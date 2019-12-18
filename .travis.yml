@@ -3,7 +3,7 @@ node_js:
   - "10.16"
 install: 
   - npm run setup
-build:
+script:
   - npm run build
   - npm run lint
   - npm run test
