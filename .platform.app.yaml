@@ -44,6 +44,11 @@ hooks:
         export PSH_URL_REPLACER_TMP_FILE=$PLATFORM_DOCUMENT_ROOT/../static/sitemap_pshtmp.xml
         export PSH_URL_REPLACER_TARGET_FILE=$APP_VOLUME/sitemap.xml
         node $PLATFORM_APP_DIR/packages/bodiless-psh/lib/psh-url-replacer.js build
+        # ssi preparation
+        export SSI_CONF_PATH=examples/test-site/ssi/ssi_conf.json
+        export DOCUMENT_ROOT=$PLATFORM_DOCUMENT_ROOT
+        export VOLUME_DIR=$APP_VOLUME
+        node $PLATFORM_APP_DIR/packages/bodiless-psh/lib/generate-ssi-files.js build    
     deploy: |
         #processing site url
         APP_SITE_URL=$(echo $APP_SITE_URL | sed -e "s/\${PLATFORM_ENVIRONMENT}/$PLATFORM_ENVIRONMENT/g")
@@ -62,6 +67,10 @@ hooks:
         export PSH_URL_REPLACER_TARGET_URL=$APP_SITE_URL
         export PSH_URL_REPLACER_PROD_ENV=$APP_PROD_ENV
         node $PLATFORM_APP_DIR/packages/bodiless-psh/lib/psh-url-replacer.js deploy
+        # ssi files generation
+        export SSI_CONF_PATH=examples/test-site/ssi/ssi_conf.json
+        export VOLUME_DIR=$APP_VOLUME
+        node $PLATFORM_APP_DIR/packages/bodiless-psh/lib/generate-ssi-files.js deploy       
 
 # The size of the persistent disk of the application (in MB).
 disk: 256
