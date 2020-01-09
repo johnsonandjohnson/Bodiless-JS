@@ -18,8 +18,10 @@ const path = require('path');
 const { spawn } = require('child_process');
 const home = require('os').homedir();
 
-const destDir = process.argv[2] || path.resolve(home, 'gatsby-starter-bodiless');
-const src = process.argv[3] || 'starter';
+const args = process.argv.filter(arg => !arg.match(/^--/));
+const destDir = args[2] || path.resolve(home, 'gatsby-starter-bodiless');
+const src = args[3] || 'starter';
+const noInstall = process.argv.find(arg => arg === '--no-install');
 const srcDir = path.resolve('.', 'examples', src);
 
 try {
@@ -30,7 +32,7 @@ try {
   mkdirpSync(destDir);
 
   copySync(srcDir, destDir, {
-    filter: name => !name.match(/node_modules/) && !name.match(/\.git/),
+    filter: name => !name.match(/node_modules/) && !name.match(/\.git\//),
   });
 } catch (e) {
   console.error(`Unable to copy ${srcDir} to ${destDir}`);
@@ -43,7 +45,9 @@ process.chdir(destDir);
 const child = spawn('git', ['init'], {
   stdio: 'inherit',
 });
-child.on('close', () => {
+child.on('close', (code) => {
+  if (noInstall) process.exit(code);
+
   const child$ = spawn('npm', ['install'], {
     stdio: 'inherit',
   });
