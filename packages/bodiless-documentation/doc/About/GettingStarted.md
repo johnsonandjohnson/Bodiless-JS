@@ -38,7 +38,7 @@ Start the editor:
 npm run start
 ```
 
-Then visit the example site on [http://localhost:8005](http://localhost:8000). 
+Then visit the example site on [http://localhost:8005](http://localhost:8005). 
 
 The
 backend-server (responsible for saving content to json files) will be listening
