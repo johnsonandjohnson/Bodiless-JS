@@ -3,10 +3,6 @@
   "version": "0.0.36",
   "description": "",
   "main": "",
-  "scripts": {
-    "build:watch": "npm run dev-backend",
-    "dev-backend": "node ./src/server.js"
-  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "dotenv": "^8.2.0",

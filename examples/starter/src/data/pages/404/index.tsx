@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,10 +12,20 @@
  * limitations under the License.
  */
 
-const express = require('express');
-const Backend = require('./backend');
+import React from 'react';
+import { Link } from 'gatsby';
 
-const backendPort = process.env.BODILESS_BACKEND_PORT || 8001;
+const NotFoundPage = () => (
+  <>
+    <h1>Page Not Found</h1>
+    <p>The requested page could not be found.</p>
+    <p>
+      <Link to="/" style={{ color: 'blue' }}>
+        {' '}
+        Go to homepage.
+      </Link>
+    </p>
+  </>
+);
 
-const backend = new Backend(express());
-backend.start(backendPort);
+export default NotFoundPage;

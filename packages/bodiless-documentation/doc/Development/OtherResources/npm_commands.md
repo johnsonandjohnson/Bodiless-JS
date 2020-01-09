@@ -1,36 +1,34 @@
-# `NPM commands reference`
+# NPM commands reference
 
-NPM commands, that are described in the root `package.json` file and their purpose.
+NPM commands, that are defined in the root `package.json` file and their purpose.
 
-There a 2 types of builds, regulated by `NODE_ENV` variable value:
-- `production` - setting value to this will cause packages (that support this variable) to build in production state, with more 
-runtime optimizations for performance, but less debug information
-- `development` - setting value to this will cause packages to build in mode with more debug information, but less runtime 
-performance  
+| Command                | Purpose |
+|------------------------|---------|
+| `bootstrap`            | Install all dependencies and bootstrap packages in the current Lerna repo with [hoist option](https://github.com/lerna/lerna/blob/master/commands/bootstrap/README.md#--hoist-glob). Also builds all packages. |
+| `build`                | Build production version of all packages and production static versions of the example sites |
+| `build:packages`       | Build production version of all packages |
+| `build:watch` .        | Build development version of all packages, watch for changes, and launch `gatsby develop` on the test site |
+| `clean`                | Clear caches, .env files and build artifacts for all packages |
+| `copyright`            | Adds copyright notice header to sll source files |
+| `fix`                  | Runs an eslint scan of the entire project and fixes all auto-fixable problems |
+| `fix:target`           | Runs an eslint scan of a particular file or directory and fixes all auto-fixable problems |
+| `fresh`                | Clean everything, remove node_modules and then run `bootstrap` |
+| `lint`                 | Runs an eslint scan of the entire project |
+| `lint:target`          | Runs an eslint scan of a particular file or directory |
+| `lint:change`          | Runs an eslint scan on all files which differ from the master branch. Can be slow. |
+| `new`                  | Creates a new BodilessJS site in the specified directory |
+| `publish:all`          | Creates new package versions and publishes all of them to NPM repo specified in $NPM_REGISTRY environment variable. | 
+| `publish:from-package` | Does not create new package versions. Should be run by automation after running `lerna version` manually to publish updated packages to the NPM repo specified in $NPM_REGISTRY environment variable. }
+| `scan`                 | Runs a ts-complexity scan of the entire project |
+| `scan:targert`         | Runs a ts-complexity scan of a specific file |
+| `serve`                | Serve a production version of the test site. Must first run `build`.
+| `setup`                | Alias for `bootstrap`
+| `sites:pack`           | Creates local tarballs of all bodiless packages |
+| `sites:clone-local`    | Clones the specified example site (default test-site) to the `/sites` directory |
+| `sites:install`        | Installs local tarballs created by `sites:pack` to the specified site in the `/sites` folder (default is `test-site`) |
+| `sites:update`         | Alias for `sites:pack` + `sites:instaall` |
+| `sites:launch-test`    | Clones the test-site, installs local packages, and starts the development server.  A quick way to simulate running the test site as a standalone site, but using local pacakges. |
+| `start`                | Alias for `build:watch` |
+| `test`                 | Runs all unit tests for the project |
+| `test:watch`           | Run tests in watch mode. Re-runs tests automatically when they change. Useful when developing tests. |
 
-| Command          | Purpose      |
-|------------------|------------|
-| `build:dev`      | Build development version of all packages (but not Tailwind CSS) |
-| `build`          | Build production version of all packages and Tailwind CSS (usually precedes running [editorial environment](../GettingStarted.md?id=run-editor-locally) or [static site](../Deployment/build.md?id=building-and-serving-a-static-site))
-| `build:css`      | Build development version of Tailwind CSS only |
-| `build:packages` | Build production version of all sub-packages |
-| `start`          | Starts `dev`-grade editorial environment at `http://localhost:8005`. Re-builds development version of all packages and keeps watching for changes |
-| `start-prod`     | Starts `prod`-grade editorial environment at `http://localhost:8005`. Re-builds production version of all packages and keeps watching for changes |
-| `start-docker`   | Start command for running inside Docker container (see "Run editor in docker" in [Getting Started](../GettingStarted.md)) |
-| `clean`          | Clearing all kinds of caches everywhere and generated files in example site(s).
-| `bootstrap`      | (Required by `setup`) Bootstrap the packages in the current Lerna repo with [hoist option](https://github.com/lerna/lerna/blob/master/commands/bootstrap/README.md#--hoist-glob). Create additional symlinks. Run `scripts/postinstall` |
-| `setup`          | Install NPM packages, run `bootstrap`, build all sub-packages and Tailwind CSS. |
-| `fresh`          | Clean everything and then install NPM packages, run `bootstrap`, build all sub-packages and Tailwind CSS. | 
-| `format`         | Part of pre-commit actions. Formats the code. | 
-| `serve`          | Serve a [static site](../Deployment/build.md?id=building-and-serving-a-static-site) locally at `http://localhost:9000`
-| `lint`           | Part of pre-commit actions. Lints the code. | 
-| `lint-target`    | Print linting report on a target (can be used for putting in Jira tickets) |
-| `lint-change`    | Run linter on changes. Used in pre-push hook (see package.json) |
-| `fix`            | Runs `format` to auto-fix linting errors 
-| `fix-target`     | Fix linting errors in target | 
-| `test`           | Part of [pre-commit actions](../Team/Scrum.md?id=code-management-and-pull-requests). Report jest coverage in the output. | 
-| `test-watch`     | Run tests in watch mode. Re-runs tests automatically when they change. Useful when developing tests. |
-| `docs`           | Serve docs from using Docsify on `http://localhost:3000`
-| `lerna:version`  | Run locally when developer wants to create, commit and push to git repo new version of packages. Should be followed by running Jenkins job that will publish packages to NPM repo   
-| `publish:all`    | (For automation purposes, JNJ network only) Creates new packages versions and immediately publishes all of them to NPM repo.  
-| `publish:from-package` | Does not create new packages version. Should be run by Jenkins job to publish updated packages to the NPM repo 

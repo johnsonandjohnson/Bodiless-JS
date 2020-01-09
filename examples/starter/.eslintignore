@@ -1,0 +1,6 @@
+lib
+public
+.cache
+static
+src/html.js
+node_modules

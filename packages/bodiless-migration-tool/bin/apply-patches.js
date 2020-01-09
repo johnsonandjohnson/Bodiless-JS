@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
+/* eslint-disable no-console */
+
 const shell = require('shelljs');
 const path = require('path');
 const fs = require('fs');

@@ -126,7 +126,7 @@ if (process.env.ROBOTSTXT_ENABLED !== '0') {
 
 module.exports = {
   siteMetadata: {
-    title: 'D9D Gatsby',
+    title: 'Bodiless-JS',
   },
   plugins,
   proxy: {

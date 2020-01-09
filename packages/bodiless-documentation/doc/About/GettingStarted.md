@@ -5,63 +5,98 @@
 Ensure you have the following installed locally:
 - NodeJS: https://nodejs.org/en/download/ 
   - We are currently using the LTS version 10.15.0. 
+  - We use `npm` as a package manager. If you prefer `yarn` feel free to try it. YMMV.
 
-## Installation
+## Creating a New Site
 
-Clone the repository and install dependencies.
+BodilessJS provides a Gatsby starter you can use as the basis of a new site. Currently, you must
+install it from this repository as follows:
+
 ```bash
 git clone https://github.com/johnsonandjohnson/bodiless-js.git
 cd bodiless-js
-npm run setup
+npm run ci
+npm run new /path/to/new/site
 ```
 
-### Environment Variables
-All environment variables are managed through two files:
-- `.env` in `bodiless-backend`
-- `.env.development` in `test-site`
-These will be created automatically for local development as part of `npm run setup`.
+This will create a new git repository at th especified location (which defaults
+to `~/gatsby-starter-bodiless`), copy the starter, and install all dependencies.
 
-## View all Docs
-Start the local docs server:
+You can then launch the editor:
+
 ```
-npm run docs
+cd /path/to/new/site
+npm start
 ```
 
-Then visit [http://localhost:3000/#/](http://localhost:3000/#/).
+And view the site at [http://localhost:8000](http://localhost:8000). Click the
+"docs" button (in the upper left corner) to view all documentation, or just
+visit http://localhost:8000/___docs](http://localhost:8000/___docs).
 
-Read more at [Documentation](Development/Architecture/Documentation)
+To build and serve the production version of the site:
 
-## Run editor locally
-
-Start the editor:
-```
-npm run start
-```
-
-Then visit the example site on [http://localhost:8005](http://localhost:8000). 
-
-The
-backend-server (responsible for saving content to json files) will be listening
-on [http://localhost:8001](http://localhost:8001).
-
-The documentation server will also be listening  on [http://localhost:3000/#/](http://localhost:3000/#/).
-
-> Note: You'll also see a third link: `http://localhost:8000/___graphql`. This is
-a tool you can use to experiment with querying your data. Learn more about using
-this tool in the
-[Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql).*
-
-## Build & Serve Static Site Locally
-
-The test site can also be built and served statically.
 ```
 npm run build
 npm run serve
 ```
-Visit http://localhost:9000/ in your browser to view site.
+
+Visit http://localhost:9000/ in your browser to view the site.
+
+> Note: Official Gatsby Stater (installable via `gatsby new`) is coming soon!
+
+## Exlporing and Developing *BodilessJS*
+
+The BodilessJS monorepo also contains a test site which showcases all features and can
+be used for local development and testing.
+
+### Install
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/johnsonandjohnson/bodiless-js.git
+cd bodiless-js
+npm run bootstrap
+```
+> Note: don't run `npm install` at package root unless you are trying to update dependencies.
+
+### Launch the Test Site
+
+```
+cd examples/test-site
+npm run start
+```
+This will build all packages in watch mode and then start `gatsby develop` on the test site.  You
+can then visit the site at [http://localhost:8005](http://localhost:8005). 
+
+The backend-server (responsible for saving content to json files) will be
+listening on [http://localhost:8006](http://localhost:8006). It is also
+reachable via proxy from the test site at
+[http://localhost:8005/___backend](http://localhost:8005/___backend). However,
+you should never need to access this directly.
+
+The documentation will be available at
+[http://localhost:8005/___docs](http://localhost:8005/___docs), or by clicking
+the documentation icon in the edit environment.
+
+You'll also see a fourth link: `http://localhost:8005/___graphql`. This is
+a tool you can use to experiment with querying your data. Learn more about using
+this tool in the
+[Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql).*
+
+The test site can also be built and served statically.
+```
+cd examples/test-site
+npm run build
+npm run serve
+```
+
+Visit http://localhost:9000/ in your browser to view the site.
 
 ## Next Steps
+
 - [Step-by-step walkthrough of site building](About/SiteBuildBasics)
+- [More ways to launch sites](Development/LocalSites.md)
 - [Read our Core Principles](About/CorePrinciples).
 - [Understand our Platform Architecture](About/Development/Architecture).
 

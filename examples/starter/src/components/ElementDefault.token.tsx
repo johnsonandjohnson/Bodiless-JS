@@ -12,10 +12,20 @@
  * limitations under the License.
  */
 
-const express = require('express');
-const Backend = require('./backend');
+/**
+ * This file might move to live in a package some where
+ */
+import { addClasses } from '@bodiless/fclasses';
 
-const backendPort = process.env.BODILESS_BACKEND_PORT || 8001;
-
-const backend = new Backend(express());
-backend.start(backendPort);
+export const asAlignLeft = addClasses('text-left');
+export const asAlignRight = addClasses('text-right');
+export const asAlignCenter = addClasses('text-center');
+export const asAlignJustify = addClasses('text-justify');
+export const asUnderline = addClasses('underline');
+export default {
+  asAlignLeft,
+  asAlignRight,
+  asAlignCenter,
+  asAlignJustify,
+  asUnderline,
+};

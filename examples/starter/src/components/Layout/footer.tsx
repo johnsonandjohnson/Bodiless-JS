@@ -12,10 +12,14 @@
  * limitations under the License.
  */
 
-const express = require('express');
-const Backend = require('./backend');
+import React from 'react';
 
-const backendPort = process.env.BODILESS_BACKEND_PORT || 8001;
+const Footer = () => (
+  <div className="container mx-auto py-3">
+    <p>
+      © Copyright 2020 Johnson &amp; Johnson
+    </p>
+  </div>
+);
 
-const backend = new Backend(express());
-backend.start(backendPort);
+export default Footer;

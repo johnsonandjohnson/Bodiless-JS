@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,10 +12,11 @@
  * limitations under the License.
  */
 
-const express = require('express');
-const Backend = require('./backend');
+const { copySync } = require('fs-extra');
+const rimraf = require('rimraf');
 
-const backendPort = process.env.BODILESS_BACKEND_PORT || 8001;
-
-const backend = new Backend(express());
-backend.start(backendPort);
+const site = process.argv[2] || 'test-site';
+rimraf.sync(`./sites/${site}`);
+copySync(`./examples/${site}`, `./sites/${site}`, {
+  filter: name => !name.match(/node_modules/),
+});

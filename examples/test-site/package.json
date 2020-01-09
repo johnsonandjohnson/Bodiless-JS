@@ -39,6 +39,7 @@
     "lodash": "^4.17.11",
     "mobx-react-lite": "^1.3.1",
     "nuka-carousel": "^4.4.7",
+    "ora": "^4.0.2",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-helmet": "^5.2.0",
@@ -50,10 +51,11 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
-  },
+  }, 
   "scripts": {
     "build": "npm-run-all build:css build:lib build:scripts build:doc psh-validate",
-    "build:watch": "run-p -r dev-frontend",
+    "build:watch": "run-p -r dev-frontend dev-backend",
+    "start": "run-p -r dev-frontend dev-backend",
     "build:lib": "gatsby build",
     "build:css": "tailwind build ./src/components/index.tailwind.css -c ./tailwind.config.js -o ./src/components/index.css",
     "build:doc": "bl-docs-build",
@@ -63,9 +65,14 @@
     "dev-backend": "DOTENV_CONFIG_PATH=.env.development node -r dotenv/config node_modules/@bodiless/backend/src/server.js",
     "dev-frontend": "gatsby develop -p 8005",
     "serve": "gatsby serve",
+    "prestart": "npm run build:doc",
+    "start": "npm run build:watch",
+    "generate-env-vars": "node scripts/generate-env-vars.js",
+    "generate-env-var:overwrite": "node scripts/generate-env-vars.js --overwrite",
     "docs:build": "bl-docs-build",
     "docs:serve": "docsify serve ./doc",
     "docs": "run-s build:doc docs:serve",
+    "prepare": "npm run generate-env-vars && npm run build:css",
     "psh-update": "node ./lib/scripts/bodiless-psh-update",
     "psh-validate": "node ./lib/scripts/bodiless-psh-validate"
   },
