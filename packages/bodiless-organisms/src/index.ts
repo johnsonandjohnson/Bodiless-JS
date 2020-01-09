@@ -38,6 +38,12 @@ export {
 } from './components/Touts';
 
 export {
+  Product,
+  ProductClean,
+  asEditableProduct,
+} from './components/Products';
+
+export {
   asToutHorizontal,
   asToutVertical,
   asToutNoTitle,

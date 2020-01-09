@@ -2,7 +2,7 @@
   "name": "@bodiless/organisms",
   "version": "0.0.36",
   "description": "Basic components to build out sites.",
-  "author": "Erik Summerfield <esummer3@its.jnj.com>",
+  "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -22,6 +22,7 @@
     "copy": "copyfiles -u 3 \"./src/components/MainMenu/*.css\" \"./lib/components/MainMenu/\""
   },
   "dependencies": {
+    "@bodiless/bv": "^0.0.36",
     "@bodiless/components": "^0.0.36",
     "@bodiless/core": "^0.0.36",
     "@bodiless/fclasses": "^0.0.36",

@@ -14,34 +14,64 @@
 
 import React, { ComponentType, FC } from 'react';
 import { useEditContext } from '@bodiless/core';
+import { flowRight } from 'lodash';
+import { DesignableComponentsProps, designable } from '@bodiless/fclasses';
 import { useBVLoader } from './BVLoader';
-import BVLoading from './BVLoading';
+import DefaultBVLoading, { Props as BVLoadingProps } from './BVLoading';
 import { BVProps } from './BVProps';
-import BVProductIsNotMapped from './BVErrors';
-import BVPlaceholder from './BVPlaceholder';
+import DefaultBVProductIsNotMapped, { Props as BVProductIsNotMappedProps } from './BVErrors';
+import DefaultBVPlaceholder, { Props as BVPlaceholderProps } from './BVPlaceholder';
+
+type BVComponents = {
+  BVProductIsNotMapped: ComponentType<BVProductIsNotMappedProps>;
+  BVPlaceholder: ComponentType<BVPlaceholderProps>;
+  BVLoading: ComponentType<BVLoadingProps>;
+};
+
+export const defaultComponents: BVComponents = {
+  BVProductIsNotMapped: DefaultBVProductIsNotMapped,
+  BVPlaceholder: DefaultBVPlaceholder,
+  BVLoading: DefaultBVLoading,
+};
+
+type DesignableProps = DesignableComponentsProps<BVComponents>;
 
 const asBVComponent = (
   componentName: string,
   onLoaded?: (bvprops: BVProps) => void,
-) => <P extends BVProps>(
+) => <P extends BVProps, Q extends P & DesignableProps> (
   Component: ComponentType<P>,
-): FC<P> => (props: P) => {
+): FC<Q> => (props: Q) => {
     const { isEdit } = useEditContext();
-    const { productId, ...rest } = props;
+    const { components, ...rest } = props;
+    const { productId } = rest;
+    const {
+      BVProductIsNotMapped,
+      BVPlaceholder,
+      BVLoading,
+    } = components;
     if (!productId) {
       return <BVProductIsNotMapped {...rest} />;
     }
     if (isEdit) {
-      return <BVPlaceholder componentName={componentName} {...props} />;
+      return <BVPlaceholder componentName={componentName} {...rest} />;
     }
     const { isLoaded } = useBVLoader();
     if (isLoaded && onLoaded) {
       onLoaded({ productId });
     }
     if (!isLoaded) {
-      return <BVLoading {...(props as P)} />;
+      return <BVLoading {...rest} />;
     }
-    return <Component {...(props as P)} />;
+    return <Component {...rest as unknown as P} />;
   };
+
+export const asDesignableBVComponent = (
+  componentName: string,
+  onLoaded?: (bvprops: BVProps) => void,
+) => <P extends BVProps>(Component: ComponentType<P>) => flowRight(
+  designable(defaultComponents),
+  asBVComponent(componentName, onLoaded),
+)(Component);
 
 export default asBVComponent;

@@ -14,20 +14,27 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import { Editable } from '@bodiless/components';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../components/Layout';
+import { SectionMargin } from '../components/Product';
+import {
+  ProductListingTitle,
+  ProductListingImage,
+  ProductListingFlexBox,
+} from '../components/ProductListing';
 
 export default props => (
   <Page {...props}>
     <Layout>
-      <h1 className="text-3xl font-bold">This page is using the PLP template.</h1>
-      <div>
-        <h3 className="text-lg font-bold">TBD: Coming Soon!</h3>
-        <p className="w-1/2 h-24 border border-blue">
-          <Editable nodeKey="text" />
-        </p>
-      </div>
+      <SectionMargin>
+        <ProductListingTitle />
+      </SectionMargin>
+      <SectionMargin>
+        <ProductListingImage />
+      </SectionMargin>
+      <SectionMargin>
+        <ProductListingFlexBox nodeKey="product_listing_touts" />
+      </SectionMargin>
     </Layout>
   </Page>
 );

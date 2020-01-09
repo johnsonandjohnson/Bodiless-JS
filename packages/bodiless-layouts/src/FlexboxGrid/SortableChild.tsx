@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import throttle from 'lodash/throttle';
 import { ResizeCallback } from 're-resizable';
 import { useEditContext } from '@bodiless/core';
@@ -44,7 +44,10 @@ const SortableChild = (props: SortableChildProps) => {
     onResizeStop, flexboxItem, onDelete, snapData: snapRaw, ...restProps
   } = props;
   const snap = snapRaw || defaultSnapData;
-  const { width: minWidth } = snap({
+  const {
+    width: minWidth,
+    className: passedSnapClassName,
+  } = snap({
     width: 0,
     className: '',
   });
@@ -52,6 +55,7 @@ const SortableChild = (props: SortableChildProps) => {
   // so className is stored only onResizeStop
   const [snapClassName, setSnapClassName] = useState(
     (flexboxItem.wrapperProps && flexboxItem.wrapperProps.className)
+      || passedSnapClassName
       || FALLBACK_SNAP_CLASSNAME,
   );
 
@@ -86,6 +90,14 @@ const SortableChild = (props: SortableChildProps) => {
     // Activate the current context after the delete (this context is the flexbox)
     context.activate();
   };
+  useEffect(() => (
+    // Call resize handler on component's unmount
+    // to make sure the correct wrapper classname is set
+    // even if the component was never be resized manually.
+    onResizeStop({
+      className: snapClassName,
+    })
+  ), []);
   useLayoutEffect(() => {
     const elm: HTMLElement | null = document.querySelector(`[uuid='${flexboxItem.uuid}']`);
     // we have to remove the style width when we have arrived at our correct size

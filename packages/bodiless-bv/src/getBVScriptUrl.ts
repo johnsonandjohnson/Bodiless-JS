@@ -15,8 +15,12 @@
 import { defaultBVConfig, BVConfig } from './BVConfig';
 
 const getBVScriptUrlFromConfig = (conf: BVConfig) => {
-  const bvHost = process.env.BV_HOST || 'https://display.ugc.bazaarvoice.com';
-  return `${bvHost}/${conf.environment}/static/${conf.client_name}/${conf.site_ID}/${conf.locale}/bvapi.js`;
+  if (process.env.BV_API_VERSION === '1') {
+    const bvHost = process.env.BV_HOST || 'https://display.ugc.bazaarvoice.com';
+    return `${bvHost}/${conf.environment}/static/${conf.client_name}/${conf.site_ID}/${conf.locale}/bvapi.js`;
+  }
+  const bvHost = process.env.BV_HOST || 'https://apps.bazaarvoice.com';
+  return `${bvHost}/deployments/${conf.client_name}/${conf.site_ID}/${conf.environment}/${conf.locale}/bv.js`;
 };
 
 const isBVConfigValid = (conf: BVConfig): boolean => {

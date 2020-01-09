@@ -18,29 +18,25 @@ import { shallow } from 'enzyme';
 
 jest.mock('../src/components/BVLoader');
 jest.mock('../src/components/asBVComponent', () => ({
-  asDesignableBVComponent: () => (Component: CT) => (props: any) => (
-    <Component {...props} />
-  ),
+  asDesignableBVComponent: () => (Component: CT) => (props: any) => <Component {...props} />,
 }));
 jest.mock('../src/components/asEditableBV');
 
-const creatBVReviews = () => {
-  let BVReviews;
+const creatBVInlineRatings = () => {
+  let BVInlineRatings;
   // @ts-ignore no types defined for jest.isolateModules
   jest.isolateModules(() => {
     // eslint-disable-next-line global-require,prefer-destructuring
-    BVReviews = require('../src/components/v2/BVReviews').BVReviewsBase;
+    BVInlineRatings = require('../src/components/v2/BVInlineRatings').BVInlineRatingsBase;
   });
-  return BVReviews;
+  return BVInlineRatings;
 };
 
-describe('bv reviews', () => {
+describe('bv inline ratings', () => {
   it('renders according to BV specification', () => {
-    const BVReviews = creatBVReviews();
+    const BVInlineRatings = creatBVInlineRatings();
     // @ts-ignore
-    const wrapper = shallow(<BVReviews productId="123" />);
-    expect(wrapper.html()).toBe(
-      '<div data-bv-show="reviews" data-bv-product-id="123"></div>',
-    );
+    const wrapper = shallow(<BVInlineRatings productId="123" />);
+    expect(wrapper.html()).toBe('<div data-bv-show="inline_rating" data-bv-product-id="123"></div>');
   });
 });

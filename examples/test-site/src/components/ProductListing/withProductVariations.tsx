@@ -11,18 +11,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { flow } from 'lodash';
+import {
+  withFacet,
+  withDesc,
+} from '@bodiless/layouts';
+import {
+  varyDesign,
+  replaceWith,
+  withDesign,
+} from '@bodiless/fclasses';
 
-import React, { FC, HTMLProps } from 'react';
-import { Div } from '@bodiless/fclasses';
-import { BVProps, withoutBVProps } from './BVProps';
+import { ProductTout } from '../ProductTout';
 
-type DivProps = HTMLProps<HTMLDivElement>;
+const withProductVariations = withFacet('Product');
 
-export type Props = DivProps & BVProps;
-
-const BVProductIsNotMapped: FC<Props> = props => {
-  const props$1 = withoutBVProps(props);
-  return <Div {...props$1}>Please hover and click to enter Bazaarvoice Product External ID: </Div>;
+const productVariations = {
+  ProductToutVariations: flow(
+    replaceWith(ProductTout),
+    withDesc('Product.\n'),
+    withProductVariations('Product')(),
+  ),
 };
 
-export default BVProductIsNotMapped;
+export default withDesign(varyDesign(
+  productVariations,
+)());

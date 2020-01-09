@@ -4,14 +4,26 @@
       "Configuration.md": "./doc/Configuration.md",
       "Components": {
         "BVLoaderProvider.md": "./doc/Components/BVLoaderProvider.md",
-        "BVRatingsSummary.md": "./doc/Components/BVRatingsSummary.md",
-        "BVRatingsSummaryBase.md": "./doc/Components/BVRatingsSummaryBase.md",
-        "BVReviews.md": "./doc/Components/BVReviews.md",
-        "BVReviewsBase.md": "./doc/Components/BVReviewsBase.md"
+        "v1": {
+          "BVRatingsSummary.md": "./doc/Components/v1/BVRatingsSummary.md",
+          "BVRatingsSummaryBase.md": "./doc/Components/v1/BVRatingsSummaryBase.md",
+          "BVReviews.md": "./doc/Components/v1/BVReviews.md",
+          "BVReviewsBase.md": "./doc/Components/v1/BVReviewsBase.md",
+          "BVInlineRatings.md": "./doc/Components/v1/BVInlineRatings.md",
+          "BVInlineRatingsBase.md": "./doc/Components/v1/BVInlineRatingsBase.md"
+        },
+        "v2": {
+          "BVRatingsSummary.md": "./doc/Components/v2/BVRatingsSummary.md",
+          "BVRatingsSummaryBase.md": "./doc/Components/v2/BVRatingsSummaryBase.md",
+          "BVReviews.md": "./doc/Components/v2/BVReviews.md",
+          "BVReviewsBase.md": "./doc/Components/v2/BVReviewsBase.md",
+          "BVInlineRatings.md": "./doc/Components/v2/BVInlineRatings.md",
+          "BVInlineRatingsBase.md": "./doc/Components/v2/BVInlineRatingsBase.md"
+        }
       },
       "HOCs": {
         "asBodilessBV.md": "./doc/HOCs/asBodilessBV.md",
-        "asBVComponent.md": "./doc/HOCs/asBVComponent.md",
+        "asDesignableBVComponent.md": "./doc/HOCs/asDesignableBVComponent.md",
         "asEditableBV.md": "./doc/HOCs/asEditableBV.md",
         "withBVLoader.md": "./doc/HOCs/withBVLoader.md"
       }
