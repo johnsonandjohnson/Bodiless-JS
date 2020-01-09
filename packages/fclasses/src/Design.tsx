@@ -141,20 +141,22 @@ type AlterPropsProps<P> = {
   acomponent: ComponentType<any>,
 } & P ;
 
-class Transformer<P> extends React.Component<AlterPropsProps<P>> {
+export class Transformer<P> extends React.Component<AlterPropsProps<P>> {
   AComponent: ComponentType = React.Fragment;
 
-  passthoughProps = {};
+  transformer: Function;
 
   constructor(props:AlterPropsProps<P>) {
     super(props);
-    const { transformer, acomponent, ...passthoughProps } = props;
-    this.passthoughProps = transformer(passthoughProps);
+    const { transformer, acomponent } = props;
     this.AComponent = acomponent;
+    this.transformer = transformer;
   }
 
   render() {
-    return <this.AComponent {...this.passthoughProps as P} />;
+    const { transformer, acomponent, ...passthoughProps } = this.props;
+    const passthoughProps$1 = this.transformer(passthoughProps);
+    return <this.AComponent {...passthoughProps$1 as P} />;
   }
 }
 
