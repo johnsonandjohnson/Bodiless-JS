@@ -12,25 +12,46 @@
  * limitations under the License.
  */
 
-import asBVComponent from './components/asBVComponent';
+import asBVComponent, { asDesignableBVComponent } from './components/asBVComponent';
 import { BVLoaderProvider, withBVLoader } from './components/BVLoader';
 import { asBodilessBV } from './components/asBodilessBV';
 import { asEditableBV } from './components/asEditableBV';
+import BVRatingsSummaryV1, {
+  BVRatingsSummaryBase as BVRatingsSummaryBaseV1,
+} from './components/v1/BVRatingsSummary';
+import BVReviewsV1, {
+  BVReviewsBase as BVReviewsBaseV1,
+} from './components/v1/BVReviews';
+import BVInlineRatingsV1, {
+  BVInlineRatingsBase as BVInlineRatingsBaseV1,
+} from './components/v1/BVInlineRatings';
 import BVRatingsSummary, {
   BVRatingsSummaryBase,
-} from './components/BVRatingsSummary';
+} from './components/v2/BVRatingsSummary';
+import BVInlineRatings, {
+  BVInlineRatingsBase,
+} from './components/v2/BVInlineRatings';
 import BVReviews, {
   BVReviewsBase,
-} from './components/BVReviews';
+} from './components/v2/BVReviews';
 
 export {
   asBodilessBV,
   asBVComponent,
+  asDesignableBVComponent,
   asEditableBV,
   BVLoaderProvider,
   withBVLoader,
+  BVRatingsSummaryV1,
+  BVRatingsSummaryBaseV1,
+  BVReviewsV1,
+  BVReviewsBaseV1,
+  BVInlineRatingsV1,
+  BVInlineRatingsBaseV1,
   BVRatingsSummary,
   BVRatingsSummaryBase,
   BVReviews,
   BVReviewsBase,
+  BVInlineRatings,
+  BVInlineRatingsBase,
 };

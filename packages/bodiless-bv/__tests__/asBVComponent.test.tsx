@@ -14,7 +14,7 @@
 
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import BVProductIsNotMapped from '../src/components/BVErrors';
 import BVPlaceholder from '../src/components/BVPlaceholder';
 import BVLoading from '../src/components/BVLoading';
@@ -40,7 +40,7 @@ const creatAsBVComponent = () => {
   // @ts-ignore no types defined for jest.isolateModules
   jest.isolateModules(() => {
     // eslint-disable-next-line global-require,prefer-destructuring
-    asBVComponent = require('../src/components/asBVComponent').default;
+    asBVComponent = require('../src/components/asBVComponent').asDesignableBVComponent;
   });
   return asBVComponent;
 };
@@ -52,8 +52,8 @@ describe('asBVComponent', () => {
     const asBVComponent = creatAsBVComponent();
     // @ts-ignore
     const BVComponent = asBVComponent()(() => <TestComponent />);
-    const wrapper = shallow(<BVComponent productId="" />);
-    expect(wrapper.equals(<BVProductIsNotMapped />)).toBe(true);
+    const wrapper = mount(<BVComponent productId="" />);
+    expect(wrapper.find(BVProductIsNotMapped).length).toBe(1);
   });
   describe('when on edit mode', () => {
     it('renders BVPlaceholder ', () => {
@@ -64,8 +64,10 @@ describe('asBVComponent', () => {
       const asBVComponent = creatAsBVComponent();
       // @ts-ignore
       const BVComponent = asBVComponent(componentName)(() => <TestComponent />);
-      const wrapper = shallow(<BVComponent productId="123" />);
-      expect(wrapper.equals(<BVPlaceholder productId="123" componentName={componentName} />)).toBe(true);
+      const wrapper = mount(<BVComponent productId="123" />);
+      expect(wrapper.find(BVPlaceholder).length).toBe(1);
+      expect(wrapper.find(BVPlaceholder).prop('productId')).toBe('123');
+      expect(wrapper.find(BVPlaceholder).prop('componentName')).toBe(componentName);
     });
   });
   describe('when on preview mode', () => {
@@ -85,11 +87,11 @@ describe('asBVComponent', () => {
       it('renders BVLoading', () => {
         mockBodilessCore(false);
         mockBVLoader(false);
-        const asBVComponent = creatAsBVComponent();
         const TestComponent = () => <></>;
+        const asBVComponent = creatAsBVComponent();
         // @ts-ignore
         const BVComponent = asBVComponent()(() => <TestComponent />);
-        const wrapper = shallow(<BVComponent productId="123" />);
+        const wrapper = mount(<BVComponent productId="123" />);
         expect(wrapper.find(BVLoading).length).toBe(1);
       });
     });

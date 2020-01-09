@@ -13,11 +13,16 @@
  */
 
 import React, { FC, HTMLProps } from 'react';
+import { Div } from '@bodiless/fclasses';
+import { BVProps, withoutBVProps } from './BVProps';
 
-type Props = HTMLProps<HTMLDivElement>;
+type DivProps = HTMLProps<HTMLDivElement>;
 
-const BVLoading: FC<Props> = props => (
-  <div {...props}>Loading BV Widget</div>
-);
+export type Props = DivProps & BVProps;
+
+const BVLoading: FC<Props> = props => {
+  const props$1 = withoutBVProps(props);
+  return <Div {...props$1}>Loading BV Widget </Div>;
+};
 
 export default BVLoading;

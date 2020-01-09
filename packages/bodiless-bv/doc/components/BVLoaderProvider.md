@@ -4,7 +4,7 @@ One can use this component in order to add main Baazarvoice script to the page h
 
 ## Usage
 
-First, you need to compose our custom BV components.
+First, you need to compose your custom BV components.
 
 ``` js
 import { BVRatingsSummaryBase, BVReviewsBase, asBodilessBV } from '@bodiless/bv';
