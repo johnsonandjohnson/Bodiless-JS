@@ -73,8 +73,8 @@ export const BVLoaderProvider: FC<Props> = ({ children, scriptUrl }) => {
 
 export const useBVLoader = () => useContext(BVLoaderContext);
 
-export const withBVLoader = (Component: CT) => () => (
+export const withBVLoader = <P extends object>(Component: CT<P>) => (props: P) => (
   <BVLoaderProvider>
-    <Component />
+    <Component {...props} />
   </BVLoaderProvider>
 );

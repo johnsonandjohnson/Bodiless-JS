@@ -11,18 +11,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import React from 'react';
+import { flow } from 'lodash';
+import { FlexboxGrid } from '@bodiless/layouts-ui';
+import withProductVariations from './withProductVariations';
 
-import React, { FC, HTMLProps } from 'react';
-import { Div } from '@bodiless/fclasses';
-import { BVProps, withoutBVProps } from './BVProps';
+const withProductStrictSnapSize = Component => props => (
+  <Component
+    {...props}
+    snapData={() => ({ className: 'w-full lg:w-1/4' })}
+  />
+);
 
-type DivProps = HTMLProps<HTMLDivElement>;
+const ProductListingFlexBox = flow(
+  withProductStrictSnapSize,
+  withProductVariations,
+)(FlexboxGrid);
 
-export type Props = DivProps & BVProps;
-
-const BVProductIsNotMapped: FC<Props> = props => {
-  const props$1 = withoutBVProps(props);
-  return <Div {...props$1}>Please hover and click to enter Bazaarvoice Product External ID: </Div>;
-};
-
-export default BVProductIsNotMapped;
+// eslint-disable-next-line import/prefer-default-export
+export { ProductListingFlexBox };

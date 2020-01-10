@@ -13,21 +13,24 @@
  */
 
 import React, { FC, HTMLProps } from 'react';
-import { BVProps } from './BVProps';
+import { Div } from '@bodiless/fclasses';
+import { BVProps, withoutBVProps } from './BVProps';
 
 type DivProps = HTMLProps<HTMLDivElement>;
 
-type Props = DivProps & BVProps;
+export type Props = DivProps & BVProps;
 
-const BVPlaceholder: FC<Props> = ({ componentName, productId, ...rest }) => {
+const BVPlaceholder: FC<Props> = props => {
+  const { componentName, productId } = props;
   const BVWidgetName = componentName || 'BV widget';
+  const props$1 = withoutBVProps(props);
   return (
-    <div {...rest}>
+    <Div {...props$1}>
       {`
       ${BVWidgetName} with Product External Id: "${productId}" will be rendered here.
       If your domain is whitelisted, you will see BV generated widget in preview mode.
     `}
-    </div>
+    </Div>
   );
 };
 

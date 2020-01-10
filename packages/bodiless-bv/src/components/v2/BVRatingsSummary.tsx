@@ -13,16 +13,25 @@
  */
 
 import React, { FC, HTMLProps } from 'react';
-import { Div } from '@bodiless/fclasses';
-import { BVProps, withoutBVProps } from './BVProps';
+import { flowRight } from 'lodash';
+import { withBVLoader } from '../BVLoader';
+import { asDesignableBVComponent } from '../asBVComponent';
+import { BVProps } from '../BVProps';
+import { asEditableBV } from '../asEditableBV';
 
 type DivProps = HTMLProps<HTMLDivElement>;
 
-export type Props = DivProps & BVProps;
+type Props = DivProps & BVProps;
 
-const BVProductIsNotMapped: FC<Props> = props => {
-  const props$1 = withoutBVProps(props);
-  return <Div {...props$1}>Please hover and click to enter Bazaarvoice Product External ID: </Div>;
-};
+export const BVPlainRatingsSummary: FC<Props> = ({ productId }) => (
+  <div data-bv-show="rating_summary" data-bv-product-id={productId} />
+);
 
-export default BVProductIsNotMapped;
+export const BVRatingsSummaryBase = asDesignableBVComponent('BV Ratings Summary')(BVPlainRatingsSummary);
+
+const BVRatingsSummary = flowRight(
+  withBVLoader,
+  asEditableBV,
+)(BVRatingsSummaryBase);
+
+export default BVRatingsSummary;
