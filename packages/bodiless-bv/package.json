@@ -25,10 +25,7 @@
   "dependencies": {
     "@bodiless/components": "^0.0.36",
     "@bodiless/core": "^0.0.36",
-    "lodash": "^4.17.15"
-  },
-  "devDependencies": {
-    "typescript": "^3.5.3"
+    "lodash": "^4.17.11"
   },
   "peerDependencies": {
     "react": "^16.11.0",
