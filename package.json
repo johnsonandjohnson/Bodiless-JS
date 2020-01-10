@@ -7,7 +7,7 @@
   ],
   "license": "Apache-2.0",
   "scripts": {
-    "bootstrap": "npm ci && lerna bootstrap --hoist --ci",
+    "bootstrap": "npx lerna bootstrap --hoist --strict",
     "build": "cross-env NODE_ENV=production lerna run build --stream",
     "build:packages": "cross-env NODE_ENV=production lerna run build --stream --no-private",
     "build:watch": "cross-env NODE_ENV=development lerna run build:watch --parallel",
