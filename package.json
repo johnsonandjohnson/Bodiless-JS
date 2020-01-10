@@ -57,7 +57,7 @@
     "@babel/runtime": "^7.4.2",
     "@types/enzyme": "^3.9.1",
     "@types/jest": "^24.0.18",
-    "@types/lodash": "^4.14.136",
+    "@types/lodash": "^4.14.149",
     "@types/rc-tooltip": "^3.7.1",
     "@types/react-dom": "^16.8.5",
     "@types/slate": "^0.44.0",
