@@ -136,33 +136,41 @@ export const remove = <P extends React.HTMLAttributes<HTMLBaseElement>> () => (p
   return <React.Fragment>{children}</React.Fragment>;
 };
 
+type TransformerFunction = (a:Object) => {
+  passthroughProps: Object,
+  fixedProps: Object,
+};
 type AlterPropsProps<P> = {
-  transformer: Function,
-  acomponent: ComponentType<any>,
+  transformer: TransformerFunction,
+  Component: ComponentType<any>,
 } & P ;
 
 export class Transformer<P> extends React.Component<AlterPropsProps<P>> {
-  AComponent: ComponentType = React.Fragment;
+  Component: ComponentType = React.Fragment;
+
+  fixedProps: Object = {};
 
   transformer: Function;
 
   constructor(props:AlterPropsProps<P>) {
     super(props);
-    const { transformer, acomponent } = props;
-    this.AComponent = acomponent;
+    const { transformer, Component, ...rest } = props;
+    this.Component = Component;
     this.transformer = transformer;
+    const { fixedProps } = transformer(rest);
+    this.fixedProps = fixedProps;
   }
 
   render() {
-    const { transformer, acomponent, ...passthoughProps } = this.props;
-    const passthoughProps$1 = this.transformer(passthoughProps);
-    return <this.AComponent {...passthoughProps$1 as P} />;
+    const { transformer, Component, ...rest } = this.props;
+    const { passthroughProps } = this.transformer(rest);
+    return <this.Component {...{ ...this.fixedProps, ...passthroughProps } as P} />;
   }
 }
 
 const withTransformer = (transformer:Function) => (
   (Component: ComponentType<any>) => (props:any) => (
-    <Transformer acomponent={Component} transformer={transformer} {...props} />
+    <Transformer Component={Component} transformer={transformer} {...props} />
   )
 );
 
@@ -170,7 +178,10 @@ export const designable = <C extends DesignableComponents> (start: C) => (
   <P extends object>(Component: ComponentType<P & DesignableComponentsProps<C>>) => {
     const designToComponents = (props:DesignableProps<C> & P) => {
       const { design, ...rest } = props;
-      return { ...rest, components: applyDesign(start)(design) };
+      return {
+        fixedProps: { ...rest, components: applyDesign(start)(design) },
+        passthroughProps: rest,
+      };
     };
     const Designable = withTransformer(designToComponents)(Component);
     return Designable as ComponentType<DesignableProps<C> & Omit<P, 'components'>>;

@@ -8,12 +8,15 @@ describe('Transformer', () => {
     it('should update passthrough props', () => {
       const Foo = () => <></>;
       const Bar = (props: any) => <Foo {...props} />;
-      const transformer = (props: any) => props;
+      const transformer = (props: any) => ({
+        fixedProps: {},
+        passthroughProps: props,
+      });
       const props = {
         a: 1,
       };
       // eslint-disable-next-line max-len
-      const wrapper = shallow(<Transformer transformer={transformer} acomponent={Bar} {...props} />);
+      const wrapper = shallow(<Transformer transformer={transformer} Component={Bar} {...props} />);
       expect(wrapper.prop('a')).toBe(1);
       const props$1 = {
         a: 2,
