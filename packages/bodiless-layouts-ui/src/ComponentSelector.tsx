@@ -30,7 +30,7 @@ export const ui: ComponentSelectorUI = {
     'bl-bg-grey-200 bl-flex bl-flex-col bl-items-center bl-justify-center bl-p-grid-2 bl-h-full bl-w-full bl-relative bl-overflow-hidden bl-cursor-pointer',
   )(Div),
   GridListBoxInner: addClasses(
-    'bl-overflow-y-scroll bl-flex bl-flex-wrap bl-h-xl-grid-2',
+    'bl-w-full bl-overflow-y-scroll bl-flex bl-flex-wrap bl-h-xl-grid-2',
   )(Div),
 
   GridListBox: addClasses(

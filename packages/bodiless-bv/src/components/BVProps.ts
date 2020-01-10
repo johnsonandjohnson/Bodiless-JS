@@ -12,8 +12,13 @@
  * limitations under the License.
  */
 
-// eslint-disable-next-line import/prefer-default-export
+import { omit } from 'lodash';
+
 export type BVProps = {
   productId: string | number,
   componentName?: string,
+  redirectUrl?: string,
+  seo?: boolean,
 };
+
+export const withoutBVProps = <P extends BVProps>(props: P) => omit(props, ['productId', 'componentName', 'redirectUrl', 'seo']);
