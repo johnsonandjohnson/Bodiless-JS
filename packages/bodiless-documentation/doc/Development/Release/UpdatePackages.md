@@ -1,18 +1,29 @@
 # Updating Package Dependencies
 
-## Hoisting
+## Adding a dependency at root
+
+If you run plain `npm install` at root, it will remove from `package-lock.json`
+all packages hoisted by Lerna (since they don't exist in the root
+`package.json`).  To add a new root package (or to change the version), you should
+therefore do the following (from root):
+```
+npm install --no-package-lock <package>
+npm run bootstrap
+```
+In this way, we let Lerna manage the root `package-lock.json`.
+
+## Things to consider when adding packages:
+
+### Matching package semver ranges
 
 Lerna will not successfully hoist packages if their semver ranges specifiers are
 different in different packages, even if the resolved version is the same. So,
 if you update or install new dependencies in a bodiless package, example site or
 at root, be sure to change the version of the package everywhere it appears in
-the monorepo.
+the monorepo.  As a result, we run `lerna bootstrap` with a `--strict` flag, so
+that any inconsistencies will cause a failed install.
 
-If you fail to do this, you will see `EHOIST` errors on bootstrap, and extraneous
-packages will be installed to the `node_modules` directory under the offending
-packages. Please clean this up before committing.
-
-## Example Sites `package-lock.json`
+### Updating Example Sites' `package-lock.json`
 
 If you update dependencies of one of the example sites, or if you pdate the
 package-lock.json at the monorepo root, you will want to regenerate the
