@@ -55,7 +55,6 @@
   "scripts": {
     "build": "npm-run-all build:css build:lib build:scripts build:doc psh-validate",
     "build:watch": "run-p -r dev-frontend dev-backend",
-    "start": "run-p -r dev-frontend dev-backend",
     "build:lib": "gatsby build",
     "build:css": "tailwind build ./src/components/index.tailwind.css -c ./tailwind.config.js -o ./src/components/index.css",
     "build:doc": "bl-docs-build",
