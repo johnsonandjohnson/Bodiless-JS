@@ -14,7 +14,7 @@
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {
-  intersection, flowRight, flow, mergeWith,
+  intersection, flowRight, flow, mergeWith, omit,
 } from 'lodash';
 import React, { ComponentType, Fragment } from 'react';
 
@@ -136,55 +136,57 @@ export const remove = <P extends React.HTMLAttributes<HTMLBaseElement>> () => (p
   return <React.Fragment>{children}</React.Fragment>;
 };
 
-type TransformerFunction = (a:Object) => {
-  passthroughProps: Object,
-  fixedProps: Object,
+// type TransformerFunction = (a:object) => object;
+type WithTransformerProps<P, Q, X> = {
+  transformFixed: (p:P) => X,
+  transformPassthrough: (p:P) => Q,
 };
-type AlterPropsProps<P> = {
-  transformer: TransformerFunction,
-  Component: ComponentType<any>,
-} & P ;
+type TransformerProps<P, Q, X> = WithTransformerProps<P, Q, X> & {
+  Component: ComponentType<X & Q>,
+  passedProps: P,
+};
 
-export class Transformer<P> extends React.Component<AlterPropsProps<P>> {
-  Component: ComponentType = React.Fragment;
-
+class Transformer<P, Q, X> extends React.Component<TransformerProps<P, Q, X>> {
   fixedProps: Object = {};
 
-  transformer: Function;
-
-  constructor(props:AlterPropsProps<P>) {
+  constructor(props:TransformerProps<P, Q, X>) {
     super(props);
-    const { transformer, Component, ...rest } = props;
-    this.Component = Component;
-    this.transformer = transformer;
-    const { fixedProps } = transformer(rest);
-    this.fixedProps = fixedProps;
+    const { transformFixed, passedProps } = props;
+    this.fixedProps = transformFixed(passedProps) as X;
   }
 
   render() {
-    const { transformer, Component, ...rest } = this.props;
-    const { passthroughProps } = this.transformer(rest);
-    return <this.Component {...{ ...this.fixedProps, ...passthroughProps } as P} />;
+    const { Component, transformPassthrough, passedProps } = this.props;
+    const props = { ...this.fixedProps as X, ...transformPassthrough(passedProps) };
+    return <Component {...props} />;
   }
 }
 
-const withTransformer = (transformer:Function) => (
-  (Component: ComponentType<any>) => (props:any) => (
-    <Transformer Component={Component} transformer={transformer} {...props} />
-  )
+export const withTransformer = <P, Q, X extends Object> (funcs: WithTransformerProps<P, Q, X>) => (
+  (Component: ComponentType<Q & X>) => (props:P) => {
+    const {
+      transformFixed,
+      transformPassthrough,
+    } = funcs;
+    const tprops = {
+      Component,
+      transformFixed,
+      transformPassthrough,
+      passedProps: props,
+    };
+    return <Transformer {...tprops} />;
+  }
 );
 
 export const designable = <C extends DesignableComponents> (start: C) => (
   <P extends object>(Component: ComponentType<P & DesignableComponentsProps<C>>) => {
-    const designToComponents = (props:DesignableProps<C> & P) => {
-      const { design, ...rest } = props;
-      return {
-        fixedProps: { ...rest, components: applyDesign(start)(design) },
-        passthroughProps: rest,
-      };
+    const transformFixed = (props:DesignableProps<C> & P) => {
+      const { design } = props;
+      return { components: applyDesign(start)(design) } as DesignableComponentsProps<C>;
     };
-    const Designable = withTransformer(designToComponents)(Component);
-    return Designable as ComponentType<DesignableProps<C> & Omit<P, 'components'>>;
+    const transformPassthrough = (props:DesignableProps<C> & P) => omit(props, ['design']) as P;
+    const Designable = withTransformer({ transformFixed, transformPassthrough })(Component);
+    return Designable as ComponentType<DesignableProps<C> & P>;
   }
 );
 
