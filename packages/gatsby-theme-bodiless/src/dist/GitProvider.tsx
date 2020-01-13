@@ -105,21 +105,21 @@ const formGitCommit = (client: Client) => contextMenuForm({
   },
 );
 
-const formGitPull = (client: Client) => contextMenuForm({
-  submitValues: () => handle(client.pull()),
-})(
-  ({ ui }: any) => {
-    const { ComponentFormTitle, ComponentFormLabel } = getUI(ui);
-    return (
-      <>
-        <ComponentFormTitle>Download Changes</ComponentFormTitle>
-        <ComponentFormLabel htmlFor="pull-txt">
-          Download remote changes
-        </ComponentFormLabel>
-      </>
-    );
-  },
-);
+// const formGitPull = (client: Client) => contextMenuForm({
+//   submitValues: () => handle(client.pull()),
+// })(
+//   ({ ui }: any) => {
+//     const { ComponentFormTitle, ComponentFormLabel } = getUI(ui);
+//     return (
+//       <>
+//         <ComponentFormTitle>Download Changes</ComponentFormTitle>
+//         <ComponentFormLabel htmlFor="pull-txt">
+//           Download remote changes
+//         </ComponentFormLabel>
+//       </>
+//     );
+//   },
+// );
 
 const formGitReset = (client: Client) => contextMenuForm({
   submitValues: () => handle(client.reset()),
@@ -153,11 +153,11 @@ const getMenuOptions = (client: Client = defaultClient): TMenuOption[] => {
       isDisabled: () => !canCommit,
       handler: () => saveChanges,
     },
-    {
-      name: 'pullchanges',
-      icon: 'cloud_download',
-      handler: () => formGitPull(client),
-    },
+    // {
+    //   name: 'pullchanges',
+    //   icon: 'cloud_download',
+    //   handler: () => formGitPull(client),
+    // },
     {
       name: 'resetchanges',
       icon: 'first_page',
