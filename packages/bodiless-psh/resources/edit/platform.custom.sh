@@ -33,9 +33,7 @@ if [ "$1" = "install" ]; then
 elif [ "$1" = "build" ]; then
   npm run build
 elif [ "$1" = "finish-deploy" ]; then
-  cp ${PLATFORM_APP_DIR}/${DEFAULT_ENV} ${ROOT_DIR}/.env
-  cp ${PLATFORM_APP_DIR}/${DEFAULT_ENV} ${ROOT_DIR}/.env.development
-  echo "BODILESS_DOCS_URL=${DOCS_URL}" >> ${ROOT_DIR}/.env
+  echo "BODILESS_DOCS_URL=${DOCS_URL}" >> ${ROOT_DIR}/.env.production
   echo "BODILESS_DOCS_URL=${DOCS_URL}" >> ${ROOT_DIR}/.env.development
 else
   echo "Unknown command specified to $0"

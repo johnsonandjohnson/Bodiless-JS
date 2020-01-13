@@ -150,15 +150,6 @@ predeploy () {
 }
 
 postdeploy () {
-  if [[ ${PLATFORM_BRANCH} = master ]]; then
-    DEFAULT_ENV=.env.master.psh
-  elif [[ ${PLATFORM_BRANCH} =~ ^test|^changeset ]]; then
-    DEFAULT_ENV=.env.changeset.psh
-  else
-    DEFAULT_ENV=.env.psh
-  fi
-  export DEFAULT_ENV
-  export ROOT_DIR
   DECODED_ROUTES=$(echo ${PLATFORM_ROUTES} | base64 --decode)
   DOCS_URL=$(echo ${DECODED_ROUTES} | extractDocsUrl)
   export DOCS_URL
