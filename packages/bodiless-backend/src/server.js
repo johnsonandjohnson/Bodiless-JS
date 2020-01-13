@@ -15,6 +15,11 @@
 const express = require('express');
 const Backend = require('./backend');
 
+// Use the same .env file as gatsby develop.
+require('dotenv').config({
+  path: '.env.development',
+});
+
 const backendPort = process.env.BODILESS_BACKEND_PORT || 8001;
 
 const backend = new Backend(express());

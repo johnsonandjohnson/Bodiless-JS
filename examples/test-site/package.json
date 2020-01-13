@@ -61,7 +61,7 @@
     "build:scripts": "tsc -p ./tsconfig.json",
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "rimraf ./public/* ./.cache",
-    "dev-backend": "DOTENV_CONFIG_PATH=.env.development node -r dotenv/config node_modules/@bodiless/backend/src/server.js",
+    "dev-backend": "node ./node_modules/@bodiless/backend/src/server.js",
     "dev-frontend": "gatsby develop -p 8005",
     "serve": "gatsby serve",
     "prestart": "npm run build:doc",

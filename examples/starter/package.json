@@ -52,7 +52,7 @@
     "build:doc": "bl-docs-build",
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "rimraf ./public/* && rimraf ./.cache",
-    "dev-backend": "DOTENV_CONFIG_PATH=.env.development node -r dotenv/config node_modules/@bodiless/backend/src/server.js",
+    "dev-backend": "node ./node_modules/@bodiless/backend/src/server.js",
     "dev-frontend": "gatsby develop",
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx .",
     "prestart": "npm run build:doc",
