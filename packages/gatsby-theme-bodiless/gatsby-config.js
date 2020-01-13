@@ -68,7 +68,7 @@ const plugins = [
 /**
  * Google Tag Manager plugin.
 */
-if (process.env.GOOGLE_TAGMANAGER_ENABLED !== '0') {
+if ((process.env.GOOGLE_TAGMANAGER_ENABLED || '0') === '1') {
   plugins.push({
     resolve: 'gatsby-plugin-google-tagmanager',
     options: {
