@@ -105,6 +105,9 @@ const formGitCommit = (client: Client) => contextMenuForm({
   },
 );
 
+// Currently descoping the Pull Changes Button Functionality.
+// Might use it later.
+
 // const formGitPull = (client: Client) => contextMenuForm({
 //   submitValues: () => handle(client.pull()),
 // })(
@@ -153,6 +156,8 @@ const getMenuOptions = (client: Client = defaultClient): TMenuOption[] => {
       isDisabled: () => !canCommit,
       handler: () => saveChanges,
     },
+    // Currently descoping the Pull Changes Button Functionality.
+    // Might use it later.
     // {
     //   name: 'pullchanges',
     //   icon: 'cloud_download',
