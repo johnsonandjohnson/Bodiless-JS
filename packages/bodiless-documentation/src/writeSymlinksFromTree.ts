@@ -15,7 +15,7 @@
 /* eslint-disable no-console */
 
 import path from 'path';
-import fs, { ensureSymlinkSync } from 'fs-extra';
+import fs from 'fs-extra';
 import { Tree } from './type';
 
 type Props = {
@@ -39,10 +39,15 @@ const writeSymlinksFromTree = (props: Props) => {
           console.log(error, key);
         }
       } else {
-        const relPath = path.relative(loc, branch.paths as string);
         const filePath = path.join(loc, key);
         try {
-          ensureSymlinkSync(relPath, filePath);
+          if (process.env.BODILESS_DOCS_COPYFILES === '1') {
+            const relPath = path.relative(process.cwd(), branch.paths as string);
+            fs.copyFileSync(relPath, filePath);
+          } else {
+            const relPath = path.relative(loc, branch.paths as string);
+            fs.ensureSymlinkSync(relPath, filePath);
+          }
         } catch (error) {
           console.log(error, key);
         }

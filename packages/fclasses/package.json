@@ -15,6 +15,9 @@
     "/lib",
     "/bodiless.docs.json"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
