@@ -52,6 +52,9 @@ const asHeader1 = flow(addClasses('text-3xl'), asTextColorPrimary);
 const asHeader2 = addClasses('text-2xl');
 const asHeader3 = addClasses('text-xl');
 
+/* BlockQuote */
+const asBlockQuote = addClasses('block mx-4');
+
 /* Image component */
 const asImage = addClasses('');
 const asEditableImage = asBodilessImage;
@@ -99,4 +102,5 @@ export {
   asYMargin,
   asNegXMargin,
   asNegYMargin,
+  asBlockQuote,
 };

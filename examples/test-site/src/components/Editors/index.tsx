@@ -13,9 +13,18 @@
  */
 
 import { flow } from 'lodash';
+import {
+  asBlock,
+  withButton,
+  withStrikeThroughMeta,
+  withComponent,
+} from '@bodiless/richtext';
 import { RichText } from '@bodiless/richtext-ui';
 import {
-  withDesign, addClasses,
+  withDesign,
+  addClasses,
+  Blockquote,
+  Strike,
 } from '@bodiless/fclasses';
 import {
   asBold,
@@ -30,9 +39,16 @@ import {
   asHeader2,
   asHeader1,
   asSuperScript,
+  asStrikeThrough,
   asEditableLink,
+  asBlockQuote,
 } from '../Elements.token';
 import asEditor from './asEditor';
+
+export const withQuoteBlockMeta = flow(
+  asBlock,
+  withButton('format_quote'),
+);
 
 const simpleDesign = {
   SuperScript: asSuperScript,
@@ -54,6 +70,8 @@ const fullFeaturedDesign = {
   H1: asHeader1,
   H2: asHeader2,
   H3: asHeader3,
+  StrikeThrough: flow(withComponent(Strike), asStrikeThrough, withStrikeThroughMeta),
+  BlockQuote: flow(withComponent(Blockquote), asBlockQuote),
 };
 
 const EditorSimple = withDesign(simpleDesign)(RichText);
