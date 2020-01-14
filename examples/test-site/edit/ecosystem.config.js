@@ -12,7 +12,7 @@ module.exports = {
     {
       name: 'backend',
       cwd: `${appVolume()}/root/examples/test-site`,
-      script: `${appVolume()}/root/bodiless-backend/src/server.js`,
+      script: `${appVolume()}/root/packages/bodiless-backend/src/server.js`,
       node_args: `-r dotenv/config ${appVolume()}/root/examples/test-site/.env.development`,
     },
   ],
