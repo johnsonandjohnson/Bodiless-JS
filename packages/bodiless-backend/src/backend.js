@@ -13,7 +13,6 @@
  */
 
 /* eslint no-console: 0 */
-require('dotenv').config();
 const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser');

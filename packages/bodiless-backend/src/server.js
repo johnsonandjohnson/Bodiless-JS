@@ -10,15 +10,15 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
-
-const express = require('express');
-const Backend = require('./backend');
+*/
 
 // Use the same .env file as gatsby develop.
 require('dotenv').config({
   path: '.env.development',
 });
+
+const express = require('express');
+const Backend = require('./backend');
 
 const backendPort = process.env.BODILESS_BACKEND_PORT || 8001;
 
