@@ -60,7 +60,7 @@ const SingleAccordionBase = ({ components, expanded, expandedStyle = null }: any
   } = components;
 
   return (
-    <Wrapper className={['zzz', accordionState]}>
+    <Wrapper className={[accordionState]}>
       <TitleWrapper
         onClick={toggleAccordionState}
         className={[
