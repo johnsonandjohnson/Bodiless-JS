@@ -15,12 +15,15 @@ install it from this repository as follows:
 ```bash
 git clone https://github.com/johnsonandjohnson/bodiless-js.git
 cd bodiless-js
-npm run ci
+npm ci
 npm run new /path/to/new/site
 ```
 
-This will create a new git repository at th especified location (which defaults
+This will create a new git repository at the specified location (which defaults
 to `~/gatsby-starter-bodiless`), copy the starter, and install all dependencies.
+
+> Note: You should avoid creating a new site in the monorepo, except in the /sites
+directory if you intend to check it against local packages.
 
 You can then launch the editor:
 
@@ -44,7 +47,7 @@ Visit http://localhost:9000/ in your browser to view the site.
 
 > Note: Official Gatsby Stater (installable via `gatsby new`) is coming soon!
 
-## Exlporing and Developing *BodilessJS*
+## Exploring and Developing *BodilessJS*
 
 The BodilessJS monorepo also contains a test site which showcases all features and can
 be used for local development and testing.
