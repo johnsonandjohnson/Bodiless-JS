@@ -51,7 +51,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
-  }, 
+  },
   "scripts": {
     "build": "npm-run-all build:css build:lib build:scripts build:doc psh-validate",
     "build:watch": "run-p -r dev-frontend dev-backend",
