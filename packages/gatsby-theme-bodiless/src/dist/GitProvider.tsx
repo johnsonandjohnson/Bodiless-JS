@@ -14,12 +14,14 @@
 
 /* eslint-disable no-alert */
 import React, { FC } from 'react';
+import Cookies from 'universal-cookie';
 import {
   contextMenuForm, getUI, ContextProvider, TMenuOption,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
 import BackendClient from './BackendClient';
 import CommitsList from './CommitsList';
+
 
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
@@ -39,7 +41,8 @@ type Client = {
     message: string,
     directories: string[],
     paths: string[],
-    files: string[]
+    files: string[],
+    author?: string,
   ) => AxiosPromise<any>,
   getLatestCommits: () => AxiosPromise<any>,
   pull: () => AxiosPromise<any>,
@@ -87,9 +90,12 @@ const formGetCommitsList = (client: Client) => contextMenuForm({
   },
 );
 
+// Get the author from the cookie.
+const cookies = new Cookies();
+const author = cookies.get('author');
 const formGitCommit = (client: Client) => contextMenuForm({
   submitValues: (submitValues: any) => handle(client.commit(submitValues.commitMessage,
-    [backendFilePath, backendStaticPath], [], [])),
+    [backendFilePath, backendStaticPath], [], [], author)),
 })(
   ({ ui }: any) => {
     const { ComponentFormTitle, ComponentFormLabel, ComponentFormText } = getUI(ui);
