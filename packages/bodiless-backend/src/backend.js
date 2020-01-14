@@ -151,7 +151,6 @@ class GitCommit {
     }
     this.files = [];
     this.remote = 'origin';
-    this.author = '';
   }
 
   addDirectory(...dirs) {
