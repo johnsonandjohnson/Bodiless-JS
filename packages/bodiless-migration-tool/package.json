@@ -91,7 +91,13 @@
   "oclif": {
     "bin": "migration_tool"
   },
-  "repository": "migration_assistant/migration_tool",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "lint": "tslint -p . -t stylish",
     "prepack": "rm -rf lib && tsc -b && babel lib --out-dir lib",
