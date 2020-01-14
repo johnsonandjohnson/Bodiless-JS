@@ -16,7 +16,7 @@
 import {
   intersection, flowRight, flow, mergeWith, omit,
 } from 'lodash';
-import React, { ComponentType, Fragment } from 'react';
+import React, { ComponentType, Fragment, useContext } from 'react';
 
 export type DesignElement<P> = (c: ComponentType<P> | string) => ComponentType<P>;
 
@@ -80,6 +80,25 @@ const withDisplayName = <P extends Object> (name: string) => (Component: Compone
   const newMeta = mergeWith({}, Component, { displayName: name });
   return Object.assign(WithDisplayName, newMeta);
 };
+const designContextDefault = undefined as undefined | ComponentType<any>;
+const DesignContext = React.createContext(designContextDefault);
+export const replaceable = <P extends object> (Component:ComponentType<P>) => (props:P) => {
+  const UpstreamComponent = useContext(DesignContext);
+  const FinalComponent = UpstreamComponent || Component;
+  return <FinalComponent {...props} />;
+};
+export const startWith = <P extends object>(ReplacementComponent: ComponentType<P>) => (
+  (Component: ComponentType<P>) => (props:P) => {
+    const UpstreamComponent = useContext(DesignContext);
+    return UpstreamComponent
+      ? <Component {...props} />
+      : (
+        <DesignContext.Provider value={ReplacementComponent}>
+          <Component {...props} />
+        </DesignContext.Provider>
+      );
+  }
+);
 export const applyDesign = <C extends DesignableComponents> (
   components: C,
   DefaultComponent: ComponentType<any> = Fragment,
@@ -92,11 +111,12 @@ export const applyDesign = <C extends DesignableComponents> (
         (acc, key) => (
           {
             ...acc,
-            // We are using a Fragment if they Design<C> has a key that is not explicitly in C
-            // We feel safe casting this to C[string] because DesignableComponents defines it as
-            // ComponentType<any>
+            // We are using a the Default Component  if they Design<C> has a key that is not
+            // explicitly in C We feel safe casting this to C[string] because DesignableComponents
+            // defines it as ComponentType<any>
+            // We are wrapping the result in replaceable so one of the HoC could replace it.
             [key]: incomingDesign[key]!(
-              (components[key] || DefaultComponent) as any as C[string],
+              replaceable(components[key] || DefaultComponent) as any as C[string],
             ),
           } as C
         ),
@@ -135,7 +155,6 @@ export const withDesign = <C extends DesignableComponents>(design: Design<C>) =>
 );
 
 export const replaceWith = <P extends object>(Component: ComponentType<P>) => () => Component;
-export const startWith = replaceWith;
 export const remove = <P extends React.HTMLAttributes<HTMLBaseElement>> () => (props:P) => {
   const { children } = props;
   return <React.Fragment>{children}</React.Fragment>;

@@ -24,6 +24,8 @@ import {
   withDesign,
   Blockquote,
   Strike,
+  startWith,
+  Em,
 } from '@bodiless/fclasses';
 import {
   asBold,
@@ -48,7 +50,7 @@ const simpleDesign = {
   SuperScript: asSuperScript,
 };
 const basicDesign = {
-  Bold: asBold,
+  Bold: flow(asBold, startWith(Em)),
   Italic: asItalic,
   Underline: asUnderline,
   Link: flow(asEditableLink(), asLink),
