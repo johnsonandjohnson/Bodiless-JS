@@ -22,7 +22,6 @@ import {
 import { RichText } from '@bodiless/richtext-ui';
 import {
   withDesign,
-  addClasses,
   Blockquote,
   Strike,
 } from '@bodiless/fclasses';
@@ -45,11 +44,6 @@ import {
 } from '../Elements.token';
 import asEditor from './asEditor';
 
-export const withQuoteBlockMeta = flow(
-  asBlock,
-  withButton('format_quote'),
-);
-
 const simpleDesign = {
   SuperScript: asSuperScript,
 };
@@ -59,19 +53,32 @@ const basicDesign = {
   Underline: asUnderline,
   Link: flow(asEditableLink(), asLink),
   ...simpleDesign,
-  RedText: addClasses('text-red-500'),
   AlignLeft: asAlignLeft,
   AlignRight: asAlignRight,
   AlignJustify: asAlignJustify,
   AlignCenter: asAlignCenter,
 };
+
+export const withQuoteBlockMeta = flow(
+  asBlock,
+  withButton('format_quote'),
+);
+
 const fullFeaturedDesign = {
-  ...basicDesign,
+  Bold: asBold,
+  Italic: asItalic,
+  Underline: asUnderline,
+  StrikeThrough: flow(withComponent(Strike), asStrikeThrough, withStrikeThroughMeta),
+  Link: flow(asEditableLink(), asLink),
+  SuperScript: asSuperScript,
+  AlignLeft: asAlignLeft,
+  AlignRight: asAlignRight,
+  AlignJustify: asAlignJustify,
+  AlignCenter: asAlignCenter,
   H1: asHeader1,
   H2: asHeader2,
   H3: asHeader3,
-  StrikeThrough: flow(withComponent(Strike), asStrikeThrough, withStrikeThroughMeta),
-  BlockQuote: flow(withComponent(Blockquote), asBlockQuote),
+  BlockQuote: flow(withComponent(Blockquote), asBlockQuote, withQuoteBlockMeta),
 };
 
 const EditorSimple = withDesign(simpleDesign)(RichText);

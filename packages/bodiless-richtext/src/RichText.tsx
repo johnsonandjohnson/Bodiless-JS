@@ -26,6 +26,9 @@ import { BasicEditorProps, Plugin } from 'slate-react';
 import { SchemaProperties } from 'slate';
 import {
   designable,
+  H1,
+  H2,
+  H3,
   Sup,
   B,
   Em,
@@ -232,6 +235,9 @@ const defaults = {
   AlignRight: Div,
   AlignCenter: Div,
   AlignJustify: Div,
+  H1,
+  H2,
+  H3,
 } as DesignableComponents;
 const lastDesign = {
   SuperScript: withSuperScriptMeta,
