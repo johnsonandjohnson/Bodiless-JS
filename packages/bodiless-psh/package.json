@@ -24,6 +24,9 @@
     "type": "git",
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "copyfiles": "^2.1.1",
     "rimraf": "^2.6.3"

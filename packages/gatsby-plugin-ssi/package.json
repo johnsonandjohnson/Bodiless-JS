@@ -16,6 +16,9 @@
     "type": "git",
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "replace-in-file": "^4.2.0"
   },
