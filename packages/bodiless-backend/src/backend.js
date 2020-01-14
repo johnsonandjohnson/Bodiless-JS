@@ -230,7 +230,7 @@ class GitCommit {
     return result;
   }
 
-  async commit(message) {
+  async commit(message, author) {
     const { remote } = this;
 
     await this.pull();
@@ -261,10 +261,14 @@ class GitCommit {
     }
 
     // Commit the staged files..
-    const res = await GitCmd.cmd()
-      .add('commit', '-m', message)
-      .addFiles(...this.files)
-      .exec();
+    const commitCmd = GitCmd.cmd();
+    commitCmd.add('commit', '-m', message);
+    // If we have an author, add it to the commit.
+    if (author) {
+      commitCmd.add('--author', author);
+    }
+    commitCmd.addFiles(...this.files);
+    const res = await commitCmd.exec();
 
     try {
       // Push changes after succesful rebase.
@@ -419,14 +423,14 @@ class Backend {
     route.post((req, res) => {
       Backend.gitCommitsEnabled(res);
       logger.log(`Start committing: ${req.body.message}`);
-
+      const { author } = req.body;
       const files = req.body.files || [];
       const dirs = req.body.dirs || [];
       new GitCommit()
         .addDirectory(...dirs)
         .addPaths(...req.body.paths)
         .addFiles(...files)
-        .commit(`[CONTENT] ${req.body.message}`)
+        .commit(`[CONTENT] ${req.body.message}`, author)
         // .then(Git.cmd().add('push').exec())
         .then(data => {
           res.send(data.stdout);
