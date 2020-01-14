@@ -23,6 +23,7 @@ if [ "$1" = "install" ]; then
 elif [ "$1" = "build" ]; then
   npm run build:packages -- --concurrency 1
 elif [ "$1" = "finish-deploy" ]; then
+  SITE_DIR=${ROOT_DIR}/examples/test-site
   cp ${PLATFORM_APP_DIR}/${DEFAULT_ENV} ${SITE_DIR}/.env.development
   if [ -n "${BV_SCRIPT}" ]; then
     echo "BV_SCRIPT=$BV_SCRIPT" >> ${SITE_DIR}/.env.development
