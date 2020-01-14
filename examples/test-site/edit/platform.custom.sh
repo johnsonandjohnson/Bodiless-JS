@@ -21,7 +21,6 @@ set -e
 if [ "$1" = "install" ]; then
   npm run bootstrap
 elif [ "$1" = "build" ]; then
-  npm run build:css
   npm run build:packages -- --concurrency 1
 elif [ "$1" = "finish-deploy" ]; then
   cp ${PLATFORM_APP_DIR}/${DEFAULT_ENV} ${SITE_DIR}/.env.development
