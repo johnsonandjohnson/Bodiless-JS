@@ -110,8 +110,8 @@ npm run sites:update <your-site-dir>
 
 When running external sites (or testing example sites using local packages), it is best to put them
 under `/sites` rather than `/examples`.  The latter is managed by Lerna; when you run bootstrap
-any site under `/examples` will be linked to the package source in the monoreop and have its
-dependencies hoisted;.  This means:
+any site under `/examples` will be linked to the package source in the monorepo and have its
+dependencies hoisted.  This means:
 
 - You might alter the package-lock.json at the monorepo root.
 - You have to remember not to commit the site (or the altered package-lock.json)
