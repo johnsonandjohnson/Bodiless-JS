@@ -21,9 +21,6 @@ import {
   ValueJSON as SlateEditorValueJSON,
 } from 'slate';
 import { Editor } from 'slate-react';
-import {
-  withDesign, addClasses,
-} from '@bodiless/fclasses';
 import defaultValue from '../src/default-value';
 
 const getDefaultRichTextItems = () => ({});
@@ -46,6 +43,9 @@ const createRichtext = () => {
 };
 
 describe('RichText', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
   describe('when value prop is not passed', () => {
     it('passes default value to ReactEditor', () => {
       const design = {};
@@ -58,98 +58,7 @@ describe('RichText', () => {
       expect(valueProp.toJSON()).toStrictEqual(defaultJSONValue);
     });
   });
-  describe('design', () => {
-    describe('when a component is added', () => {
-      it('should create a hover menu button with a default icon', () => {
-        const createPluginButtonMock = jest.fn();
-        jest.doMock('../src/plugin-factory/createPluginButton', () => ({
-          __esModule: true,
-          default: createPluginButtonMock,
-        }));
-        const simpleDesign = {
-          SuperScript: addClasses(''),
-        };
-        const RichText = createRichtext();
-        const PlainEditor = withDesign(simpleDesign)(RichText);
-        mount(<PlainEditor />);
-        expect(createPluginButtonMock.mock.calls.length).toBe(1);
-        expect(createPluginButtonMock.mock.calls[0][0].icon).toBe('format_size');
-      });
-      it('should create a keyboard shortcut', () => {
-        const simpleDesign = {
-          SuperScript: addClasses(''),
-        };
-        const createKeyboardPluginMock = jest.fn();
-        jest.doMock('../src/plugin-factory/keyBoardShortcut', () => ({
-          __esModule: true,
-          createKeyboardPlugin: (props: any) => {
-            createKeyboardPluginMock(props);
-            return {};
-          },
-        }));
-        const RichText = createRichtext();
-        const PlainEditor = withDesign(simpleDesign)(RichText);
-        mount(<PlainEditor />);
-        expect(createKeyboardPluginMock.mock.calls.length).toBe(1);
-        expect(createKeyboardPluginMock.mock.calls[0][0].key).toBe('s');
-      });
-    });
-    describe('when a block component is added', () => {
-      it('should create a block button', () => {
-        const simpleDesign = {
-          H1: addClasses(''),
-        };
-        const createBlockButtonMock = jest.fn();
-        jest.doMock('../src/plugin-factory/block/createBlockButton', () => ({
-          __esModule: true,
-          default: createBlockButtonMock,
-        }));
-        const RichText = createRichtext();
-        const PlainEditor = withDesign(simpleDesign)(RichText);
-        mount(<PlainEditor />);
-        expect(createBlockButtonMock.mock.calls.length).toBe(1);
-        expect(createBlockButtonMock.mock.calls[0][0]).toBe('H1');
-      });
-    });
-    describe('when an inline component is added', () => {
-      it('should create an inline button', () => {
-        const simpleDesign = {
-          Link: addClasses(''),
-        };
-        const createInlineButtonMock = jest.fn();
-        jest.doMock('../src/plugin-factory/inline/createInlineButton', () => ({
-          __esModule: true,
-          default: createInlineButtonMock,
-        }));
-        const RichText = createRichtext();
-        const PlainEditor = withDesign(simpleDesign)(RichText);
-        mount(<PlainEditor />);
-        expect(createInlineButtonMock.mock.calls.length).toBe(1);
-        expect(createInlineButtonMock.mock.calls[0][0]).toBe('Link');
-      });
-    });
-    describe('when a mark component is added', () => {
-      it('should create a mark button', () => {
-        const simpleDesign = {
-          SuperScript: addClasses(''),
-        };
-        const createMarkButtonMock = jest.fn();
-        jest.doMock('../src/plugin-factory/mark/createMarkButton', () => ({
-          __esModule: true,
-          default: createMarkButtonMock,
-        }));
-        const RichText = createRichtext();
-        const PlainEditor = withDesign(simpleDesign)(RichText);
-        mount(<PlainEditor />);
-        expect(createMarkButtonMock.mock.calls.length).toBe(1);
-        expect(createMarkButtonMock.mock.calls[0][0]).toBe('SuperScript');
-      });
-    });
-  });
   describe('richtext content editable', () => {
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
     // eslint:disable-next-line: max-line-length
     test('richtext is editable, hover menu and buttons rendered when isEdit enabled in pageEditContext', () => {
       const RichText = createRichtext();

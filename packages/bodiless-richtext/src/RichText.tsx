@@ -189,9 +189,6 @@ const BasicRichText = <P extends object, D extends object>(props: P & RichTextPr
   const finalComponents = withDefaults(components);
   const { HoverMenu } = getUI(ui);
   const finalUI = getUI(ui);
-  // triggering runtime validation of RichText items
-  // throwing an error if there is an item for which component or id is not set
-  // long term, it would be great to have the validation during compilation
   const { isEdit } = useEditContext();
   return (
     <uiContext.Provider value={finalUI}>
@@ -257,9 +254,20 @@ const lastDesign = {
 // as well as only apply the finalDesign on items that are already in the design.
 const apply = (design: Design<DesignableComponents>) => {
   // We want to add our meta data if the keys are present.
-  const start = pick(defaults, Object.getOwnPropertyNames(design));
+  const start = Object.getOwnPropertyNames(design)
+    .reduce(
+      (acc, key) => (
+        {
+          ...acc,
+          [key]: Object.prototype.hasOwnProperty.call(defaults, key)
+            ? defaults[key]
+            : Span,
+        }
+      ),
+      {},
+    );
   const finalDesign = pick(lastDesign, Object.getOwnPropertyNames(design));
-  return applyDesign(start, Span)(extendDesign(finalDesign)(design));
+  return applyDesign(start)(extendDesign(finalDesign)(design));
 };
 const RichText = designable(apply)(BasicRichText);
 export default RichText;

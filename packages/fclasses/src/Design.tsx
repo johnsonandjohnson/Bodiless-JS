@@ -188,7 +188,7 @@ export const designable = <C extends DesignableComponents> (start: C | Function)
     const transformFixed = (props:DesignableProps<C> & P) => {
       const { design } = props;
       const apply = typeof start === 'function' ? start : applyDesign(start);
-      return { components: apply(start)(design) } as DesignableComponentsProps<C>;
+      return { components: apply(design) } as DesignableComponentsProps<C>;
     };
     const transformPassthrough = (props:DesignableProps<C> & P) => omit(props, ['design']) as P;
     const Designable = withTransformer({ transformFixed, transformPassthrough })(Component);
