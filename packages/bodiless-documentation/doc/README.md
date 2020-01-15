@@ -25,6 +25,7 @@ git clone https://github.com/johnsonandjohnson/Bodiless-JS.git
 npm run setup`
 npm run start`
 ```
+> NOTE: Do not run `npm install` at repository root.  Use `npm run setup` instead.
 
 Then Visit `localhost:8005` in your browser.
 
