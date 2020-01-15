@@ -71,7 +71,13 @@ export default class BackendClient {
     return this.post(`${this.prefix}/pages`, payload);
   }
 
-  commit(message: string, directories: string[], paths: string[], files: string[]) {
+  commit(
+    message: string,
+    directories: string[],
+    paths: string[],
+    files: string[],
+    author?: string,
+  ) {
     const d = directories || [];
     const p = paths || [];
     const f = files || [];
@@ -80,6 +86,7 @@ export default class BackendClient {
       dirs: Array.isArray(d) ? d : [d],
       paths: Array.isArray(p) ? p : [p],
       files: Array.isArray(f) ? f : [f],
+      author,
     };
     return this.post(`${this.prefix}/change/commit`, post);
   }
