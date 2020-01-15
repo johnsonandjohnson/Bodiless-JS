@@ -59,7 +59,7 @@ Clone the repository and install dependencies:
 ```bash
 git clone https://github.com/johnsonandjohnson/bodiless-js.git
 cd bodiless-js
-npm run bootstrap
+npm run setup
 ```
 > Note: don't run `npm install` at package root unless you are trying to update dependencies.
 
