@@ -24,13 +24,17 @@ import {
 } from '@bodiless/richtext';
 import { asBodilessLink } from '@bodiless/components';
 import asEditor from '../../../components/Editors/asEditor';
-import { asLink } from '../../../components/Elements.token';
+
+const asBold = withComponent(Strong);
+const asItalic = addClasses('');
+const asUnderline = addClasses('underline');
+const asLink = flow(asBodilessLink(), addClasses('text-blue-700 underline'));
 
 const simpleDesign = {
-  Bold: withComponent(Strong),
-  Italic: addClasses(''),
-  Underline: addClasses('underline'),
-  Link: flow(asBodilessLink(), asLink),
+  Bold: asBold,
+  Italic: asItalic,
+  Underline: asUnderline,
+  Link: asLink,
 };
 
 const SimpleEditor = withDesign(simpleDesign)(RichText);
