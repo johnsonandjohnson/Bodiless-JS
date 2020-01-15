@@ -13,9 +13,18 @@
  */
 
 import React from 'react';
+import { flow } from 'lodash';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { BVRatingsSummary, BVReviews } from '@bodiless/bv';
+import {
+  withDesign,
+  replaceWith,
+  removeClasses,
+} from '@bodiless/fclasses';
+import {
+  SingleAccordionClean,
+} from '@bodiless/organisms';
 import Layout from '../components/Layout';
 import {
   ProductTitle,
@@ -26,6 +35,36 @@ import {
   ProductDetailAccWrapper,
 } from '../components/Product';
 import { FlexBoxDefault } from '../components/Flexbox';
+import { asEditorBasic } from '../components/Editors';
+import asSingleAccordionDefaultStyle from '../components/SingleAccordion/token';
+
+// Do not allow editors to set accordion titles.
+const NonEditableTitle = ({ producttitle }) => (
+  <h2>
+    {producttitle}
+  </h2>
+);
+
+const asProductAccordion = title => flow(
+  asSingleAccordionDefaultStyle,
+  withDesign({
+    Wrapper: removeClasses('p-1'),
+    Title: replaceWith(() => <NonEditableTitle producttitle={title} />),
+    Body: asEditorBasic(
+      'body',
+      'Enter Product Information',
+    ),
+  }),
+);
+
+const ProductOverAcc = asProductAccordion('Overview')(SingleAccordionClean);
+const ProductDirsAcc = asProductAccordion('Directions')(SingleAccordionClean);
+const ProductHowAcc = asProductAccordion('How To Use')(SingleAccordionClean);
+const ProductNutAcc = asProductAccordion('Nutrition')(SingleAccordionClean);
+const ProductActIngAcc = asProductAccordion('Active Ingredients')(SingleAccordionClean);
+const ProductInactIngAcc = asProductAccordion('Inactive Ingredients')(SingleAccordionClean);
+const ProductStorAcc = asProductAccordion('Storage')(SingleAccordionClean);
+const ProductWarnAcc = asProductAccordion('Warnings')(SingleAccordionClean);
 
 export default (props: any) => (
   <Page {...props}>
@@ -47,7 +86,14 @@ export default (props: any) => (
             <ProductImage />
           </ProductDetailImageWrapper>
           <ProductDetailAccWrapper>
-            <p>Placeholder for Accordion Details</p>
+            <ProductOverAcc expanded nodeKey="accordion-1" />
+            <ProductDirsAcc nodeKey="accordion-2" />
+            <ProductHowAcc nodeKey="accordion-3" />
+            <ProductNutAcc nodeKey="accordion-4" />
+            <ProductActIngAcc nodeKey="accordion-5" />
+            <ProductInactIngAcc nodeKey="accordion-6" />
+            <ProductStorAcc nodeKey="accordion-7" />
+            <ProductWarnAcc nodeKey="accordion-8" />
           </ProductDetailAccWrapper>
         </div>
       </SectionMargin>
