@@ -190,6 +190,8 @@ const BasicRichText = <P extends object, D extends object>(props: P & RichTextPr
   const { HoverMenu } = getUI(ui);
   const finalUI = getUI(ui);
   const { isEdit } = useEditContext();
+  // eslint-disable-next-line react/no-array-index-key
+  const selectorButtons = getSelectorButtons(finalComponents).map((C, i) => <C key={i} />);
   return (
     <uiContext.Provider value={finalUI}>
       <RichTextProvider
@@ -208,12 +210,11 @@ const BasicRichText = <P extends object, D extends object>(props: P & RichTextPr
               // eslint-disable-next-line react/no-array-index-key
               getHoverButtons(finalComponents).map((C, i) => <C key={i} />)
             }
-            <TextSelectorButton>
-              {
-                // eslint-disable-next-line react/no-array-index-key
-                getSelectorButtons(finalComponents).map((C, i) => <C key={i} />)
-              }
-            </TextSelectorButton>
+            { selectorButtons.length > 0
+              && (
+                <TextSelectorButton>{ selectorButtons }</TextSelectorButton>
+              )
+            }
           </HoverMenu>
           )
         }
