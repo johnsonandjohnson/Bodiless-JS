@@ -77,12 +77,12 @@ publishing process itself (eg files accidentally omitted from the package). You
 can achieve a higher-fidelity test scenario by running the local sites as if they
 were external:
 ```
-npm run sites:copy-local test-site
+npm run sites:clone-local test-site
 npm run sites:update test-site
 ```
 or
 ```
-npm run sites:copy-local starter
+npm run sites:clone-local starter
 npm run sites:update starter
 ```
 Then
