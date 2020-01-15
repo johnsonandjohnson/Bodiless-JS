@@ -147,6 +147,7 @@ maxWidth: {
 ```` 
 
 #### Class Name Examples
+
 * ``.bl-p-grid-1`` --> ``padding: 5px;`` (`defaultGrid` values) 
 * ``.bl-mt-xl-grid-0`` --> ``margin-top: 100px;`` (`xlGrid` values) 
 * ``.bl--top-grid-4`` --> ``top: -20px;`` (`negativeGrid` values) 
