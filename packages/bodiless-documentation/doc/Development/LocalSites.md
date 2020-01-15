@@ -105,3 +105,19 @@ repackage and reinstall.
 ```
 npm run sites:update <your-site-dir>
 ```
+
+### `/examples` vs `/sites`
+
+When running external sites (or testing example sites using local packages), it is best to put them
+under `/sites` rather than `/examples`.  The latter is managed by Lerna; when you run bootstrap
+any site under `/examples` will be linked to the package source in the monoreop and have its
+dependencies hoisted;.  This means:
+
+- You might alter the package-lock.json at the monorepo root.
+- You have to remember not to commit the site (or the altered package-lock.json)
+- You have to make sure the site has a unique package name
+- Bugs related to improper packaging (eg. forgetting to include files) will still be invisible.
+
+The `/sites` directory is git-ignored and invisible to Lerna - so anything you do there won't
+affect the monorepo.  This is why all the NPM `sites:...` scripts assume this location for the
+site you want to run.
