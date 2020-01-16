@@ -90,6 +90,7 @@ web:
             index: ['index.html']
             scripts: false
             allow: true
+            passthru: false
         '/___docs':
             root: 'examples/test-site/doc'
             index: ['index.html']
