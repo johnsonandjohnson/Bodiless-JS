@@ -32,9 +32,9 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
           // otherwise react hooks will not work.
           react: pathUtil.resolve('../../node_modules', 'react'),
           // @INFO: slate and slate-react added here to fix multiple versions of
-          // the same package with canvasx-slate-editor. Otherwise Editor manipulations
+          // the same package with BodilessJS-slate-editor. Otherwise Editor manipulations
           // will break
-          // @TODO: unwrap slate and slate-react aliases from here when canvasx is no longer depends
+          // @TODO: unwrap slate and slate-react aliases from here when BodilessJS is no longer depends
           // on them
           'slate-react': pathUtil.resolve('node_modules', 'slate-react'),
           slate: pathUtil.resolve('node_modules', 'slate'),

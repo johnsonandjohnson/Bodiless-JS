@@ -3,7 +3,7 @@
 
 The goal of this tool is to take an existing site (independent of its technology) and convert it static flattened html site. A flattened html site is non-editable site that can be served with no databases with minimal platform requirements. The tool automates this flattening to reduce the cost of migration of these sites off other technology.
 
-The tool is given URL that will crawl the existing site finding all pages, generates the html, pulls the assets of the sites and outputs the static html site. The tool is provided as part of the CanvasX project and is incorporated into migration process. The output works in coordination with the CanvasX Starter Kit to use the same tooling/infrastructure.
+The tool is given URL that will crawl the existing site finding all pages, generates the html, pulls the assets of the sites and outputs the static html site. The tool is provided as part of the BodilessJS project and is incorporated into migration process. The output works in coordination with the BodilessJS Starter Kit to use the same tooling/infrastructure.
 
 ### Features
 
@@ -22,7 +22,7 @@ The tool is given URL that will crawl the existing site finding all pages, gener
     - rules to remove html elements from dom
     - rules to replace html elements with html snippet
 
-1. Generate CanvasX pages
+1. Generate BodilessJS pages
 
 1. Converts html into jsx (jsx is a React extension that allows us to write JavaScript that _looks like_ HTML.)
   
@@ -95,13 +95,13 @@ Options:
 
 - `setup`
 
-		*  **Description**: Enable/disable cloning and setting up CanvasX app locally
+		*  **Description**: Enable/disable cloning and setting up BodilessJS app locally
 
 		*  **Accepted Formats:**: "true" or "false"
 
 	*  `scrape`
 
-		*  **Description**: Enable/disable site scraping and CanvasX pages generation
+		*  **Description**: Enable/disable site scraping and BodilessJS pages generation
 
 		*  **Accepted Formats:**: "true" or "false"
 
