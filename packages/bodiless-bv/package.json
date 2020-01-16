@@ -25,8 +25,8 @@
   "dependencies": {
     "@bodiless/components": "^0.0.36",
     "@bodiless/core": "^0.0.36",
-    "@bodiless/fclasses": "^0.0.36",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.11",
+    "@bodiless/fclasses": "^0.0.36"
   },
   "peerDependencies": {
     "react": "^16.11.0",

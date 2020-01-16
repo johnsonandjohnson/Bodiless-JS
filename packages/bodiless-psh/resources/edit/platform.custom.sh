@@ -16,27 +16,14 @@
 set -e
 
 # Expects the following env variables:
-# APP_NPM_REGISTRY - url to npm registry
-# APP_NPM_AUTH - authentication token to npm registry
 # PLATFORM_APP_DIR - the absolute path to the application directory. provided by platform.sh
 
 if [ "$1" = "install" ]; then
-  if [ $APP_NPM_REGISTRY ] && [ $APP_NPM_AUTH ]; then
-      bash -c 'echo Auth token is ${APP_NPM_AUTH:0:50}...'
-      echo "@bodiless:registry=https:${APP_NPM_REGISTRY}" > .npmrc
-      echo "${APP_NPM_REGISTRY}:_authToken=${APP_NPM_AUTH}" >> .npmrc
-  else
-      echo "Npm registry env vars are missing. Trying to build from public registry..."
-  fi
   npm ci
-  rm .npmrc
 elif [ "$1" = "build" ]; then
   npm run build
 elif [ "$1" = "finish-deploy" ]; then
-  cp ${PLATFORM_APP_DIR}/${DEFAULT_ENV} ${ROOT_DIR}/.env
   cp ${PLATFORM_APP_DIR}/${DEFAULT_ENV} ${ROOT_DIR}/.env.development
-  echo "BODILESS_DOCS_URL=${DOCS_URL}" >> ${ROOT_DIR}/.env
-  echo "BODILESS_DOCS_URL=${DOCS_URL}" >> ${ROOT_DIR}/.env.development
 else
   echo "Unknown command specified to $0"
 fi

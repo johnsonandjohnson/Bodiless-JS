@@ -72,18 +72,20 @@ platform project:set-remote {project id}
 ```
 where {project id} is the platform.sh project id you acquired above.
 
-#### NPM private registry
+All variables below should be set at the project level using the platform.sh command
+line, as described in [the platform.sh documentation](https://docs.platform.sh/development/variables.html#project-variables), and all should be visible at both build time and run time.
 
-In order to deploy from NPM private registry two variables must be set:
+Add the following variables:
 
-env:APP_NPM_REGISTRY
-env:APP_NPM_AUTH
+- env:APP_GIT_REMOTE_URL -- The URL of your upstream Git repository
+- env:APP_GIT_USER -- The user to access your upstream Git repository.
+- env:APP_GIT_USER_EMAIL -- THe user email for your upstream Git repository.
+- env:APP_GIT_PW -- The user password for your upstream Git repository.
+```
 
-If the variables are not set, npm will try to load packages from the public registry:
-//registry.npmjs.org/
+> Be sure to specify `--sensitive true` for all credentials.
 
-To set the `env:APP_NPM_REGISTRY` variable perform the next steps:
-
+Example:
 ```
 $ platform variable:create
 * Level (--level)
@@ -94,23 +96,23 @@ The level at which to set the variable
 
 * Name (--name)
 The variable name
-> APP_NPM_REGISTRY
+> APP_GIT_USER_EMAIL
 
 * Value (--value)
 The variable's value
-> //registry.npmjs.org/
+> email@your.service.account
 
 JSON (--json)
 Is the value JSON-formatted? [y|N] N
 
 Sensitive (--sensitive)
-Is the value sensitive? [y|N] y
+Is the value sensitive? [y|N] N
 
 Prefix (--prefix)
 The variable name's prefix
 Default: none
   [none] No prefix: The variable will be part of $PLATFORM_VARIABLES.
-  [env:] env: The variable will be exposed directly, e.g. as $APP_NPM_REGISTRY.
+  [env:] env: The variable will be exposed directly, e.g. as $APP_GIT_USER_EMAIL.
 > env:
 
 Visible at build time (--visible-build)
@@ -118,32 +120,10 @@ Should the variable be available at build time? [Y|n] Y
 
 Visible at runtime (--visible-runtime)
 Should the variable be available at runtime? [Y|n] Y
+
+Creating variable env:APP_GIT_USER_EMAIL on the project...
 ```
 
-- Verify that the variable was created properly by executing:
-  ```
-  platform variable:get env:APP_NPM_REGISTRY
-  ```
-  You should see something like:
-  ```
-  $ platform variable:get env:APP_NPM_REGISTRY
-  +-----------------+------------------------------------------------------+
-  | Property        | Value                                                |
-  +-----------------+------------------------------------------------------+
-  | id              | env:APP_NPM_REGISTRY                                 |
-  | created_at      | 2019-10-10T13:20:13+02:00                            |
-  | updated_at      | 2019-10-10T13:20:13+02:00                            |
-  | name            | env:APP_NPM_REGISTRY                                 |
-  | attributes      | {  }                                                 |
-  | value           | //registry.npmjs.org/                                |
-  | is_json         | false                                                |
-  | is_sensitive    | false                                                |
-  | visible_build   | true                                                 |
-  | visible_runtime | true                                                 |
-  | level           | project                                              |
-  +-----------------+------------------------------------------------------+
-
-  ```
 
 #### Authorization token for NPM private registry
 
