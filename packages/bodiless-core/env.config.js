@@ -16,7 +16,7 @@ module.exports = {
   configure: async (defaultConfig, nodeEnv) => {
     const config = {
       // Location of bodiless documentation
-      default: { BODILESS_DOCS_URL: 'http://localhost:3000' },
+      default: { BODILESS_DOCS_URL: '/___docs' },
     };
 
     const validNodeEnv = val => Object.keys(config).includes(val);
