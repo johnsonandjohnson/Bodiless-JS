@@ -71,11 +71,20 @@ const paths$$ = [
   './node_modules/@bodiless/psh/resources/edit/*',
   './edit',
 ];
-copyfiles(paths$$, { up: true, all: true }, (err: any) => {
+copyfiles(paths$$, { up: true, all: true, exclude: 'platform.custom.sh' }, (err: any) => {
   if (err) console.log('Error copying /edit', err);
   else {
     rename('./edit/edit.platform.app.yaml', './edit/.platform.app.yaml', err$ => {
       if (err$) console.log('Error renaming edit.platform.app.yaml', err$);
     });
   }
+});
+
+// Don't overwrite platform.custom.sh if it already exists.
+const paths$$$ = [
+  './node_modules/@bodiless/psh/resources/edit/platform.custom.sh',
+  './edit',
+];
+copyfiles(paths$$$, { up: true, soft: true }, (err: any) => {
+  if (err) console.log('Error copying /edit', err);
 });
