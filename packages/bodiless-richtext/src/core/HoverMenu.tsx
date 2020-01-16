@@ -58,6 +58,7 @@ function updateMenu(menu: HTMLElement | null, editorContext: EditorContext) {
 
   const { style } = menu;
   style.opacity = '1';
+  style.visibility = 'visible';
   style.top = `${rect.top + window.pageYOffset - menu.offsetHeight}px`;
   style.left = `${offsetLeft < 0 ? 15 : offsetLeft}px`;
 }
