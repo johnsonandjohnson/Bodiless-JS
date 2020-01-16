@@ -12,25 +12,30 @@
  * limitations under the License.
  */
 
+import { flow } from 'lodash';
 import { RichText } from '@bodiless/richtext-ui';
 import {
-  Strong, Em, A, Span, addClasses,
+  Strong,
+  addClasses,
+  withDesign,
 } from '@bodiless/fclasses';
-import { asBodilessLink } from '@bodiless/components';
 import {
-  asBoldItem, asItalicItem, asUnderlineItem, asLinkItem, withItems,
-} from '../../../components/Editors/items';
+  withComponent,
+} from '@bodiless/richtext';
+import { asBodilessLink } from '@bodiless/components';
 import asEditor from '../../../components/Editors/asEditor';
 
-const Underline = addClasses('underline')(Span);
-const Link = asBodilessLink()(A);
+const asBold = withComponent(Strong);
+const asItalic = addClasses('');
+const asUnderline = addClasses('underline');
+const asLink = flow(asBodilessLink(), addClasses('text-blue-700 underline'));
 
-const items = [
-  asBoldItem(Strong),
-  asItalicItem(Em),
-  asUnderlineItem(Underline),
-  asLinkItem(Link),
-];
+const simpleDesign = {
+  Bold: asBold,
+  Italic: asItalic,
+  Underline: asUnderline,
+  Link: asLink,
+};
 
-const SimpleEditor = withItems(items)(RichText);
+const SimpleEditor = withDesign(simpleDesign)(RichText);
 export default asEditor(SimpleEditor);

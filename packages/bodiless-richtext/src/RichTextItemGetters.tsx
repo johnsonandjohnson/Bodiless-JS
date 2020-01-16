@@ -36,23 +36,11 @@ import {
   updateInline,
 } from './plugin-factory';
 import {
-  RichTextItem,
-  RichTextItemInput,
   RichTextItemType,
+  RichTextComponents,
+  RichTextComponent,
 } from './Type';
 import { useUI } from './RichTextContext';
-
-const defaultItem = () => ({
-  type: RichTextItemType.block,
-});
-/*
-  getData will return a RichTextItem that combines the default
-  Item with the hoc or Item passed in.
-*/
-const getData = <P extends object> (data:RichTextItemInput<P>):RichTextItem<P> => (
-  typeof data === 'function'
-    ? data(defaultItem)
-    : { ...defaultItem, ...data });
 
 const addAttributes = <P extends object> (Component:ComponentType<P>) => (
   (props:P & RenderNodeProps) => {
@@ -84,25 +72,29 @@ const SlateComponentProvider = (update:Function) => (
 /*
   getPlugin will use the data passed in build a slate Plugin that can be passed to a slate editor.
 */
-const getRenderPlugin = <P extends object> (data:RichTextItemInput<P>) => {
+type RenderPluginComponent = ComponentType<any> & {
+  type: RichTextItemType,
+  id: string,
+  isVoid?: boolean,
+};
+const getRenderPlugin = <P extends object> (Component: RenderPluginComponent) => {
   const {
-    component,
     type,
     id,
     isVoid,
-  } = getData(data);
+  } = Component;
   const { creates, WrappedComponent } = {
     [RichTextItemType.block]: {
       creates: createNodeRenderPlugin,
-      WrappedComponent: SlateComponentProvider(blockUtils.updateBlock)(component),
+      WrappedComponent: SlateComponentProvider(blockUtils.updateBlock)(Component),
     },
     [RichTextItemType.inline]: {
       creates: createNodeRenderPlugin,
-      WrappedComponent: SlateComponentProvider(updateInline)(component),
+      WrappedComponent: SlateComponentProvider(updateInline)(Component),
     },
     [RichTextItemType.mark]: {
       creates: createMarkRenderPlugin,
-      WrappedComponent: component,
+      WrappedComponent: Component,
     },
   }[type];
   // Clean up th component to add Attributes and remove unused props.
@@ -117,12 +109,12 @@ const getRenderPlugin = <P extends object> (data:RichTextItemInput<P>) => {
     type: id,
   });
 };
-const getShortcutPlugin = <P extends object> (data:RichTextItemInput<P>) => {
+const getShortcutPlugin = <P extends object> (Component: RichTextComponent) => {
   const {
     type,
     id,
     keyboardKey,
-  } = getData(data);
+  } = Component;
   if (!keyboardKey) {
     throw Error('keyboardKey need to get ShortcutPlugin');
   }
@@ -140,69 +132,79 @@ const getShortcutPlugin = <P extends object> (data:RichTextItemInput<P>) => {
 /*
   getPlugins takes an array of data items and pass them though to getPlugin
 */
-const getPlugins = (datas:RichTextItem<any>[]) => [
-  ...datas.map(data => getRenderPlugin(data)),
-  ...datas.filter(data => data.keyboardKey).map(data => getShortcutPlugin(data)),
+const getPlugins = (components: RichTextComponents) => [
+  ...Object.values(components).map(Component => (
+    getRenderPlugin(Component)
+  )),
+  ...Object.values(components)
+    // eslint-disable-next-line no-prototype-builtins
+    .filter(Component => Component.hasOwnProperty('keyboardKey'))
+    .map(Component => getShortcutPlugin(Component)),
 ];
 /*
   get HoverButton takes a Item and convert it
 */
-const getHoverButton = <P extends object> (data:RichTextItem<P>) => {
-  if (!data.hoverButton) {
-    throw new Error('getHoverButton requires a hoverButton property on RichTextItem');
-  }
+type HoverButton = RichTextComponent & {
+  hoverButton: {
+    icon: string,
+  };
+};
+const getHoverButton = <P extends object> (Component: HoverButton) => {
   const creates = {
     [RichTextItemType.block]: createBlockButton,
     [RichTextItemType.inline]: createInlineButton,
     [RichTextItemType.mark]: createMarkButton,
   };
-  return creates[data.type](data.id, data.hoverButton.icon);
+  return creates[Component.type](Component.id, Component.hoverButton.icon);
 };
 
 /*
   getHoverButtons takes a array of Rich Text Items and maps that to a set of Hover Buttons
 */
-const getHoverButtons = (datas:RichTextItem<any>[]) => datas
-  .filter(data => data.hoverButton)
-  .map(data => getHoverButton(data));
+const getHoverButtons = (Components: RichTextComponents) => Object.values(Components)
+  // eslint-disable-next-line no-prototype-builtins
+  .filter(Component => Component.hoverButton)
+  .map(Component => getHoverButton(Component as HoverButton));
 
-const getGlobalButton = (data: RichTextItem<any>) => (editor: Editor) => {
-  if (data.globalButton) {
-    return {
-      icon: data.globalButton.icon,
-      name: data.id,
-      global: true,
-      isActive: () => blockUtils.hasBlock(editor.value, data.id),
-      handler: () => {
-        const options = {
-          editor,
-          blockType: data.id,
-          value: editor.value,
-        };
-        if (data.isAtomicBlock) {
-          blockUtils.insertBlock(options);
-        } else {
-          blockUtils.toggleBlock(options);
-        }
-      },
-    };
-  }
-  return null;
+type RichTextComponentWithGlobalButton = RichTextComponent & {
+  globalButton: { icon: string },
 };
-const getSchema = <D extends object>(datas:RichTextItem<any>[]) => (
-  datas.filter(data => data.isVoid)
-    .reduce((previous, data) => {
-      const next = { ...previous };
-      const type = data.type === RichTextItemType.block ? 'blocks' : 'inlines';
-      if (!(type in next)) {
-        next[type] = {};
-      }
-      if (!(data.id in next[type]!)) {
-        next[type]![data.id] = {};
-      }
-      next[type]![data.id].isVoid = true;
-      return next;
-    }, {} as SchemaProperties)
+const getGlobalButton = (Component: RichTextComponentWithGlobalButton) => (editor: Editor) => ({
+  icon: Component.globalButton.icon,
+  name: Component.id,
+  global: true,
+  isActive: () => blockUtils.hasBlock(editor.value, Component.id),
+  handler: () => {
+    const options = {
+      editor,
+      blockType: Component.id,
+      value: editor.value,
+    };
+    if (Component.isAtomicBlock) {
+      blockUtils.insertBlock(options);
+    } else {
+      blockUtils.toggleBlock(options);
+    }
+  },
+});
+
+const getSchema = <D extends object>(components: RichTextComponents) => (
+  Object.values(components).filter(Component => Component.isVoid)
+    .reduce(
+      (previous:SchemaProperties, Component) => {
+        const next = { ...previous };
+        const type = Component.type === RichTextItemType.block ? 'blocks' : 'inlines';
+        if (!(type in next)) {
+          next[type] = {};
+        }
+        if (!(Component.id in next[type]!)) {
+          next[type]![Component.id] = {};
+        }
+        next[type]![Component.id].isVoid = true;
+        return next;
+      },
+      {},
+    )
 );
 type getSelectorButtonToggleType = {
   value: Value,
@@ -216,7 +218,7 @@ type getSelectorButtonToggleMarkType = {
 /*
   getSelectorButton takes a Rich Text Item and returns a button used in the RichText Selector
 */
-const getSelectorButton = <P extends object> (data:RichTextItem<P>) => (props:P) => {
+const getSelectorButton = <P extends object> (Component: RichTextComponent) => (props:P) => {
   const { toggleFuc, has } = {
     [RichTextItemType.block]: {
       toggleFuc: ({ value, editor, name }:getSelectorButtonToggleType) => (
@@ -236,39 +238,36 @@ const getSelectorButton = <P extends object> (data:RichTextItem<P>) => (props:P)
       ),
       has: hasMark,
     },
-  }[data.type];
+  }[Component.type];
   const { ClickableWrapper } = useUI();
-  const Component = data.component;
   const Button:ComponentType = withToggle({
     toggle: ({ value, editor }) => {
-      toggleFuc({ value, editor, name: data.id });
+      toggleFuc({ value, editor, name: Component.id });
     },
-    isActive: value => has(value, data.id),
+    isActive: value => has(value, Component.id),
     icon: 'none',
   })(ClickableWrapper);
-  return <Button><Component {...props}>Lorem ipsum dolor</Component></Button>;
+  return <Button><Component {...props}>{ Component.id }</Component></Button>;
 };
 
 /*
   getSelectorButtons takes an array of RichTextitems and maps that to a array of buttons
   used in the Rich Text selector
 */
-const getSelectorButtons = (datas:RichTextItem<any>[]) => datas
-  .filter(data => data.type !== RichTextItemType.block)
-  .map(data => getSelectorButton(data));
+const getSelectorButtons = (components: RichTextComponents) => Object.values(components)
+  .filter(Component => Component.type !== RichTextItemType.block)
+  // eslint-disable-next-line no-prototype-builtins
+  .filter(Component => !Component.hasOwnProperty('hoverButton'))
+  .map(Component => getSelectorButton(Component));
 /*
   getGlobalButtons takes an array of RichTextitems and maps that to a array of objects used
   to create global buttons
 */
-const getGlobalButtons = (datas:RichTextItem<any>[]) => (editor:Editor) => datas
-  .filter(data => data.globalButton)
-  .map(data => getGlobalButton(data)(editor));
-
-/*
-  dereferenceItems take a array of Items or High order items and ensure they are all Items
-*/
-const dereferenceItems = (unsureItems:RichTextItemInput<any>[]) => (
-  unsureItems.map(d => getData(d))
+const getGlobalButtons = (components: RichTextComponents) => (editor:Editor) => (
+  Object.values(components)
+    // eslint-disable-next-line no-prototype-builtins
+    .filter(Component => Component.hasOwnProperty('globalButton'))
+    .map(Component => getGlobalButton(Component as RichTextComponentWithGlobalButton)(editor))
 );
 
 export {
@@ -277,6 +276,4 @@ export {
   getHoverButtons,
   getGlobalButtons,
   getSchema,
-  dereferenceItems,
-  getData,
 };
