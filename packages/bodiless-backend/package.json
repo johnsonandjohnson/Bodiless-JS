@@ -5,12 +5,12 @@
   "main": "",
   "files": [
     "/bodiless.docs.json",
-    "env.config.js"
+    "/env.config.js"
   ],
   "dependencies": {
     "body-parser": "^1.18.3",
     "dotenv": "^8.2.0",
-    "express": "^4.16.4",
+    "express": "^4.17.1",
     "formidable": "^1.2.1",
     "tmp": "^0.0.33"
   },

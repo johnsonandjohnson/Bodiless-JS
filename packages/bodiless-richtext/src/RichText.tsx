@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType } from 'react';
-import { flowRight } from 'lodash';
+import { flowRight, pick, flow } from 'lodash';
 import {
   ifEditable,
   useEditContext,
@@ -25,6 +25,22 @@ import {
 import { BasicEditorProps, Plugin } from 'slate-react';
 import { SchemaProperties } from 'slate';
 import {
+  designable,
+  H1,
+  H2,
+  H3,
+  Sup,
+  B,
+  Em,
+  A,
+  Div,
+  Span,
+  applyDesign,
+  extendDesign,
+  Design,
+  DesignableComponents,
+} from '@bodiless/fclasses';
+import {
   withSlateEditor,
   Content,
   useSlateContext,
@@ -35,15 +51,30 @@ import {
   getPlugins,
   getHoverButtons,
   getGlobalButtons,
-  dereferenceItems,
   getSchema,
+  getSelectorButtons,
 } from './RichTextItemGetters';
+import { withId, asMark } from './RichTextItemSetters';
 import {
-  RichTextItem,
-  RichTextItemInput,
+  RichTextComponents, RichTextComponent,
 } from './Type';
+import TextSelectorButton from './components/TextSelectorButton';
 import { uiContext, getUI, UI } from './RichTextContext';
 import defaultValue from './default-value';
+import {
+  withBoldMeta,
+  withSuperScriptMeta,
+  withItalicMeta,
+  withUnderlineMeta,
+  withLinkMeta,
+  withAlignLeftMeta,
+  withAlignRightMeta,
+  withAlignCenterMeta,
+  withAlignJustifyMeta,
+  withHeader1Meta,
+  withHeader2Meta,
+  withHeader3Meta,
+} from './meta';
 
 type WithSlateSchemaTypeProps = {
   schema: object,
@@ -74,6 +105,7 @@ const withSlateActivator = <P extends object>(Component: ComponentType<P>) => (p
   const previousEditorProps = previousSlateContext!.editorProps;
   const context = useEditContext();
   const { onClick } = useContextActivator();
+  // tslint:disable-next-line: ter-arrow-parens
   const onChange: BasicEditorProps['onChange'] = change => {
     if (typeof previousEditorProps.onChange === 'function' && change) {
       previousEditorProps.onChange(change);
@@ -124,52 +156,50 @@ const RichTextProvider = flowRight(
   ifEditable(withSlateActivator),
 )(React.Fragment) as RichTextProviderType;
 
-type RichTextProps<P> = {
-  items: RichTextItemInput<P>[],
+export type RichTextProps<P> = {
+  components: DesignableComponents,
   ui?: UI,
   initialValue?: object,
   nodeKey?: string,
 };
 
-/*
-  performs runtime validation of RichTextItem props
-*/
-const validateRichTextProps = <P extends object>(items: Partial<RichTextItem<P>>[]) => {
-  items.forEach(item => {
-    if (!item.id) {
-      // tslint:disable-next-line: max-line-length
-      throw new Error('Id for RichText item is not specified. Please check your RichText component configuration.');
-    }
-    if (!item.component) {
-      // tslint:disable-next-line: max-line-length
-      throw new Error('Component for RichText is not specified. Please check your RichText component configuration.');
-    }
-  });
+/**
+ * ensure the componets have a type (we default to mark) as well as ensuring there is an id
+ * @param components which set of component on which we should operate
+ */
+const withDefaults = (components: DesignableComponents) => {
+  const withDefaultType = (Component: ComponentType<any>) => (
+    // eslint-disable-next-line no-prototype-builtins
+    Component.hasOwnProperty('type') ? Component : asMark(Component)
+  );
+  return Object.getOwnPropertyNames(components).reduce(
+    (acc, id) => (
+      { ...acc, [id]: flow(withDefaultType, withId(id))(acc[id]) as RichTextComponent }
+    ),
+    components,
+  ) as RichTextComponents;
 };
-
-const RichText = <P extends object, D extends object>(props: P & RichTextProps<D>) => {
+const BasicRichText = <P extends object, D extends object>(props: P & RichTextProps<D>) => {
   const {
     initialValue,
-    items,
+    components,
     ui,
     ...rest
   } = props;
-  const sureItems = dereferenceItems(items);
+  const finalComponents = withDefaults(components);
   const { HoverMenu } = getUI(ui);
   const finalUI = getUI(ui);
-  // triggering runtime validation of RichText items
-  // throwing an error if there is an item for which component or id is not set
-  // long term, it would be great to have the validation during compilation
-  validateRichTextProps(sureItems);
   const { isEdit } = useEditContext();
+  // eslint-disable-next-line react/no-array-index-key
+  const selectorButtons = getSelectorButtons(finalComponents).map((C, i) => <C key={i} />);
   return (
     <uiContext.Provider value={finalUI}>
       <RichTextProvider
         {...rest}
         initialValue={initialValue || defaultValue}
-        plugins={getPlugins(sureItems)}
-        globalButtons={getGlobalButtons(sureItems)}
-        schema={getSchema(sureItems)}
+        plugins={getPlugins(finalComponents)}
+        globalButtons={getGlobalButtons(finalComponents)}
+        schema={getSchema(finalComponents)}
       >
         { isEdit
           && (
@@ -178,7 +208,12 @@ const RichText = <P extends object, D extends object>(props: P & RichTextProps<D
               // TODO: Revist but for now it seems like this will not need to
               // rerender ever so it is ok.
               // eslint-disable-next-line react/no-array-index-key
-              getHoverButtons(sureItems).map((C, i) => <C key={i} />)
+              getHoverButtons(finalComponents).map((C, i) => <C key={i} />)
+            }
+            { selectorButtons.length > 0
+              && (
+                <TextSelectorButton>{ selectorButtons }</TextSelectorButton>
+              )
             }
           </HoverMenu>
           )
@@ -188,4 +223,52 @@ const RichText = <P extends object, D extends object>(props: P & RichTextProps<D
     </uiContext.Provider>
   );
 };
+const defaults = {
+  SuperScript: Sup,
+  Bold: B,
+  Italic: Em,
+  Underline: Span,
+  Link: A,
+  AlignLeft: Div,
+  AlignRight: Div,
+  AlignCenter: Div,
+  AlignJustify: Div,
+  H1,
+  H2,
+  H3,
+} as DesignableComponents;
+const lastDesign = {
+  SuperScript: withSuperScriptMeta,
+  Bold: withBoldMeta,
+  Italic: withItalicMeta,
+  Underline: withUnderlineMeta,
+  Link: withLinkMeta,
+  AlignLeft: withAlignLeftMeta,
+  AlignRight: withAlignRightMeta,
+  AlignCenter: withAlignCenterMeta,
+  AlignJustify: withAlignJustifyMeta,
+  H1: withHeader1Meta,
+  H2: withHeader2Meta,
+  H3: withHeader3Meta,
+};
+// Build an apply function that will only use components where we have a shared key in the design
+// as well as only apply the finalDesign on items that are already in the design.
+const apply = (design: Design<DesignableComponents>) => {
+  // We want to add our meta data if the keys are present.
+  const start = Object.getOwnPropertyNames(design)
+    .reduce(
+      (acc, key) => (
+        {
+          ...acc,
+          [key]: Object.prototype.hasOwnProperty.call(defaults, key)
+            ? defaults[key]
+            : Span,
+        }
+      ),
+      {},
+    );
+  const finalDesign = pick(lastDesign, Object.getOwnPropertyNames(design));
+  return applyDesign(start)(extendDesign(finalDesign)(design));
+};
+const RichText = designable(apply)(BasicRichText);
 export default RichText;
