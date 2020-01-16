@@ -110,6 +110,20 @@ export default class Example extends Component {
   }
 }
 ``` 
+## Bodiless classes
+
+Bodiless uses tailwind for the styling of bodiless editor. A site built with this tool also uses
+tailwind for site styling. This leads to two tailwind configs in use.  Bodiless tailwind config
+resides in `packages/bodiless-ui/bodiless.tailwind.config.js`. We have prefaced it with the prefix `bl-`
+to isolate styling needed for the Bodiless editor. The site’s `tailwind.config.js` resides at site
+level (i.e. `examples/test-site or examples/starter`) and this is also built.  Therefore we introduce
+two css files within the edit mode: prefixed (`bs-`) for bodiless editor and non-prefixed for the
+site. The static mode would only serve the non-prefixed (at this point in time it is a future
+enhancement to remove the bodiless editor from static build).
+
+The recommended guideline is to prefix any bodiless editor styling with `bl-` and any site level
+styling without the prefix to continue this separation.
+
 ## Technical Details
 
 The default `tailwind.config` uses `rem` based grid styling system for paddings, margins, etc. While
