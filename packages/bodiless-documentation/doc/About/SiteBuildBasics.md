@@ -235,27 +235,32 @@ The BodilessJS core component:`RichText` is used to make the body of the page ed
 First, create your configured editor.  Create a `withSimpleEditor.tsx` file alongside your `index.tsx` file in the gallery page folder with the following contents:
 
 ```
+import { flow } from 'lodash';
 import { RichText } from '@bodiless/richtext-ui';
 import {
-  Strong, Em, A, Span, addClasses,
+  Strong,
+  addClasses,
+  withDesign,
 } from '@bodiless/fclasses';
-import { asBodilessLink } from '@bodiless/components';
 import {
-  asBoldItem, asItalicItem, asUnderlineItem, asLinkItem, withItems,
-} from '../../../components/Editors/items';
+  withComponent,
+} from '@bodiless/richtext';
+import { asBodilessLink } from '@bodiless/components';
 import asEditor from '../../../components/Editors/asEditor';
 
-const Underline = addClasses('underline')(Span);
-const Link = asBodilessLink()(A);
+const asBold = withComponent(Strong);
+const asItalic = addClasses('');
+const asUnderline = addClasses('underline');
+const asLink = flow(asBodilessLink(), addClasses('text-blue-700 underline'));
 
-const items = [
-  asBoldItem(Strong),
-  asItalicItem(Em),
-  asUnderlineItem(Underline),
-  asLinkItem(Link),
-];
+const simpleDesign = {
+  Bold: asBold,
+  Italic: asItalic,
+  Underline: asUnderline,
+  Link: asLink,
+};
 
-const SimpleEditor = withItems(items)(RichText);
+const SimpleEditor = withDesign(simpleDesign)(RichText);
 export default asEditor(SimpleEditor);
 ```
 
@@ -283,23 +288,25 @@ excellent [SlateJS](https://www.slatejs.org/) library. The content is saved in S
 
 To configure `RichText` editor, we specified what components should be used to render different text formatting options.  Normally, these would be defined by the styleguide of a site.  Here we used very simple ones:
 ```
-const Underline = addClasses('underline')(Span);
-const Link = asBodilessLink()(A);
+const asBold = withComponent(Strong);
+const asItalic = addClasses('');
+const asUnderline = addClasses('underline');
+const asLink = flow(asBodilessLink(), addClasses('text-blue-700 underline'));
 ```
 
 Next, we defined how the user would interact with these options (what each would be named, how it could be applied, what icon (if any) would represent it, etc). BodilessJS provides some defaults for common use cases, and we used them here:
 ```
-const items = [
-  asBoldItem(Bold),
-  asItalicItem(Italic),
-  asUnderlineItem(Underline),
-  asLinkItem(Link),
-];
+const simpleDesign = {
+  Bold: asBold,
+  Italic: asItalic,
+  Underline: asUnderline,
+  Link: asLink,
+};
 ```
 
 Finally, we created a HOC which would add a simple rich text editor as a child to the component to which it was applied (just as `asEditable()` added an editor for unformatted text):
 ```
-const SimpleEditor = withItems(items)(RichText);
+const SimpleEditor = withDesign(simpleDesign)(RichText);
 export default asEditor(SimpleEditor);
 ```
 

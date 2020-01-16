@@ -48,7 +48,7 @@ const CloseBtn = (props: JSX.IntrinsicElements['span']) => {
 };
 
 type props = {
-  children: React.ReactNode
+  children: React.ReactNode,
 };
 
 export const TextSelectorContext = React.createContext({ onClose: () => {} });

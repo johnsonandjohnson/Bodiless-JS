@@ -16,7 +16,7 @@ Sites built in a JAMStack tend to fall into two categories:
   
 As you might expect, BodilessJS follows the latter pattern, and provides tools which allow non-developers to edit the content inline using a browser. This is not to say that a website built with BodilessJS can't pull content from an external CMS, but if *most* of your content is managed externally, there may be other toolkits that better fit your use case.
 
-BodilessJS (and it's proprietary extension, CanvasX) are being developed at J&J to meet specific use-cases in the consumer marketing space. The design and architecture are based on learnings from many years of experience trying to build and operate a large-scale Drupal 7 platform to support customer-facing sites.
+BodilessJS is being developed at J&J to meet specific use-cases in the consumer marketing space. The design and architecture are based on learnings from many years of experience trying to build and operate a large-scale Drupal 7 platform to support customer-facing sites.
 
 ## Instant Start
 

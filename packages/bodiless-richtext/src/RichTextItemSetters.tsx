@@ -12,21 +12,35 @@
  * limitations under the License.
  */
 
-import { ComponentType } from 'react';
-import { flow } from 'lodash';
+import React, { ComponentType } from 'react';
+import { mergeWith, isArray } from 'lodash';
 import {
-  RichTextItemObject,
-  RichTextItemInput,
   RichTextItemType,
 } from './Type';
-import { getData } from './RichTextItemGetters';
 
+function customizer(objValue:any, srcValue:any) {
+  if (isArray(objValue)) {
+    return objValue.concat(srcValue);
+  }
+  return undefined;
+}
+type WithMeta = Object;
+type CTWM = ComponentType & WithMeta;
+const withOutMeta = <P extends Object> (Component:CTWM) => (props:P) => (<Component {...props} />);
+/**
+ * withMeta creates an HOC that will add meta data to a React Component
+ * @param meta the data to be side loaded in to the component
+ */
+const withMeta = (meta:Object) => (Component:CTWM) => {
+  const newMeta = mergeWith({}, Component, meta, customizer);
+  return Object.assign(withOutMeta(Component), newMeta);
+};
 /**
  * With Component returns a function that will add the provided Componet to a RichTextItem.
  */
-const withComponent = <P extends object> (Component:ComponentType<P>) => (
-  (data:RichTextItemInput<P>) => (
-    { ...getData(data), component: Component }
+const withComponent = <P, Q extends object> (Component:ComponentType<P>) => (
+  (CurrentComponent:ComponentType<Q>) => (
+    Object.assign(Component, mergeWith({}, CurrentComponent, customizer))
   )
 );
 
@@ -34,102 +48,62 @@ const withComponent = <P extends object> (Component:ComponentType<P>) => (
  * asBlock returns a function that will add the fact that an item is a block to a RichTextItem.
 
  */
-const asBlock = <P extends object> (data:RichTextItemInput<P>) => (
-  { ...getData(data), type: RichTextItemType.block }
-);
+const asBlock = withMeta({ type: RichTextItemType.block });
 
 /**
  * asInline returns a function that will add the fact that
  * an item is an inline to a RichTextItem.
  */
-const asInline = <P extends object> (data:RichTextItemInput<P>) => (
-  { ...getData(data), type: RichTextItemType.inline }
-);
+const asInline = withMeta({ type: RichTextItemType.inline });
 
 /**
  * asMark returns a function that will add the fact that an item is a mark to a RichTextItem.
 */
-const asMark = <P extends object> (data:RichTextItemInput<P>) => (
-  { ...getData(data), type: RichTextItemType.mark }
-);
+const asMark = withMeta({ type: RichTextItemType.mark });
 
 /**
  * asVoid marks the item to be inserted as a void item
 */
-const asVoid = <P extends object> (data:RichTextItemInput<P>) => (
-  { ...getData(data), isVoid: true }
-);
+const asVoid = withMeta({ isVoid: true });
 
 /**
  * asAtomicBlock marks the item to be inserted as block
  */
-const asAtomicBlock = <P extends object> (data:RichTextItemInput<P>) => (
-  { ...getData(data), isAtomicBlock: true }
-);
+const asAtomicBlock = withMeta({ isAtomicBlock: true });
 
 /**
  * withKey will return a function that will add a keyboardKey to a RichTextItem.
 */
-const withKey = (key:string) => <P extends object> (data:RichTextItemInput<P>) => (
-  { ...getData(data), keyboardKey: key }
+const withKey = (key:string) => (
+  withMeta({ keyboardKey: key })
 );
 
 /**
  * withId will return a function that will add a Id to a RichTextItem.
 */
-const withId = (id:string) => <P extends object> (data:RichTextItemInput<P>) => (
-  { ...getData(data), id }
+const withId = (id:string) => (
+  withMeta({ id })
 );
 
 /**
  * withGlobalButton will return a function that will add a GlobalButton to a RichTextItem.
 */
-const withGlobalButton = (icon:string) => <P extends object> (data:RichTextItemInput<P>) => (
-  { ...getData(data), globalButton: { icon } }
-);
+const withGlobalButton = (icon:string) => withMeta({ globalButton: { icon } });
 
 /**
  * withHoverButton will return a function that will add a HoverButton to a RichTextItem.
 */
-const withHoverButton = (icon:string) => <P extends object> (data:RichTextItemInput<P>) => (
-  { ...getData(data), hoverButton: { icon } }
+const withHoverButton = (icon:string) => (
+  withMeta({ hoverButton: { icon } })
 );
 
 /**
  * withButton will return a function that will add a hover or global button depending on the type.
 */
-const withButton = (icon:string) => <P extends object> (input:RichTextItemInput<P>) => {
-  const data = getData(input);
-  return withHoverButton(icon)(data);
-};
-
-/*
-  withMethod will add a set of methods to a RichTextItemInput that
-  can be used to chain actions on the item
-*/
-const withMethods = <P extends object> (input:RichTextItemInput<P>) => {
-  const data:RichTextItemObject<P> = {
-    ...getData(input),
-    // @ts-ignore ignoring that flow can not take 0 arguments.
-    flow: (...funcs: Function[]) => withMethods(flow(...funcs)(data)),
-    asBlock: () => data.flow(asBlock),
-    asMark: () => data.flow(asMark),
-    asInline: () => data.flow(asInline),
-    withButton: (icon:string) => data.flow(withButton(icon)),
-    withId: (id:string) => data.flow(withId(id)),
-    withKey: (key:string) => data.flow(withKey(key)),
-  };
-  return data;
-};
-/*
-  asItem takes a component and returns a Function that will add a component to a item
-  but also it wrapps that in withMethods so one can chain items.
-*/
-const asItem = (Component:ComponentType) => withMethods(withComponent(Component));
+const withButton = (icon:string) => withHoverButton(icon);
 
 export {
   withComponent,
-  asItem,
   asBlock,
   asInline,
   asMark,
