@@ -12,32 +12,18 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
 import { flow } from 'lodash';
+import {
+  asBlock,
+  withButton,
+  withStrikeThroughMeta,
+  withComponent,
+} from '@bodiless/richtext';
 import { RichText } from '@bodiless/richtext-ui';
 import {
-  withComponent,
-  withBoldMeta,
-  withItalicMeta,
-  withUnderlineMeta,
-  withAlignRightMeta,
-  withAlignCenterMeta,
-  withAlignJustifyMeta,
-  withAlignLeftMeta,
-  withHeader2Meta,
-  withHeader1Meta,
-  withSuperScriptMeta,
-  withLinkMeta,
-} from '@bodiless/richtext';
-import {
-  H2,
-  Div,
-  Strong,
-  Em,
-  H1,
-  Sup,
-  Span,
-  A,
+  withDesign,
+  Blockquote,
+  Strike,
 } from '@bodiless/fclasses';
 import {
   asBold,
@@ -48,41 +34,56 @@ import {
   asAlignRight,
   asAlignCenter,
   asAlignJustify,
+  asHeader3,
   asHeader2,
   asHeader1,
   asSuperScript,
+  asStrikeThrough,
   asEditableLink,
+  asBlockQuote,
 } from '../Elements.token';
 import asEditor from './asEditor';
 
-const withItems = (items: any[]) => <P extends object> (Component:ComponentType<P>) => (
-  (props:P) => (
-    <Component items={items} {...props} />
-  )
-);
-const itemsSimple = [
-  flow(withComponent(asSuperScript(Sup)), withSuperScriptMeta),
-];
-const itemsBasic = [
-  flow(withComponent(asBold(Strong)), withBoldMeta),
-  flow(withComponent(asItalic(Em)), withItalicMeta),
-  flow(withComponent(asUnderline(Span)), withUnderlineMeta),
-  flow(withComponent(asEditableLink()(asLink(A))), withLinkMeta),
-  ...itemsSimple,
-  flow(withComponent(asAlignLeft(Div)), withAlignLeftMeta),
-  flow(withComponent(asAlignRight(Div)), withAlignRightMeta),
-  flow(withComponent(asAlignCenter(Div)), withAlignCenterMeta),
-  flow(withComponent(asAlignJustify(Div)), withAlignJustifyMeta),
-];
+const simpleDesign = {
+  SuperScript: asSuperScript,
+};
+const basicDesign = {
+  Bold: asBold,
+  Italic: asItalic,
+  Underline: asUnderline,
+  Link: flow(asEditableLink(), asLink),
+  ...simpleDesign,
+  AlignLeft: asAlignLeft,
+  AlignRight: asAlignRight,
+  AlignJustify: asAlignJustify,
+  AlignCenter: asAlignCenter,
+};
 
-const itemsFullFeatured = [
-  ...itemsBasic,
-  flow(withComponent(asHeader1(H1)), withHeader1Meta),
-  flow(withComponent(asHeader2(H2)), withHeader2Meta),
-];
-const EditorSimple = withItems(itemsSimple)(RichText);
-const EditorBasic = withItems(itemsBasic)(RichText);
-const EditorFullFeatured = withItems(itemsFullFeatured)(RichText);
+export const withQuoteBlockMeta = flow(
+  asBlock,
+  withButton('format_quote'),
+);
+
+const fullFeaturedDesign = {
+  Bold: asBold,
+  Italic: asItalic,
+  Underline: asUnderline,
+  StrikeThrough: flow(withComponent(Strike), asStrikeThrough, withStrikeThroughMeta),
+  Link: flow(asEditableLink(), asLink),
+  SuperScript: asSuperScript,
+  AlignLeft: asAlignLeft,
+  AlignRight: asAlignRight,
+  AlignJustify: asAlignJustify,
+  AlignCenter: asAlignCenter,
+  H1: asHeader1,
+  H2: asHeader2,
+  H3: asHeader3,
+  BlockQuote: flow(withComponent(Blockquote), asBlockQuote, withQuoteBlockMeta),
+};
+
+const EditorSimple = withDesign(simpleDesign)(RichText);
+const EditorBasic = withDesign(basicDesign)(RichText);
+const EditorFullFeatured = withDesign(fullFeaturedDesign)(RichText);
 const asEditorBasic = asEditor(EditorBasic);
 const asEditorSimple = asEditor(EditorSimple);
 const asEditorFullFeatured = asEditor(EditorFullFeatured);
