@@ -22,8 +22,8 @@ BodilessJS is being developed at J&J to meet specific use-cases in the consumer 
 
 ```
 git clone https://github.com/johnsonandjohnson/Bodiless-JS.git
-npm run setup`
-npm run start`
+npm run setup
+npm run start
 ```
 > NOTE: Do not run `npm install` at repository root.  Use `npm run setup` instead.
 
