@@ -1,6 +1,6 @@
 # Guiding Principles
 
-BodilessJS (and it's proprietary extension, CanvasX) are being developed at J&J to
+BodilessJS are being developed at J&J to
 meet specific use-cases in the consumer marketing space. The design and
 architecture are based on learnings from many years experience trying to build
 and operate a large-scale Drupal 7 platform to support customer-facing sites. This
