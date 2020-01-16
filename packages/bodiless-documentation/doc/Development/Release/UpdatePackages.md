@@ -25,10 +25,10 @@ that any inconsistencies will cause a failed install.
 
 ### Updating Example Sites' `package-lock.json`
 
-If you update dependencies of one of the example sites, or if you pdate the
+If you update dependencies of one of the example sites, or if you update the
 package-lock.json at the monorepo root, you will want to regenerate the
 package-lock.json files in the example sites, to ensure that end-users get the
-same versinos of all packages as we are using to test in the monorepo.
+same versions of all packages as we are using to test in the monorepo.
 
 To do so:
 1. ensure the package-lock.json at repo root is up-to-date.
