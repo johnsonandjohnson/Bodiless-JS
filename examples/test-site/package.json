@@ -53,7 +53,7 @@
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "scripts": {
-    "build": "npm-run-all build:css build:lib build:scripts build:doc psh-validate",
+    "build": "npm-run-all prepare build:lib build:scripts build:doc psh-validate",
     "build:watch": "run-p -r dev-frontend dev-backend",
     "build:lib": "gatsby build",
     "build:css": "node scripts/build-css.js",
@@ -69,7 +69,7 @@
     "generate-env-vars": "node scripts/generate-env-vars.js",
     "psh-update": "node ./lib/scripts/bodiless-psh-update",
     "psh-validate": "node ./lib/scripts/bodiless-psh-validate",
-    "prepare": "run-p -r generate-env-vars build:css"
+    "prepare": "run-s generate-env-vars build:css"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.0",

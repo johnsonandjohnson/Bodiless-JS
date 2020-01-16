@@ -12,40 +12,82 @@
  * limitations under the License.
  */
 
-/* eslint-disable no-console */
-
+/* eslint-disable no-console, import/no-dynamic-require, global-require, no-return-assign */
 const fs = require('fs');
+const util = require('util');
+const dotenv = require('dotenv');
+const path = require('path');
+const glob = require('glob');
 
-const shouldOverwrite = process.argv[2] && process.argv[2] === '--overwrite';
+const asyncGlob = util.promisify(glob);
+const readFile = util.promisify(fs.readFile);
+const writeFile = util.promisify(fs.writeFile);
 
-function logNotice(msg) {
-  console.log(`\u001B[96m> ${msg}\u001B[0m`);
-}
-function logWarn(msg) {
-  console.log(`\x1b[33m> ${msg}\x1b[33m`);
-}
-function logError(msg) {
-  console.error(`\x1b[31m> ${msg}\x1b[31m`);
-}
+const DEFAULT_ENV_PATH = path.resolve('./node_modules/@bodiless/gatsby-theme-bodiless/.env.default');
 
-function generateEnvironmentVariables(source, target) {
-  if (!source) {
-    logError(`source environment variable file ${source} is not found`);
-    return;
+const writeToFile = async (filePath, content) => {
+  try {
+    await writeFile(filePath, content, 'utf8');
+  } catch (err) {
+    console.error(err);
   }
-  const targetExists = fs.existsSync(target);
-  if (targetExists && !shouldOverwrite) {
-    logNotice(`environment variable file ${target} already exists. try using --overwrite if you want to overwrite it`);
-    return;
-  }
-  if (targetExists && shouldOverwrite) {
-    logWarn('environment variable file exists and will be overwritten');
-  }
-  fs.copyFileSync(source, target);
-}
+};
 
-const shouldOverwriteMsg = shouldOverwrite ? 'existing environments will be overwritten' : '';
-logNotice(`environment variables generation started. ${shouldOverwriteMsg}`);
-generateEnvironmentVariables('.env.default', '.env.development');
-generateEnvironmentVariables('.env.default', '.env.production');
-logNotice('environment variables generation finished');
+const envToJson = async filePath => dotenv.parse(await readFile(filePath, 'utf8'));
+
+const jsonToEnv = async (envConfig, envType) => {
+  let envFileContent = '';
+
+  // TODO: Validate envConfig.
+  Object.keys(envConfig).forEach(key => envFileContent += `${key}='${envConfig[key]}'\n`);
+
+  await writeToFile(`.env.${envType}`, envFileContent);
+};
+
+const getSiteEnvConfig = async nodeEnv => {
+  const siteEnvFile = await envToJson(path.resolve('.env.site'));
+  const siteEnvConfig = path.resolve('env.config.js');
+
+  if (fs.existsSync(siteEnvConfig)) {
+    return {
+      ...siteEnvFile,
+      ...await require(siteEnvConfig).configure(siteEnvFile, nodeEnv),
+    };
+  }
+
+  return siteEnvFile;
+};
+
+const getBodilessEnvConfig = async (defaultConfig, nodeEnv) => {
+  const ignore = ['**/node_modules/@bodiless/**/node_modules/**'];
+  const globPattern = '**/node_modules/@bodiless/**/env.config.{js,ts}';
+
+  const bodilessEnvConfigPaths = await asyncGlob(globPattern, { ignore });
+
+  return bodilessEnvConfigPaths.reduce(async (agregatedEnvConfig, envConfigPath) => {
+    if (fs.existsSync(path.resolve(envConfigPath))) {
+      return {
+        ...await agregatedEnvConfig,
+        ...await require(path.resolve(envConfigPath)).configure(agregatedEnvConfig, nodeEnv),
+      };
+    }
+
+    return agregatedEnvConfig;
+  }, Promise.resolve(defaultConfig));
+};
+
+const init = async () => {
+  const defaultEnvConfig = await envToJson(DEFAULT_ENV_PATH);
+
+  await jsonToEnv({
+    ...await getBodilessEnvConfig(defaultEnvConfig, 'production'),
+    ...await getSiteEnvConfig('production'),
+  }, 'production');
+
+  await jsonToEnv({
+    ...await getBodilessEnvConfig(defaultEnvConfig, 'development'),
+    ...await getSiteEnvConfig('development'),
+  }, 'development');
+};
+
+init();
