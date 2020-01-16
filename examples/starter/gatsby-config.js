@@ -9,6 +9,7 @@ module.exports = {
     logo: '/images/bodiless_logo.png',
   },
   plugins: [
+    '@bodiless/gatsby-theme-bodiless',
     {
       resolve: 'gatsby-plugin-compile-es6-packages',
       options: {
@@ -16,5 +17,4 @@ module.exports = {
       },
     },
   ],
-  __experimentalThemes: ['@bodiless/gatsby-theme-bodiless'],
 };
