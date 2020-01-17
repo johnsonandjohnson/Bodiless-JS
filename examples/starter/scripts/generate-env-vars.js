@@ -38,7 +38,6 @@ const envToJson = async filePath => dotenv.parse(await readFile(filePath, 'utf8'
 const jsonToEnv = async (envConfig, envType) => {
   let envFileContent = '';
 
-  // TODO: Validate envConfig.
   Object.keys(envConfig).forEach(key => envFileContent += `${key}='${envConfig[key]}'\n`);
 
   await writeToFile(`.env.${envType}`, envFileContent);
