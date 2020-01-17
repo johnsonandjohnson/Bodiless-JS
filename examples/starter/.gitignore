@@ -1,0 +1,24 @@
+# Project dependencies
+/node_modules
+yarn-error.log
+/doc
+
+# Build directory and assets
+/.cache
+/public
+/src/components/index.css
+/src/components/bodiless.index.css
+
+# Temporary files
+.DS_Store
+.swp
+.eslintcache
+*.tsbuildinfo
+
+# jetbrains files
+.idea
+
+# environment variables
+.env
+.env.development
+.env.production

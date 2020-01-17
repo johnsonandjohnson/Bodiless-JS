@@ -43,8 +43,7 @@ const baseVariation = {
   Tout: flow(
     replaceWith(Tout),
     withDesc('A way to tout a call to Action.\n'),
-    withType('Tout')(),
-    asToutDefaultStyle,
+    withType('Tout')(asToutDefaultStyle),
   ),
 };
 

@@ -23,7 +23,7 @@ const Menu = flow(
   addClasses(`
     bl-border bl-border-transparent bl-absolute bl-bg-grey-900
     bl-rounded bl-opacity-0 bl-px-grid-1 bl-py-grid-1 bl-text-grey-400 bl--mt-2
-    bl-transition-opacity bl-z-50
+    bl-transition-opacity bl-z-50 bl-invisible
   `),
 )(Div);
 
