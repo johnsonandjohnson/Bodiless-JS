@@ -13,7 +13,7 @@
  */
 
 import React from 'react';
-import { RichText as PlainRichText, RichTextItemInput } from '@bodiless/richtext';
+import { RichText as PlainRichText, RichTextProps } from '@bodiless/richtext';
 import { Button } from '@bodiless/ui';
 import StyledHoverMenu from './HoverMenu';
 import {
@@ -26,10 +26,6 @@ const ui = {
   Overlay,
   CloseButton,
   ClickableWrapper,
-};
-
-type RichTextProps<P> = {
-  items: Array<RichTextItemInput<P>>,
 };
 
 const RichText = <P extends object, D extends object>(props: P & RichTextProps<D>) => (

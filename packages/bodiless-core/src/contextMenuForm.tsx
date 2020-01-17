@@ -47,6 +47,7 @@ export type FormBodyRenderer<D> = (props: FormBodyProps<D>) => ReactNode;
 export type Options<D> = {
   submitValues?: (componentData: D) => void;
   initialValues?: D;
+  hasSubmit?: Boolean;
 };
 
 const contextMenuForm = <D extends object>(options: Options<D>) => (
@@ -54,7 +55,7 @@ const contextMenuForm = <D extends object>(options: Options<D>) => (
 ) => {
   const ContextMenuForm = ({ closeForm, ui }: FormProps) => {
     const { ComponentFormButton, Icon } = getUI(ui);
-    const { submitValues, initialValues } = options;
+    const { submitValues, initialValues, hasSubmit = true } = options;
     return (
       <Form
         onSubmit={(values: D) => {
@@ -78,7 +79,7 @@ const contextMenuForm = <D extends object>(options: Options<D>) => (
               formState,
               ui,
             })}
-            {!formState.invalid
+            {hasSubmit && !formState.invalid
             && (
               <div className="bl-clearfix">
                 <ComponentFormButton type="submit" className="bl-float-right">

@@ -110,3 +110,59 @@ export default class Example extends Component {
   }
 }
 ``` 
+## Bodiless classes
+
+Bodiless uses tailwind for the styling of bodiless editor. A site built with this tool also uses
+tailwind for site styling. This leads to two tailwind configs in use.  Bodiless tailwind config
+resides in `packages/bodiless-ui/bodiless.tailwind.config.js`. We have prefaced it with the prefix `bl-`
+to isolate styling needed for the Bodiless editor. The site’s `tailwind.config.js` resides at site
+level (i.e. `examples/test-site or examples/starter`) and this is also built.  Therefore we introduce
+two css files within the edit mode: prefixed (`bs-`) for bodiless editor and non-prefixed for the
+site. The static mode would only serve the non-prefixed (at this point in time it is a future
+enhancement to remove the bodiless editor from static build).
+
+The recommended guideline is to prefix any bodiless editor styling with `bl-` and any site level
+styling without the prefix to continue this separation.
+
+## Technical Details
+
+The default `tailwind.config` uses `rem` based grid styling system for paddings, margins, etc. While
+`rem`s may be good for `font-size` it brings some level of inconsistency when it used for margins,
+paddings, widths, etc. since it is based on the body font-size. In this PR we configured our
+`bodiless.tailwind.config` to use `px` instead of `rem`. It has a basic `5px` grid system ( all
+margins, paddings, widths, etc. are measured with increments of 5 ) and can be extended as we need.
+
+Spacing class names are prefixed with `grid-{number}` prefix where ``{number}`` represents a
+multiples of 5s. For example ``.bl-m-grid-2`` would be `margin: 10px`.
+
+This grid system is broken down into multiple logical pieces to minimize the 'css' file size since
+not all of the tailwind elements might need all of the values from the grid system. These parts
+include:
+
+* `defaultGrid` - For general use throughout the app.
+* `xlGrid` - Extra Large values that are
+handy when we work with max-width, max-height etc.
+* `negativeGrid` - Usefull when we need negative
+margins or with top, bottom, left, right styles.
+* `percentGrid` - For the places where we need %
+values. (`bl-w-full` --> ``width: 100%``).
+
+### Use Case
+
+We may not want to use all of the values from this grid system in certain `tailwind`
+elements to save some file `kb`. For example, we may not need the `defaultGrid` and `negativeGrid`
+values for `maxWidth` since these are small so we only include `xlGrid` and/or `percentGrid` for
+`maxWidth`:
+
+````
+maxWidth: {
+  ...xlGrid, ...percentGrid,
+}, 
+```` 
+
+#### Class Name Examples
+
+* ``.bl-p-grid-1`` --> ``padding: 5px;`` (`defaultGrid` values) 
+* ``.bl-mt-xl-grid-0`` --> ``margin-top: 100px;`` (`xlGrid` values) 
+* ``.bl--top-grid-4`` --> ``top: -20px;`` (`negativeGrid` values) 
+* ``.bl-w-full`` --> ``width: 100%;`` (`percentGrid` values )

@@ -165,13 +165,14 @@ export default Content;
 ```
 
 <a name="rich-text-items"></a>
-### RichText Items ( Plugins )
 
-The RichText Component is built on the [SlateJS](https://docs.slatejs.org/) framework. It takes an array of RichText items that describe what can be used by the user inside of the RichText Component.  Those are then presented to the user using both a contextual hover menu as well as the standard menu. These items can be used by using a set of helper functions that add functionality to the item. 
+### RichText Component
 
-`withComponent(Component)` lets us know which component should be part of the item
+The RichText Component is built on the [SlateJS](https://docs.slatejs.org/) framework. It takes design object (see @bodiless/Design System) that contain HOC to build out the componet that are avaiable in the RichText Editor.  Those are then presented to the user using both a contextual hover menu as well as the standard menu. These items can be used by using a set of HOC's. 
 
-`asMark`, `asInline` and `asBlock` are used to say how the slate editor should use the component
+`starWith(Component)` lets us know which component should be part of the item
+
+`asMark`, `asInline` and `asBlock` are used to say how the slate editor should use the component.
 
 - `marks` are used for basic character-level formatting (eg bold, italic, underline, text=color, etc).
 - `inlines` may also be used for character formatting, but should generally be reserved for cases where the component requires additional configuration besides the text (for example, a link, which may require `href`, `target` or other attributes).
@@ -181,34 +182,39 @@ The RichText Component is built on the [SlateJS](https://docs.slatejs.org/) fram
 
 `withButton("icon")` can be used to add a button that will set the text to a component. If the item is asBlock then it will be added to the global menu if not then it will be added to the local hover menu.
 
+There are a set of keys that have defaults that are often used they are the following:
+
+- SuperScript
+- Bold
+- Italic
+- Underline
+- Link
+- AlignLeft
+- AlignRight
+- AlignCenter
+- AlignJustify
+- H1
+- H2
+- H3
+
+With these one only need to include the key.
+
 Each of this helper return a function that we pass in as items. we can use flow to combine them as such:
 
 ```js
-const asBold = flow(withId('Bold'), asMark, withKey('b'), withButton('format_bold'));
-const items = [
-  flow(withComponent(Bold), asBold),
-  flow(withComponent(Italic), withId('Italic'), asMark, withKey('i'), withButton('format_italic')),
-  flow(withComponent(Strikethrough), withId('Strikethrough'), asMark, withKey('s'), withButton('format_strikethrough')),
-  flow(withComponent(Link), withId('Link'), asInline, withKey('k'), withButton('link'), withId('Link')),
-  flow(withComponent(H1), withId('H1'), asBlock, withKey('1'), withButton('looks_one')),
-  flow(withComponent(H2), withId('H2'), asBlock, withKey('2'), withButton('looks_two')),
-  flow(withComponent(SSBlueBold), withId('SSBlueBold'), asMark),
-  flow(withComponent(SSHilite), withId('SSHilite')),
-];
+const design = {
+  Bold: asBold,
+  Link: asLink,
+  Strikethrough: flow(
+    startWith(Span),
+    withButton('format_strikethrough'),
+    withKey('s'),
+    asMark,
+  ),
+};
 const EditorFullFeatured = <P extends object> (props:P) => (
-  <RichText items={items2} initialValue={demoValue} {...props} />
+  <RichText design={items2} initialValue={demoValue} {...props} />
 );
-```
-There is also a alternative dot notation that can be used to create these items by using the `asItem` function
-```js
-const items = [
-  asItem(Italic).withId('Italic').asMark().withKey('i').withButton('format_italic'),
-  asItem(Strikethrough).withId('Strikethrough').asMark().withKey('s').withButton('format_strikethrough'),
-  asItem(Link).withId('Link').asInline().withKey('k').withButton('link'),
-  asItem(H1).withId('H1').asBlock().withKey('1').withButton('looks_one'),
-  asItem(H2).withId('H2').asBlock().withKey('2').withButton('looks_two'),
-  asItem(SSBlueBold).withId('SSBlueBold').asMark(),
-  asItem(SSHilite).withId('SSHilite').asMark(),
 ```
 
 ## Plugin Factories

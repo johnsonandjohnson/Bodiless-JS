@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const Logger = require('./logger');

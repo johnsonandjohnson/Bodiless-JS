@@ -22,7 +22,8 @@ const NodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
 const StaticFlexbox: FC<StaticFlexboxProps> = ({ components }) => {
   const items = useItemHandlers().getItems();
   return (
-    <div className="bl-flex bl-flex-wrap">
+    // When in a static mode we don't want to use `bl-*` prefixed classes.
+    <div className="flex flex-wrap">
       {items
         .map((flexboxItem: FlexboxItem) => {
           const ChildComponent = components[flexboxItem.type];
