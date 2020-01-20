@@ -28,6 +28,7 @@ import {
   EditorFullFeatured,
   EditorSimple,
 } from '../Editors';
+import { withType } from './Categories';
 
 const withRichText = withFacet('Rich Text');
 
@@ -36,16 +37,19 @@ const richTextVariation = {
     replaceWith(EditorSimple),
     withDesc('A block of text for a Title.\n'),
     withRichText('Simple Rich Text')(),
+    withType('Rich Text')(),
   ),
   EditorBasic: flow(
     replaceWith(EditorBasic),
     withDesc('A block of text.\n'),
     withRichText('Basic Rich Text')(),
+    withType('Rich Text')(),
   ),
   EditorFullFeatured: flow(
     replaceWith(EditorFullFeatured),
     withDesc('A block of text for more complex HTML.\n'),
     withRichText('Full Rich Text')(),
+    withType('Rich Text')(),
   ),
 };
 

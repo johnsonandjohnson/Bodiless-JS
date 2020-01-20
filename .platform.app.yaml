@@ -28,12 +28,9 @@ hooks:
     # Build hooks can modify the application files on disk but not access any services like databases.
     build: |
         set -e
-        npm ci
         npm run bootstrap
-        npm run build
-        npm run lint
-        npm run test
-        npx lerna run --stream docs:build
+        npm run build:packages
+        npm run build -- --scope @bodiless/test-site
         #robots.txt preparation
         export PSH_URL_REPLACER_SRC_FILE=$PLATFORM_DOCUMENT_ROOT/robots.txt
         export PSH_URL_REPLACER_TMP_FILE=$PLATFORM_DOCUMENT_ROOT/../static/robots_pshtmp.txt

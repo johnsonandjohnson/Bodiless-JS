@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
+/* eslint-disable no-alert */
+
 import { AxiosPromise, AxiosResponse } from 'axios';
 
 // eslint-disable-next-line arrow-body-style
