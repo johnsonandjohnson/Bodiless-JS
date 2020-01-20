@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright Â© 2019 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,20 +11,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import { flow } from 'lodash';
-import { asEditableList } from '@bodiless/components';
+import Menu, { Item as MenuItem } from 'rc-menu';
+import { withDesign, replaceWith } from '@bodiless/fclasses';
 import asMenu from './asMenu';
-import withEditableTitle from './withEditableTitle';
-import AsEditable from './types/AsEditable';
 
-/**
- * HOC, produces *editable* menu
- */
-const asEditableMenu = (editable: AsEditable) => flow(
-  asEditableList,
+const asMainMenu = flow(
+  withDesign({
+    // Types of parameters are incompatible
+    Wrapper: replaceWith<any>(Menu),
+    Item: replaceWith(MenuItem),
+  }),
   asMenu,
-  withEditableTitle(editable),
 );
 
-export default asEditableMenu;
+export default asMainMenu;

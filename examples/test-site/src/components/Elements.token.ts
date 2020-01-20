@@ -37,6 +37,10 @@ const asYMargin = addClasses('my-2');
 const asNegXMargin = addClasses('-mx-1');
 const asNegYMargin = addClasses('-my-1');
 
+/* Responsive design */
+const asMobileOnly = addClasses('md:hidden xs:block');
+const asExceptMobile = addClasses('xs:hidden md:block');
+
 /* Primary coloring */
 const asPrimaryColorBackground = addClasses('bg-gray-200');
 const asTextColorPrimary = addClasses('text-black');
@@ -84,6 +88,7 @@ export {
   asAlignRight,
   asAlignCenter,
   asAlignJustify,
+  asExceptMobile,
   asHeader1,
   asHeader2,
   asHeader3,
@@ -96,6 +101,7 @@ export {
   asEditableLink,
   asEditable,
   asImageRounded,
+  asMobileOnly,
   asSuperScript,
   asTextColorPrimary,
   asXMargin,

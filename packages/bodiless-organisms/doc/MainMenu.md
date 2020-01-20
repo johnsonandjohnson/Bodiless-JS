@@ -10,8 +10,8 @@ Back to Organisms [index](/Organisms/index.md)
 - `asHorizontalMenu`, sets the Submenu in a horizontal menu and setups the offset of submenu,
 to zero, so it will be rendered render right after the submenu `<Item />`
 - `asHorizontalSubMenu`, sets the menu to horizontal mode
-- `asMenu`, that incorporate the given component (usually based on `<List />` component)
-- `asSubMenu`, that incorporate the given component (usually based on `<List />` component)
+- `asMainMenu`, that incorporate the given component (usually based on `<List />` component)
+- `asMainSubMenu`, that incorporate the given component (usually based on `<List />` component)
 
 ## Example 
 
@@ -23,12 +23,12 @@ First, lest create an unstyled version of the menu. For that purpose we should u
 
 ```
 const MenuSubList = flow(
-  asEditableSubMenu,
+  asEditableMainSubMenu(asEditable),
   asHorizontalSubMenu,
 )(List);
 
 const MenuList = flow(
-  asEditableMenu,
+  asEditableMainMenu(asEditable),
   asHorizontalMenu,
 )(List);
 
@@ -69,7 +69,7 @@ const withTealBackground = addClasses('bg-teal-600');
 const withLimitedHeightStyles = addClasses('overflow-y-hidden max-h-menu-row')
 const withSubmenuStyles = addClasses('-ml-2');
 const MenuSubList = flow(
-  asEditableSubMenu,
+  asEditableMainSubMenu(asEditable),
   asHorizontalSubMenu,  
   withDesign({
     Title: withLinkStyles,
@@ -86,7 +86,7 @@ const MenuSubList = flow(
 )(List);
 
 const MenuList = flow(
-  asEditableMenu,
+  asEditableMainMenu(asEditable),
   asHorizontalMenu,
   withDesign({
     Title: withLinkStyles,
@@ -145,8 +145,8 @@ import {
 import {
   asHorizontalMenu,
   asHorizontalSubMenu,
-  asEditableMenu,
-  asEditableSubMenu,
+  asEditableMainMenu,
+  asEditableMainSubMenu,
   withSubmenu,
 } from '@bodiless/organisms';
 
@@ -164,7 +164,7 @@ const withTealBackground = addClasses('bg-teal-600');
 const withLimitedHeightStyles = addClasses('overflow-y-hidden max-h-menu-row')
 const withSubmenuStyles = addClasses('-ml-2');
 const MenuSubList = flow(
-  asEditableSubMenu,
+  asEditableMainSubMenu(asEditable),
   asHorizontalSubMenu,
   withDesign({
     Title: withLinkStyles,
@@ -181,7 +181,7 @@ const MenuSubList = flow(
 )(List);
 
 const MenuList = flow(
-  asEditableMenu,
+  asEditableMainMenu(asEditable),
   asHorizontalMenu,
   withDesign({
     Title: withLinkStyles,
@@ -203,3 +203,5 @@ export default withSubmenu(MenuSubList)(MenuList);
 
 <MainMenu nodeKey="main-menu" />
 ```
+
+Check [examples/test-site/src/components/Menus/MainMenu.tsx](../../examples/test-site/src/components/MainMenu.tsx)

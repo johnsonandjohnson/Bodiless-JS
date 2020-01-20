@@ -11,20 +11,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+import { ComponentClass } from 'react';
 import { flow } from 'lodash';
-import { asEditableList } from '@bodiless/components';
-import asMenu from './asMenu';
-import withEditableTitle from './withEditableTitle';
-import AsEditable from './types/AsEditable';
-
+import { SubMenu } from 'rc-menu';
+import {
+  withDesign,
+  stylable,
+  replaceWith,
+} from '@bodiless/fclasses';
+import asMainMenu from './asMainMenu';
 /**
- * HOC, produces *editable* menu
+ * HOC, that incorporate the given component (usually based on <List /> component)
+ * with rc-menu <Submenu /> component
  */
-const asEditableMenu = (editable: AsEditable) => flow(
-  asEditableList,
-  asMenu,
-  withEditableTitle(editable),
+const asMainSubMenu = flow(
+  asMainMenu,
+  withDesign({
+    Wrapper: replaceWith(stylable(SubMenu as ComponentClass)),
+  }),
 );
 
-export default asEditableMenu;
+export default asMainSubMenu;

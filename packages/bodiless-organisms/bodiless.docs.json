@@ -3,6 +3,7 @@
     "index.md" : "./README.md",
     "slider.md": "./README.md",
     "touts.md": "./README.md",
-    "MainMenu.md" : "./doc/MainMenu.md"
+    "MainMenu.md" : "./doc/MainMenu.md",
+    "BurgerMenu.md" : "./doc/BurgerMenu.md"
   }
 }
