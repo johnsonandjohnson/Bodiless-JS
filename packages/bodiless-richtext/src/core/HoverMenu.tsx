@@ -17,6 +17,7 @@ import React,
   useEffect, ComponentType, HTMLProps,
 } from 'react';
 import ReactDOM from 'react-dom';
+import { useEditContext } from '@bodiless/core';
 import { useSlateContext } from './SlateEditorContext';
 import { EditorContext } from '../Type';
 
@@ -57,6 +58,7 @@ function updateMenu(menu: HTMLElement | null, editorContext: EditorContext) {
 
   const { style } = menu;
   style.opacity = '1';
+  style.visibility = 'visible';
   style.top = `${rect.top + window.pageYOffset - menu.offsetHeight}px`;
   style.left = `${offsetLeft < 0 ? 15 : offsetLeft}px`;
 }
@@ -68,6 +70,7 @@ export type HoverMenuProps = {
 };
 
 const HoverMenu = (props: HoverMenuProps) => {
+  const isEditMode = useEditContext().isEdit || null;
   const editorContext: EditorContext = useSlateContext();
 
   const { ui } = props;
@@ -84,6 +87,7 @@ const HoverMenu = (props: HoverMenuProps) => {
   });
   return (
     root
+    && isEditMode
     && ReactDOM.createPortal(
       <Menu {...rest} id={elementID} className={className}>
         {children}

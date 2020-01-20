@@ -38,14 +38,14 @@ const FlexboxPage = (props: any) => (
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey={FLEXBOX_PAGE_PATH} />
-      <h1 className="text-3xl font-bold bl-mt-4">Flexbox grid with constrained widths</h1>
+      <h1 className="text-3xl font-bold mt-4">Flexbox grid with constrained widths</h1>
       <FlexBoxDefault
         nodeKey="constrained_widths"
         snapData={options}
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey="constrained_widths" />
-      <h1 className="text-3xl font-bold bl-mt-4">Flexbox restricted to 1 item</h1>
+      <h1 className="text-3xl font-bold mt-4">Flexbox restricted to 1 item</h1>
       <FlexBoxDefault
         nodeKey="restricted"
         maxComponents={1}

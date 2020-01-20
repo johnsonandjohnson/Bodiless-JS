@@ -142,19 +142,23 @@ depr(popcorn): Deprecate the popcorn feature as replaced by the chips feature (#
 
 ### Squash commit description
 
-The squash commit description is a free-form field that describes all the changes in the pull request. 
-Usually a pull request description can be reused as a squash commit description.
+The squash commit description is a free-form field that describes all the
+changes in the pull request. Usually a pull request description can be reused as
+a squash commit description.
 
 #### Issue reference
 
-Squash commit description must refer the issue it fixes or closes, and use any of the 
-[GitHub keywords for closing issues](https://help.github.com/en/github/managing-your-work-on-github/closing-issues-using-keywords) 
+Squash commit description must refer the issue it fixes or closes, and use any
+of the
+[GitHub keywords for closing issues](https://help.github.com/en/github/managing-your-work-on-github/closing-issues-using-keywords)
 followed by the issue reference, e.g. `Fixes #12345` or `Closes #12345`.
 
 #### Breaking changes
 
-If the pull request contains a breaking change, then the description must contain line `BREAKING CHANGE:` with a space or two newlines.
-The text after colon in this line or after two newlines will describe the breaking change.
+If the pull request contains a breaking change, then the footer must conclude
+with a line which begins with `BREAKING CHANGE:` with a space or two newlines.
+The text after colon in this line or after two newlines will describe the
+breaking change.
 
 #### Examples
 
@@ -175,15 +179,16 @@ Fixes #431, #496
 
 BREAKING CHANGE:
 
-The old file storage format for the somefeature is incompatible with the new implementation.
-You will need to delete the old storage files.
+The old file storage format for the somefeature is incompatible with the new
+implementation. You will need to delete the old storage files.
 ```
 
 ## Releases
 
-While we adhere to the principles of [Semantic Versioning](https://semver.org/),
-please note that we are currently in ["Major Version Zero"](https://semver.org/#spec-item-4)
-status, meaning that *stability or backwards compatibility is not guaranteed.*,
+While we adhere to the principles of
+[Semantic Versioning](https://semver.org/), please note that we are currently in
+["Major Version Zero"](https://semver.org/#spec-item-4) status, meaning that
+*stability or backwards compatibility is not guaranteed.*,
 
 During this phase:
 
@@ -196,3 +201,7 @@ During this phase:
   milestones on our roadmap.
 
 Once we achieve a stable major release (1.0.0), future versions will follow SemVer standards.
+
+Please see
+[our documentation](https://johnsonandjohnson.github.io/Bodiless-JS/#/Development/Release/)
+for more information on releases.

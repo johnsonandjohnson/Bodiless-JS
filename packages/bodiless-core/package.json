@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/core",
-  "version": "0.0.36",
-  "description": "Edit context for canvasx site editor",
+  "version": "0.0.37",
+  "description": "Edit context for BodilessJS site editor",
   "author": "Chris Oden <coden@its.jnj.com>",
   "license": "Apache-2.0",
   "main": "lib/index.js",
@@ -14,6 +14,9 @@
     "type": "git",
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc -p ./tsconfig.json ",
     "build:watch": "npm run build -- --watch",
@@ -21,7 +24,7 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@bodiless/fclasses": "^0.0.36",
+    "@bodiless/fclasses": "^0.0.37",
     "enzyme": "^3.9.0",
     "informed": "^2.11.8",
     "lodash": "^4.17.11",

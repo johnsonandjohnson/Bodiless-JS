@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/layouts-ui",
-  "version": "0.0.36",
+  "version": "0.0.37",
   "description": "Default UI for BodilessJS Layouts",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
@@ -13,6 +13,9 @@
     "type": "git",
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc -p ./tsconfig.json ",
     "build:watch": "npm run build -- --watch",
@@ -20,9 +23,9 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@bodiless/fclasses": "^0.0.36",
-    "@bodiless/layouts": "^0.0.36",
-    "@bodiless/ui": "^0.0.36",
+    "@bodiless/fclasses": "^0.0.37",
+    "@bodiless/layouts": "^0.0.37",
+    "@bodiless/ui": "^0.0.37",
     "@material/react-material-icon": "^0.14.1",
     "re-resizable": "^4.11.0",
     "react-sortable-hoc": "^1.9.1"

@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/gatsby-plugin-ssi",
-  "version": "0.0.36",
+  "version": "0.0.37",
   "description": "Gatsby plugin to add SSI elements onto a site.",
   "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
   "license": "Apache-2.0",
@@ -15,6 +15,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "replace-in-file": "^4.2.0"

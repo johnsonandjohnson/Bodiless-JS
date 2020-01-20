@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/migration-tool",
-  "version": "0.0.36",
+  "version": "0.0.37",
   "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
   "bin": {
     "migration_tool": "./bin/run"
@@ -24,7 +24,7 @@
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
     "ee-ts": "^1.0.1",
-    "glob": "^7.1.4",
+    "glob": "^7.1.6",
     "headless-chrome-crawler": "^1.8.0",
     "html-to-react-components": "^1.6.6",
     "htmlclean": "^3.0.8",
@@ -51,7 +51,7 @@
     "@types/dotenv": "^8.2.0",
     "@types/glob": "^7.1.1",
     "@types/jest": "^24.0.18",
-    "@types/lodash": "^4.14.130",
+    "@types/lodash": "^4.14.149",
     "@types/mime": "^2.0.1",
     "@types/minimatch": "^3.0.3",
     "@types/mock-fs": "^3.6.30",
@@ -66,7 +66,7 @@
     "jest": "^24.9.0",
     "mime": "^2.4.4",
     "mock-fs": "^4.9.0",
-    "react-helmet": "^5.2.1",
+    "react-helmet": "^5.2.0",
     "ts-jest": "^24.0.2",
     "ts-node": "^8"
   },
@@ -91,7 +91,13 @@
   "oclif": {
     "bin": "migration_tool"
   },
-  "repository": "migration_assistant/migration_tool",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "lint": "tslint -p . -t stylish",
     "prepack": "rm -rf lib && tsc -b && babel lib --out-dir lib",

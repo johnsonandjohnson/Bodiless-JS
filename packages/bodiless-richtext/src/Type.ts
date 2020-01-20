@@ -26,29 +26,6 @@ export enum RichTextItemType {
   inline = 'INLINE',
   mark = 'MARK',
 }
-export type RichTextItemButtonType = {
-  icon: string,
-};
-export type RichTextItem <P> = {
-  type: RichTextItemType,
-  id: string,
-  component: ComponentType<P>,
-  globalButton?: RichTextItemButtonType,
-  hoverButton?: RichTextItemButtonType,
-  keyboardKey?: string,
-  isVoid?: boolean,
-  isAtomicBlock?: boolean,
-};
-export type RichTextItemObject<P> = RichTextItem<P> & {
-  asBlock: Function,
-  asMark: Function,
-  flow: Function,
-  asInline: Function,
-  withButton: Function,
-  withId: Function,
-  withKey: Function,
-};
-export type RichTextItemInput<P> = RichTextItem<P> | Function;
 
 export type DataJSON = object;
 
@@ -90,4 +67,22 @@ export type CustomComponentProps = {
 export type Change = {
   operations: Immutable.List<Operation>;
   value: Value;
+};
+
+export type RichTextComponent = ComponentType<any> & {
+  isVoid?: boolean,
+  type: RichTextItemType,
+  id: string,
+  keyboardKey?: string,
+  globalButton?: {
+    icon: string,
+  },
+  hoverButton?: {
+    icon: string,
+  };
+  isAtomicBlock?: boolean,
+};
+
+export type RichTextComponents = {
+  [key:string]: RichTextComponent,
 };

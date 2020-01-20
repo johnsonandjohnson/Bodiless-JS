@@ -123,6 +123,7 @@ function useGetMenuOptions(props: EditFlexboxProps) {
     isDisabled: () => !context.isEdit,
     handler: () => contextMenuForm({
       initialValues: { selection: '' },
+      hasSubmit: false,
     })(
       ({ ui, closeForm }) => (
         <ComponentSelector
