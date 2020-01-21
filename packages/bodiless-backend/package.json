@@ -4,8 +4,7 @@
   "description": "",
   "main": "",
   "files": [
-    "/bodiless.docs.json",
-    "/env.config.js"
+    "/bodiless.docs.json"
   ],
   "dependencies": {
     "body-parser": "^1.18.3",

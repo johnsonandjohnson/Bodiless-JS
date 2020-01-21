@@ -12,13 +12,41 @@
  * limitations under the License.
  */
 
+const gitCurrentBranch = require('git-branch');
+
+const defaultValues = {
+  BODILESS_TAILWIND_THEME_ENABLED: '1',
+  BODILESS_BACKEND_DATA_FILE_PATH: 'src/data',
+  BODILESS_BACKEND_STATIC_PATH: 'static',
+  BODILESS_BACKEND_COMMIT_ENABLED: '0',
+  BODILESS_BACKEND_SAVE_ENABLED: '1',
+  APP_GIT_PATH: '.',
+  BODILESS_DOCS_URL: '/___docs',
+};
+
+/* eslint-disable no-param-reassign */
 module.exports = {
   configure: async (defaultConfig, nodeEnv) => {
     const config = {
-      default: { APP_GIT_PATH: '.' },
+      production: {
+        ...defaultValues,
+        BODILESS_BACKEND_SAVE_ENABLED: '0',
+      },
+      changeset: {
+        ...defaultValues,
+        BODILESS_BACKEND_COMMIT_ENABLED: '1',
+      },
+      default: { ...defaultValues },
     };
 
     const validNodeEnv = val => Object.keys(config).includes(val);
+    const isChangeset = branchName => branchName.startsWith('test/') || branchName.startsWith('changeset/');
+
+    const branch = await gitCurrentBranch();
+
+    if (nodeEnv !== 'production' && isChangeset(branch)) {
+      nodeEnv = 'changeset';
+    }
 
     return {
       ...defaultConfig,

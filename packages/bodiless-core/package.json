@@ -8,8 +8,7 @@
   "typings": "lib/index.d.ts",
   "files": [
     "/lib",
-    "/bodiless.docs.json",
-    "/env.config.js"
+    "/bodiless.docs.json"
   ],
   "repository": {
     "type": "git",

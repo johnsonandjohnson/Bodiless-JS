@@ -23,7 +23,8 @@ const asyncGlob = util.promisify(glob);
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
 
-const DEFAULT_ENV_PATH = path.resolve('./node_modules/@bodiless/gatsby-theme-bodiless/.env.default');
+const DEFAULT_ENV_PACKAGE = 'gatsby-theme-bodiless';
+const DEFAULT_ENV_PATH = path.resolve(`./node_modules/@bodiless/${DEFAULT_ENV_PACKAGE}/bodiless.env.config.js`);
 
 const writeToFile = async (filePath, content) => {
   try {
@@ -45,7 +46,7 @@ const jsonToEnv = async (envConfig, envType) => {
 
 const getSiteEnvConfig = async nodeEnv => {
   const siteEnvFile = await envToJson(path.resolve('.env.site'));
-  const siteEnvConfig = path.resolve('env.config.js');
+  const siteEnvConfig = path.resolve('bodiless.env.config.js');
 
   if (fs.existsSync(siteEnvConfig)) {
     return {
@@ -58,10 +59,7 @@ const getSiteEnvConfig = async nodeEnv => {
 };
 
 const getBodilessEnvConfig = async (defaultConfig, nodeEnv) => {
-  const ignore = ['**/node_modules/@bodiless/**/node_modules/**'];
-  const globPattern = '**/node_modules/@bodiless/**/env.config.{js,ts}';
-
-  const bodilessEnvConfigPaths = await asyncGlob(globPattern, { ignore });
+  const bodilessEnvConfigPaths = await asyncGlob(`node_modules/@bodiless/[!${DEFAULT_ENV_PACKAGE}]*/bodiless.env.config.{js,ts}`);
 
   return bodilessEnvConfigPaths.reduce(async (agregatedEnvConfig, envConfigPath) => {
     if (fs.existsSync(path.resolve(envConfigPath))) {
@@ -75,18 +73,28 @@ const getBodilessEnvConfig = async (defaultConfig, nodeEnv) => {
   }, Promise.resolve(defaultConfig));
 };
 
+const getDefaults = async (defaultConfig, nodeEnv) => {
+  const defaultEnvConfigPath = path.resolve(DEFAULT_ENV_PATH);
+
+  if (fs.existsSync(defaultEnvConfigPath)) {
+    return {
+      ...await require(defaultEnvConfigPath).configure(defaultConfig, nodeEnv),
+    };
+  }
+}
+
+const configureEnvFileFor = async nodeEnv => {
+  const defaultEnvConfig = await getDefaults({}, nodeEnv);
+
+  await jsonToEnv({
+    ...await getBodilessEnvConfig(defaultEnvConfig, nodeEnv),
+    ...await getSiteEnvConfig(nodeEnv),
+  }, nodeEnv);
+}
+
 const init = async () => {
-  const defaultEnvConfig = await envToJson(DEFAULT_ENV_PATH);
-
-  await jsonToEnv({
-    ...await getBodilessEnvConfig(defaultEnvConfig, 'production'),
-    ...await getSiteEnvConfig('production'),
-  }, 'production');
-
-  await jsonToEnv({
-    ...await getBodilessEnvConfig(defaultEnvConfig, 'development'),
-    ...await getSiteEnvConfig('development'),
-  }, 'development');
+  await configureEnvFileFor('production');
+  await configureEnvFileFor('development');
 };
 
 init();
