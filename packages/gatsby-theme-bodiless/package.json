@@ -5,8 +5,12 @@
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
   "license": "Apache-2.0",
+  "bin": {
+    "generate-env-vars": "./dist/generate-env-vars.js"
+  },
   "directories": {
     "lib": "lib",
+    "dist": "dist",
     "test": "__tests__"
   },
   "files": [
