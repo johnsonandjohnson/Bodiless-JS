@@ -81,7 +81,9 @@ const getDefaults = async (defaultConfig, nodeEnv) => {
       ...await require(defaultEnvConfigPath).configure(defaultConfig, nodeEnv),
     };
   }
-}
+
+  return {};
+};
 
 const configureEnvFileFor = async nodeEnv => {
   const defaultEnvConfig = await getDefaults({}, nodeEnv);
@@ -90,7 +92,7 @@ const configureEnvFileFor = async nodeEnv => {
     ...await getBodilessEnvConfig(defaultEnvConfig, nodeEnv),
     ...await getSiteEnvConfig(nodeEnv),
   }, nodeEnv);
-}
+};
 
 const init = async () => {
   await configureEnvFileFor('production');
