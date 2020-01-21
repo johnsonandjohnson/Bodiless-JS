@@ -6,7 +6,7 @@
   "homepage": "",
   "license": "Apache-2.0",
   "bin": {
-    "generate-env-vars": "./dist/generate-env-vars.js"
+    "generate-env-vars": "./bin/generate-env-vars"
   },
   "directories": {
     "lib": "lib",

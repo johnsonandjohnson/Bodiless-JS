@@ -54,7 +54,7 @@
   },
   "scripts": {
     "build": "npm-run-all prepare build:lib build:scripts build:doc psh-validate",
-    "build:watch": "run-p -r build:env-vars dev-frontend dev-backend",
+    "build:watch": "run-p -r dev-frontend dev-backend",
     "build:lib": "gatsby build",
     "build:css": "node scripts/build-css.js",
     "build:doc": "bl-docs-build",
@@ -81,7 +81,6 @@
     "gatsby-plugin-compile-es6-packages": "^1.1.0",
     "npm-run-all": "^4.1.5",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
-    "glob": "^7.1.6",
     "typescript": "^3.4.5"
   }
 }
