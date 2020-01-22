@@ -9,8 +9,7 @@
     "generate-env-vars": "./bin/generate-env-vars"
   },
   "directories": {
-    "lib": "lib",
-    "dist": "dist",
+    "lib": "dist",
     "test": "__tests__"
   },
   "files": [
