@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-/* eslint-disable no-console, no-return-assign */
+/* eslint-disable no-console, no-return-assign, max-len */
 import findUp from 'find-up';
 import { writeFile } from 'fs';
 import { promisify } from 'util';
@@ -38,9 +38,9 @@ export const jsonToEnv = async (envConfig:Tree, appEnv:string):Promise<void> => 
   await writeToFile(`.env.${appEnv}`, envFileContent);
 };
 
-export const findGitFolder = async (): Promise<string> => await findUp('.git', {type: 'directory'}) || '';
+export const findGitFolder = async (): Promise<string> => await findUp('.git', { type: 'directory' }) || '';
 
-export const getGitRepository = async (repositoryPath:string): Promise<Repository> => await Repository.open(resolve(repositoryPath));
+export const getGitRepository = (repositoryPath:string): Promise<Repository> => Repository.open(resolve(repositoryPath));
 
 export const handleDetachedState = (repo:Repository): Repository => {
   if (repo.headDetached()) {
