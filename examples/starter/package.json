@@ -46,7 +46,7 @@
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "scripts": {
-    "build": "npm-run-all build:env-vars build:lib build:doc",
+    "build": "npm-run-all build:env-vars build:css build:lib build:doc",
     "build:lib": "gatsby build",
     "build:css": "DOTENV_CONFIG_PATH=.env.production node -r dotenv/config ./scripts/build-css",
     "build:doc": "bl-docs-build",
@@ -56,7 +56,7 @@
     "dev-backend": "node ./node_modules/@bodiless/backend/src/server.js",
     "dev-frontend": "gatsby develop",
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx .",
-    "prestart": "run-s build:env-vars build:doc",
+    "prestart": "run-s build:env-vars build:css build:doc",
     "start": "run-p -r dev-backend dev-frontend",
     "serve": "gatsby serve",
     "migrate": "migration_tool",
