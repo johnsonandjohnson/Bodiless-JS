@@ -13,9 +13,8 @@
  */
 
 /* eslint-disable no-param-reassign */
-import { Tree, ResolveTree } from './type';
-
-// const gitCurrentBranch = require('git-branch');
+import { Tree } from './type';
+import { getCurrentGitBranch } from './utils';
 
 const defaultEnvValues: Tree = {
   BODILESS_TAILWIND_THEME_ENABLED: '1',
@@ -35,21 +34,18 @@ const defaultEnvConfig: Tree = {
 
 const validNodeEnv = (val:string) => Object.keys(defaultEnvConfig).includes(val);
 
-const isChangeset = (branchName: string) => branchName.startsWith('test/') || branchName.startsWith('changeset/');
+const isChangeset = (branchName:string) => branchName.startsWith('test/') || branchName.startsWith('changeset/');
 
-const getDefaults = (appEnv:string = 'production'): Promise<Tree> => (
-  new Promise((resolve:ResolveTree) => {
-    // const branch = await gitCurrentBranch();
-    const branch = 'Move-to-separate-script';
+const getDefaults = async (appEnv:string = 'production'): Promise<Tree> => {
+  const branch = await getCurrentGitBranch();
 
-    if (appEnv !== 'production' && isChangeset(branch)) {
-      appEnv = 'changeset';
-    }
+  if (appEnv !== 'production' && isChangeset(branch)) {
+    appEnv = 'changeset';
+  }
 
-    const defaultEnv = validNodeEnv(appEnv) ? defaultEnvConfig[appEnv] : defaultEnvConfig.default;
+  const defaultEnv = validNodeEnv(appEnv) ? defaultEnvConfig[appEnv] : defaultEnvConfig.default;
 
-    resolve(defaultEnv as Tree);
-  })
-);
+  return defaultEnv as Tree;
+};
 
 export default getDefaults;

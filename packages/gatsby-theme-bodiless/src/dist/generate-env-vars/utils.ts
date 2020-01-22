@@ -13,8 +13,11 @@
  */
 
 /* eslint-disable no-console, no-return-assign */
+import findUp from 'find-up';
 import { writeFile } from 'fs';
 import { promisify } from 'util';
+import { Repository, Reference } from 'nodegit';
+import { resolve } from 'path';
 import { Tree } from './type';
 
 const writeFilePromise = promisify(writeFile);
@@ -33,4 +36,24 @@ export const jsonToEnv = async (envConfig:Tree, appEnv:string):Promise<void> => 
   Object.keys(envConfig).forEach((key:string) => envFileContent += `${key}='${envConfig[key]}'\n`);
 
   await writeToFile(`.env.${appEnv}`, envFileContent);
+};
+
+export const findGitFolder = async (): Promise<string> => await findUp('.git', {type: 'directory'}) || '';
+
+export const getGitRepository = async (repositoryPath:string): Promise<Repository> => await Repository.open(resolve(repositoryPath));
+
+export const handleDetachedState = (repo:Repository): Repository => {
+  if (repo.headDetached()) {
+    console.warn('You are in "detached HEAD" state...');
+  }
+
+  return repo;
+};
+
+export const getCurrentGitBranch = async (): Promise<string> => {
+  const gitDir = await findGitFolder();
+  const repo = await getGitRepository(gitDir);
+  const currentBranch: Reference = await handleDetachedState(repo).getCurrentBranch();
+
+  return currentBranch.shorthand() as string;
 };
