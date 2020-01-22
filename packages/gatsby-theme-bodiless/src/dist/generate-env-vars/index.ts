@@ -13,24 +13,24 @@
  * limitations under the License.
  */
 
- import getDefaults from './getDefaults';
- import getBodilessEnvConfig from './getBodilessEnvConfig';
- import getSiteEnvConfig from './getSiteEnvConfig';
+import getDefaults from './getDefaults';
+import getBodilessEnvConfig from './getBodilessEnvConfig';
+import getSiteEnvConfig from './getSiteEnvConfig';
 
- import { jsonToEnv } from './utils';
+import { jsonToEnv } from './utils';
 
- const configureEnvFileFor = async (appEnv:string) => {
-   const defaultEnvConfig = await getDefaults(appEnv);
+const configureEnvFileFor = async (appEnv:string):Promise<void> => {
+  const defaultEnvConfig = await getDefaults(appEnv);
 
-   await jsonToEnv({
-     ...await getBodilessEnvConfig(defaultEnvConfig, appEnv),
-     ...await getSiteEnvConfig(appEnv),
-   }, appEnv);
- };
+  await jsonToEnv({
+    ...await getBodilessEnvConfig(defaultEnvConfig, appEnv),
+    ...await getSiteEnvConfig(appEnv),
+  }, appEnv);
+};
 
- const init = async () => {
-   await configureEnvFileFor('production');
-   await configureEnvFileFor('development');
- };
+const init = async () => {
+  await configureEnvFileFor('production');
+  await configureEnvFileFor('development');
+};
 
- export default init;
+export default init;

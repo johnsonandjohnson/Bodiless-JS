@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+/* eslint-disable max-len, global-require, import/no-dynamic-require */
 import { existsSync } from 'fs';
 import { promisify } from 'util';
 import { resolve } from 'path';
@@ -20,7 +21,7 @@ import { Tree } from './type';
 const asyncGlob = promisify(require('glob'));
 
 const getBodilessEnvConfig = async (defaultConfig:Tree, appEnv:string) => {
-  const bodilessEnvConfigPaths:string[] = await asyncGlob(`node_modules/@bodiless/*/bodiless.env.config.{js,ts}`);
+  const bodilessEnvConfigPaths:string[] = await asyncGlob('node_modules/@bodiless/*/bodiless.env.config.{js,ts}');
 
   return bodilessEnvConfigPaths.reduce(async (agregatedEnvConfig:Promise<Tree>, envConfigPath:string) => {
     if (existsSync(resolve(envConfigPath))) {

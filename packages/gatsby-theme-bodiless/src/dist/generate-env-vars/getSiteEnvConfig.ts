@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+/* eslint-disable import/no-dynamic-require, global-require */
 import { existsSync, readFile } from 'fs';
 import { promisify } from 'util';
 import { resolve as resolvePath } from 'path';

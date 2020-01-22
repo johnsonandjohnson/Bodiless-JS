@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+/* eslint-disable no-console, no-return-assign */
 import { writeFile } from 'fs';
 import { promisify } from 'util';
 import { Tree } from './type';

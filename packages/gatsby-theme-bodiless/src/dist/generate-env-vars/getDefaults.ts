@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+/* eslint-disable no-param-reassign */
 import { Tree, ResolveTree } from './type';
 
 // const gitCurrentBranch = require('git-branch');
