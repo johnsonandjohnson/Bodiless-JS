@@ -20,6 +20,9 @@ export type Tree = {
 };
 
 /**
- * The ResolveTree describes a structure of the promice that resolves to Tree
+ * The LocateFilesProps describes a structure of the `locateFiles` props.
  */
-export type ResolveTree = (a:Tree) => void;
+export type LocateFilesProps<T> = {
+  startingRoot: string,
+  filePattern: RegExp,
+};

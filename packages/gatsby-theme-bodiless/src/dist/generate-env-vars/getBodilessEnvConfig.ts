@@ -13,21 +13,23 @@
  */
 
 /* eslint-disable max-len, global-require, import/no-dynamic-require */
-import { existsSync } from 'fs';
-import { promisify } from 'util';
-import { resolve } from 'path';
+import path from 'path';
+import fs from 'fs';
+import locateFiles from './locateFiles';
+
 import { Tree } from './type';
 
-const asyncGlob = promisify(require('glob'));
-
 const getBodilessEnvConfig = async (defaultConfig:Tree, appEnv:string) => {
-  const bodilessEnvConfigPaths:string[] = await asyncGlob('node_modules/@bodiless/*/bodiless.env.config.{js,ts}');
+  const bodilessEnvConfigPaths:string[] = await locateFiles({
+    filePattern: new RegExp(/bodiless\.env\.config\.(js|ts)/g),
+    startingRoot: './'
+  });
 
   return bodilessEnvConfigPaths.reduce(async (agregatedEnvConfig:Promise<Tree>, envConfigPath:string) => {
-    if (existsSync(resolve(envConfigPath))) {
+    if (fs.existsSync(path.resolve(envConfigPath))) {
       return {
         ...await agregatedEnvConfig,
-        ...await require(resolve(envConfigPath)).configure(agregatedEnvConfig, appEnv),
+        ...await require(path.resolve(envConfigPath)).configure(agregatedEnvConfig, appEnv),
       };
     }
 
@@ -36,3 +38,4 @@ const getBodilessEnvConfig = async (defaultConfig:Tree, appEnv:string) => {
 };
 
 export default getBodilessEnvConfig;
+

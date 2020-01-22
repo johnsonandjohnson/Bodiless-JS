@@ -13,9 +13,9 @@ There is an optional `bodiless.env.config` file in a package root directory that
 module.exports = {
   // We must export an async 'configure()' function. This function
   // is used by the main `generate-env-files` script.
-  configure: async (defaultConfig, nodeEnv) => {
+  configure: async (defaultConfig, appEnv) => {
   // Here we define all env variables that the current package controls
-  // based on the `nodeEnv`. We aslo recommend to have a 'default' value.
+  // based on the `appEnv`. We aslo recommend to have a 'default' value.
     const defaultEnvValues = {
       BODILESS_TAILWIND_THEME_ENABLED: '1',
       BODILESS_BACKEND_COMMIT_ENABLED: '0',
@@ -26,25 +26,25 @@ module.exports = {
     const currentGitBranch = await getCurrentGitBranch();
 
     // Here we define all env variables that the current package controls
-    // based on the `nodeEnv`. We aslo recommend to have a 'default' value.
+    // based on the `currentGitBranch`. We aslo recommend to have a 'default' value.
     const config = currentGitBranch === 'master'
       ? { default: { ...defaultEnvValues, BODILESS_BACKEND_SAVE_ENABLED: '0' } }
       : { default: { ...defaultEnvValues } }
 
     // There might be a cases when 'config' values are same for prod and dev.
     // In this case we may keep only the 'default' option in 'config' object.
-    // `validNodeEnv` ensures that 'config' object has 'nodeEnv' option.
+    // `validNodeEnv` ensures that 'config' object has 'appEnv' option.
     // If this is not a case it will return a 'default' option.
     const validNodeEnv = val => Object.keys(config).includes(val);
 
   // Here we just merging a default config with the one provided by the package.
   // Note that it the same env variable occurs in both configs, the one that
-  // defined in 'config[nodeEnv]' will take precedence over
+  // defined in 'config[appEnv]' will take precedence over
   // the default one passed to the function.
     return {
       ...defaultConfig,
-      ...validNodeEnv(nodeEnv)
-        ? config[nodeEnv]
+      ...validNodeEnv(appEnv)
+        ? config[appEnv]
         : config.default,
     };
   },
