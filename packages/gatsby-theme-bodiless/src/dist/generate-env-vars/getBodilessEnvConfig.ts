@@ -22,7 +22,7 @@ import { Tree } from './type';
 const getBodilessEnvConfig = async (defaultConfig:Tree, appEnv:string) => {
   const bodilessEnvConfigPaths:string[] = await locateFiles({
     filePattern: new RegExp(/bodiless\.env\.config\.(js|ts)/g),
-    startingRoot: './'
+    startingRoot: './',
   });
 
   return bodilessEnvConfigPaths.reduce(async (agregatedEnvConfig:Promise<Tree>, envConfigPath:string) => {
@@ -38,4 +38,3 @@ const getBodilessEnvConfig = async (defaultConfig:Tree, appEnv:string) => {
 };
 
 export default getBodilessEnvConfig;
-
