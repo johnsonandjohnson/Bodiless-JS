@@ -21,8 +21,7 @@
     "gatsby-config.js",
     "gatsby-node.js",
     "queries.jsx",
-    "Logger.js",
-    "env.config.js"
+    "Logger.js"
   ],
   "repository": {
     "type": "git",
