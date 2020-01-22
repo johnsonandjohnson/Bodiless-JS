@@ -13,8 +13,13 @@
  */
 
 import React, { ComponentType } from 'react';
-import { Value, Editor, SchemaProperties } from 'slate';
-import { useNode, NodeProvider, DefaultContentNode, withoutProps } from '@bodiless/core';
+import {
+  Value,
+  Editor,
+  SchemaProperties,
+} from 'slate';
+
+import { NodeProvider, DefaultContentNode, withoutProps } from '@bodiless/core';
 import { RenderNodeProps } from 'slate-react';
 import { flow } from 'lodash';
 import {
