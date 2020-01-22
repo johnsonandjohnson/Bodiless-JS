@@ -17,7 +17,7 @@ import findUp from 'find-up';
 import { writeFile } from 'fs';
 import { promisify } from 'util';
 import { Repository, Reference } from 'nodegit';
-import { resolve } from 'path';
+import { resolve as resolvePath } from 'path';
 import { Tree } from './type';
 
 const writeFilePromise = promisify(writeFile);
@@ -40,7 +40,7 @@ export const jsonToEnv = async (envConfig:Tree, appEnv:string):Promise<void> => 
 
 export const findGitFolder = async (): Promise<string> => await findUp('.git', { type: 'directory' }) || '';
 
-export const getGitRepository = (repositoryPath:string): Promise<Repository> => Repository.open(resolve(repositoryPath));
+export const getGitRepository = (repositoryPath:string): Promise<Repository> => Repository.open(resolvePath(repositoryPath));
 
 export const handleDetachedState = (repo:Repository): Repository => {
   if (repo.headDetached()) {

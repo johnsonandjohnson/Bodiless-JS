@@ -22,10 +22,10 @@ const dotenv = require('dotenv');
 
 const readFilePromise = promisify(readFile);
 
-const envToJson = async (filePath: string) => dotenv.parse(await readFilePromise(filePath, 'utf8'));
+const envToJson = async (filePath: string): Promise<Tree> => dotenv.parse(await readFilePromise(filePath, 'utf8'));
 
 const getSiteEnvConfig = async (appEnv:string = 'production'): Promise<Tree> => {
-  const siteEnvFile:Promise<Tree> = await envToJson(resolvePath('.env.site'));
+  const siteEnvFile = await envToJson(resolvePath('.env.site'));
   const siteEnvConfig = resolvePath('bodiless.env.config.js');
 
   if (existsSync(siteEnvConfig)) {

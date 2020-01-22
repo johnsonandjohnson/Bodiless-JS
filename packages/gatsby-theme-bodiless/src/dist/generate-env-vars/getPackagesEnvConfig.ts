@@ -19,7 +19,7 @@ import locateFiles from './locateFiles';
 
 import { Tree } from './type';
 
-const getPackagesEnvConfig = async (defaultConfig:Tree, appEnv:string) => {
+const getPackagesEnvConfig = async (defaultConfig:Tree, appEnv:string): Promise<Tree> => {
   const bodilessEnvConfigPaths:string[] = await locateFiles({
     filePattern: new RegExp(/bodiless\.env\.config\.(js|ts)/g),
     startingRoot: './',

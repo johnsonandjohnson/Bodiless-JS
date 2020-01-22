@@ -33,9 +33,9 @@ const defaultEnvConfig: Tree = {
   default: { ...defaultEnvValues },
 };
 
-const validNodeEnv = (val:string) => Object.keys(defaultEnvConfig).includes(val);
+const validNodeEnv = (val:string):boolean => Object.keys(defaultEnvConfig).includes(val);
 
-const isChangeset = (branchName:string) => branchName.startsWith('test/') || branchName.startsWith('changeset/');
+const isChangeset = (branchName:string):boolean => branchName.startsWith('test/') || branchName.startsWith('changeset/');
 
 const getDefaults = async (appEnv:string = 'production'): Promise<Tree> => {
   const branch = await getCurrentGitBranch();
