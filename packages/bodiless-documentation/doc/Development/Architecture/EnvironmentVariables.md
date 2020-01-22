@@ -2,9 +2,9 @@
 All environment variables are managed by an optional `env.config` file in the root of each package that needs to set or update environment variables. Default env variables can be found in `.env.default` in `@bodiless/gatsby-theme-bodiless` package and all env variables may be overwritten by setting them in `.env.site` in the root directory of the site.
 
 #### About `env.config` file
-There is an optional `env.config` file in a package root directory that is used to configure `.env` variables by extending passed env configuration during the site build. In order for it to work it must export an `async` `configure(defaultConfig, nodeEnv)` function. This function accepts 2 params:
+There is an optional `env.config` file in a package root directory that is used to configure `.env` variables by extending passed env configuration during the site build. In order for it to work it must export an `async` `configure(defaultConfig, appEnv)` function. This function accepts 2 params:
 * `defaultConfig` - this is an env configuration object with all current env variables.
-* `nodeEnv` - current node environment. **Note:** `nodeEnv` (`development` or `production`) actually describes whether we are in an edit environment or a static site build.
+* `appEnv` - current app build environment. **Note:** `appEnv` (`development` or `production`) actually describes whether we are in an edit environment or a static site build.
   * `production` - static site build (`gatsby build` == `production`)
   * `development` - edit environment (`gatsby develop` == `development`)
 
@@ -16,11 +16,20 @@ module.exports = {
   configure: async (defaultConfig, nodeEnv) => {
   // Here we define all env variables that the current package controls
   // based on the `nodeEnv`. We aslo recommend to have a 'default' value.
-    const config = {
-      production: { SOME_ENV_VARIABLE: 'value-prod' },
-      development: { SOME_ENV_VARIABLE: 'value-dev' },
-      default: { SOME_ENV_VARIABLE: 'value-default' },
+    const defaultEnvValues = {
+      BODILESS_TAILWIND_THEME_ENABLED: '1',
+      BODILESS_BACKEND_COMMIT_ENABLED: '0',
+      BODILESS_BACKEND_SAVE_ENABLED: '1',
     };
+
+    // Get current git branch
+    const currentGitBranch = await getCurrentGitBranch();
+
+    // Here we define all env variables that the current package controls
+    // based on the `nodeEnv`. We aslo recommend to have a 'default' value.
+    const config = currentGitBranch === 'master'
+      ? { default: { ...defaultEnvValues, BODILESS_BACKEND_SAVE_ENABLED: '0' } }
+      : { default: { ...defaultEnvValues } }
 
     // There might be a cases when 'config' values are same for prod and dev.
     // In this case we may keep only the 'default' option in 'config' object.
