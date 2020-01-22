@@ -13,7 +13,6 @@
  */
 import { flow } from 'lodash';
 import {
-  withFacet,
   withDesc,
 } from '@bodiless/layouts';
 import {
@@ -23,14 +22,13 @@ import {
 } from '@bodiless/fclasses';
 
 import SingleAccordion from '../SingleAccordion';
-
-const withSingleAccordion = withFacet('Accordion');
+import { withType } from './Categories';
 
 const singleAccordionVariation = {
   SingleAccordionBasic: flow(
     replaceWith(SingleAccordion),
     withDesc('Applies the expand/contract affect.\n'),
-    withSingleAccordion('Single Accordion')(),
+    withType('Single Accordion')(),
   ),
 };
 

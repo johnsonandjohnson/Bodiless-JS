@@ -39,6 +39,18 @@ export const GlobalTooltip: FC<ReactTooltip['props']> = props => (
     {...props}
     placement="rightTop"
     overlayStyle={{ position: 'fixed', opacity: 1 }}
+    getTooltipContainer={() => {
+      let el = document.getElementById('global-tooltip-container');
+
+      if (!el) {
+        el = document.createElement('div');
+        el.setAttribute('id', 'global-tooltip-container');
+        el.setAttribute('style', 'position:fixed;');
+        document.body.appendChild(el);
+      }
+
+      return el;
+    }}
   />
 );
 

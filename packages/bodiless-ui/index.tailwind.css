@@ -47,6 +47,15 @@
  * @import "components/forms";
  */
 
+ /**
+  * Custom Component Picker wrapper height and width of 660px + 54px from global Tooltip wrapper padding.
+  * Total .bl-form-wrapper width = 714px
+  */
+ .bl-form-wrapper {
+  width: 660px;
+  height: 728px;
+ }
+
 /**
  * This injects all of Tailwind's utility classes, generated based on your
  * config file.

@@ -14,20 +14,14 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import { Editable } from '@bodiless/components';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../components/Layout';
+import { FlexBoxDefault } from '../components/Flexbox';
 
 export default props => (
   <Page {...props}>
     <Layout>
-      <h1 className="text-3xl font-bold">This page is using the default template.</h1>
-      <div>
-        <h3 className="text-lg font-bold">Here is a simple editable text field.</h3>
-        <p className="w-1/2 h-24 border border-blue">
-          <Editable nodeKey="text" />
-        </p>
-      </div>
+      <FlexBoxDefault nodeKey="page" />
     </Layout>
   </Page>
 );
