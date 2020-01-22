@@ -14,7 +14,7 @@
  */
 
 import getDefaults from './getDefaults';
-import getBodilessEnvConfig from './getBodilessEnvConfig';
+import getPackagesEnvConfig from './getPackagesEnvConfig';
 import getSiteEnvConfig from './getSiteEnvConfig';
 
 import { jsonToEnv } from './utils';
@@ -23,7 +23,7 @@ const configureEnvFileFor = async (appEnv:string):Promise<void> => {
   const defaultEnvConfig = await getDefaults(appEnv);
 
   await jsonToEnv({
-    ...await getBodilessEnvConfig(defaultEnvConfig, appEnv),
+    ...await getPackagesEnvConfig(defaultEnvConfig, appEnv),
     ...await getSiteEnvConfig(appEnv),
   }, appEnv);
 };
