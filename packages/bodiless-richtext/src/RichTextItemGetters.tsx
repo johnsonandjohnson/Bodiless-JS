@@ -14,7 +14,6 @@
 
 import React, { ComponentType } from 'react';
 import { Value, Editor, SchemaProperties } from 'slate';
-import { v1 } from 'uuid';
 import { useNode, NodeProvider, DefaultContentNode, withoutProps } from '@bodiless/core';
 import { RenderNodeProps } from 'slate-react';
 import { flow } from 'lodash';
