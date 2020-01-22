@@ -15,7 +15,7 @@
 import React, { ComponentType } from 'react';
 import { Value, Editor, SchemaProperties } from 'slate';
 import { v1 } from 'uuid';
-import { useNode, NodeProvider, withoutProps } from '@bodiless/core';
+import { useNode, NodeProvider, DefaultContentNode, withoutProps } from '@bodiless/core';
 import { RenderNodeProps } from 'slate-react';
 import { flow } from 'lodash';
 import {
@@ -52,14 +52,15 @@ const SlateComponentProvider = (update:Function) => (
   <P extends object, D extends object>(Component:ComponentType<P>) => (
     (props:P & RenderNodeProps) => {
       const { editor, node } = props;
-      const data = node.data.toJS();
-      const newData = { nodeKey: v1() };
-      if (!data.nodeKey) {
-        update({ node, editor, componentData: newData });
-      }
-      const nodeKey = data.nodeKey || newData.nodeKey;
-      // We might need to understand if we need a nodecollection
-      const contentNode = useNode<D>().node.child(nodeKey);
+      const getters = {
+        getNode: () => node.data.toJS(),
+        getKeys: () => ['slatenode'],
+      };
+      const actions = {
+        // tslint: disable-next-line:no-unused-vars
+        setNode: (path: string[], componentData: any) => update({ node, editor, componentData }),
+      };
+      const contentNode = new DefaultContentNode(actions, getters, 'slatenode');
       return (
         <NodeProvider node={contentNode}>
           <Component {...props} />
