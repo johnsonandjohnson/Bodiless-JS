@@ -13,6 +13,7 @@
     "test": "__tests__"
   },
   "files": [
+    "/bin",
     "dist",
     "index.js",
     "index.d.ts",
