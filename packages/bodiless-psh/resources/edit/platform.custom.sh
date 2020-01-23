@@ -22,8 +22,6 @@ if [ "$1" = "install" ]; then
   npm ci
 elif [ "$1" = "build" ]; then
   npm run build
-elif [ "$1" = "finish-deploy" ]; then
-  cp ${PLATFORM_APP_DIR}/${DEFAULT_ENV} ${ROOT_DIR}/.env.development
 else
   echo "Unknown command specified to $0"
 fi

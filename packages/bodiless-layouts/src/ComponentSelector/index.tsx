@@ -36,7 +36,7 @@ export { uiContext };
 
 const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
   const {
-    components: allComponents, ui, onSelect, closeForm,
+    components: allComponents, ui, onSelect,
   } = props;
 
   const [activeFilters, setActiveFilters] = useState([]);
@@ -59,9 +59,6 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
   return (
     <uiContext.Provider value={finalUI}>
       <finalUI.MasterWrapper>
-        <finalUI.SubmitButton onClick={closeForm}>
-          <finalUI.CloseMenuIcon />
-        </finalUI.SubmitButton>
 
         <finalUI.FlexSection>
           <AllCheckbox

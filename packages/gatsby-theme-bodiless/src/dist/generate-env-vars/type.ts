@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,23 +12,17 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { graphql } from 'gatsby';
-import { Page } from '@bodiless/gatsby-theme-bodiless';
-import Layout from '../components/Layout';
-import { FlexBoxDefault } from '../components/Flexbox';
+/**
+ * The Tree describes a structure of env config files.
+ */
+export type Tree = {
+  [key: string]: Tree | string,
+};
 
-export default props => (
-  <Page {...props}>
-    <Layout>
-      <FlexBoxDefault nodeKey="page" />
-    </Layout>
-  </Page>
-);
-
-export const query = graphql`
-  query($slug: String!) {
-    ...PageQuery,
-    ...SiteQuery
-  }
-`;
+/**
+ * The LocateFilesProps describes a structure of the `locateFiles` props.
+ */
+export type LocateFilesProps<T> = {
+  startingRoot: string,
+  filePattern: RegExp,
+};

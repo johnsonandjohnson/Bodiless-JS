@@ -3,6 +3,9 @@
   "version": "0.0.37",
   "description": "",
   "main": "",
+  "files": [
+    "/bodiless.docs.json"
+  ],
   "dependencies": {
     "body-parser": "^1.18.3",
     "dotenv": "^8.2.0",

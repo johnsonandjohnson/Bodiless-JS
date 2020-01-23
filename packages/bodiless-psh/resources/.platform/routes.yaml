@@ -20,9 +20,3 @@
 "https://{default}/":
     type: upstream
     upstream: "static:http"
-"https://docs.{default}/":
-    type: upstream
-    upstream: "docs:http"
-    id: 'docs-env-route-id'
-    cache:
-        enabled: false
