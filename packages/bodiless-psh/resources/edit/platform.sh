@@ -150,29 +150,7 @@ predeploy () {
 }
 
 postdeploy () {
-  if [[ ${PLATFORM_BRANCH} = master ]]; then
-    DEFAULT_ENV=.env.master.psh
-  elif [[ ${PLATFORM_BRANCH} =~ ^test|^changeset ]]; then
-    DEFAULT_ENV=.env.changeset.psh
-  else
-    DEFAULT_ENV=.env.psh
-  fi
-  export DEFAULT_ENV
-  export ROOT_DIR
-  DECODED_ROUTES=$(echo ${PLATFORM_ROUTES} | base64 --decode)
-  DOCS_URL=$(echo ${DECODED_ROUTES} | extractDocsUrl)
-  export DOCS_URL
-  bash ${PLATFORM_APP_DIR}/platform.custom.sh finish-deploy
   pm2 restart backend && pm2 restart frontend || pm2 start ${PLATFORM_APP_DIR}/ecosystem.config.js
-}
-
-function extractDocsUrl {
-  python -c 'import json,sys
-json_object=json.load(sys.stdin)
-for dict in json_object:
-  if json_object[dict]["id"] == "docs-env-route-id":
-    print dict
-'
 }
 
 if [ "$1" = "deploy" ]; then
