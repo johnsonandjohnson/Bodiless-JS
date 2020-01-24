@@ -13,7 +13,7 @@
  */
 
 /* eslint-disable no-alert */
-import React, { ComponentType } from 'react';
+import React, { ComponentType, useCallback } from 'react';
 import {
   contextMenuForm,
   getUI,
@@ -60,9 +60,9 @@ Click ok to visit the new page; if it does not load, wait a while and reload.`);
   } = getUI(
     ui,
   );
-  const validate = (value: string) => (!value || !RegExp(/^[a-z0-9_-]+$/i).test(value)
+  const validate = useCallback((value: string) => (!value || !RegExp(/^[a-z0-9_-]+$/i).test(value)
     ? 'No special characters or spaces allowed'
-    : undefined);
+    : undefined), []);
 
   // ensure trailing slash is present
   const currentPage = window.location.href.replace(/\/?$/, '/');
