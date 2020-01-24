@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright Â© 2019 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,25 +11,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { HOC } from '@bodiless/fclasses';
 
-import { flow } from 'lodash';
-import { SubMenu } from 'rc-menu';
-import {
-  withDesign,
-  stylable,
-  replaceWith,
-} from '@bodiless/fclasses';
-import asMenu from './asMenu';
+type AsEditable = (nodeKey?: string, placeholder?: string) => HOC;
 
-/**
- * HOC, that incorporate the given component (usually based on <List /> component)
- * with rc-menu <Submenu /> component
- */
-const asSubMenu = flow(
-  asMenu,
-  withDesign({
-    Wrapper: replaceWith<any>(stylable(SubMenu)),
-  }),
-);
-
-export default asSubMenu;
+// eslint-disable-next-line no-undef
+export default AsEditable;

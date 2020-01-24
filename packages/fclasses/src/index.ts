@@ -13,7 +13,7 @@
  */
 
 import {
-  stylable, addClasses, removeClasses, StylableProps,
+  stylable, addClasses, HOC, removeClasses, StylableProps,
 } from './FClasses';
 import addProps from './addProps';
 import {
@@ -55,6 +55,7 @@ export {
   DesignElement,
   DesignableComponentsProps,
   DesignableComponents,
+  HOC,
   designable,
   varyDesign,
   extendDesign,

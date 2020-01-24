@@ -11,8 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import Menu, { Item as MenuItem } from 'rc-menu';
 import { withDesign, replaceWith, stylable } from '@bodiless/fclasses';
 import MenuLink from './MenuLink';
 
@@ -21,10 +19,8 @@ import MenuLink from './MenuLink';
  * with rc-menu <Menu /> component
  */
 const asMenu = withDesign({
-  // @ts-ignore error in rc-menu typings
-  Wrapper: replaceWith(stylable(Menu)),
-  // @ts-ignore error in rc-menu typings
-  Item: replaceWith(stylable(MenuItem)),
+  Wrapper: stylable,
+  Item: stylable,
   Title: replaceWith(MenuLink),
 });
 

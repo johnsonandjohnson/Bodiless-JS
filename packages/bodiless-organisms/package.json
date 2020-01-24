@@ -34,7 +34,9 @@
     "@bodiless/richtext-ui": "^0.0.37",
     "lodash": "^4.17.11",
     "nuka-carousel": "^4.4.7",
-    "rc-menu": "^8.0.0-alpha.5"
+    "rc-menu": "^8.0.0-alpha.5",
+    "react-burger-menu": "^2.6.13",
+    "@types/react-burger-menu" : "^2.6.0"
   },
   "peerDependencies": {
     "react": "^16.8.4"
