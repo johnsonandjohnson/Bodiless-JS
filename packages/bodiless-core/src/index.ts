@@ -15,6 +15,7 @@
 import { ComponentType } from 'react';
 import PageContextProvider from './PageContextProvider';
 import PageEditContext from './PageEditContext';
+import asStatic from './asStatic';
 import { useEditContext, useUUID, useContextActivator } from './hooks';
 import withNode, { withNodeKey } from './withNode';
 import withEditButton from './withEditButton';
@@ -45,6 +46,7 @@ import withChild from './withChild';
 
 export * from './components';
 export {
+  asStatic,
   withContextActivator,
   withNodeAndHandlers,
   withNodeDataHandlers,

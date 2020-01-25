@@ -20,15 +20,17 @@ import {
   withDesign,
 } from '@bodiless/fclasses';
 import {
+  asEditable,
   List,
 } from '@bodiless/components';
 import {
   asHorizontalMenu,
   asHorizontalSubMenu,
-  asEditableMenu,
-  asEditableSubMenu,
+  asEditableMainMenu,
+  asEditableMainSubMenu,
   withSubmenu,
 } from '@bodiless/organisms';
+import { asExceptMobile } from '../Elements.token';
 
 const asWhiteColoredLink = flow(
   removeClasses('bl-text-primary hover:bl-underline'),
@@ -44,7 +46,7 @@ const withTealBackground = addClasses('bg-teal-600');
 const withLimitedHeightStyles = addClasses('overflow-y-hidden max-h-menu-row');
 const withSubmenuStyles = addClasses('-ml-2');
 const MenuSubList = flow(
-  asEditableSubMenu,
+  asEditableMainSubMenu(asEditable),
   asHorizontalSubMenu,
   withDesign({
     Title: withLinkStyles,
@@ -61,7 +63,7 @@ const MenuSubList = flow(
 )(List);
 
 const MenuList = flow(
-  asEditableMenu,
+  asEditableMainMenu(asEditable),
   asHorizontalMenu,
   withDesign({
     Title: withLinkStyles,
@@ -75,6 +77,7 @@ const MenuList = flow(
       withMenuStyles,
     ),
   }),
+  asExceptMobile,
 )(List);
 
 export default withSubmenu(MenuSubList)(MenuList);

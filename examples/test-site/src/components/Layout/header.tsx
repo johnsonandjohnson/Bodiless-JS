@@ -12,36 +12,52 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, ComponentType, HTMLProps } from 'react';
 import { Link } from 'gatsby';
 import { flow } from 'lodash';
 import {
-  applyDesign,
   addClasses,
   withDesign,
+  designable,
+  DesignableComponentsProps,
   DesignableProps,
   Div,
 } from '@bodiless/fclasses';
 import MainMenu from '../Menus/MainMenu';
+import BurgerMenu from '../Menus/BurgerMenu';
 import {
   asPageContainer,
   asHeader1,
   asPrimaryColorBackground,
 } from '../Elements.token';
 
-const getHeaderComponents = applyDesign({
+type HeaderComponents = {
+  Wrapper: ComponentType<any>,
+  Container: ComponentType<any>,
+  MobileContainer: ComponentType<any>,
+  SiteReturn: ComponentType<any>,
+  DesktopMenu: ComponentType<any>,
+  MobileMenu: ComponentType<any>,
+};
+export type Props = {
+  siteLogo: string,
+} & DesignableComponentsProps<HeaderComponents> & HTMLProps<HTMLElement>;
+
+const headerComponents:HeaderComponents = {
   Wrapper: Div,
   Container: Div,
   SiteReturn: Div,
-  Menu: MainMenu,
-});
-const Header: FC<DesignableProps & { siteLogo: string }> = ({ design, siteLogo }) => {
+  DesktopMenu: MainMenu,
+  MobileMenu: BurgerMenu,
+};
+const Header: FC<DesignableProps & { siteLogo: string }> = ({ siteLogo, components }) => {
   const {
     Wrapper,
     Container,
     SiteReturn,
-    Menu,
-  } = getHeaderComponents(design);
+    DesktopMenu,
+    MobileMenu,
+  } = components;
 
   return (
     <Wrapper>
@@ -53,14 +69,18 @@ const Header: FC<DesignableProps & { siteLogo: string }> = ({ design, siteLogo }
         </SiteReturn>
       </Container>
       <div className="container mx-auto">
-        <Menu nodeKey="MainMenu" nodeCollection="site" />
+        <DesktopMenu nodeKey="MainMenu" nodeCollection="site" />
+        <MobileMenu nodeKey="MainMenu" nodeCollection="site" />
       </div>
     </Wrapper>
   );
 };
-const asSiteHeader = withDesign({
-  Wrapper: flow(asPrimaryColorBackground, addClasses('')),
-  Container: flow(asPageContainer, addClasses('flex min-h-16 items-end')),
-  SiteReturn: flow(asHeader1, addClasses('flex-shrink')),
-});
+const asSiteHeader = flow(
+  designable(headerComponents),
+  withDesign({
+    Wrapper: flow(asPrimaryColorBackground, addClasses('')),
+    Container: flow(asPageContainer, addClasses('flex min-h-16 items-end')),
+    SiteReturn: flow(asHeader1, addClasses('flex-shrink')),
+  }),
+);
 export default asSiteHeader(Header);
