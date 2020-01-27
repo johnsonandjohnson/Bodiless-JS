@@ -82,10 +82,13 @@ const withDisplayName = <P extends Object> (name: string) => (Component: Compone
 };
 const designContextDefault = undefined as undefined | ComponentType<any>;
 const DesignContext = React.createContext(designContextDefault);
-export const replaceable = <P extends object> (Component:ComponentType<P>) => (props:P) => {
-  const UpstreamComponent = useContext(DesignContext);
-  const FinalComponent = UpstreamComponent || Component;
-  return <FinalComponent {...props} />;
+export const replaceable = <P extends object> (Component:ComponentType<P>) => {
+  const Replaceable = (props:P) => {
+    const UpstreamComponent = useContext(DesignContext);
+    const FinalComponent = UpstreamComponent || Component;
+    return <FinalComponent {...props} />;
+  };
+  return Replaceable;
 };
 export const startWith = <P extends object>(ReplacementComponent: ComponentType<P>) => (
   (Component: ComponentType<P>) => (props:P) => {

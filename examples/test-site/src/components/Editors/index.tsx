@@ -17,7 +17,6 @@ import {
   asBlock,
   withButton,
   withStrikeThroughMeta,
-  withComponent,
 } from '@bodiless/richtext';
 import { RichText } from '@bodiless/richtext-ui';
 import {
@@ -25,7 +24,6 @@ import {
   Blockquote,
   Strike,
   startWith,
-  Em,
 } from '@bodiless/fclasses';
 import {
   asBold,
@@ -50,7 +48,7 @@ const simpleDesign = {
   SuperScript: asSuperScript,
 };
 const basicDesign = {
-  Bold: flow(asBold, startWith(Em)),
+  Bold: asBold,
   Italic: asItalic,
   Underline: asUnderline,
   Link: flow(asEditableLink(), asLink),
@@ -70,7 +68,7 @@ const fullFeaturedDesign = {
   Bold: asBold,
   Italic: asItalic,
   Underline: asUnderline,
-  StrikeThrough: flow(withComponent(Strike), asStrikeThrough, withStrikeThroughMeta),
+  StrikeThrough: flow(startWith(Strike), asStrikeThrough, withStrikeThroughMeta),
   Link: flow(asEditableLink(), asLink),
   SuperScript: asSuperScript,
   AlignLeft: asAlignLeft,
@@ -80,7 +78,7 @@ const fullFeaturedDesign = {
   H1: asHeader1,
   H2: asHeader2,
   H3: asHeader3,
-  BlockQuote: flow(withComponent(Blockquote), asBlockQuote, withQuoteBlockMeta),
+  BlockQuote: flow(startWith(Blockquote), asBlockQuote, withQuoteBlockMeta),
 };
 
 const EditorSimple = withDesign(simpleDesign)(RichText);
