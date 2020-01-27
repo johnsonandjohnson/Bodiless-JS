@@ -377,7 +377,7 @@ index 29e72c3..a8980da 100644
        depth: this._depth,
        previousUrl: this._previousUrl,
        response: this._reduceResponse(response),
-+      rawHtml: response.text(),
++      rawHtml: await response.text(),
        redirectChain: this._getRedirectChain(response),
        result,
        screenshot,
