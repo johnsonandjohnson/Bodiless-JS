@@ -57,12 +57,19 @@ const SlateComponentProvider = (update:Function) => (
     (props:P & RenderNodeProps) => {
       const { editor, node } = props;
       const getters = {
-        getNode: () => node.data.toJS(),
+        getNode: path => node.data.toJS()[path.join('$')],
         getKeys: () => ['slatenode'],
       };
       const actions = {
         // tslint: disable-next-line:no-unused-vars
-        setNode: (path: string[], componentData: any) => update({ node, editor, componentData }),
+        setNode: (path: string[], componentData: any) => update({
+          node,
+          editor,
+          componentData: {
+            ...node.data,
+            [path.join('$')]: { ...componentData },
+          },
+        }),
       };
       const contentNode = new DefaultContentNode(actions, getters, 'slatenode');
       return (
