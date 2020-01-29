@@ -18,6 +18,7 @@
     "@babel/plugin-syntax-jsx": "^7.2.0",
     "@babel/traverse": "^7.5.5",
     "@babel/types": "^7.6.1",
+    "@bodiless/headless-chrome-crawler": "^1.8.1",
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
