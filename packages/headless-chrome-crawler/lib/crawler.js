@@ -4,6 +4,7 @@ const pick = require('lodash/pick');
 const isEmpty = require('lodash/isEmpty');
 const uniq = require('lodash/uniq');
 const devices = require('puppeteer/DeviceDescriptors');
+const isFileResponse = require('./isFileResponse');
 const {
   resolveUrl,
   debugConsole,
@@ -27,19 +28,6 @@ const RESPONSE_FIELDS = [
 ];
 
 const jQueryPath = require.resolve('jquery');
-
-const _fileDownloadHeaders = () => {
-  return [
-    'application/octet-stream',
-    'application/pdf',
-    'application/msword',
-    'application/zip',
-    'application/vnd.ms-excel',
-    'application/vnd.ms-powerpoint',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    'audio/mpeg'
-  ]
-}
 
 class Crawler {
   /**
@@ -73,7 +61,7 @@ class Crawler {
       this._getCookies(),
       this._collectLinks(response.url),
     ]);
-    const isFile = _fileDownloadHeaders().includes(response.headers()['content-type']);
+    const isFile = isFileResponse(response);
     const rawHtml = !isFile ? await response.text() : '';
     return {
       options: this._options,

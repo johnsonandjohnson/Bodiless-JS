@@ -24,6 +24,7 @@ const {
 const PriorityQueue = require('./priority-queue');
 const Crawler = require('./crawler');
 const SessionCache = require('../cache/session');
+const isFileResponse = require('./isFileResponse');
 
 const CONNECT_OPTIONS = [
   'browserWSEndpoint',
@@ -354,13 +355,9 @@ class HCCrawler extends EventEmitter {
     crawler._page.on('request', request => {
       this.emit(HCCrawler.Events.PuppeteerRequestStarted, request);
     });
-    let isFileResponse = false;
-    let headers = undefined;
+    let isFile = false;
     crawler._page.on('response', response => {
-      headers = response.headers();
-      if (this._fileDownloadHeaders().includes(headers['content-type'])) {
-        isFileResponse = true;
-      }
+      isFile = isFileResponse(response);
     });
     try {
       const res = await this._crawl(crawler);
