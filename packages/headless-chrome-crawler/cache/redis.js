@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 const redis = require('redis');
 const BaseCache = require('./base');
 

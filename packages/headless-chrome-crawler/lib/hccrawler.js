@@ -127,7 +127,7 @@ class HCCrawler extends EventEmitter {
       screenshot: null,
       viewport: null,
       enableFileDownload: false,
-      downloadPath: '/tmp/puppeteer'
+      downloadPath: '/tmp/puppeteer',
     }, options);
     this._cache = options.cache || new SessionCache();
     this._queue = new PriorityQueue({
@@ -328,19 +328,6 @@ class HCCrawler extends EventEmitter {
     return false;
   }
 
-  _fileDownloadHeaders() {
-    return [
-      'application/octet-stream',
-      'application/pdf',
-      'application/msword',
-      'application/zip',
-      'application/vnd.ms-excel',
-      'application/vnd.ms-powerpoint',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      'audio/mpeg'
-    ]
-  }
-
   /**
    * @param {!Object} options
    * @param {!number} depth
@@ -355,9 +342,9 @@ class HCCrawler extends EventEmitter {
     crawler._page.on('request', request => {
       this.emit(HCCrawler.Events.PuppeteerRequestStarted, request);
     });
-    let isFile = false;
+    let isFileRequested = false;
     crawler._page.on('response', response => {
-      isFile = isFileResponse(response);
+      isFileRequested = isFileResponse(response);
     });
     try {
       const res = await this._crawl(crawler);
@@ -372,7 +359,7 @@ class HCCrawler extends EventEmitter {
       return res.links;
     } catch (error) {
       await crawler.close();
-      if (error.message.includes('net::ERR_ABORTED') && isFileResponse) {
+      if (error.message.includes('net::ERR_ABORTED') && isFileRequested) {
         this.emit(HCCrawler.Events.AttachedFileRequested, options);
         return [];
       }
@@ -689,7 +676,7 @@ HCCrawler.Events = {
   MaxRequestReached: 'maxrequestreached',
   Disconnected: 'disconnected',
   AttachedFileRequested: 'attachedfilerequested',
-  PuppeteerRequestStarted: 'puppeteerrequeststarted'
+  PuppeteerRequestStarted: 'puppeteerrequeststarted',
 };
 
 tracePublicAPI(HCCrawler);

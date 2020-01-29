@@ -9,9 +9,9 @@ const fileDownloadHeaders = [
   'audio/mpeg',
 ];
 
-const isFileResponse = (response) => {
+const isFileResponse = response => {
   const responseContentType = response.headers()['content-type'];
-  return fileDownloadHeaders.includes(responseContentType)
-}
+  return fileDownloadHeaders.includes(responseContentType);
+};
 
 module.exports = isFileResponse;
