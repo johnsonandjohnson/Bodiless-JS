@@ -113,6 +113,7 @@ class HCCrawler extends EventEmitter {
       retryCount: 3,
       retryDelay: 10000,
       timeout: 30000,
+      jsEnabled: true,
       jQuery: true,
       browserCache: true,
       persistCache: false,
@@ -124,6 +125,8 @@ class HCCrawler extends EventEmitter {
       cookies: null,
       screenshot: null,
       viewport: null,
+      enableFileDownload: false,
+      downloadPath: '/tmp/puppeteer'
     }, options);
     this._cache = options.cache || new SessionCache();
     this._queue = new PriorityQueue({
@@ -302,6 +305,7 @@ class HCCrawler extends EventEmitter {
       return;
     }
     await this._followSitemap(options, depth, previousUrl);
+    console.warn(`hccrawler start request ${options.url}`);
     const links = await this._request(options, depth, previousUrl);
     this._checkRequestCount();
     await this._followLinks(links, options, depth);
@@ -323,6 +327,19 @@ class HCCrawler extends EventEmitter {
     return false;
   }
 
+  _fileDownloadHeaders() {
+    return [
+      'application/octet-stream',
+      'application/pdf',
+      'application/msword',
+      'application/zip',
+      'application/vnd.ms-excel',
+      'application/vnd.ms-powerpoint',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'audio/mpeg'
+    ]
+  }
+
   /**
    * @param {!Object} options
    * @param {!number} depth
@@ -334,6 +351,17 @@ class HCCrawler extends EventEmitter {
   async _request(options, depth, previousUrl, retryCount = 0) {
     this.emit(HCCrawler.Events.RequestStarted, options);
     const crawler = await this._newCrawler(options, depth, previousUrl);
+    crawler._page.on('request', request => {
+      this.emit(HCCrawler.Events.PuppeteerRequestStarted, request);
+    });
+    let isFileResponse = false;
+    let headers = undefined;
+    crawler._page.on('response', response => {
+      headers = response.headers();
+      if (this._fileDownloadHeaders().includes(headers['content-type'])) {
+        isFileResponse = true;
+      }
+    });
     try {
       const res = await this._crawl(crawler);
       await crawler.close();
@@ -347,6 +375,10 @@ class HCCrawler extends EventEmitter {
       return res.links;
     } catch (error) {
       await crawler.close();
+      if (error.message.includes('net::ERR_ABORTED') && isFileResponse) {
+        this.emit(HCCrawler.Events.AttachedFileRequested, options);
+        return [];
+      }
       extend(error, { options, depth, previousUrl });
       if (retryCount >= options.retryCount) {
         this.emit(HCCrawler.Events.RequestFailed, error);
@@ -560,8 +592,11 @@ class HCCrawler extends EventEmitter {
    * @return {!Promise<!Object>}
    */
   async _crawl(crawler) {
+    console.warn('1.5');
     if (!this._customCrawl) return crawler.crawl();
+    console.warn('1.6');
     const crawl = () => crawler.crawl.call(crawler);
+    console.warn('1.7');
     return this._customCrawl(crawler.page(), crawl);
   }
 
@@ -656,6 +691,8 @@ HCCrawler.Events = {
   MaxDepthReached: 'maxdepthreached',
   MaxRequestReached: 'maxrequestreached',
   Disconnected: 'disconnected',
+  AttachedFileRequested: 'attachedfilerequested',
+  PuppeteerRequestStarted: 'puppeteerrequeststarted'
 };
 
 tracePublicAPI(HCCrawler);

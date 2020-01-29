@@ -28,6 +28,19 @@ const RESPONSE_FIELDS = [
 
 const jQueryPath = require.resolve('jquery');
 
+const _fileDownloadHeaders = () => {
+  return [
+    'application/octet-stream',
+    'application/pdf',
+    'application/msword',
+    'application/zip',
+    'application/vnd.ms-excel',
+    'application/vnd.ms-powerpoint',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'audio/mpeg'
+  ]
+}
+
 class Crawler {
   /**
    * @param {!Puppeteer.Page} page
@@ -60,11 +73,14 @@ class Crawler {
       this._getCookies(),
       this._collectLinks(response.url),
     ]);
+    const isFile = _fileDownloadHeaders().includes(response.headers()['content-type']);
+    const rawHtml = !isFile ? await response.text() : '';
     return {
       options: this._options,
       depth: this._depth,
       previousUrl: this._previousUrl,
       response: this._reduceResponse(response),
+      rawHtml: rawHtml,
       redirectChain: this._getRedirectChain(response),
       result,
       screenshot,
@@ -219,7 +235,21 @@ class Crawler {
    */
   _request() {
     const gotoOptions = pick(this._options, GOTO_OPTIONS);
+    if (this._options.enableFileDownload) {
+      this._setDownloadBehavior(this._options.downloadPath)
+    }
+    if (!this._options.jsEnabled) {
+      this._page.setJavaScriptEnabled(false)
+    }
     return this._page.goto(this._options.url, gotoOptions);
+  }
+
+  _setDownloadBehavior(downloadPath) {
+    const path = typeof downloadPath === 'function' ? downloadPath(this._options.url) : downloadPath
+    return this._page._client.send('Page.setDownloadBehavior', {
+      behavior: 'allow',
+      downloadPath: path
+    });
   }
 
   /**

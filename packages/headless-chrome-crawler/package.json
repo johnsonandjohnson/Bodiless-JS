@@ -1,10 +1,11 @@
 {
   "name": "headless-chrome-crawler",
   "version": "1.8.0",
-  "description": "Distributed web crawler powered by Headless Chrome",
+  "description": "Fork of https://github.com/yujiosaka/headless-chrome-crawler.git",
   "main": "index.js",
   "license": "MIT",
   "author": "Yuji Isobe",
+  "private": true,
   "scripts": {
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "greenkeeper-lockfile-update": "greenkeeper-lockfile-update",
@@ -28,13 +29,10 @@
     "debug": "3.1.0",
     "jquery": "3.3.1",
     "lodash": "4.17.5",
-    "puppeteer": "1.5.0",
+    "puppeteer": "2.1.0",
     "request": "2.87.0",
     "request-promise": "4.2.2",
     "robots-parser": "1.0.2"
-  },
-  "peerDependencies": {
-    "redis": "2.8.0"
   },
   "devDependencies": {
     "@commitlint/cli": "7.0.0",
