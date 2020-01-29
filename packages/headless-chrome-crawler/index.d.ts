@@ -2,13 +2,13 @@
 // Project: https://github.com/yujiosaka/headless-chrome-crawler
 // Definitions by: Sebastian Richter <https://github.com/BassT>
 
-/*~ This is the module template file for class modules.
+/* ~ This is the module template file for class modules.
  *~ You should rename it to index.d.ts and place it in a folder with the same name as the module.
  *~ For example, if you were writing a file for "super-greeter", this
  *~ file should be 'super-greeter/index.d.ts'
  */
 
-/*~ Note that ES6 modules cannot directly export class objects.
+/* ~ Note that ES6 modules cannot directly export class objects.
  *~ This file should be imported using the CommonJS-style:
  *~   import x = require('someLibrary');
  *~
@@ -16,41 +16,43 @@
  *~ workarounds for this limitation of ES6 modules.
  */
 
- /*~ If this module is a UMD module that exposes a global variable 'myClassLib' when
+/* ~ If this module is a UMD module that exposes a global variable 'myClassLib' when
  *~ loaded outside a module loader environment, declare that global here.
  *~ Otherwise, delete this declaration.
  */
 // export as namespace myClassLib;
 
-/*~ This declaration specifies that the class constructor function
+/* ~ This declaration specifies that the class constructor function
  *~ is the exported object from the file
  */
-export = HCCrawler;
+import { EventEmitter } from 'events';
 
-import { EventEmitter } from "events";
-
-/*~ Write your module's methods and properties in this class */
+/* ~ Write your module's methods and properties in this class */
 declare class HCCrawler extends EventEmitter {
   static connect(options?: ConnectOptions): Promise<HCCrawler>;
+
   static launch(options?: LaunchOptions): Promise<HCCrawler>;
+
   queue(options: QueueOptions): Promise<void>;
+
   onIdle(): Promise<void>;
+
   close(): Promise<void>;
 
   static Events: {
-    RequestStarted: "requeststarted";
-    RequestSkipped: "requestskipped";
-    RequestDisallowed: "requestdisallowed";
-    RequestFinished: "requestfinished";
-    RequestRetried: "requestretried";
-    RequestFailed: "requestfailed";
-    RobotsTxtRequestFailed: "robotstxtrequestfailed";
-    SitemapXmlRequestFailed: "sitemapxmlrequestfailed";
-    MaxDepthReached: "maxdepthreached";
-    MaxRequestReached: "maxrequestreached";
-    Disconnected: "disconnected";
-    AttachedFileRequested: "attachedfilerequested";
-    PuppeteerRequestStarted: "puppeteerrequeststarted";
+    RequestStarted: 'requeststarted';
+    RequestSkipped: 'requestskipped';
+    RequestDisallowed: 'requestdisallowed';
+    RequestFinished: 'requestfinished';
+    RequestRetried: 'requestretried';
+    RequestFailed: 'requestfailed';
+    RobotsTxtRequestFailed: 'robotstxtrequestfailed';
+    SitemapXmlRequestFailed: 'sitemapxmlrequestfailed';
+    MaxDepthReached: 'maxdepthreached';
+    MaxRequestReached: 'maxrequestreached';
+    Disconnected: 'disconnected';
+    AttachedFileRequested: 'attachedfilerequested';
+    PuppeteerRequestStarted: 'puppeteerrequeststarted';
   };
 }
 
@@ -75,12 +77,14 @@ interface ConnectOptions extends SharedQueueOptions {
   exporter?: BaseExporter;
 
   /**
-   * A cache object which extends BaseCache's interfaces to remember and skip duplicate requests, defaults to a SessionCache object.
+   * A cache object which extends BaseCache's interfaces to remember
+   * and skip duplicate requests, defaults to a SessionCache object.
    */
   cache?: BaseCache;
 
   /**
-   * Whether to clear cache on closing or disconnecting from the Chromium instance, defaults to false.
+   * Whether to clear cache on closing or disconnecting from the Chromium instance,
+   * defaults to false.
    */
   presistCache?: boolean;
 
@@ -168,7 +172,8 @@ interface OnlyQueueOptions {
 
   /**
    * Whether to skip duplicate requests, default to true.
-   * The request is considered to be the same if url, userAgent, device and extraHeaders are strictly the same.
+   * The request is considered to be the same
+   * if url, userAgent, device and extraHeaders are strictly the same.
    */
   skipDuplicates?: boolean;
 
@@ -356,9 +361,11 @@ interface ICookie {
   httpOnly: boolean;
   secure: boolean;
   session: boolean;
-  sameSite: "Strict" | "Lax";
+  sameSite: 'Strict' | 'Lax';
 }
 
 declare class BaseCache {}
 
 declare class BaseExporter {}
+
+export = HCCrawler;
