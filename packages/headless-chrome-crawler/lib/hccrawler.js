@@ -306,7 +306,6 @@ class HCCrawler extends EventEmitter {
       return;
     }
     await this._followSitemap(options, depth, previousUrl);
-    console.warn(`hccrawler start request ${options.url}`);
     const links = await this._request(options, depth, previousUrl);
     this._checkRequestCount();
     await this._followLinks(links, options, depth);
@@ -576,11 +575,8 @@ class HCCrawler extends EventEmitter {
    * @return {!Promise<!Object>}
    */
   async _crawl(crawler) {
-    console.warn('1.5');
     if (!this._customCrawl) return crawler.crawl();
-    console.warn('1.6');
     const crawl = () => crawler.crawl.call(crawler);
-    console.warn('1.7');
     return this._customCrawl(crawler.page(), crawl);
   }
 
