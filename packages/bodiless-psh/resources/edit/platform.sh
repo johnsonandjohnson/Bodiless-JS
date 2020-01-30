@@ -47,7 +47,6 @@ check_vars () {
     echo Missing required environment variables.
     exit 1
   fi
-  bash ${PLATFORM_APP_DIR}/platform.custom.sh check-vars
 }
 
 get_current_branch () {
