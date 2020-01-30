@@ -3,7 +3,7 @@
   "version": "1.8.1",
   "description": "Fork of https://github.com/yujiosaka/headless-chrome-crawler.git",
   "main": "index.js",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "author": "Yuji Isobe",
   "private": true,
   "scripts": {
@@ -19,12 +19,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yujiosaka/headless-chrome-crawler.git"
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
-  "bugs": {
-    "url": "https://github.com/yujiosaka/headless-chrome-crawler/issues"
-  },
-  "homepage": "https://github.com/yujiosaka/headless-chrome-crawler#readme",
+  "homepage": "https://github.com/johnsonandjohnson/bodiless-js",
   "dependencies": {
     "debug": "^4.1.1",
     "jquery": "^3.3.1",
