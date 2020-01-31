@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/migration-tool",
-  "version": "0.0.37",
+  "version": "0.0.38",
   "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
   "bin": {
     "migration_tool": "./bin/run"

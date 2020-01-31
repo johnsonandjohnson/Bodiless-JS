@@ -51,9 +51,19 @@ export const handleDetachedState = (repo:Repository): Repository => {
 };
 
 export const getCurrentGitBranch = async (): Promise<string> => {
-  const gitDir = await findGitFolder();
-  const repo = await getGitRepository(gitDir);
-  const currentBranch: Reference = await handleDetachedState(repo).getCurrentBranch();
+  let gitBranchName = process.env.PLATFORM_BRANCH || '';
 
-  return currentBranch.shorthand() as string;
+  try {
+    const gitDir = await findGitFolder();
+    const repo = await getGitRepository(gitDir);
+    const currentBranch: Reference = await handleDetachedState(repo).getCurrentBranch();
+
+    if (currentBranch) {
+      gitBranchName = currentBranch.shorthand() as string;
+    }
+  } catch (e) {
+    console.warn(e);
+  }
+
+  return gitBranchName;
 };

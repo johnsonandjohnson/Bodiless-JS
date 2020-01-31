@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.0.38 (2020-01-29)
+
+
+### Bug Fixes
+
+* **psh:** Remove docs app from platform.sh ([#78](https://github.com/johnsonandjohnson/bodiless-js/issues/78)) ([8b19fce](https://github.com/johnsonandjohnson/bodiless-js/commit/8b19fce9df66fad21bf98488b0a71486cc84670b)), closes [#1234](https://github.com/johnsonandjohnson/bodiless-js/issues/1234) [#4567](https://github.com/johnsonandjohnson/bodiless-js/issues/4567) [#71](https://github.com/johnsonandjohnson/bodiless-js/issues/71)
+* New page form freezes the screen after upgrading informed ([#75](https://github.com/johnsonandjohnson/bodiless-js/issues/75)) ([739a2a2](https://github.com/johnsonandjohnson/bodiless-js/commit/739a2a2c2fed278d8045e25807773e3b19430dac))
+
+
+### Features
+
+* **@bodiless/gatsby-theme-bodiless:** Initial Commit. ([33ab746](https://github.com/johnsonandjohnson/bodiless-js/commit/33ab746af5044c963d2a1d8a2da5e799db006626))
+* **starter:** Add gatsby-starter-bodiless to monorepo ([#12](https://github.com/johnsonandjohnson/bodiless-js/issues/12)) ([f5d8d2a](https://github.com/johnsonandjohnson/bodiless-js/commit/f5d8d2af25096d5785203cb600af378a5160b33d)), closes [#7](https://github.com/johnsonandjohnson/bodiless-js/issues/7)
+
+
+### BREAKING CHANGES
+
+* **psh:** Describe the nature of the breaking change here.
+
+More Details about the breaking change.
+-->
+
+
+
+
+
 ## [0.0.37](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.36...v0.0.37) (2020-01-17)
 
 
