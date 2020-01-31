@@ -80,7 +80,7 @@ class MigrationTool extends Command {
         serve: false,
       },
       trailingSlash: settings.trailingSlash || TrailingSlash.Add,
-      transformers: settings.transformers,
+      transformers: settings.transformers || [],
       htmltojsx: true,
     };
     const flattener = new SiteFlattener(flattenerParams);

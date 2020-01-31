@@ -9,12 +9,16 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0"
   },
+  "bundledDependencies": [
+    "@bodiless/headless-chrome-crawler"
+  ],
   "dependencies": {
     "@babel/generator": "^7.5.5",
     "@babel/parser": "^7.5.5",
     "@babel/plugin-syntax-jsx": "^7.2.0",
     "@babel/traverse": "^7.5.5",
     "@babel/types": "^7.6.1",
+    "@bodiless/headless-chrome-crawler": "^1.8.1",
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
@@ -25,7 +29,6 @@
     "dotenv": "^8.2.0",
     "ee-ts": "^1.0.1",
     "glob": "^7.1.6",
-    "headless-chrome-crawler": "^1.8.0",
     "html-to-react-components": "^1.6.6",
     "htmlclean": "^3.0.8",
     "lodash": "^4.17.11",
