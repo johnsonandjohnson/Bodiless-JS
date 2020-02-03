@@ -66,7 +66,7 @@ const SlateComponentProvider = (update:Function) => (
           node,
           editor,
           componentData: {
-            ...node.data,
+            ...node.data.toJS(),
             [path.join('$')]: { ...componentData },
           },
         }),
