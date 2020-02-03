@@ -57,7 +57,7 @@ const SlateComponentProvider = (update:Function) => (
     (props:P & RenderNodeProps) => {
       const { editor, node } = props;
       const getters = {
-        getNode: path => node.data.toJS()[path.join('$')],
+        getNode: (path: string[]) => node.data.toJS()[path.join('$')],
         getKeys: () => ['slatenode'],
       };
       const actions = {
