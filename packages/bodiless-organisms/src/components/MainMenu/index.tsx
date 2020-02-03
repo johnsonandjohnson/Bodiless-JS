@@ -12,22 +12,26 @@
  * limitations under the License.
  */
 import MenuLink from './MenuLink';
+import asEditableMainMenu from './asEditableMainMenu';
 import asEditableMenu from './asEditableMenu';
-import asEditableSubMenu from './asEditableSubMenu';
+import asEditableMainSubMenu from './asEditableMainSubMenu';
 import asHorizontalMenu from './asHorizontalMenu';
 import asHorizontalSubMenu from './asHorizontalSubMenu';
+import asMainMenu from './asMainMenu';
 import asMenu from './asMenu';
-import asSubMenu from './asSubMenu';
+import asMainSubMenu from './asMainSubMenu';
 import withSubmenu from './withSubmenu';
 import './menu.css';
 
 export {
+  asEditableMainMenu,
+  asEditableMainSubMenu,
   asEditableMenu,
-  asEditableSubMenu,
   asHorizontalMenu,
   asHorizontalSubMenu,
+  asMainMenu,
+  asMainSubMenu,
   asMenu,
-  asSubMenu,
   MenuLink,
   withSubmenu,
 };

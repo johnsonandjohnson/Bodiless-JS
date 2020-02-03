@@ -20,7 +20,6 @@ import simplegit from 'simple-git/promise';
 import {
   deleteFolderRecursive,
   removeAllFilesFromDir,
-  inMonorepo,
 } from './helpers';
 import debug from './debug';
 
@@ -79,11 +78,7 @@ export class CanvasX implements JamStackApp {
   }
 
   public getCanvasXSiteDir() {
-    let canvasXSiteDir = this.params.workDir;
-    if (inMonorepo()) {
-      canvasXSiteDir = path.resolve(this.params.workDir, 'examples/test-site');
-    }
-    return canvasXSiteDir;
+    return this.params.workDir;
   }
 
   public getPagesDir() {

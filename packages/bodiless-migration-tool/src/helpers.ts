@@ -172,9 +172,3 @@ export function cfDecodeEmail(encodedString: string) {
   }
   return email;
 }
-
-// Checks if migration is triggered from monorepo.
-
-export function inMonorepo() {
-  return __dirname.includes(path.join('packages', 'bodiless-migration-tool')) === true;
-}

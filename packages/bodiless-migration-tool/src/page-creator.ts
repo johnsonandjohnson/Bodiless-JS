@@ -23,6 +23,7 @@ import {
   ensureDirectoryExistence,
   isUrlExternal,
   mapUrlToFilePath,
+  trimQueryParamsFromUrl,
 } from './helpers';
 import Downloader from './downloader';
 import {
@@ -86,6 +87,7 @@ export class PageCreator {
       return '';
     }
     filePath = this.removeExtension(filePath);
+    filePath = trimQueryParamsFromUrl(filePath);
     return filePath === '/' ? fileName : (`${filePath}/${fileName}`);
   }
 

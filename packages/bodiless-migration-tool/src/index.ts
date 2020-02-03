@@ -16,7 +16,6 @@
 import { Command, flags } from '@oclif/command';
 import fs from 'fs';
 import path from 'path';
-import { inMonorepo } from './helpers';
 import {
   SiteFlattener,
   SiteFlattenerParams,
@@ -81,7 +80,7 @@ class MigrationTool extends Command {
         serve: false,
       },
       trailingSlash: settings.trailingSlash || TrailingSlash.Add,
-      transformers: settings.transformers,
+      transformers: settings.transformers || [],
       htmltojsx: true,
     };
     const flattener = new SiteFlattener(flattenerParams);
@@ -93,11 +92,7 @@ class MigrationTool extends Command {
   }
 
   private getWorkDir(): string {
-    let workDir = process.cwd();
-    if (inMonorepo()) {
-      workDir = path.join(__dirname, '../../..');
-    }
-    return workDir;
+    return process.cwd();
   }
 
   private getGitRepo(): string {

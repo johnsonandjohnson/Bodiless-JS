@@ -22,6 +22,8 @@ if [ "$1" = "install" ]; then
   npm run bootstrap
 elif [ "$1" = "build" ]; then
   npm run build:packages -- --concurrency 1
+  npx lerna run build:env-vars --scope @bodiless/test-site
+  npx lerna run build:doc --scope @bodiless/test-site
 elif [ "$1" = "finish-deploy" ]; then
   SITE_DIR=${ROOT_DIR}/examples/test-site
   cp ${PLATFORM_APP_DIR}/${DEFAULT_ENV} ${SITE_DIR}/.env.development

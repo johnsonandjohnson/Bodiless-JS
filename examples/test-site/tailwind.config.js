@@ -57,7 +57,6 @@ module.exports = {
     |
     */
 
-    // screens: {},
 
     /*
     |---------------------------------------------------------------------------
@@ -172,7 +171,10 @@ module.exports = {
     |
     */
 
-    // backgroundColor: theme => theme('colors'),
+    backgroundColor: theme => ({
+      ...theme('colors'),
+      'burger-menu': '#D7D7D7',
+    }),
 
     /*
     |---------------------------------------------------------------------------

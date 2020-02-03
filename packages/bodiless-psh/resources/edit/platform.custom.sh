@@ -22,8 +22,8 @@ if [ "$1" = "install" ]; then
   npm ci
 elif [ "$1" = "build" ]; then
   npm run build
-elif [ "$1" = "finish-deploy" ]; then
-  cp ${PLATFORM_APP_DIR}/${DEFAULT_ENV} ${ROOT_DIR}/.env.development
+  npx lerna run build:env-vars --scope @bodiless/test-site
+  npx lerna run build:doc --scope @bodiless/test-site
 else
   echo "Unknown command specified to $0"
 fi
