@@ -4,8 +4,11 @@ Example site for testing bodiless.
 
 ## Installation
 
-Create a .env.development config file, see .env.development-example for example of contents to include in this file.
-By default GTM is enabled on Bodiless example site, and defaults to generic GTM-XXXXXX id.  Until the proper id is set in env files, it won't function correctly.
+As part of the installation process, you may want to configure specific environment variables for the site. You may do so by adding or updating `.env.site` file in the root folder of the site. This file allows us to overwrite env variables defined in `@bodiless` packages and/or add new env variables. Make sure you regenerated env variables after you've changed them by running any of the following:
+
+* `npm run build:env-vars` - To regenerate env variables only.
+* `npm run build` - It will regenerate env vars as part of the `build` script.
+* `npm run start` - It will regenerate env vars as part of the `start` script.
 
 ## Usage
 

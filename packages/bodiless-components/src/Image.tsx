@@ -156,7 +156,7 @@ export const editButtonOptions: EditButtonOptions<Props, Data> = {
       </>
     );
   },
-  global: true,
+  global: false,
   local: true,
 };
 

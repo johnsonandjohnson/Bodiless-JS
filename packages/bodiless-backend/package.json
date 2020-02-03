@@ -1,8 +1,12 @@
 {
   "name": "@bodiless/backend",
-  "version": "0.0.37",
+  "version": "0.0.38",
   "description": "",
   "main": "",
+  "files": [
+    "/bodiless.docs.json",
+    "/src"
+  ],
   "dependencies": {
     "body-parser": "^1.18.3",
     "dotenv": "^8.2.0",

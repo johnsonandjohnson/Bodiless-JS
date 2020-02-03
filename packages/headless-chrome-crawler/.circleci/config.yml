@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: yujiosaka/headless-chrome-crawler-linux
+      - image: redis
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: yarn greenkeeper-lockfile-update
+      - run: yarn test-all
+      - run: yarn greenkeeper-lockfile-upload

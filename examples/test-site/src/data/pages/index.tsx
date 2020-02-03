@@ -35,8 +35,8 @@ const EditableBulletPoints = flow(
   asEditableList,
   withDesign({
     Title: replaceWith(BulletPoints),
-    Wrapper: flow(stylable, addClasses('m-6 py-3 flex flex-wrap list-disc w-full')),
-    Item: flow(stylable, addClasses('w-full md:w-1/3')),
+    Wrapper: flow(stylable, addClasses('m-6 py-3 flex flex-wrap md:flex-nowrap list-disc w-full')),
+    Item: flow(stylable, addClasses('w-full md:w-auto md:flex-1')),
   }),
 )(List);
 
