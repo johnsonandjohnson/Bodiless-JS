@@ -131,7 +131,7 @@ const formGitCommit = (client: Client) => contextMenuForm({
 // );
 
 const formGitReset = (client: Client) => contextMenuForm({
-  submitValues: () => handle(client.reset()),
+  submitValues: () => handle(client.reset()) && location.reload(),
 })(
   ({ ui }: any) => {
     const { ComponentFormTitle, ComponentFormLabel } = getUI(ui);
