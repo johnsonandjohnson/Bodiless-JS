@@ -12,6 +12,7 @@
     "build:packages": "cross-env NODE_ENV=production lerna run build --stream --no-private",
     "build:watch": "cross-env NODE_ENV=development lerna run build:watch --parallel",
     "build:env-vars": "cross-env NODE_ENV=production lerna run build:env-vars --stream",
+    "build:doc": "cross-env NODE_ENV=production lerna run build:doc --stream",
     "clean": "lerna run clean && rimraf .eslintcache examples/*/.env.development examples/*/.env.production",
     "copyright": "node ./scripts/add-copyright",
     "fix": "eslint --fix  --cache --ext .js,.jsx,.ts,.tsx packages examples",
