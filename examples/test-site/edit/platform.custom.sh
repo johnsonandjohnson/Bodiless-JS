@@ -21,7 +21,8 @@ set -e
 if [ "$1" = "install" ]; then
   npm run bootstrap
 elif [ "$1" = "build" ]; then
-  npm run build
+  npm run build:packages -- --concurrency 1
+  npm run build:env-vars
   npm run build:doc
 elif [ "$1" = "finish-deploy" ]; then
   SITE_DIR=${ROOT_DIR}/examples/test-site
