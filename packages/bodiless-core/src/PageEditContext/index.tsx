@@ -61,7 +61,7 @@ export class PageEditStore implements PageEditStoreInterface {
 
   @observable contextMenuOptions: TMenuOption[] = [];
 
-  @observable isEdit = !!JSON.parse(window.sessionStorage.getItem("isEdit") || 'true')
+  @observable isEdit = !!JSON.parse(typeof window !== 'undefined' ? window.sessionStorage.getItem("isEdit") || 'true' : 'true')
 
   @action
   setActiveContext(context?: PageEditContext) {
@@ -180,7 +180,9 @@ class PageEditContext implements PageEditContextInterface {
       this.store.isEdit = Boolean(on);
     }
 
-    window.sessionStorage.setItem('isEdit', JSON.stringify(this.store.isEdit));
+    if (typeof window !== 'undefined') {
+      window.sessionStorage.setItem('isEdit', JSON.stringify(this.store.isEdit));
+    }
   }
 
   get contextMenuOptions() {
