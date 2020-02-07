@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 import { flow } from 'lodash';
-import { FlowContainerGrid } from '@bodiless/layouts-ui';
+import { FlowContainer } from '@bodiless/layouts-ui';
 import withToutVariations from './withToutVariations';
 
 import withRichTextVariations from './withRichTextVariations';
@@ -24,7 +24,7 @@ const FlexBoxDefault = flow(
   withToutVariations,
   withRichTextVariations,
   withSingleAccordionVariations,
-)(FlowContainerGrid);
+)(FlowContainer);
 
 // eslint-disable-next-line import/prefer-default-export
 export { FlexBoxDefault };

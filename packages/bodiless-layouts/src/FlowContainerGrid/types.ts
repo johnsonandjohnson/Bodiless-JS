@@ -36,7 +36,7 @@ export type WidthClassTuple = {
   media: string;
   class: string;
 };
-export type FlowContainerGridProps = EditFlowContainerProps & WithNodeProps;
+export type FlowContainerProps = EditFlowContainerProps & WithNodeProps;
 export type FlowContainerComponentProps = {
   components: DesignableComponents;
   ui?: ComponentSelectorUI;

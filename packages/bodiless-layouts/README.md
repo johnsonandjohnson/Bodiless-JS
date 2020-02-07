@@ -46,20 +46,20 @@ To change a component's type you must remove that component and replace it with 
 
 ## Technical Details
 
-### Adding components to the FlowContainerGrid
+### Adding components to the FlowContainer
 
-The FlowContainerGrid uses the Design API to collect the components to make available for placement. This can be passed in using the `design` prop, or by using the higher order component: `withDesign`.
+The FlowContainer uses the Design API to collect the components to make available for placement. This can be passed in using the `design` prop, or by using the higher order component: `withDesign`.
 
 ``` js
 design = {
     Tout: flow(startWith(Tout), asDefaultTout),
     ToutVertical: flow(startWith(Tout), asVerticalTout, asDefaultTout),
   }
-const SiteFlowContainer = withDesign(design)(FlowContainerGrid);
+const SiteFlowContainer = withDesign(design)(FlowContainer);
 
 or
 
-<FlowContainerGrid design={design} />
+<FlowContainer design={design} />
 ```
 
 > *(Note: the last example should only be used if there is no more reuse.*

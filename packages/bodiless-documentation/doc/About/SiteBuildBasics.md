@@ -411,13 +411,13 @@ To create the actual components add the following imports:
 ```
 import { flow } from 'lodash';
 import { withTerm, withTitle } from '@bodiless/layouts';
-import { FlowContainerGrid } from '@bodiless/layouts-ui';
+import { FlowContainer } from '@bodiless/layouts-ui';
 ```
 
 Add the following to `Gallery.tsx` just
 after withColoredBorder styling code in previous step:
 
-The FlowContainerGrid takes a design prop that is part of the [Design API](Development/Architecture/FClasses?id=the-design-api).  This is how we pass in the components that can be used in the grid.
+The FlowContainer takes a design prop that is part of the [Design API](Development/Architecture/FClasses?id=the-design-api).  This is how we pass in the components that can be used in the grid.
 we will also use the hoc  `withTitle` to provide a Title for each component in the selector.
 
 ``` js
@@ -460,7 +460,7 @@ Finally, replace the main content of `Gallery` with the flowContainer grid.
 
   ``` js
   const Body: FC = () => (
-    <FlowContainerGrid nodeKey="body" design={design} />
+    <FlowContainer nodeKey="body" design={design} />
   );
   ```
 

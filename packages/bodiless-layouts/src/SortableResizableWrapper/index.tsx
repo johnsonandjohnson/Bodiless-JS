@@ -15,7 +15,7 @@
 import { SortableElement, SortableHandle } from 'react-sortable-hoc';
 import React, { ComponentType, HTMLProps } from 'react';
 import CleanReresizable, { ResizeCallback, ResizableProps } from 're-resizable';
-import { SnapData } from '../FlowContainerGrid/utils/appendTailwindWidthClass';
+import { SnapData } from '../FlowContainer/utils/appendTailwindWidthClass';
 
 const ENABLED_DRAG_SIDES = {
   top: false,

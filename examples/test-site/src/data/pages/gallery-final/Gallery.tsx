@@ -24,7 +24,7 @@ import {
 import { withNode } from '@bodiless/core';
 import { flow } from 'lodash';
 import { withTitle, withFacet } from '@bodiless/layouts';
-import { FlowContainerGrid } from '@bodiless/layouts-ui';
+import { FlowContainer } from '@bodiless/layouts-ui';
 
 import CaptionedImage from './CaptionedImage';
 
@@ -52,7 +52,7 @@ const galleryDesign = varyDesign(
 const Wrapper = addClasses('my-2')(Section);
 const Header = addClasses('text-2xl')(H2);
 const Body: FC = () => (
-  <FlowContainerGrid nodeKey="body" design={galleryDesign} />
+  <FlowContainer nodeKey="body" design={galleryDesign} />
 );
 
 const Gallery: FC<HTMLProps<HTMLDivElement>> = ({ children, ...rest }) => (

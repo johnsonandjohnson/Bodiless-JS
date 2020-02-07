@@ -24,13 +24,13 @@ import StaticFlowContainer from './StaticFlowContainer';
 import { EditFlowContainerProps } from './types';
 
 
-const FlowContainerGridBasic: FC<EditFlowContainerProps> = props => {
+const FlowContainerBasic: FC<EditFlowContainerProps> = props => {
   const { isEdit } = useEditContext();
   return isEdit
     ? <EditFlowContainer {...props} />
     : <StaticFlowContainer {...props} />;
 };
-const FlowContainerGridDesignable = designable({})(observer(FlowContainerGridBasic));
+const FlowContainerDesignable = designable({})(observer(FlowContainerBasic));
 
-const FlowContainerGrid = withNode(FlowContainerGridDesignable);
-export default FlowContainerGrid;
+const FlowContainer = withNode(FlowContainerDesignable);
+export default FlowContainer;

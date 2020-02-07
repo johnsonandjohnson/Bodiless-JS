@@ -13,7 +13,7 @@
  */
 import React from 'react';
 import { flow } from 'lodash';
-import { FlowContainerGrid } from '@bodiless/layouts-ui';
+import { FlowContainer } from '@bodiless/layouts-ui';
 import withProductVariations from './withProductVariations';
 
 const withProductStrictSnapSize = Component => props => (
@@ -26,7 +26,7 @@ const withProductStrictSnapSize = Component => props => (
 const ProductListingFlexBox = flow(
   withProductStrictSnapSize,
   withProductVariations,
-)(FlowContainerGrid);
+)(FlowContainer);
 
 // eslint-disable-next-line import/prefer-default-export
 export { ProductListingFlexBox };
