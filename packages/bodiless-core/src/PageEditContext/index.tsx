@@ -61,7 +61,7 @@ export class PageEditStore implements PageEditStoreInterface {
 
   @observable contextMenuOptions: TMenuOption[] = [];
 
-  @observable isEdit = !!JSON.parse(typeof window !== 'undefined' ? window.sessionStorage.getItem("isEdit") || 'true' : 'true')
+  @observable isEdit = !!JSON.parse(typeof window !== 'undefined' ? window.sessionStorage.getItem('isEdit') || 'true' : 'true');
 
   @action
   setActiveContext(context?: PageEditContext) {
