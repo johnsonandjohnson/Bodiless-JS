@@ -24,10 +24,10 @@ import SortableChild from './SortableChild';
 import SortableContainer from './SortableContainer';
 import {
   useItemHandlers,
-  useFlexboxDataHandlers,
+  useFlowContainerDataHandlers,
   useGetMenuOptions,
 } from './helpers';
-import { EditFlexboxProps, FlexboxItem } from './types';
+import { EditFlowContainerProps, FlowContainerItem } from './types';
 
 const ChildNodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
 
@@ -38,54 +38,56 @@ function isAllowedComponent(
   return Boolean(components[type]);
 }
 
-const FlexboxActivator: React.FC = ({ children }) => (
+const FlowContainerActivator: React.FC = ({ children }) => (
   <div {...useContextActivator('onClick')}>
     {children}
   </div>
 );
 
-const EditFlexbox: FC<EditFlexboxProps> = (props:EditFlexboxProps) => {
+const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerProps) => {
   const uuid = useRef(v1());
   const { components, ui, snapData } = props;
   const items = useItemHandlers().getItems();
   const getMenuOptions = useGetMenuOptions(props);
   const {
-    onFlexboxItemResize,
-    setFlexboxItems,
-    deleteFlexboxItem,
-  } = useFlexboxDataHandlers();
+    onFlowContainerItemResize,
+    setFlowContainerItems,
+    deleteFlowContainerItem,
+  } = useFlowContainerDataHandlers();
 
   return (
     <ContextProvider
       name={`flex-${uuid.current}`}
       getMenuOptions={getMenuOptions}
     >
-      <FlexboxActivator>
+      <FlowContainerActivator>
         <SortableContainer
           onSortEnd={(sort: SortEnd) => {
             const { oldIndex, newIndex } = sort;
-            setFlexboxItems(arrayMove(items, oldIndex, newIndex));
+            setFlowContainerItems(arrayMove(items, oldIndex, newIndex));
           }}
         >
           {items.map(
-            (flexboxItem: FlexboxItem, index: number): React.ReactNode => {
-              if (!isAllowedComponent(components, flexboxItem.type)) {
+            (flowContainerItem: FlowContainerItem, index: number): React.ReactNode => {
+              if (!isAllowedComponent(components, flowContainerItem.type)) {
                 return null;
               }
-              const ChildComponent = components[flexboxItem.type];
+              const ChildComponent = components[flowContainerItem.type];
               return (
                 <SortableChild
                   ui={ui}
-                  key={`node-${flexboxItem.uuid}`}
+                  key={`node-${flowContainerItem.uuid}`}
                   index={index}
-                  flexboxItem={flexboxItem}
+                  flowContainerItem={flowContainerItem}
                   snapData={snapData}
-                  onDelete={() => deleteFlexboxItem(flexboxItem.uuid)}
+                  onDelete={() => deleteFlowContainerItem(flowContainerItem.uuid)}
                   onResizeStop={
-                    flexboxItemProps => onFlexboxItemResize(flexboxItem.uuid, flexboxItemProps)
+                    flowContainerItemProps => (
+                      onFlowContainerItemResize(flowContainerItem.uuid, flowContainerItemProps)
+                    )
                   }
                 >
-                  <ChildNodeProvider nodeKey={flexboxItem.uuid}>
+                  <ChildNodeProvider nodeKey={flowContainerItem.uuid}>
                     <ChildComponent />
                   </ChildNodeProvider>
                 </SortableChild>
@@ -93,16 +95,16 @@ const EditFlexbox: FC<EditFlexboxProps> = (props:EditFlexboxProps) => {
             },
           )}
         </SortableContainer>
-      </FlexboxActivator>
+      </FlowContainerActivator>
     </ContextProvider>
   );
 };
 
-EditFlexbox.displayName = 'EditFlexbox';
+EditFlowContainer.displayName = 'EditFlowContainer';
 
-EditFlexbox.defaultProps = {
+EditFlowContainer.defaultProps = {
   components: {},
 };
 
-// Wrap the EditFlexbox in a wthActivateContext so we can activate new items
-export default withActivateOnEffect(observer(EditFlexbox));
+// Wrap the EditFlowContainer in a wthActivateContext so we can activate new items
+export default withActivateOnEffect(observer(EditFlowContainer));

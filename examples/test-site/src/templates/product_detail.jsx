@@ -34,7 +34,7 @@ import {
   ProductDetailImageWrapper,
   ProductDetailAccWrapper,
 } from '../components/Product';
-import { FlexBoxDefault } from '../components/Flexbox';
+import { FlexBoxDefault } from '../components/FlowContainer';
 import { asEditorBasic } from '../components/Editors';
 import asSingleAccordionDefaultStyle from '../components/SingleAccordion/token';
 

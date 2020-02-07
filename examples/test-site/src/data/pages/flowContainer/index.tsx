@@ -22,30 +22,30 @@ import { Page } from '@bodiless/gatsby-theme-bodiless';
 
 import Layout from '../../../components/Layout';
 import tailWindConfig from '../../../../tailwind.config';
-import { FlexBoxDefault } from '../../../components/Flexbox';
+import { FlexBoxDefault } from '../../../components/FlowContainer';
 
-const FLEXBOX_PAGE_PATH = 'flexbox';
+const FLEXBOX_PAGE_PATH = 'flowContainer';
 
 const options = getSnapFrom(
   withTailwindClasses(tailWindConfig)('w-full sm:w-1/2 sm:w-full lg:w-1/2 lg:w-full'),
 );
-const FlexboxPage = (props: any) => (
+const FlowContainerPage = (props: any) => (
   <Page {...props}>
     <Layout>
-      <h1 className="text-3xl font-bold">Flexbox</h1>
+      <h1 className="text-3xl font-bold">FlowContainer</h1>
       <FlexBoxDefault
         nodeKey={FLEXBOX_PAGE_PATH}
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey={FLEXBOX_PAGE_PATH} />
-      <h1 className="text-3xl font-bold mt-4">Flexbox grid with constrained widths</h1>
+      <h1 className="text-3xl font-bold mt-4">FlowContainer grid with constrained widths</h1>
       <FlexBoxDefault
         nodeKey="constrained_widths"
         snapData={options}
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey="constrained_widths" />
-      <h1 className="text-3xl font-bold mt-4">Flexbox restricted to 1 item</h1>
+      <h1 className="text-3xl font-bold mt-4">FlowContainer restricted to 1 item</h1>
       <FlexBoxDefault
         nodeKey="restricted"
         maxComponents={1}
@@ -62,4 +62,4 @@ export const query = graphql`
     ...SiteQuery
   }
 `;
-export default FlexboxPage;
+export default FlowContainerPage;

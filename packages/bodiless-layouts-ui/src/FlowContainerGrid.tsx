@@ -13,7 +13,7 @@
  */
 
 import React, { FC } from 'react';
-import { FlexboxGrid as FlexboxGridClean, FlexboxGridProps } from '@bodiless/layouts';
+import { FlowContainerGrid as FlowContainerGridClean, FlowContainerGridProps } from '@bodiless/layouts';
 import { ui as componentSelectorUI } from './ComponentSelector';
 import Wrapper from './SortableResizableWrapper';
 
@@ -23,11 +23,11 @@ const ui = {
 };
 
 /**
- * A FlexboxGrid is a component which allows a content editor to select and place
+ * A FlowContainerGrid is a component which allows a content editor to select and place
  * components.
  */
-const FlexboxGrid: FC<FlexboxGridProps> = props => (
-  <FlexboxGridClean ui={ui} {...props} />
+const FlowContainerGrid: FC<FlowContainerGridProps> = props => (
+  <FlowContainerGridClean ui={ui} {...props} />
 );
 
-export default FlexboxGrid;
+export default FlowContainerGrid;

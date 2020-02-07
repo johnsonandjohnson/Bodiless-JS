@@ -20,7 +20,7 @@ import SlateSortableResizable, { UI as SortableResizableUI } from '../SlateSorta
 import {
   defaultSnapData, SnapData,
 } from './utils/appendTailwindWidthClass';
-import { FlexboxItem, FlexboxItemProps } from './types';
+import { FlowContainerItem, FlowContainerItemProps } from './types';
 
 const RESIZE_THROTTLE_INTERVAL: number = 100;
 const createThrottledOnResizeStop = (onResizeStop: ResizeCallback) => (
@@ -29,8 +29,8 @@ const createThrottledOnResizeStop = (onResizeStop: ResizeCallback) => (
 const FALLBACK_SNAP_CLASSNAME = 'w-full';
 
 type SortableChildProps = {
-  flexboxItem: FlexboxItem;
-  onResizeStop(props: FlexboxItemProps): void;
+  flowContainerItem: FlowContainerItem;
+  onResizeStop(props: FlowContainerItemProps): void;
   onDelete(): void;
   index: number;
   children: React.ReactNode;
@@ -41,7 +41,7 @@ type SortableChildProps = {
 
 const SortableChild = (props: SortableChildProps) => {
   const {
-    onResizeStop, flexboxItem, onDelete, snapData: snapRaw, ...restProps
+    onResizeStop, flowContainerItem, onDelete, snapData: snapRaw, ...restProps
   } = props;
   const snap = snapRaw || defaultSnapData;
   const {
@@ -54,7 +54,7 @@ const SortableChild = (props: SortableChildProps) => {
   // local classname is used to store intermidiary classname state,
   // so className is stored only onResizeStop
   const [snapClassName, setSnapClassName] = useState(
-    (flexboxItem.wrapperProps && flexboxItem.wrapperProps.className)
+    (flowContainerItem.wrapperProps && flowContainerItem.wrapperProps.className)
       || passedSnapClassName
       || FALLBACK_SNAP_CLASSNAME,
   );
@@ -87,7 +87,7 @@ const SortableChild = (props: SortableChildProps) => {
   const context = useEditContext();
   const onDeleteWrapper = () => {
     onDelete();
-    // Activate the current context after the delete (this context is the flexbox)
+    // Activate the current context after the delete (this context is the flowContainer)
     context.activate();
   };
   useEffect(() => (
@@ -99,7 +99,7 @@ const SortableChild = (props: SortableChildProps) => {
     })
   ), []);
   useLayoutEffect(() => {
-    const elm: HTMLElement | null = document.querySelector(`[uuid='${flexboxItem.uuid}']`);
+    const elm: HTMLElement | null = document.querySelector(`[uuid='${flowContainerItem.uuid}']`);
     // we have to remove the style width when we have arrived at our correct size
     // This has to be done because the re-resizeable component set the width from the
     // size prop and you can not set the size prop width to a non value (only auto or a size)
@@ -115,7 +115,7 @@ const SortableChild = (props: SortableChildProps) => {
   });
   return (
     <SlateSortableResizable
-      uuid={flexboxItem.uuid}
+      uuid={flowContainerItem.uuid}
       onResize={onResize}
       onResizeStop={createThrottledOnResizeStop(() => {
         onResizeStop({

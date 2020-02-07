@@ -20,7 +20,7 @@ import {
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 
 import Layout from '../../../components/Layout';
-import { FlexBoxDefault } from '../../../components/Flexbox';
+import { FlexBoxDefault } from '../../../components/FlowContainer';
 import { EditorBasic, EditorFullFeatured, EditorSimple } from '../../../components/Editors';
 
 

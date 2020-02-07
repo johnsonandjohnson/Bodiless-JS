@@ -14,8 +14,8 @@
 
 export { default as ComponentSelector } from './ComponentSelector';
 export * from './ComponentSelector/types';
-export { FlexboxGridProps } from './FlexboxGrid/types';
-export { default as FlexboxGrid } from './FlexboxGrid';
+export { FlowContainerGridProps } from './FlowContainerGrid/types';
+export { default as FlowContainerGrid } from './FlowContainerGrid';
 export {
   default as SortableResizableWrapper,
   Props as SortableResizableProps,
@@ -26,5 +26,5 @@ export {
   withTuple,
   getSnapFrom,
   withTailwindClasses,
-} from './FlexboxGrid/utils/appendTailwindWidthClass';
+} from './FlowContainerGrid/utils/appendTailwindWidthClass';
 export * from './meta';

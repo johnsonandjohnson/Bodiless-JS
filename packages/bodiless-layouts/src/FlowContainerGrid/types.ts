@@ -20,13 +20,13 @@ import { SnapData } from './utils/appendTailwindWidthClass';
 
 export type UI = ComponentSelectorUI & SortableResizableUI;
 
-export type FlexboxData = {
-  items: FlexboxItem[];
+export type FlowContainerData = {
+  items: FlowContainerItem[];
 };
-export type StaticFlexboxProps = {
+export type StaticFlowContainerProps = {
   components: DesignableComponents;
 };
-export type EditFlexboxProps = StaticFlexboxProps & {
+export type EditFlowContainerProps = StaticFlowContainerProps & {
   ui?: UI,
   snapData?: SnapData,
   maxComponents?: number,
@@ -36,20 +36,20 @@ export type WidthClassTuple = {
   media: string;
   class: string;
 };
-export type FlexboxGridProps = EditFlexboxProps & WithNodeProps;
-export type FlexboxComponentProps = {
+export type FlowContainerGridProps = EditFlowContainerProps & WithNodeProps;
+export type FlowContainerComponentProps = {
   components: DesignableComponents;
   ui?: ComponentSelectorUI;
 };
-export interface FlexboxItemProps {
+export interface FlowContainerItemProps {
   defaultSize?: {
     width?: string | number;
     height?: string | number;
   };
   className?: string;
 }
-export interface FlexboxItem {
+export interface FlowContainerItem {
   type: string;
   uuid: string;
-  wrapperProps: FlexboxItemProps;
+  wrapperProps: FlowContainerItemProps;
 }

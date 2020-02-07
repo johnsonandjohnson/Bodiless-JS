@@ -22,41 +22,41 @@ import {
 import ComponentSelector from '../ComponentSelector';
 import { ComponentSelectorUI } from '../ComponentSelector/types';
 import {
-  EditFlexboxProps, FlexboxItem, FlexboxItemProps, FlexboxData,
+  EditFlowContainerProps, FlowContainerItem, FlowContainerItemProps, FlowContainerData,
 } from './types';
 
-type InsertContentNode = (componentName: string, uuid?: string) => FlexboxItem;
-type SetFlexboxItems = (items: FlexboxItem[]) => void;
-type UpdateFlexboxItem = (flexboxItem: FlexboxItem) => void;
-type OnFlexboxItemResize = (
+type InsertContentNode = (componentName: string, uuid?: string) => FlowContainerItem;
+type SetFlowContainerItems = (items: FlowContainerItem[]) => void;
+type UpdateFlowContainerItem = (flowContainerItem: FlowContainerItem) => void;
+type OnFlowContainerItemResize = (
   uuid: string,
-  props: FlexboxItemProps,
+  props: FlowContainerItemProps,
 ) => void;
-type DeleteFlexboxItem = (uuid: string) => void;
-export interface FlexboxDataHandlers {
-  insertFlexboxItem: InsertContentNode;
-  setFlexboxItems: SetFlexboxItems;
-  updateFlexboxItem: UpdateFlexboxItem;
-  onFlexboxItemResize: OnFlexboxItemResize;
-  deleteFlexboxItem: DeleteFlexboxItem;
+type DeleteFlowContainerItem = (uuid: string) => void;
+export interface FlowContainerDataHandlers {
+  insertFlowContainerItem: InsertContentNode;
+  setFlowContainerItems: SetFlowContainerItems;
+  updateFlowContainerItem: UpdateFlowContainerItem;
+  onFlowContainerItemResize: OnFlowContainerItemResize;
+  deleteFlowContainerItem: DeleteFlowContainerItem;
 }
 
 export function useItemHandlers() {
-  const { node } = useNode<FlexboxData>();
+  const { node } = useNode<FlowContainerData>();
   const getItems = () => {
     const { items } = node.data;
     return items || [];
   };
-  const setItems = (items: FlexboxItem[]) => {
+  const setItems = (items: FlowContainerItem[]) => {
     node.setData({ items });
   };
   return { getItems, setItems };
 }
 
-function useFlexboxDataHandlers(): FlexboxDataHandlers {
+function useFlowContainerDataHandlers(): FlowContainerDataHandlers {
   const { getItems, setItems } = useItemHandlers();
   return {
-    insertFlexboxItem: (componentName: string, uuid: string|undefined) => {
+    insertFlowContainerItem: (componentName: string, uuid: string|undefined) => {
       const items = getItems();
       const newItem = {
         uuid: uuid || v1(),
@@ -66,40 +66,40 @@ function useFlexboxDataHandlers(): FlexboxDataHandlers {
       setItems(items.concat(newItem));
       return newItem;
     },
-    setFlexboxItems: setItems,
-    updateFlexboxItem: (flexboxItem: FlexboxItem) => {
+    setFlowContainerItems: setItems,
+    updateFlowContainerItem: (flowContainerItem: FlowContainerItem) => {
       const items = getItems();
       const itemIndex = items.findIndex(
-        (item: FlexboxItem) => flexboxItem.uuid === item.uuid,
+        (item: FlowContainerItem) => flowContainerItem.uuid === item.uuid,
       );
       if (itemIndex !== -1) {
         const newItems = [...items];
-        newItems.splice(itemIndex, 1, flexboxItem);
+        newItems.splice(itemIndex, 1, flowContainerItem);
         setItems(newItems);
       }
     },
-    onFlexboxItemResize: (contentUuid, itemProps) => {
+    onFlowContainerItemResize: (contentUuid, itemProps) => {
       const items = getItems();
       const itemIndex = items.findIndex(
-        (item: FlexboxItem) => contentUuid === item.uuid,
+        (item: FlowContainerItem) => contentUuid === item.uuid,
       );
       if (itemIndex !== -1) {
-        const currentFlexboxItem = items[itemIndex];
-        const updatedFlexboxItem: FlexboxItem = {
-          ...currentFlexboxItem,
+        const currentFlowContainerItem = items[itemIndex];
+        const updatedFlowContainerItem: FlowContainerItem = {
+          ...currentFlowContainerItem,
           wrapperProps: {
-            ...(currentFlexboxItem.wrapperProps || {}),
+            ...(currentFlowContainerItem.wrapperProps || {}),
             ...itemProps,
           },
         };
-        items.splice(itemIndex, 1, updatedFlexboxItem);
+        items.splice(itemIndex, 1, updatedFlowContainerItem);
         setItems(items);
       }
     },
-    deleteFlexboxItem: (uuid: string) => {
+    deleteFlowContainerItem: (uuid: string) => {
       const items = getItems();
       const itemIndex = items.findIndex(
-        (flexboxItem: FlexboxItem) => uuid === flexboxItem.uuid,
+        (flowContainerItem: FlowContainerItem) => uuid === flowContainerItem.uuid,
       );
       if (itemIndex !== -1) {
         const newItems = [...items];
@@ -110,11 +110,11 @@ function useFlexboxDataHandlers(): FlexboxDataHandlers {
   };
 }
 
-function useGetMenuOptions(props: EditFlexboxProps) {
+function useGetMenuOptions(props: EditFlowContainerProps) {
   const context = useEditContext();
   const { maxComponents } = props;
   const { getItems } = useItemHandlers();
-  const { insertFlexboxItem } = useFlexboxDataHandlers();
+  const { insertFlowContainerItem } = useFlowContainerDataHandlers();
   const { setId } = useActivateOnEffect();
   const addButton = {
     icon: 'add',
@@ -131,7 +131,7 @@ function useGetMenuOptions(props: EditFlexboxProps) {
           ui={{ ...ui as ComponentSelectorUI, ...props.ui as ComponentSelectorUI }}
           closeForm={closeForm}
           onSelect={(event, componentName) => {
-            const { uuid } = insertFlexboxItem(componentName);
+            const { uuid } = insertFlowContainerItem(componentName);
             // Set the new id so it will activate on creation.
             setId(uuid);
             closeForm();
@@ -153,4 +153,4 @@ function useGetMenuOptions(props: EditFlexboxProps) {
   };
 }
 
-export { useGetMenuOptions, useFlexboxDataHandlers };
+export { useGetMenuOptions, useFlowContainerDataHandlers };

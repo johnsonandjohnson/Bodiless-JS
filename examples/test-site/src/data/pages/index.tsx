@@ -23,7 +23,7 @@ import {
   withDesign, replaceWith, addClasses, stylable,
 } from '@bodiless/fclasses';
 import Layout from '../../components/Layout';
-import { FlexBoxDefault } from '../../components/Flexbox';
+import { FlexBoxDefault } from '../../components/FlowContainer';
 
 const HOME_PAGE_PATH = 'homepage';
 

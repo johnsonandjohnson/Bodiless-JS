@@ -16,7 +16,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../components/Layout';
-import { FlexBoxDefault } from '../components/Flexbox';
+import { FlexBoxDefault } from '../components/FlowContainer';
 
 export default props => (
   <Page {...props}>
