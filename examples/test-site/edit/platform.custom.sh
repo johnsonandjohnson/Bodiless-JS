@@ -19,7 +19,7 @@ set -e
 # PLATFORM_APP_DIR - the absolute path to the application directory. provided by platform.sh
 
 if [ "$1" = "install" ]; then
-  npm run bootstrap
+  npm run bootstrap -- --ci
 elif [ "$1" = "build" ]; then
   npm run build:packages -- --concurrency 1
   npm run build:env-vars
