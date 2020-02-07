@@ -50,6 +50,9 @@ At end of Sprint, a new 0.0.x package version should be published as follows.
    ```
     Commits in the PR should not be squashed since the tag is already attached to the appropriate commit hash. If we squash the original commit the release notes can be duplicated in the next release.
 
+> Ensure that you do not squash/merge the release branch, You must use the
+   "fast-forward" merge strategy.
+
 #### Notes:
 - We specify an explicit version number because we are in pre-1.0, so the
   normal semver bumps which would be created by conventional-commits are not
