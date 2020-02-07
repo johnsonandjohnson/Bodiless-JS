@@ -22,7 +22,6 @@ if [ "$1" = "install" ]; then
   npm ci
 elif [ "$1" = "build" ]; then
   npm run build
-  npm run build:doc
 else
   echo "Unknown command specified to $0"
 fi
