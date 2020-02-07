@@ -14,6 +14,7 @@
     "build:env-vars": "cross-env NODE_ENV=production lerna run build:env-vars --stream",
     "build:doc": "cross-env NODE_ENV=production lerna run build:doc --stream",
     "clean": "lerna run clean && rimraf .eslintcache examples/*/.env.development examples/*/.env.production",
+    "cy:run": "cypress run --browser chrome --record --key 0dcfb624-e152-453a-9375-aa710adb57ab",
     "copyright": "node ./scripts/add-copyright",
     "fix": "eslint --fix  --cache --ext .js,.jsx,.ts,.tsx packages examples",
     "fix:target": "eslint --fix  --cache --ext .js,.jsx,.ts,.tsx",
@@ -35,6 +36,7 @@
     "sites:launch-test": "npm run sites:clone-local test-site && npm run sites:update test-site && cd sites/test-site && npm install && npm run start",
     "start": "npm run build:watch",
     "test": "jest",
+    "test:ci": "start-server-and-test sites:launch-test http://localhost:8005 cy:run",
     "test:watch": "jest --watch"
   },
   "husky": {
@@ -45,10 +47,13 @@
   "dependencies": {
     "@types/html2canvas": "0.0.35",
     "complexity-report": "^2.0.0-alpha",
+    "cypress": "^3.8.3",
+    "cypress-failed-log": "^2.6.0",
     "debug": "^4.1.1",
     "html2canvas": "^1.0.0-rc.3",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
+    "start-server-and-test": "^1.10.8",
     "symlink-dir": "^3.0.3",
     "ts-complexity": "0.0.3"
   },
