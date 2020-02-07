@@ -27,3 +27,6 @@ coverage
 test-report.xml
 
 /starters
+
+/cypress/videos
+/cypress/screenshots
