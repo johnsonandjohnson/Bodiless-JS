@@ -12,6 +12,7 @@
     "build:packages": "cross-env NODE_ENV=production lerna run build --stream --no-private",
     "build:watch": "cross-env NODE_ENV=development lerna run build:watch --parallel",
     "build:env-vars": "cross-env NODE_ENV=production lerna run build:env-vars --stream",
+    "build:doc": "cross-env NODE_ENV=production lerna run build:doc --stream",
     "clean": "lerna run clean && rimraf .eslintcache examples/*/.env.development examples/*/.env.production",
     "cy:run": "cypress run --browser chrome --record --key 0dcfb624-e152-453a-9375-aa710adb57ab",
     "copyright": "node ./scripts/add-copyright",
