@@ -13,6 +13,7 @@
  */
 
 /* eslint class-methods-use-this: 0 */
+import fs from 'fs';
 import path from 'path';
 import minimatch from 'minimatch';
 import {
@@ -62,12 +63,19 @@ export interface Transformer {
   scope?: ComponentScope
 }
 
+export interface NoScrollToAnchor {
+  selectors: Array<string>,
+  path: string,
+  overwrite: boolean
+}
+
 export interface SiteFlattenerParams {
   websiteUrl: string,
   workDir: string,
   gitRepository?: string,
   trailingSlash?: TrailingSlash,
   scraperParams: ScraperParams,
+  noScrollToAnchor: NoScrollToAnchor,
   steps: {
     setup: boolean,
     scrape: boolean,
@@ -172,6 +180,8 @@ export class SiteFlattener {
   }
 
   private transformScrapedHtml(html: string, pageUrl: string): string {
+
+
     const htmlParser = new HtmlParser(html);
     htmlParser.transformRelativeToInternal(pageUrl);
     htmlParser.transformAbsoluteToRelative(pageUrl);
@@ -190,6 +200,24 @@ export class SiteFlattener {
             && this.shouldReplace(pageUrl, item.context),
         )
         .forEach(item => htmlParser.replace(item.selector, item.replacement));
+    }
+    if (this.params.noScrollToAnchor) {
+      const noScrollToAnchor = this.params.noScrollToAnchor;
+      const hashFile = './src/data/no-scroll-hash.json';
+      let hashes: string[] = [];
+      const { selectors, overwrite } = noScrollToAnchor;
+      selectors.map((item:string) => {
+        return htmlParser.find(item).each((i, e) => hashes.push(e.attribs.href ? e.attribs.href.slice(1) : ''));
+      });
+      let existHash: string[] = [];
+      if (fs.existsSync(hashFile) && !overwrite) {
+        const existJSon = fs.readFileSync(hashFile);
+        if (existJSon) {
+          existHash = JSON.parse(existJSon.toString());
+        }
+      }
+      const hashExport = [ ...existHash, ...hashes ];
+      fs.writeFileSync(hashFile, JSON.stringify(hashExport));
     }
     const pageHtml = htmlParser.getPageHtml();
     return this.transformAttributes(pageHtml);

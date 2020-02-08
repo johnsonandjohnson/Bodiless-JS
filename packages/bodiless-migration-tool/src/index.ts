@@ -81,6 +81,7 @@ class MigrationTool extends Command {
       },
       trailingSlash: settings.trailingSlash || TrailingSlash.Add,
       transformers: settings.transformers || [],
+      noScrollToAnchor: settings.noScrollToAnchor || {},
       htmltojsx: true,
     };
     const flattener = new SiteFlattener(flattenerParams);

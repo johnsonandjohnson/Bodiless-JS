@@ -134,6 +134,10 @@ export default class HtmlParser implements HtmlParserInterface {
     throw new Error();
   }
 
+  find(selector: string) {
+    return this.$(selector);
+  }
+
   replace(selector: string, newElement: string) {
     this.$(selector).replaceWith(newElement);
   }
