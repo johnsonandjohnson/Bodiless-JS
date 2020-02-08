@@ -48,11 +48,13 @@ export const shouldUpdateScroll = ({ prevRouterProps, routerProps: { location } 
         return false;
       }
       try {
+        // eslint-disable-next-line
         const hashes = require('./src/data/no-scroll-hash.json');
         if (hashes.indexOf(hash) >= 0) {
           return false;
         }
       } catch (e) {
+        // Ignore error.
       }
 
       const targetElement = document.getElementById(hash) || document.getElementsByName(hash)[0];
@@ -61,4 +63,3 @@ export const shouldUpdateScroll = ({ prevRouterProps, routerProps: { location } 
   }
   return true;
 };
-

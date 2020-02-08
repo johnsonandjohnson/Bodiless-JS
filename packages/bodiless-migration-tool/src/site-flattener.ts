@@ -180,8 +180,6 @@ export class SiteFlattener {
   }
 
   private transformScrapedHtml(html: string, pageUrl: string): string {
-
-
     const htmlParser = new HtmlParser(html);
     htmlParser.transformRelativeToInternal(pageUrl);
     htmlParser.transformAbsoluteToRelative(pageUrl);
@@ -202,13 +200,10 @@ export class SiteFlattener {
         .forEach(item => htmlParser.replace(item.selector, item.replacement));
     }
     if (this.params.noScrollToAnchor) {
-      const noScrollToAnchor = this.params.noScrollToAnchor;
+      const { selectors, overwrite } = this.params.noScrollToAnchor;
       const hashFile = './src/data/no-scroll-hash.json';
-      let hashes: string[] = [];
-      const { selectors, overwrite } = noScrollToAnchor;
-      selectors.map((item:string) => {
-        return htmlParser.find(item).each((i, e) => hashes.push(e.attribs.href ? e.attribs.href.slice(1) : ''));
-      });
+      const hashes: string[] = [];
+      selectors.map((item:string) => htmlParser.find(item).each((i, e) => hashes.push(e.attribs.href ? e.attribs.href.slice(1) : '')));
       let existHash: string[] = [];
       if (fs.existsSync(hashFile) && !overwrite) {
         const existJSon = fs.readFileSync(hashFile);
@@ -216,7 +211,7 @@ export class SiteFlattener {
           existHash = JSON.parse(existJSon.toString());
         }
       }
-      const hashExport = [ ...existHash, ...hashes ];
+      const hashExport = [...existHash, ...hashes];
       fs.writeFileSync(hashFile, JSON.stringify(hashExport));
     }
     const pageHtml = htmlParser.getPageHtml();
