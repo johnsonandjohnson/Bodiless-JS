@@ -83,6 +83,10 @@ function getDefaultFlattenedParams(): SiteFlattenerParams {
       },
     ],
     htmltojsx: false,
+    noScrollToAnchor: {
+      selectors: [],
+      overwrite: true,
+    },
   };
 }
 
@@ -118,6 +122,10 @@ test('tranforming of html during website flattening', async () => {
       pageUrl: productsUrl,
     },
     htmltojsx: true,
+    noScrollToAnchor: {
+      selectors: [],
+      overwrite: true,
+    },
   };
   const siteFlattener = new SiteFlattener(params);
   await siteFlattener.start();
@@ -158,6 +166,10 @@ test('migration of attached files', async () => {
       ...getDefaultFlattenedParams().scraperParams,
       pageUrl: attachedFilesUrl,
       maxDepth: 2,
+    },
+    noScrollToAnchor: {
+      selectors: [],
+      overwrite: true,
     },
   };
   const siteFlattener = new SiteFlattener(params);
