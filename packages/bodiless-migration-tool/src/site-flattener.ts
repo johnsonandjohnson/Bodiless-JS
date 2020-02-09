@@ -65,7 +65,6 @@ export interface Transformer {
 
 export interface NoScrollToAnchor {
   selectors: Array<string>,
-  path: string,
   overwrite: boolean
 }
 
