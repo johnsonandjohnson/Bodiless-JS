@@ -14,6 +14,7 @@
 
 import * as React from 'react';
 import { SortableContainer, SortEndHandler } from 'react-sortable-hoc';
+import { useContextActivator } from '@bodiless/core';
 
 type SortableListProps = {
   children: React.ReactNode;
@@ -22,7 +23,7 @@ type SortableListProps = {
 
 const SortableListWrapper = SortableContainer(
   ({ children }: SortableListProps): React.ReactElement<SortableListProps> => (
-    <section className="bl-flex bl-flex-wrap bl-py-grid-3">{children}</section>
+    <section className="bl-flex bl-flex-wrap bl-py-grid-3" {...useContextActivator()}>{children}</section>
   ),
 );
 SortableListWrapper.displayName = 'SortableListWrapper';
