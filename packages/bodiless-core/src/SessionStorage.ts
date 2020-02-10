@@ -7,7 +7,7 @@ export const getFromSessionStorage = (key: string, defValue: any = null) => {
       val = JSON.parse(window.sessionStorage.getItem(key) || JSON.stringify(defValue));
     }
   } catch (e) {
-    console.error('Can not read "${key}" from session storage.', e);
+    console.error(`Can not read "${key}" from session storage.`, e);
   }
 
   return val;

@@ -25,7 +25,7 @@ import {
 } from './types';
 import {
   getFromSessionStorage,
-  saveToSessionStorage
+  saveToSessionStorage,
 } from '../SessionStorage';
 
 export const reduceRecursively = <T extends any>(
