@@ -31,7 +31,8 @@ const getIsEdit = (defValue: boolean = true): boolean => {
     if (typeof window !== 'undefined') {
       isEdit = JSON.parse(window.sessionStorage.getItem('isEdit') || JSON.stringify(defValue));
     }
-  } catch(e) {
+  } catch (e) {
+    /* eslint-disable no-console */
     console.error('Can not read "isEdit" from session storage.', e);
   }
 
