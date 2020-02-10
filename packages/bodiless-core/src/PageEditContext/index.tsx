@@ -80,8 +80,14 @@ export class PageEditStore implements PageEditStoreInterface {
     );
   }
 
-  @action toggleEdit() {
-    this.isEdit = !this.isEdit;
+  @action toggleEdit(on? : boolean) {
+    if (on === undefined) {
+      this.isEdit = !this.isEdit;
+    } else {
+      this.isEdit = Boolean(on);
+    }
+
+    saveToSessionStorage('isEdit', this.isEdit);
   }
 
   @computed get contextTrail() {
@@ -178,13 +184,7 @@ class PageEditContext implements PageEditContextInterface {
   }
 
   toggleEdit(on?: boolean) {
-    if (on === undefined) {
-      this.store.isEdit = !this.store.isEdit;
-    } else {
-      this.store.isEdit = Boolean(on);
-    }
-
-    saveToSessionStorage('isEdit', this.store.isEdit);
+    this.store.toggleEdit(on);
   }
 
   get contextMenuOptions() {

@@ -53,7 +53,6 @@ export interface PageEditStore {
   contextMenuOptions: TMenuOption[];
   isEdit: boolean;
   setActiveContext(context?: PageEditContextInterface): void;
-  toggleEdit(): void;
   contextTrail: string[];
 }
 
