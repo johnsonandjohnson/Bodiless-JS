@@ -24,6 +24,20 @@ import {
   TMenuOptionGetter,
 } from './types';
 
+const getIsEdit = (defValue: boolean = true): boolean => {
+  let isEdit = defValue;
+
+  try {
+    if (typeof window !== 'undefined') {
+      isEdit = JSON.parse(window.sessionStorage.getItem('isEdit') || JSON.stringify(defValue));
+    }
+  } catch(e) {
+    console.error('Can not read "isEdit" from session storage.', e);
+  }
+
+  return isEdit;
+};
+
 export const reduceRecursively = <T extends any>(
   accumulator: T[],
   callback: (c: PageEditContext) => T[],
@@ -61,7 +75,7 @@ export class PageEditStore implements PageEditStoreInterface {
 
   @observable contextMenuOptions: TMenuOption[] = [];
 
-  @observable isEdit = !!JSON.parse(typeof window !== 'undefined' ? window.sessionStorage.getItem('isEdit') || 'true' : 'true');
+  @observable isEdit = getIsEdit(true);
 
   @action
   setActiveContext(context?: PageEditContext) {
