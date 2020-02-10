@@ -82,7 +82,6 @@ export class PageEditStore implements PageEditStoreInterface {
 
   @action toggleEdit() {
     this.isEdit = !this.isEdit;
-    saveToSessionStorage('isEdit', this.isEdit);
   }
 
   @computed get contextTrail() {
