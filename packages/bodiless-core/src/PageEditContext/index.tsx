@@ -23,21 +23,10 @@ import {
   TMenuOption,
   TMenuOptionGetter,
 } from './types';
-
-const getIsEdit = (defValue: boolean = true): boolean => {
-  let isEdit = defValue;
-
-  try {
-    if (typeof window !== 'undefined') {
-      isEdit = JSON.parse(window.sessionStorage.getItem('isEdit') || JSON.stringify(defValue));
-    }
-  } catch (e) {
-    /* eslint-disable no-console */
-    console.error('Can not read "isEdit" from session storage.', e);
-  }
-
-  return isEdit;
-};
+import {
+  getFromSessionStorage,
+  saveToSessionStorage
+} from '../SessionStorage';
 
 export const reduceRecursively = <T extends any>(
   accumulator: T[],
@@ -76,7 +65,7 @@ export class PageEditStore implements PageEditStoreInterface {
 
   @observable contextMenuOptions: TMenuOption[] = [];
 
-  @observable isEdit = getIsEdit(true);
+  @observable isEdit = getFromSessionStorage('isEdit', true);
 
   @action
   setActiveContext(context?: PageEditContext) {
@@ -93,6 +82,7 @@ export class PageEditStore implements PageEditStoreInterface {
 
   @action toggleEdit() {
     this.isEdit = !this.isEdit;
+    saveToSessionStorage('isEdit', this.isEdit);
   }
 
   @computed get contextTrail() {
@@ -195,9 +185,7 @@ class PageEditContext implements PageEditContextInterface {
       this.store.isEdit = Boolean(on);
     }
 
-    if (typeof window !== 'undefined') {
-      window.sessionStorage.setItem('isEdit', JSON.stringify(this.store.isEdit));
-    }
+    saveToSessionStorage('isEdit', this.store.isEdit);
   }
 
   get contextMenuOptions() {
