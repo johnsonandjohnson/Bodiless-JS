@@ -8,6 +8,7 @@
   "exclude": [
     "lib",
     "node_modules",
+    "__mocks__/**/*.*",
     "__tests__/**/*.*",
     "src/**/__tests__/**/*.*"
   ]

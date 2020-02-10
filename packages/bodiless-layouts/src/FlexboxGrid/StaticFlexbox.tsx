@@ -14,7 +14,7 @@
 
 import React, { FC, PropsWithChildren } from 'react';
 import { withNode } from '@bodiless/core';
-import { useItemHandlers } from './helpers';
+import { useItemHandlers } from './model';
 import { StaticFlexboxProps, FlexboxItem } from './types';
 
 const NodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);

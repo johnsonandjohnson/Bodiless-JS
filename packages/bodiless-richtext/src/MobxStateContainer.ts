@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { observable, computed, action } from 'mobx';
+import { observable, action } from 'mobx';
 
 type NewState = {
   [index:string]: any,
@@ -22,14 +22,11 @@ class MobxStateContainer {
 
   constructor() {
     this.setState = this.setState.bind(this);
+    this.get = this.get.bind(this);
   }
 
-  @computed get state() {
-    const obj = {} as NewState;
-    this.store.forEach((v, k) => {
-      obj[k] = v;
-    });
-    return obj;
+  get(key: string) {
+    return this.store.get(key);
   }
 
   @action setState(newState:NewState) {
