@@ -1,6 +1,6 @@
 # Building a Site using BodilessJS
 
-This guide is a suggested process for building sites using BodilessJS.  The use case maybe a site build is a brand new site build with new assets (Typography, Design & Copy Deck) or we could be rebuilding an existing site on this platform.  We will point out where differences in the new site build vs replicating existing site may be in this process, but essentially the methodology used is similar for either type of build.
+This guide is a suggested process for building sites using BodilessJS.  The use case maybe a site build is a brand new site build with new assets (Typography, Design & Copy Deck) or we could be rebuilding an existing site on this platform.  We will point out where differences in the new site build versus replicating existing site may be in this process, but essentially the methodology used is similar for either type of build.
 
 ## Table of Contents
 * [Prerequisites](#Prerequisites)
