@@ -61,6 +61,7 @@ const ContextMenu = (props: IProps) => {
           option={option}
           index={index}
           key={option.name}
+          aria-label={option.name}
           ui={ui}
         />
       ),

@@ -49,7 +49,15 @@ export class HtmlToComponents {
         fileExtension: 'jsx',
       },
     };
-    return extractReactComponents(labeledHtml, options);
+    try {
+      return extractReactComponents(labeledHtml, options);
+    } catch (error) {
+      if (error.name === 'SyntaxError'
+        && error.message.startsWith('Unexpected token')) {
+        console.log('HTML source of this page is invalid.');
+      }
+      return extractReactComponents(labeledHtml, options);
+    }
   }
 
   label(html: string): string | null {

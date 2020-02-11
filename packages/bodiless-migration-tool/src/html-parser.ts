@@ -40,6 +40,7 @@ interface HtmlParserInterface {
   getBodyInlineScripts(): string
   getMetaTags(): string
   getImages(): string
+  replaceString(oldHtmlString: string, newHtmlString: string): void
   replace(selector: string, newElement: string): void
   transformAbsoluteToRelative(pageUrl: string): void
   transformRelativeToInternal(pageUrl: string): void
@@ -132,6 +133,12 @@ export default class HtmlParser implements HtmlParserInterface {
 
   getImages(): string {
     throw new Error();
+  }
+
+  replaceString(oldHtmlString: string, newHtmlString: string) {
+    const regexp = new RegExp(oldHtmlString, 'gm');
+    this.html = this.html.replace(regexp, newHtmlString);
+    this.$ = cheerio.load(this.html);
   }
 
   replace(selector: string, newElement: string) {

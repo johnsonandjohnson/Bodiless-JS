@@ -49,9 +49,12 @@ describe('link interactions', () => {
     const inputField = menuForm.find('input#link-href');
     expect(inputField).toHaveLength(1);
 
-    const buttons = menuForm.find('button');
-    expect(buttons.at(0).text()).toBe('cancel');
-    expect(buttons.at(1).text()).toBe('done');
+    const cancelButton = menuForm.find('button[aria-label="Cancel"]');
+    expect(cancelButton).not.toBeUndefined();
+    expect(cancelButton.prop('type')).toBe('button');
+    const submitButton = menuForm.find('button[aria-label="Submit"]');
+    expect(submitButton).not.toBeUndefined();
+    expect(submitButton.prop('type')).toBeUndefined();
   });
 
 
@@ -61,8 +64,7 @@ describe('link interactions', () => {
 
     expect(wrapper.find('Popup[visible=true]')).toHaveLength(2);
 
-    const buttons = menuForm.find('button');
-    const doneButton = buttons.at(1);
+    const doneButton = menuForm.find('button[aria-label="Submit"]');
     doneButton.simulate('submit');
 
     expect(wrapper.find('Popup[visible=true]')).toHaveLength(1);
@@ -92,7 +94,8 @@ describe('link interactions', () => {
     const inputField = menuForm.find('input#link-href');
     inputField.simulate('change', { target: { value: 'this should not be saved' } });
     expect(wrapper.find('Popup[visible=true]')).toHaveLength(2);
-    menuForm.find('button').at(0).simulate('submit');
+    const cancelButton = menuForm.find('button[aria-label="Cancel"]');
+    cancelButton.simulate('submit');
     expect(wrapper.find('Popup[visible=true]')).toHaveLength(1);
     expect(inputField.prop('value')).toBe('ok');
   });

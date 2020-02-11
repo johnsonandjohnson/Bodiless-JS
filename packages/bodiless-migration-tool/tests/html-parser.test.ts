@@ -567,3 +567,18 @@ describe('html5 <base> tag', () => {
     });
   });
 });
+
+describe('replacing strings in page source html', () => {
+  test('should preplace malformed string', () => {
+    const sourceHtml = `
+      <div id="search""></div>
+   `;
+    const expectedHtml = `
+      <div id="search"></div>
+    `;
+    const htmlParser = new HtmlParser(sourceHtml);
+    htmlParser.replaceString('" ">', '">');
+    const processedHtml = htmlParser.getBodyHtml();
+    expect(htmlclean(processedHtml)).toBe(htmlclean(expectedHtml));
+  });
+});

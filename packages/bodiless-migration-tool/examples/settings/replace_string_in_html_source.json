@@ -1,0 +1,15 @@
+{
+    "url": "https://lepetitmarseillais.be/",
+    "crawler": {
+      "maxDepth": 100,
+      "maxConcurrency": 1
+    },
+    "transformers": [
+      {
+        "rule": "replaceString",
+        "selector": "\" \">",
+        "replacement": "\">",
+        "context": "https://lepetitmarseillais.be/fr/restons-nature"
+      }
+    ]
+}

@@ -59,7 +59,7 @@
     "prestart": "run-s build:env-vars build:css build:doc",
     "start": "run-p -r dev-backend dev-frontend",
     "serve": "gatsby serve",
-    "migrate": "migration_tool",
+    "migrate": "DEBUG=migration_tool migration_tool",
     "migrate:postbuild": "migration_tool postbuild public",
     "migrate:full": "npm run migrate && npm run build && npm run migrate:postbuild && npm run serve",
     "prepare": "npm run build:css"

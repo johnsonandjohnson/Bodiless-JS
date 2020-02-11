@@ -167,6 +167,10 @@ Options:
 
     - **Description**: Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed.
 
+  - `replaceString`
+
+    - **Description**: Replace string (or regex pattern) in the source html code before parsing.
+
   - `tojsx`
 
     - **Description**: Extract matched elements into React components as separate modules

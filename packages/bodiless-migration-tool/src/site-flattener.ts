@@ -51,6 +51,7 @@ export enum TrailingSlash {
 
 export enum TransformerRule {
   Replace = 'replace',
+  ReplaceString = 'replaceString',
   ToComponent = 'tocomponent',
 }
 
@@ -184,6 +185,13 @@ export class SiteFlattener {
       htmlParser.removeTrailingSlash(pageUrl);
     }
     if (this.params.transformers) {
+      this.params.transformers
+        .filter(
+          item => (
+            item.rule === TransformerRule.ReplaceString && this.shouldReplace(pageUrl, item.context)
+          ),
+        )
+        .forEach(item => htmlParser.replaceString(item.selector, item.replacement));
       this.params.transformers
         .filter(
           item => item.rule === TransformerRule.Replace

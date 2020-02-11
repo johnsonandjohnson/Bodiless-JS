@@ -109,7 +109,7 @@
     "test-debug": "jest --detectOpenHandles --detectLeaks",
     "launch": "ts-node src/launch.ts",
     "postinstall": "DEBUG=migration_tool node bin/apply-patches.js",
-    "migrate": "bin/run"
+    "migrate": "DEBUG=migration_tool bin/run"
   },
   "types": "lib/index.d.ts"
 }

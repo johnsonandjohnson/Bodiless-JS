@@ -42,6 +42,7 @@ export type UI = {
   ComponentFormLabel?: ComponentType<HTMLProps<HTMLLabelElement>> | string;
   ComponentFormButton?: ComponentType<HTMLProps<HTMLButtonElement>> | string;
   ComponentFormCloseButton?: ComponentType<HTMLProps<HTMLButtonElement>> | string;
+  ComponentFormSubmitButton?: ComponentType<HTMLProps<HTMLButtonElement>> | string;
   ComponentFormUnwrapButton?: ComponentType<HTMLProps<HTMLButtonElement>> | string;
   ComponentFormText?: ComponentType<FieldProps<any, any>>;
   ComponentFormError?: ComponentType<HTMLProps<HTMLDivElement>> | string;
@@ -53,10 +54,9 @@ export type UI = {
 export type IContextMenuProps = {
   children?: ReactNode;
   options: TMenuOption[];
-  className?: string;
-  onDispose?: (wasSubmitted: boolean) => void;
+  // onDispose?: (wasSubmitted: boolean) => void;
   ui?: UI;
-};
+} & HTMLProps<HTMLElement>;
 
 export type IContextMenuItemProps = {
   ui?: UI
