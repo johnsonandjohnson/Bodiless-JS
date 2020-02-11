@@ -62,26 +62,44 @@ install () {
   cd ${ROOT_DIR}
 
   bash ${PLATFORM_APP_DIR}/platform.custom.sh install
-  bash ${PLATFORM_APP_DIR}/platform.custom.sh build
 
   ${CMD_GIT} checkout  package-lock.json
 }
 
-rebase () {
-  ${CMD_GIT} fetch origin
-  ${CMD_GIT} rebase origin/${PLATFORM_BRANCH} -s recursive -X theirs
+build () {
+  bash ${PLATFORM_APP_DIR}/platform.custom.sh build
 }
+
+rebase () {
+  if [[ ${PLATFORM_BRANCH} =~ ^pr ]]; then
+    ID=$(echo $PLATFORM_BRANCH | sed s/pr-//g)
+    git fetch origin pull/${ID}/head:${PLATFORM_BRANCH}-rebase
+    ${CMD_GIT} rebase ${PLATFORM_BRANCH}-rebase -s recursive -X theirs
+    ${CMD_GIT} branch -d ${PLATFORM_BRANCH}-rebase
+  else
+    ${CMD_GIT} fetch origin
+    ${CMD_GIT} rebase origin/${PLATFORM_BRANCH} -s recursive -X theirs
+  fi
+} 
 
 reset () {
   echo "Reset"
-  ${CMD_GIT} fetch origin
-  current_branch=${get_current_branch}
-  if [[ -z ${current_branch} ]]; then
-    git checkout ${PLATFORM_BRANCH}
-  elif [[ ${current_branch} != ${PLATFORM_BRANCH} ]]; then
-    git checkout ${PLATFORM_BRANCH}
+  if [[ ${PLATFORM_BRANCH} =~ ^pr ]]; then
+    current_branch=${get_current_branch}
+    if [[ -z ${current_branch} || ${current_branch} != ${PLATFORM_BRANCH} ]]; then
+      echo Cannot reset PR when platform branch is not current branch.
+      exit 1
+    fi
+    ID=$(echo $PLATFORM_BRANCH | sed s/pr-//g)
+    git fetch origin pull/${ID}/head:${PLATFORM_BRANCH}-rebase
+    git reset --hard ${PLATFORM_BRANCH}-rebase
+    git branch -D ${PLATFORM_BRANCH}-rebase
+  else
+    if [[ -z ${current_branch} || ${current_branch} != ${PLATFORM_BRANCH} ]]; then
+      git checkout ${PLATFORM_BRANCH}
+    fi
+    git reset --hard origin/${PLATFORM_BRANCH}
   fi
-  git reset --hard origin/${PLATFORM_BRANCH}
   git clean -fd
 }
 
@@ -123,16 +141,37 @@ incremental_deploy () {
 full_deploy () {
   echo "Performing full deploy, branch is ${PLATFORM_BRANCH}"
   rm -rf ${ROOT_DIR}
-  ${CMD_GIT} clone -b ${PLATFORM_BRANCH} ${GIT_REMOTE_URL} ${ROOT_DIR}
-  cd ${ROOT_DIR}
+  if [[ ${PLATFORM_BRANCH} =~ ^pr- ]]; then
+    ${CMD_GIT} clone ${GIT_REMOTE_URL} ${ROOT_DIR}
+    cd ${ROOT_DIR}
+    ID=$(echo $PLATFORM_BRANCH | sed s/pr-//g)
+    git fetch origin pull/${ID}/head:${PLATFORM_BRANCH}
+    git checkout ${PLATFORM_BRANCH}
+  else
+    ${CMD_GIT} clone -b ${PLATFORM_BRANCH} ${GIT_REMOTE_URL} ${ROOT_DIR}
+    cd ${ROOT_DIR}
+  fi
   ${CMD_GIT} config user.email "${APP_GIT_USER_EMAIL}"
   ${CMD_GIT} config user.name "${APP_GIT_USER}"
 }
 
-predeploy () {
+check_branch () {
   if [[ ${PLATFORM_BRANCH} =~ ^pr- ]]; then
-      echo "Edit environments are not enabled on PR branches"
-      exit
+    if [[ ${GIT_REMOTE_URL} =~ github\.com ]]; then
+      return 0
+    else
+      echo "Edit environments for PR branches are only enabled on GitHub"
+      return 1
+    fi
+  fi
+  return 0
+}
+
+predeploy () {
+  # Exit of on a PR branch and not on GitHub
+  if ! check_branch; then
+    echo 'Invalid branch; skipping edit environment deploy'
+    exit
   fi
   check_vars
   mkdir -p ${APP_VOLUME}/.config
@@ -156,15 +195,21 @@ if [ "$1" = "deploy" ]; then
   echo "DEPLOY AT $(date)"
   predeploy
   if [ -d ${ROOT_DIR}/.git ]; then
+    # TODO: Install only when necessary.
+    # last_hash=$(git rev-parse HEAD)
     incremental_deploy
+    # if [[ ! -z $(git diff --shortstat $last_hash -- package-lock.json) ]]
+    install
+    # fi
   else
     full_deploy
+    install
   fi
-  install
+  build
   postdeploy
 elif [ "$1" = "start" ]; then
-  if [[ ${PLATFORM_BRANCH} =~ ^pr- ]]; then
-      echo "Edit environments are not enabled on PR branches"
+  if ! check_branch; then
+      echo 'Invalid branch: not starting edit app'
       exec sleep infinity
   else
       echo "Starting application on ${date}"
@@ -182,5 +227,6 @@ elif [ "$1" = "fresh" ]; then
   predeploy
   full_deploy
   install
+  build
   postdeploy
 fi

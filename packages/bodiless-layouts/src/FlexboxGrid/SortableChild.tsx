@@ -15,7 +15,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import throttle from 'lodash/throttle';
 import { ResizeCallback } from 're-resizable';
-import { useEditContext } from '@bodiless/core';
+import { TMenuOptionGetter } from '@bodiless/core';
 import SlateSortableResizable, { UI as SortableResizableUI } from '../SlateSortableResizable';
 import {
   defaultSnapData, SnapData,
@@ -31,7 +31,7 @@ const FALLBACK_SNAP_CLASSNAME = 'w-full';
 type SortableChildProps = {
   flexboxItem: FlexboxItem;
   onResizeStop(props: FlexboxItemProps): void;
-  onDelete(): void;
+  getMenuOptions: TMenuOptionGetter;
   index: number;
   children: React.ReactNode;
   ui?: SortableResizableUI;
@@ -39,9 +39,10 @@ type SortableChildProps = {
   defaultSize?: { width: (number | string), height: (number | string) };
 };
 
+
 const SortableChild = (props: SortableChildProps) => {
   const {
-    onResizeStop, flexboxItem, onDelete, snapData: snapRaw, ...restProps
+    onResizeStop, flexboxItem, snapData: snapRaw, ...restProps
   } = props;
   const snap = snapRaw || defaultSnapData;
   const {
@@ -84,12 +85,6 @@ const SortableChild = (props: SortableChildProps) => {
     // Set the class in are state
     setSnapClassName(className);
   };
-  const context = useEditContext();
-  const onDeleteWrapper = () => {
-    onDelete();
-    // Activate the current context after the delete (this context is the flexbox)
-    context.activate();
-  };
   useEffect(() => (
     // Call resize handler on component's unmount
     // to make sure the correct wrapper classname is set
@@ -126,13 +121,6 @@ const SortableChild = (props: SortableChildProps) => {
       size={size}
       minWidth={`${minWidth * 0.99}%`}
       className={snapClassName}
-      getMenuOptions={() => [
-        {
-          name: 'delete',
-          icon: 'delete',
-          handler: onDeleteWrapper,
-        },
-      ]}
       {...restProps}
     />
   );
