@@ -19,3 +19,38 @@ if (enabled) {
     // Ignore error.
   }
 }
+
+export const shouldUpdateScroll = ({ prevRouterProps, routerProps: { location } }) => {
+  if (prevRouterProps) {
+    const {
+      location: { pathname: oldPathname },
+    } = prevRouterProps;
+    if (oldPathname === location.pathname) {
+      const hash = location.hash ? location.hash.slice(1) : '';
+      if (!hash) {
+        return false;
+      }
+      const HashMatchException = {};
+      try {
+        // eslint-disable-next-line
+        const { selectors } = require('./no-scroll-settings.json');
+        selectors.map(item => {
+          document.querySelectorAll(item).forEach(element => {
+            if (element.attributes.href.value === '#' + hash) {
+              throw HashMatchException;
+            }
+          });
+        });
+      } catch (e) {
+        if (HashMatchException === e) {
+          return false;
+        }
+      }
+
+      // Override Gatsby default scroll behavior. Only scroll if hashed element exists.
+      const targetElement = document.getElementById(hash) || document.getElementsByName(hash)[0];
+      return targetElement ? hash : true;
+    }
+  }
+  return true;
+};
