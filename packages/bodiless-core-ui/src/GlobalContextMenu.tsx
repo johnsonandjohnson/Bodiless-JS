@@ -21,7 +21,7 @@ import {
 import {
   ComponentFormTitle, ComponentFormCloseButton, ComponentFormLabel, ComponentFormText,
   ComponentFormButton, Icon, Div, Hr, ToolbarButton, ComponentFormUnwrapButton,
-  ComponentFormError,
+  ComponentFormError, ComponentFormSubmitButton,
 } from '@bodiless/ui';
 
 const Toolbar = addClasses(
@@ -60,6 +60,7 @@ const ui: ContextMenuUI = {
   ComponentFormText,
   ComponentFormButton,
   ComponentFormCloseButton,
+  ComponentFormSubmitButton,
   ComponentFormUnwrapButton,
   ComponentFormError,
   Icon,

@@ -24,6 +24,7 @@ const defaultUI = {
   ComponentFormLabel: 'label',
   ComponentFormButton: 'button',
   ComponentFormCloseButton: 'button',
+  ComponentFormSubmitButton: 'button',
   ComponentFormUnwrapButton: 'button',
   ComponentFormText: Text,
   ComponentFormError: 'div',
@@ -35,6 +36,7 @@ export const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });
 export type FormProps = {
   closeForm: () => void;
   ui?: UI;
+  'aria-label'?: string;
 };
 
 export type FormBodyProps<D> = FormProps & {
@@ -53,8 +55,8 @@ export type Options<D> = {
 const contextMenuForm = <D extends object>(options: Options<D>) => (
   renderFormBody: FormBodyRenderer<D>,
 ) => {
-  const ContextMenuForm = ({ closeForm, ui }: FormProps) => {
-    const { ComponentFormButton, Icon } = getUI(ui);
+  const ContextMenuForm = ({ closeForm, ui, ...rest }: FormProps) => {
+    const { ComponentFormCloseButton, ComponentFormSubmitButton } = getUI(ui);
     const { submitValues, initialValues, hasSubmit = true } = options;
     return (
       <Form
@@ -63,16 +65,15 @@ const contextMenuForm = <D extends object>(options: Options<D>) => (
           closeForm();
         }}
         initialValues={initialValues}
+        {...rest}
       >
         {({ formApi, formState }) => (
           <>
-            <ComponentFormButton
+            <ComponentFormCloseButton
               type="button"
               onClick={closeForm}
-              className="bl-float-right"
-            >
-              <Icon>cancel</Icon>
-            </ComponentFormButton>
+              aria-label="Cancel"
+            />
             {renderFormBody({
               closeForm,
               formApi,
@@ -81,11 +82,7 @@ const contextMenuForm = <D extends object>(options: Options<D>) => (
             })}
             {hasSubmit && !formState.invalid
             && (
-              <div className="bl-clearfix">
-                <ComponentFormButton type="submit" className="bl-float-right">
-                  <Icon>done</Icon>
-                </ComponentFormButton>
-              </div>
+              <ComponentFormSubmitButton aria-label="Submit" />
             )
             }
           </>

@@ -53,9 +53,12 @@ describe('image interactions', () => {
     expect(imageAlt).toHaveLength(1);
     expect(imageAlt.prop('value')).toBe('Alt Text');
 
-    const buttons = menuForm.find('button');
-    expect(buttons.at(0).text()).toBe('cancel');
-    expect(buttons.at(1).text()).toBe('done');
+    const cancelButton = menuForm.find('button[aria-label="Cancel"]');
+    expect(cancelButton).not.toBeUndefined();
+    expect(cancelButton.prop('type')).toBe('button');
+    const submitButton = menuForm.find('button[aria-label="Submit"]');
+    expect(submitButton).not.toBeUndefined();
+    expect(submitButton.prop('type')).toBeUndefined();
   });
 
 
@@ -65,8 +68,7 @@ describe('image interactions', () => {
 
     expect(wrapper.find('Popup[visible=true]')).toHaveLength(2);
 
-    const buttons = menuForm.find('button');
-    const doneButton = buttons.at(1);
+    const doneButton = menuForm.find('button[aria-label="Submit"]');
     doneButton.simulate('submit');
 
     expect(wrapper.find('Popup[visible=true]')).toHaveLength(1);

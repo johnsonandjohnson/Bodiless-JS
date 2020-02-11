@@ -69,7 +69,7 @@ const ContextMenuItem = ({ option, index, ui }: IProps) => {
     if (Form) {
       return (
         <FormWrapper onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
-          <Form closeForm={onFormClose} ui={ui} />
+          <Form closeForm={onFormClose} ui={ui} aria-label={`Context Menu ${option.label || option.name} Form`} />
         </FormWrapper>
       );
     }
@@ -86,6 +86,7 @@ const ContextMenuItem = ({ option, index, ui }: IProps) => {
       isDisabled={isDisabled}
       isFirst={isFirst}
       onClick={onToolbarButtonClick}
+      aria-label={option.label || option.name}
     >
       <Tooltip
         trigger={['click']}

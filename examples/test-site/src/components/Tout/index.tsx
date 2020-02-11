@@ -14,7 +14,7 @@
 
 import { flow } from 'lodash';
 import {
-  ToutClean,
+  ToutClean, asTestableTout,
 } from '@bodiless/organisms';
 import {
   withDesign,
@@ -35,6 +35,7 @@ const asTout = flow(
     ),
     Body: asEditorBasic('body', 'Tout Body Text'),
   }),
+  asTestableTout,
 );
 const Tout = asTout(ToutClean);
 export default Tout;
