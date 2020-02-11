@@ -53,11 +53,14 @@ type Props = {
   client?: Client,
 };
 
-const handle = (promise: AxiosPromise<any>) => promise
+const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
   .then(res => {
     if (res.status === 200) {
       // @TODO: Display the response in a component instead of an alert.
       // eslint-disable-next-line no-undef
+      if (typeof callback === 'function') {
+        callback();
+      }
       alert('Operation successful.');
     } else {
       // eslint-disable-next-line no-undef
@@ -131,7 +134,7 @@ const formGitCommit = (client: Client) => contextMenuForm({
 // );
 
 const formGitReset = (client: Client) => contextMenuForm({
-  submitValues: () => handle(client.reset()) && window.location.reload(),
+  submitValues: () => handle(client.reset(), () => window.location.reload()),
 })(
   ({ ui }: any) => {
     const { ComponentFormTitle, ComponentFormLabel } = getUI(ui);
