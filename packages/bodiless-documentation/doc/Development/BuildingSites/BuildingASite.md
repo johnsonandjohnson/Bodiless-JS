@@ -126,7 +126,7 @@ Since the whole building of the site is composed of components.  The first step 
 
 As you look through the site build (Assets provide for a new site or existing site), you will want to identify types of components required. 
 
-This required more in-depth walk thru so visit [How to Identify Components](https://johnsonandjohnson.github.io/Bodiless-JS/#/Development/BuildingSites/IdentifyingComponentsGuide)
+This requires more in-depth walk thru so continue with [How to Identify Components & Variations](https://johnsonandjohnson.github.io/Bodiless-JS/#/Development/BuildingSites/IdentifyingComponentsGuide).
 
 So at this point, you should now have list of components your new site will use as well as possible variations of any of those components. This will help determine 
 * what components you can use from Bodiless as is.
