@@ -21,6 +21,7 @@ import {
 import { AxiosPromise } from 'axios';
 import BackendClient from './BackendClient';
 import CommitsList from './CommitsList';
+import { useEditContext } from '@bodiless/core';
 
 
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
@@ -148,7 +149,7 @@ const formGitReset = (client: Client) => contextMenuForm({
 
 const defaultClient = new BackendClient();
 
-const getMenuOptions = (client: Client = defaultClient): TMenuOption[] => {
+const getMenuOptions = (client: Client = defaultClient, isEdit?: boolean): TMenuOption[] => {
   const saveChanges = canCommit ? formGitCommit(client) : undefined;
   return [
     {
@@ -160,6 +161,7 @@ const getMenuOptions = (client: Client = defaultClient): TMenuOption[] => {
       name: 'savechanges',
       icon: 'cloud_upload',
       isDisabled: () => !canCommit,
+      isHidden: () => !isEdit,
       handler: () => saveChanges,
     },
     // Currently descoping the Pull Changes Button Functionality.
@@ -172,18 +174,23 @@ const getMenuOptions = (client: Client = defaultClient): TMenuOption[] => {
     {
       name: 'resetchanges',
       icon: 'first_page',
+      isHidden: () => !isEdit,
       handler: () => formGitReset(client),
     },
   ];
 };
 
-const GitProvider: FC<Props> = ({ children, client }) => (
-  <ContextProvider
-    getMenuOptions={() => getMenuOptions(client)}
-    name="Git"
-  >
-    {children}
-  </ContextProvider>
-);
+const GitProvider: FC<Props> = ({ children, client }) => {
+  const context = useEditContext();
+
+  return (
+      <ContextProvider
+        getMenuOptions={() => getMenuOptions(client, context.isEdit)}
+        name="Git"
+      >
+        {children}
+      </ContextProvider>
+  );
+};
 
 export default GitProvider;

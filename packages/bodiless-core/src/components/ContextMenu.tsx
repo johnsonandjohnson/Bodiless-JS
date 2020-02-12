@@ -45,12 +45,14 @@ const ContextMenu = (props: IProps) => {
   const { ui } = props;
   const { Toolbar } = getUI(ui);
 
+  console.log(options);
+
   const elements = options
     // Inject dividers
     .reduce(
       (acc: TMenuOption[], op: TMenuOption, currentIndex: Number) => (
         acc.length && acc[acc.length - 1].group
-          !== op.group
+          !== op.group && !op.isHidden
           ? [...acc, getDivider(currentIndex), op]
           : [...acc, op]),
       [] as TMenuOption[],
