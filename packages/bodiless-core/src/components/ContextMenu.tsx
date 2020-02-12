@@ -45,8 +45,6 @@ const ContextMenu = (props: IProps) => {
   const { ui } = props;
   const { Toolbar } = getUI(ui);
 
-  console.log(options);
-
   const elements = options
     // Inject dividers
     .reduce(
