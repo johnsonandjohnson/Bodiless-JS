@@ -43,19 +43,33 @@ export const shouldUpdateScroll = ({ prevRouterProps, routerProps: { location } 
     if (oldPathname === location.pathname) {
       const hash = location.hash ? location.hash.slice(1) : '';
       if (!hash) {
-        return false;
+        return true;
       }
+      const targetElement = document.getElementById(hash) || document.getElementsByName(hash)[0];
       const HashMatchException = {};
+
       try {
         // eslint-disable-next-line
-        const { selectors } = require('./no-scroll-settings.json');
-        selectors.forEach(item => {
-          document.querySelectorAll(item).forEach(element => {
-            if (element.attributes.href.value === `#${hash}`) {
-              throw HashMatchException;
-            }
+        const { parentSelectors, elementSelectors, excludeHashes } = require('./no-scroll-settings.json');
+
+        if (excludeHashes.indexOf(hash) < 0) {
+          // Skip scrolling for selected element.
+          elementSelectors.forEach(item => {
+            document.querySelectorAll(item).forEach(element => {
+              if (element.attributes.href && (element.attributes.href.value === `#${hash}`)) {
+                throw HashMatchException;
+              }
+            });
           });
-        });
+          // Skip scrolling for hashes inside selected container element.
+          parentSelectors.forEach(item => {
+            document.querySelectorAll(item).forEach(element => {
+              if (element.isSameNode(targetElement.closest(item))) {
+                throw HashMatchException;
+              }
+            });
+          });
+        }
       } catch (e) {
         if (HashMatchException === e) {
           return false;
@@ -63,7 +77,6 @@ export const shouldUpdateScroll = ({ prevRouterProps, routerProps: { location } 
       }
 
       // Override Gatsby default scroll behavior. Only scroll if hashed element exists.
-      const targetElement = document.getElementById(hash) || document.getElementsByName(hash)[0];
       return targetElement ? hash : true;
     }
   }
