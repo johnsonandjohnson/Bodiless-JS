@@ -23,6 +23,10 @@ import {
   TMenuOption,
   TMenuOptionGetter,
 } from './types';
+import {
+  getFromSessionStorage,
+  saveToSessionStorage,
+} from '../SessionStorage';
 
 export const reduceRecursively = <T extends any>(
   accumulator: T[],
@@ -61,7 +65,7 @@ export class PageEditStore implements PageEditStoreInterface {
 
   @observable contextMenuOptions: TMenuOption[] = [];
 
-  @observable isEdit = true;
+  @observable isEdit = getFromSessionStorage('isEdit', true);
 
   @action
   setActiveContext(context?: PageEditContext) {
@@ -76,8 +80,14 @@ export class PageEditStore implements PageEditStoreInterface {
     );
   }
 
-  @action toggleEdit() {
-    this.isEdit = !this.isEdit;
+  @action toggleEdit(on? : boolean) {
+    if (on === undefined) {
+      this.isEdit = !this.isEdit;
+    } else {
+      this.isEdit = Boolean(on);
+    }
+
+    saveToSessionStorage('isEdit', this.isEdit);
   }
 
   @computed get contextTrail() {
@@ -174,11 +184,7 @@ class PageEditContext implements PageEditContextInterface {
   }
 
   toggleEdit(on?: boolean) {
-    if (on === undefined) {
-      this.store.isEdit = !this.store.isEdit;
-    } else {
-      this.store.isEdit = Boolean(on);
-    }
+    this.store.toggleEdit(on);
   }
 
   get contextMenuOptions() {
