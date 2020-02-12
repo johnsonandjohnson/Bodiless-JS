@@ -16,12 +16,15 @@
 import React, { FC } from 'react';
 import Cookies from 'universal-cookie';
 import {
-  contextMenuForm, getUI, ContextProvider, TMenuOption,
+  contextMenuForm,
+  getUI,
+  ContextProvider,
+  TMenuOption,
+  useEditContext,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
 import BackendClient from './BackendClient';
 import CommitsList from './CommitsList';
-import { useEditContext } from '@bodiless/core';
 
 
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
@@ -184,12 +187,12 @@ const GitProvider: FC<Props> = ({ children, client }) => {
   const context = useEditContext();
 
   return (
-      <ContextProvider
-        getMenuOptions={() => getMenuOptions(client, context.isEdit)}
-        name="Git"
-      >
-        {children}
-      </ContextProvider>
+    <ContextProvider
+      getMenuOptions={() => getMenuOptions(client, context.isEdit)}
+      name="Git"
+    >
+      {children}
+    </ContextProvider>
   );
 };
 

@@ -19,13 +19,13 @@ import {
   getUI,
   withMenuOptions,
   TMenuOption,
+  useEditContext,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
 import verifyPage from './PageVerification';
 import { useGatsbyPageContext } from './GatsbyPageProvider';
-import { useEditContext } from '@bodiless/core';
 
 type Client = {
   savePage: (path: string, template?: string) => AxiosPromise<any>;
@@ -95,7 +95,7 @@ const defaultClient = new BackendClient();
 const useGetMenuOptions = (): () => TMenuOption[] => {
   const context = useEditContext();
   const gatsbyPage = useGatsbyPageContext();
-  
+
   return () => [
     {
       name: 'newpage',
