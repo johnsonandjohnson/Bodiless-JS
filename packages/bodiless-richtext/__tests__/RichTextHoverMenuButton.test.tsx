@@ -65,7 +65,7 @@ describe('RichText hover menu button', () => {
       const pageEditContext = setupPageEditContext(true);
       const RichText = createRichtext();
       const PlainEditor = withDesign(simpleDesign)(RichText);
-      const wrapper = mount(
+      mount(
         <PageEditContext.Provider value={pageEditContext}>
           <PlainEditor />
         </PageEditContext.Provider>,
@@ -84,7 +84,7 @@ describe('RichText hover menu button', () => {
       const pageEditContext = setupPageEditContext(true);
       const RichText = createRichtext();
       const PlainEditor = withDesign(simpleDesign)(RichText);
-      const wrapper = mount(
+      mount(
         <PageEditContext.Provider value={pageEditContext}>
           <PlainEditor />
         </PageEditContext.Provider>,
@@ -105,7 +105,7 @@ describe('RichText hover menu button', () => {
       const pageEditContext = setupPageEditContext(true);
       const RichText = createRichtext();
       const PlainEditor = withDesign(simpleDesign)(RichText);
-      const wrapper = mount(
+      mount(
         <PageEditContext.Provider value={pageEditContext}>
           <PlainEditor />
         </PageEditContext.Provider>,

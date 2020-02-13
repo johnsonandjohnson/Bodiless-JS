@@ -65,41 +65,6 @@ describe('ContextMenuOptions', () => {
     expect(menuOptions[0].isDisabled()).toBe(true);
   });
 
-  // it('handles "isHidden" menu item option correctly.', () => {
-  //   const getMenuOptions = () => [
-  //     {
-  //       name: 'itemActive',
-  //       icon: 'icon',
-  //       handler: () => undefined,
-  //       isDisabled: () => true,
-  //     },
-  //     {
-  //       name: 'itemHidden',
-  //       icon: 'icon',
-  //       handler: () => undefined,
-  //       isHidden: () => true,
-  //     },
-  //   ];
-
-  //   const wrapper = mount(
-  //     <PageContextProvider getMenuOptions={getMenuOptions} name="provider">
-  //       <Foo />
-  //     </PageContextProvider>,
-  //   );
-
-  //   console.log('wrapper buttons: ', );
-  //   console.log(wrapper.find('button'));
-  //   console.log(wrapper.find('button').length);
-  //   // console.log('Tooltip: ', wrapper.find('Tooltip'));
-  //   // console.log('Tooltip.get(0): ', wrapper.find('Tooltip').get(0));
-  //   // console.log('Tooltip.props: ', wrapper.find('Tooltip').props);
-
-  //   // const renderedButtonNames = wrapper.find('Tooltip').get(0).props.overlay.props.options.map((item: any) => item.name);
-
-  //   // expect(renderedButtonNames).toEqual(expect.arrayContaining(['itemActive']));
-  //   // expect(renderedButtonNames).not.toEqual(expect.arrayContaining(['itemHidden']));
-  // });
-
   it('has "isDisabled" and "isActive" disabled by default.', () => {
     const getMenuOptions = () => [
       {

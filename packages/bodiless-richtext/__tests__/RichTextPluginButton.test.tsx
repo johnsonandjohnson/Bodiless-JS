@@ -87,7 +87,7 @@ describe('RichText plugin button', () => {
         const RichText = createRichtext();
         const PlainEditor = withDesign(simpleDesign)(RichText);
 
-        const wrapper = mount(
+        mount(
           <PageEditContext.Provider value={pageEditContext}>
             <PlainEditor />
           </PageEditContext.Provider>,
@@ -107,7 +107,7 @@ describe('RichText plugin button', () => {
         const createInlineButtonMockkFn = createInlineButtonMock();
         const RichText = createRichtext();
         const PlainEditor = withDesign(simpleDesign)(RichText);
-        const wrapper = mount(
+        mount(
           <PageEditContext.Provider value={pageEditContext}>
             <PlainEditor />
           </PageEditContext.Provider>,
@@ -125,7 +125,7 @@ describe('RichText plugin button', () => {
         const createMarkButtonMockFn = createMarkButtonMock();
         const RichText = createRichtext();
         const PlainEditor = withDesign(simpleDesign)(RichText);
-        const wrapper = mount(
+        mount(
           <PageEditContext.Provider value={pageEditContext}>
             <PlainEditor />
           </PageEditContext.Provider>,
@@ -146,7 +146,7 @@ describe('RichText plugin button', () => {
         const createBlockButtonMockFn = createBlockButtonMock();
         const RichText = createRichtext();
         const PlainEditor = withDesign(simpleDesign)(RichText);
-        const wrapper = mount(
+        mount(
           <PageEditContext.Provider value={pageEditContext}>
             <PlainEditor />
           </PageEditContext.Provider>,
@@ -165,7 +165,7 @@ describe('RichText plugin button', () => {
         const createInlineButtonMockkFn = createInlineButtonMock();
         const RichText = createRichtext();
         const PlainEditor = withDesign(simpleDesign)(RichText);
-        const wrapper = mount(
+        mount(
           <PageEditContext.Provider value={pageEditContext}>
             <PlainEditor />
           </PageEditContext.Provider>,
@@ -184,7 +184,7 @@ describe('RichText plugin button', () => {
         const createMarkButtonMockFn = createMarkButtonMock();
         const RichText = createRichtext();
         const PlainEditor = withDesign(simpleDesign)(RichText);
-        const wrapper = mount(
+        mount(
           <PageEditContext.Provider value={pageEditContext}>
             <PlainEditor />
           </PageEditContext.Provider>,
