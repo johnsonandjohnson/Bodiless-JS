@@ -48,14 +48,6 @@ npm run setup
 
 ```
 
-or
-
-```sh
-
-npm run fresh
-
-```
-
 to include cleaning step before the setup.
 
 1. Prepare the migration-settings.json. All settings can be found in Configuration section
