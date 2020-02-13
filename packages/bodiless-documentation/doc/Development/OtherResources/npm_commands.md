@@ -12,7 +12,6 @@ NPM commands, that are defined in the root `package.json` file and their purpose
 | `copyright`            | Adds copyright notice header to sll source files |
 | `fix`                  | Runs an eslint scan of the entire project and fixes all auto-fixable problems |
 | `fix:target`           | Runs an eslint scan of a particular file or directory and fixes all auto-fixable problems |
-| `fresh`                | Clean everything, remove node_modules and then run `bootstrap` |
 | `lint`                 | Runs an eslint scan of the entire project |
 | `lint:target`          | Runs an eslint scan of a particular file or directory |
 | `lint:change`          | Runs an eslint scan on all files which differ from the master branch. Can be slow. |
