@@ -15,6 +15,7 @@
 import React, { ComponentType } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
+import { PageEditContext } from '@bodiless/core';
 import {
   withDesign,
 } from '@bodiless/fclasses';
@@ -23,6 +24,12 @@ import {
   asMark,
   withButton,
 } from '../src/RichTextItemSetters';
+
+const setupPageEditContext = (isEdit: boolean): PageEditContext => {
+  const pageEditContext = new PageEditContext();
+  Object.defineProperty(pageEditContext, 'isEdit', { value: isEdit });
+  return pageEditContext;
+};
 
 const createRichtext = () => {
   let RichText;
@@ -55,9 +62,14 @@ describe('RichText hover menu button', () => {
       const simpleDesign = {
         SuperScript: applyTestHoc,
       };
+      const pageEditContext = setupPageEditContext(true);
       const RichText = createRichtext();
       const PlainEditor = withDesign(simpleDesign)(RichText);
-      mount(<PlainEditor />);
+      const wrapper = mount(
+        <PageEditContext.Provider value={pageEditContext}>
+          <PlainEditor />
+        </PageEditContext.Provider>,
+      );
       expect(createPluginButtonMockFn.mock.calls.length).toBe(1);
       expect(createPluginButtonMockFn.mock.calls[0][0].icon).toBe('format_size');
     });
@@ -69,9 +81,14 @@ describe('RichText hover menu button', () => {
       const simpleDesign = {
         CustomStrikeThrough: withStrikeThroughMeta,
       };
+      const pageEditContext = setupPageEditContext(true);
       const RichText = createRichtext();
       const PlainEditor = withDesign(simpleDesign)(RichText);
-      mount(<PlainEditor />);
+      const wrapper = mount(
+        <PageEditContext.Provider value={pageEditContext}>
+          <PlainEditor />
+        </PageEditContext.Provider>,
+      );
       expect(createPluginButtonMockFn.mock.calls.length).toBe(1);
       expect(createPluginButtonMockFn.mock.calls[0][0].icon).toBe('format_strikethrough');
     });
@@ -85,9 +102,14 @@ describe('RichText hover menu button', () => {
         CustomStrikeThrough: withStrikeThroughMeta,
         Italic: applyTestHoc,
       };
+      const pageEditContext = setupPageEditContext(true);
       const RichText = createRichtext();
       const PlainEditor = withDesign(simpleDesign)(RichText);
-      mount(<PlainEditor />);
+      const wrapper = mount(
+        <PageEditContext.Provider value={pageEditContext}>
+          <PlainEditor />
+        </PageEditContext.Provider>,
+      );
       expect(createPluginButtonMockFn.mock.calls.length).toBe(3);
       expect(createPluginButtonMockFn.mock.calls[0][0].icon).toBe('format_bold');
       expect(createPluginButtonMockFn.mock.calls[1][0].icon).toBe('format_strikethrough');

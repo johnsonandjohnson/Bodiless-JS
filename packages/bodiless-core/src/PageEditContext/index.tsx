@@ -65,7 +65,7 @@ export class PageEditStore implements PageEditStoreInterface {
 
   @observable contextMenuOptions: TMenuOption[] = [];
 
-  @observable isEdit = getFromSessionStorage('isEdit', false);
+  @observable isEdit = getFromSessionStorage('isEdit', true);
 
   @action
   setActiveContext(context?: PageEditContext) {
