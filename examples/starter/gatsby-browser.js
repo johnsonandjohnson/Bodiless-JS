@@ -62,12 +62,11 @@ export const shouldUpdateScroll = ({ prevRouterProps, routerProps: { location } 
             });
           });
           // Skip scrolling for hashes inside selected container element.
-          parentSelectors.forEach(item => {
-            document.querySelectorAll(item).forEach(element => {
-              if (element.isSameNode(targetElement.closest(item))) {
-                throw HashMatchException;
-              }
-            });
+          const parentStr = parentSelectors.join();
+          document.querySelectorAll(parentStr).forEach(element => {
+            if (element.isSameNode(targetElement.closest(parentStr))) {
+              throw HashMatchException;
+            }
           });
         }
       } catch (e) {
