@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import GatsbyMobxStore from '../src/dist/GatsbyMobxStore';
+import GatsbyMobxStore, { ItemState } from '../src/dist/GatsbyMobxStore';
 
 const generateData = (name: string, data: any) => ({
   Page: {
@@ -33,14 +33,44 @@ const dataSource = {
 
 describe('GatsbyMobxStore', () => {
   describe('when it receives data from backend', () => {
-    it('accepts the data', () => {
-      const store = new GatsbyMobxStore(dataSource);
-      const data = generateData('foo', { text: 'bar' });
-      store.updateData(data);
-      const data$0 = generateData('foo', { text: 'bar2' });
-      store.updateData(data$0);
-      const node$0 = store.getNode(['Page', 'foo']);
-      expect(node$0.text).toBe('bar2');
+    describe('when a backend entry does not exist in the store', () => {
+      it('accepts the entry', () => {
+        const store = new GatsbyMobxStore(dataSource);
+        const data = generateData('foo', { text: 'bar' });
+        store.updateData(data);
+        const data$0 = generateData('foo', { text: 'bar2' });
+        store.updateData(data$0);
+        const node$0 = store.getNode(['Page', 'foo']);
+        expect(node$0.text).toBe('bar2');
+      });
+    });
+    describe('when backend data does not have an entry form store', () => {
+      describe('when store entry is locked', () => {
+        it('should not remove the entry from store', () => {
+          const store = new GatsbyMobxStore(dataSource);
+          const data = generateData('foo', { text: 'bar' });
+          store.updateData(data);
+          // make the item locked
+          const node = store.store.get('Page$foo');
+          node!.state = ItemState.Locked;
+          // update store with new data
+          const data$ = generateData('foo2', { text: 'bar' });
+          store.updateData(data$);
+          const node$0 = store.getNode(['Page', 'foo']);
+          expect(node$0.text).toBe('bar');
+        });
+      });
+      describe('when store entry is not locked', () => {
+        it('should remove the entry from store', () => {
+          const store = new GatsbyMobxStore(dataSource);
+          const data = generateData('foo', { text: 'bar' });
+          store.updateData(data);
+          const data$ = generateData('foo2', { text: 'bar' });
+          store.updateData(data$);
+          const node$0 = store.getNode(['Page', 'foo']);
+          expect(node$0).toStrictEqual({});
+        });
+      });
     });
   });
 });
