@@ -18,7 +18,7 @@ import { useContextActivator } from '@bodiless/core';
 import { UI } from './types';
 
 type SortableListProps = {
-  children: React.ReactNode;
+  children: React.ReactNode[];
   onSortEnd: SortEndHandler;
   ui?: UI;
 };
