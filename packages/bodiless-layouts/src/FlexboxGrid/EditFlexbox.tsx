@@ -45,6 +45,7 @@ const EditFlexbox: FC<EditFlexboxProps> = (props:EditFlexboxProps) => {
         const { oldIndex, newIndex } = sort;
         setFlexboxItems(arrayMove(items, oldIndex, newIndex));
       }}
+      ui={ui}
     >
       {items.map(
         (flexboxItem: FlexboxItem, index: number): React.ReactNode => {

@@ -15,25 +15,44 @@
 import * as React from 'react';
 import { SortableContainer, SortEndHandler } from 'react-sortable-hoc';
 import { useContextActivator } from '@bodiless/core';
+import { UI } from './types';
 
 type SortableListProps = {
   children: React.ReactNode;
   onSortEnd: SortEndHandler;
+  ui?: UI;
 };
 
+const defaultUI: Partial<UI> = {
+  FlexboxEmpty: 'div',
+};
+
+const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });
+
 const SortableListWrapper = SortableContainer(
-  ({ children }: SortableListProps): React.ReactElement<SortableListProps> => (
-    <section className="bl-flex bl-flex-wrap bl-py-grid-3" {...useContextActivator()}>{children}</section>
-  ),
+  ({ children, ui }: SortableListProps): React.ReactElement<SortableListProps> => {
+    if (!children || !children.length) {
+      const { FlexboxEmpty } = getUI(ui);
+      return (
+        <FlexboxEmpty>
+          <section className="bl-flex bl-justify-center bl-flex-wrap bl-py-grid-3" {...useContextActivator()}>Empty Flexbox</section>
+        </FlexboxEmpty>
+      );
+    }
+    return (
+      <section className="bl-flex bl-flex-wrap bl-py-grid-3" {...useContextActivator()}>{children}</section>
+    );
+  },
 );
 SortableListWrapper.displayName = 'SortableListWrapper';
 
-const EditListView = ({ onSortEnd, children }: SortableListProps) => (
+const EditListView = ({ onSortEnd, ui, children }: SortableListProps) => (
   <SortableListWrapper
     axis="xy"
     useDragHandle
     transitionDuration={0}
     onSortEnd={onSortEnd}
+    ui={ui}
   >
     {children}
   </SortableListWrapper>
