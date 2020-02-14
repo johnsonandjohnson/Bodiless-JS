@@ -32,33 +32,40 @@ The tool is given URL that will crawl the existing site finding all pages, gener
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/en/) version >= 10
-
-- [npm](https://www.npmjs.com/)
+- [Node.js](https://nodejs.org/en/) version >= 10, suggest LTS
+- [NPM](https://docs.npmjs.com/) version 6.13.1+ is required.
 
 ### Installation & Run
 
-1. Clone this repository: https://github.com/johnsonandjohnson/bodiless-js.git
+1. Clone this repository: https://github.com/johnsonandjohnson/Bodiless-JS.git
 
-1. Execute the command to install the necessary packages
+    ```sh
+    git clone https://github.com/johnsonandjohnson/Bodiless-JS.git
+    cd Bodiless-JS
+    ```
 
-```sh
+1. Let's create a site to migrate the files to.
 
-npm run setup
+    The full directions can be found [here](https://johnsonandjohnson.github.io/Bodiless-JS/#/About/GettingStarted?id=creating-a-new-site)
+    We recommend this path it outside the repository root.  In the code example, I used `../NEW_MIGRATED_SITE`.
 
-```
+    ```sh
+    npm run ci
+    npm run new ../NEW_MIGRATED_SITE
+    cd ../NEW_MIGRATED_SITE
+    npm install
 
-to include cleaning step before the setup.
+    ```
 
 1. Prepare the migration-settings.json. All settings can be found in Configuration section
 
 1. Execute the command to flatten the site
 
-```sh
+    ```sh
 
-npm run migrate
+    npm run migrate
 
-```
+    ```
 
 
 ### Configuration
