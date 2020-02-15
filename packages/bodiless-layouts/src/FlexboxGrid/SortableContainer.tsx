@@ -12,10 +12,15 @@
  * limitations under the License.
  */
 
-import * as React from 'react';
+import React, { ComponentType, HTMLProps } from 'react';
 import { SortableContainer, SortEndHandler } from 'react-sortable-hoc';
 import { useContextActivator } from '@bodiless/core';
-import { UI } from './types';
+
+type FinalUI = {
+  FlexboxEmpty: ComponentType<HTMLProps<HTMLDivElement>> | string,
+};
+
+export type UI = Partial<FinalUI>;
 
 type SortableListProps = {
   children: React.ReactNode[];
@@ -23,7 +28,8 @@ type SortableListProps = {
   ui?: UI;
 };
 
-const defaultUI: Partial<UI> = {
+
+const defaultUI: FinalUI = {
   FlexboxEmpty: 'div',
 };
 
