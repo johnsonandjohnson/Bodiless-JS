@@ -22,6 +22,7 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
+    "cross-env": "^5.2.0",
     "bluebird": "^3.5.5",
     "cheerio": "^1.0.0-rc.3",
     "css-to-object": "^1.1.0",
@@ -108,8 +109,8 @@
     "test-clear": "jest --clearCache",
     "test-debug": "jest --detectOpenHandles --detectLeaks",
     "launch": "ts-node src/launch.ts",
-    "postinstall": "DEBUG=migration_tool node bin/apply-patches.js",
-    "migrate": "DEBUG=migration_tool bin/run"
+    "postinstall": "cross-env DEBUG=migration_tool node bin/apply-patches.js",
+    "migrate": "cross-env DEBUG=migration_tool bin/run"
   },
   "types": "lib/index.d.ts"
 }

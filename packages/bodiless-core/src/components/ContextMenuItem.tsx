@@ -44,6 +44,7 @@ const ContextMenuItem = ({ option, index, ui }: IProps) => {
   } = getUI(ui);
   const isActive = option.isActive ? option.isActive() : false;
   const isDisabled = option.isDisabled ? option.isDisabled() : false;
+  const isHidden = option.isHidden ? option.isHidden() : false;
   const isFirst = index === 0;
 
   const onToolbarButtonClick = (event: React.MouseEvent<HTMLDivElement>): void => {
@@ -78,6 +79,10 @@ const ContextMenuItem = ({ option, index, ui }: IProps) => {
 
   if (option.name.startsWith('__divider')) {
     return <ToolbarDivider />;
+  }
+
+  if (isHidden) {
+    return null;
   }
 
   return (
