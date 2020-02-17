@@ -36,7 +36,7 @@ export const shouldUpdateScroll = ({ prevRouterProps, routerProps: { location } 
 
       try {
         // eslint-disable-next-line
-        const { parentSelectors, elementSelectors, excludeHashes } = require('./no-scroll-settings.json');
+        const { parentSelectors, elementSelectors, excludeHashes } = require('./src/no-scroll-settings.json');
 
         if (excludeHashes.indexOf(hash) < 0) {
           // Skip scrolling for selected element.
