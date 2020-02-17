@@ -16,7 +16,11 @@
 import React, { FC } from 'react';
 import Cookies from 'universal-cookie';
 import {
-  contextMenuForm, getUI, ContextProvider, TMenuOption,
+  contextMenuForm,
+  getUI,
+  ContextProvider,
+  TMenuOption,
+  useEditContext,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
 import BackendClient from './BackendClient';
@@ -151,7 +155,7 @@ const formGitReset = (client: Client) => contextMenuForm({
 
 const defaultClient = new BackendClient();
 
-const getMenuOptions = (client: Client = defaultClient): TMenuOption[] => {
+const getMenuOptions = (client: Client = defaultClient, isEdit?: boolean): TMenuOption[] => {
   const saveChanges = canCommit ? formGitCommit(client) : undefined;
   return [
     {
@@ -163,6 +167,7 @@ const getMenuOptions = (client: Client = defaultClient): TMenuOption[] => {
       name: 'savechanges',
       icon: 'cloud_upload',
       isDisabled: () => !canCommit,
+      isHidden: () => !isEdit,
       handler: () => saveChanges,
     },
     // Currently descoping the Pull Changes Button Functionality.
@@ -175,18 +180,23 @@ const getMenuOptions = (client: Client = defaultClient): TMenuOption[] => {
     {
       name: 'resetchanges',
       icon: 'first_page',
+      isHidden: () => !isEdit,
       handler: () => formGitReset(client),
     },
   ];
 };
 
-const GitProvider: FC<Props> = ({ children, client }) => (
-  <ContextProvider
-    getMenuOptions={() => getMenuOptions(client)}
-    name="Git"
-  >
-    {children}
-  </ContextProvider>
-);
+const GitProvider: FC<Props> = ({ children, client }) => {
+  const context = useEditContext();
+
+  return (
+    <ContextProvider
+      getMenuOptions={() => getMenuOptions(client, context.isEdit)}
+      name="Git"
+    >
+      {children}
+    </ContextProvider>
+  );
+};
 
 export default GitProvider;

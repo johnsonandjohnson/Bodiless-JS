@@ -49,7 +49,7 @@ hooks:
     build: |
         bash ./platform.sh build
     deploy: |
-        bash ./platform.sh fresh
+        bash ./platform.sh deploy
     post_deploy: |
         bash ./platform.sh post-deploy
 
