@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 
-import GatsbyMobxStore, { ItemState } from '../src/dist/GatsbyMobxStore';
+import GatsbyMobxStore from '../src/dist/GatsbyMobxStore';
+import { ItemState } from '../src/dist/GatsbyMobxStoreItem';
 
 const generateData = (name: string, data: any) => ({
   Page: {

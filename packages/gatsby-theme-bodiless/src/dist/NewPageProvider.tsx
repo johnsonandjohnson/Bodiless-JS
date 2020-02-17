@@ -19,6 +19,7 @@ import {
   getUI,
   withMenuOptions,
   TMenuOption,
+  useEditContext,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
 import BackendClient from './BackendClient';
@@ -92,12 +93,15 @@ Click ok to visit the new page; if it does not load, wait a while and reload.`);
 const defaultClient = new BackendClient();
 
 const useGetMenuOptions = (): () => TMenuOption[] => {
+  const context = useEditContext();
   const gatsbyPage = useGatsbyPageContext();
+
   return () => [
     {
       name: 'newpage',
       icon: 'note_add',
       label: 'Page',
+      isHidden: () => !context.isEdit,
       handler: () => formPageAdd(defaultClient, gatsbyPage.subPageTemplate),
     },
   ];

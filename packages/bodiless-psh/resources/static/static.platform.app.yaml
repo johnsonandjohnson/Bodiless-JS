@@ -23,56 +23,11 @@ type: 'nodejs:10'
 build:
     flavor: none
 
-# The hooks that will be triggered when the package is deployed.
 hooks:
-    # Build hooks can modify the application files on disk but not access any services like databases.
-    build: |
-        if [ $APP_NPM_REGISTRY ] && [ $APP_NPM_AUTH ]; then
-            bash -c 'echo Auth token is ${APP_NPM_AUTH:0:50}...'
-            echo "@bodiless:registry=https:${APP_NPM_REGISTRY}" > .npmrc
-            echo "${APP_NPM_REGISTRY}:_authToken=${APP_NPM_AUTH}" >> .npmrc
-        else
-            echo "Npm registry env vars are missing. Trying to build from public registry..."
-        fi
-        npm ci
-        npm run build
-        #robots.txt preparation
-        export PSH_URL_REPLACER_SRC_FILE=$PLATFORM_DOCUMENT_ROOT/robots.txt
-        export PSH_URL_REPLACER_TMP_FILE=$PLATFORM_DOCUMENT_ROOT/../static/robots_pshtmp.txt
-        export PSH_URL_REPLACER_TARGET_FILE=$APP_VOLUME/robots.txt
-        node $PLATFORM_APP_DIR/node_modules/@bodiless/psh/lib/psh-url-replacer.js build
-        #sitemap.xml preparation
-        export PSH_URL_REPLACER_SRC_FILE=$PLATFORM_DOCUMENT_ROOT/sitemap.xml
-        export PSH_URL_REPLACER_TMP_FILE=$PLATFORM_DOCUMENT_ROOT/../static/sitemap_pshtmp.xml
-        export PSH_URL_REPLACER_TARGET_FILE=$APP_VOLUME/sitemap.xml
-        node $PLATFORM_APP_DIR/node_modules/@bodiless/psh/lib/psh-url-replacer.js build
-        # ssi preparation
-        export SSI_CONF=ssi/ssi_conf.json
-        export DOCUMENT_ROOT=$PLATFORM_DOCUMENT_ROOT
-        export VOLUME_DIR=$APP_VOLUME
-        node $PLATFORM_APP_DIR/node_modules/@bodiless/psh/lib/generate-ssi-files.js build
-    deploy: |
-        #processing site url
-        APP_SITE_URL=$(echo $APP_SITE_URL | sed -e "s/\${PLATFORM_ENVIRONMENT}/$PLATFORM_ENVIRONMENT/g")
-        APP_SITE_URL=$(echo $APP_SITE_URL | sed -e "s/\${PLATFORM_PROJECT}/$PLATFORM_PROJECT/g")
-        #processing robots.txt
-        export PSH_URL_REPLACER_TMP_FILE=$PLATFORM_DOCUMENT_ROOT/../static/robots_pshtmp.txt
-        export PSH_URL_REPLACER_TARGET_FILE=$APP_VOLUME/robots.txt
-        export PSH_URL_REPLACER_SRC_URL=$APP_PROD_URL
-        export PSH_URL_REPLACER_TARGET_URL=$APP_SITE_URL
-        export PSH_URL_REPLACER_PROD_ENV=$APP_PROD_ENV
-        node $PLATFORM_APP_DIR/node_modules/@bodiless/psh/lib/psh-url-replacer.js deploy
-        #processing sitemap.xml
-        export PSH_URL_REPLACER_TMP_FILE=$PLATFORM_DOCUMENT_ROOT/../static/sitemap_pshtmp.xml
-        export PSH_URL_REPLACER_TARGET_FILE=$APP_VOLUME/sitemap.xml
-        export PSH_URL_REPLACER_SRC_URL=$APP_PROD_URL
-        export PSH_URL_REPLACER_TARGET_URL=$APP_SITE_URL
-        export PSH_URL_REPLACER_PROD_ENV=$APP_PROD_ENV
-        node $PLATFORM_APP_DIR/node_modules/@bodiless/psh/lib/psh-url-replacer.js deploy
-        # ssi files generation
-        export SSI_CONF=ssi/ssi_conf.json
-        export VOLUME_DIR=$APP_VOLUME
-        node $PLATFORM_APP_DIR/node_modules/@bodiless/psh/lib/generate-ssi-files.js deploy
+    build:  bash ./static.platform.sh build
+    deploy: bash ./static.platform.sh deploy
+    post_deploy: bash ./static.platform.sh post_deploy
+
 
 # The size of the persistent disk of the application (in MB).
 disk: 256
