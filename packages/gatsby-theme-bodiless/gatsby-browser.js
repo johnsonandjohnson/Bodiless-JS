@@ -40,12 +40,11 @@ export const shouldUpdateScroll = ({ prevRouterProps, routerProps: { location } 
 
         if (excludeHashes.indexOf(hash) < 0) {
           // Skip scrolling for selected element.
-          elementSelectors.forEach(item => {
-            document.querySelectorAll(item).forEach(element => {
-              if (element.attributes.href && (element.attributes.href.value === `#${hash}`)) {
-                throw HashMatchException;
-              }
-            });
+          const elementStr = elementSelectors.join();
+          document.querySelectorAll(elementStr).forEach(element => {
+            if (element.attributes.href && (element.attributes.href.value === `#${hash}`)) {
+              throw HashMatchException;
+            }
           });
           // Skip scrolling for hashes inside selected container element.
           const parentStr = parentSelectors.join();
