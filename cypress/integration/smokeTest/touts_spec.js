@@ -9,28 +9,28 @@ describe('Tout testing', function () {
   })
 
 
-  const altFieldXpath = '//form[@aria-label="Context Menu Image Form"]//input[@id="image-alt"]'
-  const checkmarkIconImageFormXpath = '//form[@aria-label="Context Menu Image Form"]//button[@aria-label="Submit"]'
-  const checkmarkIconLinkFormXpath = '//form[@aria-label="Context Menu Link Form"]//button[@aria-label="Submit"]'
-  const ctaButtonXpath = '//*[@id="tout-horizontal"]//a[@data-tout-element="link"]'
-  const ctaLabel = 'AT - CTA Link 1'
-  const ctaLabelXpath = '//*[@id="tout-horizontal"]//*[@data-tout-element="link"]//div[@data-slate-editor="true"]'
+  const title = 'AT - Title 1'
   const description = 'AT - Description 1'
-  const descriptionXpath = '//*[@id="tout-horizontal"]//*[@data-tout-element="body"]//div[@data-slate-editor="true"]'
-  const editedPostfix = ' - edited'
-  const editedToutUrl = '-edited' 
+  const ctaLabel = 'AT - CTA Link 1'
+  const toutUrl = 'AT-toutUrl1'
   const imageAltText = 'AT-1stToutAltText'
-  const imageIconXpath = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Image"]'
-  const imageLinkXpath = '//div[@id="tout-horizontal"]//a[@data-tout-element="image-link"]'
-  const imagePlaceholderXpath = '//*[@id="tout-horizontal"]//img[@data-tout-element="image"]'
+  const editedPostfix = ' - edited'
+  const editedToutUrl = '-edited'
   const imageOriginal = 'images/img_615x500.jpg'
   const imageUpdated = 'images/img_615x502.jpg'
-  const linkIconXpath = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Link"]'
-  const title = 'AT - Title 1'
   const titleXpath = '//*[@id="tout-horizontal"]//*[@data-tout-element="title"]//div[@data-slate-editor="true"]'
-  const toutUrl = 'AT-toutUrl1'
+  const descriptionXpath = '//*[@id="tout-horizontal"]//*[@data-tout-element="body"]//div[@data-slate-editor="true"]'
+  const ctaLabelXpath = '//*[@id="tout-horizontal"]//*[@data-tout-element="link"]//div[@data-slate-editor="true"]'
+  const imagePlaceholderXpath = '//*[@id="tout-horizontal"]//img[@data-tout-element="image"]'
   const urlFieldXpath = '//form[@aria-label="Context Menu Link Form"]//input[@id="link-href"]'
-  
+  const linkIconXpath = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Link"]'
+  const checkmarkIconLinkFormXpath = '//form[@aria-label="Context Menu Link Form"]//button[@aria-label="Submit"]'
+  const altFieldXpath = '//form[@aria-label="Context Menu Image Form"]//input[@id="image-alt"]'
+  const checkmarkIconImageFormXpath = '//form[@aria-label="Context Menu Image Form"]//button[@aria-label="Submit"]'
+  const imageIconXpath = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Image"]'
+  const ctaButtonXpath = '//*[@id="tout-horizontal"]//a[@data-tout-element="link"]'
+  const imageLinkXpath = '//div[@id="tout-horizontal"]//a[@data-tout-element="image-link"]'
+
 
   it('touts: 1 - filling in Title', () => {
     cy.xpath(titleXpath)
