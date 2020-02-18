@@ -89,7 +89,3 @@ item in the "About" category is "GettingStarted.md". The contents of each catego
 as the actual documentation to insert at "GettingStarted.md", will be determined by the
 individual packages supplying documentation.  Thus, you can specify an order for the things
 you care about, and let the documentation builder fill in the remaining documentaiton.
-
-### Known issues
-
-During execution of `npm run docs` command on Windows you may face issues with permissions to establish symlinks. To avoid this run Terminal as administrator. 
