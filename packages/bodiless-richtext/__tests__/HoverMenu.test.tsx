@@ -1,7 +1,14 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
+import { PageEditContext } from '@bodiless/core';
 import HoverMenu, { HoverMenuProps } from '../src/core/HoverMenu';
+
+const setupPageEditContext = (isEdit: boolean): PageEditContext => {
+  const pageEditContext = new PageEditContext();
+  Object.defineProperty(pageEditContext, 'isEdit', { value: isEdit });
+  return pageEditContext;
+};
 
 describe('hover menu', () => {
   it('should render', () => {
@@ -10,15 +17,20 @@ describe('hover menu', () => {
   });
 
   it('should have id, children and className', () => {
+    const pageEditContext = setupPageEditContext(true);
     const content = Math.random();
     const props: HoverMenuProps = {
       className: 'fooClass',
     };
-    const wrapper = shallow(
-      <HoverMenu {...props}>
-        {content}
-      </HoverMenu>,
+
+    const wrapper = mount(
+      <PageEditContext.Provider value={pageEditContext}>
+        <HoverMenu {...props}>
+          {content}
+        </HoverMenu>
+      </PageEditContext.Provider>,
     );
+
     const div = wrapper.find('div');
     const { className, id } = div.props();
     expect(id).toContain('hover-menu-');
