@@ -38,21 +38,25 @@ export const shouldUpdateScroll = ({ prevRouterProps, routerProps: { location } 
         // eslint-disable-next-line
         const { parentSelectors, elementSelectors, excludeHashes } = require('./src/no-scroll-settings.json');
 
-        if (excludeHashes.indexOf(hash) < 0) {
+        if (!excludeHashes || excludeHashes.indexOf(hash) < 0) {
           // Skip scrolling for selected element.
-          const elementStr = elementSelectors.join();
-          document.querySelectorAll(elementStr).forEach(element => {
-            if (element.attributes.href && (element.attributes.href.value === `#${hash}`)) {
-              throw HashMatchException;
-            }
-          });
-          // Skip scrolling for hashes inside selected container element.
-          const parentStr = parentSelectors.join();
-          document.querySelectorAll(parentStr).forEach(element => {
-            if (element.isSameNode(targetElement.closest(parentStr))) {
-              throw HashMatchException;
-            }
-          });
+          if (elementSelectors) {
+            const elementStr = elementSelectors.join();
+            document.querySelectorAll(elementStr).forEach(element => {
+              if (element.attributes.href && (element.attributes.href.value === `#${hash}`)) {
+                throw HashMatchException;
+              }
+            });
+          }
+          if (parentSelectors) {
+            // Skip scrolling for hashes inside selected container element.
+            const parentStr = parentSelectors.join();
+            document.querySelectorAll(parentStr).forEach(element => {
+              if (element.isSameNode(targetElement.closest(parentStr))) {
+                throw HashMatchException;
+              }
+            });
+          }
         }
       } catch (e) {
         if (HashMatchException === e) {
