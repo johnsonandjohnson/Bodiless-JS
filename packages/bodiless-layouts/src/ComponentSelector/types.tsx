@@ -65,6 +65,8 @@ export type FinalUI = {
   MasterWrapper: ComponentType<HTMLProps<HTMLDivElement>> | string;
   // A div that can be configured as column or row
   FlexSection: ComponentType<HTMLProps<HTMLDivElement>> | string;
+  // A div wraps an empty flexbox
+  FlexboxEmpty: ComponentType<HTMLProps<HTMLDivElement>> | string;
   // A div that will wrap the entirety of the Accordions and Accordion Checkboxes
   ComponentSelectorWrapper: ComponentType<HTMLProps<HTMLDivElement>> | string;
   // A input that will wrap the close menu icon
