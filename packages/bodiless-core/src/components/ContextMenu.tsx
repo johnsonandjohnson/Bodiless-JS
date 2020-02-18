@@ -50,7 +50,7 @@ const ContextMenu = (props: IProps) => {
     .reduce(
       (acc: TMenuOption[], op: TMenuOption, currentIndex: Number) => (
         acc.length && acc[acc.length - 1].group
-          !== op.group
+          !== op.group && (typeof op.isHidden === 'function' ? !op.isHidden() : true)
           ? [...acc, getDivider(currentIndex), op]
           : [...acc, op]),
       [] as TMenuOption[],

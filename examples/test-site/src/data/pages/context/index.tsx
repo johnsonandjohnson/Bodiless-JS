@@ -60,36 +60,6 @@ const LeftForm = demoForm('Menu option provided by left box');
 const TopForm = demoForm('Menu Option provided by outer box');
 const RightForm = demoForm('Menu option provided by right box');
 
-const topOptions = () => [
-  {
-    icon: 'keyboard_arrow_up',
-    name: 'top',
-    isActive: () => true,
-    handler: () => TopForm,
-    local: true,
-  },
-];
-const leftOptions = () => [
-  {
-    icon: 'keyboard_arrow_left',
-    name: 'home',
-    isActive: () => true,
-    handler: () => LeftForm,
-    local: true,
-    global: false,
-  },
-];
-
-const rightOptions = () => [
-  {
-    icon: 'keyboard_arrow_right',
-    name: 'home',
-    isActive: () => true,
-    handler: () => RightForm,
-    local: true,
-  },
-];
-
 type BoxProps = {
   getMenuOptions?: TMenuOptionGetter;
   name: string;
@@ -150,26 +120,63 @@ const Box: React.FC<BoxProps> = observer(props => {
   return isEdit ? <EditableBox {...props} /> : <StaticBox {...props} />;
 });
 
-const BasicTest = () => (
-  <Box
-    name="Outer"
-    getMenuOptions={topOptions}
-    className="flex w-3/4 flex-wrap"
-  >
-    <div className="w-full">Outer Box</div>
-    <Box getMenuOptions={leftOptions} name="left" className="flex-1">
-      Left Box&nbsp;
-      <Link nodeKey="linkit">This is an editable Nodelink.</Link>
-      <Editable nodeKey="test" placeholder="bob" />
-      <Link nodeKey="test2"><Editable nodeKey="text2text" placeholder="link me!" /></Link>
+const BasicTest = () => {
+  const context = useEditContext();
+
+  const topOptions = () => [
+    {
+      icon: 'keyboard_arrow_up',
+      name: 'top',
+      isActive: () => true,
+      handler: () => TopForm,
+      isHidden: () => !context.isEdit,
+      local: true,
+    },
+  ];
+  const leftOptions = () => [
+    {
+      icon: 'keyboard_arrow_left',
+      name: 'home',
+      isActive: () => true,
+      handler: () => LeftForm,
+      isHidden: () => !context.isEdit,
+      local: true,
+      global: false,
+    },
+  ];
+
+  const rightOptions = () => [
+    {
+      icon: 'keyboard_arrow_right',
+      name: 'home',
+      isActive: () => true,
+      handler: () => RightForm,
+      isHidden: () => !context.isEdit,
+      local: true,
+    },
+  ];
+
+  return (
+    <Box
+      name="Outer"
+      getMenuOptions={topOptions}
+      className="flex w-3/4 flex-wrap"
+    >
+      <div className="w-full">Outer Box</div>
+      <Box getMenuOptions={leftOptions} name="left" className="flex-1">
+        Left Box&nbsp;
+        <Link nodeKey="linkit">This is an editable Nodelink.</Link>
+        <Editable nodeKey="test" placeholder="bob" />
+        <Link nodeKey="test2"><Editable nodeKey="text2text" placeholder="link me!" /></Link>
+      </Box>
+      <Box getMenuOptions={rightOptions} name="left" className="flex-1">
+        <Image nodeKey="imageit" />
+        <Image nodeKey="imageit2" />
+        Right Box
+      </Box>
     </Box>
-    <Box getMenuOptions={rightOptions} name="left" className="flex-1">
-      <Image nodeKey="imageit" />
-      <Image nodeKey="imageit2" />
-      Right Box
-    </Box>
-  </Box>
-);
+  );
+};
 
 // const ImageTest = ({ node }: TestProps) => (
 //   <Box name="Outer" getMenuOptions={topOptions} className="flex w-3/4 flex-wrap">
