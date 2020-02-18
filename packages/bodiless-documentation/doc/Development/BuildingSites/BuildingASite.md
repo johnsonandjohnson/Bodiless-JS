@@ -97,15 +97,22 @@ Here are some suggested ways to do this:
 * Using [Open Source Typefaces npm packages](https://github.com/KyleAMathews/typefaces) built by others 
 * Or load them directly via [tutorial](https://dev.to/iangloude/4-steps-to-self-hosted-fonts-in-gatsby-aj2)
 
-The fonts can be applied either:
-* site wide by adding to `src/components/index.tailwind.css` and applying the font
+The fonts can be applied in one of two ways:
+* Site wide: 
+  * This can be done by adding the definition to apply the font in `src/components/index.tailwind.css`.
+  
    ```
    body {
      @apply font-custom_font;
    }
    ```
-* or to specific headers/elements within each element in `src/components/Elements.token.ts`
+   
+  * For more information recommend reading Tailwind's [Base Style Documentation](https://tailwindcss.com/docs/adding-base-styles/)
+* Elemental level by adding classes to the specific elements within `src/components/Elements.token.ts`
 
+   ```
+   const asHeader1 = addClasses('text-3xl font-custom_font')
+   ```
 ## 3. Identifying Components
 A BodilessJS site is built out of many components.  The starter kit comes with some ready-made and re-usable components and can be found in `/src/components`
 
