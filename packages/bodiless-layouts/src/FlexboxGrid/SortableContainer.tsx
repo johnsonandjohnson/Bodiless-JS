@@ -28,7 +28,6 @@ type SortableListProps = {
   ui?: UI;
 };
 
-
 const defaultUI: FinalUI = {
   FlexboxEmpty: 'div',
 };
