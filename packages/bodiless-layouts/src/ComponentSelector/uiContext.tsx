@@ -19,6 +19,7 @@ import { FinalUI } from './types';
 export const defaultUI: FinalUI = {
   MasterWrapper: 'div',
   FlexSection: 'div',
+  FlexboxEmpty: 'div',
   ComponentSelectorWrapper: 'div',
   SubmitButton: 'button',
   AllCheckboxWrapper: 'div',

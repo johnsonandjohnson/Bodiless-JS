@@ -147,6 +147,17 @@ You can verify that the variable was created properly by executing, eg:
   +-----------------+---------------------------+
   ```
 
+#### Optional: Configure an NPM Private Registry
+
+If you wish to install packages from a private registry, you may do so. The
+packages to be installed must be namespaced. Set the following 3 environment
+variables on p.sh. All variables should be visible at both build and run time:
+- `env:APP_NPM_REGISTRY`: the full path to your registry, eg
+  `//my-artifactory.com/api/npm/my-registry/`.
+- `env:APP_NPM_AUTH`: Ypur NPM authentication token. This should be marked as sensitive.
+- `env:APP_NPM_NAMESPACE`: The namespace of the packages in your private
+  regsitry, eg `@mynamespace`.
+
 ### Step 4. Configure the platform.sh Git Service integration.
 
 Platform.sh provides out-of-the-box integrations with many popular Git service providers.
@@ -300,6 +311,31 @@ Are you sure you want to continue? [y/N] y
   is created and deployed to platform.sh. *Note you must first push the branch to bitbucket*.
 - Issue a PR to your repository and verify that the PR branch is deployed (note that only
   the static environment will be build for PR's on Bitbucket).
+
+### Customizing Hook Implementations
+
+This package includes default implementations of platform.sh
+[build and deploy hooks](https://docs.platform.sh/configuration/app/build.html#hooks) which
+should work for most Bodiless sites.  However, should your site have special needs, you can
+customize by creating a `platform.custom.sh` or `static.platform.custom.sh` script and placing
+it alongside the appropriate `.platform.app.yaml` file (at the root of your repository for the
+static site, or in the `/edit` directory for the edit app).  In this script, you can define for
+each platform.sh hook one of the following functions:
+
+- `prepare_{hook} ()` - Run before the default implementation of the hook.
+- `hook ()` - Replaces the default implementation of the hook.
+- `finalize_{hook} ()` - Run after the default implementation of the hook.
+
+If you wish to extend the default implementation, you can do so by calling it from your function.
+To do this safely (ie to avoid errors if the default implementation doesn't exist) always use the
+`invoke` helper:
+
+```bash
+prepare_deploy () {
+  invoke default_prepare_deploy
+  # Your custom logic here...
+}
+```
 
 ## Building and Deploying
 

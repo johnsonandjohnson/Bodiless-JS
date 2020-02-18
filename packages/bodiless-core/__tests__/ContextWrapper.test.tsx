@@ -19,6 +19,8 @@ import PageEditContext from '../src/PageEditContext';
 
 describe('ContextWrapper', () => {
   beforeEach(() => {
+    const mockIsEdit = jest.spyOn(PageEditContext.prototype, 'isEdit', 'get');
+    mockIsEdit.mockImplementation(() => true);
     // TODO: Rather than spying on the prototype we should mock the class and watch an instance.
     // (but currently it's hard to get hold of the root instance, and we can't inject a new instance
     // since enzyme doesn't support the context api.)
