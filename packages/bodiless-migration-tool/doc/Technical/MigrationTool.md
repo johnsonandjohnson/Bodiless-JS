@@ -266,6 +266,38 @@ After performing of `npm run build`:
 
 Full examples can be found in [examples/settings](examples/settings).
 
+### Configure no-scroll for selected anchor element.
+
+Sometimes, migrated page contains foldable accordion elements that implemented with anchor fragment. By default GatsbyJS navigation compares the change in url and scrolls page to location base on given url hash.
+
+If this is not the desired behavior for migrated page, user might override scrolling by configure `no-scroll-settings.json` and place it under `[site]/src/@bodiless/gatsby-theme-bodiless/` folder. Behind the scenes, it shadows Gatsby theme packages/gatsby-theme-bodiless/src/no-scroll-settings.json configure file.
+
+Here's an example of no-scroll-settings.json usages:
+
+```
+{
+  "parentSelectors": [
+    ".container-classname-1",
+    ".container-classname-2"
+  ],
+  "elementSelectors": [
+    ".container-classname .fieldset .field__item > a"
+  ],
+  "excludeHashes": [
+    "hash-to-be-excluded-from-no-scrolling"
+  ]
+}
+
+```
+
+Notes,
+1. All hash anchors under classname ".container-classname-1" and ".container-classname-2" container will make page scrolling.
+
+2. Clicking on anchor that matches "elementSelectors" will not make page scrolling.
+
+3. Specify "excludeHashes" for a list of hash names (without "#" character) to be excluded from no-scrolling feature.
+
+
 ### Technical Notes
 
 #### Chosen libraries
