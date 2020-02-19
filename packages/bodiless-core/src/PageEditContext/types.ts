@@ -33,6 +33,10 @@ export interface CanControlEditMode {
   isEdit: boolean;
   toggleEdit: (mode?: boolean) => void;
 }
+export interface CanControlMenuPosition {
+  isPositionToggled: boolean;
+  togglePosition: (mode?: boolean) => void;
+}
 export interface CanGetContextMenuOptions {
   contextMenuOptions: TMenuOption[];
 }
@@ -55,12 +59,14 @@ export interface PageEditStore {
   isEdit: boolean;
   setActiveContext(context?: PageEditContextInterface): void;
   toggleEdit(): void;
+  togglePosition(): void;
   contextTrail: string[];
 }
 
 export interface PageEditContextInterface extends
   CanBeActivated,
   CanControlEditMode,
+  CanControlMenuPosition,
   CanGetContextMenuOptions,
   DefinesLocalEditContext
 {
