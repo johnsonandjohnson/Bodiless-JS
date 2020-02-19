@@ -14,19 +14,25 @@
 
 import React, { FC } from 'react';
 import ReactTooltip from 'rc-tooltip';
-import { addClasses } from '@bodiless/fclasses';
+import { flow } from 'lodash';
+import { addClasses, removeClasses } from '@bodiless/fclasses';
 import {
   ContextMenu, ContextMenuUI, ContextMenuProps,
 } from '@bodiless/core';
 import {
   ComponentFormTitle, ComponentFormCloseButton, ComponentFormLabel, ComponentFormText,
   ComponentFormButton, Icon, Div, Hr, ToolbarButton, ComponentFormUnwrapButton,
-  ComponentFormError,
+  ComponentFormError, ComponentFormSubmitButton,
 } from '@bodiless/ui';
 
 const Toolbar = addClasses(
   'bl-bg-black bl-rounded bl-z-50 bl-p-grid-2 bl-fixed bl-top-grid-0 bl-left-grid-0 bl-text-white',
 )(Div);
+
+const ToolbarRight = flow(
+  addClasses('bl-right-grid-0'),
+  removeClasses('bl-left-grid-0'),
+)(Toolbar);
 
 export const FormWrapper = addClasses('bl-flex')(Div);
 
@@ -60,6 +66,7 @@ const ui: ContextMenuUI = {
   ComponentFormText,
   ComponentFormButton,
   ComponentFormCloseButton,
+  ComponentFormSubmitButton,
   ComponentFormUnwrapButton,
   ComponentFormError,
   Icon,
@@ -70,8 +77,16 @@ const ui: ContextMenuUI = {
   Tooltip: GlobalTooltip,
 };
 
-const GlobalContextMenu: FC<ContextMenuProps> = props => (
-  <ContextMenu {...props} ui={ui} />
-);
+const GlobalContextMenu: FC<ContextMenuProps> = props => {
+  const { isPositionToggled = false } = props;
+  if (isPositionToggled) {
+    const updatedUi = {
+      ...ui,
+      Toolbar: ToolbarRight,
+    };
+    return <ContextMenu {...props} ui={updatedUi} />;
+  }
+  return <ContextMenu {...props} ui={ui} />;
+};
 
 export default GlobalContextMenu;

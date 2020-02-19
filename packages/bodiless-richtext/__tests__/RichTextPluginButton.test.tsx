@@ -15,6 +15,7 @@
 import React, { ComponentType } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
+import { PageEditContext } from '@bodiless/core';
 import {
   withDesign,
 } from '@bodiless/fclasses';
@@ -25,6 +26,12 @@ import {
   asInline,
   withButton,
 } from '../src/RichTextItemSetters';
+
+const setupPageEditContext = (isEdit: boolean): PageEditContext => {
+  const pageEditContext = new PageEditContext();
+  Object.defineProperty(pageEditContext, 'isEdit', { value: isEdit });
+  return pageEditContext;
+};
 
 const createRichtext = () => {
   let RichText;
@@ -75,10 +82,18 @@ describe('RichText plugin button', () => {
         const simpleDesign = {
           H1: applyTestHoc,
         };
+        const pageEditContext = setupPageEditContext(true);
         const createBlockButtonMockFn = createBlockButtonMock();
         const RichText = createRichtext();
         const PlainEditor = withDesign(simpleDesign)(RichText);
-        mount(<PlainEditor />);
+
+        mount(
+          <PageEditContext.Provider value={pageEditContext}>
+            <PlainEditor />
+          </PageEditContext.Provider>,
+        );
+
+        // mount(<PlainEditor />);
         expect(createBlockButtonMockFn.mock.calls.length).toBe(1);
         expect(createBlockButtonMockFn.mock.calls[0][0]).toBe('H1');
       });
@@ -88,10 +103,15 @@ describe('RichText plugin button', () => {
         const simpleDesign = {
           Link: applyTestHoc,
         };
+        const pageEditContext = setupPageEditContext(true);
         const createInlineButtonMockkFn = createInlineButtonMock();
         const RichText = createRichtext();
         const PlainEditor = withDesign(simpleDesign)(RichText);
-        mount(<PlainEditor />);
+        mount(
+          <PageEditContext.Provider value={pageEditContext}>
+            <PlainEditor />
+          </PageEditContext.Provider>,
+        );
         expect(createInlineButtonMockkFn.mock.calls.length).toBe(1);
         expect(createInlineButtonMockkFn.mock.calls[0][0]).toBe('Link');
       });
@@ -101,10 +121,15 @@ describe('RichText plugin button', () => {
         const simpleDesign = {
           SuperScript: applyTestHoc,
         };
+        const pageEditContext = setupPageEditContext(true);
         const createMarkButtonMockFn = createMarkButtonMock();
         const RichText = createRichtext();
         const PlainEditor = withDesign(simpleDesign)(RichText);
-        mount(<PlainEditor />);
+        mount(
+          <PageEditContext.Provider value={pageEditContext}>
+            <PlainEditor />
+          </PageEditContext.Provider>,
+        );
         expect(createMarkButtonMockFn.mock.calls.length).toBe(1);
         expect(createMarkButtonMockFn.mock.calls[0][0]).toBe('SuperScript');
       });
@@ -117,10 +142,15 @@ describe('RichText plugin button', () => {
         const simpleDesign = {
           CustomStrikeThrough: withStrikeThroughMeta,
         };
+        const pageEditContext = setupPageEditContext(true);
         const createBlockButtonMockFn = createBlockButtonMock();
         const RichText = createRichtext();
         const PlainEditor = withDesign(simpleDesign)(RichText);
-        mount(<PlainEditor />);
+        mount(
+          <PageEditContext.Provider value={pageEditContext}>
+            <PlainEditor />
+          </PageEditContext.Provider>,
+        );
         expect(createBlockButtonMockFn.mock.calls.length).toBe(1);
         expect(createBlockButtonMockFn.mock.calls[0][0]).toBe('CustomStrikeThrough');
       });
@@ -131,10 +161,15 @@ describe('RichText plugin button', () => {
         const simpleDesign = {
           CustomStrikeThrough: withStrikeThroughMeta,
         };
+        const pageEditContext = setupPageEditContext(true);
         const createInlineButtonMockkFn = createInlineButtonMock();
         const RichText = createRichtext();
         const PlainEditor = withDesign(simpleDesign)(RichText);
-        mount(<PlainEditor />);
+        mount(
+          <PageEditContext.Provider value={pageEditContext}>
+            <PlainEditor />
+          </PageEditContext.Provider>,
+        );
         expect(createInlineButtonMockkFn.mock.calls.length).toBe(1);
         expect(createInlineButtonMockkFn.mock.calls[0][0]).toBe('CustomStrikeThrough');
       });
@@ -145,10 +180,15 @@ describe('RichText plugin button', () => {
         const simpleDesign = {
           CustomStrikeThrough: withStrikeThroughMeta,
         };
+        const pageEditContext = setupPageEditContext(true);
         const createMarkButtonMockFn = createMarkButtonMock();
         const RichText = createRichtext();
         const PlainEditor = withDesign(simpleDesign)(RichText);
-        mount(<PlainEditor />);
+        mount(
+          <PageEditContext.Provider value={pageEditContext}>
+            <PlainEditor />
+          </PageEditContext.Provider>,
+        );
         expect(createMarkButtonMockFn.mock.calls.length).toBe(1);
         expect(createMarkButtonMockFn.mock.calls[0][0]).toBe('CustomStrikeThrough');
       });

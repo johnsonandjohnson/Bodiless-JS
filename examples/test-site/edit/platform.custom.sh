@@ -12,24 +12,9 @@
  # See the License for the specific language governing permissions and
  # limitations under the License.
  ##
-
-set -e
-
-# Expects the following env variables:
-# PLATFORM_APP_DIR - the absolute path to the application directory. provided by platform.sh
-
-if [ "$1" = "install" ]; then
+finalize_deploy () {
   npm run bootstrap -- --ci
-elif [ "$1" = "build" ]; then
   npm run build:packages -- --concurrency 1
   npm run build:env-vars
   npm run build:doc
-elif [ "$1" = "finish-deploy" ]; then
-  SITE_DIR=${ROOT_DIR}/examples/test-site
-  cp ${PLATFORM_APP_DIR}/${DEFAULT_ENV} ${SITE_DIR}/.env.development
-  if [ -n "${BV_SCRIPT}" ]; then
-    echo "BV_SCRIPT=$BV_SCRIPT" >> ${SITE_DIR}/.env.development
-  fi
-else
-  echo "Unknown command specified to $0"
-fi
+}
