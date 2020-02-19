@@ -33,7 +33,7 @@ The starter kit comes with pre-defined that can be changed and/or extended to me
 * Basic : Superscript, Bold, Italic, Underline, Link, Align Text
 * Full Featured : adds in more functionality to Basic such as Strikethru, headers, quotes.
 
-We recommend adding/removing the editor components needed for your site requirements. 
+We recommend [refining the editor components](Development/BuildingSites/RichTextEditors.md) needed for meet your site's requirements. 
 
 ### Touts
 Most sites use some form of Touts. (A block that consists of Image, Title, Body and Call to Action) The bodiless start comes with this basic form defined in `src/components/Tout`. Again, these can be used as is and/or extended to meet the site design requirements.  This Component has its own set of tokens as well for its different variations. 
