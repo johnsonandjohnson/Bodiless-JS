@@ -291,9 +291,9 @@ Here's an example of no-scroll-settings.json usages:
 ```
 
 Explanation of options:,
-- `parentSelectors`: Contains a list of classnames that within this selector the page will scroll.
+- `parentSelectors`: Contains a list of selectors that within the selected container element, clicking anchor will disable the page scrolling.
 
-- `elementSelectors`: Contains a list of classnames that disable the page scrolling.
+- `elementSelectors`: Contains a list of anchor selectors that clicking on these anchors will disable the page scrolling.
 
 - `excludeHashes`: Used to define a custom list of hash strings (without "#" character) to be excluded from no-scrolling feature.
 
