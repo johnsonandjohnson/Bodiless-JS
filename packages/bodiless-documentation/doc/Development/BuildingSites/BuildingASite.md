@@ -8,7 +8,8 @@ This guide is a suggested process for building sites using BodilessJS.  The use 
 * [2. Setting up design style of your site using Element tokens](#2-Setting-up-design-style-of-your-site-using-Element-tokens)
 * [3. Identifying Components](#3-Identifying-Components)
 * [4. Identifying Templates or One-off Custom Pages](#4-Identifying-Templates-or-One-off-custom-pages)
-* [5. Build a Page/Template with its components required to build out the page](#5-Build-a-PageTemplate-with-its-components-required-to-build-out-the-page)
+* [5. Customize the Rich Text Editor component](#5-Customize-the-Rich-Text_Editor-component)
+* [6. Build a Page/Template with its components required to build out the page](#6-Build-a-PageTemplate-with-its-components-required-to-build-out-the-page)
 
 ## Prerequisites:
 
@@ -178,7 +179,10 @@ A site may have just a custom layout for a single page.  For example, a homepage
 
 If in the future, if similar pages are added they could be refactored into template.
 
-## 5. Build a Page/Template with its components required to build out the page.
+## 5. Customize the Rich Text Editor component
+As described in Components section, the Rich Text Editor comes with a few editors.  We suggest [refining the editor components](Development/BuildingSites/RichTextEditors.md) to meet your site's requirements.
+
+## 6. Build a Page/Template with its components required to build out the page.
 
 This step is a repeatable step for every template or one-off page + components identified in the previous 2 steps.
 
