@@ -45,6 +45,7 @@ export class CanvasX implements JamStackApp {
   constructor(params: JamStackAppParams) {
     this.params = params;
     this.prepare();
+    this.setupEnvVars();
   }
 
   public clean() {
@@ -55,7 +56,6 @@ export class CanvasX implements JamStackApp {
     debug('setting up application');
     const cwd = shelljs.pwd();
     await this.setupRepository();
-    await this.setupEnvVars();
     this.cleanPages();
     this.patchApp();
     this.installPackages();
@@ -111,9 +111,9 @@ export class CanvasX implements JamStackApp {
     }
   }
 
-  private async setupEnvVars() {
+  private setupEnvVars(): void {
     if (this.params.disableTailwind) {
-      debug('Disabling Tailwind Theme');
+      debug('Disabling Tailwind Theme...');
       // Find and read env.site
       // Set/update BODILESS_TAILWIND_THEME_ENABLED to 0
     }
