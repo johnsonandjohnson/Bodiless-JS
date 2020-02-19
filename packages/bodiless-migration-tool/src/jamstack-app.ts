@@ -25,7 +25,8 @@ import debug from './debug';
 
 export interface JamStackAppParams {
   gitRepository?: string,
-  workDir: string
+  workDir: string,
+  disableTailwind?: boolean,
 }
 
 export interface JamStackApp {
@@ -54,6 +55,7 @@ export class CanvasX implements JamStackApp {
     debug('setting up application');
     const cwd = shelljs.pwd();
     await this.setupRepository();
+    await this.setupEnvVars();
     this.cleanPages();
     this.patchApp();
     this.installPackages();
@@ -106,6 +108,14 @@ export class CanvasX implements JamStackApp {
     } else {
       debug('resetting repository');
       await this.resetRepository();
+    }
+  }
+
+  private async setupEnvVars() {
+    if (this.params.disableTailwind) {
+      debug('Disabling Tailwind Theme');
+      // Find and read env.site
+      // Set/update BODILESS_TAILWIND_THEME_ENABLED to 0
     }
   }
 
