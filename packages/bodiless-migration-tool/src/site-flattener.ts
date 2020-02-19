@@ -95,7 +95,7 @@ export class SiteFlattener {
     const jamStackAppParams: JamStackAppParams = {
       gitRepository: this.params.gitRepository,
       workDir: this.params.workDir,
-      disableTailwind: this.params.disableTailwind
+      disableTailwind: this.params.disableTailwind,
     };
     this.canvasX = new CanvasX(jamStackAppParams);
   }
