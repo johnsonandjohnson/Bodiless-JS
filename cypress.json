@@ -1,4 +1,6 @@
 {
   "projectId": "totsvs",
-  "baseUrl": "http://localhost:8005"
+  "baseUrl": "http://localhost:8005",
+  "viewportWidth": 1200,
+  "viewportHeight": 768
 }
