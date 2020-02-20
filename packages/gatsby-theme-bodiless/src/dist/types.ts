@@ -19,5 +19,5 @@ export enum ItemStateEvent {
   DeleteFromBrowser,
   OnLockTimeout,
   OnRequestEnd,
-  OnPostTimeout,
+  OnRequestStart,
 }
