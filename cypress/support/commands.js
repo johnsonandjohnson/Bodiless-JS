@@ -23,3 +23,18 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+import 'cypress-file-upload'
+
+Cypress.Commands.add("revertChanges", () => {
+    cy.xpath('//*[@aria-label="resetchanges"]')
+      .click()
+    cy.xpath('//*[@aria-label="Submit"]')
+      .click()
+})
+
+
+Cypress.Commands.add("clickEdit", () => {
+    cy.xpath('//*[@aria-label="Edit"]')
+      .click()
+})

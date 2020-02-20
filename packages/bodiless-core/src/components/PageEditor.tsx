@@ -45,11 +45,11 @@ export const useUI = () => useContext(uiContext);
 const GlobalContextMenu: FC<Props> = observer(() => {
   const { GlobalContextMenu: Menu } = useUI();
   const context = useEditContext();
-  const { contextMenuOptions } = context;
+  const { contextMenuOptions, isPositionToggled } = context;
   const options = contextMenuOptions.filter(
     (op: TMenuOption) => op.global !== false,
   );
-  return <Menu options={options} />;
+  return <Menu options={options} isPositionToggled={isPositionToggled} />;
 });
 
 const PageEditor: FC<Props> = ({ children, ui }) => {
@@ -58,6 +58,14 @@ const PageEditor: FC<Props> = ({ children, ui }) => {
   // This probably remains replacing the get method isEdit with
   // a real function.
   const getMenuOptions = () => [
+    {
+      name: 'switcher',
+      icon: 'compare_arrows',
+      handler: () => {
+        context.togglePosition();
+        context.refresh();
+      },
+    },
     {
       name: 'docs',
       icon: 'description',
