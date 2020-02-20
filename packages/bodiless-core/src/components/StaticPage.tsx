@@ -32,6 +32,10 @@ class StaticContext implements PageEditContextInterface {
 
   toggleEdit = () => undefined;
 
+  isPositionToggled = false;
+
+  togglePosition = () => undefined;
+
   contextMenuOptions = [];
 
   name = 'Static';
