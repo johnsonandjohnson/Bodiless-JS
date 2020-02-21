@@ -111,19 +111,28 @@ export class CanvasX implements JamStackApp {
     }
   }
 
+  private setEnvVar(envFile: string, envVar: string, val: string): string {
+    const envFileByLine = envFile.toString().split("\n");
+    const envVarLine = envFileByLine.find(line => line.includes(envVar));
+
+    if (envVarLine) {
+      envFileByLine.splice(envFileByLine.indexOf(envVarLine), 1, `${envVar}='${val}'`);
+      return envFileByLine.join('\n');
+    } else {
+      return [...envFileByLine, `${envVar}='${val}'\n`].join('\n');
+    }
+  }
+
   private setupEnvVars(): void {
     if (this.params.disableTailwind) {
-      debug('Disabling Tailwind Theme...');
       const envFilePath = path.join(this.params.workDir, '.env.site');
-      debug('Env File Path: ', envFilePath);
 
       if (fs.existsSync(envFilePath)) {
-        debug('Env File Exists At: ', envFilePath);
-        const fileData = fs.readFileSync(envFilePath, 'utf8');
-        debug('Env File Data: ', fileData);
+        const envFile = fs.readFileSync(envFilePath, 'utf8');
+        const updatedEnvFile = this.setEnvVar(envFile, 'BODILESS_TAILWIND_THEME_ENABLED', '0');
+
+        fs.writeFileSync(envFilePath, updatedEnvFile, 'utf8');
       }
-      // Find and read env.site
-      // Set/update BODILESS_TAILWIND_THEME_ENABLED to 0
     }
   }
 
