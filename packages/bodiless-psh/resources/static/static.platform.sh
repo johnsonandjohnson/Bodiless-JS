@@ -2,7 +2,18 @@ if [ -f static.platform.custom.sh ]; then
   source static.platform.custom.sh
 fi
 
+init_npmrc () {
+  echo "Creating .npmrc"
+  if [ $APP_NPM_REGISTRY ] && [ $APP_NPM_AUTH ] && [ $APP_NPM_NAMESPACE ]; then
+    echo "NPM Private registry for $APP_NPM_NAMESPACE is $APP_NPM_REGISTRY"
+    bash -c 'echo NPM Auth token is ${APP_NPM_AUTH:0:50}...'
+    echo "$APP_NPM_NAMESPACE:registry=https:${APP_NPM_REGISTRY}" > .npmrc
+    echo "${APP_NPM_REGISTRY}:_authToken=${APP_NPM_AUTH}" >> .npmrc
+  fi
+}
+
 default_prepare_build () {
+  init_npmrc
   npm ci
 }
 

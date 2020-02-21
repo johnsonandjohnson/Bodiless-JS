@@ -11,8 +11,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* eslint-disable import/prefer-default-export */
 
-import defaultToc from './defaultToc';
+const { defaultToc } = require('@bodiless/documentation');
 
-export { defaultToc };
+const getToc = () => defaultToc();
+module.exports.default = getToc;
