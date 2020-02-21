@@ -116,6 +116,7 @@ export default class GatsbyMobxStoreItem {
   }
 
   private request() {
+    this.updateState(ItemStateEvent.OnRequestStart);
     if (this.shouldSave()) {
       const requestPromise = this.isDeleted
         ? this.store.client.deletePath(this.getResoucePath())
@@ -127,12 +128,11 @@ export default class GatsbyMobxStoreItem {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  private scheduleRequest(request: Function) {
+  private scheduleRequest() {
     if (this.requestTimeout !== undefined) {
       clearTimeout(this.requestTimeout);
     }
     this.requestTimeout = setTimeout(this.request.bind(this), 500);
-    this.updateState(ItemStateEvent.OnRequestStart);
   }
 
   private setLockTimeout() {

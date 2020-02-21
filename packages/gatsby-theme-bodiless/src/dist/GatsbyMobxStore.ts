@@ -163,9 +163,8 @@ export default class GatsbyMobxStore {
     if (soft) {
       const item = this.store.get(key);
       return item && item.delete();
-    } else {
-      return this.store.delete(key);
     }
+    return this.store.delete(key);
   };
 
   /**
