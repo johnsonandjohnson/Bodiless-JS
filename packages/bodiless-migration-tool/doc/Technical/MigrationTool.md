@@ -193,6 +193,15 @@ Options:
 
   - **Restrictions:**: Escape special characters, such as " with `\"`
 
+- `disableTailwind`
+
+  - **Description**: Disables site tailwind theme. The site tailwind theme is disabled by default, set this variable to `false` to enable site tailwind theme. You may want to enable the tailwind theme if the migrated site will add new bodiless JS components. Note that enabling the tailwind theme in some cases may interfere with the migrated site's styling.
+
+  - **Accepted Formats:** `true` or `false`
+
+  - **Default Value:** `true`
+
+
 - `context`
 
   - **Description**: A list of pages in which the rule should be applied.
