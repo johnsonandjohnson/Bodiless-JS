@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["setEnvVar"] }] */
 import fs from 'fs';
 import path from 'path';
 import util from 'util';
@@ -112,15 +113,15 @@ export class CanvasX implements JamStackApp {
   }
 
   private setEnvVar(envFile: string, envVar: string, val: string): string {
-    const envFileByLine = envFile.toString().split("\n");
+    const envFileByLine = envFile.toString().split('\n');
     const envVarLine = envFileByLine.find(line => line.includes(envVar));
 
     if (envVarLine) {
       envFileByLine.splice(envFileByLine.indexOf(envVarLine), 1, `${envVar}='${val}'`);
       return envFileByLine.join('\n');
-    } else {
-      return [...envFileByLine, `${envVar}='${val}'\n`].join('\n');
     }
+
+    return [...envFileByLine, `${envVar}='${val}'\n`].join('\n');
   }
 
   private setupEnvVars(): void {
