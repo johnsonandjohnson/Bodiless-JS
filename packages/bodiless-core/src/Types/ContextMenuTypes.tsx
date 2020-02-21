@@ -56,6 +56,7 @@ export type IContextMenuProps = {
   options: TMenuOption[];
   // onDispose?: (wasSubmitted: boolean) => void;
   ui?: UI;
+  isPositionToggled?: boolean;
 } & HTMLProps<HTMLElement>;
 
 export type IContextMenuItemProps = {

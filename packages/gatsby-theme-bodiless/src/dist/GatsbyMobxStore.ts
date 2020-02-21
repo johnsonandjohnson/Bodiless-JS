@@ -82,6 +82,26 @@ export default class GatsbyMobxStore {
     this.slug = nodeProvider.slug;
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  private parseData(gatsbyData: GatsbyData): Map<string, string> {
+    const result = new Map();
+    Object.keys(gatsbyData).forEach(collection => {
+      if (gatsbyData[collection] === null) return;
+      gatsbyData[collection].edges.forEach(({ node }) => {
+        try {
+          // Namespace the key name to the query name.
+          const key = `${collection}${nodeChildDelimiter}${node.name}`;
+          const data = JSON.parse(node.content);
+          result.set(key, data);
+        } catch (e) {
+          // console.log(e);
+          // Just ignore any nodes which fail to parse.
+        }
+      });
+    });
+    return result;
+  }
+
   /**
    * Called at initial page render to initialize our data from the Gatsby Page Query.
    * Note - we just copy the results to our unobserved data structure unless modifications
@@ -97,30 +117,31 @@ export default class GatsbyMobxStore {
     this.data = {};
     const { store } = this;
 
+    const parsedData = this.parseData(gatsbyData);
     // Add all query results into the Mobx store.
-    Object.keys(gatsbyData).forEach(collection => {
-      if (gatsbyData[collection] === null) return;
-      gatsbyData[collection].edges.forEach(({ node }) => {
-        try {
-          // Namespace the key name to the query name.
-          const key = `${collection}${nodeChildDelimiter}${node.name}`;
-          const data = JSON.parse(node.content);
-          const existingData = store.get(key);
-          // TODO: Determine why isEqual gives (apparently) false positives for RGLGrid data.
-          // if (!existingData || !isEqual(existingData.data, data)) {
+    parsedData.forEach((data, key) => {
+      const existingData = store.get(key);
+      // TODO: Determine why isEqual gives (apparently) false positives for RGLGrid data.
+      // if (!existingData || !isEqual(existingData.data, data)) {
 
-          // Invoke Mobx @action to update store.
-          if (
-            !existingData
-            || JSON.stringify(existingData.data) !== JSON.stringify(data)
-          ) {
-            this.setNode([key], data, ItemStateEvent.UpdateFromServer);
-          }
-        } catch (e) {
-          // console.log(e);
-          // Just ignore any nodes which fail to parse.
+      // Invoke Mobx @action to update store.
+      if (
+        !existingData
+        || JSON.stringify(existingData.data) !== JSON.stringify(data)
+      ) {
+        this.setNode([key], data, ItemStateEvent.UpdateFromServer);
+      }
+    });
+    // Remove Mobx store entries that are not present in query results
+    Array.from(this.store.keys()).forEach(key => {
+      if (!parsedData.has(key)) {
+        const item = this.store.get(key);
+        // The item should not be removed if it is not clean
+        // as far as it may not be delivered to the server yet
+        if (item!.isClean()) {
+          this.deleteItem(key, false);
         }
-      });
+      }
     });
   }
 
@@ -136,6 +157,15 @@ export default class GatsbyMobxStore {
 
   @action setItem = (key: string, item: Item) => {
     this.store.set(key, item);
+  };
+
+  @action deleteItem = (key: string, soft = true) => {
+    if (soft) {
+      const item = this.store.get(key);
+      return item && item.delete();
+    } else {
+      return this.store.delete(key);
+    }
   };
 
   /**
@@ -156,11 +186,6 @@ export default class GatsbyMobxStore {
     const children = Array.from(this.store)
       .filter(item => item[0].indexOf(key) === 0 && item[0] !== key);
     return children;
-  };
-
-  deleteItem = (key: string) => {
-    const item = this.store.get(key);
-    return item && item.delete();
   };
 
   deleteNode = (keyPath: string[]) => {

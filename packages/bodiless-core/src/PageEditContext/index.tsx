@@ -67,6 +67,8 @@ export class PageEditStore implements PageEditStoreInterface {
 
   @observable isEdit = getFromSessionStorage('isEdit', true);
 
+  @observable isPositionToggled = getFromSessionStorage('isPositionToggled', false);
+
   @action
   setActiveContext(context?: PageEditContext) {
     if (context) this.activeContext = context;
@@ -88,6 +90,16 @@ export class PageEditStore implements PageEditStoreInterface {
     }
 
     saveToSessionStorage('isEdit', this.isEdit);
+  }
+
+  @action togglePosition(on? : boolean) {
+    if (on === undefined) {
+      this.isPositionToggled = !this.isPositionToggled;
+    } else {
+      this.isPositionToggled = Boolean(on);
+    }
+
+    saveToSessionStorage('isPositionToggled', this.isPositionToggled);
   }
 
   @computed get contextTrail() {
@@ -185,6 +197,14 @@ class PageEditContext implements PageEditContextInterface {
 
   toggleEdit(on?: boolean) {
     this.store.toggleEdit(on);
+  }
+
+  get isPositionToggled() {
+    return this.store.isPositionToggled;
+  }
+
+  togglePosition(on?: boolean) {
+    this.store.togglePosition(on);
   }
 
   get contextMenuOptions() {
