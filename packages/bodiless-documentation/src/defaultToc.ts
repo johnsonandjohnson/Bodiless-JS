@@ -11,8 +11,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* eslint-disable import/prefer-default-export */
 
-import defaultToc from './defaultToc';
-
-export { defaultToc };
+const toc = {
+  About: {
+    'CorePrinciples.md': '',
+    'GettingStarted.md': '',
+    'SiteBuildBasics.md': '',
+  },
+  Design: {},
+  Components: {},
+  Tools: {},
+  Development: {
+    'Packages.md': '',
+    Architecture: {
+      'Data.md': '',
+      'Context.md': '',
+      'FClasses.md': '',
+      'Documentation.md': '',
+    },
+    Release: {},
+    'Contributing.md': '',
+  },
+};
+export default () => ({ bodiless: toc });

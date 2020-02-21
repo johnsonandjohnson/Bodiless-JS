@@ -33,7 +33,7 @@
     "docsify-cli": "^4.3.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "gatsby": "^2.9.11",
+    "gatsby": "^2.19.17",
     "gatsby-plugin-canonical-urls": "^2.1.18",
     "gatsby-plugin-sitemap": "^2.2.24",
     "lodash": "^4.17.11",

@@ -11,8 +11,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* eslint-disable import/prefer-default-export */
 
-import defaultToc from './defaultToc';
+const addPageLeaver = (getPendingRequests: () => any[]) => {
+  if (typeof window !== 'undefined') {
+    window.addEventListener('beforeunload', e => {
+      if (getPendingRequests().length > 0) {
+        // Cancel the event
+        e.preventDefault();
+        // Chrome requires returnValue to be set
+        e.returnValue = 'Are you sure you want to leave?';
+      } else {
+        // the absence of a returnValue property on the event
+        // will guarantee the browser unload happens
+        delete e.returnValue;
+      }
+    });
+  }
+};
 
-export { defaultToc };
+export default addPageLeaver;

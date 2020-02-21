@@ -18,6 +18,7 @@
     "/bin",
     "/lib",
     "/doc",
+    "/resources",
     "/bodiless.docs.json"
   ],
   "repository": {
