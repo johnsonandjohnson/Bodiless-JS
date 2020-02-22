@@ -1,6 +1,5 @@
-#!/usr/bin/env node
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,56 +11,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/* eslint-disable import/prefer-default-export */
 
-/* eslint-disable no-console */
-import { flow } from 'lodash';
-import fs from 'fs-extra';
-// import cleanSymlinks from './cleanSymlinks';
-import locateFiles from './locateFiles';
-import { withTreeFromFile } from './tree';
-import writeSymlinksFromTree from './writeSymlinksFromTree';
-import { writeSideBars, writeNavBar } from './createBar';
+import defaultToc from './defaultToc';
 
-const blDocsBuild = async () => {
-  const docPath = './doc';
-  // TODO: TOC should probably be maintained in bodiless-docs.
-  const tocPath = './bodiless.docs.toc.json';
-  const toc = fs.existsSync(tocPath) ? fs.readJSONSync(tocPath) : {};
-  // We start by using locateFiles and withTreeFromFile to build up an array of TreeHO and
-  // at the same time we clean up the symlinks
-  const results = await Promise.all([
-    locateFiles({
-      filePattern: /docs.json$/,
-      startingRoot: './',
-      action: withTreeFromFile,
-    }),
-    fs.emptyDir(docPath),
-    // Then we use the TreeOH (in updates) to create a Tree,
-    // which we use to write the symlinks and make the nav and side bars.
-  ]);
-  const updates = results[0];
-  const paths = flow(updates)(toc);
-  console.log('Writing symlinks');
-  try {
-    await writeSymlinksFromTree({
-      paths,
-      loc: docPath,
-    });
-  } catch (error) {
-    console.log(error, 'writing symlinks');
-  }
-  console.log('Writing sidebars');
-  try {
-    await writeSideBars(docPath, paths);
-  } catch (error) {
-    console.log(error, 'writing sidebars');
-  }
-  console.log('Writing navbar');
-  try {
-    await writeNavBar(docPath, paths);
-  } catch (error) {
-    console.log(error, 'writing navbar');
-  }
-  console.log('Done');
-};
-export default blDocsBuild;
+export { defaultToc };

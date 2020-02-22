@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.40](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v0.0.39...v0.0.40) (2020-02-21)
+
+
+### Bug Fixes
+
+* **gatsby-theme-bodiless:** Typed chars disappear sporadically ([#52](https://github.com/johnsonandjohnson/Bodiless-JS/issues/52)) ([4829496](https://github.com/johnsonandjohnson/Bodiless-JS/commit/48294967948c75707b668f90c76c0ad5d18e6a4d)), closes [#14](https://github.com/johnsonandjohnson/Bodiless-JS/issues/14) [#14](https://github.com/johnsonandjohnson/Bodiless-JS/issues/14) [#14](https://github.com/johnsonandjohnson/Bodiless-JS/issues/14)
+
+
+
+
+
 ## 0.0.38 (2020-01-29)
 
 

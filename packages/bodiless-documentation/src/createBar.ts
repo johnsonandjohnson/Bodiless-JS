@@ -18,7 +18,10 @@ import { Tree } from './type';
 
 const niceName = (s: string) => s
   .replace(/[a-z0-9]([A-Z])/g, m => `${m[0]}_${m[1]}`)
-  .replace(/_/g, ' ');
+  .replace(/_/g, ' ')
+  .split(' ')
+  .map(word => `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`)
+  .join(' ');
 
 /**
  * createBar works to generate markdown used in _sidebar and _navbar from
@@ -34,7 +37,7 @@ const createBar = (
   writeHeader: boolean = true,
   indent: number = 1,
 ) => {
-  const pathPrefix = parent.map((item:string) => `${item}/`).join('');
+  const pathPrefix = `/${parent.map((item:string) => `${item}/`).join('')}`;
   const linePrefix = ' '.repeat(indent * 2);
   const header = writeHeader && parent.length > 0 && parent.slice(-1)[0];
   let navbar = header ? `* ${niceName(header.replace(/.md$/, ''))}\n` : '';

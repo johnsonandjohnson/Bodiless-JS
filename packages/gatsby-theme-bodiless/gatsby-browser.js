@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,42 @@ export const shouldUpdateScroll = ({ prevRouterProps, routerProps: { location } 
     } = prevRouterProps;
     if (oldPathname === location.pathname) {
       const hash = location.hash ? location.hash.slice(1) : '';
+      if (!hash) {
+        return true;
+      }
       const targetElement = document.getElementById(hash) || document.getElementsByName(hash)[0];
+      const HashMatchException = {};
+
+      try {
+        // eslint-disable-next-line
+        const { parentSelectors, elementSelectors, excludeHashes } = require('./src/no-scroll-settings.json');
+
+        if (!excludeHashes || excludeHashes.indexOf(hash) < 0) {
+          // Skip scrolling for selected element.
+          if (elementSelectors) {
+            const elementStr = elementSelectors.join();
+            document.querySelectorAll(elementStr).forEach(element => {
+              if (element.attributes.href && (element.attributes.href.value === `#${hash}`)) {
+                throw HashMatchException;
+              }
+            });
+          }
+          if (parentSelectors) {
+            // Skip scrolling for hashes inside selected container element.
+            const parentStr = parentSelectors.join();
+            document.querySelectorAll(parentStr).forEach(element => {
+              if (element.isSameNode(targetElement.closest(parentStr))) {
+                throw HashMatchException;
+              }
+            });
+          }
+        }
+      } catch (e) {
+        if (HashMatchException === e) {
+          return false;
+        }
+      }
+
       return targetElement ? hash : true;
     }
   }
