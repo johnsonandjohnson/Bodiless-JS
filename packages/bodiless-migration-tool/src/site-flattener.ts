@@ -78,7 +78,8 @@ export interface SiteFlattenerParams {
   },
   transformers: Array<Transformer>,
   htmltojsx: boolean,
-  useSourceHtml?: boolean
+  useSourceHtml?: boolean,
+  disableTailwind?: boolean,
 }
 
 export class SiteFlattener {
@@ -94,6 +95,7 @@ export class SiteFlattener {
     const jamStackAppParams: JamStackAppParams = {
       gitRepository: this.params.gitRepository,
       workDir: this.params.workDir,
+      disableTailwind: this.params.disableTailwind,
     };
     this.canvasX = new CanvasX(jamStackAppParams);
   }
