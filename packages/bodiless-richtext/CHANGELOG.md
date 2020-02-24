@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.40](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.39...v0.0.40) (2020-02-21)
+
+
+### Bug Fixes
+
+* **bodiless-richtext:** improved richtext input lag on a page with multiple richtext elements ([#104](https://github.com/johnsonandjohnson/bodiless-js/issues/104)) ([e243b2d](https://github.com/johnsonandjohnson/bodiless-js/commit/e243b2d5f348dd94c603017ee72f06fee8283cb1))
+
+
+### Features
+
+* **core:** Alter the Main Menu in Preview Mode ([#132](https://github.com/johnsonandjohnson/bodiless-js/issues/132)) ([abebb43](https://github.com/johnsonandjohnson/bodiless-js/commit/abebb43c48668d8f147cb43c7c4f042b06abd48e))
+
+
+
+
+
 ## 0.0.38 (2020-01-29)
 
 

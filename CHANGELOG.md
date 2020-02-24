@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.40](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.39...v0.0.40) (2020-02-21)
+
+
+### Bug Fixes
+
+* **bodiless-migration-tool:** "UnhandledPromiseRejectionWarning: Error: Page crashed!" thrown by migration tool ([#82](https://github.com/johnsonandjohnson/bodiless-js/issues/82)) ([f966636](https://github.com/johnsonandjohnson/bodiless-js/commit/f966636563e8009ca5f694c71842da3228b865f5))
+* **bodiless-richtext:** improved richtext input lag on a page with multiple richtext elements ([#104](https://github.com/johnsonandjohnson/bodiless-js/issues/104)) ([e243b2d](https://github.com/johnsonandjohnson/bodiless-js/commit/e243b2d5f348dd94c603017ee72f06fee8283cb1))
+* **gatsby-theme-bodiless:** Deleting json file for any component does not reset content ([#145](https://github.com/johnsonandjohnson/bodiless-js/issues/145)) ([b76eb6e](https://github.com/johnsonandjohnson/bodiless-js/commit/b76eb6ec61c55f0a8864e6dcbd61e2689b6c5ff1))
+* **gatsby-theme-bodiless:** Fix revert does not refresh page ([#110](https://github.com/johnsonandjohnson/bodiless-js/issues/110)) ([629b3ef](https://github.com/johnsonandjohnson/bodiless-js/commit/629b3efebc28882932d3e136f385abaccd15b28d))
+* **gatsby-theme-bodiless:** Typed chars disappear sporadically ([#52](https://github.com/johnsonandjohnson/bodiless-js/issues/52)) ([4829496](https://github.com/johnsonandjohnson/bodiless-js/commit/48294967948c75707b668f90c76c0ad5d18e6a4d)), closes [#14](https://github.com/johnsonandjohnson/bodiless-js/issues/14) [#14](https://github.com/johnsonandjohnson/bodiless-js/issues/14) [#14](https://github.com/johnsonandjohnson/bodiless-js/issues/14)
+* **migration_tool:** 'npm run setup' fails on Windows ([#139](https://github.com/johnsonandjohnson/bodiless-js/issues/139)) ([ac8a580](https://github.com/johnsonandjohnson/bodiless-js/commit/ac8a580887e120ce50c13d545b9ba6b9e89a714a))
+* **migration_tool:** do not create a page when an internal url is redirected to an external ([#95](https://github.com/johnsonandjohnson/bodiless-js/issues/95)) ([df5077a](https://github.com/johnsonandjohnson/bodiless-js/commit/df5077abbe2403239a1e7cc5bd9ac56fb9b3d4b6))
+* **migration_tool:** issues in FAQ pages ([#126](https://github.com/johnsonandjohnson/bodiless-js/issues/126)) ([2d4a6cb](https://github.com/johnsonandjohnson/bodiless-js/commit/2d4a6cbc219682e4162c5ab77eb128dfd2048c1c))
+* **migration_tool:** SyntaxError: Unexpected token ([#84](https://github.com/johnsonandjohnson/bodiless-js/issues/84)) ([208d9f7](https://github.com/johnsonandjohnson/bodiless-js/commit/208d9f7a309ac9fc9fe6d6ecab4ae4a0dc2b685d))
+* **psh:** platform.sh files get created with lerna ([#108](https://github.com/johnsonandjohnson/bodiless-js/issues/108)) ([7192372](https://github.com/johnsonandjohnson/bodiless-js/commit/71923720b19a445a7ced190dc6c352f5ad324f0e))
+* **psh:** Private npm registry for static site. ([#148](https://github.com/johnsonandjohnson/bodiless-js/issues/148)) ([d3599f7](https://github.com/johnsonandjohnson/bodiless-js/commit/d3599f76c3b015f28b553d1c758ab50abd206ec6))
+
+
+### Features
+
+* **core:** Alter the Main Menu in Preview Mode ([#132](https://github.com/johnsonandjohnson/bodiless-js/issues/132)) ([abebb43](https://github.com/johnsonandjohnson/bodiless-js/commit/abebb43c48668d8f147cb43c7c4f042b06abd48e))
+* **core:** Preview Mode Session ([#117](https://github.com/johnsonandjohnson/bodiless-js/issues/117)) ([4246986](https://github.com/johnsonandjohnson/bodiless-js/commit/4246986e449101a9c63a8043f9a1e2d1b73d0986))
+* **documentation:** Support better control over IA ([#129](https://github.com/johnsonandjohnson/bodiless-js/issues/129)) ([05c94fd](https://github.com/johnsonandjohnson/bodiless-js/commit/05c94fdd3ccd860a29d6a81bb5abc3708d7a8157))
+* **fclasses:** Change startWith so that it does not replace the whole item but instead just the starting Component ([#57](https://github.com/johnsonandjohnson/bodiless-js/issues/57)) ([71f0b60](https://github.com/johnsonandjohnson/bodiless-js/commit/71f0b60797f45055c58aea8bf8bbc72db2795e5a))
+* **layout:** Create a location Switcher for the Edit Admin UI Menu ([#149](https://github.com/johnsonandjohnson/bodiless-js/issues/149)) ([943e960](https://github.com/johnsonandjohnson/bodiless-js/commit/943e960016718b022bcb95471977ea43b6d9afac))
+* **layout:** Easily identify a flexbox area on page so that can start… ([#99](https://github.com/johnsonandjohnson/bodiless-js/issues/99)) ([8148e1c](https://github.com/johnsonandjohnson/bodiless-js/commit/8148e1c6201d3ec64fcaf089076c4a37d3fa5923))
+* **layouts:** Component Switcher ([#105](https://github.com/johnsonandjohnson/bodiless-js/issues/105)) ([1e1ce8e](https://github.com/johnsonandjohnson/bodiless-js/commit/1e1ce8e7e79dbb66d7ffdad599de117902702b1d)), closes [#69](https://github.com/johnsonandjohnson/bodiless-js/issues/69)
+* **psh:** Improve psh-init with better logic for custom overrides. ([#135](https://github.com/johnsonandjohnson/bodiless-js/issues/135)) ([79bbfc5](https://github.com/johnsonandjohnson/bodiless-js/commit/79bbfc559e5ae22297191ca42bb6a2b71345a8b9))
+
+
+### BREAKING CHANGES
+
+* **fclasses:** startWith functionality will not replace any other HOC that has been previously applied
+
+
+
+
+
 ## 0.0.39 (2020-01-30)
 
 
