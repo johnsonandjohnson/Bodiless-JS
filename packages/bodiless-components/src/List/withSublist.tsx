@@ -16,6 +16,7 @@ import React, { ComponentType, FC, PropsWithChildren } from 'react';
 import { withDesign } from '@bodiless/fclasses';
 import { withToggleButton, withToggleTo } from '../Toggle';
 import { FinalProps as ListProps, ListDesignableComponents } from './types';
+import { useItemsMutators } from './model';
 
 /**
  * Takes a sublist component and return=s a HOC to add a toggled version
@@ -25,12 +26,21 @@ import { FinalProps as ListProps, ListDesignableComponents } from './types';
  */
 const withSublistToggle = (Sublist: ComponentType<ListProps>) => (
   (Item: ComponentType<PropsWithChildren<{}>> | string) => {
-    const ItemWithSublist: FC<ListProps> = ({ children, unwrap }) => (
-      <Item>
-        {children}
-        <Sublist unwrap={unwrap} nodeKey="sublist" />
-      </Item>
-    );
+    const ItemWithSublist: FC<ListProps> = ({ children, unwrap }) => {
+      const { deleteList } = useItemsMutators();
+      const unwrap$ = () => {
+        deleteList('sublist');
+        if (unwrap) {
+          unwrap();
+        }
+      };
+      return (
+        <Item>
+          {children}
+          <Sublist unwrap={unwrap$} nodeKey="sublist" />
+        </Item>
+      );
+    };
     return withToggleTo(Item)(ItemWithSublist);
   }
 );

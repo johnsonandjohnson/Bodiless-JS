@@ -44,10 +44,17 @@ const useDeleteItem = ({ unwrap }: Pick<Props, 'unwrap'>) => {
     setItems(items);
     deleteItem(item);
     if (items.length === 0 && unwrap) {
-      deleteItem();
       unwrap();
     }
   };
+};
+
+/**
+ * Returns a method which can be used to delete a list
+ */
+const useDeleteList = () => {
+  const { deleteItem } = useItemsAccessors();
+  return (item: string) => deleteItem(item);
 };
 
 /**
@@ -72,7 +79,8 @@ const useAddItem = () => {
  * Returns a pair of functions which can be used to insert
  * or delete items.
  */
-export const useItemsMutators = (props: Pick<Props, 'unwrap'>) => ({
+export const useItemsMutators = (props?: Pick<Props, 'unwrap'>) => ({
   addItem: useAddItem(),
-  deleteItem: useDeleteItem(props),
+  deleteItem: useDeleteItem(props || { unwrap: undefined }),
+  deleteList: useDeleteList(),
 });
