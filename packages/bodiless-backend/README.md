@@ -10,5 +10,6 @@ You can start backend server by running `node ./path/to/server.js`. Backend serv
 * `BODILESS_BACKEND_DATA_FILE_PATH` - Where to write the content json files. Defaults to `./src/data`.
 * `BODILESS_BACKEND_STATIC_PATH` - Where to write uploaded static assets. Defaults to `./static`.
 * `BODILESS_BACKEND_COMMIT_ENABLED` - Whether or not commits are enabled. Defaults to `0` for `production` and `development` environments and `1` for `test/*` and `changeset/*` branches.
+* `BODILESS_BACKEND_EXTENDED_LOGGING_ENABLED` - Whether or not extended logging is enabled. Defaults to `0`.
 
 Please note that `BODILESS_BACKEND_DATA_FILE_PATH`, `BODILESS_BACKEND_STATIC_PATH` and `BODILESS_BACKEND_COMMIT_ENABLED` are defined in `@bodiless/gatsby-theme-bodiless` by default.
