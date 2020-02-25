@@ -50,11 +50,11 @@ const useDeleteItem = ({ unwrap }: Pick<Props, 'unwrap'>) => {
 };
 
 /**
- * Returns a method which can be used to delete a list
+ * Returns a method which can be used to delete a sublist
  */
-const useDeleteList = () => {
+const useDeleteSublist = () => {
   const { deleteItem } = useItemsAccessors();
-  return (item: string) => deleteItem(item);
+  return () => deleteItem('sublist');
 };
 
 /**
@@ -82,5 +82,5 @@ const useAddItem = () => {
 export const useItemsMutators = (props?: Pick<Props, 'unwrap'>) => ({
   addItem: useAddItem(),
   deleteItem: useDeleteItem(props || { unwrap: undefined }),
-  deleteList: useDeleteList(),
+  deleteSublist: useDeleteSublist(),
 });

@@ -27,9 +27,9 @@ import { useItemsMutators } from './model';
 const withSublistToggle = (Sublist: ComponentType<ListProps>) => (
   (Item: ComponentType<PropsWithChildren<{}>> | string) => {
     const ItemWithSublist: FC<ListProps> = ({ children, unwrap }) => {
-      const { deleteList } = useItemsMutators();
+      const { deleteSublist } = useItemsMutators();
       const unwrap$ = () => {
-        deleteList('sublist');
+        deleteSublist();
         if (unwrap) {
           unwrap();
         }
