@@ -104,7 +104,7 @@
   },
   "scripts": {
     "lint": "tslint -p . -t stylish",
-    "prepack": "rm -rf lib && tsc -b && babel lib --out-dir lib",
+    "prepack": "rimraf lib && tsc -b && babel lib --out-dir lib",
     "test": "jest --runInBand",
     "test-clear": "jest --clearCache",
     "test-debug": "jest --detectOpenHandles --detectLeaks",

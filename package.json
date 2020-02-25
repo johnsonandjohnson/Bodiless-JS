@@ -1,7 +1,7 @@
 {
   "name": "bodiless-js",
   "description": "Bodiless-JS",
-  "version": "0.0.37",
+  "version": "0.0.40",
   "keywords": [
     "gatsby"
   ],
@@ -29,7 +29,7 @@
     "scan:target": "ts-complexity --max-complexity 1 --pattern",
     "serve": "lerna run serve --scope @bodiless/test-site --stream",
     "setup": "npm run bootstrap && npm run build:packages",
-    "sites:pack": "lerna exec --no-private --stream 'npm pack'",
+    "sites:pack": "lerna exec --no-private --stream -- npm pack",
     "sites:clone-local": "node ./scripts/sites-clone",
     "sites:install": "node ./scripts/sites-install",
     "sites:update": "npm run sites:pack && npm run sites:install",

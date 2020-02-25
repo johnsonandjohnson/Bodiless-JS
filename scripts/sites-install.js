@@ -70,6 +70,7 @@ if (bodilessDependencies.length < 1) {
 const args = `install --no-package-lock --package-lock-only ${bodilessDependencies.join(' ')}`.split(' ');
 const child = spawn('npm', args, {
   stdio: 'inherit',
+  shell: true,
 });
 
 child.on('close', code => {
@@ -82,6 +83,7 @@ child.on('close', code => {
   fs.copySync('../../package-lock.json', './package-lock.json');
   const child$ = spawn('npm', ['install'], {
     stdio: 'inherit',
+    shell: true,
   });
   child$.on('close', code$ => {
     console.log(`Local packages install exited with code ${code$}`);
