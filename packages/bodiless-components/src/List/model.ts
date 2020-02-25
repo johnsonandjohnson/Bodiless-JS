@@ -26,7 +26,7 @@ export const useItemsAccessors = () => {
     // We provide a default element for top level lists.
     getItems: () => node.data.items || ['default'],
     setItems: (items: string[]) => node.setData({ ...node.data, items }),
-    deleteItem: (item?: string) => {
+    deleteSubnode: (item?: string) => {
       const path$ = item ? node.path.concat(item) : node.path;
       return node.delete(path$);
     },
@@ -38,11 +38,11 @@ export const useItemsAccessors = () => {
  * an "unwrap" handler if there is only one item in the list.
  */
 const useDeleteItem = ({ unwrap }: Pick<Props, 'unwrap'>) => {
-  const { getItems, setItems, deleteItem } = useItemsAccessors();
+  const { getItems, setItems, deleteSubnode } = useItemsAccessors();
   return (item: string) => {
     const items = getItems().filter(item$ => item$ !== item);
     setItems(items);
-    deleteItem(item);
+    deleteSubnode(item);
     if (items.length === 0 && unwrap) {
       unwrap();
     }
@@ -53,8 +53,8 @@ const useDeleteItem = ({ unwrap }: Pick<Props, 'unwrap'>) => {
  * Returns a method which can be used to delete a sublist
  */
 const useDeleteSublist = () => {
-  const { deleteItem } = useItemsAccessors();
-  return () => deleteItem('sublist');
+  const { deleteSubnode } = useItemsAccessors();
+  return () => deleteSubnode('sublist');
 };
 
 /**
