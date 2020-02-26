@@ -43,10 +43,12 @@ export function getUrlToLocalDirectoryMapper(targetDir: string): Function {
   };
 }
 
-export function isUrlExternal(domain: string, item: string) {
-  return url.parse(item, true, true).host
-  !== null && url.parse(domain).host
-  !== url.parse(item).host;
+export function isUrlExternal(baseUrl: string, targetUrl: string) {
+  const hasHost = url.parse(baseUrl, true, true).host !== null;
+  const baseUrlHost = url.parse(baseUrl).host || '';
+  const targetUrlHost = url.parse(targetUrl).host || '';
+  return hasHost
+    && stripWWW(baseUrlHost) !== stripWWW(targetUrlHost);
 }
 
 export function isUrlRelative(path1: string) {
@@ -62,9 +64,13 @@ function isFragmentOnly(url1: string): boolean {
   return url1.match(/^#/g) !== null;
 }
 
+function stripWWW(host: string): string {
+  return host.replace(/^www\./, '');
+}
+
 function getHostNameWithoutWWW(host: string): string {
   const hostName = url.parse(host).hostname || '';
-  return hostName.replace(/^www\./, '');
+  return stripWWW(hostName);
 }
 
 export function transformRelativeUrlToInternal(relativeUrl: string, pageUrl: string): string {
