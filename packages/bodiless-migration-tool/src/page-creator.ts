@@ -158,7 +158,8 @@ export class PageCreator {
         htmlToComponents.convert(this.params.bodyHtml);
       } catch (error) {
         if (this.params.allowFailbackHtml) {
-          this.writeContent(targetPageJsxPath, this.wrapComponentHtml(this.params.bodyHtml));
+          this.writeContent(targetPageJsxPath, this.wrapHtmlDangerously(this.params.bodyHtml));
+          debug(`[WARNING] An error occurred while processing html to jsx component conversion for page: ${this.params.pageUrl}. Component created with dangerouslySetInnerHTML.`);
           return;
         }
       }
@@ -203,7 +204,7 @@ export class PageCreator {
     fs.writeFileSync(targetPath, content);
   }
 
-  private wrapComponentHtml(content: string) {
+  private wrapHtmlDangerously(content: string) {
     const html = `\`${content.replace(/'/g, '&quot;')}\``;
     return `import React from "react";
 
