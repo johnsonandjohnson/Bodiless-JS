@@ -15,8 +15,8 @@
 import { ComponentType as CT } from 'react';
 import { withEditToggle } from '@bodiless/core';
 
-export const withBodilessPlaceholder = <P extends object>(
+export const withEditPlaceholder = <P extends object>(
   PlaceholderComponent: CT<P>,
 ) => (Component: CT<P>) => withEditToggle(Component, PlaceholderComponent);
 
-export default withBodilessPlaceholder;
+export default withEditPlaceholder;

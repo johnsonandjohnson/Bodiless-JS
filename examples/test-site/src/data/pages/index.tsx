@@ -17,7 +17,7 @@ import { graphql } from 'gatsby';
 import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
-  Image, Editable, List, asEditableList, withBodilessPlaceholder,
+  Image, Editable, List, asEditableList, withEditPlaceholder,
 } from '@bodiless/components';
 import {
   withDesign, replaceWith, addClasses, stylable, Div,
@@ -40,7 +40,7 @@ const PlaceholderComponent = props => (
 );
 
 const TestComponentWithPlaceholder = flow(
-  withBodilessPlaceholder(PlaceholderComponent),
+  withEditPlaceholder(PlaceholderComponent),
 )(TestComponent);
 
 const EditableBulletPoints = flow(

@@ -30,7 +30,7 @@ import {
   withMeta, withMetaTitle, withMetaHtml, asBodilessHelmet,
 } from './Meta/Meta';
 import { withToggle, withToggleTo, withToggleButton } from './Toggle';
-import { withBodilessPlaceholder } from './Placeholder';
+import { withEditPlaceholder } from './Placeholder';
 
 export {
   Link,
@@ -56,5 +56,5 @@ export {
   withMetaTitle,
   withMetaHtml,
   asBodilessHelmet,
-  withBodilessPlaceholder,
+  withEditPlaceholder,
 };
