@@ -17,10 +17,10 @@ import { graphql } from 'gatsby';
 import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
-  Image, Editable, List, asEditableList, withEditPlaceholder,
+  Image, Editable, List, asEditableList,
 } from '@bodiless/components';
 import {
-  withDesign, replaceWith, addClasses, stylable, Div,
+  withDesign, replaceWith, addClasses, stylable,
 } from '@bodiless/fclasses';
 import Layout from '../../components/Layout';
 import { FlexBoxDefault } from '../../components/Flexbox';
@@ -30,18 +30,6 @@ const HOME_PAGE_PATH = 'homepage';
 const BulletPoints = (props: any) => (
   <span {...props}><Editable nodeKey="bullet" placeholder="Enter Bullet Item" /></span>
 );
-
-const TestComponent = props => (
-  <Div {...props}>Test Component</Div>
-);
-
-const PlaceholderComponent = props => (
-  <Div {...props}>Placeholder Component</Div>
-);
-
-const TestComponentWithPlaceholder = flow(
-  withEditPlaceholder(PlaceholderComponent),
-)(TestComponent);
 
 const EditableBulletPoints = flow(
   asEditableList,
@@ -67,10 +55,6 @@ const HomePage = (props: any) => (
       <FlexBoxDefault
         nodeKey={HOME_PAGE_PATH}
       />
-      <div className="py-6">
-        <TestComponent />
-        <TestComponentWithPlaceholder />
-      </div>
     </Layout>
   </Page>
 );
