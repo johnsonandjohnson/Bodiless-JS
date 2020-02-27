@@ -19,4 +19,4 @@ const withEditPlaceholder = <P extends object>(
   PlaceholderComponent: CT<P>,
 ) => (Component: CT<P>) => withEditToggle(Component, PlaceholderComponent);
 
-export { withEditPlaceholder };
+export default withEditPlaceholder;
