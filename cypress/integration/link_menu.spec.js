@@ -11,6 +11,8 @@ context('Link Context Menu', () => {
   });
 
   it('should retain submitted value when reopened', () => {
+    // activate edit mode
+    cy.clickEdit();
     cy.get('div.flex-1')
       .find('a')
       .first()
