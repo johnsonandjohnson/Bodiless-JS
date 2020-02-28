@@ -2,6 +2,7 @@ describe('Tout testing', function () {
 
   before(function () {
     cy.visit('/touts/')
+    cy.clickEdit()
   })
 
   after(function () {
