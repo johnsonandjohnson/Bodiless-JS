@@ -131,10 +131,10 @@ describe('StaticPage', () => {
       );
     };
     let wrapper = mount(<Baseline force="foo" />);
-    expect(wrapper.find('#isEdit').text()).toBe('true');
+    expect(wrapper.find('#isEdit').text()).toBe('false');
     wrapper.find('#toggle').simulate('click', event);
     wrapper.setProps({ force: 'bar' });
-    expect(wrapper.find('#isEdit').text()).toBe('false');
+    expect(wrapper.find('#isEdit').text()).toBe('true');
 
     const Test: FC<FP> = ({ force }) => (
       <StaticPage>
