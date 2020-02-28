@@ -23,6 +23,7 @@ import {
   withToggleButton,
   withToggleTo,
   ListDesignableComponents,
+  asSublist,
 } from '@bodiless/components';
 import { withDesign } from '@bodiless/fclasses';
 import { WithNodeProps } from '@bodiless/core';
@@ -53,7 +54,7 @@ const withSubmenuToggle = (Sublist: ComponentType<MenuSublistProps>) => (
 const withSubmenu = (Sublist: ComponentType<MenuSublistProps>) => (
   withDesign<ListDesignableComponents>({
     ItemMenuOptionsProvider: withToggleButton({ icon: 'playlist_add' }),
-    Item: withSubmenuToggle(Sublist),
+    Item: withSubmenuToggle(asSublist(Sublist)),
   })
 );
 

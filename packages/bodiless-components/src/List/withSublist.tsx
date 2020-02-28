@@ -26,24 +26,43 @@ import { useItemsMutators } from './model';
  */
 const withSublistToggle = (Sublist: ComponentType<ListProps>) => (
   (Item: ComponentType<PropsWithChildren<{}>> | string) => {
-    const ItemWithSublist: FC<ListProps> = ({ children, unwrap }) => {
-      const { deleteSublist } = useItemsMutators();
-      const unwrap$ = () => {
-        deleteSublist();
-        if (unwrap) {
-          unwrap();
-        }
-      };
-      return (
-        <Item>
-          {children}
-          <Sublist unwrap={unwrap$} nodeKey="sublist" />
-        </Item>
-      );
-    };
+    const ItemWithSublist: FC<ListProps> = ({ children, unwrap }) => (
+      <Item>
+        {children}
+        <Sublist unwrap={unwrap} />
+      </Item>
+    );
     return withToggleTo(Item)(ItemWithSublist);
   }
 );
+
+/**
+ * Takes an unwrap function and enhances it with sublist deletion
+ */
+const useSublistUnwrap = (unwrap: Function) => {
+  const { deleteSublist } = useItemsMutators();
+  const unwrap$ = () => {
+    deleteSublist();
+    if (unwrap) {
+      unwrap();
+    }
+  };
+  return {
+    unwrap: unwrap$,
+  };
+};
+
+/**
+ * Takes a component
+ * returns a new component with sublist node key and sublist deletion on unwrap
+ */
+export const asSublist = (Sublist: ComponentType<ListProps>) => (props: ListProps) => {
+  const { unwrap, ...rest } = props;
+  const { unwrap: unwrap$ } = useSublistUnwrap(unwrap);
+  return (
+    <Sublist unwrap={unwrap$} nodeKey="sublist" {...rest} />
+  );
+};
 
 /**
  * Takes a sublist component and returns a HOC which, when applied to a list,
@@ -53,7 +72,7 @@ const withSublistToggle = (Sublist: ComponentType<ListProps>) => (
  */
 const withSublist = (Sublist: ComponentType<ListProps>) => withDesign<ListDesignableComponents>({
   ItemMenuOptionsProvider: withToggleButton({ icon: 'playlist_add' }),
-  Item: withSublistToggle(Sublist),
+  Item: withSublistToggle(asSublist(Sublist)),
 });
 
 export default withSublist;
