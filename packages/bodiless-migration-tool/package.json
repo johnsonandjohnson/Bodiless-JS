@@ -85,7 +85,8 @@
     "/patches",
     "/conf/gatsby-config.js",
     "/conf/gatsby-node.js",
-    "/conf/template_html2jsx.jsx"
+    "/conf/template_html2jsx.jsx",
+    "/conf/template_dangerous_html.jsx"
   ],
   "keywords": [
     "oclif"

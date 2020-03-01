@@ -44,6 +44,7 @@ export interface PageCreatorParams {
   pagesDir: string,
   staticDir: string,
   templatePath: string,
+  templateDangerousHtml: string,
   pageUrl: string,
   headHtml: string,
   bodyHtml: string,
@@ -205,19 +206,9 @@ export class PageCreator {
   }
 
   private wrapHtmlDangerously(content: string) {
-    const html = `\`${content.replace(/'/g, '&quot;')}\``;
-    return `import React from "react";
-
-class Page extends React.Component {
-  render() {
-    return (
-      <div dangerouslySetInnerHTML={{ __html: ${html} }} ></div>
-    );
-  }
-}
-
-export default Page;
-    `;
+    const html = `\`${content.replace(/`/g, '\\`')}\``;
+    const templateContent = fs.readFileSync(this.params.templateDangerousHtml).toString();
+    return templateContent.replace('%html%', html);
   }
 
   private processTemplate(): string {

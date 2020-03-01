@@ -159,6 +159,10 @@ export class SiteFlattener {
     return path.resolve(this.getConfPath(), templateName);
   }
 
+  private getComponentTemplate(templateName: string): string {
+    return path.resolve(this.getConfPath(), templateName);
+  }
+
   private shouldUseSourceHtml() {
     return this.params.useSourceHtml !== undefined ? this.params.useSourceHtml : true;
   }
@@ -241,6 +245,7 @@ export class SiteFlattener {
       pagesDir: this.canvasX.getPagesDir(),
       staticDir: this.canvasX.getStaticDir(),
       templatePath: this.getPageTemplate(),
+      templateDangerousHtml: this.getComponentTemplate('template_dangerous_html.jsx'),
       pageUrl: transformedScrapedPage.pageUrl,
       headHtml: htmlParser.getHeadHtml(),
       bodyHtml: htmlParser.getBodyHtml(),
