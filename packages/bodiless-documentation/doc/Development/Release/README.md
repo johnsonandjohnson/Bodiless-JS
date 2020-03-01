@@ -17,6 +17,10 @@
 
 ### 0.x Release Process
 
+#### Pre-release notes
+
+1. Code freeze on master branch. Make sure no more commits merge into master before release complete.
+
 At end of Sprint, a new 0.0.x package version should be published as follows.
 
 1. Log into npm:
@@ -26,10 +30,18 @@ At end of Sprint, a new 0.0.x package version should be published as follows.
    > Note: You must have access to the
    [Bodiless organization](https://www.npmjs.com/settings/bodiless/packages.
    Please contact [Dewen Li](https://github.com/dewen) to obtain it.
-1. Take a fresh clone of the reposotory.
+1. Take a fresh clone of the repository.
+   ```
+   git clone git@github.com:johnsonandjohnson/Bodiless-JS.git
+   cd Bodiless-JS
+   ```
 1. Checkout a new release branch from master, eg:
    ```
    git checkout -b chore/release-0.0.37
+   ```
+   Add new release branch to remote, this is necessary during lerna publishing process.
+   ```
+   git push origin chore/release-0.0.37
    ```
 1. Initialize all dependencies and build the project:
    ```
