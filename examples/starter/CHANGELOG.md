@@ -5,7 +5,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [0.0.42](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.41...v0.0.42) (2020-02-28)
 
-**Note:** Version bump only for package @bodiless/bv
+**Note:** Version bump only for package @bodiless/gatsby-starter-bodiless
 
 
 
