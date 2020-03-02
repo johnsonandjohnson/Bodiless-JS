@@ -3,13 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.0.42](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v0.0.39...v0.0.42) (2020-02-28)
+## [0.0.42](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v0.0.41...v0.0.42) (2020-02-28)
 
+**Note:** Version bump only for package @bodiless/bv
 
-### Bug Fixes
-
-* **bodiless-backend:** do not require morgan when it is disabled ([#159](https://github.com/johnsonandjohnson/Bodiless-JS/issues/159)) ([35a6756](https://github.com/johnsonandjohnson/Bodiless-JS/commit/35a6756bf3cef23b05790bb3746ee388d8ef4e32))
-* **gatsby-theme-bodiless:** Typed chars disappear sporadically ([#52](https://github.com/johnsonandjohnson/Bodiless-JS/issues/52)) ([4829496](https://github.com/johnsonandjohnson/Bodiless-JS/commit/48294967948c75707b668f90c76c0ad5d18e6a4d)), closes [#14](https://github.com/johnsonandjohnson/Bodiless-JS/issues/14) [#14](https://github.com/johnsonandjohnson/Bodiless-JS/issues/14) [#14](https://github.com/johnsonandjohnson/Bodiless-JS/issues/14)
 
 
 
