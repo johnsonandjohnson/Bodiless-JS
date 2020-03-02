@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.41](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.39...v0.0.41) (2020-02-28)
+
+
+### Features
+
+* **bodiless-core:** edit ui should start in preview mode ([#170](https://github.com/johnsonandjohnson/bodiless-js/issues/170)) ([22b4f4c](https://github.com/johnsonandjohnson/bodiless-js/commit/22b4f4c74cf0ce9ab2e30cb87bffe428bddd7fb9))
+
+
+
+
+
+## [0.0.40](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.39...v0.0.40) (2020-02-21)
+
+**Note:** Version bump only for package @bodiless/components
+
+
+
+
+
 ## 0.0.38 (2020-01-29)
 
 
