@@ -11,24 +11,27 @@ describe('Link Toggle smoke tests', function () {
   const editedLabelPostfix = ' - edited'
   const editedUrlPostfix = '-edited'
 
-  const labelXpath = '//*[@class="my-3"]//*[@class="bodiless-inline-editable"]'
+  //const labelXpath = '//*[@class="my-3"]//*[@class="bodiless-inline-editable"]'
+  const labelXpath = '//*[@class="my-3"]//span'
   const labelPreviewXpath = '//*[@class="my-3"]//span'
+  const linkXpath = '//*[@class="my-3"]/a'
 
   const linkIconXpath = '//*[@aria-label="Local Context Menu"]//*[@aria-label="Link"]'
   const urlFieldXpath = '//form[@aria-label="Context Menu Link Form"]//input[@id="link-href"]'
   const checkmarkIconLinkFormXpath = '//form[@aria-label="Context Menu Link Form"]//button[@aria-label="Submit"]'
   const removeLinkXpath = '//form[@aria-label="Context Menu Link Form"]//button[text()="Remove Link"]'
-  const linkXpath = '//*[@class="my-3"]/a'
+  
 
 
-  it('link toggle: 1 - filling in the label', () => {
+  it.only('link toggle: 1 - checking the label without a url', () => {
     cy.xpath(labelXpath)
+    .click()
       .type(label)
       .should('have.text', label)
   })
 
 
-  it('link toggle: 2 - checking the label in Preview mode', () => {
+  it('link toggle: 2 - checking the label without a url in Preview Mode', () => {
     cy.wait(1000)
     cy.clickEdit()
     cy.xpath(labelPreviewXpath)
@@ -38,7 +41,7 @@ describe('Link Toggle smoke tests', function () {
   })
 
 
-  it('link toggle: 3 - adding a url value', () => {
+  it('link toggle: 3 - checking the label with a url value', () => {
     cy.clickEdit()
     cy.xpath(labelXpath)
       .click()
@@ -48,10 +51,6 @@ describe('Link Toggle smoke tests', function () {
       .type(url)
     cy.xpath(checkmarkIconLinkFormXpath)
       .click()
-  })
-
-
-  it('link toggle: 4 - checking the link in Edit mode', () => {
     cy.xpath(labelXpath)
       .should('have.text', label)
     cy.xpath(linkXpath)
@@ -59,7 +58,7 @@ describe('Link Toggle smoke tests', function () {
   })
 
 
-  it('link toggle: 5 - checking the link in Preview mode', () => {
+  it('link toggle: 4 - checking the label with a url value in Preview Mode', () => {
     cy.wait(1000)
     cy.clickEdit()
     cy.xpath(labelPreviewXpath)
@@ -69,15 +68,17 @@ describe('Link Toggle smoke tests', function () {
   })
 
 
-  it('link toggle: 6 - editing the label', () => {
+  it('link toggle: 5 - checking the label with a url value can be edited', () => {
     cy.clickEdit()
     cy.xpath(labelXpath)
       .type(editedLabelPostfix)
       .should('have.text', label + editedLabelPostfix)
+    cy.xpath(linkXpath)
+      .should('have.attr', 'href', '#' + url)
   })
 
 
-  it('link toggle: 7 - editing the url value', () => {
+  it('link toggle: 6 - checking that a url value can be edited', () => {
     cy.xpath(labelXpath)
       .click()
     cy.xpath(linkIconXpath)
@@ -86,10 +87,14 @@ describe('Link Toggle smoke tests', function () {
       .type(editedUrlPostfix)
     cy.xpath(checkmarkIconLinkFormXpath)
       .click()
+    cy.xpath(labelXpath)
+      .should('have.text', label + editedLabelPostfix)
+    cy.xpath(linkXpath)
+      .should('have.attr', 'href', '#' + url + editedUrlPostfix)
   })
 
 
-  it('link toggle: 8 - checking the edited link in Preview mode', () => {
+  it('link toggle: 7 - checking the edited link in Preview mode', () => {
     cy.wait(1000)
     cy.clickEdit()
     cy.xpath(labelPreviewXpath)
@@ -98,14 +103,15 @@ describe('Link Toggle smoke tests', function () {
       .should('have.attr', 'href', '#' + url + editedUrlPostfix)
   })
 
-  it('link toggle: 9 - clicking the link in Preview mode', () => {
+
+  it('link toggle: 8 - checking clicking the link in Preview mode', () => {
     cy.xpath(linkXpath)
       .click()
     cy.url().should('include', url + editedUrlPostfix)
   })
 
 
-  it('link toggle: 10 - checking Remove Link feature', () => {
+  it('link toggle: 9 - checking Remove Link feature in Edit Mode', () => {
     cy.clickEdit()
     cy.xpath(labelXpath)
       .click()
@@ -120,7 +126,7 @@ describe('Link Toggle smoke tests', function () {
   })
 
 
-  it('link toggle: 11 - checking that Link is removed in Preview mode', () => {
+  it('link toggle: 10 - checking that Remove Link removes a link in Preview mode', () => {
     cy.wait(1000)
     cy.clickEdit()
     cy.xpath(linkXpath)
