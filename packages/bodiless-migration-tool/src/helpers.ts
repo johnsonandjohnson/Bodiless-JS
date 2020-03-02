@@ -44,10 +44,10 @@ export function getUrlToLocalDirectoryMapper(targetDir: string): Function {
 }
 
 export function isUrlExternal(baseUrl: string, targetUrl: string) {
-  const hasHost = url.parse(baseUrl, true, true).host !== null;
+  const hasTargetUrlHost = url.parse(targetUrl, true, true).host !== null;
   const baseUrlHost = url.parse(baseUrl).host || '';
   const targetUrlHost = url.parse(targetUrl).host || '';
-  return hasHost
+  return hasTargetUrlHost
     && stripWWW(baseUrlHost) !== stripWWW(targetUrlHost);
 }
 
@@ -68,7 +68,7 @@ function stripWWW(host: string): string {
   return host.replace(/^www\./, '');
 }
 
-function getHostNameWithoutWWW(host: string): string {
+export function getHostNameWithoutWWW(host: string): string {
   const hostName = url.parse(host).hostname || '';
   return stripWWW(hostName);
 }
@@ -177,4 +177,11 @@ export function cfDecodeEmail(encodedString: string) {
     email += String.fromCharCode(i);
   }
   return email;
+}
+
+export function prependProtocolToBareUrl(url$: string, protocol = 'https://') {
+  if (!url$.match(/^[a-zA-Z]+:\/\//)) {
+    return protocol + url$;
+  }
+  return url$;
 }
