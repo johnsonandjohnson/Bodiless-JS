@@ -43,6 +43,10 @@ export function getUrlToLocalDirectoryMapper(targetDir: string): Function {
   };
 }
 
+function stripWWW(host: string): string {
+  return host.replace(/^www\./, '');
+}
+
 export function isUrlExternal(baseUrl: string, targetUrl: string) {
   const hasTargetUrlHost = url.parse(targetUrl, true, true).host !== null;
   const baseUrlHost = url.parse(baseUrl).host || '';
@@ -62,10 +66,6 @@ function isJavascriptProtocolUrl(url1: string): boolean {
 
 function isFragmentOnly(url1: string): boolean {
   return url1.match(/^#/g) !== null;
-}
-
-function stripWWW(host: string): string {
-  return host.replace(/^www\./, '');
 }
 
 export function getHostNameWithoutWWW(host: string): string {

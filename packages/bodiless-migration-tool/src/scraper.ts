@@ -115,6 +115,7 @@ export class Scraper extends EE<Events> {
     });
     crawler.on(HCCrawler.Events.PuppeteerRequestStarted, async (request: Request) => {
       const resourceTypes = [
+        'fetch',
         'xhr',
         'other',
         'script',
@@ -128,13 +129,13 @@ export class Scraper extends EE<Events> {
     const pageHost = getHostNameWithoutWWW(this.params.pageUrl);
     const allowedDomains = [
       pageHost,
-      ... pageHost ? [`www.${pageHost}`] : [],
+      ...pageHost ? [`www.${pageHost}`] : [],
     ];
     // Queue a request
     await crawler.queue({
       url: this.params.pageUrl,
       maxDepth: this.params.maxDepth,
-      allowedDomains: allowedDomains,
+      allowedDomains,
     });
     await crawler.onIdle(); // Resolved when no queue is left
     await crawler.close(); // Close the crawler

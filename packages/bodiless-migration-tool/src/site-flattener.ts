@@ -96,7 +96,7 @@ export class SiteFlattener {
       scraperParams: {
         ...params.scraperParams,
         pageUrl: prependProtocolToBareUrl(params.scraperParams.pageUrl),
-      }
+      },
     };
     const jamStackAppParams: JamStackAppParams = {
       gitRepository: this.params.gitRepository,
