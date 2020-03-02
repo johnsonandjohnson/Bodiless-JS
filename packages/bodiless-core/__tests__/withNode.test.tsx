@@ -38,6 +38,8 @@ class MockContentNode<D extends object> implements ContentNode<D> {
     return this.peer<E>(this.path.concat([key]).join(''));
   }
 
+  create = jest.fn();
+
   constructor(key: string) {
     this.path = [key];
   }

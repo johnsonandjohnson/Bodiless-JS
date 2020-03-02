@@ -14,6 +14,7 @@
 
 // eslint-disable-next-line import/prefer-default-export
 export type WithNodeProps = {
-  nodeKey: string;
+  nodeKey?: string;
+  nodePath?: string[];
   nodeCollection?: string;
 };

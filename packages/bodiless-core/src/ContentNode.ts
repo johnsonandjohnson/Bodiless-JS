@@ -47,6 +47,7 @@ export type ContentNode<D> = {
   path: string[];
   child<E extends object>(path: string): ContentNode<E>;
   peer<E extends object>(path: string): ContentNode<E>;
+  create<E extends object>(path: Path): ContentNode<E>;
 };
 
 export class DefaultContentNode<D extends object> implements ContentNode<D> {
@@ -64,12 +65,16 @@ export class DefaultContentNode<D extends object> implements ContentNode<D> {
   }
 
   peer<E extends object>(path: Path) {
-    return new DefaultContentNode<E>(this.actions, this.getters, path);
+    return this.create<E>(path);
   }
 
   child<E extends object>(path: Path) {
     const paths = Array.isArray(path) ? path : [path];
     return this.peer<E>([...this.path, ...paths]);
+  }
+
+  create<E extends object>(path: Path) {
+    return new DefaultContentNode<E>(this.actions, this.getters, path);
   }
 
   get data() {

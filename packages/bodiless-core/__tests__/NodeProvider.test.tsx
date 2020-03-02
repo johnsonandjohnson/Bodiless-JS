@@ -38,6 +38,8 @@ class MockContentNode implements ContentNode<Data> {
   child = jest.fn();
 
   peer = jest.fn();
+
+  create = jest.fn();
 }
 
 const ShowNode: React.FC<any> = ({ collection, id }) => {

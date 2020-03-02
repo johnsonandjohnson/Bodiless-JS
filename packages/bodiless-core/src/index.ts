@@ -17,7 +17,7 @@ import PageContextProvider from './PageContextProvider';
 import PageEditContext from './PageEditContext';
 import asStatic from './asStatic';
 import { useEditContext, useUUID, useContextActivator } from './hooks';
-import withNode, { withNodeKey } from './withNode';
+import withNode, { withNodeKey, withNodePath } from './withNode';
 import withEditButton from './withEditButton';
 import contextMenuForm from './contextMenuForm';
 import withData from './withData';
@@ -64,6 +64,7 @@ export {
   EditButtonOptions,
   withNode,
   withNodeKey,
+  withNodePath,
   contextMenuForm,
   withData,
   NodeProvider,

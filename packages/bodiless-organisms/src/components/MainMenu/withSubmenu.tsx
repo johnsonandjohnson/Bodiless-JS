@@ -17,6 +17,7 @@ import React, {
   FC,
   PropsWithChildren,
   ReactNode,
+  Fragment,
 } from 'react';
 import {
   ListProps,
@@ -26,19 +27,28 @@ import {
   asSublist,
 } from '@bodiless/components';
 import { withDesign } from '@bodiless/fclasses';
-import { WithNodeProps } from '@bodiless/core';
+import {
+  useNode,
+  withNode,
+} from '@bodiless/core';
 
-type MenuSublistProps = Omit<ListProps, 'title' | keyof WithNodeProps> & {
+type MenuSublistProps = ListProps & {
   title: ReactNode,
 };
+
+const NodeProvider = withNode<PropsWithChildren<{}>, any>(Fragment);
 
 const withSubmenuToggle = (Sublist: ComponentType<MenuSublistProps>) => (
   (Item: ComponentType<PropsWithChildren<{}>> | string) => {
     const ItemWithSubmenu: FC<ListProps> = ({
-      children, unwrap, nodeKey, ...rest
-    }) => (
-      <Sublist title={children} unwrap={unwrap} {...rest} />
-    );
+      children, ...rest
+    }) => {
+      const { node } = useNode();
+      const children$ = <NodeProvider nodePath={node.path}>{children}</NodeProvider>;
+      return (
+        <Sublist title={children$} {...rest as any} />
+      );
+    };
     const ItemWithoutSubmenu: FC<ListProps> = ({ wrap, nodeKey, ...rest }) => (
       <Item {...rest} />
     );
