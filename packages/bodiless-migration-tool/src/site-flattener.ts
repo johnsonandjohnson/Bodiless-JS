@@ -17,6 +17,7 @@ import path from 'path';
 import minimatch from 'minimatch';
 import {
   getUrlToLocalDirectoryMapper,
+  prependProtocolToBareUrl,
 } from './helpers';
 import Downloader from './downloader';
 import HtmlParser from './html-parser';
@@ -92,7 +93,12 @@ export class SiteFlattener {
     this.params = {
       reservedPaths: ['404'],
       ...params,
+      websiteUrl: prependProtocolToBareUrl(params.websiteUrl),
       trailingSlash: params.trailingSlash || TrailingSlash.Add,
+      scraperParams: {
+        ...params.scraperParams,
+        pageUrl: prependProtocolToBareUrl(params.scraperParams.pageUrl),
+      },
     };
 
     const jamStackAppParams: JamStackAppParams = {
