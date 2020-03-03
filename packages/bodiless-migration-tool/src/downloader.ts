@@ -44,9 +44,12 @@ export default class Downloader {
 
   downloadPath: string;
 
-  constructor(pageUrl: string, downloadPath: string) {
+  excludePaths: Array<string> | undefined;
+
+  constructor(pageUrl: string, downloadPath: string, excludePaths?: Array<string>) {
     this.pageUrl = pageUrl;
     this.downloadPath = downloadPath;
+    this.excludePaths = excludePaths;
   }
 
   public async downloadFiles(resources: Array<string>) {
@@ -94,6 +97,11 @@ export default class Downloader {
     if (targetPath === undefined) {
       return Promise.reject(new Error(`target path for ${resource} is undefined`));
     }
+    // if (this.excludePaths && )
+    if (this.excludePaths && (this.excludePaths.indexOf(targetPath.replace(`${this.downloadPath}/`, '')) === 0)) {
+      return Promise.reject(new Error(`Resource ${resource} is excluded from download.`));
+    }
+
     ensureDirectoryExistence(targetPath);
     return new Promise((resolve, reject) => {
       // @ts-ignore retryRequest does not have type definition for the function

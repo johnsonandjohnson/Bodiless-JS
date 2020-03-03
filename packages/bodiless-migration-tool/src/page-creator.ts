@@ -59,7 +59,8 @@ export interface PageCreatorParams {
   createPages: boolean,
   downloadAssets: boolean,
   htmlToComponents: boolean,
-  htmlToComponentsSettings?: HtmlToComponentsSettings
+  htmlToComponentsSettings?: HtmlToComponentsSettings,
+  reservedPaths?: Array<string>,
 }
 
 export class PageCreator {
@@ -69,7 +70,11 @@ export class PageCreator {
 
   constructor(params: PageCreatorParams) {
     this.params = params;
-    this.downloader = new Downloader(this.params.pageUrl, this.params.staticDir);
+    this.downloader = new Downloader(
+      this.params.pageUrl,
+      this.params.staticDir,
+      this.params.reservedPaths,
+    );
   }
 
   async createPage() {
