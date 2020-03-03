@@ -1,33 +1,30 @@
-describe('Editor Menu', function () {
+describe('Editor Menu (left)', function () {
 
    before(function () {
       cy.visit('/')
    })
 
-   const menuBarLeftXpath = '//div[contains(@class, "bl-left-grid-0")]'
-   const menuBarRightXpath = '//div[contains(@class, "bl-right-grid-0")]'
+   const menuBarLeftXpath = '//*[@aria-label="Global Context Menu Left"]'
+   const menuBarRightXpath = '//*[@aria-label="Global Context Menu Right"]'
 
    const switcherIconXpath = '//*[@aria-label="switcher"]'
-
    const docsIconXpath = '//*[@aria-label="Docs"]'
-
    const editIconXpath = '//*[@aria-label="Edit"]'
-
    const addPageIconXpath = '//*[@aria-label="Page"]'
+   const latestCommitsIconXpath = '//*[@aria-label="listCommits"]'
+   const pushIconXpath = '//*[@aria-label="savechanges"]'
+   const revertIconXpath = '//*[@aria-label="resetchanges"]'
+
    const headerAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//h3[text()="Add a New Page"]'
    const fieldAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//input[@id="new-page-path"]'
    const closeIconAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Cancel"]'
    const checkmarkIconAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Submit"]'
 
-   const latestCommitsIconXpath = '//*[@aria-label="listCommits"]'
    const headerLatestCommitsFormXpath = '//*[@aria-label="Context Menu listCommits Form"]//h3[text()="Latest Commits"]'
    const itemLatestCommitsFormXpath = '//*[@aria-label="Context Menu listCommits Form"]//input[@type="radio"][@name="commits"]'
    const checkmarkIconLatestCommitsFormXpath = '//*[@aria-label="Context Menu listCommits Form"]//*[@aria-label="Submit"]'
    const closeIconLatestCommitsFormXpath = '//*[@aria-label="Context Menu listCommits Form"]//*[@aria-label="Cancel"]'
 
-   const pushIconXpath = '//*[@aria-label="savechanges"]'
-
-   const revertIconXpath = '//*[@aria-label="resetchanges"]'
    const headerRevertFormXpath = '//*[@aria-label="Context Menu resetchanges Form"]//h3[text()="Revert to saved"]'
    const descrRevertFormXpath = '//*[@aria-label="Context Menu resetchanges Form"]//label[text()="Discard local changes"]'
    const checkmarkIconRevertFormXpath = '//*[@aria-label="Context Menu resetchanges Form"]//*[@aria-label="Submit"]'
@@ -161,7 +158,7 @@ describe('Editor Menu', function () {
    //  Docs icon that opens Docs app in a new tab cannot be fully tested within the current implementation
    //  Adding a test that directly checks Docs app Home page, without clicking on Docs icon
    it('editorMenu: 9 - Check Docs page', () => {
-      cy.visit('/___docs/#/')
+      cy.visit('/___docs')
       cy.contains('Bodiless-JS')
          .click()
       cy.url().should('include', '/___docs/#/?id=bodiless-js')
@@ -169,4 +166,3 @@ describe('Editor Menu', function () {
 
 
 })
-
