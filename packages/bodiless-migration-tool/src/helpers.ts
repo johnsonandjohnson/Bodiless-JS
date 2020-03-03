@@ -43,10 +43,16 @@ export function getUrlToLocalDirectoryMapper(targetDir: string): Function {
   };
 }
 
-export function isUrlExternal(domain: string, item: string) {
-  return url.parse(item, true, true).host
-  !== null && url.parse(domain).host
-  !== url.parse(item).host;
+function stripWWW(host: string): string {
+  return host.replace(/^www\./, '');
+}
+
+export function isUrlExternal(baseUrl: string, targetUrl: string) {
+  const hasTargetUrlHost = url.parse(targetUrl, true, true).host !== null;
+  const baseUrlHost = url.parse(baseUrl).host || '';
+  const targetUrlHost = url.parse(targetUrl).host || '';
+  return hasTargetUrlHost
+    && stripWWW(baseUrlHost) !== stripWWW(targetUrlHost);
 }
 
 export function isUrlRelative(path1: string) {
@@ -62,9 +68,9 @@ function isFragmentOnly(url1: string): boolean {
   return url1.match(/^#/g) !== null;
 }
 
-function getHostNameWithoutWWW(host: string): string {
+export function getHostNameWithoutWWW(host: string): string {
   const hostName = url.parse(host).hostname || '';
-  return hostName.replace(/^www\./, '');
+  return stripWWW(hostName);
 }
 
 export function transformRelativeUrlToInternal(relativeUrl: string, pageUrl: string): string {
@@ -171,4 +177,11 @@ export function cfDecodeEmail(encodedString: string) {
     email += String.fromCharCode(i);
   }
   return email;
+}
+
+export function prependProtocolToBareUrl(url$: string, protocol = 'https://') {
+  if (!url$.match(/^[a-zA-Z]+:\/\//)) {
+    return protocol + url$;
+  }
+  return url$;
 }
