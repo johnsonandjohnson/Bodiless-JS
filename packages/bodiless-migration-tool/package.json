@@ -29,6 +29,7 @@
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
     "ee-ts": "^1.0.1",
+    "gatsby-plugin-root-import": "^2.0.5",
     "glob": "^7.1.6",
     "html-to-react-components": "^1.6.6",
     "htmlclean": "^3.0.8",
