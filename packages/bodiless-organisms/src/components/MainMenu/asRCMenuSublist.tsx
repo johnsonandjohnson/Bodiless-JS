@@ -11,30 +11,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ComponentClass } from 'react';
-import { flow } from 'lodash';
-import { SubMenu } from 'rc-menu';
+import React, {
+  ComponentType,
+  ReactNode,
+} from 'react';
 import {
-  withDesign,
-  stylable,
-  replaceWith,
-} from '@bodiless/fclasses';
-import asMainMenu from './asMainMenu';
-import asRCMenuSublist from './asRCMenuSublist';
+  ListProps,
+} from '@bodiless/components';
+import {
+  useNode,
+  NodeProvider,
+} from '@bodiless/core';
+
+type MenuSublistProps = ListProps & {
+  title: ReactNode,
+};
+
 /**
  * HOC, that incorporate the given component (usually based on <List /> component)
  * with rc-menu <Submenu /> component
  */
-const asMainSubMenu = flow(
-  asRCMenuSublist,
-  asMainMenu,
-  withDesign({
-    Wrapper: replaceWith(
-      flow(
-        stylable(SubMenu as ComponentClass),
-      ),
-    ),
-  }),
-);
+// eslint-disable-next-line max-len
+const asRCMenuSublist = (Sublist: ComponentType<MenuSublistProps>) => ({ children, ...rest }: MenuSublistProps) => {
+  const { node } = useNode();
+  const children$ = <NodeProvider node={node}>{children}</NodeProvider>;
+  return (
+    <Sublist title={children$} {...rest as any} />
+  );
+};
 
-export default asMainSubMenu;
+export default asRCMenuSublist;

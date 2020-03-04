@@ -89,10 +89,12 @@ const asSingleAccordion = withDesign({
 
 const SingleAccordionClean = flow(
   designable(singleAccordionComponentStart),
-  withNode,
 )(SingleAccordionBase);
 
-const SingleAccordion = asSingleAccordion(SingleAccordionClean);
+const SingleAccordion = flow(
+  asSingleAccordion,
+  withNode,
+)(SingleAccordionClean);
 
 export default SingleAccordion;
 export {

@@ -15,11 +15,9 @@
 import BurgerMenuClean from './BurgerMenuClean';
 import asBurgerSubMenu from './asBurgerSubMenu';
 import asEditableBurgerSubMenu from './asEditableBurgerSubMenu';
-import withBurgerSubmenu from './withBurgerSubmenu';
 
 export {
   asBurgerSubMenu,
   asEditableBurgerSubMenu,
   BurgerMenuClean,
-  withBurgerSubmenu,
 };

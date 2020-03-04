@@ -45,6 +45,10 @@ const withToggleTo = <Q extends object>(OffComp: ComponentType<Q> | string) => (
   )
 );
 
+const withToggleFrom = <P extends object>(OnComp: ComponentType<P>) => (
+  <Q extends object>(OffComp: ComponentType<Q> | string) => withToggleTo(OffComp)(OnComp)
+);
+
 const withToggle = withToggleTo(Fragment);
 
 type TMenuOptionGetter = () => TMenuOption[];
@@ -99,6 +103,7 @@ const withWrapOnSubmit = <P extends object>(Component: ComponentType<P & OnSubmi
 );
 
 export {
+  withToggleFrom,
   withToggleTo,
   withToggle,
   withToggleButton,

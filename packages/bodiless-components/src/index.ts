@@ -29,7 +29,12 @@ import withSublist, { asSublist } from './List/withSublist';
 import {
   withMeta, withMetaTitle, withMetaHtml, asBodilessHelmet,
 } from './Meta/Meta';
-import { withToggle, withToggleTo, withToggleButton } from './Toggle';
+import {
+  withToggle,
+  withToggleFrom,
+  withToggleTo,
+  withToggleButton,
+} from './Toggle';
 import withEditPlaceholder from './Placeholder';
 
 export {
@@ -49,6 +54,7 @@ export {
   ListTitleProps,
   withListTitle,
   withToggle,
+  withToggleFrom,
   withToggleTo,
   withToggleButton,
   withPlaceholder,

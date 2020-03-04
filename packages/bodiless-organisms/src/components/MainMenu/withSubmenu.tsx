@@ -12,59 +12,24 @@
  * limitations under the License.
  */
 
-import React, {
+import {
   ComponentType,
-  FC,
-  PropsWithChildren,
-  ReactNode,
-  Fragment,
 } from 'react';
 import {
   ListProps,
   withToggleButton,
-  withToggleTo,
+  withToggleFrom,
   ListDesignableComponents,
-  asSublist,
 } from '@bodiless/components';
 import { withDesign } from '@bodiless/fclasses';
-import {
-  useNode,
-  withNode,
-} from '@bodiless/core';
-
-type MenuSublistProps = ListProps & {
-  title: ReactNode,
-};
-
-const NodeProvider = withNode<PropsWithChildren<{}>, any>(Fragment);
-
-const withSubmenuToggle = (Sublist: ComponentType<MenuSublistProps>) => (
-  (Item: ComponentType<PropsWithChildren<{}>> | string) => {
-    const ItemWithSubmenu: FC<ListProps> = ({
-      children, ...rest
-    }) => {
-      const { node } = useNode();
-      const children$ = <NodeProvider nodePath={node.path}>{children}</NodeProvider>;
-      return (
-        <Sublist title={children$} {...rest as any} />
-      );
-    };
-    const ItemWithoutSubmenu: FC<ListProps> = ({ wrap, nodeKey, ...rest }) => (
-      <Item {...rest} />
-    );
-
-    return withToggleTo(ItemWithoutSubmenu)(ItemWithSubmenu);
-  }
-);
-
 /**
  * HOC, adds the local context menu to the given component
  * @param Sublist
  */
-const withSubmenu = (Sublist: ComponentType<MenuSublistProps>) => (
+const withSubmenu = (Sublist: ComponentType<ListProps>) => (
   withDesign<ListDesignableComponents>({
     ItemMenuOptionsProvider: withToggleButton({ icon: 'playlist_add' }),
-    Item: withSubmenuToggle(asSublist(Sublist)),
+    Item: withToggleFrom(Sublist),
   })
 );
 

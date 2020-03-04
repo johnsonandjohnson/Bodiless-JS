@@ -25,9 +25,9 @@ import { withChild, asStatic } from '@bodiless/core';
 import {
   asEditableMenu,
   asEditableBurgerSubMenu,
+  withSubmenu,
   BurgerMenuClean,
   SingleAccordionClean,
-  withBurgerSubmenu,
 } from '@bodiless/organisms';
 import {
   asEditable,
@@ -56,7 +56,7 @@ const BurgerSubMenu = flow(
   }),
 )(SingleAccordionClean);
 
-const Body = withBurgerSubmenu(BurgerSubMenu)(EditableLinkList);
+const Body = withSubmenu(BurgerSubMenu)(EditableLinkList);
 
 const HeaderContents: FunctionComponent = () => (
   <A href="/">

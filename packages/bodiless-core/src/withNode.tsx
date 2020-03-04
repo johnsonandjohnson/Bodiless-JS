@@ -19,15 +19,13 @@ import { WithNodeProps } from './Types/NodeTypes';
 const withNode = <P extends object, D extends object>(Component: CT<P>) => {
   const WithNode = ({
     nodeKey,
-    nodePath,
     nodeCollection,
     ...rest
   }: P & WithNodeProps) => {
-    if (!nodeKey && !nodePath) return <Component {...rest as P} />;
-    const { node } = useNode<D>(nodeCollection);
-    const node$ = nodePath ? node.peer([...nodePath]) : node.child(nodeKey!);
+    if (!nodeKey) return <Component {...rest as P} />;
+    const node = useNode<D>(nodeCollection).node.child(nodeKey);
     return (
-      <NodeProvider node={node$} collection={nodeCollection}>
+      <NodeProvider node={node} collection={nodeCollection}>
         <Component {...rest as P} />
       </NodeProvider>
     );
@@ -45,15 +43,5 @@ const withNodeKey = <P extends object>(
     ));
     return WithNodeKey;
   };
-
-const withNodePath = <P extends object>(
-  nodePath: string[],
-) => (Component: CT<P> | string) => {
-    const WithNodePath = (props: P) => (
-      <Component nodePath={nodePath} {...props} />
-    );
-    return WithNodePath;
-  };
-
 export default withNode;
-export { withNodeKey, withNodePath };
+export { withNodeKey };
