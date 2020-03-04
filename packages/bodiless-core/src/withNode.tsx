@@ -25,7 +25,7 @@ const withNode = <P extends object, D extends object>(Component: CT<P>) => {
   }: P & WithNodeProps) => {
     if (!nodeKey && !nodePath) return <Component {...rest as P} />;
     const { node } = useNode<D>(nodeCollection);
-    const node$ = nodePath ? node.create([...nodePath]) : node.child(nodeKey!);
+    const node$ = nodePath ? node.peer([...nodePath]) : node.child(nodeKey!);
     return (
       <NodeProvider node={node$} collection={nodeCollection}>
         <Component {...rest as P} />

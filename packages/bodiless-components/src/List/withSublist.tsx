@@ -14,6 +14,7 @@
 
 import React, { ComponentType, FC, PropsWithChildren } from 'react';
 import { withDesign } from '@bodiless/fclasses';
+import { pick } from 'lodash';
 import { withToggleButton, withToggleTo } from '../Toggle';
 import { FinalProps as ListProps, ListDesignableComponents } from './types';
 import { useItemsMutators } from './model';
@@ -39,7 +40,7 @@ const withSublistToggle = (Sublist: ComponentType<ListProps>) => (
 /**
  * Takes an unwrap function and enhances it with sublist deletion
  */
-const useSublistUnwrap = (unwrap?: Function) => {
+const useSublistUnwrap = ({ unwrap }: Pick<ListProps, 'unwrap'>) => {
   const { deleteSublist } = useItemsMutators();
   const unwrap$ = () => {
     deleteSublist();
@@ -57,9 +58,8 @@ const useSublistUnwrap = (unwrap?: Function) => {
  * returns a new component with sublist node key and sublist deletion on unwrap
  */
 export const asSublist = <T extends ListProps>(Sublist: ComponentType<T>) => (props: T) => {
-  const { unwrap, nodeKey, ...rest } = props;
-  const { unwrap: unwrap$ } = useSublistUnwrap(unwrap);
-  return <Sublist unwrap={unwrap$} nodeKey="sublist" {...rest as any} />;
+  const { unwrap } = useSublistUnwrap(pick(props, 'unwrap'));
+  return <Sublist {...props} unwrap={unwrap} nodeKey="sublist" />;
 };
 
 /**
