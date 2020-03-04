@@ -40,13 +40,6 @@ exports.onCreateBabelConfig = args => {
     name: '@babel/plugin-proposal-class-properties',
     options: { loose: true },
   });
-  setBabelPlugin({
-    name: 'babel-plugin-tailwind-components',
-    options: {
-      config: './tailwind.config.js',
-      format: 'auto',
-    },
-  });
 };
 
 const findFilesystemNode = ({ node, getNode }) => {
