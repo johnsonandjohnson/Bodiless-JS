@@ -83,9 +83,9 @@ class MigrationTool extends Command {
       transformers: settings.transformers || [],
       htmltojsx: true,
       disableTailwind: settings.disableTailwind === undefined ? true : settings.disableTailwind,
-      allowFailbackHtml: settings.allowFailbackHtml === undefined
+      allowFallbackHtml: settings.allowFallbackHtml === undefined
         ? true
-        : (settings.allowFailbackHtml === 1),
+        : (settings.allowFallbackHtml === 1),
     };
     const flattener = new SiteFlattener(flattenerParams);
     await flattener.start();

@@ -80,7 +80,7 @@ export interface SiteFlattenerParams {
   htmltojsx: boolean,
   useSourceHtml?: boolean,
   disableTailwind?: boolean,
-  allowFailbackHtml?: boolean,
+  allowFallbackHtml?: boolean,
 }
 
 export class SiteFlattener {
@@ -261,7 +261,7 @@ export class SiteFlattener {
       createPages: true,
       downloadAssets: true,
       htmlToComponents: this.params.htmltojsx,
-      allowFailbackHtml: this.params.allowFailbackHtml,
+      allowFallbackHtml: this.params.allowFallbackHtml,
       htmlToComponentsSettings,
     };
     return pageCreatorParams;
