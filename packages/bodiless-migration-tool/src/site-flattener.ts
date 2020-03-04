@@ -91,7 +91,7 @@ export class SiteFlattener {
 
   constructor(params: SiteFlattenerParams) {
     this.params = {
-      reservedPaths: ['404'],
+      reservedPaths: [],
       ...params,
       websiteUrl: prependProtocolToBareUrl(params.websiteUrl),
       trailingSlash: params.trailingSlash || TrailingSlash.Add,
@@ -148,12 +148,14 @@ export class SiteFlattener {
       debug(error.message);
     });
     scraper.on('fileReceived', async fileUrl => {
+
       const downloader = new Downloader(
         this.params.websiteUrl, this.canvasX.getStaticDir(), this.params.reservedPaths,
       );
       await downloader.downloadFiles([fileUrl]);
     });
     scraper.on('requestStarted', async fileUrl => {
+
       const downloader = new Downloader(
         this.params.websiteUrl, this.canvasX.getStaticDir(), this.params.reservedPaths,
       );

@@ -61,7 +61,7 @@ export default class Downloader {
         { concurrency: 4 },
       );
     } catch (err) {
-      debug(err);
+      debug(err.message);
     }
   }
 
@@ -97,9 +97,8 @@ export default class Downloader {
     if (targetPath === undefined) {
       return Promise.reject(new Error(`target path for ${resource} is undefined`));
     }
-    // if (this.excludePaths && )
-    if (this.excludePaths && (this.excludePaths.indexOf(targetPath.replace(`${this.downloadPath}/`, '')) === 0)) {
-      return Promise.reject(new Error(`Resource ${resource} is excluded from download.`));
+    if (this.excludePaths && (this.excludePaths.indexOf(targetPath.replace(`${this.downloadPath}/`, '')) >= 0)) {
+      return Promise.reject(new Error(`Resource ${resource} has been excluded from download.`));
     }
 
     ensureDirectoryExistence(targetPath);
@@ -108,7 +107,10 @@ export default class Downloader {
       // that produces request.Request.
       const req: request.Request = retryRequest({ uri: resource });
       req
-        .on('response', () => {
+        .on('response', (res) => {
+          if (res.statusCode >= 400) {
+            return reject(new Error(`Resource ${resource} is not available for download.`));
+          }
           req.pipe(fs.createWriteStream(targetPath))
             .on('finish', resolve)
             .on('error', err => reject(new Error(`error on streaming ${resource}. ${err}.`)));
