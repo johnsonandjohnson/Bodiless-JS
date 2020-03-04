@@ -14,7 +14,7 @@ if (enabled) {
     // Disabling global-require and no-unresolved for next line
     // because index.css is created during build.
     // eslint-disable-next-line
-    require('./src/components/index.css');
+    require('./src/css/style.css');
   } catch (e) {
     // Ignore error.
   }
