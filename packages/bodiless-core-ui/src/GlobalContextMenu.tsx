@@ -15,7 +15,9 @@
 import React, { FC } from 'react';
 import ReactTooltip from 'rc-tooltip';
 import { flow } from 'lodash';
-import { addClasses, removeClasses } from '@bodiless/fclasses';
+import {
+  addClasses, removeClasses, addProps,
+} from '@bodiless/fclasses';
 import {
   ContextMenu, ContextMenuUI, ContextMenuProps,
 } from '@bodiless/core';
@@ -25,13 +27,15 @@ import {
   ComponentFormError, ComponentFormSubmitButton,
 } from '@bodiless/ui';
 
-const Toolbar = addClasses(
-  'bl-bg-black bl-rounded bl-z-50 bl-p-grid-2 bl-fixed bl-top-grid-0 bl-left-grid-0 bl-text-white',
+const Toolbar = flow(
+  addClasses('bl-bg-black bl-rounded bl-z-50 bl-p-grid-2 bl-fixed bl-top-grid-0 bl-left-grid-0 bl-text-white'),
+  addProps({ role: 'toolbar', 'aria-label': 'Global Context Menu Left', id: 'global-context-menu' }),
 )(Div);
 
 const ToolbarRight = flow(
   addClasses('bl-right-grid-0'),
   removeClasses('bl-left-grid-0'),
+  addProps({ 'aria-label': 'Global Context Menu Right' }),
 )(Toolbar);
 
 export const FormWrapper = addClasses('bl-flex')(Div);
