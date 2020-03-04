@@ -13,13 +13,12 @@
  */
 
 /* eslint no-console: 0 */
+/* eslint global-require: 0 */
 const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const { spawn } = require('child_process');
 const formidable = require('formidable');
-const morgan = require('morgan');
-const morganBody = require('morgan-body');
 const tmp = require('tmp');
 const path = require('path');
 const Page = require('./page');
@@ -312,6 +311,8 @@ class Backend {
     this.app = express();
     this.app.use(bodyParser.json());
     if (isMorganEnabled()) {
+      const morgan = require('morgan');
+      const morganBody = require('morgan-body');
       this.app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
       morganBody(this.app);
     }

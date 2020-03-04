@@ -82,7 +82,7 @@ class MigrationTool extends Command {
       trailingSlash: settings.trailingSlash || TrailingSlash.Add,
       transformers: settings.transformers || [],
       htmltojsx: true,
-      disableTailwind: settings.disableTailwind || true,
+      disableTailwind: settings.disableTailwind === undefined ? true : settings.disableTailwind,
     };
     const flattener = new SiteFlattener(flattenerParams);
     await flattener.start();
