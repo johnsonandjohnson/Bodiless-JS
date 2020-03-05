@@ -32,7 +32,9 @@ const ChildNodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
  * An editable version of the Flexbox container.
  */
 const EditFlexbox: FC<EditFlexboxProps> = (props:EditFlexboxProps) => {
-  const { components, ui, snapData } = props;
+  const {
+    components, ui, snapData, defaultWidth,
+  } = props;
   const items = useItemHandlers().getItems();
   const {
     onFlexboxItemResize,
@@ -70,6 +72,7 @@ const EditFlexbox: FC<EditFlexboxProps> = (props:EditFlexboxProps) => {
               index={index}
               flexboxItem={flexboxItem}
               snapData={snapData}
+              defaultWidth={defaultWidth}
               getMenuOptions={useGetMenuOptions(props, flexboxItem)}
               onResizeStop={
                   flexboxItemProps => onFlexboxItemResize(flexboxItem.uuid, flexboxItemProps)

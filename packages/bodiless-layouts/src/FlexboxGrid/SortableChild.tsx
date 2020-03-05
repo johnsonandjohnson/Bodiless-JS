@@ -36,20 +36,25 @@ type SortableChildProps = {
   children: React.ReactNode;
   ui?: SortableResizableUI;
   snapData?: SnapData;
-  defaultSize?: { width: (number | string), height: (number | string) };
+  defaultWidth?: string | number,
 };
 
 
 const SortableChild = (props: SortableChildProps) => {
   const {
-    onResizeStop, flexboxItem, snapData: snapRaw, ...restProps
+    onResizeStop, flexboxItem, snapData: snapRaw, defaultWidth, ...restProps
   } = props;
   const snap = snapRaw || defaultSnapData;
   const {
     width: minWidth,
-    className: passedSnapClassName,
   } = snap({
     width: 0,
+    className: '',
+  });
+  const {
+    className: passedSnapClassName,
+  } = snap({
+    width: defaultWidth as number || 100,
     className: '',
   });
   // local classname is used to store intermidiary classname state,

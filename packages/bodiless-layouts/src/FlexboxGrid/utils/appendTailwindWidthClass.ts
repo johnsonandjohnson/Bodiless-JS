@@ -151,7 +151,7 @@ const getSnapFrom = (...withTuples: WithTuples[]):SnapData => props => {
   // Find the first width for which the input width is smaller
   // If no with pass then use the one from our current class
   const width = typeof currentWidth !== 'undefined'
-    ? getWidths(currentMediaTuples).find(w => w > currentWidth) || 100
+    ? getWidths(currentMediaTuples).find(w => w >= currentWidth) || 100
     : (currentTuple && currentTuple.width) || 100;
   const currentWidthTuples = filterByWidth(width)(currentMediaTuples);
   const className = currentClassName.split(' ')

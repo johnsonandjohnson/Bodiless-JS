@@ -1,6 +1,15 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount, ReactWrapper } from 'enzyme';
+
+const setEditMode = (isEdit: boolean) => {
+  // @TODO bodiless-core internals should not be touched
+  // bodiless-core should be refactored to allow injecting of default edit mode
+  window.sessionStorage.isEdit = isEdit;
+};
+setEditMode(true);
+
+// eslint-disable-next-line import/first
 import Image from '../src/Image';
 
 let wrapper: ReactWrapper;

@@ -29,6 +29,7 @@ export type StaticFlexboxProps = {
 export type EditFlexboxProps = StaticFlexboxProps & {
   ui?: UI,
   snapData?: SnapData,
+  defaultWidth?: string|number,
   maxComponents?: number,
 };
 export type WidthClassTuple = {
