@@ -40,8 +40,8 @@ const SortableListWrapper = SortableContainer(
     ({ children, ui }: SortableListProps): React.ReactElement<SortableListProps> => {
       if (!children || !children.length) {
         const { FlexboxEmpty } = getUI(ui);
-        const { isActive } = useEditContext();
-        const activeClassName = isActive ? 'bl-border-orange-400' : 'hover:bl-border-orange-400';
+        const context = useEditContext();
+        const activeClassName = context.isActive ? 'bl-border-orange-400' : 'hover:bl-border-orange-400';
 
         return (
           <FlexboxEmpty className={`bl-flex bl-justify-center bl-flex-wrap bl-py-grid-3 ${activeClassName}`} {...useContextActivator()}>
