@@ -163,6 +163,7 @@ export class PageCreator {
           debug(`[WARNING] An error occurred while processing html to jsx component conversion for page: ${this.params.pageUrl}. Component created with dangerouslySetInnerHTML.`);
           return;
         }
+        throw error;
       }
       const targetComponentsPath = path.resolve(this.params.pagesDir, '../../components');
       let pageJsxContent = fs.readFileSync(path.resolve(sourceComponentsPath, 'Page.jsx')).toString();
