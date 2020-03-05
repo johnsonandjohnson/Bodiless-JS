@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,16 +23,17 @@ import {
   NodeProvider,
 } from '@bodiless/core';
 
-type MenuSublistProps = ListProps & {
+type Props = ListProps & {
   title: ReactNode,
 };
 
 /**
- * HOC, that incorporate the given component (usually based on <List /> component)
- * with rc-menu <Submenu /> component
+ * HOC, takes a list component
+ * extracts title from list, the title is in the list children
+ * wraps the title with current node, otherwise the title will read data from list node
+ * passes the title as a prop according to rc-menu <SubMenu /> api
  */
-// eslint-disable-next-line max-len
-const asRCMenuSublist = (Sublist: ComponentType<MenuSublistProps>) => ({ children, ...rest }: MenuSublistProps) => {
+const asRCMenuSublist = (Sublist: ComponentType<Props>) => ({ children, ...rest }: Props) => {
   const { node } = useNode();
   const children$ = <NodeProvider node={node}>{children}</NodeProvider>;
   return (

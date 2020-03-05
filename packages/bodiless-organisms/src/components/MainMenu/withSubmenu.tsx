@@ -12,16 +12,29 @@
  * limitations under the License.
  */
 
-import {
+import React, {
   ComponentType,
+  FC,
+  PropsWithChildren,
 } from 'react';
 import {
   ListProps,
   withToggleButton,
-  withToggleFrom,
+  withToggleTo,
   ListDesignableComponents,
 } from '@bodiless/components';
 import { withDesign } from '@bodiless/fclasses';
+
+
+const withSubmenuToggle = (Sublist: ComponentType<ListProps>) => (
+  (Item: ComponentType<PropsWithChildren<{}>> | string) => {
+    const ItemWithoutSubmenu: FC<ListProps> = ({ wrap, nodeKey, ...rest }) => (
+      <Item {...rest} />
+    );
+    return withToggleTo(ItemWithoutSubmenu)(Sublist);
+  }
+);
+
 /**
  * HOC, adds the local context menu to the given component
  * @param Sublist
@@ -29,7 +42,7 @@ import { withDesign } from '@bodiless/fclasses';
 const withSubmenu = (Sublist: ComponentType<ListProps>) => (
   withDesign<ListDesignableComponents>({
     ItemMenuOptionsProvider: withToggleButton({ icon: 'playlist_add' }),
-    Item: withToggleFrom(Sublist),
+    Item: withSubmenuToggle(Sublist),
   })
 );
 

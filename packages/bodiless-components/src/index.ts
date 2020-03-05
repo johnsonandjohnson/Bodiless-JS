@@ -25,13 +25,12 @@ import {
 } from './List/types';
 import withListTitle from './List/withListTitle';
 import asEditableList from './List/asEditableList';
-import withSublist, { asSublist } from './List/withSublist';
+import withSublist, { withDeleteSublistOnUnwrap } from './List/withSublist';
 import {
   withMeta, withMetaTitle, withMetaHtml, asBodilessHelmet,
 } from './Meta/Meta';
 import {
   withToggle,
-  withToggleFrom,
   withToggleTo,
   withToggleButton,
 } from './Toggle';
@@ -49,12 +48,11 @@ export {
   ListDesignableComponents,
   asEditableList,
   withSublist,
-  asSublist,
+  withDeleteSublistOnUnwrap,
   ListProps,
   ListTitleProps,
   withListTitle,
   withToggle,
-  withToggleFrom,
   withToggleTo,
   withToggleButton,
   withPlaceholder,

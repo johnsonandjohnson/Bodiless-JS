@@ -26,14 +26,11 @@ import asRCMenuSublist from './asRCMenuSublist';
  * with rc-menu <Submenu /> component
  */
 const asMainSubMenu = flow(
+  // extract list title, wrap with current node and pass it as title prop to rc-menu <Submenu />
   asRCMenuSublist,
   asMainMenu,
   withDesign({
-    Wrapper: replaceWith(
-      flow(
-        stylable(SubMenu as ComponentClass),
-      ),
-    ),
+    Wrapper: replaceWith(stylable(SubMenu as ComponentClass)),
   }),
 );
 

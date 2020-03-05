@@ -25,14 +25,11 @@ import { withChild, asStatic } from '@bodiless/core';
 import {
   asEditableMenu,
   asEditableBurgerSubMenu,
-  withSubmenu,
   BurgerMenuClean,
   SingleAccordionClean,
+  withSubmenu,
 } from '@bodiless/organisms';
-import {
-  asEditable,
-  List,
-} from '@bodiless/components';
+import { asEditable, List } from '@bodiless/components';
 import { asMobileOnly } from '../../Elements.token';
 import './burger-menu.css';
 

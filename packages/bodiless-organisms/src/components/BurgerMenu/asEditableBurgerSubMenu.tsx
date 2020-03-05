@@ -21,7 +21,7 @@ import {
   withoutProps,
 } from '@bodiless/core';
 import {
-  asSublist,
+  withDeleteSublistOnUnwrap,
   asEditable,
   withLinkToggle,
 } from '@bodiless/components';
@@ -44,7 +44,7 @@ const asEditableBurgerSubMenu = (HeaderContent: string, editable: AsEditable) =>
       ),
       InnerLinks: flow(
         withNode,
-        asSublist,
+        withDeleteSublistOnUnwrap,
         asEditableMenu(editable),
       ),
     }),
