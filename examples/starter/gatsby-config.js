@@ -11,6 +11,7 @@ module.exports = {
     logo: '/images/bodiless_logo.png',
   },
   plugins: [
+    'gatsby-plugin-root-import',
     '@bodiless/gatsby-theme-bodiless',
     {
       resolve: 'gatsby-plugin-compile-es6-packages',
