@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+const { readdirSync } = require('fs');
 const path = require('path');
 
 require('dotenv').config({
@@ -120,6 +121,49 @@ if (process.env.ROBOTSTXT_ENABLED !== '0') {
       host: process.env.ROBOTSTXT_HOST,
       sitemap: process.env.ROBOTSTXT_SITEMAP,
       policy: policy ? JSON.parse(policy) : defaultPolicy,
+    },
+  });
+}
+
+/**
+ * CSS purging.
+*/
+
+const tailwindThemeEnabled = (process.env.BODILESS_TAILWIND_THEME_ENABLED || '1') === '1';
+const getDirectories = source => readdirSync(source, { withFileTypes: true })
+  .filter(dirent => dirent.isDirectory() || dirent.isSymbolicLink())
+  .map(dirent => dirent.name);
+
+const globPattern = '**/!(*.d).{ts,js,jsx,tsx}';
+const bodilessPackagesBasePath = path.resolve('./node_modules/@bodiless');
+const bodilessFilesPaths = getDirectories(bodilessPackagesBasePath)
+  .map(pkg => path.resolve(bodilessPackagesBasePath, pkg))
+  .map(dir => path.resolve(dir, globPattern));
+
+if (process.env.BODILESS_PURGE_CSS_ENABLED !== '0') {
+  plugins.push({
+    resolve: 'gatsby-plugin-postcss',
+    options: {
+      postCssPlugins: [
+        // eslint-disable-next-line global-require
+        ...(tailwindThemeEnabled ? [require('tailwindcss')('./tailwind.config.js')] : []),
+      ],
+    },
+  });
+  plugins.push({
+    resolve: 'gatsby-plugin-purgecss',
+    options: {
+      tailwind: true,
+      purgeOnly: [
+        'src/css/style.css',
+        'packages/bodiless-ui/lib/bodiless.index.css',
+        'node_modules/@bodiless/ui/lib/bodiless.index.css',
+      ],
+      content: [
+        path.join(process.cwd(), 'src/**/!(*.d).{ts,js,jsx,tsx}'),
+        path.join(process.cwd(), 'node_modules/@bodiless/**/!(*.d).{ts,js,jsx,tsx}'),
+        ...bodilessFilesPaths,
+      ],
     },
   });
 }
