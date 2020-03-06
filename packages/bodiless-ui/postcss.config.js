@@ -29,5 +29,9 @@ module.exports = {
     // eslint-disable-next-line
     require('tailwindcss')('bodiless.tailwind.config.js'),
     purgecss,
+    // eslint-disable-next-line
+    require('cssnano')({
+      preset: 'default',
+  }),
   ],
 };
