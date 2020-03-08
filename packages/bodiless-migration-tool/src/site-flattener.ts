@@ -148,14 +148,12 @@ export class SiteFlattener {
       debug(error.message);
     });
     scraper.on('fileReceived', async fileUrl => {
-
       const downloader = new Downloader(
         this.params.websiteUrl, this.canvasX.getStaticDir(), this.params.reservedPaths,
       );
       await downloader.downloadFiles([fileUrl]);
     });
     scraper.on('requestStarted', async fileUrl => {
-
       const downloader = new Downloader(
         this.params.websiteUrl, this.canvasX.getStaticDir(), this.params.reservedPaths,
       );

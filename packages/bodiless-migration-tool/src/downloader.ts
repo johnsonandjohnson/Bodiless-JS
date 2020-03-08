@@ -57,7 +57,13 @@ export default class Downloader {
     try {
       await BluebirdPromise.map(
         filteredResources,
-        resource => this.downloadFile(resource),
+        async resource => {
+          try {
+            await this.downloadFile(resource);
+          } catch (e) {
+            debug(e.message);
+          }
+        },
         { concurrency: 4 },
       );
     } catch (err) {
@@ -107,11 +113,11 @@ export default class Downloader {
       // that produces request.Request.
       const req: request.Request = retryRequest({ uri: resource });
       req
-        .on('response', (res) => {
+        .on('response', res => {
           if (res.statusCode >= 400) {
             return reject(new Error(`Resource ${resource} is not available for download.`));
           }
-          req.pipe(fs.createWriteStream(targetPath))
+          return req.pipe(fs.createWriteStream(targetPath))
             .on('finish', resolve)
             .on('error', err => reject(new Error(`error on streaming ${resource}. ${err}.`)));
         })

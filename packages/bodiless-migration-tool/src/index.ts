@@ -65,7 +65,7 @@ class MigrationTool extends Command {
       websiteUrl: settings.url,
       workDir: this.getWorkDir(),
       gitRepository: this.getGitRepo(),
-      reservedPaths: settings.reservedPaths || [],
+      reservedPaths: ['404'],
       scraperParams: {
         pageUrl: settings.url,
         maxDepth: settings.crawler.maxDepth,
