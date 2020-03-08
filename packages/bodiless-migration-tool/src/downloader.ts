@@ -67,7 +67,7 @@ export default class Downloader {
         { concurrency: 4 },
       );
     } catch (err) {
-      debug(err.message);
+      debug(err);
     }
   }
 
