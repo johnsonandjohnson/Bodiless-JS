@@ -32,7 +32,7 @@ The tool is given URL that will crawl the existing site finding all pages, gener
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/en/) version >= 10, suggest LTS
+- [Node.js](https://nodejs.org/en/) version >= 10
 - [NPM](https://docs.npmjs.com/) version 6.13.1+ is required.
 
 ### Installation & Run
@@ -47,7 +47,7 @@ The tool is given URL that will crawl the existing site finding all pages, gener
 1. Let's create a site to migrate the files to.
 
     The full directions can be found [here](/About/GettingStarted?id=creating-a-new-site)
-    We recommend this path it outside the repository root.  In the code example, I used `../NEW_MIGRATED_SITE`.
+    We recommend this path is outside the repository root.  In the code example, we used `../NEW_MIGRATED_SITE`.
 
     ```sh
     npm run ci
