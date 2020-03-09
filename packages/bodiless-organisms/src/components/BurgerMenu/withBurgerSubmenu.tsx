@@ -13,8 +13,8 @@
  */
 
 import { withSublist } from '@bodiless/components';
-import asRCMenuSublist from './asRCMenuSublist';
+import asBurgerMenuSublist from './asBurgerMenuSublist';
 
-const withSubmenu = withSublist(asRCMenuSublist);
+const withBurgerSubmenu = withSublist(asBurgerMenuSublist);
 
-export default withSubmenu;
+export default withBurgerSubmenu;

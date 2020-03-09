@@ -14,7 +14,7 @@
 
 import { DesignableComponentsProps, DesignableProps } from '@bodiless/fclasses';
 import { WithNodeProps } from '@bodiless/core';
-import { HTMLProps, ComponentType } from 'react';
+import { HTMLProps, ComponentType, PropsWithChildren } from 'react';
 
 export type TitleProps = {
   onAdd: () => void,
@@ -42,4 +42,10 @@ export type ItemsMutator = (item: string) => void;
 
 export type Data = {
   items?: string[],
+};
+
+export type UseItemWithSublist = (Sublist: ComponentType<FinalProps>) =>
+(Item: ComponentType<PropsWithChildren<{}>>) => {
+  ItemWithSublist: ComponentType<any>,
+  ItemWithoutSublist:ComponentType<any>,
 };

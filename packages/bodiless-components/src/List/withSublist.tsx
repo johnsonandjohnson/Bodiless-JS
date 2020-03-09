@@ -12,48 +12,27 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT, FC, PropsWithChildren } from 'react';
+import { ComponentType as CT, PropsWithChildren } from 'react';
 import { withDesign } from '@bodiless/fclasses';
+import { flow } from 'lodash';
 import { withToggleButton, withToggleTo } from '../Toggle';
-import { FinalProps as ListProps, ListDesignableComponents } from './types';
-import { useItemsMutators } from './model';
+import {
+  FinalProps as ListProps,
+  ListDesignableComponents,
+  UseItemWithSublist,
+} from './types';
+import asBasicSublist from './asBasicSublist';
+import withDeleteSublistOnUnwrap from './withDeleteSublistOnUnwrap';
 
-/**
- * Takes a sublist component and return=s a HOC to add a toggled version
- * of it to a list item.
- *
- * @param Item The item to which the toggle should be added.
- */
-const withSublistToggle = (Sublist: CT<ListProps>) => (
-  (Item: CT<PropsWithChildren<{}>> | string) => {
-    const ItemWithSublist: FC<ListProps> = ({ children, ...rest }) => (
-      <Item>
-        {children}
-        <Sublist {...rest} />
-      </Item>
-    );
-    const ItemWithoutSublist: FC<ListProps> = ({ wrap, nodeKey, ...rest }) => (
-      <Item {...rest} />
-    );
-    return withToggleTo(ItemWithoutSublist)(ItemWithSublist);
-  }
-);
 
-/**
- * Takes a component
- * returns a new component with sublist node key and sublist deletion on unwrap
- */
-const withDeleteSublistOnUnwrap = <T extends ListProps>(Sublist: CT<T>) => (props: T) => {
-  const { deleteSublist } = useItemsMutators();
-  const { unwrap } = props;
-  const unwrap$ = () => {
-    deleteSublist();
-    if (unwrap) {
-      unwrap();
+const withSublistToggle = (useItemWithSublist: UseItemWithSublist) => (
+  (Sublist: CT<ListProps>) => (
+    (Item: CT<PropsWithChildren<{}>>) => {
+      const { ItemWithoutSublist, ItemWithSublist } = useItemWithSublist(Sublist)(Item);
+      return withToggleTo(ItemWithoutSublist)(ItemWithSublist);
     }
-  };
-  return <Sublist {...props} unwrap={unwrap$} nodeKey="sublist" />;
-};
+  )
+);
 
 /**
  * Takes a sublist component and returns a HOC which, when applied to a list,
@@ -61,10 +40,16 @@ const withDeleteSublistOnUnwrap = <T extends ListProps>(Sublist: CT<T>) => (prop
  *
  * @param Sublist The sublist component to add to each item.
  */
-const withSublist = (Sublist: CT<ListProps>) => withDesign<ListDesignableComponents>({
+// eslint-disable-next-line
+const withSublist = (useItemWithSublist: UseItemWithSublist) => (Sublist: CT<ListProps>) => withDesign<ListDesignableComponents>({
   ItemMenuOptionsProvider: withToggleButton({ icon: 'playlist_add' }),
-  Item: withSublistToggle(withDeleteSublistOnUnwrap(Sublist)),
+  Item: withSublistToggle(useItemWithSublist)(Sublist),
 });
 
+const withBasicSublist = flow(
+  withDeleteSublistOnUnwrap,
+  withSublist(asBasicSublist),
+);
+
 export default withSublist;
-export { withDeleteSublistOnUnwrap };
+export { withBasicSublist };

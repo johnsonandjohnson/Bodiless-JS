@@ -17,10 +17,6 @@ import React, {
 import {
   ListProps,
 } from '@bodiless/components';
-import {
-  useNode,
-  NodeProvider,
-} from '@bodiless/core';
 
 /**
  * HOC, takes a list component
@@ -29,15 +25,11 @@ import {
  * passes the title as a prop according to rc-menu <SubMenu /> api
  */
 
-const asRCMenuSublist = (Sublist: ComponentType<ListProps>) => (
+const asBurgerMenuSublist = (Sublist: ComponentType<ListProps>) => (
   (Item: ComponentType<any>) => {
-    const ItemWithSublist: ComponentType<ListProps> = ({ children, ...rest }) => {
-      const { node } = useNode();
-      const children$ = <NodeProvider node={node}>{children}</NodeProvider>;
-      return (
-        <Sublist title={children$} {...rest as any} />
-      );
-    };
+    const ItemWithSublist: ComponentType<ListProps> = ({ ...props }) => (
+      <Sublist {...props} />
+    );
     const ItemWithoutSublist: ComponentType<ListProps> = ({ wrap, nodeKey, ...rest }) => (
       <Item {...rest} />
     );
@@ -48,4 +40,4 @@ const asRCMenuSublist = (Sublist: ComponentType<ListProps>) => (
   }
 );
 
-export default asRCMenuSublist;
+export default asBurgerMenuSublist;
