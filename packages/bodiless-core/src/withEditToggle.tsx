@@ -21,8 +21,8 @@ export const withEditToggle = <P extends object, Q extends object>(
   Editable: CT<P>,
   ReadOnly: CT<Q>,
 ) => observer((props: P & Q) => {
-    const { isEdit } = useEditContext();
-    return isEdit ? <Editable {...props} /> : <ReadOnly {...props} />;
+    const context = useEditContext();
+    return context.isEdit ? <Editable {...props} /> : <ReadOnly {...props} />;
   });
 
 export const ifEditable = <H extends Function>(...hocs: Function[]) => (

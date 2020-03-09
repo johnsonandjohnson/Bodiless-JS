@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/richtext",
-  "version": "0.0.41",
+  "version": "0.0.42",
   "description": "Provide Rich Text Component",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
   "license": "Apache-2.0",
@@ -27,8 +27,8 @@
     "postinstall": "node bin/apply-patches.js"
   },
   "dependencies": {
-    "@bodiless/core": "^0.0.41",
-    "@bodiless/fclasses": "^0.0.41",
+    "@bodiless/core": "^0.0.42",
+    "@bodiless/fclasses": "^0.0.42",
     "@emotion/core": "^10.0.14",
     "@emotion/css": "^10.0.14",
     "@emotion/styled": "^10.0.14",
