@@ -81,6 +81,7 @@ export interface SiteFlattenerParams {
   htmltojsx: boolean,
   useSourceHtml?: boolean,
   disableTailwind?: boolean,
+  allowFallbackHtml?: boolean,
 }
 
 export class SiteFlattener {
@@ -161,6 +162,10 @@ export class SiteFlattener {
 
   private getPageTemplate(): string {
     const templateName = this.params.htmltojsx ? 'template_html2jsx.jsx' : 'template_mono.jsx';
+    return path.resolve(this.getConfPath(), templateName);
+  }
+
+  private getComponentTemplate(templateName: string): string {
     return path.resolve(this.getConfPath(), templateName);
   }
 
@@ -246,6 +251,7 @@ export class SiteFlattener {
       pagesDir: this.canvasX.getPagesDir(),
       staticDir: this.canvasX.getStaticDir(),
       templatePath: this.getPageTemplate(),
+      templateDangerousHtml: this.getComponentTemplate('template_dangerous_html.jsx'),
       pageUrl: transformedScrapedPage.pageUrl,
       headHtml: htmlParser.getHeadHtml(),
       bodyHtml: htmlParser.getBodyHtml(),
@@ -261,6 +267,7 @@ export class SiteFlattener {
       createPages: true,
       downloadAssets: true,
       htmlToComponents: this.params.htmltojsx,
+      allowFallbackHtml: this.params.allowFallbackHtml,
       htmlToComponentsSettings,
     };
     return pageCreatorParams;
