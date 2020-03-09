@@ -50,7 +50,7 @@ const convertToShTypeComment = string => {
   return string.replace(shReplacer, '#');
 };
 
-const hasCopyright = string => /Copyright © [0-9]+ Johnson & Johnson/.test(string);
+const hasCopyright = string => /Copyright .*© [0-9]+ Johnson & Johnson/.test(string);
 
 const respectShebang = (fileData, comment) => {
   // We need to keep Shebang string as a first line at all times.

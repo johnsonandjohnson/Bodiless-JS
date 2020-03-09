@@ -15,12 +15,21 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
-import { PageEditContext } from '@bodiless/core';
 import {
   Value as SlateEditorValue,
   ValueJSON as SlateEditorValueJSON,
 } from 'slate';
 import { Editor } from 'slate-react';
+
+const setEditMode = (isEdit: boolean) => {
+  // @TODO bodiless-core internals should not be touched
+  // bodiless-core should be refactored to allow injecting of default edit mode
+  window.sessionStorage.isEdit = isEdit;
+};
+setEditMode(true);
+// eslint-disable-next-line import/first
+import { PageEditContext } from '@bodiless/core';
+// eslint-disable-next-line import/first
 import defaultValue from '../src/default-value';
 
 const getDefaultRichTextItems = () => ({});

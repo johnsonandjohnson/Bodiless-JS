@@ -57,12 +57,16 @@ type Props = {
   client?: Client,
 };
 
-const handle = (promise: AxiosPromise<any>) => promise
+const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
   .then(res => {
     if (res.status === 200) {
       // @TODO: Display the response in a component instead of an alert.
       // eslint-disable-next-line no-undef
-      alert('Operation successful.');
+      if (typeof callback === 'function') {
+        callback();
+      } else {
+        alert('Operation successful.');
+      }
     } else {
       // eslint-disable-next-line no-undef
       alert('An unknown error has occured.');
@@ -135,7 +139,10 @@ const formGitCommit = (client: Client) => contextMenuForm({
 // );
 
 const formGitReset = (client: Client) => contextMenuForm({
-  submitValues: () => handle(client.reset()),
+  submitValues: () => handle(client.reset(), () => {
+    alert('Revert is in progress. This may take a minute.');
+    window.location.reload();
+  }),
 })(
   ({ ui }: any) => {
     const { ComponentFormTitle, ComponentFormLabel } = getUI(ui);

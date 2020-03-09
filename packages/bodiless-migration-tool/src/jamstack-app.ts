@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["setEnvVar"] }] */
 import fs from 'fs';
 import path from 'path';
 import util from 'util';
@@ -25,7 +26,8 @@ import debug from './debug';
 
 export interface JamStackAppParams {
   gitRepository?: string,
-  workDir: string
+  workDir: string,
+  disableTailwind?: boolean,
 }
 
 export interface JamStackApp {
@@ -44,6 +46,7 @@ export class CanvasX implements JamStackApp {
   constructor(params: JamStackAppParams) {
     this.params = params;
     this.prepare();
+    this.setupEnvVars();
   }
 
   public clean() {
@@ -106,6 +109,31 @@ export class CanvasX implements JamStackApp {
     } else {
       debug('resetting repository');
       await this.resetRepository();
+    }
+  }
+
+  private setEnvVar(envFile: string, envVar: string, val: string): string {
+    const envFileByLine = envFile.toString().split('\n');
+    const envVarLine = envFileByLine.find(line => line.includes(envVar));
+
+    if (envVarLine) {
+      envFileByLine.splice(envFileByLine.indexOf(envVarLine), 1, `${envVar}='${val}'`);
+      return envFileByLine.join('\n');
+    }
+
+    return [...envFileByLine, `${envVar}='${val}'\n`].join('\n');
+  }
+
+  private setupEnvVars(): void {
+    if (this.params.disableTailwind) {
+      const envFilePath = path.join(this.params.workDir, '.env.site');
+
+      if (fs.existsSync(envFilePath)) {
+        const envFile = fs.readFileSync(envFilePath, 'utf8');
+        const updatedEnvFile = this.setEnvVar(envFile, 'BODILESS_TAILWIND_THEME_ENABLED', '0');
+
+        fs.writeFileSync(envFilePath, updatedEnvFile, 'utf8');
+      }
     }
   }
 

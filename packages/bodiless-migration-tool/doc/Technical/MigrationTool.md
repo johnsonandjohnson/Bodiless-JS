@@ -192,6 +192,23 @@ Options:
 
   - **Restrictions:**: Escape special characters, such as " with `\"`
 
+- `disableTailwind`
+
+  - **Description**: Disables site tailwind theme. The site tailwind theme is disabled by default, set this variable to `false` to enable site tailwind theme. You may want to enable the tailwind theme if the migrated site will add new bodiless JS components. Note that enabling the tailwind theme in some cases may interfere with the migrated site's styling.
+
+  - **Accepted Formats:** `true` or `false`
+
+  - **Default Value:** `true`
+
+- `allowFallbackHtml`
+
+  - **Description**: Optional setting to push original html body into the page component file and report a message in the output when migration encounters an error from body section of html. If disabled with value `false`, migration skips generation of JSX on page parsing errors.
+
+  - **Accepted Formats**: Boolean (true or false)
+
+  - **Default Value:** `true`
+
+
 - `context`
 
   - **Description**: A list of pages in which the rule should be applied.
@@ -264,6 +281,38 @@ After performing of `npm run build`:
 ### Full settings.json Examples
 
 Full examples can be found in [examples/settings](examples/settings).
+
+### Configure no-scroll for selected anchor element.
+
+Sites, undergoing flattening, may have foldable accordion elements that are implemented with anchor fragment. By default, GatsbyJS navigation compares the change in url and scrolls the page to the location based on the given url hash.
+
+If this is not the desired behavior for migrated page, a user might override scrolling by configure `no-scroll-settings.json` and place it under `[site]/src/@bodiless/gatsby-theme-bodiless/` folder. Behind the scenes, it shadows Gatsby theme packages/gatsby-theme-bodiless/src/no-scroll-settings.json configuration file.
+
+Here's an example of no-scroll-settings.json usages:
+
+```
+{
+  "parentSelectors": [
+    ".container-classname-1",
+    ".container-classname-2"
+  ],
+  "elementSelectors": [
+    ".container-classname .fieldset .field__item > a"
+  ],
+  "excludeHashes": [
+    "hash-to-be-excluded-from-no-scrolling"
+  ]
+}
+
+```
+
+Explanation of options:,
+- `parentSelectors`: Contains a list of selectors that within the selected container element, clicking anchor will disable the page scrolling.
+
+- `elementSelectors`: Contains a list of anchor selectors that clicking on these anchors will disable the page scrolling.
+
+- `excludeHashes`: Used to define a custom list of hash strings (without "#" character) to be excluded from no-scrolling feature.
+
 
 ### Technical Notes
 
