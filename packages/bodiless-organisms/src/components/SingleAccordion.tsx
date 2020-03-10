@@ -74,7 +74,7 @@ const SingleAccordionBase = ({
         ]}
       >
         <Title />
-        <span className="material-icons cursor-pointer select-none" data-accordion-element={accordionState === COLLAPSED ? 'expand' : 'collapse'}>
+        <span className="material-icons cursor-pointer select-none" data-accordion-element="accordion-icon" data-accordion-icon={accordionState === COLLAPSED ? 'expand' : 'collapse'}>
           {accordionState === COLLAPSED ? 'add' : 'remove'}
         </span>
       </TitleWrapper>
