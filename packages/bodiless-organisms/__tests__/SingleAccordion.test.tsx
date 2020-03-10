@@ -15,28 +15,28 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
-import { SingleAccordion } from '../src/components/SingleAccordion';
+import { TestableSingleAccordion as SingleAccordion } from '../src/components/SingleAccordion';
 
 describe('Single Accordion organizm', () => {
   it('should be collapsed by default', () => {
     const wrapper = mount(<SingleAccordion nodeKey="test" />);
     expect(wrapper.render().hasClass('collapsed')).toBeTruthy();
-    expect(wrapper.find('BodyWrapper').hasClass('hidden')).toBeTruthy();
+    expect(wrapper.find('div[data-accordion-element="accordion-body-wrapper"]').hasClass('hidden')).toBeTruthy();
   });
   it('should be expanded if "expanded" property was passed', () => {
     const wrapper = mount(<SingleAccordion expanded nodeKey="test" />);
     expect(wrapper.render().hasClass('expanded')).toBeTruthy();
     expect(wrapper.render().hasClass('collapsed')).toBeFalsy();
-    expect(wrapper.find('BodyWrapper').hasClass('block')).toBeTruthy();
-    expect(wrapper.find('BodyWrapper').hasClass('hidden')).toBeFalsy();
+    expect(wrapper.find('div[data-accordion-element="accordion-body-wrapper"]').hasClass('block')).toBeTruthy();
+    expect(wrapper.find('div[data-accordion-element="accordion-body-wrapper"]').hasClass('hidden')).toBeFalsy();
   });
   it("should toggle on title's click", () => {
     const wrapper = mount(<SingleAccordion nodeKey="test" />);
-    wrapper.find('TitleWrapper').simulate('click');
+    wrapper.find('div[data-accordion-element="accordion-title-wrapper"]').simulate('click');
     expect(wrapper.render().hasClass('expanded')).toBeTruthy();
-    expect(wrapper.find('BodyWrapper').hasClass('block')).toBeTruthy();
-    wrapper.find('TitleWrapper').simulate('click');
+    expect(wrapper.find('div[data-accordion-element="accordion-body-wrapper"]').hasClass('block')).toBeTruthy();
+    wrapper.find('div[data-accordion-element="accordion-title-wrapper"]').simulate('click');
     expect(wrapper.render().hasClass('collapsed')).toBeTruthy();
-    expect(wrapper.find('BodyWrapper').hasClass('hidden')).toBeTruthy();
+    expect(wrapper.find('div[data-accordion-element="accordion-body-wrapper"]').hasClass('hidden')).toBeTruthy();
   });
 });

@@ -92,7 +92,9 @@ const asSingleAccordion = withDesign({
 
 const asTestableAccordion = withDesign({
   Wrapper: addProps({ 'data-accordion-element': 'accordion' }),
+  TitleWrapper: addProps({ 'data-accordion-element': 'accordion-title-wrapper' }),
   Title: addProps({ 'data-accordion-element': 'accordion-title' }),
+  BodyWrapper: addProps({ 'data-accordion-element': 'accordion-body-wrapper' }),
   Body: addProps({ 'data-accordion-element': 'accordion-body' }),
 });
 
@@ -102,12 +104,14 @@ const SingleAccordionClean = flow(
 )(SingleAccordionBase);
 
 const SingleAccordion = asSingleAccordion(SingleAccordionClean);
+const TestableSingleAccordion = asTestableAccordion(SingleAccordionClean);
 
 export default SingleAccordion;
 export {
   SingleAccordionBase,
   SingleAccordion,
   SingleAccordionClean,
+  TestableSingleAccordion,
   asSingleAccordion,
   asTestableAccordion,
 };
