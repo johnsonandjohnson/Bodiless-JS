@@ -42,7 +42,9 @@ const singleAccordionComponentStart:SingleAccordionComponents = {
   Body: Div,
 };
 
-const SingleAccordionBase = ({ components, expanded, expandedStyle = null, ...rest }: any) => {
+const SingleAccordionBase = ({
+  components, expanded, expandedStyle = null, ...rest
+}: any) => {
   const EXPANDED = 'expanded';
   const COLLAPSED = 'collapsed';
   const initialState = expanded ? EXPANDED : COLLAPSED;
@@ -72,7 +74,7 @@ const SingleAccordionBase = ({ components, expanded, expandedStyle = null, ...re
         ]}
       >
         <Title />
-        <span className="material-icons cursor-pointer select-none" data-accordion-element={accordionState === COLLAPSED ? 'expand' : 'collapse'} >
+        <span className="material-icons cursor-pointer select-none" data-accordion-element={accordionState === COLLAPSED ? 'expand' : 'collapse'}>
           {accordionState === COLLAPSED ? 'add' : 'remove'}
         </span>
       </TitleWrapper>
