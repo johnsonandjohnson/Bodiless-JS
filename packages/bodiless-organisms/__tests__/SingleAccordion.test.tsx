@@ -39,7 +39,7 @@ describe('Single Accordion organizm', () => {
     expect(wrapper.render().hasClass('collapsed')).toBeTruthy();
     expect(wrapper.find('div[data-accordion-element="accordion-body-wrapper"]').hasClass('hidden')).toBeTruthy();
   });
-  it("should toggle accordion icons on toggle", () => {
+  it('should toggle accordion icons on toggle', () => {
     const wrapper = mount(<SingleAccordion nodeKey="test" />);
     wrapper.find('div[data-accordion-element="accordion-title-wrapper"]').simulate('click');
     expect(wrapper.find('span[data-accordion-element="accordion-icon"]').text().includes('remove')).toBe(true);
