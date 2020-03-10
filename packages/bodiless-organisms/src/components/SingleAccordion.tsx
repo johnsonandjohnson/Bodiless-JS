@@ -20,6 +20,7 @@ import {
   Div,
   H2,
   StylableProps,
+  addProps,
 } from '@bodiless/fclasses';
 import {
   asEditable,
@@ -87,6 +88,11 @@ const asSingleAccordion = withDesign({
   Body: asEditable('body', 'SingleAccordion Body Text'),
 });
 
+const asTestableAccordion = withDesign({
+  Title: addProps({ 'data-accordion-element': 'title' }),
+  Body: addProps({'data-accordion-element': 'body'}),
+});
+
 const SingleAccordionClean = flow(
   designable(singleAccordionComponentStart),
   withNode,
@@ -100,4 +106,5 @@ export {
   SingleAccordion,
   SingleAccordionClean,
   asSingleAccordion,
+  asTestableAccordion,
 };
