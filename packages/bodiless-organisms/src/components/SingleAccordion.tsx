@@ -42,7 +42,7 @@ const singleAccordionComponentStart:SingleAccordionComponents = {
   Body: Div,
 };
 
-const SingleAccordionBase = ({ components, expanded, expandedStyle = null }: any) => {
+const SingleAccordionBase = ({ components, expanded, expandedStyle = null, ...rest }: any) => {
   const EXPANDED = 'expanded';
   const COLLAPSED = 'collapsed';
   const initialState = expanded ? EXPANDED : COLLAPSED;
@@ -61,7 +61,7 @@ const SingleAccordionBase = ({ components, expanded, expandedStyle = null }: any
   } = components;
 
   return (
-    <Wrapper className={[accordionState]}>
+    <Wrapper className={[accordionState]} {...rest}>
       <TitleWrapper
         onClick={toggleAccordionState}
         className={[
@@ -72,7 +72,7 @@ const SingleAccordionBase = ({ components, expanded, expandedStyle = null }: any
         ]}
       >
         <Title />
-        <span className="material-icons cursor-pointer select-none">
+        <span className="material-icons cursor-pointer select-none" data-accordion-element={accordionState === COLLAPSED ? 'expand' : 'collapse'} >
           {accordionState === COLLAPSED ? 'add' : 'remove'}
         </span>
       </TitleWrapper>
@@ -89,8 +89,9 @@ const asSingleAccordion = withDesign({
 });
 
 const asTestableAccordion = withDesign({
-  Title: addProps({ 'data-accordion-element': 'title' }),
-  Body: addProps({ 'data-accordion-element': 'body' }),
+  Wrapper: addProps({ 'data-accordion-element': 'accordion' }),
+  Title: addProps({ 'data-accordion-element': 'accordion-title' }),
+  Body: addProps({ 'data-accordion-element': 'accordion-body' }),
 });
 
 const SingleAccordionClean = flow(
