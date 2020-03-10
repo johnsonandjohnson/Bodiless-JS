@@ -90,7 +90,7 @@ const asSingleAccordion = withDesign({
 
 const asTestableAccordion = withDesign({
   Title: addProps({ 'data-accordion-element': 'title' }),
-  Body: addProps({'data-accordion-element': 'body'}),
+  Body: addProps({ 'data-accordion-element': 'body' }),
 });
 
 const SingleAccordionClean = flow(
