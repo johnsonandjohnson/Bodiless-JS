@@ -18,10 +18,14 @@ import {
   withNode,
   useEditContext,
 } from '@bodiless/core';
-import { designable } from '@bodiless/fclasses';
 import EditFlexbox from './EditFlexbox';
 import StaticFlexbox from './StaticFlexbox';
 import { EditFlexboxProps } from './types';
+
+// const asStaticFlexbox = withDesign({
+//   Wrapper: addProps({ 'data-flexbox-static': 'wrapper' }),
+//   ComponentWrapper: addProps({ 'data-flexbox-static': 'component-wrapper' }),
+// })(StaticFlexbox);
 
 
 const FlexboxGridBasic: FC<EditFlexboxProps> = props => {
@@ -30,7 +34,7 @@ const FlexboxGridBasic: FC<EditFlexboxProps> = props => {
     ? <EditFlexbox {...props} />
     : <StaticFlexbox {...props} />;
 };
-const FlexboxGridDesignable = designable({})(observer(FlexboxGridBasic));
+const FlexboxGridDesignable = observer(FlexboxGridBasic);
 
 const FlexboxGrid = withNode(FlexboxGridDesignable);
 export default FlexboxGrid;

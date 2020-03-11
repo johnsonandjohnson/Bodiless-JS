@@ -12,8 +12,9 @@
  * limitations under the License.
  */
 
+import { ComponentType } from 'react';
 import { WithNodeProps } from '@bodiless/core';
-import { DesignableComponents } from '@bodiless/fclasses';
+import { DesignableComponents, StylableProps } from '@bodiless/fclasses';
 import { ComponentSelectorUI } from '../ComponentSelector/types';
 import { UI as SortableResizableUI } from '../SlateSortableResizable';
 import { SnapData } from './utils/appendTailwindWidthClass';
@@ -54,3 +55,8 @@ export interface FlexboxItem {
   uuid: string;
   wrapperProps: FlexboxItemProps;
 }
+
+export type FlexboxComponents = {
+  Wrapper: ComponentType<StylableProps>,
+  ComponentWrapper: ComponentType<StylableProps>,
+};

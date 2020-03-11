@@ -15,17 +15,28 @@
 import React, { FC, PropsWithChildren } from 'react';
 import { arrayMove, SortEnd } from 'react-sortable-hoc';
 import { observer } from 'mobx-react-lite';
-import { flowRight } from 'lodash';
+import { flowRight, flow } from 'lodash';
 import {
   withActivateOnEffect, withNode, withMenuOptions,
 } from '@bodiless/core';
+import {
+  designable,
+  Div,
+  withDesign,
+  addProps,
+} from '@bodiless/fclasses';
 import SortableChild from './SortableChild';
 import SortableContainer from './SortableContainer';
 import { useItemHandlers, useFlexboxDataHandlers } from './model';
 import useGetMenuOptions from './useGetMenuOptions';
-import { EditFlexboxProps, FlexboxItem } from './types';
+import { EditFlexboxProps, FlexboxItem, FlexboxComponents } from './types';
 
 const ChildNodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
+
+const flexboxComponentStart: FlexboxComponents = {
+  Wrapper: Div,
+  ComponentWrapper: Div,
+}
 
 /**
  * An editable version of the Flexbox container.
@@ -39,40 +50,45 @@ const EditFlexbox: FC<EditFlexboxProps> = (props:EditFlexboxProps) => {
     onFlexboxItemResize,
     setFlexboxItems,
   } = useFlexboxDataHandlers();
+  const { Wrapper, ComponentWrapper} = components;
 
   return (
-    <SortableContainer
-      onSortEnd={(sort: SortEnd) => {
-        const { oldIndex, newIndex } = sort;
-        setFlexboxItems(arrayMove(items, oldIndex, newIndex));
-      }}
-      ui={ui}
-    >
-      {items.map(
-        (flexboxItem: FlexboxItem, index: number): React.ReactNode => {
-          const ChildComponent = components[flexboxItem.type];
-          if (!ChildComponent) return null;
-          return (
-            <SortableChild
-              ui={ui}
-              key={`node-${flexboxItem.uuid}`}
-              index={index}
-              flexboxItem={flexboxItem}
-              snapData={snapData}
-              defaultWidth={defaultWidth}
-              getMenuOptions={useGetMenuOptions(props, flexboxItem)}
-              onResizeStop={
-                  flexboxItemProps => onFlexboxItemResize(flexboxItem.uuid, flexboxItemProps)
-                }
-            >
-              <ChildNodeProvider nodeKey={flexboxItem.uuid}>
-                <ChildComponent />
-              </ChildNodeProvider>
-            </SortableChild>
-          );
-        },
-      )}
-    </SortableContainer>
+    <Wrapper>
+      <SortableContainer
+        onSortEnd={(sort: SortEnd) => {
+          const { oldIndex, newIndex } = sort;
+          setFlexboxItems(arrayMove(items, oldIndex, newIndex));
+        }}
+        ui={ui}
+      >
+        {items.map(
+          (flexboxItem: FlexboxItem, index: number): React.ReactNode => {
+            const ChildComponent = components[flexboxItem.type];
+            if (!ChildComponent) return null;
+            return (
+              <ComponentWrapper>
+                <SortableChild
+                  ui={ui}
+                  key={`node-${flexboxItem.uuid}`}
+                  index={index}
+                  flexboxItem={flexboxItem}
+                  snapData={snapData}
+                  defaultWidth={defaultWidth}
+                  getMenuOptions={useGetMenuOptions(props, flexboxItem)}
+                  onResizeStop={
+                      flexboxItemProps => onFlexboxItemResize(flexboxItem.uuid, flexboxItemProps)
+                    }
+                >
+                  <ChildNodeProvider nodeKey={flexboxItem.uuid}>
+                    <ChildComponent />
+                  </ChildNodeProvider>
+                </SortableChild>
+              </ComponentWrapper>
+            );
+          },
+        )}
+      </SortableContainer>
+    </Wrapper>
   );
 };
 
@@ -81,6 +97,15 @@ EditFlexbox.displayName = 'EditFlexbox';
 EditFlexbox.defaultProps = {
   components: {},
 };
+
+const EditFlexboxClean = flow(
+  designable(flexboxComponentStart),
+)(EditFlexbox);
+
+const asEditFlexboxClean = withDesign({
+  Wrapper: addProps({ 'data-flexbox-static': 'wrapper' }),
+  ComponentWrapper: addProps({ 'data-flexbox-static': 'component-wrapper' }),
+})(EditFlexboxClean);
 
 const asEditFlexbox = flowRight(
   withActivateOnEffect,
@@ -93,4 +118,4 @@ const asEditFlexbox = flowRight(
 );
 
 // Wrap the EditFlexbox in a wthActivateContext so we can activate new items
-export default asEditFlexbox(EditFlexbox);
+export default asEditFlexbox(asEditFlexboxClean);
