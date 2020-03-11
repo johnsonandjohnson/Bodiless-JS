@@ -17,7 +17,12 @@ import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
 import { Div } from '@bodiless/fclasses';
 import {
-  withMeta, withMetaTitle, withMetaHtml, asBodilessHelmet,
+  withMeta,
+  withMetaTitle,
+  withMetaHtml,
+  asBodilessHelmet,
+  withGTM,
+  withEvent,
 } from '@bodiless/components';
 import { flowRight } from 'lodash';
 import Header from './header';
@@ -32,6 +37,31 @@ const ExampleHelmet = flowRight(
   withMeta('bl-country', 'country', 'site'),
   withMetaTitle('page-title'),
   withMetaHtml('en'),
+)(Helmet);
+
+const ExampleGTMHelmetEvent = flowRight(
+  asBodilessHelmet('datalayer'),
+  withEvent('view-product'),
+)(Helmet);
+
+const ExampleGTMHelmet = flowRight(
+  withGTM({
+    id: 'GTM-1234',
+    dataLayerName: 'dataLayer',
+    gtmAuth: 'foo',
+    gtmPreview: 'bar',
+    defaultDataLayer: {
+      // platform: 'gatsby',
+      // value: { // Possible default datalayer data.
+      //   page: {
+      //     country: 'US',
+      //     language: 'en',
+      //     hostname: '/',
+      //   },
+      // },
+    },
+    includeInDevelopment: true,
+  }),
 )(Helmet);
 
 const Container = asPageContainer(Div);
@@ -50,10 +80,11 @@ const Layout = ({ children }) => (
     render={data => (
       <>
         <ExampleHelmet />
+        <ExampleGTMHelmet />
+        <ExampleGTMHelmetEvent />
         <Header siteLogo={data.site.siteMetadata.logo} />
-        <Container>
-          {children}
-        </Container>
+
+        <Container>{children}</Container>
         <Footer siteTitle={data.site.siteMetadata.title} />
       </>
     )}

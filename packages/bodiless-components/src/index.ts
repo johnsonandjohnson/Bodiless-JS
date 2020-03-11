@@ -27,8 +27,12 @@ import withListTitle from './List/withListTitle';
 import asEditableList from './List/asEditableList';
 import withSublist from './List/withSublist';
 import {
-  withMeta, withMetaTitle, withMetaHtml, asBodilessHelmet,
+  withMeta,
+  withMetaTitle,
+  withMetaHtml,
+  asBodilessHelmet,
 } from './Meta/Meta';
+import { withGTM, withEvent } from './GTM/gtm';
 import { withToggle, withToggleTo, withToggleButton } from './Toggle';
 import withEditPlaceholder from './Placeholder';
 
@@ -57,4 +61,6 @@ export {
   withMetaHtml,
   asBodilessHelmet,
   withEditPlaceholder,
+  withGTM,
+  withEvent
 };
