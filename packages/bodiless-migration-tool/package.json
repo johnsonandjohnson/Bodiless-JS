@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/migration-tool",
-  "version": "0.0.42",
+  "version": "0.0.43",
   "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
   "bin": {
     "migration_tool": "./bin/run"
@@ -18,7 +18,7 @@
     "@babel/plugin-syntax-jsx": "^7.2.0",
     "@babel/traverse": "^7.5.5",
     "@babel/types": "^7.6.1",
-    "@bodiless/headless-chrome-crawler": "^0.0.42",
+    "@bodiless/headless-chrome-crawler": "^0.0.43",
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
@@ -86,7 +86,8 @@
     "/patches",
     "/conf/gatsby-config.js",
     "/conf/gatsby-node.js",
-    "/conf/template_html2jsx.jsx"
+    "/conf/template_html2jsx.jsx",
+    "/conf/template_dangerous_html.jsx"
   ],
   "keywords": [
     "oclif"

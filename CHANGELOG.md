@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.43](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.42...v0.0.43) (2020-03-11)
+
+
+### Bug Fixes
+
+* **bodiless-migration-tool:** allow to migrate a site with bareroot domain specified ([#186](https://github.com/johnsonandjohnson/bodiless-js/issues/186)) ([4d24c07](https://github.com/johnsonandjohnson/bodiless-js/commit/4d24c072de158f395b2e5c4bf8ea2e41209d7b24))
+* **components, core:** Fix withEditPlaceholder components order ([3c1f99b](https://github.com/johnsonandjohnson/bodiless-js/commit/3c1f99b38bf437d97d4ffc2e062fd91d295184ca))
+* **layouts:** Fix/no link in flexbox ([#198](https://github.com/johnsonandjohnson/bodiless-js/issues/198)) ([066f0ed](https://github.com/johnsonandjohnson/bodiless-js/commit/066f0ed6659d1f983f12b32956748df6b02d5c6a))
+* **migration-tool:** Header and Footer components are missing ([c4e6a82](https://github.com/johnsonandjohnson/bodiless-js/commit/c4e6a827ba4f0df425fd93ab586ab1a4ea2fdfad))
+* **psh:** Platform.sh site return 502 error instead of 404 page on non-existing pages. ([ca72aa6](https://github.com/johnsonandjohnson/bodiless-js/commit/ca72aa6be33b91f9f439d92d326b4ffcb7fa9e6e))
+
+
+### Features
+
+* **migration-tool:** Provide fallback on migration errors to generate plain html. ([#175](https://github.com/johnsonandjohnson/bodiless-js/issues/175)) ([8d9a003](https://github.com/johnsonandjohnson/bodiless-js/commit/8d9a003ec81c9a1d202b8d82cfddf80a16d04044))
+
+
+
+
+
+
 ## [0.0.42](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.41...v0.0.42) (2020-02-28)
 
 

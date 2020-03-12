@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.43](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.42...v0.0.43) (2020-03-11)
+
+
+### Bug Fixes
+
+* **migration-tool:** Header and Footer components are missing ([c4e6a82](https://github.com/johnsonandjohnson/bodiless-js/commit/c4e6a827ba4f0df425fd93ab586ab1a4ea2fdfad))
+
+
+
+
+
+
 ## [0.0.42](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.41...v0.0.42) (2020-02-28)
 
 **Note:** Version bump only for package @bodiless/gatsby-starter-bodiless
