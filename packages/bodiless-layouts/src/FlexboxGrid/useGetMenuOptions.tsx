@@ -54,7 +54,6 @@ function useGetMenuOptions(props: EditFlexboxProps, item?: FlexboxItem) {
   const { getItems } = useItemHandlers();
   const { deleteFlexboxItem } = useFlexboxDataHandlers();
   const { insertItem, replaceItem } = useComponentSelectorActions(item);
-
   const addButton = {
     icon: 'add',
     name: 'add',

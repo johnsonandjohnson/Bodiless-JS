@@ -13,21 +13,11 @@
  */
 
 import React, { FC, PropsWithChildren } from 'react';
-import { flow } from 'lodash';
 import { withNode } from '@bodiless/core';
-import {
-  designable,
-  Div,
-} from '@bodiless/fclasses';
 import { useItemHandlers } from './model';
-import { StaticFlexboxProps, FlexboxItem, FlexboxComponents } from './types';
+import { StaticFlexboxProps, FlexboxItem } from './types';
 
 const NodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
-
-const flexboxComponentStart: FlexboxComponents = {
-  Wrapper: Div,
-  ComponentWrapper: Div,
-};
 
 const StaticFlexboxBase: FC<StaticFlexboxProps> = ({ components }) => {
   const items = useItemHandlers().getItems();
@@ -64,8 +54,4 @@ const StaticFlexboxBase: FC<StaticFlexboxProps> = ({ components }) => {
 
 StaticFlexboxBase.displayName = 'Flexbox';
 
-const StaticFlexboxClean = flow(
-  designable(flexboxComponentStart),
-)(StaticFlexboxBase);
-
-export default StaticFlexboxClean;
+export default StaticFlexboxBase;

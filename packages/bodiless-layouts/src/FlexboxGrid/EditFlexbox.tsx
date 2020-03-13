@@ -19,23 +19,13 @@ import { flowRight } from 'lodash';
 import {
   withActivateOnEffect, withNode, withMenuOptions,
 } from '@bodiless/core';
-import {
-  designable,
-  Div,
-} from '@bodiless/fclasses';
 import SortableChild from './SortableChild';
 import SortableContainer from './SortableContainer';
 import { useItemHandlers, useFlexboxDataHandlers } from './model';
 import useGetMenuOptions from './useGetMenuOptions';
-import { EditFlexboxProps, FlexboxItem, FlexboxComponents } from './types';
+import { EditFlexboxProps, FlexboxItem } from './types';
 
 const ChildNodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
-
-
-const editFlexboxComponentStart: FlexboxComponents = {
-  Wrapper: Div,
-  ComponentWrapper: Div,
-};
 
 /**
  * An editable version of the Flexbox container.
@@ -49,7 +39,7 @@ const EditFlexbox: FC<EditFlexboxProps> = (props:EditFlexboxProps) => {
     onFlexboxItemResize,
     setFlexboxItems,
   } = useFlexboxDataHandlers();
-  const { Wrapper, ComponentWrapper, ...rest } = components;
+  const { Wrapper, ComponentWrapper } = components;
 
   return (
     <Wrapper>
@@ -62,7 +52,7 @@ const EditFlexbox: FC<EditFlexboxProps> = (props:EditFlexboxProps) => {
       >
         {items.map(
           (flexboxItem: FlexboxItem, index: number): React.ReactNode => {
-            const ChildComponent = rest[flexboxItem.type];
+            const ChildComponent = components[flexboxItem.type];
             if (!ChildComponent) return null;
             return (
               <ComponentWrapper>
@@ -100,7 +90,6 @@ EditFlexbox.defaultProps = {
 const asEditFlexbox = flowRight(
   withActivateOnEffect,
   observer,
-  designable(editFlexboxComponentStart),
   withMenuOptions({
     useGetMenuOptions: (props: EditFlexboxProps) => useGetMenuOptions(props),
     name: 'Flexbox',

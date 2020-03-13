@@ -44,13 +44,13 @@ const SortableListWrapper = SortableContainer(
         const activeClassName = context.isActive ? 'bl-border-orange-400' : 'hover:bl-border-orange-400';
 
         return (
-          <FlexboxEmpty className={`bl-flex bl-justify-center bl-flex-wrap bl-py-grid-3 ${activeClassName}`} {...useContextActivator()}>
+          <FlexboxEmpty className={`w-full bl-flex bl-justify-center bl-flex-wrap bl-py-grid-3 ${activeClassName}`} {...useContextActivator()}>
             Empty Flexbox
           </FlexboxEmpty>
         );
       }
       return (
-        <section className="bl-flex bl-flex-wrap bl-py-grid-3" {...useContextActivator()}>{children}</section>
+        <section className="w-full bl-flex bl-flex-wrap bl-py-grid-3" {...useContextActivator()}>{children}</section>
       );
     },
   ),
