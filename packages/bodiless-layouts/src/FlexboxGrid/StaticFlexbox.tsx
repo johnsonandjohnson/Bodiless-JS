@@ -19,7 +19,7 @@ import { StaticFlexboxProps, FlexboxItem } from './types';
 
 const NodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
 
-const StaticFlexboxBase: FC<StaticFlexboxProps> = ({ components }) => {
+const StaticFlexbox: FC<StaticFlexboxProps> = ({ components }) => {
   const items = useItemHandlers().getItems();
   const { Wrapper, ComponentWrapper } = components;
   return (
@@ -52,6 +52,6 @@ const StaticFlexboxBase: FC<StaticFlexboxProps> = ({ components }) => {
   );
 };
 
-StaticFlexboxBase.displayName = 'Flexbox';
+StaticFlexbox.displayName = 'Flexbox';
 
-export default StaticFlexboxBase;
+export default StaticFlexbox;
