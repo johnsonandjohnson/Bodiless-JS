@@ -18,7 +18,7 @@ import withToutVariations from './withToutVariations';
 import withRichTextVariations from './withRichTextVariations';
 import withSingleAccordionVariations from './withSingleAccordionVariations';
 
-import { asStyledFlexbox } from './token';
+import { asFlexboxWithMargins } from './token';
 
 // Typically we would also import variations of other types of component.
 // const variations = extendDesign(toutVariations, sliderVariations, ...);
@@ -26,7 +26,7 @@ const FlexBoxDefault = flow(
   withToutVariations,
   withRichTextVariations,
   withSingleAccordionVariations,
-  asStyledFlexbox,
+  asFlexboxWithMargins,
 )(FlexboxGrid);
 
 // eslint-disable-next-line import/prefer-default-export
