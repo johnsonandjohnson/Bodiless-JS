@@ -15,6 +15,7 @@
 import { flow } from 'lodash';
 import {
   SingleAccordionClean,
+  asTestableAccordion,
 } from '@bodiless/organisms';
 import { withDesign } from '@bodiless/fclasses';
 import asSingleAccordionDefaultStyle from './token';
@@ -29,6 +30,7 @@ const asSingleAccordion = flow(
     ),
   }),
   asSingleAccordionDefaultStyle,
+  asTestableAccordion,
 );
 
 const SingleAccordion = asSingleAccordion(SingleAccordionClean);

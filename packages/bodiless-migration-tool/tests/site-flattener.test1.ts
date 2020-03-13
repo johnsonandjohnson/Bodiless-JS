@@ -99,13 +99,13 @@ jest.setTimeout(30000);
 test('flattening of the test website', async () => {
   const siteFlattener = new SiteFlattener(getDefaultFlattenedParams());
   await siteFlattener.start();
-  expect(existsInWorkDir('examples/test-site/src/data/pages/index.jsx')).toBe(true);
-  expect(existsInWorkDir('examples/test-site/static/gatsby.png')).toBe(true);
-  expect(existsInWorkDir('examples/test-site/static/test1.js')).toBe(true);
-  expect(existsInWorkDir('examples/test-site/static/test2.css')).toBe(true);
-  expect(existsInWorkDir('examples/test-site/static/non-existing-file.css')).toBe(false);
+  expect(existsInWorkDir('src/data/pages/index.jsx')).toBe(true);
+  expect(existsInWorkDir('static/gatsby.png')).toBe(true);
+  expect(existsInWorkDir('static/test1.js')).toBe(true);
+  expect(existsInWorkDir('static/test2.css')).toBe(true);
+  expect(existsInWorkDir('static/non-existing-file.css')).toBe(false);
   // asset loaded by xhr
-  expect(existsInWorkDir('examples/test-site/static/lazy-loaded.js')).toBe(true);
+  expect(existsInWorkDir('static/lazy-loaded.js')).toBe(true);
 }, 30000);
 
 test('tranforming of html during website flattening', async () => {
@@ -121,8 +121,8 @@ test('tranforming of html during website flattening', async () => {
   };
   const siteFlattener = new SiteFlattener(params);
   await siteFlattener.start();
-  const parentPath = getPathInWorkDir('examples/test-site/src/data/pages/products/index.jsx');
-  const childPath = getPathInWorkDir('examples/test-site/src/data/pages/products/shampoo/index.jsx');
+  const parentPath = getPathInWorkDir('src/data/pages/products/index.jsx');
+  const childPath = getPathInWorkDir('src/data/pages/products/shampoo/index.jsx');
   expect(fs.existsSync(parentPath)).toBe(true);
   expect(fs.existsSync(childPath)).toBe(true);
   // const parentIndexPage = require(parentPath).default
@@ -163,7 +163,7 @@ test('migration of attached files', async () => {
   const siteFlattener = new SiteFlattener(params);
   await siteFlattener.start();
   const sourcePath = path.join(__dirname, 'testserver', 'assets', 'files', 'test.pdf');
-  const targetPath = getPathInWorkDir('examples/test-site/static/files/test.pdf');
+  const targetPath = getPathInWorkDir('static/files/test.pdf');
   expect(fs.existsSync(targetPath)).toBe(true);
   // filesize of the downloaded file should be the same to the source file
   expect(fs.statSync(sourcePath).size).toBe(fs.statSync(targetPath).size);

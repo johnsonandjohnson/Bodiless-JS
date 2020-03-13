@@ -46,6 +46,7 @@ web:
             index: ['index.html']
             scripts: false
             allow: true
+            passthru: false
 
 variables:
     env:
