@@ -36,7 +36,7 @@ const ChildNodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
 const flexboxComponentStart: FlexboxComponents = {
   Wrapper: Div,
   ComponentWrapper: Div,
-}
+};
 
 /**
  * An editable version of the Flexbox container.
@@ -50,7 +50,7 @@ const EditFlexbox: FC<EditFlexboxProps> = (props:EditFlexboxProps) => {
     onFlexboxItemResize,
     setFlexboxItems,
   } = useFlexboxDataHandlers();
-  const { Wrapper, ComponentWrapper} = components;
+  const { Wrapper, ComponentWrapper } = components;
 
   return (
     <Wrapper>

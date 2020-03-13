@@ -27,11 +27,11 @@ const NodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
 const flexboxComponentStart: FlexboxComponents = {
   Wrapper: Div,
   ComponentWrapper: Div,
-}
+};
 
 const StaticFlexboxBase: FC<StaticFlexboxProps> = ({ components }) => {
   const items = useItemHandlers().getItems();
-  const { Wrapper, ComponentWrapper} = components;
+  const { Wrapper, ComponentWrapper } = components;
   return (
     // When in a static mode we don't want to use `bl-*` prefixed classes.
     <Wrapper>
