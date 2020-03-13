@@ -207,6 +207,4 @@ describe('Tout testing', function () {
     cy.xpath(imageLinkXpath)
       .should('have.attr', 'href', '#' + toutUrl + editedToutUrl)
   })
-
-
 })

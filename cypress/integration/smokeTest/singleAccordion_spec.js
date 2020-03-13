@@ -169,6 +169,4 @@ describe('Single Accordion smoke tests', function () {
     cy.xpath(bodyFirstXpath)
       .should('have.text', body + editedPostfix)
   })
-
-
 })   
