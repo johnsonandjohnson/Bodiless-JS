@@ -22,8 +22,6 @@ import {
 import {
   designable,
   Div,
-  withDesign,
-  addProps,
 } from '@bodiless/fclasses';
 import SortableChild from './SortableChild';
 import SortableContainer from './SortableContainer';
@@ -33,7 +31,8 @@ import { EditFlexboxProps, FlexboxItem, FlexboxComponents } from './types';
 
 const ChildNodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
 
-const flexboxComponentStart: FlexboxComponents = {
+
+const editFlexboxComponentStart: FlexboxComponents = {
   Wrapper: Div,
   ComponentWrapper: Div,
 };
@@ -99,13 +98,8 @@ EditFlexbox.defaultProps = {
 };
 
 const EditFlexboxClean = flow(
-  designable(flexboxComponentStart),
+  designable(editFlexboxComponentStart),
 )(EditFlexbox);
-
-const asEditFlexboxClean = withDesign({
-  Wrapper: addProps({ 'data-flexbox-static': 'wrapper' }),
-  ComponentWrapper: addProps({ 'data-flexbox-static': 'component-wrapper' }),
-})(EditFlexboxClean);
 
 const asEditFlexbox = flowRight(
   withActivateOnEffect,
@@ -118,4 +112,4 @@ const asEditFlexbox = flowRight(
 );
 
 // Wrap the EditFlexbox in a wthActivateContext so we can activate new items
-export default asEditFlexbox(asEditFlexboxClean);
+export default asEditFlexbox(EditFlexboxClean);

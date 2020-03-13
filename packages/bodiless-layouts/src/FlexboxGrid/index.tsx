@@ -18,6 +18,7 @@ import {
   withNode,
   useEditContext,
 } from '@bodiless/core';
+// import { designable } from '@bodiless/fclasses';
 import EditFlexbox from './EditFlexbox';
 import StaticFlexbox from './StaticFlexbox';
 import { EditFlexboxProps } from './types';
