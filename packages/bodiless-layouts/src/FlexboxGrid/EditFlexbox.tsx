@@ -15,7 +15,7 @@
 import React, { FC, PropsWithChildren } from 'react';
 import { arrayMove, SortEnd } from 'react-sortable-hoc';
 import { observer } from 'mobx-react-lite';
-import { flowRight, flow } from 'lodash';
+import { flowRight } from 'lodash';
 import {
   withActivateOnEffect, withNode, withMenuOptions,
 } from '@bodiless/core';
@@ -49,7 +49,7 @@ const EditFlexbox: FC<EditFlexboxProps> = (props:EditFlexboxProps) => {
     onFlexboxItemResize,
     setFlexboxItems,
   } = useFlexboxDataHandlers();
-  const { Wrapper, ComponentWrapper } = components;
+  const { Wrapper, ComponentWrapper, ...rest } = components;
 
   return (
     <Wrapper>
@@ -62,7 +62,7 @@ const EditFlexbox: FC<EditFlexboxProps> = (props:EditFlexboxProps) => {
       >
         {items.map(
           (flexboxItem: FlexboxItem, index: number): React.ReactNode => {
-            const ChildComponent = components[flexboxItem.type];
+            const ChildComponent = rest[flexboxItem.type];
             if (!ChildComponent) return null;
             return (
               <ComponentWrapper>
@@ -97,13 +97,10 @@ EditFlexbox.defaultProps = {
   components: {},
 };
 
-const EditFlexboxClean = flow(
-  designable(editFlexboxComponentStart),
-)(EditFlexbox);
-
 const asEditFlexbox = flowRight(
   withActivateOnEffect,
   observer,
+  designable(editFlexboxComponentStart),
   withMenuOptions({
     useGetMenuOptions: (props: EditFlexboxProps) => useGetMenuOptions(props),
     name: 'Flexbox',
@@ -112,4 +109,4 @@ const asEditFlexbox = flowRight(
 );
 
 // Wrap the EditFlexbox in a wthActivateContext so we can activate new items
-export default asEditFlexbox(EditFlexboxClean);
+export default asEditFlexbox(EditFlexbox);
