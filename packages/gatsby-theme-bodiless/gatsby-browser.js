@@ -40,7 +40,7 @@ export const shouldUpdateScroll = ({ prevRouterProps, routerProps: { location } 
 
         if (!excludeHashes || excludeHashes.indexOf(hash) < 0) {
           // Skip scrolling for selected element.
-          if (elementSelectors) {
+          if (!!elementSelectors && elementSelectors.length) {
             const elementStr = elementSelectors.join();
             document.querySelectorAll(elementStr).forEach(element => {
               if (element.attributes.href && (element.attributes.href.value === `#${hash}`)) {
@@ -48,7 +48,7 @@ export const shouldUpdateScroll = ({ prevRouterProps, routerProps: { location } 
               }
             });
           }
-          if (parentSelectors) {
+          if (!!parentSelectors && parentSelectors.length) {
             // Skip scrolling for hashes inside selected container element.
             const parentStr = parentSelectors.join();
             document.querySelectorAll(parentStr).forEach(element => {
@@ -62,6 +62,7 @@ export const shouldUpdateScroll = ({ prevRouterProps, routerProps: { location } 
         if (HashMatchException === e) {
           return false;
         }
+        throw e;
       }
 
       return targetElement ? hash : true;
