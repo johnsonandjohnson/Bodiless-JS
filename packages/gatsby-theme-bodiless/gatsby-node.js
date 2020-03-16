@@ -21,6 +21,8 @@
 const pathUtil = require('path');
 const slash = require('slash');
 const fs = require('fs');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const webpack = require('webpack');
 
 const { createFilePath } = require('gatsby-source-filesystem');
 const Logger = require('./Logger');
@@ -276,5 +278,22 @@ exports.createPages = async ({ actions, graphql, getNode }) => {
   await createPagesFromFS({ actions, graphql, getNode });
   if (process.env.NODE_ENV === 'development') {
     await createPreviewPagesForTemplates({ actions, graphql, getNode });
+  }
+};
+
+exports.onCreateWebpackConfig = (
+  { stage, actions },
+) => {
+  if (stage === 'build-javascript') {
+    const adminCssFiles = process.env.BODILESS_ADMIN_ONLY_CSS_FILES || [];
+    actions.setWebpackConfig({
+      plugins: [
+        new webpack.IgnorePlugin({
+          checkResource(resource) {
+            return adminCssFiles.some(cssFile => resource.includes(cssFile));
+          },
+        }),
+      ],
+    });
   }
 };

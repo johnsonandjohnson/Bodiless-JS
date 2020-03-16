@@ -22,7 +22,8 @@
     "gatsby-node.js",
     "queries.jsx",
     "Logger.js",
-    "src/no-scroll-settings.json"
+    "src/no-scroll-settings.json",
+    "build-css.js"
   ],
   "repository": {
     "type": "git",

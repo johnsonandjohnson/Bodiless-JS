@@ -11,7 +11,6 @@ if (enabled) {
   // This try/catch hack prevents failure in building the static site even if index.css
   // doesn't exist (tailwind disabled), since we don't seem to have access to the env vars
   // when gatsby-config is loaded.
-  // TODO: Use standard tailwind setup: https://github.com/johnsonandjohnson/Bodiless-JS/issues/42
   try {
     // Disabling global-require and no-unresolved for next line
     // because index.css is created during build.
