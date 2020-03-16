@@ -201,6 +201,14 @@ Options:
 
   - **Default Value:** `true`
 
+- `allowFallbackHtml`
+
+  - **Description**: Optional setting to push original html body into the page component file and report a message in the output when migration encounters an error from body section of html. If disabled with value `false`, migration skips generation of JSX on page parsing errors.
+
+  - **Accepted Formats**: Boolean (true or false)
+
+  - **Default Value:** `true`
+
 
 - `context`
 

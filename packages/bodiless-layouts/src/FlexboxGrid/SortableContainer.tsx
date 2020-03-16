@@ -13,8 +13,9 @@
  */
 
 import React, { ComponentType, HTMLProps } from 'react';
+import { observer } from 'mobx-react-lite';
 import { SortableContainer, SortEndHandler } from 'react-sortable-hoc';
-import { useContextActivator } from '@bodiless/core';
+import { useContextActivator, useEditContext } from '@bodiless/core';
 
 type FinalUI = {
   FlexboxEmpty: ComponentType<HTMLProps<HTMLDivElement>> | string,
@@ -35,19 +36,24 @@ const defaultUI: FinalUI = {
 const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });
 
 const SortableListWrapper = SortableContainer(
-  ({ children, ui }: SortableListProps): React.ReactElement<SortableListProps> => {
-    if (!children || !children.length) {
-      const { FlexboxEmpty } = getUI(ui);
+  observer(
+    ({ children, ui }: SortableListProps): React.ReactElement<SortableListProps> => {
+      if (!children || !children.length) {
+        const { FlexboxEmpty } = getUI(ui);
+        const context = useEditContext();
+        const activeClassName = context.isActive ? 'bl-border-orange-400' : 'hover:bl-border-orange-400';
+
+        return (
+          <FlexboxEmpty className={`bl-flex bl-justify-center bl-flex-wrap bl-py-grid-3 ${activeClassName}`} {...useContextActivator()}>
+            Empty Flexbox
+          </FlexboxEmpty>
+        );
+      }
       return (
-        <FlexboxEmpty>
-          <section className="bl-flex bl-justify-center bl-flex-wrap bl-py-grid-3" {...useContextActivator()}>Empty Flexbox</section>
-        </FlexboxEmpty>
+        <section className="bl-flex bl-flex-wrap bl-py-grid-3" {...useContextActivator()}>{children}</section>
       );
-    }
-    return (
-      <section className="bl-flex bl-flex-wrap bl-py-grid-3" {...useContextActivator()}>{children}</section>
-    );
-  },
+    },
+  ),
 );
 SortableListWrapper.displayName = 'SortableListWrapper';
 

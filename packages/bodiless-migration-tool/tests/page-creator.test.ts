@@ -32,6 +32,7 @@ function getDefaultPageParams(): PageCreatorParams {
     pagesDir: 'app/examples/test-site/src/data/pages',
     staticDir: 'app/examples/test-site/static',
     templatePath: path.resolve(__dirname, 'data/canvasx_template.jsx'),
+    templateDangerousHtml: path.resolve(__dirname, 'data/template_dangerous_html.jsx'),
     pageUrl: 'https://localhost',
     bodyHtml: '<h1>Hello World</h1>',
     metatags: [
