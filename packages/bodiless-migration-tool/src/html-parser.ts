@@ -189,6 +189,18 @@ export default class HtmlParser implements HtmlParserInterface {
     const sanitizedHtml = sanitizeHtml(html, {
       allowedTags: this.allowedTags,
       allowedAttributes: this.allowedAttributes,
+      transformTags: {
+        link: (tagName, attribs) => {
+          const primaryAttribs = ['href', 'rel'];
+          const newAttribs = attribs;
+          primaryAttribs.forEach(attr => {
+            if (typeof newAttribs[attr] === 'string' && !newAttribs[attr].trim()) {
+              delete newAttribs[attr];
+            }
+          });
+          return { tagName, attribs: newAttribs };
+        },
+      },
     });
     return !doctypeTags ? sanitizedHtml : doctypeTags[0] + sanitizedHtml;
   }
