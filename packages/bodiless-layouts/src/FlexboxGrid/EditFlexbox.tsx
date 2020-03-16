@@ -20,7 +20,7 @@ import {
   withActivateOnEffect, withNode, withMenuOptions,
 } from '@bodiless/core';
 import { designable, stylable } from '@bodiless/fclasses';
-import SortableChild, { SortableChildProps } from './SortableChild';
+import SortableChild from './SortableChild';
 import SortableContainer, { SortableListProps } from './SortableContainer';
 import { useItemHandlers, useFlexboxDataHandlers } from './model';
 import useGetMenuOptions from './useGetMenuOptions';
@@ -29,6 +29,7 @@ import {
   FlexboxItem,
   FlexboxComponents,
   FlexboxItemProps,
+  SortableChildProps,
 } from './types';
 
 const ChildNodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
