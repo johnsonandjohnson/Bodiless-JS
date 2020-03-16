@@ -11,8 +11,7 @@ describe('Link Toggle smoke tests', function () {
   const editedLabelPostfix = ' - edited'
   const editedUrlPostfix = '-edited'
 
-  //const labelXpath = '//*[@class="my-3"]//*[@class="bodiless-inline-editable"]'
-  const labelXpath = '//*[@class="my-3"]//span'
+  const labelXpath = '//*[@class="my-3"]//*[@class="bodiless-inline-editable"]'
   const labelPreviewXpath = '//*[@class="my-3"]//span'
   const linkXpath = '//*[@class="my-3"]/a'
 
@@ -20,12 +19,12 @@ describe('Link Toggle smoke tests', function () {
   const urlFieldXpath = '//form[@aria-label="Context Menu Link Form"]//input[@id="link-href"]'
   const checkmarkIconLinkFormXpath = '//form[@aria-label="Context Menu Link Form"]//button[@aria-label="Submit"]'
   const removeLinkXpath = '//form[@aria-label="Context Menu Link Form"]//button[text()="Remove Link"]'
-  
 
 
-  it.only('link toggle: 1 - checking the label without a url', () => {
+
+  it('link toggle: 1 - checking the label without a url', () => {
     cy.xpath(labelXpath)
-    .click()
+      .click()
       .type(label)
       .should('have.text', label)
   })
