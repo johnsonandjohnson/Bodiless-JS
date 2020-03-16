@@ -2,6 +2,7 @@ describe('Tout testing', function () {
 
   before(function () {
     cy.visit('/touts/')
+    cy.clickEdit()
   })
 
   after(function () {
@@ -206,6 +207,4 @@ describe('Tout testing', function () {
     cy.xpath(imageLinkXpath)
       .should('have.attr', 'href', '#' + toutUrl + editedToutUrl)
   })
-
-
 })

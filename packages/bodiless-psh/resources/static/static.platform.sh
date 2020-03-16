@@ -33,7 +33,7 @@ default_finalize_build () {
   export PSH_URL_REPLACER_TARGET_FILE=$APP_VOLUME/sitemap.xml
   node $PLATFORM_APP_DIR/node_modules/@bodiless/psh/lib/psh-url-replacer.js build
   # ssi preparation
-  export SSI_CONF=ssi/ssi_conf.json
+  export SSI_CONF_PATH=ssi/ssi_conf.json
   export DOCUMENT_ROOT=$PLATFORM_DOCUMENT_ROOT
   export VOLUME_DIR=$APP_VOLUME
   node $PLATFORM_APP_DIR/node_modules/@bodiless/psh/lib/generate-ssi-files.js build
@@ -58,7 +58,7 @@ default_deploy () {
   export PSH_URL_REPLACER_PROD_ENV=$APP_PROD_ENV
   node $PLATFORM_APP_DIR/node_modules/@bodiless/psh/lib/psh-url-replacer.js deploy
   # ssi files generation
-  export SSI_CONF=ssi/ssi_conf.json
+  export SSI_CONF_PATH=ssi/ssi_conf.json
   export VOLUME_DIR=$APP_VOLUME
   node $PLATFORM_APP_DIR/node_modules/@bodiless/psh/lib/generate-ssi-files.js deploy
 }

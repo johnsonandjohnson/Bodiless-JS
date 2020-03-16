@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/headless-chrome-crawler",
-  "version": "0.0.40",
+  "version": "0.0.43",
   "description": "Fork of https://github.com/yujiosaka/headless-chrome-crawler.git",
   "main": "index.js",
   "license": "Apache-2.0",
