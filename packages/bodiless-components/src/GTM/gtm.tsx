@@ -12,9 +12,10 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
+import React, {ComponentType as CT, useContext} from 'react';
 import { oneLine, stripIndent } from 'common-tags';
 import {useNode} from "@bodiless/core";
+import { toJS } from 'mobx';
 
 type GtmData = {
   id: string;
@@ -112,21 +113,36 @@ const withGTM = (data: GtmData) => (HelmetComponent: CT) => (props: any) => {
   );
 };
 
+const GTMContext  = React.createContext([] as GtmEventData[]);
 const withEvent = (
   nodeKey: string,
   nodeCollection: string,
 
-) => (HelmetComponent: CT) => (props: any) => {
+) => (Component: CT) => (props: any) => {
   const { children, ...rest } = props;
   const { node } = useNode(nodeCollection);
   const { data } = node.child<GtmEventData>(nodeKey);
+
+  const currentDataLayer = useContext(GTMContext);
+
+
+  // And push it into the context
+  const newDataLayer = [...currentDataLayer, data];
+  console.log(toJS(newDataLayer[0]));
+  return (
+    <GTMContext.Provider value={newDataLayer}>
+      <Component {...rest}>{children} </Component>{' '}
+    </GTMContext.Provider>
+  );
+
+
   console.log('datalayer stuff', node);
-    return (
-      <HelmetComponent {...rest}>
-        {children}
-        <script>{generateDefaultDataLayer(data, 'dataLayer')}</script>
-      </HelmetComponent>
-    );
+    // return (
+    //   <HelmetComponent {...rest}>
+    //     {children}
+    //     <script>{generateDefaultDataLayer(data, 'dataLayer')}</script>
+    //   </HelmetComponent>
+    // );
 };
 // const withDataLayer = (
 //   nodeKey: string,
