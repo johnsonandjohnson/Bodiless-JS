@@ -13,9 +13,19 @@
  */
 
 import React, { FC, PropsWithChildren } from 'react';
+import { flow } from 'lodash';
 import { withNode } from '@bodiless/core';
+import {
+  designable,
+  Div,
+} from '@bodiless/fclasses';
 import { useItemHandlers } from './model';
-import { StaticFlexboxProps, FlexboxItem } from './types';
+import { StaticFlexboxProps, FlexboxItem, FlexboxComponents } from './types';
+
+const flexboxComponentStart: FlexboxComponents = {
+  Wrapper: Div,
+  ComponentWrapper: Div,
+};
 
 const NodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
 
@@ -54,4 +64,8 @@ const StaticFlexbox: FC<StaticFlexboxProps> = ({ components }) => {
 
 StaticFlexbox.displayName = 'Flexbox';
 
-export default StaticFlexbox;
+const asStaticFlexbox = flow(
+  designable(flexboxComponentStart),
+);
+
+export default asStaticFlexbox(StaticFlexbox);

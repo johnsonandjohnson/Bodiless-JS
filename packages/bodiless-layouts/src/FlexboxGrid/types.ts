@@ -13,11 +13,12 @@
  */
 
 import { ComponentType } from 'react';
-import { WithNodeProps } from '@bodiless/core';
+import { WithNodeProps, TMenuOptionGetter } from '@bodiless/core';
 import { DesignableComponents, StylableProps } from '@bodiless/fclasses';
 import { ComponentSelectorUI } from '../ComponentSelector/types';
 import { UI as SortableResizableUI } from '../SlateSortableResizable';
 import { SnapData } from './utils/appendTailwindWidthClass';
+import { SortableListProps } from './SortableContainer';
 
 export type UI = ComponentSelectorUI & SortableResizableUI;
 
@@ -56,7 +57,19 @@ export interface FlexboxItem {
   wrapperProps: FlexboxItemProps;
 }
 
+export type SortableChildProps = {
+  flexboxItem: FlexboxItem;
+  onResizeStop(props: FlexboxItemProps): void;
+  getMenuOptions: TMenuOptionGetter;
+  index: number;
+  children: React.ReactNode;
+  ui?: SortableResizableUI;
+  snapData?: SnapData;
+  defaultWidth?: string | number;
+  className?: string;
+};
+
 export type FlexboxComponents = {
-  Wrapper: ComponentType<StylableProps>,
-  ComponentWrapper: ComponentType<StylableProps>,
+  Wrapper: ComponentType<StylableProps & SortableListProps>,
+  ComponentWrapper: ComponentType<StylableProps & SortableChildProps>,
 };

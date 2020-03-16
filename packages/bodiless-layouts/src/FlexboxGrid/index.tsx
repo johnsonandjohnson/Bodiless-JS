@@ -20,19 +20,12 @@ import {
   useEditContext,
 } from '@bodiless/core';
 import {
-  designable,
   withDesign,
-  Div,
   addClasses,
 } from '@bodiless/fclasses';
 import EditFlexbox from './EditFlexbox';
 import StaticFlexbox from './StaticFlexbox';
-import { EditFlexboxProps, FlexboxComponents } from './types';
-
-const flexboxComponentStart: FlexboxComponents = {
-  Wrapper: Div,
-  ComponentWrapper: Div,
-};
+import { EditFlexboxProps } from './types';
 
 const FlexboxGridBasic: FC<EditFlexboxProps> = props => {
   const { isEdit } = useEditContext();
@@ -43,10 +36,9 @@ const FlexboxGridBasic: FC<EditFlexboxProps> = props => {
 
 const FlexboxGridDesignable = flow(
   observer,
-  designable(flexboxComponentStart),
   withDesign({
-    Wrapper: addClasses('flex flex-wrap'),
-    ComponentWrapper: addClasses('w-full'),
+    Wrapper: addClasses('flex flex-wrap TEST'),
+    ComponentWrapper: addClasses('TEST'),
   }),
 )(FlexboxGridBasic);
 

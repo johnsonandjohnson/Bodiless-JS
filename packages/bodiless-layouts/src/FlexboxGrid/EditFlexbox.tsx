@@ -19,13 +19,24 @@ import { flowRight } from 'lodash';
 import {
   withActivateOnEffect, withNode, withMenuOptions,
 } from '@bodiless/core';
-import SortableChild from './SortableChild';
-import SortableContainer from './SortableContainer';
+import { designable, stylable } from '@bodiless/fclasses';
+import SortableChild, { SortableChildProps } from './SortableChild';
+import SortableContainer, { SortableListProps } from './SortableContainer';
 import { useItemHandlers, useFlexboxDataHandlers } from './model';
 import useGetMenuOptions from './useGetMenuOptions';
-import { EditFlexboxProps, FlexboxItem } from './types';
+import {
+  EditFlexboxProps,
+  FlexboxItem,
+  FlexboxComponents,
+  FlexboxItemProps,
+} from './types';
 
 const ChildNodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
+
+const EditFlexboxComponents: FlexboxComponents = {
+  Wrapper: stylable<SortableListProps>(SortableContainer),
+  ComponentWrapper: stylable<SortableChildProps>(SortableChild),
+};
 
 /**
  * An editable version of the Flexbox container.
@@ -42,41 +53,38 @@ const EditFlexbox: FC<EditFlexboxProps> = (props:EditFlexboxProps) => {
   const { Wrapper, ComponentWrapper } = components;
 
   return (
-    <Wrapper>
-      <SortableContainer
-        onSortEnd={(sort: SortEnd) => {
-          const { oldIndex, newIndex } = sort;
-          setFlexboxItems(arrayMove(items, oldIndex, newIndex));
-        }}
-        ui={ui}
-      >
-        {items.map(
-          (flexboxItem: FlexboxItem, index: number): React.ReactNode => {
-            const ChildComponent = components[flexboxItem.type];
-            if (!ChildComponent) return null;
-            return (
-              <ComponentWrapper>
-                <SortableChild
-                  ui={ui}
-                  key={`node-${flexboxItem.uuid}`}
-                  index={index}
-                  flexboxItem={flexboxItem}
-                  snapData={snapData}
-                  defaultWidth={defaultWidth}
-                  getMenuOptions={useGetMenuOptions(props, flexboxItem)}
-                  onResizeStop={
-                      flexboxItemProps => onFlexboxItemResize(flexboxItem.uuid, flexboxItemProps)
-                    }
-                >
-                  <ChildNodeProvider nodeKey={flexboxItem.uuid}>
-                    <ChildComponent />
-                  </ChildNodeProvider>
-                </SortableChild>
-              </ComponentWrapper>
-            );
-          },
-        )}
-      </SortableContainer>
+    <Wrapper
+      onSortEnd={(sort: SortEnd) => {
+        const { oldIndex, newIndex } = sort;
+        setFlexboxItems(arrayMove(items, oldIndex, newIndex));
+      }}
+      ui={ui}
+    >
+      {items.map(
+        (flexboxItem: FlexboxItem, index: number): React.ReactNode => {
+          const ChildComponent = components[flexboxItem.type];
+          if (!ChildComponent) return null;
+          return (
+            <ComponentWrapper
+              ui={ui}
+              key={`node-${flexboxItem.uuid}`}
+              index={index}
+              flexboxItem={flexboxItem}
+              snapData={snapData}
+              defaultWidth={defaultWidth}
+              getMenuOptions={useGetMenuOptions(props, flexboxItem)}
+              onResizeStop={
+                // eslint-disable-next-line max-len
+                (flexboxItemProps: FlexboxItemProps) => onFlexboxItemResize(flexboxItem.uuid, flexboxItemProps)
+              }
+            >
+              <ChildNodeProvider nodeKey={flexboxItem.uuid}>
+                <ChildComponent />
+              </ChildNodeProvider>
+            </ComponentWrapper>
+          );
+        },
+      )}
     </Wrapper>
   );
 };
@@ -90,6 +98,7 @@ EditFlexbox.defaultProps = {
 const asEditFlexbox = flowRight(
   withActivateOnEffect,
   observer,
+  designable(EditFlexboxComponents),
   withMenuOptions({
     useGetMenuOptions: (props: EditFlexboxProps) => useGetMenuOptions(props),
     name: 'Flexbox',
