@@ -37,8 +37,7 @@ const FlexboxGridBasic: FC<EditFlexboxProps> = props => {
 const FlexboxGridDesignable = flow(
   observer,
   withDesign({
-    Wrapper: addClasses('flex flex-wrap TEST'),
-    ComponentWrapper: addClasses('TEST'),
+    Wrapper: addClasses('flex flex-wrap'),
   }),
 )(FlexboxGridBasic);
 
