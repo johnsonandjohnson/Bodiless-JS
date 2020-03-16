@@ -24,6 +24,7 @@ export {
   SingleAccordion,
   SingleAccordionClean,
   asSingleAccordion,
+  asTestableAccordion,
 } from './components/SingleAccordion';
 
 export {
