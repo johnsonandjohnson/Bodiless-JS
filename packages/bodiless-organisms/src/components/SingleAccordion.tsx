@@ -20,6 +20,7 @@ import {
   Div,
   H2,
   StylableProps,
+  addProps,
 } from '@bodiless/fclasses';
 import {
   asEditable,
@@ -41,7 +42,9 @@ const singleAccordionComponentStart:SingleAccordionComponents = {
   Body: Div,
 };
 
-const SingleAccordionBase = ({ components, expanded, expandedStyle = null }: any) => {
+const SingleAccordionBase = ({
+  components, expanded, expandedStyle = null, ...rest
+}: any) => {
   const EXPANDED = 'expanded';
   const COLLAPSED = 'collapsed';
   const initialState = expanded ? EXPANDED : COLLAPSED;
@@ -60,7 +63,7 @@ const SingleAccordionBase = ({ components, expanded, expandedStyle = null }: any
   } = components;
 
   return (
-    <Wrapper className={[accordionState]}>
+    <Wrapper className={[accordionState]} {...rest}>
       <TitleWrapper
         onClick={toggleAccordionState}
         className={[
@@ -71,7 +74,7 @@ const SingleAccordionBase = ({ components, expanded, expandedStyle = null }: any
         ]}
       >
         <Title />
-        <span className="material-icons cursor-pointer select-none">
+        <span className="material-icons cursor-pointer select-none" data-accordion-element="accordion-icon" data-accordion-icon={accordionState === COLLAPSED ? 'expand' : 'collapse'}>
           {accordionState === COLLAPSED ? 'add' : 'remove'}
         </span>
       </TitleWrapper>
@@ -87,6 +90,14 @@ const asSingleAccordion = withDesign({
   Body: asEditable('body', 'SingleAccordion Body Text'),
 });
 
+const asTestableAccordion = withDesign({
+  Wrapper: addProps({ 'data-accordion-element': 'accordion' }),
+  TitleWrapper: addProps({ 'data-accordion-element': 'accordion-title-wrapper' }),
+  Title: addProps({ 'data-accordion-element': 'accordion-title' }),
+  BodyWrapper: addProps({ 'data-accordion-element': 'accordion-body-wrapper' }),
+  Body: addProps({ 'data-accordion-element': 'accordion-body' }),
+});
+
 const SingleAccordionClean = flow(
   designable(singleAccordionComponentStart),
 )(SingleAccordionBase);
@@ -95,11 +106,14 @@ const SingleAccordion = flow(
   asSingleAccordion,
   withNode,
 )(SingleAccordionClean);
+const TestableSingleAccordion = asTestableAccordion(SingleAccordionClean);
 
 export default SingleAccordion;
 export {
   SingleAccordionBase,
   SingleAccordion,
   SingleAccordionClean,
+  TestableSingleAccordion,
   asSingleAccordion,
+  asTestableAccordion,
 };

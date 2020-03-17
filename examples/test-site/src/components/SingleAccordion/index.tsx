@@ -15,6 +15,7 @@
 import { flow } from 'lodash';
 import {
   SingleAccordionClean,
+  asTestableAccordion,
 } from '@bodiless/organisms';
 import {
   withNode,
@@ -33,6 +34,7 @@ const asSingleAccordion = flow(
     ),
   }),
   asSingleAccordionDefaultStyle,
+  asTestableAccordion,
 );
 
 const SingleAccordion = asSingleAccordion(SingleAccordionClean);
