@@ -13,8 +13,12 @@
  */
 
 import { withSublist } from '@bodiless/components';
+import { flow } from 'lodash';
 import asBurgerMenuSublist from './asBurgerMenuSublist';
 
-const withBurgerSubmenu = withSublist(asBurgerMenuSublist);
+const withBurgerSubmenu = flow(
+  asBurgerMenuSublist,
+  withSublist,
+);
 
 export default withBurgerSubmenu;

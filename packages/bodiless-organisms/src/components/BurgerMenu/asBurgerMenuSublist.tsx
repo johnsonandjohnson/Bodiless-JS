@@ -16,27 +16,27 @@ import React, {
 } from 'react';
 import {
   ListProps,
+  withToggleTo,
 } from '@bodiless/components';
+import { WithNodeProps } from '@bodiless/core';
+
+type Props = Omit<ListProps, keyof WithNodeProps>;
 
 /**
- * HOC, takes a list component
- * extracts title from list, the title is in the list children
- * wraps the title with current node, otherwise the title will read data from list node
- * passes the title as a prop according to rc-menu <SubMenu /> api
+ * Takes a sublist component and returns a HOC which, when applied to a list item,
+ * adds a toggled version of the sublist to the list item.
+ *
+ * @param Sublist The sublist component to add to the list item.
  */
-
-const asBurgerMenuSublist = (Sublist: ComponentType<ListProps>) => (
+const asBurgerMenuSublist = (Sublist: ComponentType<Props>) => (
   (Item: ComponentType<any>) => {
-    const ItemWithSublist: ComponentType<ListProps> = ({ ...props }) => (
-      <Sublist {...props} />
+    const ItemWithSublist: ComponentType<ListProps> = ({ unwrap, nodeKey, ...rest }) => (
+      <Sublist {...rest} />
     );
-    const ItemWithoutSublist: ComponentType<ListProps> = ({ wrap, nodeKey, ...rest }) => (
+    const ItemWithoutSublist: ComponentType<any> = ({ wrap, nodeKey, ...rest }) => (
       <Item {...rest} />
     );
-    return {
-      ItemWithSublist,
-      ItemWithoutSublist,
-    };
+    return withToggleTo(ItemWithoutSublist)(ItemWithSublist);
   }
 );
 

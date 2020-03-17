@@ -106,7 +106,11 @@ const SingleAccordion = flow(
   asSingleAccordion,
   withNode,
 )(SingleAccordionClean);
-const TestableSingleAccordion = asTestableAccordion(SingleAccordionClean);
+
+const TestableSingleAccordion = flow(
+  asTestableAccordion,
+  withNode,
+)(SingleAccordionClean);
 
 export default SingleAccordion;
 export {

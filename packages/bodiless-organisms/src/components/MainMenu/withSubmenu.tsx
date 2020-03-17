@@ -13,8 +13,12 @@
  */
 
 import { withSublist } from '@bodiless/components';
+import { flow } from 'lodash';
 import asRCMenuSublist from './asRCMenuSublist';
 
-const withSubmenu = withSublist(asRCMenuSublist);
+const withSubmenu = flow(
+  asRCMenuSublist,
+  withSublist,
+);
 
 export default withSubmenu;

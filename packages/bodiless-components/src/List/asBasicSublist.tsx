@@ -13,8 +13,15 @@
  */
 
 import React, { ComponentType as CT, PropsWithChildren } from 'react';
+import { withToggleTo } from '../Toggle';
 import { FinalProps as ListProps } from './types';
 
+/**
+ * Takes a sublist component and returns a HOC which, when applied to a list item,
+ * adds a toggled version of the sublist to the list item.
+ *
+ * @param Sublist The sublist component to add to the list item.
+ */
 const asBasicSublist = (Sublist: CT<ListProps>) => (
   (Item: CT<PropsWithChildren<{}>> | string) => {
     const ItemWithSublist: CT<ListProps> = ({ children, ...rest }) => (
@@ -26,10 +33,7 @@ const asBasicSublist = (Sublist: CT<ListProps>) => (
     const ItemWithoutSublist: CT<ListProps> = ({ wrap, nodeKey, ...rest }) => (
       <Item {...rest} />
     );
-    return {
-      ItemWithSublist,
-      ItemWithoutSublist,
-    };
+    return withToggleTo(ItemWithoutSublist)(ItemWithSublist);
   }
 );
 

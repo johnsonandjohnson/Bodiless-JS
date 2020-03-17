@@ -16,6 +16,7 @@ import React, {
 } from 'react';
 import {
   ListProps,
+  withToggleTo,
 } from '@bodiless/components';
 import {
   useNode,
@@ -23,15 +24,17 @@ import {
 } from '@bodiless/core';
 
 /**
- * HOC, takes a list component
- * extracts title from list, the title is in the list children
- * wraps the title with current node, otherwise the title will read data from list node
- * passes the title as a prop according to rc-menu <SubMenu /> api
+ * Takes a sublist component and returns a HOC which, when applied to a rc-menu item,
+ * adds a toggled version of the sublist to the rc-menu item.
+ *
+ * @param Sublist The sublist component to add to each item.
  */
-
 const asRCMenuSublist = (Sublist: ComponentType<ListProps>) => (
   (Item: ComponentType<any>) => {
     const ItemWithSublist: ComponentType<ListProps> = ({ children, ...rest }) => {
+      // prepare and pass the submenu title as a prop according to rc-menu <SubMenu /> specification
+      // wrap the title with current node,
+      // otherwise the title will read data from incorrect node when it is rendered by <SubMenu />
       const { node } = useNode();
       const children$ = <NodeProvider node={node}>{children}</NodeProvider>;
       return (
@@ -41,10 +44,7 @@ const asRCMenuSublist = (Sublist: ComponentType<ListProps>) => (
     const ItemWithoutSublist: ComponentType<ListProps> = ({ wrap, nodeKey, ...rest }) => (
       <Item {...rest} />
     );
-    return {
-      ItemWithSublist,
-      ItemWithoutSublist,
-    };
+    return withToggleTo(ItemWithoutSublist)(ItemWithSublist);
   }
 );
 

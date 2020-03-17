@@ -49,3 +49,5 @@ export type UseItemWithSublist = (Sublist: ComponentType<FinalProps>) =>
   ItemWithSublist: ComponentType<any>,
   ItemWithoutSublist:ComponentType<any>,
 };
+
+export type WithSublistToggle = (Sublist: ComponentType<FinalProps>) => ComponentType<FinalProps>;
