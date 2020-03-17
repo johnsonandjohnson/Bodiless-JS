@@ -44,6 +44,7 @@ export interface PageCreatorParams {
   pagesDir: string,
   staticDir: string,
   templatePath: string,
+  templateDangerousHtml: string,
   pageUrl: string,
   headHtml: string,
   bodyHtml: string,
@@ -61,6 +62,7 @@ export interface PageCreatorParams {
   htmlToComponents: boolean,
   htmlToComponentsSettings?: HtmlToComponentsSettings,
   reservedPaths?: Array<string>,
+  allowFallbackHtml?: boolean,
 }
 
 export class PageCreator {
@@ -156,9 +158,19 @@ export class PageCreator {
         .filter(item => item.scope === ComponentScope.Local)
         .map(item => `${item.component}.jsx`);
       const htmlToComponents = new HtmlToComponents(settings);
-      htmlToComponents.convert(this.params.bodyHtml);
-      const targetComponentsPath = path.resolve(this.params.pagesDir, '../../components');
       const targetPageJsxPath = path.join(this.params.pagesDir, this.getPageFilePath(this.params.pageUrl, 'Page.jsx'));
+
+      try {
+        htmlToComponents.convert(this.params.bodyHtml);
+      } catch (error) {
+        if (this.params.allowFallbackHtml) {
+          this.writeContent(targetPageJsxPath, this.wrapHtmlDangerously(this.params.bodyHtml));
+          debug(`[WARNING] An error occurred while processing html to jsx component conversion for page: ${this.params.pageUrl}. Component created with dangerouslySetInnerHTML.`);
+          return;
+        }
+        throw error;
+      }
+      const targetComponentsPath = path.resolve(this.params.pagesDir, '../../components');
       let pageJsxContent = fs.readFileSync(path.resolve(sourceComponentsPath, 'Page.jsx')).toString();
       fs.readdirSync(sourceComponentsPath)
         .filter(file => !localComponents.includes(file) && file !== 'Page.jsx')
@@ -169,10 +181,7 @@ export class PageCreator {
           const targetPath = path.resolve(targetComponentsPath, file);
           fs.copyFileSync(sourcePath, targetPath);
         });
-      // eslint-disable-next-line no-console
-      debug(`trying writing to ${targetPageJsxPath}`);
-      ensureDirectoryExistence(targetPageJsxPath);
-      fs.writeFileSync(targetPageJsxPath, pageJsxContent);
+      this.writeContent(targetPageJsxPath, pageJsxContent);
       localComponents.forEach(component => {
         const sourcePath = path.resolve(sourceComponentsPath, component);
         if (fs.existsSync(sourcePath)) {
@@ -192,8 +201,20 @@ export class PageCreator {
       this.getPageFilePath(this.params.pageUrl),
     );
     content = formatJsx(content);
-    ensureDirectoryExistence(pageFilePath);
-    fs.writeFileSync(pageFilePath, content);
+    this.writeContent(pageFilePath, content);
+  }
+
+  private writeContent(targetPath: string, content: string) {
+    // eslint-disable-next-line no-console
+    debug(`trying writing to ${targetPath}`);
+    ensureDirectoryExistence(targetPath);
+    fs.writeFileSync(targetPath, content);
+  }
+
+  private wrapHtmlDangerously(content: string) {
+    const html = `\`${content.replace(/`/g, '\\`')}\``;
+    const templateContent = fs.readFileSync(this.params.templateDangerousHtml).toString();
+    return templateContent.replace('%html%', html);
   }
 
   private processTemplate(): string {

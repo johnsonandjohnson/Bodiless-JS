@@ -3,12 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.0.41](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.39...v0.0.41) (2020-02-28)
+## [0.0.43](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.42...v0.0.43) (2020-03-11)
+
+**Note:** Version bump only for package @bodiless/documentation
 
 
-### Features
 
-* **documentation:** Support better control over IA ([#129](https://github.com/johnsonandjohnson/bodiless-js/issues/129)) ([05c94fd](https://github.com/johnsonandjohnson/bodiless-js/commit/05c94fdd3ccd860a29d6a81bb5abc3708d7a8157))
+
+
+## [0.0.42](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.39...v0.0.42) (2020-02-28)
+
+**Note:** Version bump only for package @bodiless/documentation
+
+
+
+
+
+
+## [0.0.41](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.40...v0.0.41) (2020-02-28)
+
+**Note:** Version bump only for package @bodiless/documentation
 
 
 
