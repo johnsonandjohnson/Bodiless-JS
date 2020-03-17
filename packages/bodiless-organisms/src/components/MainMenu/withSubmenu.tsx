@@ -12,11 +12,15 @@
  * limitations under the License.
  */
 
-import { withSublist } from '@bodiless/components';
+import {
+  withSublist,
+  withDeleteSublistOnUnwrap,
+} from '@bodiless/components';
 import { flow } from 'lodash';
 import asRCMenuSublist from './asRCMenuSublist';
 
 const withSubmenu = flow(
+  withDeleteSublistOnUnwrap,
   asRCMenuSublist,
   withSublist,
 );

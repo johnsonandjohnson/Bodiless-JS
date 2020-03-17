@@ -13,10 +13,7 @@
  */
 
 import { flow } from 'lodash';
-import {
-  asEditableList,
-  withDeleteSublistOnUnwrap,
-} from '@bodiless/components';
+import { asEditableList } from '@bodiless/components';
 import asMainSubMenu from './asMainSubMenu';
 import withEditableTitle from './withEditableTitle';
 import AsEditable from './types/AsEditable';
@@ -25,7 +22,6 @@ import AsEditable from './types/AsEditable';
  * HOC, produces *editable* SubMenu
  */
 const asEditableMainSubMenu = (editable: AsEditable) => flow(
-  withDeleteSublistOnUnwrap,
   asEditableList,
   asMainSubMenu,
   withEditableTitle(editable),
