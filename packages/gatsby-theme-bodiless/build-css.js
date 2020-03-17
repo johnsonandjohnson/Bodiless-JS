@@ -52,9 +52,12 @@ if (tailwindThemeEnabled) {
   }
   if (process.env.BODILESS_PURGE_CSS_ENABLED !== '0') {
     const purgeWhileInGatsbyDevelop = false;
-    const adminCSS = [
+    const adminTailwindCSS = [
       'packages/bodiless-ui/lib/bodiless.index.css',
       'node_modules/@bodiless/ui/lib/bodiless.index.css',
+    ];
+    const siteTailwindCSS = process.env.BODILESS_TAILWIND_SITE_CSS || [
+      'src/css/style.css',
     ];
     const srcFilesGlobPattern = '**/!(*.d).{ts,js,jsx,tsx}';
     const bodilessPackagesBasePath = path.resolve('./node_modules/@bodiless');
@@ -67,8 +70,8 @@ if (tailwindThemeEnabled) {
         tailwind: true,
         develop: purgeWhileInGatsbyDevelop,
         purgeOnly: [
-          'src/css/style.css',
-          ...adminCSS,
+          ...siteTailwindCSS,
+          ...adminTailwindCSS,
         ],
         content: [
           path.join(process.cwd(), 'src', srcFilesGlobPattern),
