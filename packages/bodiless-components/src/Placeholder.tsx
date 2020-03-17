@@ -17,6 +17,6 @@ import { withEditToggle } from '@bodiless/core';
 
 const withEditPlaceholder = <P extends object>(
   PlaceholderComponent: CT<P>,
-) => (Component: CT<P>) => withEditToggle(Component, PlaceholderComponent);
+) => (Component: CT<P>) => withEditToggle(PlaceholderComponent, Component);
 
 export default withEditPlaceholder;

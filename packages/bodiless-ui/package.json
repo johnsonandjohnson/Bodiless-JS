@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/ui",
-  "version": "0.0.41",
+  "version": "0.0.43",
   "description": "Common default UI elements for BodilessJS",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
@@ -28,8 +28,8 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "@bodiless/core": "^0.0.41",
-    "@bodiless/fclasses": "^0.0.41",
+    "@bodiless/core": "^0.0.43",
+    "@bodiless/fclasses": "^0.0.43",
     "informed": "^2.11.8",
     "lodash": "^4.17.11"
   },
