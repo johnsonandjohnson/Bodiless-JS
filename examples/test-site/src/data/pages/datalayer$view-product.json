@@ -2,10 +2,7 @@
   "value": {
     "event": "view product X",
     "page": {
-      "pageType": "pageType",
-      "country": "country code",
-      "language": "language code",
-      "hostname": "production hostname"
+      "pageType": "pageType"
     }
   }
 }

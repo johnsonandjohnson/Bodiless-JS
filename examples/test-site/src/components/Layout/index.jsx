@@ -36,32 +36,12 @@ const ExampleHelmet = flowRight(
   withMeta('bl-brand', 'brand', 'site'),
   withMeta('bl-country', 'country', 'site'),
   withMetaTitle('page-title'),
-  withMetaHtml('en'),
+  withMetaHtml('en')
 )(Helmet);
 
 const ExampleGTMHelmetEvent = flowRight(
   asBodilessHelmet('datalayer'),
-  withEvent('view-product'),
-)(Helmet);
-
-const ExampleGTMHelmet = flowRight(
-  withGTM({
-    id: 'GTM-1234',
-    dataLayerName: 'dataLayer',
-    gtmAuth: 'foo',
-    gtmPreview: 'bar',
-    defaultDataLayer: {
-      // platform: 'gatsby',
-      // value: { // Possible default datalayer data.
-      //   page: {
-      //     country: 'US',
-      //     language: 'en',
-      //     hostname: '/',
-      //   },
-      // },
-    },
-    includeInDevelopment: true,
-  }),
+  withEvent('globalDataLayer','view-product'),
 )(Helmet);
 
 const Container = asPageContainer(Div);
@@ -80,7 +60,6 @@ const Layout = ({ children }) => (
     render={data => (
       <>
         <ExampleHelmet />
-        <ExampleGTMHelmet />
         <ExampleGTMHelmetEvent />
         <Header siteLogo={data.site.siteMetadata.logo} />
 

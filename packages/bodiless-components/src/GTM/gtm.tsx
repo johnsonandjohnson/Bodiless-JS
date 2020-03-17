@@ -12,156 +12,47 @@
  * limitations under the License.
  */
 
-import React, {ComponentType as CT, useContext} from 'react';
-import { oneLine, stripIndent } from 'common-tags';
-import {useNode} from "@bodiless/core";
-import { toJS } from 'mobx';
+// Summary : gatsby-config.js to starter 2. read options and conditioally include datalyer.
 
-type GtmData = {
-  id: string;
-  includeInDevelopment: boolean;
-  gtmAuth: string;
-  gtmPreview: string; // YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_PREVIEW_NAME,
-  defaultDataLayer: object;
-  dataLayerName: string; //  YOUR_DATA_LAYER_NAME
-};
+import React, { ComponentType as CT } from 'react';
+import { stripIndent } from 'common-tags';
+import { useNode } from '@bodiless/core';
+
 type GtmEventData = {
   content: string;
 };
 
-const generateGTMHeaderSnippet = (
-  id: string,
-  environmentParamStr: string,
-  dataLayerName: string,
-) => stripIndent`
-  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl+'${environmentParamStr}';f.parentNode.insertBefore(j,f);
-  })(window,document,'script','${dataLayerName}', '${id}');`;
-
-const generateDefaultDataLayer = (dataLayer: any, dataLayerName: string) => {
+const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
   let result = `window.${dataLayerName} = window.${dataLayerName} || [];`;
 
-  // @todo determine what is this orignially used for and if we need it?
-  // if (dataLayer.type === `function`) {
-  //   result += `window.${dataLayerName}.push((${dataLayer.value})());`;
-  // } else {
-  //   if (dataLayer.type !== `object` || dataLayer.value.constructor !== Object) {
-  //     console.error(
-  //       `Oops the plugin option "defaultDataLayer" should be a plain object. "${dataLayer}" is not valid.`,
-  //     );
-  //   }
   if (dataLayer.value !== undefined) {
-    result += `window.${dataLayerName}.push(${JSON.stringify(dataLayer.value)});`;
+    result += `window.${dataLayerName}.push(${JSON.stringify(
+      dataLayer.value,
+    )});`;
   }
 
   return stripIndent`${result}`;
 };
-const GTMHead = (data: GtmData) => {
-  const {
-    id,
-    includeInDevelopment,
-    gtmAuth,
-    gtmPreview,
-    dataLayerName,
-    defaultDataLayer,
-  } = data;
-  console.log(data);
-  console.log(includeInDevelopment);
+//const GTMContext = React.createContext([] as GtmEventData[]);
+const withEvent = (
+  dataLayerName: string,
+  nodeKey: string,
+  nodeCollection: string,
+) => (HelmetComponent: CT) => (props: any) => {
+  const includeInDevelopment = false; // @todo
   if (process.env.NODE_ENV === `production` || includeInDevelopment) {
-    const environmentParamStr =
-      gtmAuth && gtmPreview
-        ? oneLine`
-      &gtm_auth=${gtmAuth}&gtm_preview=${gtmPreview}&gtm_cookies_win=x
-    `
-        : ``;
+    const { children, ...rest } = props;
+    const { node } = useNode(nodeCollection);
+    const { data } = node.child<GtmEventData>(nodeKey);
 
-    let defaultDataLayerCode = ``;
-    if (defaultDataLayer) {
-      defaultDataLayerCode = generateDefaultDataLayer(
-        defaultDataLayer,
-        dataLayerName,
-      );
-    }
-    console.log('generateing gtm head');
-    return `${defaultDataLayerCode}${generateGTMHeaderSnippet(
-      id,
-      environmentParamStr,
-      dataLayerName,
-    )}`;
+    // @todo add env var to globalDataLayer
+    return (
+      <HelmetComponent {...rest}>
+        {children}
+        <script>{generateDataLayer(data, dataLayerName)}</script>
+      </HelmetComponent>
+    );
   }
 };
 
-const withGTM = (data: GtmData) => (HelmetComponent: CT) => (props: any) => {
-  console.log('in with GTM');
-  const { children, ...rest } = props;
-  const head = GTMHead(data);
-  console.log(head);
-  return (
-    <HelmetComponent
-      script={[
-        {
-          type: 'text/javascript',
-          innerHTML: `${head}`,
-        },
-      ]}
-      {...rest}
-    >
-      {children}
-    </HelmetComponent>
-  );
-};
-
-const GTMContext  = React.createContext([] as GtmEventData[]);
-const withEvent = (
-  nodeKey: string,
-  nodeCollection: string,
-
-) => (Component: CT) => (props: any) => {
-  const { children, ...rest } = props;
-  const { node } = useNode(nodeCollection);
-  const { data } = node.child<GtmEventData>(nodeKey);
-
-  const currentDataLayer = useContext(GTMContext);
-
-
-  // And push it into the context
-  const newDataLayer = [...currentDataLayer, data];
-  console.log(toJS(newDataLayer[0]));
-  return (
-    <GTMContext.Provider value={newDataLayer}>
-      <Component {...rest}>{children} </Component>{' '}
-    </GTMContext.Provider>
-  );
-
-
-  console.log('datalayer stuff', node);
-    // return (
-    //   <HelmetComponent {...rest}>
-    //     {children}
-    //     <script>{generateDefaultDataLayer(data, 'dataLayer')}</script>
-    //   </HelmetComponent>
-    // );
-};
-// const withDataLayer = (
-//   nodeKey: string,
-//   nodeCollection?: string | undefined,
-// ) => (HelmetComponent: CT) => (props: any) => {
-//   const { children, ...rest } = props;
-//   const { node } = useNode(nodeCollection);
-//   const { data } = node.child<MetaTitleData>(nodeKey);
-//   console.log('datalayer stuff');
-//   console.log(data);
-//   if (!isEmpty(data)) {
-//     return (
-//       <HelmetComponent {...rest}>
-//         {children}
-//         <script>{JSON.stringify(data.content) || ''}</script>
-//       </HelmetComponent>
-//     );
-//   }
-//   return <HelmetComponent {...rest} />;
-// };
-
-export { withGTM, withEvent };
+export { withEvent };

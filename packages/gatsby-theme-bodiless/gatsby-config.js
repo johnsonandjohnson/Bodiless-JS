@@ -66,34 +66,8 @@ const plugins = [
 ];
 
 /**
- * Google Tag Manager plugin.
-*/
-if ((process.env.GOOGLE_TAGMANAGER_ENABLED || '0') === '1') {
-  plugins.push({
-    resolve: 'gatsby-plugin-google-tagmanager',
-    options: {
-      id: process.env.GOOGLE_TAGMANAGER_ID || 'GTM-XXXXXXX',
-
-      // Include GTM in development.
-      // Defaults to false meaning GTM will only be loaded in production.
-      includeInDevelopment: false,
-
-      // datalayer to be set before GTM is loaded
-      // should be an object or a function that is executed in the browser
-      // Defaults to null
-      defaultDataLayer: { platform: 'gatsby' },
-
-      // Specify optional GTM environment details.
-      // gtmAuth: 'YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_AUTH_STRING',
-      // gtmPreview: 'YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_PREVIEW_NAME',
-      dataLayerName: 'globalDataLayer',
-    },
-  });
-}
-
-/**
  * Google Fonts plugin.
-*/
+ */
 if (process.env.GOOGLE_FONTS_ENABLED !== '0') {
   plugins.push({
     resolve: 'gatsby-plugin-google-fonts',
@@ -105,7 +79,7 @@ if (process.env.GOOGLE_FONTS_ENABLED !== '0') {
 
 /**
  * Robots.txt plugin.
-*/
+ */
 if (process.env.ROBOTSTXT_ENABLED !== '0') {
   const policy = process.env.ROBOTSTXT_POLICY;
   const defaultPolicy = [
