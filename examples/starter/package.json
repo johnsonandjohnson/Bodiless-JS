@@ -63,10 +63,12 @@
     "migrate": "cross-env DEBUG=migration_tool migration_tool",
     "migrate:postbuild": "cross-env DEBUG=migration_tool migration_tool postbuild public",
     "migrate:full": "npm run migrate && npm run build && npm run migrate:postbuild && npm run serve",
-    "prepare": "npm run build:css"
+    "prepare": "npm run build:css",
+    "bodiless-psh-init": "bodiless-psh-init"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.0",
+    "@bodiless/psh": "file:../../../Bodiless-Js/packages/bodiless-psh/bodiless-psh-0.0.43.tgz",
     "@typescript-eslint/eslint-plugin": "^2.14.0",
     "@typescript-eslint/parser": "^2.14.0",
     "eslint": "^5.16.0",
