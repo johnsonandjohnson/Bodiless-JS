@@ -21,7 +21,6 @@ import {
   withMetaTitle,
   withMetaHtml,
   asBodilessHelmet,
-  withGTM,
   withEvent,
 } from '@bodiless/components';
 import { flowRight } from 'lodash';
@@ -36,12 +35,36 @@ const ExampleHelmet = flowRight(
   withMeta('bl-brand', 'brand', 'site'),
   withMeta('bl-country', 'country', 'site'),
   withMetaTitle('page-title'),
-  withMetaHtml('en')
+  withMetaHtml('en'),
 )(Helmet);
 
 const ExampleGTMHelmetEvent = flowRight(
   asBodilessHelmet('datalayer'),
-  withEvent('globalDataLayer','view-product'),
+  //withEvent('globalDataLayer','page-loaded'),
+  withEvent(
+    'globalDataLayer',
+    {
+      event: 'Page Loaded',
+      page: {
+        country: 'US',
+        language: 'EN',
+        hostname: 'mysite.com',
+      },
+    },
+    'page-loaded',
+  ),
+)(Helmet);
+
+const ExampleGTMHelmetProductEvent = flowRight(
+  asBodilessHelmet('datalayer'),
+  //withEvent('globalDataLayer','page-loaded'),
+  withEvent(
+    'globalDataLayer',
+    {
+      event: 'Product Viewed',
+    },
+    'product-viewed',
+  ),
 )(Helmet);
 
 const Container = asPageContainer(Div);
@@ -61,6 +84,7 @@ const Layout = ({ children }) => (
       <>
         <ExampleHelmet />
         <ExampleGTMHelmetEvent />
+        <ExampleGTMHelmetProductEvent />
         <Header siteLogo={data.site.siteMetadata.logo} />
 
         <Container>{children}</Container>

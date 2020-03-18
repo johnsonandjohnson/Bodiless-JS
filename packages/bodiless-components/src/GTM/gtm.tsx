@@ -17,18 +17,24 @@
 import React, { ComponentType as CT } from 'react';
 import { stripIndent } from 'common-tags';
 import { useNode } from '@bodiless/core';
+import * as _ from "lodash"
+// import { loadPlugins } from 'gatsby';
+import { toJS } from 'mobx';
 
 type GtmEventData = {
   content: string;
 };
 
+type GtmDefaultPageData = {
+  event: string;
+  page?: string;
+};
+
 const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
   let result = `window.${dataLayerName} = window.${dataLayerName} || [];`;
 
-  if (dataLayer.value !== undefined) {
-    result += `window.${dataLayerName}.push(${JSON.stringify(
-      dataLayer.value,
-    )});`;
+  if (dataLayer !== undefined) {
+    result += `window.${dataLayerName}.push(${JSON.stringify(dataLayer)});`;
   }
 
   return stripIndent`${result}`;
@@ -36,20 +42,24 @@ const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
 //const GTMContext = React.createContext([] as GtmEventData[]);
 const withEvent = (
   dataLayerName: string,
+  defaultPageData: GtmDefaultPageData,
   nodeKey: string,
   nodeCollection: string,
 ) => (HelmetComponent: CT) => (props: any) => {
-  const includeInDevelopment = false; // @todo
+  const includeInDevelopment = true; // @todo
   if (process.env.NODE_ENV === `production` || includeInDevelopment) {
     const { children, ...rest } = props;
+    console.log(nodeCollection, 'nodeCollection');
     const { node } = useNode(nodeCollection);
     const { data } = node.child<GtmEventData>(nodeKey);
-
+    console.log(toJS(data), 'data from node');
+    const merged = _.merge({},defaultPageData, data);
+    console.log(merged, 'merged:');
     // @todo add env var to globalDataLayer
     return (
       <HelmetComponent {...rest}>
         {children}
-        <script>{generateDataLayer(data, dataLayerName)}</script>
+        <script>{generateDataLayer(merged, dataLayerName)}</script>
       </HelmetComponent>
     );
   }

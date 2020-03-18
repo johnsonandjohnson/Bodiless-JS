@@ -1,6 +1,7 @@
 const express = require('express');
 
-const activeEnv = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
+const activeEnv =
+  process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
 
 require('dotenv').config({
   path: `.env.${activeEnv}`,
@@ -44,12 +45,7 @@ if ((process.env.GOOGLE_TAGMANAGER_ENABLED || '0') === '1') {
       // datalayer to be set before GTM is loaded
       // should be an object or a function that is executed in the browser
       // Defaults to null
-      defaultDataLayer: {
-        platform: 'gatsby',
-        country: 'US',
-        language: 'EN',
-        hostname: 'production hostname',
-      },
+      defaultDataLayer: { platform: 'gatsby' },
 
       // Specify optional GTM environment details.
       // gtmAuth: 'YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_AUTH_STRING',

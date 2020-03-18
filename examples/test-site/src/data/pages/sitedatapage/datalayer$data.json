@@ -1,9 +1,0 @@
-{
-  "event": "Page Loaded",
-  "page": {
-    "pageType": "<pageType>",
-    "country": "<country code>",
-    "language": "<language code>",
-    "hostname": "<production hostname>"
-  }
-}
