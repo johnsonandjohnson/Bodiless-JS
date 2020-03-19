@@ -145,6 +145,20 @@ export default class HtmlParser implements HtmlParserInterface {
     this.$(selector).replaceWith(newElement);
   }
 
+  removeEmptyAttribute(selector: string, attributes: string[]): void {
+    if (!attributes) {
+      return;
+    }
+    const { $ } = this;
+    $(selector).each((i: number, elem: any) => {
+      attributes.forEach((item: string, index: number) => {
+        if (elem.attribs[item] !== undefined && elem.attribs[item] === '') {
+          $(elem).removeAttr(item);
+        }
+      });
+    });
+  }
+
   transformRelativeToInternal(pageUrl: string) {
     this.transformHtmlElementsWithReference((link: string, element: CheerioElement) => {
       if (this.shouldTransformRelativeToInternal(link, element)) {
@@ -189,18 +203,6 @@ export default class HtmlParser implements HtmlParserInterface {
     const sanitizedHtml = sanitizeHtml(html, {
       allowedTags: this.allowedTags,
       allowedAttributes: this.allowedAttributes,
-      transformTags: {
-        link: (tagName, attribs) => {
-          const primaryAttribs = ['href', 'rel'];
-          const newAttribs = attribs;
-          primaryAttribs.forEach(attr => {
-            if (typeof newAttribs[attr] === 'string' && !newAttribs[attr].trim()) {
-              delete newAttribs[attr];
-            }
-          });
-          return { tagName, attribs: newAttribs };
-        },
-      },
     });
     return !doctypeTags ? sanitizedHtml : doctypeTags[0] + sanitizedHtml;
   }

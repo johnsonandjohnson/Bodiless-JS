@@ -54,6 +54,7 @@ export enum TransformerRule {
   Replace = 'replace',
   ReplaceString = 'replaceString',
   ToComponent = 'tocomponent',
+  RemoveAttribute = 'removeAttribute',
 }
 
 export interface Transformer {
@@ -61,7 +62,8 @@ export interface Transformer {
   selector: string,
   replacement: string,
   context: string,
-  scope?: ComponentScope
+  scope?: ComponentScope,
+  attributes: string[],
 }
 
 export interface SiteFlattenerParams {
@@ -211,6 +213,15 @@ export class SiteFlattener {
             && this.shouldReplace(pageUrl, item.context),
         )
         .forEach(item => htmlParser.replace(item.selector, item.replacement));
+      this.params.transformers
+        .filter(
+          item => (
+            item.rule === TransformerRule.RemoveAttribute && this.shouldReplace(pageUrl, item.context)
+          ),
+        )
+        .forEach(item => {
+          htmlParser.removeEmptyAttribute(item.selector, item.attributes);
+        });
     }
     const pageHtml = htmlParser.getPageHtml();
     return this.transformAttributes(pageHtml);
@@ -229,9 +240,9 @@ export class SiteFlattener {
   }
 
   private getHtmlToComponentsSettings(): HtmlToComponentsSettings {
-    const tranfomers = this.params.transformers || [];
+    const tranformers = this.params.transformers || [];
     const settings: HtmlToComponentsSettings = {
-      rules: tranfomers
+      rules: tranformers
         .filter(item => item.rule === TransformerRule.ToComponent)
         .map(item => ({
           selector: item.selector,
