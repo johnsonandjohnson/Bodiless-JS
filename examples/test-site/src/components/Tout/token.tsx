@@ -52,11 +52,15 @@ const asToutVertical = flow(
 );
 
 const asToutDefaultStyle = withDesign({
-  Wrapper: flow(asBlockItem, asTextColorPrimary),
+  Wrapper: asTextColorPrimary,
   Image: asImageRounded,
   Title: asHeader2,
   Link: asCta,
 });
+
+const asToutWithPaddings = withDesign({
+  Wrapper: asBlockItem,
+})
 
 export {
   asToutHorizontal,
@@ -68,4 +72,5 @@ export {
   asToutOverlayTitle,
   asToutOverlayCta,
   asToutNoBodyNoTitle,
+  asToutWithPaddings,
 };
