@@ -26,8 +26,6 @@ const getFilteredComponents = (
   filters: Array<any>,
   searchString: string,
 ) => {
-  // Strip components with no categories such as Design components.
-  // eslint-disable-next-line
   if (filters.length === 0 && searchString.length === 0) {
     return components;
   }
