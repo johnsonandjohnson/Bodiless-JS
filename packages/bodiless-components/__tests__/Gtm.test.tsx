@@ -31,39 +31,35 @@ const setMockNode = (items: any) => {
   core.useNode.mockReturnValue({ node });
   return node;
 };
-
-const DataLayer = flowRight(withEvent('globalDataLayer', 'view-product', ''))(
-  Helmet,
-);
+process.env.NODE_ENV = 'production';
+const ExampleGTMHelmetEvent = flowRight(
+  withEvent(
+    'globalDataLayer',
+    {
+      event: 'foo',
+      page: {
+        country: 'US',
+        language: 'EN',
+        hostname: 'bodilessjs.com',
+      },
+    },
+    'foo',
+    '',
+  ),
+)(Helmet);
 
 describe('withEvent', () => {
-  it('add a Event data in the Helmet component', () => {
+  it('add a data layer script in the Helmet component', () => {
     const mockItem = {
-      'view-product': {
-        value: {
-          event: 'view product Y',
-          page: {
-            pageType: 'pageType',
-          },
+      'foo': {
+        page: {
+          pageType: 'pageType',
         },
       },
     };
     setMockNode(mockItem);
-    let wrapper = shallow(<DataLayer />);
+    let wrapper = shallow(<ExampleGTMHelmetEvent />);
     expect(wrapper.childAt(0).type()).toEqual('script');
-    expect(wrapper.childAt(0).text()).toEqual('test-title');
-
-    // @Todo check window.datalayer value.
-
-    // Test empty values will generate emtpy tag:
-    const emptyMockItem = {
-      'view-product': {
-        value: '',
-      },
-    };
-    setMockNode(emptyMockItem);
-    wrapper = shallow(<script />);
-    expect(wrapper.childAt(0).type()).toEqual('script');
-    expect(wrapper.childAt(0).text()).toHaveLength(0);
+    expect(eval(wrapper.childAt(0).text())).toBe(1);
   });
 });

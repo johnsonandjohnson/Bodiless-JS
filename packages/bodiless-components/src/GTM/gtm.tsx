@@ -22,8 +22,8 @@ type GtmEventData = {
 };
 
 type GtmDefaultPageData = {
-  event: string;
-  page?: string;
+  event: string
+  page: object
 };
 
 const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
@@ -43,7 +43,6 @@ const withEvent = (
 ) => (HelmetComponent: CT) => (props: any) => {
   if (process.env.NODE_ENV === `production`) {
     const { children, ...rest } = props;
-    console.log(nodeCollection, 'nodeCollection');
     const { node } = useNode(nodeCollection);
     const { data } = node.child<GtmEventData>(nodeKey);
     const merged = _.merge({},defaultPageData, data);
