@@ -28,13 +28,11 @@ const getFilteredComponents = (
 ) => {
   // Strip components with no categories such as Design components.
   // eslint-disable-next-line
-  const flexboxComponents = components.filter(comp => comp.hasOwnProperty('categories'));
-
   if (filters.length === 0 && searchString.length === 0) {
-    return flexboxComponents;
+    return components;
   }
   if (searchString.length >= 1 && filters.length === 0) {
-    const newComponentArr = flexboxComponents.filter(component => component.title.toLowerCase()
+    const newComponentArr = components.filter(component => component.title.toLowerCase()
       .includes(searchString.toLowerCase()));
     return newComponentArr;
   }
@@ -44,7 +42,7 @@ const getFilteredComponents = (
   const s = searchString;
 
   // Filter components based on filters and search string.
-  const filtered = flexboxComponents.filter((component: any, index: number, comps: any[]) => {
+  const filtered = components.filter((component: any, index: number, comps: any[]) => {
     const { categories } = component;
     const tempValArray: any = [];
 

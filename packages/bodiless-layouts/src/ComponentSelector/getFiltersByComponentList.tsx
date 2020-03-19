@@ -29,7 +29,6 @@ const getFiltersByComponentList = (components: any) => {
   const masterList: LooseObject = {};
   components.forEach((component: any) => {
     const { categories } = component;
-    if (!categories) return;
     Object.keys(categories).forEach(category => {
       if (!(category in masterList)) {
         masterList[category] = [];

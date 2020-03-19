@@ -15,7 +15,7 @@
 import React, { FC, PropsWithChildren } from 'react';
 import { arrayMove, SortEnd } from 'react-sortable-hoc';
 import { observer } from 'mobx-react-lite';
-import { flowRight } from 'lodash';
+import { flowRight, omit } from 'lodash';
 import {
   withActivateOnEffect, withNode, withMenuOptions,
 } from '@bodiless/core';
@@ -38,6 +38,11 @@ const EditFlexboxComponents: FlexboxComponents = {
   Wrapper: stylable<SortableListProps>(SortableContainer),
   ComponentWrapper: stylable<SortableChildProps>(SortableChild),
 };
+
+const witNoDesign = (props:EditFlexboxProps):EditFlexboxProps => ({
+  ...props,
+  components: omit(props.components, ['Wrapper', 'ComponentWrapper']),
+});
 
 /**
  * An editable version of the Flexbox container.
@@ -73,7 +78,7 @@ const EditFlexbox: FC<EditFlexboxProps> = (props:EditFlexboxProps) => {
               flexboxItem={flexboxItem}
               snapData={snapData}
               defaultWidth={defaultWidth}
-              getMenuOptions={useGetMenuOptions(props, flexboxItem)}
+              getMenuOptions={useGetMenuOptions(witNoDesign(props), flexboxItem)}
               onResizeStop={
                 // eslint-disable-next-line max-len
                 (flexboxItemProps: FlexboxItemProps) => onFlexboxItemResize(flexboxItem.uuid, flexboxItemProps)
@@ -101,7 +106,7 @@ const asEditFlexbox = flowRight(
   observer,
   designable(EditFlexboxComponents),
   withMenuOptions({
-    useGetMenuOptions: (props: EditFlexboxProps) => useGetMenuOptions(props),
+    useGetMenuOptions: (props: EditFlexboxProps) => useGetMenuOptions(witNoDesign(props)),
     name: 'Flexbox',
   }),
   observer,
