@@ -60,7 +60,7 @@ const asToutDefaultStyle = withDesign({
 
 const asToutWithPaddings = withDesign({
   Wrapper: asBlockItem,
-})
+});
 
 export {
   asToutHorizontal,
