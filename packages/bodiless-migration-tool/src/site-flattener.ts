@@ -83,6 +83,7 @@ export interface SiteFlattenerParams {
   htmltojsx: boolean,
   useSourceHtml?: boolean,
   disableTailwind?: boolean,
+  reservedPaths?: Array<string>,
   allowFallbackHtml?: boolean,
 }
 
@@ -93,6 +94,7 @@ export class SiteFlattener {
 
   constructor(params: SiteFlattenerParams) {
     this.params = {
+      reservedPaths: [],
       ...params,
       websiteUrl: prependProtocolToBareUrl(params.websiteUrl),
       trailingSlash: params.trailingSlash || TrailingSlash.Add,
@@ -101,6 +103,7 @@ export class SiteFlattener {
         pageUrl: prependProtocolToBareUrl(params.scraperParams.pageUrl),
       },
     };
+
     const jamStackAppParams: JamStackAppParams = {
       gitRepository: this.params.gitRepository,
       workDir: this.params.workDir,
@@ -148,11 +151,15 @@ export class SiteFlattener {
       debug(error.message);
     });
     scraper.on('fileReceived', async fileUrl => {
-      const downloader = new Downloader(this.params.websiteUrl, this.canvasX.getStaticDir());
+      const downloader = new Downloader(
+        this.params.websiteUrl, this.canvasX.getStaticDir(), this.params.reservedPaths,
+      );
       await downloader.downloadFiles([fileUrl]);
     });
     scraper.on('requestStarted', async fileUrl => {
-      const downloader = new Downloader(this.params.websiteUrl, this.canvasX.getStaticDir());
+      const downloader = new Downloader(
+        this.params.websiteUrl, this.canvasX.getStaticDir(), this.params.reservedPaths,
+      );
       await downloader.downloadFiles([fileUrl]);
     });
     await scraper.Crawl();
@@ -302,6 +309,7 @@ export class SiteFlattener {
       htmlToComponents: this.params.htmltojsx,
       allowFallbackHtml: this.params.allowFallbackHtml,
       htmlToComponentsSettings,
+      reservedPaths: this.params.reservedPaths,
     };
     return pageCreatorParams;
   }

@@ -17,9 +17,12 @@ const setMockNode = (items?: any) => {
     },
   ];
   const data = { items: items || defaultItems };
+  const path = 'foo';
   // Update the closure on setData.
   const setData = jest.fn(newData => { data.items = newData.items; });
-  const node = { data, setData };
+  const node = {
+    path, data, setData, delete: jest.fn(),
+  };
   useNode.mockReturnValue({ node });
   return node;
 };
