@@ -16,8 +16,6 @@ import React, { ComponentType as CT } from 'react';
 import { stripIndent } from 'common-tags';
 import { useNode } from '@bodiless/core';
 import * as _ from "lodash"
-// import { loadPlugins } from 'gatsby';
-import { toJS } from 'mobx';
 
 type GtmEventData = {
   content: string;
