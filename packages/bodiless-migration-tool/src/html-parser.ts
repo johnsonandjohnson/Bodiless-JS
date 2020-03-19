@@ -151,7 +151,7 @@ export default class HtmlParser implements HtmlParserInterface {
     }
     const { $ } = this;
     $(selector).each((i: number, elem: any) => {
-      attributes.forEach((item: string, index: number) => {
+      attributes.forEach((item: string) => {
         if (elem.attribs[item] !== undefined && elem.attribs[item] === '') {
           $(elem).removeAttr(item);
         }

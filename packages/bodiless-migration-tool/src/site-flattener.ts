@@ -213,16 +213,38 @@ export class SiteFlattener {
             && this.shouldReplace(pageUrl, item.context),
         )
         .forEach(item => htmlParser.replace(item.selector, item.replacement));
-      this.params.transformers
-        .filter(
-          item => (
-            item.rule === TransformerRule.RemoveAttribute && this.shouldReplace(pageUrl, item.context)
-          ),
-        )
-        .forEach(item => {
-          htmlParser.removeEmptyAttribute(item.selector, item.attributes);
-        });
     }
+
+    // Cleanup primary attributes to avoid build issue from Helmet.
+    const emptyAttributeRemovalRules = [
+      {
+        selector: "head link",
+        attributes: ["rel", "href"],
+      },
+      {
+        selector: "head meta",
+        attributes: ["name", "charset", "http-equiv", "property", "itemprop"],
+      },
+      {
+        selector: "head noscript",
+        attributes: ["innerhtml"],
+      },
+      {
+        selector: "head link",
+        attributes: ["rel", "href"],
+      },
+      {
+        selector: "head script",
+        attributes: ["src", "innerhtml"],
+      },
+      {
+        selector: "head style",
+        attributes: ["csstext"],
+      },
+    ];
+    emptyAttributeRemovalRules.forEach(item => {
+      htmlParser.removeEmptyAttribute(item.selector, item.attributes);
+    });
     const pageHtml = htmlParser.getPageHtml();
     return this.transformAttributes(pageHtml);
   }
