@@ -70,6 +70,7 @@ const SlateComponentProvider = (update:Function) => (
             [path.join('$')]: { ...componentData },
           },
         }),
+        deleteNode: () => {},
       };
       const contentNode = new DefaultContentNode(actions, getters, 'slatenode');
       return (

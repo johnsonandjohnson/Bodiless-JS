@@ -81,6 +81,8 @@ export interface SiteFlattenerParams {
   htmltojsx: boolean,
   useSourceHtml?: boolean,
   disableTailwind?: boolean,
+  reservedPaths?: Array<string>,
+  allowFallbackHtml?: boolean,
 }
 
 export class SiteFlattener {
@@ -90,6 +92,7 @@ export class SiteFlattener {
 
   constructor(params: SiteFlattenerParams) {
     this.params = {
+      reservedPaths: [],
       ...params,
       websiteUrl: prependProtocolToBareUrl(params.websiteUrl),
       trailingSlash: params.trailingSlash || TrailingSlash.Add,
@@ -98,6 +101,7 @@ export class SiteFlattener {
         pageUrl: prependProtocolToBareUrl(params.scraperParams.pageUrl),
       },
     };
+
     const jamStackAppParams: JamStackAppParams = {
       gitRepository: this.params.gitRepository,
       workDir: this.params.workDir,
@@ -145,11 +149,15 @@ export class SiteFlattener {
       debug(error.message);
     });
     scraper.on('fileReceived', async fileUrl => {
-      const downloader = new Downloader(this.params.websiteUrl, this.canvasX.getStaticDir());
+      const downloader = new Downloader(
+        this.params.websiteUrl, this.canvasX.getStaticDir(), this.params.reservedPaths,
+      );
       await downloader.downloadFiles([fileUrl]);
     });
     scraper.on('requestStarted', async fileUrl => {
-      const downloader = new Downloader(this.params.websiteUrl, this.canvasX.getStaticDir());
+      const downloader = new Downloader(
+        this.params.websiteUrl, this.canvasX.getStaticDir(), this.params.reservedPaths,
+      );
       await downloader.downloadFiles([fileUrl]);
     });
     await scraper.Crawl();
@@ -161,6 +169,10 @@ export class SiteFlattener {
 
   private getPageTemplate(): string {
     const templateName = this.params.htmltojsx ? 'template_html2jsx.jsx' : 'template_mono.jsx';
+    return path.resolve(this.getConfPath(), templateName);
+  }
+
+  private getComponentTemplate(templateName: string): string {
     return path.resolve(this.getConfPath(), templateName);
   }
 
@@ -246,6 +258,7 @@ export class SiteFlattener {
       pagesDir: this.canvasX.getPagesDir(),
       staticDir: this.canvasX.getStaticDir(),
       templatePath: this.getPageTemplate(),
+      templateDangerousHtml: this.getComponentTemplate('template_dangerous_html.jsx'),
       pageUrl: transformedScrapedPage.pageUrl,
       headHtml: htmlParser.getHeadHtml(),
       bodyHtml: htmlParser.getBodyHtml(),
@@ -261,7 +274,9 @@ export class SiteFlattener {
       createPages: true,
       downloadAssets: true,
       htmlToComponents: this.params.htmltojsx,
+      allowFallbackHtml: this.params.allowFallbackHtml,
       htmlToComponentsSettings,
+      reservedPaths: this.params.reservedPaths,
     };
     return pageCreatorParams;
   }

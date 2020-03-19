@@ -17,9 +17,8 @@ import { arrayMove, SortEnd } from 'react-sortable-hoc';
 import { observer } from 'mobx-react-lite';
 import { flowRight } from 'lodash';
 import {
-  withActivateOnEffect, withNode, withMenuOptions, useEditContext,
+  withActivateOnEffect, withNode, withMenuOptions,
 } from '@bodiless/core';
-import { addClasses, removeClasses } from '@bodiless/fclasses';
 import SortableChild from './SortableChild';
 import SortableContainer from './SortableContainer';
 import { useItemHandlers, useFlexboxDataHandlers } from './model';
@@ -40,18 +39,6 @@ const EditFlexbox: FC<EditFlexboxProps> = (props:EditFlexboxProps) => {
     onFlexboxItemResize,
     setFlexboxItems,
   } = useFlexboxDataHandlers();
-
-  if (ui && ui.FlexboxEmpty) {
-    const { isActive } = useEditContext();
-    const className = 'bl-border-orange-400';
-    const classNameHover = 'hover:bl-border-orange-400';
-
-    if (isActive) {
-      ui.FlexboxEmpty = addClasses(className).removeClasses(classNameHover)(ui.FlexboxEmpty);
-    } else {
-      ui.FlexboxEmpty = removeClasses(className).addClasses(classNameHover)(ui.FlexboxEmpty);
-    }
-  }
 
   return (
     <SortableContainer

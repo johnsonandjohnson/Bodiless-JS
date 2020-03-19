@@ -22,11 +22,11 @@ export default props => (
   <Page {...props}>
     <Layout>
       <div style={{ margin: 100 }}>
-        <SingleAccordion expanded nodeKey="accordion-1" />
-        <SingleAccordion nodeKey="accordion-2" />
-        <SingleAccordion nodeKey="accordion-3" />
-        <SingleAccordion nodeKey="accordion-4" />
-        <SingleAccordion nodeKey="accordion-5" />
+        <SingleAccordion expanded nodeKey="accordion-1" id="accordion-1" />
+        <SingleAccordion nodeKey="accordion-2" id="accordion-2" />
+        <SingleAccordion nodeKey="accordion-3" id="accordion-3" />
+        <SingleAccordion nodeKey="accordion-4" id="accordion-4" />
+        <SingleAccordion nodeKey="accordion-5" id="accordion-5" />
       </div>
     </Layout>
   </Page>
