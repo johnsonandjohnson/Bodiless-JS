@@ -12,8 +12,6 @@
  * limitations under the License.
  */
 
-// Summary : gatsby-config.js to starter 2. read options and conditioally include datalyer.
-
 import React, { ComponentType as CT } from 'react';
 import { stripIndent } from 'common-tags';
 import { useNode } from '@bodiless/core';
@@ -39,23 +37,18 @@ const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
 
   return stripIndent`${result}`;
 };
-//const GTMContext = React.createContext([] as GtmEventData[]);
 const withEvent = (
   dataLayerName: string,
   defaultPageData: GtmDefaultPageData,
   nodeKey: string,
   nodeCollection: string,
 ) => (HelmetComponent: CT) => (props: any) => {
-  const includeInDevelopment = true; // @todo
-  if (process.env.NODE_ENV === `production` || includeInDevelopment) {
+  if (process.env.NODE_ENV === `production`) {
     const { children, ...rest } = props;
     console.log(nodeCollection, 'nodeCollection');
     const { node } = useNode(nodeCollection);
     const { data } = node.child<GtmEventData>(nodeKey);
-    console.log(toJS(data), 'data from node');
     const merged = _.merge({},defaultPageData, data);
-    console.log(merged, 'merged:');
-    // @todo add env var to globalDataLayer
     return (
       <HelmetComponent {...rest}>
         {children}

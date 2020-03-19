@@ -13,7 +13,8 @@
  */
 
 import React from 'react';
-import { flow } from 'lodash';
+import Helmet from 'react-helmet';
+import { flow, flowRight } from 'lodash';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { BVRatingsSummary, BVReviews } from '@bodiless/bv';
@@ -37,6 +38,7 @@ import {
 import { FlexBoxDefault } from '../components/Flexbox';
 import { asEditorBasic } from '../components/Editors';
 import asSingleAccordionDefaultStyle from '../components/SingleAccordion/token';
+import { withEvent, asBodilessHelmet } from '@bodiless/components';
 
 // Do not allow editors to set accordion titles.
 const NonEditableTitle = ({ producttitle }) => (
@@ -66,9 +68,16 @@ const ProductInactIngAcc = asProductAccordion('Inactive Ingredients')(SingleAcco
 const ProductStorAcc = asProductAccordion('Storage')(SingleAccordionClean);
 const ProductWarnAcc = asProductAccordion('Warnings')(SingleAccordionClean);
 
+const ExampleGTMHelmetEvent = flowRight(
+  asBodilessHelmet('datalayer'),
+ // On product pages, we may add product related datalayer info:
+  withEvent('globalDataLayer', { event: 'Product Viewed' }, 'product-viewed'),
+)(Helmet);
+
 export default (props: any) => (
   <Page {...props}>
     <Layout>
+      <ExampleGTMHelmetEvent />
       <SectionMargin>
         <div className="flex flex-wrap md:items-end md:flex-row-reverse">
           <div className="w-full md:flex-1 md:flex-grow-0 md:flex-shrink-0 text-right"><p>Placeholder_for_Share</p></div>

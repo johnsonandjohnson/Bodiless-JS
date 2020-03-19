@@ -48,24 +48,12 @@ const ExampleGTMHelmetEvent = flowRight(
       page: {
         country: 'US',
         language: 'EN',
-        hostname: 'mysite.com',
+        hostname: 'bodilessjs.com',
       },
     },
     'page-loaded',
   ),
-)(Helmet);
-
-const ExampleGTMHelmetProductEvent = flowRight(
-  asBodilessHelmet('datalayer'),
-  //withEvent('globalDataLayer','page-loaded'),
-  withEvent(
-    'globalDataLayer',
-    {
-      event: 'Product Viewed',
-    },
-    'product-viewed',
-  ),
-)(Helmet);
+ )(Helmet);
 
 const Container = asPageContainer(Div);
 const Layout = ({ children }) => (
@@ -84,7 +72,6 @@ const Layout = ({ children }) => (
       <>
         <ExampleHelmet />
         <ExampleGTMHelmetEvent />
-        <ExampleGTMHelmetProductEvent />
         <Header siteLogo={data.site.siteMetadata.logo} />
 
         <Container>{children}</Container>
