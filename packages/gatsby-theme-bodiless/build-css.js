@@ -14,15 +14,6 @@
 const fs = require('fs');
 const path = require('path');
 
-const getDirectories = source => {
-  if (!fs.existsSync(source)) {
-    return [];
-  }
-  return fs.readdirSync(source, { withFileTypes: true })
-    .filter(dirent => dirent.isDirectory() || dirent.isSymbolicLink())
-    .map(dirent => dirent.name);
-};
-
 const getTailwindConfig = () => {
   const processDirFile = path.resolve(process.cwd(), 'tailwind.config.js');
   if (fs.existsSync(processDirFile)) {
@@ -52,18 +43,18 @@ if (tailwindThemeEnabled) {
   }
   if (process.env.BODILESS_PURGE_CSS_ENABLED !== '0') {
     const purgeWhileInGatsbyDevelop = false;
-    const adminTailwindCSS = [
-      'packages/bodiless-ui/lib/bodiless.index.css',
-      'node_modules/@bodiless/ui/lib/bodiless.index.css',
-    ];
     const siteTailwindCSS = process.env.BODILESS_TAILWIND_SITE_CSS || [
       'src/css/style.css',
     ];
     const srcFilesGlobPattern = '**/!(*.d).{ts,js,jsx,tsx}';
-    const bodilessPackagesBasePath = path.resolve('./node_modules/@bodiless');
-    const bodilessFilesPaths = getDirectories(bodilessPackagesBasePath)
-      .map(pkg => path.resolve(bodilessPackagesBasePath, pkg))
-      .map(dir => path.resolve(dir, srcFilesGlobPattern));
+    // list of bodiless packages that have site level styles
+    // and that should be accounted during purging
+    const bodilessPackagesPaths = [
+      './node_modules/@bodiless/components',
+      './node_modules/@bodiless/organisms',
+    ];
+    const bodilessFilesPaths = bodilessPackagesPaths
+      .map(pkg => path.resolve(pkg, srcFilesGlobPattern));
     buildCSSPlugins.push({
       resolve: 'gatsby-plugin-purgecss',
       options: {
@@ -71,11 +62,10 @@ if (tailwindThemeEnabled) {
         develop: purgeWhileInGatsbyDevelop,
         purgeOnly: [
           ...siteTailwindCSS,
-          ...adminTailwindCSS,
         ],
         content: [
           path.join(process.cwd(), 'src', srcFilesGlobPattern),
-          ...(purgeWhileInGatsbyDevelop ? bodilessFilesPaths : []),
+          ...bodilessFilesPaths,
         ],
       },
     });
