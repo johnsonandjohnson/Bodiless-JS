@@ -31,7 +31,7 @@ const setMockNode = (items: any) => {
   core.useNode.mockReturnValue({ node });
   return node;
 };
-// <titl>test title</title>
+
 const TitleMeta = flowRight(withMetaTitle('page-title', ''))(Helmet);
 
 describe('withMetaTitle', () => {
@@ -43,7 +43,6 @@ describe('withMetaTitle', () => {
     };
     setMockNode(mockItem);
     let wrapper = shallow(<TitleMeta />);
-    console.log(wrapper.debug());
     expect(wrapper.childAt(0).type()).toEqual('title');
     expect(wrapper.childAt(0).text()).toEqual('test-title');
 
