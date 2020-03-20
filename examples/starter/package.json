@@ -32,8 +32,6 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "gatsby": "^2.19.17",
-    "gatsby-plugin-postcss": "2.1.20",
-    "gatsby-plugin-purgecss": "4.0.1",
     "lodash": "^4.17.11",
     "ora": "^4.0.2",
     "react": "^16.11.0",

@@ -28,7 +28,9 @@ const getTailwindConfig = () => {
 
 const buildCSSPlugins = [];
 const tailwindThemeEnabled = (process.env.BODILESS_TAILWIND_THEME_ENABLED || '1') === '1';
-if (tailwindThemeEnabled) {
+if (!tailwindThemeEnabled) {
+  console.warn('Tailwind Theme Compilation Is Disabled');
+} else {
   const tailWindConfigFile = getTailwindConfig();
   if (tailwindThemeEnabled && tailWindConfigFile) {
     buildCSSPlugins.push({
@@ -42,6 +44,8 @@ if (tailwindThemeEnabled) {
     });
   }
   if (process.env.BODILESS_PURGE_CSS_ENABLED !== '0') {
+    console.warn('CSS Purging Is Disabled');
+  } else {
     const purgeWhileInGatsbyDevelop = false;
     const siteTailwindCSS = process.env.BODILESS_TAILWIND_SITE_CSS || [
       'src/css/style.css',
@@ -50,7 +54,7 @@ if (tailwindThemeEnabled) {
     // list of bodiless packages that have site level styles
     // and that should be accounted during purging
     const bodilessPackagesPaths = [
-      './node_modules/@bodiless/components',
+      './node_modules/@bodiless/layouts',
       './node_modules/@bodiless/organisms',
     ];
     const bodilessFilesPaths = bodilessPackagesPaths
