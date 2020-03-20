@@ -218,28 +218,28 @@ export class SiteFlattener {
     // Cleanup primary attributes to avoid build issue from Helmet.
     const emptyAttributeRemovalRules = [
       {
-        selector: "head link",
-        attributes: ["rel", "href"],
+        selector: 'head link',
+        attributes: ['rel', 'href'],
       },
       {
-        selector: "head meta",
-        attributes: ["name", "charset", "http-equiv", "property", "itemprop"],
+        selector: 'head meta',
+        attributes: ['name', 'charset', 'http-equiv', 'property', 'itemprop'],
       },
       {
-        selector: "head noscript",
-        attributes: ["innerhtml"],
+        selector: 'head noscript',
+        attributes: ['innerhtml'],
       },
       {
-        selector: "head link",
-        attributes: ["rel", "href"],
+        selector: 'head link',
+        attributes: ['rel', 'href'],
       },
       {
-        selector: "head script",
-        attributes: ["src", "innerhtml"],
+        selector: 'head script',
+        attributes: ['src', 'innerhtml'],
       },
       {
-        selector: "head style",
-        attributes: ["csstext"],
+        selector: 'head style',
+        attributes: ['csstext'],
       },
     ];
     emptyAttributeRemovalRules.forEach(item => {
