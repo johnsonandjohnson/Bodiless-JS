@@ -70,6 +70,19 @@ class Page {
     });
     return readPromise;
   }
+
+  delete() {
+    const readPromise = new Promise((resolve, reject) => {
+      ensureDirectoryExistence(this.file);
+      fs.unlink(this.file, err => {
+        if (err) {
+          reject(err);
+        }
+        resolve(this);
+      });
+    });
+    return readPromise;
+  }
 }
 
 module.exports = Page;

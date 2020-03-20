@@ -1,5 +1,5 @@
 /**
- * Copyright Â© 2019 Johnson & Johnson
+ * Copyright © 2019 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,14 +12,13 @@
  * limitations under the License.
  */
 
-import BurgerMenuClean from './BurgerMenuClean';
-import asBurgerSubMenu from './asBurgerSubMenu';
-import asEditableBurgerSubMenu from './asEditableBurgerSubMenu';
-import withBurgerSubmenu from './withBurgerSubmenu';
+import { withSublist } from '@bodiless/components';
+import { flow } from 'lodash';
+import asBurgerMenuSublist from './asBurgerMenuSublist';
 
-export {
-  asBurgerSubMenu,
-  asEditableBurgerSubMenu,
-  BurgerMenuClean,
-  withBurgerSubmenu,
-};
+const withBurgerSubmenu = flow(
+  asBurgerMenuSublist,
+  withSublist,
+);
+
+export default withBurgerSubmenu;

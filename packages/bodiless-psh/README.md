@@ -155,6 +155,20 @@ variables on p.sh. All variables should be visible at both build and run time:
 - `env:APP_NPM_REGISTRY`: the full path to your registry, eg
   `//my-artifactory.com/api/npm/my-registry/`.
 - `env:APP_NPM_AUTH`: Ypur NPM authentication token. This should be marked as sensitive.
+  To obtain your token:
+  1. Login to your registry:
+     ```
+     npm login --registry=https://url/of/your/private/registry
+     ```
+     Follow the prompts with the username/password/email of the account you wish
+     to use for p.sh automation.
+  2. Examine your `.npmrc` file (usually located in your home directory). You
+     should see something like
+     ```
+     //url/of/your/privateregistry/:_authToken={token}
+     ```
+  3. Copy the token value to the `env:APP_NPM_AUTH` variable in your p.sh project.
+
 - `env:APP_NPM_NAMESPACE`: The namespace of the packages in your private
   regsitry, eg `@mynamespace`.
 
