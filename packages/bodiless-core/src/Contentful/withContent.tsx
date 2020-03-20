@@ -16,24 +16,17 @@ import React, { ComponentType as CT } from 'react';
 import NodeProvider, { useNode } from '../NodeProvider';
 import { ContentfulNode } from './ContentfulNode';
 
-type Props = {
-  content: any
-}
-
-const withContent= <P extends object, D extends object>(Component: CT<P>) => {
-  const WithContent = ({
-    content,
-    ...rest
-  }: P & Props) => {
-    const { node } = useNode<D>();
+const withContent = <P extends object>(content: any) => (Component: CT<P>) => {
+  const WithContent = (props: P) => {
+    const { node } = useNode();
     const nodeWithDefaultContent = new ContentfulNode(node, content);
     return (
       <NodeProvider node={nodeWithDefaultContent}>
-        <Component {...rest as P} />
+        <Component {...props} />
       </NodeProvider>
     );
-  };
+  }
   return WithContent;
-};
+}
 
 export default withContent;

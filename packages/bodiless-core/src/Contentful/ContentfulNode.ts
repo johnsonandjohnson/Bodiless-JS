@@ -14,6 +14,8 @@
 
 import { ContentNode } from '../ContentNode';
 
+type Path = string | string[];
+
 // TODO: since we want to adjust data method only and proxy other ContentNode methods
 // consider a way how to avoid duplicating all methods that ContentNode has
 // TODO: this class should expose a method that allows to check if node has value in store
@@ -48,11 +50,14 @@ export class ContentfulNode<D extends object> implements ContentNode<D> {
     return this.node.path;
   }
 
-  peer(path: Path) {
-    return this.node.peer(path);
+  peer<E extends object>(path: Path) {
+    const contentNode = this.node.peer(path);
+    return new ContentfulNode(contentNode, this.content) as unknown as ContentNode<E>;
   }
 
-  child(path: Path) {
-    return this.node.child(path);
+  // ToDo: avoid copy pasting from DefaultContentNode class
+  child<E extends object>(path: string) {
+    const paths = Array.isArray(path) ? path : [path];
+    return this.peer<E>([...this.path, ...paths]);
   }
 }
