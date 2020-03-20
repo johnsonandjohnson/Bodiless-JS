@@ -12,38 +12,30 @@
  * limitations under the License.
  */
 
-import React, { ComponentType, FC, PropsWithChildren } from 'react';
 import { withDesign } from '@bodiless/fclasses';
-import { withToggleButton, withToggleTo } from '../Toggle';
-import { FinalProps as ListProps, ListDesignableComponents } from './types';
+import { flow } from 'lodash';
+import { withToggleButton } from '../Toggle';
+import { ListDesignableComponents, WithSublistToggle } from './types';
+import asBasicSublist from './asBasicSublist';
+import withDeleteSublistOnUnwrap from './withDeleteSublistOnUnwrap';
 
 /**
- * Takes a sublist component and return=s a HOC to add a toggled version
- * of it to a list item.
+ * Takes a sublist toggle HOC and returns another HOC which, when applied to a list,
+ * applies the sublist toggle HOC to each item in the list
+ * adds a toggle button to context menu
  *
- * @param Item The item to which the toggle should be added.
+ * @param withSublistToggle The sublist toggle HOC to apply to each list item.
  */
-const withSublistToggle = (Sublist: ComponentType<ListProps>) => (
-  (Item: ComponentType<PropsWithChildren<{}>> | string) => {
-    const ItemWithSublist: FC<ListProps> = ({ children, unwrap }) => (
-      <Item>
-        {children}
-        <Sublist unwrap={unwrap} nodeKey="sublist" />
-      </Item>
-    );
-    return withToggleTo(Item)(ItemWithSublist);
-  }
-);
-
-/**
- * Takes a sublist component and returns a HOC which, when applied to a list,
- * adds a toggled version of the sublist to each item in the list.
- *
- * @param Sublist The sublist component to add to each item.
- */
-const withSublist = (Sublist: ComponentType<ListProps>) => withDesign<ListDesignableComponents>({
+const withSublist = (withSublistToggle: WithSublistToggle) => withDesign<ListDesignableComponents>({
   ItemMenuOptionsProvider: withToggleButton({ icon: 'playlist_add' }),
-  Item: withSublistToggle(Sublist),
+  Item: withSublistToggle,
 });
 
+const withBasicSublist = flow(
+  withDeleteSublistOnUnwrap,
+  asBasicSublist,
+  withSublist,
+);
+
 export default withSublist;
+export { withBasicSublist };

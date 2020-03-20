@@ -571,6 +571,20 @@ class Backend {
             logger.log(reason);
             res.send({});
           });
+      })
+      .delete((req, res) => {
+        const page = Backend.getPage(Backend.getPath(req));
+        logger.log(`Start deletion for:${page.file}`);
+        page
+          .delete()
+          .then(data => {
+            logger.log('Sending', data);
+            res.send(data);
+          })
+          .catch(reason => {
+            logger.log(reason);
+            res.send({});
+          });
       });
   }
 

@@ -15,12 +15,17 @@
 import { flow } from 'lodash';
 import {
   SingleAccordionClean,
+  asTestableAccordion,
 } from '@bodiless/organisms';
+import {
+  withNode,
+} from '@bodiless/core';
 import { withDesign } from '@bodiless/fclasses';
 import asSingleAccordionDefaultStyle from './token';
 import { asEditorSimple, asEditorBasic } from '../Editors';
 
 const asSingleAccordion = flow(
+  withNode,
   withDesign({
     Title: asEditorSimple('title', 'Accordion Title'),
     Body: asEditorBasic(
@@ -29,6 +34,7 @@ const asSingleAccordion = flow(
     ),
   }),
   asSingleAccordionDefaultStyle,
+  asTestableAccordion,
 );
 
 const SingleAccordion = asSingleAccordion(SingleAccordionClean);
