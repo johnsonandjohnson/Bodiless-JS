@@ -43,7 +43,7 @@ if (!tailwindThemeEnabled) {
       },
     });
   }
-  if (process.env.BODILESS_PURGE_CSS_ENABLED !== '0') {
+  if (process.env.BODILESS_PURGE_CSS_ENABLED === '0') {
     console.warn('CSS Purging Is Disabled');
   } else {
     const purgeWhileInGatsbyDevelop = false;
