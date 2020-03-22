@@ -13,6 +13,9 @@
  * limitations under the License.
  */
 
+/* eslint no-console: 0 */
+/* eslint max-len: 0 */
+/* eslint no-lonely-if: 0 */
 const fs = require('fs');
 const path = require('path');
 const jsYaml = require('js-yaml');
@@ -26,15 +29,15 @@ const readYaml = (folderPath: string, fileName: string) => {
   if (fs.existsSync(filePath)) {
     const yamlFile = fs.readFileSync(path.resolve(folderPath, fileName), 'utf8');
     return jsYaml.safeLoad(yamlFile);
-  } else {
-    return {};
   }
-}
+
+  return {};
+};
 
 const isObject = (item:any): boolean => (item && typeof item === 'object' && !Array.isArray(item));
 
 const mergeByKey = (Source: any, Destination: any, Whitelist: any) => {
-  let result = Object.assign({}, Source);
+  const result = Object.assign({}, Source);
 
   if (isObject(Destination)) {
     Object.keys(Destination).forEach(key => {
@@ -57,7 +60,7 @@ const mergeByKey = (Source: any, Destination: any, Whitelist: any) => {
     });
   }
   return result;
-}
+};
 
 const generateStaticYaml = (whitelist: object) => {
   const defaultStaticYaml = readYaml(`${pshFolder}/resources/static/`, 'static.platform.app.yaml');
@@ -65,7 +68,7 @@ const generateStaticYaml = (whitelist: object) => {
   const finalStaticYaml = mergeByKey(defaultStaticYaml, siteStaticYaml, whitelist);
 
   return jsYaml.safeDump(finalStaticYaml);
-}
+};
 
 const generateEditYaml = (whitelist: object) => {
   const defaultEditYaml = readYaml(`${pshFolder}/resources/edit/`, 'edit.platform.app.yaml');
@@ -73,7 +76,7 @@ const generateEditYaml = (whitelist: object) => {
   const finalEditYaml = mergeByKey(defaultEditYaml, siteEditYaml, whitelist);
 
   return jsYaml.safeDump(finalEditYaml);
-}
+};
 
 const init = () => {
   const whitelistYaml = readYaml(pshFolder, 'settings.whitelist.yaml');
@@ -83,7 +86,7 @@ const init = () => {
     { up: true },
     (err: any) => {
       if (err) console.log('Error copying app config files', err);
-    }
+    },
   );
 
   copyfiles(
@@ -95,7 +98,7 @@ const init = () => {
         const staticYaml = generateStaticYaml(whitelistYaml);
         fs.writeFileSync(`${siteRootFolder}/.platform.app.yaml`, staticYaml);
       }
-    }
+    },
   );
 
   copyfiles(
@@ -107,8 +110,8 @@ const init = () => {
         const editYaml = generateEditYaml(whitelistYaml);
         fs.writeFileSync(`${siteRootFolder}/edit/.platform.app.yaml`, editYaml);
       }
-    }
+    },
   );
-}
+};
 
 init();
