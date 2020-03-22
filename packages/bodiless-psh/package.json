@@ -6,14 +6,13 @@
   "homepage": "",
   "license": "Apache-2.0",
   "bin": {
-    "bodiless-psh-init": "./lib/bodiless-psh-init.js",
-    "bodiless-psh-init-work": "./lib/bodiless-psh-init-work.js"
+    "bodiless-psh-init": "./lib/bodiless-psh-init.js"
   },
   "scripts": {
     "build": "tsc --version && tsc -p ./tsconfig.json ",
     "build:watch": "npm run build -- --watch",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo",
-    "postinstall": "bodiless-psh-init-work"
+    "postinstall": "bodiless-psh-init"
   },
   "directories": {
     "lib": "lib"
