@@ -15,7 +15,7 @@
 import React, { ComponentType as CT } from 'react';
 import { stripIndent } from 'common-tags';
 import { useNode } from '@bodiless/core';
-import * as _ from "lodash"
+import * as _ from 'lodash';
 
 type GtmEventData = {
   content: string;
@@ -41,11 +41,11 @@ const withEvent = (
   nodeKey: string,
   nodeCollection: string,
 ) => (HelmetComponent: CT) => (props: any) => {
-  if (process.env.NODE_ENV === `production`) {
+  if (process.env.NODE_ENV === 'production') {
     const { children, ...rest } = props;
     const { node } = useNode(nodeCollection);
     const { data } = node.child<GtmEventData>(nodeKey);
-    const merged = _.merge({},defaultPageData, data);
+    const merged = _.merge({}, defaultPageData, data);
     return (
       <HelmetComponent {...rest}>
         {children}
@@ -53,6 +53,7 @@ const withEvent = (
       </HelmetComponent>
     );
   }
+  return <></>;
 };
 
-export { withEvent };
+export default withEvent;

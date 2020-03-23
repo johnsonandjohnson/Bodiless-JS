@@ -27,6 +27,7 @@ import {
 import {
   SingleAccordionClean,
 } from '@bodiless/organisms';
+import { withEvent, asBodilessHelmet } from '@bodiless/components';
 import Layout from '../components/Layout';
 import {
   ProductTitle,
@@ -39,7 +40,6 @@ import {
 import { FlexBoxDefault } from '../components/Flexbox';
 import { asEditorBasic } from '../components/Editors';
 import asSingleAccordionDefaultStyle from '../components/SingleAccordion/token';
-import { withEvent, asBodilessHelmet } from '@bodiless/components';
 
 // Do not allow editors to set accordion titles.
 const NonEditableTitle = ({ producttitle }) => (
@@ -72,7 +72,7 @@ const ProductWarnAcc = asProductAccordion('Warnings')(SingleAccordionClean);
 
 const ExampleGTMHelmetEvent = flowRight(
   asBodilessHelmet('datalayer'),
- // On product pages, we may add product related datalayer info:
+  // On product pages, we may add product related datalayer info:
   withEvent('globalDataLayer', { event: 'Product Viewed' }, 'product-viewed'),
 )(Helmet);
 

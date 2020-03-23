@@ -16,7 +16,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { flowRight } from 'lodash';
 import { shallow } from 'enzyme';
-import { withEvent } from '../src/GTM/gtm';
+import withEvent from '../src/GTM/gtm';
 
 const core = require('@bodiless/core');
 

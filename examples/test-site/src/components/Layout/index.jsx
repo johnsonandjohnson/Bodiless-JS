@@ -40,7 +40,7 @@ const ExampleHelmet = flowRight(
 
 const ExampleGTMHelmetEvent = flowRight(
   asBodilessHelmet('datalayer'),
-  //withEvent('globalDataLayer','page-loaded'),
+  // withEvent('globalDataLayer','page-loaded'),
   withEvent(
     'globalDataLayer',
     {
@@ -53,7 +53,7 @@ const ExampleGTMHelmetEvent = flowRight(
     },
     'page-loaded',
   ),
- )(Helmet);
+)(Helmet);
 
 const Container = asPageContainer(Div);
 const Layout = ({ children }) => (

@@ -31,8 +31,8 @@ import withDeleteSublistOnUnwrap from './List/withDeleteSublistOnUnwrap';
 import {
   withMeta, withMetaTitle, withMetaHtml,
 } from './Meta/Meta';
-import { asBodilessHelmet } from './Helmet/Helemet';
-import { withEvent } from './GTM/gtm';
+import asBodilessHelmet from './Helmet/Helemet';
+import withEvent from './GTM/gtm';
 import {
   withToggle,
   withToggleTo,
