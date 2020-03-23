@@ -1,26 +1,119 @@
-# DesignSystem
+# Bodiless Design System
 
-The BodilessJS Design System is a hybrid approach of using Atomic Design and Pattern Lab model to implement a reusable design system in React. It allows us to utilize Reacts higher-order component (HOC) for reusing component logic at more granular layer. It will implement utility layer which is the core styling of the site with the element tokens that add design to single HTML element. Continuing this logic, the component tokens consists of more complex HOCs that apply design. All the element tokens & component tokens can be easily reused/extended to meet the design requirements without changing how/which components are used by the more complex/advanced HOCs.
+The Bodiless Design System is an opinionated set of tools and patterns for
+implementing a reusable and extensible *Design System* in React. Inspired by
+principles of Atomic Design, Functional CSS and other functional programming
+paradigms, it utilizes React's higher-order components (HOC) to encapsulate
+component styling or behavior as reusable *Design Tokens* which can be applied
+consistently across a site. All tokens can be independently extended to meet
+specific design requirements without changing the overall design system, and
+without altering the internal structure of complex components.
 
-The suggested design system is to structure your system in the following way:
+## Pre-requisites
 
-## Utility Layer
+To get the most out of this document, you should have a basic familiarity with:
 
-Utility class produced by tailwind, they should be as unambiguous as possible.
+* Atomic Design, Design Systems and Design Tokens
+* "Functional" or "Atomic" CSS
+* Fundamental principles of functional programming
+* React Higher Order Components.
 
-The BodilessJS examples/test & examples/starter site uses default tailwind https://tailwindcss.com/ for this layer.
+There are many excellent web resources on these topics, and we encourage you to
+read a few articles if any of these concepts are foreign to you.
 
-## Element Tokens
+## Design Tokens
 
-Element Tokens are HOC that add utility classes to a single HTML element. *By convention all Element Tokens start with `as`.*
+The building blocks of a Bodiless Design System are *Design Tokens*. These are
+very well defined in the
+[Salesforce Lightning Design System](https://www.lightningdesignsystem.com/design-tokens/):
 
-``` js
-const asHeader1 = addClasses('text-4xl font-bold');
+> Design tokens are the visual design atoms of the design system — specifically,
+they are named entities that store visual design attributes.
+
+In Bodiless, we construct design tokens in three layers:
+
+### Utility Classes
+
+The lowest level of the system consists of CSS "Utility Classes", usually
+produced by a functional CSS library like [Tailwind](https://tailwindcss.com/).
+These represent the smallest units of design: things like color palette, border
+curvature, typography, etc. They represent the primitive *options* available in your
+design system. These classes should be as unambiguous as possible, and should
+always have the same effect wherever they are applied.
+
+The Bodiless starter-kit uses the *Tailwind* defaults to generate
+this layer. This should be customized for any new site using values from the site's
+styleguide. For example, here are the colors defined for the Bodiless admin UI:
+```js
+      colors: {
+        primary: '#0070c8',
+
+        transparent: 'transparent',
+        initial: 'initial',
+        inherit: 'inherit',
+
+        black: '#22292f',
+        white: '#ffffff',
+
+        'grey-100': '#f7fafc',
+        'grey-200': '#edf2f7',
+        'grey-400': '#cbd5e0',
+        grey: '#a0aec0',
+        'grey-600': '#718096',
+        'grey-800': '#2d3748',
+        'grey-900': '#1a202c',
+
+        red: '#e3342f',
+        green: '#309795',
+      },
 ```
 
-## Component Tokens
+### Element Tokens
 
- Are HOC that use the applyDesign to add Tokens (or replace) the base elements in a component. *By convention all Components Tokens start with `as`.*
+In Bodiless "elements" are single HTML elements, roughly corresponding to
+"atoms" in the parlance of Atomic Design. *Element Tokens* are HOC that apply
+discrete design attributes to a single element, usually by applying one or more
+utility classes.
+
+Element Tokens represent *decisions* about how the options defined by your
+utility classes should be applied in particular contexts. (I have borrowed this
+distinction between *options* and *decisions* from
+[Nathan Curtis' excellent article on Design Tokens](https://medium.com/eightshapes-llc/tokens-in-design-systems-25dd82d58421).
+Often, an Element Token will apply a single utiltiy class, eg.
+```js
+const asErrorText = addClasses('text-red-300');
+```
+Or, sometimes they will apply more than one class to completely describe an
+element's style in a particular context, eg
+```js
+const asPrimaryHeader = addClasses('font-bold text-3xl');
+```
+
+Element tokens can be combined to produce composite tokens for more specific
+contexts:
+```js
+const asErrorPageHeader = flow(asErrorText, asPrimaryHeader);
+```
+
+Or they can be extended to implement local variations of a design system:
+```js
+import { asPrimaryHeader as asPrimaryHeaderBase } from 'some-design-system';
+const asPrimaryHeader = flow(
+  asPrimaryHeaderBase,
+  removeClasses('font-bold'),
+  addClasses('font-semibold'),
+);
+```
+
+### Component Tokens
+
+Bodiless extends the notion of design tokens to components which are larger
+than simple elements ("molecules", "organisms", "templates" and even "pages" in
+atomic design lingo, though we don't draw much of a distinction among them). A
+"Component Token" is usually a colletion of element tokens which should be applied
+to the constituent elements of a complex component.  For example, imagine a `Tout`
+component which has a title, an image, body text and a call-to-action link. We can
+then define the follwing HOC to apply tokens to the title and link:
 
 ``` js
 const asToutPink = withDesign({
@@ -29,20 +122,95 @@ const asToutPink = withDesign({
 });
 ```
 
-## Component
+In effect, this is creating a sort of macro-token which defines one of the ways
+a tout can be styled--or, really, one of the axes of variation in tout styling.
+This can be combined with other tokens to create a specific variant, eg:
+```js
+const asPinkHorizontalToutNoBody = flow(
+  asToutPink,
+  asToutHorizontal,
+  asToutNoBody,
+);
+```
 
-React components that use the BodilessJS Design system and are built in way that they are easily shared/reusable.
+Just like element tokens, component tokens can be extended or customized to meet local design
+requirements:
+```js
+import { asToutPink as asToutPinkBase } from 'some-design-system';
+const asToutPink = flow(
+  asToutPinkBase,
+  withDesign({
+    Title: removeClasses('text-base').addClasses('text-lg'),
+  }),
+);
+```
 
-For example, Touts can be reused as is, with some possible addition site specific styling and all use the same underlying Tout from @bodiless/organisms.
+### "Behavioral" Tokens
 
-*As Convention a clean version of a component is exported along with any HOC that is applied.*
+In most design systems, tokens are used to express visual design attributes.
+Bodiless extends this idea to include tokens which add units of
+*functionality* or *behavior* to a component. This allows behaviors to be
+defined uniformly across the site and applied to components of different kinds.
+Such "behavioral" tokens can be applied at the Element or Component layer.
+
+One very common application of this pattern is in bestowing "editability" on a
+component. In BodilessJS, rich text editors are highly configurable with regards
+to both the kinds of formatting allowed and the actual components used to render
+that formatting. A typical pattern is to create "behavioral" Element Tokens to
+describe the different kinds of editors available on your site. These can then
+be leveraged to make behavioral Component Tokens, eg:
+
+```js
+import { asEditorSimple, asEditorBasic } from 'my-element-tokens';
+const asEditableTout = withDesign({
+  Title: asEditorSimple('title', 'Enter title here'),
+  Body: asEditorBasic('body', 'Enter body text here'),
+});
+```
+
+`asEditableTout` can now be composed with other tout tokens to make an editable
+version of all the different tout variants on your site, using standard editors
+for each composed text element.
+
+## Applying Tokens to Components
+
+In the Bodiless design system, components should be constructed so as to be
+easily shareable and reusable. They should have effectively no styling (this
+will be applied through tokens), and only include functionality or behavior
+which is intrinsic to the component and not applicable to any other component.
+In order to play well with tokens, they should use the
+[Design API](../Development/Architecture/FClasses) to allow application of
+Component tokens, and their constituent elements should use the
+[FClasses API](../Development/Architecture/FClasses) to allow application of
+utility-based element tokens.
+
+For example, the basic tout from `@bdodiless/organisms` is very simple:
+
+```js
+    <Wrapper {...rest}>
+      <ImageWrapper>
+        <ImageLink>
+          <Image />
+        </ImageLink>
+      </ImageWrapper>
+      <ContentWrapper>
+        <Title />
+        <Body />
+        <Link />
+      </ContentWrapper>
+    </Wrapper>
+```
+
+All the constitutent components default to basic HTML elements stylable
+via the FClasses API, and the tout itself is designable by the Design API.
+That's it: no additional styling or functionality is part of the component.
+
+To make an editable version of the tout, we apply a behavioral component token:
 
 ``` js  
-import {
-CleanTout,
-} from '@bodiless/organisms';
+import { ToutClean } from '@bodiless/organisms';
 
-const asTout = flow(
+const asEditableTout = flow(
   withDesign({
     Image: asEditableImage('image'),
     ImageLink: asEditableLink('cta'),
@@ -54,21 +222,16 @@ const asTout = flow(
     Body: asEditorBasic('body', 'Tout Body Text'),
   }),
 );
-const Tout = asTout(ToutClean);
+const Tout = asEditableTout(ToutClean);
 
 ```
 
-Then at use, the components can be combined with tokens to deliver components.
-
-## Combining Tokens and Components
-
-A component can be created as single component or by applying different element tokens and component tokens, many variations of that component can be created in programmatic way.
-
-At the most basic, one needs to wrap a component in an HOC token, and create a single variant of that component.
+Then, to make styled variants of the editable tout, we compose various component
+tokens.
 
 ```js
 
-const ToutHorizontal = flow(asToutDefaultStyle, asToutHorizontal)(Tout);
+const ToutHorizontal = flow(asToutDefaultStyle, asToutHorizontal, asEditableTout)(Tout);
 const ToutHorizontalNoTitle = flow(asToutDefaultStyle, asToutHorizontal, asToutNoTitle)(Tout);
 const ToutVertical = flow(asToutDefaultStyle, asToutVertical)(Tout);
 const ToutVerticalNoTitle = flow(asToutDefaultStyle, asToutVertical, asToutNoTitle)(Tout);
@@ -80,7 +243,52 @@ const ToutVerticalNoTitleNoBody = flow(
 
 ```
 
-This combination should be done at the point of use, such as in the page file where the component is placed.  The HOC and the basic component are the shareable items not there composition.
+Generally speaking, these styled tout instances should be *local*. It is the
+*tokens*, not the *components* which we export and share. If we want to reuse a
+particular combination, we can create a composed token:
 
-Here is a flow diagram of creating a Horizontal Tout:
+```js
+export const asToutVerticalNoTitleNoBody = flow(
+  asToutDefaultStyle,
+  asToutVertical,
+  asToutNoBodyNoTitle,
+);
+```
+
+The reason for this is that this token can be applied to *any component which
+implements the tout's design API*.  For example, let's imagine we needed a
+special kind of tout with two CTA links.  We could create our clean component
+to extend the existing tout template by adding this second link:
+
+```js
+    <Wrapper {...rest}>
+      <ImageWrapper>
+        <ImageLink>
+          <Image />
+        </ImageLink>
+      </ImageWrapper>
+      <ContentWrapper>
+        <Title />
+        <Body />
+        <Link />
+        <SecondLink />
+      </ContentWrapper>
+    </Wrapper>
+```
+
+Now, all the component tokens we defined for the original tout will still apply
+to our custom tout (though of course we will need to extend them to apply
+styling or functionality to the second link).
+
+## Conclusion
+
+This has been a very high level overview of the Bodiless Design System. For some
+hands on experience, you can proceed to the
+[Design System Tutorial](../About/DesignSystemBasics). Or, you can read the full
+documentation for the [Design API](../Development/Architecture/FClasses).
+
+For reference, here is a flow diagram showing how utility classes, element
+tokens, component tokens and components are composed to create a basic,
+horizontal tout:
+
 ![](./ToutHorizontalDefaultFlow.svg)

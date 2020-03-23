@@ -11,13 +11,17 @@ to apply the same design system to multiple sites, extending it as needed.
 
 ## Prerequisites
 
-* Complete the [Site Build Basics](./SiteBuildBasics) and launch the site's
-  editor interface.
-* Alternatively, if you want to fast-forward to this tutorial, copy over the
-  [gallery-final folder & contents](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/test-site/src/data/pages/gallery-final)
-  and place in a [new site](./GettingStarted?id=creating-a-new-site) at
-  `src/data/pages/gallery` and launch the site's editor interface. Note:
-  remember to rename the folder from `gallery-final` to `gallery`.
+* Complete the [Site Build Basics](./SiteBuildBasics).
+  * Alternatively, if you already have a fair understanding of BodilessJS
+    fundamentals and want to fast-forward to this tutorial, copy over the
+    [gallery-final folder & contents](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/test-site/src/data/pages/gallery-final)
+    and place in a [new site](./GettingStarted?id=creating-a-new-site) at
+    `src/data/pages/gallery`. Remember to rename the folder from `gallery-final`
+    to `gallery`.
+* Read through the high level introduction to the
+  [Bodiless Design System](../Design/DesignSystem). Even if you don't
+  follow everything, it will give essential insight into the "why" of
+  what you will do in this tutorial.
 
 ## 1. Convert the Gallery to use Site's Simple Editor
 
@@ -69,23 +73,39 @@ maintain.
 ## 3. Create a re-useable Primary Header for the site 
 
 Within `data/pages/gallery/index.jsx` (gallery page) & `data/pages/index.jsx`
-(homepage) you can see we use the same primary header `h1`. Let's make this
-primary header a shared component. This way if we change the style of the
-primary header, it will apply throughout the site instead of having to be fixed
-on each page.
+(homepage) you can see we use similar `PrimaryHeader` components, but they don't
+quite match: the one on the gallery page is bold. Let's bring them both into the
+design system using a shared set of tokens. This way if we change the style of
+the primary header, it will apply throughout the site instead of having to be
+fixed on each page.
 
-1. In `src/components/Elements.token.ts` lets define a new H1 Primary Header
+1. In `src/components/Elements.token.ts` let's define some new primary header tokens:
     ```
-    const PrimaryHeader = flow(
+    const asPrimaryHeader = flow(
+      startWith(H1),
       asHeader1,
       asBold,
-      asEditable('title', 'Page Title'),
-    )(H1);
+    );
+    const asEditablePrimaryHeader = asEditable('title', 'Page Title');
     ````
-1. Remember to add imports needed & export this new component.
+    The first of these defines the styles that should be applied to an `h1` when
+    used as a page title, and is a standard design token. The second defines
+    the kind of editor which should be used for page titles, and is an example
+    of what we call "behavioral" tokens -- tokens which express behavior or
+    functionality rather than visual design.  We export these separately to
+    facilitate placing *non-editable* page titles on pages where that may
+    be appropriate.
+  
+1. Remember to add imports needed & export these new tokens.
 
-1. Change the imports on both gallery page `index.jsx` & homepage `index.jsx`
-   and remove the current `PrimaryHeader` definitions.
+1. Import these tokens on both gallery page `index.jsx` & homepage `index.jsx`
+   and replace the current `PrimaryHeader` definitions and references:
+   ```
+   cosnt PrimaryHeader = flow(
+     asPrimaryHeader,
+     asEditablePrimaryHeader,
+   )();
+   ```
 
 1. Run your site and visit the homepage & gallery page
    (http://localhost:8000/gallery) and it should run exactly as it did before,
@@ -389,14 +409,14 @@ design styles to a separate file.
     });
 
     const asBlueBorder = withDesign({
-        Wrapper: addClasses('border-blue-400'),
+      Wrapper: addClasses('border-blue-400'),
     });
 
     const asRedBorder = withDesign({
       Wrapper: addClasses('border-red-400'),
     });
     const asGreenBorder = withDesign({
-        Wrapper: addClasses('border-green-400'),
+      Wrapper: addClasses('border-green-400'),
     });
 
     export {
@@ -496,7 +516,6 @@ Design API as well, using the same method we just did.
       <FlexboxGrid nodeKey="body" design={galleryDesign} />
     );
 
-
     const GalleryClean = flow(
       designable(galleryStart),
       withNode,
@@ -524,6 +543,7 @@ Design API as well, using the same method we just did.
 
 All of this should look familiar now and shouldn't need more explanation.
 
-The `Gallery` naming & functionality remained the same so there is no need to update the gallery page.
+The `Gallery` naming & functionality remained the same so there is no need to
+update the gallery page.
 
 For more information, read about [FClasses](Development/Architecture/FClasses).
