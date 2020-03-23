@@ -28,38 +28,46 @@ import {
   asToutOverlayCta,
   asToutNoCta,
   asToutNoBodyNoTitle,
+  asToutWithPaddings,
 } from '../../../components/Tout/token';
 
 const ToutHorizontal = flow(
+  asToutWithPaddings,
   asToutDefaultStyle,
   asToutHorizontal,
 )(Tout);
 const ToutHorizontalNoTitle = flow(
+  asToutWithPaddings,
   asToutDefaultStyle,
   asToutHorizontal,
   asToutNoTitle,
 )(Tout);
 const ToutVertical = flow(
+  asToutWithPaddings,
   asToutDefaultStyle,
   asToutVertical,
 )(Tout);
 const ToutVerticalNoTitle = flow(
+  asToutWithPaddings,
   asToutDefaultStyle,
   asToutVertical,
   asToutNoTitle,
 )(Tout);
 const ToutVerticalNoTitleNoBody = flow(
+  asToutWithPaddings,
   asToutDefaultStyle,
   asToutVertical,
   asToutNoBodyNoTitle,
 )(Tout);
 const ToutNoTitleNoBodyOverlayCta = flow(
+  asToutWithPaddings,
   asToutDefaultStyle,
   asToutVertical,
   asToutNoBodyNoTitle,
   asToutOverlayCta,
 )(Tout);
 const ToutOverlayTitleNoBodyNoCta = flow(
+  asToutWithPaddings,
   asToutDefaultStyle,
   asToutVertical,
   asToutOverlayTitle,
@@ -68,6 +76,7 @@ const ToutOverlayTitleNoBodyNoCta = flow(
 )(Tout);
 
 const ToutOverlaytTitleNoBodyOverlayCta = flow(
+  asToutWithPaddings,
   asToutDefaultStyle,
   asToutVertical,
   asToutOverlayTitle,
@@ -75,6 +84,7 @@ const ToutOverlaytTitleNoBodyOverlayCta = flow(
   asToutOverlayCta,
 )(Tout);
 const ToutOverlaytTitleNoBody = flow(
+  asToutWithPaddings,
   asToutDefaultStyle,
   asToutVertical,
   asToutOverlayTitle,
