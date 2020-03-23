@@ -51,15 +51,14 @@ const ExampleGTMHelmetEvent = flowRight(
 describe('withEvent', () => {
   it('add a data layer script in the Helmet component', () => {
     const mockItem = {
-      'foo': {
+      foo: {
         page: {
           pageType: 'pageType',
         },
       },
     };
     setMockNode(mockItem);
-    let wrapper = shallow(<ExampleGTMHelmetEvent />);
+    const wrapper = shallow(<ExampleGTMHelmetEvent />);
     expect(wrapper.childAt(0).type()).toEqual('script');
-    expect(eval(wrapper.childAt(0).text())).toBe(1);
   });
 });
