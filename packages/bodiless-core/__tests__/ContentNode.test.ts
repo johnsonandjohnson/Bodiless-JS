@@ -18,7 +18,8 @@ const mockStore = () => {
   const getNode = jest.fn();
   const setNode = jest.fn();
   const getKeys = jest.fn(() => ['foo']);
-  const actions = { setNode };
+  const deleteNode = jest.fn();
+  const actions = { setNode, deleteNode };
   const getters = { getKeys, getNode };
   return { actions, getters };
 };

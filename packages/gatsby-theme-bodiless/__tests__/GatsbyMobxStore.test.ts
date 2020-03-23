@@ -13,64 +13,70 @@
  */
 
 import GatsbyMobxStore from '../src/dist/GatsbyMobxStore';
-import { ItemState } from '../src/dist/GatsbyMobxStoreItem';
+import GatsbyMobxStoreItem from '../src/dist/GatsbyMobxStoreItem';
 
-const generateData = (name: string, data: any) => ({
-  Page: {
-    edges: [
-      {
-        node: {
-          name,
-          content: JSON.stringify(data),
-        },
-      },
-    ],
-  },
-});
+const deleteItemMock = jest.fn();
+
+jest.mock('../src/dist/GatsbyMobxStoreItem', () => (
+  jest.fn().mockImplementation(() => ({
+    delete: deleteItemMock,
+  }))
+));
 
 const dataSource = {
   slug: 'slug',
 };
 
 describe('GatsbyMobxStore', () => {
-  describe('when it receives data from backend', () => {
-    describe('when a backend entry does not exist in the store', () => {
-      it('accepts the entry', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+  describe('getChildrenNodes', () => {
+    jest.doMock('../src/dist/GatsbyMobxStoreItem');
+    describe('when node has children', () => {
+      it('should return a collection of all children keys', () => {
         const store = new GatsbyMobxStore(dataSource);
-        const data = generateData('foo', { text: 'bar' });
-        store.updateData(data);
-        const data$0 = generateData('foo', { text: 'bar2' });
-        store.updateData(data$0);
-        const node$0 = store.getNode(['Page', 'foo']);
-        expect(node$0.text).toBe('bar2');
+        store.setNode(['foo'], 'foo');
+        store.setNode(['foo', 'bar'], 'bar');
+        store.setNode(['foo', 'bar', 'baz'], 'baz');
+        const children = store.getChildrenNodes(['foo']);
+        expect(children.length).toBe(2);
       });
     });
-    describe('when backend data does not have an entry form store', () => {
-      describe('when store entry is locked', () => {
-        it('should not remove the entry from store', () => {
-          const store = new GatsbyMobxStore(dataSource);
-          const data = generateData('foo', { text: 'bar' });
-          store.updateData(data);
-          // make the item locked
-          const node = store.store.get('Page$foo');
-          node!.state = ItemState.Locked;
-          // update store with new data
-          const data$ = generateData('foo2', { text: 'bar' });
-          store.updateData(data$);
-          const node$0 = store.getNode(['Page', 'foo']);
-          expect(node$0.text).toBe('bar');
-        });
+    describe('when node does not have children', () => {
+      it('should return empty array', () => {
+        const store = new GatsbyMobxStore(dataSource);
+        store.setNode(['foo'], 'foo');
+        store.setNode(['foo', 'bar'], 'bar');
+        store.setNode(['foo', 'bar', 'baz'], 'baz');
+        const children = store.getChildrenNodes(['baz']);
+        expect(children.length).toBe(0);
       });
-      describe('when store entry is not locked', () => {
-        it('should remove the entry from store', () => {
-          const store = new GatsbyMobxStore(dataSource);
-          const data = generateData('foo', { text: 'bar' });
-          store.updateData(data);
-          const data$ = generateData('foo2', { text: 'bar' });
-          store.updateData(data$);
-          const node$0 = store.getNode(['Page', 'foo']);
-          expect(node$0).toStrictEqual({});
-        });
+    });
+  });
+  describe('deleteNode', () => {
+    describe('when node has children', () => {
+      it('should invoke deletion of item and all its children', () => {
+        const store = new GatsbyMobxStore(dataSource);
+        store.setNode(['foo'], 'foo');
+        store.setNode(['foo', 'bar'], 'bar');
+        store.setNode(['foo', 'bar', 'baz'], 'baz');
+        store.deleteNode(['foo']);
+        const gatsbyMobxStoreItem = GatsbyMobxStoreItem as jest.Mock<any, any>;
+        expect(gatsbyMobxStoreItem.mock.calls[0][1]).toBe('foo');
+        expect(gatsbyMobxStoreItem.mock.calls[1][1]).toBe('foo$bar');
+        expect(gatsbyMobxStoreItem.mock.calls[2][1]).toBe('foo$bar$baz');
+        expect(deleteItemMock.mock.calls.length).toBe(3);
+      });
+    });
+    describe('when node does not have children', () => {
+      it('should not invoke any deletions', () => {
+        const store = new GatsbyMobxStore(dataSource);
+        store.setNode(['foo'], 'foo');
+        store.setNode(['foo', 'bar'], 'bar');
+        store.setNode(['foo', 'bar', 'baz'], 'baz');
+        store.deleteNode(['baz']);
+        expect(deleteItemMock.mock.calls.length).toBe(0);
       });
     });
   });
