@@ -27,6 +27,7 @@ const plugins = [
     resolve: 'gatsby-plugin-sitemap',
   },
 ];
+
 const tagManagerEnabled = (process.env.GOOGLE_TAGMANAGER_ENABLED || '1') === '1';
 if (tagManagerEnabled) {
   /**
