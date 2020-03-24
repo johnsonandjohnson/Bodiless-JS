@@ -1,6 +1,7 @@
 const express = require('express');
 
-const activeEnv = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
+const activeEnv =
+  process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
 
 require('dotenv').config({
   path: `.env.${activeEnv}`,
@@ -28,7 +29,8 @@ const plugins = [
   },
 ];
 
-const tagManagerEnabled = (process.env.GOOGLE_TAGMANAGER_ENABLED || '1') === '1';
+const tagManagerEnabled =
+  (process.env.GOOGLE_TAGMANAGER_ENABLED || '1') === '1';
 if (tagManagerEnabled) {
   /**
    * Google Tag Manager plugin.
@@ -67,6 +69,5 @@ module.exports = {
     title: 'BodilessJS',
     logo: '/images/bodiless_logo.png',
   },
-
   plugins,
 };
