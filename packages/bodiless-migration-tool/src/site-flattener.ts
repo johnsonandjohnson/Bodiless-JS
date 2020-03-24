@@ -54,6 +54,7 @@ export enum TransformerRule {
   Replace = 'replace',
   ReplaceString = 'replaceString',
   ToComponent = 'tocomponent',
+  RemoveAttribute = 'removeAttribute',
 }
 
 export interface Transformer {
@@ -61,7 +62,8 @@ export interface Transformer {
   selector: string,
   replacement: string,
   context: string,
-  scope?: ComponentScope
+  scope?: ComponentScope,
+  attributes: string[],
 }
 
 export interface SiteFlattenerParams {
@@ -219,6 +221,37 @@ export class SiteFlattener {
         )
         .forEach(item => htmlParser.replace(item.selector, item.replacement));
     }
+
+    // Cleanup primary attributes to avoid build issue from Helmet.
+    const emptyAttributeRemovalRules = [
+      {
+        selector: 'head link',
+        attributes: ['rel', 'href'],
+      },
+      {
+        selector: 'head meta',
+        attributes: ['name', 'charset', 'http-equiv', 'property', 'itemprop'],
+      },
+      {
+        selector: 'head noscript',
+        attributes: ['innerhtml'],
+      },
+      {
+        selector: 'head link',
+        attributes: ['rel', 'href'],
+      },
+      {
+        selector: 'head script',
+        attributes: ['src', 'innerhtml'],
+      },
+      {
+        selector: 'head style',
+        attributes: ['csstext'],
+      },
+    ];
+    emptyAttributeRemovalRules.forEach(item => {
+      htmlParser.removeEmptyAttribute(item.selector, item.attributes);
+    });
     const pageHtml = htmlParser.getPageHtml();
     return this.transformAttributes(pageHtml);
   }
@@ -236,9 +269,9 @@ export class SiteFlattener {
   }
 
   private getHtmlToComponentsSettings(): HtmlToComponentsSettings {
-    const tranfomers = this.params.transformers || [];
+    const tranformers = this.params.transformers || [];
     const settings: HtmlToComponentsSettings = {
-      rules: tranfomers
+      rules: tranformers
         .filter(item => item.rule === TransformerRule.ToComponent)
         .map(item => ({
           selector: item.selector,

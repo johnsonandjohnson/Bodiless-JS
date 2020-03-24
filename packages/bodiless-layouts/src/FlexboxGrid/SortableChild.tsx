@@ -15,30 +15,15 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import throttle from 'lodash/throttle';
 import { ResizeCallback } from 're-resizable';
-import { TMenuOptionGetter } from '@bodiless/core';
-import SlateSortableResizable, { UI as SortableResizableUI } from '../SlateSortableResizable';
-import {
-  defaultSnapData, SnapData,
-} from './utils/appendTailwindWidthClass';
-import { FlexboxItem, FlexboxItemProps } from './types';
+import SlateSortableResizable from '../SlateSortableResizable';
+import { defaultSnapData } from './utils/appendTailwindWidthClass';
+import { SortableChildProps } from './types';
 
 const RESIZE_THROTTLE_INTERVAL: number = 100;
 const createThrottledOnResizeStop = (onResizeStop: ResizeCallback) => (
   throttle(onResizeStop, RESIZE_THROTTLE_INTERVAL)
 );
 const FALLBACK_SNAP_CLASSNAME = 'w-full';
-
-type SortableChildProps = {
-  flexboxItem: FlexboxItem;
-  onResizeStop(props: FlexboxItemProps): void;
-  getMenuOptions: TMenuOptionGetter;
-  index: number;
-  children: React.ReactNode;
-  ui?: SortableResizableUI;
-  snapData?: SnapData;
-  defaultWidth?: string | number,
-};
-
 
 const SortableChild = (props: SortableChildProps) => {
   const {
@@ -106,7 +91,6 @@ const SortableChild = (props: SortableChildProps) => {
     setTimeout(
       () => {
         if (elm && elm.style.width === snapWidth) {
-          elm.style.width = '';
           elm.style.height = '';
         }
       },
