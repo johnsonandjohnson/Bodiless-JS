@@ -53,8 +53,13 @@ const mergeByKey = (Source: any, Destination: any, Whitelist: any) => {
           console.log(`Merging key '${key}' with value of '${Destination[key]}'`);
           Object.assign(result, { [key]: Destination[key] });
         } else {
-          console.log(`Key '${key}' is not whitelisted. The default value of '${Source[key]}' from '@bodiless/psh' will be used.`);
-          Object.assign(result, { [key]: Source[key] });
+          if (!(key in Source)) {
+            console.log(`Key '${key}' is not whitelisted and not found in '@bodiless/psh' defaults. The value of ${Destination[key]} will be used.`);
+            Object.assign(result, { [key]: Destination[key] });
+          } else {
+            console.log(`Key '${key}' is not whitelisted. The default value of '${Source[key]}' from '@bodiless/psh' will be used.`);
+            Object.assign(result, { [key]: Source[key] });
+          }
         }
       }
     });
@@ -79,7 +84,7 @@ const generateEditYaml = (whitelist: object) => {
 };
 
 const init = () => {
-  const whitelistYaml = readYaml(pshFolder, 'settings.whitelist.yaml');
+  const whitelistYaml = readYaml(`${pshFolder}/resources/.platform/`, 'platform.whitelist.yaml');
 
   copyfiles(
     [`${pshFolder}/resources/.platform/*`, `${siteRootFolder}/.platform`],
