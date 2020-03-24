@@ -29,8 +29,7 @@ const plugins = [
   },
 ];
 
-const tagManagerEnabled =
-  (process.env.GOOGLE_TAGMANAGER_ENABLED || '1') === '1';
+const tagManagerEnabled = (process.env.GOOGLE_TAGMANAGER_ENABLED || '1') === '1';
 if (tagManagerEnabled) {
   /**
    * Google Tag Manager plugin.
@@ -42,7 +41,7 @@ if (tagManagerEnabled) {
       // datalayer to be set before GTM is loaded
       // should be an object or a function that is executed in the browser
       // Defaults to null
-      defaultDataLayer: { platform: 'gatsby' },
+      defaultDataLayer: {},
 
       // Specify optional GTM environment details.
       //gtmAuth: 'YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_AUTH_STRING',
