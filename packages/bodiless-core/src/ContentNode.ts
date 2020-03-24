@@ -13,6 +13,7 @@
  */
 
 import { observable, action } from 'mobx';
+import { isString } from 'util';
 
 class DummyContentNodeStore {
   @observable data = {};
@@ -28,6 +29,7 @@ class DummyContentNodeStore {
 
 export type Actions = {
   setNode(path: string[], data: any): void;
+  deleteNode(path: string[]): void;
 };
 
 export type Getters = {
@@ -40,10 +42,11 @@ type Path = string | string[];
 export type ContentNode<D> = {
   data: D;
   setData: (data: D) => void;
+  delete: (path?: Path) => void;
   keys: string[];
   path: string[];
   child<E extends object>(path: string): ContentNode<E>;
-  peer<E extends object>(path: string): ContentNode<E>;
+  peer<E extends object>(path: Path): ContentNode<E>;
 };
 
 export class DefaultContentNode<D extends object> implements ContentNode<D> {
@@ -79,6 +82,13 @@ export class DefaultContentNode<D extends object> implements ContentNode<D> {
     setNode(this.path, dataObj);
   }
 
+  delete(path?: Path) {
+    const { deleteNode } = this.actions;
+    const path$ = isString(path) ? [path] : path;
+    const path$$ = path$ || this.path;
+    deleteNode(path$$);
+  }
+
   get keys() {
     const { getKeys } = this.getters;
     return getKeys();
@@ -92,8 +102,9 @@ export class DefaultContentNode<D extends object> implements ContentNode<D> {
     const setNode = (p: Path, d: any) => {
       store.setData(d);
     };
+    const deleteNode = () => {};
     const getters = { getNode, getKeys };
-    const actions = { setNode };
+    const actions = { setNode, deleteNode };
     return new DefaultContentNode(actions, getters, path$1);
   }
 }

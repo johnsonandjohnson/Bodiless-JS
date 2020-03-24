@@ -48,6 +48,7 @@ const nodeChildDelimiter = '$';
 
 type Client = {
   savePath(resourcePath: string, data: any): AxiosPromise<any>;
+  deletePath(resourcePath: string): AxiosPromise<any>;
 };
 
 /**
@@ -64,7 +65,7 @@ export default class GatsbyMobxStore {
 
   slug: string | null = null;
 
-  data: any;
+  data: any = {};
 
   constructor(nodeProvider: DataSource) {
     this.setNodeProvider(nodeProvider);
@@ -138,7 +139,7 @@ export default class GatsbyMobxStore {
         // The item should not be removed if it is not clean
         // as far as it may not be delivered to the server yet
         if (item!.isClean()) {
-          this.deleteItem(key);
+          this.deleteItem(key, false);
         }
       }
     });
@@ -149,7 +150,7 @@ export default class GatsbyMobxStore {
   getNode = (keyPath: string[]) => {
     const key = keyPath.join(nodeChildDelimiter);
     const item = this.store.get(key);
-    const storeValue = item ? item.data : null;
+    const storeValue = item && !item.isDeleted ? item.data : null;
     const dataValue = this.data[key];
     return storeValue || dataValue || {};
   };
@@ -158,8 +159,12 @@ export default class GatsbyMobxStore {
     this.store.set(key, item);
   };
 
-  @action deleteItem = (key: string) => {
-    this.store.delete(key);
+  @action deleteItem = (key: string, soft = true) => {
+    if (soft) {
+      const item = this.store.get(key);
+      return item && item.delete();
+    }
+    return this.store.delete(key);
   };
 
   /**
@@ -173,5 +178,21 @@ export default class GatsbyMobxStore {
     } else {
       this.setItem(key, new Item(this, key, value, event));
     }
+  };
+
+  getChildrenNodes = (keyPath: string[]) => {
+    const key = keyPath.join(nodeChildDelimiter);
+    const children = Array.from(this.store)
+      .filter(item => item[0].indexOf(key) === 0 && item[0] !== key);
+    return children;
+  };
+
+  deleteNode = (keyPath: string[]) => {
+    const children = this.getChildrenNodes(keyPath);
+    children.forEach(child => {
+      this.deleteItem(child[0]);
+    });
+    const key = keyPath.join(nodeChildDelimiter);
+    this.deleteItem(key);
   };
 }

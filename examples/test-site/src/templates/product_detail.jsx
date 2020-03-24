@@ -17,6 +17,7 @@ import { flow } from 'lodash';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { BVRatingsSummary, BVReviews } from '@bodiless/bv';
+import { withNode } from '@bodiless/core';
 import {
   withDesign,
   replaceWith,
@@ -46,6 +47,7 @@ const NonEditableTitle = ({ producttitle }) => (
 );
 
 const asProductAccordion = title => flow(
+  withNode,
   asSingleAccordionDefaultStyle,
   withDesign({
     Wrapper: removeClasses('p-1'),

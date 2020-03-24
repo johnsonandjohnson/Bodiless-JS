@@ -100,11 +100,17 @@ const asTestableAccordion = withDesign({
 
 const SingleAccordionClean = flow(
   designable(singleAccordionComponentStart),
-  withNode,
 )(SingleAccordionBase);
 
-const SingleAccordion = asSingleAccordion(SingleAccordionClean);
-const TestableSingleAccordion = asTestableAccordion(SingleAccordionClean);
+const SingleAccordion = flow(
+  asSingleAccordion,
+  withNode,
+)(SingleAccordionClean);
+
+const TestableSingleAccordion = flow(
+  asTestableAccordion,
+  withNode,
+)(SingleAccordionClean);
 
 export default SingleAccordion;
 export {

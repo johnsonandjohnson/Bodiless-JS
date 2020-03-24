@@ -15,7 +15,7 @@ import {
   withDesign, replaceWith, addClasses, stylable,
 } from '@bodiless/fclasses';
 import {
-  List, Editable, asEditableList, withSublist, ListProps, ListTitleProps,
+  List, Editable, asEditableList, withBasicSublist, ListProps, ListTitleProps,
 } from '@bodiless/components';
 ```
 
@@ -49,7 +49,7 @@ item. Empty lists are not supported; any top level list must have at least one i
 
 ## A compound list
 
-The helper function `withSublist` allows us to add a toggled sublist
+The helper function `withBasicSublist` allows us to add a toggled sublist
 to each item of the list. Let's first add some padding to our list so it's easier
 to see the levels. Here we use the Design API with FClasses and the Tailwind CSS
 utility classes.
@@ -66,8 +66,8 @@ Now we can easily create a nested list of any depth. Make one with three levels:
 
 ```
 const InnerList = PaddedList;
-const MiddleList = withSublist(InnerList)(PaddedList);
-const OuterList = withSublist(MiddleList)(SimpleEditableList);
+const MiddleList = withBasicSublist(InnerList)(PaddedList);
+const OuterList = withBasicSublist(MiddleList)(SimpleEditableList);
 ```
 
 This can be added to the page in the same way as the `SimpleList`, but now

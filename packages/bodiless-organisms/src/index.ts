@@ -18,6 +18,7 @@ import {
   asBurgerSubMenu,
   asEditableBurgerSubMenu,
   BurgerMenuClean,
+  withBurgerSubmenu,
 } from './components/BurgerMenu';
 
 export {
@@ -39,6 +40,7 @@ export {
   MenuLink,
   withSubmenu,
 } from './components/MainMenu/index';
+
 
 export {
   Tout,
@@ -68,6 +70,7 @@ export {
   asBurgerSubMenu,
   asEditableBurgerSubMenu,
   BurgerMenuClean,
+  withBurgerSubmenu,
 };
 
 export { Slider };
