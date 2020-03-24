@@ -1,7 +1,6 @@
 const express = require('express');
 
-const activeEnv =
-  process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
+const activeEnv = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
 
 require('dotenv').config({
   path: `.env.${activeEnv}`,
@@ -44,8 +43,8 @@ if (tagManagerEnabled) {
       defaultDataLayer: {},
 
       // Specify optional GTM environment details.
-      //gtmAuth: 'YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_AUTH_STRING',
-      //gtmPreview: 'YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_PREVIEW_NAME',
+      // gtmAuth: 'YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_AUTH_STRING',
+      // gtmPreview: 'YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_PREVIEW_NAME',
       dataLayerName: 'digitalData',
     },
   });
