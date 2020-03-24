@@ -48,7 +48,6 @@
     "find-up": "^4.1.0",
     "gatsby-plugin-emotion": "^2.0.6",
     "gatsby-plugin-google-fonts": "^0.0.4",
-    "gatsby-plugin-google-tagmanager": "^2.1.4",
     "gatsby-plugin-manifest": "^2.0.5",
     "gatsby-plugin-offline": "^2.0.5",
     "gatsby-plugin-react-helmet": "^3.0.0",

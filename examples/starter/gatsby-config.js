@@ -1,6 +1,7 @@
 const express = require('express');
 // Gatsby plugins list.
 const plugins = [
+  'gatsby-plugin-root-import',
   '@bodiless/gatsby-theme-bodiless',
   {
     resolve: 'gatsby-plugin-compile-es6-packages',
@@ -9,7 +10,6 @@ const plugins = [
     },
   },
 ];
-
 
 module.exports = {
   developMiddleware: app => {

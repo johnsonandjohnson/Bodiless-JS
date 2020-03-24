@@ -22,8 +22,8 @@ type GtmEventData = {
 };
 
 type GtmDefaultPageData = {
-  event: string
-  page: object
+  event: string;
+  page: object;
 };
 
 const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
@@ -35,13 +35,15 @@ const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
 
   return stripIndent`${result}`;
 };
+
+const tagManagerEnabled = (process.env.GOOGLE_TAGMANAGER_ENABLED || '1') === '1';
 const withEvent = (
   dataLayerName: string,
   defaultPageData: GtmDefaultPageData,
   nodeKey: string,
   nodeCollection: string,
 ) => (HelmetComponent: CT) => (props: any) => {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'production' && tagManagerEnabled) {
     const { children, ...rest } = props;
     const { node } = useNode(nodeCollection);
     const { data } = node.child<GtmEventData>(nodeKey);

@@ -34,7 +34,7 @@ const setMockNode = (items: any) => {
 process.env.NODE_ENV = 'production';
 const ExampleGTMHelmetEvent = flowRight(
   withEvent(
-    'globalDataLayer',
+    'digitalData',
     {
       event: 'foo',
       page: {

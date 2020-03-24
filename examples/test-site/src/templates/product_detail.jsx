@@ -73,7 +73,7 @@ const ProductWarnAcc = asProductAccordion('Warnings')(SingleAccordionClean);
 const ExampleGTMHelmetEvent = flowRight(
   asBodilessHelmet('datalayer'),
   // On product pages, we may add product related datalayer info:
-  withEvent('globalDataLayer', { event: 'Product Viewed' }, 'product-viewed'),
+  withEvent('digitalData', { event: 'Product Viewed' }, 'product-viewed'),
 )(Helmet);
 
 export default (props: any) => (

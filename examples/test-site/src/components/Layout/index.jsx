@@ -41,7 +41,7 @@ const ExampleHelmet = flowRight(
 const ExampleGTMHelmetEvent = flowRight(
   asBodilessHelmet('datalayer'),
   withEvent(
-    'globalDataLayer',
+    'digitalData',
     {
       event: 'Page Loaded',
       page: {
