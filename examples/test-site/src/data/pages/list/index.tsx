@@ -17,12 +17,13 @@ import { graphql } from 'gatsby';
 import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
-  List, Editable, asEditableList, withBasicSublist, Link,
+  List, Editable, asEditableList, withBasicSublist,
 } from '@bodiless/components';
 import {
   withDesign, replaceWith, addClasses, stylable,
 } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
+import EditableLink from '../../../components/Link';
 
 /**
  * We provide a simple, editable title.
@@ -32,7 +33,7 @@ const SimpleTitle = (props: any) => (
 );
 
 const LinkTitle = (props: any) => (
-  <Link nodeKey="link" {...props}><Editable nodeKey="text" placeholder="Item" /></Link>
+  <EditableLink nodeKey="link" {...props}><Editable nodeKey="text" placeholder="Item" /></EditableLink>
 );
 
 /**
