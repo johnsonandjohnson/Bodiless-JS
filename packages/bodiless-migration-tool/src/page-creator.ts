@@ -63,6 +63,7 @@ export interface PageCreatorParams {
   htmlToComponentsSettings?: HtmlToComponentsSettings,
   reservedPaths?: Array<string>,
   allowFallbackHtml?: boolean,
+  internalDomains: Array<string>,
 }
 
 export class PageCreator {
@@ -76,6 +77,7 @@ export class PageCreator {
       this.params.pageUrl,
       this.params.staticDir,
       this.params.reservedPaths,
+      this.params.internalDomains,
     );
   }
 
@@ -225,7 +227,13 @@ export class PageCreator {
   }
 
   private isUrlExternal(item: string) {
-    return isUrlExternal(this.params.pageUrl, item);
+    const internalUrls = [
+      this.params.pageUrl,
+      ...this.params.internalDomains,
+    ]
+    return !internalUrls.some(internalUrl => {
+      return !isUrlExternal(internalUrl, item);
+    });
   }
 
   private convertTextToAttribute(html: string) {

@@ -68,6 +68,7 @@ export interface Transformer {
 
 export interface SiteFlattenerParams {
   websiteUrl: string,
+  internalDomains: string[],
   workDir: string,
   gitRepository?: string,
   trailingSlash?: TrailingSlash,
@@ -152,13 +153,19 @@ export class SiteFlattener {
     });
     scraper.on('fileReceived', async fileUrl => {
       const downloader = new Downloader(
-        this.params.websiteUrl, this.canvasX.getStaticDir(), this.params.reservedPaths,
+        this.params.websiteUrl,
+        this.canvasX.getStaticDir(),
+        this.params.reservedPaths,
+        this.params.internalDomains,
       );
       await downloader.downloadFiles([fileUrl]);
     });
     scraper.on('requestStarted', async fileUrl => {
       const downloader = new Downloader(
-        this.params.websiteUrl, this.canvasX.getStaticDir(), this.params.reservedPaths,
+        this.params.websiteUrl,
+        this.canvasX.getStaticDir(),
+        this.params.reservedPaths,
+        this.params.internalDomains,
       );
       await downloader.downloadFiles([fileUrl]);
     });
@@ -197,7 +204,11 @@ export class SiteFlattener {
   private transformScrapedHtml(html: string, pageUrl: string): string {
     const htmlParser = new HtmlParser(html);
     htmlParser.transformRelativeToInternal(pageUrl);
-    htmlParser.transformAbsoluteToRelative(pageUrl);
+    const internalUrls = [
+      pageUrl,
+      ...this.params.internalDomains
+    ];
+    htmlParser.transformAbsoluteToRelative(internalUrls);
     htmlParser.transformCfEmailToOrigin();
     htmlParser.transformNewLineInInlineTags();
     if (this.params.trailingSlash === TrailingSlash.Add) {
@@ -310,6 +321,7 @@ export class SiteFlattener {
       allowFallbackHtml: this.params.allowFallbackHtml,
       htmlToComponentsSettings,
       reservedPaths: this.params.reservedPaths,
+      internalDomains: this.params.internalDomains,
     };
     return pageCreatorParams;
   }

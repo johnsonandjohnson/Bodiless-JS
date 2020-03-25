@@ -63,6 +63,7 @@ class MigrationTool extends Command {
     const settings = this.getDefaultSettings();
     const flattenerParams: SiteFlattenerParams = {
       websiteUrl: settings.url,
+      internalDomains: settings.internalDomains || [],
       workDir: this.getWorkDir(),
       gitRepository: this.getGitRepo(),
       reservedPaths: ['404'],

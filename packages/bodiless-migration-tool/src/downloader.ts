@@ -46,10 +46,13 @@ export default class Downloader {
 
   excludePaths: Array<string> | undefined;
 
-  constructor(pageUrl: string, downloadPath: string, excludePaths?: Array<string>) {
+  internalDomains?: Array<string>;
+
+  constructor(pageUrl: string, downloadPath: string, excludePaths?: Array<string>, internalDomains?: Array<string>) {
     this.pageUrl = pageUrl;
     this.downloadPath = downloadPath;
     this.excludePaths = excludePaths;
+    this.internalDomains = internalDomains;
   }
 
   public async downloadFiles(resources: Array<string>) {
@@ -78,7 +81,18 @@ export default class Downloader {
   private filterResources(resources: Array<string>): Array<string> {
     return resources
       // filter external resources
-      .filter(resource => resource && !isUrlExternal(this.pageUrl, resource), this)
+      .filter(resource => {
+        if (!resource) {
+          return false;
+        }
+        const internalDomains = [
+          this.pageUrl,
+          ...(this.internalDomains ? this.internalDomains : [])
+        ];
+        return internalDomains.some(
+          domain => !isUrlExternal(domain, resource)
+        );
+      } , this)
       // filter already downloaded resources
       .filter(resource => {
         const targetPath = this.getTargetPath(resource);

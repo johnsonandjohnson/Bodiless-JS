@@ -42,7 +42,7 @@ interface HtmlParserInterface {
   getImages(): string
   replaceString(oldHtmlString: string, newHtmlString: string): void
   replace(selector: string, newElement: string): void
-  transformAbsoluteToRelative(pageUrl: string): void
+  transformAbsoluteToRelative(internalUrls: string[]): void
   transformRelativeToInternal(pageUrl: string): void
   removeTrailingSlash(pageUrl: string): void
   addTrailingSlash(pageUrl: string): void
@@ -169,10 +169,14 @@ export default class HtmlParser implements HtmlParserInterface {
     });
   }
 
-  transformAbsoluteToRelative(pageUrl: string) {
+  transformAbsoluteToRelative(internalUrls: string[]) {
     this.transformHtmlElementsWithReference((link: string, element: CheerioElement) => {
       if (this.shouldTransformAbsoluteToRelative(link, element)) {
-        return transformAbsoluteUrlToRelative(link, pageUrl);
+        let link$ = link;
+        internalUrls.forEach(internalUrl => {
+          link$ = transformAbsoluteUrlToRelative(link$, internalUrl)
+        });
+        return link$;
       }
       return link;
     });
