@@ -227,9 +227,13 @@ export class PageCreator {
   }
 
   private isUrlExternal(item: string) {
+    const internalUrlsWithoutProtocol = this.params.internalDomains.map(
+      domain => domain.replace('https:', '').replace('http:', '')
+    );
     const internalUrls = [
       this.params.pageUrl,
       ...this.params.internalDomains,
+      ...internalUrlsWithoutProtocol
     ]
     return !internalUrls.some(internalUrl => {
       return !isUrlExternal(internalUrl, item);
