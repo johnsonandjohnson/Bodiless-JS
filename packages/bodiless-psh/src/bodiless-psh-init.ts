@@ -21,8 +21,8 @@ const path = require('path');
 const jsYaml = require('js-yaml');
 const copyfiles = require('copyfiles');
 
-const siteRootFolder = process.env.INIT_CWD || '.';
-const pshFolder = path.resolve();
+const siteRootFolder = process.env.INIT_CWD || path.resolve();
+const pshFolder = path.resolve(__dirname, '..');
 
 const readYaml = (folderPath: string, fileName: string) => {
   const filePath = path.resolve(folderPath, fileName);

@@ -11,8 +11,7 @@
   "scripts": {
     "build": "tsc --version && tsc -p ./tsconfig.json ",
     "build:watch": "npm run build -- --watch",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo",
-    "postinstall": "cross-env ROOT_CWD=$INIT_CWD node ./lib/bodiless-psh-init.js --if-present"
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
   },
   "directories": {
     "lib": "lib"
