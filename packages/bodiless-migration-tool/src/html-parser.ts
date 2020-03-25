@@ -267,7 +267,7 @@ export default class HtmlParser implements HtmlParserInterface {
         const text = $(element).html();
         if (text !== null) {
           const withoutNewLine = text.replace(/\n\s+/g, '\n');
-          $(element).html(withoutNewLine);
+          $(element).text(withoutNewLine);
         }
       }
     });
