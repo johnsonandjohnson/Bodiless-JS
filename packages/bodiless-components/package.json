@@ -38,7 +38,6 @@
     "copyfiles": "^2.1.1",
     "debug": "^4.1.1",
     "enzyme": "^3.9.0",
-    "gatsby-plugin-google-tagmanager": "^2.1.4",
     "informed": "^2.11.8",
     "lodash": "^4.17.11",
     "mobx": "^5.8.0",
