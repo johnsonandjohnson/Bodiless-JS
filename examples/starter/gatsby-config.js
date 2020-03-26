@@ -11,6 +11,7 @@ const plugins = [
   },
 ];
 
+
 module.exports = {
   developMiddleware: app => {
     app.use('/___docs', express.static('doc'));

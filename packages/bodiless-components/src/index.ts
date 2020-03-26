@@ -13,7 +13,7 @@
  */
 
 import Editable, { withPlaceholder, asEditable } from './Editable';
-import Link, { asBodilessLink } from './Link';
+import { asBodilessLink } from './Link';
 import Image, { asBodilessImage } from './Image';
 import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
@@ -41,7 +41,6 @@ import {
 import withEditPlaceholder from './Placeholder';
 
 export {
-  Link,
   asBodilessLink,
   Image,
   asBodilessImage,

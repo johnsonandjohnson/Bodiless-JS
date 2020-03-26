@@ -23,10 +23,11 @@ type FinalUI = {
 
 export type UI = Partial<FinalUI>;
 
-type SortableListProps = {
+export type SortableListProps = {
   children: React.ReactNode[];
   onSortEnd: SortEndHandler;
   ui?: UI;
+  className?: string;
 };
 
 const defaultUI: FinalUI = {
@@ -37,7 +38,7 @@ const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });
 
 const SortableListWrapper = SortableContainer(
   observer(
-    ({ children, ui }: SortableListProps): React.ReactElement<SortableListProps> => {
+    ({ children, ui, ...rest }: SortableListProps): React.ReactElement<SortableListProps> => {
       if (!children || !children.length) {
         const { FlexboxEmpty } = getUI(ui);
         const context = useEditContext();
@@ -50,20 +51,26 @@ const SortableListWrapper = SortableContainer(
         );
       }
       return (
-        <section className="bl-flex bl-flex-wrap bl-py-grid-3" {...useContextActivator()}>{children}</section>
+        <section {...rest} {...useContextActivator()}>{children}</section>
       );
     },
   ),
 );
 SortableListWrapper.displayName = 'SortableListWrapper';
 
-const EditListView = ({ onSortEnd, ui, children }: SortableListProps) => (
+const EditListView = ({
+  onSortEnd,
+  ui,
+  children,
+  ...rest
+}: SortableListProps) => (
   <SortableListWrapper
     axis="xy"
     useDragHandle
     transitionDuration={0}
     onSortEnd={onSortEnd}
     ui={ui}
+    {...rest}
   >
     {children}
   </SortableListWrapper>

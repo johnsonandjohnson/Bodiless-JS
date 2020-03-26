@@ -2,21 +2,32 @@
 
 ## Introduction
 
-The FClasses Design API is designed to allow composed components to expose a
+The Bodiless FClasses Design API is designed to facilitate the implementation of
+a *Design System* in a React application. Before diving into the technical
+details below, it might make sense to read our
+[high level overview of Design Systems in Bodiless](../Design/DesignSystems) to
+better understand the general patterns at work.
+
+At a high level, this API expresses *Design Tokens* as React higher-order
+components, and provides utilities which allow you to apply them to both simple
+elements and compound components. In most cases, the design token HOC's leverage
+"atomic" or "functional" CSS, defining units of design as collections of utility
+classes.
+
+A compound component using this API will expose a styling API (a `design` prop) which
+describes the UI elements of which it is composed. Consumers then supply a
+list of higher-order components which should be applied to each element to modify
+its appearence or behavior. The framework allows nested wrapping of components
+to selectively extend or override individual elements. It also provides a tool
+for adding and removing classes to/from individual elements.
+
+Use of this API allows composed components to expose a
 styling API which remains consistent even when the internal markup of the
 component changes. Consumers of those components can then sustainably extend and
 re-extend their look and feel, with less danger of breakage when the underlying
 component changes.
 
-At a high level, a component using this library will exposes a "design" prop
-which describes the UI elements of which it is composed. Consumers then supply a
-list of higher-order components which will be applied to each element to modify
-its appearence or behavior. The framework allows nested wrapping of components
-to selectively extend or override individual elements. It also provides a tool
-for adding and removing classes to/from individual elements, encouraging a
-pattern of "atomic" or "functional" CSS.
-
-## Styling with FClasses
+## Styling Elements with FClasses
 
 ### Functional CSS
 
@@ -339,3 +350,9 @@ A few notes:
 - We must use the `.flow` property of `addClasses()` because of a peculiar type
   inference problem in `flow` when a HOC function has its own properties or
   methods. See [tsflow.test.tsx](./__tests__/tsflow.test.jsx) for an example.
+
+  ## Design Variants
+
+  One of the most powerful features of the Design API is the ability to
+  create multiple variants of a component by composing different tokens
+  onto it.

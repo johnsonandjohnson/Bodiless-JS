@@ -21,7 +21,7 @@
   },
   "scripts": {
     "build": "tsc -p ./tsconfig.json && npm run build:css && npm run copy",
-    "build:css": "tailwind build ./index.tailwind.css -c ./bodiless.tailwind.config.js -o ./src/bodiless.index.css",
+    "build:css": "postcss index.tailwind.css -o ./src/bodiless.index.css",
     "build:watch": "npm run build -- --watch",
     "copy": "copyfiles -u 1 \"./src/*.css\" \"./lib/\"",
     "lint": "tslint ./src/**/*.ts?x",
