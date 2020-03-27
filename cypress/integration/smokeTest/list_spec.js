@@ -95,7 +95,7 @@ describe('List (text and link versions) testing', function () {
   })
 
 
-  it('list: 1.7 - checking deleting a text list item and the text sublist items', () => {
+  it.skip('list: 1.7 - checking deleting a text list item and the text sublist items', () => {
     cy.clickEdit();
     [topTextListItem[1], topTextListItem1Sublist[1], topTextListItem1Sublist[0]].forEach((element) => {
       deleteListItem(element)
@@ -103,7 +103,7 @@ describe('List (text and link versions) testing', function () {
   })
 
 
-  it('list: 1.8 - checking the deleted text list item and the text sublist items in Preview Mode', () => {
+  it.skip('list: 1.8 - checking the deleted text list item and the text sublist items in Preview Mode', () => {
     cy.wait(2000)
     cy.clickEdit();
     [topTextListItem[1], topTextListItem1Sublist[1], topTextListItem1Sublist[0]].forEach((element) => {
@@ -197,7 +197,7 @@ describe('List (text and link versions) testing', function () {
   })
 
 
-  it('list: 2.9 - checking deleting a link list item and the link sublist items', () => {
+  it.skip('list: 2.9 - checking deleting a link list item and the link sublist items', () => {
     cy.clickEdit();
     [topLinkListItem[1], topLinkListItem1Sublist[1], topLinkListItem1Sublist[0]].forEach((element) => {
       deleteListItem(element)
@@ -205,7 +205,7 @@ describe('List (text and link versions) testing', function () {
   })
 
 
-  it('list: 2.10 - checking the deleted link list item and the deleted link sublist items in Preview Mode', () => {
+  it.skip('list: 2.10 - checking the deleted link list item and the deleted link sublist items in Preview Mode', () => {
     cy.wait(2000)
     cy.clickEdit();
     [topLinkListItem[1], topLinkListItem1Sublist[1], topLinkListItem1Sublist[0]].forEach((element) => {
