@@ -13,7 +13,7 @@
  */
 
 import Editable, { withPlaceholder, asEditable } from './Editable';
-import Link, { asBodilessLink } from './Link';
+import { asBodilessLink } from './Link';
 import Image, { asBodilessImage } from './Image';
 import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
@@ -29,8 +29,10 @@ import asBasicSublist from './List/asBasicSublist';
 import withSublist, { withBasicSublist } from './List/withSublist';
 import withDeleteSublistOnUnwrap from './List/withDeleteSublistOnUnwrap';
 import {
-  withMeta, withMetaTitle, withMetaHtml, asBodilessHelmet,
+  withMeta, withMetaTitle, withMetaHtml,
 } from './Meta/Meta';
+import asBodilessHelmet from './Helmet/Helemet';
+import withEvent from './GTM/gtm';
 import {
   withToggle,
   withToggleTo,
@@ -39,7 +41,6 @@ import {
 import withEditPlaceholder from './Placeholder';
 
 export {
-  Link,
   asBodilessLink,
   Image,
   asBodilessImage,
@@ -66,4 +67,5 @@ export {
   withMetaHtml,
   asBodilessHelmet,
   withEditPlaceholder,
+  withEvent,
 };

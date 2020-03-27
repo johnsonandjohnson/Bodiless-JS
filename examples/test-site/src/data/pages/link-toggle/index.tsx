@@ -14,10 +14,11 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import { withLinkToggle, Editable, Link } from '@bodiless/components';
+import { withLinkToggle, Editable } from '@bodiless/components';
 import Layout from '../../../components/Layout';
+import EditableLink from '../../../components/Link';
 
-const LinkToggle = withLinkToggle(Link);
+const LinkToggle = withLinkToggle(EditableLink);
 
 export default (props: any) => (
   <Page {...props}>
