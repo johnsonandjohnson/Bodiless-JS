@@ -43,13 +43,14 @@ const defaultBodyValue = {
   text: 'Default Tout Body',
 };
 
+// ToDo: validate if it is an acceptable way to specify default value for the link
 const defaultLink = {
-  text: 'Default Link',
+  href: 'https://example.com',
+  text: 'Default Link'
 };
 
 // ToDo: there is a bug that when a subcomponent is reverted then other components are reverted too
 // ToDo: there is a concern that reverting link text reverts the href value as well
-// ToDo: find a way how to inject default value for the link href
 const ToutWithDefaultContent = withDesign({
   Image: flow(
     withContentfulContextMenu,
