@@ -48,7 +48,8 @@
     "react-dropzone": "^10.1.5",
     "react-helmet": "^5.2.0",
     "slate": "^0.44.12",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "common-tags": "^1.8.0"
   },
   "peerDependencies": {
     "react": "^16.8.4",
@@ -56,6 +57,7 @@
   },
   "devDependencies": {
     "@types/rc-tooltip": "^3.7.1",
-    "@types/uuid": "^3.4.4"
+    "@types/uuid": "^3.4.4",
+    "@types/common-tags": "^1.8.0"
   }
 }
