@@ -49,23 +49,24 @@ const defaultLink = {
   text: 'Default Link'
 };
 
-// ToDo: there is a bug that when a subcomponent is reverted then other components are reverted too
+// ToDo: a key should be injected to withContentfulContextMenu in order to have ability
+// to revert subcomponent by subcomponent
 // ToDo: there is a concern that reverting link text reverts the href value as well
 const ToutWithDefaultContent = withDesign({
   Image: flow(
-    withContentfulContextMenu,
+    withContentfulContextMenu('image'),
     withContent(defaultImageValue), 
   ),
   Title: flow(
-    withContentfulContextMenu,
+    withContentfulContextMenu('title'),
     withContent(defaultTitleValue), 
   ),
   Body: flow(
-    withContentfulContextMenu,
+    withContentfulContextMenu('body'),
     withContent(defaultBodyValue), 
   ),
   Link: flow(
-    withContentfulContextMenu,
+    withContentfulContextMenu('cta'),
     withContent(defaultLink), 
   ),
 })(Tout);

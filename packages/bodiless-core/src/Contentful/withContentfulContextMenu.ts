@@ -20,22 +20,23 @@ import {
 } from '../hoc';
 import { useNode } from '../NodeProvider';
 
-const useGetMenuOptions = () => {
+const useGetMenuOptions = (nodeKey?: string) => () => {
   const { node } = useNode();
+  const path = nodeKey ? node.path.concat([nodeKey]) : node.path;
   // TODO: we should disable or remove the button when the node is already reverted
   return () => ([
     {
       icon: 'undo',
       name: 'Revert',
-      handler: () => node.delete(),
+      handler: () => node.delete(path),
       local: true,
       global: false,
     },
   ]);
 };
 
-const withContentfulContextMenu = flowRight(
-  withMenuOptions({ useGetMenuOptions }),
+const withContentfulContextMenu = (nodeKey?: string) => flowRight(
+  withMenuOptions({ useGetMenuOptions: useGetMenuOptions(nodeKey) }),
   withContextActivator('onClick'),
   withLocalContextMenu,
 );
