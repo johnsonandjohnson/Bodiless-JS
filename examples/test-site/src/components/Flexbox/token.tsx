@@ -4,7 +4,7 @@ import {
 } from '@bodiless/fclasses';
 
 const asFlexboxWithMargins = withDesign({
-  Wrapper: addClasses('-m-5'),
+  Wrapper: addClasses('-mx-5'),
   ComponentWrapper: addClasses('p-5'),
 });
 
