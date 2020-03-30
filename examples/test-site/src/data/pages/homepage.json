@@ -13,6 +13,13 @@
         "className": "w-full lg:w-1/2"
       },
       "type": "ToutHorizontalWithTitleBodyWithCTA"
+    },
+    {
+      "uuid": "49259100-726a-11ea-a28b-f177d64313a2",
+      "wrapperProps": {
+        "className": " lg:w-1/2"
+      },
+      "type": "WantToLearnMore"
     }
   ]
 }

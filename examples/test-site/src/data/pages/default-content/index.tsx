@@ -13,63 +13,9 @@
  */
 import React from 'react';
 import { graphql } from 'gatsby';
-import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import {
-  withContent,
-  withContentfulContextMenu,
-} from '@bodiless/core';
-import {
-  Image
-} from '@bodiless/components';
-import {
-  withDesign
-} from '@bodiless/fclasses';
-import {
-  Tout
-} from '@bodiless/organisms';
 import Layout from '../../../components/Layout';
-
-const defaultImageValue = {
-  src: '/images/jandjwebsite.jpg',
-  alt: 'Default Image Text',
-};
-
-const defaultTitleValue = {
-  text: 'Default Tout Title',
-};
-
-const defaultBodyValue = {
-  text: 'Default Tout Body',
-};
-
-// ToDo: validate if it is an acceptable way to specify default value for the link
-const defaultLink = {
-  href: 'https://example.com',
-  text: 'Default Link'
-};
-
-// ToDo: a key should be injected to withContentfulContextMenu in order to have ability
-// to revert subcomponent by subcomponent
-// ToDo: there is a concern that reverting link text reverts the href value as well
-const ToutWithDefaultContent = withDesign({
-  Image: flow(
-    withContentfulContextMenu('image'),
-    withContent(defaultImageValue), 
-  ),
-  Title: flow(
-    withContentfulContextMenu('title'),
-    withContent(defaultTitleValue), 
-  ),
-  Body: flow(
-    withContentfulContextMenu('body'),
-    withContent(defaultBodyValue), 
-  ),
-  Link: flow(
-    withContentfulContextMenu('cta'),
-    withContent(defaultLink), 
-  ),
-})(Tout);
+import WantToLearnMore from '../../../components/Contentful/Tout/WantToLearnMore';
 
 export default (props: any) => (
   <Page {...props}>
@@ -82,7 +28,7 @@ export default (props: any) => (
       </div>
       <div className="ml-10">
         <h2>Taco with default content</h2>
-        <ToutWithDefaultContent nodeKey="tout" />
+        <WantToLearnMore nodeKey="tout" />
       </div>
     </Layout>
   </Page>

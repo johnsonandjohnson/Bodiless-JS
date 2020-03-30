@@ -20,16 +20,45 @@ import {
   Image, Editable, List, asEditableList,
 } from '@bodiless/components';
 import {
-  withDesign, replaceWith, addClasses, stylable,
+  withDesc,
+} from '@bodiless/layouts';
+import {
+  withDesign,
+  replaceWith,
+  addClasses,
+  stylable,
 } from '@bodiless/fclasses';
 import Layout from '../../components/Layout';
 import { FlexBoxDefault } from '../../components/Flexbox';
+import { withType } from '../../components/Flexbox/Categories';
+import {
+  GivingBackToCommunity,
+  WantToLearnMore,
+ } from '../../components/Contentful/Tout';
 
 const HOME_PAGE_PATH = 'homepage';
 
 const BulletPoints = (props: any) => (
   <span {...props}><Editable nodeKey="bullet" placeholder="Enter Bullet Item" /></span>
 );
+
+const contentfulItems = {
+  GivingBackToCommunity: flow(
+    replaceWith(GivingBackToCommunity),
+    withDesc('Giving Back To Community'),
+    withType('Contentful')(),
+  ),
+  WantToLearnMore: flow(
+    replaceWith(WantToLearnMore),
+    withDesc('Want to learn more?'),
+    withType('Contentful')(),
+  ),
+};
+
+// ToDo: validate flexbox api is used correctly
+const FlexBox = flow(
+  withDesign(contentfulItems),
+)(FlexBoxDefault);
 
 const EditableBulletPoints = flow(
   asEditableList,
@@ -52,7 +81,7 @@ const HomePage = (props: any) => (
       <div className="">
         <EditableBulletPoints nodeKey="bulletpoints" />
       </div>
-      <FlexBoxDefault
+      <FlexBox
         nodeKey={HOME_PAGE_PATH}
       />
     </Layout>
