@@ -20,6 +20,13 @@
         "className": " lg:w-1/2"
       },
       "type": "WantToLearnMore"
+    },
+    {
+      "uuid": "14fc9bd0-7279-11ea-83bb-af9a8f870110",
+      "wrapperProps": {
+        "className": " lg:w-1/2"
+      },
+      "type": "GivingBackToCommunity"
     }
   ]
 }

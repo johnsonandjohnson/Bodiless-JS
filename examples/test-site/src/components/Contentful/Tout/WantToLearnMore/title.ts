@@ -27,7 +27,7 @@ export default {
             "leaves": [
               {
                 "object": "leaf",
-                "text": "Giving back to community",
+                "text": 'Want to learn more?',
                 "marks": []
               }
             ]
