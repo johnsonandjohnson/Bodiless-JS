@@ -34,7 +34,7 @@ import { withType } from '../../components/Flexbox/Categories';
 import {
   GivingBackToCommunity,
   WantToLearnMore,
- } from '../../components/Contentful/Tout';
+} from '../../components/Contentful/Tout';
 
 const HOME_PAGE_PATH = 'homepage';
 

@@ -12,9 +12,9 @@
  * limitations under the License.
  */
 
-import Image from "./SiteBuildGuide.jpg";
+import Image from './SiteBuildGuide.jpg';
 
 export default {
   src: Image,
-  alt: "Site Build Guide"
+  alt: 'Site Build Guide',
 };

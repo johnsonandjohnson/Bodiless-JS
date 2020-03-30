@@ -13,27 +13,27 @@
  */
 
 export default {
-  "document": {
-    "object": "document",
-    "data": {},
-    "nodes": [
+  document: {
+    object: 'document',
+    data: {},
+    nodes: [
       {
-        "object": "block",
-        "type": "paragraph",
-        "data": {},
-        "nodes": [
+        object: 'block',
+        type: 'paragraph',
+        data: {},
+        nodes: [
           {
-            "object": "text",
-            "leaves": [
+            object: 'text',
+            leaves: [
               {
-                "object": "leaf",
-                "text": "BodilessJS is being developed at J&J to meet specific use-cases in the consumer marketing space. ",
-                "marks": []
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+                object: 'leaf',
+                text: 'BodilessJS is being developed at J&J to meet specific use-cases in the consumer marketing space. ',
+                marks: [],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 };

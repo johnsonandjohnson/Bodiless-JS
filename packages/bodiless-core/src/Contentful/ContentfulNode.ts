@@ -19,8 +19,9 @@ type Path = string | string[];
 // TODO: since we want to adjust data method only and proxy other ContentNode methods
 // consider a way how to avoid duplicating all methods that ContentNode has
 // TODO: this class should expose a method that allows to check if node has value in store
-export class ContentfulNode<D extends object> implements ContentNode<D> {
+export default class ContentfulNode<D extends object> implements ContentNode<D> {
   private node: ContentNode<D>;
+
   private content: D;
 
   constructor(contentNode: ContentNode<D>, content: D) {

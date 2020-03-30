@@ -13,27 +13,27 @@
  */
 
 export default {
-  "document": {
-    "object": "document",
-    "data": {},
-    "nodes": [
+  document: {
+    object: 'document',
+    data: {},
+    nodes: [
       {
-        "object": "block",
-        "type": "paragraph",
-        "data": {},
-        "nodes": [
+        object: 'block',
+        type: 'paragraph',
+        data: {},
+        nodes: [
           {
-            "object": "text",
-            "leaves": [
+            object: 'text',
+            leaves: [
               {
-                "object": "leaf",
-                "text": 'Want to learn more?',
-                "marks": []
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+                object: 'leaf',
+                text: 'Want to learn more?',
+                marks: [],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 };

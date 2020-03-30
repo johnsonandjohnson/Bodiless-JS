@@ -12,13 +12,13 @@
  * limitations under the License.
  */
 
-import React, { HTMLProps, FC } from 'react';
-import { mount, shallow } from 'enzyme';
+import React, { FC } from 'react';
+import { mount } from 'enzyme';
 import { flow } from 'lodash';
-import { ContentNode, DefaultContentNode } from '../src/ContentNode';
+import { DefaultContentNode } from '../src/ContentNode';
 import NodeProvider, { useNode } from '../src/NodeProvider';
 import withNode, { withNodeKey } from '../src/withNode';
-import withContent from '../src/Contentful/WithContent';
+import withContent from '../src/Contentful/withContent';
 
 const mockedActions = {
   setNode: jest.fn(),
@@ -29,31 +29,29 @@ interface Store {
   [key: string]: string | undefined | object;
 }
 
-const createGetters = (store: Store) => {
-  return {
-    getNode: (path: string[]) => {
-      const key = path.join('$');
-      return store[key] || '';
-    },
-    getKeys: jest.fn(),
-  }
-}
+const createGetters = (store: Store) => ({
+  getNode: (path: string[]) => {
+    const key = path.join('$');
+    return store[key] || '';
+  },
+  getKeys: jest.fn(),
+});
 
 const createRootNode = (store: Store) => {
-  const RootNode: FC = ( {children} ) => {
+  const RootNode: FC = ({ children }) => {
     const node = new DefaultContentNode(mockedActions, createGetters(store), 'root');
     return (
       <NodeProvider node={node}>
         {children}
       </NodeProvider>
     );
-  }
+  };
   return RootNode;
-}
+};
 
 const defaultStore = {
-  'root$foo': 'fooValue',
-  'root$foo$bar': 'barValue',
+  root$foo: 'fooValue',
+  root$foo$bar: 'barValue',
 };
 
 describe('withContent', () => {
@@ -65,7 +63,7 @@ describe('withContent', () => {
         const { node } = useNode();
         const { data } = node;
         return <>{data}</>;
-      }
+      };
       const FooWithNode = flow(
         withNode,
         withNodeKey('foo'),
@@ -73,12 +71,12 @@ describe('withContent', () => {
       )(Foo);
       const RootNode = createRootNode({
         ...defaultStore,
-        'root$foo': 'fooValue',
+        root$foo: 'fooValue',
       });
       const wrapper = mount(
         <RootNode>
           <FooWithNode />
-        </RootNode>
+        </RootNode>,
       );
       expect(wrapper.find('Foo').html()).toBe('fooValue');
     });
@@ -89,7 +87,7 @@ describe('withContent', () => {
         const { node } = useNode();
         const { data } = node;
         return <>{data}</>;
-      }
+      };
       const FooWithNode = flow(
         withNode,
         withNodeKey('foo'),
@@ -97,12 +95,12 @@ describe('withContent', () => {
       )(Foo);
       const RootNode = createRootNode({
         ...defaultStore,
-        'root$foo': {},
+        root$foo: {},
       });
       const wrapper = mount(
         <RootNode>
           <FooWithNode />
-        </RootNode>
+        </RootNode>,
       );
       expect(wrapper.find('Foo').html()).toBe('defaultFooContent');
     });
@@ -114,7 +112,7 @@ describe('withContent', () => {
         const { node } = useNode();
         const { data } = node;
         return <>{data}</>;
-      }
+      };
       const FooWithNode = flow(
         withNode,
         withNodeKey('foo'),
@@ -122,12 +120,12 @@ describe('withContent', () => {
       )(Foo);
       const RootNode = createRootNode({
         ...defaultStore,
-        'root$foo': undefined,
+        root$foo: undefined,
       });
       const wrapper = mount(
         <RootNode>
           <FooWithNode />
-        </RootNode>
+        </RootNode>,
       );
       expect(wrapper.find('Foo').html()).toBe('defaultFooContent');
     });

@@ -12,12 +12,10 @@
  * limitations under the License.
  */
 
- import { ContentfulNode } from './ContentfulNode';
- import withContent from './withContent';
- import withContentfulContextMenu from './withContentfulContextMenu';
+import withContent from './withContent';
+import withContentfulContextMenu from './withContentfulContextMenu';
 
- export {
-  ContentfulNode,
+export {
   withContent,
   withContentfulContextMenu,
- }
+};

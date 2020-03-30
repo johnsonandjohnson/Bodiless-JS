@@ -13,27 +13,27 @@
  */
 
 export default {
-  "document": {
-    "object": "document",
-    "data": {},
-    "nodes": [
+  document: {
+    object: 'document',
+    data: {},
+    nodes: [
       {
-        "object": "block",
-        "type": "paragraph",
-        "data": {},
-        "nodes": [
+        object: 'block',
+        type: 'paragraph',
+        data: {},
+        nodes: [
           {
-            "object": "text",
-            "leaves": [
+            object: 'text',
+            leaves: [
               {
-                "object": "leaf",
-                "text": "A step by step tutorial on how to work with BodilessJS to build out a basic editable site.",
-                "marks": []
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+                object: 'leaf',
+                text: 'A step by step tutorial on how to work with BodilessJS to build out a basic editable site.',
+                marks: [],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 };

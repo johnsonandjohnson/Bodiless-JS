@@ -14,7 +14,7 @@
 
 import React, { ComponentType as CT } from 'react';
 import NodeProvider, { useNode } from '../NodeProvider';
-import { ContentfulNode } from './ContentfulNode';
+import ContentfulNode from './ContentfulNode';
 
 const withContent = <P extends object>(content: any) => (Component: CT<P>) => {
   const WithContent = (props: P) => {
@@ -25,8 +25,8 @@ const withContent = <P extends object>(content: any) => (Component: CT<P>) => {
         <Component {...props} />
       </NodeProvider>
     );
-  }
+  };
   return WithContent;
-}
+};
 
 export default withContent;

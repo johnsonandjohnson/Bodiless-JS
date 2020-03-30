@@ -12,10 +12,10 @@
  * limitations under the License.
  */
 
- import GivingBackToCommunity from './GivingBackToCommunity';
- import WantToLearnMore from './WantToLearnMore';
+import GivingBackToCommunity from './GivingBackToCommunity';
+import WantToLearnMore from './WantToLearnMore';
 
- export {
+export {
   GivingBackToCommunity,
   WantToLearnMore,
- }
+};

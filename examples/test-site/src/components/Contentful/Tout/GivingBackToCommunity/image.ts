@@ -12,9 +12,9 @@
  * limitations under the License.
  */
 
-import Image from "./jandjwebsite.jpg";
+import Image from './jandjwebsite.jpg';
 
 export default {
   src: Image,
-  alt: "Johnson & Johnson's website"
+  alt: "Johnson & Johnson's website",
 };

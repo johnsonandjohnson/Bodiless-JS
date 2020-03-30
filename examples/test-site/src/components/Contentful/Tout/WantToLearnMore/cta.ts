@@ -13,32 +13,32 @@
  */
 
 const ctaText = {
-  "document": {
-    "object": "document",
-    "data": {},
-    "nodes": [
+  document: {
+    object: 'document',
+    data: {},
+    nodes: [
       {
-        "object": "block",
-        "type": "paragraph",
-        "data": {},
-        "nodes": [
+        object: 'block',
+        type: 'paragraph',
+        data: {},
+        nodes: [
           {
-            "object": "text",
-            "leaves": [
+            object: 'text',
+            leaves: [
               {
-                "object": "leaf",
-                "text": "Visit Johnson & Johnson",
-                "marks": []
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
-}
+                object: 'leaf',
+                text: 'Visit Johnson & Johnson',
+                marks: [],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+};
 
 export default {
-  href: "http://localhost:3000/#/About/SiteBuildBasics",
-  ctaText: ctaText,
+  href: 'http://localhost:3000/#/About/SiteBuildBasics',
+  ctaText,
 };
