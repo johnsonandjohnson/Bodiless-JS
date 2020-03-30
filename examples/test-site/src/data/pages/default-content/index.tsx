@@ -16,7 +16,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../../../components/Layout';
-import WantToLearnMore from '../../../components/Contentful/Tout/WantToLearnMore';
+import { WantToLearnMore } from '../../../components/Contentful/Tout';
 
 export default (props: any) => (
   <Page {...props}>

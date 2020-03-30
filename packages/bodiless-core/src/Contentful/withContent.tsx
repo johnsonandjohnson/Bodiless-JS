@@ -16,7 +16,7 @@ import React, { ComponentType as CT } from 'react';
 import NodeProvider, { useNode } from '../NodeProvider';
 import ContentfulNode from './ContentfulNode';
 
-const withContent = <P extends object>(content: any) => (Component: CT<P>) => {
+const withContent = <P extends object>(content: object | string | Function) => (Component: CT<P>) => {
   const WithContent = (props: P) => {
     const { node } = useNode();
     const nodeWithDefaultContent = new ContentfulNode(node, content);

@@ -19,6 +19,7 @@ import Tout from '../../../Tout';
 // ToDo: consider if we want to have asToutHorizontal here
 import { asToutHorizontal, asToutDefaultStyle } from '../../../Tout/token';
 import asContentfulTout from '../../asContenfulTout';
+import withCTAContent from '../../withCTAContent';
 import title from './title';
 import body from './body';
 import image from './image';
@@ -36,9 +37,7 @@ const WantToLearnMore = flow(
     Title: withContent(title),
     // ToDo: bug. page refresh is required in order to get reverted changes.
     Body: withContent(body),
-    // ToDo: validate if it is an acceptable way to specify default value for the link
-    // ToDo: link text is not displayed in taco cta
-    Link: withContent(cta),
+    Link: withCTAContent(cta),
   }),
 )(Tout);
 

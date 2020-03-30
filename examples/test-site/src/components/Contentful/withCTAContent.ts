@@ -12,35 +12,24 @@
  * limitations under the License.
  */
 
-const ctaText = {
-  document: {
-    object: 'document',
-    data: {},
-    nodes: [
-      {
-        object: 'block',
-        type: 'paragraph',
-        data: {},
-        nodes: [
-          {
-            object: 'text',
-            leaves: [
-              {
-                object: 'leaf',
-                text: 'View Site Build Basics',
-                marks: [],
-              },
-            ],
-          },
-        ],
-      },
-    ],
+import { withContent } from '@bodiless/core';
+
+type CTA = {
+  link: {
+    href: string;
   },
+  text: object;
+}
+
+const withCTAContent = (cta: CTA) => {
+  return withContent((key: string) => {
+    switch(key) {
+      case 'cta':
+        return cta.link;
+      case 'cta$ctaText':
+        return cta.text;  
+    }
+  });
 };
 
-export default {
-  link: {
-    href: 'http://localhost:3000/#/About/SiteBuildBasics'
-  },
-  text: ctaText,
-};
+export default withCTAContent;

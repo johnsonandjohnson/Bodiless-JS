@@ -27,7 +27,7 @@ const ctaText = {
             leaves: [
               {
                 object: 'leaf',
-                text: 'View Site Build Basics',
+                text: 'Visit Johnson & Johnson',
                 marks: [],
               },
             ],
@@ -39,6 +39,8 @@ const ctaText = {
 };
 
 export default {
-  href: 'http://localhost:3000/#/About/SiteBuildBasics',
-  ctaText,
+  link: {
+    href: 'https://www.jnj.com/',
+  },
+  text: ctaText,
 };

@@ -20,19 +20,38 @@ type Path = string | string[];
 // consider a way how to avoid duplicating all methods that ContentNode has
 // TODO: this class should expose a method that allows to check if node has value in store
 export default class ContentfulNode<D extends object> implements ContentNode<D> {
+  private baseNodePath: string[];
+
   private node: ContentNode<D>;
 
   private content: D;
 
-  constructor(contentNode: ContentNode<D>, content: D) {
+  constructor(contentNode: ContentNode<D>, content: D, baseNodePath?: string[]) {
     this.node = contentNode;
+    this.baseNodePath = baseNodePath || contentNode.path;
     this.content = content;
+  }
+
+  private getContentfulNodeKey() {
+    const baseNodeKey = this.baseNodePath.join('$');
+    const nodeKey = this.node.path.join('$');
+    if (nodeKey.startsWith(baseNodeKey)) {
+      return nodeKey.substring(baseNodeKey.length + 1);
+    }
+    return nodeKey;
+  }
+
+  private getDefaultContent() {
+    if (typeof this.content !== 'function') {
+      return this.content;
+    }
+    return this.content(this.getContentfulNodeKey());
   }
 
   get data() {
     const nodeData = this.node.data;
     const isNodeDataEmpty = Object.keys(nodeData).length === 0;
-    return !isNodeDataEmpty ? nodeData : this.content;
+    return !isNodeDataEmpty ? nodeData : this.getDefaultContent();
   }
 
   setData(dataObj: D) {
@@ -53,7 +72,7 @@ export default class ContentfulNode<D extends object> implements ContentNode<D> 
 
   peer<E extends object>(path: Path) {
     const contentNode = this.node.peer(path);
-    return new ContentfulNode(contentNode, this.content) as unknown as ContentNode<E>;
+    return new ContentfulNode(contentNode, this.content, this.baseNodePath) as unknown as ContentNode<E>;
   }
 
   // ToDo: avoid copy pasting from DefaultContentNode class
