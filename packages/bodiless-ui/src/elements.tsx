@@ -37,10 +37,6 @@ export const Anchor = stylable<HTMLProps<HTMLAnchorElement>>('a');
 const CheckBoxBase: FC<HTMLProps<HTMLInputElement>> = props => <input {...props} type="checkbox" />;
 export const CheckBox = stylable(CheckBoxBase);
 
-export const StyledLink = addClasses(
-  'bl-text-primary hover:bl-underline',
-)(Anchor);
-
 export const Icon = flow(
   addClasses('bl-rounded bl-p-grid-1 material-icons'),
   withoutProps<ButtonVariantProps>(['isActive']),

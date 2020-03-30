@@ -30,7 +30,6 @@ import {
   withoutProps,
 } from '@bodiless/core';
 import { flowRight } from 'lodash';
-import { StyledLink } from '@bodiless/ui';
 
 // Type of the data used by this component.
 export type Data = {
@@ -104,5 +103,5 @@ export const asBodilessLink = (nodeKey?: string) => flowRight(
   ),
   withData,
 ) as Bodiless<Props, Props & Partial<WithNodeProps>>;
-const Link = asBodilessLink()(StyledLink);
+const Link = asBodilessLink()('a');
 export default Link;
