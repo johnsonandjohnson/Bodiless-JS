@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import Image from "./jandjwebsite.jpg";
+import Image from "./SiteBuildGuide.jpg";
 
 export default {
   src: Image,
