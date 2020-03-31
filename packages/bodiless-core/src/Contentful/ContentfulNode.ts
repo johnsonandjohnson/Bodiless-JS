@@ -19,7 +19,7 @@ type Path = string | string[];
 // TODO: since we want to adjust data method only and proxy other ContentNode methods
 // consider a way how to avoid duplicating all methods that ContentNode has
 // TODO: this class should expose a method that allows to check if node has value in store
-export default class ContentfulNode<D extends object> implements ContentNode<D> {
+export default class ContentfulNode<D extends object | Function> implements ContentNode<D> {
   private baseNodePath: string[];
 
   private node: ContentNode<D>;
@@ -42,10 +42,12 @@ export default class ContentfulNode<D extends object> implements ContentNode<D> 
   }
 
   private getDefaultContent() {
-    if (typeof this.content !== 'function') {
-      return this.content;
+    if (typeof this.content === "function") {
+      const nodeKey = this.getContentfulNodeKey();
+      // @ts-ignore ToDo: remediate this one
+      return this.content(nodeKey);
     }
-    return this.content(this.getContentfulNodeKey());
+    return this.content;
   }
 
   get data() {

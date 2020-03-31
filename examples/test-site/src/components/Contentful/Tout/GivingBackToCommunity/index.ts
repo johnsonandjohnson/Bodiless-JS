@@ -13,32 +13,34 @@
  */
 
 import { flow } from 'lodash';
-import { withContent } from '@bodiless/core';
 import { withDesign } from '@bodiless/fclasses';
-import Tout from '../../../Tout';
+import { ToutClean } from '@bodiless/organisms';
 // ToDo: consider if we want to have asToutHorizontal here
 import { asToutHorizontal, asToutDefaultStyle } from '../../../Tout/token';
+import asEditableImageWithContent from '../../asEditableImageWithContent';
+import asSimpleEditorWithContent from '../../asSimpleEditorWithContent';
 import asContentfulTout from '../../asContenfulTout';
 import withCTAContent from '../../withCTAContent';
-import title from './title';
-import body from './body';
-import image from './image';
-import cta from './cta';
+import titleContent from './title';
+import bodyContent from './body';
+import imageContent from './image';
+import ctaContent from './cta';
 
 // ToDo: a key should be injected to withContentfulContextMenu in order to have ability
 // to revert subcomponent by subcomponent
 // ToDo: there is a concern that reverting link text reverts the href value as well
-const WantToLearnMore = flow(
+
+const GivingBackToCommunity = flow(
+  withDesign({
+    Image: asEditableImageWithContent('image', imageContent),
+    Title: asSimpleEditorWithContent('title', titleContent),
+    // ToDo: bug. page refresh is required in order to get reverted changes.
+    Body: asSimpleEditorWithContent('body', bodyContent),
+    //Link: withCTAContent(ctaContent),
+  }),
+  asContentfulTout,
   asToutDefaultStyle,
   asToutHorizontal,
-  asContentfulTout,
-  withDesign({
-    Image: withContent(image),
-    Title: withContent(title),
-    // ToDo: bug. page refresh is required in order to get reverted changes.
-    Body: withContent(body),
-    Link: withCTAContent(cta),
-  }),
-)(Tout);
+)(ToutClean);
 
-export default WantToLearnMore;
+export default GivingBackToCommunity;

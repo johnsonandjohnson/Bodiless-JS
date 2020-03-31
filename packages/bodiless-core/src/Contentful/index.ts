@@ -13,9 +13,9 @@
  */
 
 import withContent from './withContent';
-import withContentfulContextMenu from './withContentfulContextMenu';
+import withResetButton from './withResetButton';
 
 export {
   withContent,
-  withContentfulContextMenu,
+  withResetButton,
 };

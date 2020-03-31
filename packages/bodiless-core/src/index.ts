@@ -20,7 +20,7 @@ import { useEditContext, useUUID, useContextActivator } from './hooks';
 import withNode, { withNodeKey } from './withNode';
 import {
   withContent,
-  withContentfulContextMenu,
+  withResetButton,
 } from './Contentful';
 import withEditButton from './withEditButton';
 import contextMenuForm from './contextMenuForm';
@@ -84,7 +84,7 @@ export {
   useActivateOnEffectActivator,
   withChild,
   withContent,
-  withContentfulContextMenu,
+  withResetButton,
 };
 
 export type Bodiless<P, Q> = (C: ComponentType<P> | string) => ComponentType<Q>;

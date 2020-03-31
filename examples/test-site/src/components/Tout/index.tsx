@@ -26,7 +26,7 @@ import { asEditorBasic, asEditorSimple } from '../Editors';
 
 const asTout = flow(
   withDesign({
-    Image: asEditableImage('image'),
+    Image: asEditableImage(),
     ImageLink: asEditableLink('cta'),
     Title: asEditorSimple('title', 'Tout Title Text'),
     Link: flow(

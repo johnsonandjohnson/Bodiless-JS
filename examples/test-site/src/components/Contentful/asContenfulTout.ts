@@ -12,14 +12,14 @@
  * limitations under the License.
  */
 
-import { withContentfulContextMenu } from '@bodiless/core';
+import { withResetButton } from '@bodiless/core';
 import { withDesign } from '@bodiless/fclasses';
 
 const asContentfulTout = withDesign({
-  Image: withContentfulContextMenu('image'),
-  Title: withContentfulContextMenu('title'),
-  Body: withContentfulContextMenu('body'),
-  Link: withContentfulContextMenu('cta'),
+  Image: withResetButton,
+  Title: withResetButton,
+  Body: withResetButton,
+  Link: withResetButton,
 });
 
 export default asContentfulTout;

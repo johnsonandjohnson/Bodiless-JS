@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,15 +12,8 @@
  * limitations under the License.
  */
 
-import { flowRight } from 'lodash';
-import withNode, { withNodeKey } from '../withNode';
-import withDefaultContent from './withDefaultContent'; 
-
-const withContent = (asEditable: Function) => (nodeKey: string, content: object | Function) => flowRight(
-  withNodeKey(nodeKey),
-  withNode,
-  withDefaultContent(content),
-  asEditable(),
-);
-
-export default withContent;
+import {withContent } from '@bodiless/core';
+import { asEditableImage } from '../Elements.token';
+ 
+const asEditableImageWithContent = withContent(asEditableImage);
+export default asEditableImageWithContent;
