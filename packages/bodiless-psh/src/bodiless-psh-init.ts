@@ -24,10 +24,9 @@ const copyfiles = require('copyfiles');
 const siteRootFolder = process.env.INIT_CWD || path.resolve();
 const pshFolder = path.resolve(__dirname, '..');
 
-const readYaml = (folderPath: string, fileName: string) => {
-  const filePath = path.resolve(folderPath, fileName);
+const readYaml = (filePath: string) => {
   if (fs.existsSync(filePath)) {
-    const yamlFile = fs.readFileSync(path.resolve(folderPath, fileName), 'utf8');
+    const yamlFile = fs.readFileSync(filePath, 'utf8');
     return jsYaml.safeLoad(yamlFile);
   }
 
@@ -68,23 +67,23 @@ const mergeByKey = (Source: any, Destination: any, Whitelist: any) => {
 };
 
 const generateStaticYaml = (whitelist: object) => {
-  const defaultStaticYaml = readYaml(`${pshFolder}/resources/static/`, 'static.platform.app.yaml');
-  const siteStaticYaml = readYaml(siteRootFolder, '.platform.app.yaml');
+  const defaultStaticYaml = readYaml(path.resolve(`${pshFolder}/resources/static/`, 'static.platform.app.yaml'));
+  const siteStaticYaml = readYaml(path.resolve(siteRootFolder, '.platform.app.yaml'));
   const finalStaticYaml = mergeByKey(defaultStaticYaml, siteStaticYaml, whitelist);
 
   return jsYaml.safeDump(finalStaticYaml);
 };
 
 const generateEditYaml = (whitelist: object) => {
-  const defaultEditYaml = readYaml(`${pshFolder}/resources/edit/`, 'edit.platform.app.yaml');
-  const siteEditYaml = readYaml(`${siteRootFolder}/edit/`, '.platform.app.yaml');
+  const defaultEditYaml = readYaml(path.resolve(`${pshFolder}/resources/edit/`, 'edit.platform.app.yaml'));
+  const siteEditYaml = readYaml(path.resolve(`${siteRootFolder}/edit/`, '.platform.app.yaml'));
   const finalEditYaml = mergeByKey(defaultEditYaml, siteEditYaml, whitelist);
 
   return jsYaml.safeDump(finalEditYaml);
 };
 
 const init = () => {
-  const whitelistYaml = readYaml(`${pshFolder}/resources/.platform/`, 'platform.whitelist.yaml');
+  const whitelistYaml = readYaml(path.resolve(`${pshFolder}/resources/.platform/`, 'platform.whitelist.yaml'));
 
   copyfiles(
     [`${pshFolder}/resources/.platform/*`, `${siteRootFolder}/.platform`],
@@ -110,7 +109,7 @@ const init = () => {
     [`${pshFolder}/resources/edit/*`, `${siteRootFolder}/edit`],
     { up: true, exclude: '**/*.platform.app.yaml' },
     (err: any) => {
-      if (err) console.log('Error copying static app files', err);
+      if (err) console.log('Error copying edit app files', err);
       else {
         const editYaml = generateEditYaml(whitelistYaml);
         fs.writeFileSync(`${siteRootFolder}/edit/.platform.app.yaml`, editYaml);
