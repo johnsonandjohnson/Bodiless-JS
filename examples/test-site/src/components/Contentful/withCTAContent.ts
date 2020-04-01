@@ -12,24 +12,25 @@
  * limitations under the License.
  */
 
-import { withContent } from '@bodiless/core';
+import { flow } from 'lodash';
+import { withDefaultContent, withNodeKey } from '@bodiless/core';
+import { withDesign } from '@bodiless/fclasses';
+import { asEditableLink } from '../Elements.token';
+import { asEditorSimple } from '../Editors';
 
-type CTA = {
-  link: {
-    href: string;
-  },
-  text: object;
+export type CTAContent = {
+  Link: object,
+  Text: object;
 }
 
-const withCTAContent = (cta: CTA) => {
-  return withContent((key: string) => {
-    switch(key) {
-      case 'cta':
-        return cta.link;
-      case 'cta$ctaText':
-        return cta.text;  
-    }
-  });
-};
+const withCTAContent = (cta: CTAContent) => withDesign({
+  Link: flow(
+    asEditorSimple(undefined, 'CTA'),
+    withDefaultContent(cta.Text),
+    withNodeKey('text'),
+    asEditableLink(),
+    withDefaultContent(cta.Link),
+  ),
+});
 
 export default withCTAContent;

@@ -19,7 +19,6 @@ import asStatic from './asStatic';
 import { useEditContext, useUUID, useContextActivator } from './hooks';
 import withNode, { withNodeKey } from './withNode';
 import {
-  withContent,
   withDefaultContent,
   withResetButton,
 } from './Contentful';
@@ -84,7 +83,6 @@ export {
   useActivateOnEffect,
   useActivateOnEffectActivator,
   withChild,
-  withContent,
   withDefaultContent,
   withResetButton,
 };

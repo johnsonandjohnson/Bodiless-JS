@@ -47,16 +47,8 @@ const withToutNodeKeys = withDesign({
 });
 
 const asTout = flow(
-  withDesign({
-    Image: asEditableImage('image'),
-    ImageLink: asEditableLink('cta'),
-    Title: asEditorSimple('title', 'Tout Title Text'),
-    Link: flow(
-      asEditorSimple('ctaText', 'CTA'),
-      asEditableLink('cta'),
-    ),
-    Body: asEditorBasic('body', 'Tout Body Text'),
-  }),
+  asEditableTout,
+  withToutNodeKeys,
   asTestableTout,
 );
 const Tout = asTout(ToutClean);

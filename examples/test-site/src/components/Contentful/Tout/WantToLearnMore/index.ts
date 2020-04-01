@@ -14,7 +14,6 @@
 
 import { flow } from 'lodash';
 import { ToutClean } from '@bodiless/organisms';
-import { asEditableTout } from '../../../Tout';
 // ToDo: consider if we want to have asToutHorizontal here
 import {
   asToutHorizontal,
@@ -30,14 +29,16 @@ import ctaContent from './cta';
 // to revert subcomponent by subcomponent
 // ToDo: there is a concern that reverting link text reverts the href value as well
 const WantToLearnMore = flow(
-  asEditableTout,
   asContentfulTout({
     ImageLink: ctaContent.link,
     Image: imageContent,
     Title: titleContent,
     // ToDo: bug. page refresh is required in order to get reverted changes.
     Body: bodyContent,
-    //Link: withCTAContent(ctaContent),
+    Link: {
+      Link: ctaContent.link,
+      Text: ctaContent.text,
+    },
   }),
   asToutDefaultStyle,
   asToutHorizontal,

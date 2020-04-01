@@ -17,21 +17,49 @@ import { withDefaultContent } from '@bodiless/core';
 import { withDesign } from '@bodiless/fclasses';
 import { flow } from 'lodash';
 import { withToutNodeKeys } from '../Tout';
+import withCTAContent, { CTAContent } from './withCTAContent';
+import { asEditableImage, asEditableLink } from '../Elements.token';
+import { asEditorBasic, asEditorSimple } from '../Editors';
 
-const asContentfulTout = content => flow(
-  withDesign(
-    Object.keys(content).reduce(
-      (acc, key) => ({
-        ...acc,
-        [key]: flow(
-          withResetButton,
-          withDefaultContent(content[key]),
-        ),
-      }),
-      {},
+type ToutContent = {
+  Image: object;
+  ImageLink: object;
+  Title: object;
+  Body: object;
+  Link: CTAContent;
+};
+
+const withToutResetButton = (content: Partial<ToutContent>) => withDesign({
+  ...(content.Image || content.ImageLink ? { ImageLink: withResetButton } : {}),
+  ...(content.Title ? { Title: withResetButton } : {}),
+  ...(content.Body ? { Body: withResetButton } : {}),
+  ...(content.Link ? { Link: withResetButton } : {}),
+});
+
+const asContentfulTout = (content: Partial<ToutContent>) => {
+  const { Link: linkContent, ...rest } = content;
+  return flow(
+    withDesign({
+      Image: asEditableImage(),
+      ImageLink: asEditableLink(),
+      Title: asEditorSimple(undefined, 'Tout Title Text'),
+      Body: asEditorBasic(undefined, 'Tout Body Text'),
+    }),
+    withCTAContent(linkContent),
+    withToutResetButton(content),
+    withDesign(
+      Object.keys(rest).reduce(
+        (acc, key) => ({
+          ...acc,
+          [key]: flow(
+            withDefaultContent(content[key]),
+          ),
+        }),
+        {},
+      ),
     ),
-  ),
-  withToutNodeKeys,
-);
+    withToutNodeKeys,
+  );
+};
 
 export default asContentfulTout;

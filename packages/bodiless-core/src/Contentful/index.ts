@@ -12,12 +12,10 @@
  * limitations under the License.
  */
 
-import withContent from './withContent';
 import withDefaultContent from './withDefaultContent';
 import withResetButton from './withResetButton';
 
 export {
-  withContent,
   withDefaultContent,
   withResetButton,
 };
