@@ -19,7 +19,7 @@ type Path = string | string[];
 // TODO: since we want to adjust data method only and proxy other ContentNode methods
 // consider a way how to avoid duplicating all methods that ContentNode has
 // TODO: this class should expose a method that allows to check if node has value in store
-export default class ContentfulNode<D extends object | Function> implements ContentNode<D> {
+export default class ContentfulNode<D extends string | object | Function> implements ContentNode<D> {
   private baseNodePath: string[];
 
   private node: ContentNode<D>;
@@ -52,7 +52,7 @@ export default class ContentfulNode<D extends object | Function> implements Cont
 
   get data() {
     const nodeData = this.node.data;
-    const isNodeDataEmpty = Object.keys(nodeData).length === 0;
+    const isNodeDataEmpty = !nodeData || Object.keys(nodeData).length === 0;
     return !isNodeDataEmpty ? nodeData : this.getDefaultContent();
   }
 
@@ -74,7 +74,14 @@ export default class ContentfulNode<D extends object | Function> implements Cont
 
   peer<E extends object>(path: Path) {
     const contentNode = this.node.peer(path);
-    return new ContentfulNode(contentNode, this.content, this.baseNodePath) as unknown as ContentNode<E>;
+    return new ContentfulNode(
+      // @ts-ignore ToDo: resolve types
+      contentNode,
+      // @ts-ignore
+      this.content === 'function' ? this.content : undefined,
+      // @ts-ignore
+      this.content === 'function' ? this.baseNodePath : undefined,
+    ) as unknown as ContentNode<E>;
   }
 
   // ToDo: avoid copy pasting from DefaultContentNode class

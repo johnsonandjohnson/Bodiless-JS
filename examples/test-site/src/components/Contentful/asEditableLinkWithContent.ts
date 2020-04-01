@@ -12,12 +12,8 @@
  * limitations under the License.
  */
 
-import withContent from './withContent';
-import withDefaultContent from './withDefaultContent';
-import withResetButton from './withResetButton';
-
-export {
-  withContent,
-  withDefaultContent,
-  withResetButton,
-};
+import {withContent } from '@bodiless/core';
+import { asEditableLink } from '../Elements.token';
+ 
+const asEditableLinkWithContent = withContent(asEditableLink);
+export default asEditableLinkWithContent;

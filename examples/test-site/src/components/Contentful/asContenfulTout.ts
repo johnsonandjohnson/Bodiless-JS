@@ -13,13 +13,25 @@
  */
 
 import { withResetButton } from '@bodiless/core';
+import { withDefaultContent } from '@bodiless/core';
 import { withDesign } from '@bodiless/fclasses';
+import { flow } from 'lodash';
+import { withToutNodeKeys } from '../Tout';
 
-const asContentfulTout = withDesign({
-  Image: withResetButton,
-  Title: withResetButton,
-  Body: withResetButton,
-  Link: withResetButton,
-});
+const asContentfulTout = content => flow(
+  withDesign(
+    Object.keys(content).reduce(
+      (acc, key) => ({
+        ...acc,
+        [key]: flow(
+          withResetButton,
+          withDefaultContent(content[key]),
+        ),
+      }),
+      {},
+    ),
+  ),
+  withToutNodeKeys,
+);
 
 export default asContentfulTout;

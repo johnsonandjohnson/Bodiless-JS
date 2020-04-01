@@ -13,12 +13,11 @@
  */
 
 import { flowRight } from 'lodash';
-import withNode, { withNodeKey } from '../withNode';
+import { withNodeKey } from '../withNode';
 import withDefaultContent from './withDefaultContent'; 
 
 const withContent = (asEditable: Function) => (nodeKey: string, content: object | Function) => flowRight(
   withNodeKey(nodeKey),
-  withNode,
   withDefaultContent(content),
   asEditable(),
 );

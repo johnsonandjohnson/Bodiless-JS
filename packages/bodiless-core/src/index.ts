@@ -20,6 +20,7 @@ import { useEditContext, useUUID, useContextActivator } from './hooks';
 import withNode, { withNodeKey } from './withNode';
 import {
   withContent,
+  withDefaultContent,
   withResetButton,
 } from './Contentful';
 import withEditButton from './withEditButton';
@@ -84,6 +85,7 @@ export {
   useActivateOnEffectActivator,
   withChild,
   withContent,
+  withDefaultContent,
   withResetButton,
 };
 

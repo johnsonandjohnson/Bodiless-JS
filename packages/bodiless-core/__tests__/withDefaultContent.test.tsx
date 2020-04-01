@@ -18,7 +18,7 @@ import { flow } from 'lodash';
 import { DefaultContentNode } from '../src/ContentNode';
 import NodeProvider, { useNode } from '../src/NodeProvider';
 import withNode, { withNodeKey } from '../src/withNode';
-import withContent from '../src/Contentful/withContent';
+import withDefaultContent from '../src/Contentful/withDefaultContent';
 
 const mockedActions = {
   setNode: jest.fn(),
@@ -68,9 +68,9 @@ describe('withContent', () => {
     describe('when the wrapped component node data is not empty', () => {
       test('wrapped component takes node data from store', () => {
         const Foo = flow(
+          withDefaultContent('defaultFooContent'),
           withNode,
           withNodeKey('foo'),
-          withContent('defaultFooContent'),
           withRootNode({
             ...defaultStore,
             root$foo: 'fooValue',
@@ -83,9 +83,9 @@ describe('withContent', () => {
     describe('when the wrapped component node data is empty object', () => {
       test('wrapped component takes default content', () => {
         const Foo = flow(
+          withDefaultContent('defaultFooContent'),
           withNode,
           withNodeKey('foo'),
-          withContent('defaultFooContent'),
           withRootNode({
             ...defaultStore,
             root$foo: {},
@@ -98,9 +98,9 @@ describe('withContent', () => {
     describe('when the wrapped component node data is undefined', () => {
       test('wrapped component takes default content', () => {
         const Foo = flow(
+          withDefaultContent('defaultFooContent'),
           withNode,
           withNodeKey('foo'),
-          withContent('defaultFooContent'),
           withRootNode({
             ...defaultStore,
             root$foo: undefined,
@@ -120,7 +120,7 @@ describe('withContent', () => {
         withNodeKey('bar'),
         withNode,
         withNodeKey('baz'),
-        withContent((nodeKey: string) => {
+        withDefaultContent((nodeKey: string) => {
           if (nodeKey === 'baz$bar$foo') {
             return 'defaultFooContent';
           }

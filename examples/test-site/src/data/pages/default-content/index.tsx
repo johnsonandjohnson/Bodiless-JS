@@ -14,9 +14,32 @@
 // ToDo: remove this page
 import React from 'react';
 import { graphql } from 'gatsby';
+import { flow } from 'lodash';
+import {
+  withNode,
+  withNodeKey,
+  withDefaultContent
+} from '@bodiless/core';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../../../components/Layout';
+import {
+  asEditableImage,
+  asEditableLink,
+} from '../../../components/Elements.token';
 import { WantToLearnMore } from '../../../components/Contentful/Tout';
+import imageContent from '../../../components/Contentful/Tout/WantToLearnMore/image';
+import cta from '../../../components/Contentful/Tout/WantToLearnMore/cta';
+
+const TestImage = flow(
+  asEditableImage(),
+  withDefaultContent(imageContent),
+  withNode,
+  withNodeKey('image'),
+  asEditableLink(),
+  withDefaultContent(cta.link),
+  withNode,
+  withNodeKey('cta'),
+)('img');
 
 export default (props: any) => (
   <Page {...props}>
@@ -28,8 +51,8 @@ export default (props: any) => (
         </p>
       </div>
       <div className="ml-10">
-        <h2>Taco with default content</h2>
-        <WantToLearnMore nodeKey="tout" />
+        <h2>Experiments with Image</h2>
+        <TestImage />
       </div>
     </Layout>
   </Page>

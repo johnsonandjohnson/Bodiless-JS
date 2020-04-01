@@ -14,11 +14,15 @@
 
 import React, { ComponentType as CT } from 'react';
 import NodeProvider, { useNode } from '../NodeProvider';
+import withNode from '../withNode';
 import ContentfulNode from './ContentfulNode';
 
-const withDefaultContent = <P extends object>(content: object | Function) => (Component: CT<P>) => {
+type Content = string | object | Function;
+
+const withDefaultContent = <P extends object>(content: Content) => (Component: CT<P>) => {
   const WithDefaultContent = (props: P) => {
     const { node } = useNode();
+    // @ts-ignore ToDo: resolve types
     const nodeWithDefaultContent = new ContentfulNode(node, content);
     return (
       <NodeProvider node={nodeWithDefaultContent}>
@@ -26,7 +30,8 @@ const withDefaultContent = <P extends object>(content: object | Function) => (Co
       </NodeProvider>
     );
   };
-  return WithDefaultContent;
+  // ToDo: refactor this line
+  return withNode(WithDefaultContent);
 };
 
 export default withDefaultContent;

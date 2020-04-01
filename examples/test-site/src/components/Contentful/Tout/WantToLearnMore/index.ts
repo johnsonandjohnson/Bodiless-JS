@@ -13,23 +13,14 @@
  */
 
 import { flow } from 'lodash';
-import { withDesign } from '@bodiless/fclasses';
 import { ToutClean } from '@bodiless/organisms';
+import { asEditableTout } from '../../../Tout';
 // ToDo: consider if we want to have asToutHorizontal here
 import {
-  asEditableImage,
-  asEditableLink,
   asToutHorizontal,
   asToutDefaultStyle
 } from '../../../Tout/token';
-import {
-  asEditorBasic,
-  asEditorSimple,
-} from '../../../Editors';
-import asEditableImageWithContent from '../../asEditableImageWithContent';
-import asSimpleEditorWithContent from '../../asSimpleEditorWithContent';
 import asContentfulTout from '../../asContenfulTout';
-import withCTAContent from '../../withCTAContent';
 import titleContent from './title';
 import bodyContent from './body';
 import imageContent from './image';
@@ -39,14 +30,15 @@ import ctaContent from './cta';
 // to revert subcomponent by subcomponent
 // ToDo: there is a concern that reverting link text reverts the href value as well
 const WantToLearnMore = flow(
-  withDesign({
-    Image: asEditableImageWithContent('image', imageContent),
-    Title: asSimpleEditorWithContent('title', titleContent),
+  asEditableTout,
+  asContentfulTout({
+    ImageLink: ctaContent.link,
+    Image: imageContent,
+    Title: titleContent,
     // ToDo: bug. page refresh is required in order to get reverted changes.
-    Body: asSimpleEditorWithContent('body', bodyContent),
+    Body: bodyContent,
     //Link: withCTAContent(ctaContent),
   }),
-  asContentfulTout,
   asToutDefaultStyle,
   asToutHorizontal,
 )(ToutClean);
