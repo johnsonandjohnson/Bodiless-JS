@@ -87,7 +87,7 @@ const init = () => {
 
   copyfiles(
     [`${pshFolder}/resources/.platform/*`, `${siteRootFolder}/.platform`],
-    { up: true },
+    { up: true, exclude: '**/*.whitelist.yaml' },
     (err: any) => {
       if (err) console.log('Error copying app config files', err);
     },
