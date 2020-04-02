@@ -10,7 +10,7 @@
     {
       "uuid": "b8a76b90-74d4-11ea-84a8-bdebcda020d2",
       "wrapperProps": {
-        "className": " lg:w-full"
+        "className": " lg:w-1/2"
       },
       "type": "GivingBackToCommunityHorizontalWithTitleBodyWithCTA"
     }
