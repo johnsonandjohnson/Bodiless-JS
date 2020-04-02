@@ -11,74 +11,94 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// ToDo: remove this page
 import React from 'react';
 import { graphql } from 'gatsby';
 import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import { withTitle, withDesc, withTerm, withFacet, HOC } from '@bodiless/layouts';
-import { Tout, } from '@bodiless/organisms';
-import { FlexboxGrid } from '@bodiless/layouts-ui';
+import { withDefaultContent, useNode, withNodeKey } from '@bodiless/core';
 import {
-  varyDesign,
-  replaceWith,
-  withDesign,
-} from '@bodiless/fclasses';
-import { asFlexboxWithMargins } from '../../../components/Flexbox/token';
-import { 
-  asToutHorizontal,
-  asToutVertical,
-  asToutDefaultStyle,
-} from '../../../components/Tout/token';
+  Editable,
+  asEditableList,
+  List,
+  asEditable,
+  LinkClean,
+  asBodilessLink,
+} from '@bodiless/components';
+import { replaceWith, withDesign, Span } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
-import { withType } from '../../../components/Flexbox/Categories';
-import { WantToLearnMore, GivingBackToCommunity } from '../../../components/Contentful/Tout';
 
-const contentfulToutsBaseVariation = {
-  GivingBackToCommunity: flow(
-    replaceWith(GivingBackToCommunity),
-    asToutDefaultStyle,
-    withTitle('Giving Back To Community'),
-    withDesc('Giving Back To Community'),
-    withType('Contentful')(),
-    withType('Tout')(),
-  ),
-  WantToLearnMore: flow(
-    replaceWith(WantToLearnMore),
-    asToutDefaultStyle,
-    withTitle('Giving Back To Community'),
-    withDesc('Want to learn more?'),
-    withType('Contentful')(),
-    withType('Tout')(),
-  ),
-};
-
-const withOrientationFacet = withFacet('Tout Orientation');
-
-// Lets make Tout version that are Vertical and vary the fields that are used
-const orientationVariations = varyDesign(
-  {
-    Vertical: withOrientationFacet('Vertical')(asToutVertical as HOC),
-    Horizontal: withOrientationFacet('Horizontal')(asToutHorizontal as HOC),
-  }
+const SimpleTitle = (props: any) => (
+  <span {...props}><Editable nodeKey="text" placeholder="Item" /></span>
 );
 
-const withContentfulToutVariations = withDesign(varyDesign(
-  contentfulToutsBaseVariation,
-  orientationVariations,
-)());
+const defaultList = {
+  items: [
+    "item1",
+    "item2",
+    "item3"
+  ]
+}
 
-const withTouts = withDesign({
-  Tout1: flow(replaceWith(Tout), asToutHorizontal, withTitle('Tout1'), withTerm('Type')('Tout')),
-  Tout2: flow(replaceWith(Tout), asToutVertical, withTitle('Tout2'), withTerm('Type')('Tout')),
-});
+const withDefaultListItemContent = Component => {
+  const WithDefaultListItemContent = props => {
+    const { node } = useNode();
+    const nodeKey = node.path[node.path.length -1];
+    let content = 'default';
+    switch (nodeKey) {
+      case 'item1':
+        content = 'itemA';
+        break;
+      case 'item2':
+        content = 'itemB';
+        break;
+      case 'item3':
+        content = 'itemC';
+        break;    
+    }
+    console.log('hey from withDefaultListItemContent')
+    console.log(node);
+    return <Component {...props} />;
+  }
+  return WithDefaultListItemContent;
+}
 
-const FlexBox = flow(
-  //withContentfulItems,
-  withContentfulToutVariations,
-  withTouts,
-  asFlexboxWithMargins,
-)(FlexboxGrid);
+const EditableList = flow(
+  withDefaultContent(defaultList),
+  asEditableList,
+  withDesign({
+    Title: flow(
+      replaceWith(
+        flow(
+          asEditable(undefined, 'Enter list item'),
+          withDefaultContent((nodeKey: string) => {
+            console.log(`hey from withDefaultContent. nodeKey: ${nodeKey}`)
+            let content = 'default';
+            switch (nodeKey) {
+              case 'item1':
+                content = 'itemA';
+                break;
+              case 'item2':
+                content = 'itemB';
+                break;
+              case 'item3':
+                content = 'itemC';
+                break;    
+            }
+            return {
+              text: content
+            };
+          }),
+          withNodeKey('text'),
+        )(Span),
+      ),
+    ),
+  }),
+)(List);
+
+const Link = withDesign({
+  Link: asBodilessLink(),
+  Content: asEditable('text', 'Button Text'),
+})(LinkClean);
 
 export default (props: any) => (
   <Page {...props}>
@@ -86,12 +106,16 @@ export default (props: any) => (
       <h1 className="text-3xl font-bold">Componens with Default Content Demo</h1>
       <div className="ml-10">
         <p className="py-3">
-          This page demonstrates how to use components with default content
+          This page demonstrates components with default content
         </p>
       </div>
       <div className="ml-10">
-        <h2>Experiments with flexbox</h2>
-        <FlexBox nodeKey="testFlexBox" />
+        <h2>List</h2>
+        <EditableList nodeKey="list" />
+      </div>
+      <div className="ml-10">
+        <h2>TestLink</h2>
+        <Link nodeKey="link" />
       </div>
     </Layout>
   </Page>

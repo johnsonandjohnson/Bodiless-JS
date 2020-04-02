@@ -12,19 +12,15 @@
  * limitations under the License.
  */
 
-import { withDefaultContent } from '@bodiless/core';
+import { withResetButton } from '@bodiless/core';
 import { withDesign } from '@bodiless/fclasses';
+import { ToutContent } from './asContenfulTout';
 
-export type CTAContent = {
-  Link: object,
-  Text: object;
-}
-
-const withCTAContent = (cta: Partial<CTAContent>) => withDesign({
-  Link: withDesign({
-    ...(cta.Link ? { Link: withDefaultContent(cta.Link) } : {}),
-    ...(cta.Text ? { Content: withDefaultContent(cta.Text) } : {}),
-  }),
+const withToutResetButton = (content: Partial<ToutContent>) => withDesign({
+  ...(content.Image || content.ImageLink ? { ImageLink: withResetButton } : {}),
+  ...(content.Title ? { Title: withResetButton } : {}),
+  ...(content.Body ? { Body: withResetButton } : {}),
+  ...(content.Link ? { Link: withResetButton } : {}),
 });
 
-export default withCTAContent;
+export default withToutResetButton;

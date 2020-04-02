@@ -13,12 +13,13 @@
  */
 
 import { flow } from 'lodash';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey, withNode } from '@bodiless/core';
+import { LinkClean } from '@bodiless/components';
 import {
   ToutClean, asTestableTout,
 } from '@bodiless/organisms';
 import {
-  withDesign,
+  withDesign, startWith, replaceWith, Div,
 } from '@bodiless/fclasses';
 import {
   asEditableImage, asEditableLink,
@@ -29,12 +30,26 @@ const asEditableTout = flow(
   withDesign({
     Image: asEditableImage(),
     ImageLink: asEditableLink(),
-    Title: asEditorSimple(undefined, 'Tout Title Text'),
-    Link: flow(
-      asEditorSimple(undefined, 'CTA'),
-      asEditableLink(),
+    Title: flow(
+      asEditorSimple(undefined, 'Tout Title Text'),
+      withNode,
     ),
-    Body: asEditorBasic(undefined, 'Tout Body Text'),
+    Link: flow(
+      // ToDo: investigate why startWith does not work here
+      replaceWith(LinkClean),
+      withDesign({
+        Link: asEditableLink(),
+        Content: flow(
+          startWith(Div),
+          asEditorSimple(undefined, 'CTA'),
+          withNode,
+        ),
+      }),
+    ),
+    Body: flow(
+      asEditorBasic(undefined, 'Tout Body Text'),
+      withNode,
+    ),
   }),
 );
 
@@ -42,7 +57,12 @@ const withToutNodeKeys = withDesign({
   Image: withNodeKey('image'),
   ImageLink: withNodeKey('cta'),
   Title: withNodeKey('title'),
-  Link: withNodeKey('cta'),
+  Link: flow(
+    withDesign({
+      Link: withNodeKey('cta'),
+      Content: withNodeKey('text'),
+    }),
+  ),
   Body: withNodeKey('body'),
 });
 

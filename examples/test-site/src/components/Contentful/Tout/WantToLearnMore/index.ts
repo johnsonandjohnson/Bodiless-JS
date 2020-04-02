@@ -15,23 +15,29 @@
 import { flow } from 'lodash';
 import { ToutClean } from '@bodiless/organisms';
 import asContentfulTout from '../../asContenfulTout';
+import withToutResetButton from '../../withToutResetButton';
+import { asEditableTout } from '../../../Tout';
 import titleContent from './title';
 import bodyContent from './body';
 import imageContent from './image';
 import ctaContent from './cta';
 
+const toutContent = {
+  ImageLink: ctaContent.link,
+  Image: imageContent,
+  Title: titleContent,
+  // ToDo: bug. page refresh is required in order to get reverted changes.
+  Body: bodyContent,
+  Link: {
+    Link: ctaContent.link,
+    Text: ctaContent.text,
+  },
+};
+
 const WantToLearnMore = flow(
-  asContentfulTout({
-    ImageLink: ctaContent.link,
-    Image: imageContent,
-    Title: titleContent,
-    // ToDo: bug. page refresh is required in order to get reverted changes.
-    Body: bodyContent,
-    Link: {
-      Link: ctaContent.link,
-      Text: ctaContent.text,
-    },
-  }),
+  asEditableTout,
+  withToutResetButton(toutContent),
+  asContentfulTout(toutContent),
 )(ToutClean);
 
 export default WantToLearnMore;

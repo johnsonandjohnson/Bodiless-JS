@@ -14,6 +14,7 @@
 
 import Editable, { withPlaceholder, asEditable } from './Editable';
 import { asBodilessLink } from './Link';
+import LinkClean from './LinkClean';
 import Image, { asBodilessImage } from './Image';
 import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
@@ -41,6 +42,7 @@ import {
 import withEditPlaceholder from './Placeholder';
 
 export {
+  LinkClean,
   asBodilessLink,
   Image,
   asBodilessImage,
