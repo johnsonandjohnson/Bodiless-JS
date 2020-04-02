@@ -1,18 +1,18 @@
 {
   "items": [
     {
-      "uuid": "49259100-726a-11ea-a28b-f177d64313a2",
+      "uuid": "a7a4ddf0-74d4-11ea-84a8-bdebcda020d2",
       "wrapperProps": {
         "className": " lg:w-1/2"
       },
-      "type": "WantToLearnMore"
+      "type": "WantToLearnMoreHorizontalWithTitleBodyWithCTA"
     },
     {
-      "uuid": "14fc9bd0-7279-11ea-83bb-af9a8f870110",
+      "uuid": "b8a76b90-74d4-11ea-84a8-bdebcda020d2",
       "wrapperProps": {
-        "className": " lg:w-1/2"
+        "className": " lg:w-full"
       },
-      "type": "GivingBackToCommunity"
+      "type": "GivingBackToCommunityHorizontalWithTitleBodyWithCTA"
     }
   ]
 }

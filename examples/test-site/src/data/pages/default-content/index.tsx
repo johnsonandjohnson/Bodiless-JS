@@ -15,31 +15,70 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { flow } from 'lodash';
-import {
-  withNode,
-  withNodeKey,
-  withDefaultContent
-} from '@bodiless/core';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import Layout from '../../../components/Layout';
+import { withTitle, withDesc, withTerm, withFacet, HOC } from '@bodiless/layouts';
+import { Tout, } from '@bodiless/organisms';
+import { FlexboxGrid } from '@bodiless/layouts-ui';
 import {
-  asEditableImage,
-  asEditableLink,
-} from '../../../components/Elements.token';
-import { WantToLearnMore } from '../../../components/Contentful/Tout';
-import imageContent from '../../../components/Contentful/Tout/WantToLearnMore/image';
-import cta from '../../../components/Contentful/Tout/WantToLearnMore/cta';
+  varyDesign,
+  replaceWith,
+  withDesign,
+} from '@bodiless/fclasses';
+import { asFlexboxWithMargins } from '../../../components/Flexbox/token';
+import { 
+  asToutHorizontal,
+  asToutVertical,
+  asToutDefaultStyle,
+} from '../../../components/Tout/token';
+import Layout from '../../../components/Layout';
+import { withType } from '../../../components/Flexbox/Categories';
+import { WantToLearnMore, GivingBackToCommunity } from '../../../components/Contentful/Tout';
 
-const TestImage = flow(
-  asEditableImage(),
-  withDefaultContent(imageContent),
-  withNode,
-  withNodeKey('image'),
-  asEditableLink(),
-  withDefaultContent(cta.link),
-  withNode,
-  withNodeKey('cta'),
-)('img');
+const contentfulToutsBaseVariation = {
+  GivingBackToCommunity: flow(
+    replaceWith(GivingBackToCommunity),
+    asToutDefaultStyle,
+    withTitle('Giving Back To Community'),
+    withDesc('Giving Back To Community'),
+    withType('Contentful')(),
+    withType('Tout')(),
+  ),
+  WantToLearnMore: flow(
+    replaceWith(WantToLearnMore),
+    asToutDefaultStyle,
+    withTitle('Giving Back To Community'),
+    withDesc('Want to learn more?'),
+    withType('Contentful')(),
+    withType('Tout')(),
+  ),
+};
+
+const withOrientationFacet = withFacet('Tout Orientation');
+
+// Lets make Tout version that are Vertical and vary the fields that are used
+const orientationVariations = varyDesign(
+  {
+    Vertical: withOrientationFacet('Vertical')(asToutVertical as HOC),
+    Horizontal: withOrientationFacet('Horizontal')(asToutHorizontal as HOC),
+  }
+);
+
+const withContentfulToutVariations = withDesign(varyDesign(
+  contentfulToutsBaseVariation,
+  orientationVariations,
+)());
+
+const withTouts = withDesign({
+  Tout1: flow(replaceWith(Tout), asToutHorizontal, withTitle('Tout1'), withTerm('Type')('Tout')),
+  Tout2: flow(replaceWith(Tout), asToutVertical, withTitle('Tout2'), withTerm('Type')('Tout')),
+});
+
+const FlexBox = flow(
+  //withContentfulItems,
+  withContentfulToutVariations,
+  withTouts,
+  asFlexboxWithMargins,
+)(FlexboxGrid);
 
 export default (props: any) => (
   <Page {...props}>
@@ -51,8 +90,8 @@ export default (props: any) => (
         </p>
       </div>
       <div className="ml-10">
-        <h2>Experiments with Image</h2>
-        <TestImage />
+        <h2>Experiments with flexbox</h2>
+        <FlexBox nodeKey="testFlexBox" />
       </div>
     </Layout>
   </Page>

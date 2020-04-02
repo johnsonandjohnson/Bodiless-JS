@@ -55,15 +55,6 @@ const contentfulItems = {
   ),
 };
 
-// ToDo: validate flexbox api is used correctly
-// ToDo: preview is not displayed properly
-// ToDo: validate with the team if we want to add 2 contentful tacos globally
-// or only for frontpage
-// ToDo: remove old tacos
-const FlexBox = flow(
-  withDesign(contentfulItems),
-)(FlexBoxDefault);
-
 const EditableBulletPoints = flow(
   asEditableList,
   withDesign({
@@ -85,7 +76,7 @@ const HomePage = (props: any) => (
       <div className="">
         <EditableBulletPoints nodeKey="bulletpoints" />
       </div>
-      <FlexBox
+      <FlexBoxDefault
         nodeKey={HOME_PAGE_PATH}
       />
     </Layout>

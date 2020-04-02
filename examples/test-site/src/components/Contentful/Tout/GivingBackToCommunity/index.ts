@@ -14,20 +14,11 @@
 
 import { flow } from 'lodash';
 import { ToutClean } from '@bodiless/organisms';
-// ToDo: consider if we want to have asToutHorizontal here
-import {
-  asToutHorizontal,
-  asToutDefaultStyle
-} from '../../../Tout/token';
 import asContentfulTout from '../../asContenfulTout';
 import titleContent from './title';
 import bodyContent from './body';
 import imageContent from './image';
 import ctaContent from './cta';
-
-// ToDo: a key should be injected to withContentfulContextMenu in order to have ability
-// to revert subcomponent by subcomponent
-// ToDo: there is a concern that reverting link text reverts the href value as well
 
 const GivingBackToCommunity = flow(
   asContentfulTout({
@@ -41,8 +32,6 @@ const GivingBackToCommunity = flow(
       Text: ctaContent.text,
     },
   }),
-  asToutDefaultStyle,
-  asToutHorizontal,
 )(ToutClean);
 
 export default GivingBackToCommunity;

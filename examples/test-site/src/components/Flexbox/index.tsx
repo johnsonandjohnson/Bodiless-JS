@@ -14,7 +14,7 @@
 import { flow } from 'lodash';
 import { FlexboxGrid } from '@bodiless/layouts-ui';
 import withToutVariations from './withToutVariations';
-
+import withContentfulToutVariations from './withContentfulToutVariations';
 import withRichTextVariations from './withRichTextVariations';
 import withSingleAccordionVariations from './withSingleAccordionVariations';
 
@@ -24,6 +24,7 @@ import { asFlexboxWithMargins } from './token';
 // const variations = extendDesign(toutVariations, sliderVariations, ...);
 const FlexBoxDefault = flow(
   withToutVariations,
+  withContentfulToutVariations,
   withRichTextVariations,
   withSingleAccordionVariations,
   asFlexboxWithMargins,
