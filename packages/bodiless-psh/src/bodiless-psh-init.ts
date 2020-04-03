@@ -95,7 +95,7 @@ const init = () => {
 
   copyfiles(
     [`${pshFolder}/resources/static/*`, siteRootFolder],
-    { up: true, exclude: ['**/*.platform.app.yaml', 'platform.custom.sh'] },
+    { up: true, exclude: '**/*.platform.app.yaml' },
     (err: any) => {
       if (err) console.log('Error copying static app files', err);
       else {
@@ -107,7 +107,7 @@ const init = () => {
 
   copyfiles(
     [`${pshFolder}/resources/edit/*`, `${siteRootFolder}/edit`],
-    { up: true, exclude: '**/*.platform.app.yaml' },
+    { up: true, exclude: ['**/*.platform.app.yaml', 'platform.custom.sh'] },
     (err: any) => {
       if (err) console.log('Error copying edit app files', err);
       else {
