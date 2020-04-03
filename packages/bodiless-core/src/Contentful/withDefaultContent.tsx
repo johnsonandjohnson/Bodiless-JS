@@ -30,7 +30,6 @@ const withDefaultContent = <P extends object>(content: Content) => (Component: C
       </NodeProvider>
     );
   };
-  // ToDo: refactor this line
   return withNode(WithDefaultContent);
 };
 

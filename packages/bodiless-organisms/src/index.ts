@@ -73,4 +73,10 @@ export {
   withBurgerSubmenu,
 };
 
+export {
+  asContentfulTout,
+  withCTAContent,
+  withToutResetButton,
+} from './components/Contentful';
+
 export { Slider };

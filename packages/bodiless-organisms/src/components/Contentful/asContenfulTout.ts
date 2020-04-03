@@ -15,7 +15,6 @@
 import { withDefaultContent } from '@bodiless/core';
 import { withDesign } from '@bodiless/fclasses';
 import { flow } from 'lodash';
-import { withToutNodeKeys } from '../Tout';
 import withCTAContent, { CTAContent } from './withCTAContent';
 
 export type ToutContent = {
@@ -33,15 +32,13 @@ const asContentfulTout = (content: Partial<ToutContent>) => {
       Object.keys(rest).reduce(
         (acc, key) => ({
           ...acc,
-          [key]: flow(
-            withDefaultContent(content[key]),
-          ),
+          // @ts-ignore
+          [key]: withDefaultContent(content[key]),
         }),
         {},
       ),
     ),
-    withCTAContent(ctaContent),
-    withToutNodeKeys,
+    ctaContent ? withCTAContent(ctaContent) : [],
   );
 };
 

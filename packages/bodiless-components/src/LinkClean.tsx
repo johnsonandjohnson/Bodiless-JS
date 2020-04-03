@@ -21,19 +21,18 @@ import React, {
 import { flow } from 'lodash';
 import { withNode } from '@bodiless/core';
 import {
-  StylableProps,
-  A,
+  asComponent,
   DesignableComponentsProps,
   designable,
 } from '@bodiless/fclasses';
 
 export type LinkComponents = {
-  Link: ComponentType<StylableProps>,
-  Content: ComponentType<StylableProps>,
+  Link: ComponentType<HTMLProps<HTMLElement>>,
+  Content: ComponentType<HTMLProps<HTMLElement>>,
 };
 
 const linkComponentStart: LinkComponents = {
-  Link: A,
+  Link: asComponent('a'),
   Content: Fragment,
 };
 

@@ -25,11 +25,13 @@ import {
   H2,
   StylableProps,
   addProps,
+  stylable,
 } from '@bodiless/fclasses';
 import {
   asBodilessImage,
   asBodilessLink,
   asEditable,
+  LinkClean,
 } from '@bodiless/components';
 import { withNode } from '@bodiless/core';
 
@@ -51,7 +53,8 @@ const toutComponentStart:ToutComponents = {
   ContentWrapper: Div,
   Title: H2,
   Body: Div,
-  Link: A,
+  // @ts-ignore ToDo: resolve types
+  Link: stylable(LinkClean),
 };
 
 type Props = DesignableComponentsProps<ToutComponents> & HTMLProps<HTMLElement>;

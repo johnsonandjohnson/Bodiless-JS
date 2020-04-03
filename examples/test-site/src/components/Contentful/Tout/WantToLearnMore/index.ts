@@ -13,10 +13,8 @@
  */
 
 import { flow } from 'lodash';
-import { ToutClean } from '@bodiless/organisms';
-import asContentfulTout from '../../asContenfulTout';
-import withToutResetButton from '../../withToutResetButton';
-import { asEditableTout } from '../../../Tout';
+import { ToutClean, asContentfulTout, withToutResetButton } from '@bodiless/organisms';
+import { asEditableTout, withToutNodeKeys } from '../../../Tout';
 import titleContent from './title';
 import bodyContent from './body';
 import imageContent from './image';
@@ -38,6 +36,7 @@ const WantToLearnMore = flow(
   asEditableTout,
   withToutResetButton(toutContent),
   asContentfulTout(toutContent),
+  withToutNodeKeys,
 )(ToutClean);
 
 export default WantToLearnMore;
