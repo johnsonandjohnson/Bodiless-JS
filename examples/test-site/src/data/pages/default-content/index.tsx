@@ -15,90 +15,78 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import { withDefaultContent, useNode, withNodeKey } from '@bodiless/core';
+import { withDefaultContent, withNodeKey } from '@bodiless/core';
 import {
-  Editable,
   asEditableList,
   List,
   asEditable,
-  LinkClean,
-  asBodilessLink,
+  withBasicSublist,
 } from '@bodiless/components';
-import { replaceWith, withDesign, Span } from '@bodiless/fclasses';
+import {
+  replaceWith,
+  withDesign,
+  Span,
+  stylable,
+  addClasses,
+} from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
 
-const SimpleTitle = (props: any) => (
-  <span {...props}><Editable nodeKey="text" placeholder="Item" /></span>
-);
+class ListContent {
+  private content: object;
 
-const defaultList = {
-  items: [
-    "item1",
-    "item2",
-    "item3"
-  ]
-}
-
-const withDefaultListItemContent = Component => {
-  const WithDefaultListItemContent = props => {
-    const { node } = useNode();
-    const nodeKey = node.path[node.path.length -1];
-    let content = 'default';
-    switch (nodeKey) {
-      case 'item1':
-        content = 'itemA';
-        break;
-      case 'item2':
-        content = 'itemB';
-        break;
-      case 'item3':
-        content = 'itemC';
-        break;    
-    }
-    console.log('hey from withDefaultListItemContent')
-    console.log(node);
-    return <Component {...props} />;
+  constructor(content: object) {
+    this.content = content;
   }
-  return WithDefaultListItemContent;
-}
 
-const EditableList = flow(
-  withDefaultContent(defaultList),
-  asEditableList,
+  public getContent() {
+    return this.content;
+  }
+
+  public getItems() {
+    return {
+      items: Object.keys(this.content),
+    };
+  }
+}
+const listDefaultContent = {
+  item1: 'itemA',
+  item2: 'itemB',
+  item3: 'itemC',
+};
+
+const withDefaultListContent = (listContent: ListContent) => flow(
+  withDefaultContent(listContent.getItems()),
   withDesign({
     Title: flow(
-      replaceWith(
-        flow(
-          asEditable(undefined, 'Enter list item'),
-          withDefaultContent((nodeKey: string) => {
-            console.log(`hey from withDefaultContent. nodeKey: ${nodeKey}`)
-            let content = 'default';
-            switch (nodeKey) {
-              case 'item1':
-                content = 'itemA';
-                break;
-              case 'item2':
-                content = 'itemB';
-                break;
-              case 'item3':
-                content = 'itemC';
-                break;    
-            }
-            return {
-              text: content
-            };
-          }),
-          withNodeKey('text'),
-        )(Span),
-      ),
+      withDefaultContent((nodePath: string[]) => {
+        const nodeKey = nodePath.join('$');
+        const item = Object.entries(listContent.getContent()).find(pair => nodeKey.endsWith(`${pair[0]}$text`));
+        return {
+          text: item ? item[1] || '' : '',
+        };
+      }),
+      withNodeKey('text'),
+    ),
+  }),
+);
+
+const EditableList = flow(
+  asEditableList,
+  withDesign({
+    Title: replaceWith(
+      asEditable(undefined, 'Item')(Span),
     ),
   }),
 )(List);
-
-const Link = withDesign({
-  Link: asBodilessLink(),
-  Content: asEditable('text', 'Button Text'),
-})(LinkClean);
+const listContent = new ListContent(listDefaultContent);
+const EditableListWithContent = withDefaultListContent(listContent)(EditableList);
+const EditableSublist = withBasicSublist(
+  flow(
+    withDesign({
+      Wrapper: flow(stylable, addClasses('pl-10')),
+    }),
+  )(EditableList),
+)(EditableListWithContent);
 
 export default (props: any) => (
   <Page {...props}>
@@ -111,11 +99,7 @@ export default (props: any) => (
       </div>
       <div className="ml-10">
         <h2>List</h2>
-        <EditableList nodeKey="list" />
-      </div>
-      <div className="ml-10">
-        <h2>TestLink</h2>
-        <Link nodeKey="link" />
+        <EditableSublist nodeKey="list" />
       </div>
     </Layout>
   </Page>

@@ -40,7 +40,7 @@ const ctaText = {
 
 export default {
   link: {
-    href: 'http://localhost:3000/#/About/SiteBuildBasics'
+    href: 'http://localhost:3000/#/About/SiteBuildBasics',
   },
   text: ctaText,
 };

@@ -46,7 +46,7 @@ const createNodeConsumer = (displayName?: string) => {
   };
   NodeConsumer.displayName = displayName || 'NodeConsumer';
   return NodeConsumer;
-}
+};
 
 const defaultStore = {
   root$foo: 'fooValue',
@@ -61,7 +61,7 @@ const withRootNode = (store: Store) => <P extends object>(Component: ComponentTy
     </NodeProvider>
   );
   return WithRootNode;
-}
+};
 
 describe('withContent', () => {
   describe('when a component with single node is wrapped', () => {
@@ -109,30 +109,6 @@ describe('withContent', () => {
         const wrapper = mount(<Foo />);
         expect(wrapper.find('Foo').html()).toBe('defaultFooContent');
       });
-    });
-  });
-  describe('when a component with multiple nodes is wrapped', () => {
-    test('default content can be set for a particular node', () => {
-      const Foo = flow(
-        withNode,
-        withNodeKey('foo'),
-        withNode,
-        withNodeKey('bar'),
-        withNode,
-        withNodeKey('baz'),
-        withDefaultContent((nodeKey: string) => {
-          if (nodeKey === 'baz$bar$foo') {
-            return 'defaultFooContent';
-          }
-          return 'defaultContent'
-        }),
-        withRootNode({
-          ...defaultStore,
-          root$foo: {},
-        }),
-      )(createNodeConsumer('Foo'));
-      const wrapper = mount(<Foo />);
-      expect(wrapper.find('Foo').html()).toBe('defaultFooContent');
     });
   });
 });

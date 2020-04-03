@@ -18,7 +18,7 @@ import { withDesign } from '@bodiless/fclasses';
 export type CTAContent = {
   Link: object,
   Text: object;
-}
+};
 
 const withCTAContent = (cta: Partial<CTAContent>) => withDesign({
   Link: withDesign({

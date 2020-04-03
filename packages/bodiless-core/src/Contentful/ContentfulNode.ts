@@ -19,33 +19,21 @@ type Path = string | string[];
 // TODO: since we want to adjust data method only and proxy other ContentNode methods
 // consider a way how to avoid duplicating all methods that ContentNode has
 // TODO: this class should expose a method that allows to check if node has value in store
+// eslint-disable-next-line max-len
 export default class ContentfulNode<D extends string | object | Function> implements ContentNode<D> {
-  private baseNodePath: string[];
-
   private node: ContentNode<D>;
 
   private content: D;
 
-  constructor(contentNode: ContentNode<D>, content: D, baseNodePath?: string[]) {
+  constructor(contentNode: ContentNode<D>, content: D) {
     this.node = contentNode;
-    this.baseNodePath = baseNodePath || contentNode.path;
     this.content = content;
   }
 
-  private getContentfulNodeKey() {
-    const baseNodeKey = this.baseNodePath.join('$');
-    const nodeKey = this.node.path.join('$');
-    if (nodeKey.startsWith(baseNodeKey)) {
-      return nodeKey.substring(baseNodeKey.length + 1);
-    }
-    return nodeKey;
-  }
-
   private getDefaultContent() {
-    if (typeof this.content === "function") {
-      const nodeKey = this.getContentfulNodeKey();
+    if (typeof this.content === 'function') {
       // @ts-ignore ToDo: remediate this one
-      return this.content(nodeKey);
+      return this.content(this.node.path);
     }
     return this.content;
   }
@@ -73,20 +61,12 @@ export default class ContentfulNode<D extends string | object | Function> implem
   }
 
   peer<E extends object>(path: Path) {
-    const contentNode = this.node.peer(path);
-    return new ContentfulNode(
-      // @ts-ignore ToDo: resolve types
-      contentNode,
-      // @ts-ignore
-      this.content === 'function' ? this.content : undefined,
-      // @ts-ignore
-      this.content === 'function' ? this.baseNodePath : undefined,
-    ) as unknown as ContentNode<E>;
+    // ToDo: explory opportunities to avoid converting to unknown
+    return this.node.peer(path) as unknown as ContentNode<E>;
   }
 
   // ToDo: avoid copy pasting from DefaultContentNode class
   child<E extends object>(path: string) {
-    const paths = Array.isArray(path) ? path : [path];
-    return this.peer<E>([...this.path, ...paths]);
+    return this.node.child(path) as unknown as ContentNode<E>;
   }
 }

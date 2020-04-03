@@ -87,4 +87,4 @@ export default withDesign(varyDesign(
   ctaVariations,
 )());
 
-export { orientationVariations, ctaVariations }
+export { orientationVariations, ctaVariations };

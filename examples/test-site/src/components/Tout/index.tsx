@@ -73,4 +73,4 @@ const asTout = flow(
 );
 const Tout = asTout(ToutClean);
 export default Tout;
-export { asEditableTout, withToutNodeKeys }
+export { asEditableTout, withToutNodeKeys };
