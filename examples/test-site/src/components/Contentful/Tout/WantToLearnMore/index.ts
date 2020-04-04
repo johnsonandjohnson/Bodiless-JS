@@ -12,9 +12,8 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
-import { ToutClean, asContentfulTout, withToutResetButton } from '@bodiless/organisms';
-import { asEditableTout, withToutNodeKeys } from '../../../Tout';
+import { ToutClean } from '@bodiless/organisms';
+import { asContentfulTout } from '../../../Tout';
 import titleContent from './title';
 import bodyContent from './body';
 import imageContent from './image';
@@ -32,11 +31,6 @@ const toutContent = {
   },
 };
 
-const WantToLearnMore = flow(
-  asEditableTout,
-  withToutResetButton(toutContent),
-  asContentfulTout(toutContent),
-  withToutNodeKeys,
-)(ToutClean);
+const WantToLearnMore = asContentfulTout(toutContent)(ToutClean);
 
 export default WantToLearnMore;

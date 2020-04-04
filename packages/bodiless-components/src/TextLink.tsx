@@ -51,9 +51,9 @@ const LinkBase: FC<Props> = ({ components, ...rest }) => {
   );
 };
 
-const LinkClean = flow(
+const TextLink = flow(
   designable(linkComponentStart),
   withNode,
 )(LinkBase);
 
-export default LinkClean;
+export default TextLink;

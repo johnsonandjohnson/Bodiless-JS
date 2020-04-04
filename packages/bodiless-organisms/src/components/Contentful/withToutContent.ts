@@ -25,7 +25,7 @@ export type ToutContent = {
   Link: CTAContent;
 };
 
-const asContentfulTout = (content: Partial<ToutContent>) => {
+const withToutContent = (content: Partial<ToutContent>) => {
   const { Link: ctaContent, ...rest } = content;
   return flow(
     withDesign(
@@ -42,4 +42,4 @@ const asContentfulTout = (content: Partial<ToutContent>) => {
   );
 };
 
-export default asContentfulTout;
+export default withToutContent;

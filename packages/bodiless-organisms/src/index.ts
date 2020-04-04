@@ -45,6 +45,7 @@ export {
 export {
   Tout,
   ToutClean,
+  withToutNodeKeys,
   asEditableTout,
   asTestableTout,
 } from './components/Touts';
@@ -74,9 +75,9 @@ export {
 };
 
 export {
-  asContentfulTout,
+  withToutContent,
   withCTAContent,
-  withToutResetButton,
+  withToutResetButtons,
 } from './components/Contentful';
 
 export { Slider };

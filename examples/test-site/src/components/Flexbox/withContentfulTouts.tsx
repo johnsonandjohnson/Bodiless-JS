@@ -18,19 +18,18 @@ import {
   withDesc,
 } from '@bodiless/layouts';
 import {
-  varyDesign,
   replaceWith,
   withDesign,
 } from '@bodiless/fclasses';
-import { asToutDefaultStyle } from '../Tout/token';
+import { asToutDefaultStyle, asToutHorizontal } from '../Tout/token';
 import { withType } from './Categories';
-import { orientationVariations, ctaVariations } from './withToutVariations';
 import { WantToLearnMore, GivingBackToCommunity } from '../Contentful/Tout';
 
-const contentfulToutsBaseVariation = {
+const contentfulTouts = {
   GivingBackToCommunity: flow(
     replaceWith(GivingBackToCommunity),
     asToutDefaultStyle,
+    asToutHorizontal,
     withTitle('Giving Back To Community'),
     withDesc('Giving Back To Community'),
     withType('Contentful')(),
@@ -39,15 +38,12 @@ const contentfulToutsBaseVariation = {
   WantToLearnMore: flow(
     replaceWith(WantToLearnMore),
     asToutDefaultStyle,
-    withTitle('Giving Back To Community'),
+    asToutHorizontal,
+    withTitle('Want to learn more?'),
     withDesc('Want to learn more?'),
     withType('Contentful')(),
     withType('Tout')(),
   ),
 };
 
-export default withDesign(varyDesign(
-  contentfulToutsBaseVariation,
-  orientationVariations,
-  ctaVariations,
-)());
+export default withDesign(contentfulTouts);

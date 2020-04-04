@@ -31,9 +31,9 @@ import {
   asBodilessImage,
   asBodilessLink,
   asEditable,
-  LinkClean,
+  TextLink,
 } from '@bodiless/components';
-import { withNode } from '@bodiless/core';
+import { withNode, withNodeKey } from '@bodiless/core';
 
 export type ToutComponents = {
   Wrapper: ComponentType<StylableProps>,
@@ -54,7 +54,7 @@ const toutComponentStart:ToutComponents = {
   Title: H2,
   Body: Div,
   // @ts-ignore ToDo: resolve types
-  Link: stylable(LinkClean),
+  Link: stylable(TextLink),
 };
 
 type Props = DesignableComponentsProps<ToutComponents> & HTMLProps<HTMLElement>;
@@ -92,6 +92,19 @@ const ToutClean = flow(
   withNode,
 )(ToutBase);
 
+const withToutNodeKeys = withDesign({
+  Image: withNodeKey('image'),
+  ImageLink: withNodeKey('cta'),
+  Title: withNodeKey('title'),
+  Link: flow(
+    withDesign({
+      Link: withNodeKey('cta'),
+      Content: withNodeKey('text'),
+    }),
+  ),
+  Body: withNodeKey('body'),
+});
+
 const asEditableTout = withDesign({
   Image: asBodilessImage('image'),
   ImageLink: asBodilessLink('cta'),
@@ -124,6 +137,7 @@ export default Tout;
 export {
   Tout,
   ToutClean,
+  withToutNodeKeys,
   asEditableTout,
   asTestableTout,
 };

@@ -13,20 +13,22 @@
  */
 
 import { flow } from 'lodash';
-import { withNodeKey, withNode } from '@bodiless/core';
-import { LinkClean } from '@bodiless/components';
+import { withNode } from '@bodiless/core';
 import {
-  ToutClean, asTestableTout,
+  ToutClean,
+  asTestableTout,
+  withToutContent,
+  withToutNodeKeys,
 } from '@bodiless/organisms';
 import {
-  withDesign, startWith, replaceWith, Div,
+  withDesign, startWith, Div,
 } from '@bodiless/fclasses';
 import {
   asEditableImage, asEditableLink,
 } from '../Elements.token';
 import { asEditorBasic, asEditorSimple } from '../Editors';
 
-const asEditableTout = flow(
+export const withToutEditors = flow(
   withDesign({
     Image: asEditableImage(),
     ImageLink: asEditableLink(),
@@ -35,8 +37,6 @@ const asEditableTout = flow(
       withNode,
     ),
     Link: flow(
-      // ToDo: investigate why startWith does not work here
-      replaceWith(LinkClean),
       withDesign({
         Link: asEditableLink(),
         Content: flow(
@@ -53,24 +53,18 @@ const asEditableTout = flow(
   }),
 );
 
-const withToutNodeKeys = withDesign({
-  Image: withNodeKey('image'),
-  ImageLink: withNodeKey('cta'),
-  Title: withNodeKey('title'),
-  Link: flow(
-    withDesign({
-      Link: withNodeKey('cta'),
-      Content: withNodeKey('text'),
-    }),
-  ),
-  Body: withNodeKey('body'),
-});
-
-const asTout = flow(
-  asEditableTout,
+export const asEditableTout = flow(
+  withToutEditors,
   withToutNodeKeys,
   asTestableTout,
 );
-const Tout = asTout(ToutClean);
+
+export const asContentfulTout = (content: object) => flow(
+  withToutEditors,
+  withToutContent(content),
+  withToutNodeKeys,
+  asTestableTout,
+);
+
+const Tout = asEditableTout(ToutClean);
 export default Tout;
-export { asEditableTout, withToutNodeKeys };

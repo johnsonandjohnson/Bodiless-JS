@@ -12,12 +12,12 @@
  * limitations under the License.
  */
 
-import asContentfulTout from './asContenfulTout';
+import withToutContent from './withToutContent';
 import withCTAContent from './withCTAContent';
-import withToutResetButton from './withToutResetButton';
+import withToutResetButtons from './withToutResetButtons';
 
 export {
-  asContentfulTout,
+  withToutContent,
   withCTAContent,
-  withToutResetButton,
+  withToutResetButtons,
 };
