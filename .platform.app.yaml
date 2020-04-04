@@ -88,11 +88,13 @@ web:
             scripts: false
             allow: true
             passthru: false
+            expires: 6h
         '/___docs':
             root: 'examples/test-site/doc'
             index: ['index.html']
             scripts: false
             allow: true
+            expires: 6h
 
 variables:
     env:

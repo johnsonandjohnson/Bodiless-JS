@@ -29,7 +29,9 @@
   },
   "dependencies": {
     "copyfiles": "^2.1.1",
-    "rimraf": "^2.6.3"
+    "js-yaml": "^3.13.1",
+    "rimraf": "^2.6.3",
+    "lodash": "^4.17.11"
   },
   "devDependencies": {
     "@types/copyfiles": "^2.1.1"
