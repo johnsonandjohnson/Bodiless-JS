@@ -26,116 +26,115 @@ describe('Link Toggle smoke tests', function () {
     cy.xpath(labelXpath)
       .click()
       .type(label)
-      .should('have.text', label)
+      .should('have.text', label);
   })
 
 
   it('link toggle: 2 - checking the label without a url in Preview Mode', () => {
-    cy.wait(1000)
-    cy.clickEdit()
+    cy.wait(1000);
+    cy.clickEdit();
     cy.xpath(labelPreviewXpath)
-      .should('have.text', label)
+      .should('have.text', label);
     cy.xpath(linkXpath)
-      .should('not.exist')
+      .should('not.exist');
   })
 
 
   it('link toggle: 3 - checking the label with a url value', () => {
-    cy.clickEdit()
+    cy.clickEdit();
     cy.xpath(labelXpath)
-      .click()
+      .click();
     cy.xpath(linkIconXpath)
-      .click()
+      .click();
     cy.xpath(urlFieldXpath)
-      .type(url)
+      .type(url);
     cy.xpath(checkmarkIconLinkFormXpath)
-      .click()
+      .click();
     cy.xpath(labelXpath)
-      .should('have.text', label)
+      .should('have.text', label);
     cy.xpath(linkXpath)
-      .should('have.attr', 'href', '#' + url)
+      .should('have.attr', 'href', '#' + url);
   })
 
 
   it('link toggle: 4 - checking the label with a url value in Preview Mode', () => {
-    cy.wait(1000)
-    cy.clickEdit()
+    cy.wait(1000);
+    cy.clickEdit();
     cy.xpath(labelPreviewXpath)
-      .should('have.text', label)
+      .should('have.text', label);
     cy.xpath(linkXpath)
-      .should('have.attr', 'href', '#' + url)
+      .should('have.attr', 'href', '#' + url);
   })
 
 
   it('link toggle: 5 - checking the label with a url value can be edited', () => {
-    cy.clickEdit()
+    cy.clickEdit();
     cy.xpath(labelXpath)
       .type(editedLabelPostfix)
-      .should('have.text', label + editedLabelPostfix)
+      .should('have.text', label + editedLabelPostfix);
     cy.xpath(linkXpath)
-      .should('have.attr', 'href', '#' + url)
+      .should('have.attr', 'href', '#' + url);
   })
 
 
   it('link toggle: 6 - checking that a url value can be edited', () => {
     cy.xpath(labelXpath)
-      .click()
+      .click();
     cy.xpath(linkIconXpath)
-      .click()
+      .click();
     cy.xpath(urlFieldXpath)
-      .type(editedUrlPostfix)
+      .type(editedUrlPostfix);
     cy.xpath(checkmarkIconLinkFormXpath)
-      .click()
+      .click();
     cy.xpath(labelXpath)
-      .should('have.text', label + editedLabelPostfix)
+      .should('have.text', label + editedLabelPostfix);
     cy.xpath(linkXpath)
-      .should('have.attr', 'href', '#' + url + editedUrlPostfix)
+      .should('have.attr', 'href', '#' + url + editedUrlPostfix);
   })
 
 
   it('link toggle: 7 - checking the edited link in Preview mode', () => {
-    cy.wait(1000)
-    cy.clickEdit()
+    cy.wait(1000);
+    cy.clickEdit();
     cy.xpath(labelPreviewXpath)
-      .should('have.text', label + editedLabelPostfix)
+      .should('have.text', label + editedLabelPostfix);
     cy.xpath(linkXpath)
-      .should('have.attr', 'href', '#' + url + editedUrlPostfix)
+      .should('have.attr', 'href', '#' + url + editedUrlPostfix);
   })
 
 
   it('link toggle: 8 - checking clicking the link in Preview mode', () => {
     cy.xpath(linkXpath)
-      .click()
-    cy.url().should('include', url + editedUrlPostfix)
+      .click();
+    cy.url().should('include', url + editedUrlPostfix);
   })
 
 
   it('link toggle: 9 - checking Remove Link feature in Edit Mode', () => {
-    cy.clickEdit()
+    cy.clickEdit();
     cy.xpath(labelXpath)
-      .click()
+      .click();
     cy.xpath(linkIconXpath)
-      .click()
+      .click();
     cy.xpath(removeLinkXpath)
-      .click()
+      .click();
     cy.xpath(linkXpath)
-      .should('not.exist')
+      .should('not.exist');
     cy.xpath(labelXpath)
-      .should('have.text', label + editedLabelPostfix)
+      .should('have.text', label + editedLabelPostfix);
   })
 
 
   it('link toggle: 10 - checking that Remove Link removes a link in Preview mode', () => {
-    cy.wait(1000)
-    cy.clickEdit()
+    cy.wait(1000);
+    cy.clickEdit();
     cy.xpath(linkXpath)
-      .should('not.exist')
+      .should('not.exist');
     cy.xpath(labelPreviewXpath)
-      .should('have.text', label + editedLabelPostfix)
-    cy.visit('/link-toggle/')
+      .should('have.text', label + editedLabelPostfix);
+    cy.visit('/link-toggle/');
     cy.xpath(labelPreviewXpath)
-      .click()
-    cy.url().should('eq', Cypress.config().baseUrl + '/link-toggle/')
+      .click();
+    cy.url().should('eq', Cypress.config().baseUrl + '/link-toggle/');
   })
-
 })
