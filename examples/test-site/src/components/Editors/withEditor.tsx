@@ -26,7 +26,7 @@ const withPlaceholder = (placeholder: string) => (
   )
 );
 
-const asEditor = (Editor:ComponentType<any>) => (nodeKey?: string, placeholder?: string) => (
+const withEditor = (Editor:ComponentType<any>) => (nodeKey?: string, placeholder?: string) => (
   flow(
     addClasses('overflow-hidden'),
     withChild(flow(
@@ -35,4 +35,5 @@ const asEditor = (Editor:ComponentType<any>) => (nodeKey?: string, placeholder?:
     )(Editor)),
   )
 );
-export default asEditor;
+export default withEditor;
+export { withPlaceholder };

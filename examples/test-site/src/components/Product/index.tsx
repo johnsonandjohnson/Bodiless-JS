@@ -19,7 +19,7 @@ import {
   addClasses,
 } from '@bodiless/fclasses';
 import Tout from '../Tout';
-import { asEditorSimple } from '../Editors';
+import { withEditorSimple } from '../Editors';
 import {
   asHeader1,
   asImage,
@@ -35,7 +35,7 @@ import {
 
 export const ProductTitle = flow(
   asHeader1,
-  asEditorSimple('product_title', 'Product Title'),
+  withEditorSimple('product_title', 'Product Title'),
 )(H1);
 
 const asProductImage = addClasses('w-full');

@@ -20,34 +20,35 @@ import {
   withToutContent,
   withToutNodeKeys,
 } from '@bodiless/organisms';
-import {
-  withDesign, startWith, Div,
-} from '@bodiless/fclasses';
+import { withDesign } from '@bodiless/fclasses';
 import {
   asEditableImage, asEditableLink,
 } from '../Elements.token';
-import { asEditorBasic, asEditorSimple } from '../Editors';
+import {
+  asEditorSimple,
+  withEditorBasic,
+  withEditorSimple,
+} from '../Editors';
 
 export const withToutEditors = flow(
   withDesign({
     Image: asEditableImage(),
     ImageLink: asEditableLink(),
     Title: flow(
-      asEditorSimple(undefined, 'Tout Title Text'),
+      withEditorSimple(undefined, 'Tout Title Text'),
       withNode,
     ),
     Link: flow(
       withDesign({
         Link: asEditableLink(),
         Content: flow(
-          startWith(Div),
-          asEditorSimple(undefined, 'CTA'),
+          asEditorSimple('CTA'),
           withNode,
         ),
       }),
     ),
     Body: flow(
-      asEditorBasic(undefined, 'Tout Body Text'),
+      withEditorBasic(undefined, 'Tout Body Text'),
       withNode,
     ),
   }),
