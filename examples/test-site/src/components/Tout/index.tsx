@@ -19,6 +19,7 @@ import {
   asTestableTout,
   withToutContent,
   withToutNodeKeys,
+  withToutResetButtons,
 } from '@bodiless/organisms';
 import { withDesign } from '@bodiless/fclasses';
 import {
@@ -62,6 +63,7 @@ export const asEditableTout = flow(
 
 export const asContentfulTout = (content: object) => flow(
   withToutEditors,
+  withToutResetButtons(content),
   withToutContent(content),
   withToutNodeKeys,
   asTestableTout,
