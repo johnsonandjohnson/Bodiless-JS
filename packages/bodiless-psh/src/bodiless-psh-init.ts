@@ -57,7 +57,7 @@ const mergeByKey = (Source: any, Destination: any, Whitelist: any) => {
             Object.assign(result, { [key]: Destination[key] });
           } else {
             if (Source[key] !== Destination[key]) {
-              console.log(`Key '${key}' is not whitelisted and default value of '${Source[key]}' is different from site level value '${Destination[key]}'. Default value will be used. `)
+              console.log(`Key '${key}' is not whitelisted and default value of '${Source[key]}' is different from site level value '${Destination[key]}'. Default value will be used. `);
             }
             Object.assign(result, { [key]: Source[key] });
           }
