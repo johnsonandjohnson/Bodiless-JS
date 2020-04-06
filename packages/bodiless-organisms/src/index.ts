@@ -43,10 +43,8 @@ export {
 
 
 export {
-  Tout,
   ToutClean,
   withToutNodeKeys,
-  asEditableTout,
   asTestableTout,
 } from './components/Touts';
 
