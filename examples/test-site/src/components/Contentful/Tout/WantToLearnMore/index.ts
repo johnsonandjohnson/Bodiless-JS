@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
+import { flow } from 'lodash';
+import { withResetButton } from '@bodiless/core';
 import { ToutClean } from '@bodiless/organisms';
 import { asContentfulTout } from '../../../Tout';
 import titleContent from './title';
@@ -23,7 +25,6 @@ const toutContent = {
   ImageLink: ctaContent.link,
   Image: imageContent,
   Title: titleContent,
-  // ToDo: bug. page refresh is required in order to get reverted changes.
   Body: bodyContent,
   Link: {
     Link: ctaContent.link,
@@ -31,6 +32,9 @@ const toutContent = {
   },
 };
 
-const WantToLearnMore = asContentfulTout(toutContent)(ToutClean);
+const WantToLearnMore = flow(
+  withResetButton,
+  asContentfulTout(toutContent),
+)(ToutClean);
 
 export default WantToLearnMore;

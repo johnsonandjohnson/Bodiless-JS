@@ -12,7 +12,11 @@
  * limitations under the License.
  */
 
-import { ToutClean } from '@bodiless/organisms';
+import { flow } from 'lodash';
+import {
+  ToutClean,
+  withToutResetButtons,
+} from '@bodiless/organisms';
 import { asContentfulTout } from '../../../Tout';
 import titleContent from './title';
 import bodyContent from './body';
@@ -31,6 +35,9 @@ const toutContent = {
   },
 };
 
-const GivingBackToCommunity = asContentfulTout(toutContent)(ToutClean);
+const GivingBackToCommunity = flow(
+  withToutResetButtons(toutContent),
+  asContentfulTout(toutContent),
+)(ToutClean);
 
 export default GivingBackToCommunity;
