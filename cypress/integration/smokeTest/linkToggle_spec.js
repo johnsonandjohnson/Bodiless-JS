@@ -8,18 +8,14 @@ describe('Link Toggle smoke tests', function () {
 
   const label = 'AT - Label'
   const url = 'AT-Url'
-  const editedLabelPostfix = ' - edited'
-  const editedUrlPostfix = '-edited'
-
-  const labelXpath = '//*[@class="my-3"]//*[@class="bodiless-inline-editable"]'
-  const labelPreviewXpath = '//*[@class="my-3"]//span'
-  const linkXpath = '//*[@class="my-3"]/a'
-
+  const editedPostfix = '-edited'
+  const labelXpath = '//*[@data-linktoggle-element="link-toggle"]//*[@class="bodiless-inline-editable"]'
+  const labelPreviewXpath = '//*[@data-linktoggle-element="link-toggle"]//span'
+  const linkXpath = '//*[@data-linktoggle-element="link-toggle"]//a'
   const linkIconXpath = '//*[@aria-label="Local Context Menu"]//*[@aria-label="Link"]'
   const urlFieldXpath = '//form[@aria-label="Context Menu Link Form"]//input[@id="link-href"]'
   const checkmarkIconLinkFormXpath = '//form[@aria-label="Context Menu Link Form"]//button[@aria-label="Submit"]'
   const removeLinkXpath = '//form[@aria-label="Context Menu Link Form"]//button[text()="Remove Link"]'
-
 
 
   it('link toggle: 1 - checking the label without a url', () => {
@@ -70,8 +66,8 @@ describe('Link Toggle smoke tests', function () {
   it('link toggle: 5 - checking the label with a url value can be edited', () => {
     cy.clickEdit();
     cy.xpath(labelXpath)
-      .type(editedLabelPostfix)
-      .should('have.text', label + editedLabelPostfix);
+      .type(editedPostfix)
+      .should('have.text', label + editedPostfix);
     cy.xpath(linkXpath)
       .should('have.attr', 'href', '#' + url);
   })
@@ -83,13 +79,13 @@ describe('Link Toggle smoke tests', function () {
     cy.xpath(linkIconXpath)
       .click();
     cy.xpath(urlFieldXpath)
-      .type(editedUrlPostfix);
+      .type(editedPostfix);
     cy.xpath(checkmarkIconLinkFormXpath)
       .click();
     cy.xpath(labelXpath)
-      .should('have.text', label + editedLabelPostfix);
+      .should('have.text', label + editedPostfix);
     cy.xpath(linkXpath)
-      .should('have.attr', 'href', '#' + url + editedUrlPostfix);
+      .should('have.attr', 'href', '#' + url + editedPostfix);
   })
 
 
@@ -97,16 +93,16 @@ describe('Link Toggle smoke tests', function () {
     cy.wait(1000);
     cy.clickEdit();
     cy.xpath(labelPreviewXpath)
-      .should('have.text', label + editedLabelPostfix);
+      .should('have.text', label + editedPostfix);
     cy.xpath(linkXpath)
-      .should('have.attr', 'href', '#' + url + editedUrlPostfix);
+      .should('have.attr', 'href', '#' + url + editedPostfix);
   })
 
 
   it('link toggle: 8 - checking clicking the link in Preview mode', () => {
     cy.xpath(linkXpath)
       .click();
-    cy.url().should('include', url + editedUrlPostfix);
+    cy.url().should('include', url + editedPostfix);
   })
 
 
@@ -121,7 +117,7 @@ describe('Link Toggle smoke tests', function () {
     cy.xpath(linkXpath)
       .should('not.exist');
     cy.xpath(labelXpath)
-      .should('have.text', label + editedLabelPostfix);
+      .should('have.text', label + editedPostfix);
   })
 
 
@@ -131,7 +127,7 @@ describe('Link Toggle smoke tests', function () {
     cy.xpath(linkXpath)
       .should('not.exist');
     cy.xpath(labelPreviewXpath)
-      .should('have.text', label + editedLabelPostfix);
+      .should('have.text', label + editedPostfix);
     cy.visit('/link-toggle/');
     cy.xpath(labelPreviewXpath)
       .click();
