@@ -14,17 +14,18 @@
 
 import { ToutClean } from '@bodiless/organisms';
 import { asContentfulTout } from '../../../Tout';
-import titleContent from './title';
-import bodyContent from './body';
-import imageContent from './image';
-import ctaContent from './cta';
+import title from './title.json';
+import body from './body.json';
+import image from './image';
+import cta from './cta.json';
+import ctaContent from './ctaContent.json';
 
 const toutContent = {
-  'cta$image': imageContent,
-  'title': titleContent,
-  'body': bodyContent,
-  'cta': ctaContent.link,
-  'cta$text': ctaContent.text,
+  'cta$image': image,
+  'title': title,
+  'body': body,
+  'cta': cta,
+  'cta$text': ctaContent,
 };
 
 const GivingBackToCommunity = asContentfulTout(toutContent)(ToutClean);
