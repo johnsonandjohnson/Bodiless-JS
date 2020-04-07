@@ -17,6 +17,7 @@ import ContextWrapper from './ContextWrapper';
 import LocalContextMenu from './LocalContextMenu';
 import PageEditor from './PageEditor';
 import StaticPage from './StaticPage';
+import PageOverlay from './PageOverlay';
 import {
   IContextMenuProps as ContextMenuProps,
   ButtonVariantProps,
@@ -35,4 +36,5 @@ export {
   LocalContextMenu,
   PageEditor,
   StaticPage,
+  PageOverlay,
 };

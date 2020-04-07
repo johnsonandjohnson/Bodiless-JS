@@ -28,6 +28,7 @@ import { TMenuOption } from '../PageEditContext/types';
 type CompleteUI = {
   GlobalContextMenu: React.ComponentType<ContextMenuProps>;
   LocalContextMenu: React.ComponentType<ContextMenuProps>;
+  PageOverlay?: FC;
 };
 export type UI = Partial<CompleteUI>;
 
@@ -96,11 +97,14 @@ const PageEditor: FC<Props> = ({ children, ui }) => {
     ...ui,
   };
 
+  const { PageOverlay = () => null } = newUI;
+
   return (
     <uiContext.Provider value={newUI}>
       <PageContextProvider name="page" getMenuOptions={getMenuOptions}>
         {children}
         <GlobalContextMenu />
+        <PageOverlay />
       </PageContextProvider>
     </uiContext.Provider>
   );

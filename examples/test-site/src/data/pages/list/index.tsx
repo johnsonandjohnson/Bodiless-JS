@@ -17,12 +17,13 @@ import { graphql } from 'gatsby';
 import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
-  List, Editable, asEditableList, withSublist, Link,
+  List, Editable, asEditableList, withBasicSublist,
 } from '@bodiless/components';
 import {
   withDesign, replaceWith, addClasses, stylable,
 } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
+import EditableLink from '../../../components/Link';
 
 /**
  * We provide a simple, editable title.
@@ -32,7 +33,7 @@ const SimpleTitle = (props: any) => (
 );
 
 const LinkTitle = (props: any) => (
-  <Link nodeKey="link" {...props}><Editable nodeKey="text" placeholder="Item" /></Link>
+  <EditableLink nodeKey="link" {...props}><Editable nodeKey="text" placeholder="Item" /></EditableLink>
 );
 
 /**
@@ -64,12 +65,12 @@ const withLessPadding = withDesign({
 });
 
 const InnerList = withLessPadding(EditableList);
-const MiddleList = withSublist(InnerList)(EditableList);
-const OuterList = withSublist(MiddleList)(EditableList);
+const MiddleList = withBasicSublist(InnerList)(EditableList);
+const OuterList = withBasicSublist(MiddleList)(EditableList);
 
 const InnerLinkList = withLessPadding(EditableLinkList);
-const MiddleLinkList = withSublist(InnerLinkList)(EditableLinkList);
-const OuterLinkList = withSublist(MiddleLinkList)(EditableLinkList);
+const MiddleLinkList = withBasicSublist(InnerLinkList)(EditableLinkList);
+const OuterLinkList = withBasicSublist(MiddleLinkList)(EditableLinkList);
 
 export default (props: any) => (
   <Page {...props}>
