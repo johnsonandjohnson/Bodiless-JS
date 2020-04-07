@@ -22,8 +22,8 @@ type Content = string | object | Function;
 const withDefaultContent = <P extends object>(content: Content) => (Component: CT<P>) => {
   const WithDefaultContent = (props: P) => {
     const { node } = useNode();
-    // @ts-ignore ToDo: resolve types
-    const nodeWithDefaultContent = new ContentfulNode(node, content);
+    // @ts-ignore
+    const nodeWithDefaultContent = ContentfulNode.create(node, content);
     return (
       <NodeProvider node={nodeWithDefaultContent}>
         <Component {...props} />

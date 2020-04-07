@@ -50,9 +50,9 @@ export type ContentNode<D> = {
 };
 
 export class DefaultContentNode<D extends object> implements ContentNode<D> {
-  private actions: Actions;
+  protected actions: Actions;
 
-  private getters: Getters;
+  protected getters: Getters;
 
   path: string[];
 
@@ -92,6 +92,14 @@ export class DefaultContentNode<D extends object> implements ContentNode<D> {
   get keys() {
     const { getKeys } = this.getters;
     return getKeys();
+  }
+  
+  getGetters() {
+    return this.getters;
+  }
+
+  getActions() {
+    return this.actions;
   }
 
   static dummy(path = 'root', initialData = {}) {

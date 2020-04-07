@@ -13,11 +13,10 @@
  */
 
 import { flow } from 'lodash';
-import { withNode } from '@bodiless/core';
+import { withDefaultContent, withNode } from '@bodiless/core';
 import {
   ToutClean,
   asTestableTout,
-  withToutContent,
   withToutNodeKeys,
   withToutResetButtons,
 } from '@bodiless/organisms';
@@ -64,8 +63,8 @@ export const asEditableTout = flow(
 export const asContentfulTout = (content: object) => flow(
   withToutEditors,
   withToutResetButtons(content),
-  withToutContent(content),
   withToutNodeKeys,
+  withDefaultContent(content),
   asTestableTout,
 );
 

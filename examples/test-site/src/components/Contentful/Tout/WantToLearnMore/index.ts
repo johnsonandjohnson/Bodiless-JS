@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
+import { flow } from 'lodash';
+import { withDefaultContent } from '@bodiless/core';
 import { ToutClean } from '@bodiless/organisms';
 import { asContentfulTout } from '../../../Tout';
 import titleContent from './title';
@@ -20,14 +22,11 @@ import imageContent from './image';
 import ctaContent from './cta';
 
 const toutContent = {
-  ImageLink: ctaContent.link,
-  Image: imageContent,
-  Title: titleContent,
-  Body: bodyContent,
-  Link: {
-    Link: ctaContent.link,
-    Text: ctaContent.text,
-  },
+  'cta$image': imageContent,
+  'title': titleContent,
+  'body': bodyContent,
+  'cta': ctaContent.link,
+  'cta$text': ctaContent.text,
 };
 
 const WantToLearnMore = asContentfulTout(toutContent)(ToutClean);

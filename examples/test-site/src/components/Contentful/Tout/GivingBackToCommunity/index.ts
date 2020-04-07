@@ -20,15 +20,11 @@ import imageContent from './image';
 import ctaContent from './cta';
 
 const toutContent = {
-  ImageLink: ctaContent.link,
-  Image: imageContent,
-  Title: titleContent,
-  // ToDo: bug. page refresh is required in order to get reverted changes.
-  Body: bodyContent,
-  Link: {
-    Link: ctaContent.link,
-    Text: ctaContent.text,
-  },
+  'cta$image': imageContent,
+  'title': titleContent,
+  'body': bodyContent,
+  'cta': ctaContent.link,
+  'cta$text': ctaContent.text,
 };
 
 const GivingBackToCommunity = asContentfulTout(toutContent)(ToutClean);
