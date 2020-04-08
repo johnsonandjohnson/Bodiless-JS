@@ -56,8 +56,8 @@ export const asEditableTout = flow(
 );
 
 export const asContentfulTout = (content: object) => flow(
-  withToutEditors,
   withToutResetButtons,
+  withToutEditors,
   withToutNodeKeys,
   withDefaultContent(content),
   asTestableTout,

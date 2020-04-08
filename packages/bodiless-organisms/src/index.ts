@@ -21,6 +21,8 @@ import {
   withBurgerSubmenu,
 } from './components/BurgerMenu';
 
+import withToutResetButtons from './components/Contentful/withToutResetButtons';
+
 export {
   SingleAccordion,
   SingleAccordionClean,
@@ -72,10 +74,6 @@ export {
   withBurgerSubmenu,
 };
 
-export {
-  withToutContent,
-  withCTAContent,
-  withToutResetButtons,
-} from './components/Contentful';
+export { withToutResetButtons };
 
 export { Slider };

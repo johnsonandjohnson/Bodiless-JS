@@ -63,14 +63,16 @@ const withRootNode = (store: Store) => <P extends object>(Component: ComponentTy
   return WithRootNode;
 };
 
-describe('withContent', () => {
+describe('withDefaultContent', () => {
   describe('when a component with single node is wrapped', () => {
     describe('when the wrapped component node data is not empty', () => {
       test('wrapped component takes node data from store', () => {
         const Foo = flow(
-          withDefaultContent('defaultFooContent'),
           withNode,
           withNodeKey('foo'),
+          withDefaultContent({
+            foo: 'defaultFooContent',
+          }),
           withRootNode({
             ...defaultStore,
             root$foo: 'fooValue',
@@ -83,9 +85,11 @@ describe('withContent', () => {
     describe('when the wrapped component node data is empty object', () => {
       test('wrapped component takes default content', () => {
         const Foo = flow(
-          withDefaultContent('defaultFooContent'),
           withNode,
           withNodeKey('foo'),
+          withDefaultContent({
+            foo: 'defaultFooContent',
+          }),
           withRootNode({
             ...defaultStore,
             root$foo: {},
@@ -98,9 +102,11 @@ describe('withContent', () => {
     describe('when the wrapped component node data is undefined', () => {
       test('wrapped component takes default content', () => {
         const Foo = flow(
-          withDefaultContent('defaultFooContent'),
           withNode,
           withNodeKey('foo'),
+          withDefaultContent({
+            foo: 'defaultFooContent',
+          }),
           withRootNode({
             ...defaultStore,
             root$foo: undefined,

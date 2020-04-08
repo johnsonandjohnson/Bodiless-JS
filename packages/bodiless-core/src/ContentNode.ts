@@ -37,7 +37,7 @@ export type Getters = {
   getKeys(): string[];
 };
 
-type Path = string | string[];
+export type Path = string | string[];
 
 export type ContentNode<D> = {
   data: D;

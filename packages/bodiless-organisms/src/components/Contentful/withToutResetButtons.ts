@@ -15,7 +15,7 @@
 import { withResetButton } from '@bodiless/core';
 import { withDesign } from '@bodiless/fclasses';
 
-const withToutResetButtons = () => withDesign({
+const withToutResetButtons = withDesign({
   ImageLink: withResetButton,
   Title: withResetButton,
   Body: withResetButton,

@@ -16,14 +16,13 @@ import React, { ComponentType as CT } from 'react';
 import NodeProvider, { useNode } from '../NodeProvider';
 import withNode from '../withNode';
 import ContentfulNode from './ContentfulNode';
+import { DefaultContentNode } from '../ContentNode';
 
-type Content = string | object | Function;
-
-const withDefaultContent = <P extends object>(content: Content) => (Component: CT<P>) => {
+const withDefaultContent = <P extends object>(content: object) => (Component: CT<P>) => {
   const WithDefaultContent = (props: P) => {
     const { node } = useNode();
-    // @ts-ignore
-    const nodeWithDefaultContent = ContentfulNode.create(node, content);
+    // eslint-disable-next-line max-len
+    const nodeWithDefaultContent = ContentfulNode.create((node as DefaultContentNode<object>), content);
     return (
       <NodeProvider node={nodeWithDefaultContent}>
         <Component {...props} />

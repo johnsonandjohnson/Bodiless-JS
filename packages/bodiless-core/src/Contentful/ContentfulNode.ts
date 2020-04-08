@@ -12,35 +12,27 @@
  * limitations under the License.
  */
 
-import { DefaultContentNode } from '../ContentNode';
-
-// ToDo: export from Contentful node
-type Path = string | string[];
-
-type ContentfulNodeContent = object | Function;
+import { DefaultContentNode, Path } from '../ContentNode';
 
 export const getRelativeNodeKey = (basePath: Path, nodePath: Path) => {
-  const baseNodeKey = Array.isArray(basePath) ? basePath.join('$') : basePath;
-  const nodeKey = Array.isArray(nodePath) ? nodePath.join('$') : nodePath;
-  // ToDo: get rid of + 1 or document why it is needed
-  return nodeKey.startsWith(baseNodeKey) ? nodeKey.substring(baseNodeKey.length + 1) : nodeKey;
+  const delimiter = '$';
+  const baseNodeKey = Array.isArray(basePath) ? basePath.join(delimiter) : basePath;
+  const baseNodeKeyLength = baseNodeKey.length + delimiter.length;
+  const nodeKey = Array.isArray(nodePath) ? nodePath.join(delimiter) : nodePath;
+  return nodeKey.startsWith(baseNodeKey) ? nodeKey.substring(baseNodeKeyLength) : nodeKey;
 };
 
 // TODO: this class should expose a method that allows to check if node has value in store
-// eslint-disable-next-line max-len
-export default class ContentfulNode<D extends ContentfulNodeContent> extends DefaultContentNode<D> {
-  // @ts-ignore has no initializer and is not definitely assigned in the constructor
-  private baseContentPath: Path;
+export default class ContentfulNode<D extends object> extends DefaultContentNode<D> {
+  private baseContentPath: Path = [];
 
   // @ts-ignore has no initializer and is not definitely assigned in the constructor
   private content: D;
 
-  // eslint-disable-next-line max-len
-  static create(storeNode: DefaultContentNode<ContentfulNodeContent>, content: ContentfulNodeContent) {
-    // eslint-disable-next-line max-len
-    const contentfulNode = new ContentfulNode(storeNode.getActions(), storeNode.getGetters(), storeNode.path);
+  static create(node: DefaultContentNode<object>, content: object) {
+    const contentfulNode = new ContentfulNode(node.getActions(), node.getGetters(), node.path);
     contentfulNode.setContent(content);
-    contentfulNode.setBaseContentPath(storeNode.path);
+    contentfulNode.setBaseContentPath(node.path);
     return contentfulNode;
   }
 
@@ -50,12 +42,7 @@ export default class ContentfulNode<D extends ContentfulNodeContent> extends Def
 
   private getDefaultContent() {
     const contentKey = this.getContentKey();
-    if (typeof this.content === 'function') {
-      // @ts-ignore ToDo: remediate this one
-      return this.content(contentKey);
-    }
-    // @ts-ignore
-    return this.content[contentKey];
+    return (this.content as any)[contentKey];
   }
 
   public setContent(content: D) {
@@ -73,9 +60,8 @@ export default class ContentfulNode<D extends ContentfulNodeContent> extends Def
     return !isNodeDataEmpty ? nodeData : this.getDefaultContent();
   }
 
-  peer<E extends ContentfulNodeContent>(path: Path) {
-    const peerNode = new ContentfulNode<E>(this.actions, this.getters, path);
-    // @ts-ignore ToDo: resolve types
+  peer(path: Path) {
+    const peerNode = new ContentfulNode<object>(this.actions, this.getters, path);
     peerNode.setContent(this.content);
     peerNode.setBaseContentPath(this.baseContentPath);
     return peerNode;
