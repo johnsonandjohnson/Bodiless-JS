@@ -21,3 +21,5 @@ web:
     locations:
         '/':
             expires:
+        '/___docs':
+            expires:

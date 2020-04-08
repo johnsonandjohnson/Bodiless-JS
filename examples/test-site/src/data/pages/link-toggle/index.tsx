@@ -29,7 +29,7 @@ export default (props: any) => (
         The link can be removed by clicking on the link button again and
         then clicking &quot;Remove Link&quot; on the edit form.
       </p>
-      <div className="my-3">
+      <div className="my-3" data-linktoggle-element="link-toggle">
         <LinkToggle nodeKey="linktoggle1"><Editable nodeKey="text" placeholder="Link Toggle" /></LinkToggle>
       </div>
     </Layout>
