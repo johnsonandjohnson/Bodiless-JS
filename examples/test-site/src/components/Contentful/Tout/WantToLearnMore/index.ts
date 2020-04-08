@@ -16,16 +16,16 @@ import { ToutClean } from '@bodiless/organisms';
 import { asContentfulTout } from '../../../Tout';
 import title from './title.json';
 import body from './body.json';
-import image from './image';
+import cta$image from './image';
 import cta from './cta.json';
-import ctaContent from './ctaContent.json';
+import cta$text from './cta$text.json';
 
 const toutContent = {
-  'cta$image': image,
-  'title': title,
-  'body': body,
-  'cta': cta,
-  'cta$text': ctaContent,
+  cta$image,
+  title,
+  body,
+  cta,
+  cta$text,
 };
 
 const WantToLearnMore = asContentfulTout(toutContent)(ToutClean);

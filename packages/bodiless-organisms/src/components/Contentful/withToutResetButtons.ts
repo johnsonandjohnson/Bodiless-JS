@@ -14,14 +14,12 @@
 
 import { withResetButton } from '@bodiless/core';
 import { withDesign } from '@bodiless/fclasses';
-import { ToutContent } from './withToutContent';
 
-// @ts-ignore
-const withToutResetButtons = (content: Partial<ToutContent>) => withDesign({
-  ...(content.Image || content.ImageLink ? { ImageLink: withResetButton } : {}),
-  ...(content.Title ? { Title: withResetButton } : {}),
-  ...(content.Body ? { Body: withResetButton } : {}),
-  ...(content.Link ? { Link: withResetButton } : {}),
+const withToutResetButtons = () => withDesign({
+  ImageLink: withResetButton,
+  Title: withResetButton,
+  Body: withResetButton,
+  Link: withResetButton,
 });
 
 export default withToutResetButtons;

@@ -47,7 +47,7 @@ describe('ContentfulNode', () => {
         });
         const defaultContentNode = new DefaultContentNode(actions, getters, 'root');
         const defaultContent = {
-          foo: 'fooDefaultContent'
+          foo: 'fooDefaultContent',
         };
         const contentfulNode = ContentfulNode.create(defaultContentNode, defaultContent);
         const fooNode = contentfulNode.child('foo');
@@ -62,7 +62,7 @@ describe('ContentfulNode', () => {
         });
         const defaultContentNode = new DefaultContentNode(actions, getters, 'root');
         const defaultContent = {
-          foo: 'fooDefaultContent'
+          foo: 'fooDefaultContent',
         };
         const contentfulNode = ContentfulNode.create(defaultContentNode, defaultContent);
         const fooNode = contentfulNode.child('foo');
@@ -81,7 +81,7 @@ describe('ContentfulNode', () => {
         const defaultContentNode = new DefaultContentNode(actions, getters, 'root');
         const defaultContent = {
           foo: 'fooDefaultContent',
-          foo$bar: 'barDefaultContent'
+          foo$bar: 'barDefaultContent',
         };
         const contentfulNode = ContentfulNode.create(defaultContentNode, defaultContent);
         const fooNode = contentfulNode.child('foo');
@@ -100,7 +100,7 @@ describe('ContentfulNode', () => {
         const defaultContentNode = new DefaultContentNode(actions, getters, 'root');
         const defaultContent = {
           foo: 'fooDefaultContent',
-          foo$bar: 'barDefaultContent'
+          foo$bar: 'barDefaultContent',
         };
         const contentfulNode = ContentfulNode.create(defaultContentNode, defaultContent);
         const fooNode = contentfulNode.child('foo');
@@ -119,7 +119,7 @@ describe('ContentfulNode', () => {
         const defaultContentNode = new DefaultContentNode(actions, getters, 'root');
         const defaultContent = {
           foo: 'fooDefaultContent',
-          foo$bar: 'barDefaultContent'
+          foo$bar: 'barDefaultContent',
         };
         const contentfulNode = ContentfulNode.create(defaultContentNode, defaultContent);
         const fooNode = contentfulNode.child('foo');

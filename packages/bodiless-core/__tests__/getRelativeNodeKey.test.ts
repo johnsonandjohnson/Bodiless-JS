@@ -12,18 +12,18 @@
  * limitations under the License.
  */
 
-import { getContentfulNodeKey } from '../src/Contentful/ContentfulNode';
+import { getRelativeNodeKey } from '../src/Contentful/ContentfulNode';
 
-describe('getContentfulNodeKey', () => {
+describe('getRelativeNodeKey', () => {
   it('returns node key relative to base path', () => {
     const basePath1 = ['foo'];
     const nodePath1 = ['foo', 'bar'];
-    expect(getContentfulNodeKey(basePath1, nodePath1)).toBe('bar');
+    expect(getRelativeNodeKey(basePath1, nodePath1)).toBe('bar');
     const basePath2 = ['foo', 'bar'];
     const nodePath2 = ['foo', 'bar', 'baz'];
-    expect(getContentfulNodeKey(basePath2, nodePath2)).toBe('baz');
+    expect(getRelativeNodeKey(basePath2, nodePath2)).toBe('baz');
     const basePath3 = ['foo'];
     const nodePath3 = ['foo', 'bar', 'baz'];
-    expect(getContentfulNodeKey(basePath3, nodePath3)).toBe('bar$baz');
+    expect(getRelativeNodeKey(basePath3, nodePath3)).toBe('bar$baz');
   });
 });

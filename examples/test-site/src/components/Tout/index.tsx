@@ -25,7 +25,6 @@ import {
   asEditableImage, asEditableLink,
 } from '../Elements.token';
 import {
-  asEditorSimple,
   withEditorBasic,
   withEditorSimple,
 } from '../Editors';
@@ -39,13 +38,9 @@ export const withToutEditors = flow(
       withNode,
     ),
     Link: flow(
-      withDesign({
-        Link: asEditableLink(),
-        Content: flow(
-          asEditorSimple('CTA'),
-          withNode,
-        ),
-      }),
+      withEditorSimple('text', 'CTA'),
+      asEditableLink(),
+      withNode,
     ),
     Body: flow(
       withEditorBasic(undefined, 'Tout Body Text'),
@@ -62,7 +57,7 @@ export const asEditableTout = flow(
 
 export const asContentfulTout = (content: object) => flow(
   withToutEditors,
-  withToutResetButtons(content),
+  withToutResetButtons,
   withToutNodeKeys,
   withDefaultContent(content),
   asTestableTout,

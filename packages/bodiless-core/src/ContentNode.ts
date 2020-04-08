@@ -93,7 +93,7 @@ export class DefaultContentNode<D extends object> implements ContentNode<D> {
     const { getKeys } = this.getters;
     return getKeys();
   }
-  
+
   getGetters() {
     return this.getters;
   }

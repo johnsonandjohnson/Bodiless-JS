@@ -25,9 +25,7 @@ import {
   H2,
   StylableProps,
   addProps,
-  stylable,
 } from '@bodiless/fclasses';
-import { TextLink } from '@bodiless/components';
 import { withNode, withNodeKey } from '@bodiless/core';
 
 export type ToutComponents = {
@@ -48,8 +46,7 @@ const toutComponentStart:ToutComponents = {
   ContentWrapper: Div,
   Title: H2,
   Body: Div,
-  // @ts-ignore ToDo: resolve types
-  Link: stylable(TextLink),
+  Link: A,
 };
 
 type Props = DesignableComponentsProps<ToutComponents> & HTMLProps<HTMLElement>;
@@ -91,12 +88,7 @@ const withToutNodeKeys = withDesign({
   Image: withNodeKey('image'),
   ImageLink: withNodeKey('cta'),
   Title: withNodeKey('title'),
-  Link: flow(
-    withDesign({
-      Link: withNodeKey('cta'),
-      Content: withNodeKey('text'),
-    }),
-  ),
+  Link: withNodeKey('cta'),
   Body: withNodeKey('body'),
 });
 

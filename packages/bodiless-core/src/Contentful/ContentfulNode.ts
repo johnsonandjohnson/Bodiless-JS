@@ -17,24 +17,27 @@ import { DefaultContentNode } from '../ContentNode';
 // ToDo: export from Contentful node
 type Path = string | string[];
 
-type ContentfulNodeContent = object | Function
+type ContentfulNodeContent = object | Function;
 
 export const getRelativeNodeKey = (basePath: Path, nodePath: Path) => {
   const baseNodeKey = Array.isArray(basePath) ? basePath.join('$') : basePath;
-  const nodeKey = Array.isArray(nodePath) ? nodePath.join('$') : nodePath;;
+  const nodeKey = Array.isArray(nodePath) ? nodePath.join('$') : nodePath;
   // ToDo: get rid of + 1 or document why it is needed
   return nodeKey.startsWith(baseNodeKey) ? nodeKey.substring(baseNodeKey.length + 1) : nodeKey;
-}
+};
 
 // TODO: this class should expose a method that allows to check if node has value in store
 // eslint-disable-next-line max-len
 export default class ContentfulNode<D extends ContentfulNodeContent> extends DefaultContentNode<D> {
   // @ts-ignore has no initializer and is not definitely assigned in the constructor
   private baseContentPath: Path;
+
   // @ts-ignore has no initializer and is not definitely assigned in the constructor
   private content: D;
 
+  // eslint-disable-next-line max-len
   static create(storeNode: DefaultContentNode<ContentfulNodeContent>, content: ContentfulNodeContent) {
+    // eslint-disable-next-line max-len
     const contentfulNode = new ContentfulNode(storeNode.getActions(), storeNode.getGetters(), storeNode.path);
     contentfulNode.setContent(content);
     contentfulNode.setBaseContentPath(storeNode.path);
