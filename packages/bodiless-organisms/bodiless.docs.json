@@ -2,7 +2,7 @@
   "Components": {
     "Organisms": {
       "index.md" : "./README.md",
-      "slider.md": "./README.md",
+      "carousel.md": "./README.md",
       "touts.md": "./README.md",
       "MainMenu.md" : "./doc/MainMenu.md",
       "BurgerMenu.md" : "./doc/BurgerMenu.md"

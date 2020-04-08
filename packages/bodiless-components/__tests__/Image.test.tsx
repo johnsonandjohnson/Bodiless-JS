@@ -56,7 +56,7 @@ describe('image interactions', () => {
 
     const imageSrc = menuForm.find('input#image-src');
     expect(imageSrc).toHaveLength(1);
-    expect(imageSrc.prop('value')).toBe('/images/placeholder.png');
+    expect(imageSrc.prop('value')).toBe('/images/placeholder.jpg');
 
     const imageAlt = menuForm.find('input#image-alt');
     expect(imageAlt).toHaveLength(1);

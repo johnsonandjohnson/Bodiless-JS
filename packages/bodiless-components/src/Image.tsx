@@ -161,7 +161,7 @@ export const editButtonOptions: EditButtonOptions<Props, Data> = {
 };
 
 const emptyValue = {
-  src: '/images/placeholder.png',
+  src: '/images/placeholder.jpg',
   alt: 'Alt Text',
 };
 
