@@ -26,7 +26,7 @@ import {
   StylableProps,
   addProps,
 } from '@bodiless/fclasses';
-import { withNode, withNodeKey } from '@bodiless/core';
+import { withNode } from '@bodiless/core';
 
 export type ToutComponents = {
   Wrapper: ComponentType<StylableProps>,
@@ -84,14 +84,6 @@ const ToutClean = flow(
   withNode,
 )(ToutBase);
 
-const withToutNodeKeys = withDesign({
-  Image: withNodeKey('image'),
-  ImageLink: withNodeKey('cta'),
-  Title: withNodeKey('title'),
-  Link: withNodeKey('cta'),
-  Body: withNodeKey('body'),
-});
-
 /**
  * Adds data- identifiers to help select tout elements in automated tests.
  *
@@ -110,6 +102,5 @@ const asTestableTout = withDesign({
 
 export {
   ToutClean,
-  withToutNodeKeys,
   asTestableTout,
 };

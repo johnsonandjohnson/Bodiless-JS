@@ -19,23 +19,31 @@ import {
   withLocalContextMenu,
 } from '../hoc';
 import { useNode } from '../NodeProvider';
+import { TMenuOption } from '../PageEditContext/types';
 
-const useGetMenuOptions = () => {
+type MenuOptionWithNodeKey = TMenuOption & {
+  nodeKey?: string;
+};
+
+const useGetMenuOptions = (menuOptionWithNodeKey?: MenuOptionWithNodeKey) => () => {
   const { node } = useNode();
+  const { nodeKey, ...menuOption } = menuOptionWithNodeKey || { nodeKey: undefined };
+  const nodeKeyToDelete = nodeKey ? node.path.concat(nodeKey) : undefined;
   // TODO: we should disable or remove the button when the node is already reverted
   return () => ([
     {
       icon: 'undo',
-      name: 'Rest',
-      handler: () => node.delete(),
+      name: 'Reset',
+      handler: () => node.delete(nodeKeyToDelete),
       local: true,
       global: false,
+      ...menuOption,
     },
   ]);
 };
 
-const withResetButton = flowRight(
-  withMenuOptions({ useGetMenuOptions }),
+const withResetButton = (menuOptionWithNodeKey?: MenuOptionWithNodeKey) => flowRight(
+  withMenuOptions({ useGetMenuOptions: useGetMenuOptions(menuOptionWithNodeKey) }),
   withContextActivator('onClick'),
   withLocalContextMenu,
 );
