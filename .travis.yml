@@ -13,14 +13,23 @@ cache:
     - npm ci
     - npm run cy:verify
 
+before_deploy:
+  - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+
 deploy:
-  local_dir: examples/test-site/doc
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
-  keep_history: true
-  on:
-    branch: master
+  - provider: pages
+    local_dir: examples/test-site/doc
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
+    keep_history: true
+    on:
+      branch: master
+  - provider: script
+    script: "npm run lerna:publish"
+    skip_cleanup: true
+    on:
+      node: "10.16"
+      tags: true
 
 defaults: &defaults
   script:
