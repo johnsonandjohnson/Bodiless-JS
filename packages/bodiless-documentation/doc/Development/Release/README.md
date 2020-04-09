@@ -20,9 +20,13 @@
 At end of Sprint, a new 0.0.x package version should be published as follows.
 
 1. Take a fresh clone of the reposotory.
-1. Checkout master branch, eg:
+1. Checkout ```release``` branch, eg:
    ```
-   git checkout master
+   git checkout -b release origin/release
+   ```
+1. Merge in latest commits from master
+   ```
+   git merge master
    ```
 1. Initialize all dependencies and build the project:
    ```
@@ -34,12 +38,7 @@ At end of Sprint, a new 0.0.x package version should be published as follows.
    npm run publish:patch
    ```
 1. Update dependencies in `package-lock.json` for each example site by following [these steps](Development\/Release\/UpdatePackages?id=updating-example-sites39-package-lockjson).
-
-1. Checkout a new release branch from master, eg:
-   ```
-   git checkout -b chore/release-0.0.45
-   ```
-1. Create a PR to master from the release branch.  PR title should be, eg:
+1. Create a PR to master from the ```release``` branch.  PR title should be, eg:
    ```
    chore: Release v0.0.45
    ```
