@@ -90,7 +90,23 @@ const asNoDraggingSlider = ifEditable(
   }),
 );
 
+/**
+ * Adds data- identifiers to help select carousel elements in automated tests.
+ *
+ * @param id The id attribute to apply to the outer wrapper.
+ */
+const asTestableCarousel = withDesign({
+  Wrapper: addProps({ 'data-carousel-element': 'wrapper' }),
+  Slider: withDesign({
+    Item: addProps({ 'data-carousel-element': 'slide' }),
+    Title: addProps({ 'data-carousel-element': 'slide-image' }),
+  }),
+});
+
+
 // Replace my Slider div with Slides List.
+// TO DO: This should move to Site Level because,
+//        its currently the composition of combining Slide List + Carousel.
 const asEditableCarousel = flow(
   withNode,
   withDesign({
@@ -103,6 +119,7 @@ const asEditableCarousel = flow(
       }),
     ),
   }),
+  asTestableCarousel,
 );
 
 const BCarousel = asEditableCarousel(BCarouselClean);
@@ -119,6 +136,7 @@ const asAutoSlider = ifReadOnly(
 const BAutoCarousel = withDesign({
   Slider: asAutoSlider,
 })(BCarousel);
+
 
 export default BCarousel;
 export {

@@ -13,7 +13,9 @@
  */
 
 import {
-  BCarouselClean, BAutoCarousel, asEditableCarousel,
+  BCarouselClean,
+  BAutoCarousel,
+  asEditableCarousel,
 } from '@bodiless/organisms';
 
 // Pass thru for now as using default Carousel's from Bodiless Organisms.
