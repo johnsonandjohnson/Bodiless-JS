@@ -24,9 +24,11 @@ Basic components to build out sites.
 ## Usage
 
 ```js
-import { Carousel } from '@bodiless/organisms';
-
-<Carousel />
+import { BCarousel, BAutoCarousel } from '@bodiless/organisms';
+// Display a non-rotating carousel
+<BCarousel />
+// Display a rotating carousel
+<BAutoCarousel />
 ```
 
 ```js
