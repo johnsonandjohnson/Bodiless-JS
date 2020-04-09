@@ -42,7 +42,6 @@ import {
   asEditableLink,
   asBlockQuote,
 } from '../Elements.token';
-import asEditor from './asEditor';
 import withEditor from './withEditor';
 
 const simpleDesign = {
@@ -85,19 +84,13 @@ const fullFeaturedDesign = {
 const EditorSimple = withDesign(simpleDesign)(RichText);
 const EditorBasic = withDesign(basicDesign)(RichText);
 const EditorFullFeatured = withDesign(fullFeaturedDesign)(RichText);
-const asEditorBasic = asEditor(EditorBasic);
-const asEditorSimple = asEditor(EditorSimple);
-const asEditorFullFeatured = asEditor(EditorFullFeatured);
 const withEditorBasic = withEditor(EditorBasic);
 const withEditorSimple = withEditor(EditorSimple);
 const withEditorFullFeatured = withEditor(EditorFullFeatured);
 export {
   EditorBasic,
   EditorFullFeatured,
-  asEditorBasic,
-  asEditorFullFeatured,
   EditorSimple,
-  asEditorSimple,
   withEditorBasic,
   withEditorSimple,
   withEditorFullFeatured,
