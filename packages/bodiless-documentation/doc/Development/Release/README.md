@@ -19,36 +19,30 @@
 
 At end of Sprint, a new 0.0.x package version should be published as follows.
 
-1. Log into npm:
-   ```
-   npm login
-   ```
-   > Note: You must have access to the
-   [Bodiless organization](https://www.npmjs.com/settings/bodiless/packages.
-   Please contact [Dewen Li](https://github.com/dewen) to obtain it.
 1. Take a fresh clone of the reposotory.
-1. Checkout a new release branch from master, eg:
+1. Checkout ```release``` branch, eg:
    ```
-   git checkout -b chore/release-0.0.37
+   git checkout -b release origin/release
+   ```
+1. Merge in latest commits from master
+   ```
+   git merge master
    ```
 1. Initialize all dependencies and build the project:
    ```
    npm run setup
    npm run build
    ```
-1. Publish packages.
+1. Publish packages with patch version update.
    ```
-   npx lerna publish 0.0.{x} --conventional-commits
+   npm run publish:patch
    ```
-   where `{x}` is the next *patch* version (eg 0.0.36 -> 0.0.37).
-
 1. Update dependencies in `package-lock.json` for each example site by following [these steps](Development\/Release\/UpdatePackages?id=updating-example-sites39-package-lockjson).
-
-1. Create a PR to master from the release branch.  PR title should be, eg:
+1. Create a PR to master from the ```release``` branch.  PR title should be, eg:
    ```
-   chore: Release v0.0.37
+   chore: Release v0.0.45
    ```
-    Commits in the PR should not be squashed since the tag is already attached to the appropriate commit hash. If we squash the original commit the release notes can be duplicated in the next release.
+    Commits in the PR should not be squashed since the tag is already attached to the appropriate commit hash.
 
 > Ensure that you do not squash/merge the release branch, You must use the
    "fast-forward" merge strategy.
