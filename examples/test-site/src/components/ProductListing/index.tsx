@@ -41,7 +41,7 @@ const asProductListingImage = flow(
 const asHeaderImage = (ImageComponent: any) => (props: any) => {
   const { src: originalSrc } = props;
   // Set placeholder image with 6:1 ratio.
-  const src = originalSrc === '/images/placeholder.jpg' ? '/images/1280x300.jpg' : originalSrc;
+  const src = originalSrc === '/images/placeholder.png' ? '/images/header-image.jpeg' : originalSrc;
   return (
     <ImageComponent
       {...props}
