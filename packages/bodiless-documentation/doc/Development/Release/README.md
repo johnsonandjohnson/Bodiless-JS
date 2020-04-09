@@ -33,7 +33,7 @@ At end of Sprint, a new 0.0.x package version should be published as follows.
    npm run setup
    npm run build
    ```
-1. Publish packages with patch verison update.
+1. Publish packages with patch version update.
    ```
    npm run publish:patch
    ```
