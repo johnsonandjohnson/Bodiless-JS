@@ -24,10 +24,10 @@ const withPlaceholder = (placeholder: string) => (
     <Component placeholder={placeholder} {...props} />
   )
 );
-const asEditor = (Editor:ComponentType<any>) => (nodeKey?: string, placeholder?: string) => (
+const withEditor = (Editor:ComponentType<any>) => (nodeKey?: string, placeholder?: string) => (
   withChild(flow(
     withPlaceholder(placeholder),
     withNodeKey(nodeKey),
   )(Editor))
 );
-export default asEditor;
+export default withEditor;
