@@ -24,7 +24,12 @@ import {
   Img,
   StylableProps,
 } from '@bodiless/fclasses';
-import { withNode, withNodeKey, ifReadOnly } from '@bodiless/core';
+import {
+  withNode,
+  withNodeKey,
+  ifReadOnly,
+  ifEditable,
+} from '@bodiless/core';
 import Carousel from 'nuka-carousel';
 import {
   asEditableList,
@@ -78,12 +83,20 @@ const BCarouselClean = flow(
   }),
 )(CarouselBase);
 
+// Allows the Image Editor form to work and not slide with the image.
+const asNoDraggingSlider = ifEditable(
+  addProps({
+    dragging: false,
+  }),
+);
+
 // Replace my Slider div with Slides List.
 const asEditableCarousel = flow(
   withNode,
   withDesign({
     Slider: flow(
       asEditableList,
+      asNoDraggingSlider,
       withNodeKey('slides'),
       withDesign({
         Title: asBodilessImage('image'),
@@ -94,6 +107,7 @@ const asEditableCarousel = flow(
 
 const BCarousel = asEditableCarousel(BCarouselClean);
 
+// Auto rotating is only on in preview/static other you can edit an image.
 const asAutoSlider = ifReadOnly(
   addProps({
     autoplay: true,
