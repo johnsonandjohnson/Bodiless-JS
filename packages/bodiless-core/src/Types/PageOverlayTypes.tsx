@@ -12,18 +12,13 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
-import { PageEditor as PlainPageEditor } from '@bodiless/core';
-import GlobalContextMenu from './GlobalContextMenu';
-import LocalContextMenu from './LocalContextMenu';
-import PageOverlay from './PageOverlay';
-
-const ui = {
-  LocalContextMenu,
-  GlobalContextMenu,
-  PageOverlay,
+export type TFullOverlaySettings = {
+  isActive: boolean,
+  hasCloseButton: boolean,
+  hasSpinner: boolean,
+  message: string,
+  maxTimeoutInSeconds: number | null,
+  onClose: () => void,
 };
 
-const PageEditor: FC = props => <PlainPageEditor ui={ui} {...props} />;
-
-export default PageEditor;
+export type TOverlaySettings = Partial<TFullOverlaySettings>;

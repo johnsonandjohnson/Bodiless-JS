@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.45](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.44...v0.0.45) (2020-04-08)
+
+
+### Bug Fixes
+
+* **migration-tool:** Improve script content transformation ([#239](https://github.com/johnsonandjohnson/bodiless-js/issues/239)) ([05117d2](https://github.com/johnsonandjohnson/bodiless-js/commit/05117d29912cca332daf06ebcb18f9425645cd92))
+
+
+
+
+
 ## [0.0.44](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.43...v0.0.44) (2020-03-26)
 
 
