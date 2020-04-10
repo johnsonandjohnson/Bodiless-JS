@@ -21,15 +21,12 @@ import {
   replaceWith,
   withDesign,
 } from '@bodiless/fclasses';
-import { asToutDefaultStyle, asToutHorizontal } from '../Tout/token';
 import { withType } from './Categories';
 import { WantToLearnMore, GivingBackToCommunity } from '../Contentful/Tout';
 
 const contentfulTouts = {
   GivingBackToCommunity: flow(
     replaceWith(GivingBackToCommunity),
-    asToutDefaultStyle,
-    asToutHorizontal,
     withTitle('Giving Back To Community'),
     withDesc('Giving Back To Community'),
     withType('Contentful')(),
@@ -37,8 +34,6 @@ const contentfulTouts = {
   ),
   WantToLearnMore: flow(
     replaceWith(WantToLearnMore),
-    asToutDefaultStyle,
-    asToutHorizontal,
     withTitle('Want to learn more?'),
     withDesc('Want to learn more?'),
     withType('Contentful')(),

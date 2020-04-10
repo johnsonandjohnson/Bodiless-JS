@@ -12,8 +12,10 @@
  * limitations under the License.
  */
 
+import { flow } from 'lodash';
 import { ToutClean } from '@bodiless/organisms';
 import { asContentfulTout } from '../../../Tout';
+import { asToutDefaultStyle, asToutHorizontal } from '../../../Tout/token';
 import title from './title.json';
 import body from './body.json';
 import cta$image from './image';
@@ -28,6 +30,10 @@ const toutContent = {
   cta$text,
 };
 
-const WantToLearnMore = asContentfulTout(toutContent)(ToutClean);
+const WantToLearnMore = flow(
+  asContentfulTout(toutContent),
+  asToutDefaultStyle,
+  asToutHorizontal,
+)(ToutClean);
 
 export default WantToLearnMore;
