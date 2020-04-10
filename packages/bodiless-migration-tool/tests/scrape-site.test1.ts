@@ -63,10 +63,13 @@ test('amount of scraped pages obeying robots.txt', async () => {
     javascriptEnabled: true,
   };
   const scraper = new Scraper(scraperParams);
-  const mockCallback = jest.fn(() => {});
-  scraper.on('pageReceived', mockCallback);
+  const pageReceivedMockCallback = jest.fn();
+  const resourceReceivedMockCallback = jest.fn();
+  scraper.on('pageReceived', pageReceivedMockCallback);
+  scraper.on('fileReceived', resourceReceivedMockCallback);
   await scraper.Crawl();
-  expect(mockCallback.mock.calls.length).toBe(3);
+  expect(pageReceivedMockCallback.mock.calls.length).toBe(3);
+  expect(resourceReceivedMockCallback.mock.calls[0][0]).toBe(`${serverUrl}/gatsby.png`);
 }, 30000);
 
 test('elements scraped from the third page', async () => {
