@@ -1,0 +1,12 @@
+{
+  "product": [
+    {
+      "productInfo": {
+        "sku": "sku",
+        "upc": "upc",
+        "productName": "name",
+        "variant": "variant"
+      }
+    }
+  ]
+}

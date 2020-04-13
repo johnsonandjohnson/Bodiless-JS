@@ -13,17 +13,28 @@
  */
 
 import React, { FC, PropsWithChildren } from 'react';
+import { flow } from 'lodash';
 import { withNode } from '@bodiless/core';
-import { useItemHandlers } from './helpers';
-import { StaticFlowContainerProps, FlowContainerItem } from './types';
+import {
+  designable,
+  Div,
+} from '@bodiless/fclasses';
+import { useItemHandlers } from './model';
+import { StaticFlowContainerProps, FlowContainerItem, FlowContainerComponents } from './types';
+
+const flowContainerComponentStart: FlowContainerComponents = {
+  Wrapper: Div,
+  ComponentWrapper: Div,
+};
 
 const NodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
 
 const StaticFlowContainer: FC<StaticFlowContainerProps> = ({ components }) => {
   const items = useItemHandlers().getItems();
+  const { Wrapper, ComponentWrapper } = components;
   return (
     // When in a static mode we don't want to use `bl-*` prefixed classes.
-    <div className="flex flex-wrap">
+    <Wrapper>
       {items
         .map((flowContainerItem: FlowContainerItem) => {
           const ChildComponent = components[flowContainerItem.type];
@@ -32,7 +43,7 @@ const StaticFlowContainer: FC<StaticFlowContainerProps> = ({ components }) => {
             throw new Error(`${flowContainerItem.type} is not an allowed content type`);
           }
           return (
-            <div
+            <ComponentWrapper
               key={`flex-${flowContainerItem.uuid}`}
               className={
                   (flowContainerItem.wrapperProps
@@ -43,14 +54,18 @@ const StaticFlowContainer: FC<StaticFlowContainerProps> = ({ components }) => {
               <NodeProvider nodeKey={flowContainerItem.uuid}>
                 <ChildComponent />
               </NodeProvider>
-            </div>
+            </ComponentWrapper>
           );
         })
         .filter(Boolean)}
-    </div>
+    </Wrapper>
   );
 };
 
 StaticFlowContainer.displayName = 'FlowContainer';
 
-export default StaticFlowContainer;
+const asStaticFlowContainer = flow(
+  designable(flowContainerComponentStart),
+);
+
+export default asStaticFlowContainer(StaticFlowContainer);

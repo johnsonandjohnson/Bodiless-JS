@@ -17,12 +17,21 @@ import axios from 'axios';
 
 const backendPort = process.env.GATSBY_BODILESS_BACKEND_PORT || 8001;
 
+type BackendClientConf = {
+  baseUrl?: string,
+  prefix?: string,
+};
+
 export default class BackendClient {
   private root: string;
 
   private prefix: string;
 
-  constructor(baseUrl?: string, prefix?: string) {
+  constructor(backendClientConf?: BackendClientConf) {
+    const {
+      baseUrl = undefined,
+      prefix = undefined,
+    } = backendClientConf || {};
     let host = `http://localhost:${backendPort}`;
     if (typeof window !== 'undefined') {
       // eslint-disable-next-line no-undef
@@ -41,9 +50,18 @@ export default class BackendClient {
     return axios.post(this.root + resourcePath, data);
   }
 
+  delete(resourcePath: string) {
+    return axios.delete(this.root + resourcePath);
+  }
+
   savePath(resourcePath: string, data: any) {
     const fullPath = path.join(this.prefix, 'content', resourcePath);
     return this.post(fullPath, data);
+  }
+
+  deletePath(resourcePath: string) {
+    const fullPath = path.join(this.prefix, 'content', resourcePath);
+    return this.delete(fullPath);
   }
 
   log(data: any) {

@@ -567,3 +567,45 @@ describe('html5 <base> tag', () => {
     });
   });
 });
+
+describe('replacing strings in page source html', () => {
+  test('should preplace malformed string', () => {
+    const sourceHtml = `
+      <div id="search""></div>
+   `;
+    const expectedHtml = `
+      <div id="search"></div>
+    `;
+    const htmlParser = new HtmlParser(sourceHtml);
+    htmlParser.replaceString('" ">', '">');
+    const processedHtml = htmlParser.getBodyHtml();
+    expect(htmlclean(processedHtml)).toBe(htmlclean(expectedHtml));
+  });
+});
+
+describe('remove empty attributes on selected element', () => {
+  it('removes empty attributes', () => {
+    const sourceHtml = `
+      <html>
+        <head>
+          <link href="" rel="test">
+        </head>
+        <body>
+        </body>
+      </html>
+   `;
+    const expectedHtml = `
+      <html>
+        <head>
+          <link rel="test">
+        </head>
+        <body>
+        </body>
+      </html>
+    `;
+    const htmlParser = new HtmlParser(sourceHtml);
+    htmlParser.removeEmptyAttribute('head link', ['href']);
+    const processedHtml = htmlParser.getPageHtml();
+    expect(htmlclean(processedHtml)).toBe(htmlclean(expectedHtml));
+  });
+});

@@ -28,31 +28,55 @@ import {
   asToutOverlayCta,
   asToutNoCta,
   asToutNoBodyNoTitle,
+  asToutWithPaddings,
 } from '../../../components/Tout/token';
 
-const ToutHorizontal = flow(asToutDefaultStyle, asToutHorizontal)(Tout);
-const ToutHorizontalNoTitle = flow(asToutDefaultStyle, asToutHorizontal, asToutNoTitle)(Tout);
-const ToutVertical = flow(asToutDefaultStyle, asToutVertical)(Tout);
-const ToutVerticalNoTitle = flow(asToutDefaultStyle, asToutVertical, asToutNoTitle)(Tout);
+const ToutHorizontal = flow(
+  asToutWithPaddings,
+  asToutDefaultStyle,
+  asToutHorizontal,
+)(Tout);
+const ToutHorizontalNoTitle = flow(
+  asToutWithPaddings,
+  asToutDefaultStyle,
+  asToutHorizontal,
+  asToutNoTitle,
+)(Tout);
+const ToutVertical = flow(
+  asToutWithPaddings,
+  asToutDefaultStyle,
+  asToutVertical,
+)(Tout);
+const ToutVerticalNoTitle = flow(
+  asToutWithPaddings,
+  asToutDefaultStyle,
+  asToutVertical,
+  asToutNoTitle,
+)(Tout);
 const ToutVerticalNoTitleNoBody = flow(
+  asToutWithPaddings,
   asToutDefaultStyle,
   asToutVertical,
   asToutNoBodyNoTitle,
 )(Tout);
 const ToutNoTitleNoBodyOverlayCta = flow(
+  asToutWithPaddings,
   asToutDefaultStyle,
   asToutVertical,
   asToutNoBodyNoTitle,
   asToutOverlayCta,
 )(Tout);
 const ToutOverlayTitleNoBodyNoCta = flow(
+  asToutWithPaddings,
   asToutDefaultStyle,
   asToutVertical,
   asToutOverlayTitle,
   asToutNoBody,
   asToutNoCta,
 )(Tout);
+
 const ToutOverlaytTitleNoBodyOverlayCta = flow(
+  asToutWithPaddings,
   asToutDefaultStyle,
   asToutVertical,
   asToutOverlayTitle,
@@ -60,6 +84,7 @@ const ToutOverlaytTitleNoBodyOverlayCta = flow(
   asToutOverlayCta,
 )(Tout);
 const ToutOverlaytTitleNoBody = flow(
+  asToutWithPaddings,
   asToutDefaultStyle,
   asToutVertical,
   asToutOverlayTitle,
@@ -72,34 +97,34 @@ export default props => (
       <h1 className="text-3xl font-bold">touts</h1>
       <div className="flex flex-wrap my-3">
         <div className="w-full">
-          <ToutHorizontal nodeKey="horizontal" />
+          <ToutHorizontal nodeKey="horizontal" id="tout-horizontal" />
         </div>
         <div className="w-full">
-          <ToutHorizontalNoTitle nodeKey="horizontalNoTitle" />
+          <ToutHorizontalNoTitle nodeKey="horizontalNoTitle" id="tout-horizontal-no-title" />
         </div>
         <div className="w-full">
-          <ToutNoTitleNoBodyOverlayCta nodeKey="noTitleNoBodyOverlayCta" />
+          <ToutNoTitleNoBodyOverlayCta nodeKey="noTitleNoBodyOverlayCta" id="tout-no-title-no-body-overlay-cta" />
         </div>
         <div className="w-full">
-          <ToutOverlayTitleNoBodyNoCta nodeKey="overlayTitlenBodyNoCta" />
+          <ToutOverlayTitleNoBodyNoCta nodeKey="overlayTitlenBodyNoCta" id="tout-overlay-title-no-body-no-cta" />
         </div>
         <div className="w-full">
-          <ToutOverlaytTitleNoBodyOverlayCta nodeKey="overlayTitleNoBodyOverlayCta" />
+          <ToutOverlaytTitleNoBodyOverlayCta nodeKey="overlayTitleNoBodyOverlayCta" id="tout-overlay-title-no-body-overlay-cta" />
         </div>
         <div className="w-full lg:w-1/3">
-          <ToutVerticalNoTitle nodeKey="verticalNoTitle" />
+          <ToutVerticalNoTitle nodeKey="verticalNoTitle" id="tout-vertical-no-title" />
         </div>
         <div className="w-full lg:w-1/3">
-          <ToutVertical nodeKey="vertical" />
+          <ToutVertical nodeKey="vertical" id="tout-vertical" />
         </div>
         <div className="w-full lg:w-1/3">
-          <ToutVerticalNoTitleNoBody nodeKey="verticalNoTitleNoBody" />
+          <ToutVerticalNoTitleNoBody nodeKey="verticalNoTitleNoBody" id="tout-vertical-no-title-no-body" />
         </div>
         <div className="w-full lg:w-1/3">
-          <ToutOverlayTitleNoBodyNoCta nodeKey="overlayTitleNoBodyNoCta2" />
+          <ToutOverlayTitleNoBodyNoCta nodeKey="overlayTitleNoBodyNoCta2" id="tout-overlay-title-no-body-no-cta-2" />
         </div>
         <div className="w-full lg:w-1/3">
-          <ToutOverlaytTitleNoBody nodeKey="overlayTitleNoBody" />
+          <ToutOverlaytTitleNoBody nodeKey="overlayTitleNoBody" id="tout-overlay-title-no-body" />
         </div>
       </div>
     </Layout>

@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/migration-tool",
-  "version": "0.0.39",
+  "version": "0.0.46",
   "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
   "bin": {
     "migration_tool": "./bin/run"
@@ -18,16 +18,18 @@
     "@babel/plugin-syntax-jsx": "^7.2.0",
     "@babel/traverse": "^7.5.5",
     "@babel/types": "^7.6.1",
-    "@bodiless/headless-chrome-crawler": "^1.8.1",
+    "@bodiless/headless-chrome-crawler": "^0.0.46",
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
     "bluebird": "^3.5.5",
     "cheerio": "^1.0.0-rc.3",
+    "cross-env": "^5.2.0",
     "css-to-object": "^1.1.0",
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
     "ee-ts": "^1.0.1",
+    "gatsby-plugin-root-import": "^2.0.5",
     "glob": "^7.1.6",
     "html-to-react-components": "^1.6.6",
     "htmlclean": "^3.0.8",
@@ -84,7 +86,8 @@
     "/patches",
     "/conf/gatsby-config.js",
     "/conf/gatsby-node.js",
-    "/conf/template_html2jsx.jsx"
+    "/conf/template_html2jsx.jsx",
+    "/conf/template_dangerous_html.jsx"
   ],
   "keywords": [
     "oclif"
@@ -103,13 +106,13 @@
   },
   "scripts": {
     "lint": "tslint -p . -t stylish",
-    "prepack": "rm -rf lib && tsc -b && babel lib --out-dir lib",
+    "prepack": "rimraf lib && tsc -b && babel lib --out-dir lib",
     "test": "jest --runInBand",
     "test-clear": "jest --clearCache",
     "test-debug": "jest --detectOpenHandles --detectLeaks",
     "launch": "ts-node src/launch.ts",
-    "postinstall": "DEBUG=migration_tool node bin/apply-patches.js",
-    "migrate": "bin/run"
+    "postinstall": "cross-env DEBUG=migration_tool node bin/apply-patches.js",
+    "migrate": "cross-env DEBUG=migration_tool bin/run"
   },
   "types": "lib/index.d.ts"
 }

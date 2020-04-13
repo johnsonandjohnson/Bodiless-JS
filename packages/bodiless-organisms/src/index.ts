@@ -18,12 +18,14 @@ import {
   asBurgerSubMenu,
   asEditableBurgerSubMenu,
   BurgerMenuClean,
+  withBurgerSubmenu,
 } from './components/BurgerMenu';
 
 export {
   SingleAccordion,
   SingleAccordionClean,
   asSingleAccordion,
+  asTestableAccordion,
 } from './components/SingleAccordion';
 
 export {
@@ -39,10 +41,12 @@ export {
   withSubmenu,
 } from './components/MainMenu/index';
 
+
 export {
   Tout,
   ToutClean,
   asEditableTout,
+  asTestableTout,
 } from './components/Touts';
 
 export {
@@ -66,6 +70,7 @@ export {
   asBurgerSubMenu,
   asEditableBurgerSubMenu,
   BurgerMenuClean,
+  withBurgerSubmenu,
 };
 
 export { Slider };

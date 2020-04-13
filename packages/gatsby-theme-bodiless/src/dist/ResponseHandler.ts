@@ -24,21 +24,28 @@ const isResponseSuccessful = (res: AxiosResponse<any>): boolean => {
 const handle = (promise: AxiosPromise<any>) => promise
   .then(res => {
     if (!isResponseSuccessful(res)) {
-      alert('An unknown error has occured.');
-      return false;
+      return {
+        response: false,
+        message: 'An unknown error has occured.',
+      };
     }
-    return true;
+    return {
+      response: true,
+      message: 'Success!',
+    };
   })
   .catch(err => {
     // Use back-end crafted error message if available.
     if (err.response && err.response.data) {
-      // eslint-disable-next-line no-undef
-      alert(err.response.data);
-    } else {
-      // eslint-disable-next-line no-undef
-      alert(err.message);
+      return {
+        response: false,
+        message: err.response.data,
+      };
     }
-    return false;
+    return {
+      response: false,
+      message: err.message,
+    };
   });
 
 export default handle;

@@ -17,7 +17,7 @@ import path from 'path';
 // @ts-ignore
 import extractReactComponents from 'html-to-react-components';
 
-const COMPONENT_LABEL = 'data-component';
+const COMPONENT_LABEL = 'data-bl-component';
 
 export enum ComponentScope {
   Global = 'global',
@@ -49,7 +49,15 @@ export class HtmlToComponents {
         fileExtension: 'jsx',
       },
     };
-    return extractReactComponents(labeledHtml, options);
+    try {
+      return extractReactComponents(labeledHtml, options);
+    } catch (error) {
+      if (error.name === 'SyntaxError'
+        && error.message.startsWith('Unexpected token')) {
+        console.log('HTML source of this page is invalid.');
+      }
+      return extractReactComponents(labeledHtml, options);
+    }
   }
 
   label(html: string): string | null {

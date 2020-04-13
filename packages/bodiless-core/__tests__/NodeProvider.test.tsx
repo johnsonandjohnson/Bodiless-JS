@@ -29,6 +29,8 @@ class MockContentNode implements ContentNode<Data> {
 
   setData = jest.fn();
 
+  delete = jest.fn();
+
   keys = [];
 
   path = [];

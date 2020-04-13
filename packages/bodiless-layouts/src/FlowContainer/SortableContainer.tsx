@@ -12,27 +12,65 @@
  * limitations under the License.
  */
 
-import * as React from 'react';
+import React, { ComponentType, HTMLProps } from 'react';
+import { observer } from 'mobx-react-lite';
 import { SortableContainer, SortEndHandler } from 'react-sortable-hoc';
+import { useContextActivator, useEditContext } from '@bodiless/core';
 
-type SortableListProps = {
-  children: React.ReactNode;
-  onSortEnd: SortEndHandler;
+type FinalUI = {
+  FlexboxEmpty: ComponentType<HTMLProps<HTMLDivElement>> | string,
 };
 
+export type UI = Partial<FinalUI>;
+
+export type SortableListProps = {
+  children: React.ReactNode[];
+  onSortEnd: SortEndHandler;
+  ui?: UI;
+  className?: string;
+};
+
+const defaultUI: FinalUI = {
+  FlexboxEmpty: 'div',
+};
+
+const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });
+
 const SortableListWrapper = SortableContainer(
-  ({ children }: SortableListProps): React.ReactElement<SortableListProps> => (
-    <section className="bl-flex bl-flex-wrap bl-py-grid-3">{children}</section>
+  observer(
+    ({ children, ui, ...rest }: SortableListProps): React.ReactElement<SortableListProps> => {
+      if (!children || !children.length) {
+        const { FlexboxEmpty } = getUI(ui);
+        const context = useEditContext();
+        const activeClassName = context.isActive ? 'bl-border-orange-400' : 'hover:bl-border-orange-400';
+
+        return (
+          <FlexboxEmpty className={`bl-flex bl-justify-center bl-flex-wrap bl-py-grid-3 ${activeClassName}`} {...useContextActivator()}>
+            Empty Flexbox
+          </FlexboxEmpty>
+        );
+      }
+      return (
+        <section {...rest} {...useContextActivator()}>{children}</section>
+      );
+    },
   ),
 );
 SortableListWrapper.displayName = 'SortableListWrapper';
 
-const EditListView = ({ onSortEnd, children }: SortableListProps) => (
+const EditListView = ({
+  onSortEnd,
+  ui,
+  children,
+  ...rest
+}: SortableListProps) => (
   <SortableListWrapper
     axis="xy"
     useDragHandle
     transitionDuration={0}
     onSortEnd={onSortEnd}
+    ui={ui}
+    {...rest}
   >
     {children}
   </SortableListWrapper>

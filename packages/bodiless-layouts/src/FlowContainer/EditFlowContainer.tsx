@@ -12,91 +12,86 @@
  * limitations under the License.
  */
 
-import React, { useRef, FC, PropsWithChildren } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { arrayMove, SortEnd } from 'react-sortable-hoc';
 import { observer } from 'mobx-react-lite';
-import { v1 } from 'uuid';
+import { flowRight, omit } from 'lodash';
 import {
-  ContextProvider, useContextActivator, withActivateOnEffect, withNode,
+  withActivateOnEffect, withNode, withMenuOptions,
 } from '@bodiless/core';
-import { DesignableComponents } from '@bodiless/fclasses';
+import { designable, stylable } from '@bodiless/fclasses';
 import SortableChild from './SortableChild';
-import SortableContainer from './SortableContainer';
+import SortableContainer, { SortableListProps } from './SortableContainer';
+import { useItemHandlers, useFlexboxDataHandlers } from './model';
+import useGetMenuOptions from './useGetMenuOptions';
 import {
-  useItemHandlers,
-  useFlowContainerDataHandlers,
-  useGetMenuOptions,
-} from './helpers';
-import { EditFlowContainerProps, FlowContainerItem } from './types';
+  EditFlowContainerProps,
+  FlowContainerItem,
+  FlowContainerComponents,
+  FlowContainerItemProps,
+  SortableChildProps,
+} from './types';
 
 const ChildNodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
 
-function isAllowedComponent(
-  components: DesignableComponents,
-  type: string,
-): boolean {
-  return Boolean(components[type]);
-}
+const EditFlowContainerComponents: FlowContainerComponents = {
+  Wrapper: stylable<SortableListProps>(SortableContainer),
+  ComponentWrapper: stylable<SortableChildProps>(SortableChild),
+};
 
-const FlowContainerActivator: React.FC = ({ children }) => (
-  <div {...useContextActivator('onClick')}>
-    {children}
-  </div>
-);
+const witNoDesign = (props:EditFlowContainerProps):EditFlowContainerProps => ({
+  ...props,
+  components: omit(props.components, ['Wrapper', 'ComponentWrapper']),
+});
 
+/**
+ * An editable version of the Flexbox container.
+ */
 const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerProps) => {
-  const uuid = useRef(v1());
-  const { components, ui, snapData } = props;
-  const items = useItemHandlers().getItems();
-  const getMenuOptions = useGetMenuOptions(props);
   const {
-    onFlowContainerItemResize,
-    setFlowContainerItems,
-    deleteFlowContainerItem,
-  } = useFlowContainerDataHandlers();
+    components, ui, snapData, defaultWidth,
+  } = props;
+  const items = useItemHandlers().getItems();
+  const {
+    onFlexboxItemResize,
+    setFlexboxItems,
+  } = useFlexboxDataHandlers();
+  const { Wrapper, ComponentWrapper } = components;
 
   return (
-    <ContextProvider
-      name={`flex-${uuid.current}`}
-      getMenuOptions={getMenuOptions}
+    <Wrapper
+      onSortEnd={(sort: SortEnd) => {
+        const { oldIndex, newIndex } = sort;
+        setFlexboxItems(arrayMove(items, oldIndex, newIndex));
+      }}
+      ui={ui}
     >
-      <FlowContainerActivator>
-        <SortableContainer
-          onSortEnd={(sort: SortEnd) => {
-            const { oldIndex, newIndex } = sort;
-            setFlowContainerItems(arrayMove(items, oldIndex, newIndex));
-          }}
-        >
-          {items.map(
-            (flowContainerItem: FlowContainerItem, index: number): React.ReactNode => {
-              if (!isAllowedComponent(components, flowContainerItem.type)) {
-                return null;
+      {items.map(
+        (flowContainerItem: FlowContainerItem, index: number): React.ReactNode => {
+          const ChildComponent = components[flowContainerItem.type];
+          if (!ChildComponent) return null;
+          return (
+            <ComponentWrapper
+              ui={ui}
+              key={`node-${flowContainerItem.uuid}`}
+              index={index}
+              flowContainerItem={flowContainerItem}
+              snapData={snapData}
+              defaultWidth={defaultWidth}
+              getMenuOptions={useGetMenuOptions(witNoDesign(props), flowContainerItem)}
+              onResizeStop={
+                // eslint-disable-next-line max-len
+                (flexboxItemProps: FlowContainerItemProps) => onFlexboxItemResize(flowContainerItem.uuid, flexboxItemProps)
               }
-              const ChildComponent = components[flowContainerItem.type];
-              return (
-                <SortableChild
-                  ui={ui}
-                  key={`node-${flowContainerItem.uuid}`}
-                  index={index}
-                  flowContainerItem={flowContainerItem}
-                  snapData={snapData}
-                  onDelete={() => deleteFlowContainerItem(flowContainerItem.uuid)}
-                  onResizeStop={
-                    flowContainerItemProps => (
-                      onFlowContainerItemResize(flowContainerItem.uuid, flowContainerItemProps)
-                    )
-                  }
-                >
-                  <ChildNodeProvider nodeKey={flowContainerItem.uuid}>
-                    <ChildComponent />
-                  </ChildNodeProvider>
-                </SortableChild>
-              );
-            },
-          )}
-        </SortableContainer>
-      </FlowContainerActivator>
-    </ContextProvider>
+            >
+              <ChildNodeProvider nodeKey={flowContainerItem.uuid}>
+                <ChildComponent />
+              </ChildNodeProvider>
+            </ComponentWrapper>
+          );
+        },
+      )}
+    </Wrapper>
   );
 };
 
@@ -106,5 +101,16 @@ EditFlowContainer.defaultProps = {
   components: {},
 };
 
-// Wrap the EditFlowContainer in a wthActivateContext so we can activate new items
-export default withActivateOnEffect(observer(EditFlowContainer));
+const asEditFlowContainer = flowRight(
+  withActivateOnEffect,
+  observer,
+  designable(EditFlowContainerComponents),
+  withMenuOptions({
+    useGetMenuOptions: (props: EditFlowContainerProps) => useGetMenuOptions(witNoDesign(props)),
+    name: 'Flexbox',
+  }),
+  observer,
+);
+
+// Wrap the EditFlexbox in a wthActivateContext so we can activate new items
+export default asEditFlowContainer(EditFlowContainer);

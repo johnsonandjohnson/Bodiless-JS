@@ -19,6 +19,7 @@ import {
   getUI,
   withMenuOptions,
   TMenuOption,
+  useEditContext,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
 import BackendClient from './BackendClient';
@@ -34,21 +35,36 @@ type Props = {
   client?: Client;
 };
 
-const formPageAdd = (client: Client, template: string) => contextMenuForm({
+const formPageAdd = (client: Client, template: string, context: any) => contextMenuForm({
   submitValues: async (submittedValues: any) => {
+    context.showPageOverlay({
+      message: 'The page is creating.',
+      maxTimeoutInSeconds: 10,
+    });
     const pathname = window.location.pathname
       ? window.location.pathname.replace(/\/?$/, '/')
       : '';
     const newPagePath = pathname + submittedValues.path;
     const result = await handle(client.savePage(newPagePath, template));
-    if (result) {
+    if (result.response) {
       const isPageVerified = await verifyPage(newPagePath);
       if (!isPageVerified) {
-        alert(`unable to verify page creation.
+        const errorMessage = `Unable to verify page creation.
 It is likely that your new page was created but is not yet available.
-Click ok to visit the new page; if it does not load, wait a while and reload.`);
+Click ok to visit the new page; if it does not load, wait a while and reload.`;
+        context.showError({
+          message: errorMessage,
+          onClose: () => {
+            window.location.href = newPagePath;
+          },
+        });
+      } else {
+        window.location.href = newPagePath;
       }
-      window.location.href = newPagePath;
+    } else {
+      context.showError({
+        message: result.message,
+      });
     }
   },
 })(({ ui, formState }: any) => {
@@ -92,13 +108,16 @@ Click ok to visit the new page; if it does not load, wait a while and reload.`);
 const defaultClient = new BackendClient();
 
 const useGetMenuOptions = (): () => TMenuOption[] => {
+  const context = useEditContext();
   const gatsbyPage = useGatsbyPageContext();
+
   return () => [
     {
       name: 'newpage',
       icon: 'note_add',
       label: 'Page',
-      handler: () => formPageAdd(defaultClient, gatsbyPage.subPageTemplate),
+      isHidden: () => !context.isEdit,
+      handler: () => formPageAdd(defaultClient, gatsbyPage.subPageTemplate, context),
     },
   ];
 };

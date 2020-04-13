@@ -164,6 +164,14 @@ There are two helper functions for `snapData`.
 
 ---
 
+#### Default Width
+
+You can set the default width for a new item via the `defaultWidth` prop. This should be a number
+from 0-100 expressing the desired default width as a percentage. The actual default width will be
+the smallest *allowed* width which is greater than the value specified.  For example, if you set
+allowed widths of 50% and 100%, specifying `defaultWidth="51"` will give you an actual default width
+of 100%.
+
 ### Limit Number of Components
 
 **`maxComponents`** will limit the number of components that can be added to the flowContainerGrid. If the number of components equals the value of maxComponents then the add button will not be visible. If a component is removed and the number of components is less than the max value then the add button will reappear.

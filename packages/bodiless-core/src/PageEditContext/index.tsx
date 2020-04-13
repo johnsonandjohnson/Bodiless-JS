@@ -22,7 +22,13 @@ import {
   PageEditStore as PageEditStoreInterface,
   TMenuOption,
   TMenuOptionGetter,
+  TPageOverlayStore,
 } from './types';
+import { TOverlaySettings } from '../Types/PageOverlayTypes';
+import {
+  getFromSessionStorage,
+  saveToSessionStorage,
+} from '../SessionStorage';
 
 export const reduceRecursively = <T extends any>(
   accumulator: T[],
@@ -56,12 +62,31 @@ export const reduceRecursively = <T extends any>(
 //    - PageEditContext.Consumer (an observable version of PageEditContext.context.Consumer).
 //    - PageEditContext.Provider (equivalent to PageEditContext.context.Provider).
 // Singleton store.
+
+const defaultOverlaySettings: TOverlaySettings = {
+  isActive: false,
+  hasCloseButton: false,
+  hasSpinner: true,
+  message: '',
+  maxTimeoutInSeconds: null,
+  onClose: () => {},
+};
+
 export class PageEditStore implements PageEditStoreInterface {
   @observable activeContext: PageEditContext | undefined = undefined;
 
   @observable contextMenuOptions: TMenuOption[] = [];
 
-  @observable isEdit = true;
+  @observable isEdit = getFromSessionStorage('isEdit', false);
+
+  @observable isPositionToggled = getFromSessionStorage('isPositionToggled', false);
+
+  @observable pageOverlay: TPageOverlayStore = {
+    data: {
+      ...defaultOverlaySettings,
+    },
+    timeoutId: 0,
+  };
 
   @action
   setActiveContext(context?: PageEditContext) {
@@ -76,8 +101,24 @@ export class PageEditStore implements PageEditStoreInterface {
     );
   }
 
-  @action toggleEdit() {
-    this.isEdit = !this.isEdit;
+  @action toggleEdit(on? : boolean) {
+    if (on === undefined) {
+      this.isEdit = !this.isEdit;
+    } else {
+      this.isEdit = Boolean(on);
+    }
+
+    saveToSessionStorage('isEdit', this.isEdit);
+  }
+
+  @action togglePosition(on? : boolean) {
+    if (on === undefined) {
+      this.isPositionToggled = !this.isPositionToggled;
+    } else {
+      this.isPositionToggled = Boolean(on);
+    }
+
+    saveToSessionStorage('isPositionToggled', this.isPositionToggled);
   }
 
   @computed get contextTrail() {
@@ -174,15 +215,58 @@ class PageEditContext implements PageEditContextInterface {
   }
 
   toggleEdit(on?: boolean) {
-    if (on === undefined) {
-      this.store.isEdit = !this.store.isEdit;
-    } else {
-      this.store.isEdit = Boolean(on);
-    }
+    this.store.toggleEdit(on);
+  }
+
+  get isPositionToggled() {
+    return this.store.isPositionToggled;
+  }
+
+  togglePosition(on?: boolean) {
+    this.store.togglePosition(on);
   }
 
   get contextMenuOptions() {
     return this.store.contextMenuOptions;
+  }
+
+  get pageOverlay() {
+    return this.store.pageOverlay;
+  }
+
+  showPageOverlay(passedSettings: TOverlaySettings | undefined) {
+    clearTimeout(this.store.pageOverlay.timeoutId);
+    const settings = {
+      ...defaultOverlaySettings,
+      isActive: true,
+      ...passedSettings,
+    };
+    this.store.pageOverlay.data = settings;
+
+    if (settings.maxTimeoutInSeconds) {
+      this.store.pageOverlay.timeoutId = window.setTimeout(() => {
+        this.showError({
+          message: `The application encountered an issue.
+Please try your operation again if it was not successful.`,
+        });
+      }, settings.maxTimeoutInSeconds * 1000);
+    }
+  }
+
+  hidePageOverlay() {
+    this.showPageOverlay({
+      isActive: false,
+    });
+  }
+
+  showError(passedSettings: TOverlaySettings | undefined) {
+    const settings = {
+      message: 'An error has occurred.',
+      hasCloseButton: true,
+      hasSpinner: false,
+      ...passedSettings,
+    };
+    this.showPageOverlay(settings);
   }
 }
 

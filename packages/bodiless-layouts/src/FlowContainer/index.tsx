@@ -14,15 +14,18 @@
 
 import React, { FC } from 'react';
 import { observer } from 'mobx-react-lite';
+import { flow } from 'lodash';
 import {
   withNode,
   useEditContext,
 } from '@bodiless/core';
-import { designable } from '@bodiless/fclasses';
+import {
+  withDesign,
+  addClasses,
+} from '@bodiless/fclasses';
 import EditFlowContainer from './EditFlowContainer';
 import StaticFlowContainer from './StaticFlowContainer';
 import { EditFlowContainerProps } from './types';
-
 
 const FlowContainerBasic: FC<EditFlowContainerProps> = props => {
   const { isEdit } = useEditContext();
@@ -30,7 +33,13 @@ const FlowContainerBasic: FC<EditFlowContainerProps> = props => {
     ? <EditFlowContainer {...props} />
     : <StaticFlowContainer {...props} />;
 };
-const FlowContainerDesignable = designable({})(observer(FlowContainerBasic));
+
+const FlowContainerDesignable = flow(
+  observer,
+  withDesign({
+    Wrapper: addClasses('flex flex-wrap'),
+  }),
+)(FlowContainerBasic);
 
 const FlowContainer = withNode(FlowContainerDesignable);
 export default FlowContainer;

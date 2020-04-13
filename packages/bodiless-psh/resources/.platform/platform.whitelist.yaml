@@ -1,6 +1,5 @@
-#!/bin/bash
 ###
- # Copyright © 2019 Johnson & Johnson
+ # Copyright © 2020 Johnson & Johnson
  #
  # Licensed under the Apache License, Version 2.0 (the "License");
  # you may not use this file except in compliance with the License.
@@ -13,15 +12,14 @@
  # limitations under the License.
  ##
 
-set -e
+# This file contains only the keys that will be merged
+# with the Site level .yaml files when @bodiless\psh package is installed.
+# See './resources/static/static.platform.app.yaml' and './resources/edit/edit.platform.app.yaml'
+# for structure guidance. Note: Do not add key values here.
 
-# Expects the following env variables:
-# PLATFORM_APP_DIR - the absolute path to the application directory. provided by platform.sh
-
-if [ "$1" = "install" ]; then
-  npm ci
-elif [ "$1" = "build" ]; then
-  npm run build
-else
-  echo "Unknown command specified to $0"
-fi
+web:
+    locations:
+        '/':
+            expires:
+        '/___docs':
+            expires:

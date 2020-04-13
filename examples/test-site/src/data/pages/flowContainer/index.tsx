@@ -22,7 +22,7 @@ import { Page } from '@bodiless/gatsby-theme-bodiless';
 
 import Layout from '../../../components/Layout';
 import tailWindConfig from '../../../../tailwind.config';
-import { FlexBoxDefault } from '../../../components/FlowContainer';
+import { FlowContainerDefault } from '../../../components/FlowContainer';
 
 const FLEXBOX_PAGE_PATH = 'flowContainer';
 
@@ -32,26 +32,60 @@ const options = getSnapFrom(
 const FlowContainerPage = (props: any) => (
   <Page {...props}>
     <Layout>
-      <h1 className="text-3xl font-bold">FlowContainer</h1>
-      <FlexBoxDefault
+      <h1 className="text-3xl font-bold">Flexbox Examples</h1>
+      <h2 className="text-2xl font-bold mt-4">Default Flexbox</h2>
+      <FlowContainerDefault
+        id={FLEXBOX_PAGE_PATH}
         nodeKey={FLEXBOX_PAGE_PATH}
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey={FLEXBOX_PAGE_PATH} />
-      <h1 className="text-3xl font-bold mt-4">FlowContainer grid with constrained widths</h1>
-      <FlexBoxDefault
+      <h2 className="text-2xl font-bold mt-4">Flexbox grid with constrained widths</h2>
+      <FlowContainerDefault
+        id="constrained_widths"
         nodeKey="constrained_widths"
         snapData={options}
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey="constrained_widths" />
-      <h1 className="text-3xl font-bold mt-4">FlowContainer restricted to 1 item</h1>
-      <FlexBoxDefault
+      <h2 className="text-2xl font-bold mt-4">Flexbox restricted to 1 item</h2>
+      <FlowContainerDefault
+        id="restricted"
         nodeKey="restricted"
         maxComponents={1}
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey="restricted" />
+      <h2 className="text-2xl font-bold mt-4">Default Width of 25%</h2>
+      <FlowContainerDefault
+        id="width_25"
+        nodeKey="width_25"
+        defaultWidth="25"
+      />
+      <h2 className="text-2xl font-bold mt-4">Default Width of 33% (should round up to 33.33%)</h2>
+      <FlowContainerDefault
+        id="width_33"
+        nodeKey="width_33"
+        defaultWidth="33"
+      />
+      <h2 className="text-2xl font-bold mt-4">Default Width of 50%</h2>
+      <FlowContainerDefault
+        id="width_50"
+        nodeKey="width_50"
+        defaultWidth="50"
+      />
+      <h2 className="text-2xl font-bold mt-4">Default Width of 66.66% </h2>
+      <FlowContainerDefault
+        id="width_66"
+        nodeKey="width_66"
+        defaultWidth="66.66"
+      />
+      <h2 className="text-2xl font-bold mt-4">Default Width of 75%</h2>
+      <FlowContainerDefault
+        id="width_75"
+        nodeKey="width_75"
+        defaultWidth="75"
+      />
     </Layout>
   </Page>
 );

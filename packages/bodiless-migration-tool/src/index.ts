@@ -65,6 +65,7 @@ class MigrationTool extends Command {
       websiteUrl: settings.url,
       workDir: this.getWorkDir(),
       gitRepository: this.getGitRepo(),
+      reservedPaths: ['404'],
       scraperParams: {
         pageUrl: settings.url,
         maxDepth: settings.crawler.maxDepth,
@@ -82,6 +83,10 @@ class MigrationTool extends Command {
       trailingSlash: settings.trailingSlash || TrailingSlash.Add,
       transformers: settings.transformers || [],
       htmltojsx: true,
+      disableTailwind: settings.disableTailwind === undefined ? true : settings.disableTailwind,
+      allowFallbackHtml: settings.allowFallbackHtml === undefined
+        ? true
+        : (settings.allowFallbackHtml === true),
     };
     const flattener = new SiteFlattener(flattenerParams);
     await flattener.start();
@@ -104,6 +109,7 @@ class MigrationTool extends Command {
     const defaultSettingsPath = path.resolve(__dirname, '..', 'settings.json');
     const rootSettingsExist = fs.existsSync(rootSettingsPath);
     const settingsPath = rootSettingsExist ? rootSettingsPath : defaultSettingsPath;
+    console.log(`Applying migration settings from ${settingsPath}`);
     return JSON.parse(fs.readFileSync(settingsPath).toString());
   }
 }

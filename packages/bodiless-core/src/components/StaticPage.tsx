@@ -32,6 +32,10 @@ class StaticContext implements PageEditContextInterface {
 
   toggleEdit = () => undefined;
 
+  isPositionToggled = false;
+
+  togglePosition = () => undefined;
+
   contextMenuOptions = [];
 
   name = 'Static';
@@ -40,7 +44,18 @@ class StaticContext implements PageEditContextInterface {
 
   isInnermostLocalMenu = false;
 
+  pageOverlay = {
+    data: {},
+    timeoutId: 0,
+  };
+
   getMenuOptions = () => [];
+
+  showPageOverlay = () => undefined;
+
+  hidePageOverlay = () => undefined;
+
+  showError = () => undefined;
 
   // Normally spawn returns a new context instance, but in a static page there is only a single
   // constext, so we just return ourselves.

@@ -16,10 +16,12 @@ import {
   withDesign,
 } from '@bodiless/fclasses';
 import {
+  withNode,
   withNodeKey,
   withoutProps,
 } from '@bodiless/core';
 import {
+  withDeleteSublistOnUnwrap,
   asEditable,
   withLinkToggle,
 } from '@bodiless/components';
@@ -40,7 +42,11 @@ const asEditableBurgerSubMenu = (HeaderContent: string, editable: AsEditable) =>
         withLinkToggle,
         withNodeKey('title'),
       ),
-      InnerLinks: asEditableMenu(editable),
+      InnerLinks: flow(
+        withNode,
+        withDeleteSublistOnUnwrap,
+        asEditableMenu(editable),
+      ),
     }),
   }),
   withEditableTitle(asEditable),

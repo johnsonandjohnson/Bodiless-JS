@@ -17,6 +17,7 @@ import path from 'path';
 import minimatch from 'minimatch';
 import {
   getUrlToLocalDirectoryMapper,
+  prependProtocolToBareUrl,
 } from './helpers';
 import Downloader from './downloader';
 import HtmlParser from './html-parser';
@@ -51,7 +52,9 @@ export enum TrailingSlash {
 
 export enum TransformerRule {
   Replace = 'replace',
+  ReplaceString = 'replaceString',
   ToComponent = 'tocomponent',
+  RemoveAttribute = 'removeAttribute',
 }
 
 export interface Transformer {
@@ -59,7 +62,8 @@ export interface Transformer {
   selector: string,
   replacement: string,
   context: string,
-  scope?: ComponentScope
+  scope?: ComponentScope,
+  attributes: string[],
 }
 
 export interface SiteFlattenerParams {
@@ -77,7 +81,10 @@ export interface SiteFlattenerParams {
   },
   transformers: Array<Transformer>,
   htmltojsx: boolean,
-  useSourceHtml?: boolean
+  useSourceHtml?: boolean,
+  disableTailwind?: boolean,
+  reservedPaths?: Array<string>,
+  allowFallbackHtml?: boolean,
 }
 
 export class SiteFlattener {
@@ -87,12 +94,20 @@ export class SiteFlattener {
 
   constructor(params: SiteFlattenerParams) {
     this.params = {
+      reservedPaths: [],
       ...params,
+      websiteUrl: prependProtocolToBareUrl(params.websiteUrl),
       trailingSlash: params.trailingSlash || TrailingSlash.Add,
+      scraperParams: {
+        ...params.scraperParams,
+        pageUrl: prependProtocolToBareUrl(params.scraperParams.pageUrl),
+      },
     };
+
     const jamStackAppParams: JamStackAppParams = {
       gitRepository: this.params.gitRepository,
       workDir: this.params.workDir,
+      disableTailwind: this.params.disableTailwind,
     };
     this.canvasX = new CanvasX(jamStackAppParams);
   }
@@ -136,11 +151,15 @@ export class SiteFlattener {
       debug(error.message);
     });
     scraper.on('fileReceived', async fileUrl => {
-      const downloader = new Downloader(this.params.websiteUrl, this.canvasX.getStaticDir());
+      const downloader = new Downloader(
+        this.params.websiteUrl, this.canvasX.getStaticDir(), this.params.reservedPaths,
+      );
       await downloader.downloadFiles([fileUrl]);
     });
     scraper.on('requestStarted', async fileUrl => {
-      const downloader = new Downloader(this.params.websiteUrl, this.canvasX.getStaticDir());
+      const downloader = new Downloader(
+        this.params.websiteUrl, this.canvasX.getStaticDir(), this.params.reservedPaths,
+      );
       await downloader.downloadFiles([fileUrl]);
     });
     await scraper.Crawl();
@@ -152,6 +171,10 @@ export class SiteFlattener {
 
   private getPageTemplate(): string {
     const templateName = this.params.htmltojsx ? 'template_html2jsx.jsx' : 'template_mono.jsx';
+    return path.resolve(this.getConfPath(), templateName);
+  }
+
+  private getComponentTemplate(templateName: string): string {
     return path.resolve(this.getConfPath(), templateName);
   }
 
@@ -186,11 +209,49 @@ export class SiteFlattener {
     if (this.params.transformers) {
       this.params.transformers
         .filter(
+          item => (
+            item.rule === TransformerRule.ReplaceString && this.shouldReplace(pageUrl, item.context)
+          ),
+        )
+        .forEach(item => htmlParser.replaceString(item.selector, item.replacement));
+      this.params.transformers
+        .filter(
           item => item.rule === TransformerRule.Replace
             && this.shouldReplace(pageUrl, item.context),
         )
         .forEach(item => htmlParser.replace(item.selector, item.replacement));
     }
+
+    // Cleanup primary attributes to avoid build issue from Helmet.
+    const emptyAttributeRemovalRules = [
+      {
+        selector: 'head link',
+        attributes: ['rel', 'href'],
+      },
+      {
+        selector: 'head meta',
+        attributes: ['name', 'charset', 'http-equiv', 'property', 'itemprop'],
+      },
+      {
+        selector: 'head noscript',
+        attributes: ['innerhtml'],
+      },
+      {
+        selector: 'head link',
+        attributes: ['rel', 'href'],
+      },
+      {
+        selector: 'head script',
+        attributes: ['src', 'innerhtml'],
+      },
+      {
+        selector: 'head style',
+        attributes: ['csstext'],
+      },
+    ];
+    emptyAttributeRemovalRules.forEach(item => {
+      htmlParser.removeEmptyAttribute(item.selector, item.attributes);
+    });
     const pageHtml = htmlParser.getPageHtml();
     return this.transformAttributes(pageHtml);
   }
@@ -208,9 +269,9 @@ export class SiteFlattener {
   }
 
   private getHtmlToComponentsSettings(): HtmlToComponentsSettings {
-    const tranfomers = this.params.transformers || [];
+    const tranformers = this.params.transformers || [];
     const settings: HtmlToComponentsSettings = {
-      rules: tranfomers
+      rules: tranformers
         .filter(item => item.rule === TransformerRule.ToComponent)
         .map(item => ({
           selector: item.selector,
@@ -230,6 +291,7 @@ export class SiteFlattener {
       pagesDir: this.canvasX.getPagesDir(),
       staticDir: this.canvasX.getStaticDir(),
       templatePath: this.getPageTemplate(),
+      templateDangerousHtml: this.getComponentTemplate('template_dangerous_html.jsx'),
       pageUrl: transformedScrapedPage.pageUrl,
       headHtml: htmlParser.getHeadHtml(),
       bodyHtml: htmlParser.getBodyHtml(),
@@ -245,7 +307,9 @@ export class SiteFlattener {
       createPages: true,
       downloadAssets: true,
       htmlToComponents: this.params.htmltojsx,
+      allowFallbackHtml: this.params.allowFallbackHtml,
       htmlToComponentsSettings,
+      reservedPaths: this.params.reservedPaths,
     };
     return pageCreatorParams;
   }
