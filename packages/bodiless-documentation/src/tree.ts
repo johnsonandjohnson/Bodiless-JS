@@ -132,3 +132,48 @@ export const withTreeFromFile = (filePath:string):Promise<TreeHO> => {
       return updateTree;
     });
 };
+
+/**
+ * getSipmlePaths returns a simple list of paths gathered from a nested tree.
+ * @param tree
+ */
+export const getSimplePaths = (tree: Tree): string[] => {
+  const simplePathsList: string[] = [];
+  const walkTree = (tree1: Tree) => {
+    Object.keys(tree1).forEach(key => {
+      const branch = tree1[key];
+      if (typeof branch === 'object') {
+        walkTree(branch);
+      } else {
+        simplePathsList.push(branch);
+      }
+    });
+  };
+  walkTree(tree);
+  return simplePathsList;
+};
+
+/**
+ * validatePaths checks whether the passed paths are equal to their native
+ * counterparts in the file system.
+ * This check is needed when we want to be sure to get the same build results
+ * on MacOS (case-insensitive) and Linux (case-sensitive).
+ * https://stackoverflow.com/questions/13617863/can-i-force-node-js-require-to-be-case-sensitive
+ * @param pathsToDocs
+ */
+export const validatePaths = (pathsToDocs: string[]) => {
+  pathsToDocs.forEach(pathToDoc => {
+    const defaultPath = path.resolve(pathToDoc);
+    const nativePath = fs.realpathSync.native(defaultPath);
+    if (defaultPath !== nativePath) {
+      const errorMessage = `
+        The file path specified in docs.json is not equal to the real file path.
+        ${defaultPath}
+        !==
+        ${nativePath}
+        Make sure the path is case-sensitively correct.
+      `;
+      throw new Error(errorMessage);
+    }
+  });
+};

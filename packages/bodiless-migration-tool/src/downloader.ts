@@ -44,9 +44,12 @@ export default class Downloader {
 
   downloadPath: string;
 
-  constructor(pageUrl: string, downloadPath: string) {
+  excludePaths: Array<string> | undefined;
+
+  constructor(pageUrl: string, downloadPath: string, excludePaths?: Array<string>) {
     this.pageUrl = pageUrl;
     this.downloadPath = downloadPath;
+    this.excludePaths = excludePaths;
   }
 
   public async downloadFiles(resources: Array<string>) {
@@ -54,7 +57,13 @@ export default class Downloader {
     try {
       await BluebirdPromise.map(
         filteredResources,
-        resource => this.downloadFile(resource),
+        async resource => {
+          try {
+            await this.downloadFile(resource);
+          } catch (e) {
+            debug(e.message);
+          }
+        },
         { concurrency: 4 },
       );
     } catch (err) {
@@ -94,14 +103,21 @@ export default class Downloader {
     if (targetPath === undefined) {
       return Promise.reject(new Error(`target path for ${resource} is undefined`));
     }
+    if (this.excludePaths && (this.excludePaths.indexOf(targetPath.replace(`${this.downloadPath}/`, '')) >= 0)) {
+      return Promise.reject(new Error(`Resource ${resource} has been excluded from download.`));
+    }
+
     ensureDirectoryExistence(targetPath);
     return new Promise((resolve, reject) => {
       // @ts-ignore retryRequest does not have type definition for the function
       // that produces request.Request.
       const req: request.Request = retryRequest({ uri: resource });
       req
-        .on('response', () => {
-          req.pipe(fs.createWriteStream(targetPath))
+        .on('response', res => {
+          if (res.statusCode >= 400) {
+            return reject(new Error(`Resource ${resource} is not available for download.`));
+          }
+          return req.pipe(fs.createWriteStream(targetPath))
             .on('finish', resolve)
             .on('error', err => reject(new Error(`error on streaming ${resource}. ${err}.`)));
         })

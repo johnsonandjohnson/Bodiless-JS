@@ -17,6 +17,7 @@ import GatsbyMobxStore from '../src/dist/GatsbyMobxStore';
 import BackendClient from '../src/dist/BackendClient';
 import { ItemStateEvent } from '../src/dist/types';
 
+const deletePathMock = jest.fn().mockResolvedValue(true);
 let pendingRequests: any[] = [];
 const savePathMock = jest.fn().mockImplementation(
   () => new Promise((resolve, reject) => {
@@ -25,6 +26,7 @@ const savePathMock = jest.fn().mockImplementation(
 );
 jest.mock('../src/dist/BackendClient', () => () => ({
   savePath: savePathMock,
+  deletePath: deletePathMock,
 }));
 jest.mock('../src/dist/GatsbyMobxStore', () => () => ({
   client: new BackendClient(),
@@ -34,12 +36,14 @@ const dataSource = {
   slug: 'slug',
 };
 
+const defaultKey = 'Page$foo$bar';
+
 const defaultData = {
   foo: 'bar',
 };
 
 const createItem = (key?: string, data?: any) => {
-  const key$ = key || 'Page$foo$bar';
+  const key$ = key || defaultKey;
   const data$ = data || defaultData;
   return new GatsbyMobxStoreItem(new GatsbyMobxStore(dataSource), key$, data$);
 };
@@ -118,6 +122,47 @@ describe('GatsbyMobxStoreItem', () => {
       // fulfill the request
       await pendingRequests[0].resolve(true);
       expect(item.isPending()).toBe(false);
+    });
+  });
+  describe('delete', () => {
+    describe('when item is deleted from browser', () => {
+      it('should invoke backendClient delete', () => {
+        const item = new GatsbyMobxStoreItem(new GatsbyMobxStore(dataSource), 'Page$foo$bar');
+        item.delete();
+        jest.runAllTimers();
+        expect(deletePathMock.mock.calls[0][0]).toBe('pages/foo$bar');
+      });
+    });
+  });
+  describe('saveDisabled', () => {
+    let defaultSaveEnabled = '0';
+    beforeEach(() => {
+      defaultSaveEnabled = process.env.BODILESS_BACKEND_SAVE_ENABLED || '1';
+      process.env.BODILESS_BACKEND_SAVE_ENABLED = '0';
+    });
+    afterEach(() => {
+      process.env.BODILESS_BACKEND_SAVE_ENABLED = defaultSaveEnabled;
+    });
+    describe('when item updated by browser', () => {
+      it('should be sent to the server', async () => {
+        // eslint-disable-next-line global-require
+        const GatsbyMobxStoreItem$ = require('../src/dist/GatsbyMobxStoreItem').default;
+        // eslint-disable-next-line no-new
+        new GatsbyMobxStoreItem$(new GatsbyMobxStore(dataSource), defaultKey, defaultData);
+        jest.runAllTimers();
+        expect(savePathMock.mock.calls.length).toBe(0);
+      });
+    });
+    describe('when item deleted by browser', () => {
+      it('should not be sent to the server', async () => {
+        // eslint-disable-next-line global-require
+        const GatsbyMobxStoreItem$ = require('../src/dist/GatsbyMobxStoreItem').default;
+        // eslint-disable-next-line max-len
+        const item = new GatsbyMobxStoreItem$(new GatsbyMobxStore(dataSource), defaultKey, defaultData);
+        item.delete();
+        jest.runAllTimers();
+        expect(deletePathMock.mock.calls.length).toBe(0);
+      });
     });
   });
 });

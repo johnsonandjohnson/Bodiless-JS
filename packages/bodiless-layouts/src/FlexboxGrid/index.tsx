@@ -14,15 +14,18 @@
 
 import React, { FC } from 'react';
 import { observer } from 'mobx-react-lite';
+import { flow } from 'lodash';
 import {
   withNode,
   useEditContext,
 } from '@bodiless/core';
-import { designable } from '@bodiless/fclasses';
+import {
+  withDesign,
+  addClasses,
+} from '@bodiless/fclasses';
 import EditFlexbox from './EditFlexbox';
 import StaticFlexbox from './StaticFlexbox';
 import { EditFlexboxProps } from './types';
-
 
 const FlexboxGridBasic: FC<EditFlexboxProps> = props => {
   const { isEdit } = useEditContext();
@@ -30,7 +33,13 @@ const FlexboxGridBasic: FC<EditFlexboxProps> = props => {
     ? <EditFlexbox {...props} />
     : <StaticFlexbox {...props} />;
 };
-const FlexboxGridDesignable = designable({})(observer(FlexboxGridBasic));
+
+const FlexboxGridDesignable = flow(
+  observer,
+  withDesign({
+    Wrapper: addClasses('flex flex-wrap'),
+  }),
+)(FlexboxGridBasic);
 
 const FlexboxGrid = withNode(FlexboxGridDesignable);
 export default FlexboxGrid;

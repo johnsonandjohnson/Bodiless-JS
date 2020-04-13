@@ -199,7 +199,7 @@ index 7062916..186629d 100644
 -
  module.exports = HTMLtoJSX;
 diff --git a/node_modules/html-to-react-components/lib/jsx.js b/node_modules/html-to-react-components/lib/jsx.js
-index 1b4aa2d..fa19ae2 100644
+index 1b4aa2d..50eb185 100644
 --- a/node_modules/html-to-react-components/lib/jsx.js
 +++ b/node_modules/html-to-react-components/lib/jsx.js
 @@ -1,4 +1,4 @@
@@ -207,4 +207,31 @@ index 1b4aa2d..fa19ae2 100644
 +var parseJSX = require("@babel/parser").parse;
  var traverse = require("babel-traverse").default;
  var HTMLtoJSX = require("./html2jsx");
-
+ 
+@@ -16,7 +16,7 @@ function childrenToComponents(ast) {
+         var name;
+ 
+         var attrs = p.node.openingElement.attributes.filter(function(attr) {
+-          return attr.name.name === "data-component";
++          return attr.name.name === "data-bl-component";
+         });
+ 
+         if (attrs.length > 0) {
+diff --git a/node_modules/html-to-react-components/lib/processor.js b/node_modules/html-to-react-components/lib/processor.js
+index 1d6d661..c5577f4 100644
+--- a/node_modules/html-to-react-components/lib/processor.js
++++ b/node_modules/html-to-react-components/lib/processor.js
+@@ -7,11 +7,11 @@ var toCode = require("./code");
+ var formatCode = require("./format");
+ 
+ function getComponentName(node) {
+-  return node.attrs["data-component"];
++  return node.attrs["data-bl-component"];
+ }
+ 
+ function removeComponentName(node) {
+-  delete node.attrs["data-component"];
++  delete node.attrs["data-bl-component"];
+ 
+   return node;
+ }

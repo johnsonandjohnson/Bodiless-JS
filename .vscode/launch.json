@@ -105,8 +105,15 @@
             "timeout": 100000,
             "smartStep": true,
             "sourceMaps": true,
-            "trace": true, // verbose
+            "trace": true,
             "url": "http://localhost:8000/"
+        },
+        {
+            "name": "Build Docs",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/examples/test-site/node_modules/.bin/bl-docs-build",
+            "cwd": "${workspaceFolder}/examples/test-site",
         },
     ],
 }

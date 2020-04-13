@@ -21,7 +21,7 @@ const BurgerSubMenu = flow(
     Wrapper: replaceWith(Li),
   }),
 )(SingleAccordionClean);
-const Body = withSubmenu(BurgerSubMenu)(EditableLinkList);
+const Body = withBurgerSubmenu(BurgerSubMenu)(EditableLinkList);
 
 const asBurgerMenuDefaultStyles = flow(
   withDesign({
@@ -61,7 +61,7 @@ const BurgerSubMenu = flow(
     }),
   }),
 )(SingleAccordionClean);
-const Body = withSubmenu(BurgerSubMenu)(EditableLinkList);
+const Body = withBurgerSubmenu(BurgerSubMenu)(EditableLinkList);
 
 const asBurgerMenuDefaultStyles = flow(
   withDesign({

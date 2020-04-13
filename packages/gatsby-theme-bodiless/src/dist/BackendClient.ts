@@ -50,9 +50,18 @@ export default class BackendClient {
     return axios.post(this.root + resourcePath, data);
   }
 
+  delete(resourcePath: string) {
+    return axios.delete(this.root + resourcePath);
+  }
+
   savePath(resourcePath: string, data: any) {
     const fullPath = path.join(this.prefix, 'content', resourcePath);
     return this.post(fullPath, data);
+  }
+
+  deletePath(resourcePath: string) {
+    const fullPath = path.join(this.prefix, 'content', resourcePath);
+    return this.delete(fullPath);
   }
 
   log(data: any) {

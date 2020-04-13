@@ -17,7 +17,11 @@ import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
 import { Div } from '@bodiless/fclasses';
 import {
-  withMeta, withMetaTitle, withMetaHtml, asBodilessHelmet,
+  withMeta,
+  withMetaTitle,
+  withMetaHtml,
+  asBodilessHelmet,
+  withEvent,
 } from '@bodiless/components';
 import { flowRight } from 'lodash';
 import Header from './header';
@@ -32,6 +36,22 @@ const ExampleHelmet = flowRight(
   withMeta('bl-country', 'country', 'site'),
   withMetaTitle('page-title'),
   withMetaHtml('en'),
+)(Helmet);
+
+const ExampleGTMHelmetEvent = flowRight(
+  asBodilessHelmet('datalayer'),
+  withEvent(
+    'digitalData',
+    {
+      event: 'Page Loaded',
+      page: {
+        country: 'US',
+        language: 'EN',
+        hostname: 'bodilessjs.com',
+      },
+    },
+    'page-loaded',
+  ),
 )(Helmet);
 
 const Container = asPageContainer(Div);
@@ -50,10 +70,10 @@ const Layout = ({ children }) => (
     render={data => (
       <>
         <ExampleHelmet />
+        <ExampleGTMHelmetEvent />
         <Header siteLogo={data.site.siteMetadata.logo} />
-        <Container>
-          {children}
-        </Container>
+
+        <Container>{children}</Container>
         <Footer siteTitle={data.site.siteMetadata.title} />
       </>
     )}

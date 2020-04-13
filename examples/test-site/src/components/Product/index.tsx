@@ -28,6 +28,7 @@ import {
   asNegXMargin,
 } from '../Elements.token';
 import {
+  asToutWithPaddings,
   asToutDefaultStyle,
   asToutVertical,
 } from '../Tout/token';
@@ -45,6 +46,7 @@ export const ProductImage = flow(
 )(Img);
 
 export const ProductTout = flow(
+  asToutWithPaddings,
   asToutDefaultStyle,
   asToutVertical,
 )(Tout);
