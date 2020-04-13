@@ -23,7 +23,7 @@ import {
   withDesign, replaceWith, addClasses, stylable,
 } from '@bodiless/fclasses';
 import Layout from '../../components/Layout';
-import { FlexBoxDefault } from '../../components/FlowContainer';
+import { FlowContainerDefault } from '../../components/FlowContainer';
 
 const HOME_PAGE_PATH = 'homepage';
 
@@ -52,7 +52,7 @@ const HomePage = (props: any) => (
       <div className="">
         <EditableBulletPoints nodeKey="bulletpoints" />
       </div>
-      <FlexBoxDefault
+      <FlowContainerDefault
         nodeKey={HOME_PAGE_PATH}
       />
     </Layout>

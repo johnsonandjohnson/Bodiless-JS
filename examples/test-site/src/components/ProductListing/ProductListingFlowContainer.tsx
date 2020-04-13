@@ -24,11 +24,11 @@ const withProductStrictSnapSize = Component => props => (
   />
 );
 
-const ProductListingFlexBox = flow(
+const ProductListingFlowContainer = flow(
   withProductStrictSnapSize,
   withProductVariations,
   asFlowContainerWithMargins,
 )(FlowContainer);
 
 // eslint-disable-next-line import/prefer-default-export
-export { ProductListingFlexBox };
+export { ProductListingFlowContainer };

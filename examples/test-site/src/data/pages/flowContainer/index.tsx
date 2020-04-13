@@ -24,7 +24,7 @@ import Layout from '../../../components/Layout';
 import tailWindConfig from '../../../../tailwind.config';
 import { FlowContainerDefault } from '../../../components/FlowContainer';
 
-const FLEXBOX_PAGE_PATH = 'flowContainer';
+const FLOW_CONTAINER_PAGE_PATH = 'flowContainer';
 
 const options = getSnapFrom(
   withTailwindClasses(tailWindConfig)('w-full sm:w-1/2 sm:w-full lg:w-1/2 lg:w-full'),
@@ -32,15 +32,15 @@ const options = getSnapFrom(
 const FlowContainerPage = (props: any) => (
   <Page {...props}>
     <Layout>
-      <h1 className="text-3xl font-bold">Flexbox Examples</h1>
-      <h2 className="text-2xl font-bold mt-4">Default Flexbox</h2>
+      <h1 className="text-3xl font-bold">FlowContainer Examples</h1>
+      <h2 className="text-2xl font-bold mt-4">Default FlowContainer</h2>
       <FlowContainerDefault
-        id={FLEXBOX_PAGE_PATH}
-        nodeKey={FLEXBOX_PAGE_PATH}
+        id={FLOW_CONTAINER_PAGE_PATH}
+        nodeKey={FLOW_CONTAINER_PAGE_PATH}
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
-      <NodeViewer nodeKey={FLEXBOX_PAGE_PATH} />
-      <h2 className="text-2xl font-bold mt-4">Flexbox grid with constrained widths</h2>
+      <NodeViewer nodeKey={FLOW_CONTAINER_PAGE_PATH} />
+      <h2 className="text-2xl font-bold mt-4">FlowContainer with constrained widths</h2>
       <FlowContainerDefault
         id="constrained_widths"
         nodeKey="constrained_widths"
@@ -48,7 +48,7 @@ const FlowContainerPage = (props: any) => (
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey="constrained_widths" />
-      <h2 className="text-2xl font-bold mt-4">Flexbox restricted to 1 item</h2>
+      <h2 className="text-2xl font-bold mt-4">FlowContainer restricted to 1 item</h2>
       <FlowContainerDefault
         id="restricted"
         nodeKey="restricted"

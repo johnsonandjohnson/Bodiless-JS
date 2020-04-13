@@ -4,10 +4,10 @@ const itemHandlers = {
   getItems: jest.fn(),
   setItems: jest.fn(),
 };
-const flexboxDataHandlers = {
-  insertFlexboxItem: jest.fn(() => ({ uuid: v1() })),
-  deleteFlexboxItem: jest.fn(),
-  updateFlexboxItem: jest.fn(),
+const flowContainerDataHandlers = {
+  insertFlowContainerItem: jest.fn(() => ({ uuid: v1() })),
+  deleteFlowContainerItem: jest.fn(),
+  updateFlowContainerItem: jest.fn(),
 };
 export const useItemHandlers = () => itemHandlers;
-export const useFlexboxDataHandlers = () => flexboxDataHandlers;
+export const useFlowContainerDataHandlers = () => flowContainerDataHandlers;

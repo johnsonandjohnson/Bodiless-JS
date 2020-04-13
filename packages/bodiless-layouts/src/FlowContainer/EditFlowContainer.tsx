@@ -22,7 +22,7 @@ import {
 import { designable, stylable } from '@bodiless/fclasses';
 import SortableChild from './SortableChild';
 import SortableContainer, { SortableListProps } from './SortableContainer';
-import { useItemHandlers, useFlexboxDataHandlers } from './model';
+import { useItemHandlers, useFlowContainerDataHandlers } from './model';
 import useGetMenuOptions from './useGetMenuOptions';
 import {
   EditFlowContainerProps,
@@ -45,7 +45,7 @@ const witNoDesign = (props:EditFlowContainerProps):EditFlowContainerProps => ({
 });
 
 /**
- * An editable version of the Flexbox container.
+ * An editable version of the FlowContainer container.
  */
 const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerProps) => {
   const {
@@ -53,16 +53,16 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerPr
   } = props;
   const items = useItemHandlers().getItems();
   const {
-    onFlexboxItemResize,
-    setFlexboxItems,
-  } = useFlexboxDataHandlers();
+    onFlowContainerItemResize,
+    setFlowContainerItems,
+  } = useFlowContainerDataHandlers();
   const { Wrapper, ComponentWrapper } = components;
 
   return (
     <Wrapper
       onSortEnd={(sort: SortEnd) => {
         const { oldIndex, newIndex } = sort;
-        setFlexboxItems(arrayMove(items, oldIndex, newIndex));
+        setFlowContainerItems(arrayMove(items, oldIndex, newIndex));
       }}
       ui={ui}
     >
@@ -81,7 +81,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerPr
               getMenuOptions={useGetMenuOptions(witNoDesign(props), flowContainerItem)}
               onResizeStop={
                 // eslint-disable-next-line max-len
-                (flexboxItemProps: FlowContainerItemProps) => onFlexboxItemResize(flowContainerItem.uuid, flexboxItemProps)
+                (flowContainerItemProps: FlowContainerItemProps) => onFlowContainerItemResize(flowContainerItem.uuid, flowContainerItemProps)
               }
             >
               <ChildNodeProvider nodeKey={flowContainerItem.uuid}>
@@ -107,10 +107,10 @@ const asEditFlowContainer = flowRight(
   designable(EditFlowContainerComponents),
   withMenuOptions({
     useGetMenuOptions: (props: EditFlowContainerProps) => useGetMenuOptions(witNoDesign(props)),
-    name: 'Flexbox',
+    name: 'FlowContainer',
   }),
   observer,
 );
 
-// Wrap the EditFlexbox in a wthActivateContext so we can activate new items
+// Wrap the EditFlowContainer in a wthActivateContext so we can activate new items
 export default asEditFlowContainer(EditFlowContainer);

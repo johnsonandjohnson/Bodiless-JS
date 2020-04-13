@@ -75,15 +75,6 @@ const SortableChild = (props: SortableChildProps) => {
     // Set the class in are state
     setSnapClassName(className);
   };
-<<<<<<< HEAD:packages/bodiless-layouts/src/FlowContainer/SortableChild.tsx
-  const context = useEditContext();
-  const onDeleteWrapper = () => {
-    onDelete();
-    // Activate the current context after the delete (this context is the flowContainer)
-    context.activate();
-  };
-=======
->>>>>>> master:packages/bodiless-layouts/src/FlexboxGrid/SortableChild.tsx
   useEffect(() => (
     // Call resize handler on component's unmount
     // to make sure the correct wrapper classname is set

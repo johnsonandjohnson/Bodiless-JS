@@ -26,7 +26,7 @@ import {
   asEditableImage,
 } from '../Elements.token';
 
-export { ProductListingFlexBox } from './ProductListingFlexBox';
+export { ProductListingFlowContainer } from './ProductListingFlowContainer';
 
 export const ProductListingTitle = flow(
   asHeader1,

@@ -20,7 +20,7 @@ import {
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 
 import Layout from '../../../components/Layout';
-import { FlexBoxDefault } from '../../../components/FlowContainer';
+import { FlowContainerDefault } from '../../../components/FlowContainer';
 import { EditorBasic, EditorFullFeatured, EditorSimple } from '../../../components/Editors';
 
 
@@ -53,7 +53,7 @@ const RichTextPage = (props: any) => (
         <h3 className="p-5 font-bold">Component Picker with Rich Text:</h3>
         <div className="p-5 pt-0">
           <div className="border-solid border-4 border-gray-600 p-5">
-            <FlexBoxDefault nodeKey="richtext" />
+            <FlowContainerDefault nodeKey="richtext" />
           </div>
         </div>
       </div>
