@@ -40,6 +40,6 @@ describe('labeling html elements', () => {
   test('header, footer, search elements are labeled', () => {
     const inputHtml = '<header><div class="search"></div></header><footer></footer>';
     const resultHtml = htmlToComponents.label(inputHtml);
-    expect(resultHtml).toBe('<div data-component="Page"><header data-component="Header"><div class="search" data-component="Search"></div></header><footer data-component="Footer"></footer></div>');
+    expect(resultHtml).toBe('<div data-bl-component="Page"><header data-bl-component="Header"><div class="search" data-bl-component="Search"></div></header><footer data-bl-component="Footer"></footer></div>');
   });
 });

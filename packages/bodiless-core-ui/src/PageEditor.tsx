@@ -16,10 +16,12 @@ import React, { FC } from 'react';
 import { PageEditor as PlainPageEditor } from '@bodiless/core';
 import GlobalContextMenu from './GlobalContextMenu';
 import LocalContextMenu from './LocalContextMenu';
+import PageOverlay from './PageOverlay';
 
 const ui = {
   LocalContextMenu,
   GlobalContextMenu,
+  PageOverlay,
 };
 
 const PageEditor: FC = props => <PlainPageEditor ui={ui} {...props} />;

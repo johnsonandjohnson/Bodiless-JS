@@ -61,6 +61,7 @@ export interface PageCreatorParams {
   downloadAssets: boolean,
   htmlToComponents: boolean,
   htmlToComponentsSettings?: HtmlToComponentsSettings,
+  reservedPaths?: Array<string>,
   allowFallbackHtml?: boolean,
 }
 
@@ -71,7 +72,11 @@ export class PageCreator {
 
   constructor(params: PageCreatorParams) {
     this.params = params;
-    this.downloader = new Downloader(this.params.pageUrl, this.params.staticDir);
+    this.downloader = new Downloader(
+      this.params.pageUrl,
+      this.params.staticDir,
+      this.params.reservedPaths,
+    );
   }
 
   async createPage() {

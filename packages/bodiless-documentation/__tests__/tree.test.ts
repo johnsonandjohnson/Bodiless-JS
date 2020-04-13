@@ -20,6 +20,8 @@ import {
   prependPath,
   withDeepValue,
   getTreeFromDir,
+  getSimplePaths,
+  validatePaths,
 } from '../lib/tree';
 import { TreeHO } from '../lib/type';
 
@@ -181,5 +183,31 @@ describe('getTreeFromDir', () => {
       expect(result(startTree)).toStrictEqual({ 'file1.md': file1, ...startTree });
       done();
     });
+  });
+});
+describe('getSimplePaths', () => {
+  it('Should create a list of path from nested tree', () => {
+    const input = {
+      a: {
+        b: {
+          c: 'd',
+        },
+      },
+      y: 'y',
+    };
+    const expectResult = ['d', 'y'];
+    expect(getSimplePaths(input)).toStrictEqual(expectResult);
+  });
+});
+describe('validatePaths', () => {
+  it('Should throw an error if passed path has letter case typos', () => {
+    const input = [
+      path.resolve('PackAge.json'),
+    ];
+    // 'no such file' error on Linux.
+    // The file is found but the path is not case-sensitively equial on Mac.
+    expect(() => validatePaths(input)).toThrow(
+      /no such file or directory|Make sure the path is case-sensitively correct/,
+    );
   });
 });

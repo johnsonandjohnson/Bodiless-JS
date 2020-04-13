@@ -36,6 +36,7 @@ import { TMenuOption } from './PageEditContext/types';
 import { EditButtonOptions } from './Types/EditButtonTypes';
 import { TMenuOptionGetter } from './Types/PageContextProviderTypes';
 import { WithNodeProps } from './Types/NodeTypes';
+import { TOverlaySettings } from './Types/PageOverlayTypes';
 import {
   ActivateOnEffectProvider,
   withActivateOnEffect,
@@ -53,6 +54,7 @@ export {
   withLocalContextMenu,
   TMenuOption,
   TMenuOptionGetter,
+  TOverlaySettings,
   PageContextProvider as ContextProvider,
   withPageContext as withMenuOptions,
   PageEditContext,
