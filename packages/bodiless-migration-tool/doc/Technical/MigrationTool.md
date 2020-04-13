@@ -50,10 +50,9 @@ The tool is given URL that will crawl the existing site finding all pages, gener
     We recommend this path is outside the repository root.  In the code example, we used `../NEW_MIGRATED_SITE`.
 
     ```sh
-    npm run ci
+    npm ci
     npm run new ../NEW_MIGRATED_SITE
     cd ../NEW_MIGRATED_SITE
-    npm install
 
     ```
 
