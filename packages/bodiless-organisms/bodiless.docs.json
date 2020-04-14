@@ -4,8 +4,7 @@
       "SingleAccordion.md": "./doc/SingleAccordion.md",
       "BurgerMenu.md" : "./doc/BurgerMenu.md",      
       "MainMenu.md" : "./doc/MainMenu.md",
-      "Carousel.md": "./doc/Carousel.md",
-      "Touts.md": "./doc/Touts.md",      
+      "Carousel.md": "./doc/Carousel.md",  
       "index.md" : "./README.md"
     }
   }
