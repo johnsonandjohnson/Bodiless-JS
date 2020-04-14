@@ -4,7 +4,6 @@ Basic components for building websites.
 
 ## Components List
 
-- [Tout](/Components/Organisms/Touts.md) -  Touts are components on the website that calls out or offers something to the site visitor.
 - [Carousel](/Components/Organisms/Carousel.md) - A revolving slideshow component.
 - [Menu](/Components/Organisms/MainMenu.md) - A menu component often seen in header, footer or sidebars.
 - [Burger Menu](/Components/Organisms/BurgerMenu.md) - A hamburger mobile menu that renders data from a main menu.

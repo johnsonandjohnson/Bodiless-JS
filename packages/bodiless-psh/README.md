@@ -441,10 +441,7 @@ trigger an update of the edit environment by executing:
   ```
   platform ssh -e <env-id> 'bash platform.sh deploy'
   ```
-  Or, to force a fresh install (same as npm fresh):
-  ```
-  platform ssh -e <env-id> 'bash platform.sh fresh'
-  ```
+
   You may omit the "-e <env-id>" if you have the active branch checked out locally.
 
 #### Deleting an environment

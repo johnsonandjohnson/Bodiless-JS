@@ -1,17 +1,12 @@
-const fileDownloadHeaders = [
-  'application/octet-stream',
-  'application/pdf',
-  'application/msword',
-  'application/zip',
-  'application/vnd.ms-excel',
-  'application/vnd.ms-powerpoint',
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  'audio/mpeg',
-];
+const { parse } = require('content-type');
 
 const isFileResponse = response => {
   const responseContentType = response.headers()['content-type'];
-  return fileDownloadHeaders.includes(responseContentType);
+  if (!responseContentType) {
+    return true;
+  }
+  const parsedContentType = parse(responseContentType);
+  return parsedContentType['type'] !== 'text/html';;
 };
 
 module.exports = isFileResponse;
