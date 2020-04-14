@@ -137,9 +137,9 @@ export class SiteFlattener {
       downloadPath: getUrlToLocalDirectoryMapper(this.canvasX.getStaticDir()),
     };
     const scraper = new Scraper(scraperParams);
-    scraper.on('success', async result => {
+    scraper.on('pageReceived', async result => {
       try {
-        debug(`scraped url ${result.pageUrl}.`);
+        debug(`scraped page from ${result.pageUrl}.`);
         const pageCreator = new PageCreator(this.getPageCreatorParams(result));
         debug(`creating page for ${result.pageUrl}.`);
         await pageCreator.createPage();
