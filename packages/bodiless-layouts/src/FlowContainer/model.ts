@@ -16,6 +16,7 @@ import { v1 } from 'uuid';
 import { useNode } from '@bodiless/core';
 import { FlowContainerItem, FlowContainerItemProps, FlowContainerData } from './types';
 
+// eslint-disable-next-line max-len
 type InsertContentNode = (componentName: string, afterItem?: FlowContainerItem) => FlowContainerItem;
 type SetFlowContainerItems = (items: FlowContainerItem[]) => void;
 type UpdateFlowContainerItem = (flowContainerItem: FlowContainerItem) => void;
