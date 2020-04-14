@@ -22,7 +22,7 @@ import componentSelectorForm from '../ComponentSelector/componentSelectorForm';
  * Returns actions which can be executed upon selecting a component in the
  * component selector.
  *
- * @param props The props provided to the FlowContainerGrid
+ * @param props The props provided to the FlowContainer
  * @param currentItem The currently selected item in the grid (optional);
  */
 const useComponentSelectorActions = (

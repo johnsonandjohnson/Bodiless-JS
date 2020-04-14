@@ -1,6 +1,6 @@
-# FlowContainer Grid Component
+# FlowContainer Component
 
-The flowContainer grid (flowContainerGrid) component is a layout component that allows you to select from a set of components, place them on the page, and resize them.
+The flowContainer component is a layout component that allows you to select from a set of components, place them on the page, and resize them.
 
 ## User Details
 
@@ -8,7 +8,7 @@ When an empty flowContainer is on the page you will only see a single empty line
 
 ### Add a new component
 
-When you activate a flowContainerGrid you will be able to add a new component to the flowContainer via the menu.
+When you activate a flowContainer you will be able to add a new component to the flowContainer via the menu.
 
 By clicking on the component selector button you can scroll through all of the available components. You can filter the components by:
 
@@ -18,15 +18,15 @@ By clicking on the component selector button you can scroll through all of the a
 You can hover over the infomation icon to see a description of the component.
 
 When you have found the right component, simply click on it, and it will be
-added at the end of the activated flowContainerGrid.
+added at the end of the activated flowContainer.
 
 ### Removing a component
 
-When any component in the flowContainerGrid is active it will provide a delete button to the context menu. Clicking on this icon will remove the component.
+When any component in the flowContainer is active it will provide a delete button to the context menu. Clicking on this icon will remove the component.
 
 ### Resizing a component
 
-When any component in the flowContainerGrid is active it will appear with a blue
+When any component in the flowContainer is active it will appear with a blue
 border. You can resize the component by clicking on the right edge of the
 border. Note: this can be done at different breakpoints to adjust the size of
 the component at that breakpoint and above.
@@ -36,9 +36,9 @@ Smaller breakpoints will offer fewer options for resizing.
 
 ### Reordering a component
 
-When any component in the flowContainerGrid is active it will appear with a blue
+When any component in the flowContainer is active it will appear with a blue
 double line icon in the top left corner of the component. By clicking and
-dragging this icon you can reorder components in the flowContainerGrid.
+dragging this icon you can reorder components in the flowContainer.
 
 ### Replacing a Component
 
@@ -129,7 +129,7 @@ Also one can use the Design API function to combine designs in diffent variation
 
 ### Control Component Widths
 
-The flowContainerGrid controls the width of components by setting different classes on their wrapper component. The flowContainerGrid uses a set of tailwind width classes by default. The `snapData` prop allows the user to provide a function that can set any set of classes.
+The flowContainer controls the width of components by setting different classes on their wrapper component. The flowContainer uses a set of tailwind width classes by default. The `snapData` prop allows the user to provide a function that can set any set of classes.
 
 This function should take an object with a className property (which is a string of the current classes) and a width property. It then returns an object with a className property (an updated version of the className) and a width property (the width to which it should snap). Both width properties are expressed in percentages (e.g. 50%, 75%).
 
@@ -174,4 +174,4 @@ of 100%.
 
 ### Limit Number of Components
 
-**`maxComponents`** will limit the number of components that can be added to the flowContainerGrid. If the number of components equals the value of maxComponents then the add button will not be visible. If a component is removed and the number of components is less than the max value then the add button will reappear.
+**`maxComponents`** will limit the number of components that can be added to the flowContainer. If the number of components equals the value of maxComponents then the add button will not be visible. If a component is removed and the number of components is less than the max value then the add button will reappear.
