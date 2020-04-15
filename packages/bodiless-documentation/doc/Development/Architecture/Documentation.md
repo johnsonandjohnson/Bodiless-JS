@@ -118,13 +118,9 @@ the first item in the "About" category is "GettingStarted.md". The contents of
 each category, as well as the actual documentation to insert at
 "GettingStarted.md", will be determined by the individual packages supplying
 documentation. Thus, you can specify an order for the things you care about, and
-let the documentation builder fill in the remaining documentaiton.
+let the documentation builder fill in the remaining documentation.
 
 Note that the default ordering is supplied by a `defaultToc` function exported
 by the `@bodiless/documentation` package. You can import this into your
 site-level `bodiless.docs.toc.js` and modify the object at will--making it easy
 to extend existing structure.
-
-### Known issues
-
-During execution of `npm run docs` command on Windows you may face issues with permissions to establish symlinks. To avoid this run Terminal as administrator. 
