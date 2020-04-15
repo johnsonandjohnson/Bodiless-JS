@@ -14,7 +14,7 @@
 import { flow } from 'lodash';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withToutVariations from './withToutVariations';
-
+import withContentfulTouts from './withContentfulTouts';
 import withRichTextVariations from './withRichTextVariations';
 import withSingleAccordionVariations from './withSingleAccordionVariations';
 
@@ -24,6 +24,7 @@ import { asFlowContainerWithMargins } from './token';
 // const variations = extendDesign(toutVariations, sliderVariations, ...);
 const FlowContainerDefault = flow(
   withToutVariations,
+  withContentfulTouts,
   withRichTextVariations,
   withSingleAccordionVariations,
   asFlowContainerWithMargins,

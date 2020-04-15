@@ -13,29 +13,51 @@
  */
 
 import { flow } from 'lodash';
+import { withDefaultContent, withResetButton } from '@bodiless/core';
 import {
-  ToutClean, asTestableTout,
+  ToutClean,
+  asTestableTout,
 } from '@bodiless/organisms';
-import {
-  withDesign,
-} from '@bodiless/fclasses';
+import { withDesign } from '@bodiless/fclasses';
 import {
   asEditableImage, asEditableLink,
 } from '../Elements.token';
-import { asEditorBasic, asEditorSimple } from '../Editors';
+import {
+  withEditorBasic,
+  withEditorSimple,
+} from '../Editors';
 
-const asTout = flow(
+export const withToutEditors = flow(
   withDesign({
     Image: asEditableImage('image'),
     ImageLink: asEditableLink('cta'),
-    Title: asEditorSimple('title', 'Tout Title Text'),
+    Title: withEditorSimple('title', 'Tout Title Text'),
     Link: flow(
-      asEditorSimple('ctaText', 'CTA'),
+      withEditorSimple('text', 'CTA'),
       asEditableLink('cta'),
     ),
-    Body: asEditorBasic('body', 'Tout Body Text'),
+    Body: withEditorBasic('body', 'Tout Body Text'),
   }),
+);
+
+export const withToutResetButtons = withDesign({
+  ImageLink: withResetButton({ nodeKey: 'cta$image' }),
+  Title: withResetButton({ nodeKey: 'title' }),
+  Body: withResetButton({ nodeKey: 'body' }),
+  Link: withResetButton({ nodeKey: 'cta' }),
+});
+
+export const asEditableTout = flow(
+  withToutEditors,
   asTestableTout,
 );
-const Tout = asTout(ToutClean);
+
+export const asContentfulTout = (content: object) => flow(
+  withToutEditors,
+  withToutResetButtons,
+  withDefaultContent(content),
+  asTestableTout,
+);
+
+const Tout = asEditableTout(ToutClean);
 export default Tout;

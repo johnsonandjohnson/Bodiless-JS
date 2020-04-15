@@ -12,22 +12,10 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
-import React, { ComponentType } from 'react';
-import { withChild, withNodeKey } from '@bodiless/core';
+import GivingBackToCommunity from './GivingBackToCommunity';
+import WantToLearnMore from './WantToLearnMore';
 
-type WithInitialValue = {
-  placeholder: string;
+export {
+  GivingBackToCommunity,
+  WantToLearnMore,
 };
-const withPlaceholder = (placeholder: string) => (
-  <P extends Object> (Component: ComponentType<P & WithInitialValue>) => (props:P) => (
-    <Component placeholder={placeholder} {...props} />
-  )
-);
-const asEditor = (Editor:ComponentType<any>) => (nodeKey?: string, placeholder?: string) => (
-  withChild(flow(
-    withPlaceholder(placeholder),
-    withNodeKey(nodeKey),
-  )(Editor))
-);
-export default asEditor;

@@ -38,7 +38,7 @@ import {
   ProductDetailAccWrapper,
 } from '../components/Product';
 import { FlowContainerDefault } from '../components/FlowContainer';
-import { asEditorBasic } from '../components/Editors';
+import { withEditorBasic } from '../components/Editors';
 import asSingleAccordionDefaultStyle from '../components/SingleAccordion/token';
 
 // Do not allow editors to set accordion titles.
@@ -54,7 +54,7 @@ const asProductAccordion = title => flow(
   withDesign({
     Wrapper: removeClasses('p-1'),
     Title: replaceWith(() => <NonEditableTitle producttitle={title} />),
-    Body: asEditorBasic(
+    Body: withEditorBasic(
       'body',
       'Enter Product Information',
     ),

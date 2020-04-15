@@ -252,7 +252,7 @@ import {
   withComponent,
 } from '@bodiless/richtext';
 import { asBodilessLink } from '@bodiless/components';
-import asEditor from '../../../components/Editors/asEditor';
+import withEditor from '../../../components/Editors/withEditor';
 
 const asBold = withComponent(Strong);
 const asItalic = addClasses('');
@@ -267,7 +267,7 @@ const simpleDesign = {
 };
 
 const SimpleEditor = withDesign(simpleDesign)(RichText);
-export default asEditor(SimpleEditor);
+export default withEditor(SimpleEditor);
 ```
 
 Now
@@ -313,7 +313,7 @@ const simpleDesign = {
 Finally, we created a HOC which would add a simple rich text editor as a child to the component to which it was applied (just as `asEditable()` added an editor for unformatted text):
 ```
 const SimpleEditor = withDesign(simpleDesign)(RichText);
-export default asEditor(SimpleEditor);
+export default withEditor(SimpleEditor);
 ```
 
 The BodilessJS `RichText` component is highly configurable, and supports far more than simple character level formats (pending documentation).
