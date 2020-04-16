@@ -12,81 +12,73 @@
  * limitations under the License.
  */
 
+/* eslint-disable react/jsx-indent */
 import React, {
-  FC,
-  ConsumerProps,
+  useRef,
   useContext,
+  createContext,
+  FC,
+  useState,
   ComponentType as CT,
 } from 'react';
-import { Observer } from 'mobx-react';
+import { v1 } from 'uuid';
+import { reject, isEmpty } from 'lodash';
 import { TagType } from '@bodiless/core';
-import {
-  FBGContextOptions,
-  FBGContextInterface,
-} from './types';
-import FilterByGroupStore from './FilterByGroupStore';
+import { FBGContextOptions, SuggestionsRefType, FBGContextType } from './types';
 
-const defaultFBGStore = new FilterByGroupStore();
+const FilterByGroupContext = createContext<FBGContextType>({
+  getSuggestions: () => [],
+  useRegisterSuggestions: () => () => undefined,
+  setSelectedTag: () => undefined,
+  setSelectedNode: () => undefined,
+});
 
-class FilterByGroupContext implements FBGContextInterface {
-  readonly defaultSuggestions: TagType[] = [];
-
-  private store: FilterByGroupStore = defaultFBGStore;
-
-  static context = React.createContext(
-    new FilterByGroupContext() as FBGContextInterface,
-  );
-
-  static Consumer: FC<ConsumerProps<FBGContextInterface>> = ({ children }) => (
-    <FilterByGroupContext.context.Consumer>
-      {value => <Observer>{() => children(value)}</Observer>}
-    </FilterByGroupContext.context.Consumer>
-  );
-
-  static Provider = FilterByGroupContext.context.Provider;
-
-  constructor(values?: FBGContextOptions) {
-    if (values && values.suggestions) {
-      this.defaultSuggestions = values.suggestions;
-    }
-
-    this.defaultSuggestions.forEach(suggestion => this.store.addTag(suggestion));
-  }
-
-  /* eslint-disable class-methods-use-this */
-  spawn(values: FBGContextOptions): FBGContextInterface {
-    return new FilterByGroupContext(values);
-  }
-
-  setSelectedTag(tag?: TagType, nodeId?: string) {
-    this.store.setSelectedTag(tag, nodeId);
-  }
-
-  addTag(tag: TagType) {
-    this.store.addTag(tag);
-  }
-
-  get selectedTag() {
-    return this.store.selectedTag;
-  }
-
-  get selectedNode() {
-    return this.store.selectedNodeId;
-  }
-
-  get allTags() {
-    // Sort alphabetically
-    return this.store.tags.slice().sort((a, b) => a.name.localeCompare(b.name));
-  }
-}
-
-const useFilterByGroupContext = () => useContext(FilterByGroupContext.context);
+const useFilterByGroupContext = () => useContext(FilterByGroupContext);
 
 const FilterByGroupProvider: FC<FBGContextOptions> = ({
   children,
   suggestions,
 }) => {
-  const newValue = useFilterByGroupContext().spawn({ suggestions });
+  const [selectedTag, setSelectedTag] = useState<TagType>();
+  const [selectedNode, setSelectedNode] = useState<string>();
+
+  const refs = useRef<any>([]);
+
+  const getSuggestions = (): TagType[] => {
+    const allSuggestions = refs.current.reduce(
+      (acc: any, ref: any) => [...acc, ...ref.current.tags],
+      suggestions || [],
+    );
+    return allSuggestions;
+  };
+
+  const useRegisterSuggestions = () => {
+    const newRef = useRef<SuggestionsRefType>({
+      id: v1(),
+      tags: [] as TagType[],
+    });
+
+    if (!refs.current.find((ref: any) => ref.current.id === newRef.current.id)) {
+      refs.current.push(newRef);
+    }
+
+    return (tags: TagType[]) => {
+      reject(tags, tag => isEmpty(tag.id)).forEach(tag => {
+        if (!getSuggestions().some(_suggestion => _suggestion.id === tag.id)) {
+          newRef.current.tags.push(tag);
+        }
+      });
+    };
+  };
+
+  const newValue = {
+    getSuggestions,
+    useRegisterSuggestions,
+    selectedTag,
+    selectedNode,
+    setSelectedTag,
+    setSelectedNode,
+  };
 
   return (
     <FilterByGroupContext.Provider value={newValue}>
@@ -95,27 +87,32 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
   );
 };
 
-const withFilterSuggestions = <P extends object>({
-  suggestions,
-}: FBGContextOptions) => (Component: CT<P> | string) => (props: P) => (
-  <Component {...props} suggestions={suggestions} />);
-
 const withFilterByGroupContext = <P extends object>(
   Component: CT<P> | string,
-) => (props: P & FBGContextOptions) => {
-    const { suggestions } = props;
+) => (props: P & FBGContextOptions) => (
+    <FilterByGroupProvider suggestions={props.suggestions}>
+      <Component {...props} />
+    </FilterByGroupProvider>
+  );
 
-    return (
-      <FilterByGroupProvider suggestions={suggestions}>
-        <Component {...props} />
-      </FilterByGroupProvider>
-    );
-  };
+const withRegisterSuggestions = (Component: any) => (props: any) => {
+  const { useRegisterSuggestions } = useFilterByGroupContext();
+
+  return <Component {...props} registerSuggestions={useRegisterSuggestions()} />;
+};
+
+const withFBGSuggestions = <P extends object>({
+  suggestions,
+}: FBGContextOptions) => (Component: CT<P> | string) => (props: P) => (
+    <Component {...props} suggestions={suggestions} />
+  );
+
 
 export default FilterByGroupContext;
 export {
-  FilterByGroupProvider,
+  FilterByGroupContext,
   useFilterByGroupContext,
   withFilterByGroupContext,
-  withFilterSuggestions,
+  withRegisterSuggestions,
+  withFBGSuggestions,
 };

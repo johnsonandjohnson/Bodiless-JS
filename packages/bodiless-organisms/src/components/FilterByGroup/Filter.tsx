@@ -45,10 +45,15 @@ import {
   withTagButton,
   TagButtonOptions,
 } from '@bodiless/components';
-import { FilterComponents, FilterProps, TagLabelProps } from './types';
+import {
+  FilterComponents,
+  FilterProps,
+  TagLabelProps,
+  WithRegisterSuggestionsProps,
+} from './types';
 import { useItemsAccessors } from './FilterByGroupModel';
+import { useFilterByGroupContext, withRegisterSuggestions } from './FilterByGroupContext';
 
-import { useFBGContext } from './FBGContext';
 
 const filterComponentsStart:FilterComponents = {
   FilterCategory: asEditable('category_name', 'Category Name')(H3),
@@ -60,7 +65,7 @@ const filterComponentsStart:FilterComponents = {
 };
 
 const useWithTagButton = () => {
-  const { getSuggestions } = useFBGContext();
+  const { getSuggestions } = useFilterByGroupContext();
 
   const tagButtonOptions: TagButtonOptions = {
     getSuggestions,
@@ -70,7 +75,7 @@ const useWithTagButton = () => {
   return withTagButton(tagButtonOptions);
 };
 
-const FilterBase: FC<FilterProps> = ({ components }) => {
+const FilterBase: FC<FilterProps & WithRegisterSuggestionsProps> = ({ components, registerSuggestions }) => {
   const {
     FilterCategory,
     FilterGroupItemInput,
@@ -83,12 +88,11 @@ const FilterBase: FC<FilterProps> = ({ components }) => {
   const TagListTitleBase = (props: HTMLProps<HTMLInputElement> & ListTitleProps) => {
     const { tag, nodeId } = useItemsAccessors();
     const {
-      registerSuggestion,
       selectedTag,
       selectedNode,
       setSelectedNode,
       setSelectedTag,
-    } = useFBGContext();
+    } = useFilterByGroupContext();
 
     const onSelect = () => {
       setSelectedNode(nodeId);
@@ -98,7 +102,7 @@ const FilterBase: FC<FilterProps> = ({ components }) => {
     const isTagSelected = Boolean(selectedTag && selectedTag.id === tag.id);
     const isNodeSelected = Boolean(selectedNode === nodeId);
 
-    registerSuggestion(tag);
+    registerSuggestions([tag]);
 
     const LabelComponent = (
       { labelText, ...rest }: TagLabelProps,
@@ -158,6 +162,7 @@ const FilterBase: FC<FilterProps> = ({ components }) => {
 };
 
 const FilterClean = flow(
+  withRegisterSuggestions,
   designable(filterComponentsStart),
 )(FilterBase);
 

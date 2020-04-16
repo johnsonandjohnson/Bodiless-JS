@@ -19,33 +19,41 @@ import { mount } from 'enzyme';
 import FilterByGroup from '../src/components/FilterByGroup/FilterByGroupTestable';
 import Filter from '../src/components/FilterByGroup/Filter';
 import { useFilterByGroupContext } from '../src/components/FilterByGroup/FilterByGroupContext';
-import {
-  FBGContextInterface,
-} from '../src/components/FilterByGroup/types';
+
+type TagType = {
+  id: string,
+  name: string,
+};
+
+type WithRegisterSuggestions = (tags: TagType[]) => void;
 
 type Props = {
-  onAdd: (context: FBGContextInterface) => void,
+  onAdd: (registerSuggestion: WithRegisterSuggestions) => void,
+  onSelect: (selectFn: (tag?: TagType) => void) => void,
   force: string,
 };
 
 // Component which prints values of the current context.
-const ContextLogger: FC<Props> = ({ onAdd }) => {
-  const FBGContext: FBGContextInterface = useFilterByGroupContext();
+const ContextLogger: FC<Props> = ({ onAdd, onSelect }) => {
+  const {
+    getSuggestions,
+    setSelectedTag,
+    useRegisterSuggestions,
+    selectedTag,
+  } = useFilterByGroupContext();
 
-  const tags = FBGContext.allTags.map(tag => (<span id={tag.id} key={tag.id}>{tag.name}</span>));
+  const allSuggestions = getSuggestions() as TagType[];
+
+  const tags = allSuggestions.map(tag => (<span id={tag.id} key={tag.id}>{tag.name}</span>));
+  const registerSuggestion = useRegisterSuggestions();
 
   return (
     <>
-      <button type="button" id="add-tag-button" onClick={() => onAdd(FBGContext)}>Add</button>
-      <button type="button" id="tag-reset" onClick={() => FBGContext.setSelectedTag()}>Reset</button>
-      <span id="all-tags">{FBGContext.allTags.length}</span>
-      <span id="selected-tag">
-        {
-          FBGContext.selectedTag
-            ? FBGContext.selectedTag.name
-            : ''
-        }
-      </span>
+      <button type="button" id="add-tag-button" onClick={() => onAdd(registerSuggestion)}>Add</button>
+      <button type="button" id="select-tag-button" onClick={() => onSelect(setSelectedTag)}>Select</button>
+      <button type="button" id="tag-reset" onClick={() => setSelectedTag()}>Reset</button>
+      <span id="all-tags">{tags.length}</span>
+      <span id="selected-tag">{ selectedTag ? selectedTag.name : '' }</span>
       {tags}
     </>
   );
@@ -70,7 +78,7 @@ describe('Filter By Group', () => {
 
     const wrapper = mount(
       <FilterByGroup suggestions={suggestions}>
-        <ContextLogger onAdd={() => {}} force="foo" />
+        <ContextLogger onSelect={() => {}} onAdd={() => {}} force="foo" />
       </FilterByGroup>,
     );
 
@@ -87,15 +95,15 @@ describe('Filter By Group', () => {
       { id: 'test-id-2', name: 'Test Tag 2' },
     ];
     const newTag = { id: 'new-tag-id', name: 'New Tag' };
-    const addNewTag = (context: FBGContextInterface) => context.addTag(newTag);
+    const addNewTag = (registerSuggestion: WithRegisterSuggestions) => registerSuggestion([newTag]);
 
     const Test: FC<Props> = ({ force, onAdd }) => (
       <FilterByGroup suggestions={suggestions}>
-        <ContextLogger onAdd={onAdd} force={force} />
+        <ContextLogger onSelect={() => {}} onAdd={onAdd} force={force} />
       </FilterByGroup>
     );
 
-    const wrapper = mount(<Test force="foo" onAdd={addNewTag} />);
+    const wrapper = mount(<Test force="foo" onAdd={addNewTag} onSelect={() => {}} />);
 
     expect(wrapper.find('#all-tags').text()).toBe('2');
     wrapper.find('#add-tag-button').simulate('click');
@@ -107,26 +115,19 @@ describe('Filter By Group', () => {
   it('should provide a method to set selected tag', () => {
     const tagToSelect = { id: '1', name: 'Selected Tag' };
 
-    const Test: FC<Props> = ({ force, onAdd }) => {
-      const FBGContext: FBGContextInterface = useFilterByGroupContext();
+    const Test: FC<Props> = ({ force, onAdd, onSelect }) => (
+      <FilterByGroup>
+        <ContextLogger onAdd={onAdd} onSelect={onSelect} force={force} />
+      </FilterByGroup>
+    );
 
-      return (
-        <FilterByGroup>
-          <button type="button" id="select-tag-button" onClick={() => FBGContext.setSelectedTag(tagToSelect)} />
-          <ContextLogger onAdd={onAdd} force={force} />
-        </FilterByGroup>
-      );
-    };
-
-    const wrapper = mount(<Test force="foo" onAdd={() => {}} />);
+    const wrapper = mount(<Test force="foo" onSelect={setSelectedTag => setSelectedTag(tagToSelect)} onAdd={() => {}} />);
     expect(wrapper.find('#selected-tag').text()).toBe('');
 
     wrapper.find('#select-tag-button').simulate('click');
-    wrapper.setProps({ force: 'bar' });
-    expect(wrapper.find('#selected-tag').text()).toBe('Selected Tag');
+    expect(wrapper.find('#selected-tag').text()).toBe(tagToSelect.name);
 
     wrapper.find('button[aria-label="Reset Button"]').simulate('click');
-    wrapper.setProps({ force: 'bar' });
     expect(wrapper.find('#selected-tag').text()).toBe('');
   });
 });

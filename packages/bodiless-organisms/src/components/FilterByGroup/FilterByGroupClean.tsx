@@ -19,7 +19,7 @@ import {
 } from '@bodiless/fclasses';
 import { FilterByGroupComponents, FilterByGroupProps } from './types';
 import FilterClean from './Filter';
-import { useFBGContext, withFBGContext } from './FBGContext';
+import { useFilterByGroupContext, withFilterByGroupContext } from './FilterByGroupContext';
 
 const FilterByGroupComponentsStart:FilterByGroupComponents = {
   Wrapper: Div,
@@ -38,7 +38,7 @@ const FilterByGroupBase: FC<FilterByGroupProps> = ({ components, children, ...re
     Filter,
   } = components;
 
-  const { setSelectedTag } = useFBGContext();
+  const { setSelectedTag } = useFilterByGroupContext();
 
   return (
     <Wrapper {...rest}>
@@ -55,7 +55,7 @@ const FilterByGroupBase: FC<FilterByGroupProps> = ({ components, children, ...re
 
 const FilterByGroupClean = flow(
   withoutProps(['suggestions']),
-  withFBGContext,
+  withFilterByGroupContext,
   designable(FilterByGroupComponentsStart),
 )(FilterByGroupBase);
 

@@ -48,12 +48,20 @@ export type FBGContextOptions = {
   suggestions?: TagType[],
 };
 
-export interface FBGContextInterface {
-  readonly defaultSuggestions: TagType[]
-  readonly selectedTag: TagType | undefined,
-  readonly selectedNode: string | undefined,
-  readonly allTags: TagType[],
-  setSelectedTag: (tag?: TagType, nodeId?: string) => void,
-  addTag: (tag: TagType) => void,
-  spawn: (instance: FBGContextOptions) => FBGContextInterface,
-}
+export type SuggestionsRefType = {
+  id: string,
+  tags: TagType[],
+};
+
+export type WithRegisterSuggestionsProps = {
+  registerSuggestions: (tags: TagType[]) => undefined,
+};
+
+export type FBGContextType = {
+  getSuggestions: () => TagType[],
+  useRegisterSuggestions: () => (tags: TagType[]) => void,
+  setSelectedTag: (tag?: TagType) => void,
+  setSelectedNode: (nodeId?: string) => void,
+  selectedTag?: TagType,
+  selectedNode?: string,
+};
