@@ -1,9 +1,9 @@
 import React from 'react';
-import { ReactTagsField, ReactTagsFieldProps } from '@bodiless/core';
+import { ReactTagsField as ReactTagsFieldClean, ReactTagsFieldProps } from '@bodiless/core';
 
 import './ReactTags.css';
 
-const ReactTags = (props: ReactTagsFieldProps) => {
+const ReactTagsField = (props: ReactTagsFieldProps) => {
   const classes = {
     root: 'bl-react-tags',
     rootFocused: 'is-focused',
@@ -18,7 +18,7 @@ const ReactTags = (props: ReactTagsFieldProps) => {
   };
 
   return (
-    <ReactTagsField
+    <ReactTagsFieldClean
       classNames={classes}
       autoresize={false}
       {...props}
@@ -26,4 +26,4 @@ const ReactTags = (props: ReactTagsFieldProps) => {
   );
 };
 
-export default ReactTags;
+export default ReactTagsField;

@@ -15,9 +15,9 @@
 import ContextWrapper from './ContextWrapper';
 import PageEditor from './PageEditor';
 import PageOverlay from './PageOverlay';
-import ReactTags from './ReactTags';
+import ReactTagsField from './ReactTags';
 
 export {
   ContextWrapper, PageEditor, PageOverlay,
-  ReactTags,
+  ReactTagsField,
 };
