@@ -1,5 +1,5 @@
 const { useNode } = require('@bodiless/core');
-const { useItemHandlers, useFlexboxDataHandlers } = require('../../src/FlexboxGrid/model');
+const { useItemHandlers, useFlowContainerDataHandlers } = require('../../src/FlowContainer/model');
 
 jest.mock('@bodiless/core');
 
@@ -60,13 +60,13 @@ describe('useItemHandlers', () => {
   });
 });
 
-describe('useFlexboxDataHandlers', () => {
-  describe('insertFlexboxItem', () => {
+describe('useFlowContainerDataHandlers', () => {
+  describe('insertFlowContainerItem', () => {
     it('inserts an item after the current item', () => {
       const node = setMockNode();
       const { items } = node.data;
-      const { insertFlexboxItem } = useFlexboxDataHandlers();
-      insertFlexboxItem('New', node.data.items[0]);
+      const { insertFlowContainerItem } = useFlowContainerDataHandlers();
+      insertFlowContainerItem('New', node.data.items[0]);
       expect(node.setData).toHaveBeenCalledTimes(1);
       const testItems = node.setData.mock.calls[0][0].items;
       expect(testItems.length).toBe(3);
@@ -74,10 +74,10 @@ describe('useFlexboxDataHandlers', () => {
       expect(testItems[0]).toEqual(items[0]);
       expect(testItems[2]).toEqual(items[1]);
     });
-    it('inserts an item to an empty flexbox', () => {
+    it('inserts an item to an empty flow container', () => {
       const node = setMockNode([]);
-      const { insertFlexboxItem } = useFlexboxDataHandlers();
-      insertFlexboxItem('New');
+      const { insertFlowContainerItem } = useFlowContainerDataHandlers();
+      insertFlowContainerItem('New');
       expect(node.setData).toHaveBeenCalledTimes(1);
       const testItems = node.setData.mock.calls[0][0].items;
       expect(testItems.length).toBe(1);
@@ -86,8 +86,8 @@ describe('useFlexboxDataHandlers', () => {
     it('inserts an item at the end if no current item', () => {
       const node = setMockNode();
       const { items } = node.data;
-      const { insertFlexboxItem } = useFlexboxDataHandlers();
-      insertFlexboxItem('New');
+      const { insertFlowContainerItem } = useFlowContainerDataHandlers();
+      insertFlowContainerItem('New');
       expect(node.setData).toHaveBeenCalledTimes(1);
       const testItems = node.setData.mock.calls[0][0].items;
       expect(testItems.length).toBe(3);
@@ -96,12 +96,12 @@ describe('useFlexboxDataHandlers', () => {
       expect(testItems[1]).toEqual(items[1]);
     });
   });
-  describe('deletFlexboxItem', () => {
+  describe('deletFlowContainerItem', () => {
     it('Deletes an item correctly from the beginning', () => {
       const node = setMockNode();
       const { items } = node.data;
-      const { deleteFlexboxItem } = useFlexboxDataHandlers();
-      const currentItem = deleteFlexboxItem(node.data.items[0].uuid);
+      const { deleteFlowContainerItem } = useFlowContainerDataHandlers();
+      const currentItem = deleteFlowContainerItem(node.data.items[0].uuid);
       expect(node.setData).toHaveBeenCalledTimes(1);
       const testItems = node.setData.mock.calls[0][0].items;
       expect(testItems.length).toBe(1);
@@ -111,8 +111,8 @@ describe('useFlexboxDataHandlers', () => {
     it('Deletes an item correctly from the end', () => {
       const node = setMockNode();
       const { items } = node.data;
-      const { deleteFlexboxItem } = useFlexboxDataHandlers();
-      const currentItem = deleteFlexboxItem(node.data.items[1].uuid);
+      const { deleteFlowContainerItem } = useFlowContainerDataHandlers();
+      const currentItem = deleteFlowContainerItem(node.data.items[1].uuid);
       expect(node.setData).toHaveBeenCalledTimes(1);
       const testItems = node.setData.mock.calls[0][0].items;
       expect(testItems.length).toBe(1);
@@ -121,8 +121,8 @@ describe('useFlexboxDataHandlers', () => {
     });
     it('Deletes the last item correctly', () => {
       const node = setMockNode([{ type: 'Foo', uuid: 'foo', wrapperProps: {} }]);
-      const { deleteFlexboxItem } = useFlexboxDataHandlers();
-      const currentItem = deleteFlexboxItem(node.data.items[0].uuid);
+      const { deleteFlowContainerItem } = useFlowContainerDataHandlers();
+      const currentItem = deleteFlowContainerItem(node.data.items[0].uuid);
       expect(node.setData).toHaveBeenCalledTimes(1);
       const testItems = node.setData.mock.calls[0][0].items;
       expect(testItems.length).toBe(0);
@@ -130,13 +130,13 @@ describe('useFlexboxDataHandlers', () => {
     });
     it('Does not delete an item which doesnt exist', () => {
       const node = setMockNode();
-      const { deleteFlexboxItem } = useFlexboxDataHandlers();
-      const currentItem = deleteFlexboxItem('blap');
+      const { deleteFlowContainerItem } = useFlowContainerDataHandlers();
+      const currentItem = deleteFlowContainerItem('blap');
       expect(node.setData).not.toHaveBeenCalled();
       expect(currentItem).toBeUndefined();
     });
   });
-  describe('updateFlexboxitem', () => {
+  describe('updateFlowContaineritem', () => {
     it('updates an item by uuid', () => {
       const node = setMockNode();
       const { items } = node.data;
@@ -145,8 +145,8 @@ describe('useFlexboxDataHandlers', () => {
         type: 'Baz',
         wrapperProps: { bing: 'bat' },
       };
-      const { updateFlexboxItem } = useFlexboxDataHandlers();
-      updateFlexboxItem(newItem);
+      const { updateFlowContainerItem } = useFlowContainerDataHandlers();
+      updateFlowContainerItem(newItem);
       expect(node.setData).toHaveBeenCalledTimes(1);
       const testItems = node.setData.mock.calls[0][0].items;
       expect(testItems.length).toBe(2);
@@ -159,8 +159,8 @@ describe('useFlexboxDataHandlers', () => {
         type: 'Baz',
         wrapperProps: { bing: 'bat' },
       };
-      const { updateFlexboxItem } = useFlexboxDataHandlers();
-      updateFlexboxItem(newItem);
+      const { updateFlowContainerItem } = useFlowContainerDataHandlers();
+      updateFlowContainerItem(newItem);
       expect(node.setData).not.toHaveBeenCalled();
     });
   });

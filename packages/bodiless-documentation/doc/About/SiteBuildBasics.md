@@ -401,7 +401,7 @@ export default withNode(MyComponent);
 
 ## Managing Layouts
 
-It is part of the philosophy of BodilessJS that complex layouts should be created by developers in code, not by content editors in a complex UI,  Nevertheless, there are times when you want to give your ediors some basic control over what components are placed on a page, and how they flow. For this, BodilessJS provides a simple, flexbox-based grid container, and a selector which allows an editor to select and place components within it. Refactor the `Gallery` component to use the flexbox container.
+It is part of the philosophy of BodilessJS that complex layouts should be created by developers in code, not by content editors in a complex UI,  Nevertheless, there are times when you want to give your ediors some basic control over what components are placed on a page, and how they flow. For this, BodilessJS provides a simple, flowContainer-based grid container, and a selector which allows an editor to select and place components within it. Refactor the `Gallery` component to use the flowContainer container.
 
 First create some styled variations of`GalleryTile` with different colored borders. Add the following to `Gallery.tsx` just after the line where `asGalleryTile` is defined:
 
@@ -417,13 +417,13 @@ To create the actual components add the following imports:
 ```
 import { flow } from 'lodash';
 import { withTerm, withTitle } from '@bodiless/layouts';
-import { FlexboxGrid } from '@bodiless/layouts-ui';
+import { FlowContainer } from '@bodiless/layouts-ui';
 ```
 
 Add the following to `Gallery.tsx` just
 after withColoredBorder styling code in previous step:
 
-The FlexboxGrid takes a design prop that is part of the [Design API](Development/Architecture/FClasses?id=the-design-api).  This is how we pass in the components that can be used in the grid.
+The FlowContainer takes a design prop that is part of the [Design API](Development/Architecture/FClasses?id=the-design-api).  This is how we pass in the components that can be used in the grid.
 we will also use the hoc  `withTitle` to provide a Title for each component in the selector.
 
 ``` js
@@ -454,7 +454,7 @@ The lodash `flow` utility is used to compose tokens onto the`CaptionedImage` com
 
 Design is an object of HOC so with use the `startWith` HOC to say which component we are starting with.
 
-Finally, replace the main content of `Gallery` with the flexbox grid.
+Finally, replace the main content of `Gallery` with the flowContainer grid.
 
 - First replace the `Body` component definition:
 
@@ -466,7 +466,7 @@ Finally, replace the main content of `Gallery` with the flexbox grid.
 
   ``` js
   const Body: FC = () => (
-    <FlexboxGrid nodeKey="body" design={design} />
+    <FlowContainer nodeKey="body" design={design} />
   );
   ```
 
@@ -511,7 +511,7 @@ If you look in your `src/data/pages/gallery` directory, you will see new `json` 
 
 ### Responsive Layout
 
-With your viewport at desktop width, use the component selector to place two 50% width tiles in the gallery.  Now, change your viewport to tablet width.  Notice that the layout is responsive by default, and the tiles now stack one per row.  However, you can alter this behavior by resizing (or even reordering) the tiles while at tablet size.  In fact, the flexbox grid remembers the layout you set at every breakpoint, allowing you to create completely customized, responsive layouts.
+With your viewport at desktop width, use the component selector to place two 50% width tiles in the gallery.  Now, change your viewport to tablet width.  Notice that the layout is responsive by default, and the tiles now stack one per row.  However, you can alter this behavior by resizing (or even reordering) the tiles while at tablet size.  In fact, the flowContainer grid remembers the layout you set at every breakpoint, allowing you to create completely customized, responsive layouts.
 
 ### Selection vs Configuration
 

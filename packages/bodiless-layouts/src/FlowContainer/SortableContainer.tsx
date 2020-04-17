@@ -18,7 +18,7 @@ import { SortableContainer, SortEndHandler } from 'react-sortable-hoc';
 import { useContextActivator, useEditContext } from '@bodiless/core';
 
 type FinalUI = {
-  FlexboxEmpty: ComponentType<HTMLProps<HTMLDivElement>> | string,
+  FlowContainerEmpty: ComponentType<HTMLProps<HTMLDivElement>> | string,
 };
 
 export type UI = Partial<FinalUI>;
@@ -31,7 +31,7 @@ export type SortableListProps = {
 };
 
 const defaultUI: FinalUI = {
-  FlexboxEmpty: 'div',
+  FlowContainerEmpty: 'div',
 };
 
 const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });
@@ -40,14 +40,14 @@ const SortableListWrapper = SortableContainer(
   observer(
     ({ children, ui, ...rest }: SortableListProps): React.ReactElement<SortableListProps> => {
       if (!children || !children.length) {
-        const { FlexboxEmpty } = getUI(ui);
+        const { FlowContainerEmpty } = getUI(ui);
         const context = useEditContext();
         const activeClassName = context.isActive ? 'bl-border-orange-400' : 'hover:bl-border-orange-400';
 
         return (
-          <FlexboxEmpty className={`bl-flex bl-justify-center bl-flex-wrap bl-py-grid-3 ${activeClassName}`} {...useContextActivator()}>
-            Empty Flexbox
-          </FlexboxEmpty>
+          <FlowContainerEmpty className={`bl-flex bl-justify-center bl-flex-wrap bl-py-grid-3 ${activeClassName}`} {...useContextActivator()}>
+            Empty FlowContainer
+          </FlowContainerEmpty>
         );
       }
       return (

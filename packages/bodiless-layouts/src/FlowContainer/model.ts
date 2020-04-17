@@ -14,31 +14,32 @@
 
 import { v1 } from 'uuid';
 import { useNode } from '@bodiless/core';
-import { FlexboxItem, FlexboxItemProps, FlexboxData } from './types';
+import { FlowContainerItem, FlowContainerItemProps, FlowContainerData } from './types';
 
-type InsertContentNode = (componentName: string, afterItem?: FlexboxItem) => FlexboxItem;
-type SetFlexboxItems = (items: FlexboxItem[]) => void;
-type UpdateFlexboxItem = (flexboxItem: FlexboxItem) => void;
-type OnFlexboxItemResize = (
+// eslint-disable-next-line max-len
+type InsertContentNode = (componentName: string, afterItem?: FlowContainerItem) => FlowContainerItem;
+type SetFlowContainerItems = (items: FlowContainerItem[]) => void;
+type UpdateFlowContainerItem = (flowContainerItem: FlowContainerItem) => void;
+type OnFlowContainerItemResize = (
   uuid: string,
-  props: FlexboxItemProps,
+  props: FlowContainerItemProps,
 ) => void;
-type DeleteFlexboxItem = (uuid: string) => FlexboxItem | undefined;
-type FlexboxDataHandlers = {
-  insertFlexboxItem: InsertContentNode,
-  setFlexboxItems: SetFlexboxItems,
-  updateFlexboxItem: UpdateFlexboxItem,
-  onFlexboxItemResize: OnFlexboxItemResize,
-  deleteFlexboxItem: DeleteFlexboxItem,
+type DeleteFlowContainerItem = (uuid: string) => FlowContainerItem | undefined;
+type FlowContainerDataHandlers = {
+  insertFlowContainerItem: InsertContentNode,
+  setFlowContainerItems: SetFlowContainerItems,
+  updateFlowContainerItem: UpdateFlowContainerItem,
+  onFlowContainerItemResize: OnFlowContainerItemResize,
+  deleteFlowContainerItem: DeleteFlowContainerItem,
 };
 
 export function useItemHandlers() {
-  const { node } = useNode<FlexboxData>();
+  const { node } = useNode<FlowContainerData>();
   const getItems = () => {
     const { items } = node.data;
     return items || [];
   };
-  const setItems = (items: FlexboxItem[]) => {
+  const setItems = (items: FlowContainerItem[]) => {
     node.setData({ items });
   };
   const deleteItem = (uuid?: string) => {
@@ -48,24 +49,24 @@ export function useItemHandlers() {
   return { getItems, setItems, deleteItem };
 }
 
-export function useFlexboxDataHandlers(): FlexboxDataHandlers {
+export function useFlowContainerDataHandlers(): FlowContainerDataHandlers {
   const { getItems, setItems, deleteItem } = useItemHandlers();
-  const findItem = (startItem?: Pick<FlexboxItem, 'uuid'>) => {
+  const findItem = (startItem?: Pick<FlowContainerItem, 'uuid'>) => {
     const items = getItems();
     if (!startItem) return items.length;
     const index = items.findIndex(
-      (item: FlexboxItem) => startItem!.uuid === item.uuid,
+      (item: FlowContainerItem) => startItem!.uuid === item.uuid,
     );
     return index === -1 ? items.length : index;
   };
-  const spliceItem = (start: number, deleteCount: number, newItem?: FlexboxItem) => {
+  const spliceItem = (start: number, deleteCount: number, newItem?: FlowContainerItem) => {
     const newItems = [...getItems()];
     if (newItem) newItems.splice(start, deleteCount, newItem);
     else newItems.splice(start, deleteCount);
     setItems(newItems);
   };
   return {
-    insertFlexboxItem: (componentName: string, afterItem?: FlexboxItem) => {
+    insertFlowContainerItem: (componentName: string, afterItem?: FlowContainerItem) => {
       const newItem = {
         uuid: v1(),
         wrapperProps: {},
@@ -75,29 +76,29 @@ export function useFlexboxDataHandlers(): FlexboxDataHandlers {
       spliceItem(index + 1, 0, newItem);
       return newItem;
     },
-    setFlexboxItems: setItems,
-    updateFlexboxItem: (flexboxItem: FlexboxItem) => {
-      const index = findItem(flexboxItem);
+    setFlowContainerItems: setItems,
+    updateFlowContainerItem: (flowContainerItem: FlowContainerItem) => {
+      const index = findItem(flowContainerItem);
       if (index < getItems().length) {
-        spliceItem(index, 1, flexboxItem);
+        spliceItem(index, 1, flowContainerItem);
       }
     },
-    onFlexboxItemResize: (uuid, itemProps) => {
+    onFlowContainerItemResize: (uuid, itemProps) => {
       const items = getItems();
       const itemIndex = findItem({ uuid });
       if (itemIndex < items.length) {
-        const currentFlexboxItem = items[itemIndex];
-        const updatedFlexboxItem: FlexboxItem = {
-          ...currentFlexboxItem,
+        const currentFlowContainerItem = items[itemIndex];
+        const updatedFlowContainerItem: FlowContainerItem = {
+          ...currentFlowContainerItem,
           wrapperProps: {
-            ...(currentFlexboxItem.wrapperProps || {}),
+            ...(currentFlowContainerItem.wrapperProps || {}),
             ...itemProps,
           },
         };
-        spliceItem(itemIndex, 1, updatedFlexboxItem);
+        spliceItem(itemIndex, 1, updatedFlowContainerItem);
       }
     },
-    deleteFlexboxItem: (uuid: string) => {
+    deleteFlowContainerItem: (uuid: string) => {
       const index = findItem({ uuid });
       if (index >= getItems().length) return undefined;
       spliceItem(index, 1);

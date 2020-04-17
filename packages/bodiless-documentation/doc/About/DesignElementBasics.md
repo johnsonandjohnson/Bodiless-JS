@@ -456,7 +456,7 @@ Design API as well, using the same method we just did.
     import { withNode } from '@bodiless/core';
     import { flow } from 'lodash';
     import { withTitle, withFacet } from '@bodiless/layouts';
-    import { FlexboxGrid } from '@bodiless/layouts-ui';
+    import { FlowContainer } from '@bodiless/layouts-ui';
     import { withEditorBasic } from '../Editors';
     import CaptionedImage from './CaptionedImage';
     import {
@@ -513,7 +513,7 @@ Design API as well, using the same method we just did.
     };
 
     const GalleryBody: FC = () => (
-      <FlexboxGrid nodeKey="body" design={galleryDesign} />
+      <FlowContainer nodeKey="body" design={galleryDesign} />
     );
 
     const GalleryClean = flow(

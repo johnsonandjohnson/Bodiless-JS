@@ -37,7 +37,7 @@ import {
   ProductDetailImageWrapper,
   ProductDetailAccWrapper,
 } from '../components/Product';
-import { FlexBoxDefault } from '../components/Flexbox';
+import { FlowContainerDefault } from '../components/FlowContainer';
 import { withEditorBasic } from '../components/Editors';
 import asSingleAccordionDefaultStyle from '../components/SingleAccordion/token';
 
@@ -112,7 +112,7 @@ export default (props: any) => (
         <BVReviews />
       </SectionMargin>
       <SectionNegXMargin>
-        <FlexBoxDefault
+        <FlowContainerDefault
           nodeKey="product_touts"
           maxComponents={3}
         />

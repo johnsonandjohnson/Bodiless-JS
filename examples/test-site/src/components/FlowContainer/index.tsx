@@ -12,23 +12,23 @@
  * limitations under the License.
  */
 import { flow } from 'lodash';
-import { FlexboxGrid } from '@bodiless/layouts-ui';
+import { FlowContainer } from '@bodiless/layouts-ui';
 import withToutVariations from './withToutVariations';
 import withContentfulTouts from './withContentfulTouts';
 import withRichTextVariations from './withRichTextVariations';
 import withSingleAccordionVariations from './withSingleAccordionVariations';
 
-import { asFlexboxWithMargins } from './token';
+import { asFlowContainerWithMargins } from './token';
 
 // Typically we would also import variations of other types of component.
 // const variations = extendDesign(toutVariations, sliderVariations, ...);
-const FlexBoxDefault = flow(
+const FlowContainerDefault = flow(
   withToutVariations,
   withContentfulTouts,
   withRichTextVariations,
   withSingleAccordionVariations,
-  asFlexboxWithMargins,
-)(FlexboxGrid);
+  asFlowContainerWithMargins,
+)(FlowContainer);
 
 // eslint-disable-next-line import/prefer-default-export
-export { FlexBoxDefault };
+export { FlowContainerDefault };
