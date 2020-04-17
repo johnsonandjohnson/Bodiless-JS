@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import { v4 } from 'uuid';
 import { useFormApi, Text } from 'informed';
 import { isEmpty } from 'lodash';
