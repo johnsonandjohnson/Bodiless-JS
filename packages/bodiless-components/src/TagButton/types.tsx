@@ -26,4 +26,5 @@ export type TagButtonOptions = {
   allowNew?: boolean;
   allowMultipleTags?: boolean;
   inputAttributes?: {};
+  seeAllText?: string;
 };

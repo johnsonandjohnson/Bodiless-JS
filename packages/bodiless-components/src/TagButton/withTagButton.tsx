@@ -38,7 +38,8 @@ export const tagButtonOptions = {
         minQueryLength = 1,
         allowNew = true,
         allowMultipleTags = true,
-        inputAttributes = {name:'react-tags-input'}
+        inputAttributes = {name:'react-tags-input'},
+        seeAllText = 'See all tags',
       } = props;
 
       const suggestions = getSuggestions();
@@ -67,7 +68,7 @@ export const tagButtonOptions = {
             inputAttributes={inputAttributes}
           />
           <ComponentFormUnwrapButton type="button" onClick={displayListOfTags}>
-            See All Tags
+            {seeAllText}
           </ComponentFormUnwrapButton>
         </>
       );
