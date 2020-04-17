@@ -13,16 +13,25 @@
  */
 
 import {
+  EditButtonOptions,
   withEditButton,
   getUI,
-  useEditContext,
+  useEditContext, TagType,
 } from '@bodiless/core';
-import React from 'react';
+import React, {HTMLProps} from 'react';
+
+// Type of the data used by this component.
+export type Data = {
+  tags: TagType[];
+};
+// @Todo: Type of the props accepted by this component.
+type Props = HTMLProps<HTMLElement>;
 
 // Options used to create an edit button.
-export const tagButtonOptions = {
+export const tagButtonOptions:EditButtonOptions<Props, Data>  = {
     icon: 'local_offer',
     name: 'Tag',
+    // @ts-ignore
     renderForm: ({ui, props}) => {
       const {
         ComponentFormTitle,
@@ -49,7 +58,7 @@ export const tagButtonOptions = {
         context.showPageOverlay({
           message: suggestions
             .slice()
-            .reduce((acc, _tag) => `${acc}\n${_tag.name}`, ''),
+            .reduce((acc:any, _tag:TagType) => `${acc}\n${_tag.name}`, ''),
           hasSpinner: false,
           hasCloseButton: true,
         });
