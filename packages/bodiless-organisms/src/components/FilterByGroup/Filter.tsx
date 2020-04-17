@@ -13,8 +13,7 @@
  */
 
 /* eslint-disable arrow-body-style, max-len, @typescript-eslint/no-unused-vars */
-import React, { FC, HTMLProps, memo } from 'react';
-import { observer } from 'mobx-react-lite';
+import React, { FC } from 'react';
 import { flow, isEmpty } from 'lodash';
 import {
   withNodeKey,
@@ -30,140 +29,139 @@ import {
   designable,
   Div,
   H3,
-  Ul,
   Input,
   Label,
   withDesign,
   replaceWith,
+  stylable,
 } from '@bodiless/fclasses';
 import {
   List,
   asEditable,
   asEditableList,
   withBasicSublist,
-  ListTitleProps,
   withTagButton,
   TagButtonOptions,
 } from '@bodiless/components';
 import {
-  FilterComponents,
-  FilterProps,
-  TagLabelProps,
   WithRegisterSuggestionsProps,
+  TagTitleProps,
+  TagTitleComponents,
+  FilterProps,
+  FilterComponents,
 } from './types';
 import { useItemsAccessors } from './FilterByGroupModel';
-import { useFilterByGroupContext, withRegisterSuggestions } from './FilterByGroupContext';
+import { useFilterByGroupContext /* withRegisterSuggestions */ } from './FilterByGroupContext';
 
-
-const filterComponentsStart:FilterComponents = {
-  FilterCategory: asEditable('category_name', 'Category Name')(H3),
-  FilterGroupWrapper: Ul,
-  FilterGroupItemInput: Input,
-  FilterGroupItemLabel: Label,
-  FilterGroupItemPlaceholder: Label,
+const tagTitleComponentsStart: TagTitleComponents = {
   FilterInputWrapper: Div,
+  FilterGroupItemInput: Input,
+  FilterGroupItemPlaceholder: Label,
+  FilterGroupItemLabel: Label,
 };
 
 const useWithTagButton = () => {
-  const { getSuggestions } = useFilterByGroupContext();
+  // const { getSuggestions } = useFilterByGroupContext();
 
   const tagButtonOptions: TagButtonOptions = {
-    getSuggestions,
+    getSuggestions: () => [],
     allowMultipleTags: false,
   };
 
   return withTagButton(tagButtonOptions);
 };
 
-const FilterBase: FC<FilterProps & WithRegisterSuggestionsProps> = ({ components, registerSuggestions }) => {
+const TagTitleBase: FC<TagTitleProps> = ({ components, ...rest }) => {
   const {
-    FilterCategory,
     FilterGroupItemInput,
     FilterGroupItemLabel,
     FilterGroupItemPlaceholder,
-    FilterGroupWrapper,
     FilterInputWrapper,
   } = components;
 
-  const TagListTitleBase = (props: HTMLProps<HTMLInputElement> & ListTitleProps) => {
-    const { tag, nodeId } = useItemsAccessors();
-    const {
-      selectedTag,
-      selectedNode,
-      setSelectedNode,
-      setSelectedTag,
-    } = useFilterByGroupContext();
+  const { tag, nodeId } = useItemsAccessors();
+  const {
+    selectedTag,
+    selectedNode,
+    setSelectedNode,
+    setSelectedTag,
+    useRegisterSuggestions,
+  } = useFilterByGroupContext();
 
-    const onSelect = () => {
-      setSelectedNode(nodeId);
-      setSelectedTag(tag);
-    };
-
-    const isTagSelected = Boolean(selectedTag && selectedTag.id === tag.id);
-    const isNodeSelected = Boolean(selectedNode === nodeId);
-
-    registerSuggestions([tag]);
-
-    const LabelComponent = (
-      { labelText, ...rest }: TagLabelProps,
-    ) => (isEmpty(labelText)
-      ? (<FilterGroupItemPlaceholder {...rest}>Select tag...</FilterGroupItemPlaceholder>)
-      : (<FilterGroupItemLabel {...rest}>{ labelText }</FilterGroupItemLabel>));
-
-    return (
-      <FilterInputWrapper {...props} key={tag.id}>
-        <FilterGroupItemInput
-          type="radio"
-          name="filter-item"
-          value={tag.id}
-          id={nodeId}
-          onChange={() => onSelect()}
-          checked={isNodeSelected && isTagSelected}
-        />
-        <LabelComponent htmlFor={nodeId} labelText={tag.name} />
-      </FilterInputWrapper>
-    );
+  const onSelect = () => {
+    setSelectedNode(nodeId);
+    setSelectedTag(tag);
   };
 
-  const CategoryList = flow(
-    asEditableList,
-    withDesign({
-      Title: replaceWith(FilterCategory),
-    }),
-  )(List);
+  const isTagSelected = Boolean(selectedTag && selectedTag.id === tag.id);
+  const isNodeSelected = Boolean(selectedNode === nodeId);
 
-  const TagTitle = flow(
-    observer,
-    withoutProps(['componentData']),
-    ifEditable(
-      useWithTagButton(),
-      withContextActivator('onClick'),
-      withLocalContextMenu,
-    ),
-    ifReadOnly(withoutProps(['setComponentData'])),
-    withNodeDataHandlers({ tags: [] }),
-    withNode,
-    withNodeKey('tag'),
-  )(TagListTitleBase);
-
-  const TagList = flow(
-    asEditableList,
-    withDesign({
-      Title: replaceWith(TagTitle),
-      Wrapper: replaceWith(FilterGroupWrapper),
-    }),
-  )(List);
-
-  const FilterList = memo(withBasicSublist(TagList)(CategoryList));
+  useRegisterSuggestions()([tag]);
 
   return (
-    <FilterList nodeKey="filter" />
+    <FilterInputWrapper {...rest} key={tag.id}>
+      <FilterGroupItemInput
+        type="radio"
+        name="filter-item"
+        value={tag.id}
+        id={nodeId}
+        onChange={() => onSelect()}
+        checked={isNodeSelected && isTagSelected}
+      />
+      {
+        isEmpty(tag.name)
+          ? (<FilterGroupItemPlaceholder>Select tag...</FilterGroupItemPlaceholder>)
+          : (<FilterGroupItemLabel>{ tag.name }</FilterGroupItemLabel>)
+      }
+    </FilterInputWrapper>
   );
 };
 
+const TagTitle = flow(
+  designable(tagTitleComponentsStart),
+  withoutProps(['componentData', 'onContextMenu']),
+  ifEditable(
+    useWithTagButton(),
+    withContextActivator('onClick'),
+    withLocalContextMenu,
+  ),
+  ifReadOnly(withoutProps(['setComponentData'])),
+  withNodeDataHandlers({ tags: [] }),
+  withNode,
+  withNodeKey('tag'),
+)(TagTitleBase);
+
+const TestFilterComponentsStart: FilterComponents = {
+  CategoryList: flow(
+    asEditableList,
+    withDesign({
+      Title: flow(
+        replaceWith(H3),
+        asEditable('category_name', 'Category Name'),
+      ),
+    }),
+  )(List),
+  TagList: flow(
+    asEditableList,
+    withDesign({
+      Title: replaceWith(TagTitle),
+      Wrapper: stylable,
+    }),
+  )(List),
+};
+
+const Filter: FC<FilterProps & WithRegisterSuggestionsProps> = ({ components }) => {
+  const { CategoryList, TagList } = components;
+
+  // TODO: Still inside render fn
+  const FilterList = withBasicSublist(TagList)(CategoryList);
+
+  return (<FilterList nodeKey="filter" />);
+};
+
 const FilterClean = flow(
-  withRegisterSuggestions,
-  designable(filterComponentsStart),
-)(FilterBase);
+  // withRegisterSuggestions,
+  designable(TestFilterComponentsStart),
+)(Filter);
 
 export default FilterClean;

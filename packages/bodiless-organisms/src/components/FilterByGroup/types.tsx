@@ -15,6 +15,7 @@
 import { ComponentType, HTMLProps } from 'react';
 import { TagType } from '@bodiless/core';
 import { StylableProps, DesignableComponentsProps } from '@bodiless/fclasses';
+import { ListProps } from '@bodiless/components';
 
 export type FilterByGroupComponents = {
   Wrapper: ComponentType<StylableProps>,
@@ -25,24 +26,24 @@ export type FilterByGroupComponents = {
 };
 
 export type FilterComponents = {
-  FilterCategory: ComponentType<StylableProps>,
+  CategoryList: ComponentType<ListProps>,
+  TagList: ComponentType<ListProps>,
+};
+
+export type TagTitleComponents = {
   FilterGroupItemInput: ComponentType<StylableProps & HTMLProps<HTMLInputElement>>,
   FilterGroupItemLabel: ComponentType<StylableProps & HTMLProps<HTMLLabelElement>>,
   FilterGroupItemPlaceholder: ComponentType<StylableProps & HTMLProps<HTMLLabelElement>>,
-  FilterGroupWrapper: ComponentType<StylableProps>,
   FilterInputWrapper: ComponentType<StylableProps>,
 };
 
 export type FilterByGroupProps = DesignableComponentsProps<FilterByGroupComponents>;
 export type FilterProps = DesignableComponentsProps<FilterComponents>;
+export type TagTitleProps = DesignableComponentsProps<TagTitleComponents>;
 
 export type NodeTagType = {
   tags: TagType[],
 };
-
-export type TagLabelProps = {
-  labelText?: string,
-} & HTMLProps<HTMLLabelElement>;
 
 export type FBGContextOptions = {
   suggestions?: TagType[],

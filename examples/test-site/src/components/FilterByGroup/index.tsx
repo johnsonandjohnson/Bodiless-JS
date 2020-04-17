@@ -27,6 +27,20 @@ const suggestions = [
   { id: '4', name: 'DefaultTag 4' },
 ];
 
+const withTagListStyles = withDesign({
+  Title: withDesign({
+    FilterInputWrapper: addClasses('flex pb-2 items-center'),
+    FilterGroupItemInput: addClasses('mr-3'),
+    FilterGroupItemPlaceholder: addClasses('text-gray-600'),
+    FilterGroupItemLabel: addClasses(''),
+  }),
+  Wrapper: addClasses('m-2 pl-2'),
+});
+
+const withCategoryList = withDesign({
+  Title: addClasses('font-bold'),
+});
+
 const asFilterByGroup = flow(
   withFBGSuggestions({ suggestions }),
   withDesign({
@@ -37,17 +51,10 @@ const asFilterByGroup = flow(
       addClasses('my-2 underline self-end'),
       asTextColorPrimary,
     ),
-    Filter: flow(
-      withDesign({
-        FilterCategory: addClasses('font-bold'),
-        FilterGroupItemInput: addClasses('mr-3'),
-        FilterGroupItemLabel: addClasses(''),
-        FilterGroupItemPlaceholder: addClasses('text-gray-600'),
-        FilterInputWrapper: addClasses('flex pb-2 items-center'),
-        FilterGroupWrapper: addClasses('m-2 pl-2'),
-      }),
-      addClasses('p-4'),
-    ),
+    Filter: withDesign({
+      TagList: withTagListStyles,
+      CategoryList: withCategoryList,
+    }),
   }),
   asTestableFilterByGroup,
 );
