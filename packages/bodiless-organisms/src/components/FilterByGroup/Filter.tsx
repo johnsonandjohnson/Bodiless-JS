@@ -135,7 +135,6 @@ const TagTitle = flow(
   withNodeDataHandlers({ tags: [] }),
   withNode,
   withNodeKey('tag'),
-  withRegisterSuggestions,
 )(TagTitleBase);
 
 const TestFilterComponentsStart: FilterComponents = {
