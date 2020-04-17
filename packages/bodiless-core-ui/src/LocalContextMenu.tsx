@@ -51,7 +51,7 @@ const ui = {
   Toolbar,
   ToolbarButton,
   Tooltip: LocalTooltip,
-  ReactTagsField,
+  ReactTags: ReactTagsField,
 };
 
 const LocalContextMenu: FC<ContextMenuProps> = props => (

@@ -80,7 +80,7 @@ const ui: ContextMenuUI = {
   ToolbarDivider,
   FormWrapper,
   Tooltip: GlobalTooltip,
-  ReactTagsField,
+  ReactTags: ReactTagsField,
 };
 
 const GlobalContextMenu: FC<ContextMenuProps> = props => {
