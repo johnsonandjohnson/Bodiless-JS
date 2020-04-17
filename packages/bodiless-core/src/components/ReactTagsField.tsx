@@ -39,32 +39,30 @@ export type ReactTagsFieldProps = {
 
 const ReactTagsField = (props: ReactTagsFieldProps) => {
   const formApi = useFormApi();
+  const currentTags = formApi.getValue<TagType[]>('tags');
   const { allowMultipleTags, ...rest } = props;
-  const [tags, updateTags] = useState<TagType[]>([]);
-
+  // @todo: right here I need to be able the inital state?
   const handleAddition = (tag: TagType) => {
     if (isEmpty(tag.id)) {
       /* eslint-disable no-param-reassign */
       tag = new Tag(tag.name);
     }
 
-    const newTags = allowMultipleTags ? [...tags, tag] : [tag];
+    const newTags = allowMultipleTags ? [...currentTags, tag] : [tag];
     formApi.setValue('tags', newTags);
-    updateTags(newTags);
   };
 
   const handleDelete = (i: number) => {
-    const newTags = tags.slice(0);
+    const newTags = currentTags.slice(0);
     newTags.splice(i, 1);
     formApi.setValue('tags', newTags);
-    updateTags(newTags);
   };
 
   return (
     <React.Fragment>
       <Text type="hidden" field="tags" />
       <ReactTags
-        tags={tags}
+        tags={currentTags}
         handleDelete={handleDelete}
         handleAddition={handleAddition}
         {...rest}

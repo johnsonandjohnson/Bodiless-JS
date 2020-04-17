@@ -15,14 +15,15 @@
 import { TagType } from '@bodiless/core';
 
 export type NodeTagsType = {
-  tags: TagType[],
+  tags: TagType[];
 };
 
 export type TagButtonOptions = {
-  suggestions: TagType[],
-  placeholder?: string,
-  noSuggestionsText?: string,
-  minQueryLength?: number,
-  allowNew?: boolean,
-  allowMultipleTags?: boolean,
+  getSuggestions?: () => TagType[];
+  placeholder?: string;
+  noSuggestionsText?: string;
+  minQueryLength?: number;
+  allowNew?: boolean;
+  allowMultipleTags?: boolean;
+  inputAttributes?: {};
 };
