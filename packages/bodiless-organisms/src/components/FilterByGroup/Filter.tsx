@@ -44,14 +44,13 @@ import {
   TagButtonOptions,
 } from '@bodiless/components';
 import {
-  WithRegisterSuggestionsProps,
   TagTitleProps,
   TagTitleComponents,
   FilterProps,
   FilterComponents,
 } from './types';
 import { useItemsAccessors } from './FilterByGroupModel';
-import { useFilterByGroupContext /* withRegisterSuggestions */ } from './FilterByGroupContext';
+import { useFilterByGroupContext, withRegisterSuggestions } from './FilterByGroupContext';
 
 const tagTitleComponentsStart: TagTitleComponents = {
   FilterInputWrapper: Div,
@@ -96,6 +95,13 @@ const TagTitleBase: FC<TagTitleProps> = ({ components, ...rest }) => {
   const isTagSelected = Boolean(selectedTag && selectedTag.id === tag.id);
   const isNodeSelected = Boolean(selectedNode === nodeId);
 
+
+  /**
+   * TODO:
+   *
+   * Since FilterList below defined inside render fn
+   * useRegisterSuggestions() creates new Ref each re-render
+   */
   useRegisterSuggestions()([tag]);
 
   return (
@@ -129,6 +135,7 @@ const TagTitle = flow(
   withNodeDataHandlers({ tags: [] }),
   withNode,
   withNodeKey('tag'),
+  withRegisterSuggestions,
 )(TagTitleBase);
 
 const TestFilterComponentsStart: FilterComponents = {
@@ -150,7 +157,7 @@ const TestFilterComponentsStart: FilterComponents = {
   )(List),
 };
 
-const Filter: FC<FilterProps & WithRegisterSuggestionsProps> = ({ components }) => {
+const Filter: FC<FilterProps> = ({ components }) => {
   const { CategoryList, TagList } = components;
 
   // TODO: Still inside render fn
@@ -160,7 +167,6 @@ const Filter: FC<FilterProps & WithRegisterSuggestionsProps> = ({ components }) 
 };
 
 const FilterClean = flow(
-  // withRegisterSuggestions,
   designable(TestFilterComponentsStart),
 )(Filter);
 

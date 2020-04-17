@@ -54,7 +54,7 @@ export type SuggestionsRefType = {
   tags: TagType[],
 };
 
-export type WithRegisterSuggestionsProps = {
+export type RegisterSuggestionsProps = {
   registerSuggestions: (tags: TagType[]) => undefined,
 };
 
