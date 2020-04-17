@@ -24,7 +24,7 @@ import { TMenuOptionGetter } from './Types/PageContextProviderTypes';
 export type FormBodyProps<D> = ContextMenuFormBodyProps<D> & {
   unwrap?: () => void;
   // @todo: Make props a generic type.
-  parentProps?: any;
+  props?: any;
 };
 
 export type FormBodyRenderer<D> = (p: FormBodyProps<D>) => ReactNode;
