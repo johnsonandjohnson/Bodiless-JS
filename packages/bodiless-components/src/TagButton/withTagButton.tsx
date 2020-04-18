@@ -18,7 +18,7 @@ import {
   getUI,
   useEditContext, TagType,
 } from '@bodiless/core';
-import React, {HTMLProps} from 'react';
+import React, { HTMLProps } from 'react';
 
 // Type of the data used by this component.
 export type Data = {
@@ -28,63 +28,62 @@ export type Data = {
 type Props = HTMLProps<HTMLElement>;
 
 // Options used to create an edit button.
-export const tagButtonOptions:EditButtonOptions<Props, Data>  = {
-    icon: 'local_offer',
-    name: 'Tag',
-    // @ts-ignore
-    renderForm: ({ ui, parentComponentProps }) => {
-      const {
-        ComponentFormTitle,
-        ComponentFormLabel,
-        ComponentFormUnwrapButton,
-        ReactTags,
-      } = getUI(ui);
+export const tagButtonOptions:EditButtonOptions<Props, Data> = {
+  icon: 'local_offer',
+  name: 'Tag',
+  // @ts-ignore
+  renderForm: ({ ui, parentComponentProps }) => {
+    const {
+      ComponentFormTitle,
+      ComponentFormLabel,
+      ComponentFormUnwrapButton,
+      ReactTags,
+    } = getUI(ui);
 
-      const {
-        getSuggestions = () => [],
-        placeholder = 'Select Tags',
-        noSuggestionsText = 'No maching tags found.',
-        minQueryLength = 1,
-        allowNew = true,
-        allowMultipleTags = true,
-        inputAttributes = {name:'react-tags-input'},
-        seeAllText = 'See all tags',
-      } = parentComponentProps;
+    const {
+      getSuggestions = () => [],
+      placeholder = 'Select Tags',
+      noSuggestionsText = 'No maching tags found.',
+      minQueryLength = 1,
+      allowNew = true,
+      allowMultipleTags = true,
+      inputAttributes = { name: 'react-tags-input' },
+      seeAllText = 'See all tags',
+    } = parentComponentProps;
 
-      const suggestions = getSuggestions();
+    const suggestions = getSuggestions();
 
-      const context = useEditContext();
-      const displayListOfTags = () =>
-        context.showPageOverlay({
-          message: suggestions
-            .slice()
-            .reduce((acc:any, _tag:TagType) => `${acc}\n${_tag.name}`, ''),
-          hasSpinner: false,
-          hasCloseButton: true,
-        });
+    const context = useEditContext();
+    const displayListOfTags = () => context.showPageOverlay({
+      message: suggestions
+        .slice()
+        .reduce((acc:any, _tag:TagType) => `${acc}\n${_tag.name}`, ''),
+      hasSpinner: false,
+      hasCloseButton: true,
+    });
 
-      return (
-        <>
-          <ComponentFormTitle>Tags: </ComponentFormTitle>
-          <ComponentFormLabel>Select from available tags:</ComponentFormLabel>
-          <ReactTags
-            suggestions={suggestions}
-            placeholder={placeholder}
-            noSuggestionsText={noSuggestionsText}
-            minQueryLength={minQueryLength}
-            allowNew={allowNew}
-            allowMultipleTags={allowMultipleTags}
-            inputAttributes={inputAttributes}
-          />
-          <ComponentFormUnwrapButton type="button" onClick={displayListOfTags}>
-            {seeAllText}
-          </ComponentFormUnwrapButton>
-        </>
-      );
-    },
+    return (
+      <>
+        <ComponentFormTitle>Tags: </ComponentFormTitle>
+        <ComponentFormLabel>Select from available tags:</ComponentFormLabel>
+        <ReactTags
+          suggestions={suggestions}
+          placeholder={placeholder}
+          noSuggestionsText={noSuggestionsText}
+          minQueryLength={minQueryLength}
+          allowNew={allowNew}
+          allowMultipleTags={allowMultipleTags}
+          inputAttributes={inputAttributes}
+        />
+        <ComponentFormUnwrapButton type="button" onClick={displayListOfTags}>
+          {seeAllText}
+        </ComponentFormUnwrapButton>
+      </>
+    );
+  },
 
-    global: false,
-    local: true,
+  global: false,
+  local: true,
 
 };
 const withTagButton = () => withEditButton(tagButtonOptions);
