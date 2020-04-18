@@ -32,7 +32,7 @@ export const tagButtonOptions:EditButtonOptions<Props, Data>  = {
     icon: 'local_offer',
     name: 'Tag',
     // @ts-ignore
-    renderForm: ({ui, props}) => {
+    renderForm: ({ ui, parentComponentProps }) => {
       const {
         ComponentFormTitle,
         ComponentFormLabel,
@@ -49,7 +49,7 @@ export const tagButtonOptions:EditButtonOptions<Props, Data>  = {
         allowMultipleTags = true,
         inputAttributes = {name:'react-tags-input'},
         seeAllText = 'See all tags',
-      } = props;
+      } = parentComponentProps;
 
       const suggestions = getSuggestions();
 
