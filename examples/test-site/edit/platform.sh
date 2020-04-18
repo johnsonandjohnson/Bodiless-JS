@@ -176,6 +176,9 @@ check_branch () {
 
 # Default implementation of p.sh build hook
 default_build () {
+  echo "Build starting ..."
+  env
+  echo $PLATFORM_VARIABLES | base64 --decode
   echo "Creating symlinks for .config and .pm2"
   rm -rf .config
   rm -rf .pm2
@@ -221,6 +224,8 @@ _setup_deploy () {
 
 # Default implementation of psh deploy hook (fresh clone and prepare npm)
 default_deploy () {
+  echo "Deploy starting ..."
+  env
   full_deploy
   mkdir -p ${NPM_CACHE_DIR}
   cd ${ROOT_DIR}
