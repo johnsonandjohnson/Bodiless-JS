@@ -19,20 +19,17 @@ import {
   useEditContext, TagType,
 } from '@bodiless/core';
 import React, { HTMLProps } from 'react';
+import { TagButtonProps } from './types';
 
-// Type of the data used by this component.
-export type Data = {
-  tags: TagType[];
-};
 // @Todo: Type of the props accepted by this component.
 type Props = HTMLProps<HTMLElement>;
 
 // Options used to create an edit button.
-export const tagButtonOptions:EditButtonOptions<Props, Data> = {
+export const tagButtonOptions:EditButtonOptions<Props, TagButtonProps> = {
   icon: 'local_offer',
   name: 'Tag',
   // @ts-ignore
-  renderForm: ({ ui, parentComponentProps }) => {
+  renderForm: ({ ui, componentProps }) => {
     const {
       ComponentFormTitle,
       ComponentFormLabel,
@@ -49,7 +46,7 @@ export const tagButtonOptions:EditButtonOptions<Props, Data> = {
       allowMultipleTags = true,
       inputAttributes = { name: 'react-tags-input' },
       seeAllText = 'See all tags',
-    } = parentComponentProps;
+    } = componentProps;
 
     const suggestions = getSuggestions();
 

@@ -23,8 +23,7 @@ import { TMenuOptionGetter } from './Types/PageContextProviderTypes';
 
 export type FormBodyProps<D> = ContextMenuFormBodyProps<D> & {
   unwrap?: () => void;
-  // @todo: Make props a generic type.
-  parentComponentProps?: any;
+  componentProps: D;
 };
 
 export type FormBodyRenderer<D> = (p: FormBodyProps<D>) => ReactNode;
@@ -56,7 +55,7 @@ export const createMenuOptionHook = <P extends object, D extends object>({
   renderForm,
   useGetMenuOptions,
 }: EditButtonOptions<P, D>) => (
-    props: P & EditButtonProps<D>,
+    props: P & D & EditButtonProps<D>,
     context: PageEditContextInterface,
   ) => {
     const {
@@ -70,7 +69,7 @@ export const createMenuOptionHook = <P extends object, D extends object>({
     const render = (p: ContextMenuFormBodyProps<D>) => renderForm({
       ...p,
       unwrap,
-      parentComponentProps: props,
+      componentProps: props,
     });
     const form = contextMenuForm({
       submitValues,

@@ -13,9 +13,9 @@
  */
 
 import withTagButton from './withTagButton';
-import { TagButtonOptions } from './types';
+import { TagButtonProps } from './types';
 
 export {
-  TagButtonOptions,
+  TagButtonProps,
   withTagButton,
 };
