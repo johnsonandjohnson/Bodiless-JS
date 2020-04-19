@@ -18,11 +18,17 @@ export type NodeTagsType = {
   tags: TagType[],
 };
 
-export type TagButtonOptions = {
+export type InputAttributes = {
+  name: string,
+};
+
+export type TagButtonProps = {
   getSuggestions?: () => TagType[],
   placeholder?: string,
   noSuggestionsText?: string,
   minQueryLength?: number,
   allowNew?: boolean,
   allowMultipleTags?: boolean,
+  inputAttributes?: InputAttributes,
+  seeAllText?: string,
 };

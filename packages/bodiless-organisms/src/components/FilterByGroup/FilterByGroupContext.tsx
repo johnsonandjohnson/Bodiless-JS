@@ -95,10 +95,15 @@ const withFilterByGroupContext = <P extends object>(
     </FilterByGroupProvider>
   );
 
-const withRegisterSuggestions = (Component: any) => (props: any) => {
+const withRegisterSuggestions = <P extends object>(Component: CT<P>) => (props: P) => {
   const { useRegisterSuggestions } = useFilterByGroupContext();
 
   return <Component {...props} registerSuggestions={useRegisterSuggestions()} />;
+};
+
+const withGetSuggestions = <P extends object>(Component: CT<P>) => (props: P) => {
+  const { getSuggestions } = useFilterByGroupContext();
+  return <Component {...props} getSuggestions={getSuggestions} />;
 };
 
 const withFBGSuggestions = <P extends object>({
@@ -114,5 +119,6 @@ export {
   useFilterByGroupContext,
   withFilterByGroupContext,
   withRegisterSuggestions,
+  withGetSuggestions,
   withFBGSuggestions,
 };

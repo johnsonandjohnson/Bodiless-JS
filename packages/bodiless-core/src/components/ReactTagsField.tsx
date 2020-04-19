@@ -41,7 +41,7 @@ const ReactTagsField = (props: ReactTagsFieldProps) => {
   const formApi = useFormApi();
   const currentTags = formApi.getValue<TagType[]>('tags');
   const { allowMultipleTags, ...rest } = props;
-  // @todo: right here I need to be able the inital state?
+
   const handleAddition = (tag: TagType) => {
     if (isEmpty(tag.id)) {
       /* eslint-disable no-param-reassign */

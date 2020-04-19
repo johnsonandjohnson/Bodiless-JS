@@ -13,9 +13,8 @@
  */
 
 /* eslint-disable arrow-body-style, max-len, @typescript-eslint/no-unused-vars */
-import React, { FC } from 'react';
+import React, { FC, ComponentType as CT } from 'react';
 import { flow, isEmpty } from 'lodash';
-import { observer } from 'mobx-react-lite';
 import {
   withNodeKey,
   withNode,
@@ -42,7 +41,6 @@ import {
   asEditableList,
   withBasicSublist,
   withTagButton,
-  TagButtonOptions,
 } from '@bodiless/components';
 import {
   TagTitleProps,
@@ -51,7 +49,7 @@ import {
   FilterComponents,
 } from './types';
 import { useItemsAccessors } from './FilterByGroupModel';
-import { useFilterByGroupContext, withRegisterSuggestions } from './FilterByGroupContext';
+import { useFilterByGroupContext } from './FilterByGroupContext';
 
 const tagTitleComponentsStart: TagTitleComponents = {
   FilterInputWrapper: Div,
@@ -60,15 +58,15 @@ const tagTitleComponentsStart: TagTitleComponents = {
   FilterGroupItemLabel: Label,
 };
 
-const useWithTagButton = () => {
-  // const { getSuggestions } = useFilterByGroupContext();
+const withTagButtonProps = <P extends object>(Component: CT<P>) => (props: P) => {
+  const { getSuggestions } = useFilterByGroupContext();
 
-  const tagButtonOptions: TagButtonOptions = {
-    getSuggestions: () => [],
+  const tagButtonProps = {
     allowMultipleTags: false,
+    getSuggestions,
   };
 
-  return withTagButton(tagButtonOptions);
+  return <Component {...props} {...tagButtonProps} />;
 };
 
 const TagTitleBase: FC<TagTitleProps> = ({ components, ...rest }) => {
@@ -125,17 +123,23 @@ const TagTitleBase: FC<TagTitleProps> = ({ components, ...rest }) => {
 };
 
 const TagTitle = flow(
-  designable(tagTitleComponentsStart),
-  withoutProps(['componentData', 'onContextMenu']),
+  withoutProps([
+    'componentData',
+    'onContextMenu',
+    'getSuggestions',
+    'allowMultipleTags',
+  ]),
   ifEditable(
-    useWithTagButton(),
+    withTagButton(),
     withContextActivator('onClick'),
     withLocalContextMenu,
   ),
   ifReadOnly(withoutProps(['setComponentData'])),
+  withTagButtonProps,
   withNodeDataHandlers({ tags: [] }),
   withNode,
   withNodeKey('tag'),
+  designable(tagTitleComponentsStart),
 )(TagTitleBase);
 
 const TestFilterComponentsStart: FilterComponents = {
@@ -179,7 +183,6 @@ class FilterBase extends React.PureComponent {
 const FilterClean = flow(
   withNodeKey('filter'),
   designable(TestFilterComponentsStart),
-  observer,
 )(FilterBase);
 
 export default FilterClean;
