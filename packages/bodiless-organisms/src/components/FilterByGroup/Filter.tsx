@@ -15,6 +15,7 @@
 /* eslint-disable arrow-body-style, max-len, @typescript-eslint/no-unused-vars */
 import React, { FC } from 'react';
 import { flow, isEmpty } from 'lodash';
+import { observer } from 'mobx-react-lite';
 import {
   withNodeKey,
   withNode,
@@ -87,22 +88,22 @@ const TagTitleBase: FC<TagTitleProps> = ({ components, ...rest }) => {
     useRegisterSuggestions,
   } = useFilterByGroupContext();
 
+  useRegisterSuggestions()([tag]);
+
   const onSelect = () => {
     setSelectedNode(nodeId);
     setSelectedTag(tag);
   };
 
-  const isTagSelected = Boolean(selectedTag && selectedTag.id === tag.id);
-  const isNodeSelected = Boolean(selectedNode === nodeId);
-
-
   /**
    * TODO:
    *
-   * Since FilterList below defined inside render fn
-   * useRegisterSuggestions() creates new Ref each re-render
+   * 'checked' in FilterGroupItemInput doesn't get re-rendered right away in Edit mode
+   * since local context menu "steals" click. It is still updated in context
+   * and working as expected. Select input gest updated once we hide localContextMenu.
    */
-  useRegisterSuggestions()([tag]);
+  const isTagSelected = Boolean(selectedTag && selectedTag.id === tag.id);
+  const isNodeSelected = Boolean(selectedNode === nodeId);
 
   return (
     <FilterInputWrapper {...rest} key={tag.id}>
@@ -116,8 +117,8 @@ const TagTitleBase: FC<TagTitleProps> = ({ components, ...rest }) => {
       />
       {
         isEmpty(tag.name)
-          ? (<FilterGroupItemPlaceholder>Select tag...</FilterGroupItemPlaceholder>)
-          : (<FilterGroupItemLabel>{ tag.name }</FilterGroupItemLabel>)
+          ? (<FilterGroupItemPlaceholder htmlFor={nodeId}>Select tag...</FilterGroupItemPlaceholder>)
+          : (<FilterGroupItemLabel htmlFor={nodeId}>{ tag.name }</FilterGroupItemLabel>)
       }
     </FilterInputWrapper>
   );
@@ -156,17 +157,29 @@ const TestFilterComponentsStart: FilterComponents = {
   )(List),
 };
 
-const Filter: FC<FilterProps> = ({ components }) => {
-  const { CategoryList, TagList } = components;
+class FilterBase extends React.PureComponent {
+  Filter = Div;
 
-  // TODO: Still inside render fn
-  const FilterList = withBasicSublist(TagList)(CategoryList);
+  RestProps = {};
 
-  return (<FilterList nodeKey="filter" />);
-};
+  constructor(props: FilterProps) {
+    super(props);
+    const { components, ...rest } = props;
+    const { TagList, CategoryList } = components;
+
+    this.RestProps = rest;
+    this.Filter = withBasicSublist(TagList)(CategoryList);
+  }
+
+  render() {
+    return (<this.Filter {...this.RestProps} />);
+  }
+}
 
 const FilterClean = flow(
+  withNodeKey('filter'),
   designable(TestFilterComponentsStart),
-)(Filter);
+  observer,
+)(FilterBase);
 
 export default FilterClean;
