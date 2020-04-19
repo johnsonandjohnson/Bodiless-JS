@@ -19,7 +19,7 @@ export type NodeTagsType = {
 };
 
 export type TagButtonOptions = {
-  getSuggestions: () => TagType[],
+  getSuggestions?: () => TagType[],
   placeholder?: string,
   noSuggestionsText?: string,
   minQueryLength?: number,

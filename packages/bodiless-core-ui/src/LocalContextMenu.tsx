@@ -24,7 +24,7 @@ import {
   ComponentFormCloseButton, ComponentFormSubmitButton, Icon, Div, ToolbarButton,
   ComponentFormUnwrapButton,
 } from '@bodiless/ui';
-import ReactTags from './ReactTags';
+import ReactTagsField from './ReactTags';
 
 // For accessibility attributes, see https://www.w3.org/TR/wai-aria-practices/examples/toolbar/toolbar.html
 const Toolbar = flow(
@@ -51,7 +51,7 @@ const ui = {
   Toolbar,
   ToolbarButton,
   Tooltip: LocalTooltip,
-  ReactTags,
+  ReactTags: ReactTagsField,
 };
 
 const LocalContextMenu: FC<ContextMenuProps> = props => (

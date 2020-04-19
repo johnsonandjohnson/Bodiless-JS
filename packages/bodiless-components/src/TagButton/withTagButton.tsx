@@ -12,42 +12,79 @@
  * limitations under the License.
  */
 
-import { flowRight } from 'lodash';
 import {
-  PageEditContextInterface,
-  TMenuOptionGetter,
-  withMenuOptions,
-  EditButtonProps,
-  withoutProps,
+  EditButtonOptions,
+  withEditButton,
+  getUI,
+  useEditContext, TagType,
 } from '@bodiless/core';
-import { renderTagsForm } from './TagForm';
-import { TagButtonOptions } from './types';
+import React, { HTMLProps } from 'react';
 
-const createMenuOptionHook = <P extends object, D extends object>(options: TagButtonOptions) => (
-  props: P & EditButtonProps<D>,
-  context: PageEditContextInterface,
-) => {
-  const getMenuOptions: TMenuOptionGetter = () => [
-    {
-      icon: 'local_offer',
-      name: 'tags',
-      global: false,
-      local: true,
-      handler: () => renderTagsForm({ ...options, ...props }, context),
-    },
-  ];
-
-  return getMenuOptions;
+// Type of the data used by this component.
+export type Data = {
+  tags: TagType[];
 };
+// @Todo: Type of the props accepted by this component.
+type Props = HTMLProps<HTMLElement>;
 
-const withTagButton = (
-  options: TagButtonOptions,
-) => flowRight(
-  withMenuOptions({
-    useGetMenuOptions: createMenuOptionHook(options),
-    name: 'tags',
-  }),
-  withoutProps(['setComponentData', 'unwrap', 'isActive']),
-);
+// Options used to create an edit button.
+export const tagButtonOptions:EditButtonOptions<Props, Data> = {
+  icon: 'local_offer',
+  name: 'Tag',
+  // @ts-ignore
+  renderForm: ({ ui, parentComponentProps }) => {
+    const {
+      ComponentFormTitle,
+      ComponentFormLabel,
+      ComponentFormUnwrapButton,
+      ReactTags,
+    } = getUI(ui);
 
+    const {
+      getSuggestions = () => [],
+      placeholder = 'Select Tags',
+      noSuggestionsText = 'No maching tags found.',
+      minQueryLength = 1,
+      allowNew = true,
+      allowMultipleTags = true,
+      inputAttributes = { name: 'react-tags-input' },
+      seeAllText = 'See all tags',
+    } = parentComponentProps;
+
+    const suggestions = getSuggestions();
+
+    const context = useEditContext();
+    const displayListOfTags = () => context.showPageOverlay({
+      message: suggestions
+        .slice()
+        .reduce((acc:any, _tag:TagType) => `${acc}\n${_tag.name}`, ''),
+      hasSpinner: false,
+      hasCloseButton: true,
+    });
+
+    return (
+      <>
+        <ComponentFormTitle>Tags: </ComponentFormTitle>
+        <ComponentFormLabel>Select from available tags:</ComponentFormLabel>
+        <ReactTags
+          suggestions={suggestions}
+          placeholder={placeholder}
+          noSuggestionsText={noSuggestionsText}
+          minQueryLength={minQueryLength}
+          allowNew={allowNew}
+          allowMultipleTags={allowMultipleTags}
+          inputAttributes={inputAttributes}
+        />
+        <ComponentFormUnwrapButton type="button" onClick={displayListOfTags}>
+          {seeAllText}
+        </ComponentFormUnwrapButton>
+      </>
+    );
+  },
+
+  global: false,
+  local: true,
+
+};
+const withTagButton = () => withEditButton(tagButtonOptions);
 export default withTagButton;

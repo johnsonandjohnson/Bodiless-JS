@@ -17,8 +17,9 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json",
+    "build": "tsc -p ./tsconfig.json && npm run copy",
     "build:watch": "npm run build -- --watch",
+    "copy": "copyfiles -u 1 \"./src/*.css\" \"./lib/\"",
     "lint": "tslint ./src/**/*.ts?x",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
   },
