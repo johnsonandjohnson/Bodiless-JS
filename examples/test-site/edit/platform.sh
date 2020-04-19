@@ -139,7 +139,6 @@ incremental_deploy () {
 full_deploy () {
   echo "Full deploy, branch is ${PLATFORM_BRANCH}"
   rm -rf ${ROOT_DIR}
-  ${CMD_GIT} config --global credential.helper store --file=~/${GIT_CREDENTIAL_FILE}
   if [[ ${PLATFORM_BRANCH} =~ ^pr- ]]; then
     ${CMD_GIT} clone ${GIT_REMOTE_URL} ${ROOT_DIR}
     cd ${ROOT_DIR}
@@ -150,6 +149,7 @@ full_deploy () {
     ${CMD_GIT} clone -b ${PLATFORM_BRANCH} ${GIT_REMOTE_URL} ${ROOT_DIR}
     cd ${ROOT_DIR}
   fi
+  ls -al ${ROOT_DIR}
   ${CMD_GIT} config user.email "${APP_GIT_USER_EMAIL}"
   ${CMD_GIT} config user.name "${APP_GIT_USER}"
 }
@@ -183,6 +183,7 @@ default_build () {
   env
   echo "Create git credential store file"
   echo ${GIT_CREDENTIAL} > ${HOME}/${GIT_CREDENTIAL_FILE}
+  ${CMD_GIT} config --global credential.helper store --file=${HOME}/${GIT_CREDENTIAL_FILE}
   echo "Creating symlinks for .config and .pm2"
   rm -rf .config
   rm -rf .pm2
