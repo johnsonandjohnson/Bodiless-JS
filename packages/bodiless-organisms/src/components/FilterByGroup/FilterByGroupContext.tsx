@@ -45,11 +45,11 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
   const refs = useRef<any>([]);
 
   const getSuggestions = (): TagType[] => {
-    const allSuggestions = refs.current.reduce(
+    const allSuggestions: TagType[] = refs.current.reduce(
       (acc: any, ref: any) => [...acc, ...ref.current.tags],
       suggestions || [],
     );
-    return allSuggestions;
+    return allSuggestions.sort((a, b) => a.name.localeCompare(b.name));
   };
 
   const useRegisterSuggestions = () => {

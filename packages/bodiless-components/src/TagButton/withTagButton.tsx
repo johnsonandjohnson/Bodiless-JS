@@ -28,16 +28,13 @@ type Props = HTMLProps<HTMLElement>;
 export const tagButtonOptions:EditButtonOptions<Props, TagButtonProps> = {
   icon: 'local_offer',
   name: 'Tag',
-  renderForm: ({ ui, componentProps, ...rest }) => {
+  renderForm: ({ ui, componentProps }) => {
     const {
       ComponentFormTitle,
       ComponentFormLabel,
       ComponentFormUnwrapButton,
       ReactTags,
     } = getUI(ui);
-
-    console.log('Rest props: ', rest);
-    console.log('componentProps: ', componentProps);
 
     const {
       getSuggestions = () => [],

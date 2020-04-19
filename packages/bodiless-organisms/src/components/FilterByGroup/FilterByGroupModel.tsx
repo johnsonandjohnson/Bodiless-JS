@@ -21,7 +21,7 @@ const useItemsAccessors = () => {
 
   return {
     tag: isEmpty(node.data.tags) ? { id: '', name: '' } : node.data.tags[0],
-    nodeId: node.path[node.path.length - 2],
+    nodeId: node.path[node.path.length - 2] === 'default' ? node.path.toString() : node.path[node.path.length - 2],
   };
 };
 

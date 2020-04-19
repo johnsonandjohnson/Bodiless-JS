@@ -93,6 +93,15 @@ const TagTitleBase: FC<TagTitleProps> = ({ components, ...rest }) => {
     setSelectedTag(tag);
   };
 
+  const isSelectedTagUpdated = (selectedTag && selectedNode)
+    && (nodeId === selectedNode)
+    && (tag.id !== selectedTag.id);
+
+  if (isSelectedTagUpdated) {
+    setSelectedTag(tag);
+    setSelectedNode(nodeId);
+  }
+
   /**
    * TODO:
    *
