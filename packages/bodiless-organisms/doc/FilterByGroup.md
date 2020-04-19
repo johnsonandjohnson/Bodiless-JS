@@ -31,7 +31,22 @@ import { FilterByGroupClean } from '@bodiless/organisms';
 import { withDesign, addClasses } from '@bodiless/fclasses';
 import { asTextColorPrimary } from '../Elements.token';
 
+const withTagListStyles = withDesign({
+  Title: withDesign({
+    FilterInputWrapper: addClasses('flex pb-2 items-center'),
+    FilterGroupItemInput: addClasses('mr-3'),
+    FilterGroupItemPlaceholder: addClasses('text-gray-600'),
+    FilterGroupItemLabel: addClasses(''),
+  }),
+  Wrapper: addClasses('m-2 pl-2'),
+});
+
+const withCategoryListStyles = withDesign({
+  Title: addClasses('font-bold'),
+});
+
 const asFilterByGroupStyled = flow(
+  withFBGSuggestions({ suggestions }),
   withDesign({
     Wrapper: addClasses('flex'),
     FilterWrapper: addClasses('p-2 mr-5 w-1/4 bg-gray-400 flex flex-col'),
@@ -40,17 +55,10 @@ const asFilterByGroupStyled = flow(
       addClasses('my-2 underline self-end'),
       asTextColorPrimary,
     ),
-    Filter: flow(
-      withDesign({
-        FilterCategory: addClasses('font-bold'),
-        FilterGroupItemInput: addClasses('mr-3'),
-        FilterGroupItemLabel: addClasses(''),
-        FilterGroupItemPlaceholder: addClasses('text-gray-600'),
-        FilterInputWrapper: addClasses('flex pb-2 items-center'),
-        FilterGroupWrapper: addClasses('m-2 pl-2'),
-      }),
-      addClasses('p-4'),
-    ),
+    Filter: withDesign({
+      TagList: withTagListStyles,
+      CategoryList: withCategoryListStyles,
+    }),
   }),
 );
 
@@ -65,11 +73,21 @@ Every component places inside of FilterByGroup will have an access to FilterByGr
 import { useFilterByGroupContext } from '@bodiless/organisms';
 
 const InsideFilterByGroup = (props) => {
-  const context = useFilterByGroupContext();
-  const { allTags, selectedTag } = context;
+  const {
+    useRegisterSuggestions,
+    getSuggestions,
+    setSelectedTag,
+    selectedTag,
+  } = useFilterByGroupContext();
+  
+  // Get All Suggestions
+  const allSuggestions = getSuggestions();
 
-  const addTag = tag => context.addTag(tag);
-  const setSelected = tag => context.setSelectedTag(tag);
-  const resetSelected = () => context.setSelectedTag();
+  // Callback To Register New Suggestion
+  const addTag = useRegisterSuggestions();
+  addTag([{id: '1', name: 'Tag 1'}])
+
+  const setSelected = tag => setSelectedTag(tag);
+  const resetSelected = () => setSelectedTag();
 }
 ```
