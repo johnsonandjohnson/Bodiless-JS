@@ -29,7 +29,9 @@ fi
 CMD_GIT=/usr/bin/git
 TMP_DIR=${APP_VOLUME}/../tmp
 ROOT_DIR=${APP_VOLUME}/root
-GIT_REMOTE_URL=https://${APP_GIT_USER}:${APP_GIT_PW}@${APP_GIT_REMOTE_URL##https://}
+GIT_CREDENTIAL=https://${APP_GIT_USER}:${APP_GIT_PW}@${APP_GIT_REMOTE_URL##https://}
+GIT_CREDENTIAL_FILE=".git-credentials"
+GIT_REMOTE_URL=${APP_GIT_REMOTE_URL}
 NPM_CACHE_DIR=${APP_VOLUME}/.npm
 
 invoke () {
@@ -137,6 +139,7 @@ incremental_deploy () {
 full_deploy () {
   echo "Full deploy, branch is ${PLATFORM_BRANCH}"
   rm -rf ${ROOT_DIR}
+  ${CMD_GIT} config --global credential.helper store --file=~/${GIT_CREDENTIAL_FILE}
   if [[ ${PLATFORM_BRANCH} =~ ^pr- ]]; then
     ${CMD_GIT} clone ${GIT_REMOTE_URL} ${ROOT_DIR}
     cd ${ROOT_DIR}
@@ -178,7 +181,8 @@ check_branch () {
 default_build () {
   echo "Build starting ..."
   env
-  echo $PLATFORM_VARIABLES | base64 --decode
+  echo "Create git credential store file"
+  echo ${GIT_CREDENTIAL} > ${HOME}/${GIT_CREDENTIAL_FILE}
   echo "Creating symlinks for .config and .pm2"
   rm -rf .config
   rm -rf .pm2
