@@ -29,7 +29,7 @@
     {
       "rule": "tocomponent",
       "selector": ".swiper",
-      "replacement": "Slider",
+      "replacement": "Carousel",
       "context": "**",
       "scope": "local"
     }

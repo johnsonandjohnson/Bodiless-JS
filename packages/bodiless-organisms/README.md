@@ -1,38 +1,10 @@
 # `@bodiless/organisms`
 
-Basic components to build out sites.
+Basic components for building websites.
 
-### Single accordion
-
-- Purpose
-  - Applies the expand/collapse effect
-- Properties
-  - expanded (opt) - defines whether the accordion is expanded by default
-- Editable areas
-  - Title, Body
-- Styling
-  - Can be implemented in the appropriate token.tsx file by adding necessary tailwind classes - check [asSingleAccordionDefaultStyle](../../examples/test-site/src/components/SingleAccordion/token.tsx)
 ## Components List
 
-- `Tout` - Default Tout
-- `HTout` - Horizontal Tout
-- `ImgTout` - Tout with Image
-- `Slider` - Default Slider
-- [Main Menu](/Organisms/MainMenu.md)
-
-## Usage
-
-```js
-import { Slider } from '@bodiless/organisms';
-
-<Slider nodeKey="slider1" />
-```
-
-```js
-import { Tout, ImgTout, HTout } from '@bodiless/organisms';
-
-<Tout nodeKey="tout1" />
-<ImgTout nodeKey="tout6" />
-<HTout nodeKey="tout4" />
-```
-
+- [Carousel](/Components/Organisms/Carousel.md) - A revolving slideshow component.
+- [Menu](/Components/Organisms/MainMenu.md) - A menu component often seen in header, footer or sidebars.
+- [Burger Menu](/Components/Organisms/BurgerMenu.md) - A hamburger mobile menu that renders data from a main menu.
+- [Single Accordion](/Components/Organisms/SingleAccordion.md) - An toggle component where body of the component can expand/collapse.

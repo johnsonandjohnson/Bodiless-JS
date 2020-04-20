@@ -11,9 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import Slider from './components/Slider';
-
 import {
   asBurgerSubMenu,
   asEditableBurgerSubMenu,
@@ -40,7 +37,6 @@ export {
   MenuLink,
   withSubmenu,
 } from './components/MainMenu/index';
-
 
 export {
   ToutClean,
@@ -79,4 +75,9 @@ export {
   withBurgerSubmenu,
 };
 
-export { Slider };
+export {
+  BCarousel,
+  BAutoCarousel,
+  BCarouselClean,
+  asEditableCarousel,
+} from './components/Carousel';
