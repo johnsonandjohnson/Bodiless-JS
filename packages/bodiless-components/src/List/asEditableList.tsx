@@ -74,7 +74,7 @@ const asEditableList = (List: ComponentType<FinalProps>) => (
       ...(design || {}),
       Title: flow(
         Title || identity,
-        withContextActivator('onClick'),
+        withContextActivator('onClick', { preventDefault: false }),
         withLocalContextMenu,
         withoutProps(['onAdd', 'onDelete', 'canDelete']),
         ItemMenuOptionsProvider || identity,
