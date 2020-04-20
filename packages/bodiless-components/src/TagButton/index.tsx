@@ -13,9 +13,11 @@
  */
 
 import withTagButton from './withTagButton';
+import useTagsAccessors from './TagModel';
 import { TagButtonProps } from './types';
 
 export {
   TagButtonProps,
   withTagButton,
+  useTagsAccessors,
 };

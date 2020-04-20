@@ -41,6 +41,7 @@ import {
   asEditableList,
   withBasicSublist,
   withTagButton,
+  useTagsAccessors,
 } from '@bodiless/components';
 import {
   TagTitleProps,
@@ -48,7 +49,6 @@ import {
   FilterProps,
   FilterComponents,
 } from './types';
-import { useItemsAccessors } from './FilterByGroupModel';
 import { useFilterByGroupContext } from './FilterByGroupContext';
 
 const tagTitleComponentsStart: TagTitleComponents = {
@@ -64,12 +64,20 @@ const withTagButtonProps = <P extends object>(Component: CT<P>) => (props: P) =>
   const tagButtonProps = {
     allowMultipleTags: false,
     getSuggestions,
+    placeholder: 'Add or Create',
+    formTitle: 'Groups',
+    formBodyText: 'Select from available groups:',
+    seeAllText: 'View All Groups',
   };
 
   return <Component {...props} {...tagButtonProps} />;
 };
 
-const TagTitleBase: FC<TagTitleProps> = ({ components, ...rest }) => {
+const TagTitleBase: FC<TagTitleProps> = ({
+  components,
+  emptyTitleText = 'Select Tag...',
+  ...rest
+}) => {
   const {
     FilterGroupItemInput,
     FilterGroupItemLabel,
@@ -77,7 +85,7 @@ const TagTitleBase: FC<TagTitleProps> = ({ components, ...rest }) => {
     FilterInputWrapper,
   } = components;
 
-  const { tag, nodeId } = useItemsAccessors();
+  const { tag, nodeId } = useTagsAccessors();
   const {
     selectedTag,
     selectedNode,
@@ -124,7 +132,7 @@ const TagTitleBase: FC<TagTitleProps> = ({ components, ...rest }) => {
       />
       {
         isEmpty(tag.name)
-          ? (<FilterGroupItemPlaceholder htmlFor={nodeId}>Select tag...</FilterGroupItemPlaceholder>)
+          ? (<FilterGroupItemPlaceholder htmlFor={nodeId}>{ emptyTitleText }</FilterGroupItemPlaceholder>)
           : (<FilterGroupItemLabel htmlFor={nodeId}>{ tag.name }</FilterGroupItemLabel>)
       }
     </FilterInputWrapper>
@@ -137,10 +145,13 @@ const TagTitle = flow(
     'onContextMenu',
     'getSuggestions',
     'allowMultipleTags',
+    'seeAllText',
+    'formTitle',
+    'formBodyText',
   ]),
   ifEditable(
     withTagButton(),
-    withContextActivator('onClick'),
+    withContextActivator('onClick', { preventDefault: false }),
     withLocalContextMenu,
   ),
   ifReadOnly(withoutProps(['setComponentData'])),

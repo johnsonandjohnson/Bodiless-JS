@@ -17,6 +17,7 @@ import { FilterByGroupClean, asTestableFilterByGroup, withFBGSuggestions } from 
 import {
   withDesign,
   addClasses,
+  addProps,
 } from '@bodiless/fclasses';
 import { asTextColorPrimary } from '../Elements.token';
 
@@ -28,12 +29,15 @@ const suggestions = [
 ];
 
 const withTagListStyles = withDesign({
-  Title: withDesign({
-    FilterInputWrapper: addClasses('flex pb-2 items-center'),
-    FilterGroupItemInput: addClasses('mr-3'),
-    FilterGroupItemPlaceholder: addClasses('text-gray-600'),
-    FilterGroupItemLabel: addClasses(''),
-  }),
+  Title: flow(
+    addProps({ emptyTitleText: 'Group' }),
+    withDesign({
+      FilterInputWrapper: addClasses('flex pb-2 items-center'),
+      FilterGroupItemInput: addClasses('mr-3'),
+      FilterGroupItemPlaceholder: addClasses('text-gray-600'),
+      FilterGroupItemLabel: addClasses(''),
+    }),
+  ),
   Wrapper: addClasses('m-2 pl-2'),
 });
 
@@ -43,6 +47,7 @@ const withCategoryList = withDesign({
 
 const asFilterByGroup = flow(
   withFBGSuggestions({ suggestions }),
+  addProps({ resetButtonText: 'Show All Products' }),
   withDesign({
     Wrapper: addClasses('flex'),
     FilterWrapper: addClasses('p-2 mr-5 w-1/4 bg-gray-400 flex flex-col'),

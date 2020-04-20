@@ -29,7 +29,12 @@ const FilterByGroupComponentsStart:FilterByGroupComponents = {
   Filter: FilterClean,
 };
 
-const FilterByGroupBase: FC<FilterByGroupProps> = ({ components, children, ...rest }) => {
+const FilterByGroupBase: FC<FilterByGroupProps> = ({
+  components,
+  children,
+  resetButtonText = 'Reset',
+  ...rest
+}) => {
   const {
     Wrapper,
     FilterWrapper,
@@ -43,7 +48,7 @@ const FilterByGroupBase: FC<FilterByGroupProps> = ({ components, children, ...re
   return (
     <Wrapper {...rest}>
       <FilterWrapper>
-        <ResetButton onClick={() => setSelectedTag()}>Reset</ResetButton>
+        <ResetButton onClick={() => setSelectedTag()}>{resetButtonText}</ResetButton>
         <Filter />
       </FilterWrapper>
       <ContentWrapper>

@@ -37,9 +37,15 @@ export type TagTitleComponents = {
   FilterInputWrapper: ComponentType<StylableProps>,
 };
 
-export type FilterByGroupProps = DesignableComponentsProps<FilterByGroupComponents>;
 export type FilterProps = DesignableComponentsProps<FilterComponents>;
-export type TagTitleProps = DesignableComponentsProps<TagTitleComponents>;
+
+export type FilterByGroupProps = {
+  resetButtonText?: string,
+} & DesignableComponentsProps<FilterByGroupComponents>;
+
+export type TagTitleProps = {
+  emptyTitleText?: string,
+} & DesignableComponentsProps<TagTitleComponents>;
 
 export type NodeTagType = {
   tags: TagType[],

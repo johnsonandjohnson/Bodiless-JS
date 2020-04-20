@@ -20,11 +20,17 @@ export const useEditContext = () => useContext(PageEditContext.context);
 
 export const useUUID = () => useRef(v1()).current;
 
+export type EventConfig = {
+  preventDefault: boolean,
+};
+
 export const useContextActivator = (
   event = 'onClick',
   handler?: EventHandler<any>,
+  eventConfig?: EventConfig,
 ) => {
   const context = useEditContext();
+  const preventDefault = Boolean(eventConfig && eventConfig.preventDefault !== false);
   // Don't attach the handler when not in edit mode.
   // @TODO: Find a better way to keep the outermost context active even when not editing. AESQ-537
   if (!context.isEdit && context.name !== 'page') {
@@ -36,7 +42,8 @@ export const useContextActivator = (
     if (handler) handler(e);
     context.activate();
     if (e && e.stopPropagation) e.stopPropagation();
-    if (e && e.preventDefault && context.name !== 'page') e.preventDefault();
+    // @TODO: We may want to remove next line entirely and do a Regression Testing
+    if (preventDefault && e && e.preventDefault && context.name !== 'page') e.preventDefault();
   };
   return {
     [event]: handler$1,
