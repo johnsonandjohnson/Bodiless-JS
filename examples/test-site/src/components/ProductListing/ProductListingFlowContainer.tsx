@@ -11,23 +11,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import React from 'react';
 import { flow } from 'lodash';
-import { FlexboxGrid } from '@bodiless/layouts-ui';
-import withToutVariations from './withToutVariations';
+import { FlowContainer } from '@bodiless/layouts-ui';
+import withProductVariations from './withProductVariations';
+import { asFlowContainerWithMargins } from '../FlowContainer/token';
 
-import withRichTextVariations from './withRichTextVariations';
-import withSingleAccordionVariations from './withSingleAccordionVariations';
+const withProductStrictSnapSize = Component => props => (
+  <Component
+    {...props}
+    snapData={() => ({ className: 'w-full lg:w-1/4' })}
+  />
+);
 
-import { asFlexboxWithMargins } from './token';
-
-// Typically we would also import variations of other types of component.
-// const variations = extendDesign(toutVariations, sliderVariations, ...);
-const FlexBoxDefault = flow(
-  withToutVariations,
-  withRichTextVariations,
-  withSingleAccordionVariations,
-  asFlexboxWithMargins,
-)(FlexboxGrid);
+const ProductListingFlowContainer = flow(
+  withProductStrictSnapSize,
+  withProductVariations,
+  asFlowContainerWithMargins,
+)(FlowContainer);
 
 // eslint-disable-next-line import/prefer-default-export
-export { FlexBoxDefault };
+export { ProductListingFlowContainer };

@@ -12,22 +12,10 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
-import { FlexboxGrid as FlexboxGridClean, FlexboxGridProps } from '@bodiless/layouts';
-import { ui as componentSelectorUI } from './ComponentSelector';
-import Wrapper from './SortableResizableWrapper';
+import GivingBackToCommunity from './GivingBackToCommunity';
+import WantToLearnMore from './WantToLearnMore';
 
-const ui = {
-  ...componentSelectorUI,
-  Wrapper,
+export {
+  GivingBackToCommunity,
+  WantToLearnMore,
 };
-
-/**
- * A FlexboxGrid is a component which allows a content editor to select and place
- * components.
- */
-const FlexboxGrid: FC<FlexboxGridProps> = props => (
-  <FlexboxGridClean ui={ui} {...props} />
-);
-
-export default FlexboxGrid;

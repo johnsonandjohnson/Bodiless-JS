@@ -36,9 +36,9 @@ These can (and should) be customized to suit the needs of your site, but here we
 use one as-is.
 
 1. Replace `import withSimpleEditor from './withSimpleEditor';` 
-   with `import { asEditorBasic } from '../../../components/Editors';`
+   with `import { withEditorBasic } from '../../../components/Editors';`
 1. Replace `const Body = withSimpleEditor('body', 'Body')(Fragment);`
-   with `const Body = asEditorBasic('body', 'Body')(Fragment);`
+   with `const Body = withEditorBasic('body', 'Body')(Fragment);`
 1. Repeat above steps in `CaptionedImage.tsx`
 1. Delete the file `withSimpleEditor.tsx`
 1. Run your site and visit the gallery page (http://localhost:8000/gallery) and
@@ -46,12 +46,12 @@ use one as-is.
    the Rich Text Editor in the body of the gallery page.
 
 Note: that our rich text editor is exported as a *higher order component*
-(`asEditorBasic`) rather than as a regular component. We will see this
+(`withEditorBasic`) rather than as a regular component. We will see this
  pattern below in applying *design tokens*. And in fact, our editor HOC
 is very like a design token. It expresses a standardized bit of functionality
 which can be applied uniformly across the site--only in this case, instead
 of representing visual design, it represents behavior. We could think of
-`asEditorBasic()` as a sort of "behavior token".
+`withEditorBasic()` as a sort of "behavior token".
 
 ## 2. Make the Gallery reusable.
 
@@ -245,7 +245,7 @@ to make it more flexible and reusable.
     const asEditableCaptionedImage = flow(
       withDesign({
         Image: asBodilessImage('image'),
-        Body: asEditorBasic(
+        Body: withEditorBasic(
           'body',
           'Caption',
         ),
@@ -255,7 +255,7 @@ to make it more flexible and reusable.
 
     You will notice that this HOC (`asEditableCaptionedImage()`) is a very
     similar to the "behavior token" we used earlier to make a text field
-    editable (`asEditorBasic()`). Only here, the token applies to a *compound*
+    editable (`withEditorBasic()`). Only here, the token applies to a *compound*
     component, not to a single element. This is accomplished through `withDesign()`.
     
     `withDesign()` takes a a "Design": object whose keys are the names of the
@@ -264,7 +264,7 @@ to make it more flexible and reusable.
     which can be applied to our `CaptionedImage` to style (or otherwise alter)
     it's subcomponents.
 
-    Note, that the HOC's (`asBodilessImage` and `asEditorBasic`) are defined at
+    Note, that the HOC's (`asBodilessImage` and `withEditorBasic`) are defined at
     the site level. For now, they are just pass-through's to the core Bodiless
     utilities - but in many cases you will want to customize them further at
     site level (for example, to provide a different image selector, or a rich
@@ -312,7 +312,7 @@ to make it more flexible and reusable.
       StylableProps,
     } from '@bodiless/fclasses';
     import { flow } from 'lodash';
-    import { asEditorBasic } from '../Editors';
+    import { withEditorBasic } from '../Editors';
     ```
 
 
@@ -456,8 +456,8 @@ Design API as well, using the same method we just did.
     import { withNode } from '@bodiless/core';
     import { flow } from 'lodash';
     import { withTitle, withFacet } from '@bodiless/layouts';
-    import { FlexboxGrid } from '@bodiless/layouts-ui';
-    import { asEditorBasic } from '../Editors';
+    import { FlowContainer } from '@bodiless/layouts-ui';
+    import { withEditorBasic } from '../Editors';
     import CaptionedImage from './CaptionedImage';
     import {
       asImageTile,
@@ -513,7 +513,7 @@ Design API as well, using the same method we just did.
     };
 
     const GalleryBody: FC = () => (
-      <FlexboxGrid nodeKey="body" design={galleryDesign} />
+      <FlowContainer nodeKey="body" design={galleryDesign} />
     );
 
     const GalleryClean = flow(
@@ -524,7 +524,7 @@ Design API as well, using the same method we just did.
     const asGallery = flow(
       asGalleryDefaultStyle,
       withDesign({
-        Header:  asEditorBasic(
+        Header:  withEditorBasic(
           'gallery_header',
           'Gallery Header',
         ),

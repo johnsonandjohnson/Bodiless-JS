@@ -1,18 +1,18 @@
 {
   "items": [
     {
-      "uuid": "c0be0470-0caf-11ea-bb42-ef0d288c6098",
+      "uuid": "309e2660-767a-11ea-8222-6fba863d924a",
       "wrapperProps": {
-        "className": "w-full lg:w-1/2"
+        "className": " lg:w-1/2"
       },
-      "type": "ToutHorizontalWithTitleBodyWithCTA"
+      "type": "WantToLearnMore"
     },
     {
-      "uuid": "cb9aa060-0caf-11ea-bb42-ef0d288c6098",
+      "uuid": "3a69c780-767a-11ea-8222-6fba863d924a",
       "wrapperProps": {
-        "className": "w-full lg:w-1/2"
+        "className": " lg:w-1/2"
       },
-      "type": "ToutHorizontalWithTitleBodyWithCTA"
+      "type": "GivingBackToCommunity"
     }
   ]
 }

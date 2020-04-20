@@ -11,24 +11,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from 'react';
+
 import { flow } from 'lodash';
-import { FlexboxGrid } from '@bodiless/layouts-ui';
-import withProductVariations from './withProductVariations';
-import { asFlexboxWithMargins } from '../Flexbox/token';
+import React, { ComponentType } from 'react';
+import { withChild, withNodeKey } from '@bodiless/core';
 
-const withProductStrictSnapSize = Component => props => (
-  <Component
-    {...props}
-    snapData={() => ({ className: 'w-full lg:w-1/4' })}
-  />
+type WithInitialValue = {
+  placeholder: string;
+};
+const withPlaceholder = (placeholder: string) => (
+  <P extends Object> (Component: ComponentType<P & WithInitialValue>) => (props:P) => (
+    <Component placeholder={placeholder} {...props} />
+  )
 );
-
-const ProductListingFlexBox = flow(
-  withProductStrictSnapSize,
-  withProductVariations,
-  asFlexboxWithMargins,
-)(FlexboxGrid);
-
-// eslint-disable-next-line import/prefer-default-export
-export { ProductListingFlexBox };
+const withEditor = (Editor:ComponentType<any>) => (nodeKey?: string, placeholder?: string) => (
+  withChild(flow(
+    withPlaceholder(placeholder),
+    withNodeKey(nodeKey),
+  )(Editor))
+);
+export default withEditor;

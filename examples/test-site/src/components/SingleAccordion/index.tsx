@@ -22,13 +22,13 @@ import {
 } from '@bodiless/core';
 import { withDesign } from '@bodiless/fclasses';
 import asSingleAccordionDefaultStyle from './token';
-import { asEditorSimple, asEditorBasic } from '../Editors';
+import { withEditorSimple, withEditorBasic } from '../Editors';
 
 const asSingleAccordion = flow(
   withNode,
   withDesign({
-    Title: asEditorSimple('title', 'Accordion Title'),
-    Body: asEditorBasic(
+    Title: withEditorSimple('title', 'Accordion Title'),
+    Body: withEditorBasic(
       'body',
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.',
     ),

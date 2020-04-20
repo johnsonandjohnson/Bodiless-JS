@@ -22,19 +22,19 @@ import {
 import {
   asEditableImage, asEditableLink,
 } from '../Elements.token';
-import { asEditorBasic, asEditorSimple } from '../Editors';
+import { withEditorBasic, withEditorSimple } from '../Editors';
 
-const asTout = flow(
+const asEditableTout = flow(
   withDesign({
     Image: asEditableImage('image'),
     ImageLink: asEditableLink('cta'),
-    Title: asEditorSimple('title', 'Tout Title Text'),
+    Title: withEditorSimple('title', 'Tout Title Text'),
     Link: flow(
-      asEditorSimple('ctaText', 'CTA'),
+      withEditorSimple('ctaText', 'CTA'),
       asEditableLink('cta'),
     ),
-    Body: asEditorBasic('body', 'Tout Body Text'),
+    Body: withEditorBasic('body', 'Tout Body Text'),
   }),
 );
-const Tout = asTout(ToutClean);
+const Tout = asEditableTout(ToutClean);
 export default Tout;

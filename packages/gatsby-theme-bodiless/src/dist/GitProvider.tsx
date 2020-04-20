@@ -198,7 +198,7 @@ const getMenuOptions = (client: Client = defaultClient, context: any): TMenuOpti
     // },
     {
       name: 'resetchanges',
-      icon: 'first_page',
+      icon: 'undo',
       isHidden: () => !context.isEdit,
       handler: () => formGitReset(client, context),
     },

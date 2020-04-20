@@ -39,9 +39,7 @@ export {
 } from './components/MainMenu/index';
 
 export {
-  Tout,
   ToutClean,
-  asEditableTout,
   asTestableTout,
 } from './components/Touts';
 

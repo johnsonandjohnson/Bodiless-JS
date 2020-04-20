@@ -1,14 +1,14 @@
-# Flexbox Grid Component
+# FlowContainer Component
 
-The flexbox grid (flexboxGrid) component is a layout component that allows you to select from a set of components, place them on the page, and resize them.
+The flowContainer component is a layout component that allows you to select from a set of components, place them on the page, and resize them.
 
 ## User Details
 
-When an empty flexbox is on the page you will only see a single empty line.
+When an empty flowContainer is on the page you will only see a single empty line.
 
 ### Add a new component
 
-When you activate a flexboxGrid you will be able to add a new component to the flexbox via the menu.
+When you activate a flowContainer you will be able to add a new component to the flowContainer via the menu.
 
 By clicking on the component selector button you can scroll through all of the available components. You can filter the components by:
 
@@ -18,27 +18,27 @@ By clicking on the component selector button you can scroll through all of the a
 You can hover over the infomation icon to see a description of the component.
 
 When you have found the right component, simply click on it, and it will be
-added at the end of the activated flexboxGrid.
+added at the end of the activated flowContainer.
 
 ### Removing a component
 
-When any component in the flexboxGrid is active it will provide a delete button to the context menu. Clicking on this icon will remove the component.
+When any component in the flowContainer is active it will provide a delete button to the context menu. Clicking on this icon will remove the component.
 
 ### Resizing a component
 
-When any component in the flexboxGrid is active it will appear with a blue
+When any component in the flowContainer is active it will appear with a blue
 border. You can resize the component by clicking on the right edge of the
 border. Note: this can be done at different breakpoints to adjust the size of
 the component at that breakpoint and above.
 
-The sizes are finite and defined by the creator of that particular flexbox.
+The sizes are finite and defined by the creator of that particular flowContainer.
 Smaller breakpoints will offer fewer options for resizing.
 
 ### Reordering a component
 
-When any component in the flexboxGrid is active it will appear with a blue
+When any component in the flowContainer is active it will appear with a blue
 double line icon in the top left corner of the component. By clicking and
-dragging this icon you can reorder components in the flexboxGrid.
+dragging this icon you can reorder components in the flowContainer.
 
 ### Replacing a Component
 
@@ -46,20 +46,20 @@ To change a component's type you must remove that component and replace it with 
 
 ## Technical Details
 
-### Adding components to the FlexboxGrid
+### Adding components to the FlowContainer
 
-The FlexboxGrid uses the Design API to collect the components to make available for placement. This can be passed in using the `design` prop, or by using the higher order component: `withDesign`.
+The FlowContainer uses the Design API to collect the components to make available for placement. This can be passed in using the `design` prop, or by using the higher order component: `withDesign`.
 
 ``` js
 design = {
     Tout: flow(startWith(Tout), asDefaultTout),
     ToutVertical: flow(startWith(Tout), asVerticalTout, asDefaultTout),
   }
-const SiteFlexbox = withDesign(design)(FlexboxGrid);
+const SiteFlowContainer = withDesign(design)(FlowContainer);
 
 or
 
-<FlexboxGrid design={design} />
+<FlowContainer design={design} />
 ```
 
 > *(Note: the last example should only be used if there is no more reuse.*
@@ -69,7 +69,7 @@ In either case you can use the `startWith` HOC to declare the base component and
 
 ### Meta data HOCs
 
-To add meta data (used by the flexbox in its component selector) the following HOCs are available.
+To add meta data (used by the flowContainer in its component selector) the following HOCs are available.
 
 * **`withName`**: can be used to set the name that will appear in the component selector.
 
@@ -129,7 +129,7 @@ Also one can use the Design API function to combine designs in diffent variation
 
 ### Control Component Widths
 
-The flexboxGrid controls the width of components by setting different classes on their wrapper component. The flexboxGrid uses a set of tailwind width classes by default. The `snapData` prop allows the user to provide a function that can set any set of classes.
+The flowContainer controls the width of components by setting different classes on their wrapper component. The flowContainer uses a set of tailwind width classes by default. The `snapData` prop allows the user to provide a function that can set any set of classes.
 
 This function should take an object with a className property (which is a string of the current classes) and a width property. It then returns an object with a className property (an updated version of the className) and a width property (the width to which it should snap). Both width properties are expressed in percentages (e.g. 50%, 75%).
 
@@ -174,4 +174,4 @@ of 100%.
 
 ### Limit Number of Components
 
-**`maxComponents`** will limit the number of components that can be added to the flexboxGrid. If the number of components equals the value of maxComponents then the add button will not be visible. If a component is removed and the number of components is less than the max value then the add button will reappear.
+**`maxComponents`** will limit the number of components that can be added to the flowContainer. If the number of components equals the value of maxComponents then the add button will not be visible. If a component is removed and the number of components is less than the max value then the add button will reappear.

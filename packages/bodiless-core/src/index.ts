@@ -18,6 +18,10 @@ import PageEditContext from './PageEditContext';
 import asStatic from './asStatic';
 import { useEditContext, useUUID, useContextActivator } from './hooks';
 import withNode, { withNodeKey } from './withNode';
+import {
+  withDefaultContent,
+  withResetButton,
+} from './Contentful';
 import withEditButton from './withEditButton';
 import contextMenuForm from './contextMenuForm';
 import withData from './withData';
@@ -81,6 +85,8 @@ export {
   useActivateOnEffect,
   useActivateOnEffectActivator,
   withChild,
+  withDefaultContent,
+  withResetButton,
 };
 
 export type Bodiless<P, Q> = (C: ComponentType<P> | string) => ComponentType<Q>;

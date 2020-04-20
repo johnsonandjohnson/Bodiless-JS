@@ -22,69 +22,69 @@ import {
 import { designable, stylable } from '@bodiless/fclasses';
 import SortableChild from './SortableChild';
 import SortableContainer, { SortableListProps } from './SortableContainer';
-import { useItemHandlers, useFlexboxDataHandlers } from './model';
+import { useItemHandlers, useFlowContainerDataHandlers } from './model';
 import useGetMenuOptions from './useGetMenuOptions';
 import {
-  EditFlexboxProps,
-  FlexboxItem,
-  FlexboxComponents,
-  FlexboxItemProps,
+  EditFlowContainerProps,
+  FlowContainerItem,
+  FlowContainerComponents,
+  FlowContainerItemProps,
   SortableChildProps,
 } from './types';
 
 const ChildNodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
 
-const EditFlexboxComponents: FlexboxComponents = {
+const EditFlowContainerComponents: FlowContainerComponents = {
   Wrapper: stylable<SortableListProps>(SortableContainer),
   ComponentWrapper: stylable<SortableChildProps>(SortableChild),
 };
 
-const witNoDesign = (props:EditFlexboxProps):EditFlexboxProps => ({
+const witNoDesign = (props:EditFlowContainerProps):EditFlowContainerProps => ({
   ...props,
   components: omit(props.components, ['Wrapper', 'ComponentWrapper']),
 });
 
 /**
- * An editable version of the Flexbox container.
+ * An editable version of the FlowContainer container.
  */
-const EditFlexbox: FC<EditFlexboxProps> = (props:EditFlexboxProps) => {
+const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerProps) => {
   const {
     components, ui, snapData, defaultWidth,
   } = props;
   const items = useItemHandlers().getItems();
   const {
-    onFlexboxItemResize,
-    setFlexboxItems,
-  } = useFlexboxDataHandlers();
+    onFlowContainerItemResize,
+    setFlowContainerItems,
+  } = useFlowContainerDataHandlers();
   const { Wrapper, ComponentWrapper } = components;
 
   return (
     <Wrapper
       onSortEnd={(sort: SortEnd) => {
         const { oldIndex, newIndex } = sort;
-        setFlexboxItems(arrayMove(items, oldIndex, newIndex));
+        setFlowContainerItems(arrayMove(items, oldIndex, newIndex));
       }}
       ui={ui}
     >
       {items.map(
-        (flexboxItem: FlexboxItem, index: number): React.ReactNode => {
-          const ChildComponent = components[flexboxItem.type];
+        (flowContainerItem: FlowContainerItem, index: number): React.ReactNode => {
+          const ChildComponent = components[flowContainerItem.type];
           if (!ChildComponent) return null;
           return (
             <ComponentWrapper
               ui={ui}
-              key={`node-${flexboxItem.uuid}`}
+              key={`node-${flowContainerItem.uuid}`}
               index={index}
-              flexboxItem={flexboxItem}
+              flowContainerItem={flowContainerItem}
               snapData={snapData}
               defaultWidth={defaultWidth}
-              getMenuOptions={useGetMenuOptions(witNoDesign(props), flexboxItem)}
+              getMenuOptions={useGetMenuOptions(witNoDesign(props), flowContainerItem)}
               onResizeStop={
                 // eslint-disable-next-line max-len
-                (flexboxItemProps: FlexboxItemProps) => onFlexboxItemResize(flexboxItem.uuid, flexboxItemProps)
+                (flowContainerItemProps: FlowContainerItemProps) => onFlowContainerItemResize(flowContainerItem.uuid, flowContainerItemProps)
               }
             >
-              <ChildNodeProvider nodeKey={flexboxItem.uuid}>
+              <ChildNodeProvider nodeKey={flowContainerItem.uuid}>
                 <ChildComponent />
               </ChildNodeProvider>
             </ComponentWrapper>
@@ -95,22 +95,22 @@ const EditFlexbox: FC<EditFlexboxProps> = (props:EditFlexboxProps) => {
   );
 };
 
-EditFlexbox.displayName = 'EditFlexbox';
+EditFlowContainer.displayName = 'EditFlowContainer';
 
-EditFlexbox.defaultProps = {
+EditFlowContainer.defaultProps = {
   components: {},
 };
 
-const asEditFlexbox = flowRight(
+const asEditFlowContainer = flowRight(
   withActivateOnEffect,
   observer,
-  designable(EditFlexboxComponents),
+  designable(EditFlowContainerComponents),
   withMenuOptions({
-    useGetMenuOptions: (props: EditFlexboxProps) => useGetMenuOptions(witNoDesign(props)),
-    name: 'Flexbox',
+    useGetMenuOptions: (props: EditFlowContainerProps) => useGetMenuOptions(witNoDesign(props)),
+    name: 'FlowContainer',
   }),
   observer,
 );
 
-// Wrap the EditFlexbox in a wthActivateContext so we can activate new items
-export default asEditFlexbox(EditFlexbox);
+// Wrap the EditFlowContainer in a wthActivateContext so we can activate new items
+export default asEditFlowContainer(EditFlowContainer);

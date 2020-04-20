@@ -15,6 +15,7 @@
 import { flow } from 'lodash';
 import React, { ComponentType } from 'react';
 import { withChild, withNodeKey } from '@bodiless/core';
+import { addClasses } from '@bodiless/fclasses';
 
 type WithInitialValue = {
   placeholder: string;
@@ -24,10 +25,15 @@ const withPlaceholder = (placeholder: string) => (
     <Component placeholder={placeholder} {...props} />
   )
 );
-const asEditor = (Editor:ComponentType<any>) => (nodeKey?: string, placeholder?: string) => (
-  withChild(flow(
-    withPlaceholder(placeholder),
-    withNodeKey(nodeKey),
-  )(Editor))
+
+const withEditor = (Editor:ComponentType<any>) => (nodeKey?: string, placeholder?: string) => (
+  flow(
+    addClasses('overflow-hidden'),
+    withChild(flow(
+      withPlaceholder(placeholder),
+      withNodeKey(nodeKey),
+    )(Editor)),
+  )
 );
-export default asEditor;
+export default withEditor;
+export { withPlaceholder };

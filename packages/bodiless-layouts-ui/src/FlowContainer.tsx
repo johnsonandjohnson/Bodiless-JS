@@ -12,23 +12,22 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { graphql } from 'gatsby';
-import { Page } from '@bodiless/gatsby-theme-bodiless';
-import Layout from '../components/Layout';
-import { FlowContainerDefault } from '../components/FlowContainer';
+import React, { FC } from 'react';
+import { FlowContainer as FlowContainerClean, FlowContainerProps } from '@bodiless/layouts';
+import { ui as componentSelectorUI } from './ComponentSelector';
+import Wrapper from './SortableResizableWrapper';
 
-export default props => (
-  <Page {...props}>
-    <Layout>
-      <FlowContainerDefault nodeKey="page" />
-    </Layout>
-  </Page>
+const ui = {
+  ...componentSelectorUI,
+  Wrapper,
+};
+
+/**
+ * A FlowContainer is a component which allows a content editor to select and place
+ * components.
+ */
+const FlowContainer: FC<FlowContainerProps> = props => (
+  <FlowContainerClean ui={ui} {...props} />
 );
 
-export const query = graphql`
-  query($slug: String!) {
-    ...PageQuery,
-    ...SiteQuery
-  }
-`;
+export default FlowContainer;

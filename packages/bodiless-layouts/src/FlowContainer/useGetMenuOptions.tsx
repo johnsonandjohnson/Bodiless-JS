@@ -13,8 +13,8 @@
  */
 
 import { useEditContext, useActivateOnEffect } from '@bodiless/core';
-import { EditFlexboxProps, FlexboxItem } from './types';
-import { useFlexboxDataHandlers, useItemHandlers } from './model';
+import { EditFlowContainerProps, FlowContainerItem } from './types';
+import { useFlowContainerDataHandlers, useItemHandlers } from './model';
 import { ComponentSelectorProps } from '../ComponentSelector/types';
 import componentSelectorForm from '../ComponentSelector/componentSelectorForm';
 
@@ -22,37 +22,37 @@ import componentSelectorForm from '../ComponentSelector/componentSelectorForm';
  * Returns actions which can be executed upon selecting a component in the
  * component selector.
  *
- * @param props The props provided to the FlexboxGrid
+ * @param props The props provided to the FlowContainer
  * @param currentItem The currently selected item in the grid (optional);
  */
 const useComponentSelectorActions = (
-  currentItem?: FlexboxItem,
+  currentItem?: FlowContainerItem,
 ) => {
-  const { insertFlexboxItem, updateFlexboxItem } = useFlexboxDataHandlers();
+  const { insertFlowContainerItem, updateFlowContainerItem } = useFlowContainerDataHandlers();
   const { setId } = useActivateOnEffect();
 
   const insertItem: ComponentSelectorProps['onSelect'] = (event, componentName) => {
-    const { uuid } = insertFlexboxItem(componentName, currentItem);
+    const { uuid } = insertFlowContainerItem(componentName, currentItem);
     // Set the new id so it will activate on creation.
     setId(uuid);
   };
 
   const replaceItem: ComponentSelectorProps['onSelect'] = (event, componentName) => {
     if (currentItem) {
-      const newItem: FlexboxItem = { ...currentItem, type: componentName };
-      updateFlexboxItem(newItem);
+      const newItem: FlowContainerItem = { ...currentItem, type: componentName };
+      updateFlowContainerItem(newItem);
     }
   };
 
   return { insertItem, replaceItem };
 };
 
-function useGetMenuOptions(props: EditFlexboxProps, item?: FlexboxItem) {
+function useGetMenuOptions(props: EditFlowContainerProps, item?: FlowContainerItem) {
   const context = useEditContext();
   const { setId } = useActivateOnEffect();
   const { maxComponents } = props;
   const { getItems } = useItemHandlers();
-  const { deleteFlexboxItem } = useFlexboxDataHandlers();
+  const { deleteFlowContainerItem } = useFlowContainerDataHandlers();
   const { insertItem, replaceItem } = useComponentSelectorActions(item);
   const addButton = {
     icon: 'add',
@@ -63,9 +63,9 @@ function useGetMenuOptions(props: EditFlexboxProps, item?: FlexboxItem) {
     name: 'delete',
     icon: 'delete',
     handler: () => {
-      const newContextItem = deleteFlexboxItem(item.uuid);
-      // Set the context to the next item in the flexbox (if it exists)
-      // or to the flexbox itself (if not).
+      const newContextItem = deleteFlowContainerItem(item.uuid);
+      // Set the context to the next item in the flow container (if it exists)
+      // or to the flow container itself (if not).
       if (newContextItem !== undefined) setId(newContextItem.uuid);
       else context.activate();
     },
@@ -77,8 +77,8 @@ function useGetMenuOptions(props: EditFlexboxProps, item?: FlexboxItem) {
   };
 
 
-  const getFlexboxButtons = (nItems: Number) => (
-    // The flexbox itself only has an add button when empty (otherwise an add button.
+  const getFlowContainerButtons = (nItems: Number) => (
+    // The flow container itself only has an add button when empty (otherwise an add button.
     // will be attached to each item).
     nItems ? [] : [addButton]
   );
@@ -92,7 +92,7 @@ function useGetMenuOptions(props: EditFlexboxProps, item?: FlexboxItem) {
   return () => {
     if (!context.isEdit) return [];
     const nItems = getItems().length;
-    return item ? getItemButtons(nItems) : getFlexboxButtons(nItems);
+    return item ? getItemButtons(nItems) : getFlowContainerButtons(nItems);
   };
 }
 export default useGetMenuOptions;

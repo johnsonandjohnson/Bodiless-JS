@@ -23,23 +23,23 @@ import {
   withDesign,
   addClasses,
 } from '@bodiless/fclasses';
-import EditFlexbox from './EditFlexbox';
-import StaticFlexbox from './StaticFlexbox';
-import { EditFlexboxProps } from './types';
+import EditFlowContainer from './EditFlowContainer';
+import StaticFlowContainer from './StaticFlowContainer';
+import { EditFlowContainerProps } from './types';
 
-const FlexboxGridBasic: FC<EditFlexboxProps> = props => {
+const FlowContainerBasic: FC<EditFlowContainerProps> = props => {
   const { isEdit } = useEditContext();
   return isEdit
-    ? <EditFlexbox {...props} />
-    : <StaticFlexbox {...props} />;
+    ? <EditFlowContainer {...props} />
+    : <StaticFlowContainer {...props} />;
 };
 
-const FlexboxGridDesignable = flow(
+const FlowContainerDesignable = flow(
   observer,
   withDesign({
     Wrapper: addClasses('flex flex-wrap'),
   }),
-)(FlexboxGridBasic);
+)(FlowContainerBasic);
 
-const FlexboxGrid = withNode(FlexboxGridDesignable);
-export default FlexboxGrid;
+const FlowContainer = withNode(FlowContainerDesignable);
+export default FlowContainer;
