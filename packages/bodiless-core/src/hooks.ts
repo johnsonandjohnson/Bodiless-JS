@@ -34,7 +34,7 @@ export const useContextActivator = (
     };
   }
   const handler$1 = (e: React.SyntheticEvent<any>) => {
-    const preventDefault = e.currentTarget.getAttribute('bl-prevent') !== 'false';
+    const preventDefault = e && e.currentTarget && e.currentTarget.getAttribute('bl-prevent') !== 'false';
 
     if (handler) handler(e);
     context.activate();
