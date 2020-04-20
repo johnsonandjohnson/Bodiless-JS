@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 import { ReactTagsField as ReactTagsFieldClean, ReactTagsFieldProps } from '@bodiless/core';
 
 import './ReactTags.css';
 
-const ReactTagsField = (props: ReactTagsFieldProps) => {
+const ReactTagsField: ComponentType<ReactTagsFieldProps> = props => {
   const classes = {
     root: 'bl-react-tags',
     rootFocused: 'is-focused',

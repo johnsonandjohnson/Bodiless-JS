@@ -43,12 +43,13 @@ const ReactTagsField = (props: ReactTagsFieldProps) => {
   const { allowMultipleTags, ...rest } = props;
 
   const handleAddition = (tag: TagType) => {
-    if (isEmpty(tag.id)) {
-      /* eslint-disable no-param-reassign */
-      tag = new Tag(tag.name);
+    let tagToAdd = tag;
+
+    if (isEmpty(tagToAdd.id)) {
+      tagToAdd = new Tag(tag.name);
     }
 
-    const newTags = allowMultipleTags ? [...currentTags, tag] : [tag];
+    const newTags = allowMultipleTags ? [...currentTags, tagToAdd] : [tagToAdd];
     formApi.setValue('tags', newTags);
   };
 
@@ -59,15 +60,15 @@ const ReactTagsField = (props: ReactTagsFieldProps) => {
   };
 
   return (
-    <React.Fragment>
+    <>
       <Text type="hidden" field="tags" />
       <ReactTags
+        {...rest}
         tags={currentTags}
         handleDelete={handleDelete}
         handleAddition={handleAddition}
-        {...rest}
       />
-    </React.Fragment>
+    </>
   );
 };
 

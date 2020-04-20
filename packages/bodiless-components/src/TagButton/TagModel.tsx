@@ -12,17 +12,17 @@
  * limitations under the License.
  */
 
+import { isEmpty } from 'lodash';
 import { useNode } from '@bodiless/core';
-import { NodeTagsType } from './types';
+import { TagsNodeType } from './types';
 
 const useTagsAccessors = () => {
-  const { node } = useNode<NodeTagsType>();
+  const { node } = useNode<TagsNodeType>();
   return {
-    getItems: () => node.data.tags || [],
+    getTags: () => node.data.tags || [],
+    tag: isEmpty(node.data.tags) ? { id: '', name: '' } : node.data.tags[0],
+    nodeId: node.path[node.path.length - 2] === 'default' ? node.path.toString() : node.path[node.path.length - 2],
   };
 };
 
 export default useTagsAccessors;
-export {
-  useTagsAccessors,
-};

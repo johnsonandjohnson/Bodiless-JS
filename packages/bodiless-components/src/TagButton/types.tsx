@@ -14,7 +14,7 @@
 
 import { TagType } from '@bodiless/core';
 
-export type NodeTagsType = {
+export type TagsNodeType = {
   tags: TagType[];
 };
 
@@ -30,5 +30,7 @@ export type TagButtonProps = {
   allowNew?: boolean;
   allowMultipleTags?: boolean;
   inputAttributes?: InputAttributes,
+  formTitle?: string,
+  formBodyText?: string,
   seeAllText?: string,
 };

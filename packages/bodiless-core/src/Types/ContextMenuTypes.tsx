@@ -20,8 +20,8 @@ import {
 } from 'react';
 import { FieldProps } from 'informed';
 import Tooltip from 'rc-tooltip';
-import { ReactTagsProps } from 'react-tag-autocomplete';
 import { TMenuOption } from '../PageEditContext/types';
+import { ReactTagsFieldProps } from '../components/ReactTagsField';
 
 export type ButtonVariantProps = HTMLProps<HTMLDivElement> & {
   isActive?: boolean;
@@ -49,7 +49,7 @@ export type UI = {
   ComponentFormError?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   Form?: ComponentType<HTMLProps<HTMLFormElement>> | string;
   Tooltip?: FC<Tooltip['props']>;
-  ReactTags?: ComponentType<Omit<ReactTagsProps, 'handleDelete' | 'handleAddition'>>;
+  ReactTags?: ComponentType<ReactTagsFieldProps>;
   // @TODO: Add other controls from informed.
 };
 
