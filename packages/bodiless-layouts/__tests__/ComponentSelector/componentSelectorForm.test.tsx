@@ -4,7 +4,7 @@ import { contextMenuForm } from '@bodiless/core';
 import { shallow } from 'enzyme';
 import ComponentSelector from '../../src/ComponentSelector';
 import componentSelectorForm from '../../src/ComponentSelector/componentSelectorForm';
-import { EditFlexboxProps } from '../../src/FlexboxGrid/types';
+import { EditFlowContainerProps } from '../../src/FlowContainer/types';
 
 jest.mock('../../src/');
 
@@ -27,7 +27,7 @@ const mockContextMenuForm = contextMenuForm as jest.Mock;
 const mockContextMenuFormInner = mockContextMenuForm();
 
 describe('componentSelectorForm', () => {
-  function renderComponentSelectorForm(extraProps?: Omit<EditFlexboxProps, 'components'>) {
+  function renderComponentSelectorForm(extraProps?: Omit<EditFlowContainerProps, 'components'>) {
     const Foo = Fragment;
     const Bar = Fragment;
     const props = {

@@ -23,7 +23,7 @@ import {
   withDesign,
   Blockquote,
   Strike,
-  startWith,
+  replaceWith,
 } from '@bodiless/fclasses';
 import {
   asBold,
@@ -68,7 +68,7 @@ const fullFeaturedDesign = {
   Bold: asBold,
   Italic: asItalic,
   Underline: asUnderline,
-  StrikeThrough: flow(startWith(Strike), asStrikeThrough, withStrikeThroughMeta),
+  StrikeThrough: flow(replaceWith(Strike), asStrikeThrough, withStrikeThroughMeta),
   Link: flow(asEditableLink(), asLink),
   SuperScript: asSuperScript,
   AlignLeft: asAlignLeft,
@@ -78,7 +78,7 @@ const fullFeaturedDesign = {
   H1: asHeader1,
   H2: asHeader2,
   H3: asHeader3,
-  BlockQuote: flow(startWith(Blockquote), asBlockQuote, withQuoteBlockMeta),
+  BlockQuote: flow(replaceWith(Blockquote), asBlockQuote, withQuoteBlockMeta),
 };
 
 const EditorSimple = withDesign(simpleDesign)(RichText);

@@ -16,12 +16,12 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../components/Layout';
-import { FlexBoxDefault } from '../components/Flexbox';
+import { FlowContainerDefault } from '../components/FlowContainer';
 
 export default props => (
   <Page {...props}>
     <Layout>
-      <FlexBoxDefault nodeKey="page" />
+      <FlowContainerDefault nodeKey="page" />
     </Layout>
   </Page>
 );

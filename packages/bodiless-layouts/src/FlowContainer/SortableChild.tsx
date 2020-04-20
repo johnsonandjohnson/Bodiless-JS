@@ -27,7 +27,7 @@ const FALLBACK_SNAP_CLASSNAME = 'w-full';
 
 const SortableChild = (props: SortableChildProps) => {
   const {
-    onResizeStop, flexboxItem, snapData: snapRaw, defaultWidth, ...restProps
+    onResizeStop, flowContainerItem, snapData: snapRaw, defaultWidth, ...restProps
   } = props;
   const snap = snapRaw || defaultSnapData;
   const {
@@ -45,7 +45,7 @@ const SortableChild = (props: SortableChildProps) => {
   // local classname is used to store intermidiary classname state,
   // so className is stored only onResizeStop
   const [snapClassName, setSnapClassName] = useState(
-    (flexboxItem.wrapperProps && flexboxItem.wrapperProps.className)
+    (flowContainerItem.wrapperProps && flowContainerItem.wrapperProps.className)
       || passedSnapClassName
       || FALLBACK_SNAP_CLASSNAME,
   );
@@ -84,7 +84,7 @@ const SortableChild = (props: SortableChildProps) => {
     })
   ), []);
   useLayoutEffect(() => {
-    const elm: HTMLElement | null = document.querySelector(`[uuid='${flexboxItem.uuid}']`);
+    const elm: HTMLElement | null = document.querySelector(`[uuid='${flowContainerItem.uuid}']`);
     // we have to remove the style width when we have arrived at our correct size
     // This has to be done because the re-resizeable component set the width from the
     // size prop and you can not set the size prop width to a non value (only auto or a size)
@@ -99,7 +99,7 @@ const SortableChild = (props: SortableChildProps) => {
   });
   return (
     <SlateSortableResizable
-      uuid={flexboxItem.uuid}
+      uuid={flowContainerItem.uuid}
       onResize={onResize}
       onResizeStop={createThrottledOnResizeStop(() => {
         onResizeStop({

@@ -20,7 +20,7 @@ import { SectionMargin } from '../components/Product';
 import {
   ProductListingTitle,
   ProductListingImage,
-  ProductListingFlexBox,
+  ProductListingFlowContainer,
 } from '../components/ProductListing';
 
 export default props => (
@@ -33,7 +33,7 @@ export default props => (
         <ProductListingImage />
       </SectionMargin>
       <SectionMargin>
-        <ProductListingFlexBox nodeKey="product_listing_touts" />
+        <ProductListingFlowContainer nodeKey="product_listing_touts" />
       </SectionMargin>
     </Layout>
   </Page>

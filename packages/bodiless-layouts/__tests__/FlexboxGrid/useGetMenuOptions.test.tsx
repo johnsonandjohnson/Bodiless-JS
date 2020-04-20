@@ -1,13 +1,13 @@
 import { Fragment, FC } from 'react';
 import { useEditContext, TMenuOption } from '@bodiless/core';
 import { DesignableComponents } from '@bodiless/fclasses';
-import { EditFlexboxProps } from '../../src/FlexboxGrid/types';
+import { EditFlowContainerProps } from '../../src/FlowContainer/types';
 import componentSelectorForm from '../../src/ComponentSelector/componentSelectorForm';
-import { useItemHandlers, useFlexboxDataHandlers } from '../../src/FlexboxGrid/model';
-import useGetMenuOptions from '../../src/FlexboxGrid/useGetMenuOptions';
+import { useItemHandlers, useFlowContainerDataHandlers } from '../../src/FlowContainer/model';
+import useGetMenuOptions from '../../src/FlowContainer/useGetMenuOptions';
 
 jest.mock('../../src/ComponentSelector/componentSelectorForm');
-jest.mock('../../src/FlexboxGrid/model');
+jest.mock('../../src/FlowContainer/model');
 
 const editContext = {
   activate: jest.fn(),
@@ -65,7 +65,7 @@ describe('useGetMenuOptions', () => {
 
   describe('item getMenuOptions', () => {
     function getMenuOptions(maxComponents?: number) {
-      const props: EditFlexboxProps = {
+      const props: EditFlowContainerProps = {
         components,
       };
       if (maxComponents) {
@@ -96,42 +96,42 @@ describe('useGetMenuOptions', () => {
     });
 
     it('Returns an add button', () => {
-      const { insertFlexboxItem } = useFlexboxDataHandlers();
+      const { insertFlowContainerItem } = useFlowContainerDataHandlers();
       const options = getMenuOptions(3);
       const addButton = options.find(option => option.name === 'add');
       expect(addButton).not.toBeUndefined();
       invokeAction(addButton!, 'Baz');
-      expectDataHandlerCall(insertFlexboxItem, ['Baz', item]);
+      expectDataHandlerCall(insertFlowContainerItem, ['Baz', item]);
     });
 
-    it('Does not return an add button when flexbox is full', () => {
+    it('Does not return an add button when flow container is full', () => {
       const options = getMenuOptions(2);
       const addButton = options.find(option => option.name === 'add');
       expect(addButton).toBeUndefined();
     });
 
     it('Returns a delete button', () => {
-      const { deleteFlexboxItem } = useFlexboxDataHandlers();
+      const { deleteFlowContainerItem } = useFlowContainerDataHandlers();
       const options = getMenuOptions();
       const button = options.find(option => option.name === 'delete');
       expect(button).not.toBeUndefined();
       // @ts-ignore
       button.handler();
-      expectDataHandlerCall(deleteFlexboxItem, ['foo']);
+      expectDataHandlerCall(deleteFlowContainerItem, ['foo']);
     });
 
     it('Returns a swap button', () => {
-      const { updateFlexboxItem } = useFlexboxDataHandlers();
+      const { updateFlowContainerItem } = useFlowContainerDataHandlers();
       const options = getMenuOptions();
       const button = options.find(option => option.name === 'swap');
       expect(button).not.toBeUndefined();
       invokeAction(button!, 'Bar');
-      expectDataHandlerCall(updateFlexboxItem, [{ ...item, type: 'Bar' }]);
+      expectDataHandlerCall(updateFlowContainerItem, [{ ...item, type: 'Bar' }]);
     });
   });
 
 
-  describe('flexbox getMenuOptions', () => {
+  describe('flow container getMenuOptions', () => {
     function getMenuOptions() {
       const props = {
         components,
@@ -145,7 +145,7 @@ describe('useGetMenuOptions', () => {
       expect(options).toHaveLength(0);
     });
 
-    it('Returns no buttons for the flexbox when it is not empty', () => {
+    it('Returns no buttons for the flow container when it is not empty', () => {
       const { getItems } = useItemHandlers();
       // @ts-ignore jest mock methods don't exist on mocked imports.
       getItems.mockReturnValue([{
@@ -155,16 +155,16 @@ describe('useGetMenuOptions', () => {
       const options = getMenuOptions();
       expect(options).toHaveLength(0);
     });
-    it('Returns a single add button for the flexbox when it is empty', () => {
+    it('Returns a single add button for the flow container when it is empty', () => {
       const { getItems } = useItemHandlers();
       // @ts-ignore jest mock methods don't exist on mocked imports.
       getItems.mockReturnValue([]);
-      const { insertFlexboxItem } = useFlexboxDataHandlers();
+      const { insertFlowContainerItem } = useFlowContainerDataHandlers();
       const options = getMenuOptions();
       expect(options.length).toBe(1);
       expect(options[0].name).toBe('add');
       invokeAction(options[0], 'Bar');
-      expectDataHandlerCall(insertFlexboxItem, ['Bar']);
+      expectDataHandlerCall(insertFlowContainerItem, ['Bar']);
     });
   });
 });

@@ -22,34 +22,34 @@ import { Page } from '@bodiless/gatsby-theme-bodiless';
 
 import Layout from '../../../components/Layout';
 import tailWindConfig from '../../../../tailwind.config';
-import { FlexBoxDefault } from '../../../components/Flexbox';
+import { FlowContainerDefault } from '../../../components/FlowContainer';
 
-const FLEXBOX_PAGE_PATH = 'flexbox';
+const FLOW_CONTAINER_PAGE_PATH = 'flowContainer';
 
 const options = getSnapFrom(
   withTailwindClasses(tailWindConfig)('w-full sm:w-1/2 sm:w-full lg:w-1/2 lg:w-full'),
 );
-const FlexboxPage = (props: any) => (
+const FlowContainerPage = (props: any) => (
   <Page {...props}>
     <Layout>
-      <h1 className="text-3xl font-bold">Flexbox Examples</h1>
-      <h2 className="text-2xl font-bold mt-4">Default Flexbox</h2>
-      <FlexBoxDefault
-        id={FLEXBOX_PAGE_PATH}
-        nodeKey={FLEXBOX_PAGE_PATH}
+      <h1 className="text-3xl font-bold">FlowContainer Examples</h1>
+      <h2 className="text-2xl font-bold mt-4">Default FlowContainer</h2>
+      <FlowContainerDefault
+        id={FLOW_CONTAINER_PAGE_PATH}
+        nodeKey={FLOW_CONTAINER_PAGE_PATH}
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
-      <NodeViewer nodeKey={FLEXBOX_PAGE_PATH} />
-      <h2 className="text-2xl font-bold mt-4">Flexbox grid with constrained widths</h2>
-      <FlexBoxDefault
+      <NodeViewer nodeKey={FLOW_CONTAINER_PAGE_PATH} />
+      <h2 className="text-2xl font-bold mt-4">FlowContainer with constrained widths</h2>
+      <FlowContainerDefault
         id="constrained_widths"
         nodeKey="constrained_widths"
         snapData={options}
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey="constrained_widths" />
-      <h2 className="text-2xl font-bold mt-4">Flexbox restricted to 1 item</h2>
-      <FlexBoxDefault
+      <h2 className="text-2xl font-bold mt-4">FlowContainer restricted to 1 item</h2>
+      <FlowContainerDefault
         id="restricted"
         nodeKey="restricted"
         maxComponents={1}
@@ -57,31 +57,31 @@ const FlexboxPage = (props: any) => (
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey="restricted" />
       <h2 className="text-2xl font-bold mt-4">Default Width of 25%</h2>
-      <FlexBoxDefault
+      <FlowContainerDefault
         id="width_25"
         nodeKey="width_25"
         defaultWidth="25"
       />
       <h2 className="text-2xl font-bold mt-4">Default Width of 33% (should round up to 33.33%)</h2>
-      <FlexBoxDefault
+      <FlowContainerDefault
         id="width_33"
         nodeKey="width_33"
         defaultWidth="33"
       />
       <h2 className="text-2xl font-bold mt-4">Default Width of 50%</h2>
-      <FlexBoxDefault
+      <FlowContainerDefault
         id="width_50"
         nodeKey="width_50"
         defaultWidth="50"
       />
       <h2 className="text-2xl font-bold mt-4">Default Width of 66.66% </h2>
-      <FlexBoxDefault
+      <FlowContainerDefault
         id="width_66"
         nodeKey="width_66"
         defaultWidth="66.66"
       />
       <h2 className="text-2xl font-bold mt-4">Default Width of 75%</h2>
-      <FlexBoxDefault
+      <FlowContainerDefault
         id="width_75"
         nodeKey="width_75"
         defaultWidth="75"
@@ -96,4 +96,4 @@ export const query = graphql`
     ...SiteQuery
   }
 `;
-export default FlexboxPage;
+export default FlowContainerPage;
