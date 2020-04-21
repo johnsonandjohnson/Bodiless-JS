@@ -24,16 +24,22 @@ const asTestableFilterByGroup = withDesign({
   FilterWrapper: addProps({ 'data-filter-by-group': 'filter-wrapper' }),
   ContentWrapper: addProps({ 'data-filter-by-group': 'content-wrapper' }),
   ResetButton: addProps({ 'aria-label': 'Reset Button' }),
-  Filter: flow(
-    withDesign({
-      FilterCategory: addProps({ 'data-filter-by-group': 'filter-category' }),
-      FilterGroupItemInput: addProps({ 'aria-label': 'Radio Button Select' }),
-      FilterGroupItemLabel: addProps({ 'data-filter-by-group': 'filter-tag-label' }),
-      FilterGroupItemPlaceholder: addProps({ 'data-filter-by-group': 'filter-tag-placeholder' }),
-      FilterGroupWrapper: addProps({ 'data-filter-by-group': 'filter-group-wrapper' }),
-      FilterInputWrapper: addProps({ 'data-filter-by-group': 'filter-input-wrapper' }),
+  Filter: withDesign({
+    TagList: withDesign({
+      Title: flow(
+        withDesign({
+          FilterInputWrapper: addProps({ 'data-filter-by-group': 'filter-input-wrapper' }),
+          FilterGroupItemInput: addProps({ 'aria-label': 'Radio Button Select' }),
+          FilterGroupItemPlaceholder: addProps({ 'data-filter-by-group': 'filter-tag-placeholder' }),
+          FilterGroupItemLabel: addProps({ 'data-filter-by-group': 'filter-tag-label' }),
+        }),
+      ),
+      Wrapper: addProps({ 'data-filter-by-group': 'filter-group-wrapper' }),
     }),
-  ),
+    CategoryList: withDesign({
+      Title: addProps({ 'data-filter-by-group': 'filter-category' }),
+    }),
+  }),
 });
 
 const TestableFilterByGroup = flow(asTestableFilterByGroup)(FilterByGroupClean);
