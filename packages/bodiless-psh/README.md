@@ -600,7 +600,7 @@ see [Platform.sh Documentation Redirects](https://docs.platform.sh/configuration
 
 Platform.sh integrates with Fastly via EZ platform for Fastly.  
 
-1. Step one is to obtain your Fastly Service ID & Key from Fastly.   
+1. Obtain your Fastly Service ID & Key from Fastly.   
 1. Once Fastly Service ID & Key is obtained, these variables can be set at Master environment.
     ```
     platform variable:create -e master --level environment env:HTTPCACHE_PURGE_TYPE --value 'fastly'
@@ -631,7 +631,7 @@ Platform.sh References:
 * [How to Guide: How to configure caching for static assets](https://community.platform.sh/t/how-to-configure-caching-for-static-assets/187)
 
 
-If there are issues or need to troubleshoot, here are some good resources
+If there are issues or you need to troubleshoot, here are some good resources:
 * [Checking Fastly Cache](https://docs.fastly.com/en/guides/checking-cache)
 
     ``` curl -svo /dev/null -H "Fastly-Debug:1" www.example.com/index.html ```
