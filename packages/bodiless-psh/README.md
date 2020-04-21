@@ -621,7 +621,7 @@ Platform.sh integrates with Fastly via EZ platform for Fastly.
                 expires: 6h  
     ```
 
-Once completed, the master env deployed on Platform.sh should be on Fastly CDN.  You may have to fine tuen the expires for your static resources and set certain ones to longer to leverage browser caching.
+Once completed, the master env deployed on Platform.sh should be on Fastly CDN.  You may have to fine tune the expires setting for your static resources and set certain ones (ones identify not to change often such as font files) to longer to leverage browser caching.
 
 Platform.sh References:
 * [Set Fastly Credentials on Platform.sh](https://docs.platform.sh/frameworks/ez/fastly.html#set-credentials-on-platformsh)
