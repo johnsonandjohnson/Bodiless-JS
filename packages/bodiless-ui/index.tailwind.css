@@ -56,6 +56,66 @@
   height: 728px;
  }
 
+  /**
+   * Bodiless React Tags Component Styles
+   */
+ .bl-react-tags__selected-tag:after {
+   content: '\2715';
+   color: #AAA;
+   margin-left: 8px;
+ }
+
+ .bl-react-tags__search-input input {
+   /* prevent autoresize overflowing the container */
+   max-width: 100%;
+   min-width: 250px;
+
+   /* remove styles and layout from this element */
+   margin: 0;
+   padding: 7px;
+   border: 0;
+   outline: none;
+
+   /* match the font styles */
+   font-size: inherit;
+   line-height: inherit;
+ }
+
+ .bl-react-tags__suggestions ul {
+   margin: 4px -1px;
+   padding: 0;
+   list-style: none;
+   background: white;
+   border: 1px solid #D1D1D1;
+   border-radius: 2px;
+   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+ }
+
+ .bl-react-tags__suggestions li {
+   border-bottom: 1px solid #ddd;
+   padding: 6px 8px;
+ }
+
+ .bl-react-tags__suggestions li mark {
+   text-decoration: underline;
+   background: none;
+   font-weight: 600;
+ }
+
+ .bl-react-tags__suggestions li:hover {
+   cursor: pointer;
+   background: #eee;
+ }
+
+ .bl-react-tags__suggestions li.is-active {
+   background: #b7cfe0;
+ }
+
+ .bl-react-tags__suggestions li.is-disabled {
+   opacity: 0.5;
+   cursor: auto;
+ }
+ 
 /**
  * This injects all of Tailwind's utility classes, generated based on your
  * config file.
