@@ -15,7 +15,7 @@
 import { observer } from 'mobx-react-lite';
 import React, { ComponentType as CT } from 'react';
 import { flowRight, omit } from 'lodash';
-import { useContextActivator, useEditContext, EventConfig } from './hooks';
+import { useContextActivator, useEditContext } from './hooks';
 import { useNodeDataHandlers } from './NodeProvider';
 import withNode from './withNode';
 import LocalContextMenu from './components/LocalContextMenu';
@@ -32,9 +32,8 @@ export const withoutProps = <Q extends object>(keys: string[]) => (
 
 export const withContextActivator = (
   event: string,
-  eventConfig?: EventConfig,
 ) => (Component: CT<any>) => observer((props: any) => {
-  const activator = useContextActivator(event, props[event], eventConfig);
+  const activator = useContextActivator(event, props[event]);
   return <Component {...props} {...activator} />;
 });
 

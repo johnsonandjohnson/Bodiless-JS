@@ -121,7 +121,7 @@ const TagTitleBase: FC<TagTitleProps> = ({
   const isNodeSelected = Boolean(selectedNode === nodeId);
 
   return (
-    <FilterInputWrapper {...rest} key={tag.id}>
+    <FilterInputWrapper {...rest} key={tag.id} bl-prevent="false">
       <FilterGroupItemInput
         type="radio"
         name="filter-item"
@@ -151,7 +151,7 @@ const TagTitle = flow(
   ]),
   ifEditable(
     withTagButton(),
-    withContextActivator('onClick', { preventDefault: false }),
+    withContextActivator('onClick'),
     withLocalContextMenu,
   ),
   ifReadOnly(withoutProps(['setComponentData'])),
