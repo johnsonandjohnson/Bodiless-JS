@@ -49,6 +49,7 @@ export const tagButtonOptions:EditButtonOptions<TagButtonProps & HTMLProps<HTMLE
       formTitle = 'Tags',
       formBodyText = 'Select from available tags:',
       seeAllText = 'See all tags',
+      autofocus = false,
     } = componentProps;
 
     const suggestions = getSuggestions();
@@ -74,6 +75,7 @@ export const tagButtonOptions:EditButtonOptions<TagButtonProps & HTMLProps<HTMLE
           allowNew={allowNew}
           allowMultipleTags={allowMultipleTags}
           inputAttributes={inputAttributes}
+          autofocus={autofocus}
         />
         <ComponentFormUnwrapButton type="button" onClick={displayListOfTags}>
           {seeAllText}

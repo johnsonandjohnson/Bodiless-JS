@@ -33,4 +33,5 @@ export type TagButtonProps = {
   formTitle?: string,
   formBodyText?: string,
   seeAllText?: string,
+  autofocus?: boolean,
 };
