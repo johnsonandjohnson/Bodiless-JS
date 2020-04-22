@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,12 +12,12 @@
  * limitations under the License.
  */
 
-import ContextWrapper from './ContextWrapper';
-import PageEditor from './PageEditor';
-import PageOverlay from './PageOverlay';
-import ReactTagsField from './ReactTags';
+import withTagButton from './withTagButton';
+import useTagsAccessors from './TagModel';
+import { TagButtonProps } from './types';
 
 export {
-  ContextWrapper, PageEditor, PageOverlay,
-  ReactTagsField,
+  TagButtonProps,
+  withTagButton,
+  useTagsAccessors,
 };

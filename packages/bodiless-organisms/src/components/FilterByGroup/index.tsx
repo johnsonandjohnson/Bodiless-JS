@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,12 +12,15 @@
  * limitations under the License.
  */
 
-import ContextWrapper from './ContextWrapper';
-import PageEditor from './PageEditor';
-import PageOverlay from './PageOverlay';
-import ReactTagsField from './ReactTags';
+import FilterByGroupClean from './FilterByGroupClean';
+import { TestableFilterByGroup, asTestableFilterByGroup } from './FilterByGroupTestable';
+import { useFilterByGroupContext, withRegisterSuggestions, withFBGSuggestions } from './FilterByGroupContext';
 
 export {
-  ContextWrapper, PageEditor, PageOverlay,
-  ReactTagsField,
+  FilterByGroupClean,
+  TestableFilterByGroup,
+  asTestableFilterByGroup,
+  withFBGSuggestions,
+  useFilterByGroupContext,
+  withRegisterSuggestions,
 };

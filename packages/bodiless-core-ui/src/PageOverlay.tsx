@@ -51,7 +51,7 @@ const WrappedSpinner = () => {
 };
 
 const Message = addClasses([
-  'bl-text-gray-100 bl-text-center bl-text-2xl bl-whitespace-pre-line clear-right',
+  'bl-text-gray-100 bl-text-center bl-text-lg bl-whitespace-pre-line clear-right',
 ])(Div);
 
 const ui = {
