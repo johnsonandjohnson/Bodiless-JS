@@ -41,7 +41,7 @@ export const tagButtonOptions:EditButtonOptions<TagButtonProps & HTMLProps<HTMLE
     const {
       getSuggestions = () => [],
       placeholder = 'Select Tags',
-      noSuggestionsText = 'No maching tags found.',
+      noSuggestionsText = 'No matching tags found.',
       minQueryLength = 1,
       allowNew = true,
       allowMultipleTags = true,

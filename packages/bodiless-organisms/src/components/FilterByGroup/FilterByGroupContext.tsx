@@ -22,7 +22,7 @@ import React, {
   ComponentType as CT,
 } from 'react';
 import { v1 } from 'uuid';
-import { reject, isEmpty } from 'lodash';
+import { uniqBy } from 'lodash';
 import { TagType } from '@bodiless/core';
 import { FBGContextOptions, SuggestionsRefType, FBGContextType } from './types';
 
@@ -49,7 +49,7 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
       (acc: any, ref: any) => [...acc, ...ref.current.tags],
       suggestions || [],
     );
-    return allSuggestions.sort((a, b) => a.name.localeCompare(b.name));
+    return uniqBy(allSuggestions, 'id').sort((a, b) => a.name.localeCompare(b.name));
   };
 
   const useRegisterSuggestions = () => {
@@ -63,11 +63,7 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
     }
 
     return (tags: TagType[]) => {
-      reject(tags, tag => isEmpty(tag.id)).forEach(tag => {
-        if (!getSuggestions().some(_suggestion => _suggestion.id === tag.id)) {
-          newRef.current.tags.push(tag);
-        }
-      });
+      newRef.current.tags = [...tags];
     };
   };
 

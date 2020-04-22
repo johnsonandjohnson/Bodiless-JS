@@ -68,6 +68,7 @@ const withTagButtonProps = <P extends object>(Component: CT<P>) => (props: P) =>
     formTitle: 'Groups',
     formBodyText: 'Select from available groups:',
     seeAllText: 'View All Groups',
+    noSuggestionsText: 'No matching groups found.',
   };
 
   return <Component {...props} {...tagButtonProps} />;
@@ -110,13 +111,6 @@ const TagTitleBase: FC<TagTitleProps> = ({
     setSelectedNode(nodeId);
   }
 
-  /**
-   * TODO:
-   *
-   * 'checked' in FilterGroupItemInput doesn't get re-rendered right away in Edit mode
-   * since local context menu "steals" click. It is still updated in context
-   * and working as expected. Select input gest updated once we hide localContextMenu.
-   */
   const isTagSelected = Boolean(selectedTag && selectedTag.id === tag.id);
   const isNodeSelected = Boolean(selectedNode === nodeId);
 
@@ -145,6 +139,7 @@ const TagTitle = flow(
     'onContextMenu',
     'getSuggestions',
     'allowMultipleTags',
+    'noSuggestionsText',
     'seeAllText',
     'formTitle',
     'formBodyText',
