@@ -51,7 +51,7 @@ declare class HCCrawler extends EventEmitter {
 
   static launch(options?: LaunchOptions): Promise<HCCrawler>;
 
-  queue(options: QueueOptions): Promise<void>;
+  queue(options: QueueOptions[]): Promise<void>;
 
   onIdle(): Promise<void>;
 

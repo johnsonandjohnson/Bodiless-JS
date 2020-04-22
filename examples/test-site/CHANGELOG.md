@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.47](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.46...v0.0.47) (2020-04-22)
+
+
+### Features
+
+* **core:** component default content ([#219](https://github.com/johnsonandjohnson/bodiless-js/issues/219)) ([379e655](https://github.com/johnsonandjohnson/bodiless-js/commit/379e6559de3471214e45132ed493deed63ecfb38))
+* **layout:** Rename Flexbox to FlowContainer ([#118](https://github.com/johnsonandjohnson/bodiless-js/issues/118)) ([aa295bb](https://github.com/johnsonandjohnson/bodiless-js/commit/aa295bb77ed512a1040ed047d784a787dcd2b71a))
+
+
+
+
+
 ## [0.0.46](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.45...v0.0.46) (2020-04-08)
 
 **Note:** Version bump only for package @bodiless/test-site

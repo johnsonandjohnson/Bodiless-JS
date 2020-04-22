@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/migration-tool",
-  "version": "0.0.46",
+  "version": "0.0.47",
   "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
   "bin": {
     "migration_tool": "./bin/run"
@@ -18,7 +18,7 @@
     "@babel/plugin-syntax-jsx": "^7.2.0",
     "@babel/traverse": "^7.5.5",
     "@babel/types": "^7.6.1",
-    "@bodiless/headless-chrome-crawler": "^0.0.46",
+    "@bodiless/headless-chrome-crawler": "^0.0.47",
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
