@@ -13,7 +13,7 @@
  */
 
 import Editable, { withPlaceholder, asEditable } from './Editable';
-import Link, { asBodilessLink } from './Link';
+import { asBodilessLink } from './Link';
 import Image, { asBodilessImage } from './Image';
 import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
@@ -25,14 +25,22 @@ import {
 } from './List/types';
 import withListTitle from './List/withListTitle';
 import asEditableList from './List/asEditableList';
-import withSublist from './List/withSublist';
+import asBasicSublist from './List/asBasicSublist';
+import withSublist, { withBasicSublist } from './List/withSublist';
+import withDeleteSublistOnUnwrap from './List/withDeleteSublistOnUnwrap';
 import {
-  withMeta, withMetaTitle, withMetaHtml, asBodilessHelmet,
+  withMeta, withMetaTitle, withMetaHtml,
 } from './Meta/Meta';
-import { withToggle, withToggleTo, withToggleButton } from './Toggle';
+import asBodilessHelmet from './Helmet/Helemet';
+import withEvent from './GTM/gtm';
+import {
+  withToggle,
+  withToggleTo,
+  withToggleButton,
+} from './Toggle';
+import withEditPlaceholder from './Placeholder';
 
 export {
-  Link,
   asBodilessLink,
   Image,
   asBodilessImage,
@@ -42,7 +50,10 @@ export {
   List,
   ListDesignableComponents,
   asEditableList,
+  asBasicSublist,
+  withBasicSublist,
   withSublist,
+  withDeleteSublistOnUnwrap,
   ListProps,
   ListTitleProps,
   withListTitle,
@@ -55,4 +66,6 @@ export {
   withMetaTitle,
   withMetaHtml,
   asBodilessHelmet,
+  withEditPlaceholder,
+  withEvent,
 };

@@ -21,6 +21,8 @@ import withNode from '../src/withNode';
 class MockContentNode<D extends object> implements ContentNode<D> {
   data: D = {} as D;
 
+  delete = jest.fn();
+
   setData = jest.fn();
 
   path: string[] = [];

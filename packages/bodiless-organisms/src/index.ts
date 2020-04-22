@@ -11,19 +11,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import Slider from './components/Slider';
-
 import {
   asBurgerSubMenu,
   asEditableBurgerSubMenu,
   BurgerMenuClean,
+  withBurgerSubmenu,
 } from './components/BurgerMenu';
 
 export {
   SingleAccordion,
   SingleAccordionClean,
   asSingleAccordion,
+  asTestableAccordion,
 } from './components/SingleAccordion';
 
 export {
@@ -40,9 +39,7 @@ export {
 } from './components/MainMenu/index';
 
 export {
-  Tout,
   ToutClean,
-  asEditableTout,
   asTestableTout,
 } from './components/Touts';
 
@@ -67,6 +64,12 @@ export {
   asBurgerSubMenu,
   asEditableBurgerSubMenu,
   BurgerMenuClean,
+  withBurgerSubmenu,
 };
 
-export { Slider };
+export {
+  BCarousel,
+  BAutoCarousel,
+  BCarouselClean,
+  asEditableCarousel,
+} from './components/Carousel';

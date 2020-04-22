@@ -18,6 +18,10 @@ import PageEditContext from './PageEditContext';
 import asStatic from './asStatic';
 import { useEditContext, useUUID, useContextActivator } from './hooks';
 import withNode, { withNodeKey } from './withNode';
+import {
+  withDefaultContent,
+  withResetButton,
+} from './Contentful';
 import withEditButton from './withEditButton';
 import contextMenuForm from './contextMenuForm';
 import withData from './withData';
@@ -36,6 +40,7 @@ import { TMenuOption } from './PageEditContext/types';
 import { EditButtonOptions } from './Types/EditButtonTypes';
 import { TMenuOptionGetter } from './Types/PageContextProviderTypes';
 import { WithNodeProps } from './Types/NodeTypes';
+import { TOverlaySettings } from './Types/PageOverlayTypes';
 import {
   ActivateOnEffectProvider,
   withActivateOnEffect,
@@ -53,6 +58,7 @@ export {
   withLocalContextMenu,
   TMenuOption,
   TMenuOptionGetter,
+  TOverlaySettings,
   PageContextProvider as ContextProvider,
   withPageContext as withMenuOptions,
   PageEditContext,
@@ -79,6 +85,8 @@ export {
   useActivateOnEffect,
   useActivateOnEffectActivator,
   withChild,
+  withDefaultContent,
+  withResetButton,
 };
 
 export type Bodiless<P, Q> = (C: ComponentType<P> | string) => ComponentType<Q>;

@@ -63,10 +63,13 @@ test('amount of scraped pages obeying robots.txt', async () => {
     javascriptEnabled: true,
   };
   const scraper = new Scraper(scraperParams);
-  const mockCallback = jest.fn(() => {});
-  scraper.on('success', mockCallback);
+  const pageReceivedMockCallback = jest.fn();
+  const resourceReceivedMockCallback = jest.fn();
+  scraper.on('pageReceived', pageReceivedMockCallback);
+  scraper.on('fileReceived', resourceReceivedMockCallback);
   await scraper.Crawl();
-  expect(mockCallback.mock.calls.length).toBe(3);
+  expect(pageReceivedMockCallback.mock.calls.length).toBe(3);
+  expect(resourceReceivedMockCallback.mock.calls[0][0]).toBe(`${serverUrl}/gatsby.png`);
 }, 30000);
 
 test('elements scraped from the third page', async () => {
@@ -78,7 +81,7 @@ test('elements scraped from the third page', async () => {
   };
   const scraper = new Scraper(scraperParams);
   const mockCallback = jest.fn();
-  scraper.on('success', mockCallback);
+  scraper.on('pageReceived', mockCallback);
   await scraper.Crawl();
   expect(mockCallback.mock.calls[2][0].pageUrl).toBe(`${serverUrl}/index3.html`);
   expect(htmlclean(mockCallback.mock.calls[2][0].processedHtml)).toBe(htmlclean('<h1 class="processed">Hello World index.html</h1><a href = "/index2.html"></a> <img src = "/gatsby.png">'));
@@ -106,7 +109,7 @@ test('disabling javascript and disabling obeying robots.txt', async () => {
   };
   const scraper = new Scraper(scraperParams);
   const mockCallback = jest.fn();
-  scraper.on('success', mockCallback);
+  scraper.on('pageReceived', mockCallback);
   await scraper.Crawl();
   expect(htmlclean(mockCallback.mock.calls[3][0].processedHtml)).toBe(htmlclean('<h1>Hello World index.html</h1><a href = "/index2.html"></a> <img src = "/gatsby.png">'));
 }, 30000);

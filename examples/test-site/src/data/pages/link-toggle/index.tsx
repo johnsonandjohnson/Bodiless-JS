@@ -14,10 +14,11 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import { withLinkToggle, Editable, Link } from '@bodiless/components';
+import { withLinkToggle, Editable } from '@bodiless/components';
 import Layout from '../../../components/Layout';
+import EditableLink from '../../../components/Link';
 
-const LinkToggle = withLinkToggle(Link);
+const LinkToggle = withLinkToggle(EditableLink);
 
 export default (props: any) => (
   <Page {...props}>
@@ -28,7 +29,7 @@ export default (props: any) => (
         The link can be removed by clicking on the link button again and
         then clicking &quot;Remove Link&quot; on the edit form.
       </p>
-      <div className="my-3">
+      <div className="my-3" data-linktoggle-element="link-toggle">
         <LinkToggle nodeKey="linktoggle1"><Editable nodeKey="text" placeholder="Link Toggle" /></LinkToggle>
       </div>
     </Layout>

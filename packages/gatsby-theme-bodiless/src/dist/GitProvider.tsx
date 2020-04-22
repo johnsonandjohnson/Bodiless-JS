@@ -138,11 +138,26 @@ const formGitCommit = (client: Client) => contextMenuForm({
 //   },
 // );
 
-const formGitReset = (client: Client) => contextMenuForm({
-  submitValues: () => handle(client.reset(), () => {
-    alert('Revert is in progress. This may take a minute.');
-    window.location.reload();
-  }),
+const formGitReset = (client: Client, context: any) => contextMenuForm({
+  submitValues: async () => {
+    context.showPageOverlay({
+      message: 'Revert is in progress. This may take a minute.',
+      maxTimeoutInSeconds: 10,
+    });
+    try {
+      await client.reset();
+      context.showPageOverlay({
+        message: 'Revert completed.',
+        hasSpinner: false,
+        hasCloseButton: true,
+        onClose: () => {
+          window.location.reload();
+        },
+      });
+    } catch {
+      context.showError();
+    }
+  },
 })(
   ({ ui }: any) => {
     const { ComponentFormTitle, ComponentFormLabel } = getUI(ui);
@@ -159,7 +174,7 @@ const formGitReset = (client: Client) => contextMenuForm({
 
 const defaultClient = new BackendClient();
 
-const getMenuOptions = (client: Client = defaultClient, isEdit?: boolean): TMenuOption[] => {
+const getMenuOptions = (client: Client = defaultClient, context: any): TMenuOption[] => {
   const saveChanges = canCommit ? formGitCommit(client) : undefined;
   return [
     {
@@ -171,7 +186,7 @@ const getMenuOptions = (client: Client = defaultClient, isEdit?: boolean): TMenu
       name: 'savechanges',
       icon: 'cloud_upload',
       isDisabled: () => !canCommit,
-      isHidden: () => !isEdit,
+      isHidden: () => !context.isEdit,
       handler: () => saveChanges,
     },
     // Currently descoping the Pull Changes Button Functionality.
@@ -183,9 +198,9 @@ const getMenuOptions = (client: Client = defaultClient, isEdit?: boolean): TMenu
     // },
     {
       name: 'resetchanges',
-      icon: 'first_page',
-      isHidden: () => !isEdit,
-      handler: () => formGitReset(client),
+      icon: 'undo',
+      isHidden: () => !context.isEdit,
+      handler: () => formGitReset(client, context),
     },
   ];
 };
@@ -195,7 +210,7 @@ const GitProvider: FC<Props> = ({ children, client }) => {
 
   return (
     <ContextProvider
-      getMenuOptions={() => getMenuOptions(client, context.isEdit)}
+      getMenuOptions={() => getMenuOptions(client, context)}
       name="Git"
     >
       {children}

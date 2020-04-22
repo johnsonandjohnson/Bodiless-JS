@@ -13,13 +13,12 @@
  */
 
 /* eslint no-console: 0 */
+/* eslint global-require: 0 */
 const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const { spawn } = require('child_process');
 const formidable = require('formidable');
-const morgan = require('morgan');
-const morganBody = require('morgan-body');
 const tmp = require('tmp');
 const path = require('path');
 const Page = require('./page');
@@ -312,6 +311,8 @@ class Backend {
     this.app = express();
     this.app.use(bodyParser.json());
     if (isMorganEnabled()) {
+      const morgan = require('morgan');
+      const morganBody = require('morgan-body');
       this.app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
       morganBody(this.app);
     }
@@ -353,7 +354,7 @@ class Backend {
       res.status(500);
     }
     // End response process to prevent any further queued promises/events from responding.
-    res.send(error.message).end();
+    res.send(Backend.sanitizeOutput(error.message)).end();
   }
 
   static gitCommitsEnabled(res) {
@@ -570,6 +571,20 @@ class Backend {
             logger.log(reason);
             res.send({});
           });
+      })
+      .delete((req, res) => {
+        const page = Backend.getPage(Backend.getPath(req));
+        logger.log(`Start deletion for:${page.file}`);
+        page
+          .delete()
+          .then(data => {
+            logger.log('Sending', data);
+            res.send(data);
+          })
+          .catch(reason => {
+            logger.log(reason);
+            res.send({});
+          });
       });
   }
 
@@ -616,6 +631,10 @@ class Backend {
           res.send({});
         });
     });
+  }
+
+  static sanitizeOutput(data) {
+    return data.replace(/(http|https):\/\/[^@]+:[^@]+@/gi, '$1://****:****@');
   }
 
   start(port) {

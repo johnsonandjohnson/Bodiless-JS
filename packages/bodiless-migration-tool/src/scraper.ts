@@ -13,12 +13,12 @@
  */
 
 import { EventEmitter as EE } from 'ee-ts';
-import url from 'url';
 // eslint-disable-next-line import/no-unresolved
 import { Request } from '@bodiless/headless-chrome-crawler/lib/puppeteer';
 // @ts-ignore - ignoring as it contains functions that invoked in browser
 import evaluatePage from './evaluate-page';
 import {
+  getHostNameWithoutWWW,
   isUrlExternal,
   trimQueryParamsFromUrl,
 } from './helpers';
@@ -29,6 +29,7 @@ import HCCrawler = require('@bodiless/headless-chrome-crawler');
 export interface ScrapedPage {
   pageUrl: string,
   rawHtml: string,
+  status: number,
   processedHtml: string,
   metatags: Array<string>,
   scripts: Array<string>,
@@ -42,14 +43,14 @@ export interface ScrapedPage {
 }
 
 interface Events {
-  success(result: ScrapedPage): void,
+  pageReceived(result: ScrapedPage): void,
   fileReceived(file: string): void,
   requestStarted(file: string): void,
   error(error: Error): void
 }
 
 export interface ScraperParams {
-  pageUrl: string,
+  pageUrls: string[],
   maxDepth: number,
   maxConcurrency?: number,
   javascriptEnabled: boolean,
@@ -91,16 +92,25 @@ export class Scraper extends EE<Events> {
       // Function to be called with evaluated results from browsers
       onSuccess: (async successResult => {
         try {
-          const { result } = successResult;
           // we can get an external url here
           // when an internal url is redirected to the external
-          if (isUrlExternal(this.params.pageUrl, successResult.response.url)) {
+          const externalUrl = this.params.pageUrls.some(url => (
+            isUrlExternal(url, successResult.response.url)
+          ));
+          if (externalUrl) {
+            console.log(`external url ${successResult.response.url} received. skipping`);
             return;
           }
-          result.pageUrl = successResult.response.url;
-          // @ts-ignore
-          result.rawHtml = await successResult.rawHtml;
-          this.emit('success', result);
+          // decide if we get page or resource response
+          if (successResult.isHtmlResponse) {
+            const { result, response } = successResult;
+            result.status = response.status;
+            result.pageUrl = successResult.response.url;
+            result.rawHtml = await successResult.responseText;
+            this.emit('pageReceived', result);
+          } else {
+            this.emit('fileReceived', successResult.response.url);
+          }
         } catch (error) {
           debug(error);
         }
@@ -115,6 +125,7 @@ export class Scraper extends EE<Events> {
     });
     crawler.on(HCCrawler.Events.PuppeteerRequestStarted, async (request: Request) => {
       const resourceTypes = [
+        'fetch',
         'xhr',
         'other',
         'script',
@@ -125,13 +136,21 @@ export class Scraper extends EE<Events> {
         this.emit('requestStarted', request.url());
       }
     });
-    const pageHost = url.parse(this.params.pageUrl).hostname;
     // Queue a request
-    await crawler.queue({
-      url: this.params.pageUrl,
-      maxDepth: this.params.maxDepth,
-      allowedDomains: pageHost !== undefined ? [pageHost] : undefined,
+    const queue = this.params.pageUrls.map((url, index, pageUrls) => {
+      const pageHost = getHostNameWithoutWWW(url);
+      const allowedDomains = [
+        pageHost,
+        ...pageHost ? [`www.${pageHost}`] : [],
+      ];
+      return {
+        url,
+        maxDepth: this.params.maxDepth,
+        allowedDomains,
+        priority: pageUrls.length - index,
+      };
     });
+    await crawler.queue(queue);
     await crawler.onIdle(); // Resolved when no queue is left
     await crawler.close(); // Close the crawler
   }

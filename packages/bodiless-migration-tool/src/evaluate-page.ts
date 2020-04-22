@@ -43,7 +43,7 @@ export default function evaluatePage() {
     pictures: Array.from(document.getElementsByTagName('source'))
       .map(item => item.srcset)
       .filter(item => item !== ''),
-    videos: Array.from(document.querySelectorAll('video source'))
+    videos: Array.from(document.querySelectorAll('video source, video'))
       // @ts-ignore - this is temporarily, needs review in future
       .map(item => item.src)
       .filter(item => item !== ''),

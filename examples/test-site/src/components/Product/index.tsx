@@ -19,7 +19,7 @@ import {
   addClasses,
 } from '@bodiless/fclasses';
 import Tout from '../Tout';
-import { asEditorSimple } from '../Editors';
+import { withEditorSimple } from '../Editors';
 import {
   asHeader1,
   asImage,
@@ -28,13 +28,14 @@ import {
   asNegXMargin,
 } from '../Elements.token';
 import {
+  asToutWithPaddings,
   asToutDefaultStyle,
   asToutVertical,
 } from '../Tout/token';
 
 export const ProductTitle = flow(
   asHeader1,
-  asEditorSimple('product_title', 'Product Title'),
+  withEditorSimple('product_title', 'Product Title'),
 )(H1);
 
 const asProductImage = addClasses('w-full');
@@ -45,6 +46,7 @@ export const ProductImage = flow(
 )(Img);
 
 export const ProductTout = flow(
+  asToutWithPaddings,
   asToutDefaultStyle,
   asToutVertical,
 )(Tout);

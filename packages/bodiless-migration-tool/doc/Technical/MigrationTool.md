@@ -33,40 +33,38 @@ The tool is given URL that will crawl the existing site finding all pages, gener
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/en/) version >= 10
-
-- [npm](https://www.npmjs.com/)
+- [NPM](https://docs.npmjs.com/) version 6.13.1+ is required.
 
 ### Installation & Run
 
-1. Clone this repository: https://github.com/johnsonandjohnson/bodiless-js.git
+1. Clone this repository: https://github.com/johnsonandjohnson/Bodiless-JS.git
 
-1. Execute the command to install the necessary packages
+    ```sh
+    git clone https://github.com/johnsonandjohnson/Bodiless-JS.git
+    cd Bodiless-JS
+    ```
 
-```sh
+1. Let's create a site to migrate the files to.
 
-npm run setup
+    The full directions can be found [here](/About/GettingStarted?id=creating-a-new-site)
+    We recommend this path is outside the repository root.  In the code example, we used `../NEW_MIGRATED_SITE`.
 
-```
+    ```sh
+    npm ci
+    npm run new ../NEW_MIGRATED_SITE
+    cd ../NEW_MIGRATED_SITE
 
-or
-
-```sh
-
-npm run fresh
-
-```
-
-to include cleaning step before the setup.
+    ```
 
 1. Prepare the migration-settings.json. All settings can be found in Configuration section
 
 1. Execute the command to flatten the site
 
-```sh
+    ```sh
 
-npm run migrate
+    npm run migrate
 
-```
+    ```
 
 
 ### Configuration
@@ -86,6 +84,24 @@ Options:
   - **Examples:**: "http://pariet10.ru/" or "https://pariet10.ru/"
 
   - **Restrictions:**: None
+
+- `isPage404Disabled`
+
+  - **Description**: When this option is `false` (by default), all non-existing pages will not be scraped
+  and will redirect to the default 404 page instead.
+
+  - **Accepted Formats:**: `true`, `false`
+
+- `page404Url`
+
+  - **Description**: A specific url from where the default "page not found" page should be flattened.
+  When this option is not specified - a default /404 page will be used.
+
+  - **Accepted Formats:**: Absolute url to the page.
+
+  - **Examples:**: "https://pariet10.ru/404-custom-page"
+
+  - **Restrictions:**: `isPage404Disabled` option should be set to false.
 
 - `steps`
 
@@ -192,6 +208,23 @@ Options:
   - **Accepted Formats:**: string
 
   - **Restrictions:**: Escape special characters, such as " with `\"`
+
+- `disableTailwind`
+
+  - **Description**: Disables site tailwind theme. The site tailwind theme is disabled by default, set this variable to `false` to enable site tailwind theme. You may want to enable the tailwind theme if the migrated site will add new bodiless JS components. Note that enabling the tailwind theme in some cases may interfere with the migrated site's styling.
+
+  - **Accepted Formats:** `true` or `false`
+
+  - **Default Value:** `true`
+
+- `allowFallbackHtml`
+
+  - **Description**: Optional setting to push original html body into the page component file and report a message in the output when migration encounters an error from body section of html. If disabled with value `false`, migration skips generation of JSX on page parsing errors.
+
+  - **Accepted Formats**: Boolean (true or false)
+
+  - **Default Value:** `true`
+
 
 - `context`
 
