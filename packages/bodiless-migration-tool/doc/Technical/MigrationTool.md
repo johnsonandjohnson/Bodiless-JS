@@ -85,6 +85,24 @@ Options:
 
   - **Restrictions:**: None
 
+- `isPage404Disabled`
+
+  - **Description**: When this option is `false` (by default), all non-existing pages will not be scraped
+  and will redirect to the default 404 page instead.
+
+  - **Accepted Formats:**: `true`, `false`
+
+- `page404Url`
+
+  - **Description**: A specific url from where the default "page not found" page should be flattened.
+  When this option is not specified - a default /404 page will be used.
+
+  - **Accepted Formats:**: Absolute url to the page.
+
+  - **Examples:**: "https://pariet10.ru/404-custom-page"
+
+  - **Restrictions:**: `isPage404Disabled` option should be set to false.
+
 - `steps`
 
   - **Description**: Specify a list of steps that should be executed by the tool

@@ -19,7 +19,8 @@
             "name": "Migrate",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceRoot}/packages/bodiless-migration-tool/bin/run"
+            "program": "${workspaceRoot}/packages/bodiless-migration-tool/bin/run",
+            "cwd": "${workspaceFolder}/examples/starter",
         },
         {
             "name": "Launch Current File",

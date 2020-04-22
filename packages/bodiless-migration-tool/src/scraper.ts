@@ -29,6 +29,7 @@ import HCCrawler = require('@bodiless/headless-chrome-crawler');
 export interface ScrapedPage {
   pageUrl: string,
   rawHtml: string,
+  status: number,
   processedHtml: string,
   metatags: Array<string>,
   scripts: Array<string>,
@@ -49,7 +50,7 @@ interface Events {
 }
 
 export interface ScraperParams {
-  pageUrl: string,
+  pageUrls: string[],
   maxDepth: number,
   maxConcurrency?: number,
   javascriptEnabled: boolean,
@@ -93,13 +94,17 @@ export class Scraper extends EE<Events> {
         try {
           // we can get an external url here
           // when an internal url is redirected to the external
-          if (isUrlExternal(this.params.pageUrl, successResult.response.url)) {
+          const externalUrl = this.params.pageUrls.some(url => (
+            isUrlExternal(url, successResult.response.url)
+          ));
+          if (externalUrl) {
             console.log(`external url ${successResult.response.url} received. skipping`);
             return;
           }
           // decide if we get page or resource response
           if (successResult.isHtmlResponse) {
-            const { result } = successResult;
+            const { result, response } = successResult;
+            result.status = response.status;
             result.pageUrl = successResult.response.url;
             result.rawHtml = await successResult.responseText;
             this.emit('pageReceived', result);
@@ -131,17 +136,21 @@ export class Scraper extends EE<Events> {
         this.emit('requestStarted', request.url());
       }
     });
-    const pageHost = getHostNameWithoutWWW(this.params.pageUrl);
-    const allowedDomains = [
-      pageHost,
-      ...pageHost ? [`www.${pageHost}`] : [],
-    ];
     // Queue a request
-    await crawler.queue({
-      url: this.params.pageUrl,
-      maxDepth: this.params.maxDepth,
-      allowedDomains,
+    const queue = this.params.pageUrls.map((url, index, pageUrls) => {
+      const pageHost = getHostNameWithoutWWW(url);
+      const allowedDomains = [
+        pageHost,
+        ...pageHost ? [`www.${pageHost}`] : [],
+      ];
+      return {
+        url,
+        maxDepth: this.params.maxDepth,
+        allowedDomains,
+        priority: pageUrls.length - index,
+      };
     });
+    await crawler.queue(queue);
     await crawler.onIdle(); // Resolved when no queue is left
     await crawler.close(); // Close the crawler
   }
