@@ -1,4 +1,17 @@
-/* eslint-disable no-console */
+/**
+ * Copyright © 2020 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import { Command, flags as commandFlags } from '@oclif/command';
 import * as fs from 'fs-extra';
 import * as path from 'path';
@@ -40,28 +53,6 @@ async function installDeps(map: PackageMap, spawner: Spawner) {
   await spawner.spawn(...args);
 }
 
-/**
- * Gets a map of all packages in a monorepo, containing tarball name and directory keyed by
- * package name.
- */
-const getPackageMap = (packagesDir: string) => (
-  fs.readdirSync(packagesDir).reduce((map, name) => {
-    const dir = path.join(packagesDir, name);
-    const stats = fs.statSync(dir);
-    if (stats.isDirectory()) {
-      try {
-        const packageJson = fs.readFileSync(`${dir}/package.json`);
-        const packageJsonData = JSON.parse(packageJson.toString());
-        const tarballName = packageJsonData.name.replace(/@(.+)\//, '$1-');
-        const tarball = `${tarballName}-${packageJsonData.version}.tgz`;
-        return { ...map, [packageJsonData.name]: { tarball, dir } };
-      } catch (e) {
-        console.warn(e);
-      }
-    }
-    return map;
-  }, {})
-);
 
 /**
  * Filters a dependency map to remove any not required by the site.
@@ -113,22 +104,50 @@ export default class Pack extends Command {
     required: true,
   }];
 
+  /**
+   * Gets a map of all packages in a monorepo, containing tarball name and directory keyed by
+   * package name.
+   */
+  getPackageMap(packagesDir: string) {
+    return fs.readdirSync(packagesDir).reduce((map, name) => {
+      const dir = path.join(packagesDir, name);
+      const stats = fs.statSync(dir);
+      if (stats.isDirectory()) {
+        try {
+          const packageJson = fs.readFileSync(`${dir}/package.json`);
+          const packageJsonData = JSON.parse(packageJson.toString());
+          const tarballName = packageJsonData.name.replace(/@(.+)\//, '$1-');
+          const tarball = `${tarballName}-${packageJsonData.version}.tgz`;
+          return { ...map, [packageJsonData.name]: { tarball, dir } };
+        } catch (e) {
+          this.warn(e);
+        }
+      }
+      return map;
+    }, {});
+  }
+
   async run() {
-    const { args, flags } = this.parse(Pack);
-    if (flags.site) {
-      process.chdir(flags.site);
+    try {
+      const { args, flags } = this.parse(Pack);
+      if (flags.site) {
+        process.chdir(flags.site);
+      }
+      const packageMap = this.getPackageMap(path.join(args.repo, 'packages'));
+      const { package: explicitPackages } = flags;
+      const deps = getDepsToReplace(packageMap, explicitPackages, flags.force);
+      if (isEmpty(deps)) {
+        this.error('No matching packages');
+      }
+      const spawner = new Spawner(path.resolve(args.repo));
+      await packDeps(deps, spawner);
+      if (!flags['skip-install']) {
+        await installDeps(deps, spawner);
+      }
+      this.log('Done');
+    } catch (e) {
+      this.error('An unexpected error was encountered');
+      this.error(e);
     }
-    const packageMap = getPackageMap(path.join(args.repo, 'packages'));
-    const { package: explicitPackages } = flags;
-    const deps = getDepsToReplace(packageMap, explicitPackages, flags.force);
-    if (isEmpty(deps)) {
-      this.error('No matching packages');
-    }
-    const spawner = new Spawner(path.resolve(args.repo));
-    await packDeps(deps, spawner);
-    if (!flags['skip-install']) {
-      await installDeps(deps, spawner);
-    }
-    console.log('Done');
   }
 }
