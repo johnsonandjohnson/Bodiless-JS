@@ -61,6 +61,14 @@ export {
 } from './components/Touts.tokens';
 
 export {
+  FilterByGroupClean,
+  asTestableFilterByGroup,
+  withFBGSuggestions,
+  useFilterByGroupContext,
+  withRegisterSuggestions,
+} from './components/FilterByGroup';
+
+export {
   asBurgerSubMenu,
   asEditableBurgerSubMenu,
   BurgerMenuClean,

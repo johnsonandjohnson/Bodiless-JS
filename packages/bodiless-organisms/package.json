@@ -33,10 +33,19 @@
     "@bodiless/richtext": "^0.0.47",
     "@bodiless/richtext-ui": "^0.0.47",
     "@types/react-burger-menu": "^2.6.0",
+    "@types/react-tag-autocomplete": "^5.12.0",
     "lodash": "^4.17.11",
+    "mobx": "^5.8.0",
+    "mobx-react": "^5.4.3",
+    "mobx-react-lite": "^1.3.1",
     "nuka-carousel": "^4.4.7",
     "rc-menu": "^8.0.0-alpha.5",
-    "react-burger-menu": "^2.6.13"
+    "react-burger-menu": "^2.6.13",
+    "react-tag-autocomplete": "^5.12.1",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/uuid": "^3.4.4"
   },
   "peerDependencies": {
     "react": "^16.8.4"

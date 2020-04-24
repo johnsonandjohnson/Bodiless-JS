@@ -24,6 +24,7 @@ import {
   UI as ContextMenuUI,
 } from '../Types/ContextMenuTypes';
 import { Props as ContextWrapperProps } from '../Types/ContextWrapperTypes';
+import ReactTagsField, { ReactTagsFieldProps, TagType, BodilessTag } from './ReactTagsField';
 
 export {
   ContextMenu,
@@ -37,4 +38,8 @@ export {
   PageEditor,
   StaticPage,
   PageOverlay,
+  ReactTagsField,
+  ReactTagsFieldProps,
+  BodilessTag,
+  TagType,
 };
