@@ -76,7 +76,7 @@ export default class Pack extends Command {
   static description = 'Pack and install dependencies from a local monorepo.';
 
   static examples = [
-    '$ bl-dev pack /path/to/local/monorepo',
+    '$ bodiless pack /path/to/local/monorepo',
   ];
 
   static flags = {

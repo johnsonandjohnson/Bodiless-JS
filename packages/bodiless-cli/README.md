@@ -7,7 +7,7 @@ $ npm install -g @bodiless/cli
 $ bodiless COMMAND
 running command...
 $ bodiless (-v|--version|version)
-@bodiless/cli/0.0.39 darwin-x64 node-v10.16.0
+@bodiless/cli/0.0.47 darwin-x64 node-v10.16.0
 $ bodiless --help [COMMAND]
 USAGE
   $ bodiless COMMAND
@@ -60,7 +60,7 @@ OPTIONS
   --skip-install         Only pack, do not install.
 
 EXAMPLE
-  $ bl-dev pack /path/to/local/monorepo
+  $ bodiless pack /path/to/local/monorepo
 ```
 
 _See code: [lib/commands/pack.js](https://github.com/johnsonandjohnson/bodiless-js/blob/v0.0.39/lib/commands/pack.js)_
