@@ -1,3 +1,17 @@
+/**
+ * Copyright © 2020 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import {
   withoutProps,
   ifToggledOn,
@@ -5,8 +19,7 @@ import {
   TagType,
 } from '@bodiless/core';
 import { replaceWith } from '@bodiless/fclasses';
-import { difference, flowRight, differenceWith } from 'lodash';
-import { toJS } from 'mobx';
+import { flowRight, differenceWith } from 'lodash';
 import useTagsAccessors from './TagButton/TagModel';
 
 type ToggleByTagsProps = {
@@ -23,10 +36,6 @@ const useToggleByTags = <P extends object>({
 }: P & ToggleByTagsProps) => {
   const { getTags } = useTagsAccessors();
   const tags = getTags();
-  console.log('selected tags', selectedTags);
-  console.log('item tags', toJS(tags));
-  console.log('differnece', difference(selectedTags, tags));
-  // const tags = itemTags.map(t => t.name);
   return (
     differenceWith(
       selectedTags,
@@ -34,7 +43,6 @@ const useToggleByTags = <P extends object>({
       (selectedTag, itemTag) => selectedTag.name === itemTag.name,
     ).length === 0
   );
-  // return difference(selectedTags, tags).length === 0;
 };
 
 const ifTagsSelected = ifToggledOn(useToggleByTags);

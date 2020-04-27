@@ -45,7 +45,7 @@ const ReactTagsField = (props: ReactTagsFieldProps) => {
   const handleAddition = (tag: TagType) => {
     let tagToAdd = tag;
 
-    if (!(typeof tagToAdd.id === 'number') && isEmpty(tagToAdd.id)) {
+    if (typeof tagToAdd.id !== 'number' && isEmpty(tagToAdd.id)) {
       tagToAdd = new Tag(tag.name);
     }
 

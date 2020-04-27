@@ -41,9 +41,6 @@ const emptyValue = {
 // - anything relying on the context (activator, indicator) must be
 //   *after* `withEditButton()` as this establishes the context.
 // - withData must be *after* the data handlers are defiend.
-// @todo: revist review the markup produced by adding a tag:
-// Determine what we need to do with withData?
-// @todo revisit suggestions as they need to be passed at runtime?
 export const asTaggableItem = (nodeKey?: string) => flowRight(
   withNodeKey(nodeKey),
   withNode,

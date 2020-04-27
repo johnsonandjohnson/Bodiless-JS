@@ -12,22 +12,14 @@
  * limitations under the License.
  */
 
-import { ComponentType as CT } from 'react';
-import { flowRight } from 'lodash';
 import { useEditContext } from './hooks';
-import { withFlowToggle } from './withFlowToggle';
+import { ifToggledOn, ifToggledOff } from './withFlowToggle';
 
 export const useEditToggle = () => {
   const context = useEditContext();
   return context.isEdit;
 };
 
-export const ifEditable = <H extends Function>(...hocs: Function[]) => (
-  Component: CT<any>,
-  // @ts-ignore Expected at least 1 arguments, but got 0 or more.ts(2557)
-) => withFlowToggle(useEditToggle)(flowRight(...hocs)(Component), Component);
+export const ifEditable = ifToggledOn(useEditToggle);
 
-export const ifReadOnly = <H extends Function>(...hocs: Function[]) => (
-  Component: CT<any>,
-  // @ts-ignore Expected at least 1 arguments, but got 0 or more.ts(2557)
-) => withFlowToggle(useEditToggle)(Component, flowRight(...hocs)(Component));
+export const ifReadOnly = ifToggledOff(useEditToggle);
