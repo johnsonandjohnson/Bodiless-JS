@@ -1,13 +1,10 @@
-import React, { ComponentType } from 'react';
+import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { observable } from 'mobx';
 import {
   withContextActivator,
   withLocalContextMenu,
   withNodeDataHandlers,
-  withFlowToggle,
-  ifToggledOn,
-  ifToggledOff,
 } from '../src/hoc';
 
 const TestComponent = ({ element: Element }: any) => (
