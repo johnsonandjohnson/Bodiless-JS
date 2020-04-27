@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { withEditToggle } from '../src/withEditToggle';
+import { useEditToggle } from '../src/withEditToggle';
+import { withFlowToggle } from '../src';
 import PageEditContext from '../src/PageEditContext';
 
 const EditableComponent = ({ element: Element }: any) => (
@@ -10,7 +11,7 @@ const ReadOnlyComponent = ({ element: Element }: any) => (
   <Element><div>ReadOnly Component</div></Element>
 );
 
-const EditToggle = withEditToggle(EditableComponent, ReadOnlyComponent);
+const EditToggle = withFlowToggle(useEditToggle)(EditableComponent, ReadOnlyComponent);
 
 const context = new PageEditContext();
 

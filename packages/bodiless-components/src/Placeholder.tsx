@@ -13,10 +13,10 @@
  */
 
 import { ComponentType as CT } from 'react';
-import { withEditToggle } from '@bodiless/core';
+import { withFlowToggle, useEditToggle } from '@bodiless/core';
 
 const withEditPlaceholder = <P extends object>(
   PlaceholderComponent: CT<P>,
-) => (Component: CT<P>) => withEditToggle(PlaceholderComponent, Component);
+) => (Component: CT<P>) => withFlowToggle(useEditToggle)(PlaceholderComponent, Component);
 
 export default withEditPlaceholder;
