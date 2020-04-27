@@ -187,50 +187,48 @@ Options:
 
     - **Description**: Replace string (or regex pattern) in the source html code before parsing.
 
-  - `tojsx`
+  - `tocomponent`
 
     - **Description**: Extract matched elements into React components as separate modules
 
-    - **Note**: this option is not implemented yet. If you want to convert html into jsx please follow "Convert html into jsx" section
+- Specific configuration parameters for each rule type:
 
-    - Specific configuration parameters for each rule type:
+  - `selector`
 
-- `selector`
+    - **Description**: Selector for the element(s) that should be processed
 
-  - **Description**: Selector for the element(s) that should be processed
+    - **Accepted Formats:**: string
 
-  - **Accepted Formats:**: string
+  - `replacement`
 
-- `replacement`
+    - **Description**: New html content in `replace` mode. Name of React component in `tojsx` mode
 
-  - **Description**: New html content in `replace` mode. Name of React component in `tojsx` mode
+    - **Accepted Formats:**: string
 
-  - **Accepted Formats:**: string
+    - **Restrictions:**: Escape special characters, such as " with `\"`
 
-  - **Restrictions:**: Escape special characters, such as " with `\"`
+  - `disableTailwind`
 
-- `disableTailwind`
+    - **Description**: Disables site tailwind theme. The site tailwind theme is disabled by default, set this variable to `false` to enable site tailwind theme. You may want to enable the tailwind theme if the migrated site will add new bodiless JS components. Note that enabling the tailwind theme in some cases may interfere with the migrated site's styling.
 
-  - **Description**: Disables site tailwind theme. The site tailwind theme is disabled by default, set this variable to `false` to enable site tailwind theme. You may want to enable the tailwind theme if the migrated site will add new bodiless JS components. Note that enabling the tailwind theme in some cases may interfere with the migrated site's styling.
+    - **Accepted Formats:** `true` or `false`
 
-  - **Accepted Formats:** `true` or `false`
+    - **Default Value:** `true`
 
-  - **Default Value:** `true`
+  - `allowFallbackHtml`
 
-- `allowFallbackHtml`
+    - **Description**: Optional setting to push original html body into the page component file and report a message in the output when migration encounters an error from body section of html. If disabled with value `false`, migration skips generation of JSX on page parsing errors.
 
-  - **Description**: Optional setting to push original html body into the page component file and report a message in the output when migration encounters an error from body section of html. If disabled with value `false`, migration skips generation of JSX on page parsing errors.
+    - **Accepted Formats**: Boolean (true or false)
 
-  - **Accepted Formats**: Boolean (true or false)
-
-  - **Default Value:** `true`
+    - **Default Value:** `true`
 
 
-- `context`
+  - `context`
 
-  - **Description**: A list of pages in which the rule should be applied.
+    - **Description**: A list of pages in which the rule should be applied.
 
-  - **Accepted Formats:**: Please follow [minimatch](https://github.com/isaacs/minimatch) syntax to compose url pattern
+    - **Accepted Formats:**: Please follow [minimatch](https://github.com/isaacs/minimatch) syntax to compose url pattern
 
 - **Examples:**
 
@@ -252,20 +250,27 @@ Options:
 
 The following process will rehydrate (or replace specific html element components with React named components.)
 
-In the `packages/bodiless-migration-tool/conf/settings.json`
+In the `packages/bodiless-migration-tool/settings.json`
 
-Specify `replace` Rules
+Specify `tocomponent` Rules
 
 1. `selector`
 
   - **Description:** selector for the element(s) that should be extracted into React components
 
-  1. `component` name of the React component
-    - **Description:** selector for the element(s) that should be extracted into React components
+1. `replacement`
+
+  - **Description:**  name of the React component that should be replaced with.
+
+*Note*: Normally we extract common elements into shareable React component, for
+example, Header and Footer component. If there are dynamic elements inside the
+extracted component, i.e. active menu item with highlighted styles inside
+Header component, we will need to further process the hydrated component to
+make menu working.
 
 ##### Example
 
-View [conf/settings.json](conf/settings.json)
+View [examples/settings/to_components.json](examples/settings/to_components.json)
 
 ### Usage
 
