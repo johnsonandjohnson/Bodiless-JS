@@ -9,10 +9,10 @@ import { TagsNodeType } from '../src/TagButton/types';
 type TestData = { [key: string]: TagsNodeType };
 
 const testTags: TestData = {
-  foo: { tags: [{ id: 0, name: 'foo' }] },
-  bar: { tags: [{ id: 1, name: 'bar' }] },
-  baz: { tags: [{ id: 2, name: 'baz' }] },
-  bat: { tags: [{ id: 3, name: 'baz' }] },
+  foo: { tags: [{ id: 'fooID', name: 'foo' }] },
+  bar: { tags: [{ id: 'barID', name: 'bar' }] },
+  baz: { tags: [{ id: 'batID', name: 'bat' }] },
+  bat: { tags: [{ id: 'bazID', name: 'baz' }] },
 };
 
 const getMockNode = () => {
