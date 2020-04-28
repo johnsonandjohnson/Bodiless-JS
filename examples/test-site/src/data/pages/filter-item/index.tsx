@@ -11,13 +11,56 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from 'react';
+import React, { useState } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 // @ts-ignore TS7016: Could not find a declaration file for module .. implicitly has an 'any' type
+import { TagType } from '@bodiless/core';
+import { H2 } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
-import TaggableFilterSelector from '../../../components/Filter';
+import TaggableFilterableItem, { TagButton } from '../../../components/Filter';
 
+const getSuggestions = () => [
+  { id: 'fooId', name: 'foo' },
+  { id: 'barId', name: 'baz' },
+  { id: 'bazId', name: 'bat' },
+  { id: 'batId', name: 'bar' },
+];
+const TaggableFilterSelector = () => {
+  const [tags, setTags] = useState<TagType[]>([]);
+  const FilterButtons = getSuggestions().map(tag => (
+    <TagButton key={tag.id} onClick={() => setTags([tag])}>
+      {tag.name}
+    </TagButton>
+  ));
+  const props = {
+    getSuggestions,
+    placeholder: 'Add or create',
+    formTitle: 'Groups',
+    seeAllText: 'See all groups',
+    formBodyText: 'Select from available tags:',
+    allowNew: true,
+    noSuggestionsText: 'No suggestions found',
+  };
+  return (
+    <div>
+      <div>
+        <H2>Select a tag to filter by</H2>
+        {FilterButtons}
+        <TagButton id="show-all" onClick={() => setTags([])}>
+          All
+        </TagButton>
+      </div>
+      <div>
+        <h2>Filtered Components</h2>
+        <TaggableFilterableItem {...props} id="item1" nodeKey="item1" key="item1" selectedTags={tags}>Item 1</TaggableFilterableItem>
+        <TaggableFilterableItem {...props} id="item2" nodeKey="item2" key="item2" selectedTags={tags}>Item 2</TaggableFilterableItem>
+        <TaggableFilterableItem {...props} id="item3" nodeKey="item3" key="item3" selectedTags={tags}>Item 3</TaggableFilterableItem>
+        <TaggableFilterableItem {...props} id="item4" nodeKey="item4" key="item4" selectedTags={tags}>Item 4</TaggableFilterableItem>
+      </div>
+    </div>
+  );
+};
 export default (props: any) => (
   <Page {...props}>
     <Layout>

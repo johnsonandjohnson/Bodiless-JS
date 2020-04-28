@@ -19,7 +19,7 @@ import { isEmpty } from 'lodash';
 import ReactTags, { ReactTagsProps, Tag as ReactTagType } from 'react-tag-autocomplete';
 
 export type TagType = {
-  id: string | number,
+  id: string,
   name: string,
 } | ReactTagType;
 
@@ -45,7 +45,7 @@ const ReactTagsField = (props: ReactTagsFieldProps) => {
   const handleAddition = (tag: TagType) => {
     let tagToAdd = tag;
 
-    if (typeof tagToAdd.id !== 'number' && isEmpty(tagToAdd.id)) {
+    if (isEmpty(tagToAdd.id)) {
       tagToAdd = new Tag(tag.name);
     }
 

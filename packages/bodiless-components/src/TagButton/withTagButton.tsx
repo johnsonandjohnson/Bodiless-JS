@@ -51,6 +51,7 @@ export const tagButtonOptions:EditButtonOptions<TagButtonProps & HTMLProps<HTMLE
       seeAllText = 'See all tags',
       autofocus = false,
     } = componentProps;
+
     const suggestions = getSuggestions();
 
     const context = useEditContext();

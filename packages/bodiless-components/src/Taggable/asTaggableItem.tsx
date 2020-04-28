@@ -41,11 +41,10 @@ const emptyValue = {
 // - anything relying on the context (activator, indicator) must be
 //   *after* `withEditButton()` as this establishes the context.
 // - withData must be *after* the data handlers are defiend.
-export const asTaggableItem = (nodeKey?: string) => flowRight(
+const asTaggableItem = (nodeKey?: string) => flowRight(
   withNodeKey(nodeKey),
   withNode,
   withNodeDataHandlers(emptyValue),
-  ifReadOnly(withoutProps(['setComponentData'])),
   ifEditable(
     withTagButton(),
     withContextActivator('onClick'),
@@ -60,6 +59,7 @@ export const asTaggableItem = (nodeKey?: string) => flowRight(
     'seeAllText',
     'formBodyText',
     'formTitle',
+    'setComponentData',
   ]),
 ) as Bodiless<Props, Props & Partial<WithNodeProps>>;
 export default asTaggableItem;
