@@ -1,6 +1,6 @@
 import React, { useState, FC } from 'react';
 import { flow } from 'lodash';
-import { withNode, DefaultContentNode, NodeProvider } from '@bodiless/core';
+import { withNode, DefaultContentNode, NodeProvider,TagType } from '@bodiless/core';
 
 import { mount } from 'enzyme';
 import withFilterByTags from '../src/withFilterByTags';
@@ -35,21 +35,21 @@ const FilterableItem = flow(
 )(TestDiv) as React.ComponentType<any>;
 
 const TestFilterSelector = () => {
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<TagType[]>([]);
   return (
     <div>
       <div>
         <h2>Select a tag to filter by</h2>
-        <button id="show-foo" type="button" onClick={() => setTags(['foo'])}>
+        <button id="show-foo" type="button" onClick={() => setTags([{ id:'fooID', name:'foo'}])}>
           foo
         </button>
-        <button id="show-bar" type="button" onClick={() => setTags(['bar'])}>
+        <button id="show-bar" type="button" onClick={() => setTags([{ id:'barID', name:'bar'}])}>
           bar
         </button>
-        <button id="show-baz" type="button" onClick={() => setTags(['baz'])}>
+        <button id="show-baz" type="button" onClick={() => setTags([{ id:'barID', name:'bat'}])}>
           baz
         </button>
-        <button id="show-bat" type="button" onClick={() => setTags(['bat'])}>
+        <button id="show-bat" type="button" onClick={() => setTags([{ id:'bazID', name:'baz'}])}>
           bat
         </button>
       </div>
