@@ -17,15 +17,14 @@ import React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
 import { flow } from 'lodash';
 
+import asTaggableItem from '../src/Taggable/asTaggableItem';
+
 const setEditMode = (isEdit: boolean) => {
   // @TODO bodiless-core internals should not be touched
   // bodiless-core should be refactored to allow injecting of default edit mode
   window.sessionStorage.isEdit = isEdit;
 };
 setEditMode(true);
-
-// eslint-disable-next-line import/first
-import { asTaggableItem } from '../src/Taggable/Item';
 
 const getSuggestions = () => [
   { id: 3, name: 'Bananas' },
