@@ -21,7 +21,6 @@ import {
   WithNodeProps,
   ifEditable,
   Bodiless,
-  ifReadOnly,
   withNodeKey,
   withoutProps,
 } from '@bodiless/core';
