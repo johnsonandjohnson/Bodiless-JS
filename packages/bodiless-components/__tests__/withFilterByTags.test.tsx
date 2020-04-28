@@ -3,7 +3,7 @@ import { flow } from 'lodash';
 import { withNode, DefaultContentNode, NodeProvider } from '@bodiless/core';
 
 import { mount } from 'enzyme';
-import { withFilterByTags } from '../src/filterHOC';
+import withFilterByTags from '../src/withFilterByTags';
 import { TagsNodeType } from '../src/TagButton/types';
 
 type TestData = { [key: string]: TagsNodeType };
