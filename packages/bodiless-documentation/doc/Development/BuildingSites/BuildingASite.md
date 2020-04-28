@@ -1,6 +1,6 @@
-# Building a Site using BodilessJS
+# Building a Site using Bodiless
 
-This guide is a suggested process for building sites using BodilessJS.  The use case maybe a site build is a brand new site build with new assets (Typography, Design & Copy Deck) or we could be rebuilding an existing site on this platform.  We will point out where differences in the new site build versus replicating existing site may be in this process, but essentially the methodology used is similar for either type of build.
+This guide is a suggested process for building sites using Bodiless.  The use case maybe a site build is a brand new site build with new assets (Typography, Design & Copy Deck) or we could be rebuilding an existing site on this platform.  We will point out where differences in the new site build versus replicating existing site maybe in this process, but essentially the methodology used is similar for either type of build.
 
 ## Table of Contents
 * [Prerequisites](#Prerequisites)
@@ -13,11 +13,11 @@ This guide is a suggested process for building sites using BodilessJS.  The use 
 
 ## Prerequisites:
 
-As a precursor we highly recommend reading the following basics & guides as this guide builds upon that knowledge.
+As a precursor, we highly recommend reading the following basics & guides as this guide builds upon that knowledge.
 
-* [Creating a Site](https://johnsonandjohnson.github.io/Bodiless-JS/#/About/GettingStarted)
-* [Site Build Basics](https://johnsonandjohnson.github.io/Bodiless-JS/#/About/SiteBuildBasics)
-* [Design System Architecture](https://johnsonandjohnson.github.io/Bodiless-JS/#/Development/Architecture/FClasses)
+* [Creating a Site](#/About/GettingStarted)
+* [Site Build Basics](#/About/SiteBuildBasics)
+* [Design System Architecture](#/Development/Architecture/FClasses)
 * [Tailwind](https://tailwindcss.com/)
 
 
@@ -25,10 +25,10 @@ If a New Site Build
 * Assets for site could include Typography, Design Mockups, Copy Deck, Sitemap, Wireframes, and Image/Font/Video and other assets.
 
 If Rebuilding an Existing Site
-* The assets can be obtained from the existing site.   Because BodilessJS has a [migration tool](https://johnsonandjohnson.github.io/Bodiless-JS/#/Tools/Migration?id=flattened-amp-build-filesassets), this tool could be run and copy over the /static file it generates as a shortcut to gather all assets.
+* The assets can be obtained from the existing site.   Because BodilessJS has a [migration tool](#/Tools/Migration?id=flattened-amp-build-filesassets), this tool could be run and copy over the /static file it generates as a shortcut to gather all assets.
 
 ## 1. Create a new site with the Bodiless Starter
-1. Following the directions to create a new site using the [starter site](https://johnsonandjohnson.github.io/Bodiless-JS/#/About/GettingStarted).
+1. Following the directions to create a new site using the [starter site](#/About/GettingStarted).
 
 ## 2. Setting up design style of your site using Element tokens
 
@@ -115,7 +115,7 @@ The fonts can be applied in one of two ways:
    const asHeader1 = addClasses('text-3xl font-custom_font')
    ```
 ## 3. Identifying Components
-A BodilessJS site is built out of many components.  The starter kit comes with some ready-made and re-usable components and can be found in `/src/components`
+A Bodiless site is built out of many components.  The starter kit comes with some ready-made and re-usable components and can be found in `/src/components`
 
 ### Components that come in the Starter Kit
 The following components are part of the Starter Kit and you can start modifying to meet your requirements.
@@ -127,14 +127,14 @@ The following components are part of the Starter Kit and you can start modifying
     * Basic : Superscript, Bold, Italic, Underline, Link, Align Text
     * Full Featured : adds in more functionality to Basic such as Strikethru, headers, quotes.
  * Touts `src/components/Touts`
- For a more in-depth guide about these see [Explanation of Components that come in the Starter Kit](https://johnsonandjohnson.github.io/Bodiless-JS/#/Development/BuildingSites/ComponentsStarterKit).
+ For a more in-depth guide about these see [Explanation of Components that come in the Starter Kit](#/Development/BuildingSites/ComponentsStarterKit).
 
 ### Identify Components used in Site and their variations
 Since the whole building of the site is composed of components.  The first step is determining what components your site will need.  The above components provided by the starter kit are fundamental components your site will most likely use.  If you do not need, feel free to remove them.
 
 As you look through the site build (Assets provide for a new site or existing site), you will want to identify types of components required. 
 
-This requires more in-depth walk thru so continue with [How to Identify Components & Variations](https://johnsonandjohnson.github.io/Bodiless-JS/#/Development/BuildingSites/IdentifyingComponentsGuide).
+This requires more in-depth walk thru so continue with [How to Identify Components & Variations](#/Development/BuildingSites/IdentifyingComponentsGuide).
 
 So at this point, you should now have list of components your new site will use as well as possible variations of any of those components. This will help determine 
 * what components you can use from Bodiless as is.
@@ -155,7 +155,7 @@ If you see a pattern that site uses same layout more than once, which you would 
 
 Besides templates, providing a fast layout that the site builder can use per page, it also allows control or governance over what the site editor can add/do/remove from the page. In addition, this also allows site builder to make future changes to all pages built off these templates, without editing each individual page. 
 
-Let's take a look at the BodilessJS templates in the Test Site and review each of these.  In the BodilessJS [Test Site Homepage ](https://johnsonandjohnson.github.io/Bodiless-JS/#/About/GettingStarted?id=launch-the-test-site) there are currently three 4 types of [templates](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/test-site/src/templates) in use.
+Let's take a look at the BodilessJS templates in the Test Site and review each of these.  In the BodilessJS [Test Site Homepage ](#/About/GettingStarted?id=launch-the-test-site) there are currently three 4 types of [templates](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/test-site/src/templates) in use.
 * [_default](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/templates/_default.jsx) 
     * This provides a simple page with header/footer and flexbox area in the page to add any component the flexbox supports.
     * The site editor has control to add/remove components anywhere between the header/footer.  The flexbox area also poses no limitation to what can be added here so any components that flexbox supports can be added.
@@ -199,7 +199,7 @@ This step is a repeatable step for every template or one-off page + components i
     * Suggested pattern if its reusable define in `/src/components`.
     * If its really custom component (or variation) only meant for this page, you can define locally within the template. 
 1. Define Element tokens that may be needed to support the page/components utilized.(`src/components/Elements.tokens.ts`)
-1. Create a page in `src/data/pages` to use the template by creating `index.json` with definiting what templates to use. The `#template` this page will use the the specified template. `#subpage_template` (Optional) any children pages of this page will use the the specified template.
+1. Create a page in `src/data/pages` to use the template by creating `index.json` with defining what templates to use. The `#template` this page will use the the specified template. `#subpage_template` (Optional) any children pages of this page will use the the specified template.
      ``` 
      {
        "#template": "product_listing",
