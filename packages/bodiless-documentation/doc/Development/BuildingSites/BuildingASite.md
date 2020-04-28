@@ -168,7 +168,9 @@ This section has many different components that can be built out.
 
 We recommend reading some of the following guides:
 
-* As described in Components section, the Rich Text Editor comes with a few editors.  We suggest [refining the editor components](Development/BuildingSites/RichTextEditors.md) to meet your site's requirements.
+* As described in Components section, the Rich Text Editor comes with a few editors.  We suggest [refining the editor components](#/Development/BuildingSites/RichTextEditors.md) to meet your site's requirements.
+* [Building Components Guide](#/Development/BuildingSites/BuildingComponents.md)
+* [FlowContainer Guide](#/Development/BuildingSites/FlowContainer.md)
 
 ## 4. Identifying Templates or One-off Custom Pages
 
