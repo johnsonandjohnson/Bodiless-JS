@@ -5,10 +5,9 @@ This guide is a suggested process for building sites using Bodiless.
 ## Table of Contents
 * [Prerequisites](#Prerequisites)
 * [1. Creating a New Site](#1-Create-a-new-site-with-the-Bodiless-Starter)
-* [2. Setting up design style of your site using Element tokens](#2-Setting-up-design-style-of-your-site-using-Element-tokens)
-* [3. Identifying Components](#3-Identifying-Components)
-* [4. Identifying Templates or One-off Custom Pages](#4-Identifying-Templates-or-One-off-custom-pages)
-* [5. Build a Page/Template with its components required to build out the page](#6-Build-a-PageTemplate-with-its-components-required-to-build-out-the-page)
+* [2. Setting up Design System](#2-Setting-up-Design-System)
+* [3. Components](#3-Components)
+* [4. Templates or One-off Custom Pages](#4-Templates-or-One-off-custom-pages)
 
 ## Prerequisites:
 
@@ -24,33 +23,16 @@ As a precursor, we highly recommend reading the following basics & guides as thi
 ## 1. Create a new site with the Bodiless Starter
 1. Follow the directions to create a new site using the [starter site](#/About/GettingStarted).
 
-## 2. Setting up design style of your site using Element tokens
+## 2. Setting up Design System
 
 This is where you will begin setting up your typography requirements of a site.
 
 Bodiless use Design Tokens to start developing the simple/atomic design elements used for a site. These are the foundation elements/tokens that you can build upon to extend and build a design system for your site. These Element Tokens can be found in `src/components/Elements.token.ts` and the starter kit provides a beginning set of tokens to start utilizing. These can be customized to meet your requirements and additional ones can be added.
 
-### Setup Basic Typography
+### Setup Tokens 
 
 #### Elements.token & Tailwind
-`Elements.token.ts` utilizes addClasses() to add utility-first classes, usually these are Tailwind classes but regular classes can be added as well, and you may find you need to add additional colors and other styling than the default Tailwind configuration provides.  
-
-##### Using Tailwind system with Bodiless
-
-Adding additional styling can be done by editing `tailwind.config.js` following [Tailwind documentation](https://tailwindcss.com/docs/configuration).  The starter kit has a empty Tailwind configuration which means that site will get all Tailwind's default settings in a generated index.css.  Tailwind allows you to replace or extend the settings. If you are using Bodiless components which may be using default tailwind classes, we suggest you [extend](https://tailwindcss.com/docs/theme/#extending-the-default-theme) instead of replace using theme.extend.
-
-```
-    extend: {
-      colors: {
-        brand_blue: '#004c97',
-        brand_lightblue: '#017eb3',
-        brand_mediumblue: '#009cde',
-      },
-    },  
-```
-This will add additional brand colors to the all the default tailwind colors.  While this may produce a large css file, when the static site builds it utilizes [purge css features](https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css) to remove unused css and keep this css file small for best performance.
-
-Each time you make a change in tailwind.config.js you need to make sure your run `npm run build:css` to regenerate a new `src/components/index.css` that is automatically included for the site.  The css build will happen automatically whenever you do command `npm run start` and start your site but if you are in local develop and site is running, you can run this as separate command and site will hotload the index.css file.
+`Elements.token.ts` utilizes addClasses() to add utility-first classes, usually these are Tailwind classes but regular classes can be added as well, and you may find you need to add additional colors and other styling than the default Tailwind configuration provides. For more information on using [Tailwind with Bodiless](#/Development/BuildingSites/TailwindGuide.md)
 
 ##### Tokens in Elements.token.ts
 
@@ -99,7 +81,6 @@ The `Elements.token.ts` consists of your atoms or building blocks that will be s
 As you create more elements & components, a site builder has the choice to either add them to `Elements.token.ts`, a new additional `NAME.token.ts` file, or a component folder.  A suggested practice is the following:
 * Very small, atom-like, that are reused across site go into `Elements.token.ts`
 * Specific tokens (still very atom or small molecules) that are reused throughtout but not large enough to be their own folder with a descriptive title.  A example of page.token.ts where you store an editable h1 title & h2 title components. 
-* Create components (larger molecules/organisms) in their own folders if they are larger/more complex/multiple versions and/or have complex styling.  The recommendation is a folder name as name of component.  Within the folder component, a suggested pattern is it will have at least an index.tsx that defines the HOC and a token.ts file that contains the design styling of the component. 
 
 ### Fonts
 Websites often use custom fonts and Bodiless is very flexible in how these can be added. 
@@ -164,7 +145,7 @@ and with this knowledge can help scope, estimate & plan the site build.
 
 ### Building out Components
 
-This section has many different components that can be built out.
+You can start building out components that have been identified as reusable or wait until template/page is built that needs that component.
 
 We recommend reading some of the following guides:
 
@@ -172,9 +153,11 @@ We recommend reading some of the following guides:
 * [Building Components Guide](#/Development/BuildingSites/BuildingComponents.md)
 * [FlowContainer Guide](#/Development/BuildingSites/FlowContainer.md)
 
-## 4. Identifying Templates or One-off Custom Pages
+In general we recommend as best practice to create components in their own folders if they are larger/more complex/multiple versions and/or have complex styling.  The recommendation is a folder name as name of component.  Within the folder component, a suggested pattern is it will have at least an index.tsx that defines the HOC and a token.ts file that contains the design styling of the component. 
 
-### Templates
+## 4. Templates or One-off Custom Pages
+
+### Identifying Templates
 
 Bodiless uses templates to help make your site build faster by reusing similar page types.  The next step in the process is to analyze the site build (assets provided for a new site or existing site) looking for commonality in the page layouts.  Often you might find the following:
 * Article Pages (Could be one article layout style or several article styles)
@@ -219,18 +202,18 @@ A site may have just a custom layout for a single page.  For example, a homepage
 If in the future, if similar pages are added they could be refactored into a template.
 
 
-## 5. Build a Page/Template with its components required to build out the page.
+### Building out Page/Template with its components required to build out the page.
 
 This step is a repeatable step for every template or one-off page + components identified in the previous 2 steps.
 
-### One-off Pages:
+#### Building One-off Pages:
 1. Create & Develop the page in `/src/data/pages/PATH`
 1. Develop Or Extend Components needed for the page. (`/src/components`) or locally in the page.
     * Suggested pattern if its reusable component/token define in `/src/components`.
     * If its really custom component (or variation) only meant for this page, you can define locally within the page, or as another file in the page folder. If in future, you determine to reuse the component on another page, its suggested to move to `/src/components` and not try share with other pages.
 1. Define Element tokens that may be needed to support the page/components utilized. (`src/components/Elements.tokens.ts` or a new `src/components/NAME.tokens.ts` )
 
-### Templates:
+#### Building Templates:
 1. Create & Develop the template in `/src/templates`
 1. Develop Or Extend Components needed for the template. (`/src/components`)
     * Suggested pattern if its reusable define in `/src/components`.
@@ -243,3 +226,4 @@ This step is a repeatable step for every template or one-off page + components i
        "#subpage_template": "product_detail"
      }
     ```
+1. Create pages that use the templates.
