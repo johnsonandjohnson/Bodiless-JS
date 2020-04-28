@@ -23,6 +23,20 @@
             "cwd": "${workspaceFolder}/examples/starter",
         },
         {
+            "name": "Bodiless CLI Pack",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/packages/bodiless-cli/bin/bodiless",
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "pack",
+                "-s ..",
+                "--force",
+                "-p @bodiless/core",
+                "--skip-install",
+            ]
+        },
+        {
             "name": "Launch Current File",
             "type": "node",
             "request": "launch",

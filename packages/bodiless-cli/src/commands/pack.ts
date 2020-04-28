@@ -58,14 +58,18 @@ async function installDeps(map: PackageMap, spawner: Spawner) {
  * Filters a dependency map to remove any not required by the site.
  */
 const getDepsToReplace = (map: PackageMap, explicitPackages?: string[], force: boolean = false) => {
-  const packageJson = fs.readFileSync(path.join('.', 'package.json'));
-  const packageJsonData = JSON.parse(packageJson.toString());
-  const { dependencies, devDependencies } = packageJsonData;
-  let depNames = [...Object.keys(dependencies || {}), ...Object.keys(devDependencies || {})];
+  let keys = Object.keys(map);
   if (explicitPackages) {
-    depNames = force ? explicitPackages : intersection(explicitPackages, depNames);
+    keys = intersection(keys, explicitPackages);
   }
-  return pick(map, depNames);
+  if (keys && !force) {
+    const packageJson = fs.readFileSync(path.join('.', 'package.json'));
+    const packageJsonData = JSON.parse(packageJson.toString());
+    const { dependencies, devDependencies } = packageJsonData;
+    const depNames = [...Object.keys(dependencies || {}), ...Object.keys(devDependencies || {})];
+    keys = intersection(keys, depNames);
+  }
+  return pick(map, keys);
 };
 
 
@@ -76,7 +80,8 @@ export default class Pack extends Command {
   static description = 'Pack and install dependencies from a local monorepo.';
 
   static examples = [
-    '$ bodiless pack /path/to/local/monorepo',
+    '$ bodiless pack -r /path/to/local/monorepo',
+    '$ bodiless pack -s /path/to/site',
   ];
 
   static flags = {
@@ -84,25 +89,32 @@ export default class Pack extends Command {
     package: commandFlags.string({
       char: 'p',
       multiple: true,
-      description: 'Name of package to bundle. may be specified more than once. If omitted, will bundle all matching dependencies',
+      parse: p => p.trim(),
+      description: 'Name of package to bundle. May be specified more than once. If omitted, will bundle all matching dependencies.',
     }),
     'skip-install': commandFlags.boolean({
       description: 'Only pack, do not install.',
     }),
     force: commandFlags.boolean({
       char: 'f',
-      description: 'Install packages even if not current dependencies',
+      description: 'Install packages even if they are not existing dependencies of the site',
+    }),
+    'dry-run': commandFlags.boolean({
+      description: 'Do not pack or install. Just show list of matching packages.',
     }),
     site: commandFlags.string({
-      description: 'Path to the site into which you wish to install packages. Defaults to current directory',
+      char: 's',
+      default: path.resolve('.'),
+      parse: s => path.resolve(s.trim()),
+      description: 'Path to the site into which you wish to install packages, relative to the current directory. Defaults to `.`',
+    }),
+    repo: commandFlags.string({
+      char: 'r',
+      default: path.resolve('.'),
+      parse: r => path.resolve(r.trim()),
+      description: 'Path to the local lerna monorepo, relative to the current directory. Must contain the package source in a `packages` directory. Defaults to `.`',
     }),
   };
-
-  static args = [{
-    name: 'repo',
-    description: 'Path to the local monorepo, relative to the current directory',
-    required: true,
-  }];
 
   /**
    * Gets a map of all packages in a monorepo, containing tarball name and directory keyed by
@@ -129,24 +141,32 @@ export default class Pack extends Command {
 
   async run() {
     try {
-      const { args, flags } = this.parse(Pack);
-      if (flags.site) {
-        process.chdir(flags.site);
+      const { flags } = this.parse(Pack);
+      const destIsSrc = flags.repo === flags.site;
+      if (destIsSrc) {
+        this.warn('Monorepo and site paths are the same. Assuming --force and --skip-install.');
       }
-      const packageMap = this.getPackageMap(path.join(args.repo, 'packages'));
-      const { package: explicitPackages } = flags;
-      const deps = getDepsToReplace(packageMap, explicitPackages, flags.force);
+      process.chdir(flags.site);
+      const packageMap = this.getPackageMap(path.join(flags.repo, 'packages'));
+      // Cast is necessary bc typings do not prpperly handle multiple flags with parse functions.
+      // Type of flags.package is string and should be string[].
+      const { package: explicitPackages } = flags as any as { package: string[] };
+      const deps = getDepsToReplace(packageMap, explicitPackages, flags.force || destIsSrc);
       if (isEmpty(deps)) {
-        this.error('No matching packages');
+        this.error('No matching dependencies to pack. Use --force (-f) to pack anyway.');
       }
-      const spawner = new Spawner(path.resolve(args.repo));
+      if (flags['dry-run']) {
+        const list = Object.keys(deps).join(', ');
+        this.log(`Dry run. Packages which would be packed/installed: ${list}`);
+        this.exit(0);
+      }
+      const spawner = new Spawner(flags.repo);
       await packDeps(deps, spawner);
-      if (!flags['skip-install']) {
+      if (!flags['skip-install'] && !destIsSrc) {
         await installDeps(deps, spawner);
       }
       this.log('Done');
     } catch (e) {
-      this.error('An unexpected error was encountered');
       this.error(e);
     }
   }

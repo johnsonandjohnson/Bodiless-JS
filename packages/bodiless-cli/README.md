@@ -18,7 +18,7 @@ USAGE
 ## Commands
 <!-- commands -->
 * [`bodiless help [COMMAND]`](#bodiless-help-command)
-* [`bodiless pack REPO`](#bodiless-pack-repo)
+* [`bodiless pack`](#bodiless-pack)
 
 ## `bodiless help [COMMAND]`
 
@@ -37,31 +37,36 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.3/src/commands/help.ts)_
 
-## `bodiless pack REPO`
+## `bodiless pack`
 
 Pack and install dependencies from a local monorepo.
 
 ```
 USAGE
-  $ bodiless pack REPO
-
-ARGUMENTS
-  REPO  Path to the local monorepo, relative to the current directory
+  $ bodiless pack
 
 OPTIONS
-  -f, --force            Install packages even if not current dependencies
+  -f, --force            Install packages even if they are not existing dependencies of the site
   -h, --help             show CLI help
 
-  -p, --package=package  Name of package to bundle. may be specified more than once. If omitted, will bundle all
-                         matching dependencies
+  -p, --package=package  Name of package to bundle. May be specified more than once. If omitted, will bundle all
+                         matching dependencies.
 
-  --site=site            Path to the site into which you wish to install packages. Defaults to current directory
+  -r, --repo=repo        [default: /Users/coden/canvasx/Bodiless-JS/packages/bodiless-cli] Path to the local lerna
+                         monorepo, relative to the current directory. Must contain the package source in a `packages`
+                         directory. Defaults to `.`
+
+  -s, --site=site        [default: /Users/coden/canvasx/Bodiless-JS/packages/bodiless-cli] Path to the site into which
+                         you wish to install packages, relative to the current directory. Defaults to `.`
+
+  --dry-run              Do not pack or install. Just show list of matching packages.
 
   --skip-install         Only pack, do not install.
 
-EXAMPLE
-  $ bodiless pack /path/to/local/monorepo
+EXAMPLES
+  $ bodiless pack -r /path/to/local/monorepo
+  $ bodiless pack -s /path/to/site
 ```
 
-_See code: [lib/commands/pack.js](https://github.com/johnsonandjohnson/bodiless-js/blob/v0.0.39/lib/commands/pack.js)_
+_See code: [lib/commands/pack.js](https://github.com/johnsonandjohnson/bodiless-js/blob/v0.0.47/lib/commands/pack.js)_
 <!-- commandsstop -->
