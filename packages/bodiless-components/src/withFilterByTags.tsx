@@ -54,4 +54,4 @@ const withFilterByTags = flowRight(
 );
 
 export { ifTagsSelected, ifTagsNotSelected };
-export default withFilterByTags
+export default withFilterByTags;

@@ -22,9 +22,9 @@ import TaggableFilterableItem, { TagButton } from '../../../components/Filter';
 
 const getSuggestions = () => [
   { id: 'fooId', name: 'foo' },
-  { id: 'barId', name: 'baz' },
-  { id: 'bazId', name: 'bat' },
-  { id: 'batId', name: 'bar' },
+  { id: 'fooId', name: 'bar' },
+  { id: 'batId', name: 'bat' },
+  { id: 'bazId', name: 'baz' },
 ];
 const TaggableFilterSelector = () => {
   const [tags, setTags] = useState<TagType[]>([]);
