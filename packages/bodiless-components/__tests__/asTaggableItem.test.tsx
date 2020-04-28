@@ -17,8 +17,6 @@ import React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
 import { flow } from 'lodash';
 
-import asTaggableItem from '../src/Taggable/asTaggableItem';
-
 const setEditMode = (isEdit: boolean) => {
   // @TODO bodiless-core internals should not be touched
   // bodiless-core should be refactored to allow injecting of default edit mode
@@ -26,18 +24,24 @@ const setEditMode = (isEdit: boolean) => {
 };
 setEditMode(true);
 
+// eslint-disable-next-line import/first
+import asTaggableItem from '../src/Taggable/asTaggableItem';
+
 const getSuggestions = () => [
-  { id: 3, name: 'Bananas' },
-  { id: 4, name: 'Mangos' },
-  { id: 5, name: 'Lemons' },
-  { id: 6, name: 'Apricots' },
+  { id: 'a', name: 'Bananas' },
+  { id: 'b', name: 'Mangos' },
+  { id: 'c', name: 'Lemons' },
+  { id: 'd', name: 'Apricots' },
 ];
 
 const props = {
   getSuggestions,
+  placeholder: 'Add or create',
+  formTitle: 'Groups',
+  seeAllText: 'See all groups',
+  formBodyText: 'Select from available tags:',
   allowNew: true,
-  placeholder: 'placeholder',
-  noSuggestionsText: 'no suggestions',
+  noSuggestionsText: 'No suggestions found',
   inputAttributes: { name: 'react-tags' },
 };
 
@@ -56,12 +60,12 @@ describe('Filter item interactions', () => {
   it('should render menu item when clicked', () => {
     wrapper = mount(
       <Taggable {...itemProps}>
-        <div>test</div>
+        <div id="test">test</div>
       </Taggable>,
     );
     const item = wrapper.find({ ...itemProps }).at(0);
     expect(item).toHaveLength(1);
-    item.find('div').simulate('click');
+    item.find('div#test').simulate('click');
     menuButton = wrapper.find('i');
     expect(menuButton.text()).toBe('local_offer');
   });
@@ -83,8 +87,8 @@ describe('Filter item interactions', () => {
 
   it('React Tags should have all props', () => {
     const reactTags = wrapper.find('ReactTags');
-    expect(reactTags.prop('placeholder')).toBe('placeholder');
-    expect(reactTags.prop('noSuggestionsText')).toBe('no suggestions');
+    expect(reactTags.prop('placeholder')).toBe('Add or create');
+    expect(reactTags.prop('noSuggestionsText')).toBe('No suggestions found');
     expect(reactTags.prop('allowNew')).toBe(true);
   });
   it('context form should have input fields with cancel and done buttons', () => {
@@ -95,7 +99,7 @@ describe('Filter item interactions', () => {
     expect(tagsInputFields).toHaveLength(2);
     expect(tagsInputFields.at(0).prop('value')).toBe('');
     expect(tagsInputFields.at(0).prop('type')).toBe('hidden');
-    expect(tagsInputFields.at(1).prop('placeholder')).toBe('placeholder');
+    expect(tagsInputFields.at(1).prop('placeholder')).toBe('Add or create');
 
     // Cancel and add buttons:
     const cancelButton = menuForm.find('button[aria-label="Cancel"]');
