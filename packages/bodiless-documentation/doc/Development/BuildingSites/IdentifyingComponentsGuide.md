@@ -1,69 +1,53 @@
 # Guide in Identifying Components & Variations
 
-Let's use [Examples/Test Site homepage](https://johnsonandjohnson.github.io/Bodiless-JS/#/About/GettingStarted?id=launch-the-test-site)  as an example.  It consists of:
+A site builder can look through an existing site that is being rebuilt or the
+site design assets and choose how to build it out as as components. A good guide
+would be try keep components as smaller componets that can be reused or composed
+together to create more complex componets
+
+## Identifying Components
+
+Let's use
+[Examples/Test Site homepage](https://johnsonandjohnson.github.io/Bodiless-JS/#/About/GettingStarted?id=launch-the-test-site)
+as an example. It consists of:
 
 * Header
-    * Logo
-    * Menu
+  * Logo (Clickable Image)
+  * Menu
 * Header Image
 * Title
 * Bullet Points
 * Touts
 * Footer with Copyright
 
-The Header & Footer Global are components coming from [/src/components/Layout](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/test-site/src/components/Layout)
-* Inspection of the [Header.tsx](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/components/Layout/header.tsx) file show that it consists of few components
-    * Linkable Image for Logo
-    * Menu 
-    * Mobile Menu 
-* Inspection of the [Footer.tsx](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/components/Layout/footer.tsx) is only a Footer with paragraph copy. 
+We have discussed that Header, Menu, Logo, & Footer already come in the Bodiless Starter Kit.
+So thus it leaves the actual page components that are coming from
+[homepage](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/data/pages/index.tsx)
+and if you inspect the code, you can see it was implemented with
 
-The page components are coming from [homepage](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/data/pages/index.tsx) and if you inspect the code, uou can see it was implemented with 
-* Image component for Header Image 
-    * ` <Image className="w-full" nodeKey="header_image" />`
-* Editable component for Title 
-    * ` <Editable nodeKey="title" placeholder="Page Title" /> `
+* Image component for Header Image
+  * `<Image className="w-full" nodeKey="header_image" />`
+* Editable component for Title
+  * `<Editable nodeKey="title" placeholder="Page Title" />`
 * List Component extended for Bullet Points
-    * ` <EditableBulletPoints nodeKey="bulletpoints" />`
-* FlexboxDefault area where Touts (or actually any component) can be added.
-    * ` <FlexBoxDefault nodeKey={HOME_PAGE_PATH} />`
+  * `<EditableBulletPoints nodeKey="bulletpoints" />`
+* FlowContainer area where Touts (or actually any component) can be added.
+  * `<FlowContainerDefault nodeKey={HOME_PAGE_PATH} />`
 
-Besides identifying components on the page or website, a component can have variations. Let's use the Tout page (visit http://localhost:8005/touts/ after you have launched the test site as example of variations.  On this page [and the code reference ](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/data/pages/touts/index.jsx), you can see variations of the touts.  
- * Horitontal tout with Image, Title, Body, Call to Action
- * Horitontal tout with Image, Body, Call to Action
- * Tout with Image & Overlay of Call to Action
- * Tout with Title Overlay & Overlay of Call to Action
- * Vertical Tout with Image, Body, Call to Action
- * Vertical Tout with Image, Title, Body, Call to Action
- * Vertical Tout with Image, Body, Call to Action
- * Tout with Title Overlay
- * Tout with Title Overlay & Call to Action
-    
-All these are the same Tout component but have variations of either styling or what fields are present. 
-* For the variations for styling, a mix of token styles were applied to generate these these variations.  The token styles are define in [`src/components/Tout/token.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/components/Tout/token.tsx) you can see we have applied different classes or tokens to generate these variations. 
-* A component may have for items that you need and you want to make a simpler version of that component and this can be done by removing a component within. For example:
-    ```
-     withDesign({
-       Title: remove,
-     });
-    ```
+Thus we would have to build out or extend these components to create the page.
 
-So with this concept that sometimes a component might just be a slightly different version of the same component (styled different or less sub-components), as you review your assets or existing site and generate a list of components the sites uses, variations of the components and if used globally. 
+## Identifying Variations of Components
 
-So for example, looking at simple brand site could be something like the following:
-* Linkable Image  (Logo)
-* Menu
-    * Header
-    * Footer
-    * BurgerMenu
-* Header Image with Title overlay
-* Hero Tout (Title & Body overlay image)
-* Hero Tout with CTA (Title & Body & CTA overlay image)
-* Product Tout with Reviews
-* Product Tout (Styled different that drives to products)
-* Article Tout (Styled different that drives to articles)
-* Product Image
-* Accordions
-* BulletLists
-    * With Dots
-    * With Images
+The components could come with variations.
+
+Let's take the a header image on a page. You may see variations of this header
+image such as:
+
+* A title that overlays the image in center
+* A title changes how it overlays (left, right, bottom aligments)
+* A title & caption overlays the image in center
+* A title & caption changes how it overlays (left, right, bottom aligments)
+* and probably some other variations that make it banner.
+
+One component could be built and apply different style variations to produce a
+component that meets the requirements.
