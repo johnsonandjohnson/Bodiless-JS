@@ -21,7 +21,7 @@ import TaggableFilterableItem, { TagButton } from '../../../components/Filter';
 
 const getSuggestions = () => [
   { id: 'fooId', name: 'foo' },
-  { id: 'fooId', name: 'bar' },
+  { id: 'barId', name: 'bar' },
   { id: 'batId', name: 'bat' },
   { id: 'bazId', name: 'baz' },
 ];
