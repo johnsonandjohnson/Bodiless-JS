@@ -52,12 +52,11 @@ OPTIONS
   -p, --package=package  Name of package to bundle. May be specified more than once. If omitted, will bundle all
                          matching dependencies.
 
-  -r, --repo=repo        [default: /Users/coden/canvasx/Bodiless-JS/packages/bodiless-cli] Path to the local lerna
-                         monorepo, relative to the current directory. Must contain the package source in a `packages`
-                         directory. Defaults to `.`
+  -r, --repo=repo        [default: .] Path to the local lerna monorepo, relative to the current directory. Must contain
+                         the package source in a `packages` directory. Defaults to `.`
 
-  -s, --site=site        [default: /Users/coden/canvasx/Bodiless-JS/packages/bodiless-cli] Path to the site into which
-                         you wish to install packages, relative to the current directory. Defaults to `.`
+  -s, --site=site        [default: .] Path to the site into which you wish to install packages, relative to the current
+                         directory. Defaults to `.`
 
   --dry-run              Do not pack or install. Just show list of matching packages.
 
@@ -68,5 +67,5 @@ EXAMPLES
   $ bodiless pack -s /path/to/site
 ```
 
-_See code: [lib/commands/pack.js](https://github.com/johnsonandjohnson/bodiless-js/blob/v0.0.47/lib/commands/pack.js)_
+_See code: [lib/commands/pack.js](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/bodiless-cli/src)_
 <!-- commandsstop -->

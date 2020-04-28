@@ -53,7 +53,6 @@ async function installDeps(map: PackageMap, spawner: Spawner) {
   await spawner.spawn(...args);
 }
 
-
 /**
  * Filters a dependency map to remove any not required by the site.
  */
@@ -62,7 +61,7 @@ const getDepsToReplace = (map: PackageMap, explicitPackages?: string[], force: b
   if (explicitPackages) {
     keys = intersection(keys, explicitPackages);
   }
-  if (keys && !force) {
+  if (keys.length && !force) {
     const packageJson = fs.readFileSync(path.join('.', 'package.json'));
     const packageJsonData = JSON.parse(packageJson.toString());
     const { dependencies, devDependencies } = packageJsonData;
@@ -71,7 +70,6 @@ const getDepsToReplace = (map: PackageMap, explicitPackages?: string[], force: b
   }
   return pick(map, keys);
 };
-
 
 /**
  * Defines the 'pack' command.
@@ -104,15 +102,15 @@ export default class Pack extends Command {
     }),
     site: commandFlags.string({
       char: 's',
-      default: path.resolve('.'),
-      parse: s => path.resolve(s.trim()),
-      description: 'Path to the site into which you wish to install packages, relative to the current directory. Defaults to `.`',
+      default: '.',
+      parse: s => s.trim(),
+      description: 'Path to the site into which you wish to install packages, relative to the current directory.',
     }),
     repo: commandFlags.string({
       char: 'r',
-      default: path.resolve('.'),
-      parse: r => path.resolve(r.trim()),
-      description: 'Path to the local lerna monorepo, relative to the current directory. Must contain the package source in a `packages` directory. Defaults to `.`',
+      default: '.',
+      parse: r => r.trim(),
+      description: 'Path to the local lerna monorepo, relative to the current directory. Must contain the package source in a `packages` directory.',
     }),
   };
 
@@ -142,12 +140,14 @@ export default class Pack extends Command {
   async run() {
     try {
       const { flags } = this.parse(Pack);
-      const destIsSrc = flags.repo === flags.site;
+      const repo = path.resolve(flags.repo);
+      const site = path.resolve(flags.site);
+      const destIsSrc = repo === site;
       if (destIsSrc) {
         this.warn('Monorepo and site paths are the same. Assuming --force and --skip-install.');
       }
-      process.chdir(flags.site);
-      const packageMap = this.getPackageMap(path.join(flags.repo, 'packages'));
+      process.chdir(site);
+      const packageMap = this.getPackageMap(path.join(repo, 'packages'));
       // Cast is necessary bc typings do not prpperly handle multiple flags with parse functions.
       // Type of flags.package is string and should be string[].
       const { package: explicitPackages } = flags as any as { package: string[] };
@@ -160,7 +160,7 @@ export default class Pack extends Command {
         this.log(`Dry run. Packages which would be packed/installed: ${list}`);
         this.exit(0);
       }
-      const spawner = new Spawner(flags.repo);
+      const spawner = new Spawner(repo);
       await packDeps(deps, spawner);
       if (!flags['skip-install'] && !destIsSrc) {
         await installDeps(deps, spawner);
