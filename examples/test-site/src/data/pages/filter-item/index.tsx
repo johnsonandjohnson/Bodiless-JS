@@ -14,7 +14,6 @@
 import React, { useState } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-// @ts-ignore TS7016: Could not find a declaration file for module .. implicitly has an 'any' type
 import { TagType } from '@bodiless/core';
 import { H2 } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';

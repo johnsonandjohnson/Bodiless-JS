@@ -16,12 +16,7 @@ import React from 'react';
 import { v4 } from 'uuid';
 import { useFormApi, Text } from 'informed';
 import { isEmpty } from 'lodash';
-import ReactTags, { ReactTagsProps, Tag as ReactTagType } from 'react-tag-autocomplete';
-
-export type TagType = {
-  id: string,
-  name: string,
-} | ReactTagType;
+import ReactTags, { ReactTagsProps, Tag as TagType } from 'react-tag-autocomplete';
 
 class Tag {
   readonly id: string = v4();
@@ -74,5 +69,6 @@ const ReactTagsField = (props: ReactTagsFieldProps) => {
 
 export default ReactTagsField;
 export {
+  TagType,
   Tag as BodilessTag,
 };
