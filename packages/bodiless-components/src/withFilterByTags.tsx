@@ -53,4 +53,5 @@ const withFilterByTags = flowRight(
   withoutProps(['selectedTags']),
 );
 
-export { ifTagsSelected, withFilterByTags, ifTagsNotSelected };
+export { ifTagsSelected, ifTagsNotSelected };
+export default withFilterByTags

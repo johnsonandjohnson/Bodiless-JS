@@ -35,7 +35,7 @@ import withEvent from './GTM/gtm';
 import { withToggle, withToggleTo, withToggleButton } from './Toggle';
 import withEditPlaceholder from './Placeholder';
 import { TagButtonProps, withTagButton, useTagsAccessors } from './TagButton';
-import { withFilterByTags } from './filterHOC';
+import withFilterByTags from './withFilterByTags';
 
 export {
   asBodilessLink,
