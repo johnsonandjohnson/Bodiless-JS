@@ -1,16 +1,10 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { observable } from 'mobx';
-import {
-  withContextActivator,
-  withLocalContextMenu,
-  withNodeDataHandlers,
-} from '../src/hoc';
+import { withContextActivator, withLocalContextMenu, withNodeDataHandlers } from '../src/hoc';
 
 const TestComponent = ({ element: Element }: any) => (
-  <Element>
-    <div>Test Component</div>
-  </Element>
+  <Element><div>Test Component</div></Element>
 );
 
 describe('withContextActivator', () => {
