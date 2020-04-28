@@ -256,7 +256,7 @@ Specify `tocomponent` Rules
 
 1. `selector`
 
-  - **Description:** selector for the element(s) that should be extracted into React components
+  - **Description:** selector for the element(s) that should be extracted into React components.
 
 1. `replacement`
 
