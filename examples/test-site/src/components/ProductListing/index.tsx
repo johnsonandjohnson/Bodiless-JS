@@ -18,7 +18,7 @@ import {
   Img,
   addClasses,
 } from '@bodiless/fclasses';
-import { asEditorSimple } from '../Editors';
+import { withEditorSimple } from '../Editors';
 import {
   asHeader1,
   asImage,
@@ -26,11 +26,11 @@ import {
   asEditableImage,
 } from '../Elements.token';
 
-export { ProductListingFlexBox } from './ProductListingFlexBox';
+export { ProductListingFlowContainer } from './ProductListingFlowContainer';
 
 export const ProductListingTitle = flow(
   asHeader1,
-  asEditorSimple('product_listing_title', 'Product Listing Title'),
+  withEditorSimple('product_listing_title', 'Product Listing Title'),
 )(H1);
 
 const asProductListingImage = flow(

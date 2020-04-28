@@ -21,6 +21,7 @@ import {
 import { FieldProps } from 'informed';
 import Tooltip from 'rc-tooltip';
 import { TMenuOption } from '../PageEditContext/types';
+import { ReactTagsFieldProps } from '../components/ReactTagsField';
 
 export type ButtonVariantProps = HTMLProps<HTMLDivElement> & {
   isActive?: boolean;
@@ -48,6 +49,7 @@ export type UI = {
   ComponentFormError?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   Form?: ComponentType<HTMLProps<HTMLFormElement>> | string;
   Tooltip?: FC<Tooltip['props']>;
+  ReactTags?: ComponentType<ReactTagsFieldProps>;
   // @TODO: Add other controls from informed.
 };
 
@@ -56,6 +58,7 @@ export type IContextMenuProps = {
   options: TMenuOption[];
   // onDispose?: (wasSubmitted: boolean) => void;
   ui?: UI;
+  isPositionToggled?: boolean;
 } & HTMLProps<HTMLElement>;
 
 export type IContextMenuItemProps = {

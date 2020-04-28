@@ -44,12 +44,14 @@ process.chdir(destDir);
 
 const child = spawn('git', ['init'], {
   stdio: 'inherit',
+  shell: true,
 });
 child.on('close', (code) => {
   if (noInstall) process.exit(code);
 
   const child$ = spawn('npm', ['install'], {
     stdio: 'inherit',
+    shell: true,
   });
 
   child$.on('close', code => {

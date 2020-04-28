@@ -3,6 +3,123 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.47](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.46...v0.0.47) (2020-04-22)
+
+
+### Bug Fixes
+
+* **migration-tool:** renamed an attribute reserved for extracting common components ([#240](https://github.com/johnsonandjohnson/bodiless-js/issues/240)) ([e075b49](https://github.com/johnsonandjohnson/bodiless-js/commit/e075b49ca9fec68b51c807b3fb458e681b19f7d5))
+* **migration-tool:** site build failed due to invalid page content ([#272](https://github.com/johnsonandjohnson/bodiless-js/issues/272)) ([92dc154](https://github.com/johnsonandjohnson/bodiless-js/commit/92dc1547bd8a71b73a142acc5446f039bcabb97a))
+
+
+### Features
+
+* **migration-tool:** Migrate 404 page ([#260](https://github.com/johnsonandjohnson/bodiless-js/issues/260)) ([c93471a](https://github.com/johnsonandjohnson/bodiless-js/commit/c93471a91edd52ee433fe97a9ecc55dd5b5e34b6))
+
+
+
+
+
+## [0.0.46](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.45...v0.0.46) (2020-04-08)
+
+**Note:** Version bump only for package @bodiless/migration-tool
+
+
+
+
+
+## [0.0.45](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.44...v0.0.45) (2020-04-08)
+
+
+### Bug Fixes
+
+* **migration-tool:** Improve script content transformation ([#239](https://github.com/johnsonandjohnson/bodiless-js/issues/239)) ([05117d2](https://github.com/johnsonandjohnson/bodiless-js/commit/05117d29912cca332daf06ebcb18f9425645cd92))
+
+
+
+
+
+## [0.0.44](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.43...v0.0.44) (2020-03-26)
+
+
+### Bug Fixes
+
+* **@bodiless/migration-tool:** scrape video file injected using video html element ([#210](https://github.com/johnsonandjohnson/bodiless-js/issues/210)) ([d8c7d9c](https://github.com/johnsonandjohnson/bodiless-js/commit/d8c7d9c7a1337eec25d740dda05895aeba7326d2))
+
+
+### Features
+
+* **gatsby-theme-bodiless, starter, test-site:** purge unused css ([#195](https://github.com/johnsonandjohnson/bodiless-js/issues/195)) ([1b54d82](https://github.com/johnsonandjohnson/bodiless-js/commit/1b54d82e53d0d72291a2ed3273e5b853c182e299))
+* **migration-tool:** Enhance handling of non-existing source site resources ([#191](https://github.com/johnsonandjohnson/bodiless-js/issues/191)) ([63fea0e](https://github.com/johnsonandjohnson/bodiless-js/commit/63fea0e2384bb7467856ae7f0c2c324e4eb87e7b))
+
+
+### BREAKING CHANGES
+
+* **gatsby-theme-bodiless, starter, test-site:** bodiless/components does not export Link component anymore. One, who consumes Link component, should replace Link with a site level link component.
+
+
+
+
+
+## [0.0.43](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.42...v0.0.43) (2020-03-11)
+
+
+### Bug Fixes
+
+* **bodiless-migration-tool:** allow to migrate a site with bareroot domain specified ([#186](https://github.com/johnsonandjohnson/bodiless-js/issues/186)) ([4d24c07](https://github.com/johnsonandjohnson/bodiless-js/commit/4d24c072de158f395b2e5c4bf8ea2e41209d7b24))
+* **migration-tool:** Header and Footer components are missing ([c4e6a82](https://github.com/johnsonandjohnson/bodiless-js/commit/c4e6a827ba4f0df425fd93ab586ab1a4ea2fdfad))
+
+
+### Features
+
+* **migration-tool:** Provide fallback on migration errors to generate plain html. ([#175](https://github.com/johnsonandjohnson/bodiless-js/issues/175)) ([8d9a003](https://github.com/johnsonandjohnson/bodiless-js/commit/8d9a003ec81c9a1d202b8d82cfddf80a16d04044))
+
+
+
+
+
+## [0.0.42](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.41...v0.0.42) (2020-02-28)
+
+**Note:** Version bump only for package @bodiless/migration-tool
+
+
+
+
+
+
+
+## [0.0.41](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.40...v0.0.41) (2020-02-28)
+
+
+### Bug Fixes
+
+* **migration_tool:** Migration tool fix default value for disableTailwind ([#163](https://github.com/johnsonandjohnson/bodiless-js/issues/163)) ([65a2d3f](https://github.com/johnsonandjohnson/bodiless-js/commit/65a2d3fcc874a521e8cf45c6c1476637db5c1c55))
+* npm run new & npm run sites:update starter fail with errors ([#153](https://github.com/johnsonandjohnson/bodiless-js/issues/153)) ([a998f5f](https://github.com/johnsonandjohnson/bodiless-js/commit/a998f5f220f26cfd653577dcdd1163832990352c))
+
+
+### Features
+
+* **migration_tool:** Migration tool enhancement to auto turn off Bodiless-Tailwind Theme ([#155](https://github.com/johnsonandjohnson/bodiless-js/issues/155)) ([4c5203d](https://github.com/johnsonandjohnson/bodiless-js/commit/4c5203d0519c4123cf52cfbeb39987daeaf12d8a))
+
+
+
+
+
+## [0.0.40](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.39...v0.0.40) (2020-02-21)
+
+
+### Bug Fixes
+
+* **bodiless-migration-tool:** "UnhandledPromiseRejectionWarning: Error: Page crashed!" thrown by migration tool ([#82](https://github.com/johnsonandjohnson/bodiless-js/issues/82)) ([f966636](https://github.com/johnsonandjohnson/bodiless-js/commit/f966636563e8009ca5f694c71842da3228b865f5))
+* **migration_tool:** 'npm run setup' fails on Windows ([#139](https://github.com/johnsonandjohnson/bodiless-js/issues/139)) ([ac8a580](https://github.com/johnsonandjohnson/bodiless-js/commit/ac8a580887e120ce50c13d545b9ba6b9e89a714a))
+* **migration_tool:** do not create a page when an internal url is redirected to an external ([#95](https://github.com/johnsonandjohnson/bodiless-js/issues/95)) ([df5077a](https://github.com/johnsonandjohnson/bodiless-js/commit/df5077abbe2403239a1e7cc5bd9ac56fb9b3d4b6))
+* **migration_tool:** issues in FAQ pages ([#126](https://github.com/johnsonandjohnson/bodiless-js/issues/126)) ([2d4a6cb](https://github.com/johnsonandjohnson/bodiless-js/commit/2d4a6cbc219682e4162c5ab77eb128dfd2048c1c))
+* **migration_tool:** SyntaxError: Unexpected token ([#84](https://github.com/johnsonandjohnson/bodiless-js/issues/84)) ([208d9f7](https://github.com/johnsonandjohnson/bodiless-js/commit/208d9f7a309ac9fc9fe6d6ecab4ae4a0dc2b685d))
+
+
+
+
+
 ## 0.0.38 (2020-01-29)
 
 

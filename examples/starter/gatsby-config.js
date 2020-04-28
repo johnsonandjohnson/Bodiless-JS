@@ -1,4 +1,16 @@
 const express = require('express');
+// Gatsby plugins list.
+const plugins = [
+  'gatsby-plugin-root-import',
+  '@bodiless/gatsby-theme-bodiless',
+  {
+    resolve: 'gatsby-plugin-compile-es6-packages',
+    options: {
+      modules: ['@bodiless/gatsby-theme-bodiless'],
+    },
+  },
+];
+
 
 module.exports = {
   developMiddleware: app => {
@@ -8,13 +20,5 @@ module.exports = {
     title: 'BodilessJS Starter',
     logo: '/images/bodiless_logo.png',
   },
-  plugins: [
-    '@bodiless/gatsby-theme-bodiless',
-    {
-      resolve: 'gatsby-plugin-compile-es6-packages',
-      options: {
-        modules: ['@bodiless/gatsby-theme-bodiless'],
-      },
-    },
-  ],
+  plugins,
 };

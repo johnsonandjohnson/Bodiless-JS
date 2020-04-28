@@ -14,6 +14,7 @@
 
 // Internal mobx store which holds the state.
 import React from 'react';
+import { TOverlaySettings } from '../Types/PageOverlayTypes';
 
 export type TMenuOption = {
   name: string;
@@ -29,9 +30,25 @@ export type TMenuOption = {
 };
 
 export type TMenuOptionGetter = () => TMenuOption[];
+
+export type TPageOverlayStore = {
+  data: TOverlaySettings,
+  timeoutId: number,
+};
+
 export interface CanControlEditMode {
   isEdit: boolean;
   toggleEdit: (mode?: boolean) => void;
+}
+export interface CanControlMenuPosition {
+  isPositionToggled: boolean;
+  togglePosition: (mode?: boolean) => void;
+}
+export interface CanControlPageOverlay {
+  pageOverlay: TPageOverlayStore,
+  showPageOverlay: (settings?: TOverlaySettings) => void;
+  hidePageOverlay: (settings?: TOverlaySettings) => void;
+  showError: (settings?: TOverlaySettings) => void;
 }
 export interface CanGetContextMenuOptions {
   contextMenuOptions: TMenuOption[];
@@ -55,13 +72,16 @@ export interface PageEditStore {
   isEdit: boolean;
   setActiveContext(context?: PageEditContextInterface): void;
   toggleEdit(): void;
+  togglePosition(): void;
   contextTrail: string[];
 }
 
 export interface PageEditContextInterface extends
   CanBeActivated,
   CanControlEditMode,
+  CanControlMenuPosition,
   CanGetContextMenuOptions,
+  CanControlPageOverlay,
   DefinesLocalEditContext
 {
   readonly id: string;

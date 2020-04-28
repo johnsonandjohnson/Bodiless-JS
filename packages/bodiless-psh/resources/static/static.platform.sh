@@ -2,7 +2,18 @@ if [ -f static.platform.custom.sh ]; then
   source static.platform.custom.sh
 fi
 
+init_npmrc () {
+  echo "Creating .npmrc"
+  if [ $APP_NPM_REGISTRY ] && [ $APP_NPM_AUTH ] && [ $APP_NPM_NAMESPACE ]; then
+    echo "NPM Private registry for $APP_NPM_NAMESPACE is $APP_NPM_REGISTRY"
+    bash -c 'echo NPM Auth token is ${APP_NPM_AUTH:0:50}...'
+    echo "$APP_NPM_NAMESPACE:registry=https:${APP_NPM_REGISTRY}" > .npmrc
+    echo "${APP_NPM_REGISTRY}:_authToken=${APP_NPM_AUTH}" >> .npmrc
+  fi
+}
+
 default_prepare_build () {
+  init_npmrc
   npm ci
 }
 
@@ -22,7 +33,7 @@ default_finalize_build () {
   export PSH_URL_REPLACER_TARGET_FILE=$APP_VOLUME/sitemap.xml
   node $PLATFORM_APP_DIR/node_modules/@bodiless/psh/lib/psh-url-replacer.js build
   # ssi preparation
-  export SSI_CONF=ssi/ssi_conf.json
+  export SSI_CONF_PATH=ssi/ssi_conf.json
   export DOCUMENT_ROOT=$PLATFORM_DOCUMENT_ROOT
   export VOLUME_DIR=$APP_VOLUME
   node $PLATFORM_APP_DIR/node_modules/@bodiless/psh/lib/generate-ssi-files.js build
@@ -47,7 +58,7 @@ default_deploy () {
   export PSH_URL_REPLACER_PROD_ENV=$APP_PROD_ENV
   node $PLATFORM_APP_DIR/node_modules/@bodiless/psh/lib/psh-url-replacer.js deploy
   # ssi files generation
-  export SSI_CONF=ssi/ssi_conf.json
+  export SSI_CONF_PATH=ssi/ssi_conf.json
   export VOLUME_DIR=$APP_VOLUME
   node $PLATFORM_APP_DIR/node_modules/@bodiless/psh/lib/generate-ssi-files.js deploy
 }

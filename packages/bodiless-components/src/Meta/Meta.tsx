@@ -13,8 +13,8 @@
  */
 
 import React, { ComponentType as CT } from 'react';
-import { useNode, withNode, withNodeKey } from '@bodiless/core';
-import { flowRight, isEmpty } from 'lodash';
+import { useNode } from '@bodiless/core';
+import { isEmpty } from 'lodash';
 
 type MetaTitleData = {
   content: string;
@@ -73,13 +73,4 @@ const withMetaHtml = (
   );
 };
 
-const asBodilessHelmet = (nodeKey?: string) => flowRight(
-  withNodeKey(nodeKey, 'site'),
-  withNode,
-  withNodeKey(nodeKey, '_default'),
-  withNode,
-);
-
-export {
-  withMeta, withMetaTitle, withMetaHtml, asBodilessHelmet,
-};
+export { withMeta, withMetaTitle, withMetaHtml };

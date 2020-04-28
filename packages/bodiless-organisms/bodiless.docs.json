@@ -1,9 +1,12 @@
 {
-  "Organisms": {
-    "index.md" : "./README.md",
-    "slider.md": "./README.md",
-    "touts.md": "./README.md",
-    "MainMenu.md" : "./doc/MainMenu.md",
-    "BurgerMenu.md" : "./doc/BurgerMenu.md"
+  "Components": {
+    "Organisms": {
+      "SingleAccordion.md": "./doc/SingleAccordion.md",
+      "BurgerMenu.md" : "./doc/BurgerMenu.md",      
+      "MainMenu.md" : "./doc/MainMenu.md",
+      "FilterByGroup.md" : "./doc/FilterByGroup.md",
+      "Carousel.md": "./doc/Carousel.md",  
+      "index.md" : "./README.md"
+    }
   }
 }

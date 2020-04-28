@@ -46,6 +46,10 @@ web:
             index: ['index.html']
             scripts: false
             allow: true
+            passthru: false
+            expires: 6h
+        '/___docs':
+            expires: 6h
 
 variables:
     env:
