@@ -1,3 +1,5 @@
 {
-  "_dir": "./doc/"
+  "Tools": {
+    "BodilessCLI.md": "./README.md"
+  }
 }
