@@ -42,9 +42,10 @@ const ReactTagsField = (props: ReactTagsFieldProps) => {
     if (!tag.id) {
       tagToAdd = new Tag(tag.name);
     }
-
-    const newTags = allowMultipleTags ? [...currentTags, tagToAdd] : [tagToAdd];
-    formApi.setValue('tags', newTags);
+    if (!currentTags.some(currentTag => currentTag.name === tagToAdd.name)) {
+      const newTags = allowMultipleTags ? [...currentTags, tagToAdd] : [tagToAdd];
+      formApi.setValue('tags', newTags);
+    }
   };
 
   const handleDelete = (i: number) => {
