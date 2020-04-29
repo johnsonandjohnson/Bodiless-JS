@@ -101,7 +101,7 @@ const useValue: TUseValue = ({ initialValue }) => {
   // @see https://github.com/ianstormtaylor/slate/blob/6d8df18f016df75da0d49d6b753cecb333dca078/packages/slate/src/models/value.js#L803
   const jsonValue = oldValue.toJSON(preserveAll);
   if (isEqual(jsonValue.document, node.data.document)) return oldValue;
-  // jsonValue.document = node.data.document;
+  jsonValue.document = node.data.document;
   return Value.fromJSON(jsonValue);
 };
 

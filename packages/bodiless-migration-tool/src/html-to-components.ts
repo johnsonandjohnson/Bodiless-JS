@@ -17,7 +17,7 @@ import path from 'path';
 // @ts-ignore
 import extractReactComponents from 'html-to-react-components';
 
-const COMPONENT_LABEL = 'data-component';
+const COMPONENT_LABEL = 'data-bl-component';
 
 export enum ComponentScope {
   Global = 'global',

@@ -19,7 +19,7 @@ import {
   ProductClean,
 } from '@bodiless/organisms';
 import { BVInlineRatings } from '@bodiless/bv';
-import { asEditorBasic, asEditorSimple } from '../Editors';
+import { withEditorBasic, withEditorSimple } from '../Editors';
 import {
   asEditableLink,
   asEditableImage,
@@ -31,10 +31,10 @@ export const asProductTout = flow(
     ImageLink: asEditableLink('cta'),
     Image: asEditableImage('image'),
     TitleLink: asEditableLink('cta'),
-    Title: asEditorSimple('title', 'Product Title Text'),
+    Title: withEditorSimple('title', 'Product Title Text'),
     BvReviewLink: asEditableLink('cta'),
     BvReview: () => BVInlineRatings,
-    Body: asEditorBasic('body', 'Product Body Text'),
+    Body: withEditorBasic('body', 'Product Body Text'),
   }),
 );
 

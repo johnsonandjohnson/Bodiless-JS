@@ -26,6 +26,7 @@ import {
   ComponentFormButton, Icon, Div, Hr, ToolbarButton, ComponentFormUnwrapButton,
   ComponentFormError, ComponentFormSubmitButton,
 } from '@bodiless/ui';
+import ReactTagsField from './ReactTags';
 
 const Toolbar = flow(
   addClasses('bl-bg-black bl-rounded bl-z-50 bl-p-grid-2 bl-fixed bl-top-grid-0 bl-left-grid-0 bl-text-white'),
@@ -79,6 +80,7 @@ const ui: ContextMenuUI = {
   ToolbarDivider,
   FormWrapper,
   Tooltip: GlobalTooltip,
+  ReactTags: ReactTagsField,
 };
 
 const GlobalContextMenu: FC<ContextMenuProps> = props => {

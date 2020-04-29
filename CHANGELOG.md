@@ -3,6 +3,59 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.47](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.46...v0.0.47) (2020-04-22)
+
+
+### Bug Fixes
+
+* **migration-tool:** renamed an attribute reserved for extracting common components ([#240](https://github.com/johnsonandjohnson/bodiless-js/issues/240)) ([e075b49](https://github.com/johnsonandjohnson/bodiless-js/commit/e075b49ca9fec68b51c807b3fb458e681b19f7d5))
+* **migration-tool:** site build failed due to invalid page content ([#272](https://github.com/johnsonandjohnson/bodiless-js/issues/272)) ([92dc154](https://github.com/johnsonandjohnson/bodiless-js/commit/92dc1547bd8a71b73a142acc5446f039bcabb97a))
+
+
+### Features
+
+* **core:** component default content ([#219](https://github.com/johnsonandjohnson/bodiless-js/issues/219)) ([379e655](https://github.com/johnsonandjohnson/bodiless-js/commit/379e6559de3471214e45132ed493deed63ecfb38))
+* **layout:** Rename Flexbox to FlowContainer ([#118](https://github.com/johnsonandjohnson/bodiless-js/issues/118)) ([aa295bb](https://github.com/johnsonandjohnson/bodiless-js/commit/aa295bb77ed512a1040ed047d784a787dcd2b71a))
+* **migration-tool:** Migrate 404 page ([#260](https://github.com/johnsonandjohnson/bodiless-js/issues/260)) ([c93471a](https://github.com/johnsonandjohnson/bodiless-js/commit/c93471a91edd52ee433fe97a9ecc55dd5b5e34b6))
+* **release, publish:** Automate package publication on GitHub - Update release document. ([#269](https://github.com/johnsonandjohnson/bodiless-js/issues/269)) ([f16b5c7](https://github.com/johnsonandjohnson/bodiless-js/commit/f16b5c72aa49926add2f51bbac2d6c88912017d7))
+
+
+
+
+
+## [0.0.46](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.45...v0.0.46) (2020-04-08)
+
+**Note:** Version bump only for package bodiless-js
+
+
+
+
+
+## [0.0.45](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.44...v0.0.45) (2020-04-08)
+
+
+### Bug Fixes
+
+* **docs:** Docs Homepage is lost on gh-pages ([#249](https://github.com/johnsonandjohnson/bodiless-js/issues/249)) ([051eea7](https://github.com/johnsonandjohnson/bodiless-js/commit/051eea72592cc80a8f8a859f1fc6e24674c08b93))
+* **migration-tool:** Improve script content transformation ([#239](https://github.com/johnsonandjohnson/bodiless-js/issues/239)) ([05117d2](https://github.com/johnsonandjohnson/bodiless-js/commit/05117d29912cca332daf06ebcb18f9425645cd92))
+* **psh:** Provide default psh cache expiry for /__docs ([#261](https://github.com/johnsonandjohnson/bodiless-js/issues/261)) ([f00ead7](https://github.com/johnsonandjohnson/bodiless-js/commit/f00ead7f387c0e51492171ae6b341ce972a0a5bb))
+
+
+### Features
+
+* **core-ui:** Implement reusable modal overlay and use in create page & … ([#216](https://github.com/johnsonandjohnson/bodiless-js/issues/216)) ([230334e](https://github.com/johnsonandjohnson/bodiless-js/commit/230334eca8a99ecb05be486c28372f9e5835b975))
+* **example/test-site:** Updated the test site to have the correct pa… ([#236](https://github.com/johnsonandjohnson/bodiless-js/issues/236)) ([6729765](https://github.com/johnsonandjohnson/bodiless-js/commit/6729765d3a543b11e2bc9cc4be537d3f7aa0dfc5))
+* **psh:** Provide default psh cache expiry and allow local override ([#220](https://github.com/johnsonandjohnson/bodiless-js/issues/220)) ([4fb1e81](https://github.com/johnsonandjohnson/bodiless-js/commit/4fb1e8146c9d68f6195f2b96b39cd864f5c35cf0))
+
+
+### BREAKING CHANGES
+
+* **psh:** - Instead of just copying `*.platform.app.yaml` files it will merge existing local versions with a default version from `@bodiless/psh` with local versions taking precedence. Only keys from `/bodiless-psh/resources/.platform/platform.whitelist.yaml` will be merged
+
+
+
+
+
 ## [0.0.44](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.43...v0.0.44) (2020-03-26)
 
 

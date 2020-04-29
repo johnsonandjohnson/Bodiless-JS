@@ -161,10 +161,10 @@ describe the different kinds of editors available on your site. These can then
 be leveraged to make behavioral Component Tokens, eg:
 
 ```js
-import { asEditorSimple, asEditorBasic } from 'my-element-tokens';
+import { withEditorSimple, withEditorBasic } from 'my-element-tokens';
 const asEditableTout = withDesign({
-  Title: asEditorSimple('title', 'Enter title here'),
-  Body: asEditorBasic('body', 'Enter body text here'),
+  Title: withEditorSimple('title', 'Enter title here'),
+  Body: withEditorBasic('body', 'Enter body text here'),
 });
 ```
 
@@ -214,12 +214,12 @@ const asEditableTout = flow(
   withDesign({
     Image: asEditableImage('image'),
     ImageLink: asEditableLink('cta'),
-    Title: asEditorSimple('title', 'Tout Title Text'),
+    Title: withEditorSimple('title', 'Tout Title Text'),
     Link: flow(
       asEditableLink('cta'),
-      asEditorSimple('ctaText', 'Tout Button Text'),
+      withEditorSimple('ctaText', 'Tout Button Text'),
     ),
-    Body: asEditorBasic('body', 'Tout Body Text'),
+    Body: withEditorBasic('body', 'Tout Body Text'),
   }),
 );
 const Tout = asEditableTout(ToutClean);

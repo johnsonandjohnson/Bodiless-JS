@@ -51,7 +51,7 @@ declare class HCCrawler extends EventEmitter {
 
   static launch(options?: LaunchOptions): Promise<HCCrawler>;
 
-  queue(options: QueueOptions): Promise<void>;
+  queue(options: QueueOptions[]): Promise<void>;
 
   onIdle(): Promise<void>;
 
@@ -179,6 +179,16 @@ interface SuccessResult<EvaluatePageResult> {
    * The previous request's url. The value is null for the initial request.
    */
   previousUrl: string | null;
+
+  /**
+   * Text representation of response body.
+   */
+  responseText: string;
+
+  /**
+   * True when response has text/html content-type.
+   */
+  isHtmlResponse: isHtmlResponse,
 }
 
 interface OnlyQueueOptions {

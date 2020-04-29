@@ -1,7 +1,7 @@
 {
   "name": "bodiless-js",
   "description": "Bodiless-JS",
-  "version": "0.0.44",
+  "version": "0.0.47",
   "keywords": [
     "gatsby"
   ],
@@ -25,6 +25,10 @@
     "new": "node ./scripts/new-starter",
     "publish:all": "npm run build && lerna publish --registry $NPM_REGISTRY",
     "publish:from-package": "npm run build && lerna publish from-package --registry $NPM_REGISTRY",
+    "publish:patch": "lerna version patch --conventional-commits --force-publish",
+    "publish:minor": "lerna version minor --conventional-commits",
+    "publish:major": "lerna version major --conventional-commits",
+    "lerna:publish": "lerna publish from-git --yes --dist-tag latest",
     "scan": "ts-complexity --max-complexity 10 --pattern \"packages/**/src/**/*.ts(x)\"",
     "scan:target": "ts-complexity --max-complexity 1 --pattern",
     "serve": "lerna run serve --scope @bodiless/test-site --stream",

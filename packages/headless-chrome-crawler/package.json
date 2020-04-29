@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/headless-chrome-crawler",
-  "version": "0.0.44",
+  "version": "0.0.47",
   "description": "Fork of https://github.com/yujiosaka/headless-chrome-crawler.git",
   "main": "index.js",
   "license": "Apache-2.0",
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/johnsonandjohnson/bodiless-js",
   "dependencies": {
+    "content-type": "^1.0.4",
     "debug": "^4.1.1",
     "jquery": "^3.3.1",
     "lodash": "^4.17.11",

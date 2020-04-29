@@ -17,6 +17,7 @@ import {
   Form, FormApi, FormState, Text,
 } from 'informed';
 import { UI } from './Types/ContextMenuTypes';
+import ReactTagsField from './components/ReactTagsField';
 
 const defaultUI = {
   Icon: 'i',
@@ -29,6 +30,7 @@ const defaultUI = {
   ComponentFormText: Text,
   ComponentFormError: 'div',
   Form: 'div',
+  ReactTags: ReactTagsField,
 };
 
 export const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });

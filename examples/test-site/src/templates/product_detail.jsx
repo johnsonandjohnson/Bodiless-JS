@@ -37,8 +37,8 @@ import {
   ProductDetailImageWrapper,
   ProductDetailAccWrapper,
 } from '../components/Product';
-import { FlexBoxDefault } from '../components/Flexbox';
-import { asEditorBasic } from '../components/Editors';
+import { FlowContainerDefault } from '../components/FlowContainer';
+import { withEditorBasic } from '../components/Editors';
 import asSingleAccordionDefaultStyle from '../components/SingleAccordion/token';
 
 // Do not allow editors to set accordion titles.
@@ -54,7 +54,7 @@ const asProductAccordion = title => flow(
   withDesign({
     Wrapper: removeClasses('p-1'),
     Title: replaceWith(() => <NonEditableTitle producttitle={title} />),
-    Body: asEditorBasic(
+    Body: withEditorBasic(
       'body',
       'Enter Product Information',
     ),
@@ -112,7 +112,7 @@ export default (props: any) => (
         <BVReviews />
       </SectionMargin>
       <SectionNegXMargin>
-        <FlexBoxDefault
+        <FlowContainerDefault
           nodeKey="product_touts"
           maxComponents={3}
         />

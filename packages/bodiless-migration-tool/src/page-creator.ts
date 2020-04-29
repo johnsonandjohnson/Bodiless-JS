@@ -205,7 +205,6 @@ export class PageCreator {
   }
 
   private writeContent(targetPath: string, content: string) {
-    // eslint-disable-next-line no-console
     debug(`trying writing to ${targetPath}`);
     ensureDirectoryExistence(targetPath);
     fs.writeFileSync(targetPath, content);

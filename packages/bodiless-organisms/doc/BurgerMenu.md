@@ -1,7 +1,5 @@
 # Burger Menu 
 
-Back to Organisms [index](/Organisms/index.md)
-
 - Provides Hamburger Menu for mobile screens 
 - The Burger Menu does not provide any edit UI, any updates to the Burger Menu should be done via the [Main Menu](/Organisms/MainMenu.md)
 - Transforms submenus into accordions. Any item which has children renders it's title with no link, when the title is tapped the children expand with an "Overview" item that links to the URL that was on the title  

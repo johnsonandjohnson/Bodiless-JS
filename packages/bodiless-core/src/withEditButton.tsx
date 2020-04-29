@@ -21,10 +21,11 @@ import contextMenuForm, {
 } from './contextMenuForm';
 import { TMenuOptionGetter } from './Types/PageContextProviderTypes';
 
-export type FormBodyProps<D> = ContextMenuFormBodyProps<D> & {
+export type FormBodyProps<P, D> = ContextMenuFormBodyProps<D> & {
   unwrap?: () => void;
+  componentProps: P;
 };
-export type FormBodyRenderer<D> = (p: FormBodyProps<D>) => ReactNode;
+export type FormBodyRenderer<P, D> = (p: FormBodyProps<P, D>) => ReactNode;
 
 export type EditButtonProps<D> = {
   setComponentData: (componentData: D) => void;
@@ -40,7 +41,7 @@ export type EditButtonOptions<P, D> = {
   label?: string;
   global?: boolean;
   local?: boolean;
-  renderForm: FormBodyRenderer<D>;
+  renderForm: FormBodyRenderer<P, D>;
   // Allow additional buttons.
   useGetMenuOptions?: UseGetMenuOptions<P>;
 };
@@ -64,7 +65,11 @@ export const createMenuOptionHook = <P extends object, D extends object>({
       Object.assign(componentData, values);
       if (onSubmit) onSubmit();
     };
-    const render = (p: ContextMenuFormBodyProps<D>) => renderForm({ ...p, unwrap });
+    const render = (p: ContextMenuFormBodyProps<D>) => renderForm({
+      ...p,
+      unwrap,
+      componentProps: props,
+    });
     const form = contextMenuForm({
       submitValues,
       initialValues: componentData,

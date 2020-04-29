@@ -42,6 +42,7 @@ import {
   ComponentScope,
   HtmlToComponentsSettings,
 } from './html-to-components';
+import page404Handler, { Page404Params } from './page404-handler';
 import debug from './debug';
 
 export enum TrailingSlash {
@@ -72,6 +73,7 @@ export interface SiteFlattenerParams {
   gitRepository?: string,
   trailingSlash?: TrailingSlash,
   scraperParams: ScraperParams,
+  page404Params: Page404Params,
   steps: {
     setup: boolean,
     scrape: boolean,
@@ -100,7 +102,7 @@ export class SiteFlattener {
       trailingSlash: params.trailingSlash || TrailingSlash.Add,
       scraperParams: {
         ...params.scraperParams,
-        pageUrl: prependProtocolToBareUrl(params.scraperParams.pageUrl),
+        pageUrls: params.scraperParams.pageUrls.map(pageUrl => prependProtocolToBareUrl(pageUrl)),
       },
     };
 
@@ -136,11 +138,13 @@ export class SiteFlattener {
       enableFileDownload: false,
       downloadPath: getUrlToLocalDirectoryMapper(this.canvasX.getStaticDir()),
     };
+    const { page404Params } = this.params;
     const scraper = new Scraper(scraperParams);
-    scraper.on('success', async result => {
+    scraper.on('pageReceived', async result => {
       try {
-        debug(`scraped url ${result.pageUrl}.`);
-        const pageCreator = new PageCreator(this.getPageCreatorParams(result));
+        debug(`scraped page from ${result.pageUrl}.`);
+        const processedResult = page404Handler.processScrapedPage(result, page404Params);
+        const pageCreator = new PageCreator(this.getPageCreatorParams(processedResult));
         debug(`creating page for ${result.pageUrl}.`);
         await pageCreator.createPage();
       } catch (error) {

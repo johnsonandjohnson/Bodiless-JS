@@ -105,7 +105,7 @@ function DropZonePlugin({ formApi, targetFieldName }: {
 
   const { getRootProps, getInputProps, isDragReject } = useDropzone({
     onDrop,
-    accept: 'image/jpeg, image/png',
+    accept: 'image/jpeg, image/png, image/svg+xml,',
     multiple: false,
   });
 

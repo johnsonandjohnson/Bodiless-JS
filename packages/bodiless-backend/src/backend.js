@@ -354,7 +354,7 @@ class Backend {
       res.status(500);
     }
     // End response process to prevent any further queued promises/events from responding.
-    res.send(error.message).end();
+    res.send(Backend.sanitizeOutput(error.message)).end();
   }
 
   static gitCommitsEnabled(res) {
@@ -631,6 +631,10 @@ class Backend {
           res.send({});
         });
     });
+  }
+
+  static sanitizeOutput(data) {
+    return data.replace(/(http|https):\/\/[^@]+:[^@]+@/gi, '$1://****:****@');
   }
 
   start(port) {
