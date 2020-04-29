@@ -37,9 +37,9 @@ const TaggableFilterSelector = () => {
     placeholder: 'Add or Create',
     formTitle: 'Groups',
     seeAllText: 'View All Groups',
-    formBodyText: 'Select from available groups::',
+    formBodyText: 'Select from available groups:',
     allowNew: true,
-    noSuggestionsText: 'No matching groups found',
+    noSuggestionsText: 'No matching groups found.',
   };
   return (
     <div>
