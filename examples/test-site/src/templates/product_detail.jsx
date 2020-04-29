@@ -20,7 +20,6 @@ import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { BVRatingsSummary, BVReviews } from '@bodiless/bv';
 import { withNode } from '@bodiless/core';
 import {
-  addClasses,
   addProps,
   withDesign,
   replaceWith,
