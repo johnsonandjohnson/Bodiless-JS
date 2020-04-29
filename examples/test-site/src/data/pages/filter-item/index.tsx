@@ -34,12 +34,12 @@ const TaggableFilterSelector = () => {
   ));
   const props = {
     getSuggestions,
-    placeholder: 'Add or create',
+    placeholder: 'Add or Create',
     formTitle: 'Groups',
-    seeAllText: 'See all groups',
-    formBodyText: 'Select from available tags:',
+    seeAllText: 'View All Groups',
+    formBodyText: 'Select from available groups::',
     allowNew: true,
-    noSuggestionsText: 'No suggestions found',
+    noSuggestionsText: 'No matching groups found',
   };
   return (
     <div>
