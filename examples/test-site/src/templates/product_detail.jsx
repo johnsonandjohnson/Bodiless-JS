@@ -44,8 +44,8 @@ import { withEditorBasic } from '../components/Editors';
 import asSingleAccordionDefaultStyle from '../components/SingleAccordion/token';
 
 // Do not allow editors to set accordion titles.
-const NonEditableTitle = ({ producttitle }) => (
-  <h2>
+const NonEditableTitle = ({ producttitle, ...rest }) => (
+  <h2 {...rest}>
     {producttitle}
   </h2>
 );
@@ -62,7 +62,7 @@ const asProductAccordion = title => flow(
   asSingleAccordionDefaultStyle,
   withDesign({
     Wrapper: removeClasses('p-1'),
-    Title: replaceWith(() => <NonEditableTitle producttitle={title} />),
+    Title: replaceWith((props) => <NonEditableTitle {...props} producttitle={title} />),
     Body: withEditorBasic(
       'body',
       'Enter Product Information',
