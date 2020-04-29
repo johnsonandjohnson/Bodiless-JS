@@ -20,12 +20,15 @@ import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { BVRatingsSummary, BVReviews } from '@bodiless/bv';
 import { withNode } from '@bodiless/core';
 import {
+  addClasses,
+  addProps,
   withDesign,
   replaceWith,
   removeClasses,
 } from '@bodiless/fclasses';
 import {
   SingleAccordionClean,
+  asTestableAccordion,
 } from '@bodiless/organisms';
 import { withEvent, asBodilessHelmet } from '@bodiless/components';
 import Layout from '../components/Layout';
@@ -48,6 +51,13 @@ const NonEditableTitle = ({ producttitle }) => (
   </h2>
 );
 
+const asTestableProductAccordion = label => flow(
+  asTestableAccordion,
+  withDesign({
+    Wrapper: addProps({ 'aria-label': label }),
+  }),
+);
+
 const asProductAccordion = title => flow(
   withNode,
   asSingleAccordionDefaultStyle,
@@ -59,6 +69,7 @@ const asProductAccordion = title => flow(
       'Enter Product Information',
     ),
   }),
+  asTestableProductAccordion(title),
 );
 
 const ProductOverAcc = asProductAccordion('Overview')(SingleAccordionClean);
@@ -69,6 +80,17 @@ const ProductActIngAcc = asProductAccordion('Active Ingredients')(SingleAccordio
 const ProductInactIngAcc = asProductAccordion('Inactive Ingredients')(SingleAccordionClean);
 const ProductStorAcc = asProductAccordion('Storage')(SingleAccordionClean);
 const ProductWarnAcc = asProductAccordion('Warnings')(SingleAccordionClean);
+
+const asTestableRatingsSummary = addProps({ 'data-product-element': 'ratings-summary' });
+const ProductRatingsSummary = asTestableRatingsSummary(BVRatingsSummary);
+
+const asTestableProductReviews = addProps({ 'data-product-element': 'reviews' });
+const ProductReviews = asTestableProductReviews(BVReviews);
+
+const asTestableFlowContainer = withDesign({
+  Wrapper: addProps({ 'data-product-element': 'flow-container' }),
+});
+const ProductFlowContainer = asTestableFlowContainer(FlowContainerDefault);
 
 const ExampleGTMHelmetEvent = flowRight(
   asBodilessHelmet('datalayer'),
@@ -89,7 +111,7 @@ export default (props: any) => (
         </div>
       </SectionMargin>
       <SectionMargin>
-        <BVRatingsSummary />
+        <ProductRatingsSummary />
       </SectionMargin>
       <SectionMargin>
         <div className="flex flex-wrap">
@@ -109,10 +131,10 @@ export default (props: any) => (
         </div>
       </SectionMargin>
       <SectionMargin>
-        <BVReviews />
+        <ProductReviews />
       </SectionMargin>
       <SectionNegXMargin>
-        <FlowContainerDefault
+        <ProductFlowContainer
           nodeKey="product_touts"
           maxComponents={3}
         />
