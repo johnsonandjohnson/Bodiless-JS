@@ -25,7 +25,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
   const imagePlaceholderXpath = '//img[@class=" w-full"]'
   const imageIconXpath = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Image"]'
   const checkmarkIconImageFormXpath = '//form[@aria-label="Context Menu Image Form"]//button[@aria-label="Submit"]'
-  const flexboxXpath = '//div[contains(@class,"bl-flex-wrap")][text()="Empty Flexbox"]'
+  const flexboxXpath = '//div[contains(@class,"bl-flex-wrap")][text()="Empty FlowContainer"]'
   const addComponentIconXpath = '//button[@aria-label="add"]'
   const horToutinSelectorXpath = '//div[@class="bl-p-grid-2"][1]'
   const horToutinFlexboxXpath = '//div[@data-tout-element="wrapper"]'
