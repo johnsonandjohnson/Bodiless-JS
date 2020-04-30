@@ -62,7 +62,7 @@ const asProductAccordion = title => flow(
   asSingleAccordionDefaultStyle,
   withDesign({
     Wrapper: removeClasses('p-1'),
-    Title: replaceWith((props) => <NonEditableTitle {...props} producttitle={title} />),
+    Title: replaceWith(props => <NonEditableTitle {...props} producttitle={title} />),
     Body: withEditorBasic(
       'body',
       'Enter Product Information',
