@@ -46,9 +46,13 @@ const TaggableFilterSelector = () => {
       <div>
         <H2>Select a tag to filter by</H2>
         {FilterButtons}
+        <TagButton id="foo-bar" onClick={() => setTags(getSuggestions().slice(0, 2))}>
+          multiple (foo, bar)
+        </TagButton>
         <TagButton id="all-tags-selected" onClick={() => setTags(getSuggestions())}>
           multiple (foo, bar, baz, bat)
         </TagButton>
+
         <TagButton id="show-all" onClick={() => setTags([])}>
           All
         </TagButton>
