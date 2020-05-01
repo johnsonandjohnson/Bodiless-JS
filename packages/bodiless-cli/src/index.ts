@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,14 +12,5 @@
  * limitations under the License.
  */
 
-import { useEditContext } from './hooks';
-import { ifToggledOn, ifToggledOff } from './withFlowToggle';
-
-export const useEditToggle = () => {
-  const context = useEditContext();
-  return context.isEdit;
-};
-
-export const ifEditable = ifToggledOn(useEditToggle);
-
-export const ifReadOnly = ifToggledOff(useEditToggle);
+// eslint-disable-next-line import/prefer-default-export
+export { run } from '@oclif/command';

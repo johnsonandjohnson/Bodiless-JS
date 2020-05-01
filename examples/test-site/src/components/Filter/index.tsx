@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,14 +12,15 @@
  * limitations under the License.
  */
 
-import { useEditContext } from './hooks';
-import { ifToggledOn, ifToggledOff } from './withFlowToggle';
+import { asTaggableItem, withFilterByTags } from '@bodiless/components';
+import { Span, addClasses, Button } from '@bodiless/fclasses';
+import { flow } from 'lodash';
 
-export const useEditToggle = () => {
-  const context = useEditContext();
-  return context.isEdit;
-};
-
-export const ifEditable = ifToggledOn(useEditToggle);
-
-export const ifReadOnly = ifToggledOff(useEditToggle);
+const TagSpan = addClasses('px-2 mb-2 mr-2')(Span);
+const TagButton = addClasses('px-2 mb-2 mr-2 border border-gray-600')(Button);
+const TaggableFilterableItem = flow(
+  withFilterByTags,
+  asTaggableItem(),
+)(TagSpan);
+export { TagButton };
+export default TaggableFilterableItem;
