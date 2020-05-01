@@ -17,12 +17,11 @@ import { graphql } from 'gatsby';
 import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
-  List, Editable, asEditableList, withBasicSublist,
+  List, Editable, asEditableList, withBasicSublist, asTestableList,
 } from '@bodiless/components';
 import {
   withDesign, replaceWith, addClasses, stylable,
 } from '@bodiless/fclasses';
-import { asTestableList } from '@bodiless/components/lib/List';
 import Layout from '../../../components/Layout';
 import EditableLink from '../../../components/Link';
 
