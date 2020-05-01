@@ -42,9 +42,9 @@ const LinkTitle = (props: any) => (
 const EditableList = flow(
   asEditableList,
   withDesign({
-    Title: flow(replaceWith(SimpleTitle), addProps({ 'aria-label': 'list-title' })),
+    Title: flow(replaceWith(SimpleTitle), addProps({ 'aria-label': 'List Title' })),
     Wrapper: flow(stylable, addClasses('pl-10')),
-    Item: flow(stylable, addClasses('text-red'), addProps({ 'aria-label': 'list-item' })),
+    Item: flow(stylable, addClasses('text-red'), addProps({ 'aria-label': 'List Item' })),
   }),
 )(List);
 
