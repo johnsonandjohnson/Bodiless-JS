@@ -20,7 +20,7 @@ import {
   List, Editable, asEditableList, withBasicSublist,
 } from '@bodiless/components';
 import {
-  withDesign, replaceWith, addClasses, stylable,
+  withDesign, replaceWith, addClasses, stylable, addProps,
 } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
 import EditableLink from '../../../components/Link';
@@ -42,9 +42,9 @@ const LinkTitle = (props: any) => (
 const EditableList = flow(
   asEditableList,
   withDesign({
-    Title: replaceWith(SimpleTitle),
+    Title: flow(replaceWith(SimpleTitle), addProps({ 'aria-label': 'list-title' })),
     Wrapper: flow(stylable, addClasses('pl-10')),
-    Item: flow(stylable, addClasses('text-red')),
+    Item: flow(stylable, addClasses('text-red'), addProps({ 'aria-label': 'list-item' })),
   }),
 )(List);
 
