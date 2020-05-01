@@ -78,8 +78,8 @@ const BasicList: FC<Props> = ({ components, unwrap, ...rest }) => {
 
 const asTestableList = withDesign({
   Wrapper: addProps({ 'data-list-element': 'list' }),
-  Title: addProps({ 'data-list-title': 'list-title' }),
-  Item: addProps({ 'data-list-item': 'list-item' }),
+  Title: addProps({ 'data-list-element': 'title' }),
+  Item: addProps({ 'data-list-element': 'item' }),
 });
 
 /**
