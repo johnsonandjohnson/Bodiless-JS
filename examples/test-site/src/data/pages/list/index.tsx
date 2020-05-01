@@ -24,6 +24,7 @@ import {
 } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
 import EditableLink from '../../../components/Link';
+import { asTestableList } from '@bodiless/components/lib/List';
 
 /**
  * We provide a simple, editable title.
@@ -42,10 +43,11 @@ const LinkTitle = (props: any) => (
 const EditableList = flow(
   asEditableList,
   withDesign({
-    Title: flow(replaceWith(SimpleTitle), addProps({ 'aria-label': 'List Title' })),
+    Title: replaceWith(SimpleTitle),
     Wrapper: flow(stylable, addClasses('pl-10')),
-    Item: flow(stylable, addClasses('text-red'), addProps({ 'aria-label': 'List Item' })),
+    Item: flow(stylable, addClasses('text-red')),
   }),
+  asTestableList,
 )(List);
 
 /**
