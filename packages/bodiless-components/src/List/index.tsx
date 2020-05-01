@@ -82,12 +82,6 @@ const asTestableList = withDesign({
   Item: addProps({ 'data-list-item': 'list-item' }),
 });
 
-const TestableList = flow(
-  asTestableList,
-  withNode,
-)(BasicList);
-
-
 /**
  * A List component.
  */
@@ -99,4 +93,4 @@ const List = flow(
 List.displayName = 'List';
 
 export default List;
-export { asTestableList, TestableList };
+export { asTestableList };
