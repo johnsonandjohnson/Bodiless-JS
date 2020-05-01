@@ -46,6 +46,8 @@ import {
 import page404Handler, { Page404Params } from './page404-handler';
 import debug from './debug';
 
+const jsYaml = require('js-yaml');
+
 export enum TrailingSlash {
   Skip = 'skip',
   Remove = 'remove',
@@ -182,7 +184,7 @@ export class SiteFlattener {
       await downloader.downloadFiles([fileUrl]);
     });
     const exports = this.params.exports || null;
-    if (!!exports.redirects) {
+    if (exports.redirects) {
       const redirectKeys: Array<string> = [];
       scraper.on('responseReceived', async response => {
         if ([301, 302, 307, 308].indexOf(response.status()) !== -1) {
@@ -199,20 +201,21 @@ export class SiteFlattener {
           }
         }
       });
-
     }
+
     await scraper.Crawl();
 
     // Export redirect rules.
     if (redirects.length && exports.redirects.path) {
       const format = exports.redirects.format || 'yaml';
-      switch(format) {
+      switch (format) {
         case 'yaml':
-          const jsYaml = require('js-yaml');
-          fs.writeFile(exports.redirects.path, jsYaml.dump({paths: redirects}), (err) => {
+          fs.writeFile(exports.redirects.path, jsYaml.dump({ paths: redirects }), err => {
             if (err) throw err;
           });
           break;
+        default:
+          throw new Error('unknown format is specified');
       }
     }
   }
