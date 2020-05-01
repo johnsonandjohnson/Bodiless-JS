@@ -20,7 +20,7 @@ import {
   List, Editable, asEditableList, withBasicSublist,
 } from '@bodiless/components';
 import {
-  withDesign, replaceWith, addClasses, stylable, addProps,
+  withDesign, replaceWith, addClasses, stylable,
 } from '@bodiless/fclasses';
 import { asTestableList } from '@bodiless/components/lib/List';
 import Layout from '../../../components/Layout';
