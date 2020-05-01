@@ -79,7 +79,7 @@ const BasicList: FC<Props> = ({ components, unwrap, ...rest }) => {
 const asTestableList = withDesign({
   Wrapper: addProps({ 'data-list-element': 'list' }),
   Title: addProps({ 'data-list-title': 'list-title' }),
-  item: addProps({ 'data-list-item': 'list-item' }),
+  Item: addProps({ 'data-list-item': 'list-item' }),
 });
 
 const TestableList = flow(
