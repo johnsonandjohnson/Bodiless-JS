@@ -14,7 +14,7 @@
 
 import { EventEmitter as EE } from 'ee-ts';
 // eslint-disable-next-line import/no-unresolved
-import { Request } from '@bodiless/headless-chrome-crawler/lib/puppeteer';
+import { Request, Response } from '@bodiless/headless-chrome-crawler/lib/puppeteer';
 // @ts-ignore - ignoring as it contains functions that invoked in browser
 import evaluatePage from './evaluate-page';
 import {
@@ -47,6 +47,7 @@ interface Events {
   fileReceived(file: string): void,
   requestStarted(file: string): void,
   error(error: Error): void
+  responseReceived(response: Response): void,
 }
 
 export interface ScraperParams {
@@ -136,6 +137,10 @@ export class Scraper extends EE<Events> {
         this.emit('requestStarted', request.url());
       }
     });
+    crawler.on(HCCrawler.Events.PuppeteerResponseReceived, async (response: Response) => {
+      this.emit('responseReceived', response);
+    });
+
     // Queue a request
     const queue = this.params.pageUrls.map((url, index, pageUrls) => {
       const pageHost = getHostNameWithoutWWW(url);

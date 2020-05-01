@@ -71,6 +71,7 @@ declare class HCCrawler extends EventEmitter {
     Disconnected: 'disconnected';
     AttachedFileRequested: 'attachedfilerequested';
     PuppeteerRequestStarted: 'puppeteerrequeststarted';
+    PuppeteerResponseReceived: 'puppeteerresponsereceived';
   };
 }
 

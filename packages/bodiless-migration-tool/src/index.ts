@@ -89,6 +89,7 @@ class MigrationTool extends Command {
       },
       trailingSlash: settings.trailingSlash || TrailingSlash.Add,
       transformers: settings.transformers || [],
+      exports: settings.exports || {},
       htmltojsx: true,
       disableTailwind: settings.disableTailwind === undefined ? true : settings.disableTailwind,
       allowFallbackHtml: settings.allowFallbackHtml === undefined

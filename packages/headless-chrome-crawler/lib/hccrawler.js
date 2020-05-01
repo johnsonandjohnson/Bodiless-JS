@@ -344,6 +344,7 @@ class HCCrawler extends EventEmitter {
     let isFileRequested = false;
     crawler._page.on('response', response => {
       isFileRequested = isFileResponse(response);
+      this.emit(HCCrawler.Events.PuppeteerResponseReceived, response);
     });
     try {
       const res = await this._crawl(crawler);
@@ -673,6 +674,7 @@ HCCrawler.Events = {
   Disconnected: 'disconnected',
   AttachedFileRequested: 'attachedfilerequested',
   PuppeteerRequestStarted: 'puppeteerrequeststarted',
+  PuppeteerResponseReceived: 'puppeteerresponsereceived',
 };
 
 tracePublicAPI(HCCrawler);
