@@ -17,7 +17,7 @@ import { asBodilessLink } from './Link';
 import Image, { asBodilessImage } from './Image';
 import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
-import List from './List';
+import List, { asTestableList } from './List';
 import {
   FinalProps as ListProps,
   TitleProps as ListTitleProps,
@@ -52,6 +52,7 @@ export {
   ListDesignableComponents,
   asEditableList,
   asBasicSublist,
+  asTestableList,
   withBasicSublist,
   withSublist,
   withDeleteSublistOnUnwrap,

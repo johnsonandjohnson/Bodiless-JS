@@ -21,7 +21,9 @@ import React, {
 import { flow } from 'lodash';
 import { observer } from 'mobx-react-lite';
 import { withNode, withoutProps } from '@bodiless/core';
-import { designable, asComponent, addProps, withDesign } from '@bodiless/fclasses';
+import {
+  designable, asComponent, addProps, withDesign,
+} from '@bodiless/fclasses';
 import { useItemsMutators, useItemsAccessors } from './model';
 import { Props, FinalProps, ListDesignableComponents } from './types';
 

@@ -22,9 +22,9 @@ import {
 import {
   withDesign, replaceWith, addClasses, stylable, addProps,
 } from '@bodiless/fclasses';
+import { asTestableList } from '@bodiless/components/lib/List';
 import Layout from '../../../components/Layout';
 import EditableLink from '../../../components/Link';
-import { asTestableList } from '@bodiless/components/lib/List';
 
 /**
  * We provide a simple, editable title.
