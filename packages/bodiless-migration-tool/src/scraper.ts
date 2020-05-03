@@ -48,6 +48,7 @@ interface Events {
   requestStarted(file: string): void,
   error(error: Error): void
   responseReceived(response: Response): void,
+  requestFinished(): void,
 }
 
 export interface ScraperParams {
@@ -139,6 +140,9 @@ export class Scraper extends EE<Events> {
     });
     crawler.on(HCCrawler.Events.PuppeteerResponseReceived, async (response: Response) => {
       this.emit('responseReceived', response);
+    });
+    crawler.on(HCCrawler.Events.RequestFinished, async () => {
+      this.emit('requestFinished');
     });
 
     // Queue a request

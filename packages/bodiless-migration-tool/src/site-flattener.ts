@@ -14,8 +14,8 @@
 
 /* eslint class-methods-use-this: 0 */
 import path from 'path';
-import fs from 'fs';
 import minimatch from 'minimatch';
+import { isEmpty } from 'lodash';
 import {
   getUrlToLocalDirectoryMapper,
   prependProtocolToBareUrl,
@@ -45,8 +45,7 @@ import {
 } from './html-to-components';
 import page404Handler, { Page404Params } from './page404-handler';
 import debug from './debug';
-
-const jsYaml = require('js-yaml');
+import ResponseProcessor, { RedirectConfig } from './response-processor';
 
 export enum TrailingSlash {
   Skip = 'skip',
@@ -91,18 +90,8 @@ export interface SiteFlattenerParams {
   reservedPaths?: Array<string>,
   allowFallbackHtml?: boolean,
   exports: {
-    redirects: {
-      path: string,
-      format: string,
-    }
+    redirects: RedirectConfig,
   },
-}
-
-interface RedirectRule {
-  [key:string]: {
-    to: string,
-    code: number,
-  }
 }
 
 export class SiteFlattener {
@@ -116,6 +105,7 @@ export class SiteFlattener {
       ...params,
       websiteUrl: prependProtocolToBareUrl(params.websiteUrl),
       trailingSlash: params.trailingSlash || TrailingSlash.Add,
+      exports: params.exports,
       scraperParams: {
         ...params.scraperParams,
         pageUrls: params.scraperParams.pageUrls.map(pageUrl => prependProtocolToBareUrl(pageUrl)),
@@ -154,8 +144,8 @@ export class SiteFlattener {
       enableFileDownload: false,
       downloadPath: getUrlToLocalDirectoryMapper(this.canvasX.getStaticDir()),
     };
-    const { page404Params } = this.params;
-    const redirects: Array<RedirectRule> = [];
+    const { page404Params, exports } = this.params;
+    const responseProcessor = new ResponseProcessor();
     const scraper = new Scraper(scraperParams);
     scraper.on('pageReceived', async result => {
       try {
@@ -183,46 +173,18 @@ export class SiteFlattener {
       );
       await downloader.downloadFiles([fileUrl]);
     });
-    const exports = this.params.exports || null;
-    if (exports.redirects) {
-      const redirectKeys: Array<string> = [];
-      scraper.on('responseReceived', async response => {
-        if ([301, 302, 307, 308].indexOf(response.status()) !== -1) {
-          const headers = response.headers();
-          const from = this.getRedirectPath(response.url());
-          if (redirectKeys.indexOf(from) === -1) {
-            redirectKeys.push(from);
-            const redirectRule: RedirectRule = {};
-            redirectRule[from] = {
-              to: this.getRedirectPath(headers.location),
-              code: response.status(),
-            };
-            redirects.push(redirectRule);
-          }
-        }
-      });
-    }
+    scraper.on('responseReceived', async response => {
+      if (!isEmpty(exports) && !isEmpty(exports.redirects)) {
+        responseProcessor.processRedirect(response);
+      }
+    });
+    scraper.on('requestFinished', async () => {
+      if (!isEmpty(exports) && !isEmpty(exports.redirects)) {
+        responseProcessor.exportRedirects(exports.redirects);
+      }
+    });
 
     await scraper.Crawl();
-
-    // Export redirect rules.
-    if (redirects.length && exports.redirects.path) {
-      const format = exports.redirects.format || 'yaml';
-      switch (format) {
-        case 'yaml':
-          fs.writeFile(exports.redirects.path, jsYaml.dump({ paths: redirects }), err => {
-            if (err) throw err;
-          });
-          break;
-        default:
-          throw new Error('unknown format is specified');
-      }
-    }
-  }
-
-  private getRedirectPath(url: string): string {
-    const u = new URL(url);
-    return u.pathname.replace(/\/$/g, '');
   }
 
   private getConfPath(): string {
