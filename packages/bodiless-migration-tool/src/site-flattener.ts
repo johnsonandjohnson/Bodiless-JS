@@ -178,13 +178,10 @@ export class SiteFlattener {
         responseProcessor.processRedirect(response);
       }
     });
-    scraper.on('requestFinished', async () => {
-      if (!isEmpty(exports) && !isEmpty(exports.redirects)) {
-        responseProcessor.exportRedirects(exports.redirects);
-      }
-    });
-
     await scraper.Crawl();
+    if (!isEmpty(exports) && !isEmpty(exports.redirects)) {
+      responseProcessor.exportRedirects(exports.redirects);
+    }
   }
 
   private getConfPath(): string {

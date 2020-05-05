@@ -62,14 +62,18 @@ export default class ResponseProcessor {
       const headers = response.headers();
       const from = ResponseProcessor.getRedirectPath(response.url()).replace(/\/$/g, '');
       const destUrl = headers.location;
-      const destination = isUrlExternal(response.request().url(), destUrl)
+      const destination = isUrlExternal(response.url(), destUrl)
         ? headers.location
         : ResponseProcessor.getRedirectPath(headers.location);
-      debug(`scraped page redirected from ${from} to ${destination}.`);
-      this.redirects[from] = {
-        to: destination,
-        code: response.status(),
-      };
+
+      // Avoid trailing slash redirect that could cause loop.
+      if (from !== destination.replace(/\/$/g, '')) {
+        debug(`scraped page redirected from ${from} to ${destination}.`);
+        this.redirects[from] = {
+          to: destination,
+          code: response.status(),
+        };
+      }
     }
   }
 
