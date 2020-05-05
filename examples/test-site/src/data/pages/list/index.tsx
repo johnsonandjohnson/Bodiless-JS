@@ -55,6 +55,7 @@ const EditableList = flow(
 const EditableLinkList = flow(
   asEditableList,
   withDesign({ Title: replaceWith(LinkTitle), Wrapper: flow(stylable, addClasses('pl-10')) }),
+  asTestableList,
 )(List);
 
 /**
