@@ -43,6 +43,7 @@ import { useDropzone } from 'react-dropzone';
 import { FormApi } from 'informed';
 import { Spinner } from '@bodiless/ui';
 import BackendSave from './BackendSave';
+import Placeholder from './placeholder.png';
 
 // Type of the data used by this component.
 export type Data = {
@@ -161,7 +162,7 @@ export const editButtonOptions: EditButtonOptions<Props, Data> = {
 };
 
 const emptyValue = {
-  src: '/images/placeholder.png',
+  src: Placeholder,
   alt: 'Alt Text',
 };
 
@@ -172,11 +173,16 @@ const emptyValue = {
 // - anything relying on the context (activator, indicator) must be
 //   *after* `withEditButton()` as this establishes the context.
 // - withData must be *after* the data handlers are defiend.
-export const asBodilessImage = (nodeKey?: string) => flowRight(
+export const asBodilessImage = (nodeKey?: string, nodeData?: Partial<Data>) => flowRight(
   // @ts-ignore: Types of parameters are incompatible.
   withNodeKey(nodeKey),
   withNode,
-  withNodeDataHandlers(emptyValue),
+  withNodeDataHandlers(
+    {
+      ...emptyValue,
+      ...nodeData,
+    },
+  ),
   ifReadOnly(
     withoutProps(['setComponentData']),
   ),

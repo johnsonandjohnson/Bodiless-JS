@@ -17,6 +17,7 @@ import withToutVariations from './withToutVariations';
 import withContentfulTouts from './withContentfulTouts';
 import withRichTextVariations from './withRichTextVariations';
 import withSingleAccordionVariations from './withSingleAccordionVariations';
+import withImageVariations from './withImageVariations';
 
 import { asFlowContainerWithMargins } from './token';
 
@@ -27,6 +28,7 @@ const FlowContainerDefault = flow(
   withContentfulTouts,
   withRichTextVariations,
   withSingleAccordionVariations,
+  withImageVariations,
   asFlowContainerWithMargins,
 )(FlowContainer);
 
