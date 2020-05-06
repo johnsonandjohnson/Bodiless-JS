@@ -28,8 +28,9 @@ interface RedirectRule {
   }
 }
 
-enum ExportFormat {
+export enum ExportFormat {
   Yaml = 'yaml',
+  Json = 'json',
 }
 
 export interface RedirectConfig {

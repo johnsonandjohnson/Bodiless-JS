@@ -12,11 +12,15 @@
  * limitations under the License.
  */
 
-import ResponseProcessor from '../src/response-processor';
+import ResponseProcessor, { RedirectConfig, ExportFormat } from '../src/response-processor';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { Response } = require('puppeteer/lib/NetworkManager');
+const fs = require('fs');
+const jsYaml = require('js-yaml');
 
+// jest.mock('fs');
+fs.writeFile = jest.fn();
 let rp = new ResponseProcessor();
 
 describe('Process redirect urls', () => {
@@ -68,5 +72,55 @@ describe('Process redirect urls', () => {
       rp.processRedirect(Response);
       expect(rp.redirects).toMatchObject({});
     });
+  });
+});
+
+describe('Export redirect rules to file', () => {
+  beforeEach(() => {
+    rp = new ResponseProcessor();
+    const responseSet = [
+      {
+        url: 'http://example.com/page1',
+        location: 'http://example.com/page2/',
+        code: 301,
+      },
+      {
+        url: 'http://example.com/page3',
+        location: 'http://example.com/page4/',
+        code: 302,
+      },
+    ];
+    responseSet.forEach(_ => {
+      Response.headers = jest.fn(() => ({
+        location: _.location
+      }));
+      Response.url = jest.fn(() => _.url);
+      Response.status = jest.fn(() => _.code);
+      rp.processRedirect(Response);
+    });
+
+  });
+
+  it('creates exports in right format', () => {
+    const conf: RedirectConfig = {
+      path: '/path/to/export.yaml',
+      format: ExportFormat.Yaml,
+    };
+    rp.exportRedirects(conf);
+    expect(fs.writeFile.mock.calls.length).toBe(1);
+    expect(fs.writeFile.mock.calls[0][0]).toBe(conf.path);
+    expect(fs.writeFile.mock.calls[0][1]).toBe(jsYaml.dump({ paths: rp.redirects }));
+  });
+
+  it('throws exception for wrong export format', () => {
+    const conf: RedirectConfig = {
+      path: '/path/to/export.yaml',
+      format: ExportFormat.Json,
+    };
+    try {
+      rp.exportRedirects(conf);
+    } catch (e) {
+      expect(e.message).toBe('Unknown format is specified');
+    }
   });
 });
