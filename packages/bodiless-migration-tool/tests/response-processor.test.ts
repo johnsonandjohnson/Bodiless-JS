@@ -92,13 +92,12 @@ describe('Export redirect rules to file', () => {
     ];
     responseSet.forEach(_ => {
       Response.headers = jest.fn(() => ({
-        location: _.location
+        location: _.location,
       }));
       Response.url = jest.fn(() => _.url);
       Response.status = jest.fn(() => _.code);
       rp.processRedirect(Response);
     });
-
   });
 
   it('creates exports in right format', () => {
