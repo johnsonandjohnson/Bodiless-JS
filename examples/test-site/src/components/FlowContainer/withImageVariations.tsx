@@ -24,35 +24,34 @@ import {
 import { withType } from './Categories';
 import {
   SquareImage,
-  HorizontalImage,
-  LinkableSquareImage,
-  LinkableHorizontalImage,
+  SquareLinkableImage,
+  LandscapeImage,
+  LandscapeLinkableImage,
 } from '../Image';
 
 const images = {
   SquareImage: flow(
     replaceWith(SquareImage),
-    // ToDo: provide a better title and description
     withTitle('Square Image'),
     withDesc('Adds a square image'),
     withType('Image')(),
   ),
-  HorizontalImage: flow(
-    replaceWith(HorizontalImage),
-    withTitle('Horizontal Image'),
-    withDesc('Adds a horizontal image'),
+  LandscapeImage: flow(
+    replaceWith(LandscapeImage),
+    withTitle('Landscape Image'),
+    withDesc('Adds a landscape image'),
     withType('Image')(),
   ),
-  LinkableSquareImage: flow(
-    replaceWith(LinkableSquareImage),
-    withTitle('Linkable Square Image'),
-    withDesc('Adds a linkable square image'),
+  SquareLinkableImage: flow(
+    replaceWith(SquareLinkableImage),
+    withTitle('Square Linkable Image'),
+    withDesc('Adds a square linkable image'),
     withType('Linkable Image')(),
   ),
-  LinkableHorizontalImage: flow(
-    replaceWith(LinkableHorizontalImage),
-    withTitle('Linkable Horizontal Image'),
-    withDesc('Adds a linkable horizontal image'),
+  LandscapeLinkableImage: flow(
+    replaceWith(LandscapeLinkableImage),
+    withTitle('Landscape Linkable Image'),
+    withDesc('Adds a linkable landscape image'),
     withType('Linkable Image')(),
   ),
 };

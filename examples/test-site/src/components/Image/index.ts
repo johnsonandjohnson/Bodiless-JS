@@ -12,23 +12,38 @@
  * limitations under the License.
  */
 
+import { withDefaultContent } from '@bodiless/core';
+import { flowRight } from 'lodash';
 import {
   asBodilessImage,
   asBodilessLink,
   Image,
 } from '@bodiless/components';
-import HImagePlaceholder from './horizontal_image.png';
+import { Img } from '@bodiless/fclasses';
+import landscapeImage from './landscape_image.png';
+
+
+type Data = {
+  src: string;
+  alt: string;
+};
+
+const asContentfulImage = (nodeKey: string, nodeContent: Partial<Data>) => flowRight(
+  withDefaultContent({
+    [nodeKey]: nodeContent,
+  }),
+  asBodilessImage(nodeKey),
+)(Img);
 
 const SquareImage = Image;
-const HorizontalImage = asBodilessImage('horizontalImage', {
-  src: HImagePlaceholder,
-})('img');
-const LinkableSquareImage = asBodilessLink('link')(SquareImage);
-const LinkableHorizontalImage = asBodilessLink('link')(HorizontalImage);
+const SquareLinkableImage = asBodilessLink('link')(SquareImage);
+const LandscapeImage = asContentfulImage('landscapeImage', { src: landscapeImage });
+const LandscapeLinkableImage = asBodilessLink('link')(LandscapeImage);
 
 export {
   SquareImage,
-  HorizontalImage,
-  LinkableSquareImage,
-  LinkableHorizontalImage,
+  LandscapeImage,
+  SquareLinkableImage,
+  LandscapeLinkableImage,
+  asContentfulImage,
 };

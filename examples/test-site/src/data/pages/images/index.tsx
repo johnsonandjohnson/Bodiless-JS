@@ -14,33 +14,137 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
+import { flowRight } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import Layout from '../../../components/Layout';
 import {
-  Image,
-  LinkableImage,
-  HorizontalImage,
-} from '../../../components/Image';
+  H1,
+  H2,
+  H3,
+  Div,
+  addClasses,
+} from '@bodiless/fclasses';
+import Layout from '../../../components/Layout';
+import { asContentfulImage } from '../../../components/Image';
+import {
+  asHeader1,
+  asHeader2,
+  asHeader3,
+  asYMargin,
+  asEditableLink,
+} from '../../../components/Elements.token';
+
+import ImageAnimatedPngSrc from './animated.png';
+import ImageGifSrc from './image.gif';
+import ImageJpgSrc from './image.jpg';
+import ImagePngSrc from './image.png';
+import ImageSvgSrc from './image.svg';
+import ImageWebpSrc from './image.webp';
+import ImageResponsiveSvgSrc from './responsive_asvg.svg';
+
+const ImageAnimatedPng = asContentfulImage('animatedPng', { src: ImageAnimatedPngSrc });
+const ImageGif = asContentfulImage('gif', { src: ImageGifSrc });
+const ImageJpg = asContentfulImage('jpg', { src: ImageJpgSrc });
+const ImagePng = asContentfulImage('png', { src: ImagePngSrc });
+const ImageSvg = asContentfulImage('svg', { src: ImageSvgSrc });
+const ImageWebp = asContentfulImage('webp', { src: ImageWebpSrc });
+const ImageResponsiveSvg = asContentfulImage('responsiveSvg', { src: ImageResponsiveSvgSrc });
+
+const LinkableImageAnimatedPng = asEditableLink('animatedPngLink')(ImageAnimatedPng);
+const LinkableImageGif = asEditableLink('gifLink')(ImageGif);
+const LinkableImageJpg = asEditableLink('jpgLink')(ImageJpg);
+const LinkableImagePng = asEditableLink('pngLink')(ImagePng);
+const LinkableImageSvg = asEditableLink('svgLink')(ImageSvg);
+const LinkableImageWebp = asEditableLink('webpLink')(ImageWebp);
+const LinkableImageResponsiveSvg = asEditableLink('responsiveSvgLink')(ImageResponsiveSvg);
+
+const PageTitle = asHeader1(H1);
+
+const ImageWrapper = flowRight(
+  addClasses('inline-block'),
+)(Div);
+const ImageSectionTitle = flowRight(
+  asHeader2,
+  asYMargin,
+)(H2);
+const ImageTitle = asHeader3(H3);
 
 export default (props: any) => (
   <Page {...props}>
     <Layout>
-      <h1 className="text-3xl font-bold">Images Demo</h1>
-      <div className="pt-4">
-        <h2 className="text-2xl font-bold">Square Image</h2>
-        <Image nodeKey="squareImage" />
+      <PageTitle>Images Demo</PageTitle>
+      <div>
+        <ImageSectionTitle>Editable images</ImageSectionTitle>
+        <ImageWrapper>
+          <ImageTitle>Animated PNG</ImageTitle>
+          <ImageAnimatedPng />
+        </ImageWrapper>
+      
+        <ImageWrapper>
+          <ImageTitle>GIF</ImageTitle>
+          <ImageGif />
+        </ImageWrapper>
+
+        <ImageWrapper>
+          <ImageTitle>JPG</ImageTitle>
+          <ImageJpg />
+        </ImageWrapper>
+
+        <ImageWrapper>
+          <ImageTitle>PNG</ImageTitle>
+          <ImagePng />
+        </ImageWrapper>
+
+        <ImageWrapper>
+          <ImageTitle>SVG</ImageTitle>
+          <ImageSvg />
+        </ImageWrapper>
+
+        <ImageWrapper>
+          <ImageTitle>WEBP</ImageTitle>
+          <ImageWebp />
+        </ImageWrapper>
+
+        <ImageWrapper>
+          <ImageTitle>Responsive SVG</ImageTitle>
+          <ImageResponsiveSvg />
+        </ImageWrapper>
       </div>
-      <div className="pt-4">
-        <h2 className="text-2xl font-bold">Horizontal Image</h2>
-        <HorizontalImage />
-      </div>
-      <div className="pt-4">
-        <h2 className="text-2xl font-bold">Linkable Square Image</h2>
-        <LinkableImage nodeKey="squareImage" />
-      </div>
-      <div className="pt-4">
-        <h2 className="text-2xl font-bold">Linkable Horizontal Image</h2>
-        <LinkableImage nodeKey="horizontalImage" />
+      <div>
+        <ImageSectionTitle>Linkable Editable images</ImageSectionTitle>
+        <ImageWrapper>
+          <ImageTitle>Animated PNG</ImageTitle>
+          <LinkableImageAnimatedPng />
+        </ImageWrapper>
+      
+        <ImageWrapper>
+          <ImageTitle>GIF</ImageTitle>
+          <LinkableImageGif />
+        </ImageWrapper>
+
+        <ImageWrapper>
+          <ImageTitle>JPG</ImageTitle>
+          <LinkableImageJpg />
+        </ImageWrapper>
+
+        <ImageWrapper>
+          <ImageTitle>PNG</ImageTitle>
+          <LinkableImagePng />
+        </ImageWrapper>
+
+        <ImageWrapper>
+          <ImageTitle>SVG</ImageTitle>
+          <LinkableImageSvg />
+        </ImageWrapper>
+
+        <ImageWrapper>
+          <ImageTitle>WEBP</ImageTitle>
+          <LinkableImageWebp />
+        </ImageWrapper>
+
+        <ImageWrapper>
+          <ImageTitle>Responsive SVG</ImageTitle>
+          <LinkableImageResponsiveSvg />
+        </ImageWrapper>
       </div>
     </Layout>
   </Page>

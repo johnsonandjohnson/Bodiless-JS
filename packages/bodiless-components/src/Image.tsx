@@ -43,6 +43,7 @@ import { useDropzone } from 'react-dropzone';
 import { FormApi } from 'informed';
 import { Spinner } from '@bodiless/ui';
 import BackendSave from './BackendSave';
+// ToDo: typescript error should be resolved
 import Placeholder from './placeholder.png';
 
 // Type of the data used by this component.
@@ -173,16 +174,11 @@ const emptyValue = {
 // - anything relying on the context (activator, indicator) must be
 //   *after* `withEditButton()` as this establishes the context.
 // - withData must be *after* the data handlers are defiend.
-export const asBodilessImage = (nodeKey?: string, nodeData?: Partial<Data>) => flowRight(
+export const asBodilessImage = (nodeKey?: string) => flowRight(
   // @ts-ignore: Types of parameters are incompatible.
   withNodeKey(nodeKey),
   withNode,
-  withNodeDataHandlers(
-    {
-      ...emptyValue,
-      ...nodeData,
-    },
-  ),
+  withNodeDataHandlers(emptyValue),
   ifReadOnly(
     withoutProps(['setComponentData']),
   ),

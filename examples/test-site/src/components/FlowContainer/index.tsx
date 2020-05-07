@@ -21,14 +21,14 @@ import withImageVariations from './withImageVariations';
 
 import { asFlowContainerWithMargins } from './token';
 
-// Typically we would also import variations of other types of component.
-// const variations = extendDesign(toutVariations, sliderVariations, ...);
+// Order of includes currently dictates order in Component Picker
+// thus recommend putting more frequently used components toward top for quicker access.
 const FlowContainerDefault = flow(
+  withRichTextVariations,
+  withImageVariations,
   withToutVariations,
   withContentfulTouts,
-  withRichTextVariations,
   withSingleAccordionVariations,
-  withImageVariations,
   asFlowContainerWithMargins,
 )(FlowContainer);
 
