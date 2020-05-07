@@ -50,6 +50,7 @@ const asTaggableItem = (nodeKey?: string) => flowRight(
     withLocalContextMenu,
   ),
   withoutProps([
+    'registerSuggestions',
     'getSuggestions',
     'allowNew',
     'noSuggestionsText',

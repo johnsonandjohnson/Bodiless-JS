@@ -71,10 +71,9 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerPr
           const ChildComponent = components[flowContainerItem.type];
           if (!ChildComponent) return null;
           return (
-            <ChildNodeProvider nodeKey={flowContainerItem.uuid}>
+            <ChildNodeProvider nodeKey={flowContainerItem.uuid} key={`node-${flowContainerItem.uuid}`}>
               <ComponentWrapper
                 ui={ui}
-                key={`node-${flowContainerItem.uuid}`}
                 index={index}
                 flowContainerItem={flowContainerItem}
                 snapData={snapData}

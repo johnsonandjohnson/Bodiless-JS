@@ -12,14 +12,17 @@
  * limitations under the License.
  */
 
-import { useAccordionContext } from './AccordionContext';
-import { asAccodionTitle } from './AccordionTitle';
-import { asAccordionBody } from './AccordionBody';
-import asAccordionWrapper from './AccordionWrapper';
+import { ComponentType, HTMLProps } from 'react';
+import { StylableProps, DesignableComponentsProps } from '@bodiless/fclasses';
 
-export {
-  useAccordionContext,
-  asAccordionWrapper,
-  asAccodionTitle,
-  asAccordionBody,
+export type AccordionTitleComponents = {
+  Wrapper: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
+  Icon: ComponentType<StylableProps & HTMLProps<HTMLSpanElement>>,
 };
+
+export type AccordionBodyComponents = {
+  Wrapper: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
+};
+
+export type AccordionTitleProps = DesignableComponentsProps<AccordionTitleComponents>;
+export type AccordionBodyProps = DesignableComponentsProps<AccordionBodyComponents>;

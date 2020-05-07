@@ -12,14 +12,15 @@
  * limitations under the License.
  */
 
-import { useAccordionContext } from './AccordionContext';
-import { asAccodionTitle } from './AccordionTitle';
-import { asAccordionBody } from './AccordionBody';
-import asAccordionWrapper from './AccordionWrapper';
+import React, { ComponentType } from 'react';
+import { AccordionProvider } from './AccordionContext';
 
-export {
-  useAccordionContext,
-  asAccordionWrapper,
-  asAccodionTitle,
-  asAccordionBody,
-};
+const asAccordionWrapper = <P extends Object>(
+  Component: ComponentType<P> | string,
+) => (props: P) => (
+  <AccordionProvider>
+    <Component {...props} />
+  </AccordionProvider>
+  );
+
+export default asAccordionWrapper;

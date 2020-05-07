@@ -48,10 +48,8 @@ const mapBreakpointsSize = (breakpoints: BreakpointsType = {}, width: number) =>
 
 const usePageDimensionsContext = () => useContext(PageDimensionsContext);
 
-const isWindowDefined = typeof window !== 'undefined';
-
 const getDimensions = (breakpoints?: BreakpointsType): PageDimensions => {
-  if (isWindowDefined) {
+  if (typeof window !== 'undefined') {
     return {
       width: window.innerWidth,
       height: window.innerHeight,
@@ -70,7 +68,7 @@ const PageDimensionsProvider: FC<PageDimensionsProviderProps> = ({ children, bre
       setDimensions(getDimensions(breakpoints));
     };
 
-    if (isWindowDefined) window.addEventListener('resize', throttle(handleResize, 500));
+    window.addEventListener('resize', throttle(handleResize, 500));
 
     return () => {
       window.removeEventListener('resize', handleResize);

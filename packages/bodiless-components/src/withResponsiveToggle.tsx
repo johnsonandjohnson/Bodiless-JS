@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 
-import { ifToggledOn, ifToggledOff } from '@bodiless/core';
+import { ComponentType } from 'react';
+import { ifToggledOn, ifToggledOff, withFlowToggle } from '@bodiless/core';
 import { usePageDimensionsContext } from './PageDimensionsProvider';
 
 const useResponsiveToggle = (sizes: string[] | string) => () => {
@@ -20,10 +21,22 @@ const useResponsiveToggle = (sizes: string[] | string) => () => {
   return Array.isArray(sizes) ? sizes.includes(size) : sizes === size;
 };
 
+const useRehydrationToggle = () => typeof window !== 'undefined';
+
 const ifViewportIs = (sizes: string[] | string) => ifToggledOn(useResponsiveToggle(sizes));
 const ifViewportIsNot = (sizes: string[] | string) => ifToggledOff(useResponsiveToggle(sizes));
 
+const ifHydrated = ifToggledOn(useRehydrationToggle);
+const ifNotHydrated = ifToggledOff(useRehydrationToggle);
+
+const withRehydrationPlaceholder = <P extends object>(
+  Placeholder: ComponentType<P>,
+) => (Component: ComponentType<P>) => withFlowToggle(useRehydrationToggle)(Placeholder, Component);
+
 export {
+  ifHydrated,
+  ifNotHydrated,
   ifViewportIs,
   ifViewportIsNot,
+  withRehydrationPlaceholder,
 };
