@@ -44,9 +44,6 @@ import PageDimensionsProvider, {
 import {
   ifViewportIs,
   ifViewportIsNot,
-  ifNotHydrated,
-  ifHydrated,
-  withRehydrationPlaceholder,
 } from './withResponsiveToggle';
 
 export * from './Accordion';
@@ -91,7 +88,4 @@ export {
   BreakpointsType,
   ifViewportIs,
   ifViewportIsNot,
-  ifHydrated,
-  ifNotHydrated,
-  withRehydrationPlaceholder,
 };

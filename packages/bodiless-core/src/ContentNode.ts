@@ -41,7 +41,6 @@ export type Path = string | string[];
 
 export type ContentNode<D> = {
   data: D;
-  parent: () => ContentNode<D>;
   setData: (data: D) => void;
   delete: (path?: Path) => void;
   keys: string[];
@@ -71,10 +70,6 @@ export class DefaultContentNode<D extends object> implements ContentNode<D> {
   child<E extends object>(path: Path) {
     const paths = Array.isArray(path) ? path : [path];
     return this.peer<E>([...this.path, ...paths]);
-  }
-
-  parent<E extends object>() {
-    return this.peer<E>([...this.path.slice(0, -1)]);
   }
 
   get data() {

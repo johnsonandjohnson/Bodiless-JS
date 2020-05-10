@@ -12,8 +12,6 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
-import { withParentNode } from '@bodiless/core';
 import { asFilterableByGroup } from '@bodiless/organisms';
 import {
   addClasses,
@@ -31,10 +29,7 @@ const asFlowContainerFullWidth = withDesign({
 });
 
 const asFlowContainerFilterable = withDesign({
-  ComponentWrapper: flow(
-    withParentNode,
-    asFilterableByGroup(),
-  ),
+  ComponentWrapper: asFilterableByGroup,
 });
 
 export {

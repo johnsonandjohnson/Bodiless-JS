@@ -13,13 +13,10 @@
  */
 
 import { flow } from 'lodash';
-import { withNode, withNodeKey } from '@bodiless/core';
 import { asTaggableItem, withFilterByTags } from '@bodiless/components';
 import { withTagProps } from './FilterByGroupContext';
 
-const asFilterableByGroup = (nodeKey: string = '_tags') => flow(
-  withNode,
-  withNodeKey(nodeKey),
+const asFilterableByGroup = flow(
   withFilterByTags,
   asTaggableItem(),
   withTagProps({
