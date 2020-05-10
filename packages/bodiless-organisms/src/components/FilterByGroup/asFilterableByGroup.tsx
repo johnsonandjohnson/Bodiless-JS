@@ -13,12 +13,15 @@
  */
 
 import { flow } from 'lodash';
+import { withSidecarNodes } from '@bodiless/core';
 import { asTaggableItem, withFilterByTags } from '@bodiless/components';
 import { withTagProps } from './FilterByGroupContext';
 
-const asFilterableByGroup = flow(
-  withFilterByTags,
-  asTaggableItem(),
+const asFilterableByGroup = (nodeKey: string = '_tags') => flow(
+  withSidecarNodes(
+    asTaggableItem(nodeKey),
+    withFilterByTags,
+  ),
   withTagProps({
     placeholder: 'Add or Create',
     formTitle: 'Group Membership',

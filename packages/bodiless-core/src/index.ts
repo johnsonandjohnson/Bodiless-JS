@@ -49,6 +49,7 @@ import {
   useActivateOnEffectActivator,
 } from './ActivateContext';
 import withChild from './withChild';
+import withSidecarNodes from './withSidecarNodes';
 
 export * from './components';
 export {
@@ -93,6 +94,7 @@ export {
   ifToggledOn,
   withFlowToggle,
   useEditToggle,
+  withSidecarNodes,
 };
 
 export type Bodiless<P, Q> = (C: ComponentType<P> | string) => ComponentType<Q>;

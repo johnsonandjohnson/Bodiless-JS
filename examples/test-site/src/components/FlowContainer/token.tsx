@@ -29,7 +29,7 @@ const asFlowContainerFullWidth = withDesign({
 });
 
 const asFlowContainerFilterable = withDesign({
-  ComponentWrapper: asFilterableByGroup,
+  ComponentWrapper: asFilterableByGroup(),
 });
 
 export {
