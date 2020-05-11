@@ -13,12 +13,16 @@
  */
 
 import { flow } from 'lodash';
-import { withDefaultContent, withResetButton } from '@bodiless/core';
+import {
+  ifEditable,
+  withDefaultContent,
+  withResetButton,
+} from '@bodiless/core';
 import {
   ToutClean,
   asTestableTout,
 } from '@bodiless/organisms';
-import { withDesign } from '@bodiless/fclasses';
+import { addProps, withDesign } from '@bodiless/fclasses';
 import {
   asEditableImage, asEditableLink,
 } from '../Elements.token';
@@ -26,6 +30,8 @@ import {
   withEditorBasic,
   withEditorSimple,
 } from '../Editors';
+
+const asNonDraggable = addProps({ draggable: false });
 
 export const withToutEditors = flow(
   withDesign({
@@ -35,6 +41,7 @@ export const withToutEditors = flow(
     Link: flow(
       withEditorSimple('text', 'CTA'),
       asEditableLink('cta'),
+      ifEditable(asNonDraggable),
     ),
     Body: withEditorBasic('body', 'Tout Body Text'),
   }),
