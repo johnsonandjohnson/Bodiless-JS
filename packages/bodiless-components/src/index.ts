@@ -36,6 +36,7 @@ import { withToggle, withToggleTo, withToggleButton } from './Toggle';
 import withEditPlaceholder from './Placeholder';
 import { TagButtonProps, withTagButton, useTagsAccessors } from './TagButton';
 import withFilterByTags from './withFilterByTags';
+import Youtube from './Youtube';
 
 export {
   asBodilessLink,
@@ -70,4 +71,5 @@ export {
   asTaggableItem,
   withFilterByTags,
   useTagsAccessors,
+  Youtube,
 };
