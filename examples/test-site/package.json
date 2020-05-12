@@ -17,6 +17,7 @@
     "@bodiless/bv": "^0.0.47",
     "@bodiless/cli": "^0.0.47",
     "@bodiless/components": "^0.0.47",
+    "@bodiless/components-ui": "^0.0.47",
     "@bodiless/core": "^0.0.47",
     "@bodiless/core-ui": "^0.0.47",
     "@bodiless/documentation": "^0.0.47",

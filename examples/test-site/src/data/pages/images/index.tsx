@@ -21,6 +21,7 @@ import {
   H2,
   H3,
   Div,
+  Section,
   addClasses,
 } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
@@ -32,6 +33,7 @@ import {
   asYMargin,
   asEditableLink,
 } from '../../../components/Elements.token';
+import { FlowContainerDefault } from '../../../components/FlowContainer';
 
 import ImageAnimatedPngSrc from './animated.png';
 import ImageGifSrc from './image.gif';
@@ -58,31 +60,21 @@ const LinkableImageWebp = asEditableLink('webpLink')(ImageWebp);
 const LinkableImageResponsiveSvg = asEditableLink('responsiveSvgLink')(ImageResponsiveSvg);
 
 const PageTitle = asHeader1(H1);
-
+const PageSection = flowRight(
+  addClasses('my-4'),
+)(Section);
 const ImageWrapper = flowRight(
-  addClasses('inline-block'),
+  addClasses('inline-block p-2'),
 )(Div);
-const ImageSectionTitle = flowRight(
-  asHeader2,
-  asYMargin,
-)(H2);
+const ImageSectionTitle = asHeader2(H2);
 const ImageTitle = asHeader3(H3);
 
 export default (props: any) => (
   <Page {...props}>
     <Layout>
       <PageTitle>Images Demo</PageTitle>
-      <div>
+      <PageSection>
         <ImageSectionTitle>Editable images</ImageSectionTitle>
-        <ImageWrapper>
-          <ImageTitle>Animated PNG</ImageTitle>
-          <ImageAnimatedPng />
-        </ImageWrapper>
-      
-        <ImageWrapper>
-          <ImageTitle>GIF</ImageTitle>
-          <ImageGif />
-        </ImageWrapper>
 
         <ImageWrapper>
           <ImageTitle>JPG</ImageTitle>
@@ -92,6 +84,11 @@ export default (props: any) => (
         <ImageWrapper>
           <ImageTitle>PNG</ImageTitle>
           <ImagePng />
+        </ImageWrapper>
+
+        <ImageWrapper>
+          <ImageTitle>GIF</ImageTitle>
+          <ImageGif />
         </ImageWrapper>
 
         <ImageWrapper>
@@ -105,21 +102,17 @@ export default (props: any) => (
         </ImageWrapper>
 
         <ImageWrapper>
+          <ImageTitle>Animated PNG</ImageTitle>
+          <ImageAnimatedPng />
+        </ImageWrapper>
+
+        <ImageWrapper>
           <ImageTitle>Responsive SVG</ImageTitle>
           <ImageResponsiveSvg />
         </ImageWrapper>
-      </div>
-      <div>
+      </PageSection>
+      <PageSection>
         <ImageSectionTitle>Linkable Editable images</ImageSectionTitle>
-        <ImageWrapper>
-          <ImageTitle>Animated PNG</ImageTitle>
-          <LinkableImageAnimatedPng />
-        </ImageWrapper>
-      
-        <ImageWrapper>
-          <ImageTitle>GIF</ImageTitle>
-          <LinkableImageGif />
-        </ImageWrapper>
 
         <ImageWrapper>
           <ImageTitle>JPG</ImageTitle>
@@ -129,6 +122,11 @@ export default (props: any) => (
         <ImageWrapper>
           <ImageTitle>PNG</ImageTitle>
           <LinkableImagePng />
+        </ImageWrapper>
+      
+        <ImageWrapper>
+          <ImageTitle>GIF</ImageTitle>
+          <LinkableImageGif />
         </ImageWrapper>
 
         <ImageWrapper>
@@ -142,10 +140,19 @@ export default (props: any) => (
         </ImageWrapper>
 
         <ImageWrapper>
+          <ImageTitle>Animated PNG</ImageTitle>
+          <LinkableImageAnimatedPng />
+        </ImageWrapper>
+
+        <ImageWrapper>
           <ImageTitle>Responsive SVG</ImageTitle>
           <LinkableImageResponsiveSvg />
         </ImageWrapper>
-      </div>
+      </PageSection>
+      <PageSection>
+        <ImageSectionTitle>Images in a flow container</ImageSectionTitle>
+        <FlowContainerDefault nodeKey="images" />
+      </PageSection>
     </Layout>
   </Page>
 );

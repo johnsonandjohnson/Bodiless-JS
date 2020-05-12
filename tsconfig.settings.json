@@ -28,6 +28,8 @@
       "@bodiless/bv/*": ["bodiless-bv/src/*"],
       "@bodiless/components": ["bodiless-components/src"],
       "@bodiless/components/*": [".bodiless-components/src/*"],
+      "@bodiless/components-ui": ["bodiless-components-ui/src"],
+      "@bodiless/components-ui/*": [".bodiless-components-ui/src/*"],
       "@bodiless/core": ["bodiless-core/src"],
       "@bodiless/core/*": ["bodiless-core/src/*"],
       "@bodiless/core-ui": ["bodiless-core-ui/src"],

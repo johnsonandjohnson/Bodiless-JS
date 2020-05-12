@@ -13,20 +13,6 @@
         "className": " lg:w-1/2"
       },
       "type": "GivingBackToCommunity"
-    },
-    {
-      "uuid": "95da5c60-8eb2-11ea-9e2d-67caefe48284",
-      "wrapperProps": {
-        "className": " lg:w-1/2"
-      },
-      "type": "Image"
-    },
-    {
-      "uuid": "9aca6620-8eb2-11ea-9e2d-67caefe48284",
-      "wrapperProps": {
-        "className": " lg:w-1/2"
-      },
-      "type": "LinkableImage"
     }
   ]
 }
