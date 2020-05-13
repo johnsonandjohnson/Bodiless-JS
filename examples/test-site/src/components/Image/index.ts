@@ -37,7 +37,8 @@ const asContentfulImage = (nodeContent: Partial<Data>) => (nodeKey: string) => f
 
 const SquareImage = Image;
 const SquareLinkableImage = asBodilessLink('link')(SquareImage);
-const LandscapeImage = asContentfulImage({ src: landscapeImage })('landscapeImage')(Img);
+const asLandscapeImage = asContentfulImage({ src: landscapeImage });
+const LandscapeImage = asLandscapeImage('landscapeImage')(Img);
 const LandscapeLinkableImage = asBodilessLink('link')(LandscapeImage);
 
 export {
@@ -46,4 +47,5 @@ export {
   SquareLinkableImage,
   LandscapeLinkableImage,
   asContentfulImage,
+  asLandscapeImage,
 };

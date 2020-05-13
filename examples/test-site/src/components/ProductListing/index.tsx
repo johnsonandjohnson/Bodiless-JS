@@ -18,7 +18,7 @@ import {
   addClasses,
 } from '@bodiless/fclasses';
 import { withEditorSimple } from '../Editors';
-import { asContentfulImage } from '../Image';
+import { asLandscapeImage } from '../Image';
 import {
   asHeader1,
   asImage,
@@ -37,12 +37,8 @@ const asProductListingImage = flow(
   addClasses('w-full'),
 );
 
-const asHeaderImage = asContentfulImage({
-  src: '/images/header-image.jpeg',
-});
-
 export const ProductListingImage = flow(
-  asHeaderImage('product_listing_image'),
+  asLandscapeImage('product_listing_image'),
   asImage,
   asProductListingImage,
 )(Img);
