@@ -1,3 +1,3 @@
-# `@bodiless/richtext-ui`
+# `@bodiless/components-ui`
 
-Default UI for bodiless richtext components.
+Default UI for bodiless components.
