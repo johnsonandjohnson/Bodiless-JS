@@ -34,6 +34,7 @@ import {
 } from '@bodiless/core';
 
 import { flowRight } from 'lodash';
+import withEditPlaceholder from './Placeholder';
 
 // Type of the data used by this component.
 export type Data = {
@@ -63,10 +64,12 @@ export const editButtonOptions: EditButtonOptions<Props, Data> = {
   local: true,
 };
 
-const emptyValue = {
-  src: '/images/placeholder.png',
+const EditPlaceholder = (props: IframeProps) => {
+  const { src, ...rest } = props;
+  return src
+    ? <div {...rest}>{`Youtube with ${src} configured.`}</div>
+    : <div {...rest}>Click to enter youtube url.</div>;
 };
-
 
 // Composed hoc which creates editable version of the component.
 // Note - the order is important. In particular:
@@ -78,7 +81,7 @@ export const asBodilessYoutube = (nodeKey?: string) => flowRight(
   // @ts-ignore: Types of parameters are incompatible.
   withNodeKey(nodeKey),
   withNode,
-  withNodeDataHandlers(emptyValue),
+  withNodeDataHandlers(),
   ifReadOnly(
     withoutProps(['setComponentData']),
   ),
@@ -88,6 +91,7 @@ export const asBodilessYoutube = (nodeKey?: string) => flowRight(
     withLocalContextMenu,
   ),
   withData,
+  withEditPlaceholder(EditPlaceholder),
 ) as Bodiless<Props, Props & Partial<WithNodeProps>>;
 
 const Youtube = asBodilessYoutube()('iframe');
