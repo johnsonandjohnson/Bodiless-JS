@@ -12,8 +12,9 @@
  * limitations under the License.
  */
 
-import Image from './Image';
+import Image, { asBodilessImage } from './Image';
 
 export {
-  Image
+  asBodilessImage,
+  Image,
 };

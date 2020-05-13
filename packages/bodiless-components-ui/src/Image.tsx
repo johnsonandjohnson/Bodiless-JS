@@ -12,10 +12,11 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { ComponentType } from 'react';
 import { flowRight } from 'lodash';
 import {
-  asBodilessImage,
+  asBodilessImage as asBaseBodilessImage,
+  TImagePickerUI,
 } from '@bodiless/components';
 import {
   addClasses,
@@ -29,7 +30,7 @@ import MaterialIcon from '@material/react-material-icon';
 
 const MasterWrapper = addClasses('bl-container')(Section);
 
-const withForwardedRefStart = Component => {
+const withForwardedRefStart = (Component: ComponentType<any>) => {
   const WithForwardedRefStart = React.forwardRef((props, ref) => (
     <Component forwardedRef={ref} {...props} />
   ));
@@ -37,8 +38,8 @@ const withForwardedRefStart = Component => {
   return WithForwardedRefStart;
 };
 
-const withForwardedRefEnd = Component => {
-  const WithForwardedRefEnd = ({ forwardedRef, ...rest }) => (
+const withForwardedRefEnd = (Component: ComponentType<any>) => {
+  const WithForwardedRefEnd = ({ forwardedRef, ...rest }: any) => (
     <Component {...rest} ref={forwardedRef} />
   );
   WithForwardedRefEnd.displayName = 'WithForwardedRefEnd';
@@ -47,6 +48,7 @@ const withForwardedRefEnd = Component => {
 
 const withForwardedRef = (...hocs: Function[]) => flowRight(
   withForwardedRefStart,
+  // @ts-ignore
   ...hocs,
   withForwardedRefEnd,
 );
@@ -76,9 +78,9 @@ const UploadTimeout = () => (
 );
 const Uploading = () => <Spinner color="bl-bg-grey-800 bl-my-4" />;
 const UploadFinished = () => <div className="bl-text-center bl-text-lg bl-text-black">Done!</div>;
-const UploadStatus = ({ statusText }) => <div>{statusText}</div>;
+const UploadStatus = ({ statusText } : { statusText: string; }) => <div>{statusText}</div>;
 
-const ui = {
+const imagePickerUI = {
   MasterWrapper,
   Wrapper,
   Input,
@@ -90,11 +92,16 @@ const ui = {
   UploadStatus,
 };
 
-const withUI = ui => addProps({ ui }); 
+const withUI = (ui: TImagePickerUI) => addProps({ ui });
 
-const Image = flowRight(
-  //withUI(ui),
-  asBodilessImage(),
-)(Img);
+const asBodilessImage = (nodeKey?: string) => flowRight(
+  withUI(imagePickerUI),
+  asBaseBodilessImage(nodeKey),
+);
+
+const Image = asBodilessImage()(Img);
 
 export default Image;
+export {
+  asBodilessImage,
+};

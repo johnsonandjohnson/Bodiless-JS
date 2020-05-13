@@ -11,7 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from 'react';
 import { flow } from 'lodash';
 import {
   H1,
@@ -19,11 +18,11 @@ import {
   addClasses,
 } from '@bodiless/fclasses';
 import { withEditorSimple } from '../Editors';
+import { asContentfulImage } from '../Image';
 import {
   asHeader1,
   asImage,
   asImageRounded,
-  asEditableImage,
 } from '../Elements.token';
 
 export { ProductListingFlowContainer } from './ProductListingFlowContainer';
@@ -38,21 +37,12 @@ const asProductListingImage = flow(
   addClasses('w-full'),
 );
 
-const asHeaderImage = (ImageComponent: any) => (props: any) => {
-  const { src: originalSrc } = props;
-  // Set placeholder image with 6:1 ratio.
-  const src = originalSrc === '/images/placeholder.png' ? '/images/header-image.jpeg' : originalSrc;
-  return (
-    <ImageComponent
-      {...props}
-      src={src}
-    />
-  );
-};
+const asHeaderImage = asContentfulImage({
+  src: '/images/header-image.jpeg',
+});
 
 export const ProductListingImage = flow(
-  asHeaderImage,
-  asProductListingImage,
+  asHeaderImage('product_listing_image'),
   asImage,
-  asEditableImage('product_listing_image'),
+  asProductListingImage,
 )(Img);

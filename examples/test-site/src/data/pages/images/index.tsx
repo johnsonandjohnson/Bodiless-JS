@@ -21,6 +21,7 @@ import {
   H2,
   H3,
   Div,
+  Img,
   Section,
   addClasses,
 } from '@bodiless/fclasses';
@@ -30,7 +31,6 @@ import {
   asHeader1,
   asHeader2,
   asHeader3,
-  asYMargin,
   asEditableLink,
 } from '../../../components/Elements.token';
 import { FlowContainerDefault } from '../../../components/FlowContainer';
@@ -43,13 +43,13 @@ import ImageSvgSrc from './image.svg';
 import ImageWebpSrc from './image.webp';
 import ImageResponsiveSvgSrc from './responsive_asvg.svg';
 
-const ImageAnimatedPng = asContentfulImage('animatedPng', { src: ImageAnimatedPngSrc });
-const ImageGif = asContentfulImage('gif', { src: ImageGifSrc });
-const ImageJpg = asContentfulImage('jpg', { src: ImageJpgSrc });
-const ImagePng = asContentfulImage('png', { src: ImagePngSrc });
-const ImageSvg = asContentfulImage('svg', { src: ImageSvgSrc });
-const ImageWebp = asContentfulImage('webp', { src: ImageWebpSrc });
-const ImageResponsiveSvg = asContentfulImage('responsiveSvg', { src: ImageResponsiveSvgSrc });
+const ImageAnimatedPng = asContentfulImage({ src: ImageAnimatedPngSrc })('animatedPng')(Img);
+const ImageGif = asContentfulImage({ src: ImageGifSrc })('gif')(Img);
+const ImageJpg = asContentfulImage({ src: ImageJpgSrc })('jpg')(Img);
+const ImagePng = asContentfulImage({ src: ImagePngSrc })('png')(Img);
+const ImageSvg = asContentfulImage({ src: ImageSvgSrc })('svg')(Img);
+const ImageWebp = asContentfulImage({ src: ImageWebpSrc })('webp')(Img);
+const ImageResponsiveSvg = asContentfulImage({ src: ImageResponsiveSvgSrc })('responsiveSvg')(Img);
 
 const LinkableImageAnimatedPng = asEditableLink('animatedPngLink')(ImageAnimatedPng);
 const LinkableImageGif = asEditableLink('gifLink')(ImageGif);
@@ -123,7 +123,7 @@ export default (props: any) => (
           <ImageTitle>PNG</ImageTitle>
           <LinkableImagePng />
         </ImageWrapper>
-      
+
         <ImageWrapper>
           <ImageTitle>GIF</ImageTitle>
           <LinkableImageGif />

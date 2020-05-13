@@ -42,7 +42,7 @@ import { flowRight } from 'lodash';
 import { useDropzone } from 'react-dropzone';
 import { FormApi } from 'informed';
 import BackendSave from './BackendSave';
-// ToDo: typescript error should be resolved
+// @ts-ignore fails when it is imported by jest.
 import Placeholder from './placeholder.png';
 
 // Type of the data used by this component.
@@ -56,7 +56,8 @@ const MaxTimeout:number = 10000;
 
 const errorLog = debug('Image');
 
-export type ImagePickerUI = {
+type UploadStatusProps = HTMLProps<HTMLElement> & { statusText: string; };
+export type TImagePickerUI = {
   MasterWrapper: ComponentType<HTMLProps<HTMLElement>>,
   Wrapper: ComponentType<HTMLProps<HTMLElement>>,
   Input: ComponentType<HTMLProps<HTMLInputElement>>,
@@ -65,7 +66,7 @@ export type ImagePickerUI = {
   DragRejected: ComponentType<HTMLProps<HTMLElement>>,
   UploadTimeout: ComponentType<HTMLProps<HTMLElement>>,
   UploadFinished: ComponentType<HTMLProps<HTMLElement>>,
-  UploadStatus: ComponentType<HTMLProps<HTMLElement> & { statusText: string; }>,
+  UploadStatus: ComponentType<UploadStatusProps>,
 };
 
 const defaultImagePickerUI = {
@@ -77,14 +78,14 @@ const defaultImagePickerUI = {
   DragRejected: () => <div>File type not accepted or too many, try again!</div>,
   UploadTimeout: () => <div>Upload failed, please try again.</div>,
   UploadFinished: () => <div>Done!</div>,
-  UploadStatus: ({ statusText }) => <div>{statusText}</div>,
+  UploadStatus: ({ statusText }: UploadStatusProps) => <div>{statusText}</div>,
 };
 
 // DropZonePlugin control the upload of file and only saves jpg/png files.
 function DropZonePlugin({ formApi, targetFieldName, ui }: {
   formApi: FormApi<Data>;
   targetFieldName:string;
-  ui: ImagePickerUI;
+  ui?: TImagePickerUI;
 }) {
   const [statusText, setStatusText] = useState('');
   const [isUploading, setIsUploading] = useState(false);
@@ -167,7 +168,7 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
 // Exclude the src and alt from the props accepted as we write it.
 type ImageProps = HTMLProps<HTMLImageElement>;
 type ReducedImageProps = Pick<ImageProps, Exclude<keyof ImageProps, 'src'> | Exclude<keyof ImageProps, 'alt'>>;
-type Props = ReducedImageProps & { ui: ImagePickerUI};
+type Props = ReducedImageProps & { ui?: TImagePickerUI};
 
 // Options used to create an edit button.
 export const editButtonOptions: EditButtonOptions<Props, Data> = {
