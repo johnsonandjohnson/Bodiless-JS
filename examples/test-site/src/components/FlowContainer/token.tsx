@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { asFilterableByGroup } from '@bodiless/organisms';
 import {
   addClasses,
   withDesign,
@@ -20,7 +19,7 @@ import {
 
 const asFlowContainerWithMargins = withDesign({
   Wrapper: addClasses('md:-m-5 py-5'),
-  ComponentWrapper: addClasses('p-5'),
+  ComponentWrapper: addClasses('md:p-5'),
 });
 
 const asFlowContainerFullWidth = withDesign({
@@ -28,12 +27,7 @@ const asFlowContainerFullWidth = withDesign({
   ComponentWrapper: addClasses('w-full md:w-1/3'),
 });
 
-const asFlowContainerFilterable = withDesign({
-  ComponentWrapper: asFilterableByGroup(),
-});
-
 export {
   asFlowContainerWithMargins,
   asFlowContainerFullWidth,
-  asFlowContainerFilterable,
 };

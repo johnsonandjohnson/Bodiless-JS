@@ -31,11 +31,12 @@ import {
 
 /* Page Structure */
 const asBlockItem = addClasses('p-1 w-full');
-const asPageContainer = addClasses('container mx-auto p-5');
+const asPageContainer = addClasses('container mx-auto');
 const asXMargin = addClasses('mx-2');
 const asYMargin = addClasses('my-2');
 const asNegXMargin = addClasses('-mx-1');
 const asNegYMargin = addClasses('-my-1');
+const asWithPadding = addClasses('p-5');
 
 /* Responsive design */
 const asMobileOnly = addClasses('block lg:hidden');
@@ -109,4 +110,5 @@ export {
   asNegXMargin,
   asNegYMargin,
   asBlockQuote,
+  asWithPadding,
 };

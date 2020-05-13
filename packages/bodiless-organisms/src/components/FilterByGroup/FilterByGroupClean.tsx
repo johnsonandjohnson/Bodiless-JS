@@ -16,13 +16,12 @@ import React, { FC } from 'react';
 import { flow } from 'lodash';
 import {
   designable, Div, Button, withoutProps, H3,
-  withDesign, addClasses,
+  withDesign,
 } from '@bodiless/fclasses';
 import {
   asAccordionWrapper,
   asAccordionBody,
   asAccodionTitle,
-  ifViewportIs,
   ifViewportIsNot,
 } from '@bodiless/components';
 import { FilterByGroupComponents, FilterByGroupProps } from './types';
@@ -84,19 +83,9 @@ const asResponsiveFilterByGroup = flow(
   ifViewportIsNot(['lg', 'xl', 'xxl'])(
     withDesign({
       FilterWrapper: asAccordionWrapper,
-      FilterHeader: asAccodionTitle,
+      FilterTitle: asAccodionTitle,
       Filter: asAccordionBody,
       ResetButton: asAccordionBody,
-    }),
-  ),
-  ifViewportIs(['sm', 'md'])(
-    withDesign({
-      Filter: withDesign({
-        Wrapper: addClasses('md:block'),
-      }),
-      ResetButton: withDesign({
-        Wrapper: addClasses('md:block'),
-      }),
     }),
   ),
 );

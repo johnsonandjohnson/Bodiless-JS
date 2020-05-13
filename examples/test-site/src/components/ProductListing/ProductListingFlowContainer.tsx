@@ -15,7 +15,8 @@ import React from 'react';
 import { flow } from 'lodash';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withProductVariations from './withProductVariations';
-import { asFlowContainerWithMargins, asFlowContainerFullWidth, asFlowContainerFilterable } from '../FlowContainer/token';
+import { asFilterableProductContainer } from '../ProductTout/token';
+import { asFlowContainerWithMargins, asFlowContainerFullWidth } from '../FlowContainer/token';
 
 const withProductStrictSnapSize = Component => props => (
   <Component
@@ -25,7 +26,7 @@ const withProductStrictSnapSize = Component => props => (
 );
 
 const ProductListingFlowContainer = flow(
-  asFlowContainerFilterable,
+  asFilterableProductContainer,
   withProductStrictSnapSize,
   withProductVariations,
   asFlowContainerFullWidth,

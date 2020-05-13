@@ -15,7 +15,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
-import { SectionMargin } from '../components/Product';
+import { SectionContent, SectionMargin } from '../components/Product';
 import Page from '../components/Page';
 import {
   ProductListingTitle,
@@ -27,17 +27,19 @@ import FilterByGroup from '../components/FilterByGroup';
 export default props => (
   <Page {...props}>
     <Layout>
-      <SectionMargin>
-        <ProductListingTitle />
-      </SectionMargin>
-      <SectionMargin>
-        <ProductListingImage />
-      </SectionMargin>
-      <SectionMargin>
-        <FilterByGroup>
-          <ProductListingFlowContainer nodeKey="product_listing_touts" />
-        </FilterByGroup>
-      </SectionMargin>
+      <SectionContent>
+        <SectionMargin>
+          <ProductListingTitle />
+        </SectionMargin>
+        <SectionMargin>
+          <ProductListingImage />
+        </SectionMargin>
+        <SectionMargin>
+          <FilterByGroup>
+            <ProductListingFlowContainer nodeKey="product_listing_touts" />
+          </FilterByGroup>
+        </SectionMargin>
+      </SectionContent>
     </Layout>
   </Page>
 );

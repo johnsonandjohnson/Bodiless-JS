@@ -17,6 +17,7 @@ import {
   withDesign,
   addClasses,
   addProps,
+  stylable,
 } from '@bodiless/fclasses';
 import { asTextColorPrimary } from '../Elements.token';
 
@@ -41,12 +42,16 @@ const withTagListStyles = withDesign({
 
 const withCategoryList = withDesign({
   Title: addClasses('font-bold'),
+  Wrapper: flow(
+    stylable,
+    addClasses('p-2'),
+  ),
 });
 
 const asFilterByGroupDefaultStyle = withDesign({
   Wrapper: addClasses('flex flex-col'),
-  FilterWrapper: addClasses('p-2 bg-gray-400 flex flex-col'),
-  FilterHeader: addClasses('flex flex-col w-full'),
+  FilterWrapper: addClasses('bg-gray-400 flex flex-col'),
+  FilterHeader: addClasses('flex flex-col w-full bg-gray-500 p-2'),
   FilterTitle: addClasses('my-2 text-xl font-bold'),
   ContentWrapper: addClasses('p-2 w-full'),
   ResetButton: flow(

@@ -19,8 +19,11 @@ import {
   Div,
   Span,
   DesignableProps,
+  withDesign,
+  addClasses,
 } from '@bodiless/fclasses';
 import { useAccordionContext } from './AccordionContext';
+import { ifViewportIs } from '../withResponsiveToggle';
 import { AccordionTitleProps, AccordionTitleComponents } from './types';
 
 const AccordionTitleComponentsStart:AccordionTitleComponents = {
@@ -33,10 +36,10 @@ const AccordionTitleBase: FC<AccordionTitleProps> = ({ components, children }) =
   const { expanded, setExpanded } = useAccordionContext();
 
   return (
-    <Wrapper className="flex items-baseline justify-between" onClick={() => setExpanded(!expanded)}>
+    <Wrapper className="flex items-center justify-between relative" onClick={() => setExpanded(!expanded)}>
       { children }
       <Icon
-        className="material-icons"
+        className="material-icons absolute right-0"
         data-accordion-element="accordion-icon"
         data-accordion-icon={expanded ? 'remove' : 'add'}
       >
@@ -46,8 +49,15 @@ const AccordionTitleBase: FC<AccordionTitleProps> = ({ components, children }) =
   );
 };
 
+const asNoIconOnDesktop = ifViewportIs(['sm', 'md'])(
+  withDesign({
+    Icon: addClasses('lg:hidden'),
+  }),
+);
+
 const AccordionTitleClean = flow(
   designable(AccordionTitleComponentsStart),
+  asNoIconOnDesktop,
 )(AccordionTitleBase);
 
 const asAccodionTitle = <P extends DesignableProps<AccordionTitleComponents>>(

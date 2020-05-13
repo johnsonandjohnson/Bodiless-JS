@@ -18,6 +18,7 @@ import PageEditContext from './PageEditContext';
 import asStatic from './asStatic';
 import { useEditContext, useUUID, useContextActivator } from './hooks';
 import withNode, { withNodeKey } from './withNode';
+import withSidecarNodes, { startSidecarNodes, endSidecarNodes } from './withSidecarNodes';
 import {
   withDefaultContent,
   withResetButton,
@@ -49,7 +50,6 @@ import {
   useActivateOnEffectActivator,
 } from './ActivateContext';
 import withChild from './withChild';
-import withSidecarNodes from './withSidecarNodes';
 
 export * from './components';
 export {
@@ -74,6 +74,9 @@ export {
   EditButtonOptions,
   withNode,
   withNodeKey,
+  withSidecarNodes,
+  startSidecarNodes,
+  endSidecarNodes,
   contextMenuForm,
   withData,
   NodeProvider,
@@ -94,7 +97,6 @@ export {
   ifToggledOn,
   withFlowToggle,
   useEditToggle,
-  withSidecarNodes,
 };
 
 export type Bodiless<P, Q> = (C: ComponentType<P> | string) => ComponentType<Q>;

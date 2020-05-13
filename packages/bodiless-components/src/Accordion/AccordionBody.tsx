@@ -14,8 +14,15 @@
 
 import { flow } from 'lodash';
 import React, { FC, ComponentType } from 'react';
-import { designable, Div, DesignableProps } from '@bodiless/fclasses';
+import {
+  designable,
+  Div,
+  DesignableProps,
+  withDesign,
+  addClasses,
+} from '@bodiless/fclasses';
 import { useAccordionContext } from './AccordionContext';
+import { ifViewportIs } from '../withResponsiveToggle';
 import { AccordionBodyComponents, AccordionBodyProps } from './types';
 
 const AccordionBodyComponentsStart:AccordionBodyComponents = {
@@ -33,10 +40,16 @@ const AccordionBodyBase: FC<AccordionBodyProps> = ({ components, children }) => 
   );
 };
 
+const asExpandedOnDesktop = ifViewportIs(['sm', 'md'])(
+  withDesign({
+    Wrapper: addClasses('lg:block'),
+  }),
+);
+
 const AccordionBodyClean = flow(
   designable(AccordionBodyComponentsStart),
+  asExpandedOnDesktop,
 )(AccordionBodyBase);
-
 
 const asAccordionBody = <P extends DesignableProps<AccordionBodyComponents>>(
   Component: ComponentType<P> | string,
