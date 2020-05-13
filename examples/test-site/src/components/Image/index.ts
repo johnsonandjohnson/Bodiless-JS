@@ -27,6 +27,7 @@ type Data = {
   alt: string;
 };
 
+// Allows to set default content for image based component.
 const asContentfulImage = (nodeContent: Partial<Data>) => (nodeKey: string) => flowRight(
   withDefaultContent({
     [nodeKey]: nodeContent,

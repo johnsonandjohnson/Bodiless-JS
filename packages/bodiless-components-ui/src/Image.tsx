@@ -28,8 +28,6 @@ import {
 import { Spinner } from '@bodiless/ui';
 import MaterialIcon from '@material/react-material-icon';
 
-const MasterWrapper = addClasses('bl-container')(Section);
-
 const withForwardedRefStart = (Component: ComponentType<any>) => {
   const WithForwardedRefStart = React.forwardRef((props, ref) => (
     <Component forwardedRef={ref} {...props} />
@@ -46,12 +44,17 @@ const withForwardedRefEnd = (Component: ComponentType<any>) => {
   return WithForwardedRefEnd;
 };
 
-const withForwardedRef = (...hocs: Function[]) => flowRight(
+type HOC = (Component: ComponentType<any>) => ComponentType<any>;
+
+// Allows to pass a ref through a component to one of its children.
+// @see: https://reactjs.org/docs/forwarding-refs.html
+const withForwardedRef = (...hocs: HOC[]) => flowRight(
   withForwardedRefStart,
-  // @ts-ignore
   ...hocs,
   withForwardedRefEnd,
 );
+
+const MasterWrapper = addClasses('bl-container')(Section);
 
 const Wrapper = flowRight(
   withForwardedRef(
