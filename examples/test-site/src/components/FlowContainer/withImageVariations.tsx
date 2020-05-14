@@ -32,27 +32,27 @@ import {
 const images = {
   SquareImage: flow(
     replaceWith(SquareImage),
+    withType('Image')(),
     withTitle('Square Image'),
     withDesc('Adds a square image'),
-    withType('Image')(),
   ),
   LandscapeImage: flow(
     replaceWith(LandscapeImage),
+    withType('Image')(),
     withTitle('Landscape Image'),
     withDesc('Adds a landscape image'),
-    withType('Image')(),
   ),
   SquareLinkableImage: flow(
     replaceWith(SquareLinkableImage),
+    withType('Linkable Image')(),
     withTitle('Square Linkable Image'),
     withDesc('Adds a square linkable image'),
-    withType('Linkable Image')(),
   ),
   LandscapeLinkableImage: flow(
     replaceWith(LandscapeLinkableImage),
+    withType('Linkable Image')(),
     withTitle('Landscape Linkable Image'),
     withDesc('Adds a linkable landscape image'),
-    withType('Linkable Image')(),
   ),
 };
 
