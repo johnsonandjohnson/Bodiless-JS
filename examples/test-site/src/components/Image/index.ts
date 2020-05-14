@@ -14,10 +14,8 @@
 
 import { withDefaultContent } from '@bodiless/core';
 import { flowRight } from 'lodash';
-import {
-  asBodilessLink,
-  Image,
-} from '@bodiless/components';
+import { asBodilessLink } from '@bodiless/components';
+import { Image } from '@bodiless/components-ui';
 import { Img } from '@bodiless/fclasses';
 import landscapeImage from './landscape_image.png';
 import { asEditableImage } from '../Elements.token';
