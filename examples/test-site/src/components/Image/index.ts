@@ -14,7 +14,10 @@
 
 import { withDefaultContent } from '@bodiless/core';
 import { flowRight } from 'lodash';
-import { asBodilessLink } from '@bodiless/components';
+import {
+  asBodilessLink,
+  withImagePlaceholder,
+} from '@bodiless/components';
 import { Img } from '@bodiless/fclasses';
 import landscapeImage from './landscape_image.png';
 import { asEditableImage } from '../Elements.token';
@@ -38,7 +41,10 @@ const DEFAULT_LINK_NODE_KEY = 'link';
 const asSquareImage = asEditableImage;
 const SquareImage = asSquareImage(DEFAULT_IMAGE_NODE_KEY)(Img);
 const SquareLinkableImage = asBodilessLink(DEFAULT_LINK_NODE_KEY)(SquareImage);
-const asLandscapeImage = asContentfulImage({ src: landscapeImage });
+const asLandscapeImage = (nodeKey: string) => flowRight(
+  withImagePlaceholder({ src: landscapeImage }),
+  asEditableImage(nodeKey),
+);
 const LandscapeImage = asLandscapeImage(DEFAULT_IMAGE_NODE_KEY)(Img);
 const LandscapeLinkableImage = asBodilessLink(DEFAULT_LINK_NODE_KEY)(LandscapeImage);
 

@@ -14,7 +14,11 @@
 
 import Editable, { withPlaceholder, asEditable } from './Editable';
 import { asBodilessLink } from './Link';
-import Image, { asBodilessImage, TImagePickerUI } from './Image';
+import Image, {
+  asBodilessImage,
+  TImagePickerUI,
+  withImagePlaceholder,
+} from './Image';
 import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
 import List from './List';
@@ -41,6 +45,7 @@ export {
   asBodilessLink,
   Image,
   asBodilessImage,
+  withImagePlaceholder,
   TImagePickerUI,
   Editable,
   NodeViewer,

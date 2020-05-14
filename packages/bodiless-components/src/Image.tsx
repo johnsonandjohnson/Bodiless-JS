@@ -17,7 +17,7 @@ import React, {
   useCallback,
   useState,
   useEffect,
-  ComponentType,
+  ComponentType as CT,
 } from 'react';
 import debug from 'debug';
 
@@ -58,15 +58,15 @@ const errorLog = debug('Image');
 
 type UploadStatusProps = HTMLProps<HTMLElement> & { statusText: string; };
 export type TImagePickerUI = {
-  MasterWrapper: ComponentType<HTMLProps<HTMLElement>>,
-  Wrapper: ComponentType<HTMLProps<HTMLElement>>,
-  Input: ComponentType<HTMLProps<HTMLInputElement>>,
-  UploadArea: ComponentType<HTMLProps<HTMLElement>>,
-  Uploading: ComponentType<HTMLProps<HTMLElement>>,
-  DragRejected: ComponentType<HTMLProps<HTMLElement>>,
-  UploadTimeout: ComponentType<HTMLProps<HTMLElement>>,
-  UploadFinished: ComponentType<HTMLProps<HTMLElement>>,
-  UploadStatus: ComponentType<UploadStatusProps>,
+  MasterWrapper: CT<HTMLProps<HTMLElement>>,
+  Wrapper: CT<HTMLProps<HTMLElement>>,
+  Input: CT<HTMLProps<HTMLInputElement>>,
+  UploadArea: CT<HTMLProps<HTMLElement>>,
+  Uploading: CT<HTMLProps<HTMLElement>>,
+  DragRejected: CT<HTMLProps<HTMLElement>>,
+  UploadTimeout: CT<HTMLProps<HTMLElement>>,
+  UploadFinished: CT<HTMLProps<HTMLElement>>,
+  UploadStatus: CT<UploadStatusProps>,
 };
 
 const defaultImagePickerUI = {
@@ -197,6 +197,17 @@ const emptyValue = {
   alt: 'Alt Text',
 };
 
+export const withImagePlaceholder = <P extends Data> (placeholder: Data) => (Component:CT<P> | string) => {
+  const WithImagePlaceholder = (props:P) => {
+    const { src: srcFromProps } = props;
+    const { src: srcFromPlaceholder } = placeholder;
+    const src = srcFromProps || srcFromPlaceholder;
+    return (
+      <Component {...props} src={src} />
+    );
+  };
+  return WithImagePlaceholder;
+};
 
 // Composed hoc which creates editable version of the component.
 // Note - the order is important. In particular:
