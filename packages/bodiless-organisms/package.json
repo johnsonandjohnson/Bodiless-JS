@@ -28,6 +28,7 @@
   "dependencies": {
     "@bodiless/bv": "^0.0.47",
     "@bodiless/components": "^0.0.47",
+    "@bodiless/components-ui": "^0.0.47",
     "@bodiless/core": "^0.0.47",
     "@bodiless/fclasses": "^0.0.47",
     "@bodiless/richtext": "^0.0.47",
