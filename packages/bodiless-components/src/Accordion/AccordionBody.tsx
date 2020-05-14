@@ -18,37 +18,27 @@ import {
   designable,
   Div,
   DesignableProps,
-  withDesign,
-  addClasses,
 } from '@bodiless/fclasses';
 import { useAccordionContext } from './AccordionContext';
-import { ifViewportIs } from '../withResponsiveToggle';
 import { AccordionBodyComponents, AccordionBodyProps } from './types';
 
 const AccordionBodyComponentsStart:AccordionBodyComponents = {
   Wrapper: Div,
+  ExpandedBody: Div,
+  ContractedBody: Div,
 };
 
 const AccordionBodyBase: FC<AccordionBodyProps> = ({ components, children }) => {
-  const { Wrapper } = components;
+  const { ExpandedBody, ContractedBody } = components;
   const { expanded } = useAccordionContext();
 
-  return (
-    <Wrapper className={expanded ? 'block' : 'hidden'}>
-      { children }
-    </Wrapper>
-  );
+  return expanded
+    ? (<ExpandedBody>{ children }</ExpandedBody>)
+    : (<ContractedBody>{ children }</ContractedBody>);
 };
-
-const asExpandedOnDesktop = ifViewportIs(['sm', 'md'])(
-  withDesign({
-    Wrapper: addClasses('lg:block'),
-  }),
-);
 
 const AccordionBodyClean = flow(
   designable(AccordionBodyComponentsStart),
-  asExpandedOnDesktop,
 )(AccordionBodyBase);
 
 const asAccordionBody = <P extends DesignableProps<AccordionBodyComponents>>(

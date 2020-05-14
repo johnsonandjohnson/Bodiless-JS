@@ -17,7 +17,6 @@ import {
   withDesign,
   addClasses,
   addProps,
-  stylable,
 } from '@bodiless/fclasses';
 import { asTextColorPrimary } from '../Elements.token';
 
@@ -42,9 +41,9 @@ const withTagListStyles = withDesign({
 
 const withCategoryList = withDesign({
   Title: addClasses('font-bold'),
-  Wrapper: flow(
-    stylable,
-    addClasses('p-2'),
+  Wrapper: addClasses('p-2'),
+  Item: flow(
+    addClasses('py-2'),
   ),
 });
 
@@ -61,6 +60,7 @@ const asFilterByGroupDefaultStyle = withDesign({
   Filter: withDesign({
     TagList: withTagListStyles,
     CategoryList: withCategoryList,
+    ContractedBody: addClasses('lg:block'), // Prevent contractin on lg devices.
   }),
 });
 

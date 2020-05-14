@@ -33,7 +33,6 @@ import {
   Label,
   withDesign,
   replaceWith,
-  stylable,
 } from '@bodiless/fclasses';
 import {
   List,
@@ -53,6 +52,7 @@ import {
   FilterComponents,
 } from './types';
 import { useFilterByGroupContext, withTagProps } from './FilterByGroupContext';
+import { asContractibleAccordionBody } from './token';
 
 const tagTitleComponentsStart: TagTitleComponents = {
   FilterInputWrapper: Div,
@@ -178,7 +178,6 @@ const TestFilterComponentsStart: FilterComponents = {
     asEditableList,
     withDesign({
       Title: replaceWith(TagTitle),
-      Wrapper: stylable,
     }),
   )(List),
 };
@@ -193,10 +192,12 @@ class FilterBase extends React.PureComponent {
     const { components, ...rest } = props;
     const { TagList, CategoryList } = components;
 
+    const AccordionTagList = asContractibleAccordionBody(TagList);
+
     this.RestProps = rest;
     this.Filter = flow(
       ifViewportIs(['lg', 'xl', 'xxl'])(withBasicSublist(TagList)),
-      ifViewportIsNot(['lg', 'xl', 'xxl'])(withAccordionSublist(TagList)),
+      ifViewportIsNot(['lg', 'xl', 'xxl'])(withAccordionSublist(AccordionTagList)),
     )(CategoryList);
   }
 

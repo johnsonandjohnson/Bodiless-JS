@@ -36,7 +36,7 @@ const asXMargin = addClasses('mx-2');
 const asYMargin = addClasses('my-2');
 const asNegXMargin = addClasses('-mx-1');
 const asNegYMargin = addClasses('-my-1');
-const asWithPadding = addClasses('p-5');
+const withPadding5 = addClasses('p-5');
 
 /* Responsive design */
 const asMobileOnly = addClasses('block lg:hidden');
@@ -110,5 +110,5 @@ export {
   asNegXMargin,
   asNegYMargin,
   asBlockQuote,
-  asWithPadding,
+  withPadding5,
 };

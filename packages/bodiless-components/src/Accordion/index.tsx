@@ -17,6 +17,8 @@ import { asAccodionTitle } from './AccordionTitle';
 import { asAccordionBody } from './AccordionBody';
 import asAccordionWrapper from './AccordionWrapper';
 
+export * from './types';
+
 export {
   useAccordionContext,
   asAccordionWrapper,

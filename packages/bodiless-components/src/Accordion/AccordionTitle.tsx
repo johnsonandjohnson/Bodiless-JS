@@ -19,11 +19,8 @@ import {
   Div,
   Span,
   DesignableProps,
-  withDesign,
-  addClasses,
 } from '@bodiless/fclasses';
 import { useAccordionContext } from './AccordionContext';
-import { ifViewportIs } from '../withResponsiveToggle';
 import { AccordionTitleProps, AccordionTitleComponents } from './types';
 
 const AccordionTitleComponentsStart:AccordionTitleComponents = {
@@ -49,15 +46,8 @@ const AccordionTitleBase: FC<AccordionTitleProps> = ({ components, children }) =
   );
 };
 
-const asNoIconOnDesktop = ifViewportIs(['sm', 'md'])(
-  withDesign({
-    Icon: addClasses('lg:hidden'),
-  }),
-);
-
 const AccordionTitleClean = flow(
   designable(AccordionTitleComponentsStart),
-  asNoIconOnDesktop,
 )(AccordionTitleBase);
 
 const asAccodionTitle = <P extends DesignableProps<AccordionTitleComponents>>(

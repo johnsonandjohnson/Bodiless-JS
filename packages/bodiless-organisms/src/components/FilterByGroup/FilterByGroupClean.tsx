@@ -16,18 +16,11 @@ import React, { FC } from 'react';
 import { flow } from 'lodash';
 import {
   designable, Div, Button, withoutProps, H3,
-  withDesign,
 } from '@bodiless/fclasses';
-import {
-  asAccordionWrapper,
-  asAccordionBody,
-  asAccodionTitle,
-  ifViewportIsNot,
-} from '@bodiless/components';
-import { FilterByGroupComponents, FilterByGroupProps } from './types';
 import FilterClean from './Filter';
 import { useFilterByGroupContext, withFilterByGroupContext } from './FilterByGroupContext';
-
+import { FilterByGroupComponents, FilterByGroupProps } from './types';
+import { asResponsiveFilterByGroup } from './token';
 
 const FilterByGroupComponentsStart:FilterByGroupComponents = {
   Wrapper: Div,
@@ -78,17 +71,6 @@ const FilterByGroupBase: FC<FilterByGroupProps> = ({
     </Wrapper>
   );
 };
-
-const asResponsiveFilterByGroup = flow(
-  ifViewportIsNot(['lg', 'xl', 'xxl'])(
-    withDesign({
-      FilterWrapper: asAccordionWrapper,
-      FilterTitle: asAccodionTitle,
-      Filter: asAccordionBody,
-      ResetButton: asAccordionBody,
-    }),
-  ),
-);
 
 const FilterByGroupClean = flow(
   withoutProps(['suggestions']),

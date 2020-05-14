@@ -28,8 +28,8 @@ export type FilterByGroupComponents = {
 };
 
 export type FilterComponents = {
-  CategoryList: ComponentType<ListProps>,
-  TagList: ComponentType<ListProps>,
+  CategoryList: ComponentType<StylableProps & ListProps>,
+  TagList: ComponentType<StylableProps & ListProps>,
 };
 
 export type TagTitleComponents = {
