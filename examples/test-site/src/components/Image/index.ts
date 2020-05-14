@@ -33,14 +33,14 @@ const asContentfulImage = (nodeContent: Partial<Data>) => (nodeKey: string) => f
 );
 
 const DEFAULT_IMAGE_NODE_KEY = 'image';
-const DEFAULT_IMAGE_LINK_NODE_KEY = 'link';
+const DEFAULT_LINK_NODE_KEY = 'link';
 
 const asSquareImage = asEditableImage;
 const SquareImage = asSquareImage(DEFAULT_IMAGE_NODE_KEY)(Img);
-const SquareLinkableImage = asBodilessLink(DEFAULT_IMAGE_LINK_NODE_KEY)(SquareImage);
+const SquareLinkableImage = asBodilessLink(DEFAULT_LINK_NODE_KEY)(SquareImage);
 const asLandscapeImage = asContentfulImage({ src: landscapeImage });
 const LandscapeImage = asLandscapeImage(DEFAULT_IMAGE_NODE_KEY)(Img);
-const LandscapeLinkableImage = asBodilessLink(DEFAULT_IMAGE_NODE_KEY)(LandscapeImage);
+const LandscapeLinkableImage = asBodilessLink(DEFAULT_LINK_NODE_KEY)(LandscapeImage);
 
 export {
   SquareImage,
