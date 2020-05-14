@@ -23,7 +23,7 @@ import {
   asEditableLink,
   asEditableImage,
 } from '../Elements.token';
-import asProductToutDefaultStyle from './token';
+import { asProductToutDefaultStyle } from './token';
 
 export const asProductTout = flow(
   withDesign({

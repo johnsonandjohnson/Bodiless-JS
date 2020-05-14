@@ -16,10 +16,12 @@ import { useAccordionContext } from './AccordionContext';
 import { asAccodionTitle } from './AccordionTitle';
 import { asAccordionBody } from './AccordionBody';
 import asAccordionWrapper from './AccordionWrapper';
+import { withAccordionSublist } from './asAccordionSublist';
 
 export * from './types';
 
 export {
+  withAccordionSublist,
   useAccordionContext,
   asAccordionWrapper,
   asAccodionTitle,

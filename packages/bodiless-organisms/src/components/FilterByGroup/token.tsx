@@ -14,12 +14,12 @@
 
 import { flow } from 'lodash';
 import { withDesign, addClasses } from '@bodiless/fclasses';
+import { ifViewportIsNot } from '@bodiless/components';
 import {
   asAccordionWrapper,
   asAccordionBody,
   asAccodionTitle,
-  ifViewportIsNot,
-} from '@bodiless/components';
+} from '../Accordion';
 
 const asResponsiveAccordionTitle = flow(
   asAccodionTitle,

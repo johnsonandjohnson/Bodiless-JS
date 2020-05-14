@@ -53,7 +53,6 @@ const asFilterableProductContainer = withDesign({
   ComponentWrapper: asFilterableByGroup(),
 });
 
-export default asProductToutDefaultStyle;
 export {
   asProductToutDefaultStyle,
   asFilterableProductContainer,

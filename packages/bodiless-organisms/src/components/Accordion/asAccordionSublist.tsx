@@ -12,21 +12,18 @@
  * limitations under the License.
  */
 
-import React, {
-  ComponentType as CT,
-  PropsWithChildren,
-} from 'react';
-import { DesignableProps, Div } from '@bodiless/fclasses';
-import { withToggleTo } from '../Toggle';
+import { flow } from 'lodash';
+import React, { ComponentType, PropsWithChildren } from 'react';
+import { asComponent } from '@bodiless/fclasses';
 import {
-  FinalProps as ListProps,
-} from './types';
-import {
-  asAccordionWrapper,
-  asAccordionBody,
-  asAccodionTitle,
-  AccordionTitleComponents,
-} from '../Accordion';
+  ListProps,
+  withToggleTo,
+  withDeleteSublistOnUnwrap,
+  withSublist,
+} from '@bodiless/components';
+import asAccordionWrapper from './AccordionWrapper';
+import { asAccordionBody } from './AccordionBody';
+import { asAccodionTitle } from './AccordionTitle';
 
 /**
  * Takes a sublist component and returns a HOC which, when applied to a list item,
@@ -34,13 +31,16 @@ import {
  *
  * @param Sublist The sublist component to add to the list accordion body.
  */
-const asAccordionSublist = (Sublist: CT<ListProps>) => (
-  (Item: CT<PropsWithChildren<DesignableProps<AccordionTitleComponents>>> | string) => {
-    const AccordionWrapper = asAccordionWrapper(Div);
-    const AccordionTitle = asAccodionTitle(Item);
+const asAccordionSublist = (Sublist: ComponentType<ListProps>) => (
+  (Item: ComponentType<PropsWithChildren<{}>> | string) => {
+    const AccordionWrapper = asAccordionWrapper(Item);
     const AccordionBody = asAccordionBody(Sublist);
+    const AccordionTitle = flow(
+      asAccodionTitle,
+      asComponent,
+    )('div');
 
-    const ItemWithSublist: CT<ListProps> = ({ children, ...rest }) => (
+    const ItemWithSublist: ComponentType<ListProps> = ({ children, ...rest }) => (
       <AccordionWrapper>
         <AccordionTitle>
           {children}
@@ -48,7 +48,7 @@ const asAccordionSublist = (Sublist: CT<ListProps>) => (
         <AccordionBody {...rest} />
       </AccordionWrapper>
     );
-    const ItemWithoutSublist: CT<ListProps> = ({ wrap, nodeKey, ...rest }) => (
+    const ItemWithoutSublist: ComponentType<ListProps> = ({ wrap, nodeKey, ...rest }) => (
       <Item {...rest} />
     );
 
@@ -56,4 +56,13 @@ const asAccordionSublist = (Sublist: CT<ListProps>) => (
   }
 );
 
+const withAccordionSublist = flow(
+  withDeleteSublistOnUnwrap,
+  asAccordionSublist,
+  withSublist,
+);
+
 export default asAccordionSublist;
+export {
+  withAccordionSublist,
+};

@@ -27,7 +27,7 @@ import asTaggableItem from './Taggable/asTaggableItem';
 import withListTitle from './List/withListTitle';
 import asEditableList from './List/asEditableList';
 import asBasicSublist from './List/asBasicSublist';
-import withSublist, { withBasicSublist, withAccordionSublist } from './List/withSublist';
+import withSublist, { withBasicSublist } from './List/withSublist';
 import withDeleteSublistOnUnwrap from './List/withDeleteSublistOnUnwrap';
 import { withMeta, withMetaTitle, withMetaHtml } from './Meta/Meta';
 import asBodilessHelmet from './Helmet/Helemet';
@@ -46,8 +46,6 @@ import {
   ifViewportIsNot,
 } from './withResponsiveToggle';
 
-export * from './Accordion';
-
 export {
   asBodilessLink,
   Image,
@@ -60,7 +58,6 @@ export {
   asEditableList,
   asBasicSublist,
   withBasicSublist,
-  withAccordionSublist,
   withSublist,
   withDeleteSublistOnUnwrap,
   ListProps,

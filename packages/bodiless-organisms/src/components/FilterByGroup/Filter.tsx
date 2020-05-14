@@ -38,7 +38,6 @@ import {
   List,
   asEditable,
   asEditableList,
-  withAccordionSublist,
   withBasicSublist,
   withTagButton,
   useTagsAccessors,
@@ -53,6 +52,7 @@ import {
 } from './types';
 import { useFilterByGroupContext, withTagProps } from './FilterByGroupContext';
 import { asContractibleAccordionBody } from './token';
+import { withAccordionSublist } from '../Accordion';
 
 const tagTitleComponentsStart: TagTitleComponents = {
   FilterInputWrapper: Div,

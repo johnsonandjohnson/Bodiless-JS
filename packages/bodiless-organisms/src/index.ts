@@ -77,6 +77,13 @@ export {
 };
 
 export {
+  useAccordionContext,
+  asAccordionWrapper,
+  asAccodionTitle,
+  asAccordionBody,
+} from './components/Accordion';
+
+export {
   BCarousel,
   BAutoCarousel,
   BCarouselClean,
