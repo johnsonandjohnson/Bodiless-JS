@@ -87,7 +87,7 @@ export default (props: any) => (
       </p>
       <div className="flex pt-4">
         <OuterList nodeKey="list1" className="w-1/2" data-list-element="outerlist" />
-        <OuterLinkList nodeKey="list2" className="w-1/2" data-list-element="outerlist" />
+        <OuterLinkList nodeKey="list2" className="w-1/2" data-list-element="outerlinklist" />
       </div>
     </Layout>
   </Page>
