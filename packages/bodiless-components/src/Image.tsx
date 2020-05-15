@@ -42,6 +42,7 @@ import { flowRight } from 'lodash';
 import { useDropzone } from 'react-dropzone';
 import { FormApi } from 'informed';
 import BackendSave from './BackendSave';
+import withPropsFromPlaceholder from './withPropsFromPlaceholder';
 // @ts-ignore fails when it is imported by jest.
 import Placeholder from './placeholder.png';
 
@@ -197,18 +198,7 @@ const emptyValue = {
   alt: 'Alt Text',
 };
 
-// eslint-disable-next-line max-len
-export const withImagePlaceholder = <P extends Data> (placeholder: Partial<Data>) => (Component:CT<P> | string) => {
-  const WithImagePlaceholder = (props:P) => {
-    const { src: srcFromProps } = props;
-    const { src: srcFromPlaceholder } = placeholder;
-    const src = srcFromProps || srcFromPlaceholder;
-    return (
-      <Component {...props} src={src} />
-    );
-  };
-  return WithImagePlaceholder;
-};
+export const withImagePlaceholder = withPropsFromPlaceholder(['src']);
 
 // Composed hoc which creates editable version of the component.
 // Note - the order is important. In particular:
