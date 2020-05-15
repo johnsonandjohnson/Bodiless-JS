@@ -15,6 +15,7 @@ import React from 'react';
 import { flow } from 'lodash';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withProductVariations from './withProductVariations';
+import withLinkVariations from './withLinkVariations';
 import { asFilterableProductContainer } from '../ProductTout/token';
 import { asFlowContainerWithMargins, asFlowContainerFullWidth } from '../FlowContainer/token';
 
@@ -29,6 +30,7 @@ const ProductListingFlowContainer = flow(
   asFilterableProductContainer,
   withProductStrictSnapSize,
   withProductVariations,
+  withLinkVariations,
   asFlowContainerFullWidth,
   asFlowContainerWithMargins,
 )(FlowContainer);
