@@ -56,7 +56,7 @@ export const withNodeDataHandlers = (defaultData?: any) => (
 ) => observer((props: any) => {
   const enhancedDefaultData = {
     ...defaultData,
-    ...pick(props, Object.keys(defaultData)),
+    ...(defaultData ? pick(props, Object.keys(defaultData)) : {}),
   };
   return (<Component {...props} {...useNodeDataHandlers(undefined, enhancedDefaultData)} />);
 });
