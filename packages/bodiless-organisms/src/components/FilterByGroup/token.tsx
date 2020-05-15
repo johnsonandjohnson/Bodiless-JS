@@ -28,11 +28,10 @@ const asResponsiveAccordionTitle = flow(
   }),
 );
 
-const asContractibleAccordionBody = flow(
+const asExpandedOnDesktopBody = flow(
   asAccordionBody,
   withDesign({
-    ExpandedBody: addClasses('block'),
-    ContractedBody: addClasses('hidden'),
+    Wrapper: addClasses('lg:block'),
   }),
 );
 
@@ -41,13 +40,13 @@ const asResponsiveFilterByGroup = flow(
     withDesign({
       FilterWrapper: asAccordionWrapper,
       FilterTitle: asResponsiveAccordionTitle,
-      Filter: asContractibleAccordionBody,
-      ResetButton: asContractibleAccordionBody,
+      Filter: asExpandedOnDesktopBody,
+      ResetButton: asExpandedOnDesktopBody,
     }),
   ),
 );
 
 export {
-  asContractibleAccordionBody,
+  asExpandedOnDesktopBody,
   asResponsiveFilterByGroup,
 };

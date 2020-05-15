@@ -24,17 +24,17 @@ import { AccordionBodyComponents, AccordionBodyProps } from './types';
 
 const AccordionBodyComponentsStart:AccordionBodyComponents = {
   Wrapper: Div,
-  ExpandedBody: Div,
-  ContractedBody: Div,
 };
 
 const AccordionBodyBase: FC<AccordionBodyProps> = ({ components, children }) => {
-  const { ExpandedBody, ContractedBody } = components;
+  const { Wrapper } = components;
   const { expanded } = useAccordionContext();
 
-  return expanded
-    ? (<ExpandedBody>{ children }</ExpandedBody>)
-    : (<ContractedBody>{ children }</ContractedBody>);
+  return (
+    <Wrapper className={expanded ? 'block' : 'hidden'}>
+      { children }
+    </Wrapper>
+  );
 };
 
 const AccordionBodyClean = flow(

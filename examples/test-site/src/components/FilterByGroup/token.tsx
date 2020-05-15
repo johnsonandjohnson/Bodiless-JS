@@ -42,9 +42,7 @@ const withTagListStyles = withDesign({
 const withCategoryList = withDesign({
   Title: addClasses('font-bold'),
   Wrapper: addClasses('p-2'),
-  Item: flow(
-    addClasses('py-2'),
-  ),
+  Item: addClasses('py-2'),
 });
 
 const asFilterByGroupDefaultStyle = withDesign({
@@ -60,7 +58,6 @@ const asFilterByGroupDefaultStyle = withDesign({
   Filter: withDesign({
     TagList: withTagListStyles,
     CategoryList: withCategoryList,
-    ContractedBody: addClasses('lg:block'), // Prevent contractin on lg devices.
   }),
 });
 

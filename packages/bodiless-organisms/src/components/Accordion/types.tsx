@@ -22,8 +22,6 @@ export type AccordionTitleComponents = {
 
 export type AccordionBodyComponents = {
   Wrapper: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
-  ExpandedBody: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
-  ContractedBody: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
 };
 
 export type AccordionTitleProps = DesignableComponentsProps<AccordionTitleComponents>;

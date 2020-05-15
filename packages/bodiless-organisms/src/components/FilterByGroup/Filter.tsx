@@ -51,7 +51,7 @@ import {
   FilterComponents,
 } from './types';
 import { useFilterByGroupContext, withTagProps } from './FilterByGroupContext';
-import { asContractibleAccordionBody } from './token';
+import { asExpandedOnDesktopBody } from './token';
 import { withAccordionSublist } from '../Accordion';
 
 const tagTitleComponentsStart: TagTitleComponents = {
@@ -192,7 +192,7 @@ class FilterBase extends React.PureComponent {
     const { components, ...rest } = props;
     const { TagList, CategoryList } = components;
 
-    const AccordionTagList = asContractibleAccordionBody(TagList);
+    const AccordionTagList = asExpandedOnDesktopBody(TagList);
 
     this.RestProps = rest;
     this.Filter = flow(
