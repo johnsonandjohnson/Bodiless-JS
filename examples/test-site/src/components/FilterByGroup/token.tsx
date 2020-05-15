@@ -49,7 +49,7 @@ const asFilterByGroupDefaultStyle = withDesign({
   Wrapper: addClasses('flex flex-col'),
   FilterWrapper: addClasses('bg-gray-400 flex flex-col'),
   FilterHeader: addClasses('flex flex-col w-full bg-gray-500 p-2'),
-  FilterTitle: addClasses('my-2 text-xl font-bold'),
+  FilterTitle: addClasses('my-2 lg:my-0 text-xl font-bold'),
   ContentWrapper: addClasses('p-2 w-full'),
   ResetButton: flow(
     addClasses('my-2 underline self-start'),
