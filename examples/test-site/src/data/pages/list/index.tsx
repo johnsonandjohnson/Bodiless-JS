@@ -46,7 +46,7 @@ const EditableList = flow(
     Wrapper: flow(stylable, addClasses('pl-10')),
     Item: flow(stylable, addClasses('text-red')),
   }),
-  asTestableList,
+  asTestableList('list'),
 )(List);
 
 /**
@@ -55,7 +55,7 @@ const EditableList = flow(
 const EditableLinkList = flow(
   asEditableList,
   withDesign({ Title: replaceWith(LinkTitle), Wrapper: flow(stylable, addClasses('pl-10')) }),
-  asTestableList,
+  asTestableList('link-list'),
 )(List);
 
 /**
@@ -86,8 +86,8 @@ export default (props: any) => (
         items with red text.  The one on the right contains editable links.
       </p>
       <div className="flex pt-4">
-        <OuterList nodeKey="list1" className="w-1/2" />
-        <OuterLinkList nodeKey="list2" className="w-1/2" />
+        <OuterList nodeKey="list1" className="w-1/2" data-list-element="outerlist" />
+        <OuterLinkList nodeKey="list2" className="w-1/2" data-list-element="outerlist" />
       </div>
     </Layout>
   </Page>
