@@ -12,13 +12,16 @@
  * limitations under the License.
  */
 
-import { withDefaultContent } from '@bodiless/core';
+import {
+  withChild,
+  withDefaultContent,
+} from '@bodiless/core';
 import { flowRight } from 'lodash';
 import {
   asBodilessLink,
   withImagePlaceholder,
 } from '@bodiless/components';
-import { Img } from '@bodiless/fclasses';
+import { A, Img } from '@bodiless/fclasses';
 import landscapeImage from './landscape_image.png';
 import { asEditableImage } from '../Elements.token';
 
@@ -40,13 +43,19 @@ const DEFAULT_LINK_NODE_KEY = 'link';
 
 const asSquareImage = asEditableImage;
 const SquareImage = asSquareImage(DEFAULT_IMAGE_NODE_KEY)(Img);
-const SquareLinkableImage = asBodilessLink(DEFAULT_LINK_NODE_KEY)(SquareImage);
+const SquareLinkableImage = flowRight(
+  asBodilessLink(DEFAULT_LINK_NODE_KEY),
+  withChild(SquareImage),
+)(A);
 const asLandscapeImage = (nodeKey: string) => flowRight(
   withImagePlaceholder({ src: landscapeImage }),
   asEditableImage(nodeKey),
 );
 const LandscapeImage = asLandscapeImage(DEFAULT_IMAGE_NODE_KEY)(Img);
-const LandscapeLinkableImage = asBodilessLink(DEFAULT_LINK_NODE_KEY)(LandscapeImage);
+const LandscapeLinkableImage = flowRight(
+  asBodilessLink(DEFAULT_LINK_NODE_KEY),
+  withChild(LandscapeImage),
+)(A);
 
 export {
   SquareImage,

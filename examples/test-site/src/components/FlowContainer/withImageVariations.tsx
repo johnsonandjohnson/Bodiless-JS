@@ -52,7 +52,7 @@ const images = {
     replaceWith(LandscapeLinkableImage),
     withType('Linkable Image')(),
     withTitle('Landscape Linkable Image'),
-    withDesc('Adds a linkable landscape image'),
+    withDesc('Adds a landscape linkable image'),
   ),
 };
 

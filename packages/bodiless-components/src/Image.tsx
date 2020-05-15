@@ -197,6 +197,7 @@ const emptyValue = {
   alt: 'Alt Text',
 };
 
+// eslint-disable-next-line max-len
 export const withImagePlaceholder = <P extends Data> (placeholder: Data) => (Component:CT<P> | string) => {
   const WithImagePlaceholder = (props:P) => {
     const { src: srcFromProps } = props;

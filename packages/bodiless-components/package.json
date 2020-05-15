@@ -26,7 +26,7 @@
     "build:watch": "npm run build -- --watch",
     "lint": "tslint ./src/**/*.ts?x",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo",
-    "copy": "copyfiles -u 1 \"./src/*.css\" \"./lib/\""
+    "copy": "copyfiles -u 1 \"./src/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
     "@bodiless/core": "^0.0.47",
