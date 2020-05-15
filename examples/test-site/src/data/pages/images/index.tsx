@@ -17,6 +17,7 @@ import { graphql } from 'gatsby';
 import { flowRight } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
+  A,
   H1,
   H2,
   H3,
@@ -26,12 +27,14 @@ import {
   addClasses,
 } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
-import { asContentfulImage } from '../../../components/Image';
+import {
+  asEditableImageWithPlaceholder,
+  asLinkableImage,
+} from '../../../components/Image';
 import {
   asHeader1,
   asHeader2,
   asHeader3,
-  asEditableLink,
 } from '../../../components/Elements.token';
 import { FlowContainerDefault } from '../../../components/FlowContainer';
 
@@ -43,21 +46,21 @@ import ImageSvgSrc from './image.svg';
 import ImageWebpSrc from './image.webp';
 import ImageResponsiveSvgSrc from './responsive_asvg.svg';
 
-const ImageAnimatedPng = asContentfulImage({ src: ImageAnimatedPngSrc })('animatedPng')(Img);
-const ImageGif = asContentfulImage({ src: ImageGifSrc })('gif')(Img);
-const ImageJpg = asContentfulImage({ src: ImageJpgSrc })('jpg')(Img);
-const ImagePng = asContentfulImage({ src: ImagePngSrc })('png')(Img);
-const ImageSvg = asContentfulImage({ src: ImageSvgSrc })('svg')(Img);
-const ImageWebp = asContentfulImage({ src: ImageWebpSrc })('webp')(Img);
-const ImageResponsiveSvg = asContentfulImage({ src: ImageResponsiveSvgSrc })('responsiveSvg')(Img);
+const ImageAnimatedPng = asEditableImageWithPlaceholder(ImageAnimatedPngSrc)('animatedPng')(Img);
+const ImageGif = asEditableImageWithPlaceholder(ImageGifSrc)('gif')(Img);
+const ImageJpg = asEditableImageWithPlaceholder(ImageJpgSrc)('jpg')(Img);
+const ImagePng = asEditableImageWithPlaceholder(ImagePngSrc)('png')(Img);
+const ImageSvg = asEditableImageWithPlaceholder(ImageSvgSrc)('svg')(Img);
+const ImageWebp = asEditableImageWithPlaceholder(ImageWebpSrc)('webp')(Img);
+const ImageResponsiveSvg = asEditableImageWithPlaceholder(ImageResponsiveSvgSrc)('responsiveSvg')(Img);
 
-const LinkableImageAnimatedPng = asEditableLink('animatedPngLink')(ImageAnimatedPng);
-const LinkableImageGif = asEditableLink('gifLink')(ImageGif);
-const LinkableImageJpg = asEditableLink('jpgLink')(ImageJpg);
-const LinkableImagePng = asEditableLink('pngLink')(ImagePng);
-const LinkableImageSvg = asEditableLink('svgLink')(ImageSvg);
-const LinkableImageWebp = asEditableLink('webpLink')(ImageWebp);
-const LinkableImageResponsiveSvg = asEditableLink('responsiveSvgLink')(ImageResponsiveSvg);
+const LinkableImageAnimatedPng = asLinkableImage(ImageAnimatedPng)('animatedPngLink')(A);
+const LinkableImageGif = asLinkableImage(ImageGif)('gifLink')(A);
+const LinkableImageJpg = asLinkableImage(ImageJpg)('jpgLink')(A);
+const LinkableImagePng = asLinkableImage(ImagePng)('pngLink')(A);
+const LinkableImageSvg = asLinkableImage(ImageSvg)('svgLink')(A);
+const LinkableImageWebp = asLinkableImage(ImageWebp)('webpLink')(A);
+const LinkableImageResponsiveSvg = asLinkableImage(ImageResponsiveSvg)('responsiveSvgLink')(A);
 
 const PageTitle = asHeader1(H1);
 const PageSection = flowRight(

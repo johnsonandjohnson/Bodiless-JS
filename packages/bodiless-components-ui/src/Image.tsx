@@ -14,6 +14,7 @@
 
 import React, { ComponentType } from 'react';
 import { flowRight } from 'lodash';
+import { withoutProps } from '@bodiless/core';
 import {
   asBodilessImage as asBaseBodilessImage,
   TImagePickerUI,
@@ -100,6 +101,7 @@ const withUI = (ui: TImagePickerUI) => addProps({ ui });
 const asBodilessImage = (nodeKey?: string) => flowRight(
   withUI(imagePickerUI),
   asBaseBodilessImage(nodeKey),
+  withoutProps(['ui']),
 );
 
 const Image = asBodilessImage()(Img);

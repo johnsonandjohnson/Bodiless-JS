@@ -23,6 +23,7 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
   },
   "dependencies": {
+    "@bodiless/core": "^0.0.47",
     "@bodiless/fclasses": "^0.0.47",
     "@bodiless/components": "^0.0.47",
     "@bodiless/ui": "^0.0.47",

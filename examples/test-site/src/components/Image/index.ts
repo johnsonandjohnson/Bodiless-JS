@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import { ComponentType } from 'react';
 import {
   withChild,
   withDefaultContent,
@@ -41,21 +42,20 @@ const asContentfulImage = (nodeContent: Partial<Data>) => (nodeKey: string) => f
 const DEFAULT_IMAGE_NODE_KEY = 'image';
 const DEFAULT_LINK_NODE_KEY = 'link';
 
-const asSquareImage = asEditableImage;
-const SquareImage = asSquareImage(DEFAULT_IMAGE_NODE_KEY)(Img);
-const SquareLinkableImage = flowRight(
-  asBodilessLink(DEFAULT_LINK_NODE_KEY),
-  withChild(SquareImage),
-)(A);
-const asLandscapeImage = (nodeKey: string) => flowRight(
-  withImagePlaceholder({ src: landscapeImage }),
+const asEditableImageWithPlaceholder = (placeholder: string) => (nodeKey: string) => flowRight(
+  withImagePlaceholder({ src: placeholder }),
   asEditableImage(nodeKey),
 );
+const asLinkableImage = (ImageComponent: ComponentType<any>) => (nodeKey: string) => flowRight(
+  asBodilessLink(nodeKey),
+  withChild(ImageComponent),
+);
+const asSquareImage = asEditableImage;
+const SquareImage = asSquareImage(DEFAULT_IMAGE_NODE_KEY)(Img);
+const SquareLinkableImage = asLinkableImage(SquareImage)(DEFAULT_LINK_NODE_KEY)(A);
+const asLandscapeImage = asEditableImageWithPlaceholder(landscapeImage);
 const LandscapeImage = asLandscapeImage(DEFAULT_IMAGE_NODE_KEY)(Img);
-const LandscapeLinkableImage = flowRight(
-  asBodilessLink(DEFAULT_LINK_NODE_KEY),
-  withChild(LandscapeImage),
-)(A);
+const LandscapeLinkableImage = asLinkableImage(LandscapeImage)(DEFAULT_LINK_NODE_KEY)(A);
 
 export {
   SquareImage,
@@ -64,4 +64,6 @@ export {
   LandscapeLinkableImage,
   asContentfulImage,
   asLandscapeImage,
+  asEditableImageWithPlaceholder,
+  asLinkableImage,
 };

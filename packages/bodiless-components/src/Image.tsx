@@ -198,7 +198,7 @@ const emptyValue = {
 };
 
 // eslint-disable-next-line max-len
-export const withImagePlaceholder = <P extends Data> (placeholder: Data) => (Component:CT<P> | string) => {
+export const withImagePlaceholder = <P extends Data> (placeholder: Partial<Data>) => (Component:CT<P> | string) => {
   const WithImagePlaceholder = (props:P) => {
     const { src: srcFromProps } = props;
     const { src: srcFromPlaceholder } = placeholder;
