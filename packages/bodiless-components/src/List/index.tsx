@@ -21,7 +21,7 @@ import React, {
 import { flow } from 'lodash';
 import { observer } from 'mobx-react-lite';
 import { withNode, withoutProps } from '@bodiless/core';
-import { designable, Ul, Li } from '@bodiless/fclasses';
+import { designable, asComponent } from '@bodiless/fclasses';
 import { useItemsMutators, useItemsAccessors } from './model';
 import { Props, FinalProps, ListDesignableComponents } from './types';
 
@@ -38,8 +38,8 @@ const ItemWithNode: FC<ItemWithNodeProps> = ({ nodeKey, component: Component, ..
 
 
 const startComponents: ListDesignableComponents = {
-  Wrapper: Ul,
-  Item: Li,
+  Wrapper: asComponent('ul'),
+  Item: asComponent('li'),
   // For title we have to strip the props if not wrapped.
   Title: withoutProps(['onAdd', 'onDelete', 'canDelete'])(Fragment),
   ItemMenuOptionsProvider: Fragment,

@@ -33,6 +33,7 @@ import {
   Label,
   withDesign,
   replaceWith,
+  stylable,
 } from '@bodiless/fclasses';
 import {
   List,
@@ -171,6 +172,8 @@ const TestFilterComponentsStart: FilterComponents = {
         replaceWith(H3),
         asEditable('category_name', 'Category Name'),
       ),
+      Item: stylable,
+      Wrapper: stylable,
     }),
   )(List),
   TagList: flow(
@@ -178,6 +181,7 @@ const TestFilterComponentsStart: FilterComponents = {
     asEditableList,
     withDesign({
       Title: replaceWith(TagTitle),
+      Wrapper: stylable,
     }),
   )(List),
 };
