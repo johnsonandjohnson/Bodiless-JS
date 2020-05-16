@@ -23,7 +23,7 @@ const tmp = require('tmp');
 const path = require('path');
 const Page = require('./page');
 const GitCmd = require('./GitCmd');
-const { getChanges, getConflicts, getCurrentBranch } = require('./git');
+const { getChanges, getConflicts } = require('./git');
 const Logger = require('./logger');
 
 const backendPrefix = process.env.GATSBY_BACKEND_PREFIX || '/___backend';
