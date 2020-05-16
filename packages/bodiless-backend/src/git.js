@@ -11,7 +11,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+const path = require('path');
+const rimraf = require('rimraf');
+const { v1 } = require('uuid');
 const GitCmd = require('./GitCmd');
+const Logger = require('./logger');
 
 /**
  * Returns the name of the current branch as a string.
@@ -67,13 +71,23 @@ const compare = async (show, comparedTo) => {
   };
 };
 
+const getGitCmdOutput = result => result.stdout.trim().replace('\n$', '');
+
 /**
  * Returns an object describing local and upstream changes on the changeset branch.
+ *
+ * @return {object} changes between branches.
+ *            {
+ *              upstream,   // Commits from upstream branch.
+ *              production, // Commits from origin/master.
+ *              local,      // Commits made on local branch.
+ *            }
  */
 const getChanges = async () => {
   await GitCmd.cmd().add('fetch', 'origin').exec();
   const branch = await getCurrentBranch();
   const upstreamBranch = await getUpstreamBranch(branch);
+  const productionBranch = 'origin/master';
   if (!upstreamBranch) {
     return {
       upstream: {
@@ -85,21 +99,103 @@ const getChanges = async () => {
   }
   const result = await Promise.all([
     compare(upstreamBranch, branch),
-    // compare('origin/master', upstreamBranch),
-    // compare(branch, 'origin/master'),
+    compare(productionBranch, upstreamBranch),
+    compare(branch, productionBranch),
   ]);
   const status = {
     upstream: { branch: upstreamBranch, ...result[0] },
-    // production: result[1],
-    // local: result[2],
+    production: { branch: productionBranch, ...result[1] },
+    local: { branch, ...result[2] },
   };
   return status;
+};
+
+/**
+ * Clone a repo with url and branch to checkout.
+ *
+ * @param {string} url - Repo url.
+ * @param {array} options - Clone options [branch|directory].
+ */
+const clone = (url, options = {}) => {
+  const cmd = GitCmd.cmd().add('clone', url);
+  if (options.branch) cmd.add('-b', options.branch);
+  if (options.directory) cmd.add(options.directory);
+  return cmd.exec();
+};
+
+/**
+ * Get origin master to upstream branch merge conflict status.
+ *
+ * @return {object} Results.
+ */
+const getConflicts = async () => {
+  // const remoteUrl = await getRemote('origin');
+  const logger = new Logger('BACKEND');
+  const directory = path.resolve(process.env.BODILESS_BACKEND_TMP || '/tmp', v1());
+
+  // @todo: fs directory existence check.
+  const branch = await getCurrentBranch();
+  const upstreamBranch = await getUpstreamBranch(branch);
+  const rootCmd = GitCmd.cmd().add('rev-parse', '--show-toplevel');
+  const root = getGitCmdOutput(await rootCmd.exec());
+  logger.log([`Repo root: ${root}`]);
+
+  const mergeUpstreamBranch = `origin-${upstreamBranch.replace('origin/', '')}`;
+  const mergeMasterBranch = 'origin-master';
+  await GitCmd.cmd().add(
+    'fetch',
+    'origin',
+    `${upstreamBranch.replace('origin/', '')}:${mergeUpstreamBranch}`,
+  ).exec();
+
+  await GitCmd.cmd().add(
+    'fetch',
+    'origin',
+    `master:${mergeMasterBranch}`,
+  ).exec();
+
+  await clone(root, { directory, branch: mergeUpstreamBranch });
+  process.chdir(directory);
+
+  let conflictFiles = [];
+  try {
+    await GitCmd.cmd()
+      .add('merge', '--no-commit', '--no-ff', 'origin/origin-master')
+      .exec();
+  } catch (e) {
+    const conflictResult = await GitCmd.cmd()
+      .add('diff', '--name-only', '--diff-filter=U')
+      .exec();
+    conflictFiles = conflictResult.stdout.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+    await GitCmd.cmd()
+      .add('merge', '--abort')
+      .exec();
+  }
+
+  // cleanup tmp repo and branches.
+  process.chdir(root);
+  await GitCmd.cmd()
+    .add(
+      'branch',
+      '--delete',
+      '--force',
+      `${mergeMasterBranch}`,
+      `${mergeUpstreamBranch}`,
+    )
+    .exec();
+  rimraf(directory, () => logger.log(`${directory} removed.`));
+
+  if (conflictFiles.length) {
+    return { hasConflict: true, files: conflictFiles };
+  }
+  return { hasConflict: false };
 };
 
 module.exports = {
   getCurrentBranch,
   getUpstreamBranch,
   getChanges,
+  getConflicts,
   getMergeBase,
   compare,
 };

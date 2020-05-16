@@ -12,7 +12,9 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "formidable": "^1.2.1",
-    "tmp": "^0.0.33"
+    "rimraf": "^3.0.2",
+    "tmp": "^0.0.33",
+    "uuid": "^8.0.0"
   },
   "publishConfig": {
     "access": "public"

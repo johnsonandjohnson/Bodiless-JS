@@ -23,7 +23,7 @@ const tmp = require('tmp');
 const path = require('path');
 const Page = require('./page');
 const GitCmd = require('./GitCmd');
-const { getChanges } = require('./git');
+const { getChanges, getConflicts, getCurrentBranch } = require('./git');
 const Logger = require('./logger');
 
 const backendPrefix = process.env.GATSBY_BACKEND_PREFIX || '/___backend';
@@ -265,6 +265,7 @@ class Backend {
       next();
     });
     this.setRoute(`${backendPrefix}/changes`, Backend.getChanges);
+    this.setRoute(`${backendPrefix}/conflicts`, Backend.getConflicts);
     this.setRoute(`${backendPrefix}/get/commits`, Backend.getLatestCommits);
     this.setRoute(`${backendPrefix}/change/amend`, Backend.setChangeAmend);
     this.setRoute(`${backendPrefix}/change/commit`, Backend.setChangeCommit);
@@ -313,6 +314,19 @@ class Backend {
     route.get(async (req, res) => {
       try {
         const status = await getChanges();
+        res.send(status);
+      } catch (error) {
+        logger.log(error);
+        error.code = 500;
+        Backend.exitWithErrorResponse(error, res);
+      }
+    });
+  }
+
+  static getConflicts(route) {
+    route.get(async (req, res) => {
+      try {
+        const status = await getConflicts();
         res.send(status);
       } catch (error) {
         logger.log(error);
