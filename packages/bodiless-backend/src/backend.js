@@ -265,7 +265,7 @@ class Backend {
       next();
     });
     this.setRoute(`${backendPrefix}/changes`, Backend.getChanges);
-    this.setRoute(`${backendPrefix}/conflicts`, Backend.getConflicts);
+    this.setRoute(`${backendPrefix}/changes/conflicts`, Backend.getConflicts);
     this.setRoute(`${backendPrefix}/get/commits`, Backend.getLatestCommits);
     this.setRoute(`${backendPrefix}/change/amend`, Backend.setChangeAmend);
     this.setRoute(`${backendPrefix}/change/commit`, Backend.setChangeCommit);
