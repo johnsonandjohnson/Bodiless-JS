@@ -183,7 +183,8 @@ const getConflicts = async () => {
       `${mergeUpstreamBranch}`,
     )
     .exec();
-  rimraf(directory, () => logger.log(`${directory} removed.`));
+  rimraf.sync(directory);
+  logger.log(`${directory} removed.`);
 
   if (conflictFiles.length) {
     return { hasConflict: true, files: conflictFiles };
