@@ -45,14 +45,19 @@ const startComponents: ListDesignableComponents = {
   ItemMenuOptionsProvider: Fragment,
 };
 
-const BasicList: FC<Props> = ({ components, unwrap, ...rest }) => {
+const BasicList: FC<Props> = ({
+  components,
+  unwrap,
+  onDelete,
+  ...rest
+}) => {
   const {
     Wrapper,
     Item,
     Title,
   } = components;
 
-  const { addItem, deleteItem } = useItemsMutators({ unwrap });
+  const { addItem, deleteItem } = useItemsMutators({ unwrap, onDelete });
   const { getItems } = useItemsAccessors();
   const itemData = getItems();
   const canDelete = () => Boolean(getItems().length > 1 || unwrap);

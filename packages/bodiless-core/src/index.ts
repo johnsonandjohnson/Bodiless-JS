@@ -18,6 +18,7 @@ import PageEditContext from './PageEditContext';
 import asStatic from './asStatic';
 import { useEditContext, useUUID, useContextActivator } from './hooks';
 import withNode, { withNodeKey } from './withNode';
+import withSidecarNodes, { startSidecarNodes, endSidecarNodes } from './withSidecarNodes';
 import {
   withDefaultContent,
   withResetButton,
@@ -35,7 +36,8 @@ import {
   withContextActivator,
   withoutProps,
 } from './hoc';
-import { ifEditable, ifReadOnly, withEditToggle } from './withEditToggle';
+import { ifToggledOff, ifToggledOn, withFlowToggle } from './withFlowToggle';
+import { ifEditable, ifReadOnly, useEditToggle } from './withEditToggle';
 import { TMenuOption, PageEditContextInterface } from './PageEditContext/types';
 import { EditButtonOptions } from './Types/EditButtonTypes';
 import { TMenuOptionGetter } from './Types/PageContextProviderTypes';
@@ -72,6 +74,9 @@ export {
   EditButtonOptions,
   withNode,
   withNodeKey,
+  withSidecarNodes,
+  startSidecarNodes,
+  endSidecarNodes,
   contextMenuForm,
   withData,
   NodeProvider,
@@ -80,7 +85,6 @@ export {
   DefaultContentNode,
   ifEditable,
   ifReadOnly,
-  withEditToggle,
   withoutProps,
   ActivateOnEffectProvider,
   withActivateOnEffect,
@@ -89,6 +93,10 @@ export {
   withChild,
   withDefaultContent,
   withResetButton,
+  ifToggledOff,
+  ifToggledOn,
+  withFlowToggle,
+  useEditToggle,
 };
 
 export type Bodiless<P, Q> = (C: ComponentType<P> | string) => ComponentType<Q>;
