@@ -12,13 +12,16 @@
  * limitations under the License.
  */
 
-import withTagButton from './withTagButton';
-import useTagsAccessors from './TagModel';
-import { TagButtonProps, TagsNodeType } from './types';
+import { flow } from 'lodash';
+import { Page } from '@bodiless/gatsby-theme-bodiless';
+import { withPageDimensionsContext } from '@bodiless/components';
 
-export {
-  TagButtonProps,
-  TagsNodeType,
-  withTagButton,
-  useTagsAccessors,
+const breakpoints = {
+  sm: 640, md: 768, lg: 1024, xl: 1280,
 };
+
+const asResponsivePage = flow(
+  withPageDimensionsContext({ breakpoints }),
+)(Page);
+
+export default asResponsivePage;

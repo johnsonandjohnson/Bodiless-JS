@@ -15,18 +15,21 @@ import React from 'react';
 import { flow } from 'lodash';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withProductVariations from './withProductVariations';
-import { asFlowContainerWithMargins } from '../FlowContainer/token';
+import { asFilterableProductContainer } from '../ProductTout/token';
+import { asFlowContainerWithMargins, asFlowContainerFullWidth } from '../FlowContainer/token';
 
 const withProductStrictSnapSize = Component => props => (
   <Component
     {...props}
-    snapData={() => ({ className: 'w-full lg:w-1/4' })}
+    snapData={() => ({ className: 'w-1/3' })}
   />
 );
 
 const ProductListingFlowContainer = flow(
+  asFilterableProductContainer,
   withProductStrictSnapSize,
   withProductVariations,
+  asFlowContainerFullWidth,
   asFlowContainerWithMargins,
 )(FlowContainer);
 

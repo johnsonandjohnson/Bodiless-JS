@@ -25,13 +25,13 @@ import {
   withoutProps,
 } from '@bodiless/core';
 import { flowRight } from 'lodash';
-import { withTagButton } from '../TagButton';
+import { withTagButton, TagsNodeType } from '../TagButton';
 // Type of the data used by this component.
 // @Todo: Determine if this type is necessary?
 type Props = HTMLProps<HTMLElement>;
 
-const emptyValue = {
-  tags: '',
+const emptyValue:TagsNodeType = {
+  tags: [],
 };
 
 // Composed hoc which creates editable version of the component.
@@ -45,11 +45,12 @@ const asTaggableItem = (nodeKey?: string) => flowRight(
   withNode,
   withNodeDataHandlers(emptyValue),
   ifEditable(
-    withTagButton(),
+    withTagButton,
     withContextActivator('onClick'),
     withLocalContextMenu,
   ),
   withoutProps([
+    'registerSuggestions',
     'getSuggestions',
     'allowNew',
     'noSuggestionsText',
