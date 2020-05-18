@@ -28,7 +28,7 @@ type ResponseData = {
 
 type Props = {
   client: any;
-  closeForm?: () => void;
+  formApi?: any;
 };
 
 /**
@@ -42,9 +42,9 @@ const RemoteChanges = ({ client }: Props) => {
   const formApi = useFormApi();
   // @Todo revise the use of formState, possibly use informed multistep.
   if (formApi.getState().submits === 0) {
-    return (<FetchChanges client={client} />);
+    return (<FetchChanges client={client} formApi={formApi} />);
   }
-  return <PullChanges client={client} />;
+  return <PullChanges client={client} formApi={formApi} />;
 };
 
 enum ChangeState {
@@ -97,8 +97,7 @@ const ChangeContent = ({ status, errorMessage } : ContentProps) => {
  * @param {BackendClient} client
  * @constructor
  */
-const FetchChanges = ({ client }: Props) => {
-  const formApi = useFormApi();
+const FetchChanges = ({ client, formApi }: Props) => {
   const [state, setState] = useState<ContentProps>({
     status: ChangeState.Pending,
   });
@@ -141,8 +140,7 @@ type PullStatus = {
  * @param {BackendClient} client
  * @constructor
  */
-const PullChanges = ({ client }: Props) => {
-  const formApi = useFormApi();
+const PullChanges = ({ client, formApi }: Props) => {
   const [pullStatus, setPullStatus] = useState<PullStatus>({
     complete: false,
     error: '',
