@@ -95,6 +95,7 @@ const ChangeContent = ({ status, errorMessage } : ContentProps) => {
  *
  * @component
  * @param {BackendClient} client
+ * @param formApi
  * @constructor
  */
 const FetchChanges = ({ client, formApi }: Props) => {
@@ -138,6 +139,7 @@ type PullStatus = {
  *
  * @component
  * @param {BackendClient} client
+ * @param formApi
  * @constructor
  */
 const PullChanges = ({ client, formApi }: Props) => {
