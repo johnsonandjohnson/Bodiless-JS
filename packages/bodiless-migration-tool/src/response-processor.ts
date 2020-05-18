@@ -38,11 +38,18 @@ export interface RedirectConfig {
   format: ExportFormat,
 }
 
+interface ResponseProcessorParams {
+  websiteUrl: string
+}
+
 export default class ResponseProcessor {
   redirects: RedirectRule;
 
-  constructor() {
+  websiteUrl: string;
+
+  constructor(params: ResponseProcessorParams) {
     this.redirects = {};
+    this.websiteUrl = params.websiteUrl;
   }
 
   public exportRedirects(redirectConfig: RedirectConfig): void {
@@ -59,11 +66,18 @@ export default class ResponseProcessor {
   }
 
   public processRedirect(response: Response): void {
-    if ([301, 302, 307, 308].indexOf(response.status()) !== -1) {
+    if (
+      [301, 302, 307, 308].indexOf(response.status()) !== -1
+      && !isUrlExternal(this.websiteUrl, response.url())
+    ) {
+
       const headers = response.headers();
-      const from = ResponseProcessor.getRedirectPath(response.url()).replace(/\/$/g, '');
+      const from = ResponseProcessor.getRedirectPath(response.url()).replace(
+        /\/$/g,
+        '',
+      );
       const destUrl = headers.location;
-      const destination = isUrlExternal(response.url(), destUrl)
+      const destination = isUrlExternal(this.websiteUrl, destUrl)
         ? headers.location
         : ResponseProcessor.getRedirectPath(headers.location);
 
@@ -79,6 +93,7 @@ export default class ResponseProcessor {
   }
 
   private static getRedirectPath(url: string): string {
-    return new URL(url).pathname;
+    const u = new URL(url);
+    return u.pathname + u.search;
   }
 }
