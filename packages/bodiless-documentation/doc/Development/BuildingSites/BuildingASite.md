@@ -168,10 +168,10 @@ We recommend reading some of the following guides:
 
 * As described in Components section, the Rich Text Editor comes with a few
   editors. We suggest
-  [refining the editor components](Development/BuildingSites/RichTextEditors.md)
+  [refining the editor components](Components/RichText.md)
   to meet your site's requirements.
 * [Building Components Guide](Development/BuildingSites/BuildingComponents.md)
-* [FlowContainer Guide](Development/BuildingSites/FlowContainer.md)
+* [FlowContainer Guide](Components/FlowContainer.md)
 
 In general we recommend as best practice to create components in their own
 folders if they are larger/more complex/multiple versions and/or have complex
