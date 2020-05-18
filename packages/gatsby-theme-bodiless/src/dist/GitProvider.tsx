@@ -130,7 +130,6 @@ const formGitCommit = (client: Client) => contextMenuForm({
 
 const formGitPull = (client: Client) => contextMenuForm({
   submitValues: (values : any) => {
-    console.log(values);
     const { allowed } = values;
     if (!allowed) return false;
     return true;

@@ -47,7 +47,6 @@ const SpinnerWrapper = () => (
 const RemoteChanges = ({ client, closeForm }: Props) => {
   const formApi = useFormApi();
   // @Todo revise the use of formState, possibly use informed multistep.
-  console.log(formApi.getState().submits);
   if (formApi.getState().submits === 2 && closeForm) {
     closeForm();
     return null;
