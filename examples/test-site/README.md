@@ -1,6 +1,5 @@
 # Bodiless-JS Test Site
 
-
 Example site for testing bodiless.
 
 ## Installation

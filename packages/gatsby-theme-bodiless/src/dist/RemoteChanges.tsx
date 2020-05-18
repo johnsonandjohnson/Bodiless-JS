@@ -51,7 +51,7 @@ const RemoteChanges = ({ client, closeForm }: Props) => {
     closeForm();
     return null;
   }
-  if (formApi.getState().submits === 1 && formApi.getValue('allowed') === true) {
+  if (formApi.getState().submits > 0 && formApi.getValue('allowed') === true) {
     return <PullChanges client={client} />;
   }
   return (<FetchChanges client={client} />);
@@ -121,10 +121,11 @@ const FetchChanges = ({ client }: Props) => {
         });
         const response = await client.getChanges();
         if (response.status === 200) {
-          setState({ status: handleChangesResponse(response.data) });
-          if (state.status === ChangeState.CanBePulled) {
+          const status = handleChangesResponse(response.data);
+          if (status === ChangeState.CanBePulled) {
             formApi.setValue('allowed', true);
           }
+          setState({ status });
         }
       } catch (error) {
         setState({ status: ChangeState.Errored, errorMessage: error.message });
