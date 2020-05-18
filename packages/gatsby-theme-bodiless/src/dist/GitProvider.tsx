@@ -130,16 +130,15 @@ const formGitCommit = (client: Client) => contextMenuForm({
 
 const formGitPull = (client: Client) => contextMenuForm({
   submitValues: (values : any) => {
-    const { allowed } = values;
-    if (!allowed) return false;
-    return true;
+    const { keepOpen } = values;
+    return keepOpen;
   },
 })(({ ui, closeForm }: any) => {
   const { ComponentFormTitle, ComponentFormText } = getUI(ui);
   return (
     <>
       <ComponentFormTitle>Pull Changes</ComponentFormTitle>
-      <ComponentFormText type="hidden" field="allowed" initialValue={false} />
+      <ComponentFormText type="hidden" field="keepOpen" initialValue={false} />
       <RemoteChanges client={client} closeForm={closeForm} />
     </>
   );

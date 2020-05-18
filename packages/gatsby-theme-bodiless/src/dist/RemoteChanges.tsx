@@ -14,7 +14,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useEditContext } from '@bodiless/core';
-import { Spinner } from '@bodiless/ui';
+import { SpinnerWrapper } from '@bodiless/ui';
 import { isEmpty } from 'lodash';
 import { useFormApi } from 'informed';
 
@@ -31,12 +31,6 @@ type Props = {
   closeForm?: () => void;
 };
 
-const SpinnerWrapper = () => (
-  <div className="bl-pt-3">
-    <Spinner color="bl-bg-white" />
-  </div>
-);
-
 /**
  * Component for showing and pulling remote changes.
  *
@@ -44,17 +38,13 @@ const SpinnerWrapper = () => (
  * @param {BackendClient} client
  * @constructor
  */
-const RemoteChanges = ({ client, closeForm }: Props) => {
+const RemoteChanges = ({ client }: Props) => {
   const formApi = useFormApi();
   // @Todo revise the use of formState, possibly use informed multistep.
-  if (formApi.getState().submits === 2 && closeForm) {
-    closeForm();
-    return null;
+  if (formApi.getState().submits === 0) {
+    return (<FetchChanges client={client} />);
   }
-  if (formApi.getState().submits > 0 && formApi.getValue('allowed') === true) {
-    return <PullChanges client={client} />;
-  }
-  return (<FetchChanges client={client} />);
+  return <PullChanges client={client} />;
 };
 
 enum ChangeState {
@@ -120,13 +110,14 @@ const FetchChanges = ({ client }: Props) => {
           hasSpinner: false,
         });
         const response = await client.getChanges();
-        if (response.status === 200) {
-          const status = handleChangesResponse(response.data);
-          if (status === ChangeState.CanBePulled) {
-            formApi.setValue('allowed', true);
-          }
-          setState({ status });
+        if (response.status !== 200) {
+          throw new Error(`Error pulling changes, status=${response.status}`);
         }
+        const status = handleChangesResponse(response.data);
+        if (status === ChangeState.CanBePulled) {
+          formApi.setValue('keepOpen', true);
+        }
+        setState({ status });
       } catch (error) {
         setState({ status: ChangeState.Errored, errorMessage: error.message });
       } finally {
@@ -151,6 +142,7 @@ type PullStatus = {
  * @constructor
  */
 const PullChanges = ({ client }: Props) => {
+  const formApi = useFormApi();
   const [pullStatus, setPullStatus] = useState<PullStatus>({
     complete: false,
     error: '',
@@ -163,15 +155,17 @@ const PullChanges = ({ client }: Props) => {
           hasSpinner: false,
         });
         const response = await client.pull();
-        if (response.status === 200) {
-          setPullStatus({ complete: true });
+        if (response.status !== 200) {
+          throw new Error(`Error pulling changes, status=${response.status}`);
         }
+        setPullStatus({ complete: true });
       } catch (error) {
         setPullStatus({
           complete: false,
-          error: error || 'An unexpected error has occurred.',
+          error: error.message || 'An unexpected error has occurred.',
         });
       } finally {
+        formApi.setValue('keepOpen', false);
         context.hidePageOverlay();
       }
     })();
