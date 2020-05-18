@@ -120,7 +120,7 @@ const FetchChanges = ({ client }: Props) => {
           hasSpinner: false,
           maxTimeoutInSeconds: 10,
         });
-        const response = await client.getChanges();
+        const response = await client.pull();
         if (response.status === 200) {
           setState({ status: handleChangesResponse(response.data) });
           if (state.status === ChangeState.CanBePulled) {
