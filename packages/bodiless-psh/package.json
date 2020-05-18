@@ -17,8 +17,9 @@
     "lib": "lib"
   },
   "files": [
-    "lib",
-    "resources"
+    "/lib",
+    "/resources",
+    "/bodiless.docs.json"
   ],
   "repository": {
     "type": "git",

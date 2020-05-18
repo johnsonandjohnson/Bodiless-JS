@@ -15,13 +15,7 @@
 import React from 'react';
 import { v4 } from 'uuid';
 import { useFormApi, Text } from 'informed';
-import { isEmpty } from 'lodash';
-import ReactTags, { ReactTagsProps, Tag as ReactTagType } from 'react-tag-autocomplete';
-
-export type TagType = {
-  id: string,
-  name: string,
-} | ReactTagType;
+import ReactTags, { ReactTagsProps, Tag as TagType } from 'react-tag-autocomplete';
 
 class Tag {
   readonly id: string = v4();
@@ -39,18 +33,19 @@ export type ReactTagsFieldProps = {
 
 const ReactTagsField = (props: ReactTagsFieldProps) => {
   const formApi = useFormApi();
-  const currentTags = formApi.getValue<TagType[]>('tags');
+  const currentTags = formApi.getValue<TagType[]>('tags') || [];
   const { allowMultipleTags, ...rest } = props;
 
   const handleAddition = (tag: TagType) => {
     let tagToAdd = tag;
 
-    if (isEmpty(tagToAdd.id)) {
+    if (!tag.id) {
       tagToAdd = new Tag(tag.name);
     }
-
-    const newTags = allowMultipleTags ? [...currentTags, tagToAdd] : [tagToAdd];
-    formApi.setValue('tags', newTags);
+    if (!currentTags.some(currentTag => currentTag.name === tagToAdd.name)) {
+      const newTags = allowMultipleTags ? [...currentTags, tagToAdd] : [tagToAdd];
+      formApi.setValue('tags', newTags);
+    }
   };
 
   const handleDelete = (i: number) => {
@@ -74,5 +69,6 @@ const ReactTagsField = (props: ReactTagsFieldProps) => {
 
 export default ReactTagsField;
 export {
+  TagType,
   Tag as BodilessTag,
 };

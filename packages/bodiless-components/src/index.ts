@@ -23,23 +23,28 @@ import {
   TitleProps as ListTitleProps,
   ListDesignableComponents,
 } from './List/types';
+import asTaggableItem from './Taggable/asTaggableItem';
 import withListTitle from './List/withListTitle';
 import asEditableList from './List/asEditableList';
 import asBasicSublist from './List/asBasicSublist';
 import withSublist, { withBasicSublist } from './List/withSublist';
 import withDeleteSublistOnUnwrap from './List/withDeleteSublistOnUnwrap';
-import {
-  withMeta, withMetaTitle, withMetaHtml,
-} from './Meta/Meta';
+import { withMeta, withMetaTitle, withMetaHtml } from './Meta/Meta';
 import asBodilessHelmet from './Helmet/Helemet';
 import withEvent from './GTM/gtm';
-import {
-  withToggle,
-  withToggleTo,
-  withToggleButton,
-} from './Toggle';
+import { withToggle, withToggleTo, withToggleButton } from './Toggle';
 import withEditPlaceholder from './Placeholder';
 import { TagButtonProps, withTagButton, useTagsAccessors } from './TagButton';
+import withFilterByTags from './withFilterByTags';
+import PageDimensionsProvider, {
+  usePageDimensionsContext,
+  withPageDimensionsContext,
+  BreakpointsType,
+} from './PageDimensionsProvider';
+import {
+  ifViewportIs,
+  ifViewportIsNot,
+} from './withResponsiveToggle';
 
 export {
   asBodilessLink,
@@ -72,5 +77,13 @@ export {
   withEvent,
   withTagButton,
   TagButtonProps,
+  asTaggableItem,
+  withFilterByTags,
   useTagsAccessors,
+  PageDimensionsProvider,
+  usePageDimensionsContext,
+  withPageDimensionsContext,
+  BreakpointsType,
+  ifViewportIs,
+  ifViewportIsNot,
 };

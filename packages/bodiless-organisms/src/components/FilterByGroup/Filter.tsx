@@ -13,7 +13,7 @@
  */
 
 /* eslint-disable arrow-body-style, max-len, @typescript-eslint/no-unused-vars */
-import React, { FC, ComponentType as CT } from 'react';
+import React, { FC, ComponentType, HTMLProps } from 'react';
 import { flow, isEmpty } from 'lodash';
 import {
   withNodeKey,
@@ -42,6 +42,8 @@ import {
   withBasicSublist,
   withTagButton,
   useTagsAccessors,
+  ifViewportIs,
+  ifViewportIsNot,
 } from '@bodiless/components';
 import {
   TagTitleProps,
@@ -49,7 +51,9 @@ import {
   FilterProps,
   FilterComponents,
 } from './types';
-import { useFilterByGroupContext } from './FilterByGroupContext';
+import { useFilterByGroupContext, withTagProps } from './FilterByGroupContext';
+import { asExpandedOnDesktopBody } from './token';
+import { withAccordionSublist } from '../Accordion';
 
 const tagTitleComponentsStart: TagTitleComponents = {
   FilterInputWrapper: Div,
@@ -58,20 +62,17 @@ const tagTitleComponentsStart: TagTitleComponents = {
   FilterGroupItemLabel: Label,
 };
 
-const withTagButtonProps = <P extends object>(Component: CT<P>) => (props: P) => {
-  const { getSuggestions } = useFilterByGroupContext();
+const withUnselectOnDelete = <P extends object>(Component: ComponentType<P>) => (props: P) => {
+  const {
+    setSelectedNode,
+    setSelectedTag,
+  } = useFilterByGroupContext();
 
-  const tagButtonProps = {
-    allowMultipleTags: false,
-    getSuggestions,
-    placeholder: 'Add or Create',
-    formTitle: 'Groups',
-    formBodyText: 'Select from available groups:',
-    seeAllText: 'View All Groups',
-    noSuggestionsText: 'No matching groups found.',
+  const onDelete = (deletedItem: any) => {
+    setSelectedTag();
+    setSelectedNode();
   };
-
-  return <Component {...props} {...tagButtonProps} />;
+  return <Component {...props} onDelete={onDelete} />;
 };
 
 const TagTitleBase: FC<TagTitleProps> = ({
@@ -92,10 +93,7 @@ const TagTitleBase: FC<TagTitleProps> = ({
     selectedNode,
     setSelectedNode,
     setSelectedTag,
-    useRegisterSuggestions,
   } = useFilterByGroupContext();
-
-  useRegisterSuggestions()([tag]);
 
   const onSelect = () => {
     setSelectedNode(nodeId);
@@ -143,14 +141,23 @@ const TagTitle = flow(
     'seeAllText',
     'formTitle',
     'formBodyText',
+    'selectedTags',
+    'registerSuggestions',
   ]),
   ifEditable(
-    withTagButton(),
+    withTagButton,
     withContextActivator('onClick'),
     withLocalContextMenu,
   ),
   ifReadOnly(withoutProps(['setComponentData'])),
-  withTagButtonProps,
+  withTagProps({
+    allowMultipleTags: false,
+    placeholder: 'Add or Create',
+    formTitle: 'Group Membership',
+    formBodyText: 'Select from available groups:',
+    seeAllText: 'View All Groups',
+    noSuggestionsText: 'No matching groups found.',
+  }),
   withNodeDataHandlers({ tags: [] }),
   withNode,
   withNodeKey('tag'),
@@ -165,9 +172,12 @@ const TestFilterComponentsStart: FilterComponents = {
         replaceWith(H3),
         asEditable('category_name', 'Category Name'),
       ),
+      Item: stylable,
+      Wrapper: stylable,
     }),
   )(List),
   TagList: flow(
+    withUnselectOnDelete,
     asEditableList,
     withDesign({
       Title: replaceWith(TagTitle),
@@ -177,7 +187,7 @@ const TestFilterComponentsStart: FilterComponents = {
 };
 
 class FilterBase extends React.PureComponent {
-  Filter = Div;
+  Filter: ComponentType<HTMLProps<HTMLHeadingElement>> = Div;
 
   RestProps = {};
 
@@ -186,8 +196,13 @@ class FilterBase extends React.PureComponent {
     const { components, ...rest } = props;
     const { TagList, CategoryList } = components;
 
+    const AccordionTagList = asExpandedOnDesktopBody(TagList);
+
     this.RestProps = rest;
-    this.Filter = withBasicSublist(TagList)(CategoryList);
+    this.Filter = flow(
+      ifViewportIs(['lg', 'xl', 'xxl'])(withBasicSublist(TagList)),
+      ifViewportIsNot(['lg', 'xl', 'xxl'])(withAccordionSublist(AccordionTagList)),
+    )(CategoryList);
   }
 
   render() {

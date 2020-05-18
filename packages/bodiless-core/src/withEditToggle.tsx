@@ -12,25 +12,14 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
-import { observer } from 'mobx-react-lite';
-import { flowRight } from 'lodash';
 import { useEditContext } from './hooks';
+import { ifToggledOn, ifToggledOff } from './withFlowToggle';
 
-export const withEditToggle = <P extends object, Q extends object>(
-  Editable: CT<P>,
-  ReadOnly: CT<Q>,
-) => observer((props: P & Q) => {
-    const context = useEditContext();
-    return context.isEdit ? <Editable {...props} /> : <ReadOnly {...props} />;
-  });
+export const useEditToggle = () => {
+  const context = useEditContext();
+  return context.isEdit;
+};
 
-export const ifEditable = <H extends Function>(...hocs: Function[]) => (
-  Component: CT<any>,
-  // @ts-ignore Expected at least 1 arguments, but got 0 or more.ts(2557)
-) => withEditToggle(flowRight(...hocs)(Component), Component);
+export const ifEditable = ifToggledOn(useEditToggle);
 
-export const ifReadOnly = <H extends Function>(...hocs: Function[]) => (
-  Component: CT<any>,
-  // @ts-ignore Expected at least 1 arguments, but got 0 or more.ts(2557)
-) => withEditToggle(Component, flowRight(...hocs)(Component));
+export const ifReadOnly = ifToggledOff(useEditToggle);

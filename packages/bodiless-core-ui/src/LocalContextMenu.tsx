@@ -35,7 +35,7 @@ const Toolbar = flow(
 const LocalTooltip: FC<ReactTooltip['props']> = props => (
   <ReactTooltip
     {...props}
-    placement="bottom"
+    placement="bottomLeft"
   />
 );
 
