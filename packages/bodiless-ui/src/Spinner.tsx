@@ -41,11 +41,10 @@ export const Spinner: FC<SpipperProps> = (props: any) => {
   );
 };
 
-export const SpinnerWrapper = () => (
+export const ComponentFormSpinner = () => (
   <div className="bl-pt-3">
     <Spinner color="bl-bg-white" />
   </div>
 );
-
 
 export default Spinner;

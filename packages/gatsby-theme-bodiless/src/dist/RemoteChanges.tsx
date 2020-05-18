@@ -14,7 +14,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useEditContext } from '@bodiless/core';
-import { SpinnerWrapper } from '@bodiless/ui';
+import { ComponentFormSpinner } from '@bodiless/ui';
 import { isEmpty } from 'lodash';
 import { useFormApi } from 'informed';
 
@@ -86,7 +86,7 @@ const ChangeContent = ({ status, errorMessage } : ContentProps) => {
     case ChangeState.Errored:
       return errorMessage ? <>{errorMessage}</> : <>An unexpected error has occurred</>;
     default:
-      return <SpinnerWrapper />;
+      return <ComponentFormSpinner />;
   }
 };
 
@@ -174,7 +174,7 @@ const PullChanges = ({ client, formApi }: Props) => {
   if (complete) {
     return <>Operation completed.</>;
   }
-  return <SpinnerWrapper />;
+  return <ComponentFormSpinner />;
 };
 
 export default RemoteChanges;

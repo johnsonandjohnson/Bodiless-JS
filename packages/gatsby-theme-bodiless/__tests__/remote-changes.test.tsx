@@ -62,6 +62,7 @@ const nonPullableChangesClient = {
 const mockFormApi = {
   setValue: jest.fn(),
 };
+
 describe('Fetch Changes component', () => {
   it('should show a spinner while a request to the back-end is processed', () => {
     const wrapper = mount(<FetchChanges client={mockChangesClient} />);
