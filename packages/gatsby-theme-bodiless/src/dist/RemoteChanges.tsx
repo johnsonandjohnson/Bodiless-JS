@@ -162,7 +162,7 @@ const PullChanges = ({ client }: Props) => {
         context.showPageOverlay({
           hasSpinner: false,
         });
-        const response = await client.getChanges(); // @Todo replace client.pull();
+        const response = await client.pull();
         if (response.status === 200) {
           setPullStatus({ complete: true });
           context.hidePageOverlay();
