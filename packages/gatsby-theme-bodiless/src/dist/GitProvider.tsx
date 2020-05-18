@@ -26,6 +26,7 @@ import { AxiosPromise } from 'axios';
 import BackendClient from './BackendClient';
 import CommitsList from './CommitsList';
 import RemoteChanges from './RemoteChanges';
+import { useFormApi } from 'informed';
 
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
@@ -130,16 +131,18 @@ const formGitCommit = (client: Client) => contextMenuForm({
 
 const formGitPull = (client: Client) => contextMenuForm({
   submitValues: (values : any) => {
+    console.log(values);
     const { allowed } = values;
     if (!allowed) return false;
     return true;
   },
-})(({ ui }: any) => {
-  const { ComponentFormTitle } = getUI(ui);
+})(({ ui, closeForm }: any) => {
+  const { ComponentFormTitle, ComponentFormText } = getUI(ui);
   return (
     <>
       <ComponentFormTitle>Pull Changes</ComponentFormTitle>
-      <RemoteChanges client={client} />
+      <ComponentFormText type="hidden" field="allowed" initialValue={false} />
+      <RemoteChanges client={client} closeForm={closeForm} />
     </>
   );
 });

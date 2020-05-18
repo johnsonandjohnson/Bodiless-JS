@@ -12,13 +12,11 @@
  * limitations under the License.
  */
 
-import React, {
-  useState, useEffect, SetStateAction, Dispatch,
-} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useEditContext } from '@bodiless/core';
 import { Spinner } from '@bodiless/ui';
 import { isEmpty } from 'lodash';
-import { useFormApi, Text } from 'informed';
+import { useFormApi } from 'informed';
 
 type ResponseData = {
   upstream: {
@@ -30,11 +28,7 @@ type ResponseData = {
 
 type Props = {
   client: any;
-};
-
-type PullStatus = {
-  complete: boolean;
-  error?: string;
+  closeForm?: () => void;
 };
 
 const SpinnerWrapper = () => (
@@ -50,48 +44,73 @@ const SpinnerWrapper = () => (
  * @param {BackendClient} client
  * @constructor
  */
-const RemoteChanges = ({ client }: Props) => {
+const RemoteChanges = ({ client, closeForm }: Props) => {
   const formApi = useFormApi();
-  const [pullStatus, setPullStatus] = useState<PullStatus>({ complete: false, error: '' });
-  const { complete, error } = pullStatus;
-  if (error) return <>{error}</>;
-  if (complete) {
-    return <>Operation completed.</>;
-  }
   // @Todo revise the use of formState, possibly use informed multistep.
-  if (formApi.getState().submits === 1 && formApi.getValue('allowed') === true) {
-    return <PullChanges client={client} setPullStatus={setPullStatus} />;
+  console.log(formApi.getState().submits);
+  if (formApi.getState().submits === 2 && closeForm) {
+    closeForm();
+    return null;
   }
-  if (formApi.getState().submits === 0) return (<FetchChanges client={client} />);
-  return <SpinnerWrapper />;
+  if (formApi.getState().submits === 1 && formApi.getValue('allowed') === true) {
+    return <PullChanges client={client} />;
+  }
+  return (<FetchChanges client={client} />);
 };
+
+enum ChangeState {
+  Pending,
+  CanBePulled,
+  CannotBePulled,
+  NoneAvailable,
+  Errored
+}
 
 const handleChangesResponse = ({ upstream }: ResponseData) => {
   const { commits, files } = upstream;
   if (isEmpty(commits)) {
-    return 'There aren\'t any changes to download.';
+    return ChangeState.NoneAvailable;
   }
   if (files.some(file => file.includes('package-lock.json'))) {
-    return 'Upstream changes are available but cannot be fetched via the UI.';
+    return ChangeState.CannotBePulled;
   }
-  return (
-    <>
-      <Text type="hidden" field="allowed" initialValue />
+  return ChangeState.CanBePulled;
+};
+
+type ContentProps = {
+  status: ChangeState;
+};
+
+const ChangeContent = ({ status } : ContentProps) => {
+  switch (status) {
+    case ChangeState.NoneAvailable:
+      return <>There are no changes to download.</>;
+    case ChangeState.CanBePulled:
+      return (
+        <>
       There are changes ready to be pulled. Click check (✓) to initiate.
-    </>
-  );
+        </>
+      );
+    case ChangeState.CannotBePulled:
+      return <>Upstream changes are available but cannot be fetched via the UI.</>;
+    case ChangeState.Errored:
+      return <>An unexpected error has occurred</>;
+    default:
+      return <SpinnerWrapper />;
+  }
 };
 
 /**
- * Component for showing remote changes.
+ * Component for fetching & showing remote changes.
  *
  * @component
  * @param {BackendClient} client
  * @constructor
  */
 const FetchChanges = ({ client }: Props) => {
-  const [state, setState] = useState<{ content: any }>({
-    content: <SpinnerWrapper />,
+  const formApi = useFormApi();
+  const [state, setState] = useState<{ status: ChangeState }>({
+    status: ChangeState.Pending,
   });
   const context = useEditContext();
   useEffect(() => {
@@ -102,24 +121,27 @@ const FetchChanges = ({ client }: Props) => {
           maxTimeoutInSeconds: 10,
         });
         const response = await client.getChanges();
-        setState({
-          content: handleChangesResponse(response.data),
-        });
-        context.hidePageOverlay();
+        if (response.status === 200) {
+          setState({ status: handleChangesResponse(response.data) });
+          if (state.status === ChangeState.CanBePulled) {
+            formApi.setValue('allowed', true);
+          }
+          context.hidePageOverlay();
+        }
       } catch (error) {
-        setState({
-          content: 'An unexpected error has occurred',
-        });
+        setState({ status: ChangeState.Errored });
+        context.hidePageOverlay();
+        throw error;
       }
     })();
   }, []);
-  const { content } = state;
-  return content;
+  const { status } = state;
+  return <ChangeContent status={status} />;
 };
 
-type PullChangesProps = {
-  client: any;
-  setPullStatus: Dispatch<SetStateAction<PullStatus>>;
+type PullStatus = {
+  complete: boolean;
+  error?: string;
 };
 
 /**
@@ -127,39 +149,42 @@ type PullChangesProps = {
  *
  * @component
  * @param {BackendClient} client
- * @param setPullStatus
  * @constructor
  */
-const PullChanges = ({ client, setPullStatus }: PullChangesProps) => {
+const PullChanges = ({ client }: Props) => {
+  const [pullStatus, setPullStatus] = useState<PullStatus>({
+    complete: false,
+    error: '',
+  });
   const context = useEditContext();
   useEffect(() => {
     (async () => {
       try {
         context.showPageOverlay({
           hasSpinner: false,
-          maxTimeoutInSeconds: 10,
         });
         const response = await client.getChanges(); // @Todo replace client.pull();
         if (response.status === 200) {
           setPullStatus({ complete: true });
-        } else {
-          setPullStatus({
-            complete: false,
-            error: 'An unexpected error has occurred.',
-          });
+          context.hidePageOverlay();
         }
-        context.hidePageOverlay();
       } catch (error) {
         setPullStatus({
           complete: false,
           error: 'An unexpected error has occurred.',
         });
+        context.hidePageOverlay();
+        throw error;
       }
     })();
-    return () => {};
   }, []);
 
-  return null;
+  const { complete, error } = pullStatus;
+  if (error) return <>{error}</>;
+  if (complete) {
+    return <>Operation completed.</>;
+  }
+  return <SpinnerWrapper />;
 };
 
 export default RemoteChanges;
