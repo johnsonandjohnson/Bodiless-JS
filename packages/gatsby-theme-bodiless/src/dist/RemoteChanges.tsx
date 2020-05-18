@@ -118,7 +118,6 @@ const FetchChanges = ({ client }: Props) => {
       try {
         context.showPageOverlay({
           hasSpinner: false,
-          maxTimeoutInSeconds: 10,
         });
         const response = await client.pull();
         if (response.status === 200) {
