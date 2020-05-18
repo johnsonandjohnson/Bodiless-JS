@@ -13,3 +13,133 @@ You can start backend server by running `node ./path/to/server.js`. Backend serv
 * `BODILESS_BACKEND_EXTENDED_LOGGING_ENABLED` - Whether or not extended logging is enabled. Defaults to `0`. Please note that this feature requires `morgan` and `morgan-body` packages. If you plan to use this feature outside of monorepo, please ensure those dependencies are installed.
 
 Please note that `BODILESS_BACKEND_DATA_FILE_PATH`, `BODILESS_BACKEND_STATIC_PATH` and `BODILESS_BACKEND_COMMIT_ENABLED` are defined in `@bodiless/gatsby-theme-bodiless` by default.
+
+## Web API
+
+Backend package provides a set of web API endpoints to allow developers working on git workflow.
+
+- ```changes```
+ 
+  Get changes between branchs.
+ 
+  **Request**
+  - *Method:* GET
+  - *Parameters:*
+    - N/A
+  
+  Example:
+    ```
+    curl --request GET --url http://localhost:8006/___backend/changes
+    ```
+
+- ```changes/conflicts```
+
+  Find conflicts between origin master and upstream branch.
+
+  **Request**
+  - *Method:* GET
+  - *Parameters:*
+    - N/A
+
+
+  Example:
+    ```
+    curl --request GET --url http://localhost:8006/___backend/changes/conflicts
+    ```
+
+- ```get/commits```
+
+  Return a list of commits from current changeset.
+
+  **Request**
+  - *Method:* POST
+  - *Parameters:*
+    - N/A
+
+- ```change/amend```
+
+  ...
+
+  **Request**
+  - *Method:* POST
+  - *Parameters:*
+
+- ```change/commit```
+
+  ...
+
+  **Request**
+  - *Method:* POST
+  - *Parameters:*
+
+- ```change/push```
+
+  ...
+
+  **Request**
+  - *Method:* POST
+  - *Parameters:*
+
+- ```change/reset```
+
+  ...
+
+  **Request**
+  - *Method:* POST
+  - *Parameters:*
+
+- ```change/pull```
+
+  ...
+
+  **Request**
+  - *Method:* POST
+  - *Parameters:*
+
+- ```asset```
+
+  ...
+
+  **Request**
+  - *Method:* POST
+  - *Parameters:*
+
+- ```set/current```
+
+  ...
+
+  **Request**
+  - *Method:* POST
+  - *Parameters:*
+
+- ```set/list```
+
+  ...
+
+  **Request**
+  - *Method:* POST
+  - *Parameters:*
+
+- ```content```
+
+  ...
+
+  **Request**
+  - *Method:* POST
+  - *Parameters:*
+
+- ```log```
+
+  ...
+
+  **Request**
+  - *Method:* POST
+  - *Parameters:*
+
+- ```pages```
+
+  ...
+
+  **Request**
+  - *Method:* POST
+  - *Parameters:*
