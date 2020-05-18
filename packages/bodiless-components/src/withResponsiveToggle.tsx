@@ -12,13 +12,18 @@
  * limitations under the License.
  */
 
-import withTagButton from './withTagButton';
-import useTagsAccessors from './TagModel';
-import { TagButtonProps, TagsNodeType } from './types';
+import { ifToggledOn, ifToggledOff } from '@bodiless/core';
+import { usePageDimensionsContext } from './PageDimensionsProvider';
+
+const useResponsiveToggle = (sizes: string[] | string) => () => {
+  const { size } = usePageDimensionsContext();
+  return Array.isArray(sizes) ? sizes.includes(size) : sizes === size;
+};
+
+const ifViewportIs = (sizes: string[] | string) => ifToggledOn(useResponsiveToggle(sizes));
+const ifViewportIsNot = (sizes: string[] | string) => ifToggledOff(useResponsiveToggle(sizes));
 
 export {
-  TagButtonProps,
-  TagsNodeType,
-  withTagButton,
-  useTagsAccessors,
+  ifViewportIs,
+  ifViewportIsNot,
 };

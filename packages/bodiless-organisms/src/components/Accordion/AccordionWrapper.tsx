@@ -12,13 +12,15 @@
  * limitations under the License.
  */
 
-import withTagButton from './withTagButton';
-import useTagsAccessors from './TagModel';
-import { TagButtonProps, TagsNodeType } from './types';
+import React, { ComponentType } from 'react';
+import { AccordionProvider } from './AccordionContext';
 
-export {
-  TagButtonProps,
-  TagsNodeType,
-  withTagButton,
-  useTagsAccessors,
-};
+const asAccordionWrapper = <P extends Object>(
+  Component: ComponentType<P> | string,
+) => (props: P) => (
+  <AccordionProvider>
+    <Component {...props} />
+  </AccordionProvider>
+  );
+
+export default asAccordionWrapper;

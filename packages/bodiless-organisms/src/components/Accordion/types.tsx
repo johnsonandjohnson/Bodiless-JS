@@ -12,13 +12,17 @@
  * limitations under the License.
  */
 
-import withTagButton from './withTagButton';
-import useTagsAccessors from './TagModel';
-import { TagButtonProps, TagsNodeType } from './types';
+import { ComponentType, HTMLProps } from 'react';
+import { StylableProps, DesignableComponentsProps } from '@bodiless/fclasses';
 
-export {
-  TagButtonProps,
-  TagsNodeType,
-  withTagButton,
-  useTagsAccessors,
+export type AccordionTitleComponents = {
+  Wrapper: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
+  Icon: ComponentType<StylableProps & HTMLProps<HTMLSpanElement>>,
 };
+
+export type AccordionBodyComponents = {
+  Wrapper: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
+};
+
+export type AccordionTitleProps = DesignableComponentsProps<AccordionTitleComponents>;
+export type AccordionBodyProps = DesignableComponentsProps<AccordionBodyComponents>;
