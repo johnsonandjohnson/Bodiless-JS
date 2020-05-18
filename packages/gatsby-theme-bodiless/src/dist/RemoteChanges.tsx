@@ -119,7 +119,7 @@ const FetchChanges = ({ client }: Props) => {
         context.showPageOverlay({
           hasSpinner: false,
         });
-        const response = await client.pull();
+        const response = await client.getChanges();
         if (response.status === 200) {
           setState({ status: handleChangesResponse(response.data) });
           if (state.status === ChangeState.CanBePulled) {
