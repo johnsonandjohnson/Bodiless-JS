@@ -78,9 +78,10 @@ const handleChangesResponse = ({ upstream }: ResponseData) => {
 
 type ContentProps = {
   status: ChangeState;
+  errorMessage?: string;
 };
 
-const ChangeContent = ({ status } : ContentProps) => {
+const ChangeContent = ({ status, errorMessage } : ContentProps) => {
   switch (status) {
     case ChangeState.NoneAvailable:
       return <>There are no changes to download.</>;
@@ -93,7 +94,7 @@ const ChangeContent = ({ status } : ContentProps) => {
     case ChangeState.CannotBePulled:
       return <>Upstream changes are available but cannot be fetched via the UI.</>;
     case ChangeState.Errored:
-      return <>An unexpected error has occurred</>;
+      return errorMessage ? <>{errorMessage}</> : <>An unexpected error has occurred</>;
     default:
       return <SpinnerWrapper />;
   }
@@ -108,7 +109,7 @@ const ChangeContent = ({ status } : ContentProps) => {
  */
 const FetchChanges = ({ client }: Props) => {
   const formApi = useFormApi();
-  const [state, setState] = useState<{ status: ChangeState }>({
+  const [state, setState] = useState<ContentProps>({
     status: ChangeState.Pending,
   });
   const context = useEditContext();
@@ -125,17 +126,16 @@ const FetchChanges = ({ client }: Props) => {
           if (state.status === ChangeState.CanBePulled) {
             formApi.setValue('allowed', true);
           }
-          context.hidePageOverlay();
         }
       } catch (error) {
-        setState({ status: ChangeState.Errored });
+        setState({ status: ChangeState.Errored, errorMessage: error.message });
+      } finally {
         context.hidePageOverlay();
-        throw error;
       }
     })();
   }, []);
-  const { status } = state;
-  return <ChangeContent status={status} />;
+  const { status, errorMessage } = state;
+  return <ChangeContent status={status} errorMessage={errorMessage} />;
 };
 
 type PullStatus = {
@@ -165,15 +165,14 @@ const PullChanges = ({ client }: Props) => {
         const response = await client.pull();
         if (response.status === 200) {
           setPullStatus({ complete: true });
-          context.hidePageOverlay();
         }
       } catch (error) {
         setPullStatus({
           complete: false,
-          error: 'An unexpected error has occurred.',
+          error: error || 'An unexpected error has occurred.',
         });
+      } finally {
         context.hidePageOverlay();
-        throw error;
       }
     })();
   }, []);
