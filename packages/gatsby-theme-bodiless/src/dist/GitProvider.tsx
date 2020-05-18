@@ -139,7 +139,7 @@ const formGitPull = (client: Client) => contextMenuForm({
     <>
       <ComponentFormTitle>Pull Changes</ComponentFormTitle>
       <ComponentFormText type="hidden" field="keepOpen" initialValue={false} />
-      <RemoteChanges client={client} closeForm={closeForm} />
+      <RemoteChanges client={client} />
     </>
   );
 });
