@@ -70,7 +70,6 @@ export default class ResponseProcessor {
       [301, 302, 307, 308].indexOf(response.status()) !== -1
       && !isUrlExternal(this.websiteUrl, response.url())
     ) {
-
       const headers = response.headers();
       const from = ResponseProcessor.getRedirectPath(response.url()).replace(
         /\/$/g,
