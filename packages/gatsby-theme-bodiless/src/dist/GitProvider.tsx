@@ -133,7 +133,7 @@ const formGitPull = (client: Client) => contextMenuForm({
     const { keepOpen } = values;
     return keepOpen;
   },
-})(({ ui, closeForm }: any) => {
+})(({ ui }: any) => {
   const { ComponentFormTitle, ComponentFormText } = getUI(ui);
   return (
     <>
