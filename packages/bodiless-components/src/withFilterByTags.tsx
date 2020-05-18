@@ -19,7 +19,7 @@ import {
   TagType,
 } from '@bodiless/core';
 import { replaceWith } from '@bodiless/fclasses';
-import { flowRight, differenceWith } from 'lodash';
+import { flowRight, differenceWith, isEmpty } from 'lodash';
 import useTagsAccessors from './TagButton/TagModel';
 
 type ToggleByTagsProps = {
@@ -36,6 +36,12 @@ const useToggleByTags = <P extends object>({
 }: P & ToggleByTagsProps) => {
   const { getTags } = useTagsAccessors();
   const tags = getTags();
+
+  // Show all items if there is no selected tag.
+  if (isEmpty(selectedTags)) {
+    return true;
+  }
+
   return (
     differenceWith(
       selectedTags,

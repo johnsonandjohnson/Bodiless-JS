@@ -14,10 +14,11 @@
 
 import withTagButton from './withTagButton';
 import useTagsAccessors from './TagModel';
-import { TagButtonProps } from './types';
+import { TagButtonProps, TagsNodeType } from './types';
 
 export {
   TagButtonProps,
+  TagsNodeType,
   withTagButton,
   useTagsAccessors,
 };

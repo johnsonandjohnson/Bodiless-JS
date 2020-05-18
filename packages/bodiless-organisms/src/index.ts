@@ -63,9 +63,10 @@ export {
 export {
   FilterByGroupClean,
   asTestableFilterByGroup,
+  asFilterableByGroup,
   withFBGSuggestions,
   useFilterByGroupContext,
-  withRegisterSuggestions,
+  withTagProps,
 } from './components/FilterByGroup';
 
 export {
@@ -74,6 +75,13 @@ export {
   BurgerMenuClean,
   withBurgerSubmenu,
 };
+
+export {
+  useAccordionContext,
+  asAccordionWrapper,
+  asAccodionTitle,
+  asAccordionBody,
+} from './components/Accordion';
 
 export {
   BCarousel,

@@ -17,6 +17,7 @@ import {
   addClasses,
   withDesign,
 } from '@bodiless/fclasses';
+import { asFilterableByGroup } from '@bodiless/organisms';
 import {
   asImageRounded,
   asXMargin,
@@ -48,4 +49,11 @@ const asProductToutDefaultStyle = withDesign({
   ),
 });
 
-export default asProductToutDefaultStyle;
+const asFilterableProductContainer = withDesign({
+  ComponentWrapper: asFilterableByGroup(),
+});
+
+export {
+  asProductToutDefaultStyle,
+  asFilterableProductContainer,
+};
