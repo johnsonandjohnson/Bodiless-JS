@@ -15,11 +15,11 @@
 import { flow } from 'lodash';
 import { addClasses } from '@bodiless/fclasses';
 import {
-  asBodilessImage,
   asBodilessLink,
   Editable,
   withPlaceholder,
 } from '@bodiless/components';
+import { asBodilessImage } from '@bodiless/components-ui';
 import { withChild, withNodeKey } from '@bodiless/core';
 import {
   asAlignCenter,

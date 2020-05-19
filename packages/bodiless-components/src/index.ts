@@ -14,10 +14,14 @@
 
 import Editable, { withPlaceholder, asEditable } from './Editable';
 import { asBodilessLink } from './Link';
-import Image, { asBodilessImage } from './Image';
+import Image, {
+  asBodilessImage,
+  TImagePickerUI,
+  withImagePlaceholder,
+} from './Image';
 import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
-import List from './List';
+import List, { asTestableList } from './List';
 import {
   FinalProps as ListProps,
   TitleProps as ListTitleProps,
@@ -51,6 +55,8 @@ export {
   asBodilessLink,
   Image,
   asBodilessImage,
+  withImagePlaceholder,
+  TImagePickerUI,
   Editable,
   NodeViewer,
   withLinkToggle,
@@ -58,6 +64,7 @@ export {
   ListDesignableComponents,
   asEditableList,
   asBasicSublist,
+  asTestableList,
   withBasicSublist,
   withSublist,
   withDeleteSublistOnUnwrap,

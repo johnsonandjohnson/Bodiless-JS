@@ -35,8 +35,8 @@ import {
   asEditableList,
   List,
   ListProps,
-  asBodilessImage,
 } from '@bodiless/components';
+import { asBodilessImage } from '@bodiless/components-ui';
 
 type CarouselComponents = {
   Wrapper: ComponentType<StylableProps>,
