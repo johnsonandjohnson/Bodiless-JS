@@ -21,11 +21,12 @@ const jsYaml = require('js-yaml');
 
 // jest.mock('fs');
 fs.writeFile = jest.fn();
-let rp = new ResponseProcessor();
+
+const websiteUrl = 'http://example.com';
+let rp = new ResponseProcessor({ websiteUrl });
 
 describe('Process redirect urls', () => {
   beforeEach(() => {
-    rp = new ResponseProcessor();
   });
 
   it('creates redirect rules with redirecting response', () => {
@@ -42,13 +43,24 @@ describe('Process redirect urls', () => {
 
   it('creates redirect rule for external redirection', () => {
     Response.headers = jest.fn(() => ({
-      location: 'http://example.com/page2/',
+      location: 'http://test.com/page2/',
+    }));
+    Response.url = jest.fn(() => 'http://example.com/page1');
+    const code = 301;
+    Response.status = jest.fn(() => code);
+    rp.processRedirect(Response);
+    expect(rp.redirects).toMatchObject({ '/page1': { to: 'http://test.com/page2/', code } });
+  });
+
+  it('does not process external links', () => {
+    Response.headers = jest.fn(() => ({
+      location: 'http://test.com/page2/',
     }));
     Response.url = jest.fn(() => 'http://test.com/page1');
     const code = 301;
     Response.status = jest.fn(() => code);
     rp.processRedirect(Response);
-    expect(rp.redirects).toMatchObject({ '/page1': { to: 'http://example.com/page2/', code } });
+    expect(rp.redirects).toMatchObject({});
   });
 
   it('creates redirect rule for asset resource', () => {
@@ -77,7 +89,7 @@ describe('Process redirect urls', () => {
 
 describe('Export redirect rules to file', () => {
   beforeEach(() => {
-    rp = new ResponseProcessor();
+    rp = new ResponseProcessor({ websiteUrl });
     const responseSet = [
       {
         url: 'http://example.com/page1',

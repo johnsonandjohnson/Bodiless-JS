@@ -145,7 +145,7 @@ export class SiteFlattener {
       downloadPath: getUrlToLocalDirectoryMapper(this.canvasX.getStaticDir()),
     };
     const { page404Params, exports } = this.params;
-    const responseProcessor = new ResponseProcessor();
+    const responseProcessor = new ResponseProcessor({ websiteUrl: this.params.websiteUrl });
     const scraper = new Scraper(scraperParams);
     scraper.on('pageReceived', async result => {
       try {
