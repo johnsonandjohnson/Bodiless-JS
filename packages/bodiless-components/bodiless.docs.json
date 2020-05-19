@@ -1,9 +1,9 @@
 {
   "Components": {
-    "Image.md": "./Image.md",
-    "Link.md": "./Link.md",
-    "List.md": "./List.md",
-    "Editable.md": "./editable.md",
-    "Youtube.md": "./Youtube.md"
+    "Image.md": "./doc/Image.md",
+    "Link.md": "./doc/Link.md",
+    "List.md": "./doc/List.md",
+    "Editable.md": "./doc/editable.md",
+    "Youtube.md": "./doc/Youtube.md"
   }
 }

@@ -2,8 +2,8 @@
 
 This package provides basic editable components, including:
 
-- [Link](./Link.md)
-- [Image](./Image.md)
-- [Editable](./editable.md)
-- [List](./List.md)
-- [Youtube](./Youtube.md)
+- [Link](./Components/Link.md)
+- [Image](./Components/Image.md)
+- [Editable](./Components/editable.md)
+- [List](./Components/List.md)
+- [Youtube](./Components/Youtube.md)

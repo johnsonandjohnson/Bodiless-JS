@@ -9,10 +9,7 @@
   "files": [
     "/lib",
     "/bodiless.docs.json",
-    "/editable.md",
-    "/Link.md",
-    "/Image.md",
-    "/List.md"
+    "/doc"
   ],
   "repository": {
     "type": "git",
