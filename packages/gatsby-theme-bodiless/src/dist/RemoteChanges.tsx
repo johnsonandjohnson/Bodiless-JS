@@ -77,14 +77,18 @@ const ChangeContent = ({ status, errorMessage } : ContentProps) => {
       return <>There are no changes to download.</>;
     case ChangeState.CanBePulled:
       return (
-        <>
-      There are changes ready to be pulled. Click check (✓) to initiate.
-        </>
+        <>There are changes ready to be pulled. Click check (✓) to initiate.</>
       );
     case ChangeState.CannotBePulled:
-      return <>Upstream changes are available but cannot be fetched via the UI.</>;
+      return (
+        <>Upstream changes are available but cannot be fetched via the UI.</>
+      );
     case ChangeState.Errored:
-      return errorMessage ? <>{errorMessage}</> : <>An unexpected error has occurred</>;
+      return errorMessage ? (
+        <>{errorMessage}</>
+      ) : (
+        <>An unexpected error has occurred</>
+      );
     default:
       return <ComponentFormSpinner />;
   }
