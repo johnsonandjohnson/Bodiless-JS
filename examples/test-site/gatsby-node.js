@@ -8,20 +8,6 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
 const fs = require('fs');
 
-// exports.onCreateBabelConfig = ({ actions: { setBabelPlugin } }) => {
-exports.onCreateBabelConfig = args => {
-  const {
-    actions: { setBabelPlugin },
-  } = args;
-  setBabelPlugin({
-    name: 'babel-plugin-tailwind-components',
-    options: {
-      config: './tailwind.config.js',
-      format: 'auto',
-    },
-  });
-};
-
 // Fix sourcemap issue
 // See: https://github.com/gatsbyjs/gatsby/issues/6278#issuecomment-402540404
 exports.onCreateWebpackConfig = ({ stage, actions }) => {

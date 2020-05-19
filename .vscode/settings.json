@@ -38,6 +38,7 @@
   ],
   "spellright.documentTypes": [
     "markdown",
+    "md",
     "latex",
     "plaintext"
   ],

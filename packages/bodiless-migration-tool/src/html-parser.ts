@@ -145,6 +145,20 @@ export default class HtmlParser implements HtmlParserInterface {
     this.$(selector).replaceWith(newElement);
   }
 
+  removeEmptyAttribute(selector: string, attributes: string[]): void {
+    if (!attributes) {
+      return;
+    }
+    const { $ } = this;
+    $(selector).each((i: number, elem: any) => {
+      attributes.forEach((item: string) => {
+        if (elem.attribs[item] !== undefined && elem.attribs[item] === '') {
+          $(elem).removeAttr(item);
+        }
+      });
+    });
+  }
+
   transformRelativeToInternal(pageUrl: string) {
     this.transformHtmlElementsWithReference((link: string, element: CheerioElement) => {
       if (this.shouldTransformRelativeToInternal(link, element)) {
@@ -249,7 +263,7 @@ export default class HtmlParser implements HtmlParserInterface {
         const text = $(element).html();
         if (text !== null) {
           const withoutNewLine = text.replace(/\n\s+/g, '\n');
-          $(element).html(withoutNewLine);
+          $(element).text(withoutNewLine);
         }
       }
     });
@@ -296,6 +310,10 @@ export default class HtmlParser implements HtmlParserInterface {
   private shouldSkipTextToAttributeTransformation(tag: string, element: CheerioElement): boolean {
     let skip = false;
     if (tag === 'script' && this.$(element).attr('src')) {
+      skip = true;
+    }
+    // skip if html element text is empty
+    if (!this.$(element).html()) {
       skip = true;
     }
     return skip;

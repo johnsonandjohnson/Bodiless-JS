@@ -14,5 +14,10 @@
 
 import ContextWrapper from './ContextWrapper';
 import PageEditor from './PageEditor';
+import PageOverlay from './PageOverlay';
+import ReactTagsField from './ReactTags';
 
-export { ContextWrapper, PageEditor };
+export {
+  ContextWrapper, PageEditor, PageOverlay,
+  ReactTagsField,
+};

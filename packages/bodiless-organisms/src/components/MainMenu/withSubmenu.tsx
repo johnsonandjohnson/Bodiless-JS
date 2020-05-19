@@ -12,49 +12,17 @@
  * limitations under the License.
  */
 
-import React, {
-  ComponentType,
-  FC,
-  PropsWithChildren,
-  ReactNode,
-} from 'react';
 import {
-  ListProps,
-  withToggleButton,
-  withToggleTo,
-  ListDesignableComponents,
+  withSublist,
+  withDeleteSublistOnUnwrap,
 } from '@bodiless/components';
-import { withDesign } from '@bodiless/fclasses';
-import { WithNodeProps } from '@bodiless/core';
+import { flow } from 'lodash';
+import asRCMenuSublist from './asRCMenuSublist';
 
-type MenuSublistProps = Omit<ListProps, 'title' | keyof WithNodeProps> & {
-  title: ReactNode,
-};
-
-const withSubmenuToggle = (Sublist: ComponentType<MenuSublistProps>) => (
-  (Item: ComponentType<PropsWithChildren<{}>> | string) => {
-    const ItemWithSubmenu: FC<ListProps> = ({
-      children, unwrap, nodeKey, ...rest
-    }) => (
-      <Sublist title={children} unwrap={unwrap} {...rest} />
-    );
-    const ItemWithoutSubmenu: FC<ListProps> = ({ wrap, nodeKey, ...rest }) => (
-      <Item {...rest} />
-    );
-
-    return withToggleTo(ItemWithoutSubmenu)(ItemWithSubmenu);
-  }
-);
-
-/**
- * HOC, adds the local context menu to the given component
- * @param Sublist
- */
-const withSubmenu = (Sublist: ComponentType<MenuSublistProps>) => (
-  withDesign<ListDesignableComponents>({
-    ItemMenuOptionsProvider: withToggleButton({ icon: 'playlist_add' }),
-    Item: withSubmenuToggle(Sublist),
-  })
+const withSubmenu = flow(
+  withDeleteSublistOnUnwrap,
+  asRCMenuSublist,
+  withSublist,
 );
 
 export default withSubmenu;

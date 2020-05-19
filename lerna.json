@@ -4,5 +4,11 @@
     "packages/*"
   ],
   "lerna": "2.0.0",
-  "version": "0.0.43"
+  "command": {
+    "publish": {
+      "allowBranch": "release",
+      "message": "chore(release): publish %s"
+    }
+  },
+  "version": "0.0.47"
 }

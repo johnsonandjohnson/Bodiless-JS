@@ -23,7 +23,7 @@ import {
   withComponent,
 } from '@bodiless/richtext';
 import { asBodilessLink } from '@bodiless/components';
-import asEditor from '../../../components/Editors/asEditor';
+import withEditor from '../../../components/Editors/withEditor';
 
 const asBold = withComponent(Strong);
 const asItalic = addClasses('');
@@ -38,4 +38,4 @@ const simpleDesign = {
 };
 
 const SimpleEditor = withDesign(simpleDesign)(RichText);
-export default asEditor(SimpleEditor);
+export default withEditor(SimpleEditor);

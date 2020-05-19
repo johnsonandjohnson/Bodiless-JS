@@ -17,13 +17,14 @@ import { graphql } from 'gatsby';
 import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
-  Image, Editable, List, asEditableList,
+  Editable, List, asEditableList,
 } from '@bodiless/components';
+import { Image } from '@bodiless/components-ui';
 import {
   withDesign, replaceWith, addClasses, stylable,
 } from '@bodiless/fclasses';
 import Layout from '../../components/Layout';
-import { FlexBoxDefault } from '../../components/Flexbox';
+import { FlowContainerDefault } from '../../components/FlowContainer';
 
 const HOME_PAGE_PATH = 'homepage';
 
@@ -52,7 +53,7 @@ const HomePage = (props: any) => (
       <div className="">
         <EditableBulletPoints nodeKey="bulletpoints" />
       </div>
-      <FlexBoxDefault
+      <FlowContainerDefault
         nodeKey={HOME_PAGE_PATH}
       />
     </Layout>

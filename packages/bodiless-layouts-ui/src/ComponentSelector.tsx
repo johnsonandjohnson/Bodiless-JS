@@ -25,7 +25,7 @@ import { ComponentSelector as CleanComponentSelector, ComponentSelectorUI, Compo
 export const ui: ComponentSelectorUI = {
   MasterWrapper: addClasses('bl-flex bl-form-wrapper')(Div),
   FlexSection: addClasses('bl-pt-grid-16')(Div),
-  FlexboxEmpty: addClasses(
+  FlowContainerEmpty: addClasses(
     'bl-border-2 bl-border-dashed bl-text-gray-600',
   )(Div),
   ItemBoxWrapper: addClasses('bl-p-grid-2')(Div),

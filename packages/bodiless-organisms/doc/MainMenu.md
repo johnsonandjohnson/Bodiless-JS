@@ -1,7 +1,5 @@
 # Main Menu 
 
-Back to Organisms [index](/Organisms/index.md)
-
 ## Exported HOC's 
 
 - `withSubmenu`, adds the local context menu to the given component

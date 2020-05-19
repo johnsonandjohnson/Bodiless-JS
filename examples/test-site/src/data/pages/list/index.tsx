@@ -17,12 +17,13 @@ import { graphql } from 'gatsby';
 import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
-  List, Editable, asEditableList, withSublist, Link,
+  List, Editable, asEditableList, withBasicSublist, asTestableList,
 } from '@bodiless/components';
 import {
   withDesign, replaceWith, addClasses, stylable,
 } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
+import EditableLink from '../../../components/Link';
 
 /**
  * We provide a simple, editable title.
@@ -32,7 +33,7 @@ const SimpleTitle = (props: any) => (
 );
 
 const LinkTitle = (props: any) => (
-  <Link nodeKey="link" {...props}><Editable nodeKey="text" placeholder="Item" /></Link>
+  <EditableLink nodeKey="link" {...props}><Editable nodeKey="text" placeholder="Item" /></EditableLink>
 );
 
 /**
@@ -45,6 +46,7 @@ const EditableList = flow(
     Wrapper: flow(stylable, addClasses('pl-10')),
     Item: flow(stylable, addClasses('text-red')),
   }),
+  asTestableList('list'),
 )(List);
 
 /**
@@ -53,6 +55,7 @@ const EditableList = flow(
 const EditableLinkList = flow(
   asEditableList,
   withDesign({ Title: replaceWith(LinkTitle), Wrapper: flow(stylable, addClasses('pl-10')) }),
+  asTestableList('link-list'),
 )(List);
 
 /**
@@ -64,12 +67,12 @@ const withLessPadding = withDesign({
 });
 
 const InnerList = withLessPadding(EditableList);
-const MiddleList = withSublist(InnerList)(EditableList);
-const OuterList = withSublist(MiddleList)(EditableList);
+const MiddleList = withBasicSublist(InnerList)(EditableList);
+const OuterList = withBasicSublist(MiddleList)(EditableList);
 
 const InnerLinkList = withLessPadding(EditableLinkList);
-const MiddleLinkList = withSublist(InnerLinkList)(EditableLinkList);
-const OuterLinkList = withSublist(MiddleLinkList)(EditableLinkList);
+const MiddleLinkList = withBasicSublist(InnerLinkList)(EditableLinkList);
+const OuterLinkList = withBasicSublist(MiddleLinkList)(EditableLinkList);
 
 export default (props: any) => (
   <Page {...props}>
@@ -83,8 +86,8 @@ export default (props: any) => (
         items with red text.  The one on the right contains editable links.
       </p>
       <div className="flex pt-4">
-        <OuterList nodeKey="list1" className="w-1/2" />
-        <OuterLinkList nodeKey="list2" className="w-1/2" />
+        <OuterList nodeKey="list1" className="w-1/2" data-list-element="outerlist" />
+        <OuterLinkList nodeKey="list2" className="w-1/2" data-list-element="outerlinklist" />
       </div>
     </Layout>
   </Page>

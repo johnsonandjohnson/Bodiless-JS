@@ -33,10 +33,12 @@ export const useContextActivator = (
     };
   }
   const handler$1 = (e: React.SyntheticEvent<any>) => {
+    const preventDefault = e && e.currentTarget && e.currentTarget.getAttribute('bl-prevent') !== 'false';
     if (handler) handler(e);
     context.activate();
     if (e && e.stopPropagation) e.stopPropagation();
-    if (e && e.preventDefault && context.name !== 'page') e.preventDefault();
+    // @TODO: We may want to remove next line entirely and do a Regression Testing
+    if (preventDefault && e && e.preventDefault && context.name !== 'page') e.preventDefault();
   };
   return {
     [event]: handler$1,

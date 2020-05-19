@@ -26,10 +26,10 @@ import {
   StylableProps,
 } from '@bodiless/fclasses';
 import {
-  asBodilessImage,
   asBodilessLink,
   asEditable,
 } from '@bodiless/components';
+import { asBodilessImage } from '@bodiless/components-ui';
 import { withNode } from '@bodiless/core';
 import { BVInlineRatings } from '@bodiless/bv';
 

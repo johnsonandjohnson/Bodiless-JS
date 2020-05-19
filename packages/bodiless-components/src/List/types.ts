@@ -12,9 +12,9 @@
  * limitations under the License.
  */
 
+import { HTMLProps, ComponentType, PropsWithChildren } from 'react';
 import { DesignableComponentsProps, DesignableProps } from '@bodiless/fclasses';
 import { WithNodeProps } from '@bodiless/core';
-import { HTMLProps, ComponentType } from 'react';
 
 export type TitleProps = {
   onAdd: () => void,
@@ -31,6 +31,7 @@ export type ListDesignableComponents = {
 
 export type Props = {
   unwrap?: Function,
+  onDelete?: Function,
 } & DesignableComponentsProps<ListDesignableComponents> & HTMLProps<HTMLElement>;
 
 export type FinalProps =
@@ -43,3 +44,11 @@ export type ItemsMutator = (item: string) => void;
 export type Data = {
   items?: string[],
 };
+
+export type UseItemWithSublist = (Sublist: ComponentType<FinalProps>) =>
+(Item: ComponentType<PropsWithChildren<{}>>) => {
+  ItemWithSublist: ComponentType<any>,
+  ItemWithoutSublist:ComponentType<any>,
+};
+
+export type WithSublistToggle = (Sublist: ComponentType<FinalProps>) => ComponentType<FinalProps>;

@@ -1,0 +1,37 @@
+{
+  "name": "@bodiless/components-ui",
+  "version": "0.0.47",
+  "description": "Default UI for Bodiless components",
+  "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json ",
+    "build:watch": "npm run build -- --watch",
+    "lint": "tslint ./src/**/*.ts?x",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
+  },
+  "dependencies": {
+    "@bodiless/core": "^0.0.47",
+    "@bodiless/fclasses": "^0.0.47",
+    "@bodiless/components": "^0.0.47",
+    "@bodiless/ui": "^0.0.47",
+    "lodash": "^4.17.11",
+    "@material/react-material-icon": "^0.14.1"
+  },
+  "peerDependencies": {
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  }
+}

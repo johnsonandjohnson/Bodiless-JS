@@ -22,6 +22,8 @@ const formidable = require('formidable');
 const tmp = require('tmp');
 const path = require('path');
 const Page = require('./page');
+const GitCmd = require('./GitCmd');
+const { getChanges } = require('./git');
 const Logger = require('./logger');
 
 const backendPrefix = process.env.GATSBY_BACKEND_PREFIX || '/___backend';
@@ -75,69 +77,7 @@ class Git {
     });
   }
 }
-/*
-This Class wraps spawn and lets us build out git commands with standard responses
-*/
-class GitCmd {
-  constructor() {
-    this.cmd = 'git';
-    this.params = [];
-    this.files = [];
-  }
 
-  add(...params) {
-    this.params.push(...params);
-    return this;
-  }
-
-  addFiles(...files) {
-    this.files.push(...files);
-    // const rawFiles = [...arguments]
-    // this.files.push(...rawFiles.map((file) => file.replace(/ /,'\ ')))
-    return this;
-  }
-
-  spawn() {
-    const args = [...this.params, ...this.files];
-    logger.log([`Spawning command: ${this.cmd}`, ...args]);
-    return spawn(this.cmd, args);
-  }
-
-  exec() {
-    return new Promise((resolve, reject) => {
-      const cmd = this.spawn();
-      let stderr = '';
-      let stdout = '';
-      cmd.stdout.on('data', data => {
-        stdout += data.toString();
-      });
-      cmd.stderr.on('data', data => {
-        stderr += data.toString();
-      });
-      cmd.on('close', code => {
-        logger.log(stdout, stderr, code);
-        if (code === 0) {
-          resolve({ stdout, stderr, code });
-          return;
-        }
-        // Allow plumbing commands with --quiet flag to return either 0 or 1.
-        if (this.params.includes('--quiet')) {
-          resolve({ stdout, stderr, code });
-          return;
-        }
-
-        const error = new Error(`${stderr}`);
-        error.code = `${code}`;
-        error.info = { stdout, stderr, code };
-        reject(error);
-      });
-    });
-  }
-
-  static cmd() {
-    return new GitCmd();
-  }
-}
 /*
 This Class lets us buildout and execute a GitCommit
 */
@@ -324,6 +264,7 @@ class Backend {
       res.header('Content-Type', 'application/json');
       next();
     });
+    this.setRoute(`${backendPrefix}/changes`, Backend.getChanges);
     this.setRoute(`${backendPrefix}/get/commits`, Backend.getLatestCommits);
     this.setRoute(`${backendPrefix}/change/amend`, Backend.setChangeAmend);
     this.setRoute(`${backendPrefix}/change/commit`, Backend.setChangeCommit);
@@ -354,7 +295,7 @@ class Backend {
       res.status(500);
     }
     // End response process to prevent any further queued promises/events from responding.
-    res.send(error.message).end();
+    res.send(Backend.sanitizeOutput(error.message)).end();
   }
 
   static gitCommitsEnabled(res) {
@@ -366,6 +307,19 @@ class Backend {
       error.code = 405;
       Backend.exitWithErrorResponse(error, res);
     }
+  }
+
+  static getChanges(route) {
+    route.get(async (req, res) => {
+      try {
+        const status = await getChanges();
+        res.send(status);
+      } catch (error) {
+        logger.log(error);
+        error.code = 500;
+        Backend.exitWithErrorResponse(error, res);
+      }
+    });
   }
 
   static getLatestCommits(route) {
@@ -571,6 +525,20 @@ class Backend {
             logger.log(reason);
             res.send({});
           });
+      })
+      .delete((req, res) => {
+        const page = Backend.getPage(Backend.getPath(req));
+        logger.log(`Start deletion for:${page.file}`);
+        page
+          .delete()
+          .then(data => {
+            logger.log('Sending', data);
+            res.send(data);
+          })
+          .catch(reason => {
+            logger.log(reason);
+            res.send({});
+          });
       });
   }
 
@@ -617,6 +585,10 @@ class Backend {
           res.send({});
         });
     });
+  }
+
+  static sanitizeOutput(data) {
+    return data.replace(/(http|https):\/\/[^@]+:[^@]+@/gi, '$1://****:****@');
   }
 
   start(port) {

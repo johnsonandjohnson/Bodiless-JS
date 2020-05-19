@@ -11,30 +11,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import { flow } from 'lodash';
 import {
   withDesign,
 } from '@bodiless/fclasses';
-import {
-  ProductClean,
-} from '@bodiless/organisms';
+import { ProductClean } from '@bodiless/organisms';
 import { BVInlineRatings } from '@bodiless/bv';
-import { asEditorBasic, asEditorSimple } from '../Editors';
+import { withEditorBasic, withEditorSimple } from '../Editors';
 import {
   asEditableLink,
   asEditableImage,
 } from '../Elements.token';
-import asProductToutDefaultStyle from './token';
+import { asProductToutDefaultStyle } from './token';
 
 export const asProductTout = flow(
   withDesign({
     ImageLink: asEditableLink('cta'),
     Image: asEditableImage('image'),
     TitleLink: asEditableLink('cta'),
-    Title: asEditorSimple('title', 'Product Title Text'),
+    Title: withEditorSimple('title', 'Product Title Text'),
     BvReviewLink: asEditableLink('cta'),
     BvReview: () => BVInlineRatings,
-    Body: asEditorBasic('body', 'Product Body Text'),
+    Body: withEditorBasic('body', 'Product Body Text'),
   }),
 );
 

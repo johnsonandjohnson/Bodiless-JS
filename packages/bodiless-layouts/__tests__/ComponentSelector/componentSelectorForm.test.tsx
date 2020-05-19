@@ -1,10 +1,24 @@
+/**
+ * Copyright © 2020 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import React, { Fragment } from 'react';
 import { contextMenuForm } from '@bodiless/core';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { shallow } from 'enzyme';
 import ComponentSelector from '../../src/ComponentSelector';
 import componentSelectorForm from '../../src/ComponentSelector/componentSelectorForm';
-import { EditFlexboxProps } from '../../src/FlexboxGrid/types';
+import { EditFlowContainerProps } from '../../src/FlowContainer/types';
 
 jest.mock('../../src/');
 
@@ -27,7 +41,7 @@ const mockContextMenuForm = contextMenuForm as jest.Mock;
 const mockContextMenuFormInner = mockContextMenuForm();
 
 describe('componentSelectorForm', () => {
-  function renderComponentSelectorForm(extraProps?: Omit<EditFlexboxProps, 'components'>) {
+  function renderComponentSelectorForm(extraProps?: Omit<EditFlowContainerProps, 'components'>) {
     const Foo = Fragment;
     const Bar = Fragment;
     const props = {

@@ -19,7 +19,7 @@ import { flow } from 'lodash';
 import fs from 'fs-extra';
 // import cleanSymlinks from './cleanSymlinks';
 import locateFiles from './locateFiles';
-import { withTreeFromFile } from './tree';
+import { withTreeFromFile, getSimplePaths, validatePaths } from './tree';
 import {
   writeTree, writeResources, copyFile, symlinkFile,
 } from './write';
@@ -68,6 +68,9 @@ const blDocsBuild = async () => {
     (acc, nameSpace, i) => (i === 0 ? acc : { ...acc, [nameSpace]: pathsList[i] }),
     pathsList[0],
   );
+
+  // Validate the paths for letter-case typos.
+  validatePaths(getSimplePaths(paths));
 
   // Now we use the tree we created above to write symlinks, sidebar and navbar.
   console.log('Writing symlinks');

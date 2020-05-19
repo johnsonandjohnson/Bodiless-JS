@@ -22,6 +22,7 @@ import {
   TrailingSlash,
 } from './site-flattener';
 import postBuild from './post-build';
+import page404Handler from './page404-handler';
 
 enum CommandType {
   Flatten = 'flatten',
@@ -61,17 +62,24 @@ class MigrationTool extends Command {
 
   async flatten() {
     const settings = this.getDefaultSettings();
+    const page404Params = page404Handler.getParams(settings);
+    const page404Urls = page404Params.page404Url ? [page404Params.page404Url] : [];
     const flattenerParams: SiteFlattenerParams = {
       websiteUrl: settings.url,
       workDir: this.getWorkDir(),
       gitRepository: this.getGitRepo(),
+      reservedPaths: ['404'],
       scraperParams: {
-        pageUrl: settings.url,
+        pageUrls: [
+          ...page404Urls,
+          settings.url,
+        ],
         maxDepth: settings.crawler.maxDepth,
         maxConcurrency: settings.crawler.maxConcurrency || 1,
         obeyRobotsTxt: settings.crawler.ignoreRobotsTxt !== true,
         javascriptEnabled: true,
       },
+      page404Params,
       steps: {
         setup: false,
         scrape: true,

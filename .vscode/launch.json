@@ -19,7 +19,22 @@
             "name": "Migrate",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceRoot}/packages/bodiless-migration-tool/bin/run"
+            "program": "${workspaceRoot}/packages/bodiless-migration-tool/bin/run",
+            "cwd": "${workspaceFolder}/examples/starter",
+        },
+        {
+            "name": "Bodiless CLI Pack",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/packages/bodiless-cli/bin/bodiless",
+            "cwd": "${workspaceFolder}",
+            "args": [
+                "pack",
+                "-s ..",
+                "--force",
+                "-p @bodiless/core",
+                "--skip-install",
+            ]
         },
         {
             "name": "Launch Current File",
@@ -105,8 +120,15 @@
             "timeout": 100000,
             "smartStep": true,
             "sourceMaps": true,
-            "trace": true, // verbose
+            "trace": true,
             "url": "http://localhost:8000/"
+        },
+        {
+            "name": "Build Docs",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceRoot}/examples/test-site/node_modules/.bin/bl-docs-build",
+            "cwd": "${workspaceFolder}/examples/test-site",
         },
     ],
 }

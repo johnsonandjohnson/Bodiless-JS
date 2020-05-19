@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,27 +14,32 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import { Page } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../components/Layout';
-import { SectionMargin } from '../components/Product';
+import { SectionContent, SectionMargin } from '../components/Product';
+import Page from '../components/Page';
 import {
   ProductListingTitle,
   ProductListingImage,
-  ProductListingFlexBox,
+  ProductListingFlowContainer,
 } from '../components/ProductListing';
+import FilterByGroup from '../components/FilterByGroup';
 
 export default props => (
   <Page {...props}>
     <Layout>
-      <SectionMargin>
-        <ProductListingTitle />
-      </SectionMargin>
-      <SectionMargin>
-        <ProductListingImage />
-      </SectionMargin>
-      <SectionMargin>
-        <ProductListingFlexBox nodeKey="product_listing_touts" />
-      </SectionMargin>
+      <SectionContent>
+        <SectionMargin>
+          <ProductListingTitle />
+        </SectionMargin>
+        <SectionMargin>
+          <ProductListingImage />
+        </SectionMargin>
+        <SectionMargin>
+          <FilterByGroup>
+            <ProductListingFlowContainer nodeKey="product_listing_touts" />
+          </FilterByGroup>
+        </SectionMargin>
+      </SectionContent>
     </Layout>
   </Page>
 );

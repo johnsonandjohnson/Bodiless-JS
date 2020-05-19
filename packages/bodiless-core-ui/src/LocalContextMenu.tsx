@@ -14,6 +14,7 @@
 
 import React, { FC } from 'react';
 import ReactTooltip from 'rc-tooltip';
+import { flow } from 'lodash';
 import { addClasses, addProps } from '@bodiless/fclasses';
 import {
   ContextMenu, ContextMenuProps,
@@ -23,7 +24,7 @@ import {
   ComponentFormCloseButton, ComponentFormSubmitButton, Icon, Div, ToolbarButton,
   ComponentFormUnwrapButton,
 } from '@bodiless/ui';
-import { flow } from 'lodash';
+import ReactTagsField from './ReactTags';
 
 // For accessibility attributes, see https://www.w3.org/TR/wai-aria-practices/examples/toolbar/toolbar.html
 const Toolbar = flow(
@@ -34,7 +35,7 @@ const Toolbar = flow(
 const LocalTooltip: FC<ReactTooltip['props']> = props => (
   <ReactTooltip
     {...props}
-    placement="bottom"
+    placement="bottomLeft"
   />
 );
 
@@ -50,6 +51,7 @@ const ui = {
   Toolbar,
   ToolbarButton,
   Tooltip: LocalTooltip,
+  ReactTags: ReactTagsField,
 };
 
 const LocalContextMenu: FC<ContextMenuProps> = props => (

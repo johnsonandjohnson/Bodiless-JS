@@ -34,10 +34,12 @@ import {
   ContextWrapper,
   ContextWrapperProps,
 } from '@bodiless/core';
-import { Editable, Link, Image } from '@bodiless/components';
+import { Editable } from '@bodiless/components';
+import { Image } from '@bodiless/components-ui';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 
 import Layout from '../../../components/Layout';
+import EditableLink from '../../../components/Link';
 
 type Values = { text: string };
 const demoForm = (text: string) => contextMenuForm<Values>({
@@ -165,9 +167,9 @@ const BasicTest = () => {
       <div className="w-full">Outer Box</div>
       <Box getMenuOptions={leftOptions} name="left" className="flex-1">
         Left Box&nbsp;
-        <Link nodeKey="linkit">This is an editable Nodelink.</Link>
+        <EditableLink nodeKey="linkit">This is an editable Nodelink.</EditableLink>
         <Editable nodeKey="test" placeholder="bob" />
-        <Link nodeKey="test2"><Editable nodeKey="text2text" placeholder="link me!" /></Link>
+        <EditableLink nodeKey="test2"><Editable nodeKey="text2text" placeholder="link me!" /></EditableLink>
       </Box>
       <Box getMenuOptions={rightOptions} name="left" className="flex-1">
         <Image nodeKey="imageit" />
