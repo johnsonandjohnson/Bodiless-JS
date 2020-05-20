@@ -1,10 +1,9 @@
 describe('PDP (Product Details Page) smoke tests', function () {
 
   before(function () {
-    cy.visit('/products/')
+    cy.visit('/products/');
     cy.clickEdit();
   })
-
 
   const random = Math.floor(Math.random() * 10000)
   const pdpURL = 'pdp-autotest' + random.toString()
@@ -14,21 +13,19 @@ describe('PDP (Product Details Page) smoke tests', function () {
   const addPageIconXpath = '//*[@aria-label="Page"]'
   const fieldAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//input[@id="new-page-path"]'
   const checkmarkIconAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Submit"]'
-  const titleXpath = '//h1'
-  const accordionOverviewBodyXpath = '//h2[text()="Overview"]//parent::*//following-sibling::*//*[@data-slate-editor="true"]'
-  const accordionDirectionsExpandXpath = '//h2[text()="Directions"]//following-sibling::span[@data-accordion-icon="expand"]'
-  const accordionDirectionsBodyExpandedXpath = '//div[contains(@class,"expanded")][2]//div[@class="overflow-hidden"]'
-  const accordionDirectionsBodyXpath = '//h2[text()="Directions"]//parent::*//following-sibling::*//*[text()="Enter Product Information"]'
-  const bvTextXpath = '//div[@class="my-2"][2]/div[text()="Please hover and click to enter Bazaarvoice Product External ID: "]'
+  const titleXpath = '//*[@data-product-element="title"]'
+  const accordionOverviewBodyXpath = '//*[@data-accordion-element="accordion"][@aria-label="Overview"]//*[@data-accordion-element="accordion-body"]//*[@data-slate-editor="true"]'
+  const accordionDirectionsExpandXpath = '//*[@data-accordion-element="accordion"][@aria-label="Directions"]//*[@data-accordion-icon="expand"]'
+  const accordionDirectionsBodyExpandedXpath = '//*[@data-accordion-element="accordion"][@aria-label="Directions"]//*[@data-accordion-element="accordion-body"]'
+  const accordionDirectionsBodyPlaceholderXpath = '//*[@data-accordion-element="accordion"][@aria-label="Directions"]//*[@data-accordion-element="accordion-body"]//*[text()="Enter Product Information"]'
+  const bvTextXpath = '//*[@data-product-element="ratings-summary"][text()="Please hover and click to enter Bazaarvoice Product External ID: "]'
   const editBVIconXpath = '//*[@aria-label="Local Context Menu"]/*[@aria-label="Edit"]'
   const closeBVFormXpath = '//*[@aria-label="Context Menu Edit Form"]/*[@aria-label="Cancel"]'
-  const imagePlaceholderXpath = '//img[@class=" w-full"]'
+  const imagePlaceholderXpath = '//*[@data-product-element="image"]'
   const imageIconXpath = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Image"]'
   const checkmarkIconImageFormXpath = '//form[@aria-label="Context Menu Image Form"]//button[@aria-label="Submit"]'
-  const flexboxXpath = '//div[contains(@class,"bl-flex-wrap")][text()="Empty FlowContainer"]'
+  const flexboxXpath = '//*[@data-product-element="flow-container"]'
   const addComponentIconXpath = '//button[@aria-label="add"]'
-  const horToutinSelectorXpath = '//div[@class="bl-p-grid-2"][1]'
-  const horToutinFlexboxXpath = '//div[@data-tout-element="wrapper"]'
 
 
   it('PDP: 1 - creating a page from /products/', () => {
@@ -38,8 +35,6 @@ describe('PDP (Product Details Page) smoke tests', function () {
       .type(pdpURL);
     cy.xpath(checkmarkIconAddPageFormXpath)
       .click();
-    // commented until #251 is fixed
-    // cy.url({ timeout: 10000 }).should('eq', Cypress.config().baseUrl + '/products/' + pdpURL + '/');
     cy.url({ timeout: 10000 }).should('eq', Cypress.config().baseUrl + '/products/' + pdpURL);
   })
 
@@ -59,7 +54,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
       .click({ force: true });
     cy.xpath(accordionDirectionsBodyExpandedXpath)
       .should('be.visible');
-    cy.xpath(accordionDirectionsBodyXpath);
+    cy.xpath(accordionDirectionsBodyPlaceholderXpath);
     cy.xpath(accordionOverviewBodyXpath)
       .should('have.text', accordionBody);
   })
@@ -92,14 +87,10 @@ describe('PDP (Product Details Page) smoke tests', function () {
   })
 
 
-  it('PDP: 6 - checking adding a tout in Flexbox area', () => {
+  it('PDP: 6 - checking a click in FlowContainer area', () => {
     cy.xpath(flexboxXpath)
       .click({ force: true });
     cy.xpath(addComponentIconXpath)
-      .click();
-    cy.xpath(horToutinSelectorXpath)
-      .click();
-    cy.xpath(horToutinFlexboxXpath)
       .should('be.visible');
   })
 
@@ -113,8 +104,6 @@ describe('PDP (Product Details Page) smoke tests', function () {
       .should('have.text', accordionBody);
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'src', '/' + imageName);
-    cy.xpath(horToutinFlexboxXpath)
-      .should('be.visible');
   })
 
 
@@ -126,7 +115,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
       .should('have.text', accordionBody);
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'src', '/' + imageName);
-    cy.xpath(horToutinFlexboxXpath)
+    cy.xpath(flexboxXpath)
       .should('be.visible');
   })
-})   
+})
