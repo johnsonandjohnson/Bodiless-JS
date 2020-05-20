@@ -4,10 +4,12 @@ The [Product Listing Page](https://github.com/johnsonandjohnson/Bodiless-JS/blob
 
 ## Overview
 
-The Product Listing Page as designed has some of the following unique characteristics
+The Product Listing Page as designed has some of the following unique
+characteristics
 
 * FilterByGroup:  
-  * A HOC that renders a Product Filter on left and a taggable Product flowContainer on right.
+  * A HOC that renders a Product Filter on left and a taggable Product
+    flowContainer on right.
 
 * ExampleGTMHelmetEvent
   * If Google Tag Manager is in use, this will render the data layer on the page.
