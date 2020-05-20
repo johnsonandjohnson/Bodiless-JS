@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/cli",
-  "version": "0.0.47",
+  "version": "0.0.48",
   "description": "A cli tool for Bodiless-JS",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
@@ -34,20 +34,20 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@types/fs-extra": "^8.0.0",
-    "@types/lodash": "^4.14.149",
-    "@types/lodash.flow": "^3.5.6",
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
+    "@types/fs-extra": "^8.0.0",
+    "@types/lodash": "^4.14.149",
+    "@types/lodash.flow": "^3.5.6",
     "fs-extra": "^8.1.0",
     "globby": "^10",
     "lodash": "^4.17.11"
   },
   "devDependencies": {
+    "@oclif/dev-cli": "^1",
     "@types/node": "^10",
-    "nodemon": "^1.19.1",
-    "@oclif/dev-cli": "^1"
+    "nodemon": "^1.19.1"
   },
   "oclif": {
     "commands": "./lib/commands",
