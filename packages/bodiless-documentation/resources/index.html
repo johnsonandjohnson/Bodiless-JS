@@ -70,6 +70,10 @@ limitations under the License.
           responsiveTables: true  // default
       },
       search: {
+        maxAge: 86400000, // Expiration time, the default one day
+        paths: 'auto',
+        placeholder: 'Type to search',
+        noData: 'No Results!',        
         namespace: 'bodiless',
       }
     }

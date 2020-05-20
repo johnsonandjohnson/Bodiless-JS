@@ -1,9 +1,11 @@
-# `@bodiless/accessibility`
+# Bodiless Accessibility using Pa11y
 
 Accessibility is essential for developers and organizations that want to create high-quality websites and web tools, and not exclude people from using their products and services. This package includes a set of tools to run accessibility checks on provided `sitemap.xml` file or `url` using [Pa11y](https://github.com/pa11y/pa11y). Pa11y is your automated accessibility testing pal. It runs accessibility tests on your pages via the command line or Node.js, so you can automate your testing process.
 
 ### Installation
-Installation step is simple: `npm i @bodiless/accessibility`. Once `@bodiless/accessibility` installed it will add `pa11y-audit` command into bin folder.
+Installation step is simple: `npm i @bodiless/accessibility`. 
+Once `@bodiless/accessibility` installed it will add `pa11y-audit` command into bin folder.
+Please note you may have to add bin to your path if you are getting executable not found.
 
 ### Usage
 One can generate friendly CLI report by running `pa11y-audit --file=/path/to/sitemap.xml` or `pa11y-audit --url={url}` command. It will either extract all URLs from provided `sitemap.xml` file or scan the provided `{url}` and output all accessibility issues found on the website with the elements selectors and issue messages.

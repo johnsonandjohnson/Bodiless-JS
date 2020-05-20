@@ -7,7 +7,9 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
-    "/lib"
+    "/lib",
+    "/doc",
+    "/bodiless.docs.json"
   ],
   "repository": {
     "type": "git",
