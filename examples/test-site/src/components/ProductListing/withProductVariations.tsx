@@ -27,10 +27,10 @@ import { ProductTout } from '../ProductTout';
 const withProductVariations = withFacet('Product');
 
 const productVariations = {
-  ProductToutVariations: flow(
+  FilterableProductToutVariations: flow(
     replaceWith(ProductTout),
-    withDesc('Product.\n'),
-    withProductVariations('Product')(),
+    withDesc('Filterable Product.\n'),
+    withProductVariations('Filterable Product')(),
   ),
 };
 

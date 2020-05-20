@@ -15,15 +15,18 @@
 import React, { FC } from 'react';
 import { flow } from 'lodash';
 import {
-  designable, Div, Button, withoutProps,
+  designable, Div, Button, withoutProps, H3,
 } from '@bodiless/fclasses';
-import { FilterByGroupComponents, FilterByGroupProps } from './types';
 import FilterClean from './Filter';
 import { useFilterByGroupContext, withFilterByGroupContext } from './FilterByGroupContext';
+import { FilterByGroupComponents, FilterByGroupProps } from './types';
+import { asResponsiveFilterByGroup } from './token';
 
 const FilterByGroupComponentsStart:FilterByGroupComponents = {
   Wrapper: Div,
   FilterWrapper: Div,
+  FilterHeader: Div,
+  FilterTitle: H3,
   ContentWrapper: Div,
   ResetButton: Button,
   Filter: FilterClean,
@@ -33,11 +36,14 @@ const FilterByGroupBase: FC<FilterByGroupProps> = ({
   components,
   children,
   resetButtonText = 'Reset',
+  filterTitle = 'Filter',
   ...rest
 }) => {
   const {
     Wrapper,
     FilterWrapper,
+    FilterHeader,
+    FilterTitle,
     ContentWrapper,
     ResetButton,
     Filter,
@@ -45,10 +51,18 @@ const FilterByGroupBase: FC<FilterByGroupProps> = ({
 
   const { setSelectedTag } = useFilterByGroupContext();
 
+  const onReset = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setSelectedTag();
+  };
+
   return (
     <Wrapper {...rest}>
       <FilterWrapper>
-        <ResetButton onClick={() => setSelectedTag()}>{resetButtonText}</ResetButton>
+        <FilterHeader>
+          <FilterTitle>{filterTitle}</FilterTitle>
+          <ResetButton onClick={onReset}>{resetButtonText}</ResetButton>
+        </FilterHeader>
         <Filter />
       </FilterWrapper>
       <ContentWrapper>
@@ -60,8 +74,9 @@ const FilterByGroupBase: FC<FilterByGroupProps> = ({
 
 const FilterByGroupClean = flow(
   withoutProps(['suggestions']),
-  withFilterByGroupContext,
   designable(FilterByGroupComponentsStart),
+  asResponsiveFilterByGroup,
+  withFilterByGroupContext,
 )(FilterByGroupBase);
 
 export default FilterByGroupClean;

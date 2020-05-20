@@ -12,9 +12,9 @@
  * limitations under the License.
  */
 
+import { HTMLProps, ComponentType, PropsWithChildren } from 'react';
 import { DesignableComponentsProps, DesignableProps } from '@bodiless/fclasses';
 import { WithNodeProps } from '@bodiless/core';
-import { HTMLProps, ComponentType, PropsWithChildren } from 'react';
 
 export type TitleProps = {
   onAdd: () => void,
@@ -31,6 +31,7 @@ export type ListDesignableComponents = {
 
 export type Props = {
   unwrap?: Function,
+  onDelete?: Function,
 } & DesignableComponentsProps<ListDesignableComponents> & HTMLProps<HTMLElement>;
 
 export type FinalProps =

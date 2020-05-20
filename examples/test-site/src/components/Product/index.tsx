@@ -27,6 +27,7 @@ import {
   asEditableImage,
   asYMargin,
   asNegXMargin,
+  withPadding5,
 } from '../Elements.token';
 import {
   asToutWithPaddings,
@@ -56,6 +57,7 @@ export const ProductTout = flow(
   asToutVertical,
 )(Tout);
 
+export const SectionContent = withPadding5(Div);
 export const SectionMargin = asYMargin(Div);
 export const SectionNegXMargin = flow(
   asYMargin,

@@ -35,3 +35,7 @@ export type TagButtonProps = {
   seeAllText?: string,
   autofocus?: boolean,
 };
+
+export type WithRegisterSuggestionsType = {
+  registerSuggestions: (tags: TagType[]) => void,
+};

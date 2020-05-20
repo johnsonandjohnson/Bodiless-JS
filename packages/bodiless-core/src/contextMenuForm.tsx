@@ -49,7 +49,7 @@ export type FormBodyProps<D> = FormProps & {
 export type FormBodyRenderer<D> = (props: FormBodyProps<D>) => ReactNode;
 
 export type Options<D> = {
-  submitValues?: (componentData: D) => void;
+  submitValues?: (componentData: D) => boolean|void;
   initialValues?: D;
   hasSubmit?: Boolean;
 };
@@ -63,8 +63,9 @@ const contextMenuForm = <D extends object>(options: Options<D>) => (
     return (
       <Form
         onSubmit={(values: D) => {
-          if (submitValues) submitValues(values);
-          closeForm();
+          if (!submitValues || !submitValues(values)) {
+            closeForm();
+          }
         }}
         initialValues={initialValues}
         {...rest}
