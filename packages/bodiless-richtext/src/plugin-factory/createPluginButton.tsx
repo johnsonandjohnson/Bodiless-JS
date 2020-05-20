@@ -55,10 +55,11 @@ const withToggle = <P extends requiredProps> (opts:Opts) => (
 
     return (
       <StyledComponent
-        onMouseDown={() => toggle({
-          editor: editorContext!.editor,
-          value: editorContext!.value,
-        })
+        onMouseDown={
+          () => toggle({
+            editor: editorContext!.editor,
+            value: editorContext!.value,
+          })
         }
         className={`${
           isActive(editorContext!.value) ? 'active bl-active' : ''

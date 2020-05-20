@@ -4,7 +4,7 @@
       "productInfo": {
         "sku": "sku",
         "upc": "upc",
-        "productName": "name",
+        "productName": "product_a",
         "variant": "variant"
       }
     }

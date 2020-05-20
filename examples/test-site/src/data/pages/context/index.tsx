@@ -34,7 +34,8 @@ import {
   ContextWrapper,
   ContextWrapperProps,
 } from '@bodiless/core';
-import { Editable, Image } from '@bodiless/components';
+import { Editable } from '@bodiless/components';
+import { Image } from '@bodiless/components-ui';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 
 import Layout from '../../../components/Layout';

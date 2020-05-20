@@ -14,49 +14,54 @@
 
 import Editable, { withPlaceholder, asEditable } from './Editable';
 import { asBodilessLink } from './Link';
-import Image, { asBodilessImage } from './Image';
+import Image, {
+  asBodilessImage,
+  TImagePickerUI,
+  withImagePlaceholder,
+} from './Image';
 import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
-import List from './List';
-import {
-  FinalProps as ListProps,
-  TitleProps as ListTitleProps,
-  ListDesignableComponents,
-} from './List/types';
+import List, { asTestableList } from './List';
+import asTaggableItem from './Taggable/asTaggableItem';
 import withListTitle from './List/withListTitle';
 import asEditableList from './List/asEditableList';
 import asBasicSublist from './List/asBasicSublist';
 import withSublist, { withBasicSublist } from './List/withSublist';
 import withDeleteSublistOnUnwrap from './List/withDeleteSublistOnUnwrap';
-import {
-  withMeta, withMetaTitle, withMetaHtml,
-} from './Meta/Meta';
+import { withMeta, withMetaTitle, withMetaHtml } from './Meta/Meta';
 import asBodilessHelmet from './Helmet/Helemet';
 import withEvent from './GTM/gtm';
-import {
-  withToggle,
-  withToggleTo,
-  withToggleButton,
-} from './Toggle';
+import { withToggle, withToggleTo, withToggleButton } from './Toggle';
 import withEditPlaceholder from './Placeholder';
 import { TagButtonProps, withTagButton, useTagsAccessors } from './TagButton';
+import withFilterByTags from './withFilterByTags';
+import Youtube, { asBodilessYoutube } from './Youtube';
+import PageDimensionsProvider, {
+  usePageDimensionsContext,
+  withPageDimensionsContext,
+  BreakpointsType,
+} from './PageDimensionsProvider';
+import {
+  ifViewportIs,
+  ifViewportIsNot,
+} from './withResponsiveToggle';
 
 export {
   asBodilessLink,
   Image,
   asBodilessImage,
+  withImagePlaceholder,
+  TImagePickerUI,
   Editable,
   NodeViewer,
   withLinkToggle,
   List,
-  ListDesignableComponents,
   asEditableList,
   asBasicSublist,
+  asTestableList,
   withBasicSublist,
   withSublist,
   withDeleteSublistOnUnwrap,
-  ListProps,
-  ListTitleProps,
   withListTitle,
   withToggle,
   withToggleTo,
@@ -71,5 +76,21 @@ export {
   withEvent,
   withTagButton,
   TagButtonProps,
+  asTaggableItem,
+  withFilterByTags,
   useTagsAccessors,
+  asBodilessYoutube,
+  Youtube,
+  PageDimensionsProvider,
+  usePageDimensionsContext,
+  withPageDimensionsContext,
+  BreakpointsType,
+  ifViewportIs,
+  ifViewportIsNot,
 };
+
+export type {
+  FinalProps as ListProps,
+  TitleProps as ListTitleProps,
+  ListDesignableComponents,
+} from './List/types';

@@ -19,7 +19,8 @@ import { flow } from 'lodash';
 import {
   H1, Img, A, addClasses,
 } from '@bodiless/fclasses';
-import { asEditable, asBodilessImage, asBodilessLink } from '@bodiless/components';
+import { asEditable, asBodilessLink } from '@bodiless/components';
+import { asBodilessImage } from '@bodiless/components-ui';
 
 import Layout from '../../../components/Layout';
 import withSimpleEditor from './withSimpleEditor';

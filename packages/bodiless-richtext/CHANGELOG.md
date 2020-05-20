@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.48](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.47...v0.0.48) (2020-05-20)
+
+
+### Bug Fixes
+
+* **richtext:** richtext is not refreshed on server data change ([#292](https://github.com/johnsonandjohnson/bodiless-js/issues/292)) ([df0075d](https://github.com/johnsonandjohnson/bodiless-js/commit/df0075d5c8b856b7be61524e13e90e09c03acf4a))
+
+
+### Features
+
+* **core:** Sidecar Node API ([#320](https://github.com/johnsonandjohnson/bodiless-js/issues/320)) ([1c61274](https://github.com/johnsonandjohnson/bodiless-js/commit/1c61274ea1e45e81210bfd5f05f06c6244977abb)), closes [#285](https://github.com/johnsonandjohnson/bodiless-js/issues/285) [#321](https://github.com/johnsonandjohnson/bodiless-js/issues/321)
+
+
+
+
+
 ## [0.0.47](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.46...v0.0.47) (2020-04-22)
 
 **Note:** Version bump only for package @bodiless/richtext

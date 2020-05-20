@@ -160,7 +160,7 @@ export const withDesign = <C extends DesignableComponents>(design: Design<C>) =>
 export const replaceWith = <P extends object>(Component: ComponentType<P>) => () => Component;
 export const remove = <P extends React.HTMLAttributes<HTMLBaseElement>> () => (props:P) => {
   const { children } = props;
-  return <React.Fragment>{children}</React.Fragment>;
+  return <>{children}</>;
 };
 
 // type TransformerFunction = (a:object) => object;

@@ -14,7 +14,7 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import { Page } from '@bodiless/gatsby-theme-bodiless';
+import Page from '../../../components/Page';
 
 import Layout from '../../../components/Layout';
 import FilterByGroup, { ContextLogger } from '../../../components/FilterByGroup';
@@ -23,6 +23,16 @@ export default (props: any) => (
   <Page {...props}>
     <Layout>
       <h1 className="text-3xl font-bold">Filter Demo Page</h1>
+      <p className="p-5">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Iste laboriosam reiciendis in tempore velit qui soluta ullam illo ipsam vero
+        placeat molestias nobis libero incidunt, dolorum provident deleniti ipsum ex.
+      </p>
+      <p className="p-5">
+        Fuga est nihil ipsum. Porro reiciendis saepe amet, ipsa, dignissimos eaque ducimus
+        ullam quia quo aut dolorem consectetur voluptatum ipsam,
+        neque sint ratione cupiditate laudantium?
+      </p>
       <div className="my-10">
         <FilterByGroup>
           <ContextLogger />
