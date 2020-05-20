@@ -10,26 +10,26 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * Copyright (c) 2017 yujiosaka
- * Licensed under MIT.
- *
  */
 
-module.exports = {
-  "extends": "airbnb-base",
-  "globals": {
-    'window': true,
-  },
-  "rules": {
-    "arrow-parens": ["warn", "as-needed"],
-    "class-methods-use-this": 0,
-    "func-names": 0,
-    "max-classes-per-file": 0,
-    "no-underscore-dangle": 0,
-    "no-console": 0,
-    "no-void": 0,
-    "no-param-reassign": 0,
-    "no-bitwise": 0,
-  },
-}
+import React from 'react';
+import { graphql } from 'gatsby';
+import { Page } from '@bodiless/gatsby-theme-bodiless';
+import { Youtube } from '@bodiless/components';
+import Layout from '../../../components/Layout';
+
+export default (props: any) => (
+  <Page {...props}>
+    <Layout>
+      <h1 className="text-3xl font-bold">Youtube Demo</h1>
+      <Youtube nodeKey="youtube" />
+    </Layout>
+  </Page>
+);
+
+export const query = graphql`
+  query($slug: String!) {
+    ...PageQuery
+    ...SiteQuery
+  }
+`;

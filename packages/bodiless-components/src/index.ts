@@ -22,11 +22,6 @@ import Image, {
 import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
 import List, { asTestableList } from './List';
-import {
-  FinalProps as ListProps,
-  TitleProps as ListTitleProps,
-  ListDesignableComponents,
-} from './List/types';
 import asTaggableItem from './Taggable/asTaggableItem';
 import withListTitle from './List/withListTitle';
 import asEditableList from './List/asEditableList';
@@ -40,6 +35,7 @@ import { withToggle, withToggleTo, withToggleButton } from './Toggle';
 import withEditPlaceholder from './Placeholder';
 import { TagButtonProps, withTagButton, useTagsAccessors } from './TagButton';
 import withFilterByTags from './withFilterByTags';
+import Youtube, { asBodilessYoutube } from './Youtube';
 import PageDimensionsProvider, {
   usePageDimensionsContext,
   withPageDimensionsContext,
@@ -60,15 +56,12 @@ export {
   NodeViewer,
   withLinkToggle,
   List,
-  ListDesignableComponents,
   asEditableList,
   asBasicSublist,
   asTestableList,
   withBasicSublist,
   withSublist,
   withDeleteSublistOnUnwrap,
-  ListProps,
-  ListTitleProps,
   withListTitle,
   withToggle,
   withToggleTo,
@@ -86,6 +79,8 @@ export {
   asTaggableItem,
   withFilterByTags,
   useTagsAccessors,
+  asBodilessYoutube,
+  Youtube,
   PageDimensionsProvider,
   usePageDimensionsContext,
   withPageDimensionsContext,
@@ -93,3 +88,9 @@ export {
   ifViewportIs,
   ifViewportIsNot,
 };
+
+export type {
+  FinalProps as ListProps,
+  TitleProps as ListTitleProps,
+  ListDesignableComponents,
+} from './List/types';

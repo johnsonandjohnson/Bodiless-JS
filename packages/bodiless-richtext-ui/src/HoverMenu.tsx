@@ -15,7 +15,8 @@
 import React, { FC } from 'react';
 import { Div } from '@bodiless/ui';
 import { addClasses, withoutProps } from '@bodiless/fclasses';
-import { HoverMenu, HoverMenuProps } from '@bodiless/richtext';
+import { HoverMenu } from '@bodiless/richtext';
+import type { HoverMenuProps } from '@bodiless/richtext';
 import { flow } from 'lodash';
 
 const Menu = flow(
@@ -31,7 +32,7 @@ const ui = {
   Menu,
 };
 
-const StyledHoverMenu: FC<HoverMenuProps> = props => (
+const StyledHoverMenu: FC<HoverMenuProps> = (props: HoverMenuProps) => (
   <HoverMenu {...props} ui={ui} />
 );
 
