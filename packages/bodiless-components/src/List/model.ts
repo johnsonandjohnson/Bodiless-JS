@@ -37,12 +37,15 @@ export const useItemsAccessors = () => {
  * Returns a method which can be used to delete an item, or call
  * an "unwrap" handler if there is only one item in the list.
  */
-const useDeleteItem = ({ unwrap }: Pick<Props, 'unwrap'>) => {
+const useDeleteItem = ({ unwrap, onDelete }: Pick<Props, 'unwrap' | 'onDelete'>) => {
   const { getItems, setItems, deleteSubnode } = useItemsAccessors();
   return (item: string) => {
     const items = getItems().filter(item$ => item$ !== item);
     setItems(items);
     deleteSubnode(item);
+    if (onDelete) {
+      onDelete(item);
+    }
     if (items.length === 0 && unwrap) {
       unwrap();
     }
@@ -79,8 +82,8 @@ const useAddItem = () => {
  * Returns a pair of functions which can be used to insert
  * or delete items.
  */
-export const useItemsMutators = (props?: Pick<Props, 'unwrap'>) => ({
+export const useItemsMutators = (props?: Pick<Props, 'unwrap' | 'onDelete'>) => ({
   addItem: useAddItem(),
-  deleteItem: useDeleteItem(props || { unwrap: undefined }),
+  deleteItem: useDeleteItem(props || { unwrap: undefined, onDelete: undefined }),
   deleteSublist: useDeleteSublist(),
 });

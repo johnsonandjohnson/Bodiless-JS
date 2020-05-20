@@ -344,6 +344,16 @@ describe('transforming html element text to attribute', () => {
     const result = htmlParser.getBodyHtml();
     expect(result).toBe(expected);
   });
+  describe('when html element text is empty', () => {
+    it('should not create an attribute with empty value', () => {
+      const input = '<body><script></script></body>';
+      const expected = '<script></script>';
+      const htmlParser = new HtmlParser(input);
+      htmlParser.transformElementTextToAttribute('script', 'innerHTML');
+      const result = htmlParser.getBodyHtml();
+      expect(result).toBe(expected);
+    });
+  });
 });
 
 describe('getting html and body tags', () => {

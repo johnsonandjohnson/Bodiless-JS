@@ -312,6 +312,10 @@ export default class HtmlParser implements HtmlParserInterface {
     if (tag === 'script' && this.$(element).attr('src')) {
       skip = true;
     }
+    // skip if html element text is empty
+    if (!this.$(element).html()) {
+      skip = true;
+    }
     return skip;
   }
 

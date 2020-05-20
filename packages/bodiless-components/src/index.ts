@@ -14,10 +14,14 @@
 
 import Editable, { withPlaceholder, asEditable } from './Editable';
 import { asBodilessLink } from './Link';
-import Image, { asBodilessImage } from './Image';
+import Image, {
+  asBodilessImage,
+  TImagePickerUI,
+  withImagePlaceholder,
+} from './Image';
 import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
-import List from './List';
+import List, { asTestableList } from './List';
 import {
   FinalProps as ListProps,
   TitleProps as ListTitleProps,
@@ -36,11 +40,22 @@ import { withToggle, withToggleTo, withToggleButton } from './Toggle';
 import withEditPlaceholder from './Placeholder';
 import { TagButtonProps, withTagButton, useTagsAccessors } from './TagButton';
 import withFilterByTags from './withFilterByTags';
+import PageDimensionsProvider, {
+  usePageDimensionsContext,
+  withPageDimensionsContext,
+  BreakpointsType,
+} from './PageDimensionsProvider';
+import {
+  ifViewportIs,
+  ifViewportIsNot,
+} from './withResponsiveToggle';
 
 export {
   asBodilessLink,
   Image,
   asBodilessImage,
+  withImagePlaceholder,
+  TImagePickerUI,
   Editable,
   NodeViewer,
   withLinkToggle,
@@ -48,6 +63,7 @@ export {
   ListDesignableComponents,
   asEditableList,
   asBasicSublist,
+  asTestableList,
   withBasicSublist,
   withSublist,
   withDeleteSublistOnUnwrap,
@@ -70,4 +86,10 @@ export {
   asTaggableItem,
   withFilterByTags,
   useTagsAccessors,
+  PageDimensionsProvider,
+  usePageDimensionsContext,
+  withPageDimensionsContext,
+  BreakpointsType,
+  ifViewportIs,
+  ifViewportIsNot,
 };

@@ -21,7 +21,9 @@ import React, {
 import { flow } from 'lodash';
 import { observer } from 'mobx-react-lite';
 import { withNode, withoutProps } from '@bodiless/core';
-import { designable, asComponent } from '@bodiless/fclasses';
+import {
+  designable, asComponent, addProps, withDesign,
+} from '@bodiless/fclasses';
 import { useItemsMutators, useItemsAccessors } from './model';
 import { Props, FinalProps, ListDesignableComponents } from './types';
 
@@ -45,14 +47,19 @@ const startComponents: ListDesignableComponents = {
   ItemMenuOptionsProvider: Fragment,
 };
 
-const BasicList: FC<Props> = ({ components, unwrap, ...rest }) => {
+const BasicList: FC<Props> = ({
+  components,
+  unwrap,
+  onDelete,
+  ...rest
+}) => {
   const {
     Wrapper,
     Item,
     Title,
   } = components;
 
-  const { addItem, deleteItem } = useItemsMutators({ unwrap });
+  const { addItem, deleteItem } = useItemsMutators({ unwrap, onDelete });
   const { getItems } = useItemsAccessors();
   const itemData = getItems();
   const canDelete = () => Boolean(getItems().length > 1 || unwrap);
@@ -74,6 +81,12 @@ const BasicList: FC<Props> = ({ components, unwrap, ...rest }) => {
   );
 };
 
+const asTestableList = (listName: string) => withDesign({
+  Wrapper: addProps({ 'data-list-element': listName }),
+  Title: addProps({ 'data-list-element': 'title' }),
+  Item: addProps({ 'data-list-element': 'item' }),
+});
+
 /**
  * A List component.
  */
@@ -85,3 +98,4 @@ const List = flow(
 List.displayName = 'List';
 
 export default List;
+export { asTestableList };

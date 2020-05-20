@@ -20,14 +20,16 @@ import { ListProps } from '@bodiless/components';
 export type FilterByGroupComponents = {
   Wrapper: ComponentType<StylableProps>,
   FilterWrapper: ComponentType<StylableProps>,
+  FilterHeader: ComponentType<StylableProps>,
+  FilterTitle: ComponentType<StylableProps & HTMLProps<HTMLHeadingElement>>,
   ContentWrapper: ComponentType<StylableProps>,
   ResetButton: ComponentType<StylableProps & HTMLProps<HTMLButtonElement>>,
   Filter: ComponentType<StylableProps>,
 };
 
 export type FilterComponents = {
-  CategoryList: ComponentType<ListProps>,
-  TagList: ComponentType<ListProps>,
+  CategoryList: ComponentType<StylableProps & ListProps>,
+  TagList: ComponentType<StylableProps & ListProps>,
 };
 
 export type TagTitleComponents = {
@@ -41,6 +43,7 @@ export type FilterProps = DesignableComponentsProps<FilterComponents>;
 
 export type FilterByGroupProps = {
   resetButtonText?: string,
+  filterTitle?: string,
 } & DesignableComponentsProps<FilterByGroupComponents>;
 
 export type TagTitleProps = {
