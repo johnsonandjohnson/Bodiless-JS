@@ -83,6 +83,7 @@ export interface PageEditContextInterface extends
   CanGetContextMenuOptions,
   CanControlPageOverlay,
   DefinesLocalEditContext
+// eslint-disable-next-line @typescript-eslint/brace-style
 {
   readonly id: string;
   readonly name: string;

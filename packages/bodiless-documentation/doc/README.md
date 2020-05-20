@@ -30,7 +30,7 @@ npm run start
 Then Visit `localhost:8005` in your browser.
 
 > Requires:
-> - [NodeJS](https://nodejs.org/en/download/) (v10.15 preferred)
+> - [NodeJS](https://nodejs.org/en/download/) (v12.16.3+ preferred)
 > - [NPM](https://docs.npmjs.com/) version 6.13.1+
 
 ## Links

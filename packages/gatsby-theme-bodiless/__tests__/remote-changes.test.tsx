@@ -15,8 +15,7 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
-import { FetchChanges } from '../src/dist/RemoteChanges';
-import { PullChanges } from '../dist/RemoteChanges';
+import { FetchChanges, PullChanges } from '../src/dist/RemoteChanges';
 
 const changes = {
   status: 200,

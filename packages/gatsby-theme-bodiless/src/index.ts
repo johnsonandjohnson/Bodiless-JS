@@ -18,7 +18,7 @@ import BackendClient from './dist/BackendClient';
 import GitProvider from './dist/GitProvider';
 import NewPageProvider from './dist/NewPageProvider';
 import GatsbyPageProvider, { useGatsbyPageContext } from './dist/GatsbyPageProvider';
-import Page, { Props as PageProps } from './dist/Page';
+import Page from './dist/Page';
 
 export {
   GatsbyMobxStore,
@@ -29,5 +29,6 @@ export {
   GatsbyPageProvider,
   useGatsbyPageContext,
   Page,
-  PageProps,
 };
+
+export type { Props as PageProps } from './dist/Page';

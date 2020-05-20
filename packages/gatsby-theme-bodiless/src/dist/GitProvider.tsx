@@ -121,7 +121,7 @@ const formGitCommit = (client: Client) => contextMenuForm({
     <>
       <ComponentFormTitle>Upload Changes</ComponentFormTitle>
       <ComponentFormLabel htmlFor="commit-txt">
-          Description:
+        Description:
       </ComponentFormLabel>
       <ComponentFormText field="commitMessage" id="commit-txt" />
     </>

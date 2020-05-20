@@ -56,7 +56,7 @@
     "gatsby-plugin-react-helmet": "^3.0.0",
     "gatsby-plugin-remove-serviceworker": "^1.0.0",
     "gatsby-plugin-robots-txt": "^1.5.0",
-    "gatsby-plugin-typescript": "^2.0.3",
+    "gatsby-plugin-typescript": "^2.3.3",
     "gatsby-source-filesystem": "^2.0.4",
     "gatsby-transformer-code": "^0.1.0",
     "gatsby-transformer-json": "^2.1.4",

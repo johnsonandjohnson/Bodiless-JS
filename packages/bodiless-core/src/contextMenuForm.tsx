@@ -83,10 +83,11 @@ const contextMenuForm = <D extends object>(options: Options<D>) => (
               formState,
               ui,
             })}
-            {hasSubmit && !formState.invalid
-            && (
-              <ComponentFormSubmitButton aria-label="Submit" />
-            )
+            {
+              hasSubmit && !formState.invalid
+              && (
+                <ComponentFormSubmitButton aria-label="Submit" />
+              )
             }
           </>
         )}

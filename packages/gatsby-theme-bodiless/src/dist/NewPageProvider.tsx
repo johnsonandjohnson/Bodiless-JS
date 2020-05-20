@@ -89,7 +89,7 @@ Click ok to visit the new page; if it does not load, wait a while and reload.`;
     <>
       <ComponentFormTitle>Add a New Page</ComponentFormTitle>
       <ComponentFormLabel htmlFor="new-page-path">
-          URL
+        URL
         <br />
         {`${currentPage}...`}
       </ComponentFormLabel>

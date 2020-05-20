@@ -62,7 +62,7 @@
     "ts-complexity": "0.0.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
+    "@babel/core": "^7.9.0",
     "@babel/plugin-proposal-class-properties": "^7.2.1",
     "@babel/plugin-proposal-decorators": "^7.4.0",
     "@babel/runtime": "^7.4.2",
@@ -74,8 +74,8 @@
     "@types/slate": "^0.44.0",
     "@types/slate-react": "^0.21.1",
     "@types/uuid": "^3.4.4",
-    "@typescript-eslint/eslint-plugin": "^2.14.0",
-    "@typescript-eslint/parser": "^2.14.0",
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "@typescript-eslint/parser": "^2.29.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.9.0",
     "cross-env": "^5.2.0",
@@ -86,15 +86,15 @@
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.3.5",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb": "17.1.0",
-    "eslint-config-airbnb-typescript": "^4.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "18.1.0",
+    "eslint-config-airbnb-typescript": "^7.2.1",
     "eslint-config-prettier": "^4.2.0",
-    "eslint-plugin-import": "^2.17.2",
-    "eslint-plugin-jest": "^22.1.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jest": "^23.8.2",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-prettier": "^3.0.1",
-    "eslint-plugin-react": "^7.11.0",
+    "eslint-plugin-react": "^7.19.0",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.6",
     "husky": "^3.0.0",
@@ -112,13 +112,13 @@
     "ts-jest": "^24.0.2",
     "tslint": "^5.12.1",
     "tslint-config-airbnb": "^5.11.1",
-    "typescript": "^3.4.5"
+    "typescript": "^3.8.3"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "engines": {
-    "node": ">=10.5"
+    "node": ">=12.16"
   }
 }
