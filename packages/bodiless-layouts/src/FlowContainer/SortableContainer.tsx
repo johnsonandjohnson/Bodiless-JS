@@ -45,7 +45,7 @@ const SortableListWrapper = SortableContainer(
         const activeClassName = context.isActive ? 'bl-border-orange-400' : 'hover:bl-border-orange-400';
 
         return (
-          <FlowContainerEmpty className={`bl-flex bl-justify-center bl-flex-wrap bl-py-grid-3 ${activeClassName}`} {...useContextActivator()}>
+          <FlowContainerEmpty {...rest} className={`bl-flex bl-justify-center bl-flex-wrap bl-py-grid-3 ${activeClassName}`} {...useContextActivator()}>
             Empty FlowContainer
           </FlowContainerEmpty>
         );
