@@ -46,7 +46,7 @@ class GitCmd {
 
   spawn() {
     const args = [...this.params, ...this.files];
-    logger.log([`Spawning command: ${this.cmd}`, ...args]);
+    logger.log([`Spawning command: ${this.cmd}`, ...args, Date.now(), process.cwd()]);
     return spawn(this.cmd, args, this.options);
   }
 
