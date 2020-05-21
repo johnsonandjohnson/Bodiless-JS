@@ -8,6 +8,4 @@ This section describes the building of site with BodilessJS.
 * Customizing a Site to meet Design Requirements
   * [Using Tailwind with Bodiless](Development/BuildingSites/TailwindGuide)
   * [Fonts](Development/BuildingSites/Fonts)
-  * [Rich Text Editor](Development/BuildingSites/RichTextEditors)
   * [Building Components](Development/BuildingSites/BuildingComponents)
-  * [Flow Container Components](Development/BuildingSites/FlowContainerGuide)

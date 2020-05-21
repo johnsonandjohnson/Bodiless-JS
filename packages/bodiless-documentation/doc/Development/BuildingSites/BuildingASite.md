@@ -198,63 +198,7 @@ If you see a pattern that site uses same layout more than once, which you would
 expect this to happen, this is beneficial to group these pages and create a
 template for this group.  
 
-Using templates provides other benefits:
-
-* It also allows control or governance over what the site editor can
-  add, edit and remove from the page.
-* It allows site builder to make future changes to all pages built off these
-  templates, without editing each individual page.
-
-Let's take a look at the Bodiless templates in the Test Site and review each of
-these. In the Bodiless Test Site Homepage there are currently three types of
-[templates](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/test-site/src/templates)
-in use.
-
-* [_default](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/templates/_default.jsx)
-  * This provides a simple page with header/footer and a flowContainer area in
-    the page to add any component the flowContainer supports.
-  * The site editor has control to add/remove components anywhere between the
-    header/footer. The flowContainer area also poses no limitation (by default)
-    to what can be added here so any components that flowContainer supports can
-    be added.
-  * Very flexible, free-form page allowing site editor complete control over
-    contents of the page.
-  * This is part of the starter kit.
-
-* [product_listing](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/templates/product_listing.jsx)
-  * This is a template that contains a editable title, editable image and
-    special flowContainer area that can only add variation of touts that have
-    special product features.
-  * This page is very restrictive template that site editor can only edit the
-    title, change the image, and place specific product touts.
-    * This is not part of the starter kit and the template must be added to the
-      site if you would like this template.
-
-* [product_detail](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/templates/product_detail.jsx)
-  * This is a template page that creates a product detail pages with editable
-    images, accordions, flowContainer area for touts, & reviews if site uses
-    this feature.
-  * This page is also very restrictive page that force the site editor to only
-    modify Image, Title, Product Details in their accordions and placing of a
-    specific product tout.
-  * This restrictiveness enforces conformity that all product detail pages are
-    similar. It also allows in future, a new component to be added easily to
-    template, and apply to all products.
-    * If a single product detail page had to deviate from the template, it could
-      be copied to the page and modified and it breaks away from templating as
-      one-off customized product detail page, requiring in future, any new
-      components to be done on this page.
-  * This is not part of the starter kit and the template must be added to the
-    site if you would like this template.
-
-So as a site builder creating templates, it is suggested to create templates
-with defining what you see is general uniformity and applying flowContainer
-areas within an area to add components as needed. For example, in article you
-create two columns (2/3 & 1/3) where left side is a flowContainer area that can
-take any component and the right 1/3 sidebar maybe only takes tout components or
-Rich Text Editor component. This allows all articles to have column layouts and
-enforce uniformity, but what is placed into those areas is more flexible and
-controlled by editor.
+Please read using [templates](./Templates/Templates.md) for deeper dive.
 
 ### Identifying One-off Custom Pages
 
