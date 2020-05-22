@@ -138,4 +138,8 @@ export default class BackendClient {
   getSetList() {
     return this.get(`${this.prefix}/set/list`);
   }
+
+  getChanges() {
+    return this.get(`${this.prefix}/changes`);
+  }
 }

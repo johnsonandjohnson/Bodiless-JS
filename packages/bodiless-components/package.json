@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/components",
-  "version": "0.0.47",
+  "version": "0.0.48",
   "description": "Reusable compoments",
   "author": "Heidi Vanyo <hvanyo@its.jnj.com>",
   "license": "Apache-2.0",
@@ -9,10 +9,7 @@
   "files": [
     "/lib",
     "/bodiless.docs.json",
-    "/editable.md",
-    "/Link.md",
-    "/Image.md",
-    "/List.md"
+    "/doc"
   ],
   "repository": {
     "type": "git",
@@ -26,13 +23,12 @@
     "build:watch": "npm run build -- --watch",
     "lint": "tslint ./src/**/*.ts?x",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo",
-    "copy": "copyfiles -u 1 \"./src/*.css\" \"./lib/\""
+    "copy": "copyfiles -u 1 \"./src/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
-    "@bodiless/core": "^0.0.47",
-    "@bodiless/fclasses": "^0.0.47",
-    "@bodiless/ui": "^0.0.47",
-    "@material/react-material-icon": "^0.14.1",
+    "@bodiless/core": "^0.0.48",
+    "@bodiless/fclasses": "^0.0.48",
+    "@bodiless/ui": "^0.0.48",
     "@types/react-helmet": "^5.0.14",
     "axios": "^0.19.0",
     "common-tags": "^1.8.0",

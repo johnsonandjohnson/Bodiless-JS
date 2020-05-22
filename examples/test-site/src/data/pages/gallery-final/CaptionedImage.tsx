@@ -13,7 +13,7 @@
  */
 
 import React, { FC, HTMLProps } from 'react';
-import { asBodilessImage } from '@bodiless/components';
+import { asBodilessImage } from '@bodiless/components-ui';
 import { withNode } from '@bodiless/core';
 import {
   Img, Section, Div, addClasses, stylable,

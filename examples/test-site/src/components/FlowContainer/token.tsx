@@ -18,11 +18,16 @@ import {
 } from '@bodiless/fclasses';
 
 const asFlowContainerWithMargins = withDesign({
-  Wrapper: addClasses('-m-5 py-5'),
-  ComponentWrapper: addClasses('p-5'),
+  Wrapper: addClasses('md:-m-5 py-5'),
+  ComponentWrapper: addClasses('md:p-5'),
 });
 
-/* eslint-disable import/prefer-default-export */
+const asFlowContainerFullWidth = withDesign({
+  Wrapper: addClasses('w-full'),
+  ComponentWrapper: addClasses('w-full md:w-1/3'),
+});
+
 export {
   asFlowContainerWithMargins,
+  asFlowContainerFullWidth,
 };

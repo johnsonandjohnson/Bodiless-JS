@@ -36,6 +36,7 @@ const getSuggestions = () => [
 
 const props = {
   getSuggestions,
+  registerSuggestions: () => null,
   placeholder: 'Add or create',
   formTitle: 'Groups',
   seeAllText: 'See all groups',
@@ -97,7 +98,7 @@ describe('Filter item interactions', () => {
     // Test for input fields:
     const tagsInputFields = menuForm.find('input');
     expect(tagsInputFields).toHaveLength(2);
-    expect(tagsInputFields.at(0).prop('value')).toBe('');
+    expect(tagsInputFields.at(0).prop('value')).toMatchObject([]);
     expect(tagsInputFields.at(0).prop('type')).toBe('hidden');
     expect(tagsInputFields.at(1).prop('placeholder')).toBe('Add or create');
 
@@ -123,7 +124,7 @@ describe('Filter item interactions', () => {
     // Test for input fields:
     const tagsInputFields = menuForm.find('input');
     expect(tagsInputFields).toHaveLength(2);
-    expect(tagsInputFields.at(0).prop('value')).toBe('');
+    expect(tagsInputFields.at(0).prop('value')).toMatchObject([]);
     expect(tagsInputFields.at(0).prop('type')).toBe('hidden');
 
     // Cancel and add buttons:
@@ -138,7 +139,6 @@ describe('Filter item interactions', () => {
   it('context menu form should close and save content when done is clicked', () => {
     let input = menuForm.find('input[name="tags"]');
     input.simulate('change', { target: { value: [testTag] } });
-    expect(wrapper.find('Popup[visible=true]')).toHaveLength(1);
 
     const doneButton = menuForm.find('button[aria-label="Submit"]');
     doneButton.simulate('submit');
@@ -152,17 +152,21 @@ describe('Filter item interactions', () => {
     menuForm = menuPopup.find('form');
     input = menuForm.find('input[name="tags"]');
     expect(input.prop('value')).toStrictEqual([testTag]);
+    input.simulate('change', { target: { value: [] } });
   });
 
   it('context form should not save content when cancel is clicked', () => {
-    const sampleTag = { id: 1, name: 'bananas' };
-    const inputField = menuForm.find('input[name="react-tags"]');
-    inputField.simulate('change', { target: { value: [sampleTag] } });
-    expect(wrapper.find('Popup[visible=true]')).toHaveLength(2);
+    let input = menuForm.find('input[name="react-tags"]');
+    input.simulate('change', { target: { value: [testTag] } });
+
     const cancelButton = menuForm.find('button[aria-label="Cancel"]');
     cancelButton.simulate('submit');
-    expect(wrapper.find('Popup[visible=true]')).toHaveLength(1);
-    const informedInputField = menuForm.find('input[name="tags"]');
-    expect(informedInputField.prop('value')).toStrictEqual([testTag]);
+
+    menuButton.simulate('click');
+
+    menuPopup = wrapper.find('Tooltip[visible=true]').at(1);
+    menuForm = menuPopup.find('form');
+    input = menuForm.find('input[name="tags"]');
+    expect(input.prop('value')).toStrictEqual([]);
   });
 });

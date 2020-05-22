@@ -15,11 +15,11 @@
 import { flow } from 'lodash';
 import { addClasses } from '@bodiless/fclasses';
 import {
-  asBodilessImage,
   asBodilessLink,
   Editable,
   withPlaceholder,
 } from '@bodiless/components';
+import { asBodilessImage } from '@bodiless/components-ui';
 import { withChild, withNodeKey } from '@bodiless/core';
 import {
   asAlignCenter,
@@ -36,6 +36,7 @@ const asXMargin = addClasses('mx-2');
 const asYMargin = addClasses('my-2');
 const asNegXMargin = addClasses('-mx-1');
 const asNegYMargin = addClasses('-my-1');
+const withPadding5 = addClasses('p-5');
 
 /* Responsive design */
 const asMobileOnly = addClasses('block lg:hidden');
@@ -109,4 +110,5 @@ export {
   asNegXMargin,
   asNegYMargin,
   asBlockQuote,
+  withPadding5,
 };

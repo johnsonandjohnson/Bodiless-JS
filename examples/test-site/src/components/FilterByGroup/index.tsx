@@ -14,12 +14,8 @@
 
 import { flow } from 'lodash';
 import { FilterByGroupClean, asTestableFilterByGroup, withFBGSuggestions } from '@bodiless/organisms';
-import {
-  withDesign,
-  addClasses,
-  addProps,
-} from '@bodiless/fclasses';
-import { asTextColorPrimary } from '../Elements.token';
+import { addProps } from '@bodiless/fclasses';
+import { asFilterByGroupResponsive, asFilterByGroupDefaultStyle } from './token';
 
 const suggestions = [
   { id: '1', name: 'DefaultTag 1' },
@@ -28,39 +24,11 @@ const suggestions = [
   { id: '4', name: 'DefaultTag 4' },
 ];
 
-const withTagListStyles = withDesign({
-  Title: flow(
-    addProps({ emptyTitleText: 'Group' }),
-    withDesign({
-      FilterInputWrapper: addClasses('flex pb-2 items-center'),
-      FilterGroupItemInput: addClasses('mr-3'),
-      FilterGroupItemPlaceholder: addClasses('text-gray-600'),
-      FilterGroupItemLabel: addClasses(''),
-    }),
-  ),
-  Wrapper: addClasses('m-2 pl-2'),
-});
-
-const withCategoryList = withDesign({
-  Title: addClasses('font-bold'),
-});
-
 const asFilterByGroup = flow(
   withFBGSuggestions({ suggestions }),
   addProps({ resetButtonText: 'Show All Products' }),
-  withDesign({
-    Wrapper: addClasses('flex'),
-    FilterWrapper: addClasses('p-2 mr-5 w-1/4 bg-gray-400 flex flex-col'),
-    ContentWrapper: addClasses('p-2 w-3/4'),
-    ResetButton: flow(
-      addClasses('my-2 underline self-end'),
-      asTextColorPrimary,
-    ),
-    Filter: withDesign({
-      TagList: withTagListStyles,
-      CategoryList: withCategoryList,
-    }),
-  }),
+  asFilterByGroupResponsive,
+  asFilterByGroupDefaultStyle,
   asTestableFilterByGroup,
 );
 

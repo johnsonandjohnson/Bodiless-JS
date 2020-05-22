@@ -18,10 +18,14 @@
 name: 'edit'
 
 # The type key specifies the language and version for your application.
-type: 'nodejs:10'
+type: 'nodejs:12'
 
 # The size of the persistent disk of the application (in MB).
-disk: 4096
+disk: 8192
+
+resources:
+  base_memory: 1024
+  memory_ratio: 1024
 
 dependencies:
     nodejs:

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.48](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v0.0.47...v0.0.48) (2020-05-20)
+
+
+### Features
+
+* **backend:** Add API to check for upstream changes. ([#314](https://github.com/johnsonandjohnson/Bodiless-JS/issues/314)) ([554a29e](https://github.com/johnsonandjohnson/Bodiless-JS/commit/554a29edd76af237765ffd4ec6a62850cdda357d)), closes [#312](https://github.com/johnsonandjohnson/Bodiless-JS/issues/312)
+* **core:** Sidecar Node API ([#320](https://github.com/johnsonandjohnson/Bodiless-JS/issues/320)) ([1c61274](https://github.com/johnsonandjohnson/Bodiless-JS/commit/1c61274ea1e45e81210bfd5f05f06c6244977abb)), closes [#285](https://github.com/johnsonandjohnson/Bodiless-JS/issues/285) [#321](https://github.com/johnsonandjohnson/Bodiless-JS/issues/321)
+
+
+
+
+
 ## [0.0.47](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v0.0.46...v0.0.47) (2020-04-22)
 
 **Note:** Version bump only for package @bodiless/backend

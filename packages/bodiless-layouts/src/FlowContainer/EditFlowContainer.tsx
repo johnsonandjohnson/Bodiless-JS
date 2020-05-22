@@ -71,23 +71,22 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerPr
           const ChildComponent = components[flowContainerItem.type];
           if (!ChildComponent) return null;
           return (
-            <ComponentWrapper
-              ui={ui}
-              key={`node-${flowContainerItem.uuid}`}
-              index={index}
-              flowContainerItem={flowContainerItem}
-              snapData={snapData}
-              defaultWidth={defaultWidth}
-              getMenuOptions={useGetMenuOptions(witNoDesign(props), flowContainerItem)}
-              onResizeStop={
-                // eslint-disable-next-line max-len
-                (flowContainerItemProps: FlowContainerItemProps) => onFlowContainerItemResize(flowContainerItem.uuid, flowContainerItemProps)
-              }
-            >
-              <ChildNodeProvider nodeKey={flowContainerItem.uuid}>
+            <ChildNodeProvider nodeKey={flowContainerItem.uuid} key={`node-${flowContainerItem.uuid}`}>
+              <ComponentWrapper
+                ui={ui}
+                index={index}
+                flowContainerItem={flowContainerItem}
+                snapData={snapData}
+                defaultWidth={defaultWidth}
+                getMenuOptions={useGetMenuOptions(witNoDesign(props), flowContainerItem)}
+                onResizeStop={
+                  // eslint-disable-next-line max-len
+                  (flowContainerItemProps: FlowContainerItemProps) => onFlowContainerItemResize(flowContainerItem.uuid, flowContainerItemProps)
+                }
+              >
                 <ChildComponent />
-              </ChildNodeProvider>
-            </ComponentWrapper>
+              </ComponentWrapper>
+            </ChildNodeProvider>
           );
         },
       )}

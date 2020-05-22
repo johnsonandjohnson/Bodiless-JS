@@ -23,7 +23,7 @@ type ToggleHook = (props: any) => boolean;
  *
  * @param {ToggleHook} useToggle
  *  Define the conditions to toggle on/off.
- * @returns {<P extends object, Q extends object>
+ * @returns {<P extends object, Q extends object>}
  *   (On: React.ComponentType<P>, Off: React.ComponentType<Q>) => any}
  */
 export const withFlowToggle = (useToggle: ToggleHook) => <P extends object, Q extends object>(

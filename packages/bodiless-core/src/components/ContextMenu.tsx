@@ -38,7 +38,7 @@ export const getUI = (ui: UI = {}) => ({
 
 const ContextMenu = (props: IProps) => {
   if (typeof window === 'undefined') {
-    return <React.Fragment />;
+    return <></>;
   }
 
   const { options } = props;

@@ -36,6 +36,7 @@ class GatsbyNodeProvider extends Component<Props, State> implements DataSource {
     };
   }
 
+  // eslint-disable-next-line react/state-in-constructor
   readonly state: State;
 
   // React hook inserts props into mobx store.

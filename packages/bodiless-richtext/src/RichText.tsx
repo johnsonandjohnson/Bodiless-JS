@@ -201,7 +201,8 @@ const BasicRichText = <P extends object, D extends object>(props: P & RichTextPr
         globalButtons={getGlobalButtons(finalComponents)}
         schema={getSchema(finalComponents)}
       >
-        { isEdit
+        {
+          isEdit
           && (
           <HoverMenu>
             {
@@ -210,7 +211,8 @@ const BasicRichText = <P extends object, D extends object>(props: P & RichTextPr
               // eslint-disable-next-line react/no-array-index-key
               getHoverButtons(finalComponents).map((C, i) => <C key={i} />)
             }
-            { selectorButtons.length > 0
+            {
+              selectorButtons.length > 0
               && (
                 <TextSelectorButton>{ selectorButtons }</TextSelectorButton>
               )

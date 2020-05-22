@@ -22,6 +22,8 @@ import FilterByGroupClean from './FilterByGroupClean';
 const asTestableFilterByGroup = withDesign({
   Wrapper: addProps({ 'data-filter-by-group': 'wrapper' }),
   FilterWrapper: addProps({ 'data-filter-by-group': 'filter-wrapper' }),
+  FilterHeader: addProps({ 'data-filter-by-group': 'filter-header' }),
+  FilterTitle: addProps({ 'data-filter-by-group': 'filter-title' }),
   ContentWrapper: addProps({ 'data-filter-by-group': 'content-wrapper' }),
   ResetButton: addProps({ 'aria-label': 'Reset Button' }),
   Filter: withDesign({

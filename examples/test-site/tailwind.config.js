@@ -5,7 +5,7 @@ module.exports = {
   */
 
   // prefix: '',
-  // important: false,
+  important: '#___gatsby', // https://tailwindcss.com/docs/configuration/#important
   // separator: ':',
 
   /*
