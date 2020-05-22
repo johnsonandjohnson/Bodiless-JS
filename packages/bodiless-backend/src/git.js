@@ -116,8 +116,15 @@ const getChanges = async () => {
  * @param {string} url - Repo url.
  * @param {array} options - Clone options [branch|directory].
  */
-const clone = (url, options = {}) => {
+const clone = async (url, options = {}) => {
+  let result = await GitCmd.cmd().add('config', '--get', 'user.name').exec();
+  const configName = result.stdout.trim().replace('\n', '');
+  result = await GitCmd.cmd().add('config', '--get', 'user.email').exec();
+  const configEmail = result.stdout.trim().replace('\n', '');
+
   const cmd = GitCmd.cmd().add('clone', url);
+  cmd.add('--config', `user.email=${configEmail}`);
+  cmd.add('--config', `user.name=${configName}`);
   if (options.branch) cmd.add('-b', options.branch);
   if (options.directory) cmd.add(options.directory);
   return cmd.exec();
