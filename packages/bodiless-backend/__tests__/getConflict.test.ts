@@ -14,7 +14,7 @@
 
 import { cloneGitFixture, cleanGitFixture } from './tools';
 
-const { getConflicts } = require('../src/git');
+const { getConflicts, getUpstreamTrackingBranch } = require('../src/git');
 const GitCmd = require('../src/GitCmd');
 
 describe('getConflicts', () => {
@@ -30,9 +30,30 @@ describe('getConflicts', () => {
   });
 
   it('returns conflict false when no conflict', async () => {
-    await GitCmd.cmd().add('checkout', '-b', 'feat/foo-test-2').exec();
+    await GitCmd.cmd()
+      .add('checkout', '-b', 'feat/foo-test-2', 'origin/feat/foo-test-2')
+      .exec();
     const result = await getConflicts();
     expect(result.hasConflict).toBeFalsy();
     expect(result.files).toBe(undefined);
+  });
+});
+
+describe('getUpstreamBranch', () => {
+  const branch = 'feat/foo-test-upstream-tracking';
+  beforeEach(cloneGitFixture('get-conflicts', branch));
+
+  afterEach(cleanGitFixture('get-conflicts'));
+
+  it('returns remote tracking branch name', async () => {
+    const result = await getUpstreamTrackingBranch();
+    expect(result).toBe(`origin/${branch}`);
+
+    // Empty upstream branch name after tracking branch removed.
+    await GitCmd.cmd()
+      .add('branch', '--unset-upstream', branch)
+      .exec();
+    const result1 = await getUpstreamTrackingBranch();
+    expect(result1).toBe('');
   });
 });

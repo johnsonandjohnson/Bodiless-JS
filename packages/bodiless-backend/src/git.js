@@ -27,6 +27,7 @@ const getCurrentBranch = async () => {
 
 /**
  * Verify the existence of an upstream branch.
+ * @todo: replace with getUpstreamTrackingBranch?
  */
 const getUpstreamBranch = async (branch, remote = 'origin') => {
   try {
@@ -37,6 +38,16 @@ const getUpstreamBranch = async (branch, remote = 'origin') => {
     if (e.code === '2') return undefined;
     throw e;
   }
+};
+
+/**
+ * Get current branch remote tracking branch.
+ */
+const getUpstreamTrackingBranch = async () => {
+  const result = await GitCmd.cmd()
+    .add('for-each-ref', '--format="%(upstream:short)"', 'refs/heads')
+    .exec();
+  return result.stdout.replace(/"([^"]*)".*/g, '$1').split('\n')[0];
 };
 
 /**
@@ -142,7 +153,11 @@ const getConflicts = async () => {
 
   // @todo: fs directory existence check.
   const branch = await getCurrentBranch();
-  const upstreamBranch = await getUpstreamBranch(branch);
+  const upstreamBranch = await getUpstreamTrackingBranch();
+  if (!upstreamBranch) {
+    throw new Error(`No upstream branch found for current branch ${branch}. Please contact your server administrator`);
+  }
+
   const rootCmd = GitCmd.cmd().add('rev-parse', '--show-toplevel');
   const root = getGitCmdOutput(await rootCmd.exec());
   logger.log([`Repo root: ${root}`]);
@@ -202,6 +217,7 @@ const getConflicts = async () => {
 module.exports = {
   getCurrentBranch,
   getUpstreamBranch,
+  getUpstreamTrackingBranch,
   getChanges,
   getConflicts,
   getMergeBase,
