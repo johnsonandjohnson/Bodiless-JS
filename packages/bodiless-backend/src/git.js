@@ -42,10 +42,12 @@ const getUpstreamBranch = async (branch, remote = 'origin') => {
 
 /**
  * Get current branch remote tracking branch.
+ *
+ * @param {string} local branch name.
  */
-const getUpstreamTrackingBranch = async () => {
+const getUpstreamTrackingBranch = async branch => {
   const result = await GitCmd.cmd()
-    .add('for-each-ref', '--format="%(upstream:short)"', 'refs/heads')
+    .add('for-each-ref', '--format="%(upstream:short)"', `refs/heads/${branch}`)
     .exec();
   return result.stdout.replace(/"([^"]*)".*/g, '$1').split('\n')[0];
 };
@@ -153,7 +155,7 @@ const getConflicts = async () => {
 
   // @todo: fs directory existence check.
   const branch = await getCurrentBranch();
-  const upstreamBranch = await getUpstreamTrackingBranch();
+  const upstreamBranch = await getUpstreamTrackingBranch(branch);
   if (!upstreamBranch) {
     throw new Error(`No upstream branch found for current branch ${branch}. Please contact your server administrator`);
   }

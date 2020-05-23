@@ -46,14 +46,14 @@ describe('getUpstreamBranch', () => {
   afterEach(cleanGitFixture('get-conflicts'));
 
   it('returns remote tracking branch name', async () => {
-    const result = await getUpstreamTrackingBranch();
+    const result = await getUpstreamTrackingBranch(branch);
     expect(result).toBe(`origin/${branch}`);
 
     // Empty upstream branch name after tracking branch removed.
     await GitCmd.cmd()
       .add('branch', '--unset-upstream', branch)
       .exec();
-    const result1 = await getUpstreamTrackingBranch();
+    const result1 = await getUpstreamTrackingBranch(branch);
     expect(result1).toBe('');
   });
 });
