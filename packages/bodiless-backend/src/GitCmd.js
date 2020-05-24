@@ -32,8 +32,8 @@ class GitCmd {
     return this;
   }
 
-  set(option) {
-    this.options = { ...this.options, ...option };
+  set(options) {
+    this.options = { ...this.options, ...options };
     return this;
   }
 

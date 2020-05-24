@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 const path = require('path');
+const os = require('os');
 const rimraf = require('rimraf');
 const { v1 } = require('uuid');
 const GitCmd = require('./GitCmd');
@@ -151,7 +152,7 @@ const clone = async (url, options = {}) => {
 const getConflicts = async () => {
   // const remoteUrl = await getRemote('origin');
   const logger = new Logger('BACKEND');
-  const directory = path.resolve(process.env.BODILESS_BACKEND_TMP || '/tmp', v1());
+  const directory = path.resolve(process.env.BODILESS_BACKEND_TMP || os.tmpdir(), v1());
 
   // @todo: fs directory existence check.
   const branch = await getCurrentBranch();
