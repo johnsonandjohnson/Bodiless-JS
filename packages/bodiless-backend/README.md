@@ -16,7 +16,7 @@ Please note that `BODILESS_BACKEND_DATA_FILE_PATH`, `BODILESS_BACKEND_STATIC_PAT
 
 ## Web API
 
-Backend package provides a set of web API endpoints to allow developers working on git workflow.
+Backend package provides a set of web API endpoints to allow developers working on git workflow. As a private API, not all routes are currently documented.
 
 - ```changes```
  
