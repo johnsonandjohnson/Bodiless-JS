@@ -22,3 +22,16 @@
 
   <Image />
   ```
+
+One can enhance Image picker UI elements. A list of UI elements that can be enhanced can be found in TImagePickerUI type exported by Image. In order to enhance a UI element, the enhancement should be injected as ui prop to the Image element. Lets consider, we want to customize master wrapper element
+
+``` js
+import { Image } from '@bodiless/components';
+
+const UploadArea = () => <div>Some custom text that guide users how to upload image</div>;
+const ui = { UploadArea };
+
+<Image ui={ui} />
+```
+
+In order to find a complete example how to build a custom UI for Image picker, check @bodiless/components-ui.

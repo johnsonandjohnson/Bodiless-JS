@@ -300,7 +300,7 @@ to make it more flexible and reusable.
    work!
     ```
     import React, { FC } from 'react';
-    import { asBodilessImage } from '@bodiless/components';
+    import { asBodilessImage } from '@bodiless/components-ui';
     import { withNode } from '@bodiless/core';
     import {
       withDesign,

@@ -1,4 +1,4 @@
-FROM node:10.15.0-alpine
+FROM node:12.16.1-alpine3.11-devtools
 ARG SSG_HOME=/opt/ssg
 COPY . $SSG_HOME
 WORKDIR $SSG_HOME

@@ -1,0 +1,25 @@
+{
+  "document": {
+    "object": "document",
+    "data": {},
+    "nodes": [
+      {
+        "object": "block",
+        "type": "H3",
+        "data": {},
+        "nodes": [
+          {
+            "object": "text",
+            "leaves": [
+              {
+                "object": "leaf",
+                "text": "Editable Images",
+                "marks": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
