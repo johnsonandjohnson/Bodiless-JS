@@ -120,7 +120,7 @@ export default class Downloader {
           return false;
         }
         return true;
-      }
+      };
       // @ts-ignore retryRequest does not have type definition for the function
       // that produces request.Request.
       const req: request.Request = retryRequest({

@@ -131,6 +131,7 @@ describe('Export redirect rules to file', () => {
     try {
       rp.exportRedirects(conf);
     } catch (e) {
+      // eslint-disable-next-line jest/no-try-expect
       expect(e.message).toBe('Unknown format is specified');
     }
   });
