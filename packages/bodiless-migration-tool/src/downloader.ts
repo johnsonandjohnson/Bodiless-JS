@@ -28,6 +28,7 @@ that is leveraged for downloading files.
 */
 /* eslint class-methods-use-this: 0 */
 import fs from 'fs';
+import http from 'http';
 import request from 'request';
 import { Promise as BluebirdPromise } from 'bluebird';
 import retryRequest from 'retry-request';
@@ -109,13 +110,31 @@ export default class Downloader {
 
     ensureDirectoryExistence(targetPath);
     return new Promise((resolve, reject) => {
+      const followRedirect = (resp: http.IncomingMessage) => {
+        if (
+          resp.statusCode
+          && [301, 302, 307, 308].indexOf(resp.statusCode) !== -1
+          && resp.headers.location
+        ) {
+          this.downloadFile(resp.headers.location);
+          return false;
+        }
+        return true;
+      }
       // @ts-ignore retryRequest does not have type definition for the function
       // that produces request.Request.
-      const req: request.Request = retryRequest({ uri: resource });
+      const req: request.Request = retryRequest({
+        uri: resource,
+        followRedirect,
+      });
+
       req
         .on('response', res => {
           if (res.statusCode >= 400) {
             return reject(new Error(`Resource ${resource} is not available for download.`));
+          }
+          if ([301, 302, 307, 308].indexOf(res.statusCode) !== -1) {
+            return reject(new Error(`Resource ${resource} is redirected. No download.`));
           }
           return req.pipe(fs.createWriteStream(targetPath))
             .on('finish', resolve)
