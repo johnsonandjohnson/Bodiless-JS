@@ -124,6 +124,7 @@ export default class Downloader {
             return Promise.reject(new Error(`target path for ${res.request.href} is undefined`));
           }
           debug(`Resource ${resource} redirect to ${res.request.href}.`);
+          ensureDirectoryExistence(targetPath);
           return req.pipe(fs.createWriteStream(targetPath))
             .on('finish', resolve)
             .on('error', err => reject(new Error(`error on streaming ${resource}. ${err}.`)));
