@@ -28,7 +28,6 @@ that is leveraged for downloading files.
 */
 /* eslint class-methods-use-this: 0 */
 import fs from 'fs';
-import http from 'http';
 import request from 'request';
 import { Promise as BluebirdPromise } from 'bluebird';
 import retryRequest from 'retry-request';
@@ -100,7 +99,7 @@ export default class Downloader {
   }
 
   private downloadFile(resource: string) {
-    const targetPath = this.getTargetPath(resource);
+    let targetPath = this.getTargetPath(resource);
     if (targetPath === undefined) {
       return Promise.reject(new Error(`target path for ${resource} is undefined`));
     }
@@ -110,32 +109,21 @@ export default class Downloader {
 
     ensureDirectoryExistence(targetPath);
     return new Promise((resolve, reject) => {
-      const followRedirect = (resp: http.IncomingMessage) => {
-        if (
-          resp.statusCode
-          && [301, 302, 307, 308].indexOf(resp.statusCode) !== -1
-          && resp.headers.location
-        ) {
-          this.downloadFile(resp.headers.location);
-          return false;
-        }
-        return true;
-      };
       // @ts-ignore retryRequest does not have type definition for the function
       // that produces request.Request.
-      const req: request.Request = retryRequest({
-        uri: resource,
-        followRedirect,
-      });
-
+      const req: request.Request = retryRequest({ uri: resource });
       req
         .on('response', res => {
           if (res.statusCode >= 400) {
             return reject(new Error(`Resource ${resource} is not available for download.`));
           }
-          if ([301, 302, 307, 308].indexOf(res.statusCode) !== -1) {
-            return reject(new Error(`Resource ${resource} is redirected. No download.`));
+          if (res.request.href !== resource) {
+            targetPath = this.getTargetPath(res.request.href);
           }
+          if (targetPath === undefined) {
+            return Promise.reject(new Error(`target path for ${res.request.href} is undefined`));
+          }
+          debug(`Resource ${resource} redirect to ${res.request.href}.`);
           return req.pipe(fs.createWriteStream(targetPath))
             .on('finish', resolve)
             .on('error', err => reject(new Error(`error on streaming ${resource}. ${err}.`)));
