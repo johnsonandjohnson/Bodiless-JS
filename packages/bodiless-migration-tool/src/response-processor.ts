@@ -87,6 +87,7 @@ export default class ResponseProcessor {
         this.redirects[from] = {
           to: destination,
           code: response.status(),
+          regexp: false,
         };
       }
     }
