@@ -25,7 +25,7 @@ interface RedirectRule {
   [key:string]: {
     to: string,
     code: number,
-    prefix: boolean,
+    regexp: boolean,
   }
 }
 
@@ -87,7 +87,6 @@ export default class ResponseProcessor {
         this.redirects[from] = {
           to: destination,
           code: response.status(),
-          prefix: false,
         };
       }
     }
