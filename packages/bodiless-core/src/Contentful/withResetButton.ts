@@ -14,7 +14,7 @@
 
 import { flowRight } from 'lodash';
 import {
-  withPageContext as withMenuOptions,
+  withMenuOptions,
   withContextActivator,
   withLocalContextMenu,
 } from '../hoc';

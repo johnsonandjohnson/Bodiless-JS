@@ -16,7 +16,7 @@ import React, { ComponentType } from 'react';
 import { ResizeCallback } from 're-resizable';
 import { SortableElementProps } from 'react-sortable-hoc';
 import {
-  ContextProvider,
+  PageContextProvider,
   TMenuOptionGetter,
   useContextActivator,
   useEditContext,
@@ -81,7 +81,7 @@ const SlateSortableResizable = (props: Props) => {
   } = props;
 
   return (
-    <ContextProvider
+    <PageContextProvider
       name={`flexItem-${uuid}`}
       id={`flexItem-${uuid}`}
       getMenuOptions={getMenuOptions}
@@ -89,7 +89,7 @@ const SlateSortableResizable = (props: Props) => {
       <SortableResizable uuid={uuid} {...rest}>
         {children}
       </SortableResizable>
-    </ContextProvider>
+    </PageContextProvider>
   );
 };
 

@@ -78,7 +78,7 @@ type Options<P> = {
   id?: string;
 };
 
-export const withPageContext = <P extends object>({
+export const withMenuOptions = <P extends object>({
   useGetMenuOptions,
   name,
   id,
