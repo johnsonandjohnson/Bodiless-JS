@@ -99,15 +99,6 @@ export default class Downloader {
   }
 
   private downloadFile(resource: string) {
-    const targetPath = this.getTargetPath(resource);
-    if (targetPath === undefined) {
-      return Promise.reject(new Error(`target path for ${resource} is undefined`));
-    }
-    if (this.excludePaths && (this.excludePaths.indexOf(targetPath.replace(`${this.downloadPath}/`, '')) >= 0)) {
-      return Promise.reject(new Error(`Resource ${resource} has been excluded from download.`));
-    }
-
-    ensureDirectoryExistence(targetPath);
     return new Promise((resolve, reject) => {
       // @ts-ignore retryRequest does not have type definition for the function
       // that produces request.Request.
@@ -117,16 +108,20 @@ export default class Downloader {
           if (res.statusCode >= 400) {
             return reject(new Error(`Resource ${resource} is not available for download.`));
           }
+          let target = resource;
           if (res.request.href !== resource) {
-            const redirectTargetPath = this.getTargetPath(res.request.href);
-            if (redirectTargetPath === undefined) {
-              return Promise.reject(new Error(`target path for ${res.request.href} is undefined`));
-            }
-            ensureDirectoryExistence(redirectTargetPath);
-            return req.pipe(fs.createWriteStream(redirectTargetPath))
-              .on('finish', resolve)
-              .on('error', err => reject(new Error(`error on streaming ${resource}. ${err}.`)));
+            target = res.request.href;
           }
+
+          const targetPath = this.getTargetPath(target);
+          if (targetPath === undefined) {
+            return Promise.reject(new Error(`target path for ${target} is undefined`));
+          }
+          if (this.excludePaths && (this.excludePaths.indexOf(targetPath.replace(`${this.downloadPath}/`, '')) >= 0)) {
+            return Promise.reject(new Error(`Resource ${target} has been excluded from download.`));
+          }
+          ensureDirectoryExistence(targetPath);
+
           return req.pipe(fs.createWriteStream(targetPath))
             .on('finish', resolve)
             .on('error', err => reject(new Error(`error on streaming ${resource}. ${err}.`)));
