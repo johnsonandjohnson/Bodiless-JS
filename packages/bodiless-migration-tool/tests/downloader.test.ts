@@ -11,9 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-jest.mock('../src/debug');
-/* eslint-disable import/first */
-import debug from '../src/debug';
 import Downloader from '../src/downloader';
 /* eslint-enable import/first */
 
