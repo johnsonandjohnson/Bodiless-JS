@@ -41,18 +41,4 @@ describe('assets download', () => {
     expect(downloadFileMock.mock.calls[3][0]).toBe('https://localhost/test1.js');
     expect(downloadFileMock.mock.calls[4][0]).toBe('https://localhost/test2.js');
   });
-
-  it('sends warning message on non-existing assests', async () => {
-    const pageUrl = 'https://localhost';
-    const downloadPath = 'static';
-    const excludePaths = ['404'];
-    const downloader = new Downloader(pageUrl, downloadPath, excludePaths);
-    const assets = [
-      'https://localhost/404',
-    ];
-    await downloader.downloadFiles(assets);
-    expect(debug).toHaveBeenCalledTimes(1);
-    // eslint-disable-next-line max-len
-    // expect(debug).toHaveBeenCalledWith(`Resource ${pageUrl}/${excludePaths[0]} has been excluded from download.`);
-  });
 });
