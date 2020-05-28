@@ -18,7 +18,7 @@ import Cookies from 'universal-cookie';
 import {
   contextMenuForm,
   getUI,
-  ContextProvider,
+  PageContextProvider,
   TMenuOption,
   useEditContext,
 } from '@bodiless/core';
@@ -216,12 +216,12 @@ const GitProvider: FC<Props> = ({ children, client }) => {
   const context = useEditContext();
 
   return (
-    <ContextProvider
+    <PageContextProvider
       getMenuOptions={() => getMenuOptions(client, context)}
       name="Git"
     >
       {children}
-    </ContextProvider>
+    </PageContextProvider>
   );
 };
 
