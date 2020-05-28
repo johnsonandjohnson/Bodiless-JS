@@ -13,6 +13,7 @@
  */
 
 import fs from 'fs';
+import path from 'path';
 import { Response } from '@bodiless/headless-chrome-crawler/lib/puppeteer';
 import debug from './debug';
 import {
@@ -72,14 +73,23 @@ export default class ResponseProcessor {
       && !isUrlExternal(this.websiteUrl, response.url())
     ) {
       const headers = response.headers();
-      const from = ResponseProcessor.getRedirectPath(response.url()).replace(
+      let from = ResponseProcessor.getRedirectPath(response.url()).replace(
         /\/$/g,
         '',
       );
       const destUrl = headers.location;
-      const destination = isUrlExternal(this.websiteUrl, destUrl)
-        ? headers.location
-        : ResponseProcessor.getRedirectPath(headers.location);
+
+      let destination = '';
+      let regexp = false;
+      if (isUrlExternal(this.websiteUrl, destUrl)) {
+        destination = headers.location;
+      } else {
+        destination = ResponseProcessor.getRedirectPath(headers.location);
+        if (!!path.extname(destination) && !path.extname(from)) {
+          regexp = true;
+          from = `${from}/?`;
+        }
+      }
 
       // Avoid trailing slash redirect that could cause loop.
       if (from !== destination.replace(/\/$/g, '')) {
@@ -87,7 +97,7 @@ export default class ResponseProcessor {
         this.redirects[from] = {
           to: destination,
           code: response.status(),
-          regexp: false,
+          regexp,
         };
       }
     }

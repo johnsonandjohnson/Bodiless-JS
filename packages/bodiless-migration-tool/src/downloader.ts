@@ -99,7 +99,7 @@ export default class Downloader {
   }
 
   private downloadFile(resource: string) {
-    let targetPath = this.getTargetPath(resource);
+    const targetPath = this.getTargetPath(resource);
     if (targetPath === undefined) {
       return Promise.reject(new Error(`target path for ${resource} is undefined`));
     }
@@ -118,13 +118,15 @@ export default class Downloader {
             return reject(new Error(`Resource ${resource} is not available for download.`));
           }
           if (res.request.href !== resource) {
-            targetPath = this.getTargetPath(res.request.href);
+            const redirectTargetPath = this.getTargetPath(res.request.href);
+            if (redirectTargetPath === undefined) {
+              return Promise.reject(new Error(`target path for ${res.request.href} is undefined`));
+            }
+            ensureDirectoryExistence(redirectTargetPath);
+            return req.pipe(fs.createWriteStream(redirectTargetPath))
+              .on('finish', resolve)
+              .on('error', err => reject(new Error(`error on streaming ${resource}. ${err}.`)));
           }
-          if (targetPath === undefined) {
-            return Promise.reject(new Error(`target path for ${res.request.href} is undefined`));
-          }
-          debug(`Resource ${resource} redirect to ${res.request.href}.`);
-          ensureDirectoryExistence(targetPath);
           return req.pipe(fs.createWriteStream(targetPath))
             .on('finish', resolve)
             .on('error', err => reject(new Error(`error on streaming ${resource}. ${err}.`)));
