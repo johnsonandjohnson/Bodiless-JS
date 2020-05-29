@@ -142,4 +142,12 @@ export default class BackendClient {
   getChanges() {
     return this.get(`${this.prefix}/changes`);
   }
+
+  getConflicts() {
+    return this.get(`${this.prefix}/changes/conflicts`);
+  }
+
+  mergeMaster() {
+    return this.get(`${this.prefix}/merge/master`);
+  }
 }

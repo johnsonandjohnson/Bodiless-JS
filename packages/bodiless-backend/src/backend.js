@@ -23,7 +23,7 @@ const tmp = require('tmp');
 const path = require('path');
 const Page = require('./page');
 const GitCmd = require('./GitCmd');
-const { getChanges, getConflicts } = require('./git');
+const { getChanges, getConflicts, mergeMaster } = require('./git');
 const Logger = require('./logger');
 
 const backendPrefix = process.env.GATSBY_BACKEND_PREFIX || '/___backend';
@@ -272,6 +272,7 @@ class Backend {
     this.setRoute(`${backendPrefix}/change/push`, Backend.setChangePush);
     this.setRoute(`${backendPrefix}/change/reset`, Backend.setChangeReset);
     this.setRoute(`${backendPrefix}/change/pull`, Backend.setChangePull);
+    this.setRoute(`${backendPrefix}/merge/master`, Backend.mergeMaster);
     this.setRoute(`${backendPrefix}/asset`, Backend.setAsset);
     this.setRoute(`${backendPrefix}/set/current`, Backend.setSetCurrent);
     this.setRoute(`${backendPrefix}/set/list`, Backend.setSetList);
@@ -381,6 +382,19 @@ class Backend {
         .then(data => res.send(data.stdout))
         // Need to inform user of merge operation fails.
         .catch(error => Backend.exitWithErrorResponse(error, res));
+    });
+  }
+
+  static mergeMaster(route) {
+    route.get(async (req, res) => {
+      try {
+        const status = await mergeMaster();
+        res.send(status);
+      } catch (error) {
+        logger.log(error);
+        error.code = 500;
+        Backend.exitWithErrorResponse(error, res);
+      }
     });
   }
 

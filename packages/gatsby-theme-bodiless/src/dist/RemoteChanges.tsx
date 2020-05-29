@@ -17,18 +17,26 @@ import { useEditContext } from '@bodiless/core';
 import { ComponentFormSpinner } from '@bodiless/ui';
 import { isEmpty } from 'lodash';
 import { useFormApi } from 'informed';
+// import { GitClient } from './types';
 
-type ResponseData = {
-  upstream: {
-    branch: string;
-    commits: [string];
-    files: [string];
-  };
+type GitBranchType = {
+  branch: string | null,
+  commits: string[],
+  files: string[];
 };
 
-type Props = {
-  client: any;
-  formApi?: any;
+type ResponseData = {
+  upstream: GitBranchType;
+  production: GitBranchType,
+  local: GitBranchType,
+};
+
+type PropsWithGitClient = {
+  client: any; // GitClient | Test is failing with GitClient type
+};
+
+type PropsWithFormApi = {
+  formApi: any;
 };
 
 /**
@@ -38,7 +46,7 @@ type Props = {
  * @param {BackendClient} client
  * @constructor
  */
-const RemoteChanges = ({ client }: Props) => {
+const RemoteChanges = ({ client }: PropsWithGitClient) => {
   const formApi = useFormApi();
   // @Todo revise the use of formState, possibly use informed multistep.
   if (formApi.getState().submits === 0) {
@@ -50,20 +58,28 @@ const RemoteChanges = ({ client }: Props) => {
 enum ChangeState {
   Pending,
   CanBePulled,
-  CannotBePulled,
+  CanNotBePulled,
   NoneAvailable,
   Errored
 }
 
-const handleChangesResponse = ({ upstream }: ResponseData) => {
-  const { commits, files } = upstream;
+const handleBranchResponse = (branch: GitBranchType) => {
+  const { commits, files } = branch;
+
   if (isEmpty(commits)) {
     return ChangeState.NoneAvailable;
   }
   if (files.some(file => file.includes('package-lock.json'))) {
-    return ChangeState.CannotBePulled;
+    return ChangeState.CanNotBePulled;
   }
   return ChangeState.CanBePulled;
+};
+
+const handleChangesResponse = ({ upstream, production }: ResponseData) => {
+  const upstreamStatus = handleBranchResponse(upstream);
+  const productionStatus = handleBranchResponse(production);
+
+  return { upstreamStatus, productionStatus };
 };
 
 type ContentProps = {
@@ -79,7 +95,7 @@ const ChangeContent = ({ status, errorMessage } : ContentProps) => {
       return (
         <>There are changes ready to be pulled. Click check (✓) to initiate.</>
       );
-    case ChangeState.CannotBePulled:
+    case ChangeState.CanNotBePulled:
       return (
         <>Upstream changes are available but cannot be fetched via the UI.</>
       );
@@ -102,7 +118,7 @@ const ChangeContent = ({ status, errorMessage } : ContentProps) => {
  * @param formApi
  * @constructor
  */
-const FetchChanges = ({ client, formApi }: Props) => {
+const FetchChanges = ({ client, formApi }: PropsWithFormApi & PropsWithGitClient) => {
   const [state, setState] = useState<ContentProps>({
     status: ChangeState.Pending,
   });
@@ -113,15 +129,31 @@ const FetchChanges = ({ client, formApi }: Props) => {
         context.showPageOverlay({
           hasSpinner: false,
         });
+
         const response = await client.getChanges();
         if (response.status !== 200) {
           throw new Error(`Error pulling changes, status=${response.status}`);
         }
-        const status = handleChangesResponse(response.data);
-        if (status === ChangeState.CanBePulled) {
+
+        const { upstreamStatus, productionStatus } = handleChangesResponse(response.data);
+
+        if (upstreamStatus === ChangeState.CanBePulled) {
           formApi.setValue('keepOpen', true);
+
+          if (productionStatus === ChangeState.CanBePulled) {
+            const conflictsResponse = await client.getConflicts();
+
+            if (conflictsResponse.status !== 200) {
+              throw new Error(`Error checking conflicts with the master branch, status=${response.status}`);
+            }
+
+            if (!conflictsResponse.data.hasConflict) {
+              formApi.setValue('mergeMaster', true);
+            }
+          }
         }
-        setState({ status });
+
+        setState({ status: upstreamStatus });
       } catch (error) {
         setState({ status: ChangeState.Errored, errorMessage: error.message });
       } finally {
@@ -146,7 +178,7 @@ type PullStatus = {
  * @param formApi
  * @constructor
  */
-const PullChanges = ({ client, formApi }: Props) => {
+const PullChanges = ({ client, formApi }: PropsWithFormApi & PropsWithGitClient) => {
   const [pullStatus, setPullStatus] = useState<PullStatus>({
     complete: false,
     error: '',
@@ -158,6 +190,15 @@ const PullChanges = ({ client, formApi }: Props) => {
         context.showPageOverlay({
           hasSpinner: false,
         });
+
+        if (formApi.getValue('mergeMaster')) {
+          const mergeResponse = await client.mergeMaster();
+          if (mergeResponse.status !== 200) {
+            throw new Error(`Error merging production changes to upstream, status=${mergeResponse.status}`);
+          }
+          formApi.setValue('mergeMaster', false);
+        }
+
         const response = await client.pull();
         if (response.status !== 200) {
           throw new Error(`Error pulling changes, status=${response.status}`);

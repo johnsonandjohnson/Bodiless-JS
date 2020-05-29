@@ -35,7 +35,7 @@ describe('getConflicts', () => {
       .exec();
     const result = await getConflicts();
     expect(result.hasConflict).toBeFalsy();
-    expect(result.files).toBe(undefined);
+    expect(result.files).toEqual([]);
   });
 });
 
