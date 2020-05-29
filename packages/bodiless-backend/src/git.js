@@ -218,7 +218,7 @@ const getConflicts = async () => {
  * @return {object} Results.
  */
 const mergeMaster = async () => {
-  const logger = new Logger('--TEST--');
+  const logger = new Logger('BACKEND');
   const directory = path.resolve(process.env.BODILESS_BACKEND_TMP || os.tmpdir(), v1());
   const branch = await getCurrentBranch();
   const upstreamBranch = await getUpstreamTrackingBranch(branch);

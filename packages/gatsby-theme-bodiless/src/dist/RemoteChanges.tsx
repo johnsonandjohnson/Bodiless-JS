@@ -17,7 +17,6 @@ import { useEditContext } from '@bodiless/core';
 import { ComponentFormSpinner } from '@bodiless/ui';
 import { isEmpty } from 'lodash';
 import { useFormApi } from 'informed';
-// import { GitClient } from './types';
 
 type GitBranchType = {
   branch: string | null,
@@ -32,7 +31,7 @@ type ResponseData = {
 };
 
 type PropsWithGitClient = {
-  client: any; // GitClient | Test is failing with GitClient type
+  client: any;
 };
 
 type PropsWithFormApi = {
