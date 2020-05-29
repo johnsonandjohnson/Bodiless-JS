@@ -13,3 +13,36 @@ You can start backend server by running `node ./path/to/server.js`. Backend serv
 * `BODILESS_BACKEND_EXTENDED_LOGGING_ENABLED` - Whether or not extended logging is enabled. Defaults to `0`. Please note that this feature requires `morgan` and `morgan-body` packages. If you plan to use this feature outside of monorepo, please ensure those dependencies are installed.
 
 Please note that `BODILESS_BACKEND_DATA_FILE_PATH`, `BODILESS_BACKEND_STATIC_PATH` and `BODILESS_BACKEND_COMMIT_ENABLED` are defined in `@bodiless/gatsby-theme-bodiless` by default.
+
+## Web API
+
+Backend package provides a set of web API endpoints to allow developers working on git workflow. As a private API, not all routes are currently documented.
+
+- ```changes```
+ 
+  Get changes between branchs.
+ 
+  **Request**
+  - *Method:* GET
+  - *Parameters:*
+    - N/A
+  
+  Example:
+    ```
+    curl --request GET --url http://localhost:8006/___backend/changes
+    ```
+
+- ```changes/conflicts```
+
+  Find conflicts between origin master and upstream branch.
+
+  **Request**
+  - *Method:* GET
+  - *Parameters:*
+    - N/A
+
+
+  Example:
+    ```
+    curl --request GET --url http://localhost:8006/___backend/changes/conflicts
+    ```

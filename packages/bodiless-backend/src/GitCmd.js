@@ -24,10 +24,16 @@ class GitCmd {
     this.cmd = 'git';
     this.params = [];
     this.files = [];
+    this.options = {};
   }
 
   add(...params) {
     this.params.push(...params);
+    return this;
+  }
+
+  set(options) {
+    this.options = { ...this.options, ...options };
     return this;
   }
 
@@ -40,8 +46,8 @@ class GitCmd {
 
   spawn() {
     const args = [...this.params, ...this.files];
-    logger.log([`Spawning command: ${this.cmd}`, ...args]);
-    return spawn(this.cmd, args);
+    logger.log([`Spawning command: ${this.cmd}`, ...args, Date.now(), process.cwd()]);
+    return spawn(this.cmd, args, this.options);
   }
 
   exec() {
