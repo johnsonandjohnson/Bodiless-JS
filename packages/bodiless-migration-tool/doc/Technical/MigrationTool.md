@@ -169,6 +169,40 @@ Options:
 
   - **Recommendation:**: "true"
 
+- `export`
+
+  - **Description**: Setup the parameters for exporting site information.
+
+    - `redirects`
+
+      - **Description**: Migration site path redirect configure.
+
+        - `path`
+
+          - **Description**: File path for redirect rule export.
+
+          - **Accepted Formats:**: string
+
+        - `format`
+
+          - **Description**: Format of redirect rule, currently supports 'yaml' format only.
+
+          - **Accepted Formats:**: string
+
+        - **Examples:**
+        ```json
+          {
+            ...
+
+            "exports": {
+              "redirects": {
+                "path": "/path/to/myexport.yaml",
+                "format": "yaml"
+              }
+            }
+          }
+        ```
+
   
 
 - `transformers`

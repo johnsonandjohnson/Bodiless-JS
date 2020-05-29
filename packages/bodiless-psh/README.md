@@ -596,6 +596,26 @@ In order to avoid redirect chains, pay attention on destination path protocol an
 The trailing slash should be appended to the configure item if platform environment adds trailing slash to url by default.
 see [Platform.sh Documentation Redirects](https://docs.platform.sh/configuration/routes/redirects.html)
 
+### Generate redirect rules for migration sites
+
+BodilessJS [Site Migration Tool](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/bodiless-migration-tool) package comes with a feature that allows user to export site redirection into file. See [Tools/Migration](/#/Tools/Migration?id=configuration) for configuration.
+
+User can apply these exported redirect rules to routers.yaml before deploying to platform.sh.
+
+```yaml
+"https://{default}/":
+    type: upstream
+    upstream: "static:http"
+    redirects:
+      paths:
+        /image/redirect.png:
+          to: /image/placeholder.png
+          code: 301
+        /page2:
+          to: /page3
+          code: 301
+```
+
 ## Using Fastly CDN
 
 Platform.sh integrates with Fastly via EZ platform for Fastly.  
