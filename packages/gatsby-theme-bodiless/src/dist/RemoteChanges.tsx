@@ -158,12 +158,16 @@ const FetchChanges = ({ client, formApi }: PropsWithFormApi & PropsWithGitClient
             if (conflictsResponse.data.hasConflict) {
               setState({ status: upstreamStatus, masterStatus: ChangeState.CanNotBePulled });
             } else {
+              setState({ status: upstreamStatus, masterStatus: ChangeState.CanBePulled });
               formApi.setValue('mergeMaster', true);
             }
           }
         }
 
-        setState({ status: upstreamStatus, masterStatus: productionStatus });
+        setState((currentState) => ({
+          status: upstreamStatus,
+          masterStatus: currentState.masterStatus,
+        }));
       } catch (error) {
         setState({
           status: ChangeState.Errored,
