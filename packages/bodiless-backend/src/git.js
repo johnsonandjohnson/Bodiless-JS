@@ -227,52 +227,34 @@ const mergeMaster = async () => {
     throw new Error(`No upstream branch found for current branch ${branch}. Please contact your server administrator`);
   }
 
+  const remote = getGitCmdOutput(await GitCmd.cmd().add('remote', 'get-url', 'origin').exec());
   const rootCmd = GitCmd.cmd().add('rev-parse', '--show-toplevel');
   const root = getGitCmdOutput(await rootCmd.exec());
-  logger.log([`Repo root: ${root}`]);
 
-  const mergeUpstreamBranch = `origin-${upstreamBranch.replace('origin/', '')}`;
-  const mergeMasterBranch = 'origin-master';
-  await GitCmd.cmd().add(
-    'fetch',
-    'origin',
-    `${upstreamBranch.replace('origin/', '')}:${mergeUpstreamBranch}`,
-  ).exec();
-
-  await GitCmd.cmd().add(
-    'fetch',
-    'origin',
-    `master:${mergeMasterBranch}`,
-  ).exec();
-
-  await clone(root, { directory, branch: mergeUpstreamBranch });
+  await clone(root, { directory, branch: upstreamBranch.replace('origin/', '') });
   process.chdir(directory);
 
   try {
     await GitCmd.cmd()
-      .add('merge', 'origin/origin-master')
+      .add('remote', 'set-url', 'origin', remote)
       .exec();
 
     await GitCmd.cmd()
-      .add('push', '--set-upstream', 'origin', `${upstreamBranch.replace('origin/', '')}:${mergeUpstreamBranch}`)
+      .add('pull')
+      .exec();
+
+    await GitCmd.cmd()
+      .add('merge', 'origin/master')
+      .exec();
+
+    await GitCmd.cmd()
+      .add('push')
       .exec();
   } catch (e) {
     logger.error(e);
-    await GitCmd.cmd()
-      .add('merge', '--abort')
-      .exec();
   }
 
   process.chdir(root);
-  await GitCmd.cmd()
-    .add(
-      'branch',
-      '--delete',
-      '--force',
-      `${mergeMasterBranch}`,
-      `${mergeUpstreamBranch}`,
-    )
-    .exec();
   rimraf.sync(directory);
   logger.log(`${directory} removed.`);
 
