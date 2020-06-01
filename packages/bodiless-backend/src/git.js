@@ -254,9 +254,10 @@ const mergeMaster = async () => {
       .exec();
 
     await GitCmd.cmd()
-      .add('push', 'origin', `${upstreamBranch.replace('origin/', '')}:${mergeUpstreamBranch}`)
+      .add('push', '--set-upstream', 'origin', `${upstreamBranch.replace('origin/', '')}:${mergeUpstreamBranch}`)
       .exec();
   } catch (e) {
+    logger.error(e);
     await GitCmd.cmd()
       .add('merge', '--abort')
       .exec();
