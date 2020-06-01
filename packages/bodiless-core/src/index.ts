@@ -56,6 +56,7 @@ import {
   useNotify,
 } from './NotificationProvider';
 import NotificationButtonProvider from './NotificationButtonProvider';
+import SwitcherButtonProvider from './SwitcherButtonProvider';
 import withChild from './withChild';
 
 export * from './components';
@@ -102,6 +103,7 @@ export {
   useNotifyFromNode,
   useNotifications,
   useNotify,
+  SwitcherButtonProvider,
 };
 
 export type {
