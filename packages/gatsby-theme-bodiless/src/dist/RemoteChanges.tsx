@@ -83,16 +83,24 @@ const handleChangesResponse = ({ upstream, production }: ResponseData) => {
 
 type ContentProps = {
   status: ChangeState;
+  masterStatus: ChangeState;
   errorMessage?: string;
 };
 
-const ChangeContent = ({ status, errorMessage } : ContentProps) => {
+const ChangeContent = ({ status, masterStatus, errorMessage } : ContentProps) => {
   switch (status) {
     case ChangeState.NoneAvailable:
       return <>There are no changes to download.</>;
     case ChangeState.CanBePulled:
       return (
-        <>There are changes ready to be pulled. Click check (✓) to initiate.</>
+        <>
+          There are changes ready to be pulled. Click check (✓) to initiate.
+          {
+            masterStatus === ChangeState.CanNotBePulled
+              ? '\nThere are changes on production which cannot be merged from the UI.'
+              : ''
+          }
+        </>
       );
     case ChangeState.CanNotBePulled:
       return (
@@ -120,6 +128,7 @@ const ChangeContent = ({ status, errorMessage } : ContentProps) => {
 const FetchChanges = ({ client, formApi }: PropsWithFormApi & PropsWithGitClient) => {
   const [state, setState] = useState<ContentProps>({
     status: ChangeState.Pending,
+    masterStatus: ChangeState.Pending,
   });
   const context = useEditContext();
   useEffect(() => {
@@ -146,22 +155,28 @@ const FetchChanges = ({ client, formApi }: PropsWithFormApi & PropsWithGitClient
               throw new Error(`Error checking conflicts with the master branch, status=${response.status}`);
             }
 
-            if (!conflictsResponse.data.hasConflict) {
+            if (conflictsResponse.data.hasConflict) {
+              setState({ status: upstreamStatus, masterStatus: ChangeState.CanNotBePulled });
+            } else {
               formApi.setValue('mergeMaster', true);
             }
           }
         }
 
-        setState({ status: upstreamStatus });
+        setState({ status: upstreamStatus, masterStatus: productionStatus });
       } catch (error) {
-        setState({ status: ChangeState.Errored, errorMessage: error.message });
+        setState({
+          status: ChangeState.Errored,
+          masterStatus: ChangeState.Errored,
+          errorMessage: error.message,
+        });
       } finally {
         context.hidePageOverlay();
       }
     })();
   }, []);
-  const { status, errorMessage } = state;
-  return <ChangeContent status={status} errorMessage={errorMessage} />;
+  const { status, masterStatus, errorMessage } = state;
+  return <ChangeContent status={status} masterStatus={masterStatus} errorMessage={errorMessage} />;
 };
 
 type PullStatus = {

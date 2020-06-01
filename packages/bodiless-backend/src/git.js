@@ -214,8 +214,6 @@ const getConflicts = async () => {
 
 /**
  * Merge latest origin master to upstream branch.
- *
- * @return {object} Results.
  */
 const mergeMaster = async () => {
   const logger = new Logger('BACKEND');
