@@ -36,18 +36,24 @@ type Props = {
   id?: string;
   name?: string;
   active?: boolean;
+  tooltipsDisabled?: boolean;
 };
 
 const fooText = Math.random().toString();
 const Foo: React.FC<any> = props => <span {...props}>{fooText}</span>;
 
 const MockContextProvider: FC<Props> = ({
-  active, children, getMenuOptions, id, name,
+  active, children, getMenuOptions, id, name, tooltipsDisabled,
 }) => {
   class MockPageEditContext extends PageEditContext {
     // Overides PageEditContext.isInnermost to test LocalContextMenu Tooltip behavior.
     get isInnermost() {
       return Boolean(active);
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    get areLocalTooltipsDisabled() {
+      return Boolean(tooltipsDisabled);
     }
   }
 
@@ -180,5 +186,15 @@ describe('LocalContextMenu', () => {
     );
 
     expect(wrapper.find('Tooltip').get(0).props.visible).toBe(true);
+  });
+
+  it('renders invisible Tooltip when local tooltips are disabled via edit context.', () => {
+    const wrapper = mount(
+      <MockContextProvider active getMenuOptions={options} id="t8" name="toolbarActive" tooltipsDisabled>
+        <LocalContextMenu><Foo /></LocalContextMenu>
+      </MockContextProvider>,
+    );
+
+    expect(wrapper.find('Tooltip').get(0).props.visible).toBe(false);
   });
 });
