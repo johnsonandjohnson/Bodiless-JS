@@ -55,19 +55,19 @@ const Page: FC<Props> = observer(({ children, ui, ...rest }) => {
       <GatsbyNodeProvider {...rest}>
         <GatsbyPageProvider pageContext={rest.pageContext}>
           <NotificationProvider>
-            <Editor>
-              <NewPageProvider>
-                <GitProvider>
-                  <NotificationButtonProvider>
+            <NotificationButtonProvider>
+              <Editor>
+                <NewPageProvider>
+                  <GitProvider>
                     <Wrapper clickable>
                       <DefaultActiveMenuOptions>
                         {children}
                       </DefaultActiveMenuOptions>
                     </Wrapper>
-                  </NotificationButtonProvider>
-                </GitProvider>
-              </NewPageProvider>
-            </Editor>
+                  </GitProvider>
+                </NewPageProvider>
+              </Editor>
+            </NotificationButtonProvider>
           </NotificationProvider>
         </GatsbyPageProvider>
       </GatsbyNodeProvider>

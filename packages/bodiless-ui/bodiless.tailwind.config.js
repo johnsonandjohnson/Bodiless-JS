@@ -625,9 +625,9 @@ module.exports = {
   |
   */
 
-  // variants: {
-
-  // },
+  variants: {
+    borderWidth: ['first', 'responsive'],
+  },
 
   // corePlugins: {},
 

@@ -19,7 +19,7 @@ import {
   withNodeKey,
   useNotifyFromNode,
   useNotifications,
-  useNotifyContextValue,
+  useNotify,
 } from '@bodiless/core';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { flowRight } from 'lodash';
@@ -36,13 +36,15 @@ const asBodiless = flowRight(
 
 const AComponentWhoObservesNotify = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { notify } = useNotifyContextValue();
+  useNotify([]);
   const renderCounter = React.useRef(0);
   renderCounter.current += 1;
   return (
     <div>
       Render Count:
-      {renderCounter.current}
+      <span id="render-count">
+        {renderCounter.current}
+      </span>
     </div>
   );
 };
@@ -50,7 +52,9 @@ const AComponentWhoObservesNotify = () => {
 const NotificationViewer = () => {
   const { notifications } = useNotifications();
   return (
-    <pre>{JSON.stringify(notifications, undefined, 2)}</pre>
+    <div id="notifications">
+      <pre>{JSON.stringify(notifications, undefined, 2)}</pre>
+    </div>
   );
 };
 
@@ -67,9 +71,8 @@ const ChildWithNotifications = asBodiless(() => {
   return (
     <div className="border p-2">
       <h2 className="text-lg">I Have Notifications</h2>
-      {/* <pre>{JSON.stringify(myNotifications, undefined, 2)}</pre> */}
-      <button type="button" className="border p-2 m-2" onClick={addRandomNotification}>Add a notification</button>
-      <button type="button" className="vborder p-2 m-2" onClick={() => setNotifications([])}>Clear All</button>
+      <button type="button" className="border p-2 m-2" id="add-notification" onClick={addRandomNotification}>Add a notification</button>
+      <button type="button" className="vborder p-2 m-2" id="clear-notifications" onClick={() => setNotifications([])}>Clear All</button>
 
     </div>
   );

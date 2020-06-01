@@ -19,20 +19,17 @@ import { useNotifications } from './NotificationProvider';
 import { getUI } from './components';
 
 const NotificationList = ({ ui } : any) => {
-  const { ComponentFormNotification } = getUI(ui);
+  const { ComponentFormList, ComponentFormListItem } = getUI(ui);
   const { notifications } = useNotifications();
   if (notifications.length === 0) return (<p>There are no alerts.</p>);
   return (
-    <>
+    <ComponentFormList>
       {notifications.map(n => (
-        <>
-          <ComponentFormNotification key={n.id}>
-            {n.message}
-          </ComponentFormNotification>
-          <hr />
-        </>
+        <ComponentFormListItem key={n.id}>
+          {n.message}
+        </ComponentFormListItem>
       ))}
-    </>
+    </ComponentFormList>
   );
 };
 

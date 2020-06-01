@@ -51,8 +51,6 @@ const NotifyContext = React.createContext<NotifyContextType>({
   notify: () => undefined,
 });
 
-const useNotifyContextValue = () => useContext(NotifyContext);
-
 /**
  * A component used to provide notifications.
  *
@@ -123,5 +121,4 @@ export {
   useNotify,
   useNotifyFromNode,
   useNotifications,
-  useNotifyContextValue,
 };

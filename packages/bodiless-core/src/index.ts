@@ -54,7 +54,6 @@ import {
   useNotifyFromNode,
   useNotifications,
   useNotify,
-  useNotifyContextValue,
 } from './NotificationProvider';
 import NotificationButtonProvider from './NotificationButtonProvider';
 import withChild from './withChild';
@@ -103,7 +102,6 @@ export {
   useNotifyFromNode,
   useNotifications,
   useNotify,
-  useNotifyContextValue,
 };
 
 export type {

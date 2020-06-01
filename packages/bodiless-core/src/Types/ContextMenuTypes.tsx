@@ -50,8 +50,9 @@ export type UI = {
   Form?: ComponentType<HTMLProps<HTMLFormElement>> | string;
   Tooltip?: FC<Tooltip['props']>;
   ReactTags?: ComponentType<ReactTagsFieldProps>;
+  ComponentFormList?: ComponentType<HTMLProps<HTMLUListElement>> | string;
+  ComponentFormListItem?: ComponentType<HTMLProps<HTMLLIElement>> | string;
   // @TODO: Add other controls from informed.
-  ComponentFormNotification?: ComponentType<HTMLProps<HTMLDivElement>> | string;
 };
 
 export type IContextMenuProps = {
