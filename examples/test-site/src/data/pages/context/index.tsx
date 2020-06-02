@@ -24,7 +24,7 @@ import {
 import { Div } from '@bodiless/ui';
 import {
   TMenuOptionGetter,
-  ContextProvider,
+  PageContextProvider,
   withNode,
   useNodeDataHandlers,
   useEditContext,
@@ -108,14 +108,14 @@ const EditableBox: React.FC<BoxProps> = ({
   children,
   className,
 }) => (
-  <ContextProvider
+  <PageContextProvider
     getMenuOptions={getMenuOptions || emptyMenuOptionsGetter}
     name={name}
   >
     <LocalContextMenu>
       <StaticBox className={className}>{children}</StaticBox>
     </LocalContextMenu>
-  </ContextProvider>
+  </PageContextProvider>
 );
 const Box: React.FC<BoxProps> = observer(props => {
   const { isEdit } = useEditContext();

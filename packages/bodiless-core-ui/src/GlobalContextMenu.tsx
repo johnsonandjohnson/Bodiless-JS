@@ -19,7 +19,7 @@ import {
   addClasses, removeClasses, addProps,
 } from '@bodiless/fclasses';
 import {
-  ContextMenu, ContextMenuUI, ContextMenuProps,
+  ContextMenu, ContextMenuUI, ContextMenuProps, useEditContext,
 } from '@bodiless/core';
 import {
   ComponentFormTitle, ComponentFormCloseButton, ComponentFormLabel, ComponentFormText,
@@ -45,25 +45,30 @@ export const ToolbarDivider = addClasses(
   'bl-bg-grey bl-w-auto bl-my-grid-3 bl-h-px',
 )(Hr);
 
-export const GlobalTooltip: FC<ReactTooltip['props']> = props => (
-  <ReactTooltip
-    {...props}
-    placement="rightTop"
-    overlayStyle={{ position: 'fixed', opacity: 1 }}
-    getTooltipContainer={() => {
-      let el = document.getElementById('global-tooltip-container');
+export const GlobalTooltip: FC<ReactTooltip['props']> = props => {
+  const context = useEditContext();
+  return (
+    <ReactTooltip
+      {...props}
+      placement="rightTop"
+      overlayStyle={{ position: 'fixed', opacity: 1 }}
+      // Hide all local tooltips outside the main toolbar.
+      onPopupAlign={() => { context.toggleLocalTooltipsDisabled(true); }}
+      getTooltipContainer={() => {
+        let el = document.getElementById('global-tooltip-container');
 
-      if (!el) {
-        el = document.createElement('div');
-        el.setAttribute('id', 'global-tooltip-container');
-        el.setAttribute('style', 'position:fixed;');
-        document.body.appendChild(el);
-      }
+        if (!el) {
+          el = document.createElement('div');
+          el.setAttribute('id', 'global-tooltip-container');
+          el.setAttribute('style', 'position:fixed;');
+          document.body.appendChild(el);
+        }
 
-      return el;
-    }}
-  />
-);
+        return el;
+      }}
+    />
+  );
+};
 
 const ui: ContextMenuUI = {
   ComponentFormTitle,

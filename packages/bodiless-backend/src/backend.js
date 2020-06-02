@@ -23,7 +23,7 @@ const tmp = require('tmp');
 const path = require('path');
 const Page = require('./page');
 const GitCmd = require('./GitCmd');
-const { getChanges } = require('./git');
+const { getChanges, getConflicts, mergeMaster } = require('./git');
 const Logger = require('./logger');
 
 const backendPrefix = process.env.GATSBY_BACKEND_PREFIX || '/___backend';
@@ -114,6 +114,10 @@ class GitCommit {
     const { remote } = this;
     await GitCmd.cmd()
       .add('fetch', remote)
+      .exec();
+
+    await GitCmd.cmd()
+      .add('pull', remote)
       .exec();
 
     // Check if there are any unstaged files left before rebasing.
@@ -265,12 +269,14 @@ class Backend {
       next();
     });
     this.setRoute(`${backendPrefix}/changes`, Backend.getChanges);
+    this.setRoute(`${backendPrefix}/changes/conflicts`, Backend.getConflicts);
     this.setRoute(`${backendPrefix}/get/commits`, Backend.getLatestCommits);
     this.setRoute(`${backendPrefix}/change/amend`, Backend.setChangeAmend);
     this.setRoute(`${backendPrefix}/change/commit`, Backend.setChangeCommit);
     this.setRoute(`${backendPrefix}/change/push`, Backend.setChangePush);
     this.setRoute(`${backendPrefix}/change/reset`, Backend.setChangeReset);
     this.setRoute(`${backendPrefix}/change/pull`, Backend.setChangePull);
+    this.setRoute(`${backendPrefix}/merge/master`, Backend.mergeMaster);
     this.setRoute(`${backendPrefix}/asset`, Backend.setAsset);
     this.setRoute(`${backendPrefix}/set/current`, Backend.setSetCurrent);
     this.setRoute(`${backendPrefix}/set/list`, Backend.setSetList);
@@ -313,6 +319,19 @@ class Backend {
     route.get(async (req, res) => {
       try {
         const status = await getChanges();
+        res.send(status);
+      } catch (error) {
+        logger.log(error);
+        error.code = 500;
+        Backend.exitWithErrorResponse(error, res);
+      }
+    });
+  }
+
+  static getConflicts(route) {
+    route.get(async (req, res) => {
+      try {
+        const status = await getConflicts();
         res.send(status);
       } catch (error) {
         logger.log(error);
@@ -367,6 +386,19 @@ class Backend {
         .then(data => res.send(data.stdout))
         // Need to inform user of merge operation fails.
         .catch(error => Backend.exitWithErrorResponse(error, res));
+    });
+  }
+
+  static mergeMaster(route) {
+    route.post(async (req, res) => {
+      try {
+        const status = await mergeMaster();
+        res.send(status);
+      } catch (error) {
+        logger.log(error);
+        error.code = 500;
+        Backend.exitWithErrorResponse(error, res);
+      }
     });
   }
 
