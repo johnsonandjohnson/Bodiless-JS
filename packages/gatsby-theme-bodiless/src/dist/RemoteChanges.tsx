@@ -93,9 +93,12 @@ const ChangeContent = ({ status, masterStatus, errorMessage } : ContentProps) =>
       return (
         <>
           {
+            // eslint-disable-next-line no-nested-ternary
             masterStatus === ChangeState.CanBePulled
               ? 'There are changes ready to be pulled. Click check (✓) to initiate.'
-              : 'There are no changes to download.'
+              : masterStatus === ChangeState.CanNotBePulled
+                ? 'There are changes on production which cannot be merged from the UI.'
+                : 'There are no changes to download.'
           }
         </>
       );
