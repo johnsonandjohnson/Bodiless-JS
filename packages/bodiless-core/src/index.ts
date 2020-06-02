@@ -51,7 +51,6 @@ import {
 } from './ActivateContext';
 import {
   NotificationProvider,
-  useNotifyFromNode,
   useNotifications,
   useNotify,
 } from './NotificationProvider';
@@ -100,7 +99,6 @@ export {
   useEditToggle,
   NotificationProvider,
   NotificationButtonProvider,
-  useNotifyFromNode,
   useNotifications,
   useNotify,
   SwitcherButtonProvider,

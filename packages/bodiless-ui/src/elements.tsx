@@ -57,7 +57,7 @@ export const ComponentFormListItem = addClasses(
 )(Li);
 
 export const ComponentFormList = addClasses(
-  'list-none bl-max-h-screen bl-overflow-scroll',
+  'list-none bl-max-h-xl-grid-1 bl-overflow-scroll',
 )(Ul);
 
 export const ComponentFormLabel = addClasses(

@@ -17,9 +17,9 @@ import { graphql } from 'gatsby';
 import {
   withNode,
   withNodeKey,
-  useNotifyFromNode,
   useNotifications,
   useNotify,
+  useNode,
 } from '@bodiless/core';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { flowRight } from 'lodash';
@@ -33,6 +33,15 @@ const asBodiless = flowRight(
   withNode,
   observer,
 );
+
+const useNotifyFromNode = () => {
+  const { node } = useNode<any>();
+  useNotify(node.data.notifications);
+  return {
+    notifications: node.data.notifications || [],
+    setNotifications: (notifications: Notification[]) => node.setData({ notifications }),
+  };
+};
 
 const AComponentWhoObservesNotify = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

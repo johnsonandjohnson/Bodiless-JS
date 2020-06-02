@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import contextMenuForm from './contextMenuForm';
 import PageContextProvider from './PageContextProvider';
 import { useNotifications } from './NotificationProvider';
@@ -51,13 +51,14 @@ const Form = contextMenuForm({})(({ ui }) => {
  */
 const NotificationButtonProvider: FC = ({ children }) => {
   const { notifications } = useNotifications();
-  const getMenuOptions = () => [{
+
+  const getMenuOptions = useCallback(() => [{
     name: 'Notifications',
     label: 'Alerts',
     icon: notifications.length > 0 ? 'notification_important' : 'notifications',
     isActive: () => notifications.length > 0,
     handler: () => Form,
-  }];
+  }], [notifications]);
   return (
     <PageContextProvider getMenuOptions={getMenuOptions}>
       {children}

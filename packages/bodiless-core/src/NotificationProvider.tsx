@@ -21,7 +21,6 @@ import React, {
   useMemo,
 } from 'react';
 import { v1 } from 'uuid';
-import { useNode } from './NodeProvider';
 
 type Notification = {
   id: string,
@@ -79,9 +78,7 @@ const NotificationProvider: FC = ({ children }) => {
   );
 };
 
-type Data = {
-  notifications: Notification[],
-};
+
 
 /**
  * The useNotify() hook allows you to register notifications which should be
@@ -106,19 +103,9 @@ const useNotify = (notifications: Notification[]) => {
   );
 };
 
-const useNotifyFromNode = () => {
-  const { node } = useNode<Data>();
-  useNotify(node.data.notifications);
-  return {
-    notifications: node.data.notifications || [],
-    setNotifications: (notifications: Notification[]) => node.setData({ notifications }),
-  };
-};
-
 export {
   NotificationProvider,
   NotificationProviderItem,
   useNotify,
-  useNotifyFromNode,
   useNotifications,
 };
