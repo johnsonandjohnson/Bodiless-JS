@@ -40,7 +40,7 @@ const AComponentWhoObservesNotify = () => {
   const renderCounter = React.useRef(0);
   renderCounter.current += 1;
   return (
-    <div>
+    <div id="count-wrapper">
       Render Count:
       <span id="render-count">
         {renderCounter.current}
