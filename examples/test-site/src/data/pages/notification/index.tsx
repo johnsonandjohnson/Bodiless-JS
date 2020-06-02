@@ -52,8 +52,8 @@ const AComponentWhoObservesNotify = () => {
 const NotificationViewer = () => {
   const { notifications } = useNotifications();
   return (
-    <div id="notifications">
-      <pre>{JSON.stringify(notifications, undefined, 2)}</pre>
+    <div id="notifications-wrapper">
+      <pre id="notifications">{JSON.stringify(notifications, undefined, 2)}</pre>
     </div>
   );
 };
@@ -69,7 +69,7 @@ const ChildWithNotifications = asBodiless(() => {
     [notifications, setNotifications],
   );
   return (
-    <div className="border p-2">
+    <div className="border p-2" id="notification-actions">
       <h2 className="text-lg">I Have Notifications</h2>
       <button type="button" className="border p-2 m-2" id="add-notification" onClick={addRandomNotification}>Add a notification</button>
       <button type="button" className="vborder p-2 m-2" id="clear-notifications" onClick={() => setNotifications([])}>Clear All</button>
