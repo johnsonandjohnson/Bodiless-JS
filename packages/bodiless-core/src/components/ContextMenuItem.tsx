@@ -49,7 +49,6 @@ const ContextMenuItem = ({ option, index, ui }: IProps) => {
 
   const onToolbarButtonClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     const menuForm = option.handler ? option.handler(event) : undefined;
-
     if (menuForm) {
       setIsToolTipShown(!isToolTipShown);
       // We have to pass a function to setForm b/c menuForm is itself a function
@@ -74,7 +73,7 @@ const ContextMenuItem = ({ option, index, ui }: IProps) => {
         </FormWrapper>
       );
     }
-    return <React.Fragment />;
+    return <></>;
   }
 
   if (option.name.startsWith('__divider')) {
@@ -100,11 +99,12 @@ const ContextMenuItem = ({ option, index, ui }: IProps) => {
       >
         <Icon isActive={isActive || isToolTipShown}>{option.icon}</Icon>
       </Tooltip>
-      {(option.label) ? (
-        <div className="bl-text-center bl-text-white">
-          {option.label}
-        </div>
-      ) : (null)
+      {
+        (option.label) ? (
+          <div className="bl-text-center bl-text-white">
+            {option.label}
+          </div>
+        ) : (null)
       }
     </ToolbarButton>
   );

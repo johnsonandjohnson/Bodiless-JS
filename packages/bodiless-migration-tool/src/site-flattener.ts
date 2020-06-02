@@ -15,6 +15,7 @@
 /* eslint class-methods-use-this: 0 */
 import path from 'path';
 import minimatch from 'minimatch';
+import { isEmpty } from 'lodash';
 import {
   getUrlToLocalDirectoryMapper,
   prependProtocolToBareUrl,
@@ -44,6 +45,7 @@ import {
 } from './html-to-components';
 import page404Handler, { Page404Params } from './page404-handler';
 import debug from './debug';
+import ResponseProcessor, { RedirectConfig } from './response-processor';
 
 export enum TrailingSlash {
   Skip = 'skip',
@@ -87,6 +89,9 @@ export interface SiteFlattenerParams {
   disableTailwind?: boolean,
   reservedPaths?: Array<string>,
   allowFallbackHtml?: boolean,
+  exports: {
+    redirects: RedirectConfig,
+  },
 }
 
 export class SiteFlattener {
@@ -100,6 +105,7 @@ export class SiteFlattener {
       ...params,
       websiteUrl: prependProtocolToBareUrl(params.websiteUrl),
       trailingSlash: params.trailingSlash || TrailingSlash.Add,
+      exports: params.exports,
       scraperParams: {
         ...params.scraperParams,
         pageUrls: params.scraperParams.pageUrls.map(pageUrl => prependProtocolToBareUrl(pageUrl)),
@@ -138,7 +144,8 @@ export class SiteFlattener {
       enableFileDownload: false,
       downloadPath: getUrlToLocalDirectoryMapper(this.canvasX.getStaticDir()),
     };
-    const { page404Params } = this.params;
+    const { page404Params, exports } = this.params;
+    const responseProcessor = new ResponseProcessor({ websiteUrl: this.params.websiteUrl });
     const scraper = new Scraper(scraperParams);
     scraper.on('pageReceived', async result => {
       try {
@@ -166,7 +173,15 @@ export class SiteFlattener {
       );
       await downloader.downloadFiles([fileUrl]);
     });
+    scraper.on('responseReceived', async response => {
+      if (!isEmpty(exports) && !isEmpty(exports.redirects)) {
+        responseProcessor.processRedirect(response);
+      }
+    });
     await scraper.Crawl();
+    if (!isEmpty(exports) && !isEmpty(exports.redirects)) {
+      responseProcessor.exportRedirects(exports.redirects);
+    }
   }
 
   private getConfPath(): string {

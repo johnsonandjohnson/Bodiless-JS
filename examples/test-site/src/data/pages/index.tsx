@@ -17,8 +17,9 @@ import { graphql } from 'gatsby';
 import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
-  Image, Editable, List, asEditableList,
+  Editable, List, asEditableList,
 } from '@bodiless/components';
+import { Image } from '@bodiless/components-ui';
 import {
   withDesign, replaceWith, addClasses, stylable,
 } from '@bodiless/fclasses';

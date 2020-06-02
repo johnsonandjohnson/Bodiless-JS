@@ -36,36 +36,38 @@ type Props = {
 };
 
 const formPageAdd = (client: Client, template: string, context: any) => contextMenuForm({
-  submitValues: async (submittedValues: any) => {
-    context.showPageOverlay({
-      message: 'The page is creating.',
-      maxTimeoutInSeconds: 10,
-    });
-    const pathname = window.location.pathname
-      ? window.location.pathname.replace(/\/?$/, '/')
-      : '';
-    const newPagePath = pathname + submittedValues.path;
-    const result = await handle(client.savePage(newPagePath, template));
-    if (result.response) {
-      const isPageVerified = await verifyPage(newPagePath);
-      if (!isPageVerified) {
-        const errorMessage = `Unable to verify page creation.
+  submitValues: (submittedValues: any) => {
+    (async () => {
+      context.showPageOverlay({
+        message: 'The page is creating.',
+        maxTimeoutInSeconds: 10,
+      });
+      const pathname = window.location.pathname
+        ? window.location.pathname.replace(/\/?$/, '/')
+        : '';
+      const newPagePath = pathname + submittedValues.path;
+      const result = await handle(client.savePage(newPagePath, template));
+      if (result.response) {
+        const isPageVerified = await verifyPage(newPagePath);
+        if (!isPageVerified) {
+          const errorMessage = `Unable to verify page creation.
 It is likely that your new page was created but is not yet available.
 Click ok to visit the new page; if it does not load, wait a while and reload.`;
-        context.showError({
-          message: errorMessage,
-          onClose: () => {
-            window.location.href = newPagePath;
-          },
-        });
+          context.showError({
+            message: errorMessage,
+            onClose: () => {
+              window.location.href = newPagePath;
+            },
+          });
+        } else {
+          window.location.href = newPagePath;
+        }
       } else {
-        window.location.href = newPagePath;
+        context.showError({
+          message: result.message,
+        });
       }
-    } else {
-      context.showError({
-        message: result.message,
-      });
-    }
+    })();
   },
 })(({ ui, formState }: any) => {
   const {
@@ -87,7 +89,7 @@ Click ok to visit the new page; if it does not load, wait a while and reload.`;
     <>
       <ComponentFormTitle>Add a New Page</ComponentFormTitle>
       <ComponentFormLabel htmlFor="new-page-path">
-          URL
+        URL
         <br />
         {`${currentPage}...`}
       </ComponentFormLabel>

@@ -153,7 +153,8 @@ BodilessJS has built-in support for editable images and links, so let's add an i
 Change the imports from `@bodiless/components` and `@bodiless/fclasses`;
 ```
 import { H1, Img, A, addClasses } from '@bodiless/fclasses';
-import { asEditable, asBodilessImage, asBodilessLink } from '@bodiless/components';
+import { asEditable, asBodilessLink } from '@bodiless/components';
+import { asBodilessImage } from '@bodiless/components-ui';
 ```
 
 Now define your editable `Image` and `Link` components:
@@ -326,7 +327,7 @@ Create a new `CaptionedImage.tsx` file in your `src/data/pages/gallery` director
 
 ```
 import React, { FC, HTMLProps } from 'react';
-import { asBodilessImage } from '@bodiless/components';
+import { asBodilessImage } from '@bodiless/components-ui';
 import { withNode } from '@bodiless/core';
 import {
   Img, Section, Div, addClasses, stylable,

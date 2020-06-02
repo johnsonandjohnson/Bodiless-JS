@@ -15,11 +15,11 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import PageContextProvider from '../src/PageContextProvider';
-import { withPageContext } from '../src/hoc';
+import { withMenuOptions } from '../src/hoc';
 import { useEditContext } from '../src/hooks';
 import { PageEditContextInterface } from '../src/PageEditContext/types';
 
-describe('withPageContext', () => {
+describe('withMenuOptions', () => {
   type Props = {
     foo: string;
   };
@@ -40,7 +40,7 @@ describe('withPageContext', () => {
 
   const WrappedComponent = ({ foo }: Props) => <span>{foo}</span>;
 
-  const Test = withPageContext({ useGetMenuOptions })(WrappedComponent);
+  const Test = withMenuOptions({ useGetMenuOptions })(WrappedComponent);
 
   it('passes props and context correctly to the getMenuOptions creator', () => {
     const ShowContextId = () => <span>{useEditContext().id}</span>;
