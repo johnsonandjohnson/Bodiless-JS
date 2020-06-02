@@ -200,6 +200,7 @@ export class SiteFlattener {
 
   private transformScrapedHtml(html: string, pageUrl: string): string {
     const htmlParser = new HtmlParser(html);
+    htmlParser.clean();
     htmlParser.transformRelativeToInternal(pageUrl);
     htmlParser.transformAbsoluteToRelative(pageUrl);
     htmlParser.transformCfEmailToOrigin();

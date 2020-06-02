@@ -40,6 +40,7 @@ interface HtmlParserInterface {
   getBodyInlineScripts(): string
   getMetaTags(): string
   getImages(): string
+  clean(): void
   replaceString(oldHtmlString: string, newHtmlString: string): void
   replace(selector: string, newElement: string): void
   transformAbsoluteToRelative(pageUrl: string): void
@@ -52,20 +53,30 @@ interface HtmlParserInterface {
 type TransformerType = (attrValue: string, element: CheerioElement) => string;
 
 export default class HtmlParser implements HtmlParserInterface {
+  // @ts-ignore the propery is not definitely assigned in the constructor
   html: string;
 
+  // @ts-ignore the propery is not definitely assigned in the constructor
   $: CheerioStatic;
 
   allowedTags: boolean;
 
   allowedAttributes: boolean;
 
+  private loadHtml(html: string) {
+    this.html = html;
+    this.$ = cheerio.load(html);
+  }
+
   constructor(html: string) {
-    const cleanHtml = this.cleanUpHtmlErrors(html);
-    this.html = cleanHtml;
-    this.$ = cheerio.load(cleanHtml);
+    this.loadHtml(html);
     this.allowedTags = false;
     this.allowedAttributes = false;
+  }
+
+  clean() {
+    const cleanHtml = this.cleanUpHtmlErrors(this.html);
+    this.loadHtml(cleanHtml);
   }
 
   getPageHtml(): string {
