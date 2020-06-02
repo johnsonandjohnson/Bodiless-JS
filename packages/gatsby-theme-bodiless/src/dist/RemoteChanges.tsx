@@ -90,7 +90,15 @@ type ContentProps = {
 const ChangeContent = ({ status, masterStatus, errorMessage } : ContentProps) => {
   switch (status) {
     case ChangeState.NoneAvailable:
-      return <>There are no changes to download.</>;
+      return (
+        <>
+          {
+            masterStatus === ChangeState.CanBePulled
+              ? 'There are changes ready to be pulled. Click check (✓) to initiate.'
+              : 'There are no changes to download.'
+          }
+        </>
+      );
     case ChangeState.CanBePulled:
       return (
         <>
@@ -128,7 +136,7 @@ const ChangeContent = ({ status, masterStatus, errorMessage } : ContentProps) =>
 const FetchChanges = ({ client, formApi }: PropsWithFormApi & PropsWithGitClient) => {
   const [state, setState] = useState<ContentProps>({
     status: ChangeState.Pending,
-    masterStatus: ChangeState.Pending,
+    masterStatus: ChangeState.NoneAvailable,
   });
   const context = useEditContext();
   useEffect(() => {
@@ -145,23 +153,24 @@ const FetchChanges = ({ client, formApi }: PropsWithFormApi & PropsWithGitClient
 
         const { upstreamStatus, productionStatus } = handleChangesResponse(response.data);
 
+        if (productionStatus === ChangeState.CanBePulled) {
+          const conflictsResponse = await client.getConflicts();
+
+          if (conflictsResponse.status !== 200) {
+            throw new Error(`Error checking conflicts with the master branch, status=${response.status}`);
+          }
+
+          if (conflictsResponse.data.hasConflict) {
+            setState({ status: upstreamStatus, masterStatus: ChangeState.CanNotBePulled });
+          } else {
+            setState({ status: ChangeState.CanBePulled, masterStatus: ChangeState.CanBePulled });
+            formApi.setValue('mergeMaster', true);
+            formApi.setValue('keepOpen', true);
+          }
+        }
+
         if (upstreamStatus === ChangeState.CanBePulled) {
           formApi.setValue('keepOpen', true);
-
-          if (productionStatus === ChangeState.CanBePulled) {
-            const conflictsResponse = await client.getConflicts();
-
-            if (conflictsResponse.status !== 200) {
-              throw new Error(`Error checking conflicts with the master branch, status=${response.status}`);
-            }
-
-            if (conflictsResponse.data.hasConflict) {
-              setState({ status: upstreamStatus, masterStatus: ChangeState.CanNotBePulled });
-            } else {
-              setState({ status: upstreamStatus, masterStatus: ChangeState.CanBePulled });
-              formApi.setValue('mergeMaster', true);
-            }
-          }
         }
 
         setState((currentState) => ({

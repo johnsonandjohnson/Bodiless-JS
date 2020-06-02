@@ -386,7 +386,7 @@ class Backend {
   }
 
   static mergeMaster(route) {
-    route.get(async (req, res) => {
+    route.post(async (req, res) => {
       try {
         const status = await mergeMaster();
         res.send(status);
