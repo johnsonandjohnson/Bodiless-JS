@@ -148,6 +148,6 @@ export default class BackendClient {
   }
 
   mergeMaster() {
-    return this.get(`${this.prefix}/merge/master`);
+    return this.post(`${this.prefix}/merge/master`, {});
   }
 }
