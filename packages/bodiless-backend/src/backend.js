@@ -116,6 +116,10 @@ class GitCommit {
       .add('fetch', remote)
       .exec();
 
+    await GitCmd.cmd()
+      .add('pull', remote)
+      .exec();
+
     // Check if there are any unstaged files left before rebasing.
     const dirty = await GitCmd.cmd()
       .add('diff-files', '--quiet')
