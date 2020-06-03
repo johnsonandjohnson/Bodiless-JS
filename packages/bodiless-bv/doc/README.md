@@ -7,23 +7,23 @@ It supports [Conversations API](https://developer.bazaarvoice.com/conversations-
 For information on [Configuration](./Configuration)
 
 ## Conversations Version 1
-   *  [BVRatingsSummary](./components/v1/BVRatingsSummary)
-   *  [BVRatingsSummaryBase](./components/v1/BVRatingsSummaryBase)
-   *  [BVReviews](./components/v1/BVReviews)
-   *  [BVInlineRatings](./components/v1/BVInlineRatings)
-   *  [BVInlineRatingsBase](./components/v1/BVInlineRatingsBase)
+   *  [BVRatingsSummary](./Components/v1/BVRatingsSummary)
+   *  [BVRatingsSummaryBase](./Components/v1/BVRatingsSummaryBase)
+   *  [BVReviews](./Components/v1/BVReviews)
+   *  [BVInlineRatings](./Components/v1/BVInlineRatings)
+   *  [BVInlineRatingsBase](./Components/v1/BVInlineRatingsBase)
 
 ## Conversations Version 2
-   *  [BVRatingsSummary](./components/v2/BVRatingsSummary)
-   *  [BVRatingsSummaryBase](./components/v2/BVRatingsSummaryBase)
-   *  [BVReviews](./components/v2/BVReviews)
-   *  [BVInlineRatings](./components/v2/BVInlineRatings)
-   *  [BVInlineRatingsBase](./components/v2/BVInlineRatingsBase)
+   *  [BVRatingsSummary](./Components/v2/BVRatingsSummary)
+   *  [BVRatingsSummaryBase](./Components/v2/BVRatingsSummaryBase)
+   *  [BVReviews](./Components/v2/BVReviews)
+   *  [BVInlineRatings](./Components/v2/BVInlineRatings)
+   *  [BVInlineRatingsBase](./Components/v2/BVInlineRatingsBase)
 
 ## HOCs
-   *  [asBodilessBV](./components/hocs/asBodilessBV)
-   *  [asDesignableBVComponent](./components/hocs/asDesignableBVComponent)
-   *  [asEditableBV](./components/hocs/asEditableBV)
-   *  [withBVLoader](./components/hocs/withBVLoader)
+   *  [asBodilessBV](./Components/hocs/asBodilessBV)
+   *  [asDesignableBVComponent](./Components/hocs/asDesignableBVComponent)
+   *  [asEditableBV](./Components/hocs/asEditableBV)
+   *  [withBVLoader](./Components/hocs/withBVLoader)
 
-[BV Loader Provider](./components/BVLoaderProvider)
+[BV Loader Provider](./Components/BVLoaderProvider)
