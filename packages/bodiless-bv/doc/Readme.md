@@ -4,26 +4,26 @@ This component provides ability to place [Bazaarvoice](https://www.bazaarvoice.c
 
 It supports [Conversations API](https://developer.bazaarvoice.com/conversations-api/home) and both [v1](https://knowledge.bazaarvoice.com/wp-content/conversations/en_US/Display/display_integration_v1.html) and [v2](https://knowledge.bazaarvoice.com/wp-content/conversations/en_US/Display/display_integration.html)
 
-For information on [Configuration](Components/Bazaarvoice/Configuration)
+For information on [Configuration](./Configuration)
 
 ## Conversations Version 1
-   *  [BVRatingsSummary](./Bazaarvoice/components/v1/BVRatingsSummary)
-   *  [BVRatingsSummaryBase](./Bazaarvoice/components/v1/BVRatingsSummaryBase)
-   *  [BVReviews](./Bazaarvoice/components/v1/BVReviews)
-   *  [BVInlineRatings](./Bazaarvoice/components/v1/BVInlineRatings)
-   *  [BVInlineRatingsBase](./Bazaarvoice/components/v1/BVInlineRatingsBase)
+   *  [BVRatingsSummary](./components/v1/BVRatingsSummary)
+   *  [BVRatingsSummaryBase](./components/v1/BVRatingsSummaryBase)
+   *  [BVReviews](./components/v1/BVReviews)
+   *  [BVInlineRatings](./components/v1/BVInlineRatings)
+   *  [BVInlineRatingsBase](./components/v1/BVInlineRatingsBase)
 
 ## Conversations Version 2
-   *  [BVRatingsSummary](./Bazaarvoice/components/v2/BVRatingsSummary)
-   *  [BVRatingsSummaryBase](./Bazaarvoice/components/v2/BVRatingsSummaryBase)
-   *  [BVReviews](./Bazaarvoice/components/v2/BVReviews)
-   *  [BVInlineRatings](./Bazaarvoice/components/v2/BVInlineRatings)
-   *  [BVInlineRatingsBase](./Bazaarvoice/components/v2/BVInlineRatingsBase)
+   *  [BVRatingsSummary](./components/v2/BVRatingsSummary)
+   *  [BVRatingsSummaryBase](./components/v2/BVRatingsSummaryBase)
+   *  [BVReviews](./components/v2/BVReviews)
+   *  [BVInlineRatings](./components/v2/BVInlineRatings)
+   *  [BVInlineRatingsBase](./components/v2/BVInlineRatingsBase)
 
 ## HOCs
-   *  [asBodilessBV](./Bazaarvoice/hocs/asBodilessBV)
-   *  [asDesignableBVComponent](./Bazaarvoice/hocs/asDesignableBVComponent)
-   *  [asEditableBV](./Bazaarvoice/hocs/asEditableBV)
-   *  [withBVLoader](./Bazaarvoice/hocs/withBVLoader)
+   *  [asBodilessBV](./components/hocs/asBodilessBV)
+   *  [asDesignableBVComponent](./components/hocs/asDesignableBVComponent)
+   *  [asEditableBV](./components/hocs/asEditableBV)
+   *  [withBVLoader](./components/hocs/withBVLoader)
 
-[BV Loader Provider](./Bazaarvoice/components/BVLoaderProvider)
+[BV Loader Provider](./components/BVLoaderProvider)
