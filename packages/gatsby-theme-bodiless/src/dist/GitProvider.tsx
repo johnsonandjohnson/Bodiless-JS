@@ -26,6 +26,7 @@ import { AxiosPromise } from 'axios';
 import BackendClient from './BackendClient';
 import CommitsList from './CommitsList';
 import RemoteChanges from './RemoteChanges';
+import { GitClient } from './types';
 
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
@@ -40,21 +41,8 @@ const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
  */
 const canCommit = (process.env.BODILESS_BACKEND_COMMIT_ENABLED || '0') === '1';
 
-type Client = {
-  commit: (
-    message: string,
-    directories: string[],
-    paths: string[],
-    files: string[],
-    author?: string,
-  ) => AxiosPromise<any>,
-  getLatestCommits: () => AxiosPromise<any>,
-  pull: () => AxiosPromise<any>,
-  reset: () => AxiosPromise<any>,
-};
-
 type Props = {
-  client?: Client,
+  client?: GitClient,
 };
 
 const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
@@ -83,7 +71,7 @@ const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
     }
   });
 
-const formGetCommitsList = (client: Client) => contextMenuForm({
+const formGetCommitsList = (client: GitClient) => contextMenuForm({
   // @todo: handle what happens when user selects a commit from the loaded list.
   submitValues: () => {},
 })(
@@ -101,7 +89,7 @@ const formGetCommitsList = (client: Client) => contextMenuForm({
 // Get the author from the cookie.
 const cookies = new Cookies();
 const author = cookies.get('author');
-const formGitCommit = (client: Client) => contextMenuForm({
+const formGitCommit = (client: GitClient) => contextMenuForm({
   submitValues: (submitValues: any) => {
     handle(
       client.commit(
@@ -128,7 +116,7 @@ const formGitCommit = (client: Client) => contextMenuForm({
   );
 });
 
-const formGitPull = (client: Client) => contextMenuForm({
+const formGitPull = (client: GitClient) => contextMenuForm({
   submitValues: (values : any) => {
     const { keepOpen } = values;
     return keepOpen;
@@ -139,12 +127,13 @@ const formGitPull = (client: Client) => contextMenuForm({
     <>
       <ComponentFormTitle>Pull Changes</ComponentFormTitle>
       <ComponentFormText type="hidden" field="keepOpen" initialValue={false} />
+      <ComponentFormText type="hidden" field="mergeMaster" initialValue={false} />
       <RemoteChanges client={client} />
     </>
   );
 });
 
-const formGitReset = (client: Client, context: any) => contextMenuForm({
+const formGitReset = (client: GitClient, context: any) => contextMenuForm({
   submitValues: () => {
     (async () => {
       context.showPageOverlay({
@@ -182,7 +171,7 @@ const formGitReset = (client: Client, context: any) => contextMenuForm({
 
 const defaultClient = new BackendClient();
 
-const getMenuOptions = (client: Client = defaultClient, context: any): TMenuOption[] => {
+const getMenuOptions = (client: GitClient = defaultClient, context: any): TMenuOption[] => {
   const saveChanges = canCommit ? formGitCommit(client) : undefined;
   return [
     {

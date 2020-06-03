@@ -104,11 +104,9 @@ const getChanges = async () => {
   const productionBranch = 'origin/master';
   if (!upstreamBranch) {
     return {
-      upstream: {
-        branch: null,
-        commits: [],
-        files: [],
-      },
+      upstream: { branch: null, commits: [], files: [] },
+      production: { branch: productionBranch, commits: [], files: [] },
+      local: { branch, commits: [], files: [] },
     };
   }
   const result = await Promise.all([
@@ -211,10 +209,54 @@ const getConflicts = async () => {
   rimraf.sync(directory);
   logger.log(`${directory} removed.`);
 
-  if (conflictFiles.length) {
-    return { hasConflict: true, files: conflictFiles };
+  return { hasConflict: conflictFiles.length > 0, files: conflictFiles };
+};
+
+/**
+ * Merge latest origin master to upstream branch.
+ */
+const mergeMaster = async () => {
+  const logger = new Logger('BACKEND');
+  const directory = path.resolve(process.env.BODILESS_BACKEND_TMP || os.tmpdir(), v1());
+  const branch = await getCurrentBranch();
+  const upstreamBranch = await getUpstreamTrackingBranch(branch);
+
+  if (!upstreamBranch) {
+    throw new Error(`No upstream branch found for current branch ${branch}. Please contact your server administrator`);
   }
-  return { hasConflict: false };
+
+  const remote = getGitCmdOutput(await GitCmd.cmd().add('remote', 'get-url', 'origin').exec());
+  const rootCmd = GitCmd.cmd().add('rev-parse', '--show-toplevel');
+  const root = getGitCmdOutput(await rootCmd.exec());
+
+  await clone(root, { directory, branch: upstreamBranch.replace('origin/', '') });
+  process.chdir(directory);
+
+  try {
+    await GitCmd.cmd()
+      .add('remote', 'set-url', 'origin', remote)
+      .exec();
+
+    await GitCmd.cmd()
+      .add('pull')
+      .exec();
+
+    await GitCmd.cmd()
+      .add('merge', 'origin/master')
+      .exec();
+
+    await GitCmd.cmd()
+      .add('push')
+      .exec();
+  } catch (e) {
+    logger.error(e);
+  }
+
+  process.chdir(root);
+  rimraf.sync(directory);
+  logger.log(`${directory} removed.`);
+
+  return {};
 };
 
 module.exports = {
@@ -225,4 +267,5 @@ module.exports = {
   getConflicts,
   getMergeBase,
   compare,
+  mergeMaster,
 };

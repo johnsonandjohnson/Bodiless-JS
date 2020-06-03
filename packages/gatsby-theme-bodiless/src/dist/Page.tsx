@@ -17,6 +17,9 @@ import {
   StaticPage,
   ContextWrapperProps,
   useEditContext,
+  NotificationProvider,
+  NotificationButtonProvider,
+  SwitcherButtonProvider,
 } from '@bodiless/core';
 import { observer } from 'mobx-react-lite';
 import { ContextWrapper, PageEditor } from '@bodiless/core-ui';
@@ -52,17 +55,23 @@ const Page: FC<Props> = observer(({ children, ui, ...rest }) => {
     return (
       <GatsbyNodeProvider {...rest}>
         <GatsbyPageProvider pageContext={rest.pageContext}>
-          <Editor>
-            <NewPageProvider>
-              <GitProvider>
-                <Wrapper clickable>
-                  <DefaultActiveMenuOptions>
-                    {children}
-                  </DefaultActiveMenuOptions>
-                </Wrapper>
-              </GitProvider>
-            </NewPageProvider>
-          </Editor>
+          <SwitcherButtonProvider>
+            <NotificationProvider>
+              <NotificationButtonProvider>
+                <Editor>
+                  <NewPageProvider>
+                    <GitProvider>
+                      <Wrapper clickable>
+                        <DefaultActiveMenuOptions>
+                          {children}
+                        </DefaultActiveMenuOptions>
+                      </Wrapper>
+                    </GitProvider>
+                  </NewPageProvider>
+                </Editor>
+              </NotificationButtonProvider>
+            </NotificationProvider>
+          </SwitcherButtonProvider>
         </GatsbyPageProvider>
       </GatsbyNodeProvider>
     );

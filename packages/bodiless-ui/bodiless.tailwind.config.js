@@ -484,7 +484,9 @@ module.exports = {
       |
       */
 
-      // maxHeight: { },
+      maxHeight: {
+        ...xlGrid,
+      },
 
       /*
       |---------------------------------------------------------------------------
@@ -625,9 +627,9 @@ module.exports = {
   |
   */
 
-  // variants: {
-
-  // },
+  variants: {
+    borderWidth: ['first', 'responsive'],
+  },
 
   // corePlugins: {},
 

@@ -17,54 +17,51 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { FetchChanges, PullChanges } from '../src/dist/RemoteChanges';
 
-const changes = {
-  status: 200,
-  data: {
-    upstream: {
-      branch: 'origin/feat/test',
-      commits: ['Test Commit'],
-      files: ['packages/gatsby-theme-bodiless/src/dist/RemoteChanges.tsx'],
-    },
-  },
-};
-const mockChangesClient = {
-  getChanges: jest.fn(() => Promise.resolve(changes)),
-  pull: jest.fn(() => Promise.resolve({ status: 200 })),
-};
-const noChanges = {
+const mockUpstreamResponse = (data?: any) => ({
   status: 200,
   data: {
     upstream: {
       branch: 'null',
       commits: [],
       files: [],
+      ...data,
     },
+    production: { branch: 'origin/master', commits: [], files: [] },
+    local: { branch: 'origin/test', commits: [], files: [] },
   },
-};
-const noChangesClient = {
-  getChanges: jest.fn(() => Promise.resolve(noChanges)),
-};
-const nonPullableChanges = {
-  status: 200,
-  data: {
-    upstream: {
-      branch: 'null',
-      commits: ['Test Commit'],
-      files: ['packages/gatsby-theme-bodiless/src/dist/package-lock.json'],
-    },
-  },
-};
-const nonPullableChangesClient = {
-  getChanges: jest.fn(() => Promise.resolve(nonPullableChanges)),
-};
+});
+
+const mockClient = (responseData?: any) => ({
+  getChanges: jest.fn(() => Promise.resolve(mockUpstreamResponse(responseData))),
+  pull: jest.fn(() => Promise.resolve({ status: 200 })),
+  commit: jest.fn(() => Promise.resolve({ status: 200 })),
+  getConflicts: () => jest.fn(() => Promise.resolve({ status: 200 })),
+  getLatestCommits: () => jest.fn(() => Promise.resolve({ status: 200 })),
+  reset: () => jest.fn(() => Promise.resolve({ status: 200 })),
+});
 
 const mockFormApi = {
   setValue: jest.fn(),
+  getValue: jest.fn(),
 };
+
+const noChangesClient = mockClient();
+
+const mockChangesClient = mockClient({
+  branch: 'origin/feat/test',
+  commits: ['Test Commit'],
+  files: ['packages/gatsby-theme-bodiless/src/dist/RemoteChanges.tsx'],
+});
+
+const nonPullableChangesClient = mockClient({
+  branch: 'null',
+  commits: ['Test Commit'],
+  files: ['packages/gatsby-theme-bodiless/src/dist/package-lock.json'],
+});
 
 describe('Fetch Changes component', () => {
   it('should show a spinner while a request to the back-end is processed', () => {
-    const wrapper = mount(<FetchChanges client={mockChangesClient} />);
+    const wrapper = mount(<FetchChanges client={mockChangesClient} formApi={mockFormApi} />);
     expect(wrapper.find('.bodiless-spinner').length > 0).toBe(true);
   });
   it('should detect changes are available', async () => {

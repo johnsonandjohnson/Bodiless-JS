@@ -60,14 +60,6 @@ const PageEditor: FC<Props> = ({ children, ui }) => {
   // a real function.
   const getMenuOptions = () => [
     {
-      name: 'switcher',
-      icon: 'compare_arrows',
-      handler: () => {
-        context.togglePosition();
-        context.refresh();
-      },
-    },
-    {
       name: 'docs',
       icon: 'description',
       label: 'Docs',
