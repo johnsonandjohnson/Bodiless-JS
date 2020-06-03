@@ -21,9 +21,9 @@ For information on [Configuration](./Configuration)
    *  [BVInlineRatingsBase](./Components/v2/BVInlineRatingsBase)
 
 ## HOCs
-   *  [asBodilessBV](./Components/hocs/asBodilessBV)
-   *  [asDesignableBVComponent](./Components/hocs/asDesignableBVComponent)
-   *  [asEditableBV](./Components/hocs/asEditableBV)
-   *  [withBVLoader](./Components/hocs/withBVLoader)
+   *  [asBodilessBV](./Components/HOCs/asBodilessBV)
+   *  [asDesignableBVComponent](./Components/HOCs/asDesignableBVComponent)
+   *  [asEditableBV](./Components/HOCs/asEditableBV)
+   *  [withBVLoader](./Components/HOCs/withBVLoader)
 
-[BV Loader Provider](./Components/BVLoaderProvider)
+[BV Loader Provider](./BVLoaderProvider)
