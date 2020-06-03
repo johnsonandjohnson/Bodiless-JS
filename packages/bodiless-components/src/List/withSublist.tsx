@@ -27,7 +27,7 @@ import withDeleteSublistOnUnwrap from './withDeleteSublistOnUnwrap';
  * @param withSublistToggle The sublist toggle HOC to apply to each list item.
  */
 const withSublist = (withSublistToggle: WithSublistToggle) => withDesign<ListDesignableComponents>({
-  ItemMenuOptionsProvider: withToggleButton({ icon: 'playlist_add' }),
+  ItemMenuOptionsProvider: withToggleButton({ icon: 'playlist_add', label: 'Sublist' }),
   Item: withSublistToggle,
 });
 

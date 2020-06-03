@@ -195,7 +195,7 @@ const getMenuOptions = (client: GitClient = defaultClient, context: any): TMenuO
     },
     {
       name: 'resetchanges',
-      label: 'Reset',
+      label: 'Revert',
       icon: 'undo',
       isHidden: () => !context.isEdit,
       handler: () => formGitReset(client, context),
