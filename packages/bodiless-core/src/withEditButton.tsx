@@ -14,7 +14,7 @@
 
 import { ReactNode } from 'react';
 import { flowRight } from 'lodash';
-import { withPageContext, withoutProps, UseGetMenuOptions } from './hoc';
+import { withMenuOptions, withoutProps, UseGetMenuOptions } from './hoc';
 import { PageEditContextInterface } from './PageEditContext/types';
 import contextMenuForm, {
   FormBodyProps as ContextMenuFormBodyProps,
@@ -96,7 +96,7 @@ export const createMenuOptionHook = <P extends object, D extends object>({
 const withEditButton = <P extends object, D extends object>(
   options: EditButtonOptions<P, D>,
 ) => flowRight(
-    withPageContext({
+    withMenuOptions({
       useGetMenuOptions: createMenuOptionHook(options),
       name: options.name,
     }),

@@ -16,7 +16,8 @@ import React, { FC, HTMLProps } from 'react';
 import { flow } from 'lodash';
 import { Text as BaseText } from 'informed';
 import {
-  stylable, addClasses, StylableProps, withoutProps, flowIf, hasProp, addProps, removeClasses,
+  Li, Ul, stylable, addClasses, StylableProps, withoutProps, flowIf, hasProp, addProps,
+  removeClasses,
 } from '@bodiless/fclasses';
 import { ButtonVariantProps, withChild } from '@bodiless/core';
 
@@ -50,6 +51,14 @@ export const Icon = flow(
 export const ComponentFormTitle = addClasses(
   'bl-text-lg bl-font-bold bl-text-grey-100 bl-block bl-mb-grid-2',
 )(Title);
+
+export const ComponentFormListItem = addClasses(
+  'first:bl-border-t-0 bl-border-t bl-py-grid-1 bl-px-grid-1 bl-max-w-xl-grid-1',
+)(Li);
+
+export const ComponentFormList = addClasses(
+  'list-none bl-max-h-xl-grid-1 bl-overflow-y-scroll',
+)(Ul);
 
 export const ComponentFormLabel = addClasses(
   'bl-text-xs bl-text-grey-100 bl-block',

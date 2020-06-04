@@ -29,7 +29,7 @@ import withData from './withData';
 import NodeProvider, { useNode, useNodeDataHandlers } from './NodeProvider';
 import { DefaultContentNode } from './ContentNode';
 import {
-  withPageContext,
+  withMenuOptions,
   withNodeAndHandlers,
   withNodeDataHandlers,
   withLocalContextMenu,
@@ -49,6 +49,13 @@ import {
   useActivateOnEffect,
   useActivateOnEffectActivator,
 } from './ActivateContext';
+import {
+  NotificationProvider,
+  useNotifications,
+  useNotify,
+} from './NotificationProvider';
+import NotificationButtonProvider from './NotificationButtonProvider';
+import SwitcherButtonProvider from './SwitcherButtonProvider';
 import withChild from './withChild';
 
 export * from './components';
@@ -58,8 +65,8 @@ export {
   withNodeAndHandlers,
   withNodeDataHandlers,
   withLocalContextMenu,
-  PageContextProvider as ContextProvider,
-  withPageContext as withMenuOptions,
+  PageContextProvider,
+  withMenuOptions,
   PageEditContext,
   useEditContext,
   useContextActivator,
@@ -90,6 +97,11 @@ export {
   ifToggledOn,
   withFlowToggle,
   useEditToggle,
+  NotificationProvider,
+  NotificationButtonProvider,
+  useNotifications,
+  useNotify,
+  SwitcherButtonProvider,
 };
 
 export type {

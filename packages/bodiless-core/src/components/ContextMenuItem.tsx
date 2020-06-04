@@ -49,7 +49,6 @@ const ContextMenuItem = ({ option, index, ui }: IProps) => {
 
   const onToolbarButtonClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     const menuForm = option.handler ? option.handler(event) : undefined;
-
     if (menuForm) {
       setIsToolTipShown(!isToolTipShown);
       // We have to pass a function to setForm b/c menuForm is itself a function
