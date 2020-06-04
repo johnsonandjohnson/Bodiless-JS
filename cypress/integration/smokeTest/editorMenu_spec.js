@@ -177,7 +177,7 @@ describe('Editor Menu (left and right)', function () {
       cy.xpath(addPageIcon)
          .should('not.exist')
       cy.xpath(pushIcon)
-         .should('not.exist')
+         .should('be.visible')
       cy.xpath(revertIcon)
          .should('not.exist')
    }
