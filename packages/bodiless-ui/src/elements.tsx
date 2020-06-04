@@ -99,7 +99,7 @@ export const SubmitButton: FC<HTMLProps<HTMLButtonElement> & StylableProps> = pr
 
 export const ToolbarButton = flow(
   withoutProps<ButtonVariantProps>(['isActive', 'isFirst', 'isDisabled']),
-  addClasses('bl-cursor-pointer bl-text-grey-200 bl-block focus:underline'), // focus:underline focus:outline-none
+  addClasses('bl-cursor-pointer bl-text-grey-200 bl-block'),
   flowIf(hasProp('isDisabled'))(
     addClasses('bl-text-grey-600').removeClasses('bl-text-grey-200'),
   ),
