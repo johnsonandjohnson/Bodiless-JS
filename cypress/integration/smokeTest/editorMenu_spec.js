@@ -35,15 +35,15 @@ describe('Editor Menu (left and right)', function () {
    const closeIconAddPageForm = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Cancel"]'
    const checkmarkIconAddPageForm = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Submit"]'
 
-   const headerLatestCommitsForm = '//*[@aria-label="Context Menu listCommits Form"]//h3[text()="Latest Commits"]'
-   const itemLatestCommitsForm = '//*[@aria-label="Context Menu listCommits Form"]//input[@type="radio"][@name="commits"]'
-   const checkmarkIconLatestCommitsForm = '//*[@aria-label="Context Menu listCommits Form"]//*[@aria-label="Submit"]'
-   const closeIconLatestCommitsForm = '//*[@aria-label="Context Menu listCommits Form"]//*[@aria-label="Cancel"]'
+   const headerLatestCommitsForm = '//*[@aria-label="Context Menu History Form"]//h3[text()="Latest Commits"]'
+   const itemLatestCommitsForm = '//*[@aria-label="Context Menu History Form"]//input[@type="radio"][@name="commits"]'
+   const checkmarkIconLatestCommitsForm = '//*[@aria-label="Context Menu History Form"]//*[@aria-label="Submit"]'
+   const closeIconLatestCommitsForm = '//*[@aria-label="Context Menu History Form"]//*[@aria-label="Cancel"]'
 
-   const headerRevertForm = '//*[@aria-label="Context Menu resetchanges Form"]//h3[text()="Revert to saved"]'
-   const descrRevertForm = '//*[@aria-label="Context Menu resetchanges Form"]//label[text()="Discard local changes"]'
-   const checkmarkIconRevertForm = '//*[@aria-label="Context Menu resetchanges Form"]//*[@aria-label="Submit"]'
-   const closeIconRevertForm = '//*[@aria-label="Context Menu resetchanges Form"]//*[@aria-label="Cancel"]'
+   const headerRevertForm = '//*[@aria-label="Context Menu Revert Form"]//h3[text()="Revert to saved"]'
+   const descrRevertForm = '//*[@aria-label="Context Menu Revert Form"]//label[text()="Discard local changes"]'
+   const checkmarkIconRevertForm = '//*[@aria-label="Context Menu Revert Form"]//*[@aria-label="Submit"]'
+   const closeIconRevertForm = '//*[@aria-label="Context Menu Revert Form"]//*[@aria-label="Cancel"]'
 
 
 
