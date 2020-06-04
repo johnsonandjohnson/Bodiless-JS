@@ -26,9 +26,9 @@ describe('Editor Menu (left and right)', function () {
    const docsIcon = '//*[@aria-label="Docs"]'
    const editIcon = '//*[@aria-label="Edit"]'
    const addPageIcon = '//*[@aria-label="Page"]'
-   const latestCommitsIcon = '//*[@aria-label="listCommits"]'
-   const pushIcon = '//*[@aria-label="savechanges"]'
-   const revertIcon = '//*[@aria-label="resetchanges"]'
+   const historyIcon = '//*[@aria-label="History"]'
+   const pushIcon = '//*[@aria-label="Push"]'
+   const revertIcon = '//*[@aria-label="Revert"]'
 
    const headerAddPageForm = '//*[@aria-label="Context Menu Page Form"]//h3[text()="Add a New Page"]'
    const fieldAddPageForm = '//*[@aria-label="Context Menu Page Form"]//input[@id="new-page-path"]'
@@ -172,7 +172,7 @@ describe('Editor Menu (left and right)', function () {
          .should('be.visible')
       cy.xpath(editIcon)
          .should('be.visible')
-      cy.xpath(latestCommitsIcon)
+      cy.xpath(historyIcon)
          .should('be.visible')
       cy.xpath(addPageIcon)
          .should('not.exist')
@@ -191,7 +191,7 @@ describe('Editor Menu (left and right)', function () {
          .should('be.visible')
       cy.xpath(addPageIcon)
          .should('be.visible')
-      cy.xpath(latestCommitsIcon)
+      cy.xpath(historyIcon)
          .should('be.visible')
       cy.xpath(pushIcon)
          .should('be.visible')
@@ -216,7 +216,7 @@ describe('Editor Menu (left and right)', function () {
    }
 
    function checkLatestCommitsButton() {
-      cy.xpath(latestCommitsIcon)
+      cy.xpath(historyIcon)
          .click()
       cy.xpath(headerLatestCommitsForm)
       cy.xpath(itemLatestCommitsForm)

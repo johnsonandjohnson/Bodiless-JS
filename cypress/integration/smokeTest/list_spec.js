@@ -30,8 +30,8 @@ describe('List (text and link versions) testing', function () {
   const listItemUrl = 'AT-listItemUrl'
   const itemCount = 2
   const addListItemIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Add"]'
-  const addSubListItemIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Toggle"]'
-  const removeListItemIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Remove"]'
+  const addSubListItemIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Sublist"]'
+  const removeListItemIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Delete"]'
   const linkIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Link"]'
   const urlField = '//form[@aria-label="Context Menu Link Form"]//input[@id="link-href"]'
   const checkmarkIcon = '//form[@aria-label="Context Menu Link Form"]//button[@aria-label="Submit"]'

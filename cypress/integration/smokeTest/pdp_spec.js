@@ -25,7 +25,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
   const imageIconXpath = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Image"]'
   const checkmarkIconImageFormXpath = '//form[@aria-label="Context Menu Image Form"]//button[@aria-label="Submit"]'
   const flexboxXpath = '//*[@data-product-element="flow-container"]'
-  const addComponentIconXpath = '//button[@aria-label="add"]'
+  const addComponentIconXpath = '//button[@aria-label="Add"]'
 
 
   it('PDP: 1 - creating a page from /products/', () => {
