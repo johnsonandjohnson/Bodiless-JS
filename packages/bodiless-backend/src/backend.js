@@ -118,7 +118,7 @@ class GitCommit {
 
     // Check if there are any unstaged files left before rebasing.
     const dirty = await GitCmd.cmd()
-      .add('diff-files', '--quiet')
+      .add('diff', '--quiet')
       .exec();
     if (dirty.code) {
       await GitCmd.cmd()
