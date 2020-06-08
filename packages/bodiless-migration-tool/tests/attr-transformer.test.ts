@@ -53,4 +53,15 @@ describe('attribute transformation', () => {
     const received = htmlclean(replaceAttributes(input, AttrTransformerDirecton.Direct));
     expect(received).toBe(htmlclean(expected));
   });
+  it('should not trim ssi elements', () => {
+    const input = `
+     <html>
+      <head>
+        <!--# include file="file.html" -->
+      </head>
+      <body></body>
+     </html>`;
+    const received = htmlclean(replaceAttributes(input, AttrTransformerDirecton.Direct));
+    expect(received).toBe(htmlclean(input));
+  });
 });
