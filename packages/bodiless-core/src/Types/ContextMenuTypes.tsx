@@ -41,6 +41,7 @@ export type UI = {
   ToolbarDivider?: ComponentType<HTMLProps<HTMLHRElement>> | string;
   ComponentFormTitle?: ComponentType<HTMLProps<HTMLHeadingElement>> | string;
   ComponentFormLabel?: ComponentType<HTMLProps<HTMLLabelElement>> | string;
+  ComponentFormDescription?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   ComponentFormButton?: ComponentType<HTMLProps<HTMLButtonElement>> | string;
   ComponentFormCloseButton?: ComponentType<HTMLProps<HTMLButtonElement>> | string;
   ComponentFormSubmitButton?: ComponentType<HTMLProps<HTMLButtonElement>> | string;

@@ -53,6 +53,7 @@ export const editButtonOptions: EditButtonOptions<Props, Data> = {
       ComponentFormTitle,
       ComponentFormLabel,
       ComponentFormText,
+      ComponentFormDescription,
       ComponentFormUnwrapButton,
     } = getUI(formUi);
     const removeLinkHandler = (event: React.MouseEvent) => {
@@ -66,11 +67,16 @@ export const editButtonOptions: EditButtonOptions<Props, Data> = {
       <>
         <ComponentFormTitle>Link</ComponentFormTitle>
         <ComponentFormLabel htmlFor="link-href">URL</ComponentFormLabel>
-        <ComponentFormText field="href" id="link-href" />
+        <ComponentFormText field="href" id="link-href" aria-describedby="description" />
+        <ComponentFormDescription id="description">
+          Use relative URLs for internal links. Preface the link with `/` to be
+          relative to the root, otherwise the link is relative to the page. Use
+          a fully formed URL for external links, e.g., https://www.example.com.
+        </ComponentFormDescription>
         {unwrap && (
-        <ComponentFormUnwrapButton type="button" onClick={removeLinkHandler}>
-          Remove Link
-        </ComponentFormUnwrapButton>
+          <ComponentFormUnwrapButton type="button" onClick={removeLinkHandler}>
+            Remove Link
+          </ComponentFormUnwrapButton>
         )}
       </>
     );
@@ -80,7 +86,7 @@ export const editButtonOptions: EditButtonOptions<Props, Data> = {
 };
 
 const emptyValue = {
-  href: '#',
+  href: '/link',
 };
 // Composed hoc which creates editable version of the component.
 // Note - the order is important. In particular:

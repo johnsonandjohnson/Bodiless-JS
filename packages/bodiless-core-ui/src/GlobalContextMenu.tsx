@@ -23,7 +23,7 @@ import {
 } from '@bodiless/core';
 import {
   ComponentFormTitle, ComponentFormCloseButton, ComponentFormLabel, ComponentFormText,
-  ComponentFormButton, Icon, Div, Hr, ToolbarButton, ComponentFormUnwrapButton,
+  ComponentFormButton, Icon, Div, Hr, ToolbarButton, ComponentFormUnwrapButton, ComponentFormDescription,
   ComponentFormError, ComponentFormSubmitButton, ComponentFormList, ComponentFormListItem,
 } from '@bodiless/ui';
 import ReactTagsField from './ReactTags';
@@ -73,6 +73,7 @@ export const GlobalTooltip: FC<ReactTooltip['props']> = props => {
 const ui: ContextMenuUI = {
   ComponentFormTitle,
   ComponentFormLabel,
+  ComponentFormDescription,
   ComponentFormText,
   ComponentFormButton,
   ComponentFormCloseButton,
