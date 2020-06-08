@@ -24,6 +24,9 @@ export default class IndexPage extends React.Component {
           <body className="class3 class4" />
           <base href="https://localhost/" />
           <link type="text/css" rel="stylesheet" href="https://localhost/test1.css" />
+          {/*[if lt IE 9]>
+    <link type="text/css" rel="stylesheet" href="https://localhost/conditional.css" media="all" />
+    <![endif]*/}
           <link type="text/css" rel="stylesheet" href="https://localhost/test2.css" />
           <link type="text/css" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
           <meta name="MobileOptimized" content="width" />
