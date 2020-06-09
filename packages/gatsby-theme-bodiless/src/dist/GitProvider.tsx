@@ -176,14 +176,15 @@ const getMenuOptions = (client: GitClient = defaultClient, context: any): TMenuO
   return [
     {
       name: 'listCommits',
-      icon: 'list',
+      icon: 'book',
+      label: 'History',
       handler: () => formGetCommitsList(client),
     },
     {
       name: 'savechanges',
       icon: 'cloud_upload',
+      label: 'Push',
       isDisabled: () => !canCommit,
-      isHidden: () => !context.isEdit,
       handler: () => saveChanges,
     },
     {
@@ -194,6 +195,7 @@ const getMenuOptions = (client: GitClient = defaultClient, context: any): TMenuO
     },
     {
       name: 'resetchanges',
+      label: 'Revert',
       icon: 'undo',
       isHidden: () => !context.isEdit,
       handler: () => formGitReset(client, context),

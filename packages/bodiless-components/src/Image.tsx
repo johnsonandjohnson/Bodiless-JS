@@ -174,6 +174,7 @@ type Props = ReducedImageProps & { ui?: TImagePickerUI};
 // Options used to create an edit button.
 export const editButtonOptions: EditButtonOptions<Props, Data> = {
   icon: 'image',
+  label: 'Image',
   name: 'Image',
   renderForm: ({ ui: formUi, formApi, componentProps }) => {
     const { ui: imagePickerUI } = componentProps;

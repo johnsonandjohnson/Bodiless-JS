@@ -29,6 +29,7 @@ type TagButtonType = EditButtonOptions<TagButtonProps & HTMLProps<HTMLElement>, 
 // Options used to create an edit button.
 export const tagButtonOptions:TagButtonType = {
   icon: 'local_offer',
+  label: 'Groups',
   name: 'Tag',
   renderForm: ({ ui, componentProps }) => {
     const {
