@@ -13,13 +13,17 @@
  */
 
 import path from 'path';
+import defaultToc from './defaultToc';
+import { Tree } from './type';
 
 type Settings = {
   resourceDir: string;
+  toc: Tree;
 };
 
 const getDefaultSettings = () => ({
   resourceDir: path.dirname(require.resolve(path.join('..', 'resources', 'index.html'))),
+  toc: defaultToc(),
 });
 
 /**
@@ -30,7 +34,7 @@ const readSettings = (): Settings => {
   try {
     const localSettingsPath = path.resolve('./bodiless.docs.settings.js');
     // eslint-disable-next-line global-require, import/no-dynamic-require
-    localSettings = require(localSettingsPath).default;
+    localSettings = require(localSettingsPath).default();
   } catch (e) {
     console.warn('No local settings found.');
   }
