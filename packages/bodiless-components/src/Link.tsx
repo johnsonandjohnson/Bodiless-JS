@@ -74,9 +74,9 @@ export const editButtonOptions: EditButtonOptions<Props, Data> = {
           a fully formed URL for external links, e.g., https://www.example.com.
         </ComponentFormDescription>
         {unwrap && (
-          <ComponentFormUnwrapButton type="button" onClick={removeLinkHandler}>
-            Remove Link
-          </ComponentFormUnwrapButton>
+        <ComponentFormUnwrapButton type="button" onClick={removeLinkHandler}>
+          Remove Link
+        </ComponentFormUnwrapButton>
         )}
       </>
     );
