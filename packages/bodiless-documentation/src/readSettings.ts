@@ -36,7 +36,7 @@ const readSettings = (): Settings => {
     // eslint-disable-next-line global-require, import/no-dynamic-require
     localSettings = require(localSettingsPath).default();
   } catch (e) {
-    console.warn('No local settings found.');
+    console.warn('No local settings. Falling back on bodiless default.');
   }
   const defaultSettings = getDefaultSettings();
   return {
