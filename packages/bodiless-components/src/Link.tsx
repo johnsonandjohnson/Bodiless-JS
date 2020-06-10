@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { HTMLProps } from 'react';
+import React, { ComponentType, HTMLProps } from 'react';
 import {
   EditButtonOptions,
   getUI,
@@ -44,6 +44,7 @@ export type Props = Pick<AProps, Exclude<keyof AProps, 'href'>> & {
   unwrap?: () => void,
 };
 
+
 // Options used to create an edit button.
 export const editButtonOptions: EditButtonOptions<Props, Data> = {
   icon: 'link',
@@ -67,7 +68,7 @@ export const editButtonOptions: EditButtonOptions<Props, Data> = {
       <>
         <ComponentFormTitle>Link</ComponentFormTitle>
         <ComponentFormLabel htmlFor="link-href">URL</ComponentFormLabel>
-        <ComponentFormText field="href" id="link-href" aria-describedby="description" />
+        <ComponentFormText field="href" id="link-href" aria-describedby="description" placeholder="/link" />
         <ComponentFormDescription id="description">
           Use relative URLs for internal links. Preface the link with `/` to be
           relative to the root, otherwise the link is relative to the page. Use
@@ -86,8 +87,21 @@ export const editButtonOptions: EditButtonOptions<Props, Data> = {
 };
 
 const emptyValue = {
-  href: '/link',
+  href: '',
 };
+
+const withPropTransformer = (transformer: Function) => (prop: string) => (
+  Component: ComponentType,
+) => (props: any) => {
+  const props$ = {
+    ...props,
+    [prop]: transformer(props[prop]),
+  };
+  return <Component {...props$} />;
+};
+
+const hrefTransformer = (href : string) => (href !== '' ? href : '#');
+const withHrefTransformer = withPropTransformer(hrefTransformer)('href');
 // Composed hoc which creates editable version of the component.
 // Note - the order is important. In particular:
 // - the node data handlers must be outermost
@@ -108,6 +122,7 @@ export const asBodilessLink = (nodeKey?: string) => flowRight(
     withLocalContextMenu,
   ),
   withData,
+  withHrefTransformer,
 ) as Bodiless<Props, Props & Partial<WithNodeProps>>;
 const Link = asBodilessLink()('a');
 export default Link;
