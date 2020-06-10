@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,15 +12,67 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { FC, ComponentType, HTMLProps } from 'react';
+import { flow } from 'lodash';
+import {
+  addClasses,
+  withDesign,
+  designable,
+  DesignableComponentsProps,
+  DesignableProps,
+  Div,
+} from '@bodiless/fclasses';
+import { Editable } from '@bodiless/components'; 
+import {
+  asPageContainer,
+  asPrimaryColorBackground,
+} from '../Elements.token';
 
-const Footer = () => (
-  <div className="container mx-auto py-3">
-    <hr />
-    <p>
-      &copy; Copyright 2019-20 Johnson &amp; Johnson
-    </p>
-  </div>
+var today = new Date();
+var date = new Intl.DateTimeFormat().format(today);
+var year = new Intl.DateTimeFormat('en-US', { year: 'numeric' }).format(today);
+
+type FooterComponents = {
+  Wrapper: ComponentType<any>,
+  Container: ComponentType<any>,
+};
+
+export type Props = {
+  siteTitle: string,
+} & DesignableComponentsProps<FooterComponents> & HTMLProps<HTMLElement>;
+
+const footerComponents:FooterComponents = {
+  Wrapper: Div,
+  Container: Div,
+};
+
+const Footer: FC<DesignableProps & { siteTitle: string }> = ({ siteTitle, components }) => {
+  const {
+    Wrapper,
+    Container,
+  } = components;
+
+  return (
+    <Wrapper>
+      <Container>
+        <p>
+          ©
+          {siteTitle}
+          &nbsp;2019-{year}
+        </p>
+        <Editable nodeKey="copyright" placeholder="Insert Copyright" nodeCollection="site" />
+        {date}
+      </Container>
+    </Wrapper>
+  );
+};
+
+const asSiteFooter = flow(
+  designable(footerComponents),
+  withDesign({
+    Wrapper: asPrimaryColorBackground,
+    Container: flow(asPageContainer, addClasses('py-3')),
+  }),
 );
 
-export default Footer;
+export default asSiteFooter(Footer);
