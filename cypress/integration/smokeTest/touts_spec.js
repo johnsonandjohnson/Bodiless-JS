@@ -18,11 +18,6 @@ describe('Tout testing', () => {
     cy.clickEdit();
   });
 
-  after(() => {
-    cy.revertChanges();
-  });
-
-
   const title = 'AT - Title 1';
   const description = 'AT - Description 1';
   const ctaLabel = 'AT - CTA Link 1';
