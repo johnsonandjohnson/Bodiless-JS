@@ -19,13 +19,13 @@ describe('PDP (Product Details Page) smoke tests', function () {
   const accordionDirectionsBodyExpandedXpath = '//*[@data-accordion-element="accordion"][@aria-label="Directions"]//*[@data-accordion-element="accordion-body"]'
   const accordionDirectionsBodyPlaceholderXpath = '//*[@data-accordion-element="accordion"][@aria-label="Directions"]//*[@data-accordion-element="accordion-body"]//*[text()="Enter Product Information"]'
   const bvTextXpath = '//*[@data-product-element="ratings-summary"][text()="Please hover and click to enter Bazaarvoice Product External ID: "]'
-  const editBVIconXpath = '//*[@aria-label="Local Context Menu"]/*[@aria-label="Edit"]'
-  const closeBVFormXpath = '//*[@aria-label="Context Menu Edit Form"]/*[@aria-label="Cancel"]'
+  const editBVIconXpath = '//*[@aria-label="Local Context Menu"]/*[@aria-label="Settings"]'
+  const closeBVFormXpath = '//*[@aria-label="Context Menu Settings Form"]/*[@aria-label="Cancel"]'
   const imagePlaceholderXpath = '//*[@data-product-element="image"]'
   const imageIconXpath = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Image"]'
   const checkmarkIconImageFormXpath = '//form[@aria-label="Context Menu Image Form"]//button[@aria-label="Submit"]'
   const flexboxXpath = '//*[@data-product-element="flow-container"]'
-  const addComponentIconXpath = '//button[@aria-label="add"]'
+  const addComponentIconXpath = '//button[@aria-label="Add"]'
 
 
   it('PDP: 1 - creating a page from /products/', () => {

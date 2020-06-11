@@ -26,24 +26,24 @@ describe('Editor Menu (left and right)', function () {
    const docsIcon = '//*[@aria-label="Docs"]'
    const editIcon = '//*[@aria-label="Edit"]'
    const addPageIcon = '//*[@aria-label="Page"]'
-   const latestCommitsIcon = '//*[@aria-label="listCommits"]'
-   const pushIcon = '//*[@aria-label="savechanges"]'
-   const revertIcon = '//*[@aria-label="resetchanges"]'
+   const historyIcon = '//*[@aria-label="History"]'
+   const pushIcon = '//*[@aria-label="Push"]'
+   const revertIcon = '//*[@aria-label="Revert"]'
 
    const headerAddPageForm = '//*[@aria-label="Context Menu Page Form"]//h3[text()="Add a New Page"]'
    const fieldAddPageForm = '//*[@aria-label="Context Menu Page Form"]//input[@id="new-page-path"]'
    const closeIconAddPageForm = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Cancel"]'
    const checkmarkIconAddPageForm = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Submit"]'
 
-   const headerLatestCommitsForm = '//*[@aria-label="Context Menu listCommits Form"]//h3[text()="Latest Commits"]'
-   const itemLatestCommitsForm = '//*[@aria-label="Context Menu listCommits Form"]//input[@type="radio"][@name="commits"]'
-   const checkmarkIconLatestCommitsForm = '//*[@aria-label="Context Menu listCommits Form"]//*[@aria-label="Submit"]'
-   const closeIconLatestCommitsForm = '//*[@aria-label="Context Menu listCommits Form"]//*[@aria-label="Cancel"]'
+   const headerLatestCommitsForm = '//*[@aria-label="Context Menu History Form"]//h3[text()="Latest Commits"]'
+   const itemLatestCommitsForm = '//*[@aria-label="Context Menu History Form"]//input[@type="radio"][@name="commits"]'
+   const checkmarkIconLatestCommitsForm = '//*[@aria-label="Context Menu History Form"]//*[@aria-label="Submit"]'
+   const closeIconLatestCommitsForm = '//*[@aria-label="Context Menu History Form"]//*[@aria-label="Cancel"]'
 
-   const headerRevertForm = '//*[@aria-label="Context Menu resetchanges Form"]//h3[text()="Revert to saved"]'
-   const descrRevertForm = '//*[@aria-label="Context Menu resetchanges Form"]//label[text()="Discard local changes"]'
-   const checkmarkIconRevertForm = '//*[@aria-label="Context Menu resetchanges Form"]//*[@aria-label="Submit"]'
-   const closeIconRevertForm = '//*[@aria-label="Context Menu resetchanges Form"]//*[@aria-label="Cancel"]'
+   const headerRevertForm = '//*[@aria-label="Context Menu Revert Form"]//h3[text()="Revert to saved"]'
+   const descrRevertForm = '//*[@aria-label="Context Menu Revert Form"]//label[text()="Discard local changes"]'
+   const checkmarkIconRevertForm = '//*[@aria-label="Context Menu Revert Form"]//*[@aria-label="Submit"]'
+   const closeIconRevertForm = '//*[@aria-label="Context Menu Revert Form"]//*[@aria-label="Cancel"]'
 
 
 
@@ -172,12 +172,12 @@ describe('Editor Menu (left and right)', function () {
          .should('be.visible')
       cy.xpath(editIcon)
          .should('be.visible')
-      cy.xpath(latestCommitsIcon)
+      cy.xpath(historyIcon)
          .should('be.visible')
       cy.xpath(addPageIcon)
          .should('not.exist')
       cy.xpath(pushIcon)
-         .should('not.exist')
+         .should('be.visible')
       cy.xpath(revertIcon)
          .should('not.exist')
    }
@@ -191,7 +191,7 @@ describe('Editor Menu (left and right)', function () {
          .should('be.visible')
       cy.xpath(addPageIcon)
          .should('be.visible')
-      cy.xpath(latestCommitsIcon)
+      cy.xpath(historyIcon)
          .should('be.visible')
       cy.xpath(pushIcon)
          .should('be.visible')
@@ -216,7 +216,7 @@ describe('Editor Menu (left and right)', function () {
    }
 
    function checkLatestCommitsButton() {
-      cy.xpath(latestCommitsIcon)
+      cy.xpath(historyIcon)
          .click()
       cy.xpath(headerLatestCommitsForm)
       cy.xpath(itemLatestCommitsForm)
