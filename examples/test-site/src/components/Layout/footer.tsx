@@ -22,15 +22,15 @@ import {
   DesignableProps,
   Div,
 } from '@bodiless/fclasses';
-import { Editable } from '@bodiless/components'; 
+import { Editable } from '@bodiless/components';
 import {
   asPageContainer,
   asPrimaryColorBackground,
 } from '../Elements.token';
 
-var today = new Date();
-var date = new Intl.DateTimeFormat().format(today);
-var year = new Intl.DateTimeFormat('en-US', { year: 'numeric' }).format(today);
+const today = new Date();
+const date = new Intl.DateTimeFormat().format(today);
+const year = new Intl.DateTimeFormat('en-US', { year: 'numeric' }).format(today);
 
 type FooterComponents = {
   Wrapper: ComponentType<any>,
@@ -58,7 +58,8 @@ const Footer: FC<DesignableProps & { siteTitle: string }> = ({ siteTitle, compon
         <p>
           ©
           {siteTitle}
-          &nbsp;2019-{year}
+          &nbsp;2019-
+          {year}
         </p>
         <Editable nodeKey="copyright" placeholder="Insert Copyright" nodeCollection="site" />
         {date}
