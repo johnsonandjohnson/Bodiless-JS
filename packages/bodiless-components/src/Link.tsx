@@ -44,7 +44,6 @@ export type Props = Pick<AProps, Exclude<keyof AProps, 'href'>> & {
   unwrap?: () => void,
 };
 
-
 // Options used to create an edit button.
 export const editButtonOptions: EditButtonOptions<Props, Data> = {
   icon: 'link',
@@ -90,18 +89,10 @@ const emptyValue = {
   href: '',
 };
 
-const withPropTransformer = (transformer: Function) => (prop: string) => (
-  Component: ComponentType,
-) => (props: any) => {
-  const props$ = {
-    ...props,
-    [prop]: transformer(props[prop]),
-  };
-  return <Component {...props$} />;
+const withHrefTransformer = (Component : ComponentType<AProps>) => {
+  const TransformedHref = ({ href, ...rest } : AProps) => <Component href={href !== '' ? href : '#'} {...rest} />;
+  return TransformedHref;
 };
-
-const hrefTransformer = (href : string) => (href !== '' ? href : '#');
-const withHrefTransformer = withPropTransformer(hrefTransformer)('href');
 // Composed hoc which creates editable version of the component.
 // Note - the order is important. In particular:
 // - the node data handlers must be outermost
