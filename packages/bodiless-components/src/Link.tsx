@@ -48,6 +48,7 @@ export type Props = Pick<AProps, Exclude<keyof AProps, 'href'>> & {
 export const editButtonOptions: EditButtonOptions<Props, Data> = {
   icon: 'link',
   name: 'Link',
+  label: 'Link',
   renderForm: ({ ui: formUi, unwrap, closeForm }) => {
     const {
       ComponentFormTitle,

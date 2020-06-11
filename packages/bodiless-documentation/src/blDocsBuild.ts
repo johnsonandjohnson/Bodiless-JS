@@ -14,7 +14,6 @@
  */
 
 /* eslint-disable no-console */
-import path from 'path';
 import { flow } from 'lodash';
 import fs from 'fs-extra';
 // import cleanSymlinks from './cleanSymlinks';
@@ -24,8 +23,8 @@ import {
   writeTree, writeResources, copyFile, symlinkFile,
 } from './write';
 import { writeSideBars, writeNavBar } from './createBar';
-import defaultToc from './defaultToc';
 import { Tree } from './type';
+import readSettings from './readSettings';
 
 const buildSubTree = async (toc: any, namespace: string) => {
   // We start by using locateFiles and withTreeFromFile to build up an array of TreeHO and
@@ -43,15 +42,7 @@ const buildSubTree = async (toc: any, namespace: string) => {
 const blDocsBuild = async () => {
   const copier = process.env.BODILESS_DOCS_COPYFILES ? copyFile : symlinkFile;
   const docPath = './doc';
-  let toc: any;
-  try {
-    const tocPath = path.resolve('./bodiless.docs.toc.js');
-    // eslint-disable-next-line global-require
-    toc = require(tocPath).default(); // eslint-disable-line import/no-dynamic-require
-  } catch (e) {
-    console.warn('No local TOC. Falling back on bodiless default.');
-    toc = defaultToc();
-  }
+  const { toc } = readSettings();
 
   console.log('Building documentation tree');
   // The top level keys of the toc are namespaces defining which docs.json files to parse.

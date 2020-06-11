@@ -30,7 +30,7 @@ import {
 import ReactTagsField from './ReactTags';
 
 const Toolbar = flow(
-  addClasses('bl-bg-black bl-rounded bl-z-50 bl-p-grid-2 bl-fixed bl-top-grid-0 bl-left-grid-0 bl-text-white'),
+  addClasses('bl-flex bl-flex-col bl-bg-black bl-rounded bl-z-50 bl-p-grid-2 bl-fixed bl-top-grid-0 bl-left-grid-0 bl-text-white'),
   addProps({ role: 'toolbar', 'aria-label': 'Global Context Menu Left', id: 'global-context-menu' }),
 )(Div);
 
