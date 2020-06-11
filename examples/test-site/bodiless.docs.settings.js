@@ -14,5 +14,7 @@
 
 const { defaultToc } = require('@bodiless/documentation');
 
-const getToc = () => defaultToc();
-module.exports.default = getToc;
+const settings = () => ({
+  toc: defaultToc(),
+});
+module.exports.default = settings;
