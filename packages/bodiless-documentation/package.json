@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/documentation",
-  "version": "0.0.49",
+  "version": "0.0.50",
   "description": "A tool to aggregate markdown files for rendering by docsify",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
   "homepage": "",
