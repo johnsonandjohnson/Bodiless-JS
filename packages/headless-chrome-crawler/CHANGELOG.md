@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.50](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.49...v0.0.50) (2020-06-12)
+
+**Note:** Version bump only for package @bodiless/headless-chrome-crawler
+
+
+
+
+
+## [0.0.49](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.48...v0.0.49) (2020-06-08)
+
+
+### Features
+
+* **Migration tool:** Migrate page and resource redirections. ([#309](https://github.com/johnsonandjohnson/bodiless-js/issues/309)) ([4b4163b](https://github.com/johnsonandjohnson/bodiless-js/commit/4b4163bf50a272df2da4f38d8921762382624488))
+
+
+
+
+
 ## [0.0.48](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.47...v0.0.48) (2020-05-20)
 
 **Note:** Version bump only for package @bodiless/headless-chrome-crawler

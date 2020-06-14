@@ -41,7 +41,7 @@
 import 'cypress-file-upload'
 
 Cypress.Commands.add("revertChanges", () => {
-  cy.xpath('//*[@aria-label="resetchanges"]')
+  cy.xpath('//*[@aria-label="Revert"]')
     .click()
   cy.xpath('//*[@aria-label="Submit"]')
     .click()
