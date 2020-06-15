@@ -27,17 +27,17 @@ import { WantToLearnMore, GivingBackToCommunity } from '../Contentful/Tout';
 const contentfulTouts = {
   GivingBackToCommunity: flow(
     replaceWith(GivingBackToCommunity),
-    withTitle('Giving Back To Community'),
-    withDesc('Giving Back To Community'),
     withType('Contentful')(),
     withType('Tout')(),
+    withTitle('Giving Back To Community'),
+    withDesc('Custom content for community campaign.'),
   ),
   WantToLearnMore: flow(
     replaceWith(WantToLearnMore),
-    withTitle('Want to learn more?'),
-    withDesc('Want to learn more?'),
     withType('Contentful')(),
     withType('Tout')(),
+    withTitle('Want to learn more?'),
+    withDesc('Custom content for doc campaign.'),
   ),
 };
 
