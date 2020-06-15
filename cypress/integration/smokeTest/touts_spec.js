@@ -19,11 +19,6 @@ describe('Tout testing', function () {
     cy.clickEdit()
   })
 
-  after(function () {
-    cy.revertChanges()
-  })
-
-
   const title = 'AT - Title 1'
   const description = 'AT - Description 1'
   const ctaLabel = 'AT - CTA Link 1'
@@ -118,10 +113,11 @@ describe('Tout testing', function () {
       .should('have.attr', 'src', '/' + imageOriginal)
       .and('have.attr', 'alt', imageAltText)
     cy.xpath(imageLinkXpath)
-      .should('have.attr', 'href', '#' + toutUrl)
+      .should('have.attr', 'href', toutUrl)
     cy.xpath(ctaButtonXpath)
       .click()
     cy.url().should('include', toutUrl)
+    cy.visit('/touts/');
   })
 
 
@@ -137,7 +133,7 @@ describe('Tout testing', function () {
       .should('have.attr', 'src', '/' + imageOriginal)
       .and('have.attr', 'alt', imageAltText)
     cy.xpath(imageLinkXpath)
-      .should('have.attr', 'href', '#' + toutUrl)
+      .should('have.attr', 'href', toutUrl)
   })
 
   it('touts: 9 - editing Title', () => {
@@ -200,10 +196,11 @@ describe('Tout testing', function () {
       .should('have.attr', 'src', '/' + imageUpdated)
       .and('have.attr', 'alt', imageAltText + editedPostfix)
     cy.xpath(ctaButtonXpath)
-      .should('have.attr', 'href', '#' + toutUrl + editedToutUrl)
+      .should('have.attr', 'href', toutUrl + editedToutUrl)
     cy.xpath(imagePlaceholderXpath)
       .click()
     cy.url().should('include', toutUrl + editedToutUrl)
+    cy.visit('/touts/');
   })
 
 
@@ -219,6 +216,6 @@ describe('Tout testing', function () {
       .should('have.attr', 'src', '/' + imageUpdated)
       .and('have.attr', 'alt', imageAltText + editedPostfix)
     cy.xpath(imageLinkXpath)
-      .should('have.attr', 'href', '#' + toutUrl + editedToutUrl)
+      .should('have.attr', 'href', toutUrl + editedToutUrl)
   })
 })
