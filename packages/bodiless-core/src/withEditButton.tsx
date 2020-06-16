@@ -49,6 +49,7 @@ export type EditButtonOptions<P, D> = {
 export const createMenuOptionHook = <P extends object, D extends object>({
   icon,
   name,
+  label,
   global,
   local,
   renderForm,
@@ -78,6 +79,7 @@ export const createMenuOptionHook = <P extends object, D extends object>({
       {
         icon,
         name,
+        label,
         isActive,
         global,
         local,

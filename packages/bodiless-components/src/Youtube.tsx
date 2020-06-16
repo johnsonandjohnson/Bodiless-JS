@@ -48,7 +48,8 @@ export type Props = Pick<IframeProps, Exclude<keyof IframeProps, 'src'>>;
 
 // Options used to create an edit button.
 export const editButtonOptions: EditButtonOptions<Props, Data> = {
-  icon: 'edit',
+  icon: 'settings',
+  label: 'Settings',
   name: 'Edit',
   renderForm: ({ ui: formUi }) => {
     const { ComponentFormTitle, ComponentFormLabel, ComponentFormText } = getUI(formUi);

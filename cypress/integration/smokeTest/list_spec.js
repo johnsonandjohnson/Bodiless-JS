@@ -30,8 +30,8 @@ describe('List (text and link versions) testing', function () {
   const listItemUrl = 'AT-listItemUrl'
   const itemCount = 2
   const addListItemIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Add"]'
-  const addSubListItemIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Toggle"]'
-  const removeListItemIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Remove"]'
+  const addSubListItemIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Sub"]'
+  const removeListItemIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Delete"]'
   const linkIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Link"]'
   const urlField = '//form[@aria-label="Context Menu Link Form"]//input[@id="link-href"]'
   const checkmarkIcon = '//form[@aria-label="Context Menu Link Form"]//button[@aria-label="Submit"]'
@@ -143,7 +143,7 @@ describe('List (text and link versions) testing', function () {
     for (i = 0; i < itemCount; i++) {
       addUrlInListItem(topLinkListItem[i], listItemUrl + '-' + (i + 1).toString());
       cy.xpath(topLinkListItem[i])
-        .should('have.attr', 'href', '#' + listItemUrl + '-' + (i + 1).toString());
+        .should('have.attr', 'href',  listItemUrl + '-' + (i + 1).toString());
     }
   })
 
@@ -163,7 +163,7 @@ describe('List (text and link versions) testing', function () {
     for (i = 0; i < itemCount; i++) {
       addUrlInListItem(topLinkListItem1Sublist[i], listItemUrl + '-1.' + (i + 1).toString());
       cy.xpath(topLinkListItem1Sublist[i])
-        .should('have.attr', 'href', '#' + listItemUrl + '-1.' + (i + 1).toString());
+        .should('have.attr', 'href',  listItemUrl + '-1.' + (i + 1).toString());
     }
   })
 
@@ -175,10 +175,10 @@ describe('List (text and link versions) testing', function () {
     for (i = 0; i < itemCount; i++) {
       cy.xpath(topLinkListItem[i])
         .should('have.text', listItemLabel + ' ' + (i + 1).toString())
-        .should('have.attr', 'href', '#' + listItemUrl + '-' + (i + 1).toString());
+        .should('have.attr', 'href',  listItemUrl + '-' + (i + 1).toString());
       cy.xpath(topLinkListItem1Sublist[i])
         .should('have.text', sublistItemLabel + ' 1.' + (i + 1).toString())
-        .should('have.attr', 'href', '#' + listItemUrl + '-1.' + (i + 1).toString());
+        .should('have.attr', 'href',  listItemUrl + '-1.' + (i + 1).toString());
     }
   })
 
@@ -190,10 +190,10 @@ describe('List (text and link versions) testing', function () {
     addUrlInListItem(topLinkListItem1Sublist[0], editedPostfix);
     cy.xpath(topLinkListItem[0])
       .should('have.text', listItemLabel + ' 1' + editedPostfix)
-      .should('have.attr', 'href', '#' + listItemUrl + '-1' + editedPostfix);
+      .should('have.attr', 'href',  listItemUrl + '-1' + editedPostfix);
     cy.xpath(topLinkListItem1Sublist[0])
       .should('have.text', sublistItemLabel + ' 1.1' + editedPostfix)
-      .should('have.attr', 'href', '#' + listItemUrl + '-1.1' + editedPostfix);
+      .should('have.attr', 'href',  listItemUrl + '-1.1' + editedPostfix);
   })
 
 
@@ -202,20 +202,22 @@ describe('List (text and link versions) testing', function () {
     cy.clickEdit();
     cy.xpath(topLinkListItem[0])
       .should('have.text', listItemLabel + ' 1' + editedPostfix)
-      .should('have.attr', 'href', '#' + listItemUrl + '-1' + editedPostfix);
+      .should('have.attr', 'href',  listItemUrl + '-1' + editedPostfix);
     cy.xpath(topLinkListItem1Sublist[0])
       .should('have.text', sublistItemLabel + ' 1.1' + editedPostfix)
-      .should('have.attr', 'href', '#' + listItemUrl + '-1.1' + editedPostfix);
+      .should('have.attr', 'href',  listItemUrl + '-1.1' + editedPostfix);
   })
 
 
   it('list: 2.8 - checking clicking the links in a link list and a link sublist items in Preview Mode', () => {
     cy.xpath(topLinkListItem[0])
       .click();
-    cy.url().should('include', '#' + listItemUrl + '-1' + editedPostfix);
+    cy.url().should('include',  listItemUrl + '-1' + editedPostfix);
+    cy.visit('/list/');
     cy.xpath(topLinkListItem1Sublist[0])
       .click();
-    cy.url().should('include', '#' + listItemUrl + '-1.1' + editedPostfix);
+    cy.url().should('include',  listItemUrl + '-1.1' + editedPostfix);
+    cy.visit('/list/');
   })
 
 
@@ -239,7 +241,7 @@ describe('List (text and link versions) testing', function () {
     cy.xpath(topLinkListItem[0])
       .should('have.text', listItemLabel + ' 1' + editedPostfix);
     cy.xpath(topLinkListItem[0])
-      .should('have.attr', 'href', '#' + listItemUrl + '-1' + editedPostfix);
+      .should('have.attr', 'href',  listItemUrl + '-1' + editedPostfix);
   })
 
 

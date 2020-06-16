@@ -92,12 +92,13 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
   const [isUploading, setIsUploading] = useState(false);
   const [isUploadTimeout, setIsUploadingTimeout] = useState(false);
   const [isUploadFinished, setIsUploadFinished] = useState(false);
+  const saveRequest = new BackendSave();
   useEffect(() => {
     if (isUploading) {
       const timer = setTimeout(
         () => {
           if (isUploading) {
-            BackendSave.cancel('Timeout exceeded');
+            saveRequest.cancel('Timeout exceeded');
             formApi.setError(targetFieldName, 'Timeout exceeded');
             setIsUploadingTimeout(true);
             setIsUploading(false);
@@ -112,9 +113,9 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
   const onDrop = useCallback(acceptedFiles => {
     setIsUploading(true);
     setIsUploadFinished(false);
+    setIsUploadingTimeout(false);
     setStatusText(`File "${acceptedFiles[0].name}" selected`);
     formApi.setError(targetFieldName, 'Uploading in progress');
-    const saveRequest = new BackendSave();
     saveRequest.saveFile(acceptedFiles[0])
       .then(() => {
         const state = formApi.getState();
@@ -174,6 +175,7 @@ type Props = ReducedImageProps & { ui?: TImagePickerUI};
 // Options used to create an edit button.
 export const editButtonOptions: EditButtonOptions<Props, Data> = {
   icon: 'image',
+  label: 'Image',
   name: 'Image',
   renderForm: ({ ui: formUi, formApi, componentProps }) => {
     const { ui: imagePickerUI } = componentProps;
