@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.50](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.49...v0.0.50) (2020-06-12)
+
+
+### Features
+
+* **documentation:** allow to override doc site resources locally ([#369](https://github.com/johnsonandjohnson/bodiless-js/issues/369)) ([1884179](https://github.com/johnsonandjohnson/bodiless-js/commit/18841798e5d22d69c12230ec41c91e0150dbda72))
+
+
+
+
+
 ## [0.0.49](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.48...v0.0.49) (2020-06-08)
 
 **Note:** Version bump only for package @bodiless/documentation

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { HTMLProps } from 'react';
+import React, { ComponentType, HTMLProps } from 'react';
 import {
   EditButtonOptions,
   getUI,
@@ -54,6 +54,7 @@ export const editButtonOptions: EditButtonOptions<Props, Data> = {
       ComponentFormTitle,
       ComponentFormLabel,
       ComponentFormText,
+      ComponentFormDescription,
       ComponentFormUnwrapButton,
     } = getUI(formUi);
     const removeLinkHandler = (event: React.MouseEvent) => {
@@ -67,7 +68,12 @@ export const editButtonOptions: EditButtonOptions<Props, Data> = {
       <>
         <ComponentFormTitle>Link</ComponentFormTitle>
         <ComponentFormLabel htmlFor="link-href">URL</ComponentFormLabel>
-        <ComponentFormText field="href" id="link-href" />
+        <ComponentFormText field="href" id="link-href" aria-describedby="description" placeholder="/link" />
+        <ComponentFormDescription id="description">
+          Use relative URLs for internal links. Preface the link with `/` to be
+          relative to the root, otherwise the link is relative to the page. Use
+          a fully formed URL for external links, e.g., https://www.example.com.
+        </ComponentFormDescription>
         {unwrap && (
         <ComponentFormUnwrapButton type="button" onClick={removeLinkHandler}>
           Remove Link
@@ -81,7 +87,12 @@ export const editButtonOptions: EditButtonOptions<Props, Data> = {
 };
 
 const emptyValue = {
-  href: '#',
+  href: '',
+};
+
+const withHrefTransformer = (Component : ComponentType<AProps>) => {
+  const TransformedHref = ({ href, ...rest } : AProps) => <Component href={href !== '' ? href : '#'} {...rest} />;
+  return TransformedHref;
 };
 // Composed hoc which creates editable version of the component.
 // Note - the order is important. In particular:
@@ -103,6 +114,7 @@ export const asBodilessLink = (nodeKey?: string) => flowRight(
     withLocalContextMenu,
   ),
   withData,
+  withHrefTransformer,
 ) as Bodiless<Props, Props & Partial<WithNodeProps>>;
 const Link = asBodilessLink()('a');
 export default Link;

@@ -25,6 +25,7 @@ import {
   ComponentFormTitle, ComponentFormCloseButton, ComponentFormLabel, ComponentFormText,
   ComponentFormButton, Icon, Div, Hr, ToolbarButton, ComponentFormUnwrapButton,
   ComponentFormError, ComponentFormSubmitButton, ComponentFormList, ComponentFormListItem,
+  ComponentFormDescription,
 } from '@bodiless/ui';
 import ReactTagsField from './ReactTags';
 
@@ -73,6 +74,7 @@ export const GlobalTooltip: FC<ReactTooltip['props']> = props => {
 const ui: ContextMenuUI = {
   ComponentFormTitle,
   ComponentFormLabel,
+  ComponentFormDescription,
   ComponentFormText,
   ComponentFormButton,
   ComponentFormCloseButton,
