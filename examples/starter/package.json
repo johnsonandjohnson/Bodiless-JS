@@ -61,6 +61,7 @@
     "start": "run-p -r dev-backend dev-frontend",
     "serve": "gatsby serve",
     "migrate": "cross-env DEBUG=migration_tool migration_tool",
+    "migrate:debug": "cross-env DEBUG=migration_tool:* migration_tool",
     "migrate:postbuild": "cross-env DEBUG=migration_tool migration_tool postbuild public",
     "migrate:full": "npm run migrate && npm run build && npm run migrate:postbuild && npm run serve"
   },
