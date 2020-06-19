@@ -13,6 +13,7 @@
  */
 
 import { EventEmitter as EE } from 'ee-ts';
+import debug from 'debug';
 // eslint-disable-next-line import/no-unresolved
 import { Request, Response } from '@bodiless/headless-chrome-crawler/lib/puppeteer';
 // @ts-ignore - ignoring as it contains functions that invoked in browser
@@ -22,9 +23,11 @@ import {
   isUrlExternal,
   trimQueryParamsFromUrl,
 } from './helpers';
-import debug from './debug';
+import debugDefault from './debug';
 // require due to ES6 modules cannot directly export class objects.
 import HCCrawler = require('@bodiless/headless-chrome-crawler');
+
+const debugScraper = debug('migration_tool:scraper');
 
 export interface ScrapedPage {
   pageUrl: string,
@@ -69,6 +72,29 @@ export class Scraper extends EE<Events> {
     this.params = params;
   }
 
+  private shouldAcceptPageResponse(response: any) {
+    // we can get an external url here
+    // when an internal url is redirected to the external
+    const externalUrl = this.params.pageUrls.some(url => (
+      isUrlExternal(url, response.url)
+    ));
+    if (externalUrl) {
+      console.log(`external url ${response.url} received. skipping`);
+      return false;
+    }
+    const statusCode = Number(response.status);
+    // skip if resource was already handled.
+    if (statusCode === 304) {
+      return false;
+    }
+    // skip and log responses with server errors.
+    if (statusCode >= 500) {
+      console.log(`response ${response.url} with status ${statusCode} received. skipping`);
+      return false;
+    }
+    return true;
+  }
+
   async Crawl() {
     const crawler = await HCCrawler.launch({
       enableFileDownload: this.params.enableFileDownload || false,
@@ -83,24 +109,20 @@ export class Scraper extends EE<Events> {
       preRequest: async queueOptions => {
         try {
           if (queueOptions !== undefined && queueOptions.url !== undefined) {
+            debugScraper(`preRequest: queueing ${queueOptions.url}`);
             /* eslint no-param-reassign: 1 */
             queueOptions.url = trimQueryParamsFromUrl(queueOptions.url);
           }
         } catch (error) {
-          debug(error);
+          debugDefault(error);
         }
         return true;
       },
       // Function to be called with evaluated results from browsers
       onSuccess: (async successResult => {
+        debugScraper(`onSuccess: received ${successResult.response.url} with ${successResult.response.status} status`);
         try {
-          // we can get an external url here
-          // when an internal url is redirected to the external
-          const externalUrl = this.params.pageUrls.some(url => (
-            isUrlExternal(url, successResult.response.url)
-          ));
-          if (externalUrl) {
-            console.log(`external url ${successResult.response.url} received. skipping`);
+          if (!this.shouldAcceptPageResponse(successResult.response)) {
             return;
           }
           // decide if we get page or resource response
@@ -114,11 +136,11 @@ export class Scraper extends EE<Events> {
             this.emit('fileReceived', successResult.response.url);
           }
         } catch (error) {
-          debug(error);
+          debugDefault(`onSuccess exception: ${error}`);
         }
       }),
       onError: (error => {
-        debug(`onerror ${error}`);
+        debugDefault(`onError: ${error}`);
         this.emit('error', error);
       }),
     });
@@ -126,6 +148,7 @@ export class Scraper extends EE<Events> {
       this.emit('fileReceived', options.url);
     });
     crawler.on(HCCrawler.Events.PuppeteerRequestStarted, async (request: Request) => {
+      debugScraper(`requestStarted: ${request.url()}`);
       const resourceTypes = [
         'fetch',
         'xhr',
@@ -139,6 +162,7 @@ export class Scraper extends EE<Events> {
       }
     });
     crawler.on(HCCrawler.Events.PuppeteerResponseReceived, async (response: Response) => {
+      debugScraper(`responseReceived: ${response.url()}`);
       this.emit('responseReceived', response);
     });
     crawler.on(HCCrawler.Events.RequestFinished, async () => {
