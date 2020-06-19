@@ -17,6 +17,7 @@ import { useEditContext } from '@bodiless/core';
 import { ComponentFormSpinner } from '@bodiless/ui';
 import { isEmpty } from 'lodash';
 import { useFormApi } from 'informed';
+import type { ChangeNotifier } from './GitProvider';
 
 type GitBranchType = {
   branch: string | null,
@@ -38,6 +39,10 @@ type PropsWithFormApi = {
   formApi: any;
 };
 
+type PropsWithNotify = {
+  notifyOfChanges: ChangeNotifier;
+};
+
 /**
  * Component for showing and pulling remote changes.
  *
@@ -45,13 +50,25 @@ type PropsWithFormApi = {
  * @param {BackendClient} client
  * @constructor
  */
-const RemoteChanges = ({ client }: PropsWithGitClient) => {
+const RemoteChanges = ({ client, notifyOfChanges }: PropsWithGitClient & PropsWithNotify) => {
   const formApi = useFormApi();
   // @Todo revise the use of formState, possibly use informed multistep.
   if (formApi.getState().submits === 0) {
-    return (<FetchChanges client={client} formApi={formApi} />);
+    return (
+      <FetchChanges
+        client={client}
+        formApi={formApi}
+        notifyOfChanges={notifyOfChanges}
+      />
+    );
   }
-  return <PullChanges client={client} formApi={formApi} />;
+  return (
+    <PullChanges
+      client={client}
+      formApi={formApi}
+      notifyOfChanges={notifyOfChanges}
+    />
+  );
 };
 
 enum ChangeState {
@@ -136,7 +153,9 @@ const ChangeContent = ({ status, masterStatus, errorMessage } : ContentProps) =>
  * @param formApi
  * @constructor
  */
-const FetchChanges = ({ client, formApi }: PropsWithFormApi & PropsWithGitClient) => {
+const FetchChanges = (
+  { client, formApi, notifyOfChanges }: PropsWithFormApi & PropsWithGitClient & PropsWithNotify,
+) => {
   const [state, setState] = useState<ContentProps>({
     status: ChangeState.Pending,
     masterStatus: ChangeState.NoneAvailable,
@@ -187,6 +206,7 @@ const FetchChanges = ({ client, formApi }: PropsWithFormApi & PropsWithGitClient
           errorMessage: error.message,
         });
       } finally {
+        notifyOfChanges();
         context.hidePageOverlay();
       }
     })();
@@ -208,11 +228,14 @@ type PullStatus = {
  * @param formApi
  * @constructor
  */
-const PullChanges = ({ client, formApi }: PropsWithFormApi & PropsWithGitClient) => {
+const PullChanges = (
+  { client, formApi, notifyOfChanges }: PropsWithFormApi & PropsWithGitClient & PropsWithNotify,
+) => {
   const [pullStatus, setPullStatus] = useState<PullStatus>({
     complete: false,
     error: '',
   });
+
   const context = useEditContext();
   useEffect(() => {
     (async () => {
@@ -242,6 +265,7 @@ const PullChanges = ({ client, formApi }: PropsWithFormApi & PropsWithGitClient)
       } finally {
         formApi.setValue('keepOpen', false);
         context.hidePageOverlay();
+        notifyOfChanges();
       }
     })();
   }, []);
