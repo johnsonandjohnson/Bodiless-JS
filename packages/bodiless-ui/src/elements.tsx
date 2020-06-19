@@ -52,6 +52,10 @@ export const ComponentFormTitle = addClasses(
   'bl-text-lg bl-font-bold bl-text-grey-100 bl-block bl-mb-grid-2',
 )(Title);
 
+export const ComponentFormDescription = addClasses(
+  'bl-text-xs bl-text-grey-100 bl-block bl-mb-grid-2 bl-max-w-xl-grid-1',
+)(Div);
+
 export const ComponentFormListItem = addClasses(
   'first:bl-border-t-0 bl-border-t bl-py-grid-1 bl-px-grid-1 bl-max-w-xl-grid-1',
 )(Li);

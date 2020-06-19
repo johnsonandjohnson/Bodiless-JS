@@ -12,14 +12,16 @@
  * limitations under the License.
  */
 
-import axios from 'axios';
-
-const source = axios.CancelToken.source();
+import axios, { CancelTokenSource } from 'axios';
 
 export default class BackendSave {
   private root: string;
 
   private prefix: string;
+
+  // @ts-ignore it is not initialized in constructor on purpose
+  // the plan is to initiliaze it during saveFile
+  private cancelTokenSource: CancelTokenSource;
 
   constructor(baseUrl?: string, prefix?: string) {
     let host = 'http://localhost:8005';
@@ -40,13 +42,16 @@ export default class BackendSave {
     // eslint-disable-next-line no-undef
     const payload = new FormData();
     payload.append('file', file);
-
+    this.cancelTokenSource = axios.CancelToken.source();
     return this.post(`${this.prefix}/asset/`, payload, {
-      cancelToken: source.token,
+      cancelToken: this.cancelTokenSource.token,
     });
   }
 
-  static cancel(reason: string) {
-    source.cancel(reason);
+  cancel(reason: string) {
+    // cancelTokenSource can be undefined when saveFile was not invoked before cancel
+    if (this.cancelTokenSource !== undefined) {
+      this.cancelTokenSource.cancel(reason);
+    }
   }
 }
