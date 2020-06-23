@@ -20,11 +20,9 @@ import {
   withDesign,
   designable,
   DesignableComponentsProps,
-  DesignableProps,
   Div,
 } from '@bodiless/fclasses';
-import MainMenu from '../Menus/MainMenu';
-import BurgerMenu from '../Menus/BurgerMenu';
+import ResponsiveMenu from '../Menus';
 import {
   asPageContainer,
   asHeader1,
@@ -34,10 +32,8 @@ import {
 type HeaderComponents = {
   Wrapper: ComponentType<any>,
   Container: ComponentType<any>,
-  MobileContainer: ComponentType<any>,
   SiteReturn: ComponentType<any>,
-  DesktopMenu: ComponentType<any>,
-  MobileMenu: ComponentType<any>,
+  Menu: ComponentType<any>,
 };
 export type Props = {
   siteLogo: string,
@@ -47,16 +43,14 @@ const headerComponents:HeaderComponents = {
   Wrapper: Div,
   Container: Div,
   SiteReturn: Div,
-  DesktopMenu: MainMenu,
-  MobileMenu: BurgerMenu,
+  Menu: ResponsiveMenu,
 };
-const Header: FC<DesignableProps & { siteLogo: string }> = ({ siteLogo, components }) => {
+const Header: FC<Props> = ({ siteLogo, components }) => {
   const {
     Wrapper,
     Container,
     SiteReturn,
-    DesktopMenu,
-    MobileMenu,
+    Menu,
   } = components;
 
   return (
@@ -69,8 +63,7 @@ const Header: FC<DesignableProps & { siteLogo: string }> = ({ siteLogo, componen
         </SiteReturn>
       </Container>
       <div className="container mx-auto">
-        <DesktopMenu nodeKey="MainMenu" nodeCollection="site" />
-        <MobileMenu nodeKey="MainMenu" nodeCollection="site" />
+        <Menu nodeKey="MainMenu" nodeCollection="site" />
       </div>
     </Wrapper>
   );
