@@ -81,7 +81,7 @@ describe('Fetch Changes component', () => {
     return new Promise(resolve => setImmediate(resolve)).then(() => {
       wrapper.update();
       expect(wrapper.text()).toBe(
-        'There are changes ready to be pulled. Click check (✓) to initiate.',
+        'There are updates available to be pulled. Click check (✓) to initiate, page will refresh when done.',
       );
     });
   });
