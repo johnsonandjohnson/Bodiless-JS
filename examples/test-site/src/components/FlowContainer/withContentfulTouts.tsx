@@ -23,21 +23,28 @@ import {
 } from '@bodiless/fclasses';
 import { withType } from './Categories';
 import { WantToLearnMore, GivingBackToCommunity } from '../Contentful/Tout';
+import { withOrientationFacet, withStructureFacet } from './withToutVariations';
 
 const contentfulTouts = {
   GivingBackToCommunity: flow(
     replaceWith(GivingBackToCommunity),
-    withTitle('Giving Back To Community'),
-    withDesc('Giving Back To Community'),
     withType('Contentful')(),
     withType('Tout')(),
+    withOrientationFacet('Horizontal')(),
+    withStructureFacet('With Title and Body')(),
+    withStructureFacet('With CTA')(),
+    withTitle('Giving Back To Community'),
+    withDesc('Custom content for community campaign.'),
   ),
   WantToLearnMore: flow(
     replaceWith(WantToLearnMore),
-    withTitle('Want to learn more?'),
-    withDesc('Want to learn more?'),
     withType('Contentful')(),
     withType('Tout')(),
+    withOrientationFacet('Horizontal')(),
+    withStructureFacet('With Title and Body')(),
+    withStructureFacet('With CTA')(),
+    withTitle('Want To Learn More?'),
+    withDesc('Custom content for doc campaign.'),
   ),
 };
 

@@ -13,7 +13,9 @@
  */
 
 /* eslint-disable no-alert */
-import React, { FC } from 'react';
+import React, {
+  FC, useState, useEffect, useCallback,
+} from 'react';
 import Cookies from 'universal-cookie';
 import {
   contextMenuForm,
@@ -21,6 +23,7 @@ import {
   PageContextProvider,
   TMenuOption,
   useEditContext,
+  useNotify,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
 import BackendClient from './BackendClient';
@@ -40,6 +43,7 @@ const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
  * https://www.gatsbyjs.org/docs/environment-variables/#example.
  */
 const canCommit = (process.env.BODILESS_BACKEND_COMMIT_ENABLED || '0') === '1';
+const canAlertOnLoad = process.env.BODILESS_ALERT_ON_PAGE_LOAD_ENABLED || 1;
 
 type Props = {
   client?: GitClient,
@@ -116,7 +120,7 @@ const formGitCommit = (client: GitClient) => contextMenuForm({
   );
 });
 
-const formGitPull = (client: GitClient) => contextMenuForm({
+const formGitPull = (client: GitClient, notifyOfChanges: ChangeNotifier) => contextMenuForm({
   submitValues: (values : any) => {
     const { keepOpen } = values;
     return keepOpen;
@@ -128,7 +132,7 @@ const formGitPull = (client: GitClient) => contextMenuForm({
       <ComponentFormTitle>Pull Changes</ComponentFormTitle>
       <ComponentFormText type="hidden" field="keepOpen" initialValue={false} />
       <ComponentFormText type="hidden" field="mergeMaster" initialValue={false} />
-      <RemoteChanges client={client} />
+      <RemoteChanges client={client} notifyOfChanges={notifyOfChanges} />
     </>
   );
 });
@@ -171,7 +175,11 @@ const formGitReset = (client: GitClient, context: any) => contextMenuForm({
 
 const defaultClient = new BackendClient();
 
-const getMenuOptions = (client: GitClient = defaultClient, context: any): TMenuOption[] => {
+const getMenuOptions = (
+  client: GitClient = defaultClient,
+  context: any,
+  notifyOfChanges: ChangeNotifier,
+): TMenuOption[] => {
   const saveChanges = canCommit ? formGitCommit(client) : undefined;
   return [
     {
@@ -191,7 +199,7 @@ const getMenuOptions = (client: GitClient = defaultClient, context: any): TMenuO
       name: 'Pull',
       label: 'Pull',
       icon: 'cloud_download',
-      handler: () => formGitPull(client),
+      handler: () => formGitPull(client, notifyOfChanges),
     },
     {
       name: 'resetchanges',
@@ -203,12 +211,54 @@ const getMenuOptions = (client: GitClient = defaultClient, context: any): TMenuO
   ];
 };
 
-const GitProvider: FC<Props> = ({ children, client }) => {
+export type ChangeNotifier = () => Promise<void>;
+
+const GitProvider: FC<Props> = ({ children, client = defaultClient }) => {
+  const [notifications, setNotifications] = useState([] as any);
   const context = useEditContext();
+
+  useNotify(notifications);
+
+  // Quickly [double-]check for changes in the upstream and master branches
+  // and send notifications to the "Alerts" section.
+  // Will perform on page load and after each fetch or push action initiated from UI.
+  const notifyOfChanges: ChangeNotifier = useCallback(
+    async () => {
+      try {
+        const response = await client.getChanges();
+        if (response.status !== 200) {
+          throw new Error('Fetching upstream changes failed');
+        }
+        const updatedRemoteBranches = Object.keys(response.data).filter(branch => (
+          ['upstream', 'production'].includes(branch) && response.data[branch].commits.length
+        ));
+        const isBranchOutdated = Boolean(updatedRemoteBranches.length);
+        if (isBranchOutdated) {
+          setNotifications([
+            {
+              id: 'upstreamChanges',
+              message: 'Your branch is outdated. Please pull remote changes.',
+            },
+          ]);
+        } else if (notifications.length) {
+          setNotifications([]);
+        }
+      } catch {
+        // Fail silently.
+      }
+    },
+    [notifications, setNotifications],
+  );
+
+  useEffect(() => {
+    if (canAlertOnLoad) {
+      notifyOfChanges();
+    }
+  }, []);
 
   return (
     <PageContextProvider
-      getMenuOptions={() => getMenuOptions(client, context)}
+      getMenuOptions={() => getMenuOptions(client, context, notifyOfChanges)}
       name="Git"
     >
       {children}

@@ -14,6 +14,7 @@
 
 import { flow } from 'lodash';
 import {
+  withTitle,
   withFacet,
   withDesc,
 } from '@bodiless/layouts';
@@ -35,21 +36,24 @@ const withRichText = withFacet('Rich Text');
 const richTextVariation = {
   EditorSimple: flow(
     replaceWith(EditorSimple),
-    withDesc('A block of text for a Title.\n'),
-    withRichText('Simple Rich Text')(),
     withType('Rich Text')(),
+    withRichText('Simple')(),
+    withTitle('Simple Rich Text'),
+    withDesc('Adds a block of text for a Title.\n'),
   ),
   EditorBasic: flow(
     replaceWith(EditorBasic),
-    withDesc('A block of text.\n'),
-    withRichText('Basic Rich Text')(),
     withType('Rich Text')(),
+    withRichText('Basic')(),
+    withTitle('Basic Rich Text'),
+    withDesc('Adds a block of text with basic formatting.\n'),
   ),
   EditorFullFeatured: flow(
     replaceWith(EditorFullFeatured),
-    withDesc('A block of text for more complex HTML.\n'),
-    withRichText('Full Rich Text')(),
     withType('Rich Text')(),
+    withRichText('Full')(),
+    withTitle('Full Rich Text'),
+    withDesc('Adds a block of text for more complex HTML.\n'),
   ),
 };
 
