@@ -16,6 +16,7 @@ import { flow } from 'lodash';
 import {
   withTitle,
   withDesc,
+  withFacet,
 } from '@bodiless/layouts';
 import {
   replaceWith,
@@ -29,28 +30,36 @@ import {
   LandscapeLinkableImage,
 } from '../Image';
 
+const withImageFacet = withFacet('Image');
+
 const images = {
   SquareImage: flow(
     replaceWith(SquareImage),
     withType('Image')(),
+    withImageFacet('Square')(),
     withTitle('Square Image'),
     withDesc('Adds a square image'),
   ),
   LandscapeImage: flow(
     replaceWith(LandscapeImage),
     withType('Image')(),
+    withImageFacet('Landscape')(),
     withTitle('Landscape Image'),
     withDesc('Adds a landscape image'),
   ),
   SquareLinkableImage: flow(
     replaceWith(SquareLinkableImage),
-    withType('Linkable Image')(),
+    withType('Image')(),
+    withImageFacet('Linkable')(),
+    withImageFacet('Square')(),
     withTitle('Square Linkable Image'),
     withDesc('Adds a square linkable image'),
   ),
   LandscapeLinkableImage: flow(
     replaceWith(LandscapeLinkableImage),
-    withType('Linkable Image')(),
+    withType('Image')(),
+    withImageFacet('Linkable')(),
+    withImageFacet('Landscape')(),
     withTitle('Landscape Linkable Image'),
     withDesc('Adds a landscape linkable image'),
   ),
