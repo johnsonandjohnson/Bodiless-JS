@@ -15,7 +15,9 @@ import { flowRight } from 'lodash';
 import {
   ifEditable, withNode, ifReadOnly, withoutProps,
 } from '@bodiless/core';
-import { replaceWith, asComponent, addProps } from '@bodiless/fclasses';
+import {
+  replaceWith, asComponent, addProps, stylable,
+} from '@bodiless/fclasses';
 import { Fragment } from 'react';
 import { asBodilessLink } from './Link';
 import { withToggleTo, withWrapOnSubmit } from './Toggle';
@@ -33,6 +35,7 @@ const EmptyToggle = flowRight(
 )(Fragment);
 
 const withLinkToggle = flowRight(
+  stylable,
   ifEditable(
     addProps({ 'aria-label': 'Link Toggle' }),
   ),

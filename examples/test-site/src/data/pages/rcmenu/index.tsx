@@ -24,12 +24,10 @@ export default (props: any) => (
   <Page {...props}>
     <Layout>
       <h1 className="text-3xl font-bold">Editable Menu Demo</h1>
-      <div className="ml-10">
-        <p className="py-3">
-          The following is an editable menu using rc-menu
-        </p>
-        <MainMenu nodeKey="list1" className="w-1/2" />
-      </div>
+      <p className="py-3">
+        The following is an editable menu using rc-menu
+      </p>
+      <MainMenu nodeKey="list1" className="w-full" />
     </Layout>
   </Page>
 );
