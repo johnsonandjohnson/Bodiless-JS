@@ -68,7 +68,7 @@ const PageDimensionsProvider: FC<PageDimensionsProviderProps> = ({ children, bre
       setDimensions(getDimensions(breakpoints));
     };
 
-    window.addEventListener('resize', throttle(handleResize, 500));
+    window.addEventListener('resize', throttle(handleResize, 100));
 
     return () => {
       window.removeEventListener('resize', handleResize);
