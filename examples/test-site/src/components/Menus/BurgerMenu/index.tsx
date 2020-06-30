@@ -1,5 +1,5 @@
 /**
- * Copyright Ã‚Â© 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,17 +11,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { FunctionComponent } from 'react';
+
 import { flow } from 'lodash';
-import {
-  A,
-  addProps,
-  withDesign,
-  addClasses,
-  Li,
-  replaceWith,
-} from '@bodiless/fclasses';
-import { withChild, asStatic } from '@bodiless/core';
+import { withDesign, replaceWith } from '@bodiless/fclasses';
+import { asStatic } from '@bodiless/core';
 import {
   asEditableMenu,
   asEditableBurgerSubMenu,
@@ -29,66 +22,24 @@ import {
   SingleAccordionClean,
   withBurgerSubmenu,
 } from '@bodiless/organisms';
-import { asEditable, List } from '@bodiless/components';
-import { asMobileOnly } from '../../Elements.token';
+import { List } from '@bodiless/components';
+import { withEditorSimple } from '../../Editors';
+import { withBurgerMenuStyles, withBurgerSubMenuStyles } from '../token';
 import './burger-menu.css';
 
-const defaultTopMenuLinksStyles = flow(
-  addClasses('text-black'),
-);
+const BurgerMenuList = asEditableMenu(withEditorSimple)(List);
 
-const EditableLinkList = flow(
-  asEditableMenu(asEditable),
-  defaultTopMenuLinksStyles,
-)(List);
-
-const BurgerSubMenu = flow(
-  asEditableBurgerSubMenu('Overview', asEditable),
-  withDesign({
-    Wrapper: replaceWith(Li),
-    TitleWrapper: addClasses('font-bold text-black'),
-    Body: withDesign({
-      Wrapper: addClasses('pl-1'),
-    }),
-  }),
+const BurgerMenuSubList = flow(
+  asEditableBurgerSubMenu('Overview', withEditorSimple),
+  withBurgerSubMenuStyles,
 )(SingleAccordionClean);
 
-const Body = withBurgerSubmenu(BurgerSubMenu)(EditableLinkList);
-
-const HeaderContents: FunctionComponent = () => (
-  <A href="/">
-    <img src="/images/bodiless_logo.png" className="h-16" alt="Return To Home" />
-  </A>
-);
-
-const asBurgerMenuDefaultStyles = flow(
-  withDesign({
-    Wrapper: flow(
-      asMobileOnly,
-      addClasses('bg-teal-600'),
-    ),
-    Slide: flow(
-      addClasses('bg-burger-menu'),
-      addProps({
-        noOverlay: true,
-        width: '100%',
-        right: true,
-      }),
-    ),
-    Header: flow(
-      withChild(HeaderContents),
-      addClasses('bg-teal-600 pt-3 pb-4'),
-    ),
-    Body: flow(
-      replaceWith(Body),
-      addClasses('p-3'),
-    ),
-  }),
-);
+const BurgerMenuBody = withBurgerSubmenu(BurgerMenuSubList)(BurgerMenuList);
 
 const BurgerMenu = flow(
   asStatic,
-  asBurgerMenuDefaultStyles,
+  withDesign({ Body: replaceWith(BurgerMenuBody) }),
+  withBurgerMenuStyles,
 )(BurgerMenuClean);
 
 export default BurgerMenu;
