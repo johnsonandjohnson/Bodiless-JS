@@ -53,6 +53,7 @@ export type FormBodyRenderer<D> = (props: FormBodyProps<D>) => ReactNode;
 
 export type Options<D> = {
   submitValues?: (componentData: D) => boolean|void;
+  onClose?: (componentData: D) => boolean|void;
   initialValues?: D;
   hasSubmit?: Boolean;
 };
@@ -62,12 +63,25 @@ const contextMenuForm = <D extends object>(options: Options<D>) => (
 ) => {
   const ContextMenuForm = ({ closeForm, ui, ...rest }: FormProps) => {
     const { ComponentFormCloseButton, ComponentFormSubmitButton } = getUI(ui);
-    const { submitValues, initialValues, hasSubmit = true } = options;
+    const {
+      submitValues,
+      initialValues,
+      onClose,
+      hasSubmit = true,
+    } = options;
+
+    const callOnClose = (values: D) => {
+      if (typeof onClose === 'function') {
+        onClose(values);
+      }
+      closeForm();
+    };
+
     return (
       <Form
         onSubmit={(values: D) => {
           if (!submitValues || !submitValues(values)) {
-            closeForm();
+            callOnClose(values);
           }
         }}
         initialValues={initialValues}
@@ -77,7 +91,7 @@ const contextMenuForm = <D extends object>(options: Options<D>) => (
           <>
             <ComponentFormCloseButton
               type="button"
-              onClick={closeForm}
+              onClick={() => callOnClose(formState.values)}
               aria-label="Cancel"
             />
             {renderFormBody({
