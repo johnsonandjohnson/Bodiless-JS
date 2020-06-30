@@ -68,7 +68,7 @@ function Checkbox({
 // The Dropdown component
 // On click render or do not render the checkbox (children)
 function Dropdown({ children, type }: { children: any; type: any }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const finalUI:FinalUI = useContext(uiContext);
   return (
     <finalUI.AccordionWrapper>

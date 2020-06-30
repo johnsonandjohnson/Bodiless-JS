@@ -63,7 +63,7 @@ describe('Link Toggle smoke tests', function () {
     cy.xpath(labelXpath)
       .should('have.text', label);
     cy.xpath(linkXpath)
-      .should('have.attr', 'href', '#' + url);
+      .should('have.attr', 'href', url);
   })
 
 
@@ -73,7 +73,7 @@ describe('Link Toggle smoke tests', function () {
     cy.xpath(labelPreviewXpath)
       .should('have.text', label);
     cy.xpath(linkXpath)
-      .should('have.attr', 'href', '#' + url);
+      .should('have.attr', 'href', url);
   })
 
 
@@ -83,7 +83,7 @@ describe('Link Toggle smoke tests', function () {
       .type(editedPostfix)
       .should('have.text', label + editedPostfix);
     cy.xpath(linkXpath)
-      .should('have.attr', 'href', '#' + url);
+      .should('have.attr', 'href', url);
   })
 
 
@@ -99,7 +99,7 @@ describe('Link Toggle smoke tests', function () {
     cy.xpath(labelXpath)
       .should('have.text', label + editedPostfix);
     cy.xpath(linkXpath)
-      .should('have.attr', 'href', '#' + url + editedPostfix);
+      .should('have.attr', 'href', url + editedPostfix);
   })
 
 
@@ -109,7 +109,7 @@ describe('Link Toggle smoke tests', function () {
     cy.xpath(labelPreviewXpath)
       .should('have.text', label + editedPostfix);
     cy.xpath(linkXpath)
-      .should('have.attr', 'href', '#' + url + editedPostfix);
+      .should('have.attr', 'href', url + editedPostfix);
   })
 
 
@@ -117,6 +117,7 @@ describe('Link Toggle smoke tests', function () {
     cy.xpath(linkXpath)
       .click();
     cy.url().should('include', url + editedPostfix);
+    cy.visit('/link-toggle/');
   })
 
 

@@ -36,8 +36,8 @@ import {
 } from '../Tout/token';
 import { withType } from './Categories';
 
-const withStructureFacet = withFacet('Tout Structure');
-const withOrientationFacet = withFacet('Tout Orientation');
+export const withStructureFacet = withFacet('Tout Structure');
+export const withOrientationFacet = withFacet('Tout Orientation');
 
 const baseVariation = {
   Tout: flow(

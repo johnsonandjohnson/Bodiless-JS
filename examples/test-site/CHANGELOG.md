@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.50](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.49...v0.0.50) (2020-06-12)
+
+
+### Features
+
+* **documentation:** allow to override doc site resources locally ([#369](https://github.com/johnsonandjohnson/bodiless-js/issues/369)) ([1884179](https://github.com/johnsonandjohnson/bodiless-js/commit/18841798e5d22d69c12230ec41c91e0150dbda72))
+
+
+
+
+
+## [0.0.49](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.48...v0.0.49) (2020-06-08)
+
+
+### Bug Fixes
+
+* **Example Test Site:** Submenu items lost their background style. ([#356](https://github.com/johnsonandjohnson/bodiless-js/issues/356)) ([0e2d719](https://github.com/johnsonandjohnson/bodiless-js/commit/0e2d719bd67b9a9171997fdfdefefa9ee9094ffb))
+* **test-site:** Fix missing registerSuggestions on filter-item page ([#340](https://github.com/johnsonandjohnson/bodiless-js/issues/340)) ([211da0c](https://github.com/johnsonandjohnson/bodiless-js/commit/211da0c0bbb50222091ea0c6e5e5c5e0e26a59a7))
+
+
+### Features
+
+* **core, ui:**  Notifications/Alerts. ([#346](https://github.com/johnsonandjohnson/bodiless-js/issues/346)) ([136abd3](https://github.com/johnsonandjohnson/bodiless-js/commit/136abd355ed7a99deb6e21718a3d6aaf5041c898)), closes [#300](https://github.com/johnsonandjohnson/bodiless-js/issues/300)
+
+
+
+
+
 ## [0.0.48](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.47...v0.0.48) (2020-05-20)
 
 

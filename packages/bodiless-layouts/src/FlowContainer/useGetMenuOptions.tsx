@@ -56,11 +56,13 @@ function useGetMenuOptions(props: EditFlowContainerProps, item?: FlowContainerIt
   const { insertItem, replaceItem } = useComponentSelectorActions(item);
   const addButton = {
     icon: 'add',
+    label: 'Add',
     name: 'add',
     handler: () => componentSelectorForm(props, insertItem),
   };
   const deleteButton = !item ? undefined : {
     name: 'delete',
+    label: 'Delete',
     icon: 'delete',
     handler: () => {
       const newContextItem = deleteFlowContainerItem(item.uuid);
@@ -72,6 +74,7 @@ function useGetMenuOptions(props: EditFlowContainerProps, item?: FlowContainerIt
   };
   const swapButton = !item ? undefined : {
     name: 'swap',
+    label: 'Swap',
     icon: 'repeat',
     handler: () => componentSelectorForm(props, replaceItem),
   };
