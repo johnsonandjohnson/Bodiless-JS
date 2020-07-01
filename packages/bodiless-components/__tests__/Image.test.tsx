@@ -84,7 +84,6 @@ describe('image interactions', () => {
     expect(submitButton.prop('type')).toBeUndefined();
   });
 
-
   it('context menu form should close and save content when done is clicked', () => {
     let imageSrc = menuForm.find('input#image-src');
     imageSrc.simulate('change', { target: { value: 'ok' } });

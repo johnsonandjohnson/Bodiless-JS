@@ -19,7 +19,6 @@ import { Page } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../../../components/Layout';
 import MainMenu from '../../../components/Menus/MainMenu';
 
-
 export default (props: any) => (
   <Page {...props}>
     <Layout>

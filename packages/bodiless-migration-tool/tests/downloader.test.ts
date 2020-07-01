@@ -32,10 +32,11 @@ describe('assets download', () => {
     // @ts-ignore since we are mocking private method
     const downloadFileMock = jest.spyOn(downloader, 'downloadFile').mockImplementation(() => true);
     await downloader.downloadFiles(assets);
-    expect(downloadFileMock.mock.calls[0][0]).toBe('https://localhost/test1.css');
-    expect(downloadFileMock.mock.calls[1][0]).toBe('https://localhost/test2.css');
-    expect(downloadFileMock.mock.calls[2][0]).toBe('https://localhost/gatsby.png');
-    expect(downloadFileMock.mock.calls[3][0]).toBe('https://localhost/test1.js');
-    expect(downloadFileMock.mock.calls[4][0]).toBe('https://localhost/test2.js');
+    expect(downloadFileMock).toHaveBeenCalledTimes(5);
+    expect(downloadFileMock).toHaveBeenCalledWith('https://localhost/test1.css');
+    expect(downloadFileMock).toHaveBeenCalledWith('https://localhost/test2.css');
+    expect(downloadFileMock).toHaveBeenCalledWith('https://localhost/gatsby.png');
+    expect(downloadFileMock).toHaveBeenCalledWith('https://localhost/test1.js');
+    expect(downloadFileMock).toHaveBeenCalledWith('https://localhost/test2.js');
   });
 });

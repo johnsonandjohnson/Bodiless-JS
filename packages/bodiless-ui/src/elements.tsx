@@ -14,7 +14,7 @@
 
 import React, { FC, HTMLProps } from 'react';
 import { flow } from 'lodash';
-import { Text as BaseText } from 'informed';
+import { Text as BaseText, TextArea as BaseTextArea, FieldProps } from 'informed';
 import {
   Li, Ul, stylable, addClasses, StylableProps, withoutProps, flowIf, hasProp, addProps,
   removeClasses,
@@ -32,7 +32,8 @@ export const Div = stylable<HTMLProps<HTMLDivElement>>('div');
 export const Span = stylable<HTMLProps<HTMLSpanElement>>('span');
 export const Button = stylable<HTMLProps<HTMLButtonElement>>('button');
 export const Hr = stylable<HTMLProps<HTMLHRElement>>('hr');
-export const Text = stylable(BaseText);
+export const Text = stylable<FieldProps<any, any>>(BaseText);
+export const TextArea = stylable<FieldProps<any, any>>(BaseTextArea);
 export const Anchor = stylable<HTMLProps<HTMLAnchorElement>>('a');
 
 const CheckBoxBase: FC<HTMLProps<HTMLInputElement>> = props => <input {...props} type="checkbox" />;
@@ -72,6 +73,10 @@ export const ComponentFormText = addClasses(
   'bl-text-grey-900 bg-grey-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-block bl-my-grid-2 bl-p-grid-1',
 )(Text);
 
+export const ComponentFormTextArea = addClasses(
+  'bl-resize bl-text-grey-900 bg-grey-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-block bl-my-grid-2 bl-p-grid-1',
+)(TextArea);
+
 export const ComponentFormButton = addClasses(
   'bl-text-grey-200 bl-cursor-pointer hover:bl-text-green',
 )(Button);
@@ -99,7 +104,6 @@ export const ComponentFormError = addClasses(
 )(Div);
 
 export const SubmitButton: FC<HTMLProps<HTMLButtonElement> & StylableProps> = props => <ComponentFormButton type="submit" {...props} />;
-
 
 export const ToolbarButton = flow(
   withoutProps<ButtonVariantProps>(['isActive', 'isFirst', 'isDisabled']),

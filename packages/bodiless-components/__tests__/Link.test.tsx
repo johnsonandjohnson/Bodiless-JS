@@ -80,7 +80,6 @@ describe('link interactions', () => {
     expect(submitButton.prop('type')).toBeUndefined();
   });
 
-
   it('context menu form should close and save content when done is clicked', () => {
     let inputField = menuForm.find('input#link-href');
     inputField.simulate('change', { target: { value: 'ok' } });

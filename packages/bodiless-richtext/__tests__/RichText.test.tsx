@@ -67,6 +67,7 @@ describe('RichText', () => {
       expect(valueProp.toJSON()).toStrictEqual(defaultJSONValue);
     });
   });
+
   describe('richtext content editable', () => {
     // eslint:disable-next-line: max-line-length
     test('richtext is editable, hover menu and buttons rendered when isEdit enabled in pageEditContext', () => {
@@ -79,24 +80,26 @@ describe('RichText', () => {
       );
       expect(wrapper.find('Editor').props().readOnly).toBe(false);
       expect(wrapper.find('HoverMenu').length).toBe(1);
-      expect(wrapper.find('PageContextProvider').length).toBe(1);
+      expect(wrapper.find('PageContextProvider').length).toBe(0);
 
       const editor = wrapper.find('Editor').instance() as Editor;
       PageEditContext.prototype.refresh = jest.fn();
       expect(PageEditContext.prototype.refresh).toHaveBeenCalledTimes(0);
       editor.props.onChange!({ operations: [] as any, value: SlateEditorValue.create() });
-      expect(PageEditContext.prototype.refresh).toHaveBeenCalledTimes(1);
+      expect(PageEditContext.prototype.refresh).toHaveBeenCalledTimes(0);
 
       PageEditContext.prototype.activate = jest.fn();
       expect(PageEditContext.prototype.activate).toHaveBeenCalledTimes(0);
       wrapper.find('Editor').simulate('click');
-      expect(PageEditContext.prototype.activate).toHaveBeenCalledTimes(1);
+      expect(PageEditContext.prototype.activate).toHaveBeenCalledTimes(0);
     });
 
     // eslint:disable-next-line: max-line-length
     test('richtext is not editable, hover menu and buttons are not rendered when isEdit disabled in pageEditContext', () => {
       const RichText = createRichtext();
       const pageEditContext = setupPageEditContext(false);
+      pageEditContext.activate = jest.fn();
+      pageEditContext.refresh = jest.fn();
       const wrapper = mount(
         <PageEditContext.Provider value={pageEditContext}>
           <RichText design={getDefaultRichTextItems()} initialValue={getRichTextInitialValue()} />
@@ -109,11 +112,11 @@ describe('RichText', () => {
 
       const editor = wrapper.find('Editor').instance() as Editor;
       editor.props.onChange!({ operations: [] as any, value: SlateEditorValue.create() });
-      expect(PageEditContext.prototype.refresh).toHaveBeenCalledTimes(0);
+      expect(pageEditContext.refresh).not.toHaveBeenCalled();
 
       expect(wrapper.find('Editor').props().onClick).toBeUndefined();
       wrapper.find('Editor').simulate('click');
-      expect(PageEditContext.prototype.activate).toHaveBeenCalledTimes(0);
+      expect(pageEditContext.activate).toHaveBeenCalledTimes(0);
     });
   });
 });

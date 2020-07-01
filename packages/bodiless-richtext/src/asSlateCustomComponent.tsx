@@ -33,7 +33,7 @@ const asSlateCustomComponent = <P extends WithNodeProps>(Component: CT<P>) => ({
   const contentNode = new DefaultContentNode(actions, getters, 'slatenode');
   return (
     <NodeProvider node={contentNode}>
-      <Component nodeKey="data" {...rest as P} />
+      <Component {...rest as P} />
     </NodeProvider>
   );
 };

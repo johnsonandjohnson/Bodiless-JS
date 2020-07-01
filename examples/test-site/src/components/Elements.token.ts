@@ -16,11 +16,9 @@ import { flow } from 'lodash';
 import { addClasses } from '@bodiless/fclasses';
 import {
   asBodilessLink,
-  Editable,
-  withPlaceholder,
+  asEditable as asEditableCore,
 } from '@bodiless/components';
 import { asBodilessImage } from '@bodiless/components-ui';
-import { withChild, withNodeKey } from '@bodiless/core';
 import {
   asAlignCenter,
   asAlignRight,
@@ -69,12 +67,7 @@ const asImageRounded = addClasses('rounded-lg');
 const asEditableLink = asBodilessLink;
 
 /* Edit component */
-const asEditable = (nodeKey?: string, placeholder?: string) => withChild(
-  flow(
-    withNodeKey(nodeKey),
-    withPlaceholder(placeholder),
-  )(Editable),
-);
+const asEditable = asEditableCore;
 
 // Tout Components
 const asCta = addClasses('bg-orange-700 hover:bg-orange-600 text-center text-white p-2 rounded');

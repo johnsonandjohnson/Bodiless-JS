@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-
 import React, { createContext, useContext, ComponentType } from 'react';
 import { flowRight } from 'lodash';
 import NodeProvider, { useNode } from './NodeProvider';
@@ -41,7 +40,6 @@ const startSidecarNodes = <P extends object>(Component: ComponentType<P>) => {
   StartSidecarNodes.displayName = 'StartSidecarNodes';
   return StartSidecarNodes;
 };
-
 
 /**
  * `endSidecarNodes` is an HOC which restores the ContentNode preserved

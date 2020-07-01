@@ -38,7 +38,6 @@ const ItemWithNode: FC<ItemWithNodeProps> = ({ nodeKey, component: Component, ..
   </NodeProvider>
 );
 
-
 const startComponents: ListDesignableComponents = {
   Wrapper: asComponent('ul'),
   Item: asComponent('li'),

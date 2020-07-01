@@ -22,23 +22,11 @@ import React, {
 import debug from 'debug';
 
 import {
-  EditButtonOptions,
   getUI,
-  withEditButton,
-  withData,
-  withContextActivator,
-  withNode,
-  withNodeKey,
-  withNodeDataHandlers,
-  withLocalContextMenu,
-  WithNodeProps,
-  ifEditable,
-  Bodiless,
-  ifReadOnly,
-  withoutProps,
+  asBodilessComponent,
+  BodilessOptions,
 } from '@bodiless/core';
 
-import { flowRight } from 'lodash';
 import { useDropzone } from 'react-dropzone';
 import { FormApi } from 'informed';
 import BackendSave from './BackendSave';
@@ -118,9 +106,8 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
     formApi.setError(targetFieldName, 'Uploading in progress');
     saveRequest.saveFile(acceptedFiles[0])
       .then(() => {
-        const state = formApi.getState();
-        // *HACK* as the formApi does not provide a interface to unset errors
-        delete state.errors[targetFieldName as ('alt' | 'src')];
+        // unset errors
+        formApi.setError(targetFieldName, undefined);
         formApi.setValue(targetFieldName, `/${acceptedFiles[0].name}`);
         // formApi.validate();
         setIsUploading(false);
@@ -169,11 +156,10 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
 // Type of the props accepted by this component.
 // Exclude the src and alt from the props accepted as we write it.
 type ImageProps = HTMLProps<HTMLImageElement>;
-type ReducedImageProps = Pick<ImageProps, Exclude<keyof ImageProps, 'src'> | Exclude<keyof ImageProps, 'alt'>>;
-type Props = ReducedImageProps & { ui?: TImagePickerUI};
+type Props = ImageProps & { ui?: TImagePickerUI};
 
 // Options used to create an edit button.
-export const editButtonOptions: EditButtonOptions<Props, Data> = {
+const options: BodilessOptions<Props, Data> = {
   icon: 'image',
   label: 'Image',
   name: 'Image',
@@ -193,36 +179,16 @@ export const editButtonOptions: EditButtonOptions<Props, Data> = {
   },
   global: false,
   local: true,
-};
-
-const emptyValue = {
-  src: Placeholder,
-  alt: 'Alt Text',
+  defaultData: {
+    src: Placeholder,
+    alt: 'Alt Text',
+  },
 };
 
 export const withImagePlaceholder = withPropsFromPlaceholder(['src']);
 
-// Composed hoc which creates editable version of the component.
-// Note - the order is important. In particular:
-// - the node data handlers must be outermost
-// - anything relying on the context (activator, indicator) must be
-//   *after* `withEditButton()` as this establishes the context.
-// - withData must be *after* the data handlers are defiend.
-export const asBodilessImage = (nodeKey?: string) => flowRight(
-  // @ts-ignore: Types of parameters are incompatible.
-  withNodeKey(nodeKey),
-  withNode,
-  withNodeDataHandlers(emptyValue),
-  ifReadOnly(
-    withoutProps(['setComponentData']),
-  ),
-  ifEditable(
-    withEditButton(editButtonOptions),
-    withContextActivator('onClick'),
-    withLocalContextMenu,
-  ),
-  withData,
-) as Bodiless<Props, Props & Partial<WithNodeProps>>;
+export const asBodilessImage = asBodilessComponent<HTMLProps<HTMLImageElement>, Data>(options);
 
 const Image = asBodilessImage()('img');
+
 export default Image;

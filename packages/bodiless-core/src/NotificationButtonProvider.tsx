@@ -13,13 +13,14 @@
  */
 
 import React, { FC, useCallback } from 'react';
-import contextMenuForm from './contextMenuForm';
+import { ContextMenuForm } from './contextMenuForm';
 import PageContextProvider from './PageContextProvider';
 import { useNotifications } from './NotificationProvider';
-import { getUI } from './components';
+import { useUI as useFormUI } from './components/ContextMenuItem';
+import type { FormProps as ContextMenuFormProps } from './contextMenuForm';
 
-const NotificationList = ({ ui } : any) => {
-  const { ComponentFormList, ComponentFormListItem } = getUI(ui);
+const NotificationList = () => {
+  const { ComponentFormList, ComponentFormListItem } = useFormUI();
   const { notifications } = useNotifications();
   if (notifications.length === 0) return (<p>There are no alerts.</p>);
   return (
@@ -33,15 +34,17 @@ const NotificationList = ({ ui } : any) => {
   );
 };
 
-const Form = contextMenuForm({})(({ ui }) => {
-  const { ComponentFormTitle } = getUI(ui);
+const RenderForm = (props: ContextMenuFormProps) => {
+  const { ComponentFormTitle } = useFormUI();
   return (
-    <>
+    <ContextMenuForm {...props}>
       <ComponentFormTitle>Alerts</ComponentFormTitle>
-      <NotificationList ui={ui} />
-    </>
+      <NotificationList />
+    </ContextMenuForm>
   );
-});
+};
+// Work around "change in the order of Hooks" issue.
+const renderForm = (props: ContextMenuFormProps) => <RenderForm {...props} />;
 
 /**
  * Provide a component to display notifications.
@@ -57,7 +60,7 @@ const NotificationButtonProvider: FC = ({ children }) => {
     label: 'Alerts',
     icon: notifications.length > 0 ? 'notification_important' : 'notifications',
     isActive: () => notifications.length > 0,
-    handler: () => Form,
+    handler: () => renderForm,
   }], [notifications]);
   return (
     <PageContextProvider getMenuOptions={getMenuOptions}>

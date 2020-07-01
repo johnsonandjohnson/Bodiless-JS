@@ -57,7 +57,6 @@ module.exports = {
     |
     */
 
-
     /*
     |---------------------------------------------------------------------------
     | Fonts                                  https://tailwindcss.com/docs/fonts

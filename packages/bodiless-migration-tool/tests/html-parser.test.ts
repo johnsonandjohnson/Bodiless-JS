@@ -243,7 +243,6 @@ describe('relative urls to internal links', () => {
   });
 });
 
-
 describe('absolute urls to relative urls', () => {
   test('absolute urls to relative urls', () => {
     const pageUrl = 'http://localhost/';

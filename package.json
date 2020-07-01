@@ -1,7 +1,7 @@
 {
   "name": "bodiless-js",
   "description": "Bodiless-JS",
-  "version": "0.0.50",
+  "version": "0.0.51",
   "keywords": [
     "gatsby"
   ],
@@ -112,13 +112,13 @@
     "ts-jest": "^24.0.2",
     "tslint": "^5.12.1",
     "tslint-config-airbnb": "^5.11.1",
-    "typescript": "^3.8.3"
+    "typescript": "^3.9.5"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "engines": {
-    "node": ">=12.16"
+    "node": ">=12.18"
   }
 }

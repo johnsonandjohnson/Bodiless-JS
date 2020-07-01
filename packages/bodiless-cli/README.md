@@ -7,7 +7,7 @@ $ npm install -g @bodiless/cli
 $ bodiless COMMAND
 running command...
 $ bodiless (-v|--version|version)
-@bodiless/cli/0.0.47 darwin-x64 node-v10.16.0
+@bodiless/cli/0.0.51 darwin-x64 node-v12.9.1
 $ bodiless --help [COMMAND]
 USAGE
   $ bodiless COMMAND
@@ -53,10 +53,10 @@ OPTIONS
                          matching dependencies.
 
   -r, --repo=repo        [default: .] Path to the local lerna monorepo, relative to the current directory. Must contain
-                         the package source in a `packages` directory. Defaults to `.`
+                         the package source in a `packages` directory.
 
   -s, --site=site        [default: .] Path to the site into which you wish to install packages, relative to the current
-                         directory. Defaults to `.`
+                         directory.
 
   --dry-run              Do not pack or install. Just show list of matching packages.
 

@@ -79,7 +79,6 @@ function useGetMenuOptions(props: EditFlowContainerProps, item?: FlowContainerIt
     handler: () => componentSelectorForm(props, replaceItem),
   };
 
-
   const getFlowContainerButtons = (nItems: Number) => (
     // The flow container itself only has an add button when empty (otherwise an add button.
     // will be attached to each item).

@@ -12,7 +12,9 @@
  * limitations under the License.
  */
 
-import React, { useState, ComponentType } from 'react';
+import React, {
+  useState, createContext, useContext,
+} from 'react';
 import ReactTooltip from 'rc-tooltip';
 import { getUI as getFormUI, FormProps } from '../contextMenuForm';
 import { UI, IContextMenuItemProps as IProps } from '../Types/ContextMenuTypes';
@@ -32,16 +34,23 @@ export const getUI = (ui: UI = {}) => ({
   ...ui,
 });
 
+const UIContext = createContext<UI>({});
+export const useUI = () => {
+  const ui = useContext(UIContext);
+  return getUI(ui);
+};
+
 const ContextMenuItem = ({ option, index, ui }: IProps) => {
-  const [Form, setForm] = useState<ComponentType<FormProps>>();
+  const [renderForm, setRenderForm] = useState<(props:FormProps) => JSX.Element>();
   const [isToolTipShown, setIsToolTipShown] = useState(false);
+  const finalUI = getUI(ui);
   const {
     ToolbarDivider,
     Icon,
     ToolbarButton,
     FormWrapper,
     Tooltip,
-  } = getUI(ui);
+  } = finalUI;
   const isActive = option.isActive ? option.isActive() : false;
   const isDisabled = option.isDisabled ? option.isDisabled() : false;
   const isHidden = option.isHidden ? option.isHidden() : false;
@@ -51,25 +60,32 @@ const ContextMenuItem = ({ option, index, ui }: IProps) => {
     const menuForm = option.handler ? option.handler(event) : undefined;
     if (menuForm) {
       setIsToolTipShown(!isToolTipShown);
-      // We have to pass a function to setForm b/c menuForm is itself a function
-      // (a component) and, when a function is passed to setState, react interprets
+      // We have to pass a function to setRenderForm b/c menuForm is itself a function
+      // (a render prop) and, when a function is passed to setState, react interprets
       // it as a state setter (in order to set state based on previous state)
       // see https://reactjs.org/docs/hooks-reference.html#functional-updates
-      setForm(() => menuForm);
+      setRenderForm(() => menuForm);
     }
   };
 
   // Reset form and tooltip state
   const onFormClose = (): void => {
     setIsToolTipShown(false);
-    setForm(undefined);
+    setRenderForm(undefined);
   };
 
   function getContextMenuForm(): JSX.Element {
-    if (Form) {
+    if (renderForm) {
+      const formProps = {
+        closeForm: onFormClose,
+        ui,
+        'aria-label': `Context Menu ${option.label || option.name} Form`,
+      };
       return (
         <FormWrapper onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
-          <Form closeForm={onFormClose} ui={ui} aria-label={`Context Menu ${option.label || option.name} Form`} />
+          <UIContext.Provider value={finalUI}>
+            {renderForm(formProps)}
+          </UIContext.Provider>
         </FormWrapper>
       );
     }

@@ -14,14 +14,18 @@
 
 const toc = {
   About: {
-    'CorePrinciples.md': '',
     'GettingStarted.md': '',
-    'SiteBuildBasics.md': '',
+    'CorePrinciples.md': '',
   },
   Design: {},
   Components: {},
   Tools: {},
   Development: {
+    Guides: {
+      'SiteBuildBasics.md': '',
+      'DesignElementBasics.md': '',
+      'CreatingBodilessComponents.md': '',
+    },
     'Packages.md': '',
     Architecture: {
       'Data.md': '',

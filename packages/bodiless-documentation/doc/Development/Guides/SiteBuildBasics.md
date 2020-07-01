@@ -8,7 +8,7 @@ clone the Bodiless monorepo to create a new site.
 
 ## Create a Site
 To begin, follow the directions to
-[create a new site](./GettingStarted?id=creating-a-new-site) and all the pages
+[create a new site](../../About/GettingStarted?id=creating-a-new-site) and all the pages
 we create in this tutorial will be in this new site.
 
 ## Creating pages
@@ -67,7 +67,7 @@ current page path.* If page creation is successful, you will be redirected to th
   "#template": "_default"
 }
 ```
-You can modify the template by editing the contents of this file - or remove the file entirely and replace it with a custom page component.  For more information, see [Creating Pages](/Development/Architecture/Data?id=creating-pages);
+You can modify the template by editing the contents of this file - or remove the file entirely and replace it with a custom page component.  For more information, see [Creating Pages](../Architecture/Data?id=creating-pages);
 
 > There is currently a known issue with pages created in this manner. Sometimes, after redirection to the new page, it will not load correctly but instead generate an error. This can be resolved by touching the default template or by restarting the development server.
 
@@ -86,7 +86,7 @@ const asPrimaryHeader = addClasses('text-3xl font-bold');
 const PrimaryHeader = asPrimaryHeader(H1);
 ```
 
-A *design token* for our sites primary headers, and a component to which that token is applied have been created. The value of creating (and exporting) both will become more apparent once the [Design API](Development/Architecture/FClasses?id=the-design-api) is in use.
+A *design token* for our sites primary headers, and a component to which that token is applied have been created. The value of creating (and exporting) both will become more apparent once the [Design API](../Architecture/FClasses?id=the-design-api) is in use.
 
 Now replace the `<h1 ...>` tag:
 ```
@@ -101,10 +101,10 @@ We could have defined our token as:
 ```
 const asPrimaryHeader = flow(stylable, addClasses('text-3xl font-bold`))
 ```
-but, fortunately, we don't have to, since `@bodiless/fclasses` exports a stylable verison of every HTML element.   If you revisit the localhost:8005/gallery the header is rendered with the h1 and new classes.
+but, fortunately, we don't have to, since `@bodiless/fclasses` exports a stylable version of every HTML element.   If you revisit the localhost:8005/gallery the header is rendered with the h1 and new classes.
 
 You can read more about this pattern for building out a site's UI in our
-[Design System documentation](Development/Architecture/DesignSystem).
+[Design System documentation](../../Design/DesignSystem).
 
 ## Making something editable
 
@@ -132,7 +132,7 @@ The `asEditable()` HOC used above, adds a special `Editable` component as a chil
 <PrimaryHeader><Editable nodeKey="title" placeholder="Title" /></PrimaryHeader>
 ```
 (Again, the version using HOC's shows it's real value when using the
-[Design API](Development/Architecture/FClasses?id=the-design-api)).
+[Design API](../Architecture/FClasses?id=the-design-api)).
 
 The `Editable` component is basically just a `contenteditable` span which is wired to the BodilessJS data framework. As you type, it posts updated content to a lightweight node server, which serializes the content to disk (you can see the POSTS in the network tab of your dev tools as you type).
 
@@ -348,7 +348,7 @@ const CaptionedImage: FC<HTMLProps<HTMLElement>> = props => (
 
 export default withNode(stylable(CaptionedImage));
 ```
-The pattern here should be familiar: stylable primitives are imported and add styling and edit functionality using higher-order components.  It's worth noting that the whole compound image is stylable. Since all props are passed on to the `Wrapper` component, this allows the wrapper itself to be styled when the `CaptionedImage` is placed.  We'll expore a more efficient way of styling the wrapper (and the other internal elements) later when we introduce the Design API.
+The pattern here should be familiar: stylable primitives are imported and add styling and edit functionality using higher-order components.  It's worth noting that the whole compound image is stylable. Since all props are passed on to the `Wrapper` component, this allows the wrapper itself to be styled when the `CaptionedImage` is placed.  We'll explore a more efficient way of styling the wrapper (and the other internal elements) later when we introduce the Design API.
 
 Next create a `Gallery.tsx` file as follows:
 ```
@@ -402,7 +402,7 @@ export default withNode(MyComponent);
 
 ## Managing Layouts
 
-It is part of the philosophy of BodilessJS that complex layouts should be created by developers in code, not by content editors in a complex UI,  Nevertheless, there are times when you want to give your ediors some basic control over what components are placed on a page, and how they flow. For this, BodilessJS provides a simple, flowContainer-based grid container, and a selector which allows an editor to select and place components within it. Refactor the `Gallery` component to use the flowContainer container.
+It is part of the philosophy of BodilessJS that complex layouts should be created by developers in code, not by content editors in a complex UI,  Nevertheless, there are times when you want to give your editors some basic control over what components are placed on a page, and how they flow. For this, BodilessJS provides a simple, flowContainer-based grid container, and a selector which allows an editor to select and place components within it. Refactor the `Gallery` component to use the flowContainer container.
 
 First create some styled variations of`GalleryTile` with different colored borders. Add the following to `Gallery.tsx` just after the line where `asGalleryTile` is defined:
 
@@ -412,7 +412,7 @@ const withGreenBorder = addClasses('border-green-400');
 const withRedBorder = addClasses('border-red-400');
 ```
 
-No new components have been created. Instead, *design tokens* which describe them have been created. These tokens are expressed as React higher order components. These can be composed onto unstyled components to build up a design system. Usually these tokens would be defined elsewhere (most likely under you  `src/components` directory) and imported as needed. More information about this pattern can be found in [Design System documentation](Development/Architecture/DesignSystem).
+No new components have been created. Instead, *design tokens* which describe them have been created. These tokens are expressed as React higher order components. These can be composed onto unstyled components to build up a design system. Usually these tokens would be defined elsewhere (most likely under you  `src/components` directory) and imported as needed. More information about this pattern can be found in [Design System documentation](../../Design/DesignSystem).
 
 To create the actual components add the following imports:
 ```
@@ -424,7 +424,7 @@ import { FlowContainer } from '@bodiless/layouts-ui';
 Add the following to `Gallery.tsx` just
 after withColoredBorder styling code in previous step:
 
-The FlowContainer takes a design prop that is part of the [Design API](Development/Architecture/FClasses?id=the-design-api).  This is how we pass in the components that can be used in the grid.
+The FlowContainer takes a design prop that is part of the [Design API](../Architecture/FClasses?id=the-design-api).  This is how we pass in the components that can be used in the grid.
 we will also use the hoc  `withTitle` to provide a Title for each component in the selector.
 
 ``` js
@@ -516,7 +516,7 @@ With your viewport at desktop width, use the component selector to place two 50%
 
 ### Selection vs Configuration
 
-BodilessJS favors selection over configuration. It follows the belief that it is better to create lots of simple components than to create a few complex components. The component selector supports this pattern by providing sophisticated search and filter capabilities allowing a content editor to find the exact component they are looking for quickly and easily. You can read more about this [the next section](CorePrinciples).
+BodilessJS favors selection over configuration. It follows the belief that it is better to create lots of simple components than to create a few complex components. The component selector supports this pattern by providing sophisticated search and filter capabilities allowing a content editor to find the exact component they are looking for quickly and easily. You can read more about this in our [Core Principles](../../About/CorePrinciples).
 
 With this in mind we can use the `varyDesign` function to refactor the design we use in the Gallery.
 

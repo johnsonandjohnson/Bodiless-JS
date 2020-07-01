@@ -78,7 +78,6 @@ const NotificationProvider: FC = ({ children }) => {
   );
 };
 
-
 /**
  * The useNotify() hook allows you to register notifications which should be
  * displayed to the user upon clicking the "Notifications" button on the main

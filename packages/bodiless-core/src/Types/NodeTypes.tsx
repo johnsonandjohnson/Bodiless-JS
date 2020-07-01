@@ -17,3 +17,5 @@ export type WithNodeProps = {
   nodeKey: string;
   nodeCollection?: string;
 };
+
+export type WithNodeKeyProps = string|Partial<WithNodeProps>;

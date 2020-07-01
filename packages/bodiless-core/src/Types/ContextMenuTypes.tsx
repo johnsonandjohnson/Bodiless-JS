@@ -16,7 +16,6 @@ import {
   ComponentType,
   HTMLProps,
   ReactNode,
-  FC,
 } from 'react';
 import { FieldProps } from 'informed';
 import Tooltip from 'rc-tooltip';
@@ -47,9 +46,10 @@ export type UI = {
   ComponentFormSubmitButton?: ComponentType<HTMLProps<HTMLButtonElement>> | string;
   ComponentFormUnwrapButton?: ComponentType<HTMLProps<HTMLButtonElement>> | string;
   ComponentFormText?: ComponentType<FieldProps<any, any>>;
+  ComponentFormTextArea?: ComponentType<FieldProps<any, any>>;
   ComponentFormError?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   Form?: ComponentType<HTMLProps<HTMLFormElement>> | string;
-  Tooltip?: FC<Tooltip['props']>;
+  Tooltip?: ComponentType<Tooltip['props']>;
   ReactTags?: ComponentType<ReactTagsFieldProps>;
   ComponentFormList?: ComponentType<HTMLProps<HTMLUListElement>> | string;
   ComponentFormListItem?: ComponentType<HTMLProps<HTMLLIElement>> | string;

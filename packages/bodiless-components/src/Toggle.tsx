@@ -96,7 +96,6 @@ type Props<P> = {
   wrap: (values: any) => void;
 } & Omit<P, keyof OnSubmitProps>;
 
-
 const withWrapOnSubmit = <P extends object>(Component: ComponentType<P & OnSubmitProps>) => (
   ({ wrap, ...rest }: Props<P>) => <Component {...rest as P} onSubmit={wrap} />
 );

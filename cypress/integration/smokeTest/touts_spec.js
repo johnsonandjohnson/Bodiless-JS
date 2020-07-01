@@ -59,6 +59,7 @@ describe('Tout testing', function () {
 
   it('touts: 3 - filling in CTA text', () => {
     cy.xpath(ctaLabelXpath)
+      .click()
       .type(ctaLabel)
       .should('have.text', ctaLabel)
   })
@@ -152,6 +153,7 @@ describe('Tout testing', function () {
 
   it('touts: 11 - editing CTA label', () => {
     cy.xpath(ctaLabelXpath)
+      .click()
       .type(editedPostfix)
       .should('have.text', ctaLabel + editedPostfix)
   })

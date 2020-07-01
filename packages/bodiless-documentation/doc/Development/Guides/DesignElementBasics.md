@@ -2,7 +2,7 @@
 
 In this guide, we will continue the gallery tutorial to apply some designs and
 implement some best practices. We will also introduce the Bodiless Design API.
-You can [read more about it here](../Design/DesignSystem), but at a high level
+You can [read more about it here](../../Design/DesignSystem), but at a high level
 this is a set of tools and patterns for applying a *Design System* to a React
 site. It encourages defining the building blocks of the system (tokens,
 elements, components) at the site level, and then applying them consistently
@@ -15,11 +15,11 @@ to apply the same design system to multiple sites, extending it as needed.
   * Alternatively, if you already have a fair understanding of BodilessJS
     fundamentals and want to fast-forward to this tutorial, copy over the
     [gallery-final folder & contents](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/test-site/src/data/pages/gallery-final)
-    and place in a [new site](./GettingStarted?id=creating-a-new-site) at
+    and place in a [new site](../../About/GettingStarted?id=creating-a-new-site) at
     `src/data/pages/gallery`. Remember to rename the folder from `gallery-final`
     to `gallery`.
 * Read through the high level introduction to the
-  [Bodiless Design System](../Design/DesignSystem). Even if you don't
+  [Bodiless Design System](../../Design/DesignSystem). Even if you don't
   follow everything, it will give essential insight into the "why" of
   what you will do in this tutorial.
 
@@ -157,13 +157,13 @@ can simply:
 
 The `addClasses()` and `removeClasses()` functions used in the examples above
 are part of the Bodiless "FClasses" (Functional Classes) API. You can
-[read more about this here](../Development/Architecture/FClasses). Briefly, it's
-a pair of simple utilty HOC's which allow you to manipulate the `className` prop
+[read more about this here](../Architecture/FClasses). Briefly, it's
+a pair of simple utility HOC's which allow you to manipulate the `className` prop
 of a React element. When you make an element "stylable" by the FClasses API, you
 can wrap it with these HOC's to add and remove classes. In so doing, you are
 applying tokens to create a styled version of the component. You can then wrap
 it again, and again, to extend or customize its style (as we did above) - for
-exmample, to create a local variant of a design system.
+example, to create a local variant of a design system.
 
 ## 4. Refactor `CaptionedImage` to use the Bodiless Design API
 
@@ -173,7 +173,7 @@ to make it more flexible and reusable.
 
 1. Within `CaptionedImage.tsx`, the first step is to define all the individual
    sub-components of our `CaptionedImage` and ensure that they are *stylable*
-   via the [FClasses API](../Development/Architecture/FClasses). 
+   via the [FClasses API](../Architecture/FClasses). 
 
    * First, we define the expected type of each individual component. Here we
      require that each be stylable via FClasses (i.e., accept `StylableProps`).
@@ -380,7 +380,7 @@ few benefits:
 css cascade that builds and grows over time.
 * Isolation: it keeps the styling isolated to the specific item minimizing the risk
 of affecting other non-related items.
-* Reuseability as is or with extending.
+* Reusability as is or with extending.
 
 These benefits apply during the initial build and future changes benefit as well.
 For example, if there is a request to change a rendered H1 to H2 for SEO purposes,
@@ -546,4 +546,4 @@ All of this should look familiar now and shouldn't need more explanation.
 The `Gallery` naming & functionality remained the same so there is no need to
 update the gallery page.
 
-For more information, read about [FClasses](Development/Architecture/FClasses).
+For more information, read about [FClasses](../Architecture/FClasses).

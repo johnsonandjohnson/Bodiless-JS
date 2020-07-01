@@ -93,7 +93,6 @@ const writeTree = (props: Props, copier: Copier) => {
   return Promise.all(promises);
 };
 
-
 /**
  * Copies or symlinks docsify resources to the root of the docs tree.
  *
