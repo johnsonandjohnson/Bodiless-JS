@@ -257,6 +257,7 @@ const PullChanges = (
           throw new Error(`Error pulling changes, status=${response.status}`);
         }
         setPullStatus({ complete: true });
+        formApi.setValue('refreshWhenDone', true);
       } catch (error) {
         setPullStatus({
           complete: false,
@@ -266,7 +267,6 @@ const PullChanges = (
         formApi.setValue('keepOpen', false);
         context.hidePageOverlay();
         notifyOfChanges();
-        formApi.setValue('refreshWhenDone', true);
       }
     })();
   }, []);
