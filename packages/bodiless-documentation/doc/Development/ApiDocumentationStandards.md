@@ -10,7 +10,8 @@ Each comment must start with a `/**` sequence and be placed immediately before t
 function foo() {...};
 
 // This comment will be ignored.
-function bar() {...};```
+function bar() {...};
+```
 
 **The standard format of JSDoc:**
 ```ts
