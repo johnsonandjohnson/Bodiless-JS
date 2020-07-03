@@ -1,6 +1,10 @@
 ---
-name: Bug 🐞
+name: "Bug \U0001F41E"
 about: Report something that is not working as expected.
+title: ''
+labels: bug
+assignees: ''
+
 ---
 
 <!--
