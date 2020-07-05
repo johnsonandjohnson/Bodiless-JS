@@ -1,4 +1,4 @@
-# Bodiless-Js API Documentation Standards
+# Bodiless API Documentation Standards
 We use [JSDoc](https://jsdoc.app/) to generate our API documentation. JSDoc is an API documentation generator for JavaScript. Comments are added directly to the source code, right alongside the code itself. The JSDoc tool will scan the source code and generate an HTML documentation website.
 
 ## Getting Started
@@ -9,7 +9,9 @@ Each comment must start with a `/**` sequence and be placed immediately before t
  */
 function foo() {...};
 
-// This comment will be ignored.
+/*
+ * This comment will be ignored.
+ */
 function bar() {...};
 ```
 
@@ -103,6 +105,7 @@ To generate a live preview of the component, you can add `@example` tag and retu
 /**
  * TextBlock component description
  * @component
+ * @example
  * const text = 'Example text'
  * return (
  *   <TextBlock text={text} />
@@ -140,10 +143,10 @@ class BarClass {
 ```
 
 
-## Bodiless-Js API Documentation Best Practices
+## Bodiless API Documentation Best Practices
 
 ### Try to Avoid Using Named Parameters
-There is nothing wrong with using named parameters but prefer not to use it where possible. API documentation is generated differently for named parameters, and it is less human-friendly. Let's consider the example below:
+There is nothing wrong with using named parameters but we prefer not to use it where possible. API documentation is generated differently for named parameters, and it is less human-friendly. Let's consider the example below:
 ```ts
 /**
  * Basic Designable List component.
@@ -177,7 +180,7 @@ It will generate params info as following:
 ```ts
 BasicList(options: ListProps): Element
 ```
-where `ListProps` is a clickable **link to the actual type defenition** with subsequent links to other types:
+where `ListProps` is a clickable **link to the actual type definition** with subsequent links to other types:
 ```ts
 ListProps: { onDelete?: Function; unwrap?: Function } & DesignableComponentsProps<ListDesignableComponents> & HTMLProps<HTMLElement>
 ```
@@ -245,6 +248,6 @@ There is a way to document the purpose of the file itself. A documentation comme
  * This is the doc comment for file.ts
  * @packageDocumentation
  */
- import React from 'react;
+ import React from 'react';
  ...
 ```
