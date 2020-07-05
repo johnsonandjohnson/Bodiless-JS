@@ -41,6 +41,7 @@ export const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });
 
 export type Options<D> = {
   submitValues?: (componentData: D) => boolean|void;
+  onClose?: (componentData: D) => boolean|void;
   initialValues?: D;
   hasSubmit?: Boolean;
 };
@@ -63,6 +64,7 @@ type Props<D> = FormProps & Options<D> & {
 
 export const ContextMenuForm = <D extends object>({
   closeForm,
+  onClose,
   ui,
   submitValues = () => undefined,
   initialValues = {} as D,
@@ -71,11 +73,17 @@ export const ContextMenuForm = <D extends object>({
   ...rest
 }: Props<D>) => {
   const { ComponentFormCloseButton, ComponentFormSubmitButton } = getUI(ui);
+  const callOnClose = (values: D) => {
+    if (typeof onClose === 'function') {
+      onClose(values);
+    }
+    closeForm();
+  };
   return (
     <Form
       onSubmit={(values: D) => {
         if (!submitValues(values)) {
-          closeForm();
+          callOnClose(values);
         }
       }}
       initialValues={initialValues}
@@ -85,7 +93,7 @@ export const ContextMenuForm = <D extends object>({
         <>
           <ComponentFormCloseButton
             type="button"
-            onClick={closeForm}
+            onClick={() => callOnClose(formState.values)}
             aria-label="Cancel"
           />
           {typeof children === 'function'

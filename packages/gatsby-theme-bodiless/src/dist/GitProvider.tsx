@@ -125,6 +125,11 @@ const formGitPull = (client: GitClient, notifyOfChanges: ChangeNotifier) => cont
     const { keepOpen } = values;
     return keepOpen;
   },
+  onClose: ({ refreshWhenDone }) => {
+    if (refreshWhenDone) {
+      window.location.reload();
+    }
+  },
 })(({ ui }: any) => {
   const { ComponentFormTitle, ComponentFormText } = getUI(ui);
   return (
@@ -132,6 +137,7 @@ const formGitPull = (client: GitClient, notifyOfChanges: ChangeNotifier) => cont
       <ComponentFormTitle>Pull Changes</ComponentFormTitle>
       <ComponentFormText type="hidden" field="keepOpen" initialValue={false} />
       <ComponentFormText type="hidden" field="mergeMaster" initialValue={false} />
+      <ComponentFormText type="hidden" field="refreshWhenDone" initialValue={false} />
       <RemoteChanges client={client} notifyOfChanges={notifyOfChanges} />
     </>
   );

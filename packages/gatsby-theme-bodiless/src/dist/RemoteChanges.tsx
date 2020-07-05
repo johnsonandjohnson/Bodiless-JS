@@ -112,7 +112,7 @@ const ChangeContent = ({ status, masterStatus, errorMessage } : ContentProps) =>
           {
             // eslint-disable-next-line no-nested-ternary
             masterStatus === ChangeState.CanBePulled
-              ? 'There are changes ready to be pulled. Click check (✓) to initiate.'
+              ? 'There are master changes available to be pulled. Click check (✓) to initiate.'
               : masterStatus === ChangeState.CanNotBePulled
                 ? 'There are changes on production which cannot be merged from the UI.'
                 : 'There are no changes to download.'
@@ -122,7 +122,7 @@ const ChangeContent = ({ status, masterStatus, errorMessage } : ContentProps) =>
     case ChangeState.CanBePulled:
       return (
         <>
-          There are changes ready to be pulled. Click check (✓) to initiate.
+          There are updates available to be pulled. Click check (✓) to initiate.
           {
             masterStatus === ChangeState.CanNotBePulled
               ? '\nThere are changes on production which cannot be merged from the UI.'
@@ -257,6 +257,7 @@ const PullChanges = (
           throw new Error(`Error pulling changes, status=${response.status}`);
         }
         setPullStatus({ complete: true });
+        formApi.setValue('refreshWhenDone', true);
       } catch (error) {
         setPullStatus({
           complete: false,
@@ -273,7 +274,7 @@ const PullChanges = (
   const { complete, error } = pullStatus;
   if (error) return <>{error}</>;
   if (complete) {
-    return <>Operation completed.</>;
+    return <>Operation complete, page will refresh.</>;
   }
   return <ComponentFormSpinner />;
 };
