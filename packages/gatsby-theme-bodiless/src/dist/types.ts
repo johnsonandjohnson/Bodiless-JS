@@ -21,6 +21,7 @@ export enum ItemStateEvent {
   OnLockTimeout,
   OnRequestEnd,
   OnRequestStart,
+  OnRequestError,
 }
 
 export type ConflictsResponseType = {

@@ -27,6 +27,8 @@ enum ItemState {
   Queued,
 }
 
+const DEFAULT_REQUEST_DELAY = 500;
+
 export default class GatsbyMobxStoreItem {
   @observable data = {};
 
@@ -41,6 +43,8 @@ export default class GatsbyMobxStoreItem {
   lockTimeout?: NodeJS.Timeout;
 
   requestTimeout?: NodeJS.Timeout;
+
+  requestDelay: number = DEFAULT_REQUEST_DELAY;
 
   private shouldAccept() {
     const isClean = this.state === ItemState.Clean;
@@ -80,6 +84,7 @@ export default class GatsbyMobxStoreItem {
         this.setState(ItemState.Flushing);
         break;
       case ItemStateEvent.OnRequestEnd:
+        this.requestDelay = DEFAULT_REQUEST_DELAY;
         if (this.state === ItemState.Queued) {
           this.scheduleRequest();
           break;
@@ -88,6 +93,12 @@ export default class GatsbyMobxStoreItem {
         // So that mitigate the problem with stale data coming from the server
         this.setState(ItemState.Locked);
         this.setLockTimeout();
+        break;
+      case ItemStateEvent.OnRequestError:
+        // incrementally increasing times between each subsequent retry
+        this.requestDelay *= 2;
+        this.scheduleRequest();
+        this.setState(ItemState.Queued);
         break;
       case ItemStateEvent.OnLockTimeout:
         if (this.state === ItemState.Locked) {
@@ -121,7 +132,9 @@ export default class GatsbyMobxStoreItem {
       const requestPromise = this.isDeleted
         ? this.store.client.deletePath(this.getResoucePath())
         : this.store.client.savePath(this.getResoucePath(), this.data);
-      requestPromise.then(() => this.updateState(ItemStateEvent.OnRequestEnd));
+      requestPromise
+        .then(() => this.updateState(ItemStateEvent.OnRequestEnd))
+        .catch(() => this.updateState(ItemStateEvent.OnRequestError));
     } else {
       this.updateState(ItemStateEvent.OnRequestEnd);
     }
@@ -132,7 +145,7 @@ export default class GatsbyMobxStoreItem {
     if (this.requestTimeout !== undefined) {
       clearTimeout(this.requestTimeout);
     }
-    this.requestTimeout = setTimeout(this.request.bind(this), 500);
+    this.requestTimeout = setTimeout(this.request.bind(this), this.requestDelay);
   }
 
   private setLockTimeout() {
