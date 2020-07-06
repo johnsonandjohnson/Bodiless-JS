@@ -66,6 +66,41 @@ describe('GatsbyMobxStoreItem', () => {
       expect(savePathMock.mock.calls[0][1]).toStrictEqual(defaultData);
     });
   });
+  describe('when item request fails', () => {
+    it('should retry sending the request', async () => {
+      createItem();
+      await jest.runAllTimers();
+      // reject the request
+      await pendingRequests[0].reject(false);
+      await jest.runAllTimers();
+      expect(savePathMock.mock.calls.length).toBe(1);
+      await jest.runAllTimers();
+      await pendingRequests[1].resolve(true);
+      expect(savePathMock.mock.calls.length).toBe(2);
+      expect(savePathMock.mock.calls[1][0]).toBe('pages/foo$bar');
+      expect(savePathMock.mock.calls[1][1]).toStrictEqual(defaultData);
+    });
+  });
+  describe('when a new request to modify the same node is made, and the original request has no succeeded', () => {
+    it('should abandon original request and retry it until successful', async () => {
+      const item = createItem();
+      await jest.runAllTimers();
+      const data1 = {
+        foo1: 'bar1',
+      };
+      item.update(data1);
+      // reject the first request
+      await pendingRequests[0].reject(false);
+      await jest.runAllTimers();
+      await jest.runAllTimers();
+      // fulfil the second request
+      await pendingRequests[1].resolve(true);
+      await jest.runAllTimers();
+      expect(savePathMock.mock.calls.length).toBe(2);
+      expect(savePathMock.mock.calls[1][0]).toBe('pages/foo$bar');
+      expect(savePathMock.mock.calls[1][1]).toStrictEqual(data1);
+    });
+  });
   describe('when item is created and then updated by browser', () => {
     it('should not send the second request to the server until the first request is finished', async () => {
       const item = createItem();
