@@ -1,11 +1,12 @@
 # Bodiless API Documentation Standards
-We use [JSDoc](https://jsdoc.app/) to generate our API documentation. JSDoc is an API documentation generator for JavaScript. Comments are added directly to the source code, right alongside the code itself. The JSDoc tool will scan the source code and generate an HTML documentation website.
+We use [TypeDoc](https://typedoc.org/) to generate our API documentation. TypeDoc is an API documentation generator for TypeScript. Comments are added directly to the source code, right alongside the code itself. The TypeDoc tool will scan the source code and generate an HTML documentation website.
 
 ## Getting Started
-Each comment must start with a `/**` sequence and be placed immediately before the code you want to document. Comments that do not begin with `/**` will be **ignored**.
+Each comment must start with a `/**` sequence and be placed immediately before the code you want to document. Comments that do not begin with `/**` will be **ignored**. All comments are parsed as markdown. TypeDoc uses the Marked markdown parser to convert comments to HTML.
 ```ts
 /**
  * This is a description of the foo function.
+ * This comment _supports_ [Markdown](https://marked.js.org/).
  */
 function foo() {...};
 
@@ -15,29 +16,31 @@ function foo() {...};
 function bar() {...};
 ```
 
-**The standard format of JSDoc:**
+**The standard format of TypeDoc:**
+Note that the param type is not necessary because it will be read from the TypeScript types.
 ```ts
 /**
  * <description>
- * @param   {<type>} param1_name <description>
- * @param   {<type>} param2_name <description>
- * @return  {<type>}             <description>
+ * @param   <param name> <description>
+ * @param   <param name> <description>
+ * @return  <description>
  */
 ```
 **An example with a function**
 ```ts
 /**
  * Calculate sum of 2 numbers.
- * @param   {number} numberA  First Number.
- * @param   {number} numberB  Second Number.
- * @return  {number}          The summ of First Number and Second Number.
+ * @param   numberA  First Number.
+ * @param   numberB  Second Number.
+ *
+ * @return  The summ of First Number and Second Number.
  */
 function summ(numberA: number, numberB: number): number {
     return numberA + numberB;
 };
 ```
 
-## JSDoc with React Components
+## TypeDoc with React Components
 The documentation comments for React components are similar to those that are used for functions.
 ```ts
 type DocumentType = {
@@ -47,8 +50,8 @@ type DocumentType = {
 
 /**
  * Renders a paragraph with defined fontSize and text.
- * @param   {DocumentType} props DocumentType Object that includes size and text.
- * @return  {ElementType} HTML p element.
+ * @param   props DocumentType Object that includes size and text.
+ * @return  HTML p element.
  */
 const Document:FC<DocumentType> = (props) => {
   const { text, size } = props
@@ -60,89 +63,6 @@ const Document:FC<DocumentType> = (props) => {
 
 Note that when using [TypeDoc](https://typedoc.org/), it will run the TypeScript compiler and extracts type information from the generated compiler symbols. Therefore you don't have to include additional metadata within your comments. TypeScript specific elements like classes, enumerations, or property types, and access modifiers will be automatically detected. 
 
-**TypeDoc Example:**
-The below TypeDoc example will render the same documentation as JSDoc example above.
-```ts
-/**
- * Renders a paragraph with defined fontSize and text.
- */
-const Document:FC<DocumentType> = (props) => {
-  const { text, size } = props
-  return (
-    <p style={{ fontSize: size }}>{text}</p>
-  )
-}
-```
-
-## JSDoc Plugins
-Out of the box, JSDocs does not support the generation of reliable documentation for React components. In the example above, the `Document` component is treated as a regular function missing some of the key benefits of React components.
-
-To improve our documentation quality and reliability, we use a `better-docs` plugin for JSDoc. It provides `@component`, `@category`, and `@optional` plugins.
-
-**Working with `@component` plugin:**
-One of the great benefits of using `better-docs` plugin for JSDoc is that it allows us to document React components automatically by adding a `@component` tag. It will take all props from component and, along with an `@example` tag - will generate a **live preview**. 
-
-```ts
-type TextBlockType = {
-  text: string,
-};
-
-/**
- * TextBlock component description
- * @component
- */
-const TextBlock = (props: TextBlockType) => {
-  const { text } = props
-  return (
-    <div>{text}</div>
-  )
-};
-```
-
-To generate a live preview of the component, you can add `@example` tag and return component from it:
-
-```ts
-/**
- * TextBlock component description
- * @component
- * @example
- * const text = 'Example text'
- * return (
- *   <TextBlock text={text} />
- * )
- */
-const TextBlock = (props: TextBlockType) => {
-  const { text } = props
-  return (
-    <div>{text}</div>
-  )
-};
-```
-
-
-**Working with `@category` plugin:**
-This plugin allows to nest documentation into categories and subcategories in the sidebar menu. In the example below, `FooClass` and `BarClass` will be grouped into one documentation category.
-```ts
-/**
- * FooClass class description.
- * @category Classes
- */
-class FooClass {
-  ....
-}
-```
-
-```ts
-/**
- * BarClass class description.
- * @category Classes
- */
-class BarClass {
-  ....
-}
-```
-
-
 ## Bodiless API Documentation Best Practices
 
 ### Try to Avoid Using Named Parameters
@@ -151,7 +71,7 @@ There is nothing wrong with using named parameters but we prefer not to use it w
 /**
  * Basic Designable List component.
  *
- * @param {ListProps} options BasicList options.
+ * @param options BasicList options.
  * @returns HTML ul element.
  */
 const BasicList = ({components, unwrap, onDelete, ...rest}: ListProps) => {
@@ -168,7 +88,7 @@ Compare it to this example:
 /**
  * Basic Designable List component.
  *
- * @param {ListProps} options BasicList options.
+ * @param options BasicList options.
  * @returns HTML ul element.
  */
 const BasicList = (options: ListProps) => {
@@ -193,7 +113,7 @@ import { Props } from './types';
 /**
  * Basic Designable List component.
  *
- * @param {Props} options BasicList options.
+ * @param options BasicList options.
  * @returns HTML ul element.
  */
 const BasicList = (options: Props) => {
@@ -216,7 +136,7 @@ import { Props as ListProps } from './types';
 /**
  * Basic Designable List component.
  *
- * @param {ListProps} options BasicList options.
+ * @param options BasicList options.
  * @returns HTML ul element.
  */
 const BasicList = (options: ListProps) => {
@@ -250,4 +170,16 @@ There is a way to document the purpose of the file itself. A documentation comme
  */
  import React from 'react';
  ...
+```
+
+### Categorizing API documentation
+TypeDoc's tag `@category` allows grouping reflections on a page:
+
+```ts
+/**
+ * Regular description
+ *
+ * @category Category Name
+ */
+function doSomething() {};
 ```
