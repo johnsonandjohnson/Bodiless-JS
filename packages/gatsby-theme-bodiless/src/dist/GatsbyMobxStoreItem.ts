@@ -28,6 +28,7 @@ enum ItemState {
 }
 
 export const DEFAULT_REQUEST_DELAY = 500;
+const MAXIMUM_REQUEST_DELAY = 5 * 60 * 1000; // 5 minutes
 
 export default class GatsbyMobxStoreItem {
   @observable data = {};
@@ -96,7 +97,8 @@ export default class GatsbyMobxStoreItem {
         break;
       case ItemStateEvent.OnRequestError:
         // incrementally increasing time between each subsequent retry
-        this.requestDelay *= 2;
+        // ensure new delay is not greater than defined maximum
+        this.requestDelay = Math.min(this.requestDelay * 2, MAXIMUM_REQUEST_DELAY);
         this.scheduleRequest();
         this.setState(ItemState.Queued);
         break;
