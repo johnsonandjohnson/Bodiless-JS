@@ -27,7 +27,7 @@ enum ItemState {
   Queued,
 }
 
-const DEFAULT_REQUEST_DELAY = 500;
+export const DEFAULT_REQUEST_DELAY = 500;
 
 export default class GatsbyMobxStoreItem {
   @observable data = {};
@@ -95,7 +95,7 @@ export default class GatsbyMobxStoreItem {
         this.setLockTimeout();
         break;
       case ItemStateEvent.OnRequestError:
-        // incrementally increasing times between each subsequent retry
+        // incrementally increasing time between each subsequent retry
         this.requestDelay *= 2;
         this.scheduleRequest();
         this.setState(ItemState.Queued);

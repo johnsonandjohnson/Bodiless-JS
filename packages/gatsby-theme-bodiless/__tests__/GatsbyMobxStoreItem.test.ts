@@ -12,16 +12,41 @@
  * limitations under the License.
  */
 
-import GatsbyMobxStoreItem from '../src/dist/GatsbyMobxStoreItem';
+import GatsbyMobxStoreItem, { DEFAULT_REQUEST_DELAY } from '../src/dist/GatsbyMobxStoreItem';
 import GatsbyMobxStore from '../src/dist/GatsbyMobxStore';
 import BackendClient from '../src/dist/BackendClient';
 import { ItemStateEvent } from '../src/dist/types';
 
-const deletePathMock = jest.fn().mockResolvedValue(true);
-let pendingRequests: any[] = [];
+class RequestsMock {
+  requests: any[] = [];
+
+  public add({ resolve, reject }: any) {
+    this.requests.push({ resolve, reject });
+  }
+
+  public reject(requestId: number) {
+    this.requests[requestId].reject(false);
+  }
+
+  public resolve(requestId: number) {
+    this.requests[requestId].resolve(true);
+  }
+
+  public clear() {
+    this.requests = [];
+  }
+}
+
+const requestsMock = new RequestsMock();
+
 const savePathMock = jest.fn().mockImplementation(
   () => new Promise((resolve, reject) => {
-    pendingRequests.push({ resolve, reject });
+    requestsMock.add({ resolve, reject });
+  }),
+);
+const deletePathMock = jest.fn().mockImplementation(
+  () => new Promise((resolve, reject) => {
+    requestsMock.add({ resolve, reject });
   }),
 );
 jest.mock('../src/dist/BackendClient', () => () => ({
@@ -48,9 +73,13 @@ const createItem = (key?: string, data?: any) => {
   return new GatsbyMobxStoreItem(new GatsbyMobxStore(dataSource), key$, data$);
 };
 
+const flushPromises = () => new Promise(setImmediate);
+const flushItems = () => jest.runAllTimers();
+const processResponse = flushPromises;
+
 describe('GatsbyMobxStoreItem', () => {
   beforeEach(() => {
-    pendingRequests = [];
+    requestsMock.clear();
     jest.useFakeTimers();
     jest.clearAllTimers();
     jest.clearAllMocks();
@@ -59,46 +88,118 @@ describe('GatsbyMobxStoreItem', () => {
     it('should send the item data to the server', async () => {
       createItem();
       jest.runAllTimers();
-      // fulfill the request
-      await pendingRequests[0].resolve(true);
+      await requestsMock.resolve(0);
       expect(savePathMock.mock.calls.length).toBe(1);
       expect(savePathMock.mock.calls[0][0]).toBe('pages/foo$bar');
       expect(savePathMock.mock.calls[0][1]).toStrictEqual(defaultData);
     });
   });
   describe('when item request fails', () => {
-    it('should retry sending the request', async () => {
+    it('should retry sending the request until it succeeds', async () => {
       createItem();
-      await jest.runAllTimers();
-      // reject the request
-      await pendingRequests[0].reject(false);
-      await jest.runAllTimers();
+      await flushItems();
       expect(savePathMock.mock.calls.length).toBe(1);
-      await jest.runAllTimers();
-      await pendingRequests[1].resolve(true);
+      // reject the first request
+      await requestsMock.reject(0);
+      await processResponse();
+      await flushItems();
+      // reject the second request
+      await requestsMock.reject(1);
+      await processResponse();
+      await flushItems();
+      // resolve the third request
+      await requestsMock.resolve(2);
+      await processResponse();
+      expect(savePathMock.mock.calls.length).toBe(3);
+      expect(savePathMock.mock.calls[2][0]).toBe('pages/foo$bar');
+      expect(savePathMock.mock.calls[2][1]).toStrictEqual(defaultData);
+      // flush again and test nothing is flushed
+      await flushItems();
+      expect(savePathMock.mock.calls.length).toBe(3);
+    });
+    it('should incrementally increase delay between subsequent failed requests', async () => {
+      const delay = DEFAULT_REQUEST_DELAY;
+      createItem();
+      await flushItems();
+      expect(savePathMock.mock.calls.length).toBe(1);
+      // reject the first request
+      await requestsMock.reject(0);
+      await processResponse();
+      // increment delay and use jest.advanceTimersByTime instead of flushItems
+      await jest.advanceTimersByTime(delay * 2);
       expect(savePathMock.mock.calls.length).toBe(2);
-      expect(savePathMock.mock.calls[1][0]).toBe('pages/foo$bar');
-      expect(savePathMock.mock.calls[1][1]).toStrictEqual(defaultData);
+      await requestsMock.reject(1);
+      await processResponse();
+      await jest.advanceTimersByTime(delay);
+      // test the request has not flushed yet since delay was increased
+      expect(savePathMock.mock.calls.length).toBe(2);
+      await jest.advanceTimersByTime(delay * 3);
+      expect(savePathMock.mock.calls.length).toBe(3);
+    });
+    it('should reset increased delay after a request succeeds', async () => {
+      const delay = DEFAULT_REQUEST_DELAY;
+      const item = createItem();
+      await flushItems();
+      expect(savePathMock.mock.calls.length).toBe(1);
+      await requestsMock.reject(0);
+      await processResponse();
+      await jest.advanceTimersByTime(delay * 2);
+      expect(savePathMock.mock.calls.length).toBe(2);
+      await requestsMock.resolve(1);
+      await processResponse();
+      item.update({
+        foo1: 'bar1',
+      });
+      await jest.advanceTimersByTime(delay);
+      expect(savePathMock.mock.calls.length).toBe(3);
     });
   });
   describe('when a new request to modify the same node is made, and the original request has no succeeded', () => {
-    it('should abandon original request and retry it until successful', async () => {
+    it('should abandon original request and retry the new request until successful', async () => {
       const item = createItem();
-      await jest.runAllTimers();
+      await flushItems();
       const data1 = {
         foo1: 'bar1',
       };
       item.update(data1);
       // reject the first request
-      await pendingRequests[0].reject(false);
-      await jest.runAllTimers();
-      await jest.runAllTimers();
-      // fulfil the second request
-      await pendingRequests[1].resolve(true);
-      await jest.runAllTimers();
+      await requestsMock.reject(0);
+      await processResponse();
+      await flushItems();
+      // resolve the second request
+      await requestsMock.resolve(1);
+      await processResponse();
       expect(savePathMock.mock.calls.length).toBe(2);
       expect(savePathMock.mock.calls[1][0]).toBe('pages/foo$bar');
       expect(savePathMock.mock.calls[1][1]).toStrictEqual(data1);
+    });
+  });
+  describe('when a request to delete the same node is made, and the original request has no succeeded', () => {
+    it('should abandon original request and retry the delete request until successful', async () => {
+      const item = createItem();
+      await flushItems();
+      expect(savePathMock.mock.calls.length).toBe(1);
+      expect(deletePathMock.mock.calls.length).toBe(0);
+      item.delete();
+      // reject the first request
+      await requestsMock.reject(0);
+      await processResponse();
+      await flushItems();
+      // reject the second request
+      await requestsMock.reject(1);
+      await processResponse();
+      expect(savePathMock.mock.calls.length).toBe(1);
+      expect(deletePathMock.mock.calls.length).toBe(1);
+      await flushItems();
+      // reject the second request
+      await requestsMock.resolve(2);
+      await processResponse();
+      expect(savePathMock.mock.calls.length).toBe(1);
+      expect(deletePathMock.mock.calls.length).toBe(2);
+      // flush again and test nothing is flushed
+      await flushItems();
+      expect(savePathMock.mock.calls.length).toBe(1);
+      expect(deletePathMock.mock.calls.length).toBe(2);
     });
   });
   describe('when item is created and then updated by browser', () => {
@@ -114,10 +215,10 @@ describe('GatsbyMobxStoreItem', () => {
       expect(savePathMock.mock.calls[0][0]).toBe('pages/foo$bar');
       expect(savePathMock.mock.calls[0][1]).toStrictEqual(defaultData);
       // fulfill the first request
-      await pendingRequests[0].resolve(true);
+      await requestsMock.resolve(0);
       jest.runAllTimers();
       // fulfill the second request
-      await pendingRequests[1].resolve(true);
+      await requestsMock.resolve(1);
       expect(savePathMock.mock.calls.length).toBe(2);
       expect(savePathMock.mock.calls[1][0]).toBe('pages/foo$bar');
       expect(savePathMock.mock.calls[1][1]).toStrictEqual(data1);
@@ -128,7 +229,7 @@ describe('GatsbyMobxStoreItem', () => {
       const item = createItem();
       jest.runAllTimers();
       // fulfill the request
-      await pendingRequests[0].resolve(true);
+      await requestsMock.resolve(0);
       const data1 = {
         foo: 'bar1',
       };
@@ -139,7 +240,7 @@ describe('GatsbyMobxStoreItem', () => {
       const item = createItem();
       jest.runAllTimers();
       // fulfill the request
-      await pendingRequests[0].resolve(true);
+      await requestsMock.resolve(0);
       jest.runAllTimers();
       const data1 = {
         foo: 'bar1',
@@ -155,7 +256,7 @@ describe('GatsbyMobxStoreItem', () => {
       const item = createItem();
       jest.runAllTimers();
       // fulfill the request
-      await pendingRequests[0].resolve(true);
+      await requestsMock.resolve(0);
       expect(item.isPending()).toBe(false);
     });
   });
