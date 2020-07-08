@@ -1,12 +1,12 @@
 # Using Tailwind system with Bodiless
-(TO DO:  Doc Starting point and will be enhanced in future tickets.)
+(TO DO:  Starting point and will be enhanced in future tickets.)
 
 As discussed in other sections, Bodiless depends on Tailwind which is
 utility-first CSS framework. If you are unfamiliar, we highly suggest reading
 these guides:
 
-- [Github](https://github.com/tailwindcss)
-- [Docs](https://tailwindcss.com/docs/what-is-tailwind)
+- [Tailwind on Github](https://github.com/tailwindcss/tailwindcss)
+- [Tailwind Docs](https://tailwindcss.com/docs/what-is-tailwind)
 
 ## Tailwind Configuration File
 The sites tailwind configuration file, `tailwind.config.js`, can be found in
@@ -16,11 +16,11 @@ Adding custom styling can be done by editing `tailwind.config.js` following
 [Tailwind documentation](https://tailwindcss.com/docs/configuration). 
 
 The starter kit has a empty Tailwind configuration which means that site will
-get all Tailwind's default settings into a generated index.css. 
+use all Tailwind's default settings and place into a generated index.css file.
 
 ## Extend vs Replace
 Tailwind allows you to replace or extend the settings. If you are using Bodiless
-components which may be using default tailwind classes, we suggest you
+components, which may be using default tailwind classes, we suggest you
 [extend](https://tailwindcss.com/docs/theme/#extending-the-default-theme)
 instead of replace using theme.extend.
 
@@ -34,10 +34,11 @@ instead of replace using theme.extend.
     },  
 ```
 
-This will add additional brand colors to the all the default tailwind colors.
-While this may produce a large css file, when the static site builds it utilizes
+This will add additional brand colors to all the default tailwind colors. When
+the static site builds it utilizes
 [purge css features](https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css)
-to remove unused css and keep this css file small for best performance.
+to remove unused css classes and this will keep the css file small for best
+performance.
 
 ## Building with Tailwind
 
@@ -47,8 +48,3 @@ automatically included for the site. The css build will happen automatically
 whenever you do command `npm run start` and start your site but if you are in
 local develop and site is running, you can run this as separate command and site
 will hotload the index.css file.
-
-## Components iwth Tailwind Dependencies
-
-Components that have tailwind dependencies:
-* TO DO

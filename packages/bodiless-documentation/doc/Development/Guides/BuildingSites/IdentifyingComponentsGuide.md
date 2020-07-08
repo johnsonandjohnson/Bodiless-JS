@@ -1,9 +1,9 @@
 # Guide in Identifying Components & Variations
 
 A site builder can look through an existing site that is being rebuilt or the
-site design assets and choose how to build it out as as components. A good guide
-would be try keep components as smaller componets that can be reused or composed
-together to create more complex componets
+site design assets and choose how to build it out as components. A good guide
+would be try keep components as small as possible and that can be reused or composed
+together to create more complex components.
 
 ## Identifying Components
 
@@ -11,16 +11,16 @@ Let's use
 [Examples/Test Site homepage](https://johnsonandjohnson.github.io/Bodiless-JS/#/About/GettingStarted?id=launch-the-test-site)
 as an example. It consists of:
 
-* Header
+* Header and within the header is a 
   * Logo (Clickable Image)
   * Menu
-* Header Image
+* Header Landscape Image
 * Title
 * Bullet Points
 * Touts
 * Footer with Copyright
 
-We have discussed that Header, Menu, Logo, & Footer already come in the Bodiless Starter Kit.
+The Header, Menu, Logo, & Footer components are global components.
 So thus it leaves the actual page components that are coming from
 [homepage](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/data/pages/index.tsx)
 and if you inspect the code, you can see it was implemented with
@@ -36,7 +36,7 @@ and if you inspect the code, you can see it was implemented with
 
 Thus we would have to build out or extend these components to create the page.
 
-## Identifying Variations of Components
+## Variations of Components
 
 The components could come with variations.
 
@@ -44,10 +44,18 @@ Let's take the a header image on a page. You may see variations of this header
 image such as:
 
 * A title that overlays the image in center
-* A title changes how it overlays (left, right, bottom aligments)
-* A title & caption overlays the image in center
-* A title & caption changes how it overlays (left, right, bottom aligments)
-* and probably some other variations that make it banner.
+* A title changes how it overlays (left, right, bottom alignments)
+* A title & caption are both present.
+* and probably some other variations...
 
 One component could be built and apply different style variations to produce a
-component that meets the requirements.
+component that meets this requirement. In the above example, you could build a
+page banner component that is composed of Image, Rich Text Editor Simple for the
+title, Rich Text Editor Full for the caption. Then create style variations to
+control the design of title, captions and placement of the title & captions. In
+addition, you could create a variation that removes the caption and it will
+render with only image & title.  
+
+## Reviewing a Site
+
+So as you review a site assets (or existing site) generate a list of individual components that are used throughout each page.  As you review, track the different variations that are seen (which are often same type of content and displayed visually slightly differently.)  This is also good time to find the commonality of types of pages used within so you can record what templates have to be built.
