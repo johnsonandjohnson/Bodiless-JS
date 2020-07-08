@@ -23,7 +23,6 @@ import Layout from '../../../components/Layout';
 import { FlowContainerDefault } from '../../../components/FlowContainer';
 import { EditorBasic, EditorFullFeatured, EditorSimple } from '../../../components/Editors';
 
-
 const RichTextPage = (props: any) => (
   <Page {...props}>
     <Layout>

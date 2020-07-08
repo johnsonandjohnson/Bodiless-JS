@@ -74,7 +74,6 @@ describe('componentSelectorForm', () => {
     expect(mockContextMenuForm.mock.calls[0][0].hasSubmit).toBeFalsy();
   });
 
-
   it('Passes correct onSelect handler to ComponentSelector', () => {
     const { onSelect, closeForm, wrapper } = renderComponentSelectorForm();
     // @ts-ignore

@@ -42,7 +42,7 @@ export default class ContentfulNode<D extends object> extends DefaultContentNode
 
   private getDefaultContent() {
     const contentKey = this.getContentKey();
-    return (this.content as any)[contentKey];
+    return (this.content as any)[contentKey] || {};
   }
 
   public setContent(content: D) {
@@ -56,6 +56,8 @@ export default class ContentfulNode<D extends object> extends DefaultContentNode
   get data() {
     const { getNode } = this.getters;
     const nodeData = getNode(this.path) as D;
+    // @TODO: When we deprecate componentData, this will have to be updated.
+    // We'll need to return our default content instead of the emptyValue.
     const isNodeDataEmpty = !nodeData || Object.keys(nodeData).length === 0;
     return !isNodeDataEmpty ? nodeData : this.getDefaultContent();
   }

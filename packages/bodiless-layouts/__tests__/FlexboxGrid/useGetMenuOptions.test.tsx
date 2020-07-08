@@ -54,7 +54,6 @@ describe('useGetMenuOptions', () => {
     );
   }
 
-
   function invokeAction(button: TMenuOption, selection: string) {
     // @ts-ignore
     button.handler();
@@ -143,7 +142,6 @@ describe('useGetMenuOptions', () => {
       expectDataHandlerCall(updateFlowContainerItem, [{ ...item, type: 'Bar' }]);
     });
   });
-
 
   describe('flow container getMenuOptions', () => {
     function getMenuOptions() {

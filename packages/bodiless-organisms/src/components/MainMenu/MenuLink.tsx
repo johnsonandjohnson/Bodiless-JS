@@ -50,12 +50,10 @@ const isCurrentPage = (href: string | undefined) => {
   return urls.indexOf(href) > -1;
 };
 
-
 export type Props = {
   href?: string,
   unwrap?: Function,
 } & DesignableComponentsProps<MenuLinkComponents> & HTMLProps<HTMLElement>;
-
 
 /**
  * Toggles between two states. Render <ActiveLink /> when the active page URL (window.location)

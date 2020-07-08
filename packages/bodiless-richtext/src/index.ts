@@ -14,8 +14,8 @@
 
 export {
   default as RichText,
-  RichTextProps,
 } from './RichText';
+export type { RichTextProps } from './RichText';
 export { default as asFloat } from './Float';
 export * from './RichTextItemGetters';
 export * from './RichTextItemSetters';

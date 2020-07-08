@@ -19,17 +19,18 @@ import {
   addClasses, removeClasses, addProps,
 } from '@bodiless/fclasses';
 import {
-  ContextMenu, ContextMenuUI, ContextMenuProps,
+  ContextMenu, ContextMenuUI, ContextMenuProps, useEditContext,
 } from '@bodiless/core';
 import {
   ComponentFormTitle, ComponentFormCloseButton, ComponentFormLabel, ComponentFormText,
   ComponentFormButton, Icon, Div, Hr, ToolbarButton, ComponentFormUnwrapButton,
-  ComponentFormError, ComponentFormSubmitButton,
+  ComponentFormError, ComponentFormSubmitButton, ComponentFormList, ComponentFormListItem,
+  ComponentFormDescription,
 } from '@bodiless/ui';
 import ReactTagsField from './ReactTags';
 
 const Toolbar = flow(
-  addClasses('bl-bg-black bl-rounded bl-z-50 bl-p-grid-2 bl-fixed bl-top-grid-0 bl-left-grid-0 bl-text-white'),
+  addClasses('bl-flex bl-flex-col bl-bg-black bl-rounded bl-z-50 bl-p-grid-2 bl-fixed bl-top-grid-0 bl-left-grid-0 bl-text-white'),
   addProps({ role: 'toolbar', 'aria-label': 'Global Context Menu Left', id: 'global-context-menu' }),
 )(Div);
 
@@ -45,35 +46,43 @@ export const ToolbarDivider = addClasses(
   'bl-bg-grey bl-w-auto bl-my-grid-3 bl-h-px',
 )(Hr);
 
-export const GlobalTooltip: FC<ReactTooltip['props']> = props => (
-  <ReactTooltip
-    {...props}
-    placement="rightTop"
-    overlayStyle={{ position: 'fixed', opacity: 1 }}
-    getTooltipContainer={() => {
-      let el = document.getElementById('global-tooltip-container');
+export const GlobalTooltip: FC<ReactTooltip['props']> = props => {
+  const context = useEditContext();
+  return (
+    <ReactTooltip
+      {...props}
+      placement="rightTop"
+      overlayStyle={{ position: 'fixed', opacity: 1 }}
+      // Hide all local tooltips outside the main toolbar.
+      onPopupAlign={() => { context.toggleLocalTooltipsDisabled(true); }}
+      getTooltipContainer={() => {
+        let el = document.getElementById('global-tooltip-container');
 
-      if (!el) {
-        el = document.createElement('div');
-        el.setAttribute('id', 'global-tooltip-container');
-        el.setAttribute('style', 'position:fixed;');
-        document.body.appendChild(el);
-      }
+        if (!el) {
+          el = document.createElement('div');
+          el.setAttribute('id', 'global-tooltip-container');
+          el.setAttribute('style', 'position:fixed;');
+          document.body.appendChild(el);
+        }
 
-      return el;
-    }}
-  />
-);
+        return el;
+      }}
+    />
+  );
+};
 
 const ui: ContextMenuUI = {
   ComponentFormTitle,
   ComponentFormLabel,
+  ComponentFormDescription,
   ComponentFormText,
   ComponentFormButton,
   ComponentFormCloseButton,
   ComponentFormSubmitButton,
   ComponentFormUnwrapButton,
   ComponentFormError,
+  ComponentFormList,
+  ComponentFormListItem,
   Icon,
   Toolbar,
   ToolbarButton,

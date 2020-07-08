@@ -58,7 +58,6 @@ const BurgerMenuBase: FC<Props> = ({ components, ...rest }) => {
   );
 };
 
-
 const BurgerMenuClean = designable(burgerMenuComponents)(BurgerMenuBase) as ComponentType<Props>;
 
 export default BurgerMenuClean;

@@ -28,17 +28,24 @@ const event = {
 };
 
 describe('useContextActivator', () => {
-  beforeEach(() => {
-    const mockIsEdit = jest.spyOn(PageEditContext.prototype, 'isEdit', 'get');
-    mockIsEdit.mockImplementation(() => true);
-    // TODO: Rather than spying on the prototype we should mock the class and watch an instance.
-    // (but currently it's hard to get hold of the root instance, and we can't inject a new instance
-    // since enzyme doesn't support the context api.)
-    jest.spyOn(PageEditContext.prototype, 'activate');
+  let mockActivate: any;
+  let mockIsInnermost: any;
+  let mockIsEdit: any;
+
+  beforeAll(() => {
+    mockActivate = jest.spyOn(PageEditContext.prototype, 'activate');
+    mockIsInnermost = jest.spyOn(PageEditContext.prototype, 'isInnermost', 'get').mockReturnValue(false);
+    mockIsEdit = jest.spyOn(PageEditContext.prototype, 'isEdit', 'get').mockReturnValue(true);
   });
 
   afterEach(() => {
-    (PageEditContext.prototype.activate as any).mockClear();
+    mockActivate.mockClear();
+  });
+
+  afterAll(() => {
+    mockActivate.mockRestore();
+    mockIsInnermost.mockRestore();
+    mockIsEdit.mockRestore();
   });
 
   it('creates an activator for a mouseover event', () => {

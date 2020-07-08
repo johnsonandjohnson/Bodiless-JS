@@ -35,8 +35,8 @@ import {
   asEditableList,
   List,
   ListProps,
-  asBodilessImage,
 } from '@bodiless/components';
+import { asBodilessImage } from '@bodiless/components-ui';
 
 type CarouselComponents = {
   Wrapper: ComponentType<StylableProps>,
@@ -103,7 +103,6 @@ const asTestableCarousel = withDesign({
   }),
 });
 
-
 // Replace my Slider div with Slides List.
 // TO DO: This should move to Site Level because,
 //        its currently the composition of combining Slide List + Carousel.
@@ -136,7 +135,6 @@ const asAutoSlider = ifReadOnly(
 const BAutoCarousel = withDesign({
   Slider: asAutoSlider,
 })(BCarousel);
-
 
 export default BCarousel;
 export {

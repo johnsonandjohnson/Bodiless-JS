@@ -87,7 +87,6 @@ const dataSource = {
   slug: 'slug',
 };
 
-
 describe('GatsbyMobxStore', () => {
   it('Processes data correctly', () => {
     // @ts-ignore

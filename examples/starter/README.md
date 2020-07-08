@@ -1,10 +1,10 @@
-# Gatsby Starter for [BodilessJS](https://github.com/johnsonandjohnson/Bodiless-JS)
+8 Gatsby Starter for [BodilessJS](https://github.com/johnsonandjohnson/Bodiless-JS)
 
 ## Prerequisites
 
 Ensure you have the following installed locally:
 - NodeJS: https://nodejs.org/en/download/ 
-  - We are currently using the LTS version 10.15.0. 
+  - We are currently using the LTS version 12.18.0.
   - We use `npm` as a package manager. If you prefer `yarn` feel free to try it. YMMV.
 
 ## Creating a New Site

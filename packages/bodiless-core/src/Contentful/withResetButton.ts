@@ -14,7 +14,7 @@
 
 import { flowRight } from 'lodash';
 import {
-  withPageContext as withMenuOptions,
+  withMenuOptions,
   withContextActivator,
   withLocalContextMenu,
 } from '../hoc';
@@ -34,6 +34,7 @@ const useGetMenuOptions = (menuOptionWithNodeKey?: MenuOptionWithNodeKey) => () 
     {
       icon: 'undo',
       name: 'Reset',
+      label: 'Undo',
       handler: () => node.delete(nodeKeyToDelete),
       local: true,
       global: false,

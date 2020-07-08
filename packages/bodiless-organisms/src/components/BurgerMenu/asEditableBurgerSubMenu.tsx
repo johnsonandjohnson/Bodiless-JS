@@ -22,7 +22,6 @@ import {
 } from '@bodiless/core';
 import {
   withDeleteSublistOnUnwrap,
-  asEditable,
   withLinkToggle,
 } from '@bodiless/components';
 import asEditableMenu from '../MainMenu/asEditableMenu';
@@ -49,6 +48,6 @@ const asEditableBurgerSubMenu = (HeaderContent: string, editable: AsEditable) =>
       ),
     }),
   }),
-  withEditableTitle(asEditable),
+  withEditableTitle(editable),
 );
 export default asEditableBurgerSubMenu;

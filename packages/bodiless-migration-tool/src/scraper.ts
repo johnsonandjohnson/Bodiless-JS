@@ -13,8 +13,9 @@
  */
 
 import { EventEmitter as EE } from 'ee-ts';
+import debug from 'debug';
 // eslint-disable-next-line import/no-unresolved
-import { Request } from '@bodiless/headless-chrome-crawler/lib/puppeteer';
+import { Request, Response } from '@bodiless/headless-chrome-crawler/lib/puppeteer';
 // @ts-ignore - ignoring as it contains functions that invoked in browser
 import evaluatePage from './evaluate-page';
 import {
@@ -22,9 +23,11 @@ import {
   isUrlExternal,
   trimQueryParamsFromUrl,
 } from './helpers';
-import debug from './debug';
+import debugDefault from './debug';
 // require due to ES6 modules cannot directly export class objects.
-import HCCrawler = require('@bodiless/headless-chrome-crawler');
+const HCCrawler = require('@bodiless/headless-chrome-crawler');
+
+const debugScraper = debug('migration_tool:scraper');
 
 export interface ScrapedPage {
   pageUrl: string,
@@ -47,6 +50,8 @@ interface Events {
   fileReceived(file: string): void,
   requestStarted(file: string): void,
   error(error: Error): void
+  responseReceived(response: Response): void,
+  requestFinished(): void,
 }
 
 export interface ScraperParams {
@@ -59,12 +64,55 @@ export interface ScraperParams {
   obeyRobotsTxt?: boolean
 }
 
+interface QueueOptions {
+  url?: string;
+}
+
+interface RequestOptions {
+  url: string;
+}
+
+interface SuccessResult<T> {
+  isHtmlResponse: boolean;
+  response: {
+    ok: boolean;
+    status: string;
+    url: string;
+    headers: Object;
+  };
+  responseText: string;
+  result: T;
+}
+
 export class Scraper extends EE<Events> {
   params: ScraperParams;
 
   constructor(params: ScraperParams) {
     super();
     this.params = params;
+  }
+
+  private shouldAcceptPageResponse(response: any) {
+    // we can get an external url here
+    // when an internal url is redirected to the external
+    const externalUrl = this.params.pageUrls.some(url => (
+      isUrlExternal(url, response.url)
+    ));
+    if (externalUrl) {
+      console.log(`external url ${response.url} received. skipping`);
+      return false;
+    }
+    const statusCode = Number(response.status);
+    // skip if resource was already handled.
+    if (statusCode === 304) {
+      return false;
+    }
+    // skip and log responses with server errors.
+    if (statusCode >= 500) {
+      console.log(`response ${response.url} with status ${statusCode} received. skipping`);
+      return false;
+    }
+    return true;
   }
 
   async Crawl() {
@@ -78,27 +126,23 @@ export class Scraper extends EE<Events> {
       // Function to be evaluated in browsers
       evaluatePage,
       // Function to do anything like modifying options before each request
-      preRequest: async queueOptions => {
+      preRequest: async (queueOptions: QueueOptions) => {
         try {
           if (queueOptions !== undefined && queueOptions.url !== undefined) {
+            debugScraper(`preRequest: queueing ${queueOptions.url}`);
             /* eslint no-param-reassign: 1 */
             queueOptions.url = trimQueryParamsFromUrl(queueOptions.url);
           }
         } catch (error) {
-          debug(error);
+          debugDefault(error);
         }
         return true;
       },
       // Function to be called with evaluated results from browsers
-      onSuccess: (async successResult => {
+      onSuccess: (async (successResult: SuccessResult<any>) => {
+        debugScraper(`onSuccess: received ${successResult.response.url} with ${successResult.response.status} status`);
         try {
-          // we can get an external url here
-          // when an internal url is redirected to the external
-          const externalUrl = this.params.pageUrls.some(url => (
-            isUrlExternal(url, successResult.response.url)
-          ));
-          if (externalUrl) {
-            console.log(`external url ${successResult.response.url} received. skipping`);
+          if (!this.shouldAcceptPageResponse(successResult.response)) {
             return;
           }
           // decide if we get page or resource response
@@ -112,18 +156,19 @@ export class Scraper extends EE<Events> {
             this.emit('fileReceived', successResult.response.url);
           }
         } catch (error) {
-          debug(error);
+          debugDefault(`onSuccess exception: ${error}`);
         }
       }),
-      onError: (error => {
-        debug(`onerror ${error}`);
+      onError: ((error: Error) => {
+        debugDefault(`onError: ${error}`);
         this.emit('error', error);
       }),
     });
-    crawler.on(HCCrawler.Events.AttachedFileRequested, async options => {
+    crawler.on(HCCrawler.Events.AttachedFileRequested, async (options: RequestOptions) => {
       this.emit('fileReceived', options.url);
     });
     crawler.on(HCCrawler.Events.PuppeteerRequestStarted, async (request: Request) => {
+      debugScraper(`requestStarted: ${request.url()}`);
       const resourceTypes = [
         'fetch',
         'xhr',
@@ -136,6 +181,14 @@ export class Scraper extends EE<Events> {
         this.emit('requestStarted', request.url());
       }
     });
+    crawler.on(HCCrawler.Events.PuppeteerResponseReceived, async (response: Response) => {
+      debugScraper(`responseReceived: ${response.url()}`);
+      this.emit('responseReceived', response);
+    });
+    crawler.on(HCCrawler.Events.RequestFinished, async () => {
+      this.emit('requestFinished');
+    });
+
     // Queue a request
     const queue = this.params.pageUrls.map((url, index, pageUrls) => {
       const pageHost = getHostNameWithoutWWW(url);

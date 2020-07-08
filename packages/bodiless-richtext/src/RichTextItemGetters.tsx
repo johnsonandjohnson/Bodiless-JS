@@ -276,12 +276,17 @@ const getSelectorButtons = (components: RichTextComponents) => Object.values(com
   getGlobalButtons takes an array of RichTextitems and maps that to a array of objects used
   to create global buttons
 */
-const getGlobalButtons = (components: RichTextComponents) => (editor:Editor) => (
-  Object.values(components)
+const getGlobalButtons = (components: RichTextComponents) => {
+  const componentsWithButtons = Object.values(components)
     // eslint-disable-next-line no-prototype-builtins
-    .filter(Component => Component.hasOwnProperty('globalButton'))
-    .map(Component => getGlobalButton(Component as RichTextComponentWithGlobalButton)(editor))
-);
+    .filter(Component => Component.hasOwnProperty('globalButton'));
+  if (!componentsWithButtons.length) return undefined;
+  return (
+    (editor:Editor) => componentsWithButtons.map(
+      Component => getGlobalButton(Component as RichTextComponentWithGlobalButton)(editor),
+    )
+  );
+};
 
 export {
   getPlugins,

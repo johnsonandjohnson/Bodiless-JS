@@ -4,7 +4,7 @@
 
 Ensure you have the following installed locally:
 - NodeJS: https://nodejs.org/en/download/ 
-  - We are currently using the LTS version 10.15.0. 
+  - We are currently using the LTS version 12.18.0.
   - We use `npm` as a package manager. If you prefer `yarn` feel free to try it. YMMV.
 - [NPM](https://docs.npmjs.com/) version 6.13.1+ is required.
 
@@ -99,9 +99,9 @@ Visit http://localhost:9000/ in your browser to view the site.
 
 ## Next Steps
 
-- [Step-by-step walkthrough of site building](About/SiteBuildBasics)
-- [More ways to launch sites](Development/LocalSites.md)
-- [Read our Core Principles](About/CorePrinciples).
-- [Understand our Platform Architecture](About/Development/Architecture).
+- [Step-by-step walkthrough of site building](../Development/Guides/SiteBuildBasics)
+- [More ways to launch sites](../Development/LocalSites.md)
+- [Read our Core Principles](./CorePrinciples).
+- [Understand our Platform Architecture](../Development/Architecture).
 
 

@@ -75,7 +75,9 @@ describe('withEditButton', () => {
     const menuOptions = wrapper.prop('getMenuOptions')();
     const Form = menuOptions[0].handler();
     const closeForm = jest.fn();
-    const formWrapper = shallow(<Form closeForm={closeForm} />);
+    const formWrapper$ = shallow(<Form closeForm={closeForm} />);
+    const formWrapper = formWrapper$.dive();
+    // @ts-ignore The result of dive is somehow not recognized as always being a component.
     formWrapper.prop('onSubmit')();
     expect(props.setComponentData.mock.calls.length).toBe(1);
     expect(closeForm.mock.calls.length).toBe(1);
