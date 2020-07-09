@@ -12,18 +12,18 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React, { ComponentType, useMemo } from 'react';
 import { flowRight, pick, flow } from 'lodash';
+import type { Plugin } from 'slate-react';
+import type { SchemaProperties } from 'slate';
 import {
-  ifEditable,
   useEditContext,
   useContextActivator,
   withNode,
   withMenuOptions,
   withoutProps,
+  ifToggledOn,
 } from '@bodiless/core';
-import { BasicEditorProps, Plugin } from 'slate-react';
-import { SchemaProperties } from 'slate';
 import {
   designable,
   H1,
@@ -103,18 +103,24 @@ const withSlateSchema = <P extends object>(Component: ComponentType<P>) => (
 const withSlateActivator = <P extends object>(Component: ComponentType<P>) => (props: P) => {
   const previousSlateContext = useSlateContext();
   const previousEditorProps = previousSlateContext!.editorProps;
-  const context = useEditContext();
   const { onClick } = useContextActivator();
+
+  // TODO: The following onCHange handler is only necessary if the menu options provided
+  // by this editor depend on the state of the editor. If this is ever the case, we will
+  // need to add logic to prevent the context from refreshing on *every* change, and
+  // only trigger refresh when necxessary.
+  // const context = useEditContext();
   // tslint:disable-next-line: ter-arrow-parens
-  const onChange: BasicEditorProps['onChange'] = change => {
-    if (typeof previousEditorProps.onChange === 'function' && change) {
-      previousEditorProps.onChange(change);
-    }
-    context.refresh();
-  };
+  // const onChange: BasicEditorProps['onChange'] = change => {
+  //   if (typeof previousEditorProps.onChange === 'function' && change) {
+  //     previousEditorProps.onChange(change);
+  //   }
+  //   context.refresh();
+  // };
+
   const editorProps = {
     ...previousEditorProps!,
-    onChange,
+    // onChange,
     onClick,
   };
 
@@ -132,28 +138,35 @@ const withSlateActivator = <P extends object>(Component: ComponentType<P>) => (p
 };
 
 type UseGetMenuOptionsProps = {
-  globalButtons: Function,
+  globalButtons?: Function,
 };
 // This is a call back that goes to withMenuOptions so that we can add button to the global menu
 const richTextUseGetMenuOptions = (props: UseGetMenuOptionsProps) => {
   const slateContext = useSlateContext();
   const { editor } = slateContext!;
-  return () => props.globalButtons(editor);
+  return () => (props.globalButtons ? props.globalButtons(editor) : []);
 };
+
+const ifMenuOptions = ifToggledOn((props: UseGetMenuOptionsProps) => {
+  const context = useEditContext();
+  return context.isEdit && Boolean(props.globalButtons);
+});
+
 type RichTextProviderProps = {
   plugins: Plugin[],
   schema?: SchemaProperties,
-};
+} & UseGetMenuOptionsProps;
 type RichTextProviderType = ComponentType<RichTextProviderProps>;
 const RichTextProvider = flowRight(
   withNode,
   withNodeStateHandlers,
-  // @ts-ignore
   withSlateEditor,
-  ifEditable(withMenuOptions({ useGetMenuOptions: richTextUseGetMenuOptions, name: 'editor' })),
-  withoutProps(['className', 'globalButtons', 'plugins', 'readOnly']),
+  ifMenuOptions(
+    withMenuOptions({ useGetMenuOptions: richTextUseGetMenuOptions, name: 'editor' }),
+    withSlateActivator,
+  ),
+  withoutProps(['className', 'plugins', 'globalButtons', 'readOnly']),
   withSlateSchema,
-  ifEditable(withSlateActivator),
 )(React.Fragment) as RichTextProviderType;
 
 export type RichTextProps<P> = {
@@ -186,7 +199,17 @@ const BasicRichText = <P extends object, D extends object>(props: P & RichTextPr
     ui,
     ...rest
   } = props;
-  const finalComponents = withDefaults(components);
+  const {
+    finalComponents, plugins, schema, globalButtons,
+  } = useMemo(() => {
+    const finalComponents$ = withDefaults(components);
+    return {
+      finalComponents: finalComponents$,
+      plugins: getPlugins(finalComponents$),
+      schema: getSchema(finalComponents$),
+      globalButtons: getGlobalButtons(finalComponents$),
+    };
+  }, [components]);
   const { HoverMenu } = getUI(ui);
   const finalUI = getUI(ui);
   const { isEdit } = useEditContext();
@@ -197,11 +220,12 @@ const BasicRichText = <P extends object, D extends object>(props: P & RichTextPr
       <RichTextProvider
         {...rest}
         initialValue={initialValue || defaultValue}
-        plugins={getPlugins(finalComponents)}
-        globalButtons={getGlobalButtons(finalComponents)}
-        schema={getSchema(finalComponents)}
+        plugins={plugins}
+        globalButtons={globalButtons}
+        schema={schema}
       >
-        { isEdit
+        {
+          isEdit
           && (
           <HoverMenu>
             {
@@ -210,7 +234,8 @@ const BasicRichText = <P extends object, D extends object>(props: P & RichTextPr
               // eslint-disable-next-line react/no-array-index-key
               getHoverButtons(finalComponents).map((C, i) => <C key={i} />)
             }
-            { selectorButtons.length > 0
+            {
+              selectorButtons.length > 0
               && (
                 <TextSelectorButton>{ selectorButtons }</TextSelectorButton>
               )

@@ -30,7 +30,7 @@ export const flowIf = (condition: (args: any) => boolean) => (
   <H extends Function>(...hocs: Function[]) => (
     <P extends object>(Component: ComponentType<P> | string) => {
       // @ts-ignore Expected at least 1 arguments, but got 0 or more.ts(2557)
-      const WrappedComponent = flow(...hocs)(Component);
+      const WrappedComponent = flow(...hocs)(Component) as ComponentType;
       return (props: P) => (
         condition(props) ? <WrappedComponent {...props} /> : <Component {...props} />
       );

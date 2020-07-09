@@ -44,7 +44,7 @@ export const shouldUpdateScroll = ({ prevRouterProps, routerProps: { location } 
             const elementStr = elementSelectors.join();
             document.querySelectorAll(elementStr).forEach(element => {
               if (element.attributes.href && (element.attributes.href.value === `#${hash}`)) {
-                throw HashMatchException;
+                throw new HashMatchException();
               }
             });
           }
@@ -53,7 +53,7 @@ export const shouldUpdateScroll = ({ prevRouterProps, routerProps: { location } 
             const parentStr = parentSelectors.join();
             document.querySelectorAll(parentStr).forEach(element => {
               if (element.isSameNode(targetElement.closest(parentStr))) {
-                throw HashMatchException;
+                throw new HashMatchException();
               }
             });
           }

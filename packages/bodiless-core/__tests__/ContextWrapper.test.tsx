@@ -12,10 +12,11 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { FC } from 'react';
 import { mount } from 'enzyme';
 import ContextWrapper from '../src/components/ContextWrapper';
 import PageEditContext from '../src/PageEditContext';
+import { useEditContext } from '../src/hooks';
 
 describe('ContextWrapper', () => {
   beforeEach(() => {
@@ -97,10 +98,24 @@ describe('ContextWrapper', () => {
   // });
 
   it('activates the current context on click', () => {
+    const mockActivate = jest.fn();
+    const MockContext: FC = ({ children }) => {
+      const context = useEditContext();
+      // eslint-disable-next-line react/destructuring-assignment
+      const newContext = context.spawn({
+        getMenuOptions: () => [],
+        name: 'test',
+        id: 'test',
+      });
+      newContext.activate = mockActivate;
+      return <PageEditContext.Provider value={newContext}>{children}</PageEditContext.Provider>;
+    };
     const wrapper = mount(
-      <ContextWrapper clickable>
-        <span>This is the wrapped text.</span>
-      </ContextWrapper>,
+      <MockContext>
+        <ContextWrapper clickable>
+          <span>This is the wrapped text.</span>
+        </ContextWrapper>
+      </MockContext>,
     );
     // TODO: We should have reusable mocks for events.
     const event = {
@@ -108,7 +123,7 @@ describe('ContextWrapper', () => {
       stopPropagation: jest.fn(),
     };
     wrapper.find('div').simulate('click', event);
-    expect(PageEditContext.prototype.activate).toHaveBeenCalledTimes(1);
+    expect(mockActivate).toHaveBeenCalled();
   });
 
   it('does not activate the current context if not clickable', () => {

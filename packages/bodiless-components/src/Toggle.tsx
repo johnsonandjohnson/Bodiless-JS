@@ -51,11 +51,13 @@ type TMenuOptionGetter = () => TMenuOption[];
 
 type ToggleMenuOptions = {
   icon? : string;
+  label?: string,
 };
 
 const withToggleButton = (options? : ToggleMenuOptions) => {
   const useGetMenuOptions = (): TMenuOptionGetter => {
     const icon = options ? options.icon : false;
+    const label = options ? options.label : undefined;
     const { setOn, isOn } = useAccessors();
     // TODO: This should be a general useMenuHandler() utility exposed by bodiless core.
     const context = useEditContext();
@@ -68,6 +70,7 @@ const withToggleButton = (options? : ToggleMenuOptions) => {
       isOn() ? [] : [{
         icon: icon || 'toggle_off',
         name: 'Toggle',
+        label,
         handler: asHandler(() => setOn(true)),
         global: false,
         local: true,
@@ -92,7 +95,6 @@ type OnSubmitProps = {
 type Props<P> = {
   wrap: (values: any) => void;
 } & Omit<P, keyof OnSubmitProps>;
-
 
 const withWrapOnSubmit = <P extends object>(Component: ComponentType<P & OnSubmitProps>) => (
   ({ wrap, ...rest }: Props<P>) => <Component {...rest as P} onSubmit={wrap} />

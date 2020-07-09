@@ -81,7 +81,7 @@ const SortableResizableWrapper = SortableElement((props: Props) => {
   const { DragHandle, ResizeHandle, Reresizable } = getUI(ui);
 
   const childrenWithDragHandle = (
-    <React.Fragment>
+    <>
       <Handle
         component={DragHandle}
         style={{
@@ -89,7 +89,7 @@ const SortableResizableWrapper = SortableElement((props: Props) => {
         }}
       />
       {children}
-    </React.Fragment>
+    </>
   );
 
   return (

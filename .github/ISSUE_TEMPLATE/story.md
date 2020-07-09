@@ -1,7 +1,12 @@
 ---
-name: Story 💡
+name: "Story \U0001F4A1"
 about: Request a new feature
+title: ''
+labels: enhancement
+assignees: ''
+
 ---
+
 <!--
   Before submitting an issue:
 

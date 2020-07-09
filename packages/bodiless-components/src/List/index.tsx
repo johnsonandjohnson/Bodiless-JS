@@ -21,7 +21,9 @@ import React, {
 import { flow } from 'lodash';
 import { observer } from 'mobx-react-lite';
 import { withNode, withoutProps } from '@bodiless/core';
-import { designable, asComponent } from '@bodiless/fclasses';
+import {
+  designable, asComponent, addProps, withDesign,
+} from '@bodiless/fclasses';
 import { useItemsMutators, useItemsAccessors } from './model';
 import { Props, FinalProps, ListDesignableComponents } from './types';
 
@@ -35,7 +37,6 @@ const ItemWithNode: FC<ItemWithNodeProps> = ({ nodeKey, component: Component, ..
     <Component {...rest} />
   </NodeProvider>
 );
-
 
 const startComponents: ListDesignableComponents = {
   Wrapper: asComponent('ul'),
@@ -79,6 +80,12 @@ const BasicList: FC<Props> = ({
   );
 };
 
+const asTestableList = (listName: string) => withDesign({
+  Wrapper: addProps({ 'data-list-element': listName }),
+  Title: addProps({ 'data-list-element': 'title' }),
+  Item: addProps({ 'data-list-element': 'item' }),
+});
+
 /**
  * A List component.
  */
@@ -90,3 +97,4 @@ const List = flow(
 List.displayName = 'List';
 
 export default List;
+export { asTestableList };

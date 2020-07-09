@@ -3,11 +3,12 @@
 ## Overview
 
 Bodiless uses the [React Context API](https://reactjs.org/docs/context.html) to
-provide an "edit context" (../packages/bodiless-core/src/PageEditContext/index.tsx) instance to
-all components on the page. This is an interface which allows a
-component to contribute contextual elements to the page edit UI (currently
-limited to toolbar menu items). For example, an image component
-might contribute a menu item which allows a user to upload an image.
+provide a "page edit context"
+(../packages/bodiless-core/src/PageEditContext/index.tsx) instance to all
+components on the page. This is an interface which allows a component to
+contribute contextual elements to the page edit UI (currently limited to toolbar
+menu items). For example, an image component might contribute a menu item which
+allows a user to upload an image.
 
 The edit context also provides an interface to a global store which defines the
 UI state, including:
@@ -70,27 +71,64 @@ There are several ways in which a component can provide or consume the edit cont
 
 ### Providing a new context
 
-To provide a new context value, you may use the supplied `ContextProvider`
+To provide a new context value (usually to add menu options which should appear
+when a component has focus), you may use the supplied `PageContextProvider`
 
 ```javascript
-const getExampleMenuOptions = (context) => {
+const getExampleMenuOptions = () => {
   // this should return an array of menu options...
 }
 
 const Example: React.FC = ({ children }) => (
-  <ContextProvider getMenuOptions={getExampleMenuOptions} name="Example">
+  <PageContextProvider getMenuOptions={getExampleMenuOptions} name="Example">
     {children}
-  </ContextProvider}
+  </PageContextProvider}
 ```
 Here we provide a menu options callback as a prop to the `ContextProvider` component.
 This will be invoked when this context or any descendant is activated.  It should return any menu
 options this component wishes to provide (see [Context Menu Options](#context-menu-options)
 below for more information).
 
+Note that it is unusual to invoke the provider directly in this manner.  Instead, use the
+`withMenuOptions` hoc to attach options to your component. First you define a custom hook
+which will create your `getMenuOptions()` callback. This hook will be invoked when the
+component is rendered, and will receive its props as an argument:
+
+```
+const useGetMenuOptions = (props) => {
+  const { propUsedInOption } = props;
+  const contextValueUsedInOption = React.useContext(SomeContext);
+  return React.useCallback(
+    () => (
+      // This should return an array of menu options. It can use
+      // any of the props received by the original component, as well
+      // as any other react hook.
+    ),
+    [propUsedInOption, contextValueUsedInOption],
+  );
+};
+```
+
+Then, pass that along with a unique name to `withMenuOptions` to create an HOC which will
+add the options to your component.
+
+```
+const ComponentWithMyOptions = withMenuOptions({
+  useGetMenuOptions,
+  name: 'my-component'
+})(AnyComponent);
+...
+<ComponentWithMyOptions propUsedInOption="foo" />
+```
+
+Note that the menu options you are defining here will only be available when
+your component (or one of its children) declares itself as "active". To do so,
+it will need to use a method on the current context.
+
 ### Consuming the context with hooks
 
-To access the current page edit context without modifying it, simply use the
-`useEditContext()` and/or `useContextActivator()` hooks (../packages/bodiless-core/src/hooks.ts).
+To access the current page edit context, simply use the `useEditContext()`
+and/or `useContextActivator()` hooks.
 
 ```javascript
 import { observer } from 'mobx-react-lite';
@@ -118,63 +156,66 @@ const TextareaActivator = ({ onFocus: onFocus$1, ...rest }) => {
   return <textarea onFocus={onFocus} {...rest} />
 }
 ```
-In the above example, the textarea will activate the context on focus, and
+In the above example, the `textarea` will activate the context on focus, and
 will then invoke any 'onFocus' handler passed to it.
 
-### Consuming the context in a class component.
+Note that we are using the `isActive` property of the context to render
+differently if the current context is active, and using the `isEdit` property to
+determine if we are in edit mode. Note also that we wrap our component in a
+[mobx observer](https://mobx-react.js.org/observer-hoc) to ensure that it
+updates properly if the active context or edit mode changes.
 
-Or, in a class component, use the [React contextType API](https://reactjs.org/docs/context.html#classcontexttype):
-```javascript
-import { observer } from 'mobx-react';
-@observer 
-class Example extends React.Component {
-  static contextType = PageEditContext.context;
+> Important! For functional components using hooks, we must use the version of
+> `observer` from mobx-react-lite.
 
-  render() {
-    return (
-      <div>{this.context.isActive ? 'Active' : 'Not Active'}</div>
-      {this.context.store.isEdit ?
-        <button onClick={() => this.context.activate()}>Activate Me!</button>
-        : <span>Not editing!</span>
-      }
-    );
-  }
-}
+It is also possible to use the `withContextActivator` HOC to provide an activation
+event to a pre-existing component:
 ```
-Note that in both cases, we are using the `isActive` property of the context to
-render differently if the current context is active, and using the `isEdit` property
-to determine if we are in edit mode.  Note also that in both cases we wrap
-our component in a mobx observer to ensure that our component udates properly
-if the active context or edit mode changes.  For functional components using hooks,
-we must use the version from mobx-react-lite.
-
-### Using the ContextWrapper component
-
-The `ContextWrapper` (../packages/bodiless-core/src/components/ContextWrapper.tsx)
-provides a convenient way to wrap any component in a div which will activate an
-enclosing context on click:
-
-```javascript
-<ContextProvider getMenuOptions={myGetMenuOptions()} name="My Context" >
-  <ContextWrapper clickable>
-    <MyComponent />
-  </ContextWrapper>
-</ContextProvider>
+const ComponentWithMenuOption = flowRight(
+  withMenuOptions({ ... }), // See abo ve
+  withContextActivator('onClick'),
+)(AnyComponent)
 ```
+
+Now, when you click on `AnyComponent` it will activate the provdied context, and
+the associated menu options will be displayed.
+
+Note - the above will only work if `AnyComponent` can accept an `onClick` prop.
+If not, you will want to wrap it in an element which can, for example a `div`:
+```
+const ComponentWithMenuOption = flowRight(
+  withMenuOptions({ ... }), // See above
+  withContextActivator('onClick'),
+  withActivatorWrapper('div'),
+)(AnyComponent)
+```
+
+Finally, you will want to be sure that none of the above HOC's are applied when not in edit mode.
+For this, `ifEditable` comes in handy:
+```
+const ComponentWithMenuOption = ifEditable(
+  withMenuOptions({ ... }), // See above
+  withContextActivator('onClick'),
+  withActivatorWrapper('div'),
+)(AnyComponent)
+```
+Note that the order of these HOC's is important.
+
 ## Context Menu Options
 
 The Global Context Menu aggregates menu options provided by all contexts within
-the [active context trail](#context-trail). It is a wrapper around the generic `ContextMenu` (../packages/bodiless-core/src/components/ContextMenu.tsx)
+the [active context trail](#context-trail). It is a wrapper around the generic
+`ContextMenu` (../packages/bodiless-core/src/components/ContextMenu.tsx)
 component, which provides a mechanism for displaying a set of menu options
 provided in an "options" prop. Each item is an object with the following
 members:
-- name: a human readable name for this option (currently unused)
+- name: a unique machine name for this item.
 - icon: the name of a [material design icon](https://material.io/tools/icons/?style=baseline)
-  to display for this item
+  to display for this item.
+- label: A human readable label to display beneath the icon.
 - isActive; a callback to determine if the option or its flyout panel is currently "active" 
 - isDisabled; a callback to determine if the option is currently "disabled" (for toggles)
 - handler: a callback to invoke when the item is selected
-
 
  A simple context menu implementation with a single option might look like this:
  ```javascript
@@ -182,8 +223,9 @@ const isUp = false;
 
 const options = [
 {
-  name: 'Say Yes',
+  name: 'say_yes',
   icon: 'thumb_up',
+  label: 'Yes!',
   isActive: () => isUp,
   handler: () => {
     if (!isUp) {
@@ -206,7 +248,8 @@ provided by edit contexts.
 The `GlobalContextMenu` is a part of the `PageEditor` and is intended to provide
 a single, top-level menu for the page.
 
-The `LocalContextMenu` component may be used to add a tooltip version of the context menu to any component, as
+The `LocalContextMenu` component may be used to add a tooltip version of the
+context menu to any component, as
 
 ```
 <ContextProvider getMenuOptions={myComponentMenuOptionGetter} name="My Component">
@@ -233,14 +276,13 @@ const myMenuOption = {
 
 #### Context menu forms
 
-The handler function for a menu option can, optionally, return a component
-(usually a form) to be rendered when the menu item is selected. This allows menu
+The handler function for a menu option can, optionally, return a render
+function. If it does, when the menu item is selected, this will be invoked to
+render the contents of a fly-out panel (usually a form). This allows menu
 options to trigger display of a configuration form to collect additional user
 input. For example, an image component might provide a menu option to configure
 its content. This might then display a form for uploading the image, entering
 alt-text, etc.
-
-*TODO: Example of creating a form*
 
 ## Styling
 
@@ -284,13 +326,15 @@ and
 
 ## Activate Context System
 
-The activate Context system allow for one component to store an id of another component that should activate its context on creation.
+The activate Context system allow for one component to store an id of another
+component that should activate its context on creation.
 
 This is a three step process.
 
 ### Step 1 Ensure there is a Activate Context in place
 
-One can wrap there components in a `<ActivateContextProvider>` component or one can use the withActivateContext() HOC that will wrap a component in the Provider
+One can wrap there components in a `<ActivateContextProvider>` component or one
+can use the withActivateContext() HOC that will wrap a component in the Provider
 
 ### Step 2 set the Id
 

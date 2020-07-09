@@ -14,7 +14,7 @@
 
 import { observer } from 'mobx-react-lite';
 import React, { ComponentType as CT } from 'react';
-import { flowRight, omit } from 'lodash';
+import { flowRight, omit, pick } from 'lodash';
 import { useContextActivator, useEditContext } from './hooks';
 import { useNodeDataHandlers } from './NodeProvider';
 import withNode from './withNode';
@@ -53,9 +53,13 @@ export const withLocalContextMenu = (Component: CT<any> | string) => {
 // @TODO: Combine withNode and withNodeDataHandlers and fix types
 export const withNodeDataHandlers = (defaultData?: any) => (
   Component: CT<any>,
-) => observer((props: any) => (
-  <Component {...props} {...useNodeDataHandlers(undefined, defaultData)} />
-));
+) => observer((props: any) => {
+  const enhancedDefaultData = {
+    ...defaultData,
+    ...(defaultData ? pick(props, Object.keys(defaultData)) : {}),
+  };
+  return (<Component {...props} {...useNodeDataHandlers(undefined, enhancedDefaultData)} />);
+});
 
 export const withNodeAndHandlers = (defaultData?: any) => flowRight(
   // @ts-ignore
@@ -74,7 +78,7 @@ type Options<P> = {
   id?: string;
 };
 
-export const withPageContext = <P extends object>({
+export const withMenuOptions = <P extends object>({
   useGetMenuOptions,
   name,
   id,

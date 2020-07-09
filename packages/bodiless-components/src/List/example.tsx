@@ -45,7 +45,6 @@ const PaddedList = withDesign({
   Wrapper: flow(stylable, addClasses('pl-10')),
 })(SimpleList);
 
-
 const InnerList = PaddedList;
 const MiddleList = withBasicSublist(InnerList)(PaddedList);
 

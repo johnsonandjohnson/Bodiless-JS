@@ -70,7 +70,7 @@ describe('image interactions', () => {
 
     const imageSrc = menuForm.find('input#image-src');
     expect(imageSrc).toHaveLength(1);
-    expect(imageSrc.prop('value')).toBe('/images/placeholder.png');
+    expect(imageSrc.prop('value')).toBe('test-file-stub');
 
     const imageAlt = menuForm.find('input#image-alt');
     expect(imageAlt).toHaveLength(1);
@@ -83,7 +83,6 @@ describe('image interactions', () => {
     expect(submitButton).not.toBeUndefined();
     expect(submitButton.prop('type')).toBeUndefined();
   });
-
 
   it('context menu form should close and save content when done is clicked', () => {
     let imageSrc = menuForm.find('input#image-src');

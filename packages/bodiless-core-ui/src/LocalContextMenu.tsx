@@ -22,7 +22,7 @@ import {
 import {
   ComponentFormTitle, ComponentFormLabel, ComponentFormText, ComponentFormButton,
   ComponentFormCloseButton, ComponentFormSubmitButton, Icon, Div, ToolbarButton,
-  ComponentFormUnwrapButton,
+  ComponentFormUnwrapButton, ComponentFormTextArea, ComponentFormDescription,
 } from '@bodiless/ui';
 import ReactTagsField from './ReactTags';
 
@@ -41,12 +41,14 @@ const LocalTooltip: FC<ReactTooltip['props']> = props => (
 
 const ui = {
   ComponentFormText,
+  ComponentFormTextArea,
   ComponentFormButton,
   ComponentFormCloseButton,
   ComponentFormUnwrapButton,
   ComponentFormSubmitButton,
   ComponentFormTitle,
   ComponentFormLabel,
+  ComponentFormDescription,
   Icon,
   Toolbar,
   ToolbarButton,

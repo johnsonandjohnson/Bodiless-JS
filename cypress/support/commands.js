@@ -41,14 +41,20 @@
 import 'cypress-file-upload'
 
 Cypress.Commands.add("revertChanges", () => {
-    cy.xpath('//*[@aria-label="resetchanges"]')
-      .click()
-    cy.xpath('//*[@aria-label="Submit"]')
-      .click()
+  cy.xpath('//*[@aria-label="Revert"]')
+    .click()
+  cy.xpath('//*[@aria-label="Submit"]')
+    .click()
 })
 
 
 Cypress.Commands.add("clickEdit", () => {
-    cy.xpath('//*[@aria-label="Edit"]')
-      .click()
+  cy.xpath('//*[@aria-label="Edit"]')
+    .click()
+})
+
+
+Cypress.Commands.add("hideContextMenu", () => {
+  cy.xpath('//h1')
+    .click()
 })

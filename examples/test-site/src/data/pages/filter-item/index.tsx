@@ -34,6 +34,7 @@ const TaggableFilterSelector = () => {
   ));
   const props = {
     getSuggestions,
+    registerSuggestions: () => {},
     placeholder: 'Add or Create',
     formTitle: 'Groups',
     seeAllText: 'View All Groups',

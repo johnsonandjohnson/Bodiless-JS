@@ -36,18 +36,24 @@ type Props = {
   id?: string;
   name?: string;
   active?: boolean;
+  tooltipsDisabled?: boolean;
 };
 
 const fooText = Math.random().toString();
 const Foo: React.FC<any> = props => <span {...props}>{fooText}</span>;
 
 const MockContextProvider: FC<Props> = ({
-  active, children, getMenuOptions, id, name,
+  active, children, getMenuOptions, id, name, tooltipsDisabled,
 }) => {
   class MockPageEditContext extends PageEditContext {
     // Overides PageEditContext.isInnermost to test LocalContextMenu Tooltip behavior.
     get isInnermost() {
       return Boolean(active);
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    get areLocalTooltipsDisabled() {
+      return Boolean(tooltipsDisabled);
     }
   }
 
@@ -75,13 +81,13 @@ describe('LocalContextMenu', () => {
   it('renders Tooltip with overlay of default ContextMenu ui element.', () => {
     const wrapper = mount(
       <PageEditor>
-        <MockContextProvider getMenuOptions={options} id="t1" name="defaultUI">
+        <MockContextProvider active getMenuOptions={options} id="t1" name="defaultUI">
           <LocalContextMenu><Foo /></LocalContextMenu>
         </MockContextProvider>
       </PageEditor>,
     );
-
-    expect(wrapper.find('Tooltip').get(0).props.overlay.type).toBe(ContextMenu);
+    const content = wrapper.find('div.rc-tooltip-content');
+    expect(content.find(ContextMenu)).toHaveLength(1);
   });
 
   it('renders Tooltip with overlay of customized ui element.', () => {
@@ -93,13 +99,14 @@ describe('LocalContextMenu', () => {
     };
     const wrapper = mount(
       <PageEditor ui={ui}>
-        <MockContextProvider getMenuOptions={options} id="t2" name="customUI">
+        <MockContextProvider active getMenuOptions={options} id="t2" name="customUI">
           <LocalContextMenu><Foo /></LocalContextMenu>
         </MockContextProvider>
       </PageEditor>,
     );
-
-    expect(wrapper.find('Tooltip').get(0).props.overlay.type).toBe(Foo2);
+    const content = wrapper.find('div.rc-tooltip-content');
+    expect(content.find(Foo2)).toHaveLength(1);
+    expect(content.find(ContextMenu)).toHaveLength(0);
   });
 
   it('renders child component correctly.', () => {
@@ -109,25 +116,6 @@ describe('LocalContextMenu', () => {
       </MockContextProvider>,
     );
     expect(wrapper.find('Foo')).toHaveLength(1);
-    expect(wrapper.find('Tooltip')).toHaveLength(1);
-    expect(wrapper.find('Tooltip').get(0).props.visible).toBe(false);
-  });
-
-  it('renders invisible Tooltip when menu option is not local.', () => {
-    const options1 = () => [
-      {
-        icon: 'add',
-        name: 'add',
-        local: false,
-      },
-    ];
-    const wrapper = mount(
-      <MockContextProvider active getMenuOptions={options1} id="t4" name="menuOptionInvisible">
-        <LocalContextMenu><Foo /></LocalContextMenu>
-      </MockContextProvider>,
-    );
-
-    expect(wrapper.find('Tooltip').get(0).props.visible).toBe(false);
   });
 
   it('displays menu options which have "local" flag set.', () => {
@@ -156,7 +144,7 @@ describe('LocalContextMenu', () => {
     expect(wrapper.find('Tooltip').get(0).props.visible).toBe(true);
 
     // Available menu option names from rendered tooltip.
-    const optionNames = wrapper.find('Tooltip').get(0).props.overlay.props.options.map((item: any) => item.name);
+    const optionNames = wrapper.find('ContextMenu').get(0).props.options.map((item: any) => item.name);
     expect(optionNames).toEqual(expect.arrayContaining(['itemLocal']));
     expect(optionNames).not.toEqual(expect.arrayContaining(['itemNonLocal']));
     expect(optionNames).not.toEqual(expect.arrayContaining(['itemLocalOmit']));
@@ -169,7 +157,7 @@ describe('LocalContextMenu', () => {
       </MockContextProvider>,
     );
 
-    expect(wrapper.find('Tooltip').get(0).props.visible).toBe(false);
+    expect(wrapper.find('Tooltip[visible=true]')).toHaveLength(0);
   });
 
   it('renders visible Tooltip when ContextProvider is inner most.', () => {
@@ -179,6 +167,15 @@ describe('LocalContextMenu', () => {
       </MockContextProvider>,
     );
 
-    expect(wrapper.find('Tooltip').get(0).props.visible).toBe(true);
+    expect(wrapper.find('Tooltip[visible=true]')).toHaveLength(1);
+  });
+
+  it('does not render visible Tooltip when local tooltips are disabled via edit context.', () => {
+    const wrapper = mount(
+      <MockContextProvider active getMenuOptions={options} id="t8" name="toolbarActive" tooltipsDisabled>
+        <LocalContextMenu><Foo /></LocalContextMenu>
+      </MockContextProvider>,
+    );
+    expect(wrapper.find('Tooltip[visible=true]')).toHaveLength(0);
   });
 });

@@ -5,7 +5,7 @@ module.exports = {
   */
 
   // prefix: '',
-  important: '#___gatsby', // https://tailwindcss.com/docs/configuration/#important
+  // important: false,
   // separator: ':',
 
   /*
@@ -56,7 +56,6 @@ module.exports = {
     | Class name: .{screen}:{utility}
     |
     */
-
 
     /*
     |---------------------------------------------------------------------------

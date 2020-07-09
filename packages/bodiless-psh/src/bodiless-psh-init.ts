@@ -36,6 +36,7 @@ const readYaml = (filePath: string) => {
 const isObject = (item:any): boolean => (item && typeof item === 'object' && !Array.isArray(item));
 
 const mergeByKey = (Source: any, Destination: any, Whitelist: any) => {
+  // eslint-disable-next-line prefer-object-spread
   const result = Object.assign({}, Source);
 
   if (isObject(Destination)) {

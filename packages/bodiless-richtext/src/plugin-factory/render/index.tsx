@@ -43,7 +43,7 @@ const createMarkRenderPlugin = <P extends object> ({
     renderMark: (props, editor, next) => {
       switch (props.mark.type) {
         case type:
-          return <Component {...props as P & RenderNodeProps} />;
+          return <Component {...props as unknown as P & RenderNodeProps} />;
         default:
           return next();
       }

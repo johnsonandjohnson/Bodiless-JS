@@ -16,7 +16,7 @@ import React, { HTMLProps, FC } from 'react';
 import { mount, shallow } from 'enzyme';
 import { ContentNode } from '../src/ContentNode';
 import NodeProvider, { useNode } from '../src/NodeProvider';
-import withNode from '../src/withNode';
+import withNode, { withNodeKey } from '../src/withNode';
 
 class MockContentNode<D extends object> implements ContentNode<D> {
   data: D = {} as D;
@@ -91,5 +91,33 @@ describe('withNode', () => {
       .props() as any;
     expect(providerProps.node.path).toEqual([`${topKey}${newKey}`]);
     expect(providerProps.collection).toEqual('special');
+  });
+});
+
+describe('withNodeKey', () => {
+  const C: FC<any> = () => <></>;
+  it('passes a string nodeKey prop to the underlying component', () => {
+    const Test = withNodeKey('foo')(C);
+    const wrapper = shallow(<Test />);
+    expect(wrapper.prop('nodeKey')).toBe('foo');
+    expect(wrapper.prop('nodeCollection')).toBeUndefined();
+  });
+  it('passes a nodeKey and nodeCollection object as props to the underlying component', () => {
+    const Test = withNodeKey({ nodeKey: 'foo', nodeCollection: 'bar' })(C);
+    const wrapper = shallow(<Test />);
+    expect(wrapper.prop('nodeKey')).toBe('foo');
+    expect(wrapper.prop('nodeCollection')).toBe('bar');
+  });
+  it('does not pass any props if called without arguments', () => {
+    const Test = withNodeKey()(C);
+    const wrapper = shallow(<Test />);
+    expect(wrapper.prop('nodeKey')).toBeUndefined();
+    expect(wrapper.prop('nodeCollection')).toBeUndefined();
+  });
+  it('allows nodeKey and nodeCollection to be overridden', () => {
+    const Test = withNodeKey({ nodeKey: 'foo', nodeCollection: 'bar' })(C);
+    const wrapper = shallow(<Test nodeKey="baz" nodeCollection="bing" />);
+    expect(wrapper.prop('nodeKey')).toBe('baz');
+    expect(wrapper.prop('nodeCollection')).toBe('bing');
   });
 });

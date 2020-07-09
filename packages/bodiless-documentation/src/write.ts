@@ -17,6 +17,7 @@
 import path from 'path';
 import fs from 'fs-extra';
 import { Tree } from './type';
+import readSettings from './readSettings';
 
 type Props = {
   paths: Tree,
@@ -92,14 +93,13 @@ const writeTree = (props: Props, copier: Copier) => {
   return Promise.all(promises);
 };
 
-
 /**
  * Copies or symlinks docsify resources to the root of the docs tree.
  *
  * @param loc The path of the root directory of the docs tree, relative to `process.cwd`.
  */
 const writeResources = (loc: string, copier: Copier) => {
-  const resourceDir = path.dirname(require.resolve(path.join('..', 'resources', 'index.html')));
+  const { resourceDir } = readSettings();
   const resources = fs.readdirSync(resourceDir)
     .filter(fn => fs.statSync(path.join(resourceDir, fn)).isFile());
   return resources.map(fn => copier(

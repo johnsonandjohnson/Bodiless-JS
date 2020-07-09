@@ -43,9 +43,8 @@ const StaticFlowContainer: FC<StaticFlowContainerProps> = ({ components }) => {
             throw new Error(`${flowContainerItem.type} is not an allowed content type`);
           }
           return (
-            <NodeProvider nodeKey={flowContainerItem.uuid}>
+            <NodeProvider nodeKey={flowContainerItem.uuid} key={`flex-${flowContainerItem.uuid}`}>
               <ComponentWrapper
-                key={`flex-${flowContainerItem.uuid}`}
                 className={
                     (flowContainerItem.wrapperProps
                       && flowContainerItem.wrapperProps.className)

@@ -171,7 +171,8 @@ const TestFilterComponentsStart: FilterComponents = {
       Title: flow(
         replaceWith(H3),
         asEditable('category_name', 'Category Name'),
-      ),
+        // cast is necessary bc asEditable produces a component whose children prop is a string.
+      ) as (C: ComponentType<any>) => ComponentType<any>,
       Item: stylable,
       Wrapper: stylable,
     }),

@@ -115,7 +115,6 @@ const withFBGSuggestions = <P extends object>({
     <Component {...props} suggestions={suggestions} />
   );
 
-
 export default FilterByGroupContext;
 export {
   FilterByGroupContext,

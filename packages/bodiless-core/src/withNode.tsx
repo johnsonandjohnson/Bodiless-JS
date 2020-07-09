@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
+import React, { ComponentType as CT, FC } from 'react';
+import { pickBy } from 'lodash';
 import NodeProvider, { useNode } from './NodeProvider';
 import { WithNodeProps } from './Types/NodeTypes';
 
@@ -33,14 +34,14 @@ const withNode = <P extends object, D extends object>(Component: CT<P>) => {
   return WithNode;
 };
 const withNodeKey = <P extends object>(
-  nodeKey?: string,
-  nodeCollection?: string,
+  nodeKeys: string|Partial<WithNodeProps> = {},
 ) => (Component: CT<P> | string) => {
-    const WithNodeKey = (props: P) => (nodeKey ? (
-      <Component nodeKey={nodeKey} nodeCollection={nodeCollection} {...props} />
-    ) : (
-      <Component {...props} />
-    ));
+    const nodeKeyProps = pickBy(
+      typeof nodeKeys === 'string' ? { nodeKey: nodeKeys } : nodeKeys,
+    );
+    const WithNodeKey: FC<P & Partial<WithNodeProps>> = props => (
+      <Component {...nodeKeyProps} {...props} />
+    );
     return WithNodeKey;
   };
 export default withNode;

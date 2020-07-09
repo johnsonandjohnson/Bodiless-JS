@@ -18,22 +18,18 @@ import LocalContextMenu from './LocalContextMenu';
 import PageEditor from './PageEditor';
 import StaticPage from './StaticPage';
 import PageOverlay from './PageOverlay';
-import {
+import type {
   IContextMenuProps as ContextMenuProps,
   ButtonVariantProps,
   UI as ContextMenuUI,
 } from '../Types/ContextMenuTypes';
-import { Props as ContextWrapperProps } from '../Types/ContextWrapperTypes';
+import type { Props as ContextWrapperProps } from '../Types/ContextWrapperTypes';
 import ReactTagsField, { ReactTagsFieldProps, TagType, BodilessTag } from './ReactTagsField';
 
 export {
   ContextMenu,
-  ContextMenuProps,
-  ContextMenuUI,
   getUI,
-  ButtonVariantProps,
   ContextWrapper,
-  ContextWrapperProps,
   LocalContextMenu,
   PageEditor,
   StaticPage,
@@ -42,4 +38,11 @@ export {
   ReactTagsFieldProps,
   BodilessTag,
   TagType,
+};
+
+export type {
+  ContextMenuProps,
+  ContextMenuUI,
+  ButtonVariantProps,
+  ContextWrapperProps,
 };

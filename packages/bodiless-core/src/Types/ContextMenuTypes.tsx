@@ -16,7 +16,6 @@ import {
   ComponentType,
   HTMLProps,
   ReactNode,
-  FC,
 } from 'react';
 import { FieldProps } from 'informed';
 import Tooltip from 'rc-tooltip';
@@ -41,15 +40,19 @@ export type UI = {
   ToolbarDivider?: ComponentType<HTMLProps<HTMLHRElement>> | string;
   ComponentFormTitle?: ComponentType<HTMLProps<HTMLHeadingElement>> | string;
   ComponentFormLabel?: ComponentType<HTMLProps<HTMLLabelElement>> | string;
+  ComponentFormDescription?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   ComponentFormButton?: ComponentType<HTMLProps<HTMLButtonElement>> | string;
   ComponentFormCloseButton?: ComponentType<HTMLProps<HTMLButtonElement>> | string;
   ComponentFormSubmitButton?: ComponentType<HTMLProps<HTMLButtonElement>> | string;
   ComponentFormUnwrapButton?: ComponentType<HTMLProps<HTMLButtonElement>> | string;
   ComponentFormText?: ComponentType<FieldProps<any, any>>;
+  ComponentFormTextArea?: ComponentType<FieldProps<any, any>>;
   ComponentFormError?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   Form?: ComponentType<HTMLProps<HTMLFormElement>> | string;
-  Tooltip?: FC<Tooltip['props']>;
+  Tooltip?: ComponentType<Tooltip['props']>;
   ReactTags?: ComponentType<ReactTagsFieldProps>;
+  ComponentFormList?: ComponentType<HTMLProps<HTMLUListElement>> | string;
+  ComponentFormListItem?: ComponentType<HTMLProps<HTMLLIElement>> | string;
   // @TODO: Add other controls from informed.
 };
 

@@ -11,9 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-jest.mock('../src/debug');
-/* eslint-disable import/first */
-import debug from '../src/debug';
 import Downloader from '../src/downloader';
 /* eslint-enable import/first */
 
@@ -35,23 +32,11 @@ describe('assets download', () => {
     // @ts-ignore since we are mocking private method
     const downloadFileMock = jest.spyOn(downloader, 'downloadFile').mockImplementation(() => true);
     await downloader.downloadFiles(assets);
-    expect(downloadFileMock.mock.calls[0][0]).toBe('https://localhost/test1.css');
-    expect(downloadFileMock.mock.calls[1][0]).toBe('https://localhost/test2.css');
-    expect(downloadFileMock.mock.calls[2][0]).toBe('https://localhost/gatsby.png');
-    expect(downloadFileMock.mock.calls[3][0]).toBe('https://localhost/test1.js');
-    expect(downloadFileMock.mock.calls[4][0]).toBe('https://localhost/test2.js');
-  });
-
-  it('sends warning message on non-existing assests', async () => {
-    const pageUrl = 'https://localhost';
-    const downloadPath = 'static';
-    const excludePaths = ['404'];
-    const downloader = new Downloader(pageUrl, downloadPath, excludePaths);
-    const assets = [
-      'https://localhost/404',
-    ];
-    await downloader.downloadFiles(assets);
-    expect(debug).toHaveBeenCalledTimes(1);
-    expect(debug).toHaveBeenCalledWith(`Resource ${pageUrl}/${excludePaths[0]} has been excluded from download.`);
+    expect(downloadFileMock).toHaveBeenCalledTimes(5);
+    expect(downloadFileMock).toHaveBeenCalledWith('https://localhost/test1.css');
+    expect(downloadFileMock).toHaveBeenCalledWith('https://localhost/test2.css');
+    expect(downloadFileMock).toHaveBeenCalledWith('https://localhost/gatsby.png');
+    expect(downloadFileMock).toHaveBeenCalledWith('https://localhost/test1.js');
+    expect(downloadFileMock).toHaveBeenCalledWith('https://localhost/test2.js');
   });
 });

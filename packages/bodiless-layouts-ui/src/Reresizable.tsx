@@ -15,7 +15,6 @@
 import React, { FC } from 'react';
 import CleanReresizable, { ResizableProps } from 're-resizable';
 
-
 const Reresizable: FC<ResizableProps & { isEnabled?: boolean }> = ({ isEnabled, ...rest }) => {
   const borderClassName = isEnabled ? 'bl-border-primary' : 'bl-border-transparent hover:bl-border-primary';
   const { className } = rest;
