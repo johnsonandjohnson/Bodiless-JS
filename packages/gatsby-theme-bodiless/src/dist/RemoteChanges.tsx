@@ -112,7 +112,7 @@ const ChangeContent = ({ status, masterStatus, errorMessage } : ContentProps) =>
       if (masterStatus === ChangeState.CanNotBePulled) {
         return (
           <ComponentFormWarning>
-            Alert! There are changes on production which cannot be merged without developer support.
+            There are changes on production which cannot be merged from the UI.
           </ComponentFormWarning>
         );
       }
@@ -127,8 +127,7 @@ const ChangeContent = ({ status, masterStatus, errorMessage } : ContentProps) =>
               initiate.
             </div>
             <ComponentFormWarning>
-              Alert! There are changes on production which cannot be merged
-              without developer support.
+              There are changes on production which cannot be merged from the UI.
             </ComponentFormWarning>
           </>
         );

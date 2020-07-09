@@ -22,7 +22,7 @@ import {
 import {
   ComponentFormTitle, ComponentFormLabel, ComponentFormText, ComponentFormButton,
   ComponentFormCloseButton, ComponentFormSubmitButton, Icon, Div, ToolbarButton,
-  ComponentFormUnwrapButton, ComponentFormTextArea, ComponentFormDescription,
+  ComponentFormUnwrapButton, ComponentFormTextArea, ComponentFormDescription, ComponentFormWarning,
 } from '@bodiless/ui';
 import ReactTagsField from './ReactTags';
 
@@ -49,6 +49,7 @@ const ui = {
   ComponentFormTitle,
   ComponentFormLabel,
   ComponentFormDescription,
+  ComponentFormWarning,
   Icon,
   Toolbar,
   ToolbarButton,
