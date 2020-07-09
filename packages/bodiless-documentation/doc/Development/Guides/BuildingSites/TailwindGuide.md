@@ -42,9 +42,6 @@ performance.
 
 ## Building with Tailwind
 
-Each time you make a change in tailwind.config.js you need to make sure your run
-`npm run build:css` to regenerate a new `src/components/index.css` that is
-automatically included for the site. The css build will happen automatically
-whenever you do command `npm run start` and start your site but if you are in
-local develop and site is running, you can run this as separate command and site
-will hotload the index.css file.
+Each time you make a change in tailwind.config.js you will need to rerun the
+build process. This is done in either `npm run start` or `npm run build` and
+will generate css that is automatically included for the site.
