@@ -1,4 +1,4 @@
-# Components & Tempaltes that come in the Bodiless starter
+# Components & Templates that come in the Bodiless starter
 
 Let us discuss a few of these components/templates that are contained within the Bodiless starter:
 
@@ -31,11 +31,14 @@ const ExampleHelmet = flowRight(
   withMetaHtml('en'),
 )(Helmet);
 ```
-`withMeta`, `withMetaTitle` are HOC's that will obtain the value of data out json object associated at page level or if specified at site level.
+`withMeta`, `withMetaTitle` are HOC's that will obtain the value of data out
+json object associated at page level or if specified at site level.
 
 e.g.
-- `withMeta('pagetype', 'page-type')` will obtain its value at page level from `meta$page-type.json` which contains `{	"content": "Home" }`
-- `withMeta('bl-brand', 'brand', 'site')` will obtain its value from `src/data/site.meta$brand.json` which contains `{ "content": "BodilessJS" }`
+- `withMeta('pagetype', 'page-type')` will obtain its value at page level from
+  `meta$page-type.json` which contains `{ "content": "Home" }`
+- `withMeta('bl-brand', 'brand', 'site')` will obtain its value from
+  `src/data/site.meta$brand.json` which contains `{ "content": "BodilessJS" }`
 
 ### Site Title & Logo
 
@@ -60,7 +63,7 @@ doesn't use siteMetaData.
 Often there are other elements in the header/footer and they can be added by
 manipulating these files. As you add more components, remember the header and
 footer are components that all pages will use, so the data for them should be
-stored at site level. This can be done via specifying `nodeCollect="site"`.
+stored at site level. This can be done via specifying `nodeCollection="site"`.
 
 e.g.
 ```
@@ -110,7 +113,12 @@ for its different variations.
 The Flow Container component is a layout component that allows you to select from
 a set of components, place them on the page, and resize them.
 
-The Editors, Images & Touts are available as a starting point of components that can be added to your site via the Flow Container.  Additional components as they are built or extended can be added to allow other components to be added via FlowContainer.  In addition, you can create multiple variations of FlowContainers to control what components are used in different areas of sites.  e.g.  A FlowContainer for a sidebar could have reduced set of components to select from. 
+The Editors, Images & Touts are available as a starting point of components that
+can be added to your site via the Flow Container. Additional components as they
+are built or extended can be added to allow other components to be added via
+FlowContainer. In addition, you can create multiple variations of FlowContainers
+to control what components are used in different areas of sites. e.g. A
+FlowContainer for a sidebar could have reduced set of components to select from.
 
 For more information, please read [FlowContainer](/Components/FlowContainer).
 

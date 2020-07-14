@@ -36,7 +36,7 @@ instead of replace using theme.extend.
 
 This will add additional brand colors to all the default tailwind colors. When
 the static site builds it utilizes
-[purge css features](https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css)
+[gatsby purge css feature](https://www.gatsbyjs.org/packages/gatsby-plugin-purgecss)
 to remove unused css classes and this will keep the css file small for best
 performance.
 
