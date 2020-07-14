@@ -22,15 +22,20 @@ component and skip entering the data for it.
 Bodiless provides an API that allows you to extend your component and make it
 contentful component.
 
-* `withDefaultContent` will extend your component to allow default data to be passed as prop.
+* `withDefaultContent` will extend your component to allow default content to be
+  passed as a parameter.
 
 * `withResetButton` will add a context menu icon, Reset, to the component that
   allows the site editor to reset data back to the default content. If your
-  components consists of a composition of individual components, then the
-  `withResetButton` should be added to each individual components.
+  components consists of a composition of individual components, A site builder
+  has the choice of determing the reset behavior.  
+  * It can be for placed on the component itself, and then the reset will revert
+all data back to the original.
+  * Or it can be placed on each individual components, allowing the site editor
+    to reset individual components.
 
 ### Defining a Contentful Component that consists of single component
-The following is example of defining a Contentful Image:
+The following is an example of defining a contentful image:
 
 e.g.
 ```
@@ -45,7 +50,7 @@ const asContentfulImage = (nodeContent: Partial<Data>) => (nodeKey: string) => f
     [nodeKey]: nodeContent,
   }),
   asEditableImage(nodeKey),
-  withResetButton(nodeKey),
+  withResetButton(),
 );
 ```
 
@@ -65,7 +70,10 @@ export default {
   alt: "contentful 1",
 };
 ```
-the image would be stored within  `src/components/Contentful/Image` folder.
+
+The contentful default image is stored within `src/components/Contentful/Image`
+folder. If a site editor uploads an image in place of this image, it will be
+stored in the normal static folder.
 
 This contentful component can be used within a page, template or added to FlowContainer to be available to site editor.
 
@@ -75,7 +83,7 @@ The following is example of defining a tout contentful component (which is a com
 
 The logic is the same except that `withResetButton`'s are added to each component.
 
-e.g.
+Option 1 with reset on each individual component
   ```
   export const withToutResetButtons = withDesign({
     ImageLink: withResetButton({ nodeKey: 'cta$image' }),
@@ -87,6 +95,18 @@ e.g.
   export const asContentfulTout = (content: object) => flow(
     withToutEditors,
     withToutResetButtons,
+    withDefaultContent(content),
+  );
+  ```
+
+Option 2 with reset at tout level (not individual). A reset button will still
+appear for each individual component, but data is restored for entire component
+and not per sub-component.
+  ```
+  
+  export const asContentfulTout = (content: object) => flow(
+    withToutEditors,
+    withResetButton,
     withDefaultContent(content),
   );
   ```

@@ -38,7 +38,7 @@ const asContentfulImage = (nodeContent: Partial<Data>) => (nodeKey: string) => f
     [nodeKey]: nodeContent,
   }),
   asEditableImage(nodeKey),
-  withResetButton(nodeKey),
+  withResetButton(),
 );
 
 const DEFAULT_IMAGE_NODE_KEY = 'image';
