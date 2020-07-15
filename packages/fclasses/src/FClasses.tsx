@@ -35,13 +35,14 @@ type Classable = {
 
 export type HOC = <P extends object>(C: ComponentType<P> | string) => ComponentType<P>;
 
-export type Condition = () => boolean;
+export type Condition = <T extends StylableProps>(args?: T) => boolean;
 const alwaysTrueCondition = () => true;
 
 const modifyClassesIf = (operation: 'add' | 'remove') => (condition: Condition) => (classes?: Classes) => {
   const hoc = <P extends StylableProps>(Component: ComponentType<P> | string) => {
-    const ModifyClasses: FC<P> = ({ fClasses, ...rest }) => {
-      const newFClasses = condition() ? {
+    const ModifyClasses: FC<P> = props => {
+      const { fClasses, ...rest } = props;
+      const newFClasses = condition(props) ? {
         parentFClasses: fClasses,
         operation,
         classes,
