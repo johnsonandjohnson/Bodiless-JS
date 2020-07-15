@@ -362,13 +362,20 @@ class Backend {
           const gitStatus = await GitCmd.cmd()
             .add('status', '--porcelain', backendPagePath)
             .exec();
+          const gitRootRelPath = await GitCmd.cmd()
+            .add('rev-parse', '--show-cdup')
+            .exec();
           const reGetDeletedAndUntracked = /(?<= D |\?\? ).*/gm;
           const deletedAndUntracked = gitStatus.stdout.match(reGetDeletedAndUntracked);
           if (deletedAndUntracked !== null) {
             const dataPagePath = path.join(backendFilePath, 'pages');
             const obsoletePublicPages = deletedAndUntracked.map(gitPath => {
               const publicPagePath = gitPath.replace(dataPagePath, backendPublicPath);
-              return path.resolve('../..', publicPagePath);
+              // Get absolute path considering location of .git folder
+              return path.resolve(
+                gitRootRelPath.stdout.trim(),
+                publicPagePath,
+              );
             });
             // Have to loop through every path since 'git clean' can work incorrectly when passing
             // all the paths at once.
