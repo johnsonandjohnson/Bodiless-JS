@@ -1,7 +1,7 @@
 # Fonts
 
 Custom fonts can be used on a Bodiless site and here are some suggested ways to
-add and use fonts:
+add and use them:
 
 ## Adding Fonts to a Bodiless Site
 

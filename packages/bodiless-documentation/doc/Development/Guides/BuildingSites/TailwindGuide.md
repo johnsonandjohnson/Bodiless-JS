@@ -1,9 +1,11 @@
 # Using Tailwind system with Bodiless
 (TO DO:  Starting point and will be enhanced in future tickets.)
 
-As discussed in other sections, Bodiless depends on Tailwind which is
-utility-first CSS framework. If you are unfamiliar, we highly suggest reading
-these guides:
+As discussed in other sections, Bodiless is preconfigured to use
+[TailwindCSS](https://tailwindcss.com) which is utility-first CSS framework.
+While this is not strictly required, we highly recommend it to get the most out
+of the Bodiless Design System. If you are unfamiliar with Tailwind, you can
+learn more from one of
 
 - [Tailwind on Github](https://github.com/tailwindcss/tailwindcss)
 - [Tailwind Docs](https://tailwindcss.com/docs/what-is-tailwind)
@@ -19,8 +21,8 @@ The starter kit has a empty Tailwind configuration which means that site will
 use all Tailwind's default settings and place into a generated index.css file.
 
 ## Extend vs Replace
-Tailwind allows you to replace or extend the settings. If you are using Bodiless
-components, which may be using default tailwind classes, we suggest you
+Tailwind allows replacing or extending the settings. If site builder is using
+Bodiless components, which may be using default tailwind classes, we suggest to
 [extend](https://tailwindcss.com/docs/theme/#extending-the-default-theme)
 instead of replace using theme.extend.
 
@@ -42,6 +44,7 @@ performance.
 
 ## Building with Tailwind
 
-Each time you make a change in tailwind.config.js you will need to rerun the
-build process. This is done in either `npm run start` or `npm run build` and
-will generate css that is automatically included for the site.
+Each time site builder makes a change in tailwind.config.js, she will need to
+rerun the build process. This is done in either `npm run start` or
+`npm run build` and will generate css that is automatically included for the
+site.
