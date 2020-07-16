@@ -48,6 +48,7 @@ export type UI = {
   ComponentFormText?: ComponentType<FieldProps<any, any>>;
   ComponentFormTextArea?: ComponentType<FieldProps<any, any>>;
   ComponentFormError?: ComponentType<HTMLProps<HTMLDivElement>> | string;
+  ComponentFormWarning?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   Form?: ComponentType<HTMLProps<HTMLFormElement>> | string;
   Tooltip?: ComponentType<Tooltip['props']>;
   ReactTags?: ComponentType<ReactTagsFieldProps>;
