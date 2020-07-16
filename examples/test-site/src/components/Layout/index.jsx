@@ -13,6 +13,7 @@
  */
 
 import React from 'react';
+import { flow, flowRight } from 'lodash';
 import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
 import { Div } from '@bodiless/fclasses';
@@ -23,10 +24,9 @@ import {
   asBodilessHelmet,
   withEvent,
 } from '@bodiless/components';
-import { flowRight } from 'lodash';
 import Header from './header';
 import Footer from './footer';
-import { asPageContainer } from '../Elements.token';
+import { asPageContainer, asYMargin } from '../Elements.token';
 
 const ExampleHelmet = flowRight(
   asBodilessHelmet('meta'),
@@ -54,7 +54,11 @@ const ExampleGTMHelmetEvent = flowRight(
   ),
 )(Helmet);
 
-const Container = asPageContainer(Div);
+const Container = flow(
+  asPageContainer,
+  asYMargin,
+)(Div);
+
 const Layout = ({ children }) => (
   <StaticQuery
     query={graphql`
