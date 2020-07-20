@@ -31,6 +31,7 @@ import NewPageProvider from './NewPageProvider';
 import GatsbyPageProvider, {
   Props as PageProviderProps,
 } from './GatsbyPageProvider';
+import OnStoreErrorNotification from './OnStoreErrorNotification';
 
 type FinalUI = {
   ContextWrapper: ComponentType<ContextWrapperProps>;
@@ -58,17 +59,19 @@ const Page: FC<Props> = observer(({ children, ui, ...rest }) => {
           <SwitcherButtonProvider>
             <NotificationProvider>
               <NotificationButtonProvider>
-                <Editor>
-                  <NewPageProvider>
-                    <GitProvider>
-                      <Wrapper clickable>
-                        <DefaultActiveMenuOptions>
-                          {children}
-                        </DefaultActiveMenuOptions>
-                      </Wrapper>
-                    </GitProvider>
-                  </NewPageProvider>
-                </Editor>
+                <OnStoreErrorNotification>
+                  <Editor>
+                    <NewPageProvider>
+                      <GitProvider>
+                        <Wrapper clickable>
+                          <DefaultActiveMenuOptions>
+                            {children}
+                          </DefaultActiveMenuOptions>
+                        </Wrapper>
+                      </GitProvider>
+                    </NewPageProvider>
+                  </Editor>
+                </OnStoreErrorNotification>
               </NotificationButtonProvider>
             </NotificationProvider>
           </SwitcherButtonProvider>
