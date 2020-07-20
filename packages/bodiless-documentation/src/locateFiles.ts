@@ -41,7 +41,7 @@ const locateFiles = <T>(props:Props<T>):Promise<T[]> => new Promise(resolve => {
       return (
         fs.existsSync(fullPath)
         && fs.statSync(fullPath).isDirectory()
-      ) || name.search(filePattern) !== -1;
+      ) || fullPath.search(filePattern) !== -1;
     })
   );
   const walker = walk(startingRoot, { filter, follow_symlinks: true });

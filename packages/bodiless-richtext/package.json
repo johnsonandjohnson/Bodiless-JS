@@ -10,6 +10,7 @@
     "/lib",
     "/bin",
     "/patches",
+    "/doc",
     "/bodiless.docs.json"
   ],
   "repository": {
@@ -22,8 +23,9 @@
   "scripts": {
     "build": "tsc --version && tsc -p ./tsconfig.json ",
     "build:watch": "npm run build -- --watch",
+    "build:api-doc": "typedoc --out doc/api --mode file",
     "lint": "tslint ./src/**/*.ts?x",
-    "clean": "rimraf \"lib/*\" && rimraf *.tsbuildinfo",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
     "postinstall": "node bin/apply-patches.js"
   },
   "dependencies": {

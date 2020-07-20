@@ -21,8 +21,9 @@
   "scripts": {
     "build": "npm run copy && tsc -p ./tsconfig.json",
     "build:watch": "npm run build -- --watch",
+    "build:api-doc": "typedoc --out doc/api --mode file",
     "lint": "tslint ./src/**/*.ts?x",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
     "copy": "copyfiles -u 1 \"./src/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {

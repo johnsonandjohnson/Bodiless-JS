@@ -16,6 +16,7 @@
 	    	"Documentation.md": ""
 	    },
 		"Release": {},
-		"Contributing.md": ""
+		"Contributing.md": "",
+		"API": {}
 	}
 }

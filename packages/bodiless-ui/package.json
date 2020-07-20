@@ -8,6 +8,7 @@
   "typings": "lib/index.d.ts",
   "files": [
     "/lib",
+    "/doc",
     "/bodiless.docs.json",
     "/bodiless.tailwind.config.js",
     "/index.tailwind.css"
@@ -23,9 +24,10 @@
     "build": "tsc -p ./tsconfig.json && npm run build:css && npm run copy",
     "build:css": "postcss index.tailwind.css -o ./src/bodiless.index.css",
     "build:watch": "npm run build -- --watch",
+    "build:api-doc": "typedoc --out doc/api --mode file",
     "copy": "copyfiles -u 1 \"./src/*.css\" \"./lib/\"",
     "lint": "tslint ./src/**/*.ts?x",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
     "@bodiless/core": "^0.0.51",

@@ -25,6 +25,7 @@ import {
 import { writeSideBars, writeNavBar } from './createBar';
 import { Tree } from './type';
 import readSettings from './readSettings';
+import buildApiDoc from './blApiDocsBuild';
 
 const buildSubTree = async (toc: any, namespace: string) => {
   // We start by using locateFiles and withTreeFromFile to build up an array of TreeHO and
@@ -89,7 +90,13 @@ const blDocsBuild = async () => {
   try {
     await writeResources(docPath, copier);
   } catch (error) {
-    console.warn('Error writing navbar', error);
+    console.warn('Error writing resources', error);
+  }
+  console.log('Building API docs');
+  try {
+    await buildApiDoc({ targetDocPath: docPath, copier });
+  } catch (error) {
+    console.warn('Error building API docs', error);
   }
   console.log('Done');
 };

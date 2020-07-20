@@ -13,6 +13,7 @@
   },
   "files": [
     "/lib",
+    "/doc",
     "/bodiless.docs.json"
   ],
   "publishConfig": {
@@ -25,7 +26,8 @@
   "scripts": {
     "build": "tsc --version && tsc -p ./tsconfig.json ",
     "build:watch": "npm run build -- --watch",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
+    "build:api-doc": "typedoc --out doc/api --mode file",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
     "lodash": "^4.17.11"

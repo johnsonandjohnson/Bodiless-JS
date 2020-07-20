@@ -111,3 +111,4 @@ const writeResources = (loc: string, copier: Copier) => {
 export {
   writeTree, writeResources, copyFile, symlinkFile,
 };
+export type { Copier };

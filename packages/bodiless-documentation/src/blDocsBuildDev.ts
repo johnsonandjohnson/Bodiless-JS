@@ -1,0 +1,1 @@
+require('./blDocsBuild').default();

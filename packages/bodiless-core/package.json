@@ -8,6 +8,7 @@
   "typings": "lib/index.d.ts",
   "files": [
     "/lib",
+    "/doc",
     "/bodiless.docs.json"
   ],
   "repository": {
@@ -20,8 +21,9 @@
   "scripts": {
     "build": "tsc -p ./tsconfig.json ",
     "build:watch": "npm run build -- --watch",
+    "build:api-doc": "typedoc --out doc/api --mode file",
     "lint": "tslint ./src/**/*.ts?x",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
     "@bodiless/fclasses": "^0.0.51",

@@ -23,7 +23,8 @@
     "queries.jsx",
     "Logger.js",
     "src/no-scroll-settings.json",
-    "build-css.js"
+    "build-css.js",
+    "/doc"
   ],
   "repository": {
     "type": "git",
@@ -35,7 +36,8 @@
   "scripts": {
     "build": "tsc -p ./tsconfig.json ",
     "build:watch": "npm run build -- --watch",
-    "clean": "rimraf -rf \"dist\" && rimraf index*"
+    "build:api-doc": "typedoc --out doc/api --mode file",
+    "clean": "rimraf -rf \"dist\" && rimraf index* && rimraf \"doc/api\""
   },
   "dependencies": {
     "@bodiless/core": "^0.0.51",

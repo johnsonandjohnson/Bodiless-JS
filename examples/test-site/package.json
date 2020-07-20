@@ -61,6 +61,7 @@
     "build:watch": "run-p -r dev-frontend dev-backend",
     "build:lib": "gatsby build",
     "build:doc": "bl-docs-build",
+    "build:doc-dev": "../../node_modules/.bin/ts-node --dir ../../packages/bodiless-documentation src/blDocsBuildDev",
     "build:scripts": "tsc -p ./tsconfig.json",
     "build:env-vars": "generate-env-vars",
     "check": "tsc -p ./tsconfig.check.json",
