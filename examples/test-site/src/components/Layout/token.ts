@@ -25,7 +25,7 @@ import {
 const asDefaultLogoStyle = withDesign({
   SiteReturn: addClasses('flex-shrink py-4 px-2'),
   SiteLogo: addClasses('h-16'),
-  SiteLink: addClasses(''),
+  // Do not addClasses to SiteLink as by default its Gatsby Link and not designable.
 });
 
 const asSiteHeader = withDesign({
