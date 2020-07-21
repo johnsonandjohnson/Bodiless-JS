@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,15 @@
  */
 
 import React from 'react';
-import { Link, graphql } from 'gatsby';
+import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../../../components/Layout';
+import { FlowContainerDefault } from '../../../components/FlowContainer';
 
 export default (props: any) => (
   <Page {...props}>
     <Layout>
-      <h1>Page Not Found</h1>
-      <p>The requested page could not be found.</p>
-      <p>
-        <Link to="/" style={{ color: 'blue' }}>
-          {' '}
-          Go to homepage.
-        </Link>
-      </p>
+      <FlowContainerDefault nodeKey="notfound" />
     </Layout>
   </Page>
 );
