@@ -5,8 +5,8 @@ and accompanying styleguide provided by a designer, this is not always possible.
 Maybe you want to rebuild an existing site, or maybe your creative partners
 don't work that way. In such cases, a site builder can look through an existing
 site that is being rebuilt or the site design assets and choose how to build it
-out as components. A good guide would be try keep components as small as
-possible and that can be reused or composed together to create more complex
+out as components. Note: try to keep components as small as
+possible so that they can be reused or composed together to create more complex
 components.
 
 ## Identifying Components
@@ -62,9 +62,9 @@ render with only image & title.
 
 ## Reviewing a Site
 
-So as you review a site assets (or existing site) generate a list of individual
+So as you review site assets (or existing site), generate a list of individual
 components that are used throughout each page. As you review, track the
-different variations that are seen (which are often same type of content and
-displayed visually slightly differently.) This is also good time to find the
+different variations that are seen (which are often the same type of content and
+displayed visually slightly differently.) This is also a good time to find the
 commonality of types of pages used within so you can record what templates have
 to be built.

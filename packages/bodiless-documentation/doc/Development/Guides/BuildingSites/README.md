@@ -1,6 +1,6 @@
 # Building a Site
 
-This section describes the building of site with BodilessJS.
+This section describes the building of a site with BodilessJS.
 
 * Overview of [Building a Site using Bodiless](./BuildingOverview)
   * [Bodiless Starter Components](./ComponentsStarterKit)

@@ -40,7 +40,10 @@ This is where site builder will begin setting up the typography and site level
 design requirements of the site.
 
 The basic units of design in Bodiless are
-[Tokens](../../../Design/DesignSystem?id=element-tokens). These are the
+[Tokens](../../../Design/DesignSystem?id=element-tokens). Tokens are the foundation that the site builder can build upon or extend to build a design system for the site. The starter kit provides a beginning set of tokens to
+start utilizing. This set can be found in `src/components/Elements.token.ts`.
+These tokens can be customized to meet the site's requirements and additional tokens can
+be added.
 foundation that site builder can build upon or extend to build a design system
 for the site, The starter kit provides provides a beginning set of tokens to
 start utilizing and they can be found in `src/components/Elements.token.ts`.
@@ -55,9 +58,9 @@ set items such as site width and breakpoints.
 #### Tailwind Configuration
 
 Within `Elements.token.ts` the site builder will find Element tokens that
-utilize addClasses() to add class names, usually these are utility-first
+utilize `addClasses()` to add class names, usually these are utility-first
 Tailwind classes but regular css classes can be added as well. The starter kit
-offers default Tailwind classes but site builder may have to provide addition
+offers default Tailwind classes but site builder may have to provide additional
 definitions, such as custom colors. For more information on doing this, read
 [Tailwind with Bodiless](./TailwindGuide.md)
 
@@ -65,13 +68,13 @@ definitions, such as custom colors. For more information on doing this, read
 
 The following is set of example element tokens we provide in the starter site.
 These correspond to single atoms that will be used in the more complex
-components. In Bodiless, tokens are generally expressed as React High Order
+components. In Bodiless, tokens are generally expressed as React Higher Order
 components.
 
-Here is sampling of tokens that could be used. For full set of tokens, after
+Here is a sampling of tokens that could be used. For full set of tokens, after
 site builder generates a new site from the starter site, reference the site's
 `src/components/Elements.token.ts` file for full set or
-[code](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/starter/src/components/Elements.token.ts).
+[see it on GitHub](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/starter/src/components/Elements.token.ts).
 
 ```
 const asPageContainer = addClasses('container mx-auto p-0 md:p-3');
@@ -116,12 +119,12 @@ tokens file, or a component folder. A suggested practice is the following:
 
 * Very small, atom-like, that are reused across site go into `Elements.token.ts`
 * Specific tokens (atom-size or small molecules) that are:
-  * reused throughout site, 
-  * and probably more complex that previous atom-like tokens,
-  * but not large enough to be in their own folder.
-  * We recommend creating files with a descriptive title that describes the type
+  * reused throughout site
+  *  more complex than previous atom-like tokens
+  * not large enough to be in their own folder
+   We recommend creating files with a descriptive title that describes the type
     of tokens it contains.
-  * An example is create page.token.ts where a site builder could store a
+  For example a site builder could create `page.token.ts` where they could store 
     components that help layout pages (sections, indents, etc).
 * Token styling of components should be stored with the individual components.
 
@@ -241,7 +244,7 @@ can be created as page directly within `src/pages/` in the correct path for
 display. An example of this is the
 [homepage of test site](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/data/pages/index.tsx).
 
-If in the future, similar pages are added this one-off custom page could be
+If similar pages are added in the future, this one-off, custom page could be
 refactored into a template.
 
 ### Building out Page/Template with its components
@@ -252,14 +255,14 @@ identified in the previous 2 steps.
 #### Building One-off Pages
 
 1. Create & develop the page in `/src/data/pages/PATH`
-1. Develop Or extend components needed for the page. (`/src/components`) or
+1. Develop or extend components needed for the page. (`/src/components`) or
    locally in the page.
-    * Suggested pattern if its reusable component define in
+    * Suggested pattern for reusable component is to define in
       `/src/components`.
-    * If its really custom component (or variation) only meant for this page,
+    * If it really is a custom component (or variation) only meant for this page,
       site builder can define locally within the page, or as another file in the
       page folder. If in future, site builder decides to reuse the component on
-      another page, its suggested to move to `/src/components` and not try share
+      another page, it is suggested to move to `/src/components` and not try to share
       with other pages.
 1. Define Element tokens that may be needed to support the page/components
    utilized. (`src/components/Elements.tokens.ts` or a new
