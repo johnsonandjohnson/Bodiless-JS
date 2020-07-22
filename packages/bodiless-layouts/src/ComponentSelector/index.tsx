@@ -75,7 +75,7 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
           />
         </finalUI.FlexSection>
 
-        <finalUI.FlexSection>
+        <finalUI.FlexSectionFull>
           <finalUI.ComponentTitleWrapper>
             Components
           </finalUI.ComponentTitleWrapper>
@@ -87,7 +87,7 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
             onSelect={onSelect}
             components={newCompRender}
           />
-        </finalUI.FlexSection>
+        </finalUI.FlexSectionFull>
 
       </finalUI.MasterWrapper>
     </uiContext.Provider>

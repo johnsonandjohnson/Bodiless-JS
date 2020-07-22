@@ -74,7 +74,7 @@ Click ok to visit the new page; if it does not load, wait a while and reload.`;
     ComponentFormTitle,
     ComponentFormLabel,
     ComponentFormText,
-    ComponentFormError,
+    ComponentFormWarning,
   } = getUI(
     ui,
   );
@@ -101,7 +101,7 @@ Click ok to visit the new page; if it does not load, wait a while and reload.`;
         validateOnBlur
       />
       {formState.errors && formState.errors.path && (
-      <ComponentFormError>{formState.errors.path}</ComponentFormError>
+      <ComponentFormWarning>{formState.errors.path}</ComponentFormWarning>
       )}
     </>
   );

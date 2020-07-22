@@ -111,7 +111,7 @@ describe('Fetch Changes component', () => {
     return new Promise(resolve => setImmediate(resolve)).then(() => {
       wrapper.update();
       expect(wrapper.text()).toBe(
-        'Upstream changes are available but cannot be fetched via the UI.',
+        'report_problem_outlinedUpstream changes are available but cannot be fetched via the UI.',
       );
     });
   });
