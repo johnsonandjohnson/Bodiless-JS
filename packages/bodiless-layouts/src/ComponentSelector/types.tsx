@@ -65,6 +65,8 @@ export type FinalUI = {
   MasterWrapper: ComponentType<HTMLProps<HTMLDivElement>> | string;
   // A div that can be configured as column or row
   FlexSection: ComponentType<HTMLProps<HTMLDivElement>> | string;
+  // A div that can be configured as column or row and takes all available space
+  FlexSectionFull: ComponentType<HTMLProps<HTMLDivElement>> | string;
   // A div wraps an empty flow container
   FlowContainerEmpty: ComponentType<HTMLProps<HTMLDivElement>> | string;
   // A div that will wrap the entirety of the Accordions and Accordion Checkboxes
@@ -102,6 +104,8 @@ export type FinalUI = {
   // A div that wraps the ItemBox
   GridListBox: ComponentType<HTMLProps<HTMLDivElement>> | string;
   // A div that wraps the ItemBox Elements
+  GridListBoxWrapper: ComponentType<HTMLProps<HTMLDivElement>> | string;
+  // An additional div that wraps the ItemBox Elements
   GridListBoxInner: ComponentType<HTMLProps<HTMLDivElement>> | string;
   // A span that wraps the title element of a component box
   TitleWrapper: ComponentType<HTMLProps<HTMLSpanElement>> | string;
