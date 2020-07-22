@@ -23,7 +23,7 @@ import {
 } from '../Elements.token';
 
 const asDefaultLogoStyle = withDesign({
-  SiteReturn: addClasses('flex-shrink py-4 px-2'),
+  SiteReturn: addClasses('flex-shrink px-2'),
   SiteLogo: addClasses('h-16'),
   // Do not addClasses to SiteLink as by default its Gatsby Link and not designable.
 });
