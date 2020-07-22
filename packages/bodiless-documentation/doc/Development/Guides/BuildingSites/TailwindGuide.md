@@ -1,5 +1,4 @@
 # Using Tailwind system with Bodiless
-(TO DO:  Starting point and will be enhanced in future tickets.)
 
 As discussed in other sections, Bodiless is preconfigured to use
 [TailwindCSS](https://tailwindcss.com) which is utility-first CSS framework.
@@ -10,12 +9,17 @@ learn more from one of
 - [Tailwind on Github](https://github.com/tailwindcss/tailwindcss)
 - [Tailwind Docs](https://tailwindcss.com/docs/what-is-tailwind)
 
+Most of the site's styling can be defined with Tailwind and for the most part,
+Bodiless will defer to their documentation. The following documentation either
+are specific Bodiless applications of Tailwind or important enough to call
+out to help direct to the specific Tailwind documentation.
+
 ## Tailwind Configuration File
 The sites tailwind configuration file, `tailwind.config.js`, can be found in
 root directory of the site.
 
 Adding custom styling can be done by editing `tailwind.config.js` following
-[Tailwind documentation](https://tailwindcss.com/docs/configuration). 
+[Tailwind documentation](https://tailwindcss.com/docs/configuration).
 
 The starter kit has a empty Tailwind configuration which means that site will
 use all Tailwind's default settings and place into a generated index.css file.
@@ -48,3 +52,42 @@ Each time site builder makes a change in tailwind.config.js, she will need to
 rerun the build process. This is done in either `npm run start` or
 `npm run build` and will generate css that is automatically included for the
 site.
+
+!> **Important** for tailwind changes to be updated, you must restart or build
+to see the changes.
+
+## Responsiveness with Tailwind
+
+Tailwind controls the responsiveness of the site and classes can be prefixed with responsive size.
+
+### Breakpoints
+
+For more information, about setting the (responsive
+breakpoints](./Responsiveness#Breakpoints).
+
+## Setting maximum container width of a site
+
+If a site has maximum container width of a site should be, they can be set with
+max-width
+breakpoints](https://tailwindcss.com/docs/breakpoints/#max-width-breakpoints)
+and limit the size of the containers at different breakpoints.
+
+### Using Responsive Classes
+
+For more information, read about
+[https://tailwindcss.com/docs/responsive-design#mobile-first](https://tailwindcss.com/docs/responsive-design#mobile-first)
+which contains excellent documentation about responsive classes and how to use
+them.
+
+## Using Custom CSS
+
+There are cases that Tailwind CSS doesn't support or it may be easier to not
+rely on Tailwind. This can be achieved by including the css file and referencing
+those classes instead of the tailwind classes.  
+
+The custom css files can be included imported either in gatsby-browser.js file
+or within the component that is using them. Do we have recommendation here:
+
+If the site builder includes custom css such as they later make changes, does
+purgecss remove them if they aren't used??? And if they want to leverage
+purgecss waht is the recommended method??? Include via gatsby-browser.js
