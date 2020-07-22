@@ -169,8 +169,19 @@ And add the following above the `<PrimaryHeader>` tag:
 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
 <Link><Image /></Link>
 ```
-
 *Note - the jsx-a11y linting rule is disable because the Link component provides its own `href` attribute from the content.*
+
+Example test site also offers image components with default placeholders that
+make this easier and there is one for landscape placeholder. So an alternative
+that can be used and does the same as above (with the exception of nodekeys will
+be 'link' & 'image' instead of 'hero-link' & 'hero-image'):
+```
+import { LandscapeLinkableImage } from '../../../components/Image';
+```
+And add the following above the `<PrimaryHeader>` tag:
+```
+<LandscapeLinkableImage />
+```
 
 Reload your page and click on the image placeholder. Image and link edit buttons will appear; you can use them to upload and image and set the `href` of the link.
 

@@ -1,0 +1,11 @@
+{
+  "items": [
+    {
+      "uuid": "5ba01e60-c83a-11ea-b1a8-87fb545d5688",
+      "wrapperProps": {
+        "className": " lg:w-full"
+      },
+      "type": "EditorFullFeatured"
+    }
+  ]
+}
