@@ -1,7 +1,7 @@
 # Building Contentful Components
 
-While building sites, there often are use cases where the same content is
-re-used between pages or possibly it could be a component you want to share with
+While building sites, there are often use cases where content is
+re-used between pages, or you might want to share a component with
 another site. 
 
 A contentful component allows you to specify the default content of a component,
