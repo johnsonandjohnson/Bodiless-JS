@@ -40,15 +40,16 @@ This is where site builder will begin setting up the typography and site level
 design requirements of the site.
 
 The basic units of design in Bodiless are
-[Tokens](../../../Design/DesignSystem?id=element-tokens). Tokens are the foundation that the site builder can build upon or extend to build a design system for the site. The starter kit provides a beginning set of tokens to
-start utilizing. This set can be found in `src/components/Elements.token.ts`.
-These tokens can be customized to meet the site's requirements and additional tokens can
-be added.
-foundation that site builder can build upon or extend to build a design system
-for the site, The starter kit provides provides a beginning set of tokens to
-start utilizing and they can be found in `src/components/Elements.token.ts`.
-These can be customized to meet the site's requirements and additional ones can
-be added.
+[Tokens](../../../Design/DesignSystem?id=element-tokens). Tokens are the
+foundation that the site builder can build upon or extend to build a design
+system for the site. The starter kit provides a beginning set of tokens to start
+utilizing. This set can be found in `src/components/Elements.token.ts`. These
+tokens can be customized to meet the site's requirements and additional tokens
+can be added. This becomes the foundation that the site builder can build upon
+or extend to build a design system for the site, The starter kit provides
+provides a beginning set of tokens to start utilizing and they can be found in
+`src/components/Elements.token.ts`. These can be customized to meet the site's
+requirements and additional ones can be added.
 
 The default tailwind configurations also sets global configuration elements to
 set items such as site width and breakpoints.
