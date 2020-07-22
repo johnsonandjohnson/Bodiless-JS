@@ -8,7 +8,9 @@ These components consist of the global components
 
 * Header `src/components/Layout/header.tsx`
 * Footer `src/components/Layout/footer.tsx`
-* Layout `src/components/Layout/index.jsx`
+* Meta `src/components/Layout/meta.tsx`
+* Logo `src/components/Layout/logo.tsx`
+* Layout `src/components/Layout/index.tsx`
   * This file bring together header & footer into the page layout & composes the
     metadata of the page.
 
@@ -16,30 +18,30 @@ These components work as-is out of the Bodiless starter but site builder may
 have to adjust their tokens (styling) to meet the designs of the site.
 
 ### MetaData Component
+
 Bodiless provides a set of HOC's which work with react-helmet to place editable
-meta-tags in the document HEAD.  Site Builder can find an example in
-`src/components/Layout/index.jsx`.
+meta-tags in the document HEAD.  A Site Builder can find an example in
+`src/components/Layout/meta.tsx`.
 
-The starter kit provides the following example:
-```
-const ExampleHelmet = flowRight(
-  asBodilessHelmet('meta'),
-  withMeta('pagetype', 'page-type'),
-  withMeta('description', 'description'),
-  withMeta('bl-brand', 'brand', 'site'),
-  withMeta('bl-country', 'country', 'site'),
-  withMetaTitle('page-title'),
-  withMetaHtml('en'),
-)(Helmet);
-```
-`withMeta`, `withMetaTitle` are HOC's that will obtain the value of data out
-json object associated at page level or if specified at site level.
+For full code, please
+[review code](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Layout)
 
-e.g.
-- `withMeta('pagetype', 'page-type')` will obtain its value at page level from
-  `meta$page-type.json` which contains `{ "content": "Home" }`
-- `withMeta('bl-brand', 'brand', 'site')` will obtain its value from
-  `src/data/site.meta$brand.json` which contains `{ "content": "BodilessJS" }`
+The components within this file are providing two abilities:
+#### Adding SEO form to Editor interface
+The `withMetaForm` provides ab ability to insert a SEO form
+within the editor inferface for the site editor to manipulate meta date per
+page. 
+
+Besides adding the form, the site builder will also define the fields that the
+site builder can see to edit in the page.
+
+#### Adding metatag to the document HEAD
+
+In addition, the calls to `withMeta*` are HOC's that will obtain the value of
+data out json object (where its written by the editor.) You can also review and
+see some meta data are associated at page level or at a site (global) level.
+
+For full information on adding metadata, please read [Meta](TBD)
 
 ### Site Title & Logo
 
@@ -51,8 +53,12 @@ e.g.
     logo: '/images/bodiless_logo.png',
   },
 ```
-Note: the mobile logo is defined within `/src/components/Menus/token.tsx` and
-doesn't use siteMetaData.
+
+Both the desktop menu and mobile burger menu will use the logo defined here.
+The footer will use title in the copyright.
+
+Note: This is a vanilla Gatsby pattern and there is nothing unique that Bodiless
+is doing with it.
 
 ### Site Favicon
 

@@ -6,7 +6,6 @@ add and use them:
 ## Adding Fonts to a Bodiless Site
 
 * [gatsby-plugin-google-fonts](https://github.com/didierfranc/gatsby-plugin-google-fonts)
-  is part of Bodiless and can be used. 
   * Tip: make sure GOOGLE_FONTS_ENABLED is not disabled in .env.site file.
 * Using [Open Source Typefaces npm packages](https://github.com/KyleAMathews/typefaces) built by others
   * Follow directions for the package to install and use.

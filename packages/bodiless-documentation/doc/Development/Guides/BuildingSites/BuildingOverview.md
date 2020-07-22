@@ -2,8 +2,8 @@
 
 This guide is a suggested process for building sites using Bodiless.
 
-The are two use cases for building sites.
-* A brand new site build with new assets (Typography, Design & Copy Deck).
+There are two use cases for building sites.
+* A brand new site build with new assets (typography, design & copy deck).
 * Rebuild of an existing site on the Bodiless platform
 
 In either case, the process is generally the same. In the rebuild of an existing
@@ -76,27 +76,20 @@ site builder generates a new site from the starter site, reference the site's
 `src/components/Elements.token.ts` file for full set or
 [see it on GitHub](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/starter/src/components/Elements.token.ts).
 
-```
-const asPageContainer = addClasses('container mx-auto p-0 md:p-3');
-const asSectionContainer = addClasses('container mx-auto my-6');
+The following are examples of some tokens:
 
+```
 const asMargin = addClasses('m-2');
 const asXMargin = addClasses('mx-2');
-const asYMargin = addClasses('my-2');
 const asNegXMargin = addClasses('-mx-2');
-const asNegYMargin = addClasses('-my-2');
-const asPadding = addClasses('p-4');
 const asXPadding = addClasses('px-2');
-const asYPadding = addClasses('py-2');
 
 /* Primary coloring */
 const asPrimaryColorBackground = addClasses('bg-gray-200');
-const asTextColorPrimary = addClasses('text-black');
 
 // Typography
 const asBold = addClasses('font-bold');
 const asLink = addClasses('text-brand_lightblue underline');
-const asSuperScript = addClasses('');
 const asHeader1 = flow(addClasses('text-3xl'), asTextColorPrimary, asBold);
 const asHeader2 = flow(addClasses('text-2xl', asBold));
 ```
@@ -169,13 +162,24 @@ every site will probably use in some form.
 For a more in-depth guide about these see
 [Explanation of Components that come in the Starter Kit](./ComponentsStarterKit).
 
+### Identify & Define Tokens used in a site and their variations
+
+Within the assets provided by the creative agency, the site builder will need to
+start defining the tokens a site will use. As mentioned, the starter kit comes
+with some predefined tokens that can be modified or add additional tokens. In
+the case where the site is being rebuilt from existing site and the original
+site assets are not available, the tokens will have to be determined by
+inspecting and reverse engineering the existing site.
+
 ### Identify Components used in a site and their variations
 
 Since the building of the site is composing of many types of different
 components. The first step is determining what components the site will need.
 The above components provided by the starter kit are fundamental components the
 site will most likely use. If site doesn't need that component, feel free to
-remove it.
+remove it. In the case where the site is being rebuilt from existing site and
+the original site assets are not available, the list components will have to be
+determined by inspecting and reverse engineering the existing site.
 
 As a site builder looks through the site build assets provided for a new site or
 existing site, they will want to identify types of components required.
