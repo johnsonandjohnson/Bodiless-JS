@@ -46,8 +46,8 @@ system for the site. The starter kit provides a beginning set of tokens to start
 utilizing. This set can be found in `src/components/Elements.token.ts`. These
 tokens can be customized to meet the site's requirements and additional tokens
 can be added. This becomes the foundation that the site builder can build upon
-or extend to build a design system for the site, The starter kit provides
-provides a beginning set of tokens to start utilizing and they can be found in
+or extend to build a design system for the site. The starter kit provides
+a beginning set of tokens to start utilizing and they can be found in
 `src/components/Elements.token.ts`. These can be customized to meet the site's
 requirements and additional ones can be added.
 
