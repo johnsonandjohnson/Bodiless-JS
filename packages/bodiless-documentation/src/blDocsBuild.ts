@@ -25,7 +25,7 @@ import {
 import { writeSideBars, writeNavBar } from './createBar';
 import { Tree } from './type';
 import readSettings from './readSettings';
-import buildApiDoc from './blApiDocsBuild';
+import buildApiDoc, { updateNavigation as apiDocUpdateNavigation } from './blApiDocsBuild';
 
 const buildSubTree = async (toc: any, namespace: string) => {
   // We start by using locateFiles and withTreeFromFile to build up an array of TreeHO and
@@ -74,15 +74,18 @@ const blDocsBuild = async () => {
   } catch (error) {
     console.warn('Error writing symlinks', error);
   }
-  console.log('Writing sidebars');
+
+  // Let api doc builder to update navigation links in runtime
+  const navigationPaths = apiDocUpdateNavigation(paths);
+
   try {
-    await writeSideBars(docPath, paths);
+    await writeSideBars(docPath, navigationPaths);
   } catch (error) {
     console.warn('Error writing sidebars', error);
   }
   console.log('Writing navbar');
   try {
-    await writeNavBar(docPath, paths);
+    await writeNavBar(docPath, navigationPaths);
   } catch (error) {
     console.warn('Error writing navbar', error);
   }
