@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,14 +12,54 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { FC, ComponentType, HTMLProps } from 'react';
+import {
+  designable,
+  DesignableComponentsProps,
+  DesignableProps,
+  Div,
+} from '@bodiless/fclasses';
+import { Editable } from '@bodiless/components';
 
-const Footer = () => (
-  <div className="container mx-auto py-3">
-    <p>
-      © Copyright 2020 Johnson &amp; Johnson
-    </p>
-  </div>
-);
+const today = new Date();
+const date = new Intl.DateTimeFormat().format(today);
+const year = new Intl.DateTimeFormat('en-US', { year: 'numeric' }).format(today);
 
+type FooterComponents = {
+  Wrapper: ComponentType<any>,
+  Container: ComponentType<any>,
+};
+
+export type Props = {
+  siteTitle: string,
+} & DesignableComponentsProps<FooterComponents> & HTMLProps<HTMLElement>;
+
+const footerComponents:FooterComponents = {
+  Wrapper: Div,
+  Container: Div,
+};
+
+const FooterClean: FC<DesignableProps & { siteTitle: string }> = ({ siteTitle, components }) => {
+  const {
+    Wrapper,
+    Container,
+  } = components;
+
+  return (
+    <Wrapper>
+      <Container>
+        <p>
+          ©
+          {siteTitle}
+          &nbsp;2019-
+          {year}
+        </p>
+        <Editable nodeKey="copyright" placeholder="Insert Copyright" nodeCollection="site" />
+        {date}
+      </Container>
+    </Wrapper>
+  );
+};
+
+const Footer = designable(footerComponents)(FooterClean);
 export default Footer;

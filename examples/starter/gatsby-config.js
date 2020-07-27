@@ -9,6 +9,16 @@ const plugins = [
       modules: ['@bodiless/gatsby-theme-bodiless'],
     },
   },
+  {
+    resolve: 'gatsby-plugin-canonical-urls',
+    options: {
+      // Set the siteUrl to the absolute production url i.e. https://example.com
+      siteUrl: '/',
+    },
+  },
+  {
+    resolve: 'gatsby-plugin-sitemap',
+  },
 ];
 
 module.exports = {
@@ -18,6 +28,7 @@ module.exports = {
   siteMetadata: {
     title: 'BodilessJS Starter',
     logo: '/images/bodiless_logo.png',
+    siteUrl: 'https://example.com',
   },
   plugins,
 };

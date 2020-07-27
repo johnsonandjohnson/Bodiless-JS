@@ -12,23 +12,22 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { graphql } from 'gatsby';
-import { Page } from '@bodiless/gatsby-theme-bodiless';
-import Layout from '../../components/Layout';
-import { FlowContainerDefault } from '../../components/FlowContainer';
+import {
+  addClasses,
+  withDesign,
+} from '@bodiless/fclasses';
 
-export default (props: any) => (
-  <Page {...props}>
-    <Layout>
-      <FlowContainerDefault nodeKey="homepage" />
-    </Layout>
-  </Page>
-);
+const asFlowContainerWithMargins = withDesign({
+  Wrapper: addClasses('md:-m-5 py-5'),
+  ComponentWrapper: addClasses('md:p-5'),
+});
 
-export const query = graphql`
-  query($slug: String!) {
-    ...PageQuery
-    ...SiteQuery
-  }
-`;
+const asFlowContainerFullWidth = withDesign({
+  Wrapper: addClasses('w-full'),
+  ComponentWrapper: addClasses('w-full md:w-1/3'),
+});
+
+export {
+  asFlowContainerWithMargins,
+  asFlowContainerFullWidth,
+};

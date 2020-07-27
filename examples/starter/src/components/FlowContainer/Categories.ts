@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2019 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,23 +12,9 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { graphql } from 'gatsby';
-import { Page } from '@bodiless/gatsby-theme-bodiless';
-import Layout from '../../components/Layout';
-import { FlowContainerDefault } from '../../components/FlowContainer';
+import { withFacet } from '@bodiless/layouts';
 
-export default (props: any) => (
-  <Page {...props}>
-    <Layout>
-      <FlowContainerDefault nodeKey="homepage" />
-    </Layout>
-  </Page>
-);
+const withType = withFacet('Type');
+const withStyle = withFacet('Style');
 
-export const query = graphql`
-  query($slug: String!) {
-    ...PageQuery
-    ...SiteQuery
-  }
-`;
+export { withType, withStyle };

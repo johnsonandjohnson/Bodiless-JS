@@ -16,14 +16,10 @@ import { flow } from 'lodash';
 import {
   asBlock,
   withButton,
-  withStrikeThroughMeta,
-  withComponent,
 } from '@bodiless/richtext';
 import { RichText } from '@bodiless/richtext-ui';
 import {
   withDesign,
-  Blockquote,
-  Strike,
 } from '@bodiless/fclasses';
 import {
   asBold,
@@ -38,9 +34,7 @@ import {
   asHeader2,
   asHeader1,
   asSuperScript,
-  asStrikeThrough,
   asEditableLink,
-  asBlockQuote,
 } from '../Elements.token';
 import withEditor from './withEditor';
 
@@ -68,7 +62,6 @@ const fullFeaturedDesign = {
   Bold: asBold,
   Italic: asItalic,
   Underline: asUnderline,
-  StrikeThrough: flow(withComponent(Strike), asStrikeThrough, withStrikeThroughMeta),
   Link: flow(asEditableLink(), asLink),
   SuperScript: asSuperScript,
   AlignLeft: asAlignLeft,
@@ -78,7 +71,6 @@ const fullFeaturedDesign = {
   H1: asHeader1,
   H2: asHeader2,
   H3: asHeader3,
-  BlockQuote: flow(withComponent(Blockquote), asBlockQuote, withQuoteBlockMeta),
 };
 
 const EditorSimple = withDesign(simpleDesign)(RichText);
@@ -90,8 +82,8 @@ const withEditorFullFeatured = withEditor(EditorFullFeatured);
 export {
   EditorBasic,
   EditorFullFeatured,
-  withEditorBasic,
-  withEditorFullFeatured,
   EditorSimple,
+  withEditorBasic,
   withEditorSimple,
+  withEditorFullFeatured,
 };
