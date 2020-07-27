@@ -170,7 +170,7 @@ have provided a design system which clearly defines a site's tokens and the
 components to which they apply. As mentioned before, the starter kit comes with
 some predefined token implementations that can be modified or extended to match
 this design. In the case where the site is being rebuilt from an existing site
-or and the original assets are not available, or if the agency does not work
+or the original assets are not available, or if the agency does not work
 with design systems, the tokens will have to be determined by inspecting and
 reverse engineering the existing site.
 
