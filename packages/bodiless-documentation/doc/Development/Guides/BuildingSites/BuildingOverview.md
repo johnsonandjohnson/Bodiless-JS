@@ -51,7 +51,7 @@ a beginning set of tokens to start utilizing and they can be found in
 `src/components/Elements.token.ts`. These can be customized to meet the site's
 requirements and additional ones can be added.
 
-The default tailwind configurations also sets global configuration elements to
+The default tailwind configurations also set global configuration elements to
 set items such as site width and breakpoints.
 
 ### Setup Tokens
@@ -165,12 +165,14 @@ For a more in-depth guide about these see
 
 ### Identify & Define Tokens used in a site and their variations
 
-Within the assets provided by the creative agency, the site builder will need to
-start defining the tokens a site will use. As mentioned, the starter kit comes
-with some predefined tokens that can be modified or add additional tokens. In
-the case where the site is being rebuilt from existing site and the original
-site assets are not available, the tokens will have to be determined by
-inspecting and reverse engineering the existing site.
+If you are building a new site from scratch, hopefully your creative agency will
+have provided a design system which clearly defines a site's tokens and the
+components to which they apply. As mentioned before, the starter kit comes with
+some predefined token implementations that can be modified or extended to match
+this design. In the case where the site is being rebuilt from an existing site
+or and the original assets are not available, or if the agency does not work
+with design systems, the tokens will have to be determined by inspecting and
+reverse engineering the existing site.
 
 ### Identify Components used in a site and their variations
 

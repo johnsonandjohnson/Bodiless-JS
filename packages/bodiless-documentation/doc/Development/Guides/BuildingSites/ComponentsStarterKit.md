@@ -26,20 +26,21 @@ meta-tags in the document HEAD.  A Site Builder can find an example in
 For full code, please
 [review code](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Layout)
 
-The components within this file are providing two abilities:
+The HOC's used in this file are responsible for both rendering and editing meta-tags:
 #### Adding SEO form to Editor interface
 The `withMetaForm` provides ab ability to insert a SEO form
 within the editor inferface for the site editor to manipulate meta date per
 page. 
 
 Besides adding the form, the site builder will also define the fields that the
-site builder can see to edit in the page.
+content editor can see to edit in the page.
 
 #### Adding metatag to the document HEAD
 
-In addition, the calls to `withMeta*` are HOC's that will obtain the value of
-data out json object (where its written by the editor.) You can also review and
-see some meta data are associated at page level or at a site (global) level.
+In addition fo defining the form fields, the calls to `withMeta*` also render
+the meta-tags to the document head, using data from json objects which were
+written by the editor. You can also see defined here some site-level meta-tags
+which are not exposed to the editor for modification.
 
 For full information on adding metadata, please read [Meta](TBD)
 
