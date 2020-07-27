@@ -57,7 +57,7 @@ const asContentfulImage = (nodeContent: Partial<Data>) => (nodeKey: string) => f
 #### Defining the data of the Contentful Component
 
 Create a ts file to define the data for the component and within match the data
-structure for the component, in this case it is for the image component. 
+structure for the component. In this case it is for the image component. 
 
 e.g.
 
@@ -83,7 +83,7 @@ The following is example of defining a tout contentful component (which is a com
 
 The logic is the same except that `withResetButton`'s are added to each component.
 
-Option 1 with reset on each individual component
+* Option 1 with reset on each individual component:
   ```
   export const withToutResetButtons = withDesign({
     ImageLink: withResetButton({ nodeKey: 'cta$image' }),
@@ -99,9 +99,9 @@ Option 1 with reset on each individual component
   );
   ```
 
-Option 2 with reset at tout level (not individual). A reset button will still
+* Option 2 with reset at tout level (not individual). A reset button will still
 appear for each individual component, but data is restored for entire component
-and not per sub-component.
+and not per sub-component:
   ```
   
   export const asContentfulTout = (content: object) => flow(
@@ -151,11 +151,11 @@ export default GivingBackToCommunity;
 ```
 
 The contents of each of the `.json` is the data if this component was saved in
-the traditional way through the edit interface. A suggested way to create these
-files is place the component on the page, fill in the default content and then
+the traditional way through the edit interface. To create these
+files place the component on the page, fill in the default content and then
 copy the `.json` files to this Contentful Component folder and import them in.
 
-The contents for the `./image` is same as our simple image contentful component in
+The contents for the `./image` are the same as our simple image contentful component in
 the first example that includes data object and the src of the image.
 
 ### Adding Contentful Components to the FlowContainer
