@@ -14,7 +14,18 @@
 
 import React, { FC, HTMLProps } from 'react';
 import { flow } from 'lodash';
-import { Text as BaseText, TextArea as BaseTextArea, FieldProps } from 'informed';
+import {
+  Text as BaseText,
+  TextArea as BaseTextArea,
+  RadioGroup as BaseRadioGroup,
+  Radio as BaseRadio,
+  Checkbox as BaseCheckBox,
+  Select as BaseSelect,
+  Option as BaseOption,
+  FieldProps,
+  ChildFieldProps,
+  SelectFieldProps,
+} from 'informed';
 import {
   Li, Ul, stylable, addClasses, StylableProps, withoutProps, flowIf, hasProp, addProps,
   removeClasses,
@@ -32,12 +43,15 @@ export const Div = stylable<HTMLProps<HTMLDivElement>>('div');
 export const Span = stylable<HTMLProps<HTMLSpanElement>>('span');
 export const Button = stylable<HTMLProps<HTMLButtonElement>>('button');
 export const Hr = stylable<HTMLProps<HTMLHRElement>>('hr');
+export const Form = stylable<HTMLProps<HTMLFormElement>>('form');
 export const Text = stylable<FieldProps<any, any>>(BaseText);
 export const TextArea = stylable<FieldProps<any, any>>(BaseTextArea);
+export const RadioGroup = stylable<FieldProps<any, any>>(BaseRadioGroup);
+export const Radio = stylable<ChildFieldProps<any, any>>(BaseRadio);
+export const CheckBox = stylable<FieldProps<any, any>>(BaseCheckBox);
+export const Select = stylable<SelectFieldProps<any, any>>(BaseSelect);
+export const Option = stylable<ChildFieldProps<any, any>>(BaseOption);
 export const Anchor = stylable<HTMLProps<HTMLAnchorElement>>('a');
-
-const CheckBoxBase: FC<HTMLProps<HTMLInputElement>> = props => <input {...props} type="checkbox" />;
-export const CheckBox = stylable(CheckBoxBase);
 
 export const Icon = flow(
   addClasses('bl-rounded bl-p-grid-1 material-icons'),
@@ -52,6 +66,14 @@ export const Icon = flow(
 export const ComponentFormTitle = addClasses(
   'bl-text-lg bl-font-bold bl-text-grey-100 bl-block bl-mb-grid-2',
 )(Title);
+
+export const ComponentFormFieldWrapper = addClasses(
+  'bl-mb-grid-3 bl-w-full',
+)(Div);
+
+export const ComponentFormFieldTitle = addClasses(
+  'bl-mb-grid-2 bl-font-bold bl-text-grey-100',
+)(Div);
 
 export const ComponentFormDescription = addClasses(
   'bl-text-xs bl-text-grey-100 bl-block bl-mb-grid-2 bl-max-w-xl-grid-1',
@@ -74,8 +96,27 @@ export const ComponentFormText = addClasses(
 )(Text);
 
 export const ComponentFormTextArea = addClasses(
-  'bl-resize bl-text-grey-900 bg-grey-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-block bl-my-grid-2 bl-p-grid-1',
+  'bl-resize bl-text-grey-900 bg-grey-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-min-h-grid-16 bl-block bl-my-grid-2 bl-p-grid-1',
 )(TextArea);
+
+export const ComponentFormRadioGroup = addClasses(
+  'bl-mb-grid-2',
+)(RadioGroup);
+
+export const ComponentFormRadio = addClasses(
+  'bl-mr-grid-2 bl-mb-grid-2 align-baseline',
+)(Radio);
+
+export const ComponentFormCheckBox = addClasses(
+  'bl-mr-grid-2 bl-mb-grid-2 align-baseline',
+)(CheckBox);
+
+export const ComponentFormSelect = addClasses(
+  `bl-text-grey-900 bg-grey-100 bl-text-xs bl-w-full
+  bl-min-w-xl-grid-1 bl-block bl-my-grid-2 bl-p-grid-1`,
+)(Select);
+
+export const ComponentFormOption = Option;
 
 export const ComponentFormButton = addClasses(
   'bl-text-grey-200 bl-cursor-pointer hover:bl-text-green',
