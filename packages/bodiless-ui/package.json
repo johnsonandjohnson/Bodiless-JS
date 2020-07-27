@@ -21,7 +21,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run build:css && npm run copy",
+    "build": "tsc -p ./tsconfig.json && npm run build:css && npm run copy && npm run build:api-doc",
     "build:css": "postcss index.tailwind.css -o ./src/bodiless.index.css",
     "build:watch": "npm run build -- --watch",
     "build:api-doc": "typedoc --out doc/api --mode file",

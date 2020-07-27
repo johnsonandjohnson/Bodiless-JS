@@ -30,9 +30,13 @@ const API_DOC_DOCSERVER_PATH = '/Development/API';
 /**
  * adds API link to the navigation tree.
  */
-const updateNavigation = (paths: Tree) => {
+const updateNavigation = (docPath: string, paths: Tree) => {
   const paths$1 = paths;
   if (paths$1.Development !== undefined) {
+    // we need to ensure target directory exists
+    // otherwise an error will be thrown during navbar creation
+    ensureDirSync(pathUtil.join(docPath, API_DOC_DOCSERVER_PATH));
+    // adds an api link to the tree
     (paths$1.Development as Tree).API = {
       'README.md': 'README.md',
     };

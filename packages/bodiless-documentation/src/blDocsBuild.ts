@@ -76,7 +76,7 @@ const blDocsBuild = async () => {
   }
 
   // Let api doc builder to update navigation links in runtime
-  const navigationPaths = apiDocUpdateNavigation(paths);
+  const navigationPaths = apiDocUpdateNavigation(docPath, paths);
 
   try {
     await writeSideBars(docPath, navigationPaths);
