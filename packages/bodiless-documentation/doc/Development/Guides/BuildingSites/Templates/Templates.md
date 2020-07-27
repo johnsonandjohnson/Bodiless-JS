@@ -1,7 +1,7 @@
 # Templates Overview
 
 The site builder can create templates that the site pages use to render the data
-in a similar layout/pattern. Using templates makes the site building and editing
+in a similar layout/pattern. Using templates makes the site building and editing process
 more efficient.
 
 ## Template Benefits
@@ -10,7 +10,7 @@ Using templates provides the following benefits:
 
 * Provide quick way to create similar style or layout of pages.
 * It also allows control or governance over what the site editor can
-  add, edit and remove from the page.
+  add, edit, and remove from the page.
 * It allows site builder to make future changes to all pages built off these
   templates, without editing each individual page.
 
@@ -42,8 +42,8 @@ eg.  An `index.json` file with the following content:
     "#subpage_template": "product_detail"
   }
 ```
-the page at url path "/products", would use the product listing page templatess
-and the sub pages would use the product detail template.  This would require two templates created in the `src/templates` with the names `product_listing.jsx` and `product_detail.jsx`.  We will provide these examples in the next sections of this guide.s
+the page at url path "/products", would use the product listing page templates
+and the sub pages would use the product detail template. This would require two templates created in the `src/templates` with the names `product_listing.jsx` and `product_detail.jsx`. We will provide these examples in the next sections of this guide.
 
 ## Brief Overview of Templates in Examples/Test-Site
 
@@ -56,8 +56,8 @@ in use.
   * View [code of _default template](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/templates/_default.jsx).
   * This provides a simple page with the sites page layout that includes:
     * ![Default template screenshot](/assets/default.jpg ':size=400')
-    * Sites page layout that includes header/footer.
-    * a default flowContainer to add any component the flowContainer supports.
+    * Site's page layout that includes header/footer.
+    * A default flowContainer to add any component the flowContainer supports.
   * The default flowContainer area poses no limitations to what can be added,
     so any components that flowContainer supports can be chosen.
   * Thus this is a very flexible, free-form page allowing site editors complete control over
@@ -124,20 +124,20 @@ for the site builder.
 
 By contrast, the product detail page above has strict enforcement and doesn't
 allow the site editor much variation at all. It defines the product image
-placement, title, and product detail headers only allowing the site editor to
+placement, title, and product detail headers - only allowing the site editor to
 modify the content. They have some flexiblity at the bottom where they can add
 different tout components in the flowContainer area but its still restrictive.
-So while restrictive this allows quick product addition by site editor, as they
+This allows quick product addition by site editor, as they
 only have to enter in the specific production information.
 
-Lets use example of article to create a template with some governance but still
-lot flexiblity. A template could be created that has two columns (2/3 & 1/3)
+Let's use example of article to create a template with some governance but still
+a lot of flexiblity. A template could be created that has two columns (2/3 & 1/3)
 where left side is a flowContainer area that can take any component and the
-right 1/3 sidebar may only takes tout components or Rich Text Editor components.
+right 1/3 sidebar may only take tout components or Rich Text Editor components.
 This allows all articles to have column layouts and enforce uniformity, but what
 is placed into those areas is more flexible and controlled by editor. In the
 sidebar though you limit to components that fit nicely into 1/3 width space.
-This offers fairly high level of flexibility but keeps the articles using this
+This offers flexibility but keeps the articles using this
 template in the layout of two columns without being two restrictive.
 
 The site builder as they design the templates can choose the following:

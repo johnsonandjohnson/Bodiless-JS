@@ -10,14 +10,14 @@ The Product Detail Page has the following componets:
   * Product Title (Rich Text Editor component)
   * Product Image (Image component)
   * Set of product details (Accordion components)
-  * Ratings & Review component by a third party
+  * Ratings & Review component by a third party.
   * FlowContainer that allows specific componets.
 
 The Product Detail Page as designed has some of the following unique characteristics:
 
 * NonEditableTitle:  
   * This enforces the product accordions into the same naming convention for uniformity.  
-  * It saves time when a new product page is created as they site editor doesn't have to enter them.
+  * It saves time when a new product page is created as the site editor doesn't have to enter them.
 
 * ExampleGTMHelmetEvent
   * If Google Tag Manager is in use, this will render the data layer on the page.
