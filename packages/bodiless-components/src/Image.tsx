@@ -185,7 +185,7 @@ const options: BodilessOptions<Props, Data> = {
   },
 };
 
-export const withImagePlaceholder = withPropsFromPlaceholder(['src']);
+export const withImagePlaceholder = withPropsFromPlaceholder(['src', 'alt']);
 
 export const asBodilessImage = asBodilessComponent<HTMLProps<HTMLImageElement>, Data>(options);
 

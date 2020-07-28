@@ -46,13 +46,13 @@ import ImageSvgSrc from './image.svg';
 import ImageWebpSrc from './image.webp';
 import ImageResponsiveSvgSrc from './responsive_asvg.svg';
 
-const ImageAnimatedPng = asEditableImageWithPlaceholder(ImageAnimatedPngSrc)('animatedPng')(Img);
-const ImageGif = asEditableImageWithPlaceholder(ImageGifSrc)('gif')(Img);
-const ImageJpg = asEditableImageWithPlaceholder(ImageJpgSrc)('jpg')(Img);
-const ImagePng = asEditableImageWithPlaceholder(ImagePngSrc)('png')(Img);
-const ImageSvg = asEditableImageWithPlaceholder(ImageSvgSrc)('svg')(Img);
-const ImageWebp = asEditableImageWithPlaceholder(ImageWebpSrc)('webp')(Img);
-const ImageResponsiveSvg = asEditableImageWithPlaceholder(ImageResponsiveSvgSrc)('responsiveSvg')(Img);
+const ImageAnimatedPng = asEditableImageWithPlaceholder({ src: ImageAnimatedPngSrc })('animatedPng')(Img);
+const ImageGif = asEditableImageWithPlaceholder({ src: ImageGifSrc })('gif')(Img);
+const ImageJpg = asEditableImageWithPlaceholder({ src: ImageJpgSrc, alt: 'Editable JPG Image' })('jpg')(Img);
+const ImagePng = asEditableImageWithPlaceholder({ src: ImagePngSrc })('png')(Img);
+const ImageSvg = asEditableImageWithPlaceholder({ src: ImageSvgSrc })('svg')(Img);
+const ImageWebp = asEditableImageWithPlaceholder({ src: ImageWebpSrc })('webp')(Img);
+const ImageResponsiveSvg = asEditableImageWithPlaceholder({ src: ImageResponsiveSvgSrc })('responsiveSvg')(Img);
 
 const LinkableImageAnimatedPng = asLinkableImage(ImageAnimatedPng)('animatedPngLink')(A);
 const LinkableImageGif = asLinkableImage(ImageGif)('gifLink')(A);
@@ -86,7 +86,7 @@ export default (props: any) => (
 
         <ImageWrapper>
           <ImageTitle>PNG</ImageTitle>
-          <ImagePng />
+          <ImagePng alt="Editable PNG Image" />
         </ImageWrapper>
 
         <ImageWrapper>

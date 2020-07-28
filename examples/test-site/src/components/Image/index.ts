@@ -28,7 +28,7 @@ import { asEditableImage } from '../Elements.token';
 
 type Data = {
   src: string;
-  alt: string;
+  alt?: string;
 };
 
 // Allows to set default content for image based component.
@@ -42,8 +42,8 @@ const asContentfulImage = (nodeContent: Partial<Data>) => (nodeKey: string) => f
 const DEFAULT_IMAGE_NODE_KEY = 'image';
 const DEFAULT_LINK_NODE_KEY = 'link';
 
-const asEditableImageWithPlaceholder = (placeholder: string) => (nodeKey: string) => flowRight(
-  withImagePlaceholder({ src: placeholder }),
+const asEditableImageWithPlaceholder = (placeholder: Data) => (nodeKey: string) => flowRight(
+  withImagePlaceholder(placeholder),
   asEditableImage(nodeKey),
 );
 const asLinkableImage = (ImageComponent: ComponentType<any>) => (nodeKey: string) => flowRight(
@@ -53,7 +53,7 @@ const asLinkableImage = (ImageComponent: ComponentType<any>) => (nodeKey: string
 const asSquareImage = asEditableImage;
 const SquareImage = asSquareImage(DEFAULT_IMAGE_NODE_KEY)(Img);
 const SquareLinkableImage = asLinkableImage(SquareImage)(DEFAULT_LINK_NODE_KEY)(A);
-const asLandscapeImage = asEditableImageWithPlaceholder(landscapeImage);
+const asLandscapeImage = asEditableImageWithPlaceholder({ src: landscapeImage });
 const LandscapeImage = asLandscapeImage(DEFAULT_IMAGE_NODE_KEY)(Img);
 const LandscapeLinkableImage = asLinkableImage(LandscapeImage)(DEFAULT_LINK_NODE_KEY)(A);
 
