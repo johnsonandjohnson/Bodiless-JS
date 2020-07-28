@@ -16,6 +16,7 @@ import React, { Component } from 'react';
 import { pick } from 'lodash';
 import { DefaultContentNode, NodeProvider } from '@bodiless/core';
 import GatsbyMobxStore, { DataSource } from './GatsbyMobxStore';
+import OnStoreErrorNotification from './OnStoreErrorNotification';
 
 type State = {
   store: GatsbyMobxStore,
@@ -69,10 +70,12 @@ class GatsbyNodeProvider extends Component<Props, State> implements DataSource {
   }
 
   render() {
+    const { store } = this.state;
     const { children } = this.props;
     return (
       <NodeProvider node={this.getRootNode('Site')} collection="site">
         <NodeProvider node={this.getRootNode('Page')} collection="_default">
+          <OnStoreErrorNotification hasError={store.hasError} />
           {children}
         </NodeProvider>
       </NodeProvider>

@@ -54,9 +54,11 @@ import {
   useActivateOnEffectActivator,
 } from './ActivateContext';
 import {
+  NotificationProvider,
   useNotifications,
   useNotify,
 } from './NotificationProvider';
+import useNotificationButton from './withNotificationButton';
 import withChild from './withChild';
 import asBodilessComponent, { withActivatorWrapper } from './asBodilessComponent';
 import type { Options as BodilessOptions, AsBodiless } from './asBodilessComponent';
@@ -64,6 +66,7 @@ import { useUI as useFormUI } from './components/ContextMenuItem';
 import withCompoundForm, { useRegisterSnippet } from './withCompoundForm';
 import type { Snippet as FormSnippet } from './withCompoundForm';
 import withEditFormSnippet from './withEditFormSnippet';
+import useSwitcherButton from './useSwitcherButton';
 
 export * from './components';
 export {
@@ -117,6 +120,9 @@ export {
   useEditToggle,
   useNotifications,
   useNotify,
+  NotificationProvider,
+  useNotificationButton,
+  useSwitcherButton,
 };
 
 export type {
