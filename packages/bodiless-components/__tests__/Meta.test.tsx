@@ -16,13 +16,18 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { flowRight } from 'lodash';
 import { shallow, mount } from 'enzyme';
-import { DefaultContentNode, NodeProvider } from '@bodiless/core';
+import {
+  DefaultContentNode,
+  NodeProvider,
+  PageEditContext,
+  useEditContext,
+} from '@bodiless/core';
 import { withMeta, withTitle, withMetaHtml } from '../src/Meta/Meta';
 
 const getMockNode = (data: string) => {
   const getters = {
     getNode: jest.fn(() => ({ content: data })),
-    getKeys: jest.fn(() => ['foo']),
+    getKeys: jest.fn(),
   };
   const actions = {
     setNode: jest.fn(),
@@ -31,24 +36,37 @@ const getMockNode = (data: string) => {
   return new DefaultContentNode(actions, getters, '');
 };
 
+class EditOnlyContext extends PageEditContext {
+  // eslint-disable-next-line class-methods-use-this
+  get isEdit() { return true; }
+}
+class NonEditContext extends PageEditContext {
+  // eslint-disable-next-line class-methods-use-this
+  get isEdit() { return false; }
+}
+
 describe('Meta data process', () => {
   describe('withMeta', () => {
-    it('Add meta data to Helmet', () => {
-      const data = {
+    // dataSet array, to be expendable for future test cases.
+    const dataSet = [
+      {
         name: 'data1',
         label: 'Date 1',
         key: 'data-1',
         content: Math.random().toString(),
-      };
+      },
+    ];
+    it('Add meta data to Helmet', () => {
+      const data = dataSet[0];
       const withMetaPageData = withMeta({
         name: data.name,
         label: data.label,
       });
 
-      const PageType = flowRight(withMetaPageData(data.key))(Helmet);
+      const PageMeta = flowRight(withMetaPageData(data.key))(Helmet);
       const TestMetaComponent = () => (
         <NodeProvider node={getMockNode(data.content)}>
-          <PageType />
+          <PageMeta />
         </NodeProvider>
       );
       const wrapper = mount(<TestMetaComponent />);
@@ -60,6 +78,55 @@ describe('Meta data process', () => {
       // withMeta has Sidecar applied.
       expect(wrapper.find('EndSidecarNodes')).toHaveLength(1);
       expect(wrapper.find('StartSidecarNodes')).toHaveLength(1);
+      wrapper.unmount();
+    });
+
+    it('adds meta form snippet when UI is editable', () => {
+      const data = dataSet[0];
+      const withMetaPageData = withMeta({
+        name: data.name,
+        label: data.label,
+      });
+
+      const PageType = flowRight(withMetaPageData(data.key))(Helmet);
+      const TestMetaComponent = () => {
+        const oldContext = useEditContext();
+        const newContext = new EditOnlyContext(oldContext);
+        return (
+          <PageEditContext.Provider value={newContext}>
+            <NodeProvider node={getMockNode(data.content)}>
+              <PageType />
+            </NodeProvider>
+          </PageEditContext.Provider>
+        );
+      };
+      const wrapper = mount(<TestMetaComponent />);
+      expect(wrapper.find('WithEditFormSnippet')).toHaveLength(1);
+      wrapper.unmount();
+    });
+
+    it('does NOT add meta form snippet when UI is not editable', () => {
+      const data = dataSet[0];
+      const withMetaPageData = withMeta({
+        name: data.name,
+        label: data.label,
+      });
+
+      const PageType = flowRight(withMetaPageData(data.key))(Helmet);
+      const TestMetaComponent = () => {
+        const oldContext = useEditContext();
+        const newContext = new NonEditContext(oldContext);
+        return (
+          <PageEditContext.Provider value={newContext}>
+            <NodeProvider node={getMockNode(data.content)}>
+              <PageType />
+            </NodeProvider>
+          </PageEditContext.Provider>
+        );
+      };
+      const wrapper = mount(<TestMetaComponent />);
+      expect(wrapper.find('WithEditFormSnippet')).toHaveLength(0);
+      wrapper.unmount();
     });
   });
 
@@ -76,10 +143,10 @@ describe('Meta data process', () => {
         label: data.label,
       });
 
-      const PageType = flowRight(withMetaPageTitle(data.key))(Helmet);
+      const PageMeta = flowRight(withMetaPageTitle(data.key))(Helmet);
       const TestMetaComponent = () => (
         <NodeProvider node={getMockNode(data.content)}>
-          <PageType />
+          <PageMeta />
         </NodeProvider>
       );
       const wrapper = mount(<TestMetaComponent />);
@@ -88,6 +155,7 @@ describe('Meta data process', () => {
       // withTitle has Sidecar applied.
       expect(wrapper.find('EndSidecarNodes')).toHaveLength(1);
       expect(wrapper.find('StartSidecarNodes')).toHaveLength(1);
+      wrapper.unmount();
     });
   });
 });
