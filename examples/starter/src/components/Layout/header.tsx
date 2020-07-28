@@ -64,7 +64,7 @@ const HeaderClean: FC<Props> = ({ components }) => {
 const asSiteHeader = flow(
   designable(headerComponents),
   withDesign({
-    Menu: withNodeKey('MainMenu', 'site'),
+    Menu: withNodeKey({ nodeKey: 'MainMenu', nodeCollection: 'site' }),
   }),
 );
 
