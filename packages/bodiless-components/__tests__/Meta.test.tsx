@@ -15,90 +15,80 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { flowRight } from 'lodash';
-import { shallow } from 'enzyme';
-import { withMetaTitle, withMeta, withMetaHtml } from '../src/Meta/Meta';
+import { shallow, mount } from 'enzyme';
+import { DefaultContentNode, NodeProvider } from '@bodiless/core';
+import { withMeta, withTitle, withMetaHtml } from '../src/Meta/Meta';
 
-const core = require('@bodiless/core');
-
-jest.mock('@bodiless/core');
-
-const setMockNode = (items: any) => {
-  const node = {
-    child: (key: string) => ({
-      data: items[key],
-    }),
+const getMockNode = (data: string) => {
+  const getters = {
+    getNode: jest.fn(() => ({ content: data })),
+    getKeys: jest.fn(() => ['foo']),
   };
-  core.useNode.mockReturnValue({ node });
-  return node;
+  const actions = {
+    setNode: jest.fn(),
+    deleteNode: jest.fn(),
+  };
+  return new DefaultContentNode(actions, getters, '');
 };
 
-const TitleMeta = flowRight(withMetaTitle('page-title', ''))(Helmet);
+describe('Meta data process', () => {
+  describe('withMeta', () => {
+    it('Add meta data to Helmet', () => {
+      const data = {
+        name: 'data1',
+        label: 'Date 1',
+        key: 'data-1',
+        content: Math.random().toString(),
+      };
+      const withMetaPageData = withMeta({
+        name: data.name,
+        label: data.label,
+      });
 
-describe('withMetaTitle', () => {
-  it('add a title in the Helmet component', () => {
-    const mockItem = {
-      'page-title': {
-        content: 'test-title',
-      },
-    };
-    setMockNode(mockItem);
-    let wrapper = shallow(<TitleMeta />);
-    expect(wrapper.childAt(0).type()).toEqual('title');
-    expect(wrapper.childAt(0).text()).toEqual('test-title');
+      const PageType = flowRight(withMetaPageData(data.key))(Helmet);
+      const TestMetaComponent = () => (
+        <NodeProvider node={getMockNode(data.content)}>
+          <PageType />
+        </NodeProvider>
+      );
+      const wrapper = mount(<TestMetaComponent />);
+      const helmet = Helmet.peek() as any;
+      expect(helmet.metaTags).toHaveLength(1);
+      expect(helmet.metaTags[0].name).toBe(data.name);
+      expect(helmet.metaTags[0].content).toBe(data.content);
 
-    // Test empty values will generate emtpy tag:
-    const emptyMockItem = {
-      'page-title': {
-        content: '',
-      },
-    };
-    setMockNode(emptyMockItem);
-    wrapper = shallow(<TitleMeta />);
-    expect(wrapper.childAt(0).type()).toEqual('title');
-    expect(wrapper.childAt(0).text()).toHaveLength(0);
+      // withMeta has Sidecar applied.
+      expect(wrapper.find('EndSidecarNodes')).toHaveLength(1);
+      expect(wrapper.find('StartSidecarNodes')).toHaveLength(1);
+    });
   });
-});
 
-const PageTypeMeta = flowRight(withMeta('pageType', 'pageType', ''))(Helmet);
-const PageDescriptionMeta = flowRight(
-  withMeta('description', 'description', ''),
-)(Helmet);
-describe('withMetaTag', () => {
-  it('add a Meta tag to the Helmet component', () => {
-    const mockItems = {
-      pageType: {
-        content: 'test-type',
-      },
-    };
-    setMockNode(mockItems);
-    const wrapper = shallow(<PageTypeMeta />);
-    // Expect the tag to be <meta>.
-    expect(wrapper.childAt(0).type()).toEqual('meta');
-    expect(wrapper.childAt(0).prop('name')).toEqual('pageType');
-    // Expect the value property name to exist and the value to be 'test-type'.
-    expect(wrapper.find('meta').prop('content')).toEqual('test-type');
+  describe('withTitle', () => {
+    it('Add title to Helmet', () => {
+      const data = {
+        name: 'title1',
+        label: 'Title 1',
+        key: 'title-1',
+        content: Math.random().toString(),
+      };
+      const withMetaPageTitle = withTitle({
+        name: data.name,
+        label: data.label,
+      });
 
-    const mockDescriptionItems = {
-      description: {
-        content: 'test-description',
-      },
-    };
-    setMockNode(mockDescriptionItems);
-    const descriptionMetaWrapper = shallow(<PageDescriptionMeta />);
-
-    expect(descriptionMetaWrapper.childAt(0).type()).toEqual('meta');
-    expect(descriptionMetaWrapper.childAt(0).prop('name')).toEqual(
-      'description',
-    );
-    // Expect the value property name to exist and the value to be 'test-type'.
-    expect(descriptionMetaWrapper.find('meta').prop('content')).toEqual(
-      'test-description',
-    );
-    // There should be no meta tags when the data is empty.
-    const mockEmtpyMetaItem = {};
-    setMockNode(mockEmtpyMetaItem);
-    const emptyMetaWrapper = shallow(<PageDescriptionMeta />);
-    expect(emptyMetaWrapper.find('meta')).toHaveLength(0);
+      const PageType = flowRight(withMetaPageTitle(data.key))(Helmet);
+      const TestMetaComponent = () => (
+        <NodeProvider node={getMockNode(data.content)}>
+          <PageType />
+        </NodeProvider>
+      );
+      const wrapper = mount(<TestMetaComponent />);
+      const helmet = Helmet.peek() as any;
+      expect(helmet.title).toBe(data.content);
+      // withTitle has Sidecar applied.
+      expect(wrapper.find('EndSidecarNodes')).toHaveLength(1);
+      expect(wrapper.find('StartSidecarNodes')).toHaveLength(1);
+    });
   });
 });
 
