@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@babel/core": "^7.9.0",
-    "@bodiless/accessibility": "^0.0.51",
     "@bodiless/backend": "^0.0.51",
     "@bodiless/bv": "^0.0.51",
     "@bodiless/cli": "^0.0.51",
@@ -26,7 +25,6 @@
     "@bodiless/gatsby-theme-bodiless": "^0.0.51",
     "@bodiless/layouts": "^0.0.51",
     "@bodiless/layouts-ui": "^0.0.51",
-    "@bodiless/migration-tool": "^0.0.51",
     "@bodiless/organisms": "^0.0.51",
     "@bodiless/psh": "^0.0.51",
     "@bodiless/richtext": "^0.0.51",
