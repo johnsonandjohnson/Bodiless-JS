@@ -13,13 +13,17 @@
  */
 
 import React, { FC, ComponentType, HTMLProps } from 'react';
-import { Link, useStaticQuery, graphql } from 'gatsby';
+import { Link } from 'gatsby';
+import { flow } from 'lodash';
 import {
   designable,
   DesignableComponentsProps,
   Div,
   Img,
+  replaceWith,
+  withDesign,
 } from '@bodiless/fclasses';
+import { asEditableImage } from '../Elements.token';
 
 type LogoComponents = {
   SiteReturn: ComponentType<any>,
@@ -27,6 +31,7 @@ type LogoComponents = {
 };
 export type Props = DesignableComponentsProps<LogoComponents> & HTMLProps<HTMLElement>;
 
+// SiteLink uses Gatsby Link, so we can benefit from gatsby performance that page doesn't reload.
 const logoComponents:LogoComponents = {
   SiteReturn: Div,
   SiteLogo: Img,
@@ -39,24 +44,24 @@ const LogoClean: FC<Props> = ({ components }) => {
     SiteLink,
   } = components;
 
-  const data = useStaticQuery(graphql`
-  query HeaderQuery {
-    site {
-      siteMetadata {
-        logo
-      }
-    }
-  }
-  `);
-
   return (
     <SiteReturn>
       <SiteLink to="/">
-        <SiteLogo src={data.site.siteMetadata.logo} alt="Return To Home" />
+        <SiteLogo />
       </SiteLink>
     </SiteReturn>
   );
 };
 
-const Logo = designable(logoComponents)(LogoClean);
+// Override asEditableImage nodekey to store in site nodeCollection.
+const LogoImg = asEditableImage({ nodeKey: 'image', nodeCollection: 'site' })(Img);
+
+const asLogo = flow(
+  designable(logoComponents),
+  withDesign({
+    SiteLogo: replaceWith(LogoImg),
+  }),
+);
+
+const Logo = asLogo(LogoClean);
 export default Logo;

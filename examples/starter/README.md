@@ -1,4 +1,4 @@
-8 Gatsby Starter for [BodilessJS](https://github.com/johnsonandjohnson/Bodiless-JS)
+# Gatsby Starter for [BodilessJS](https://github.com/johnsonandjohnson/Bodiless-JS)
 
 ## Prerequisites
 
@@ -18,6 +18,7 @@ cd bodiless-js
 npm run ci
 npm run new /path/to/new/site
 ```
+Recommend path for the new site is outside the bodiless-js repo.  i.e. ../mysite.
 
 This will copy the starter to the specified location (which defaults to
 `~/gatsby-starter-bodiless`), initialize a new git repository, and install all
@@ -44,11 +45,13 @@ npm run serve
 Visit http://localhost:9000/ in your browser to view the site.
 
 ### Handling environment variables with `.env.site`
-As part of the installation process, you may want to configure specific environment variables for the site. You may do so by adding or updating `.env.site` file in the root folder of the site. This file allows us to overwrite env variables defined in `@bodiless` packages and/or add new env variables. Make sure you regenerated env variables after you've changed it by running any of the following:
+As part of the installation process, you may want to configure specific
+environment variables for the site. You may do so by adding or updating
+`.env.site` file in the root folder of the site. This file allows us to
+overwrite env variables defined in `@bodiless` packages and/or add new env
+variables. 
 
-* `npm run build:env-vars` - To regenerate env variables only.
-* `npm run build` - It will regenerate env vars as part of the `build` script.
-* `npm run start` - It will regenerate env vars as part of the `start` script.
-
+The primary variable that should be set is the SITE_URL, which can be set to
+your production absolute URL and is used by Canonical & Sitemap.xml plugins.
 
 > Note: Official Gatsby Stater (installable via `gatsby new`) is coming soon!

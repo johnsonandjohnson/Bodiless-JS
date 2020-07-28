@@ -15,7 +15,6 @@
 import React from 'react';
 import { flow, flowRight } from 'lodash';
 import Helmet from 'react-helmet';
-import { StaticQuery, graphql } from 'gatsby';
 import { Div } from '@bodiless/fclasses';
 import {
   withMeta,
@@ -64,26 +63,15 @@ const Container = flow(
 )(Div);
 
 const Layout = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `}
-    render={data => (
-      <>
-        <SiteHelmet />
-        <SiteGTMHelmetEvent />
-        <SiteHeader />
-        <Container>{children}</Container>
-        <SiteFooter siteTitle={data.site.siteMetadata.title} />
-      </>
-    )}
-  />
+  <>
+    <SiteHelmet />
+    <SiteGTMHelmetEvent />
+    <SiteHeader />
+    <Container>
+      {children}
+    </Container>
+    <SiteFooter />
+  </>
 );
 
 export default Layout;

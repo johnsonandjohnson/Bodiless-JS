@@ -1,4 +1,13 @@
 const express = require('express');
+
+const activeEnv = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
+
+require('dotenv').config({
+  path: `.env.${activeEnv}`,
+});
+
+const SITEURL = process.env.SITE_URL;
+
 // Gatsby plugins list.
 const plugins = [
   'gatsby-plugin-root-import',
@@ -12,8 +21,7 @@ const plugins = [
   {
     resolve: 'gatsby-plugin-canonical-urls',
     options: {
-      // Set the siteUrl to the absolute production url i.e. https://example.com
-      siteUrl: '/',
+      siteUrl: SITEURL,
     },
   },
   {
@@ -26,9 +34,7 @@ module.exports = {
     app.use('/___docs', express.static('doc'));
   },
   siteMetadata: {
-    title: 'BodilessJS Starter',
-    logo: '/images/bodiless_logo.png',
-    siteUrl: 'https://example.com',
+    siteUrl: SITEURL,
   },
   plugins,
 };
