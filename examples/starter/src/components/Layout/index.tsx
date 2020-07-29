@@ -25,6 +25,11 @@ import {
 } from '@bodiless/components';
 import Header from './header';
 import Footer from './footer';
+/*
+ * Comment out above import & uncomment below import, to use a
+ * simple non-editable, non-designable footer.
+ */
+// import Footer from './footerBasic';
 import { asPageContainer, asYMargin } from '../Elements.token';
 import { asSiteHeader, asSiteFooter } from './token';
 
