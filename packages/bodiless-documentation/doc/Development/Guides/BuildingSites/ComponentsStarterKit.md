@@ -27,6 +27,7 @@ For full code, please
 [review code](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Layout)
 
 The HOC's used in this file are responsible for both rendering and editing meta-tags:
+
 #### Adding SEO form to Editor interface
 The `withMetaForm` provides ab ability to insert a SEO form
 within the editor inferface for the site editor to manipulate meta date per
@@ -44,27 +45,42 @@ which are not exposed to the editor for modification.
 
 For full information on adding metadata, please read [Meta](TBD)
 
-### Site Title & Logo
+### Logo
 
-* This can be configured in `gatsby-config.js` by setting SiteMetaData.
+* The Logo is an editable image that can be uploaded in the editor.
 
+### Favicon
+
+* Can be updated by replacing the image in `src/images/favicon.png` and continue
+  to use the same filename.
+* Favion size recommendation is 
+  * at least as big as the largest icon being generated (512x512 by default).
+  * square (if it’s not, transparent bars will automatically be added to make it square)
+  * of one of the following formats: JPEG, PNG, WebP, TIFF, GIF or SVG.
+
+The favicon path & image is currently hardcoded as part
+[gatsby-theme-bodiless](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/packages/gatsby-theme-bodiless/gatsby-config.js)  
+and it uses
+[gatsby-plugin-manifest](https://www.gatsbyjs.org/packages/gatsby-plugin-manifest/)
+to generate a set of favicons for your site to use. For more information on
+options, please read the documentation for
+[gatsby-plugin-manifest](https://www.gatsbyjs.org/packages/gatsby-plugin-manifest/).
+
+If desired, this can be overrode by specifying custom options within the site's
+`gatsby-config.js`.
+
+e.g.
 ```
-  siteMetadata: {
-    title: 'BodilessJS Starter',
-    logo: '/images/bodiless_logo.png',
+const plugins = [
+  {
+    resolve: `gatsby-plugin-manifest`,
+    options: {
+      icon: `src/images/customfavicon.gif`,
+      legacy: false,
+    },  
   },
+];
 ```
-
-Both the desktop menu and mobile burger menu will use the logo defined here.
-The footer will use title in the copyright.
-
-Note: This is a vanilla Gatsby pattern and there is nothing unique that Bodiless
-is doing with it.
-
-### Site Favicon
-
-* Can be updated in `src/components/Layout/index.jsx` by defining location of
-  favicon.
 
 ### Addition of other components in the Header & Footer
 
@@ -77,7 +93,7 @@ should be stored at site level. This can be done via specifying
 
 e.g.
 ```
- <Menu nodeKey="MainMenu" nodeCollection="site" />
+asEditable({ nodeKey: 'copyright', nodeCollection: 'site' }, 'Insert Copyright', 'site')
 ```
 
 ## Menu & Burger Menu

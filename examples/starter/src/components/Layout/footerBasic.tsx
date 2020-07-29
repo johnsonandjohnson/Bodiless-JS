@@ -13,14 +13,45 @@
  */
 
 // Offered as simplistic non-editable for tutorial purposes.
-import React from 'react';
+// This file can be deleted if you are using footer.tsx.
+import React, { FC, ComponentType, HTMLProps } from 'react';
+import {
+  designable,
+  DesignableComponentsProps,
+  DesignableProps,
+  Div,
+} from '@bodiless/fclasses';
 
-const Footer = () => (
-  <div className="container mx-auto py-3">
-    <p>
-      © Copyright 2020 Johnson &amp; Johnson
-    </p>
-  </div>
-);
+type FooterComponents = {
+  Wrapper: ComponentType<any>,
+  Container: ComponentType<any>,
+};
 
+export type Props = DesignableComponentsProps<FooterComponents> & HTMLProps<HTMLElement>;
+
+const footerComponents:FooterComponents = {
+  Wrapper: Div,
+  Container: Div,
+};
+
+const FooterClean: FC<DesignableProps> = ({ components }) => {
+  const {
+    Wrapper,
+    Container,
+  } = components;
+
+  return (
+    <Wrapper>
+      <Container>
+        <div className="container mx-auto py-3">
+          <p>
+            © Copyright 2020 Johnson &amp; Johnson
+          </p>
+        </div>
+      </Container>
+    </Wrapper>
+  );
+};
+
+const Footer = designable(footerComponents)(FooterClean);
 export default Footer;
