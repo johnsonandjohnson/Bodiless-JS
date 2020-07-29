@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { ContextMenuForm } from './contextMenuForm';
 import { useRegisterMenuOptions } from './PageContextProvider';
 import { useNotifications } from './NotificationProvider';
@@ -56,13 +56,9 @@ const useNotificationButton = () => {
   const context = useEditContext();
   const { notifications } = useNotifications();
   const hasNotifications = notifications.length > 0;
-  const [isActive, setIsActive] = useState(hasNotifications);
-  if (hasNotifications !== isActive) {
-    setIsActive(hasNotifications);
-  }
   useEffect(() => {
     context.refresh();
-  }, [isActive]);
+  }, [hasNotifications]);
   const getMenuOptions = useCallback(() => [{
     name: 'Notifications',
     label: 'Alerts',
