@@ -13,6 +13,7 @@
   },
   "files": [
     "/lib",
+    "/doc",
     "/bodiless.docs.json"
   ],
   "repository": {
@@ -23,9 +24,10 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json ",
+    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
+    "build:api-doc": "typedoc --out doc/api --mode file",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "peerDependencies": {
     "react": "^16.8.1"
