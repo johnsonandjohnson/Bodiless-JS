@@ -14,7 +14,7 @@
 
 import React, { ComponentType, FC } from 'react';
 import {
-  union, difference, capitalize, flow,
+  union, difference, capitalize,
 } from 'lodash';
 
 type Classes = string | string[];
@@ -54,10 +54,6 @@ const modifyClassesIf = (operation: 'add' | 'remove') => (condition: Condition) 
     ModifyClasses.displayName = `${capitalize(operation)}Classes`;
     return ModifyClasses;
   };
-  hoc.addClassesIf = (condition$1: Condition) => (classes$1?: Classes) => flow(hoc as HOC, modifyClassesIf('add')(condition$1)(classes$1) as HOC);
-  hoc.addClasses = (classes$1?: Classes) => flow(hoc as HOC, modifyClassesIf('add')(alwaysTrueCondition)(classes$1) as HOC);
-  hoc.removeClassesIf = (condition$1: Condition) => (classes$1?: Classes) => flow(modifyClassesIf('remove')(condition$1)(classes$1) as HOC, hoc as HOC);
-  hoc.removeClasses = (classes$1?: Classes) => flow(modifyClassesIf('remove')(alwaysTrueCondition)(classes$1) as HOC, hoc as HOC);
   hoc.flow = hoc as HOC;
   return hoc;
 };

@@ -18,7 +18,11 @@ import {
   ContextWrapperProps, ContextWrapper as PlainContextWrapper,
 } from '@bodiless/core';
 import {
-  addClasses, withoutProps, hasProp, flowIf,
+  addClasses,
+  withoutProps,
+  hasProp,
+  flowIf,
+  removeClasses,
 } from '@bodiless/fclasses';
 import { Div } from '@bodiless/ui';
 
@@ -28,9 +32,12 @@ type VariantProps = {
 
 const ContextWrapperDiv = flow(
   withoutProps<VariantProps>(['isActive']),
-  addClasses('bl-border bl-border-transparent').flow,
+  addClasses('bl-border bl-border-transparent'),
   flowIf(hasProp('isActive'))(
-    addClasses('bl-border-red').removeClasses('bl-border-transparent'),
+    flow(
+      addClasses('bl-border-red'),
+      removeClasses('bl-border-transparent'),
+    ),
   ),
 )(Div);
 
