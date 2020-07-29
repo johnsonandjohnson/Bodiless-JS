@@ -58,7 +58,7 @@ process.env.ROBOTSTXT_POLICY = JSON.stringify(robotsTxtPolicy);
 
 module.exports = {
   developMiddleware: app => {
-    app.use('/___docs', express.static('doc'));
+    app.use('/___docs', express.static('doc', { fallthrough: false }));
   },
   siteMetadata: {
     siteUrl: 'https://www.example.com',

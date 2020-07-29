@@ -19,10 +19,11 @@
     "access": "public"
   },
   "scripts": {
-    "build": "npm run copy && tsc -p ./tsconfig.json",
+    "build": "npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
+    "build:api-doc": "typedoc --out doc/api --mode file",
     "lint": "tslint ./src/**/*.ts?x",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
     "copy": "copyfiles -u 3 \"./src/components/MainMenu/*.css\" \"./lib/components/MainMenu/\""
   },
   "dependencies": {

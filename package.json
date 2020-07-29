@@ -13,6 +13,7 @@
     "build:watch": "cross-env NODE_ENV=development lerna run build:watch --parallel",
     "build:env-vars": "cross-env NODE_ENV=production lerna run build:env-vars --stream",
     "build:doc": "cross-env NODE_ENV=production lerna run build:doc --stream",
+    "build:api-doc": "cross-env NODE_ENV=production lerna run build:api-doc --stream",
     "clean": "lerna run clean && rimraf .eslintcache examples/*/.env.development examples/*/.env.production",
     "cy:run": "cypress run --browser chrome --record --key 0dcfb624-e152-453a-9375-aa710adb57ab",
     "copyright": "node ./scripts/add-copyright",
@@ -112,6 +113,8 @@
     "ts-jest": "^24.0.2",
     "tslint": "^5.12.1",
     "tslint-config-airbnb": "^5.11.1",
+    "typedoc": "^0.17.8",
+    "typedoc-plugin-markdown": "^2.3.1",
     "typescript": "^3.9.5"
   },
   "repository": {
