@@ -25,8 +25,12 @@ import Header from './header';
 import Footer from './footer';
 import SeoHelmet from './meta';
 import { asPageContainer, asYMargin } from '../Elements.token';
+import { asSiteHeader, asSiteFooter } from './token';
 
-const ExampleGTMHelmetEvent = flowRight(
+const SiteHeader = asSiteHeader(Header);
+const SiteFooter = asSiteFooter(Footer);
+
+const SiteGTMHelmetEvent = flowRight(
   asBodilessHelmet('datalayer'),
   withEvent(
     'digitalData',
@@ -54,7 +58,6 @@ const Layout = ({ children }) => (
         site {
           siteMetadata {
             title
-            logo
           }
         }
       }
@@ -62,10 +65,10 @@ const Layout = ({ children }) => (
     render={data => (
       <>
         <SeoHelmet />
-        <ExampleGTMHelmetEvent />
-        <Header siteLogo={data.site.siteMetadata.logo} />
+        <SiteGTMHelmetEvent />
+        <SiteHeader />
         <Container>{children}</Container>
-        <Footer siteTitle={data.site.siteMetadata.title} />
+        <SiteFooter siteTitle={data.site.siteMetadata.title} />
       </>
     )}
   />

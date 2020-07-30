@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT, PropsWithChildren } from 'react';
+import React, { ComponentType as CT, PropsWithChildren, HTMLProps } from 'react';
 import { HelmetProps } from 'react-helmet';
 import {
   useNode, withNodeKey, withNode, withSidecarNodes, withNodeDataHandlers, withoutProps,
@@ -34,7 +34,7 @@ type BasicOptions = {
 
 type Options = {
   label: string;
-  useFormElement?: () => CT<any>,
+  useFormElement?: () => CT<HTMLProps<HTMLElement>>,
   placeholder?: string;
 } & BasicOptions;
 

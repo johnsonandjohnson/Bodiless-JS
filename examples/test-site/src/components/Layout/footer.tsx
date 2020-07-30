@@ -13,20 +13,13 @@
  */
 
 import React, { FC, ComponentType, HTMLProps } from 'react';
-import { flow } from 'lodash';
 import {
-  addClasses,
-  withDesign,
   designable,
   DesignableComponentsProps,
   DesignableProps,
   Div,
 } from '@bodiless/fclasses';
 import { Editable } from '@bodiless/components';
-import {
-  asPageContainer,
-  asPrimaryColorBackground,
-} from '../Elements.token';
 
 const today = new Date();
 const date = new Intl.DateTimeFormat().format(today);
@@ -46,7 +39,7 @@ const footerComponents:FooterComponents = {
   Container: Div,
 };
 
-const Footer: FC<DesignableProps & { siteTitle: string }> = ({ siteTitle, components }) => {
+const FooterClean: FC<DesignableProps & { siteTitle: string }> = ({ siteTitle, components }) => {
   const {
     Wrapper,
     Container,
@@ -68,12 +61,5 @@ const Footer: FC<DesignableProps & { siteTitle: string }> = ({ siteTitle, compon
   );
 };
 
-const asSiteFooter = flow(
-  designable(footerComponents),
-  withDesign({
-    Wrapper: asPrimaryColorBackground,
-    Container: flow(asPageContainer, addClasses('py-3')),
-  }),
-);
-
-export default asSiteFooter(Footer);
+const Footer = designable(footerComponents)(FooterClean);
+export default Footer;
