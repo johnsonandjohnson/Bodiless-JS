@@ -12,21 +12,24 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { observer } from 'mobx-react-lite';
-import { useNotify } from '@bodiless/core';
-import { useGatsbyStoreProvider } from './GatsbyStoreProvider';
+import React, { useContext } from 'react';
 
-const STORE_ERROR_NOTIFICATION_ID = 'STORE_ERROR_NOTIFICATION_ID';
+type GatsbyStoreContextProps = {
+  hasError: () => boolean;
+};
 
-const OnStoreErrorNotification = observer(() => {
-  const { hasError } = useGatsbyStoreProvider();
-  const notifications = hasError() ? [{
-    id: STORE_ERROR_NOTIFICATION_ID,
-    message: 'There is an error with saving data',
-  }] : [];
-  useNotify(notifications);
-  return <></>;
+const GatsbyStoreContext = React.createContext<GatsbyStoreContextProps>({
+  hasError: () => false,
 });
 
-export default OnStoreErrorNotification;
+const GatsbyStoreProvider: React.FC<GatsbyStoreContextProps> = ({ children, hasError }) => {
+  const contextValue = {
+    hasError,
+  };
+  return <GatsbyStoreContext.Provider value={contextValue}>{children}</GatsbyStoreContext.Provider>;
+};
+
+const useGatsbyStoreProvider = () => useContext(GatsbyStoreContext);
+
+export default GatsbyStoreProvider;
+export { useGatsbyStoreProvider };

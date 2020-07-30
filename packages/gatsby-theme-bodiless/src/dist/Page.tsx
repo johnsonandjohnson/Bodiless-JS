@@ -28,6 +28,7 @@ import GatsbyNodeProvider, {
 import GatsbyPageProvider, { Props as PageProviderProps } from './GatsbyPageProvider';
 import useNewPageButton from './useNewPageButton';
 import useGitButtons from './useGitButtons';
+import OnStoreErrorNotification from './OnStoreErrorNotification';
 
 type FinalUI = {
   ContextWrapper: ComponentType<ContextWrapperProps>;
@@ -62,19 +63,20 @@ const Page: FC<Props> = observer(({ children, ui, ...rest }) => {
   const { PageEditor: Editor, ContextWrapper: Wrapper } = getUI(ui);
   if (process.env.NODE_ENV === 'development') {
     return (
-      <NotificationProvider>
-        <GatsbyNodeProvider {...rest}>
-          <GatsbyPageProvider pageContext={rest.pageContext}>
+      <GatsbyNodeProvider {...rest}>
+        <GatsbyPageProvider pageContext={rest.pageContext}>
+          <NotificationProvider>
             <OuterButtons />
             <Editor>
+              <OnStoreErrorNotification />
               <InnerButtons />
               <Wrapper clickable>
                 {children}
               </Wrapper>
             </Editor>
-          </GatsbyPageProvider>
-        </GatsbyNodeProvider>
-      </NotificationProvider>
+          </NotificationProvider>
+        </GatsbyPageProvider>
+      </GatsbyNodeProvider>
     );
   }
   return (
