@@ -1,18 +1,18 @@
 # Using Tailwind system with Bodiless
 
-As discussed in other sections, Bodiless is preconfigured to use
+As discussed in other sections, BodilessJS is preconfigured to use
 [TailwindCSS](https://tailwindcss.com) which is utility-first CSS framework.
 While this is not strictly required, we highly recommend it to get the most out
 of the Bodiless Design System. If you are unfamiliar with Tailwind, you can
-learn more from one of
+learn more from:
 
 - [Tailwind on Github](https://github.com/tailwindcss/tailwindcss)
 - [Tailwind Docs](https://tailwindcss.com/docs/what-is-tailwind)
 
 Most of the site's styling can be defined with Tailwind and for the most part,
-Bodiless will defer to their documentation. The following documentation either
-are specific Bodiless applications of Tailwind or important enough to call
-out to help direct to the specific Tailwind documentation.
+BodilessJS will defer to Tailwind documentation. The following documentation
+either are specific Bodiless applications of Tailwind or important enough to
+call out to help direct to the specific Tailwind documentation.
 
 ## Tailwind Configuration File
 The sites tailwind configuration file, `tailwind.config.js`, can be found in
@@ -28,7 +28,7 @@ use all Tailwind's default settings and place into a generated index.css file.
 Tailwind allows replacing or extending the settings. If site builder is using
 Bodiless components, which may be using default tailwind classes, we suggest to
 [extend](https://tailwindcss.com/docs/theme/#extending-the-default-theme)
-instead of replace using theme.extend.
+instead of replace.
 
 ```
     extend: {
@@ -40,8 +40,9 @@ instead of replace using theme.extend.
     },  
 ```
 
-This will add additional brand colors to all the default tailwind colors. When
-the static site builds it utilizes
+This will add additional brand colors to all the default tailwind colors. 
+
+When the static site builds it utilizes
 [gatsby purge css feature](https://www.gatsbyjs.org/packages/gatsby-plugin-purgecss)
 to remove unused css classes and this will keep the css file small for best
 performance.
@@ -53,41 +54,66 @@ rerun the build process. This is done in either `npm run start` or
 `npm run build` and will generate css that is automatically included for the
 site.
 
-!> **Important** for tailwind changes to be updated, you must restart or build
-to see the changes.
+!> **Important** for tailwind config changes to be updated, you must restart or
+build to see the changes.
 
 ## Responsiveness with Tailwind
 
-Tailwind controls the responsiveness of the site and classes can be prefixed with responsive size.
+Tailwind classes controls most of the responsiveness behavior of the site and
+classes can be prefixed with responsive size.
 
 ### Breakpoints
 
-For more information, about setting the (responsive
+For more information, about setting the [responsive
 breakpoints](./Responsiveness#Breakpoints).
 
 ## Setting maximum container width of a site
 
 If a site has maximum container width of a site should be, they can be set with
-max-width
+[max-width
 breakpoints](https://tailwindcss.com/docs/breakpoints/#max-width-breakpoints)
-and limit the size of the containers at different breakpoints.
+and limit the size of the containers at different breakpoints. This is done via
+the same method as [responsive breakpoints](./Responsiveness#Breakpoints).
 
 ### Using Responsive Classes
 
-For more information, read about
-[https://tailwindcss.com/docs/responsive-design#mobile-first](https://tailwindcss.com/docs/responsive-design#mobile-first)
+Every utility class in Tailwind can be applied conditionally at different
+breakpoints. For more information, read about
+[Tailwind Mobile first](https://tailwindcss.com/docs/responsive-design#mobile-first)
 which contains excellent documentation about responsive classes and how to use
 them.
 
 ## Using Custom CSS
 
-There are cases that Tailwind CSS doesn't support or it may be easier to not
+There are cases that TailwindCSS doesn't support or it may be easier to not
 rely on Tailwind. This can be achieved by including the css file and referencing
 those classes instead of the tailwind classes.  
 
-The custom css files can be included imported either in gatsby-browser.js file
-or within the component that is using them. Do we have recommendation here:
+The custom css files can be included imported either in gatsby-browser.js file,
+within the pages, or within the component that is using them.
 
-If the site builder includes custom css such as they later make changes, does
-purgecss remove them if they aren't used??? And if they want to leverage
-purgecss waht is the recommended method??? Include via gatsby-browser.js
+?> **Recommendation** is to keep the css file as close to possible to the
+component or page it is needed for.
+
+For example:
+* If its css used exclusively for the homepage, place it `/src/pages` and
+  include it in the `index.tsx`.
+* If its css used for a component, place it components folder and include it
+  with the component.
+
+By doing the above, this custom css will only be loaded for pages or pages that
+use the component and help with performance. While BodilessJS runs with
+[gatsby purge css feature](https://www.gatsbyjs.org/packages/gatsby-plugin-purgecss)
+tool this is only processing on tailwind css and not on any custom css included.
+
+?> **Tip** As a site developer its always good practice to remove css that isn't
+being used if updates/changes are being made.
+
+Common usages for using custom css:
+* Setting background images 
+* Defining ::before and ::after pseudo-elements  
+  * or alternative use https://github.com/yutahaga/tailwindcss-pseudo-elements to
+    extend tailwind.
+* Gradients
+  * or alternative use https://github.com/benface/tailwindcss-gradients to extend
+    tailwind.
