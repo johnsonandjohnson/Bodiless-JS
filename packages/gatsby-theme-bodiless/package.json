@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/gatsby-theme-bodiless",
-  "version": "0.0.51",
+  "version": "0.0.52",
   "description": "A Gatsby theme for BodilessJS",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
@@ -23,7 +23,8 @@
     "queries.jsx",
     "Logger.js",
     "src/no-scroll-settings.json",
-    "build-css.js"
+    "build-css.js",
+    "/doc"
   ],
   "repository": {
     "type": "git",
@@ -33,14 +34,15 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json ",
+    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
-    "clean": "rimraf -rf \"dist\" && rimraf index*"
+    "build:api-doc": "typedoc --out doc/api --mode file",
+    "clean": "rimraf -rf \"dist\" && rimraf index* && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/core": "^0.0.51",
-    "@bodiless/core-ui": "^0.0.51",
-    "@bodiless/ui": "^0.0.51",
+    "@bodiless/core": "^0.0.52",
+    "@bodiless/core-ui": "^0.0.52",
+    "@bodiless/ui": "^0.0.52",
     "@types/nodegit": "^0.26.1",
     "@types/walk": "^2.3.0",
     "axios": "^0.19.0",

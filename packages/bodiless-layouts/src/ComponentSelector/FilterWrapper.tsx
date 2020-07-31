@@ -52,6 +52,7 @@ function Checkbox({
   return (
     <finalUI.AccordionCheckboxWrapper>
       <finalUI.AccordionCheckBox
+        field="accordion-checkbox"
         onChange={onToggle}
         checked={isChecked}
         disabled={disabled}

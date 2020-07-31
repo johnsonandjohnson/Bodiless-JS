@@ -12,15 +12,13 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React from 'react';
 import { flow } from 'lodash';
-import { withChild } from '@bodiless/core';
 import {
   addClasses,
   addProps,
   withDesign,
   replaceWith,
-  A,
   Li,
 } from '@bodiless/fclasses';
 import { asMobileOnly } from '../Elements.token';
@@ -36,12 +34,6 @@ const withLinkStyles = withDesign({
   ActiveLink: flow(asWhiteColoredLink, withMenuBackground),
   Link: asWhiteColoredLink,
 });
-
-const BurgerMenuHeader: FC = () => (
-  <A href="/">
-    <img src="/images/bodiless_logo.png" className="h-16" alt="Return To Home" />
-  </A>
-);
 
 const withMenuSublistStyles = withDesign({
   Title: withLinkStyles,
@@ -73,15 +65,11 @@ const withBurgerMenuStyles = withDesign({
   Wrapper: flow(
     asMobileOnly,
     withTealBackground,
+    addClasses('py-1'),
   ),
   Slide: flow(
     addClasses('bg-burger-menu'),
     addProps({ noOverlay: true, width: '100%', right: true }),
-  ),
-  Header: flow(
-    withChild(BurgerMenuHeader),
-    withTealBackground,
-    addClasses('py-4'),
   ),
   Body: flow(
     addClasses('p-3 text-black'),
@@ -96,9 +84,14 @@ const withBurgerSubMenuStyles = withDesign({
   }),
 });
 
+const withBurgerLogoBg = flow(
+  withTealBackground,
+);
+
 export {
   withMenuListStyles,
   withMenuSublistStyles,
   withBurgerMenuStyles,
   withBurgerSubMenuStyles,
+  withBurgerLogoBg,
 };

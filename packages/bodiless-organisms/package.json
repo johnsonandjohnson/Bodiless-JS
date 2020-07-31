@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/organisms",
-  "version": "0.0.51",
+  "version": "0.0.52",
   "description": "Basic components to build out sites.",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
@@ -19,20 +19,21 @@
     "access": "public"
   },
   "scripts": {
-    "build": "npm run copy && tsc -p ./tsconfig.json",
+    "build": "npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
+    "build:api-doc": "typedoc --out doc/api --mode file",
     "lint": "tslint ./src/**/*.ts?x",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
     "copy": "copyfiles -u 3 \"./src/components/MainMenu/*.css\" \"./lib/components/MainMenu/\""
   },
   "dependencies": {
-    "@bodiless/bv": "^0.0.51",
-    "@bodiless/components": "^0.0.51",
-    "@bodiless/components-ui": "^0.0.51",
-    "@bodiless/core": "^0.0.51",
-    "@bodiless/fclasses": "^0.0.51",
-    "@bodiless/richtext": "^0.0.51",
-    "@bodiless/richtext-ui": "^0.0.51",
+    "@bodiless/bv": "^0.0.52",
+    "@bodiless/components": "^0.0.52",
+    "@bodiless/components-ui": "^0.0.52",
+    "@bodiless/core": "^0.0.52",
+    "@bodiless/fclasses": "^0.0.52",
+    "@bodiless/richtext": "^0.0.52",
+    "@bodiless/richtext-ui": "^0.0.52",
     "@types/react-burger-menu": "^2.6.0",
     "@types/react-tag-autocomplete": "^5.12.0",
     "lodash": "^4.17.11",

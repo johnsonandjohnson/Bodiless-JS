@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/layouts",
-  "version": "0.0.51",
+  "version": "0.0.52",
   "description": "Layout managers for BodilessJS.",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
   "homepage": "",
@@ -13,6 +13,7 @@
   },
   "files": [
     "/lib",
+    "/doc",
     "/bodiless.docs.json"
   ],
   "repository": {
@@ -23,17 +24,18 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json ",
+    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
+    "build:api-doc": "typedoc --out doc/api --mode file",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "peerDependencies": {
     "react": "^16.8.1"
   },
   "dependencies": {
-    "@bodiless/core": "^0.0.51",
-    "@bodiless/fclasses": "^0.0.51",
-    "@bodiless/gatsby-theme-bodiless": "^0.0.51",
+    "@bodiless/core": "^0.0.52",
+    "@bodiless/fclasses": "^0.0.52",
+    "@bodiless/gatsby-theme-bodiless": "^0.0.52",
     "@material/react-material-icon": "^0.14.1",
     "axios": "^0.19.0",
     "html2canvas": "^1.0.0-rc.3",
