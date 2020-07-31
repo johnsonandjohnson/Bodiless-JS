@@ -1,13 +1,15 @@
 {
   "name": "@bodiless/bv",
-  "version": "0.0.51",
+  "version": "0.0.52",
   "description": "Provides bazaarvoice components.",
   "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
-    "/lib"
+    "/lib",
+    "/bodiless.docs.json",
+    "/doc"
   ],
   "repository": {
     "type": "git",
@@ -17,15 +19,16 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json ",
+    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
+    "build:api-doc": "typedoc --out doc/api --mode file",
     "lint": "tslint ./src/**/*.ts?x",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/components": "^0.0.51",
-    "@bodiless/core": "^0.0.51",
-    "@bodiless/fclasses": "^0.0.51",
+    "@bodiless/components": "^0.0.52",
+    "@bodiless/core": "^0.0.52",
+    "@bodiless/fclasses": "^0.0.52",
     "lodash": "^4.17.11"
   },
   "peerDependencies": {
