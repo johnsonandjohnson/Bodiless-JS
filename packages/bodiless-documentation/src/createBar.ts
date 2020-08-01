@@ -40,7 +40,7 @@ const createBar = (
   const pathPrefix = `/${parent.map((item:string) => `${item}/`).join('')}`;
   const linePrefix = ' '.repeat(indent * 2);
   const header = writeHeader && parent.length > 0 && parent.slice(-1)[0];
-  let navbar = header ? `* ${niceName(header.replace(/.md$/, ''))}\n` : '';
+  let navbar = header ? `- ${niceName(header.replace(/.md$/, ''))}\n` : '';
   Object.keys(paths).forEach((key:string) => {
     let line = '';
     const link = key.replace(/.md$/, '');
@@ -49,14 +49,14 @@ const createBar = (
       const branch = paths[key] as Tree;
       const subLines = depth > 0 || !branch['README.md'] ? createBar(paths[key] as Tree, [...parent, key], depth - 1, false, indent + 1) : '';
       if (branch['README.md']) {
-        line = `${linePrefix}* [${name}](${pathPrefix}${link}/)\n`;
+        line = `${linePrefix}- [${name}](${pathPrefix}${link}/)\n`;
         // If we have subLines but we have no README then do not add the tree item
       } else if (subLines) {
-        line = `${linePrefix}* ${name}\n`;
+        line = `${linePrefix}- ${name}\n`;
       }
       line += subLines;
     } else if (key !== 'README.md' && path.extname(paths[key] as string) === '.md') {
-      line = `${linePrefix}* [${name}](${pathPrefix}${link})\n`;
+      line = `${linePrefix}- [${name}](${pathPrefix}${link})\n`;
     }
     navbar += line;
   });

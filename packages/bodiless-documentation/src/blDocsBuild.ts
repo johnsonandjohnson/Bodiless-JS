@@ -22,7 +22,7 @@ import { withTreeFromFile, getSimplePaths, validatePaths } from './tree';
 import {
   writeTree, writeResources, copyFile, symlinkFile,
 } from './write';
-import { writeSideBars, writeNavBar } from './createBar';
+import { writeSideBars } from './createBar';
 import { Tree } from './type';
 import readSettings from './readSettings';
 import buildApiDoc, { updateNavigation as apiDocUpdateNavigation } from './blApiDocsBuild';
@@ -83,12 +83,17 @@ const blDocsBuild = async () => {
   } catch (error) {
     console.warn('Error writing sidebars', error);
   }
+  /*
+   * Remove as we aren't using navbar
+   */
+  /*
   console.log('Writing navbar');
   try {
     await writeNavBar(docPath, navigationPaths);
   } catch (error) {
     console.warn('Error writing navbar', error);
   }
+   */
   console.log('Writing resources');
   try {
     await writeResources(docPath, copier);

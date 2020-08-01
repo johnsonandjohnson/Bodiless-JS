@@ -19,13 +19,25 @@ limitations under the License.
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="BodilessJS">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/buble.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
   <link rel="icon" href="/favicon.ico" />
   <style>
     .app-name-link > img {
       width: 175px;
     }
   </style>
+  <style>
+    :root {
+      /* Reduce the font size */
+      --base-font-size: 14px;
+  
+      /* Change the theme color hue */
+      --sidebar-background: #edf2f7;
+      --link-color: #2b6cb0;
+      --theme-color: #2b6cb0;
+  
+    }
+  </style> 
 </head>
 <body>
   <div id="app"></div>
@@ -35,13 +47,32 @@ limitations under the License.
       logo: './logo.png',
       repo: 'https://github.com/johnsonandjohnson/bodiless-js',
       loadSidebar: true,
-      loadNavbar: true,
       alias: {
-        '/.*/_navbar.md': '/_navbar.md',
-      },
+        '/.*/_sidebar.md': '/_sidebar.md'
+       },    
+      loadNavbar: false,
       relativePath: true,
       subMaxLevel: 5,
       auto2top: true,
+      themeable: {
+          readyTransition : true, // default
+          responsiveTables: true  // default
+      },
+      pagination: {
+        previousText: 'Previous',
+        nextText: 'Next',
+        crossChapter: true,
+        crossChapterText: true,
+      },
+      search: {
+        maxAge: 86400000, // Expiration time, the default one day
+        paths: 'auto',
+        placeholder: 'Type to search',
+        noData: 'No Results!',
+        depth: 2,
+        hideOtherSidebarContent: true,
+        namespace: 'bodiless',
+      },      
       plugins: [
         function(hook) {
           const footer = [
@@ -59,6 +90,8 @@ limitations under the License.
     }
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
+  <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
   <!-- plugins -->
   <!--
   <script src="//unpkg.com/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js">
