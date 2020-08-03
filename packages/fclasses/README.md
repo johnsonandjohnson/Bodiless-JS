@@ -77,13 +77,19 @@ prserving some of its styles while adding or removing others. For example:
 ```javascript
 const Div = stylable<HTMLProps<HTMLDivElement>>('div');
 const Callout = addClasses('bg-blue text-white p-2 border border-yellow')(Div);
-const SpecialGreenCallout = addClasses('bg-green').removeClasses('bg-blue')(Callout);
+const SpecialGreenCallout = flow(
+  addClasses('bg-green'),
+  removeClasses('bg-blue'),
+)(Callout);
 ```
 
 The higher order components are reusable, so for example:
 
 ```
-const withRedCalloutBorder = addClasses('border-red').removeClasses('border-yellow);
+const withRedCalloutBorder = flow(
+  addClasses('border-red'),
+  removeClasses('border-yellow),
+);
 const RedBorderedCallout = withRedCalloutBorder(Callout);
 const ChristmasCallout = withRedCalloutBorder(SpecialGreenCallout);
 ```
@@ -330,9 +336,12 @@ const Div = stylable<HTMLProps<HTMLDivElement>>('div');
 
 const ContextMenuButton = flow(
   withoutProps<VariantProps>(['isActive', 'isFirst'),
-  addClasses('cursor-pointer pl-2 text-grey').flow,
+  addClasses('cursor-pointer pl-2 text-grey'),
   flowIf(hasProp('isActive'))(
-    addClasses('text-white').removeClasses('text-grey'),
+    flow(
+      addClasses('text-white'),
+      removeClasses('text-grey'),
+    ),
   ),
   flowIf(hasProp('isFirst'))(
     removeClasses('pl-2'),
