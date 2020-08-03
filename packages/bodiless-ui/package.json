@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/ui",
-  "version": "0.0.51",
+  "version": "0.0.52",
   "description": "Common default UI elements for BodilessJS",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
@@ -8,6 +8,7 @@
   "typings": "lib/index.d.ts",
   "files": [
     "/lib",
+    "/doc",
     "/bodiless.docs.json",
     "/bodiless.tailwind.config.js",
     "/index.tailwind.css"
@@ -20,16 +21,17 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run build:css && npm run copy",
+    "build": "tsc -p ./tsconfig.json && npm run build:css && npm run copy && npm run build:api-doc",
     "build:css": "postcss index.tailwind.css -o ./src/bodiless.index.css",
     "build:watch": "npm run build -- --watch",
+    "build:api-doc": "typedoc --out doc/api --mode file",
     "copy": "copyfiles -u 1 \"./src/*.css\" \"./lib/\"",
     "lint": "tslint ./src/**/*.ts?x",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/core": "^0.0.51",
-    "@bodiless/fclasses": "^0.0.51",
+    "@bodiless/core": "^0.0.52",
+    "@bodiless/fclasses": "^0.0.52",
     "informed": "^3.9.0",
     "lodash": "^4.17.11"
   },

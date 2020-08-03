@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +27,12 @@ import {
 import Header from './header';
 import Footer from './footer';
 import { asPageContainer, asYMargin } from '../Elements.token';
+import { asSiteHeader, asSiteFooter } from './token';
 
-const ExampleHelmet = flowRight(
+const SiteHeader = asSiteHeader(Header);
+const SiteFooter = asSiteFooter(Footer);
+
+const SiteHelmet = flowRight(
   asBodilessHelmet('meta'),
   withMeta('pagetype', 'page-type'),
   withMeta('description', 'description'),
@@ -38,7 +42,7 @@ const ExampleHelmet = flowRight(
   withMetaHtml('en'),
 )(Helmet);
 
-const ExampleGTMHelmetEvent = flowRight(
+const SiteGTMHelmetEvent = flowRight(
   asBodilessHelmet('datalayer'),
   withEvent(
     'digitalData',
@@ -66,19 +70,17 @@ const Layout = ({ children }) => (
         site {
           siteMetadata {
             title
-            logo
           }
         }
       }
     `}
     render={data => (
       <>
-        <ExampleHelmet />
-        <ExampleGTMHelmetEvent />
-        <Header siteLogo={data.site.siteMetadata.logo} />
-
+        <SiteHelmet />
+        <SiteGTMHelmetEvent />
+        <SiteHeader />
         <Container>{children}</Container>
-        <Footer siteTitle={data.site.siteMetadata.title} />
+        <SiteFooter siteTitle={data.site.siteMetadata.title} />
       </>
     )}
   />
