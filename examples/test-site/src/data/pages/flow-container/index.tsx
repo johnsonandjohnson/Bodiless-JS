@@ -19,7 +19,7 @@ import {
   NodeViewer,
 } from '@bodiless/components';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-
+import resolveConfig from 'tailwindcss/resolveConfig';
 import Layout from '../../../components/Layout';
 import tailWindConfig from '../../../../tailwind.config';
 import { FlowContainerDefault } from '../../../components/FlowContainer';
@@ -27,7 +27,7 @@ import { FlowContainerDefault } from '../../../components/FlowContainer';
 const FLOW_CONTAINER_PAGE_PATH = 'flowContainer';
 
 const options = getSnapFrom(
-  withTailwindClasses(tailWindConfig)('w-full sm:w-1/2 sm:w-full lg:w-1/2 lg:w-full'),
+  withTailwindClasses(resolveConfig(tailWindConfig))('w-full sm:w-1/2 sm:w-full lg:w-1/2 lg:w-full'),
 );
 const FlowContainerPage = (props: any) => (
   <Page {...props}>
@@ -40,7 +40,9 @@ const FlowContainerPage = (props: any) => (
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey={FLOW_CONTAINER_PAGE_PATH} />
-      <h2 className="text-2xl font-bold mt-4">FlowContainer with constrained widths</h2>
+      <h2 className="text-2xl font-bold mt-4">
+        FlowContainer with constrained widths of 50% & 100% only
+      </h2>
       <FlowContainerDefault
         id="constrained_widths"
         nodeKey="constrained_widths"
