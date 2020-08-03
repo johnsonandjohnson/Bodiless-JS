@@ -33,7 +33,7 @@ import {
 } from './Meta/Meta';
 import withMetaForm, { withMetaSnippet } from './Meta/withMetaForm';
 import type { FieldType as MetaFormFieldType } from './Meta/withMetaForm';
-import asBodilessHelmet from './Helmet/Helemet';
+import asBodilessHelmet from './Helmet/Helmet';
 import withEvent from './GTM/gtm';
 import { withToggle, withToggleTo, withToggleButton } from './Toggle';
 import withEditPlaceholder from './Placeholder';
