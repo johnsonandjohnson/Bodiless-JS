@@ -12,10 +12,13 @@
  * limitations under the License.
  */
 
+/* eslint-disable no-nested-ternary */
+
 import React, {
   useState, createContext, useContext,
 } from 'react';
 import ReactTooltip from 'rc-tooltip';
+import { observer } from 'mobx-react-lite';
 import { getUI as getFormUI, FormProps } from '../contextMenuForm';
 import { UI, IContextMenuItemProps as IProps } from '../Types/ContextMenuTypes';
 
@@ -40,7 +43,7 @@ export const useUI = () => {
   return getUI(ui);
 };
 
-const ContextMenuItem = ({ option, index, ui }: IProps) => {
+const ContextMenuItem = observer(({ option, index, ui }: IProps) => {
   const [renderForm, setRenderForm] = useState<(props:FormProps) => JSX.Element>();
   const [isToolTipShown, setIsToolTipShown] = useState(false);
   const finalUI = getUI(ui);
@@ -51,9 +54,12 @@ const ContextMenuItem = ({ option, index, ui }: IProps) => {
     FormWrapper,
     Tooltip,
   } = finalUI;
-  const isActive = option.isActive ? option.isActive() : false;
-  const isDisabled = option.isDisabled ? option.isDisabled() : false;
-  const isHidden = option.isHidden ? option.isHidden() : false;
+  const isActive = option.isActive ? (typeof option.isActive === 'function' ? option.isActive() : option.isActive) : false;
+  const isDisabled = option.isDisabled ? (typeof option.isDisabled === 'function' ? option.isDisabled() : option.isDisabled) : false;
+  const isHidden = option.isDisabled ? (typeof option.isHidden === 'function' ? option.isHidden() : option.isHidden) : false;
+  const label = option.label ? (typeof option.label === 'function' ? option.label() : option.label) : '';
+  const icon = option.icon ? (typeof option.icon === 'function' ? option.icon() : option.icon) : '';
+
   const isFirst = index === 0;
 
   const onToolbarButtonClick = (event: React.MouseEvent<HTMLDivElement>): void => {
@@ -79,7 +85,7 @@ const ContextMenuItem = ({ option, index, ui }: IProps) => {
       const formProps = {
         closeForm: onFormClose,
         ui,
-        'aria-label': `Context Menu ${option.label || option.name} Form`,
+        'aria-label': `Context Menu ${label || option.name} Form`,
       };
       return (
         <FormWrapper onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
@@ -106,24 +112,24 @@ const ContextMenuItem = ({ option, index, ui }: IProps) => {
       isDisabled={isDisabled}
       isFirst={isFirst}
       onClick={onToolbarButtonClick}
-      aria-label={option.label || option.name}
+      aria-label={label || option.name}
     >
       <Tooltip
         trigger={['click']}
         overlay={getContextMenuForm()}
         visible={isToolTipShown}
       >
-        <Icon isActive={isActive || isToolTipShown}>{option.icon}</Icon>
+        <Icon isActive={isActive || isToolTipShown}>{icon}</Icon>
       </Tooltip>
       {
-        (option.label) ? (
+        (label) ? (
           <div className="bl-text-center bl-text-white">
-            {option.label}
+            {label}
           </div>
         ) : (null)
       }
     </ToolbarButton>
   );
-};
+});
 
 export default ContextMenuItem;
