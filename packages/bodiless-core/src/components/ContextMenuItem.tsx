@@ -56,7 +56,7 @@ const ContextMenuItem = observer(({ option, index, ui }: IProps) => {
   } = finalUI;
   const isActive = option.isActive ? (typeof option.isActive === 'function' ? option.isActive() : option.isActive) : false;
   const isDisabled = option.isDisabled ? (typeof option.isDisabled === 'function' ? option.isDisabled() : option.isDisabled) : false;
-  const isHidden = option.isDisabled ? (typeof option.isHidden === 'function' ? option.isHidden() : option.isHidden) : false;
+  const isHidden = option.isHidden ? (typeof option.isHidden === 'function' ? option.isHidden() : option.isHidden) : false;
   const label = option.label ? (typeof option.label === 'function' ? option.label() : option.label) : '';
   const icon = option.icon ? (typeof option.icon === 'function' ? option.icon() : option.icon) : '';
 
