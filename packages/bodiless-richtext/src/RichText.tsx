@@ -16,6 +16,7 @@ import React, { ComponentType, useMemo } from 'react';
 import { flowRight, pick, flow } from 'lodash';
 import type { Plugin } from 'slate-react';
 import type { SchemaProperties } from 'slate';
+import MaterialIcon from '@material/react-material-icon';
 import {
   useEditContext,
   useContextActivator,
@@ -295,5 +296,19 @@ const apply = (design: Design<DesignableComponents>) => {
   const finalDesign = pick(lastDesign, Object.getOwnPropertyNames(design));
   return applyDesign(start)(extendDesign(finalDesign)(design));
 };
+
+const BaseRichTextPreview = <P extends object, D extends object>(props: P & RichTextProps<D>) => {
+  const { components } = props;
+  const finalComponents = withDefaults(components)
+  return (
+    // ToDo move it to a component 
+    <>{
+      Object.values(finalComponents).map((C, i) => C.hoverButton && <C key={i} ><MaterialIcon icon={C.hoverButton.icon} /></C>)
+    }</>
+  );
+}
+
 const RichText = designable(apply)(BasicRichText);
+const RichTextPreview = designable(apply)(BaseRichTextPreview);
 export default RichText;
+export { RichTextPreview };

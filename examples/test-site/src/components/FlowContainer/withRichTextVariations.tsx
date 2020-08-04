@@ -12,26 +12,33 @@
  * limitations under the License.
  */
 
+import React from 'react';
 import { flow } from 'lodash';
 import {
   withTitle,
   withFacet,
   withDesc,
+  useComponentDisplayModeContext,
+  ComponentDisplayMode,
 } from '@bodiless/layouts';
 import {
   varyDesign,
   replaceWith,
   withDesign,
 } from '@bodiless/fclasses';
+import { withFlowToggle } from '@bodiless/core';
 
 import {
   EditorBasic,
   EditorFullFeatured,
   EditorSimple,
+  EditorFullFeaturedPreview,
 } from '../Editors';
 import { withType } from './Categories';
 
 const withRichText = withFacet('Rich Text');
+
+const toggle = () => useComponentDisplayModeContext().mode === ComponentDisplayMode.ComponentSelector;
 
 const richTextVariation = {
   EditorSimple: flow(
@@ -49,7 +56,7 @@ const richTextVariation = {
     withDesc('Adds a block of text with basic formatting.\n'),
   ),
   EditorFullFeatured: flow(
-    replaceWith(EditorFullFeatured),
+    replaceWith(withFlowToggle(toggle)(EditorFullFeaturedPreview, EditorFullFeatured)),
     withType('Rich Text')(),
     withRichText('Full')(),
     withTitle('Full Rich Text'),

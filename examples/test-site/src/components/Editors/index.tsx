@@ -17,6 +17,7 @@ import {
   asBlock,
   withButton,
   withStrikeThroughMeta,
+  RichTextPreview,
 } from '@bodiless/richtext';
 import { RichText } from '@bodiless/richtext-ui';
 import {
@@ -84,13 +85,17 @@ const fullFeaturedDesign = {
 const EditorSimple = withDesign(simpleDesign)(RichText);
 const EditorBasic = withDesign(basicDesign)(RichText);
 const EditorFullFeatured = withDesign(fullFeaturedDesign)(RichText);
+const EditorFullFeaturedPreview = withDesign(fullFeaturedDesign)(RichTextPreview);
+
 const withEditorBasic = withEditor(EditorBasic);
 const withEditorSimple = withEditor(EditorSimple);
 const withEditorFullFeatured = withEditor(EditorFullFeatured);
+
 export {
   EditorBasic,
   EditorFullFeatured,
   EditorSimple,
+  EditorFullFeaturedPreview,
   withEditorBasic,
   withEditorSimple,
   withEditorFullFeatured,
