@@ -318,8 +318,9 @@ const StandardPinkAndGreenTout = flowRight(
 ## Conditional styling
 
 It is sometimes useful to apply classes conditionally, based on props passed to
-a component. The FClasses design API includes some helper methods which make
-this easier.
+a component and/or based on component state. The FClasses design API includes some helper methods which make this easier.
+
+### Conditional styling based on passed props
 
 Imagine we have a button which has different variants depending on whether it
 is active and/or whether it is the first in a list of buttons.  We can use
@@ -349,6 +350,31 @@ const ContextMenuButton = flow(
 )(Div);
 ```
 
+### Conditional styling based on component state
+
+Imagine we have a button which consume some state from a react context.
+We can use `addClassesIf` and `removeClassesIf` helpers to add classes to the button conditionally:
+
+```js
+const ToggleContext = React.createContext({
+  state: false,
+});
+const useStateContext = () => useContext(ToggleContext);
+const isToggled = () => useStateContext().state;
+
+const Div = stylable<HTMLProps<HTMLDivElement>>('div');
+
+const Button = props => {
+  const { state } = useStateContext();
+  return <Div {...props}>{`Button state consumed from store is ${state}.`}</Div>;
+};
+
+const StyledButton = flow(
+  addClassesIf(isToggled)('bg-green-200'),
+)(Button);
+
+```
+
 A few notes:
 
 - We use `flow()` rather than `flowRight()` because it is better at type inference.
@@ -356,9 +382,6 @@ A few notes:
   control styling won't be passed to the `div` element. We must explicitly type
   the generic `withoutProps()`. This ensures that the type of the resulting
   component will include these props.
-- We must use the `.flow` property of `addClasses()` because of a peculiar type
-  inference problem in `flow` when a HOC function has its own properties or
-  methods. See [tsflow.test.tsx](./__tests__/tsflow.test.jsx) for an example.
 
   ## Design Variants
 

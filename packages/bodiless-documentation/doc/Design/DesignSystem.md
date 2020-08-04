@@ -118,7 +118,10 @@ then define the follwing HOC to apply tokens to the title and link:
 ``` js
 const asToutPink = withDesign({
   Title: addClasses('text-base text-pink font-bold'),
-  Link: addClasses('bg-pink').removeClasses('bg-blue-dark'),
+  Link: flow(
+    addClasses('bg-pink'),
+    removeClasses('bg-blue-dark'),
+  ),
 });
 ```
 
@@ -140,7 +143,10 @@ import { asToutPink as asToutPinkBase } from 'some-design-system';
 const asToutPink = flow(
   asToutPinkBase,
   withDesign({
-    Title: removeClasses('text-base').addClasses('text-lg'),
+    Title: flow(
+      removeClasses('text-base'),
+      addClasses('text-lg'),
+    ),
   }),
 );
 ```
