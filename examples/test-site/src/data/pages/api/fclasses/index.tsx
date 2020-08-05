@@ -17,9 +17,9 @@ import { graphql } from 'gatsby';
 import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
-  Button as BaseButton,
-  addClassesIf,
   addClasses,
+  addClassesIf,
+  Button as BaseButton,
   H3,
 } from '@bodiless/fclasses';
 import Layout from '../../../../components/Layout';
