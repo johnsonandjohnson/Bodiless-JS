@@ -93,6 +93,20 @@ limitations under the License.
             next(html);
           });
         },
+        /* 
+         * This hook is for a bug in collapse plugin, the items start collapsed but,
+         * don't have collapse class on them so the arrow points down instead 
+         * to the right.  
+         */
+        function(hook, vm) {
+          hook.doneEach(function() {
+            document.querySelectorAll(".sidebar-nav > ul li").forEach((el) => {
+              if (!el.classList.contains('open')) {
+                el.classList.add('collapse');
+              }  
+            });
+          });
+        },
       ],
     }
   </script>
@@ -100,9 +114,6 @@ limitations under the License.
   <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
   <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
   <script src="//unpkg.com/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
-  <!-- plugins -->
-  <!--
-  <script src="//unpkg.com/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js">
-  -->
+  
 </body>
 </html>
