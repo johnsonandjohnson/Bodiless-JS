@@ -20,12 +20,7 @@ limitations under the License.
   <meta name="description" content="BodilessJS">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
-  <link rel="icon" href="/favicon.ico" />
-  <style>
-    .app-name-link > img {
-      width: 175px;
-    }
-  </style>
+  <link rel="icon" href="./favicon.ico" />
   <style>
     :root {
       /* Reduce the font size */
@@ -35,9 +30,21 @@ limitations under the License.
       --sidebar-background: #edf2f7;
       --link-color: #2b6cb0;
       --theme-color: #2b6cb0;
-  
+
+      /* Remove the - before the 3rd & lower levels. */
+      --sidebar-nav-link-before-content-l3: '';
+
     }
   </style> 
+  <style>
+    .app-name-link > img {
+      width: 175px;
+    }
+    .sidebar-nav > ul > li > a,
+    .sidebar-nav > ul > li.active > a {
+      font-weight: 700;
+    }
+  </style>  
 </head>
 <body>
   <div id="app"></div>
@@ -52,7 +59,7 @@ limitations under the License.
        },    
       loadNavbar: false,
       relativePath: true,
-      subMaxLevel: 5,
+      subMaxLevel: 6,
       auto2top: true,
       themeable: {
           readyTransition : true, // default
@@ -92,6 +99,7 @@ limitations under the License.
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
   <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
   <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <script src="//unpkg.com/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
   <!-- plugins -->
   <!--
   <script src="//unpkg.com/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js">
