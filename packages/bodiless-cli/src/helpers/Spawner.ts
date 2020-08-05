@@ -21,6 +21,7 @@ export default class Spawner {
   constructor(monorepo: string) {
     this.options = {
       stdio: 'inherit',
+      shell: true,
     };
     // Add the monorepo npm bin directory to the path, bc some packages
     // may use binaries in their pack command which are only available there.
