@@ -30,19 +30,30 @@ limitations under the License.
       --sidebar-background: #edf2f7;
       --link-color: #2b6cb0;
       --theme-color: #2b6cb0;
-
+      --sidebar-nav-link-before-color: #000000;
+      
       /* Remove the - before the 3rd & lower levels. */
-      --sidebar-nav-link-before-content-l3: '';
+      --sidebar-nav-link-before-content-l3: ''; 
 
+      --sidebar-nav-pagelink-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='11.2' viewBox='0 0 7 11.2'%3E%3Cpath d='M1.5 1.5l4 4.1 -4 4.1' stroke-width='1.5' stroke='rgb%2811, 135, 218%29' fill='none' stroke-linecap='square' stroke-linejoin='miter' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+      --sidebar-nav-pagelink-background-image--loaded: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='11.2' viewBox='0 0 7 11.2'%3E%3Cpath d='M1.5 1.5l4 4.1 -4 4.1' stroke-width='1.5' stroke='rgb%2868, 68, 68%29' fill='none' stroke-linecap='square' stroke-linejoin='miter' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+      --sidebar-nav-pagelink-background-image--active: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='11.2' viewBox='0 0 7 11.2'%3E%3Cpath d='M1.5 1.5l4 4.1 -4 4.1' stroke-width='1.5' stroke='rgb%2868, 68, 68%29' fill='none' stroke-linecap='square' stroke-linejoin='miter' vector-effect='non-scaling-stroke'/%3E%3C/svg%3E");
+      
     }
-  </style> 
+  </style>
+   
   <style>
+    /* Following styling couldn't be controlled variables */
     .app-name-link > img {
       width: 175px;
     }
     .sidebar-nav > ul > li > a,
     .sidebar-nav > ul > li.active > a {
       font-weight: 700;
+    }
+    .sidebar-nav li.active>a,
+    .sidebar-nav li>a:hover {
+      color: #444444;
     }
   </style>  
 </head>
@@ -114,6 +125,7 @@ limitations under the License.
   <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
   <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
   <script src="//unpkg.com/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
   
 </body>
 </html>

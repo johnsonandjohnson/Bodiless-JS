@@ -1,12 +1,5 @@
 {
   "Components": {
-    "Bazaarvoice": {    
-      "BVLoaderProvider.md": "./doc/components/BVLoaderProvider.md",
-      "HOCs.md": "./doc/components/HOCs.md",
-      "BazaarvoiceV1.md": "./doc/components/BazaarvoiceV1.md",
-      "BazaarvoiceV2.md": "./doc/components/BazaarvoiceV2.md",
-      "Configuration.md": "./doc/Configuration.md",
-      "Overview.md": "./doc/README.md"
-    }
+    "bv.md": "./doc/README.md"
   }
 }
