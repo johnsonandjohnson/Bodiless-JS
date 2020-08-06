@@ -13,4 +13,4 @@
  */
 
 // eslint-disable-next-line import/prefer-default-export
-export { default as RichText } from './RichText';
+export { default as RichText, RichTextPreview } from './RichText';

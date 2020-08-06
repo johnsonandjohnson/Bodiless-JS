@@ -12,21 +12,18 @@
  * limitations under the License.
  */
 
-import React from 'react';
 import { flow } from 'lodash';
 import {
   withTitle,
   withFacet,
   withDesc,
-  useComponentDisplayModeContext,
-  ComponentDisplayMode,
+  withComponentSelectorToggle,
 } from '@bodiless/layouts';
 import {
   varyDesign,
   replaceWith,
   withDesign,
 } from '@bodiless/fclasses';
-import { withFlowToggle } from '@bodiless/core';
 
 import {
   EditorBasic,
@@ -40,25 +37,23 @@ import { withType } from './Categories';
 
 const withRichText = withFacet('Rich Text');
 
-const toggle = () => useComponentDisplayModeContext().mode === ComponentDisplayMode.ComponentSelector;
-
 const richTextVariation = {
   EditorSimple: flow(
-    replaceWith(withFlowToggle(toggle)(EditorSimplePreview, EditorSimple)),
+    replaceWith(withComponentSelectorToggle(EditorSimplePreview, EditorSimple)),
     withType('Rich Text')(),
     withRichText('Simple')(),
     withTitle('Simple Rich Text'),
     withDesc('Adds a block of text for a Title.\n'),
   ),
   EditorBasic: flow(
-    replaceWith(withFlowToggle(toggle)(EditorBasicPreview, EditorBasic)),
+    replaceWith(withComponentSelectorToggle(EditorBasicPreview, EditorBasic)),
     withType('Rich Text')(),
     withRichText('Basic')(),
     withTitle('Basic Rich Text'),
     withDesc('Adds a block of text with basic formatting.\n'),
   ),
   EditorFullFeatured: flow(
-    replaceWith(withFlowToggle(toggle)(EditorFullFeaturedPreview, EditorFullFeatured)),
+    replaceWith(withComponentSelectorToggle(EditorFullFeaturedPreview, EditorFullFeatured)),
     withType('Rich Text')(),
     withRichText('Full')(),
     withTitle('Full Rich Text'),

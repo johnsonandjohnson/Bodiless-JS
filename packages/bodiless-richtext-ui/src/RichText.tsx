@@ -13,11 +13,18 @@
  */
 
 import React from 'react';
-import { RichText as PlainRichText, RichTextProps } from '@bodiless/richtext';
+import {
+  RichText as PlainRichText,
+  RichTextPreview as PlainRichTextPreview,
+  RichTextProps
+} from '@bodiless/richtext';
 import { Button } from '@bodiless/ui';
 import StyledHoverMenu from './HoverMenu';
 import {
-  CloseButton, Overlay, ClickableWrapper,
+  CloseButton,
+  Overlay,
+  ClickableWrapper,
+  PreviewWrapper,
 } from './components';
 
 const ui = {
@@ -26,10 +33,16 @@ const ui = {
   Overlay,
   CloseButton,
   ClickableWrapper,
+  PreviewWrapper,
 };
 
 const RichText = <P extends object, D extends object>(props: P & RichTextProps<D>) => (
   <PlainRichText {...props} ui={ui} />
 );
 
+const RichTextPreview = <P extends object, D extends object>(props: P & RichTextProps<D>) => (
+  <PlainRichTextPreview {...props} ui={ui} />
+);
+
 export default RichText;
+export { RichTextPreview };

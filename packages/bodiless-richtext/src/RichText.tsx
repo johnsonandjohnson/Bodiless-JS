@@ -298,12 +298,14 @@ const apply = (design: Design<DesignableComponents>) => {
 };
 
 const BaseRichTextPreview = <P extends object, D extends object>(props: P & RichTextProps<D>) => {
-  const { components } = props;
+  const { components, ui } = props;
   const finalComponents = withDefaults(components)
+  const { PreviewWrapper } = getUI(ui);
   return (
-    <div className="bg-black">{
+    <PreviewWrapper>{
+      // ToDo: refactor this
       Object.values(finalComponents).map((C, i) => C.hoverButton && <PluginButton key={i} icon={C.hoverButton.icon} componentName="Button" />)
-    }</div>
+    }</PreviewWrapper>
   );
 }
 

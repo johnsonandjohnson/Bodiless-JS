@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-export { default as Overlay } from './Overlay';
-export { default as CloseButton } from './CloseButton';
-export { default as ClickableWrapper } from './ClickableWrapper';
-export { default as PreviewWrapper } from './PreviewWrapper';
+import { Div, addClasses } from '@bodiless/fclasses';
 
+const PreviewWrapper = addClasses('bl-block bg-black')(Div);
+
+export default PreviewWrapper;

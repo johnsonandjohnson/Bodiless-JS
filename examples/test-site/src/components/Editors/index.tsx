@@ -17,9 +17,8 @@ import {
   asBlock,
   withButton,
   withStrikeThroughMeta,
-  RichTextPreview,
 } from '@bodiless/richtext';
-import { RichText } from '@bodiless/richtext-ui';
+import { RichText, RichTextPreview } from '@bodiless/richtext-ui';
 import {
   withDesign,
   Blockquote,
