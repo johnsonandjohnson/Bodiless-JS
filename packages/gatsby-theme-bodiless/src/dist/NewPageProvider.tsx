@@ -59,6 +59,8 @@ const createPage = async ({ path, client, template } : any) => {
   const newPagePath = pathname + path;
   // Create the page.
   const result = await handle(client.savePage(newPagePath, template));
+  // @todo: remove after testing.
+  // const result = { response: false, message: 'terrible failure' }; // await handle(client.savePage(newPagePath, template));
   // If the page was created successfully:
   if (result.response) {
     // Verify the creation of the page.
@@ -145,39 +147,39 @@ const PageComp = (props : any) => {
 
 const CreatPage = (props : any) => {
   const formApi = useFormApi();
-  const formState = formApi.getState();
-  const { submits, errors } = formState;
   const {
-    client, ui, template,
-  } = props;
+    submits, errors, invalid, values,
+  } = formApi.getState();
+  const { client, ui, template } = props;
   // const formApi = useFormApi();
   const [state, setState] = useState<PageStatus>({
     status: NewPageState.Init,
   });
-  console.log('outside use affect', formState.submits);
-  // useEffect(() => {
-  // (async () => {
-  console.log('in use effec submites', formState.submits);
-  // If the form is submitted and valid then lets try to creat a page.
-  if (submits >= 1 && formState.invalid === false) {
-    setState({ status: NewPageState.Pending });
-    const submittedValues = formState.values;
-    const { path } = submittedValues;
-    // Create the page.
-    createPage({ path, client, template }).then((newPagePath: string) => {
-      if (newPagePath) {
-        setState({ status: NewPageState.Complete });
-        // formApi.setValue('keepOpen', false);
-        // window.location.href = newPagePath;
-      }
-    })
-      .catch((errorMessage: string) => {
-        setState({ status: NewPageState.Errored, errorMessage });
-        // formApi.setValue('keepOpen', false);
-      });
-  }
-  // })();
-  // }, []);
+  console.log('outside use affect', submits);
+  const context = useEditContext();
+  useEffect(() => {
+    console.log('in use effec submites', submits);
+    // If the form is submitted and valid then lets try to creat a page.
+    if (submits === 1 && invalid === false) {
+      context.showPageOverlay({ hasSpinner: false });
+      setState({ status: NewPageState.Pending });
+      const { path } = values;
+      // Create the page.
+      createPage({ path, client, template })
+        .then((newPagePath: string) => {
+          if (newPagePath) {
+            setState({ status: NewPageState.Complete });
+            formApi.setValue('keepOpen', false);
+            // window.location.href = newPagePath;
+          }
+        })
+        .catch((errorMessage: string) => {
+          setState({ status: NewPageState.Errored, errorMessage });
+          // formApi.setValue('keepOpen', false);
+        })
+        .finally(() => context.hidePageOverlay());
+    }
+  }, [submits]);
   // Order matter?
   const { status } = state;
   return (
