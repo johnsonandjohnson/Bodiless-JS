@@ -13,13 +13,13 @@ original content, they can restore the default content at the individual
 component level via a reset button in the context menu.
 
 As a site builder, if you see a component that is often reused
-through the site, say a tout on each article, it can be helpful to build this
-component as contentful tout and then a site editor can quickly choose this
+through the site - say a tout on each article - it can be helpful to build this
+component as a contentful tout and then a site editor can quickly choose this
 component and skip entering the data for it.
 
 ## Developing a Contentful Component
 
-Bodiless provides an API that allows you to extend your component and make it
+BodilessJS provides an API that allows you to extend your component and make it
 contentful component.
 
 * `withDefaultContent` will extend your component to allow default content to be
