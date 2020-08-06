@@ -13,7 +13,9 @@
  */
 
 /* eslint-disable no-alert */
-import React, { ComponentType, useCallback } from 'react';
+import React, {
+  ComponentType, useCallback, useEffect, useState,
+} from 'react';
 import {
   contextMenuForm,
   getUI,
@@ -22,6 +24,8 @@ import {
   useEditContext,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
+import { useFormApi } from 'informed';
+import { ComponentFormSpinner } from '@bodiless/ui';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
 import verifyPage from './PageVerification';
@@ -35,59 +39,79 @@ type Props = {
   client?: Client;
 };
 
-const formPageAdd = (client: Client, template: string, context: any) => contextMenuForm({
-  submitValues: (submittedValues: any) => {
-    (async () => {
-      context.showPageOverlay({
-        message: 'The page is creating.',
-        maxTimeoutInSeconds: 10,
-      });
-      const pathname = window.location.pathname
-        ? window.location.pathname.replace(/\/?$/, '/')
-        : '';
-      const newPagePath = pathname + submittedValues.path;
-      const result = await handle(client.savePage(newPagePath, template));
-      if (result.response) {
-        const isPageVerified = await verifyPage(newPagePath);
-        if (!isPageVerified) {
-          const errorMessage = `Unable to verify page creation.
-It is likely that your new page was created but is not yet available.
-Click ok to visit the new page; if it does not load, wait a while and reload.`;
-          context.showError({
-            message: errorMessage,
-            onClose: () => {
-              window.location.href = newPagePath;
-            },
-          });
-        } else {
-          window.location.href = newPagePath;
-        }
-      } else {
-        context.showError({
-          message: result.message,
-        });
-      }
-    })();
-  },
-})(({ ui, formState }: any) => {
-  const {
-    ComponentFormTitle,
-    ComponentFormLabel,
-    ComponentFormText,
-    ComponentFormError,
-  } = getUI(
-    ui,
-  );
-  const validate = useCallback((value: string) => (!value || !RegExp(/^[a-z0-9_-]+$/i).test(value)
-    ? 'No special characters or spaces allowed'
-    : undefined), []);
+enum NewPageState {
+  Init,
+  Pending,
+  Complete,
+  Errored,
+}
 
+type PageStatus = {
+  status: NewPageState;
+  errorMessage?: string;
+};
+
+const createPage = async ({ path, client, template } : any) => {
+  const context = useEditContext();
+  context.showPageOverlay({ hasSpinner: false });
+  const pathname = window.location.pathname
+    ? window.location.pathname.replace(/\/?$/, '/')
+    : '';
+  const newPagePath = pathname + path;
+  // Create the page.
+  const result = await handle(client.savePage(newPagePath, template));
+  // If the page was created successfully:
+  if (result.response) {
+    // Verify the creation of the page.
+    const isPageVerified = await verifyPage(newPagePath);
+    context.hidePageOverlay();
+    if (!isPageVerified) {
+      const errorMessage = `Unable to verify page creation.
+        It is likely that your new page was created but is not yet available.
+        Click ok to visit the new page; if it does not load, wait a while and reload.`;
+      // @fixme: what to do here?
+      return Promise.reject(errorMessage);
+    }
+    return Promise.resolve(newPagePath);
+  }
+  context.hidePageOverlay();
+  return Promise.reject(result.message);
+};
+
+const CreatPage = (props : any) => {
+  const { ui, formState, setState } = props;
+  const { client, template } = props;
+  const formApi = useFormApi();
+  // If the form is submitted and valid then lets try to creat a page.
+  if (formState.submits === 1 && formState.invalid === false) {
+    setState({ status: NewPageState.Pending });
+    const submittedValues = formState.values;
+    const { path } = submittedValues;
+    // Create the page.
+    createPage({ path, client, template })
+      .then((newPagePath: string) => {
+        if (newPagePath) {
+          setState({ status: NewPageState.Complete });
+          formApi.setValue('keepOpen', false);
+          // window.location.href = newPagePath;
+        }
+      })
+      .catch((errorMessage: string) => {
+        setState({ status: NewPageState.Errored, errorMessage });
+        formApi.setValue('keepOpen', false);
+      });
+  }
+  const { ComponentFormLabel, ComponentFormText, ComponentFormError } = getUI(ui);
+  const validate = useCallback(
+    (value: string) => (!value || !RegExp(/^[a-z0-9_-]+$/i).test(value)
+      ? 'No special characters or spaces allowed'
+      : undefined),
+    [],
+  );
   // ensure trailing slash is present
   const currentPage = window.location.href.replace(/\/?$/, '/');
-
   return (
     <>
-      <ComponentFormTitle>Add a New Page</ComponentFormTitle>
       <ComponentFormLabel htmlFor="new-page-path">
         URL
         <br />
@@ -100,16 +124,108 @@ Click ok to visit the new page; if it does not load, wait a while and reload.`;
         validateOnChange
         validateOnBlur
       />
+      <ComponentFormText type="hidden" field="keepOpen" initialValue={false} />
       {formState.errors && formState.errors.path && (
-      <ComponentFormError>{formState.errors.path}</ComponentFormError>
+        <ComponentFormError>{formState.errors.path}</ComponentFormError>
       )}
     </>
   );
+};
+
+const PageComp = (props : any) => {
+  const { status, ui } = props;
+  const { ComponentFormTitle, ComponentFormText, ComponentFormError } = getUI(ui);
+  switch (status) {
+    case NewPageState.Init:
+      return (
+        <>
+          <ComponentFormTitle>Add a New Page</ComponentFormTitle>
+          <ComponentFormText type="hidden" field="keepOpen" initialValue />
+          <CreatPage
+            ui={ui}
+            formState={formState}
+            setState={setState}
+            client={client}
+            template={template}
+          />
+        </>
+      );
+    case NewPageState.Pending:
+      return (
+        <>
+          <ComponentFormTitle>Creating</ComponentFormTitle>
+          <ComponentFormSpinner />
+        </>
+      );
+    case NewPageState.Complete:
+      return (
+        <>
+          <ComponentFormTitle>Page Created at ...</ComponentFormTitle>
+        </>
+      );
+    case NewPageState.Errored:
+      return (
+        <>
+          <ComponentFormError>{errorMessage}</ComponentFormError>
+        </>
+      );
+    default: return (<></>);
+  }
+};
+const formPageAdd = (client: Client, template: string) => contextMenuForm({
+  submitValues: (submittedValues: any) => {
+    const { keepOpen } = submittedValues;
+    console.log(keepOpen);
+    return true;
+    // return keepOpen;
+  },
+})(({ ui, formState }: any) => {
+  const { ComponentFormTitle, ComponentFormText, ComponentFormError } = getUI(ui);
+  const [state, setState] = useState<PageStatus>({
+    status: NewPageState.Init,
+  });
+  const { status, errorMessage } = state;
+  switch (status) {
+    case NewPageState.Init:
+      return (
+        <>
+          <ComponentFormTitle>Add a New Page</ComponentFormTitle>
+          <ComponentFormText type="hidden" field="keepOpen" initialValue />
+          <CreatPage
+            ui={ui}
+            formState={formState}
+            setState={setState}
+            client={client}
+            template={template}
+          />
+        </>
+      );
+    case NewPageState.Pending:
+      return (
+        <>
+          <ComponentFormTitle>Creating</ComponentFormTitle>
+          <ComponentFormSpinner />
+        </>
+      );
+    case NewPageState.Complete:
+      return (
+        <>
+          <ComponentFormTitle>Page Created at ...</ComponentFormTitle>
+        </>
+      );
+    case NewPageState.Errored:
+      return (
+        <>
+          <ComponentFormError>{errorMessage}</ComponentFormError>
+        </>
+      );
+    default: return (<></>);
+  }
 });
 
 const defaultClient = new BackendClient();
 
-const useGetMenuOptions = (): () => TMenuOption[] => {
+const useGetMenuOptions = (): (() => TMenuOption[]) => {
   const context = useEditContext();
   const gatsbyPage = useGatsbyPageContext();
 
@@ -125,7 +241,9 @@ const useGetMenuOptions = (): () => TMenuOption[] => {
 };
 
 const menuOptions = { useGetMenuOptions, name: 'Gatsby' };
-const NewPageProvider = withMenuOptions(menuOptions)(React.Fragment) as ComponentType<Props>;
+const NewPageProvider = withMenuOptions(menuOptions)(
+  React.Fragment,
+) as ComponentType<Props>;
 NewPageProvider.displayName = 'NewPageProvider';
 
 export default NewPageProvider;
