@@ -4,7 +4,7 @@ BodilessJS is in itself is not very opinionated about the responsiveness but the
 are some components and features that do provide specific responsive behaviors.
 
 BodilessJS primarily uses [TailwindCSS](https://tailwindcss.com) to give the
-site its reponsiveness. While not a requirement to use, its included within the
+site its reponsiveness. While not a requirement to use, it's included within the
 Example
 [Test Site](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/test-site)
 and
@@ -12,7 +12,7 @@ and
 
 ### Site Editing
 
-The BodilessJS site editing interface was designed to be edited in desktop
+The BodilessJS site editing interface was designed for desktop
 scenario based on the assumption that site editors were working on desktop size
 screen for productivity.
 
@@ -23,13 +23,13 @@ extra scrolling.
 
 ## Breakpoints
 By default, the breakpoints are set by Tailwind and are defined by TailwindCSS
-default's
+default's:
 
 | Small     | Medium    | Large      | Extra Large | 
 | --------- | --------- | ---------- | ----------- |
 | <= 640px  | 641-768px | 769-1024px | 1280px      |
 
-A site builder can changes by making the modifications in the sites
+A site builder can change the breakpoints by modifying the site's
 `tailwind.config.js` by following the directions specified in
 [Tailwind Breakpoints](https://tailwindcss.com/docs/breakpoints/).
 
