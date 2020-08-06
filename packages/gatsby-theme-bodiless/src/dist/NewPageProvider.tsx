@@ -13,9 +13,7 @@
  */
 
 /* eslint-disable no-alert */
-import React, {
-  ComponentType, useCallback, useEffect, useState,
-} from 'react';
+import React, { ComponentType, useCallback, useState } from 'react';
 import {
   contextMenuForm,
   getUI,
@@ -74,7 +72,7 @@ const createPage = async ({ path, client, template } : any) => {
     }
     return Promise.resolve(newPagePath);
   }
-  context.hidePageOverlay();
+
   return Promise.reject(result.message);
 };
 
@@ -93,10 +91,10 @@ const CreatPage = (props : any) => {
         if (newPagePath) {
           setState({ status: NewPageState.Complete });
           formApi.setValue('keepOpen', false);
-          // window.location.href = newPagePath;
+          window.location.href = newPagePath;
         }
       })
-      .catch((errorMessage: string) => {
+      .catch((errorMessage : string) => {
         setState({ status: NewPageState.Errored, errorMessage });
         formApi.setValue('keepOpen', false);
       });
@@ -130,47 +128,6 @@ const CreatPage = (props : any) => {
       )}
     </>
   );
-};
-
-const PageComp = (props : any) => {
-  const { status, ui } = props;
-  const { ComponentFormTitle, ComponentFormText, ComponentFormError } = getUI(ui);
-  switch (status) {
-    case NewPageState.Init:
-      return (
-        <>
-          <ComponentFormTitle>Add a New Page</ComponentFormTitle>
-          <ComponentFormText type="hidden" field="keepOpen" initialValue />
-          <CreatPage
-            ui={ui}
-            formState={formState}
-            setState={setState}
-            client={client}
-            template={template}
-          />
-        </>
-      );
-    case NewPageState.Pending:
-      return (
-        <>
-          <ComponentFormTitle>Creating</ComponentFormTitle>
-          <ComponentFormSpinner />
-        </>
-      );
-    case NewPageState.Complete:
-      return (
-        <>
-          <ComponentFormTitle>Page Created at ...</ComponentFormTitle>
-        </>
-      );
-    case NewPageState.Errored:
-      return (
-        <>
-          <ComponentFormError>{errorMessage}</ComponentFormError>
-        </>
-      );
-    default: return (<></>);
-  }
 };
 const formPageAdd = (client: Client, template: string) => contextMenuForm({
   submitValues: (submittedValues: any) => {
@@ -210,7 +167,8 @@ const formPageAdd = (client: Client, template: string) => contextMenuForm({
     case NewPageState.Complete:
       return (
         <>
-          <ComponentFormTitle>Page Created at ...</ComponentFormTitle>
+          <ComponentFormTitle>Redirecting...</ComponentFormTitle>
+          <ComponentFormSpinner />
         </>
       );
     case NewPageState.Errored:
