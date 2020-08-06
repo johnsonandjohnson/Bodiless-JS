@@ -37,9 +37,9 @@ A site builder can change the breakpoints by modifying the site's
 review the next section to determine if there needs to be update to any
 component's behavior.
 
-## Components with Custom a Responsive Behavior
+## Components with Custom Responsive Behavior
 
-At times, there is need to define a specific responsive behavior that can't be
+At times, you may need to define a specific responsive behavior that can't be
 defined by tailwind classes by itself and should be included within the
 component. BodilessJS provides a mechanism to allow the site to handle the
 custom responsive behaviors.
@@ -49,7 +49,7 @@ Within the Starter site, the
 will read in the Tailwind breakpoints via
 [resolveConfig()](https://tailwindcss.com/docs/configuration/#referencing-in-javascript)
 set in the Tailwind.config.js (see previous section). These breakpoints are
-exported as `breakpoints` object that contain the site's configuration.
+exported as `breakpoints` object that contains the site's configuration.
 
 BodilessJS provides the following tools to work with these breakpoints:
 * [`withPageDimensionsContext`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/packages/bodiless-components/src/PageDimensionsProvider.tsx)

@@ -11,7 +11,7 @@ learn more from:
 
 Most of the site's styling can be defined with Tailwind and for the most part,
 BodilessJS will defer to Tailwind documentation. The following documentation
-either are specific Bodiless applications of Tailwind or important enough to
+is either specific to Bodiless applications of Tailwind or important enough to
 call out to help direct to the specific Tailwind documentation.
 
 ## Tailwind Configuration File
@@ -64,12 +64,12 @@ classes can be prefixed with responsive size.
 
 ### Breakpoints
 
-For more information, about setting the [responsive
+For more information, see [responsive
 breakpoints](./Responsiveness#Breakpoints).
 
 ## Setting maximum container width of a site
 
-If a site has maximum container width of a site should be, they can be set with
+If a site has a maximum container width, they can be set with
 [max-width
 breakpoints](https://tailwindcss.com/docs/breakpoints/#max-width-breakpoints)
 and limit the size of the containers at different breakpoints. This is done via
@@ -96,9 +96,9 @@ within the pages, or within the component that is using them.
 component or page it is needed for.
 
 For example:
-* If its css used exclusively for the homepage, place it `/src/pages` and
-  include it in the `index.tsx`.
-* If its css used for a component, place it components folder and include it
+* css used exclusively for the homepage should be placed in `/src/pages` and
+  included it in the `index.tsx`.
+* css used for a component should be placed in components folder and included
   with the component.
 
 By doing the above, this custom css will only be loaded for pages or pages that
@@ -106,7 +106,7 @@ use the component and help with performance. While BodilessJS runs with
 [gatsby purge css feature](https://www.gatsbyjs.org/packages/gatsby-plugin-purgecss)
 tool this is only processing on tailwind css and not on any custom css included.
 
-?> **Tip** As a site developer its always good practice to remove css that isn't
+?> **Tip** As a site developer it is always good practice to remove css that isn't
 being used if updates/changes are being made.
 
 Common usages for using custom css:
