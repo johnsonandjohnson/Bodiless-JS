@@ -83,7 +83,9 @@ const fullFeaturedDesign = {
 };
 
 const EditorSimple = withDesign(simpleDesign)(RichText);
+const EditorSimplePreview = withDesign(simpleDesign)(RichTextPreview);
 const EditorBasic = withDesign(basicDesign)(RichText);
+const EditorBasicPreview = withDesign(basicDesign)(RichTextPreview);
 const EditorFullFeatured = withDesign(fullFeaturedDesign)(RichText);
 const EditorFullFeaturedPreview = withDesign(fullFeaturedDesign)(RichTextPreview);
 
@@ -95,6 +97,8 @@ export {
   EditorBasic,
   EditorFullFeatured,
   EditorSimple,
+  EditorSimplePreview,
+  EditorBasicPreview,
   EditorFullFeaturedPreview,
   withEditorBasic,
   withEditorSimple,

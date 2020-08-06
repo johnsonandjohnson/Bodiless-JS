@@ -32,6 +32,8 @@ import {
   EditorBasic,
   EditorFullFeatured,
   EditorSimple,
+  EditorBasicPreview,
+  EditorSimplePreview,
   EditorFullFeaturedPreview,
 } from '../Editors';
 import { withType } from './Categories';
@@ -42,14 +44,14 @@ const toggle = () => useComponentDisplayModeContext().mode === ComponentDisplayM
 
 const richTextVariation = {
   EditorSimple: flow(
-    replaceWith(EditorSimple),
+    replaceWith(withFlowToggle(toggle)(EditorSimplePreview, EditorSimple)),
     withType('Rich Text')(),
     withRichText('Simple')(),
     withTitle('Simple Rich Text'),
     withDesc('Adds a block of text for a Title.\n'),
   ),
   EditorBasic: flow(
-    replaceWith(EditorBasic),
+    replaceWith(withFlowToggle(toggle)(EditorBasicPreview, EditorBasic)),
     withType('Rich Text')(),
     withRichText('Basic')(),
     withTitle('Basic Rich Text'),
