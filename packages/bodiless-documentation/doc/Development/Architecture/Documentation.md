@@ -18,7 +18,7 @@ We are using [docsify](https://github.com/docsifyjs/docsify/) to generate a web 
 
 If there is documentation that is specific to a package, then it should be include in the package as part of the readme for that package, or as seperate markdown files.
 Each package can have a `{namespace}.docs.json` file, that describes the structure and location of files.  (The `{namespace}` is a unique key which identifies the
-domain of your documentation. All Bodiless-JS packages have a
+domain of your documentation. All BodilessJS packages have a
 `bodiless.docs.json` file.  We'll talk about namespaces in greater detail below). 
 For example if your package added a component it might have a `bodiless.docs.json`:
 
