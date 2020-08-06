@@ -27,7 +27,7 @@ immutable, and components simply consume the data therein.
 
 ## Flow
 
-THe following diagram illustrates the flow of data in the edit environment.
+The following diagram illustrates the flow of data in the edit environment.
 
 ![Data Flow](assets/data.jpg)
 
@@ -52,7 +52,7 @@ THe following diagram illustrates the flow of data in the edit environment.
    component to re-render. As a result, we explicity prevent update of the main
    page component, which would otherwise re-render itself and all children
    whenever a json file was modified. Note also that we compare the incoming
-   data from Gatsby to the data already in the score, and only update if it has
+   data from Gatsby to the data already in the store, and only update if it has
    changed.
 
 4. We refer to each element in the store as a "node", and each is represented by
@@ -244,7 +244,7 @@ This could be solved by ensuring that our aria-label component provides a
 const withAriaLabel = Component => withNode(
   props => (<Component nodeKey="component" {...props} aria-label={useNode().node.data} />)
 );
-``
+```
 This will work, but consider the resulting node hierarchy:
 ```
 content.json // This contains the aria-label data
