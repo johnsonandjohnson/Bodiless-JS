@@ -12,12 +12,12 @@
  * limitations under the License.
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import { graphql } from 'gatsby';
 import { Page, PageProps } from '@bodiless/gatsby-theme-bodiless';
 import { flow } from 'lodash';
 import {
-  H1, addClasses,
+  H1, addClasses, Div,
 } from '@bodiless/fclasses';
 import { asEditable } from '@bodiless/components';
 import { LandscapeLinkableImage } from '../../../components/Image';
@@ -31,7 +31,7 @@ const PrimaryHeader = flow(
   asEditable('title', 'Title'),
 )(H1);
 
-const Body = withSimpleEditor('body', 'Body')(Fragment);
+const Body = withSimpleEditor('body', 'Body')(Div);
 
 export default (props: PageProps) => (
   <Page {...props}>
