@@ -79,7 +79,7 @@ This contentful component can be used within a page, template or added to FlowCo
 
 ### Defining a Contentful Component that consists of composition of multiple components
 
-The following is example of defining a tout contentful component (which is a composition of set of components: link, rich text editor, image.)
+The following is an example of defining a tout contentful component (which is a composition of set of components: link, rich text editor, image.)
 
 The logic is the same except that `withResetButton`'s are added to each component.
 
