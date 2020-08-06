@@ -76,10 +76,81 @@ const createPage = async ({ path, client, template } : any) => {
   return Promise.reject(result.message);
 };
 
+const PageComp = (props : any) => {
+  const {
+    status, ui, formState, errorMessage,
+  } = props;
+  const {
+    ComponentFormLabel,
+    ComponentFormText,
+    ComponentFormError,
+    ComponentFormTitle,
+  } = getUI(ui);
+  console.log(formState);
+  // ensure trailing slash is present
+  const currentPage = window.location.href.replace(/\/?$/, '/');
+  const validate = useCallback(
+    (value: string) => (!value || !RegExp(/^[a-z0-9_-]+$/i).test(value)
+      ? 'No special characters or spaces allowed'
+      : undefined),
+    [],
+  );
+  switch (status) {
+    case NewPageState.Init: {
+      return (
+        <>
+          <ComponentFormTitle>Add a New Page</ComponentFormTitle>
+          <ComponentFormLabel htmlFor="new-page-path">
+            URL
+            <br />
+            {`${currentPage}...`}
+          </ComponentFormLabel>
+          <ComponentFormText
+            field="path"
+            id="new-page-path"
+            validate={validate}
+            validateOnChange
+            validateOnBlur
+          />
+          {formState.errors && formState.errors.path && (
+            <ComponentFormError>{formState.errors.path}</ComponentFormError>
+          )}
+
+        </>
+      );
+    }
+    case NewPageState.Pending:
+      return (
+        <>
+          <ComponentFormTitle>Creating</ComponentFormTitle>
+          <ComponentFormSpinner />
+        </>
+      );
+    case NewPageState.Complete:
+      return (
+        <>
+          <ComponentFormTitle>Done...</ComponentFormTitle>
+        </>
+      );
+    case NewPageState.Errored:
+      return (
+        <>
+          <ComponentFormError>{errorMessage}</ComponentFormError>
+        </>
+      );
+    default: return (<></>);
+  }
+};
+
 const CreatPage = (props : any) => {
-  const { ui, formState, setState } = props;
-  const { client, template } = props;
+  const {
+    ui, formState, client, template,
+  } = props;
   const formApi = useFormApi();
+  const [state, setState] = useState<PageStatus>({
+    status: NewPageState.Init,
+  });
+  const { status } = state;
   // If the form is submitted and valid then lets try to creat a page.
   if (formState.submits === 1 && formState.invalid === false) {
     setState({ status: NewPageState.Pending });
@@ -91,7 +162,7 @@ const CreatPage = (props : any) => {
         if (newPagePath) {
           setState({ status: NewPageState.Complete });
           formApi.setValue('keepOpen', false);
-          window.location.href = newPagePath;
+          // window.location.href = newPagePath;
         }
       })
       .catch((errorMessage : string) => {
@@ -99,33 +170,9 @@ const CreatPage = (props : any) => {
         formApi.setValue('keepOpen', false);
       });
   }
-  const { ComponentFormLabel, ComponentFormText, ComponentFormError } = getUI(ui);
-  const validate = useCallback(
-    (value: string) => (!value || !RegExp(/^[a-z0-9_-]+$/i).test(value)
-      ? 'No special characters or spaces allowed'
-      : undefined),
-    [],
-  );
-  // ensure trailing slash is present
-  const currentPage = window.location.href.replace(/\/?$/, '/');
   return (
     <>
-      <ComponentFormLabel htmlFor="new-page-path">
-        URL
-        <br />
-        {`${currentPage}...`}
-      </ComponentFormLabel>
-      <ComponentFormText
-        field="path"
-        id="new-page-path"
-        validate={validate}
-        validateOnChange
-        validateOnBlur
-      />
-      <ComponentFormText type="hidden" field="keepOpen" initialValue={false} />
-      {formState.errors && formState.errors.path && (
-        <ComponentFormError>{formState.errors.path}</ComponentFormError>
-      )}
+      <PageComp formState={formState} status={status} ui={ui} errorMessage={state.errorMessage} />
     </>
   );
 };
@@ -136,50 +183,7 @@ const formPageAdd = (client: Client, template: string) => contextMenuForm({
     return true;
     // return keepOpen;
   },
-})(({ ui, formState }: any) => {
-  const { ComponentFormTitle, ComponentFormText, ComponentFormError } = getUI(ui);
-  const [state, setState] = useState<PageStatus>({
-    status: NewPageState.Init,
-  });
-  const { status, errorMessage } = state;
-  switch (status) {
-    case NewPageState.Init:
-      return (
-        <>
-          <ComponentFormTitle>Add a New Page</ComponentFormTitle>
-          <ComponentFormText type="hidden" field="keepOpen" initialValue />
-          <CreatPage
-            ui={ui}
-            formState={formState}
-            setState={setState}
-            client={client}
-            template={template}
-          />
-        </>
-      );
-    case NewPageState.Pending:
-      return (
-        <>
-          <ComponentFormTitle>Creating</ComponentFormTitle>
-          <ComponentFormSpinner />
-        </>
-      );
-    case NewPageState.Complete:
-      return (
-        <>
-          <ComponentFormTitle>Redirecting...</ComponentFormTitle>
-          <ComponentFormSpinner />
-        </>
-      );
-    case NewPageState.Errored:
-      return (
-        <>
-          <ComponentFormError>{errorMessage}</ComponentFormError>
-        </>
-      );
-    default: return (<></>);
-  }
-});
+})((formProps : any) => <CreatPage client={client} template={template} {...formProps} />);
 
 const defaultClient = new BackendClient();
 
