@@ -18,7 +18,7 @@ import { SortableContainer, SortEndHandler } from 'react-sortable-hoc';
 import { useContextActivator, useEditContext } from '@bodiless/core';
 
 type FinalUI = {
-  FlowContainerEmpty: ComponentType<HTMLProps<HTMLDivElement>> | string,
+  FlowContainerEmptyWrapper: ComponentType<HTMLProps<HTMLDivElement>> | string,
 };
 
 export type UI = Partial<FinalUI>;
@@ -31,27 +31,36 @@ export type SortableListProps = {
 };
 
 const defaultUI: FinalUI = {
-  FlowContainerEmpty: 'div',
+  FlowContainerEmptyWrapper: 'div',
 };
 
 const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });
 
+const FlowContainerEmpty = (ui: UI) => {
+  const { FlowContainerEmptyWrapper } = getUI(ui);
+  const context = useEditContext();
+  // mobx has issues with destructured values
+  // eslint-disable-next-line react/destructuring-assignment
+  const activeClassName = context.isActive ? 'bl-border-orange-400' : 'hover:bl-border-orange-400';
+  const classNames = `bl-border-2 bl-border-dashed bl-flex bl-w-full bl-justify-center 
+    bl-flex-wrap bl-py-grid-3 ${activeClassName}`;
+  return (
+    <FlowContainerEmptyWrapper className={classNames}>
+      Empty FlowContainer
+    </FlowContainerEmptyWrapper>
+  );
+};
+
 const SortableListWrapper = SortableContainer(
   observer(
     ({ children, ui, ...rest }: SortableListProps): React.ReactElement<SortableListProps> => {
-      if (!children || !children.length) {
-        const { FlowContainerEmpty } = getUI(ui);
-        const context = useEditContext();
-        const activeClassName = context.isActive ? 'bl-border-orange-400' : 'hover:bl-border-orange-400';
-
-        return (
-          <FlowContainerEmpty {...rest} className={`bl-flex bl-justify-center bl-flex-wrap bl-py-grid-3 ${activeClassName}`} {...useContextActivator()}>
-            Empty FlowContainer
-          </FlowContainerEmpty>
-        );
-      }
+      const content = children && children.length
+        ? children
+        : <FlowContainerEmpty />;
       return (
-        <section {...rest} {...useContextActivator()}>{children}</section>
+        <section {...rest} {...useContextActivator()}>
+          {content}
+        </section>
       );
     },
   ),

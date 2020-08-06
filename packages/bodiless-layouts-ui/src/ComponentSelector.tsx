@@ -25,12 +25,16 @@ import { ComponentSelector as CleanComponentSelector, ComponentSelectorUI, Compo
 export const ui: ComponentSelectorUI = {
   MasterWrapper: addClasses('bl-flex bl-form-wrapper')(Div),
   FlexSection: addClasses('bl-pt-grid-16')(Div),
+  FlexSectionFull: addClasses('bl-pt-grid-16 bl-w-full')(Div),
   FlowContainerEmpty: addClasses(
     'bl-border-2 bl-border-dashed bl-text-gray-600',
   )(Div),
   ItemBoxWrapper: addClasses('bl-p-grid-2')(Div),
   ItemBox: addClasses(
-    'bl-bg-grey-200 bl-flex bl-flex-col bl-items-center bl-justify-center bl-p-grid-2 bl-h-full bl-w-full bl-relative bl-overflow-hidden bl-cursor-pointer',
+    'bl-bg-grey-200 bl-flex bl-flex-col bl-items-center bl-p-grid-2 bl-h-full bl-w-full bl-relative bl-overflow-hidden bl-cursor-pointer',
+  )(Div),
+  GridListBoxWrapper: addClasses(
+    'bl-w-full bl-h-xl-grid-2',
   )(Div),
   GridListBoxInner: addClasses(
     'bl-w-full bl-overflow-y-scroll bl-flex bl-flex-wrap bl-h-xl-grid-2',
@@ -51,7 +55,7 @@ export const ui: ComponentSelectorUI = {
   )(Span),
 
   ComponentSelectorWrapper: addClasses(
-    'bl-text-white bl-mr-grid-3',
+    'bl-text-white bl-mr-grid-3  bl-whitespace-no-wrap',
   )(Div),
 
   SubmitButton: addClasses(

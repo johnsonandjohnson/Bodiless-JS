@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.52](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.51...v0.0.52) (2020-07-29)
+
+
+### Bug Fixes
+
+* **test-site:** Add Page padding on example site ([#454](https://github.com/johnsonandjohnson/bodiless-js/issues/454)) ([66ab492](https://github.com/johnsonandjohnson/bodiless-js/commit/66ab492e3c3b4bb560b8474188e953b71b263410))
+* **test-site:** Change gallery-final header to landscape image ([#452](https://github.com/johnsonandjohnson/bodiless-js/issues/452)) ([d1457d1](https://github.com/johnsonandjohnson/bodiless-js/commit/d1457d15f173cccf3eebd61347c3c2dcf15ac156))
+* **test-site:** Editable 404 with flowcontainer ([#457](https://github.com/johnsonandjohnson/bodiless-js/issues/457)) ([51e2239](https://github.com/johnsonandjohnson/bodiless-js/commit/51e223905c0a55e9e752dd9d7dd93ee328ef56b3))
+* **test-site:** Fix contentful link ([#444](https://github.com/johnsonandjohnson/bodiless-js/issues/444)) ([cdd6301](https://github.com/johnsonandjohnson/bodiless-js/commit/cdd6301059864eb25e1fd4324dcee0c9602ebe79))
+* **test-site:** Reusable Logo ([#455](https://github.com/johnsonandjohnson/bodiless-js/issues/455)) ([599603b](https://github.com/johnsonandjohnson/bodiless-js/commit/599603b972640ef96da288d2feecebdd3678bd07))
+
+
+### Features
+
+* **core-ui:** add a warning element for user warning messages ([f40eb6c](https://github.com/johnsonandjohnson/bodiless-js/commit/f40eb6cd8b7271f90c3895cc623e1a8778cfb9c9)), closes [#416](https://github.com/johnsonandjohnson/bodiless-js/issues/416)
+* **documentation:** API Doc for Site builder ([#474](https://github.com/johnsonandjohnson/bodiless-js/issues/474)) ([14e7594](https://github.com/johnsonandjohnson/bodiless-js/commit/14e75948f2856908f24781b64469df6c8810e7c6))
+* **documentation:** Document API documentation standards for JSDoc ([#414](https://github.com/johnsonandjohnson/bodiless-js/issues/414)) ([95af4e2](https://github.com/johnsonandjohnson/bodiless-js/commit/95af4e2f7401e8867466414bd1277c5c9ab67903))
+* **gatsby-theme-bodiless:** Refresh on pull that has upstream changes ([#395](https://github.com/johnsonandjohnson/bodiless-js/issues/395)) ([0e76057](https://github.com/johnsonandjohnson/bodiless-js/commit/0e76057e714347071086044a766d1218cf70f1dc))
+* **gatsby-theme-bodiless:** Retry on Error When Saving to the Backend ([#419](https://github.com/johnsonandjohnson/bodiless-js/issues/419)) ([931e87c](https://github.com/johnsonandjohnson/bodiless-js/commit/931e87c56fba2b04ee66fb90b7c143dd9c01a2c0))
+
+
+
+
+
 ## [0.0.51](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.50...v0.0.51) (2020-07-01)
 
 
