@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Copyright © 2019 Johnson & Johnson
  *
@@ -13,7 +14,9 @@
  */
 
 /* eslint-disable no-alert */
-import React, { ComponentType, useCallback, useState } from 'react';
+import React, {
+  ComponentType, useCallback, useEffect, useState,
+} from 'react';
 import {
   contextMenuForm,
   getUI,
@@ -50,8 +53,6 @@ type PageStatus = {
 };
 
 const createPage = async ({ path, client, template } : any) => {
-  const context = useEditContext();
-  context.showPageOverlay({ hasSpinner: false });
   const pathname = window.location.pathname
     ? window.location.pathname.replace(/\/?$/, '/')
     : '';
@@ -62,7 +63,6 @@ const createPage = async ({ path, client, template } : any) => {
   if (result.response) {
     // Verify the creation of the page.
     const isPageVerified = await verifyPage(newPagePath);
-    context.hidePageOverlay();
     if (!isPageVerified) {
       const errorMessage = `Unable to verify page creation.
         It is likely that your new page was created but is not yet available.
@@ -78,25 +78,26 @@ const createPage = async ({ path, client, template } : any) => {
 
 const PageComp = (props : any) => {
   const {
-    status, ui, formState, errorMessage,
+    status, ui, errors, errorMessage,
   } = props;
   const {
     ComponentFormLabel,
     ComponentFormText,
     ComponentFormError,
+    ComponentFormWarning,
     ComponentFormTitle,
   } = getUI(ui);
-  console.log(formState);
   // ensure trailing slash is present
   const currentPage = window.location.href.replace(/\/?$/, '/');
-  const validate = useCallback(
-    (value: string) => (!value || !RegExp(/^[a-z0-9_-]+$/i).test(value)
-      ? 'No special characters or spaces allowed'
-      : undefined),
-    [],
-  );
+
   switch (status) {
     case NewPageState.Init: {
+      const validate = useCallback(
+        (value: string) => (!value || !RegExp(/^[a-z0-9_-]+$/i).test(value)
+          ? 'No special characters or spaces allowed'
+          : undefined),
+        [],
+      );
       return (
         <>
           <ComponentFormTitle>Add a New Page</ComponentFormTitle>
@@ -112,8 +113,8 @@ const PageComp = (props : any) => {
             validateOnChange
             validateOnBlur
           />
-          {formState.errors && formState.errors.path && (
-            <ComponentFormError>{formState.errors.path}</ComponentFormError>
+          {errors && errors.path && (
+          <ComponentFormWarning>{errors.path}</ComponentFormWarning>
           )}
 
         </>
@@ -143,47 +144,65 @@ const PageComp = (props : any) => {
 };
 
 const CreatPage = (props : any) => {
-  const {
-    ui, formState, client, template,
-  } = props;
   const formApi = useFormApi();
+  const formState = formApi.getState();
+  const { submits, errors } = formState;
+  const {
+    client, ui, template,
+  } = props;
+  // const formApi = useFormApi();
   const [state, setState] = useState<PageStatus>({
     status: NewPageState.Init,
   });
-  const { status } = state;
+  console.log('outside use affect', formState.submits);
+  // useEffect(() => {
+  // (async () => {
+  console.log('in use effec submites', formState.submits);
   // If the form is submitted and valid then lets try to creat a page.
-  if (formState.submits === 1 && formState.invalid === false) {
+  if (submits >= 1 && formState.invalid === false) {
     setState({ status: NewPageState.Pending });
     const submittedValues = formState.values;
     const { path } = submittedValues;
     // Create the page.
-    createPage({ path, client, template })
-      .then((newPagePath: string) => {
-        if (newPagePath) {
-          setState({ status: NewPageState.Complete });
-          formApi.setValue('keepOpen', false);
-          // window.location.href = newPagePath;
-        }
-      })
-      .catch((errorMessage : string) => {
+    createPage({ path, client, template }).then((newPagePath: string) => {
+      if (newPagePath) {
+        setState({ status: NewPageState.Complete });
+        // formApi.setValue('keepOpen', false);
+        // window.location.href = newPagePath;
+      }
+    })
+      .catch((errorMessage: string) => {
         setState({ status: NewPageState.Errored, errorMessage });
-        formApi.setValue('keepOpen', false);
+        // formApi.setValue('keepOpen', false);
       });
   }
+  // })();
+  // }, []);
+  // Order matter?
+  const { status } = state;
   return (
     <>
-      <PageComp formState={formState} status={status} ui={ui} errorMessage={state.errorMessage} />
+      <PageComp status={status} ui={ui} errorMessage={state.errorMessage} errors={errors} />
     </>
   );
 };
+
 const formPageAdd = (client: Client, template: string) => contextMenuForm({
   submitValues: (submittedValues: any) => {
     const { keepOpen } = submittedValues;
-    console.log(keepOpen);
+    console.log('in submit values keep open: ', keepOpen);
     return true;
     // return keepOpen;
   },
-})((formProps : any) => <CreatPage client={client} template={template} {...formProps} />);
+})(({ ui } : any) => {
+  const { ComponentFormText } = getUI(ui);
+  return (
+    <>
+      <ComponentFormText type="hidden" field="keepOpen" initialValue={false} />
+      <CreatPage client={client} tempate={template} ui={ui} />
+    </>
+  );
+});
 
 const defaultClient = new BackendClient();
 
