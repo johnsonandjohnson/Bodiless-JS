@@ -13,7 +13,7 @@
  */
 
 import { observer } from 'mobx-react-lite';
-import React, { ComponentType as CT } from 'react';
+import React, { ComponentType as CT, FC } from 'react';
 import { flowRight, omit, pick } from 'lodash';
 import { useContextActivator, useEditContext } from './hooks';
 import { useNodeDataHandlers } from './NodeProvider';
@@ -28,6 +28,20 @@ export const withoutProps = <Q extends object>(keys: string[]) => (
   <P extends object>(Component: CT<P> | string) => (
     (props: P & Q) => <Component {...omit(props, keys) as P} />
   )
+);
+
+/**
+ * Creates an HOC which strips all but the specified props.
+ *
+ * @param keys A list of the prop-names to keep.
+ *
+ * @return An HOC which will strip all but the specified props.
+ */
+export const withOnlyProps = <Q extends object>(...keys: string[]) => (
+  <P extends object>(Component: CT<P> | string) => {
+    const WithOnlyProps: FC<P & Q> = props => <Component {...pick(props, keys) as P} />;
+    return WithOnlyProps;
+  }
 );
 
 export const withContextActivator = (
