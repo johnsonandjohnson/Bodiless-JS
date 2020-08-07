@@ -27,7 +27,9 @@ export default class Spawner {
     // may use binaries in their pack command which are only available there.
     const { PATH: PATH$ } = process.env;
     const PATH = PATH$ + path.delimiter + path.join(monorepo, 'node_modules', '.bin');
-    this.options.env = { ...process.env, PATH };
+    // adding a fake SPAWNED_PROCESS env variable because of a nodejs bug on Windows
+    // @see https://github.com/nodejs/node/issues/34667
+    this.options.env = { ...process.env, PATH, SPAWNED_PROCESS: '1' };
     this.spawn = this.spawn.bind(this);
   }
 
