@@ -145,13 +145,18 @@ const PageComp = (props : any) => {
   }
 };
 
-const CreatPage = (props : any) => {
-  const formApi = useFormApi();
+const formPageAdd = (client: Client, template: string) => contextMenuForm({
+  submitValues: (submittedValues: any) => {
+    const { keepOpen } = submittedValues;
+    console.log('in submit values keep open: ', keepOpen);
+    return true;
+    // return keepOpen;
+  },
+})(({ formState, ui } : any) => {
+  const { ComponentFormText } = getUI(ui);
   const {
     submits, errors, invalid, values,
-  } = formApi.getState();
-  const { client, ui, template } = props;
-  // const formApi = useFormApi();
+  } = formState;
   const [state, setState] = useState<PageStatus>({
     status: NewPageState.Init,
   });
@@ -160,7 +165,7 @@ const CreatPage = (props : any) => {
   useEffect(() => {
     console.log('in use effec submites', submits);
     // If the form is submitted and valid then lets try to creat a page.
-    if (submits === 1 && invalid === false) {
+    if (submits && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
       setState({ status: NewPageState.Pending });
       const { path } = values;
@@ -184,24 +189,8 @@ const CreatPage = (props : any) => {
   const { status } = state;
   return (
     <>
-      <PageComp status={status} ui={ui} errorMessage={state.errorMessage} errors={errors} />
-    </>
-  );
-};
-
-const formPageAdd = (client: Client, template: string) => contextMenuForm({
-  submitValues: (submittedValues: any) => {
-    const { keepOpen } = submittedValues;
-    console.log('in submit values keep open: ', keepOpen);
-    return true;
-    // return keepOpen;
-  },
-})(({ ui } : any) => {
-  const { ComponentFormText } = getUI(ui);
-  return (
-    <>
       <ComponentFormText type="hidden" field="keepOpen" initialValue={false} />
-      <CreatPage client={client} tempate={template} ui={ui} />
+      <PageComp status={status} ui={ui} errorMessage={state.errorMessage} errors={errors} />
     </>
   );
 });
