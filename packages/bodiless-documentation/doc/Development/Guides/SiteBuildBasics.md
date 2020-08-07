@@ -283,9 +283,9 @@ export default withEditor(SimpleEditor);
 ```
 
 Now
-- import `Fragment` from `react` by changing react import.
+- import `Div` from `@bodiless/fclasses` by adding it into the import.
   ```
-  import React, { Fragment } from 'react';
+  import { H1, addClasses, Div, } from '@bodiless/fclasses';
   ```
 - import your `withSimpleEditor` HOC into your `index.tsx`:
   ```
@@ -293,7 +293,7 @@ Now
   ```
 - create a `Body` component:
   ```
-  const Body = withSimpleEditor('body', 'Body')(Fragment);
+  const Body = withSimpleEditor('body', 'Body')(Div);
   ```
 - and replace the *lorem ipsum* paragraph with the following:
 ```
