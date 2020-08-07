@@ -26,7 +26,7 @@ export default class Spawner {
     // Add the monorepo npm bin directory to the path, bc some packages
     // may use binaries in their pack command which are only available there.
     const { PATH: PATH$ } = process.env;
-    const PATH = `${PATH$}:${path.join(monorepo, 'node_modules', '.bin')}`;
+    const PATH = PATH$ + path.delimiter + path.join(monorepo, 'node_modules', '.bin');
     this.options.env = { ...process.env, PATH };
     this.spawn = this.spawn.bind(this);
   }
