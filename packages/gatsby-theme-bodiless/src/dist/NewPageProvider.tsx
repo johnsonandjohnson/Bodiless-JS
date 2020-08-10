@@ -153,11 +153,9 @@ const NewPageComp = (props : NewPageProps) => {
 const formPageAdd = (client: Client, template: string) => contextMenuForm({
   submitValues: (submittedValues: any) => {
     const { keepOpen } = submittedValues;
-    console.log('in submit values keep open: ', keepOpen);
-    return true;
-    // return keepOpen;
+    return keepOpen;
   },
-})(({ formState, ui } : any) => {
+})(({ formState, ui, formApi } : any) => {
   const { ComponentFormText } = getUI(ui);
   const {
     submits, errors, invalid, values,
@@ -177,22 +175,22 @@ const formPageAdd = (client: Client, template: string) => contextMenuForm({
         .then((newPagePath: string) => {
           if (newPagePath) {
             setState({ status: NewPageState.Complete, newPagePath });
-            // formApi.setValue('keepOpen', false);
-            // window.location.href = newPagePath;
           }
         })
         .catch((errorMessage: string) => {
           setState({ status: NewPageState.Errored, errorMessage });
-          // formApi.setValue('keepOpen', false);
         })
-        .finally(() => context.hidePageOverlay());
+        .finally(() => {
+          context.hidePageOverlay();
+          formApi.setValue('keepOpen', false);
+        });
     }
   }, [submits]);
   // Order matter?
   const { status } = state;
   return (
     <>
-      <ComponentFormText type="hidden" field="keepOpen" initialValue={false} />
+      <ComponentFormText type="hidden" field="keepOpen" initialValue />
       <NewPageComp
         status={status}
         ui={ui}
