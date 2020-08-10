@@ -1,4 +1,3 @@
-// @ts-nocheck
 /**
  * Copyright © 2019 Johnson & Johnson
  *
@@ -25,7 +24,6 @@ import {
   useEditContext,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
-import { useFormApi } from 'informed';
 import { ComponentFormSpinner } from '@bodiless/ui';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
@@ -49,7 +47,13 @@ enum NewPageState {
 
 type PageStatus = {
   status: NewPageState;
+  newPagePath?: string;
   errorMessage?: string;
+};
+
+type NewPageProps = PageStatus & {
+  ui: any,
+  errors: any,
 };
 
 const createPage = async ({ path, client, template } : any) => {
@@ -59,8 +63,6 @@ const createPage = async ({ path, client, template } : any) => {
   const newPagePath = pathname + path;
   // Create the page.
   const result = await handle(client.savePage(newPagePath, template));
-  // @todo: remove after testing.
-  // const result = { response: false, message: 'terrible failure' }; // await handle(client.savePage(newPagePath, template));
   // If the page was created successfully:
   if (result.response) {
     // Verify the creation of the page.
@@ -69,7 +71,6 @@ const createPage = async ({ path, client, template } : any) => {
       const errorMessage = `Unable to verify page creation.
         It is likely that your new page was created but is not yet available.
         Click ok to visit the new page; if it does not load, wait a while and reload.`;
-      // @fixme: what to do here?
       return Promise.reject(errorMessage);
     }
     return Promise.resolve(newPagePath);
@@ -78,12 +79,13 @@ const createPage = async ({ path, client, template } : any) => {
   return Promise.reject(result.message);
 };
 
-const PageComp = (props : any) => {
+const NewPageComp = (props : NewPageProps) => {
   const {
-    status, ui, errors, errorMessage,
+    status, ui, errors, errorMessage, newPagePath,
   } = props;
   const {
     ComponentFormLabel,
+    ComponentFormDescription,
     ComponentFormText,
     ComponentFormError,
     ComponentFormWarning,
@@ -125,14 +127,17 @@ const PageComp = (props : any) => {
     case NewPageState.Pending:
       return (
         <>
-          <ComponentFormTitle>Creating</ComponentFormTitle>
+          <ComponentFormTitle>Creating Page</ComponentFormTitle>
           <ComponentFormSpinner />
         </>
       );
     case NewPageState.Complete:
       return (
         <>
-          <ComponentFormTitle>Done...</ComponentFormTitle>
+          <ComponentFormTitle>Operation Complete...</ComponentFormTitle>
+          <ComponentFormDescription>
+            <a href={newPagePath}>{`Click here to visit the new page. ${newPagePath}`}</a>
+          </ComponentFormDescription>
         </>
       );
     case NewPageState.Errored:
@@ -160,10 +165,8 @@ const formPageAdd = (client: Client, template: string) => contextMenuForm({
   const [state, setState] = useState<PageStatus>({
     status: NewPageState.Init,
   });
-  console.log('outside use affect', submits);
   const context = useEditContext();
   useEffect(() => {
-    console.log('in use effec submites', submits);
     // If the form is submitted and valid then lets try to creat a page.
     if (submits && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
@@ -173,8 +176,8 @@ const formPageAdd = (client: Client, template: string) => contextMenuForm({
       createPage({ path, client, template })
         .then((newPagePath: string) => {
           if (newPagePath) {
-            setState({ status: NewPageState.Complete });
-            formApi.setValue('keepOpen', false);
+            setState({ status: NewPageState.Complete, newPagePath });
+            // formApi.setValue('keepOpen', false);
             // window.location.href = newPagePath;
           }
         })
@@ -190,7 +193,13 @@ const formPageAdd = (client: Client, template: string) => contextMenuForm({
   return (
     <>
       <ComponentFormText type="hidden" field="keepOpen" initialValue={false} />
-      <PageComp status={status} ui={ui} errorMessage={state.errorMessage} errors={errors} />
+      <NewPageComp
+        status={status}
+        ui={ui}
+        errorMessage={state.errorMessage}
+        errors={errors}
+        newPagePath={state.newPagePath}
+      />
     </>
   );
 });
@@ -207,7 +216,7 @@ const useGetMenuOptions = (): (() => TMenuOption[]) => {
       icon: 'note_add',
       label: 'Page',
       isHidden: () => !context.isEdit,
-      handler: () => formPageAdd(defaultClient, gatsbyPage.subPageTemplate, context),
+      handler: () => formPageAdd(defaultClient, gatsbyPage.subPageTemplate),
     },
   ];
 };
