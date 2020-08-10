@@ -1,3 +1,3 @@
 # Development
 
-This section describes how to develop with the BodilessJS system.
+The 'Development' section provides information for site builders and developers on how to work within the BodilessJS system.

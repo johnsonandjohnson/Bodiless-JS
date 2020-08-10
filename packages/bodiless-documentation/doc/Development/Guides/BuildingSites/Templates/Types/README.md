@@ -1,3 +1,3 @@
 # Templates Types
 
-This section describes the individual templates available in the BodilessJS system.
+The 'Templates Types' section contains information regarding the individual templates available in BodilessJS.

@@ -1,3 +1,3 @@
 # Design
 
-This section describes the basic architecture of the BodilessJS system.
+The 'Design' section contains information regarding the design system of BodilessJS.
