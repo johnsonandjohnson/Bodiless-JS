@@ -17,21 +17,19 @@ import {
   withTitle,
   withFacet,
   withDesc,
-  withComponentSelectorToggle,
+  ifComponentSelector,
 } from '@bodiless/layouts';
 import {
   varyDesign,
   replaceWith,
   withDesign,
 } from '@bodiless/fclasses';
+import { asPreview } from '@bodiless/richtext';
 
 import {
   EditorBasic,
   EditorFullFeatured,
   EditorSimple,
-  EditorBasicPreview,
-  EditorSimplePreview,
-  EditorFullFeaturedPreview,
 } from '../Editors';
 import { withType } from './Categories';
 
@@ -39,21 +37,24 @@ const withRichText = withFacet('Rich Text');
 
 const richTextVariation = {
   EditorSimple: flow(
-    replaceWith(withComponentSelectorToggle(EditorSimplePreview, EditorSimple)),
+    replaceWith(EditorSimple),
+    ifComponentSelector(asPreview),
     withType('Rich Text')(),
     withRichText('Simple')(),
     withTitle('Simple Rich Text'),
     withDesc('Adds a block of text for a Title.\n'),
   ),
   EditorBasic: flow(
-    replaceWith(withComponentSelectorToggle(EditorBasicPreview, EditorBasic)),
+    replaceWith(EditorBasic),
+    ifComponentSelector(asPreview),
     withType('Rich Text')(),
     withRichText('Basic')(),
     withTitle('Basic Rich Text'),
     withDesc('Adds a block of text with basic formatting.\n'),
   ),
   EditorFullFeatured: flow(
-    replaceWith(withComponentSelectorToggle(EditorFullFeaturedPreview, EditorFullFeatured)),
+    replaceWith(EditorFullFeatured),
+    ifComponentSelector(asPreview),
     withType('Rich Text')(),
     withRichText('Full')(),
     withTitle('Full Rich Text'),

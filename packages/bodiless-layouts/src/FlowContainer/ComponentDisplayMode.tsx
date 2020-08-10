@@ -12,8 +12,10 @@
  * limitations under the License.
  */
 
-import React, { useContext } from 'react';
+import React, { useContext, ComponentType } from 'react';
+import { flow } from 'lodash';
 import { withFlowToggle } from '@bodiless/core';
+import { flowIf } from '@bodiless/fclasses';
 
 enum ComponentDisplayMode {
   ComponentSelector = 1,
@@ -21,10 +23,10 @@ enum ComponentDisplayMode {
   StaticFlowContainer = 3,
 }
 
-const defaultMode = ComponentDisplayMode.ComponentSelector;
+const defaultMode = ComponentDisplayMode.StaticFlowContainer;
 
 const ComponentDisplayModeContext = React.createContext({
-  mode: ComponentDisplayMode.ComponentSelector,
+  mode: defaultMode,
 });
 
 const useComponentDisplayModeContext = () => useContext(ComponentDisplayModeContext);
@@ -40,12 +42,13 @@ const ComponentDisplayModeProvider = ({ children, mode = defaultMode }) => {
   )
 }
 
-const useComponentSelectorToggle = () => useComponentDisplayModeContext().mode === ComponentDisplayMode.ComponentSelector;
-const withComponentSelectorToggle = withFlowToggle(useComponentSelectorToggle);
+const isComponentSelector = () => useComponentDisplayModeContext().mode === ComponentDisplayMode.ComponentSelector;
+
+const ifComponentSelector = flowIf(isComponentSelector);
 
 export {
   ComponentDisplayMode,
   ComponentDisplayModeProvider,
   useComponentDisplayModeContext,
-  withComponentSelectorToggle,
+  ifComponentSelector,
 };

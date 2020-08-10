@@ -26,6 +26,9 @@ import {
 } from '@bodiless/core';
 import {
   designable,
+  replaceWith,
+  flowIf,
+  hasProp,
   H1,
   H2,
   H3,
@@ -39,6 +42,7 @@ import {
   extendDesign,
   Design,
   DesignableComponents,
+  addProps,
 } from '@bodiless/fclasses';
 import {
   withSlateEditor,
@@ -309,7 +313,21 @@ const BaseRichTextPreview = <P extends object, D extends object>(props: P & Rich
   );
 }
 
-const RichText = designable(apply)(BasicRichText);
-const RichTextPreview = designable(apply)(BaseRichTextPreview);
+const asPreview = addProps({
+  preview: 1,
+});
+
+const withPreview = flowIf(hasProp('preview'))(
+  withoutProps(['preview']),
+  replaceWith(BaseRichTextPreview),
+);
+
+const RichText = flow(
+  withPreview,
+  designable(apply),
+)(BasicRichText);
+
 export default RichText;
-export { RichTextPreview };
+export {
+  asPreview,
+};

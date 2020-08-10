@@ -14,7 +14,7 @@
 
 export {
   default as RichText,
-  RichTextPreview,
+  asPreview,
 } from './RichText';
 export type { RichTextProps } from './RichText';
 export { default as asFloat } from './Float';

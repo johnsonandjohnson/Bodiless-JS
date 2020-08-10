@@ -40,9 +40,4 @@ const RichText = <P extends object, D extends object>(props: P & RichTextProps<D
   <PlainRichText {...props} ui={ui} />
 );
 
-const RichTextPreview = <P extends object, D extends object>(props: P & RichTextProps<D>) => (
-  <PlainRichTextPreview {...props} ui={ui} />
-);
-
 export default RichText;
-export { RichTextPreview };

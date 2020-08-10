@@ -18,7 +18,7 @@ import {
   withButton,
   withStrikeThroughMeta,
 } from '@bodiless/richtext';
-import { RichText, RichTextPreview } from '@bodiless/richtext-ui';
+import { RichText } from '@bodiless/richtext-ui';
 import {
   withDesign,
   Blockquote,
@@ -82,23 +82,15 @@ const fullFeaturedDesign = {
 };
 
 const EditorSimple = withDesign(simpleDesign)(RichText);
-const EditorSimplePreview = withDesign(simpleDesign)(RichTextPreview);
 const EditorBasic = withDesign(basicDesign)(RichText);
-const EditorBasicPreview = withDesign(basicDesign)(RichTextPreview);
 const EditorFullFeatured = withDesign(fullFeaturedDesign)(RichText);
-const EditorFullFeaturedPreview = withDesign(fullFeaturedDesign)(RichTextPreview);
-
 const withEditorBasic = withEditor(EditorBasic);
 const withEditorSimple = withEditor(EditorSimple);
 const withEditorFullFeatured = withEditor(EditorFullFeatured);
-
 export {
   EditorBasic,
   EditorFullFeatured,
   EditorSimple,
-  EditorSimplePreview,
-  EditorBasicPreview,
-  EditorFullFeaturedPreview,
   withEditorBasic,
   withEditorSimple,
   withEditorFullFeatured,
