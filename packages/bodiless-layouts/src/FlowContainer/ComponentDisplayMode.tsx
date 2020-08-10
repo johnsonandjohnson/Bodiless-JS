@@ -13,8 +13,6 @@
  */
 
 import React, { useContext, ComponentType } from 'react';
-import { flow } from 'lodash';
-import { withFlowToggle } from '@bodiless/core';
 import { flowIf } from '@bodiless/fclasses';
 
 enum ComponentDisplayMode {
@@ -31,17 +29,20 @@ const ComponentDisplayModeContext = React.createContext({
 
 const useComponentDisplayModeContext = () => useContext(ComponentDisplayModeContext);
 
-const ComponentDisplayModeProvider = ({ children, mode = defaultMode }) => {
-  const contextValue = {
-    mode
-  };
+type Props = {
+  mode: ComponentDisplayMode,
+};
+
+const ComponentDisplayModeProvider: ComponentType<Props> = ({ children, mode = defaultMode }) => {
+  const contextValue = { mode };
   return (
     <ComponentDisplayModeContext.Provider value={contextValue}>
       {children}
     </ComponentDisplayModeContext.Provider>
-  )
-}
+  );
+};
 
+// eslint-disable-next-line max-len
 const isComponentSelector = () => useComponentDisplayModeContext().mode === ComponentDisplayMode.ComponentSelector;
 
 const ifComponentSelector = flowIf(isComponentSelector);

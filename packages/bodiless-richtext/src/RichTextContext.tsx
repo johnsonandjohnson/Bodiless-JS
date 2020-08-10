@@ -39,7 +39,7 @@ export type PreviewUI = {
   PreviewWrapper?: ComponentType<HTMLProps<HTMLDivElement>> | string;
 };
 
-export const getUI = (ui: UI = {}) => ({
+export const getUI = (ui: UI & PreviewUI = {}) => ({
   ...defaultUI,
   ...ui,
 });

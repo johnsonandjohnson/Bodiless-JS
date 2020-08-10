@@ -80,7 +80,7 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
           <finalUI.FlexSectionFull>
             <finalUI.ComponentTitleWrapper>
               Components
-          </finalUI.ComponentTitleWrapper>
+            </finalUI.ComponentTitleWrapper>
             <SearchWrapper
               activeSearch={activeSearch}
               setActiveSearch={setActiveSearch}

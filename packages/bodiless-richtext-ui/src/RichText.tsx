@@ -15,8 +15,7 @@
 import React from 'react';
 import {
   RichText as PlainRichText,
-  RichTextPreview as PlainRichTextPreview,
-  RichTextProps
+  RichTextProps,
 } from '@bodiless/richtext';
 import { Button } from '@bodiless/ui';
 import StyledHoverMenu from './HoverMenu';

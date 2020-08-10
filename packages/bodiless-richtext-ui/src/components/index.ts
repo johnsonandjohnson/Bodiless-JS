@@ -16,4 +16,3 @@ export { default as Overlay } from './Overlay';
 export { default as CloseButton } from './CloseButton';
 export { default as ClickableWrapper } from './ClickableWrapper';
 export { default as PreviewWrapper } from './PreviewWrapper';
-

@@ -303,15 +303,18 @@ const apply = (design: Design<DesignableComponents>) => {
 
 const BaseRichTextPreview = <P extends object, D extends object>(props: P & RichTextProps<D>) => {
   const { components, ui } = props;
-  const finalComponents = withDefaults(components)
+  const finalComponents = withDefaults(components);
   const { PreviewWrapper } = getUI(ui);
   return (
-    <PreviewWrapper>{
-      // ToDo: refactor this
-      Object.values(finalComponents).map((C, i) => C.hoverButton && <PluginButton key={i} icon={C.hoverButton.icon} componentName="Button" />)
-    }</PreviewWrapper>
+    <PreviewWrapper>
+      {
+        Object.values(finalComponents)
+          // eslint-disable-next-line react/no-array-index-key
+          .map((C, i) => C.hoverButton && <PluginButton key={i} icon={C.hoverButton.icon} componentName="Button" />)
+      }
+    </PreviewWrapper>
   );
-}
+};
 
 const asPreview = addProps({
   preview: 1,

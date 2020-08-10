@@ -12,11 +12,12 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React, { ComponentType, HTMLProps } from 'react';
 import MaterialIcon from '@material/react-material-icon';
+import Button from '@bodiless/fclasses';
 import { useUI } from '../RichTextContext';
 
-const DefaultPluginButton = props  => <button {...props} />
+const DefaultPluginButton = Button;
 
 type uiIndexType = {
   [index: string]: any;
@@ -24,22 +25,22 @@ type uiIndexType = {
 
 type Props = {
   componentName?: string;
-  Component?: ComponentType<any>;
   icon: string;
-  // ToDo improve types
-  children: any;
-}
+} & HTMLProps<HTMLButtonElement>;
 
-const PluginButton = (props: Props) => {
-  const { componentName, Component, icon, children, ...rest } = props;
+const PluginButton: ComponentType<Props> = props => {
+  const {
+    componentName,
+    icon,
+    children,
+    ...rest
+  } = props;
 
   // Workaround to get styled component from UI if it exists with fallback to original Component.
   const completeUI: uiIndexType = useUI();
   let StyledComponent;
   if (componentName && completeUI[componentName]) {
     StyledComponent = completeUI[componentName];
-  } else if (Component) {
-    StyledComponent = Component;
   } else {
     StyledComponent = DefaultPluginButton;
   }
@@ -49,6 +50,6 @@ const PluginButton = (props: Props) => {
       {children || <MaterialIcon className="bl-material-icons" icon={icon} />}
     </StyledComponent>
   );
-}
+};
 
 export default PluginButton;
