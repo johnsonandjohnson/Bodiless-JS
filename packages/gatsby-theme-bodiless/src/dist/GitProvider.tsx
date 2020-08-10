@@ -29,6 +29,7 @@ import { AxiosPromise } from 'axios';
 import BackendClient from './BackendClient';
 import CommitsList from './CommitsList';
 import RemoteChanges from './RemoteChanges';
+import Reset from './Reset';
 import { GitClient } from './types';
 
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
@@ -143,37 +144,41 @@ const formGitPull = (client: GitClient, notifyOfChanges: ChangeNotifier) => cont
   );
 });
 
-const formGitReset = (client: GitClient, context: any) => contextMenuForm({
-  submitValues: () => {
-    (async () => {
-      context.showPageOverlay({
-        message: 'Revert is in progress. This may take a minute.',
-        maxTimeoutInSeconds: 10,
-      });
-      try {
-        await client.reset();
-        context.showPageOverlay({
-          message: 'Revert completed.',
-          hasSpinner: false,
-          hasCloseButton: true,
-          onClose: () => {
-            window.location.reload();
-          },
-        });
-      } catch {
-        context.showError();
-      }
-    })();
+const formGitReset = (client: GitClient) => contextMenuForm({
+  submitValues: (submittedValues: any) => {
+    const { keepOpen } = submittedValues;
+    console.log(keepOpen);
+    return keepOpen;
   },
+  // submitValues: () => {
+  //   (async () => {
+  //     context.showPageOverlay({
+  //       message: 'Revert is in progress. This may take a minute.',
+  //       maxTimeoutInSeconds: 10,
+  //     });
+  //     try {
+  //       await client.reset();
+  //       context.showPageOverlay({
+  //         message: 'Revert completed.',
+  //         hasSpinner: false,
+  //         hasCloseButton: true,
+  //         onClose: () => {
+  //           window.location.reload();
+  //         },
+  //       });
+  //     } catch {
+  //       context.showError();
+  //     }
+  //   })();
+  // },
 })(
-  ({ ui }: any) => {
-    const { ComponentFormTitle, ComponentFormLabel } = getUI(ui);
+  (props: any) => {
+    const { ui } = props;
+    const { ComponentFormText } = getUI(ui);
     return (
       <>
-        <ComponentFormTitle>Revert to saved</ComponentFormTitle>
-        <ComponentFormLabel htmlFor="reset-txt">
-          Discard local changes
-        </ComponentFormLabel>
+        <ComponentFormText type="hidden" field="keepOpen" initialValue />
+        <Reset {...props} client={client} />
       </>
     );
   },
@@ -212,7 +217,7 @@ const getMenuOptions = (
       label: 'Revert',
       icon: 'undo',
       isHidden: () => !context.isEdit,
-      handler: () => formGitReset(client, context),
+      handler: () => formGitReset(client),
     },
   ];
 };
