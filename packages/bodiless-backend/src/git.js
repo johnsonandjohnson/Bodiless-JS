@@ -129,6 +129,7 @@ const getChanges = async () => {
  * @param {array} options - Clone options [branch|directory].
  */
 const clone = async (url, options = {}) => {
+  const logger = new Logger('BACKEND');
   let result = await GitCmd.cmd().add('config', '--get', 'user.name').exec();
   const configName = result.stdout.trim().replace('\n', '');
   result = await GitCmd.cmd().add('config', '--get', 'user.email').exec();
@@ -139,6 +140,7 @@ const clone = async (url, options = {}) => {
   cmd.add('--config', `user.name=${configName}`);
   if (options.branch) cmd.add('-b', options.branch);
   if (options.directory) cmd.add(options.directory);
+  logger.log([`Clone to path: ${options.directory}`]);
   return cmd.exec();
 };
 
@@ -150,7 +152,8 @@ const clone = async (url, options = {}) => {
 const getConflicts = async () => {
   // const remoteUrl = await getRemote('origin');
   const logger = new Logger('BACKEND');
-  const directory = path.resolve(process.env.BODILESS_BACKEND_TMP || os.tmpdir(), v1());
+  const tmpDir = path.resolve(process.env.BODILESS_BACKEND_TMP || os.tmpdir(), v1());
+  const originalDir = process.cwd();
 
   // @todo: fs directory existence check.
   const branch = await getCurrentBranch();
@@ -160,8 +163,8 @@ const getConflicts = async () => {
   }
 
   const rootCmd = GitCmd.cmd().add('rev-parse', '--show-toplevel');
-  const root = getGitCmdOutput(await rootCmd.exec());
-  logger.log([`Repo root: ${root}`]);
+  const rootDir = getGitCmdOutput(await rootCmd.exec());
+  logger.log([`Repo root: ${rootDir}`]);
 
   const mergeUpstreamBranch = `origin-${upstreamBranch.replace('origin/', '')}`;
   const mergeMasterBranch = 'origin-master';
@@ -177,8 +180,8 @@ const getConflicts = async () => {
     `master:${mergeMasterBranch}`,
   ).exec();
 
-  await clone(root, { directory, branch: mergeUpstreamBranch });
-  process.chdir(directory);
+  await clone(rootDir, { directory: tmpDir, branch: mergeUpstreamBranch });
+  process.chdir(tmpDir);
 
   let conflictFiles = [];
   try {
@@ -196,7 +199,7 @@ const getConflicts = async () => {
   }
 
   // cleanup tmp repo and branches.
-  process.chdir(root);
+  process.chdir(rootDir);
   await GitCmd.cmd()
     .add(
       'branch',
@@ -206,8 +209,12 @@ const getConflicts = async () => {
       `${mergeUpstreamBranch}`,
     )
     .exec();
-  rimraf.sync(directory);
-  logger.log(`${directory} removed.`);
+  rimraf.sync(tmpDir);
+  logger.log(`${tmpDir} removed.`);
+
+  // restore original working directory
+  process.chdir(originalDir);
+  logger.log(`${originalDir} restored.`, process.cwd());
 
   return { hasConflict: conflictFiles.length > 0, files: conflictFiles };
 };
@@ -217,7 +224,8 @@ const getConflicts = async () => {
  */
 const mergeMaster = async () => {
   const logger = new Logger('BACKEND');
-  const directory = path.resolve(process.env.BODILESS_BACKEND_TMP || os.tmpdir(), v1());
+  const tmpDir = path.resolve(process.env.BODILESS_BACKEND_TMP || os.tmpdir(), v1());
+  const originalDir = process.cwd();
   const branch = await getCurrentBranch();
   const upstreamBranch = await getUpstreamTrackingBranch(branch);
 
@@ -227,10 +235,10 @@ const mergeMaster = async () => {
 
   const remote = getGitCmdOutput(await GitCmd.cmd().add('remote', 'get-url', 'origin').exec());
   const rootCmd = GitCmd.cmd().add('rev-parse', '--show-toplevel');
-  const root = getGitCmdOutput(await rootCmd.exec());
+  const rootDir = getGitCmdOutput(await rootCmd.exec());
 
-  await clone(root, { directory, branch: upstreamBranch.replace('origin/', '') });
-  process.chdir(directory);
+  await clone(rootDir, { directory: tmpDir, branch: upstreamBranch.replace('origin/', '') });
+  process.chdir(tmpDir);
 
   try {
     await GitCmd.cmd()
@@ -242,7 +250,7 @@ const mergeMaster = async () => {
       .exec();
 
     await GitCmd.cmd()
-      .add('merge', 'origin/master')
+      .add('merge', 'origin/master', '--no-edit', '-Xours')
       .exec();
 
     await GitCmd.cmd()
@@ -252,9 +260,13 @@ const mergeMaster = async () => {
     logger.error(e);
   }
 
-  process.chdir(root);
-  rimraf.sync(directory);
-  logger.log(`${directory} removed.`);
+  process.chdir(rootDir);
+  rimraf.sync(tmpDir);
+  logger.log(`${tmpDir} removed.`);
+
+  // restore original working directory
+  process.chdir(originalDir);
+  logger.log(`${originalDir} restored.`, process.cwd());
 
   return {};
 };
