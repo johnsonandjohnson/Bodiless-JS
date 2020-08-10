@@ -1,3 +1,3 @@
 # Tools
 
-This section describes the tools of the BodilessJS system.
+The 'Tools' section contains information on the tools available in BodilessJS.
