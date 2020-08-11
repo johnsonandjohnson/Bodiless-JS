@@ -61,6 +61,7 @@ const createPage = async ({ path, client, template } : any) => {
     ? window.location.pathname.replace(/\/?$/, '/')
     : '';
   const newPagePath = pathname + path;
+  console.log(newPagePath);
   // Create the page.
   const result = await handle(client.savePage(newPagePath, template));
   // If the page was created successfully:
