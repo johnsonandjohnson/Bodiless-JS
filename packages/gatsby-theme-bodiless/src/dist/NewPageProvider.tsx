@@ -71,12 +71,11 @@ const createPage = async ({ path, client, template } : any) => {
       const errorMessage = `Unable to verify page creation.
         It is likely that your new page was created but is not yet available.
         Click ok to visit the new page; if it does not load, wait a while and reload.`;
-      return Promise.reject(errorMessage);
+      return Promise.reject(new Error(errorMessage));
     }
     return Promise.resolve(newPagePath);
   }
-
-  return Promise.reject(result.message);
+  return Promise.reject(new Error('An internal error occurred. Please try again later.'));
 };
 
 const NewPageComp = (props : NewPageProps) => {
@@ -174,8 +173,9 @@ const formPageAdd = (client: Client, template: string) => contextMenuForm({
             setState({ status: NewPageState.Complete, newPagePath });
           }
         })
-        .catch((errorMessage: string) => {
-          setState({ status: NewPageState.Errored, errorMessage });
+        .catch((err: Error) => {
+          console.log(err);
+          setState({ status: NewPageState.Errored, errorMessage: err.message });
         })
         .finally(() => {
           context.hidePageOverlay();

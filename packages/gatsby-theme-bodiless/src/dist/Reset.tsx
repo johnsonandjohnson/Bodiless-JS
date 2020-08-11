@@ -3,6 +3,7 @@ import { FormApi, FormState } from 'informed';
 
 import { getUI, useEditContext } from '@bodiless/core';
 import { ComponentFormSpinner } from '@bodiless/ui';
+import { AxiosError } from 'axios';
 import { GitClient } from './types';
 
 enum ResetState {
@@ -62,8 +63,8 @@ const Reset = (props: Props) => {
         .then(() => {
           setState({ status: ResetState.Complete });
         })
-        .catch((errorMessage: string) => {
-          setState({ status: ResetState.Errored, errorMessage });
+        .catch((error : AxiosError) => {
+          setState({ status: ResetState.Errored, errorMessage: error.message });
         })
         .finally(() => {
           context.hidePageOverlay();
