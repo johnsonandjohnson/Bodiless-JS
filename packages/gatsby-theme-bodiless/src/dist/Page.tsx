@@ -19,6 +19,7 @@ import {
   NotificationProvider,
   useNotificationButton,
   useSwitcherButton,
+  OnNodeErrorNotification,
 } from '@bodiless/core';
 import { observer } from 'mobx-react-lite';
 import { ContextWrapper, PageEditor } from '@bodiless/core-ui';
@@ -28,7 +29,6 @@ import GatsbyNodeProvider, {
 import GatsbyPageProvider, { Props as PageProviderProps } from './GatsbyPageProvider';
 import useNewPageButton from './useNewPageButton';
 import useGitButtons from './useGitButtons';
-import OnStoreErrorNotification from './OnStoreErrorNotification';
 
 type FinalUI = {
   ContextWrapper: ComponentType<ContextWrapperProps>;
@@ -68,7 +68,7 @@ const Page: FC<Props> = observer(({ children, ui, ...rest }) => {
           <NotificationProvider>
             <OuterButtons />
             <Editor>
-              <OnStoreErrorNotification />
+              <OnNodeErrorNotification />
               <InnerButtons />
               <Wrapper clickable>
                 {children}

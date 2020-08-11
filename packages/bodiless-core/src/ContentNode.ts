@@ -35,6 +35,7 @@ export type Actions = {
 export type Getters = {
   getNode(path: string[]): any;
   getKeys(): string[];
+  hasError(): boolean;
 };
 
 export type Path = string | string[];
@@ -47,6 +48,7 @@ export type ContentNode<D> = {
   path: string[];
   child<E extends object>(path: string): ContentNode<E>;
   peer<E extends object>(path: Path): ContentNode<E>;
+  hasError: () => boolean;
 };
 
 export class DefaultContentNode<D extends object> implements ContentNode<D> {
@@ -92,6 +94,11 @@ export class DefaultContentNode<D extends object> implements ContentNode<D> {
   get keys() {
     const { getKeys } = this.getters;
     return getKeys();
+  }
+
+  get hasError() {
+    const { hasError } = this.getters;
+    return hasError;
   }
 
   getGetters() {

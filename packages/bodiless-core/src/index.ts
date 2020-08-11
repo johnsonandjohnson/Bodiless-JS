@@ -67,6 +67,7 @@ import withCompoundForm, { useRegisterSnippet } from './withCompoundForm';
 import type { Snippet as FormSnippet } from './withCompoundForm';
 import withEditFormSnippet from './withEditFormSnippet';
 import useSwitcherButton from './useSwitcherButton';
+import OnNodeErrorNotification from './OnNodeErrorNotification';
 
 export * from './components';
 export {
@@ -123,6 +124,7 @@ export {
   NotificationProvider,
   useNotificationButton,
   useSwitcherButton,
+  OnNodeErrorNotification,
 };
 
 export type {

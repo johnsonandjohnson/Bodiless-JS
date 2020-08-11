@@ -14,19 +14,20 @@
 
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { useNotify } from '@bodiless/core';
-import { useGatsbyStoreProvider } from './GatsbyStoreProvider';
+import { useNotify } from './NotificationProvider';
+import { useNode } from './NodeProvider';
 
-const STORE_ERROR_NOTIFICATION_ID = 'STORE_ERROR_NOTIFICATION_ID';
+const NODE_ERROR_NOTIFICATION_ID = 'STORE_ERROR_NOTIFICATION_ID';
 
-const OnStoreErrorNotification = observer(() => {
-  const { hasError } = useGatsbyStoreProvider();
+const OnNodeErrorNotification = observer(() => {
+  const { node } = useNode();
+  const { hasError } = node;
   const notifications = hasError() ? [{
-    id: STORE_ERROR_NOTIFICATION_ID,
+    id: NODE_ERROR_NOTIFICATION_ID,
     message: 'There is an error with saving data',
   }] : [];
   useNotify(notifications);
   return <></>;
 });
 
-export default OnStoreErrorNotification;
+export default OnNodeErrorNotification;

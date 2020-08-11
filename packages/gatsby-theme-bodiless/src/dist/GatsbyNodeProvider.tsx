@@ -16,7 +16,6 @@ import React, { Component } from 'react';
 import { pick } from 'lodash';
 import { DefaultContentNode, NodeProvider } from '@bodiless/core';
 import GatsbyMobxStore, { DataSource } from './GatsbyMobxStore';
-import GatsbyStoreProvider from './GatsbyStoreProvider';
 
 type State = {
   store: GatsbyMobxStore,
@@ -63,21 +62,18 @@ class GatsbyNodeProvider extends Component<Props, State> implements DataSource {
   getRootNode(collection = 'Page') {
     const { store } = this.state;
     const actions = pick(store, ['setNode', 'deleteNode']);
-    const getters = pick(store, ['getNode', 'getKeys']);
+    const getters = pick(store, ['getNode', 'getKeys', 'hasError']);
 
     const node = new DefaultContentNode(actions, getters, collection);
     return node;
   }
 
   render() {
-    const { store } = this.state;
     const { children } = this.props;
     return (
       <NodeProvider node={this.getRootNode('Site')} collection="site">
         <NodeProvider node={this.getRootNode('Page')} collection="_default">
-          <GatsbyStoreProvider hasError={store.hasError}>
-            {children}
-          </GatsbyStoreProvider>
+          {children}
         </NodeProvider>
       </NodeProvider>
     );
