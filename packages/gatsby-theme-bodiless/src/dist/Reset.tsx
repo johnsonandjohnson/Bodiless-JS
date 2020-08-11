@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { FormApi, FormState } from 'informed';
+
 import { getUI, useEditContext } from '@bodiless/core';
 import { ComponentFormSpinner } from '@bodiless/ui';
+import { GitClient } from './types';
 
 enum ResetState {
   Init,
@@ -14,17 +17,31 @@ type ResetStatus = {
   errorMessage?: string;
 };
 
+type Props = {
+  ui: any,
+  formState: FormState,
+  formApi: FormApi,
+  client: GitClient
+};
+
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// @todo remove.
 const reset = (milliseconds: number) => new Promise(resolve => setTimeout(resolve, milliseconds));
+
 /**
- * Component for showing and pulling remote changes.
+ * Form component for reverting local changes.
  *
  * @component
- * @param {BackendClient} client
+ * @param props Props
  * @constructor
  */
-const Reset = (props: any) => {
+const Reset = (props: Props) => {
   const context = useEditContext();
-  const { ui, formState, formApi } = props;
+  const {
+    ui, formState, formApi, client,
+  } = props;
+  console.log(client);
   const {
     ComponentFormTitle,
     ComponentFormLabel,
@@ -40,7 +57,7 @@ const Reset = (props: any) => {
     if (submits && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
       setState({ status: ResetState.Pending });
-      reset(3000)
+      client.reset()
         .then(() => {
           setState({ status: ResetState.Complete });
         })
@@ -67,8 +84,8 @@ const Reset = (props: any) => {
     case ResetState.Complete:
       return (
         <>
-          <ComponentFormTitle>Operation Complete.</ComponentFormTitle>
-          <ComponentFormDescription>Changes were discarded.</ComponentFormDescription>
+          <ComponentFormTitle>Operation complete.</ComponentFormTitle>
+          <ComponentFormDescription>Local changes were discarded.</ComponentFormDescription>
         </>
       );
     case ResetState.Errored:

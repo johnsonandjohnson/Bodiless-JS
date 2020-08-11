@@ -134,7 +134,7 @@ const NewPageComp = (props : NewPageProps) => {
     case NewPageState.Complete:
       return (
         <>
-          <ComponentFormTitle>Operation Complete...</ComponentFormTitle>
+          <ComponentFormTitle>Operation Complete</ComponentFormTitle>
           <ComponentFormDescription>
             <a href={newPagePath}>{`Click here to visit the new page. ${newPagePath}`}</a>
           </ComponentFormDescription>
@@ -151,10 +151,7 @@ const NewPageComp = (props : NewPageProps) => {
 };
 
 const formPageAdd = (client: Client, template: string) => contextMenuForm({
-  submitValues: (submittedValues: any) => {
-    const { keepOpen } = submittedValues;
-    return keepOpen;
-  },
+  submitValues: ({ keepOpen }: any) => keepOpen,
 })(({ formState, ui, formApi } : any) => {
   const { ComponentFormText } = getUI(ui);
   const {
@@ -186,17 +183,16 @@ const formPageAdd = (client: Client, template: string) => contextMenuForm({
         });
     }
   }, [submits]);
-  // Order matter?
-  const { status } = state;
+  const { status, errorMessage, newPagePath } = state;
   return (
     <>
       <ComponentFormText type="hidden" field="keepOpen" initialValue />
       <NewPageComp
         status={status}
         ui={ui}
-        errorMessage={state.errorMessage}
+        errorMessage={errorMessage}
         errors={errors}
-        newPagePath={state.newPagePath}
+        newPagePath={newPagePath}
       />
     </>
   );

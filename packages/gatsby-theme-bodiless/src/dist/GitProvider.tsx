@@ -172,13 +172,12 @@ const formGitReset = (client: GitClient) => contextMenuForm({
   //   })();
   // },
 })(
-  (props: any) => {
-    const { ui } = props;
+  ({ ui, formState, formApi }: any) => {
     const { ComponentFormText } = getUI(ui);
     return (
       <>
         <ComponentFormText type="hidden" field="keepOpen" initialValue />
-        <Reset {...props} client={client} />
+        <Reset ui={ui} formState={formState} formApi={formApi} client={client} />
       </>
     );
   },
