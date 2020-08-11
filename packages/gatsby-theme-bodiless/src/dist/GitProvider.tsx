@@ -147,7 +147,6 @@ const formGitPull = (client: GitClient, notifyOfChanges: ChangeNotifier) => cont
 const formGitReset = (client: GitClient) => contextMenuForm({
   submitValues: (submittedValues: any) => {
     const { keepOpen } = submittedValues;
-    if (keepOpen) window.location.reload();
     return keepOpen;
   },
   // submitValues: () => {
