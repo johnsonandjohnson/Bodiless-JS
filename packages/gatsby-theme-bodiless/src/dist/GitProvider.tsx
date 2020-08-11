@@ -148,6 +148,7 @@ const formGitReset = (client: GitClient) => contextMenuForm({
   submitValues: (submittedValues: any) => {
     console.log(submittedValues);
     const { keepOpen } = submittedValues;
+    if (keepOpen === false) window.location.reload();
     return keepOpen;
   },
   // submitValues: () => {
