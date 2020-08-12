@@ -101,7 +101,7 @@ For example:
 * css used for a component should be placed in components folder and included
   with the component.
 
-By doing the above, this custom css will only be loaded for pages or pages that
+By doing the above, this custom css will only be loaded for pages that
 use the component and help with performance. While BodilessJS runs with
 [gatsby purge css feature](https://www.gatsbyjs.org/packages/gatsby-plugin-purgecss)
 tool this is only processing on tailwind css and not on any custom css included.
