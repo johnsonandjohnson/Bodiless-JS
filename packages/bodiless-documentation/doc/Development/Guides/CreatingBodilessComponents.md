@@ -2,7 +2,7 @@
 
 In the previous guides, you have seen how to use built-in Bodiless components to
 build out an editable site. But what if you have pre-built components (or even
-pages) you'd like to make editable? Bodiless-JS provides a set of utilities which
+pages) you'd like to make editable? BodilessJS provides a set of utilities which
 make it easy to wire up any component with an edit form. To demonstrate, we'll
 create an editable version of the popular
 [`ReactMarkdown` component](https://github.com/rexxars/react-markdown).
@@ -101,7 +101,7 @@ buttons. |
 ### Defining the form
 
 The key option above is `renderForm`. This is where you define the fields that
-will be used to edit your component. Bodiless-JS uses the excellent
+will be used to edit your component. BodilessJS uses the excellent
 [Informed](https://joepuzzo.github.io/informed) library to build forms. Defining
 your component form is as simple as returning informed inputs whose names match
 the props of your component.
@@ -121,7 +121,7 @@ const renderForm = () => {
 We provide a form title and a single field named after the `source` prop of
 `ReactMarkdown`.
 
-> Notice the use of the `useFormUI()` hook. The Bodiless-JS admin UI is designed
+> Notice the use of the `useFormUI()` hook. The BodilessJS admin UI is designed
 to be theme-able. Themers can provide their own styled versions of all UI
 elements. Here we simply retrieve the styled elements we need. For example,
 `ComponentFormTextArea` is nothing more than a styled version of the native

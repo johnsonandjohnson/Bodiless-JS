@@ -241,7 +241,7 @@ A template will often consist of flexible area (use
 [FlowContainer](../../../Components/FlowContainer.md)) and defined
 components/behavior.
 
-Please read using [templates](./Templates/Templates.md) for deeper dive.
+Please read using [templates](./Templates/README.md) for deeper dive.
 
 ### Identifying One-off Custom Pages
 
