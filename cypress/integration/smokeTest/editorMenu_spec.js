@@ -160,7 +160,7 @@ describe('Editor Menu (left and right)', function () {
       cy.visit('/___docs')
       cy.contains('Bodiless-JS')
          .click()
-      cy.url().should('include', '/___docs/#/?id=bodiless-js')
+      cy.url().should('include', '/___docs/#/?id=bodilessjs')
    })
 
 
