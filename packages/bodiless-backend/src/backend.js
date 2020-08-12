@@ -327,8 +327,9 @@ class Backend {
 
   static getConflicts(route) {
     route.get(async (req, res) => {
+      const target = req.query.target || undefined;
       try {
-        const status = await getConflicts();
+        const status = await getConflicts(target);
         res.send(status);
       } catch (error) {
         logger.log(error);

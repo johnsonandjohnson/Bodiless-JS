@@ -239,7 +239,9 @@ const FetchChanges = (
         }
 
         const { production, upstream, local } = getRemoteStatus(response.data);
+        // @todo: refactor the if conditions.
         if (production.hasUpdates) {
+          // @todo: refactor restart check with function.
           if (production.files.some(file => file.includes('package-lock.json'))) {
             setState({ messageCode: MessageCode.PullRestartRequired, messageData: [] });
             formApi.setValue('mergeMaster', false);
@@ -273,8 +275,17 @@ const FetchChanges = (
                 formApi.setValue('mergeMaster', true);
               }
             } else {
-              setState({ messageCode: MessageCode.PullChangeAvailable, messageData: [] });
-              formApi.setValue('mergeMaster', false);
+              // No production/upstream conflict, further check produciton/local
+              const localConflictsResponse = await client.getConflicts('edit');
+              if (localConflictsResponse.data.hasConflict) {
+                setState({ messageCode: MessageCode.PullConflictConfirm, messageData: [] });
+                formApi.setValue('mergeMaster', true);
+              } else {
+                // If there are conflicts between CHANGESET and EDIT, but no conflicts with
+                // PRODUCTION, then these are resolved silently in favor of EDIT.
+                setState({ messageCode: MessageCode.PullChangeAvailable, messageData: [] });
+                formApi.setValue('mergeMaster', false);
+              }
             }
           }
         } else {
