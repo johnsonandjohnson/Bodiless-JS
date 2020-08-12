@@ -324,7 +324,7 @@ a component and/or based on component state. The FClasses design API includes so
 
 Imagine we have a button which has different variants depending on whether it
 is active and/or whether it is the first in a list of buttons.  We can use
-the `flowIf()`, `withoutProps()` and `hasProp()` helpers to accomplish this:
+the `addClassesIf()`, `removeClassesIf()`, `withoutProps()` and `hasProp()` helpers to accomplish this:
 
 ``` js
 type VariantProps = {
@@ -334,19 +334,15 @@ type VariantProps = {
 };
 
 const Div = stylable<HTMLProps<HTMLDivElement>>('div');
+const isActive = (props: any) => hasProp('isActive')(props);
+const isFirst = (props: any) => hasProp('isFirst')(props);
 
 const ContextMenuButton = flow(
   withoutProps<VariantProps>(['isActive', 'isFirst'),
   addClasses('cursor-pointer pl-2 text-grey'),
-  flowIf(hasProp('isActive'))(
-    flow(
-      addClasses('text-white'),
-      removeClasses('text-grey'),
-    ),
-  ),
-  flowIf(hasProp('isFirst'))(
-    removeClasses('pl-2'),
-  ),
+  addClassesIf(isActive)('text-white'),
+  removeClassesIf(isActive)('text-grey'),
+  removeClassesIf(isFirst)('pl-2'),
 )(Div);
 ```
 
