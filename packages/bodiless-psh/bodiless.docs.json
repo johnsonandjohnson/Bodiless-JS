@@ -1,7 +1,5 @@
 {
   "Development": {
-    "OtherResources": {
-      "Platform.sh.md": "./README.md"
-    }
+    "Platform.sh.md": "./README.md"
   }
 }
