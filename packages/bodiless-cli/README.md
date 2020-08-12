@@ -1,7 +1,6 @@
 # Bodiless-JS CLI
 
 ## Usage
-<!-- usage -->
 ```sh-session
 $ npm install -g @bodiless/cli
 $ bodiless COMMAND
@@ -13,10 +12,8 @@ USAGE
   $ bodiless COMMAND
 ...
 ```
-<!-- usagestop -->
 
 ## Commands
-<!-- commands -->
 * [`bodiless help [COMMAND]`](#bodiless-help-command)
 * [`bodiless pack`](#bodiless-pack)
 
@@ -68,4 +65,3 @@ EXAMPLES
 ```
 
 _See code: [lib/commands/pack.js](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/bodiless-cli/src)_
-<!-- commandsstop -->
