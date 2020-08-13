@@ -25,11 +25,16 @@ export default class Spawner {
     };
     // Add the monorepo npm bin directory to the path, bc some packages
     // may use binaries in their pack command which are only available there.
-    const { PATH: PATH$ } = process.env;
-    const PATH = PATH$ + path.delimiter + path.join(monorepo, 'node_modules', '.bin');
-    // adding a fake SPAWNED_PROCESS env variable because of a nodejs bug on Windows
-    // @see https://github.com/nodejs/node/issues/34667
-    this.options.env = { ...process.env, PATH, SPAWNED_PROCESS: '1' };
+    const monorepoBinPath = path.join(monorepo, 'node_modules', '.bin');
+    // process.env may have PATH variant with different casing (e.g. Path)
+    // see https://github.com/nodejs/node/issues/34667#issuecomment-670505074
+    const pathEnvKey = Object.keys(process.env).find(x => x.toUpperCase() === 'PATH') || 'PATH';
+    const { [pathEnvKey]: PATH } = process.env;
+    const PATH$ = PATH ? PATH + path.delimiter + monorepoBinPath : monorepoBinPath;
+    this.options.env = {
+      ...process.env,
+      [pathEnvKey]: PATH$,
+    };
     this.spawn = this.spawn.bind(this);
   }
 
