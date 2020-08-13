@@ -24,7 +24,6 @@ import {
   useEditContext,
   useNotify,
 } from '@bodiless/core';
-import { AxiosPromise } from 'axios';
 import BackendClient from './BackendClient';
 import CommitsList from './CommitsList';
 import RemoteChanges from './RemoteChanges';
