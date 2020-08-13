@@ -49,32 +49,6 @@ type Props = {
   client?: GitClient,
 };
 
-// const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
-//   .then(res => {
-//     if (res.status === 200) {
-//       // @TODO: Display the response in a component instead of an alert.
-//       // eslint-disable-next-line no-undef
-//       if (typeof callback === 'function') {
-//         callback();
-//       } else {
-//         alert('Operation successful.');
-//       }
-//     } else {
-//       // eslint-disable-next-line no-undef
-//       alert('An unknown error has occured.');
-//     }
-//   })
-//   .catch(err => {
-//     // Use back-end crafted error message if available.
-//     if (err.response && err.response.data) {
-//       // eslint-disable-next-line no-undef
-//       alert(err.response.data);
-//     } else {
-//       // eslint-disable-next-line no-undef
-//       alert(err.message);
-//     }
-//   });
-
 const formGetCommitsList = (client: GitClient) => contextMenuForm({
   // @todo: handle what happens when user selects a commit from the loaded list.
   submitValues: () => {},

@@ -3,7 +3,7 @@ import { FormApi, FormState } from 'informed';
 
 import { getUI, useEditContext } from '@bodiless/core';
 import { ComponentFormSpinner } from '@bodiless/ui';
-import { AxiosError } from 'axios';
+import { AxiosError, AxiosPromise } from 'axios';
 import Cookies from 'universal-cookie';
 import { GitClient } from './types';
 
@@ -35,6 +35,29 @@ let rcount = 1;
 
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
+
+const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
+  .then(res => {
+    if (res.status === 200) {
+      // @TODO: Display the response in a component instead of an alert.
+      // eslint-disable-next-line no-undef
+      if (typeof callback === 'function') {
+        callback();
+      } else {
+        alert('Operation successful.');
+      }
+    } else {
+      // eslint-disable-next-line no-undef
+      return Promise.reject(new Error('An unknown error has occured.'));
+    }
+  })
+  .catch(err => {
+    // Use back-end crafted error message if available.
+    if (err.response && err.response.data) {
+      return Promise.reject(err.response.data);
+    }
+    return Promise.reject(err.message);
+  });
 
 /**
  * Form component for reverting local changes.
@@ -83,13 +106,13 @@ const SaveChanges = (props: Props) => {
       context.showPageOverlay({ hasSpinner: false });
       setState({ status: SaveState.Pending });
       // client.reset()
-      client.commit(
+      handle(client.commit(
         formApi.getValue('commitMessage'),
         [backendFilePath, backendStaticPath],
         [],
         [],
         author,
-      )
+      ))
         .then(() => {
           setState({ status: SaveState.Complete });
         })
