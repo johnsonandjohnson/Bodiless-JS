@@ -1,6 +1,6 @@
-# Contributing to Bodiless-JS
+# Contributing to BodilessJS
 
-Bodiless-JS is an open source project being actively developed at Johnson &
+BodilessJS is an open source project being actively developed at Johnson &
 Johnson. We welcome contributions from the community, and are committed to
 transparency.  
 
@@ -29,7 +29,7 @@ For bugs, the issue should clearly specify:
 - Artifacts (screenshots, video, logs)
 - Execution (version, OS, browser, important libraries)
 
-Anyone can create an issue in the Bodiless-JS project.
+Anyone can create an issue in the BodilessJS project.
 
 For features, the issue should clearly specify:
 - The high level description of the feature expressed as a user story

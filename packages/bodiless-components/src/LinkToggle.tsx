@@ -13,7 +13,7 @@
  */
 import { flowRight } from 'lodash';
 import {
-  ifEditable, withNode, ifReadOnly, withoutProps,
+  ifEditable, withNode, ifReadOnly, withOnlyProps,
 } from '@bodiless/core';
 import {
   replaceWith, asComponent, addProps, stylable,
@@ -30,8 +30,8 @@ const EmptyToggle = flowRight(
   ),
   ifReadOnly(
     withNode,
-    withoutProps(['wrap']),
   ),
+  withOnlyProps('key', 'children'),
 )(Fragment);
 
 const withLinkToggle = flowRight(
