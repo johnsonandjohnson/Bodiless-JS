@@ -29,7 +29,7 @@ type Props = {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // @todo remove.
 // @ts-ignore
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars,max-len
 const saveChanges = (milliseconds: number) => new Promise(resolve => setTimeout(resolve, milliseconds));
 let rcount = 1;
 
@@ -44,7 +44,8 @@ const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
  * @constructor
  */
 const SaveChanges = (props: Props) => {
-  console.log(rcount++);
+  console.log(rcount);
+  rcount += 1;
   // submitValues: (submitValues: any) => {
   //   handle(
   //     client.commit(
