@@ -16,7 +16,6 @@
 import React, {
   FC, useState, useEffect, useCallback,
 } from 'react';
-import Cookies from 'universal-cookie';
 import {
   contextMenuForm,
   getUI,
@@ -30,10 +29,11 @@ import BackendClient from './BackendClient';
 import CommitsList from './CommitsList';
 import RemoteChanges from './RemoteChanges';
 import Reset from './Reset';
+import SaveChanges from './SaveChanges';
 import { GitClient } from './types';
 
-const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
-const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
+// const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
+// const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
 /**
  * DefinePlugin env var.
  *
@@ -50,31 +50,31 @@ type Props = {
   client?: GitClient,
 };
 
-const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
-  .then(res => {
-    if (res.status === 200) {
-      // @TODO: Display the response in a component instead of an alert.
-      // eslint-disable-next-line no-undef
-      if (typeof callback === 'function') {
-        callback();
-      } else {
-        alert('Operation successful.');
-      }
-    } else {
-      // eslint-disable-next-line no-undef
-      alert('An unknown error has occured.');
-    }
-  })
-  .catch(err => {
-    // Use back-end crafted error message if available.
-    if (err.response && err.response.data) {
-      // eslint-disable-next-line no-undef
-      alert(err.response.data);
-    } else {
-      // eslint-disable-next-line no-undef
-      alert(err.message);
-    }
-  });
+// const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
+//   .then(res => {
+//     if (res.status === 200) {
+//       // @TODO: Display the response in a component instead of an alert.
+//       // eslint-disable-next-line no-undef
+//       if (typeof callback === 'function') {
+//         callback();
+//       } else {
+//         alert('Operation successful.');
+//       }
+//     } else {
+//       // eslint-disable-next-line no-undef
+//       alert('An unknown error has occured.');
+//     }
+//   })
+//   .catch(err => {
+//     // Use back-end crafted error message if available.
+//     if (err.response && err.response.data) {
+//       // eslint-disable-next-line no-undef
+//       alert(err.response.data);
+//     } else {
+//       // eslint-disable-next-line no-undef
+//       alert(err.message);
+//     }
+//   });
 
 const formGetCommitsList = (client: GitClient) => contextMenuForm({
   // @todo: handle what happens when user selects a commit from the loaded list.
@@ -91,32 +91,16 @@ const formGetCommitsList = (client: GitClient) => contextMenuForm({
   },
 );
 
-// Get the author from the cookie.
-const cookies = new Cookies();
-const author = cookies.get('author');
 const formGitCommit = (client: GitClient) => contextMenuForm({
-  submitValues: (submitValues: any) => {
-    handle(
-      client.commit(
-        submitValues.commitMessage,
-        [backendFilePath, backendStaticPath],
-        [],
-        [],
-        author,
-      ),
-    );
-  },
-})(({ ui }: any) => {
-  const { ComponentFormTitle, ComponentFormLabel, ComponentFormText } = getUI(
+  submitValues: ({ keepOpen } : any) => keepOpen,
+})(({ ui, formApi, formState }: any) => {
+  const { ComponentFormText } = getUI(
     ui,
   );
   return (
     <>
-      <ComponentFormTitle>Upload Changes</ComponentFormTitle>
-      <ComponentFormLabel htmlFor="commit-txt">
-        Description:
-      </ComponentFormLabel>
-      <ComponentFormText field="commitMessage" id="commit-txt" />
+      <ComponentFormText type="hidden" field="keepOpen" initialValue />
+      <SaveChanges ui={ui} formState={formState} formApi={formApi} client={client} />
     </>
   );
 });
@@ -151,27 +135,6 @@ const formGitReset = (client: GitClient) => contextMenuForm({
     if (keepOpen === false) window.location.reload();
     return keepOpen;
   },
-  // submitValues: () => {
-  //   (async () => {
-  //     context.showPageOverlay({
-  //       message: 'Revert is in progress. This may take a minute.',
-  //       maxTimeoutInSeconds: 10,
-  //     });
-  //     try {
-  //       await client.reset();
-  //       context.showPageOverlay({
-  //         message: 'Revert completed.',
-  //         hasSpinner: false,
-  //         hasCloseButton: true,
-  //         onClose: () => {
-  //           window.location.reload();
-  //         },
-  //       });
-  //     } catch {
-  //       context.showError();
-  //     }
-  //   })();
-  // },
 })(
   ({ ui, formState, formApi }: any) => {
     const { ComponentFormText } = getUI(ui);
