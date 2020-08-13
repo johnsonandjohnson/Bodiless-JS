@@ -45,6 +45,7 @@ const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
         callback();
       } else {
         alert('Operation successful.');
+        return Promise.resolve(('Success'));
       }
     } else {
       // eslint-disable-next-line no-undef
@@ -114,9 +115,11 @@ const SaveChanges = (props: Props) => {
         author,
       ))
         .then(() => {
+          console.log('Complete');
           setState({ status: SaveState.Complete });
         })
         .catch((error : AxiosError) => {
+          console.log('catch error', error);
           setState({ status: SaveState.Errored, errorMessage: error.message });
         })
         .finally(() => {
