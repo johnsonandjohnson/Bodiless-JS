@@ -55,7 +55,7 @@ const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
   .catch(err => {
     // Use back-end crafted error message if available.
     if (err.response && err.response.data) {
-      return Promise.reject(err.response.data);
+      return Promise.reject(new Error(err.response.data));
     }
     return Promise.reject(err.message);
   });
