@@ -158,9 +158,9 @@ describe('Editor Menu (left and right)', function () {
    //  Adding a test that directly checks Docs app Home page, without clicking on Docs icon
    it('editorMenu: 17 - Check Docs page', () => {
       cy.visit('/___docs')
-      cy.contains('Bodiless-JS')
+      cy.contains('BodilessJS')
          .click()
-      cy.url().should('include', '/___docs/#/?id=bodiless-js')
+      cy.url().should('include', '/___docs/#/?id=bodilessjs')
    })
 
 
