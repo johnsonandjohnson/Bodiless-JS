@@ -1,4 +1,4 @@
-# Bodiless-JS
+# BodilessJS
 
 BodilessJS is a toolset for building editable websites in a JAMStack. It is based on the idea that, for many sites, a full-blown CMS is unnecessary overhead and introduces more problems than it solves, including:
 
@@ -37,7 +37,7 @@ Then Visit `localhost:8005` in your browser.
 
 - [Read the Documentation on GitHub](https://johnsonandjohnson.github.io/Bodiless-JS)
 - [Join us on Slack](https://bodiless-js.slack.com/join/shared_invite/enQtODk2NzI3NDU3NTQxLWQwNzJkOTgxODFlMTAwNDg4Mzc2YmU2OTgzYjIwZjZjYTJkY2QwYjBjNDhjM2QyM2RmNTEzOWNkYmVmNmI1YzM)
-- [Bodiless-JS on NPM](https://www.npmjs.com/org/bodiless)
+- [BodilessJS on NPM](https://www.npmjs.com/org/bodiless)
 
 
 
