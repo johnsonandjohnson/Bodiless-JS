@@ -24,6 +24,7 @@ describe('Editor Menu (left and right)', function () {
 
    const switcherIcon = '//*[@aria-label="switcher"]'
    const docsIcon = '//*[@aria-label="Docs"]'
+   const docsTitle = '//*[@data-id="bodilessjs"]'
    const editIcon = '//*[@aria-label="Edit"]'
    const addPageIcon = '//*[@aria-label="Page"]'
    const historyIcon = '//*[@aria-label="History"]'
@@ -158,7 +159,7 @@ describe('Editor Menu (left and right)', function () {
    //  Adding a test that directly checks Docs app Home page, without clicking on Docs icon
    it('editorMenu: 17 - Check Docs page', () => {
       cy.visit('/___docs')
-      cy.contains('BodilessJS')
+      cy.xpath(docsTitle)
          .click()
       cy.url().should('include', '/___docs/#/?id=bodilessjs')
    })
