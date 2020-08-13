@@ -29,7 +29,7 @@
     "@bodiless/fclasses": "^0.0.52",
     "@bodiless/ui": "^0.0.52",
     "informed": "^3.9.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "rc-tooltip": "^3.7.3"
   },
   "peerDependencies": {
