@@ -1,6 +1,6 @@
 # Responsiveness
 
-BodilessJS is in itself is not very opinionated about the responsiveness but there
+BodilessJS in itself is not very opinionated about the responsiveness but there
 are some components and features that do provide specific responsive behaviors.
 
 BodilessJS primarily uses [TailwindCSS](https://tailwindcss.com) to give the

@@ -59,7 +59,7 @@ build to see the changes.
 
 ## Responsiveness with Tailwind
 
-Tailwind classes controls most of the responsiveness behavior of the site and
+Tailwind classes control most of the responsiveness behavior of the site and
 classes can be prefixed with responsive size.
 
 ### Breakpoints
