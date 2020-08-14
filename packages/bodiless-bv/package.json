@@ -29,7 +29,7 @@
     "@bodiless/components": "^0.0.52",
     "@bodiless/core": "^0.0.52",
     "@bodiless/fclasses": "^0.0.52",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.19"
   },
   "peerDependencies": {
     "react": "^16.11.0",

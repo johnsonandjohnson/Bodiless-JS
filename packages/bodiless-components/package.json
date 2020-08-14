@@ -37,7 +37,7 @@
     "debug": "^4.1.1",
     "enzyme": "^3.9.0",
     "informed": "^3.9.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",
     "mobx-react-lite": "^1.3.1",

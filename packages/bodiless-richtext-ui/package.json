@@ -28,7 +28,7 @@
     "@bodiless/fclasses": "^0.0.52",
     "@bodiless/richtext": "^0.0.52",
     "@bodiless/ui": "^0.0.52",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.19"
   },
   "peerDependencies": {
     "react": "^16.8.4",

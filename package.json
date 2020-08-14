@@ -30,8 +30,6 @@
     "publish:minor": "lerna version minor --conventional-commits",
     "publish:major": "lerna version major --conventional-commits",
     "lerna:publish": "lerna publish from-git --yes --dist-tag latest",
-    "scan": "ts-complexity --max-complexity 10 --pattern \"packages/**/src/**/*.ts(x)\"",
-    "scan:target": "ts-complexity --max-complexity 1 --pattern",
     "serve": "lerna run serve --scope @bodiless/test-site --stream",
     "setup": "npm run bootstrap && npm run build:packages",
     "sites:pack": "lerna exec --no-private --stream -- npm pack",
@@ -52,15 +50,14 @@
   "dependencies": {
     "@types/html2canvas": "0.0.35",
     "complexity-report": "^2.0.0-alpha",
-    "cypress": "^3.8.3",
+    "cypress": "^4.11.0",
     "cypress-failed-log": "^2.6.0",
     "debug": "^4.1.1",
     "html2canvas": "^1.0.0-rc.3",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "start-server-and-test": "^1.10.8",
-    "symlink-dir": "^3.0.3",
-    "ts-complexity": "0.0.3"
+    "symlink-dir": "^3.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -69,7 +66,7 @@
     "@babel/runtime": "^7.4.2",
     "@types/enzyme": "^3.9.1",
     "@types/jest": "^24.0.18",
-    "@types/lodash": "^4.14.149",
+    "@types/lodash": "^4.14.158",
     "@types/rc-tooltip": "^3.7.1",
     "@types/react-dom": "^16.8.5",
     "@types/slate": "^0.44.0",
@@ -113,9 +110,9 @@
     "ts-jest": "^24.0.2",
     "tslint": "^5.12.1",
     "tslint-config-airbnb": "^5.11.1",
+    "typescript": "^3.9.7",
     "typedoc": "^0.17.8",
-    "typedoc-plugin-markdown": "^2.3.1",
-    "typescript": "^3.9.5"
+    "typedoc-plugin-markdown": "^2.3.1"
   },
   "repository": {
     "type": "git",
