@@ -43,7 +43,6 @@ const Reset = (props: Props) => {
   const {
     ui, formState, formApi, client,
   } = props;
-  console.log(client);
   const {
     ComponentFormTitle,
     ComponentFormLabel,

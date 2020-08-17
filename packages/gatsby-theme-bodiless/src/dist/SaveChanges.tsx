@@ -103,7 +103,6 @@ const SaveChanges = (props: Props) => {
           setState({ status: SaveState.Complete });
         })
         .catch((error : any) => {
-          console.log(error);
           setState({ status: SaveState.Errored, errorMessage: error.message });
         })
         .finally(() => {
