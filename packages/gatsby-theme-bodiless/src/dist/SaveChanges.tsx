@@ -55,7 +55,7 @@ const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
   .catch((err: AxiosError) => {
     console.log(err);
     // Use back-end crafted error message if available.
-    let errMsg = `${err.message}\n`;
+    let errMsg = `${err.message}:\n`;
     if (err.response && err.response.data) {
       errMsg += err.response.data;
     }
