@@ -26,12 +26,6 @@ type Props = {
   client: GitClient
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// @todo remove.
-// @ts-ignore
-// eslint-disable-next-line @typescript-eslint/no-unused-vars,max-len
-const saveChanges = (milliseconds: number) => new Promise(resolve => setTimeout(resolve, milliseconds));
-
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
 
