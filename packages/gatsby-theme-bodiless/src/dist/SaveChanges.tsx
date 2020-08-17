@@ -53,7 +53,6 @@ const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
     throw new Error('An unknown error has occured.');
   })
   .catch((err: AxiosError) => {
-    console.log(err);
     // Use back-end crafted error message if available.
     let errMsg = `${err.message}:\n`;
     if (err.response && err.response.data) {
