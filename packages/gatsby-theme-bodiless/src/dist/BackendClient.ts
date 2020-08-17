@@ -118,7 +118,7 @@ export default class BackendClient {
   }
 
   reset() {
-    return this.post(`${this.prefix}/change/reset2`, {});
+    return this.post(`${this.prefix}/change/reset`, {});
   }
 
   amend(paths: string[], files: string[]) {
