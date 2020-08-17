@@ -31,8 +31,6 @@ import Reset from './Reset';
 import SaveChanges from './SaveChanges';
 import { GitClient } from './types';
 
-// const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
-// const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
 /**
  * DefinePlugin env var.
  *
