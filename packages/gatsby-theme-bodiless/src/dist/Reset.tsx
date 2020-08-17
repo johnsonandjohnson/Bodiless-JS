@@ -75,6 +75,16 @@ const Reset = (props: Props) => {
   const { status, errorMessage } = state;
 
   switch (status) {
+    case ResetState.Init: {
+      return (
+        <>
+          <ComponentFormTitle>Revert to saved</ComponentFormTitle>
+          <ComponentFormLabel htmlFor="reset-txt">
+            Discard local changes
+          </ComponentFormLabel>
+        </>
+      );
+    }
     case ResetState.Pending:
       return (
         <>
@@ -95,16 +105,6 @@ const Reset = (props: Props) => {
           <ComponentFormError>{errorMessage}</ComponentFormError>
         </>
       );
-    case ResetState.Init: {
-      return (
-        <>
-          <ComponentFormTitle>Revert to saved</ComponentFormTitle>
-          <ComponentFormLabel htmlFor="reset-txt">
-            Discard local changes
-          </ComponentFormLabel>
-        </>
-      );
-    }
     default:
       return <></>;
   }
