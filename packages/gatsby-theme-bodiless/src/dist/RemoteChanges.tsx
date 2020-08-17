@@ -18,13 +18,13 @@ import { ComponentFormSpinner, ComponentFormWarning } from '@bodiless/ui';
 import { useFormApi } from 'informed';
 import type { ChangeNotifier } from './GitProvider';
 
-type GitBranchType = {
+export type GitBranchType = {
   branch: string | null,
   commits: string[],
   files: string[];
 };
 
-type ResponseData = {
+export type ResponseData = {
   upstream: GitBranchType;
   production: GitBranchType,
   local: GitBranchType,
@@ -144,7 +144,11 @@ const FormMessages = ({ messageCode, messageData } : MessageProps) => {
       );
 
     case MessageCode.PullNoChange:
-      return (<>There are no changes to download.</>);
+      return (
+        <>
+          No changes are available, your Edit Environment is up to date!
+        </>
+      );
 
     case MessageCode.PullMasterAbort:
       return (
@@ -170,8 +174,8 @@ const FormMessages = ({ messageCode, messageData } : MessageProps) => {
       return (
         <ComponentFormWarning>
           {
-            `Changes are available but cannot be pulled, contact your development team for
-            assistance. (code ${MessageCode.PullRestartRequired})`
+            `Changes are available but cannot be pulled, contact your development team for \
+assistance. (code ${MessageCode.PullRestartRequired})`
           }
         </ComponentFormWarning>
       );
@@ -242,6 +246,7 @@ const FetchChanges = (
         // @todo: refactor the if conditions.
         if (production.hasUpdates) {
           // @todo: refactor restart check with function.
+          formApi.setValue('keepOpen', true);
           if (production.files.some(file => file.includes('package-lock.json'))) {
             setState({ messageCode: MessageCode.PullRestartRequired, messageData: [] });
             formApi.setValue('mergeMaster', false);
@@ -249,7 +254,6 @@ const FetchChanges = (
             // No local changes.
             setState({ messageCode: MessageCode.PullChangeAvailable, messageData: [] });
             formApi.setValue('mergeMaster', true);
-            formApi.setValue('keepOpen', true);
           } else {
             // Check production-upstream branch conflict.
             const upstreamConflicts = await client.getConflicts();
@@ -258,7 +262,6 @@ const FetchChanges = (
               throw new Error(`Error checking conflicts with the master branch, status=${response.status}`);
             }
 
-            formApi.setValue('keepOpen', true);
             if (upstreamConflicts.data.hasConflict) {
               if (!isContentOnly(upstreamConflicts.data.files)) {
                 setState({ messageCode: MessageCode.PullNonContentOnly, messageData: [] });
@@ -284,13 +287,14 @@ const FetchChanges = (
                 // If there are conflicts between CHANGESET and EDIT, but no conflicts with
                 // PRODUCTION, then these are resolved silently in favor of EDIT.
                 setState({ messageCode: MessageCode.PullChangeAvailable, messageData: [] });
-                formApi.setValue('mergeMaster', false);
+                formApi.setValue('mergeMaster', true);
               }
             }
           }
         } else {
           setState({ messageCode: MessageCode.PullNoChange, messageData: [] });
           formApi.setValue('mergeMaster', false);
+          formApi.setValue('keepOpen', false);
         }
 
         setState((currentState) => ({

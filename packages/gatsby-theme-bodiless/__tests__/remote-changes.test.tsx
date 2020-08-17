@@ -67,6 +67,15 @@ const defaultResponse = {
 
 const noChangesClient = mockClient(defaultResponse);
 
+const upstreamChangesOnlyClient = mockClient({
+  ...defaultResponse,
+  upstream: {
+    branch: 'origin/feat/feat',
+    commits: ['Test Commit'],
+    files: ['packages/gatsby-theme-bodiless/src/dist/RemoteChanges.tsx'],
+  },
+});
+
 const mockChangesClient = mockClient({
   ...defaultResponse,
   production: {
@@ -80,12 +89,40 @@ const nonPullableChangesClient = mockClient({
   ...defaultResponse,
   production: {
     branch: 'origin/master',
-    commits: ['a'],
+    commits: ['Test Commit'],
     files: ['packages/gatsby-theme-bodiless/src/dist/package-lock.json'],
   },
 });
 
 describe('Fetch Changes component', () => {
+  it('should detect changes are not available', async () => {
+    const wrapper = mount(
+      <FetchChanges
+        client={noChangesClient}
+        formApi={mockFormApi}
+        notifyOfChanges={jest.fn()}
+      />,
+    );
+    return new Promise(resolve => setImmediate(resolve)).then(() => {
+      wrapper.update();
+      expect(wrapper.text()).toBe('No changes are available, your Edit Environment is up to date!');
+    });
+  });
+
+  it('should indicate no change to download if only upstream changes', async () => {
+    const wrapper = mount(
+      <FetchChanges
+        client={upstreamChangesOnlyClient}
+        formApi={mockFormApi}
+        notifyOfChanges={jest.fn()}
+      />,
+    );
+    return new Promise(resolve => setImmediate(resolve)).then(() => {
+      wrapper.update();
+      expect(wrapper.text()).toBe('No changes are available, your Edit Environment is up to date!');
+    });
+  });
+
   it('should show a spinner while a request to the back-end is processed', () => {
     const wrapper = mount(
       <FetchChanges
@@ -112,20 +149,6 @@ describe('Fetch Changes component', () => {
     });
   });
 
-  it('should detect changes are not available', async () => {
-    const wrapper = mount(
-      <FetchChanges
-        client={noChangesClient}
-        formApi={mockFormApi}
-        notifyOfChanges={jest.fn()}
-      />,
-    );
-    return new Promise(resolve => setImmediate(resolve)).then(() => {
-      wrapper.update();
-      expect(wrapper.text()).toBe('There are no changes to download.');
-    });
-  });
-
   it('should detect changes are available but cannot be pulled', async () => {
     const wrapper = mount(
       <FetchChanges
@@ -136,7 +159,9 @@ describe('Fetch Changes component', () => {
     );
     return new Promise(resolve => setImmediate(resolve)).then(() => {
       wrapper.update();
-      expect(wrapper.text()).toMatch(/contact your development team for assistance. \(code 1002\)/);
+      expect(wrapper.text()).toMatch(
+        /contact your development team for assistance. \(code 1002\)/,
+      );
     });
   });
 });
