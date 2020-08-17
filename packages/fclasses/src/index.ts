@@ -14,6 +14,8 @@
 
 import {
   stylable, addClasses, removeClasses,
+  addClassesIf,
+  removeClassesIf,
 } from './FClasses';
 
 import type {
@@ -61,6 +63,8 @@ export {
   varyDesign,
   extendDesign,
   asComponent,
+  addClassesIf,
+  removeClassesIf,
 };
 
 export type {

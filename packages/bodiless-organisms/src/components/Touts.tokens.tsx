@@ -15,6 +15,7 @@
 import { flow } from 'lodash';
 import {
   addClasses,
+  removeClasses,
   withDesign,
   remove,
 } from '@bodiless/fclasses';
@@ -60,7 +61,10 @@ const asToutOverlayTitle = withDesign({
   Wrapper: addClasses('relative'),
 });
 const asToutOverlayCta = withDesign({
-  Link: addClasses('absolute bottom-0 right-0 m-8 px-8 min-w-5').removeClasses('w-full'),
+  Link: flow(
+    addClasses('absolute bottom-0 right-0 m-8 px-8 min-w-5'),
+    removeClasses('w-full'),
+  ),
   Wrapper: addClasses('relative'),
 });
 export {
