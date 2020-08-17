@@ -86,7 +86,7 @@ export default class BackendClient {
       path: path$,
       template,
     };
-    return this.post(`${this.prefix}/pagesX`, payload);
+    return this.post(`${this.prefix}/pages`, payload);
   }
 
   commit(

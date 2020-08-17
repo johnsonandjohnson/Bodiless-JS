@@ -135,7 +135,7 @@ const NewPageComp = (props : NewPageProps) => {
         <>
           <ComponentFormTitle>Operation Complete</ComponentFormTitle>
           <ComponentFormDescription>
-            <a href={newPagePath}>{`Click here to visit the new page. ${newPagePath}`}</a>
+            <a href={newPagePath}>{`Click here to visit the new page: ${newPagePath}`}</a>
           </ComponentFormDescription>
         </>
       );
@@ -174,7 +174,6 @@ const formPageAdd = (client: Client, template: string) => contextMenuForm({
           }
         })
         .catch((err: Error) => {
-          console.log(err);
           setState({ status: NewPageState.Errored, errorMessage: err.message });
         })
         .finally(() => {
