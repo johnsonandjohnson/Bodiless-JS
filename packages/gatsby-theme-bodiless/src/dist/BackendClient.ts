@@ -106,7 +106,7 @@ export default class BackendClient {
       files: Array.isArray(f) ? f : [f],
       author,
     };
-    return this.post(`${this.prefix}/change/commit`, post);
+    return this.post(`${this.prefix}/change/commitx`, post);
   }
 
   getLatestCommits() {

@@ -43,7 +43,7 @@ const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
       if (typeof callback === 'function') {
         callback();
       } else {
-        return Promise.resolve('Success');
+        return 'Success';
       }
     }
     // eslint-disable-next-line no-undef
@@ -52,11 +52,9 @@ const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
   .catch((err: AxiosError) => {
     // Use back-end crafted error message if available.
     if (err.response && err.response.data) {
-      console.log('err', err);
-      console.log('err', err.response.data);
       throw Error(err.response.data);
     }
-    return Promise.reject(err.message);
+    throw err;
   });
 
 /**
