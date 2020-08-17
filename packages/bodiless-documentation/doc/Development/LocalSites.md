@@ -4,7 +4,7 @@ This section describes tooling for testing Bodiless packages from the monorepo.
 
 ## Example sites
 
-The Bodiless-JS monorepo contains 2 example sites:
+The BodilessJS monorepo contains 2 example sites:
 
 - The "test-site", which demonstrates all Bodiless functionality, and is used
   internally for testing.

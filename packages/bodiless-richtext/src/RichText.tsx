@@ -12,10 +12,11 @@
  * limitations under the License.
  */
 
-import React, { ComponentType, useMemo } from 'react';
+import React, { ComponentType, useMemo, FC } from 'react';
 import { flowRight, pick, flow } from 'lodash';
 import type { Plugin } from 'slate-react';
 import type { SchemaProperties } from 'slate';
+import { observer } from 'mobx-react-lite';
 import {
   useEditContext,
   useContextActivator,
@@ -23,6 +24,7 @@ import {
   withMenuOptions,
   withoutProps,
   ifToggledOn,
+  useUUID,
 } from '@bodiless/core';
 import {
   designable,
@@ -182,6 +184,18 @@ export type RichTextProps<P> = {
 };
 
 /**
+ * @private
+ * Observer wrapper around hover menu which hides it when not in edit mode.
+ */
+const EditOnlyHoverMenu$: FC<Pick<Required<UI>, 'HoverMenu'>> = ({ HoverMenu, children }) => {
+  const { isEdit } = useEditContext();
+  return isEdit
+    ? <HoverMenu>{children}</HoverMenu>
+    : <></>;
+};
+const EditOnlyHoverMenu = observer(EditOnlyHoverMenu$);
+
+/**
  * ensure the componets have a type (we default to mark) as well as ensuring there is an id
  * @param components which set of component on which we should operate
  */
@@ -217,9 +231,7 @@ const BasicRichText = <P extends object, D extends object>(props: P & RichTextPr
   }, [components]);
   const { HoverMenu } = getUI(ui);
   const finalUI = getUI(ui);
-  const { isEdit } = useEditContext();
-  // eslint-disable-next-line react/no-array-index-key
-  const selectorButtons = getSelectorButtons(finalComponents).map((C, i) => <C key={i} />);
+  const selectorButtons = getSelectorButtons(finalComponents).map(C => <C key={useUUID()} />);
   return (
     <uiContext.Provider value={finalUI}>
       <RichTextProvider
@@ -229,25 +241,17 @@ const BasicRichText = <P extends object, D extends object>(props: P & RichTextPr
         globalButtons={globalButtons}
         schema={schema}
       >
-        {
-          isEdit
-          && (
-          <HoverMenu>
-            {
-              // TODO: Revist but for now it seems like this will not need to
-              // rerender ever so it is ok.
-              // eslint-disable-next-line react/no-array-index-key
-              getHoverButtons(finalComponents).map((C, i) => <C key={i} />)
-            }
-            {
-              selectorButtons.length > 0
-              && (
-                <TextSelectorButton>{ selectorButtons }</TextSelectorButton>
-              )
-            }
-          </HoverMenu>
-          )
-        }
+        <EditOnlyHoverMenu HoverMenu={HoverMenu}>
+          {
+            getHoverButtons(finalComponents).map(C => <C key={useUUID()} />)
+          }
+          {
+            selectorButtons.length > 0
+            && (
+              <TextSelectorButton>{ selectorButtons }</TextSelectorButton>
+            )
+          }
+        </EditOnlyHoverMenu>
         <Content />
       </RichTextProvider>
     </uiContext.Provider>

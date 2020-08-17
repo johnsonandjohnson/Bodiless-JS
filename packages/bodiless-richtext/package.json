@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/richtext",
-  "version": "0.0.52",
+  "version": "0.0.53",
   "description": "Provide Rich Text Component",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
   "license": "Apache-2.0",
@@ -29,15 +29,15 @@
     "postinstall": "node bin/apply-patches.js"
   },
   "dependencies": {
-    "@bodiless/core": "^0.0.52",
-    "@bodiless/fclasses": "^0.0.52",
+    "@bodiless/core": "^0.0.53",
+    "@bodiless/fclasses": "^0.0.53",
     "@emotion/core": "^10.0.14",
     "@emotion/css": "^10.0.14",
     "@emotion/styled": "^10.0.14",
     "@material/react-material-icon": "^0.14.1",
     "immutable": "^4.0.0-rc.12",
     "immutable-js": "^0.3.1-6",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",
     "mobx-react-lite": "^1.3.1",
