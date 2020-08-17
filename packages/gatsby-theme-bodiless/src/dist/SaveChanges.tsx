@@ -47,7 +47,7 @@ const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
       }
     }
     // eslint-disable-next-line no-undef
-    return Promise.reject(new Error('An unknown error has occured.'));
+    throw new Error('An unknown error has occured.'));
   })
   .catch((err: AxiosError) => {
     // Use back-end crafted error message if available.
