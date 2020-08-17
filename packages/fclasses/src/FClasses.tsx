@@ -14,7 +14,7 @@
 
 import React, { ComponentType, FC } from 'react';
 import {
-  union, difference, capitalize, flow,
+  union, difference, capitalize,
 } from 'lodash';
 
 type Classes = string | string[];
@@ -35,14 +35,18 @@ type Classable = {
 
 export type HOC = <P extends object>(C: ComponentType<P> | string) => ComponentType<P>;
 
-const modifyClasses = (operation: 'add' | 'remove') => (classes?: Classes) => {
+export type Condition = <T extends StylableProps>(args?: T) => boolean;
+const alwaysTrueCondition = () => true;
+
+const modifyClassesIf = (operation: 'add' | 'remove') => (condition: Condition) => (classes?: Classes) => {
   const hoc = <P extends StylableProps>(Component: ComponentType<P> | string) => {
-    const ModifyClasses: FC<P> = ({ fClasses, ...rest }) => {
-      const newFClasses = {
+    const ModifyClasses: FC<P> = props => {
+      const { fClasses, ...rest } = props;
+      const newFClasses = condition(props) ? {
         parentFClasses: fClasses,
         operation,
         classes,
-      };
+      } : fClasses;
       return (
         <Component fClasses={newFClasses} {...rest as P} />
       );
@@ -50,18 +54,32 @@ const modifyClasses = (operation: 'add' | 'remove') => (classes?: Classes) => {
     ModifyClasses.displayName = `${capitalize(operation)}Classes`;
     return ModifyClasses;
   };
-  hoc.addClasses = (classes$1?: Classes) => flow(hoc as HOC, modifyClasses('add')(classes$1) as HOC);
-  hoc.removeClasses = (classes$1?: Classes) => flow(modifyClasses('remove')(classes$1) as HOC, hoc as HOC);
   hoc.flow = hoc as HOC;
   return hoc;
 };
+
+/**
+ * Allows to add classes to a component conditionally.
+ *
+ * @param condition A function that is evaluated to determine whether classes should be added.
+ * @returns HOC that can be used for adding classes to a component
+ */
+const addClassesIf = modifyClassesIf('add');
 
 /**
  * HOC which specifies that a list of classes should be added to the wrapped component's className.
  *
  * @param classes A string or array of classes to add.
  */
-const addClasses = modifyClasses('add');
+const addClasses = addClassesIf(alwaysTrueCondition);
+
+/**
+ * Allows to remove classes from a component conditionally.
+ *
+ * @param condition A function that is evaluated to determine whether classes should be removed.
+ * @returns HOC that can be used for removing classes from a component
+ */
+const removeClassesIf = modifyClassesIf('remove');
 
 /**
  * HOC which specifies that a list of classes shoudl be removed from the wrapped component's
@@ -70,7 +88,7 @@ const addClasses = modifyClasses('add');
  * @param classes A string or array of classes to remove. If not specified, then *all* classes will
  * be removed.
  */
-const removeClasses = modifyClasses('remove');
+const removeClasses = removeClassesIf(alwaysTrueCondition);
 
 const asArray = (classes: Classes = []) => (Array.isArray(classes) ? classes : classes.split(' '));
 const asClassName = (classes: Classes) => {
@@ -115,6 +133,8 @@ const stylable = <P extends Classable>(Component: ComponentType<P> | string) => 
 
 export {
   addClasses,
+  addClassesIf,
   removeClasses,
+  removeClassesIf,
   stylable,
 };

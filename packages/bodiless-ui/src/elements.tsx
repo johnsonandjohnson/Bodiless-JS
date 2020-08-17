@@ -150,7 +150,10 @@ export const ToolbarButton = flow(
   withoutProps<ButtonVariantProps>(['isActive', 'isFirst', 'isDisabled']),
   addClasses('bl-cursor-pointer bl-text-grey-200 bl-block'),
   flowIf(hasProp('isDisabled'))(
-    addClasses('bl-text-grey-600').removeClasses('bl-text-grey-200'),
+    flow(
+      addClasses('bl-text-grey-600'),
+      removeClasses('bl-text-grey-200'),
+    ),
   ),
   addProps({ type: 'button' }),
 )(Button);

@@ -21,6 +21,7 @@ import {
 } from '@bodiless/components';
 import {
   withDesign, replaceWith, addClasses, stylable,
+  removeClasses,
 } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
 import EditableLink from '../../../components/Link';
@@ -63,7 +64,10 @@ const EditableLinkList = flow(
  * to demonstrate how to style a particular sublist.
  */
 const withLessPadding = withDesign({
-  Wrapper: addClasses('pl-4').removeClasses('pl-10'),
+  Wrapper: flow(
+    addClasses('pl-4'),
+    removeClasses('pl-10'),
+  ),
 });
 
 const InnerList = withLessPadding(EditableList);
