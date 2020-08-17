@@ -294,7 +294,7 @@ content$component.json
 The examples above can be refactored to make them more composable.
 
 Instead of defining our `ComponentWithData` as a Component, we can abstract that functionality
-to an HOC (a very common pattern in Bodiless-JS).
+to an HOC (a very common pattern in BodilessJS).
 ```
 const asComponentWithData = BaseComponent => {
   const ComponentWIthData = props => (

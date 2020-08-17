@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/bv",
-  "version": "0.0.52",
+  "version": "0.0.53",
   "description": "Provides bazaarvoice components.",
   "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
   "license": "Apache-2.0",
@@ -26,10 +26,10 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/components": "^0.0.52",
-    "@bodiless/core": "^0.0.52",
-    "@bodiless/fclasses": "^0.0.52",
-    "lodash": "^4.17.11"
+    "@bodiless/components": "^0.0.53",
+    "@bodiless/core": "^0.0.53",
+    "@bodiless/fclasses": "^0.0.53",
+    "lodash": "^4.17.19"
   },
   "peerDependencies": {
     "react": "^16.11.0",
