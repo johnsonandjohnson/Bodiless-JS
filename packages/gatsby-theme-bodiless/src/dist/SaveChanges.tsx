@@ -6,6 +6,7 @@ import { ComponentFormSpinner } from '@bodiless/ui';
 import { AxiosError, AxiosPromise } from 'axios';
 import Cookies from 'universal-cookie';
 import { GitClient } from './types';
+import handle from './ResponseHandler';
 
 enum SaveState {
   Init,
@@ -35,7 +36,7 @@ const saveChanges = (milliseconds: number) => new Promise(resolve => setTimeout(
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
 
-const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
+const myhandle = (promise: AxiosPromise<any>, callback?: () => void) => promise
   .then(res => {
     if (res.status === 200) {
       // @TODO: Display the response in a component instead of an alert.
