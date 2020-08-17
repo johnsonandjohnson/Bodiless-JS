@@ -13,6 +13,7 @@
  */
 
 import { flow } from 'lodash';
+import { withSidecarNodes } from '@bodiless/core';
 import {
   withDesign,
 } from '@bodiless/fclasses';
@@ -27,9 +28,13 @@ import { asProductToutDefaultStyle } from './token';
 
 export const asProductTout = flow(
   withDesign({
-    ImageLink: asEditableLink('cta'),
+    ImageLink: withSidecarNodes(
+      asEditableLink('cta'),
+    ),
     Image: asEditableImage('image'),
-    TitleLink: asEditableLink('cta'),
+    TitleLink: withSidecarNodes(
+      asEditableLink('cta'),
+    ),
     Title: withEditorSimple('title', 'Product Title Text'),
     BvReviewLink: asEditableLink('cta'),
     BvReview: () => BVInlineRatings,
