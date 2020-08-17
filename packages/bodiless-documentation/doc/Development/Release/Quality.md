@@ -2,7 +2,7 @@
 
 ## Standards
 
-The Bodiless-JS Javascript coding standards are based on the
+The BodilessJS Javascript coding standards are based on the
 [AirBnB syle guide](https://github.com/airbnb/javascript). Please use the
 provided [.eslintrc.json](./.eslintrc.json) to scan your code to ensure
 compliance. This can be done by executing
@@ -26,7 +26,7 @@ error detected. It's allow us keep code in compliance with code style.
 
 ## Scanning with Sonarqube
 
-The Bodiless-JS repo contains configurations for scanning using
+The BodilessJS repo contains configurations for scanning using
 [SonarQube](https://www.sonarqube.org/), and will soon be scanned
 regularly on [SonarCloud](https://sonarcloud.io). For now, you can trigger a scan locally targeting
 your own SonarQube server instance:
