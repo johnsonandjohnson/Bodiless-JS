@@ -31,7 +31,6 @@ type Props = {
 // @ts-ignore
 // eslint-disable-next-line @typescript-eslint/no-unused-vars,max-len
 const saveChanges = (milliseconds: number) => new Promise(resolve => setTimeout(resolve, milliseconds));
-let rcount = 1;
 
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
@@ -71,28 +70,13 @@ const handle = (promise: AxiosPromise<any>, callback?: () => void) => {
  * @constructor
  */
 const SaveChanges = (props: Props) => {
-  console.log(rcount);
-  rcount += 1;
-  // submitValues: (submitValues: any) => {
-  //   handle(
-  //     client.commit(
-  //       submitValues.commitMessage,
-  //       [backendFilePath, backendStaticPath],
-  //       [],
-  //       [],
-  //       author,
-  //     ),
-  //   );
-  // },
   // Get the author from the cookie.
   const cookies = new Cookies();
   const author = cookies.get('author');
-  console.log(author);
   const context = useEditContext();
   const {
     ui, formState, formApi, client,
   } = props;
-  console.log(client);
   const {
     ComponentFormTitle,
     ComponentFormLabel,
@@ -103,7 +87,6 @@ const SaveChanges = (props: Props) => {
   const [state, setState] = useState<SaveStatus>({
     status: SaveState.Init,
   });
-  console.log('kO', formApi.getValue('keepOpen'));
   useEffect(() => {
     // If the form is submitted and valid then lets try reset.
     if (submits && invalid === false) {
@@ -118,17 +101,14 @@ const SaveChanges = (props: Props) => {
         author,
       ))
         .then(() => {
-          console.log('Complete');
           setState({ status: SaveState.Complete });
         })
         .catch((error : AxiosError) => {
-          console.log('catch error', error);
           setState({ status: SaveState.Errored, errorMessage: error.message });
         })
         .finally(() => {
           context.hidePageOverlay();
           formApi.setValue('keepOpen', false);
-          console.log('setting keep open to false');
         });
     }
   }, [submits]);
