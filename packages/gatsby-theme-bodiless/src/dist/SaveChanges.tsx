@@ -6,7 +6,6 @@ import { ComponentFormSpinner } from '@bodiless/ui';
 import { AxiosError, AxiosPromise } from 'axios';
 import Cookies from 'universal-cookie';
 import { GitClient } from './types';
-import handle from './ResponseHandler';
 
 enum SaveState {
   Init,
@@ -36,7 +35,10 @@ const saveChanges = (milliseconds: number) => new Promise(resolve => setTimeout(
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
 
-const myhandle = (promise: AxiosPromise<any>, callback?: () => void) => promise
+// @todo unify response handler for all actions to the backend.
+// We need to handle reponses that come in the form of html, such as 404, and
+// other messages.
+const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
   .then(res => {
     if (res.status === 200) {
       // @TODO: Display the response in a component instead of an alert.
@@ -52,9 +54,9 @@ const myhandle = (promise: AxiosPromise<any>, callback?: () => void) => promise
   })
   .catch((err: AxiosError) => {
     // Use back-end crafted error message if available.
-    if (err.response && err.response.data) {
-      throw Error(err.response.data);
-    }
+    // if (err.response && err.response.data) {
+    //   throw Error(err.response.data);
+    // }
     throw err;
   });
 
