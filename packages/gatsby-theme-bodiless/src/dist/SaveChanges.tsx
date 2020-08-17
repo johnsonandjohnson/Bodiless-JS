@@ -35,32 +35,29 @@ const saveChanges = (milliseconds: number) => new Promise(resolve => setTimeout(
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
 
-const handle = (promise: AxiosPromise<any>, callback?: () => void) => {
-  promise
-    .then(res => {
-      if (res.status === 200) {
-        // @TODO: Display the response in a component instead of an alert.
-        // eslint-disable-next-line no-undef
-        if (typeof callback === 'function') {
-          callback();
-        } else {
-          return Promise.resolve('Success');
-        }
-      }
+const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
+  .then(res => {
+    if (res.status === 200) {
+      // @TODO: Display the response in a component instead of an alert.
       // eslint-disable-next-line no-undef
-      return Promise.reject(new Error('An unknown error has occured.'));
-    })
-    .catch((err: AxiosError) => {
-      // Use back-end crafted error message if available.
-      if (err.response && err.response.data) {
-        return Promise.reject(new Error(err.response.data));
+      if (typeof callback === 'function') {
+        callback();
+      } else {
+        return Promise.resolve('Success');
       }
-      return Promise.reject(err.message);
-    });
-  return Promise.reject(
-    new Error('An internal error occurred. Please try again later.'),
-  );
-};
+    }
+    // eslint-disable-next-line no-undef
+    return Promise.reject(new Error('An unknown error has occured.'));
+  })
+  .catch((err: AxiosError) => {
+    // Use back-end crafted error message if available.
+    if (err.response && err.response.data) {
+      console.log('err', err);
+      console.log('err', err.response.data);
+      return new Error(err.response.data);
+    }
+    return Promise.reject(err.message);
+  });
 
 /**
  * Form component for reverting local changes.
@@ -103,7 +100,8 @@ const SaveChanges = (props: Props) => {
         .then(() => {
           setState({ status: SaveState.Complete });
         })
-        .catch((error : AxiosError) => {
+        .catch((error : any) => {
+          console.log(error);
           setState({ status: SaveState.Errored, errorMessage: error.message });
         })
         .finally(() => {
