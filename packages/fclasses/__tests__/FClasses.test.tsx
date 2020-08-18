@@ -20,6 +20,8 @@ import { flow } from 'lodash';
 import {
   addClasses,
   removeClasses,
+  addClassesIf,
+  removeClassesIf,
   stylable,
 } from '../src/FClasses';
 
@@ -42,27 +44,12 @@ describe('stylable', () => {
 
 describe('Simple FClasses', () => {
   it('preserves classes passed via className', () => {
-    const BigSpan = addClasses('text-xl').removeClasses('bg-yellow')(Span);
+    const BigSpan = flow(
+      addClasses('text-xl'),
+      removeClasses('bg-yellow'),
+    )(Span);
     const wrapper = mount(<BigSpan id="foo" className="text-blue bg-yellow" />);
     expect(normalize(wrapper.find('span').prop('className'))).toBe(normalize('text-blue bg-yellow text-xl'));
-  });
-
-  it('allows chaining', () => {
-    const BlueSpan = addClasses('text-blue bg-black')(Span);
-    let wrapper = mount(<BlueSpan />);
-    expect(normalize(wrapper.find('span').prop('className'))).toBe('bg-black text-blue');
-    let TestSpan = removeClasses().addClasses('text-red')(BlueSpan);
-    wrapper = mount(<TestSpan />);
-    expect(normalize(wrapper.find('span').prop('className'))).toBe('text-red');
-    TestSpan = addClasses('text-red').removeClasses()(BlueSpan);
-    wrapper = mount(<TestSpan />);
-    expect(normalize(wrapper.find('span').prop('className'))).toBe('text-red');
-    TestSpan = addClasses('text-red').removeClasses('text-blue')(BlueSpan);
-    wrapper = mount(<TestSpan />);
-    expect(normalize(wrapper.find('span').prop('className'))).toBe('bg-black text-red');
-    TestSpan = removeClasses('text-blue').addClasses('text-red')(BlueSpan);
-    wrapper = mount(<TestSpan />);
-    expect(normalize(wrapper.find('span').prop('className'))).toBe('bg-black text-red');
   });
 
   it('works', () => {
@@ -88,5 +75,37 @@ describe('Simple FClasses', () => {
     expect(normalize(wrapper.find('span').prop('className'))).toBeUndefined();
     wrapper = mount(<GreenSpan />);
     expect(normalize(wrapper.find('span').prop('className'))).toBe('text-green');
+  });
+
+  describe('addClassesIf', () => {
+    it('adds classes to the component when the passed condition is true', () => {
+      const StyledSpan = addClassesIf(() => true)('text-blue')(Span);
+      const wrapper = mount(<StyledSpan />);
+      expect(normalize(wrapper.find('span').prop('className'))).toBe('text-blue');
+    });
+    it('does not add classes to the component when the passed condition is false', () => {
+      const StyledSpan = addClassesIf(() => false)('text-blue')(Span);
+      const wrapper = mount(<StyledSpan />);
+      expect(normalize(wrapper.find('span').prop('className'))).toBeUndefined();
+    });
+  });
+
+  describe('removeClassesIf', () => {
+    it('removes classes from the component when the passed condition is true', () => {
+      const StyledSpan = flow(
+        addClasses('text-blue'),
+        removeClassesIf(() => true)('text-blue'),
+      )(Span);
+      const wrapper = mount(<StyledSpan />);
+      expect(normalize(wrapper.find('span').prop('className'))).toBeUndefined();
+    });
+    it('does not remove classes from the component when the passed condition is false', () => {
+      const StyledSpan = flow(
+        addClasses('text-blue'),
+        removeClassesIf(() => false)('text-blue'),
+      )(Span);
+      const wrapper = mount(<StyledSpan />);
+      expect(normalize(wrapper.find('span').prop('className'))).toBe('text-blue');
+    });
   });
 });
