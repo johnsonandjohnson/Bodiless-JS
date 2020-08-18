@@ -136,7 +136,7 @@ const NewPageComp = (props : NewPageProps) => {
         <>
           <ComponentFormTitle>Operation Complete</ComponentFormTitle>
           <ComponentFormDescription>
-            <ComponentFormLink href={newPagePath} id={'new-page-link'}>{`Click here to visit the new page: ${newPagePath}`}</ComponentFormLink>
+            <ComponentFormLink href={newPagePath} id="new-page-link">{`Click here to visit the new page: ${newPagePath}`}</ComponentFormLink>
           </ComponentFormDescription>
         </>
       );
