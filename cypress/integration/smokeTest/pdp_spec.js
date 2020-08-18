@@ -12,6 +12,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
   const imageName = 'images/img_615x500.jpg'
   const addPageIconXpath = '//*[@aria-label="Page"]'
   const fieldAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//input[@id="new-page-path"]'
+  const newPageLinkSelector = '#new-page-link'
   const checkmarkIconAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Submit"]'
   const titleXpath = '//*[@data-product-element="title"]'
   const accordionOverviewBodyXpath = '//*[@data-accordion-element="accordion"][@aria-label="Overview"]//*[@data-accordion-element="accordion-body"]//*[@data-slate-editor="true"]'
@@ -35,7 +36,8 @@ describe('PDP (Product Details Page) smoke tests', function () {
       .type(pdpURL);
     cy.xpath(checkmarkIconAddPageFormXpath)
       .click();
-    cy.url({ timeout: 10000 }).should('eq', Cypress.config().baseUrl + '/products/' + pdpURL);
+    cy.get(newPageLinkSelector,{ timeout: 10000 } ).click();
+    cy.url().should('eq', Cypress.config().baseUrl + '/products/' + pdpURL);
   })
 
 

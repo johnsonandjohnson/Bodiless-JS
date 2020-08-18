@@ -60,6 +60,7 @@ export type UI = {
   ComponentFormOption?: ComponentType<ChildFieldProps<any, any>>;
   ComponentFormError?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   ComponentFormWarning?: ComponentType<HTMLProps<HTMLDivElement>> | string;
+  ComponentFormLink?: ComponentType<HTMLProps<HTMLAnchorElement>> | string;
   Form?: ComponentType<HTMLProps<HTMLFormElement>> | string;
   Tooltip?: ComponentType<Tooltip['props']>;
   ReactTags?: ComponentType<ReactTagsFieldProps>;

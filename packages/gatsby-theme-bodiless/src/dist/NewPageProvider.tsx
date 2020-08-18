@@ -89,6 +89,7 @@ const NewPageComp = (props : NewPageProps) => {
     ComponentFormError,
     ComponentFormWarning,
     ComponentFormTitle,
+    ComponentFormLink,
   } = getUI(ui);
   // ensure trailing slash is present
   const currentPage = window.location.href.replace(/\/?$/, '/');
@@ -135,7 +136,7 @@ const NewPageComp = (props : NewPageProps) => {
         <>
           <ComponentFormTitle>Operation Complete</ComponentFormTitle>
           <ComponentFormDescription>
-            <a href={newPagePath}>{`Click here to visit the new page: ${newPagePath}`}</a>
+            <ComponentFormLink href={newPagePath} id={'new-page-link'}>{`Click here to visit the new page: ${newPagePath}`}</ComponentFormLink>
           </ComponentFormDescription>
         </>
       );
