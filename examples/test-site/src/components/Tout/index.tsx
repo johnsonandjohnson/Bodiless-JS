@@ -53,10 +53,10 @@ export const withToutEditors = flow(
 );
 
 export const withToutResetButtons = withDesign({
-  ImageLink: withResetButton({ nodeKey: 'image' }),
+  ImageLink: withResetButton({ nodeKey: ['image', 'link'] }),
   Title: withResetButton({ nodeKey: 'title' }),
   Body: withResetButton({ nodeKey: 'body' }),
-  Link: withResetButton({ nodeKey: 'link' }),
+  Link: withResetButton({ nodeKey: ['link', 'ctatext'] }),
 });
 
 export const asEditableTout = flow(

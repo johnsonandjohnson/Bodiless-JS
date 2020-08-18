@@ -21,21 +21,22 @@ import {
 import { useNode } from '../NodeProvider';
 import { TMenuOption } from '../PageEditContext/types';
 
-type MenuOptionWithNodeKey = TMenuOption & {
-  nodeKey?: string;
+type MenuOptionWithNodeKey = Partial<TMenuOption> & {
+  nodeKey?: string | string[];
 };
 
 const useGetMenuOptions = (menuOptionWithNodeKey?: MenuOptionWithNodeKey) => () => {
   const { node } = useNode();
   const { nodeKey, ...menuOption } = menuOptionWithNodeKey || { nodeKey: undefined };
-  const nodeKeyToDelete = nodeKey ? node.path.concat(nodeKey) : undefined;
+  const nodeKeys = Array.isArray(nodeKey) ? nodeKey : [nodeKey];
+  const nodeKeysToDelete = nodeKeys.map(key => (key ? node.path.concat(key) : undefined));
   // TODO: we should disable or remove the button when the node is already reverted
   return () => ([
     {
       icon: 'undo',
       name: 'Reset',
       label: 'Undo',
-      handler: () => node.delete(nodeKeyToDelete),
+      handler: () => nodeKeysToDelete.forEach(key => node.delete(key)),
       local: true,
       global: false,
       ...menuOption,
