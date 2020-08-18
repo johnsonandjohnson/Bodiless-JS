@@ -99,6 +99,15 @@ export const FilterWrapper = (props: any) => {
     <finalUI.ComponentSelectorWrapper>
       {Object.keys(allfilters).map(category => {
         if (allfilters[category].length > 0) {
+          const isAllDisabled = allfilters[category].every((value: string) => {
+            // ToDo code duplication with Checkbox disabled
+            return Object.entries(filters).length === 0
+              || !Object.keys(filters).includes(category)
+              || !filters[category].includes(value);
+          });
+          if (isAllDisabled) {
+            return true;
+          }
           return (
             <Dropdown type={category} key={category}>
               {allfilters[category].map((value: string) => (
