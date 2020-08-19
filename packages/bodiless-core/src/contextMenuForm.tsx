@@ -12,34 +12,10 @@
  * limitations under the License.
  */
 
-import React, { ReactNode, useCallback } from 'react';
-import {
-  Form, FormApi, FormState, Text, TextArea,
-} from 'informed';
-import { UI } from './Types/ContextMenuTypes';
-import ReactTagsField from './components/ReactTagsField';
-
-const defaultUI = {
-  Icon: 'i',
-  ComponentFormTitle: 'h3',
-  ComponentFormLabel: 'label',
-  ComponentFormButton: 'button',
-  ComponentFormCloseButton: 'button',
-  ComponentFormSubmitButton: 'button',
-  ComponentFormUnwrapButton: 'button',
-  ComponentFormText: Text,
-  ComponentFormTextArea: TextArea,
-  ComponentFormError: 'div',
-  ComponentFormWarning: 'div',
-  ComponentFormLink: 'a',
-  Form: 'div',
-  ReactTags: ReactTagsField,
-  ComponentFormList: 'ul',
-  ComponentFormListItem: 'li',
-  ComponentFormDescription: 'div',
-};
-
-export const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });
+import React, { FC, ReactNode, useCallback } from 'react';
+import { Form, FormApi, FormState } from 'informed';
+import { useMenuOptionUI } from './components/ContextMenuContext';
+import type { ContextMenuFormProps } from './Types/ContextMenuTypes';
 
 export type Options<D> = {
   submitValues?: (componentData: D) => boolean|void;
@@ -53,7 +29,7 @@ export type FormBodyProps<D> = ContextMenuFormProps & Options<D> & {
   formState: FormState<D>;
 };
 
-export type FormBodyRenderer<D> = (props: FormBodyProps<D>) => ReactNode;
+export type FormBoqdyRenderer<D> = (props: FormBodyProps<D>) => ReactNode;
 
 export type ContextMenuPropsType<D> = ContextMenuFormProps & Options<D> & {
   children: FormBodyRenderer<D>|ReactNode,
