@@ -32,6 +32,7 @@ import {
 } from '@bodiless/ui';
 import ReactTagsField from './ReactTags';
 
+// Change to trigger cypress re-run
 const Toolbar = flow(
   addClasses('bl-flex bl-flex-col bl-w-grid-12 bl-bg-black bl-rounded bl-z-50 bl-px-grid-2 bl-py-2 bl-fixed bl-top-grid-0 bl-left-grid-0 bl-text-white'),
   addProps({ role: 'toolbar', 'aria-label': 'Global Context Menu Left', id: 'global-context-menu' }),
