@@ -14,7 +14,7 @@
 
 /* eslint-disable no-alert */
 import React, {
-  ComponentType, useCallback, useEffect, useState,
+  useCallback, useEffect, useState,
 } from 'react';
 import {
   contextMenuForm,
@@ -32,10 +32,6 @@ import { useGatsbyPageContext } from './GatsbyPageProvider';
 
 type Client = {
   savePage: (path: string, template?: string) => AxiosPromise<any>;
-};
-
-type Props = {
-  client?: Client;
 };
 
 enum NewPageState {

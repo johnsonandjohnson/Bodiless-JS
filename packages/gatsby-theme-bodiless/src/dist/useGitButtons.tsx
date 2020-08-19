@@ -14,7 +14,7 @@
 
 /* eslint-disable no-alert */
 import React, {
-  FC, useState, useEffect, useCallback,
+  useState, useEffect, useCallback,
 } from 'react';
 import {
   contextMenuForm,
@@ -43,10 +43,6 @@ import { GitClient } from './types';
  */
 const canCommit = (process.env.BODILESS_BACKEND_COMMIT_ENABLED || '0') === '1';
 const canAlertOnLoad = process.env.BODILESS_ALERT_ON_PAGE_LOAD_ENABLED || 1;
-
-type Props = {
-  client?: GitClient,
-};
 
 const formGetCommitsList = (client: GitClient) => contextMenuForm({
   // @todo: handle what happens when user selects a commit from the loaded list.
