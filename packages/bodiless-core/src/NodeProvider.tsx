@@ -15,24 +15,22 @@
 import React, { useContext } from 'react';
 import { ContentNode, DefaultContentNode } from './ContentNode';
 
-type NodeMap<D> = {
+export type NodeMap<D> = {
   activeCollection: string;
   collections: {
     [collection: string]: ContentNode<any>;
   };
 };
 
-const context = React.createContext<NodeMap<any>>({
+const NodeContext = React.createContext<NodeMap<any>>({
   activeCollection: '_default',
   collections: {
     _default: DefaultContentNode.dummy(),
   },
 });
 
-const NodeConsumer = context.Consumer;
-
 const useNode = <D extends object>(collection?: string) => {
-  const map = React.useContext(context);
+  const map = React.useContext(NodeContext);
   // If no collection is specified, then return a node from the
   // collection which was set by the most recent NodeProvier.
   const key = collection || map.activeCollection || '_default';
@@ -59,15 +57,15 @@ export type Props = {
 };
 
 const NodeProvider: React.FC<Props> = ({ node, collection, children }) => {
-  const currentValue = useContext(context);
+  const currentValue = useContext(NodeContext);
   // If no collection specified, then create a new node in the active collection.
   const activeCollection = collection || currentValue.activeCollection || '_default';
   const newValue = {
     activeCollection,
     collections: { ...currentValue.collections, [activeCollection]: node },
   };
-  return <context.Provider value={newValue}>{children}</context.Provider>;
+  return <NodeContext.Provider value={newValue}>{children}</NodeContext.Provider>;
 };
 
 export default NodeProvider;
-export { NodeConsumer, useNode, useNodeDataHandlers };
+export { NodeContext, useNode, useNodeDataHandlers };

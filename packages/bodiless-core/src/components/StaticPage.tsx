@@ -64,6 +64,10 @@ class StaticContext implements PageEditContextInterface {
   // Normally spawn returns a new context instance, but in a static page there is only a single
   // constext, so we just return ourselves.
   spawn = (): PageEditContextInterface => this;
+
+  registerPeer = () => {};
+
+  allMenuOptions = [];
 }
 
 const staticContext = new StaticContext();

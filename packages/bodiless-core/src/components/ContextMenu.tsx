@@ -12,66 +12,79 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { getUI as getFormUI } from '../contextMenuForm';
-import { IContextMenuProps as IProps, UI } from '../Types/ContextMenuTypes';
-import { TMenuOption } from '../PageEditContext/types';
+import React, { FC, useState } from 'react';
+import { uniqBy } from 'lodash';
 import ContextMenuItem from './ContextMenuItem';
+import StructuredChildren from '../ContextMenu/StructuredChildren';
+import ContextMenuProvider, { getUI } from './ContextMenuContext';
+import type {
+  IContextMenuProps, ContextMenuFormProps, TMenuOption,
+} from '../Types/ContextMenuTypes';
 
-const defaultUI = {
-  Toolbar: 'div',
-  ToolbarDivider: 'hr',
-};
+const createChildrenFromOptions = (options: TMenuOption[]) => options.map(
+  option => {
+    const Component = option.Component || ContextMenuItem;
+    return (
+      <Component
+        option={option}
+        group={option.group || option.name}
+        name={option.name}
+        key={option.name}
+        aria-label={option.name}
+      />
+    );
+  },
+);
 
-const getDivider = (index: Number): TMenuOption => ({
-  name: `__divider-${index}`,
-  icon: '',
-  isActive: () => false,
-  handler: () => undefined,
-});
+const ContextMenuBase: FC<IContextMenuProps> = (props) => {
+  if (typeof window === 'undefined') return null;
 
-export const getUI = (ui: UI = {}) => ({
-  ...defaultUI,
-  ...getFormUI(),
-  ...ui,
-});
-
-const ContextMenu = (props: IProps) => {
-  if (typeof window === 'undefined') {
-    return <></>;
-  }
-
-  const { options } = props;
-  const { ui } = props;
+  const [renderForm, setRenderForm] = useState<(props:ContextMenuFormProps) => JSX.Element>();
+  const {
+    ui,
+    renderInTooltip = true,
+    children,
+  } = props;
   const { Toolbar } = getUI(ui);
 
-  const elements = options
-    // Inject dividers
-    .reduce(
-      (acc: TMenuOption[], op: TMenuOption, currentIndex: Number) => (
-        acc.length && acc[acc.length - 1].group
-          !== op.group && (typeof op.isHidden === 'function' ? !op.isHidden() : true)
-          ? [...acc, getDivider(currentIndex), op]
-          : [...acc, op]),
-      [] as TMenuOption[],
-    )
-    .map(
-      (option, index) => (
-        <ContextMenuItem
-          option={option}
-          index={index}
-          key={option.name}
-          aria-label={option.name}
-          ui={ui}
-        />
-      ),
-    );
+  if (renderForm) {
+    const formProps: ContextMenuFormProps = {
+      closeForm: () => setRenderForm(undefined),
+      ui,
+      'aria-label': 'Context Submenu Form',
+    };
+    return renderForm(formProps);
+  }
 
-  if (elements.length > 0) {
+  if (children) {
     return (
-      <Toolbar onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
-        {elements}
-      </Toolbar>
+      <ContextMenuProvider setRenderForm={renderInTooltip ? undefined : setRenderForm} ui={ui}>
+        <Toolbar onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>
+          {children}
+        </Toolbar>
+      </ContextMenuProvider>
+    );
+  }
+
+  return null;
+};
+
+const ContextMenu: FC<IContextMenuProps> = (props) => {
+  if (typeof window === 'undefined') return null;
+
+  const { options, ui, children } = props;
+  const { ContextMenuGroup } = getUI(ui);
+  const childProps = { ui };
+  const childrenFromOptions = uniqBy(createChildrenFromOptions(options || []), 'key');
+
+  if (children || childrenFromOptions.length > 0) {
+    return (
+      <ContextMenuBase {...props}>
+        <StructuredChildren components={{ Group: ContextMenuGroup! }} {...childProps}>
+          {children}
+          {childrenFromOptions}
+        </StructuredChildren>
+      </ContextMenuBase>
     );
   }
 
@@ -79,3 +92,6 @@ const ContextMenu = (props: IProps) => {
 };
 
 export default ContextMenu;
+export {
+  ContextMenuBase,
+};

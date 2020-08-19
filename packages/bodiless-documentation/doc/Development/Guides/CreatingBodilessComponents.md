@@ -2,7 +2,7 @@
 
 In the previous guides, you have seen how to use built-in Bodiless components to
 build out an editable site. But what if you have pre-built components (or even
-pages) you'd like to make editable? Bodiless-JS provides a set of utilities which
+pages) you'd like to make editable? BodilessJS provides a set of utilities which
 make it easy to wire up any component with an edit form. To demonstrate, we'll
 create an editable version of the popular
 [`ReactMarkdown` component](https://github.com/rexxars/react-markdown).
@@ -101,7 +101,7 @@ buttons. |
 ### Defining the form
 
 The key option above is `renderForm`. This is where you define the fields that
-will be used to edit your component. Bodiless-JS uses the excellent
+will be used to edit your component. BodilessJS uses the excellent
 [Informed](https://joepuzzo.github.io/informed) library to build forms. Defining
 your component form is as simple as returning informed inputs whose names match
 the props of your component.
@@ -109,7 +109,7 @@ the props of your component.
 Let's see what a `renderForm` callback might look like for `ReactMarkdown`.
 ```
 const renderForm = () => {
-  const { ComponentFormTitle, ComponentFormTextArea } = useFormUI();
+  const { ComponentFormTitle, ComponentFormTextArea } = useMenuOptionUI();
   return (
     <>
       <ComponentFormTitle>Edit Page Body</ComponentFormTitle>
@@ -121,12 +121,12 @@ const renderForm = () => {
 We provide a form title and a single field named after the `source` prop of
 `ReactMarkdown`.
 
-> Notice the use of the `useFormUI()` hook. The Bodiless-JS admin UI is designed
+> Notice the use of the `useMenuOptionUI()` hook. The Bodiless-JS admin UI is designed
 to be theme-able. Themers can provide their own styled versions of all UI
 elements. Here we simply retrieve the styled elements we need. For example,
 `ComponentFormTextArea` is nothing more than a styled version of the native
 [TextArea](https://joepuzzo.github.io/informed/?path=/story/inputs--text-area)
-input from Informed. `useFormUI()` will return such styled versions of all
+input from Informed. `useMenuOptionUI()` will return such styled versions of all
 native Informed inputs (pending [#336](https://github.com/johnsonandjohnson/Bodiless-JS/issues/336))
 
 Now we're ready to complete our `asBodilessMarkdown` function:
@@ -198,7 +198,7 @@ Now, we can rewrite our `renderForm` to use the above input.
 
 ```
 const renderForm = () => {
-  const { ComponentFormTitle } = useFormUI();
+  const { ComponentFormTitle } = useMenuOptionUI();
   return (
     <>
       <ComponentFormTitle>Edit Page Body</ComponentFormTitle>
@@ -215,7 +215,7 @@ Putting it all together, our final, editable `PageBody` would look like this:
 import React } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import { asBodilessComponent, useFormUI } from '@bodiless/core';
+import { asBodilessComponent, useMenuOptionUI } from '@bodiless/core';
 import { asEditable } from '@bodiless/components';
 import ReactMarkdown from 'react-markdown';
 
@@ -226,7 +226,7 @@ const asBodilessMarkdown = asBodilessComponent({
   icon: 'edit',
   name: 'edit',
   renderForm: () => {
-    const { ComponentFormTitle } = useFormUI();
+    const { ComponentFormTitle } = useMenuOptionUI();
     return (
       <>
         <ComponentFormTitle>Markdown</ComponentFormTitle>
@@ -322,7 +322,7 @@ const useRenderCustomEditForm = componentProps => {
   const editFormProps = useCustomEditFormProps(props);
   return useCallback(
     (contextMenuFormProps) => {
-      const { ComponentFormLabel, ComponentFormTitle } = useFormUI();
+      const { ComponentFormLabel, ComponentFormTitle } = useMenuOptionUI();
       return (
         <ContextMenuForm {...contextMenuFormProps} {...editFormProps}>
           <ComponentFormTitle>Markdown</ComponentFormTitle>

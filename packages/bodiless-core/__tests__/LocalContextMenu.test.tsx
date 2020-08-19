@@ -14,13 +14,13 @@
 
 /* eslint class-methods-use-this: ["error", { "exceptMethods": ["isInnermost"] }] */
 
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { mount } from 'enzyme';
 import PageEditContext from '../src/PageEditContext';
 import LocalContextMenu from '../src/components/LocalContextMenu';
 import ContextMenu from '../src/components/ContextMenu';
 import { TMenuOptionGetter } from '../src/PageEditContext/types';
-import { useUUID } from '../src/hooks';
+import { useUUID, useEditContext } from '../src/hooks';
 import PageEditor from '../src/components/PageEditor';
 
 const options = () => [
@@ -63,12 +63,13 @@ const MockContextProvider: FC<Props> = ({
     name: name || 'Unknown',
   };
 
-  const mockPageContext = new MockPageEditContext(newValues);
+  const context = useEditContext() as PageEditContext;
+  const mockPageContext = new MockPageEditContext(newValues, context);
 
   // Activate the context.
-  if (active) {
-    mockPageContext.activate();
-  }
+  useEffect(() => {
+    if (active) mockPageContext.activate();
+  });
 
   return (
     <PageEditContext.context.Provider value={mockPageContext}>

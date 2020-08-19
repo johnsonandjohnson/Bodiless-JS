@@ -12,14 +12,27 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { FC } from 'react';
 import { shallow, mount } from 'enzyme';
 import { observable } from 'mobx';
-import { withContextActivator, withLocalContextMenu, withNodeDataHandlers } from '../src/hoc';
+import {
+  withContextActivator, withLocalContextMenu, withNodeDataHandlers, withOnlyProps,
+} from '../src/hoc';
 
 const TestComponent = ({ element: Element }: any) => (
   <Element><div>Test Component</div></Element>
 );
+
+describe('withOnlyProps', () => {
+  it('keeps only the specified props', () => {
+    const Base: FC<any> = () => null;
+    const Test = withOnlyProps('foo', 'bar')(Base);
+    const wrapper = shallow(<Test foo bar baz />);
+    expect(wrapper.prop('foo')).toBeTruthy();
+    expect(wrapper.prop('bar')).toBeTruthy();
+    expect(wrapper.prop('baz')).toBeUndefined();
+  });
+});
 
 describe('withContextActivator', () => {
   it('should be able to pass onClick handler to component', () => {

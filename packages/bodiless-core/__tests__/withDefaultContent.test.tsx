@@ -35,6 +35,7 @@ const createGetters = (store: Store) => ({
     return store[key] || '';
   },
   getKeys: jest.fn(),
+  hasError: jest.fn(),
 });
 
 const createNodeConsumer = (displayName?: string) => {
