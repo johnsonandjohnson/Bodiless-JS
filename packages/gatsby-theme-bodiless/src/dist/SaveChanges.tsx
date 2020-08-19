@@ -82,7 +82,7 @@ const SaveChanges = (props: Props) => {
   });
   useEffect(() => {
     // If the form is submitted and valid then lets try reset.
-    if (submits && invalid === false) {
+    if (submits === 1 && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
       setState({ status: SaveState.Pending });
       // client.reset()
