@@ -29,7 +29,7 @@ export type FormBodyProps<D> = ContextMenuFormProps & Options<D> & {
   formState: FormState<D>;
 };
 
-export type FormBoqdyRenderer<D> = (props: FormBodyProps<D>) => ReactNode;
+export type FormBodyRenderer<D> = (props: FormBodyProps<D>) => ReactNode;
 
 export type ContextMenuPropsType<D> = ContextMenuFormProps & Options<D> & {
   children: FormBodyRenderer<D>|ReactNode,
