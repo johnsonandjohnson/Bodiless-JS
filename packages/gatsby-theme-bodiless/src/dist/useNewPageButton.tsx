@@ -157,12 +157,12 @@ const formPageAdd = (client: Client, template: string) => contextMenuForm({
     status: NewPageState.Init,
   });
   const context = useEditContext();
+  const { path } = values;
   useEffect(() => {
     // If the form is submitted and valid then lets try to creat a page.
-    if (submits && invalid === false) {
+    if (submits && path && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
       setState({ status: NewPageState.Pending });
-      const { path } = values;
       // Create the page.
       createPage({ path, client, template })
         .then((newPagePath: string) => {
