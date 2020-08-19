@@ -96,6 +96,7 @@ const ui: ContextMenuUI = {
   ComponentFormLink,
   ComponentFormList,
   ComponentFormListItem,
+  ContextSubMenu,
   Icon,
   Toolbar,
   ToolbarButton,
