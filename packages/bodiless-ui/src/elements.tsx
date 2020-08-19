@@ -162,6 +162,11 @@ export const ToolbarButton = flow(
   addProps({ type: 'button' }),
 )(Button);
 
+export const HorizontalToolbarButton = flow(
+  removeClasses('bl-mb-3'),
+  addClasses('bl-mr-grid-2 last:bl-mr-grid-0'),
+)(ToolbarButton);
+
 export const ToolbarButtonLabel = addClasses('bl-text-center bl-text-white bl-text-base')(Span);
 
 export const ResizeHandle = addClasses(

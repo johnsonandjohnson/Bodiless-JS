@@ -15,13 +15,13 @@
 import React, { FC } from 'react';
 import ReactTooltip from 'rc-tooltip';
 import { flow } from 'lodash';
-import { addClasses, removeClasses, addProps } from '@bodiless/fclasses';
+import { addClasses, addProps } from '@bodiless/fclasses';
 import {
   ContextMenu, ContextMenuProps, ContextMenuUI,
 } from '@bodiless/core';
 import {
   ComponentFormTitle, ComponentFormLabel, ComponentFormText, ComponentFormButton,
-  ComponentFormCloseButton, ComponentFormSubmitButton, ToolbarIcon, Div, ToolbarButton,
+  ComponentFormCloseButton, ComponentFormSubmitButton, ToolbarIcon, Div, HorizontalToolbarButton,
   ComponentFormUnwrapButton, ComponentFormTextArea, ComponentFormDescription, ComponentFormWarning,
   ComponentFormFieldWrapper, ComponentFormFieldTitle, ComponentFormCheckBox, ComponentFormRadio,
   ComponentFormRadioGroup, ComponentFormSelect, ComponentFormOption, ContextSubMenu,
@@ -31,14 +31,9 @@ import ReactTagsField from './ReactTags';
 
 // For accessibility attributes, see https://www.w3.org/TR/wai-aria-practices/examples/toolbar/toolbar.html
 const Toolbar = flow(
-  addClasses('bl-flex bl--mr-grid-2'),
+  addClasses('bl-flex'),
   addProps({ role: 'toolbar', 'aria-label': 'Local Context Menu' }),
 )(Div);
-
-const LocalToolbarButton = flow(
-  removeClasses('bl-mb-3'),
-  addClasses('bl-mr-grid-2'),
-)(ToolbarButton);
 
 const LocalTooltip: FC<ReactTooltip['props']> = props => (
   <ReactTooltip
@@ -68,7 +63,7 @@ const ui: ContextMenuUI = {
   ComponentFormWarning,
   Icon: ToolbarIcon,
   Toolbar,
-  ToolbarButton: LocalToolbarButton,
+  ToolbarButton: HorizontalToolbarButton,
   ToolbarButtonLabel,
   Tooltip: LocalTooltip,
   ReactTags: ReactTagsField,
