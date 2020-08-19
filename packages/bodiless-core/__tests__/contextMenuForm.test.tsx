@@ -5,8 +5,9 @@
 import React, { useState } from 'react';
 import { mount, shallow } from 'enzyme';
 import {
-  contextMenuForm, ContextMenuForm, FormProps, FormBodyRenderer,
+  contextMenuForm, ContextMenuForm, FormBodyRenderer,
 } from '../src/contextMenuForm';
+import type { ContextMenuFormProps } from '../src/Types/ContextMenuTypes';
 
 describe('contextMenuForm', () => {
   it('Applies options as props to the innter ContextMenuForm', () => {
@@ -88,7 +89,7 @@ describe('ContextMenuForm (High Level)', () => {
   it('Allows state from an enclosing component to be used in the form and submit handler', () => {
     const submit = jest.fn();
     const close = jest.fn();
-    const Form = (props: FormProps) => {
+    const Form = (props: ContextMenuFormProps) => {
       const [state, setState] = useState('unclicked');
       const renderFormBody: FormBodyRenderer<{}> = () => (
         <button type="button" id="clickme" onClick={() => setState('clicked')}>{state}</button>

@@ -14,8 +14,7 @@
 
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import PageContextProvider from '../src/PageContextProvider';
-import { withMenuOptions } from '../src/hoc';
+import PageContextProvider, { withMenuOptions } from '../src/PageContextProvider';
 import { useEditContext } from '../src/hooks';
 import { PageEditContextInterface } from '../src/PageEditContext/types';
 

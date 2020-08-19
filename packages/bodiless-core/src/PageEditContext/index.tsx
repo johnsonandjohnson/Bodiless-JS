@@ -19,18 +19,26 @@ import { action, computed, observable } from 'mobx';
 import {
   DefinesLocalEditContext,
   PageEditContextInterface,
-  PageEditStore as PageEditStoreInterface,
-  TMenuOption,
+  PageEditStoreInterface,
   TMenuOptionGetter,
   TPageOverlayStore,
 } from './types';
+import { TMenuOption } from '../Types/ContextMenuTypes';
 import { TOverlaySettings } from '../Types/PageOverlayTypes';
 import {
   getFromSessionStorage,
   saveToSessionStorage,
 } from '../SessionStorage';
 
-export const reduceRecursively = <T extends any>(
+/**
+ * @private
+ * Helper function to cravel the context trail, invoking a callback on each context
+ * and accumulating the results.
+ * @param accumulator The accumulated results.
+ * @param callback The callback which returns the results for each context.
+ * @param context The context on which to execute the callback.
+ */
+const reduceRecursively = <T extends any>(
   accumulator: T[],
   callback: (c: PageEditContext) => T[],
   context?: PageEditContext,
@@ -42,26 +50,6 @@ export const reduceRecursively = <T extends any>(
     ? reduceRecursively(newAccumulator, callback, context.parent)
     : newAccumulator;
 };
-// Helper function to aggregate information from all nested contexts.
-// @TODO Convert to private method
-
-// A Page Edit Context represents a particular state of the page editor, usually
-// defined by what element of the page is "active" or "focused". Currently, the
-// only bit of state tracked in the context are context menu options (along with
-// whether a context is "active", which can be used to highlight the component
-// which registered the context.
-// - Contexts are nested (so that a parent context is "active" when any of
-// its child contexts are active).
-// - Contexts are established using the React context API - and each PageEditContext
-// instance is a "value".
-// - The PageEditContext instance also contains a reference to the page edit store,
-// which tracks editor UI state (eg the currently active context).
-// - The react context container (created by React.createContext) of which the
-// PageEditContext instance is a value is available as a static property of the class via:
-//    - PageEditContext.context (the context object, suitable for use as a component contextType).
-//    - PageEditContext.Consumer (an observable version of PageEditContext.context.Consumer).
-//    - PageEditContext.Provider (equivalent to PageEditContext.context.Provider).
-// Singleton store.
 
 const defaultOverlaySettings: TOverlaySettings = {
   isActive: false,
@@ -72,7 +60,12 @@ const defaultOverlaySettings: TOverlaySettings = {
   onClose: () => {},
 };
 
-export class PageEditStore implements PageEditStoreInterface {
+/**
+ * @private
+ *
+ * Holds the current UI state for the editor.
+ */
+class PageEditStore implements PageEditStoreInterface {
   @observable activeContext: PageEditContext | undefined = undefined;
 
   @observable contextMenuOptions: TMenuOption[] = [];
@@ -95,10 +88,7 @@ export class PageEditStore implements PageEditStoreInterface {
     if (context) this.activeContext = context;
     this.contextMenuOptions = reduceRecursively<TMenuOption>(
       [],
-      (passedContext: PageEditContext) => passedContext
-        .getMenuOptions()
-        // Inject the context id into the map
-        .map(option => ({ ...option, group: passedContext.id })),
+      (passedContext: PageEditContext) => passedContext.allMenuOptions,
       this.activeContext,
     );
   }
@@ -136,9 +126,27 @@ export class PageEditStore implements PageEditStoreInterface {
   }
 }
 
-export const defaultStore = new PageEditStore();
+const defaultStore = new PageEditStore();
 
-// tslint:disable-next-line:max-line-length
+/**
+ * A Page Edit Context represents a particular state of the page editor, usually
+ * defined by what element of the page is "active" or "focused". Currently, the
+ * only bit of state tracked in the context are context menu options (along with
+ * whether a context is "active", which can be used to highlight the component
+ * which registered the context.
+ * - Contexts are nested (so that a parent context is "active" when any of
+ * its child contexts are active).
+ * - Contexts are established using the React context API - and each PageEditContext
+ * instance is a "value".
+ * - The PageEditContext instance also contains a reference to the page edit store,
+ * which tracks editor UI state (eg the currently active context).
+ * - The react context container (created by React.createContext) of which the
+ * PageEditContext instance is a value is available as a static property of the class via:
+ *    - PageEditContext.context (the context object, suitable for use as a component contextType).
+ *    - PageEditContext.Consumer (an observable version of PageEditContext.context.Consumer).
+ *    - PageEditContext.Provider (equivalent to PageEditContext.context.Provider).
+ * Singleton store.
+ */
 class PageEditContext implements PageEditContextInterface {
   readonly id: string = v1();
 
@@ -165,9 +173,29 @@ class PageEditContext implements PageEditContextInterface {
     }
   }
 
-  static context = React.createContext(
-    new PageEditContext() as PageEditContextInterface,
-  );
+  peerContexts: PageEditContextInterface[] = [];
+
+  registerPeer(values: DefinesLocalEditContext) {
+    const context = new PageEditContext(values, this.parent);
+    // Ensure that the same context is not registered more than once.
+    const existsAt = this.peerContexts.findIndex(c => c.id === context.id);
+    if (existsAt >= 0) this.peerContexts.splice(existsAt, 1, context);
+    else this.peerContexts.push(context);
+  }
+
+  get allMenuOptions() {
+    // Sets the group for each option to
+    const ownOptions = this.getMenuOptions
+      // Add the id of this context as the "group" of each option.
+      ? this.getMenuOptions().map((op): TMenuOption => ({ group: this.id, ...op }))
+      : [];
+    return this.peerContexts.reduce(
+      (finalOptions, peerContext) => [...finalOptions, ...peerContext.allMenuOptions],
+      ownOptions,
+    );
+  }
+
+  static context = React.createContext<PageEditContextInterface>(new PageEditContext());
 
   // Make our context consumer observable.
   // See https://github.com/mobxjs/mobx-react/issues/471.

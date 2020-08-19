@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/migration-tool",
-  "version": "0.0.51",
+  "version": "0.0.53",
   "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
   "bin": {
     "migration_tool": "./bin/run"
@@ -18,7 +18,7 @@
     "@babel/plugin-syntax-jsx": "^7.2.0",
     "@babel/traverse": "^7.9.0",
     "@babel/types": "^7.9.0",
-    "@bodiless/headless-chrome-crawler": "^0.0.51",
+    "@bodiless/headless-chrome-crawler": "^0.0.53",
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
@@ -34,7 +34,7 @@
     "html-to-react-components": "^1.6.6",
     "htmlclean": "^3.0.8",
     "js-yaml": "^3.13.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "minimatch": "^3.0.4",
     "patch-package": "^6.1.2",
     "path": "^0.12.7",
@@ -57,7 +57,7 @@
     "@types/dotenv": "^8.2.0",
     "@types/glob": "^7.1.1",
     "@types/jest": "^24.0.18",
-    "@types/lodash": "^4.14.149",
+    "@types/lodash": "^4.14.158",
     "@types/mime": "^2.0.1",
     "@types/minimatch": "^3.0.3",
     "@types/mock-fs": "^3.6.30",

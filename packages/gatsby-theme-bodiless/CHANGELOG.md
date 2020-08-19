@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.53](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.52...v0.0.53) (2020-08-13)
+
+**Note:** Version bump only for package @bodiless/gatsby-theme-bodiless
+
+
+
+
+
+## [0.0.52](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.51...v0.0.52) (2020-07-29)
+
+
+### Features
+
+* **core-ui:** add a warning element for user warning messages ([f40eb6c](https://github.com/johnsonandjohnson/bodiless-js/commit/f40eb6cd8b7271f90c3895cc623e1a8778cfb9c9)), closes [#416](https://github.com/johnsonandjohnson/bodiless-js/issues/416)
+* **documentation:** API Doc for Site builder ([#474](https://github.com/johnsonandjohnson/bodiless-js/issues/474)) ([14e7594](https://github.com/johnsonandjohnson/bodiless-js/commit/14e75948f2856908f24781b64469df6c8810e7c6))
+* **gatsby-theme-bodiless:** Refresh on pull that has upstream changes ([#395](https://github.com/johnsonandjohnson/bodiless-js/issues/395)) ([0e76057](https://github.com/johnsonandjohnson/bodiless-js/commit/0e76057e714347071086044a766d1218cf70f1dc))
+* **gatsby-theme-bodiless:** Retry on Error When Saving to the Backend ([#419](https://github.com/johnsonandjohnson/bodiless-js/issues/419)) ([931e87c](https://github.com/johnsonandjohnson/bodiless-js/commit/931e87c56fba2b04ee66fb90b7c143dd9c01a2c0))
+
+
+
+
+
 ## [0.0.51](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.50...v0.0.51) (2020-07-01)
 
 

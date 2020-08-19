@@ -195,4 +195,10 @@ export default class GatsbyMobxStore {
     const key = keyPath.join(nodeChildDelimiter);
     this.deleteItem(key);
   };
+
+  hasError = () => {
+    const itemsWithError = Array.from(this.store.values())
+      .filter(item => item.hasFlushingError);
+    return itemsWithError.length > 0;
+  };
 }

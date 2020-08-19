@@ -24,145 +24,81 @@ describe('Editor Menu (left and right)', function () {
 
    const switcherIcon = '//*[@aria-label="switcher"]'
    const docsIcon = '//*[@aria-label="Docs"]'
+   const docsTitle = '//*[@data-id="bodilessjs"]'
    const editIcon = '//*[@aria-label="Edit"]'
    const addPageIcon = '//*[@aria-label="Page"]'
-   const historyIcon = '//*[@aria-label="History"]'
-   const pushIcon = '//*[@aria-label="Push"]'
-   const revertIcon = '//*[@aria-label="Revert"]'
 
    const headerAddPageForm = '//*[@aria-label="Context Menu Page Form"]//h3[text()="Add a New Page"]'
    const fieldAddPageForm = '//*[@aria-label="Context Menu Page Form"]//input[@id="new-page-path"]'
    const closeIconAddPageForm = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Cancel"]'
    const checkmarkIconAddPageForm = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Submit"]'
 
-   const headerLatestCommitsForm = '//*[@aria-label="Context Menu History Form"]//h3[text()="Latest Commits"]'
-   const itemLatestCommitsForm = '//*[@aria-label="Context Menu History Form"]//input[@type="radio"][@name="commits"]'
-   const checkmarkIconLatestCommitsForm = '//*[@aria-label="Context Menu History Form"]//*[@aria-label="Submit"]'
-   const closeIconLatestCommitsForm = '//*[@aria-label="Context Menu History Form"]//*[@aria-label="Cancel"]'
 
-   const headerRevertForm = '//*[@aria-label="Context Menu Revert Form"]//h3[text()="Revert to saved"]'
-   const descrRevertForm = '//*[@aria-label="Context Menu Revert Form"]//label[text()="Discard local changes"]'
-   const checkmarkIconRevertForm = '//*[@aria-label="Context Menu Revert Form"]//*[@aria-label="Submit"]'
-   const closeIconRevertForm = '//*[@aria-label="Context Menu Revert Form"]//*[@aria-label="Cancel"]'
-
+   // Preview Mode
+   it('editorMenu: 1 - checking Switcher button in Preview Mode (left and right)', () => {
+      cy.toggleMenuRight()
+      checkMenuRight()
+      cy.toggleMenuLeft()
+      checkMenuLeft()
+   })
 
 
-   it('editorMenu: 1 - checking presence of Menu buttons in Preview Mode (left)', () => {
+   it('editorMenu: 2 - checking presence of Menu buttons in Preview Mode (left)', () => {
+      cy.togglePreviewMode()
       checkEditorMenuButtonsPreviewMode()
    })
 
 
-   it('editorMenu: 2 - checking Switcher button in Preview Mode (left and right)', () => {
-      cy.xpath(switcherIcon)
-         .click()
-      checkMenuRight()
-      cy.xpath(switcherIcon)
-         .click()
-      checkMenuLeft()
-   })
-
-
-   it('editorMenu: 3 - checking Latest Commits button in Preview Mode (left)', () => {
-      checkLatestCommitsButton()
-   })
-
-
-   it('editorMenu: 4 - checking Menu buttons in Edit Mode (left)', () => {
-      cy.clickEdit()
-      checkEditorMenuButtonsEditMode()
-   })
-
-
-   it('editorMenu: 5 - checking Switcher button in Edit Mode (left and right)', () => {
-      cy.xpath(switcherIcon)
-         .click()
-      checkMenuRight()
-      cy.xpath(switcherIcon)
-         .click()
-      checkMenuLeft()
-   })
-
-
-   it('editorMenu: 6 - checking Add a New Page button in Edit Mode (left)', () => {
-      checkAddNewPageButton()
-   })
-
-
-   it('editorMenu: 7 - checking Latest Commits button in Edit Mode (left)', () => {
-      checkLatestCommitsButton()
-   })
-
-
-   it('editorMenu: 8 - checking Revert button in Edit Mode (left)', () => {
-      checkRevertChangesButton()
-   })
-
-
-   it('editorMenu: 9 - checking presence of Menu buttons in Preview Mode (right)', () => {
-      cy.clickEdit()
-      cy.xpath(switcherIcon)
-         .click()
+   it('editorMenu: 3 - checking presence of Menu buttons in Preview Mode (right)', () => {
+      cy.toggleMenuRight()
       checkEditorMenuButtonsPreviewMode()
+      cy.toggleMenuLeft()
    })
 
 
-   it('editorMenu: 10 - checking Switcher button in Preview Mode (right and left)', () => {
-      cy.xpath(switcherIcon)
-         .click()
-      checkMenuLeft()
-      cy.xpath(switcherIcon)
-         .click()
+   // Edit Mode
+   it('editorMenu: 4 - checking Switcher button in Edit Mode (left and right)', () => {
+      cy.toggleEditMode()
+      cy.toggleMenuRight()
       checkMenuRight()
+      cy.toggleMenuLeft()
+      checkMenuLeft()
    })
 
 
-   // skipping until #158 is fixed
-   it.skip('editorMenu: 11 - checking Latest Commits button in Preview Mode (right)', () => {
-      checkLatestCommitsButton()
-   })
-
-
-   it('editorMenu: 12 - checking Menu buttons in Edit Mode (right)', () => {
-      cy.clickEdit()
+   it('editorMenu: 5 - checking Menu buttons in Edit Mode (left)', () => {
       checkEditorMenuButtonsEditMode()
    })
 
 
-   it('editorMenu: 13 - checking Switcher button in Edit Mode (right anf left)', () => {
-      cy.xpath(switcherIcon)
-         .click()
-      checkMenuLeft()
-      cy.xpath(switcherIcon)
-         .click()
-      checkMenuRight()
+   it('editorMenu: 6 - checking Menu buttons in Edit Mode (right)', () => {
+      cy.toggleMenuRight()
+      checkEditorMenuButtonsEditMode()
+      cy.toggleMenuLeft()
    })
 
 
-   it('editorMenu: 14 - checking Add a New Page button in Edit Mode (right)', () => {
+   it('editorMenu: 7 - checking Add a New Page button in Edit Mode (left)', () => {
       checkAddNewPageButton()
    })
 
-   // skipping until #158 is fixed
-   it.skip('editorMenu: 15 - checking Latest Commits button in Edit Mode (right)', () => {
-      checkLatestCommitsButton()
-   })
 
-
-   it('editorMenu: 16 - checking Revert button in Edit Mode (right)', () => {
-      checkRevertChangesButton()
+   it('editorMenu: 8 - checking Add a New Page button in Edit Mode (right)', () => {
+      cy.toggleMenuRight()
+      checkAddNewPageButton()
+      cy.toggleMenuLeft()
    })
 
 
    // 'Cypress does not and may never have multi-tab support' - a quote from Cypress documentation
    //  Docs icon that opens Docs app in a new tab cannot be fully tested within the current implementation
    //  Adding a test that directly checks Docs app Home page, without clicking on Docs icon
-   it('editorMenu: 17 - Check Docs page', () => {
+   it('editorMenu: 9 - Check Docs page', () => {
       cy.visit('/___docs')
-      cy.contains('Bodiless-JS')
+      cy.xpath(docsTitle)
          .click()
-      cy.url().should('include', '/___docs/#/?id=bodiless-js')
+      cy.url().should('include', '/___docs/#/?id=bodilessjs')
    })
-
 
 
    function checkEditorMenuButtonsPreviewMode() {
@@ -172,13 +108,7 @@ describe('Editor Menu (left and right)', function () {
          .should('be.visible')
       cy.xpath(editIcon)
          .should('be.visible')
-      cy.xpath(historyIcon)
-         .should('be.visible')
       cy.xpath(addPageIcon)
-         .should('not.exist')
-      cy.xpath(pushIcon)
-         .should('be.visible')
-      cy.xpath(revertIcon)
          .should('not.exist')
    }
 
@@ -190,12 +120,6 @@ describe('Editor Menu (left and right)', function () {
       cy.xpath(editIcon)
          .should('be.visible')
       cy.xpath(addPageIcon)
-         .should('be.visible')
-      cy.xpath(historyIcon)
-         .should('be.visible')
-      cy.xpath(pushIcon)
-         .should('be.visible')
-      cy.xpath(revertIcon)
          .should('be.visible')
    }
 
@@ -215,20 +139,6 @@ describe('Editor Menu (left and right)', function () {
          .should('have.css', 'left', '0px')
    }
 
-   function checkLatestCommitsButton() {
-      cy.xpath(historyIcon)
-         .click()
-      cy.xpath(headerLatestCommitsForm)
-      cy.xpath(itemLatestCommitsForm)
-         .its('length')
-         .should('be.gt', 3)
-      cy.xpath(checkmarkIconLatestCommitsForm)
-      cy.xpath(closeIconLatestCommitsForm)
-         .click()
-      cy.xpath(itemLatestCommitsForm)
-         .should('have.length', 0)
-   }
-
    function checkAddNewPageButton() {
       cy.xpath(addPageIcon)
          .click()
@@ -236,16 +146,6 @@ describe('Editor Menu (left and right)', function () {
       cy.xpath(fieldAddPageForm)
       cy.xpath(checkmarkIconAddPageForm)
       cy.xpath(closeIconAddPageForm)
-         .click()
-   }
-
-   function checkRevertChangesButton() {
-      cy.xpath(revertIcon)
-         .click()
-      cy.xpath(headerRevertForm)
-      cy.xpath(descrRevertForm)
-      cy.xpath(checkmarkIconRevertForm)
-      cy.xpath(closeIconRevertForm)
          .click()
    }
 })

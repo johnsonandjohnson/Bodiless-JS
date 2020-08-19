@@ -59,6 +59,7 @@ const SlateComponentProvider = (update:Function) => (
       const getters = {
         getNode: (path: string[]) => node.data.toJS()[path.join('$')],
         getKeys: () => ['slatenode'],
+        hasError: () => false,
       };
       const actions = {
         // tslint: disable-next-line:no-unused-vars

@@ -1,22 +1,19 @@
 # Bodiless-JS CLI
 
 ## Usage
-<!-- usage -->
 ```sh-session
 $ npm install -g @bodiless/cli
 $ bodiless COMMAND
 running command...
 $ bodiless (-v|--version|version)
-@bodiless/cli/0.0.51 darwin-x64 node-v12.9.1
+@bodiless/cli/0.0.52 darwin-x64 node-v12.9.1
 $ bodiless --help [COMMAND]
 USAGE
   $ bodiless COMMAND
 ...
 ```
-<!-- usagestop -->
 
 ## Commands
-<!-- commands -->
 * [`bodiless help [COMMAND]`](#bodiless-help-command)
 * [`bodiless pack`](#bodiless-pack)
 
@@ -68,4 +65,3 @@ EXAMPLES
 ```
 
 _See code: [lib/commands/pack.js](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/bodiless-cli/src)_
-<!-- commandsstop -->

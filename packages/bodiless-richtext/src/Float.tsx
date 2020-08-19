@@ -63,7 +63,7 @@ const useGetMenuOptions = () => {
     },
     {
       icon: 'format_align_right',
-      name: 'Float Rigt',
+      name: 'Float Right',
       handler: () => node.setData({ float: 'right' }),
       local: true,
       global: true,

@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/psh",
-  "version": "0.0.51",
+  "version": "0.0.53",
   "description": "Provides cli tool for initializing a bodiless project on platform.sh",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
@@ -31,7 +31,7 @@
   "dependencies": {
     "copyfiles": "^2.1.1",
     "js-yaml": "^3.13.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "rimraf": "^2.6.3"
   },
   "devDependencies": {

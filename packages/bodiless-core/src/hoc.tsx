@@ -13,21 +13,37 @@
  */
 
 import { observer } from 'mobx-react-lite';
-import React, { ComponentType as CT } from 'react';
+import React, { ComponentType as CT, FC } from 'react';
 import { flowRight, omit, pick } from 'lodash';
-import { useContextActivator, useEditContext } from './hooks';
+import { useContextActivator } from './hooks';
 import { useNodeDataHandlers } from './NodeProvider';
 import withNode from './withNode';
 import LocalContextMenu from './components/LocalContextMenu';
-import PageContextProvider from './PageContextProvider';
-import { PageEditContextInterface } from './PageEditContext/types';
-import { TMenuOptionGetter } from './Types/PageContextProviderTypes';
 
-// Helper hoc function to strip props.
-export const withoutProps = <Q extends object>(keys: string[]) => (
-  <P extends object>(Component: CT<P> | string) => (
-    (props: P & Q) => <Component {...omit(props, keys) as P} />
-  )
+/**
+ * Removes the specified props from the wrapped component.
+ * @param ...keys The names of the props to remove.
+ */
+export const withoutProps = <Q extends object>(keys: string|string[], ...restKeys: string[]) => (
+  <P extends object>(Component: CT<P> | string) => {
+    const keys$ = typeof keys === 'string' ? [keys, ...restKeys] : keys;
+    const WithoutProps = (props: P & Q) => <Component {...omit(props, keys$) as P} />;
+    return WithoutProps;
+  }
+);
+
+/**
+ * Creates an HOC which strips all but the specified props.
+ *
+ * @param keys A list of the prop-names to keep.
+ *
+ * @return An HOC which will strip all but the specified props.
+ */
+export const withOnlyProps = <Q extends object>(...keys: string[]) => (
+  <P extends object>(Component: CT<P> | string) => {
+    const WithOnlyProps: FC<P & Q> = props => <Component {...pick(props, keys) as P} />;
+    return WithOnlyProps;
+  }
 );
 
 export const withContextActivator = (
@@ -66,29 +82,3 @@ export const withNodeAndHandlers = (defaultData?: any) => flowRight(
   withNode,
   withNodeDataHandlers(defaultData),
 );
-
-export type UseGetMenuOptions<P> = (
-  props: P,
-  context: PageEditContextInterface,
-) => TMenuOptionGetter | undefined;
-
-type Options<P> = {
-  useGetMenuOptions?: UseGetMenuOptions<P>;
-  name?: string;
-  id?: string;
-};
-
-export const withMenuOptions = <P extends object>({
-  useGetMenuOptions,
-  name,
-  id,
-}: Options<P>) => (Component: CT<P> | string) => (props: P) => {
-    const getMenuOptions = useGetMenuOptions
-      ? useGetMenuOptions(props, useEditContext())
-      : undefined;
-    return (
-      <PageContextProvider getMenuOptions={getMenuOptions} name={name} id={id}>
-        <Component {...props} />
-      </PageContextProvider>
-    );
-  };
