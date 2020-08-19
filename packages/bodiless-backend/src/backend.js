@@ -336,10 +336,11 @@ class Backend {
           .map(file => (
             path.dirname(file).replace(backendPagePath, '').replace(/^\/|\/$/g, '') || 'homepage'
           )));
-        const site = uniq(conflicts.files.filter(file => (file.search(defaultBackendSitePath) !== -1))
-          .map(file => (
-            path.dirname(file).replace(defaultBackendSitePath, '').replace(/^\/|\/$/g, '') || 'site'
-          )));
+        const site = uniq(conflicts.files.filter(
+          file => (file.search(defaultBackendSitePath) !== -1),
+        ).map(file => (
+          path.dirname(file).replace(defaultBackendSitePath, '').replace(/^\/|\/$/g, '') || 'site'
+        )));
         res.send({ ...conflicts, pages, site });
       } catch (error) {
         logger.log(error);
