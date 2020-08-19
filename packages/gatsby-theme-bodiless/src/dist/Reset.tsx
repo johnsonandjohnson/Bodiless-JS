@@ -49,7 +49,7 @@ const Reset = (props: Props) => {
   });
   useEffect(() => {
     // If the form is submitted and valid then lets try reset.
-    if (submits && invalid === false) {
+    if (submits === 1 && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
       setState({ status: ResetState.Pending });
       client.reset()
@@ -64,7 +64,7 @@ const Reset = (props: Props) => {
           formApi.setValue('keepOpen', false);
         });
     }
-  });
+  }, [submits]);
 
   const { status, errorMessage } = state;
 
