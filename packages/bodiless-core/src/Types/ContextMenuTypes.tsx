@@ -24,6 +24,7 @@ import {
 } from 'informed';
 import Tooltip from 'rc-tooltip';
 import { ReactTagsFieldProps } from '../components/ReactTagsField';
+import type { StylableProps } from '@bodiless/fclasses';
 
 export type TMenuOption = {
   name: string;
@@ -56,9 +57,9 @@ export type ContextMenuGroupProps = {
 };
 
 export type UI = {
-  Icon?: ComponentType<IconVariantProps> | string;
+  Icon?: ComponentType<StylableProps & IconVariantProps> | string;
   Toolbar?: ComponentType<HTMLProps<HTMLDivElement>> | string;
-  ToolbarButton?: ComponentType<ButtonVariantProps> | string;
+  ToolbarButton?: ComponentType<StylableProps & ButtonVariantProps> | string;
   ToolbarButtonLabel?: ComponentType<HTMLProps<HTMLSpanElement>> | string;
   FormWrapper?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   ToolbarDivider?: ComponentType<HTMLProps<HTMLHRElement>> | string;
