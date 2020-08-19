@@ -162,11 +162,16 @@ export const ToolbarButton = flow(
   addProps({ type: 'button' }),
 )(Button);
 
-export const ToolbarButtonLabel = addClasses('bl-leading-6 bl-text-base')(Span);
+export const ToolbarButtonLabel = addClasses('bl-text-center bl-text-white bl-text-base')(Span);
 
 export const ResizeHandle = addClasses(
   'bl-block bl-text-2xl bl-absolute material-icons bl-z-1 bl-text-red bl-rotate-45deg bl-bottom-grid-0 bl-right-grid-0',
 )(Span);
+
+export const ContextSubMenu = flow(
+  addClasses('bl-flex bl-text-white'),
+  addProps({ role: 'toolbar', 'aria-label': 'Submenu' }),
+)(Div);
 
 export const Warning = flow(
   addClasses('bl-w-grid-7 bl-text-yellow-500'),

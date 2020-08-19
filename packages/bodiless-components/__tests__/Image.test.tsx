@@ -66,6 +66,8 @@ describe('image interactions', () => {
 
   it('context form should have src and alt input fields with cancel and done buttons', () => {
     menuButton.simulate('click');
+    const tooltips = wrapper.find('Tooltip');
+    menuPopup = tooltips.at(1);
     menuForm = menuPopup.find('form');
 
     const imageSrc = menuForm.find('input#image-src');
