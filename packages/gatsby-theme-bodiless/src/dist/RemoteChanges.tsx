@@ -13,6 +13,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import lodash from 'lodash';
 import { useEditContext } from '@bodiless/core';
 import { ComponentFormSpinner, ComponentFormWarning } from '@bodiless/ui';
 import { useFormApi } from 'informed';
@@ -122,16 +123,25 @@ const FormMessages = ({ messageCode, messageData } : MessageProps) => {
     case MessageCode.PullMasterAvailable:
       return (<>There are master changes available to be pulled. Click check (✓) to initiate.</>);
 
-    case MessageCode.PullConflictConfirm:
+    case MessageCode.PullConflictConfirm: {
+      const pages = messageData.pages.map((page: string) => (<li>{page}</li>));
       return (
-        <ComponentFormWarning>
-          Changes you have recently made in your Edit Environment conflict with changes that
-          have been made to production since the last time you pulled changes. You can choose
-          to have your changes override the production changes in your changeset, by clicking
-          the check. Or, you can dismiss this dialogue and contact your development team for
-          assistance.
-        </ComponentFormWarning>
+        <>
+          <ComponentFormWarning>
+            Changes you have recently made in your Edit Environment conflict with changes that
+            have been made to production since the last time you pulled changes. You can choose
+            to have your changes override the production changes in your changeset, by clicking
+            the check. Or, you can dismiss this dialogue and contact your development team for
+            assistance.
+          </ComponentFormWarning>
+          <div className="py-1 px-20">
+            Conflict pages:
+            {messageData.pages.length > 0 && <ul className="list-disc px-3">{pages}</ul> }
+            {messageData.site.length > 0 && <p>A change that affects multiple pages</p> }
+          </div>
+        </>
       );
+    }
 
     case MessageCode.PullConflictAbort:
       return (
@@ -268,13 +278,27 @@ const FetchChanges = (
                 formApi.setValue('mergeMaster', false);
                 formApi.setValue('keepOpen', false);
               } else if (upstream.hasUpdates) {
-                // Un-pulled upstream updates can't be merged
+                // Production conflict with upstream with un-pulled upstream updates
+                // Updates can't be merged.
                 setState({ messageCode: MessageCode.PullConflictAbort, messageData: [] });
                 formApi.setValue('mergeMaster', false);
                 formApi.setValue('keepOpen', false);
               } else {
-                // Production conflict with upstream and no extra commits on upstream to local.
-                setState({ messageCode: MessageCode.PullConflictConfirm, messageData: [] });
+                // Production conflict with upstream and no extra commits on upstream to local,
+                // then check production/local conflict to get conflict file list.
+                const localConflictsResponse = await client.getConflicts('edit');
+                const pages = lodash.uniq([
+                  ...upstreamConflicts.data.pages,
+                  ...localConflictsResponse.data.pages,
+                ]);
+                const site = lodash.uniq([
+                  ...upstreamConflicts.data.site,
+                  ...localConflictsResponse.data.site,
+                ]);
+                setState({
+                  messageCode: MessageCode.PullConflictConfirm,
+                  messageData: { pages, site },
+                });
                 formApi.setValue('mergeMaster', true);
               }
             } else {

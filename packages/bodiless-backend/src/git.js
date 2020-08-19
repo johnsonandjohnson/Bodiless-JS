@@ -272,7 +272,7 @@ const getConflicts = async (target = 'upstream') => {
     const conflictResult = await GitCmd.cmd()
       .add('diff', '--name-only', '--diff-filter=U')
       .exec();
-    conflictFiles = getGitCmdOutputArray(conflictResult);
+    conflictFiles = getGitCmdOutputArray(conflictResult).map(file => `${rootDir}/${file}`);
     await GitCmd.cmd()
       .add('merge', '--abort')
       .exec();
@@ -299,7 +299,6 @@ const getConflicts = async (target = 'upstream') => {
   return {
     hasConflict: conflictFiles.length > 0,
     files: conflictFiles,
-    pages: [],
     target,
   };
 };
