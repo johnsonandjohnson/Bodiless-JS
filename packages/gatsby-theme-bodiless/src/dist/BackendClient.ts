@@ -110,7 +110,7 @@ export default class BackendClient {
   }
 
   getLatestCommits() {
-    return this.post(`${this.prefix}/get/commitsX`, {});
+    return this.post(`${this.prefix}/get/commits`, {});
   }
 
   pull() {
