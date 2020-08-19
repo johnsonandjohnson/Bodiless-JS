@@ -80,4 +80,3 @@ export {
   useMenuOptionUI,
   getUI,
 };
-GlobalContextMenu.tsxGlobalContextMenu.tsx
