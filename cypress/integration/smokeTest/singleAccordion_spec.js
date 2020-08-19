@@ -16,7 +16,11 @@ describe('Single Accordion smoke tests', function () {
 
   before(function () {
     cy.visit('/accordion/')
-    cy.clickEdit()
+    cy.toggleEditMode()
+  })
+
+  after(function() {
+    cy.togglePreviewMode();
   })
 
   const title = 'AT - Title 1'

@@ -17,10 +17,11 @@ import { DefaultContentNode } from '../src/ContentNode';
 const mockStore = () => {
   const getNode = jest.fn();
   const setNode = jest.fn();
+  const hasError = jest.fn();
   const getKeys = jest.fn(() => ['foo']);
   const deleteNode = jest.fn();
   const actions = { setNode, deleteNode };
-  const getters = { getKeys, getNode };
+  const getters = { getKeys, getNode, hasError };
   return { actions, getters };
 };
 

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import {
+import React, {
   ComponentType,
   HTMLProps,
   ReactNode,
@@ -23,8 +23,21 @@ import {
   SelectFieldProps,
 } from 'informed';
 import Tooltip from 'rc-tooltip';
-import { TMenuOption } from '../PageEditContext/types';
 import { ReactTagsFieldProps } from '../components/ReactTagsField';
+
+export type TMenuOption = {
+  name: string;
+  icon?: (() => string) | string;
+  label?: (() => string) | string;
+  isActive?: (() => boolean) | boolean;
+  isDisabled?: (() => boolean) | boolean;
+  isHidden?: (() => boolean) | boolean;
+  handler?: (event: React.MouseEvent) => any;
+  local?: boolean;
+  global?: boolean;
+  group?: string;
+  Component?: ComponentType<IContextMenuItemProps>;
+};
 
 export type ButtonVariantProps = HTMLProps<HTMLDivElement> & {
   isActive?: boolean;
@@ -36,10 +49,17 @@ type IconVariantProps = HTMLProps<HTMLSpanElement> & {
   isActive?: boolean;
 };
 
+export type ContextMenuGroupProps = {
+  name: string,
+  label?: string,
+  group?: string,
+};
+
 export type UI = {
   Icon?: ComponentType<IconVariantProps> | string;
   Toolbar?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   ToolbarButton?: ComponentType<ButtonVariantProps> | string;
+  ToolbarButtonLabel?: ComponentType<HTMLProps<HTMLSpanElement>> | string;
   FormWrapper?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   ToolbarDivider?: ComponentType<HTMLProps<HTMLHRElement>> | string;
   ComponentFormFieldWrapper?: ComponentType<HTMLProps<HTMLDivElement>> | string;
@@ -66,18 +86,31 @@ export type UI = {
   ReactTags?: ComponentType<ReactTagsFieldProps>;
   ComponentFormList?: ComponentType<HTMLProps<HTMLUListElement>> | string;
   ComponentFormListItem?: ComponentType<HTMLProps<HTMLLIElement>> | string;
+  ContextSubMenu?: ComponentType<HTMLProps<HTMLDivElement>> | string;
+  ContextMenuGroup?: ComponentType<ContextMenuGroupProps>;
 };
 
 export type IContextMenuProps = {
   children?: ReactNode;
-  options: TMenuOption[];
+  options?: TMenuOption[];
   // onDispose?: (wasSubmitted: boolean) => void;
   ui?: UI;
   isPositionToggled?: boolean;
+  renderInTooltip?: boolean;
 } & HTMLProps<HTMLElement>;
+
+export type ContextMenuFormProps = {
+  closeForm: () => void;
+  ui?: UI;
+  'aria-label'?: string;
+};
 
 export type IContextMenuItemProps = {
   ui?: UI
   option: TMenuOption;
-  index: number;
+  name: string,
+  index?: number;
+  group?: string;
+  // eslint-disable-next-line max-len
+  setRenderForm?: React.Dispatch<React.SetStateAction<((props: ContextMenuFormProps) => JSX.Element) | undefined>>;
 };

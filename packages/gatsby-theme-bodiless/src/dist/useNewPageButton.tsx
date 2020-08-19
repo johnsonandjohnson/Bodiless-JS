@@ -19,9 +19,9 @@ import React, {
 import {
   contextMenuForm,
   getUI,
-  withMenuOptions,
-  TMenuOption,
   useEditContext,
+  useRegisterMenuOptions,
+  TMenuOptionGetter,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
 import { ComponentFormSpinner } from '@bodiless/ui';
@@ -200,7 +200,7 @@ const formPageAdd = (client: Client, template: string) => contextMenuForm({
 
 const defaultClient = new BackendClient();
 
-const useGetMenuOptions = (): (() => TMenuOption[]) => {
+const useGetMenuOptions = (): TMenuOptionGetter => {
   const context = useEditContext();
   const gatsbyPage = useGatsbyPageContext();
 
@@ -215,10 +215,11 @@ const useGetMenuOptions = (): (() => TMenuOption[]) => {
   ];
 };
 
-const menuOptions = { useGetMenuOptions, name: 'Gatsby' };
-const NewPageProvider = withMenuOptions(menuOptions)(
-  React.Fragment,
-) as ComponentType<Props>;
-NewPageProvider.displayName = 'NewPageProvider';
+const useNewPageButton = () => {
+  useRegisterMenuOptions({
+    getMenuOptions: useGetMenuOptions(),
+    name: 'NewPage',
+  });
+};
 
-export default NewPageProvider;
+export default useNewPageButton;

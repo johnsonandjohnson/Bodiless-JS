@@ -87,32 +87,19 @@ describe('Filter item interactions', () => {
   });
 
   it('React Tags should have all props', () => {
+    menuButton.simulate('click');
     const reactTags = wrapper.find('ReactTags');
     expect(reactTags.prop('placeholder')).toBe('Add or create');
     expect(reactTags.prop('noSuggestionsText')).toBe('No suggestions found');
     expect(reactTags.prop('allowNew')).toBe(true);
   });
-  it('context form should have input fields with cancel and done buttons', () => {
-    menuButton.simulate('click');
-    menuForm = menuPopup.find('form');
-    // Test for input fields:
-    const tagsInputFields = menuForm.find('input');
-    expect(tagsInputFields).toHaveLength(2);
-    expect(tagsInputFields.at(0).prop('value')).toMatchObject([]);
-    expect(tagsInputFields.at(0).prop('type')).toBe('hidden');
-    expect(tagsInputFields.at(1).prop('placeholder')).toBe('Add or create');
-
-    // Cancel and add buttons:
-    const cancelButton = menuForm.find('button[aria-label="Cancel"]');
-    expect(cancelButton).not.toBeUndefined();
-    expect(cancelButton.prop('type')).toBe('button');
-    const submitButton = menuForm.find('button[aria-label="Submit"]');
-    expect(submitButton).not.toBeUndefined();
-    expect(submitButton.prop('type')).toBeUndefined();
-  });
 
   it('context form should have all tags button and when clicked display all ', () => {
     // All tags
+    menuButton.simulate('click');
+    const tooltips = wrapper.find('Tooltip');
+    menuPopup = tooltips.at(1);
+    menuForm = menuPopup.find('form');
     const allTags = menuForm.find('button').at(1);
     expect(allTags).not.toBeUndefined();
     // allTags.simulate('click');
@@ -120,6 +107,8 @@ describe('Filter item interactions', () => {
 
   it('context form should have interactive all tags button', () => {
     menuButton.simulate('click');
+    const tooltips = wrapper.find('Tooltip');
+    menuPopup = tooltips.at(1);
     menuForm = menuPopup.find('form');
     // Test for input fields:
     const tagsInputFields = menuForm.find('input');

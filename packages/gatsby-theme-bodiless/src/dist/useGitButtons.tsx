@@ -19,10 +19,11 @@ import React, {
 import {
   contextMenuForm,
   getUI,
-  PageContextProvider,
   TMenuOption,
   useEditContext,
   useNotify,
+  useRegisterMenuOptions,
+  ContextSubMenu,
 } from '@bodiless/core';
 import BackendClient from './BackendClient';
 import CommitsList from './CommitsList';
@@ -127,10 +128,17 @@ const getMenuOptions = (
   const saveChanges = canCommit ? formGitCommit(client) : undefined;
   return [
     {
-      name: 'listCommits',
-      icon: 'book',
-      label: 'History',
-      handler: () => formGetCommitsList(client),
+      name: 'file',
+      label: 'File',
+      icon: 'cloud',
+      Component: ContextSubMenu,
+    },
+    {
+      name: 'Pull',
+      label: 'Pull',
+      icon: 'cloud_download',
+      handler: () => formGitPull(client, notifyOfChanges),
+      group: 'file',
     },
     {
       name: 'savechanges',
@@ -138,12 +146,14 @@ const getMenuOptions = (
       label: 'Push',
       isDisabled: () => !canCommit,
       handler: () => saveChanges,
+      group: 'file',
     },
     {
-      name: 'Pull',
-      label: 'Pull',
-      icon: 'cloud_download',
-      handler: () => formGitPull(client, notifyOfChanges),
+      name: 'listCommits',
+      icon: 'book',
+      label: 'History',
+      handler: () => formGetCommitsList(client),
+      group: 'file',
     },
     {
       name: 'resetchanges',
@@ -151,13 +161,14 @@ const getMenuOptions = (
       icon: 'undo',
       isHidden: () => !context.isEdit,
       handler: () => formGitReset(client),
+      group: 'file',
     },
   ];
 };
 
 export type ChangeNotifier = () => Promise<void>;
 
-const GitProvider: FC<Props> = ({ children, client = defaultClient }) => {
+const useGitButtons = ({ client = defaultClient } = {}) => {
   const [notifications, setNotifications] = useState([] as any);
   const context = useEditContext();
 
@@ -200,14 +211,10 @@ const GitProvider: FC<Props> = ({ children, client = defaultClient }) => {
     }
   }, []);
 
-  return (
-    <PageContextProvider
-      getMenuOptions={() => getMenuOptions(client, context, notifyOfChanges)}
-      name="Git"
-    >
-      {children}
-    </PageContextProvider>
-  );
+  useRegisterMenuOptions({
+    getMenuOptions: () => getMenuOptions(client, context, notifyOfChanges),
+    name: 'Git',
+  });
 };
 
-export default GitProvider;
+export default useGitButtons;
