@@ -25,12 +25,6 @@ type Props = {
   client: GitClient
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// @todo remove.
-// @ts-ignore
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const reset = (milliseconds: number) => new Promise(resolve => setTimeout(resolve, milliseconds));
-
 /**
  * Form component for reverting local changes.
  *

@@ -56,7 +56,7 @@ const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
   });
 
 /**
- * Form component for reverting local changes.
+ * Form component for saving local changes.
  *
  * @component
  * @param props Props
