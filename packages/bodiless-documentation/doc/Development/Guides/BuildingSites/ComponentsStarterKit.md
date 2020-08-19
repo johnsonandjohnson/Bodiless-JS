@@ -51,15 +51,12 @@ For full information on adding metadata, please read [Meta](TBD)
 
 ### Favicon
 
-* Can be updated by replacing the image in `src/images/favicon.png` and continue
-  to use the same filename.
-* Favion size recommendation is 
+* Favion size recommendation is:
   * at least as big as the largest icon being generated (512x512 by default).
   * square (if it’s not, transparent bars will automatically be added to make it square)
   * of one of the following formats: JPEG, PNG, WebP, TIFF, GIF or SVG.
 
-The favicon path & image is currently hardcoded as part
-[gatsby-theme-bodiless](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/packages/gatsby-theme-bodiless/gatsby-config.js)  
+The favicon path & image is currently defined in the starter kit to use `src/images/favicon.png`
 and it uses
 [gatsby-plugin-manifest](https://www.gatsbyjs.org/packages/gatsby-plugin-manifest/)
 to generate a set of favicons for your site to use. For more information on
@@ -73,9 +70,9 @@ e.g.
 ```
 const plugins = [
   {
-    resolve: `gatsby-plugin-manifest`,
+    resolve: 'gatsby-plugin-manifest',
     options: {
-      icon: `src/images/customfavicon.gif`,
+      icon: 'src/images/favicon.png',
       legacy: false,
     },  
   },

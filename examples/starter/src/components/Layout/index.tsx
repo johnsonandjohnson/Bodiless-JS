@@ -17,14 +17,13 @@ import { flow, flowRight } from 'lodash';
 import Helmet from 'react-helmet';
 import { Div } from '@bodiless/fclasses';
 import {
-  withMeta,
-  withMetaTitle,
-  withMetaHtml,
   asBodilessHelmet,
   withEvent,
 } from '@bodiless/components';
 import Header from './header';
 import Footer from './footer';
+import SeoHelmet from './meta';
+
 /*
  * Comment out above import & uncomment below import, to use a
  * simple non-editable, non-designable footer.
@@ -35,16 +34,6 @@ import { asSiteHeader, asSiteFooter } from './token';
 
 const SiteHeader = asSiteHeader(Header);
 const SiteFooter = asSiteFooter(Footer);
-
-const SiteHelmet = flowRight(
-  asBodilessHelmet('meta'),
-  withMeta('pagetype', 'page-type'),
-  withMeta('description', 'description'),
-  withMeta('bl-brand', 'brand', 'site'),
-  withMeta('bl-country', 'country', 'site'),
-  withMetaTitle('page-title'),
-  withMetaHtml('en'),
-)(Helmet);
 
 const SiteGTMHelmetEvent = flowRight(
   asBodilessHelmet('datalayer'),
@@ -69,7 +58,7 @@ const Container = flow(
 
 const Layout = ({ children }) => (
   <>
-    <SiteHelmet />
+    <SeoHelmet />
     <SiteGTMHelmetEvent />
     <SiteHeader />
     <Container>

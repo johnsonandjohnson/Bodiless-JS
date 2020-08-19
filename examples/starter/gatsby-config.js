@@ -19,6 +19,12 @@ const plugins = [
     },
   },
   {
+    resolve: 'gatsby-plugin-manifest',
+    options: {
+      icon: 'src/images/favicon.png',
+    },
+  },
+  {
     resolve: 'gatsby-plugin-canonical-urls',
     options: {
       siteUrl: SITEURL,
