@@ -43,7 +43,6 @@ const LocalTooltip: FC<ReactTooltip['props']> = props => (
   <ReactTooltip
     {...props}
     placement="bottomLeft"
-    overlayClassName="TEST"
   />
 );
 
