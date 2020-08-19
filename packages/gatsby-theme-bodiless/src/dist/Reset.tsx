@@ -64,7 +64,7 @@ const Reset = (props: Props) => {
           formApi.setValue('keepOpen', false);
         });
     }
-  }, [submits]);
+  });
 
   const { status, errorMessage } = state;
 
