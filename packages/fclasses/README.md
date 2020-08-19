@@ -77,13 +77,19 @@ prserving some of its styles while adding or removing others. For example:
 ```javascript
 const Div = stylable<HTMLProps<HTMLDivElement>>('div');
 const Callout = addClasses('bg-blue text-white p-2 border border-yellow')(Div);
-const SpecialGreenCallout = addClasses('bg-green').removeClasses('bg-blue')(Callout);
+const SpecialGreenCallout = flow(
+  addClasses('bg-green'),
+  removeClasses('bg-blue'),
+)(Callout);
 ```
 
 The higher order components are reusable, so for example:
 
 ```
-const withRedCalloutBorder = addClasses('border-red').removeClasses('border-yellow);
+const withRedCalloutBorder = flow(
+  addClasses('border-red'),
+  removeClasses('border-yellow),
+);
 const RedBorderedCallout = withRedCalloutBorder(Callout);
 const ChristmasCallout = withRedCalloutBorder(SpecialGreenCallout);
 ```
@@ -312,12 +318,13 @@ const StandardPinkAndGreenTout = flowRight(
 ## Conditional styling
 
 It is sometimes useful to apply classes conditionally, based on props passed to
-a component. The FClasses design API includes some helper methods which make
-this easier.
+a component and/or based on component state. The FClasses design API includes some helper methods which make this easier.
+
+### Conditional styling based on passed props
 
 Imagine we have a button which has different variants depending on whether it
 is active and/or whether it is the first in a list of buttons.  We can use
-the `flowIf()`, `withoutProps()` and `hasProp()` helpers to accomplish this:
+the `addClassesIf()`, `removeClassesIf()`, `withoutProps()` and `hasProp()` helpers to accomplish this:
 
 ``` js
 type VariantProps = {
@@ -327,17 +334,41 @@ type VariantProps = {
 };
 
 const Div = stylable<HTMLProps<HTMLDivElement>>('div');
+const isActive = (props: any) => hasProp('isActive')(props);
+const isFirst = (props: any) => hasProp('isFirst')(props);
 
 const ContextMenuButton = flow(
   withoutProps<VariantProps>(['isActive', 'isFirst'),
-  addClasses('cursor-pointer pl-2 text-grey').flow,
-  flowIf(hasProp('isActive'))(
-    addClasses('text-white').removeClasses('text-grey'),
-  ),
-  flowIf(hasProp('isFirst'))(
-    removeClasses('pl-2'),
-  ),
+  addClasses('cursor-pointer pl-2 text-grey'),
+  addClassesIf(isActive)('text-white'),
+  removeClassesIf(isActive)('text-grey'),
+  removeClassesIf(isFirst)('pl-2'),
 )(Div);
+```
+
+### Conditional styling based on component state
+
+Imagine we have a button which consume some state from a react context.
+We can use `addClassesIf` and `removeClassesIf` helpers to add classes to the button conditionally:
+
+```js
+const ToggleContext = React.createContext({
+  state: false,
+});
+const useStateContext = () => useContext(ToggleContext);
+const isToggled = () => useStateContext().state;
+
+const Div = stylable<HTMLProps<HTMLDivElement>>('div');
+
+const Button = props => {
+  const { state } = useStateContext();
+  return <Div {...props}>{`Button state consumed from store is ${state}.`}</Div>;
+};
+
+const StyledButton = flow(
+  addClassesIf(isToggled)('bg-green-200'),
+)(Button);
+
 ```
 
 A few notes:
@@ -347,9 +378,6 @@ A few notes:
   control styling won't be passed to the `div` element. We must explicitly type
   the generic `withoutProps()`. This ensures that the type of the resulting
   component will include these props.
-- We must use the `.flow` property of `addClasses()` because of a peculiar type
-  inference problem in `flow` when a HOC function has its own properties or
-  methods. See [tsflow.test.tsx](./__tests__/tsflow.test.jsx) for an example.
 
   ## Design Variants
 

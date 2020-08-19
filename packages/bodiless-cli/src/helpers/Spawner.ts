@@ -21,12 +21,20 @@ export default class Spawner {
   constructor(monorepo: string) {
     this.options = {
       stdio: 'inherit',
+      shell: true,
     };
     // Add the monorepo npm bin directory to the path, bc some packages
     // may use binaries in their pack command which are only available there.
-    const { PATH: PATH$ } = process.env;
-    const PATH = `${PATH$}:${path.join(monorepo, 'node_modules', '.bin')}`;
-    this.options.env = { ...process.env, PATH };
+    const monorepoBinPath = path.join(monorepo, 'node_modules', '.bin');
+    // process.env may have PATH variant with different casing (e.g. Path)
+    // see https://github.com/nodejs/node/issues/34667#issuecomment-670505074
+    const pathEnvKey = Object.keys(process.env).find(x => x.toUpperCase() === 'PATH') || 'PATH';
+    const { [pathEnvKey]: PATH } = process.env;
+    const PATH$ = PATH ? PATH + path.delimiter + monorepoBinPath : monorepoBinPath;
+    this.options.env = {
+      ...process.env,
+      [pathEnvKey]: PATH$,
+    };
     this.spawn = this.spawn.bind(this);
   }
 
