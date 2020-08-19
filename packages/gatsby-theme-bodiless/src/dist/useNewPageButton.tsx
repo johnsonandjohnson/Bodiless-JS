@@ -147,10 +147,7 @@ const NewPageComp = (props : NewPageProps) => {
 };
 
 const formPageAdd = (client: Client, template: string) => contextMenuForm({
-  submitValues: ({ keepOpen }: any) => {
-    console.log('in submits ko:', keepOpen);
-    return keepOpen;
-  },
+  submitValues: ({ keepOpen }: any) => keepOpen,
 })(({ formState, ui, formApi } : any) => {
   const { ComponentFormText } = getUI(ui);
   const {
