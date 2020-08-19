@@ -26,7 +26,7 @@ describe('getConflicts', () => {
     const result = await getConflicts();
     expect(result.hasConflict).toBeTruthy();
     expect(result.files).toHaveLength(1);
-    expect(result.files).toContain('foo.txt');
+    expect(result.files[0]).toMatch(/foo.txt$/);
   });
 
   it('returns conflict false when no conflict', async () => {
