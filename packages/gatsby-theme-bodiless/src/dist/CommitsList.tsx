@@ -116,12 +116,11 @@ const CommitsList = ({ client }: Props) => {
         });
         context.hidePageOverlay();
       } catch (error) {
-        context.showError({
-          message: error.message || 'An unexpected error has occurred',
-        });
+        const errorMessage = error.message || 'An unexpected error has occurred';
         setState({
-          content: 'An unexpected error has occurred',
+          content: errorMessage,
         });
+        context.hidePageOverlay();
       }
     })();
   }, []);
