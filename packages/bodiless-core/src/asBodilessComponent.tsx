@@ -7,9 +7,10 @@ import {
   withNodeDataHandlers, withoutProps, withContextActivator, withLocalContextMenu,
 } from './hoc';
 import { ifReadOnly, ifEditable } from './withEditToggle';
-import withEditButton, { EditButtonOptions } from './withEditButton';
+import withEditButton from './withEditButton';
 import withData from './withData';
-import { WithNodeProps, WithNodeKeyProps } from './Types/NodeTypes';
+import type { WithNodeProps, WithNodeKeyProps } from './Types/NodeTypes';
+import type { EditButtonOptions } from './Types/EditButtonTypes';
 
 /**
  * Options for making a component "bodiless".

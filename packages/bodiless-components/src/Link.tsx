@@ -14,7 +14,7 @@
 
 import React, { HTMLProps, ComponentType } from 'react';
 import {
-  useFormUI,
+  useMenuOptionUI,
   asBodilessComponent,
 } from '@bodiless/core';
 import type { AsBodiless, BodilessOptions } from '@bodiless/core';
@@ -37,7 +37,7 @@ const options: BodilessOptions<HTMLProps<HTMLAnchorElement>, Data> = {
       ComponentFormText,
       ComponentFormUnwrapButton,
       ComponentFormDescription,
-    } = useFormUI();
+    } = useMenuOptionUI();
     const removeLinkHandler = (event: React.MouseEvent) => {
       event.preventDefault();
       if (unwrap) {

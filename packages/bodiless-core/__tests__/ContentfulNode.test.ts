@@ -26,9 +26,10 @@ const createMockStore = (storeData: StoreData) => {
   };
   const setNode = jest.fn();
   const getKeys = jest.fn(() => ['foo']);
+  const hasError = jest.fn();
   const deleteNode = jest.fn();
   const actions = { setNode, deleteNode };
-  const getters = { getKeys, getNode };
+  const getters = { getKeys, getNode, hasError };
   return { actions, getters };
 };
 

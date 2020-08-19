@@ -13,13 +13,13 @@
  */
 
 /* eslint-disable no-alert */
-import React, { ComponentType, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import {
   contextMenuForm,
   getUI,
-  withMenuOptions,
-  TMenuOption,
   useEditContext,
+  useRegisterMenuOptions,
+  TMenuOptionGetter,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
 import BackendClient from './BackendClient';
@@ -29,10 +29,6 @@ import { useGatsbyPageContext } from './GatsbyPageProvider';
 
 type Client = {
   savePage: (path: string, template?: string) => AxiosPromise<any>;
-};
-
-type Props = {
-  client?: Client;
 };
 
 const formPageAdd = (client: Client, template: string, context: any) => contextMenuForm({
@@ -109,7 +105,7 @@ Click ok to visit the new page; if it does not load, wait a while and reload.`;
 
 const defaultClient = new BackendClient();
 
-const useGetMenuOptions = (): () => TMenuOption[] => {
+const useGetMenuOptions = (): TMenuOptionGetter => {
   const context = useEditContext();
   const gatsbyPage = useGatsbyPageContext();
 
@@ -124,8 +120,11 @@ const useGetMenuOptions = (): () => TMenuOption[] => {
   ];
 };
 
-const menuOptions = { useGetMenuOptions, name: 'Gatsby' };
-const NewPageProvider = withMenuOptions(menuOptions)(React.Fragment) as ComponentType<Props>;
-NewPageProvider.displayName = 'NewPageProvider';
+const useNewPageButton = () => {
+  useRegisterMenuOptions({
+    getMenuOptions: useGetMenuOptions(),
+    name: 'NewPage',
+  });
+};
 
-export default NewPageProvider;
+export default useNewPageButton;

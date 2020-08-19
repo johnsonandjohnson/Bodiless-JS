@@ -12,31 +12,24 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
-import PageContextProvider from './PageContextProvider';
+import React, { ComponentType } from 'react';
+import PageEditContext from './PageEditContext';
 import { useEditContext } from './hooks';
 
-/**
- * Provide a component Button to switch the position of the global menu.
- *
- * @param children
- * @constructor
- */
-const SwitcherButtonProvider: FC = ({ children }) => {
-  const context = useEditContext();
-  const getMenuOptions = () => [{
-    name: 'switcher',
-    icon: 'compare_arrows',
-    handler: () => {
-      context.togglePosition();
-      context.refresh();
-    },
-  }];
+class ReadOnlyContext extends PageEditContext {
+  // eslint-disable-next-line class-methods-use-this
+  get isEdit() { return false; }
+}
+
+const asReadOnly = (Component: ComponentType<any> | string) => (props: any) => {
+  const oldContext = useEditContext();
+  // @ts-ignore: root context has no parent.
+  const newContext = new ReadOnlyContext(oldContext, oldContext.parent);
   return (
-    <PageContextProvider getMenuOptions={getMenuOptions}>
-      {children}
-    </PageContextProvider>
+    <PageEditContext.Provider value={newContext}>
+      <Component {...props} />
+    </PageEditContext.Provider>
   );
 };
 
-export default SwitcherButtonProvider;
+export default asReadOnly;
