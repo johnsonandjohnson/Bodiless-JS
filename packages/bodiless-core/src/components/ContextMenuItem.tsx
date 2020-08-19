@@ -22,6 +22,7 @@ import { UI, IContextMenuItemProps as IProps } from '../Types/ContextMenuTypes';
 const defaultUI = {
   Icon: 'span',
   ToolbarButton: 'div',
+  ToolbarButtonLabel: 'span',
   FormWrapper: 'div',
   ToolbarDivider: 'div',
   Form: 'form',
@@ -48,6 +49,7 @@ const ContextMenuItem = ({ option, index, ui }: IProps) => {
     ToolbarDivider,
     Icon,
     ToolbarButton,
+    ToolbarButtonLabel,
     FormWrapper,
     Tooltip,
   } = finalUI;
@@ -117,9 +119,9 @@ const ContextMenuItem = ({ option, index, ui }: IProps) => {
       </Tooltip>
       {
         (option.label) ? (
-          <div className="bl-text-center bl-text-white">
+          <ToolbarButtonLabel>
             {option.label}
-          </div>
+          </ToolbarButtonLabel>
         ) : (null)
       }
     </ToolbarButton>

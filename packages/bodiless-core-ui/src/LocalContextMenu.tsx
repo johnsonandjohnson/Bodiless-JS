@@ -15,33 +15,39 @@
 import React, { FC } from 'react';
 import ReactTooltip from 'rc-tooltip';
 import { flow } from 'lodash';
-import { addClasses, addProps } from '@bodiless/fclasses';
+import { addClasses, removeClasses, addProps } from '@bodiless/fclasses';
 import {
-  ContextMenu, ContextMenuProps,
+  ContextMenu, ContextMenuProps, ContextMenuUI,
 } from '@bodiless/core';
 import {
   ComponentFormTitle, ComponentFormLabel, ComponentFormText, ComponentFormButton,
-  ComponentFormCloseButton, ComponentFormSubmitButton, Icon, Div, ToolbarButton,
+  ComponentFormCloseButton, ComponentFormSubmitButton, ToolbarIcon, Div, ToolbarButton,
   ComponentFormUnwrapButton, ComponentFormTextArea, ComponentFormDescription, ComponentFormWarning,
   ComponentFormFieldWrapper, ComponentFormFieldTitle, ComponentFormCheckBox, ComponentFormRadio,
-  ComponentFormRadioGroup, ComponentFormSelect, ComponentFormOption,
+  ComponentFormRadioGroup, ComponentFormSelect, ComponentFormOption, ToolbarButtonLabel,
 } from '@bodiless/ui';
 import ReactTagsField from './ReactTags';
 
 // For accessibility attributes, see https://www.w3.org/TR/wai-aria-practices/examples/toolbar/toolbar.html
 const Toolbar = flow(
-  addClasses('bl-flex'),
+  addClasses('bl-flex bl--mr-grid-2'),
   addProps({ role: 'toolbar', 'aria-label': 'Local Context Menu' }),
 )(Div);
+
+const LocalToolbarButton = flow(
+  removeClasses('bl-mb-3'),
+  addClasses('bl-mr-grid-2'),
+)(ToolbarButton);
 
 const LocalTooltip: FC<ReactTooltip['props']> = props => (
   <ReactTooltip
     {...props}
     placement="bottomLeft"
+    overlayClassName="TEST"
   />
 );
 
-const ui = {
+const ui: ContextMenuUI = {
   ComponentFormText,
   ComponentFormTextArea,
   ComponentFormFieldWrapper,
@@ -59,9 +65,10 @@ const ui = {
   ComponentFormLabel,
   ComponentFormDescription,
   ComponentFormWarning,
-  Icon,
+  Icon: ToolbarIcon,
   Toolbar,
-  ToolbarButton,
+  ToolbarButton: LocalToolbarButton,
+  ToolbarButtonLabel,
   Tooltip: LocalTooltip,
   ReactTags: ReactTagsField,
 };

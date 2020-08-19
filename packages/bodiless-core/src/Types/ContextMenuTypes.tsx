@@ -40,6 +40,7 @@ export type UI = {
   Icon?: ComponentType<IconVariantProps> | string;
   Toolbar?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   ToolbarButton?: ComponentType<ButtonVariantProps> | string;
+  ToolbarButtonLabel?: ComponentType<HTMLProps<HTMLSpanElement>> | string;
   FormWrapper?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   ToolbarDivider?: ComponentType<HTMLProps<HTMLHRElement>> | string;
   ComponentFormFieldWrapper?: ComponentType<HTMLProps<HTMLDivElement>> | string;

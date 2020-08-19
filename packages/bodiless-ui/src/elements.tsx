@@ -54,9 +54,8 @@ export const Option = stylable<ChildFieldProps<any, any>>(BaseOption);
 export const Anchor = stylable<HTMLProps<HTMLAnchorElement>>('a');
 
 export const Icon = flow(
-  addClasses('bl-rounded bl-p-grid-1 material-icons'),
+  addClasses('bl-rounded bl-p-grid-1 material-icons bl-text-3xl'),
   withoutProps<ButtonVariantProps>(['isActive']),
-  addClasses('bl-text-3xl'),
   flowIf(hasProp('isActive'))(
     addClasses('bl-bg-primary'),
   ),
@@ -146,9 +145,14 @@ export const ComponentFormError = addClasses(
 
 export const SubmitButton: FC<HTMLProps<HTMLButtonElement> & StylableProps> = props => <ComponentFormButton type="submit" {...props} />;
 
+export const ToolbarIcon = flow(
+  removeClasses('bl-p-grid-1'),
+  addClasses('bl-w-grid-8 bl-h-grid-8 md-36'),
+)(Icon);
+
 export const ToolbarButton = flow(
   withoutProps<ButtonVariantProps>(['isActive', 'isFirst', 'isDisabled']),
-  addClasses('bl-cursor-pointer bl-text-grey-200 bl-block'),
+  addClasses('bl-cursor-pointer bl-mb-3 bl-flex bl-flex-col bl-items-center'),
   flowIf(hasProp('isDisabled'))(
     flow(
       addClasses('bl-text-grey-600'),
@@ -157,6 +161,8 @@ export const ToolbarButton = flow(
   ),
   addProps({ type: 'button' }),
 )(Button);
+
+export const ToolbarButtonLabel = addClasses('bl-leading-6 bl-text-base')(Span);
 
 export const ResizeHandle = addClasses(
   'bl-block bl-text-2xl bl-absolute material-icons bl-z-1 bl-text-red bl-rotate-45deg bl-bottom-grid-0 bl-right-grid-0',
