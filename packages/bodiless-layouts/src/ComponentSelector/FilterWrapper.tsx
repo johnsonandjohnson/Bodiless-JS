@@ -92,44 +92,56 @@ function Dropdown({ children, type }: { children: any; type: any }) {
 // The wrapper that wraps the checkboxes and dropdown menus
 export const FilterWrapper = (props: any) => {
   const {
-    allfilters, filters, activeFilter, setActiveFilters,
+    allfilters,
+    filters,
+    activeFilter,
+    setActiveFilters,
+    mandatoryCategories,
   } = props;
   const finalUI:FinalUI = useContext(uiContext);
+  const isTermDisabled = (category: string, term: string) => Object.entries(filters).length === 0
+    || !Object.keys(filters).includes(category)
+    || !filters[category].includes(term);
+  const isAllCategoryTermDisabled = (category: string) => allfilters[category]
+    .every((term: string) => isTermDisabled(category, term));
+  const isCategoryMandatory = (category: string) => mandatoryCategories
+    && mandatoryCategories.includes(category);
   return (
     <finalUI.ComponentSelectorWrapper>
       {Object.keys(allfilters).map(category => {
-        console.log(`category ${category}`);
         if (allfilters[category].length > 0) {
-          const isAllDisabled = allfilters[category].every((value: string) => {
-            // ToDo code duplication with Checkbox disabled
-            return Object.entries(filters).length === 0
-              || !Object.keys(filters).includes(category)
-              || !filters[category].includes(value);
-          });
-          if (isAllDisabled && category !== 'Tout Orientation') {
+          if (isAllCategoryTermDisabled(category) && !isCategoryMandatory(category)) {
             return true;
           }
           return (
             <Dropdown type={category} key={category}>
-              {allfilters[category].map((value: string) => (
-                <Checkbox
-                  key={value}
-                  type={value}
-                  disabled={
-                    Object.entries(filters).length === 0
-                    || !Object.keys(filters).includes(category)
-                    || !filters[category].includes(value)
-                  }
-                  onToggle={() => {
-                    if (activeFilter.indexOf(value) !== -1) {
-                      setActiveFilters(removefromArray(activeFilter, value));
-                    } else {
-                      setActiveFilters(addtoArray(activeFilter, value));
-                    }
-                  }}
-                  isChecked={activeFilter.indexOf(value) !== -1}
-                />
-              ))}
+              {
+              isAllCategoryTermDisabled(category) && isCategoryMandatory(category)
+                ? (
+                  <Checkbox
+                    key="NA"
+                    type="N/A"
+                    disabled
+                    isChecked={false}
+                    onToggle={() => { }}
+                  />
+                )
+                : allfilters[category].map((value: string) => (
+                  <Checkbox
+                    key={value}
+                    type={value}
+                    disabled={isTermDisabled(category, value)}
+                    onToggle={() => {
+                      if (activeFilter.indexOf(value) !== -1) {
+                        setActiveFilters(removefromArray(activeFilter, value));
+                      } else {
+                        setActiveFilters(addtoArray(activeFilter, value));
+                      }
+                    }}
+                    isChecked={activeFilter.indexOf(value) !== -1}
+                  />
+                ))
+            }
             </Dropdown>
           );
         }

@@ -36,7 +36,7 @@ export { uiContext };
 
 const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
   const {
-    components: allComponents, ui, onSelect,
+    components: allComponents, ui, onSelect, mandatoryCategories,
   } = props;
 
   const [activeFilters, setActiveFilters] = useState([]);
@@ -72,6 +72,7 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
             setActiveFilters={setActiveFilters}
             allfilters={allFilters}
             filters={filters}
+            mandatoryCategories={mandatoryCategories}
           />
         </finalUI.FlexSection>
 

@@ -30,6 +30,7 @@ export type ComponentSelectorProps = {
   onSelect(event: MouseEvent, componentName: string): void;
   closeForm?(): void;
   ui?: ComponentSelectorUI;
+  mandatoryCategories?: string[];
 };
 export type onSelectType = (
   event: MouseEvent,
