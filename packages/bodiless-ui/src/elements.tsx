@@ -54,10 +54,10 @@ export const Option = stylable<ChildFieldProps<any, any>>(BaseOption);
 export const Anchor = stylable<HTMLProps<HTMLAnchorElement>>('a');
 
 export const Icon = flow(
-  addClasses('bl-rounded bl-p-grid-1 material-icons bl-text-3xl'),
+  addClasses('bl-p-grid-1 material-icons'),
   withoutProps<ButtonVariantProps>(['isActive']),
   flowIf(hasProp('isActive'))(
-    addClasses('bl-bg-primary'),
+    addClasses('bl-bg-primary bl-rounded'),
   ),
   addProps({ 'aria-hidden': true }),
 )(Span);
@@ -167,7 +167,7 @@ export const HorizontalToolbarButton = flow(
   addClasses('bl-mr-grid-2 last:bl-mr-grid-0'),
 )(ToolbarButton);
 
-export const ToolbarButtonLabel = addClasses('bl-text-center bl-text-white bl-text-base')(Span);
+export const ToolbarButtonLabel = addClasses('bl-text-center bl-text-base')(Span);
 
 export const ResizeHandle = addClasses(
   'bl-block bl-text-2xl bl-absolute material-icons bl-z-1 bl-text-red bl-rotate-45deg bl-bottom-grid-0 bl-right-grid-0',
