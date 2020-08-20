@@ -14,16 +14,15 @@
 
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { FC, createContext, useContext } from 'react';
+import React, {
+  FC, createContext, useContext, useEffect, useCallback,
+} from 'react';
 import { observer } from 'mobx-react-lite';
 
 import ContextMenu from './ContextMenu';
-
-import PageContextProvider from '../PageContextProvider';
-
 import { useEditContext } from '../hooks';
-import { IContextMenuProps as ContextMenuProps } from '../Types/ContextMenuTypes';
-import { TMenuOption } from '../PageEditContext/types';
+import { IContextMenuProps as ContextMenuProps, TMenuOption } from '../Types/ContextMenuTypes';
+import { useRegisterMenuOptions } from '../PageContextProvider';
 
 type CompleteUI = {
   GlobalContextMenu: React.ComponentType<ContextMenuProps>;
@@ -55,10 +54,7 @@ const GlobalContextMenu: FC<Props> = observer(() => {
 
 const PageEditor: FC<Props> = ({ children, ui }) => {
   const context = useEditContext();
-  // TODO: This should use useHandler to memoize the callback.
-  // This probably remains replacing the get method isEdit with
-  // a real function.
-  const getMenuOptions = () => [
+  const getMenuOptions = useCallback(() => [
     {
       name: 'docs',
       icon: 'description',
@@ -73,12 +69,11 @@ const PageEditor: FC<Props> = ({ children, ui }) => {
       label: 'Edit',
       isActive: () => context.isEdit,
       handler: () => {
-        // Set edit mode on/off.
         context.toggleEdit();
         context.refresh();
       },
     },
-  ];
+  ], []);
 
   const newUI = {
     ...useUI(),
@@ -87,13 +82,18 @@ const PageEditor: FC<Props> = ({ children, ui }) => {
 
   const { PageOverlay = () => null } = newUI;
 
+  // Register buttons to the main menu.
+  useRegisterMenuOptions({
+    getMenuOptions,
+    name: 'Editor',
+  });
+  useEffect(() => { if (!context.isActive) context.activate(); }, []);
+
   return (
     <uiContext.Provider value={newUI}>
-      <PageContextProvider name="page" getMenuOptions={getMenuOptions}>
-        {children}
-        <GlobalContextMenu />
-        <PageOverlay />
-      </PageContextProvider>
+      {children}
+      <GlobalContextMenu />
+      <PageOverlay />
     </uiContext.Provider>
   );
 };

@@ -5,6 +5,10 @@ describe('PDP (Product Details Page) smoke tests', function () {
     cy.clickEdit();
   })
 
+  after(function() {
+    cy.togglePreviewMode();
+  })
+
   const random = Math.floor(Math.random() * 10000)
   const pdpURL = 'pdp-autotest' + random.toString()
   const title = 'AT - PDD title'

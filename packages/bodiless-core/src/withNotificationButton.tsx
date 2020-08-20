@@ -12,15 +12,15 @@
  * limitations under the License.
  */
 
-import React, { FC, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { ContextMenuForm } from './contextMenuForm';
-import PageContextProvider from './PageContextProvider';
+import { useRegisterMenuOptions } from './PageContextProvider';
 import { useNotifications } from './NotificationProvider';
-import { useUI as useFormUI } from './components/ContextMenuItem';
-import type { FormProps as ContextMenuFormProps } from './contextMenuForm';
+import { useMenuOptionUI } from './components/ContextMenuContext';
+import type { ContextMenuFormProps } from './Types/ContextMenuTypes';
 
 const NotificationList = () => {
-  const { ComponentFormList, ComponentFormListItem } = useFormUI();
+  const { ComponentFormList, ComponentFormListItem } = useMenuOptionUI();
   const { notifications } = useNotifications();
   if (notifications.length === 0) return (<p>There are no alerts.</p>);
   return (
@@ -35,7 +35,7 @@ const NotificationList = () => {
 };
 
 const RenderForm = (props: ContextMenuFormProps) => {
-  const { ComponentFormTitle } = useFormUI();
+  const { ComponentFormTitle } = useMenuOptionUI();
   return (
     <ContextMenuForm {...props}>
       <ComponentFormTitle>Alerts</ComponentFormTitle>
@@ -47,26 +47,23 @@ const RenderForm = (props: ContextMenuFormProps) => {
 const renderForm = (props: ContextMenuFormProps) => <RenderForm {...props} />;
 
 /**
- * Provide a component to display notifications.
+ * @private
  *
- * @param children
- * @constructor
+ * Hook to add a notification button.
  */
-const NotificationButtonProvider: FC = ({ children }) => {
-  const { notifications } = useNotifications();
-
+const useNotificationButton = () => {
+  const { hasNotifications } = useNotifications();
   const getMenuOptions = useCallback(() => [{
     name: 'Notifications',
     label: 'Alerts',
-    icon: notifications.length > 0 ? 'notification_important' : 'notifications',
-    isActive: () => notifications.length > 0,
+    icon: () => (hasNotifications() ? 'notification_important' : 'notifications'),
+    isActive: () => hasNotifications(),
     handler: () => renderForm,
-  }], [notifications]);
-  return (
-    <PageContextProvider getMenuOptions={getMenuOptions}>
-      {children}
-    </PageContextProvider>
-  );
+  }], [hasNotifications]);
+  useRegisterMenuOptions({
+    getMenuOptions,
+    name: 'Notifications',
+  });
 };
 
-export default NotificationButtonProvider;
+export default useNotificationButton;
