@@ -14,10 +14,10 @@
 
 import React, { createContext, useContext, ComponentType } from 'react';
 import { flowRight } from 'lodash';
-import NodeProvider, { useNode } from './NodeProvider';
-import { ContentNode } from './ContentNode';
+import { NodeContext } from './NodeProvider';
+import type { NodeMap } from './NodeProvider';
 
-const SidecarNodeContext = createContext<ContentNode<any>[]>([]);
+const SidecarNodeContext = createContext<NodeMap<any>[]>([]);
 
 /**
  * `startSidecarNodes` is an HOC which records the current ContentNode so that
@@ -30,7 +30,7 @@ const SidecarNodeContext = createContext<ContentNode<any>[]>([]);
 const startSidecarNodes = <P extends object>(Component: ComponentType<P>) => {
   const StartSidecarNodes = (props: P) => {
     const oldValue = useContext(SidecarNodeContext);
-    const newValue = [...oldValue, useNode().node];
+    const newValue = [...oldValue, useContext(NodeContext)];
     return (
       <SidecarNodeContext.Provider value={newValue}>
         <Component {...props} />
@@ -53,14 +53,14 @@ const endSidecarNodes = <P extends object>(Component: ComponentType<P>) => {
   const EndSidecarNodes = (props: P) => {
     const oldValue = useContext(SidecarNodeContext);
     if (oldValue.length === 0) return <Component {...props} />;
-    const newNode = oldValue[oldValue.length - 1];
+    const newNodeProviderValue = oldValue[oldValue.length - 1];
     const newValue = oldValue.slice(0, -1);
     return (
-      <NodeProvider node={newNode}>
+      <NodeContext.Provider value={newNodeProviderValue}>
         <SidecarNodeContext.Provider value={newValue}>
           <Component {...props} />
         </SidecarNodeContext.Provider>
-      </NodeProvider>
+      </NodeContext.Provider>
     );
   };
   EndSidecarNodes.displayName = 'EndSidecarNodes';
@@ -86,7 +86,7 @@ type HOC = (Component: ComponentType<any>) => ComponentType<any>;
  * )
  * ```
  * This is useful, for example, if you want to apply an enhancment HOC which uses its own
- * content node(s) without affecting the node paths of other children of the wrapped compoenent.
+ * content node(s) without affecting the node paths of other children of the wrapped component.
  *
  * @param hocs A list of HOC's to be applied using the parallel node hierarchy.  These will
  *             be composed using lodash `flowRight`

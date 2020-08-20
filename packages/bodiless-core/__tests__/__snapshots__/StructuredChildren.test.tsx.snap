@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StructuredChildren Produces a properly nested tree 1`] = `
+<Fragment>
+  <Item
+    className="foo"
+    key="Item5"
+    name="Item5"
+  />
+  <Group
+    className="foo"
+    key="group1"
+    name="group1"
+  >
+    <Item
+      className="foo"
+      group="group1"
+      key="item1"
+      name="item1"
+    />
+    <Item
+      className="foo"
+      group="group1"
+      key="item2"
+      name="item2"
+    />
+    <Group
+      className="foo"
+      group="group1"
+      key="group2"
+      name="group2"
+    >
+      <Item
+        className="foo"
+        group="group2"
+        key="item3"
+        name="item3"
+      />
+    </Group>
+  </Group>
+</Fragment>
+`;

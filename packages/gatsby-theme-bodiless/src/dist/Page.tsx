@@ -12,25 +12,23 @@
  * limitations under the License.
  */
 
-import React, { FC, ComponentType, useEffect } from 'react';
+import React, { FC, ComponentType } from 'react';
 import {
   StaticPage,
   ContextWrapperProps,
-  useEditContext,
   NotificationProvider,
-  NotificationButtonProvider,
-  SwitcherButtonProvider,
+  useNotificationButton,
+  useSwitcherButton,
+  OnNodeErrorNotification,
 } from '@bodiless/core';
 import { observer } from 'mobx-react-lite';
 import { ContextWrapper, PageEditor } from '@bodiless/core-ui';
 import GatsbyNodeProvider, {
   Props as NodeProviderProps,
 } from './GatsbyNodeProvider';
-import GitProvider from './GitProvider';
-import NewPageProvider from './NewPageProvider';
-import GatsbyPageProvider, {
-  Props as PageProviderProps,
-} from './GatsbyPageProvider';
+import GatsbyPageProvider, { Props as PageProviderProps } from './GatsbyPageProvider';
+import useNewPageButton from './useNewPageButton';
+import useGitButtons from './useGitButtons';
 
 type FinalUI = {
   ContextWrapper: ComponentType<ContextWrapperProps>;
@@ -49,29 +47,34 @@ const defaultUI: FinalUI = {
 
 const getUI = (ui: UI = {}): FinalUI => ({ ...defaultUI, ...ui });
 
+const OuterButtons: FC = () => {
+  useSwitcherButton();
+  useNotificationButton();
+  return <></>;
+};
+
+const InnerButtons: FC = () => {
+  useNewPageButton();
+  useGitButtons();
+  return <></>;
+};
+
 const Page: FC<Props> = observer(({ children, ui, ...rest }) => {
   const { PageEditor: Editor, ContextWrapper: Wrapper } = getUI(ui);
   if (process.env.NODE_ENV === 'development') {
     return (
       <GatsbyNodeProvider {...rest}>
         <GatsbyPageProvider pageContext={rest.pageContext}>
-          <SwitcherButtonProvider>
-            <NotificationProvider>
-              <NotificationButtonProvider>
-                <Editor>
-                  <NewPageProvider>
-                    <GitProvider>
-                      <Wrapper clickable>
-                        <DefaultActiveMenuOptions>
-                          {children}
-                        </DefaultActiveMenuOptions>
-                      </Wrapper>
-                    </GitProvider>
-                  </NewPageProvider>
-                </Editor>
-              </NotificationButtonProvider>
-            </NotificationProvider>
-          </SwitcherButtonProvider>
+          <NotificationProvider>
+            <OuterButtons />
+            <Editor>
+              <OnNodeErrorNotification />
+              <InnerButtons />
+              <Wrapper clickable>
+                {children}
+              </Wrapper>
+            </Editor>
+          </NotificationProvider>
         </GatsbyPageProvider>
       </GatsbyNodeProvider>
     );
@@ -81,17 +84,6 @@ const Page: FC<Props> = observer(({ children, ui, ...rest }) => {
       <StaticPage>{children}</StaticPage>
     </GatsbyNodeProvider>
   );
-});
-
-/**
- * General component that define default active menu.
- */
-const DefaultActiveMenuOptions = observer(({ children }: any) => {
-  const context = useEditContext();
-  useEffect(() => {
-    context.activate();
-  });
-  return <>{children}</>;
 });
 
 export default Page;

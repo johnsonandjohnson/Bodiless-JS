@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 import React from 'react';
-import { asBodilessComponent, useFormUI } from '@bodiless/core';
+import { asBodilessComponent, useMenuOptionUI } from '@bodiless/core';
 import type { ReactMarkdownProps as Props } from 'react-markdown';
 
 import MarkdownField from './InformedMarkdown';
@@ -23,8 +23,8 @@ const asBodilessMarkdown = asBodilessComponent<Props, Data>({
   icon: 'edit',
   name: 'edit',
   renderForm: () => {
-    // const { ComponentFormLabel, ComponentFormTitle, ComponentFormTextArea } = useFormUI();
-    const { ComponentFormLabel, ComponentFormTitle } = useFormUI();
+    // const { ComponentFormLabel, ComponentFormTitle, ComponentFormTextArea } = useMenuOptionUI();
+    const { ComponentFormLabel, ComponentFormTitle } = useMenuOptionUI();
     return (
       <>
         <ComponentFormTitle>Markdown</ComponentFormTitle>

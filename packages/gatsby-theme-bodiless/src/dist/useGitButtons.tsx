@@ -13,17 +13,16 @@
  */
 
 /* eslint-disable no-alert */
-import React, {
-  FC, useState, useEffect, useCallback,
-} from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Cookies from 'universal-cookie';
 import {
   contextMenuForm,
   getUI,
-  PageContextProvider,
   TMenuOption,
   useEditContext,
   useNotify,
+  useRegisterMenuOptions,
+  ContextSubMenu,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
 import BackendClient from './BackendClient';
@@ -44,10 +43,6 @@ const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
  */
 const canCommit = (process.env.BODILESS_BACKEND_COMMIT_ENABLED || '0') === '1';
 const canAlertOnLoad = process.env.BODILESS_ALERT_ON_PAGE_LOAD_ENABLED || 1;
-
-type Props = {
-  client?: GitClient,
-};
 
 const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
   .then(res => {
@@ -189,10 +184,17 @@ const getMenuOptions = (
   const saveChanges = canCommit ? formGitCommit(client) : undefined;
   return [
     {
-      name: 'listCommits',
-      icon: 'book',
-      label: 'History',
-      handler: () => formGetCommitsList(client),
+      name: 'file',
+      label: 'File',
+      icon: 'cloud',
+      Component: ContextSubMenu,
+    },
+    {
+      name: 'Pull',
+      label: 'Pull',
+      icon: 'cloud_download',
+      handler: () => formGitPull(client, notifyOfChanges),
+      group: 'file',
     },
     {
       name: 'savechanges',
@@ -200,12 +202,14 @@ const getMenuOptions = (
       label: 'Push',
       isDisabled: () => !canCommit,
       handler: () => saveChanges,
+      group: 'file',
     },
     {
-      name: 'Pull',
-      label: 'Pull',
-      icon: 'cloud_download',
-      handler: () => formGitPull(client, notifyOfChanges),
+      name: 'listCommits',
+      icon: 'book',
+      label: 'History',
+      handler: () => formGetCommitsList(client),
+      group: 'file',
     },
     {
       name: 'resetchanges',
@@ -213,13 +217,14 @@ const getMenuOptions = (
       icon: 'undo',
       isHidden: () => !context.isEdit,
       handler: () => formGitReset(client, context),
+      group: 'file',
     },
   ];
 };
 
 export type ChangeNotifier = () => Promise<void>;
 
-const GitProvider: FC<Props> = ({ children, client = defaultClient }) => {
+const useGitButtons = ({ client = defaultClient } = {}) => {
   const [notifications, setNotifications] = useState([] as any);
   const context = useEditContext();
 
@@ -262,14 +267,10 @@ const GitProvider: FC<Props> = ({ children, client = defaultClient }) => {
     }
   }, []);
 
-  return (
-    <PageContextProvider
-      getMenuOptions={() => getMenuOptions(client, context, notifyOfChanges)}
-      name="Git"
-    >
-      {children}
-    </PageContextProvider>
-  );
+  useRegisterMenuOptions({
+    getMenuOptions: () => getMenuOptions(client, context, notifyOfChanges),
+    name: 'Git',
+  });
 };
 
-export default GitProvider;
+export default useGitButtons;

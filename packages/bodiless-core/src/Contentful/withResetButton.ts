@@ -14,12 +14,12 @@
 
 import { flowRight } from 'lodash';
 import {
-  withMenuOptions,
   withContextActivator,
   withLocalContextMenu,
 } from '../hoc';
+import { withMenuOptions } from '../PageContextProvider';
 import { useNode } from '../NodeProvider';
-import { TMenuOption } from '../PageEditContext/types';
+import { TMenuOption } from '../Types/ContextMenuTypes';
 
 type MenuOptionWithNodeKey = Partial<TMenuOption> & {
   nodeKey?: string | string[];
