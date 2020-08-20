@@ -36,7 +36,9 @@ export const asProductTout = flow(
       asEditableLink('cta'),
     ),
     Title: withEditorSimple('title', 'Product Title Text'),
-    BvReviewLink: asEditableLink('cta'),
+    BvReviewLink: withSidecarNodes(
+      asEditableLink('cta'),
+    ),
     BvReview: () => BVInlineRatings,
     Body: withEditorBasic('body', 'Product Body Text'),
   }),
