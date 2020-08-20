@@ -98,6 +98,7 @@ export const FilterWrapper = (props: any) => {
   return (
     <finalUI.ComponentSelectorWrapper>
       {Object.keys(allfilters).map(category => {
+        console.log(`category ${category}`);
         if (allfilters[category].length > 0) {
           const isAllDisabled = allfilters[category].every((value: string) => {
             // ToDo code duplication with Checkbox disabled
@@ -105,7 +106,7 @@ export const FilterWrapper = (props: any) => {
               || !Object.keys(filters).includes(category)
               || !filters[category].includes(value);
           });
-          if (isAllDisabled) {
+          if (isAllDisabled && category !== 'Tout Orientation') {
             return true;
           }
           return (

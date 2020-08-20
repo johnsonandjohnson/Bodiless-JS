@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 import { flow } from 'lodash';
+import { withMandatoryTerm } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withToutVariations from './withToutVariations';
 import withContentfulTouts from './withContentfulTouts';
@@ -24,6 +25,8 @@ import { asFlowContainerWithMargins } from './token';
 // Order of includes currently dictates order in Component Picker
 // thus recommend putting more frequently used components toward top for quicker access.
 const FlowContainerDefault = flow(
+  //withMandatoryTerm('Tout Orientation'),
+  //withMandatoryTerm('Type'),
   withRichTextVariations,
   withImageVariations,
   withToutVariations,

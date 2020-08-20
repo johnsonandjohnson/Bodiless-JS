@@ -114,6 +114,11 @@ const withAppendDesc = (newDescription: string) => (Component: CTWM):CTWM => {
 const withTerm = (cat: string) => (term: string) => (Component: CTWM):CTWM => (
   withMeta({ categories: { [cat]: [term] } })(Component)
 );
+
+const withMandatoryTerm = (cat: string) => (term: string) => (Component: CTWM):CTWM => (
+  withMeta({ mandatoryCategories: { [cat]: [term] } })(Component)
+);
+
 /**
  * preserveMeta returns takes an hoc and returns another one that will apply the hoc but preserve
  * theMeta data from the component.
@@ -142,6 +147,7 @@ export {
   withMeta,
   withTitle,
   withDisplayName,
+  withMandatoryTerm,
   withTerm,
   withAppendTitle,
   withAppendDisplayName,
