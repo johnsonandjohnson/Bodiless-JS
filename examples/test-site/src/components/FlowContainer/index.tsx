@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 import { flow } from 'lodash';
-import { addProps } from '@bodiless/fclasses';
+import { withMandatoryCategories } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withToutVariations from './withToutVariations';
 import withContentfulTouts from './withContentfulTouts';
@@ -21,10 +21,6 @@ import withSingleAccordionVariations from './withSingleAccordionVariations';
 import withImageVariations from './withImageVariations';
 
 import { asFlowContainerWithMargins } from './token';
-
-const withMandatoryCategories = (categories: string[]) => addProps({
-  mandatoryCategories: categories,
-});
 
 // Order of includes currently dictates order in Component Picker
 // thus recommend putting more frequently used components toward top for quicker access.

@@ -102,7 +102,7 @@ export const FilterWrapper = (props: any) => {
   const isTermDisabled = (category: string, term: string) => Object.entries(filters).length === 0
     || !Object.keys(filters).includes(category)
     || !filters[category].includes(term);
-  const isAllCategoryTermDisabled = (category: string) => allfilters[category]
+  const areAllTermsDisabled = (category: string) => allfilters[category]
     .every((term: string) => isTermDisabled(category, term));
   const isCategoryMandatory = (category: string) => mandatoryCategories
     && mandatoryCategories.includes(category);
@@ -110,13 +110,13 @@ export const FilterWrapper = (props: any) => {
     <finalUI.ComponentSelectorWrapper>
       {Object.keys(allfilters).map(category => {
         if (allfilters[category].length > 0) {
-          if (isAllCategoryTermDisabled(category) && !isCategoryMandatory(category)) {
+          if (areAllTermsDisabled(category) && !isCategoryMandatory(category)) {
             return true;
           }
           return (
             <Dropdown type={category} key={category}>
               {
-              isAllCategoryTermDisabled(category) && isCategoryMandatory(category)
+              areAllTermsDisabled(category) && isCategoryMandatory(category)
                 ? (
                   <Checkbox
                     key="NA"

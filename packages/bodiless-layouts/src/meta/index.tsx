@@ -114,7 +114,6 @@ const withAppendDesc = (newDescription: string) => (Component: CTWM):CTWM => {
 const withTerm = (cat: string) => (term: string) => (Component: CTWM):CTWM => (
   withMeta({ categories: { [cat]: [term] } })(Component)
 );
-
 /**
  * preserveMeta returns takes an hoc and returns another one that will apply the hoc but preserve
  * theMeta data from the component.
