@@ -13,7 +13,6 @@
  */
 
 import React, {
-  useState,
   FC,
   useContext,
   useEffect,
@@ -21,6 +20,8 @@ import React, {
   useMemo,
 } from 'react';
 import { v1 } from 'uuid';
+import { observable, computed, action } from 'mobx';
+import { observer } from 'mobx-react-lite';
 
 type Notification = {
   id: string,
@@ -35,6 +36,7 @@ type Notifier = (owner: string, notifications: Notification[]) => void;
 
 type NotificationsContextType = {
   notifications: Notification[],
+  hasNotifications: () => boolean,
 };
 type NotifyContextType = {
   notify: Notifier,
@@ -42,6 +44,7 @@ type NotifyContextType = {
 
 const NotificationContext = React.createContext<NotificationsContextType>({
   notifications: [],
+  hasNotifications: () => false,
 });
 
 const useNotifications = () => useContext(NotificationContext);
@@ -50,33 +53,52 @@ const NotifyContext = React.createContext<NotifyContextType>({
   notify: () => undefined,
 });
 
+class NotificationStore {
+  @observable private notificationsMap = new Map<string, NotificationProviderItem[]>();
+
+  @computed get hasNotifications() {
+    return this.notifications.length > 0;
+  }
+
+  @computed get notifications() {
+    return Array.prototype.concat.apply([], Array.from(this.notificationsMap.values()));
+  }
+
+  @action setNotifications(owner: string, notifications: NotificationProviderItem[]) {
+    this.notificationsMap.set(owner, notifications);
+  }
+}
+
+const notificationStore = new NotificationStore();
+
 /**
  * A component used to provide notifications.
  *
  * @param children
  * @constructor
  */
-const NotificationProvider: FC = ({ children }) => {
-  const [notifications, setNotifications] = useState<NotificationProviderItem[]>([]);
-  const notify = (owner: string, newNotifications: Notification[]) => setNotifications(
-    (oldNotifications: NotificationProviderItem[]) => oldNotifications
-      .filter(n => n.owner !== owner)
-      .concat(
-        newNotifications.map(n => ({ ...n, owner })),
-      ),
+const NotificationProvider: FC = observer(({ children }) => {
+  // eslint-disable-next-line max-len
+  const notify = (owner: string, newNotifications: Notification[]) => notificationStore.setNotifications(
+    owner,
+    newNotifications.map(n => ({ ...n, owner })),
   );
   // We memoize the notifier context value to prevent unnecessary re-renders
   // of subscribers to only this context.
-  const notifyContextValue = useMemo(() => ({ notify }), [setNotifications]);
+  const notifyContextValue = useMemo(() => ({ notify }), [notificationStore.setNotifications]);
 
   return (
-    <NotificationContext.Provider value={{ notifications }}>
+    <NotificationContext.Provider value={{
+      notifications: notificationStore.notifications,
+      hasNotifications: () => notificationStore.hasNotifications,
+    }}
+    >
       <NotifyContext.Provider value={notifyContextValue}>
         {children}
       </NotifyContext.Provider>
     </NotificationContext.Provider>
   );
-};
+});
 
 /**
  * The useNotify() hook allows you to register notifications which should be

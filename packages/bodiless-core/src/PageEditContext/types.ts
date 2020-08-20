@@ -13,21 +13,8 @@
  */
 
 // Internal mobx store which holds the state.
-import React from 'react';
 import { TOverlaySettings } from '../Types/PageOverlayTypes';
-
-export type TMenuOption = {
-  name: string;
-  icon?: string;
-  label?: string;
-  isActive?: () => boolean;
-  isDisabled?: () => boolean;
-  isHidden?: () => boolean;
-  handler?: (event: React.MouseEvent) => any;
-  local?: boolean;
-  global?: boolean;
-  group?: string;
-};
+import type { TMenuOption } from '../Types/ContextMenuTypes';
 
 export type TMenuOptionGetter = () => TMenuOption[];
 
@@ -70,7 +57,7 @@ export interface CanBeActivated {
   activate: () => void;
   refresh: () => void;
 }
-export interface PageEditStore {
+export interface PageEditStoreInterface {
   activeContext: PageEditContextInterface | undefined;
   contextMenuOptions: TMenuOption[];
   isEdit: boolean;
@@ -94,6 +81,22 @@ export interface PageEditContextInterface extends
 {
   readonly id: string;
   readonly name: string;
+  readonly parent?: PageEditContextInterface;
+  /**
+   * Function property which gets the menu options associated with this context.
+   */
   readonly getMenuOptions: TMenuOptionGetter;
+  /**
+   * Prototype function which gets menu options associated with this context and any peers.
+   */
+  readonly allMenuOptions: TMenuOption[];
+  /**
+   * Spawn a child of this context (another context which, when activaged, will also activate
+   * this one and all of its ancestors).
+   */
   spawn: (v: DefinesLocalEditContext) => PageEditContextInterface;
+  /**
+   * Register a peer of this context (another context which will be activagted along with this one)
+   */
+  registerPeer: (v: DefinesLocalEditContext) => void;
 }

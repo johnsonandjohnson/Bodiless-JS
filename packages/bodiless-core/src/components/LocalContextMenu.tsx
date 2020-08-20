@@ -18,7 +18,7 @@ import Tooltip from 'rc-tooltip';
 
 import { useEditContext } from '../hooks';
 import { useUI } from './PageEditor';
-import { TMenuOption } from '../PageEditContext/types';
+import { TMenuOption } from '../Types/ContextMenuTypes';
 
 /**
  * @private

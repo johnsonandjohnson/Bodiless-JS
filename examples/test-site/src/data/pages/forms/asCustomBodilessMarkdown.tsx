@@ -1,6 +1,6 @@
 import React, { useCallback, ComponentType } from 'react';
 import {
-  useFormUI, useEditFormProps,
+  useMenuOptionUI, useEditFormProps,
   ContextMenuForm, withNodeKey, withNode, withNodeDataHandlers,
   ifReadOnly, withoutProps, ifEditable, withMenuOptions, withContextActivator,
   withActivatorWrapper, withLocalContextMenu, withData,
@@ -36,7 +36,7 @@ const useRenderForm = (props: EditProps) => {
   const editFormProps = useMarkdownEditFormProps(props);
   return useCallback(
     (contextMenuFormProps: ContextMenuFormProps) => {
-      const { ComponentFormLabel, ComponentFormTitle } = useFormUI();
+      const { ComponentFormLabel, ComponentFormTitle } = useMenuOptionUI();
       return (
         <ContextMenuForm {...contextMenuFormProps} {...editFormProps}>
           <ComponentFormTitle>Markdown</ComponentFormTitle>

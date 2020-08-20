@@ -15,8 +15,8 @@
 import GatsbyMobxStore from './dist/GatsbyMobxStore';
 import GatsbyNodeProvider from './dist/GatsbyNodeProvider';
 import BackendClient from './dist/BackendClient';
-import GitProvider from './dist/GitProvider';
-import NewPageProvider from './dist/NewPageProvider';
+import useGitButtons from './dist/useGitButtons';
+import useNewPageButton from './dist/useNewPageButton';
 import GatsbyPageProvider, { useGatsbyPageContext } from './dist/GatsbyPageProvider';
 import Page from './dist/Page';
 
@@ -24,8 +24,8 @@ export {
   GatsbyMobxStore,
   GatsbyNodeProvider,
   BackendClient,
-  GitProvider,
-  NewPageProvider,
+  useGitButtons,
+  useNewPageButton,
   GatsbyPageProvider,
   useGatsbyPageContext,
   Page,
