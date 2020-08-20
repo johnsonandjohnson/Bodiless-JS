@@ -37,6 +37,8 @@ export default class GatsbyMobxStoreItem {
 
   @observable isDeleted = false;
 
+  @observable hasFlushingError = false;
+
   key: string;
 
   store: GatsbyMobxStore;
@@ -86,6 +88,7 @@ export default class GatsbyMobxStoreItem {
         break;
       case ItemStateEvent.OnRequestEnd:
         this.requestDelay = DEFAULT_REQUEST_DELAY;
+        this.hasFlushingError = false;
         if (this.state === ItemState.Queued) {
           this.scheduleRequest();
           break;
@@ -99,6 +102,7 @@ export default class GatsbyMobxStoreItem {
         // incrementally increasing time between each subsequent retry
         // ensure new delay is not greater than defined maximum
         this.requestDelay = Math.min(this.requestDelay * 2, MAXIMUM_REQUEST_DELAY);
+        this.hasFlushingError = true;
         this.scheduleRequest();
         this.setState(ItemState.Queued);
         break;

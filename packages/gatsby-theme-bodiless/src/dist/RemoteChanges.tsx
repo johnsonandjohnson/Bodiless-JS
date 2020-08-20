@@ -17,7 +17,7 @@ import { useEditContext } from '@bodiless/core';
 import { ComponentFormSpinner, ComponentFormWarning } from '@bodiless/ui';
 import { isEmpty } from 'lodash';
 import { useFormApi } from 'informed';
-import type { ChangeNotifier } from './GitProvider';
+import type { ChangeNotifier } from './useGitButtons';
 
 type GitBranchType = {
   branch: string | null,
