@@ -172,8 +172,10 @@ resized.
 When an empty Flow Container is on the page you will only see a single empty
 line.
 
-#### Add a new component When you activate a Flow Container you will be able to
-add a new component to the Flow Container via the menu.
+#### Add a new component
+
+When you activate a Flow Container you will be able to add a new component 
+to the Flow Container via the menu.
 
 #### Component Library
 
@@ -193,25 +195,32 @@ available components. You can filter the components by:
 When you have found the right component, simply click on it, and it will be
 added at the end of the activated Flow Container.
 
-#### Removing a component When any component in the Flow Container is active it
-will provide a delete button to the context menu. Clicking on this icon will
-remove the component.
+#### Removing a component
 
-#### Resizing a component When any component in the Flow Container is active it
-will appear with a blue border. You can resize the component by clicking on the
-right edge of the border. Note: this can be done at different breakpoints to
-adjust the size of the component at that breakpoint and above.
+When any component in the Flow Container is active it will provide a delete button 
+to the context menu. Clicking on this icon will remove the component.
+
+#### Resizing a component
+
+When any component in the Flow Container is active it will appear with a blue border. 
+You can resize the component by clicking on the right edge of the border. 
+
+_Note:_ This can be done at different breakpoints to adjust the size of the component 
+at that breakpoint and above.
 
 The sizes are finite and defined by the creator of that particular Flow
 Container. Smaller breakpoints will offer fewer options for resizing.
 
-#### Reordering a component When any component in the Flow Container is active
-it will appear with a blue double line icon in the top left corner of the
-component. By clicking and dragging this icon you can reorder components in the
-Flow Container.
+#### Reordering a component
 
-#### Replacing a Component To change a component's type you must remove that
-component and replace it with the new component type.
+When any component in the Flow Container is active it will appear with a blue double line 
+icon in the top left corner of the component. By clicking and dragging this icon you can 
+reorder components in the Flow Container.
+
+#### Replacing a Component
+
+To change a component's type you must remove that component and replace it with the new 
+component type.
 
 #### “Contentful” Components
 
