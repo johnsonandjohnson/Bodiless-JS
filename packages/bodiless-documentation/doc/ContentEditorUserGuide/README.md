@@ -31,12 +31,7 @@ You use the site's navigation to quickly access the content you need to edit.
 In Review Mode, the toolbar on the lefthand side of the screen offers a subset
 of functionality to interact with the site.
 
-![](https://i.imgur.com/rCBWLNO.png)
-
 ### Edit Mode
-
-![](https://i.imgur.com/9wNKYvJ.png)
-
 
 The Edit mode is where you can do the actual work of updating the site content. 
 
@@ -47,8 +42,6 @@ site's content.
 
 _In Edit Mode the *Edit* icon will appear highlighted in blue._ 
 
-![](https://i.imgur.com/8DImTOE.png)
-
 ### Toolbar
 
 In your site's edit interface - in both Review mode and Edit mode - you will
@@ -57,12 +50,12 @@ default, the edit interface begins in review mode.
 
 | Review Mode | Edit Mode |
 |-------------|-----------|
-| ![](https://i.imgur.com/5Zsyod6.png) | ![](https://i.imgur.com/nKCYR2E.png) |
+| ![](./ToolbarReview.jpg) | ![](./ToolbarEdit.jpg) |
 
 
 * #### Location Switcher
 
-  ![](https://i.imgur.com/uwEML5o.png)
+  ![](./Switcher.jpg)
 
   The default position of this toolbar is the lefthand side of the page. You can
   click the location switcher button to move the admin toolbar to the righthand
@@ -71,7 +64,7 @@ default, the edit interface begins in review mode.
 
 * #### Alerts
 
-  ![](https://i.imgur.com/TLhAQHu.png)
+  ![](./Alerts.jpg)
 
   The **Alerts** button on the Toolbar notifies you when there have been changes
   in your site's environment. If changes exist the Alerts button will be
@@ -82,17 +75,19 @@ default, the edit interface begins in review mode.
 
 * #### Docs
 
-  ![](https://i.imgur.com/iSjq7yh.png)
+  ![](./Docs.jpg)
 
   The **Docs** button opens BodilessJS documentation in a new browser tab.
 
 ### Workflow
 
-![](https://i.imgur.com/bWSVtCB.png)
+![](./File1.jpg)
 
 The **File** icon gives you the ability to manage your site's workflow. The
 following options are available in the File submenu: Pull, Push, Revert,
 History.
+
+![](./File.jpg)
 
 * #### Pull
 
@@ -121,7 +116,7 @@ you can manage your site's metadata. Here you can enter a page's Title,
 Description and Page Type so that your page's search engine result page will be
 as effective as possible. 
 
-![](https://i.imgur.com/87j5t4j.png)
+![](./Seo.jpg)
 
 * Title: Usually shown as title in search results 
 * Description: Usually shown
@@ -131,27 +126,25 @@ in snippet for search results.
 
 #### Edit Mode
 
-![](https://i.imgur.com/9wNKYvJ.png)
-
 Clicking on the *Edit* icon in the Tool Bar will transition the site into Edit
 Mode. _In Edit Mode the *Edit* icon will appear highlighted in blue._
 
-![](https://i.imgur.com/8DImTOE.png)
+![](./EditScreen.jpg)
 
 #### Page
 
-![](https://i.imgur.com/GasgAOM.png)
+![](./PageIcon.jpg)
 
 Clicking the Page button will create a new page for your site. 
 
 When you click on the Page button you will be prompted to enter the url you wish
 to use for the new page. 
 
-![](https://i.imgur.com/qeDildU.png)
+![](./AddPage1.jpg)
 
 Enter the new url and then click the checkmark to finish creating the new page.
 
-![](https://i.imgur.com/1hiBDUk.png)
+![](./AddPage2.jpg)
 
 In BodilessJS, pages utilize
 [templates](https://johnsonandjohnson.github.io/Bodiless-JS/#/Development/Guides/BuildingSites/Templates/Templates).
@@ -169,6 +162,8 @@ To create a new page click on the "Page" button in the toolbar.
 
 #### Flow Container
 
+![](./EditFlow.jpg)
+
 In BodilessJS pages are laid out using the Flow Container. The Flow Container is a
 layout tool which uses css flexbox templates to form the skeleton of BodilessJS
 pages. Within the Flow Container, components can easily be moved around and
@@ -181,6 +176,8 @@ line.
 add a new component to the Flow Container via the menu.
 
 #### Component Library
+
+![](./ComponentLibrary.jpg)
 
 The component library allows you to change components on your page so that you
 can easily update the layout of your site. 
