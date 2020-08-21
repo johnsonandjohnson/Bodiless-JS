@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { ComponentType, HTMLProps } from 'react';
 import { flow } from 'lodash';
 
 import { Div, Spinner, ComponentFormCloseButton } from '@bodiless/ui';
@@ -37,7 +37,7 @@ type ButtonProps = {
 
 const Button = (props: ButtonProps) => {
   const ButtonWrapper = addClasses('bl-flex bl-pb-5 bl-justify-end bl-w-full')(Div);
-  const ButtonEl = removeClasses('bl-float-right')(ComponentFormCloseButton);
+  const ButtonEl = removeClasses('bl-float-right')(ComponentFormCloseButton) as ComponentType<HTMLProps<HTMLButtonElement>>;
   return (
     <ButtonWrapper>
       <ButtonEl {...props} />

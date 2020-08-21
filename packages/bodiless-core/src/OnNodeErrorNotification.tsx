@@ -12,14 +12,22 @@
  * limitations under the License.
  */
 
-import { withNode, withNodeKey } from '@bodiless/core';
-import { flowRight } from 'lodash';
+import React from 'react';
+import { observer } from 'mobx-react-lite';
+import { useNotify } from './NotificationProvider';
+import { useNode } from './NodeProvider';
 
-const asBodilessHelmet = (nodeKey?: string) => flowRight(
-  withNodeKey({ nodeKey, nodeCollection: 'site' }),
-  withNode,
-  withNodeKey({ nodeKey, nodeCollection: '_default' }),
-  withNode,
-);
+const NODE_ERROR_NOTIFICATION_ID = 'STORE_ERROR_NOTIFICATION_ID';
 
-export default asBodilessHelmet;
+const OnNodeErrorNotification = observer(() => {
+  const { node } = useNode();
+  const { hasError } = node;
+  const notifications = hasError() ? [{
+    id: NODE_ERROR_NOTIFICATION_ID,
+    message: 'There is an error with saving data',
+  }] : [];
+  useNotify(notifications);
+  return <></>;
+});
+
+export default OnNodeErrorNotification;

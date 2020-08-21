@@ -18,29 +18,17 @@ import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
 import { Div } from '@bodiless/fclasses';
 import {
-  withMeta,
-  withMetaTitle,
-  withMetaHtml,
   asBodilessHelmet,
   withEvent,
 } from '@bodiless/components';
 import Header from './header';
 import Footer from './footer';
+import SeoHelmet from './meta';
 import { asPageContainer, asYMargin } from '../Elements.token';
 import { asSiteHeader, asSiteFooter } from './token';
 
 const SiteHeader = asSiteHeader(Header);
 const SiteFooter = asSiteFooter(Footer);
-
-const SiteHelmet = flowRight(
-  asBodilessHelmet('meta'),
-  withMeta('pagetype', 'page-type'),
-  withMeta('description', 'description'),
-  withMeta('bl-brand', 'brand', 'site'),
-  withMeta('bl-country', 'country', 'site'),
-  withMetaTitle('page-title'),
-  withMetaHtml('en'),
-)(Helmet);
 
 const SiteGTMHelmetEvent = flowRight(
   asBodilessHelmet('datalayer'),
@@ -76,7 +64,7 @@ const Layout = ({ children }) => (
     `}
     render={data => (
       <>
-        <SiteHelmet />
+        <SeoHelmet />
         <SiteGTMHelmetEvent />
         <SiteHeader />
         <Container>{children}</Container>

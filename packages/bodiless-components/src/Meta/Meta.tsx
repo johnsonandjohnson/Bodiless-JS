@@ -12,50 +12,73 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
-import { useNode } from '@bodiless/core';
-import { isEmpty } from 'lodash';
+import React, { ComponentType as CT, PropsWithChildren } from 'react';
+import { HelmetProps } from 'react-helmet';
+import { FieldProps } from 'informed';
+import {
+  useNode, withNodeKey, withNode, withSidecarNodes, withNodeDataHandlers, withoutProps,
+  withData, ifEditable, asReadOnly,
+} from '@bodiless/core';
+import type { WithNodeKeyProps } from '@bodiless/core';
+import { flowRight } from 'lodash';
+import { withMetaSnippet } from './withMetaForm';
 
-type MetaTitleData = {
+type BaseProps = PropsWithChildren<HelmetProps>;
+type Data = {
   content: string;
 };
+type Props = BaseProps & Data;
 
-const withMeta = (
-  name: string,
-  nodeKey: string,
-  nodeCollection: string | undefined,
-) => (HelmetComponent: CT) => (props: any) => {
-  const { children, ...rest } = props;
-  const { node } = useNode(nodeCollection);
-  const childNode = node.child(nodeKey);
-  if (!isEmpty(childNode.data)) {
-    return (
-      <HelmetComponent {...rest}>
-        {children}
-        <meta name={name} {...childNode.data} />
-      </HelmetComponent>
-    );
-  }
-  return <HelmetComponent {...rest} />;
+type BasicOptions = {
+  name: string;
 };
 
-const withMetaTitle = (
-  nodeKey: string,
-  nodeCollection?: string | undefined,
-) => (HelmetComponent: CT) => (props: any) => {
-  const { children, ...rest } = props;
-  const { node } = useNode(nodeCollection);
-  const { data } = node.child<MetaTitleData>(nodeKey);
-  if (!isEmpty(data)) {
-    return (
-      <HelmetComponent {...rest}>
-        {children}
-        <title>{data.content || ''}</title>
-      </HelmetComponent>
-    );
-  }
-  return <HelmetComponent {...rest} />;
-};
+type Options = {
+  label: string;
+  useFormElement?: () => CT<FieldProps<any, any>>,
+  placeholder?: string;
+} & BasicOptions;
+
+const withTitle$ = () => (
+  HelmetComponent: CT<BaseProps>,
+) => ({ children, content, ...rest }: Props) => (
+  <HelmetComponent {...rest}>
+    {children}
+    {content && <title>{content}</title>}
+  </HelmetComponent>
+);
+
+const withMeta$ = (options: Options) => (
+  HelmetComponent: CT<BaseProps>,
+) => ({ children, content, ...rest }: Props) => (
+  <HelmetComponent {...rest}>
+    {children}
+    {content && <meta name={options.name} content={content} />}
+  </HelmetComponent>
+);
+
+const withHeadElement = (renderHoc: Function) => (options: Options) => (
+  nodeKey?: WithNodeKeyProps, defaultContent?: string,
+) => withSidecarNodes(
+  withNodeKey(nodeKey),
+  withNode,
+  withNodeDataHandlers({ content: defaultContent }),
+  ifEditable(withMetaSnippet({ ...options })),
+  withoutProps('setComponentData'),
+  withData,
+  renderHoc(options),
+);
+
+const withMeta = withHeadElement(withMeta$);
+const withTitle = withHeadElement(withTitle$);
+
+const withMetaStatic = (options: BasicOptions) => (
+  nodeKey?: WithNodeKeyProps, defaultContent?: string,
+) => flowRight(
+  asReadOnly,
+  // @ts-ignore: non-editable meta data pass in BasicOptions.
+  withMeta(options)(nodeKey, defaultContent),
+);
 
 const withMetaHtml = (
   lang: string,
@@ -73,4 +96,6 @@ const withMetaHtml = (
   );
 };
 
-export { withMeta, withMetaTitle, withMetaHtml };
+export {
+  withMeta, withMetaHtml, withMetaStatic, withTitle,
+};
