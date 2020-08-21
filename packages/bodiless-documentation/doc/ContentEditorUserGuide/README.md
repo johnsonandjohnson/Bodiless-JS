@@ -55,7 +55,7 @@ default, the edit interface begins in review mode.
 
 * #### Location Switcher
 
-  ![](./Switcher.jpg)
+  ![](./Switcher)
 
   The default position of this toolbar is the lefthand side of the page. You can
   click the location switcher button to move the admin toolbar to the righthand
