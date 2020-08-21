@@ -19,16 +19,16 @@ import { ComponentFormSpinner, ComponentFormWarning } from '@bodiless/ui';
 import { useFormApi } from 'informed';
 import type { ChangeNotifier } from './useGitButtons';
 
-export type GitBranchType = {
+export type BranchUpdateType = {
   branch: string | null,
   commits: string[],
   files: string[];
 };
 
 export type ResponseData = {
-  upstream: GitBranchType;
-  production: GitBranchType,
-  local: GitBranchType,
+  upstream: BranchUpdateType;
+  production: BranchUpdateType,
+  local: BranchUpdateType,
 };
 
 type PropsWithGitClient = {
@@ -91,30 +91,16 @@ const RemoteChanges = ({ client, notifyOfChanges }: PropsWithGitClient & PropsWi
   );
 };
 
-const getRemoteStatus = (responseDate: ResponseData) => {
-  const { upstream, production, local } = responseDate;
+const mapResponse = (response: BranchUpdateType) => ({
+  hasUpdates: !!response.commits.length,
+  files: response.files,
+});
 
-  const upstreamStatus = {
-    hasUpdates: !!upstream.commits.length,
-    files: upstream.files,
-  };
-
-  const productionStatus = {
-    hasUpdates: !!production.commits.length,
-    files: production.files,
-  };
-
-  const localStatus = {
-    hasUpdates: !!local.commits.length,
-    files: local.files,
-  };
-
-  return {
-    upstream: upstreamStatus,
-    production: productionStatus,
-    local: localStatus,
-  };
-};
+const getRemoteStatus = (responseData: ResponseData) => ({
+  upstream: mapResponse(responseData.upstream),
+  production: mapResponse(responseData.production),
+  local: mapResponse(responseData.local),
+});
 
 const isContentOnly = (files: string[]) => files.every(file => file.search(/\.json$/g) !== -1);
 
@@ -163,10 +149,6 @@ const FormMessages = ({ messageCode, messageData } : MessageProps) => {
     case MessageCode.PullMasterAbort:
       return (
         <>
-          <div>
-            There are updates available to be pulled. Click check (✓) to
-            initiate.
-          </div>
           <ComponentFormWarning>
             There are changes on production which cannot be merged from the UI.
           </ComponentFormWarning>
@@ -320,11 +302,6 @@ const FetchChanges = (
           formApi.setValue('mergeMaster', false);
           formApi.setValue('keepOpen', false);
         }
-
-        setState((currentState) => ({
-          messageCode: currentState.messageCode,
-          messageData: currentState.messageData,
-        }));
       } catch (error) {
         setState({
           messageCode: MessageCode.PullErrored,
