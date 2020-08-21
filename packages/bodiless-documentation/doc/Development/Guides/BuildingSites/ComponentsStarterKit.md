@@ -20,29 +20,70 @@ have to adjust their tokens (styling) to meet the designs of the site.
 ### MetaData Component
 
 Bodiless provides a set of HOC's which work with react-helmet to place editable
-meta-tags in the document HEAD.  A Site Builder can find an example in
+meta-tags in the document HEAD.  A Site Builder can find examples of adding editable or 
+non-editable (static) meta data into head section from
 `src/components/Layout/meta.tsx`.
 
 For full code, please
-[review code](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Layout)
+[review code](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/test-site/src/components/Layout/meta.tsx).
 
-The HOC's used in this file are responsible for both rendering and editing meta-tags:
-#### Adding SEO form to Editor interface
-The `withMetaForm` provides ab ability to insert a SEO form
+Below, it is illustrated how to add the meta data to page head and make it editable for site 
+editors.
+
+- #### Adding SEO form to Editor interface
+  The `withMetaForm` provides ability to insert a SEO form
 within the editor inferface for the site editor to manipulate meta date per
-page. 
-
-Besides adding the form, the site builder will also define the fields that the
-content editor can see to edit in the page.
-
-#### Adding metatag to the document HEAD
-
-In addition fo defining the form fields, the calls to `withMeta*` also render
-the meta-tags to the document head, using data from json objects which were
+page. So first, import withMetaForm from @bodiless/components package: 
+  ```
+  import withMetaForm from @bodiless/components;
+  ```
+  `withMetaForm` takes 2 parameters:
+  - useGetMenuOptions: defines SEO form menu button apparence. 
+    ```
+    {
+      name: 'seo',                     // Menu item name
+      isHidden: () => !context.isEdit, // Hidden the button in preview mode
+      icon: 'category',                // Button icon
+      label: 'SEO',                    // Button label
+    },
+    ```
+  - metaFormHeader: [Optional] defined SEO form title and description for users.
+    ```
+    {
+      title: 'SEO Data form',
+      description: `Enter the page level data used for SEO ...`
+    };
+    ```
+  Then, apply this HOC to Helment component:
+  ```
+  const SeoHelmet = withMetaForm(useGetMenuOptions, seoFormHeader)(Helmet);
+  ```
+- #### Adding meta data fields to Editor interface
+  Next, define the form fields so site editor could update content of meta data displayed 
+  on the head section of each page. For example, to add editable meta description field, first import withMeta from '@bodiless/components', then create HOC withMetaPageDescription with meta field name `description`, form field label `Description` and a placeholder text, i.e.
+  ```
+  const withMetaPageDescription = withMeta({
+    name: 'description',
+    useFormElement: () => useMenuOptionUI().ComponentFormTextArea,
+    label: 'Description',
+    placeholder: 'Rec < 160 char',
+  });
+  ```
+  where useFormElement provides function that returns an UI input component, i.e. *ComponentFormText*, *ComponentFormTextArea*, etc.
+  To apply this field to meta form previously created, you can use flowRight:
+  ``` 
+  const SeoHelmet = flowRight(
+    withMetaForm(useGetMenuOptions, seoFormHeader),
+    asBodilessHelmet('meta'),
+    withMetaPageDescription('description', ''),
+  )(Helmet);
+  ```
+  here, asBodilessHelmet HOC specifies `meta` as nodeKey for server side storage, and the description content will be saved in data file named `meta$description.json`.
+- #### Meta data rendering
+  In addition fo defining the form fields, the calls to `withMeta*` also render
+the meta-tags to the page document head, using data from json objects which were
 written by the editor. You can also see defined here some site-level meta-tags
 which are not exposed to the editor for modification.
-
-For full information on adding metadata, please read [Meta](TBD)
 
 ### Site Title & Logo
 
