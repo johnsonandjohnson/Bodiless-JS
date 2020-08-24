@@ -29,6 +29,7 @@ import {
   ItemListProps,
   RenderList,
 } from './types';
+import { ComponentDisplayModeProvider, ComponentDisplayMode } from '../FlowContainer/ComponentDisplayMode';
 
 export { defaultUI } from './uiContext';
 
@@ -57,40 +58,42 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
   const finalUI = useUI();
 
   return (
-    <uiContext.Provider value={finalUI}>
-      <finalUI.MasterWrapper>
+    <ComponentDisplayModeProvider mode={ComponentDisplayMode.ComponentSelector}>
+      <uiContext.Provider value={finalUI}>
+        <finalUI.MasterWrapper>
 
-        <finalUI.FlexSection>
-          <AllCheckbox
-            activeFilter={activeFilters}
-            setActiveFilters={setActiveFilters}
-            activeSearch={activeSearch}
-            setActiveSearch={setActiveSearch}
-          />
-          <FilterWrapper
-            activeFilter={activeFilters}
-            setActiveFilters={setActiveFilters}
-            allfilters={allFilters}
-            filters={filters}
-          />
-        </finalUI.FlexSection>
+          <finalUI.FlexSection>
+            <AllCheckbox
+              activeFilter={activeFilters}
+              setActiveFilters={setActiveFilters}
+              activeSearch={activeSearch}
+              setActiveSearch={setActiveSearch}
+            />
+            <FilterWrapper
+              activeFilter={activeFilters}
+              setActiveFilters={setActiveFilters}
+              allfilters={allFilters}
+              filters={filters}
+            />
+          </finalUI.FlexSection>
 
-        <finalUI.FlexSectionFull>
-          <finalUI.ComponentTitleWrapper>
-            Components
-          </finalUI.ComponentTitleWrapper>
-          <SearchWrapper
-            activeSearch={activeSearch}
-            setActiveSearch={setActiveSearch}
-          />
-          <ItemList
-            onSelect={onSelect}
-            components={newCompRender}
-          />
-        </finalUI.FlexSectionFull>
+          <finalUI.FlexSectionFull>
+            <finalUI.ComponentTitleWrapper>
+              Components
+            </finalUI.ComponentTitleWrapper>
+            <SearchWrapper
+              activeSearch={activeSearch}
+              setActiveSearch={setActiveSearch}
+            />
+            <ItemList
+              onSelect={onSelect}
+              components={newCompRender}
+            />
+          </finalUI.FlexSectionFull>
 
-      </finalUI.MasterWrapper>
-    </uiContext.Provider>
+        </finalUI.MasterWrapper>
+      </uiContext.Provider>
+    </ComponentDisplayModeProvider>
   );
 };
 
