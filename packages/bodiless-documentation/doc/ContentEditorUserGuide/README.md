@@ -25,7 +25,7 @@ lets you quickly toggle back and forth between edit mode and review mode.
 ### Review Mode
 
 The Edit Interface defaults to the Review mode. In Review Mode, you can navigate
-through the pages of the site to quickly access and asses what you need to edit.
+through the pages of the site to quickly access and assess what you need to edit.
 You use the site's navigation to quickly access the content you need to edit.
 
 In Review Mode, the toolbar on the lefthand side of the screen offers a subset
@@ -35,7 +35,7 @@ of functionality to interact with the site.
 
 The Edit mode is where you can do the actual work of updating the site content. 
 
-Clicking on the **Edit** icon in the Tool Bar will transition the site into Edit
+Clicking on the **Edit** pencil icon in the Tool Bar will transition the site into Edit
 Mode. Point and click to where you want to be on the page, and then make the
 change directly on the page. You can see your changes in the context of your
 site's content.
@@ -230,4 +230,3 @@ Contentful components are components that are preloaded with data so that you
 can easily populate your site with content. These contentful components will
 render the default content but you can easily override and edit the content to
 suit your needs.
-
