@@ -633,6 +633,7 @@ module.exports = {
 
   variants: {
     borderWidth: ['first', 'responsive'],
+    margin: ['responsive', 'first', 'last'],
   },
 
   // corePlugins: {},
