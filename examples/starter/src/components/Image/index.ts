@@ -16,6 +16,7 @@ import { ComponentType } from 'react';
 import {
   withChild,
   withDefaultContent,
+  withSidecarNodes,
 } from '@bodiless/core';
 import { flowRight } from 'lodash';
 import {
@@ -47,7 +48,9 @@ const asEditableImageWithPlaceholder = (placeholder: string) => (nodeKey: string
   asEditableImage(nodeKey),
 );
 const asLinkableImage = (ImageComponent: ComponentType<any>) => (nodeKey: string) => flowRight(
-  asBodilessLink(nodeKey),
+  withSidecarNodes(
+    asBodilessLink(nodeKey),
+  ),
   withChild(ImageComponent),
 );
 const asSquareImage = asEditableImage;

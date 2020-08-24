@@ -13,6 +13,7 @@
  */
 
 import { flow } from 'lodash';
+import { withSidecarNodes } from '@bodiless/core';
 import {
   ToutClean,
 } from '@bodiless/organisms';
@@ -27,11 +28,15 @@ import { withEditorBasic, withEditorSimple } from '../Editors';
 const asEditableTout = flow(
   withDesign({
     Image: asEditableImage('image'),
-    ImageLink: asEditableLink('cta'),
+    ImageLink: withSidecarNodes(
+      asEditableLink('link'),
+    ),
     Title: withEditorSimple('title', 'Tout Title Text'),
     Link: flow(
       withEditorSimple('ctaText', 'CTA'),
-      asEditableLink('cta'),
+      withSidecarNodes(
+        asEditableLink('link'),
+      ),
     ),
     Body: withEditorBasic('body', 'Tout Body Text'),
   }),
