@@ -71,6 +71,9 @@ const createPage = async ({ path, client, template } : any) => {
     }
     return Promise.resolve(newPagePath);
   }
+  if (result.message) {
+    return Promise.reject(new Error(result.message));
+  }
   return Promise.reject(new Error('An internal error occurred. Please try again later.'));
 };
 
@@ -82,7 +85,6 @@ const NewPageComp = (props : NewPageProps) => {
     ComponentFormLabel,
     ComponentFormDescription,
     ComponentFormText,
-    ComponentFormError,
     ComponentFormWarning,
     ComponentFormTitle,
     ComponentFormLink,
@@ -139,7 +141,7 @@ const NewPageComp = (props : NewPageProps) => {
     case NewPageState.Errored:
       return (
         <>
-          <ComponentFormError>{errorMessage}</ComponentFormError>
+          <ComponentFormWarning>{errorMessage}</ComponentFormWarning>
         </>
       );
     default: return (<></>);

@@ -102,6 +102,11 @@ const formGitReset = (client: GitClient) => contextMenuForm({
     if (keepOpen === false) window.location.reload();
     return keepOpen;
   },
+  onClose: ({ keepOpen }) => {
+    if (!keepOpen) {
+      window.location.reload();
+    }
+  },
 })(
   ({ ui, formState, formApi }: any) => {
     const { ComponentFormText } = getUI(ui);

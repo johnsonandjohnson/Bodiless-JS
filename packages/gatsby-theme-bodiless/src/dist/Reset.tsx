@@ -40,7 +40,7 @@ const Reset = (props: Props) => {
   const {
     ComponentFormTitle,
     ComponentFormLabel,
-    ComponentFormError,
+    ComponentFormWarning,
     ComponentFormDescription,
   } = getUI(ui);
   const { submits, invalid } = formState;
@@ -96,7 +96,7 @@ const Reset = (props: Props) => {
     case ResetState.Errored:
       return (
         <>
-          <ComponentFormError>{errorMessage}</ComponentFormError>
+          <ComponentFormWarning>{errorMessage}</ComponentFormWarning>
         </>
       );
     default:

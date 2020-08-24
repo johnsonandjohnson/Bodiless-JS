@@ -73,7 +73,7 @@ const SaveChanges = (props: Props) => {
   const {
     ComponentFormTitle,
     ComponentFormLabel,
-    ComponentFormError,
+    ComponentFormWarning,
     ComponentFormText,
   } = getUI(ui);
   const { submits, invalid } = formState;
@@ -125,7 +125,7 @@ const SaveChanges = (props: Props) => {
     case SaveState.Errored:
       return (
         <>
-          <ComponentFormError>{errorMessage}</ComponentFormError>
+          <ComponentFormWarning>{errorMessage}</ComponentFormWarning>
         </>
       );
     case SaveState.Init: {
