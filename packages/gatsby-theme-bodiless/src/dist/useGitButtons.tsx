@@ -41,7 +41,7 @@ import { GitClient } from './types';
  * DefinePlugin is used by Gatsby to source env vars.
  * https://www.gatsbyjs.org/docs/environment-variables/#example.
  */
-const canCommit = 1; //(process.env.BODILESS_BACKEND_COMMIT_ENABLED || '0') === '1';
+const canCommit = 1; // (process.env.BODILESS_BACKEND_COMMIT_ENABLED || '0') === '1';
 const canAlertOnLoad = process.env.BODILESS_ALERT_ON_PAGE_LOAD_ENABLED || 1;
 
 const formGetCommitsList = (client: GitClient) => contextMenuForm({
@@ -53,7 +53,7 @@ const formGetCommitsList = (client: GitClient) => contextMenuForm({
     return (
       <>
         <ComponentFormTitle>Latest Commits</ComponentFormTitle>
-        <CommitsList client={client} />
+        <CommitsList client={client} ui={ui} />
       </>
     );
   },
@@ -102,8 +102,8 @@ const formGitReset = (client: GitClient) => contextMenuForm({
     if (keepOpen === false) window.location.reload();
     return keepOpen;
   },
-  onClose: ({ keepOpen }) => {
-    if (keepOpen === false) {
+  onClose: ({ reload }) => {
+    if (reload === true) {
       window.location.reload();
     }
   },
@@ -113,6 +113,7 @@ const formGitReset = (client: GitClient) => contextMenuForm({
     return (
       <>
         <ComponentFormText type="hidden" field="keepOpen" initialValue />
+        <ComponentFormText type="hidden" field="reload" initialValue={false} />
         <Reset ui={ui} formState={formState} formApi={formApi} client={client} />
       </>
     );

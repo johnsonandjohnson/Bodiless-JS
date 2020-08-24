@@ -55,6 +55,7 @@ const Reset = (props: Props) => {
       client.reset()
         .then(() => {
           setState({ status: ResetState.Complete });
+          formApi.setValue('reload', true);
         })
         .catch((error : AxiosError) => {
           setState({ status: ResetState.Errored, errorMessage: error.message });

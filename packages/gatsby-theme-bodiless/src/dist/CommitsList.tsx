@@ -13,7 +13,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { useEditContext } from '@bodiless/core';
+import { getUI, useEditContext } from '@bodiless/core';
 import { Spinner } from '@bodiless/ui';
 
 type Commit = {
@@ -91,6 +91,7 @@ const handleResponse = (responseData: ResponseData) => {
 
 type Props = {
   client: any,
+  ui: any,
 };
 
 const WrappedSpinner = () => (
@@ -99,7 +100,8 @@ const WrappedSpinner = () => (
   </div>
 );
 
-const CommitsList = ({ client }: Props) => {
+const CommitsList = ({ client, ui }: Props) => {
+  const { ComponentFormWarning } = getUI(ui);
   const [state, setState] = useState<{ content: any }>({ content: <WrappedSpinner /> });
   const context = useEditContext();
 
@@ -118,7 +120,7 @@ const CommitsList = ({ client }: Props) => {
       } catch (error) {
         const errorMessage = error.message || 'An unexpected error has occurred';
         setState({
-          content: errorMessage,
+          content: <ComponentFormWarning>{errorMessage}</ComponentFormWarning>,
         });
         context.hidePageOverlay();
       }
