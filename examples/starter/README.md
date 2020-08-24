@@ -55,11 +55,11 @@ As part of the installation process, you may want to configure specific
 environment variables for the site. You may do so by adding or updating
 `.env.site` file in the root folder of the site. This file allows us to
 overwrite env variables defined in `@bodiless` packages and/or add new env
-variables. The variables within system are provided with majority commented out
+variables. The variables within the system are provided with the majority commented out
 and not actively being used.
 
 Many of the plugins have a dependency to know the absolute url. This can be set
-once with SITE_URL, This URL is used by Canonical & Sitemap.xml plugins.
+once with SITE_URL. This URL is used by Canonical & Sitemap.xml plugins.
 
 #### Add the Favicon
 This can be done by replacing the favicon.png in `src/images/`.  It it uses
@@ -68,7 +68,7 @@ to generate a set of favicons for your site to use. For more information on
 options, please read the documentation for
 [gatsby-plugin-manifest](https://www.gatsbyjs.org/packages/gatsby-plugin-manifest/).
 
-If desired, this can be overrode by specifying custom options within the site's
+If desired, this can be overridden by specifying custom options within the site's
 `gatsby-config.js`.
 
 #### Start the Editing Site and add the Logo
@@ -86,8 +86,8 @@ alt text for your logo.
 For further details we highly recommend visiting the built in documentation:
 
 Click the Docs icon in toolbar or visit
-[(http://localhost:8000/___docs/#/Development/Guides/BuildingSites/) and read
-more in-depth of starting to build a site.
+[(http://localhost:8000/___docs/#/Development/Guides/BuildingSites/) to read
+more in-depth on how to start building a site.
 
 Then continue on in Edit mode and start adding menu items, new pages, adding
 content & update footer and start building your site.
