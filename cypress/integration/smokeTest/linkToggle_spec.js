@@ -135,7 +135,7 @@ describe('Link Toggle smoke tests', function () {
       .should('have.text', label + editedPostfix);
   })
 
-
+  // Add comment to toggle rebuild and test cypress on ci
   it('link toggle: 10 - checking that Remove Link removes a link in Preview mode', () => {
     cy.wait(1000);
     cy.clickEdit();
