@@ -35,12 +35,12 @@ editors.
 within the editor interface for the site editor to manipulate meta data per
 page.
 
-  First, import withMetaForm from @bodiless/components package:
+  First, import `withMetaForm` from @bodiless/components package:
   ```
   import withMetaForm from @bodiless/components;
   ```
   `withMetaForm` takes 2 parameters:
-  1. useGetMenuOptions: defines SEO form menu button appearance. 
+  1. `useGetMenuOptions`: defines SEO form menu button appearance. 
       ```
       {
         name: 'seo',                     // Menu item name
@@ -49,7 +49,7 @@ page.
         label: 'SEO',                    // Button label
       },
       ```
-  1. metaFormHeader: [Optional] defines SEO form title and description for users.
+  1. `seoFormHeader`: [Optional] defines SEO form title and description for users.
       ```
       {
         title: 'SEO Data form',
@@ -91,7 +91,7 @@ page.
   written by the editor. 
   
   The recommendation is the content editor can set the meta data per page, but the 
-  site-level meta is not exposed to content editor for modication. The reason being the 
+  site-level meta is not exposed to content editor for modification. The reason being the 
   site-level meta data is set once per site on the site build and changes very infrequently 
   to never, so there is little need to allow a content editor to change this data.
 
