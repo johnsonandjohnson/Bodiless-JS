@@ -48,7 +48,7 @@ const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
   })
   .catch((err: AxiosError) => {
     // Use back-end crafted error message if available.
-    let errMsg = `${err.message}:\n`;
+    let errMsg = `${err.message}\n`;
     if (err.response && err.response.data) {
       errMsg += err.response.data;
     }
@@ -80,6 +80,7 @@ const SaveChanges = (props: Props) => {
   const [state, setState] = useState<SaveStatus>({
     status: SaveState.Init,
   });
+  const formTitle = 'Upload changes';
   useEffect(() => {
     // If the form is submitted and valid then lets try reset.
     if (submits === 1 && invalid === false) {
@@ -125,13 +126,14 @@ const SaveChanges = (props: Props) => {
     case SaveState.Errored:
       return (
         <>
+          <ComponentFormTitle>{formTitle}</ComponentFormTitle>
           <ComponentFormWarning>{errorMessage}</ComponentFormWarning>
         </>
       );
     case SaveState.Init: {
       return (
         <>
-          <ComponentFormTitle>Upload Changes</ComponentFormTitle>
+          <ComponentFormTitle>{formTitle}</ComponentFormTitle>
           <ComponentFormLabel htmlFor="commit-txt">
             Description:
           </ComponentFormLabel>

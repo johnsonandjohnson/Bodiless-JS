@@ -91,7 +91,7 @@ const NewPageComp = (props : NewPageProps) => {
   } = getUI(ui);
   // ensure trailing slash is present
   const currentPage = window.location.href.replace(/\/?$/, '/');
-
+  const formTitle = 'Add a New Page';
   switch (status) {
     case NewPageState.Init: {
       const validate = useCallback(
@@ -102,7 +102,7 @@ const NewPageComp = (props : NewPageProps) => {
       );
       return (
         <>
-          <ComponentFormTitle>Add a New Page</ComponentFormTitle>
+          <ComponentFormTitle>{formTitle}</ComponentFormTitle>
           <ComponentFormLabel htmlFor="new-page-path">
             URL
             <br />
@@ -141,6 +141,7 @@ const NewPageComp = (props : NewPageProps) => {
     case NewPageState.Errored:
       return (
         <>
+          <ComponentFormTitle>{formTitle}</ComponentFormTitle>
           <ComponentFormWarning>{errorMessage}</ComponentFormWarning>
         </>
       );
