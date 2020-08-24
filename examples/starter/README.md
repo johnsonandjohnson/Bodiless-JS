@@ -62,7 +62,7 @@ Many of the plugins have a dependency to know the absolute url. This can be set
 once with SITE_URL. This URL is used by Canonical & Sitemap.xml plugins.
 
 #### Add the Favicon
-This can be done by replacing the favicon.png in `src/images/`.  It it uses
+This can be done by replacing the favicon.png in `src/images/`.  It uses
 [gatsby-plugin-manifest](https://www.gatsbyjs.org/packages/gatsby-plugin-manifest/)
 to generate a set of favicons for your site to use. For more information on
 options, please read the documentation for
