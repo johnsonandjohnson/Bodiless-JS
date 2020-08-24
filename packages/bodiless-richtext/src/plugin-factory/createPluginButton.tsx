@@ -14,13 +14,12 @@
 
 import React from 'react';
 import { Value } from 'slate';
-import MaterialIcon from '@material/react-material-icon';
 import {
   EditorContext,
   ToggleProps,
 } from '../Type';
 import { useSlateContext } from '../core';
-import { useUI } from '../RichTextContext';
+import PluginButton from '../components/PluginButton';
 
 const defaultButton = {
   defaultProps: {
@@ -38,23 +37,16 @@ type Opts = {
   isActive(value: Value): boolean;
   icon: string;
 };
-type uiIndexType = {
-  [index: string]:any;
-};
+
 const withToggle = <P extends requiredProps> (opts:Opts) => (
   (Component:any) => (props:P) => {
     const { toggle, isActive, icon } = opts;
     const { children, className = '' } = props;
     const editorContext: EditorContext = useSlateContext();
-
-    // Workaround to get styled component from UI if it exists with fallback to original Component.
-    const completeUI:uiIndexType = useUI();
-    const StyledComponent = (Component && Component.defaultProps && Component.defaultProps.name)
-      ? completeUI[Component.defaultProps.name]
-      : Component;
-
+    const componentName = Component.defaultProps ? Component.defaultProps.name : undefined;
     return (
-      <StyledComponent
+      <PluginButton
+        componentName={componentName}
         onMouseDown={
           () => toggle({
             editor: editorContext!.editor,
@@ -64,9 +56,10 @@ const withToggle = <P extends requiredProps> (opts:Opts) => (
         className={`${
           isActive(editorContext!.value) ? 'active bl-active' : ''
         } ${className}`}
+        icon={icon}
       >
-        {children || <MaterialIcon className="bl-material-icons" icon={icon} />}
-      </StyledComponent>
+        {children}
+      </PluginButton>
     );
   }
 );
