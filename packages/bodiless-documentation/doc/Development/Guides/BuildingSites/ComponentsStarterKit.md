@@ -27,13 +27,15 @@ non-editable (static) meta data into head section from
 For full code, please
 [review code](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/test-site/src/components/Layout/meta.tsx).
 
-Below, it is illustrated how to add the meta data to page head and make it editable for site 
+See below for instructions on how to add meta data to a page's head and make it editable for site 
 editors.
 
 - #### Adding SEO form to Editor interface
   The `withMetaForm` provides ability to insert a SEO form
 within the editor inferface for the site editor to manipulate meta date per
-page. So first, import withMetaForm from @bodiless/components package: 
+page.
+
+  First, import withMetaForm from @bodiless/components package:
   ```
   import withMetaForm from @bodiless/components;
   ```
@@ -54,23 +56,27 @@ page. So first, import withMetaForm from @bodiless/components package:
       description: `Enter the page level data used for SEO ...`
     };
     ```
-  Then, apply this HOC to Helment component:
+  Then, apply this HOC to Helmet component:
   ```
   const SeoHelmet = withMetaForm(useGetMenuOptions, seoFormHeader)(Helmet);
   ```
 - #### Adding meta data fields to Editor interface
-  Next, define the form fields so site editor could update content of meta data displayed 
-  on the head section of each page. For example, to add editable meta description field, first import withMeta from '@bodiless/components', then create HOC withMetaPageDescription with meta field name `description`, form field label `Description` and a placeholder text, i.e.
-  ```
-  const withMetaPageDescription = withMeta({
-    name: 'description',
-    useFormElement: () => useMenuOptionUI().ComponentFormTextArea,
-    label: 'Description',
-    placeholder: 'Rec < 160 char',
-  });
-  ```
-  where useFormElement provides function that returns an UI input component, i.e. *ComponentFormText*, *ComponentFormTextArea*, etc.
-  To apply this field to meta form previously created, you can use flowRight:
+  Next, define the form fields so site editor can update content of meta data displayed 
+  on the head section of each page. For example, to add editable meta description field:
+  1. Import withMeta from '@bodiless/components'.
+  1. Create HOC withMetaPageDescription with meta field name `description`, form field label `Description` and a placeholder text.
+  e.g.:
+      ```
+      const withMetaPageDescription = withMeta({
+        name: 'description',
+        useFormElement: () => useMenuOptionUI().ComponentFormTextArea,
+        label: 'Description',
+        placeholder: 'Rec < 160 char',
+      });
+      ```
+  ***useFormElement*** provides a function that returns a UI input component (e.g. "ComponentFormText", "ComponentFormTextArea", etc.).
+
+  To apply this field to the meta form previously created, you can use flowRight:
   ``` 
   const SeoHelmet = flowRight(
     withMetaForm(useGetMenuOptions, seoFormHeader),
@@ -78,7 +84,7 @@ page. So first, import withMetaForm from @bodiless/components package:
     withMetaPageDescription('description', ''),
   )(Helmet);
   ```
-  here, asBodilessHelmet HOC specifies `meta` as nodeKey for server side storage, and the description content will be saved in data file named `meta$description.json`.
+  ***asBodilessHelmet*** HOC specifies `meta` as nodeKey for server side storage, and the description content will be saved in data file named `meta$description.json`.
 - #### Meta data rendering
   In addition fo defining the form fields, the calls to `withMeta*` also render
 the meta-tags to the page document head, using data from json objects which were
