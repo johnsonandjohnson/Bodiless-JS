@@ -28,3 +28,4 @@ export {
   withTailwindClasses,
 } from './FlowContainer/utils/appendTailwindWidthClass';
 export * from './meta';
+export { ifComponentSelector } from './FlowContainer/ComponentDisplayMode';

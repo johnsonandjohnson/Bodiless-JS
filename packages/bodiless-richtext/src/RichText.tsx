@@ -56,10 +56,6 @@ import {
   getSchema,
   getSelectorButtons,
 } from './RichTextItemGetters';
-import { withId, asMark } from './RichTextItemSetters';
-import {
-  RichTextComponents, RichTextComponent,
-} from './Type';
 import TextSelectorButton from './components/TextSelectorButton';
 import { uiContext, getUI, UI } from './RichTextContext';
 import defaultValue from './default-value';
@@ -77,6 +73,9 @@ import {
   withHeader2Meta,
   withHeader3Meta,
 } from './meta';
+import withDefaults from './withDefaults';
+import { withPreview } from './RichTextPreview';
+import type { RichTextProps } from './Type';
 
 type WithSlateSchemaTypeProps = {
   schema: object,
@@ -171,13 +170,6 @@ const RichTextProvider = flowRight(
   withSlateSchema,
 )(React.Fragment) as RichTextProviderType;
 
-export type RichTextProps<P> = {
-  components: DesignableComponents,
-  ui?: UI,
-  initialValue?: object,
-  nodeKey?: string,
-};
-
 /**
  * @private
  * Observer wrapper around hover menu which hides it when not in edit mode.
@@ -190,22 +182,6 @@ const EditOnlyHoverMenu$: FC<Pick<Required<UI>, 'HoverMenu'>> = ({ HoverMenu, ch
 };
 const EditOnlyHoverMenu = observer(EditOnlyHoverMenu$);
 
-/**
- * ensure the componets have a type (we default to mark) as well as ensuring there is an id
- * @param components which set of component on which we should operate
- */
-const withDefaults = (components: DesignableComponents) => {
-  const withDefaultType = (Component: ComponentType<any>) => (
-    // eslint-disable-next-line no-prototype-builtins
-    Component.hasOwnProperty('type') ? Component : asMark(Component)
-  );
-  return Object.getOwnPropertyNames(components).reduce(
-    (acc, id) => (
-      { ...acc, [id]: flow(withDefaultType, withId(id))(acc[id]) as RichTextComponent }
-    ),
-    components,
-  ) as RichTextComponents;
-};
 const BasicRichText = <P extends object, D extends object>(props: P & RichTextProps<D>) => {
   const {
     initialValue,
@@ -299,5 +275,10 @@ const apply = (design: Design<DesignableComponents>) => {
   const finalDesign = pick(lastDesign, Object.getOwnPropertyNames(design));
   return applyDesign(start)(extendDesign(finalDesign)(design));
 };
-const RichText = designable(apply)(BasicRichText);
+
+const RichText = flow(
+  withPreview,
+  designable(apply),
+)(BasicRichText);
+
 export default RichText;
