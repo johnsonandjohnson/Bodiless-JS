@@ -143,7 +143,7 @@ describe('Link Toggle smoke tests', function () {
       .should('not.exist');
     cy.xpath(labelPreviewXpath)
       .should('have.text', label + editedPostfix);
-    cy.visit('/link-toggle/');
+    cy.visit('/link-toggle/'); // Comment to toggle Build
     cy.xpath(labelPreviewXpath)
       .click();
     cy.url().should('eq', Cypress.config().baseUrl + '/link-toggle/');
