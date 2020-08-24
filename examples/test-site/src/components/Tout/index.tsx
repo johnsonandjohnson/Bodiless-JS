@@ -17,6 +17,7 @@ import {
   ifEditable,
   withDefaultContent,
   withResetButton,
+  withSidecarNodes,
 } from '@bodiless/core';
 import {
   ToutClean,
@@ -36,11 +37,15 @@ const asNonDraggable = addProps({ draggable: false });
 export const withToutEditors = flow(
   withDesign({
     Image: asEditableImage('image'),
-    ImageLink: asEditableLink('cta'),
+    ImageLink: withSidecarNodes(
+      asEditableLink('link'),
+    ),
     Title: withEditorSimple('title', 'Tout Title Text'),
     Link: flow(
-      withEditorSimple('text', 'CTA'),
-      asEditableLink('cta'),
+      withEditorSimple('ctatext', 'CTA'),
+      withSidecarNodes(
+        asEditableLink('link'),
+      ),
       ifEditable(asNonDraggable),
     ),
     Body: withEditorBasic('body', 'Tout Body Text'),
@@ -48,10 +53,10 @@ export const withToutEditors = flow(
 );
 
 export const withToutResetButtons = withDesign({
-  ImageLink: withResetButton({ nodeKey: 'cta$image' }),
+  ImageLink: withResetButton({ nodeKey: ['image', 'link'] }),
   Title: withResetButton({ nodeKey: 'title' }),
   Body: withResetButton({ nodeKey: 'body' }),
-  Link: withResetButton({ nodeKey: 'cta' }),
+  Link: withResetButton({ nodeKey: ['link', 'ctatext'] }),
 });
 
 export const asEditableTout = flow(
