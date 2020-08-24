@@ -17,12 +17,14 @@ import {
   withTitle,
   withFacet,
   withDesc,
+  ifComponentSelector,
 } from '@bodiless/layouts';
 import {
   varyDesign,
   replaceWith,
   withDesign,
 } from '@bodiless/fclasses';
+import { asPreview } from '@bodiless/richtext';
 
 import {
   EditorBasic,
@@ -36,6 +38,7 @@ const withRichText = withFacet('Rich Text');
 const richTextVariation = {
   EditorSimple: flow(
     replaceWith(EditorSimple),
+    ifComponentSelector(asPreview),
     withType('Rich Text')(),
     withRichText('Simple')(),
     withTitle('Simple Rich Text'),
@@ -43,6 +46,7 @@ const richTextVariation = {
   ),
   EditorBasic: flow(
     replaceWith(EditorBasic),
+    ifComponentSelector(asPreview),
     withType('Rich Text')(),
     withRichText('Basic')(),
     withTitle('Basic Rich Text'),
@@ -50,6 +54,7 @@ const richTextVariation = {
   ),
   EditorFullFeatured: flow(
     replaceWith(EditorFullFeatured),
+    ifComponentSelector(asPreview),
     withType('Rich Text')(),
     withRichText('Full')(),
     withTitle('Full Rich Text'),
