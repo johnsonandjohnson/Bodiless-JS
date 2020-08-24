@@ -20,6 +20,8 @@ import {
   BasicEditorProps,
   EditorProps,
 } from 'slate-react';
+import type { DesignableComponents } from '@bodiless/fclasses';
+import type { UI } from './RichTextContext';
 
 export enum RichTextItemType {
   block = 'BLOCK',
@@ -85,4 +87,11 @@ export type RichTextComponent = ComponentType<any> & {
 
 export type RichTextComponents = {
   [key:string]: RichTextComponent,
+};
+
+export type RichTextProps<P> = {
+  components: DesignableComponents,
+  ui?: UI,
+  initialValue?: object,
+  nodeKey?: string,
 };
