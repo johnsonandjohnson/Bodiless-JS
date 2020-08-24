@@ -28,6 +28,7 @@ import { asEditableImage } from '../Elements.token';
 type LogoComponents = {
   SiteReturn: ComponentType<any>,
   SiteLogo: ComponentType<any>,
+  SiteLink: ComponentType<any>,
 };
 export type Props = DesignableComponentsProps<LogoComponents> & HTMLProps<HTMLElement>;
 
