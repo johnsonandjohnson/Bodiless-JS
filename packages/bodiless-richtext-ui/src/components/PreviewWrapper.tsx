@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,15 +12,8 @@
  * limitations under the License.
  */
 
-export {
-  default as RichText,
-} from './RichText';
-export { asPreview } from './RichTextPreview';
-export { default as asFloat } from './Float';
-export * from './RichTextItemGetters';
-export * from './RichTextItemSetters';
-export * from './Type';
-export * from './plugin-factory';
-export * from './components';
-export * from './core';
-export * from './meta';
+import { Div, addClasses } from '@bodiless/fclasses';
+
+const PreviewWrapper = addClasses('bl-block bg-black')(Div);
+
+export default PreviewWrapper;
