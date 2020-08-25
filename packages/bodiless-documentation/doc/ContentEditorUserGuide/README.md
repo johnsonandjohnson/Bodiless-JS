@@ -23,6 +23,8 @@ allows you to interact with your site as an end user would, while Edit Mode
 allows you to edit content directly on your site. The Edit button on the Toolbar
 lets you quickly toggle back and forth between edit mode and review mode.
 
+![](./assets/ReviewmodeHome.jpg)
+
 ### Review Mode
 
 The Edit Interface defaults to the Review mode. In Review Mode, you can navigate
@@ -165,7 +167,7 @@ To create a new page click on the "Page" button in the toolbar.
 
 ![](./assets/EditFlow.jpg)
 
-In BodilessJS pages are laid out using the Flow Container. The Flow Container is a
+In BodilessJS pages can be laid out using the Flow Container. The Flow Container is a
 layout tool which uses css flexbox templates to form the skeleton of BodilessJS
 pages. Within the Flow Container, components can easily be moved around and
 resized. 
