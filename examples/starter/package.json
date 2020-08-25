@@ -35,6 +35,7 @@
     "gatsby": "^2.19.17",
     "gatsby-plugin-canonical-urls": "^2.1.18",
     "gatsby-plugin-sitemap": "^2.2.24",
+    "gatsby-plugin-google-tagmanager": "^2.1.4",
     "lodash": "^4.17.19",
     "ora": "^4.0.2",
     "react": "^16.11.0",
