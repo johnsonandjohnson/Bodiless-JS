@@ -24,6 +24,7 @@ const defaultUI = {
   Overlay: 'div',
   CloseButton: 'span',
   ClickableWrapper: 'button',
+  PreviewWrapper: 'div',
 };
 
 export type UI = {
@@ -34,7 +35,11 @@ export type UI = {
   ClickableWrapper?: ComponentType<HTMLProps<HTMLButtonElement>> | string;
 };
 
-export const getUI = (ui: UI = {}) => ({
+export type PreviewUI = {
+  PreviewWrapper?: ComponentType<HTMLProps<HTMLDivElement>> | string;
+};
+
+export const getUI = (ui: UI & PreviewUI = {}) => ({
   ...defaultUI,
   ...ui,
 });
