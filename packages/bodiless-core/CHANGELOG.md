@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.54](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.53...v0.0.54) (2020-08-24)
+
+
+### Features
+
+* **test-site:** Image component: 'swap' operation is not transfering data between linkable and non-linkable components ([#507](https://github.com/johnsonandjohnson/bodiless-js/issues/507)) ([bbe8302](https://github.com/johnsonandjohnson/bodiless-js/commit/bbe830292aa604e438425fe2dccf41af7d7d2bb9))
+
+
+
+
+
 ## [0.0.53](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.52...v0.0.53) (2020-08-13)
 
 
