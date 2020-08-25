@@ -40,7 +40,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
       .type(pdpURL);
     cy.xpath(checkmarkIconAddPageFormXpath)
       .click();
-    cy.xpath(newPageLinkXpathcommits-list.test.tsx,{ timeout: 10000 } ).click();
+    cy.xpath(newPageLinkXpath,{ timeout: 10000 } ).click();
     cy.url().should('eq', Cypress.config().baseUrl + '/products/' + pdpURL);
   })
 
