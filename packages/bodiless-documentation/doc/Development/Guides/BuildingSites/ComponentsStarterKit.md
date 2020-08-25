@@ -74,7 +74,7 @@ page.
         placeholder: 'Rec < 160 char',
       });
       ```
-  ***useFormElement*** provides a function that returns a UI input component (e.g. "ComponentFormText", "ComponentFormTextArea", etc.).
+      ***useFormElement*** provides a function that returns a UI input component (e.g. "ComponentFormText", "ComponentFormTextArea", etc.).
 
   To apply this field to the meta form previously created, you can use flowRight:
   ``` 
