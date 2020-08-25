@@ -376,7 +376,7 @@ const PullChanges = (
   const { complete, error } = pullStatus;
   if (error) return <>{error}</>;
   if (complete) {
-    return <>Operation complete, page will refresh.</>;
+    return <>Pull success, your Edit Environment is up to date!</>;
   }
   return <ComponentFormSpinner />;
 };
