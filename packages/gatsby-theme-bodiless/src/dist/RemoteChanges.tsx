@@ -57,10 +57,10 @@ enum MessageCode {
   PullConflictConfirm = 1004,
   PullConflictAbort = 1005,
   PullMasterAbort = 1006,
-  PullUpstreamAbort = 1006,
-  PullChangeAvailable = 1007,
-  PullMasterAvailable = 1008,
-  PullNonContentOnly = 1009,
+  PullUpstreamAbort = 1007,
+  PullChangeAvailable = 1008,
+  PullMasterAvailable = 1009,
+  PullNonContentOnly = 1010,
 }
 
 /**
@@ -297,6 +297,9 @@ const FetchChanges = (
               }
             }
           }
+        } else if (upstream.hasUpdates) {
+          setState({ messageCode: MessageCode.PullChangeAvailable, messageData: [] });
+          formApi.setValue('mergeMaster', true);
         } else {
           setState({ messageCode: MessageCode.PullNoChange, messageData: [] });
           formApi.setValue('mergeMaster', false);
