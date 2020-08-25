@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.54](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.53...v0.0.54) (2020-08-24)
+
+
+### Features
+
+* **fclasses:** Allow adding/removing classes conditionally via fclasses ([#440](https://github.com/johnsonandjohnson/bodiless-js/issues/440)) ([d3d522b](https://github.com/johnsonandjohnson/bodiless-js/commit/d3d522b22e88e39a86f7c36fb21cd7b0dfd978da))
+* **layouts:** Update the Rich Text Options in the Component Picker ([#497](https://github.com/johnsonandjohnson/bodiless-js/issues/497)) ([28a0771](https://github.com/johnsonandjohnson/bodiless-js/commit/28a0771e3a4fb84bcde24b7894d32be742a98b81))
+* **test-site:** Image component: 'swap' operation is not transfering data between linkable and non-linkable components ([#507](https://github.com/johnsonandjohnson/bodiless-js/issues/507)) ([bbe8302](https://github.com/johnsonandjohnson/bodiless-js/commit/bbe830292aa604e438425fe2dccf41af7d7d2bb9))
+
+
+### BREAKING CHANGES
+
+* **fclasses:** chaining support is removed from addClasses and removeClasses. If your code contains chained addClasses/removeClasses, you need to replace the chaining with flow/flowIf or any other helpers that provides functional composition.
+For example, when you have in your code
+```
+addClasses('classA').removeClasses('classB')
+```
+you need to change it to
+```
+flow(
+  addClasses('classA'),
+  removeClasses('classB'),
+)
+```
+
+
+
+
+
 ## [0.0.53](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.52...v0.0.53) (2020-08-13)
 
 
