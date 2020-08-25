@@ -94,7 +94,7 @@ const ContextMenuItem = observer((props: IProps) => {
         overlay={getContextMenuForm()}
         visible={isToolTipShown}
         destroyTooltipOnHide
-        align={{ offset: [10, 0], useCssRight }}
+        align={{ offset: [5, 0], useCssRight }}
       >
         <Icon isActive={isActive || isToolTipShown}>{icon}</Icon>
       </Tooltip>
