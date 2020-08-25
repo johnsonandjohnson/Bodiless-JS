@@ -2,8 +2,9 @@
 
 BodilessJS provides tools which allow non-developers to edit content inline
 using a browser, referred to in this document as the Edit Interface. For more
-information about launching the Edit Interface please see the Getting Started
-Documentation, note this will require some technical experience.
+information about launching the Edit Interface please see the [Getting Started
+documentation](../../../About/GettingStarted?id=creating-a-new-site) - _note this 
+will require some technical experience._
 
 This guide focuses on 3 main parts:
 1. Edit Interface - including how to work with the tool bar and the editing
@@ -50,12 +51,12 @@ default, the edit interface begins in review mode.
 
 | Review Mode | Edit Mode |
 |-------------|-----------|
-| ![](./ToolbarReview.jpg) | ![](./ToolbarEdit.jpg) |
+| ![](./assets/ToolbarReview.jpg) | ![](./assets/ToolbarEdit.jpg) |
 
 
 * #### Location Switcher
 
-  ![](./Switcher)
+  ![](./assets/Switcher)
 
   The default position of this toolbar is the lefthand side of the page. You can
   click the location switcher button to move the admin toolbar to the righthand
@@ -64,7 +65,7 @@ default, the edit interface begins in review mode.
 
 * #### Alerts
 
-  ![](./Alerts.jpg)
+  ![](./assets/Alerts.jpg)
 
   The **Alerts** button on the Toolbar notifies you when there have been changes
   in your site's environment. If changes exist the Alerts button will be
@@ -75,19 +76,19 @@ default, the edit interface begins in review mode.
 
 * #### Docs
 
-  ![](./Docs.jpg)
+  ![](./assets/Docs.jpg)
 
   The **Docs** button opens BodilessJS documentation in a new browser tab.
 
 ### Workflow
 
-![](./File1.jpg)
+![](./assets/File1.jpg)
 
 The **File** icon gives you the ability to manage your site's workflow. The
 following options are available in the File submenu: Pull, Push, Revert,
 History.
 
-![](./File.jpg)
+![](./assets/File.jpg)
 
 * #### Pull
 
@@ -116,7 +117,7 @@ you can manage your site's metadata. Here you can enter a page's Title,
 Description and Page Type so that your page's search engine result page will be
 as effective as possible. 
 
-![](./Seo.jpg)
+![](./assets/Seo.jpg)
 
 * Title: Usually shown as title in search results 
 * Description: Usually shown
@@ -129,31 +130,31 @@ in snippet for search results.
 Clicking on the *Edit* icon in the Tool Bar will transition the site into Edit
 Mode. _In Edit Mode the *Edit* icon will appear highlighted in blue._
 
-![](./EditScreen.jpg)
+![](./assets/EditScreen.jpg)
 
 #### Page
 
-![](./PageIcon.jpg)
+![](./assets/PageIcon.jpg)
 
 Clicking the Page button will create a new page for your site. 
 
 When you click on the Page button you will be prompted to enter the url you wish
 to use for the new page. 
 
-![](./AddPage1.jpg)
+![](./assets/AddPage1.jpg)
 
 Enter the new url and then click the checkmark to finish creating the new page.
 
-![](./AddPage2.jpg)
+![](./assets/AddPage2.jpg)
 
 In BodilessJS, pages utilize
-[templates](https://johnsonandjohnson.github.io/Bodiless-JS/#/Development/Guides/BuildingSites/Templates/Templates).
+[templates](../../../Development/Guides/BuildingSites/Templates/Templates).
 Developers use templates to define page layout to maintain uniformity and
 consistency across content types and sections.
 
 Pages are added as part of the section in which it was created. The newly
 created page will use the
-[template](https://johnsonandjohnson.github.io/Bodiless-JS/#/Development/Guides/BuildingSites/Templates/Templates)
+[template](../../../Development/Guides/BuildingSites/Templates/Templates)
 associated with that section.
 
 To create a new page click on the "Page" button in the toolbar.
@@ -162,7 +163,7 @@ To create a new page click on the "Page" button in the toolbar.
 
 #### Flow Container
 
-![](./EditFlow.jpg)
+![](./assets/EditFlow.jpg)
 
 In BodilessJS pages are laid out using the Flow Container. The Flow Container is a
 layout tool which uses css flexbox templates to form the skeleton of BodilessJS
@@ -179,7 +180,7 @@ to the Flow Container via the menu.
 
 #### Component Library
 
-![](./ComponentLibrary.jpg)
+![](./assets/ComponentLibrary.jpg)
 
 The component library allows you to change components on your page so that you
 can easily update the layout of your site. 
