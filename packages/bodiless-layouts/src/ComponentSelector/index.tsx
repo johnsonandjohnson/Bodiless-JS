@@ -14,6 +14,7 @@
 
 import React, { ReactElement, useState } from 'react';
 import PropTypes from 'prop-types';
+import { pickBy } from 'lodash';
 
 import { AllCheckbox, FilterWrapper } from './FilterWrapper';
 import SearchWrapper from './SearchWrapper';
@@ -35,6 +36,29 @@ export { defaultUI } from './uiContext';
 
 export { uiContext };
 
+const applyMandatoryCategories = (components: any, mandatoryCategories: string[]) => {
+  mandatoryCategories.forEach(mandatoryCategory => {
+    components.forEach((component: any) => {
+      if (!(mandatoryCategory in component.categories)) {
+        // eslint-disable-next-line no-param-reassign
+        component.categories[mandatoryCategory] = ['N/A'];
+      }
+    });
+  });
+};
+
+/**
+ * reduce filters so that filter is picked
+ * when at least one of it's terms applies or associated with ALL of the components
+ * @param filters
+ * @param components
+ */
+const reduceFilters = (filters: any, components: any) => pickBy(
+  filters,
+  (value: any, category: string) => components
+    .every((component: any) => (category in component.categories)),
+);
+
 const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
   const {
     components: allComponents, ui, onSelect, mandatoryCategories,
@@ -47,12 +71,19 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
     return { ...defaultUI, ...ui };
   }
 
+  if (mandatoryCategories) {
+    applyMandatoryCategories(allComponents, mandatoryCategories);
+  }
+
   const newCompRender = getFilteredComponents(
     allComponents,
     activeFilters,
     activeSearch,
   );
-  const filters = getFiltersByComponentList(newCompRender);
+  const filters = reduceFilters(
+    getFiltersByComponentList(newCompRender),
+    newCompRender,
+  );
   const allFilters = getFiltersByComponentList(allComponents);
 
   const finalUI = useUI();

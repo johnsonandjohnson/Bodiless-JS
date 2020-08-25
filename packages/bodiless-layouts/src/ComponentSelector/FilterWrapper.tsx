@@ -96,7 +96,6 @@ export const FilterWrapper = (props: any) => {
     filters,
     activeFilter,
     setActiveFilters,
-    mandatoryCategories,
   } = props;
   const finalUI:FinalUI = useContext(uiContext);
   const isTermDisabled = (category: string, term: string) => Object.entries(filters).length === 0
@@ -104,44 +103,30 @@ export const FilterWrapper = (props: any) => {
     || !filters[category].includes(term);
   const areAllTermsDisabled = (category: string) => allfilters[category]
     .every((term: string) => isTermDisabled(category, term));
-  const isCategoryMandatory = (category: string) => mandatoryCategories
-    && mandatoryCategories.includes(category);
   return (
     <finalUI.ComponentSelectorWrapper>
       {Object.keys(allfilters).map(category => {
         if (allfilters[category].length > 0) {
-          if (areAllTermsDisabled(category) && !isCategoryMandatory(category)) {
+          if (areAllTermsDisabled(category)) {
             return true;
           }
           return (
             <Dropdown type={category} key={category}>
-              {
-              areAllTermsDisabled(category) && isCategoryMandatory(category)
-                ? (
-                  <Checkbox
-                    key="NA"
-                    type="N/A"
-                    disabled
-                    isChecked={false}
-                    onToggle={() => { }}
-                  />
-                )
-                : allfilters[category].map((value: string) => (
-                  <Checkbox
-                    key={value}
-                    type={value}
-                    disabled={isTermDisabled(category, value)}
-                    onToggle={() => {
-                      if (activeFilter.indexOf(value) !== -1) {
-                        setActiveFilters(removefromArray(activeFilter, value));
-                      } else {
-                        setActiveFilters(addtoArray(activeFilter, value));
-                      }
-                    }}
-                    isChecked={activeFilter.indexOf(value) !== -1}
-                  />
-                ))
-            }
+              {allfilters[category].map((value: string) => (
+                <Checkbox
+                  key={value}
+                  type={value}
+                  disabled={isTermDisabled(category, value)}
+                  onToggle={() => {
+                    if (activeFilter.indexOf(value) !== -1) {
+                      setActiveFilters(removefromArray(activeFilter, value));
+                    } else {
+                      setActiveFilters(addtoArray(activeFilter, value));
+                    }
+                  }}
+                  isChecked={activeFilter.indexOf(value) !== -1}
+                />
+              ))}
             </Dropdown>
           );
         }
