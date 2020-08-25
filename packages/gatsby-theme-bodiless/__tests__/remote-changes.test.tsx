@@ -109,7 +109,7 @@ describe('Fetch Changes component', () => {
     });
   });
 
-  it('should indicate no change to download if only upstream changes', async () => {
+  it('should indicate changes to download if upstream changes', async () => {
     const wrapper = mount(
       <FetchChanges
         client={upstreamChangesOnlyClient}
@@ -119,7 +119,7 @@ describe('Fetch Changes component', () => {
     );
     return new Promise(resolve => setImmediate(resolve)).then(() => {
       wrapper.update();
-      expect(wrapper.text()).toBe('No changes are available, your Edit Environment is up to date!');
+      expect(wrapper.text()).toBe('There are updates available to be pulled. Click check (✓) to initiate.');
     });
   });
 
@@ -187,7 +187,7 @@ describe('Pull Changes component', () => {
     );
     return new Promise(resolve => setImmediate(resolve)).then(() => {
       wrapper.update();
-      expect(wrapper.text()).toBe('Operation complete, page will refresh.');
+      expect(wrapper.text()).toBe('Pull success, your Edit Environment is up to date!');
     });
   });
 });
