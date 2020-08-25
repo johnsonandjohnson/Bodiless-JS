@@ -91,7 +91,7 @@ const handleResponse = (responseData: ResponseData) => {
 
 type Props = {
   client: any,
-  ui: any,
+  ui?: any,
 };
 
 const WrappedSpinner = () => (
