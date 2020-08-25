@@ -21,7 +21,7 @@ import {
 } from '@bodiless/core';
 import {
   ComponentFormTitle, ComponentFormLabel, ComponentFormText, ComponentFormButton,
-  ComponentFormCloseButton, ComponentFormSubmitButton, Icon, Div, ToolbarButton,
+  ComponentFormCloseButton, ComponentFormSubmitButton, ToolbarIcon, Div, HorizontalToolbarButton,
   ComponentFormUnwrapButton, ComponentFormTextArea, ComponentFormDescription, ComponentFormWarning,
   ComponentFormFieldWrapper, ComponentFormFieldTitle, ComponentFormCheckBox, ComponentFormRadio,
   ComponentFormRadioGroup, ComponentFormSelect, ComponentFormOption, ContextSubMenu,
@@ -61,9 +61,9 @@ const ui: ContextMenuUI = {
   ComponentFormDescription,
   ContextSubMenu,
   ComponentFormWarning,
-  Icon,
+  Icon: ToolbarIcon,
   Toolbar,
-  ToolbarButton,
+  ToolbarButton: HorizontalToolbarButton,
   ToolbarButtonLabel,
   Tooltip: LocalTooltip,
   ReactTags: ReactTagsField,
