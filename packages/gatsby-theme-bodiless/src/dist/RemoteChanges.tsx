@@ -300,6 +300,7 @@ const FetchChanges = (
         } else if (upstream.hasUpdates) {
           setState({ messageCode: MessageCode.PullChangeAvailable, messageData: [] });
           formApi.setValue('mergeMaster', true);
+          formApi.setValue('keepOpen', true);
         } else {
           setState({ messageCode: MessageCode.PullNoChange, messageData: [] });
           formApi.setValue('mergeMaster', false);
