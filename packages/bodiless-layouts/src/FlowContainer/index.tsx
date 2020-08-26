@@ -22,6 +22,7 @@ import {
 import {
   withDesign,
   addClasses,
+  addProps,
 } from '@bodiless/fclasses';
 import EditFlowContainer from './EditFlowContainer';
 import StaticFlowContainer from './StaticFlowContainer';
@@ -41,5 +42,10 @@ const FlowContainerDesignable = flow(
   }),
 )(FlowContainerBasic);
 
+const withMandatoryCategories = (categories: string[]) => addProps({
+  mandatoryCategories: categories,
+});
+
 const FlowContainer = withNode(FlowContainerDesignable);
 export default FlowContainer;
+export { withMandatoryCategories };
