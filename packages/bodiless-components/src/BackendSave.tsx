@@ -38,10 +38,10 @@ export default class BackendSave {
     return axios.post(this.root + resourcePath, data, config);
   }
 
-  saveFile(file: string) {
+  saveFile(file: File, distFolder: string) {
     // eslint-disable-next-line no-undef
     const payload = new FormData();
-    payload.append('file', file);
+    payload.append('file', file, `${distFolder}/${file.name}`);
     this.cancelTokenSource = axios.CancelToken.source();
     return this.post(`${this.prefix}/asset/`, payload, {
       cancelToken: this.cancelTokenSource.token,

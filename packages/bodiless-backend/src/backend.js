@@ -504,6 +504,9 @@ class Backend {
       // every time a file has been uploaded successfully,
       // copy to static path with orignal name
       form.on('file', (field, file) => {
+        const folderPath = path.join(backendStaticPath, file.name.substring(0, file.name.lastIndexOf('/')));
+        if (!fs.existsSync(folderPath)) fs.mkdirSync(folderPath);
+
         fs.copyFile(file.path, path.join(backendStaticPath, file.name), err => {
           if (err) throw err;
           fs.unlinkSync(file.path);
