@@ -13,8 +13,9 @@
  */
 
 /* eslint-disable no-alert */
-import React, { useState, useEffect, useCallback } from 'react';
-import Cookies from 'universal-cookie';
+import React, {
+  useState, useEffect, useCallback,
+} from 'react';
 import {
   contextMenuForm,
   getUI,
@@ -24,14 +25,13 @@ import {
   useRegisterMenuOptions,
   ContextSubMenu,
 } from '@bodiless/core';
-import { AxiosPromise } from 'axios';
 import BackendClient from './BackendClient';
 import CommitsList from './CommitsList';
 import RemoteChanges from './RemoteChanges';
+import Reset from './Reset';
+import SaveChanges from './SaveChanges';
 import { GitClient } from './types';
 
-const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
-const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
 /**
  * DefinePlugin env var.
  *
@@ -44,32 +44,6 @@ const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
 const canCommit = (process.env.BODILESS_BACKEND_COMMIT_ENABLED || '0') === '1';
 const canAlertOnLoad = process.env.BODILESS_ALERT_ON_PAGE_LOAD_ENABLED || 1;
 
-const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
-  .then(res => {
-    if (res.status === 200) {
-      // @TODO: Display the response in a component instead of an alert.
-      // eslint-disable-next-line no-undef
-      if (typeof callback === 'function') {
-        callback();
-      } else {
-        alert('Operation successful.');
-      }
-    } else {
-      // eslint-disable-next-line no-undef
-      alert('An unknown error has occured.');
-    }
-  })
-  .catch(err => {
-    // Use back-end crafted error message if available.
-    if (err.response && err.response.data) {
-      // eslint-disable-next-line no-undef
-      alert(err.response.data);
-    } else {
-      // eslint-disable-next-line no-undef
-      alert(err.message);
-    }
-  });
-
 const formGetCommitsList = (client: GitClient) => contextMenuForm({
   // @todo: handle what happens when user selects a commit from the loaded list.
   submitValues: () => {},
@@ -79,38 +53,22 @@ const formGetCommitsList = (client: GitClient) => contextMenuForm({
     return (
       <>
         <ComponentFormTitle>Latest Commits</ComponentFormTitle>
-        <CommitsList client={client} />
+        <CommitsList client={client} ui={ui} />
       </>
     );
   },
 );
 
-// Get the author from the cookie.
-const cookies = new Cookies();
-const author = cookies.get('author');
 const formGitCommit = (client: GitClient) => contextMenuForm({
-  submitValues: (submitValues: any) => {
-    handle(
-      client.commit(
-        submitValues.commitMessage,
-        [backendFilePath, backendStaticPath],
-        [],
-        [],
-        author,
-      ),
-    );
-  },
-})(({ ui }: any) => {
-  const { ComponentFormTitle, ComponentFormLabel, ComponentFormText } = getUI(
+  submitValues: ({ keepOpen } : any) => keepOpen,
+})(({ ui, formApi, formState }: any) => {
+  const { ComponentFormText } = getUI(
     ui,
   );
   return (
     <>
-      <ComponentFormTitle>Upload Changes</ComponentFormTitle>
-      <ComponentFormLabel htmlFor="commit-txt">
-        Description:
-      </ComponentFormLabel>
-      <ComponentFormText field="commitMessage" id="commit-txt" />
+      <ComponentFormText type="hidden" field="keepOpen" initialValue />
+      <SaveChanges ui={ui} formState={formState} formApi={formApi} client={client} />
     </>
   );
 });
@@ -138,37 +96,25 @@ const formGitPull = (client: GitClient, notifyOfChanges: ChangeNotifier) => cont
   );
 });
 
-const formGitReset = (client: GitClient, context: any) => contextMenuForm({
-  submitValues: () => {
-    (async () => {
-      context.showPageOverlay({
-        message: 'Revert is in progress. This may take a minute.',
-        maxTimeoutInSeconds: 10,
-      });
-      try {
-        await client.reset();
-        context.showPageOverlay({
-          message: 'Revert completed.',
-          hasSpinner: false,
-          hasCloseButton: true,
-          onClose: () => {
-            window.location.reload();
-          },
-        });
-      } catch {
-        context.showError();
-      }
-    })();
+const formGitReset = (client: GitClient) => contextMenuForm({
+  submitValues: (submittedValues: any) => {
+    const { keepOpen } = submittedValues;
+    if (keepOpen === false) window.location.reload();
+    return keepOpen;
+  },
+  onClose: ({ reload }) => {
+    if (reload === true) {
+      window.location.reload();
+    }
   },
 })(
-  ({ ui }: any) => {
-    const { ComponentFormTitle, ComponentFormLabel } = getUI(ui);
+  ({ ui, formState, formApi }: any) => {
+    const { ComponentFormText } = getUI(ui);
     return (
       <>
-        <ComponentFormTitle>Revert to saved</ComponentFormTitle>
-        <ComponentFormLabel htmlFor="reset-txt">
-          Discard local changes
-        </ComponentFormLabel>
+        <ComponentFormText type="hidden" field="keepOpen" initialValue />
+        <ComponentFormText type="hidden" field="reload" initialValue={false} />
+        <Reset ui={ui} formState={formState} formApi={formApi} client={client} />
       </>
     );
   },
@@ -216,7 +162,7 @@ const getMenuOptions = (
       label: 'Revert',
       icon: 'undo',
       isHidden: () => !context.isEdit,
-      handler: () => formGitReset(client, context),
+      handler: () => formGitReset(client),
       group: 'file',
     },
   ];

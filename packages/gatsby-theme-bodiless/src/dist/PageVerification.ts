@@ -22,7 +22,7 @@ type PageData = {
 
 const stripSurroundingSlashes = (path: string): string => {
   let path$ = path[0] === '/' ? path.slice(1) : path;
-  path$ = path$.endsWith('/') ? path.slice(0, -1) : path;
+  path$ = path$.endsWith('/') ? path$.slice(0, -1) : path$;
   return path$;
 };
 
