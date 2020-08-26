@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { FormApi, FormState } from 'informed';
-
 import { getUI, useEditContext } from '@bodiless/core';
 import { ComponentFormSpinner } from '@bodiless/ui';
 import { AxiosError } from 'axios';
