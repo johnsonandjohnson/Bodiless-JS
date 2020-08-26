@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 import { flow } from 'lodash';
+import { withMandatoryCategories } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withToutVariations from './withToutVariations';
 import withContentfulTouts from './withContentfulTouts';
@@ -30,6 +31,7 @@ const FlowContainerDefault = flow(
   withContentfulTouts,
   withSingleAccordionVariations,
   asFlowContainerWithMargins,
+  withMandatoryCategories(['Orientation', 'Type']),
 )(FlowContainer);
 
 // eslint-disable-next-line import/prefer-default-export
