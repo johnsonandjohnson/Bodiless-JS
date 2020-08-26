@@ -39,6 +39,7 @@ const defaultUI = {
   ComponentFormTextArea: TextArea,
   ComponentFormError: 'div',
   ComponentFormWarning: 'div',
+  ComponentFormLink: 'a',
   Form: 'form',
   ReactTags: ReactTagsField,
   ComponentFormList: 'ul',
