@@ -233,3 +233,6 @@ Contentful components are components that are preloaded with data so that you
 can easily populate your site with content. These contentful components will
 render the default content but you can easily override and edit the content to
 suit your needs.
+
+For information on layouts and working with the Flow Container see the [Flow Container documentation.](../../../bodiless-layouts#flowcontainer-component)
+
