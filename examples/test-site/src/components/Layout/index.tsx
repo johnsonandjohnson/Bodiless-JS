@@ -13,38 +13,17 @@
  */
 
 import React from 'react';
-import { flow, flowRight } from 'lodash';
-import Helmet from 'react-helmet';
-import { StaticQuery, graphql } from 'gatsby';
+import { flow } from 'lodash';
 import { Div } from '@bodiless/fclasses';
-import {
-  asBodilessHelmet,
-  withEvent,
-} from '@bodiless/components';
 import Header from './header';
 import Footer from './footer';
 import SeoHelmet from './meta';
+import SiteGTMHelmetEvent from './GTM';
 import { asPageContainer, asYMargin } from '../Elements.token';
 import { asSiteHeader, asSiteFooter } from './token';
 
 const SiteHeader = asSiteHeader(Header);
 const SiteFooter = asSiteFooter(Footer);
-
-const SiteGTMHelmetEvent = flowRight(
-  asBodilessHelmet('datalayer'),
-  withEvent(
-    'digitalData',
-    {
-      event: 'Page Loaded',
-      page: {
-        country: 'US',
-        language: 'EN',
-        hostname: 'bodilessjs.com',
-      },
-    },
-    'page-loaded',
-  ),
-)(Helmet);
 
 const Container = flow(
   asPageContainer,
@@ -52,26 +31,15 @@ const Container = flow(
 )(Div);
 
 const Layout = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `}
-    render={data => (
-      <>
-        <SeoHelmet />
-        <SiteGTMHelmetEvent />
-        <SiteHeader />
-        <Container>{children}</Container>
-        <SiteFooter siteTitle={data.site.siteMetadata.title} />
-      </>
-    )}
-  />
+  <>
+    <SeoHelmet />
+    <SiteGTMHelmetEvent />
+    <SiteHeader />
+    <Container>
+      {children}
+    </Container>
+    <SiteFooter />
+  </>
 );
 
 export default Layout;

@@ -192,3 +192,7 @@ export const ComponentFormWarning = flow(
     {children}
   </Div>
 ));
+
+export const ComponentFormLink = addClasses(
+  'bl-text-xs bl-text-grey-100 bl-block bl-underline',
+)(Anchor);

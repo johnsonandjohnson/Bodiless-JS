@@ -92,24 +92,31 @@ function Dropdown({ children, type }: { children: any; type: any }) {
 // The wrapper that wraps the checkboxes and dropdown menus
 export const FilterWrapper = (props: any) => {
   const {
-    allfilters, filters, activeFilter, setActiveFilters,
+    allfilters,
+    filters,
+    activeFilter,
+    setActiveFilters,
   } = props;
   const finalUI:FinalUI = useContext(uiContext);
+  const isTermDisabled = (category: string, term: string) => Object.entries(filters).length === 0
+    || !Object.keys(filters).includes(category)
+    || !filters[category].includes(term);
+  const areAllTermsDisabled = (category: string) => allfilters[category]
+    .every((term: string) => isTermDisabled(category, term));
   return (
     <finalUI.ComponentSelectorWrapper>
       {Object.keys(allfilters).map(category => {
         if (allfilters[category].length > 0) {
+          if (areAllTermsDisabled(category)) {
+            return true;
+          }
           return (
             <Dropdown type={category} key={category}>
               {allfilters[category].map((value: string) => (
                 <Checkbox
                   key={value}
                   type={value}
-                  disabled={
-                    Object.entries(filters).length === 0
-                    || !Object.keys(filters).includes(category)
-                    || !filters[category].includes(value)
-                  }
+                  disabled={isTermDisabled(category, value)}
                   onToggle={() => {
                     if (activeFilter.indexOf(value) !== -1) {
                       setActiveFilters(removefromArray(activeFilter, value));
