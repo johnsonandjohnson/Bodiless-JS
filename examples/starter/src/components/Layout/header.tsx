@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,52 +12,61 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
-import { Link } from 'gatsby';
+import React, { FC, ComponentType, HTMLProps } from 'react';
 import { flow } from 'lodash';
 import {
-  applyDesign,
-  addClasses,
+  designable,
+  DesignableComponentsProps,
   withDesign,
-  DesignableProps,
   Div,
 } from '@bodiless/fclasses';
-import {
-  asPageContainer,
-  asHeader1,
-  asPrimaryColorBackground,
-} from '../Elements.token';
+import { withNodeKey } from '@bodiless/core';
+import ResponsiveMenu from '../Menus';
+import Logo from './logo';
 
-const getHeaderComponents = applyDesign({
+type HeaderComponents = {
+  Wrapper: ComponentType<any>,
+  Container: ComponentType<any>,
+  MenuContainer: ComponentType<any>,
+  Menu: ComponentType<any>,
+  SiteLogoReturn: ComponentType<any>,
+};
+export type Props = DesignableComponentsProps<HeaderComponents> & HTMLProps<HTMLElement>;
+
+const headerComponents:HeaderComponents = {
   Wrapper: Div,
   Container: Div,
-  SiteReturn: Div,
-  Menu: Div,
-});
-const Header: FC<DesignableProps> = ({ design, siteLogo }) => {
+  MenuContainer: Div,
+  Menu: ResponsiveMenu,
+  SiteLogoReturn: Logo,
+};
+const HeaderClean: FC<Props> = ({ components }) => {
   const {
     Wrapper,
     Container,
-    SiteReturn,
+    MenuContainer,
     Menu,
-  } = getHeaderComponents(design);
+    SiteLogoReturn,
+  } = components;
 
   return (
     <Wrapper>
       <Container>
-        <SiteReturn>
-          <Link to="/">
-            <img src={siteLogo} className="h-16" alt="Return To Home" />
-          </Link>
-        </SiteReturn>
-        <Menu />
+        <SiteLogoReturn />
       </Container>
+      <MenuContainer>
+        <Menu />
+      </MenuContainer>
     </Wrapper>
   );
 };
-const asSiteHeader = withDesign({
-  Wrapper: flow(asPrimaryColorBackground, addClasses('')),
-  Container: flow(asPageContainer, addClasses('flex min-h-16 items-end')),
-  SiteReturn: flow(asHeader1, addClasses('flex-shrink')),
-});
-export default asSiteHeader(Header);
+
+const asSiteHeader = flow(
+  designable(headerComponents),
+  withDesign({
+    Menu: withNodeKey({ nodeKey: 'MainMenu', nodeCollection: 'site' }),
+  }),
+);
+
+const Header = asSiteHeader(HeaderClean);
+export default Header;

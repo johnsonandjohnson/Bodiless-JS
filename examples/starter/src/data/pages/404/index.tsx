@@ -13,19 +13,22 @@
  */
 
 import React from 'react';
-import { Link } from 'gatsby';
+import { graphql } from 'gatsby';
+import { Page } from '@bodiless/gatsby-theme-bodiless';
+import Layout from '../../../components/Layout';
+import { FlowContainerDefault } from '../../../components/FlowContainer';
 
-const NotFoundPage = () => (
-  <>
-    <h1>Page Not Found</h1>
-    <p>The requested page could not be found.</p>
-    <p>
-      <Link to="/" style={{ color: 'blue' }}>
-        {' '}
-        Go to homepage.
-      </Link>
-    </p>
-  </>
+export default (props: any) => (
+  <Page {...props}>
+    <Layout>
+      <FlowContainerDefault nodeKey="notfound" />
+    </Layout>
+  </Page>
 );
 
-export default NotFoundPage;
+export const query = graphql`
+  query($slug: String!) {
+    ...PageQuery
+    ...SiteQuery
+  }
+`;
