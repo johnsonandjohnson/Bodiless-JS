@@ -150,13 +150,13 @@ Enter the new url and then click the checkmark to finish creating the new page.
 ![](./assets/AddPage2.jpg)
 
 In BodilessJS, pages utilize
-[templates](../Development/Guides/BuildingSites/Templates#templates-overview).
+[templates](../../../Development/Guides/BuildingSites/Templates/?id=templates-overview).
 Developers use templates to define page layout to maintain uniformity and
 consistency across content types and sections.
 
 Pages are added as part of the section in which it was created. The newly
 created page will use the
-[template](../Development/Guides/BuildingSites/Templates#templates-overview)
+[template](../../../Development/Guides/BuildingSites/Templates/?id=templates-overview)
 associated with that section.
 
 To create a new page click on the "Page" button in the toolbar.
@@ -234,5 +234,5 @@ can easily populate your site with content. These contentful components will
 render the default content but you can easily override and edit the content to
 suit your needs.
 
-For information on layouts and working with the Flow Container see the [Flow Container documentation.](../../../bodiless-layouts#flowcontainer-component)
+For information on layouts and working with the Flow Container see the [Flow Container documentation.](../../../Components/FlowContainer)
 
