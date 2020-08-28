@@ -70,6 +70,16 @@ const defaultImagePickerUI = {
   UploadStatus: ({ statusText }: UploadStatusProps) => <div>{statusText}</div>,
 };
 
+const generateHash = (str: string) => {
+  let hash = 0, i, chr;
+  for (i = 0; i < str.length; i++) {
+    chr   = str.charCodeAt(i);
+    hash  = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return -hash;
+};
+
 // DropZonePlugin control the upload of file and only saves jpg/png files.
 function DropZonePlugin({ formApi, targetFieldName, ui }: {
   formApi: FormApi<Data>;
@@ -100,16 +110,18 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
   });
   const onDrop = useCallback(acceptedFiles => {
     const pagePath = window.location.pathname.replace(/^\/|\/$/g, '');
+    const fileName = acceptedFiles[0].name;
+    const fileHash = generateHash(fileName);
     setIsUploading(true);
     setIsUploadFinished(false);
     setIsUploadingTimeout(false);
-    setStatusText(`File "${acceptedFiles[0].name}" selected`);
+    setStatusText(`File "${fileName}" selected`);
     formApi.setError(targetFieldName, 'Uploading in progress');
-    saveRequest.saveFile(acceptedFiles[0], pagePath)
+    saveRequest.saveFile(acceptedFiles[0], `${pagePath}/${fileHash}`)
       .then(() => {
         // unset errors
         formApi.setError(targetFieldName, undefined);
-        formApi.setValue(targetFieldName, `/images/${pagePath}/${acceptedFiles[0].name}`);
+        formApi.setValue(targetFieldName, `/images/${pagePath}/${fileHash}/${fileName}`);
         // formApi.validate();
         setIsUploading(false);
         setIsUploadingTimeout(false);
