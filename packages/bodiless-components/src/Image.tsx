@@ -116,6 +116,10 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
     const pagePath = window.location.pathname.replace(/^\/|\/$/g, '');
     const fileName = acceptedFiles[0].name;
     const fileHash = generateHash(fileName);
+    const fileDist = pagePath.length
+      ? `/images/${pagePath}/${fileHash}/${fileName}`
+      : `/images/${fileHash}/${fileName}`;
+
     setIsUploading(true);
     setIsUploadFinished(false);
     setIsUploadingTimeout(false);
@@ -125,7 +129,7 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
       .then(() => {
         // unset errors
         formApi.setError(targetFieldName, undefined);
-        formApi.setValue(targetFieldName, `/images/${pagePath}/${fileHash}/${fileName}`);
+        formApi.setValue(targetFieldName, fileDist);
         // formApi.validate();
         setIsUploading(false);
         setIsUploadingTimeout(false);
