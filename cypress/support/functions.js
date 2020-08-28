@@ -1,11 +1,13 @@
-Cypress.Functions = {
-  generateHash: (str) => {
-    let hash = 0, i, chr;
-    for (i = 0; i < str.length; i++) {
-      chr   = str.charCodeAt(i);
-      hash  = ((hash << 5) - hash) + chr;
-      hash |= 0; // Convert to 32bit integer
-    }
-    return -hash;
+const generateHash = (str) => {
+  let hash = 0, i, chr;
+  for (i = 0; i < str.length; i++) {
+    chr   = str.charCodeAt(i);
+    hash  = ((hash << 5) - hash) + chr;
+    hash |= 0; // Convert to 32bit integer
   }
-}
+  return -hash;
+};
+
+cy.Functions = {
+  getUploadedImagePath: (pagePath, imageName) => `/images/${pagePath.replace(/^\/|\/$/g, '')}/${generateHash(imageName)}/${imageName}`,
+};

@@ -9,8 +9,8 @@ describe('PDP (Product Details Page) smoke tests', function () {
     cy.togglePreviewMode();
   })
 
-  const random = Math.floor(Math.random() * 10000)
-  const pdpURL = 'pdp-autotest' + random.toString()
+  const pdpURL = 'pdp-autotest' + Math.floor(Math.random() * 10000).toString()
+  const pdpPagePath = '/products/' + pdpURL
   const title = 'AT - PDD title'
   const accordionBody = 'AT - Overview'
   const imageName = 'images/img_615x500.jpg'
@@ -32,6 +32,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
   const flexboxXpath = '//*[@data-product-element="flow-container"]'
   const addComponentIconXpath = '//button[@aria-label="Add"]'
 
+  const uploadedImagePath = cy.Functions.getUploadedImagePath(pdpPagePath, imageName);
 
   it('PDP: 1 - creating a page from /products/', () => {
     cy.xpath(addPageIconXpath)
@@ -41,7 +42,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
     cy.xpath(checkmarkIconAddPageFormXpath)
       .click();
     cy.xpath(newPageLinkXpath,{ timeout: 10000 } ).click();
-    cy.url().should('eq', Cypress.config().baseUrl + '/products/' + pdpURL);
+    cy.url().should('eq', Cypress.config().baseUrl + pdpPagePath);
   })
 
 
@@ -89,7 +90,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
     cy.xpath(checkmarkIconImageFormXpath)
       .click();
     cy.xpath(imagePlaceholderXpath)
-      .should('have.attr', 'src', '/' + imageName);
+      .should('have.attr', 'src', uploadedImagePath);
   })
 
 
@@ -109,7 +110,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
     cy.xpath(accordionOverviewBodyXpath)
       .should('have.text', accordionBody);
     cy.xpath(imagePlaceholderXpath)
-      .should('have.attr', 'src', '/' + imageName);
+      .should('have.attr', 'src', uploadedImagePath);
   })
 
 
@@ -120,7 +121,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
     cy.xpath(accordionOverviewBodyXpath)
       .should('have.text', accordionBody);
     cy.xpath(imagePlaceholderXpath)
-      .should('have.attr', 'src', '/' + imageName);
+      .should('have.attr', 'src', uploadedImagePath);
     cy.xpath(flexboxXpath)
       .should('be.visible');
   })
