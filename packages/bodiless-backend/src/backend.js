@@ -502,14 +502,18 @@ class Backend {
       form.uploadDir = tmpDir.name;
 
       // every time a file has been uploaded successfully,
-      // copy to static path with orignal name
+      // copy to folderPath with orignal name
       form.on('file', (field, file) => {
-        const folderPath = path.join(backendStaticPath, file.name.substring(0, file.name.lastIndexOf('/')));
-        if (!fs.existsSync(folderPath)) fs.mkdirSync(folderPath);
+        const filePath = path.join(backendStaticPath, 'images', file.name);
+        const folderPath = path.dirname(filePath);
 
-        fs.copyFile(file.path, path.join(backendStaticPath, file.name), err => {
-          if (err) throw err;
-          fs.unlinkSync(file.path);
+        fs.mkdir(folderPath, { recursive: true }, mkdirErr => {
+          if (mkdirErr) throw mkdirErr;
+
+          fs.copyFile(file.path, filePath, copyErr => {
+            if (copyErr) throw copyErr;
+            fs.unlinkSync(file.path);
+          });
         });
       });
 

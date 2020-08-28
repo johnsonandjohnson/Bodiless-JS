@@ -99,17 +99,17 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
     return () => null;
   });
   const onDrop = useCallback(acceptedFiles => {
-    const saveFilePath = 'images/touts';
+    const pageName = 'touts';
     setIsUploading(true);
     setIsUploadFinished(false);
     setIsUploadingTimeout(false);
     setStatusText(`File "${acceptedFiles[0].name}" selected`);
     formApi.setError(targetFieldName, 'Uploading in progress');
-    saveRequest.saveFile(acceptedFiles[0], saveFilePath)
+    saveRequest.saveFile(acceptedFiles[0], pageName)
       .then(() => {
         // unset errors
         formApi.setError(targetFieldName, undefined);
-        formApi.setValue(targetFieldName, `/${saveFilePath}/${acceptedFiles[0].name}`);
+        formApi.setValue(targetFieldName, `/images/${pageName}/${acceptedFiles[0].name}`);
         // formApi.validate();
         setIsUploading(false);
         setIsUploadingTimeout(false);
