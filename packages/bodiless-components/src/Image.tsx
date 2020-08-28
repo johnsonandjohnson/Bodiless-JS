@@ -71,10 +71,14 @@ const defaultImagePickerUI = {
 };
 
 const generateHash = (str: string) => {
+  // eslint-disable-next-line one-var, one-var-declaration-per-line
   let hash = 0, i, chr;
+  // eslint-disable-next-line no-plusplus
   for (i = 0; i < str.length; i++) {
-    chr   = str.charCodeAt(i);
-    hash  = ((hash << 5) - hash) + chr;
+    chr = str.charCodeAt(i);
+    // eslint-disable-next-line no-bitwise
+    hash = ((hash << 5) - hash) + chr;
+    // eslint-disable-next-line no-bitwise
     hash |= 0; // Convert to 32bit integer
   }
   return -hash;
