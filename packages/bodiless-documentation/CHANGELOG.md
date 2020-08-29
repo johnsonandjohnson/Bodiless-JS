@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.55](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.54...v0.0.55) (2020-08-28)
+
+
+### Bug Fixes
+
+* **starter-kit:** Starter kit cleanup ([#482](https://github.com/johnsonandjohnson/bodiless-js/issues/482)) ([6bf6b1f](https://github.com/johnsonandjohnson/bodiless-js/commit/6bf6b1f46d42a0d585c1eefbc346a5abf4ca3e32))
+
+
+
+
+
 ## [0.0.54](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.53...v0.0.54) (2020-08-24)
 
 
