@@ -42,9 +42,6 @@ describe('Tout testing', function () {
   const ctaButtonXpath = '//*[@id="tout-horizontal"]//a[@data-tout-element="link"]'
   const imageLinkXpath = '//div[@id="tout-horizontal"]//a[@data-tout-element="image-link"]'
 
-  const uploadedOriginalImagePath = cy.Functions.getUploadedImagePath(pagePath, imageOriginal);
-  const uploadedUpdatedImagePath = cy.Functions.getUploadedImagePath(pagePath, imageUpdated);
-
   it('touts: 1 - filling in Title', () => {
     cy.xpath(titleXpath)
       .type(title)
@@ -113,9 +110,9 @@ describe('Tout testing', function () {
       .should('have.text', description);
     cy.xpath(ctaLabelXpath)
       .should('have.text', ctaLabel)
+    cy.isImageVisible(imagePlaceholderXpath)
     cy.xpath(imagePlaceholderXpath)
-      .should('have.attr', 'src', uploadedOriginalImagePath)
-      .and('have.attr', 'alt', imageAltText)
+      .should('have.attr', 'alt', imageAltText)
     cy.xpath(imageLinkXpath)
       .should('have.attr', 'href', toutUrl)
     cy.xpath(ctaButtonXpath)
@@ -133,9 +130,9 @@ describe('Tout testing', function () {
       .should('have.text', description);
     cy.xpath(ctaLabelXpath)
       .should('have.text', ctaLabel)
+    cy.isImageVisible(imagePlaceholderXpath)
     cy.xpath(imagePlaceholderXpath)
-      .should('have.attr', 'src', uploadedOriginalImagePath)
-      .and('have.attr', 'alt', imageAltText)
+      .should('have.attr', 'alt', imageAltText)
     cy.xpath(imageLinkXpath)
       .should('have.attr', 'href', toutUrl)
   })
@@ -197,9 +194,9 @@ describe('Tout testing', function () {
       .should('have.text', description + editedPostfix);
     cy.xpath(ctaLabelXpath)
       .should('have.text', ctaLabel + editedPostfix)
+    cy.isImageVisible(imagePlaceholderXpath)
     cy.xpath(imagePlaceholderXpath)
-      .should('have.attr', 'src', uploadedUpdatedImagePath)
-      .and('have.attr', 'alt', imageAltText + editedPostfix)
+      .should('have.attr', 'alt', imageAltText + editedPostfix)
     cy.xpath(ctaButtonXpath)
       .should('have.attr', 'href', toutUrl + editedToutUrl)
     cy.xpath(imagePlaceholderXpath)
@@ -217,9 +214,9 @@ describe('Tout testing', function () {
       .should('have.text', description + editedPostfix);
     cy.xpath(ctaLabelXpath)
       .should('have.text', ctaLabel + editedPostfix)
+    cy.isImageVisible(imagePlaceholderXpath)
     cy.xpath(imagePlaceholderXpath)
-      .should('have.attr', 'src', uploadedUpdatedImagePath)
-      .and('have.attr', 'alt', imageAltText + editedPostfix)
+      .should('have.attr', 'alt', imageAltText + editedPostfix)
     cy.xpath(imageLinkXpath)
       .should('have.attr', 'href', toutUrl + editedToutUrl)
   })

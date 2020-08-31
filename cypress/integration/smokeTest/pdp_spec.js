@@ -13,7 +13,8 @@ describe('PDP (Product Details Page) smoke tests', function () {
   const pdpPagePath = '/products/' + pdpURL
   const title = 'AT - PDD title'
   const accordionBody = 'AT - Overview'
-  const imageName = 'images/img_615x500.jpg'
+  const imagesFolderPath = "images"
+  const imageName = 'img_615x500.jpg'
   const addPageIconXpath = '//*[@aria-label="Page"]'
   const fieldAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//input[@id="new-page-path"]'
   const newPageLinkXpath = '//*[@id="new-page-link"]'
@@ -31,8 +32,6 @@ describe('PDP (Product Details Page) smoke tests', function () {
   const checkmarkIconImageFormXpath = '//form[@aria-label="Context Menu Image Form"]//button[@aria-label="Submit"]'
   const flexboxXpath = '//*[@data-product-element="flow-container"]'
   const addComponentIconXpath = '//button[@aria-label="Add"]'
-
-  const uploadedImagePath = cy.Functions.getUploadedImagePath(pdpPagePath, imageName);
 
   it('PDP: 1 - creating a page from /products/', () => {
     cy.xpath(addPageIconXpath)
@@ -82,15 +81,14 @@ describe('PDP (Product Details Page) smoke tests', function () {
       .click();
     cy.xpath(imageIconXpath)
       .click();
-    const fileName = imageName
-    cy.fixture(fileName).then(fileContent => {
-      cy.get('input[type=file]').upload({ fileContent, fileName, mimeType: "image/jpeg" });
+    const imagePath = `${imagesFolderPath}/${imageName}`;
+    cy.fixture(imagePath).then(fileContent => {
+      cy.get('input[type=file]').upload({ fileContent, fileName: imageName, mimeType: "image/jpeg" });
     })
-    cy.wait(3000);
+    cy.wait(1000);
     cy.xpath(checkmarkIconImageFormXpath)
       .click();
-    cy.xpath(imagePlaceholderXpath)
-      .should('have.attr', 'src', uploadedImagePath);
+    cy.isImageVisible(imagePlaceholderXpath)
   })
 
 
@@ -109,8 +107,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
       .should('have.text', title);
     cy.xpath(accordionOverviewBodyXpath)
       .should('have.text', accordionBody);
-    cy.xpath(imagePlaceholderXpath)
-      .should('have.attr', 'src', uploadedImagePath);
+    cy.isImageVisible(imagePlaceholderXpath)
   })
 
 
@@ -120,8 +117,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
       .should('have.text', title);
     cy.xpath(accordionOverviewBodyXpath)
       .should('have.text', accordionBody);
-    cy.xpath(imagePlaceholderXpath)
-      .should('have.attr', 'src', uploadedImagePath);
+    cy.isImageVisible(imagePlaceholderXpath)
     cy.xpath(flexboxXpath)
       .should('be.visible');
   })
