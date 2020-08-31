@@ -14,6 +14,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
 
@@ -25,19 +26,7 @@ const copyFilePromise = (from, to) => new Promise((resolve, reject) => {
   });
 });
 
-const generateHash = (str) => {
-  // eslint-disable-next-line one-var, one-var-declaration-per-line
-  let hash = 0, i, chr;
-  // eslint-disable-next-line no-plusplus
-  for (i = 0; i < str.length; i++) {
-    chr = str.charCodeAt(i);
-    // eslint-disable-next-line no-bitwise
-    hash = ((hash << 5) - hash) + chr;
-    // eslint-disable-next-line no-bitwise
-    hash |= 0; // Convert to 32bit integer
-  }
-  return String(-hash);
-};
+const generateHash = (str) => crypto.createHash('md5').update(str).digest('hex');
 
 const copyAllFiles = (files, pagePath, nodePath) => {
   const allFiles = [];
