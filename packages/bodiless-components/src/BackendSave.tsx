@@ -14,6 +14,16 @@
 
 import axios, { CancelTokenSource } from 'axios';
 
+type FileOptions = {
+  file: File,
+  pagePath: string,
+  nodePath: string,
+};
+
+interface ServerData {
+  filesPath: string[]
+}
+
 export default class BackendSave {
   private root: string;
 
@@ -34,16 +44,21 @@ export default class BackendSave {
     this.prefix = prefix || process.env.BODILESS_BACKEND_PREFIX || '/___backend';
   }
 
-  post(resourcePath: string, data: any, config: any) {
-    return axios.post(this.root + resourcePath, data, config);
+  post<T>(resourcePath: string, data: any, config: any) {
+    return axios.post<T>(this.root + resourcePath, data, config);
   }
 
-  saveFile(file: File, distFolder: string) {
+  saveFile(options: FileOptions) {
+    const {
+      file, pagePath, nodePath,
+    } = options;
     // eslint-disable-next-line no-undef
     const payload = new FormData();
-    payload.append('file', file, `${distFolder}/${file.name}`);
+    payload.append('file', file);
+    payload.append('nodePath', nodePath);
+    payload.append('pagePath', pagePath);
     this.cancelTokenSource = axios.CancelToken.source();
-    return this.post(`${this.prefix}/asset/`, payload, {
+    return this.post<ServerData>(`${this.prefix}/asset/`, payload, {
       cancelToken: this.cancelTokenSource.token,
     });
   }

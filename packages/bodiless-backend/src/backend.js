@@ -24,6 +24,7 @@ const path = require('path');
 const Page = require('./page');
 const GitCmd = require('./GitCmd');
 const { getChanges, getConflicts, mergeMaster } = require('./git');
+const { copyAllFiles } = require('./fileHelper');
 const Logger = require('./logger');
 
 const backendPrefix = process.env.GATSBY_BACKEND_PREFIX || '/___backend';
@@ -491,44 +492,18 @@ class Backend {
 
   static setAsset(route) {
     route.post((req, res) => {
-      // create an incoming form object
-      const form = new formidable.IncomingForm();
-
-      // specify that we want to allow the user to upload multiple files in a single request
-      form.multiples = true;
-
-      // store all uploads in a temporary directory
       const tmpDir = tmp.dirSync({ mode: '0755', unsafeCleanup: true, prefix: 'backendTmpDir_' });
-      form.uploadDir = tmpDir.name;
+      const form = formidable({ multiples: true, uploadDir: tmpDir.name });
 
-      // every time a file has been uploaded successfully,
-      // copy to folderPath with orignal name
-      form.on('file', (field, file) => {
-        const filePath = path.join(backendStaticPath, 'images', file.name);
-        const folderPath = path.dirname(filePath);
-
-        fs.mkdir(folderPath, { recursive: true }, mkdirErr => {
-          if (mkdirErr) throw mkdirErr;
-
-          fs.copyFile(file.path, filePath, copyErr => {
-            if (copyErr) throw copyErr;
-            fs.unlinkSync(file.path);
-          });
+      form.parse(req, (err, fields, files) => {
+        const { pagePath, nodePath } = fields;
+        copyAllFiles(files, pagePath, nodePath).then((filesPath) => {
+          res.json({ filesPath });
+        }).catch(copyErr => {
+          console.log(copyErr);
+          res.send(copyErr);
         });
       });
-
-      // log any errors that occur
-      form.on('error', err => {
-        logger.log(`An error has occured here: \n${err}`);
-      });
-
-      // once all the files have been uploaded, send a response to the client
-      form.on('end', () => {
-        res.send('success');
-      });
-
-      // parse the incoming request containing the form data
-      form.parse(req);
     });
   }
 

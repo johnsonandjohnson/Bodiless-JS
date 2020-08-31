@@ -25,6 +25,7 @@ import {
   getUI,
   asBodilessComponent,
   BodilessOptions,
+  useNode,
 } from '@bodiless/core';
 
 import { useDropzone } from 'react-dropzone';
@@ -70,20 +71,6 @@ const defaultImagePickerUI = {
   UploadStatus: ({ statusText }: UploadStatusProps) => <div>{statusText}</div>,
 };
 
-const generateHash = (str: string) => {
-  // eslint-disable-next-line one-var, one-var-declaration-per-line
-  let hash = 0, i, chr;
-  // eslint-disable-next-line no-plusplus
-  for (i = 0; i < str.length; i++) {
-    chr = str.charCodeAt(i);
-    // eslint-disable-next-line no-bitwise
-    hash = ((hash << 5) - hash) + chr;
-    // eslint-disable-next-line no-bitwise
-    hash |= 0; // Convert to 32bit integer
-  }
-  return -hash;
-};
-
 // DropZonePlugin control the upload of file and only saves jpg/png files.
 function DropZonePlugin({ formApi, targetFieldName, ui }: {
   formApi: FormApi<Data>;
@@ -95,6 +82,8 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
   const [isUploadTimeout, setIsUploadingTimeout] = useState(false);
   const [isUploadFinished, setIsUploadFinished] = useState(false);
   const saveRequest = new BackendSave();
+  const { node } = useNode<any>();
+
   useEffect(() => {
     if (isUploading) {
       const timer = setTimeout(
@@ -113,23 +102,20 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
     return () => null;
   });
   const onDrop = useCallback(acceptedFiles => {
-    const pagePath = window.location.pathname.replace(/^\/|\/$/g, '');
-    const fileName = acceptedFiles[0].name;
-    const fileHash = generateHash(fileName);
-    const fileDist = pagePath.length
-      ? `/images/${pagePath}/${fileHash}/${fileName}`
-      : `/images/${fileHash}/${fileName}`;
-
     setIsUploading(true);
     setIsUploadFinished(false);
     setIsUploadingTimeout(false);
-    setStatusText(`File "${fileName}" selected`);
+    setStatusText(`File "${acceptedFiles[0].name}" selected`);
     formApi.setError(targetFieldName, 'Uploading in progress');
-    saveRequest.saveFile(acceptedFiles[0], `${pagePath}/${fileHash}`)
-      .then(() => {
+    saveRequest.saveFile({
+      file: acceptedFiles[0],
+      nodePath: node.path.join('$'),
+      pagePath: window.location.pathname,
+    })
+      .then(({ data }) => {
         // unset errors
         formApi.setError(targetFieldName, undefined);
-        formApi.setValue(targetFieldName, fileDist);
+        formApi.setValue(targetFieldName, data.filesPath[0]);
         // formApi.validate();
         setIsUploading(false);
         setIsUploadingTimeout(false);
