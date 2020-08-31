@@ -19,6 +19,7 @@ import useGitButtons from './dist/useGitButtons';
 import useNewPageButton from './dist/useNewPageButton';
 import GatsbyPageProvider, { useGatsbyPageContext } from './dist/GatsbyPageProvider';
 import Page from './dist/Page';
+import asGatsbyImage, { GatsbyImage } from './dist/asGatsbyImage';
 
 export {
   GatsbyMobxStore,
@@ -29,6 +30,8 @@ export {
   GatsbyPageProvider,
   useGatsbyPageContext,
   Page,
+  asGatsbyImage,
+  GatsbyImage,
 };
 
 export type { Props as PageProps } from './dist/Page';

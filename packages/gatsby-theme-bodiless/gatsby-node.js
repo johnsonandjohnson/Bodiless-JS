@@ -19,13 +19,16 @@
  *
  */
 const pathUtil = require('path');
-const slash = require('slash');
 const fs = require('fs');
 
 const { createFilePath } = require('gatsby-source-filesystem');
+const { onCreateNode, createSlug } = require('./create-node');
+
 const Logger = require('./Logger');
 
 const logger = new Logger('gatsby');
+
+exports.onCreateNode = onCreateNode;
 
 // exports.onCreateBabelConfig = ({ actions: { setBabelPlugin } }) => {
 exports.onCreateBabelConfig = args => {
@@ -40,45 +43,6 @@ exports.onCreateBabelConfig = args => {
     name: '@babel/plugin-proposal-class-properties',
     options: { loose: true },
   });
-};
-
-const findFilesystemNode = ({ node, getNode }) => {
-  // Find the filesystem node.
-  const types = ['File', 'Directory'];
-  let fsNode = node;
-  let whileCount = 0;
-
-  while (
-    !types.includes(fsNode.internal.type)
-    && fsNode.parent
-    && getNode(fsNode.parent) !== undefined
-    && whileCount < 101
-  ) {
-    fsNode = getNode(fsNode.parent);
-    whileCount += 1;
-
-    if (whileCount > 100) {
-      logger.warn('Cannot find a directory node for ', fsNode);
-    }
-  }
-  return fsNode;
-};
-
-// Adapted from create-file-path.
-const createSlug = ({ node, getNode }) => {
-  // Find the filesystem node
-  const fsNode = findFilesystemNode({ node, getNode });
-  if (!fsNode) return undefined;
-  const relativePath = pathUtil.posix.relative(
-    slash('pages'),
-    slash(fsNode.relativePath),
-  );
-  const { dir, name } = pathUtil.parse(relativePath);
-  const dirFragment = dir || '';
-  const nameFragment = fsNode.internal.type === 'Directory' ? name : '';
-  const slug = pathUtil.posix.join('/', dirFragment, nameFragment, '/');
-  const finalSlug = relativePath.startsWith('..') ? `..${slug}` : slug;
-  return finalSlug;
 };
 
 /**
@@ -148,17 +112,6 @@ const findTemplate = (indexPath, basePath, isFirst = true) => {
     return '_default';
   }
   return findTemplate(`${parentPath}/index.json`, basePath, false);
-};
-
-exports.onCreateNode = ({ node, getNode, actions }) => {
-  const { createNodeField } = actions;
-  if (node.internal.type === 'RawCode') {
-    createNodeField({
-      node,
-      name: 'slug',
-      value: createSlug({ node, getNode }),
-    });
-  }
 };
 
 const createPagesFromFS = async ({ actions, graphql, getNode }) => {
