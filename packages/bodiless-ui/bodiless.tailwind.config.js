@@ -68,11 +68,18 @@ const negativeGrid = {
 };
 
 const percentGrid = {
+  'tenth': '10%',
+  'fifth': '20%',
   'quarter': '25%',
   'third': '33.33%',
   'half': '50%',
   'three-quarters': '75%',
   'full': '100%',
+};
+
+const remGrid = {
+  'half-rem': '0.5rem',
+  'rem-1': '1rem',
 };
 
 module.exports = {
@@ -100,6 +107,7 @@ module.exports = {
         ...defaultGrid,
         ...negativeGrid,
         ...percentGrid,
+        ...remGrid,
       },
 
       /*

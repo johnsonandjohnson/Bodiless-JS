@@ -170,8 +170,8 @@ export const HorizontalToolbarButton = flow(
 export const ToolbarButtonLabel = addClasses('bl-text-center bl-text-base')(Span);
 
 export const ResizeHandle = addClasses(
-  'bl-block bl-text-2xl bl-absolute material-icons bl-z-1 bl-text-red bl-rotate-45deg bl-bottom-grid-0 bl-right-grid-0',
-)(Span);
+  'bl-z-1 bl-h-three-quarters bl-relative bl-border-solid bl-border-l-2 bl-top-tenth bl-right-half-rem bl-border-primary',
+)(Div);
 
 export const ContextSubMenu = flow(
   addClasses('bl-flex bl-text-white'),
