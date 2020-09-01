@@ -160,7 +160,7 @@ describe('Fetch Changes component', () => {
     return new Promise(resolve => setImmediate(resolve)).then(() => {
       wrapper.update();
       expect(wrapper.text()).toMatch(
-        /contact your development team for assistance. \(code 1002\)/,
+        /Changes are available but cannot be pulled, contact your development team for assistance. \(code 1002\)/,
       );
     });
   });

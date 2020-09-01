@@ -133,8 +133,8 @@ const FormMessages = ({ messageCode, messageData } : MessageProps) => {
       return (
         <ComponentFormWarning>
           {
-            `Changes are available but cannot be pulled, contact your development team for
-            assistance. (Code: ${MessageCode.PullConflictAbort})`
+            `Changes are available but cannot be pulled, contact your development team for \
+assistance. (Code: ${MessageCode.PullConflictAbort})`
           }
         </ComponentFormWarning>
       );
@@ -166,8 +166,8 @@ const FormMessages = ({ messageCode, messageData } : MessageProps) => {
       return (
         <ComponentFormWarning>
           {
-            `Changes are available but cannot be pulled, contact your development team for
-             assistance. (code ${MessageCode.PullRestartRequired})`
+        `Changes are available but cannot be pulled, contact your development team for \
+assistance. (code ${MessageCode.PullRestartRequired})`
           }
         </ComponentFormWarning>
       );
@@ -183,8 +183,8 @@ const FormMessages = ({ messageCode, messageData } : MessageProps) => {
       return (
         <ComponentFormWarning>
           {
-            `Changes are available but cannot be pulled, contact your development team for
-            assistance. (code ${MessageCode.PullNonContentOnly})`
+            `Changes are available but cannot be pulled, contact your development team for \
+assistance. (code ${MessageCode.PullNonContentOnly})`
           }
         </ComponentFormWarning>
       );
