@@ -166,8 +166,8 @@ const FormMessages = ({ messageCode, messageData } : MessageProps) => {
       return (
         <ComponentFormWarning>
           {
-            `Changes are available but cannot be pulled, contact your development team for \
-assistance. (code ${MessageCode.PullRestartRequired})`
+            `Changes are available but cannot be pulled, contact your development team for
+             assistance. (code ${MessageCode.PullRestartRequired})`
           }
         </ComponentFormWarning>
       );
@@ -183,8 +183,8 @@ assistance. (code ${MessageCode.PullRestartRequired})`
       return (
         <ComponentFormWarning>
           {
-            `There are changes available, but they conflict with work on your changeset and the
-             conflict must be resolved by a developer.  (code ${MessageCode.PullNonContentOnly})`
+            `Changes are available but cannot be pulled, contact your development team for
+            assistance. (code ${MessageCode.PullNonContentOnly})`
           }
         </ComponentFormWarning>
       );
@@ -242,6 +242,7 @@ const FetchChanges = (
           if (production.files.some(file => file.includes('package-lock.json'))) {
             setState({ messageCode: MessageCode.PullRestartRequired, messageData: [] });
             formApi.setValue('mergeMaster', false);
+            formApi.setValue('keepOpen', false);
           } else if (!local.hasUpdates && !upstream.hasUpdates) {
             // No local changes.
             setState({ messageCode: MessageCode.PullChangeAvailable, messageData: [] });
