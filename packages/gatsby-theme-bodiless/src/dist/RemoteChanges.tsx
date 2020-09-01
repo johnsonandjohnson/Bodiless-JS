@@ -92,7 +92,7 @@ const RemoteChanges = ({ client, notifyOfChanges }: PropsWithGitClient & PropsWi
 };
 
 const mapResponse = (response: BranchUpdateType) => ({
-  hasUpdates: !!response.commits.length,
+  hasUpdates: !!response.commits.length || !!response.files.length,
   files: response.files,
 });
 
@@ -287,7 +287,12 @@ const FetchChanges = (
               // No production/upstream conflict, further check produciton/local
               const localConflictsResponse = await client.getConflicts('edit');
               if (localConflictsResponse.data.hasConflict) {
-                setState({ messageCode: MessageCode.PullConflictConfirm, messageData: [] });
+                const { pages } = localConflictsResponse.data;
+                const { site } = localConflictsResponse.data;
+                setState({
+                  messageCode: MessageCode.PullConflictConfirm,
+                  messageData: { pages, site },
+                });
                 formApi.setValue('mergeMaster', true);
               } else {
                 // If there are conflicts between CHANGESET and EDIT, but no conflicts with
