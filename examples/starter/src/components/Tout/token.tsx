@@ -12,10 +12,14 @@
  * limitations under the License.
  */
 
+import { flow } from 'lodash';
 import {
+  addClasses,
   withDesign,
 } from '@bodiless/fclasses';
 import {
+  asToutVertical as asBToutVertical,
+  asToutHorizontal as asBToutHorizontal,
   asToutNoTitle,
   asToutNoBody,
   asToutNoCta,
@@ -24,25 +28,49 @@ import {
   asToutNoBodyNoTitle,
 } from '@bodiless/organisms';
 import {
-  asLink,
+  asImageRounded,
+  asCta,
   asHeader2,
   asBlockItem,
+  asTextColorPrimary,
 } from '../Elements.token';
 
-// Within this space you can style the touts according to site requirements.
+const asToutHorizontal = flow(
+  withDesign({
+    Title: addClasses(''),
+    Body: addClasses(''),
+    Link: addClasses(''),
+  }),
+  asBToutHorizontal,
+);
+const asToutVertical = flow(
+  withDesign({
+    Title: addClasses(''),
+    Body: addClasses(''),
+  }),
+  asBToutVertical,
+);
 
 const asToutDefaultStyle = withDesign({
-  Wrapper: asBlockItem,
+  Wrapper: asTextColorPrimary,
+  Image: asImageRounded,
   Title: asHeader2,
-  Link: asLink,
+  Link: asCta,
+});
+
+const asToutWithPaddings = withDesign({
+  Wrapper: asBlockItem,
 });
 
 export {
-  asToutDefaultStyle,
+  asToutHorizontal,
+  asToutVertical,
   asToutNoTitle,
   asToutNoBody,
   asToutNoCta,
+  asToutDefaultStyle,
   asToutOverlayTitle,
   asToutOverlayCta,
   asToutNoBodyNoTitle,
+  asToutWithPaddings,
 };

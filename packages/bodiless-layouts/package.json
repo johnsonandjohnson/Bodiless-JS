@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/layouts",
-  "version": "0.0.53",
+  "version": "0.0.55",
   "description": "Layout managers for BodilessJS.",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
   "homepage": "",
@@ -33,9 +33,9 @@
     "react": "^16.8.1"
   },
   "dependencies": {
-    "@bodiless/core": "^0.0.53",
-    "@bodiless/fclasses": "^0.0.53",
-    "@bodiless/gatsby-theme-bodiless": "^0.0.53",
+    "@bodiless/core": "^0.0.55",
+    "@bodiless/fclasses": "^0.0.55",
+    "@bodiless/gatsby-theme-bodiless": "^0.0.55",
     "@material/react-material-icon": "^0.14.1",
     "axios": "^0.19.0",
     "html2canvas": "^1.0.0-rc.3",

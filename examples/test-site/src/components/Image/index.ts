@@ -17,6 +17,7 @@ import {
   withChild,
   withDefaultContent,
   withResetButton,
+  withSidecarNodes,
 } from '@bodiless/core';
 import { flowRight } from 'lodash';
 import {
@@ -48,10 +49,14 @@ const asEditableImageWithPlaceholder = (placeholder: string) => (nodeKey: string
   withImagePlaceholder({ src: placeholder }),
   asEditableImage(nodeKey),
 );
+
 const asLinkableImage = (ImageComponent: ComponentType<any>) => (nodeKey: string) => flowRight(
-  asBodilessLink(nodeKey),
+  withSidecarNodes(
+    asBodilessLink(nodeKey),
+  ),
   withChild(ImageComponent),
 );
+
 const asSquareImage = asEditableImage;
 const SquareImage = asSquareImage(DEFAULT_IMAGE_NODE_KEY)(Img);
 const SquareLinkableImage = asLinkableImage(SquareImage)(DEFAULT_LINK_NODE_KEY)(A);

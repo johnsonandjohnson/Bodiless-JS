@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,14 +12,79 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { FC, ComponentType, HTMLProps } from 'react';
+import { flow } from 'lodash';
+import {
+  designable,
+  DesignableComponentsProps,
+  DesignableProps,
+  Div,
+  P,
+  Span,
+  withDesign,
+} from '@bodiless/fclasses';
+import { asEditable } from '../Elements.token';
 
-const Footer = () => (
-  <div className="container mx-auto py-3">
-    <p>
-      © Copyright 2020 Johnson &amp; Johnson
-    </p>
-  </div>
+const today = new Date();
+const date = new Intl.DateTimeFormat().format(today);
+const year = new Intl.DateTimeFormat('en-US', { year: 'numeric' }).format(today);
+
+type FooterComponents = {
+  Wrapper: ComponentType<any>,
+  Container: ComponentType<any>,
+  SiteTitleCopyright: ComponentType<any>,
+  SiteTitleCopyrightEditable: ComponentType<any>,
+  SiteCopyright: ComponentType<any>,
+  SiteCopyrightEditable: ComponentType<any>,
+};
+
+export type Props = DesignableComponentsProps<FooterComponents> & HTMLProps<HTMLElement>;
+
+const footerComponents:FooterComponents = {
+  Wrapper: Div,
+  Container: Div,
+  SiteTitleCopyright: P,
+  SiteTitleCopyrightEditable: Span,
+  SiteCopyright: P,
+  SiteCopyrightEditable: Span,
+};
+
+const FooterClean: FC<DesignableProps> = ({ components }) => {
+  const {
+    Wrapper,
+    Container,
+    SiteTitleCopyright,
+    SiteTitleCopyrightEditable,
+    SiteCopyright,
+    SiteCopyrightEditable,
+  } = components;
+
+  return (
+    <Wrapper>
+      <Container>
+        <SiteTitleCopyright>
+          ©
+          <SiteTitleCopyrightEditable />
+          &nbsp;
+          {year}
+        </SiteTitleCopyright>
+        <SiteCopyright>
+          <SiteCopyrightEditable />
+          &nbsp;Last Updated:&nbsp;
+          {date}
+        </SiteCopyright>
+      </Container>
+    </Wrapper>
+  );
+};
+
+const asFooterHeader = flow(
+  designable(footerComponents),
+  withDesign({
+    SiteTitleCopyrightEditable: asEditable({ nodeKey: 'sitetitle', nodeCollection: 'site' }, 'Insert Site Title', 'site'),
+    SiteCopyrightEditable: asEditable({ nodeKey: 'copyright', nodeCollection: 'site' }, 'Insert Copyright', 'site'),
+  }),
 );
 
+const Footer = asFooterHeader(FooterClean);
 export default Footer;

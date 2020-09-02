@@ -116,6 +116,8 @@
   cursor: auto;
 }
 
+.material-icons.md-36 { font-size: 36px; }
+
 /**
  * This injects all of Tailwind's utility classes, generated based on your
  * config file.

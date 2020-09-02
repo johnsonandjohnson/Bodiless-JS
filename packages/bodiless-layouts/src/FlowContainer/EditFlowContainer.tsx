@@ -31,6 +31,7 @@ import {
   FlowContainerItemProps,
   SortableChildProps,
 } from './types';
+import { ComponentDisplayModeProvider, ComponentDisplayMode } from './ComponentDisplayMode';
 
 const ChildNodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
 
@@ -59,38 +60,40 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerPr
   const { Wrapper, ComponentWrapper } = components;
 
   return (
-    <Wrapper
-      onSortEnd={(sort: SortEnd) => {
-        const { oldIndex, newIndex } = sort;
-        setFlowContainerItems(arrayMove(items, oldIndex, newIndex));
-      }}
-      ui={ui}
-    >
-      {items.map(
-        (flowContainerItem: FlowContainerItem, index: number): React.ReactNode => {
-          const ChildComponent = components[flowContainerItem.type];
-          if (!ChildComponent) return null;
-          return (
-            <ChildNodeProvider nodeKey={flowContainerItem.uuid} key={`node-${flowContainerItem.uuid}`}>
-              <ComponentWrapper
-                ui={ui}
-                index={index}
-                flowContainerItem={flowContainerItem}
-                snapData={snapData}
-                defaultWidth={defaultWidth}
-                getMenuOptions={useGetMenuOptions(witNoDesign(props), flowContainerItem)}
-                onResizeStop={
-                  // eslint-disable-next-line max-len
-                  (flowContainerItemProps: FlowContainerItemProps) => onFlowContainerItemResize(flowContainerItem.uuid, flowContainerItemProps)
-                }
-              >
-                <ChildComponent />
-              </ComponentWrapper>
-            </ChildNodeProvider>
-          );
-        },
-      )}
-    </Wrapper>
+    <ComponentDisplayModeProvider mode={ComponentDisplayMode.EditFlowContainer}>
+      <Wrapper
+        onSortEnd={(sort: SortEnd) => {
+          const { oldIndex, newIndex } = sort;
+          setFlowContainerItems(arrayMove(items, oldIndex, newIndex));
+        }}
+        ui={ui}
+      >
+        {items.map(
+          (flowContainerItem: FlowContainerItem, index: number): React.ReactNode => {
+            const ChildComponent = components[flowContainerItem.type];
+            if (!ChildComponent) return null;
+            return (
+              <ChildNodeProvider nodeKey={flowContainerItem.uuid} key={`node-${flowContainerItem.uuid}`}>
+                <ComponentWrapper
+                  ui={ui}
+                  index={index}
+                  flowContainerItem={flowContainerItem}
+                  snapData={snapData}
+                  defaultWidth={defaultWidth}
+                  getMenuOptions={useGetMenuOptions(witNoDesign(props), flowContainerItem)}
+                  onResizeStop={
+                    // eslint-disable-next-line max-len
+                    (flowContainerItemProps: FlowContainerItemProps) => onFlowContainerItemResize(flowContainerItem.uuid, flowContainerItemProps)
+                  }
+                >
+                  <ChildComponent />
+                </ComponentWrapper>
+              </ChildNodeProvider>
+            );
+          },
+        )}
+      </Wrapper>
+    </ComponentDisplayModeProvider>
   );
 };
 

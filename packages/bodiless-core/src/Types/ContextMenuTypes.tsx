@@ -13,16 +13,13 @@
  */
 
 import React, {
-  ComponentType,
-  HTMLProps,
-  ReactNode,
+  ComponentType, HTMLProps, ReactNode,
 } from 'react';
 import {
-  FieldProps,
-  ChildFieldProps,
-  SelectFieldProps,
+  FieldProps, ChildFieldProps, SelectFieldProps,
 } from 'informed';
 import Tooltip from 'rc-tooltip';
+import type { StylableProps } from '@bodiless/fclasses';
 import { ReactTagsFieldProps } from '../components/ReactTagsField';
 
 export type TMenuOption = {
@@ -56,9 +53,10 @@ export type ContextMenuGroupProps = {
 };
 
 export type UI = {
-  Icon?: ComponentType<IconVariantProps> | string;
+  Icon?: ComponentType<StylableProps & IconVariantProps> | string;
   Toolbar?: ComponentType<HTMLProps<HTMLDivElement>> | string;
-  ToolbarButton?: ComponentType<ButtonVariantProps> | string;
+  ToolbarButton?: ComponentType<StylableProps & ButtonVariantProps> | string;
+  HorizontalToolbarButton?: ComponentType<StylableProps & ButtonVariantProps> | string;
   ToolbarButtonLabel?: ComponentType<HTMLProps<HTMLSpanElement>> | string;
   FormWrapper?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   ToolbarDivider?: ComponentType<HTMLProps<HTMLHRElement>> | string;
@@ -80,6 +78,7 @@ export type UI = {
   ComponentFormOption?: ComponentType<ChildFieldProps<any, any>>;
   ComponentFormError?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   ComponentFormWarning?: ComponentType<HTMLProps<HTMLDivElement>> | string;
+  ComponentFormLink?: ComponentType<HTMLProps<HTMLAnchorElement>> | string;
   Form?: ComponentType<HTMLProps<HTMLFormElement>> | string;
   Tooltip?: ComponentType<Tooltip['props']>;
   ReactTags?: ComponentType<ReactTagsFieldProps>;

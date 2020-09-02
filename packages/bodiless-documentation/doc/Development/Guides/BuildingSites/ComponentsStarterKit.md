@@ -20,51 +20,117 @@ have to adjust their tokens (styling) to meet the designs of the site.
 ### MetaData Component
 
 Bodiless provides a set of HOC's which work with react-helmet to place editable
-meta-tags in the document HEAD.  A Site Builder can find an example in
+meta-tags in the document HEAD.  A Site Builder can find examples of adding editable or
+non-editable (static) meta data into head section from
 `src/components/Layout/meta.tsx`.
 
 For full code, please
-[review code](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Layout)
+[review code](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Layout/meta.tsx).
 
-The HOC's used in this file are responsible for both rendering and editing meta-tags:
-#### Adding SEO form to Editor interface
-The `withMetaForm` provides ab ability to insert a SEO form
-within the editor inferface for the site editor to manipulate meta date per
-page. 
+See below for instructions on how to add meta data to a page's head and make it editable for site
+editors.
 
-Besides adding the form, the site builder will also define the fields that the
-content editor can see to edit in the page.
+- #### Adding SEO form to Editor interface
+  The `withMetaForm` provides ability to insert a SEO form
+within the editor interface for the site editor to manipulate meta data per
+page.
 
-#### Adding metatag to the document HEAD
+  First, import `withMetaForm` from @bodiless/components package:
+  ```
+  import withMetaForm from @bodiless/components;
+  ```
+  `withMetaForm` takes 2 parameters:
+  1. `useGetMenuOptions`: defines SEO form menu button appearance.
+      ```
+      {
+        name: 'seo',                     // Menu item name
+        isHidden: () => !context.isEdit, // Hidden the button in preview mode
+        icon: 'category',                // Button icon
+        label: 'SEO',                    // Button label
+      },
+      ```
+  1. `seoFormHeader`: [Optional] defines SEO form title and description for users.
+      ```
+      {
+        title: 'SEO Data form',
+        description: `Enter the page level data used for SEO ...`
+      };
+      ```
+  Then, apply this HOC to Helmet component:
+  ```
+  const SeoHelmet = withMetaForm(useGetMenuOptions, seoFormHeader)(Helmet);
+  ```
+- #### Adding Meta Data Fields to Editor interface
+  Next, define the form fields so site editor can update content of meta data displayed
+  on the head section of each page. For example, to add editable meta description field:
+  1. Import withMeta from '@bodiless/components'.
+  1. Create HOC withMetaPageDescription with meta field name `description`, form
+     field label `Description` and a placeholder text. e.g.:
+      ```
+      const withMetaPageDescription = withMeta({
+        name: 'description',
+        useFormElement: () => useMenuOptionUI().ComponentFormTextArea,
+        label: 'Description',
+        placeholder: 'Rec < 160 char',
+      });
+      ```
+      ***useFormElement*** provides a function that returns a UI input component
+      (e.g. "ComponentFormText", "ComponentFormTextArea", etc.).
 
-In addition fo defining the form fields, the calls to `withMeta*` also render
-the meta-tags to the document head, using data from json objects which were
-written by the editor. You can also see defined here some site-level meta-tags
-which are not exposed to the editor for modification.
+  To apply this field to the meta form previously created, you can use flowRight:
+  ``` 
+  const SeoHelmet = flowRight(
+    withMetaForm(useGetMenuOptions, seoFormHeader),
+    asBodilessHelmet('meta'),
+    withMetaPageDescription('description', ''),
+  )(Helmet);
+  ```
+  ***asBodilessHelmet*** HOC specifies `meta` as nodeKey for server side
+  storage, and the description content will be saved in data file named
+  `meta$description.json`.
+- #### Meta Data Rendering
+  In addition to defining the form fields, the calls to `withMeta*` also render
+  the meta-tags to the page document head, using data from the json files which were
+  written by the editor. 
+  
+  The recommendation is the content editor can set the meta data per page, but the
+  site-level meta is not exposed to content editor for modification. The reason being the
+  site-level meta data is set once per site on the site build and changes very infrequently
+  to never, so there is little need to allow a content editor to change this data.
 
-For full information on adding metadata, please read [Meta](TBD)
+### Logo
 
-### Site Title & Logo
+* The Logo is an editable image that can be uploaded in the editor.
 
-* This can be configured in `gatsby-config.js` by setting SiteMetaData.
+### Favicon
 
+* Favion size recommendation is:
+  * at least as big as the largest icon being generated (512x512 by default).
+  * square (if it’s not, transparent bars will automatically be added to make it square)
+  * of one of the following formats: JPEG, PNG, WebP, TIFF, GIF or SVG.
+
+The favicon path & image is currently defined in the starter kit to use `src/images/favicon.png`
+and it uses
+[gatsby-plugin-manifest](https://www.gatsbyjs.org/packages/gatsby-plugin-manifest/)
+to generate a set of favicons for your site to use. For more information on
+options, please read the documentation for
+[gatsby-plugin-manifest](https://www.gatsbyjs.org/packages/gatsby-plugin-manifest/).
+
+If desired, this can be overrode by specifying custom options within the site's
+`gatsby-config.js`.
+
+e.g.
 ```
-  siteMetadata: {
-    title: 'BodilessJS Starter',
-    logo: '/images/bodiless_logo.png',
+const plugins = [
+  {
+    resolve: 'gatsby-plugin-manifest',
+    options: {
+      icon: 'src/images/favicon.png',
+      legacy: false,
+    },  
   },
+];
 ```
-
-Both the desktop menu and mobile burger menu will use the logo defined here.
-The footer will use title in the copyright.
-
-Note: This is a vanilla Gatsby pattern and there is nothing unique that Bodiless
-is doing with it.
-
-### Site Favicon
-
-* Can be updated in `src/components/Layout/index.jsx` by defining location of
-  favicon.
 
 ### Addition of other components in the Header & Footer
 
@@ -77,7 +143,7 @@ should be stored at site level. This can be done via specifying
 
 e.g.
 ```
- <Menu nodeKey="MainMenu" nodeCollection="site" />
+asEditable({ nodeKey: 'copyright', nodeCollection: 'site' }, 'Insert Copyright', 'site')
 ```
 
 ## Menu & Burger Menu

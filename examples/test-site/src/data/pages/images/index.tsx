@@ -16,6 +16,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { flowRight } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
+import { withNode, withNodeKey } from '@bodiless/core';
 import {
   A,
   H1,
@@ -74,6 +75,14 @@ const PageTitle = asHeader1(H1);
 const PageSection = flowRight(
   addClasses('my-4'),
 )(Section);
+const EditableImagesSection = flowRight(
+  withNodeKey('editableImages'),
+  withNode,
+)(PageSection);
+const LinkableImagesSection = flowRight(
+  withNodeKey('linkableImages'),
+  withNode,
+)(PageSection);
 const ImageWrapper = flowRight(
   addClasses('inline-block p-2'),
 )(Div);
@@ -84,7 +93,7 @@ export default (props: any) => (
   <Page {...props}>
     <Layout>
       <PageTitle>Images Demo</PageTitle>
-      <PageSection>
+      <EditableImagesSection>
         <ImageSectionTitle>Editable images</ImageSectionTitle>
 
         <ImageWrapper>
@@ -121,8 +130,8 @@ export default (props: any) => (
           <ImageTitle>Responsive SVG</ImageTitle>
           <ImageResponsiveSvg />
         </ImageWrapper>
-      </PageSection>
-      <PageSection>
+      </EditableImagesSection>
+      <LinkableImagesSection>
         <ImageSectionTitle>Linkable Editable images</ImageSectionTitle>
 
         <ImageWrapper>
@@ -159,7 +168,7 @@ export default (props: any) => (
           <ImageTitle>Responsive SVG</ImageTitle>
           <LinkableImageResponsiveSvg />
         </ImageWrapper>
-      </PageSection>
+      </LinkableImagesSection>
       <PageSection>
         <ImageSectionTitle>Contentful Image Components</ImageSectionTitle>
         <ImageWrapper>

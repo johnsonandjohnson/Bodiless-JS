@@ -13,11 +13,14 @@
  */
 
 import React, { FC, ComponentType, HTMLProps } from 'react';
+import { flow } from 'lodash';
 import {
   designable,
   DesignableComponentsProps,
+  withDesign,
   Div,
 } from '@bodiless/fclasses';
+import { withNodeKey } from '@bodiless/core';
 import ResponsiveMenu from '../Menus';
 import Logo from './logo';
 
@@ -52,11 +55,18 @@ const HeaderClean: FC<Props> = ({ components }) => {
         <SiteLogoReturn />
       </Container>
       <MenuContainer>
-        <Menu nodeKey="MainMenu" nodeCollection="site" />
+        <Menu />
       </MenuContainer>
     </Wrapper>
   );
 };
 
-const Header = designable(headerComponents)(HeaderClean);
+const asSiteHeader = flow(
+  designable(headerComponents),
+  withDesign({
+    Menu: withNodeKey({ nodeKey: 'MainMenu', nodeCollection: 'site' }),
+  }),
+);
+
+const Header = asSiteHeader(HeaderClean);
 export default Header;

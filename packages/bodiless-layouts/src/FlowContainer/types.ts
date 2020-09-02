@@ -33,6 +33,7 @@ export type EditFlowContainerProps = StaticFlowContainerProps & {
   snapData?: SnapData,
   defaultWidth?: string|number,
   maxComponents?: number,
+  mandatoryCategories?: string[],
 };
 export type WidthClassTuple = {
   width: number;
