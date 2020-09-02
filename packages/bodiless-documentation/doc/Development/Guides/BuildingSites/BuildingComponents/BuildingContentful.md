@@ -29,7 +29,7 @@ a contentful component.
   allows the site editor to reset data back to the default content. If your
   components consists of a composition of individual components, A site builder
   has the choice of determing the reset behavior.  
-  * It can be for placed on the component itself, and then the reset will revert
+  * It can be placed on the component itself, and then the reset will revert
 all data back to the original.
   * Or it can be placed on each individual components, allowing the site editor
     to reset individual components.
