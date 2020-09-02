@@ -13,48 +13,104 @@
  */
 
 /* eslint-disable no-console */
-const { copySync, existsSync, mkdirpSync } = require('fs-extra');
+const { copySync, existsSync, mkdirpSync, emptyDirSync } = require('fs-extra');
 const path = require('path');
 const { spawn } = require('child_process');
 const home = require('os').homedir();
 
-const args = process.argv.filter(arg => !arg.match(/^--/));
-const destDir = args[2] || path.resolve(home, 'gatsby-starter-bodiless');
-const src = args[3] || 'starter';
-const noInstall = process.argv.find(arg => arg === '--no-install');
-const srcDir = path.resolve('.', 'examples', src);
+var destDir = '';
+var src = '';
+var noInstall = '';
+var srcDir = '';
 
-try {
-  if (existsSync(destDir)) {
-    console.error(`${destDir} already exists. Stopping.`);
+
+let inquirer = require('inquirer');
+
+const askSetup = () => {
+  const questions = [
+    {
+      type: 'list',
+      name: 'typeofsite',
+      message: 'What type of new site do you want to create?',
+      choices: ["starter", "test-site"],
+      default: src,
+    },
+    {
+      type: 'input',
+      name: 'destinationdir',
+      message: 'What is location of new site or site to update? recommend path to be ../ so its outside of monorepo.:'
+    },
+    {
+      type: 'confirm',
+      name: 'gitinit',
+      message: 'Do you want to run git-init on Destination Directory? Recommended if New Starter Site:',
+      default: false,
+    },
+    {
+      type: 'confirm',
+      name: 'runinstall',
+      message: 'Do you want to run npm install on Destination Directory? Skip if you plan to Pack:',
+      default: true,
+    },
+    {
+      type: 'confirm',
+      name: 'runpack',
+      message: 'Do you want to pack latest version of Bodiless into Destination Directory?',
+      default: true,
+    },    
+  ];
+  return inquirer.prompt(questions);
+};
+
+const askOverride = () => {
+  const questions = [
+    {
+      type: 'confirm',
+      name: 'overwrite',
+      message: 'Destination directory already exists. Do you want to stop?',
+      default: false,
+    },
+  ];
+  return inquirer.prompt(questions);
+};
+
+const createSite = () => {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    mkdirpSync(destDir),
+    copySync(srcDir, destDir, {
+      overwrite: true,
+      errorOnExist: true,
+      dereference: true,
+      filter: name => !name.match(/node_modules/) && !name.match(/\.git\//) && !name.match(/.cache/) && !name.match(/lib/) && !name.match('/doc/') && !name.match('/edit/'),
+    });
+  } catch (e) {
+    console.error(`Unable to copy ${srcDir} to ${destDir}`);
+    console.error(e);
     process.exit(1);
   }
-  mkdirpSync(destDir);
+  console.log(`Site has been successfully copied from ${srcDir} to ${destDir}`);
+};
 
-  copySync(srcDir, destDir, {
-    filter: name => !name.match(/node_modules/) && !name.match(/\.git\//),
+const runGit = () => {
+  process.chdir(destDir);
+
+  spawn('git', ['init'], {
+    stdio: 'inherit',
+    shell: true,
   });
-} catch (e) {
-  console.error(`Unable to copy ${srcDir} to ${destDir}`);
-  console.error(e);
-  process.exit(1);
-}
+};
 
-process.chdir(destDir);
+const runInstall = () => {
 
-const child = spawn('git', ['init'], {
-  stdio: 'inherit',
-  shell: true,
-});
-child.on('close', (code) => {
-  if (noInstall) process.exit(code);
+  process.chdir(destDir);
 
-  const child$ = spawn('npm', ['install'], {
+  const child = spawn('npm', ['install'], {
     stdio: 'inherit',
     shell: true,
   });
 
-  child$.on('close', code => {
+  child.on('close', code => {
     console.log();
     if (code) {
       console.error(`npm install exited with code ${code}`);
@@ -63,4 +119,48 @@ child.on('close', (code) => {
     console.log('Installation successful.');
     console.log(`Use "cd ${destDir} && npm start" to launch the editor.`);
   });
-});
+
+};
+
+const runPack = () => {
+
+  const packstr = 'pack -s ' + destDir;
+
+  spawn('bodiless', [packstr], {
+    stdio: 'inherit',
+    shell: true,
+  });
+  console.log('Pack successful.');
+};
+
+const run = async () => {
+
+  const choice = await askSetup();
+
+  src = choice.typeofsite;
+  destDir = choice.destinationdir;
+  noInstall = choice.runinstall;
+  srcDir = path.resolve('.', 'examples', src);
+
+  if (existsSync(destDir)) {
+    const choice = await askOverride();
+    if (choice.overwrite) process.exit(0);
+  }
+
+  createSite();
+
+  if (choice.gitinit) {
+    runGit();
+  }
+
+  if (choice.runinstall) {
+    runInstall();
+  }
+
+  if (choice.runpack) {
+    runPack();
+  }
+
+};
+
+run();

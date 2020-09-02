@@ -17,14 +17,21 @@ install it from this repository as follows:
 git clone https://github.com/johnsonandjohnson/bodiless-js.git
 cd bodiless-js
 npm ci
-npm run new /path/to/new/site
+npm run new
 ```
+
+The wizard will ask prompts:
+- Type of Site: choose starter
+- Location of Site:  i.e.  ../starter
+> Note: You should avoid creating a new site in the monorepo, except in the /sites
+directory if you intend to check it against local packages.
+- Git initialize: yes
+- NPM install: yes
+- Bodiless Pack: no
 
 This will create a new git repository at the specified location (which defaults
 to `~/gatsby-starter-bodiless`), copy the starter, and install all dependencies.
 
-> Note: You should avoid creating a new site in the monorepo, except in the /sites
-directory if you intend to check it against local packages.
 
 You can then launch the editor:
 

@@ -67,6 +67,7 @@
     "clean": "rimraf ./public/* ./.cache",
     "dev-backend": "node ./node_modules/@bodiless/backend/src/server.js",
     "dev-frontend": "gatsby develop -p 8005",
+    "init-psh": "bodiless-psh-init",    
     "serve": "gatsby serve",
     "prebuild:watch": "run-s build:env-vars build:doc",
     "start": "npm run build:watch",

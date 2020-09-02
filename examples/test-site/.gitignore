@@ -1,15 +1,23 @@
 # Project dependencies
 node_modules
-doc
 yarn-error.log
+doc
 
-# Build directory
-/public
+# Build directory and assets
+.cache
+public
+src/components/index.css
 
 # Temporary files
 .DS_Store
 .swp
+.eslintcache
+*.tsbuildinfo
 
-.cache
-public
-src/components/index.css
+# jetbrains files
+.idea
+
+# environment variables
+.env
+.env.development
+.env.production

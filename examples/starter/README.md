@@ -14,10 +14,9 @@ BodilessJS provides a Gatsby starter you can use as the basis of a new site.
 Currently, you must install it from the main repository as follows:
 
 ```bash
-git clone https://github.com/johnsonandjohnson/bodiless-js.git
-cd bodiless-js
-npm run ci
-npm run new /path/to/new/site
+git clone GIT_REPO NEW_SITE
+cd NEW_SITE 
+npm install
 ```
 Recommend path for the new site is outside the bodiless-js repo.  i.e. ../mysite.
 
