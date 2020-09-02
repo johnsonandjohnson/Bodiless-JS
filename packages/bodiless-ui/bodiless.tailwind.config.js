@@ -68,8 +68,6 @@ const negativeGrid = {
 };
 
 const percentGrid = {
-  'tenth': '10%',
-  'fifth': '20%',
   'quarter': '25%',
   'third': '33.33%',
   'half': '50%',
@@ -78,7 +76,6 @@ const percentGrid = {
 };
 
 const remGrid = {
-  'half-rem': '0.5rem',
   'rem-1': '1rem',
 };
 

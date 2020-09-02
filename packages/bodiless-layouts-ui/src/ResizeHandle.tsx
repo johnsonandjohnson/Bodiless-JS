@@ -23,7 +23,7 @@ const ResizeHandle = (hocProps: TProps): React.ReactElement<TProps> => {
   const { className, ...props } = hocProps;
 
   return (
-    <ResizeHandleBase {...props} className={`${className}`} />
+    <ResizeHandleBase {...props} className={className} />
   );
 };
 

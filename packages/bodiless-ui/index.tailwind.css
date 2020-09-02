@@ -118,6 +118,19 @@
 
 .material-icons.md-36 { font-size: 36px; }
 
+
+/**
+ * Bodiless Resizable Styles
+ */
+.bl-resizable .bl-resizable-handle {
+  display: none;
+}
+
+.bl-resizable:hover .bl-resizable-handle,
+.bl-active .bl-resizable-handle {
+  display: block;
+}
+
 /**
  * This injects all of Tailwind's utility classes, generated based on your
  * config file.

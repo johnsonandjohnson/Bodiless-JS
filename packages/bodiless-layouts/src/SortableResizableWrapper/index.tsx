@@ -27,20 +27,10 @@ const ENABLED_DRAG_SIDES = {
   bottomLeft: false,
   topLeft: false,
 };
-const DISABLED_DRAG_SIDES = {
-  top: false,
-  right: false,
-  bottom: false,
-  left: false,
-  topRight: false,
-  bottomRight: false,
-  bottomLeft: false,
-  topLeft: false,
-};
 
 type FinalUI = {
   DragHandle: ComponentType<HTMLProps<HTMLSpanElement>> | string,
-  ResizeHandle: ComponentType<HTMLProps<HTMLSpanElement>> | string,
+  ResizeHandle: ComponentType<HTMLProps<HTMLDivElement>> | string,
   Reresizable: ComponentType<ResizableProps & { isEnabled?: boolean }>,
 };
 
@@ -48,7 +38,7 @@ export type UI = Partial<FinalUI>;
 
 const defaultUI: FinalUI = {
   DragHandle: 'span',
-  ResizeHandle: 'span',
+  ResizeHandle: 'div',
   Reresizable: CleanReresizable,
 };
 
@@ -94,7 +84,7 @@ const SortableResizableWrapper = SortableElement((props: Props) => {
 
   return (
     <Reresizable
-      enable={isEnabled ? ENABLED_DRAG_SIDES : DISABLED_DRAG_SIDES}
+      enable={ENABLED_DRAG_SIDES}
       isEnabled={isEnabled}
       scale={1}
       className={className}
