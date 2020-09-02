@@ -128,7 +128,7 @@
 }
 
 .bl-resizable:hover .bl-resizable-handle,
-.bl-active .bl-resizable-handle {
+.bl-resizable.bl-active .bl-resizable-handle {
   display: block;
 }
 
