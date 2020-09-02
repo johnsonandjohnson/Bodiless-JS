@@ -175,8 +175,8 @@ const ResizeHandleBar = addClasses(`
 
 export const ResizeHandle = flow(
   addClasses(`
-    bl-flex bl-justify-center bl-w-5 bl-right-rem-1
-    bl-z-1 bl-h-three-quarters bl-relative bl-top-half bl-transform bl--translate-y-1/2
+    bl-flex bl-justify-center bl-w-5 bl-right-rem-1 bl-z-1
+    bl-h-three-quarters bl-relative bl-top-half bl-transform bl--translate-y-1/2
   `),
   withChild(() => <ResizeHandleBar />),
 )(Div);

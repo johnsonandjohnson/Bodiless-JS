@@ -121,6 +121,7 @@
 
 /**
  * Bodiless Resizable Styles
+ * Only display .bl-resizable-handle when .bl-resizable is active or hovered over.
  */
 .bl-resizable .bl-resizable-handle {
   display: none;
