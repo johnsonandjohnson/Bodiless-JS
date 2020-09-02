@@ -30,18 +30,24 @@ import {
 /* Page Structure */
 const asBlockItem = addClasses('p-1 w-full');
 const asPageContainer = addClasses('container mx-auto');
-const asVerticalMargin = addClasses('my-2');
-const asHorizontalMargin = addClasses('mx-2');
+const asXMargin = addClasses('mx-2');
+const asYMargin = addClasses('my-2');
+const asNegXMargin = addClasses('-mx-1');
+const asNegYMargin = addClasses('-my-1');
+const withPadding5 = addClasses('p-5');
+
+/* Responsive design */
+const asMobileOnly = addClasses('block lg:hidden');
+const asExceptMobile = addClasses('hidden lg:block');
 
 /* Primary coloring */
 const asPrimaryColorBackground = addClasses('bg-gray-200');
-const asTextColorPrimary = addClasses('text-blue');
+const asTextColorPrimary = addClasses('text-black');
 
 /* Typography */
 const asBold = addClasses('');
 const asItalic = addClasses('');
 const asLink = addClasses('text-blue-700 underline');
-const asStrikeThrough = addClasses('');
 const asSuperScript = addClasses('');
 
 const asHeader1 = flow(addClasses('text-3xl'), asTextColorPrimary);
@@ -54,6 +60,7 @@ const asBlockQuote = addClasses('block mx-4');
 /* Image component */
 const asImage = addClasses('');
 const asEditableImage = asBodilessImage;
+const asImageRounded = addClasses('rounded-lg');
 
 /* Link component */
 const asEditableLink = asBodilessLink;
@@ -61,19 +68,23 @@ const asEditableLink = asBodilessLink;
 /* Edit component */
 const asEditable = asEditableCore;
 
+// Tout Components
+const asCta = addClasses('bg-orange-700 hover:bg-orange-600 text-center text-white p-2 rounded');
+
 export {
   asBold,
   asItalic,
   asUnderline,
   asLink,
-  asStrikeThrough,
   asAlignLeft,
   asAlignRight,
   asAlignCenter,
   asAlignJustify,
+  asExceptMobile,
   asHeader1,
   asHeader2,
   asHeader3,
+  asCta,
   asBlockItem,
   asPageContainer,
   asPrimaryColorBackground,
@@ -81,9 +92,14 @@ export {
   asEditableImage,
   asEditableLink,
   asEditable,
+  asImageRounded,
+  asMobileOnly,
   asSuperScript,
   asTextColorPrimary,
-  asVerticalMargin,
-  asHorizontalMargin,
+  asXMargin,
+  asYMargin,
+  asNegXMargin,
+  asNegYMargin,
   asBlockQuote,
+  withPadding5,
 };
