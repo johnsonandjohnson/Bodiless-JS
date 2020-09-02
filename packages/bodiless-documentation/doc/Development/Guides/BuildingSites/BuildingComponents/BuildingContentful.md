@@ -8,7 +8,7 @@ A contentful component allows you to specify the default content of a component,
 so when it is placed on a site, the data is pre-populated.
 
 Once a contentful component is placed, the content can be edited by the
-content editor as needed. In addition, if a site editor wants to return back to
+content editor as needed. In addition, if a site editor wants to revert to the
 original content, they can do so at the individual
 component level via a reset button in the context menu.
 
@@ -35,6 +35,7 @@ all data back to the original.
     to reset individual components.
 
 ### Defining a Contentful Component that consists of single component
+
 The following is an example of defining a contentful image:
 
 e.g.
