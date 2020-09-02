@@ -7,9 +7,9 @@ another site.
 A contentful component allows you to specify the default content of a component,
 so when it is placed on a site, the data is pre-populated.
 
-Once a contentful component is placed, the content still be can edited by the
-site editor as needed. In addition, if a site editor wants to return back to
-original content, they can restore the default content at the individual
+Once a contentful component is placed, the content can be edited by the
+content editor as needed. In addition, if a site editor wants to return back to
+original content, they can do so at the individual
 component level via a reset button in the context menu.
 
 As a site builder, if you see a component that is often reused
@@ -20,7 +20,7 @@ component and skip entering the data for it.
 ## Developing a Contentful Component
 
 BodilessJS provides an API that allows you to extend your component and make it
-contentful component.
+a contentful component.
 
 * `withDefaultContent` will extend your component to allow default content to be
   passed as a parameter.
@@ -152,17 +152,17 @@ export default GivingBackToCommunity;
 
 The contents of each of the `.json` is the data if this component was saved in
 the traditional way through the edit interface. To create these
-files place the component on the page, fill in the default content and then
+files, place the component on the page, fill in the default content and then
 copy the `.json` files to this Contentful Component folder and import them in.
 
 The contents for the `./image` are the same as our simple image contentful component in
 the first example that includes data object and the src of the image.
 
-### Adding Contentful Components to the FlowContainer
+### Adding Contentful Components to the Flow Container
 
-Adding your contentful components to the FlowContainer is done in the normal method for the FlowContainer.  
+Adding your contentful components to the Flow Container is done in the normal method for the Flow Container.  
 
-We do suggest that you remember to include the same facets used for the original component as part of this variation, so it can easily be found in the same categories as defined in the original component.
+We suggest that you remember to include the same facets used for the original component as part of this variation, so it can easily be found in the same categories as defined in the original component.
 
 e.g. An example defining the contentful component from the previous example and
 define in `withContentfulTouts.tsx.`
