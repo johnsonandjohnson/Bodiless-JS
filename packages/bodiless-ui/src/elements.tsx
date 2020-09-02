@@ -169,15 +169,14 @@ export const HorizontalToolbarButton = flow(
 
 export const ToolbarButtonLabel = addClasses('bl-text-center bl-text-base')(Span);
 
-const ResizeHandleBar = addClasses(`
-  bl-resizable-handle bl-border-solid bl-border-l-2 bl-border-primary bl-h-full
-`)(Div);
+const ResizeHandleBar = addClasses(
+  'bl-resizable-handle bl-border-solid bl-border-l-2 bl-border-primary bl-h-full',
+)(Div);
 
 export const ResizeHandle = flow(
-  addClasses(`
-    bl-flex bl-justify-center bl-w-5 bl-right-rem-1 bl-z-1
-    bl-h-three-quarters bl-relative bl-top-half bl-transform bl--translate-y-1/2
-  `),
+  addClasses(
+    'bl-flex bl-justify-center bl-w-5 bl-right-rem-1 bl-z-1 bl-h-three-quarters bl-relative bl-top-half bl-transform bl--translate-y-1/2',
+  ),
   withChild(() => <ResizeHandleBar />),
 )(Div);
 
