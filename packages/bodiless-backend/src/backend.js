@@ -167,7 +167,7 @@ class GitCommit {
       throw rebaseErr;
     } finally {
       // If there was a temporary commit, rewind working directory back one commit.
-      if (dirty.code) {
+      if (dirty.code && (result.stdout.search('Already applied') !== -1)) {
         await GitCmd.cmd()
           .add('reset', 'HEAD^')
           .exec();
