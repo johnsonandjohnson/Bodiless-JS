@@ -8,13 +8,13 @@ A contentful component allows you to specify the default content of a component,
 so when it is placed on a site, the data is pre-populated.
 
 Once a contentful component is placed, the content can be edited by the
-content editor as needed. In addition, if a site editor wants to revert to the
+content editor as needed. In addition, if a content editor wants to revert to the
 original content, they can do so at the individual
 component level via a reset button in the context menu.
 
 As a site builder, if you see a component that is often reused
 through the site - say a tout on each article - it can be helpful to build this
-component as a contentful tout and then a site editor can quickly choose this
+component as a contentful tout and then a content editor can quickly choose this
 component and skip entering the data for it.
 
 ## Developing a Contentful Component
@@ -26,12 +26,12 @@ a contentful component.
   passed as a parameter.
 
 * `withResetButton` will add a context menu icon, Reset, to the component that
-  allows the site editor to reset data back to the default content. If your
+  allows the content editor to reset data back to the default content. If your
   components consists of a composition of individual components, A site builder
   has the choice of determing the reset behavior.  
   * It can be placed on the component itself, and then the reset will revert
 all data back to the original.
-  * Or it can be placed on each individual components, allowing the site editor
+  * Or it can be placed on each individual components, allowing the content editor
     to reset individual components.
 
 ### Defining a Contentful Component that consists of single component
@@ -73,10 +73,10 @@ export default {
 ```
 
 The contentful default image is stored within `src/components/Contentful/Image`
-folder. If a site editor uploads an image in place of this image, it will be
+folder. If a content editor uploads an image in place of this image, it will be
 stored in the normal static folder.
 
-This contentful component can be used within a page, template or added to FlowContainer to be available to site editor.
+This contentful component can be used within a page, template or added to Flow Container to be available to content editor.
 
 ### Defining a Contentful Component that consists of composition of multiple components
 
