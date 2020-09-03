@@ -19,7 +19,9 @@ import {
   SchemaProperties,
 } from 'slate';
 
-import { NodeProvider, DefaultContentNode, withoutProps } from '@bodiless/core';
+import {
+  NodeProvider, DefaultContentNode, withoutProps, useNode,
+} from '@bodiless/core';
 import { RenderNodeProps } from 'slate-react';
 import { flow } from 'lodash';
 import {
@@ -55,11 +57,13 @@ const addAttributes = <P extends object> (Component:ComponentType<P>) => (
 const SlateComponentProvider = (update:Function) => (
   <P extends object, D extends object>(Component:ComponentType<P>) => (
     (props:P & RenderNodeProps) => {
+      const { node: bodilessNode } = useNode();
       const { editor, node } = props;
       const getters = {
         getNode: (path: string[]) => node.data.toJS()[path.join('$')],
         getKeys: () => ['slatenode'],
-        hasError: () => false,
+        hasError: () => bodilessNode.hasError(),
+        getPagePath: () => bodilessNode.pagePath,
       };
       const actions = {
         // tslint: disable-next-line:no-unused-vars

@@ -13,30 +13,34 @@
  */
 
 import React, { ComponentType as CT } from 'react';
-import { WithNodeProps, DefaultContentNode, NodeProvider } from '@bodiless/core';
+import {
+  WithNodeProps, DefaultContentNode, NodeProvider, useNode,
+} from '@bodiless/core';
 import { CustomComponentProps } from './Type';
 
-const asSlateCustomComponent = <P extends WithNodeProps>(Component: CT<P>) => ({
-  componentData,
-  setComponentData,
-  ...rest
-}: P & CustomComponentProps) => {
-  const getters = {
-    getNode: () => componentData,
-    getKeys: () => ['slatenode'],
-    hasError: () => false,
+const asSlateCustomComponent = <P extends WithNodeProps>(Component: CT<P>) => {
+  const SlateCustomComponent = (props: P & CustomComponentProps) => {
+    const { componentData, setComponentData, ...rest } = props;
+    const { node } = useNode();
+    const getters = {
+      getNode: () => componentData,
+      getKeys: () => ['slatenode'],
+      hasError: () => node.hasError(),
+      getPagePath: () => node.pagePath,
+    };
+    const actions = {
+      // tslint: disable-next-line:no-unused-vars
+      setNode: (path: string[], data: any) => setComponentData(data),
+      deleteNode: () => {},
+    };
+    const contentNode = new DefaultContentNode(actions, getters, 'slatenode');
+    return (
+      <NodeProvider node={contentNode}>
+        <Component {...rest as P} />
+      </NodeProvider>
+    );
   };
-  const actions = {
-    // tslint: disable-next-line:no-unused-vars
-    setNode: (path: string[], data: any) => setComponentData(data),
-    deleteNode: () => {},
-  };
-  const contentNode = new DefaultContentNode(actions, getters, 'slatenode');
-  return (
-    <NodeProvider node={contentNode}>
-      <Component {...rest as P} />
-    </NodeProvider>
-  );
+  return SlateCustomComponent;
 };
 
 export default asSlateCustomComponent;
