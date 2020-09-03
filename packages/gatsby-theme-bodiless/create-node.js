@@ -15,7 +15,8 @@
 const pathUtil = require('path');
 const slash = require('slash');
 const crypto = require('crypto');
-const { fluid } = require('gatsby-plugin-sharp');
+const { fluid, fixed } = require('gatsby-plugin-sharp');
+const GatsbyImagePresets = require('./dist/GatsbyImage/GatsbyImagePresets').default;
 
 const Logger = require('./Logger');
 
@@ -76,13 +77,173 @@ const generateDigest = content => crypto
   .update(content)
   .digest('hex');
 
+const supportedExtensions = {
+  jpeg: true,
+  jpg: true,
+  png: true,
+  webp: true,
+  tif: true,
+  tiff: true,
+};
+
+const generateGatsbyImage = async ({ file, preset, reporter }) => {
+  // skip image generation when unknown preset is passed
+  if (!Object.values(GatsbyImagePresets).includes(preset)) {
+    return undefined;
+  }
+  switch (preset) {
+    case GatsbyImagePresets.Fixed:
+      return {
+        fixed: await fixed({
+          file,
+          args: {
+            base64: true,
+          },
+          reporter,
+        }),
+      };
+    case GatsbyImagePresets.FixedNoBase64:
+      return {
+        fixed: await fixed({
+          file,
+          args: {
+            base64: false,
+          },
+          reporter,
+        }),
+      };
+    case GatsbyImagePresets.FixedTracedSVG:
+      return {
+        fixed: await fixed({
+          file,
+          args: {
+            generateTracedSVG: true,
+            tracedSVG: true,
+            base64: false,
+          },
+          reporter,
+        }),
+      };
+    case GatsbyImagePresets.FixedWithWebp:
+      return {
+        fixed: await fixed({
+          file,
+          args: {
+            toFormat: 'webp',
+            base64: true,
+          },
+          reporter,
+        }),
+      };
+    case GatsbyImagePresets.FixedWithWebpNoBase64:
+      return {
+        fixed: await fixed({
+          file,
+          args: {
+            toFormat: 'webp',
+            base64: false,
+          },
+          reporter,
+        }),
+      };
+    case GatsbyImagePresets.FixedWithWebpTracedSVG:
+      return {
+        fixed: await fixed({
+          file,
+          args: {
+            toFormat: 'webp',
+            generateTracedSVG: true,
+            tracedSVG: true,
+            base64: false,
+          },
+          reporter,
+        }),
+      };
+    case GatsbyImagePresets.Fluid:
+      return {
+        fluid: await fluid({
+          file,
+          args: {
+            base64: true,
+          },
+          reporter,
+        }),
+      };
+    case GatsbyImagePresets.FluidNoBase64:
+      return {
+        fluid: await fluid({
+          file,
+          args: {
+            base64: false,
+          },
+          reporter,
+        }),
+      };
+    case GatsbyImagePresets.FluidTracedSVG:
+      return {
+        fluid: await fluid({
+          file,
+          args: {
+            generateTracedSVG: true,
+            tracedSVG: true,
+            base64: false,
+          },
+          reporter,
+        }),
+      };
+    case GatsbyImagePresets.FluidWithWebp:
+      return {
+        fluid: await fluid({
+          file,
+          args: {
+            toFormat: 'webp',
+          },
+          reporter,
+        }),
+      };
+    case GatsbyImagePresets.FluidWithWebpNoBase64:
+      return {
+        fluid: await fluid({
+          file,
+          args: {
+            toFormat: 'webp',
+            base64: false,
+          },
+          reporter,
+        }),
+      };
+    case GatsbyImagePresets.FluidWithWebpTracedSVG:
+      return {
+        fluid: await fluid({
+          file,
+          args: {
+            toFormat: 'webp',
+            generateTracedSVG: true,
+            tracedSVG: true,
+            base64: false,
+          },
+          reporter,
+        }),
+      };
+    default:
+      return undefined;
+  }
+};
+
 const generateImages = async ({ node, content, reporter }) => {
   const parsedContent = JSON.parse(content);
-  // ToDo better check when we have image content
   if (parsedContent === undefined || parsedContent.src === undefined) {
     return undefined;
   }
+  // skip image generation if preset is not set
+  if (parsedContent.preset === undefined) {
+    return undefined;
+  }
   const imgSrc = parsedContent.src;
+  const fileExtension = pathUtil.extname(imgSrc).substr(1);
+  if (!supportedExtensions[fileExtension]) {
+    return undefined;
+  }
   const imageNode = {
     id: `${node.id} >>> ImageNode`,
     parent: node.id,
@@ -97,8 +258,9 @@ const generateImages = async ({ node, content, reporter }) => {
       contentDigest: generateDigest(content),
     },
   };
-  return fluid({
+  return generateGatsbyImage({
     file: imageNode,
+    preset: parsedContent.preset,
     reporter,
   });
 };
@@ -120,7 +282,7 @@ const createBodilessNode = async ({
 
   const content = gatsbyImgData ? JSON.stringify({
     ...JSON.parse(nodeContent),
-    gatsbyImg: gatsbyImgData,
+    ...(gatsbyImgData ? { gatsbyImg: gatsbyImgData } : {}),
   }) : nodeContent;
 
   const bodilessNode = {

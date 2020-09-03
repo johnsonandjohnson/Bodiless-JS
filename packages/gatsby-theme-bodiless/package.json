@@ -41,7 +41,6 @@
     "clean": "rimraf -rf \"dist\" && rimraf index* && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/components-ui": "^0.0.55",
     "@bodiless/core": "^0.0.55",
     "@bodiless/core-ui": "^0.0.55",
     "@bodiless/fclasses": "^0.0.55",

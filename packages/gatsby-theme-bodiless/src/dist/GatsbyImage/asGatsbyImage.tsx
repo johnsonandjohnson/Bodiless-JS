@@ -14,13 +14,9 @@
 
 import React, { ComponentType as CT } from 'react';
 import GatsbyImg from 'gatsby-image';
-import { flowRight } from 'lodash';
+import type { GatsbyImageProps } from 'gatsby-image';
 import { useEditContext } from '@bodiless/core';
-import {
-  Div,
-  Img,
-} from '@bodiless/fclasses';
-import { asBodilessImage } from '@bodiless/components-ui';
+import { Div } from '@bodiless/fclasses';
 
 type ImageProps = {
   src: string;
@@ -28,7 +24,8 @@ type ImageProps = {
 };
 
 type GasbyImageProps = ImageProps & {
-  gatsbyImg?: any;
+  preset: string;
+  gatsbyImg?: GatsbyImageProps;
 };
 
 const GatsbyImgEditWrapper = (props: ImageProps) => {
@@ -43,12 +40,12 @@ const GatsbyImgStaticWrapper: CT<ImageProps> = ({ children }) => <>{children}</>
 const asGatsbyImage = (Component: CT<any>) => {
   const AsGatsbyImage = (props: GasbyImageProps) => {
     const { isEdit } = useEditContext();
-    const { gatsbyImg, ...rest } = props;
-    const Wrapper = isEdit ? GatsbyImgEditWrapper : GatsbyImgStaticWrapper;
+    const { gatsbyImg, preset, ...rest } = props;
     if (gatsbyImg !== undefined) {
+      const Wrapper = isEdit ? GatsbyImgEditWrapper : GatsbyImgStaticWrapper;
       return (
         <Wrapper {...rest}>
-          <GatsbyImg fluid={gatsbyImg} />
+          <GatsbyImg {...gatsbyImg} />
         </Wrapper>
       );
     }
@@ -59,10 +56,4 @@ const asGatsbyImage = (Component: CT<any>) => {
   return AsGatsbyImage;
 };
 
-const GatsbyImage = flowRight(
-  asBodilessImage(),
-  asGatsbyImage,
-)(Img);
-
 export default asGatsbyImage;
-export { GatsbyImage };

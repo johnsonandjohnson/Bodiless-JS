@@ -23,6 +23,11 @@ import {
   asBodilessLink,
   withImagePlaceholder,
 } from '@bodiless/components';
+import {
+  asGatsbyImage as asBaseGatsbyImage,
+  withGatsbyImageNode,
+  GatsbyImagePresets,
+} from '@bodiless/gatsby-theme-bodiless';
 import { A, Img } from '@bodiless/fclasses';
 import landscapeImage from './landscape_image.png';
 import { asEditableImage } from '../Elements.token';
@@ -62,6 +67,25 @@ const asLandscapeImage = asEditableImageWithPlaceholder(landscapeImage);
 const LandscapeImage = asLandscapeImage(DEFAULT_IMAGE_NODE_KEY)(Img);
 const LandscapeLinkableImage = asLinkableImage(LandscapeImage)(DEFAULT_LINK_NODE_KEY)(A);
 
+const asGatsbyImg = (preset: string) => flowRight(
+  withGatsbyImageNode(preset),
+  asEditableImage(),
+  asBaseGatsbyImage,
+);
+
+const asFluidGatsbyImage = asGatsbyImg(GatsbyImagePresets.Fluid);
+const asFluidNoBase64GatsbyImage = asGatsbyImg(GatsbyImagePresets.FluidNoBase64);
+const asFluidTracedSVGGatsbyImage = asGatsbyImg(GatsbyImagePresets.FluidTracedSVG);
+const asFluidWithWebpGatsbyImage = asGatsbyImg(GatsbyImagePresets.FluidWithWebp);
+const asFluidWithWebpNoBase64GatsbyImage = asGatsbyImg(GatsbyImagePresets.FluidWithWebpNoBase64);
+const asFluidWithWebpTracedSVGGatsbyImage = asGatsbyImg(GatsbyImagePresets.FluidWithWebpTracedSVG);
+const asFixedGatsbyImage = asGatsbyImg(GatsbyImagePresets.Fixed);
+const asFixedNoBase64GatsbyImage = asGatsbyImg(GatsbyImagePresets.FixedNoBase64);
+const asFixedTracedSVGGatsbyImage = asGatsbyImg(GatsbyImagePresets.FixedTracedSVG);
+const asFixedWithWebpGatsbyImage = asGatsbyImg(GatsbyImagePresets.FixedWithWebp);
+const asFixedWithWebpNoBase64GatsbyImage = asGatsbyImg(GatsbyImagePresets.FixedWithWebpNoBase64);
+const asFixedWithWebpTracedSVGGatsbyImage = asGatsbyImg(GatsbyImagePresets.FixedWithWebpTracedSVG);
+
 export {
   SquareImage,
   LandscapeImage,
@@ -71,4 +95,16 @@ export {
   asLandscapeImage,
   asEditableImageWithPlaceholder,
   asLinkableImage,
+  asFluidGatsbyImage,
+  asFluidNoBase64GatsbyImage,
+  asFluidTracedSVGGatsbyImage,
+  asFluidWithWebpGatsbyImage,
+  asFluidWithWebpNoBase64GatsbyImage,
+  asFluidWithWebpTracedSVGGatsbyImage,
+  asFixedGatsbyImage,
+  asFixedNoBase64GatsbyImage,
+  asFixedTracedSVGGatsbyImage,
+  asFixedWithWebpGatsbyImage,
+  asFixedWithWebpNoBase64GatsbyImage,
+  asFixedWithWebpTracedSVGGatsbyImage,
 };
