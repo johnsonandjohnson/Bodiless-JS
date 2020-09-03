@@ -64,6 +64,7 @@ const SlateComponentProvider = (update:Function) => (
         getKeys: () => ['slatenode'],
         hasError: () => bodilessNode.hasError(),
         getPagePath: () => bodilessNode.pagePath,
+        getResourcePath: () => bodilessNode.resourcePath,
       };
       const actions = {
         // tslint: disable-next-line:no-unused-vars

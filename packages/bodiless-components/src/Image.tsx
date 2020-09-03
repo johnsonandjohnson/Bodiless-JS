@@ -84,6 +84,8 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
   const saveRequest = new BackendSave();
   const { node } = useNode<any>();
 
+  console.log('NODE: ', node.pagePath);
+
   useEffect(() => {
     if (isUploading) {
       const timer = setTimeout(
