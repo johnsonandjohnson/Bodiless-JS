@@ -190,9 +190,7 @@ assistance. (code ${MessageCode.PullNonContentOnly})`
       );
 
     case MessageCode.PullErrored:
-      return messageData ? (
-        <ComponentFormWarning>{messageData}</ComponentFormWarning>
-      ) : (
+      return (
         <ComponentFormWarning>
           {
             `An error has occurred, please try Pull again in a few minutes.
