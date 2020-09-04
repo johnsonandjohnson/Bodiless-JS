@@ -37,7 +37,7 @@ export type Getters = {
   getKeys(): string[];
   hasError(): boolean;
   getPagePath(): string;
-  getResourcePath(): string;
+  getResourcePath(collection: string): string;
 };
 
 export type Path = string | string[];
@@ -90,7 +90,7 @@ export class DefaultContentNode<D extends object> implements ContentNode<D> {
 
   get resourcePath() {
     const { getResourcePath } = this.getters;
-    return getResourcePath();
+    return getResourcePath('page');
   }
 
   setData(dataObj: D) {

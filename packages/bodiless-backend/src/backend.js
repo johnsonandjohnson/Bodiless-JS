@@ -275,7 +275,7 @@ class Backend {
     this.setRoute(`${backendPrefix}/change/reset`, Backend.setChangeReset);
     this.setRoute(`${backendPrefix}/change/pull`, Backend.setChangePull);
     this.setRoute(`${backendPrefix}/merge/master`, Backend.mergeMaster);
-    this.setRoute(`${backendPrefix}/asset`, Backend.setAsset);
+    this.setRoute(`${backendPrefix}/asset/*`, Backend.setAsset);
     this.setRoute(`${backendPrefix}/set/current`, Backend.setSetCurrent);
     this.setRoute(`${backendPrefix}/set/list`, Backend.setSetList);
     this.setRoute(`${backendPrefix}/content/*`, Backend.setContent);
@@ -492,12 +492,13 @@ class Backend {
 
   static setAsset(route) {
     route.post((req, res) => {
+      const resourcePath = Backend.getPath(req);
       const tmpDir = tmp.dirSync({ mode: '0755', unsafeCleanup: true, prefix: 'backendTmpDir_' });
       const form = formidable({ multiples: true, uploadDir: tmpDir.name });
 
       form.parse(req, (err, fields, files) => {
-        const { pagePath, nodePath } = fields;
-        copyAllFiles(files, pagePath, nodePath).then((filesPath) => {
+        const { nodePath } = fields;
+        copyAllFiles(files, resourcePath, nodePath).then((filesPath) => {
           res.json({ filesPath });
         }).catch(copyErr => {
           console.log(copyErr);

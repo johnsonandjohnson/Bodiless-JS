@@ -16,8 +16,8 @@ import axios, { CancelTokenSource } from 'axios';
 
 type FileOptions = {
   file: File,
-  pagePath: string,
   nodePath: string,
+  resourcePath: string,
 };
 
 interface ServerData {
@@ -50,15 +50,14 @@ export default class BackendSave {
 
   saveFile(options: FileOptions) {
     const {
-      file, pagePath, nodePath,
+      file, nodePath, resourcePath,
     } = options;
     // eslint-disable-next-line no-undef
     const payload = new FormData();
     payload.append('file', file);
     payload.append('nodePath', nodePath);
-    payload.append('pagePath', pagePath);
     this.cancelTokenSource = axios.CancelToken.source();
-    return this.post<ServerData>(`${this.prefix}/asset/`, payload, {
+    return this.post<ServerData>(`${this.prefix}/asset/${resourcePath}`, payload, {
       cancelToken: this.cancelTokenSource.token,
     });
   }

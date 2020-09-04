@@ -26,17 +26,14 @@ const copyFilePromise = (from, to) => new Promise((resolve, reject) => {
   });
 });
 
-const isNodeGlobal = nodePath => nodePath.split('$')[0] === 'Site';
-
 const generateHash = str => crypto.createHash('md5').update(str).digest('hex');
 
-const copyAllFiles = (files, pagePath, nodePath) => {
+const copyAllFiles = (files, resourcePath, nodePath) => {
   const allFiles = [];
   Object.keys(files).forEach(key => allFiles.push(files[key]));
-  const hasPagePath = isNodeGlobal(nodePath);
 
   return Promise.all(allFiles.map(file => {
-    const distFolderPath = path.join(backendStaticPath, 'images', hasPagePath ? pagePath : '', generateHash(nodePath));
+    const distFolderPath = path.join(backendStaticPath, 'images', resourcePath, generateHash(nodePath));
 
     if (!fs.existsSync(distFolderPath)) {
       fs.mkdirSync(distFolderPath, { recursive: true });

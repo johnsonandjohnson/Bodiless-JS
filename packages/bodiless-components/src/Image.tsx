@@ -84,8 +84,6 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
   const saveRequest = new BackendSave();
   const { node } = useNode<any>();
 
-  console.log('NODE: ', node.pagePath);
-
   useEffect(() => {
     if (isUploading) {
       const timer = setTimeout(
@@ -103,6 +101,7 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
     }
     return () => null;
   });
+  
   const onDrop = useCallback(acceptedFiles => {
     setIsUploading(true);
     setIsUploadFinished(false);
@@ -112,7 +111,7 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
     saveRequest.saveFile({
       file: acceptedFiles[0],
       nodePath: node.path.join('$'),
-      pagePath: window.location.pathname,
+      resourcePath: node.resourcePath,
     })
       .then(({ data }) => {
         // unset errors
