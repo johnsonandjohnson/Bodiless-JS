@@ -66,6 +66,7 @@ class GatsbyNodeProvider extends Component<Props, State> implements DataSource {
     const getters = {
       ...pick(store, ['getNode', 'getKeys', 'hasError']),
       getPagePath: () => this.slug,
+      // eslint-disable-next-line no-confusing-arrow
       getResourcePath: () => collection === 'Page'
         ? path.join('pages', this.slug)
         : 'site/',

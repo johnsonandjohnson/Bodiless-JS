@@ -101,7 +101,7 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
     }
     return () => null;
   });
-  
+
   const onDrop = useCallback(acceptedFiles => {
     setIsUploading(true);
     setIsUploadFinished(false);
