@@ -37,7 +37,7 @@ const createGetters = (store: Store) => ({
   getKeys: jest.fn(),
   hasError: jest.fn(),
   getPagePath: jest.fn(() => '/'),
-  getResourcePath: jest.fn(() => '/'),
+  getBaseResourcePath: jest.fn(() => '/'),
 });
 
 const createNodeConsumer = (displayName?: string) => {

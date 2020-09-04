@@ -27,7 +27,7 @@ const asSlateCustomComponent = <P extends WithNodeProps>(Component: CT<P>) => {
       getKeys: () => ['slatenode'],
       hasError: () => node.hasError(),
       getPagePath: () => node.pagePath,
-      getResourcePath: () => node.resourcePath,
+      getBaseResourcePath: () => node.baseResourcePath,
     };
     const actions = {
       // tslint: disable-next-line:no-unused-vars

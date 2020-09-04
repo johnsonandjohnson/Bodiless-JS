@@ -111,7 +111,7 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
     saveRequest.saveFile({
       file: acceptedFiles[0],
       nodePath: node.path.join('$'),
-      resourcePath: node.resourcePath,
+      baseResourcePath: node.baseResourcePath,
     })
       .then(({ data }) => {
         // unset errors

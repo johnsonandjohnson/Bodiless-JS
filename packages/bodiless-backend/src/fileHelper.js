@@ -28,12 +28,12 @@ const copyFilePromise = (from, to) => new Promise((resolve, reject) => {
 
 const generateHash = str => crypto.createHash('md5').update(str).digest('hex');
 
-const copyAllFiles = (files, resourcePath, nodePath) => {
+const copyAllFiles = (files, baseResourcePath, nodePath) => {
   const allFiles = [];
   Object.keys(files).forEach(key => allFiles.push(files[key]));
 
   return Promise.all(allFiles.map(file => {
-    const distFolderPath = path.join(backendStaticPath, 'images', resourcePath, generateHash(nodePath));
+    const distFolderPath = path.join(backendStaticPath, 'images', baseResourcePath, generateHash(nodePath));
 
     if (!fs.existsSync(distFolderPath)) {
       fs.mkdirSync(distFolderPath, { recursive: true });

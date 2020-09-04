@@ -27,12 +27,12 @@ const createMockStore = (storeData: StoreData) => {
   const setNode = jest.fn();
   const getKeys = jest.fn(() => ['foo']);
   const getPagePath = jest.fn(() => '/');
-  const getResourcePath = jest.fn(() => '/');
+  const getBaseResourcePath = jest.fn(() => '/');
   const hasError = jest.fn();
   const deleteNode = jest.fn();
   const actions = { setNode, deleteNode };
   const getters = {
-    getKeys, getNode, hasError, getPagePath, getResourcePath,
+    getKeys, getNode, hasError, getPagePath, getBaseResourcePath,
   };
   return { actions, getters };
 };

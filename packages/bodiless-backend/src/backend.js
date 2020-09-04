@@ -492,13 +492,13 @@ class Backend {
 
   static setAsset(route) {
     route.post((req, res) => {
-      const resourcePath = Backend.getPath(req);
+      const baseResourcePath = Backend.getPath(req);
       const tmpDir = tmp.dirSync({ mode: '0755', unsafeCleanup: true, prefix: 'backendTmpDir_' });
       const form = formidable({ multiples: true, uploadDir: tmpDir.name });
 
       form.parse(req, (err, fields, files) => {
         const { nodePath } = fields;
-        copyAllFiles(files, resourcePath, nodePath).then((filesPath) => {
+        copyAllFiles(files, baseResourcePath, nodePath).then((filesPath) => {
           res.json({ filesPath });
         }).catch(copyErr => {
           console.log(copyErr);

@@ -37,7 +37,7 @@ export type Getters = {
   getKeys(): string[];
   hasError(): boolean;
   getPagePath(): string;
-  getResourcePath(collection: string): string;
+  getBaseResourcePath(collection: string): string;
 };
 
 export type Path = string | string[];
@@ -49,7 +49,7 @@ export type ContentNode<D> = {
   keys: string[];
   path: string[];
   pagePath: string;
-  resourcePath: string;
+  baseResourcePath: string;
   child<E extends object>(path: string): ContentNode<E>;
   peer<E extends object>(path: Path): ContentNode<E>;
   hasError: () => boolean;
@@ -88,9 +88,9 @@ export class DefaultContentNode<D extends object> implements ContentNode<D> {
     return getPagePath();
   }
 
-  get resourcePath() {
-    const { getResourcePath } = this.getters;
-    return getResourcePath('page');
+  get baseResourcePath() {
+    const { getBaseResourcePath } = this.getters;
+    return getBaseResourcePath('page');
   }
 
   setData(dataObj: D) {
@@ -129,14 +129,14 @@ export class DefaultContentNode<D extends object> implements ContentNode<D> {
     const getNode = () => store.data;
     const getKeys = () => path$1;
     const getPagePath = () => '/';
-    const getResourcePath = () => '/';
+    const getBaseResourcePath = () => '/';
     const hasError = () => false;
     const setNode = (p: Path, d: any) => {
       store.setData(d);
     };
     const deleteNode = () => {};
     const getters = {
-      getNode, getKeys, hasError, getPagePath, getResourcePath,
+      getNode, getKeys, hasError, getPagePath, getBaseResourcePath,
     };
     const actions = { setNode, deleteNode };
     return new DefaultContentNode(actions, getters, path$1);

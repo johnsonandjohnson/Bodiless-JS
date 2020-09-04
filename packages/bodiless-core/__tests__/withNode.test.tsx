@@ -33,7 +33,7 @@ class MockContentNode<D extends object> implements ContentNode<D> {
 
   pagePath: string = '/';
 
-  resourcePath: string = '/';
+  baseResourcePath: string = '/';
 
   // eslint-disable-next-line class-methods-use-this
   peer<E extends object>(key: string) {

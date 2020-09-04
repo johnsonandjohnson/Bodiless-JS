@@ -43,7 +43,7 @@ class MockContentNode implements ContentNode<Data> {
 
   pagePath: string = '/';
 
-  resourcePath: string = '/';
+  baseResourcePath: string = '/';
 }
 
 const ShowNode: React.FC<any> = ({ collection, id }) => {
