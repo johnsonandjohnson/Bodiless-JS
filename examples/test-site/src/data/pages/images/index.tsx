@@ -32,18 +32,18 @@ import Layout from '../../../components/Layout';
 import {
   asEditableImageWithPlaceholder,
   asLinkableImage,
-  asFluidGatsbyImage,
-  asFluidNoBase64GatsbyImage,
-  asFluidTracedSVGGatsbyImage,
-  asFluidWithWebpGatsbyImage,
-  asFluidWithWebpNoBase64GatsbyImage,
-  asFluidWithWebpTracedSVGGatsbyImage,
-  asFixedGatsbyImage,
-  asFixedNoBase64GatsbyImage,
-  asFixedTracedSVGGatsbyImage,
-  asFixedWithWebpGatsbyImage,
-  asFixedWithWebpNoBase64GatsbyImage,
-  asFixedWithWebpTracedSVGGatsbyImage,
+  FluidGatsbyImage,
+  FluidNoBase64GatsbyImage,
+  FluidTracedSVGGatsbyImage,
+  FluidWithWebpGatsbyImage,
+  FluidWithWebpNoBase64GatsbyImage,
+  FluidWithWebpTracedSVGGatsbyImage,
+  FixedGatsbyImage,
+  FixedNoBase64GatsbyImage,
+  FixedTracedSVGGatsbyImage,
+  FixedWithWebpGatsbyImage,
+  FixedWithWebpNoBase64GatsbyImage,
+  FixedWithWebpTracedSVGGatsbyImage,
 } from '../../../components/Image';
 import {
   asHeader1,
@@ -75,19 +75,6 @@ const LinkableImagePng = asLinkableImage(ImagePng)('pngLink')(A);
 const LinkableImageSvg = asLinkableImage(ImageSvg)('svgLink')(A);
 const LinkableImageWebp = asLinkableImage(ImageWebp)('webpLink')(A);
 const LinkableImageResponsiveSvg = asLinkableImage(ImageResponsiveSvg)('responsiveSvgLink')(A);
-
-const FluidGatsbyImage = asFluidGatsbyImage(Img);
-const FluidNoBase64GatsbyImage = asFluidNoBase64GatsbyImage(Img);
-const FluidTracedSVGGatsbyImage = asFluidTracedSVGGatsbyImage(Img);
-const FluidWithWebpGatsbyImage = asFluidWithWebpGatsbyImage(Img);
-const FluidWithWebpNoBase64GatsbyImage = asFluidWithWebpNoBase64GatsbyImage(Img);
-const FluidWithWebpTracedSVGGatsbyImage = asFluidWithWebpTracedSVGGatsbyImage(Img);
-const FixedGatsbyImage = asFixedGatsbyImage(Img);
-const FixedNoBase64GatsbyImage = asFixedNoBase64GatsbyImage(Img);
-const FixedTracedSVGGatsbyImage = asFixedTracedSVGGatsbyImage(Img);
-const FixedWithWebpGatsbyImage = asFixedWithWebpGatsbyImage(Img);
-const FixedWithWebpNoBase64GatsbyImage = asFixedWithWebpNoBase64GatsbyImage(Img);
-const FixedWithWebpTracedSVGGatsbyImage = asFixedWithWebpTracedSVGGatsbyImage(Img);
 
 const PageTitle = asHeader1(H1);
 const PageSection = flowRight(

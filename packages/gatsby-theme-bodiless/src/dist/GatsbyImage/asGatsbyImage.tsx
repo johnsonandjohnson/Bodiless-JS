@@ -15,7 +15,6 @@
 import React, { ComponentType as CT } from 'react';
 import GatsbyImg from 'gatsby-image';
 import type { GatsbyImageProps } from 'gatsby-image';
-import { useEditContext } from '@bodiless/core';
 import { Div } from '@bodiless/fclasses';
 
 type ImageProps = {
@@ -28,25 +27,21 @@ type GasbyImageProps = ImageProps & {
   gatsbyImg?: GatsbyImageProps;
 };
 
-const GatsbyImgEditWrapper = (props: ImageProps) => {
+const GatsbyImgWrapper = (props: ImageProps) => {
   const { src, alt, ...rest } = props;
   return (
     <Div {...rest} />
   );
 };
 
-const GatsbyImgStaticWrapper: CT<ImageProps> = ({ children }) => <>{children}</>;
-
 const asGatsbyImage = (Component: CT<any>) => {
   const AsGatsbyImage = (props: GasbyImageProps) => {
-    const { isEdit } = useEditContext();
     const { gatsbyImg, preset, ...rest } = props;
     if (gatsbyImg !== undefined) {
-      const Wrapper = isEdit ? GatsbyImgEditWrapper : GatsbyImgStaticWrapper;
       return (
-        <Wrapper {...rest}>
+        <GatsbyImgWrapper {...rest}>
           <GatsbyImg {...gatsbyImg} />
-        </Wrapper>
+        </GatsbyImgWrapper>
       );
     }
     return (

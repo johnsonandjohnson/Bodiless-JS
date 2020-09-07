@@ -86,6 +86,19 @@ const asFixedWithWebpGatsbyImage = asGatsbyImg(GatsbyImagePresets.FixedWithWebp)
 const asFixedWithWebpNoBase64GatsbyImage = asGatsbyImg(GatsbyImagePresets.FixedWithWebpNoBase64);
 const asFixedWithWebpTracedSVGGatsbyImage = asGatsbyImg(GatsbyImagePresets.FixedWithWebpTracedSVG);
 
+const FluidGatsbyImage = asFluidGatsbyImage(Img);
+const FluidNoBase64GatsbyImage = asFluidNoBase64GatsbyImage(Img);
+const FluidTracedSVGGatsbyImage = asFluidTracedSVGGatsbyImage(Img);
+const FluidWithWebpGatsbyImage = asFluidWithWebpGatsbyImage(Img);
+const FluidWithWebpNoBase64GatsbyImage = asFluidWithWebpNoBase64GatsbyImage(Img);
+const FluidWithWebpTracedSVGGatsbyImage = asFluidWithWebpTracedSVGGatsbyImage(Img);
+const FixedGatsbyImage = asFixedGatsbyImage(Img);
+const FixedNoBase64GatsbyImage = asFixedNoBase64GatsbyImage(Img);
+const FixedTracedSVGGatsbyImage = asFixedTracedSVGGatsbyImage(Img);
+const FixedWithWebpGatsbyImage = asFixedWithWebpGatsbyImage(Img);
+const FixedWithWebpNoBase64GatsbyImage = asFixedWithWebpNoBase64GatsbyImage(Img);
+const FixedWithWebpTracedSVGGatsbyImage = asFixedWithWebpTracedSVGGatsbyImage(Img);
+
 export {
   SquareImage,
   LandscapeImage,
@@ -107,4 +120,16 @@ export {
   asFixedWithWebpGatsbyImage,
   asFixedWithWebpNoBase64GatsbyImage,
   asFixedWithWebpTracedSVGGatsbyImage,
+  FluidGatsbyImage,
+  FluidNoBase64GatsbyImage,
+  FluidTracedSVGGatsbyImage,
+  FluidWithWebpGatsbyImage,
+  FluidWithWebpNoBase64GatsbyImage,
+  FluidWithWebpTracedSVGGatsbyImage,
+  FixedGatsbyImage,
+  FixedNoBase64GatsbyImage,
+  FixedTracedSVGGatsbyImage,
+  FixedWithWebpGatsbyImage,
+  FixedWithWebpNoBase64GatsbyImage,
+  FixedWithWebpTracedSVGGatsbyImage,
 };
