@@ -86,6 +86,12 @@ const supportedExtensions = {
   tiff: true,
 };
 
+const srcSetBreakpoints = [
+  360,
+  834,
+  1024,
+];
+
 const generateGatsbyImage = async ({ file, preset, reporter }) => {
   // skip image generation when unknown preset is passed
   if (!Object.values(GatsbyImagePresets).includes(preset)) {
@@ -98,6 +104,7 @@ const generateGatsbyImage = async ({ file, preset, reporter }) => {
           file,
           args: {
             base64: true,
+            srcSetBreakpoints,
           },
           reporter,
         }),
@@ -108,6 +115,7 @@ const generateGatsbyImage = async ({ file, preset, reporter }) => {
           file,
           args: {
             base64: false,
+            srcSetBreakpoints,
           },
           reporter,
         }),
@@ -120,6 +128,7 @@ const generateGatsbyImage = async ({ file, preset, reporter }) => {
             generateTracedSVG: true,
             tracedSVG: true,
             base64: false,
+            srcSetBreakpoints,
           },
           reporter,
         }),
@@ -131,6 +140,7 @@ const generateGatsbyImage = async ({ file, preset, reporter }) => {
           args: {
             toFormat: 'webp',
             base64: true,
+            srcSetBreakpoints,
           },
           reporter,
         }),
@@ -142,6 +152,7 @@ const generateGatsbyImage = async ({ file, preset, reporter }) => {
           args: {
             toFormat: 'webp',
             base64: false,
+            srcSetBreakpoints,
           },
           reporter,
         }),
@@ -155,6 +166,7 @@ const generateGatsbyImage = async ({ file, preset, reporter }) => {
             generateTracedSVG: true,
             tracedSVG: true,
             base64: false,
+            srcSetBreakpoints,
           },
           reporter,
         }),
@@ -165,6 +177,7 @@ const generateGatsbyImage = async ({ file, preset, reporter }) => {
           file,
           args: {
             base64: true,
+            srcSetBreakpoints,
           },
           reporter,
         }),
@@ -175,6 +188,7 @@ const generateGatsbyImage = async ({ file, preset, reporter }) => {
           file,
           args: {
             base64: false,
+            srcSetBreakpoints,
           },
           reporter,
         }),
@@ -187,6 +201,7 @@ const generateGatsbyImage = async ({ file, preset, reporter }) => {
             generateTracedSVG: true,
             tracedSVG: true,
             base64: false,
+            srcSetBreakpoints,
           },
           reporter,
         }),
@@ -197,6 +212,7 @@ const generateGatsbyImage = async ({ file, preset, reporter }) => {
           file,
           args: {
             toFormat: 'webp',
+            srcSetBreakpoints,
           },
           reporter,
         }),
@@ -208,6 +224,7 @@ const generateGatsbyImage = async ({ file, preset, reporter }) => {
           args: {
             toFormat: 'webp',
             base64: false,
+            srcSetBreakpoints,
           },
           reporter,
         }),
@@ -221,6 +238,7 @@ const generateGatsbyImage = async ({ file, preset, reporter }) => {
             generateTracedSVG: true,
             tracedSVG: true,
             base64: false,
+            srcSetBreakpoints,
           },
           reporter,
         }),
