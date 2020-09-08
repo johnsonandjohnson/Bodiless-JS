@@ -13,13 +13,17 @@
  */
 
 import React, { FC, ComponentType, HTMLProps } from 'react';
+import { flow } from 'lodash';
 import {
   designable,
   DesignableComponentsProps,
   DesignableProps,
   Div,
+  P,
+  Span,
+  withDesign,
 } from '@bodiless/fclasses';
-import { Editable } from '@bodiless/components';
+import { asEditable } from '../Elements.token';
 
 const today = new Date();
 const date = new Intl.DateTimeFormat().format(today);
@@ -28,38 +32,59 @@ const year = new Intl.DateTimeFormat('en-US', { year: 'numeric' }).format(today)
 type FooterComponents = {
   Wrapper: ComponentType<any>,
   Container: ComponentType<any>,
+  SiteTitleCopyright: ComponentType<any>,
+  SiteTitleCopyrightEditable: ComponentType<any>,
+  SiteCopyright: ComponentType<any>,
+  SiteCopyrightEditable: ComponentType<any>,
 };
 
-export type Props = {
-  siteTitle: string,
-} & DesignableComponentsProps<FooterComponents> & HTMLProps<HTMLElement>;
+export type Props = DesignableComponentsProps<FooterComponents> & HTMLProps<HTMLElement>;
 
 const footerComponents:FooterComponents = {
   Wrapper: Div,
   Container: Div,
+  SiteTitleCopyright: P,
+  SiteTitleCopyrightEditable: Span,
+  SiteCopyright: P,
+  SiteCopyrightEditable: Span,
 };
 
-const FooterClean: FC<DesignableProps & { siteTitle: string }> = ({ siteTitle, components }) => {
+const FooterClean: FC<DesignableProps> = ({ components }) => {
   const {
     Wrapper,
     Container,
+    SiteTitleCopyright,
+    SiteTitleCopyrightEditable,
+    SiteCopyright,
+    SiteCopyrightEditable,
   } = components;
 
   return (
     <Wrapper>
       <Container>
-        <p>
+        <SiteTitleCopyright>
           ©
-          {siteTitle}
+          <SiteTitleCopyrightEditable />
           &nbsp;2019-
           {year}
-        </p>
-        <Editable nodeKey="copyright" placeholder="Insert Copyright" nodeCollection="site" />
-        {date}
+        </SiteTitleCopyright>
+        <SiteCopyright>
+          <SiteCopyrightEditable />
+          &nbsp;Last Updated:&nbsp;
+          {date}
+        </SiteCopyright>
       </Container>
     </Wrapper>
   );
 };
 
-const Footer = designable(footerComponents)(FooterClean);
+const asFooterHeader = flow(
+  designable(footerComponents),
+  withDesign({
+    SiteTitleCopyrightEditable: asEditable({ nodeKey: 'sitetitle', nodeCollection: 'site' }, 'Insert Site Title', 'site'),
+    SiteCopyrightEditable: asEditable({ nodeKey: 'copyright', nodeCollection: 'site' }, 'Insert Copyright', 'site'),
+  }),
+);
+
+const Footer = asFooterHeader(FooterClean);
 export default Footer;

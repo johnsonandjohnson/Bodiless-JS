@@ -12,28 +12,9 @@
  * limitations under the License.
  */
 
-import * as React from 'react';
-import { ResizeHandle as ResizeHandleBase } from '@bodiless/ui';
+import { withFacet } from '@bodiless/layouts';
 
-type TProps = {
-  className?: string;
-};
+const withType = withFacet('Type');
+const withStyle = withFacet('Style');
 
-const ResizeHandle = (hocProps: TProps): React.ReactElement<TProps> => {
-  const { className, ...props } = hocProps;
-
-  return (
-    <ResizeHandleBase
-      {...props}
-      className={`${className}`}
-    >
-      chevron_right
-    </ResizeHandleBase>
-  );
-};
-
-ResizeHandle.defaultProps = {
-  className: '',
-};
-
-export default ResizeHandle;
+export { withType, withStyle };

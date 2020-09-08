@@ -38,6 +38,7 @@ const componentSelectorForm = (
       closeForm={closeForm}
       onSelect={(...args) => { onSelect(...args); closeForm(); }}
       components={Object.values(props.components)}
+      mandatoryCategories={props.mandatoryCategories}
     />
   ),
 );

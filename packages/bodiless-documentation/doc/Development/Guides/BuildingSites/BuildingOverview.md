@@ -144,9 +144,11 @@ every site will probably use in some form.
 * [Footer](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/starter/src/components/Layout/footer.tsx):
   The reusable footer section for all pages, usually containing copyright,
   footer menus, etc.
-* [Layout](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/starter/src/components/Layout/index.jsx):
+* [Layout](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/starter/src/components/Layout/index.tsx):
   The main page that combines header, content, & footer of the page. This may
   also contain meta data inserted into head of pages.
+* [Logo](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/starter/src/components/Layout/logo.tsx):
+  Logo used with the desktop header and mobile burger menu.
 * [Rich Text Editors](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Editors):
   * Simple : Superscript Only
   * Basic : Superscript, Bold, Italic, Underline, Link, Align Text
