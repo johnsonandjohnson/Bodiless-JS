@@ -14,6 +14,7 @@
 
 import React, { Component } from 'react';
 import { pick } from 'lodash';
+import path from 'path';
 import { DefaultContentNode, NodeProvider } from '@bodiless/core';
 import GatsbyMobxStore, { DataSource } from './GatsbyMobxStore';
 
@@ -62,7 +63,14 @@ class GatsbyNodeProvider extends Component<Props, State> implements DataSource {
   getRootNode(collection = 'Page') {
     const { store } = this.state;
     const actions = pick(store, ['setNode', 'deleteNode']);
-    const getters = pick(store, ['getNode', 'getKeys', 'hasError']);
+    const getters = {
+      ...pick(store, ['getNode', 'getKeys', 'hasError']),
+      getPagePath: () => this.slug,
+      // eslint-disable-next-line no-confusing-arrow
+      getBaseResourcePath: () => collection === 'Page'
+        ? path.join('pages', this.slug)
+        : 'site/',
+    };
 
     const node = new DefaultContentNode(actions, getters, collection);
     return node;

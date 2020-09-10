@@ -25,6 +25,7 @@ const uniq = require('lodash/uniq');
 const Page = require('./page');
 const GitCmd = require('./GitCmd');
 const { getChanges, getConflicts, mergeMaster } = require('./git');
+const { copyAllFiles } = require('./fileHelper');
 const Logger = require('./logger');
 
 const backendPrefix = process.env.GATSBY_BACKEND_PREFIX || '/___backend';
@@ -276,7 +277,7 @@ class Backend {
     this.setRoute(`${backendPrefix}/change/reset`, Backend.setChangeReset);
     this.setRoute(`${backendPrefix}/change/pull`, Backend.setChangePull);
     this.setRoute(`${backendPrefix}/merge/master`, Backend.mergeMaster);
-    this.setRoute(`${backendPrefix}/asset`, Backend.setAsset);
+    this.setRoute(`${backendPrefix}/asset/*`, Backend.setAsset);
     this.setRoute(`${backendPrefix}/set/current`, Backend.setSetCurrent);
     this.setRoute(`${backendPrefix}/set/list`, Backend.setSetList);
     this.setRoute(`${backendPrefix}/content/*`, Backend.setContent);
@@ -503,37 +504,19 @@ class Backend {
 
   static setAsset(route) {
     route.post((req, res) => {
-      // create an incoming form object
-      const form = new formidable.IncomingForm();
-
-      // specify that we want to allow the user to upload multiple files in a single request
-      form.multiples = true;
-
-      // store all uploads in a temporary directory
+      const baseResourcePath = Backend.getPath(req);
       const tmpDir = tmp.dirSync({ mode: '0755', unsafeCleanup: true, prefix: 'backendTmpDir_' });
-      form.uploadDir = tmpDir.name;
+      const form = formidable({ multiples: true, uploadDir: tmpDir.name });
 
-      // every time a file has been uploaded successfully,
-      // copy to static path with orignal name
-      form.on('file', (field, file) => {
-        fs.copyFile(file.path, path.join(backendStaticPath, file.name), err => {
-          if (err) throw err;
-          fs.unlinkSync(file.path);
+      form.parse(req, (err, fields, files) => {
+        const { nodePath } = fields;
+        copyAllFiles(files, baseResourcePath, nodePath).then((filesPath) => {
+          res.json({ filesPath });
+        }).catch(copyErr => {
+          console.log(copyErr);
+          res.send(copyErr);
         });
       });
-
-      // log any errors that occur
-      form.on('error', err => {
-        logger.log(`An error has occured here: \n${err}`);
-      });
-
-      // once all the files have been uploaded, send a response to the client
-      form.on('end', () => {
-        res.send('success');
-      });
-
-      // parse the incoming request containing the form data
-      form.parse(req);
     });
   }
 
