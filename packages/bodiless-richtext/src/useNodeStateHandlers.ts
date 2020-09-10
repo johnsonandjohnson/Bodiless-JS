@@ -15,7 +15,7 @@
 import React from 'react';
 import { Value, ValueJSON } from 'slate';
 import isEqual from 'react-fast-compare';
-import { useNode } from '@bodiless/core';
+import { useNode, useUUID } from '@bodiless/core';
 import { Change } from './Type';
 import MobxStateContainer from './MobxStateContainer';
 
@@ -27,13 +27,15 @@ type InitialValue = ValueJSON;
 type TOnChange = Function; // (change: Change) => void;
 type TUseOnChangeParams = {
   onChange?: TOnChange;
+  key: string;
 };
 type TUseOnChange = (params: TUseOnChangeParams) => (change: Change) => void;
 type TUseValueParam = {
   initialValue: InitialValue;
+  key: string;
 };
 type TUseValue = (params: TUseValueParam) => Value;
-type TUseNodeStateHandlersParams = TUseOnChangeParams & TUseValueParam;
+type TUseNodeStateHandlersParams = Omit<TUseOnChangeParams & TUseValueParam, 'key'>;
 type TUseNodeStateHandlers = (
   params: TUseNodeStateHandlersParams,
 ) => {
@@ -57,14 +59,13 @@ const preserveAll = {
 
 // Create the onChange prop.
 // @TODO Should be memoized with useCallback.
-const useOnChange: TUseOnChange = ({ onChange }) => {
+const useOnChange: TUseOnChange = ({ onChange, key }) => {
   const { setState } = useStateContainer();
   const { node } = useNode<Data>();
 
   return change => {
     const { value } = change;
     const jsonValue = value.toJSON();
-    const key = (node.path as string[]).join('$');
     // Set the editor state.  We use the node path as a key.
     const newState = {
       [key]: value,
@@ -83,10 +84,9 @@ const useOnChange: TUseOnChange = ({ onChange }) => {
 };
 
 // Create the value prop (gets current editor value from state).
-const useValue: TUseValue = ({ initialValue }) => {
+const useValue: TUseValue = ({ initialValue, key }) => {
   const { get: getValue } = useStateContainer();
   const { node } = useNode<Data>();
-  const key = (node.path as string[]).join('$');
   let oldValue = getValue(key);
   if (!oldValue) {
     oldValue = Value.fromJSON(
@@ -108,12 +108,17 @@ const useValue: TUseValue = ({ initialValue }) => {
 const useNodeStateHandlers: TUseNodeStateHandlers = ({
   initialValue,
   onChange,
-}) => ({
-  value: useValue({
-    initialValue,
-  }),
-  onChange: useOnChange({
-    onChange,
-  }),
-});
+}) => {
+  const key = useUUID();
+  return ({
+    value: useValue({
+      initialValue,
+      key,
+    }),
+    onChange: useOnChange({
+      onChange,
+      key,
+    }),
+  });
+};
 export default useNodeStateHandlers;
