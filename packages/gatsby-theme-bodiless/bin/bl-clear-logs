@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+const logHandler = require('../dist/fsLogHandler');
+logHandler.clear();

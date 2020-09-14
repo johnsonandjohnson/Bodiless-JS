@@ -6,7 +6,9 @@
   "homepage": "",
   "license": "Apache-2.0",
   "bin": {
-    "generate-env-vars": "./bin/generate-env-vars"
+    "generate-env-vars": "./bin/generate-env-vars",
+    "bl-validate-logs": "./bin/bl-validate-logs",
+    "bl-clear-logs": "./bin/bl-clear-logs"
   },
   "directories": {
     "lib": "dist",

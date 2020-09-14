@@ -22,6 +22,7 @@ import Page from './dist/Page';
 import asGatsbyImage from './dist/GatsbyImage/asGatsbyImage';
 import withGatsbyImageNode from './dist/GatsbyImage/withGatsbyImageNode';
 import GatsbyImagePresets from './dist/GatsbyImage/GatsbyImagePresets';
+import withGatsbyImageLogger from './dist/GatsbyImage/withGatsbyImageLogger';
 
 export {
   GatsbyMobxStore,
@@ -35,6 +36,7 @@ export {
   asGatsbyImage,
   withGatsbyImageNode,
   GatsbyImagePresets,
+  withGatsbyImageLogger,
 };
 
 export type { Props as PageProps } from './dist/Page';

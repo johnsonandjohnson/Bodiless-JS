@@ -22,7 +22,7 @@ type ImageProps = {
   alt: string;
 };
 
-type GasbyImageProps = ImageProps & {
+export type GasbyImageProps = ImageProps & {
   preset: string;
   gatsbyImg?: GatsbyImageProps;
 };

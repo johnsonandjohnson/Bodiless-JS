@@ -27,6 +27,7 @@ import {
   asGatsbyImage as asBaseGatsbyImage,
   withGatsbyImageNode,
   GatsbyImagePresets,
+  withGatsbyImageLogger,
 } from '@bodiless/gatsby-theme-bodiless';
 import { A, Img } from '@bodiless/fclasses';
 import landscapeImage from './landscape_image.png';
@@ -70,6 +71,7 @@ const LandscapeLinkableImage = asLinkableImage(LandscapeImage)(DEFAULT_LINK_NODE
 const asGatsbyImg = (preset: string) => flowRight(
   withGatsbyImageNode(preset),
   asEditableImage(),
+  withGatsbyImageLogger(preset),
   asBaseGatsbyImage,
 );
 
