@@ -18,24 +18,20 @@ import React, {
   useContext,
   useState,
 } from 'react';
-
-type AccordionContextType = {
-  expanded: boolean,
-  setExpanded: React.Dispatch<React.SetStateAction<boolean>>,
-};
+import { AccordionProviderType, AccordionContextType } from './types';
 
 const AccordionContext = createContext<AccordionContextType>({
-  expanded: false,
+  isExpanded: false,
   setExpanded: () => null,
 });
 
 const useAccordionContext = () => useContext(AccordionContext);
 
-const AccordionProvider: FC = ({ children }) => {
-  const [expanded, setExpanded] = useState<boolean>(false);
+const AccordionProvider: FC<AccordionProviderType> = ({ children, expanded = false }) => {
+  const [isExpanded, setExpanded] = useState<boolean>(expanded);
 
   return (
-    <AccordionContext.Provider value={{ expanded, setExpanded }}>
+    <AccordionContext.Provider value={{ isExpanded, setExpanded }}>
       { children }
     </AccordionContext.Provider>
   );
@@ -43,5 +39,6 @@ const AccordionProvider: FC = ({ children }) => {
 
 export {
   AccordionProvider,
+  AccordionProviderType,
   useAccordionContext,
 };

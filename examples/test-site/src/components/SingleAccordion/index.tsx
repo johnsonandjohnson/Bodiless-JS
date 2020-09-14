@@ -15,14 +15,29 @@
 import { flow } from 'lodash';
 import {
   SingleAccordionClean,
+  asTestableSingleAccordion,
   asTestableAccordion,
+  AccordionClean,
 } from '@bodiless/organisms';
 import {
   withNode, withContextActivator, ifEditable,
 } from '@bodiless/core';
 import { withDesign } from '@bodiless/fclasses';
-import asSingleAccordionDefaultStyle from './token';
+import asSingleAccordionDefaultStyle, { asTestAccordionDefaultStyle } from './token';
 import { withEditorSimple, withEditorBasic } from '../Editors';
+
+const asTestAccordion = flow(
+  withNode,
+  withDesign({
+    Title: withEditorSimple('t-title', 'Accordion Test Title'),
+    Body: withEditorBasic(
+      't-body',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.',
+    ),
+  }),
+  asTestAccordionDefaultStyle,
+  asTestableAccordion,
+);
 
 const asSingleAccordion = flow(
   withNode,
@@ -42,9 +57,13 @@ const asSingleAccordion = flow(
     ),
   }),
   asSingleAccordionDefaultStyle,
-  asTestableAccordion,
+  asTestableSingleAccordion,
 );
 
 const SingleAccordion = asSingleAccordion(SingleAccordionClean);
+const SingleAccordionTest = asTestAccordion(AccordionClean);
 
 export default SingleAccordion;
+export {
+  SingleAccordionTest,
+};

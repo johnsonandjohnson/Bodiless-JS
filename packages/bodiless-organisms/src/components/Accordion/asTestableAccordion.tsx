@@ -11,23 +11,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { withDesign, addProps } from '@bodiless/fclasses';
 
-import AccordionClean from './Accordion';
-import { useAccordionContext } from './AccordionContext';
-import { asAccodionTitle } from './AccordionTitle';
-import { asAccordionBody } from './AccordionBody';
-import asAccordionWrapper from './AccordionWrapper';
-import asTestableAccordion from './asTestableAccordion';
-import { withAccordionSublist } from './asAccordionSublist';
+const asTestableAccordion = withDesign({
+  Wrapper: addProps({ 'data-accordion-element': 'accordion' }),
+  Title: withDesign({
+    Wrapper: addProps({ 'data-accordion-element': 'accordion-title-wrapper' }),
+    Title: addProps({ 'data-accordion-element': 'accordion-title' }),
+  }),
+  Body: withDesign({
+    Wrapper: addProps({ 'data-accordion-element': 'accordion-body-wrapper' }),
+  }),
+});
 
-export * from './types';
-
-export {
-  AccordionClean,
-  withAccordionSublist,
-  useAccordionContext,
-  asAccordionWrapper,
-  asAccodionTitle,
-  asAccordionBody,
-  asTestableAccordion,
-};
+export default asTestableAccordion;

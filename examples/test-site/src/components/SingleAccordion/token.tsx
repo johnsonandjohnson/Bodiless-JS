@@ -14,10 +14,7 @@
 
 import React from 'react';
 import { flow } from 'lodash';
-import {
-  withDesign,
-  addClasses,
-} from '@bodiless/fclasses';
+import { withDesign, addClasses } from '@bodiless/fclasses';
 import {
   asHeader2,
   asBlockItem,
@@ -55,4 +52,22 @@ const asSingleAccordionDefaultStyle = flow(
   asSingleAccordionDefaultExpandedStyle,
 );
 
+const asTestAccordionDefaultStyle = flow(
+  withDesign({
+    Wrapper: addClasses('p-1'),
+    Title: withDesign({
+      Wrapper: flow(
+        addClasses('bg-gray-200 p-3'),
+        asHeader2,
+      ),
+    }),
+    Body: withDesign({
+      Wrapper: addClasses('p-3 border border-solid border-gray-200'),
+    }),
+  }),
+);
+
 export default asSingleAccordionDefaultStyle;
+export {
+  asTestAccordionDefaultStyle,
+};

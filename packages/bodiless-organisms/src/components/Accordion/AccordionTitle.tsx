@@ -20,27 +20,32 @@ import {
   Span,
   DesignableProps,
 } from '@bodiless/fclasses';
+import {
+  asAccordionIcon,
+  asAccordionTitleWrapper,
+  asAccordionTitle,
+} from './Accordion.tokens';
 import { useAccordionContext } from './AccordionContext';
 import { AccordionTitleProps, AccordionTitleComponents } from './types';
 
 const AccordionTitleComponentsStart:AccordionTitleComponents = {
-  Wrapper: Div,
-  Icon: Span,
+  Wrapper: asAccordionTitleWrapper(Div),
+  Icon: asAccordionIcon(Span),
+  Title: asAccordionTitle(Div),
 };
 
 const AccordionTitleBase: FC<AccordionTitleProps> = ({ components, children }) => {
-  const { Wrapper, Icon } = components;
-  const { expanded, setExpanded } = useAccordionContext();
+  const { Wrapper, Title, Icon } = components;
+  const { isExpanded, setExpanded } = useAccordionContext();
 
   return (
-    <Wrapper className="flex items-center justify-between relative" onClick={() => setExpanded(!expanded)}>
-      { children }
+    <Wrapper onClick={() => setExpanded(!isExpanded)}>
+      <Title>{ children }</Title>
       <Icon
-        className="material-icons absolute right-0"
-        data-accordion-element="accordion-icon"
-        data-accordion-icon={expanded ? 'remove' : 'add'}
+        isExpanded={isExpanded}
+        data-accordion-icon={isExpanded ? 'remove' : 'add'}
       >
-        {expanded ? 'remove' : 'add'}
+        {isExpanded ? 'remove' : 'add'}
       </Icon>
     </Wrapper>
   );

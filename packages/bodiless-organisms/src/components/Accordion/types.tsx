@@ -15,9 +15,23 @@
 import { ComponentType, HTMLProps } from 'react';
 import { StylableProps, DesignableComponentsProps } from '@bodiless/fclasses';
 
+type WithIsExpanded = {
+  isExpanded: boolean,
+};
+
+export type AccordionProviderType = {
+  expanded?: boolean,
+};
+
+export type AccordionContextType = {
+  isExpanded: boolean,
+  setExpanded: React.Dispatch<React.SetStateAction<boolean>>,
+};
+
 export type AccordionTitleComponents = {
   Wrapper: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
-  Icon: ComponentType<StylableProps & HTMLProps<HTMLSpanElement>>,
+  Title: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
+  Icon: ComponentType<StylableProps & HTMLProps<HTMLSpanElement> & WithIsExpanded>,
 };
 
 export type AccordionBodyComponents = {
@@ -26,3 +40,11 @@ export type AccordionBodyComponents = {
 
 export type AccordionTitleProps = DesignableComponentsProps<AccordionTitleComponents>;
 export type AccordionBodyProps = DesignableComponentsProps<AccordionBodyComponents>;
+
+export type AccordionComponents = {
+  Wrapper: ComponentType<HTMLProps<any> & AccordionProviderType>,
+  Title: ComponentType<AccordionTitleProps>,
+  Body: ComponentType<AccordionBodyProps>,
+};
+
+export type AccordionProps = DesignableComponentsProps<AccordionComponents>;
