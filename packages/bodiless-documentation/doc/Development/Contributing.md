@@ -40,7 +40,7 @@ For features, the issue should clearly specify:
 Once an issue is created, it will be reviewed by the Bodiless product team who will determine
 whether or not it should be accepted for development.  The team may request further details or
 suggest alterations in the requirements. Once a decision is made, the issue will be given one
-of the following dispositions:
+of the following dispositions by setting the labels:
 
 - "won't fix": The issue will not be addressed, and associated pull requests will not be considered.
 - "accepted": The issue is accepted for development, and pull requests are welcome. Capacity for
@@ -49,6 +49,21 @@ of the following dispositions:
 - "priority": The issue is accepted for development and will be prioritized by the core team.  Pull
   requests are welcome, but the issue will likely be assigned a developer from the core team and be
   included in an upcoming sprint.
+- "help wanted": The issue is accepted for develop but it is NOT prioritized by
+  the core team. Pull requests are welcome.  
+
+In addition each label will be set on the issue to help with additional categorizing. 
+- "bug": Issue with current behavior.
+- "enhancement": Feature enhancement.
+- "documentation": Documentation change/request/addition.
+- "testing enhancement": Automation story enhancements.
+- "windows": Bug specific to Windows platform.
+
+Additional labels that can be used as needed:
+- "duplicate": Duplicate of another issue or bug.
+- "invalid": This doesn't seem right.
+- "question": Further information is requested. Submitter should respond with more information/clarifications.
+- "dependencies": Pull requests that update a dependency file.
 
 ## Commits
 

@@ -15,24 +15,32 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
-import { FetchChanges, PullChanges } from '../src/dist/RemoteChanges';
+import {
+  FetchChanges,
+  PullChanges,
+  ResponseData,
+} from '../src/dist/RemoteChanges';
 
-const mockUpstreamResponse = (data?: any) => ({
-  status: 200,
+const mockBackendResponse = (data: ResponseData, status = 200) => ({
+  status,
   data: {
     upstream: {
       branch: 'null',
-      commits: [],
-      files: [],
-      ...data,
+      ...data.upstream,
     },
-    production: { branch: 'origin/master', commits: [], files: [] },
-    local: { branch: 'origin/test', commits: [], files: [] },
+    production: {
+      branch: 'origin/master',
+      ...data.production,
+    },
+    local: {
+      branch: 'origin/test',
+      ...data.local,
+    },
   },
 });
 
-const mockClient = (responseData?: any) => ({
-  getChanges: jest.fn(() => Promise.resolve(mockUpstreamResponse(responseData))),
+const mockClient = (responseData: ResponseData) => ({
+  getChanges: jest.fn(() => Promise.resolve(mockBackendResponse(responseData))),
   pull: jest.fn(() => Promise.resolve({ status: 200 })),
   commit: jest.fn(() => Promise.resolve({ status: 200 })),
   getConflicts: () => jest.fn(() => Promise.resolve({ status: 200 })),
@@ -45,21 +53,76 @@ const mockFormApi = {
   getValue: jest.fn(),
 };
 
-const noChangesClient = mockClient();
+const defaultBranchData = {
+  branch: null,
+  commits: [],
+  files: [],
+};
+
+const defaultResponse = {
+  local: defaultBranchData,
+  production: defaultBranchData,
+  upstream: defaultBranchData,
+};
+
+const noChangesClient = mockClient(defaultResponse);
+
+const upstreamChangesOnlyClient = mockClient({
+  ...defaultResponse,
+  upstream: {
+    branch: 'origin/feat/feat',
+    commits: ['Test Commit'],
+    files: ['packages/gatsby-theme-bodiless/src/dist/RemoteChanges.tsx'],
+  },
+});
 
 const mockChangesClient = mockClient({
-  branch: 'origin/feat/test',
-  commits: ['Test Commit'],
-  files: ['packages/gatsby-theme-bodiless/src/dist/RemoteChanges.tsx'],
+  ...defaultResponse,
+  production: {
+    branch: 'origin/master',
+    commits: ['Test Commit'],
+    files: ['packages/gatsby-theme-bodiless/src/dist/RemoteChanges.tsx'],
+  },
 });
 
 const nonPullableChangesClient = mockClient({
-  branch: 'null',
-  commits: ['Test Commit'],
-  files: ['packages/gatsby-theme-bodiless/src/dist/package-lock.json'],
+  ...defaultResponse,
+  production: {
+    branch: 'origin/master',
+    commits: ['Test Commit'],
+    files: ['packages/gatsby-theme-bodiless/src/dist/package-lock.json'],
+  },
 });
 
 describe('Fetch Changes component', () => {
+  it('should detect changes are not available', async () => {
+    const wrapper = mount(
+      <FetchChanges
+        client={noChangesClient}
+        formApi={mockFormApi}
+        notifyOfChanges={jest.fn()}
+      />,
+    );
+    return new Promise(resolve => setImmediate(resolve)).then(() => {
+      wrapper.update();
+      expect(wrapper.text()).toBe('No changes are available, your Edit Environment is up to date!');
+    });
+  });
+
+  it('should indicate changes to download if upstream changes', async () => {
+    const wrapper = mount(
+      <FetchChanges
+        client={upstreamChangesOnlyClient}
+        formApi={mockFormApi}
+        notifyOfChanges={jest.fn()}
+      />,
+    );
+    return new Promise(resolve => setImmediate(resolve)).then(() => {
+      wrapper.update();
+      expect(wrapper.text()).toBe('There are updates available to be pulled. Click check (✓) to initiate.');
+    });
+  });
+
   it('should show a spinner while a request to the back-end is processed', () => {
     const wrapper = mount(
       <FetchChanges
@@ -86,20 +149,6 @@ describe('Fetch Changes component', () => {
     });
   });
 
-  it('should detect changes are not available', async () => {
-    const wrapper = mount(
-      <FetchChanges
-        client={noChangesClient}
-        formApi={mockFormApi}
-        notifyOfChanges={jest.fn()}
-      />,
-    );
-    return new Promise(resolve => setImmediate(resolve)).then(() => {
-      wrapper.update();
-      expect(wrapper.text()).toBe('There are no changes to download.');
-    });
-  });
-
   it('should detect changes are available but cannot be pulled', async () => {
     const wrapper = mount(
       <FetchChanges
@@ -110,8 +159,8 @@ describe('Fetch Changes component', () => {
     );
     return new Promise(resolve => setImmediate(resolve)).then(() => {
       wrapper.update();
-      expect(wrapper.text()).toBe(
-        'report_problem_outlinedUpstream changes are available but cannot be fetched via the UI.',
+      expect(wrapper.text()).toMatch(
+        /Changes are available but cannot be pulled, contact your development team for assistance. \(code 1002\)/,
       );
     });
   });
@@ -138,9 +187,7 @@ describe('Pull Changes component', () => {
     );
     return new Promise(resolve => setImmediate(resolve)).then(() => {
       wrapper.update();
-      expect(wrapper.text()).toBe(
-        'Operation complete, page will refresh.',
-      );
+      expect(wrapper.text()).toBe('Pull success, your Edit Environment is up to date!');
     });
   });
 });

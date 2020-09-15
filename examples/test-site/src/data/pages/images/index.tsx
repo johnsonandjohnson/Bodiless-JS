@@ -31,6 +31,7 @@ import Layout from '../../../components/Layout';
 import {
   asEditableImageWithPlaceholder,
   asLinkableImage,
+  asContentfulImage,
 } from '../../../components/Image';
 import {
   asHeader1,
@@ -47,6 +48,9 @@ import ImageSvgSrc from './image.svg';
 import ImageWebpSrc from './image.webp';
 import ImageResponsiveSvgSrc from './responsive_asvg.svg';
 
+import ContentfulImage1 from '../../../components/Contentful/Image/image1';
+import ContentfulImage2 from '../../../components/Contentful/Image/image2';
+
 const ImageAnimatedPng = asEditableImageWithPlaceholder(ImageAnimatedPngSrc)('animatedPng')(Img);
 const ImageGif = asEditableImageWithPlaceholder(ImageGifSrc)('gif')(Img);
 const ImageJpg = asEditableImageWithPlaceholder(ImageJpgSrc)('jpg')(Img);
@@ -62,6 +66,10 @@ const LinkableImagePng = asLinkableImage(ImagePng)('pngLink')(A);
 const LinkableImageSvg = asLinkableImage(ImageSvg)('svgLink')(A);
 const LinkableImageWebp = asLinkableImage(ImageWebp)('webpLink')(A);
 const LinkableImageResponsiveSvg = asLinkableImage(ImageResponsiveSvg)('responsiveSvgLink')(A);
+
+// Define Contentful Image
+const ImageContentful1 = asContentfulImage(ContentfulImage1)('ContentfulImage1')(Img);
+const ImageContentful2 = asContentfulImage(ContentfulImage2)('ContentfulImage2')(Img);
 
 const PageTitle = asHeader1(H1);
 const PageSection = flowRight(
@@ -161,6 +169,16 @@ export default (props: any) => (
           <LinkableImageResponsiveSvg />
         </ImageWrapper>
       </LinkableImagesSection>
+      <PageSection>
+        <ImageSectionTitle>Contentful Image Components</ImageSectionTitle>
+        <ImageWrapper>
+          <ImageContentful1 />
+        </ImageWrapper>
+
+        <ImageWrapper>
+          <ImageContentful2 />
+        </ImageWrapper>
+      </PageSection>
       <PageSection>
         <ImageSectionTitle>Images in a flow container</ImageSectionTitle>
         <FlowContainerDefault nodeKey="images" />
