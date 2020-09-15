@@ -7,6 +7,11 @@ import {
 import type { FormSnippet, UseGetMenuOptions } from '@bodiless/core';
 import { Div } from '@bodiless/fclasses';
 
+export type MetaFormProps = {
+  id: string,
+  name: string,
+};
+
 export enum FieldType {
   Text = 'text',
   TextArea = 'textarea',
@@ -85,9 +90,13 @@ const defaultMetaFormHeader = {
 const withMetaForm = (
   useGetMenuOptions: UseGetMenuOptions<any>,
   metaFormHeader?: HeaderProps,
+  metaFormProps?: MetaFormProps,
 ) => flowRight(
   withCompoundForm({
-    useGetMenuOptions, name: 'Meta', peer: true, id: 'meta',
+    useGetMenuOptions,
+    id: (metaFormProps && metaFormProps.id) || 'meta',
+    name: (metaFormProps && metaFormProps.name) || 'Meta',
+    peer: true,
   }),
   withMetaFormHeader(metaFormHeader || defaultMetaFormHeader),
 );

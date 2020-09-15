@@ -32,7 +32,7 @@ import {
   withMeta, withMetaStatic, withMetaHtml, withTitle,
 } from './Meta/Meta';
 import withMetaForm, { withMetaSnippet } from './Meta/withMetaForm';
-import type { FieldType as MetaFormFieldType } from './Meta/withMetaForm';
+import type { FieldType as MetaFormFieldType, MetaFormProps } from './Meta/withMetaForm';
 import asBodilessHelmet from './Helmet/Helmet';
 import withEvent from './GTM/gtm';
 import { withToggle, withToggleTo, withToggleButton } from './Toggle';
@@ -101,4 +101,4 @@ export type {
   TitleProps as ListTitleProps,
   ListDesignableComponents,
 } from './List/types';
-export type { MetaFormFieldType };
+export type { MetaFormFieldType, MetaFormProps };
