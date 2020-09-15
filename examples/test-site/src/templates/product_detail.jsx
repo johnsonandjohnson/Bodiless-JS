@@ -44,7 +44,6 @@ import SocialShare from '../components/SocialShare';
 import { withEditorBasic } from '../components/Editors';
 import asSingleAccordionDefaultStyle from '../components/SingleAccordion/token';
 
-
 // Do not allow editors to set accordion titles.
 const NonEditableTitle = ({ producttitle, ...rest }) => (
   <h2 {...rest}>
