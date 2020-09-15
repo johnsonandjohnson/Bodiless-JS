@@ -13,22 +13,22 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import lodash from 'lodash';
 import { useEditContext } from '@bodiless/core';
 import { ComponentFormSpinner, ComponentFormWarning } from '@bodiless/ui';
-import { isEmpty } from 'lodash';
 import { useFormApi } from 'informed';
 import type { ChangeNotifier } from './useGitButtons';
 
-type GitBranchType = {
+export type BranchUpdateType = {
   branch: string | null,
   commits: string[],
   files: string[];
 };
 
-type ResponseData = {
-  upstream: GitBranchType;
-  production: GitBranchType,
-  local: GitBranchType,
+export type ResponseData = {
+  upstream: BranchUpdateType;
+  production: BranchUpdateType,
+  local: BranchUpdateType,
 };
 
 type PropsWithGitClient = {
@@ -42,6 +42,26 @@ type PropsWithFormApi = {
 type PropsWithNotify = {
   notifyOfChanges: ChangeNotifier;
 };
+
+type MessageProps = {
+  messageCode: MessageCode;
+  messageData?: any;
+};
+
+enum MessageCode {
+  Default = 0,
+  PullErrored = 1000,
+  PullNoChange = 1001,
+  PullRestartRequired = 1002,
+  PullSuccess = 1003,
+  PullConflictConfirm = 1004,
+  PullConflictAbort = 1005,
+  PullMasterAbort = 1006,
+  PullUpstreamAbort = 1007,
+  PullChangeAvailable = 1008,
+  PullMasterAvailable = 1009,
+  PullNonContentOnly = 1010,
+}
 
 /**
  * Component for showing and pulling remote changes.
@@ -71,85 +91,114 @@ const RemoteChanges = ({ client, notifyOfChanges }: PropsWithGitClient & PropsWi
   );
 };
 
-enum ChangeState {
-  Pending,
-  CanBePulled,
-  CanNotBePulled,
-  NoneAvailable,
-  Errored
-}
+const mapResponse = (response: BranchUpdateType) => ({
+  hasUpdates: !!response.commits.length || !!response.files.length,
+  files: response.files,
+});
 
-const handleBranchResponse = (branch: GitBranchType) => {
-  const { commits, files } = branch;
-  if (isEmpty(commits)) {
-    return ChangeState.NoneAvailable;
-  }
-  if (files.some(file => file.includes('package-lock.json'))) {
-    return ChangeState.CanNotBePulled;
-  }
-  return ChangeState.CanBePulled;
-};
+const getRemoteStatus = (responseData: ResponseData) => ({
+  upstream: mapResponse(responseData.upstream),
+  production: mapResponse(responseData.production),
+  local: mapResponse(responseData.local),
+});
 
-const handleChangesResponse = ({ upstream, production }: ResponseData) => {
-  const upstreamStatus = handleBranchResponse(upstream);
-  const productionStatus = handleBranchResponse(production);
+const isContentOnly = (files: string[]) => files.every(file => file.search(/\.json$/g) !== -1);
 
-  return { upstreamStatus, productionStatus };
-};
+const FormMessages = ({ messageCode, messageData } : MessageProps) => {
+  switch (messageCode) {
+    case MessageCode.PullMasterAvailable:
+      return (<>There are master changes available to be pulled. Click check (✓) to initiate.</>);
 
-type ContentProps = {
-  status: ChangeState;
-  masterStatus: ChangeState;
-  errorMessage?: string;
-};
+    case MessageCode.PullConflictConfirm: {
+      const pages = messageData.pages.map((page: string) => (<li>{page}</li>));
+      return (
+        <>
+          <ComponentFormWarning>
+            Changes you have recently made in your Edit Environment conflict with changes that
+            have been made to production since the last time you pulled changes. You can choose
+            to have your changes override the production changes in your changeset, by clicking
+            the check. Or, you can dismiss this dialogue and contact your development team for
+            assistance.
+          </ComponentFormWarning>
+          <div className="py-1 px-20">
+            Conflict pages:
+            {messageData.pages.length > 0 && <ul className="list-disc px-3">{pages}</ul> }
+            {messageData.site.length > 0 && <p>A change that affects multiple pages</p> }
+          </div>
+        </>
+      );
+    }
 
-const ChangeContent = ({ status, masterStatus, errorMessage } : ContentProps) => {
-  switch (status) {
-    case ChangeState.NoneAvailable:
-      if (masterStatus === ChangeState.CanBePulled) {
-        return (<>There are master changes available to be pulled. Click check (✓) to initiate.</>);
-      }
-      if (masterStatus === ChangeState.CanNotBePulled) {
-        return (
+    case MessageCode.PullConflictAbort:
+      return (
+        <ComponentFormWarning>
+          {
+            `Changes are available but cannot be pulled, contact your development team for \
+assistance. (Code: ${MessageCode.PullConflictAbort})`
+          }
+        </ComponentFormWarning>
+      );
+
+    case MessageCode.PullNoChange:
+      return (
+        <>
+          No changes are available, your Edit Environment is up to date!
+        </>
+      );
+
+    case MessageCode.PullMasterAbort:
+      return (
+        <>
           <ComponentFormWarning>
             There are changes on production which cannot be merged from the UI.
           </ComponentFormWarning>
-        );
-      }
-      return (<>There are no changes to download.</>);
+        </>
+      );
 
-    case ChangeState.CanBePulled:
-      if (masterStatus === ChangeState.CanNotBePulled) {
-        return (
-          <>
-            <div>
-              There are updates available to be pulled. Click check (✓) to
-              initiate.
-            </div>
-            <ComponentFormWarning>
-              There are changes on production which cannot be merged from the UI.
-            </ComponentFormWarning>
-          </>
-        );
-      }
+    case MessageCode.PullChangeAvailable:
       return (
         <>
           There are updates available to be pulled. Click check (✓) to initiate.
         </>
       );
 
-    case ChangeState.CanNotBePulled:
+    case MessageCode.PullRestartRequired:
+      return (
+        <ComponentFormWarning>
+          {
+        `Changes are available but cannot be pulled, contact your development team for \
+assistance. (code ${MessageCode.PullRestartRequired})`
+          }
+        </ComponentFormWarning>
+      );
+
+    case MessageCode.PullUpstreamAbort:
       return (
         <ComponentFormWarning>
           Upstream changes are available but cannot be fetched via the UI.
         </ComponentFormWarning>
       );
-    case ChangeState.Errored:
-      return errorMessage ? (
-        <ComponentFormWarning>{errorMessage}</ComponentFormWarning>
-      ) : (
-        <ComponentFormWarning>An unexpected error has occurred</ComponentFormWarning>
+
+    case MessageCode.PullNonContentOnly:
+      return (
+        <ComponentFormWarning>
+          {
+            `Changes are available but cannot be pulled, contact your development team for \
+assistance. (code ${MessageCode.PullNonContentOnly})`
+          }
+        </ComponentFormWarning>
       );
+
+    case MessageCode.PullErrored:
+      return (
+        <ComponentFormWarning>
+          {
+            `An error has occurred, please try Pull again in a few minutes.
+            (code ${MessageCode.PullErrored})`
+          }
+        </ComponentFormWarning>
+      );
+
     default:
       return <ComponentFormSpinner />;
   }
@@ -166,9 +215,9 @@ const ChangeContent = ({ status, masterStatus, errorMessage } : ContentProps) =>
 const FetchChanges = (
   { client, formApi, notifyOfChanges }: PropsWithFormApi & PropsWithGitClient & PropsWithNotify,
 ) => {
-  const [state, setState] = useState<ContentProps>({
-    status: ChangeState.Pending,
-    masterStatus: ChangeState.NoneAvailable,
+  const [state, setState] = useState<MessageProps>({
+    messageCode: MessageCode.Default,
+    messageData: '',
   });
   const context = useEditContext();
   useEffect(() => {
@@ -183,37 +232,88 @@ const FetchChanges = (
           throw new Error(`Error pulling changes, status=${response.status}`);
         }
 
-        const { upstreamStatus, productionStatus } = handleChangesResponse(response.data);
-
-        if (productionStatus === ChangeState.CanBePulled) {
-          const conflictsResponse = await client.getConflicts();
-
-          if (conflictsResponse.status !== 200) {
-            throw new Error(`Error checking conflicts with the master branch, status=${response.status}`);
-          }
-
-          if (conflictsResponse.data.hasConflict) {
-            setState({ status: upstreamStatus, masterStatus: ChangeState.CanNotBePulled });
-          } else {
-            setState({ status: ChangeState.CanBePulled, masterStatus: ChangeState.CanBePulled });
-            formApi.setValue('mergeMaster', true);
-            formApi.setValue('keepOpen', true);
-          }
-        }
-
-        if (upstreamStatus === ChangeState.CanBePulled) {
+        const { production, upstream, local } = getRemoteStatus(response.data);
+        // @todo: refactor the if conditions.
+        if (production.hasUpdates) {
+          // @todo: refactor restart check with function.
           formApi.setValue('keepOpen', true);
-        }
+          if (production.files.some(file => file.includes('package-lock.json'))) {
+            setState({ messageCode: MessageCode.PullRestartRequired, messageData: [] });
+            formApi.setValue('mergeMaster', false);
+            formApi.setValue('keepOpen', false);
+          } else if (!local.hasUpdates && !upstream.hasUpdates) {
+            // No local changes.
+            setState({ messageCode: MessageCode.PullChangeAvailable, messageData: [] });
+            formApi.setValue('mergeMaster', true);
+          } else {
+            // Check production-upstream branch conflict.
+            const upstreamConflicts = await client.getConflicts();
 
-        setState((currentState) => ({
-          status: upstreamStatus,
-          masterStatus: currentState.masterStatus,
-        }));
+            if (upstreamConflicts.status !== 200) {
+              throw new Error(`Error checking conflicts with the master branch, status=${response.status}`);
+            }
+
+            if (upstreamConflicts.data.hasConflict) {
+              if (!isContentOnly(upstreamConflicts.data.files)) {
+                setState({ messageCode: MessageCode.PullNonContentOnly, messageData: [] });
+                formApi.setValue('mergeMaster', false);
+                formApi.setValue('keepOpen', false);
+              } else if (upstream.hasUpdates) {
+                // Production conflict with upstream with un-pulled upstream updates
+                // Updates can't be merged.
+                setState({ messageCode: MessageCode.PullConflictAbort, messageData: [] });
+                formApi.setValue('mergeMaster', false);
+                formApi.setValue('keepOpen', false);
+              } else {
+                // Production conflict with upstream and no extra commits on upstream to local,
+                // then check production/local conflict to get conflict file list.
+                const localConflictsResponse = await client.getConflicts('edit');
+                const pages = lodash.uniq([
+                  ...upstreamConflicts.data.pages,
+                  ...localConflictsResponse.data.pages,
+                ]);
+                const site = lodash.uniq([
+                  ...upstreamConflicts.data.site,
+                  ...localConflictsResponse.data.site,
+                ]);
+                setState({
+                  messageCode: MessageCode.PullConflictConfirm,
+                  messageData: { pages, site },
+                });
+                formApi.setValue('mergeMaster', true);
+              }
+            } else {
+              // No production/upstream conflict, further check produciton/local
+              const localConflictsResponse = await client.getConflicts('edit');
+              if (localConflictsResponse.data.hasConflict) {
+                const { pages } = localConflictsResponse.data;
+                const { site } = localConflictsResponse.data;
+                setState({
+                  messageCode: MessageCode.PullConflictConfirm,
+                  messageData: { pages, site },
+                });
+                formApi.setValue('mergeMaster', true);
+              } else {
+                // If there are conflicts between CHANGESET and EDIT, but no conflicts with
+                // PRODUCTION, then these are resolved silently in favor of EDIT.
+                setState({ messageCode: MessageCode.PullChangeAvailable, messageData: [] });
+                formApi.setValue('mergeMaster', true);
+              }
+            }
+          }
+        } else if (upstream.hasUpdates) {
+          setState({ messageCode: MessageCode.PullChangeAvailable, messageData: [] });
+          formApi.setValue('mergeMaster', true);
+          formApi.setValue('keepOpen', true);
+        } else {
+          setState({ messageCode: MessageCode.PullNoChange, messageData: [] });
+          formApi.setValue('mergeMaster', false);
+          formApi.setValue('keepOpen', false);
+        }
       } catch (error) {
         setState({
-          status: ChangeState.Errored,
-          masterStatus: ChangeState.Errored,
-          errorMessage: error.message,
+          messageCode: MessageCode.PullErrored,
+          messageData: error.message,
         });
       } finally {
         notifyOfChanges();
@@ -221,8 +321,8 @@ const FetchChanges = (
       }
     })();
   }, []);
-  const { status, masterStatus, errorMessage } = state;
-  return <ChangeContent status={status} masterStatus={masterStatus} errorMessage={errorMessage} />;
+  const { messageCode, messageData } = state;
+  return <FormMessages messageCode={messageCode} messageData={messageData} />;
 };
 
 type PullStatus = {
@@ -284,7 +384,7 @@ const PullChanges = (
   const { complete, error } = pullStatus;
   if (error) return <>{error}</>;
   if (complete) {
-    return <>Operation complete, page will refresh.</>;
+    return <>Pull success, your Edit Environment is up to date!</>;
   }
   return <ComponentFormSpinner />;
 };
