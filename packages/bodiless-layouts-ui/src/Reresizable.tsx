@@ -16,13 +16,14 @@ import React, { FC } from 'react';
 import CleanReresizable, { ResizableProps } from 're-resizable';
 
 const Reresizable: FC<ResizableProps & { isEnabled?: boolean }> = ({ isEnabled, ...rest }) => {
-  const borderClassName = isEnabled ? 'bl-border-primary' : 'bl-border-transparent hover:bl-border-primary';
+  const borderClass = 'bl-border-2 bl-border-dashed hover:bl-border-primary';
+  const activeClass = isEnabled ? 'bl-active bl-border-primary' : 'bl-border-transparent';
   const { className } = rest;
 
   return (
     <CleanReresizable
       {...rest}
-      className={`bl-border-2 bl-border-dashed bl-relative ${borderClassName} ${className}`}
+      className={`bl-resizable bl-relative ${activeClass} ${borderClass} ${className}`}
     />
   );
 };

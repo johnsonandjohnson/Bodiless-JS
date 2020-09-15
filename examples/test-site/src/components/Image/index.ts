@@ -16,6 +16,7 @@ import { ComponentType } from 'react';
 import {
   withChild,
   withDefaultContent,
+  withResetButton,
   withSidecarNodes,
 } from '@bodiless/core';
 import { flowRight } from 'lodash';
@@ -38,6 +39,7 @@ const asContentfulImage = (nodeContent: Partial<Data>) => (nodeKey: string) => f
     [nodeKey]: nodeContent,
   }),
   asEditableImage(nodeKey),
+  withResetButton(),
 );
 
 const DEFAULT_IMAGE_NODE_KEY = 'image';
