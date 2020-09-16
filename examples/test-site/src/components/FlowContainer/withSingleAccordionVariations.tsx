@@ -22,12 +22,12 @@ import {
   withDesign,
 } from '@bodiless/fclasses';
 
-import { SingleAccordionTest } from '../SingleAccordion';
+import SingleAccordion from '../SingleAccordion';
 import { withType } from './Categories';
 
 const singleAccordionVariation = {
   SingleAccordionBasic: flow(
-    replaceWith(SingleAccordionTest),
+    replaceWith(SingleAccordion),
     withType('Accordion')(),
     withTitle('Single Accordion'),
     withDesc('Adds expand/contract affect to a single title/body item.\n'),

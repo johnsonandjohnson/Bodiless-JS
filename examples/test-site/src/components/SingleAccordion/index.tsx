@@ -13,65 +13,32 @@
  */
 
 import { flow } from 'lodash';
-import {
-  SingleAccordionClean,
-  asTestableSingleAccordion,
-  asTestableAccordion,
-  AccordionClean,
-  withDisableExpandOnClick,
-} from '@bodiless/organisms';
-import {
-  withNode, withContextActivator, ifEditable,
-} from '@bodiless/core';
+import { asTestableAccordion, AccordionClean, withDisableExpandOnClick } from '@bodiless/organisms';
+import { withNode } from '@bodiless/core';
 import { withDesign } from '@bodiless/fclasses';
-import asSingleAccordionDefaultStyle, { asTestAccordionDefaultStyle } from './token';
+import asAccordionDefaultStyle from './token';
 import { withEditorSimple, withEditorBasic } from '../Editors';
 
-const asTestAccordion = flow(
+const asSingleAccordion = flow(
   withNode,
   withDesign({
     Title: withDesign({
       Label: flow(
-        withEditorSimple('t-title', 'Accordion Test Title'),
+        withEditorSimple('title', 'Accordion Title'),
         withDisableExpandOnClick,
       ),
     }),
     Body: withDesign({
       Content: withEditorBasic(
-        't-body',
+        'body',
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.',
       ),
     }),
   }),
-  asTestAccordionDefaultStyle,
+  asAccordionDefaultStyle,
   asTestableAccordion,
 );
 
-const asSingleAccordion = flow(
-  withNode,
-  withDesign({
-    Title: flow(
-      withEditorSimple('title', 'Accordion Title'),
-      // The following is a hack to prevent accordion expanding/contracting while editing
-      // the title. It mimics previous behavior where the click was eaten by the editor.
-      // Now editors do not add a context activator if they have no buttons, so we have
-      // to put one here.
-      // @TODO: Refactor accordions: https://github.com/johnsonandjohnson/Bodiless-JS/issues/390
-      ifEditable(withContextActivator('onClick')),
-    ),
-    Body: withEditorBasic(
-      'body',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.',
-    ),
-  }),
-  asSingleAccordionDefaultStyle,
-  asTestableSingleAccordion,
-);
-
-const SingleAccordion = asSingleAccordion(SingleAccordionClean);
-const SingleAccordionTest = asTestAccordion(AccordionClean);
+const SingleAccordion = asSingleAccordion(AccordionClean);
 
 export default SingleAccordion;
-export {
-  SingleAccordionTest,
-};

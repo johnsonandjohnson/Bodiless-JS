@@ -41,7 +41,7 @@ import {
 } from '../components/Product';
 import { FlowContainerDefault } from '../components/FlowContainer';
 import { withEditorBasic } from '../components/Editors';
-import { asTestAccordionDefaultStyle } from '../components/SingleAccordion/token';
+import asAccordionDefaultStyle from '../components/SingleAccordion/token';
 
 // Do not allow editors to set accordion titles.
 const NonEditableTitle = ({ producttitle, ...rest }) => (
@@ -59,7 +59,7 @@ const asTestableProductAccordion = label => flow(
 
 const asProductAccordion = title => flow(
   withNode,
-  asTestAccordionDefaultStyle,
+  asAccordionDefaultStyle,
   withDesign({
     Wrapper: removeClasses('p-1'),
     Title: withDesign({
