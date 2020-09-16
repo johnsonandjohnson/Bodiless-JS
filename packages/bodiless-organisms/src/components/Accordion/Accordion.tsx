@@ -26,7 +26,9 @@ const AccordionComponentsStart:AccordionComponents = {
   Body: AccordionBodyClean,
 };
 
-const AccordionBase: FC<AccordionProps & AccordionProviderProps> = ({ components, expanded }) => {
+const AccordionBase: FC<AccordionProps & AccordionProviderProps> = ({
+  components, expanded, ...rest
+}) => {
   const {
     Wrapper,
     Title = AccordionTitleClean,
@@ -35,7 +37,7 @@ const AccordionBase: FC<AccordionProps & AccordionProviderProps> = ({ components
 
   return (
     <AccordionProvider expanded={expanded}>
-      <Wrapper>
+      <Wrapper {...rest}>
         <Title />
         <Body />
       </Wrapper>
