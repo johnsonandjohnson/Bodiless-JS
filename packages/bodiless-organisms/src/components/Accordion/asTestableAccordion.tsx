@@ -21,6 +21,7 @@ const asTestableAccordion = withDesign({
   }),
   Body: withDesign({
     Wrapper: addProps({ 'data-accordion-element': 'accordion-body-wrapper' }),
+    Body: addProps({ 'data-accordion-element': 'accordion-body' }),
   }),
 });
 

@@ -18,11 +18,8 @@ import {
   withoutProps,
   addProps,
   addClassesIf,
-  hasProp,
 } from '@bodiless/fclasses';
-
-const isExpanded = (props: any) => hasProp('isExpanded')(props);
-const isNotExpanded = (props: any) => !hasProp('isExpanded')(props);
+import { isAccordionExpanded, isAccordionContracted } from './AccordionContext';
 
 const asAccordionIcon = flow(
   withoutProps(['isExpanded']),
@@ -40,8 +37,12 @@ const asAccordionTitle = flow(
 
 const asAccordionBodyWrapper = flow(
   withoutProps(['isExpanded']),
-  addClassesIf(isExpanded)('block'),
-  addClassesIf(isNotExpanded)('hidden'),
+  addClassesIf(isAccordionExpanded)('block'),
+  addClassesIf(isAccordionContracted)('hidden'),
+);
+
+const asAccordionBody = flow(
+  addClasses('truncate'),
 );
 
 export {
@@ -49,4 +50,5 @@ export {
   asAccordionTitleWrapper,
   asAccordionTitle,
   asAccordionBodyWrapper,
+  asAccordionBody,
 };

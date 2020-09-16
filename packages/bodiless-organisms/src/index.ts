@@ -83,6 +83,8 @@ export {
   asAccodionTitle,
   asAccordionBody,
   asTestableAccordion,
+  isAccordionExpanded,
+  isAccordionContracted,
 } from './components/Accordion';
 
 export {

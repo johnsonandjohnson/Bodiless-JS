@@ -37,8 +37,14 @@ const AccordionProvider: FC<AccordionProviderType> = ({ children, expanded = fal
   );
 };
 
+// Used for conditional fClasses.
+const isAccordionExpanded = () => useAccordionContext().isExpanded;
+const isAccordionContracted = () => !useAccordionContext().isExpanded;
+
 export {
   AccordionProvider,
   AccordionProviderType,
   useAccordionContext,
+  isAccordionExpanded,
+  isAccordionContracted,
 };

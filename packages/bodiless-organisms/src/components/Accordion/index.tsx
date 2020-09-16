@@ -13,7 +13,7 @@
  */
 
 import AccordionClean from './Accordion';
-import { useAccordionContext } from './AccordionContext';
+import { useAccordionContext, isAccordionExpanded, isAccordionContracted } from './AccordionContext';
 import { asAccodionTitle } from './AccordionTitle';
 import { asAccordionBody } from './AccordionBody';
 import asAccordionWrapper from './AccordionWrapper';
@@ -30,4 +30,6 @@ export {
   asAccodionTitle,
   asAccordionBody,
   asTestableAccordion,
+  isAccordionExpanded,
+  isAccordionContracted,
 };

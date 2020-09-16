@@ -14,7 +14,8 @@
 
 import React from 'react';
 import { flow } from 'lodash';
-import { withDesign, addClasses } from '@bodiless/fclasses';
+import { withDesign, addClasses, addClassesIf } from '@bodiless/fclasses';
+import { isAccordionExpanded, isAccordionContracted } from '@bodiless/organisms';
 import {
   asHeader2,
   asBlockItem,
@@ -57,7 +58,9 @@ const asTestAccordionDefaultStyle = flow(
     Wrapper: addClasses('p-1'),
     Title: withDesign({
       Wrapper: flow(
-        addClasses('bg-gray-200 p-3'),
+        addClassesIf(isAccordionExpanded)('bg-gray-400'),
+        addClassesIf(isAccordionContracted)('bg-gray-200'),
+        addClasses('p-3'),
         asHeader2,
       ),
     }),
