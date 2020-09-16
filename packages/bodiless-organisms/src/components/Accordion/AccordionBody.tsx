@@ -20,7 +20,6 @@ import {
   DesignableProps,
 } from '@bodiless/fclasses';
 import { asAccordionBodyWrapper, asAccordionBodyContent } from './Accordion.tokens';
-import { useAccordionContext } from './AccordionContext';
 import { AccordionBodyComponents, AccordionBodyProps } from './types';
 
 const AccordionBodyComponentsStart:AccordionBodyComponents = {
@@ -30,10 +29,9 @@ const AccordionBodyComponentsStart:AccordionBodyComponents = {
 
 const AccordionBodyBase: FC<AccordionBodyProps> = ({ components, children }) => {
   const { Wrapper, Content } = components;
-  const { isExpanded } = useAccordionContext();
 
   return (
-    <Wrapper isExpanded={isExpanded}>
+    <Wrapper>
       <Content>
         { children }
       </Content>

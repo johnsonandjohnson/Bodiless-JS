@@ -13,12 +13,7 @@
  */
 
 import { flow } from 'lodash';
-import {
-  addClasses,
-  withoutProps,
-  addProps,
-  addClassesIf,
-} from '@bodiless/fclasses';
+import { addClasses, addProps, addClassesIf } from '@bodiless/fclasses';
 import { ifEditable, withContextActivator } from '@bodiless/core';
 import { isAccordionExpanded, isAccordionContracted } from './AccordionContext';
 
@@ -27,7 +22,6 @@ const withDisableExpandOnClick = flow(
 );
 
 const asAccordionIcon = flow(
-  withoutProps(['isExpanded']),
   addClasses('material-icons cursor-pointer right-0'),
   addProps({ 'data-accordion-element': 'accordion-icon' }),
 );
@@ -41,7 +35,6 @@ const asAccordionLabel = flow(
 );
 
 const asAccordionBodyWrapper = flow(
-  withoutProps(['isExpanded']),
   addClassesIf(isAccordionExpanded)('block'),
   addClassesIf(isAccordionContracted)('hidden'),
 );

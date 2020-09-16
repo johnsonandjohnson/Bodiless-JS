@@ -41,10 +41,7 @@ const AccordionTitleBase: FC<AccordionTitleProps> = ({ components, children }) =
   return (
     <Wrapper onClick={() => setExpanded(!isExpanded)}>
       <Label>{ children }</Label>
-      <Icon
-        isExpanded={isExpanded}
-        data-accordion-icon={isExpanded ? 'remove' : 'add'}
-      >
+      <Icon data-accordion-icon={isExpanded ? 'remove' : 'add'}>
         {isExpanded ? 'remove' : 'add'}
       </Icon>
     </Wrapper>

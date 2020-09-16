@@ -18,7 +18,7 @@ import React, {
   useContext,
   useState,
 } from 'react';
-import { AccordionProviderType, AccordionContextType } from './types';
+import { AccordionProviderProps, AccordionContextType } from './types';
 
 const AccordionContext = createContext<AccordionContextType>({
   isExpanded: false,
@@ -27,7 +27,7 @@ const AccordionContext = createContext<AccordionContextType>({
 
 const useAccordionContext = () => useContext(AccordionContext);
 
-const AccordionProvider: FC<AccordionProviderType> = ({ children, expanded = false }) => {
+const AccordionProvider: FC<AccordionProviderProps> = ({ children, expanded = false }) => {
   const [isExpanded, setExpanded] = useState<boolean>(expanded);
 
   return (
@@ -43,7 +43,6 @@ const isAccordionContracted = () => !useAccordionContext().isExpanded;
 
 export {
   AccordionProvider,
-  AccordionProviderType,
   useAccordionContext,
   isAccordionExpanded,
   isAccordionContracted,

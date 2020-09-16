@@ -18,7 +18,7 @@ import { designable, Div } from '@bodiless/fclasses';
 import AccordionTitleClean from './AccordionTitle';
 import AccordionBodyClean from './AccordionBody';
 import { AccordionProvider } from './AccordionContext';
-import { AccordionComponents, AccordionProps, AccordionProviderType } from './types';
+import { AccordionComponents, AccordionProps, AccordionProviderProps } from './types';
 
 const AccordionComponentsStart:AccordionComponents = {
   Wrapper: Div,
@@ -26,7 +26,7 @@ const AccordionComponentsStart:AccordionComponents = {
   Body: AccordionBodyClean,
 };
 
-const AccordionBase: FC<AccordionProps & AccordionProviderType> = ({ components, expanded }) => {
+const AccordionBase: FC<AccordionProps & AccordionProviderProps> = ({ components, expanded }) => {
   const {
     Wrapper,
     Title = AccordionTitleClean,

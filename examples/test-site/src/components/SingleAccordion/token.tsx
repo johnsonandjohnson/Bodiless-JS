@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-// import React from 'react';
 import { flow } from 'lodash';
 import { withDesign, addClasses, addClassesIf } from '@bodiless/fclasses';
 import { isAccordionExpanded, isAccordionContracted } from '@bodiless/organisms';
