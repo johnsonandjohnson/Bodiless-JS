@@ -16,10 +16,7 @@ const asSingleAccordion = flow(
   withNode,
   withDesign({
     Title: withDesign({
-      Label: flow(
-        withEditorSimple('title', 'Accordion Title'),
-        withDisableExpandOnClick,
-      ),
+      Label: withEditorSimple('title', 'Accordion Title'),
     }),
     Body: withDesign({
       Content: withEditorBasic(
@@ -28,8 +25,6 @@ const asSingleAccordion = flow(
       ),
     }),
   }),
-  asAccordionDefaultStyle,
-  asTestableAccordion,
 );
 
 const SingleAccordion = asSingleAccordion(AccordionClean);
