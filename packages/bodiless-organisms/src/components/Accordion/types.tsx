@@ -30,13 +30,13 @@ export type AccordionContextType = {
 
 export type AccordionTitleComponents = {
   Wrapper: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
-  Title: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
+  Label: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
   Icon: ComponentType<StylableProps & HTMLProps<HTMLSpanElement> & WithIsExpanded>,
 };
 
 export type AccordionBodyComponents = {
   Wrapper: ComponentType<StylableProps & HTMLProps<HTMLDivElement> & WithIsExpanded>,
-  Body: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
+  Content: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
 };
 
 export type AccordionTitleProps = DesignableComponentsProps<AccordionTitleComponents>;

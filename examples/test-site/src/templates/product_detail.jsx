@@ -26,7 +26,7 @@ import {
   removeClasses,
 } from '@bodiless/fclasses';
 import {
-  SingleAccordionClean,
+  AccordionClean,
   asTestableAccordion,
 } from '@bodiless/organisms';
 import { withEvent, asBodilessHelmet } from '@bodiless/components';
@@ -41,7 +41,7 @@ import {
 } from '../components/Product';
 import { FlowContainerDefault } from '../components/FlowContainer';
 import { withEditorBasic } from '../components/Editors';
-import asSingleAccordionDefaultStyle from '../components/SingleAccordion/token';
+import { asTestAccordionDefaultStyle } from '../components/SingleAccordion/token';
 
 // Do not allow editors to set accordion titles.
 const NonEditableTitle = ({ producttitle, ...rest }) => (
@@ -59,26 +59,31 @@ const asTestableProductAccordion = label => flow(
 
 const asProductAccordion = title => flow(
   withNode,
-  asSingleAccordionDefaultStyle,
+  asTestAccordionDefaultStyle,
   withDesign({
     Wrapper: removeClasses('p-1'),
-    Title: replaceWith(props => <NonEditableTitle {...props} producttitle={title} />),
-    Body: withEditorBasic(
-      'body',
-      'Enter Product Information',
-    ),
+    Title: withDesign({
+      Wrapper: removeClasses('text-2xl'),
+      Label: replaceWith(props => <NonEditableTitle {...props} producttitle={title} />),
+    }),
+    Body: withDesign({
+      Content: withEditorBasic(
+        'body',
+        'Enter Product Information',
+      ),
+    }),
   }),
   asTestableProductAccordion(title),
 );
 
-const ProductOverAcc = asProductAccordion('Overview')(SingleAccordionClean);
-const ProductDirsAcc = asProductAccordion('Directions')(SingleAccordionClean);
-const ProductHowAcc = asProductAccordion('How To Use')(SingleAccordionClean);
-const ProductNutAcc = asProductAccordion('Nutrition')(SingleAccordionClean);
-const ProductActIngAcc = asProductAccordion('Active Ingredients')(SingleAccordionClean);
-const ProductInactIngAcc = asProductAccordion('Inactive Ingredients')(SingleAccordionClean);
-const ProductStorAcc = asProductAccordion('Storage')(SingleAccordionClean);
-const ProductWarnAcc = asProductAccordion('Warnings')(SingleAccordionClean);
+const ProductOverAcc = asProductAccordion('Overview')(AccordionClean);
+const ProductDirsAcc = asProductAccordion('Directions')(AccordionClean);
+const ProductHowAcc = asProductAccordion('How To Use')(AccordionClean);
+const ProductNutAcc = asProductAccordion('Nutrition')(AccordionClean);
+const ProductActIngAcc = asProductAccordion('Active Ingredients')(AccordionClean);
+const ProductInactIngAcc = asProductAccordion('Inactive Ingredients')(AccordionClean);
+const ProductStorAcc = asProductAccordion('Storage')(AccordionClean);
+const ProductWarnAcc = asProductAccordion('Warnings')(AccordionClean);
 
 const asTestableRatingsSummary = addProps({ 'data-product-element': 'ratings-summary' });
 const ProductRatingsSummary = asTestableRatingsSummary(BVRatingsSummary);

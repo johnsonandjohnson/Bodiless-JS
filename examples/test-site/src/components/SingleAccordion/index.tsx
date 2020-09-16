@@ -18,6 +18,7 @@ import {
   asTestableSingleAccordion,
   asTestableAccordion,
   AccordionClean,
+  withDisableExpandOnClick,
 } from '@bodiless/organisms';
 import {
   withNode, withContextActivator, ifEditable,
@@ -29,11 +30,18 @@ import { withEditorSimple, withEditorBasic } from '../Editors';
 const asTestAccordion = flow(
   withNode,
   withDesign({
-    Title: withEditorSimple('t-title', 'Accordion Test Title'),
-    Body: withEditorBasic(
-      't-body',
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.',
-    ),
+    Title: withDesign({
+      Label: flow(
+        withEditorSimple('t-title', 'Accordion Test Title'),
+        withDisableExpandOnClick,
+      ),
+    }),
+    Body: withDesign({
+      Content: withEditorBasic(
+        't-body',
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.',
+      ),
+    }),
   }),
   asTestAccordionDefaultStyle,
   asTestableAccordion,

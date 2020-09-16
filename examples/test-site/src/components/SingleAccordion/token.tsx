@@ -55,7 +55,7 @@ const asSingleAccordionDefaultStyle = flow(
 
 const asTestAccordionDefaultStyle = flow(
   withDesign({
-    Wrapper: addClasses('p-1'),
+    Wrapper: flow(asBlockItem, asTextColorPrimary),
     Title: withDesign({
       Wrapper: flow(
         addClassesIf(isAccordionExpanded)('bg-gray-400'),

@@ -19,7 +19,12 @@ import {
   addProps,
   addClassesIf,
 } from '@bodiless/fclasses';
+import { ifEditable, withContextActivator } from '@bodiless/core';
 import { isAccordionExpanded, isAccordionContracted } from './AccordionContext';
+
+const withDisableExpandOnClick = flow(
+  ifEditable(withContextActivator('onClick')),
+);
 
 const asAccordionIcon = flow(
   withoutProps(['isExpanded']),
@@ -31,7 +36,7 @@ const asAccordionTitleWrapper = flow(
   addClasses('flex items-center justify-between relative'),
 );
 
-const asAccordionTitle = flow(
+const asAccordionLabel = flow(
   addClasses('w-full'),
 );
 
@@ -41,14 +46,15 @@ const asAccordionBodyWrapper = flow(
   addClassesIf(isAccordionContracted)('hidden'),
 );
 
-const asAccordionBody = flow(
+const asAccordionBodyContent = flow(
   addClasses('truncate'),
 );
 
 export {
   asAccordionIcon,
   asAccordionTitleWrapper,
-  asAccordionTitle,
+  asAccordionLabel,
   asAccordionBodyWrapper,
-  asAccordionBody,
+  asAccordionBodyContent,
+  withDisableExpandOnClick,
 };

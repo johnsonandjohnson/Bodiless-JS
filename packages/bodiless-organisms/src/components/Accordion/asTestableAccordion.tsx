@@ -17,11 +17,11 @@ const asTestableAccordion = withDesign({
   Wrapper: addProps({ 'data-accordion-element': 'accordion' }),
   Title: withDesign({
     Wrapper: addProps({ 'data-accordion-element': 'accordion-title-wrapper' }),
-    Title: addProps({ 'data-accordion-element': 'accordion-title' }),
+    Label: addProps({ 'data-accordion-element': 'accordion-title' }),
   }),
   Body: withDesign({
     Wrapper: addProps({ 'data-accordion-element': 'accordion-body-wrapper' }),
-    Body: addProps({ 'data-accordion-element': 'accordion-body' }),
+    Content: addProps({ 'data-accordion-element': 'accordion-body' }),
   }),
 });
 

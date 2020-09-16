@@ -23,7 +23,7 @@ import {
 import {
   asAccordionIcon,
   asAccordionTitleWrapper,
-  asAccordionTitle,
+  asAccordionLabel,
 } from './Accordion.tokens';
 import { useAccordionContext } from './AccordionContext';
 import { AccordionTitleProps, AccordionTitleComponents } from './types';
@@ -31,16 +31,16 @@ import { AccordionTitleProps, AccordionTitleComponents } from './types';
 const AccordionTitleComponentsStart:AccordionTitleComponents = {
   Wrapper: asAccordionTitleWrapper(Div),
   Icon: asAccordionIcon(Span),
-  Title: asAccordionTitle(Div),
+  Label: asAccordionLabel(Div),
 };
 
 const AccordionTitleBase: FC<AccordionTitleProps> = ({ components, children }) => {
-  const { Wrapper, Title, Icon } = components;
+  const { Wrapper, Label, Icon } = components;
   const { isExpanded, setExpanded } = useAccordionContext();
 
   return (
     <Wrapper onClick={() => setExpanded(!isExpanded)}>
-      <Title>{ children }</Title>
+      <Label>{ children }</Label>
       <Icon
         isExpanded={isExpanded}
         data-accordion-icon={isExpanded ? 'remove' : 'add'}

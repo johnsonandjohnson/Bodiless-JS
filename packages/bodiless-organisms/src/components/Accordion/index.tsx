@@ -19,6 +19,7 @@ import { asAccordionBody } from './AccordionBody';
 import asAccordionWrapper from './AccordionWrapper';
 import asTestableAccordion from './asTestableAccordion';
 import { withAccordionSublist } from './asAccordionSublist';
+import { withDisableExpandOnClick } from './Accordion.tokens';
 
 export * from './types';
 
@@ -32,4 +33,5 @@ export {
   asTestableAccordion,
   isAccordionExpanded,
   isAccordionContracted,
+  withDisableExpandOnClick,
 };

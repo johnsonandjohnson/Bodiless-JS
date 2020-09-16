@@ -85,6 +85,7 @@ export {
   asTestableAccordion,
   isAccordionExpanded,
   isAccordionContracted,
+  withDisableExpandOnClick,
 } from './components/Accordion';
 
 export {
