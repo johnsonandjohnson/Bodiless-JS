@@ -79,3 +79,20 @@ const asAccordionExampleStyle = withDesign({
   }),
 });
 ```
+
+## Accordion Context
+You can use accordion context to retrieve and manipulate the accordion state: `useAccordionContext` hook is provided by `@bodiless/organisms`:
+```js
+import { useAccordionContext } from './AccordionContext';
+
+const AccordionExampleTitle = () => {
+  const { isExpanded, setExpanded } = useAccordionContext();
+  const toggleExpanded = () => setExpanded(!isExpanded);
+
+  return (
+    <div onClick={toggleExpanded}>
+      <span>{ isExpanded ? 'Expanded' : 'Contracted' }</span>
+    </div>
+  );
+};
+```
