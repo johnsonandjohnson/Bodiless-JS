@@ -26,11 +26,24 @@ import {
   Img,
   Section,
   addClasses,
+  removeClasses,
 } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
 import {
   asEditableImageWithPlaceholder,
   asLinkableImage,
+  FluidGatsbyImage,
+  FluidNoBase64GatsbyImage,
+  FluidTracedSVGGatsbyImage,
+  FluidWithWebpGatsbyImage,
+  FluidWithWebpNoBase64GatsbyImage,
+  FluidWithWebpTracedSVGGatsbyImage,
+  FixedGatsbyImage,
+  FixedNoBase64GatsbyImage,
+  FixedTracedSVGGatsbyImage,
+  FixedWithWebpGatsbyImage,
+  FixedWithWebpNoBase64GatsbyImage,
+  FixedWithWebpTracedSVGGatsbyImage,
   asContentfulImage,
 } from '../../../components/Image';
 import {
@@ -86,6 +99,10 @@ const LinkableImagesSection = flowRight(
 const ImageWrapper = flowRight(
   addClasses('inline-block p-2'),
 )(Div);
+const GatsbyImageWrapper = flowRight(
+  removeClasses('inline-block'),
+  addClasses('block'),
+)(ImageWrapper);
 const ImageSectionTitle = asHeader2(H2);
 const ImageTitle = asHeader3(H3);
 
@@ -93,6 +110,69 @@ export default (props: any) => (
   <Page {...props}>
     <Layout>
       <PageTitle>Images Demo</PageTitle>
+      <PageSection>
+        <ImageSectionTitle>Gatsby Images</ImageSectionTitle>
+        <GatsbyImageWrapper>
+          <ImageTitle>Fluid</ImageTitle>
+          <FluidGatsbyImage nodeKey="fluid" />
+        </GatsbyImageWrapper>
+
+        <GatsbyImageWrapper>
+          <ImageTitle>Fluid No Base64</ImageTitle>
+          <FluidNoBase64GatsbyImage nodeKey="fluidNoBase64" />
+        </GatsbyImageWrapper>
+
+        <GatsbyImageWrapper>
+          <ImageTitle>Fluid Traced SVG</ImageTitle>
+          <FluidTracedSVGGatsbyImage nodeKey="fluidTracedSVG" />
+        </GatsbyImageWrapper>
+
+        <GatsbyImageWrapper>
+          <ImageTitle>Fluid With Webp</ImageTitle>
+          <FluidWithWebpGatsbyImage nodeKey="fluidWithWebp" />
+        </GatsbyImageWrapper>
+
+        <GatsbyImageWrapper>
+          <ImageTitle>Fluid With Webp No Base64</ImageTitle>
+          <FluidWithWebpNoBase64GatsbyImage nodeKey="fluidWithWebpNoBase64" />
+        </GatsbyImageWrapper>
+
+        <GatsbyImageWrapper>
+          <ImageTitle>Fluid With Webp TracedSVG</ImageTitle>
+          <FluidWithWebpTracedSVGGatsbyImage nodeKey="fluidWithWebpTracedSVG" />
+        </GatsbyImageWrapper>
+
+        <GatsbyImageWrapper>
+          <ImageTitle>Fixed</ImageTitle>
+          <FixedGatsbyImage nodeKey="fixed" />
+        </GatsbyImageWrapper>
+
+        <GatsbyImageWrapper>
+          <ImageTitle>Fixed No Base64</ImageTitle>
+          <FixedNoBase64GatsbyImage nodeKey="fixedNoBase64" />
+        </GatsbyImageWrapper>
+
+        <GatsbyImageWrapper>
+          <ImageTitle>Fixed Traced SVG</ImageTitle>
+          <FixedTracedSVGGatsbyImage nodeKey="fixedTracedSVG" />
+        </GatsbyImageWrapper>
+
+        <GatsbyImageWrapper>
+          <ImageTitle>Fixed With Webp</ImageTitle>
+          <FixedWithWebpGatsbyImage nodeKey="fixedWithWebp" />
+        </GatsbyImageWrapper>
+
+        <GatsbyImageWrapper>
+          <ImageTitle>Fixed With Webp No Base64</ImageTitle>
+          <FixedWithWebpNoBase64GatsbyImage nodeKey="fixedWithWebpNoBase64" />
+        </GatsbyImageWrapper>
+
+        <GatsbyImageWrapper>
+          <ImageTitle>Fixed With Webp Traced SVG</ImageTitle>
+          <FixedWithWebpTracedSVGGatsbyImage nodeKey="fixedWithWebpTracedSVG" />
+        </GatsbyImageWrapper>
+      </PageSection>
+
       <EditableImagesSection>
         <ImageSectionTitle>Editable images</ImageSectionTitle>
 

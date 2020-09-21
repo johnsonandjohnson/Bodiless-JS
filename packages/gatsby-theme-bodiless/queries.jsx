@@ -17,7 +17,7 @@ import { graphql } from 'gatsby';
 
 export const defaultQuery = graphql`
   fragment PageQuery on Query {
-    Page: allRawCode(filter: { fields: { slug: { eq: $slug } } }) {
+    Page: allBodiless(filter: { fields: { slug: { eq: $slug } } }) {
       edges {
         node {
           name
@@ -30,7 +30,7 @@ export const defaultQuery = graphql`
     }
   }
   fragment SiteQuery on Query {
-    Site: allRawCode(filter: { fields: { slug: { eq: "../site/" } } }) {
+    Site: allBodiless(filter: { fields: { slug: { eq: "../site/" } } }) {
       edges {
         node {
           name
