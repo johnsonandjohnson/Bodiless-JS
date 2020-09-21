@@ -12,10 +12,9 @@
  * limitations under the License.
  */
 
-import React, { Fragment, ComponentType } from 'react';
+import React, { Fragment, ComponentType, useMemo } from 'react';
 import {
-  useNode, TMenuOption, withMenuOptions, useEditContext,
-  withOnlyProps,
+  useNode, TMenuOption, withMenuOptions, withOnlyProps,
 } from '@bodiless/core';
 import { observer } from 'mobx-react-lite';
 
@@ -48,38 +47,34 @@ const withToggleTo = <Q extends object>(OffComp: ComponentType<Q> | string) => (
 
 const withToggle = withToggleTo(withOnlyProps('key', 'children')(Fragment));
 
-type TMenuOptionGetter = () => TMenuOption[];
-
 type ToggleMenuOptions = {
   icon? : string;
   label?: string,
 };
 
 const withToggleButton = (options? : ToggleMenuOptions) => {
-  const useGetMenuOptions = (): TMenuOptionGetter => {
+  const useMenuOptions = (): TMenuOption[] => {
     const icon = options ? options.icon : false;
     const label = options ? options.label : undefined;
     const { setOn, isOn } = useAccessors();
-    // TODO: This should be a general useMenuHandler() utility exposed by bodiless core.
-    const context = useEditContext();
-    const asHandler = (action: Function) => () => {
-      action();
-      context.refresh();
-    };
 
-    return () => (
-      isOn() ? [] : [{
+    // We can return an invariant set of menu options bc state only depends
+    // on the mobx data store.
+    const menuOptions = useMemo(() => (
+      [{
         icon: icon || 'toggle_off',
         name: 'Toggle',
         label,
-        handler: asHandler(() => setOn(true)),
+        isHidden: () => isOn(),
+        handler: () => setOn(true),
         global: false,
         local: true,
       }]
-    );
+    ), []);
+    return menuOptions;
   };
 
-  return withMenuOptions({ useGetMenuOptions, name: 'toggle' });
+  return withMenuOptions({ useMenuOptions, name: 'toggle' });
 };
 
 export const withToggleOnSubmit = <P extends object>(Component: ComponentType<P>) => (

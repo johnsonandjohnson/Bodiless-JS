@@ -110,23 +110,23 @@ export const ContextMenuForm = <D extends object>(props: ContextMenuPropsType<D>
 };
 
 export const contextMenuForm = <D extends object>(options: Options<D> = {}) => (
-  renderFormBody?: FormBodyRenderer<D>,
+  renderForm?: FormBodyRenderer<D>,
 ) => (
-  (props: Omit<ContextMenuPropsType<D>, 'children'>) => (
+  (props: Omit<ContextMenuFormProps, 'children'>) => (
     <ContextMenuForm {...options} {...props}>
-      {renderFormBody || (() => <></>)}
+      {renderForm || (() => <></>)}
     </ContextMenuForm>
   )
 );
 
 type HookOptions<D> = Options<D> & {
-  renderFormBody?: FormBodyRenderer<D>,
+  renderForm?: FormBodyRenderer<D>,
 };
 
 const useContextMenuForm = <D extends object>(options: HookOptions<D> = {}) => {
-  const { renderFormBody, ...rest } = options;
+  const { renderForm, ...rest } = options;
   return useCallback(
-    contextMenuForm(rest)(renderFormBody),
+    contextMenuForm(rest)(renderForm),
     [options],
   );
 };

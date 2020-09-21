@@ -75,7 +75,7 @@ const defaultImagePickerUI = {
 function DropZonePlugin({ formApi, targetFieldName, ui }: {
   formApi: FormApi<Data>;
   targetFieldName:string;
-  ui?: TImagePickerUI;
+  ui?: Partial<TImagePickerUI>;
 }) {
   const [statusText, setStatusText] = useState('');
   const [isUploading, setIsUploading] = useState(false);
@@ -160,6 +160,9 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
     </MasterWrapper>
   );
 }
+DropZonePlugin.defaultProps = {
+  ui: {},
+};
 
 // Type of the props accepted by this component.
 // Exclude the src and alt from the props accepted as we write it.

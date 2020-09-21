@@ -41,13 +41,6 @@ const plugins = [
     },
   },
   {
-    resolve: 'gatsby-transformer-code',
-    options: {
-      name: 'data',
-      extensions: ['json'],
-    },
-  },
-  {
     resolve: 'gatsby-source-filesystem',
     options: {
       name: 'data',
@@ -60,6 +53,9 @@ const plugins = [
       name: 'templates',
       path: path.resolve('./src/templates/'),
     },
+  },
+  {
+    resolve: 'gatsby-plugin-sharp',
   },
   // 'gatsby-plugin-offline',
   // 'gatsby-plugin-remove-serviceworker',

@@ -1,4 +1,5 @@
 {
   "src": "/images/bodilessheader.jpg",
-  "alt": "BodilessJS Header"
+  "alt": "BodilessJS Header",
+  "preset": "fluid"
 }

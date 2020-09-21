@@ -48,14 +48,15 @@ type Props = {
     height?: string | number | undefined;
   };
   className: string;
-  getMenuOptions?: TMenuOptionGetter;
+  useGetMenuOptions: () => TMenuOptionGetter;
   onResizeStop?: ResizeCallback;
   onResize?: ResizeCallback;
   ui?: UI,
 };
 
-const SortableResizable = observer(({ children, ui, ...props }: Props) => {
-  const { onClick } = useContextActivator();
+type SortableResizableProps = Omit<Props, 'useGetMenuOptions'>;
+
+const SortableResizable = observer(({ children, ui, ...props }: SortableResizableProps) => {
   // We wabt to activate if nessesary
   useActivateOnEffectActivator(props.uuid);
   const context = useEditContext();
@@ -63,8 +64,8 @@ const SortableResizable = observer(({ children, ui, ...props }: Props) => {
   // @ts-ignore
   return (
     <Wrapper
-      isEnabled={context.isActive as boolean}
-      onClick={onClick}
+      isEnabled={context.isActive && !context.areLocalTooltipsDisabled}
+      {...useContextActivator()}
       {...props}
     >
       {children}
@@ -76,7 +77,7 @@ const SlateSortableResizable = (props: Props) => {
   const {
     children,
     uuid,
-    getMenuOptions,
+    useGetMenuOptions,
     ...rest
   } = props;
 
@@ -84,7 +85,7 @@ const SlateSortableResizable = (props: Props) => {
     <PageContextProvider
       name={`flexItem-${uuid}`}
       id={`flexItem-${uuid}`}
-      getMenuOptions={getMenuOptions}
+      getMenuOptions={useGetMenuOptions()}
     >
       <SortableResizable uuid={uuid} {...rest}>
         {children}
@@ -96,8 +97,6 @@ const SlateSortableResizable = (props: Props) => {
 SlateSortableResizable.displayName = 'SlateSortableResizable';
 
 SlateSortableResizable.defaultProps = {
-  className: '',
-  getMenuOptions: () => [],
   onResize: () => {},
   defaultSize: {
     width: '',

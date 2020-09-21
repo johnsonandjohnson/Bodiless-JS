@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /**
  * Copyright © 2019 Johnson & Johnson
  *
@@ -13,19 +14,69 @@
  */
 
 import React from 'react';
-import { shallow } from 'enzyme';
-import { useContextActivator } from '../src/hooks';
+import { mount } from 'enzyme';
+import { useContextActivator, useExtendHandler } from '../src/hooks';
 import PageEditContext from '../src/PageEditContext';
 
-const TestComponent = ({ element: Element, event, handler }: any) => (
-  <Element {...useContextActivator(event, handler)}>Foo!</Element>
+const TestComponent = ({
+  element: Element, event, handler, children, id,
+}: any) => (
+  <Element
+    id={id || 'test'}
+    {...useContextActivator(event, handler)}
+  >
+    {children || 'Foo!'}
+  </Element>
 );
 
-// TODO: We should have reusable mocks for events.
-const event = {
-  preventDefault: jest.fn(),
-  stopPropagation: jest.fn(),
-};
+describe('useExtendHandler', () => {
+  let mockIsEdit: any;
+  const outerHandler = jest.fn();
+  const innerHandler = jest.fn();
+
+  const Test = (props: any) => (
+    <div {...useExtendHandler('onClick', innerHandler, props)} />
+  );
+
+  beforeAll(() => {
+    mockIsEdit = jest.spyOn(PageEditContext.prototype, 'isEdit', 'get').mockReturnValue(true);
+  });
+
+  beforeEach(() => {
+    outerHandler.mockClear();
+    innerHandler.mockClear();
+  });
+
+  afterAll(() => {
+    mockIsEdit.mockRestore();
+  });
+
+  it('adds a handler and invokes it with the event', () => {
+    const wrapper = mount(<Test />);
+    wrapper.simulate('click');
+    expect(innerHandler).toBeCalledTimes(1);
+    expect(innerHandler.mock.calls[0][0].type).toBe('click');
+  });
+
+  it('extends a handler and invokes it with the event', () => {
+    const wrapper = mount(<Test onClick={outerHandler} />);
+    wrapper.simulate('click');
+    expect(innerHandler).toBeCalledTimes(1);
+    expect(outerHandler).toBeCalledTimes(1);
+    expect(innerHandler.mock.calls[0][0].type).toBe('click');
+    expect(outerHandler.mock.calls[0][0].type).toBe('click');
+  });
+
+  it('does not alter a handler when not in edit mode', () => {
+    mockIsEdit.mockClear();
+    mockIsEdit = jest.spyOn(PageEditContext.prototype, 'isEdit', 'get').mockReturnValue(false);
+    const wrapper = mount(<Test onClick={outerHandler} />);
+    wrapper.simulate('click');
+    expect(outerHandler).toBeCalledTimes(1);
+    expect(outerHandler.mock.calls[0][0].type).toBe('click');
+    expect(innerHandler).toBeCalledTimes(0);
+  });
+});
 
 describe('useContextActivator', () => {
   let mockActivate: any;
@@ -54,18 +105,66 @@ describe('useContextActivator', () => {
       trigger: 'mouseover',
       element: 'span',
     };
-    const wrapper = shallow(<TestComponent {...conditions} />);
-    wrapper.simulate(conditions.trigger, event);
+    const wrapper = mount(<TestComponent {...conditions} />);
+    wrapper.simulate(conditions.trigger);
     expect(PageEditContext.prototype.activate).toHaveBeenCalledTimes(1);
   });
 
   it('invokes a passed handler', () => {
     const handler = jest.fn();
-    const wrapper = shallow(
+    const wrapper = mount(
       <TestComponent handler={handler} event="onClick" element="div" />,
     );
-    wrapper.simulate('click', event);
+    wrapper.simulate('click');
     expect(handler).toHaveBeenCalledTimes(1);
     expect(PageEditContext.prototype.activate).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not stop propagation of the event', () => {
+    const outer = jest.fn();
+    const Test = () => (
+      <button type="button" onClick={outer}>
+        <TestComponent event="onClick" element="div" />
+      </button>
+    );
+    const wrapper = mount(<Test />);
+    wrapper.find('#test').simulate('click');
+    expect(outer).toHaveBeenCalledTimes(1);
+    expect(outer.mock.calls[0][0].type).toBe('click');
+  });
+
+  it('does not activate a context that is already innermost', () => {
+    mockIsInnermost.mockRestore();
+    mockIsInnermost = jest.spyOn(PageEditContext.prototype, 'isInnermost', 'get').mockReturnValue(true);
+    const wrapper = mount(
+      <TestComponent event="onClick" element="div" />,
+    );
+    wrapper.find('#test').simulate('click');
+    expect(mockActivate).not.toBeCalled();
+  });
+
+  it('does not activate an outer context', () => {
+    mockActivate.mockRestore();
+    mockIsInnermost.mockRestore();
+    mockIsInnermost = jest.spyOn(PageEditContext.prototype, 'isInnermost', 'get').mockReturnValue(false);
+    class MockContext extends PageEditContext {
+      activate = jest.fn();
+    }
+    const outer = new MockContext({ id: 'outer' });
+    const inner = new MockContext({ id: 'inner' }, outer);
+
+    const wrapper = mount(
+      <PageEditContext.Provider value={outer}>
+        <TestComponent event="onClick" element="div" id="outer">
+          <PageEditContext.Provider value={inner}>
+            <TestComponent event="onClick" element="div" id="inner" />
+          </PageEditContext.Provider>
+        </TestComponent>
+      </PageEditContext.Provider>,
+    );
+    wrapper.find('div#inner').simulate('click');
+    expect(mockActivate).not.toBeCalled();
+    expect(inner.activate).toBeCalledTimes(1);
+    expect(outer.activate).not.toBeCalled();
   });
 });
