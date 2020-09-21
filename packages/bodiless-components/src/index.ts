@@ -39,6 +39,7 @@ import { withToggle, withToggleTo, withToggleButton } from './Toggle';
 import withEditPlaceholder from './Placeholder';
 import { TagButtonProps, withTagButton, useTagsAccessors } from './TagButton';
 import withFilterByTags from './withFilterByTags';
+import asBodilessIframe from './Iframe';
 import Youtube, { asBodilessYoutube } from './Youtube';
 import PageDimensionsProvider, {
   usePageDimensionsContext,
@@ -84,6 +85,7 @@ export {
   asTaggableItem,
   withFilterByTags,
   useTagsAccessors,
+  asBodilessIframe,
   asBodilessYoutube,
   Youtube,
   PageDimensionsProvider,

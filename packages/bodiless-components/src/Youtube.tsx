@@ -12,88 +12,98 @@
  * limitations under the License.
  */
 
-import React, {
-  HTMLProps,
-} from 'react';
-
-import {
-  EditButtonOptions,
-  getUI,
-  withEditButton,
-  withData,
-  withContextActivator,
-  withNode,
-  withNodeKey,
-  withNodeDataHandlers,
-  withLocalContextMenu,
-  WithNodeProps,
-  ifEditable,
-  Bodiless,
-  ifReadOnly,
-  withoutProps,
-} from '@bodiless/core';
-
+import React, { useCallback, ComponentType } from 'react';
+import { getUI } from '@bodiless/core';
+import { addProps } from '@bodiless/fclasses';
 import { flowRight } from 'lodash';
-import withEditPlaceholder from './Placeholder';
+import asBodilessIframe from './iFrame';
 
-// Type of the data used by this component.
-export type Data = {
-  src: string;
+export const asBodilessYoutube = asBodilessIframe;
+
+type YoutubePlayerSettings = {
+  autoplay: boolean,
+  cc_lang_pref: string,
+  cc_load_policy: boolean,
+  controls: boolean,
+  loop: boolean,
+  enablejsapi: boolean,
+  modestbranding: boolean,
+  rel: boolean,
 };
 
-// Type of the props accepted by this component.
-type IframeProps = HTMLProps<HTMLIFrameElement>;
+// https://stackoverflow.com/a/9102270
+const extractVideoIdFromUrl = (url: string) => {
+  const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  return match && match[2].length == 11 ? match[2] : undefined;
+}
 
-export type Props = Pick<IframeProps, Exclude<keyof IframeProps, 'src'>>;
+const withYoutubePlayerSettings = (settings: Partial<YoutubePlayerSettings>) =>
+  (Component: ComponentType<any>) => {
+    const WithYoutubePlayerSettings = (props: any) => {
+      const { src, ...rest } = props;
+      const url = new URL(src);
+      Object.entries(settings).forEach(setting => {
+        const [key, value] = setting;
+        url.searchParams.set(key, String(value));
+      });
+      return <Component {...rest} src={url} />
+    }
+    WithYoutubePlayerSettings.displayName = 'WithYoutubePlayerSettings';
+    return WithYoutubePlayerSettings;
+  }
 
-// Options used to create an edit button.
-export const editButtonOptions: EditButtonOptions<Props, Data> = {
-  icon: 'settings',
-  label: 'Settings',
-  name: 'Edit',
-  renderForm: ({ ui: formUi }) => {
-    const { ComponentFormTitle, ComponentFormLabel, ComponentFormText } = getUI(formUi);
-    return (
-      <>
-        <ComponentFormTitle>Youtube video</ComponentFormTitle>
-        <ComponentFormLabel htmlFor="youtube-src">Src</ComponentFormLabel>
-        <ComponentFormText field="src" id="youtube-src" />
-      </>
-    );
-  },
-  global: false,
-  local: true,
+const withYoutubeVideoTransformer = (Component : ComponentType<any>) => {
+  const WithYoutubeVideoTransformer = ({ videoId, ...rest } : any) => 
+    <Component
+      src={`https://www.youtube.com/embed/${videoId}`} {...rest}
+    />;
+  return WithYoutubeVideoTransformer;
 };
 
-const EditPlaceholder = (props: IframeProps) => {
-  const { src, ...rest } = props;
-  return src
-    ? <div {...rest}>{`Youtube with ${src} configured.`}</div>
-    : <div {...rest}>Click to enter youtube url.</div>;
-};
+const Youtube = flowRight(
+  /*addProps({
+    height: "500px",
+    width: "900px"
+  }),*/
+  asBodilessIframe(undefined, undefined, props => ({
+    renderForm: ({ ui: formUi, formState }) => {
+      const { errors } = formState;
+      const {
+        ComponentFormTitle,
+        ComponentFormLabel,
+        ComponentFormText,
+        ComponentFormWarning
+      } = getUI(formUi);
+      return (
+        <>
+          <ComponentFormTitle>Youtube video</ComponentFormTitle>
+          <ComponentFormLabel htmlFor="video-url">Video URL</ComponentFormLabel>
+          <ComponentFormText
+            field="videoId"
+            id="video-url"
+            validate={
+              useCallback(
+                (value: string) =>
+                  !value || !extractVideoIdFromUrl(value)
+                  ? `Enter No special characters or spaces allowed`
+                  : undefined,
+              [])
+            }
+            validateOnChange
+            validateOnBlur
+          />
+          {errors && errors.videoId && (
+            <ComponentFormWarning>{errors.videoId}</ComponentFormWarning>
+          )}
+        </>
+      );
+    },
+  })),
+  withYoutubeVideoTransformer,
+)('iframe');
 
-// Composed hoc which creates editable version of the component.
-// Note - the order is important. In particular:
-// - the node data handlers must be outermost
-// - anything relying on the context (activator, indicator) must be
-//   *after* `withEditButton()` as this establishes the context.
-// - withData must be *after* the data handlers are defiend.
-export const asBodilessYoutube = (nodeKey?: string) => flowRight(
-  // @ts-ignore: Types of parameters are incompatible.
-  withNodeKey(nodeKey),
-  withNode,
-  withNodeDataHandlers(),
-  ifReadOnly(
-    withoutProps(['setComponentData']),
-  ),
-  ifEditable(
-    withEditButton(editButtonOptions),
-    withContextActivator('onClick'),
-    withLocalContextMenu,
-  ),
-  withData,
-  withEditPlaceholder(EditPlaceholder),
-) as Bodiless<Props, Props & Partial<WithNodeProps>>;
-
-const Youtube = asBodilessYoutube()('iframe');
 export default Youtube;
+export {
+  withYoutubePlayerSettings,
+};

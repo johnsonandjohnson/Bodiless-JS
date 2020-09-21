@@ -89,3 +89,5 @@ export {
   BCarouselClean,
   asEditableCarousel,
 } from './components/Carousel';
+
+export { default as Embed } from './components/Embed';
