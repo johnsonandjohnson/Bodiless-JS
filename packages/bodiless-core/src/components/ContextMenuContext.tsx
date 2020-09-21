@@ -15,6 +15,7 @@
 import React, { FC, createContext, useContext } from 'react';
 import { Text, TextArea } from 'informed';
 import ReactTooltip from 'rc-tooltip';
+import { omit } from 'lodash';
 import ReactTagsField from './ReactTagsField';
 import type { UI, ContextMenuFormProps } from '../Types/ContextMenuTypes';
 
@@ -28,7 +29,7 @@ type ContextUIType = {
 };
 
 const defaultUI = {
-  Icon: 'i',
+  Icon: (props: any) => <i {...omit(props, 'isActive')} />,
   ComponentFormTitle: 'h3',
   ComponentFormLabel: 'label',
   ComponentFormButton: 'button',
@@ -46,7 +47,7 @@ const defaultUI = {
   ComponentFormListItem: 'li',
   ComponentFormDescription: 'div',
   ContextSubMenu: React.Fragment,
-  ToolbarButton: 'div',
+  ToolbarButton: (props: any) => <div {...omit(props, 'isActive', 'isDisabled', 'isFirst')} />,
   ToolbarButtonLabel: 'span',
   FormWrapper: 'div',
   ToolbarDivider: 'div',

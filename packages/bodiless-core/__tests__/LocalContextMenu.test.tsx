@@ -63,7 +63,7 @@ const MockContextProvider: FC<Props> = ({
     name: name || 'Unknown',
   };
 
-  const context = useEditContext() as PageEditContext;
+  const context = useEditContext();
   const mockPageContext = new MockPageEditContext(newValues, context);
 
   // Activate the context.

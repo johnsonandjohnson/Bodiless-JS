@@ -14,7 +14,7 @@
 
 /* eslint-disable no-alert */
 import React, {
-  useState, useEffect, useCallback,
+  useState, useEffect, useCallback, useMemo,
 } from 'react';
 import {
   contextMenuForm,
@@ -24,6 +24,7 @@ import {
   useNotify,
   useRegisterMenuOptions,
   ContextSubMenu,
+  useGetter,
 } from '@bodiless/core';
 import BackendClient from './BackendClient';
 import CommitsList from './CommitsList';
@@ -213,8 +214,12 @@ const useGitButtons = ({ client = defaultClient } = {}) => {
     }
   }, []);
 
+  const menuOptions = useMemo(
+    () => getMenuOptions(client, context, notifyOfChanges), [notifyOfChanges],
+  );
+
   useRegisterMenuOptions({
-    getMenuOptions: () => getMenuOptions(client, context, notifyOfChanges),
+    getMenuOptions: useGetter(menuOptions),
     name: 'Git',
   });
 };

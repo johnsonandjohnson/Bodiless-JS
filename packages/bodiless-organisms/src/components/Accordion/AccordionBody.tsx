@@ -43,11 +43,14 @@ const AccordionBodyClean = flow(
 
 const asAccordionBody = <P extends DesignableProps<AccordionBodyComponents>>(
   Component: ComponentType<P> | string,
-) => (props: P) => (
-  <AccordionBodyClean design={props.design}>
-    <Component {...props} />
-  </AccordionBodyClean>
-  );
+) => (props: P) => {
+    const { design } = props;
+    return (
+      <AccordionBodyClean design={design}>
+        <Component {...props} />
+      </AccordionBodyClean>
+    );
+  };
 
 export default AccordionBodyClean;
 export {

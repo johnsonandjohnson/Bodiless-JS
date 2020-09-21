@@ -64,7 +64,7 @@ const LocalContextMenu: FC = ({ children }) => {
   // TODO: Only render tooltip when needed. Currently this causes focus issues with editables.
   // (The editable gets the focus, then the tooltip re-renders and creates a new editable
   // which is not focused.  Might be worth investigating this at some point.)
-  // if (!isInnermostLocalMenu || areLocalTooltipsDisabled) {
+  // if (!isInnermostLocalMenu) {
   //   return <>{children}</>;
   // }
   return (
