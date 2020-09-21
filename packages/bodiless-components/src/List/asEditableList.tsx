@@ -12,9 +12,9 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React, { ComponentType, useMemo } from 'react';
 import {
-  withMenuOptions, useEditContext, withLocalContextMenu,
+  withMenuOptions, withLocalContextMenu,
   withContextActivator, withoutProps, ifEditable,
 } from '@bodiless/core';
 import { flow, identity } from 'lodash';
@@ -22,40 +22,32 @@ import { Design } from '@bodiless/fclasses/lib/Design';
 
 import { TitleProps, FinalProps, ListDesignableComponents } from './types';
 
-const useGetMenuOptions = (props: TitleProps) => {
+const useMenuOptions = (props: TitleProps) => {
   const {
     onAdd, onDelete, canDelete,
   } = props;
-  const context = useEditContext();
 
-  const asHandler = (action: Function) => () => {
-    action();
-    context.refresh();
-  };
-
-  return () => {
-    const options = [];
-    options.push({
+  const menuOptions = useMemo(() => ([
+    {
       name: 'Add',
       icon: 'add',
       label: 'Add',
-      handler: asHandler(onAdd),
+      handler: onAdd,
       global: false,
       local: true,
-    });
-    // TODO: Disable rather than hide this button when delete is not allowed.
-    if (canDelete()) {
-      options.push({
-        name: 'Remove',
-        icon: 'delete',
-        label: 'Delete',
-        handler: asHandler(onDelete),
-        global: false,
-        local: true,
-      });
-    }
-    return options;
-  };
+    },
+    {
+      name: 'Remove',
+      icon: 'delete',
+      label: 'Delete',
+      isHidden: () => !canDelete(),
+      handler: onDelete,
+      global: false,
+      local: true,
+    },
+  ]), []);
+
+  return menuOptions;
 };
 
 // TODO: Maybe generalize this as an "alterDesign()" method.
@@ -73,7 +65,7 @@ const asEditableList = (List: ComponentType<FinalProps>) => (
         withoutProps(['onAdd', 'onDelete', 'canDelete']),
         ItemMenuOptionsProvider || identity,
         ifEditable(
-          withMenuOptions({ useGetMenuOptions, name: 'list-item' }),
+          withMenuOptions({ useMenuOptions, name: 'list-item' }),
         ),
       ),
     };

@@ -14,8 +14,15 @@
 import { flow } from 'lodash';
 import { withDesign, HOC } from '@bodiless/fclasses';
 import { asBodilessLink, withLinkToggle } from '@bodiless/components';
-import { withNode, withNodeKey, withoutProps } from '@bodiless/core';
+import {
+  withNode, withNodeKey, withoutProps, withExtendHandler,
+} from '@bodiless/core';
 import AsEditable from './types/AsEditable';
+
+function stopPropagation(e: MouseEvent) {
+  e.stopPropagation();
+}
+
 /**
  * HOC, that injects editable link toggle component into component design (usually Menu or Submenu)
  */
@@ -23,6 +30,7 @@ const withEditableTitle = (editable: AsEditable) => withDesign({
   Title: flow(
     asBodilessLink('title-link'),
     withLinkToggle,
+    withExtendHandler('onClick', () => stopPropagation),
     withNode,
     withNodeKey('title'),
     editable('text', 'Menu Item'),
