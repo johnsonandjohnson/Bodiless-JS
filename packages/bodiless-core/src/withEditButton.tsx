@@ -115,6 +115,7 @@ const withEditButton = <P extends object, D extends object>(
     withMenuOptions({
       useMenuOptions: createMenuOptionHook(options),
       name: options.name,
+      peer: options.peer,
     }),
     withoutProps(['setComponentData', 'isActive']),
   );

@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Copyright © 2020 Johnson & Johnson
  *
@@ -12,27 +13,64 @@
  * limitations under the License.
  */
 
-import { flowRight } from 'lodash';
-import Helmet from 'react-helmet';
-import {
-  asBodilessHelmet,
-  withEvent,
-} from '@bodiless/components';
+import { asBodilessGTMHelmet } from '@bodiless/components';
 
-const SiteGTMHelmetEvent = flowRight(
-  asBodilessHelmet('datalayer'),
-  withEvent(
-    'digitalData',
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const digitalData = [
+  {
+    event: 'Page Loaded',
+    page: {
+      country: 'US',
+      language: 'en',
+      hostname: 'www.listerine.com',
+      pageType: 'product detail',
+    },
+  },
+  {
+    event: 'Product Viewed',
+    product: [
+      {
+        productInfo: {
+          productID: '312547306355',
+          sku: '1254730635',
+          upc: '312547306355',
+          productName: 'LISTERINE\u00ae TOTAL CARE Mouthwash',
+          careArea: '',
+          concernArea: '',
+        },
+      },
+    ],
+  },
+];
+const defaultDataLayer = {
+  name: 'DigitalData',
+  events: [
     {
       event: 'Page Loaded',
       page: {
         country: 'US',
-        language: 'EN',
-        hostname: 'bodilessjs.com',
+        language: 'en',
+        hostname: 'www.listerine.com',
+        pageType: 'product detail',
       },
     },
-    'page-loaded',
-  ),
-)(Helmet);
-
+    {
+      event: 'Product Viewed',
+      product: [
+        {
+          productInfo: {
+            productID: '312547306355',
+            sku: '1254730635',
+            upc: '312547306355',
+            productName: 'LISTERINE',
+            careArea: '',
+            concernArea: '',
+          },
+        },
+      ],
+    },
+  ],
+};
+const editableDataDefaultContent = { pageType: 'mama' };
+const SiteGTMHelmetEvent = asBodilessGTMHelmet(defaultDataLayer)('datalayer', editableDataDefaultContent);
 export default SiteGTMHelmetEvent;

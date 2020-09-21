@@ -14,11 +14,26 @@
 
 import React, { ComponentType as CT } from 'react';
 import { stripIndent } from 'common-tags';
-import { useNode } from '@bodiless/core';
+import {
+  EditButtonOptions,
+  getUI,
+  ifEditable,
+  useNode,
+  withEditButton,
+  withNode,
+  withNodeDataHandlers,
+  withNodeKey,
+} from '@bodiless/core';
 import * as _ from 'lodash';
+import { flowRight } from 'lodash';
+import Helmet from 'react-helmet';
 
-type GtmEventData = {
-  content: string;
+type GTMNodeDataType = {
+  pageType: string,
+  sku: string,
+  upc: string,
+  name: string,
+  variant: string
 };
 
 type GtmDefaultPageData = {
@@ -32,7 +47,6 @@ const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
   if (dataLayer !== undefined) {
     result += `window.${dataLayerName}.push(${JSON.stringify(dataLayer)});`;
   }
-
   return stripIndent`${result}`;
 };
 
@@ -43,7 +57,7 @@ const withEvent = (
   nodeKey: string,
   nodeCollection: string,
 ) => (HelmetComponent: CT) => (props: any) => {
-  if (process.env.NODE_ENV === 'production' && tagManagerEnabled) {
+  if (process.env.NODE_ENV === 'production' && tagManagerEnabled || 1) {
     const { children, ...rest } = props;
     const { node } = useNode(nodeCollection);
     const { data } = node.child<GtmEventData>(nodeKey);
@@ -57,5 +71,71 @@ const withEvent = (
   }
   return <></>;
 };
+
+// Options used to create an edit button.
+export const editButtonOptions: EditButtonOptions<any, GTMNodeDataType> = {
+  icon: 'local_offer',
+  label: 'GTM',
+  name: 'gtm',
+  peer: true,
+  isHidden: false,
+  renderForm: ({ ui: formUi }) => {
+    console.log('in renderform');
+    const {
+      ComponentFormTitle,
+      ComponentFormLabel,
+      ComponentFormText,
+    } = getUI(formUi);
+    return (
+      <>
+        <ComponentFormTitle>GTM</ComponentFormTitle>
+        <ComponentFormLabel htmlFor="pageType">Page Type</ComponentFormLabel>
+        <ComponentFormText field="pageType" id="page-type" />
+        <ComponentFormLabel htmlFor="pageType">Product SKU</ComponentFormLabel>
+        <ComponentFormText field="sku" id="product-sku" />
+        <ComponentFormLabel htmlFor="upc">Product UPC</ComponentFormLabel>
+        <ComponentFormText field="upc" id="product-upc" />
+        <ComponentFormLabel htmlFor="name">Product Name</ComponentFormLabel>
+        <ComponentFormText field="name" id="product-name" />
+        <ComponentFormLabel htmlFor="variant">Product Variant</ComponentFormLabel>
+        <ComponentFormText field="variant" id="product-variant" />
+      </>
+    );
+  },
+  global: true,
+};
+const asEditableGTM = flowRight(
+  ifEditable(
+    withEditButton(editButtonOptions),
+  ),
+);
+
+const withDataLayer = (defaultDataLayer : any) => (HelmetComponent: CT) => (props : any) => {
+  const { componentData } = props;
+  const {
+    pageType, sku, upc, name, variant,
+  } = componentData;
+  const { events } = defaultDataLayer;
+  events.map((event) => {
+    console.log(event)
+  });
+
+  const merged = { ...defaultDataLayer, ...componentData };
+  console.log(merged);
+  return (
+    <HelmetComponent><script /></HelmetComponent>
+  );
+};
+
+export const asBodilessGTMHelmet = (defaultDataLayer: any) => (
+  nodeKey: string,
+  defaultContent: string,
+) => flowRight(
+  withNodeKey(nodeKey),
+  withNode,
+  withNodeDataHandlers(defaultContent),
+  asEditableGTM,
+  withDataLayer(defaultDataLayer),
+)(Helmet);
 
 export default withEvent;

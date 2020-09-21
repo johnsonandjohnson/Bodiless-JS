@@ -51,8 +51,7 @@ const useMenuOptions = (props: TitleProps) => {
 };
 
 // TODO: Maybe generalize this as an "alterDesign()" method.
-const asEditableList = (List: ComponentType<FinalProps>) => (
-  ({ design, ...rest }: FinalProps) => {
+const asEditableList = (List: ComponentType<FinalProps>) => (({ design, ...rest }: FinalProps) => {
     const { Title, ItemMenuOptionsProvider } = (design || {}) as Design<ListDesignableComponents>;
     const newDesign = {
       ...(design || {}),

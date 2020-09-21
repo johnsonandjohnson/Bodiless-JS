@@ -36,4 +36,5 @@ export type EditButtonProps<D> = {
 
 export type EditButtonOptions<P, D> = Omit<TMenuOption, 'handler'> & {
   renderForm: FormBodyRenderer<P, D>,
+  peer?: boolean,
 } & EditDataHandler<D>;
