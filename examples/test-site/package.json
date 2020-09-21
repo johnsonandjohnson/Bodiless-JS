@@ -60,7 +60,7 @@
   "scripts": {
     "build": "npm-run-all build:env-vars build:lib build:scripts build:doc psh-validate",
     "build:watch": "run-p -r dev-frontend dev-backend",
-    "build:lib": "gatsby build",
+    "build:lib": "bl-clear-logs && gatsby build && bl-validate-logs",
     "build:doc": "bl-docs-build",
     "build:scripts": "tsc -p ./tsconfig.json",
     "build:env-vars": "generate-env-vars",

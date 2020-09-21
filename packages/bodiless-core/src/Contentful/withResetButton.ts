@@ -25,13 +25,13 @@ type MenuOptionWithNodeKey = Partial<TMenuOption> & {
   nodeKey?: string | string[];
 };
 
-const useGetMenuOptions = (menuOptionWithNodeKey?: MenuOptionWithNodeKey) => () => {
+const useMenuOptions = (menuOptionWithNodeKey?: MenuOptionWithNodeKey) => () => {
   const { node } = useNode();
   const { nodeKey, ...menuOption } = menuOptionWithNodeKey || { nodeKey: undefined };
   const nodeKeys = Array.isArray(nodeKey) ? nodeKey : [nodeKey];
   const nodeKeysToDelete = nodeKeys.map(key => (key ? node.path.concat(key) : undefined));
   // TODO: we should disable or remove the button when the node is already reverted
-  return () => ([
+  const menuOptions = [
     {
       icon: 'undo',
       name: 'Reset',
@@ -41,11 +41,12 @@ const useGetMenuOptions = (menuOptionWithNodeKey?: MenuOptionWithNodeKey) => () 
       global: false,
       ...menuOption,
     },
-  ]);
+  ];
+  return menuOptions;
 };
 
 const withResetButton = (menuOptionWithNodeKey?: MenuOptionWithNodeKey) => flowRight(
-  withMenuOptions({ useGetMenuOptions: useGetMenuOptions(menuOptionWithNodeKey) }),
+  withMenuOptions({ useMenuOptions: useMenuOptions(menuOptionWithNodeKey) }),
   withContextActivator('onClick'),
   withLocalContextMenu,
 );

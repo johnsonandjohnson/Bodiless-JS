@@ -55,7 +55,8 @@ export const useActivateOnEffect = () => React.useContext(activateOnEffect);
  * @param uuid id of the component to check
  */
 export const useActivateOnEffectActivator = (uuid: string) => {
-  const { onClick } = useContextActivator();
+  // Cast is necessary bc useContextActivator returns a boolean for 'data-bl-activator'
+  const { onClick } = useContextActivator() as any as { onClick: Function };
   const { id, setId } = useActivateOnEffect();
   // useEffect has to be at the top level so we have to put the conditional inside the hook
   React.useEffect(() => {

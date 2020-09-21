@@ -52,11 +52,14 @@ const AccordionTitleClean = flow(
 
 const asAccodionTitle = <P extends DesignableProps<AccordionTitleComponents>>(
   Component: ComponentType<P> | string,
-) => (props: P) => (
-  <AccordionTitleClean design={props.design}>
-    <Component {...props} />
-  </AccordionTitleClean>
-  );
+) => (props: P) => {
+    const { design } = props;
+    return (
+      <AccordionTitleClean design={design}>
+        <Component {...props} />
+      </AccordionTitleClean>
+    );
+  };
 
 export default AccordionTitleClean;
 export {

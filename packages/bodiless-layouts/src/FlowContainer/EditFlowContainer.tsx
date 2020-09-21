@@ -15,7 +15,7 @@
 import React, { FC, PropsWithChildren } from 'react';
 import { arrayMove, SortEnd } from 'react-sortable-hoc';
 import { observer } from 'mobx-react-lite';
-import { flowRight, omit } from 'lodash';
+import { flowRight } from 'lodash';
 import {
   withActivateOnEffect, withNode, withMenuOptions,
 } from '@bodiless/core';
@@ -23,7 +23,7 @@ import { designable, stylable } from '@bodiless/fclasses';
 import SortableChild from './SortableChild';
 import SortableContainer, { SortableListProps } from './SortableContainer';
 import { useItemHandlers, useFlowContainerDataHandlers } from './model';
-import useGetMenuOptions from './useGetMenuOptions';
+import { useMenuOptions, useGetItemUseGetMenuOptions } from './useGetMenuOptions';
 import {
   EditFlowContainerProps,
   FlowContainerItem,
@@ -40,11 +40,6 @@ const EditFlowContainerComponents: FlowContainerComponents = {
   ComponentWrapper: stylable<SortableChildProps>(SortableChild),
 };
 
-const witNoDesign = (props:EditFlowContainerProps):EditFlowContainerProps => ({
-  ...props,
-  components: omit(props.components, ['Wrapper', 'ComponentWrapper']),
-});
-
 /**
  * An editable version of the FlowContainer container.
  */
@@ -58,6 +53,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerPr
     setFlowContainerItems,
   } = useFlowContainerDataHandlers();
   const { Wrapper, ComponentWrapper } = components;
+  const getItemUseGetMenuOptions = useGetItemUseGetMenuOptions(props);
 
   return (
     <ComponentDisplayModeProvider mode={ComponentDisplayMode.EditFlowContainer}>
@@ -80,7 +76,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerPr
                   flowContainerItem={flowContainerItem}
                   snapData={snapData}
                   defaultWidth={defaultWidth}
-                  getMenuOptions={useGetMenuOptions(witNoDesign(props), flowContainerItem)}
+                  useGetMenuOptions={getItemUseGetMenuOptions(flowContainerItem)}
                   onResizeStop={
                     // eslint-disable-next-line max-len
                     (flowContainerItemProps: FlowContainerItemProps) => onFlowContainerItemResize(flowContainerItem.uuid, flowContainerItemProps)
@@ -108,7 +104,7 @@ const asEditFlowContainer = flowRight(
   observer,
   designable(EditFlowContainerComponents),
   withMenuOptions({
-    useGetMenuOptions: (props: EditFlowContainerProps) => useGetMenuOptions(witNoDesign(props)),
+    useMenuOptions,
     name: 'FlowContainer',
   }),
   observer,
