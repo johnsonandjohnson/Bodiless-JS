@@ -20,7 +20,7 @@ import { DesignableComponents } from '@bodiless/fclasses';
 import { EditFlowContainerProps } from '../../src/FlowContainer/types';
 import componentSelectorForm from '../../src/ComponentSelector/componentSelectorForm';
 import { useItemHandlers, useFlowContainerDataHandlers } from '../../src/FlowContainer/model';
-import { useMenuOptions, useItemUseGetMenuOptions } from '../../src/FlowContainer/useGetMenuOptions';
+import { useMenuOptions, useGetItemUseGetMenuOptions } from '../../src/FlowContainer/useGetMenuOptions';
 
 jest.mock('../../src/ComponentSelector/componentSelectorForm');
 jest.mock('../../src/FlowContainer/model');
@@ -99,7 +99,7 @@ describe('useGetMenuOptions', () => {
       if (maxComponents) {
         props.maxComponents = maxComponents;
       }
-      const hook = useItemUseGetMenuOptions(props, item);
+      const hook = useGetItemUseGetMenuOptions(props)(item);
       logMenuOptions(hook()());
       return null;
     }
@@ -133,7 +133,7 @@ describe('useGetMenuOptions', () => {
     it('Returns an add button', () => {
       const { insertFlowContainerItem } = useFlowContainerDataHandlers();
       const options = getMenuOptions(3);
-      const addButton = options.find(option => option.name === 'add');
+      const addButton = options.find(option => option.name === 'add-item');
       expect(addButton).not.toBeUndefined();
       invokeAction(addButton!, 'Baz');
       expectDataHandlerCall(insertFlowContainerItem, ['Baz', item]);

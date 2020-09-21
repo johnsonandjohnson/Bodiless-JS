@@ -19,11 +19,11 @@ import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
   Editable, List, asEditableList,
 } from '@bodiless/components';
-import { Image } from '@bodiless/components-ui';
 import {
   withDesign, replaceWith, addClasses, stylable,
 } from '@bodiless/fclasses';
 import Layout from '../../components/Layout';
+import { FluidGatsbyImage } from '../../components/Image';
 import { FlowContainerDefault } from '../../components/FlowContainer';
 
 const HOME_PAGE_PATH = 'homepage';
@@ -45,7 +45,7 @@ const HomePage = (props: any) => (
   <Page {...props}>
     <Layout>
       <div className="flex my-3">
-        <Image className="w-full" nodeKey="header_image" />
+        <FluidGatsbyImage className="w-full" nodeKey="header_image" />
       </div>
       <h1 className="text-3xl font-bold">
         <Editable nodeKey="title" placeholder="Page Title" />

@@ -18,9 +18,12 @@ import {
   useEditContext, useActivateOnEffect, useGetter,
 } from '@bodiless/core';
 import { EditFlowContainerProps, FlowContainerItem } from './types';
+import type { FlowContainerDataHandlers, FlowContainerItemHandlers } from './model';
 import { useFlowContainerDataHandlers, useItemHandlers } from './model';
 import { ComponentSelectorProps } from '../ComponentSelector/types';
 import componentSelectorForm from '../ComponentSelector/componentSelectorForm';
+
+type Handlers = FlowContainerDataHandlers & FlowContainerItemHandlers;
 
 /**
  * @private
@@ -47,9 +50,10 @@ const withNoDesign = (props:EditFlowContainerProps):EditFlowContainerProps => ({
  * @param currentItem The currently selected item in the grid (optional);
  */
 const useComponentSelectorActions = (
+  handlers: Handlers,
   currentItem?: FlowContainerItem,
 ) => {
-  const { insertFlowContainerItem, updateFlowContainerItem } = useFlowContainerDataHandlers();
+  const { insertFlowContainerItem, updateFlowContainerItem } = handlers;
   const { setId } = useActivateOnEffect();
 
   const insertItem: ComponentSelectorProps['onSelect'] = (event, componentName) => {
@@ -68,9 +72,12 @@ const useComponentSelectorActions = (
   return { insertItem, replaceItem };
 };
 
-function useDeleteButton(props: EditFlowContainerProps, item: FlowContainerItem) {
+const useDeleteButton = (
+  handlers: Handlers,
+  item: FlowContainerItem,
+) => {
   const context = useEditContext();
-  const { deleteFlowContainerItem } = useFlowContainerDataHandlers();
+  const { deleteFlowContainerItem } = handlers;
   const { setId } = useActivateOnEffect();
 
   const handler = () => {
@@ -88,28 +95,37 @@ function useDeleteButton(props: EditFlowContainerProps, item: FlowContainerItem)
     handler,
     isHidden: useCallback(() => !context.isEdit, []),
   };
-}
+};
 
-function useAddButton(props: EditFlowContainerProps, item?: FlowContainerItem) {
+const useAddButton = (
+  handlers: Handlers,
+  props: EditFlowContainerProps,
+  item?: FlowContainerItem,
+) => {
   const { maxComponents = Infinity } = props;
   const context = useEditContext();
-  const { insertItem } = useComponentSelectorActions(item);
-  const { getItems } = useItemHandlers();
+  const { insertItem } = useComponentSelectorActions(handlers, item);
+  const { getItems } = handlers;
   const isHidden = item
     ? useCallback(() => !context.isEdit || getItems().length >= maxComponents, [maxComponents])
     : useCallback(() => !context.isEdit || getItems().length > 0, []);
+  const name = item ? 'add-item' : 'add';
   return {
     icon: 'add',
     label: 'Add',
-    name: 'add',
+    name,
     handler: () => componentSelectorForm(props, insertItem),
     isHidden,
   };
-}
+};
 
-function useSwapButton(props: EditFlowContainerProps, item: FlowContainerItem) {
+const useSwapButton = (
+  handlers: Handlers,
+  props: EditFlowContainerProps,
+  item: FlowContainerItem,
+) => {
   const context = useEditContext();
-  const { replaceItem } = useComponentSelectorActions(item);
+  const { replaceItem } = useComponentSelectorActions(handlers, item);
   return {
     name: 'swap',
     label: 'Swap',
@@ -117,19 +133,28 @@ function useSwapButton(props: EditFlowContainerProps, item: FlowContainerItem) {
     handler: () => componentSelectorForm(props, replaceItem),
     isHidden: useCallback(() => !context.isEdit, []),
   };
-}
+};
 
+/**
+ * @private
+ * Gets the context menu options for the flow container itself (an add button when the
+ * flow container is empty).
+ *
+ * @param props The props passed to the flow container
+ */
 function useMenuOptions(props: EditFlowContainerProps) {
-  const addButton = useAddButton(withNoDesign(props));
+  const handlers = { ...useFlowContainerDataHandlers(), ...useItemHandlers() };
+  const addButton = useAddButton(handlers, withNoDesign(props));
   return [addButton];
 }
 
 /**
  * @private
  *
- * Returns a 'useGetMenuOptions' hook which is passed to each flow container item. When invoked,
- * this hook returns a memoized 'getMenuOptions' callback, suitable for passing to
- * PageContextProvider.
+ * Returns a function which takes a flow container item and returns a 'useGetMenuOptions' hook
+ * which is passed as a prop to that item. This hook is invoked in by the item to obtain a
+ * memoized 'getMenuOptions' callback, which is in turn passed to PageContextProvider to define
+ * the menu options for that item.
  *
  * The reasons for this extra indirection (a hook returning a hook) are:
  * - we want to build the menu options using the node of the flow container
@@ -140,20 +165,24 @@ function useMenuOptions(props: EditFlowContainerProps) {
  *   rather than relying on `withMenuOptions`. This is because we don't want to call
  *   the `withMenuOptions` HOC in the context of a render.
  *
- * @param props Props passed to this component
- * @param item The flow container item for which to create the hook.
+ * @param props Props passed to the flow container
  *
- * @return A `useGetMenuOptinos` hook which will be passed to the item.
+ * @return A function which generates a 'useGetMenuOptions' prop for an item.
  */
-function useItemUseGetMenuOptions(props: EditFlowContainerProps, item: FlowContainerItem) {
+const useGetItemUseGetMenuOptions = (props: EditFlowContainerProps) => {
+  // We have to obtain the handlers in the flow container context, and we have
+  // to do it only once to avoid hook sequencing errors.
+  const handlers = { ...useFlowContainerDataHandlers(), ...useItemHandlers() };
   const props$ = withNoDesign(props);
-  const buttons = [
-    useAddButton(props$, item),
-    useSwapButton(props$, item),
-    useDeleteButton(props$, item),
-  ];
+  return (item: FlowContainerItem) => () => {
+    const buttons = [
+      // These hooks are all invoked by the flow container item (not the flow container itself).
+      useAddButton(handlers, props$, item),
+      useSwapButton(handlers, props$, item),
+      useDeleteButton(handlers, item),
+    ];
+    return useGetter(buttons);
+  };
+};
 
-  return () => useGetter(buttons);
-}
-
-export { useMenuOptions, useItemUseGetMenuOptions };
+export { useMenuOptions, useGetItemUseGetMenuOptions };

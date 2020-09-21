@@ -17,6 +17,8 @@ import {
   useMenuOptionUI,
   asBodilessComponent,
   withoutProps,
+  ifEditable,
+  withExtendHandler,
 } from '@bodiless/core';
 import type { AsBodiless, BodilessOptions } from '@bodiless/core';
 import { flowRight } from 'lodash';
@@ -80,6 +82,10 @@ const withHrefTransformer = (Component : ComponentType<Props>) => {
 };
 
 export const asBodilessLink: AsBodiless<Props, Data> = (nodeKeys?) => flowRight(
+  // Prevent following the link in edit mode
+  ifEditable(
+    withExtendHandler('onClick', () => (e: MouseEvent) => e.preventDefault()),
+  ),
   asBodilessComponent<Props, Data>(options)(nodeKeys),
   withoutProps(['unwrap']),
   withHrefTransformer,

@@ -75,6 +75,10 @@ const percentGrid = {
   'full': '100%',
 };
 
+const remGrid = {
+  'rem-1': '1rem',
+};
+
 module.exports = {
   prefix: 'bl-',
   theme: {
@@ -100,6 +104,7 @@ module.exports = {
         ...defaultGrid,
         ...negativeGrid,
         ...percentGrid,
+        ...remGrid,
       },
 
       /*

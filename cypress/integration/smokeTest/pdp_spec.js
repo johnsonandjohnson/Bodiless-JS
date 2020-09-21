@@ -1,3 +1,17 @@
+/**
+ * Copyright © 2020 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 describe('PDP (Product Details Page) smoke tests', function () {
 
   before(function () {
@@ -9,11 +23,12 @@ describe('PDP (Product Details Page) smoke tests', function () {
     cy.togglePreviewMode();
   })
 
-  const random = Math.floor(Math.random() * 10000)
-  const pdpURL = 'pdp-autotest' + random.toString()
+  const pdpURL = 'pdp-autotest' + Math.floor(Math.random() * 10000).toString()
+  const pdpPagePath = '/products/' + pdpURL
   const title = 'AT - PDD title'
   const accordionBody = 'AT - Overview'
-  const imageName = 'images/img_615x500.jpg'
+  const imagesFolderPath = "images"
+  const imageName = 'img_615x500.jpg'
   const addPageIconXpath = '//*[@aria-label="Page"]'
   const fieldAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//input[@id="new-page-path"]'
   const newPageLinkXpath = '//*[@id="new-page-link"]'
@@ -32,7 +47,6 @@ describe('PDP (Product Details Page) smoke tests', function () {
   const flexboxXpath = '//*[@data-product-element="flow-container"]'
   const addComponentIconXpath = '//button[@aria-label="Add"]'
 
-
   it('PDP: 1 - creating a page from /products/', () => {
     cy.xpath(addPageIconXpath)
       .click();
@@ -41,7 +55,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
     cy.xpath(checkmarkIconAddPageFormXpath)
       .click();
     cy.xpath(newPageLinkXpath,{ timeout: 10000 } ).click();
-    cy.url().should('eq', Cypress.config().baseUrl + '/products/' + pdpURL);
+    cy.url().should('eq', Cypress.config().baseUrl + pdpPagePath);
   })
 
 
@@ -81,15 +95,14 @@ describe('PDP (Product Details Page) smoke tests', function () {
       .click();
     cy.xpath(imageIconXpath)
       .click();
-    const fileName = imageName
-    cy.fixture(fileName).then(fileContent => {
-      cy.get('input[type=file]').upload({ fileContent, fileName, mimeType: "image/jpeg" });
+    const imagePath = `${imagesFolderPath}/${imageName}`;
+    cy.fixture(imagePath).then(fileContent => {
+      cy.get('input[type=file]').upload({ fileContent, fileName: imageName, mimeType: "image/jpeg" });
     })
     cy.wait(3000);
     cy.xpath(checkmarkIconImageFormXpath)
       .click();
-    cy.xpath(imagePlaceholderXpath)
-      .should('have.attr', 'src', '/' + imageName);
+    cy.isImageVisible(imagePlaceholderXpath)
   })
 
 
@@ -108,8 +121,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
       .should('have.text', title);
     cy.xpath(accordionOverviewBodyXpath)
       .should('have.text', accordionBody);
-    cy.xpath(imagePlaceholderXpath)
-      .should('have.attr', 'src', '/' + imageName);
+    cy.isImageVisible(imagePlaceholderXpath)
   })
 
 
@@ -119,8 +131,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
       .should('have.text', title);
     cy.xpath(accordionOverviewBodyXpath)
       .should('have.text', accordionBody);
-    cy.xpath(imagePlaceholderXpath)
-      .should('have.attr', 'src', '/' + imageName);
+    cy.isImageVisible(imagePlaceholderXpath)
     cy.xpath(flexboxXpath)
       .should('be.visible');
   })

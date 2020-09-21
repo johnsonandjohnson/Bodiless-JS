@@ -23,7 +23,7 @@ import { designable, stylable } from '@bodiless/fclasses';
 import SortableChild from './SortableChild';
 import SortableContainer, { SortableListProps } from './SortableContainer';
 import { useItemHandlers, useFlowContainerDataHandlers } from './model';
-import { useMenuOptions, useItemUseGetMenuOptions } from './useGetMenuOptions';
+import { useMenuOptions, useGetItemUseGetMenuOptions } from './useGetMenuOptions';
 import {
   EditFlowContainerProps,
   FlowContainerItem,
@@ -53,6 +53,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerPr
     setFlowContainerItems,
   } = useFlowContainerDataHandlers();
   const { Wrapper, ComponentWrapper } = components;
+  const getItemUseGetMenuOptions = useGetItemUseGetMenuOptions(props);
 
   return (
     <ComponentDisplayModeProvider mode={ComponentDisplayMode.EditFlowContainer}>
@@ -75,7 +76,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerPr
                   flowContainerItem={flowContainerItem}
                   snapData={snapData}
                   defaultWidth={defaultWidth}
-                  useGetMenuOptions={useItemUseGetMenuOptions(props, flowContainerItem)}
+                  useGetMenuOptions={getItemUseGetMenuOptions(flowContainerItem)}
                   onResizeStop={
                     // eslint-disable-next-line max-len
                     (flowContainerItemProps: FlowContainerItemProps) => onFlowContainerItemResize(flowContainerItem.uuid, flowContainerItemProps)

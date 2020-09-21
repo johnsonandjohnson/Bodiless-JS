@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,28 +12,9 @@
  * limitations under the License.
  */
 
-import * as React from 'react';
-import { ResizeHandle as ResizeHandleBase } from '@bodiless/ui';
+import Image from './contentful1.png';
 
-type TProps = {
-  className?: string;
+export default {
+  src: Image,
+  alt: 'contentful 1',
 };
-
-const ResizeHandle = (hocProps: TProps): React.ReactElement<TProps> => {
-  const { className, ...props } = hocProps;
-
-  return (
-    <ResizeHandleBase
-      {...props}
-      className={`${className}`}
-    >
-      chevron_right
-    </ResizeHandleBase>
-  );
-};
-
-ResizeHandle.defaultProps = {
-  className: '',
-};
-
-export default ResizeHandle;

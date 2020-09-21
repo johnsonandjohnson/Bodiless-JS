@@ -59,10 +59,6 @@ export const useContextActivator = (
   const context = useEditContext();
 
   const extender = useCallback((e: React.SyntheticEvent<any>) => {
-    // Prevent default behavior (maybe move this to asBodilessLink)
-    const preventDefault = e && e.preventDefault
-      && e.currentTarget && e.currentTarget.getAttribute('bl-prevent') !== 'false';
-    if (preventDefault) e.preventDefault();
     // Do not activate the context if it is already innermost.
     if (context.isInnermost) return;
     // Do not activate if this event already activated an inner context.
