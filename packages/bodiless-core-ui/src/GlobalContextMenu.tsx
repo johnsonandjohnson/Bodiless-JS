@@ -51,10 +51,15 @@ export const ToolbarDivider = addClasses(
 
 export const GlobalTooltip: FC<ReactTooltip['props']> = props => {
   const context = useEditContext();
+  const { isPositionToggled } = context;
   return (
     <ReactTooltip
       {...props}
       placement="rightTop"
+      align={{
+        offset: [5, 0],
+        useCssRight: isPositionToggled,
+      }}
       overlayStyle={{ position: 'fixed', opacity: 1 }}
       // Hide all local tooltips outside the main toolbar.
       onPopupAlign={() => { context.toggleLocalTooltipsDisabled(true); }}
