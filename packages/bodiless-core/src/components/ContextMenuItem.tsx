@@ -15,7 +15,6 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { useEditContext } from '../hooks';
 import { useContextMenuContext, useMenuOptionUI } from './ContextMenuContext';
 import type { IContextMenuItemProps as IProps, ContextMenuFormProps } from '../Types/ContextMenuTypes';
 
@@ -23,7 +22,6 @@ const ContextMenuItem = observer((props: IProps) => {
   const { option, index } = props;
   const [renderForm, setRenderForm$] = useState<(props:ContextMenuFormProps) => JSX.Element>();
   const [isToolTipShown, setIsToolTipShown] = useState(false);
-  const { isPositionToggled } = useEditContext();
   const ui = useMenuOptionUI();
   const {
     ToolbarDivider, Icon, ToolbarButton,
@@ -34,7 +32,6 @@ const ContextMenuItem = observer((props: IProps) => {
   const isHidden = option.isHidden ? (typeof option.isHidden === 'function' ? option.isHidden() : option.isHidden) : false;
   const label = option.label ? (typeof option.label === 'function' ? option.label() : option.label) : '';
   const icon = option.icon ? (typeof option.icon === 'function' ? option.icon() : option.icon) : '';
-  const useCssRight = isPositionToggled && option.Component;
 
   const isFirst = index === 0;
   const setRenderForm = useContextMenuContext().setRenderForm || setRenderForm$;
@@ -82,30 +79,29 @@ const ContextMenuItem = observer((props: IProps) => {
   }
 
   return (
-    <ToolbarButton
-      isActive={isActive}
-      isDisabled={isDisabled}
-      isFirst={isFirst}
-      onClick={onToolbarButtonClick}
-      aria-label={label || option.name}
+    <Tooltip
+      trigger={['click']}
+      overlay={getContextMenuForm()}
+      visible={isToolTipShown}
+      destroyTooltipOnHide
     >
-      <Tooltip
-        trigger={['click']}
-        overlay={getContextMenuForm()}
-        visible={isToolTipShown}
-        destroyTooltipOnHide
-        align={{ offset: [5, 0], useCssRight }}
+      <ToolbarButton
+        isActive={isActive}
+        isDisabled={isDisabled}
+        isFirst={isFirst}
+        onClick={onToolbarButtonClick}
+        aria-label={label || option.name}
       >
         <Icon isActive={isActive || isToolTipShown}>{icon}</Icon>
-      </Tooltip>
-      {
-        (label) ? (
-          <ToolbarButtonLabel>
-            {label}
-          </ToolbarButtonLabel>
-        ) : (null)
-      }
-    </ToolbarButton>
+        {
+          (label) ? (
+            <ToolbarButtonLabel>
+              {label}
+            </ToolbarButtonLabel>
+          ) : (null)
+        }
+      </ToolbarButton>
+    </Tooltip>
   );
 });
 
