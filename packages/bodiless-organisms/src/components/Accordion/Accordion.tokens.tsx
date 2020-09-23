@@ -14,11 +14,13 @@
 
 import { flow } from 'lodash';
 import { addClasses, addProps, addClassesIf } from '@bodiless/fclasses';
-import { ifEditable, withContextActivator } from '@bodiless/core';
+import { ifEditable, withExtendHandler } from '@bodiless/core';
 import { isAccordionExpanded, isAccordionContracted } from './AccordionContext';
 
 const withDisableExpandOnClick = flow(
-  ifEditable(withContextActivator('onClick')),
+  ifEditable(
+    withExtendHandler('onClick', () => (e: MouseEvent) => e.stopPropagation()),
+  ),
 );
 
 const asAccordionIcon = flow(
