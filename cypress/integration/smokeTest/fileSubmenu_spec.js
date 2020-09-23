@@ -37,12 +37,15 @@ describe('File Submenu Smoke Tests', function () {
   // History Form
   const historyFormTitle = '//*[@aria-label="Context Submenu Form"]//h3[text()="Latest Commits"]'
   const historyFormItems = '//*[@aria-label="Context Submenu Form"]//input[@type="radio"][@name="commits"]'
+  const historyFormSubmitButton = '//*[@aria-label="Context Submenu Form"]//*[@aria-label="Submit"]'
   const historyFormCloseButton = '//*[@aria-label="Context Submenu Form"]//*[@aria-label="Cancel"]'
 
   // Revert Form
   const revertFormTitle = '//*[@aria-label="Context Submenu Form"]//h3[text()="Revert to saved"]'
   const revertFormDescription = '//*[@aria-label="Context Submenu Form"]//label[text()="Discard local changes"]'
+  const revertFormSubmitButton = '//*[@aria-label="Context Submenu Form"]//*[@aria-label="Submit"]'
   const revertFormCloseButton = '//*[@aria-label="Context Submenu Form"]//*[@aria-label="Cancel"]'
+
 
   // Preview Mode
   it('File Submenu: 1 - Checking file submenu buttons in preview mode', () => {
@@ -156,6 +159,7 @@ describe('File Submenu Smoke Tests', function () {
     cy.xpath(historyFormItems)
       .its('length')
       .should('be.gt', 3)
+    cy.xpath(historyFormSubmitButton).should('not.exist')
     cy.xpath(historyFormCloseButton)
       .click()
   }
@@ -165,6 +169,7 @@ describe('File Submenu Smoke Tests', function () {
       .click()
     cy.xpath(revertFormTitle)
     cy.xpath(revertFormDescription)
+    cy.xpath(revertFormSubmitButton).should('not.exist')
     cy.xpath(revertFormCloseButton)
       .click()
   }
