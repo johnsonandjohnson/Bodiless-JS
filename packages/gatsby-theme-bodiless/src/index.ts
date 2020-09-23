@@ -16,7 +16,6 @@ import GatsbyMobxStore from './dist/GatsbyMobxStore';
 import GatsbyNodeProvider from './dist/GatsbyNodeProvider';
 import BackendClient from './dist/BackendClient';
 import useGitButtons from './dist/useGitButtons';
-import useNewPageButton from './dist/useNewPageButton';
 import GatsbyPageProvider, { useGatsbyPageContext } from './dist/GatsbyPageProvider';
 import Page from './dist/Page';
 import asGatsbyImage from './dist/GatsbyImage/asGatsbyImage';
@@ -29,7 +28,6 @@ export {
   GatsbyNodeProvider,
   BackendClient,
   useGitButtons,
-  useNewPageButton,
   GatsbyPageProvider,
   useGatsbyPageContext,
   Page,

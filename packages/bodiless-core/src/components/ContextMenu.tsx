@@ -27,7 +27,7 @@ const createChildrenFromOptions = (options: TMenuOption[]) => options.map(
     return (
       <Component
         option={option}
-        group={option.group || option.name}
+        group={option.group}
         name={option.name}
         key={option.name}
         aria-label={option.name}
@@ -76,13 +76,15 @@ const ContextMenu: FC<IContextMenuProps> = (props) => {
   const { ContextMenuGroup } = getUI(ui);
   const childProps = { ui };
   const childrenFromOptions = uniqBy(createChildrenFromOptions(options || []), 'key');
+  const finalChildren = children
+    ? [...React.Children.toArray(children).filter(React.isValidElement), ...childrenFromOptions]
+    : childrenFromOptions;
 
-  if (children || childrenFromOptions.length > 0) {
+  if (finalChildren.length > 0) {
     return (
       <ContextMenuBase {...props}>
         <StructuredChildren components={{ Group: ContextMenuGroup! }} {...childProps}>
-          {children}
-          {childrenFromOptions}
+          {finalChildren}
         </StructuredChildren>
       </ContextMenuBase>
     );

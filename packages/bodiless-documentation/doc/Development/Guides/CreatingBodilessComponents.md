@@ -77,7 +77,7 @@ type Options<P, D> = {
   global?: boolean;
   local?: boolean;
   renderForm: FormBodyRenderer<P, D>;
-  useGetMenuOptions?: UseGetMenuOptions<P>;
+  useMenuOptions?: UseMenuOptions<P>;
   activateEvent?: string,
   Wrapper?: CT<any>|string,
   defaultData?: D,
@@ -92,7 +92,7 @@ type Options<P, D> = {
 | global | If true, specifies that the button should appear on the global menu (the lefthand sidebar) |
 | local | If true, specifies that the button should appear in the local context menu |
 | renderForm | A render function which should the form fields. See below. |
-| useGetMenuOptions | A hook which will be called to provide additional menu
+| useMenuOptions | A hook which will be called to provide additional menu
 buttons. |
 | activateEvent | The event which will trigger the "activation" of the components edit button. Usually "onClick".  "Activation" is usually the result of selecting the component in some way or giving it focus.  The component's button(s) will only appear in the menu when the component is activated. |
 | Wrapper | A component which will wrap this component in edit mode. Useful if the component itself cannot generate the activateEvent |
@@ -298,13 +298,10 @@ const useCustomEditFormProps = componentProps => {
   // Get the default submit handler for an edit form.
   const { submitValues, ...rest } = useEditFormProps(props);
   // 
-  const customSubmitValues = useCallback(
-    values => {
-      const newValues = { ...values, timestamp: new Date().toString() };
-      submitValues(newValues);
-    },
-    [submitValues],
-  );
+  const customSubmitValues = values => {
+    const newValues = { ...values, timestamp: new Date().toString() };
+    submitValues(newValues);
+  };
   return {
     submitValues: customSubmitValues,
     ...rest,
@@ -316,59 +313,57 @@ handler for a component edit form, and replacing it with our own. `useEditFormPr
 takes the component's own props as a parameter and returns a default `submitValues` and
 `initialValues` props which handle loading and saving the component's data.
 
-Next, we define a function which will render our customized form:
+Next, we define a component which renders our custom form:
  ```
-const useRenderCustomEditForm = componentProps => {
-  const editFormProps = useCustomEditFormProps(props);
-  return useCallback(
-    (contextMenuFormProps) => {
-      const { ComponentFormLabel, ComponentFormTitle } = useMenuOptionUI();
-      return (
-        <ContextMenuForm {...contextMenuFormProps} {...editFormProps}>
-          <ComponentFormTitle>Markdown</ComponentFormTitle>
-          <ComponentFormLabel>Content</ComponentFormLabel>
-          <MarkdownField field="source" />
-        </ContextMenuForm>
-      );
-    },
-    [editFormProps],
+const Form = props => {
+  const { ComponentFormLabel, ComponentFormTitle } = useMenuOptionUI();
+  return (
+    <ContextMenuForm {...props}>
+      <ComponentFormTitle>Markdown</ComponentFormTitle>
+      <ComponentFormLabel>Content</ComponentFormLabel>
+      <MarkdownField field="source" />
+    </ContextMenuForm>
   );
 };
 ```
 
-Here we take our custom edit form props (including our submit handler) and pass
-them to `ContextMenuForm`. Note that in the previous example using
-`asBodilessComponent()` our render function returned only the actual form
-controls needed by our component.  Here we must render the whole form.
-Note also that this render function receives a `contextMenuFormProps`
-parameter, which must be passed through to the `ContextMenuForm` component
-along with our custom edit form props.
+Note that in the previous example using `asBodilessComponent()` our render
+function returned only the actual form controls needed by our component. Here we
+must render the whole form. 
 
 Now we are ready to wire our form to the BodilessJS menu system.  To do this,
-we create a `useGetMenuOptions` hook which will be passed as an argument
+we create a `useMenuOptions` hook which will be passed as an argument
 to the `withMenuOptions` HOC:
 ```
-const useGetMenuOptions = componentProps => {
-  const renderForm = useRenderForm(componentProps);
-  return useCallback(
-    () => [{
-      icon: 'edit',
-      name: 'edit',
-      label: 'Edit',
-      global: false,
-      local: true,
-      handler: () => renderForm,
-    }],
-    [renderForm],
+const useMenuOptions = props => {
+  const editFormProps = useMarkdownEditFormProps(props);
+  const render = formProps => (
+    <Form {...formProps} {...editFormProps} />
   );
+  return [{
+    icon: 'edit',
+    name: 'edit',
+    label: 'Edit',
+    global: false,
+    local: true,
+    handler: () => render,
+  }];
 };
 ```
-This hook will receive the component's own props as an argument, and should
-return a *menu options getter* -- a function which itself returns an array of
-*menu options*. Each menu option is an object describing a button which should
-appear on either the sidebar "global menu", or the floating "local context
-menu". Many of these properties are the same as those we used in
-`asBodilessComponent`. The main differences are:
+Here we create a render function which takes our custom edit form props
+(including our submit handler) and passes them to our Form component. Note that
+this render function receives a `formProps` parameter, which must be
+passed through to the Form component along with our custom edit
+form props.
+
+We then define a menu option which whose handler simply returns our custom
+render function.
+
+The `useMenuOptions` hook will receive the component's own props as an argument,
+and should return an array of *menu options*. Each menu option is an object
+describing a button which should appear on either the sidebar "global menu", or
+the floating "local context menu". Many of these properties are the same as
+those we used in `asBodilessComponent`. The main differences are:
 - The `Wrapper` and `defaultData` props are missing.  We'll handle these later.
 - The `renderForm` prop is missing. Instead we have a `handler` prop, which is a
   callback to execute when the button is clicked. This callback can optionally
@@ -392,7 +387,7 @@ const asCustomBodilessMarkdown> = (nodeKey, defaultData) => flowRight(
     withoutProps(['setComponentData']),
   ),
   ifEditable(
-    withMenuOptions({ useGetMenuOptions }),
+    withMenuOptions({ useMenuOptions }),
     withContextActivator('onClick'),
     withActivatorWrapper('onClick', 'div'),
     withLocalContextMenu,
@@ -427,7 +422,7 @@ on a static site never alters its content, we here strip the `setComponentData`
 prop.
 ```
   ifEditable(
-    withMenuOptions({ useGetMenuOptions }),
+    withMenuOptions({ useMenuOptions }),
     withContextActivator('onClick'),
     withActivatorWrapper('onClick', 'div'),
     withLocalContextMenu,

@@ -15,6 +15,7 @@
 /* eslint-disable no-nested-ternary */
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
+import { useEditContext } from '../hooks';
 import { useContextMenuContext, useMenuOptionUI } from './ContextMenuContext';
 import type { IContextMenuItemProps as IProps, ContextMenuFormProps } from '../Types/ContextMenuTypes';
 
@@ -35,10 +36,12 @@ const ContextMenuItem = observer((props: IProps) => {
 
   const isFirst = index === 0;
   const setRenderForm = useContextMenuContext().setRenderForm || setRenderForm$;
+  const context = useEditContext();
 
   const onToolbarButtonClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     const menuForm = option.handler ? option.handler(event) : undefined;
     if (menuForm) {
+      if (!option.local) context.toggleLocalTooltipsDisabled(true);
       setIsToolTipShown(!isToolTipShown);
       // We have to pass a function to setRenderForm b/c menuForm is itself a function
       // (a render prop) and, when a function is passed to setState, react interprets
@@ -50,6 +53,7 @@ const ContextMenuItem = observer((props: IProps) => {
 
   // Reset form and tooltip state
   const onFormClose = (): void => {
+    context.toggleLocalTooltipsDisabled(false);
     setIsToolTipShown(false);
     setRenderForm(undefined);
   };
