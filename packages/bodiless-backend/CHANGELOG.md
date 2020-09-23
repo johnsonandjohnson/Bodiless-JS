@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.56](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v0.0.55...v0.0.56) (2020-09-21)
+
+
+### Features
+
+* **backend, components:** Image files should be uploaded to path per page ([#527](https://github.com/johnsonandjohnson/Bodiless-JS/issues/527)) ([8bffeac](https://github.com/johnsonandjohnson/Bodiless-JS/commit/8bffeacfa2a1fdc4dc7ff61dea9aaff360673af8))
+* **gatsby-theme-bodiless, backend:** Better handling of merge conflicts ([#502](https://github.com/johnsonandjohnson/Bodiless-JS/issues/502)) ([8ae1edb](https://github.com/johnsonandjohnson/Bodiless-JS/commit/8ae1edb3457a91b1013125209d7dd22e2f0ea7fd))
+
+
+
+
+
 ## [0.0.55](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v0.0.54...v0.0.55) (2020-08-28)
 
 **Note:** Version bump only for package @bodiless/backend
