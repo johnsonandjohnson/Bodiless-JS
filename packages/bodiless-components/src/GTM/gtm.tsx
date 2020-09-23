@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Copyright © 2020 Johnson & Johnson
  *
@@ -18,7 +19,6 @@ import {
   EditButtonOptions,
   getUI,
   ifEditable,
-  useNode,
   withEditButton,
   withNode,
   withNodeDataHandlers,
@@ -27,19 +27,7 @@ import {
 import * as _ from 'lodash';
 import { flowRight } from 'lodash';
 import Helmet from 'react-helmet';
-
-type GTMNodeDataType = {
-  pageType: string,
-  sku: string,
-  upc: string,
-  name: string,
-  variant: string
-};
-
-type GtmDefaultPageData = {
-  event: string;
-  page: object;
-};
+import { GTMDefaultPageData, GTMNodeData, DataLayerEvent } from './types';
 
 const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
   let result = `window.${dataLayerName} = window.${dataLayerName} || [];`;
@@ -53,15 +41,11 @@ const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
 const tagManagerEnabled = (process.env.GOOGLE_TAGMANAGER_ENABLED || '1') === '1';
 const withEvent = (
   dataLayerName: string,
-  defaultPageData: GtmDefaultPageData,
+  defaultPageData: GTMDefaultPageData,
   nodeKey: string,
   nodeCollection: string,
 ) => (HelmetComponent: CT) => (props: any) => {
   if (process.env.NODE_ENV === 'production' && tagManagerEnabled || 1) {
-    const { children, ...rest } = props;
-    const { node } = useNode(nodeCollection);
-    const { data } = node.child<GtmEventData>(nodeKey);
-    const merged = _.merge({}, defaultPageData, data);
     return (
       <HelmetComponent {...rest}>
         {children}
@@ -73,14 +57,13 @@ const withEvent = (
 };
 
 // Options used to create an edit button.
-export const editButtonOptions: EditButtonOptions<any, GTMNodeDataType> = {
+export const editButtonOptions: EditButtonOptions<any, GTMNodeData> = {
   icon: 'local_offer',
   label: 'GTM',
   name: 'gtm',
   peer: true,
   isHidden: false,
   renderForm: ({ ui: formUi }) => {
-    console.log('in renderform');
     const {
       ComponentFormTitle,
       ComponentFormLabel,
@@ -95,8 +78,8 @@ export const editButtonOptions: EditButtonOptions<any, GTMNodeDataType> = {
         <ComponentFormText field="sku" id="product-sku" />
         <ComponentFormLabel htmlFor="upc">Product UPC</ComponentFormLabel>
         <ComponentFormText field="upc" id="product-upc" />
-        <ComponentFormLabel htmlFor="name">Product Name</ComponentFormLabel>
-        <ComponentFormText field="name" id="product-name" />
+        <ComponentFormLabel htmlFor="productName">Product Name</ComponentFormLabel>
+        <ComponentFormText field="productName" id="product-name" />
         <ComponentFormLabel htmlFor="variant">Product Variant</ComponentFormLabel>
         <ComponentFormText field="variant" id="product-variant" />
       </>
@@ -110,24 +93,40 @@ const asEditableGTM = flowRight(
   ),
 );
 
-const withDataLayer = (defaultDataLayer : any) => (HelmetComponent: CT) => (props : any) => {
-  const { componentData } = props;
-  const {
-    pageType, sku, upc, name, variant,
-  } = componentData;
-  const { events } = defaultDataLayer;
-  events.map((event) => {
-    console.log(event)
-  });
+const withDataLayer = (defaultDataLayer: GTMDefaultPageData) => (
+  HelmetComponent: CT,
+) => (props: any) => {
+  if (process.env.NODE_ENV === 'production' && tagManagerEnabled || 1) {
+    const { componentData, childeren, rest } = props;
+    const {
+      pageType, sku, upc, productName, variant,
+    } = componentData;
+    const { events, name } = defaultDataLayer;
+    const dataLayer = events?.map(({ event, page, product }) => {
+      if (event === 'Page Loaded') {
+        return { event, page: { ...page, pageType } };
+      }
+      if (event === 'Product Viewed') {
+        const currentProductInfo = { product };
+        const productInfo = {
+          ...currentProductInfo, sku, upc, productName, variant,
+        };
+        return { event, product: [{ productInfo }] };
+      }
+      return dataLayerEvent;
+    });
 
-  const merged = { ...defaultDataLayer, ...componentData };
-  console.log(merged);
-  return (
-    <HelmetComponent><script /></HelmetComponent>
-  );
+    return (
+      <HelmetComponent {...rest}>
+        {childeren}
+        <script>{generateDataLayer(dataLayer, name)}</script>
+      </HelmetComponent>
+    );
+  }
+  return <></>;
 };
 
-export const asBodilessGTMHelmet = (defaultDataLayer: any) => (
+export const asBodilessGTMHelmet = (defaultDataLayer: GTMDefaultPageData) => (
   nodeKey: string,
   defaultContent: string,
 ) => flowRight(

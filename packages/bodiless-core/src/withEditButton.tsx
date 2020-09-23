@@ -115,9 +115,8 @@ const withEditButton = <P extends object, D extends object>(
     withMenuOptions({
       useMenuOptions: createMenuOptionHook(options),
       name: options.name,
-      peer: options.peer,
+      peer: (options as EditButtonOptions<P, D>).peer,
     }),
     withoutProps(['setComponentData', 'isActive']),
   );
-
 export default withEditButton;

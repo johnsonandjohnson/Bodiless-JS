@@ -47,30 +47,57 @@ const defaultDataLayer = {
   events: [
     {
       event: 'Page Loaded',
+      // page: {
+      //   country: 'US',
+      //   language: 'en',
+      //   hostname: 'www.listerine.com',
+      // },
+    },
+    {
+      event: 'Product Viewed',
+      // product: [
+      //   {
+      //     productInfo: {
+      //       productID: '312547306355',
+      //       sku: '1254730635',
+      //       upc: '312547306355',
+      //       productName: 'LISTERINE',
+      //       careArea: '',
+      //       concernArea: '',
+      //     },
+      //   },
+      // ],
+    },
+  ],
+};
+
+const simpleDefault = {
+  name: 'DigitalData',
+  events: [
+    {
+      event: 'Page Loaded',
       page: {
         country: 'US',
         language: 'en',
         hostname: 'www.listerine.com',
-        pageType: 'product detail',
       },
     },
     {
       event: 'Product Viewed',
-      product: [
-        {
-          productInfo: {
-            productID: '312547306355',
-            sku: '1254730635',
-            upc: '312547306355',
-            productName: 'LISTERINE',
-            careArea: '',
-            concernArea: '',
-          },
-        },
-      ],
     },
   ],
 };
-const editableDataDefaultContent = { pageType: 'mama' };
-const SiteGTMHelmetEvent = asBodilessGTMHelmet(defaultDataLayer)('datalayer', editableDataDefaultContent);
+// This will provide the default values for the editable gtm content currently
+// limited to fields defined below:
+const editableDataDefaultContent = {
+  pageType: 'Bodiless Page',
+  sku: 'Bodiless sku',
+  productName: 'Product',
+  upc: 'UPC',
+  variant: 'Variant',
+};
+const SiteGTMHelmetEvent = asBodilessGTMHelmet(simpleDefault)(
+  'datalayer',
+  editableDataDefaultContent,
+);
 export default SiteGTMHelmetEvent;
