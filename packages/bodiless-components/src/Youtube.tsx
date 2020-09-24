@@ -12,13 +12,16 @@
  * limitations under the License.
  */
 
-import React, { useCallback, ComponentType } from 'react';
-import { getUI } from '@bodiless/core';
-import { addProps } from '@bodiless/fclasses';
-import { flowRight } from 'lodash';
+import React, { useEffect, ComponentType } from 'react';
+import type {
+  AsBodiless,
+  BodilessOptions,
+} from '@bodiless/core';
 import asBodilessIframe from './iFrame';
-
-export const asBodilessYoutube = asBodilessIframe;
+import type {
+  Props as IframeProps,
+  Data as IframeData,
+} from './iFrame';
 
 type YoutubePlayerSettings = {
   autoplay: boolean,
@@ -37,6 +40,7 @@ const extractVideoIdFromUrl = (url: string) => {
   const match = url.match(regExp);
   return match && match[2].length == 11 ? match[2] : undefined;
 }
+const isValidYoutubeUrl = extractVideoIdFromUrl;
 
 const withYoutubePlayerSettings = (settings: Partial<YoutubePlayerSettings>) =>
   (Component: ComponentType<any>) => {
@@ -53,57 +57,39 @@ const withYoutubePlayerSettings = (settings: Partial<YoutubePlayerSettings>) =>
     return WithYoutubePlayerSettings;
   }
 
-const withYoutubeVideoTransformer = (Component : ComponentType<any>) => {
-  const WithYoutubeVideoTransformer = ({ videoId, ...rest } : any) => 
-    <Component
-      src={`https://www.youtube.com/embed/${videoId}`} {...rest}
-    />;
-  return WithYoutubeVideoTransformer;
-};
+const URL_FIELD = 'src';
+const YOUTUBE_ERROR = 'Invalid video url specified';
 
-const Youtube = flowRight(
-  /*addProps({
-    height: "500px",
-    width: "900px"
-  }),*/
-  asBodilessIframe(undefined, undefined, props => ({
-    renderForm: ({ ui: formUi, formState }) => {
-      const { errors } = formState;
-      const {
-        ComponentFormTitle,
-        ComponentFormLabel,
-        ComponentFormText,
-        ComponentFormWarning
-      } = getUI(formUi);
-      return (
-        <>
-          <ComponentFormTitle>Youtube video</ComponentFormTitle>
-          <ComponentFormLabel htmlFor="video-url">Video URL</ComponentFormLabel>
-          <ComponentFormText
-            field="videoId"
-            id="video-url"
-            validate={
-              useCallback(
-                (value: string) =>
-                  !value || !extractVideoIdFromUrl(value)
-                  ? `Enter No special characters or spaces allowed`
-                  : undefined,
-              [])
-            }
-            validateOnChange
-            validateOnBlur
-          />
-          {errors && errors.videoId && (
-            <ComponentFormWarning>{errors.videoId}</ComponentFormWarning>
-          )}
-        </>
-      );
-    },
-  })),
-  withYoutubeVideoTransformer,
-)('iframe');
+const useFormOverrides = (props: IframeProps, options: BodilessOptions<IframeProps, IframeData>) => ({
+  renderForm: (formProps: any) => {
+    const { formState, formApi } = formProps;
+    const { values, errors } = formState;
+    const { [URL_FIELD]: urlValue } = values;
+    useEffect(() => {
+      if (urlValue !== undefined) {
+        const isValid = isValidYoutubeUrl(urlValue);
+        if (errors.src === undefined && !isValid) {
+          formApi.setError(URL_FIELD, YOUTUBE_ERROR);
+        }
+        if (errors.src === YOUTUBE_ERROR && isValid) {
+          formApi.setError(URL_FIELD, undefined);
+        }
+      }
+    });
+    return options.renderForm(formProps);
+  }
+});
+
+const asBodilessYoutube: AsBodiless<IframeProps, IframeData> = (
+  nodeKeys?,
+  defaultData?,
+  //useOverrides?,
+) => asBodilessIframe(nodeKeys, defaultData, useFormOverrides);
+
+const Youtube = asBodilessYoutube()('iframe');
 
 export default Youtube;
 export {
+  asBodilessYoutube,
   withYoutubePlayerSettings,
 };

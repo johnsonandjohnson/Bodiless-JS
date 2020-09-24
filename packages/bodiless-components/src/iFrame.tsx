@@ -12,49 +12,55 @@
  * limitations under the License.
  */
 
-import React, {
-  HTMLProps,
-} from 'react';
+import React, { HTMLProps } from 'react';
 
 import {
   asBodilessComponent,
   getUI,
+  ifEditable,
 } from '@bodiless/core';
 import type {
-  WithNodeKeyProps,
+  AsBodiless,
   BodilessOptions,
-  EditButtonOptions,
 } from '@bodiless/core';
-import {
-  asComponent,
-  DesignableComponentsProps
-} from '@bodiless/fclasses';
+import { addProps } from '@bodiless/fclasses';
 
 import { flowRight } from 'lodash';
-import withEditPlaceholder from './Placeholder';
 
 // Type of the data used by this component.
 export type Data = {
   src: string;
+  height: string;
 };
 
-// Type of the props accepted by this component.
-type IframeProps = HTMLProps<HTMLIFrameElement>;
-
-export type Props = Pick<IframeProps, Exclude<keyof IframeProps, 'src'>>;
+export type Props = HTMLProps<HTMLIFrameElement>;
 
 // Options used to create an edit button.
 const options: BodilessOptions<Props, Data> = {
   icon: 'settings',
   label: 'Settings',
   name: 'Edit',
-  renderForm: ({ ui: formUi }) => {
-    const { ComponentFormTitle, ComponentFormLabel, ComponentFormText } = getUI(formUi);
+  renderForm: ({ ui: formUi, formState }) => {
+    const {
+      ComponentFormTitle,
+      ComponentFormLabel,
+      ComponentFormText,
+      ComponentFormWarning
+    } = getUI(formUi);
+    const { errors } = formState;
     return (
       <>
         <ComponentFormTitle>iFrame</ComponentFormTitle>
         <ComponentFormLabel htmlFor="iframe-src">Src</ComponentFormLabel>
-        <ComponentFormText field="src" id="iframe-src" />
+        <ComponentFormText
+          field="src"
+          id="iframe-src"
+          validateOnChange
+          validateOnBlur
+        />
+        {errors && errors.src && (
+          <ComponentFormWarning>{errors.src}</ComponentFormWarning>
+        )}
         <ComponentFormLabel htmlFor="iframe-height">Height</ComponentFormLabel>
         <ComponentFormText field="height" id="iframe-height" />
       </>
@@ -62,27 +68,27 @@ const options: BodilessOptions<Props, Data> = {
   },
   global: false,
   local: true,
+  Wrapper: 'div',
 };
 
-const EditPlaceholder = (props: IframeProps) => {
-  const { src, ...rest } = props;
-  return src
-    ? <div {...rest}>{`Iframe with ${src} configured.`}</div>
-    : <div {...rest}>Click to enter iframe url.</div>;
-};
+const withoutPointerEvenets = addProps({
+  style: {
+    pointerEvents: 'none',
+  },
+});
 
-const asBodilessIframe = (
-  nodeKeys?: WithNodeKeyProps,
-  defaultData?: Data,
-  useOverrides?: (props: Props) => Partial<EditButtonOptions<Props, Data>>,
+const asBodilessIframe: AsBodiless<Props, Data> = (
+  nodeKeys?,
+  defaultData?,
+  useOverrides?,
 ) =>
   flowRight(
+    ifEditable(withoutPointerEvenets),
     asBodilessComponent(options)(
       nodeKeys,
       defaultData,
       useOverrides
     ),
-    withEditPlaceholder(EditPlaceholder),
   );
 
 export default asBodilessIframe;
