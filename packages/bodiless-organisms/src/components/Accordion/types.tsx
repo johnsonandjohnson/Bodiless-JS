@@ -15,14 +15,33 @@
 import { ComponentType, HTMLProps } from 'react';
 import { StylableProps, DesignableComponentsProps } from '@bodiless/fclasses';
 
+export type AccordionProviderProps = {
+  expanded?: boolean,
+};
+
+export type AccordionContextType = {
+  isExpanded: boolean,
+  setExpanded: React.Dispatch<React.SetStateAction<boolean>>,
+};
+
 export type AccordionTitleComponents = {
   Wrapper: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
+  Label: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
   Icon: ComponentType<StylableProps & HTMLProps<HTMLSpanElement>>,
 };
 
 export type AccordionBodyComponents = {
   Wrapper: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
+  Content: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
 };
 
 export type AccordionTitleProps = DesignableComponentsProps<AccordionTitleComponents>;
 export type AccordionBodyProps = DesignableComponentsProps<AccordionBodyComponents>;
+
+export type AccordionComponents = {
+  Wrapper: ComponentType<HTMLProps<any> & AccordionProviderProps>,
+  Title: ComponentType<AccordionTitleProps>,
+  Body: ComponentType<AccordionBodyProps>,
+};
+
+export type AccordionProps = DesignableComponentsProps<AccordionComponents>;
