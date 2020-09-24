@@ -47,31 +47,31 @@ const defaultDataLayer = {
   events: [
     {
       event: 'Page Loaded',
-      // page: {
-      //   country: 'US',
-      //   language: 'en',
-      //   hostname: 'www.listerine.com',
-      // },
+      page: {
+        country: 'US',
+        language: 'en',
+        hostname: 'www.listerine.com',
+      },
     },
     {
       event: 'Product Viewed',
-      // product: [
-      //   {
-      //     productInfo: {
-      //       productID: '312547306355',
-      //       sku: '1254730635',
-      //       upc: '312547306355',
-      //       productName: 'LISTERINE',
-      //       careArea: '',
-      //       concernArea: '',
-      //     },
-      //   },
-      // ],
+      product: [
+        {
+          productInfo: {
+            productID: '312547306355',
+            sku: '1254730635',
+            upc: '312547306355',
+            productName: 'LISTERINE',
+            careArea: '',
+            concernArea: '',
+          },
+        },
+      ],
     },
   ],
 };
 
-const simpleDefault = {
+const dataLayer = {
   name: 'DigitalData',
   events: [
     {
@@ -86,6 +86,22 @@ const simpleDefault = {
       event: 'Product Viewed',
     },
   ],
+  editableFields: [
+    {
+      id: 'page-type',
+      fieldTitle: 'Page Type',
+      fieldName: 'pageType',
+      defaultValue: 'Page Type',
+      path: '0.page.pageType',
+    },
+    {
+      id: 'product-sku',
+      fieldTitle: 'Product SKU',
+      fieldName: 'sku',
+      defaultValue: 'Page Type',
+      path: '1.product.0.productInfo.sku',
+    },
+  ],
 };
 // This will provide the default values for the editable gtm content currently
 // limited to fields defined below:
@@ -96,6 +112,7 @@ const editableDataDefaultContent = {
   upc: 'UPC',
   variant: 'Variant',
 };
+
 const SiteGTMHelmetEvent = asBodilessGTMHelmet(simpleDefault)(
   'datalayer',
   editableDataDefaultContent,

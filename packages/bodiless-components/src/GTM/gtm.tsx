@@ -56,6 +56,32 @@ const withEvent = (
   return <></>;
 };
 
+const createEditButtonOptions = (fields: FieldType) => ({
+  icon: 'local_offer',
+  label: 'GTM',
+  name: 'gtm',
+  peer: true,
+  isHidden: false,
+  renderForm: ({ ui: formUi }) => {
+    const {
+      ComponentFormTitle,
+      ComponentFormLabel,
+      ComponentFormText,
+    } = getUI(formUi);
+    return (
+      <>
+        <ComponentFormTitle>GTM</ComponentFormTitle>
+        {fields.map((field: any) => (
+          <>
+            <ComponentFormLabel htmlFor={field.fieldName}>{field.fieldTitle}</ComponentFormLabel>
+            <ComponentFormText field={field.fieldName} id={field.id} />
+          </>
+        ))}
+      </>
+    );
+  },
+  global: true,
+});
 // Options used to create an edit button.
 export const editButtonOptions: EditButtonOptions<any, GTMNodeData> = {
   icon: 'local_offer',
@@ -87,9 +113,10 @@ export const editButtonOptions: EditButtonOptions<any, GTMNodeData> = {
   },
   global: true,
 };
-const asEditableGTM = flowRight(
+
+const asEditableGTM = (fields: any) => flowRight(
   ifEditable(
-    withEditButton(editButtonOptions),
+    withEditButton(createEditButtonOptions(fields)),
   ),
 );
 
@@ -129,12 +156,15 @@ const withDataLayer = (defaultDataLayer: GTMDefaultPageData) => (
 export const asBodilessGTMHelmet = (defaultDataLayer: GTMDefaultPageData) => (
   nodeKey: string,
   defaultContent: string,
-) => flowRight(
-  withNodeKey(nodeKey),
-  withNode,
-  withNodeDataHandlers(defaultContent),
-  asEditableGTM,
-  withDataLayer(defaultDataLayer),
-)(Helmet);
+) => {
+  const { editableFields } = defaultDataLayer;
+  return flowRight(
+    withNodeKey(nodeKey),
+    withNode,
+    withNodeDataHandlers(defaultContent),
+    asEditableGTM(editableFields),
+    withDataLayer(defaultDataLayer),
+  )(Helmet);
+};
 
 export default withEvent;
