@@ -169,7 +169,7 @@ describe('File Submenu Smoke Tests', function () {
       .click()
     cy.xpath(revertFormTitle)
     cy.xpath(revertFormDescription)
-    cy.xpath(revertFormSubmitButton).should('not.exist')
+    cy.xpath(revertFormSubmitButton)
     cy.xpath(revertFormCloseButton)
       .click()
   }
