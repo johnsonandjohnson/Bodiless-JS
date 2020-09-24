@@ -12,18 +12,26 @@
  * limitations under the License.
  */
 
-import { useAccordionContext } from './AccordionContext';
+import AccordionClean from './Accordion';
+import { useAccordionContext, isAccordionExpanded, isAccordionContracted } from './AccordionContext';
 import { asAccodionTitle } from './AccordionTitle';
 import { asAccordionBody } from './AccordionBody';
 import asAccordionWrapper from './AccordionWrapper';
+import asTestableAccordion from './asTestableAccordion';
 import { withAccordionSublist } from './asAccordionSublist';
+import { withDisableExpandOnClick } from './Accordion.tokens';
 
 export * from './types';
 
 export {
+  AccordionClean,
   withAccordionSublist,
   useAccordionContext,
   asAccordionWrapper,
   asAccodionTitle,
   asAccordionBody,
+  asTestableAccordion,
+  isAccordionExpanded,
+  isAccordionContracted,
+  withDisableExpandOnClick,
 };

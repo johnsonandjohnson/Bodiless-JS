@@ -49,6 +49,9 @@ export const ToolbarDivider = addClasses(
 
 export const GlobalTooltip: FC<ReactTooltip['props']> = props => (
   <ReactTooltip
+    align={{
+      offset: [5, 0],
+    }}
     {...props}
     placement="rightTop"
     overlayStyle={{ position: 'fixed', opacity: 1 }}
@@ -66,6 +69,15 @@ export const GlobalTooltip: FC<ReactTooltip['props']> = props => (
     }}
   />
 );
+
+const GlobalTooltipRight = flow(
+  addProps({
+    align: {
+      offset: [5, 0],
+      useCssRight: true,
+    },
+  }),
+)(GlobalTooltip);
 
 const ui: ContextMenuUI = {
   ComponentFormTitle,
@@ -107,6 +119,7 @@ const GlobalContextMenu: FC<ContextMenuProps> = props => {
     const updatedUi = {
       ...ui,
       Toolbar: ToolbarRight,
+      Tooltip: GlobalTooltipRight,
     };
     return <ContextMenu {...props} ui={updatedUi} />;
   }

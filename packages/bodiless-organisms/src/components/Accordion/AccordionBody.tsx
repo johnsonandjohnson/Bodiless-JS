@@ -19,20 +19,22 @@ import {
   Div,
   DesignableProps,
 } from '@bodiless/fclasses';
-import { useAccordionContext } from './AccordionContext';
+import { asAccordionBodyWrapper, asAccordionBodyContent } from './Accordion.tokens';
 import { AccordionBodyComponents, AccordionBodyProps } from './types';
 
 const AccordionBodyComponentsStart:AccordionBodyComponents = {
-  Wrapper: Div,
+  Wrapper: asAccordionBodyWrapper(Div),
+  Content: asAccordionBodyContent(Div),
 };
 
 const AccordionBodyBase: FC<AccordionBodyProps> = ({ components, children }) => {
-  const { Wrapper } = components;
-  const { expanded } = useAccordionContext();
+  const { Wrapper, Content } = components;
 
   return (
-    <Wrapper className={expanded ? 'block' : 'hidden'}>
-      { children }
+    <Wrapper>
+      <Content>
+        { children }
+      </Content>
     </Wrapper>
   );
 };
