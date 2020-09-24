@@ -40,6 +40,7 @@ import {
   ProductDetailAccWrapper,
 } from '../components/Product';
 import { FlowContainerDefault } from '../components/FlowContainer';
+import SocialShare from '../components/SocialShare';
 import { withEditorBasic } from '../components/Editors';
 import asAccordionDefaultStyle from '../components/SingleAccordion/token';
 
@@ -102,13 +103,15 @@ const ExampleGTMHelmetEvent = flowRight(
   withEvent('digitalData', { event: 'Product Viewed' }, 'product-viewed'),
 )(Helmet);
 
-export default (props: any) => (
+export default (props) => (
   <Page {...props}>
     <Layout>
       <ExampleGTMHelmetEvent />
       <SectionMargin>
         <div className="flex flex-wrap md:items-end md:flex-row-reverse">
-          <div className="w-full md:flex-1 md:flex-grow-0 md:flex-shrink-0 text-right"><p>Placeholder_for_Share</p></div>
+          <div className="w-full md:flex-1 md:flex-grow-0 md:flex-shrink-0 text-right">
+            <SocialShare />
+          </div>
           <div className="w-full md:flex-1">
             <ProductTitle />
           </div>
