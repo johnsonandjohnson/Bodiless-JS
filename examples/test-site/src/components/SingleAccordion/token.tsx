@@ -12,47 +12,30 @@
  * limitations under the License.
  */
 
-import React from 'react';
 import { flow } from 'lodash';
-import {
-  withDesign,
-  addClasses,
-} from '@bodiless/fclasses';
+import { withDesign, addClasses, addClassesIf } from '@bodiless/fclasses';
+import { isAccordionExpanded, isAccordionContracted } from '@bodiless/organisms';
 import {
   asHeader2,
   asBlockItem,
   asTextColorPrimary,
 } from '../Elements.token';
 
-const asSingleAccordionDefaultExpandedStyle = Component => props => (
-  <Component {...props} expandedStyle="bg-gray-400" />
-);
-
 const asSingleAccordionDefaultStyle = flow(
   withDesign({
     Wrapper: flow(asBlockItem, asTextColorPrimary),
-    TitleWrapper: addClasses([
-      'bg-gray-200',
-      'p-3',
-      'flex',
-      'justify-between',
-      'items-center',
-    ]),
-    Title: flow(
-      addClasses([
-        'w-full',
-        'expanded: bold',
-      ]),
-      asHeader2,
-    ),
-    BodyWrapper: addClasses([
-      'p-3',
-      'border',
-      'border-solid',
-      'border-gray-200',
-    ]),
+    Title: withDesign({
+      Wrapper: flow(
+        addClassesIf(isAccordionExpanded)('bg-gray-400'),
+        addClassesIf(isAccordionContracted)('bg-gray-200'),
+        addClasses('p-3'),
+        asHeader2,
+      ),
+    }),
+    Body: withDesign({
+      Wrapper: addClasses('p-3 border border-solid border-gray-200'),
+    }),
   }),
-  asSingleAccordionDefaultExpandedStyle,
 );
 
 export default asSingleAccordionDefaultStyle;
