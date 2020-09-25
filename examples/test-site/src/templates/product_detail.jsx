@@ -28,7 +28,6 @@ import {
   SingleAccordionClean,
   asTestableAccordion,
 } from '@bodiless/organisms';
-import { withEvent, asBodilessHelmet } from '@bodiless/components';
 import Layout from '../components/Layout';
 import {
   ProductTitle,
@@ -41,7 +40,6 @@ import {
 import { FlowContainerDefault } from '../components/FlowContainer';
 import { withEditorBasic } from '../components/Editors';
 import asSingleAccordionDefaultStyle from '../components/SingleAccordion/token';
-import { asBodilessGTMHelmet } from '@bodiless/components';
 
 // Do not allow editors to set accordion titles.
 const NonEditableTitle = ({ producttitle, ...rest }) => (
@@ -91,56 +89,9 @@ const asTestableFlowContainer = withDesign({
 });
 const ProductFlowContainer = asTestableFlowContainer(FlowContainerDefault);
 
-// Example of defining datalayer for a product page
-const dataLayer = {
-  name: 'DigitalData',
-  events: [
-    {
-      event: 'Page Loaded',
-      page: {
-        country: 'US',
-        language: 'en',
-        hostname: 'www.listerine.com',
-      },
-    },
-    {
-      event: 'Product Viewed',
-    },
-  ],
-  editableFields: [
-    {
-      id: 'page-type',
-      fieldTitle: 'Page Type',
-      fieldName: 'pageType',
-      path: '0.page.pageType',
-    },
-    {
-      id: 'product-sku',
-      fieldTitle: 'Product SKU',
-      fieldName: 'sku',
-      path: '1.product.0.productInfo.sku',
-    },
-  ],
-};
-// This will provide the default values for the editable gtm content currently
-// limited to fields defined below:
-const editableDataDefaultContent = {
-  pageType: 'Bodiless Page',
-  sku: 'Bodiless sku',
-  productName: 'Product',
-  upc: 'UPC',
-  variant: 'Variant',
-};
-
-const ExampleGTMHelmetEvent = asBodilessGTMHelmet(dataLayer)(
-  'datalayer',
-  editableDataDefaultContent,
-);
-
 export default (props: any) => (
   <Page {...props}>
     <Layout>
-      <ExampleGTMHelmetEvent />
       <SectionMargin>
         <div className="flex flex-wrap md:items-end md:flex-row-reverse">
           <div className="w-full md:flex-1 md:flex-grow-0 md:flex-shrink-0 text-right"><p>Placeholder_for_Share</p></div>
