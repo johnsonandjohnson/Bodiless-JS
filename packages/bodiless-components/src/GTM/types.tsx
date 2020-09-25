@@ -12,40 +12,16 @@
  * limitations under the License.
  */
 
-export type DataLayerEventName = 'Page Loaded' | 'Product Viewed';
-
-export type GTMPage = {
-  country: string,
-  language: string,
-  hostname: string,
-  pageType?: string,
+export type editableField = {
+  id: string,
+  title: string,
+  name : string,
+  path: string,
 };
 
-// @todo: check with heidi for dataLayer info such as productID, care ..etc see listerine
-export type GTMProduct = {
-  productInfo: {
-    sku: string,
-    upc: string,
-    variant: string
-    productName: string,
-  }
-};
 
-export type DataLayerEvent = {
-  event: DataLayerEventName,
-  page?: GTMPage,
-  product? :GTMProduct,
-};
-
-export type GTMDefaultPageData = {
-  name: string;
-  events: [DataLayerEvent];
-};
-
-export type GTMNodeData = {
-  pageType: string,
-  sku: string,
-  upc: string,
-  productName: string,
-  variant: string
+export type DataLayer = {
+  name: string
+  events: any,
+  editableFields: [editableField],
 };

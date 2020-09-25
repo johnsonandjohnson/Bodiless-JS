@@ -27,7 +27,7 @@ import {
 import * as _ from 'lodash';
 import { flowRight } from 'lodash';
 import Helmet from 'react-helmet';
-import { GTMDefaultPageData, GTMNodeData, DataLayerEvent } from './types';
+import { DataLayer, editableField } from './types';
 
 const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
   let result = `window.${dataLayerName} = window.${dataLayerName} || [];`;
@@ -56,7 +56,7 @@ const withEvent = (
   return <></>;
 };
 
-const createEditButtonOptions = (fields: FieldType) => ({
+const createEditButtonOptions = (fields: any) => ({
   icon: 'local_offer',
   label: 'GTM',
   name: 'gtm',
@@ -71,7 +71,7 @@ const createEditButtonOptions = (fields: FieldType) => ({
     return (
       <>
         <ComponentFormTitle>GTM</ComponentFormTitle>
-        {fields.map((field: any) => (
+        {fields.map((field: editableField) => (
           <>
             <ComponentFormLabel htmlFor={field.fieldName}>{field.fieldTitle}</ComponentFormLabel>
             <ComponentFormText field={field.fieldName} id={field.id} />
@@ -83,7 +83,7 @@ const createEditButtonOptions = (fields: FieldType) => ({
   global: true,
 });
 // Options used to create an edit button.
-export const editButtonOptions: EditButtonOptions<any, GTMNodeData> = {
+export const editButtonOptions: EditButtonOptions<any, any> = {
   icon: 'local_offer',
   label: 'GTM',
   name: 'gtm',
@@ -120,7 +120,7 @@ const asEditableGTM = (fields: any) => flowRight(
   ),
 );
 
-const withDataLayer = (defaultDataLayer: GTMDefaultPageData) => (
+const withDataLayer = (defaultDataLayer: DataLayer) => (
   HelmetComponent: CT,
 ) => (props: any) => {
   if (process.env.NODE_ENV === 'production' && tagManagerEnabled || 1) {
@@ -153,9 +153,9 @@ const withDataLayer = (defaultDataLayer: GTMDefaultPageData) => (
   return <></>;
 };
 
-export const asBodilessGTMHelmet = (defaultDataLayer: GTMDefaultPageData) => (
+export const asBodilessGTMHelmet = (defaultDataLayer: DataLayer) => (
   nodeKey: string,
-  defaultContent: string,
+  defaultContent: any,
 ) => {
   const { editableFields } = defaultDataLayer;
   return flowRight(
