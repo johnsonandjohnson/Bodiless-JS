@@ -1,4 +1,3 @@
-// @ts-nocheck
 /**
  * Copyright © 2020 Johnson & Johnson
  *
@@ -166,5 +165,3 @@ export const asBodilessGTMHelmet = (defaultDataLayer: DataLayer) => (
     withDataLayer(defaultDataLayer),
   )(Helmet);
 };
-
-export default withEvent;

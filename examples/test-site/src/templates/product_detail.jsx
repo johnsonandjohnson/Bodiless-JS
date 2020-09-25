@@ -13,8 +13,7 @@
  */
 
 import React from 'react';
-import Helmet from 'react-helmet';
-import { flow, flowRight } from 'lodash';
+import { flow } from 'lodash';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { BVRatingsSummary, BVReviews } from '@bodiless/bv';
@@ -42,6 +41,7 @@ import {
 import { FlowContainerDefault } from '../components/FlowContainer';
 import { withEditorBasic } from '../components/Editors';
 import asSingleAccordionDefaultStyle from '../components/SingleAccordion/token';
+import { asBodilessGTMHelmet } from '@bodiless/components';
 
 // Do not allow editors to set accordion titles.
 const NonEditableTitle = ({ producttitle, ...rest }) => (
@@ -91,11 +91,51 @@ const asTestableFlowContainer = withDesign({
 });
 const ProductFlowContainer = asTestableFlowContainer(FlowContainerDefault);
 
-const ExampleGTMHelmetEvent = flowRight(
-  asBodilessHelmet('datalayer'),
-  // On product pages, we may add product related datalayer info:
-  withEvent('digitalData', { event: 'Product Viewed' }, 'product-viewed'),
-)(Helmet);
+// Example of defining datalayer for a product page
+const dataLayer = {
+  name: 'DigitalData',
+  events: [
+    {
+      event: 'Page Loaded',
+      page: {
+        country: 'US',
+        language: 'en',
+        hostname: 'www.listerine.com',
+      },
+    },
+    {
+      event: 'Product Viewed',
+    },
+  ],
+  editableFields: [
+    {
+      id: 'page-type',
+      fieldTitle: 'Page Type',
+      fieldName: 'pageType',
+      path: '0.page.pageType',
+    },
+    {
+      id: 'product-sku',
+      fieldTitle: 'Product SKU',
+      fieldName: 'sku',
+      path: '1.product.0.productInfo.sku',
+    },
+  ],
+};
+// This will provide the default values for the editable gtm content currently
+// limited to fields defined below:
+const editableDataDefaultContent = {
+  pageType: 'Bodiless Page',
+  sku: 'Bodiless sku',
+  productName: 'Product',
+  upc: 'UPC',
+  variant: 'Variant',
+};
+
+const ExampleGTMHelmetEvent = asBodilessGTMHelmet(dataLayer)(
+  'datalayer',
+  editableDataDefaultContent,
+);
 
 export default (props: any) => (
   <Page {...props}>
