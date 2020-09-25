@@ -39,23 +39,6 @@ const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
 };
 
 const tagManagerEnabled = (process.env.GOOGLE_TAGMANAGER_ENABLED || '1') === '1';
-const withEvent = (
-  dataLayerName: string,
-  defaultPageData: GTMDefaultPageData,
-  nodeKey: string,
-  nodeCollection: string,
-) => (HelmetComponent: CT) => (props: any) => {
-  if (process.env.NODE_ENV === 'production' && tagManagerEnabled || 1) {
-    return (
-      <HelmetComponent {...rest}>
-        {children}
-        <script>{generateDataLayer(merged, dataLayerName)}</script>
-      </HelmetComponent>
-    );
-  }
-  return <></>;
-};
-
 
 const createEditButtonOptions = (fields: EditableFields) : EditButtonOptions<any, any> => ({
   icon: 'local_offer',
