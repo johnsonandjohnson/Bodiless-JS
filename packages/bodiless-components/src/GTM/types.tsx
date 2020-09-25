@@ -26,3 +26,5 @@ export type DataLayer = {
   events: any,
   editableFields: [EditableField],
 };
+
+export type GTMNodeData = {};

@@ -109,24 +109,11 @@ const withDataLayer = (defaultDataLayer: DataLayer) => (
 ) => (props: any) => {
   if (process.env.NODE_ENV === 'production' && tagManagerEnabled || 1) {
     const { componentData, childeren, rest } = props;
-    const {
-      pageType, sku, upc, productName, variant,
-    } = componentData;
-    const { events, name } = defaultDataLayer;
-    const dataLayer = events?.map(({ event, page, product }) => {
-      if (event === 'Page Loaded') {
-        return { event, page: { ...page, pageType } };
-      }
-      if (event === 'Product Viewed') {
-        const currentProductInfo = { product };
-        const productInfo = {
-          ...currentProductInfo, sku, upc, productName, variant,
-        };
-        return { event, product: [{ productInfo }] };
-      }
-      return dataLayerEvent;
+    const { editableFields, name } = defaultDataLayer;
+    const dataLayer = defaultDataLayer.events;
+    editableFields?.map(({ path, fieldName }) => {
+      _.set(dataLayer, path, componentData[fieldName]);
     });
-
     return (
       <HelmetComponent {...rest}>
         {childeren}
@@ -150,3 +137,5 @@ export const asBodilessGTMHelmet = (defaultDataLayer: DataLayer) => (
     withDataLayer(defaultDataLayer),
   )(Helmet);
 };
+
+export default asBodilessGTMHelmet;

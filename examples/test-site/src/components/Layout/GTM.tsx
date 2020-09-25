@@ -84,6 +84,11 @@ const dataLayer = {
     },
     {
       event: 'Product Viewed',
+      product: [{
+        productInfo: {
+          productCustomAttribute: 'Product Static Value',
+        },
+      }],
     },
   ],
   editableFields: [
@@ -98,6 +103,24 @@ const dataLayer = {
       fieldTitle: 'Product SKU',
       fieldName: 'sku',
       path: '1.product.0.productInfo.sku',
+    },
+    {
+      id: 'product-name',
+      fieldTitle: 'Product Name',
+      fieldName: 'productName',
+      path: '1.product.0.productInfo.productName',
+    },
+    {
+      id: 'product-upc',
+      fieldTitle: 'Product UPC',
+      fieldName: 'upc',
+      path: '1.product.0.productInfo.upc',
+    },
+    {
+      id: 'product-variant',
+      fieldTitle: 'Product Variant',
+      fieldName: 'variant',
+      path: '1.product.0.productInfo.variant',
     },
   ],
 };
