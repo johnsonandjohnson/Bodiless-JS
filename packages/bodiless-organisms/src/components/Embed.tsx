@@ -20,15 +20,19 @@ import {
   DesignableComponentsProps,
   Div,
   Embed as BaseEmbed,
+  withDesign,
+  replaceWith,
 } from '@bodiless/fclasses';
 
 type EmbedDesignableComponents = {
   Wrapper: ComponentType<HTMLProps<HTMLDivElement>>,
+  AspectRatio: ComponentType<HTMLProps<HTMLDivElement>>,
   Item: ComponentType<HTMLProps<HTMLEmbedElement>>,
 };
   
 const startComponents: EmbedDesignableComponents = {
   Wrapper: Div,
+  AspectRatio: Div,
   Item: BaseEmbed,
 };
 
@@ -37,10 +41,12 @@ type EmbedProps = DesignableComponentsProps<EmbedDesignableComponents>;
 const BaseEmbedComponent: ComponentType<EmbedProps> = ({ components }) => {
   const {
     Wrapper,
+    AspectRatio,
     Item,
   } = components;
   return (
     <Wrapper>
+      <AspectRatio />
       <Item />
     </Wrapper>
   )

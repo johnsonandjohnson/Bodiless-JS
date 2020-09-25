@@ -14,41 +14,31 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import { flowRight } from 'lodash';
-import { ifReadOnly } from '@bodiless/core';
-import { asBodilessIframe } from '@bodiless/components';
-import { Embed } from '@bodiless/organisms';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-
 import {
-  addClasses,
-  withDesign,
-  replaceWith,
-  Iframe,
-} from '@bodiless/fclasses';
+  IframeWithResponsiveWidth,
+  Reponsive21By9Iframe,
+  Reponsive16By9Iframe,
+  Reponsive4By3Iframe,
+  Reponsive1By1Iframe,
+} from '../../../components/Iframe';
+
 import Layout from '../../../components/Layout';
-
-const BodilessIframe = flowRight(
-  asBodilessIframe(),
-  addClasses('w-full'),
-)(Iframe);
-
-const ResponsiveIframe = withDesign({
-  Wrapper: addClasses('relative overflow-hidden w-full'),
-  Item: flowRight(
-    addClasses('absolute w-full h-full inset-0'),
-    replaceWith(BodilessIframe),
-  ),
-})(Embed);
 
 export default (props: any) => (
   <Page {...props}>
     <Layout>
       <h1 className="text-3xl font-bold">iFrame Demo</h1>
-      <h2>Iframe</h2>
-      <BodilessIframe nodeKey="iframe" />
-      <h2>Responsive iframe</h2>
-      <ResponsiveIframe nodeKey="iframe" />
+      <h2>Iframe with responive width</h2>
+      <IframeWithResponsiveWidth nodeKey="iframe" />
+      <h2>Responsive iframe 21:9</h2>
+      <Reponsive21By9Iframe nodeKey="iframe" />
+      <h2>Responsive iframe 16:9</h2>
+      <Reponsive16By9Iframe nodeKey="iframe" />
+      <h2>Responsive iframe 4:3</h2>
+      <Reponsive4By3Iframe nodeKey="iframe" />
+      <h2>Responsive iframe 1:1</h2>
+      <Reponsive1By1Iframe nodeKey="iframe" />
     </Layout>
   </Page>
 );
