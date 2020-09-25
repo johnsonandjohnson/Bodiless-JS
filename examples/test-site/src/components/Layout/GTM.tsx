@@ -113,7 +113,7 @@ const editableDataDefaultContent = {
   variant: 'Variant',
 };
 
-const SiteGTMHelmetEvent = asBodilessGTMHelmet(simpleDefault)(
+const SiteGTMHelmetEvent = asBodilessGTMHelmet(dataLayer)(
   'datalayer',
   editableDataDefaultContent,
 );
