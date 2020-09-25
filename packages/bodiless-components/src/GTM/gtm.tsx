@@ -108,9 +108,10 @@ const withDataLayer = (defaultDataLayer: DataLayer) => (
   HelmetComponent: CT,
 ) => (props: any) => {
   if (process.env.NODE_ENV === 'production' && tagManagerEnabled || 1) {
-    const { componentDat/product_detail.jsxa, childeren, rest } = props;
+    const { componentData, childeren, rest } = props;
     const { editableFields, name } = defaultDataLayer;
     const dataLayer = defaultDataLayer.events;
+    // @todo: behavior if no path?
     editableFields?.map(({ path, fieldName }) => {
       _.set(dataLayer, path, componentData[fieldName]);
     });

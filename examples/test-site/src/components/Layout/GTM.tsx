@@ -15,62 +15,6 @@
 
 import { asBodilessGTMHelmet } from '@bodiless/components';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const digitalData = [
-  {
-    event: 'Page Loaded',
-    page: {
-      country: 'US',
-      language: 'en',
-      hostname: 'www.listerine.com',
-      pageType: 'product detail',
-    },
-  },
-  {
-    event: 'Product Viewed',
-    product: [
-      {
-        productInfo: {
-          productID: '312547306355',
-          sku: '1254730635',
-          upc: '312547306355',
-          productName: 'LISTERINE\u00ae TOTAL CARE Mouthwash',
-          careArea: '',
-          concernArea: '',
-        },
-      },
-    ],
-  },
-];
-const defaultDataLayer = {
-  name: 'DigitalData',
-  events: [
-    {
-      event: 'Page Loaded',
-      page: {
-        country: 'US',
-        language: 'en',
-        hostname: 'www.listerine.com',
-      },
-    },
-    {
-      event: 'Product Viewed',
-      product: [
-        {
-          productInfo: {
-            productID: '312547306355',
-            sku: '1254730635',
-            upc: '312547306355',
-            productName: 'LISTERINE',
-            careArea: '',
-            concernArea: '',
-          },
-        },
-      ],
-    },
-  ],
-};
-
 const dataLayer = {
   name: 'DigitalData',
   events: [
@@ -91,17 +35,22 @@ const dataLayer = {
       }],
     },
   ],
+  // Define additional datalayer fields that are editable using the UI.
+  // These fields will be injected into the datalayer events object using the
+  // required path property defined on each field.
   editableFields: [
     {
       id: 'page-type',
       fieldTitle: 'Page Type',
       fieldName: 'pageType',
+      // Maps to page object on the first event.
       path: '0.page.pageType',
     },
     {
       id: 'product-sku',
       fieldTitle: 'Product SKU',
       fieldName: 'sku',
+      // Maps to the first product on the second event.
       path: '1.product.0.productInfo.sku',
     },
     {
