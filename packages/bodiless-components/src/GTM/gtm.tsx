@@ -107,6 +107,7 @@ const asEditableGTM = (fields: EditableFields) => flowRight(
 const withDataLayer = (defaultDataLayer: DataLayer) => (
   HelmetComponent: CT,
 ) => (props: any) => {
+  // eslint-disable-next-line no-mixed-operators
   if (process.env.NODE_ENV === 'production' && tagManagerEnabled || 1) {
     const { componentData, childeren, rest } = props;
     const { editableFields, name } = defaultDataLayer;
