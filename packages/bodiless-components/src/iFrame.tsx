@@ -71,7 +71,7 @@ const options: BodilessOptions<Props, Data> = {
   Wrapper: 'div',
 };
 
-const withoutPointerEvenets = addProps({
+const withoutPointerEvents = addProps({
   style: {
     pointerEvents: 'none',
   },
@@ -83,7 +83,7 @@ const asBodilessIframe: AsBodiless<Props, Data> = (
   useOverrides?,
 ) =>
   flowRight(
-    ifEditable(withoutPointerEvenets),
+    ifEditable(withoutPointerEvents),
     asBodilessComponent(options)(
       nodeKeys,
       defaultData,
