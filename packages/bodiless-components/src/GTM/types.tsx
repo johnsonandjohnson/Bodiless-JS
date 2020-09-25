@@ -12,16 +12,17 @@
  * limitations under the License.
  */
 
-export type editableField = {
+export type EditableField = {
   id: string,
-  title: string,
-  name : string,
+  fieldTitle: string,
+  fieldName : string,
   path: string,
 };
 
+export type EditableFields = EditableField[];
 
 export type DataLayer = {
   name: string
   events: any,
-  editableFields: [editableField],
+  editableFields: [EditableField],
 };

@@ -26,7 +26,8 @@ import {
 import * as _ from 'lodash';
 import { flowRight } from 'lodash';
 import Helmet from 'react-helmet';
-import { DataLayer, editableField } from './types';
+import { ComponentFormFieldWrapper } from '@bodiless/ui';
+import { DataLayer, EditableFields, EditableField } from './types';
 
 const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
   let result = `window.${dataLayerName} = window.${dataLayerName} || [];`;
@@ -55,7 +56,8 @@ const withEvent = (
   return <></>;
 };
 
-const createEditButtonOptions = (fields: any) => ({
+
+const createEditButtonOptions = (fields: EditableFields) : EditButtonOptions<any, any> => ({
   icon: 'local_offer',
   label: 'GTM',
   name: 'gtm',
@@ -70,11 +72,11 @@ const createEditButtonOptions = (fields: any) => ({
     return (
       <>
         <ComponentFormTitle>GTM</ComponentFormTitle>
-        {fields.map((field: editableField) => (
-          <>
+        {fields.map((field: EditableField) => (
+          <ComponentFormFieldWrapper>
             <ComponentFormLabel htmlFor={field.fieldName}>{field.fieldTitle}</ComponentFormLabel>
             <ComponentFormText field={field.fieldName} id={field.id} />
-          </>
+          </ComponentFormFieldWrapper>
         ))}
       </>
     );
@@ -113,7 +115,7 @@ export const editButtonOptions: EditButtonOptions<any, any> = {
   global: true,
 };
 
-const asEditableGTM = (fields: any) => flowRight(
+const asEditableGTM = (fields: EditableFields) => flowRight(
   ifEditable(
     withEditButton(createEditButtonOptions(fields)),
   ),
