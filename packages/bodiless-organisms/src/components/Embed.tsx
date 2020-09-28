@@ -20,8 +20,6 @@ import {
   DesignableComponentsProps,
   Div,
   Embed as BaseEmbed,
-  withDesign,
-  replaceWith,
 } from '@bodiless/fclasses';
 
 type EmbedDesignableComponents = {
@@ -29,7 +27,7 @@ type EmbedDesignableComponents = {
   AspectRatio: ComponentType<HTMLProps<HTMLDivElement>>,
   Item: ComponentType<HTMLProps<HTMLEmbedElement>>,
 };
-  
+
 const startComponents: EmbedDesignableComponents = {
   Wrapper: Div,
   AspectRatio: Div,
@@ -49,7 +47,7 @@ const BaseEmbedComponent: ComponentType<EmbedProps> = ({ components }) => {
       <AspectRatio />
       <Item />
     </Wrapper>
-  )
+  );
 };
 
 const Embed = flowRight(

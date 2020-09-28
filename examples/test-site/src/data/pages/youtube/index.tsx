@@ -15,14 +15,15 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import { Youtube } from '@bodiless/components';
 import Layout from '../../../components/Layout';
+import { Reponsive16By9Youtube } from '../../../components/Youtube';
 
 export default (props: any) => (
   <Page {...props}>
     <Layout>
       <h1 className="text-3xl font-bold">Youtube Demo</h1>
-      <Youtube nodeKey="youtube" />
+      <h2>Responsive youtube 16:9</h2>
+      <Reponsive16By9Youtube nodeKey="youtube" />
     </Layout>
   </Page>
 );

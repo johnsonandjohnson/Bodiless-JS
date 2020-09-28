@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { withDesign, addClasses } from "@bodiless/fclasses";
+import { withDesign, addClasses } from '@bodiless/fclasses';
 import { flowRight } from 'lodash';
 
 const asResponsiveEmbed = withDesign({
@@ -22,21 +22,21 @@ const asResponsiveEmbed = withDesign({
 
 const asResponsive21By9Embed = flowRight(
   withDesign({
-    AspectRatio: addClasses('aspect-ratio-21\/9'),
+    AspectRatio: addClasses('aspect-ratio-21/9'),
   }),
   asResponsiveEmbed,
 );
 
 const asResponsive16By9Embed = flowRight(
   withDesign({
-    AspectRatio: addClasses('aspect-ratio-16\/9'),
+    AspectRatio: addClasses('aspect-ratio-16/9'),
   }),
   asResponsiveEmbed,
 );
 
 const asResponsive4By3Embed = flowRight(
   withDesign({
-    AspectRatio: addClasses('aspect-ratio-4\/3'),
+    AspectRatio: addClasses('aspect-ratio-4/3'),
   }),
   asResponsiveEmbed,
 );
@@ -53,4 +53,4 @@ export {
   asResponsive16By9Embed,
   asResponsive4By3Embed,
   asResponsive1By1Embed,
-}
+};

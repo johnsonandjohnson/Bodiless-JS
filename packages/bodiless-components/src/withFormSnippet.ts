@@ -27,19 +27,25 @@ import type {
 } from '@bodiless/core';
 import { flowRight } from 'lodash';
 
-const withEditFormSnippet = (
+type EditFormSnippet<P, D> = {
   nodeKeys?: WithNodeKeyProps,
-  defaultData?: object,
-  snippetOptions?: EditFormSnippetOptions
-) => withSidecarNodes(
-  flowRight(
-    withNodeKey(nodeKeys),
-    withNode,
-    withNodeDataHandlers(defaultData),
-    withBaseEditFormSnippet(snippetOptions),
-    withoutProps('setComponentData'),
-    withData,
-  ),
-);
+  defaultData?: D,
+  snippetOptions: EditFormSnippetOptions<P, D>,
+};
 
-export default withEditFormSnippet;
+const withFormSnippet = <P extends object, D extends object>({
+  nodeKeys,
+  defaultData,
+  snippetOptions,
+}: EditFormSnippet<P, D>) => withSidecarNodes(
+    flowRight(
+      withNodeKey(nodeKeys),
+      withNode,
+      withNodeDataHandlers(defaultData),
+      withBaseEditFormSnippet(snippetOptions),
+      withoutProps('setComponentData'),
+      withData,
+    ),
+  );
+
+export default withFormSnippet;

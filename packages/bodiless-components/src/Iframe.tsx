@@ -12,20 +12,12 @@
  * limitations under the License.
  */
 
-import React, { HTMLProps } from 'react';
+import React, { ComponentType, HTMLProps } from 'react';
 
 import {
   asBodilessComponent,
   ifEditable,
-} from '@bodiless/core';
-import {
   useMenuOptionUI,
-  withNodeDataHandlers,
-  withNodeKey,
-  withNode,
-  withoutProps,
-  withData,
-  withSidecarNodes,
 } from '@bodiless/core';
 import type {
   AsBodiless,
@@ -34,7 +26,7 @@ import type {
 import { addProps } from '@bodiless/fclasses';
 
 import { flowRight } from 'lodash';
-import withEditFormSnippet from './withEditFormSnippet';
+import withFormSnippet from './withFormSnippet';
 
 // Type of the data used by this component.
 export type Data = {
@@ -61,59 +53,62 @@ const withoutPointerEvents = addProps({
   },
 });
 
-const withHeightSnippet = withEditFormSnippet(
-  'height',
-  { height: '' },
-  {
+const withHeightSnippet = withFormSnippet({
+  nodeKeys: 'height',
+  defaultData: { height: '' },
+  snippetOptions: {
     renderForm: () => {
       const { ComponentFormLabel, ComponentFormText } = useMenuOptionUI();
       return (
-        <>
+        <React.Fragment key="height">
           <ComponentFormLabel htmlFor="height">Height</ComponentFormLabel>
           <ComponentFormText field="height" />
-        </>
+        </React.Fragment>
       );
-    }
-  }
-);
+    },
+  },
+});
 
-const withSrcSnippet = withEditFormSnippet(
-  'src',
-  { src: '' },
-  {
+const withSrcSnippet = withFormSnippet({
+  nodeKeys: 'src',
+  defaultData: { src: '' },
+  snippetOptions: {
     renderForm: () => {
       const { ComponentFormLabel, ComponentFormText } = useMenuOptionUI();
       return (
-        <>
+        <React.Fragment key="src">
           <ComponentFormLabel htmlFor="src">Src</ComponentFormLabel>
           <ComponentFormText field="src" />
-        </>
+        </React.Fragment>
       );
-    }
-  }
-);
+    },
+  },
+});
 
 const asBaseBodilessIframe: AsBodiless<Props, Data> = (
   nodeKeys?,
   defaultData?,
   useOverrides?,
-) =>
-  flowRight(
-    ifEditable(withoutPointerEvents),
-    asBodilessComponent(options)(nodeKeys, defaultData, useOverrides),
-  );
+  Wrapper?: ComponentType<any> | string,
+) => flowRight(
+  ifEditable(withoutPointerEvents),
+  asBodilessComponent({
+    ...options,
+    ...(Wrapper ? { Wrapper } : {}),
+  })(nodeKeys, defaultData, useOverrides),
+);
 
 const asBodilessIframe: AsBodiless<Props, Data> = (
   nodeKeys?,
   defaultData?,
   useOverrides?,
-) =>
-  flowRight(
-    asBaseBodilessIframe(nodeKeys, defaultData, useOverrides),
-    withHeightSnippet,
-    withSrcSnippet,
-  );
-
+  Wrapper?: ComponentType<any> | string,
+) => flowRight(
+  // @ts-ignore
+  asBaseBodilessIframe(nodeKeys, defaultData, useOverrides, Wrapper),
+  withHeightSnippet,
+  withSrcSnippet,
+);
 
 export default asBodilessIframe;
 export {

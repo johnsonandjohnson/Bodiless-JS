@@ -17,9 +17,11 @@ import { asBodilessIframe } from '@bodiless/components';
 import { Embed } from '@bodiless/organisms';
 import {
   Iframe,
+  Div,
   withDesign,
   replaceWith,
   addClasses,
+  addProps,
 } from '@bodiless/fclasses';
 
 import {
@@ -28,14 +30,25 @@ import {
   asResponsive4By3Embed,
   asResponsive1By1Embed,
 } from '../Elements.token';
-import { ifEditable } from '@bodiless/core';
 
-const BodilessIframe = asBodilessIframe()(Iframe);
+const withPlaceholder = addProps({ src: 'https://www.youtube.com/embed/_LBdqpscwi0' });
+const BodilessIframe = withPlaceholder(asBodilessIframe()(Iframe));
+
+const Wrapper = addClasses('absolute w-full h-full inset-0')(Div);
+const ResponsiveBodilessIframe = asBodilessIframe(
+  undefined,
+  undefined,
+  undefined,
+  Wrapper,
+)(Iframe);
 
 const withResponsiveWidth = addClasses('w-full');
 
 const asResponsiveIframe = withDesign({
-  Item: replaceWith(BodilessIframe),
+  Item: flowRight(
+    withPlaceholder,
+    replaceWith(ResponsiveBodilessIframe),
+  ),
 });
 
 const asReponsive21By9Iframe = flowRight(
@@ -75,4 +88,5 @@ export {
   Reponsive16By9Iframe,
   Reponsive4By3Iframe,
   Reponsive1By1Iframe,
-}
+  withPlaceholder,
+};
