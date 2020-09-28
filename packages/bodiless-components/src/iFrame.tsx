@@ -16,8 +16,16 @@ import React, { HTMLProps } from 'react';
 
 import {
   asBodilessComponent,
-  getUI,
   ifEditable,
+} from '@bodiless/core';
+import {
+  useMenuOptionUI,
+  withNodeDataHandlers,
+  withNodeKey,
+  withNode,
+  withoutProps,
+  withData,
+  withSidecarNodes,
 } from '@bodiless/core';
 import type {
   AsBodiless,
@@ -26,6 +34,7 @@ import type {
 import { addProps } from '@bodiless/fclasses';
 
 import { flowRight } from 'lodash';
+import withEditFormSnippet from './withEditFormSnippet';
 
 // Type of the data used by this component.
 export type Data = {
@@ -40,35 +49,10 @@ const options: BodilessOptions<Props, Data> = {
   icon: 'settings',
   label: 'Settings',
   name: 'Edit',
-  renderForm: ({ ui: formUi, formState }) => {
-    const {
-      ComponentFormTitle,
-      ComponentFormLabel,
-      ComponentFormText,
-      ComponentFormWarning
-    } = getUI(formUi);
-    const { errors } = formState;
-    return (
-      <>
-        <ComponentFormTitle>iFrame</ComponentFormTitle>
-        <ComponentFormLabel htmlFor="iframe-src">Src</ComponentFormLabel>
-        <ComponentFormText
-          field="src"
-          id="iframe-src"
-          validateOnChange
-          validateOnBlur
-        />
-        {errors && errors.src && (
-          <ComponentFormWarning>{errors.src}</ComponentFormWarning>
-        )}
-        <ComponentFormLabel htmlFor="iframe-height">Height</ComponentFormLabel>
-        <ComponentFormText field="height" id="iframe-height" />
-      </>
-    );
-  },
   global: false,
   local: true,
   Wrapper: 'div',
+  useCompoundForm: () => true,
 };
 
 const withoutPointerEvents = addProps({
@@ -77,18 +61,63 @@ const withoutPointerEvents = addProps({
   },
 });
 
-const asBodilessIframe: AsBodiless<Props, Data> = (
+const withHeightSnippet = withEditFormSnippet(
+  'height',
+  { height: '' },
+  {
+    renderForm: () => {
+      const { ComponentFormLabel, ComponentFormText } = useMenuOptionUI();
+      return (
+        <>
+          <ComponentFormLabel htmlFor="height">Height</ComponentFormLabel>
+          <ComponentFormText field="height" />
+        </>
+      );
+    }
+  }
+);
+
+const withSrcSnippet = withEditFormSnippet(
+  'src',
+  { src: '' },
+  {
+    renderForm: () => {
+      const { ComponentFormLabel, ComponentFormText } = useMenuOptionUI();
+      return (
+        <>
+          <ComponentFormLabel htmlFor="src">Src</ComponentFormLabel>
+          <ComponentFormText field="src" />
+        </>
+      );
+    }
+  }
+);
+
+const asBaseBodilessIframe: AsBodiless<Props, Data> = (
   nodeKeys?,
   defaultData?,
   useOverrides?,
 ) =>
   flowRight(
     ifEditable(withoutPointerEvents),
-    asBodilessComponent(options)(
-      nodeKeys,
-      defaultData,
-      useOverrides
-    ),
+    asBodilessComponent(options)(nodeKeys, defaultData, useOverrides),
   );
 
+const asBodilessIframe: AsBodiless<Props, Data> = (
+  nodeKeys?,
+  defaultData?,
+  useOverrides?,
+) =>
+  flowRight(
+    asBaseBodilessIframe(nodeKeys, defaultData, useOverrides),
+    withHeightSnippet,
+    withSrcSnippet,
+  );
+
+
 export default asBodilessIframe;
+export {
+  asBaseBodilessIframe,
+  withHeightSnippet,
+  withSrcSnippet,
+};

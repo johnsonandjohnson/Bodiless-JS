@@ -26,6 +26,7 @@ import withData from './withData';
 import type { WithNodeProps, WithNodeKeyProps } from './Types/NodeTypes';
 import type { EditButtonOptions } from './Types/EditButtonTypes';
 import { useContextActivator } from './hooks';
+import withCompoundForm from './withCompoundForm';
 
 /**
  * Options for making a component "bodiless".
@@ -45,6 +46,12 @@ export type Options<P, D> = EditButtonOptions<P, D> & {
    * prop name.
    */
   defaultData?: D,
+  /**
+   * An optional function that determines if the created menu option displays "compound form".
+   * If the function returns true, then "compound form" is displayed. Otherwise, standard form is displayed.
+   * Default is to display standard form.
+   */
+  useCompoundForm?: () => boolean;
 };
 
 type HOC<P, Q> = (Component: CT<P>|string) => CT<Q>;
@@ -103,7 +110,11 @@ const asBodilessComponent = <P extends object, D extends object>(options: Option
     useOverrides?: (props: P, options: Options<P, D>) => Partial<EditButtonOptions<P, D>>,
   ) => {
     const {
-      activateEvent = 'onClick', Wrapper, defaultData: defaultDataOption = {}, ...rest
+      activateEvent = 'onClick',
+      Wrapper,
+      defaultData: defaultDataOption = {},
+      useCompoundForm = () => false,
+      ...rest
     } = options;
     const editButtonOptions = useOverrides
       ? (props: P) => ({ ...rest, ...useOverrides(props, options) })
@@ -117,7 +128,11 @@ const asBodilessComponent = <P extends object, D extends object>(options: Option
         withoutProps(['setComponentData']),
       ),
       ifEditable(
-        withEditButton(editButtonOptions),
+        useCompoundForm()
+          ? withCompoundForm({
+              useMenuOptions: () => [editButtonOptions]}
+            )
+          : withEditButton(editButtonOptions),
         withContextActivator(activateEvent),
         withLocalContextMenu,
         Wrapper ? withActivatorWrapper(activateEvent, Wrapper) : identity,

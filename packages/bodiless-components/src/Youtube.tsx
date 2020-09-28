@@ -12,12 +12,12 @@
  * limitations under the License.
  */
 
-import React, { useEffect, ComponentType } from 'react';
-import type {
-  AsBodiless,
-  BodilessOptions,
-} from '@bodiless/core';
-import asBodilessIframe from './iFrame';
+import React, { useCallback, ComponentType } from 'react';
+import { useMenuOptionUI } from '@bodiless/core';
+import type { AsBodiless } from '@bodiless/core';
+import { flowRight } from 'lodash';
+import withEditFormSnippet from './withEditFormSnippet';
+import { asBaseBodilessIframe, withHeightSnippet } from './iFrame';
 import type {
   Props as IframeProps,
   Data as IframeData,
@@ -57,39 +57,63 @@ const withYoutubePlayerSettings = (settings: Partial<YoutubePlayerSettings>) =>
     return WithYoutubePlayerSettings;
   }
 
-const URL_FIELD = 'src';
-const YOUTUBE_ERROR = 'Invalid video url specified';
-
-const useFormOverrides = (props: IframeProps, options: BodilessOptions<IframeProps, IframeData>) => ({
-  renderForm: (formProps: any) => {
-    const { formState, formApi } = formProps;
-    const { values, errors } = formState;
-    const { [URL_FIELD]: urlValue } = values;
-    useEffect(() => {
-      if (urlValue !== undefined) {
-        const isValid = isValidYoutubeUrl(urlValue);
-        if (errors.src === undefined && !isValid) {
-          formApi.setError(URL_FIELD, YOUTUBE_ERROR);
-        }
-        if (errors.src === YOUTUBE_ERROR && isValid) {
-          formApi.setError(URL_FIELD, undefined);
-        }
+  const withYoutubeSrcSnippet = withEditFormSnippet(
+    'src',
+    { src: '' },
+    {
+      renderForm: props => {
+        const { errors } = props;
+        const {
+          ComponentFormLabel,
+          ComponentFormText,
+          ComponentFormWarning,
+        } = useMenuOptionUI();
+        const validate = useCallback(
+          (value: string) => (!value || !isValidYoutubeUrl(value)
+            ? 'Invalid youtube URL specified.'
+            : undefined),
+          [],
+        );
+        return (
+          <>
+            <ComponentFormLabel htmlFor="src">Src</ComponentFormLabel>
+            <ComponentFormText
+              field="src"
+              validate={validate}
+              validateOnChange
+              validateOnBlur
+            />
+            {errors && errors.src && (
+              <ComponentFormWarning>{errors.src}</ComponentFormWarning>
+            )}
+          </>
+        );
       }
-    });
-    return options.renderForm(formProps);
-  }
-});
+    }
+  );
+
+ const asBaseBodilessYoutube: AsBodiless<IframeProps, IframeData> = (
+  nodeKeys?,
+  defaultData?,
+  useOverrides?,
+) => asBaseBodilessIframe(nodeKeys, defaultData, useOverrides);
 
 const asBodilessYoutube: AsBodiless<IframeProps, IframeData> = (
   nodeKeys?,
   defaultData?,
-  //useOverrides?,
-) => asBodilessIframe(nodeKeys, defaultData, useFormOverrides);
+  useOverrides?,
+) => flowRight(
+  asBaseBodilessYoutube(nodeKeys, defaultData, useOverrides),
+  withYoutubeSrcSnippet,
+  withHeightSnippet,
+);
 
 const Youtube = asBodilessYoutube()('iframe');
 
 export default Youtube;
 export {
+  asBaseBodilessYoutube,
   asBodilessYoutube,
   withYoutubePlayerSettings,
+  withYoutubeSrcSnippet,
 };
