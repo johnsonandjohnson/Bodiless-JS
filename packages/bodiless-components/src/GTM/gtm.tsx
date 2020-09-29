@@ -26,7 +26,7 @@ import {
 import * as _ from 'lodash';
 import { flowRight } from 'lodash';
 import Helmet from 'react-helmet';
-import { ComponentFormFieldWrapper } from '@bodiless/ui';
+import { ComponentFormDescription, ComponentFormFieldWrapper } from '@bodiless/ui';
 import { DataLayer, EditableFields, EditableField } from './types';
 
 const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
@@ -37,8 +37,6 @@ const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
   }
   return stripIndent`${result}`;
 };
-
-const tagManagerEnabled = (process.env.GOOGLE_TAGMANAGER_ENABLED || '1') === '1';
 
 const createEditButtonOptions = (fields: EditableFields) : EditButtonOptions<any, any> => ({
   icon: 'local_offer',
@@ -56,47 +54,21 @@ const createEditButtonOptions = (fields: EditableFields) : EditButtonOptions<any
       <>
         <ComponentFormTitle>GTM</ComponentFormTitle>
         {fields.map((field: EditableField) => (
-          <ComponentFormFieldWrapper>
+          <>
             <ComponentFormLabel htmlFor={field.fieldName}>{field.fieldTitle}</ComponentFormLabel>
             <ComponentFormText field={field.fieldName} id={field.id} />
-          </ComponentFormFieldWrapper>
+            {field.description && (
+              <ComponentFormDescription>
+                {field.description}
+              </ComponentFormDescription>
+            )}
+          </>
         ))}
       </>
     );
   },
   global: true,
 });
-// Options used to create an edit button.
-export const editButtonOptions: EditButtonOptions<any, any> = {
-  icon: 'local_offer',
-  label: 'GTM',
-  name: 'gtm',
-  peer: true,
-  isHidden: false,
-  renderForm: ({ ui: formUi }) => {
-    const {
-      ComponentFormTitle,
-      ComponentFormLabel,
-      ComponentFormText,
-    } = getUI(formUi);
-    return (
-      <>
-        <ComponentFormTitle>GTM</ComponentFormTitle>
-        <ComponentFormLabel htmlFor="pageType">Page Type</ComponentFormLabel>
-        <ComponentFormText field="pageType" id="page-type" />
-        <ComponentFormLabel htmlFor="pageType">Product SKU</ComponentFormLabel>
-        <ComponentFormText field="sku" id="product-sku" />
-        <ComponentFormLabel htmlFor="upc">Product UPC</ComponentFormLabel>
-        <ComponentFormText field="upc" id="product-upc" />
-        <ComponentFormLabel htmlFor="productName">Product Name</ComponentFormLabel>
-        <ComponentFormText field="productName" id="product-name" />
-        <ComponentFormLabel htmlFor="variant">Product Variant</ComponentFormLabel>
-        <ComponentFormText field="variant" id="product-variant" />
-      </>
-    );
-  },
-  global: true,
-};
 
 const asEditableGTM = (fields: EditableFields) => flowRight(
   ifEditable(
@@ -104,6 +76,7 @@ const asEditableGTM = (fields: EditableFields) => flowRight(
   ),
 );
 
+const tagManagerEnabled = (process.env.GOOGLE_TAGMANAGER_ENABLED || '1') === '1';
 const withDataLayer = (defaultDataLayer: DataLayer) => (
   HelmetComponent: CT,
 ) => (props: any) => {

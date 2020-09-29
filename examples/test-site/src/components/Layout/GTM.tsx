@@ -1,4 +1,3 @@
-// @ts-nocheck
 /**
  * Copyright © 2020 Johnson & Johnson
  *
@@ -45,6 +44,7 @@ const dataLayer = {
       fieldName: 'pageType',
       // Maps to page object on the first event.
       path: '0.page.pageType',
+      description: 'optional description'
     },
     {
       id: 'product-sku',

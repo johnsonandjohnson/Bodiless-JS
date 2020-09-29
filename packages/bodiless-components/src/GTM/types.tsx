@@ -17,6 +17,7 @@ export type EditableField = {
   fieldTitle: string,
   fieldName : string,
   path: string,
+  description?: string,
 };
 
 export type EditableFields = EditableField[];
@@ -24,7 +25,7 @@ export type EditableFields = EditableField[];
 export type DataLayer = {
   name: string
   events: any,
-  editableFields: [EditableField],
+  editableFields: EditableFields,
 };
 
 export type GTMNodeData = {};
