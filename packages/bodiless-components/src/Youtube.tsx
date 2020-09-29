@@ -13,8 +13,9 @@
  */
 
 import React, { useCallback, ComponentType } from 'react';
-import { useMenuOptionUI } from '@bodiless/core';
 import { flowRight } from 'lodash';
+import { useMenuOptionUI } from '@bodiless/core';
+import { addProps } from '@bodiless/fclasses';
 import withFormSnippet from './withFormSnippet';
 import { asBaseBodilessIframe, withHeightSnippet } from './Iframe';
 import type {
@@ -32,6 +33,11 @@ type YoutubePlayerSettings = {
   enablejsapi: boolean,
   modestbranding: boolean,
   rel: boolean,
+  mute: boolean,
+};
+
+type Props = IframeProps & {
+  playerSettings?: YoutubePlayerSettings,
 };
 
 // https://stackoverflow.com/a/9102270
@@ -45,14 +51,22 @@ const isValidYoutubeUrl = extractVideoIdFromUrl;
 
 const withYoutubePlayerSettings = (
   settings: Partial<YoutubePlayerSettings>,
-) => (Component: ComponentType<any>) => {
+) => addProps({
+  playerSettings: settings,
+});
+
+const withYoutubePlayerTransformer = (Component: ComponentType<any>) => {
   const WithYoutubePlayerSettings = (props: any) => {
-    const { src, ...rest } = props;
-    const url = new URL(src);
-    Object.entries(settings).forEach(setting => {
-      const [key, value] = setting;
-      url.searchParams.set(key, String(value));
-    });
+    const { playerSettings, src, ...rest } = props;
+    const videoId = extractVideoIdFromUrl(src);
+    const src$ = `https://www.youtube.com/embed/${videoId}`;
+    const url = new URL(src$);
+    if (playerSettings !== undefined) {
+      Object.entries(playerSettings).forEach(setting => {
+        const [key, value] = setting;
+        url.searchParams.set(key, String(value));
+      });
+    }
     return <Component {...rest} src={url} />;
   };
   WithYoutubePlayerSettings.displayName = 'WithYoutubePlayerSettings';
@@ -94,9 +108,9 @@ const withYoutubeSrcSnippet = withFormSnippet({
   },
 });
 
-const asBaseBodilessYoutube: AsIframeBodiless<IframeProps, IframeData> = asBaseBodilessIframe;
+const asBaseBodilessYoutube: AsIframeBodiless<Props, IframeData> = asBaseBodilessIframe;
 
-const asBodilessYoutube: AsIframeBodiless<IframeProps, IframeData> = (
+const asBodilessYoutube: AsIframeBodiless<Props, IframeData> = (
   nodeKeys?,
   defaultData?,
   useOverrides?,
@@ -105,6 +119,7 @@ const asBodilessYoutube: AsIframeBodiless<IframeProps, IframeData> = (
   asBaseBodilessYoutube(nodeKeys, defaultData, useOverrides, Wrapper),
   withHeightSnippet,
   withYoutubeSrcSnippet,
+  withYoutubePlayerTransformer,
 );
 
 const Youtube = asBodilessYoutube()('iframe');

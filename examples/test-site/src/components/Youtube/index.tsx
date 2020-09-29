@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { flowRight, identity } from 'lodash';
+import { flowRight } from 'lodash';
 import { ifReadOnly } from '@bodiless/core';
 import { asBodilessYoutube, withYoutubePlayerSettings } from '@bodiless/components';
 import { Embed } from '@bodiless/organisms';
@@ -35,31 +35,32 @@ const asBodilessYoutubeWithWrapper = asBodilessYoutube(
   Wrapper,
 );
 
-const asResponsiveYoutube = (settings?: object) => withDesign({
+const asResponsiveYoutube = withDesign({
   Item: flowRight(
     withPlaceholder,
-    replaceWith(
-      flowRight(
-        asBodilessYoutubeWithWrapper,
-        settings ? ifReadOnly(withYoutubePlayerSettings(settings)) : identity,
-      )(Iframe),
-    ),
+    replaceWith(asBodilessYoutubeWithWrapper(Iframe)),
   ),
 });
 
-const Reponsive16By9Youtube = flowRight(
+const asReponsive16By9Youtube = flowRight(
   asResponsive16By9Embed,
-  asResponsiveYoutube(),
-)(Embed);
+  asResponsiveYoutube,
+);
 
-const autoplaySettings = {
-  autoplay: true,
-  mute: true,
-};
+const Reponsive16By9Youtube = asReponsive16By9Youtube(Embed);
+
+const withAutoPlay = withDesign({
+  Item: ifReadOnly(
+    withYoutubePlayerSettings({
+      autoplay: true,
+      mute: true,
+    }),
+  ),
+});
 
 const Reponsive16By9AutoPlayYoutube = flowRight(
-  asResponsive16By9Embed,
-  asResponsiveYoutube(autoplaySettings),
+  withAutoPlay,
+  asReponsive16By9Youtube,
 )(Embed);
 
 export {

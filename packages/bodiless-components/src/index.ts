@@ -40,7 +40,7 @@ import withEditPlaceholder from './Placeholder';
 import { TagButtonProps, withTagButton, useTagsAccessors } from './TagButton';
 import withFilterByTags from './withFilterByTags';
 import asBodilessIframe from './Iframe';
-import Youtube, { asBodilessYoutube } from './Youtube';
+import Youtube, { asBodilessYoutube, withYoutubePlayerSettings } from './Youtube';
 import PageDimensionsProvider, {
   usePageDimensionsContext,
   withPageDimensionsContext,
@@ -87,6 +87,7 @@ export {
   useTagsAccessors,
   asBodilessIframe,
   asBodilessYoutube,
+  withYoutubePlayerSettings,
   Youtube,
   PageDimensionsProvider,
   usePageDimensionsContext,
