@@ -49,6 +49,7 @@ import {
   ifViewportIs,
   ifViewportIsNot,
 } from './withResponsiveToggle';
+import Search from './Search/Search';
 
 export {
   asBodilessLink,
@@ -80,6 +81,7 @@ export {
   withEditPlaceholder,
   withEvent,
   withTagButton,
+  Search,
   TagButtonProps,
   asTaggableItem,
   withFilterByTags,
