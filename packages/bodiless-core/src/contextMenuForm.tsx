@@ -21,7 +21,7 @@ export type Options<D> = {
   submitValues?: (componentData: D) => boolean|void;
   onClose?: (componentData: D) => boolean|void;
   initialValues?: D;
-  hasSubmit?: Boolean;
+  hasSubmit?: ((componentData: D) => boolean) | boolean;
 };
 
 export type FormBodyProps<D> = ContextMenuFormProps & Options<D> & {
@@ -95,7 +95,9 @@ export const ContextMenuForm = <D extends object>(props: ContextMenuPropsType<D>
     >
       {({ formApi, formState }) => (
         <FormChrome
-          hasSubmit={hasSubmit && !formState.invalid}
+          hasSubmit={typeof hasSubmit === 'function'
+            ? hasSubmit(formState.values) && !formState.invalid
+            : hasSubmit && !formState.invalid}
           closeForm={() => callOnClose(formState.values)}
         >
           {typeof children === 'function'
