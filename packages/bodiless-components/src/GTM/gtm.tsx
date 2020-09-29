@@ -54,7 +54,7 @@ const createEditButtonOptions = (fields: EditableFields) : EditButtonOptions<any
       <>
         <ComponentFormTitle>GTM</ComponentFormTitle>
         {fields.map((field: EditableField) => (
-          <>
+          <ComponentFormFieldWrapper key={field.id}>
             <ComponentFormLabel htmlFor={field.fieldName}>{field.fieldTitle}</ComponentFormLabel>
             <ComponentFormText field={field.fieldName} id={field.id} />
             {field.description && (
@@ -62,7 +62,7 @@ const createEditButtonOptions = (fields: EditableFields) : EditButtonOptions<any
                 {field.description}
               </ComponentFormDescription>
             )}
-          </>
+          </ComponentFormFieldWrapper>
         ))}
       </>
     );
@@ -114,3 +114,4 @@ export const asBodilessGTMHelmet = (defaultDataLayer: DataLayer) => (
 };
 
 export default asBodilessGTMHelmet;
+ComponentFormFieldWrapper
