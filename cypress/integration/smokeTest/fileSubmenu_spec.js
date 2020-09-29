@@ -133,7 +133,7 @@ describe('File Submenu Smoke Tests', function () {
       .should('be.visible')
     cy.xpath(revertButton)
       .should('be.visible')
-    
+
     closeFileForm()
   }
 
@@ -148,7 +148,7 @@ describe('File Submenu Smoke Tests', function () {
       .should('be.visible')
     cy.xpath(revertButton)
       .should('not.exist')
-    
+
     closeFileForm()
   }
 
@@ -159,7 +159,7 @@ describe('File Submenu Smoke Tests', function () {
     cy.xpath(historyFormItems)
       .its('length')
       .should('be.gt', 3)
-    cy.xpath(historyFormSubmitButton)
+    cy.xpath(historyFormSubmitButton).should('not.exist')
     cy.xpath(historyFormCloseButton)
       .click()
   }

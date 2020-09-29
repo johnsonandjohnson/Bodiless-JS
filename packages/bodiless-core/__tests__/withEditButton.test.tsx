@@ -75,6 +75,7 @@ describe('withEditButton', () => {
       icon: 'test',
       // This is a bit of a hack to count the renders of the context menu item.
       label: itemRendered,
+      activateContext: false,
       renderForm: () => (
         <Text field="foo" />
       ),

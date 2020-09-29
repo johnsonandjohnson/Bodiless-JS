@@ -14,6 +14,7 @@
 
 import {
   useContext, useRef, EventHandler, useCallback,
+  useEffect,
 } from 'react';
 import { v1 } from 'uuid';
 import PageEditContext from './PageEditContext';
@@ -92,4 +93,50 @@ export const useGetter = <P extends any>(value: P): () => P => {
   const getter = useCallback(() => ref.current as P, []);
   ref.current = value;
   return getter;
+};
+
+/**
+ *
+ * Utility hook to detect click outside of the `ref` element and execute a callback.
+ * This HOC also adds an Escape button listner and will execute a callback on the `esc` keypress.
+ *
+ * Usage:
+ *
+ * ```js
+ * useClickOutside(ref, () => {
+ *   alert('Clicked outside');
+ * });
+ * ```
+ *
+ * @param ref Is a ref to the object we are clicking outside created via useRef() or createRef().
+ * @param callback A callback to execute when click outside is detected.
+ *
+ */
+export const useClickOutside = (
+  ref: React.MutableRefObject<any>,
+  callback: (e: KeyboardEvent | MouseEvent) => void,
+) => {
+  const escapeListener = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      callback(e);
+    }
+  }, []);
+
+  const clickListener = useCallback((e: MouseEvent) => {
+    // Prevent click outside when page loading overlay is active
+    if (e.target instanceof Element && e.target.id === 'page-overlay') return;
+    if (ref.current && !ref.current.contains(e.target)) {
+      callback(e);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.body.addEventListener('click', clickListener);
+    document.body.addEventListener('keyup', escapeListener);
+
+    return () => {
+      document.body.removeEventListener('click', clickListener);
+      document.body.removeEventListener('keyup', escapeListener);
+    };
+  });
 };
