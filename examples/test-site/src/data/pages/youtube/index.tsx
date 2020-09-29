@@ -16,7 +16,10 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../../../components/Layout';
-import { Reponsive16By9Youtube } from '../../../components/Youtube';
+import {
+  Reponsive16By9Youtube,
+  Reponsive16By9AutoPlayYoutube,
+} from '../../../components/Youtube';
 
 export default (props: any) => (
   <Page {...props}>
@@ -24,6 +27,8 @@ export default (props: any) => (
       <h1 className="text-3xl font-bold">Youtube Demo</h1>
       <h2>Responsive youtube 16:9</h2>
       <Reponsive16By9Youtube nodeKey="youtube" />
+      <h2>Responsive Autoplay youtube 16:9</h2>
+      <Reponsive16By9AutoPlayYoutube nodeKey="autoplay" />
     </Layout>
   </Page>
 );

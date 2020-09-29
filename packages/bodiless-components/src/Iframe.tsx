@@ -20,8 +20,10 @@ import {
   useMenuOptionUI,
 } from '@bodiless/core';
 import type {
-  AsBodiless,
   BodilessOptions,
+  WithNodeKeyProps,
+  WithNodeProps,
+  EditButtonOptions,
 } from '@bodiless/core';
 import { addProps } from '@bodiless/fclasses';
 
@@ -85,11 +87,21 @@ const withSrcSnippet = withFormSnippet({
   },
 });
 
-const asBaseBodilessIframe: AsBodiless<Props, Data> = (
+// modification of AsBodiless type from @bodiless/core
+// so that allow passing Wrapper as a parameter
+type HOC<P, Q> = (Component: ComponentType<P>|string) => ComponentType<Q>;
+export type AsIframeBodiless<P, D> = (
+  nodeKeys?: WithNodeKeyProps,
+  defaultData?: D,
+  useOverrides?: ((props: P, options: EditButtonOptions<P, D>) => Partial<EditButtonOptions<P, D>>),
+  Wrapper?: ComponentType<any> | string,
+) => HOC<P, P & Partial<WithNodeProps>>;
+
+const asBaseBodilessIframe: AsIframeBodiless<Props, Data> = (
   nodeKeys?,
   defaultData?,
   useOverrides?,
-  Wrapper?: ComponentType<any> | string,
+  Wrapper?,
 ) => flowRight(
   ifEditable(withoutPointerEvents),
   asBodilessComponent({
@@ -98,13 +110,12 @@ const asBaseBodilessIframe: AsBodiless<Props, Data> = (
   })(nodeKeys, defaultData, useOverrides),
 );
 
-const asBodilessIframe: AsBodiless<Props, Data> = (
+const asBodilessIframe: AsIframeBodiless<Props, Data> = (
   nodeKeys?,
   defaultData?,
   useOverrides?,
   Wrapper?: ComponentType<any> | string,
 ) => flowRight(
-  // @ts-ignore
   asBaseBodilessIframe(nodeKeys, defaultData, useOverrides, Wrapper),
   withHeightSnippet,
   withSrcSnippet,

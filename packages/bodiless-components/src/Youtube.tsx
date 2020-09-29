@@ -14,13 +14,13 @@
 
 import React, { useCallback, ComponentType } from 'react';
 import { useMenuOptionUI } from '@bodiless/core';
-import type { AsBodiless } from '@bodiless/core';
 import { flowRight } from 'lodash';
 import withFormSnippet from './withFormSnippet';
 import { asBaseBodilessIframe, withHeightSnippet } from './Iframe';
 import type {
   Props as IframeProps,
   Data as IframeData,
+  AsIframeBodiless,
 } from './Iframe';
 
 type YoutubePlayerSettings = {
@@ -94,15 +94,14 @@ const withYoutubeSrcSnippet = withFormSnippet({
   },
 });
 
-const asBaseBodilessYoutube: AsBodiless<IframeProps, IframeData> = asBaseBodilessIframe;
+const asBaseBodilessYoutube: AsIframeBodiless<IframeProps, IframeData> = asBaseBodilessIframe;
 
-const asBodilessYoutube: AsBodiless<IframeProps, IframeData> = (
+const asBodilessYoutube: AsIframeBodiless<IframeProps, IframeData> = (
   nodeKeys?,
   defaultData?,
   useOverrides?,
   Wrapper?: ComponentType<any> | string,
 ) => flowRight(
-  // @ts-ignore
   asBaseBodilessYoutube(nodeKeys, defaultData, useOverrides, Wrapper),
   withHeightSnippet,
   withYoutubeSrcSnippet,

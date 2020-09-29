@@ -12,8 +12,9 @@
  * limitations under the License.
  */
 
-import { flowRight } from 'lodash';
-import { asBodilessYoutube } from '@bodiless/components';
+import { flowRight, identity } from 'lodash';
+import { ifReadOnly } from '@bodiless/core';
+import { asBodilessYoutube, withYoutubePlayerSettings } from '@bodiless/components';
 import { Embed } from '@bodiless/organisms';
 import {
   Iframe,
@@ -27,28 +28,42 @@ import { withPlaceholder } from '../Iframe';
 import { asResponsive16By9Embed } from '../Elements.token';
 
 const Wrapper = addClasses('absolute w-full h-full inset-0')(Div);
-const ResponsiveBodilessYoutube = asBodilessYoutube(
+const asBodilessYoutubeWithWrapper = asBodilessYoutube(
   undefined,
   undefined,
   undefined,
   Wrapper,
-)(Iframe);
+);
 
-const asResponsiveYoutube = withDesign({
+const asResponsiveYoutube = (settings?: object) => withDesign({
   Item: flowRight(
     withPlaceholder,
-    replaceWith(ResponsiveBodilessYoutube),
+    replaceWith(
+      flowRight(
+        asBodilessYoutubeWithWrapper,
+        settings ? ifReadOnly(withYoutubePlayerSettings(settings)) : identity,
+      )(Iframe),
+    ),
   ),
 });
 
-const asReponsive16By9Youtube = flowRight(
+const Reponsive16By9Youtube = flowRight(
   asResponsive16By9Embed,
-  asResponsiveYoutube,
-);
+  asResponsiveYoutube(),
+)(Embed);
 
-const Reponsive16By9Youtube = asReponsive16By9Youtube(Embed);
+const autoplaySettings = {
+  autoplay: true,
+  mute: true,
+};
+
+const Reponsive16By9AutoPlayYoutube = flowRight(
+  asResponsive16By9Embed,
+  asResponsiveYoutube(autoplaySettings),
+)(Embed);
 
 export {
-  asReponsive16By9Youtube,
+  asResponsiveYoutube,
   Reponsive16By9Youtube,
+  Reponsive16By9AutoPlayYoutube,
 };
