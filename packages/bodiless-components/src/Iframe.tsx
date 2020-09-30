@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ComponentType, HTMLProps } from 'react';
+import React, { HTMLProps } from 'react';
 
 import {
   asBodilessComponent,
@@ -21,9 +21,7 @@ import {
 } from '@bodiless/core';
 import type {
   BodilessOptions,
-  WithNodeKeyProps,
-  WithNodeProps,
-  EditButtonOptions,
+  AsBodiless,
 } from '@bodiless/core';
 import { addProps } from '@bodiless/fclasses';
 
@@ -48,6 +46,8 @@ const options: BodilessOptions<Props, Data> = {
   Wrapper: 'div',
   useCompoundForm: () => true,
 };
+
+const useIframeBodilessOptions = () => options;
 
 const withoutPointerEvents = addProps({
   style: {
@@ -87,43 +87,30 @@ const withSrcSnippet = withFormSnippet({
   },
 });
 
-// modification of AsBodiless type from @bodiless/core
-// so that allow passing Wrapper as a parameter
-type HOC<P, Q> = (Component: ComponentType<P>|string) => ComponentType<Q>;
-export type AsIframeBodiless<P, D> = (
-  nodeKeys?: WithNodeKeyProps,
-  defaultData?: D,
-  useOverrides?: ((props: P, options: EditButtonOptions<P, D>) => Partial<EditButtonOptions<P, D>>),
-  Wrapper?: ComponentType<any> | string,
-) => HOC<P, P & Partial<WithNodeProps>>;
-
-const asBaseBodilessIframe: AsIframeBodiless<Props, Data> = (
+const asBaseBodilessIframe: AsBodiless<Props, Data> = (
   nodeKeys?,
   defaultData?,
   useOverrides?,
-  Wrapper?,
 ) => flowRight(
   ifEditable(withoutPointerEvents),
-  asBodilessComponent({
-    ...options,
-    ...(Wrapper ? { Wrapper } : {}),
-  })(nodeKeys, defaultData, useOverrides),
+  asBodilessComponent(useIframeBodilessOptions())(nodeKeys, defaultData, useOverrides),
 );
 
-const asBodilessIframe: AsIframeBodiless<Props, Data> = (
+const asBodilessIframe: AsBodiless<Props, Data> = (
   nodeKeys?,
   defaultData?,
   useOverrides?,
-  Wrapper?: ComponentType<any> | string,
 ) => flowRight(
-  asBaseBodilessIframe(nodeKeys, defaultData, useOverrides, Wrapper),
-  withHeightSnippet,
+  asBaseBodilessIframe(nodeKeys, defaultData, useOverrides),
   withSrcSnippet,
+  withHeightSnippet,
 );
 
 export default asBodilessIframe;
 export {
   asBaseBodilessIframe,
-  withHeightSnippet,
-  withSrcSnippet,
+  withoutPointerEvents,
+  useIframeBodilessOptions,
+  withHeightSnippet as withIframeFormHeightSnippet,
+  withSrcSnippet as withIframeFormSrcSnippet,
 };

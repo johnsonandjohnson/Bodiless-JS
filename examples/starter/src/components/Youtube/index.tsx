@@ -14,33 +14,26 @@
 
 import { flowRight } from 'lodash';
 import { ifReadOnly } from '@bodiless/core';
-import { asBodilessYoutube, withYoutubePlayerSettings } from '@bodiless/components';
-import { Embed } from '@bodiless/organisms';
+import { withYoutubePlayerSettings } from '@bodiless/components';
 import {
-  Iframe,
-  Div,
+  Embed,
+  asResponsiveYoutube as asBaseResponsiveYoutube,
+} from '@bodiless/organisms';
+import {
   withDesign,
-  replaceWith,
-  addClasses,
 } from '@bodiless/fclasses';
 
 import { withPlaceholder } from '../Iframe';
 import { asResponsive16By9Embed } from '../Elements.token';
 
-const Wrapper = addClasses('absolute w-full h-full inset-0')(Div);
-const asBodilessYoutubeWithWrapper = asBodilessYoutube(
-  undefined,
-  undefined,
-  undefined,
-  Wrapper,
+const asResponsiveYoutube = flowRight(
+  withDesign({
+    Item: flowRight(
+      withPlaceholder,
+    ),
+  }),
+  asBaseResponsiveYoutube,
 );
-
-const asResponsiveYoutube = withDesign({
-  Item: flowRight(
-    withPlaceholder,
-    replaceWith(asBodilessYoutubeWithWrapper(Iframe)),
-  ),
-});
 
 const asReponsive16By9Youtube = flowRight(
   asResponsive16By9Embed,

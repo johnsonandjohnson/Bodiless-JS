@@ -39,8 +39,18 @@ import { withToggle, withToggleTo, withToggleButton } from './Toggle';
 import withEditPlaceholder from './Placeholder';
 import { TagButtonProps, withTagButton, useTagsAccessors } from './TagButton';
 import withFilterByTags from './withFilterByTags';
-import asBodilessIframe from './Iframe';
-import Youtube, { asBodilessYoutube, withYoutubePlayerSettings } from './Youtube';
+import asBodilessIframe, {
+  withoutPointerEvents,
+  withIframeFormHeightSnippet,
+  withIframeFormSrcSnippet,
+  useIframeBodilessOptions,
+} from './Iframe';
+import Youtube, {
+  asBodilessYoutube,
+  withYoutubePlayerSettings,
+  withYoutubeFormSrcSnippet,
+  withYoutubePlayerTransformer,
+} from './Youtube';
 import PageDimensionsProvider, {
   usePageDimensionsContext,
   withPageDimensionsContext,
@@ -86,8 +96,14 @@ export {
   withFilterByTags,
   useTagsAccessors,
   asBodilessIframe,
+  withoutPointerEvents,
+  withIframeFormHeightSnippet,
+  withIframeFormSrcSnippet,
+  useIframeBodilessOptions,
   asBodilessYoutube,
   withYoutubePlayerSettings,
+  withYoutubePlayerTransformer,
+  withYoutubeFormSrcSnippet,
   Youtube,
   PageDimensionsProvider,
   usePageDimensionsContext,

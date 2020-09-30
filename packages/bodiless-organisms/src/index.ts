@@ -102,3 +102,12 @@ export {
   asResponsive4By3Embed,
   asResponsive1By1Embed,
 } from './components/Embed.tokens';
+
+export {
+  asBaseResponsiveIframe,
+  asResponsiveIframe,
+} from './components/ResponsiveIframe';
+export {
+  asBaseResponsiveYoutube,
+  asResponsiveYoutube,
+} from './components/ResponsiveYoutube';

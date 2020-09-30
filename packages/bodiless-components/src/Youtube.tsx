@@ -15,13 +15,13 @@
 import React, { useCallback, ComponentType } from 'react';
 import { flowRight } from 'lodash';
 import { useMenuOptionUI } from '@bodiless/core';
+import type { AsBodiless } from '@bodiless/core';
 import { addProps } from '@bodiless/fclasses';
 import withFormSnippet from './withFormSnippet';
-import { asBaseBodilessIframe, withHeightSnippet } from './Iframe';
+import { asBaseBodilessIframe } from './Iframe';
 import type {
   Props as IframeProps,
   Data as IframeData,
-  AsIframeBodiless,
 } from './Iframe';
 
 type YoutubePlayerSettings = {
@@ -56,7 +56,7 @@ const withYoutubePlayerSettings = (
 });
 
 const withYoutubePlayerTransformer = (Component: ComponentType<any>) => {
-  const WithYoutubePlayerSettings = (props: any) => {
+  const WithYoutubePlayerTransformer = (props: any) => {
     const { playerSettings, src, ...rest } = props;
     const videoId = extractVideoIdFromUrl(src);
     const src$ = `https://www.youtube.com/embed/${videoId}`;
@@ -69,11 +69,11 @@ const withYoutubePlayerTransformer = (Component: ComponentType<any>) => {
     }
     return <Component {...rest} src={url} />;
   };
-  WithYoutubePlayerSettings.displayName = 'WithYoutubePlayerSettings';
-  return WithYoutubePlayerSettings;
+  WithYoutubePlayerTransformer.displayName = 'WithYoutubePlayerTransformer';
+  return WithYoutubePlayerTransformer;
 };
 
-const withYoutubeSrcSnippet = withFormSnippet({
+const withYoutubeFormSrcSnippet = withFormSnippet({
   nodeKeys: 'src',
   defaultData: { src: '' },
   snippetOptions: {
@@ -108,18 +108,16 @@ const withYoutubeSrcSnippet = withFormSnippet({
   },
 });
 
-const asBaseBodilessYoutube: AsIframeBodiless<Props, IframeData> = asBaseBodilessIframe;
+const asBaseBodilessYoutube: AsBodiless<Props, IframeData> = asBaseBodilessIframe;
 
-const asBodilessYoutube: AsIframeBodiless<Props, IframeData> = (
+const asBodilessYoutube: AsBodiless<Props, IframeData> = (
   nodeKeys?,
   defaultData?,
   useOverrides?,
-  Wrapper?: ComponentType<any> | string,
 ) => flowRight(
-  asBaseBodilessYoutube(nodeKeys, defaultData, useOverrides, Wrapper),
-  withHeightSnippet,
-  withYoutubeSrcSnippet,
   withYoutubePlayerTransformer,
+  asBaseBodilessYoutube(nodeKeys, defaultData, useOverrides),
+  withYoutubeFormSrcSnippet,
 );
 
 const Youtube = asBodilessYoutube()('iframe');
@@ -129,5 +127,6 @@ export {
   asBaseBodilessYoutube,
   asBodilessYoutube,
   withYoutubePlayerSettings,
-  withYoutubeSrcSnippet,
+  withYoutubeFormSrcSnippet,
+  withYoutubePlayerTransformer,
 };
