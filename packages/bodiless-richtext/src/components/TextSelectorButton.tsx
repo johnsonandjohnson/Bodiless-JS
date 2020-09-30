@@ -65,6 +65,9 @@ const TextSelectorButton = ({
       visible={visible}
       placement="topLeft"
       overlayStyle={{ opacity: 1 }}
+      align={{
+        offset: [-40, -10],
+      }}
       overlay={() => (
 
         // error TS2604: JSX element type 'Overlay' does not have any construct or call signatures.
@@ -72,7 +75,9 @@ const TextSelectorButton = ({
         <Overlay>
           <TextSelectorContext.Provider value={textSelectorContextValue}>
             <CloseBtn onMouseDown={() => setVisible(false)} />
-            { children }
+            <div className="grid bg-white rounded p-2">
+              { children }
+            </div>
           </TextSelectorContext.Provider>
         </Overlay>
       )}
