@@ -12,8 +12,9 @@
  * limitations under the License.
  */
 
-export { default as Overlay } from './Overlay';
-export { default as CloseButton } from './CloseButton';
-export { default as ClickableWrapper } from './ClickableWrapper';
-export { default as PreviewWrapper } from './PreviewWrapper';
-export { default as TextSelectorWrapper } from './TextSelectorWrapper';
+import { Div } from '@bodiless/ui';
+import { addClasses } from '@bodiless/fclasses';
+
+const TextSelectorWrapper = addClasses('bl-grid bl-bg-white bl-rounded bl-p-2')(Div);
+
+export default TextSelectorWrapper;
