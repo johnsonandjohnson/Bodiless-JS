@@ -42,8 +42,8 @@ describe('Tout testing', function () {
   const imageIconXpath = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Image"]';
   const ctaButtonXpath = '//*[@id="tout-horizontal"]//a[@data-tout-element="link"]';
   const imageLinkXpath = '//div[@id="tout-horizontal"]//a[@data-tout-element="image-link"]';
-  var imageOrigPathRegex = new RegExp("images\/pages"+ pagePath + "[a-zA-Z0-9]+\/" + imageNameOriginal, "");
-  var imageUpdPathRegex = new RegExp("images\/pages" + pagePath + "[a-zA-Z0-9]+\/" + imageNameUpdated, "");
+  const imageOrigPathRegex = new RegExp("images\/pages"+ pagePath + "[a-zA-Z0-9]+\/" + imageNameOriginal, "");
+  const imageUpdPathRegex = new RegExp("images\/pages" + pagePath + "[a-zA-Z0-9]+\/" + imageNameUpdated, "");
 
   it('touts: 1 - filling in Title', () => {
     cy.xpath(titleXpath)
