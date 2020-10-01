@@ -57,7 +57,7 @@ const TextSelectorButton = ({
   children,
 }:props) => {
   const [visible, setVisible] = useState(false);
-  const { Overlay } = useUI();
+  const { Overlay, TextSelectorWrapper } = useUI();
   const textSelectorContextValue = { onClose: () => setVisible(false) };
 
   return (
@@ -75,9 +75,9 @@ const TextSelectorButton = ({
         <Overlay>
           <TextSelectorContext.Provider value={textSelectorContextValue}>
             <CloseBtn onMouseDown={() => setVisible(false)} />
-            <div className="grid bg-white rounded p-2">
+            <TextSelectorWrapper>
               { children }
-            </div>
+            </TextSelectorWrapper>
           </TextSelectorContext.Provider>
         </Overlay>
       )}
