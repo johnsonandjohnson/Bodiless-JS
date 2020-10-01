@@ -24,6 +24,7 @@ import {
   Blockquote,
   Strike,
   replaceWith,
+  Div,
 } from '@bodiless/fclasses';
 import {
   asBold,
@@ -79,8 +80,8 @@ const fullFeaturedDesign = {
   H2: asHeader2,
   H3: asHeader3,
   BlockQuote: flow(replaceWith(Blockquote), asBlockQuote, withQuoteBlockMeta),
-  CenterHeader: flow(asHeader1, asAlignCenter, asItalic),
-  UnderlineRightHeader: flow(asHeader1, asAlignRight, asUnderline),
+  CenterItalicHeader: flow(replaceWith(Div), asBlock, asHeader1, asAlignCenter, asItalic),
+  UnderlineRightHeader: flow(replaceWith(Div), asBlock, asHeader1, asAlignRight, asUnderline),
 };
 
 const EditorSimple = withDesign(simpleDesign)(RichText);
