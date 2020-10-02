@@ -76,7 +76,8 @@
     "docs:serve": "docsify serve ./doc",
     "docs": "run-s build:doc docs:serve",
     "psh-update": "node ./lib/scripts/bodiless-psh-update",
-    "psh-validate": "node ./lib/scripts/bodiless-psh-validate"
+    "psh-validate": "node ./lib/scripts/bodiless-psh-validate",
+    "search": "node ./lib/scripts/bodiless-search-index"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.0",

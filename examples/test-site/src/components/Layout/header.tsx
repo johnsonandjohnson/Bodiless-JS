@@ -21,7 +21,7 @@ import {
   Div,
 } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
-import Search from '../Search';
+import Search from '@bodiless/search';
 import ResponsiveMenu from '../Menus';
 import Logo from './logo';
 
