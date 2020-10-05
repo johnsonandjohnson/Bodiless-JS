@@ -13,15 +13,5 @@
  */
 
 import Search from './components/Search';
-import SearchTool from './SearchTool';
-import type { TSearchConf, TSearchIndexSettings } from './types';
 
-export {
-  Search,
-  SearchTool,
-};
-
-export type {
-  TSearchConf,
-  TSearchIndexSettings,
-};
+export default Search;

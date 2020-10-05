@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-import { SearchTool, TSearchIndexSettings } from '@bodiless/search';
-import type { TSearchConf } from '@bodiless/search';
+import SearchTool from '../SearchTool';
+import type { TSearchConf, TSearchIndexSettings } from '../types';
 // import fs from 'fs';
 // import Search from './components/Search';
 
@@ -28,9 +28,12 @@ const tool = new SearchTool(config);
   * - sourcePath: Valid data source folder.
   * - sourceType: Specified data file extensions for indexing.
   * - targetPath: Target folder for saving generated index file.
+  * - indexConfig: Document index configuration.
   */
 const settings: TSearchIndexSettings = {
   sourcePath: process.env.BODILESS_SEARCH_SOURCE_PATH || './public',
+
+  // @todo: make this configurable.
   sourceTypes: ['html'],
   targetPath: './public/lunr.idx',
   indexConfig: { ref: 'id', fields: [{ name: 'title' }, { name: 'body' }] },

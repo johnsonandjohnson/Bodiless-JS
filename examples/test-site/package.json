@@ -59,12 +59,13 @@
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "scripts": {
-    "build": "npm-run-all build:env-vars build:lib build:scripts build:doc psh-validate",
+    "build": "npm-run-all build:env-vars build:lib build:scripts build:doc psh-validate build:search",
     "build:watch": "run-p -r dev-frontend dev-backend",
     "build:lib": "bl-clear-logs && gatsby build && bl-validate-logs",
     "build:doc": "bl-docs-build",
     "build:scripts": "tsc -p ./tsconfig.json",
     "build:env-vars": "generate-env-vars",
+    "build:search": "npm run search-index",
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "rimraf ./public/* ./.cache",
     "dev-backend": "node ./node_modules/@bodiless/backend/src/server.js",
@@ -78,7 +79,7 @@
     "docs": "run-s build:doc docs:serve",
     "psh-update": "node ./lib/scripts/bodiless-psh-update",
     "psh-validate": "node ./lib/scripts/bodiless-psh-validate",
-    "search": "node ./lib/scripts/bodiless-search-index"
+    "search-index": "node ./node_modules/@bodiless/search/lib/scripts/bodiless-search-index.js"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.0",
