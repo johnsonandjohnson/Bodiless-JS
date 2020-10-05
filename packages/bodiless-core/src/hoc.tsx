@@ -13,9 +13,12 @@
  */
 
 import { observer } from 'mobx-react-lite';
-import React, { ComponentType as CT, EventHandler, FC } from 'react';
+import React, {
+  ComponentType as CT, EventHandler, FC,
+  useRef,
+} from 'react';
 import { flowRight, omit, pick } from 'lodash';
-import { useContextActivator, useExtendHandler } from './hooks';
+import { useContextActivator, useExtendHandler, useClickOutside } from './hooks';
 import { useNodeDataHandlers } from './NodeProvider';
 import withNode from './withNode';
 import LocalContextMenu from './components/LocalContextMenu';
@@ -108,20 +111,32 @@ export const withNodeAndHandlers = (defaultData?: any) => flowRight(
   withNodeDataHandlers(defaultData),
 );
 
-// type OnClickElsewhereProps = {
-//   onClickElsewhere: Function,
-// };
+export type ClickOutsideProps = {
+  onClickOutside?: (e: KeyboardEvent | MouseEvent) => void;
+};
 
-// export const withOnClickElsewhere = <P extends object>(Component: ComponentType<P>|string) => (
-//  const WithOnClickElsewhere = (props: P & OnClickElsewhereProps) => {
-//    const { onClickElsewhere } = props;
-//    const ref = useRef();
-//    const handler = useCallback((e: MouseEvent) => {
-//      const target = e.target;
-//
-//    }
-//    useEffect(() => {
-//      document
-//    }
-//  }
-// )
+/**
+ * Utility hoc to add onClickOutside handler to the original component.
+ * A callback will be executed on both click outside as well as on the `esc` keypress.
+ *
+ * @return An HOC which will add the handler.
+ */
+export const withClickOutside = <P extends object>(Component: CT<P> | string) => {
+  const WithClickOutside = (props: P & ClickOutsideProps) => {
+    const { onClickOutside } = props;
+    const ref = useRef(null);
+
+    // Only add listners if onClickOutside handler is defined
+    if (typeof onClickOutside === 'function') {
+      useClickOutside(ref, onClickOutside);
+    }
+
+    return (
+      <div ref={ref}>
+        <Component {...props} />
+      </div>
+    );
+  };
+
+  return WithClickOutside;
+};

@@ -64,7 +64,7 @@ const SortableResizable = observer(({ children, ui, ...props }: SortableResizabl
   // @ts-ignore
   return (
     <Wrapper
-      isEnabled={context.isActive && !context.areLocalTooltipsDisabled}
+      isEnabled={context.isActive}
       {...useContextActivator()}
       {...props}
     >

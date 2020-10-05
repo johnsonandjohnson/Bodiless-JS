@@ -24,6 +24,7 @@ import {
   Overlay,
   ClickableWrapper,
   PreviewWrapper,
+  TextSelectorWrapper,
 } from './components';
 
 const ui = {
@@ -33,6 +34,7 @@ const ui = {
   CloseButton,
   ClickableWrapper,
   PreviewWrapper,
+  TextSelectorWrapper,
 };
 
 const RichText = <P extends object, D extends object>(props: P & RichTextProps<D>) => (

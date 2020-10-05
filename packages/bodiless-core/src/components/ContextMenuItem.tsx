@@ -33,6 +33,11 @@ const ContextMenuItem = observer((props: IProps) => {
   const isHidden = option.isHidden ? (typeof option.isHidden === 'function' ? option.isHidden() : option.isHidden) : false;
   const label = option.label ? (typeof option.label === 'function' ? option.label() : option.label) : '';
   const icon = option.icon ? (typeof option.icon === 'function' ? option.icon() : option.icon) : '';
+  const activateContext = option.activateContext
+    ? (typeof option.activateContext === 'function'
+      ? option.activateContext()
+      : option.activateContext)
+    : option.activateContext !== false;
 
   const isFirst = index === 0;
   const setRenderForm = useContextMenuContext().setRenderForm || setRenderForm$;
@@ -41,7 +46,8 @@ const ContextMenuItem = observer((props: IProps) => {
   const onToolbarButtonClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     const menuForm = option.handler ? option.handler(event) : undefined;
     if (menuForm) {
-      if (!option.local) context.toggleLocalTooltipsDisabled(true);
+      if (activateContext) context.activate();
+      if (!option.local) context.toggleLocalTooltipsDisabled(!context.areLocalTooltipsDisabled);
       setIsToolTipShown(!isToolTipShown);
       // We have to pass a function to setRenderForm b/c menuForm is itself a function
       // (a render prop) and, when a function is passed to setState, react interprets
