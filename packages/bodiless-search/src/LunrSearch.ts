@@ -13,7 +13,9 @@
  */
 
 import lunr, { Builder } from 'lunr';
-import { SearchEngineInterface, TDocument, TIndexConfig } from './types';
+import {
+  SearchEngineInterface, TDocument, TIndexConfig, TPreview,
+} from './types';
 
 /**
  * Wrapper class for Lunr static site search engine.
@@ -75,9 +77,30 @@ class LunrSearch implements SearchEngineInterface {
   };
 
   /**
+   * Create index preview JSON object.
+   */
+  private createPreview = (): { [key: string]: TPreview; } => {
+    const previews: { [key: string]: TPreview; } = {};
+    this.documents.forEach(doc => {
+      const { id, link, title } = doc;
+      const preview = {
+        id,
+        link,
+        title,
+      };
+      previews[id] = preview;
+    });
+
+    return previews;
+  };
+
+  /**
    * Export serialized index.
    */
-  exportIndex = (index: lunr.Index): string => JSON.stringify(index.toJSON());
+  exportIndex = (): string => JSON.stringify({
+    idx: this.createIndex().toJSON(),
+    preview: this.createPreview(),
+  });
 }
 
 export default LunrSearch;

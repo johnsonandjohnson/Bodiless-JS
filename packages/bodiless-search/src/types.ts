@@ -14,19 +14,22 @@
 
 import lunr from 'lunr';
 
-// export interface SearchableInterface {
-//   search: (queryString: string) => {},
-// }
+export interface SearchableInterface {
+  search: (queryString: string) => {},
+}
 
 export interface SearchEngineInterface {
   getEngineName: () => string,
   getIndexConfig: () => TIndexConfig | null,
   setIndexConfig: (conf: TIndexConfig) => void,
   createIndex: () => lunr.Index,
-  exportIndex: (index: lunr.Index) => string,
+  exportIndex: () => string,
+  addDocuments: (doc: TDocument | TDocument[]) => void,
 }
 
 export type TDocument = { [key: string]: string; };
+
+export type TPreview = { [key: string]: string; };
 
 export type TSearchConf = {
   searchEngine?: SearchEngineInterface,
@@ -52,7 +55,8 @@ export type TIndexConfig = {
 };
 
 export type TSearchIndexSettings = {
-  sourcePath: string | string[],
-  sourceType: string[],
+  sourcePath: string,
+  sourceTypes: string[],
   targetPath: string,
+  indexConfig: TIndexConfig,
 };
