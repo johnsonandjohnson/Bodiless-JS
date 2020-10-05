@@ -51,8 +51,8 @@ const asPrimaryColorBackground = addClasses('bg-gray-200');
 const asTextColorPrimary = addClasses('text-black');
 
 /* Typography */
-const asBold = addClasses('');
-const asItalic = addClasses('');
+const asBold = addClasses('font-bold');
+const asItalic = addClasses('italic');
 const asLink = addClasses('text-blue-700 underline');
 const asStrikeThrough = addClasses('');
 const asSuperScript = addClasses('');
