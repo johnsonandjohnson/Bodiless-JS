@@ -52,7 +52,8 @@ class SearchTool {
     this.searchEngine.addDocuments(documents);
 
     const ind = this.searchEngine.exportIndex();
-    fs.writeFile(targetPath, ind, 'utf8', err => {
+    const targetPath$ = path.resolve(process.cwd(), targetPath);
+    fs.writeFile(targetPath$, ind, 'utf8', err => {
       if (err) throw err;
     });
 
