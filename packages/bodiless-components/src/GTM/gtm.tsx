@@ -19,23 +19,20 @@ import { HelmetProps } from 'react-helmet';
 import * as _ from 'lodash';
 import { withHeadElement } from '../Meta/Meta';
 
-// type GtmEventData = {
-//   content: string;
-// };
-//
-// type GtmDefaultPageData = {
-//   event: string;
-//   page: object;
-// };
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
   let result = `window.${dataLayerName} = window.${dataLayerName} || [];`;
 
   if (dataLayer !== undefined) {
-    result += `window.${dataLayerName}.push(${JSON.stringify(dataLayer)});`;
+    result += `window.${dataLayerName} = (${JSON.stringify(dataLayer)});`;
   }
 
+  return stripIndent`${result}`;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const setDataLayerItem = (path: string, dataLayerName: string, content:any) => {
+  const result = `_.set(window.${dataLayerName},'${path}', ${JSON.stringify(content)});`;
   return stripIndent`${result}`;
 };
 
@@ -45,7 +42,7 @@ type Data = {
 };
 export type DataLayer = {
   dataLayerName: string
-  data?: any,
+  dataLayerData?: any,
 };
 
 type Props = BaseProps & Data & DataLayer;
@@ -66,18 +63,16 @@ const withDataLayer$ = (options: Options) => (
 ) => (props : Props) => {
   // @ts-ignore
   const {
-    dataLayerName, data, children, content, ...rest
+    dataLayerName, children, content, ...rest
   } = props;
   const { path } = options;
   console.log('props', props);
   console.log('options', options);
-  _.set(data, path, content);
-  console.log('content', content);
   return (
-    <HelmetComponent {...rest}>
+    <HelmetComponent dataLayerName={dataLayerName} {...rest}>
       {children}
       <script>
-        {generateDataLayer(data, dataLayerName)}
+        {setDataLayerItem(path, dataLayerName, content)}
       </script>
     </HelmetComponent>
   );
@@ -87,11 +82,12 @@ const withDataLayer = withHeadElement(withDataLayer$);
 
 /**
  * HOC that adds Default Datalayer to a Component
- * @param propsToAdd
  */
-export const withDefaultDataLayer = (dataLayer: DataLayer) => (
-  (HelmetComponent: CT<BaseProps>) => (
-    (props: Props) => (<HelmetComponent {...dataLayer} {...props} />)
-  )
+export const withDefaultDataLayer = ({ dataLayerName, dataLayerData }: DataLayer) => (
+  HelmetComponent: CT<BaseProps>,
+) => (props : any) => (
+  <HelmetComponent dataLayerName={dataLayerName} {...props}>
+    <script>{generateDataLayer(dataLayerData, dataLayerName)}</script>
+  </HelmetComponent>
 );
 export default withDataLayer;

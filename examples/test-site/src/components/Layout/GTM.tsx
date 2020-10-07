@@ -22,9 +22,10 @@ import {
 } from '@bodiless/components';
 import { useEditContext } from '@bodiless/core';
 
+const dataLayerName = 'DigitalData';
 const defaultDataLayer = {
-  dataLayerName: 'DigitalData',
-  data: [
+  dataLayerName,
+  dataLayerData: [
     {
       foo: 'foo value',
       bar: {
