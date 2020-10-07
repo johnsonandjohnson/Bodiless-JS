@@ -32,7 +32,9 @@ type SearchComponents = {
   SearchButton: ComponentType<any>;
 };
 
-const submitHandler = (data: any) => data;
+const submitHandler = () => {
+  // @todo: search logic
+};
 
 const searchComponents: SearchComponents = {
   SearchWrapper: Div,
