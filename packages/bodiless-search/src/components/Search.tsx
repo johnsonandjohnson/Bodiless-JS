@@ -28,14 +28,16 @@ import {
 
 type SearchComponents = {
   SearchWrapper: ComponentType<StylableProps>;
-  SearchBox: ComponentType<StylableProps>;
-  SearchButton: ComponentType<StylableProps>;
+  SearchBox: ComponentType<any>;
+  SearchButton: ComponentType<any>;
 };
+
+const submitHandler = (data: any) => data;
 
 const searchComponents: SearchComponents = {
   SearchWrapper: Div,
   SearchBox: Input,
-  SearchButton: Button,
+  SearchButton: (props: any) => (<Button {...props} onClick={submitHandler} />),
 };
 
 type Props = DesignableComponentsProps<SearchComponents> &
