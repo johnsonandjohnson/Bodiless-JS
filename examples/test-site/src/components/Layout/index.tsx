@@ -18,7 +18,7 @@ import { Div } from '@bodiless/fclasses';
 import Header from './header';
 import Footer from './footer';
 import SeoHelmet from './meta';
-import GTMDataLayerHelmet  from './GTM';
+import GTMDataLayerHelmet from './GTM';
 import { asPageContainer, asYMargin } from '../Elements.token';
 import { asSiteHeader, asSiteFooter } from './token';
 
