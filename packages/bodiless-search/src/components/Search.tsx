@@ -12,11 +12,45 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { Input } from '@bodiless/fclasses';
+import React, {
+  FunctionComponent as FC,
+  ComponentType,
+  HTMLProps,
+} from 'react';
+import {
+  Div,
+  Input,
+  Button,
+  StylableProps,
+  DesignableComponentsProps,
+  designable,
+} from '@bodiless/fclasses';
 
-const Search = () => (
-  <Input name="search" placeholder="Search" />
-);
+type SearchComponents = {
+  SearchWrapper: ComponentType<StylableProps>;
+  SearchBox: ComponentType<StylableProps>;
+  SearchButton: ComponentType<StylableProps>;
+};
+
+const searchComponents: SearchComponents = {
+  SearchWrapper: Div,
+  SearchBox: Input,
+  SearchButton: Button,
+};
+
+type Props = DesignableComponentsProps<SearchComponents> &
+HTMLProps<HTMLElement>;
+
+const SearchBase: FC<Props> = ({ components }) => {
+  const { SearchWrapper, SearchBox, SearchButton } = components;
+  return (
+    <SearchWrapper>
+      <SearchBox />
+      <SearchButton />
+    </SearchWrapper>
+  );
+};
+
+const Search = designable(searchComponents)(SearchBase) as ComponentType<Props>;
 
 export default Search;

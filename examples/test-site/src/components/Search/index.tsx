@@ -12,17 +12,38 @@
  * limitations under the License.
  */
 import { flow } from 'lodash';
-import { Search as SearchClean } from '@bodiless/components';
+import React, { ComponentType } from 'react';
+import SearchClean from '@bodiless/search';
 import {
   addClasses,
+  withDesign,
+  stylable,
 } from '@bodiless/fclasses';
 
-const asRedText = addClasses('text-red-300');
-const asPrimaryHeader = addClasses('font-bold text-3xl');
+const Icon = flow(
+  addClasses('material-icons cursor-pointer align-middle'),
+)(stylable((props: any) => (<i {...props}>{props.children}</i>)));
+
+const withIcon = (icon: string) => (Component: ComponentType) => () => (
+  <Component>
+    <Icon>{icon}</Icon>
+  </Component>
+);
+const withSearchButton = (icon: string) => flow(
+  withIcon(icon),
+);
+
+const searchDesign = {
+  SearchBox: addClasses('px-2 align-middle text-1xl'),
+  SearchButton: withSearchButton('search'),
+};
+
+const asSimpleSearch = withDesign(searchDesign);
+
+// withPlaceholder
 
 const Search = flow(
-  asPrimaryHeader,
-  asRedText,
+  asSimpleSearch,
 )(SearchClean);
 
 export default Search;

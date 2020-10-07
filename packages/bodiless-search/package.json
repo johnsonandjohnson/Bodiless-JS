@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@bodiless/fclasses": "^0.0.56",
+    "axios": "^0.19.0",
     "cheerio": "^1.0.0-rc.3",
     "glob": "^7.1.6",
     "lunr": "^2.3.9",

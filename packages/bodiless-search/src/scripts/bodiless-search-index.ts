@@ -13,10 +13,9 @@
  * limitations under the License.
  */
 
+// @todo: use oclif/command
 import SearchTool from '../SearchTool';
 import type { TSearchConf, TSearchIndexSettings } from '../types';
-// import fs from 'fs';
-// import Search from './components/Search';
 
 const config: TSearchConf = {};
 
