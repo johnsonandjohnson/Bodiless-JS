@@ -31,8 +31,14 @@ const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const setDataLayerItem = (path: string, dataLayerName: string, content:any) => {
-  const result = `_.set(window.${dataLayerName},'${path}', ${JSON.stringify(content)});`;
+const setDataLayerItem = (
+  path: string,
+  dataLayerName: string,
+  content: any,
+) => {
+  const result = `_.set(window.${dataLayerName},'${path}', ${JSON.stringify(
+    content,
+  )});`;
   return stripIndent`${result}`;
 };
 
@@ -41,8 +47,8 @@ type Data = {
   content: string;
 };
 export type DataLayer = {
-  dataLayerName: string
-  dataLayerData?: any,
+  dataLayerName: string;
+  dataLayerData?: any;
 };
 
 type Props = BaseProps & Data & DataLayer;
@@ -54,13 +60,13 @@ type BasicOptions = {
 type Options = {
   label: string;
   path: string;
-  useFormElement?: () => CT<FieldProps<any, any>>,
+  useFormElement?: () => CT<FieldProps<any, any>>;
   placeholder?: string;
 } & BasicOptions;
 
-const withDataLayer$ = (options: Options) => (
-  HelmetComponent: CT<BaseProps>,
-) => (props : Props) => {
+const withDataLayer$ = (options: Options) => (HelmetComponent: CT<Props>) => (
+  props: Props,
+) => {
   // @ts-ignore
   const {
     dataLayerName, children, content, ...rest
@@ -69,11 +75,9 @@ const withDataLayer$ = (options: Options) => (
   console.log('props', props);
   console.log('options', options);
   return (
-    <HelmetComponent dataLayerName={dataLayerName} {...rest}>
+    <HelmetComponent content={content} dataLayerName={dataLayerName} {...rest}>
       {children}
-      <script>
-        {setDataLayerItem(path, dataLayerName, content)}
-      </script>
+      <script>{setDataLayerItem(path, dataLayerName, content)}</script>
     </HelmetComponent>
   );
 };
@@ -83,9 +87,10 @@ const withDataLayer = withHeadElement(withDataLayer$);
 /**
  * HOC that adds Default Datalayer to a Component
  */
-export const withDefaultDataLayer = ({ dataLayerName, dataLayerData }: DataLayer) => (
-  HelmetComponent: CT<BaseProps>,
-) => (props : any) => (
+export const withDefaultDataLayer = ({
+  dataLayerName,
+  dataLayerData,
+}: DataLayer) => (HelmetComponent: CT<BaseProps>) => (props: any) => (
   <HelmetComponent dataLayerName={dataLayerName} {...props}>
     <script>{generateDataLayer(dataLayerData, dataLayerName)}</script>
   </HelmetComponent>
