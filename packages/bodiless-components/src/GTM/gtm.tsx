@@ -23,7 +23,7 @@ const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
   let result = `window.${dataLayerName} = window.${dataLayerName} || [];`;
 
   if (dataLayer !== undefined) {
-    result += `window.${dataLayerName} = (${JSON.stringify(dataLayer)});`;
+    result += `window.${dataLayerName}.push(${JSON.stringify(dataLayer)});`;
   }
 
   return stripIndent`${result}`;
@@ -35,7 +35,7 @@ const setDataLayerItem = (
   dataLayerName: string,
   content: any,
 ) => {
-  const result = `_.set(window.${dataLayerName},'${path}', ${JSON.stringify(
+  const result = `_.set(window.${dataLayerName},"${path}", ${JSON.stringify(
     content,
   )});`;
   return stripIndent`${result}`;
