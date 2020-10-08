@@ -14,50 +14,65 @@
 
 import { flowRight } from 'lodash';
 import { ifReadOnly } from '@bodiless/core';
-import { withYoutubePlayerSettings } from '@bodiless/components';
+import { withYouTubePlayerSettings } from '@bodiless/components';
 import {
   Embed,
-  asResponsiveYoutube as asBaseResponsiveYoutube,
+  asResponsiveYouTube as asBaseResponsiveYouTube,
 } from '@bodiless/organisms';
 import {
+  addProps,
   withDesign,
 } from '@bodiless/fclasses';
 
-import { withPlaceholder } from '../Iframe';
 import { asResponsive16By9Embed } from '../Elements.token';
 
-const asResponsiveYoutube = flowRight(
+const withPlaceholder = addProps({ src: 'https://www.youtube.com/embed/_LBdqpscwi0' });
+
+const asResponsiveYouTube = flowRight(
   withDesign({
     Item: flowRight(
       withPlaceholder,
     ),
   }),
-  asBaseResponsiveYoutube,
+  asBaseResponsiveYouTube,
 );
 
-const asReponsive16By9Youtube = flowRight(
+const asReponsive16By9YouTube = flowRight(
   asResponsive16By9Embed,
-  asResponsiveYoutube,
+  asResponsiveYouTube,
 );
 
-const Reponsive16By9Youtube = asReponsive16By9Youtube(Embed);
+const withYouTubeDefaults = withDesign({
+  Item: withYouTubePlayerSettings({
+    cc_load_policy: 0,
+    controls: 1,
+    loop: 0,
+    enablejsapi: 1,
+    modestbranding: 1,
+    rel: 0,
+  }),
+});
+
+const Reponsive16By9YouTube = asReponsive16By9YouTube(Embed);
+const DefaultReponsive16By9YouTube = withYouTubeDefaults(Reponsive16By9YouTube);
 
 const withAutoPlay = withDesign({
   Item: ifReadOnly(
-    withYoutubePlayerSettings({
+    withYouTubePlayerSettings({
       autoplay: true,
       mute: true,
     }),
   ),
 });
 
-const Reponsive16By9AutoPlayYoutube = flowRight(
+const Reponsive16By9AutoPlayYouTube = flowRight(
   withAutoPlay,
-  asReponsive16By9Youtube,
+  asReponsive16By9YouTube,
 )(Embed);
 
 export {
-  asResponsiveYoutube,
-  Reponsive16By9Youtube,
-  Reponsive16By9AutoPlayYoutube,
+  asResponsiveYouTube,
+  Reponsive16By9YouTube,
+  Reponsive16By9AutoPlayYouTube,
+  DefaultReponsive16By9YouTube,
 };

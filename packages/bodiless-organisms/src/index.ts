@@ -108,6 +108,6 @@ export {
   asResponsiveIframe,
 } from './components/ResponsiveIframe';
 export {
-  asBaseResponsiveYoutube,
-  asResponsiveYoutube,
-} from './components/ResponsiveYoutube';
+  asBaseResponsiveYouTube,
+  asResponsiveYouTube,
+} from './components/ResponsiveYouTube';

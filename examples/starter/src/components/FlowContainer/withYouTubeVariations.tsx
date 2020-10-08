@@ -22,15 +22,15 @@ import {
   withDesign,
 } from '@bodiless/fclasses';
 
-import { Reponsive16By9Youtube } from '../Youtube';
+import { DefaultReponsive16By9YouTube } from '../YouTube';
 import { withType } from './Categories';
 
 const youtubeVariation = {
-  Youtube: flow(
-    replaceWith(Reponsive16By9Youtube),
-    withType('Youbube')(),
-    withTitle('Youtube'),
-    withDesc('Responsive 16:9 youtube.'),
+  YouTube: flow(
+    replaceWith(DefaultReponsive16By9YouTube),
+    withType('YouTube')(),
+    withTitle('YouTube'),
+    withDesc('Responsive 16:9 YouTube.'),
   ),
 };
 

@@ -29,15 +29,15 @@ export default (props: any) => (
   <Page {...props}>
     <Layout>
       <h1 className="text-3xl font-bold">iFrame Demo</h1>
-      <h2>Iframe with responive width</h2>
+      <h2 className="text-xl font-bold my-4">Iframe with responsive width</h2>
       <IframeWithResponsiveWidth nodeKey="iframe" />
-      <h2>Responsive iframe 21:9</h2>
+      <h2 className="text-xl font-bold my-4">Responsive iframe 21:9</h2>
       <Reponsive21By9Iframe nodeKey="iframe21by9" />
-      <h2>Responsive iframe 16:9</h2>
+      <h2 className="text-xl font-bold my-4">Responsive iframe 16:9</h2>
       <Reponsive16By9Iframe nodeKey="iframe16by9" />
-      <h2>Responsive iframe 4:3</h2>
+      <h2 className="text-xl font-bold my-4">Responsive iframe 4:3</h2>
       <Reponsive4By3Iframe nodeKey="iframe4by3" />
-      <h2>Responsive iframe 1:1</h2>
+      <h2 className="text-xl font-bold my-4">Responsive iframe 1:1</h2>
       <Reponsive1By1Iframe nodeKey="iframe1by1" />
     </Layout>
   </Page>

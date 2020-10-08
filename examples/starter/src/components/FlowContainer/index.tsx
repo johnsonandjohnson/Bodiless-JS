@@ -18,7 +18,7 @@ import withToutVariations from './withToutVariations';
 import withRichTextVariations from './withRichTextVariations';
 import withImageVariations from './withImageVariations';
 import withIframeVariations from './withIframeVariations';
-import withYoutubeVariations from './withYoutubeVariations';
+import withYouTubeVariations from './withYouTubeVariations';
 
 import { asFlowContainerWithMargins } from './token';
 
@@ -30,7 +30,7 @@ const FlowContainerDefault = flow(
   withToutVariations,
   asFlowContainerWithMargins,
   withIframeVariations,
-  withYoutubeVariations,
+  withYouTubeVariations,
   withMandatoryCategories(['Orientation', 'Type']),
 )(FlowContainer);
 

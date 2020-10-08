@@ -17,18 +17,18 @@ import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../../../components/Layout';
 import {
-  Reponsive16By9Youtube,
-  Reponsive16By9AutoPlayYoutube,
-} from '../../../components/Youtube';
+  DefaultReponsive16By9YouTube,
+  Reponsive16By9AutoPlayYouTube,
+} from '../../../components/YouTube';
 
 export default (props: any) => (
   <Page {...props}>
     <Layout>
-      <h1 className="text-3xl font-bold">Youtube Demo</h1>
-      <h2>Responsive youtube 16:9</h2>
-      <Reponsive16By9Youtube nodeKey="youtube" />
-      <h2>Responsive Autoplay youtube 16:9</h2>
-      <Reponsive16By9AutoPlayYoutube nodeKey="autoplay" />
+      <h1 className="text-3xl font-bold">YouTube Demo</h1>
+      <h2 className="text-xl font-bold my-4">Responsive youtube 16:9</h2>
+      <DefaultReponsive16By9YouTube nodeKey="youtube" />
+      <h2 className="text-xl font-bold my-4">Responsive Autoplay youtube 16:9</h2>
+      <Reponsive16By9AutoPlayYouTube nodeKey="autoplay" />
     </Layout>
   </Page>
 );

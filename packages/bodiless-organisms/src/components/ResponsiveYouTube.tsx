@@ -27,41 +27,41 @@ import {
 import {
   withoutPointerEvents,
   useIframeBodilessOptions,
-  withYoutubeFormSrcSnippet,
-  withYoutubePlayerTransformer,
+  withYouTubeFormSrcSnippet,
+  withYouTubePlayerTransformer,
 } from '@bodiless/components';
 
 const ActivatorWrapper = addClasses('absolute w-full h-full inset-0')(Div);
-const asBodilessYoutube = asBodilessComponent({
+const asBodilessYouTube = asBodilessComponent({
   ...useIframeBodilessOptions(),
   Wrapper: ActivatorWrapper,
 });
 
-const asBaseResponsiveYoutube = withDesign({
+const asBaseResponsiveYouTube = withDesign({
   Item: flowRight(
     replaceWith(
       flowRight(
         ifEditable(withoutPointerEvents),
-        asBodilessYoutube(),
+        asBodilessYouTube(),
       )(Iframe),
     ),
   ),
 });
 
-const asResponsiveYoutube = withDesign({
+const asResponsiveYouTube = withDesign({
   Item: flowRight(
     replaceWith(
       flowRight(
         ifEditable(withoutPointerEvents),
-        asBodilessYoutube(),
-        withYoutubeFormSrcSnippet,
-        withYoutubePlayerTransformer,
+        asBodilessYouTube(),
+        withYouTubeFormSrcSnippet,
+        withYouTubePlayerTransformer,
       )(Iframe),
     ),
   ),
 });
 
 export {
-  asBaseResponsiveYoutube,
-  asResponsiveYoutube,
+  asBaseResponsiveYouTube,
+  asResponsiveYouTube,
 };

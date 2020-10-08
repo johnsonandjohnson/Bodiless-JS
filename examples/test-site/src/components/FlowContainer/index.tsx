@@ -20,7 +20,7 @@ import withRichTextVariations from './withRichTextVariations';
 import withSingleAccordionVariations from './withSingleAccordionVariations';
 import withImageVariations from './withImageVariations';
 import withIframeVariations from './withIframeVariations';
-import withYoububeVariations from './withYoutubeVariations';
+import withYouTubeVariations from './withYouTubeVariations';
 
 import { asFlowContainerWithMargins } from './token';
 
@@ -33,7 +33,7 @@ const FlowContainerDefault = flow(
   withContentfulTouts,
   withSingleAccordionVariations,
   withIframeVariations,
-  withYoububeVariations,
+  withYouTubeVariations,
   asFlowContainerWithMargins,
   withMandatoryCategories(['Orientation', 'Type']),
 )(FlowContainer);

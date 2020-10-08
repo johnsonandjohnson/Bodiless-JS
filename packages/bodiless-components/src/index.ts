@@ -45,12 +45,12 @@ import asBodilessIframe, {
   withIframeFormSrcSnippet,
   useIframeBodilessOptions,
 } from './Iframe';
-import Youtube, {
-  asBodilessYoutube,
-  withYoutubePlayerSettings,
-  withYoutubeFormSrcSnippet,
-  withYoutubePlayerTransformer,
-} from './Youtube';
+import YouTube, {
+  asBodilessYouTube,
+  withYouTubePlayerSettings,
+  withYouTubeFormSrcSnippet,
+  withYouTubePlayerTransformer,
+} from './YouTube';
 import PageDimensionsProvider, {
   usePageDimensionsContext,
   withPageDimensionsContext,
@@ -100,11 +100,11 @@ export {
   withIframeFormHeightSnippet,
   withIframeFormSrcSnippet,
   useIframeBodilessOptions,
-  asBodilessYoutube,
-  withYoutubePlayerSettings,
-  withYoutubePlayerTransformer,
-  withYoutubeFormSrcSnippet,
-  Youtube,
+  asBodilessYouTube,
+  withYouTubePlayerSettings,
+  withYouTubePlayerTransformer,
+  withYouTubeFormSrcSnippet,
+  YouTube,
   PageDimensionsProvider,
   usePageDimensionsContext,
   withPageDimensionsContext,

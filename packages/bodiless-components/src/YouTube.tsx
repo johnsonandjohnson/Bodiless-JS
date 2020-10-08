@@ -24,20 +24,20 @@ import type {
   Data as IframeData,
 } from './Iframe';
 
-type YoutubePlayerSettings = {
-  autoplay: boolean,
+type YouTubePlayerSettings = {
+  autoplay: boolean | 0 | 1,
   cc_lang_pref: string,
-  cc_load_policy: boolean,
-  controls: boolean,
-  loop: boolean,
-  enablejsapi: boolean,
-  modestbranding: boolean,
-  rel: boolean,
-  mute: boolean,
+  cc_load_policy: boolean | 0 | 1,
+  controls: boolean | 0 | 1,
+  loop: boolean | 0 | 1,
+  enablejsapi: boolean | 0 | 1,
+  modestbranding: boolean | 0 | 1,
+  rel: boolean | 0 | 1,
+  mute: boolean | 0 | 1,
 };
 
 type Props = IframeProps & {
-  playerSettings?: YoutubePlayerSettings,
+  playerSettings?: YouTubePlayerSettings,
 };
 
 // https://stackoverflow.com/a/9102270
@@ -47,16 +47,16 @@ const extractVideoIdFromUrl = (url: string) => {
   const match = url.match(regExp);
   return match && match[2].length === 11 ? match[2] : undefined;
 };
-const isValidYoutubeUrl = extractVideoIdFromUrl;
+const isValidYouTubeUrl = extractVideoIdFromUrl;
 
-const withYoutubePlayerSettings = (
-  settings: Partial<YoutubePlayerSettings>,
+const withYouTubePlayerSettings = (
+  settings: Partial<YouTubePlayerSettings>,
 ) => addProps({
   playerSettings: settings,
 });
 
-const withYoutubePlayerTransformer = (Component: ComponentType<any>) => {
-  const WithYoutubePlayerTransformer = (props: any) => {
+const withYouTubePlayerTransformer = (Component: ComponentType<any>) => {
+  const WithYouTubePlayerTransformer = (props: any) => {
     const { playerSettings, src, ...rest } = props;
     const videoId = extractVideoIdFromUrl(src);
     const src$ = `https://www.youtube.com/embed/${videoId}`;
@@ -69,11 +69,11 @@ const withYoutubePlayerTransformer = (Component: ComponentType<any>) => {
     }
     return <Component {...rest} src={url} />;
   };
-  WithYoutubePlayerTransformer.displayName = 'WithYoutubePlayerTransformer';
-  return WithYoutubePlayerTransformer;
+  WithYouTubePlayerTransformer.displayName = 'WithYouTubePlayerTransformer';
+  return WithYouTubePlayerTransformer;
 };
 
-const withYoutubeFormSrcSnippet = withFormSnippet({
+const withYouTubeFormSrcSnippet = withFormSnippet({
   nodeKeys: 'src',
   defaultData: { src: '' },
   snippetOptions: {
@@ -85,7 +85,7 @@ const withYoutubeFormSrcSnippet = withFormSnippet({
         ComponentFormWarning,
       } = useMenuOptionUI();
       const validate = useCallback(
-        (value: string) => (!value || !isValidYoutubeUrl(value)
+        (value: string) => (!value || !isValidYouTubeUrl(value)
           ? 'Invalid youtube URL specified.'
           : undefined),
         [],
@@ -108,25 +108,25 @@ const withYoutubeFormSrcSnippet = withFormSnippet({
   },
 });
 
-const asBaseBodilessYoutube: AsBodiless<Props, IframeData> = asBaseBodilessIframe;
+const asBaseBodilessYouTube: AsBodiless<Props, IframeData> = asBaseBodilessIframe;
 
-const asBodilessYoutube: AsBodiless<Props, IframeData> = (
+const asBodilessYouTube: AsBodiless<Props, IframeData> = (
   nodeKeys?,
   defaultData?,
   useOverrides?,
 ) => flowRight(
-  withYoutubePlayerTransformer,
-  asBaseBodilessYoutube(nodeKeys, defaultData, useOverrides),
-  withYoutubeFormSrcSnippet,
+  withYouTubePlayerTransformer,
+  asBaseBodilessYouTube(nodeKeys, defaultData, useOverrides),
+  withYouTubeFormSrcSnippet,
 );
 
-const Youtube = asBodilessYoutube()('iframe');
+const YouTube = asBodilessYouTube()('iframe');
 
-export default Youtube;
+export default YouTube;
 export {
-  asBaseBodilessYoutube,
-  asBodilessYoutube,
-  withYoutubePlayerSettings,
-  withYoutubeFormSrcSnippet,
-  withYoutubePlayerTransformer,
+  asBaseBodilessYouTube,
+  asBodilessYouTube,
+  withYouTubePlayerSettings,
+  withYouTubeFormSrcSnippet,
+  withYouTubePlayerTransformer,
 };

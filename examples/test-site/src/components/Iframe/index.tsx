@@ -32,7 +32,7 @@ import {
   asResponsive1By1Embed,
 } from '../Elements.token';
 
-const withPlaceholder = addProps({ src: 'https://www.youtube.com/embed/_LBdqpscwi0' });
+const withPlaceholder = addProps({ src: 'https://johnsonandjohnson.github.io/Bodiless-JS/' });
 const BodilessIframe = withPlaceholder(asBodilessIframe()(Iframe));
 
 const withResponsiveWidth = addClasses('w-full');
