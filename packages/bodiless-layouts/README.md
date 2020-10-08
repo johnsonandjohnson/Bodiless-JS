@@ -164,7 +164,7 @@ There are two helper functions for `snapData`.
 
 ---
 
-#### Default Width (depricated)
+#### Default Width
 
 One can set the default width classes via the `defaultWidth` prop.  The prop is a function that will 
 be pass the snapData function.  It is expect to return a string of the starting classes
