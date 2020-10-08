@@ -14,7 +14,7 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import { getSnapFrom, withTailwindClasses } from '@bodiless/layouts';
+import { getSnapFrom, withTailwindClasses, asDefaultClasses } from '@bodiless/layouts';
 import {
   NodeViewer,
 } from '@bodiless/components';
@@ -62,31 +62,32 @@ const FlowContainerPage = (props: any) => (
       <FlowContainerDefault
         id="width_25"
         nodeKey="width_25"
-        defaultWidthClasses="w-full lg:w-1/4"
+        defaultWidth={asDefaultClasses('w-full lg:w-1/4')}
       />
       <h2 className="text-2xl font-bold mt-4">Default Width of 33% (should round up to 33.33%)</h2>
       <FlowContainerDefault
         id="width_33"
         nodeKey="width_33"
         defaultWidthClasses="w-full lg:w-1/3"
+        defaultWidth={asDefaultClasses('w-full lg:w-1/3')}
       />
       <h2 className="text-2xl font-bold mt-4">Default Width of 50%</h2>
       <FlowContainerDefault
         id="width_50"
         nodeKey="width_50"
-        defaultWidthClasses="w-full md:w-1/2"
+        defaultWidth={asDefaultClasses('w-full lg:w-1/2')}
       />
       <h2 className="text-2xl font-bold mt-4">Default Width of 66.66% </h2>
       <FlowContainerDefault
         id="width_66"
         nodeKey="width_66"
-        defaultWidthClasses="w-full lg:w-2/3"
+        defaultWidth={asDefaultClasses('w-full lg:w-2/3')}
       />
       <h2 className="text-2xl font-bold mt-4">Default Width of 75%</h2>
       <FlowContainerDefault
         id="width_75"
         nodeKey="width_75"
-        defaultWidthClasses="w-full lg:w-3/4"
+        defaultWidth={asDefaultClasses('w-full lg:w-3/4')}
       />
     </Layout>
   </Page>

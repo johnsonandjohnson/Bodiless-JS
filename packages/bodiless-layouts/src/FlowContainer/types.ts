@@ -31,8 +31,7 @@ export type StaticFlowContainerProps = {
 export type EditFlowContainerProps = StaticFlowContainerProps & {
   ui?: UI,
   snapData?: SnapData,
-  defaultWidth?: string|number,
-  defaultWidthClasses?: string,
+  defaultWidth?: (snapData: SnapData) => string;
   maxComponents?: number,
   mandatoryCategories?: string[],
 };
@@ -67,8 +66,7 @@ export type SortableChildProps = {
   children: React.ReactNode;
   ui?: SortableResizableUI;
   snapData?: SnapData;
-  defaultWidth?: string | number;
-  defaultWidthClasses?: | string;
+  defaultWidth?: (snapData: SnapData) => string;
   className?: string;
 };
 

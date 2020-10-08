@@ -31,7 +31,6 @@ const SortableChild = (props: SortableChildProps) => {
     flowContainerItem,
     snapData: snapRaw,
     defaultWidth,
-    defaultWidthClasses,
     className: classNameRaw,
     ...restProps
   } = props;
@@ -42,19 +41,13 @@ const SortableChild = (props: SortableChildProps) => {
     width: 0,
     className: '',
   });
-  const {
-    className: passedSnapClassName,
-  } = snap({
-    width: defaultWidth as number || 100,
-    className: '',
-  });
+  const passedSnapClassName = defaultWidth && defaultWidth(snap);
   // local classname is used to store intermidiary classname state,
   // so className is stored only onResizeStop
   // we are only getting a class from the default Width if we have a default width
   const [snapClassName, setSnapClassName] = useState(
     (flowContainerItem.wrapperProps && flowContainerItem.wrapperProps.className)
-      || (defaultWidth && passedSnapClassName)
-      || defaultWidthClasses
+      || passedSnapClassName
       || FALLBACK_SNAP_CLASSNAME,
   );
   // Store what with aligns with the current class
