@@ -27,6 +27,7 @@ import {
 import {
   withoutPointerEvents,
   useIframeBodilessOptions,
+  withYouTubeFormHeader,
   withYouTubeFormSrcSnippet,
   withYouTubePlayerTransformer,
 } from '@bodiless/components';
@@ -54,6 +55,7 @@ const asResponsiveYouTube = withDesign({
       flowRight(
         ifEditable(withoutPointerEvents),
         asBodilessYouTube(),
+        withYouTubeFormHeader,
         withYouTubeFormSrcSnippet,
         withYouTubePlayerTransformer,
       )(Iframe),

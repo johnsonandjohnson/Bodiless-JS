@@ -83,5 +83,4 @@ export {
   Reponsive16By9Iframe,
   Reponsive4By3Iframe,
   Reponsive1By1Iframe,
-  withPlaceholder,
 };

@@ -12,8 +12,7 @@
  * limitations under the License.
  */
 
-import React, { HTMLProps } from 'react';
-
+import React, { HTMLProps, useCallback } from 'react';
 import {
   asBodilessComponent,
   ifEditable,
@@ -27,6 +26,7 @@ import { addProps } from '@bodiless/fclasses';
 
 import { flowRight } from 'lodash';
 import withFormSnippet from './withFormSnippet';
+import withFormHeader from './withFormHeader';
 
 // Type of the data used by this component.
 export type Data = {
@@ -39,7 +39,7 @@ export type Props = HTMLProps<HTMLIFrameElement>;
 // Options used to create an edit button.
 const options: BodilessOptions<Props, Data> = {
   icon: 'settings',
-  label: 'Settings',
+  label: 'Config',
   name: 'Edit',
   global: false,
   local: true,
@@ -55,16 +55,37 @@ const withoutPointerEvents = addProps({
   },
 });
 
+const isNonNegativeNumber = (value: string) => /^\d+$/.test(value);
+
 const withHeightSnippet = withFormSnippet({
   nodeKeys: 'height',
   defaultData: { height: '' },
   snippetOptions: {
-    renderForm: () => {
-      const { ComponentFormLabel, ComponentFormText } = useMenuOptionUI();
+    renderForm: ({ formState }) => {
+      const { errors } = formState;
+      const {
+        ComponentFormLabel,
+        ComponentFormText,
+        ComponentFormWarning,
+      } = useMenuOptionUI();
+      const validate = useCallback(
+        (value: string) => (value && !isNonNegativeNumber(value)
+          ? 'Height must be a non-negative number.'
+          : undefined),
+        [],
+      );
       return (
         <React.Fragment key="height">
-          <ComponentFormLabel htmlFor="height">Height</ComponentFormLabel>
-          <ComponentFormText field="height" />
+          <ComponentFormLabel htmlFor="height">Height (in CSS px)</ComponentFormLabel>
+          <ComponentFormText
+            field="height"
+            validate={validate}
+            validateOnChange
+            validateOnBlur
+          />
+          {errors && errors.height && (
+            <ComponentFormWarning>{errors.height}</ComponentFormWarning>
+          )}
         </React.Fragment>
       );
     },
@@ -79,12 +100,16 @@ const withSrcSnippet = withFormSnippet({
       const { ComponentFormLabel, ComponentFormText } = useMenuOptionUI();
       return (
         <React.Fragment key="src">
-          <ComponentFormLabel htmlFor="src">Src</ComponentFormLabel>
+          <ComponentFormLabel htmlFor="src">URL</ComponentFormLabel>
           <ComponentFormText field="src" />
         </React.Fragment>
       );
     },
   },
+});
+
+const withIframeFormHeader = withFormHeader({
+  title: 'Iframe Config',
 });
 
 const asBaseBodilessIframe: AsBodiless<Props, Data> = (
@@ -102,6 +127,7 @@ const asBodilessIframe: AsBodiless<Props, Data> = (
   useOverrides?,
 ) => flowRight(
   asBaseBodilessIframe(nodeKeys, defaultData, useOverrides),
+  withIframeFormHeader,
   withSrcSnippet,
   withHeightSnippet,
 );
@@ -111,6 +137,7 @@ export {
   asBaseBodilessIframe,
   withoutPointerEvents,
   useIframeBodilessOptions,
+  withIframeFormHeader,
   withHeightSnippet as withIframeFormHeightSnippet,
   withSrcSnippet as withIframeFormSrcSnippet,
 };

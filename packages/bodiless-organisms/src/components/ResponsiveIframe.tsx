@@ -27,6 +27,7 @@ import {
 import {
   withoutPointerEvents,
   useIframeBodilessOptions,
+  withIframeFormHeader,
   withIframeFormSrcSnippet,
 } from '@bodiless/components';
 
@@ -53,6 +54,7 @@ const asResponsiveIframe = withDesign({
       flowRight(
         ifEditable(withoutPointerEvents),
         asBodilessIframe(),
+        withIframeFormHeader,
         withIframeFormSrcSnippet,
       )(Iframe),
     ),

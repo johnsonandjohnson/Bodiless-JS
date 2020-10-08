@@ -42,6 +42,7 @@ import withFilterByTags from './withFilterByTags';
 import asBodilessIframe, {
   asBaseBodilessIframe,
   withoutPointerEvents,
+  withIframeFormHeader,
   withIframeFormHeightSnippet,
   withIframeFormSrcSnippet,
   useIframeBodilessOptions,
@@ -49,10 +50,12 @@ import asBodilessIframe, {
 import YouTube, {
   asBaseBodilessYouTube,
   asBodilessYouTube,
+  withYouTubeFormHeader,
   withYouTubePlayerSettings,
   withYouTubeFormSrcSnippet,
   withYouTubePlayerTransformer,
 } from './YouTube';
+import type { YouTubePlayerSettings } from './YouTube';
 import PageDimensionsProvider, {
   usePageDimensionsContext,
   withPageDimensionsContext,
@@ -100,6 +103,7 @@ export {
   asBaseBodilessIframe,
   asBodilessIframe,
   withoutPointerEvents,
+  withIframeFormHeader,
   withIframeFormHeightSnippet,
   withIframeFormSrcSnippet,
   useIframeBodilessOptions,
@@ -108,6 +112,7 @@ export {
   withYouTubePlayerSettings,
   withYouTubePlayerTransformer,
   withYouTubeFormSrcSnippet,
+  withYouTubeFormHeader,
   YouTube,
   PageDimensionsProvider,
   usePageDimensionsContext,
@@ -124,4 +129,4 @@ export type {
   TitleProps as ListTitleProps,
   ListDesignableComponents,
 } from './List/types';
-export type { MetaFormFieldType };
+export type { MetaFormFieldType, YouTubePlayerSettings };

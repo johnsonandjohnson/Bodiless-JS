@@ -17,6 +17,7 @@ import { flowRight } from 'lodash';
 import { useMenuOptionUI } from '@bodiless/core';
 import type { AsBodiless } from '@bodiless/core';
 import { addProps } from '@bodiless/fclasses';
+import withFormHeader from './withFormHeader';
 import withFormSnippet from './withFormSnippet';
 import { asBaseBodilessIframe } from './Iframe';
 import type {
@@ -34,6 +35,7 @@ type YouTubePlayerSettings = {
   modestbranding: boolean | 0 | 1,
   rel: boolean | 0 | 1,
   mute: boolean | 0 | 1,
+  origin: string,
 };
 
 type Props = IframeProps & {
@@ -92,9 +94,10 @@ const withYouTubeFormSrcSnippet = withFormSnippet({
       );
       return (
         <React.Fragment key="src">
-          <ComponentFormLabel htmlFor="src">Src</ComponentFormLabel>
+          <ComponentFormLabel htmlFor="src">URL</ComponentFormLabel>
           <ComponentFormText
             field="src"
+            placeholder="https://"
             validate={validate}
             validateOnChange
             validateOnBlur
@@ -108,6 +111,10 @@ const withYouTubeFormSrcSnippet = withFormSnippet({
   },
 });
 
+const withYouTubeFormHeader = withFormHeader({
+  title: 'YouTube Config',
+});
+
 const asBaseBodilessYouTube: AsBodiless<Props, IframeData> = asBaseBodilessIframe;
 
 const asBodilessYouTube: AsBodiless<Props, IframeData> = (
@@ -116,6 +123,7 @@ const asBodilessYouTube: AsBodiless<Props, IframeData> = (
   useOverrides?,
 ) => flowRight(
   asBaseBodilessYouTube(nodeKeys, defaultData, useOverrides),
+  withYouTubeFormHeader,
   withYouTubeFormSrcSnippet,
   withYouTubePlayerTransformer,
 );
@@ -127,6 +135,8 @@ export {
   asBaseBodilessYouTube,
   asBodilessYouTube,
   withYouTubePlayerSettings,
+  withYouTubeFormHeader,
   withYouTubeFormSrcSnippet,
   withYouTubePlayerTransformer,
 };
+export type { YouTubePlayerSettings };

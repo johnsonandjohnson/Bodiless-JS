@@ -15,6 +15,7 @@
 import { flowRight } from 'lodash';
 import { ifReadOnly } from '@bodiless/core';
 import { withYouTubePlayerSettings } from '@bodiless/components';
+import type { YouTubePlayerSettings } from '@bodiless/components';
 import {
   Embed,
   asResponsiveYouTube as asBaseResponsiveYouTube,
@@ -42,15 +43,20 @@ const asReponsive16By9YouTube = flowRight(
   asResponsiveYouTube,
 );
 
+const getOrigin = () => process.env.SITE_URL || '';
+
+const defaultPlayerSettings: YouTubePlayerSettings = {
+  cc_load_policy: 0,
+  controls: 1,
+  loop: 0,
+  enablejsapi: 1,
+  modestbranding: 1,
+  rel: 0,
+  origin: getOrigin(),
+};
+
 const withYouTubeDefaults = withDesign({
-  Item: withYouTubePlayerSettings({
-    cc_load_policy: 0,
-    controls: 1,
-    loop: 0,
-    enablejsapi: 1,
-    modestbranding: 1,
-    rel: 0,
-  }),
+  Item: withYouTubePlayerSettings(defaultPlayerSettings),
 });
 
 const Reponsive16By9YouTube = asReponsive16By9YouTube(Embed);
@@ -67,6 +73,7 @@ const withAutoPlay = withDesign({
 
 const Reponsive16By9AutoPlayYouTube = flowRight(
   withAutoPlay,
+  withYouTubeDefaults,
   asReponsive16By9YouTube,
 )(Embed);
 
@@ -75,4 +82,5 @@ export {
   Reponsive16By9YouTube,
   Reponsive16By9AutoPlayYouTube,
   DefaultReponsive16By9YouTube,
+  defaultPlayerSettings,
 };

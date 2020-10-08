@@ -22,12 +22,12 @@ import {
   withDesign,
 } from '@bodiless/fclasses';
 
-import { Reponsive16By9Iframe } from '../Iframe';
+import { IframeWithResponsiveWidth } from '../Iframe';
 import { withType } from './Categories';
 
 const iframeVariation = {
   Iframe: flow(
-    replaceWith(Reponsive16By9Iframe),
+    replaceWith(IframeWithResponsiveWidth),
     withType('Iframe')(),
     withTitle('Iframe'),
     withDesc('Responsive 16:9 iframe.'),
