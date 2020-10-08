@@ -62,31 +62,31 @@ const FlowContainerPage = (props: any) => (
       <FlowContainerDefault
         id="width_25"
         nodeKey="width_25"
-        defaultWidth="25"
+        defaultWidthClasses="w-full lg:w-1/4"
       />
       <h2 className="text-2xl font-bold mt-4">Default Width of 33% (should round up to 33.33%)</h2>
       <FlowContainerDefault
         id="width_33"
         nodeKey="width_33"
-        defaultWidth="33"
+        defaultWidthClasses="w-full lg:w-1/3"
       />
       <h2 className="text-2xl font-bold mt-4">Default Width of 50%</h2>
       <FlowContainerDefault
         id="width_50"
         nodeKey="width_50"
-        defaultWidth="50"
+        defaultWidthClasses="w-full md:w-1/2"
       />
       <h2 className="text-2xl font-bold mt-4">Default Width of 66.66% </h2>
       <FlowContainerDefault
         id="width_66"
         nodeKey="width_66"
-        defaultWidth="66.66"
+        defaultWidthClasses="w-full lg:w-2/3"
       />
       <h2 className="text-2xl font-bold mt-4">Default Width of 75%</h2>
       <FlowContainerDefault
         id="width_75"
         nodeKey="width_75"
-        defaultWidth="75"
+        defaultWidthClasses="w-full lg:w-3/4"
       />
     </Layout>
   </Page>

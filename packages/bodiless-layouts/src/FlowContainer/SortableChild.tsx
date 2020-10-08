@@ -27,7 +27,13 @@ const FALLBACK_SNAP_CLASSNAME = 'w-full';
 
 const SortableChild = (props: SortableChildProps) => {
   const {
-    onResizeStop, flowContainerItem, snapData: snapRaw, defaultWidth, ...restProps
+    onResizeStop, 
+    flowContainerItem,
+    snapData: snapRaw,
+    defaultWidth,
+    defaultWidthClasses,
+    className: classNameRaw,
+    ...restProps
   } = props;
   const snap = snapRaw || defaultSnapData;
   const {
@@ -42,14 +48,23 @@ const SortableChild = (props: SortableChildProps) => {
     width: defaultWidth as number || 100,
     className: '',
   });
+  console.log("hi");
+  console.log(defaultWidthClasses);
   // local classname is used to store intermidiary classname state,
   // so className is stored only onResizeStop
+  // we are only getting a class from the default Width if we have a default width
   const [snapClassName, setSnapClassName] = useState(
     (flowContainerItem.wrapperProps && flowContainerItem.wrapperProps.className)
-      || passedSnapClassName
+      || (defaultWidth && passedSnapClassName)
+      || defaultWidthClasses
       || FALLBACK_SNAP_CLASSNAME,
   );
-
+  console.log(
+    (flowContainerItem.wrapperProps && flowContainerItem.wrapperProps.className)
+    || (defaultWidth && passedSnapClassName)
+    || defaultWidthClasses
+    || FALLBACK_SNAP_CLASSNAME,
+  );
   // Store what with aligns with the current class
   const [snapWidth, setSnapWidth] = useState('');
   // Store what size is being used we set the width so that re-sizeable uses percent when resizeing
@@ -92,11 +107,15 @@ const SortableChild = (props: SortableChildProps) => {
       () => {
         if (elm && elm.style.width === snapWidth) {
           elm.style.height = '';
+          elm.style.width = '';
         }
       },
       1,
     );
   });
+  console.log(snapClassName);
+  console.log(restProps);
+  const classNameOut = [...snapClassName.split(' '), ...(classNameRaw || '').split(' ')].join(' ');
   return (
     <SlateSortableResizable
       uuid={flowContainerItem.uuid}
@@ -109,7 +128,7 @@ const SortableChild = (props: SortableChildProps) => {
       })}
       size={size}
       minWidth={`${minWidth * 0.99}%`}
-      className={snapClassName}
+      className={classNameOut}
       {...restProps}
     />
   );

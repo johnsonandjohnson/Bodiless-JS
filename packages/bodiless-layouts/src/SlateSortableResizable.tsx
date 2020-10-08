@@ -80,6 +80,7 @@ const SlateSortableResizable = (props: Props) => {
     useGetMenuOptions,
     ...rest
   } = props;
+  console.log(rest.className);
 
   return (
     <PageContextProvider

@@ -164,13 +164,19 @@ There are two helper functions for `snapData`.
 
 ---
 
-#### Default Width
+#### Default Width (depricated)
 
 You can set the default width for a new item via the `defaultWidth` prop. This should be a number
 from 0-100 expressing the desired default width as a percentage. The actual default width will be
 the smallest *allowed* width which is greater than the value specified.  For example, if you set
 allowed widths of 50% and 100%, specifying `defaultWidth="51"` will give you an actual default width
 of 100%.
+
+#### Default Width Classes
+
+One can set the default width classes via the `defaultWidthClassses` prop.  This should be string of
+classes that are part of the snapData (e.g. "w-full lg:w-1/2").  If no value is used than a default
+of "w-full" will be used.
 
 ### Limit Number of Components
 
