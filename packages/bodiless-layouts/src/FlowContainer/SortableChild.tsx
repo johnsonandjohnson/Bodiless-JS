@@ -27,7 +27,7 @@ const FALLBACK_SNAP_CLASSNAME = 'w-full';
 
 const SortableChild = (props: SortableChildProps) => {
   const {
-    onResizeStop, 
+    onResizeStop,
     flowContainerItem,
     snapData: snapRaw,
     defaultWidth,
@@ -48,8 +48,6 @@ const SortableChild = (props: SortableChildProps) => {
     width: defaultWidth as number || 100,
     className: '',
   });
-  console.log("hi");
-  console.log(defaultWidthClasses);
   // local classname is used to store intermidiary classname state,
   // so className is stored only onResizeStop
   // we are only getting a class from the default Width if we have a default width
@@ -58,12 +56,6 @@ const SortableChild = (props: SortableChildProps) => {
       || (defaultWidth && passedSnapClassName)
       || defaultWidthClasses
       || FALLBACK_SNAP_CLASSNAME,
-  );
-  console.log(
-    (flowContainerItem.wrapperProps && flowContainerItem.wrapperProps.className)
-    || (defaultWidth && passedSnapClassName)
-    || defaultWidthClasses
-    || FALLBACK_SNAP_CLASSNAME,
   );
   // Store what with aligns with the current class
   const [snapWidth, setSnapWidth] = useState('');
@@ -113,8 +105,6 @@ const SortableChild = (props: SortableChildProps) => {
       1,
     );
   });
-  console.log(snapClassName);
-  console.log(restProps);
   const classNameOut = [...snapClassName.split(' '), ...(classNameRaw || '').split(' ')].join(' ');
   return (
     <SlateSortableResizable
