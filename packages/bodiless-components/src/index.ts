@@ -40,12 +40,14 @@ import withEditPlaceholder from './Placeholder';
 import { TagButtonProps, withTagButton, useTagsAccessors } from './TagButton';
 import withFilterByTags from './withFilterByTags';
 import asBodilessIframe, {
+  asBaseBodilessIframe,
   withoutPointerEvents,
   withIframeFormHeightSnippet,
   withIframeFormSrcSnippet,
   useIframeBodilessOptions,
 } from './Iframe';
 import YouTube, {
+  asBaseBodilessYouTube,
   asBodilessYouTube,
   withYouTubePlayerSettings,
   withYouTubeFormSrcSnippet,
@@ -95,11 +97,13 @@ export {
   asTaggableItem,
   withFilterByTags,
   useTagsAccessors,
+  asBaseBodilessIframe,
   asBodilessIframe,
   withoutPointerEvents,
   withIframeFormHeightSnippet,
   withIframeFormSrcSnippet,
   useIframeBodilessOptions,
+  asBaseBodilessYouTube,
   asBodilessYouTube,
   withYouTubePlayerSettings,
   withYouTubePlayerTransformer,

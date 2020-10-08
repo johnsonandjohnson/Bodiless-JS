@@ -58,7 +58,7 @@ const withYouTubePlayerSettings = (
 const withYouTubePlayerTransformer = (Component: ComponentType<any>) => {
   const WithYouTubePlayerTransformer = (props: any) => {
     const { playerSettings, src, ...rest } = props;
-    const videoId = extractVideoIdFromUrl(src);
+    const videoId = src ? extractVideoIdFromUrl(src) : '';
     const src$ = `https://www.youtube.com/embed/${videoId}`;
     const url = new URL(src$);
     if (playerSettings !== undefined) {
@@ -67,7 +67,7 @@ const withYouTubePlayerTransformer = (Component: ComponentType<any>) => {
         url.searchParams.set(key, String(value));
       });
     }
-    return <Component {...rest} src={url} />;
+    return <Component {...rest} src={url.toString()} />;
   };
   WithYouTubePlayerTransformer.displayName = 'WithYouTubePlayerTransformer';
   return WithYouTubePlayerTransformer;
@@ -86,7 +86,7 @@ const withYouTubeFormSrcSnippet = withFormSnippet({
       } = useMenuOptionUI();
       const validate = useCallback(
         (value: string) => (!value || !isValidYouTubeUrl(value)
-          ? 'Invalid youtube URL specified.'
+          ? 'Invalid YouTube URL specified.'
           : undefined),
         [],
       );
@@ -115,9 +115,9 @@ const asBodilessYouTube: AsBodiless<Props, IframeData> = (
   defaultData?,
   useOverrides?,
 ) => flowRight(
-  withYouTubePlayerTransformer,
   asBaseBodilessYouTube(nodeKeys, defaultData, useOverrides),
   withYouTubeFormSrcSnippet,
+  withYouTubePlayerTransformer,
 );
 
 const YouTube = asBodilessYouTube()('iframe');
