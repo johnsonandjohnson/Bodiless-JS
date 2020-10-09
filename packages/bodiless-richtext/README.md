@@ -1,12 +1,38 @@
-# Rich Text Editor
+# Rich Text Editor Component
 
-> Note this document describes the low-level API of Bodiless's rich text editing support. A new high
-> level API is under active development.
+The Rich Text Editor allows you to easily add text content to your site. By
+default there are three options for the Rich Text Editor: Simple, Basic, and
+Full. The Rich Text Editor is also a sub component of many higher order components. 
+You can add text to a page on your site via the editor component or you
+can add a component or components that contain text, which make use of the
+editor (e.g. Tout, Accordion, etc).
 
-Bodiless RichText provides a Rich Text Component that allows content uses to edit and manipulate text. This package also includes a set of tools for elegant scaffolding and extending Slate editor.
-> Before using this module it is essential to understand how Slate editor works: **[Read Slate Walkthroughs and Guides sections](https://docs.slatejs.org/).** 
+## Content Editor Details
 
-## Contents
+| Simple | Basic | Full | 
+| -------|-------|------| 
+|![](./assets/SimpleRichText.jpg) | ![](./assets/BasicRichText.jpg) | ![](./assets/FullRichText.jpg) | 
+|The Simple Rich Text Editor offers the following formatting options: Superscript | Basic Rich Text Editor offers the following formatting options: bold, italic, underline, link, left alignment, right alignment, center alignment, justification alignment, superscript | The Full Rich Text Editor offers the following formatting options: bold, italic, underline, link, left alignment, right alignment, center alignment, justification alignment, superscript, header |
+
+?> Please note that the above configurations are examples of the default options.
+The site requirements and site builder will determine which rich text editor
+options are available, where they are available to the editor, and which options
+are available for each variation.
+
+## Site Builder Details
+
+> Note this document describes the low-level API of Bodiless's rich text editing support. 
+> A new high level API is under active development.
+
+Bodiless RichText provides a Rich Text Component that allows content uses to edit and manipulate text. 
+This package also includes a set of tools for elegant scaffolding and extending Slate editor.
+> Before using this module it is essential to understand how Slate editor works: 
+**[Read Slate Walkthroughs and Guides sections](https://docs.slatejs.org/).** 
+
+
+## Architectural Details
+
+### Contents
 
 1. **Exports**
    - [Slate Editor Component](#slateeditor) 
@@ -31,11 +57,13 @@ Bodiless RichText provides a Rich Text Component that allows content uses to edi
    
 5. **[Roadmap](#roadmap)**
 
-## Exports
+### Exports
 
 <a name="slateeditor"></a>
-### Slate Editor Component - `<SlateEditor />`
-`<SlateEditor>` - Main Content controller component that provides react context with editor related data and callbacks to nested components. Expects `<SlateEditor>` as one of its direct children to obtain editor reference.
+#### Slate Editor Component - `<SlateEditor />`
+`<SlateEditor>` - Main Content controller component that provides react context with 
+editor related data and callbacks to nested components. Expects `<SlateEditor>` as one
+of its direct children to obtain editor reference.
 
 **Basic usage:**
 
@@ -63,7 +91,8 @@ function MyEditor() {
 
 <a name="slatecontent"></a>
 ### Content Component - `<Content />` 
-`<Content>` - Wrapper around [`<Content />`](https://docs.slatejs.org/slate-react/editor)  which is the main editorial area. `<Content>` wraps Content with a `<div />` and supplies values from Content Context to [`<Content />`](https://docs.slatejs.org/slate-react/editor).
+`<Content>` - Wrapper around [`<Content />`](https://docs.slatejs.org/slate-react/editor) which is the main editorial area. 
+`<Content>` wraps Content with a `<div />` and supplies values from Content Context to [`<Content />`](https://docs.slatejs.org/slate-react/editor).
 
 **Basic usage:**
 
@@ -140,7 +169,8 @@ function MyEditor() {
 
 <a name="hovermenu"></a>
 ### Hover Menu Component - `<HoverMenu />`
-`<HoverMenu />` - a hover menu that appears on any selection within editor. `<HoverMenu />` passes values of `SlateContext` to all its children as props.
+`<HoverMenu />` - a hover menu that appears on any selection within editor. 
+`<HoverMenu />` passes values of `SlateContext` to all its children as props.
 
 **Basic usage:**
 ```js
@@ -166,21 +196,29 @@ export default Content;
 
 <a name="rich-text-items"></a>
 
-### RichText Component
+#### RichText Component
 
-The RichText Component is built on the [SlateJS](https://docs.slatejs.org/) framework. It takes design object (see @bodiless/Design System) that contain HOC to build out the componet that are avaiable in the RichText Editor.  Those are then presented to the user using both a contextual hover menu as well as the standard menu. These items can be used by using a set of HOC's. 
+The RichText Component is built on the [SlateJS](https://docs.slatejs.org/) framework. It takes design object 
+(see @bodiless/Design System) that contain HOC to build out the component that are 
+avaiable in the RichText Editor. Those are then presented to the user using both a 
+contextual hover menu as well as the standard menu. These items can be used by using 
+a set of HOC's. 
 
 `starWith(Component)` lets us know which component should be part of the item
 
 `asMark`, `asInline` and `asBlock` are used to say how the slate editor should use the component.
 
 - `marks` are used for basic character-level formatting (eg bold, italic, underline, text=color, etc).
-- `inlines` may also be used for character formatting, but should generally be reserved for cases where the component requires additional configuration besides the text (for example, a link, which may require `href`, `target` or other attributes).
+- `inlines` may also be used for character formatting, but should generally be reserved for cases 
+where the component requires additional configuration besides the text (for example, a link, 
+which may require `href`, `target` or other attributes).
 - `blocks` should be used for block-level formatting (eg headers, lists, etc).
 
 `withKey("k")` can be used to add a shortcut key to the component.
 
-`withButton("icon")` can be used to add a button that will set the text to a component. If the item is asBlock then it will be added to the global menu if not then it will be added to the local hover menu.
+`withButton("icon")` can be used to add a button that will set the text to a component. 
+If the item is asBlock then it will be added to the global menu if not then it will be added 
+to the local hover menu.
 
 There are a set of keys that have defaults that are often used they are the following:
 
@@ -199,7 +237,8 @@ There are a set of keys that have defaults that are often used they are the foll
 
 With these one only need to include the key.
 
-Each of this helper return a function that we pass in as items. we can use flow to combine them as such:
+Each of this helper return a function that we pass in as items. We can use flow to 
+combine them as such:
 
 ```js
 const design = {
@@ -217,53 +256,66 @@ const EditorFullFeatured = <P extends object> (props:P) => (
 );
 ```
 
-## Plugin Factories
+### Plugin Factories
 
-In order to minify boilerplate creating a slate plugin `@bodiless/richtext` provides factories. Plugin types are mimicking [Slate data model](https://docs.slatejs.org/guides/data-model). There are 3 types of plugins that can be created:
-- **Mark plugin** - renders provided component wrapping a piece of text. Doesn't have any data and component is togglable.
-- **Inline plugin** - acts as a mark, but has data and a way to control it. You can provide a Form component that implements [Form API](#using-form-api) along with the component, and plugin with handle the data updates and rendering of both Component and Form.
+In order to minify boilerplate creating a slate plugin `@bodiless/richtext` provides factories. 
+Plugin types are mimicking [Slate data model](https://docs.slatejs.org/guides/data-model). 
+There are 3 types of plugins that can be created:
+- **Mark plugin** - renders provided component wrapping a piece of text. Doesn't have any 
+data and component is togglable.
+- **Inline plugin** - acts as a mark, but has data and a way to control it. You can 
+provide a Form component that implements [Form API](#using-form-api) along with the component, 
+and plugin with handle the data updates and rendering of both Component and Form.
 - **Block plugin** - TBD
 
 <a name="mark-factory"></a>
-### Mark Plugin Factory
-Mark plugin factory reduces boilerplate required to create a plugin to render custom marks in Slate editor. Also, you can generate a button that is going to trigger the mark on and off.
+#### Mark Plugin Factory
+Mark plugin factory reduces boilerplate required to create a plugin to render custom marks in 
+Slate editor. Also, you can generate a button that is going to trigger the mark on and off.
 
 **Exports:**
 - createMarkButton(markType: string, materialIcon: string): React.ComponentType
-    - **_markType_**: string - a unique string to identify mark component. Should match _markType_ value of the corresponding mark plugin.
+    - **_markType_**: string - a unique string to identify mark component. 
+    Should match _markType_ value of the corresponding mark plugin.
     - **_materialIcon_**: string - a string that is converted into a [Material Icon](https://material.io/tools/icons/?style=baseline) glyph
 
 - createMarkPlugin(MarkComponent: Mark, markType: string, options: MarkPluginOptions): [Hooks](https://docs.slatejs.org/slate-react/plugins#hooks)
-    - **_MarkComponent_**: MarkComponent - mark component that is going to be rendered to represent mark occurrences. Should match _markType_ value of the corresponding mark button.
+    - **_MarkComponent_**: MarkComponent - mark component that is going to be rendered to represent mark occurrences. 
+    Should match _markType_ value of the corresponding mark button.
     - **_markType_**: string - a unique string to identify mark component. Should match _markType_ value of the corresponding mark button.
     - **_options_**: MarkPluginOptions - options object to provide additional plugin configuration. Acceptable options:
         - **_keyboardKey_**: string - a keyboard key to trigger the mark. Make sure the provided key is not used in any other plugins.
 
 <a name="inline-factory"></a>
 ### Inline Plugin Factory
-Inline plugin factory reduces boilerplate required to create a plugin to render custom inline nodes in Slate editor. You can generate a button for an inline node like for marks. Also, in addition, you can provide a custom form for each inline node to manage its data.
+Inline plugin factory reduces boilerplate required to create a plugin to render
+custom inline nodes in Slate editor. You can generate a button for an inline
+node like for marks. Also, in addition, you can provide a custom form for each
+inline node to manage its data.
 
 **Exports:**
 - createInlineButton(inlineType: string, materialIcon: string): React.ComponentType
-    - **_inlineType_**: string - a unique string to identify inline node component. Should match _inlineType_ value of the corresponding inline plugin.
+    - **_inlineType_**: string - a unique string to identify inline node component. 
+    Should match _inlineType_ value of the corresponding inline plugin.
     - **_materialIcon_**: string - a string that is converted into a [Material Icon](https://material.io/tools/icons/?style=baseline) glyph
 
 
 <a name="block-factory"></a>
 ### Block Plugin Factory
-Block plugin factory reduces boilerplate required to create a plugin to render custom block nodes in Slate editor. 
-You can generate a button for block node like for marks. 
+Block plugin factory reduces boilerplate required to create a plugin to render custom 
+block nodes in Slate editor. You can generate a button for block node like for marks. 
 
 **Exports:**
 - createBlockButton(inlineType: string, materialIcon: string): React.ComponentType
-    - **_inlineType_**: string - a unique string to identify inline node component. Should match _inlineType_ value of the corresponding block plugin.
+    - **_inlineType_**: string - a unique string to identify inline node component. 
+    Should match _inlineType_ value of the corresponding block plugin.
     - **_materialIcon_**: string - a string that is converted into a [Material Icon](https://material.io/tools/icons/?style=baseline) glyph
 
 
-## APIs
+### APIs
 
 <a name="node-component-api"></a>
-### Node Component API
+#### Node Component API
 
 Inline plugin factory generates a wrapper around provided Component. 
 
@@ -303,11 +355,13 @@ function FormComponent({data, setData, closeForm, unwrap}) {
 
 [See Using Form API Guide](#using-form-api) 
 
-## Guides 
+### Guides 
 
 <a name="creating-mark-plugin"></a>
-### Creating mark plugin
-Mark is a simple wrapper for a specific piece of text in the editor. Marks are the simplest entities of Slate Content and can be only triggered on and off and stack with other marks.
+#### Creating mark plugin
+Mark is a simple wrapper for a specific piece of text in the editor. Marks are the 
+simplest entities of Slate Content and can be only triggered on and off and stack
+with other marks.
  
 **Mark Plugin Factory usage:**
 ```js
@@ -330,9 +384,12 @@ export {
 ```
 
 <a name="creating-inline-plugin"></a>
-### Creating Inline Plugin 
+#### Creating Inline Plugin 
 
-Inline nodes are more complex entities of the slate editor and can contain data. That's why inline can have an optional form and inline component has a way of updating itself data using `setData()` prop.  Inline Form API can be used to render edit form in a tooltip around the inline node, however, it's not mandatory. 
+Inline nodes are more complex entities of the slate editor and can contain data. 
+That's why inline can have an optional form and inline component has a way of updating 
+itself data using `setData()` prop.  Inline Form API can be used to render edit form
+in a tooltip around the inline node, however, it's not mandatory. 
 
 **Using Form API:** 
 ```js
@@ -422,7 +479,8 @@ export {
 ```
 
 <a name="roadmap"></a>
-## Roadmap
+### Roadmap
 
 -[ ] Create block factory
 -[ ] Write Unit Tests
+
