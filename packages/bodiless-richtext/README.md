@@ -11,7 +11,7 @@ editor (e.g. Tout, Accordion, etc).
 
 | Simple | Basic | Full | 
 | -------|-------|------| 
-|![](./assets/SimpleRichText.jpg) | ![](./assets/BasicRichText.jpg) | ![](./assets/FullRichText.jpg) | 
+|![](./assets/SimpleRichTextNew.jpg) | ![](./assets/BasicRichTextNew.jpg) | ![](./assets/FullRichTextNew.jpg) | 
 |The Simple Rich Text Editor offers the following formatting options: Superscript | Basic Rich Text Editor offers the following formatting options: bold, italic, underline, link, left alignment, right alignment, center alignment, justification alignment, superscript | The Full Rich Text Editor offers the following formatting options: bold, italic, underline, link, left alignment, right alignment, center alignment, justification alignment, superscript, header |
 
 ?> Please note that the above configurations are examples of the default options.
