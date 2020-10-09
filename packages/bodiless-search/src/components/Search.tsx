@@ -16,7 +16,10 @@ import React, {
   FunctionComponent as FC,
   ComponentType,
   HTMLProps,
+  useEffect,
+  useState,
 } from 'react';
+import axios from 'axios';
 import {
   Div,
   Input,
@@ -25,6 +28,7 @@ import {
   DesignableComponentsProps,
   designable,
 } from '@bodiless/fclasses';
+import SearchClient from '../SearchClient';
 
 type SearchComponents = {
   SearchWrapper: ComponentType<StylableProps>;
@@ -32,25 +36,103 @@ type SearchComponents = {
   SearchButton: ComponentType<any>;
 };
 
-const submitHandler = () => {
-  // @todo: search logic
+type SearchBoxProps = {
+  onChange: Function,
+};
+
+type SearchButtonProps = {
+  onClick: Function,
+};
+
+const searchClient = new SearchClient();
+
+const SearchBoxBase: FC<SearchBoxProps & HTMLProps<HTMLInputElement>> = (
+  { onChange, ...props },
+) => {
+  console.log(onChange, 'onChange SearchBoxBase');
+  return (
+    <Input onChange={onChange} {...props} />
+  );
+};
+
+const SearchButtonBase: FC<SearchButtonProps & HTMLProps<HTMLButtonElement>> = (
+  { onClick, ...rest },
+) => {
+  console.log(onClick, 'onClick SearchButtonBase');
+  return (
+    <Button onClick={onClick} {...rest} />
+  );
 };
 
 const searchComponents: SearchComponents = {
   SearchWrapper: Div,
-  SearchBox: Input,
-  SearchButton: (props: any) => (<Button {...props} onClick={submitHandler} />),
+  SearchBox: SearchBoxBase,
+  SearchButton: SearchButtonBase,
 };
 
 type Props = DesignableComponentsProps<SearchComponents> &
 HTMLProps<HTMLElement>;
 
+type SearchIndex = {
+  idx: string;
+  preview: string,
+  expires: number,
+};
+
 const SearchBase: FC<Props> = ({ components }) => {
+  const [queryString, setQueryString] = useState('');
+
+  // @todo: search state
+  const onChangeHandler = (event: any) => {
+    event.preventDefault();
+    // @todo: collect search term.
+    setQueryString(event.target.value);
+    console.log('onChangeHandler: ', event.target.value);
+    // setQueryString(event.currentTarget().value);
+  };
+  const onClickHandler = (event: React.MouseEvent) => {
+    // @todo: search logic
+    console.log('onClickHandler: ', event);
+    console.log(searchClient.search(queryString));
+  };
+
+  useEffect(() => {
+    const validateIndex = (index: SearchIndex | ''): boolean => {
+      if (!index) {
+        return false;
+      }
+      const {
+        expires,
+      } = index;
+
+      return (Date.now() <= expires);
+    };
+
+    const loadIndex = async () => {
+      try {
+        const rawIndex = localStorage.getItem('search:index') || '{}';
+        const index = JSON.parse(rawIndex);
+        if (validateIndex(index)) {
+          searchClient.loadIndex(index.idx);
+        } else {
+          const response = await axios.get('/lunr.idx');
+          console.log(response.data, 'RESPONSE');
+          localStorage.setItem('search:index', JSON.stringify({
+            expires: (Date.now() + 86400), ...response.data,
+          }));
+        }
+      } catch (error) {
+        throw new Error('Failed to load search index file.');
+      }
+    };
+    loadIndex();
+  });
+
   const { SearchWrapper, SearchBox, SearchButton } = components;
   return (
     <SearchWrapper>
-      <SearchBox />
-      <SearchButton />
+      <SearchBox value={queryString} onChange={onChangeHandler} />
+      <SearchButton onClick={onClickHandler} />
     </SearchWrapper>
   );
 };

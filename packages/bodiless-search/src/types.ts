@@ -14,8 +14,9 @@
 
 import lunr from 'lunr';
 
-export interface SearchableInterface {
-  search: (queryString: string) => {},
+export interface SearchClientInterface {
+  loadIndex: (index: object) => void;
+  search: (queryString: string) => object;
 }
 
 export interface SearchEngineInterface {
@@ -25,6 +26,8 @@ export interface SearchEngineInterface {
   createIndex: () => lunr.Index,
   exportIndex: () => string,
   addDocuments: (doc: TDocument | TDocument[]) => void,
+  loadIndex: (index: object) => void;
+  search: (queryString: string) => object;
 }
 
 export type TDocument = { [key: string]: string; };

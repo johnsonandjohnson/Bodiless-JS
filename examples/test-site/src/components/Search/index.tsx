@@ -24,8 +24,8 @@ const Icon = flow(
   addClasses('material-icons cursor-pointer align-middle'),
 )(stylable((props: any) => (<i {...props}>{props.children}</i>)));
 
-const withIcon = (icon: string) => (Component: ComponentType) => () => (
-  <Component>
+const withIcon = (icon: string) => (Component: ComponentType) => (props: any) => (
+  <Component {...props}>
     <Icon>{icon}</Icon>
   </Component>
 );

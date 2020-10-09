@@ -27,11 +27,25 @@ class LunrSearch implements SearchEngineInterface {
 
   indexConfig: TIndexConfig | null;
 
+  index: lunr.Index | null;
+
   constructor() {
     this.name = 'Lunr';
     this.documents = [];
     this.indexConfig = null;
+    this.index = null;
   }
+
+  loadIndex = (index: object): void => {
+    this.index = lunr.Index.load(index);
+  };
+
+  search = (queryString: string): object => {
+    if (!this.index) {
+      throw new Error('There are no documents to be indexed');
+    }
+    return this.index.search(queryString);
+  };
 
   getEngineName = () => this.name;
 
