@@ -45,13 +45,19 @@ export const useUI = () => useContext(uiContext);
 const GlobalContextMenu: FC<Props> = observer(() => {
   const { GlobalContextMenu: Menu } = useUI();
   const context = useEditContext();
-  const { contextMenuOptions, isPositionToggled } = context;
+  const { isPositionToggled, contextMenuOptions } = context;
   const options = contextMenuOptions.filter(
     (op: TMenuOption) => op.global !== false,
   );
-  return <Menu options={options} isPositionToggled={isPositionToggled} />;
+  return (
+    <Menu options={options} isPositionToggled={isPositionToggled} />
+  );
 });
 
+/**
+ * Component providing the global Bodiless UI elements, the Main Menu and Page Overlay.
+ * Also provides the Edit and Docs buttons on the main menu.
+ */
 const PageEditor: FC<Props> = ({ children, ui }) => {
   const context = useEditContext();
   const getMenuOptions = useCallback(() => [
@@ -67,10 +73,10 @@ const PageEditor: FC<Props> = ({ children, ui }) => {
       name: 'edit',
       icon: 'edit',
       label: 'Edit',
+      // We use a callback here to get the latest value from the context.
       isActive: () => context.isEdit,
       handler: () => {
         context.toggleEdit();
-        context.refresh();
       },
     },
   ], []);
@@ -98,4 +104,4 @@ const PageEditor: FC<Props> = ({ children, ui }) => {
   );
 };
 
-export default PageEditor;
+export default observer(PageEditor);

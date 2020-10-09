@@ -61,7 +61,7 @@ export interface FlowContainerItem {
 export type SortableChildProps = {
   flowContainerItem: FlowContainerItem;
   onResizeStop(props: FlowContainerItemProps): void;
-  getMenuOptions: TMenuOptionGetter;
+  useGetMenuOptions: () => TMenuOptionGetter;
   index: number;
   children: React.ReactNode;
   ui?: SortableResizableUI;

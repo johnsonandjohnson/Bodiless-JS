@@ -16,6 +16,9 @@ import React, { HTMLProps, ComponentType } from 'react';
 import {
   useMenuOptionUI,
   asBodilessComponent,
+  withoutProps,
+  ifEditable,
+  withExtendHandler,
 } from '@bodiless/core';
 import type { AsBodiless, BodilessOptions } from '@bodiless/core';
 import { flowRight } from 'lodash';
@@ -24,13 +27,16 @@ import { flowRight } from 'lodash';
 type Data = {
   href: string;
 };
-type Props = HTMLProps<HTMLAnchorElement>;
 
-const options: BodilessOptions<HTMLProps<HTMLAnchorElement>, Data> = {
+type Props = HTMLProps<HTMLAnchorElement> & {
+  unwrap?: () => void,
+};
+
+const options: BodilessOptions<Props, Data> = {
   icon: 'link',
   name: 'Link',
   label: 'Link',
-  renderForm: ({ unwrap, closeForm }) => {
+  renderForm: ({ componentProps: { unwrap }, closeForm }) => {
     const {
       ComponentFormTitle,
       ComponentFormLabel,
@@ -43,7 +49,7 @@ const options: BodilessOptions<HTMLProps<HTMLAnchorElement>, Data> = {
       if (unwrap) {
         unwrap();
       }
-      closeForm();
+      closeForm(event);
     };
     return (
       <>
@@ -76,7 +82,12 @@ const withHrefTransformer = (Component : ComponentType<Props>) => {
 };
 
 export const asBodilessLink: AsBodiless<Props, Data> = (nodeKeys?) => flowRight(
+  // Prevent following the link in edit mode
+  ifEditable(
+    withExtendHandler('onClick', () => (e: MouseEvent) => e.preventDefault()),
+  ),
   asBodilessComponent<Props, Data>(options)(nodeKeys),
+  withoutProps(['unwrap']),
   withHrefTransformer,
 );
 const Link = asBodilessLink()('a');

@@ -31,6 +31,10 @@ class MockContentNode<D extends object> implements ContentNode<D> {
 
   hasError = jest.fn();
 
+  pagePath: string = '/';
+
+  baseResourcePath: string = '/';
+
   // eslint-disable-next-line class-methods-use-this
   peer<E extends object>(key: string) {
     return new MockContentNode<E>(key);

@@ -25,6 +25,7 @@ import {
   getUI,
   asBodilessComponent,
   BodilessOptions,
+  useNode,
 } from '@bodiless/core';
 
 import { useDropzone } from 'react-dropzone';
@@ -74,13 +75,15 @@ const defaultImagePickerUI = {
 function DropZonePlugin({ formApi, targetFieldName, ui }: {
   formApi: FormApi<Data>;
   targetFieldName:string;
-  ui?: TImagePickerUI;
+  ui?: Partial<TImagePickerUI>;
 }) {
   const [statusText, setStatusText] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [isUploadTimeout, setIsUploadingTimeout] = useState(false);
   const [isUploadFinished, setIsUploadFinished] = useState(false);
   const saveRequest = new BackendSave();
+  const { node } = useNode<any>();
+
   useEffect(() => {
     if (isUploading) {
       const timer = setTimeout(
@@ -98,17 +101,22 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
     }
     return () => null;
   });
+
   const onDrop = useCallback(acceptedFiles => {
     setIsUploading(true);
     setIsUploadFinished(false);
     setIsUploadingTimeout(false);
     setStatusText(`File "${acceptedFiles[0].name}" selected`);
     formApi.setError(targetFieldName, 'Uploading in progress');
-    saveRequest.saveFile(acceptedFiles[0])
-      .then(() => {
+    saveRequest.saveFile({
+      file: acceptedFiles[0],
+      nodePath: node.path.join('$'),
+      baseResourcePath: node.baseResourcePath,
+    })
+      .then(({ data }) => {
         // unset errors
         formApi.setError(targetFieldName, undefined);
-        formApi.setValue(targetFieldName, `/${acceptedFiles[0].name}`);
+        formApi.setValue(targetFieldName, data.filesPath[0]);
         // formApi.validate();
         setIsUploading(false);
         setIsUploadingTimeout(false);
@@ -152,6 +160,9 @@ function DropZonePlugin({ formApi, targetFieldName, ui }: {
     </MasterWrapper>
   );
 }
+DropZonePlugin.defaultProps = {
+  ui: {},
+};
 
 // Type of the props accepted by this component.
 // Exclude the src and alt from the props accepted as we write it.

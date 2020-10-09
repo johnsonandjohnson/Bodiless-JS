@@ -29,11 +29,13 @@ export type TMenuOption = {
   isActive?: (() => boolean) | boolean;
   isDisabled?: (() => boolean) | boolean;
   isHidden?: (() => boolean) | boolean;
+  activateContext?: (() => boolean) | boolean;
   handler?: (event: React.MouseEvent) => any;
   local?: boolean;
   global?: boolean;
   group?: string;
   Component?: ComponentType<IContextMenuItemProps>;
+  context?: string;
 };
 
 export type ButtonVariantProps = HTMLProps<HTMLDivElement> & {
@@ -95,10 +97,15 @@ export type IContextMenuProps = {
   ui?: UI;
   isPositionToggled?: boolean;
   renderInTooltip?: boolean;
+  /**
+   * `closeForm` prop used to override the default `closeForm` behaviour if provided.
+   * Currently it will only be triggered by clicking outside of `ComponentFormCloseButton`.
+   */
+  closeForm?: (e: any) => void;
 } & HTMLProps<HTMLElement>;
 
 export type ContextMenuFormProps = {
-  closeForm: () => void;
+  closeForm: (e: any) => void;
   ui?: UI;
   'aria-label'?: string;
 };
