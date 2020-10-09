@@ -62,9 +62,10 @@ const withYouTubeDefaults = withDesign({
 const Reponsive16By9YouTube = asReponsive16By9YouTube(Embed);
 const DefaultReponsive16By9YouTube = withYouTubeDefaults(Reponsive16By9YouTube);
 
-const withAutoPlay = withDesign({
+const withAutoPlaySettings = withDesign({
   Item: ifReadOnly(
     withYouTubePlayerSettings({
+      ...defaultPlayerSettings,
       autoplay: true,
       mute: true,
     }),
@@ -72,7 +73,7 @@ const withAutoPlay = withDesign({
 });
 
 const Reponsive16By9AutoPlayYouTube = flowRight(
-  withAutoPlay,
+  withAutoPlaySettings,
   withYouTubeDefaults,
   asReponsive16By9YouTube,
 )(Embed);
