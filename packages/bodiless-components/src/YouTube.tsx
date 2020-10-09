@@ -112,7 +112,7 @@ const withYouTubeFormSrcSnippet = withFormSnippet({
 });
 
 const withYouTubeFormHeader = withFormHeader({
-  title: 'YouTube Config',
+  title: 'YouTube Configuration',
 });
 
 const asBaseBodilessYouTube: AsBodiless<Props, IframeData> = asBaseBodilessIframe;

@@ -76,7 +76,7 @@ const withHeightSnippet = withFormSnippet({
       );
       return (
         <React.Fragment key="height">
-          <ComponentFormLabel htmlFor="height">Height (in CSS px)</ComponentFormLabel>
+          <ComponentFormLabel htmlFor="height">Height (in pixels)</ComponentFormLabel>
           <ComponentFormText
             field="height"
             validate={validate}
@@ -109,7 +109,7 @@ const withSrcSnippet = withFormSnippet({
 });
 
 const withIframeFormHeader = withFormHeader({
-  title: 'Iframe Config',
+  title: 'Iframe Configuration',
 });
 
 const asBaseBodilessIframe: AsBodiless<Props, Data> = (
