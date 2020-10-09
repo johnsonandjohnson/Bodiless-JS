@@ -1,8 +1,10 @@
 # Tout Component
 
-Touts are commonly used on websites to call out or offer something to the site
-visitor. The tout component allows site builders to configure and modify touts
-according to the site design.
+Tout, sometimes called a taco or a tile,  is a group of content which 
+typically features a less than full size image alongside supporting 
+content or a call to action (CTA). Touts are commonly used on websites to 
+call out or offer something to the site visitor. The tout component allows
+site builders to configure and modify touts according to the site design.
 
 Basic touts usually consist of some or all of the following components:
 * **Title:** Text editable via simple text editor.
@@ -37,6 +39,25 @@ left of the tout's flow container box and dragging to the desired place on your
 page.  ![](./assets/ToutMove.jpg)
 
 
+---
+
+## Site Builder Details
+
+### Tout Variations with combining tokens
+
+The tout can be composed of different tokens (see
+[code](../../../packages/bodiless-organisms/src/components/Touts.tokens.tsx)) to
+create many tout variations. These variations include: * Horizontal * Vertical *
+No Title, * No Body * No description * No CTA * Overlay of CTA * Overlay of
+title
+
+### Usage
+
+```
+const ToutVerticalNoTitle = flow(
+  asToutWithPaddings, asToutDefaultStyle, asToutVertical, asToutNoTitle,
+)(Tout); 
+```
 
 ---
 
@@ -55,19 +76,3 @@ The Tout renders as a block of html with the following:
       </ContentWrapper>
     </Wrapper>
 ```    
-
-## Tout Variations with combining tokens
-
-The tout can be composed of different tokens (see
-[code](../../../packages/bodiless-organisms/src/components/Touts.tokens.tsx)) to
-create many tout variations. These variations include: * Horizontal * Vertical *
-No Title, * No Body * No description * No CTA * Overlay of CTA * Overlay of
-title
-
-## Usage
-
-```
-const ToutVerticalNoTitle = flow(
-  asToutWithPaddings, asToutDefaultStyle, asToutVertical, asToutNoTitle,
-)(Tout); 
-```
