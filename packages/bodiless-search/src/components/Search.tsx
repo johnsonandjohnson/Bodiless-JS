@@ -24,11 +24,15 @@ import {
   Div,
   Input,
   Button,
+  Ul,
+  Li,
   StylableProps,
   DesignableComponentsProps,
   designable,
 } from '@bodiless/fclasses';
 import SearchClient from '../SearchClient';
+import { useSearchResultContext } from './SearchContextProvider';
+import { TSearchResult } from '../types';
 
 type SearchComponents = {
   SearchWrapper: ComponentType<StylableProps>;
@@ -42,6 +46,12 @@ type SearchBoxProps = {
 
 type SearchButtonProps = {
   onClick: Function,
+};
+
+type SearchResultComponents = {
+  SearchResultWrapper: ComponentType<StylableProps>;
+  SearchResultList: ComponentType<any>;
+  SearchResultItem: ComponentType<any>;
 };
 
 const searchClient = new SearchClient();
@@ -70,7 +80,15 @@ const searchComponents: SearchComponents = {
   SearchButton: SearchButtonBase,
 };
 
-type Props = DesignableComponentsProps<SearchComponents> &
+const searchResultComponents: SearchResultComponents = {
+  SearchResultWrapper: Div,
+  SearchResultList: Ul,
+  SearchResultItem: Li,
+};
+
+type SearchProps = DesignableComponentsProps<SearchComponents> &
+HTMLProps<HTMLElement>;
+type SearchResultProps = DesignableComponentsProps<SearchResultComponents> &
 HTMLProps<HTMLElement>;
 
 type SearchIndex = {
@@ -79,7 +97,23 @@ type SearchIndex = {
   expires: number,
 };
 
-const SearchBase: FC<Props> = ({ components }) => {
+const SearchResultBase: FC<SearchResultProps> = ({ components }) => {
+  const { searchResult } = useSearchResultContext();
+  const { SearchResultWrapper, SearchResultList, SearchResultItem } = components;
+  return (
+    <SearchResultWrapper>
+      <SearchResultList>
+        {
+          searchResult.map((i: TSearchResult) => (
+            <SearchResultItem key={i.id} />
+          ))
+        }
+      </SearchResultList>
+    </SearchResultWrapper>
+  );
+};
+
+const SearchBase: FC<SearchProps> = ({ components }) => {
   const [queryString, setQueryString] = useState('');
 
   // @todo: search state
@@ -91,6 +125,7 @@ const SearchBase: FC<Props> = ({ components }) => {
     // setQueryString(event.currentTarget().value);
   };
   const onClickHandler = (event: React.MouseEvent) => {
+    event.preventDefault();
     // @todo: search logic
     console.log('onClickHandler: ', event);
     console.log(searchClient.search(queryString));
@@ -137,6 +172,9 @@ const SearchBase: FC<Props> = ({ components }) => {
   );
 };
 
-const Search = designable(searchComponents)(SearchBase) as ComponentType<Props>;
+const Search = designable(searchComponents)(SearchBase) as ComponentType<SearchProps>;
 
+export const SearchResult = designable(
+  searchResultComponents,
+)(SearchResultBase) as ComponentType<SearchResultProps>;
 export default Search;

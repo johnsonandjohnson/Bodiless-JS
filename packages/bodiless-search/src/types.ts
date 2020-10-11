@@ -38,11 +38,12 @@ export type TSearchConf = {
   searchEngine?: SearchEngineInterface,
 };
 
-export type TSearchResult = {
-  score: number,
-  ref: string,
-  metaData?: { [key: string]: string; },
-};
+// @todo: remove
+// export type TSearchResult = {
+//   score: number,
+//   ref: string,
+//   metaData?: { [key: string]: string; },
+// };
 
 export type TField = {
   name: string,
@@ -63,3 +64,13 @@ export type TSearchIndexSettings = {
   targetPath: string,
   indexConfig: TIndexConfig,
 };
+
+export type TSearchResult = {
+  id: string,
+  ref: string,
+  link: string,
+  title: string,
+  preview: string,
+};
+
+export type TSearchResults = TSearchResult[];

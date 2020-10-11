@@ -13,7 +13,7 @@
  */
 import { flow } from 'lodash';
 import React, { ComponentType } from 'react';
-import SearchClean from '@bodiless/search';
+import SearchClean, { SearchResult as SearchResultClean } from '@bodiless/search';
 import {
   addClasses,
   withDesign,
@@ -45,5 +45,17 @@ const asSimpleSearch = withDesign(searchDesign);
 const Search = flow(
   asSimpleSearch,
 )(SearchClean);
+
+const searchResultDesign = {
+  SearchResultWrapper: addClasses('p-2 border border-red'),
+  SearchResultList: addClasses('p-2 border border-blue'),
+  SearchResultItem: addClasses('p-2 border border-green'),
+};
+
+const asSimpleSearchResult = withDesign(searchResultDesign);
+
+export const SearchResult = flow(
+  asSimpleSearchResult,
+)(SearchResultClean);
 
 export default Search;

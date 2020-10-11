@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
-import Search from './components/Search';
+import Search, { SearchResult } from './components/Search';
 
+export { withSearchResult, useSearchResultContext } from './components/SearchContextProvider';
+export { SearchResult };
 export default Search;
