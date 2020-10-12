@@ -14,23 +14,10 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-// import { getSnapFrom, withTailwindClasses } from '@bodiless/layouts';
-// import {
-//   NodeViewer,
-// } from '@bodiless/components';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { withSearchResult } from '@bodiless/search';
-// import resolveConfig from 'tailwindcss/resolveConfig';
 import Layout from '../../../components/Layout';
 import { SearchResult } from '../../../components/Search';
-// import tailWindConfig from '../../../../tailwind.config';
-// import { FlowContainerDefault } from '../../../components/FlowContainer';
-
-// const FLOW_CONTAINER_PAGE_PATH = 'flowContainer';
-
-// const options = getSnapFrom(
-//   withTailwindClasses(resolveConfig(tailWindConfig))('w-full sm:w-1/2 sm:w-full lg:w-1/2 lg:w-full'),
-// );
 
 const SearchLayout = withSearchResult(Layout);
 
