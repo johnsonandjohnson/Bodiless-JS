@@ -27,7 +27,8 @@ export interface SearchEngineInterface {
   exportIndex: () => string,
   addDocuments: (doc: TDocument | TDocument[]) => void,
   loadIndex: (index: object) => void;
-  search: (queryString: string) => object;
+  loadPreviews: (previews: { [key: string]: TPreview; }) => void;
+  search: (queryString: string) => TSearchResults;
 }
 
 export type TDocument = { [key: string]: string; };
@@ -66,7 +67,7 @@ export type TSearchIndexSettings = {
 };
 
 export type TSearchResult = {
-  id: string,
+  id: number,
   ref: string,
   link: string,
   title: string,

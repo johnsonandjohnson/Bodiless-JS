@@ -16,6 +16,8 @@ import {
   SearchEngineInterface,
   SearchClientInterface,
   TSearchConf,
+  TSearchResults,
+  TPreview,
 } from './types';
 import LunrSearch from './LunrSearch';
 
@@ -32,10 +34,14 @@ class SearchClient implements SearchClientInterface {
     this.searchEngine = config && config.searchEngine ? config.searchEngine : new LunrSearch();
   }
 
-  search = (queryString: string): object => this.searchEngine.search(queryString);
+  search = (queryString: string): TSearchResults => this.searchEngine.search(queryString);
 
   loadIndex = (index: object): void => {
     this.searchEngine.loadIndex(index);
+  };
+
+  loadPreviews = (previews: { [key: string]: TPreview; }): void => {
+    this.searchEngine.loadPreviews(previews);
   };
 
   setSearchEngine(searchEngine: SearchEngineInterface) {

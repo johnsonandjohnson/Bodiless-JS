@@ -14,7 +14,7 @@
 
 import fs from 'fs';
 import glob from 'glob';
-import { Index } from 'lunr';
+// import { Index } from 'lunr';
 import SearchTool from '../src/SearchTool';
 
 const searchTool = new SearchTool({});
@@ -38,7 +38,7 @@ describe('Search Tool', () => {
     );
   });
 
-  it('collects source files by type from source path', () => {
+  it('collects source files by extension from given path', () => {
     jest.spyOn(fs, 'existsSync').mockImplementation(() => true);
     const sync = jest.spyOn(glob, 'sync');
 
@@ -58,5 +58,74 @@ describe('Search Tool', () => {
       '**/+(*.html|*.htm)',
       expect.objectContaining({ cwd: `${process.cwd()}/relative_path/to/source` }),
     );
+  });
+
+  it('converts html to document', () => {
+    const htmlSamples = [
+      {
+        selector: 'body *',
+        html: `<html><head><title>head title</title></head>
+                <body><h1> h1 title </h1><p> body p1 </p><div>body div1</div></body>`,
+        title: 'h1 title',
+        body: 'h1 title body p1 body div1',
+        exclude: '',
+      },
+      {
+        selector: 'body p',
+        html: `<html><head><title>head title</title></head>
+                <body><h1>h1 title</h1><p>body p1</p><div>body div1</div></body>`,
+        title: 'h1 title',
+        body: 'body p1',
+        exclude: '',
+      },
+      {
+        selector: 'body p, body div',
+        html: `<html><head><title>head title</title></head>
+                <body><h1>h1 title</h1><p>body p1</p><div>body div1</div></body>`,
+        title: 'h1 title',
+        body: 'body p1 body div1',
+        exclude: '',
+      },
+      {
+        selector: 'body *',
+        html: `<html><head><title>head title</title></head>
+                <body><p>body p1</p><div>body div1</div></body>`,
+        title: 'head title',
+        body: 'body p1 body div1',
+        exclude: '',
+      },
+      {
+        selector: 'body *',
+        html: `<html><head></head>
+                <body><p>body p1</p><div>body div1</div></body>`,
+        title: '',
+        body: 'body p1 body div1',
+        exclude: '',
+      },
+      {
+        selector: 'body div, body p',
+        html: `<html><head><title>head title</title></head>
+<body><noscript><iframe src="http://example.com"></iframe></noscript>
+<h1>h1 title</h1><p>body p1</p><div>body div1</div></body>`,
+        title: 'h1 title',
+        body: 'body p1 body div1',
+        exclude: '',
+      },
+      {
+        selector: 'body *',
+        html: `<html><head><title>head title</title></head>
+<body><noscript><iframe src="http://example.com"></iframe></noscript>
+<h1>h1 title</h1><p>body p1</p><div>body div1</div></body>`,
+        title: 'h1 title',
+        body: 'h1 title body p1 body div1',
+        exclude: 'noscript',
+      },
+    ];
+
+    htmlSamples.forEach(item => {
+      const { title, body } = searchTool.htmlToDocument(item.html, item.selector, item.exclude);
+      expect(title).toBe(item.title);
+      expect(body).toBe(item.body);
+    });
   });
 });

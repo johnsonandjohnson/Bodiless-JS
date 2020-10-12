@@ -13,8 +13,9 @@
  */
 
 import lunr, { Builder } from 'lunr';
+import { truncate } from 'lodash';
 import {
-  SearchEngineInterface, TDocument, TIndexConfig, TPreview,
+  SearchEngineInterface, TDocument, TIndexConfig, TPreview, TSearchResults,
 } from './types';
 
 /**
@@ -29,22 +30,44 @@ class LunrSearch implements SearchEngineInterface {
 
   index: lunr.Index | null;
 
+  previews: { [key: string]: TPreview; } | null;
+
   constructor() {
     this.name = 'Lunr';
     this.documents = [];
     this.indexConfig = null;
     this.index = null;
+    this.index = null;
+    this.previews = null;
   }
 
   loadIndex = (index: object): void => {
     this.index = lunr.Index.load(index);
   };
 
-  search = (queryString: string): object => {
+  loadPreviews = (previews: { [key: string]: TPreview; }): void => {
+    this.previews = previews;
+  };
+
+  search = (queryString: string): TSearchResults => {
     if (!this.index) {
       throw new Error('There are no documents to be indexed');
     }
-    return this.index.search(queryString);
+    if (!this.previews) {
+      throw new Error('There are no previews to display');
+    }
+    const { previews } = this;
+    const results = this.index.search(queryString).map((result, i) => ({
+      id: i,
+      ref: result.ref,
+      link: `/${previews[result.ref].link}`,
+      title: previews[result.ref].title,
+      preview: previews[result.ref].body,
+    }));
+
+    console.log('RESULT FROM SEARCH ENGINE', results);
+
+    return results;
   };
 
   getEngineName = () => this.name;
@@ -94,13 +117,17 @@ class LunrSearch implements SearchEngineInterface {
    * Create index preview JSON object.
    */
   private createPreview = (): { [key: string]: TPreview; } => {
+    const length = Number(process.env.BODILESS_SEARCH_INDEX_PREVIEW_LENGTH) || 24;
     const previews: { [key: string]: TPreview; } = {};
     this.documents.forEach(doc => {
-      const { id, link, title } = doc;
+      const {
+        id, link, title, body,
+      } = doc;
       const preview = {
         id,
         link,
         title,
+        body: truncate(body, { length, separator: ' ' }),
       };
       previews[id] = preview;
     });

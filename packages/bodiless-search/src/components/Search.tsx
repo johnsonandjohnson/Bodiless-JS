@@ -18,6 +18,7 @@ import React, {
   HTMLProps,
   useEffect,
   useState,
+  useRef,
 } from 'react';
 import axios from 'axios';
 import {
@@ -26,6 +27,8 @@ import {
   Button,
   Ul,
   Li,
+  A,
+  P,
   StylableProps,
   DesignableComponentsProps,
   designable,
@@ -33,6 +36,8 @@ import {
 import SearchClient from '../SearchClient';
 import { useSearchResultContext } from './SearchContextProvider';
 import { TSearchResult } from '../types';
+
+const querystring = require('query-string');
 
 type SearchComponents = {
   SearchWrapper: ComponentType<StylableProps>;
@@ -48,10 +53,15 @@ type SearchButtonProps = {
   onClick: Function,
 };
 
+type TSearchResultItem = {
+  key: number,
+  value: { [key: string]: string; },
+};
+
 type SearchResultComponents = {
   SearchResultWrapper: ComponentType<StylableProps>;
   SearchResultList: ComponentType<any>;
-  SearchResultItem: ComponentType<any>;
+  SearchResultListItem: ComponentType<any>;
 };
 
 const searchClient = new SearchClient();
@@ -80,10 +90,17 @@ const searchComponents: SearchComponents = {
   SearchButton: SearchButtonBase,
 };
 
+const SearchResultItem: FC<TSearchResultItem> = ({ value }) => (
+  <Li>
+    <A href={value.link}>{ value.title }</A>
+    <P>{value.preview}</P>
+  </Li>
+);
+
 const searchResultComponents: SearchResultComponents = {
   SearchResultWrapper: Div,
   SearchResultList: Ul,
-  SearchResultItem: Li,
+  SearchResultListItem: SearchResultItem,
 };
 
 type SearchProps = DesignableComponentsProps<SearchComponents> &
@@ -92,20 +109,20 @@ type SearchResultProps = DesignableComponentsProps<SearchResultComponents> &
 HTMLProps<HTMLElement>;
 
 type SearchIndex = {
-  idx: string;
+  idx: string,
   preview: string,
   expires: number,
 };
 
 const SearchResultBase: FC<SearchResultProps> = ({ components }) => {
-  const { searchResult } = useSearchResultContext();
-  const { SearchResultWrapper, SearchResultList, SearchResultItem } = components;
+  const searchResultContext = useSearchResultContext();
+  const { SearchResultWrapper, SearchResultList, SearchResultListItem } = components;
   return (
     <SearchResultWrapper>
       <SearchResultList>
         {
-          searchResult.map((i: TSearchResult) => (
-            <SearchResultItem key={i.id} />
+          searchResultContext.results.map((item: TSearchResult) => (
+            <SearchResultListItem key={item.id} value={item} />
           ))
         }
       </SearchResultList>
@@ -113,8 +130,20 @@ const SearchResultBase: FC<SearchResultProps> = ({ components }) => {
   );
 };
 
+const useDidMountEffect = (func: Function[]) => {
+  const didMountRef = useRef(false);
+  useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+      func.map(f => f());
+    }
+  });
+};
+
 const SearchBase: FC<SearchProps> = ({ components }) => {
   const [queryString, setQueryString] = useState('');
+  const searchResultContext = useSearchResultContext();
+  const searchPagePath = process.env.BODILESS_SEARCH_PAGE || 'search';
 
   // @todo: search state
   const onChangeHandler = (event: any) => {
@@ -122,46 +151,56 @@ const SearchBase: FC<SearchProps> = ({ components }) => {
     // @todo: collect search term.
     setQueryString(event.target.value);
     console.log('onChangeHandler: ', event.target.value);
-    // setQueryString(event.currentTarget().value);
   };
+
   const onClickHandler = (event: React.MouseEvent) => {
     event.preventDefault();
-    // @todo: search logic
-    console.log('onClickHandler: ', event);
-    console.log(searchClient.search(queryString));
+    if (searchPagePath !== window.location.pathname.replace(/^\//, '').replace(/\/$/, '')) {
+      window.location.href = `/search?q=${queryString}`;
+      return;
+    }
+    const results = searchClient.search(queryString);
+    console.log(searchResultContext, results);
+    searchResultContext.setResult(results);
   };
 
-  useEffect(() => {
-    const validateIndex = (index: SearchIndex | ''): boolean => {
-      if (!index) {
-        return false;
-      }
-      const {
-        expires,
-      } = index;
+  const validateIndex = (index: SearchIndex | ''): boolean => {
+    if (!index) {
+      return false;
+    }
+    const {
+      expires,
+    } = index;
+    return (Date.now() <= expires);
+  };
 
-      return (Date.now() <= expires);
-    };
-
-    const loadIndex = async () => {
-      try {
-        const rawIndex = localStorage.getItem('search:index') || '{}';
-        const index = JSON.parse(rawIndex);
-        if (validateIndex(index)) {
-          searchClient.loadIndex(index.idx);
-        } else {
-          const response = await axios.get('/lunr.idx');
-          console.log(response.data, 'RESPONSE');
-          localStorage.setItem('search:index', JSON.stringify({
-            expires: (Date.now() + 86400), ...response.data,
-          }));
-        }
-      } catch (error) {
-        throw new Error('Failed to load search index file.');
+  const loadIndex = async () => {
+    try {
+      const rawIndex = localStorage.getItem('search:index') || '{}';
+      let index = JSON.parse(rawIndex);
+      if (!validateIndex(index)) {
+        const response = await axios.get('/lunr.idx');
+        console.log(response.data, 'RESPONSE');
+        const expires = process.env.BODILESS_SEARCH_EXPIRES || 86400;
+        index = { expires: (Date.now() + Number(expires)), ...response.data };
+        localStorage.setItem('search:index', JSON.stringify(index));
       }
-    };
-    loadIndex();
-  });
+      console.log('Loading index ...', index.idx);
+      searchClient.loadIndex(index.idx);
+      searchClient.loadPreviews(index.preview);
+    } catch (error) {
+      throw new Error('Failed to load search index file.');
+    }
+
+    const { q } = querystring.parse(window.location.search);
+    if (q) {
+      const results = searchClient.search(q);
+      console.log('qsSearch', results);
+      searchResultContext.setResult(results);
+    }
+  };
+
+  useDidMountEffect([loadIndex]);
 
   const { SearchWrapper, SearchBox, SearchButton } = components;
   return (
@@ -177,4 +216,5 @@ const Search = designable(searchComponents)(SearchBase) as ComponentType<SearchP
 export const SearchResult = designable(
   searchResultComponents,
 )(SearchResultBase) as ComponentType<SearchResultProps>;
+
 export default Search;

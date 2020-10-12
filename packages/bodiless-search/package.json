@@ -30,8 +30,10 @@
     "axios": "^0.19.0",
     "cheerio": "^1.0.0-rc.3",
     "glob": "^7.1.6",
+    "lodash": "^4.17.19",
     "lunr": "^2.3.9",
     "mime": "^2.4.4",
+    "query-string": "^6.13.2",
     "uuid": "^3.3.2"
   },
   "peerDependencies": {
@@ -40,6 +42,7 @@
   "devDependencies": {
     "@types/cheerio": "^0.22.11",
     "@types/glob": "^7.1.1",
+    "@types/lodash": "^4.14.158",
     "@types/lunr": "^2.3.3",
     "@types/mime": "^2.0.1",
     "@types/uuid": "^3.4.4"

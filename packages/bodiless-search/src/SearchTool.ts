@@ -89,14 +89,22 @@ class SearchTool {
    */
   filesToDocument = (filePaths: string[], sourcePath: string): TDocument[] => {
     const documents: TDocument[] = [];
+    const selector = process.env.BODILESS_SEARCH_INDEX_SELECTOR || 'body *';
+    const exclude = process.env.BODILESS_SEARCH_INDEX_EXCLUDE_SELECTOR || 'script,noscript,style';
     filePaths
       .filter(filePath => fs.statSync(path.join(sourcePath, filePath)).isFile())
       .forEach(filePath => {
         const mimeType = mime.getType(filePath);
         switch (mimeType) {
-          case 'text/html':
-            documents.push(this.htmlToDocument(filePath, sourcePath));
+          case 'text/html': {
+            const html = fs.readFileSync(path.resolve(sourcePath, filePath)).toString();
+            documents.push({
+              title: filePath,
+              ...this.htmlToDocument(html, selector, exclude),
+              link: filePath,
+            });
             break;
+          }
           default:
             throw new Error(`Only HTML is supported for indexing, ${mimeType} is given.`);
         }
@@ -104,14 +112,24 @@ class SearchTool {
     return documents;
   };
 
-  htmlToDocument = (filePath: string, sourcePath: string): TDocument => {
-    const html = fs.readFileSync(path.resolve(sourcePath, filePath)).toString();
+  /**
+   * Create index document from HTML content.
+   */
+  htmlToDocument = (html: string, selector: string, exclude: string): TDocument => {
     const $ = cheerio.load(html);
+    if (exclude) {
+      $(exclude).remove();
+    }
+    // eslint-disable-next-line func-names
+    const body = $(selector).contents().map(function (this: CheerioElement) {
+      return (this.type === 'text') ? $(this).text().trim() : '';
+    }).get()
+      .join(' ');
+    const title = $('h1').text().trim() || $('title').text().trim();
     return {
       id: v1(),
-      title: $('title').text(),
-      body: $('body').text(),
-      link: filePath,
+      title,
+      body,
     };
   };
 }

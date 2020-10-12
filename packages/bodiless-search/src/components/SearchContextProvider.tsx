@@ -13,25 +13,34 @@
  */
 
 import React, {
-  ComponentType, useContext, useEffect, useState, FC,
+  ComponentType, useContext, useState, FC,
 } from 'react';
 import { TSearchResults } from '../types';
+
+type TSearchResultContextValue = {
+  results: TSearchResults,
+  setResult: React.Dispatch<React.SetStateAction<TSearchResults>>,
+};
 
 /**
  * Search result context
  */
-const defaultSearchResults: TSearchResults = [];
-const searchResultContext = React.createContext<TSearchResults>(defaultSearchResults);
+const defaultSearchResults: TSearchResultContextValue = {
+  results: [],
+  setResult: () => {},
+};
+const searchResultContext = React.createContext<TSearchResultContextValue>(defaultSearchResults);
 
 export const SearchResultProvider: FC = ({ children }) => {
-  const [result, setResult] = useState([]);
+  const [results, setResult] = useState<TSearchResults>([]);
 
-  useEffect(() => {
-    console.log(setResult);
-  }, []);
+  const contextValue = {
+    results,
+    setResult,
+  };
 
   return (
-    <searchResultContext.Provider value={result}>
+    <searchResultContext.Provider value={contextValue}>
       {children}
     </searchResultContext.Provider>
   );
