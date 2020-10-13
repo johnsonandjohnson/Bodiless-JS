@@ -49,8 +49,8 @@ export type TSearchConf = {
 export type TField = {
   name: string,
   attributes?: {
-    boost?: string,
-    extractor?: string,
+    boost?: number,
+    extractor?: (doc: object) => string | object | object[],
   },
 };
 

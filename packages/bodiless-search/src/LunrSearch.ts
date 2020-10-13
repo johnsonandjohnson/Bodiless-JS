@@ -103,7 +103,7 @@ class LunrSearch implements SearchEngineInterface {
     // Configure index ref and fields
     builder.ref(this.indexConfig.ref);
     this.indexConfig.fields.forEach(field => {
-      builder.field(field.name);
+      builder.field(field.name, field.attributes);
     });
 
     // Add documents to index.
@@ -117,7 +117,7 @@ class LunrSearch implements SearchEngineInterface {
    * Create index preview JSON object.
    */
   private createPreview = (): { [key: string]: TPreview; } => {
-    const length = Number(process.env.BODILESS_SEARCH_INDEX_PREVIEW_LENGTH) || 24;
+    const length = Number(process.env.BODILESS_SEARCH_INDEX_PREVIEW_LENGTH) || 100;
     const previews: { [key: string]: TPreview; } = {};
     this.documents.forEach(doc => {
       const {
@@ -126,7 +126,7 @@ class LunrSearch implements SearchEngineInterface {
       const preview = {
         id,
         link,
-        title,
+        title: `${title} ${id}`,
         body: truncate(body, { length, separator: ' ' }),
       };
       previews[id] = preview;

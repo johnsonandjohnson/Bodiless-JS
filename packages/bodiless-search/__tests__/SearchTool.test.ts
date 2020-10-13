@@ -65,7 +65,7 @@ describe('Search Tool', () => {
       {
         selector: 'body *',
         html: `<html><head><title>head title</title></head>
-                <body><h1> h1 title </h1><p> body p1 </p><div>body div1</div></body>`,
+                <body><h1> h1 title </h1><p> </p><p> body p1 </p><div>body div1</div></body>`,
         title: 'h1 title',
         body: 'h1 title body p1 body div1',
         exclude: '',
@@ -119,6 +119,22 @@ describe('Search Tool', () => {
         title: 'h1 title',
         body: 'h1 title body p1 body div1',
         exclude: 'noscript',
+      },
+      {
+        selector: 'body *',
+        html: `<html><head><title>head title</title></head>
+                <body><h1>h1 title</h1><p>body p1</p><div>body div1</div></body>`,
+        title: 'h1 title',
+        body: 'body p1',
+        exclude: 'div,h1',
+      },
+      {
+        selector: 'div',
+        html: `<html><head><title>head title</title></head>
+                <body><h1>h1 title</h1><div class="c1">div1</div><div>div2</div></body>`,
+        title: 'h1 title',
+        body: 'div2',
+        exclude: '.c1',
       },
     ];
 

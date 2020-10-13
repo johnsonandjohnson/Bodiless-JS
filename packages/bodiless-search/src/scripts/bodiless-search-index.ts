@@ -17,6 +17,10 @@
 import SearchTool from '../SearchTool';
 import type { TSearchConf, TSearchIndexSettings } from '../types';
 
+require('dotenv').config({
+  path: '.env.development',
+});
+
 const config: TSearchConf = {};
 
 const tool = new SearchTool(config);
@@ -35,7 +39,13 @@ const settings: TSearchIndexSettings = {
   // @todo: make this configurable.
   sourceTypes: ['html'],
   targetPath: './public/lunr.idx',
-  indexConfig: { ref: 'id', fields: [{ name: 'title' }, { name: 'body' }] },
+  indexConfig: {
+    ref: 'id',
+    fields: [
+      { name: 'title', attributes: { boost: 2 } },
+      { name: 'body' },
+    ],
+  },
 };
 
 // Create and save index to target path.

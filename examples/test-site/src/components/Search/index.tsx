@@ -14,7 +14,6 @@
 import { flow } from 'lodash';
 import React, { ComponentType } from 'react';
 import SearchClean, { SearchResult as SearchResultClean } from '@bodiless/search';
-import { asBodilessLink } from '@bodiless/components';
 import {
   addClasses,
   withDesign,
@@ -48,10 +47,10 @@ const Search = flow(
 )(SearchClean);
 
 const searchResultDesign = {
-  SearchResultWrapper: addClasses('p-2 border border-red'),
+  SearchResultWrapper: addClasses('p-2 border border-red bg-blue'),
   SearchResultList: addClasses('p-2 border border-blue'),
-  SearchResultListItem: addClasses('p-4 border border-green'),
-  A: flow(asBodilessLink(), addClasses('text-blue-700 underline')),
+  SearchResultListItem: addClasses('my-4'),
+  A: addClasses('text-blue-700 underline'),
 };
 
 const asSimpleSearchResult = withDesign(searchResultDesign);

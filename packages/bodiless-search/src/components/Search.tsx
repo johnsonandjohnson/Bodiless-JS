@@ -71,7 +71,7 @@ const SearchBoxBase: FC<SearchBoxProps & HTMLProps<HTMLInputElement>> = (
 ) => {
   console.log(onChange, 'onChange SearchBoxBase');
   return (
-    <Input onChange={onChange} {...props} />
+    <Input onChange={onChange} {...props} placeholder="Search" />
   );
 };
 
@@ -90,9 +90,9 @@ const searchComponents: SearchComponents = {
   SearchButton: SearchButtonBase,
 };
 
-const SearchResultItem: FC<TSearchResultItem> = ({ value }) => (
-  <Li>
-    <A href={value.link}>{ value.title }</A>
+const SearchResultItem: FC<TSearchResultItem> = ({ value, ...props }) => (
+  <Li {...props}>
+    <A href={value.link} {...props}>{ value.title }</A>
     <P>{value.preview}</P>
   </Li>
 );

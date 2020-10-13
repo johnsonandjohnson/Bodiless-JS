@@ -98,9 +98,13 @@ class SearchTool {
         switch (mimeType) {
           case 'text/html': {
             const html = fs.readFileSync(path.resolve(sourcePath, filePath)).toString();
+            const doc = this.htmlToDocument(html, selector, exclude);
+            console.log('DOC:', doc);
+            if (!doc.title) {
+              doc.title = filePath;
+            }
             documents.push({
-              title: filePath,
-              ...this.htmlToDocument(html, selector, exclude),
+              ...doc,
               link: filePath,
             });
             break;
@@ -117,6 +121,7 @@ class SearchTool {
    */
   htmlToDocument = (html: string, selector: string, exclude: string): TDocument => {
     const $ = cheerio.load(html);
+    const title = $('h1').text().trim() || $('title').text().trim();
     if (exclude) {
       $(exclude).remove();
     }
@@ -124,8 +129,10 @@ class SearchTool {
     const body = $(selector).contents().map(function (this: CheerioElement) {
       return (this.type === 'text') ? $(this).text().trim() : '';
     }).get()
-      .join(' ');
-    const title = $('h1').text().trim() || $('title').text().trim();
+      .join(' ')
+      .replace(/ +/gi, ' ')
+      .trim();
+
     return {
       id: v1(),
       title,

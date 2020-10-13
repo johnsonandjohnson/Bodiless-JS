@@ -20,7 +20,7 @@ import {
   withDesign,
   Div,
 } from '@bodiless/fclasses';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey, useEditContext } from '@bodiless/core';
 import Search from '../Search';
 import ResponsiveMenu from '../Menus';
 import Logo from './logo';
@@ -52,11 +52,13 @@ const HeaderClean: FC<Props> = ({ components }) => {
     SiteLogoReturn,
   } = components;
 
+  const { isEdit } = useEditContext();
+
   return (
     <Wrapper>
       <Container>
         <SiteLogoReturn />
-        <Search />
+        { !isEdit && <Search />}
       </Container>
       <MenuContainer>
         <Menu />
