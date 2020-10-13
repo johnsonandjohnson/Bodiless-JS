@@ -54,6 +54,11 @@ import YouTube, {
   withYouTubePlayerSettings,
   withYouTubeFormSrcSnippet,
   withYouTubePlayerTransformer,
+  useYouTubePlayerAPI,
+  withYouTubePlayerAPI,
+  ifYouTubePlayerAPILoaded,
+  ifNotYouTubePlayerAPILoaded,
+  YouTubePlayerAPIProvider,
 } from './YouTube';
 import type { YouTubePlayerSettings } from './YouTube';
 import PageDimensionsProvider, {
@@ -113,6 +118,11 @@ export {
   withYouTubePlayerTransformer,
   withYouTubeFormSrcSnippet,
   withYouTubeFormHeader,
+  useYouTubePlayerAPI,
+  withYouTubePlayerAPI,
+  ifYouTubePlayerAPILoaded,
+  ifNotYouTubePlayerAPILoaded,
+  YouTubePlayerAPIProvider,
   YouTube,
   PageDimensionsProvider,
   usePageDimensionsContext,

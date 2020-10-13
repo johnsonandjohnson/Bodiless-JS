@@ -12,16 +12,25 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import { withYouTubePlayerSettings } from '@bodiless/components';
+import {
+  withYouTubePlayerSettings,
+  ifNotYouTubePlayerAPILoaded,
+  useYouTubePlayerAPI,
+  YouTubePlayerAPIProvider,
+} from '@bodiless/components';
 import {
   withDesign,
   A,
   H2,
+  Button,
   addClasses,
+  addProps,
+  flowIf,
 } from '@bodiless/fclasses';
+import { flowRight } from 'lodash';
 import Layout from '../../../components/Layout';
 import {
   DefaultReponsive16By9YouTube,
@@ -36,6 +45,15 @@ const withShownCaptions = withYouTubePlayerSettings({
   ...defaultPlayerSettings,
   cc_load_policy: 1,
 });
+
+declare global {
+  interface Window {
+    ytplayer: {
+      playVideo: Function;
+      stopVideo: Function;
+    };
+  }
+}
 
 const YouTubeWithShownCaptions = withDesign({
   Item: withShownCaptions,
@@ -59,13 +77,64 @@ const YouTubeWithLoop = withDesign({
   Item: withLoop,
 })(DefaultReponsive16By9YouTube);
 
-const withoutJSApi = withYouTubePlayerSettings({
-  ...defaultPlayerSettings,
-  enablejsapi: 0,
-});
+const withJSApi = flowRight(
+  withYouTubePlayerSettings({
+    ...defaultPlayerSettings,
+    enablejsapi: 1,
+    mute: 1,
+    origin: '',
+  }),
+);
 
-const YouTubeWithoutJSApi = withDesign({
-  Item: withoutJSApi,
+const JS_API_IFRAME_ID = 'jsapidemo';
+
+const withYTPlayer = (playerId: string) => (Component: any) => (props: any) => {
+  const { isLoaded } = useYouTubePlayerAPI();
+  useEffect(() => {
+    if (isLoaded) {
+      // @ts-ignore
+      // ToDo make it more generic. Allow supporting multiple players on a page.
+      window.ytplayer = new YT.Player(playerId, {
+        events: { onReady: () => { } },
+      });
+    }
+  }, [isLoaded]);
+  return (
+    <Component {...props} />
+  );
+};
+
+const StyledButton = addClasses('border p-2 m-2 inline')(Button);
+const YouTubeButton = flowIf(
+  ifNotYouTubePlayerAPILoaded,
+)(addProps({ disabled: true }))(StyledButton);
+
+const PlayButton = flowRight(
+  addProps({
+    onClick: () => {
+      if (window.ytplayer !== undefined && typeof window.ytplayer.playVideo === 'function') {
+        window.ytplayer.playVideo();
+      }
+    },
+  }),
+)(YouTubeButton);
+
+const StopButton = flowRight(
+  addProps({
+    onClick: () => {
+      if (window.ytplayer !== undefined && typeof window.ytplayer.stopVideo === 'function') {
+        window.ytplayer.stopVideo();
+      }
+    },
+  }),
+)(YouTubeButton);
+
+const YouTubeWithJSApi = withDesign({
+  Item: flowRight(
+    withJSApi,
+    withYTPlayer(JS_API_IFRAME_ID),
+    addProps({ id: JS_API_IFRAME_ID }),
+  ),
 })(DefaultReponsive16By9YouTube);
 
 const withoutModestBranding = withYouTubePlayerSettings({
@@ -99,10 +168,9 @@ export default (props: any) => (
       <AnchorLink href="#withShownCaptions">Responsive YouTube 16:9 with shown captions</AnchorLink>
       <AnchorLink href="#withoutControls">Responsive YouTube 16:9 without controls</AnchorLink>
       <AnchorLink href="#withLoop">Responsive YouTube 16:9 with loop</AnchorLink>
-      <AnchorLink href="#withoutJSApi">Responsive YouTube 16:9 without js api</AnchorLink>
+      <AnchorLink href="#withJSAPI">YouTube Player JS API</AnchorLink>
       <AnchorLink href="#withoutJSApi">Responsive YouTube 16:9 without modest branding</AnchorLink>
       <AnchorLink href="#withRelated">Responsive YouTube 16:9 with related videos</AnchorLink>
-
       <Header2 id="defaultSettings">Responsive YouTube 16:9 with default settings</Header2>
       <DefaultReponsive16By9YouTube nodeKey="default" />
       <Header2 id="autoplay">Responsive Autoplay YouTube 16:9</Header2>
@@ -113,8 +181,12 @@ export default (props: any) => (
       <YouTubeWithoutControls nodeKey="withoutControls" />
       <Header2 id="withLoop">Responsive YouTube 16:9 with loop</Header2>
       <YouTubeWithLoop nodeKey="withLoop" />
-      <Header2 id="withoutJSApi">Responsive YouTube 16:9 without js api</Header2>
-      <YouTubeWithoutJSApi nodeKey="withoutJSApi" />
+      <Header2 id="withJSAPI">YouTube Player API</Header2>
+      <YouTubePlayerAPIProvider>
+        <PlayButton>Play</PlayButton>
+        <StopButton>Stop</StopButton>
+        <YouTubeWithJSApi nodeKey="withJsApi" />
+      </YouTubePlayerAPIProvider>
       <Header2 id="withoutModestBranding">Responsive YouTube 16:9 without modest branding</Header2>
       <YouTubeWithoutModestBranding nodeKey="withoutModestBranding" />
       <Header2 id="withRelated">Responsive YouTube 16:9 with related videos</Header2>

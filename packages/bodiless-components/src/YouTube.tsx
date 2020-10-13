@@ -12,7 +12,13 @@
  * limitations under the License.
  */
 
-import React, { useCallback, ComponentType } from 'react';
+import React, {
+  useCallback,
+  ComponentType,
+  useState,
+  useEffect,
+  useContext,
+} from 'react';
 import { flowRight } from 'lodash';
 import { useMenuOptionUI } from '@bodiless/core';
 import type { AsBodiless } from '@bodiless/core';
@@ -36,6 +42,8 @@ type YouTubePlayerSettings = {
   rel: boolean | 0 | 1,
   mute: boolean | 0 | 1,
   origin: string,
+  version: number,
+  playlist: string,
 };
 
 type Props = IframeProps & {
@@ -57,14 +65,23 @@ const withYouTubePlayerSettings = (
   playerSettings: settings,
 });
 
+/*
+* adjust loop settings per https://developers.google.com/youtube/player_parameters#loop
+*/
+const adjustLoopPlayerSettings = (settings: Partial<YouTubePlayerSettings>, videoId: string) => ({
+  ...settings,
+  ...(settings.loop && videoId && { playlist: videoId, version: 3 }),
+});
+
 const withYouTubePlayerTransformer = (Component: ComponentType<any>) => {
   const WithYouTubePlayerTransformer = (props: any) => {
     const { playerSettings, src, ...rest } = props;
     const videoId = src ? extractVideoIdFromUrl(src) : '';
     const src$ = `https://www.youtube.com/embed/${videoId}`;
     const url = new URL(src$);
-    if (playerSettings !== undefined) {
-      Object.entries(playerSettings).forEach(setting => {
+    if (playerSettings !== undefined && videoId !== undefined) {
+      const playerSettings$ = adjustLoopPlayerSettings(playerSettings, videoId);
+      Object.entries(playerSettings$).forEach(setting => {
         const [key, value] = setting;
         url.searchParams.set(key, String(value));
       });
@@ -74,6 +91,55 @@ const withYouTubePlayerTransformer = (Component: ComponentType<any>) => {
   WithYouTubePlayerTransformer.displayName = 'WithYouTubePlayerTransformer';
   return WithYouTubePlayerTransformer;
 };
+
+type YouTubePlayerContextData = {
+  isLoaded: boolean;
+};
+
+const YouTubePlayerAPIContext = React.createContext<YouTubePlayerContextData>({
+  isLoaded: false,
+});
+
+const YouTubePlayerAPIProvider: ComponentType<any> = ({ children }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect(() => {
+    const scriptId = 'youtubeplayerapiscript';
+    const scriptSrc = 'https://www.youtube.com/iframe_api';
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement('script');
+      script.id = scriptId;
+      script.type = 'text/javascript';
+      script.async = true;
+      script.src = scriptSrc;
+      document.getElementsByTagName('head')[0].appendChild(script);
+    }
+  });
+  useEffect(() => {
+    // @ts-ignore
+    window.onYouTubeIframeAPIReady = () => {
+      setIsLoaded(true);
+    };
+  });
+  return (
+    <YouTubePlayerAPIContext.Provider value={{ isLoaded }}>
+      {children}
+    </YouTubePlayerAPIContext.Provider>
+  );
+};
+
+const withYouTubePlayerAPI = (Component: ComponentType<any>) => {
+  const WithYouTubePlayerAPI = (props: any) => (
+    <YouTubePlayerAPIProvider>
+      <Component {...props} />
+    </YouTubePlayerAPIProvider>
+  );
+  WithYouTubePlayerAPI.displayName = 'WithYouTubePlayerAPI';
+  return WithYouTubePlayerAPI;
+};
+
+const useYouTubePlayerAPI = () => useContext(YouTubePlayerAPIContext);
+const ifYouTubePlayerAPILoaded = () => useContext(YouTubePlayerAPIContext).isLoaded;
+const ifNotYouTubePlayerAPILoaded = () => !useContext(YouTubePlayerAPIContext).isLoaded;
 
 const withYouTubeFormSrcSnippet = withFormSnippet({
   nodeKeys: 'src',
@@ -138,5 +204,10 @@ export {
   withYouTubeFormHeader,
   withYouTubeFormSrcSnippet,
   withYouTubePlayerTransformer,
+  useYouTubePlayerAPI,
+  ifYouTubePlayerAPILoaded,
+  ifNotYouTubePlayerAPILoaded,
+  withYouTubePlayerAPI,
+  YouTubePlayerAPIProvider,
 };
 export type { YouTubePlayerSettings };
