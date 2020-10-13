@@ -1,9 +1,9 @@
 # Iframe Component
 
   One can use this to compose and place an iframe on the page, that uses
-  the bodiless edit system.
+  the BodilessJS edit system.
 
-  Lets compose a base bodiless iframe component.
+  Lets compose a base BodilessJS iframe component.
 
   ``` js
   import React from 'react';
@@ -18,7 +18,7 @@
   <Iframe nodeKey="iframe" src="https://johnsonandjohnson.github.io/Bodiless-JS/" />
  ```
 
-  By default, src and height fields are editable. One can compose its own bodiless iframe component defining custom editable fields. For example, lets make src and width editable. In order to do it, we will import src snippet from @bodiless/components, compose width snippet ourself and compose our custom EditableWidthIframe component.
+  By default, src and height fields are editable. One can compose its own BodilessJS iframe component defining custom editable fields. For example, lets make src and width editable. In order to do it, we will import src snippet from @bodiless/components, compose width snippet ourself and compose our custom `EditableWidthIframe` component.
 
   ``` js
   import {
@@ -60,7 +60,7 @@
 
   ```
 
-  Then, we can render EditableWidthIframe
+  Then, we can render `EditableWidthIframe`
 
 ``` jsx
 <EditableWidthIframe nodeKey="iframe" src="https://johnsonandjohnson.github.io/Bodiless-JS/" />

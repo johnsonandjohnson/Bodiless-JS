@@ -1,7 +1,6 @@
 # YouTube Component
 
-  One can use this to compose and place a YouTube video on the page, that uses
-  the bodiless edit system.
+  The YouTube Component can be used to place a YouTube video on a page via the BodilessJS edit system.
 
   ``` js
   import { YouTube } from '@bodiless/components';
@@ -9,7 +8,7 @@
   <YouTube nodeKey="youtube" />
   ```
 
-  One can also use the HOC version of this which can then be apply to other components. But
+  You can also use the HOC version of this which can then be applied to other components. But
   the underlining component must accept the same props as an `iframe` tag. Simply pass
   the node key to the asBodilessYouTube function and then use the returned HOC
 
@@ -22,7 +21,7 @@
   <YouTube />
   ```
 
-  One can configure YouTube player settings leveraging withYouTubePlayerSettings HOC. For example, lets configure AutoPlay for our YouTube component.
+  You can configure YouTube player settings leveraging withYouTubePlayerSettings HOC. For example, to configure AutoPlay for the YouTube component:
 
   ``` js
   import { YouTube } from '@bodiless/components';
@@ -34,3 +33,12 @@
 
   <AutoPlayYouTube nodeKey="youtube" />
   ```
+
+## Props
+
+| name           | default   | description                                                                         |
+|----------------|-----------|-------------------------------------------------------------------------------------|
+| nodeKey        | undefined | Identifies where the component data will be stored.                                 |
+| playerSettings | undefined | YouTube embed player settings. Check YouTubePlayerSettings type from 'Youtube.tsx'. |
+
+In addition, you can pass `HTMLIFrameElement` props (id, src, width, etc.). Check `HTMLIFrameElement` type for more details.

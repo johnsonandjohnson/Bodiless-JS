@@ -31,6 +31,11 @@ import type {
   Data as IframeData,
 } from './Iframe';
 
+/**
+ * YouTube embed player parameters
+ *
+ * @see https://developers.google.com/youtube/player_parameters#Parameters
+ */
 type YouTubePlayerSettings = {
   autoplay: boolean | 0 | 1,
   cc_lang_pref: string,

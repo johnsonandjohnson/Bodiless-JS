@@ -192,7 +192,7 @@ export default (props: any) => (
       <AnchorLink href="#withoutJSApi">Responsive YouTube 16:9 without modest branding</AnchorLink>
       <AnchorLink href="#withRelated">Responsive YouTube 16:9 with related videos</AnchorLink>
       <AnchorLink href="#withLangPref">Responsive YouTube 16:9 with custom language preferences</AnchorLink>
-      
+
       <Header2 id="defaultSettings">Responsive YouTube 16:9 with default settings</Header2>
       <DefaultReponsive16By9YouTube nodeKey="default" />
       <Header2 id="autoplay">Responsive Autoplay YouTube 16:9</Header2>
