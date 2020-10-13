@@ -1,7 +1,7 @@
 # Iframe Component
 
   One can use this to compose and place an iframe on the page, that uses
-  the BodilessJS edit system.
+  the BodilessJS edit interface.
 
   Lets compose a base BodilessJS iframe component.
 

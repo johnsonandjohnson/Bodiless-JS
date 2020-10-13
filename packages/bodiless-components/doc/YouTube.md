@@ -1,6 +1,6 @@
 # YouTube Component
 
-  The YouTube Component can be used to place a YouTube video on a page via the BodilessJS edit system.
+  The YouTube Component can be used to place a YouTube video on a page via the BodilessJS edit interface.
 
   ``` js
   import { YouTube } from '@bodiless/components';
