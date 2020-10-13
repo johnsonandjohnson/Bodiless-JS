@@ -189,7 +189,7 @@ export default (props: any) => (
       <AnchorLink href="#withoutControls">Responsive YouTube 16:9 without controls</AnchorLink>
       <AnchorLink href="#withLoop">Responsive YouTube 16:9 with loop</AnchorLink>
       <AnchorLink href="#withJSAPI">YouTube Player JS API</AnchorLink>
-      <AnchorLink href="#withoutJSApi">Responsive YouTube 16:9 without modest branding</AnchorLink>
+      <AnchorLink href="#withoutModestBranding">Responsive YouTube 16:9 without modest branding</AnchorLink>
       <AnchorLink href="#withRelated">Responsive YouTube 16:9 with related videos</AnchorLink>
       <AnchorLink href="#withLangPref">Responsive YouTube 16:9 with custom language preferences</AnchorLink>
 
