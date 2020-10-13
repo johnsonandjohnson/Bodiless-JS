@@ -126,7 +126,7 @@ class LunrSearch implements SearchEngineInterface {
       const preview = {
         id,
         link,
-        title: `${title} ${id}`,
+        title,
         body: truncate(body, { length, separator: ' ' }),
       };
       previews[id] = preview;
