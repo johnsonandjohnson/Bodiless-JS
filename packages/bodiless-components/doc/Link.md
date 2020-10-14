@@ -1,11 +1,11 @@
 # Link Component
 
-The Link Component allows you to easily add links to your site. Links can be
+The Link Component allows you to easily add links to your site. Links are
 used within other components - such as touts, menus, and images to name a few.
 
 ## Content Editor Details
 
-To add a Link:
+To set links used within components:
 
 1. In Edit mode, click on a component that utilizes link component. For example click on a linkable image.
  
@@ -23,7 +23,7 @@ To add a Link:
 
 ### Adding Links in Rich Text Editor
 
-To add a link to text in the rich text editor (e.g. in the body copy of a Tout):
+To add a link to text in the [rich text editor](../../../Components/RichText)(e.g. in the body copy of a Tout):
 
 1. Highlight the text you want to add the link to.
 ![](./assets/HighlightLinkText.jpg)
@@ -38,10 +38,26 @@ menu.
 4. In the link form, enter the link URL and click the checkmark.
 ![](./assets/LinkButtonAfter.jpg)
 
+---
+
+## Site Builder Details
+
+**Usage:**
+
+```
+import { withLinkToggle, Editable, Link } from '@bodiless/components';
+
+const LinkToggle = withLinkToggle(Link);
+
+<LinkToggle nodeKey="linktoggle1"><Editable nodeKey="text" placeholder="Link
+Toggle" /></LinkToggle>
+```
+
+---
 
 ## Architectural Details
 
-One can use this to place a link (usually an `a` tag) on the page, that uses the
+You can use this to place a link (usually an `a` tag) on the page, that uses the
 BodilessJS edit system and allow the href to be editable.
 
   ``` 
@@ -50,8 +66,8 @@ BodilessJS edit system and allow the href to be editable.
   <Link nodeKey="linkit">This is an editable Nodelink.</Link> 
   ```
 
-One can also use the HOC version of this which can then be apply to other
-components. But the underlining component must accept the same props as an `a`
+You can also use the HOC version of this which can then be apply to other
+components. But the underlying component must accept the same props as an `a`
 tag. Simply pass the node key to the asBodilessLink function and then use the
 returned HOC
 
@@ -74,14 +90,3 @@ children
 
 In edit mode, the On/Off is controlled by a button exposed in local context
 menu. 
-
-**Usage:**
-
-```
-import { withLinkToggle, Editable, Link } from '@bodiless/components';
-
-const LinkToggle = withLinkToggle(Link);
-
-<LinkToggle nodeKey="linktoggle1"><Editable nodeKey="text" placeholder="Link
-Toggle" /></LinkToggle>
-```
