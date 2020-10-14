@@ -15,7 +15,8 @@ click the Swap icon.
 ![](./assets/ImageComponentLibraryAll.jpg)
 
 3. In the Component Library select which type of image you would like to
-display. For example:
+display. The BodilessJS Starter Kit provides the following image options by default. 
+Your site may provide a different array of options for the image component.
     * Square
     * Landscape
     * Square Linkable
@@ -25,22 +26,21 @@ display. For example:
 image alt text using the context menu.
 ![](./assets/ContextMenuImage.jpg)
 
-5. Once you are done selecting your image and have entered the alt text click
+5. Once you are done selecting your image and have entered the alt text, click
 the checkmark or hit enter.
 
 6. You can resize the image by clicking and dragging on the the right hand side
 of the Flow Container.
 
-Images can also be added to touts. For more information on adding images to
+Images are parts of touts. For more information on adding images to
 touts see the [tout documentation](../../../Components/Touts).
+
+---
 
 ## Site Builder Details
 
-
-## Architectural Details
-
-One can use this to place an image (usually an `img` tag) on the page, that uses
-the BodilessJS edit system and allow the src and alt text to be editable. The edit
+You can use this to place an image (usually an `img` tag) on a page via the BodilessJS 
+edit interfce and allow the src and alt text to be editable. The edit
 interface also supports image upload.
 
   ``` 
@@ -49,8 +49,8 @@ interface also supports image upload.
   <Image nodeKey="imageit" /> 
   ```
 
-One can also use the HOC version of this which can then be apply to other
-components.  But the underlining component must accept the same props as an
+You can also use the HOC version of this which can then be applied to other
+components.  But the underlying component must accept the same props as an
 `img` tag. Simply pass the node key to the asBodilessImage function and then use
 the returned HOC
 
@@ -63,10 +63,10 @@ the returned HOC
   <Image />
   ```
 
-One can enhance Image picker UI elements. A list of UI elements that can be
+You can also enhance Image picker UI elements. A list of UI elements that can be
 enhanced can be found in TImagePickerUI type exported by Image. In order to
 enhance a UI element, the enhancement should be injected as ui prop to the Image
-element. Lets consider, we want to customize master wrapper element
+element. To customize master wrapper element:
 
 ```
 js import { Image } from '@bodiless/components';
@@ -78,4 +78,8 @@ image</div>; const ui = { UploadArea };
 ```
 
 In order to find a complete example how to build a custom UI for Image picker,
-check @bodiless/components-ui.
+see @bodiless/components-ui.
+
+---
+
+## Architectural Details
