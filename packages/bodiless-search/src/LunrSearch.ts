@@ -65,8 +65,6 @@ class LunrSearch implements SearchEngineInterface {
       preview: previews[result.ref].body,
     }));
 
-    console.log('RESULT FROM SEARCH ENGINE', results);
-
     return results;
   };
 

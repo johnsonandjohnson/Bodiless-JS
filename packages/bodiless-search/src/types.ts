@@ -39,13 +39,6 @@ export type TSearchConf = {
   searchEngine?: SearchEngineInterface,
 };
 
-// @todo: remove
-// export type TSearchResult = {
-//   score: number,
-//   ref: string,
-//   metaData?: { [key: string]: string; },
-// };
-
 export type TField = {
   name: string,
   attributes?: {

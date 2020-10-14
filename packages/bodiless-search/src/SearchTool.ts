@@ -100,7 +100,6 @@ class SearchTool {
             const html = fs.readFileSync(path.resolve(sourcePath, filePath)).toString();
             const doc = this.htmlToDocument(html, selector, exclude);
             const filePathClean = filePath.replace(/index.html$/i, '');
-            console.log('DOC:', doc);
             if (!doc.title) {
               doc.title = filePathClean;
             }

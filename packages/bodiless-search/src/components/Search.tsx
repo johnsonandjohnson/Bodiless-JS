@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import { flow } from 'lodash';
 import React, {
   FunctionComponent as FC,
   ComponentType,
@@ -22,13 +23,14 @@ import React, {
 } from 'react';
 import axios from 'axios';
 import {
-  Div,
-  Input,
-  Button,
-  Ul,
-  Li,
   A,
+  Button,
+  Div,
+  H3,
+  Input,
+  Li,
   P,
+  Ul,
   StylableProps,
   DesignableComponentsProps,
   designable,
@@ -47,42 +49,39 @@ type SearchComponents = {
 
 type SearchBoxProps = {
   onChange: Function,
+  onKeyPress: Function,
 };
 
 type SearchButtonProps = {
   onClick: Function,
 };
 
-type TSearchResultItem = {
-  key: number,
-  value: { [key: string]: string; },
-};
-
 type SearchResultComponents = {
   SearchResultWrapper: ComponentType<StylableProps>;
   SearchResultList: ComponentType<any>;
   SearchResultListItem: ComponentType<any>;
+  SearchResultSummary: ComponentType<StylableProps>,
 };
+
+type SearchResultItemComponents = {
+  ItemList: ComponentType<StylableProps>,
+  ItemH3: ComponentType<StylableProps>,
+  ItemAnchor: ComponentType<HTMLProps<HTMLAnchorElement> & StylableProps>,
+  ItemParagraph: ComponentType<StylableProps>,
+};
+
+type SearchResultItemProps = DesignableComponentsProps<SearchResultItemComponents> &
+{value: { [key: string]: string; }};
 
 const searchClient = new SearchClient();
 
-const SearchBoxBase: FC<SearchBoxProps & HTMLProps<HTMLInputElement>> = (
-  { onChange, ...props },
-) => {
-  console.log(onChange, 'onChange SearchBoxBase');
-  return (
-    <Input onChange={onChange} {...props} placeholder="Search" />
-  );
-};
+const SearchBoxBase: FC<SearchBoxProps & HTMLProps<HTMLInputElement>> = props => (
+  <Input {...props} placeholder="Search" />
+);
 
 const SearchButtonBase: FC<SearchButtonProps & HTMLProps<HTMLButtonElement>> = (
   { onClick, ...rest },
-) => {
-  console.log(onClick, 'onClick SearchButtonBase');
-  return (
-    <Button onClick={onClick} {...rest} />
-  );
-};
+) => <Button onClick={onClick} {...rest} />;
 
 const searchComponents: SearchComponents = {
   SearchWrapper: Div,
@@ -90,17 +89,42 @@ const searchComponents: SearchComponents = {
   SearchButton: SearchButtonBase,
 };
 
-const SearchResultItem: FC<TSearchResultItem> = ({ value, ...props }) => (
-  <Li {...props}>
-    <A href={value.link} {...props}>{ value.title }</A>
-    <P>{value.preview}</P>
-  </Li>
-);
+const searchResultItemComponents: SearchResultItemComponents = {
+  ItemList: Li,
+  ItemH3: H3,
+  ItemAnchor: A,
+  ItemParagraph: P,
+};
+
+const SearchResultItemBase: FC<SearchResultItemProps> = ({ components, ...props }) => {
+  const {
+    ItemList,
+    ItemH3,
+    ItemAnchor,
+    ItemParagraph,
+  } = components;
+
+  const { value } = props;
+
+  return (
+    <ItemList {...props}>
+      <ItemH3>
+        <ItemAnchor href={value.link}>{ value.title }</ItemAnchor>
+      </ItemH3>
+      <ItemParagraph>{value.preview}</ItemParagraph>
+    </ItemList>
+  );
+};
+
+const SearchResultItemClean = flow(
+  designable(searchResultItemComponents),
+)(SearchResultItemBase);
 
 const searchResultComponents: SearchResultComponents = {
   SearchResultWrapper: Div,
   SearchResultList: Ul,
-  SearchResultListItem: SearchResultItem,
+  SearchResultListItem: SearchResultItemClean,
+  SearchResultSummary: P,
 };
 
 type SearchProps = DesignableComponentsProps<SearchComponents> &
@@ -116,9 +140,13 @@ type SearchIndex = {
 
 const SearchResultBase: FC<SearchResultProps> = ({ components }) => {
   const searchResultContext = useSearchResultContext();
-  const { SearchResultWrapper, SearchResultList, SearchResultListItem } = components;
+  const {
+    SearchResultWrapper, SearchResultList, SearchResultListItem, SearchResultSummary,
+  } = components;
+  const showResultCount = `Showing ${searchResultContext.results.length} results.`;
   return (
     <SearchResultWrapper>
+      <SearchResultSummary>{showResultCount}</SearchResultSummary>
       <SearchResultList>
         {
           searchResultContext.results.map((item: TSearchResult) => (
@@ -145,12 +173,26 @@ const SearchBase: FC<SearchProps> = ({ components }) => {
   const searchResultContext = useSearchResultContext();
   const searchPagePath = process.env.BODILESS_SEARCH_PAGE || 'search';
 
-  // @todo: search state
   const onChangeHandler = (event: any) => {
     event.preventDefault();
-    // @todo: collect search term.
     setQueryString(event.target.value);
-    console.log('onChangeHandler: ', event.target.value);
+  };
+
+  const searchHandler = () => {
+    if (
+      searchPagePath !== window.location.pathname.replace(/^\//, '').replace(/\/$/, '')
+    ) {
+      window.location.href = `/search?q=${queryString}`;
+      return;
+    }
+    const results = searchClient.search(queryString);
+    searchResultContext.setResult(results);
+  };
+
+  const onKeyPressHandler = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      searchHandler();
+    }
   };
 
   const onClickHandler = (event: React.MouseEvent) => {
@@ -160,7 +202,6 @@ const SearchBase: FC<SearchProps> = ({ components }) => {
       return;
     }
     const results = searchClient.search(queryString);
-    console.log(searchResultContext, results);
     searchResultContext.setResult(results);
   };
 
@@ -180,12 +221,10 @@ const SearchBase: FC<SearchProps> = ({ components }) => {
       let index = JSON.parse(rawIndex);
       if (!validateIndex(index)) {
         const response = await axios.get('/lunr.idx');
-        console.log(response.data, 'RESPONSE');
         const expires = process.env.BODILESS_SEARCH_EXPIRES || 86400;
         index = { expires: (Date.now() + Number(expires)), ...response.data };
         localStorage.setItem('search:index', JSON.stringify(index));
       }
-      console.log('Loading index ...', index.idx);
       searchClient.loadIndex(index.idx);
       searchClient.loadPreviews(index.preview);
     } catch (error) {
@@ -195,7 +234,6 @@ const SearchBase: FC<SearchProps> = ({ components }) => {
     const { q } = querystring.parse(window.location.search);
     if (q) {
       const results = searchClient.search(q);
-      console.log('qsSearch', results);
       searchResultContext.setResult(results);
     }
   };
@@ -205,7 +243,7 @@ const SearchBase: FC<SearchProps> = ({ components }) => {
   const { SearchWrapper, SearchBox, SearchButton } = components;
   return (
     <SearchWrapper>
-      <SearchBox value={queryString} onChange={onChangeHandler} />
+      <SearchBox value={queryString} onChange={onChangeHandler} onKeyPress={onKeyPressHandler} />
       <SearchButton onClick={onClickHandler} />
     </SearchWrapper>
   );

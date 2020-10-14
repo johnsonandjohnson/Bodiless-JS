@@ -17,7 +17,7 @@ import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { withSearchResult } from '@bodiless/search';
 import Layout from '../../../components/Layout';
-import { SearchResult } from '../../../components/Search';
+import { InlineSearchBox, SearchResult } from '../../../components/Search';
 
 const SearchLayout = withSearchResult(Layout);
 
@@ -25,6 +25,7 @@ const SearchPage = (props: any) => (
   <Page {...props}>
     <SearchLayout>
       <h1 className="text-3xl font-bold">Search Result</h1>
+      <InlineSearchBox />
       <SearchResult />
     </SearchLayout>
   </Page>

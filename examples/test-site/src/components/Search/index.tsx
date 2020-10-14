@@ -34,23 +34,29 @@ const withSearchButton = (icon: string) => flow(
 );
 
 const searchDesign = {
+  SearchWrapper: addClasses('my-4 border bl-border-black align-middle'),
+  SearchBox: addClasses('px-2 align-middle text-1xl'),
+  SearchButton: withSearchButton('search'),
+};
+
+const searchInlineDesign = {
+  SearchWrapper: addClasses('inline-block border bl-border-black align-middle bl-react-tags__search-input'),
   SearchBox: addClasses('px-2 align-middle text-1xl'),
   SearchButton: withSearchButton('search'),
 };
 
 const asSimpleSearch = withDesign(searchDesign);
-
-// withPlaceholder
-
-const Search = flow(
-  asSimpleSearch,
-)(SearchClean);
+const asInlineSearch = withDesign(searchInlineDesign);
 
 const searchResultDesign = {
-  SearchResultWrapper: addClasses('p-2 border border-red bg-blue'),
-  SearchResultList: addClasses('p-2 border border-blue'),
-  SearchResultListItem: addClasses('my-4'),
-  A: addClasses('text-blue-700 underline'),
+  SearchResultWrapper: addClasses('py-2'),
+  SearchResultList: addClasses('py-2'),
+  SearchResultSummary: addClasses('text-sm italic'),
+  SearchResultListItem: withDesign({
+    ItemAnchor: addClasses('my-4 bl-text-blue-500 underline'),
+    ItemParagraph: addClasses('text-sm'),
+    ItemList: addClasses('my-4'),
+  }),
 };
 
 const asSimpleSearchResult = withDesign(searchResultDesign);
@@ -59,4 +65,5 @@ export const SearchResult = flow(
   asSimpleSearchResult,
 )(SearchResultClean);
 
-export default Search;
+export const InlineSearchBox = flow(asInlineSearch)(SearchClean);
+export const SimpleSearchBox = flow(asSimpleSearch)(SearchClean);
