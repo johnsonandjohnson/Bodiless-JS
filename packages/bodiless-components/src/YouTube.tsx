@@ -55,6 +55,16 @@ type Props = IframeProps & {
   playerSettings?: YouTubePlayerSettings,
 };
 
+declare global {
+  interface Window {
+    /**
+     * YouTube API calls this function
+     * when the page has finished downloading the JavaScript for the player API,
+     */
+    onYouTubeIframeAPIReady: Function;
+  }
+}
+
 // https://stackoverflow.com/a/9102270
 const extractVideoIdFromUrl = (url: string) => {
   // eslint-disable-next-line no-useless-escape
@@ -78,8 +88,8 @@ const adjustLoopPlayerSettings = (settings: Partial<YouTubePlayerSettings>, vide
   ...(settings.loop && videoId && { playlist: videoId, version: 3 }),
 });
 
-const withYouTubePlayerTransformer = (Component: ComponentType<any>) => {
-  const WithYouTubePlayerTransformer = (props: any) => {
+const withYouTubePlayerTransformer = (Component: ComponentType<Props>) => {
+  const WithYouTubePlayerTransformer = (props: Props) => {
     const { playerSettings, src, ...rest } = props;
     const videoId = src ? extractVideoIdFromUrl(src) : '';
     const src$ = `https://www.youtube.com/embed/${videoId}`;
@@ -120,7 +130,6 @@ const YouTubePlayerAPIProvider: ComponentType<any> = ({ children }) => {
     }
   });
   useEffect(() => {
-    // @ts-ignore
     window.onYouTubeIframeAPIReady = () => {
       setIsLoaded(true);
     };
