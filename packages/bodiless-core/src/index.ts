@@ -31,6 +31,7 @@ import withEditButton, { useEditFormProps } from './withEditButton';
 import useContextMenuForm, { contextMenuForm, ContextMenuForm } from './contextMenuForm';
 import withCompoundForm, { useRegisterSnippet } from './withCompoundForm';
 import withEditFormSnippet from './withEditFormSnippet';
+import type { Options as EditFormSnippetOptions } from './withEditFormSnippet';
 import withData from './withData';
 import NodeProvider, { useNode, useNodeDataHandlers } from './NodeProvider';
 import { DefaultContentNode } from './ContentNode';
@@ -149,6 +150,7 @@ export type {
   IContextMenuItemProps,
   AsBodiless,
   FormSnippet,
+  EditFormSnippetOptions,
 };
 
 export type Bodiless<P, Q> = (C: ComponentType<P> | string) => ComponentType<Q>;
