@@ -29,20 +29,17 @@ const withIcon = (icon: string) => (Component: ComponentType) => (props: any) =>
     <Icon>{icon}</Icon>
   </Component>
 );
-const withSearchButton = (icon: string) => flow(
-  withIcon(icon),
-);
 
 const searchDesign = {
   SearchWrapper: addClasses('my-4 border bl-border-black align-middle'),
   SearchBox: addClasses('px-2 align-middle text-1xl'),
-  SearchButton: withSearchButton('search'),
+  SearchButton: withIcon('search'),
 };
 
 const searchInlineDesign = {
   SearchWrapper: addClasses('inline-block border bl-border-black align-middle'),
   SearchBox: addClasses('px-2 align-middle text-1xl'),
-  SearchButton: withSearchButton('search'),
+  SearchButton: withIcon('search'),
 };
 
 const asSimpleSearch = withDesign(searchDesign);
