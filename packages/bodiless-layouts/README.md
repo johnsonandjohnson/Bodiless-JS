@@ -163,11 +163,11 @@ current classes) and a width property. It then returns an object with a classNam
 (an updated version of the className) and a width property (the width to which it should snap). 
 Both width properties are expressed in percentages (e.g. 50%, 75%).
 
-#### Helper functions for snap Data
+#### Helper functions for snapData
 
 There are two helper functions for `snapData`.
 
-* **`withTailwindClasses`**: takes a tailwind configuration and the the classes in that 
+* **`withTailwindClasses`**: takes a tailwind configuration and the classes in that 
 configuration you would like to use. It returns a snapData function using the data from 
 the tailwind config.
 

@@ -1,13 +1,13 @@
 # Link Component
 
 The Link Component allows you to easily add links to your site. Links can be
-added within other components - such as touts, menus, and images to name a few.
+used within other components - such as touts, menus, and images to name a few.
 
 ## Content Editor Details
 
 To add a Link:
 
-1. In Edit mode, click on a component. For example click on a linkable image.
+1. In Edit mode, click on a component that utilizes link component. For example click on a linkable image.
  
 2. In the context menu click on the Link icon.
 ![](./assets/LinkIcon.jpg)
@@ -15,7 +15,7 @@ To add a Link:
 3. In the Link form enter the URL which you want the link to direct to.
 ![](./assets/LinkForm.jpg)
 
-    >? Please note that you should use relative URLs for internal links (e.g.
+    ?> **Note**  Please note that you should use relative URLs for internal links (e.g.
     /Example/Example). For external links enter a fully formed URL (e.g.
     https://example.com).
 
@@ -42,7 +42,7 @@ menu.
 ## Architectural Details
 
 One can use this to place a link (usually an `a` tag) on the page, that uses the
-bodiless edit system and allow the href to be editable.
+BodilessJS edit system and allow the href to be editable.
 
   ``` 
   js import Link from '@bodiless/components';
@@ -85,4 +85,3 @@ const LinkToggle = withLinkToggle(Link);
 <LinkToggle nodeKey="linktoggle1"><Editable nodeKey="text" placeholder="Link
 Toggle" /></LinkToggle>
 ```
-

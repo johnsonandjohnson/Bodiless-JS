@@ -1,6 +1,6 @@
 # Tout Component
 
-Tout, sometimes called a taco or a tile,  is a group of content which 
+Tout, sometimes called a taco or a tile or a card,  is a group of content which 
 typically features a less than full size image alongside supporting 
 content or a call to action (CTA). Touts are commonly used on websites to 
 call out or offer something to the site visitor. The tout component allows

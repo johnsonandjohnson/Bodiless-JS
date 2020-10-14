@@ -12,7 +12,7 @@ To add an Image to your site:
 
 2. Click on the +Add icon in the toolbar, or if you are swapping components
 click the Swap icon.
-![](./assets/ImageComponentLibraryAll.jpg.jpg)
+![](./assets/ImageComponentLibraryAll.jpg)
 
 3. In the Component Library select which type of image you would like to
 display. For example:
@@ -40,7 +40,7 @@ touts see the [tout documentation](../../../Components/Touts).
 ## Architectural Details
 
 One can use this to place an image (usually an `img` tag) on the page, that uses
-the bodiless edit system and allow the src and alt text to be editable. The edit
+the BodilessJS edit system and allow the src and alt text to be editable. The edit
 interface also supports image upload.
 
   ``` 
