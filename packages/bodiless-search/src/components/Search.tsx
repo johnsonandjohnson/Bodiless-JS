@@ -228,7 +228,7 @@ const SearchBase: FC<SearchProps> = ({ components }) => {
       searchClient.loadIndex(index.idx);
       searchClient.loadPreviews(index.preview);
     } catch (error) {
-      throw new Error('Failed to load search index file.');
+      console.log('Failed to load search index file.');
     }
 
     const { q } = querystring.parse(window.location.search);

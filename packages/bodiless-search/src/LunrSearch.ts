@@ -51,7 +51,8 @@ class LunrSearch implements SearchEngineInterface {
 
   search = (queryString: string): TSearchResults => {
     if (!this.index) {
-      throw new Error('There are no documents to be indexed');
+      console.log('No search index is available.');
+      return [];
     }
     if (!this.previews) {
       throw new Error('There are no previews to display');
