@@ -52,12 +52,11 @@ const SortableChild = (props: SortableChildProps) => {
   );
   // Store what with aligns with the current class
   const [snapWidth, setSnapWidth] = useState('');
-  // Store what size is being used we set the width so that re-sizeable uses percent when resizeing
-  // we default the size to what the current class width is.
-  // we can not set this to auto becaus then it resizes in pixels and not percent.
+  // We start this off as not set so that the classes are used
   const [size, setSize] = useState({
     height: '',
-    width: `${snap({ className: snapClassName }).width}%`,
+    width: '',
+    // width: `${snap({ className: snapClassName }).width}%`,
   });
   // Set the current size to by the stored width
   const updateSizeWithWidth = () => {

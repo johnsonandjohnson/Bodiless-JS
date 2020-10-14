@@ -166,7 +166,11 @@ const getSnapFrom = (...withTuples: WithTuples[]):SnapData => props => {
 };
 const defaultSnapData = getSnapFrom(
   withTuple('(min-width: 0px)')(100)('w-full'),
+  withTuple('(min-width: 576px)')(25)('sm:w-1/4'),
+  withTuple('(min-width: 576px)')(33.33)('sm:w-1/3'),
   withTuple('(min-width: 576px)')(50)('sm:w-1/2'),
+  withTuple('(min-width: 576px)')(66.66)('sm:w-2/3'),
+  withTuple('(min-width: 576px)')(75)('sm:w-3/4'),
   withTuple('(min-width: 576px)')(100)('sm:w-full'),
   withTuple('(min-width: 992px)')(25)('lg:w-1/4'),
   withTuple('(min-width: 992px)')(33.33)('lg:w-1/3'),
