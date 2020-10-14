@@ -47,9 +47,16 @@ page.  ![](./assets/ToutMove.jpg)
 
 The tout can be composed of different tokens (see
 [code](../../../packages/bodiless-organisms/src/components/Touts.tokens.tsx)) to
-create many tout variations. These variations include: * Horizontal * Vertical *
-No Title, * No Body * No description * No CTA * Overlay of CTA * Overlay of
-title
+create many tout variations. These variations include:
+
+* Horizontal 
+* Vertical 
+* No Title, 
+* No Body 
+* No description 
+* No CTA 
+* Overlay of CTA 
+* Overlay of title
 
 ### Usage
 
