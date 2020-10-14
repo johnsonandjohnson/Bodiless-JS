@@ -305,7 +305,7 @@ the links below to read more about working with the individual components.
 
 * [Link](../../../Components/Link) 
 * [Single Accordion](../../../Components/SingleAccordion) 
-* [Menu](../../../Components/Menu)
+* [Main Menu](../../../Components/MainMenu)
 * [List Filter](../../../Components/FilterByGroup)
 
 #### Integrations
