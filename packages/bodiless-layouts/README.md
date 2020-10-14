@@ -58,8 +58,12 @@ dragging this icon you can reorder components in the flowContainer.
 
 ### Replacing a Component
 
-To change a component's type you must remove that component and replace it with 
-the new component type.
+To replace a component, use the swap button from the toolbar. It will replace the component 
+without losing data (as long as the data is applicable in the replacement component). 
+You can also replace a component by deleting it and adding a new component in its place
+via the add button on the toolbar. 
+
+---
 
 ## Site Builder Details
 
@@ -212,5 +216,7 @@ specifying `defaultWidth="51"` will give you an actual default width of 100%.
 Flow Container. If the number of components equals the value of maxComponents then 
 the add button will not be visible. If a component is removed and the number of components
 is less than the max value then the add button will reappear.
+
+---
 
 ## Architectural Details
