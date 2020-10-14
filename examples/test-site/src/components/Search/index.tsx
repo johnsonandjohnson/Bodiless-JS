@@ -40,7 +40,7 @@ const searchDesign = {
 };
 
 const searchInlineDesign = {
-  SearchWrapper: addClasses('inline-block border bl-border-black align-middle bl-react-tags__search-input'),
+  SearchWrapper: addClasses('inline-block border bl-border-black align-middle'),
   SearchBox: addClasses('px-2 align-middle text-1xl'),
   SearchButton: withSearchButton('search'),
 };
