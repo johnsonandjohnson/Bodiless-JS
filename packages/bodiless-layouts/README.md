@@ -172,7 +172,7 @@ be passed the snapData function.  It is expected to return a string of the start
 example:
 
 ```js
-<FlowContainer deafaultWidth={() => 'w-full lg:w-1/4'} />
+<FlowContainer getDefaultWidth={() => 'w-full lg:w-1/4'} />
 ```
 
 ### Limit Number of Components
