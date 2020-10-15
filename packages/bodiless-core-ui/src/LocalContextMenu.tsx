@@ -42,6 +42,8 @@ const LocalTooltip: FC<ReactTooltip['props']> = props => (
   />
 );
 
+export const FormWrapper = addClasses('bl-flex')(Div);
+
 const ui: ContextMenuUI = {
   ComponentFormText,
   ComponentFormTextArea,
@@ -65,6 +67,7 @@ const ui: ContextMenuUI = {
   Toolbar,
   ToolbarButton: HorizontalToolbarButton,
   ToolbarButtonLabel,
+  FormWrapper,
   Tooltip: LocalTooltip,
   ReactTags: ReactTagsField,
 };
