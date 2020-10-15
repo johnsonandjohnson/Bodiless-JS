@@ -14,6 +14,8 @@
 
 import React, { FC, ReactNode, useCallback } from 'react';
 import { Form, FormApi, FormState } from 'informed';
+import { flow } from 'lodash';
+import { withClickOutside } from './hoc';
 import { useMenuOptionUI } from './components/ContextMenuContext';
 import type { ContextMenuFormProps } from './Types/ContextMenuTypes';
 
@@ -21,7 +23,7 @@ export type Options<D> = {
   submitValues?: (componentData: D) => boolean|void;
   onClose?: (componentData: D) => boolean|void;
   initialValues?: D;
-  hasSubmit?: Boolean;
+  hasSubmit?: ((componentData: D) => boolean) | boolean;
 };
 
 export type FormBodyProps<D> = ContextMenuFormProps & Options<D> & {
@@ -40,7 +42,7 @@ export type FormChromeProps = {
   title?: string;
 } & ContextMenuFormProps;
 
-export const FormChrome: FC<FormChromeProps> = (props) => {
+const FormChromeBase: FC<FormChromeProps> = (props) => {
   const {
     children,
     title,
@@ -56,7 +58,8 @@ export const FormChrome: FC<FormChromeProps> = (props) => {
       <ComponentFormCloseButton
         type="button"
         aria-label="Cancel"
-        onClick={() => closeForm()}
+        onClick={(e: any) => closeForm(e)}
+        data-bl-component-form-close-button
       />
       <ComponentFormTitle>{title}</ComponentFormTitle>
       {children}
@@ -64,6 +67,8 @@ export const FormChrome: FC<FormChromeProps> = (props) => {
     </>
   );
 };
+
+export const FormChrome = flow(withClickOutside)(FormChromeBase);
 
 export const ContextMenuForm = <D extends object>(props: ContextMenuPropsType<D>) => {
   const {
@@ -77,17 +82,17 @@ export const ContextMenuForm = <D extends object>(props: ContextMenuPropsType<D>
     ...rest
   } = props;
 
-  const callOnClose = (values: D) => {
+  const callOnClose = (e: KeyboardEvent | MouseEvent | null, values: D) => {
     if (typeof onClose === 'function') {
       onClose(values);
     }
-    closeForm();
+    closeForm(e);
   };
   return (
     <Form
       onSubmit={(values: D) => {
         if (!submitValues(values)) {
-          callOnClose(values);
+          callOnClose(null, values);
         }
       }}
       initialValues={initialValues}
@@ -95,8 +100,11 @@ export const ContextMenuForm = <D extends object>(props: ContextMenuPropsType<D>
     >
       {({ formApi, formState }) => (
         <FormChrome
-          hasSubmit={hasSubmit && !formState.invalid}
-          closeForm={() => callOnClose(formState.values)}
+          onClickOutside={(e: KeyboardEvent | MouseEvent) => callOnClose(e, formState.values)}
+          hasSubmit={typeof hasSubmit === 'function'
+            ? hasSubmit(formState.values) && !formState.invalid
+            : hasSubmit && !formState.invalid}
+          closeForm={(e: KeyboardEvent | MouseEvent) => callOnClose(e, formState.values)}
         >
           {typeof children === 'function'
             ? children({
@@ -110,23 +118,23 @@ export const ContextMenuForm = <D extends object>(props: ContextMenuPropsType<D>
 };
 
 export const contextMenuForm = <D extends object>(options: Options<D> = {}) => (
-  renderFormBody?: FormBodyRenderer<D>,
+  renderForm?: FormBodyRenderer<D>,
 ) => (
-  (props: Omit<ContextMenuPropsType<D>, 'children'>) => (
+  (props: Omit<ContextMenuFormProps, 'children'>) => (
     <ContextMenuForm {...options} {...props}>
-      {renderFormBody || (() => <></>)}
+      {renderForm || (() => <></>)}
     </ContextMenuForm>
   )
 );
 
 type HookOptions<D> = Options<D> & {
-  renderFormBody?: FormBodyRenderer<D>,
+  renderForm?: FormBodyRenderer<D>,
 };
 
 const useContextMenuForm = <D extends object>(options: HookOptions<D> = {}) => {
-  const { renderFormBody, ...rest } = options;
+  const { renderForm, ...rest } = options;
   return useCallback(
-    contextMenuForm(rest)(renderFormBody),
+    contextMenuForm(rest)(renderForm),
     [options],
   );
 };

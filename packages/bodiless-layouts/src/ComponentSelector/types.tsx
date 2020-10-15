@@ -28,7 +28,7 @@ export type ComponentSelectorProps = {
   components: (ComponentType<any> | string)[];
   renderList?: RenderList;
   onSelect(event: MouseEvent, componentName: string): void;
-  closeForm?(): void;
+  closeForm?(e: any): void;
   ui?: ComponentSelectorUI;
   mandatoryCategories?: string[];
 };

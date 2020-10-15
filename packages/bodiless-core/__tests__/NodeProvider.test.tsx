@@ -40,6 +40,10 @@ class MockContentNode implements ContentNode<Data> {
   peer = jest.fn();
 
   hasError = jest.fn();
+
+  pagePath: string = '/';
+
+  baseResourcePath: string = '/';
 }
 
 const ShowNode: React.FC<any> = ({ collection, id }) => {

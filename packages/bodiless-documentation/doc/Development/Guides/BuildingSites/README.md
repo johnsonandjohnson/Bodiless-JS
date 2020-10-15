@@ -10,3 +10,4 @@ This section describes the building of a site with BodilessJS.
   * [Using Tailwind with Bodiless](./TailwindGuide)
   * [Using Custom Fonts](./Fonts)
   * [Building Site Components TBD](/TBD)
+  * [Building Contentful Components](./BuildingComponents/BuildingContentful)

@@ -12,9 +12,15 @@
  * limitations under the License.
  */
 
-import React, { HTMLProps } from 'react';
-import { shallow } from 'enzyme';
+import React, {
+  HTMLProps, useEffect,
+} from 'react';
+import { shallow, mount } from 'enzyme';
+import { Text } from 'informed';
+import { observer } from 'mobx-react-lite';
 import withEditButton from '../src/withEditButton';
+import { useEditContext } from '../src/hooks';
+import ContextMenuItem from '../src/components/ContextMenuItem';
 
 type Props = HTMLProps<HTMLDivElement>;
 type Data = {
@@ -30,7 +36,6 @@ describe('withEditButton', () => {
     };
     const consumedProps = {
       setComponentData: jest.fn(),
-      unwrap: jest.fn(),
       isActive: jest.fn(),
     };
     const passedProps = {
@@ -53,6 +58,57 @@ describe('withEditButton', () => {
     Object.keys(consumedProps).forEach(key => {
       expect(div.prop(key)).toBeUndefined();
     });
+  });
+
+  it('does not re-render a menu option when data changes', () => {
+    const MockMenu = observer(() => {
+      const { contextMenuOptions } = useEditContext();
+      const op = contextMenuOptions[0] || false;
+      if (op) return <ContextMenuItem option={op} index={0} name={op.name} />;
+      return null;
+    });
+
+    const itemRendered = jest.fn();
+    itemRendered.mockReturnValue('Foo');
+    const def = {
+      name: 'Foo',
+      icon: 'test',
+      // This is a bit of a hack to count the renders of the context menu item.
+      label: itemRendered,
+      activateContext: false,
+      renderForm: () => (
+        <Text field="foo" />
+      ),
+    };
+
+    const Provider = withEditButton(def)(() => {
+      const context = useEditContext();
+      useEffect(() => {
+        context.activate();
+      }, []);
+      return <>Provider</>;
+    });
+
+    const Test = ({ componentData }: any) => (
+      <>
+        <MockMenu />
+        <Provider componentData={componentData} />
+      </>
+    );
+
+    const wrapper = mount(<Test componentData={{ foo: 'foo' }} />);
+    expect(itemRendered).toBeCalledTimes(1);
+    wrapper.find('div[aria-label="Foo"]').simulate('click');
+    expect(wrapper.find('input[name="foo"]').prop('value')).toEqual('foo');
+    expect(itemRendered).toBeCalledTimes(2);
+    wrapper.find('button[aria-label="Cancel"]').simulate('click');
+    expect(itemRendered).toBeCalledTimes(3);
+    expect(wrapper.find('input[name="foo"]')).toHaveLength(0);
+    wrapper.setProps({ componentData: { foo: 'bar' } });
+    expect(itemRendered).toBeCalledTimes(3);
+    wrapper.find('div[aria-label="Foo"]').simulate('click');
+    expect(wrapper.find('input[name="foo"]').prop('value')).toEqual('bar');
+    expect(itemRendered).toBeCalledTimes(4);
   });
 
   it('renders the edit form component properly', () => {

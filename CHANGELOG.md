@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.56](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.55...v0.0.56) (2020-09-21)
+
+
+### Bug Fixes
+
+* **richtext:** Slate editor in tooltip with shared node. ([#540](https://github.com/johnsonandjohnson/bodiless-js/issues/540)) ([5c62a77](https://github.com/johnsonandjohnson/bodiless-js/commit/5c62a77f531cbee1128e4a7adbea0ab951de9f68)), closes [#535](https://github.com/johnsonandjohnson/bodiless-js/issues/535)
+
+
+### Features
+
+* **backend, components:** Image files should be uploaded to path per page ([#527](https://github.com/johnsonandjohnson/bodiless-js/issues/527)) ([8bffeac](https://github.com/johnsonandjohnson/bodiless-js/commit/8bffeacfa2a1fdc4dc7ff61dea9aaff360673af8))
+* **core:** Improved Context Menu API ([#519](https://github.com/johnsonandjohnson/bodiless-js/issues/519)) ([463e8f6](https://github.com/johnsonandjohnson/bodiless-js/commit/463e8f61a8e13af6b6c62428d2b6a63fce197cb7)), closes [#3](https://github.com/johnsonandjohnson/bodiless-js/issues/3) [#487](https://github.com/johnsonandjohnson/bodiless-js/issues/487) [#486](https://github.com/johnsonandjohnson/bodiless-js/issues/486)
+* **gatsby-theme-bodiless:** Image generation on upload ([#531](https://github.com/johnsonandjohnson/bodiless-js/issues/531)) ([6524581](https://github.com/johnsonandjohnson/bodiless-js/commit/65245814df2e2b90a86f7fe12696c00126b14498))
+* **gatsby-theme-bodiless, backend:** Better handling of merge conflicts ([#502](https://github.com/johnsonandjohnson/bodiless-js/issues/502)) ([8ae1edb](https://github.com/johnsonandjohnson/bodiless-js/commit/8ae1edb3457a91b1013125209d7dd22e2f0ea7fd))
+* **ui, layouts-ui:** Simplify Component Resizing ([#532](https://github.com/johnsonandjohnson/bodiless-js/issues/532)) ([6a3896a](https://github.com/johnsonandjohnson/bodiless-js/commit/6a3896a2c9a5661b62abdb253025098d6755622e))
+
+
+### Reverts
+
+* Revert "Update README.md" ([8ae3c5c](https://github.com/johnsonandjohnson/bodiless-js/commit/8ae3c5c4a14b49153480590ae8af059c46bd4976))
+
+
+
+
+
 ## [0.0.55](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.54...v0.0.55) (2020-08-28)
 
 

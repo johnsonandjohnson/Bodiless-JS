@@ -14,7 +14,7 @@
 
 /* eslint-disable no-alert */
 import React, {
-  useState, useEffect, useCallback,
+  useState, useEffect, useCallback, useMemo,
 } from 'react';
 import {
   contextMenuForm,
@@ -24,6 +24,7 @@ import {
   useNotify,
   useRegisterMenuOptions,
   ContextSubMenu,
+  useGetter,
 } from '@bodiless/core';
 import BackendClient from './BackendClient';
 import CommitsList from './CommitsList';
@@ -46,7 +47,8 @@ const canAlertOnLoad = process.env.BODILESS_ALERT_ON_PAGE_LOAD_ENABLED || 1;
 
 const formGetCommitsList = (client: GitClient) => contextMenuForm({
   // @todo: handle what happens when user selects a commit from the loaded list.
-  submitValues: () => {},
+  submitValues: () => { },
+  hasSubmit: false,
 })(
   ({ ui }: any) => {
     const { ComponentFormTitle } = getUI(ui);
@@ -60,7 +62,8 @@ const formGetCommitsList = (client: GitClient) => contextMenuForm({
 );
 
 const formGitCommit = (client: GitClient) => contextMenuForm({
-  submitValues: ({ keepOpen } : any) => keepOpen,
+  submitValues: ({ keepOpen }: any) => keepOpen,
+  hasSubmit: ({ keepOpen }: any) => keepOpen,
 })(({ ui, formApi, formState }: any) => {
   const { ComponentFormText } = getUI(
     ui,
@@ -74,7 +77,7 @@ const formGitCommit = (client: GitClient) => contextMenuForm({
 });
 
 const formGitPull = (client: GitClient, notifyOfChanges: ChangeNotifier) => contextMenuForm({
-  submitValues: (values : any) => {
+  submitValues: (values: any) => {
     const { keepOpen } = values;
     return keepOpen;
   },
@@ -83,6 +86,7 @@ const formGitPull = (client: GitClient, notifyOfChanges: ChangeNotifier) => cont
       window.location.reload();
     }
   },
+  hasSubmit: ({ keepOpen }) => keepOpen,
 })(({ ui }: any) => {
   const { ComponentFormTitle, ComponentFormText } = getUI(ui);
   return (
@@ -107,6 +111,7 @@ const formGitReset = (client: GitClient) => contextMenuForm({
       window.location.reload();
     }
   },
+  hasSubmit: ({ keepOpen }) => keepOpen,
 })(
   ({ ui, formState, formApi }: any) => {
     const { ComponentFormText } = getUI(ui);
@@ -213,8 +218,12 @@ const useGitButtons = ({ client = defaultClient } = {}) => {
     }
   }, []);
 
+  const menuOptions = useMemo(
+    () => getMenuOptions(client, context, notifyOfChanges), [notifyOfChanges],
+  );
+
   useRegisterMenuOptions({
-    getMenuOptions: () => getMenuOptions(client, context, notifyOfChanges),
+    getMenuOptions: useGetter(menuOptions),
     name: 'Git',
   });
 };

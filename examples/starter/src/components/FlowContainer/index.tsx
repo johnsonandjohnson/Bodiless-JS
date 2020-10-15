@@ -17,6 +17,8 @@ import { FlowContainer } from '@bodiless/layouts-ui';
 import withToutVariations from './withToutVariations';
 import withRichTextVariations from './withRichTextVariations';
 import withImageVariations from './withImageVariations';
+import withIframeVariations from './withIframeVariations';
+import withYouTubeVariations from './withYouTubeVariations';
 
 import { asFlowContainerWithMargins } from './token';
 
@@ -27,6 +29,8 @@ const FlowContainerDefault = flow(
   withImageVariations,
   withToutVariations,
   asFlowContainerWithMargins,
+  withIframeVariations,
+  withYouTubeVariations,
   withMandatoryCategories(['Orientation', 'Type']),
 )(FlowContainer);
 

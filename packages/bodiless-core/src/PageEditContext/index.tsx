@@ -14,119 +14,14 @@
 
 import React, { ConsumerProps, FC } from 'react';
 import { Observer } from 'mobx-react';
-import { v1 } from 'uuid';
-import { action, computed, observable } from 'mobx';
 import {
   DefinesLocalEditContext,
   PageEditContextInterface,
   PageEditStoreInterface,
   TMenuOptionGetter,
-  TPageOverlayStore,
 } from './types';
-import { TMenuOption } from '../Types/ContextMenuTypes';
 import { TOverlaySettings } from '../Types/PageOverlayTypes';
-import {
-  getFromSessionStorage,
-  saveToSessionStorage,
-} from '../SessionStorage';
-
-/**
- * @private
- * Helper function to cravel the context trail, invoking a callback on each context
- * and accumulating the results.
- * @param accumulator The accumulated results.
- * @param callback The callback which returns the results for each context.
- * @param context The context on which to execute the callback.
- */
-const reduceRecursively = <T extends any>(
-  accumulator: T[],
-  callback: (c: PageEditContext) => T[],
-  context?: PageEditContext,
-): T[] => {
-  if (!context) return [];
-  const newItems = callback(context);
-  const newAccumulator = [...newItems, ...accumulator];
-  return context.parent
-    ? reduceRecursively(newAccumulator, callback, context.parent)
-    : newAccumulator;
-};
-
-const defaultOverlaySettings: TOverlaySettings = {
-  isActive: false,
-  hasCloseButton: false,
-  hasSpinner: true,
-  message: '',
-  maxTimeoutInSeconds: null,
-  onClose: () => {},
-};
-
-/**
- * @private
- *
- * Holds the current UI state for the editor.
- */
-class PageEditStore implements PageEditStoreInterface {
-  @observable activeContext: PageEditContext | undefined = undefined;
-
-  @observable contextMenuOptions: TMenuOption[] = [];
-
-  @observable isEdit = getFromSessionStorage('isEdit', false);
-
-  @observable isPositionToggled = getFromSessionStorage('isPositionToggled', false);
-
-  @observable pageOverlay: TPageOverlayStore = {
-    data: {
-      ...defaultOverlaySettings,
-    },
-    timeoutId: 0,
-  };
-
-  @observable areLocalTooltipsDisabled = false;
-
-  @action
-  setActiveContext(context?: PageEditContext) {
-    if (context) this.activeContext = context;
-    this.contextMenuOptions = reduceRecursively<TMenuOption>(
-      [],
-      (passedContext: PageEditContext) => passedContext.allMenuOptions,
-      this.activeContext,
-    );
-  }
-
-  @action toggleEdit(on? : boolean) {
-    if (on === undefined) {
-      this.isEdit = !this.isEdit;
-    } else {
-      this.isEdit = Boolean(on);
-    }
-
-    saveToSessionStorage('isEdit', this.isEdit);
-  }
-
-  @action togglePosition(on? : boolean) {
-    if (on === undefined) {
-      this.isPositionToggled = !this.isPositionToggled;
-    } else {
-      this.isPositionToggled = Boolean(on);
-    }
-
-    saveToSessionStorage('isPositionToggled', this.isPositionToggled);
-  }
-
-  @action toggleLocalTooltipsDisabled(isDisabled?: boolean) {
-    if (isDisabled === undefined) {
-      this.areLocalTooltipsDisabled = !this.areLocalTooltipsDisabled;
-    } else {
-      this.areLocalTooltipsDisabled = isDisabled;
-    }
-  }
-
-  @computed get contextTrail() {
-    return reduceRecursively<string>([], context => [context.id], this.activeContext);
-  }
-}
-
-const defaultStore = new PageEditStore();
+import { defaultStore, defaultOverlaySettings } from './Store';
 
 /**
  * A Page Edit Context represents a particular state of the page editor, usually
@@ -148,54 +43,68 @@ const defaultStore = new PageEditStore();
  * Singleton store.
  */
 class PageEditContext implements PageEditContextInterface {
-  readonly id: string = v1();
+  readonly id: string = 'Root';
 
-  readonly name: string = 'PageEditContext';
+  readonly name: string = 'Root';
 
   readonly getMenuOptions: TMenuOptionGetter = () => [];
 
-  readonly parent: PageEditContext | undefined;
+  readonly parent: PageEditContextInterface | undefined;
 
-  private store: PageEditStore = defaultStore;
+  protected store: PageEditStoreInterface = defaultStore;
 
   hasLocalMenu = false;
 
   // When called with no argument this creates a new store and react context.
-  constructor(values?: DefinesLocalEditContext, parent?: PageEditContext) {
+  constructor(values?: DefinesLocalEditContext, parent?: PageEditContextInterface) {
     if (values) {
       this.id = values.id;
-      this.name = values.name;
+      this.name = values.name || values.id;
       if (values.getMenuOptions) this.getMenuOptions = values.getMenuOptions;
     }
     if (parent) {
       this.parent = parent;
-      this.store = parent.store;
     }
   }
 
-  peerContexts: PageEditContextInterface[] = [];
+  protected peerContextMap: Map<string, PageEditContextInterface|null> = new Map();
 
-  registerPeer(values: DefinesLocalEditContext) {
-    const context = new PageEditContext(values, this.parent);
-    // Ensure that the same context is not registered more than once.
-    const existsAt = this.peerContexts.findIndex(c => c.id === context.id);
-    if (existsAt >= 0) this.peerContexts.splice(existsAt, 1, context);
-    else this.peerContexts.push(context);
+  get peerContexts() {
+    // Cast is necessary bc ts can't figure out that the filter removes all the nulls.
+    return Array.from(this.peerContextMap.values()).filter(Boolean) as PageEditContextInterface[];
   }
 
-  get allMenuOptions() {
-    // Sets the group for each option to
-    const ownOptions = this.getMenuOptions
-      // Add the id of this context as the "group" of each option.
-      ? this.getMenuOptions().map((op): TMenuOption => ({ group: this.id, ...op }))
-      : [];
-    return this.peerContexts.reduce(
-      (finalOptions, peerContext) => [...finalOptions, ...peerContext.allMenuOptions],
-      ownOptions,
-    );
+  /**
+   * Registers a context as a peer.  Peer contexts contribute their menu options whenever the
+   * context to which they are registered is activated.
+   *
+   * @param context The peer context to register.
+   */
+  registerPeer(context: PageEditContextInterface) {
+    this.peerContextMap.set(context.id, context);
   }
 
-  static context = React.createContext<PageEditContextInterface>(new PageEditContext());
+  /**
+   * Marks a peer context as "unregistered".  An unregistered peer will not contribute
+   * its menu options.
+   *
+   * @param context The peer context to unregister.
+   */
+  unregisterPeer(context: PageEditContextInterface) {
+    if (this.peerContextMap.has(context.id)) {
+      // We mark it as unregistered instead of deleting it in order to preserve
+      // the original insertion order if/when it is added back.
+      this.peerContextMap.set(context.id, null);
+    }
+  }
+
+  unregisterPeers() {
+    this.peerContextMap = new Map();
+  }
+
+  static root = new PageEditContext();
+
+  static context = React.createContext<PageEditContextInterface>(PageEditContext.root);
 
   // Make our context consumer observable.
   // See https://github.com/mobxjs/mobx-react/issues/471.
@@ -218,14 +127,14 @@ class PageEditContext implements PageEditContextInterface {
     this.store.setActiveContext(this);
   }
 
-  refresh() {
-    this.store.setActiveContext();
+  updateMenuOptions() {
+    this.store.updateMenuOptions(this);
   }
 
   // Tests whether this context is "active" - i.e. whether it or one of its descendants is the
   // "current" context.
   get isActive() {
-    return this.store.contextTrail.includes(this.id);
+    return !this.parent || this.store.contextTrail.includes(this.id);
   }
 
   get isInnermost() {
@@ -235,7 +144,7 @@ class PageEditContext implements PageEditContextInterface {
   }
 
   get isInnermostLocalMenu() {
-    const getId = (context: PageEditContext):string => {
+    const getId = (context: PageEditContextInterface):string => {
       if (context.hasLocalMenu) return context.id;
       if (context.parent) return getId(context.parent);
       return '';
@@ -265,6 +174,10 @@ class PageEditContext implements PageEditContextInterface {
 
   get contextMenuOptions() {
     return this.store.contextMenuOptions;
+  }
+
+  get optionMap() {
+    return this.store.optionMap;
   }
 
   get pageOverlay() {

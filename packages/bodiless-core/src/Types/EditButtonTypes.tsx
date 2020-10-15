@@ -13,8 +13,8 @@
  */
 
 import { ReactNode } from 'react';
-import { UseGetMenuOptions } from './PageContextProviderTypes';
 import { FormBodyProps as ContextMenuFormBodyProps } from '../contextMenuForm';
+import { TMenuOption } from './ContextMenuTypes';
 
 type EditDataHandler<D> = {
   initialValueHandler?: (values: any) => D;
@@ -22,7 +22,6 @@ type EditDataHandler<D> = {
 };
 
 export type FormBodyProps<P, D> = ContextMenuFormBodyProps<D> & {
-  unwrap?: () => void;
   componentProps: P;
 };
 
@@ -31,18 +30,17 @@ export type FormBodyRenderer<P, D> = (p: FormBodyProps<P, D>) => ReactNode;
 export type EditButtonProps<D> = {
   setComponentData: (componentData: D) => void;
   componentData: D;
-  unwrap?: () => void;
   isActive?: () => boolean;
   onSubmit?: () => void;
-  dataHandler?: EditDataHandler<D>;
 };
-export type EditButtonOptions<P, D> = {
-  icon: string;
-  name: string;
-  global?: boolean;
-  local?: boolean;
-  label?: string,
-  renderForm: FormBodyRenderer<P, D>;
-  // Allow additional buttons.
-  useGetMenuOptions?: UseGetMenuOptions<P>;
-};
+
+export type EditButtonOptions<P, D> = Omit<TMenuOption, 'handler'> & {
+  renderForm?: FormBodyRenderer<P, D>,
+  /**
+  * An optional function that determines if the created menu option displays "compound form".
+  * If the function returns true, then "compound form" is displayed.
+  * Otherwise, standard form is displayed.
+  * Default is to display standard form.
+  */
+  useCompoundForm?: () => boolean,
+} & EditDataHandler<D>;

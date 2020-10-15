@@ -19,20 +19,22 @@ import {
   Div,
   DesignableProps,
 } from '@bodiless/fclasses';
-import { useAccordionContext } from './AccordionContext';
+import { asAccordionBodyWrapper, asAccordionBodyContent } from './Accordion.tokens';
 import { AccordionBodyComponents, AccordionBodyProps } from './types';
 
 const AccordionBodyComponentsStart:AccordionBodyComponents = {
-  Wrapper: Div,
+  Wrapper: asAccordionBodyWrapper(Div),
+  Content: asAccordionBodyContent(Div),
 };
 
 const AccordionBodyBase: FC<AccordionBodyProps> = ({ components, children }) => {
-  const { Wrapper } = components;
-  const { expanded } = useAccordionContext();
+  const { Wrapper, Content } = components;
 
   return (
-    <Wrapper className={expanded ? 'block' : 'hidden'}>
-      { children }
+    <Wrapper>
+      <Content>
+        { children }
+      </Content>
     </Wrapper>
   );
 };
@@ -43,11 +45,14 @@ const AccordionBodyClean = flow(
 
 const asAccordionBody = <P extends DesignableProps<AccordionBodyComponents>>(
   Component: ComponentType<P> | string,
-) => (props: P) => (
-  <AccordionBodyClean design={props.design}>
-    <Component {...props} />
-  </AccordionBodyClean>
-  );
+) => (props: P) => {
+    const { design } = props;
+    return (
+      <AccordionBodyClean design={design}>
+        <Component {...props} />
+      </AccordionBodyClean>
+    );
+  };
 
 export default AccordionBodyClean;
 export {

@@ -14,7 +14,7 @@
 
 import React, { ComponentType, HTMLProps } from 'react';
 import MaterialIcon from '@material/react-material-icon';
-import Button from '@bodiless/fclasses';
+import { Button } from '@bodiless/fclasses';
 import { useUI } from '../RichTextContext';
 
 const DefaultPluginButton = Button;

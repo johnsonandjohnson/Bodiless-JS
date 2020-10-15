@@ -20,8 +20,7 @@ import {
   contextMenuForm,
   getUI,
   useEditContext,
-  useRegisterMenuOptions,
-  TMenuOptionGetter,
+  withMenuOptions,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
 import { ComponentFormSpinner } from '@bodiless/ui';
@@ -151,6 +150,7 @@ const NewPageComp = (props : NewPageProps) => {
 
 const formPageAdd = (client: Client, template: string) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
+  hasSubmit: ({ keepOpen }: any) => keepOpen,
 })(({ formState, ui, formApi } : any) => {
   const { ComponentFormText } = getUI(ui);
   const {
@@ -199,26 +199,26 @@ const formPageAdd = (client: Client, template: string) => contextMenuForm({
 
 const defaultClient = new BackendClient();
 
-const useGetMenuOptions = (): TMenuOptionGetter => {
+const useMenuOptions = () => {
   const context = useEditContext();
   const gatsbyPage = useGatsbyPageContext();
 
-  return () => [
+  const menuOptions = [
     {
       name: 'newpage',
       icon: 'note_add',
       label: 'Page',
-      isHidden: () => !context.isEdit,
+      isHidden: useCallback(() => !context.isEdit, []),
       handler: () => formPageAdd(defaultClient, gatsbyPage.subPageTemplate),
     },
   ];
+  return menuOptions;
 };
 
-const useNewPageButton = () => {
-  useRegisterMenuOptions({
-    getMenuOptions: useGetMenuOptions(),
-    name: 'NewPage',
-  });
-};
+const withNewPageButton = withMenuOptions({
+  useMenuOptions,
+  name: 'NewPage',
+  peer: true,
+});
 
-export default useNewPageButton;
+export default withNewPageButton;

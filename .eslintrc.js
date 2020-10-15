@@ -32,6 +32,7 @@ module.exports = {
     "tsconfigRootDir": "./"
   },
   "rules": {
+    "react/require-default-props": "off",
     "arrow-parens": "off",
     "jest/no-export": "off",
     "jest/no-test-callback": "off",

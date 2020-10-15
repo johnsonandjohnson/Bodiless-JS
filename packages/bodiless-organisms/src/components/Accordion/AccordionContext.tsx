@@ -18,30 +18,32 @@ import React, {
   useContext,
   useState,
 } from 'react';
-
-type AccordionContextType = {
-  expanded: boolean,
-  setExpanded: React.Dispatch<React.SetStateAction<boolean>>,
-};
+import { AccordionProviderProps, AccordionContextType } from './types';
 
 const AccordionContext = createContext<AccordionContextType>({
-  expanded: false,
+  isExpanded: false,
   setExpanded: () => null,
 });
 
 const useAccordionContext = () => useContext(AccordionContext);
 
-const AccordionProvider: FC = ({ children }) => {
-  const [expanded, setExpanded] = useState<boolean>(false);
+const AccordionProvider: FC<AccordionProviderProps> = ({ children, expanded = false }) => {
+  const [isExpanded, setExpanded] = useState<boolean>(expanded);
 
   return (
-    <AccordionContext.Provider value={{ expanded, setExpanded }}>
+    <AccordionContext.Provider value={{ isExpanded, setExpanded }}>
       { children }
     </AccordionContext.Provider>
   );
 };
 
+// Used for conditional fClasses.
+const isAccordionExpanded = () => useAccordionContext().isExpanded;
+const isAccordionContracted = () => !useAccordionContext().isExpanded;
+
 export {
   AccordionProvider,
   useAccordionContext,
+  isAccordionExpanded,
+  isAccordionContracted,
 };

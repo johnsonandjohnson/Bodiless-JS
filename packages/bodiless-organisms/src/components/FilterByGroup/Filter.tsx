@@ -113,7 +113,7 @@ const TagTitleBase: FC<TagTitleProps> = ({
   const isNodeSelected = Boolean(selectedNode === nodeId);
 
   return (
-    <FilterInputWrapper {...rest} key={tag.id} bl-prevent="false">
+    <FilterInputWrapper {...rest} key={tag.id}>
       <FilterGroupItemInput
         type="radio"
         name="filter-item"
