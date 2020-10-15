@@ -144,7 +144,7 @@ There are two helper functions for `snapData`.
 
    const snapData = withtailwindClasses(tailwindConfig)('w-full, md:w-full, md:w-1/2, lg:w-full, lg:w-1/2, lg:w-1/3, lg:w-1/4');
    ```
-   ---
+     ---
 
 * **`getSnapFrom`**: can be used with `withTuple` to create a snapData as well. Each `withTuple` takes a mediaQuery at which it is active, a width to which it corresponds and a class to used.
 
@@ -166,15 +166,13 @@ There are two helper functions for `snapData`.
 
 #### Default Width
 
-One can set the default width classes via the `defaultWidth` prop.  The prop is a function that will 
-be pass the snapData function.  It is expect to return a string of the starting classes
-
-There is the helper function withDefautClasses that can be used to pass a class string through
+One can set the default width classes via the `getDefaultWidth` prop.  The prop is a function that will 
+be passed the snapData function.  It is expected to return a string of the starting classes
 
 example:
 
 ```js
-<FlowContainer deafaultWidth={withDefaultClasses('w-full lg:w-1/4')} />
+<FlowContainer deafaultWidth={() => 'w-full lg:w-1/4'} />
 ```
 
 ### Limit Number of Components

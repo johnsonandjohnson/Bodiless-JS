@@ -179,13 +179,10 @@ const defaultSnapData = getSnapFrom(
   withTuple('(min-width: 992px)')(75)('lg:w-3/4'),
   withTuple('(min-width: 992px)')(100)('lg:w-full'),
 );
-type DefautlClasses = (classes:string) => (snapData: SnapData) => String;
 
-const asDefaultClasses:DefautlClasses = (classes:string) => () => classes;
 export {
   getSnapFrom,
   withTuple,
   defaultSnapData,
   withTailwindClasses,
-  asDefaultClasses,
 };

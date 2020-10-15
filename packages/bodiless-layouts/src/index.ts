@@ -26,7 +26,6 @@ export {
   withTuple,
   getSnapFrom,
   withTailwindClasses,
-  asDefaultClasses,
 } from './FlowContainer/utils/appendTailwindWidthClass';
 export * from './meta';
 export { ifComponentSelector } from './FlowContainer/ComponentDisplayMode';
