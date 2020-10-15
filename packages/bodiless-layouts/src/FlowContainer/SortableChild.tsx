@@ -27,7 +27,12 @@ const FALLBACK_SNAP_CLASSNAME = 'w-full';
 
 const SortableChild = (props: SortableChildProps) => {
   const {
-    onResizeStop, flowContainerItem, snapData: snapRaw, defaultWidth, ...restProps
+    onResizeStop,
+    flowContainerItem,
+    snapData: snapRaw,
+    getDefaultWidth,
+    className: classNameRaw,
+    ...restProps
   } = props;
   const snap = snapRaw || defaultSnapData;
   const {
@@ -36,28 +41,21 @@ const SortableChild = (props: SortableChildProps) => {
     width: 0,
     className: '',
   });
-  const {
-    className: passedSnapClassName,
-  } = snap({
-    width: defaultWidth as number || 100,
-    className: '',
-  });
+  const passedSnapClassName = getDefaultWidth && getDefaultWidth(snap);
   // local classname is used to store intermidiary classname state,
   // so className is stored only onResizeStop
+  // we are only getting a class from the default Width if we have a default width
   const [snapClassName, setSnapClassName] = useState(
     (flowContainerItem.wrapperProps && flowContainerItem.wrapperProps.className)
       || passedSnapClassName
       || FALLBACK_SNAP_CLASSNAME,
   );
-
   // Store what with aligns with the current class
   const [snapWidth, setSnapWidth] = useState('');
-  // Store what size is being used we set the width so that re-sizeable uses percent when resizeing
-  // we default the size to what the current class width is.
-  // we can not set this to auto becaus then it resizes in pixels and not percent.
+  // We start this off as not set so that the classes are used
   const [size, setSize] = useState({
     height: '',
-    width: `${snap({ className: snapClassName }).width}%`,
+    width: '',
   });
   // Set the current size to by the stored width
   const updateSizeWithWidth = () => {
@@ -92,11 +90,13 @@ const SortableChild = (props: SortableChildProps) => {
       () => {
         if (elm && elm.style.width === snapWidth) {
           elm.style.height = '';
+          elm.style.width = '';
         }
       },
       1,
     );
   });
+  const classNameOut = [...snapClassName.split(' '), ...(classNameRaw || '').split(' ')].join(' ');
   return (
     <SlateSortableResizable
       uuid={flowContainerItem.uuid}
@@ -109,7 +109,7 @@ const SortableChild = (props: SortableChildProps) => {
       })}
       size={size}
       minWidth={`${minWidth * 0.99}%`}
-      className={snapClassName}
+      className={classNameOut}
       {...restProps}
     />
   );

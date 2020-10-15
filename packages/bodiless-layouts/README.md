@@ -180,7 +180,7 @@ the tailwind config.
 
    const snapData = withtailwindClasses(tailwindConfig)('w-full, md:w-full, md:w-1/2, lg:w-full, lg:w-1/2, lg:w-1/3, lg:w-1/4');
    ```
----
+     ---
 
 * **`getSnapFrom`**: can be used with `withTuple` to create a snapData as well. 
 Each `withTuple` takes a mediaQuery at which it is active, a width to which it 
@@ -204,11 +204,14 @@ corresponds and a class to used.
 
 #### Default Width
 
-You can set the default width for a new item via the `defaultWidth` prop. 
-This should be a numberfrom 0-100 expressing the desired default width as a percentage. 
-The actual default width will be the smallest *allowed* width which is greater than the 
-value specified.  For example, if you set allowed widths of 50% and 100%, 
-specifying `defaultWidth="51"` will give you an actual default width of 100%.
+One can set the default width classes via the `getDefaultWidth` prop.  The prop is a function that will 
+be passed the snapData function.  It is expected to return a string of the starting classes
+
+example:
+
+```js
+<FlowContainer getDefaultWidth={() => 'w-full lg:w-1/4'} />
+```
 
 ### Limit Number of Components
 
