@@ -58,9 +58,6 @@ const searchResultDesign = {
 
 const asSimpleSearchResult = withDesign(searchResultDesign);
 
-export const SearchResult = flow(
-  asSimpleSearchResult,
-)(SearchResultClean);
-
+export const SimpleSearchResult = flow(asSimpleSearchResult)(SearchResultClean);
 export const InlineSearchBox = flow(asInlineSearch)(SearchClean);
 export const SimpleSearchBox = flow(asSimpleSearch)(SearchClean);

@@ -39,7 +39,7 @@ class SearchTool {
     this.searchEngine = config && config.searchEngine ? config.searchEngine : new LunrSearch();
   }
 
-  generateIndex(settings: TSearchIndexSettings): string {
+  generateIndex(settings: TSearchIndexSettings): void {
     const {
       sourcePath, sourceTypes, targetPath, indexConfig,
     } = settings;
@@ -56,9 +56,6 @@ class SearchTool {
     fs.writeFile(targetPath$, ind, 'utf8', err => {
       if (err) throw err;
     });
-
-    // @todo: remove retur, should be void.
-    return ind;
   }
 
   setSearchEngine(searchEngine: SearchEngineInterface) {
