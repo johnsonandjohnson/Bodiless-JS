@@ -22,7 +22,7 @@ import type { FormBodyRenderer as Renderer } from './Types/EditButtonTypes';
 import { useRegisterSnippet } from './withCompoundForm';
 import type { Snippet } from './withCompoundForm';
 
-type Options<P, D> = {
+export type Options<P, D> = {
   renderForm: Renderer<P, D>,
   submitValueHandler?: (values: D) => any,
   initialValueHandler?: (values: any) => D,

@@ -18,6 +18,7 @@ import useContextMenuForm, {
   FormBodyProps as ContextMenuFormBodyProps,
 } from './contextMenuForm';
 import { withMenuOptions } from './PageContextProvider';
+import withCompoundForm from './withCompoundForm';
 import type { EditButtonProps, EditButtonOptions } from './Types/EditButtonTypes';
 
 type UseEditFormProps<P, D> = P & EditButtonProps<D> & Pick<EditButtonOptions<P, D>, 'renderForm'|'initialValueHandler'|'submitValueHandler'>;
@@ -111,12 +112,20 @@ const createMenuOptionHook = <P extends object, D extends object>(
  */
 const withEditButton = <P extends object, D extends object>(
   options: EditButtonOptions<P, D> | ((props: P) => EditButtonOptions<P, D>),
-) => flowRight(
-    withMenuOptions({
+) => {
+  const isCompoundForm = typeof options === 'object'
+    && options.useCompoundForm !== undefined
+    && options.useCompoundForm();
+  const withMenuOptions$ = isCompoundForm
+    ? withCompoundForm({ useMenuOptions: () => [options] })
+    : withMenuOptions({
       useMenuOptions: createMenuOptionHook(options),
       name: options.name,
-    }),
+    });
+  return flowRight(
+    withMenuOptions$,
     withoutProps(['setComponentData', 'isActive']),
   );
+};
 
 export default withEditButton;

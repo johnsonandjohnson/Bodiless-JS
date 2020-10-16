@@ -35,5 +35,12 @@ export type EditButtonProps<D> = {
 };
 
 export type EditButtonOptions<P, D> = Omit<TMenuOption, 'handler'> & {
-  renderForm: FormBodyRenderer<P, D>,
+  renderForm?: FormBodyRenderer<P, D>,
+  /**
+  * An optional function that determines if the created menu option displays "compound form".
+  * If the function returns true, then "compound form" is displayed.
+  * Otherwise, standard form is displayed.
+  * Default is to display standard form.
+  */
+  useCompoundForm?: () => boolean,
 } & EditDataHandler<D>;

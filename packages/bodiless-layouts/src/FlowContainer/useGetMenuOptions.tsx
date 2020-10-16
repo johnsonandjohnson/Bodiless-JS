@@ -115,6 +115,7 @@ const useAddButton = (
     label: 'Add',
     name,
     handler: () => componentSelectorForm(props, insertItem),
+    activateContext: false,
     isHidden,
   };
 };
@@ -131,6 +132,7 @@ const useSwapButton = (
     label: 'Swap',
     icon: 'repeat',
     handler: () => componentSelectorForm(props, replaceItem),
+    activateContext: false,
     isHidden: useCallback(() => !context.isEdit, []),
   };
 };
