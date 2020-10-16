@@ -20,6 +20,12 @@ import {
 } from '@bodiless/components';
 import { asBodilessImage } from '@bodiless/components-ui';
 import {
+  asResponsive21By9Embed,
+  asResponsive16By9Embed,
+  asResponsive4By3Embed,
+  asResponsive1By1Embed,
+} from '@bodiless/organisms';
+import {
   asAlignCenter,
   asAlignRight,
   asAlignLeft,
@@ -102,4 +108,8 @@ export {
   asNegYMargin,
   asBlockQuote,
   withPadding5,
+  asResponsive21By9Embed,
+  asResponsive16By9Embed,
+  asResponsive4By3Embed,
+  asResponsive1By1Embed,
 };

@@ -99,16 +99,21 @@ const Form = <D extends object>(props: FormProps<D>) => {
   );
 
   const formProps = { submitValues, initialValues };
-  const renderProps: FormBodyProps<D> = {
-    formState: useFormState(),
-    formApi: useFormApi(),
-    ...rest,
+
+  const Snippets = (props$: Omit<FormProps<D>, 'components'>) => {
+    const { snippets: snippets$, ...rest$ } = props$;
+    const renderProps: FormBodyProps<D> = {
+      formState: useFormState(),
+      formApi: useFormApi(),
+      ...rest$,
+    };
+    return <>{snippets$.map(s => s.render(renderProps))}</>;
   };
 
   return (
     <ContextMenuForm {...rest} {...formProps}>
       <Wrapper>
-        {snippets.map(s => s.render(renderProps))}
+        <Snippets snippets={snippets} {...rest} />
       </Wrapper>
     </ContextMenuForm>
   );

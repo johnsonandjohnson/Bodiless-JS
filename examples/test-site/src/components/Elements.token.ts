@@ -20,6 +20,12 @@ import {
 } from '@bodiless/components';
 import { asBodilessImage } from '@bodiless/components-ui';
 import {
+  asResponsive21By9Embed,
+  asResponsive16By9Embed,
+  asResponsive4By3Embed,
+  asResponsive1By1Embed,
+} from '@bodiless/organisms';
+import {
   asAlignCenter,
   asAlignRight,
   asAlignLeft,
@@ -45,8 +51,8 @@ const asPrimaryColorBackground = addClasses('bg-gray-200');
 const asTextColorPrimary = addClasses('text-black');
 
 /* Typography */
-const asBold = addClasses('');
-const asItalic = addClasses('');
+const asBold = addClasses('font-bold');
+const asItalic = addClasses('italic');
 const asLink = addClasses('text-blue-700 underline');
 const asStrikeThrough = addClasses('');
 const asSuperScript = addClasses('');
@@ -104,4 +110,8 @@ export {
   asNegYMargin,
   asBlockQuote,
   withPadding5,
+  asResponsive21By9Embed,
+  asResponsive16By9Embed,
+  asResponsive4By3Embed,
+  asResponsive1By1Embed,
 };

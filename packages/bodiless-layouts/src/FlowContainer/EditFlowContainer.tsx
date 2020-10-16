@@ -45,7 +45,7 @@ const EditFlowContainerComponents: FlowContainerComponents = {
  */
 const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerProps) => {
   const {
-    components, ui, snapData, defaultWidth,
+    components, ui, snapData, getDefaultWidth,
   } = props;
   const items = useItemHandlers().getItems();
   const {
@@ -75,7 +75,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerPr
                   index={index}
                   flowContainerItem={flowContainerItem}
                   snapData={snapData}
-                  defaultWidth={defaultWidth}
+                  getDefaultWidth={getDefaultWidth}
                   useGetMenuOptions={getItemUseGetMenuOptions(flowContainerItem)}
                   onResizeStop={
                     // eslint-disable-next-line max-len

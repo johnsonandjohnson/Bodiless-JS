@@ -37,7 +37,7 @@ const NotificationList = () => {
 const RenderForm = (props: ContextMenuFormProps) => {
   const { ComponentFormTitle } = useMenuOptionUI();
   return (
-    <ContextMenuForm {...props}>
+    <ContextMenuForm {...props} hasSubmit={false}>
       <ComponentFormTitle>Alerts</ComponentFormTitle>
       <NotificationList />
     </ContextMenuForm>
