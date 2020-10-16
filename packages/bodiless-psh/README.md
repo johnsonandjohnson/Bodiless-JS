@@ -1,6 +1,6 @@
 # Bodiless integration with platform.sh
 
-This package provides standard configuration files and helpehttps://github.com/johnsonandjohnson/Bodiless-JS/issues/65https://github.com/johnsonandjohnson/Bodiless-JS/issues/65r scripts which
+This package provides standard configuration files and helper scripts which
 make it easy for a bodiless site to be deployed to platform.sh.
 
 ## Setting up your project
@@ -20,7 +20,7 @@ To continue, you will need the following:
   ```
   platform login
   ```
-  You will directed to log in via a web browser
+  You will be directed to log in via a web browser
 - Execute
   ```
   platform project:list
@@ -83,7 +83,7 @@ Add the following variables:
 - env:APP_GIT_USER -- The user to access your upstream Git repository.
 - env:APP_GIT_USER_EMAIL -- THe user email for your upstream Git repository.
 - env:APP_GIT_PW -- The user password for your upstream Git repository.
-```
+
 
 > Be sure to specify `--sensitive true` for all credentials.
 
