@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - '12.18'
+  - '12.19'
 install:
   - npm run setup
 
@@ -28,7 +28,7 @@ deploy:
     script: "npm run lerna:publish"
     skip_cleanup: true
     on:
-      node: "12.18"
+      node: "12.19"
       tags: true
 
 defaults: &defaults
