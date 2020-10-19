@@ -79,7 +79,7 @@
     "docs": "run-s build:doc docs:serve",
     "psh-update": "node ./lib/scripts/bodiless-psh-update",
     "psh-validate": "node ./lib/scripts/bodiless-psh-validate",
-    "search-index": "node ./node_modules/@bodiless/search/lib/scripts/bodiless-search-index.js"
+    "search-index": "create-search-index"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.0",

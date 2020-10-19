@@ -6,6 +6,9 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
+  "bin": {
+    "create-search-index": "./bin/create-search-index"
+  },
   "files": [
     "/lib",
     "/bodiless.docs.json",
