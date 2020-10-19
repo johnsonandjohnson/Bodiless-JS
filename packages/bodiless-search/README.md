@@ -111,7 +111,7 @@ export const SearchResult = flow(
 
 ```
 
-Here, `SimpleSearchBox` and `SimpleSearchResult` are exported as site level components for page renderring. Site builder will need to add them on pages that require search feature. For example, to display the search box on page header, `SimpleSearchBox` can be added to `src/components/Layout/header.tsx`,
+Here, `SimpleSearchBox` and `SimpleSearchResult` are exported as site level components for search renderring. Site builder will need to add them on pages that require search feature. For example, to display the search box on page header, `SimpleSearchBox` can be added to `src/components/Layout/header.tsx`,
 
 
 ```
@@ -140,6 +140,26 @@ const HeaderClean: FC<Props> = ({ components }) => {
 };
 
 ```
+
+To add `SimpleSearchResult` component, site builder will also need to import `withSearchResult` HOC, which can add `SearchResultProvider` context provider to a container component on the page, i.e.
+
+```
+import { withSearchResult } from '@bodiless/search';
+
+const SearchLayout = withSearchResult(Layout);
+
+const SearchPage = (props: any) => (
+  <Page {...props}>
+    <SearchLayout>
+      <h1 className="text-3xl font-bold">Search Result</h1>
+      <InlineSearchBox />
+      <SimpleSearchResult />
+    </SearchLayout>
+  </Page>
+);
+```
+
+
 
 > Note: for complete search component implementation example, please check [Test-Site/Search Component](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/components/Search/index.tsx).
 

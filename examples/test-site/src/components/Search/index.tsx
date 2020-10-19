@@ -12,52 +12,11 @@
  * limitations under the License.
  */
 import { flow } from 'lodash';
-import React, { ComponentType } from 'react';
-import SearchClean, { SearchResult as SearchResultClean } from '@bodiless/search';
+import { SearchBox as SearchBoxClean, SearchResult as SearchResultClean } from '@bodiless/search';
 import {
-  addClasses,
-  withDesign,
-  stylable,
-} from '@bodiless/fclasses';
-
-const Icon = flow(
-  addClasses('material-icons cursor-pointer align-middle'),
-)(stylable((props: any) => (<i {...props}>{props.children}</i>)));
-
-const withIcon = (icon: string) => (Component: ComponentType) => (props: any) => (
-  <Component {...props}>
-    <Icon>{icon}</Icon>
-  </Component>
-);
-
-const searchDesign = {
-  SearchWrapper: addClasses('my-4 border bl-border-black align-middle'),
-  SearchBox: addClasses('px-2 align-middle text-1xl'),
-  SearchButton: withIcon('search'),
-};
-
-const searchInlineDesign = {
-  SearchWrapper: addClasses('inline-block border bl-border-black align-middle'),
-  SearchBox: addClasses('px-2 align-middle text-1xl'),
-  SearchButton: withIcon('search'),
-};
-
-const asSimpleSearch = withDesign(searchDesign);
-const asInlineSearch = withDesign(searchInlineDesign);
-
-const searchResultDesign = {
-  SearchResultWrapper: addClasses('py-2'),
-  SearchResultList: addClasses('py-2'),
-  SearchResultSummary: addClasses('text-sm italic'),
-  SearchResultListItem: withDesign({
-    ItemAnchor: addClasses('my-4 bl-text-blue-500 underline'),
-    ItemParagraph: addClasses('text-sm'),
-    ItemList: addClasses('my-4'),
-  }),
-};
-
-const asSimpleSearchResult = withDesign(searchResultDesign);
+  asSimpleSearchResult, asInlineSearch, asSimpleSearch,
+} from './token';
 
 export const SimpleSearchResult = flow(asSimpleSearchResult)(SearchResultClean);
-export const InlineSearchBox = flow(asInlineSearch)(SearchClean);
-export const SimpleSearchBox = flow(asSimpleSearch)(SearchClean);
+export const InlineSearchBox = flow(asInlineSearch)(SearchBoxClean);
+export const SimpleSearchBox = flow(asSimpleSearch)(SearchBoxClean);

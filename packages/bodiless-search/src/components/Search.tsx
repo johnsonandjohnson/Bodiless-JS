@@ -43,17 +43,8 @@ const querystring = require('query-string');
 
 type SearchComponents = {
   SearchWrapper: ComponentType<StylableProps>;
-  SearchBox: ComponentType<any>;
+  SearchInput: ComponentType<any>;
   SearchButton: ComponentType<any>;
-};
-
-type SearchBoxProps = {
-  onChange: Function,
-  onKeyPress: Function,
-};
-
-type SearchButtonProps = {
-  onClick: Function,
 };
 
 type SearchResultComponents = {
@@ -75,17 +66,20 @@ type SearchResultItemProps = DesignableComponentsProps<SearchResultItemComponent
 
 const searchClient = new SearchClient();
 
-const SearchBoxBase: FC<SearchBoxProps & HTMLProps<HTMLInputElement>> = props => (
-  <Input {...props} placeholder="Search" />
-);
+const SearchInputBase: FC<HTMLProps<HTMLInputElement>> = props => {
+  const { placeholder = 'Search', ...rest } = props;
+  return (
+    <Input {...rest} placeholder={placeholder} />
+  );
+};
 
-const SearchButtonBase: FC<SearchButtonProps & HTMLProps<HTMLButtonElement>> = (
+const SearchButtonBase: FC<HTMLProps<HTMLButtonElement>> = (
   { onClick, ...rest },
 ) => <Button onClick={onClick} {...rest} />;
 
 const searchComponents: SearchComponents = {
   SearchWrapper: Div,
-  SearchBox: SearchBoxBase,
+  SearchInput: SearchInputBase,
   SearchButton: SearchButtonBase,
 };
 
@@ -130,7 +124,7 @@ const searchResultComponents: SearchResultComponents = {
 type SearchProps = DesignableComponentsProps<SearchComponents> &
 HTMLProps<HTMLElement>;
 type SearchResultProps = DesignableComponentsProps<SearchResultComponents> &
-HTMLProps<HTMLElement>;
+HTMLProps<HTMLElement> & { resultCountMessage?: string };
 
 type SearchIndex = {
   idx: string,
@@ -138,12 +132,17 @@ type SearchIndex = {
   expires: number,
 };
 
-const SearchResultBase: FC<SearchResultProps> = ({ components }) => {
+const defaultResultCountMessage = 'Showing %count% result(s).';
+const SearchResultBase: FC<SearchResultProps> = ({
+  components, resultCountMessage = defaultResultCountMessage,
+}) => {
   const searchResultContext = useSearchResultContext();
   const {
     SearchResultWrapper, SearchResultList, SearchResultListItem, SearchResultSummary,
   } = components;
-  const showResultCount = `Showing ${searchResultContext.results.length} results.`;
+  const showResultCount = resultCountMessage.replace(
+    '%count%', searchResultContext.results.length.toString(),
+  );
   return (
     <SearchResultWrapper>
       <SearchResultSummary>{showResultCount}</SearchResultSummary>
@@ -168,7 +167,7 @@ const useDidMountEffect = (func: Function[]) => {
   });
 };
 
-const SearchBase: FC<SearchProps> = ({ components }) => {
+const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
   const [queryString, setQueryString] = useState('');
   const searchResultContext = useSearchResultContext();
   const searchPagePath = process.env.BODILESS_SEARCH_PAGE || 'search';
@@ -182,7 +181,7 @@ const SearchBase: FC<SearchProps> = ({ components }) => {
     if (
       searchPagePath !== window.location.pathname.replace(/^\//, '').replace(/\/$/, '')
     ) {
-      window.location.href = `/search?q=${queryString}`;
+      window.location.href = `/${searchPagePath}/?q=${queryString}`;
       return;
     }
     const results = searchClient.search(queryString);
@@ -240,19 +239,23 @@ const SearchBase: FC<SearchProps> = ({ components }) => {
 
   useDidMountEffect([loadIndex]);
 
-  const { SearchWrapper, SearchBox, SearchButton } = components;
+  const { placeholder = 'Search' } = props;
+
+  const { SearchWrapper, SearchInput, SearchButton } = components;
   return (
     <SearchWrapper>
-      <SearchBox value={queryString} onChange={onChangeHandler} onKeyPress={onKeyPressHandler} />
+      <SearchInput
+        value={queryString}
+        onChange={onChangeHandler}
+        onKeyPress={onKeyPressHandler}
+        placeholder={placeholder}
+      />
       <SearchButton onClick={onClickHandler} />
     </SearchWrapper>
   );
 };
 
-const Search = designable(searchComponents)(SearchBase) as ComponentType<SearchProps>;
-
+export const SearchBox = designable(searchComponents)(SearchBoxBase) as ComponentType<SearchProps>;
 export const SearchResult = designable(
   searchResultComponents,
 )(SearchResultBase) as ComponentType<SearchResultProps>;
-
-export default Search;

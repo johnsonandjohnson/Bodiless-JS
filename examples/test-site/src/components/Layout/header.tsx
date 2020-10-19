@@ -56,7 +56,7 @@ const HeaderClean: FC<Props> = ({ components }) => {
     <Wrapper>
       <Container>
         <SiteLogoReturn />
-        <SimpleSearchBox />
+        <SimpleSearchBox placeholder="Search" />
       </Container>
       <MenuContainer>
         <Menu />

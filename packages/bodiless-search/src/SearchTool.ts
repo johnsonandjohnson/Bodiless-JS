@@ -18,7 +18,7 @@ import glob from 'glob';
 import mime from 'mime';
 import path from 'path';
 import { v1 } from 'uuid';
-import {
+import type {
   SearchEngineInterface,
   TSearchConf,
   TSearchIndexSettings,
@@ -67,11 +67,9 @@ class SearchTool {
     sourceTypes: string[];
   }) => {
     const { sourcePath, sourceTypes } = settings;
-    // @todo: glob file list
-
     const path$ = path.resolve(process.cwd(), sourcePath);
     if (!fs.existsSync(path$)) {
-      throw new Error('Invalid source path');
+      throw new Error(`Invalid source path: ${path$}`);
     }
 
     const pattern = `**/+(${sourceTypes.map(v => `*.${v}`).join('|')})`;
