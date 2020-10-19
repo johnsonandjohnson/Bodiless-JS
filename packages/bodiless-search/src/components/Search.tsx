@@ -177,13 +177,16 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
     setQueryString(event.target.value);
   };
 
-  const searchHandler = () => {
+  const searchLocationValidate = () => {
     if (
       searchPagePath !== window.location.pathname.replace(/^\//, '').replace(/\/$/, '')
     ) {
       window.location.href = `/${searchPagePath}/?q=${queryString}`;
-      return;
     }
+  };
+
+  const searchHandler = () => {
+    searchLocationValidate();
     const results = searchClient.search(queryString);
     searchResultContext.setResult(results);
   };
@@ -196,12 +199,7 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
 
   const onClickHandler = (event: React.MouseEvent) => {
     event.preventDefault();
-    if (searchPagePath !== window.location.pathname.replace(/^\//, '').replace(/\/$/, '')) {
-      window.location.href = `/search?q=${queryString}`;
-      return;
-    }
-    const results = searchClient.search(queryString);
-    searchResultContext.setResult(results);
+    searchHandler();
   };
 
   const validateIndex = (index: SearchIndex | ''): boolean => {
