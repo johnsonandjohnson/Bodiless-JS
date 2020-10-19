@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/search",
-  "version": "0.0.56",
+  "version": "0.0.57",
   "description": "Provide static site search option for Bodiless project.",
   "author": "Dewen Li <dli94@its.jnj.com>",
   "license": "Apache-2.0",

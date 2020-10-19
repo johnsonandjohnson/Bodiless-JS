@@ -27,7 +27,7 @@ enum ItemState {
   Queued,
 }
 
-export const DEFAULT_REQUEST_DELAY = 500;
+export const DEFAULT_REQUEST_DELAY = 2000;
 const MAXIMUM_REQUEST_DELAY = 5 * 60 * 1000; // 5 minutes
 
 export default class GatsbyMobxStoreItem {
