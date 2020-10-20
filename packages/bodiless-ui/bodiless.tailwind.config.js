@@ -80,6 +80,10 @@ const remGrid = {
 };
 
 module.exports = {
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: false,
+  },
   prefix: 'bl-',
   theme: {
     extend: {
