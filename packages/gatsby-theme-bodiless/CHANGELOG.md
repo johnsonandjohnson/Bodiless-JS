@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.57](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.56...v0.0.57) (2020-10-15)
+
+
+### Features
+
+* **core:** Remove submit button from non-interactive forms ([#564](https://github.com/johnsonandjohnson/bodiless-js/issues/564)) ([3382d54](https://github.com/johnsonandjohnson/bodiless-js/commit/3382d54acc98735e7fdc49ab843c06b5a39cc271))
+
+
+### BREAKING CHANGES
+
+* **core:** Describe the nature of the breaking change here.
+
+More Details about the breaking change.
+-->
+
+
+
+
+
 ## [0.0.56](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.55...v0.0.56) (2020-09-21)
 
 
