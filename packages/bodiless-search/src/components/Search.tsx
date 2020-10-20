@@ -179,7 +179,6 @@ const useDidMountEffect = (func: Function[]) => {
 };
 
 export const withSearchIndexLoader = (Component: ComponentType<any>) => {
-
   const WithSearchIndexLoader = (props: any) => {
     const searchResultContext = useSearchResultContext();
 
