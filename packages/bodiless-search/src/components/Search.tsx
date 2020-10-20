@@ -124,7 +124,7 @@ const searchResultComponents: SearchResultComponents = {
 type SearchProps = DesignableComponentsProps<SearchComponents> &
 HTMLProps<HTMLElement>;
 type SearchResultProps = DesignableComponentsProps<SearchResultComponents> &
-HTMLProps<HTMLElement> & { resultCountMessage?: string };
+HTMLProps<HTMLElement> & { resultCountMessage?: string, resultEmptyMessage?: string };
 
 type SearchIndex = {
   idx: string,
@@ -133,8 +133,11 @@ type SearchIndex = {
 };
 
 const defaultResultCountMessage = 'Showing %count% result(s).';
+const defaultResultEmptyMessage = 'No content matches your request, please enter new keywords.';
 const SearchResultBase: FC<SearchResultProps> = ({
-  components, resultCountMessage = defaultResultCountMessage,
+  components,
+  resultCountMessage = defaultResultCountMessage,
+  resultEmptyMessage = defaultResultEmptyMessage,
 }) => {
   const searchResultContext = useSearchResultContext();
   const {
@@ -143,6 +146,14 @@ const SearchResultBase: FC<SearchResultProps> = ({
   const showResultCount = resultCountMessage.replace(
     '%count%', searchResultContext.results.length.toString(),
   );
+  if (!searchResultContext.results.length) {
+    return (
+      <SearchResultWrapper>
+        <SearchResultSummary>{showResultCount}</SearchResultSummary>
+        <H3>{ resultEmptyMessage }</H3>
+      </SearchResultWrapper>
+    );
+  }
   return (
     <SearchResultWrapper>
       <SearchResultSummary>{showResultCount}</SearchResultSummary>
