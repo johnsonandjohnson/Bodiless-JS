@@ -1,5 +1,8 @@
 module.exports = {
-
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: false,
+  },
   /*
   New for V1 - the legacy 'options' is now top-level
   */
