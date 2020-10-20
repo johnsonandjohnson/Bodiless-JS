@@ -90,6 +90,13 @@ const asFixedWithWebpGatsbyImage = asGatsbyImg(GatsbyImagePresets.FixedWithWebp)
 const asFixedWithWebpNoBase64GatsbyImage = asGatsbyImg(GatsbyImagePresets.FixedWithWebpNoBase64);
 const asFixedWithWebpTracedSVGGatsbyImage = asGatsbyImg(GatsbyImagePresets.FixedWithWebpTracedSVG);
 
+const asFluidWithWebpGatsbyImage75 = asGatsbyImg(GatsbyImagePresets.FluidWithWebp75);
+const asFluidWithWebpGatsbyImage90 = asGatsbyImg(GatsbyImagePresets.FluidWithWebp90);
+const asFluidWithWebpGatsbyImage100 = asGatsbyImg(GatsbyImagePresets.FluidWithWebp100);
+const FluidWithWebpGatsbyImage75 = asFluidWithWebpGatsbyImage75(Img);
+const FluidWithWebpGatsbyImage90 = asFluidWithWebpGatsbyImage90(Img);
+const FluidWithWebpGatsbyImage100 = asFluidWithWebpGatsbyImage100(Img);
+
 const FluidGatsbyImage = asFluidGatsbyImage(Img);
 const FluidNoBase64GatsbyImage = asFluidNoBase64GatsbyImage(Img);
 const FluidTracedSVGGatsbyImage = asFluidTracedSVGGatsbyImage(Img);
@@ -136,4 +143,10 @@ export {
   FixedWithWebpGatsbyImage,
   FixedWithWebpNoBase64GatsbyImage,
   FixedWithWebpTracedSVGGatsbyImage,
+  FluidWithWebpGatsbyImage75,
+  FluidWithWebpGatsbyImage90,
+  FluidWithWebpGatsbyImage100,
+  asFluidWithWebpGatsbyImage75,
+  asFluidWithWebpGatsbyImage90,
+  asFluidWithWebpGatsbyImage100,
 };

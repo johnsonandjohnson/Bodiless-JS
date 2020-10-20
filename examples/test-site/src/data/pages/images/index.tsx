@@ -36,6 +36,9 @@ import {
   FluidNoBase64GatsbyImage,
   FluidTracedSVGGatsbyImage,
   FluidWithWebpGatsbyImage,
+  FluidWithWebpGatsbyImage75,
+  FluidWithWebpGatsbyImage90,
+  FluidWithWebpGatsbyImage100,
   FluidWithWebpNoBase64GatsbyImage,
   FluidWithWebpTracedSVGGatsbyImage,
   FixedGatsbyImage,
@@ -101,7 +104,7 @@ const ImageWrapper = flowRight(
 )(Div);
 const GatsbyImageWrapper = flowRight(
   removeClasses('inline-block'),
-  addClasses('block'),
+  addClasses('block w-1/2'),
 )(ImageWrapper);
 const ImageSectionTitle = asHeader2(H2);
 const ImageTitle = asHeader3(H3);
@@ -111,6 +114,41 @@ export default (props: any) => (
     <Layout>
       <PageTitle>Images Demo</PageTitle>
       <PageSection>
+        <ImageSectionTitle>Gatsby Images : Fluid webp conversion quality</ImageSectionTitle>
+        <div className="flex flex-wrap">
+          <GatsbyImageWrapper>
+            <ImageTitle>Fluid With Webp : 50% Default PNG</ImageTitle>
+            <FluidWithWebpGatsbyImage nodeKey="fluidWithWebpa" />
+          </GatsbyImageWrapper>
+          <GatsbyImageWrapper>
+            <ImageTitle>Fluid With Webp : 50% Default JPG</ImageTitle>
+            <FluidWithWebpGatsbyImage nodeKey="fluidWithWebpb" />
+          </GatsbyImageWrapper>
+          <GatsbyImageWrapper>
+            <ImageTitle>Fluid With Webp : 75% PNG</ImageTitle>
+            <FluidWithWebpGatsbyImage75 nodeKey="fluidWithWebp75a" />
+          </GatsbyImageWrapper>
+          <GatsbyImageWrapper>
+            <ImageTitle>Fluid With Webp : 75% JPG</ImageTitle>
+            <FluidWithWebpGatsbyImage75 nodeKey="fluidWithWebp75b" />
+          </GatsbyImageWrapper>
+          <GatsbyImageWrapper>
+            <ImageTitle>Fluid With Webp : 90% PNG</ImageTitle>
+            <FluidWithWebpGatsbyImage90 nodeKey="fluidWithWebp90a" />
+          </GatsbyImageWrapper>
+          <GatsbyImageWrapper>
+            <ImageTitle>Fluid With Webp : 90% JPG</ImageTitle>
+            <FluidWithWebpGatsbyImage90 nodeKey="fluidWithWebp90b" />
+          </GatsbyImageWrapper>
+          <GatsbyImageWrapper>
+            <ImageTitle>Fluid With Webp : 100% PNG</ImageTitle>
+            <FluidWithWebpGatsbyImage100 nodeKey="fluidWithWebp100a" />
+          </GatsbyImageWrapper>
+          <GatsbyImageWrapper>
+            <ImageTitle>Fluid With Webp : 100% JPG</ImageTitle>
+            <FluidWithWebpGatsbyImage100 nodeKey="fluidWithWebp100b" />
+          </GatsbyImageWrapper>
+        </div>
         <ImageSectionTitle>Gatsby Images</ImageSectionTitle>
         <GatsbyImageWrapper>
           <ImageTitle>Fluid</ImageTitle>

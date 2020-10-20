@@ -217,6 +217,42 @@ const generateGatsbyImage = async ({ file, preset, reporter }) => {
           reporter,
         }),
       };
+    case GatsbyImagePresets.FluidWithWebp75:
+      return {
+        fluid: await fluid({
+          file,
+          args: {
+            toFormat: 'webp',
+            srcSetBreakpoints,
+            quality: 75,
+          },
+          reporter,
+        }),
+      };
+    case GatsbyImagePresets.FluidWithWebp90:
+      return {
+        fluid: await fluid({
+          file,
+          args: {
+            toFormat: 'webp',
+            srcSetBreakpoints,
+            quality: 90,
+          },
+          reporter,
+        }),
+      };
+    case GatsbyImagePresets.FluidWithWebp100:
+      return {
+        fluid: await fluid({
+          file,
+          args: {
+            toFormat: 'webp',
+            srcSetBreakpoints,
+            quality: 100,
+          },
+          reporter,
+        }),
+      };
     case GatsbyImagePresets.FluidWithWebpNoBase64:
       return {
         fluid: await fluid({
