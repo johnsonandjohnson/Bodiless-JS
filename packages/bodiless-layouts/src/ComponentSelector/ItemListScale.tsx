@@ -82,7 +82,7 @@ const ItemList: React.FC<ItemListProps> = props => {
 
   const maxComponents = 25;
   const maxErrorMsg = `This result set includes items which cannot be displayed. Please 
-  reduce the result set to less then ${maxComponents} by filtering or searching.`;
+  reduce the result set to less than ${maxComponents} by filtering or searching.`;
 
   const elems: ReactNode[] = components.slice(0, maxComponents).map(
     (Component: ComponentWithMeta<any>, index: number) => (
