@@ -22,6 +22,7 @@ import React, {
   useRef,
 } from 'react';
 import axios from 'axios';
+import querystring from 'query-string';
 import {
   A,
   Button,
@@ -38,8 +39,6 @@ import {
 import SearchClient from '../SearchClient';
 import { useSearchResultContext } from './SearchContextProvider';
 import { TSearchResult } from '../types';
-
-const querystring = require('query-string');
 
 type SearchComponents = {
   SearchWrapper: ComponentType<StylableProps>;
@@ -239,8 +238,8 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
       console.log('Failed to load search index file.');
     }
 
-    const { q } = querystring.parse(window.location.search);
-    if (q) {
+    const { q } = querystring.parseUrl(window.location.search).query;
+    if (q && typeof q === 'string') {
       const results = searchClient.search(q);
       searchResultContext.setResult(results);
     }
