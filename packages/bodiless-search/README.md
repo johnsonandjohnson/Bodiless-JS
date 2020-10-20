@@ -1,6 +1,6 @@
 # Search Component
 
-Bodiless Search component provides in-borswer full-text search for Bodiless site build. By default, it uses [Lunr](https://lunrjs.com/) search library for creating index and performing the search behind the sence. Site builders could also switch to their own customized search library during site build.
+The Bodiless Search component provides in-browser, full-text search for Bodiless sites. By default, it uses [Lunr](https://lunrjs.com/) search library for creating index and performing the search behind the scenes. Site builders can also switch to their own customized search library during site build.
 
 ## Installation
 
@@ -14,11 +14,11 @@ npm install @bodiless/search
 
 ## Usage
 
-To enable the search on a site project, site builder needs to add search configures inside environment setting file. Then, creates design HOC functions that add styles to search components. Insert the sytled search box and search result components into the pages for renderring.
+To enable the search on a site project, the site builder needs to add search configurations inside the environment setting file. Next create the design HOC functions, which will add styles to search components. Insert the styled search box and search result components into the pages for rendering.
 
 ### Configuration
 
-Set the following configure options in .env.site base on search requirement.
+Set the following configuration options in `.env.site` based on search requirement.
 
 ```
 # .env.site
@@ -44,9 +44,9 @@ BODILESS_SEARCH_INDEX_PREVIEW_LENGTH='300'
 
 ### Create Search Index
 
-Then add following line to `script` section of package.json. 
+Add the following line to `script` section of package.json.
 ```
-"search-index": "node ./node_modules/@bodiless/search/lib/scripts/bodiless-search-index.js"
+"search-index": "create-search-index"
 ```
 
 It will generate the search index when running command:
@@ -70,7 +70,7 @@ import { SearchBox as SearchBoxClean, SearchResult as SearchResultClean } from '
 
 The "Search*Clean" alias given to imported components is a Bodiless convention for unstyled package components. Site builder will need to format them before adding to pages.
 
-For how to add design to clean components, please refer documentation of [Bodiless Design System](https://johnsonandjohnson.github.io/Bodiless-JS/#/Design/DesignSystem).
+For how to add design to clean components, please refer to the [Bodiless Design System](https://johnsonandjohnson.github.io/Bodiless-JS/#/Design/DesignSystem) documentation.
 
 Here's a quick example of applying design to `SearchBox` and `SearchResult`:
 ```
@@ -111,7 +111,7 @@ export const SearchResult = flow(
 
 ```
 
-Here, `SimpleSearchBox` and `SimpleSearchResult` are exported as site level components for search renderring. Site builder will need to add them on pages that require search feature. For example, to display the search box on page header, `SimpleSearchBox` can be added to `src/components/Layout/header.tsx`,
+Here, `SimpleSearchBox` and `SimpleSearchResult` are exported as site level components for search rendering. They will need to be added on pages that require the search feature. For example, to display the search box on page header, `SimpleSearchBox` can be added to `src/components/Layout/header.tsx`,
 
 
 ```
@@ -141,7 +141,7 @@ const HeaderClean: FC<Props> = ({ components }) => {
 
 ```
 
-To add `SimpleSearchResult` component, site builder will also need to import `withSearchResult` HOC, which can add `SearchResultProvider` context provider to a container component on the page, i.e.
+To add `SimpleSearchResult` component, import `withSearchResult` HOC, which can add `SearchResultProvider` context provider to a container component on the page, i.e.
 
 ```
 import { withSearchResult } from '@bodiless/search';
