@@ -17,6 +17,7 @@ import React, {
   FunctionComponent as FC,
   ComponentType,
   HTMLProps,
+  useCallback,
   useEffect,
   useState,
   useRef,
@@ -177,15 +178,62 @@ const useDidMountEffect = (func: Function[]) => {
   });
 };
 
+export const withSearchIndexLoader = (Component: ComponentType<any>) => {
+
+  const WithSearchIndexLoader = (props: any) => {
+    const searchResultContext = useSearchResultContext();
+
+    const validateIndex = (index: SearchIndex | ''): boolean => {
+      if (!index) {
+        return false;
+      }
+      const {
+        expires,
+      } = index;
+      return (Date.now() <= expires);
+    };
+
+    const loadIndex = async () => {
+      try {
+        const rawIndex = localStorage.getItem('search:index') || '{}';
+        let index = JSON.parse(rawIndex);
+        if (!validateIndex(index)) {
+          const response = await axios.get('/lunr.idx');
+          const expires = process.env.BODILESS_SEARCH_EXPIRES || 86400;
+          index = { expires: (Date.now() + Number(expires)), ...response.data };
+          localStorage.setItem('search:index', JSON.stringify(index));
+        }
+        searchClient.loadIndex(index.idx);
+        searchClient.loadPreviews(index.preview);
+      } catch (error) {
+        console.log('Failed to load search index file.');
+      }
+      const { q } = querystring.parseUrl(window.location.search).query;
+      if (q && typeof q === 'string') {
+        const results = searchClient.search(q);
+        searchResultContext.setResult(results);
+      }
+    };
+
+    useDidMountEffect([loadIndex]);
+
+    return (
+      <Component {...props} />
+    );
+  };
+
+  return WithSearchIndexLoader;
+};
+
 const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
   const [queryString, setQueryString] = useState('');
   const searchResultContext = useSearchResultContext();
   const searchPagePath = process.env.BODILESS_SEARCH_PAGE || 'search';
 
-  const onChangeHandler = (event: any) => {
+  const onChangeHandler = useCallback((event: any) => {
     event.preventDefault();
     setQueryString(event.target.value);
-  };
+  }, []);
 
   const searchLocationValidate = () => {
     if (
@@ -212,41 +260,6 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
     searchHandler();
   };
 
-  const validateIndex = (index: SearchIndex | ''): boolean => {
-    if (!index) {
-      return false;
-    }
-    const {
-      expires,
-    } = index;
-    return (Date.now() <= expires);
-  };
-
-  const loadIndex = async () => {
-    try {
-      const rawIndex = localStorage.getItem('search:index') || '{}';
-      let index = JSON.parse(rawIndex);
-      if (!validateIndex(index)) {
-        const response = await axios.get('/lunr.idx');
-        const expires = process.env.BODILESS_SEARCH_EXPIRES || 86400;
-        index = { expires: (Date.now() + Number(expires)), ...response.data };
-        localStorage.setItem('search:index', JSON.stringify(index));
-      }
-      searchClient.loadIndex(index.idx);
-      searchClient.loadPreviews(index.preview);
-    } catch (error) {
-      console.log('Failed to load search index file.');
-    }
-
-    const { q } = querystring.parseUrl(window.location.search).query;
-    if (q && typeof q === 'string') {
-      const results = searchClient.search(q);
-      searchResultContext.setResult(results);
-    }
-  };
-
-  useDidMountEffect([loadIndex]);
-
   const { placeholder = 'Search' } = props;
 
   const { SearchWrapper, SearchInput, SearchButton } = components;
@@ -263,7 +276,9 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
   );
 };
 
-export const SearchBox = designable(searchComponents)(SearchBoxBase) as ComponentType<SearchProps>;
+export const SearchBox = designable(searchComponents)(
+  withSearchIndexLoader(SearchBoxBase),
+) as ComponentType<SearchProps>;
 export const SearchResult = designable(
   searchResultComponents,
 )(SearchResultBase) as ComponentType<SearchResultProps>;
