@@ -94,11 +94,12 @@ const srcSetBreakpoints = [
   1024,
 ];
 
-const generateGatsbyImage = async ({ file, preset, reporter }) => {
+const generateGatsbyImage = async ({ file, preset, reporter }, options) => {
   // skip image generation when unknown preset is passed
   if (!Object.values(GatsbyImagePresets).includes(preset)) {
     return undefined;
   }
+  const { sharpArgs } = options;
   switch (preset) {
     case GatsbyImagePresets.Fixed:
       return {
@@ -214,6 +215,7 @@ const generateGatsbyImage = async ({ file, preset, reporter }) => {
         args: {
           toFormat: 'webp',
           srcSetBreakpoints,
+          ...sharpArgs,
         },
         reporter,
       });
@@ -221,6 +223,7 @@ const generateGatsbyImage = async ({ file, preset, reporter }) => {
         file,
         args: {
           srcSetBreakpoints,
+          ...sharpArgs,
         },
         reporter,
       });
@@ -262,7 +265,7 @@ const generateGatsbyImage = async ({ file, preset, reporter }) => {
   }
 };
 
-const generateImages = async ({ node, content, reporter }) => {
+const generateImages = async ({ node, content, reporter }, options) => {
   const parsedContent = JSON.parse(content);
   if (parsedContent === undefined || parsedContent.src === undefined) {
     return undefined;
@@ -294,7 +297,7 @@ const generateImages = async ({ node, content, reporter }) => {
     file: imageNode,
     preset: parsedContent.preset,
     reporter,
-  });
+  }, options);
 };
 
 const createBodilessNode = async ({
@@ -302,15 +305,16 @@ const createBodilessNode = async ({
   boundActionCreators,
   loadNodeContent,
   reporter,
-}) => {
+}, pluginOptions) => {
   const nodeContent = await loadNodeContent(node);
   const { createNode, createParentChildLink } = boundActionCreators;
 
+  const { gatsbyImage: gatsbyImageOptions } = pluginOptions;
   const gatsbyImgData = await generateImages({
     node,
     content: nodeContent,
     reporter,
-  });
+  }, gatsbyImageOptions);
 
   const content = gatsbyImgData ? JSON.stringify({
     ...JSON.parse(nodeContent),
@@ -342,7 +346,7 @@ exports.onCreateNode = ({
   boundActionCreators,
   loadNodeContent,
   reporter,
-}) => {
+}, pluginOptions) => {
   // Add slug field to Bodiless node
   if (node.internal.type === BODILESS_NODE_TYPE) {
     addSlugField({ node, getNode, actions });
@@ -359,7 +363,7 @@ exports.onCreateNode = ({
       boundActionCreators,
       loadNodeContent,
       reporter,
-    });
+    }, pluginOptions);
   }
 };
 

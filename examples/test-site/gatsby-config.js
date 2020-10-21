@@ -16,7 +16,16 @@ const plugins = [
       modules: ['@bodiless/gatsby-theme-bodiless'],
     },
   },
-  '@bodiless/gatsby-theme-bodiless',
+  {
+    resolve: '@bodiless/gatsby-theme-bodiless',
+    options: {
+      gatsbyImage: {
+        sharpArgs: {
+          quality: 90,
+        },
+      },
+    },
+  },
   '@bodiless/gatsby-plugin-ssi',
   {
     resolve: 'gatsby-plugin-canonical-urls',
