@@ -242,22 +242,22 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
     }
   };
 
-  const searchHandler = () => {
+  const searchHandler = useCallback(() => {
     searchLocationValidate();
     const results = searchClient.search(queryString);
     searchResultContext.setResult(results);
-  };
+  }, [queryString]);
 
-  const onKeyPressHandler = (event: React.KeyboardEvent) => {
+  const onKeyPressHandler = useCallback((event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
       searchHandler();
     }
-  };
+  }, [queryString]);
 
-  const onClickHandler = (event: React.MouseEvent) => {
+  const onClickHandler = useCallback((event: React.MouseEvent) => {
     event.preventDefault();
     searchHandler();
-  };
+  }, [queryString]);
 
   const { placeholder = 'Search' } = props;
 
