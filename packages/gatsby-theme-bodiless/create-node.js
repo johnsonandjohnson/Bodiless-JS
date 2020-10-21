@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
+/* eslint-disable no-case-declarations */
+
 const pathUtil = require('path');
 const slash = require('slash');
 const crypto = require('crypto');
@@ -207,15 +209,27 @@ const generateGatsbyImage = async ({ file, preset, reporter }) => {
         }),
       };
     case GatsbyImagePresets.FluidWithWebp:
+      const { src: srcWebp, srcSet: srcSetWebp } = await fluid({
+        file,
+        args: {
+          toFormat: 'webp',
+          srcSetBreakpoints,
+        },
+        reporter,
+      });
+      const fallback = await fluid({
+        file,
+        args: {
+          srcSetBreakpoints,
+        },
+        reporter,
+      });
       return {
-        fluid: await fluid({
-          file,
-          args: {
-            toFormat: 'webp',
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
+        fluid: {
+          ...fallback,
+          srcWebp,
+          srcSetWebp,
+        },
       };
     case GatsbyImagePresets.FluidWithWebpNoBase64:
       return {
