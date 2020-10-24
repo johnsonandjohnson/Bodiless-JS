@@ -29,7 +29,7 @@
     "@bodiless/core": "^0.0.58",
     "@bodiless/fclasses": "^0.0.58",
     "@bodiless/ui": "^0.0.58",
-    "@material/react-material-icon": "^0.14.1",
+    "@material/react-material-icon": "^0.15.0",
     "lodash": "^4.17.19"
   },
   "peerDependencies": {
