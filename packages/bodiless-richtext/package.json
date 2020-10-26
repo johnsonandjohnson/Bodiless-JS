@@ -44,8 +44,8 @@
     "rc-tooltip": "^3.7.3",
     "react-fast-compare": "^2.0.4",
     "shelljs": "^0.8.4",
-    "slate": "^0.47.9",
-    "slate-react": "^0.22.10",
+    "slate": "^0.44.12",
+    "slate-react": "^0.21.18",
     "uuid": "^3.3.2"
   },
   "peerDependencies": {
