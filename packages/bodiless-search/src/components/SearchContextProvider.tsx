@@ -13,14 +13,18 @@
  */
 
 import React, {
-  ComponentType, useContext, useState, FC,
+  ComponentType, useContext, useState, FC, useRef, useEffect,
 } from 'react';
+import querystring from 'query-string';
+import SearchClient from '../SearchClient';
 import { TSearchResults } from '../types';
 
 type TSearchResultContextValue = {
   results: TSearchResults,
   setResult: React.Dispatch<React.SetStateAction<TSearchResults>>,
 };
+
+const searchClient = new SearchClient();
 
 /**
  * Search result context
@@ -30,9 +34,25 @@ const defaultSearchResults: TSearchResultContextValue = {
   setResult: () => {},
 };
 const searchResultContext = React.createContext<TSearchResultContextValue>(defaultSearchResults);
-
+export const useSearchResultContext = () => useContext(searchResultContext);
 export const SearchResultProvider: FC = ({ children }) => {
   const [results, setResult] = useState<TSearchResults>([]);
+
+  const qsSearch = () => {
+    const { q } = querystring.parseUrl(window.location.search).query;
+    if (q && typeof q === 'string') {
+      const searchResult = searchClient.search(q);
+      setResult(searchResult);
+    }
+  };
+
+  const didMountRef = useRef(false);
+  useEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+      searchClient.loadIndex().then(() => qsSearch());
+    }
+  });
 
   const contextValue = {
     results,
@@ -46,10 +66,11 @@ export const SearchResultProvider: FC = ({ children }) => {
   );
 };
 
-export const useSearchResultContext = () => useContext(searchResultContext);
-
-export const withSearchResult = <P extends object>(Component: ComponentType<P>) => (props: P) => (
-  <SearchResultProvider>
-    <Component {...props} />
-  </SearchResultProvider>
-);
+export const withSearchResult = <P extends object>(Component: ComponentType<P>) => {
+  const WithSearchResult = (props: P) => (
+    <SearchResultProvider>
+      <Component {...props} />
+    </SearchResultProvider>
+  );
+  return WithSearchResult;
+};

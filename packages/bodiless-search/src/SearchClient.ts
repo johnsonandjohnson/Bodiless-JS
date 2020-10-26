@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import axios from 'axios';
 import {
   SearchEngineInterface,
   SearchClientInterface,
@@ -20,6 +21,12 @@ import {
   TPreview,
 } from './types';
 import LunrSearch from './LunrSearch';
+
+type SearchIndex = {
+  idx: string,
+  preview: string,
+  expires: number,
+};
 
 /**
  * Search client wraps search engine for in-browser search features.
@@ -36,8 +43,32 @@ class SearchClient implements SearchClientInterface {
 
   search = (queryString: string): TSearchResults => this.searchEngine.search(queryString);
 
-  loadIndex = (index: object): void => {
-    this.searchEngine.loadIndex(index);
+  validateIndex = (index: SearchIndex | ''): boolean => {
+    if (!index) {
+      return false;
+    }
+    const {
+      expires,
+    } = index;
+    return (Date.now() <= expires);
+  };
+
+  loadIndex = async () => {
+    try {
+      const rawIndex = localStorage.getItem('search:index') || '{}';
+      let index = JSON.parse(rawIndex);
+      if (!this.validateIndex(index)) {
+        const indexUrl = process.env.BODILESS_SEARCH_INDEX_URL || '/default.idx';
+        const response = await axios.get(indexUrl);
+        const expires = process.env.BODILESS_SEARCH_EXPIRES || 86400;
+        index = { expires: (Date.now() + Number(expires)), ...response.data };
+        localStorage.setItem('search:index', JSON.stringify(index));
+      }
+      this.searchEngine.loadIndex(index.idx);
+      this.loadPreviews(index.preview);
+    } catch (error) {
+      console.log('Failed to load search index file.');
+    }
   };
 
   loadPreviews = (previews: { [key: string]: TPreview; }): void => {

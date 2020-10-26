@@ -36,7 +36,7 @@ const tool = new SearchTool(config);
 const settings: TSearchIndexSettings = {
   sourcePath: process.env.BODILESS_SEARCH_SOURCE_PATH || './public',
   sourceTypes: process.env.BODILESS_SEARCH_SOURCE_TYPE ? process.env.BODILESS_SEARCH_SOURCE_TYPE.split('|') : ['html', 'htm'],
-  targetPath: './public/lunr.idx',
+  targetPath: process.env.BODILESS_SEARCH_INDEX_PATH ? process.env.BODILESS_SEARCH_INDEX_PATH : './public/default.idx',
   indexConfig: {
     ref: 'id',
     fields: [
