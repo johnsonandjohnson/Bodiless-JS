@@ -9,16 +9,16 @@ a 16:9 ratio by default.
 To add a YouTube Component to your site:
 
 1. In Edit Mode, select the YouTube Component from the Component Library.
-![](https://i.imgur.com/IdFyIsU.jpg)
+![](./assets/YoutubeComponentLibrary.jpg)
 
 2. Click on the YouTube Component to show the Configure button in the context menu. 
-![](https://i.imgur.com/9kBY6NC.jpg)
+![](./assets/YoutubeFlow.jpg)
 
 3. Enter the target YouTube URL and click the checkmark or hit enter. 
 ?> Please note the following accepted URL formats:
-?> * **Share** (e.g. https://youtu.be/Rqla3gsl1Ik)
-?> * **Watch** (e.g. https://www.youtube.com/watch?v=Rqla3gsl1Ik)
-?> * **Embed** (e.g. https://www.youtube.com/embed/Rqla3gsl1Ik)
+  * **Share** (e.g. https://youtu.be/Rqla3gsl1Ik)
+  * **Watch** (e.g. https://www.youtube.com/watch?v=Rqla3gsl1Ik)
+  * **Embed** (e.g. https://www.youtube.com/embed/Rqla3gsl1Ik)
 
 4. Resize or reposition the YouTube component using the Flow Container controls.
 
