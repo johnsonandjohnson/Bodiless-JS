@@ -9,11 +9,11 @@ and the source URL for the iframe are editable.
 To place an Iframe Component on a BodilessJS page:
 
 1. Select the Iframe Component from the Component Library.
-![](https://i.imgur.com/laFOAx2.jpg)
+![](./assets/IframeComponentLibrary.jpg)
 
 2. Click on the iframe component to toggle the configuration button for 
 the iframe.
-![](https://i.imgur.com/SStfbrB.png)
+![](./assets/IframeConfigButton.jpg)
 
 
 3. Enter the URL you wish to place in the iframe and enter the height at 
@@ -22,7 +22,8 @@ which you would like to display the iframe's content.
 to allow iframes. If the originating site does not allow embedding from their 
 site the content will not display in the iframe.
 ?> If you do not enter a display height the iframe will default to 150 px
-![](https://i.imgur.com/AABlH1K.jpg)
+
+![](./assets/IframeConfig.jpg)
 
 4. Click the check mark or hit enter.
  
