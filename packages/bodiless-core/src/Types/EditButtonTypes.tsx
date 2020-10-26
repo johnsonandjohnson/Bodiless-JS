@@ -35,7 +35,8 @@ export type EditButtonProps<D> = {
 };
 
 export type EditButtonOptions<P, D> = Omit<TMenuOption, 'handler'> & {
-  renderForm?: FormBodyRenderer<P, D>,
+  renderForm: FormBodyRenderer<P, D>,
+  formTitle?: string,
   /**
   * An optional function that determines if the created menu option displays "compound form".
   * If the function returns true, then "compound form" is displayed.
@@ -44,3 +45,7 @@ export type EditButtonOptions<P, D> = Omit<TMenuOption, 'handler'> & {
   */
   useCompoundForm?: () => boolean,
 } & EditDataHandler<D>;
+
+export type UseBodilessOverrides<P = any, D = any> = (
+  props: P & EditButtonProps<D>,
+) => Partial<EditButtonOptions<P, D>>;

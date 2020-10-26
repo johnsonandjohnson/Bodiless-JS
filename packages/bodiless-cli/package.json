@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/cli",
-  "version": "0.0.57",
+  "version": "0.0.58",
   "description": "A cli tool for Bodiless-JS",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",

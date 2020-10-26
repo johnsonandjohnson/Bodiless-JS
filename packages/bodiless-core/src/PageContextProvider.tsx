@@ -29,12 +29,15 @@ import { PageEditContextInterface } from './PageEditContext/types';
  * @return Values suitable for passing to the `PageEditContext` constructor.
  */
 const useNewContext = (props: PageContextProviderProps, parent?: PageEditContextInterface) => {
-  const { getMenuOptions, name, id } = props;
+  const {
+    getMenuOptions, name, id, type,
+  } = props;
   const id$ = id || useUUID();
   const finalValues = {
     getMenuOptions,
     id: id$,
     name: name || id$,
+    type,
   };
   return useMemo(
     () => (parent ? parent.spawn(finalValues) : new PageEditContext(finalValues)),

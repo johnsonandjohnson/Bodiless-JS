@@ -11,17 +11,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { withDesign, replaceWith, stylable } from '@bodiless/fclasses';
-import MenuLink from './MenuLink';
+import { flow } from 'lodash';
+import {
+  withTitle,
+  withDesc,
+} from '@bodiless/layouts';
+import {
+  varyDesign,
+  replaceWith,
+  withDesign,
+} from '@bodiless/fclasses';
 
-/**
- * HOC, that incorporate the design of given component (usually based on <List /> component)
- * with rc-menu <Menu /> component
- */
-const asMenu = withDesign({
-  Wrapper: stylable,
-  Item: stylable,
-  Title: replaceWith(MenuLink),
-});
+import ChameleonListDemo from '../../data/pages/list2/ChameleonListDemo';
+import { withType } from './Categories';
 
-export default asMenu;
+const listVariations = {
+  ChameleonList: flow(
+    replaceWith(ChameleonListDemo),
+    withType('List')(),
+    withTitle('Chameleon LIst'),
+    withDesc('Multi-level list with choice between bullets and numbers.\n'),
+  ),
+};
+
+export default withDesign(varyDesign(
+  listVariations,
+)());

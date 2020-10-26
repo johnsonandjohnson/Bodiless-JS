@@ -45,6 +45,7 @@ const options: BodilessOptions<Props, Data> = {
   local: true,
   Wrapper: 'div',
   useCompoundForm: () => true,
+  renderForm: () => true,
 };
 
 const useIframeBodilessOptions = () => options;

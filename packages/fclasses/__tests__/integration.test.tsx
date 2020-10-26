@@ -63,7 +63,7 @@ const Tout: FC<DesignableProps<ToutComponents>> = ({ design }) => {
   );
 };
 
-const asBasicTout = withDesign({
+const asBasicTout = withDesign<ToutComponents>({
   Wrapper: addClasses('font-sans'),
   Title: addClasses('text-sm text-green'),
   Body: addClasses('my-10'),
@@ -92,6 +92,7 @@ const withGreenCtaText = withDesign({
   ),
 });
 
+// @ts-ignore: Types of parameters are incompatible.
 const BasicTout = asBasicTout(Tout);
 const PinkTout = asPinkTout(BasicTout);
 // const StandardTout = asStandardTout(BasicTout);asSta

@@ -13,7 +13,9 @@
  */
 
 import React, { FC, createContext, useContext } from 'react';
-import { Text, TextArea } from 'informed';
+import {
+  Text, TextArea, Radio, RadioGroup, Checkbox, Option, Select,
+} from 'informed';
 import ReactTooltip from 'rc-tooltip';
 import { omit } from 'lodash';
 import ReactTagsField from './ReactTagsField';
@@ -28,7 +30,11 @@ type ContextUIType = {
   ui?: UI;
 };
 
-const defaultUI = {
+const DefaultToolbarButton = (props: any) => (
+  <div {...omit(props, 'isActive', 'isDisabled', 'isFirst')} />
+);
+
+const defaultUI: Required<UI> = {
   Icon: (props: any) => <i {...omit(props, 'isActive')} />,
   ComponentFormTitle: 'h3',
   ComponentFormLabel: 'label',
@@ -47,13 +53,21 @@ const defaultUI = {
   ComponentFormListItem: 'li',
   ComponentFormDescription: 'div',
   ContextSubMenu: React.Fragment,
-  ToolbarButton: (props: any) => <div {...omit(props, 'isActive', 'isDisabled', 'isFirst')} />,
-  ToolbarButtonLabel: 'span',
+  HorizontalToolbarButton: DefaultToolbarButton,
+  ToolbarButton: DefaultToolbarButton,
   FormWrapper: 'div',
   ToolbarDivider: 'div',
   Tooltip: ReactTooltip,
   Toolbar: 'div',
+  ToolbarButtonLabel: 'span',
   ContextMenuGroup: React.Fragment,
+  ComponentFormRadio: Radio,
+  ComponentFormRadioGroup: RadioGroup,
+  ComponentFormCheckBox: Checkbox,
+  ComponentFormFieldTitle: 'title',
+  ComponentFormOption: Option,
+  ComponentFormSelect: Select,
+  ComponentFormFieldWrapper: 'div',
 };
 
 const getUI = (ui: UI = {}) => ({

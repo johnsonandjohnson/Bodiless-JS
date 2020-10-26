@@ -13,7 +13,7 @@
  */
 import { flow } from 'lodash';
 import {
-  withDesign,
+  withDesign, HOC,
 } from '@bodiless/fclasses';
 import {
   withNode,
@@ -45,7 +45,7 @@ const asEditableBurgerSubMenu = (HeaderContent: string, editable: AsEditable) =>
         withNode,
         withDeleteSublistOnUnwrap,
         asEditableMenu(editable),
-      ),
+      ) as HOC,
     }),
   }),
   withEditableTitle(editable),

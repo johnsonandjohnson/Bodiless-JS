@@ -14,11 +14,19 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import { withLinkToggle, Editable } from '@bodiless/components';
+import { withBodilessLinkToggle, asEditable } from '@bodiless/components';
+import { A, HOC } from '@bodiless/fclasses';
+import { flowRight } from 'lodash';
+import { withNodeKey } from '@bodiless/core/lib/withNode';
 import Layout from '../../../components/Layout';
-import EditableLink from '../../../components/Link';
+import { asEditableLink, asLink } from '../../../components/Elements.token';
 
-const LinkToggle = withLinkToggle(EditableLink);
+export const LinkToggle = flowRight(
+  withNodeKey('linktoggle1'),
+  asEditable('text', 'Link Toggle'),
+  withBodilessLinkToggle(asEditableLink('link') as HOC),
+  asLink,
+)(A);
 
 export default (props: any) => (
   <Page {...props}>
@@ -30,7 +38,7 @@ export default (props: any) => (
         then clicking &quot;Remove Link&quot; on the edit form.
       </p>
       <div className="my-3" data-linktoggle-element="link-toggle">
-        <LinkToggle nodeKey="linktoggle1"><Editable nodeKey="text" placeholder="Link Toggle" /></LinkToggle>
+        <LinkToggle />
       </div>
     </Layout>
   </Page>
