@@ -29,7 +29,7 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/fclasses": "^0.0.57",
+    "@bodiless/fclasses": "^0.0.58",
     "axios": "^0.19.0",
     "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.2.0",
