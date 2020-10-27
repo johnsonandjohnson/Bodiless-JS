@@ -22,6 +22,8 @@ import { TSearchResults } from '../types';
 type TSearchResultContextValue = {
   results: TSearchResults,
   setResult: React.Dispatch<React.SetStateAction<TSearchResults>>,
+  searchTerm: string,
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>,
 };
 
 const searchClient = new SearchClient();
@@ -32,31 +34,42 @@ const searchClient = new SearchClient();
 const defaultSearchResults: TSearchResultContextValue = {
   results: [],
   setResult: () => {},
+  searchTerm: '',
+  setSearchTerm: () => '',
 };
 const searchResultContext = React.createContext<TSearchResultContextValue>(defaultSearchResults);
 export const useSearchResultContext = () => useContext(searchResultContext);
 export const SearchResultProvider: FC = ({ children }) => {
   const [results, setResult] = useState<TSearchResults>([]);
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
-  const qsSearch = () => {
-    const { q } = querystring.parseUrl(window.location.search).query;
-    if (q && typeof q === 'string') {
-      const searchResult = searchClient.search(q);
+  const search = (term: string) => {
+    if (term) {
+      const searchResult = searchClient.search(term);
       setResult(searchResult);
     }
   };
 
   const didMountRef = useRef(false);
+  const searchTermRef = useRef('');
   useEffect(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
-      searchClient.loadIndex().then(() => qsSearch());
+      const { q } = querystring.parseUrl(window.location.search).query;
+      if (typeof q === 'string') {
+        searchClient.loadIndex().then(() => search(q));
+      }
+    } else if (searchTermRef.current !== searchTerm) {
+      searchClient.loadIndex().then(() => search(searchTerm));
+      searchTermRef.current = searchTerm;
     }
   });
 
   const contextValue = {
     results,
     setResult,
+    searchTerm,
+    setSearchTerm,
   };
 
   return (

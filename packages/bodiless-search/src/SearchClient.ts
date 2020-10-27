@@ -23,8 +23,8 @@ import {
 import LunrSearch from './LunrSearch';
 
 type SearchIndex = {
-  idx: string,
-  preview: string,
+  idx: object,
+  preview: { [key: string]: TPreview; },
   expires: number,
 };
 
@@ -43,7 +43,7 @@ class SearchClient implements SearchClientInterface {
 
   search = (queryString: string): TSearchResults => this.searchEngine.search(queryString);
 
-  validateIndex = (index: SearchIndex | ''): boolean => {
+  validateIndex = (index: SearchIndex | false): boolean => {
     if (!index) {
       return false;
     }
@@ -53,11 +53,19 @@ class SearchClient implements SearchClientInterface {
     return (Date.now() <= expires);
   };
 
+  getLocalIndex = (): SearchIndex | false => {
+    const rawIndex = localStorage.getItem('search:index') || '{}';
+    try {
+      return JSON.parse(rawIndex);
+    } catch (error) {
+      return false;
+    }
+  };
+
   loadIndex = async () => {
     try {
-      const rawIndex = localStorage.getItem('search:index') || '{}';
-      let index = JSON.parse(rawIndex);
-      if (!this.validateIndex(index)) {
+      let index = this.getLocalIndex() as SearchIndex;
+      if (!index || !this.validateIndex(index)) {
         const indexUrl = process.env.BODILESS_SEARCH_INDEX_URL || '/default.idx';
         const response = await axios.get(indexUrl);
         const expires = process.env.BODILESS_SEARCH_EXPIRES || 86400;

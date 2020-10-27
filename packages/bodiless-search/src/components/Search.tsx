@@ -177,8 +177,7 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
 
   const searchHandler = useCallback(async () => {
     searchLocationValidate();
-    const results = await searchClient.loadIndex().then(() => searchClient.search(queryString));
-    searchResultContext.setResult(results);
+    searchResultContext.setSearchTerm(queryString);
   }, [queryString]);
 
   const onKeyPressHandler = useCallback((event: React.KeyboardEvent) => {
