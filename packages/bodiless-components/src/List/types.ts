@@ -16,16 +16,16 @@ import { HTMLProps, ComponentType, PropsWithChildren } from 'react';
 import { DesignableComponentsProps, DesignableProps } from '@bodiless/fclasses';
 import { WithNodeProps } from '@bodiless/core';
 
-export type TitleProps = {
-  onAdd: () => void,
-  onDelete: () => void,
+export type ItemProps = {
+  addItem: () => void,
+  deleteItem: () => void,
   canDelete: () => boolean,
 };
 
 export type ListDesignableComponents = {
   Wrapper: ComponentType<any>,
-  Item: ComponentType<any>,
-  Title: ComponentType<TitleProps>,
+  Item: ComponentType<ItemProps>,
+  Title: ComponentType<any>,
   ItemMenuOptionsProvider: ComponentType<any>,
 };
 

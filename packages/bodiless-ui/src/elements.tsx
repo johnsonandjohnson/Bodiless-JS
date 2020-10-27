@@ -63,7 +63,7 @@ export const Icon = flow(
 )(Span);
 
 export const ComponentFormTitle = addClasses(
-  'bl-text-lg bl-font-bold bl-text-grey-100 bl-block bl-mb-grid-2',
+  'bl-text-lg bl-font-bold bl-text-grey-100 bl-block bl-mb-grid-2 bl-min-w-xl-grid-0',
 )(Title);
 
 export const ComponentFormFieldWrapper = addClasses(

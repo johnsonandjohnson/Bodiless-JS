@@ -29,7 +29,7 @@ type WithMeta = {
   categories?: MetaCategory,
 };
 type CTWM = CT & WithMeta;
-export type HOC = (Component:CTWM) => CTWM;
+export type HOC = (Component?:CTWM) => CTWM;
 
 function customizer(objValue:any, srcValue:any) {
   if (isArray(objValue)) {

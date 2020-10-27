@@ -1,5 +1,8 @@
 module.exports = {
-
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: false,
+  },
   /*
   New for V1 - the legacy 'options' is now top-level
   */
@@ -13,6 +16,12 @@ module.exports = {
   */
 
   theme: {
+
+    extend: {
+      width: {
+        content: 'max-content',
+      },
+    },
 
     // tailwindcss-aspect-ratio configs
     aspectRatio: { // defaults to {}
@@ -310,6 +319,7 @@ module.exports = {
       5: '5rem',
       // Used by main menu items to match the UI wireframes
       100: '100px',
+      full: '100%',
     },
 
     /*
@@ -506,7 +516,10 @@ module.exports = {
   |
   */
 
-  variants: {},
+  variants: {
+    overflow: ['responsive', 'hover', 'focus'],
+    position: ['responsive', 'hover', 'focus'],
+  },
 
   corePlugins: {},
 

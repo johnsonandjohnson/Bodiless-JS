@@ -27,7 +27,7 @@ const SidecarNodeContext = createContext<NodeMap<any>[]>([]);
  *
  * @param Component Any component which uses the Bodiless ContentNode system.
  */
-const startSidecarNodes = <P extends object>(Component: ComponentType<P>) => {
+const startSidecarNodes = <P extends object>(Component: ComponentType<P>|string) => {
   const StartSidecarNodes = (props: P) => {
     const oldValue = useContext(SidecarNodeContext);
     const newValue = [...oldValue, useContext(NodeContext)];
@@ -49,7 +49,7 @@ const startSidecarNodes = <P extends object>(Component: ComponentType<P>) => {
  *
  * @param Component Any component which uses the Bodiless ContentNode system.
  */
-const endSidecarNodes = <P extends object>(Component: ComponentType<P>) => {
+const endSidecarNodes = <P extends object>(Component: ComponentType<P>|string) => {
   const EndSidecarNodes = (props: P) => {
     const oldValue = useContext(SidecarNodeContext);
     if (oldValue.length === 0) return <Component {...props} />;

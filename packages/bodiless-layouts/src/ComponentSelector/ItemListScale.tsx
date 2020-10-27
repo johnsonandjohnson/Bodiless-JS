@@ -80,7 +80,11 @@ const ItemList: React.FC<ItemListProps> = props => {
   };
   const { transformStyle, boxStyle, outerStyle } = styles[scale];
 
-  const elems: ReactNode[] = components.slice(0, 50).map(
+  const maxComponents = 25;
+  const maxErrorMsg = `This result set includes items which cannot be displayed. Please 
+  reduce the result set to less than ${maxComponents} by filtering or searching.`;
+
+  const elems: ReactNode[] = components.slice(0, maxComponents).map(
     (Component: ComponentWithMeta<any>, index: number) => (
       <finalUI.ItemBoxWrapper style={boxStyle} key={Component.displayName}>
         <finalUI.ItemBox key={Component.displayName}>
@@ -125,7 +129,7 @@ const ItemList: React.FC<ItemListProps> = props => {
     <finalUI.ItemBoxWrapper style={boxStyle}>
       <finalUI.ItemBox>
         <finalUI.TitleWrapper>
-          There are more then 50 items use filter to lower the number of items
+          {maxErrorMsg}
         </finalUI.TitleWrapper>
       </finalUI.ItemBox>
     </finalUI.ItemBoxWrapper>
@@ -151,7 +155,7 @@ const ItemList: React.FC<ItemListProps> = props => {
         <finalUI.GridListBoxInner style={transformStyle} id="gridlistboxinner">
           {elems}
           {
-            components.length > 50
+            components.length > maxComponents
               ? <MoreItems />
               : Fragment
           }

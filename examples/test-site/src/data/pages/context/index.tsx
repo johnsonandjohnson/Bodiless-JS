@@ -21,6 +21,7 @@ import { flow } from 'lodash';
 import {
   flowIf, hasProp, addClasses, withoutProps, StylableProps,
   removeClasses,
+  A,
 } from '@bodiless/fclasses';
 import { Div } from '@bodiless/ui';
 import {
@@ -40,7 +41,9 @@ import { Image } from '@bodiless/components-ui';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 
 import Layout from '../../../components/Layout';
-import EditableLink from '../../../components/Link';
+import { asEditableLink } from '../../../components/Elements.token';
+
+const EditableLink = asEditableLink()(A);
 
 type Values = { text: string };
 const demoForm = (text: string) => contextMenuForm<Values>({

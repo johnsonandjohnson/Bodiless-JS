@@ -14,7 +14,7 @@
 import { flow } from 'lodash';
 import Menu, { Item as MenuItem } from 'rc-menu';
 import { withDesign, replaceWith } from '@bodiless/fclasses';
-import asMenu from './asMenu';
+import asStylableList from './asStylableList';
 
 const asMainMenu = flow(
   withDesign({
@@ -22,7 +22,7 @@ const asMainMenu = flow(
     Wrapper: replaceWith<any>(Menu),
     Item: replaceWith(MenuItem),
   }),
-  asMenu,
+  asStylableList,
 );
 
 export default asMainMenu;

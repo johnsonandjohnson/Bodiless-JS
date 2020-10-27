@@ -15,7 +15,7 @@
 import { flow } from 'lodash';
 import React, { ComponentType } from 'react';
 import { withChild, withNodeKey } from '@bodiless/core';
-import { addClasses } from '@bodiless/fclasses';
+import { addClasses, withoutProps } from '@bodiless/fclasses';
 
 type WithInitialValue = {
   placeholder: string;
@@ -32,6 +32,7 @@ const withEditor = (Editor:ComponentType<any>) => (nodeKey?: string, placeholder
     withChild(flow(
       withPlaceholder(placeholder),
       withNodeKey(nodeKey),
+      withoutProps(['design']),
     )(Editor)),
   )
 );

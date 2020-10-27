@@ -15,16 +15,16 @@
 import { flow } from 'lodash';
 import { asEditableList } from '@bodiless/components';
 import asMainMenu from './asMainMenu';
-import withEditableTitle from './withEditableTitle';
+import withMenuLinkTitle from './withMenuLinkTitle';
 import AsEditable from './types/AsEditable';
 
 /**
  * HOC, produces *editable* main menu (based on rc-menu)
  */
-const asEditableMainMenu = (editable: AsEditable) => flow(
+const asEditableMainMenu = (asEditable: AsEditable) => flow(
   asEditableList,
   asMainMenu,
-  withEditableTitle(editable),
+  withMenuLinkTitle(asEditable),
 );
 
 export default asEditableMainMenu;
