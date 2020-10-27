@@ -48,16 +48,27 @@ export interface CanGetContextMenuOptions {
 export interface DefinesLocalEditContext {
   id: string;
   name?: string;
+  type?: string;
   getMenuOptions?: () => TMenuOption[];
 }
 
 export interface CanBeActivated {
-  isActive: boolean;
+  isActive: boolean
   isInnermost: boolean;
   hasLocalMenu: boolean;
   isInnermostLocalMenu: boolean;
   activate: () => void;
+  /**
+   * The currently active context, or undefined if no context is active.
+   */
+  activeContext?: PageEditContextInterface;
+  /**
+   * If the context is active, an array of its descendants, starting with its first child
+   * and ending with the innermost active context.  If the context is not active, undefined.
+   */
+  activeDescendants?: PageEditContextInterface[];
 }
+
 export interface PageEditStoreInterface extends CanControlLocalTooltipsVisibility {
   activeContext: PageEditContextInterface | undefined;
   updateMenuOptions: (contexts: PageEditContextInterface) => string[];

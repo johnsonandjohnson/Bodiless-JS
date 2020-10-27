@@ -16,9 +16,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import {
-  Editable, List, asEditableList,
-} from '@bodiless/components';
+import { Editable, asBodilessList } from '@bodiless/components';
 import {
   withDesign, replaceWith, addClasses, stylable,
 } from '@bodiless/fclasses';
@@ -33,13 +31,13 @@ const BulletPoints = (props: any) => (
 );
 
 const EditableBulletPoints = flow(
-  asEditableList,
+  asBodilessList('bulletpoints'),
   withDesign({
     Title: replaceWith(BulletPoints),
     Wrapper: flow(stylable, addClasses('m-6 py-3 flex flex-wrap md:flex-nowrap list-disc w-full')),
     Item: flow(stylable, addClasses('w-full md:w-auto md:flex-1')),
   }),
-)(List);
+)('ul');
 
 const HomePage = (props: any) => (
   <Page {...props}>
@@ -51,7 +49,7 @@ const HomePage = (props: any) => (
         <Editable nodeKey="title" placeholder="Page Title" />
       </h1>
       <div className="">
-        <EditableBulletPoints nodeKey="bulletpoints" />
+        <EditableBulletPoints />
       </div>
       <FlowContainerDefault
         nodeKey={HOME_PAGE_PATH}

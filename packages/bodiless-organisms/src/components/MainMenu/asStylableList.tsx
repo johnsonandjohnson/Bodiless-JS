@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2019 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,15 +11,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { withDesign, stylable } from '@bodiless/fclasses';
 
-import { flow } from 'lodash';
-import { stylable } from '@bodiless/fclasses';
-import { asLink, asEditableLink } from '../Elements.token';
+/**
+ * HOC, that incorporate the design of given component (usually based on <List /> component)
+ * with rc-menu <Menu /> component
+ */
+const asStylableList = withDesign({
+  Wrapper: stylable,
+  Item: stylable,
+  Title: stylable,
+});
 
-const EditableLink = flow(
-  asEditableLink(),
-  stylable,
-  asLink,
-)('a');
-
-export default EditableLink;
+export default asStylableList;

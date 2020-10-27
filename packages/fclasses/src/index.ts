@@ -32,8 +32,10 @@ import {
   startWith,
   remove,
   designable,
+  extendDesignable,
   varyDesign,
   extendDesign,
+  withFinalDesign,
 } from './Design';
 import type {
   Design,
@@ -52,6 +54,7 @@ export {
   addClasses,
   removeClasses,
   withDesign,
+  withFinalDesign,
   applyDesign,
   replaceWith,
   startWith,
@@ -60,6 +63,7 @@ export {
   hasProp,
   withoutProps,
   designable,
+  extendDesignable,
   varyDesign,
   extendDesign,
   asComponent,

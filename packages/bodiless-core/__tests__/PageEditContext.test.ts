@@ -17,10 +17,11 @@ import PageEditContext from '../src/PageEditContext';
 import { PageEditContextInterface } from '../src/PageEditContext/types';
 import { TMenuOption } from '../src/Types/ContextMenuTypes';
 
-const spawn = (parent: PageEditContextInterface, id: string) => (
+const spawn = (parent: PageEditContextInterface, id: string, type?: string) => (
   parent.spawn({
     id,
     name: id,
+    type,
     getMenuOptions: () => [
       {
         name: id,
@@ -62,6 +63,12 @@ describe('PageEditContext', () => {
     expect(tree.child12.isInnermost).toBeFalsy();
     expect(tree.parent2.isInnermost).toBeFalsy();
     expect(tree.child21.isInnermost).toBeFalsy();
+    expect(tree.root.activeDescendants).toEqual([tree.parent1, tree.child11]);
+    expect(tree.parent1.activeDescendants).toEqual([tree.child11]);
+    expect(tree.child11.activeDescendants).toHaveLength(0);
+    expect(tree.child12.activeDescendants).toBeUndefined();
+    expect(tree.parent2.activeDescendants).toBeUndefined();
+    expect(tree.child21.activeDescendants).toBeUndefined();
   });
 
   it('sets the correct menu options', () => {

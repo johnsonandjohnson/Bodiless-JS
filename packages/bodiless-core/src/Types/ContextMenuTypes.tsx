@@ -36,6 +36,7 @@ export type TMenuOption = {
   group?: string;
   Component?: ComponentType<IContextMenuItemProps>;
   context?: string;
+  formTitle?: string;
 };
 
 export type ButtonVariantProps = HTMLProps<HTMLDivElement> & {

@@ -33,9 +33,10 @@ export {
   asHorizontalSubMenu,
   asMainMenu,
   asMainSubMenu,
-  asMenu,
+  asStylableList,
   MenuLink,
   withSubmenu,
+  withMenuLinkTitle,
 } from './components/MainMenu/index';
 
 export {
@@ -94,6 +95,8 @@ export {
   BCarouselClean,
   asEditableCarousel,
 } from './components/Carousel';
+
+export * from './components/Menu';
 
 export { default as Embed } from './components/Embed';
 export {
