@@ -33,7 +33,6 @@ import {
   DesignableComponentsProps,
   designable,
 } from '@bodiless/fclasses';
-import SearchClient from '../SearchClient';
 import { useSearchResultContext } from './SearchContextProvider';
 import { TSearchResult } from '../types';
 
@@ -59,8 +58,6 @@ type SearchResultItemComponents = {
 
 type SearchResultItemProps = DesignableComponentsProps<SearchResultItemComponents> &
 {value: { [key: string]: string; }};
-
-const searchClient = new SearchClient();
 
 const SearchInputBase: FC<HTMLProps<HTMLInputElement>> = props => {
   const { placeholder = 'Search', ...rest } = props;
