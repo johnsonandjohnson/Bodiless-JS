@@ -57,7 +57,7 @@ export default class HtmlParser implements HtmlParserInterface {
   html: string;
 
   // @ts-ignore the propery is not definitely assigned in the constructor
-  $: CheerioStatic;
+  $: cheerio.Root;
 
   allowedTags: boolean;
 
