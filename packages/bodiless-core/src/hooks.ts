@@ -131,11 +131,11 @@ export const useClickOutside = (
   }, []);
 
   useEffect(() => {
-    document.body.addEventListener('click', clickListener);
+    document.body.addEventListener('mousedown', clickListener);
     document.body.addEventListener('keyup', escapeListener);
 
     return () => {
-      document.body.removeEventListener('click', clickListener);
+      document.body.removeEventListener('mousedown', clickListener);
       document.body.removeEventListener('keyup', escapeListener);
     };
   });
