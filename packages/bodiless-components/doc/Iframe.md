@@ -9,10 +9,12 @@ and the source URL for the iframe are editable.
 To place an Iframe Component on a BodilessJS page:
 
 1. Select the Iframe Component from the Component Library.
+
 ![](./assets/IframeComponentLibrary.jpg)
 
 2. Click on the iframe component to toggle the configuration button for 
 the iframe.
+
 ![](./assets/IframeConfigButton.jpg)
 
 
