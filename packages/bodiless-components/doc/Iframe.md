@@ -17,10 +17,12 @@ the iframe.
 
 
 3. Enter the URL you wish to place in the iframe and enter the height at 
-which you would like to display the iframe's content. 
+which you would like to display the iframe's content.
+
 !> Please note that the originating site for the target URL must be configured 
 to allow iframes. If the originating site does not allow embedding from their 
 site the content will not display in the iframe.
+
 ?> If you do not enter a display height the iframe will default to 150 px
 
 ![](./assets/IframeConfig.jpg)
@@ -112,6 +114,6 @@ Then, we can render `EditableWidthIframe`
 The Iframe Component renders:
 
 ```
-<iframe src="string" height="200"></iframe>
+<iframe src="string" height=""></iframe>
 ```
 
