@@ -78,7 +78,7 @@ HOC. For example, to configure AutoPlay for the YouTube component:
 
 In addition, you can pass `HTMLIFrameElement` props (id, src, width, etc.). Check `HTMLIFrameElement` type for more details.
 
-### Parameters 
+### `playerSettings` Parameters 
 
 The YouTube Component utilizes an API that allows you to change the following
 properties/parameters. You can use defaultPlayerSettings to set parameters that
