@@ -1,6 +1,6 @@
 # YouTube Component
 
-The YouTube Component can be used to place a YouTube video on a page via the
+The YouTube Component can be used to place a [YouTube video](https://www.youtube.com/) on a page via the
 BodilessJS edit interface. The YouTube Component is responsive and features 
 a 16:9 ratio by default. 
 
@@ -14,8 +14,10 @@ To add a YouTube Component to your site:
 2. Click on the YouTube Component to show the Configure button in the context menu. 
 ![](./assets/YoutubeFlow.jpg)
 
-3. Enter the target YouTube URL and click the checkmark or hit enter. 
+3. Enter the target YouTube URL and click the checkmark or hit enter.
+
 ?> Please note the following accepted URL formats:
+
   * **Share** (e.g. https://youtu.be/Rqla3gsl1Ik)
   * **Watch** (e.g. https://www.youtube.com/watch?v=Rqla3gsl1Ik)
   * **Embed** (e.g. https://www.youtube.com/embed/Rqla3gsl1Ik)
@@ -29,6 +31,9 @@ To add a YouTube Component to your site:
 
 The YouTube Component can be used to place a YouTube video on a page via the 
 BodilessJS edit interface.
+
+?> Please note that the [Embed Component](../../../Components/Embed) must be activated on your site for the YouTube Component to work.
+
 
 ``` js
   import { YouTube } from '@bodiless/components';
@@ -77,10 +82,10 @@ In addition, you can pass `HTMLIFrameElement` props (id, src, width, etc.). Chec
 
 The YouTube Component utilizes an API that allows you to change the following
 properties/parameters. You can use defaultPlayerSettings to set parameters that
-are commonly used together. For more details see [YouTube Player API Reference for iframe Embeds](https://developers.google.com/youtube/iframe_api_reference). 
+are commonly used together. For more details on each individual parameter see [YouTube Player API Reference for iframe Embeds](https://developers.google.com/youtube/iframe_api_reference). 
 
 
-| Parameters | Default | 
+| Parameters | Suggested Default | 
 | -------- | -------- |
 | autoplay     | 0     |
 | cc_lang_pref    | no default    |
