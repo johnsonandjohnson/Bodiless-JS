@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,8 +13,7 @@
  */
 
 import React from 'react';
-import Helmet from 'react-helmet';
-import { flow, flowRight } from 'lodash';
+import { flow } from 'lodash';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { BVRatingsSummary, BVReviews } from '@bodiless/bv';
@@ -29,7 +28,6 @@ import {
   AccordionClean,
   asTestableAccordion,
 } from '@bodiless/organisms';
-import { withEvent, asBodilessHelmet } from '@bodiless/components';
 import Layout from '../components/Layout';
 import {
   ProductTitle,
@@ -42,6 +40,7 @@ import {
 import { FlowContainerDefault } from '../components/FlowContainer';
 import { withEditorBasic } from '../components/Editors';
 import asAccordionDefaultStyle from '../components/SingleAccordion/token';
+import GTMDataLayerProductHelmet from '../components/GTM/productViewed';
 
 // Do not allow editors to set accordion titles.
 const NonEditableTitle = ({ producttitle, ...rest }) => (
@@ -96,16 +95,10 @@ const asTestableFlowContainer = withDesign({
 });
 const ProductFlowContainer = asTestableFlowContainer(FlowContainerDefault);
 
-const ExampleGTMHelmetEvent = flowRight(
-  asBodilessHelmet('datalayer'),
-  // On product pages, we may add product related datalayer info:
-  withEvent('digitalData', { event: 'Product Viewed' }, 'product-viewed'),
-)(Helmet);
-
 export default (props: any) => (
   <Page {...props}>
     <Layout>
-      <ExampleGTMHelmetEvent />
+      <GTMDataLayerProductHelmet />
       <SectionMargin>
         <div className="flex flex-wrap md:items-end md:flex-row-reverse">
           <div className="w-full md:flex-1 md:flex-grow-0 md:flex-shrink-0 text-right"><p>Placeholder_for_Share</p></div>
