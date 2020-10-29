@@ -119,6 +119,6 @@
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "engines": {
-    "node": ">=12.18"
+    "node": ">=12.19"
   }
 }
