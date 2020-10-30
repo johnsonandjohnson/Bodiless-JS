@@ -103,7 +103,7 @@ const StandardPinkAndGreenTout = flowRight(
   asPinkTout,
 )(BasicTout);
 
-function expectClasses(wrapper: Cheerio, selector: string, classes: string) {
+function expectClasses(wrapper: cheerio.Cheerio, selector: string, classes: string) {
   const normalize = (className: string) => className.split(' ').filter(Boolean).sort().join(' ');
   const found = normalize(wrapper.find(selector).attr('class')!);
   const expected = normalize(classes);

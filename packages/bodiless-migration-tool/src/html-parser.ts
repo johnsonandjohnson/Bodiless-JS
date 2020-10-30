@@ -50,14 +50,14 @@ interface HtmlParserInterface {
   transformElementTextToAttribute(tag: string, attribute: string): void
 }
 
-type TransformerType = (attrValue: string, element: CheerioElement) => string;
+type TransformerType = (attrValue: string, element: cheerio.Element) => string;
 
 export default class HtmlParser implements HtmlParserInterface {
   // @ts-ignore the propery is not definitely assigned in the constructor
   html: string;
 
   // @ts-ignore the propery is not definitely assigned in the constructor
-  $: CheerioStatic;
+  $: cheerio.Root;
 
   allowedTags: boolean;
 
@@ -171,7 +171,7 @@ export default class HtmlParser implements HtmlParserInterface {
   }
 
   transformRelativeToInternal(pageUrl: string) {
-    this.transformHtmlElementsWithReference((link: string, element: CheerioElement) => {
+    this.transformHtmlElementsWithReference((link: string, element: cheerio.Element) => {
       if (this.shouldTransformRelativeToInternal(link, element)) {
         const baseUrl = this.getBaseUrl() || pageUrl;
         return transformRelativeUrlToInternal(link, baseUrl);
@@ -181,7 +181,7 @@ export default class HtmlParser implements HtmlParserInterface {
   }
 
   transformAbsoluteToRelative(pageUrl: string) {
-    this.transformHtmlElementsWithReference((link: string, element: CheerioElement) => {
+    this.transformHtmlElementsWithReference((link: string, element: cheerio.Element) => {
       if (this.shouldTransformAbsoluteToRelative(link, element)) {
         return transformAbsoluteUrlToRelative(link, pageUrl);
       }
@@ -190,7 +190,7 @@ export default class HtmlParser implements HtmlParserInterface {
   }
 
   removeTrailingSlash(pageUrl: string) {
-    this.transformHtmlElementsWithReference((link: string, element: CheerioElement) => {
+    this.transformHtmlElementsWithReference((link: string, element: cheerio.Element) => {
       if (this.shouldTransformTrailingSlash(link, element, pageUrl)) {
         return removeTrailingSlashFromUrl(link);
       }
@@ -199,7 +199,7 @@ export default class HtmlParser implements HtmlParserInterface {
   }
 
   addTrailingSlash(pageUrl: string) {
-    this.transformHtmlElementsWithReference((link: string, element: CheerioElement) => {
+    this.transformHtmlElementsWithReference((link: string, element: cheerio.Element) => {
       if (this.shouldTransformTrailingSlash(link, element, pageUrl)) {
         return addTrailingSlashToUrl(link);
       }
@@ -221,7 +221,7 @@ export default class HtmlParser implements HtmlParserInterface {
   transformElementTextToAttribute(tag: string, attribute: string) {
     const self = this;
     const { $ } = this;
-    $(tag).each((i, element) => {
+    $(tag).each((i: number, element: cheerio.Element) => {
       if (!self.shouldSkipTextToAttributeTransformation(tag, element)) {
         const text = $(element).html();
         $(element).attr(attribute, text!).html('');
@@ -234,7 +234,7 @@ export default class HtmlParser implements HtmlParserInterface {
     const { $ } = this;
     const tag = 'span';
     const dataFieldName = 'data-cfemail';
-    $(tag).each((i, element) => {
+    $(tag).each((i: number, element: cheerio.Element) => {
       if (self.shouldTransformCfEmail(element)) {
         const parentLink = this.getCfParentLink(element);
         if (parentLink !== undefined) {
@@ -248,7 +248,7 @@ export default class HtmlParser implements HtmlParserInterface {
 
   manipulateAttributes(transformAttr: (oldAttr: string) => string): void {
     const { $ } = this;
-    $('*').each((i, element) => {
+    $('*').each((i: number, element: cheerio.Element) => {
       Object.keys(element.attribs).forEach(attrName => {
         const newAttr = transformAttr(attrName);
         if (attrName !== newAttr) {
@@ -259,7 +259,7 @@ export default class HtmlParser implements HtmlParserInterface {
     });
   }
 
-  replaceAttribute(element: CheerioElement, oldAttr: string, newAttr: string) {
+  replaceAttribute(element: cheerio.Element, oldAttr: string, newAttr: string) {
     const { $ } = this;
     const attrValue = element.attribs[oldAttr];
     $(element).removeAttr(oldAttr);
@@ -269,7 +269,7 @@ export default class HtmlParser implements HtmlParserInterface {
   transformNewLineInInlineTags() {
     const { $ } = this;
     const self = this;
-    $('*').each((i, element) => {
+    $('*').each((i: number, element: cheerio.Element) => {
       if (self.shouldTransformNewLine(element)) {
         const text = $(element).html();
         if (text !== null) {
@@ -304,21 +304,21 @@ export default class HtmlParser implements HtmlParserInterface {
 
   private transformAttribute(element: string, attr: string, transformer: TransformerType) {
     const { $ } = this;
-    $(element).each((index, item) => {
+    $(element).each((index: number, item: any) => {
       const currentValue = $(item).attr(attr);
       $(item).attr(attr, transformer(currentValue!, item));
     });
   }
 
-  private isHrefLangElement(element: CheerioElement): boolean {
+  private isHrefLangElement(element: cheerio.Element): boolean {
     return element.tagName === 'link' && cheerio(element).attr('hreflang') !== undefined;
   }
 
-  private isCanonical(element: CheerioElement): boolean {
+  private isCanonical(element: cheerio.Element): boolean {
     return element.tagName === 'link' && cheerio(element).attr('rel') === 'canonical';
   }
 
-  private shouldSkipTextToAttributeTransformation(tag: string, element: CheerioElement): boolean {
+  private shouldSkipTextToAttributeTransformation(tag: string, element: cheerio.Element): boolean {
     let skip = false;
     if (tag === 'script' && this.$(element).attr('src')) {
       skip = true;
@@ -330,32 +330,32 @@ export default class HtmlParser implements HtmlParserInterface {
     return skip;
   }
 
-  private shouldTransformRelativeToInternal(link: string, element: CheerioElement): boolean {
+  private shouldTransformRelativeToInternal(link: string, element: cheerio.Element): boolean {
     return link !== undefined
     && isUrlRelative(link)
     && !this.isHrefLangElement(element)
     && !this.isCanonical(element);
   }
 
-  private shouldTransformAbsoluteToRelative(link: string, element: CheerioElement): boolean {
+  private shouldTransformAbsoluteToRelative(link: string, element: cheerio.Element): boolean {
     return link !== undefined
     && !this.isHrefLangElement(element)
     && !this.isCanonical(element);
   }
 
   private shouldTransformTrailingSlash(
-    link: string, element: CheerioElement, pageUrl: string,
+    link: string, element: cheerio.Element, pageUrl: string,
   ): boolean {
     return link !== undefined
     && !isUrlExternal(pageUrl, link)
     && !this.isHrefLangElement(element);
   }
 
-  private getCfParentLink(element: CheerioElement): CheerioElement | undefined {
+  private getCfParentLink(element: cheerio.Element): cheerio.Element | undefined {
     return cheerio(element).closest('a')[0];
   }
 
-  private shouldTransformCfEmail(element: CheerioElement): boolean {
+  private shouldTransformCfEmail(element: cheerio.Element): boolean {
     const className = '__cf_email__';
     const hrefPatern = '/cdn-cgi/l/email-protection';
     if (element.attribs.class !== className) {
@@ -367,7 +367,7 @@ export default class HtmlParser implements HtmlParserInterface {
       && parentLink.attribs.href.includes(hrefPatern);
   }
 
-  private shouldTransformNewLine(element: CheerioElement): boolean {
+  private shouldTransformNewLine(element: cheerio.Element): boolean {
     return element.tagName === 'script'
           && !cheerio(element).attr('src')
           && cheerio(element).attr('type') !== 'application/ld+json';

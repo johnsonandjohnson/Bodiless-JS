@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@bodiless/fclasses": "^0.0.58",
-    "axios": "^0.19.0",
+    "axios": "^0.21.0",
     "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.2.0",
     "glob": "^7.1.6",
@@ -44,7 +44,7 @@
     "react": "^16.8.4"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.22.11",
+    "@types/cheerio": "^0.22.22",
     "@types/glob": "^7.1.1",
     "@types/lodash": "^4.14.158",
     "@types/lunr": "^2.3.3",

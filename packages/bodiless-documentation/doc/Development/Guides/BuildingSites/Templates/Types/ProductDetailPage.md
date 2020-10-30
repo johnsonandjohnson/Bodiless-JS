@@ -19,18 +19,6 @@ The Product Detail Page as designed has some of the following unique characteris
   * This enforces the product accordions into the same naming convention for uniformity.  
   * It saves time when a new product page is created as the site editor doesn't have to enter them.
 
-* ExampleGTMHelmetEvent
-  * If Google Tag Manager is in use, this will render the data layer on the page.
-    ```js
-      const ExampleGTMHelmetEvent = flowRight(
-        asBodilessHelmet('datalayer'),
-        // On product pages, we may add product related datalayer info:
-        withEvent('digitalData', { event: 'Product Viewed' }, 'product-viewed'),
-      )(Helmet);
-    ```
-   * The data for this is stored in `datalayer$product-viewed.json` with each
-     product in `src/data/pages` so each product has unique data.
-
 ## Usage
 
 1. The [Product Detail Page](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/templates/product_detail.jsx) template can be copied into your `src/templates` folder and customized.
