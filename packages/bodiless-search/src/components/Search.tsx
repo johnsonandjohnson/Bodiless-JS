@@ -18,6 +18,7 @@ import React, {
   ComponentType,
   HTMLProps,
   useCallback,
+  useEffect,
   useState,
 } from 'react';
 import {
@@ -163,6 +164,16 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
     event.preventDefault();
     setQueryString(event.target.value);
   }, []);
+
+  /**
+   * When searchTerm updated, by click or enterkey, update queryString.
+   * This is to sync search term in different searchInput components.
+   */
+  useEffect(() => {
+    if (queryString !== searchResultContext.searchTerm) {
+      setQueryString(searchResultContext.searchTerm);
+    }
+  }, [searchResultContext.searchTerm]);
 
   const searchLocationValidate = () => {
     if (

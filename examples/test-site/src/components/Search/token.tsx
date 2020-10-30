@@ -31,13 +31,13 @@ const withIcon = (icon: string) => (Component: ComponentType) => (props: any) =>
 );
 const searchDesign = {
   SearchWrapper: addClasses('my-4 border border-black align-middle'),
-  SearchBox: addClasses('px-2 align-middle text-1xl'),
+  SearchInput: addClasses('px-2 align-middle text-1xl outline-none'),
   SearchButton: withIcon('search'),
 };
 
 const searchInlineDesign = {
   SearchWrapper: addClasses('inline-block border border-black align-middle'),
-  SearchBox: addClasses('px-2 align-middle text-1xl'),
+  SearchInput: addClasses('px-2 align-middle text-1xl outline-none'),
   SearchButton: withIcon('search'),
 };
 

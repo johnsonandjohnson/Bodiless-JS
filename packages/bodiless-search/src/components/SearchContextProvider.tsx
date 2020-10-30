@@ -44,10 +44,8 @@ export const SearchResultProvider: FC = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   const search = (term: string) => {
-    if (term) {
-      const searchResult = searchClient.search(term);
-      setResult(searchResult);
-    }
+    const searchResult = searchClient.search(term);
+    setResult(searchResult);
   };
 
   const didMountRef = useRef(false);
@@ -58,6 +56,7 @@ export const SearchResultProvider: FC = ({ children }) => {
       const { q } = querystring.parseUrl(window.location.search).query;
       if (typeof q === 'string') {
         searchClient.loadIndex().then(() => search(q));
+        setSearchTerm(q);
       }
     } else if (searchTermRef.current !== searchTerm) {
       searchClient.loadIndex().then(() => search(searchTerm));
