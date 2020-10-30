@@ -20,7 +20,7 @@ const toc = {
   ContentEditorUserGuide: {},
   Design: {},
   Components: {
-     'YouTube.md': 'YouTube',
+    'YouTube.md': 'YouTube',
   },
   Tools: {},
   Development: {
