@@ -121,7 +121,7 @@ class SearchTool {
       $(exclude).remove();
     }
     // eslint-disable-next-line func-names
-    const body = $(selector).contents().map(function (this: CheerioElement) {
+    const body = $(selector).contents().map(function (this: cheerio.Element) {
       return (this.type === 'text') ? $(this).text().trim() : '';
     }).get()
       .join(' ')
