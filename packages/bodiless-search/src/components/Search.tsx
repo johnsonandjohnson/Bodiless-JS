@@ -179,7 +179,7 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
     if (
       searchPagePath !== window.location.pathname.replace(/^\//, '').replace(/\/$/, '')
     ) {
-      window.location.href = `/${searchPagePath}/?q=${queryString}`;
+      window.location.href = `/${searchPagePath}/?q=${encodeURIComponent(queryString)}`;
     }
   };
 

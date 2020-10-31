@@ -41,7 +41,12 @@ class SearchClient implements SearchClientInterface {
     this.searchEngine = config && config.searchEngine ? config.searchEngine : new LunrSearch();
   }
 
-  search = (queryString: string): TSearchResults => this.searchEngine.search(queryString);
+  search = (queryString: string): TSearchResults => {
+    const filtered = this.filter(queryString);
+    return this.searchEngine.search(filtered);
+  };
+
+  private filter = (qs: string) => qs.replace(/:|^|\*|\+|-|~|%/g, ' ');
 
   validateIndex = (index: SearchIndex | false): boolean => {
     if (!index) {
