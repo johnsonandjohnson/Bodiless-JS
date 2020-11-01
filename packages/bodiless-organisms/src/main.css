@@ -1,0 +1,182 @@
+.cursor-pointer {
+  cursor: pointer
+}
+
+.block {
+  display: block
+}
+
+.inline-block {
+  display: inline-block
+}
+
+.flex {
+  display: flex
+}
+
+.table {
+  display: table
+}
+
+.hidden {
+  display: none
+}
+
+.flex-col {
+  flex-direction: column
+}
+
+.items-center {
+  align-items: center
+}
+
+.justify-between {
+  justify-content: space-between
+}
+
+.flex-grow {
+  flex-grow: 1
+}
+
+.h-full {
+  height: 100%
+}
+
+.m-8 {
+  margin: 2rem
+}
+
+.min-w-full {
+  min-width: 100%
+}
+
+.overflow-hidden {
+  overflow: hidden
+}
+
+.overflow-visible {
+  overflow: visible
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem
+}
+
+.absolute {
+  position: absolute
+}
+
+.relative {
+  position: relative
+}
+
+.inset-0 {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0
+}
+
+.top-0 {
+  top: 0
+}
+
+.right-0 {
+  right: 0
+}
+
+.bottom-0 {
+  bottom: 0
+}
+
+.left-0 {
+  left: 0
+}
+
+.select-none {
+  user-select: none
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+
+.w-full {
+  width: 100%
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg)
+  }
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0
+  }
+}
+
+@keyframes pulse {
+  50% {
+    opacity: .5
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8,0,1,1)
+  }
+
+  50% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0,0,0.2,1)
+  }
+}
+
+.aspect-ratio-square {
+  padding-bottom: 100%
+}
+
+.aspect-ratio-16\/9 {
+  padding-bottom: 56.25%
+}
+
+.aspect-ratio-4\/3 {
+  padding-bottom: 75%
+}
+
+.aspect-ratio-21\/9 {
+  padding-bottom: 42.857142857142854%
+}
+
+@media (min-width: 640px) {
+}
+
+@media (min-width: 768px) {
+  .md\:flex-row {
+    flex-direction: row
+  }
+
+  .md\:w-1\/2 {
+    width: 50%
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:block {
+    display: block
+  }
+
+  .lg\:hidden {
+    display: none
+  }
+}
+
+@media (min-width: 1280px) {
+}

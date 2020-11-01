@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import './bodiless.index.css';
+import './main.css';
 
 import Editable, { withPlaceholder, asEditable } from './Editable';
 import { asBodilessLink } from './Link';

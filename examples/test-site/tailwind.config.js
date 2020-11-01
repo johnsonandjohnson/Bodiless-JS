@@ -1,7 +1,7 @@
 module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: false,
+    purgeLayersByDefault: true,
   },
   purge: [
     './src/**/!(*.d).{ts,js,jsx,tsx}',
