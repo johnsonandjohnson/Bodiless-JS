@@ -23,7 +23,8 @@
     "build": "npm run build:css && npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:css": "postcss index.tailwind.css -o ./src/main.css",
     "build:watch": "npm run build -- --watch",
-    "build:api-doc": "typedoc --out doc/api --mode file",    "lint": "tslint ./src/**/*.ts?x",
+    "build:api-doc": "typedoc --out doc/api --mode file",
+    "lint": "tslint ./src/**/*.ts?x",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
     "copy": "copyfiles -u 1 \"./src/*.{css,png}\" \"./lib/\""
   },
