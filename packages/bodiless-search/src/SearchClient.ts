@@ -46,7 +46,7 @@ class SearchClient implements SearchClientInterface {
     return this.searchEngine.search(filtered);
   };
 
-  private filter = (qs: string) => qs.replace(/:|^|\*|\+|-|~|%/g, ' ');
+  private filter = (qs: string) => qs.replace(/:|\$|#|@|!|\^|\*|\+|-|~|%/g, ' ');
 
   validateIndex = (index: SearchIndex | false): boolean => {
     if (!index) {
