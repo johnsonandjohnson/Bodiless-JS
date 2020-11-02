@@ -12,8 +12,6 @@
  * limitations under the License.
  */
 
-import './main.css';
-
 import Editable, { withPlaceholder, asEditable } from './Editable';
 import { asBodilessLink } from './Link';
 import Image, {
@@ -74,6 +72,8 @@ import {
 } from './withResponsiveToggle';
 import asBreadcrumb, { useBreadcrumbContext } from './asBreadcrumb';
 import withBodilessLinkToggle from './withBodilessLinkToggle';
+
+import './main.css';
 
 export {
   withBodilessLinkToggle,

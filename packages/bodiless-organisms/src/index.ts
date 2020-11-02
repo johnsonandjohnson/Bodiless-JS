@@ -11,14 +11,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import './main.css';
-
 import {
   asBurgerSubMenu,
   asEditableBurgerSubMenu,
   BurgerMenuClean,
   withBurgerSubmenu,
 } from './components/BurgerMenu';
+
+import './main.css';
 
 export {
   SingleAccordion,

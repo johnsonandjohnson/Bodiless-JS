@@ -120,10 +120,10 @@ Common usages for using custom css:
 
 ## Tailwind configuration for a package
 
-1. Install postcss-cli via npm.
+1. Install postcss-cli as a dev dependency via npm.
 
 ```sh
-npm i postcss-cli
+npm i -D postcss-cli
 ```
 
 1. Add Tailwind to package CSS
@@ -156,7 +156,7 @@ module.exports = {
 };
 ```
 
-1. Include css compilation to your package  build.
+1. Include css compilation to your package build.
 
 Assuming your package.json contains build command with typescript compilation,
 
@@ -174,7 +174,7 @@ extend the build command by adding a build css and copy compiled css steps:
 
 1. Import compiled css in your code.
 
-Insert the following line at the beginning of your package index file
+Add compiled css import to your package index file
 
 ```js
 import './main.css';
