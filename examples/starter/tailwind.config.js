@@ -3,6 +3,9 @@ module.exports = {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
   },
+  purge: [
+    './src/**/!(*.d).{ts,js,jsx,tsx}',
+  ],
   /*
   New for V1 - the legacy 'options' is now top-level
   */
