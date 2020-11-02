@@ -1,9 +1,12 @@
-# Embed
+# Embed Component
 
-- Purpose
-  - Create responsive embeds based on the width of the parent by creating an intrinsic ratio that scales on any device.
+The Embed Component allows site builders to create responsive embeds 
+based on the width of the parent by creating an intrinsic ratio that 
+scales on any device.
 
-## Usage
+## Site Builder Details
+
+### Usage
 
 ```js
 import { Embed, asResponsive16By9Embed } from '@bodiless/organisms';
@@ -25,4 +28,17 @@ const Responsive16By9Embed = flowRight(
 <Responsive16By9Embed nodeKey="video" />
 ```
 
-For more examples, check ResponsiveIframe and ResponsiveYouTube.
+For more examples, see [ResponsiveIframe](../../../Components/Iframe) and [ResponsiveYouTube](../../../Components/YouTube).
+
+---
+
+## Architectural Details
+
+The Embed Component renders the following code:
+```
+<Wrapper>
+ <AspectRatio />
+  <Item />
+</Wrapper>
+ 
+```

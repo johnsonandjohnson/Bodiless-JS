@@ -32,7 +32,7 @@
     "@bodiless/fclasses": "^0.0.58",
     "@bodiless/ui": "^0.0.58",
     "@types/react-helmet": "^5.0.14",
-    "axios": "^0.19.0",
+    "axios": "^0.21.0",
     "common-tags": "^1.8.0",
     "copyfiles": "^2.1.1",
     "debug": "^4.1.1",

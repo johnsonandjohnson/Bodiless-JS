@@ -78,6 +78,26 @@ stored in the normal static folder.
 
 This contentful component can be used within a page, template or added to Flow Container to be available to content editor.
 
+#### Using a hook to for dynamic default content
+
+If you wish, you may specify default content as a function rather than an object. This
+function may be a custom hook (it will be executed in the render context of a functional
+component), and will receive the component's props as an argument.  This can be useful
+if you want to supply the default content dynamically (eg from an API):
+
+```ts
+import { DefaultImageContext } from 'my-custom-way-of-getting-default-images';
+const withDynamicDefaultImage = withDefaultContent(
+  (props: HTMLProps<HTMLImageElement>) => {
+    const { src: ctxtSrc, alt: ctxtAlt } = React.useContext(DefaultImageContext); // You can use hooks.
+    const { src = ctxtSrc, alt = ctxtAlt } = props;
+    return {
+      myNodeKey: { src, alt }
+    };
+  }
+);
+```
+
 ### Defining a Contentful Component that consists of composition of multiple components
 
 The following is an example of defining a tout contentful component (which is a composition of set of components: link, rich text editor, image.)
