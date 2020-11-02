@@ -125,6 +125,7 @@ class SearchTool {
       return (this.type === 'text') ? $(this).text().trim() : '';
     }).get()
       .join(' ')
+      .replace(/:|^|\*|\+|-|~|%|"/gi, ' ')
       .replace(/ +/gi, ' ')
       .trim();
 
