@@ -179,13 +179,14 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
     if (
       searchPagePath !== window.location.pathname.replace(/^\//, '').replace(/\/$/, '')
     ) {
-      window.location.href = `/${searchPagePath}/?q=${encodeURIComponent(queryString)}`;
+      window.location.href = `/${searchPagePath}/#${encodeURIComponent(queryString)}`;
     }
   };
 
   const searchHandler = useCallback(async () => {
     searchLocationValidate();
     searchResultContext.setSearchTerm(queryString);
+    window.location.href = `/${searchPagePath}/#${encodeURIComponent(queryString)}`;
   }, [queryString]);
 
   const onKeyPressHandler = useCallback((event: React.KeyboardEvent) => {
