@@ -117,3 +117,83 @@ Common usages for using custom css:
 * Gradients
   * or alternative use https://github.com/benface/tailwindcss-gradients to extend
     tailwind.
+
+## Tailwind configuration for a package
+
+1. Install postcss-cli via npm.
+
+```sh
+npm i postcss-cli
+```
+
+1. Add Tailwind to package CSS
+
+Create new or update existing CSS file with Tailwind's `base`, `components`, and `utilities` styles.
+
+```js
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+```
+
+1. Create tailwind and postcss configuration file.
+
+```sh
+npx tailwindcss init -p
+```
+
+1. Process package CSS with Tailwind.
+
+Update postcss.config.js with the following content
+
+```js
+module.exports = {
+  plugins: [
+    require('tailwindcss')('tailwind.config.js'),
+  ],
+};
+```
+
+1. Include css compilation to your package  build.
+
+Assuming your package.json contains build command with typescript compilation,
+
+```json
+  "build": "tsc -p ./tsconfig.json",
+```
+
+extend the build command by adding a build css and copy compiled css steps:
+
+```json
+  "build": "npm run build:css && npm run copy && tsc -p ./tsconfig.json",
+  "build:css": "postcss index.tailwind.css -o ./src/main.css",
+  "copy": "copyfiles -u 1 \"./src/**/*.css\" \"./lib/\""
+```
+
+1. Import compiled css in your code.
+
+Insert the following line at the beginning of your package index file
+
+```js
+import './main.css';
+```
+
+1. Add the compiled css to .gitignore.
+
+Update package level .gitignore with:
+
+```txt
+src/main.css
+```
+
+## Configure CSS Purging
+
+1. Provide an array of paths to all of your template files using the purge option of `tailwind.config.js`:
+
+```js
+purge: [
+  './src/**/!(*.d).{ts,js,jsx,tsx}',
+],
+```
