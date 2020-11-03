@@ -21,7 +21,7 @@ import {
 } from '@bodiless/fclasses';
 
 const Icon = flow(
-  addClasses('material-icons cursor-pointer align-middle'),
+  addClasses('material-icons cursor-pointer align-middle bg-white text-gray-500'),
 )(I);
 
 const withIcon = (icon: string) => (Component: ComponentType) => (props: any) => (
@@ -30,13 +30,13 @@ const withIcon = (icon: string) => (Component: ComponentType) => (props: any) =>
   </Component>
 );
 const searchDesign = {
-  SearchWrapper: addClasses('my-4 border border-black align-middle'),
+  SearchWrapper: addClasses('my-4 border border-black align-middle border-gray-500'),
   SearchInput: addClasses('px-2 align-middle text-1xl outline-none'),
   SearchButton: withIcon('search'),
 };
 
 const searchInlineDesign = {
-  SearchWrapper: addClasses('inline-block border border-black align-middle'),
+  SearchWrapper: addClasses('inline-block border border-black align-middle border-gray-500'),
   SearchInput: addClasses('px-2 align-middle text-1xl outline-none'),
   SearchButton: withIcon('search'),
 };
