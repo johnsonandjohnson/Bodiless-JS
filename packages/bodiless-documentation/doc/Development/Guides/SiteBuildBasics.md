@@ -746,7 +746,7 @@ const asFluidWithWebpGatsbyImage = asGatsbyImg(GatsbyImagePresets.FluidWithWebp)
 );
 ```
 
-> Note: We are using default image presets exposed by `@bodiless/gatsby-theme-bodiless`. Visit [default image presets](#default-image-presets) section to get a list of available presets.
+> Note: BodilessJS uses default image presets exposed by `@bodiless/gatsby-theme-bodiless`. Visit [default image presets](#default-image-presets) section to get a list of available presets.
 
 1. Use the HOCs to compose gatsby image components
 
