@@ -769,7 +769,7 @@ const FluidWithWebpGatsbyImage = asFluidWithWebpGatsbyImage(Img);
 
 ### Change image preset
 
-Lest consider, you have an image with `GatsbyImagePresets.Fluid` preset and you want to change the preset to `GatsbyImagePresets.FluidNoBase64`.
+If you have an image with `GatsbyImagePresets.Fluid` preset and you want to change the preset to `GatsbyImagePresets.FluidNoBase64`.
 
 1. Compose new image component with new preset
 
