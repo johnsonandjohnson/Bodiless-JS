@@ -99,6 +99,8 @@ class LunrSearch implements SearchEngineInterface {
      */
     const builder = new Builder();
 
+    const filter = (str: string) => str.replace(/:|\$|#|@|!|\^|\*|\+|-|~|%/gi, ' ');
+
     // Configure index ref and fields
     builder.ref(this.indexConfig.ref);
     this.indexConfig.fields.forEach(field => {
@@ -107,7 +109,12 @@ class LunrSearch implements SearchEngineInterface {
 
     // Add documents to index.
     this.documents.forEach(doc => {
-      builder.add(doc);
+      builder.add({
+        id: doc.id,
+        title: filter(doc.title),
+        body: filter(doc.body),
+        link: doc.link,
+      });
     });
     return builder.build();
   };
