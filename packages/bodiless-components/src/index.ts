@@ -73,8 +73,6 @@ import {
 import asBreadcrumb, { useBreadcrumbContext } from './asBreadcrumb';
 import withBodilessLinkToggle from './withBodilessLinkToggle';
 
-import './main.css';
-
 export {
   withBodilessLinkToggle,
   asBodilessLink,
