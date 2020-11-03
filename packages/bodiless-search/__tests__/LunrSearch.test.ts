@@ -27,24 +27,27 @@ const mockBuilder = {
 
 const documents = [
   {
-    name: 'first',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    description:
+    id: 'first',
+    title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    body:
       'Sed lacinia egestas tellus, at consequat dolor consectetur nec.',
+    link: '',
   },
   {
-    name: 'second',
-    text:
+    id: 'second',
+    title:
       'Quisque interdum quam non mauris pretium, et fringilla magna tempor.',
-    description:
+    body:
       'Etiam sit amet odio elementum, vulputate velit in, consectetur tortor.',
+    link: '/1',
   },
   {
-    name: 'third',
-    text:
+    id: 'third',
+    title:
       'Morbi nisi dui, efficitur et tristique sit amet, porttitor vel leo. Sed eleifend sapien sed semper laoreet.',
-    description:
+    body:
       'Cras vulputate tortor eget massa pharetra, ac volutpat lectus pulvinar.',
+    link: '/2',
   },
 ];
 
