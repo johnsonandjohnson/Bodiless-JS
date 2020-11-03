@@ -731,7 +731,7 @@ const asGatsbyImg = (preset: string) => flowRight(
 );
 ```
 
-> Note: We are using `asGatsbyImage`, `withGatsbyImageNode`, `withGatsbyImageLogger` functions provided by `@bodiless/gatsby-theme-bodiless`.
+> Note: BodilessJS uses `asGatsbyImage`, `withGatsbyImageNode`, `withGatsbyImageLogger` functions provided by `@bodiless/gatsby-theme-bodiless`.
 > * `asGatsbyImage` is a HOC that either replaces the component with `GatsbyImg` in case of data required for `GatsbyImg` is available or it renders the input component otherwise.
 > * `withGatsbyImageNode` is a HOF that adds a gatsby image BodilessJS node, which enriches image node data with image preset provided as an input.
 > * `withGatsbyImageLogger` is a HOF that fails gatsby build and logs errors when there is a mismatch between image preset passed as an argument to gatsby image node and the corresponding image preset stored in the image node json file.
