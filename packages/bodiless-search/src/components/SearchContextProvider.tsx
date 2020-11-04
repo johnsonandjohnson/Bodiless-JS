@@ -56,7 +56,7 @@ export const SearchResultProvider: FC = ({ children }) => {
       didMountRef.current = true;
       const q = querystring.parseUrl(window.location.href, {
         parseFragmentIdentifier: true,
-      }).fragmentIdentifier;
+      }).fragmentIdentifier || '';
       if (typeof q === 'string') {
         searchClient.loadIndex().then(() => search(q));
         setSearchTerm(q);
