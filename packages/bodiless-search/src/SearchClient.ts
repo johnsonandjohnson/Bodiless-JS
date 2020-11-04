@@ -46,6 +46,7 @@ class SearchClient implements SearchClientInterface {
     return this.searchEngine.search(filtered);
   };
 
+  // Remove the search engine specific charactors on customize search.
   private filter = (qs: string) => qs.replace(/:|\$|#|@|!|\^|\*|\+|-|~|%/g, ' ');
 
   validateIndex = (index: SearchIndex | false): boolean => {

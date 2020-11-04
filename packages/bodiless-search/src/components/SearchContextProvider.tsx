@@ -42,6 +42,7 @@ export const useSearchResultContext = () => useContext(searchResultContext);
 export const SearchResultProvider: FC = ({ children }) => {
   const [results, setResult] = useState<TSearchResults>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const searchPagePath = process.env.BODILESS_SEARCH_PAGE || 'search';
 
   const search = (term: string) => {
     const searchResult = searchClient.search(term);
@@ -62,6 +63,7 @@ export const SearchResultProvider: FC = ({ children }) => {
       }
     } else if (searchTermRef.current !== searchTerm) {
       searchClient.loadIndex().then(() => search(searchTerm));
+      window.location.href = `/${searchPagePath}/#${encodeURIComponent(searchTerm)}`;
       searchTermRef.current = searchTerm;
     }
   });

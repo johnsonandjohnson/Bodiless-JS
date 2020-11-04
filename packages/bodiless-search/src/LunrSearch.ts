@@ -99,6 +99,7 @@ class LunrSearch implements SearchEngineInterface {
      */
     const builder = new Builder();
 
+    // Replace non-searchable char with space char, used for tokenize content.
     const filter = (str: string) => str.replace(/:|\$|#|@|!|\^|\*|\+|-|~|%/gi, ' ');
 
     // Configure index ref and fields

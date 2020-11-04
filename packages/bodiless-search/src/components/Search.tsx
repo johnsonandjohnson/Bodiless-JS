@@ -186,7 +186,6 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
   const searchHandler = useCallback(async () => {
     searchLocationValidate();
     searchResultContext.setSearchTerm(queryString);
-    window.location.href = `/${searchPagePath}/#${encodeURIComponent(queryString)}`;
   }, [queryString]);
 
   const onKeyPressHandler = useCallback((event: React.KeyboardEvent) => {
