@@ -11,7 +11,6 @@ npm install @bodiless/search
 ```
 
 
-
 ## Usage
 
 To enable the search on a site project, the site builder needs to add search configurations inside the environment setting file. Next create the design HOC functions, which will add styles to search components. Insert the styled search box and search result components into the pages for rendering.
