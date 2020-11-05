@@ -30,23 +30,23 @@ describe('PDP (Product Details Page) smoke tests', function () {
   const accordionBody = 'AT - Overview';
   const imagesFolderPath = "images";
   const imageName = 'img_615x500.jpg';
-  const addPageIconXpath = '//*[@aria-label="Page"]';
+  const addPageIconXpath = '//*[@aria-label="Page"]'; 
   const fieldAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//input[@id="new-page-path"]';
-  const newPageLinkXpath = '//*[@id="new-page-link"]';
   const checkmarkIconAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Submit"]';
+  const newPageLinkXpath = '//*[@id="new-page-link"]';
   const titleXpath = '//*[@data-product-element="title"]';
   const accordionOverviewBodyXpath = '//*[@data-accordion-element="accordion"][@aria-label="Overview"]//*[@data-accordion-element="accordion-body"]//*[@data-slate-editor="true"]';
   const accordionDirectionsExpandXpath = '//*[@data-accordion-element="accordion"][@aria-label="Directions"]//*[@data-accordion-icon="expand"]';
   const accordionDirectionsBodyExpandedXpath = '//*[@data-accordion-element="accordion"][@aria-label="Directions"]//*[@data-accordion-element="accordion-body"]';
   const accordionDirectionsBodyPlaceholderXpath = '//*[@data-accordion-element="accordion"][@aria-label="Directions"]//*[@data-accordion-element="accordion-body"]//*[text()="Enter Product Information"]';
   const bvTextXpath = '//*[@data-product-element="ratings-summary"][text()="Please hover and click to enter Bazaarvoice Product External ID: "]';
-  const editBVIconXpath = '//*[@aria-label="Local Context Menu"]/*[@aria-label="Settings"]';
-  const closeBVFormXpath = '//*[@aria-label="Context Menu Settings Form"]//*[@aria-label="Cancel"]';
+  const editBVIconXpath = '//*[@aria-label="Local Context Menu"]//*[@aria-label="Settings Reviews"]';
+  const closeBVFormXpath = '//*[@aria-label="Context Menu Settings Reviews Form"]//*[@aria-label="Cancel"]';
   const imagePlaceholderXpath = '//*[@data-product-element="image"]';
-  const imageIconXpath = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Image"]';
-  const checkmarkIconImageFormXpath = '//form[@aria-label="Context Menu Image Form"]//button[@aria-label="Submit"]';
+  const imageIconXpath = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Select Image"]';
+  const checkmarkIconImageFormXpath = '//form[@aria-label="Context Menu Select Image Form"]//button[@aria-label="Submit"]';
   const flexboxXpath = '//*[@data-product-element="flow-container"]';
-  const addComponentIconXpath = '//button[@aria-label="Add"]';
+  const addComponentIconXpath = '//button[@aria-label="Add Flow Container"]';
   const imagePathRegex = new RegExp("images\/pages" + pdpPagePath + "\/[a-zA-Z0-9]+\/" + imageName, "");
 
 

@@ -114,6 +114,8 @@ PageContextProvider.defaultProps = {
   getMenuOptions: () => [],
 };
 
+type MenuOptionsDefinition$<P> = MenuOptionsDefinition<P>|((props:P) => MenuOptionsDefinition<P>);
+
 /**
  * Using supplied options, returns an HOC which adds one or more menu options (buttons).
  * This simplly wraps the supplied component with a `PageContextProvider`.
@@ -131,12 +133,13 @@ PageContextProvider.defaultProps = {
  * @return An HOC which will cause the component it enhances to contribute the specified
  *         menu options when placed.
  */
-export const withMenuOptions = <P extends object>(def: MenuOptionsDefinition<P>) => (
+export const withMenuOptions = <P extends object>(def$: MenuOptionsDefinition$<P>) => (
   (Component: ComponentType<P> | string) => {
-    const {
-      useMenuOptions, peer, ...rest
-    } = def;
     const WithMenuOptions = (props: P) => {
+      const def = typeof def$ === 'function' ? def$(props) : def$;
+      const {
+        useMenuOptions, peer, ...rest
+      } = def;
       const options = useMenuOptions && useMenuOptions(props);
       const getMenuOptions = options ? useGetter(options) : undefined;
       if (peer) {

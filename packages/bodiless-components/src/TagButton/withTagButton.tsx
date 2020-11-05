@@ -30,6 +30,7 @@ type TagButtonType = EditButtonOptions<TagButtonProps & HTMLProps<HTMLElement>, 
 export const tagButtonOptions:TagButtonType = {
   icon: 'local_offer',
   label: 'Groups',
+  groupLabel: 'Filter',
   name: 'Tag',
   renderForm: ({ ui, componentProps }) => {
     const {

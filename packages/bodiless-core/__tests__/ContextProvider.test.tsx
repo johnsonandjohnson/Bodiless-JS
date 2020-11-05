@@ -22,10 +22,10 @@ import {
 } from 'enzyme';
 import { observer } from 'mobx-react-lite';
 import PageContextProvider, { withMenuOptions, useRegisterMenuOptions } from '../src/PageContextProvider';
-import { useEditContext } from '../src/hooks';
+import { useEditContext, useGetter } from '../src/hooks';
 import { defaultStore } from '../src/PageEditContext/Store';
 import PageEditContext from '../src/PageEditContext';
-import { TMenuOption } from '../src/Types/ContextMenuTypes';
+import type { TMenuOption } from '../src/Types/ContextMenuTypes';
 import {
   Menu, menuRendered, itemRendered, withMenu,
 } from './helpers/Menu';
@@ -63,7 +63,8 @@ const FooBar: FC<any> = ({
     });
   }
   const props = {
-    getMenuOptions: () => options,
+    // We must memoize our getMenuOptions to avoid unnecessary regeneration of context.
+    getMenuOptions: useGetter(options),
     name: 'FooBar',
   };
 

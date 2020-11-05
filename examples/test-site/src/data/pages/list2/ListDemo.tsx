@@ -13,7 +13,7 @@ import { withItemMargin, withSimpleTitle } from './SimpleListDemo';
  * Defines the all sublists
  */
 export const asToggledSubList = flow(
-  asSubList,
+  asSubList(),
   withDeleteNodeOnUnwrap('sublist'),
 );
 

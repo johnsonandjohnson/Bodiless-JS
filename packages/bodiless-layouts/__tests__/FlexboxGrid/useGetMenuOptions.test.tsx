@@ -196,6 +196,7 @@ describe('useGetMenuOptions', () => {
       const options = getMenuOptions();
       expect(options).toHaveLength(0);
     });
+
     it('Returns a single add button for the flow container when it is empty', () => {
       const { getItems } = useItemHandlers();
       // @ts-ignore jest mock methods don't exist on mocked imports.
@@ -204,7 +205,6 @@ describe('useGetMenuOptions', () => {
       shallow(<LogMenuOptions />);
       const options = getMenuOptions();
       expect(options.length).toBe(1);
-      expect(options[0].name).toBe('add');
       invokeAction(options[0], 'Bar');
       expectDataHandlerCall(insertFlowContainerItem, ['Bar']);
     });

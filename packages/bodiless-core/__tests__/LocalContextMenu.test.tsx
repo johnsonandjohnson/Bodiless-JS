@@ -15,15 +15,17 @@
 /* eslint class-methods-use-this: ["error", { "exceptMethods": ["isInnermost"] }] */
 
 import React, { FC, useEffect } from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
+import { v1 } from 'uuid';
 import PageEditContext from '../src/PageEditContext';
 import LocalContextMenu from '../src/components/LocalContextMenu';
 import ContextMenu from '../src/components/ContextMenu';
 import { TMenuOptionGetter } from '../src/PageEditContext/types';
 import { useUUID, useEditContext } from '../src/hooks';
 import PageEditor from '../src/components/PageEditor';
+import { TMenuOption } from '../src/Types/ContextMenuTypes';
 
-const options = () => [
+const testOptions = () => [
   {
     icon: 'add',
     name: 'add',
@@ -82,7 +84,7 @@ describe('LocalContextMenu', () => {
   it('renders Tooltip with overlay of default ContextMenu ui element.', () => {
     const wrapper = mount(
       <PageEditor>
-        <MockContextProvider active getMenuOptions={options} id="t1" name="defaultUI">
+        <MockContextProvider active getMenuOptions={testOptions} id="t1" name="defaultUI">
           <LocalContextMenu><Foo /></LocalContextMenu>
         </MockContextProvider>
       </PageEditor>,
@@ -100,7 +102,7 @@ describe('LocalContextMenu', () => {
     };
     const wrapper = mount(
       <PageEditor ui={ui}>
-        <MockContextProvider active getMenuOptions={options} id="t2" name="customUI">
+        <MockContextProvider active getMenuOptions={testOptions} id="t2" name="customUI">
           <LocalContextMenu><Foo /></LocalContextMenu>
         </MockContextProvider>
       </PageEditor>,
@@ -112,7 +114,7 @@ describe('LocalContextMenu', () => {
 
   it('renders child component correctly.', () => {
     const wrapper = mount(
-      <MockContextProvider getMenuOptions={options} id="t3" name="childRendering">
+      <MockContextProvider getMenuOptions={testOptions} id="t3" name="childRendering">
         <LocalContextMenu><Foo /></LocalContextMenu>
       </MockContextProvider>,
     );
@@ -153,7 +155,7 @@ describe('LocalContextMenu', () => {
 
   it('renders invisible Tooltip when ContextProvider is not inner most.', () => {
     const wrapper = mount(
-      <MockContextProvider active={false} getMenuOptions={options} id="t6" name="contextInActive">
+      <MockContextProvider active={false} getMenuOptions={testOptions} id="t6" name="contextInActive">
         <LocalContextMenu><Foo /></LocalContextMenu>
       </MockContextProvider>,
     );
@@ -163,7 +165,7 @@ describe('LocalContextMenu', () => {
 
   it('renders visible Tooltip when ContextProvider is inner most.', () => {
     const wrapper = mount(
-      <MockContextProvider active getMenuOptions={options} id="t7" name="contextActive">
+      <MockContextProvider active getMenuOptions={testOptions} id="t7" name="contextActive">
         <LocalContextMenu><Foo /></LocalContextMenu>
       </MockContextProvider>,
     );
@@ -173,10 +175,266 @@ describe('LocalContextMenu', () => {
 
   it('does not render visible Tooltip when local tooltips are disabled via edit context.', () => {
     const wrapper = mount(
-      <MockContextProvider active getMenuOptions={options} id="t8" name="toolbarActive" tooltipsDisabled>
+      <MockContextProvider active getMenuOptions={testOptions} id="t8" name="toolbarActive" tooltipsDisabled>
         <LocalContextMenu><Foo /></LocalContextMenu>
       </MockContextProvider>,
     );
     expect(wrapper.find('Tooltip[visible=true]')).toHaveLength(0);
+  });
+});
+
+describe('Grouped options', () => {
+  let mockOptionsGetter:jest.SpyInstance<TMenuOption[], []>;
+
+  const setMockOptions = (ops: TMenuOption[]) => {
+    mockOptionsGetter.mockReturnValue(ops);
+  };
+
+  beforeEach(() => {
+    mockOptionsGetter = jest.spyOn(PageEditContext.prototype, 'contextMenuOptions', 'get');
+  });
+
+  afterEach(() => {
+    mockOptionsGetter.mockRestore();
+  });
+
+  const getRenderedOptions = ():TMenuOption[] => {
+    const wrapper = shallow(<LocalContextMenu><Foo /></LocalContextMenu>);
+    const overlay = shallow(wrapper.prop('overlay'));
+    return overlay.prop('options');
+  };
+
+  it('Renders only local options', () => {
+    const foo = { name: 'Foo', local: true };
+    const bar = { name: 'Bar' };
+    const baz = { name: 'Baz', local: false };
+    setMockOptions([foo, bar, baz]);
+    const options = getRenderedOptions();
+    expect(options).toEqual([foo]);
+  });
+
+  it('Creates groups based on context', () => {
+    const local = true;
+    const c1 = new PageEditContext({ name: 'C1', id: v1() });
+    const c2 = new PageEditContext({ name: 'C2', id: v1() });
+
+    const c1a = { name: 'c1a', context: c1, local };
+    const c1b = { name: 'c1b', context: c1, local };
+    const c2a = { name: 'c2a', context: c2, local };
+
+    setMockOptions([c1a, c2a, c1b]);
+    const options = getRenderedOptions();
+    const groups = options.filter(o => o.Component === 'group');
+    expect(groups).toHaveLength(2);
+    const g1 = groups.find(g => g.label === 'C1');
+    const g2 = groups.find(g => g.label === 'C2');
+    expect(g1).toBeDefined();
+    expect(g2).toBeDefined();
+    expect(options.find(o => o.name === 'c1b')!.group).toBe(g1!.name);
+    expect(options.find(o => o.name === 'c2a')!.group).toBe(g2!.name);
+  });
+
+  it('Preserves named groups', () => {
+    const local = true;
+    const context = new PageEditContext({ name: 'C1', id: v1() });
+    const a = { name: 'a', context, local };
+    const b = { name: 'b', context, local };
+    const c = {
+      name: 'c', context, group: 'a', local,
+    };
+    setMockOptions([a, b, c]);
+    const options = getRenderedOptions();
+    expect(options.find(o => o.name === 'a')!.group).toBeUndefined();
+    expect(options.find(o => o.name === 'c')!.group).toBe('a');
+    const groupName = options.find(o => o.name === 'b')!.group;
+    expect(options.find(o => o.name === groupName)!.label).toBe('C1');
+    expect(options.filter(o => o.Component === 'group')).toHaveLength(1);
+  });
+
+  it('Orders default groups properly', () => {
+    const local = true;
+    const outer = new PageEditContext({ name: 'Outer', id: v1() });
+    const inner = new PageEditContext({ name: 'Inner', id: v1() });
+    const initialOptions: TMenuOption[] = [
+      { name: 'outer', context: outer, local },
+      { name: 'inner', context: inner, local },
+    ];
+    setMockOptions(initialOptions);
+    const options = getRenderedOptions();
+    const groups = options.filter(o => o.Component === 'group');
+    expect(groups[0].label).toBe('Inner');
+    expect(groups[1].label).toBe('Outer');
+  });
+
+  it('Orders custom groups from different contexts correctly', () => {
+    const local = true;
+    const outer = new PageEditContext({ name: 'Outer', id: v1() });
+    const inner = new PageEditContext({ name: 'Inner', id: v1() });
+    const initialOptions: TMenuOption[] = [
+      {
+        name: 'outer', context: outer, local, Component: 'group',
+      },
+      {
+        name: 'o1', context: outer, local, group: 'outer',
+      },
+      {
+        name: 'inner', context: inner, local, Component: 'group',
+      },
+      {
+        name: 'i1', context: inner, local, group: 'inner',
+      },
+    ];
+    setMockOptions(initialOptions);
+    const options = getRenderedOptions();
+    const groups = options.filter(o => o.Component === 'group');
+    expect(groups).toHaveLength(2);
+    expect(groups[0].name).toBe('inner');
+    expect(groups[1].name).toBe('outer');
+  });
+
+  it('Orders custom groups from the same context correctly', () => {
+    const local = true;
+    const context = new PageEditContext({ name: 'Middle', id: v1() });
+    const initialOptions: TMenuOption[] = [
+      {
+        name: 'first', label: 'First', context, local, Component: 'group',
+      },
+      { name: 'i1', context, local },
+      {
+        name: 'last', label: 'Last', context, local, Component: 'group',
+      },
+      {
+        name: 'i2', context, local, group: 'last',
+      },
+      {
+        name: 'i3', context, local, group: 'first',
+      },
+    ];
+    setMockOptions(initialOptions);
+    const options = getRenderedOptions();
+    const groups = options.filter(o => o.Component === 'group');
+    expect(groups).toHaveLength(3);
+    expect(groups[0].label).toBe('First');
+    expect(groups[1].label).toBe('Middle');
+    expect(groups[2].label).toBe('Last');
+  });
+
+  it('Merges groups when specified', () => {
+    const local = true;
+    const outer = new PageEditContext({ name: 'Outer', id: v1() });
+    const inner = new PageEditContext({ name: 'Inner', id: v1() }, outer);
+    const initialOptions: TMenuOption[] = [
+      { name: 'o1', context: outer, local },
+      {
+        name: 'o2', context: outer, local, group: 'merge',
+      },
+      { name: 'o3', context: outer, local },
+      { name: 'merge', groupMerge: 'merge', local },
+      { name: 'i1', context: inner, local },
+    ];
+    setMockOptions(initialOptions);
+    const options = getRenderedOptions();
+    expect(options.find(o => o.name === 'o1')!.group).toBe(outer.id);
+    expect(options.find(o => o.name === 'o2')!.group).toBe(inner.id);
+    expect(options.find(o => o.name === 'o3')!.group).toBe(outer.id);
+    expect(options.find(o => o.name === 'merge'))!.toBeUndefined();
+    expect(options.find(o => o.name === 'i1')!.group).toBe(inner.id);
+    expect(options.find(o => o.name === outer.id))!.toBeDefined();
+    expect(options.find(o => o.name === inner.id))!.toBeDefined();
+  });
+
+  it('Does not delete a merge group if it is innermost', () => {
+    const local = true;
+    const outer = new PageEditContext({ name: 'Outer', id: v1() });
+    const initialOptions: TMenuOption[] = [
+      { name: 'o1', context: outer, local },
+      {
+        name: 'o2', context: outer, local, group: 'merge',
+      },
+      { name: 'o3', context: outer, local },
+      { name: 'merge', groupMerge: 'merge', local },
+    ];
+    setMockOptions(initialOptions);
+    const options = getRenderedOptions();
+    expect(options.find(o => o.name === 'o1')!.group).toBe(outer.id);
+    expect(options.find(o => o.name === 'o2')!.group).toBe('merge');
+    expect(options.find(o => o.name === 'o3')!.group).toBe(outer.id);
+    expect(options.find(o => o.name === 'merge'))!.toBeDefined();
+    expect(options.find(o => o.name === outer.id))!.toBeDefined();
+  });
+
+  it('Merges up correctly', () => {
+    const local = true;
+    const outer = new PageEditContext({ name: 'Outer', id: v1() });
+    const inner = new PageEditContext({ name: 'Inner', id: v1() }, outer);
+    const initialOptions: TMenuOption[] = [
+      { name: 'o1', context: outer, local },
+      { name: 'o2', context: outer, local },
+      {
+        name: 'i1', context: inner, local, group: 'merge',
+      },
+      { name: 'merge', groupMerge: 'merge-up', local },
+      { name: 'i2', context: inner, local },
+    ];
+    setMockOptions(initialOptions);
+    const options = getRenderedOptions();
+    expect(options.find(o => o.name === 'o1')!.group).toBe(outer.id);
+    expect(options.find(o => o.name === 'o2')!.group).toBe(outer.id);
+    expect(options.find(o => o.name === 'i1')!.group).toBe(outer.id);
+    expect(options.find(o => o.name === 'merge'))!.toBeUndefined();
+    expect(options.find(o => o.name === 'i2')!.group).toBe(inner.id);
+    expect(options.find(o => o.name === outer.id))!.toBeDefined();
+    expect(options.find(o => o.name === inner.id))!.toBeDefined();
+  });
+
+  describe('Hiding empty groups', () => {
+    const local = true;
+    const isHidden = (option?: TMenuOption) => {
+      if (!option) return true;
+      return typeof option.isHidden === 'function' ? option.isHidden() : Boolean(option.isHidden);
+    };
+    it('Hides groups with no visible options', () => {
+      const initialOptions: TMenuOption[] = [
+        { name: 'empty-group', local, Component: 'group' },
+        {
+          name: 'hidden-option', isHidden: true, local, group: 'empty-group',
+        },
+        {
+          name: 'hidden-option-2', isHidden: () => true, local, group: 'empty-group',
+        },
+
+      ];
+      setMockOptions(initialOptions);
+      const options = getRenderedOptions();
+      const group = options.find(o => o.Component === 'group');
+      expect(isHidden(group)).toBeTruthy();
+    });
+
+    it('Shows groups with at least one visible options', () => {
+      const initialOptions: TMenuOption[] = [
+        { name: 'empty-group', local, Component: 'group' },
+        {
+          name: 'hidden-option', isHidden: true, local, group: 'empty-group',
+        },
+        { name: 'visible-option', local, group: 'empty-group' },
+      ];
+      setMockOptions(initialOptions);
+      const options = getRenderedOptions();
+      const group = options.find(o => o.Component === 'group');
+      expect(isHidden(group)).toBeFalsy();
+    });
+
+    it('Hides explicitly hidden groups even if they have visible options', () => {
+      const initialOptions: TMenuOption[] = [
+        {
+          name: 'group', local, Component: 'group', isHidden: true,
+        },
+        { name: 'visible-option', local, group: 'group' },
+      ];
+      setMockOptions(initialOptions);
+      const options = getRenderedOptions();
+      const group = options.find(o => o.Component === 'group');
+      expect(isHidden(group)).toBeTruthy();
+    });
   });
 });

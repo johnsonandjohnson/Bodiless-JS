@@ -26,10 +26,13 @@ describe('Link Toggle smoke tests', function () {
   const labelXpath = '//*[@data-linktoggle-element="link-toggle"]//*[@class="bodiless-inline-editable"]'
   const labelPreviewXpath = '//*[@data-linktoggle-element="link-toggle"]//span'
   const linkXpath = '//*[@data-linktoggle-element="link-toggle"]//a'
-  const linkIconXpath = '//*[@aria-label="Local Context Menu"]//*[@aria-label="Link"]'
-  const urlFieldXpath = '//form[@aria-label="Context Menu Link Form"]//input[@id="link-href"]'
-  const checkmarkIconLinkFormXpath = '//form[@aria-label="Context Menu Link Form"]//button[@aria-label="Submit"]'
-  const removeLinkXpath = '//form[@aria-label="Context Menu Link Form"]//button[text()="Remove Link"]'
+  const linkIconAddXpath = '//*[@aria-label="Local Context Menu"]//*[@aria-label="Add Link"]'
+  const urlFieldAddXpath = '//form[@aria-label="Context Menu Add Link Form"]//input[@id="link-href"]'
+  const checkmarkIconLinkAddFormXpath = '//form[@aria-label="Context Menu Add Link Form"]//button[@aria-label="Submit"]'
+  const linkIconEditXpath = '//*[@aria-label="Local Context Menu"]//*[@aria-label="Edit Link"]'
+  const urlFieldEditXpath = '//form[@aria-label="Context Menu Edit Link Form"]//input[@id="link-href"]'
+  const checkmarkIconLinkEditFormXpath = '//form[@aria-label="Context Menu Edit Link Form"]//button[@aria-label="Submit"]'
+  const removeLinkXpath = '//form[@aria-label="Context Menu Edit Link Form"]//button[text()="Remove Link"]'
 
 
   it('link toggle: 1 - checking the label without a url', () => {
@@ -54,11 +57,11 @@ describe('Link Toggle smoke tests', function () {
     cy.clickEdit();
     cy.xpath(labelXpath)
       .click();
-    cy.xpath(linkIconXpath)
+    cy.xpath(linkIconAddXpath)
       .click();
-    cy.xpath(urlFieldXpath)
+    cy.xpath(urlFieldAddXpath)
       .type(url);
-    cy.xpath(checkmarkIconLinkFormXpath)
+    cy.xpath(checkmarkIconLinkAddFormXpath)
       .click();
     cy.xpath(labelXpath)
       .should('have.text', label);
@@ -90,11 +93,11 @@ describe('Link Toggle smoke tests', function () {
   it('link toggle: 6 - checking that a url value can be edited', () => {
     cy.xpath(labelXpath)
       .click();
-    cy.xpath(linkIconXpath)
+    cy.xpath(linkIconEditXpath)
       .click();
-    cy.xpath(urlFieldXpath)
+    cy.xpath(urlFieldEditXpath)
       .type(editedPostfix);
-    cy.xpath(checkmarkIconLinkFormXpath)
+    cy.xpath(checkmarkIconLinkEditFormXpath)
       .click();
     cy.xpath(labelXpath)
       .should('have.text', label + editedPostfix);
@@ -125,7 +128,7 @@ describe('Link Toggle smoke tests', function () {
     cy.clickEdit();
     cy.xpath(labelXpath)
       .click();
-    cy.xpath(linkIconXpath)
+    cy.xpath(linkIconEditXpath)
       .click();
     cy.xpath(removeLinkXpath)
       .click();

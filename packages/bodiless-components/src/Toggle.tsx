@@ -60,8 +60,8 @@ const withToggleButton = (options? : ToggleMenuOptions) => {
 
     // We can return an invariant set of menu options bc state only depends
     // on the mobx data store.
-    const menuOptions = useMemo(() => (
-      [{
+    const menuOptions = useMemo((): TMenuOption[] => [
+      {
         icon: icon || 'toggle_off',
         name: 'Toggle',
         label,
@@ -69,8 +69,17 @@ const withToggleButton = (options? : ToggleMenuOptions) => {
         handler: () => setOn(true),
         global: false,
         local: true,
-      }]
-    ), []);
+        group: 'toggle-group',
+      },
+      {
+        name: 'toggle-group',
+        label,
+        isHidden: () => isOn(),
+        global: false,
+        local: true,
+        Component: 'group',
+      },
+    ], []);
     return menuOptions;
   };
 

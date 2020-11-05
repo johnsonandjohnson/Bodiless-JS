@@ -20,9 +20,9 @@ export const withItemMargin = withDesign({
 
 const withSubLists = withDesign({
   Item: flow(
-    asSubList,
+    asSubList(),
     withDesign({
-      Item: asSubList,
+      Item: asSubList(),
     }),
   ),
 });
@@ -59,7 +59,7 @@ const BasicCompoundList = flow(
   asBodilessList(),
   withSimpleTitle,
   withListDesign(flow(
-    asSubList,
+    asSubList(),
     withSimpleTitle,
     withItemMargin,
   )),
