@@ -24,6 +24,7 @@ export type {
 } from './SortableResizableWrapper';
 export { default as SortableResizableWrapper } from './SortableResizableWrapper';
 export { default as SlateSortableResizable } from './SlateSortableResizable';
+export { default as SortableChild } from './FlowContainer/SortableChild';
 export {
   withTuple,
   getSnapFrom,
