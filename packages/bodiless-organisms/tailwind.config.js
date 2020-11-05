@@ -16,6 +16,9 @@ module.exports = {
     },
   },
   variants: {},
+  corePlugins: {
+    container: false,
+  },
   plugins: [
     // eslint-disable-next-line
     require('tailwindcss-aspect-ratio'),

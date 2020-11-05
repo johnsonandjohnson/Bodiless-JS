@@ -10,5 +10,8 @@ module.exports = {
     extend: {},
   },
   variants: {},
+  corePlugins: {
+    container: false,
+  },
   plugins: [],
 };
