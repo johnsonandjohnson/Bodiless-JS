@@ -95,9 +95,12 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
 
           <finalUI.FlexSection>
             <finalUI.ComponentLinkWrapper
+              isDisabled={activeFilters.length === 0}
               onClick={() => {
-                setActiveSearch('');
-                setActiveFilters([]);
+                if (activeFilters.length !== 0 || activeSearch.length !== 0) {
+                  setActiveSearch('');
+                  setActiveFilters([]);
+                }
               }}
             >
               Clear

@@ -141,6 +141,10 @@ export type ButtonVariantProps = HTMLProps<HTMLDivElement> & {
   isDisabled?: boolean;
 };
 
+export type LinkVariantProps = HTMLProps<HTMLDivElement> & {
+  isDisabled?: boolean;
+};
+
 type IconVariantProps = HTMLProps<HTMLSpanElement> & {
   isActive?: boolean;
 };
@@ -174,7 +178,7 @@ export type ContextMenuUI = {
   ComponentFormOption?: ComponentType<ChildFieldProps<any, any>>;
   ComponentFormError?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   ComponentFormWarning?: ComponentType<HTMLProps<HTMLDivElement>> | string;
-  ComponentFormLink?: ComponentType<HTMLProps<HTMLAnchorElement>> | string;
+  ComponentFormLink?: ComponentType<HTMLProps<HTMLAnchorElement> & LinkVariantProps> | string;
   Form?: ComponentType<HTMLProps<HTMLFormElement>> | string;
   Tooltip?: ComponentType<Tooltip['props']>;
   ReactTags?: ComponentType<ReactTagsFieldProps>;

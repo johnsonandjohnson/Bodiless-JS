@@ -30,7 +30,7 @@ import {
   Li, Ul, stylable, addClasses, StylableProps, withoutProps, flowIf, hasProp, addProps,
   removeClasses,
 } from '@bodiless/fclasses';
-import { ButtonVariantProps, withChild } from '@bodiless/core';
+import { ButtonVariantProps, LinkVariantProps, withChild } from '@bodiless/core';
 
 import './bodiless.index.css';
 import 'rc-tooltip/assets/bootstrap.css';
@@ -200,6 +200,12 @@ export const ComponentFormWarning = flow(
   </Div>
 ));
 
-export const ComponentFormLink = addClasses(
-  'bl-text-xs bl-text-grey-100 bl-block bl-underline',
+export const ComponentFormLink = flow(
+  withoutProps<LinkVariantProps>(['isActive', 'isDisabled']),
+  addClasses('bl-text-xs bl-text-grey-100 bl-block bl-underline'),
+  flowIf(hasProp('isDisabled'))(
+    flow(
+      addClasses('bl-text-grey-600'),
+    ),
+  ),
 )(Anchor);

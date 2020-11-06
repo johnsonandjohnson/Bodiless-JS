@@ -22,6 +22,7 @@ import { getUI } from './ContextMenuContext';
 import type {
   IContextMenuProps as ContextMenuProps,
   ButtonVariantProps,
+  LinkVariantProps,
   ContextMenuUI,
 } from '../Types/ContextMenuTypes';
 import type { Props as ContextWrapperProps } from '../Types/ContextWrapperTypes';
@@ -45,5 +46,6 @@ export type {
   ContextMenuProps,
   ContextMenuUI,
   ButtonVariantProps,
+  LinkVariantProps,
   ContextWrapperProps,
 };
