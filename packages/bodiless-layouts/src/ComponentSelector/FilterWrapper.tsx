@@ -90,7 +90,7 @@ function Dropdown({ children, type }: { children: any; type: any }) {
 }
 
 // The wrapper that wraps the checkboxes and dropdown menus
-export const FilterWrapper = (props: any) => {
+const FilterWrapper = (props: any) => {
   const {
     allfilters,
     filters,
@@ -135,3 +135,5 @@ export const FilterWrapper = (props: any) => {
     </finalUI.ComponentSelectorWrapper>
   );
 };
+
+export default FilterWrapper;
