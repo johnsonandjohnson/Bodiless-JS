@@ -16,7 +16,7 @@ import React, { ReactElement, useState } from 'react';
 import PropTypes from 'prop-types';
 import { pickBy } from 'lodash';
 
-import { AllCheckbox, FilterWrapper } from './FilterWrapper';
+import { FilterWrapper } from './FilterWrapper';
 import SearchWrapper from './SearchWrapper';
 import ItemList from './ItemListScale';
 import { getFiltersByComponentList } from './getFiltersByComponentList';
@@ -94,12 +94,15 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
         <finalUI.MasterWrapper>
 
           <finalUI.FlexSection>
-            <AllCheckbox
-              activeFilter={activeFilters}
-              setActiveFilters={setActiveFilters}
-              activeSearch={activeSearch}
-              setActiveSearch={setActiveSearch}
-            />
+            <finalUI.ComponentLinkWrapper
+              onClick={() => {
+               // document.querySelectorAll('input[type=checkbox]').forEach(el => (el.checked = false));
+                setActiveSearch('');
+                setActiveFilters([]);
+              }}
+            >
+              Clear
+            </finalUI.ComponentLinkWrapper>
             <FilterWrapper
               activeFilter={activeFilters}
               setActiveFilters={setActiveFilters}

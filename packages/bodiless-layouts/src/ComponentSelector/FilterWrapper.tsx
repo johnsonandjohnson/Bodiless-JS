@@ -135,31 +135,3 @@ export const FilterWrapper = (props: any) => {
     </finalUI.ComponentSelectorWrapper>
   );
 };
-
-// The AllCheckbox component
-// If a filter or search value exist, it is unchecked
-// If checked from unchecked state will remove all existing filters
-export function AllCheckbox(props: any) {
-  const {
-    activeFilter,
-    setActiveFilters,
-    activeSearch,
-    setActiveSearch,
-  } = props;
-  const finalUI:FinalUI = useContext(uiContext);
-  return (
-    <finalUI.AllCheckboxWrapper>
-      <Checkbox
-        type="All"
-        disabled={false}
-        isChecked={activeFilter.length === 0 && activeSearch.length === 0}
-        onToggle={() => {
-          if (activeFilter.length !== 0 || activeSearch.length !== 0) {
-            setActiveFilters([]);
-            setActiveSearch('');
-          }
-        }}
-      />
-    </finalUI.AllCheckboxWrapper>
-  );
-}

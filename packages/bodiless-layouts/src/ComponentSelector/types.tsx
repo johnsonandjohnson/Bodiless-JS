@@ -74,13 +74,11 @@ export type FinalUI = {
   ComponentSelectorWrapper: ComponentType<HTMLProps<HTMLDivElement>> | string;
   // A input that will wrap the close menu icon
   SubmitButton: ComponentType<HTMLProps<HTMLButtonElement>> | string;
-  // A div the will wrap the AllCheckbox
-  AllCheckboxWrapper: ComponentType<HTMLProps<HTMLDivElement>> | string;
   // A div that will wrap all Accordion
   AccordionWrapper: ComponentType<HTMLProps<HTMLDivElement>> | string;
   // A div the will wrap the AccordionCheckbox
   AccordionCheckboxWrapper: ComponentType<HTMLProps<HTMLDivElement>> | string;
-  // An Anchor tag that will wrap each Accordion Item
+  // An Anchor tag that will wrap ea  ch Accordion Item
   AccordionItemWrapper: ComponentType<HTMLProps<HTMLAnchorElement>> | string;
   // A label that will be displayed by the AccordionCheckbox
   AccordionCheckboxLabel: ComponentType<HTMLProps<HTMLLabelElement>> | string;
@@ -112,6 +110,9 @@ export type FinalUI = {
   TitleWrapper: ComponentType<HTMLProps<HTMLSpanElement>> | string;
   // An h3 that wraps the component title element of a component box
   ComponentTitleWrapper: ComponentType<HTMLProps<HTMLHeadingElement>> | string;
+  // A link element.
+  ComponentLinkWrapper: ComponentType<HTMLProps<HTMLAnchorElement>> | string;
+
   // A span that wraps the icon element of a component box
   IconWrapper: ComponentType<HTMLProps<HTMLSpanElement>> | string;
   // A div that wraps the component description

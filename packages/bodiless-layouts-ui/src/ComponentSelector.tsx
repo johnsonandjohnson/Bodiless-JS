@@ -12,14 +12,28 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, HTMLProps } from 'react';
 import MaterialIcon, { MaterialIconDefaultProps } from '@material/react-material-icon';
-import { addClasses } from '@bodiless/fclasses';
+import { addClasses, stylable } from '@bodiless/fclasses';
 import {
-  SubmitButton as SubmitButtonBase, Div, Span, Label, CheckBox, Input,
-  Button, Anchor, ComponentFormTitle,
+  SubmitButton as SubmitButtonBase, Div, Span, Label, Input,
+  Button, Anchor, ComponentFormTitle, ComponentFormLink,
 } from '@bodiless/ui';
 import { ComponentSelector as CleanComponentSelector, ComponentSelectorUI, ComponentSelectorProps } from '@bodiless/layouts';
+
+const Checkbox = ({
+  label, isSelected, onChange, disabled,
+} : any) => (
+  <Input
+    type="checkbox"
+    name={label}
+    disabled={disabled}
+    checked={isSelected}
+    onChange={onChange}
+  />
+);
+
+const CheckBox = stylable<HTMLProps<HTMLInputElement>>(Checkbox);
 
 // eslint-disable-next-line import/prefer-default-export
 export const ui: ComponentSelectorUI = {
@@ -50,6 +64,8 @@ export const ui: ComponentSelectorUI = {
 
   ComponentTitleWrapper: ComponentFormTitle,
 
+  ComponentLinkWrapper: ComponentFormLink,
+
   IconWrapper: addClasses(
     'bl-block bl-absolute bl-left-grid-0 bl-top-grid-0',
   )(Span),
@@ -61,10 +77,6 @@ export const ui: ComponentSelectorUI = {
   SubmitButton: addClasses(
     'bl-right-grid-0 bl-absolute tbl-ext-m bl-mr-grid-2',
   )(SubmitButtonBase),
-
-  AllCheckboxWrapper: addClasses(
-    'bl-text-white',
-  )(Div),
 
   AccordionWrapper: addClasses(
     'bl-font-semibold',
