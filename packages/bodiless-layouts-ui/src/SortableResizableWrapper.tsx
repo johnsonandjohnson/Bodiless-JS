@@ -29,8 +29,9 @@ const ui: SortableResizableUI = {
   DragHandle,
 };
 
-const Wrapper: FC<SortableResizableProps & SortableElementProps> = props => (
-  <CleanWrapper ui={ui} {...props} />
-);
+const Wrapper: FC<SortableResizableProps & SortableElementProps> = ({ className, ...rest }) => {
+  const className$ = `${className} bl-relative`;
+  return <CleanWrapper ui={ui} className={className$} {...rest} />;
+};
 
 export default Wrapper;

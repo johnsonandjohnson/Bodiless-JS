@@ -19,7 +19,7 @@ import {
 import ReactTooltip from 'rc-tooltip';
 import { omit } from 'lodash';
 import ReactTagsField from './ReactTagsField';
-import type { UI, ContextMenuFormProps } from '../Types/ContextMenuTypes';
+import type { ContextMenuUI, ContextMenuFormProps } from '../Types/ContextMenuTypes';
 
 type ContextType = {
   // eslint-disable-next-line max-len
@@ -27,14 +27,14 @@ type ContextType = {
 };
 
 type ContextUIType = {
-  ui?: UI;
+  ui?: ContextMenuUI;
 };
 
 const DefaultToolbarButton = (props: any) => (
   <div {...omit(props, 'isActive', 'isDisabled', 'isFirst')} />
 );
 
-const defaultUI: Required<UI> = {
+const defaultUI: Required<ContextMenuUI> = {
   Icon: (props: any) => <i {...omit(props, 'isActive')} />,
   ComponentFormTitle: 'h3',
   ComponentFormLabel: 'label',
@@ -59,8 +59,10 @@ const defaultUI: Required<UI> = {
   ToolbarDivider: 'div',
   Tooltip: ReactTooltip,
   Toolbar: 'div',
+  ContextMenuGroup: ({ children, key }: any) => (
+    <React.Fragment key={key}>{children}</React.Fragment>
+  ),
   ToolbarButtonLabel: 'span',
-  ContextMenuGroup: React.Fragment,
   ComponentFormRadio: Radio,
   ComponentFormRadioGroup: RadioGroup,
   ComponentFormCheckBox: Checkbox,
@@ -70,13 +72,13 @@ const defaultUI: Required<UI> = {
   ComponentFormFieldWrapper: 'div',
 };
 
-const getUI = (ui: UI = {}) => ({
+const getUI = (ui: ContextMenuUI = {}) => ({
   ...defaultUI,
   ...ui,
 });
 
 const ContextMenuContext = createContext<ContextType>({});
-const ContextMenuUIContext = createContext<UI>({});
+const ContextMenuUIContext = createContext<ContextMenuUI>({});
 
 const useContextMenuContext = () => useContext(ContextMenuContext);
 const useMenuOptionUI = () => getUI(useContext(ContextMenuUIContext));

@@ -18,10 +18,10 @@ import StructuredChildren, {
   asElementArray, addMissingGroups,
   buildGroupTree, cloneChildren,
 } from '../src/ContextMenu/StructuredChildren';
-import type { ContextMenuGroupProps } from '../src/Types/ContextMenuTypes';
+import type { IContextMenuItemProps } from '../src/Types/ContextMenuTypes';
 
-const Item: FC<ContextMenuGroupProps> = ({ children }) => <>{children}</>;
-const Group: FC<ContextMenuGroupProps> = ({ children }) => <>{children}</>;
+const Item: FC<IContextMenuItemProps> = ({ children }) => <>{children}</>;
+const Group: FC<IContextMenuItemProps> = ({ children }) => <>{children}</>;
 
 describe('asElementArray', () => {
   it('Removes children which are not elements', () => {

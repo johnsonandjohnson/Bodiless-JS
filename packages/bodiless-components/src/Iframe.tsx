@@ -39,8 +39,9 @@ export type Props = HTMLProps<HTMLIFrameElement>;
 // Options used to create an edit button.
 const options: BodilessOptions<Props, Data> = {
   icon: 'settings',
-  label: 'Config',
-  name: 'Edit',
+  groupLabel: 'IFrame',
+  label: 'Settings',
+  name: 'iframe-settings',
   global: false,
   local: true,
   Wrapper: 'div',

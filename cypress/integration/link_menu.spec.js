@@ -39,7 +39,7 @@ context('Link Context Menu', () => {
       .first()
       .as('first-tooltip')
       .find('span.material-icons')
-      .last()
+      .first()
       .click();
 
     cy.get('div.rc-tooltip')
@@ -76,7 +76,7 @@ context('Link Context Menu', () => {
 
     cy.get('@first-tooltip')
       .find('span.material-icons')
-      .last()
+      .first()
       .click();
 
     cy.get('@link-href').should('have.value', someText);
@@ -95,7 +95,7 @@ context('Link Context Menu', () => {
       .first()
       .as('first-tooltip')
       .find('span.material-icons')
-      .last()
+      .first()
       .click();
 
     cy.get('div.rc-tooltip')

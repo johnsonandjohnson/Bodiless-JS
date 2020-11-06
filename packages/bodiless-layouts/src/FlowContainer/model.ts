@@ -100,7 +100,9 @@ export function useFlowContainerDataHandlers(): FlowContainerDataHandlers {
             ...itemProps,
           },
         };
-        spliceItem(itemIndex, 1, updatedFlowContainerItem);
+        if (JSON.stringify(currentFlowContainerItem) !== JSON.stringify(updatedFlowContainerItem)) {
+          spliceItem(itemIndex, 1, updatedFlowContainerItem);
+        }
       }
     },
     deleteFlowContainerItem: (uuid: string) => {

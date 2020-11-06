@@ -14,11 +14,13 @@
 
 import Editable, { withPlaceholder, asEditable } from './Editable';
 import { asBodilessLink } from './Link';
+import type { AsBodilessLink } from './Link';
 import Image, {
   asBodilessImage,
   TImagePickerUI,
   withImagePlaceholder,
 } from './Image';
+import type { AsBodilessImage } from './Image';
 import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
 import List from './List_DEPRECATED';
@@ -144,3 +146,8 @@ export * from './Chameleon/index';
 export * from './List';
 
 export type { MetaFormFieldType, YouTubePlayerSettings };
+
+export type {
+  AsBodilessImage,
+  AsBodilessLink,
+};

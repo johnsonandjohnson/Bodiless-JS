@@ -20,6 +20,7 @@ import useContextMenuForm, {
 import { withMenuOptions } from './PageContextProvider';
 import withCompoundForm from './withCompoundForm';
 import type { EditButtonProps, EditButtonOptions } from './Types/EditButtonTypes';
+import { TMenuOption } from './Types/ContextMenuTypes';
 
 type UseEditFormProps<P, D> = P & EditButtonProps<D> & Pick<EditButtonOptions<P, D>, 'renderForm'|'initialValueHandler'|'submitValueHandler'>;
 
@@ -90,6 +91,8 @@ const createMenuOptionHook = <P extends object, D extends object>(
     const options$ = typeof options === 'function' ? options(props) : options;
     const {
       renderForm,
+      groupLabel,
+      groupMerge,
       initialValueHandler,
       submitValueHandler,
       ...rest
@@ -106,7 +109,18 @@ const createMenuOptionHook = <P extends object, D extends object>(
       handler: () => render,
     };
     if (isActive) menuOption.isActive = isActive;
-    return [menuOption];
+    // We always create a custom menu group for this option so we have full control
+    // ovef group label and merge behavior.
+    const menuGroup:TMenuOption = {
+      name: `${menuOption.name}-group`,
+      label: groupLabel || menuOption.label,
+      groupMerge: groupMerge || 'none',
+      local: menuOption.local,
+      global: menuOption.global,
+      Component: 'group',
+    };
+    menuOption.group = menuGroup.name;
+    return [menuOption, menuGroup];
   };
 
 /**
@@ -124,10 +138,13 @@ const withEditButton = <P extends object, D extends object>(
     && options.useCompoundForm !== undefined
     && options.useCompoundForm();
   const withMenuOptions$ = isCompoundForm
-    ? withCompoundForm({ useMenuOptions: () => [options] })
+    ? withCompoundForm({
+      useMenuOptions: createMenuOptionHook(options),
+      name: `Edit ${options.name}`,
+    })
     : withMenuOptions({
       useMenuOptions: createMenuOptionHook(options),
-      name: options.name,
+      name: `Edit${options.name}`,
     });
   return flowRight(
     withMenuOptions$,

@@ -1,0 +1,3 @@
+#!/usr/bin/env node
+
+const bodilessSearchIndex = require('../lib/scripts/bodiless-search-index');

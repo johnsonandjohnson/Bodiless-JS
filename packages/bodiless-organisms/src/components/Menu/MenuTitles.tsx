@@ -33,9 +33,7 @@ export const asMenuTout = (withToutEditors: any) => flow(
 export const asMenuLink = (asEditable: HOC) => flow(
   replaceWith(MenuLink),
   withSidecarNodes(
-    withBodilessLinkToggle(
-      asBodilessLink('link') as HOC,
-    ),
+    withBodilessLinkToggle(asBodilessLink)('link'),
   ),
   stylable,
   asEditable,

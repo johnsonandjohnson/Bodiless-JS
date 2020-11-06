@@ -9,7 +9,8 @@
   "files": [
     "/lib",
     "/bodiless.docs.json",
-    "/doc"
+    "/doc",
+    "/index.tailwind.css"
   ],
   "repository": {
     "type": "git",
@@ -19,12 +20,13 @@
     "access": "public"
   },
   "scripts": {
-    "build": "npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build": "npm run build:css && npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build:css": "postcss index.tailwind.css -o ./src/main.css",
     "build:watch": "npm run build -- --watch",
     "build:api-doc": "typedoc --out doc/api --mode file",
     "lint": "tslint ./src/**/*.ts?x",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
-    "copy": "copyfiles -u 3 \"./src/components/MainMenu/*.css\" \"./lib/components/MainMenu/\""
+    "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
     "@bodiless/bv": "^0.0.58",
@@ -47,7 +49,8 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "@types/uuid": "^3.4.4"
+    "@types/uuid": "^3.4.4",
+    "tailwindcss-aspect-ratio": "^3.0.0"
   },
   "peerDependencies": {
     "react": "^16.8.4"

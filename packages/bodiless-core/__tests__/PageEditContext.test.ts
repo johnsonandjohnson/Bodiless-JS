@@ -254,20 +254,22 @@ describe('Update menu options', () => {
     id: 'Peer',
   });
 
-  const createContext = (options?: TMenuOption[]) => {
+  const createBaseContext = () => {
+    let options: TMenuOption[] = [{
+      name: 'foo',
+      icon: 'foo',
+    }];
     const context = new PageEditContext({
-      getMenuOptions: () => (options || [{
-        name: 'foo',
-        icon: 'foo',
-      }]),
+      getMenuOptions: () => options,
       name: 'Foo',
       id: 'Foo',
     }, parentContext);
     context.registerPeer(peerContext);
-    return context;
+    const createContext = (newOptions: TMenuOption[]) => { options = newOptions; return context; };
+    return { context, createContext };
   };
 
-  const context = createContext();
+  const { context, createContext } = createBaseContext();
 
   const optionListener = jest.fn(() => {
     const options = context.contextMenuOptions;
@@ -283,9 +285,9 @@ describe('Update menu options', () => {
   const listener = jest.fn(() => {
     const options = context.contextMenuOptions;
     options.forEach(op => {
-      // Access only the group and name properties (which are used by the menu itself)
+      // Access only the group, name and context properties (which are used by the menu itself)
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const ref = [op.group, op.name];
+      const ref = [op.group, op.name, op.context];
     });
   });
   let disposer: Function;
@@ -318,22 +320,6 @@ describe('Update menu options', () => {
   it('Does not notify when context updates with no change', () => {
     clearListeners();
     context.updateMenuOptions();
-    expect(listener).toHaveBeenCalledTimes(0);
-    expect(optionListener).toHaveBeenCalledTimes(0);
-  });
-
-  it('Does not notify when new context with same menu options activates', () => {
-    clearListeners();
-    const newContext = createContext();
-    newContext.activate();
-    expect(listener).toHaveBeenCalledTimes(0);
-    expect(optionListener).toHaveBeenCalledTimes(0);
-  });
-
-  it('Does not notify when new context with same menu options updates', () => {
-    clearListeners();
-    const newContext = createContext();
-    newContext.updateMenuOptions();
     expect(listener).toHaveBeenCalledTimes(0);
     expect(optionListener).toHaveBeenCalledTimes(0);
   });

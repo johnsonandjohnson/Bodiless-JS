@@ -43,37 +43,6 @@ if (!tailwindThemeEnabled) {
       },
     });
   }
-  if (process.env.BODILESS_PURGE_CSS_ENABLED === '0') {
-    console.warn('CSS Purging Is Disabled');
-  } else {
-    const purgeWhileInGatsbyDevelop = false;
-    const siteTailwindCSS = process.env.BODILESS_TAILWIND_SITE_CSS || [
-      'src/css/style.css',
-    ];
-    const srcFilesGlobPattern = '**/!(*.d).{ts,js,jsx,tsx}';
-    // list of bodiless packages that have site level styles
-    // and that should be accounted during purging
-    const bodilessPackagesPaths = [
-      './node_modules/@bodiless/layouts',
-      './node_modules/@bodiless/organisms',
-    ];
-    const bodilessFilesPaths = bodilessPackagesPaths
-      .map(pkg => path.resolve(pkg, srcFilesGlobPattern));
-    buildCSSPlugins.push({
-      resolve: 'gatsby-plugin-purgecss',
-      options: {
-        tailwind: true,
-        develop: purgeWhileInGatsbyDevelop,
-        purgeOnly: [
-          ...siteTailwindCSS,
-        ],
-        content: [
-          path.join(process.cwd(), 'src', srcFilesGlobPattern),
-          ...bodilessFilesPaths,
-        ],
-      },
-    });
-  }
 }
 
 const getBuildCSSPlugins = () => buildCSSPlugins;
