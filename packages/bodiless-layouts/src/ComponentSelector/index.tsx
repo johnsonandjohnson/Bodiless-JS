@@ -16,7 +16,7 @@ import React, { ReactElement, useState } from 'react';
 import PropTypes from 'prop-types';
 import { pickBy } from 'lodash';
 
-import { FilterWrapper } from './FilterWrapper';
+import FilterWrapper from './FilterWrapper';
 import SearchWrapper from './SearchWrapper';
 import ItemList from './ItemListScale';
 import { getFiltersByComponentList } from './getFiltersByComponentList';
