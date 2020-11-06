@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,10 @@ import React, {
 } from 'react';
 import {
   contextMenuForm,
-  getUI,
+  useMenuOptionUI,
   useEditContext,
   withMenuOptions,
+  ContextSubMenu,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
 import { ComponentFormSpinner } from '@bodiless/ui';
@@ -28,10 +29,13 @@ import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
 import verifyPage from './PageVerification';
 import { useGatsbyPageContext } from './GatsbyPageProvider';
+import NewPageURLField, { usePagePath } from './NewPageURLField';
 
 type Client = {
   savePage: (path: string, template?: string) => AxiosPromise<any>;
 };
+
+const DEFAULT_PAGE_TEMPLATE = '_default';
 
 enum NewPageState {
   Init,
@@ -43,32 +47,28 @@ enum NewPageState {
 type PageStatus = {
   status: NewPageState;
   newPagePath?: string;
+  newPageTemplate?: string;
   errorMessage?: string;
 };
 
 type NewPageProps = PageStatus & {
-  ui: any,
   errors: any,
 };
 
 const createPage = async ({ path, client, template } : any) => {
-  const pathname = window.location.pathname
-    ? window.location.pathname.replace(/\/?$/, '/')
-    : '';
-  const newPagePath = pathname + path;
   // Create the page.
-  const result = await handle(client.savePage(newPagePath, template));
+  const result = await handle(client.savePage(path, template));
   // If the page was created successfully:
   if (result.response) {
     // Verify the creation of the page.
-    const isPageVerified = await verifyPage(newPagePath);
+    const isPageVerified = await verifyPage(path);
     if (!isPageVerified) {
       const errorMessage = `Unable to verify page creation.
         It is likely that your new page was created but is not yet available.
         Click ok to visit the new page; if it does not load, wait a while and reload.`;
       return Promise.reject(new Error(errorMessage));
     }
-    return Promise.resolve(newPagePath);
+    return Promise.resolve(path);
   }
   if (result.message) {
     return Promise.reject(new Error(result.message));
@@ -78,7 +78,7 @@ const createPage = async ({ path, client, template } : any) => {
 
 const NewPageComp = (props : NewPageProps) => {
   const {
-    status, ui, errors, errorMessage, newPagePath,
+    status, errorMessage, newPagePath,
   } = props;
   const {
     ComponentFormLabel,
@@ -87,37 +87,22 @@ const NewPageComp = (props : NewPageProps) => {
     ComponentFormWarning,
     ComponentFormTitle,
     ComponentFormLink,
-  } = getUI(ui);
-  // ensure trailing slash is present
-  const currentPage = window.location.href.replace(/\/?$/, '/');
-  const formTitle = 'Add a New Page';
+  } = useMenuOptionUI();
+  const formTitle = 'Add a Blank Page';
+  const { subPageTemplate } = useGatsbyPageContext();
+  const template = subPageTemplate || DEFAULT_PAGE_TEMPLATE;
   switch (status) {
     case NewPageState.Init: {
-      const validate = useCallback(
-        (value: string) => (!value || !RegExp(/^[a-z0-9_-]+$/i).test(value)
-          ? 'No special characters or spaces allowed'
-          : undefined),
-        [],
-      );
       return (
         <>
           <ComponentFormTitle>{formTitle}</ComponentFormTitle>
-          <ComponentFormLabel htmlFor="new-page-path">
-            URL
-            <br />
-            {`${currentPage}...`}
-          </ComponentFormLabel>
+          <ComponentFormLabel>Template</ComponentFormLabel>
           <ComponentFormText
-            field="path"
-            id="new-page-path"
-            validate={validate}
-            validateOnChange
-            validateOnBlur
+            field="template"
+            disabled
+            initialValue={template}
           />
-          {errors && errors.path && (
-          <ComponentFormWarning>{errors.path}</ComponentFormWarning>
-          )}
-
+          <NewPageURLField />
         </>
       );
     }
@@ -148,11 +133,11 @@ const NewPageComp = (props : NewPageProps) => {
   }
 };
 
-const formPageAdd = (client: Client, template: string) => contextMenuForm({
+const formPageAdd = (client: Client) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
-})(({ formState, ui, formApi } : any) => {
-  const { ComponentFormText } = getUI(ui);
+})(({ formState, formApi } : any) => {
+  const { ComponentFormText } = useMenuOptionUI();
   const {
     submits, errors, invalid, values,
   } = formState;
@@ -160,7 +145,9 @@ const formPageAdd = (client: Client, template: string) => contextMenuForm({
     status: NewPageState.Init,
   });
   const context = useEditContext();
-  const { path } = values;
+  const basePagePath = usePagePath();
+  const { pageURL, pagePath, template } = values;
+  const path = pageURL ? pageURL : `${basePagePath}/${pagePath}`;
   useEffect(() => {
     // If the form is submitted and valid then lets try to creat a page.
     if (submits && path && invalid === false) {
@@ -188,10 +175,10 @@ const formPageAdd = (client: Client, template: string) => contextMenuForm({
       <ComponentFormText type="hidden" field="keepOpen" initialValue />
       <NewPageComp
         status={status}
-        ui={ui}
         errorMessage={errorMessage}
         errors={errors}
         newPagePath={newPagePath}
+        newPageTemplate={template}
       />
     </>
   );
@@ -201,15 +188,22 @@ const defaultClient = new BackendClient();
 
 const useMenuOptions = () => {
   const context = useEditContext();
-  const gatsbyPage = useGatsbyPageContext();
 
   const menuOptions = [
     {
-      name: 'newpage',
-      icon: 'note_add',
+      name: 'page',
       label: 'Page',
       isHidden: useCallback(() => !context.isEdit, []),
-      handler: () => formPageAdd(defaultClient, gatsbyPage.subPageTemplate),
+      icon: 'note_add',
+      Component: ContextSubMenu,
+    },
+    {
+      name: 'newpage',
+      icon: 'check_box_outline_blank',
+      label: 'Blank',
+      isHidden: useCallback(() => !context.isEdit, []),
+      handler: () => formPageAdd(defaultClient),
+      group: 'page',
     },
   ];
   return menuOptions;

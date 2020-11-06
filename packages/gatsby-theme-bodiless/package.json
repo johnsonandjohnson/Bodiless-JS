@@ -45,6 +45,7 @@
   "dependencies": {
     "@bodiless/core": "^0.0.58",
     "@bodiless/core-ui": "^0.0.58",
+    "@bodiless/components": "^0.0.58",
     "@bodiless/fclasses": "^0.0.58",
     "@bodiless/ui": "^0.0.58",
     "@types/nodegit": "^0.26.11",
