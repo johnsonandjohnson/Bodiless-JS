@@ -96,7 +96,6 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
           <finalUI.FlexSection>
             <finalUI.ComponentLinkWrapper
               onClick={() => {
-               // document.querySelectorAll('input[type=checkbox]').forEach(el => (el.checked = false));
                 setActiveSearch('');
                 setActiveFilters([]);
               }}
