@@ -18,6 +18,8 @@ import {
   withBurgerSubmenu,
 } from './components/BurgerMenu';
 
+import './main.css';
+
 export {
   SingleAccordion,
   SingleAccordionClean,

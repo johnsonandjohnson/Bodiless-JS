@@ -53,12 +53,6 @@ Tailwind CSS compilation is configured and enabled by default. One can disable c
 
 Tailwind CSS compilation is configured using PostCSS approach. gatsby-plugin-postcss is leveraged for this purpose.
 
-#### CSS purging
-
-Tailwind CSS purging is configured and enabled by default. One can disable css purging by setting BODILESS_PURGE_CSS_ENABLED env variable to '0'.
-
-CSS purging is enabled for @bodiless/ui tailwind css and for site level tailwind css. Assumption is made that site level tailwind styles are in `src/css/style.css`. One can override path to site level styles by configuring BODILESS_TAILWIND_SITE_CSS env variable.
-
 #### Exclude imported CSS from static builds
 
 One can exclude css resources from static build by configuring BODILESS_ADMIN_ONLY_CSS_FILES environment variable. By default, all css resources are included to the static build.
