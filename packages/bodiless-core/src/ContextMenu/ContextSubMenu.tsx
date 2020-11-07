@@ -17,22 +17,23 @@ import React, { FC } from 'react';
 import { addProps, Div } from '@bodiless/fclasses';
 import ContextMenuItem from '../components/ContextMenuItem';
 import { ContextMenuBase } from '../components/ContextMenu';
-import { getUI } from '../components/ContextMenuContext';
+import { useMenuOptionUI } from '../components/ContextMenuContext';
 import { FormChrome } from '../contextMenuForm';
 import type { IContextMenuItemProps, ContextMenuFormProps } from '../Types/ContextMenuTypes';
 
 const ContextSubMenu: FC<IContextMenuItemProps> = props => {
   const {
-    option, children, ui, ...rest
+    option: option$, name, children, ...rest
   } = props;
+  const option = option$ || { name };
 
-  const { HorizontalToolbarButton } = getUI(ui);
+  const { HorizontalToolbarButton } = useMenuOptionUI();
 
-  const finalUi = getUI({
-    ...ui,
+  const finalUi = {
+    ...useMenuOptionUI(),
     Toolbar: addProps({ 'aria-label': `Context Submenu ${option.label} form` })(Div),
     ToolbarButton: HorizontalToolbarButton,
-  });
+  };
 
   const { ContextSubMenu: SubMenu } = finalUi;
   const title = option.label ? (typeof option.label === 'function' ? option.label() : option.label) : '';
@@ -53,7 +54,7 @@ const ContextSubMenu: FC<IContextMenuItemProps> = props => {
     </ContextMenuBase>
   );
   const newOption = { ...option, handler };
-  return <ContextMenuItem option={newOption} ui={ui} {...rest} />;
+  return <ContextMenuItem option={newOption} name={option.name} {...rest} />;
 };
 
 export default ContextSubMenu;

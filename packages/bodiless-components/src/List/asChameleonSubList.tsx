@@ -1,58 +1,53 @@
 import { v1 } from 'uuid';
 import { identity, flow } from 'lodash';
+import type { EditButtonOptions, UseBodilessOverrides } from '@bodiless/core';
 import {
   withDesign, HOC, Design, withoutProps,
 } from '@bodiless/fclasses';
-import { useEditContext, PageEditContextInterface } from '@bodiless/core';
-import { useCallback } from 'react';
 import {
   useChameleonContext, withChameleonContext,
   withChameleonComponentFormControls, applyChameleon, withChameleonButton,
 } from '../Chameleon';
 
-const hasChildSubList = (context: PageEditContextInterface): boolean => {
-  const descendants = context.activeDescendants || [];
-  // The first child list is the one to which this toggle applies,
-  // so we check to see if more than one.
-  return descendants.filter(c => c.type === 'sublist-toggle').length > 1;
-};
-
-const useChameleonOverrides = () => {
-  const context = useEditContext();
+const useChameleonOverrides = ():Partial<EditButtonOptions<any, any>> => {
   const { isOn } = useChameleonContext();
   return {
-    isHidden: useCallback(() => hasChildSubList(context), []),
     icon: isOn ? 'repeat' : 'playlist_add',
-    label: 'Sub',
     name: `chameleon-sublist-${v1()}`,
+    label: 'Sub',
+    groupMerge: 'merge-up',
     formTitle: 'Sublist',
   };
 };
 
-const useToggleOverrides = () => {
+const useToggleOverrides = ():Partial<EditButtonOptions<any, any>> => {
   const { isOn } = useChameleonContext();
-  const context = useEditContext();
   return {
-    isHidden: useCallback(() => isOn || hasChildSubList(context), [isOn]),
+    isHidden: isOn,
     icon: 'playlist_add',
-    label: 'Sub',
     name: `chameleon-sublist-${v1()}`,
+    label: 'Sub',
+    groupMerge: 'merge-up',
+    // label: 'Add',
+    // groupLabel: 'Sublist',
     formTitle: 'Sublist',
   };
 };
 
-const useOverrides = () => {
+const getUseOverrides = (
+  useOverrides: UseBodilessOverrides = () => ({}),
+): UseBodilessOverrides => props => {
   const { selectableComponents } = useChameleonContext();
   return Object.keys(selectableComponents).length > 1
-    ? useChameleonOverrides()
-    : useToggleOverrides();
+    ? { ...useChameleonOverrides(), ...useOverrides(props) }
+    : { ...useToggleOverrides(), ...useOverrides(props) };
 };
 
-const asChameleonSubList = flow(
+const asChameleonSubList = (useOverrides?: UseBodilessOverrides) => flow(
   applyChameleon,
   withoutProps('onSubmit'),
   withChameleonComponentFormControls,
-  withChameleonButton(useOverrides),
+  withChameleonButton(getUseOverrides(useOverrides)),
   withChameleonContext('cham-sublist'),
 );
 
@@ -92,8 +87,11 @@ const withSubListDesign = (depth: number) => (
  * @param Depth The number of nested sublists to attach.
  * @return An function accepting a sublist definition and returning an HOC which adds the sublists.
  */
-const withSubLists = (depth: number) => (asSubList$: HOC|Design<any>): HOC => (
-  withSubListDesign(depth)(asSubList$, asChameleonSubList)
+const withSubLists = (
+  depth: number,
+  useOverrides?: UseBodilessOverrides,
+) => (asSubList$: HOC|Design<any>): HOC => (
+  withSubListDesign(depth)(asSubList$, asChameleonSubList(useOverrides))
 );
 export default asChameleonSubList;
 export { withSubLists, withSubListDesign };

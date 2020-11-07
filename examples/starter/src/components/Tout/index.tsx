@@ -29,17 +29,18 @@ const asEditableTout = flow(
   withDesign({
     Image: asEditableImage('image'),
     ImageLink: withSidecarNodes(
-      asEditableLink('link'),
+      asEditableLink('link', undefined, () => ({ label: 'Link' })),
     ),
     Title: withEditorSimple('title', 'Tout Title Text'),
     Link: flow(
       withEditorSimple('ctaText', 'CTA'),
       withSidecarNodes(
-        asEditableLink('link'),
+        asEditableLink('link', undefined, () => ({ groupLabel: 'CTA', label: 'Link' })),
       ),
     ),
     Body: withEditorBasic('body', 'Tout Body Text'),
   }),
 );
+
 const Tout = asEditableTout(ToutClean);
 export default Tout;

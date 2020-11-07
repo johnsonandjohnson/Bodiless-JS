@@ -16,7 +16,7 @@ import React, {
   FC, ReactElement, ReactNode, ComponentType,
 } from 'react';
 import { flow } from 'lodash';
-import { ContextMenuGroupProps } from '../Types/ContextMenuTypes';
+import type { IContextMenuItemProps } from '../Types/ContextMenuTypes';
 
 type GroupTree = {
   [name: string]: {
@@ -29,7 +29,7 @@ export const asElementArray = (children: ReactNode): ReactElement[] => React.Chi
   .toArray(children)
   .filter(React.isValidElement);
 
-export const addMissingGroups = (GroupComponent: ComponentType<ContextMenuGroupProps>) => (
+export const addMissingGroups = (GroupComponent: ComponentType<IContextMenuItemProps>) => (
   (elements: ReactElement[]): ReactElement[] => elements.reduce(
     (acc: ReactElement[], el: ReactElement) => {
       if (el.props.group && !acc.find(el$ => el$.props.name === el.props.group)) {
@@ -64,7 +64,7 @@ export const cloneChildren = (props: any = {}) => (tree: GroupTree): ReactElemen
   }, []);
 
 const buildChildren = (
-  DefaultGroupComponent: ComponentType<ContextMenuGroupProps> = React.Fragment,
+  DefaultGroupComponent: ComponentType<IContextMenuItemProps> = React.Fragment,
   props: any = {},
 ) => flow(
   asElementArray,
@@ -75,7 +75,7 @@ const buildChildren = (
 
 type GroupedChildrenProps = {
   components: {
-    Group: ComponentType<ContextMenuGroupProps>,
+    Group: ComponentType<IContextMenuItemProps>,
   },
   [prop: string]: any,
 };

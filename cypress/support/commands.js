@@ -52,7 +52,7 @@ Cypress.Commands.add("revertChanges", () => {
 
 
 Cypress.Commands.add("clickEdit", () => {
-  cy.xpath('//*[@aria-label="Edit"]')
+  cy.xpath('//*[contains(@aria-label,"Global Context Menu")]//*[@aria-label="Edit"]')
     .click()
 })
 

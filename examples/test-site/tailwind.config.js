@@ -1,8 +1,11 @@
 module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: false,
+    purgeLayersByDefault: true,
   },
+  purge: [
+    './src/**/!(*.d).{ts,js,jsx,tsx}',
+  ],
   /*
   New for V1 - the legacy 'options' is now top-level
   */
@@ -21,15 +24,6 @@ module.exports = {
       width: {
         content: 'max-content',
       },
-    },
-
-    // tailwindcss-aspect-ratio configs
-    aspectRatio: { // defaults to {}
-      none: 0,
-      square: [1, 1], // or 1 / 1, or simply 1
-      '16/9': [16, 9], // or 16 / 9
-      '4/3': [4, 3], // or 4 / 3
-      '21/9': [21, 9], // or 21 / 9
     },
 
     /*
@@ -540,7 +534,5 @@ module.exports = {
   */
 
   plugins: [
-    // eslint-disable-next-line global-require
-    require('tailwindcss-aspect-ratio'),
   ],
 };

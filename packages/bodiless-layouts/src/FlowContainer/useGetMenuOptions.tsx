@@ -15,7 +15,7 @@
 import { useCallback } from 'react';
 import { omit } from 'lodash';
 import {
-  useEditContext, useActivateOnEffect, useGetter,
+  useEditContext, useActivateOnEffect, useGetter, TMenuOption,
 } from '@bodiless/core';
 import { EditFlowContainerProps, FlowContainerItem } from './types';
 import type { FlowContainerDataHandlers, FlowContainerItemHandlers } from './model';
@@ -92,6 +92,8 @@ const useDeleteButton = (
     name: 'delete',
     label: 'Delete',
     icon: 'delete',
+    global: false,
+    local: true,
     handler,
     isHidden: useCallback(() => !context.isEdit, []),
   };
@@ -109,10 +111,13 @@ const useAddButton = (
   const isHidden = item
     ? useCallback(() => !context.isEdit || getItems().length >= maxComponents, [maxComponents])
     : useCallback(() => !context.isEdit || getItems().length > 0, []);
+  // @TODO For nested flow containers we'll have to give these unique names.
   const name = item ? 'add-item' : 'add';
   return {
     icon: 'add',
     label: 'Add',
+    global: false,
+    local: true,
     name,
     handler: () => componentSelectorForm(props, insertItem),
     activateContext: false,
@@ -131,6 +136,8 @@ const useSwapButton = (
     name: 'swap',
     label: 'Swap',
     icon: 'repeat',
+    global: false,
+    local: true,
     handler: () => componentSelectorForm(props, replaceItem),
     activateContext: false,
     isHidden: useCallback(() => !context.isEdit, []),
@@ -146,7 +153,7 @@ const useSwapButton = (
  */
 function useMenuOptions(props: EditFlowContainerProps) {
   const handlers = { ...useFlowContainerDataHandlers(), ...useItemHandlers() };
-  const addButton = useAddButton(handlers, withNoDesign(props));
+  const addButton: TMenuOption = useAddButton(handlers, withNoDesign(props));
   return [addButton];
 }
 

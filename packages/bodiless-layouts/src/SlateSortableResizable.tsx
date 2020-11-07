@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React, { ComponentType, HTMLProps } from 'react';
 import { ResizeCallback } from 're-resizable';
 import { SortableElementProps } from 'react-sortable-hoc';
 import {
@@ -27,12 +27,14 @@ import CleanWrapper, { Props as WrapperProps } from './SortableResizableWrapper'
 
 export type FinalUI = {
   Wrapper: ComponentType<WrapperProps & SortableElementProps>,
+  SnapIndicator: ComponentType<HTMLProps<HTMLDivElement>>|string,
 };
 export type UI = Partial<FinalUI>;
 const defaultUI: FinalUI = {
   Wrapper: CleanWrapper,
+  SnapIndicator: 'div',
 };
-const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });
+export const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });
 
 type Props = {
   children: React.ReactNode;
@@ -83,7 +85,7 @@ const SlateSortableResizable = (props: Props) => {
 
   return (
     <PageContextProvider
-      name={`flexItem-${uuid}`}
+      name="Flow Container Item"
       id={`flexItem-${uuid}`}
       getMenuOptions={useGetMenuOptions()}
     >

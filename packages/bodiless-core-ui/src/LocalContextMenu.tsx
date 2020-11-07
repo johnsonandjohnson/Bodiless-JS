@@ -15,9 +15,9 @@
 import React, { FC } from 'react';
 import ReactTooltip from 'rc-tooltip';
 import { flow } from 'lodash';
-import { addClasses, addProps } from '@bodiless/fclasses';
+import { addClasses, addProps, removeClasses } from '@bodiless/fclasses';
 import {
-  ContextMenu, ContextMenuProps, ContextMenuUI,
+  ContextMenu, ContextMenuProps, ContextMenuUI, IContextMenuItemProps,
 } from '@bodiless/core';
 import {
   ComponentFormTitle, ComponentFormLabel, ComponentFormText, ComponentFormButton,
@@ -29,9 +29,18 @@ import {
 } from '@bodiless/ui';
 import ReactTagsField from './ReactTags';
 
+// Stacked toolbar orientation...
+// Horizontal
+const toolbarClasses = 'bl-flex';
+const groupClasses = 'bl-border-l first:bl-border-l-0 bl-border-white bl-px-3';
+// Vertical
+// const toolbarClasses = '';
+// eslint-disable-next-line max-len
+// const groupClasses = 'bl-border-t first:bl-border-t-0 bl-border-white bl-mt-grid-2 first:bl-mt-grid-0';
+
 // For accessibility attributes, see https://www.w3.org/TR/wai-aria-practices/examples/toolbar/toolbar.html
 const Toolbar = flow(
-  addClasses('bl-flex'),
+  addClasses(toolbarClasses),
   addProps({ role: 'toolbar', 'aria-label': 'Local Context Menu' }),
 )(Div);
 
@@ -41,6 +50,27 @@ const LocalTooltip: FC<ReactTooltip['props']> = props => (
     placement="bottomLeft"
   />
 );
+
+const GroupTitle = flow(
+  removeClasses('bl-mb-grid-2 bl-min-w-xl-grid-1'),
+)(ComponentFormTitle);
+
+const ContextMenuGroup: FC<IContextMenuItemProps> = ({ option, children }) => {
+  const hidden: boolean = Boolean(option && (
+    typeof option.isHidden === 'function' ? option.isHidden() : option.isHidden
+  ));
+  if (hidden) return null;
+  return (
+    <div className={groupClasses}>
+      {option && option.label && (
+        <GroupTitle>{option.label}</GroupTitle>
+      )}
+      <div className="flex">
+        {children}
+      </div>
+    </div>
+  );
+};
 
 export const FormWrapper = addClasses('bl-flex')(Div);
 
@@ -70,6 +100,7 @@ const ui: ContextMenuUI = {
   FormWrapper,
   Tooltip: LocalTooltip,
   ReactTags: ReactTagsField,
+  ContextMenuGroup,
 };
 
 const LocalContextMenu: FC<ContextMenuProps> = props => (

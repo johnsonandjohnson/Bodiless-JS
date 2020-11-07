@@ -14,7 +14,8 @@
   "files": [
     "/lib",
     "/doc",
-    "/bodiless.docs.json"
+    "/bodiless.docs.json",
+    "/index.tailwind.css"
   ],
   "repository": {
     "type": "git",
@@ -24,10 +25,12 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build": "npm run build:css && npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build:css": "postcss index.tailwind.css -o ./src/main.css",
     "build:watch": "npm run build -- --watch",
     "build:api-doc": "typedoc --out doc/api --mode file",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
+    "copy": "copyfiles -u 1 \"./src/**/*.css\" \"./lib/\""
   },
   "peerDependencies": {
     "react": "^16.8.1"

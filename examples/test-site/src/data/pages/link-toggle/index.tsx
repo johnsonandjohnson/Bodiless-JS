@@ -15,7 +15,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { withBodilessLinkToggle, asEditable } from '@bodiless/components';
-import { A, HOC } from '@bodiless/fclasses';
+import { A } from '@bodiless/fclasses';
 import { flowRight } from 'lodash';
 import { withNodeKey } from '@bodiless/core/lib/withNode';
 import Layout from '../../../components/Layout';
@@ -24,7 +24,7 @@ import { asEditableLink, asLink } from '../../../components/Elements.token';
 export const LinkToggle = flowRight(
   withNodeKey('linktoggle1'),
   asEditable('text', 'Link Toggle'),
-  withBodilessLinkToggle(asEditableLink('link') as HOC),
+  withBodilessLinkToggle(asEditableLink)('link'),
   asLink,
 )(A);
 

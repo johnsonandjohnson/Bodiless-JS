@@ -26,6 +26,7 @@ import {
   asBodilessComponent,
   BodilessOptions,
   useNode,
+  AsBodiless,
 } from '@bodiless/core';
 
 import { useDropzone } from 'react-dropzone';
@@ -172,7 +173,8 @@ type Props = ImageProps & { ui?: TImagePickerUI};
 // Options used to create an edit button.
 const options: BodilessOptions<Props, Data> = {
   icon: 'image',
-  label: 'Image',
+  label: 'Select',
+  groupLabel: 'Image',
   name: 'Image',
   renderForm: ({ ui: formUi, formApi, componentProps }) => {
     const { ui: imagePickerUI } = componentProps;
@@ -198,7 +200,9 @@ const options: BodilessOptions<Props, Data> = {
 
 export const withImagePlaceholder = withPropsFromPlaceholder(['src']);
 
-export const asBodilessImage = asBodilessComponent<HTMLProps<HTMLImageElement>, Data>(options);
+export type AsBodilessImage = AsBodiless<HTMLProps<HTMLImageElement>, Data>;
+
+export const asBodilessImage: AsBodilessImage = asBodilessComponent(options);
 
 const Image = asBodilessImage()('img');
 
