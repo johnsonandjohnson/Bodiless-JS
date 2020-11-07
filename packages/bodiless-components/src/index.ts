@@ -72,6 +72,7 @@ import {
 } from './withResponsiveToggle';
 import asBreadcrumb, { useBreadcrumbContext } from './asBreadcrumb';
 import withBodilessLinkToggle from './withBodilessLinkToggle';
+import SocialShare from './SocialShare';
 
 export {
   withBodilessLinkToggle,
@@ -138,6 +139,7 @@ export {
   withDataLayerItem,
   withDefaultDataLayer,
   withDataLayerScript,
+  SocialShare,
 };
 
 export * from './Chameleon/index';
