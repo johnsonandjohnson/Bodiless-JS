@@ -21,13 +21,6 @@ import {
 } from '@bodiless/ui';
 import { ComponentSelector as CleanComponentSelector, ComponentSelectorUI, ComponentSelectorProps } from '@bodiless/layouts';
 
-type Props = {
-  label: string,
-  onChange?: () => void,
-  checked?: boolean,
-  disabled?: boolean,
-};
-
 /**
  * Checkbox component used on flow container.
  *
@@ -35,7 +28,7 @@ type Props = {
  */
 const CheckboxBase = ({
   label, checked, onChange, disabled,
-} : Props) => (
+} : any) => (
   <Input
     type="checkbox"
     name={label}
@@ -44,7 +37,7 @@ const CheckboxBase = ({
     onChange={onChange}
   />
 );
-const CheckBox = stylable<HTMLProps<HTMLInputElement> & Props>(CheckboxBase);
+const CheckBox = stylable<HTMLProps<HTMLInputElement>>(CheckboxBase);
 
 // eslint-disable-next-line import/prefer-default-export
 export const ui: ComponentSelectorUI = {
