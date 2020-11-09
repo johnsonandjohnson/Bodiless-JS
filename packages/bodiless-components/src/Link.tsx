@@ -23,6 +23,8 @@ import {
 import type { AsBodiless, BodilessOptions } from '@bodiless/core';
 import { flowRight } from 'lodash';
 
+import { withDeleteNodeOnUnwrap } from './Chameleon/asBodilessChameleon';
+
 // Type of the data used by this component.
 export type LinkData = {
   href: string;
@@ -63,11 +65,10 @@ const options: BodilessOptions<Props, LinkData> = {
           relative to the root, otherwise the link is relative to the page. Use
           a fully formed URL for external links, e.g., https://www.example.com.
         </ComponentFormDescription>
-        {unwrap && (
-        <ComponentFormUnwrapButton type="button" onClick={removeLinkHandler}>
+
+        <ComponentFormUnwrapButton disabled={!unwrap} type="button" onClick={removeLinkHandler}>
           Remove Link
         </ComponentFormUnwrapButton>
-        )}
       </>
     );
   },
@@ -93,6 +94,7 @@ export const asBodilessLink: AsBodilessLink = (
   // Prevent following the link in edit mode
   ifEditable(
     withExtendHandler('onClick', () => (e: MouseEvent) => e.preventDefault()),
+    withDeleteNodeOnUnwrap(),
   ),
   asBodilessComponent<Props, LinkData>(options)(nodeKeys, defaultData, useOverrides),
   withoutProps(['unwrap']),

@@ -28,7 +28,7 @@ import {
 } from 'informed';
 import {
   Li, Ul, stylable, addClasses, StylableProps, withoutProps, flowIf, hasProp, addProps,
-  removeClasses,
+  removeClasses, addClassesIf,
 } from '@bodiless/fclasses';
 import { ButtonVariantProps, withChild } from '@bodiless/core';
 
@@ -121,8 +121,11 @@ export const ComponentFormButton = addClasses(
   'bl-text-grey-200 bl-cursor-pointer hover:bl-text-green',
 )(Button);
 
-export const ComponentFormUnwrapButton = addClasses(
-  'bl-absolute bl-bottom-0 bl-left-0 bl-mb-5 bl-ml-3 bl-cursor-pointer bl-underline',
+const isDisabled = (props: any) => hasProp('disabled')(props);
+
+export const ComponentFormUnwrapButton = flow(
+  addClassesIf(isDisabled)('bl-text-grey-600 bl-cursor-not-allowed bl-no-underline'),
+  addClasses('bl-absolute bl-bottom-0 bl-left-0 bl-mb-5 bl-ml-3 bl-cursor-pointer bl-underline'),
 )(Button);
 
 export const ComponentFormCloseButton = flow(
