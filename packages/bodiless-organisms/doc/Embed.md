@@ -6,31 +6,7 @@ scales on any device.
 
 ## Site Builder Details
 
-### Activation
-
-1. Install tailwindcss-aspect-ratio package on site level.
-1. Update site tailwind.config.js with:
-
-```js
-// tailwind.config.js
-module.exports = {
-  theme: {
-    aspectRatio: { // defaults to {}
-      'none': 0,
-      'square': [1, 1], // or 1 / 1, or simply 1
-      '16/9': [16, 9],  // or 16 / 9
-      '4/3': [4, 3],    // or 4 / 3
-      '21/9': [21, 9],  // or 21 / 9
-    },
-  },
-  plugins: [
-    // other plugins
-    require('tailwindcss-aspect-ratio'),
-  ],
-};
-```
-
-## Usage
+### Usage
 
 ```js
 import { Embed, asResponsive16By9Embed } from '@bodiless/organisms';
