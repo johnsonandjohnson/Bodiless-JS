@@ -26,10 +26,8 @@ import {
   CanvasX,
   JamStackAppParams,
 } from './jamstack-app';
-import {
-  PageCreator,
-  PageCreatorParams,
-} from './page-creator';
+import { PageCreator } from './page-creator';
+import type { PageCreatorParams } from './page-creator';
 import {
   ScrapedPage,
   Scraper,
@@ -69,12 +67,15 @@ export interface Transformer {
   attributes: string[],
 }
 
+type ExposedPageCreatorParams = Pick<PageCreatorParams, 'isEnabled' | 'pageIndexFile'>;
+
 export interface SiteFlattenerParams {
   websiteUrl: string,
   workDir: string,
   gitRepository?: string,
   trailingSlash?: TrailingSlash,
   scraperParams: ScraperParams,
+  pageCreatorParams: ExposedPageCreatorParams,
   page404Params: Page404Params,
   steps: {
     setup: boolean,
@@ -308,6 +309,7 @@ export class SiteFlattener {
     const htmlParser = new HtmlParser(transformedScrapedPage.processedHtml);
     const htmlToComponentsSettings = this.getHtmlToComponentsSettings();
     const pageCreatorParams: PageCreatorParams = {
+      ...this.params.pageCreatorParams,
       pagesDir: this.canvasX.getPagesDir(),
       staticDir: this.canvasX.getStaticDir(),
       templatePath: this.getPageTemplate(),
@@ -324,7 +326,6 @@ export class SiteFlattener {
       videos: transformedScrapedPage.videos,
       htmlTag: htmlParser.getHtmlTag(),
       bodyTag: htmlParser.getBodyTag(),
-      createPages: true,
       downloadAssets: true,
       htmlToComponents: this.params.htmltojsx,
       allowFallbackHtml: this.params.allowFallbackHtml,

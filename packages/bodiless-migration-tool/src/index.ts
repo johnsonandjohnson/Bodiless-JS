@@ -15,7 +15,6 @@
 /* eslint class-methods-use-this: 0 */
 import { Command, flags } from '@oclif/command';
 import fs from 'fs';
-import path from 'path';
 import {
   SiteFlattener,
   SiteFlattenerParams,
@@ -23,6 +22,7 @@ import {
 } from './site-flattener';
 import postBuild from './post-build';
 import page404Handler from './page404-handler';
+import loadSettings from './loadSettings';
 
 enum CommandType {
   Flatten = 'flatten',
@@ -61,11 +61,12 @@ class MigrationTool extends Command {
   }
 
   async flatten() {
-    const settings = this.getDefaultSettings();
+    const settings = loadSettings();
     const page404Params = page404Handler.getParams(settings);
     const page404Urls = page404Params.page404Url ? [page404Params.page404Url] : [];
     const flattenerParams: SiteFlattenerParams = {
       websiteUrl: settings.url,
+      pageCreatorParams: settings.pageCreator,
       workDir: this.getWorkDir(),
       gitRepository: this.getGitRepo(),
       reservedPaths: ['404'],
@@ -110,15 +111,6 @@ class MigrationTool extends Command {
 
   private getGitRepo(): string {
     return process.env.git_repo || 'https://github.com/johnsonandjohnson/bodiless-js.git';
-  }
-
-  private getDefaultSettings() {
-    const rootSettingsPath = path.resolve(process.cwd(), 'migration-settings.json');
-    const defaultSettingsPath = path.resolve(__dirname, '..', 'settings.json');
-    const rootSettingsExist = fs.existsSync(rootSettingsPath);
-    const settingsPath = rootSettingsExist ? rootSettingsPath : defaultSettingsPath;
-    console.log(`Applying migration settings from ${settingsPath}`);
-    return JSON.parse(fs.readFileSync(settingsPath).toString());
   }
 }
 

@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+/* eslint no-console: 0 */
 import path from 'path';
 import fs from 'fs';
 
@@ -23,25 +24,23 @@ const getSettingsBaseDirs = () => [
   path.resolve(__dirname, '..'),
 ];
 
+const findSettingsFile = (settingsFileName: string) => getSettingsBaseDirs()
+  .map(path$ => path.resolve(path$, settingsFileName))
+  .find(path$ => fs.existsSync(path$));
+
 const loadJsSettings = () => {
-  const settingsPath = getSettingsBaseDirs().some((basePath: string) => {
-    const configPath = path.resolve(basePath, JS_SETTINGS_FILE_NAME);
-    return fs.existsSync(configPath) ? configPath : undefined;
-  });
+  const settingsPath = findSettingsFile(JS_SETTINGS_FILE_NAME);
   if (!settingsPath) return undefined;
-  console.log(`Applying migration settings from ${settingsPath}`);
+  // eslint-disable-next-line import/no-dynamic-require, global-require
   return require(settingsPath);
-}
+};
 
 const loadJsonSettings = () => {
-  const settingsPath = getSettingsBaseDirs().some((basePath: string) => {
-    const configPath = path.resolve(basePath, JSON_SETTINGS_FILE_NAME);
-    return fs.existsSync(configPath) ? configPath : undefined;
-  });
+  const settingsPath = findSettingsFile(JSON_SETTINGS_FILE_NAME);
   if (!settingsPath) return undefined;
   console.log(`Applying migration settings from ${settingsPath}`);
   return JSON.parse(fs.readFileSync(settingsPath).toString());
-}
+};
 
 const loadSettings = () => loadJsSettings() || loadJsonSettings();
 
