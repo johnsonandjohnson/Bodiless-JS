@@ -59,10 +59,11 @@ const applyMandatoryCategories = (
  * @param filters
  * @param components
  */
-const reduceFilters = (filters: any, components: any) =>
-  pickBy(filters, (value: any, category: string) =>
-    components.every((component: any) => category in component.categories),
-  );
+const reduceFilters = (filters: any, components: any) => pickBy(
+  filters,
+  (value: any, category: string) => components
+    .every((component: any) => (category in component.categories)),
+);
 
 const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
   const {
