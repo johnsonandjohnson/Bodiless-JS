@@ -94,7 +94,7 @@ export const asBodilessLink: AsBodilessLink = (
   // Prevent following the link in edit mode
   ifEditable(
     withExtendHandler('onClick', () => (e: MouseEvent) => e.preventDefault()),
-    withDeleteNodeOnUnwrap(),
+    withDeleteNodeOnUnwrap(nodeKeys),
   ),
   asBodilessComponent<Props, LinkData>(options)(nodeKeys, defaultData, useOverrides),
   withoutProps(['unwrap']),
