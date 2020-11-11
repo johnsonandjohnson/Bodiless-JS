@@ -78,7 +78,7 @@ export type FinalUI = {
   AccordionWrapper: ComponentType<HTMLProps<HTMLDivElement>> | string;
   // A div the will wrap the AccordionCheckbox
   AccordionCheckboxWrapper: ComponentType<HTMLProps<HTMLDivElement>> | string;
-  // An Anchor tag that will wrap ea  ch Accordion Item
+  // An Anchor tag that will wrap each Accordion Item
   AccordionItemWrapper: ComponentType<HTMLProps<HTMLAnchorElement>> | string;
   // A label that will be displayed by the AccordionCheckbox
   AccordionCheckboxLabel: ComponentType<HTMLProps<HTMLLabelElement>> | string;
