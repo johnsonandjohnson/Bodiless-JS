@@ -30,13 +30,19 @@ import {
   ItemListProps,
   RenderList,
 } from './types';
-import { ComponentDisplayModeProvider, ComponentDisplayMode } from '../FlowContainer/ComponentDisplayMode';
+import {
+  ComponentDisplayModeProvider,
+  ComponentDisplayMode,
+} from '../FlowContainer/ComponentDisplayMode';
 
 export { defaultUI } from './uiContext';
 
 export { uiContext };
 
-const applyMandatoryCategories = (components: any, mandatoryCategories: string[]) => {
+const applyMandatoryCategories = (
+  components: any,
+  mandatoryCategories: string[],
+) => {
   mandatoryCategories.forEach(mandatoryCategory => {
     components.forEach((component: any) => {
       if (!(mandatoryCategory in component.categories)) {
@@ -53,15 +59,17 @@ const applyMandatoryCategories = (components: any, mandatoryCategories: string[]
  * @param filters
  * @param components
  */
-const reduceFilters = (filters: any, components: any) => pickBy(
-  filters,
-  (value: any, category: string) => components
-    .every((component: any) => (category in component.categories)),
-);
+const reduceFilters = (filters: any, components: any) =>
+  pickBy(filters, (value: any, category: string) =>
+    components.every((component: any) => category in component.categories),
+  );
 
 const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
   const {
-    components: allComponents, ui, onSelect, mandatoryCategories,
+    components: allComponents,
+    ui,
+    onSelect,
+    mandatoryCategories,
   } = props;
 
   const [activeFilters, setActiveFilters] = useState([]);
@@ -92,10 +100,9 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
     <ComponentDisplayModeProvider mode={ComponentDisplayMode.ComponentSelector}>
       <uiContext.Provider value={finalUI}>
         <finalUI.MasterWrapper>
-
           <finalUI.FlexSection>
             <finalUI.ComponentLinkWrapper
-              isDisabled={activeFilters.length === 0}
+              disabled={activeFilters.length === 0}
               onClick={() => {
                 if (activeFilters.length !== 0 || activeSearch.length !== 0) {
                   setActiveSearch('');
@@ -121,12 +128,8 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
               activeSearch={activeSearch}
               setActiveSearch={setActiveSearch}
             />
-            <ItemList
-              onSelect={onSelect}
-              components={newCompRender}
-            />
+            <ItemList onSelect={onSelect} components={newCompRender} />
           </finalUI.FlexSectionFull>
-
         </finalUI.MasterWrapper>
       </uiContext.Provider>
     </ComponentDisplayModeProvider>
@@ -167,7 +170,8 @@ const TextFormatSelector: React.FC<ComponentSelectorProps> = props => {
 // A HoverMenu option which will bring up the component selector form and then
 // insert an inline for the selected component.
 // See HoverMenu props definitions for the fields of an option.
-const textFormatSelectorOption = ( // eslint-ignore-line
+const textFormatSelectorOption = (
+  // eslint-ignore-line
   components: ComponentWithMeta<any>[],
   ui: ComponentSelectorUI,
   getEditor: () => {
@@ -203,8 +207,5 @@ const textFormatSelectorOption = ( // eslint-ignore-line
 });
 
 export default ComponentSelector;
-export {
-  TextFormatSelector,
-  textFormatSelectorOption,
-};
+export { TextFormatSelector, textFormatSelectorOption };
 export const UIConsumer = uiContext.Consumer;

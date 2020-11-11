@@ -16,7 +16,6 @@ import {
   ComponentType, HTMLProps, MouseEvent, ReactNode,
 } from 'react';
 import { FormApi, FormState, FieldProps } from 'informed';
-import { LinkVariantProps } from '@bodiless/core';
 
 export type AllowedComponent = ComponentWithMeta<any>;
 export type RenderList = (options: {
@@ -112,7 +111,7 @@ export type FinalUI = {
   // An h3 that wraps the component title element of a component box
   ComponentTitleWrapper: ComponentType<HTMLProps<HTMLHeadingElement>> | string;
   // A link element.
-  ComponentLinkWrapper: ComponentType<HTMLProps<HTMLAnchorElement> & LinkVariantProps> | string;
+  ComponentLinkWrapper: ComponentType<HTMLProps<HTMLAnchorElement>> | string;
 
   // A span that wraps the icon element of a component box
   IconWrapper: ComponentType<HTMLProps<HTMLSpanElement>> | string;
