@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/gatsby-theme-bodiless",
-  "version": "0.0.58",
+  "version": "0.0.59",
   "description": "A Gatsby theme for BodilessJS",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
@@ -43,10 +43,10 @@
     "clean": "rimraf -rf \"dist\" && rimraf index* && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/core": "^0.0.58",
-    "@bodiless/core-ui": "^0.0.58",
-    "@bodiless/fclasses": "^0.0.58",
-    "@bodiless/ui": "^0.0.58",
+    "@bodiless/core": "^0.0.59",
+    "@bodiless/core-ui": "^0.0.59",
+    "@bodiless/fclasses": "^0.0.59",
+    "@bodiless/ui": "^0.0.59",
     "@types/nodegit": "^0.26.11",
     "@types/walk": "^2.3.0",
     "axios": "^0.21.0",
