@@ -12,98 +12,156 @@
  * limitations under the License.
  */
 
-import React, { FunctionComponent as FC } from 'react';
-// import { HelmetProps } from 'react-helmet';
-// import { FieldProps } from 'informed';
+import React, {
+  FunctionComponent as FC,
+  useState,
+} from 'react';
+import { flow } from 'lodash';
+import {
+  Div,
+  Button,
+  Ul,
+  Li,
+  designable,
+  addClassesIf,
+} from '@bodiless/fclasses';
 // import {
-//   useNode, withNodeKey, withNode, withSidecarNodes, withNodeDataHandlers, withoutProps,
-//   withData, ifEditable, asReadOnly,
+//   useMenuOptionUI,
 // } from '@bodiless/core';
-// import type { WithNodeKeyProps } from '@bodiless/core';
-// import { flowRight } from 'lodash';
-// import { withMetaSnippet } from './withMetaForm';
+import {
+  withMeta,
+} from '../Meta/Meta';
+import withMetaForm from '../Meta/withMetaForm';
+import {
+  ProvidersComponents,
+  SocialShareProvidersProps,
+  SocialShareComponents,
+  SocialShareProps,
+  SocialShareProdviderScript,
+} from './types';
 
-const SocialShare: FC = () => {
-  // Toggle buttons
-  return <>Social Share</>;
+const withMetaOGTitle = withMeta({
+  name: 'og:title',
+  // useFormElement: () => useMenuOptionUI().ComponentFormTextArea,
+  label: 'Description',
+  // placeholder: 'Rec < 160 char',
+});
+
+const WrapperClean: FC = ({ children, ...props }) => <Div {...props}>{ children }</Div>;
+/**
+ * Display a social share button.
+ *
+ * @param buttonContent - a string or JSX element provides content of share button.
+ *        for example, to display a Material Share icon, use
+ *            <MaterialIcon className="bl-material-icons" icon="share" />
+ */
+const ButtonClean: FC<any> = ({
+  buttonContent: content,
+  onClick,
+  ...props
+}) => (
+  <Button onClick={onClick} {...props}>
+    {content || 'Share'}
+  </Button>
+);
+
+const providersComponents: ProvidersComponents = {
+  ProvidersWrapper: Ul,
+  ProviderList: Li,
+};
+const ProvidersClean: FC<SocialShareProvidersProps> = ({
+  components,
+  expanded,
+  providers,
+}) => {
+  const {
+    ProvidersWrapper,
+    ProviderList,
+  } = components;
+
+  const ProvidersWrapperStyled = flow(
+    addClassesIf(() => !expanded)('hidden'),
+  )(ProvidersWrapper);
+
+  const applyScript = (script: SocialShareProdviderScript) => {
+    const firstScript = document.getElementsByTagName('script')[0];
+    if (document.getElementById(script.id)) return;
+    const js = document.createElement('script');
+    js.id = script.id;
+    js.src = script.src;
+    if (firstScript && firstScript.parentNode) {
+      firstScript.parentNode.insertBefore(js, firstScript);
+    }
+  };
+
+  return (
+    <ProvidersWrapperStyled>
+      {
+        providers.map(Provider => {
+          if (Provider.script) {
+            applyScript(Provider.script);
+          }
+          return (
+            <ProviderList key={Provider.id}>
+              { Provider.element }
+            </ProviderList>
+          );
+        })
+      }
+    </ProvidersWrapperStyled>
+  );
 };
 
+const SocialShareProviders = designable(providersComponents)(ProvidersClean);
+
+const socialShareComponents: SocialShareComponents = {
+  SocialShareWrapper: WrapperClean,
+  SocialShareButton: ButtonClean,
+  SocialShareProdviders: SocialShareProviders,
+};
+
+export const SocialShareBase: FC<SocialShareProps> = ({
+  components,
+  buttonContent,
+  providers,
+  ...props
+}) => {
+  const [expanded, setExpanded] = useState(false);
+  const toggleExpanded = () => setExpanded(!expanded);
+  const {
+    SocialShareWrapper,
+    SocialShareButton,
+    SocialShareProdviders,
+  } = components;
+
+  return (
+    <SocialShareWrapper {...props}>
+      <SocialShareButton buttonContent={buttonContent} onClick={toggleExpanded} />
+      <SocialShareProdviders
+        expanded={expanded}
+        providers={providers}
+      />
+    </SocialShareWrapper>
+  );
+};
+
+const useMenuOptions = () => [
+  {
+    name: 'share',
+    icon: 'share',
+    label: 'Social Share',
+  },
+];
+
+const seoFormHeader = {
+  title: 'SEO Data Management',
+  description: `Enter the page level data used for SEO. 
+  This is metadata needed for SEO that will go in the page header.`,
+};
+
+const SocialShare = flow(
+  withMetaForm(useMenuOptions, seoFormHeader),
+  // withMetaOGTitle('og:title', ''),
+  designable(socialShareComponents),
+)(SocialShareBase);
 export default SocialShare;
-
-// type BaseProps = PropsWithChildren<HelmetProps>;
-// type Data = {
-//   content: string;
-// };
-// type Props = BaseProps & Data;
-
-// type BasicOptions = {
-//   name: string;
-// };
-
-// export type Options = {
-//   label: string;
-//   useFormElement?: () => CT<FieldProps<any, any>>,
-//   placeholder?: string;
-// } & BasicOptions;
-
-// const withTitle$ = () => (
-//   HelmetComponent: CT<BaseProps>,
-// ) => ({ children, content, ...rest }: Props) => (
-//   <HelmetComponent {...rest}>
-//     {children}
-//     {content && <title>{content}</title>}
-//   </HelmetComponent>
-// );
-
-// const withMeta$ = (options: Options) => (
-//   HelmetComponent: CT<BaseProps>,
-// ) => ({ children, content, ...rest }: Props) => (
-//   <HelmetComponent {...rest}>
-//     {children}
-//     {content && <meta name={options.name} content={content} />}
-//   </HelmetComponent>
-// );
-
-// // @todo withHeadElement to its own file.
-// export const withHeadElement = (renderHoc: Function) => (options: Options) => (
-//   nodeKey?: WithNodeKeyProps, defaultContent?: string,
-// ) => withSidecarNodes(
-//   withNodeKey(nodeKey),
-//   withNode,
-//   withNodeDataHandlers({ content: defaultContent }),
-//   ifEditable(withMetaSnippet({ ...options })),
-//   withoutProps('setComponentData'),
-//   withData,
-//   renderHoc(options),
-// );
-
-// const withMeta = withHeadElement(withMeta$);
-// const withTitle = withHeadElement(withTitle$);
-
-// const withMetaStatic = (options: BasicOptions) => (
-//   nodeKey?: WithNodeKeyProps, defaultContent?: string,
-// ) => flowRight(
-//   asReadOnly,
-//   // @ts-ignore: non-editable meta data pass in BasicOptions.
-//   withMeta(options)(nodeKey, defaultContent),
-// );
-
-// const withMetaHtml = (
-//   lang: string,
-//   nodeKey: string,
-//   nodeCollection: string | undefined,
-// ) => (HelmetComponent: CT) => (props: any) => {
-//   const { children, ...rest } = props;
-//   const { node } = useNode(nodeCollection);
-//   const childNode = node.child(nodeKey);
-//   return (
-//     <HelmetComponent {...rest}>
-//       {children}
-//       <html lang={lang} {...childNode.data} />
-//     </HelmetComponent>
-//   );
-// };
-
-// export {
-//   withMeta, withMetaHtml, withMetaStatic, withTitle,
-// };
