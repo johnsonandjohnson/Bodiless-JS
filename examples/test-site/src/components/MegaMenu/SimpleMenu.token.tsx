@@ -21,7 +21,7 @@ import { withDesign, addClasses } from '@bodiless/fclasses';
  */
 const withBaseMenuStyles = withDesign({
   Wrapper: addClasses('w-full bg-teal-600 text-white'),
-  Item: addClasses('hover:bg-teal-500 min-w-100 leading-loose text-sm'),
+  Item: addClasses('hover:bg-teal-500 leading-loose text-sm'),
   Title: addClasses('block w-full px-3'),
 });
 
@@ -33,7 +33,7 @@ const withBaseSubMenuStyles = withDesign({
   Wrapper: withDesign({
     List: addClasses('bg-teal-600 text-white z-10'),
   }),
-  Item: addClasses('min-w-100 leading-loose text-sm'),
+  Item: addClasses('leading-loose text-sm'),
   Title: addClasses('hover:bg-teal-500 block w-full px-3'),
 });
 

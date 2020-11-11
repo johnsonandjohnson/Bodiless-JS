@@ -1,0 +1,13 @@
+diff --git a/node_modules/slate-react/lib/slate-react.es.js b/node_modules/slate-react/lib/slate-react.es.js
+index b59ee022..445e3d75 100644
+--- a/node_modules/slate-react/lib/slate-react.es.js
++++ b/node_modules/slate-react/lib/slate-react.es.js
+@@ -4638,7 +4638,7 @@ var Content = function (_React$Component) {
+ 
+       // Otherwise, figure out which DOM nodes should be selected...
+       if (selection.isFocused && selection.isSet) {
+-        var current = !!rangeCount && native.getRangeAt(0);
++        var current = !!native.rangeCount && native.getRangeAt(0);
+         var range = findDOMRange(selection, window);
+ 
+         if (!range) {
