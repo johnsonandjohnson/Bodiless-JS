@@ -43,4 +43,10 @@ module.exports = {
   },
   transformers: [
   ],
+  /**
+   * a list of plugins that can subscribe to events emitted by the tool
+   */
+  plugin: [
+
+  ],
 };

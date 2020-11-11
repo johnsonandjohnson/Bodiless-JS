@@ -44,6 +44,7 @@ import {
 import page404Handler, { Page404Params } from './page404-handler';
 import debug from './debug';
 import ResponseProcessor, { RedirectConfig } from './response-processor';
+import type { PluginManagerType } from './pluginManager';
 
 export enum TrailingSlash {
   Skip = 'skip',
@@ -93,6 +94,7 @@ export interface SiteFlattenerParams {
   exports: {
     redirects: RedirectConfig,
   },
+  pluginManager?: PluginManagerType,
 }
 
 export class SiteFlattener {
@@ -148,13 +150,15 @@ export class SiteFlattener {
     const { page404Params, exports } = this.params;
     const responseProcessor = new ResponseProcessor({ websiteUrl: this.params.websiteUrl });
     const scraper = new Scraper(scraperParams);
-    scraper.on('pageReceived', async result => {
+    scraper.on('pageReceived', async scrapedPage => {
       try {
-        debug(`scraped page from ${result.pageUrl}.`);
-        const processedResult = page404Handler.processScrapedPage(result, page404Params);
+        const { pageUrl } = scrapedPage;
+        debug(`scraped page from ${pageUrl}.`);
+        const processedResult = page404Handler.processScrapedPage(scrapedPage, page404Params);
         const pageCreator = new PageCreator(this.getPageCreatorParams(processedResult));
-        debug(`creating page for ${result.pageUrl}.`);
+        debug(`creating page for ${pageUrl}.`);
         await pageCreator.createPage();
+        if (this.params.pluginManager !== undefined) this.params.pluginManager.onPageCreate(pageUrl);
       } catch (error) {
         debug(error);
       }

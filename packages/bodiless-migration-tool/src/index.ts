@@ -23,6 +23,7 @@ import {
 import postBuild from './post-build';
 import page404Handler from './page404-handler';
 import loadSettings from './loadSettings';
+import { PluginManager } from './pluginManager';
 
 enum CommandType {
   Flatten = 'flatten',
@@ -96,6 +97,7 @@ class MigrationTool extends Command {
       allowFallbackHtml: settings.allowFallbackHtml === undefined
         ? true
         : (settings.allowFallbackHtml === true),
+      pluginManager: settings.plugins ? PluginManager.create(settings.plugins) : undefined,
     };
     const flattener = new SiteFlattener(flattenerParams);
     await flattener.start();
