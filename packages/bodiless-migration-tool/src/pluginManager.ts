@@ -24,10 +24,9 @@ type PluginManagerType = {
 class PluginManager implements PluginManagerType {
   private plugins: PluginType[] = [];
 
-  static create(pluginPaths: string[]) {
+  static create(plugins: PluginType[]) {
     const pluginManager = new PluginManager();
-    // @ts-ignore
-    pluginPaths.forEach(plugin => pluginManager.registerPlugin(plugin));
+    plugins.forEach(plugin => pluginManager.registerPlugin(plugin));
     return pluginManager;
   }
 
