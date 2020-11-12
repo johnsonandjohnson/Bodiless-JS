@@ -106,18 +106,23 @@ const popupOpen = (props: WindowOpenerProps) => {
   window.open(url, name, features);
 };
 
-const currentUrl = '';
-// const currentUrl = encodeURIComponent(window.location.href);
+let sharedUrl = '';
+if (typeof document !== 'undefined') {
+  sharedUrl = encodeURIComponent(
+    document.querySelector("link[rel='canonical']").getAttribute('href')
+  );
+} else if (typeof window !== 'undefined') {
+  sharedUrl = encodeURIComponent(window.location.href);
+}
 
 /**
- * FaceBook social share
+ * FaceBook social share provider.
  */
-const facebookSrc = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}&amp;src=sdkpreparse`;
+const facebookSrc = `https://www.facebook.com/sharer/sharer.php?u=${sharedUrl}&amp;src=sdkpreparse`;
 const facebookShare = () => popupOpen({
   url: facebookSrc,
   name: 'share',
 });
-
 const facebook: SocialShareProvider = {
   id: 'facebook',
   script: {
@@ -133,7 +138,7 @@ const facebook: SocialShareProvider = {
   />,
 };
 
-const twitterSrc = `https://twitter.com/intent/tweet?url=${currentUrl}`;
+const twitterSrc = `https://twitter.com/intent/tweet?url=${sharedUrl}`;
 const twitterShare = () => popupOpen({
   url: twitterSrc,
   name: 'share',
