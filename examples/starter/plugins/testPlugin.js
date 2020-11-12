@@ -1,6 +1,12 @@
 module.exports = {
-  onPageCreate: (pagePath) => {
-    console.log('=========hey from testPlugin========');
-    console.log(`received ${pagePath}`);
+  onPageCreate: ({
+    document,
+    pagePath,
+    api,
+  }) => {
+    const $ = document;
+    console.log(pagePath);
+    console.log($('head').html());
+    console.log($('body').html());
   }
 }

@@ -12,14 +12,23 @@
  * limitations under the License.
  */
 
-type PluginType = {
-  onPageCreate: (pagePath: string) => void,
+import { MigrationApiType } from './migrationApi';
+
+type OnPageCreateParams = {
+  document: cheerio.Root,
+  pagePath: string,
+  api: MigrationApiType,
 };
+
+type Events = {
+  onPageCreate: (params: OnPageCreateParams) => void,
+};
+
+type PluginType = Events;
 
 type PluginManagerType = {
   registerPlugin: (plugin: PluginType) => void,
-  onPageCreate: (pagePath: string) => void,
-};
+} & Events;
 
 class PluginManager implements PluginManagerType {
   private plugins: PluginType[] = [];
@@ -34,8 +43,8 @@ class PluginManager implements PluginManagerType {
     this.plugins.push(plugin);
   }
 
-  public onPageCreate(pagePath: string) {
-    this.plugins.forEach(plugin => plugin.onPageCreate(pagePath));
+  public onPageCreate(params: OnPageCreateParams) {
+    this.plugins.forEach(plugin => plugin.onPageCreate(params));
   }
 }
 

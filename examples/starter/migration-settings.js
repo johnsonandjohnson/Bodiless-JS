@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
+const testPlugin = require('./plugins/testPlugin');
+
 module.exports = {
   /**
    * page url that should be scraped
@@ -46,7 +48,7 @@ module.exports = {
   /**
    * a list of plugins that can subscribe to events emitted by the tool
    */
-  plugin: [
-
+  plugins: [
+    testPlugin,
   ],
 };

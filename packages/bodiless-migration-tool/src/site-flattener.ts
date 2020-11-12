@@ -45,6 +45,7 @@ import page404Handler, { Page404Params } from './page404-handler';
 import debug from './debug';
 import ResponseProcessor, { RedirectConfig } from './response-processor';
 import type { PluginManagerType } from './pluginManager';
+import { MigrationApi } from './migrationApi';
 
 export enum TrailingSlash {
   Skip = 'skip',
@@ -135,11 +136,18 @@ export class SiteFlattener {
       try {
         const { pageUrl } = scrapedPage;
         debug(`scraped page from ${pageUrl}.`);
-        const processedResult = page404Handler.processScrapedPage(scrapedPage, page404Params);
-        const pageCreator = new PageCreator(this.getPageCreatorParams(processedResult));
+        const scrapedPage$1 = page404Handler.processScrapedPage(scrapedPage, page404Params);
+        const scrapedPage$2 = this.transformScrapedPage(scrapedPage$1);
+        const pageCreator = new PageCreator(this.getPageCreatorParams(scrapedPage$2));
         debug(`creating page for ${pageUrl}.`);
         await pageCreator.createPage();
-        if (this.params.pluginManager !== undefined) this.params.pluginManager.onPageCreate(pageUrl);
+        if (this.params.pluginManager !== undefined) {
+          this.params.pluginManager.onPageCreate({
+            pagePath: pageUrl,
+            document: (new HtmlParser(scrapedPage.processedHtml)).$,
+            api: MigrationApi.create(),
+          });
+        };
       } catch (error) {
         debug(error);
       }
@@ -289,9 +297,8 @@ export class SiteFlattener {
   }
 
   private getPageCreatorParams(scrapedPage: ScrapedPage): PageCreatorParams {
-    const transformedScrapedPage = this.transformScrapedPage(scrapedPage);
-    const images = transformedScrapedPage.images.concat(transformedScrapedPage.pictures || []);
-    const htmlParser = new HtmlParser(transformedScrapedPage.processedHtml);
+    const images = scrapedPage.images.concat(scrapedPage.pictures || []);
+    const htmlParser = new HtmlParser(scrapedPage.processedHtml);
     const htmlToComponentsSettings = this.getHtmlToComponentsSettings();
     const pageCreatorParams: PageCreatorParams = {
       ...this.params.pageCreator,
@@ -299,16 +306,16 @@ export class SiteFlattener {
       staticDir: this.canvasX.getStaticDir(),
       templatePath: this.getPageTemplate(),
       templateDangerousHtml: this.getComponentTemplate('template_dangerous_html.jsx'),
-      pageUrl: transformedScrapedPage.pageUrl,
+      pageUrl: scrapedPage.pageUrl,
       headHtml: htmlParser.getHeadHtml(),
       bodyHtml: htmlParser.getBodyHtml(),
-      metatags: transformedScrapedPage.metatags,
-      scripts: transformedScrapedPage.scripts,
-      inlineScripts: transformedScrapedPage.inlineScripts,
-      styles: transformedScrapedPage.styles,
-      inlineStyles: transformedScrapedPage.inlineStyles,
+      metatags: scrapedPage.metatags,
+      scripts: scrapedPage.scripts,
+      inlineScripts: scrapedPage.inlineScripts,
+      styles: scrapedPage.styles,
+      inlineStyles: scrapedPage.inlineStyles,
       images,
-      videos: transformedScrapedPage.videos,
+      videos: scrapedPage.videos,
       htmlTag: htmlParser.getHtmlTag(),
       bodyTag: htmlParser.getBodyTag(),
       downloadAssets: true,
