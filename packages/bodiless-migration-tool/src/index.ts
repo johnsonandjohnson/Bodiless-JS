@@ -22,12 +22,14 @@ import {
 } from './site-flattener';
 import postBuild from './post-build';
 import page404Handler from './page404-handler';
-import loadSettings from './loadSettings';
+import loadSettings, { JS_SETTINGS_FILE_NAME } from './loadSettings';
 
 enum CommandType {
   Flatten = 'flatten',
   Postbuild = 'postbuild'
 }
+
+const DEFAULT_MAX_DEPTH = 100;
 
 class MigrationTool extends Command {
   static description = 'site flattenning tool';
@@ -62,11 +64,21 @@ class MigrationTool extends Command {
 
   async flatten() {
     const settings = loadSettings();
+    if (settings === undefined) {
+      console.error(`Configuration file is not found. Ensure your working directory contains ${JS_SETTINGS_FILE_NAME}`);
+      return;
+    }
+    const {
+      url: websiteUrl,
+      pageCreator,
+      crawler: crawlerSettings,
+      exports,
+    } = settings;
     const page404Params = page404Handler.getParams(settings);
     const page404Urls = page404Params.page404Url ? [page404Params.page404Url] : [];
     const flattenerParams: SiteFlattenerParams = {
-      websiteUrl: settings.url,
-      pageCreatorParams: settings.pageCreator,
+      websiteUrl,
+      pageCreator,
       workDir: this.getWorkDir(),
       gitRepository: this.getGitRepo(),
       reservedPaths: ['404'],
@@ -75,22 +87,15 @@ class MigrationTool extends Command {
           ...page404Urls,
           settings.url,
         ],
-        maxDepth: settings.crawler.maxDepth,
-        maxConcurrency: settings.crawler.maxConcurrency || 1,
-        obeyRobotsTxt: settings.crawler.ignoreRobotsTxt !== true,
+        maxDepth: crawlerSettings ? crawlerSettings.maxDepth : DEFAULT_MAX_DEPTH,
+        maxConcurrency: 1,
+        obeyRobotsTxt: crawlerSettings ? crawlerSettings.ignoreRobotsTxt !== true : false,
         javascriptEnabled: true,
       },
       page404Params,
-      steps: {
-        setup: false,
-        scrape: true,
-        startDev: false,
-        build: false,
-        serve: false,
-      },
       trailingSlash: settings.trailingSlash || TrailingSlash.Add,
       transformers: settings.transformers || [],
-      exports: settings.exports || {},
+      exports,
       htmltojsx: true,
       disableTailwind: settings.disableTailwind === undefined ? true : settings.disableTailwind,
       allowFallbackHtml: settings.allowFallbackHtml === undefined

@@ -15,9 +15,34 @@
 /* eslint no-console: 0 */
 import path from 'path';
 import fs from 'fs';
+import type {
+  PageCreatorParams,
+  Transformer,
+  Exports,
+} from './site-flattener';
+import { TrailingSlash } from './site-flattener';
+import { Page404Params } from './page404-handler';
 
-const JS_SETTINGS_FILE_NAME = 'migration-settings.js';
+export const JS_SETTINGS_FILE_NAME = 'migration-settings.js';
 const JSON_SETTINGS_FILE_NAME = 'migration-settings.json';
+
+type CrawlerSettings = {
+  maxDepth: number,
+  ignoreRobotsTxt: boolean,
+};
+
+type Settings = {
+  url: string,
+  pageCreator?: PageCreatorParams,
+  crawler?: CrawlerSettings,
+  trailingSlash?: TrailingSlash,
+  transformers?: Transformer[],
+  exports?: Exports,
+  disableTailwind?: boolean,
+  allowFallbackHtml?: boolean,
+} & Page404Params;
+
+type SettingsLoader = () => Settings | undefined;
 
 const getSettingsBaseDirs = () => [
   process.cwd(),
@@ -28,14 +53,14 @@ const findSettingsFile = (settingsFileName: string) => getSettingsBaseDirs()
   .map(path$ => path.resolve(path$, settingsFileName))
   .find(path$ => fs.existsSync(path$));
 
-const loadJsSettings = () => {
+const loadJsSettings: SettingsLoader = () => {
   const settingsPath = findSettingsFile(JS_SETTINGS_FILE_NAME);
   if (!settingsPath) return undefined;
   // eslint-disable-next-line import/no-dynamic-require, global-require
   return require(settingsPath);
 };
 
-const loadJsonSettings = () => {
+const loadJsonSettings: SettingsLoader = () => {
   const settingsPath = findSettingsFile(JSON_SETTINGS_FILE_NAME);
   if (!settingsPath) return undefined;
   console.log(`Applying migration settings from ${settingsPath}`);
@@ -45,3 +70,4 @@ const loadJsonSettings = () => {
 const loadSettings = () => loadJsSettings() || loadJsonSettings();
 
 export default loadSettings;
+export type { Settings };
