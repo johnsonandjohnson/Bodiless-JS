@@ -109,7 +109,7 @@ const popupOpen = (props: WindowOpenerProps) => {
 let sharedUrl = '';
 if (typeof document !== 'undefined') {
   sharedUrl = encodeURIComponent(
-    document.querySelector("link[rel='canonical']").getAttribute('href')
+    document.querySelector("link[rel='canonical']").getAttribute('href'),
   );
 } else if (typeof window !== 'undefined') {
   sharedUrl = encodeURIComponent(window.location.href);
