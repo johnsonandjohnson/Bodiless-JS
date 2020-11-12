@@ -106,7 +106,7 @@ const popupOpen = (props: WindowOpenerProps) => {
   window.open(url, name, features);
 };
 
-const currentUrl = 'https://www.listerine.com/gum-disease-healthy-gums/what-is-gingivitis?icid=subnav';
+const currentUrl = '';
 // const currentUrl = encodeURIComponent(window.location.href);
 
 /**
