@@ -18,7 +18,7 @@ import {
 } from '@bodiless/fclasses';
 
 const providersDesign = {
-  ProvidersWrapper: addClasses('flex m-2'),
+  ProvidersWrapper: addClasses('m-2'),
   ProviderList: addClasses('p-1'),
 };
 

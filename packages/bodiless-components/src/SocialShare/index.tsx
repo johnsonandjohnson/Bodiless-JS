@@ -25,27 +25,12 @@ import {
   designable,
   addClassesIf,
 } from '@bodiless/fclasses';
-// import {
-//   useMenuOptionUI,
-// } from '@bodiless/core';
-import {
-  withMeta,
-} from '../Meta/Meta';
-import withMetaForm from '../Meta/withMetaForm';
 import {
   ProvidersComponents,
   SocialShareProvidersProps,
   SocialShareComponents,
   SocialShareProps,
-  SocialShareProdviderScript,
 } from './types';
-
-const withMetaOGTitle = withMeta({
-  name: 'og:title',
-  // useFormElement: () => useMenuOptionUI().ComponentFormTextArea,
-  label: 'Description',
-  // placeholder: 'Rec < 160 char',
-});
 
 const WrapperClean: FC = ({ children, ...props }) => <Div {...props}>{ children }</Div>;
 /**
@@ -81,32 +66,17 @@ const ProvidersClean: FC<SocialShareProvidersProps> = ({
 
   const ProvidersWrapperStyled = flow(
     addClassesIf(() => !expanded)('hidden'),
+    addClassesIf(() => expanded)('flex'),
   )(ProvidersWrapper);
-
-  const applyScript = (script: SocialShareProdviderScript) => {
-    const firstScript = document.getElementsByTagName('script')[0];
-    if (document.getElementById(script.id)) return;
-    const js = document.createElement('script');
-    js.id = script.id;
-    js.src = script.src;
-    if (firstScript && firstScript.parentNode) {
-      firstScript.parentNode.insertBefore(js, firstScript);
-    }
-  };
 
   return (
     <ProvidersWrapperStyled>
       {
-        providers.map(Provider => {
-          if (Provider.script) {
-            applyScript(Provider.script);
-          }
-          return (
-            <ProviderList key={Provider.id}>
-              { Provider.element }
-            </ProviderList>
-          );
-        })
+        providers.map(Provider => (
+          <ProviderList key={Provider.id}>
+            { Provider.element }
+          </ProviderList>
+        ))
       }
     </ProvidersWrapperStyled>
   );
@@ -145,23 +115,5 @@ export const SocialShareBase: FC<SocialShareProps> = ({
   );
 };
 
-const useMenuOptions = () => [
-  {
-    name: 'share',
-    icon: 'share',
-    label: 'Social Share',
-  },
-];
-
-const seoFormHeader = {
-  title: 'SEO Data Management',
-  description: `Enter the page level data used for SEO. 
-  This is metadata needed for SEO that will go in the page header.`,
-};
-
-const SocialShare = flow(
-  withMetaForm(useMenuOptions, seoFormHeader),
-  // withMetaOGTitle('og:title', ''),
-  designable(socialShareComponents),
-)(SocialShareBase);
+const SocialShare = designable(socialShareComponents)(SocialShareBase);
 export default SocialShare;

@@ -12,9 +12,18 @@
  * limitations under the License.
  */
 import React, { FunctionComponent as FC } from 'react';
-import { flow } from 'lodash';
-import { SocialShare as SocialShareClean } from '@bodiless/components';
+import Helmet from 'react-helmet';
+import { flow, flowRight } from 'lodash';
+import {
+  SocialShare as SocialShareClean,
+  withMeta,
+  asBodilessHelmet,
+  withMetaForm,
+} from '@bodiless/components';
 import type { SocialShareProvider } from '@bodiless/components';
+import {
+  useMenuOptionUI,
+} from '@bodiless/core';
 import {
   addClasses,
   Div,
@@ -58,7 +67,7 @@ type WindowOpenerProps = {
   resizable?: boolean;
   top?: number;
   left?: number;
-  with?: number;
+  width?: number;
   height?: number;
 };
 
@@ -97,7 +106,8 @@ const popupOpen = (props: WindowOpenerProps) => {
   window.open(url, name, features);
 };
 
-const currentUrl = encodeURIComponent(window.location.href);
+const currentUrl = 'https://www.listerine.com/gum-disease-healthy-gums/what-is-gingivitis?icid=subnav';
+// const currentUrl = encodeURIComponent(window.location.href);
 
 /**
  * FaceBook social share
@@ -110,12 +120,12 @@ const facebookShare = () => popupOpen({
 
 const facebook: SocialShareProvider = {
   id: 'facebook',
-  // script: {
-  //   id: 'facebook',
-  //   src: 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0',
-  //   async: true,
-  //   defer: true,
-  // },
+  script: {
+    id: 'facebook',
+    src: 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0',
+    async: true,
+    defer: true,
+  },
   element: <Provider
     name="FaceBook"
     icon={imgFacebook}
@@ -160,3 +170,54 @@ export const SimpleSocialShare = flow(asSimpleSocialShare)(SocialShareClean);
 export default () => (
   <SimpleSocialShare providers={providers} buttonContent={Icon('share', 'Share')} />
 );
+
+/**
+ * Social Share helmet
+ */
+const socialShareFormHeader = {
+  title: 'Social Share Management',
+  description: 'Enter the page level Open Graph data used for Social Share.',
+};
+
+const useMenuOptions = () => [
+  {
+    name: 'share',
+    icon: 'share',
+    label: 'Share',
+  },
+];
+
+const withSocialShareTitle = withMeta({
+  name: 'og:title',
+  label: 'Title',
+  attribute: 'property',
+});
+
+const withSocialShareImage = withMeta({
+  name: 'og:image',
+  label: 'Image',
+  attribute: 'property',
+});
+
+const withSocialShareDescription = withMeta({
+  name: 'og:description',
+  useFormElement: () => useMenuOptionUI().ComponentFormTextArea,
+  label: 'Description',
+  attribute: 'property',
+});
+const withSocialShareUrl = withMeta({
+  name: 'og:url',
+  label: 'Url',
+  attribute: 'property',
+});
+
+const SocialShareHelmet = flowRight(
+  withMetaForm(useMenuOptions, socialShareFormHeader),
+  asBodilessHelmet('meta'),
+  withSocialShareTitle('og-title', ''),
+  withSocialShareImage('og-image', ''),
+  withSocialShareUrl('og-url', ''),
+  withSocialShareDescription('og-description', ''),
+)(Helmet);
+
+export { SocialShareHelmet };

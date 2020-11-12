@@ -15,23 +15,27 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 // import { useMenuOptionUI, asBodilessComponent, useEditContext } from '@bodiless/core';
-import {
-  Section, addClasses,
-} from '@bodiless/fclasses';
+import { Section, addClasses } from '@bodiless/fclasses';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../../../components/Layout';
 import SocialShare from '../../../components/SocialShare';
 
 const FlexSection = addClasses('text-right')(Section);
 
-export default (props: any) => (
-  <Page {...props}>
-    <Layout>
-      <h1 className="text-2xl font-bold">Social Share</h1>
-      <FlexSection><SocialShare /></FlexSection>
-    </Layout>
-  </Page>
-);
+export default (props: any) => {
+  console.log('CCCCCCCCCCC', props);
+  
+  return (
+    <Page {...props}>
+      <Layout>
+        <h1 className="text-2xl font-bold">Social Share</h1>
+        <FlexSection>
+          <SocialShare />
+        </FlexSection>
+      </Layout>
+    </Page>
+  );
+};
 
 export const query = graphql`
   query($slug: String!) {

@@ -75,7 +75,7 @@ import {
 import asBreadcrumb, { useBreadcrumbContext } from './asBreadcrumb';
 import withBodilessLinkToggle from './withBodilessLinkToggle';
 import SocialShare from './SocialShare';
-import type { SocialShareProvider, SocialShareProdviderScript } from './SocialShare/types';
+import type { SocialShareProvider } from './SocialShare/types';
 
 export {
   withBodilessLinkToggle,
@@ -149,7 +149,7 @@ export * from './Chameleon/index';
 export * from './List';
 
 export type {
-  MetaFormFieldType, YouTubePlayerSettings, SocialShareProvider, SocialShareProdviderScript,
+  MetaFormFieldType, YouTubePlayerSettings, SocialShareProvider,
 };
 
 export type {

@@ -24,17 +24,6 @@ import {
 export type SocialShareProvider = {
   id: string;
   element: JSX.Element;
-  script?: SocialShareProdviderScript;
-};
-
-export type SocialShareProdviderScript = {
-  id: string;
-  src: string;
-  type?: string;
-  async?: boolean;
-  defer?: boolean;
-  crossorigin?: string;
-  nonce?: string;
 };
 
 export type SocialShareComponents = {

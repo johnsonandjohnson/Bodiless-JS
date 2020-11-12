@@ -12,12 +12,13 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { ComponentType } from 'react';
 import { flow } from 'lodash';
 import { Div } from '@bodiless/fclasses';
 import Header from './header';
 import Footer from './footer';
 import SeoHelmet from './meta';
+import { SocialShareHelmet } from '../SocialShare';
 import { asPageContainer, asYMargin } from '../Elements.token';
 import { asSiteHeader, asSiteFooter } from './token';
 
@@ -29,9 +30,10 @@ const Container = flow(
   asYMargin,
 )(Div);
 
-const Layout = ({ children }) => (
+const Layout: ComponentType<any> = ({ children }) => (
   <>
     <SeoHelmet />
+    <SocialShareHelmet />
     <SiteHeader />
     <Container>
       {children}
