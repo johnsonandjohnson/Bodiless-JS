@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ComponentType, HTMLProps } from 'react';
+import React, { ComponentType, FC, HTMLProps } from 'react';
 import { ResizeCallback } from 're-resizable';
 import { SortableElementProps } from 'react-sortable-hoc';
 import {
@@ -21,8 +21,11 @@ import {
   useContextActivator,
   useEditContext,
   useActivateOnEffectActivator,
+  withContextActivator,
+  withLocalContextMenu,
 } from '@bodiless/core';
 import { observer } from 'mobx-react-lite';
+import { flow } from 'lodash';
 import CleanWrapper, { Props as WrapperProps } from './SortableResizableWrapper';
 
 export type FinalUI = {
@@ -58,22 +61,29 @@ type Props = {
 
 type SortableResizableProps = Omit<Props, 'useGetMenuOptions'>;
 
-const SortableResizable = observer(({ children, ui, ...props }: SortableResizableProps) => {
+const SortableResizable$: FC<SortableResizableProps> = ({ children, ui, ...props }) => {
   // We wabt to activate if nessesary
-  useActivateOnEffectActivator(props.uuid);
-  const context = useEditContext();
+  const { uuid } = props;
+  useActivateOnEffectActivator(uuid);
+  const { isActive } = useEditContext();
   const { Wrapper } = getUI(ui);
   // @ts-ignore
   return (
     <Wrapper
-      isEnabled={context.isActive}
+      isEnabled={isActive}
       {...useContextActivator()}
       {...props}
     >
       {children}
     </Wrapper>
   );
-});
+};
+
+const SortableResizable = flow(
+  observer,
+  withContextActivator('onClick'),
+  withLocalContextMenu,
+)(SortableResizable$);
 
 const SlateSortableResizable = (props: Props) => {
   const {

@@ -54,7 +54,7 @@ const asToutsSubMenu = flow(
  */
 const withColumnStyles = flow(
   withDesign({
-    Item: addClasses('hover:bg-teal-500 min-w-100'),
+    Item: addClasses('hover:bg-teal-500'),
     Title: addClasses('hover:bg-teal-500 block w-full px-3 pl-5'),
   }),
 );
