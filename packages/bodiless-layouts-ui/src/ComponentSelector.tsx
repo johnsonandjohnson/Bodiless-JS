@@ -27,7 +27,7 @@ import { ComponentSelector as CleanComponentSelector, ComponentSelectorUI, Compo
  * Used instead of informed Checkbox for more concise handling.
  */
 const CheckBox = ({
-  name, checked, onChange, disabled, id,...rest
+  name, checked, onChange, disabled, id, ...rest
 } : any) => (
   <Input
     type="checkbox"
