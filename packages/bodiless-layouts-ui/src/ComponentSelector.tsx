@@ -12,9 +12,9 @@
  * limitations under the License.
  */
 
-import React, { FC, HTMLProps } from 'react';
+import React, { FC } from 'react';
 import MaterialIcon, { MaterialIconDefaultProps } from '@material/react-material-icon';
-import { addClasses, stylable } from '@bodiless/fclasses';
+import { addClasses } from '@bodiless/fclasses';
 import {
   SubmitButton as SubmitButtonBase, Div, Span, Label, Input,
   Button, Anchor, ComponentFormTitle, ComponentFormLink,
@@ -26,8 +26,8 @@ import { ComponentSelector as CleanComponentSelector, ComponentSelectorUI, Compo
  *
  * Used instead of informed Checkbox for more concise handling.
  */
-const CheckboxBase = ({
-  name, checked, onChange, disabled, id,
+const CheckBox = ({
+  name, checked, onChange, disabled, id,...rest
 } : any) => (
   <Input
     type="checkbox"
@@ -36,9 +36,9 @@ const CheckboxBase = ({
     checked={checked}
     onChange={onChange}
     id={id}
+    {...rest}
   />
 );
-const CheckBox = stylable<HTMLProps<HTMLInputElement>>(CheckboxBase);
 
 // eslint-disable-next-line import/prefer-default-export
 export const ui: ComponentSelectorUI = {
@@ -100,7 +100,7 @@ export const ui: ComponentSelectorUI = {
   )(Label),
 
   AccordionCheckBox: addClasses(
-    'bl-ml-grid-1',
+    'bl-ml-grid-1 bl-mr-grid-1',
   )(CheckBox),
 
   SearchBarWrapper: addClasses(

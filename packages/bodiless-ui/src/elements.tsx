@@ -202,7 +202,7 @@ export const ComponentFormWarning = flow(
 
 const isDisabled = (props: any) => hasProp('disabled')(props);
 export const ComponentFormLink = flow(
-  addClasses('bl-cursor-pointer bl-text-xs bl-text-grey-100 bl-block bl-underline'),
+  addClasses('bl-cursor-pointer bl-text-xs bl-block bl-underline'),
   addClassesIf(isDisabled)('bl-text-grey-600'),
-  removeClassesIf(isDisabled)('bl-cursor-pointer'),
+  removeClassesIf(isDisabled)('bl-cursor-pointer bl-text-grey-100 '),
 )(Anchor);

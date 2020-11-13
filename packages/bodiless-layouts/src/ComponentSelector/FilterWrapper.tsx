@@ -51,15 +51,14 @@ function Checkbox({
   const finalUI:FinalUI = useContext(uiContext);
   return (
     <finalUI.AccordionCheckboxWrapper>
-      <finalUI.AccordionCheckBox
-        field="accordion-checkbox"
-        onChange={onToggle}
-        checked={isChecked}
-        disabled={disabled}
-        id={type}
-        name={type}
-      />
       <finalUI.AccordionCheckboxLabel htmlFor={type}>
+        <finalUI.AccordionCheckBox
+          onChange={onToggle}
+          checked={isChecked}
+          disabled={disabled}
+          id={type}
+          name={type}
+        />
         {Capitalize(type)}
       </finalUI.AccordionCheckboxLabel>
     </finalUI.AccordionCheckboxWrapper>
