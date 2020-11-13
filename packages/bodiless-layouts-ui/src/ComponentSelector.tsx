@@ -27,14 +27,15 @@ import { ComponentSelector as CleanComponentSelector, ComponentSelectorUI, Compo
  * Used instead of informed Checkbox for more concise handling.
  */
 const CheckboxBase = ({
-  label, checked, onChange, disabled,
+  name, checked, onChange, disabled, id,
 } : any) => (
   <Input
     type="checkbox"
-    name={label}
+    name={name}
     disabled={disabled}
     checked={checked}
     onChange={onChange}
+    id={id}
   />
 );
 const CheckBox = stylable<HTMLProps<HTMLInputElement>>(CheckboxBase);
