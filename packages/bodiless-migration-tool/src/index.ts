@@ -23,7 +23,7 @@ import {
 import postBuild from './post-build';
 import page404Handler from './page404-handler';
 import { PluginManager } from './pluginManager';
-import loadSettings, { JS_SETTINGS_FILE_NAME } from './loadSettings';
+import loadSettings from './loadSettings';
 
 enum CommandType {
   Flatten = 'flatten',
@@ -65,10 +65,7 @@ class MigrationTool extends Command {
 
   async flatten() {
     const settings = loadSettings();
-    if (settings === undefined) {
-      console.error(`Configuration file is not found. Ensure your working directory contains ${JS_SETTINGS_FILE_NAME}`);
-      return;
-    }
+    if (settings === undefined) return;
     const {
       url: websiteUrl,
       pageCreator,

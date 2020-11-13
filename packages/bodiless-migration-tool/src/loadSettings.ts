@@ -24,7 +24,7 @@ import type { PluginType } from './pluginManager';
 import { TrailingSlash } from './site-flattener';
 import { Page404Params } from './page404-handler';
 
-export const JS_SETTINGS_FILE_NAME = 'migration-settings.js';
+const JS_SETTINGS_FILE_NAME = 'migration-settings.js';
 const JSON_SETTINGS_FILE_NAME = 'migration-settings.json';
 
 type CrawlerSettings = {
@@ -69,7 +69,13 @@ const loadJsonSettings: SettingsLoader = () => {
   return JSON.parse(fs.readFileSync(settingsPath).toString());
 };
 
-const loadSettings = () => loadJsSettings() || loadJsonSettings();
+const loadSettings = () => {
+  const settings = loadJsSettings() || loadJsonSettings();
+  if (settings === undefined) {
+    console.error(`Configuration file is not found. Ensure your working directory contains ${JS_SETTINGS_FILE_NAME}`);
+  }
+  return settings;
+};
 
 export default loadSettings;
 export type { Settings };
