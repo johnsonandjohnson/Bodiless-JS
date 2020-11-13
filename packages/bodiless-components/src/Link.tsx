@@ -63,11 +63,10 @@ const options: BodilessOptions<Props, LinkData> = {
           relative to the root, otherwise the link is relative to the page. Use
           a fully formed URL for external links, e.g., https://www.example.com.
         </ComponentFormDescription>
-
         {unwrap && (
-          <ComponentFormUnwrapButton type="button" onClick={removeLinkHandler}>
-            Remove Link
-          </ComponentFormUnwrapButton>
+        <ComponentFormUnwrapButton type="button" onClick={removeLinkHandler}>
+          Remove Link
+        </ComponentFormUnwrapButton>
         )}
       </>
     );

@@ -121,8 +121,8 @@ export const ComponentFormButton = addClasses(
   'bl-text-grey-200 bl-cursor-pointer hover:bl-text-green',
 )(Button);
 
-export const ComponentFormUnwrapButton = flow(
-  addClasses('bl-absolute bl-bottom-0 bl-left-0 bl-mb-5 bl-ml-3 bl-cursor-pointer bl-underline'),
+export const ComponentFormUnwrapButton = addClasses(
+  'bl-absolute bl-bottom-0 bl-left-0 bl-mb-5 bl-ml-3 bl-cursor-pointer bl-underline',
 )(Button);
 
 export const ComponentFormCloseButton = flow(
