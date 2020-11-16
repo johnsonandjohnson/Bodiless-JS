@@ -12,7 +12,12 @@
  * limitations under the License.
  */
 
+const { plugins } = require('@bodiless/migration-tool');
 const testPlugin = require('./plugins/testPlugin');
+
+const { createMetatagsPlugin } = plugins;
+
+const metatagsPlugin = createMetatagsPlugin('meta');
 
 module.exports = {
   /**
@@ -49,6 +54,7 @@ module.exports = {
    * a list of plugins that can subscribe to events emitted by the tool
    */
   plugins: [
-    testPlugin,
+    //testPlugin,
+    //metatagsPlugin,
   ],
 };
