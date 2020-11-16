@@ -63,7 +63,6 @@ type WindowOpenerProps = {
   height?: number;
 };
 
-
 /**
  * @todo: move to package component
  */
