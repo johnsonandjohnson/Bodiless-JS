@@ -43,7 +43,7 @@ export type MetaSnippetOptions = {
 export const withMetaSnippet = (
   options: MetaSnippetOptions,
 ) => withEditFormSnippet({
-  renderForm: () => {
+  renderForm: ({ formApi }) => {
     const {
       name, label, placeholder, useFormElement,
     } = options;
@@ -52,7 +52,7 @@ export const withMetaSnippet = (
     return (
       <Div key={name}>
         <ComponentFormLabel>{label}</ComponentFormLabel>
-        <Field field={name} placeholder={placeholder} />
+        <Field field={name} placeholder={placeholder} formapi={formApi} />
       </Div>
     );
   },

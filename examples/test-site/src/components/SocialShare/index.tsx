@@ -14,38 +14,23 @@
 import React, { FunctionComponent as FC } from 'react';
 import Helmet from 'react-helmet';
 import { flow, flowRight } from 'lodash';
+import { useMenuOptionUI } from '@bodiless/core';
+import type { FormBodyProps } from '@bodiless/core';
 import {
   SocialShare as SocialShareClean,
   withMeta,
   asBodilessHelmet,
   withMetaForm,
+  ImageDropZone,
 } from '@bodiless/components';
 import type { SocialShareProvider } from '@bodiless/components';
-import {
-  useMenuOptionUI,
-} from '@bodiless/core';
-import {
-  addClasses,
-  Div,
-  Img,
-  Label,
-  Span,
-} from '@bodiless/fclasses';
-import asSimpleSocialShare from './token';
+import { Div } from '@bodiless/fclasses';
+import asSimpleSocialShare, {
+  StyledIcon, StyledLabel, LogoWrapper, Logo,
+} from './token';
 import imgFacebook from './images/facebook.png';
 import imgTwitter from './images/twitter.png';
-// import imgEmail from './images/email.png';
-
-const StyledIcon = flow(
-  addClasses('material-icons cursor-pointer align-middle text-gray-600'),
-)(Span);
-
-const Icon = (icon: string, label?: string): JSX.Element => (
-  <Label>
-    <StyledIcon>{icon}</StyledIcon>
-    {label}
-  </Label>
-);
+import imgEmail from './images/email.png';
 
 type ProviderProps = {
   name: string;
@@ -53,8 +38,15 @@ type ProviderProps = {
   onclick: Function;
 };
 
+const Icon = (icon: string, label?: string): JSX.Element => (
+  <StyledLabel>
+    <StyledIcon>{icon}</StyledIcon>
+    {label}
+  </StyledLabel>
+);
+
 /**
- * Window open this.props.
+ * Popup window props type.
  *
  * Ref:
  *   https://developer.mozilla.org/en-US/docs/Web/API/Window/open
@@ -71,12 +63,6 @@ type WindowOpenerProps = {
   height?: number;
 };
 
-const Logo = flow(
-  addClasses('bg-blue-500 w-full'),
-)(Img);
-const LogoWrapper = flow(
-  addClasses('w-8'),
-)(Div);
 
 /**
  * @todo: move to package component
@@ -107,10 +93,17 @@ const popupOpen = (props: WindowOpenerProps) => {
 };
 
 let sharedUrl = '';
+let sharedTitle = '';
+let sharedDescription = '';
 if (typeof document !== 'undefined') {
-  sharedUrl = encodeURIComponent(
-    document.querySelector("link[rel='canonical']").getAttribute('href'),
-  );
+  const linkElem = document.querySelector("link[rel='canonical']");
+  sharedUrl = linkElem ? encodeURIComponent(
+    linkElem.getAttribute('href') || '',
+  ) : '';
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  sharedTitle = ogTitle ? ogTitle.content : '';
+  const ogDescription = document.querySelector('meta[property="og:description"]');
+  sharedDescription = ogDescription ? ogDescription.content : '';
 } else if (typeof window !== 'undefined') {
   sharedUrl = encodeURIComponent(window.location.href);
 }
@@ -125,12 +118,6 @@ const facebookShare = () => popupOpen({
 });
 const facebook: SocialShareProvider = {
   id: 'facebook',
-  script: {
-    id: 'facebook',
-    src: 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0',
-    async: true,
-    defer: true,
-  },
   element: <Provider
     name="FaceBook"
     icon={imgFacebook}
@@ -138,37 +125,41 @@ const facebook: SocialShareProvider = {
   />,
 };
 
+/**
+ * Twitter social share provider.
+ */
 const twitterSrc = `https://twitter.com/intent/tweet?url=${sharedUrl}`;
 const twitterShare = () => popupOpen({
   url: twitterSrc,
   name: 'share',
 });
-
 const twitter: SocialShareProvider = {
   id: 'twitter',
-  // script: {
-  //   id: 'twitter',
-  //   src: '',
-  // },
   element: <Provider
     name="Twitter"
     icon={imgTwitter}
     onclick={twitterShare}
   />,
 };
-// const email: SocialShareProvider = {
-//   id: 'email',
-//   script: {
-//     id: 'email',
-//     src: '',
-//   },
-//   element: <Provider name="Email" icon={imgEmail} />,
-// };
+
+/**
+ * Email share provider.
+ */
+const emailSrc = `mailto:?subject=${encodeURIComponent(sharedTitle)}&body=${encodeURIComponent(sharedDescription)}`;
+const emailShare = () => { window.location.href = emailSrc; };
+const email: SocialShareProvider = {
+  id: 'email',
+  element: <Provider
+    name="Email"
+    icon={imgEmail}
+    onclick={emailShare}
+  />,
+};
 
 const providers: SocialShareProvider[] = [
   facebook,
   twitter,
-  // email,
+  email,
 ];
 
 export const SimpleSocialShare = flow(asSimpleSocialShare)(SocialShareClean);
@@ -177,13 +168,12 @@ export default () => (
 );
 
 /**
- * Social Share helmet
+ * Social Share menu.
  */
 const socialShareFormHeader = {
   title: 'Social Share Management',
   description: 'Enter the page level Open Graph data used for Social Share.',
 };
-
 const useMenuOptions = () => [
   {
     name: 'share',
@@ -191,16 +181,28 @@ const useMenuOptions = () => [
     label: 'Share',
   },
 ];
-
 const withSocialShareTitle = withMeta({
   name: 'og:title',
   label: 'Title',
   attribute: 'property',
 });
+const metaSocialShareImageName = 'og:image';
+const SocialShareFormImage = (props: FormBodyProps) => {
+  const { ComponentFormLabel, ComponentFormText } = useMenuOptionUI();
+  const { formapi } = props;
+  return (
+    <Div>
+      <ComponentFormLabel htmlFor="social-share-img-src">Src</ComponentFormLabel>
+      <ComponentFormText field={metaSocialShareImageName} id="social-share-img-src" />
+      <ImageDropZone formApi={formapi} targetFieldName={metaSocialShareImageName} />
+    </Div>
+  );
+};
 
 const withSocialShareImage = withMeta({
   name: 'og:image',
   label: 'Image',
+  useFormElement: () => SocialShareFormImage,
   attribute: 'property',
 });
 
