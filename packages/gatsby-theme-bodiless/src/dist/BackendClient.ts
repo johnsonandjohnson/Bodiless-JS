@@ -143,8 +143,9 @@ export default class BackendClient {
     return this.get(`${this.prefix}/changes`);
   }
 
-  getConflicts() {
-    return this.get(`${this.prefix}/changes/conflicts`);
+  getConflicts(target?: string) {
+    const $param = target ? `?target=${target}` : '';
+    return this.get(`${this.prefix}/changes/conflicts${$param}`);
   }
 
   mergeMaster() {

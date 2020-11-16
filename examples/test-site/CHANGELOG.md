@@ -3,6 +3,67 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.59](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.58...v0.0.59) (2020-11-05)
+
+
+### Bug Fixes
+
+* **layouts:** Various FlowContainer bugs + Snap Indicator ([#658](https://github.com/johnsonandjohnson/bodiless-js/issues/658)) ([b4fec7b](https://github.com/johnsonandjohnson/bodiless-js/commit/b4fec7bf937c73d379a847b823c823483072ccc1)), closes [#657](https://github.com/johnsonandjohnson/bodiless-js/issues/657) [#654](https://github.com/johnsonandjohnson/bodiless-js/issues/654) [#656](https://github.com/johnsonandjohnson/bodiless-js/issues/656)
+
+
+### Features
+
+* **search:** component library search component ([#592](https://github.com/johnsonandjohnson/bodiless-js/issues/592)) ([faa2219](https://github.com/johnsonandjohnson/bodiless-js/commit/faa2219a5dc5b66cbb3fd2a8eba6d24a04d3d38f))
+
+
+
+
+
+## [0.0.58](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.57...v0.0.58) (2020-10-23)
+
+
+### Features
+
+* **components,organisms:** Mega-menu support ([#572](https://github.com/johnsonandjohnson/bodiless-js/issues/572)) ([9f43d0e](https://github.com/johnsonandjohnson/bodiless-js/commit/9f43d0e38abd7b7ac48d8ea1c3c06a97cf48fdef)), closes [#546](https://github.com/johnsonandjohnson/bodiless-js/issues/546)
+
+
+
+
+
+## [0.0.57](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.56...v0.0.57) (2020-10-15)
+
+
+### Bug Fixes
+
+* **richtext, richtext-ui:** Additional ... in RTE throws type is invalid error and serves WSOD ([#536](https://github.com/johnsonandjohnson/bodiless-js/issues/536)) ([d35ddd4](https://github.com/johnsonandjohnson/bodiless-js/commit/d35ddd43b9a26f43d0adcf8adbc91cde3f2d6463))
+
+
+### Features
+
+* **components:** youtube and iframe ([#569](https://github.com/johnsonandjohnson/bodiless-js/issues/569)) ([388166c](https://github.com/johnsonandjohnson/bodiless-js/commit/388166cdbeebedc71bd287c2794867c76f09b794))
+* **core, layouts:** Closing Main Menu Panel Windows ([#571](https://github.com/johnsonandjohnson/bodiless-js/issues/571)) ([3e0b9f0](https://github.com/johnsonandjohnson/bodiless-js/commit/3e0b9f0df681c146e61d1905c312706dd11d5f1d))
+
+
+
+
+
+## [0.0.56](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.55...v0.0.56) (2020-09-21)
+
+
+### Bug Fixes
+
+* **richtext:** Slate editor in tooltip with shared node. ([#540](https://github.com/johnsonandjohnson/bodiless-js/issues/540)) ([5c62a77](https://github.com/johnsonandjohnson/bodiless-js/commit/5c62a77f531cbee1128e4a7adbea0ab951de9f68)), closes [#535](https://github.com/johnsonandjohnson/bodiless-js/issues/535)
+
+
+### Features
+
+* **core:** Improved Context Menu API ([#519](https://github.com/johnsonandjohnson/bodiless-js/issues/519)) ([463e8f6](https://github.com/johnsonandjohnson/bodiless-js/commit/463e8f61a8e13af6b6c62428d2b6a63fce197cb7)), closes [#3](https://github.com/johnsonandjohnson/bodiless-js/issues/3) [#487](https://github.com/johnsonandjohnson/bodiless-js/issues/487) [#486](https://github.com/johnsonandjohnson/bodiless-js/issues/486)
+* **gatsby-theme-bodiless:** Image generation on upload ([#531](https://github.com/johnsonandjohnson/bodiless-js/issues/531)) ([6524581](https://github.com/johnsonandjohnson/bodiless-js/commit/65245814df2e2b90a86f7fe12696c00126b14498))
+
+
+
+
+
 ## [0.0.55](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.54...v0.0.55) (2020-08-28)
 
 

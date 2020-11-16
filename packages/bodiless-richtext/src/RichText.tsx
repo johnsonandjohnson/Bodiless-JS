@@ -104,12 +104,13 @@ const withSlateSchema = <P extends object>(Component: ComponentType<P>) => (
 const withSlateActivator = <P extends object>(Component: ComponentType<P>) => (props: P) => {
   const previousSlateContext = useSlateContext();
   const previousEditorProps = previousSlateContext!.editorProps;
-  const { onClick } = useContextActivator();
 
   // TODO: The following onCHange handler is only necessary if the menu options provided
   // by this editor depend on the state of the editor. If this is ever the case, we will
   // need to add logic to prevent the context from refreshing on *every* change, and
   // only trigger refresh when necxessary.
+  // NOTE: As of this commit, refresh has been deprecated, and this may no longer
+  // be necessary.
   // const context = useEditContext();
   // tslint:disable-next-line: ter-arrow-parens
   // const onChange: BasicEditorProps['onChange'] = change => {
@@ -121,8 +122,7 @@ const withSlateActivator = <P extends object>(Component: ComponentType<P>) => (p
 
   const editorProps = {
     ...previousEditorProps!,
-    // onChange,
-    onClick,
+    ...useContextActivator(),
   };
 
   const slateContext = {
@@ -138,17 +138,20 @@ const withSlateActivator = <P extends object>(Component: ComponentType<P>) => (p
   );
 };
 
-type UseGetMenuOptionsProps = {
+type UseMenuOptionsProps = {
   globalButtons?: Function,
 };
 // This is a call back that goes to withMenuOptions so that we can add button to the global menu
-const richTextUseGetMenuOptions = (props: UseGetMenuOptionsProps) => {
+const useMenuOptions = (props: UseMenuOptionsProps) => {
   const slateContext = useSlateContext();
   const { editor } = slateContext!;
-  return () => (props.globalButtons ? props.globalButtons(editor) : []);
+  return useMemo(
+    () => (props.globalButtons ? props.globalButtons(editor) : []),
+    [props.globalButtons],
+  );
 };
 
-const ifMenuOptions = ifToggledOn((props: UseGetMenuOptionsProps) => {
+const ifMenuOptions = ifToggledOn((props: UseMenuOptionsProps) => {
   const context = useEditContext();
   return context.isEdit && Boolean(props.globalButtons);
 });
@@ -156,14 +159,14 @@ const ifMenuOptions = ifToggledOn((props: UseGetMenuOptionsProps) => {
 type RichTextProviderProps = {
   plugins: Plugin[],
   schema?: SchemaProperties,
-} & UseGetMenuOptionsProps;
+} & UseMenuOptionsProps;
 type RichTextProviderType = ComponentType<RichTextProviderProps>;
 const RichTextProvider = flowRight(
   withNode,
   withNodeStateHandlers,
   withSlateEditor,
   ifMenuOptions(
-    withMenuOptions({ useGetMenuOptions: richTextUseGetMenuOptions, name: 'editor' }),
+    withMenuOptions({ useMenuOptions, name: 'editor' }),
     withSlateActivator,
   ),
   withoutProps(['className', 'plugins', 'globalButtons', 'readOnly']),
@@ -207,7 +210,7 @@ const BasicRichText = <P extends object, D extends object>(props: P & RichTextPr
     <uiContext.Provider value={finalUI}>
       <RichTextProvider
         {...rest}
-        initialValue={initialValue || defaultValue}
+        initialValue={initialValue || { ...defaultValue }}
         plugins={plugins}
         globalButtons={globalButtons}
         schema={schema}

@@ -18,6 +18,8 @@ import {
   withDefaultContent,
   withResetButton,
   withSidecarNodes,
+  withMenuOptions,
+  withContextActivator,
 } from '@bodiless/core';
 import {
   ToutClean,
@@ -44,7 +46,7 @@ export const withToutEditors = flow(
     Link: flow(
       withEditorSimple('ctatext', 'CTA'),
       withSidecarNodes(
-        asEditableLink('link'),
+        asEditableLink('link', undefined, () => ({ groupLabel: 'CTA' })),
       ),
       ifEditable(asNonDraggable),
     ),
@@ -52,10 +54,26 @@ export const withToutEditors = flow(
   }),
 );
 
+const withEmptyContext = (name: string) => flow(
+  withContextActivator('onClick'),
+  withMenuOptions({
+    name,
+    useMenuOptions: () => ([{
+      name, isHidden: true, global: false, local: true,
+    }]),
+  }),
+);
+
 export const withToutResetButtons = withDesign({
   ImageLink: withResetButton({ nodeKey: ['image', 'link'] }),
-  Title: withResetButton({ nodeKey: 'title' }),
-  Body: withResetButton({ nodeKey: 'body' }),
+  Title: flow(
+    withEmptyContext('Title'),
+    withResetButton({ nodeKey: 'title' }),
+  ),
+  Body: flow(
+    withEmptyContext('Body'),
+    withResetButton({ nodeKey: 'body' }),
+  ),
   Link: withResetButton({ nodeKey: ['link', 'ctatext'] }),
 });
 

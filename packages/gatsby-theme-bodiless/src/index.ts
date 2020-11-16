@@ -16,19 +16,25 @@ import GatsbyMobxStore from './dist/GatsbyMobxStore';
 import GatsbyNodeProvider from './dist/GatsbyNodeProvider';
 import BackendClient from './dist/BackendClient';
 import useGitButtons from './dist/useGitButtons';
-import useNewPageButton from './dist/useNewPageButton';
 import GatsbyPageProvider, { useGatsbyPageContext } from './dist/GatsbyPageProvider';
 import Page from './dist/Page';
+import asGatsbyImage from './dist/GatsbyImage/asGatsbyImage';
+import withGatsbyImageNode from './dist/GatsbyImage/withGatsbyImageNode';
+import GatsbyImagePresets from './dist/GatsbyImage/GatsbyImagePresets';
+import withGatsbyImageLogger from './dist/GatsbyImage/withGatsbyImageLogger';
 
 export {
   GatsbyMobxStore,
   GatsbyNodeProvider,
   BackendClient,
   useGitButtons,
-  useNewPageButton,
   GatsbyPageProvider,
   useGatsbyPageContext,
   Page,
+  asGatsbyImage,
+  withGatsbyImageNode,
+  GatsbyImagePresets,
+  withGatsbyImageLogger,
 };
 
 export type { Props as PageProps } from './dist/Page';

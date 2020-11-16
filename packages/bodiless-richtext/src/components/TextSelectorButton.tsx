@@ -15,18 +15,16 @@
 import React, { useState } from 'react';
 import RCTooltip from 'rc-tooltip';
 import MaterialIcon from '@material/react-material-icon';
-import { useUI } from '../RichTextContext';
+import { useUI, getUI } from '../RichTextContext';
 
 type ButtonProps = {
   onMouseDown(e: React.MouseEvent): void;
 };
 
 const NodeSelectorButton = (props: ButtonProps) => {
-  const { Button } = useUI();
+  const { Button } = getUI(useUI());
 
   return (
-    // error TS2604: JSX element type 'Button' does not have any construct or call signatures.
-    // @ts-ignore
     <Button {...props}>
       <MaterialIcon className="bl-material-icons" icon="more_horiz" />
     </Button>
@@ -36,11 +34,9 @@ const NodeSelectorButton = (props: ButtonProps) => {
 NodeSelectorButton.displayName = 'NodeSelectorButton';
 
 const CloseBtn = (props: JSX.IntrinsicElements['span']) => {
-  const { CloseButton } = useUI();
+  const { CloseButton } = getUI(useUI());
 
   return (
-    // error TS2604: JSX element type 'CloseButton' does not have any construct or call signatures.
-    // @ts-ignore
     <CloseButton {...props}>
       <MaterialIcon icon="cancel" />
     </CloseButton>
@@ -57,7 +53,7 @@ const TextSelectorButton = ({
   children,
 }:props) => {
   const [visible, setVisible] = useState(false);
-  const { Overlay } = useUI();
+  const { Overlay, TextSelectorWrapper } = getUI(useUI());
   const textSelectorContextValue = { onClose: () => setVisible(false) };
 
   return (
@@ -65,14 +61,16 @@ const TextSelectorButton = ({
       visible={visible}
       placement="topLeft"
       overlayStyle={{ opacity: 1 }}
+      align={{
+        offset: [-40, -10],
+      }}
       overlay={() => (
-
-        // error TS2604: JSX element type 'Overlay' does not have any construct or call signatures.
-        // @ts-ignore
         <Overlay>
           <TextSelectorContext.Provider value={textSelectorContextValue}>
             <CloseBtn onMouseDown={() => setVisible(false)} />
-            { children }
+            <TextSelectorWrapper>
+              { children }
+            </TextSelectorWrapper>
           </TextSelectorContext.Provider>
         </Overlay>
       )}

@@ -15,11 +15,14 @@
 import React, {
   useRef,
   useState,
+  useMemo,
   Fragment,
   ComponentType,
 } from 'react';
 import { Editor, Value } from 'slate';
-import { Editor as ReactEditor, EditorProps } from 'slate-react';
+import { Editor as ReactEditor, EditorProps, Plugin } from 'slate-react';
+// @ts-ignore
+import PlaceholderPlugin from 'slate-react-placeholder';
 import SlateEditorContext from './SlateEditorContext';
 import '@material/react-material-icon/dist/material-icon.css';
 import { EditorOnChange } from '../Type';
@@ -30,7 +33,7 @@ type Props = {
 
 const withSlateEditor = <P extends object> (Component:ComponentType<P>) => (props:P & Props) => {
   const {
-    initialValue, value, onChange, placeholder, ...rest
+    initialValue, value, onChange, placeholder, plugins = [], ...rest
   } = props;
   // A reference to 'slate-react/Content' instance that allows to manipulate the editor
   const editorRef = useRef<ReactEditor>(null);
@@ -53,6 +56,26 @@ const withSlateEditor = <P extends object> (Component:ComponentType<P>) => (prop
     return change;
   };
 
+  const pluginWithPlaceholder = (placeholder) ? useMemo(() => [...plugins,
+    [
+      {
+        queries: {
+          isEmpty: (editor:Editor) => editor.value.document.text === '',
+        },
+      },
+      PlaceholderPlugin({
+        placeholder,
+        when: 'isEmpty',
+        style: {
+          width: '100%',
+          display: 'inline',
+          height: '0',
+          overflow: 'visible',
+        },
+      }),
+    ],
+  ], [plugins]) as Plugin[] : plugins;
+
   const editorContextValue = {
     editorRef,
     // for some reason current.controller doesn't return what it's supposed to
@@ -64,7 +87,7 @@ const withSlateEditor = <P extends object> (Component:ComponentType<P>) => (prop
     value: value || localValueState,
     editorProps: {
       ...rest,
-      placeholder,
+      plugins: pluginWithPlaceholder,
       onChange: internalOnChange,
       value: value || localValueState,
     },

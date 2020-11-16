@@ -87,6 +87,7 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
 const withFilterByGroupContext = <P extends object>(
   Component: ComponentType<P> | string,
 ) => (props: P & FBGContextOptions) => (
+    // eslint-disable-next-line react/destructuring-assignment
     <FilterByGroupProvider suggestions={props.suggestions}>
       <Component {...props} />
     </FilterByGroupProvider>

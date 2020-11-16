@@ -12,50 +12,115 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
+import React, { ComponentType as CT, PropsWithChildren } from 'react';
 import { stripIndent } from 'common-tags';
-import { useNode } from '@bodiless/core';
+import { HelmetProps } from 'react-helmet';
 import * as _ from 'lodash';
+import { WithNodeKeyProps } from '@bodiless/core';
+import { withHeadElement, Options as BaseOptions } from '../Meta/Meta';
 
-type GtmEventData = {
+type BaseProps = PropsWithChildren<HelmetProps>;
+type Data = {
   content: string;
 };
-
-type GtmDefaultPageData = {
-  event: string;
-  page: object;
+export type DataLayer = {
+  dataLayerName: string;
+  dataLayerData?: any;
 };
 
+type Props = BaseProps & Data & DataLayer;
+
+type ItemProps = BaseProps & DataLayer;
+
+type Options = BaseOptions & {
+  path: string
+};
+
+/**
+ * Generate the dataLayer script.
+ *
+ * @param {any} dataLayer - The dataLayer Object.
+ * @param {string} dataLayerName - The dataLayer name.
+ *
+ * Return {string} - Datalayer script.
+ */
 const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
   let result = `window.${dataLayerName} = window.${dataLayerName} || [];`;
-
   if (dataLayer !== undefined) {
-    result += `window.${dataLayerName}.push(${JSON.stringify(dataLayer)});`;
+    Object.values(dataLayer).forEach((entry: any) => {
+      result += `window.${dataLayerName}.push(${JSON.stringify(entry)});`;
+    });
   }
 
   return stripIndent`${result}`;
 };
 
-const tagManagerEnabled = (process.env.GOOGLE_TAGMANAGER_ENABLED || '1') === '1';
-const withEvent = (
-  dataLayerName: string,
-  defaultPageData: GtmDefaultPageData,
-  nodeKey: string,
-  nodeCollection: string,
-) => (HelmetComponent: CT) => (props: any) => {
-  if (process.env.NODE_ENV === 'production' && tagManagerEnabled) {
-    const { children, ...rest } = props;
-    const { node } = useNode(nodeCollection);
-    const { data } = node.child<GtmEventData>(nodeKey);
-    const merged = _.merge({}, defaultPageData, data);
-    return (
-      <HelmetComponent {...rest}>
-        {children}
-        <script>{generateDataLayer(merged, dataLayerName)}</script>
-      </HelmetComponent>
-    );
+const withDataLayerItem$ = (options: Options) => (HelmetComponent: CT<ItemProps>) => (
+  props: Props,
+) => {
+  const {
+    dataLayerName, dataLayerData, children, content, ...rest
+  } = props;
+  const { path } = options;
+  const value = content !== undefined ? content : '';
+  if (path) {
+    _.set(dataLayerData, path, value);
   }
-  return <></>;
+  return (
+    <HelmetComponent
+      dataLayerName={dataLayerName}
+      dataLayerData={dataLayerData}
+      {...rest}
+    />
+  );
 };
 
-export default withEvent;
+/**
+ * HOC that adds Default Datalayer to a Component
+ */
+const withDefaultDataLayer : Function = (dataLayer: DataLayer) => (
+  HelmetComponent: CT<BaseProps>,
+) => (props: Props) => {
+  const { dataLayerData: defaultData, ...rest } = props;
+  if (defaultData !== undefined) {
+    _.set(dataLayer, 'dataLayerData', {
+      ...defaultData,
+      ...dataLayer.dataLayerData,
+    });
+  }
+  return <HelmetComponent {...dataLayer} {...rest} />;
+};
+
+const tagManagerEnabled = (process.env.GOOGLE_TAGMANAGER_ENABLED || '1') === '1';
+/**
+ * An HOC that renders the dataLayer scrip.
+ *
+ * @param HelmetComponent
+ */
+const withDataLayerScript = (HelmetComponent: CT<BaseProps>) => (
+  props: Props,
+) => {
+  if (!tagManagerEnabled) {
+    return HelmetComponent;
+  }
+  const {
+    dataLayerData, dataLayerName, children, ...rest
+  } = props;
+
+  return (
+    <HelmetComponent {...rest}>
+      {children}
+      <script>{generateDataLayer(dataLayerData, dataLayerName)}</script>
+    </HelmetComponent>
+  );
+};
+
+const withDataLayerItem: (
+  options: Options,
+) => (
+  nodeKey?: WithNodeKeyProps,
+  defaultContent?: string,
+) => (...args: any[]) => any = withHeadElement(withDataLayerItem$);
+
+export default withDataLayerItem;
+export { withDataLayerScript, withDefaultDataLayer };

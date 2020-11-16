@@ -26,15 +26,13 @@ import {
   CanvasX,
   JamStackAppParams,
 } from './jamstack-app';
-import {
-  PageCreator,
-  PageCreatorParams,
-} from './page-creator';
+import { PageCreator } from './page-creator';
+import type { PageCreatorParams } from './page-creator';
 import {
   ScrapedPage,
   Scraper,
-  ScraperParams,
 } from './scraper';
+import type { ScraperParams } from './scraper';
 import {
   replaceAttributes,
   AttrTransformerDirecton,
@@ -60,14 +58,19 @@ export enum TransformerRule {
   RemoveAttribute = 'removeAttribute',
 }
 
-export interface Transformer {
+export type Transformer = {
   rule: TransformerRule,
   selector: string,
   replacement: string,
   context: string,
   scope?: ComponentScope,
   attributes: string[],
-}
+};
+
+type ExposedPageCreatorParams = Pick<PageCreatorParams, 'isEnabled' | 'pageIndexFile'>;
+type Exports = {
+  redirects: RedirectConfig,
+};
 
 export interface SiteFlattenerParams {
   websiteUrl: string,
@@ -75,23 +78,15 @@ export interface SiteFlattenerParams {
   gitRepository?: string,
   trailingSlash?: TrailingSlash,
   scraperParams: ScraperParams,
+  pageCreator?: ExposedPageCreatorParams,
   page404Params: Page404Params,
-  steps: {
-    setup: boolean,
-    scrape: boolean,
-    startDev: boolean,
-    build: boolean,
-    serve: boolean,
-  },
   transformers: Array<Transformer>,
   htmltojsx: boolean,
   useSourceHtml?: boolean,
   disableTailwind?: boolean,
   reservedPaths?: Array<string>,
   allowFallbackHtml?: boolean,
-  exports: {
-    redirects: RedirectConfig,
-  },
+  exports?: Exports,
 }
 
 export class SiteFlattener {
@@ -121,21 +116,7 @@ export class SiteFlattener {
   }
 
   public async start() {
-    if (this.params.steps.setup) {
-      await this.canvasX.setup();
-    }
-    if (this.params.steps.scrape) {
-      await this.scrape();
-    }
-    if (this.params.steps.startDev) {
-      this.canvasX.startDev();
-    }
-    if (this.params.steps.build) {
-      this.canvasX.build();
-    }
-    if (this.params.steps.serve) {
-      this.canvasX.serve();
-    }
+    await this.scrape();
   }
 
   public async scrape() {
@@ -174,12 +155,12 @@ export class SiteFlattener {
       await downloader.downloadFiles([fileUrl]);
     });
     scraper.on('responseReceived', async response => {
-      if (!isEmpty(exports) && !isEmpty(exports.redirects)) {
+      if (exports !== undefined && !isEmpty(exports) && !isEmpty(exports.redirects)) {
         responseProcessor.processRedirect(response);
       }
     });
     await scraper.Crawl();
-    if (!isEmpty(exports) && !isEmpty(exports.redirects)) {
+    if (exports !== undefined && !isEmpty(exports) && !isEmpty(exports.redirects)) {
       responseProcessor.exportRedirects(exports.redirects);
     }
   }
@@ -308,6 +289,7 @@ export class SiteFlattener {
     const htmlParser = new HtmlParser(transformedScrapedPage.processedHtml);
     const htmlToComponentsSettings = this.getHtmlToComponentsSettings();
     const pageCreatorParams: PageCreatorParams = {
+      ...this.params.pageCreator,
       pagesDir: this.canvasX.getPagesDir(),
       staticDir: this.canvasX.getStaticDir(),
       templatePath: this.getPageTemplate(),
@@ -324,7 +306,6 @@ export class SiteFlattener {
       videos: transformedScrapedPage.videos,
       htmlTag: htmlParser.getHtmlTag(),
       bodyTag: htmlParser.getBodyTag(),
-      createPages: true,
       downloadAssets: true,
       htmlToComponents: this.params.htmltojsx,
       allowFallbackHtml: this.params.allowFallbackHtml,
@@ -334,3 +315,8 @@ export class SiteFlattener {
     return pageCreatorParams;
   }
 }
+
+export type {
+  ExposedPageCreatorParams as PageCreatorParams,
+  Exports,
+};

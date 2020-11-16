@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/layouts",
-  "version": "0.0.55",
+  "version": "0.0.59",
   "description": "Layout managers for BodilessJS.",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
   "homepage": "",
@@ -14,7 +14,8 @@
   "files": [
     "/lib",
     "/doc",
-    "/bodiless.docs.json"
+    "/bodiless.docs.json",
+    "/index.tailwind.css"
   ],
   "repository": {
     "type": "git",
@@ -24,20 +25,22 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build": "npm run build:css && npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build:css": "postcss index.tailwind.css -o ./src/main.css",
     "build:watch": "npm run build -- --watch",
     "build:api-doc": "typedoc --out doc/api --mode file",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
+    "copy": "copyfiles -u 1 \"./src/**/*.css\" \"./lib/\""
   },
   "peerDependencies": {
     "react": "^16.8.1"
   },
   "dependencies": {
-    "@bodiless/core": "^0.0.55",
-    "@bodiless/fclasses": "^0.0.55",
-    "@bodiless/gatsby-theme-bodiless": "^0.0.55",
-    "@material/react-material-icon": "^0.14.1",
-    "axios": "^0.19.0",
+    "@bodiless/core": "^0.0.59",
+    "@bodiless/fclasses": "^0.0.59",
+    "@bodiless/gatsby-theme-bodiless": "^0.0.59",
+    "@material/react-material-icon": "^0.15.0",
+    "axios": "^0.21.0",
     "html2canvas": "^1.0.0-rc.3",
     "informed": "^3.9.0",
     "lodash": "^4.17.19",

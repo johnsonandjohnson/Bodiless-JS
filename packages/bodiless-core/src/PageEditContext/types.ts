@@ -27,6 +27,11 @@ export interface CanControlEditMode {
   isEdit: boolean;
   toggleEdit: (mode?: boolean) => void;
 }
+export interface CanControlLocalTooltipsVisibility {
+  areLocalTooltipsDisabled: boolean;
+  toggleLocalTooltipsDisabled: (isDisabled?: boolean) => void;
+}
+
 export interface CanControlMenuPosition {
   isPositionToggled: boolean;
   togglePosition: (mode?: boolean) => void;
@@ -37,36 +42,45 @@ export interface CanControlPageOverlay {
   hidePageOverlay: (settings?: TOverlaySettings) => void;
   showError: (settings?: TOverlaySettings) => void;
 }
-export interface CanControlLocalTooltipsVisibility {
-  areLocalTooltipsDisabled: boolean;
-  toggleLocalTooltipsDisabled: (isDisabled?: boolean) => void;
-}
 export interface CanGetContextMenuOptions {
   contextMenuOptions: TMenuOption[];
 }
 export interface DefinesLocalEditContext {
-  name: string;
   id: string;
+  name?: string;
+  type?: string;
   getMenuOptions?: () => TMenuOption[];
 }
+
 export interface CanBeActivated {
-  isActive: boolean;
+  isActive: boolean
   isInnermost: boolean;
   hasLocalMenu: boolean;
   isInnermostLocalMenu: boolean;
   activate: () => void;
-  refresh: () => void;
+  /**
+   * The currently active context, or undefined if no context is active.
+   */
+  activeContext?: PageEditContextInterface;
+  /**
+   * If the context is active, an array of its descendants, starting with its first child
+   * and ending with the innermost active context.  If the context is not active, undefined.
+   */
+  activeDescendants?: PageEditContextInterface[];
 }
-export interface PageEditStoreInterface {
+
+export interface PageEditStoreInterface extends CanControlLocalTooltipsVisibility {
   activeContext: PageEditContextInterface | undefined;
+  updateMenuOptions: (contexts: PageEditContextInterface) => string[];
   contextMenuOptions: TMenuOption[];
   isEdit: boolean;
+  isPositionToggled: boolean;
   setActiveContext(context?: PageEditContextInterface): void;
-  toggleEdit(): void;
-  togglePosition(): void;
+  toggleEdit: (on?: boolean) => void;
+  togglePosition: (on?: boolean) => void;
   contextTrail: string[];
-  areLocalTooltipsDisabled: boolean;
-  toggleLocalTooltipsDisabled(isDisabled?: boolean): void;
+  pageOverlay: TPageOverlayStore;
+  optionMap: Map<string, Map<string, TMenuOption>>;
 }
 
 export interface PageEditContextInterface extends
@@ -83,13 +97,15 @@ export interface PageEditContextInterface extends
   readonly name: string;
   readonly parent?: PageEditContextInterface;
   /**
+   * The "peer" contexts registered with this context.  Peer contexts contribute their menu
+   * options when the context wo which they are registered becomes active.
+   */
+  readonly peerContexts: PageEditContextInterface[];
+  updateMenuOptions: () => void;
+  /**
    * Function property which gets the menu options associated with this context.
    */
   readonly getMenuOptions: TMenuOptionGetter;
-  /**
-   * Prototype function which gets menu options associated with this context and any peers.
-   */
-  readonly allMenuOptions: TMenuOption[];
   /**
    * Spawn a child of this context (another context which, when activaged, will also activate
    * this one and all of its ancestors).
@@ -98,5 +114,9 @@ export interface PageEditContextInterface extends
   /**
    * Register a peer of this context (another context which will be activagted along with this one)
    */
-  registerPeer: (v: DefinesLocalEditContext) => void;
+  registerPeer: (c: PageEditContextInterface) => void;
+  /**
+   * Unregister all peers.
+   */
+  unregisterPeer: (c: PageEditContextInterface) => void;
 }

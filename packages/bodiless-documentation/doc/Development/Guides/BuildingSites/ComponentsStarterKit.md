@@ -40,7 +40,7 @@ page.
   import withMetaForm from @bodiless/components;
   ```
   `withMetaForm` takes 2 parameters:
-  1. `useGetMenuOptions`: defines SEO form menu button appearance.
+  1. `useMenuOptions`: defines SEO form menu button appearance.
       ```
       {
         name: 'seo',                     // Menu item name
@@ -58,7 +58,7 @@ page.
       ```
   Then, apply this HOC to Helmet component:
   ```
-  const SeoHelmet = withMetaForm(useGetMenuOptions, seoFormHeader)(Helmet);
+  const SeoHelmet = withMetaForm(useMenuOptions, seoFormHeader)(Helmet);
   ```
 - #### Adding Meta Data Fields to Editor interface
   Next, define the form fields so site editor can update content of meta data displayed
@@ -80,7 +80,7 @@ page.
   To apply this field to the meta form previously created, you can use flowRight:
   ``` 
   const SeoHelmet = flowRight(
-    withMetaForm(useGetMenuOptions, seoFormHeader),
+    withMetaForm(useMenuOptions, seoFormHeader),
     asBodilessHelmet('meta'),
     withMetaPageDescription('description', ''),
   )(Helmet);

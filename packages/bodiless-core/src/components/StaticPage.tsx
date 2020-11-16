@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 /**
  * Copyright © 2019 Johnson & Johnson
  *
@@ -18,6 +19,10 @@ import PageEditContext from '../PageEditContext';
 import { PageEditContextInterface } from '../PageEditContext/types';
 
 class StaticContext implements PageEditContextInterface {
+  areLocalTooltipsDisabled = true;
+
+  toggleLocalTooltipsDisabled() {}
+
   isActive = false;
 
   isInnermost = false;
@@ -25,6 +30,8 @@ class StaticContext implements PageEditContextInterface {
   hasLocalMenu = false;
 
   activate = () => undefined;
+
+  updateMenuOptions = () => undefined;
 
   refresh = () => undefined;
 
@@ -35,6 +42,8 @@ class StaticContext implements PageEditContextInterface {
   isPositionToggled = false;
 
   togglePosition = () => undefined;
+
+  peerContexts = [];
 
   contextMenuOptions = [];
 
@@ -57,15 +66,13 @@ class StaticContext implements PageEditContextInterface {
 
   showError = () => undefined;
 
-  areLocalTooltipsDisabled = false;
-
-  toggleLocalTooltipsDisabled = () => undefined;
-
   // Normally spawn returns a new context instance, but in a static page there is only a single
   // constext, so we just return ourselves.
   spawn = (): PageEditContextInterface => this;
 
   registerPeer = () => {};
+
+  unregisterPeer = () => {};
 
   allMenuOptions = [];
 }

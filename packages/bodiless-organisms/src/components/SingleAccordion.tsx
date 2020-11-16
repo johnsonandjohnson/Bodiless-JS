@@ -14,6 +14,7 @@
 
 import React, { ComponentType, useState } from 'react';
 import { flow } from 'lodash';
+import { observer } from 'mobx-react-lite';
 import {
   withDesign,
   designable,
@@ -25,7 +26,7 @@ import {
 import {
   asEditable,
 } from '@bodiless/components';
-import { withNode } from '@bodiless/core';
+import { withNode, useEditContext } from '@bodiless/core';
 
 export type SingleAccordionComponents = {
   Wrapper: ComponentType<StylableProps>,
@@ -42,13 +43,14 @@ const singleAccordionComponentStart:SingleAccordionComponents = {
   Body: Div,
 };
 
-const SingleAccordionBase = ({
+const SingleAccordionBase = observer(({
   components, expanded, expandedStyle = null, ...rest
 }: any) => {
   const EXPANDED = 'expanded';
   const COLLAPSED = 'collapsed';
   const initialState = expanded ? EXPANDED : COLLAPSED;
   const [accordionState, setAccordionState] = useState(initialState);
+  const { isEdit } = useEditContext();
 
   const toggleAccordionState = () => {
     setAccordionState(accordionState === EXPANDED ? COLLAPSED : EXPANDED);
@@ -65,7 +67,7 @@ const SingleAccordionBase = ({
   return (
     <Wrapper className={[accordionState]} {...rest}>
       <TitleWrapper
-        onClick={toggleAccordionState}
+        onClick={isEdit ? undefined : toggleAccordionState}
         className={[
           'flex',
           'justify-between',
@@ -74,7 +76,15 @@ const SingleAccordionBase = ({
         ]}
       >
         <Title />
-        <span className="material-icons cursor-pointer select-none" data-accordion-element="accordion-icon" data-accordion-icon={accordionState === COLLAPSED ? 'expand' : 'collapse'}>
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
+        <span
+          tabIndex={0}
+          role="button"
+          onClick={toggleAccordionState}
+          className="material-icons cursor-pointer select-none"
+          data-accordion-element="accordion-icon"
+          data-accordion-icon={accordionState === COLLAPSED ? 'expand' : 'collapse'}
+        >
           {accordionState === COLLAPSED ? 'add' : 'remove'}
         </span>
       </TitleWrapper>
@@ -83,14 +93,14 @@ const SingleAccordionBase = ({
       </BodyWrapper>
     </Wrapper>
   );
-};
+});
 
 const asSingleAccordion = withDesign({
   Title: asEditable('title', 'SingleAccordion Title Text'),
   Body: asEditable('body', 'SingleAccordion Body Text'),
 });
 
-const asTestableAccordion = withDesign({
+const asTestableSingleAccordion = withDesign({
   Wrapper: addProps({ 'data-accordion-element': 'accordion' }),
   TitleWrapper: addProps({ 'data-accordion-element': 'accordion-title-wrapper' }),
   Title: addProps({ 'data-accordion-element': 'accordion-title' }),
@@ -108,7 +118,7 @@ const SingleAccordion = flow(
 )(SingleAccordionClean);
 
 const TestableSingleAccordion = flow(
-  asTestableAccordion,
+  asTestableSingleAccordion,
   withNode,
 )(SingleAccordionClean);
 
@@ -119,5 +129,5 @@ export {
   SingleAccordionClean,
   TestableSingleAccordion,
   asSingleAccordion,
-  asTestableAccordion,
+  asTestableSingleAccordion,
 };

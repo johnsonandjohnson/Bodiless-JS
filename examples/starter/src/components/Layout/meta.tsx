@@ -53,10 +53,10 @@ const withMetaCountry = withMetaStatic({
   name: 'bl-country',
 });
 
-const useGetMenuOptions = () => {
+const useMenuOptions = () => {
   const context = useEditContext();
 
-  return () => ([
+  return ([
     {
       name: 'seo',
       isHidden: () => !context.isEdit,
@@ -73,7 +73,7 @@ const seoFormHeader = {
 };
 
 const SeoHelmet = flowRight(
-  withMetaForm(useGetMenuOptions, seoFormHeader),
+  withMetaForm(useMenuOptions, seoFormHeader),
   asBodilessHelmet('meta'),
   withMetaPageTitle('page-title', ''),
   withMetaPageDescription('description', ''),

@@ -15,37 +15,40 @@
 describe('Tout testing', function () {
 
   before(function () {
-    cy.visit('/touts/')
-    cy.clickEdit()
+    cy.visit(pagePath);
+    cy.clickEdit();
   })
 
-  const title = 'AT - Title 1'
-  const description = 'AT - Description 1'
-  const ctaLabel = 'AT - CTA Link 1'
-  const toutUrl = 'AT-toutUrl1'
-  const imageAltText = 'AT-1stToutAltText'
-  const editedPostfix = ' - edited'
-  const editedToutUrl = '-edited'
-  const imageOriginal = 'images/img_615x500.jpg'
-  const imageUpdated = 'images/img_615x502.jpg'
-  const titleXpath = '//*[@id="tout-horizontal"]//*[@data-tout-element="title"]//div[@data-slate-editor="true"]'
-  const descriptionXpath = '//*[@id="tout-horizontal"]//*[@data-tout-element="body"]//div[@data-slate-editor="true"]'
-  const ctaLabelXpath = '//*[@id="tout-horizontal"]//*[@data-tout-element="link"]//div[@data-slate-editor="true"]'
-  const imagePlaceholderXpath = '//*[@id="tout-horizontal"]//img[@data-tout-element="image"]'
-  const urlFieldXpath = '//form[@aria-label="Context Menu Link Form"]//input[@id="link-href"]'
-  const linkIconXpath = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Link"]'
-  const checkmarkIconLinkFormXpath = '//form[@aria-label="Context Menu Link Form"]//button[@aria-label="Submit"]'
-  const altFieldXpath = '//form[@aria-label="Context Menu Image Form"]//input[@id="image-alt"]'
-  const checkmarkIconImageFormXpath = '//form[@aria-label="Context Menu Image Form"]//button[@aria-label="Submit"]'
-  const imageIconXpath = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Image"]'
-  const ctaButtonXpath = '//*[@id="tout-horizontal"]//a[@data-tout-element="link"]'
-  const imageLinkXpath = '//div[@id="tout-horizontal"]//a[@data-tout-element="image-link"]'
-
+  const pagePath = '/touts/';
+  const title = 'AT - Title 1';
+  const description = 'AT - Description 1';
+  const ctaLabel = 'AT - CTA Link 1';
+  const toutUrl = 'AT-toutUrl1';
+  const imageAltText = 'AT-1stToutAltText';
+  const editedPostfix = ' - edited';
+  const editedToutUrl = '-edited';
+  const imagesFolderPath = "images";
+  const imageNameOriginal = 'img_615x500.jpg';
+  const imageNameUpdated = 'img_615x502.jpg';
+  const titleXpath = '//*[@id="tout-horizontal"]//*[@data-tout-element="title"]//div[@data-slate-editor="true"]';
+  const descriptionXpath = '//*[@id="tout-horizontal"]//*[@data-tout-element="body"]//div[@data-slate-editor="true"]';
+  const ctaLabelXpath = '//*[@id="tout-horizontal"]//*[@data-tout-element="link"]//div[@data-slate-editor="true"]';
+  const imagePlaceholderXpath = '//*[@id="tout-horizontal"]//img[@data-tout-element="image"]';
+  const urlFieldCTAXpath = '//form[@aria-label="Context Menu Edit CTA Form"]//input[@id="link-href"]';
+  const linkIconCTAXpath = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Edit CTA"]';
+  const checkmarkIconLinkCTAFormXpath = '//form[@aria-label="Context Menu Edit CTA Form"]//button[@aria-label="Submit"]';
+  const altFieldXpath = '//form[@aria-label="Context Menu Select Image Form"]//input[@id="image-alt"]';
+  const checkmarkIconImageFormXpath = '//form[@aria-label="Context Menu Select Image Form"]//button[@aria-label="Submit"]';
+  const imageIconXpath = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Select Image"]';
+  const ctaButtonXpath = '//*[@id="tout-horizontal"]//a[@data-tout-element="link"]';
+  const imageLinkXpath = '//div[@id="tout-horizontal"]//a[@data-tout-element="image-link"]';
+  const imageOrigPathRegex = new RegExp("images\/pages"+ pagePath + "[a-zA-Z0-9]+\/" + imageNameOriginal, "");
+  const imageUpdPathRegex = new RegExp("images\/pages" + pagePath + "[a-zA-Z0-9]+\/" + imageNameUpdated, "");
 
   it('touts: 1 - filling in Title', () => {
     cy.xpath(titleXpath)
       .type(title)
-      .should('have.text', title)
+      .should('have.text', title);
   })
 
 
@@ -61,86 +64,93 @@ describe('Tout testing', function () {
     cy.xpath(ctaLabelXpath)
       .click()
       .type(ctaLabel)
-      .should('have.text', ctaLabel)
+      .should('have.text', ctaLabel);
   })
 
 
   it('touts: 4 - filling in CTA url', () => {
-    cy.xpath(linkIconXpath)
-      .click()
-    cy.xpath(urlFieldXpath)
-      .type(toutUrl)
-    cy.xpath(checkmarkIconLinkFormXpath)
-      .click()
+    cy.xpath(linkIconCTAXpath)
+      .click();
+    cy.xpath(urlFieldCTAXpath)
+      .type(toutUrl);
+    cy.xpath(checkmarkIconLinkCTAFormXpath)
+      .click();
   })
 
 
   it('touts: 5 - uploading an image', () => {
     cy.xpath(imagePlaceholderXpath)
-      .click()
+      .click();
     cy.xpath(imageIconXpath)
-      .click()
-    const fileName = imageOriginal
-    cy.fixture(fileName).then(fileContent => {
-      cy.get('input[type=file]').upload({ fileContent, fileName, mimeType: "image/jpeg" });
+      .click();
+    const imagePath = `${imagesFolderPath}/${imageNameOriginal}`;
+    cy.fixture(imagePath).then(fileContent => {
+      cy.get('input[type=file]').upload({ fileContent, fileName: imageNameOriginal, mimeType: "image/jpeg" });
     })
-    cy.wait(3000)
+    cy.wait(3000);
     cy.xpath(checkmarkIconImageFormXpath)
-      .click()
+      .click();
   })
 
 
   it('touts: 6 - filling an image alt text', () => {
     cy.xpath(imagePlaceholderXpath)
-      .click()
+      .click();
     cy.xpath(imageIconXpath)
-      .click()
-    cy.xpath(altFieldXpath).clear().type(imageAltText)
+      .click();
+    cy.xpath(altFieldXpath).clear().type(imageAltText);
     cy.xpath(checkmarkIconImageFormXpath)
-      .click()
+      .click();
   })
 
 
   it('touts: 7 - checking data in Preview Mode', () => {
-    cy.wait(3000)
-    cy.clickEdit()
+    cy.wait(3000);
+    cy.clickEdit();
     cy.xpath(titleXpath)
-      .should('have.text', title)
+      .should('have.text', title);
     cy.xpath(descriptionXpath)
       .should('have.text', description);
     cy.xpath(ctaLabelXpath)
-      .should('have.text', ctaLabel)
+      .should('have.text', ctaLabel);
     cy.xpath(imagePlaceholderXpath)
-      .should('have.attr', 'src', '/' + imageOriginal)
-      .and('have.attr', 'alt', imageAltText)
+      .should('have.attr', 'src')
+      .and('match', imageOrigPathRegex);
+    cy.isImageVisible(imagePlaceholderXpath);
+    cy.xpath(imagePlaceholderXpath)
+      .should('have.attr', 'alt', imageAltText);
     cy.xpath(imageLinkXpath)
-      .should('have.attr', 'href', toutUrl)
+      .should('have.attr', 'href', toutUrl);
     cy.xpath(ctaButtonXpath)
-      .click()
-    cy.url().should('include', toutUrl)
-    cy.visit('/touts/');
+      .click();
+    cy.url().should('include', toutUrl);
+    cy.visit(pagePath);
   })
 
 
   it('touts: 8 - checking that the data still present in Edit Mode after switching back from Preview Mode', () => {
-    cy.clickEdit()
+    cy.clickEdit();
     cy.xpath(titleXpath)
-      .should('have.text', title)
+      .should('have.text', title);
     cy.xpath(descriptionXpath)
       .should('have.text', description);
     cy.xpath(ctaLabelXpath)
-      .should('have.text', ctaLabel)
+      .should('have.text', ctaLabel);
     cy.xpath(imagePlaceholderXpath)
-      .should('have.attr', 'src', '/' + imageOriginal)
-      .and('have.attr', 'alt', imageAltText)
+      .should('have.attr', 'src')
+      .and('match', imageOrigPathRegex);
+    cy.isImageVisible(imagePlaceholderXpath);
+    cy.xpath(imagePlaceholderXpath)
+      .should('have.attr', 'alt', imageAltText);
     cy.xpath(imageLinkXpath)
-      .should('have.attr', 'href', toutUrl)
+      .should('have.attr', 'href', toutUrl);
   })
+
 
   it('touts: 9 - editing Title', () => {
     cy.xpath(titleXpath)
       .type(editedPostfix)
-      .should('have.text', title + editedPostfix)
+      .should('have.text', title + editedPostfix);
   })
 
 
@@ -148,76 +158,84 @@ describe('Tout testing', function () {
     cy.xpath(descriptionXpath)
       .click()
       .type(editedPostfix)
-      .should('have.text', description + editedPostfix)
+      .should('have.text', description + editedPostfix);
   })
+
 
   it('touts: 11 - editing CTA label', () => {
     cy.xpath(ctaLabelXpath)
       .click()
       .type(editedPostfix)
-      .should('have.text', ctaLabel + editedPostfix)
+      .should('have.text', ctaLabel + editedPostfix);
   })
 
+
   it('touts: 12 - editing CTA url', () => {
-    cy.xpath(linkIconXpath)
-      .click()
-    cy.xpath(urlFieldXpath)
-      .type(editedToutUrl)
-    cy.xpath(checkmarkIconLinkFormXpath)
-      .click()
+    cy.xpath(linkIconCTAXpath)
+      .click();
+    cy.xpath(urlFieldCTAXpath)
+      .type(editedToutUrl);
+    cy.xpath(checkmarkIconLinkCTAFormXpath)
+      .click();
   })
 
 
   it('touts: 13 - uploading a new image and editing an image alt text', () => {
     cy.xpath(imagePlaceholderXpath)
-      .click()
+      .click();
     cy.xpath(imageIconXpath)
-      .click()
+      .click();
     cy.xpath(altFieldXpath)
-      .type(editedPostfix)
-    const fileName = imageUpdated
-    cy.fixture(fileName).then(fileContent => {
-      cy.get('input[type=file]').upload({ fileContent, fileName, mimeType: "image/jpeg" });
+      .type(editedPostfix);
+    const imagePath = `${imagesFolderPath}/${imageNameUpdated}`;
+    cy.fixture(imagePath).then(fileContent => {
+      cy.get('input[type=file]').upload({ fileContent, fileName: imageNameUpdated, mimeType: "image/jpeg" });
     })
-    cy.wait(3000)
+    cy.wait(3000);
     cy.xpath(checkmarkIconImageFormXpath)
-      .click()
+      .click();
   })
 
 
   it('touts: 14 - checking edited data in Preview Mode', () => {
-    cy.wait(3000)
-    cy.clickEdit()
+    cy.wait(3000);
+    cy.clickEdit();
     cy.xpath(titleXpath)
-      .should('have.text', title + editedPostfix)
+      .should('have.text', title + editedPostfix);;
     cy.xpath(descriptionXpath)
       .should('have.text', description + editedPostfix);
     cy.xpath(ctaLabelXpath)
-      .should('have.text', ctaLabel + editedPostfix)
+      .should('have.text', ctaLabel + editedPostfix);
     cy.xpath(imagePlaceholderXpath)
-      .should('have.attr', 'src', '/' + imageUpdated)
-      .and('have.attr', 'alt', imageAltText + editedPostfix)
+      .should('have.attr', 'src')
+      .and('match', imageUpdPathRegex);
+    cy.isImageVisible(imagePlaceholderXpath);
+    cy.xpath(imagePlaceholderXpath)
+      .should('have.attr', 'alt', imageAltText + editedPostfix);
     cy.xpath(ctaButtonXpath)
-      .should('have.attr', 'href', toutUrl + editedToutUrl)
+      .should('have.attr', 'href', toutUrl + editedToutUrl);
     cy.xpath(imagePlaceholderXpath)
-      .click()
-    cy.url().should('include', toutUrl + editedToutUrl)
-    cy.visit('/touts/');
+      .click();
+    cy.url().should('include', toutUrl + editedToutUrl);
+    cy.visit(pagePath);
   })
 
 
   it('touts: 15 - checking the edited data still present in Edit Mode', () => {
-    cy.clickEdit()
+    cy.clickEdit();
     cy.xpath(titleXpath)
-      .should('have.text', title + editedPostfix)
+      .should('have.text', title + editedPostfix);
     cy.xpath(descriptionXpath)
       .should('have.text', description + editedPostfix);
     cy.xpath(ctaLabelXpath)
-      .should('have.text', ctaLabel + editedPostfix)
+      .should('have.text', ctaLabel + editedPostfix);
     cy.xpath(imagePlaceholderXpath)
-      .should('have.attr', 'src', '/' + imageUpdated)
-      .and('have.attr', 'alt', imageAltText + editedPostfix)
+      .should('have.attr', 'src')
+      .and('match', imageUpdPathRegex);
+    cy.isImageVisible(imagePlaceholderXpath);
+    cy.xpath(imagePlaceholderXpath)
+      .should('have.attr', 'alt', imageAltText + editedPostfix);
     cy.xpath(imageLinkXpath)
-      .should('have.attr', 'href', toutUrl + editedToutUrl)
+      .should('have.attr', 'href', toutUrl + editedToutUrl);
   })
 })

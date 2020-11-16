@@ -52,7 +52,7 @@ Cypress.Commands.add("revertChanges", () => {
 
 
 Cypress.Commands.add("clickEdit", () => {
-  cy.xpath('//*[@aria-label="Edit"]')
+  cy.xpath('//*[contains(@aria-label,"Global Context Menu")]//*[@aria-label="Edit"]')
     .click()
 })
 
@@ -88,6 +88,15 @@ Cypress.Commands.add("toggleMenuLeft", () => {
          .click()
     }
   });
+})
+
+Cypress.Commands.add("isImageVisible", (imageXpath) => {
+  cy.xpath(imageXpath)
+    .should('be.visible')
+    .and(($img) => {
+      // "naturalWidth" and "naturalHeight" are set when the image loads
+      expect($img[0].naturalWidth).to.be.greaterThan(0)
+    })
 })
 
 Cypress.Commands.add("hideContextMenu", () => {

@@ -74,7 +74,8 @@ export const Overlay = ({ settings, ui }: { settings: TOverlaySettings, ui: Full
   );
 
   return (
-    <OverlayWrapper>
+    // Stop click propagation to the native document click
+    <OverlayWrapper onClick={(e) => e.nativeEvent.stopImmediatePropagation()}>
       {hasCloseButton ? <WrappedElements /> : <Elements />}
     </OverlayWrapper>
   );

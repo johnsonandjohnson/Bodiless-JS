@@ -34,13 +34,13 @@ export const withFlowToggle = (useToggle: ToggleHook) => <P extends object, Q ex
 export const ifToggledOn = (useToggle: ToggleHook) => <H extends Function>(
   ...hocs: Function[]
 ) => (
-    Component: CT<any>,
+    Component: CT<any>|string,
   //  @ts-ignore Expected at least 1  arguments, but got 0 or more.ts(2557)
   ) => withFlowToggle(useToggle)(flowRight(...hocs)(Component), Component);
 
 export const ifToggledOff = (useToggle: ToggleHook) => <H extends Function>(
   ...hocs: Function[]
 ) => (
-    Component: CT<any>,
+    Component: CT<any>|string,
   // @ts-ignore
   ) => withFlowToggle(useToggle)(Component, flowRight(...hocs)(Component));

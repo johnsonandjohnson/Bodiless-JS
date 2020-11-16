@@ -13,9 +13,10 @@
  */
 
 import React from 'react';
+import { isObservable, toJS } from 'mobx';
 import { Value, ValueJSON } from 'slate';
 import isEqual from 'react-fast-compare';
-import { useNode } from '@bodiless/core';
+import { useNode, useUUID } from '@bodiless/core';
 import { Change } from './Type';
 import MobxStateContainer from './MobxStateContainer';
 
@@ -27,13 +28,16 @@ type InitialValue = ValueJSON;
 type TOnChange = Function; // (change: Change) => void;
 type TUseOnChangeParams = {
   onChange?: TOnChange;
+  key: string;
+  initialValue: InitialValue;
 };
 type TUseOnChange = (params: TUseOnChangeParams) => (change: Change) => void;
 type TUseValueParam = {
   initialValue: InitialValue;
+  key: string;
 };
 type TUseValue = (params: TUseValueParam) => Value;
-type TUseNodeStateHandlersParams = TUseOnChangeParams & TUseValueParam;
+type TUseNodeStateHandlersParams = Omit<TUseOnChangeParams & TUseValueParam, 'key'>;
 type TUseNodeStateHandlers = (
   params: TUseNodeStateHandlersParams,
 ) => {
@@ -57,22 +61,36 @@ const preserveAll = {
 
 // Create the onChange prop.
 // @TODO Should be memoized with useCallback.
-const useOnChange: TUseOnChange = ({ onChange }) => {
+const useOnChange: TUseOnChange = ({ onChange, key, initialValue }) => {
   const { setState } = useStateContainer();
   const { node } = useNode<Data>();
 
   return change => {
     const { value } = change;
     const jsonValue = value.toJSON();
-    const key = (node.path as string[]).join('$');
+    let { document } = node.data;
+
+    if (isObservable(document)) {
+      document = toJS(document);
+    }
     // Set the editor state.  We use the node path as a key.
     const newState = {
       [key]: value,
     };
-    if (
-      !node.data.document
-      || !isEqual(node.data.document, jsonValue.document)
-    ) {
+
+    // If Document has changed
+    const isDocumentChanged = !isEqual(document, jsonValue.document);
+
+    // If the value is initial value
+    const isNewValueInitial = isEqual(initialValue.document, jsonValue.document);
+
+    // If New Value is Empty
+    const isNewValueEmpty = isNewValueInitial && document && isDocumentChanged;
+
+    // If New Value Has Changes
+    const isNewValueChanged = !isNewValueInitial && (!document || isDocumentChanged);
+
+    if (isNewValueEmpty || isNewValueChanged) {
       node.setData({ document: jsonValue.document! });
     }
     if (onChange) {
@@ -83,10 +101,9 @@ const useOnChange: TUseOnChange = ({ onChange }) => {
 };
 
 // Create the value prop (gets current editor value from state).
-const useValue: TUseValue = ({ initialValue }) => {
+const useValue: TUseValue = ({ initialValue, key }) => {
   const { get: getValue } = useStateContainer();
   const { node } = useNode<Data>();
-  const key = (node.path as string[]).join('$');
   let oldValue = getValue(key);
   if (!oldValue) {
     oldValue = Value.fromJSON(
@@ -108,12 +125,18 @@ const useValue: TUseValue = ({ initialValue }) => {
 const useNodeStateHandlers: TUseNodeStateHandlers = ({
   initialValue,
   onChange,
-}) => ({
-  value: useValue({
-    initialValue,
-  }),
-  onChange: useOnChange({
-    onChange,
-  }),
-});
+}) => {
+  const key = useUUID();
+  return ({
+    value: useValue({
+      initialValue,
+      key,
+    }),
+    onChange: useOnChange({
+      onChange,
+      key,
+      initialValue,
+    }),
+  });
+};
 export default useNodeStateHandlers;

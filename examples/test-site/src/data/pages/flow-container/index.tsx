@@ -20,6 +20,8 @@ import {
 } from '@bodiless/components';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import resolveConfig from 'tailwindcss/resolveConfig';
+import { withDefaultContent, withNodeKey, withResetButton } from '@bodiless/core';
+import { flow } from 'lodash';
 import Layout from '../../../components/Layout';
 import tailWindConfig from '../../../../tailwind.config';
 import { FlowContainerDefault } from '../../../components/FlowContainer';
@@ -29,6 +31,25 @@ const FLOW_CONTAINER_PAGE_PATH = 'flowContainer';
 const options = getSnapFrom(
   withTailwindClasses(resolveConfig(tailWindConfig))('w-full sm:w-1/2 sm:w-full lg:w-1/2 lg:w-full'),
 );
+
+const contentfulFlowContainer = {
+  items: [
+    {
+      uuid: 'c68e8090-1dc6-11eb-9a1b-2b284c8ff835',
+      wrapperProps: {
+        className: 'w-full',
+      },
+      type: 'ToutHorizontalWithTitleBodyWithCTA',
+    },
+  ],
+};
+
+const ContentfulFlowContainer = flow(
+  withDefaultContent({ contentfulFlowContainer }),
+  withNodeKey('contentfulFlowContainer'),
+  withResetButton({ nodeKey: 'contentfulFlowContainer' }),
+)(FlowContainerDefault);
+
 const FlowContainerPage = (props: any) => (
   <Page {...props}>
     <Layout>
@@ -62,32 +83,34 @@ const FlowContainerPage = (props: any) => (
       <FlowContainerDefault
         id="width_25"
         nodeKey="width_25"
-        defaultWidth="25"
+        getDefaultWidth={() => 'w-full lg:w-1/4'}
       />
       <h2 className="text-2xl font-bold mt-4">Default Width of 33% (should round up to 33.33%)</h2>
       <FlowContainerDefault
         id="width_33"
         nodeKey="width_33"
-        defaultWidth="33"
+        getDefaultWidth={() => 'w-full lg:w-1/3'}
       />
       <h2 className="text-2xl font-bold mt-4">Default Width of 50%</h2>
       <FlowContainerDefault
         id="width_50"
         nodeKey="width_50"
-        defaultWidth="50"
+        getDefaultWidth={() => 'w-full lg:w-1/2'}
       />
       <h2 className="text-2xl font-bold mt-4">Default Width of 66.66% </h2>
       <FlowContainerDefault
         id="width_66"
         nodeKey="width_66"
-        defaultWidth="66.66"
+        getDefaultWidth={() => 'w-full lg:w-2/3'}
       />
       <h2 className="text-2xl font-bold mt-4">Default Width of 75%</h2>
       <FlowContainerDefault
         id="width_75"
         nodeKey="width_75"
-        defaultWidth="75"
+        getDefaultWidth={() => 'w-full lg:w-3/4'}
       />
+      <h2 className="text-2xl font-bold mt-4">Contentful Flow Container</h2>
+      <ContentfulFlowContainer />
     </Layout>
   </Page>
 );

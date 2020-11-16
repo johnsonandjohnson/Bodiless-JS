@@ -30,7 +30,7 @@ const asDefaultLogoStyle = withDesign({
 
 const asSiteHeader = withDesign({
   Wrapper: flow(asPrimaryColorBackground, addClasses('')),
-  Container: flow(asPageContainer, addClasses('flex min-h-16 items-end')),
+  Container: flow(asPageContainer, addClasses('flex justify-between min-h-16 items-center')),
   MenuContainer: asPageContainer,
   SiteLogoReturn: asDefaultLogoStyle,
 });

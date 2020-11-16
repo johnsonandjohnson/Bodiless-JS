@@ -18,11 +18,13 @@ import {
   withBurgerSubmenu,
 } from './components/BurgerMenu';
 
+import './main.css';
+
 export {
   SingleAccordion,
   SingleAccordionClean,
   asSingleAccordion,
-  asTestableAccordion,
+  asTestableSingleAccordion,
 } from './components/SingleAccordion';
 
 export {
@@ -33,9 +35,10 @@ export {
   asHorizontalSubMenu,
   asMainMenu,
   asMainSubMenu,
-  asMenu,
+  asStylableList,
   MenuLink,
   withSubmenu,
+  withMenuLinkTitle,
 } from './components/MainMenu/index';
 
 export {
@@ -77,10 +80,15 @@ export {
 };
 
 export {
+  AccordionClean,
   useAccordionContext,
   asAccordionWrapper,
   asAccodionTitle,
   asAccordionBody,
+  asTestableAccordion,
+  isAccordionExpanded,
+  isAccordionContracted,
+  withDisableExpandOnClick,
 } from './components/Accordion';
 
 export {
@@ -89,3 +97,22 @@ export {
   BCarouselClean,
   asEditableCarousel,
 } from './components/Carousel';
+
+export * from './components/Menu';
+
+export { default as Embed } from './components/Embed';
+export {
+  asResponsive21By9Embed,
+  asResponsive16By9Embed,
+  asResponsive4By3Embed,
+  asResponsive1By1Embed,
+} from './components/Embed.tokens';
+
+export {
+  asBaseResponsiveIframe,
+  asResponsiveIframe,
+} from './components/ResponsiveIframe';
+export {
+  asBaseResponsiveYouTube,
+  asResponsiveYouTube,
+} from './components/ResponsiveYouTube';

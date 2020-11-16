@@ -29,6 +29,8 @@ const getMockNode = (data: string) => {
     getNode: jest.fn(() => ({ content: data })),
     getKeys: jest.fn(),
     hasError: jest.fn(),
+    getPagePath: jest.fn(() => '/'),
+    getBaseResourcePath: jest.fn(() => '/'),
   };
   const actions = {
     setNode: jest.fn(),

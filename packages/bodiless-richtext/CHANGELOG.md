@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.59](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.58...v0.0.59) (2020-11-05)
+
+**Note:** Version bump only for package @bodiless/richtext
+
+
+
+
+
+## [0.0.58](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.57...v0.0.58) (2020-10-23)
+
+**Note:** Version bump only for package @bodiless/richtext
+
+
+
+
+
+## [0.0.57](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.56...v0.0.57) (2020-10-15)
+
+
+### Bug Fixes
+
+* **richtext, richtext-ui:** Additional ... in RTE throws type is invalid error and serves WSOD ([#536](https://github.com/johnsonandjohnson/bodiless-js/issues/536)) ([d35ddd4](https://github.com/johnsonandjohnson/bodiless-js/commit/d35ddd43b9a26f43d0adcf8adbc91cde3f2d6463))
+
+
+
+
+
+## [0.0.56](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.55...v0.0.56) (2020-09-21)
+
+
+### Bug Fixes
+
+* **richtext:** Slate editor in tooltip with shared node. ([#540](https://github.com/johnsonandjohnson/bodiless-js/issues/540)) ([5c62a77](https://github.com/johnsonandjohnson/bodiless-js/commit/5c62a77f531cbee1128e4a7adbea0ab951de9f68)), closes [#535](https://github.com/johnsonandjohnson/bodiless-js/issues/535)
+
+
+### Features
+
+* **backend, components:** Image files should be uploaded to path per page ([#527](https://github.com/johnsonandjohnson/bodiless-js/issues/527)) ([8bffeac](https://github.com/johnsonandjohnson/bodiless-js/commit/8bffeacfa2a1fdc4dc7ff61dea9aaff360673af8))
+* **core:** Improved Context Menu API ([#519](https://github.com/johnsonandjohnson/bodiless-js/issues/519)) ([463e8f6](https://github.com/johnsonandjohnson/bodiless-js/commit/463e8f61a8e13af6b6c62428d2b6a63fce197cb7)), closes [#3](https://github.com/johnsonandjohnson/bodiless-js/issues/3) [#487](https://github.com/johnsonandjohnson/bodiless-js/issues/487) [#486](https://github.com/johnsonandjohnson/bodiless-js/issues/486)
+
+
+
+
+
 ## [0.0.55](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.54...v0.0.55) (2020-08-28)
 
 **Note:** Version bump only for package @bodiless/richtext

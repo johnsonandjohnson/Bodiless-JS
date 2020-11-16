@@ -63,7 +63,7 @@ const Tout: FC<DesignableProps<ToutComponents>> = ({ design }) => {
   );
 };
 
-const asBasicTout = withDesign({
+const asBasicTout = withDesign<ToutComponents>({
   Wrapper: addClasses('font-sans'),
   Title: addClasses('text-sm text-green'),
   Body: addClasses('my-10'),
@@ -92,6 +92,7 @@ const withGreenCtaText = withDesign({
   ),
 });
 
+// @ts-ignore: Types of parameters are incompatible.
 const BasicTout = asBasicTout(Tout);
 const PinkTout = asPinkTout(BasicTout);
 // const StandardTout = asStandardTout(BasicTout);asSta
@@ -102,7 +103,7 @@ const StandardPinkAndGreenTout = flowRight(
   asPinkTout,
 )(BasicTout);
 
-function expectClasses(wrapper: Cheerio, selector: string, classes: string) {
+function expectClasses(wrapper: cheerio.Cheerio, selector: string, classes: string) {
   const normalize = (className: string) => className.split(' ').filter(Boolean).sort().join(' ');
   const found = normalize(wrapper.find(selector).attr('class')!);
   const expected = normalize(classes);

@@ -23,6 +23,7 @@ import {
   withTerm,
   perserveMeta,
   withFacet,
+  HOC,
 } from '../lib/meta';
 
 describe('withTitle', () => {
@@ -86,8 +87,8 @@ describe('withTerm', () => {
 describe('perserveMeta', () => {
   it('if a hoc is wrapped in perserve meta the meta from before the hoc will be applied', () => {
     const Comp = withTitle('title')(React.Fragment);
-    const HOC = (Component:React.ComponentType) => () => <Component />;
-    const perservedHOC = perserveMeta(HOC);
+    const Hoc = (Component:React.ComponentType) => () => <Component />;
+    const perservedHOC = perserveMeta(Hoc as HOC);
     expect(perservedHOC(Comp).title).toBe('title');
   });
 });
@@ -114,7 +115,7 @@ describe('withFacet', () => {
       B.categories = { x: ['y'] };
       return B;
     };
-    const hoc = withFacet('cat')('term')(newHoc);
+    const hoc = withFacet('cat')('term')(newHoc as HOC);
     expect(hoc(C).categories).toStrictEqual({ x: ['y'], cat: ['term'] });
     expect(hoc(C).title).toBe('title term');
   });

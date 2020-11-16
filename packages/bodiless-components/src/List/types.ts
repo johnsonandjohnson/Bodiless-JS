@@ -12,20 +12,20 @@
  * limitations under the License.
  */
 
-import { HTMLProps, ComponentType, PropsWithChildren } from 'react';
-import { DesignableComponentsProps, DesignableProps } from '@bodiless/fclasses';
-import { WithNodeProps } from '@bodiless/core';
+import type { HTMLProps, ComponentType, PropsWithChildren } from 'react';
+import type { DesignableComponentsProps, DesignableProps } from '@bodiless/fclasses';
+import type { WithNodeProps, EditButtonOptions } from '@bodiless/core';
 
-export type TitleProps = {
-  onAdd: () => void,
-  onDelete: () => void,
+export type ItemProps = {
+  addItem: () => void,
+  deleteItem: () => void,
   canDelete: () => boolean,
 };
 
 export type ListDesignableComponents = {
   Wrapper: ComponentType<any>,
-  Item: ComponentType<any>,
-  Title: ComponentType<TitleProps>,
+  Item: ComponentType<ItemProps>,
+  Title: ComponentType<any>,
   ItemMenuOptionsProvider: ComponentType<any>,
 };
 
@@ -52,3 +52,5 @@ export type UseItemWithSublist = (Sublist: ComponentType<FinalProps>) =>
 };
 
 export type WithSublistToggle = (Sublist: ComponentType<FinalProps>) => ComponentType<FinalProps>;
+
+export type UseListOverrides<P = any> = (props: P) => Partial<EditButtonOptions<P, Data>>;

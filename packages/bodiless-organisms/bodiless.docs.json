@@ -4,6 +4,8 @@
     "BurgerMenu.md" : "./doc/BurgerMenu.md",
     "MainMenu.md" : "./doc/MainMenu.md",
     "FilterByGroup.md" : "./doc/FilterByGroup.md",
-    "Carousel.md": "./doc/Carousel.md"
+    "Carousel.md": "./doc/Carousel.md",
+    "Embed.md": "./doc/Embed.md",
+    "Tout.md": "./doc/Tout.md"
   }
 }

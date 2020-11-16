@@ -14,90 +14,142 @@
 
 import { flowRight } from 'lodash';
 import { withoutProps } from './hoc';
-import { PageEditContextInterface } from './PageEditContext/types';
 import useContextMenuForm, {
   FormBodyProps as ContextMenuFormBodyProps,
 } from './contextMenuForm';
 import { withMenuOptions } from './PageContextProvider';
-import type { TMenuOptionGetter } from './Types/PageContextProviderTypes';
+import withCompoundForm from './withCompoundForm';
 import type { EditButtonProps, EditButtonOptions } from './Types/EditButtonTypes';
+import { TMenuOption } from './Types/ContextMenuTypes';
 
-export const useEditFormProps = <P extends object, D extends object>({
-  componentData,
-  setComponentData,
-  onSubmit,
-  dataHandler,
-}: P & EditButtonProps<D>) => {
-  const initialValues = componentData;
+type UseEditFormProps<P, D> = P & EditButtonProps<D> & Pick<EditButtonOptions<P, D>, 'renderForm'|'initialValueHandler'|'submitValueHandler'>;
 
-  const initialValues$ = dataHandler && dataHandler.initialValueHandler
-    ? dataHandler.initialValueHandler(initialValues) : initialValues;
-  const submitValues = (values: D) => {
+/**
+ * Generates required props to pass to `ContextMenuForm`
+ * using the normal bodiless data handlers. For example:
+ * ```
+ * const useMyContextMenuForm = props => (
+ *   const render = () => (
+ *     <ContextMenuForm {..useEditFormProps(props)}>
+ *       // Custom form components
+ *     </ContextMenuForm>
+ *   );
+ *   // use this render to provide a menu button.
+ * );
+ * ```
+ * Alternatively you can pass an additional renderForm callback
+ * to generate props suitable for `useEditForm`:
+ * ```
+ * const WithMyContextMenuForm = props => (
+ *   const renderForm = () => // Custom form components
+ *   const render = useContextMenuForm(useEditFormProps({ ...props, renderForm }));
+ *   // use this render to provide a menu button.
+ * };
+ * ```
+ *
+ * @param props The props passed to the component providing the form.
+ *
+ * @return Props suitable for passing to ContextMenuForm.
+ */
+export const useEditFormProps = <P extends object, D extends object>(
+  props: UseEditFormProps<P, D>,
+) => {
+  const {
+    componentData: initialValues$,
+    setComponentData,
+    onSubmit,
+    initialValueHandler,
+    submitValueHandler,
+    renderForm: renderForm$,
+  } = props;
+
+  const initialValues = initialValueHandler
+    ? initialValueHandler(initialValues$) : initialValues$;
+  const submitValues$ = (values: D) => {
     setComponentData(values);
-    Object.assign(componentData, values);
-    // @todo: refactor - replace this workaround fix.
-    Object.assign(initialValues$, dataHandler && dataHandler.initialValueHandler
-      ? dataHandler.initialValueHandler(initialValues) : initialValues);
     if (onSubmit) onSubmit();
   };
-  const submitValues$ = dataHandler && dataHandler.submitValueHandler
-    ? flowRight(submitValues, dataHandler.submitValueHandler) : submitValues;
-  return {
-    submitValues: submitValues$,
-    initialValues: initialValues$,
-  };
-};
-
-export const createMenuOptionHook = <P extends object, D extends object>({
-  icon,
-  name,
-  label,
-  global,
-  local,
-  renderForm,
-  useGetMenuOptions,
-}: EditButtonOptions<P, D>) => (
-    props: P & EditButtonProps<D>,
-    context: PageEditContextInterface,
-  ) => {
-    const { unwrap, isActive } = props;
-    const renderFormBody = (p: ContextMenuFormBodyProps<D>) => renderForm({
+  const submitValues = submitValueHandler
+    ? flowRight(submitValues$, submitValueHandler) : submitValues$;
+  if (renderForm$) {
+    // Pass component props to the render function.
+    const renderForm = (p: ContextMenuFormBodyProps<D>) => renderForm$({
       ...p,
-      unwrap,
+      // @TODO: Avoid passing all the props.
       componentProps: props,
     });
-    const form = useContextMenuForm({
-      ...useEditFormProps(props),
-      renderFormBody,
-    });
-    const getMenuOptions: TMenuOptionGetter = () => [
-      {
-        icon,
-        name,
-        label,
-        isActive,
-        global,
-        local,
-        // @TODO: Align this onSubmit prop received from ContextMenu with closeForm
-        handler: () => form,
-      },
-    ];
-    // If a hook providing additional menu options was specified, then call it.
-    if (useGetMenuOptions) {
-      const getMenuOptions$1 = useGetMenuOptions(props, context) || (() => []);
-      return () => [...getMenuOptions(), ...getMenuOptions$1()];
-    }
-    return getMenuOptions;
+    return { initialValues, submitValues, renderForm };
+  }
+  return { initialValues, submitValues };
+};
+
+const createMenuOptionHook = <P extends object, D extends object>(
+  options: EditButtonOptions<P, D> | ((props: P) => EditButtonOptions<P, D>),
+) => (
+    props: P & EditButtonProps<D>,
+  ) => {
+    const options$ = typeof options === 'function' ? options(props) : options;
+    const {
+      renderForm,
+      groupLabel,
+      groupMerge,
+      initialValueHandler,
+      submitValueHandler,
+      ...rest
+    } = options$;
+    const { isActive } = props;
+    const render = useContextMenuForm(useEditFormProps({
+      ...props,
+      renderForm,
+      initialValueHandler,
+      submitValueHandler,
+    }));
+    const menuOption = {
+      ...rest,
+      handler: () => render,
+    };
+    if (isActive) menuOption.isActive = isActive;
+    // We always create a custom menu group for this option so we have full control
+    // ovef group label and merge behavior.
+    const menuGroup:TMenuOption = {
+      name: `${menuOption.name}-group`,
+      label: groupLabel || menuOption.label,
+      groupMerge: groupMerge || 'none',
+      local: menuOption.local,
+      global: menuOption.global,
+      Component: 'group',
+    };
+    menuOption.group = menuGroup.name;
+    return [menuOption, menuGroup];
   };
 
+/**
+ * Uses the provided options to create an HOC which adds an edit button provider
+ * to the wrapped component.
+ *
+ * @param options The options defining the edit button.
+ *
+ * @return An HOC which will add an edit button for the wrapped component.
+ */
 const withEditButton = <P extends object, D extends object>(
-  options: EditButtonOptions<P, D>,
-) => flowRight(
-    withMenuOptions({
-      useGetMenuOptions: createMenuOptionHook(options),
-      name: options.name,
-    }),
-    withoutProps(['setComponentData', 'unwrap', 'isActive']),
+  options: EditButtonOptions<P, D> | ((props: P) => EditButtonOptions<P, D>),
+) => {
+  const isCompoundForm = typeof options === 'object'
+    && options.useCompoundForm !== undefined
+    && options.useCompoundForm();
+  const withMenuOptions$ = isCompoundForm
+    ? withCompoundForm({
+      useMenuOptions: createMenuOptionHook(options),
+      name: `Edit ${options.name}`,
+    })
+    : withMenuOptions({
+      useMenuOptions: createMenuOptionHook(options),
+      name: `Edit${options.name}`,
+    });
+  return flowRight(
+    withMenuOptions$,
+    withoutProps(['setComponentData', 'isActive']),
   );
+};
 
 export default withEditButton;

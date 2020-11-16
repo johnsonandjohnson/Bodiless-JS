@@ -17,24 +17,40 @@ import { uniqBy } from 'lodash';
 import ContextMenuItem from './ContextMenuItem';
 import StructuredChildren from '../ContextMenu/StructuredChildren';
 import ContextMenuProvider, { getUI } from './ContextMenuContext';
-import type {
-  IContextMenuProps, ContextMenuFormProps, TMenuOption,
+import {
+  IContextMenuProps, ContextMenuFormProps, TMenuOption, MenuOptionDefaultComponents,
 } from '../Types/ContextMenuTypes';
 
-const createChildrenFromOptions = (options: TMenuOption[]) => options.map(
+const getComponent = (option: TMenuOption, defaultComponents: MenuOptionDefaultComponents) => {
+  if (typeof option.Component === 'function') return option.Component;
+  if (option.Component === 'group') return defaultComponents.group;
+  return defaultComponents.item;
+};
+
+/**
+ * @private
+ * Converts an array of context menu option objects into an array of child components.
+ *
+ * @param options The array of options
+ * @param defaultComponents Default components to be used when a component does not define one.
+ */
+const createChildrenFromOptions = (
+  options: TMenuOption[]|undefined,
+  defaultComponents: MenuOptionDefaultComponents,
+) => uniqBy((options || []).map(
   option => {
-    const Component = option.Component || ContextMenuItem;
+    const Component = getComponent(option, defaultComponents);
     return (
       <Component
         option={option}
-        group={option.group || option.name}
+        group={option.group}
         name={option.name}
         key={option.name}
         aria-label={option.name}
       />
     );
   },
-);
+), 'key');
 
 const ContextMenuBase: FC<IContextMenuProps> = (props) => {
   if (typeof window === 'undefined') return null;
@@ -43,13 +59,33 @@ const ContextMenuBase: FC<IContextMenuProps> = (props) => {
   const {
     ui,
     renderInTooltip = true,
+    closeForm,
     children,
   } = props;
   const { Toolbar } = getUI(ui);
 
+  const closeMenuForm = (e: KeyboardEvent | MouseEvent) => {
+    if (typeof closeForm === 'function') {
+      closeForm(e);
+    } else {
+      setRenderForm(undefined);
+    }
+  };
+
   if (renderForm) {
     const formProps: ContextMenuFormProps = {
-      closeForm: () => setRenderForm(undefined),
+      /**
+       * Here we use `closeForm` handler from component props to close the form if
+       * `e.target` is NOT a close button with `id="data-bl-component-form-close-button"`.
+       *
+       * For example, if we try to close the form by clicking outside of it,
+       * it will try to execute `closeForm` from the component props first
+       * and if it is not defined, it will just close the form using standard setRenderForm.
+       */
+      // eslint-disable-next-line no-confusing-arrow
+      closeForm: (e) => e.currentTarget.hasAttribute('data-bl-component-form-close-button')
+        ? setRenderForm(undefined)
+        : closeMenuForm(e),
       ui,
       'aria-label': 'Context Submenu Form',
     };
@@ -75,14 +111,19 @@ const ContextMenu: FC<IContextMenuProps> = (props) => {
   const { options, ui, children } = props;
   const { ContextMenuGroup } = getUI(ui);
   const childProps = { ui };
-  const childrenFromOptions = uniqBy(createChildrenFromOptions(options || []), 'key');
+  const childrenFromOptions = createChildrenFromOptions(
+    options,
+    { item: ContextMenuItem, group: ContextMenuGroup },
+  );
+  const finalChildren = children
+    ? [...React.Children.toArray(children).filter(React.isValidElement), ...childrenFromOptions]
+    : childrenFromOptions;
 
-  if (children || childrenFromOptions.length > 0) {
+  if (finalChildren.length > 0) {
     return (
       <ContextMenuBase {...props}>
         <StructuredChildren components={{ Group: ContextMenuGroup! }} {...childProps}>
-          {children}
-          {childrenFromOptions}
+          {finalChildren}
         </StructuredChildren>
       </ContextMenuBase>
     );
