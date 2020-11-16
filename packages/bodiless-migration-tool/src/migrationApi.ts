@@ -24,17 +24,53 @@ import {
   ensureDirectoryExistence,
 } from './helpers';
 
+/**
+ * defines types for MigrationApi constructor
+ */
 type MigrationApiParams = {
+  /**
+   * stores page data and site data directories
+   */
   app: JamStackApp,
+  /**
+   * url of the migrated page
+   */
   pageUrl: string,
 };
 
+/**
+ * defines interface for migration api object
+ * exposed to the plugins
+ */
 type MigrationApiType = {
+  /**
+   * writes json data to a file synchronously
+   * replaces the file if it already exists
+   * @param path - path to a file
+   * @param data - the data to write
+   */
   writeJsonFileSync(path: string, data: any): void,
-  getPagePath: (pagePath?: string) => string,
+  /**
+   * maps a url to the file system directory containing corresponding page data
+   * @param pageUrl - page url that should be mapped
+   * if not specified, pageUrl passed to migration api constructor will be taken
+   * @returns file system directory containing page data
+   */
+  getPagePath: (pageUrl?: string) => string,
+  /**
+   * provides directory containing global site data
+   * @returns file system directory containing global site data
+   */
   getSitePath: () => string,
 };
 
+/**
+ * maps page url into file system path
+ * removes page url extensions
+ * trims page query params
+ * @param pageUrl - url that should be mapped
+ * @returns filePath - file system path
+ */
 const getPagePathFromUrl = (pageUrl: string) => {
   let filePath = url.parse(pageUrl).path;
   if (filePath === undefined) {
@@ -45,6 +81,9 @@ const getPagePathFromUrl = (pageUrl: string) => {
   return filePath;
 };
 
+/**
+ * Exposes migration tool api that can be consumed by external plugins
+ */
 class MigrationApi implements MigrationApiType {
   private app: JamStackApp;
 

@@ -14,22 +14,51 @@
 
 import { MigrationApiType } from './migrationApi';
 
+/**
+ * params exposed once a page create event is emitted
+ */
 type OnPageCreateParams = {
+  /**
+   * reference to cheerio document root of the migrated page
+   */
   document: cheerio.Root,
+  /**
+   * path of the migrated page
+   */
   pagePath: string,
+  /**
+   * object containing migration tool api
+   */
   api: MigrationApiType,
 };
 
+/**
+ * a list of events emitted by the tool
+ */
 type Events = {
   onPageCreate: (params: OnPageCreateParams) => void,
 };
 
+/**
+ * interface for building external plugin
+ */
 type PluginType = Events;
 
+/**
+ * stores a list of plugins
+ * allows to register a new plugin
+ * invokes plugins once a particular event is triggered
+ */
 type PluginManagerType = {
   registerPlugin: (plugin: PluginType) => void,
 } & Events;
 
+/**
+ * stores a list of plugins
+ * provides a factory to create plugins
+ * allows to register a new plugin
+ * invokes plugins once a particular event is triggered
+ */
 class PluginManager implements PluginManagerType {
   private plugins: PluginType[] = [];
 

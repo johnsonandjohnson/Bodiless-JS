@@ -56,7 +56,7 @@ The tool is given URL that will crawl the existing site finding all pages, gener
 
     ```
 
-1. Prepare the migration-settings.json. All settings can be found in Configuration section
+1. Prepare the migration-settings.js. All settings can be found in Configuration section
 
 1. Execute the command to flatten the site
 
@@ -69,7 +69,7 @@ The tool is given URL that will crawl the existing site finding all pages, gener
 
 ### Configuration
 
-Using the requirements of the flattened site, prepare a build plan by adjusting `migration-settings.json`
+Using the requirements of the flattened site, prepare a build plan by adjusting `migration-settings.js`
 
 The following options control how the the site will be flattened.
 

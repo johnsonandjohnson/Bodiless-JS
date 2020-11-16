@@ -47,6 +47,9 @@ class MigrationTool extends Command {
     { name: 'staticDir' },
   ];
 
+  /**
+   * contains a list of default plugins provided by the tool
+   */
   static plugins = plugins;
 
   async run() {

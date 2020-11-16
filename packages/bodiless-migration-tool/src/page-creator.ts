@@ -57,6 +57,10 @@ export type PageCreatorParams = {
    * default: index.jsx
    */
   pageIndexFile?: string | ((pageUrl: string) => string),
+  /**
+   * migration api object
+   * stores path to the directory containing page data
+   */
   migrationApi: MigrationApiType,
   staticDir: string,
   templatePath: string,
@@ -117,7 +121,7 @@ export class PageCreator {
     }
   }
 
-  getPageFilePath(pageUrl: string, fileName?: string): string {
+  private getPageFilePath(pageUrl: string, fileName?: string): string {
     const filePath = this.params.migrationApi.getPagePath(pageUrl);
     const fileName$ = fileName || this.pageIndexFile;
     return filePath === '/' ? fileName$ : path.join(filePath, fileName$);

@@ -12,6 +12,12 @@
  * limitations under the License.
  */
 
+/**
+ * this file provides a sample plugin
+ * that demonstrates how data can be extracted from a migrate page
+ * and written to local file system
+ */
+
 import path from 'path';
 import type { OnPageCreateParams } from '../pluginManager';
 
