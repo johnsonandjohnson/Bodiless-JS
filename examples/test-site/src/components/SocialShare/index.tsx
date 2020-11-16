@@ -26,11 +26,14 @@ import {
 import type { SocialShareProvider } from '@bodiless/components';
 import { Div } from '@bodiless/fclasses';
 import asSimpleSocialShare, {
-  StyledIcon, StyledLabel, LogoWrapper, Logo,
+  asOrangeSocialShare, StyledIcon, StyledLabel, LogoWrapper, Logo, WhiteIcon, LogoNoBackground,
 } from './token';
 import imgFacebook from './images/facebook.png';
+import imgFacebookRnd from './images/facebookimg.png';
 import imgTwitter from './images/twitter.png';
+import imgTwitterRnd from './images/twitterimg.png';
 import imgEmail from './images/email.png';
+import imgEmailRnd from './images/emailimg.png';
 
 type ProviderProps = {
   name: string;
@@ -39,6 +42,11 @@ type ProviderProps = {
 };
 
 const Icon = (icon: string, label?: string): JSX.Element => (
+  <StyledLabel>
+    <WhiteIcon>{icon}</WhiteIcon>
+  </StyledLabel>
+);
+const IconWithLabel = (icon: string, label?: string): JSX.Element => (
   <StyledLabel>
     <StyledIcon>{icon}</StyledIcon>
     {label}
@@ -71,6 +79,14 @@ const Provider: FC<any> = (props: ProviderProps) => {
   return (
     <LogoWrapper data-label={name} data-icon={icon} onClick={onclick}>
       <Logo src={icon} alt={name} />
+    </LogoWrapper>
+  );
+};
+const ProviderCustomized: FC<any> = (props: ProviderProps) => {
+  const { name, icon, onclick } = props;
+  return (
+    <LogoWrapper data-label={name} data-icon={icon} onClick={onclick}>
+      <LogoNoBackground src={icon} alt={name} />
     </LogoWrapper>
   );
 };
@@ -123,6 +139,14 @@ const facebook: SocialShareProvider = {
     onclick={facebookShare}
   />,
 };
+const facebookRound: SocialShareProvider = {
+  id: 'facebook',
+  element: <ProviderCustomized
+    name="FaceBook"
+    icon={imgFacebookRnd}
+    onclick={facebookShare}
+  />,
+};
 
 /**
  * Twitter social share provider.
@@ -140,6 +164,14 @@ const twitter: SocialShareProvider = {
     onclick={twitterShare}
   />,
 };
+const twitterRound: SocialShareProvider = {
+  id: 'twitter',
+  element: <ProviderCustomized
+    name="Twitter"
+    icon={imgTwitterRnd}
+    onclick={twitterShare}
+  />,
+};
 
 /**
  * Email share provider.
@@ -154,17 +186,35 @@ const email: SocialShareProvider = {
     onclick={emailShare}
   />,
 };
+const emailRound: SocialShareProvider = {
+  id: 'email',
+  element: <ProviderCustomized
+    name="Email"
+    icon={imgEmailRnd}
+    onclick={emailShare}
+  />,
+};
 
 const providers: SocialShareProvider[] = [
   facebook,
   twitter,
   email,
 ];
+const providersCustomized: SocialShareProvider[] = [
+  facebookRound,
+  twitterRound,
+  emailRound,
+];
 
-export const SimpleSocialShare = flow(asSimpleSocialShare)(SocialShareClean);
-export default () => (
-  <SimpleSocialShare providers={providers} buttonContent={Icon('share', 'Share')} />
+const SimpleSocialShare = flow(asSimpleSocialShare)(SocialShareClean);
+const CustomizedSocialShare = flow(asOrangeSocialShare)(SocialShareClean);
+const IconOnlySocialShare = () => (
+  <CustomizedSocialShare providers={providersCustomized} buttonContent={Icon('share', 'Share')} />
 );
+export default () => (
+  <SimpleSocialShare providers={providers} buttonContent={IconWithLabel('share', 'Share')} />
+);
+export { IconOnlySocialShare };
 
 /**
  * Social Share menu.

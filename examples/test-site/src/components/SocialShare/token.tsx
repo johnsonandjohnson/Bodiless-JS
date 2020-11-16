@@ -31,12 +31,20 @@ const socialShareDesign = {
   SocialShareButton: addClasses('m-2 p-2 bg-green-200 cursor-pointer'),
   SocialShareProdviders: withDesign(providersDesign),
 };
+const socialShareOrangeDesign = {
+  SocialShareWrapper: addClasses('my-4 flex flex-row-reverse'),
+  SocialShareButton: addClasses('m-2 p-2 bg-orange-600 cursor-pointer'),
+  SocialShareProdviders: withDesign(providersDesign),
+};
 
 export const StyledIcon = addClasses('material-icons cursor-pointer align-middle text-gray-600')(Span);
+export const WhiteIcon = addClasses('material-icons cursor-pointer align-middle text-white')(Span);
 export const StyledLabel = addClasses('cursor-pointer')(Label);
 export const Logo = addClasses('bg-blue-500 w-full cursor-pointer')(Img);
+export const LogoNoBackground = addClasses('w-full cursor-pointer')(Img);
 export const LogoWrapper = addClasses('w-8')(Div);
 
 const asSimpleSocialShare = withDesign(socialShareDesign);
+export const asOrangeSocialShare = withDesign(socialShareOrangeDesign);
 
 export default asSimpleSocialShare;

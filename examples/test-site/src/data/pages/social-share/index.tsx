@@ -15,19 +15,27 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import {
-  Section, addClasses,
+  Section, addClasses, H3,
 } from '@bodiless/fclasses';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../../../components/Layout';
-import SocialShare from '../../../components/SocialShare';
+import SocialShare, { IconOnlySocialShare } from '../../../components/SocialShare';
 
-const FlexSection = addClasses('text-right')(Section);
+const FlexSection = addClasses('text-right border')(Section);
+const StyledH3 = addClasses('text-2xl m-2')(H3);
 
 export default (props: any) => (
   <Page {...props}>
     <Layout>
       <h1 className="text-2xl font-bold">Social Share</h1>
-      <FlexSection><SocialShare /></FlexSection>
+      <FlexSection>
+        <StyledH3>Simple share button</StyledH3>
+        <SocialShare />
+      </FlexSection>
+      <FlexSection>
+        <StyledH3>Customized share button</StyledH3>
+        <IconOnlySocialShare />
+      </FlexSection>
     </Layout>
   </Page>
 );
