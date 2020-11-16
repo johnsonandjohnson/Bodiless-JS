@@ -107,6 +107,7 @@
   },
   "scripts": {
     "lint": "tslint -p . -t stylish",
+    "build": "npm run prepack",
     "prepack": "rimraf lib && tsc -b && babel lib --out-dir lib",
     "test": "jest --runInBand",
     "test-clear": "jest --clearCache",

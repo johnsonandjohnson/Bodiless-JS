@@ -12,13 +12,64 @@
  * limitations under the License.
  */
 
-type MigrationApiType = {
+/* eslint class-methods-use-this: 0 */
 
+import fs from 'fs';
+import url from 'url';
+import path from 'path';
+import type { JamStackApp } from './jamstack-app';
+import {
+  trimQueryParamsFromUrl,
+  removeExtensionFromUrl,
+} from './helpers';
+
+type MigrationApiParams = {
+  app: JamStackApp,
+  pageUrl: string,
+};
+
+type MigrationApiType = {
+  writeJsonFileSync(path: string, data: any): void,
+  getPagePath: (pagePath?: string) => string,
+  getSitePath: () => string,
+};
+
+const getPagePathFromUrl = (pageUrl: string) => {
+  let filePath = url.parse(pageUrl).path;
+  if (filePath === undefined) {
+    return '';
+  }
+  filePath = removeExtensionFromUrl(filePath);
+  filePath = trimQueryParamsFromUrl(filePath);
+  return filePath;
 };
 
 class MigrationApi implements MigrationApiType {
-  static create() {
-    return new MigrationApi();
+  private app: JamStackApp;
+
+  private pageUrl: string;
+
+  constructor({ app, pageUrl }: MigrationApiParams) {
+    this.app = app;
+    this.pageUrl = pageUrl;
+  }
+
+  static create(params: MigrationApiParams) {
+    return new MigrationApi(params);
+  }
+
+  public writeJsonFileSync(path$: string, data: any) {
+    return fs.writeFileSync(path$, JSON.stringify(data, null, 2));
+  }
+
+  public getPagePath(pageUrl?: string) {
+    const basePath = this.app.getPagesDir();
+    const pagePath = getPagePathFromUrl(pageUrl || this.pageUrl);
+    return path.join(basePath, pagePath);
+  }
+
+  public getSitePath() {
+    return this.app.getSiteDataDir();
   }
 }
 

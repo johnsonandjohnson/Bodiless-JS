@@ -185,3 +185,7 @@ export function prependProtocolToBareUrl(url$: string, protocol = 'https://') {
   }
   return url$;
 }
+
+export function removeExtensionFromUrl(pageUrl: string) {
+  return pageUrl.replace(/\.[^/.]+$/, '');
+}

@@ -38,7 +38,7 @@ interface HtmlParserInterface {
   getHeadStyles(): string
   getHeadInlineStyles(): string
   getBodyInlineScripts(): string
-  getMetaTags(): string
+  getMetaTags(): cheerio.Element[],
   getImages(): string
   clean(): void
   replaceString(oldHtmlString: string, newHtmlString: string): void
@@ -138,8 +138,8 @@ export default class HtmlParser implements HtmlParserInterface {
     throw new Error();
   }
 
-  getMetaTags(): string {
-    throw new Error();
+  getMetaTags() {
+    return this.$('meta').toArray();
   }
 
   getImages(): string {

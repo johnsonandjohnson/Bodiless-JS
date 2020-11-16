@@ -24,6 +24,7 @@ import postBuild from './post-build';
 import page404Handler from './page404-handler';
 import { PluginManager } from './pluginManager';
 import loadSettings from './loadSettings';
+import * as plugins from './plugins';
 
 enum CommandType {
   Flatten = 'flatten',
@@ -45,6 +46,8 @@ class MigrationTool extends Command {
     { name: 'command' },
     { name: 'staticDir' },
   ];
+
+  static plugins = plugins;
 
   async run() {
     const { args } = this.parse(MigrationTool);
@@ -71,7 +74,7 @@ class MigrationTool extends Command {
       pageCreator,
       crawler: crawlerSettings,
       exports,
-      plugins,
+      plugins: plugins$,
     } = settings;
     const page404Params = page404Handler.getParams(settings);
     const page404Urls = page404Params.page404Url ? [page404Params.page404Url] : [];
@@ -100,7 +103,7 @@ class MigrationTool extends Command {
       allowFallbackHtml: settings.allowFallbackHtml === undefined
         ? true
         : (settings.allowFallbackHtml === true),
-      pluginManager: plugins ? PluginManager.create(plugins) : undefined,
+      pluginManager: plugins$ ? PluginManager.create(plugins$) : undefined,
     };
     const flattener = new SiteFlattener(flattenerParams);
     await flattener.start();

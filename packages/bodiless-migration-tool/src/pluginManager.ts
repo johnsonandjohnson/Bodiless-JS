@@ -49,4 +49,8 @@ class PluginManager implements PluginManagerType {
 }
 
 export { PluginManager };
-export type { PluginType, PluginManagerType };
+export type {
+  PluginType,
+  PluginManagerType,
+  OnPageCreateParams,
+};
