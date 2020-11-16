@@ -120,7 +120,7 @@ export class PageCreator {
   getPageFilePath(pageUrl: string, fileName?: string): string {
     const filePath = this.params.migrationApi.getPagePath(pageUrl);
     const fileName$ = fileName || this.pageIndexFile;
-    return filePath === '/' ? fileName$ : (`${filePath}/${fileName$}`);
+    return filePath === '/' ? fileName$ : path.join(filePath, fileName$);
   }
 
   getHtmlFilePath(pageUrl: string): string {

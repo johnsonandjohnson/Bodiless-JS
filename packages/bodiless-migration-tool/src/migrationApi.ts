@@ -73,5 +73,5 @@ class MigrationApi implements MigrationApiType {
   }
 }
 
-export { MigrationApi };
+export { MigrationApi, getPagePathFromUrl };
 export type { MigrationApiType };
