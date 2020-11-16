@@ -12,13 +12,6 @@
  * limitations under the License.
  */
 
-const { plugins } = require('@bodiless/migration-tool');
-const testPlugin = require('./plugins/testPlugin');
-
-const { createMetatagsPlugin } = plugins;
-
-const metatagsPlugin = createMetatagsPlugin('meta');
-
 module.exports = {
   /**
    * page url that should be scraped
@@ -28,7 +21,7 @@ module.exports = {
    * crawler settings
    */
   crawler: {
-    maxDepth: 1,
+    maxDepth: 100,
   },
   /**
    * page creator settings
@@ -54,7 +47,5 @@ module.exports = {
    * a list of plugins that can subscribe to events emitted by the tool
    */
   plugins: [
-    //testPlugin,
-    //metatagsPlugin,
   ],
 };
