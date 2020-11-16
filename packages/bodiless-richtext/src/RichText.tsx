@@ -210,7 +210,7 @@ const BasicRichText = <P extends object, D extends object>(props: P & RichTextPr
     <uiContext.Provider value={finalUI}>
       <RichTextProvider
         {...rest}
-        initialValue={initialValue || defaultValue}
+        initialValue={initialValue || { ...defaultValue }}
         plugins={plugins}
         globalButtons={globalButtons}
         schema={schema}

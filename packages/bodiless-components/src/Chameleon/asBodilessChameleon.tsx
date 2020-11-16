@@ -32,14 +32,16 @@ import withChameleonContext from './withChameleonContext';
  * @param nodeKey Location of the child node that will be purged.
  */
 const withDeleteNodeOnUnwrap = (
-  nodeKey?: string,
+  nodeKey?: WithNodeKeyProps,
 ) => <P extends object>(Component: ComponentType<P> | string) => {
   const WithDeleteOnUnwrap = (props: P) => {
     const { node } = useNode();
     const { unwrap, ...rest } = props as { unwrap?: () => void; };
     if (!unwrap) return <Component {...props} />;
     const unwrap$ = () => {
-      const node$ = nodeKey ? node.child(nodeKey) : node;
+      const node$ = nodeKey
+        ? node.child(typeof nodeKey === 'string' ? nodeKey : nodeKey.nodeKey!)
+        : node;
       node$.delete();
       if (unwrap) unwrap();
     };
