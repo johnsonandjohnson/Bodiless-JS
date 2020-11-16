@@ -62,7 +62,7 @@ function getDefaultPageParams(): PageCreatorParams {
       'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
     ],
     downloadAssets: false,
-    createPages: false,
+    isEnabled: false,
     htmlToComponents: false,
     headHtml: `
       <base href="https://localhost/" />
@@ -115,7 +115,7 @@ describe('creation of pages', () => {
   test('creation of frontpage', async () => {
     const params = {
       ...getFrontPageParams(),
-      createPages: true,
+      isEnabled: true,
       downloadAssets: false,
     };
     const expectedFileContent = getExpectedContent('data/canvasx_test_page.jsx');
@@ -131,7 +131,7 @@ describe('creation of pages', () => {
   test('creation of products page', async () => {
     const params = {
       ...getProductsListingPageParams(),
-      createPages: true,
+      isEnabled: true,
       downloadAssets: false,
     };
     const expectedFileContent = getExpectedContent('data/canvasx_test_page.jsx');
@@ -229,7 +229,7 @@ describe('break monolithic html down to jsx components', () => {
     const params = {
       ...getFrontPageParams(),
       bodyHtml,
-      createPages: true,
+      isEnabled: true,
       downloadAssets: false,
       htmlToComponents: true,
       htmlToComponentsSettings: settings,
