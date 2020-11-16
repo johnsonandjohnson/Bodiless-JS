@@ -116,3 +116,6 @@ export {
   asBaseResponsiveYouTube,
   asResponsiveYouTube,
 } from './components/ResponsiveYouTube';
+
+export { default as SocialShare } from './components/SocialShare';
+export type { SocialShareProvider } from './components/SocialShare/types';

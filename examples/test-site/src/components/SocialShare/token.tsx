@@ -33,7 +33,7 @@ const socialShareDesign = {
 };
 const socialShareOrangeDesign = {
   SocialShareWrapper: addClasses('my-4 flex flex-row-reverse'),
-  SocialShareButton: addClasses('m-2 p-2 bg-orange-600 cursor-pointer'),
+  SocialShareButton: addClasses('m-2 p-2 bg-orange-600 cursor-pointer rounded'),
   SocialShareProdviders: withDesign(providersDesign),
 };
 

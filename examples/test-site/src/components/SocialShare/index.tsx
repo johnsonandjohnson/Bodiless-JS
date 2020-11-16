@@ -17,13 +17,13 @@ import { flow, flowRight } from 'lodash';
 import { useMenuOptionUI } from '@bodiless/core';
 import type { FormBodyProps } from '@bodiless/core';
 import {
-  SocialShare as SocialShareClean,
   withMeta,
   asBodilessHelmet,
   withMetaForm,
   ImageDropZone,
 } from '@bodiless/components';
-import type { SocialShareProvider } from '@bodiless/components';
+import { SocialShare as SocialShareClean } from '@bodiless/organisms';
+import type { SocialShareProvider } from '@bodiless/organisms';
 import { Div } from '@bodiless/fclasses';
 import asSimpleSocialShare, {
   asOrangeSocialShare, StyledIcon, StyledLabel, LogoWrapper, Logo, WhiteIcon, LogoNoBackground,
