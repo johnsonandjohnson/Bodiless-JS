@@ -41,7 +41,7 @@ type ProviderProps = {
   onclick: Function;
 };
 
-const Icon = (icon: string, label?: string): JSX.Element => (
+const Icon = (icon: string): JSX.Element => (
   <StyledLabel>
     <WhiteIcon>{icon}</WhiteIcon>
   </StyledLabel>
