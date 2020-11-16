@@ -23,8 +23,8 @@ import {
 import postBuild from './post-build';
 import page404Handler from './page404-handler';
 import { PluginManager } from './pluginManager';
-import loadSettings from './loadSettings';
 import * as plugins from './plugins';
+import loadSettings from './loadSettings';
 
 enum CommandType {
   Flatten = 'flatten',
