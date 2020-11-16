@@ -43,6 +43,11 @@ export const StyledLabel = addClasses('cursor-pointer')(Label);
 export const Logo = addClasses('bg-blue-500 w-full cursor-pointer')(Img);
 export const LogoNoBackground = addClasses('w-full cursor-pointer')(Img);
 export const LogoWrapper = addClasses('w-8')(Div);
+export const DropZoneWrapper = addClasses('my-2')(Div);
+
+export const DropZoneDesign = {
+  UploadArea: addClasses('w-full bg-gray-600 text-center p-2')(Div),
+};
 
 const asSimpleSocialShare = withDesign(socialShareDesign);
 export const asOrangeSocialShare = withDesign(socialShareOrangeDesign);

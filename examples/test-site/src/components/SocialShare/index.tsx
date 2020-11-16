@@ -20,13 +20,22 @@ import {
   withMeta,
   asBodilessHelmet,
   withMetaForm,
+  withMetaStatic,
   ImageDropZone,
+  TImagePickerUI,
 } from '@bodiless/components';
 import { SocialShare as SocialShareClean } from '@bodiless/organisms';
 import type { SocialShareProvider } from '@bodiless/organisms';
-import { Div } from '@bodiless/fclasses';
 import asSimpleSocialShare, {
-  asOrangeSocialShare, StyledIcon, StyledLabel, LogoWrapper, Logo, WhiteIcon, LogoNoBackground,
+  asOrangeSocialShare,
+  DropZoneWrapper,
+  StyledIcon,
+  StyledLabel,
+  LogoWrapper,
+  Logo,
+  WhiteIcon,
+  LogoNoBackground,
+  DropZoneDesign,
 } from './token';
 import imgFacebook from './images/facebook.png';
 import imgFacebookRnd from './images/facebookimg.png';
@@ -112,15 +121,20 @@ let sharedTitle = '';
 let sharedDescription = '';
 if (typeof document !== 'undefined') {
   const linkElem = document.querySelector("link[rel='canonical']");
-  sharedUrl = linkElem ? encodeURIComponent(
-    linkElem.getAttribute('href') || '',
-  ) : '';
+  const linkUrl = linkElem ? encodeURIComponent(linkElem.getAttribute('href') || '') : '';
+  const ogUrlMeta = document.querySelector('meta[property="og:url"]');
+  const ogUrl = ogUrlMeta ? encodeURIComponent(ogUrlMeta.content) : '';
+  if (linkUrl) {
+    sharedUrl = linkUrl;
+  } else if (ogUrl) {
+    sharedUrl = ogUrl;
+  } else if (typeof window !== 'undefined') {
+    sharedUrl = encodeURIComponent(window.location.href);
+  }
   const ogTitle = document.querySelector('meta[property="og:title"]');
   sharedTitle = ogTitle ? ogTitle.content : '';
   const ogDescription = document.querySelector('meta[property="og:description"]');
   sharedDescription = ogDescription ? ogDescription.content : '';
-} else if (typeof window !== 'undefined') {
-  sharedUrl = encodeURIComponent(window.location.href);
 }
 
 /**
@@ -209,7 +223,7 @@ const providersCustomized: SocialShareProvider[] = [
 const SimpleSocialShare = flow(asSimpleSocialShare)(SocialShareClean);
 const CustomizedSocialShare = flow(asOrangeSocialShare)(SocialShareClean);
 const IconOnlySocialShare = () => (
-  <CustomizedSocialShare providers={providersCustomized} buttonContent={Icon('share', 'Share')} />
+  <CustomizedSocialShare providers={providersCustomized} buttonContent={Icon('share')} />
 );
 export default () => (
   <SimpleSocialShare providers={providers} buttonContent={IconWithLabel('share', 'Share')} />
@@ -236,15 +250,20 @@ const withSocialShareTitle = withMeta({
   attribute: 'property',
 });
 const metaSocialShareImageName = 'og:image';
+
+const DropZoneUploadArea = DropZoneDesign.UploadArea;
+const dropZoneUI: Partial<TImagePickerUI> = {
+  UploadArea: () => <DropZoneUploadArea>Drag a file or click here to upload.</DropZoneUploadArea>,
+};
+
 const SocialShareFormImage = (props: FormBodyProps) => {
-  const { ComponentFormLabel, ComponentFormText } = useMenuOptionUI();
+  const { ComponentFormText } = useMenuOptionUI();
   const { formapi } = props;
   return (
-    <Div>
-      <ComponentFormLabel htmlFor="social-share-img-src">Src</ComponentFormLabel>
+    <DropZoneWrapper>
       <ComponentFormText field={metaSocialShareImageName} id="social-share-img-src" />
-      <ImageDropZone formApi={formapi} targetFieldName={metaSocialShareImageName} />
-    </Div>
+      <ImageDropZone formApi={formapi} targetFieldName={metaSocialShareImageName} ui={dropZoneUI} />
+    </DropZoneWrapper>
   );
 };
 
@@ -266,6 +285,14 @@ const withSocialShareUrl = withMeta({
   label: 'Url',
   attribute: 'property',
 });
+const withSocialShareType = withMetaStatic({
+  name: 'og:type',
+  attribute: 'property',
+});
+const withSocialShareSitename = withMetaStatic({
+  name: 'og:sitename',
+  attribute: 'property',
+});
 
 const SocialShareHelmet = flowRight(
   withMetaForm(useMenuOptions, socialShareFormHeader),
@@ -274,6 +301,8 @@ const SocialShareHelmet = flowRight(
   withSocialShareImage('og-image', ''),
   withSocialShareUrl('og-url', ''),
   withSocialShareDescription('og-description', ''),
+  withSocialShareType({ nodeKey: 'og:type', nodeCollection: 'site' }),
+  withSocialShareSitename({ nodeKey: 'og:sitename', nodeCollection: 'site' }),
 )(Helmet);
 
 export { SocialShareHelmet };

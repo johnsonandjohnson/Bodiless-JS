@@ -40,6 +40,10 @@ export type Options = {
   attribute?: string;
 } & BasicOptions;
 
+export type StaticOptions = {
+  attribute?: string;
+} & BasicOptions;
+
 const withTitle$ = () => (
   HelmetComponent: CT<BaseProps>,
 ) => ({ children, content, ...rest }: Props) => (
@@ -77,7 +81,7 @@ export const withHeadElement = (renderHoc: Function) => (options: Options) => (
 const withMeta = withHeadElement(withMeta$);
 const withTitle = withHeadElement(withTitle$);
 
-const withMetaStatic = (options: BasicOptions) => (
+const withMetaStatic = (options: StaticOptions) => (
   nodeKey?: WithNodeKeyProps, defaultContent?: string,
 ) => flowRight(
   asReadOnly,
