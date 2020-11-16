@@ -21,6 +21,7 @@ import type { JamStackApp } from './jamstack-app';
 import {
   trimQueryParamsFromUrl,
   removeExtensionFromUrl,
+  ensureDirectoryExistence,
 } from './helpers';
 
 type MigrationApiParams = {
@@ -58,8 +59,9 @@ class MigrationApi implements MigrationApiType {
     return new MigrationApi(params);
   }
 
-  public writeJsonFileSync(path$: string, data: any) {
-    return fs.writeFileSync(path$, JSON.stringify(data, null, 2));
+  public writeJsonFileSync(targetPath: string, data: any) {
+    ensureDirectoryExistence(targetPath);
+    return fs.writeFileSync(targetPath, JSON.stringify(data, null, 2));
   }
 
   public getPagePath(pageUrl?: string) {
