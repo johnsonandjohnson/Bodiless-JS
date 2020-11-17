@@ -293,6 +293,12 @@ const withSocialShareSitename = withMetaStatic({
   name: 'og:sitename',
   attribute: 'property',
 });
+const withSocialShareTwitterCard = withMetaStatic({
+  name: 'twitter:card',
+});
+const withSocialShareTwitterSite = withMetaStatic({
+  name: 'twitter:site',
+});
 
 const SocialShareHelmet = flowRight(
   withMetaForm(useMenuOptions, socialShareFormHeader),
@@ -303,6 +309,8 @@ const SocialShareHelmet = flowRight(
   withSocialShareDescription('og-description', ''),
   withSocialShareType({ nodeKey: 'og:type', nodeCollection: 'site' }),
   withSocialShareSitename({ nodeKey: 'og:sitename', nodeCollection: 'site' }),
+  withSocialShareTwitterCard({ nodeKey: 'twitter:card', nodeCollection: 'site' }),
+  withSocialShareTwitterSite({ nodeKey: 'twitter:site', nodeCollection: 'site' }),
 )(Helmet);
 
 export { SocialShareHelmet };
