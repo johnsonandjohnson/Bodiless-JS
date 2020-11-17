@@ -96,7 +96,7 @@ const ProductBase: FC<Props> = ({ components }) => {
 };
 
 const ProductClean = flow(
-  designable(ProductComponentStart),
+  designable(ProductComponentStart, 'Product'),
   withNode,
 )(ProductBase);
 

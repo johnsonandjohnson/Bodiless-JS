@@ -281,7 +281,7 @@ const apply = (design: Design<DesignableComponents>) => {
 
 const RichText = flow(
   withPreview,
-  designable(apply),
+  designable(apply, 'RichText'),
 )(BasicRichText);
 
 export default RichText;

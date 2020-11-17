@@ -109,7 +109,7 @@ const asTestableSingleAccordion = withDesign({
 });
 
 const SingleAccordionClean = flow(
-  designable(singleAccordionComponentStart),
+  designable(singleAccordionComponentStart, 'Accordion'),
 )(SingleAccordionBase);
 
 const SingleAccordion = flow(

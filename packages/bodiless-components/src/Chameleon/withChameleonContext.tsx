@@ -71,7 +71,7 @@ const applyChameleonDesign = <P extends object>(Component: ComponentType<P> | st
     }), { [DEFAULT_KEY]: Component$ });
     return applyDesign(start)(design);
   };
-  return extendDesignable()(apply);
+  return extendDesignable()(apply, 'Chameleon');
 };
 
 const withChameleonContext = (

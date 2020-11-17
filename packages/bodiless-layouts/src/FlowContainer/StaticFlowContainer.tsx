@@ -66,7 +66,7 @@ StaticFlowContainer.displayName = 'FlowContainer';
 
 const asStaticFlowContainer = flow(
   observer,
-  designable(flowContainerComponentStart),
+  designable(flowContainerComponentStart, 'FlowContainer'),
 );
 
 export default asStaticFlowContainer(StaticFlowContainer);
