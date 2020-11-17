@@ -80,9 +80,6 @@ type WindowOpenerProps = {
   height?: number;
 };
 
-/**
- * @todo: move to package component
- */
 const Provider: FC<any> = (props: ProviderProps) => {
   const { name, icon, onclick } = props;
   return (

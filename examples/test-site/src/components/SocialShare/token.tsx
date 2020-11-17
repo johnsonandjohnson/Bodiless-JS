@@ -28,7 +28,7 @@ const providersDesign = {
 
 const socialShareDesign = {
   SocialShareWrapper: addClasses('my-4 flex flex-row-reverse'),
-  SocialShareButton: addClasses('m-2 p-2 bg-green-200 cursor-pointer'),
+  SocialShareButton: addClasses('m-2 py-2 px-4 bg-teal-500 rounded text-white cursor-pointer'),
   SocialShareProdviders: withDesign(providersDesign),
 };
 const socialShareOrangeDesign = {
@@ -37,10 +37,10 @@ const socialShareOrangeDesign = {
   SocialShareProdviders: withDesign(providersDesign),
 };
 
-export const StyledIcon = addClasses('material-icons cursor-pointer align-middle text-gray-600')(Span);
+export const StyledIcon = addClasses('material-icons cursor-pointer align-middle text-white mr-2')(Span);
 export const WhiteIcon = addClasses('material-icons cursor-pointer align-middle text-white')(Span);
 export const StyledLabel = addClasses('cursor-pointer')(Label);
-export const Logo = addClasses('bg-blue-500 w-full cursor-pointer')(Img);
+export const Logo = addClasses('bg-blue-500 w-full rounded-full cursor-pointer transition duration-500 ease-in-out hover:bg-black transform hover:-translate-y-1 hover:scale-110')(Img);
 export const LogoNoBackground = addClasses('w-full cursor-pointer')(Img);
 export const LogoWrapper = addClasses('w-8')(Div);
 export const DropZoneWrapper = addClasses('my-2')(Div);
