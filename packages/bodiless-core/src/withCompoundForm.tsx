@@ -184,7 +184,7 @@ const withCompoundForm = <P extends object>(options: MenuOptionsDefinition<P>) =
       </Context.Provider>
     );
   };
-  return designable(defaultComponents)(WithCompoundForm);
+  return designable(defaultComponents, 'CompoundForm')(WithCompoundForm);
 };
 
 export default withCompoundForm;
