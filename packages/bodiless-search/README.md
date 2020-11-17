@@ -4,7 +4,7 @@ The BodilessJS Search component provides a search box which allows users to
 search for site content. It also provides search results components to display
 results on a designated search page.
 
-![](https://i.imgur.com/J2WpFXy.jpg)
+![](./assets/search.jpg)
 
 ?> The BodilessJS Search Component requires search index to be built prior to
 searching.  The Search Component is intended for use in a static environment
