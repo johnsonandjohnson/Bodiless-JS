@@ -18,6 +18,8 @@ import {
 } from 'lodash';
 import React, { ComponentType, Fragment, useContext } from 'react';
 import { HOC } from './FClasses';
+import { addPropsIf } from './addProps';
+import { useShowDesignKeys } from './Context';
 
 export type DesignElement<P> = (c: ComponentType<P> | string) => ComponentType<P>;
 
@@ -297,8 +299,14 @@ type TransformDesign = (design?: Design<any>) => Design<any>|undefined;
  * @return A function with the same signature as `designable`.
  */
 export const extendDesignable = (transformDesign: TransformDesign = identity) => (
-  <C extends DesignableComponents> (start: C | Function) => (
+  <C extends DesignableComponents> (start: C | Function, namespace: string = '?') => (
     <P extends object>(Component: ComponentType<P & DesignableComponentsProps<C>>) => {
+      const designKeys = typeof start !== 'function'
+        ? Object.keys(start).reduce((keys, key) => ({
+          ...keys,
+          [key]: addPropsIf(useShowDesignKeys)({ 'data-bl-design-key': `${namespace}:${key}` }),
+        }), {})
+        : undefined;
       const transformFixed = (props:DesignableProps<C> & P) => {
         const { design } = props;
         const { _final, ...restDesign } = design || {};
@@ -315,7 +323,10 @@ export const extendDesignable = (transformDesign: TransformDesign = identity) =>
         return (newDesign ? { ...rest, design: newDesign } : rest) as P;
       };
       // const transformPassthrough = (props:DesignableProps<C>&P) => omit(props, ['design']) as P;
-      const Designable = withTransformer({ transformFixed, transformPassthrough })(Component);
+      const Designable = flow(
+        withTransformer({ transformFixed, transformPassthrough }),
+        designKeys ? withDesign(designKeys) : identity,
+      )(Component);
       return Designable as ComponentType<DesignableProps<C> & P>;
     }
   )
