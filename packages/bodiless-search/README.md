@@ -91,7 +91,7 @@ automatically on every build.
 
 _Make the following changes (Steps 3a, 3b, 3c) in the `scripts` section of `package.json`._
 
-#### 3a. Create a search index task
+#### 3a. Create a `search-index` task
 
 ```
 "search-index": "create-search-index"
@@ -127,7 +127,7 @@ This will create the search index under path specified by
 Create the search HOC functions, which will add and define the styles for search
 comopnents.
 
-Under site project root, add a new folder as src/component/Search for site level
+Under site project root, add a new folder as `src/component/Search` for site level
 search components. Then create search related component files under this folder.
 In this example, create:
 
@@ -222,7 +222,7 @@ const HeaderClean: FC<Props> = ({ components }) => {
     <Wrapper>
       <Container>
         <SiteLogoReturn />
-        <SimpleSearchBox placeholder ="Search" />
+        <SimpleSearchBox placeholder="Search" />
       </Container>
       <MenuContainer>
         <Menu />
@@ -256,7 +256,10 @@ const SearchPage = (props: any) => (
     <SearchLayout>
       <PrimaryHeader/>
       <InlineSearchBox />
-      <SimpleSearchResult resultCountMessage={myCountMessage} resultEmptyMessage={myEmptyMessage} />
+        <SimpleSearchResult
+          resultCountMessage={myCountMessage}
+          resultEmptyMessage={myEmptyMessage}
+        />
     </SearchLayout>
   </Page>
 );
@@ -275,7 +278,7 @@ substitutes a value of search results found.
 
 ### Site Build Troubleshooting Guide.
 
-The site search index is cached in browser cache so if you make changes, they
+The site search index is cached in your browser cache so if you make changes, they
 may not take effect.
 To clear the search index cache go to your Developer Tools in your browser (e.g.
 Chrome)
@@ -287,7 +290,7 @@ Chrome)
 
 Indexing on your site is defined by the `BODILESS_SEARCH_INDEX_SELECTOR` env
 variable. It is recommended that you set it to the body of your content or body
-of your articles. It accepts classes or ids or other items and is comma
+of your articles. It accepts classes or ids or other selectors and is comma
 separated. If you want to index all items in the body of your page use "body *"
 and all content within body will be indexed.
 
@@ -295,11 +298,11 @@ For example, if you want to index article content, you can use ".article-content
 and target article content specifically.
 
 In addition, you can exclude items from search via the env var `BODILESS_SEARCH_INDEX_EXCLUDE_SELECTOR`.
-By default we suggest adding script,noscript, style so this isn't indexed. 
+By default we suggest adding `script`, `noscript`, `style` so these aren't indexed. 
 
 #### Adding a `no-search` Class
 
-Using a `no-search` class anything you do not want indexed can be wrapped in this class.
+Using a `no-search` HOC around anything you do not want indexed is very useful.```
 
 **Example:**
 
