@@ -265,7 +265,8 @@ const SearchPage = (props: any) => (
 );
 ```
 
-?> `resultCountmessage` & `resultEmptyMessage` defaults to const `ResultCountMessage = 'Showing %count% result(s).';
+?> `resultCountmessage` & `resultEmptyMessage` defaults to const 
+`ResultCountMessage = 'Showing %count% result(s).'; 
 defaultResultEmptyMessage = 'No content matches your request, please enter new keywords.';`
 
 ?> These can be overwritten by specifying your own string. When placing the
