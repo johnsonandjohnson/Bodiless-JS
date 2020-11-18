@@ -40,15 +40,20 @@ const asXMargin = addClasses('mx-2');
 const asYMargin = addClasses('my-2');
 const asNegXMargin = addClasses('-mx-1');
 const asNegYMargin = addClasses('-my-1');
+const withPadding1 = addClasses('py-1');
+const withPadding3 = addClasses('p-3');
 const withPadding5 = addClasses('p-5');
 
 /* Responsive design */
-const asMobileOnly = addClasses('block lg:hidden');
-const asExceptMobile = addClasses('hidden lg:block');
+const asMobileOnly = addClasses('lg:hidden');
+const asDesktopOnly = addClasses('hidden lg:flex');
 
 /* Primary coloring */
 const asPrimaryColorBackground = addClasses('bg-gray-200');
 const asTextColorPrimary = addClasses('text-black');
+
+/* Coloring */
+const asTealBackground = addClasses('bg-teal-600');
 
 /* Typography */
 const asBold = addClasses('');
@@ -77,6 +82,9 @@ const asEditable = asEditableCore;
 // Tout Components
 const asCta = addClasses('bg-orange-700 hover:bg-orange-600 text-center text-white p-2 rounded');
 
+/* Utility Classes */
+const asDisabled = addClasses('pointer-events-none');
+
 export {
   asBold,
   asItalic,
@@ -86,14 +94,16 @@ export {
   asAlignRight,
   asAlignCenter,
   asAlignJustify,
-  asExceptMobile,
+  asDesktopOnly,
   asHeader1,
   asHeader2,
   asHeader3,
   asCta,
+  asDisabled,
   asBlockItem,
   asPageContainer,
   asPrimaryColorBackground,
+  asTealBackground,
   asImage,
   asEditableImage,
   asEditableLink,
@@ -107,6 +117,8 @@ export {
   asNegXMargin,
   asNegYMargin,
   asBlockQuote,
+  withPadding1,
+  withPadding3,
   withPadding5,
   asResponsive21By9Embed,
   asResponsive16By9Embed,

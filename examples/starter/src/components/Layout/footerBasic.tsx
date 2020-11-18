@@ -53,5 +53,5 @@ const FooterClean: FC<DesignableProps> = ({ components }) => {
   );
 };
 
-const Footer = designable(footerComponents)(FooterClean);
+const Footer = designable(footerComponents, 'Footer')(FooterClean);
 export default Footer;

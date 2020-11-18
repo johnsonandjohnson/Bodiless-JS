@@ -74,7 +74,7 @@ const FilterByGroupBase: FC<FilterByGroupProps> = ({
 
 const FilterByGroupClean = flow(
   withoutProps(['suggestions']),
-  designable(FilterByGroupComponentsStart),
+  designable(FilterByGroupComponentsStart, 'FilterByGroup'),
   asResponsiveFilterByGroup,
   withFilterByGroupContext,
 )(FilterByGroupBase);

@@ -97,7 +97,7 @@ const withDemoMenuStyles = withDesign({
 // Define Sub Menu Styles
 const asDemoSubMenu = withDesign({
   Wrapper: withDesign({
-  WrapperItem: addClasses('parent_menu_item'),
+    WrapperItem: addClasses('parent_menu_item'),
     List: addClasses('sub_menu_wrapper'),
   }),
   Title: addClasses('sub_menu_title'),
@@ -110,6 +110,38 @@ const withSimpleMenuStyles = flow(
       SubMenu: asDemoSubMenu, // Styles for the sub-menu.
     }),
   }),
+  withDemoMenuStyles, // Styles for the top menu.
+);
+
+export default withSimpleMenuStyles;
+```
+
+There is an `withSimpleMenuDesign` HOC provided by the `@bodiless/organisms` to simplify the submenu styling. Let's see how using `withSimpleMenuDesign` changes the code:
+
+```js
+import { flow } from 'lodash';
+import { withDesign, addClasses } from '@bodiless/fclasses';
+import { withSimpleMenuDesign } from '@bodiless/organisms';
+
+// Define Top Menu Styles
+const withDemoMenuStyles = withDesign({
+  Wrapper: addClasses('menu_wrapper'),
+  Title: addClasses('menu_title'),
+  Item: addClasses('menu_item_wrapper'),
+});
+
+// Define Sub Menu Styles
+const asDemoSubMenu = withDesign({
+  Wrapper: withDesign({
+    WrapperItem: addClasses('parent_menu_item'),
+    List: addClasses('sub_menu_wrapper'),
+  }),
+  Title: addClasses('sub_menu_title'),
+  Item: addClasses('sub_menu_item_wrapper'),
+});
+
+const withSimpleMenuStyles = flow(
+  withSimpleMenuDesign(asDemoSubMenu), // Styles for the sub-menu.
   withDemoMenuStyles, // Styles for the top menu.
 );
 
@@ -281,6 +313,105 @@ const withMegaMenuStyles = flow(
   withDesign({
     Item: asMegaMenuSubListStyles, // Each menu item may have one of 3 SubMenus. 
   }),
+  withTopMenuStyles, // Top Menu Styles
+);
+
+export default withMegaMenuStyles;
+```
+
+There is an `withMegaMenuDesign` HOC provided by the `@bodiless/organisms` to simplify the submenu styling. Let's see how using `withMegaMenuDesign` simplifies the code:
+
+```js
+import { flow } from 'lodash';
+import { withDesign, addClasses } from '@bodiless/fclasses';
+import { withMegaMenuDesign } from '@bodiless/organisms';
+
+/**
+ * Top Menu Styles
+ * Same structure as the Simple Menu
+ * ===========================================
+ */
+const withTopMenuStyles = withDesign({
+  Wrapper: addClasses('menu_wrapper'),
+  Title: addClasses('menu_title'),
+  Item: addClasses('menu_item_wrapper'),
+});
+
+/**
+ * Sub Menu Styles
+ * ===========================================
+ */
+const asBasicSubMenu = withDesign({
+  Wrapper: withDesign({
+  WrapperItem: addClasses('parent_menu_item'),
+    List: addClasses('sub_menu_wrapper'),
+  }),
+  Title: addClasses('sub_menu_title'),
+  Item: addClasses('sub_menu_item_wrapper'),
+});
+
+const withMegaMenuStyles = flow(
+  withMegaMenuDesign(asBasicSubMenu), // General Styles for all submenus.
+  withTopMenuStyles, // Top Menu Styles
+);
+
+export default withMegaMenuStyles;
+```
+
+Note that `withMegaMenuDesign` applies design to all submenu variations. If you want to apply styles only to `Columns` submenus then you would do something like this:
+
+```js
+import { flow } from 'lodash';
+import { withDesign, addClasses } from '@bodiless/fclasses';
+import { withMegaMenuDesign } from '@bodiless/organisms';
+
+/**
+ * Top Menu Styles
+ * Same structure as the Simple Menu
+ * ===========================================
+ */
+const withTopMenuStyles = withDesign({
+  Wrapper: addClasses('menu_wrapper'),
+  Title: addClasses('menu_title'),
+  Item: addClasses('menu_item_wrapper'),
+});
+
+/**
+ * Sub Menu Styles
+ * ===========================================
+ */
+const asBasicSubMenu = withDesign({
+  Wrapper: withDesign({
+  WrapperItem: addClasses('parent_menu_item'),
+    List: addClasses('sub_menu_wrapper'),
+  }),
+  Title: addClasses('sub_menu_title'),
+  Item: addClasses('sub_menu_item_wrapper'),
+});
+
+/**
+ * Columns Sub Menu Styles
+ * ===========================================
+ */
+const asColumnPaddingLeft = withDesign({
+  Item: withDesign({
+    Title: addClasses('pl-5'),
+  }),
+});
+
+/**
+ * Mega Menu Sub Menu Styles
+ * ===========================================
+ */
+const withMegaMenuSubMenuStyles = withDesign({
+  Item: withDesign({
+    Columns: asColumnPaddingLeft,
+  }),
+});
+
+const withMegaMenuStyles = flow(
+  withMegaMenuSubMenuStyles, // Add Column Submenu styles
+  withMegaMenuDesign(asBasicSubMenu), // General Styles for all submenus.
   withTopMenuStyles, // Top Menu Styles
 );
 

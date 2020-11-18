@@ -46,6 +46,7 @@
     "shelljs": "^0.8.4",
     "slate": "^0.44.12",
     "slate-react": "^0.21.18",
+    "slate-plain-serializer": "^0.7.13",
     "slate-react-placeholder": "^0.1.20",
     "uuid": "^3.3.2"
   },
@@ -55,6 +56,7 @@
   },
   "devDependencies": {
     "@types/rc-tooltip": "^3.7.1",
-    "@types/uuid": "^3.4.4"
+    "@types/uuid": "^3.4.4",
+    "@types/slate-plain-serializer": "^0.7.0"
   }
 }

@@ -17,10 +17,12 @@ import { useEditContext } from '@bodiless/core';
 import {
   withDesign, addClasses, addClassesIf, removeClassesIf,
 } from '@bodiless/fclasses';
+import { withSubListDesign } from '@bodiless/components';
 
 import { useIsMenuOpen } from './withMenuContext';
 import {
   withBaseSubMenuStyles, withBaseMenuStyles, asSimpleSubMenu, asRelative,
+  asAccessibleMenu, asAccessibleSubMenu,
 } from './SimpleMenu.token';
 
 /*
@@ -35,8 +37,8 @@ const isContextNotActive = () => {
 const asStaticOnHover = withDesign({
   Wrapper: withDesign({
     WrapperItem: flow(
-      addClasses('hover:static'),
-      removeClassesIf(useIsMenuOpen)('hover:static'),
+      addClasses('hover:static focus:static'),
+      removeClassesIf(useIsMenuOpen)('hover:static focus:static'),
     ),
   }),
 });
@@ -52,6 +54,24 @@ const asFullWidthSublist = withDesign({
     List: addClasses('w-full'),
   }),
 });
+
+/**
+ * Accessibility Features
+ * ===========================================
+ */
+const asAccessibleMegaMenu = flow(
+  withSubListDesign(2)({
+    List: asAccessibleSubMenu,
+    Touts: asAccessibleSubMenu,
+    Columns: flow(
+      asAccessibleSubMenu,
+      withDesign({
+        Item: asAccessibleSubMenu,
+      }),
+    ),
+  }),
+  asAccessibleMenu,
+);
 
 /*
  * Touts Sub Menu Styles
@@ -97,6 +117,7 @@ const asMegaMenuTopNav = flow(
     Item: asMegaMenuSubListStyles,
   }),
   withBaseMenuStyles,
+  asAccessibleMegaMenu,
 );
 
 export default asMegaMenuTopNav;
