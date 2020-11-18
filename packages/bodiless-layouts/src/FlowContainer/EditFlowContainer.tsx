@@ -102,10 +102,10 @@ EditFlowContainer.defaultProps = {
 const asEditFlowContainer = flowRight(
   withActivateOnEffect,
   observer,
-  designable(EditFlowContainerComponents),
+  designable(EditFlowContainerComponents, 'FlowContainer'),
   withMenuOptions({
     useMenuOptions,
-    name: 'FlowContainer',
+    name: 'Flow Container',
   }),
   observer,
 );

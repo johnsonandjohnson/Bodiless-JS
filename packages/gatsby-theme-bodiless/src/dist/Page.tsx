@@ -21,6 +21,7 @@ import {
   withSwitcherButton,
   OnNodeErrorNotification,
 } from '@bodiless/core';
+import { withShowDesignKeys } from '@bodiless/fclasses';
 import { observer } from 'mobx-react-lite';
 import { ContextWrapper, PageEditor } from '@bodiless/core-ui';
 import GatsbyNodeProvider, {
@@ -56,31 +57,39 @@ const GitButtons: FC = () => {
   return <></>;
 };
 
+const ShowDesignKeys = (
+  process.env.NODE_ENV === 'development' || process.env.BODILESS_DEBUG === '1'
+) ? withShowDesignKeys()(Fragment) : Fragment;
+
 const Page: FC<Props> = observer(({ children, ui, ...rest }) => {
   const { PageEditor: Editor, ContextWrapper: Wrapper } = getUI(ui);
   if (process.env.NODE_ENV === 'development') {
     return (
       <GatsbyNodeProvider {...rest}>
-        <GatsbyPageProvider pageContext={rest.pageContext}>
-          <NotificationProvider>
-            <SwitcherButton />
-            <NotificationButton />
-            <Editor>
-              <OnNodeErrorNotification />
-              <NewPageButton />
-              <GitButtons />
-              <Wrapper clickable>
-                {children}
-              </Wrapper>
-            </Editor>
-          </NotificationProvider>
-        </GatsbyPageProvider>
+        <ShowDesignKeys>
+          <GatsbyPageProvider pageContext={rest.pageContext}>
+            <NotificationProvider>
+              <SwitcherButton />
+              <NotificationButton />
+              <Editor>
+                <OnNodeErrorNotification />
+                <NewPageButton />
+                <GitButtons />
+                <Wrapper clickable>
+                  {children}
+                </Wrapper>
+              </Editor>
+            </NotificationProvider>
+          </GatsbyPageProvider>
+        </ShowDesignKeys>
       </GatsbyNodeProvider>
     );
   }
   return (
     <GatsbyNodeProvider {...rest}>
-      <StaticPage>{children}</StaticPage>
+      <ShowDesignKeys>
+        <StaticPage>{children}</StaticPage>
+      </ShowDesignKeys>
     </GatsbyNodeProvider>
   );
 });

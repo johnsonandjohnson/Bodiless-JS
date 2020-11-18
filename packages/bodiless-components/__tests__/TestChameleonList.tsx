@@ -28,7 +28,7 @@ const withItemTitle = (title: string) => withDesign({
  * Defines the all sublists
  */
 const asSubList$ = (title: string, className: string) => flow(
-  asSubList,
+  asSubList(),
   withDesign({
     Item: addProps({ className }),
   }),
@@ -39,13 +39,13 @@ const asNumberedSubList = asSubList$('Numbered', 'list-decimal ml-5');
 
 const withDemoSubLists = withDesign({
   Item: flow(
-    asChameleonSubList,
+    asChameleonSubList(),
     withDesign({
       Bullet: flow(
         asBulletedSubList,
         withDesign({
           Item: flow(
-            asChameleonSubList,
+            asChameleonSubList(),
             withDesign({
               Bullet: asNumberedSubList,
             }),

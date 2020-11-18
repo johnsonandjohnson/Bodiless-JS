@@ -35,6 +35,7 @@ import {
 const ActivatorWrapper = addClasses('absolute w-full h-full inset-0')(Div);
 const asBodilessYouTube = asBodilessComponent({
   ...useIframeBodilessOptions(),
+  groupLabel: 'YouTube',
   Wrapper: ActivatorWrapper,
 });
 

@@ -1,0 +1,54 @@
+{
+  "name": "@bodiless/search",
+  "version": "0.0.59",
+  "description": "Provide static site search option for Bodiless project.",
+  "author": "Dewen Li <dli94@its.jnj.com>",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "bin": {
+    "create-search-index": "./bin/create-search-index"
+  },
+  "files": [
+    "/lib",
+    "/bodiless.docs.json",
+    "/doc"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build:watch": "npm run build -- --watch",
+    "build:api-doc": "typedoc --out doc/api --mode file",
+    "lint": "tslint ./src/**/*.ts?x",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
+  },
+  "dependencies": {
+    "@bodiless/fclasses": "^0.0.59",
+    "axios": "^0.21.0",
+    "cheerio": "^1.0.0-rc.3",
+    "dotenv": "^8.2.0",
+    "glob": "^7.1.6",
+    "lodash": "^4.17.19",
+    "lunr": "^2.3.9",
+    "mime": "^2.4.4",
+    "query-string": "^6.13.2",
+    "uuid": "^3.3.2"
+  },
+  "peerDependencies": {
+    "react": "^16.8.4"
+  },
+  "devDependencies": {
+    "@types/cheerio": "^0.22.22",
+    "@types/glob": "^7.1.1",
+    "@types/lodash": "^4.14.158",
+    "@types/lunr": "^2.3.3",
+    "@types/mime": "^2.0.1",
+    "@types/uuid": "^3.4.4"
+  }
+}

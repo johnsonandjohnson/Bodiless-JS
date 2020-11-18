@@ -96,12 +96,12 @@ const ProductBase: FC<Props> = ({ components }) => {
 };
 
 const ProductClean = flow(
-  designable(ProductComponentStart),
+  designable(ProductComponentStart, 'Product'),
   withNode,
 )(ProductBase);
 
 const asEditableProduct = withDesign<ProductComponents>({
-  Image: asBodilessImage('image'),
+  Image: asBodilessImage('image') as HOC,
   ImageLink: asBodilessLink('cta') as HOC,
   TitleLink: asBodilessLink('cta') as HOC,
   Title: asEditable('title', 'Product Title Text'),

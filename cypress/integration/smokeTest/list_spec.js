@@ -43,12 +43,12 @@ describe('List (text and link versions) testing', function () {
   const editedPostfix = '-edited'
   const listItemUrl = 'AT-listItemUrl'
   const itemCount = 2
-  const addListItemIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Add"]'
-  const addSubListItemIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Sub"]'
-  const removeListItemIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Delete"]'
-  const linkIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Link"]'
-  const urlField = '//form[@aria-label="Context Menu Link Form"]//input[@id="link-href"]'
-  const checkmarkIcon = '//form[@aria-label="Context Menu Link Form"]//button[@aria-label="Submit"]'
+  const addListItemIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Add list-item"]'
+  const addSubListItemIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Sub Sub"]'
+  const removeListItemIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Delete list-item"]'
+  const linkIcon = '//*[@role="toolbar" and @aria-label="Local Context Menu"]//*[@aria-label="Edit Link"]'
+  const urlField = '//form[@aria-label="Context Menu Edit Link Form"]//input[@id="link-href"]'
+  const checkmarkIcon = '//form[@aria-label="Context Menu Edit Link Form"]//button[@aria-label="Submit"]'
 
 
   it('list: 1.1 - checking adding and filling in the text list items', () => {

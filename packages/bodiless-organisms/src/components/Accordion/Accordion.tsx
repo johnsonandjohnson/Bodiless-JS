@@ -46,7 +46,7 @@ const AccordionBase: FC<AccordionProps & AccordionProviderProps> = ({
 };
 
 const AccordionClean = flow(
-  designable(AccordionComponentsStart),
+  designable(AccordionComponentsStart, 'Accordion'),
 )(AccordionBase);
 
 export default AccordionClean;

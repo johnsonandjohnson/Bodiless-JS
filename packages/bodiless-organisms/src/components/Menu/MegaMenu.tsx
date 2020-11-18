@@ -13,16 +13,21 @@
  */
 
 import { flow } from 'lodash';
-import { observer } from 'mobx-react-lite';
 
-import { withDesign, addClassesIf } from '@bodiless/fclasses';
-import { withSidecarNodes, WithNodeKeyProps } from '@bodiless/core';
 import {
-  asBreadcrumb, useBreadcrumbContext, asBodilessList, asChameleonSubList,
+  withDesign,
+  replaceWith,
+  Fragment,
+} from '@bodiless/fclasses';
+import { WithNodeKeyProps } from '@bodiless/core';
+import {
+  asBreadcrumb, withBreadcrumbs, withSubListDesign,
+  asBodilessList, asChameleonSubList,
 } from '@bodiless/components';
+import type { BreadcrumbSettings } from '@bodiless/components';
 
 import { asMenuSubList } from './SimpleMenu';
-import asStylableList from './asStylableList';
+import { asStylableList } from './SimpleMenu.token';
 import withMenuContext from './withMenuContext';
 
 /**
@@ -67,42 +72,70 @@ const withMenuDesign = (design: any) => {
  * a site's main menu, a burger menu and breadcrumbs.
  *
  * @param nodeKeys The optional nodekeys specifying where the data should be stored.
- *
+
  * @return HOC which creates a basic mega menu list.
  */
 const asMenuBase = (nodeKeys?: WithNodeKeyProps) => flow(
-  asBodilessList(nodeKeys),
+  asBodilessList(nodeKeys, undefined, () => ({ groupLabel: 'Menu Item' })),
   asStylableList,
   withDesign({
-    Item: asChameleonSubList,
+    Item: asChameleonSubList(() => ({ formTitle: 'Sub-Menu Type' })),
   }),
   withSubMenuDesign(asMenuSubList),
   withMenuContext,
 );
 
-// Now we create breaccrumbs
+// Now we create breadcrumbs
 
 /**
- * HOC which can be applied to a base menu to make it into a site's breadcrumbs
- *
- * @param A base menu component created via asMenuBase()
- *
- * @return A clean (unstyled) site breadcrumb component.
+ * HOC that can be applied to a mega menu based component,
+ * it renders all list and sublist items but produces no markup.
  */
-const asBreadcrumbsClean = withMenuDesign({
-  Item: withSidecarNodes(asBreadcrumb('title$component')),
-  Title: flow(
-    addClassesIf(() => !useBreadcrumbContext().isActive)('hidden'),
-    observer,
-  ),
-});
+const withEmptyMenuMarkup = flow(
+  // can not use withSubMenuDesign({ Item: replaceWith(Fragment) }) here
+  // as far as we will break Columns sublist items
+  // due to design prop removal from Columns.Item element
+  withDesign({
+    Item: withDesign({
+      List: withDesign({
+        Item: replaceWith(Fragment),
+      }),
+      Touts: withDesign({
+        Item: replaceWith(Fragment),
+      }),
+      Columns: withDesign({
+        Item: withDesign({
+          Item: replaceWith(Fragment),
+        }),
+      }),
+    }),
+  }),
+  withMenuDesign({
+    Wrapper: replaceWith(Fragment),
+  }),
+  withSubListDesign(1)({
+    _default: replaceWith(Fragment),
+  }),
+);
 
-// @TODO Add a similar HOC for BurgerMenu, something like:
-// const asMegaMenuClean = withMenuDesign({
-//   WrapperItem: asAccodionTitle,
-//   List: asAccordionBody,
-// });
+/**
+ * Creates a HOC which can be applied to a base menu to make it into a site's breadcrumbs
+ *
+ * @param settings The title and link nodekeys defining where to locate the link and title nodes.
+ *
+ * @return  HOC for composing a clean (unstyled) site breadcrumb component.
+ */
+const asBreadcrumbsClean = (settings: BreadcrumbSettings) => flow(
+  withEmptyMenuMarkup,
+  withMenuDesign({
+    Item: flow(
+      asBreadcrumb(settings),
+    ),
+  }),
+  withBreadcrumbs,
+);
 
 export {
-  asMenuSubList, asMenuBase, withMenuDesign, asBreadcrumbsClean,
+  asMenuSubList, asMenuBase, withMenuDesign,
+  asBreadcrumbsClean,
 };

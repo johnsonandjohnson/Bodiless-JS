@@ -22,9 +22,9 @@ export default class ResourcesFromCssExtractor {
       return embeddedRegexp.test(src.trim());
     }
 
-    const urls = [];
+    const urls: string[] = [];
     let urlMatch;
-    let url;
+    let url: string;
 
     const text = css.replace(commentRegexp, '');
 

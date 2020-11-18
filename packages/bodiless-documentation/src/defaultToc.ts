@@ -19,7 +19,9 @@ const toc = {
   },
   ContentEditorUserGuide: {},
   Design: {},
-  Components: {},
+  Components: {
+    'YouTube.md': 'YouTube',
+  },
   Tools: {},
   Development: {
     Guides: {

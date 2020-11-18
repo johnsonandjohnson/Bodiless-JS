@@ -13,9 +13,11 @@
  */
 
 import {
-  WithNodeKeyProps, withNodeKey, useNode, NodeProvider, WithNodeProps,
+  WithNodeKeyProps, withNodeKey, useNode, NodeProvider, WithNodeProps, withOnlyProps,
 } from '@bodiless/core';
-import React, { ComponentType, PropsWithChildren, FC } from 'react';
+import React, {
+  Fragment, ComponentType, PropsWithChildren, FC,
+} from 'react';
 import { flow, identity } from 'lodash';
 import {
   replaceWith, withDesign, asComponent, DesignableComponentsProps, designable, HOC,
@@ -24,11 +26,16 @@ import {
 
 import withListButtons from './withListButtons';
 import BodilessList from './List';
+import { Data, UseListOverrides } from './types';
 
 type ComponentOrTag<P> = ComponentType<P>|keyof JSX.IntrinsicElements;
 
 export type TitledItemProps = PropsWithChildren<{
   title: JSX.Element,
+}>;
+
+export type OverviewItem = PropsWithChildren<{
+  overview: JSX.Element,
 }>;
 
 const asTitledItem = <P extends TitledItemProps>(Item: ComponentType<P>) => {
@@ -48,30 +55,32 @@ const asTitledItem = <P extends TitledItemProps>(Item: ComponentType<P>) => {
 type SubListComponents = {
   WrapperItem: ComponentType<any>,
   List: ComponentType<any>,
+  Title: ComponentType<any>
 };
 
 const startComponents: SubListComponents = {
   WrapperItem: asComponent('li'),
   List: asComponent('ul'),
+  Title: withOnlyProps('key', 'children')(Fragment),
 };
 
-type SubListProps = TitledItemProps & DesignableComponentsProps<SubListComponents>;
+type SubListProps = TitledItemProps & OverviewItem & DesignableComponentsProps<SubListComponents>;
 
 const SubList$: FC<SubListProps> = ({
-  title, children, components, ...rest
+  title, children, components, overview, ...rest
 }) => {
-  const { WrapperItem, List } = components;
+  const { WrapperItem, List, Title } = components;
   return (
     <WrapperItem {...rest}>
-      {title}
-      <List>
+      <Title>{title}</Title>
+      <List overview={overview}>
         {children}
       </List>
     </WrapperItem>
   );
 };
 
-const SubList = designable(startComponents)(SubList$);
+const SubList = designable(startComponents, 'SubList')(SubList$);
 
 /**
  * Converts a component or tag to a "bodiless" list. The component itself (usually
@@ -80,19 +89,21 @@ const SubList = designable(startComponents)(SubList$);
  *
  * @param nodeKeys
  */
-const asBodilessList = (
+const asBodilessList = <P extends object>(
   nodeKeys?: WithNodeKeyProps,
   // @TODO - Handle default data
-  // defaultData?: Data,
-) => <P extends object>(Component: ComponentOrTag<P>): ComponentType<P & WithNodeProps> => flow(
-  replaceWith(BodilessList),
-  withListButtons,
-  withDesign({
-    Wrapper: replaceWith(asComponent(Component)),
-    Item: withoutProps(['addItem', 'deleteItem', 'canDelete']),
-  }),
-  withNodeKey(nodeKeys),
-)(Component);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  defaultData?: Data,
+  useOverrides?: UseListOverrides<P>,
+) => (Component: ComponentOrTag<P>): ComponentType<P & WithNodeProps> => flow(
+    replaceWith(BodilessList),
+    withListButtons(useOverrides),
+    withDesign({
+      Wrapper: replaceWith(asComponent(Component)),
+      Item: withoutProps(['addItem', 'deleteItem', 'canDelete']),
+    }),
+    withNodeKey(nodeKeys),
+  )(Component);
 
 // This ensures that the original item is used as the sublist wrapper item.
 const asSubListWrapper = (Component: any) => withDesign<SubListComponents>({
@@ -102,8 +113,8 @@ const asSubListWrapper = (Component: any) => withDesign<SubListComponents>({
 /**
  * HOC which can be applied to a list item to convert it to a sublist.
  */
-const asSubList = flow(
-  asBodilessList('sublist'),
+const asSubList = (useOverrides?: UseListOverrides) => flow(
+  asBodilessList('sublist', undefined, useOverrides),
   withDesign({
     Wrapper: asSubListWrapper,
   }),

@@ -28,7 +28,7 @@ import {
 } from 'informed';
 import {
   Li, Ul, stylable, addClasses, StylableProps, withoutProps, flowIf, hasProp, addProps,
-  removeClasses,
+  removeClasses, addClassesIf, removeClassesIf,
 } from '@bodiless/fclasses';
 import { ButtonVariantProps, withChild } from '@bodiless/core';
 
@@ -63,7 +63,7 @@ export const Icon = flow(
 )(Span);
 
 export const ComponentFormTitle = addClasses(
-  'bl-text-lg bl-font-bold bl-text-grey-100 bl-block bl-mb-grid-2 bl-min-w-xl-grid-0',
+  'bl-text-lg bl-font-bold bl-text-grey-100 bl-block bl-mb-grid-2 bl-min-w-xl-grid-1',
 )(Title);
 
 export const ComponentFormFieldWrapper = addClasses(
@@ -200,6 +200,9 @@ export const ComponentFormWarning = flow(
   </Div>
 ));
 
-export const ComponentFormLink = addClasses(
-  'bl-text-xs bl-text-grey-100 bl-block bl-underline',
+const isDisabled = (props: any) => hasProp('disabled')(props);
+export const ComponentFormLink = flow(
+  addClasses('bl-cursor-pointer bl-text-xs bl-block bl-underline'),
+  addClassesIf(isDisabled)('bl-text-grey-600'),
+  removeClassesIf(isDisabled)('bl-cursor-pointer bl-text-grey-100 '),
 )(Anchor);

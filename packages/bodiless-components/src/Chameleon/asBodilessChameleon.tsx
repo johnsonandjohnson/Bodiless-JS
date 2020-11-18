@@ -15,10 +15,13 @@
 import React, { ComponentType } from 'react';
 import { flowRight } from 'lodash';
 import {
-  ifEditable, useNode, MenuOptionsDefinition, UseBodilessOverrides,
+  ifEditable,
+  useNode,
 } from '@bodiless/core';
-import type { WithNodeKeyProps } from '@bodiless/core';
-import { ChameleonData, ChameleonButtonProps } from './types';
+import type {
+  WithNodeKeyProps, UseBodilessOverrides,
+} from '@bodiless/core';
+import { ChameleonData } from './types';
 import withChameleonButton from './withChameleonButton';
 import applyChameleon from './applyChameleon';
 import withChameleonContext from './withChameleonContext';
@@ -29,14 +32,16 @@ import withChameleonContext from './withChameleonContext';
  * @param nodeKey Location of the child node that will be purged.
  */
 const withDeleteNodeOnUnwrap = (
-  nodeKey?: string,
+  nodeKey?: WithNodeKeyProps,
 ) => <P extends object>(Component: ComponentType<P> | string) => {
   const WithDeleteOnUnwrap = (props: P) => {
     const { node } = useNode();
     const { unwrap, ...rest } = props as { unwrap?: () => void; };
     if (!unwrap) return <Component {...props} />;
     const unwrap$ = () => {
-      const node$ = nodeKey ? node.child(nodeKey) : node;
+      const node$ = nodeKey
+        ? node.child(typeof nodeKey === 'string' ? nodeKey : nodeKey.nodeKey!)
+        : node;
       node$.delete();
       if (unwrap) unwrap();
     };
@@ -59,11 +64,10 @@ const asBodilessChameleon = (
   nodeKeys: WithNodeKeyProps,
   defaultData?: ChameleonData,
   useOverrides?: UseBodilessOverrides,
-  contextProps?: Partial<MenuOptionsDefinition<ChameleonButtonProps>>,
 ) => flowRight(
   withChameleonContext(nodeKeys, defaultData),
   ifEditable(
-    withChameleonButton(useOverrides, contextProps),
+    withChameleonButton(useOverrides),
   ),
   applyChameleon,
 );

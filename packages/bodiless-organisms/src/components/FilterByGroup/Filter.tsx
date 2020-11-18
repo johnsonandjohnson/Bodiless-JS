@@ -161,7 +161,7 @@ const TagTitle = flow(
   withNodeDataHandlers({ tags: [] }),
   withNode,
   withNodeKey('tag'),
-  designable(tagTitleComponentsStart),
+  designable(tagTitleComponentsStart, 'TagTitle'),
 )(TagTitleBase);
 
 const TestFilterComponentsStart: FilterComponents = {
@@ -213,7 +213,7 @@ class FilterBase extends React.PureComponent {
 
 const FilterClean = flow(
   withNodeKey('filter'),
-  designable(TestFilterComponentsStart),
+  designable(TestFilterComponentsStart, 'Filter'),
 )(FilterBase);
 
 export default FilterClean;
