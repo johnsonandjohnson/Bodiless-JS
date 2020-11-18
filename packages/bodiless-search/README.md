@@ -58,7 +58,8 @@ requirement.
 # .env.site
 
 ## This is the URL path of the search results landing page. 
-## When you create this page, you must use this same page path when you ## perform step 6 - 
+## When you create this page, you must use this same page path when you
+## perform step 6 - 
 ## "Add search results pages..."
 BODILESS_SEARCH_PAGE='search'
 
@@ -141,7 +142,8 @@ import them and apply custom styling.
 
 ```
 import { flow } from 'lodash';
-import { SearchBox as SearchBoxClean, SearchResult as SearchResultClean } from '@bodiless/search';
+import { SearchBox as SearchBoxClean, SearchResult as SearchResultClean } 
+  from '@bodiless/search';
 import {
   asSimpleSearchResult, asInlineSearch, asSimpleSearch,
 } from './token';
@@ -172,8 +174,8 @@ const searchBoxDesign = {
 };
 
 /**
-* Search result list item subcomponent is also composed of 3 subcomponents, they can be formatted 
-* with nested designs.
+* Search result list item subcomponent is also composed of 3 subcomponents, 
+* they can be formatted with nested designs.
 */ 
 const searchResultDesign = {
   SearchResultWrapper: addClasses('py-2'),
@@ -266,8 +268,8 @@ const SearchPage = (props: any) => (
 ```
 
 ?> `resultCountmessage` & `resultEmptyMessage` defaults to const 
-`ResultCountMessage = 'Showing %count% result(s).'; 
-defaultResultEmptyMessage = 'No content matches your request, please enter new keywords.';`
+`ResultCountMessage = 'Showing %count% result(s).';`
+`defaultResultEmptyMessage = 'No content matches your request, please enter new keywords.';`
 
 ?> These can be overwritten by specifying your own string. When placing the
 search result component and strings utilize the count token (%count%) which
@@ -351,6 +353,8 @@ export const NoSearch = flow(
 ---
 
 ## Architectural Details
+
+For more information see the [source folder for the Search Component](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/bodiless-search/src). 
 
 #### SearchBoxClean
 
