@@ -44,7 +44,10 @@ import type {
   DesignableComponentsProps,
   DesignableComponents,
 } from './Design';
-import { flowIf, hasProp, withoutProps } from './hoc-util';
+import {
+  flowIf, hasProp, withoutProps, withOnlyProps,
+} from './hoc-util';
+import Fragment from './Fragment';
 
 export * from './StyledHTML';
 
@@ -65,6 +68,7 @@ export {
   flowIf,
   hasProp,
   withoutProps,
+  withOnlyProps,
   designable,
   extendDesignable,
   varyDesign,
@@ -72,6 +76,7 @@ export {
   asComponent,
   addClassesIf,
   removeClassesIf,
+  Fragment,
 };
 
 export type {

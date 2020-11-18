@@ -15,8 +15,9 @@
 import { flow } from 'lodash';
 import { useEditContext } from '@bodiless/core';
 import {
-  withDesign, addClasses, addClassesIf, removeClassesIf,
+  withDesign, addClasses, addProps, addClassesIf, removeClassesIf, stylable,
 } from '@bodiless/fclasses';
+import { withSubListDesign } from '@bodiless/components';
 
 import { useIsMenuOpen } from './withMenuContext';
 /*
@@ -52,14 +53,43 @@ const asResponsiveSublist = withDesign({
   }),
 });
 
+const asStylableList = withDesign({
+  Wrapper: stylable,
+  Item: stylable,
+  Title: stylable,
+});
+
+/**
+ * Accessibility Features
+ * ===========================================
+ */
+const asAccessibleMenu = withDesign({
+  Wrapper: addProps({ role: 'menubar', 'aria-label': 'Navigation Menu' }),
+  Item: addProps({ tabIndex: 0, role: 'menuitem' }),
+});
+
+const asAccessibleSubMenu = withDesign({
+  Wrapper: withDesign({
+    WrapperItem: addProps({ 'aria-haspopup': true }),
+    List: addProps({ role: 'menu', 'aria-label': 'Navigation Sub Menu' }),
+  }),
+  Item: addProps({ role: 'none' }),
+  Title: addProps({ role: 'menuitem' }),
+});
+
+const asAccessibleSimpleMenu = flow(
+  withSubListDesign(1)({ SubMenu: asAccessibleSubMenu }),
+  asAccessibleMenu,
+);
+
 /*
  * Base Menu Styles
  * ===========================================
  */
 const withHoverStyles = withDesign({
   Item: flow(
-    addClasses('hover:overflow-visible'),
-    removeClassesIf(useIsMenuOpen)('hover:overflow-visible'),
+    addClasses('hover:overflow-visible focus:overflow-visible'),
+    removeClassesIf(useIsMenuOpen)('hover:overflow-visible focus:overflow-visible'),
   ),
 });
 
@@ -110,6 +140,7 @@ const asSimpleMenuTopNav = flow(
     Item: asSimpleSubMenuStyles,
   }),
   withBaseMenuStyles,
+  asAccessibleSimpleMenu,
 );
 
 export default asSimpleMenuTopNav;
@@ -117,5 +148,8 @@ export {
   withBaseSubMenuStyles,
   withBaseMenuStyles,
   asSimpleSubMenu,
+  asStylableList,
   asRelative,
+  asAccessibleMenu,
+  asAccessibleSubMenu,
 };

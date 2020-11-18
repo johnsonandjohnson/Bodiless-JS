@@ -16,10 +16,29 @@ import React, { FC } from 'react';
 import MaterialIcon, { MaterialIconDefaultProps } from '@material/react-material-icon';
 import { addClasses } from '@bodiless/fclasses';
 import {
-  SubmitButton as SubmitButtonBase, Div, Span, Label, CheckBox, Input,
-  Button, Anchor, ComponentFormTitle,
+  SubmitButton as SubmitButtonBase, Div, Span, Label, Input,
+  Button, Anchor, ComponentFormTitle, ComponentFormLink,
 } from '@bodiless/ui';
 import { ComponentSelector as CleanComponentSelector, ComponentSelectorUI, ComponentSelectorProps } from '@bodiless/layouts';
+
+/**
+ * Checkbox component used on flow container.
+ *
+ * Used instead of informed Checkbox for more concise handling.
+ */
+const CheckBox = ({
+  name, checked, onChange, disabled, id, ...rest
+} : any) => (
+  <Input
+    type="checkbox"
+    name={name}
+    disabled={disabled}
+    checked={checked}
+    onChange={onChange}
+    id={id}
+    {...rest}
+  />
+);
 
 // eslint-disable-next-line import/prefer-default-export
 export const ui: ComponentSelectorUI = {
@@ -50,6 +69,8 @@ export const ui: ComponentSelectorUI = {
 
   ComponentTitleWrapper: ComponentFormTitle,
 
+  ComponentLinkWrapper: ComponentFormLink,
+
   IconWrapper: addClasses(
     'bl-block bl-absolute bl-left-grid-0 bl-top-grid-0',
   )(Span),
@@ -61,10 +82,6 @@ export const ui: ComponentSelectorUI = {
   SubmitButton: addClasses(
     'bl-right-grid-0 bl-absolute tbl-ext-m bl-mr-grid-2',
   )(SubmitButtonBase),
-
-  AllCheckboxWrapper: addClasses(
-    'bl-text-white',
-  )(Div),
 
   AccordionWrapper: addClasses(
     'bl-font-semibold',
@@ -83,7 +100,7 @@ export const ui: ComponentSelectorUI = {
   )(Label),
 
   AccordionCheckBox: addClasses(
-    'bl-ml-grid-1',
+    'bl-ml-grid-1 bl-mr-grid-1',
   )(CheckBox),
 
   SearchBarWrapper: addClasses(
