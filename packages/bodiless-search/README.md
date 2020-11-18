@@ -7,7 +7,7 @@ results on a designated search page.
 ![](./assets/search.jpg)
 
 ?> The BodilessJS Search Component requires search index to be built prior to
-searching.  The Search Component is intended for use in a static environment
+searching. The Search Component is intended for use in a static environment
 (i.e. not an edit environment). In the edit environment, search may work locally
 but the search index may be out of date. For example if you add a new page on a
 site in edit mode, the search will not find the new page until you perform a
@@ -63,7 +63,7 @@ requirement.
 BODILESS_SEARCH_PAGE='search'
 
 ## Set in-browser search index expiration time period in seconds. 
-## By default, the index expires in one hour (86400 seconds) from time  of load.
+## By default, the index expires in one hour (86400 seconds) from time of load.
 BODILESS_SEARCH_EXPIRES='86400'
 
 ## Where index file is located, used by index generating script. 
