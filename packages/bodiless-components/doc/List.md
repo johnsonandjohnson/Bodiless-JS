@@ -1,14 +1,61 @@
-# Editable Lists
+# List Component
+
+The List Component can be used to add different types of editable lists to
+BodilessJS pages. The types of lists offered include: 
+
+* **Simple List**: A list with one level of editable but non linkable titles.
+* **Basic Compound List**: A list with two levels of nested sublists.
+* **Toggled Compound List**: A list with up to 2 levels of nested sublists,
+which can be added or removed by an editor.
+* **Super List**: This list has up to 2 levels of nested sublists. For both the
+main list and each sublist, users can toggle between list component types (e.g.
+bulleted or numbered). The titles in the list are editable links.
+
+
+## Content Editor Details
+
+Based on your site implementation you may have one or all of the above lists. It
+is also possible that your site implementation may have its own type of custom
+list.
+
+To add a list to your site:
+
+1. In Edit Mode, select the List Component from the Component Library.
+2. Select the type of list you would like to place on the page.
+3. With the List Component's Context Menu you can edit your list.
+![](./assets/ListContext.jpg)
+    * **Link**: The Link button allows you add Links to List Items. See [Link
+    Component](../../../Components/Link) for more information.
+    * **List Item**:
+      * **Add** button allows you to add more items to your list.
+      * **Sub** button allows you to add sublist items. You can add up to 2
+      levels of sub menu items to your list.
+    * **List Format**: This button allows you to switch formats for your list
+    (in this example the available formats are Numbered or Bulleted. Your
+    implementation may have a different selection of list formats).
+
+?> When working with lists and their context menus it is helpful to remember
+that the order of the controls proceeds from left to right. (i.e.: on the far
+left is the button controlling the individual item (link for list item), then
+inner lists, then outer list, then flow container controls. 
+
+
+---
+
+## Site Builder Details
+
+### Editable Lists
 
 The `asBodilessList` HOC creates an editable list, providing controls to add and
-remove elements. Additional helper functions allow adding nested sublists of
+remove items. Additional helper functions allow adding nested sublists of
 different types.
 
-By default, a component wrapped in `asBodilessList` renders empty list items, so
-it requires some configuration to be useful. Lists are configured via the Design
-API.
+By default, a component wrapped in `asBodilessList` renders empty list items and
+is designed to meet many different requirements and use cases. Sample
+configurations will be provided to demonstrate these use cases. Lists are
+configured via the Design API.
 
-## A Simple List
+### A Simple List
 
 At its simplest, a list needs a `Title` to render for each item:
 
@@ -30,19 +77,20 @@ const SimpleEditableList = flow(
 )('ul');
 ```
 
-Here we create a simple title (an editable span) and then inject it into the list via the
-Design API.  This list can now be placed on a page, and will allow adding and removing items,
-and editing their text, for example:
+Here we create a simple title (an editable span) and then inject it into the
+list via the Design API.  This list can now be placed on a page, and will allow
+adding and removing items, and editing their text, for example:
 
 ```jsx
 <SimpleList nodeKey="list" />
 ```
 Don't forget to give it a `nodeKey` prop so it has a place to store its data.
 
-Note that the "delete item" button will be hidden if the list doesn't have at least one
-item. Empty lists are not supported; any top level list must have at least one item.
+Note that the "delete item" button will be hidden if the list doesn't have at
+least one item. Empty lists are not supported; any top level list must have at
+least one item.
 
-## A compound list
+### A Compound list
 
 Now let's create a basic 2-level compound list (one in which each item has a
 pair of nested sublists). To do this, we use the design API again to convert
@@ -73,10 +121,10 @@ const withTitles = withDesign({
 });
 ```
 
-And let's add some padding to the sublist items to make the list more legible. We use
-the bodiless [FClasses](..) package and [TailwindCSS]() for this, but it could be
-done with almost any CSS-in-JS library which uses higher order components for
-styling.
+And let's add some padding to the sublist items to make the list more legible.
+We use the bodiless [FClasses](..) package and [TailwindCSS]() for this, but it
+could be done with almost any CSS-in-JS library which uses higher order
+components for styling.
 
 ```ts
 import { addClasses, stylable } from '@bodiless/fclasses';
@@ -129,7 +177,7 @@ const BasicCompoundList = flow(
 for the sublists, and returns a function which will apply a given HOC
 recursively to each item in the list and all sublists.
 
-## A List with Toggled Sublists
+### A List with Toggled Sublists
 
 The above list may be easily enhanced to allow an editor to choose whether each
 item will have a sublist. Tp do so, we leverage the bodiless
@@ -156,10 +204,13 @@ const List = flow(
 
 Here we introduce three new helper functions:
 
-- `withSubListDesign` is similar to `withSimpleSubListDesign` which we used above, but adapted
-  to the structure of a list with optional sublists (we'll explore that structure below).
+- `withSubListDesign` is similar to `withSimpleSubListDesign` which we used
+above, but adapted to the structure of a list with optional sublists
+(we'll explore that structure below).
 - `withSubLists` recursively replaces list items with toggled or "chameleon" sublists.
-- `withDeleteNodeOnUnwrap(nodeKey?)` - ensures that sublist data are purged when sublists are removed. Accepts an optional `nodeKey` param that determines what child node will be purged.
+- `withDeleteNodeOnUnwrap(nodeKey?)` - ensures that sublist data are purged when
+sublists are removed. Accepts an optional `nodeKey` param that determines what
+child node will be purged.
 
 ### Structure of a toggled sublist
 
@@ -189,7 +240,7 @@ const ListVariation = withDesign({
 })(List);
 ```
 
-## "Chameleon" Lists
+### "Chameleon" Lists
 
 The toggled sublist we saw above is actually a list in which each item is a
 "chameleon" -- a component which can switch what it renders depending on state.
@@ -277,9 +328,9 @@ Note - we need to add `withNode` here to ensure that the list (and it's chameleo
 receive their own node. Without it, the list would attempt to store data at the root
 node, which would conflict with other elements on the page.
 
-## Advanced Topics
+### Advanced Topics
 
-### Optional Parameters
+#### Optional Parameters
 
 Link other bodiless components, `asBodilessList` accepts 3 optional positional parameters.
 
@@ -317,3 +368,9 @@ const asNestedMenu = flow(
   ...
 );
 ```
+
+---
+
+## Architectural Details
+
+For architectural details for different list types please see [List source folder](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/bodiless-components/src/List) in @bodiless-components. 
