@@ -216,16 +216,22 @@ const providersCustomized: SocialShareProvider[] = [
   twitterRound,
   emailRound,
 ];
+const providersEmailOnly: SocialShareProvider[] = [
+  emailRound,
+];
 
 const SimpleSocialShare = flow(asSimpleSocialShare)(SocialShareClean);
 const CustomizedSocialShare = flow(asOrangeSocialShare)(SocialShareClean);
 const IconOnlySocialShare = () => (
   <CustomizedSocialShare providers={providersCustomized} buttonContent={Icon('share')} />
 );
+const EmailOnlySocialShare = () => (
+  <SimpleSocialShare providers={providersEmailOnly} buttonContent={IconWithLabel('share', 'Email Share')} />
+);
 export default () => (
   <SimpleSocialShare providers={providers} buttonContent={IconWithLabel('share', 'Share')} />
 );
-export { IconOnlySocialShare };
+export { IconOnlySocialShare, EmailOnlySocialShare };
 
 /**
  * Social Share menu.

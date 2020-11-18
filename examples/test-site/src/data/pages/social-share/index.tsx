@@ -19,7 +19,7 @@ import {
 } from '@bodiless/fclasses';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../../../components/Layout';
-import SocialShare, { IconOnlySocialShare } from '../../../components/SocialShare';
+import SocialShare, { IconOnlySocialShare, EmailOnlySocialShare } from '../../../components/SocialShare';
 
 const FlexSection = addClasses('text-right border')(Section);
 const StyledH3 = addClasses('text-2xl m-2')(H3);
@@ -35,6 +35,10 @@ export default (props: any) => (
       <FlexSection>
         <StyledH3>Customized share button</StyledH3>
         <IconOnlySocialShare />
+      </FlexSection>
+      <FlexSection>
+        <StyledH3>Signle share button</StyledH3>
+        <EmailOnlySocialShare />
       </FlexSection>
     </Layout>
   </Page>

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React from 'react';
 import { flow } from 'lodash';
 import {
   Div, designable, addClasses, replaceWith,
