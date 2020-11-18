@@ -14,108 +14,139 @@
 
 import React, { useCallback } from 'react';
 import { useMenuOptionUI, useNode } from '@bodiless/core';
-import {
-  withDesign,
-  replaceWith,
-  addProps,
-} from '@bodiless/fclasses';
-import { useFormState } from 'informed';
-import { flow } from 'lodash';
-import LockedEditableField from '@bodiless/components/src/LockedEditableField';
+import { useField } from 'informed';
+import path from 'path';
+
+const BASE_PATH_FIELD_NAME = 'basePath';
+const PAGE_URL_FIELD_NAME = 'pagePath';
+const INPUT_FIELD_DEFAULT_CLASSES = 'bl-text-grey-900 bg-grey-100 bl-text-xs bl-min-w-xl-grid-1 bl-my-grid-2 bl-p-grid-1';
+const INPUT_FIELD_INLINE_CLASSES = INPUT_FIELD_DEFAULT_CLASSES.concat(' bl-inline');
+const INPUT_FIELD_BLOCK_CLASSES = INPUT_FIELD_DEFAULT_CLASSES.concat(' bl-block bl-w-full');
 
 const usePagePath = () => useNode().node.pagePath;
 
-const PageURLPreview = () => {
+const useBasePathField = (props) => {
   const basePath = usePagePath();
-  const { errors } = useFormState();
+  const { fieldState, fieldApi, ref, userProps } = useField({
+    field: BASE_PATH_FIELD_NAME,
+    initialValue: basePath,
+  });
+  const { value } = fieldState;
+  const { setValue } = fieldApi;
+  const { onChange, onBlur, ...rest } = userProps;
+  return {
+    ref,
+    value,
+    setValue,
+    onChange,
+    ...rest,
+  }
+}
+
+const getPageUrlValidate = () => useCallback(
+  (value: string) => (!RegExp(/^[a-z0-9_/-]+$/i).test(value)
+    ? 'No special characters or spaces allowed'
+    : undefined),
+  [],
+);
+
+const getPagePathValidate = () => useCallback(
+  (value: string) => (!RegExp(/^[a-z0-9_-]+$/i).test(value)
+    ? 'No special characters or spaces allowed'
+    : undefined),
+  [],
+);
+
+// since we want to join relative urls, path.join should be ok here
+const joinUrl = (url1?: string, url2?: string) => path.join(url1 || '/', url2 || '');
+
+const NewPageURLField = (props) => {
   const {
     ComponentFormLabel,
-    ComponentFormText,
-    ComponentFormDescription,
+    ComponentFormLink,
     ComponentFormWarning,
   } = useMenuOptionUI();
-  /*const validate = useCallback(
-    (value: string) => (!value || !RegExp(/^[a-z0-9_-]+$/i).test(value)
-      ? 'No special characters or spaces allowed'
-      : undefined),
-    [],
-  );*/
-  const validate = useCallback(
-    (value: string) => (!RegExp(/^[a-z0-9_-]+$/i).test(value)
-      ? 'No special characters or spaces allowed'
-      : undefined),
-    [],
-  );
-  return (
-    <>
-      <ComponentFormLabel htmlFor="new-page-path">Page Path</ComponentFormLabel>
-      <ComponentFormDescription>{`${basePath}`}</ComponentFormDescription>
-      <ComponentFormText
-        id="new-page-path"
-        key="pagePath"
-        field="pagePath"
-        keepState
-        validate={validate}
-        validateOnChange
-        validateOnBlur
-      />
-      {errors && errors.pagePath && (
-        <ComponentFormWarning>{errors.pagePath}</ComponentFormWarning>
-      )}   
-    </>
-  );
-};
-
-const PageURLInput = () => {
-  const basePath = usePagePath();
-  const { errors, values } = useFormState();
-  const pagePath = values['pageURL'] || '';  
-  const pageURLInitialValue = `${basePath}${pagePath}`;
   const {
-    ComponentFormLabel,
-    ComponentFormText,
-    ComponentFormWarning,
-  } = useMenuOptionUI();
-  const validate = useCallback(
-    (value: string) => (!value || !RegExp(/^[a-z0-9/_-]+$/i).test(value)
-      ? 'No special characters or spaces allowed'
-      : undefined),
-    [],
-  );
-  return (
-    <>
-      <ComponentFormLabel>URL</ComponentFormLabel>
-      <ComponentFormText
-        key="pageURL"
-        field="pageURL"
-        initialValue={pageURLInitialValue}
-        validate={validate}
-        validateOnChange
-        validateOnBlur
+    value: basePathValue,
+    setValue: setBasePathValue,
+    ...restBasePathProps
+  } = useBasePathField(props);
+
+  const isEmptyValue = value => value === undefined || value === '';
+  const isBasePathValueEmpty = isEmptyValue(basePathValue) || basePathValue === '/';
+  const isFullUrl = isBasePathValueEmpty;
+
+  const { fieldState, fieldApi, render, ref, userProps } = useField({
+    field: PAGE_URL_FIELD_NAME,
+    validate: isFullUrl ? getPageUrlValidate() : getPagePathValidate(),
+    ...props,
+  });
+  const { value } = fieldState;
+  const { setTouched, setValue } = fieldApi;
+  const { onChange, onBlur, ...rest } = userProps;
+  const fieldLabel = isFullUrl ? 'URL' : 'Page Path';
+  const inputClasses = isFullUrl ? INPUT_FIELD_BLOCK_CLASSES : INPUT_FIELD_INLINE_CLASSES; 
+  return render(
+    <React.Fragment>
+      <ComponentFormLabel>{fieldLabel}</ComponentFormLabel>
+      {
+        !isFullUrl
+        ? <span
+            className="mr-1"
+          >{
+          `${basePathValue}`
+          }</span>
+         : null 
+      }
+      <input
+        {...restBasePathProps}
+        type='hidden'
+        value={isBasePathValueEmpty ? '/' : basePathValue}
       />
-      {errors && errors.pageURL && (
-        <ComponentFormWarning>{errors.pageURL}</ComponentFormWarning>
-      )}   
-    </>
+      <input
+        className={inputClasses}
+        {...rest}
+        ref={ref}
+        value={isEmptyValue(value) ? '' : value}
+        onChange={e => {
+          setValue(e.target.value);
+          if (onChange) {
+            onChange(e);
+          }
+        }}
+        onBlur={e => {
+          setTouched(true);
+          if (onBlur) {
+            onBlur(e);
+          }
+        }}
+      />
+      {
+        !isBasePathValueEmpty &&
+        <ComponentFormLink
+          onClick={() => {
+            setValue(joinUrl(basePathValue, value));
+            setBasePathValue('/');
+          }}>
+            Edit
+        </ComponentFormLink>
+      }
+      {
+        fieldState.error ? (
+        <ComponentFormWarning>{fieldState.error}</ComponentFormWarning>
+        ) : null
+      }
+    </React.Fragment>
   );
 };
 
-const asComponentFormLink = () => (props: any) => {
-  const { ComponentFormLink } = useMenuOptionUI();
-  return <ComponentFormLink {...props} />
-};
-
-const NewPageURLField = withDesign({
-  Input: replaceWith(PageURLInput),
-  CancelLink: replaceWith(React.Fragment),
-  EditLink: flow(
-    asComponentFormLink,
-    addProps({
-      children: 'Edit',
-    }),
-  ),
-  Preview: replaceWith(PageURLPreview),
-})(LockedEditableField);
+const getPathValue = values => {
+  const {
+    [BASE_PATH_FIELD_NAME]: basePagePath,
+    [PAGE_URL_FIELD_NAME]: pageUrl,
+  } = values;
+  return joinUrl(basePagePath, pageUrl);
+}
 
 export default NewPageURLField;
-export { usePagePath };
+export { getPathValue };

@@ -29,7 +29,7 @@ import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
 import verifyPage from './PageVerification';
 import { useGatsbyPageContext } from './GatsbyPageProvider';
-import NewPageURLField, { usePagePath } from './NewPageURLField';
+import NewPageURLField, { getPathValue } from './NewPageURLField';
 
 type Client = {
   savePage: (path: string, template?: string) => AxiosPromise<any>;
@@ -102,7 +102,10 @@ const NewPageComp = (props : NewPageProps) => {
             disabled
             initialValue={template}
           />
-          <NewPageURLField />
+          <NewPageURLField
+            validateOnChange
+            validateOnBlur
+          />
         </>
       );
     }
@@ -145,9 +148,8 @@ const formPageAdd = (client: Client) => contextMenuForm({
     status: NewPageState.Init,
   });
   const context = useEditContext();
-  const basePagePath = usePagePath();
-  const { pageURL, pagePath, template } = values;
-  const path = pageURL ? pageURL : `${basePagePath}/${pagePath}`;
+  const { template } = values;
+  const path = getPathValue(values);
   useEffect(() => {
     // If the form is submitted and valid then lets try to creat a page.
     if (submits && path && invalid === false) {
