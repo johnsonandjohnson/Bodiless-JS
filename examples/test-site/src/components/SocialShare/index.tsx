@@ -118,9 +118,9 @@ let sharedTitle = '';
 let sharedDescription = '';
 if (typeof document !== 'undefined') {
   const linkElem = document.querySelector("link[rel='canonical']");
-  const linkUrl = linkElem ? encodeURIComponent(linkElem.getAttribute('href') || '') : '';
+  const linkUrl = linkElem ? linkElem.getAttribute('href') || '' : '';
   const ogUrlMeta = document.querySelector('meta[property="og:url"]');
-  const ogUrl = ogUrlMeta ? encodeURIComponent(ogUrlMeta.content) : '';
+  const ogUrl = ogUrlMeta ? ogUrlMeta.content : '';
   if (linkUrl) {
     sharedUrl = linkUrl;
   } else if (ogUrl) {
@@ -131,12 +131,13 @@ if (typeof document !== 'undefined') {
   const ogTitle = document.querySelector('meta[property="og:title"]');
   sharedTitle = ogTitle ? ogTitle.content : '';
   const ogDescription = document.querySelector('meta[property="og:description"]');
-  sharedDescription = ogDescription ? ogDescription.content : '';
+  sharedDescription = ogDescription ? `${ogDescription.content} \n\nRead at: ${sharedUrl}` : '';
 }
 
 /**
  * FaceBook social share provider.
  */
+sharedUrl = encodeURIComponent(sharedUrl);
 const facebookSrc = `https://www.facebook.com/sharer/sharer.php?u=${sharedUrl}&amp;src=sdkpreparse`;
 const facebookShare = () => popupOpen({
   url: facebookSrc,
