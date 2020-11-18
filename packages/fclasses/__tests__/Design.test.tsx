@@ -26,6 +26,7 @@ import {
   designable,
   withFinalDesign,
 } from '../src/Design';
+import { withShowDesignKeys } from '../src';
 
 type SpanType = ComponentType<any>;
 type MyDesignableComponents = {
@@ -153,5 +154,34 @@ describe('withFinalDesign', () => {
     const wrapper = mount(<Test />);
     expect(wrapper.find('span#foo').prop('className'))
       .toBe('outer-final inner-final next base');
+  });
+});
+
+describe('withShowDesignKeys', () => {
+  const Base = ({ components }: any) => {
+    const { Foo, Bar } = components;
+    return <Foo><Bar /></Foo>;
+  };
+  const startComponents = {
+    Foo: (props: any) => <span id="foo" {...props} />,
+    Bar: (props: any) => <span id="bar" {...props} />,
+  };
+  it('Adds design keys when enabled', () => {
+    const Test: ComponentType<any> = flow(
+      designable(startComponents, 'Base'),
+      withShowDesignKeys(),
+    )(Base);
+    const wrapper = mount(<Test />);
+    expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBe('Base:Foo');
+    expect(wrapper.find('span#bar').prop('data-bl-design-key')).toBe('Base:Bar');
+  });
+  it('Does not add a design keys when disabled', () => {
+    const Test: ComponentType<any> = flow(
+      designable(startComponents, 'Base'),
+      withShowDesignKeys(false),
+    )(Base);
+    const wrapper = mount(<Test />);
+    expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBeUndefined();
+    expect(wrapper.find('span#bar').prop('data-bl-design-key')).toBeUndefined();
   });
 });

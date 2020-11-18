@@ -25,7 +25,7 @@ import {
 } from '../Elements.token';
 import { withEditorBasic, withEditorSimple } from '../Editors';
 
-const asEditableTout = flow(
+export const asEditableTout = flow(
   withDesign({
     Image: asEditableImage('image'),
     ImageLink: withSidecarNodes(

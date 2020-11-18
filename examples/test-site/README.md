@@ -38,3 +38,4 @@ there is a script responsible for updating platform.sh configuration for test-si
 please trigger the following command from monorepo root:
 
 `npm run lerna -- run psh-update --scope=@bodiless/test-site`
+

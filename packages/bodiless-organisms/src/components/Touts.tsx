@@ -80,7 +80,7 @@ const ToutBase: FC<Props> = ({ components, ...rest }) => {
 };
 
 const ToutClean = flow(
-  designable(toutComponentStart),
+  designable(toutComponentStart, 'Tout'),
   withNode,
 )(ToutBase);
 

@@ -66,6 +66,13 @@ const asToutTextWhite = withDesign({
   ContentWrapper: addClasses('text-white'),
 });
 
+const asToutMainMenu = flow(
+  asToutTextWhite,
+  asToutWithPaddings,
+  asToutDefaultStyle,
+  asToutHorizontal,
+);
+
 export {
   asToutHorizontal,
   asToutVertical,
@@ -78,4 +85,5 @@ export {
   asToutNoBodyNoTitle,
   asToutWithPaddings,
   asToutTextWhite,
+  asToutMainMenu,
 };

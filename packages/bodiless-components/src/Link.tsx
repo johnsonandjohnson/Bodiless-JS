@@ -19,8 +19,14 @@ import {
   withoutProps,
   ifEditable,
   withExtendHandler,
+  useNode,
+  ifToggledOn,
 } from '@bodiless/core';
 import type { AsBodiless, BodilessOptions } from '@bodiless/core';
+import {
+  replaceWith,
+  Fragment,
+} from '@bodiless/fclasses';
 import { flowRight } from 'lodash';
 
 // Type of the data used by this component.
@@ -99,4 +105,28 @@ export const asBodilessLink: AsBodilessLink = (
   withHrefTransformer,
 );
 const Link = asBodilessLink()('a');
+
+/**
+ * hook that determines if the link data is empty
+ * the hook validates the data in the current node and in the corresponding prop
+ *
+ * @param props - link based component props
+ * @returns true when link data is empty, otherwise false
+ */
+const useEmptyLinkToggle = ({ href }: Props) => {
+  const { node } = useNode<LinkData>();
+  return (href === undefined || href === '#') && node.data.href === undefined;
+};
+
+/**
+ * HOC that can be applied to a link based component to not render the component
+ * when the component link data is empty
+ * Note: the component will still render its children
+ *
+ * @param Component - link based component
+ * @returns Component - Fragment when link data empty, input Component otherwise
+ */
+const withoutLinkWhenLinkDataEmpty = ifToggledOn(useEmptyLinkToggle)(replaceWith(Fragment));
+
 export default Link;
+export { withoutLinkWhenLinkDataEmpty };

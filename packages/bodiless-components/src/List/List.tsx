@@ -100,7 +100,7 @@ const asTestableList = (listName: string) => withDesign({
  */
 const List = flow(
   observer,
-  designable(startComponents),
+  designable(startComponents, 'List'),
   withNode,
 )(BasicList) as ComponentType<FinalProps>;
 List.displayName = 'List';

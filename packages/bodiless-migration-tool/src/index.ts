@@ -15,7 +15,6 @@
 /* eslint class-methods-use-this: 0 */
 import { Command, flags } from '@oclif/command';
 import fs from 'fs';
-import path from 'path';
 import {
   SiteFlattener,
   SiteFlattenerParams,
@@ -23,11 +22,14 @@ import {
 } from './site-flattener';
 import postBuild from './post-build';
 import page404Handler from './page404-handler';
+import loadSettings from './loadSettings';
 
 enum CommandType {
   Flatten = 'flatten',
   Postbuild = 'postbuild'
 }
+
+const DEFAULT_MAX_DEPTH = 100;
 
 class MigrationTool extends Command {
   static description = 'site flattenning tool';
@@ -61,11 +63,19 @@ class MigrationTool extends Command {
   }
 
   async flatten() {
-    const settings = this.getDefaultSettings();
+    const settings = loadSettings();
+    if (settings === undefined) return;
+    const {
+      url: websiteUrl,
+      pageCreator,
+      crawler: crawlerSettings,
+      exports,
+    } = settings;
     const page404Params = page404Handler.getParams(settings);
     const page404Urls = page404Params.page404Url ? [page404Params.page404Url] : [];
     const flattenerParams: SiteFlattenerParams = {
-      websiteUrl: settings.url,
+      websiteUrl,
+      pageCreator,
       workDir: this.getWorkDir(),
       gitRepository: this.getGitRepo(),
       reservedPaths: ['404'],
@@ -74,22 +84,15 @@ class MigrationTool extends Command {
           ...page404Urls,
           settings.url,
         ],
-        maxDepth: settings.crawler.maxDepth,
-        maxConcurrency: settings.crawler.maxConcurrency || 1,
-        obeyRobotsTxt: settings.crawler.ignoreRobotsTxt !== true,
+        maxDepth: crawlerSettings ? crawlerSettings.maxDepth : DEFAULT_MAX_DEPTH,
+        maxConcurrency: 1,
+        obeyRobotsTxt: crawlerSettings ? crawlerSettings.ignoreRobotsTxt !== true : false,
         javascriptEnabled: true,
       },
       page404Params,
-      steps: {
-        setup: false,
-        scrape: true,
-        startDev: false,
-        build: false,
-        serve: false,
-      },
       trailingSlash: settings.trailingSlash || TrailingSlash.Add,
       transformers: settings.transformers || [],
-      exports: settings.exports || {},
+      exports,
       htmltojsx: true,
       disableTailwind: settings.disableTailwind === undefined ? true : settings.disableTailwind,
       allowFallbackHtml: settings.allowFallbackHtml === undefined
@@ -110,15 +113,6 @@ class MigrationTool extends Command {
 
   private getGitRepo(): string {
     return process.env.git_repo || 'https://github.com/johnsonandjohnson/bodiless-js.git';
-  }
-
-  private getDefaultSettings() {
-    const rootSettingsPath = path.resolve(process.cwd(), 'migration-settings.json');
-    const defaultSettingsPath = path.resolve(__dirname, '..', 'settings.json');
-    const rootSettingsExist = fs.existsSync(rootSettingsPath);
-    const settingsPath = rootSettingsExist ? rootSettingsPath : defaultSettingsPath;
-    console.log(`Applying migration settings from ${settingsPath}`);
-    return JSON.parse(fs.readFileSync(settingsPath).toString());
   }
 }
 

@@ -49,7 +49,7 @@ const AccordionTitleBase: FC<AccordionTitleProps> = ({ components, children }) =
 };
 
 const AccordionTitleClean = flow(
-  designable(AccordionTitleComponentsStart),
+  designable(AccordionTitleComponentsStart, 'AccordionTitle'),
 )(AccordionTitleBase);
 
 const asAccodionTitle = <P extends DesignableProps<AccordionTitleComponents>>(

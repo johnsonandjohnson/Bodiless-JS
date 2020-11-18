@@ -14,8 +14,20 @@ module.exports = {
       '4/3': [4, 3],
       '21/9': [21, 9],
     },
+
+    extend: {
+      width: {
+        content: 'max-content',
+      },
+      minWidth: {
+        full: '100%',
+      },
+    },
   },
-  variants: {},
+  variants: {
+    overflow: ['responsive', 'hover', 'focus'],
+    position: ['responsive', 'hover', 'focus'],
+  },
   corePlugins: {
     container: false,
   },

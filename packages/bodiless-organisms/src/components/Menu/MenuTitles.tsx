@@ -21,7 +21,7 @@ import {
   asBodilessLink, withBodilessLinkToggle,
 } from '@bodiless/components';
 import { ToutClean } from '../Touts';
-import MenuLink from '../MainMenu/MenuLink';
+import MenuLink from './MenuLink';
 
 export const asMenuTout = (withToutEditors: any) => flow(
   replaceWith(ToutClean),

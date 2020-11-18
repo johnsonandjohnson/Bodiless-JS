@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.59](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.58...v0.0.59) (2020-11-05)
+
+
+### Bug Fixes
+
+* **core:** Context Menu Panel for link/image/seo disappear when you mouse moves off ([#639](https://github.com/johnsonandjohnson/bodiless-js/issues/639)) ([43e0d84](https://github.com/johnsonandjohnson/bodiless-js/commit/43e0d84e3235845dc4938c41526c227c4cb5ad63))
+* **layouts:** Various FlowContainer bugs + Snap Indicator ([#658](https://github.com/johnsonandjohnson/bodiless-js/issues/658)) ([b4fec7b](https://github.com/johnsonandjohnson/bodiless-js/commit/b4fec7bf937c73d379a847b823c823483072ccc1)), closes [#657](https://github.com/johnsonandjohnson/bodiless-js/issues/657) [#654](https://github.com/johnsonandjohnson/bodiless-js/issues/654) [#656](https://github.com/johnsonandjohnson/bodiless-js/issues/656)
+
+
+### Features
+
+* **search:** component library search component ([#592](https://github.com/johnsonandjohnson/bodiless-js/issues/592)) ([faa2219](https://github.com/johnsonandjohnson/bodiless-js/commit/faa2219a5dc5b66cbb3fd2a8eba6d24a04d3d38f))
+
+
+
+
+
 ## [0.0.58](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.57...v0.0.58) (2020-10-23)
 
 

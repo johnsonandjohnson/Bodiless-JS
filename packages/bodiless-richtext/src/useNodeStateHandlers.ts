@@ -13,6 +13,7 @@
  */
 
 import React from 'react';
+import { isObservable, toJS } from 'mobx';
 import { Value, ValueJSON } from 'slate';
 import isEqual from 'react-fast-compare';
 import { useNode, useUUID } from '@bodiless/core';
@@ -28,6 +29,7 @@ type TOnChange = Function; // (change: Change) => void;
 type TUseOnChangeParams = {
   onChange?: TOnChange;
   key: string;
+  initialValue: InitialValue;
 };
 type TUseOnChange = (params: TUseOnChangeParams) => (change: Change) => void;
 type TUseValueParam = {
@@ -59,21 +61,36 @@ const preserveAll = {
 
 // Create the onChange prop.
 // @TODO Should be memoized with useCallback.
-const useOnChange: TUseOnChange = ({ onChange, key }) => {
+const useOnChange: TUseOnChange = ({ onChange, key, initialValue }) => {
   const { setState } = useStateContainer();
   const { node } = useNode<Data>();
 
   return change => {
     const { value } = change;
     const jsonValue = value.toJSON();
+    let { document } = node.data;
+
+    if (isObservable(document)) {
+      document = toJS(document);
+    }
     // Set the editor state.  We use the node path as a key.
     const newState = {
       [key]: value,
     };
-    if (
-      !node.data.document
-      || !isEqual(node.data.document, jsonValue.document)
-    ) {
+
+    // If Document has changed
+    const isDocumentChanged = !isEqual(document, jsonValue.document);
+
+    // If the value is initial value
+    const isNewValueInitial = isEqual(initialValue.document, jsonValue.document);
+
+    // If New Value is Empty
+    const isNewValueEmpty = isNewValueInitial && document && isDocumentChanged;
+
+    // If New Value Has Changes
+    const isNewValueChanged = !isNewValueInitial && (!document || isDocumentChanged);
+
+    if (isNewValueEmpty || isNewValueChanged) {
       node.setData({ document: jsonValue.document! });
     }
     if (onChange) {
@@ -118,6 +135,7 @@ const useNodeStateHandlers: TUseNodeStateHandlers = ({
     onChange: useOnChange({
       onChange,
       key,
+      initialValue,
     }),
   });
 };
