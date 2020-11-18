@@ -24,3 +24,4 @@ export * from './plugin-factory';
 export * from './components';
 export * from './core';
 export * from './meta';
+export * from './RichTextPlain';

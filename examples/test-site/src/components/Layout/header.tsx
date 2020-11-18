@@ -21,8 +21,8 @@ import {
   Div,
 } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
+import { ResponsiveMegaMenu } from '../Menu';
 import { SimpleSearchBox } from '../Search';
-import ResponsiveMenu from '../Menus';
 import Logo from './logo';
 
 type HeaderComponents = {
@@ -39,7 +39,7 @@ const headerComponents:HeaderComponents = {
   Wrapper: Div,
   Container: Div,
   MenuContainer: Div,
-  Menu: ResponsiveMenu,
+  Menu: ResponsiveMegaMenu,
   SiteLogoReturn: Logo,
   Search: SimpleSearchBox,
 };

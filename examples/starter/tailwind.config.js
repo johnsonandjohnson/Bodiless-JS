@@ -20,12 +20,6 @@ module.exports = {
 
   theme: {
 
-    extend: {
-      width: {
-        content: 'max-content',
-      },
-    },
-
     /*
     |---------------------------------------------------------------------------
     | Colors                                https://tailwindcss.com/docs/colors
@@ -306,10 +300,8 @@ module.exports = {
     | Class name: .min-w-{size}
     |
     */
-    minWidth: {
-      // Used by main menu items to match the UI wireframes
-      full: '100%',
-    },
+
+    // minWidth: {},
 
     /*
     |---------------------------------------------------------------------------
@@ -358,11 +350,7 @@ module.exports = {
     |
     */
 
-    maxHeight: {
-      // Used to limit the maximum height of menu.
-      // See src/components/Menus/token.tsx for usage.
-      'menu-row': '1.75rem',
-    },
+    // maxHeight: {},
 
     /*
     |---------------------------------------------------------------------------
@@ -505,10 +493,7 @@ module.exports = {
   |
   */
 
-  variants: {
-    overflow: ['responsive', 'hover', 'focus'],
-    position: ['responsive', 'hover', 'focus'],
-  },
+  variants: {},
 
   corePlugins: {},
 
