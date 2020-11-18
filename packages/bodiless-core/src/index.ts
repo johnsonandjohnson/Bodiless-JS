@@ -35,6 +35,7 @@ import type { Options as EditFormSnippetOptions } from './withEditFormSnippet';
 import withData from './withData';
 import NodeProvider, { useNode, useNodeDataHandlers } from './NodeProvider';
 import { DefaultContentNode } from './ContentNode';
+import type { ContentNode } from './ContentNode';
 import {
   withNodeAndHandlers,
   withNodeDataHandlers,
@@ -48,8 +49,8 @@ import { ifToggledOff, ifToggledOn, withFlowToggle } from './withFlowToggle';
 import { ifEditable, ifReadOnly, useEditToggle } from './withEditToggle';
 import type { ContextMenuFormProps, IContextMenuItemProps, TMenuOption } from './Types/ContextMenuTypes';
 import type { PageEditContextInterface } from './PageEditContext/types';
-import type { EditButtonOptions, EditButtonProps } from './Types/EditButtonTypes';
-import type { TMenuOptionGetter } from './Types/PageContextProviderTypes';
+import type { EditButtonOptions, EditButtonProps, UseBodilessOverrides } from './Types/EditButtonTypes';
+import type { TMenuOptionGetter, MenuOptionsDefinition } from './Types/PageContextProviderTypes';
 import type { WithNodeProps, WithNodeKeyProps } from './Types/NodeTypes';
 import type { TOverlaySettings } from './Types/PageOverlayTypes';
 import type { Snippet as FormSnippet } from './withCompoundForm';
@@ -66,7 +67,7 @@ import {
 } from './NotificationProvider';
 import withNotificationButton from './withNotificationButton';
 import withChild from './withChild';
-import asBodilessComponent, { withActivatorWrapper } from './asBodilessComponent';
+import asBodilessComponent, { withActivatorWrapper, withBodilessData } from './asBodilessComponent';
 import type { Options as BodilessOptions, AsBodiless } from './asBodilessComponent';
 import { useMenuOptionUI } from './components/ContextMenuContext';
 import ContextSubMenu from './ContextMenu/ContextSubMenu';
@@ -76,6 +77,7 @@ import OnNodeErrorNotification from './OnNodeErrorNotification';
 export * from './components';
 export {
   asBodilessComponent,
+  withBodilessData,
   asStatic,
   asReadOnly,
   withContextActivator,
@@ -137,6 +139,7 @@ export {
 };
 
 export type {
+  ContentNode,
   BodilessOptions,
   PageEditContextInterface,
   TMenuOption,
@@ -144,12 +147,14 @@ export type {
   WithNodeProps,
   WithNodeKeyProps,
   EditButtonOptions,
+  UseBodilessOverrides,
   EditButtonProps,
   TOverlaySettings,
   ContextMenuFormProps,
   IContextMenuItemProps,
   AsBodiless,
   FormSnippet,
+  MenuOptionsDefinition,
   EditFormSnippetOptions,
 };
 

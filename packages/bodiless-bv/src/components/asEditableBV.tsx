@@ -29,6 +29,7 @@ import { DataType as BVNodeDataType, withBVDataHandlers } from './asBodilessBV';
 export const editButtonOptions: EditButtonOptions<any, BVNodeDataType> = {
   icon: 'settings',
   label: 'Settings',
+  groupLabel: 'Reviews',
   name: 'Edit',
   renderForm: ({ ui: formUi }) => {
     const {

@@ -19,12 +19,18 @@ import {
   withoutProps,
   ifEditable,
   withExtendHandler,
+  useNode,
+  ifToggledOn,
 } from '@bodiless/core';
 import type { AsBodiless, BodilessOptions } from '@bodiless/core';
+import {
+  replaceWith,
+  Fragment,
+} from '@bodiless/fclasses';
 import { flowRight } from 'lodash';
 
 // Type of the data used by this component.
-type Data = {
+export type LinkData = {
   href: string;
 };
 
@@ -32,10 +38,12 @@ type Props = HTMLProps<HTMLAnchorElement> & {
   unwrap?: () => void,
 };
 
-const options: BodilessOptions<Props, Data> = {
+const options: BodilessOptions<Props, LinkData> = {
   icon: 'link',
   name: 'Link',
-  label: 'Link',
+  label: 'Edit',
+  groupLabel: 'Link',
+  groupMerge: 'merge',
   renderForm: ({ componentProps: { unwrap }, closeForm }) => {
     const {
       ComponentFormTitle,
@@ -81,14 +89,44 @@ const withHrefTransformer = (Component : ComponentType<Props>) => {
   return TransformedHref;
 };
 
-export const asBodilessLink: AsBodiless<Props, Data> = (nodeKeys?) => flowRight(
+export type AsBodilessLink = AsBodiless<Props, LinkData>;
+
+export const asBodilessLink: AsBodilessLink = (
+  nodeKeys,
+  defaultData,
+  useOverrides,
+) => flowRight(
   // Prevent following the link in edit mode
   ifEditable(
     withExtendHandler('onClick', () => (e: MouseEvent) => e.preventDefault()),
   ),
-  asBodilessComponent<Props, Data>(options)(nodeKeys),
+  asBodilessComponent<Props, LinkData>(options)(nodeKeys, defaultData, useOverrides),
   withoutProps(['unwrap']),
   withHrefTransformer,
 );
 const Link = asBodilessLink()('a');
+
+/**
+ * hook that determines if the link data is empty
+ * the hook validates the data in the current node and in the corresponding prop
+ *
+ * @param props - link based component props
+ * @returns true when link data is empty, otherwise false
+ */
+const useEmptyLinkToggle = ({ href }: Props) => {
+  const { node } = useNode<LinkData>();
+  return (href === undefined || href === '#') && node.data.href === undefined;
+};
+
+/**
+ * HOC that can be applied to a link based component to not render the component
+ * when the component link data is empty
+ * Note: the component will still render its children
+ *
+ * @param Component - link based component
+ * @returns Component - Fragment when link data empty, input Component otherwise
+ */
+const withoutLinkWhenLinkDataEmpty = ifToggledOn(useEmptyLinkToggle)(replaceWith(Fragment));
+
 export default Link;
+export { withoutLinkWhenLinkDataEmpty };

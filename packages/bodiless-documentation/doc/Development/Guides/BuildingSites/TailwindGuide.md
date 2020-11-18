@@ -43,7 +43,7 @@ instead of replace.
 This will add additional brand colors to all the default tailwind colors. 
 
 When the static site builds it utilizes
-[gatsby purge css feature](https://www.gatsbyjs.org/packages/gatsby-plugin-purgecss)
+[tailwind purge css feature](https://tailwindcss.com/docs/controlling-file-size#removing-unused-css)
 to remove unused css classes and this will keep the css file small for best
 performance.
 
@@ -103,7 +103,7 @@ For example:
 
 By doing the above, this custom css will only be loaded for pages that
 use the component and help with performance. While BodilessJS runs with
-[gatsby purge css feature](https://www.gatsbyjs.org/packages/gatsby-plugin-purgecss)
+[tailwind purge css feature](https://tailwindcss.com/docs/controlling-file-size#removing-unused-css)
 tool this is only processing on tailwind css and not on any custom css included.
 
 ?> **Tip** As a site developer it is always good practice to remove css that isn't
@@ -117,3 +117,83 @@ Common usages for using custom css:
 * Gradients
   * or alternative use https://github.com/benface/tailwindcss-gradients to extend
     tailwind.
+
+## Tailwind configuration for a package
+
+1. Install postcss-cli as a dev dependency via npm.
+
+    ```sh
+    npm i -D postcss-cli
+    ```
+    
+1. Add Tailwind to package CSS
+
+    Create new or update existing CSS file with Tailwind's `base`, `components`, and `utilities` styles.
+
+    ```js
+    @tailwind base;
+
+    @tailwind components;
+
+    @tailwind utilities;
+    ```
+
+1. Create tailwind and postcss configuration file.
+
+    ```sh
+    npx tailwindcss init -p
+    ```
+
+1. Process package CSS with Tailwind.
+
+    Update postcss.config.js with the following content
+
+    ```js
+    module.exports = {
+      plugins: [
+        require('tailwindcss')('tailwind.config.js'),
+      ],
+    };
+    ```
+
+1. Include css compilation to your package build.
+
+    Assuming your package.json contains build command with typescript compilation,
+
+    ```json
+      "build": "tsc -p ./tsconfig.json",
+    ```
+
+    extend the build command by adding a build css and copy compiled css steps:
+
+    ```json
+      "build": "npm run build:css && npm run copy && tsc -p ./tsconfig.json",
+      "build:css": "postcss index.tailwind.css -o ./src/main.css",
+      "copy": "copyfiles -u 1 \"./src/**/*.css\" \"./lib/\""
+    ```
+
+1. Import compiled css in your code.
+
+    Add compiled css import to your package index file
+
+    ```js
+    import './main.css';
+    ```
+
+1. Add the compiled css to .gitignore.
+
+    Update package level .gitignore with:
+
+    ```txt
+    src/main.css
+    ```
+
+## Configure CSS Purging
+
+1. Provide an array of paths to all of your template files using the purge option of `tailwind.config.js`:
+
+    ```js
+    purge: [
+      './src/**/!(*.d).{ts,js,jsx,tsx}',
+    ],
+    ```

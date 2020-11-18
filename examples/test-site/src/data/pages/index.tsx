@@ -16,33 +16,45 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import {
-  Editable, List, asEditableList,
-} from '@bodiless/components';
+import { Editable, asBodilessList } from '@bodiless/components';
 import {
   withDesign, replaceWith, addClasses, stylable,
 } from '@bodiless/fclasses';
+import Helmet from 'react-helmet';
 import Layout from '../../components/Layout';
 import { FluidGatsbyImage } from '../../components/Image';
 import { FlowContainerDefault } from '../../components/FlowContainer';
+import { withDataLayerPageType, withGlobalGTMForm } from '../../components/GTM';
 
 const HOME_PAGE_PATH = 'homepage';
+
+/**
+ * A helmet Component containing datalayer script. In edit mode, it shows a form
+ * to edit the values page type.
+ *
+ * The use of withGlobalGTMForm allows us to retain the global datalayer script
+ * and only add page information to it.
+ */
+const GTMDataLayerHomePageHelmet = withGlobalGTMForm(
+  withDataLayerPageType('page-type'),
+)(Helmet);
 
 const BulletPoints = (props: any) => (
   <span {...props}><Editable nodeKey="bullet" placeholder="Enter Bullet Item" /></span>
 );
 
 const EditableBulletPoints = flow(
-  asEditableList,
+  asBodilessList('bulletpoints'),
   withDesign({
     Title: replaceWith(BulletPoints),
     Wrapper: flow(stylable, addClasses('m-6 py-3 flex flex-wrap md:flex-nowrap list-disc w-full')),
     Item: flow(stylable, addClasses('w-full md:w-auto md:flex-1')),
   }),
-)(List);
+)('ul');
 
 const HomePage = (props: any) => (
   <Page {...props}>
+    <GTMDataLayerHomePageHelmet />
     <Layout>
       <div className="flex my-3">
         <FluidGatsbyImage className="w-full" nodeKey="header_image" />
@@ -51,7 +63,7 @@ const HomePage = (props: any) => (
         <Editable nodeKey="title" placeholder="Page Title" />
       </h1>
       <div className="">
-        <EditableBulletPoints nodeKey="bulletpoints" />
+        <EditableBulletPoints />
       </div>
       <FlowContainerDefault
         nodeKey={HOME_PAGE_PATH}

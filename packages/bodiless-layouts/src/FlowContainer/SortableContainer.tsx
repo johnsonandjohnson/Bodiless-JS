@@ -15,7 +15,10 @@
 import React, { ComponentType, HTMLProps } from 'react';
 import { observer } from 'mobx-react-lite';
 import { SortableContainer, SortEndHandler } from 'react-sortable-hoc';
-import { useContextActivator, useEditContext } from '@bodiless/core';
+import {
+  useContextActivator, useEditContext, withLocalContextMenu, withContextActivator,
+} from '@bodiless/core';
+import { flow } from 'lodash';
 
 type FinalUI = {
   FlowContainerEmptyWrapper: ComponentType<HTMLProps<HTMLDivElement>> | string,
@@ -36,7 +39,7 @@ const defaultUI: FinalUI = {
 
 const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });
 
-const FlowContainerEmpty = (ui: UI) => {
+const FlowContainerEmpty$ = (ui: UI) => {
   const { FlowContainerEmptyWrapper } = getUI(ui);
   const context = useEditContext();
   // mobx has issues with destructured values
@@ -50,6 +53,11 @@ const FlowContainerEmpty = (ui: UI) => {
     </FlowContainerEmptyWrapper>
   );
 };
+
+const FlowContainerEmpty = flow(
+  withContextActivator('onClick'),
+  withLocalContextMenu,
+)(FlowContainerEmpty$);
 
 const SortableListWrapper = SortableContainer(
   observer(

@@ -19,6 +19,7 @@ import {
   designable,
   Div,
 } from '@bodiless/fclasses';
+import { observer } from 'mobx-react-lite';
 import { useItemHandlers } from './model';
 import { StaticFlowContainerProps, FlowContainerItem, FlowContainerComponents } from './types';
 
@@ -64,7 +65,8 @@ const StaticFlowContainer: FC<StaticFlowContainerProps> = ({ components }) => {
 StaticFlowContainer.displayName = 'FlowContainer';
 
 const asStaticFlowContainer = flow(
-  designable(flowContainerComponentStart),
+  observer,
+  designable(flowContainerComponentStart, 'FlowContainer'),
 );
 
 export default asStaticFlowContainer(StaticFlowContainer);

@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`asChameleonSubList works 1`] = `
+<ul>
+  <li
+    data-bl-activator="true"
+  >
+    <span>
+      Top
+    </span>
+    <ul>
+      <li
+        class="list-disc ml-5"
+        data-bl-activator="true"
+      >
+        <span>
+          Bulleted
+        </span>
+        <ul>
+          <li
+            class="list-decimal ml-5"
+          >
+            <span>
+              Numbered
+            </span>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+`;

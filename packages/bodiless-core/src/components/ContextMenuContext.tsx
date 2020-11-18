@@ -13,11 +13,13 @@
  */
 
 import React, { FC, createContext, useContext } from 'react';
-import { Text, TextArea } from 'informed';
+import {
+  Text, TextArea, Radio, RadioGroup, Checkbox, Option, Select,
+} from 'informed';
 import ReactTooltip from 'rc-tooltip';
 import { omit } from 'lodash';
 import ReactTagsField from './ReactTagsField';
-import type { UI, ContextMenuFormProps } from '../Types/ContextMenuTypes';
+import type { ContextMenuUI, ContextMenuFormProps } from '../Types/ContextMenuTypes';
 
 type ContextType = {
   // eslint-disable-next-line max-len
@@ -25,10 +27,14 @@ type ContextType = {
 };
 
 type ContextUIType = {
-  ui?: UI;
+  ui?: ContextMenuUI;
 };
 
-const defaultUI = {
+const DefaultToolbarButton = (props: any) => (
+  <div {...omit(props, 'isActive', 'isDisabled', 'isFirst')} />
+);
+
+const defaultUI: Required<ContextMenuUI> = {
   Icon: (props: any) => <i {...omit(props, 'isActive')} />,
   ComponentFormTitle: 'h3',
   ComponentFormLabel: 'label',
@@ -47,22 +53,32 @@ const defaultUI = {
   ComponentFormListItem: 'li',
   ComponentFormDescription: 'div',
   ContextSubMenu: React.Fragment,
-  ToolbarButton: (props: any) => <div {...omit(props, 'isActive', 'isDisabled', 'isFirst')} />,
-  ToolbarButtonLabel: 'span',
+  HorizontalToolbarButton: DefaultToolbarButton,
+  ToolbarButton: DefaultToolbarButton,
   FormWrapper: 'div',
   ToolbarDivider: 'div',
   Tooltip: ReactTooltip,
   Toolbar: 'div',
-  ContextMenuGroup: React.Fragment,
+  ContextMenuGroup: ({ children, key }: any) => (
+    <React.Fragment key={key}>{children}</React.Fragment>
+  ),
+  ToolbarButtonLabel: 'span',
+  ComponentFormRadio: Radio,
+  ComponentFormRadioGroup: RadioGroup,
+  ComponentFormCheckBox: Checkbox,
+  ComponentFormFieldTitle: 'title',
+  ComponentFormOption: Option,
+  ComponentFormSelect: Select,
+  ComponentFormFieldWrapper: 'div',
 };
 
-const getUI = (ui: UI = {}) => ({
+const getUI = (ui: ContextMenuUI = {}) => ({
   ...defaultUI,
   ...ui,
 });
 
 const ContextMenuContext = createContext<ContextType>({});
-const ContextMenuUIContext = createContext<UI>({});
+const ContextMenuUIContext = createContext<ContextMenuUI>({});
 
 const useContextMenuContext = () => useContext(ContextMenuContext);
 const useMenuOptionUI = () => getUI(useContext(ContextMenuUIContext));

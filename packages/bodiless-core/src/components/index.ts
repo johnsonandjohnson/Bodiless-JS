@@ -22,7 +22,7 @@ import { getUI } from './ContextMenuContext';
 import type {
   IContextMenuProps as ContextMenuProps,
   ButtonVariantProps,
-  UI as ContextMenuUI,
+  ContextMenuUI,
 } from '../Types/ContextMenuTypes';
 import type { Props as ContextWrapperProps } from '../Types/ContextWrapperTypes';
 import ReactTagsField, { ReactTagsFieldProps, TagType, BodilessTag } from './ReactTagsField';

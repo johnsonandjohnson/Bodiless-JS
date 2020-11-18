@@ -49,20 +49,22 @@ The following diagram illustrates the flow of data in the edit environment.
    directory which corresponds to the current page. These are processed into a
    key-value store (a JS map) keyed by the filename. The elements of this map
    are Mobx observables, so when they are updated they trigger any observer
-   component to re-render. As a result, we explicity prevent update of the main
+   component to re-render. As a result, we explicitly prevent update of the main
    page component, which would otherwise re-render itself and all children
    whenever a json file was modified. Note also that we compare the incoming
    data from Gatsby to the data already in the store, and only update if it has
    changed.
 
 4. We refer to each element in the store as a "node", and each is represented by
-   an instance of the `DefaultContentNode` class. A ContentNode is placed in a
-   context which can be access by `useNode()`. The component can then read and
-   write to the store via the node's data property.
+   an implementation of the `ContentNode` interface. BodilessJS provides a
+   default implementation (the `DefaultContentNode` class). This is initialized
+   by a list of getters and actions which connect it to a data store. A
+   ContentNode is placed in a context which can be access by `useNode()`. The
+   component can then read and write to the store via the node's data property.
 
 5. The store also defines a Mobx _reaction_ which listens for changes. When a
    component updates its data. The reaction invokes a `BackendClient` to post
-   the updated node to a ligthweight express server which in turn serialized the
+   the updated node to a lightweight express server which in turn serialized the
    data to json.
 
 6. The backend server is also responsible for managing the git repository which
@@ -125,7 +127,7 @@ export const query = graphql`
 
 The fragment is defined by Gatsby Theme Bodiless and queries the contents of all
 json files in the directory corresponding to the page. This can be used as-is,
-or the page query could be extended in case the page requries additional data.
+or the page query could be extended in case the page requires additional data.
 
 ### Component Data
 
@@ -198,7 +200,7 @@ export default (props: any) => (
 
 As described above, Bodiless Content Nodes are backed by JSON files in your
 repository (although this is a pluggable mechanism, and you could easily build a
-store backed by some other persistant storage, like a database). Each node has
+store backed by some other persistent storage, like a database). Each node has
 its own file within the directory corresponding to the current page.  The filename
 is created by concatenating all segments of the node's path using the dollar sign ($).
 
@@ -220,7 +222,7 @@ const ComponentWithAriaLabel = withNode(
   props => <ComponentWithData {...props} aria-label={useNode().node.data} />
 );
 ```
-Or, better, you could encapsulate this enahncement in a simple, reusable HOC.
+Or, better, you could encapsulate this enhancement in a simple, reusable HOC.
 ```
 const withAriaLabel = Component => withNode(
   props => (<Component {...props} aria-label={useNode().node.data} />)
@@ -253,7 +255,7 @@ content$component.json // This contains the actual content of the original compo
 The original component's data are now stored as a child of the aria-label, which
 seems backwards. And it's worse if the original component had already been
 placed on a site and was rendering actual data. When replaced with the enhanced
-component, it's existing data (at `content.json`) will be used forthe
+component, it's existing data (at `content.json`) will be used for the
 aria-label, and the actual text displayed on the screen will be lost.
 
 What we really want to to attach the aria-label data alongside the original
@@ -297,7 +299,7 @@ Instead of defining our `ComponentWithData` as a Component, we can abstract that
 to an HOC (a very common pattern in BodilessJS).
 ```
 const asComponentWithData = BaseComponent => {
-  const ComponentWIthData = props => (
+  const ComponentWithData = props => (
     <BaseComponent {...props}>
       {useNode().node.data}
     </BaseComponent>

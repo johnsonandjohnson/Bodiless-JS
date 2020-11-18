@@ -33,7 +33,7 @@ type BasicOptions = {
   name: string;
 };
 
-type Options = {
+export type Options = {
   label: string;
   useFormElement?: () => CT<FieldProps<any, any>>,
   placeholder?: string;
@@ -57,7 +57,8 @@ const withMeta$ = (options: Options) => (
   </HelmetComponent>
 );
 
-const withHeadElement = (renderHoc: Function) => (options: Options) => (
+// @todo withHeadElement to its own file.
+export const withHeadElement = (renderHoc: Function) => (options: Options) => (
   nodeKey?: WithNodeKeyProps, defaultContent?: string,
 ) => withSidecarNodes(
   withNodeKey(nodeKey),

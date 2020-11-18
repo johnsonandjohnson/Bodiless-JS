@@ -19,8 +19,6 @@ import PageEditContext from '../PageEditContext';
 import { PageEditContextInterface } from '../PageEditContext/types';
 
 class StaticContext implements PageEditContextInterface {
-  parent?: PageEditContextInterface | undefined;
-
   areLocalTooltipsDisabled = true;
 
   toggleLocalTooltipsDisabled() {}

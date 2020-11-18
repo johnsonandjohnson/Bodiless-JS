@@ -22,4 +22,19 @@ const addProps = <P extends object, Q extends object>(propsToAdd: Q) => (
     (props: P) => <Component {...propsToAdd} {...props} />
   )
 );
+
+/**
+ * HOC that adds props conditionally based on value returned by hook.
+ */
+export const addPropsIf = <P extends object, Q extends object>(
+  conditionHook: (props: P) => boolean,
+) => (propsToAdd: Q) => (Component: ComponentType<P>) => {
+    const AddPropsIf = (props: P) => (
+      conditionHook(props)
+        ? <Component {...propsToAdd} {...props} />
+        : <Component {...props} />
+    );
+    return AddPropsIf;
+  };
+
 export default addProps;

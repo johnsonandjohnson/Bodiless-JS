@@ -13,9 +13,9 @@
  */
 
 import React, { ComponentType as CT } from 'react';
-import { flowRight } from 'lodash';
 import { v1 } from 'uuid';
 import {
+  ifEditable,
   useMenuOptionUI, useRegisterSnippet, withCompoundForm, withEditFormSnippet,
 } from '@bodiless/core';
 import type { FormSnippet, TMenuOption } from '@bodiless/core';
@@ -99,9 +99,9 @@ const defaultMetaFormHeader = {
 const withMetaForm = (
   useMenuOptions: (props: any) => TMenuOption[],
   metaFormHeader?: HeaderProps,
-) => flowRight(
+) => ifEditable(
   withCompoundForm({
-    useMenuOptions, name: 'Meta', peer: true, id: 'meta',
+    useMenuOptions, name: 'Meta', peer: true,
   }),
   withMetaFormHeader(metaFormHeader || defaultMetaFormHeader),
 );

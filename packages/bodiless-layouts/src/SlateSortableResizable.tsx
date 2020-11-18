@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React, { ComponentType, FC, HTMLProps } from 'react';
 import { ResizeCallback } from 're-resizable';
 import { SortableElementProps } from 'react-sortable-hoc';
 import {
@@ -21,18 +21,23 @@ import {
   useContextActivator,
   useEditContext,
   useActivateOnEffectActivator,
+  withContextActivator,
+  withLocalContextMenu,
 } from '@bodiless/core';
 import { observer } from 'mobx-react-lite';
+import { flow } from 'lodash';
 import CleanWrapper, { Props as WrapperProps } from './SortableResizableWrapper';
 
 export type FinalUI = {
   Wrapper: ComponentType<WrapperProps & SortableElementProps>,
+  SnapIndicator: ComponentType<HTMLProps<HTMLDivElement>>|string,
 };
 export type UI = Partial<FinalUI>;
 const defaultUI: FinalUI = {
   Wrapper: CleanWrapper,
+  SnapIndicator: 'div',
 };
-const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });
+export const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });
 
 type Props = {
   children: React.ReactNode;
@@ -56,22 +61,29 @@ type Props = {
 
 type SortableResizableProps = Omit<Props, 'useGetMenuOptions'>;
 
-const SortableResizable = observer(({ children, ui, ...props }: SortableResizableProps) => {
+const SortableResizable$: FC<SortableResizableProps> = ({ children, ui, ...props }) => {
   // We wabt to activate if nessesary
-  useActivateOnEffectActivator(props.uuid);
-  const context = useEditContext();
+  const { uuid } = props;
+  useActivateOnEffectActivator(uuid);
+  const { isActive } = useEditContext();
   const { Wrapper } = getUI(ui);
   // @ts-ignore
   return (
     <Wrapper
-      isEnabled={context.isActive}
+      isEnabled={isActive}
       {...useContextActivator()}
       {...props}
     >
       {children}
     </Wrapper>
   );
-});
+};
+
+const SortableResizable = flow(
+  observer,
+  withContextActivator('onClick'),
+  withLocalContextMenu,
+)(SortableResizable$);
 
 const SlateSortableResizable = (props: Props) => {
   const {
@@ -83,7 +95,7 @@ const SlateSortableResizable = (props: Props) => {
 
   return (
     <PageContextProvider
-      name={`flexItem-${uuid}`}
+      name="Flow Container Item"
       id={`flexItem-${uuid}`}
       getMenuOptions={useGetMenuOptions()}
     >

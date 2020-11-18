@@ -11,12 +11,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import {
-  asBurgerSubMenu,
-  asEditableBurgerSubMenu,
-  BurgerMenuClean,
-  withBurgerSubmenu,
-} from './components/BurgerMenu';
+
+import './main.css';
 
 export {
   SingleAccordion,
@@ -24,19 +20,6 @@ export {
   asSingleAccordion,
   asTestableSingleAccordion,
 } from './components/SingleAccordion';
-
-export {
-  asEditableMainMenu,
-  asEditableMenu,
-  asEditableMainSubMenu,
-  asHorizontalMenu,
-  asHorizontalSubMenu,
-  asMainMenu,
-  asMainSubMenu,
-  asMenu,
-  MenuLink,
-  withSubmenu,
-} from './components/MainMenu/index';
 
 export {
   ToutClean,
@@ -70,13 +53,6 @@ export {
 } from './components/FilterByGroup';
 
 export {
-  asBurgerSubMenu,
-  asEditableBurgerSubMenu,
-  BurgerMenuClean,
-  withBurgerSubmenu,
-};
-
-export {
   AccordionClean,
   useAccordionContext,
   asAccordionWrapper,
@@ -94,6 +70,8 @@ export {
   BCarouselClean,
   asEditableCarousel,
 } from './components/Carousel';
+
+export * from './components/Menu';
 
 export { default as Embed } from './components/Embed';
 export {
