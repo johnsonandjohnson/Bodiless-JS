@@ -51,7 +51,7 @@ The tool is given URL that will crawl the existing site finding all pages, gener
 
     ```sh
     npm ci
-    npm run new (follow wizard guidess from [here](/About/GettingStarted?id=creating-a-new-site))
+    npm run new (follow wizard guides from [here](/About/GettingStarted?id=creating-a-new-site))
     cd ../NEW_MIGRATED_SITE
 
     ```

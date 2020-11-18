@@ -13,18 +13,15 @@
  */
 
 /* eslint-disable no-console */
-const { copySync, existsSync, mkdirpSync, emptyDirSync } = require('fs-extra');
+const { copySync, existsSync, mkdirpSync } = require('fs-extra');
 const path = require('path');
 const { spawn } = require('child_process');
-const home = require('os').homedir();
 
-var destDir = '';
-var src = '';
-var noInstall = '';
-var srcDir = '';
+let destDir = '';
+let src = 'starter';
+let srcDir = '';
 
-
-let inquirer = require('inquirer');
+const inquirer = require('inquirer');
 
 const askSetup = () => {
   const questions = [
@@ -32,7 +29,7 @@ const askSetup = () => {
       type: 'list',
       name: 'typeofsite',
       message: 'What type of new site do you want to create?',
-      choices: ["starter", "test-site"],
+      choices: ['starter', 'test-site'],
       default: src,
     },
     {
@@ -57,7 +54,7 @@ const askSetup = () => {
       name: 'runpack',
       message: 'Do you want to pack latest version of Bodiless into Destination Directory?',
       default: true,
-    },    
+    },
   ];
   return inquirer.prompt(questions);
 };
@@ -102,7 +99,6 @@ const runGit = () => {
 };
 
 const runInstall = () => {
-
   process.chdir(destDir);
 
   const child = spawn('npm', ['install'], {
@@ -124,7 +120,7 @@ const runInstall = () => {
 
 const runPack = () => {
 
-  const packstr = 'pack -s ' + destDir;
+  const packstr = `pack -s ${destDir}`;
 
   spawn('bodiless', [packstr], {
     stdio: 'inherit',
@@ -135,32 +131,46 @@ const runPack = () => {
 
 const run = async () => {
 
-  const choice = await askSetup();
+  const args = process.argv.filter(arg => !arg.match(/^--/));
+  let gitInit = 0;
+  let runPack = 0;
+  let noInstall = 0;
 
-  src = choice.typeofsite;
-  destDir = choice.destinationdir;
-  noInstall = choice.runinstall;
+  if (args.length >= 3) {
+    /// Preserve original new script behavior
+    destDir = args[2]
+    src = args[3] || 'starter';
+    noInstall = process.argv.find(arg => arg === '--no-install') || 1;
+    console.log(noInstall);
+  } else {
+    const choice = await askSetup();
+    src = choice.typeofsite;
+    destDir = choice.destinationdir;
+    noInstall = choice.runinstall;
+    gitInit = choice.gitInit;
+    runPack = choice.runPack;
+  };
+
   srcDir = path.resolve('.', 'examples', src);
 
   if (existsSync(destDir)) {
-    const choice = await askOverride();
-    if (choice.overwrite) process.exit(0);
+    const overrideChoice = await askOverride();
+    if (overrideChoice.overwrite) process.exit(0);
   }
 
   createSite();
 
-  if (choice.gitinit) {
+  if (gitInit) {
     runGit();
   }
 
-  if (choice.runinstall) {
+  if (noInstall) {
     runInstall();
   }
 
-  if (choice.runpack) {
+  if (runPack) {
     runPack();
   }
-
 };
 
 run();
