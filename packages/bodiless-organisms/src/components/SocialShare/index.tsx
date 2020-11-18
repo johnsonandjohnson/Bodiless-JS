@@ -115,5 +115,5 @@ export const SocialShareBase: FC<SocialShareProps> = ({
   );
 };
 
-const SocialShare = designable(socialShareComponents)(SocialShareBase);
+const SocialShare = designable(socialShareComponents, 'SocialShare')(SocialShareBase);
 export default SocialShare;

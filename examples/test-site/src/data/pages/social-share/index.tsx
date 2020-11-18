@@ -37,7 +37,7 @@ export default (props: any) => (
         <IconOnlySocialShare />
       </FlexSection>
       <FlexSection>
-        <StyledH3>Signle share button</StyledH3>
+        <StyledH3>Single share button</StyledH3>
         <EmailOnlySocialShare />
       </FlexSection>
     </Layout>
