@@ -13,18 +13,7 @@ Ensure you have the following installed locally:
 BodilessJS provides a Gatsby starter you can use as the basis of a new site.
 Currently, you must install it from the main repository as follows:
 
-```bash
-git clone GIT_REPO NEW_SITE
-cd NEW_SITE 
-npm install
-```
-Recommend path for the new site is outside the bodiless-js repo.  i.e. ../mysite.
-
-This will copy the starter to the specified location (which defaults to
-`~/gatsby-starter-bodiless`), initialize a new git repository, and install all
-dependencies.
-
-> Note: Official Gatsby Stater (installable via `gatsby new`) is coming soon!
+[Create a New Starter Site](https://johnsonandjohnson.github.io/Bodiless-JS/#/About/GettingStarted?id=creating-a-new-site)
 
 You can then launch the editor:
 
