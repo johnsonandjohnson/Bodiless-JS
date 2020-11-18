@@ -40,7 +40,7 @@ const AccordionBodyBase: FC<AccordionBodyProps> = ({ components, children }) => 
 };
 
 const AccordionBodyClean = flow(
-  designable(AccordionBodyComponentsStart),
+  designable(AccordionBodyComponentsStart, 'AccordionBody'),
 )(AccordionBodyBase);
 
 const asAccordionBody = <P extends DesignableProps<AccordionBodyComponents>>(

@@ -77,7 +77,7 @@ const asSlidesList: Token<ListProps> = flow(
 );
 
 const BCarouselClean = flow(
-  designable(carouselStart),
+  designable(carouselStart, 'Carousel'),
   withDesign({
     Slider: asSlidesList,
   }),

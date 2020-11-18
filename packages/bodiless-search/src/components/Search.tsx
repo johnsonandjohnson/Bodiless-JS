@@ -105,7 +105,7 @@ const SearchResultItemBase: FC<SearchResultItemProps> = ({ components, ...props 
 };
 
 const SearchResultItemClean = flow(
-  designable(searchResultItemComponents),
+  designable(searchResultItemComponents, 'SearchResultItem'),
 )(SearchResultItemBase);
 
 const searchResultComponents: SearchResultComponents = {
@@ -215,7 +215,9 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
   );
 };
 
-export const SearchBox = designable(searchComponents)(SearchBoxBase) as ComponentType<SearchProps>;
+export const SearchBox = designable(
+  searchComponents, 'SearchBox',
+)(SearchBoxBase) as ComponentType<SearchProps>;
 export const SearchResult = designable(
-  searchResultComponents,
+  searchResultComponents, 'SearchResult',
 )(SearchResultBase) as ComponentType<SearchResultProps>;
