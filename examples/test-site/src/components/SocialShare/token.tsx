@@ -31,6 +31,7 @@ const socialShareDesign = {
   SocialShareButton: addClasses('m-2 py-2 px-4 bg-teal-500 rounded text-white cursor-pointer'),
   SocialShareProdviders: withDesign(providersDesign),
 };
+
 const socialShareOrangeDesign = {
   SocialShareWrapper: addClasses('my-4 flex flex-row-reverse'),
   SocialShareButton: addClasses('m-2 p-2 bg-orange-600 cursor-pointer rounded'),
