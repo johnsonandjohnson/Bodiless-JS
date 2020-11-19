@@ -9,8 +9,7 @@
   "files": [
     "/lib",
     "/bodiless.docs.json",
-    "/doc",
-    "/index.tailwind.css"
+    "/doc"
   ],
   "repository": {
     "type": "git",
@@ -20,8 +19,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "npm run build:css && npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
-    "build:css": "postcss index.tailwind.css -o ./src/main.css",
+    "build": "npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
     "build:api-doc": "typedoc --out doc/api --mode file",
     "lint": "tslint ./src/**/*.ts?x",

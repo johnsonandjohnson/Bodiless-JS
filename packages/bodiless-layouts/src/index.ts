@@ -12,8 +12,6 @@
  * limitations under the License.
  */
 
-import './main.css';
-
 export { default as ComponentSelector } from './ComponentSelector';
 export * from './ComponentSelector/types';
 export type { FlowContainerProps } from './FlowContainer/types';

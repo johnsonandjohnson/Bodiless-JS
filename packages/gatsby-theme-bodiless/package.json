@@ -27,6 +27,7 @@
     "src/no-scroll-settings.json",
     "build-css.js",
     "create-node.js",
+    "tailwind.base.config.js",
     "/doc"
   ],
   "repository": {
@@ -46,7 +47,9 @@
     "@bodiless/core": "^0.0.60",
     "@bodiless/core-ui": "^0.0.60",
     "@bodiless/fclasses": "^0.0.60",
+    "@bodiless/layouts": "^0.0.60",
     "@bodiless/ui": "^0.0.60",
+    "@bodiless/organisms": "^0.0.60",
     "@types/nodegit": "^0.26.11",
     "@types/walk": "^2.3.0",
     "axios": "^0.21.0",
@@ -80,6 +83,9 @@
     "universal-cookie": "^4.0.3",
     "walk": "^2.3.14",
     "walkdir": "^0.4.1"
+  },
+  "devDependencies": {
+    "tailwindcss-aspect-ratio": "^3.0.0"
   },
   "peerDependencies": {
     "gatsby": "^2.0.19",

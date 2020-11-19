@@ -1,9 +1,16 @@
+const {
+  purge: basePurge,
+  theme: baseTheme,
+  plugins: basePlugins,
+} = require('@bodiless/gatsby-theme-bodiless/tailwind.base.config');
+
 module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
   },
   purge: [
+    ...basePurge,
     './src/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   /*
@@ -19,7 +26,7 @@ module.exports = {
   */
 
   theme: {
-
+    ...baseTheme,
     /*
     |---------------------------------------------------------------------------
     | Colors                                https://tailwindcss.com/docs/colors
@@ -512,5 +519,6 @@ module.exports = {
   */
 
   plugins: [
+    ...basePlugins,
   ],
 };
