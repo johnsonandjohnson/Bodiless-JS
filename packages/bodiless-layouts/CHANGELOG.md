@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.60](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.58...v0.0.60) (2020-11-18)
+
+
+### Bug Fixes
+
+* **bodiless-layouts:** Add local context menu and activator to flow container items. ([#665](https://github.com/johnsonandjohnson/bodiless-js/issues/665)) ([548d2d6](https://github.com/johnsonandjohnson/bodiless-js/commit/548d2d6051413fc3cae1a8d3fae82851b2906d98))
+* **layouts:** Various FlowContainer bugs + Snap Indicator ([#658](https://github.com/johnsonandjohnson/bodiless-js/issues/658)) ([b4fec7b](https://github.com/johnsonandjohnson/bodiless-js/commit/b4fec7bf937c73d379a847b823c823483072ccc1)), closes [#657](https://github.com/johnsonandjohnson/bodiless-js/issues/657) [#654](https://github.com/johnsonandjohnson/bodiless-js/issues/654) [#656](https://github.com/johnsonandjohnson/bodiless-js/issues/656)
+
+
+### Features
+
+* **core, layouts, layouts-ui:**  Add "Clear" Functionality for Component Library Filters ([#669](https://github.com/johnsonandjohnson/bodiless-js/issues/669)) ([df03dbf](https://github.com/johnsonandjohnson/bodiless-js/commit/df03dbf85368ee6c9b9223a5dc356b7880d09b71)), closes [#668](https://github.com/johnsonandjohnson/bodiless-js/issues/668)
+* **fclasses:** Design Keys ([#685](https://github.com/johnsonandjohnson/bodiless-js/issues/685)) ([0db060a](https://github.com/johnsonandjohnson/bodiless-js/commit/0db060ad1e7496553cd8eae3654770530d543010)), closes [#660](https://github.com/johnsonandjohnson/bodiless-js/issues/660)
+* Purge CSS Enhancements ([#632](https://github.com/johnsonandjohnson/bodiless-js/issues/632)) ([9f9c6de](https://github.com/johnsonandjohnson/bodiless-js/commit/9f9c6dee725389887066702295ee447990d69b67))
+
+
+
+
+
 ## [0.0.59](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.58...v0.0.59) (2020-11-05)
 
 

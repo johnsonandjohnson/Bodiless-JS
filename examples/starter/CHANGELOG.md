@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.60](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.58...v0.0.60) (2020-11-18)
+
+
+### Bug Fixes
+
+* **richtext:** [GAPS] RTE editor doesn't allow for inline files/components (aka inline CTA styled buttons) ([#481](https://github.com/johnsonandjohnson/bodiless-js/issues/481)) ([3647e41](https://github.com/johnsonandjohnson/bodiless-js/commit/3647e41b9e8ac23e0a24ac065a5d0229dc04223c))
+
+
+### Features
+
+* **components, core, organisms:** Burger Menu with Breadcrumbs ([#637](https://github.com/johnsonandjohnson/bodiless-js/issues/637)) ([23af96d](https://github.com/johnsonandjohnson/bodiless-js/commit/23af96d68bc49a64ea71131071cd4392311a3593))
+* **fclasses:** Design Keys ([#685](https://github.com/johnsonandjohnson/bodiless-js/issues/685)) ([0db060a](https://github.com/johnsonandjohnson/bodiless-js/commit/0db060ad1e7496553cd8eae3654770530d543010)), closes [#660](https://github.com/johnsonandjohnson/bodiless-js/issues/660)
+* **migration-tool:** migrate site skeleton ([#678](https://github.com/johnsonandjohnson/bodiless-js/issues/678)) ([db01c52](https://github.com/johnsonandjohnson/bodiless-js/commit/db01c52b30e3b9cc6c8440fcf54c3d4d96cf4879))
+* Purge CSS Enhancements ([#632](https://github.com/johnsonandjohnson/bodiless-js/issues/632)) ([9f9c6de](https://github.com/johnsonandjohnson/bodiless-js/commit/9f9c6dee725389887066702295ee447990d69b67))
+
+
+
+
+
 ## [0.0.59](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.58...v0.0.59) (2020-11-05)
 
 **Note:** Version bump only for package @bodiless/gatsby-starter-bodiless
