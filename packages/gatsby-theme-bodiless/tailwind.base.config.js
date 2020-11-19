@@ -5,11 +5,18 @@ const whitelistedModules = [
   '@bodiless/organisms',
 ];
 
-const purgePackageRule = '/lib/**/!(*.d).{ts,js,jsx,tsx}';
+const purgePackageRule = '/**/!(*.d).{ts,js,jsx,tsx}';
 
 const purge = whitelistedModules
-  .map(module => require.resolve(`${module}/package.json`))
-  .map(packageJSONPath => path.dirname(path.join(packageJSONPath)))
+  .map(module => {
+    try {
+      return require.resolve(module);
+    } catch (e) {
+      return null;
+    }
+  })
+  .filter(Boolean)
+  .map(indexFilePath => path.dirname(path.join(indexFilePath)))
   .map(moduleRootPath => moduleRootPath.concat(purgePackageRule));
 
 module.exports = {
