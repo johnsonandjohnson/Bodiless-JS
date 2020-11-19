@@ -46,8 +46,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "@types/uuid": "^3.4.4",
-    "tailwindcss-aspect-ratio": "^3.0.0"
+    "@types/uuid": "^3.4.4"
   },
   "peerDependencies": {
     "react": "^16.8.4"
