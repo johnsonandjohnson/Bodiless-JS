@@ -133,7 +133,7 @@ const run = async () => {
 
   const args = process.argv.filter(arg => !arg.match(/^--/));
   let gitInit = 0;
-  let runPack = 0;
+  let pack = 0;
   let noInstall = 0;
 
   if (args.length >= 3) {
@@ -148,7 +148,7 @@ const run = async () => {
     destDir = choice.destinationdir;
     noInstall = choice.runinstall;
     gitInit = choice.gitInit;
-    runPack = choice.runPack;
+    pack = choice.runpack;
   };
 
   srcDir = path.resolve('.', 'examples', src);
@@ -168,7 +168,7 @@ const run = async () => {
     runInstall();
   }
 
-  if (runPack) {
+  if (pack) {
     runPack();
   }
 };
