@@ -92,7 +92,6 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
   const names = allComponents.map(Component => (
     typeof Component === 'string' ? Component : Component.displayName));
   const keySuffix = hash(names.sort().join().trim());
-  console.log(keySuffix);
 
   const localStorageKey = `bodiless.componentLibrary.activeFilters.${keySuffix}`;
   let storedFilters: any = [];
@@ -100,7 +99,6 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
     storedFilters = window.localStorage.getItem(localStorageKey);
     storedFilters = storedFilters === null ? [] : JSON.parse(storedFilters);
   }
-  console.log('storedFilters', storedFilters);
   const [activeFilters, setActiveFilters] = useState(storedFilters);
   const [activeSearch, setActiveSearch] = useState('');
 

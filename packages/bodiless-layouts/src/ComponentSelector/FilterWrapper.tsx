@@ -118,7 +118,6 @@ const FilterWrapper = (props: any) => {
                   type={value}
                   disabled={isTermDisabled(category, value)}
                   onToggle={() => {
-                    console.log('cat', category);
                     let newFilters = [];
                     if (activeFilter.indexOf(value) !== -1) {
                       newFilters = removefromArray(activeFilter, value);
