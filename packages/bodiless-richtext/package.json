@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/richtext",
-  "version": "0.0.59",
+  "version": "0.0.60",
   "description": "Provide Rich Text Component",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
   "license": "Apache-2.0",
@@ -29,8 +29,8 @@
     "postinstall": "node bin/apply-patches.js"
   },
   "dependencies": {
-    "@bodiless/core": "^0.0.59",
-    "@bodiless/fclasses": "^0.0.59",
+    "@bodiless/core": "^0.0.60",
+    "@bodiless/fclasses": "^0.0.60",
     "@emotion/core": "^10.0.14",
     "@emotion/css": "^10.0.14",
     "@emotion/styled": "^10.0.14",
@@ -45,8 +45,8 @@
     "react-fast-compare": "^2.0.4",
     "shelljs": "^0.8.4",
     "slate": "^0.44.12",
-    "slate-react": "^0.21.18",
     "slate-plain-serializer": "^0.7.13",
+    "slate-react": "^0.21.18",
     "slate-react-placeholder": "^0.1.20",
     "uuid": "^3.3.2"
   },
@@ -56,7 +56,7 @@
   },
   "devDependencies": {
     "@types/rc-tooltip": "^3.7.1",
-    "@types/uuid": "^3.4.4",
-    "@types/slate-plain-serializer": "^0.7.0"
+    "@types/slate-plain-serializer": "^0.7.0",
+    "@types/uuid": "^3.4.4"
   }
 }
