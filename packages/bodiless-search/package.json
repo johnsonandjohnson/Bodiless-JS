@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/search",
-  "version": "0.0.59",
+  "version": "0.0.60",
   "description": "Provide static site search option for Bodiless project.",
   "author": "Dewen Li <dli94@its.jnj.com>",
   "license": "Apache-2.0",
@@ -29,7 +29,7 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/fclasses": "^0.0.59",
+    "@bodiless/fclasses": "^0.0.60",
     "axios": "^0.21.0",
     "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.2.0",
