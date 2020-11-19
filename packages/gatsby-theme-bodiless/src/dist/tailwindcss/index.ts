@@ -12,18 +12,12 @@
  * limitations under the License.
  */
 
-/**
- * contains package level tailwind configuration
- * the package does not perform tailwind compilation
- * site is responsible for merging these settings into site level settings
- */
-module.exports = {
-  purge: [
-    './lib/**/!(*.d).{ts,js,jsx,tsx}',
-  ],
-  theme: {
-    extend: {},
-  },
-  variants: {},
-  plugins: [],
+import { getTailwindConfigs, getBodilessConfigs } from './getBodilessConfigs';
+import { mergeConfigs, mergeWithBodilessConfigs } from './mergeConfigs';
+
+export {
+  getTailwindConfigs,
+  getBodilessConfigs,
+  mergeConfigs,
+  mergeWithBodilessConfigs,
 };

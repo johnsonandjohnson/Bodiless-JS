@@ -1,0 +1,38 @@
+/**
+ * Copyright © 2020 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { flatten, merge } from 'lodash';
+import { getBodilessConfigs } from './getBodilessConfigs';
+import type { TailwindConfigs } from './getBodilessConfigs';
+
+const mergeConfigs = (siteConfig: TailwindConfigs, packageConfigs: Array<TailwindConfigs>) => ({
+  ...siteConfig,
+  purge: [
+    ...flatten(packageConfigs.map(config => config.purge).filter(Boolean)),
+    ...(siteConfig.purge !== undefined ? siteConfig.purge : []),
+  ],
+  theme: merge(siteConfig.theme, ...packageConfigs.map(config => config.theme)),
+  plugins: [
+    ...flatten(packageConfigs.map(config => config.plugins).filter(Boolean)),
+    ...(siteConfig.plugins !== undefined ? siteConfig.plugins : []),
+  ],
+});
+
+const bodilessConfigs = getBodilessConfigs();
+const mergeWithBodilessConfigs = (config: TailwindConfigs) => mergeConfigs(config, bodilessConfigs);
+
+export {
+  mergeConfigs,
+  mergeWithBodilessConfigs,
+};

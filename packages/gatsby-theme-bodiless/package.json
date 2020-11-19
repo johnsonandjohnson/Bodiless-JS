@@ -84,9 +84,6 @@
     "walk": "^2.3.14",
     "walkdir": "^0.4.1"
   },
-  "devDependencies": {
-    "tailwindcss-aspect-ratio": "^3.0.0"
-  },
   "peerDependencies": {
     "gatsby": "^2.0.19",
     "react": "^16.8.0",

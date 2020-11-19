@@ -9,7 +9,8 @@
   "files": [
     "/lib",
     "/bodiless.docs.json",
-    "/doc"
+    "/doc",
+    "tailwind.config.js"
   ],
   "repository": {
     "type": "git",
@@ -46,6 +47,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "tailwindcss-aspect-ratio": "^3.0.0",
     "@types/uuid": "^3.4.4"
   },
   "peerDependencies": {

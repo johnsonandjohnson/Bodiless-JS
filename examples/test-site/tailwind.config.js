@@ -1,16 +1,11 @@
-const {
-  purge: basePurge,
-  theme: baseTheme,
-  plugins: basePlugins,
-} = require('@bodiless/gatsby-theme-bodiless/tailwind.base.config');
+const { mergeWithBodilessConfigs } = require('@bodiless/gatsby-theme-bodiless/dist/tailwindcss');
 
-module.exports = {
+module.exports = mergeWithBodilessConfigs({
   future: {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
   },
   purge: [
-    ...basePurge,
     './src/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   /*
@@ -26,7 +21,6 @@ module.exports = {
   */
 
   theme: {
-    ...baseTheme,
     /*
     |---------------------------------------------------------------------------
     | Colors                                https://tailwindcss.com/docs/colors
@@ -521,6 +515,5 @@ module.exports = {
   */
 
   plugins: [
-    ...basePlugins,
   ],
-};
+});
