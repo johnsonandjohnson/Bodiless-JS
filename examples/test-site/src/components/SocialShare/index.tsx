@@ -310,7 +310,7 @@ const withSocialShareType = withMetaStatic({
   attribute: 'property',
 });
 const withSocialShareSitename = withMetaStatic({
-  name: 'og:sitename',
+  name: 'og:site_name',
   attribute: 'property',
 });
 const withSocialShareTwitterCard = withMetaStatic({
