@@ -82,7 +82,7 @@ const ProvidersClean: FC<SocialShareProvidersProps> = ({
   );
 };
 
-const SocialShareProviders = designable(providersComponents)(ProvidersClean);
+const SocialShareProviders = designable(providersComponents, 'SocialShareProviders')(ProvidersClean);
 
 const socialShareComponents: SocialShareComponents = {
   SocialShareWrapper: WrapperClean,

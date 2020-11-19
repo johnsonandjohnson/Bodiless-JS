@@ -113,36 +113,46 @@ const popupOpen = (props: WindowOpenerProps) => {
   window.open(url, name, features);
 };
 
-let sharedUrl = '';
-let sharedTitle = '';
-let sharedDescription = '';
-if (typeof document !== 'undefined') {
-  const linkElem = document.querySelector("link[rel='canonical']");
-  const linkUrl = linkElem ? linkElem.getAttribute('href') || '' : '';
-  const ogUrlMeta = document.querySelector('meta[property="og:url"]');
-  const ogUrl = ogUrlMeta ? ogUrlMeta.content : '';
-  if (linkUrl) {
-    sharedUrl = linkUrl;
-  } else if (ogUrl) {
-    sharedUrl = ogUrl;
-  } else if (typeof window !== 'undefined') {
-    sharedUrl = encodeURIComponent(window.location.href);
+const pageResources = (): {url: string, title: string, desc: string} => {
+  let sharedUrl = '';
+  let sharedTitle = '';
+  let sharedDescription = '';
+  if (typeof document !== 'undefined') {
+    const linkElem = document.querySelector("link[rel='canonical']");
+    const linkUrl = linkElem ? linkElem.getAttribute('href') || '' : '';
+    const ogUrlMeta = document.querySelector('meta[property="og:url"]');
+    const ogUrl = ogUrlMeta ? ogUrlMeta.content : '';
+    if (linkUrl) {
+      sharedUrl = linkUrl;
+    } else if (ogUrl) {
+      sharedUrl = ogUrl;
+    } else if (typeof window !== 'undefined') {
+      sharedUrl = window.location.href;
+    }
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    sharedTitle = ogTitle ? ogTitle.content : '';
+    const ogDescription = document.querySelector('meta[property="og:description"]');
+    sharedDescription = ogDescription ? ogDescription.content : '';
   }
-  const ogTitle = document.querySelector('meta[property="og:title"]');
-  sharedTitle = ogTitle ? ogTitle.content : '';
-  const ogDescription = document.querySelector('meta[property="og:description"]');
-  sharedDescription = ogDescription ? `${ogDescription.content} \n\nRead at: ${sharedUrl}` : '';
-}
+
+  return {
+    url: sharedUrl,
+    title: sharedTitle,
+    desc: sharedDescription,
+  };
+};
 
 /**
  * FaceBook social share provider.
  */
-sharedUrl = encodeURIComponent(sharedUrl);
-const facebookSrc = `https://www.facebook.com/sharer/sharer.php?u=${sharedUrl}&amp;src=sdkpreparse`;
-const facebookShare = () => popupOpen({
-  url: facebookSrc,
-  name: 'share',
-});
+const facebookShare = () => {
+  const { url } = pageResources();
+  const facebookSrc = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&amp;src=sdkpreparse`;
+  popupOpen({
+    url: facebookSrc,
+    name: 'share',
+  });
+};
 const facebook: SocialShareProvider = {
   id: 'facebook',
   element: <Provider
@@ -163,11 +173,14 @@ const facebookRound: SocialShareProvider = {
 /**
  * Twitter social share provider.
  */
-const twitterSrc = `https://twitter.com/intent/tweet?url=${sharedUrl}`;
-const twitterShare = () => popupOpen({
-  url: twitterSrc,
-  name: 'share',
-});
+const twitterShare = () => {
+  const { url } = pageResources();
+  const twitterSrc = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}`;
+  popupOpen({
+    url: twitterSrc,
+    name: 'share',
+  });
+};
 const twitter: SocialShareProvider = {
   id: 'twitter',
   element: <Provider
@@ -188,8 +201,11 @@ const twitterRound: SocialShareProvider = {
 /**
  * Email share provider.
  */
-const emailSrc = `mailto:?subject=${encodeURIComponent(sharedTitle)}&body=${encodeURIComponent(sharedDescription)}`;
-const emailShare = () => { window.location.href = emailSrc; };
+const emailShare = () => {
+  const { title, url, desc } = pageResources();
+  const emailSrc = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(desc)}%0A%0ARead at: ${encodeURIComponent(url)}`;
+  window.location.href = emailSrc;
+};
 const email: SocialShareProvider = {
   id: 'email',
   element: <Provider
