@@ -40,5 +40,12 @@ const FlowContainerDefault = flow(
   withMandatoryCategories(['Orientation', 'Type']),
 )(FlowContainer);
 
+const FlowContainerLimited = flow(
+  withRichTextVariations,
+  withImageVariations,
+  asFlowContainerWithMargins,
+  withMandatoryCategories(['Orientation', 'Type']),
+)(FlowContainer);
+
 // eslint-disable-next-line import/prefer-default-export
-export { FlowContainerDefault };
+export { FlowContainerDefault, FlowContainerLimited };

@@ -95,6 +95,7 @@ const FilterWrapper = (props: any) => {
     filters,
     activeFilter,
     setActiveFilters,
+    localStorageKey,
   } = props;
   const finalUI:FinalUI = useContext(uiContext);
   const isTermDisabled = (category: string, term: string) => Object.entries(filters).length === 0
@@ -117,10 +118,17 @@ const FilterWrapper = (props: any) => {
                   type={value}
                   disabled={isTermDisabled(category, value)}
                   onToggle={() => {
+                    console.log('cat', category);
+                    let newFilters = [];
                     if (activeFilter.indexOf(value) !== -1) {
-                      setActiveFilters(removefromArray(activeFilter, value));
+                      newFilters = removefromArray(activeFilter, value);
+                      setActiveFilters(newFilters);
                     } else {
-                      setActiveFilters(addtoArray(activeFilter, value));
+                      newFilters = addtoArray(activeFilter, value);
+                      setActiveFilters(newFilters);
+                    }
+                    if (typeof window !== 'undefined') {
+                      window.localStorage.setItem(localStorageKey, JSON.stringify(newFilters));
                     }
                   }}
                   isChecked={activeFilter.indexOf(value) !== -1}

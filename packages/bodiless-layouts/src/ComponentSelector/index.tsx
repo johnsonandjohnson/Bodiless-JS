@@ -65,6 +65,23 @@ const reduceFilters = (filters: any, components: any) => pickBy(
     .every((component: any) => (category in component.categories)),
 );
 
+/*
+ * JS implmenetation of djb2 algorithm to hash strings.
+ *
+ * @see http://www.cse.yorku.ca/~oz/hash.html
+ * @see https://gist.github.com/eplawless/52813b1d8ad9af510d85
+ */
+const hash = (str : string) => {
+  const len = str.length;
+  let h = 5381;
+
+  for (let i = 0; i < len; i += 1) {
+    // eslint-disable-next-line no-bitwise
+    h = h * 33 ^ str.charCodeAt(i);
+  }
+  // eslint-disable-next-line no-bitwise
+  return h >>> 0;
+};
 const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
   const {
     components: allComponents,
@@ -73,7 +90,19 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
     mandatoryCategories,
   } = props;
 
-  const [activeFilters, setActiveFilters] = useState([]);
+  const names = allComponents.map(Component => (
+    typeof Component === 'string' ? Component : Component.displayName));
+  const keySuffix = hash(names.sort().join());
+  console.log(keySuffix);
+
+  const localStorageKey = `bodiless.componentLibrary.activeFilters.${keySuffix}`;
+  let storedFilters: any = [];
+  if (typeof window !== 'undefined') {
+    storedFilters = window.localStorage.getItem(localStorageKey);
+    storedFilters = storedFilters === null ? [] : JSON.parse(storedFilters);
+  }
+  console.log('storedFilters', storedFilters);
+  const [activeFilters, setActiveFilters] = useState(storedFilters);
   const [activeSearch, setActiveSearch] = useState('');
 
   function useUI(): FinalUI {
@@ -89,11 +118,12 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
     activeFilters,
     activeSearch,
   );
+  const allFilters = getFiltersByComponentList(allComponents);
+
   const filters = reduceFilters(
     getFiltersByComponentList(newCompRender),
     newCompRender,
   );
-  const allFilters = getFiltersByComponentList(allComponents);
 
   const finalUI = useUI();
 
@@ -108,6 +138,7 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
                 if (activeFilters.length !== 0 || activeSearch.length !== 0) {
                   setActiveSearch('');
                   setActiveFilters([]);
+                  if (typeof window !== 'undefined') window.localStorage.removeItem(localStorageKey);
                 }
               }}
             >
@@ -118,6 +149,7 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
               setActiveFilters={setActiveFilters}
               allfilters={allFilters}
               filters={filters}
+              localStorageKey={localStorageKey}
             />
           </finalUI.FlexSection>
 
