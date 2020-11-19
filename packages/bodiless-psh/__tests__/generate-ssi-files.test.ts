@@ -48,6 +48,7 @@ const generateMock = (ssiConfPath: string) => {
     }
     return '';
   });
+  fs.existsSync.mockImplementation(() => true);
 };
 
 describe('ssi files generator', () => {
