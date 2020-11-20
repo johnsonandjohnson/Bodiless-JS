@@ -72,6 +72,36 @@ const useComponentSelectorActions = (
   return { insertItem, replaceItem };
 };
 
+const useCloneButton = (
+  handlers: Handlers,
+  props: EditFlowContainerProps,
+  item: FlowContainerItem,
+) => {
+  const context = useEditContext();
+  const { insertFlowContainerItem, getItems } = handlers;
+  const { maxComponents = Infinity } = props;
+  const { setId } = useActivateOnEffect();
+
+  const handler = () => {
+    const { uuid } = insertFlowContainerItem(item.type, item, item.wrapperProps);
+    setId(uuid);
+  };
+
+  const isHidden = useCallback(
+    () => !context.isEdit || getItems().length >= maxComponents, [maxComponents],
+  );
+
+  return {
+    name: 'copy-item',
+    label: 'Copy',
+    icon: 'content_copy',
+    global: false,
+    local: true,
+    handler,
+    isHidden,
+  };
+};
+
 const useDeleteButton = (
   handlers: Handlers,
   item: FlowContainerItem,
@@ -187,6 +217,7 @@ const useGetItemUseGetMenuOptions = (props: EditFlowContainerProps) => {
     const buttons = [
       // These hooks are all invoked by the flow container item (not the flow container itself).
       useAddButton(handlers, props$, item),
+      useCloneButton(handlers, props$, item),
       useSwapButton(handlers, props$, item),
       useDeleteButton(handlers, item),
     ];
