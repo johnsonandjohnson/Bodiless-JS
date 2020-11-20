@@ -62,7 +62,7 @@ Then, the created providers can be insert into this styled SocialShare component
 
 #### 2.1 Page-level meta data.
 
-Most social media websites support Open Graph (OG) Protocol, which requires some information to be added to meta tags on webpages. Bodiless social share feature comes with a default meta data edit form, allowing site editors to add page-level OG meta data, i.e. `og:title`, `og:description`, `og:image` etc. 
+Most social media websites support Open Graph (OG) Protocol, which requires some information to be added to meta tags on webpages. The BodilessJS social share feature comes with a default meta data edit form, allowing site editors to add page-level OG meta data, i.e. `og:title`, `og:description`, `og:image` etc. 
 
 Site builders can also add additional meta data tag, by following the examples from `examples/test-site/src/components/SocialShare/index.tsx`.
 
