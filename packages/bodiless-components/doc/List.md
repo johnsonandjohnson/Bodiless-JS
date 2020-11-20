@@ -30,6 +30,7 @@ To add a list to your site:
       * **Add** button allows you to add more items to your list.
       * **Sub** button allows you to add sublist items. You can add up to 2
       levels of sub menu items to your list.
+      _Note: The number of levels of sub-menu can be configured by the site builder._
     * **List Format**: This button allows you to switch formats for your list
     (in this example the available formats are Numbered or Bulleted. Your
     implementation may have a different selection of list formats).
@@ -38,7 +39,6 @@ To add a list to your site:
 that the order of the controls proceeds from left to right. (i.e.: on the far
 left is the button controlling the individual item (link for list item), then
 inner lists, then outer list, then flow container controls. 
-
 
 ---
 
