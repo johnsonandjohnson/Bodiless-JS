@@ -22,9 +22,10 @@ const whitelistedModules = [
 ];
 
 type TailwindConfigs = {
-  purge: string[],
-  theme: object,
-  plugins: string[],
+  purge?: string[],
+  theme?: object,
+  plugins?: string[],
+  variants?: object,
 };
 
 const getTailwindConfigs = (modules: string[]) => modules

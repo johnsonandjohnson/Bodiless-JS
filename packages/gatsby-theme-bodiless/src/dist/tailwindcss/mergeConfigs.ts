@@ -12,20 +12,29 @@
  * limitations under the License.
  */
 
-import { flatten, merge } from 'lodash';
+import { merge, flatten } from 'lodash';
 import { getBodilessConfigs } from './getBodilessConfigs';
 import type { TailwindConfigs } from './getBodilessConfigs';
 
-const mergeConfigs = (siteConfig: TailwindConfigs, packageConfigs: Array<TailwindConfigs>) => ({
+const mergeConfigs = (
+  siteConfig: TailwindConfigs,
+  packageConfigs: Array<TailwindConfigs>,
+) => ({
   ...siteConfig,
+  // purge setting
   purge: [
-    ...flatten(packageConfigs.map(config => config.purge).filter(Boolean)),
-    ...(siteConfig.purge !== undefined ? siteConfig.purge : []),
+    ...flatten(merge(packageConfigs).map((config: TailwindConfigs) => config.purge)),
+    ...(siteConfig.purge ? siteConfig.purge : []),
   ],
-  theme: merge(siteConfig.theme, ...packageConfigs.map(config => config.theme)),
+  // theme setting
+  // dummy first argument because of https://github.com/microsoft/TypeScript/issues/28010#issuecomment-713484584
+  theme: merge({}, ...packageConfigs, siteConfig).theme,
+  // variants setting
+  variants: merge({}, ...packageConfigs, siteConfig).variants,
+  // plugins setting
   plugins: [
-    ...flatten(packageConfigs.map(config => config.plugins).filter(Boolean)),
-    ...(siteConfig.plugins !== undefined ? siteConfig.plugins : []),
+    ...flatten(merge(packageConfigs).map((config: TailwindConfigs) => config.plugins)),
+    ...(siteConfig.plugins ? siteConfig.plugins : []),
   ],
 });
 
