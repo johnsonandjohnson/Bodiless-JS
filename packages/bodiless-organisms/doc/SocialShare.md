@@ -71,7 +71,7 @@ For example, to support OG video sharing, we are going to add a new meta data ta
 <meta property="og:video" content="https//youtube.com/j3fs2k" >
 ```
  
-first, create a `withSocialShareVideo` HOC:
+First, create a `withSocialShareVideo` HOC:
 
 ```
 const withSocialShareVideo = withMeta({
@@ -93,11 +93,11 @@ const SocialShareHelmet = flowRight(
 )(Helmet);
 ```
 
-By doing this, the video edit field will show up on Social Share form and the correspond meta tag will be rendered on page head.
+By doing this, the video edit field will show up on Social Share form and the corresponding meta tag will be rendered on page head.
 
 #### 2.2 Cross site meta data
 
-Non-editable cross site meta data can also added to page using withMetaStatic HOC. These meta data will be rendered on HTML head like page-level meta data, but will not show on Social Share form.
+Non-editable cross site meta data can also be added to the page using `withMetaStatic` HOC. These meta data will be rendered on HTML head like page-level meta data, but will not show on Social Share form.
 
 To add cross site meta data, site builder needs to create a HOC:
 
