@@ -44,10 +44,10 @@
     "nuka-carousel": "^4.4.7",
     "react-burger-menu": "^2.6.13",
     "react-tag-autocomplete": "^5.12.1",
+    "tailwindcss-aspect-ratio": "^3.0.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "tailwindcss-aspect-ratio": "^3.0.0",
     "@types/uuid": "^3.4.4"
   },
   "peerDependencies": {
