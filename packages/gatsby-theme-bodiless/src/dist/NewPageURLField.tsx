@@ -15,19 +15,27 @@
 import React, { useCallback } from 'react';
 import { useMenuOptionUI, useNode } from '@bodiless/core';
 import { useField } from 'informed';
+import type {
+  BaseFieldProps,
+  FormValue,
+  FormValues,
+} from 'informed';
 import path from 'path';
 
 const BASE_PATH_FIELD_NAME = 'basePath';
 const PAGE_URL_FIELD_NAME = 'pagePath';
+const BASE_PATH_EMPTY_VALUE = '/';
 const INPUT_FIELD_DEFAULT_CLASSES = 'bl-text-grey-900 bg-grey-100 bl-text-xs bl-min-w-xl-grid-1 bl-my-grid-2 bl-p-grid-1';
 const INPUT_FIELD_INLINE_CLASSES = INPUT_FIELD_DEFAULT_CLASSES.concat(' bl-inline');
 const INPUT_FIELD_BLOCK_CLASSES = INPUT_FIELD_DEFAULT_CLASSES.concat(' bl-block bl-w-full');
 
 const usePagePath = () => useNode().node.pagePath;
 
-const useBasePathField = (props) => {
+const useBasePathField = () => {
   const basePath = usePagePath();
-  const { fieldState, fieldApi, ref, userProps } = useField({
+  const {
+    fieldState, fieldApi, ref, userProps,
+  } = useField({
     field: BASE_PATH_FIELD_NAME,
     initialValue: basePath,
   });
@@ -40,27 +48,49 @@ const useBasePathField = (props) => {
     setValue,
     onChange,
     ...rest,
-  }
-}
+  };
+};
 
-const getPageUrlValidate = () => useCallback(
-  (value: string) => (!RegExp(/^[a-z0-9_/-]+$/i).test(value)
+const isEmptyValue = (value : FormValue) => Boolean(value) === false;
+
+const validateEmptyField = (value: FormValue) => (isEmptyValue(value)
+  ? 'Field can not be empty'
+  : undefined
+);
+
+const validatePageUrl = (
+  value: FormValue,
+) => (
+  typeof value === 'string' && !RegExp(/^[a-z0-9_/-]+$/i).test(value)
     ? 'No special characters or spaces allowed'
-    : undefined),
+    : undefined
+);
+
+const validatePagePath = (
+  value: FormValue,
+) => (
+  typeof value === 'string' && !RegExp(/^[a-z0-9_-]+$/i).test(value)
+    ? 'No special characters or spaces allowed'
+    : undefined
+);
+
+const getPageUrlValidator = () => useCallback(
+  (value: FormValue) => validateEmptyField(value) && validatePageUrl(value),
   [],
 );
 
-const getPagePathValidate = () => useCallback(
-  (value: string) => (!RegExp(/^[a-z0-9_-]+$/i).test(value)
-    ? 'No special characters or spaces allowed'
-    : undefined),
+const getPagePathValidator = () => useCallback(
+  (value: FormValue) => validateEmptyField(value) && validatePagePath(value),
   [],
 );
 
-// since we want to join relative urls, path.join should be ok here
-const joinUrl = (url1?: string, url2?: string) => path.join(url1 || '/', url2 || '');
+const joinPath = (path1: string, path2: string) => path.join(path1, path2);
 
-const NewPageURLField = (props) => {
+const fieldValueToUrl = (value: FormValue) => (typeof value === 'string'
+  ? value || BASE_PATH_EMPTY_VALUE
+  : BASE_PATH_EMPTY_VALUE);
+
+const NewPageURLField = (props: BaseFieldProps) => {
   const {
     ComponentFormLabel,
     ComponentFormLink,
@@ -70,40 +100,38 @@ const NewPageURLField = (props) => {
     value: basePathValue,
     setValue: setBasePathValue,
     ...restBasePathProps
-  } = useBasePathField(props);
+  } = useBasePathField();
 
-  const isEmptyValue = value => value === undefined || value === '';
-  const isBasePathValueEmpty = isEmptyValue(basePathValue) || basePathValue === '/';
-  const isFullUrl = isBasePathValueEmpty;
+  const isBasePathEmpty = isEmptyValue(basePathValue) || basePathValue === BASE_PATH_EMPTY_VALUE;
+  const isFullUrl = isBasePathEmpty;
 
-  const { fieldState, fieldApi, render, ref, userProps } = useField({
+  const {
+    fieldState, fieldApi, render, ref, userProps,
+  } = useField({
     field: PAGE_URL_FIELD_NAME,
-    validate: isFullUrl ? getPageUrlValidate() : getPagePathValidate(),
+    validate: isFullUrl ? getPageUrlValidator() : getPagePathValidator(),
     ...props,
   });
   const { value } = fieldState;
   const { setTouched, setValue } = fieldApi;
   const { onChange, onBlur, ...rest } = userProps;
   const fieldLabel = isFullUrl ? 'URL' : 'Page Path';
-  const inputClasses = isFullUrl ? INPUT_FIELD_BLOCK_CLASSES : INPUT_FIELD_INLINE_CLASSES; 
+  const inputClasses = isFullUrl ? INPUT_FIELD_BLOCK_CLASSES : INPUT_FIELD_INLINE_CLASSES;
   return render(
-    <React.Fragment>
-      <ComponentFormLabel>{fieldLabel}</ComponentFormLabel>
+    <>
+      <ComponentFormLabel htmlFor="new-page-path">{fieldLabel}</ComponentFormLabel>
       {
         !isFullUrl
-        ? <span
-            className="mr-1"
-          >{
-          `${basePathValue}`
-          }</span>
-         : null 
+          ? (<span className="mr-1">{`${basePathValue}`}</span>)
+          : null
       }
       <input
         {...restBasePathProps}
-        type='hidden'
-        value={isBasePathValueEmpty ? '/' : basePathValue}
+        type="hidden"
+        value={isBasePathEmpty ? BASE_PATH_EMPTY_VALUE : basePathValue}
       />
       <input
+        name="new-page-path"
         className={inputClasses}
         {...rest}
         ref={ref}
@@ -122,31 +150,34 @@ const NewPageURLField = (props) => {
         }}
       />
       {
-        !isBasePathValueEmpty &&
+        !isBasePathEmpty
+        && (
         <ComponentFormLink
           onClick={() => {
-            setValue(joinUrl(basePathValue, value));
-            setBasePathValue('/');
-          }}>
-            Edit
+            setValue(joinPath(basePathValue, fieldValueToUrl(value)));
+            setBasePathValue(BASE_PATH_EMPTY_VALUE);
+          }}
+        >
+          Edit
         </ComponentFormLink>
+        )
       }
       {
         fieldState.error ? (
-        <ComponentFormWarning>{fieldState.error}</ComponentFormWarning>
+          <ComponentFormWarning>{fieldState.error}</ComponentFormWarning>
         ) : null
       }
-    </React.Fragment>
+    </>,
   );
 };
 
-const getPathValue = values => {
+const getPathValue = (values: FormValues) => {
   const {
     [BASE_PATH_FIELD_NAME]: basePagePath,
     [PAGE_URL_FIELD_NAME]: pageUrl,
   } = values;
-  return joinUrl(basePagePath, pageUrl);
-}
+  return joinPath(fieldValueToUrl(basePagePath), fieldValueToUrl(pageUrl));
+};
 
 export default NewPageURLField;
 export { getPathValue };

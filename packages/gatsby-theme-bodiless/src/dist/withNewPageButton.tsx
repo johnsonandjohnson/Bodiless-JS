@@ -47,13 +47,10 @@ enum NewPageState {
 type PageStatus = {
   status: NewPageState;
   newPagePath?: string;
-  newPageTemplate?: string;
   errorMessage?: string;
 };
 
-type NewPageProps = PageStatus & {
-  errors: any,
-};
+type NewPageProps = PageStatus;
 
 const createPage = async ({ path, client, template } : any) => {
   // Create the page.
@@ -142,7 +139,7 @@ const formPageAdd = (client: Client) => contextMenuForm({
 })(({ formState, formApi } : any) => {
   const { ComponentFormText } = useMenuOptionUI();
   const {
-    submits, errors, invalid, values,
+    submits, invalid, values,
   } = formState;
   const [state, setState] = useState<PageStatus>({
     status: NewPageState.Init,
@@ -178,9 +175,7 @@ const formPageAdd = (client: Client) => contextMenuForm({
       <NewPageComp
         status={status}
         errorMessage={errorMessage}
-        errors={errors}
         newPagePath={newPagePath}
-        newPageTemplate={template}
       />
     </>
   );

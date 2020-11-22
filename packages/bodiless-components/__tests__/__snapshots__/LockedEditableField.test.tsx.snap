@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`LockedEditableField renders in preview mode by default 1`] = `"<div data-field-element=\\"wrapper\\"><div data-field-element=\\"preview\\">test</div><a data-field-element=\\"edit\\"></a></div>"`;
-
-exports[`LockedEditableField switches back to preview mode when user clicks cancel in edit mode 1`] = `"<div data-field-element=\\"wrapper\\"><div data-field-element=\\"preview\\">test</div><a data-field-element=\\"edit\\"></a></div>"`;
-
-exports[`LockedEditableField switches to edit mode when user click edit button 1`] = `"<div data-field-element=\\"wrapper\\"><input data-field-element=\\"input\\" value=\\"test\\"><a data-field-element=\\"cancel\\"></a></div>"`;

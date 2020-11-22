@@ -27,11 +27,12 @@ describe('Editor Menu (left and right)', function () {
    const docsTitle = '//*[@data-id="bodilessjs"]'
    const editIcon = '//*[@aria-label="Edit"]'
    const addPageIcon = '//*[@aria-label="Page"]'
+   const addBlankPageIcon = '//*[@aria-label="Blank"]'
 
-   const headerAddPageForm = '//*[@aria-label="Context Menu Page Form"]//h3[text()="Add a New Page"]'
-   const fieldAddPageForm = '//*[@aria-label="Context Menu Page Form"]//input[@id="new-page-path"]'
-   const closeIconAddPageForm = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Cancel"]'
-   const checkmarkIconAddPageForm = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Submit"]'
+   const headerAddPageForm = '//*[@aria-label="Context Submenu Form"]//h3[text()="Add a Blank Page"]'
+   const fieldAddPageForm = '//*[@aria-label="Context Submenu Form"]//input[@name="new-page-path"]'
+   const closeIconAddPageForm = '//*[@aria-label="Context Submenu Form"]//*[@aria-label="Cancel"]'
+   const checkmarkIconAddPageForm = '//*[@aria-label="Context Submenu Form"]//*[@aria-label="Submit"]'
 
 
    // Preview Mode
@@ -142,6 +143,8 @@ describe('Editor Menu (left and right)', function () {
    function checkAddNewPageButton() {
       cy.xpath(addPageIcon)
          .click()
+      cy.xpath(addBlankPageIcon)
+         .click()     
       cy.xpath(headerAddPageForm)
       cy.xpath(fieldAddPageForm)
       cy.xpath(checkmarkIconAddPageForm)
