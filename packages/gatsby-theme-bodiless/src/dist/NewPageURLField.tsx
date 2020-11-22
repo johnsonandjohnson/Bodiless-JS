@@ -19,6 +19,7 @@ import type {
   BaseFieldProps,
   FormValue,
   FormValues,
+  FormError,
 } from 'informed';
 import path from 'path';
 
@@ -74,13 +75,26 @@ const validatePagePath = (
     : undefined
 );
 
-const getPageUrlValidator = () => useCallback(
-  (value: FormValue) => validateEmptyField(value) && validatePageUrl(value),
+/**
+ * props that can be passed to NewPageURLField
+ * disallow overriding field prop
+ * if we decide to allow overriding it in the future
+ * then also we need to allow overriding the second NewPageURLField input
+ */
+type FieldProps = Omit<BaseFieldProps, 'field'>;
+type FieldValidate = (value: FormValue, values: FormValues) => FormError;
+
+const getPageUrlValidator = (validate?: FieldValidate) => useCallback(
+  (value: FormValue, values: FormValues) => validateEmptyField(value)
+    || validatePageUrl(value)
+    || (validate && validate(value, values)),
   [],
 );
 
-const getPagePathValidator = () => useCallback(
-  (value: FormValue) => validateEmptyField(value) && validatePagePath(value),
+const getPagePathValidator = (validate?: FieldValidate) => useCallback(
+  (value: FormValue, values: FormValues) => validateEmptyField(value)
+    || validatePagePath(value)
+    || (validate && validate(value, values)),
   [],
 );
 
@@ -90,7 +104,14 @@ const fieldValueToUrl = (value: FormValue) => (typeof value === 'string'
   ? value || BASE_PATH_EMPTY_VALUE
   : BASE_PATH_EMPTY_VALUE);
 
-const NewPageURLField = (props: BaseFieldProps) => {
+/**
+ * informed custom field that provides ability to enter new page path
+ * the field contains 2 inputs: base path and page path
+ * it is recommended to use getPathValue function to merge these 2 inputs
+ * and to get result page path after the form containing this field is submitted
+ * @param props informed field props
+ */
+const NewPageURLField = (props: FieldProps) => {
   const {
     ComponentFormLabel,
     ComponentFormLink,
@@ -105,16 +126,17 @@ const NewPageURLField = (props: BaseFieldProps) => {
   const isBasePathEmpty = isEmptyValue(basePathValue) || basePathValue === BASE_PATH_EMPTY_VALUE;
   const isFullUrl = isBasePathEmpty;
 
+  const { validate, ...rest } = props;
   const {
     fieldState, fieldApi, render, ref, userProps,
   } = useField({
     field: PAGE_URL_FIELD_NAME,
-    validate: isFullUrl ? getPageUrlValidator() : getPagePathValidator(),
-    ...props,
+    validate: isFullUrl ? getPageUrlValidator(validate) : getPagePathValidator(validate),
+    ...rest,
   });
   const { value } = fieldState;
   const { setTouched, setValue } = fieldApi;
-  const { onChange, onBlur, ...rest } = userProps;
+  const { onChange, onBlur, ...restUserProps } = userProps;
   const fieldLabel = isFullUrl ? 'URL' : 'Page Path';
   const inputClasses = isFullUrl ? INPUT_FIELD_BLOCK_CLASSES : INPUT_FIELD_INLINE_CLASSES;
   return render(
@@ -133,7 +155,7 @@ const NewPageURLField = (props: BaseFieldProps) => {
       <input
         name="new-page-path"
         className={inputClasses}
-        {...rest}
+        {...restUserProps}
         ref={ref}
         value={isEmptyValue(value) ? '' : value}
         onChange={e => {
@@ -171,6 +193,13 @@ const NewPageURLField = (props: BaseFieldProps) => {
   );
 };
 
+/**
+ * function that can be used to get new page path value
+ * this function should usually be invoked after an informed form
+ * containing NewPageURLField field is submitted
+ * @param values informed form values
+ * @returns new page path
+ */
 const getPathValue = (values: FormValues) => {
   const {
     [BASE_PATH_FIELD_NAME]: basePagePath,
@@ -181,3 +210,4 @@ const getPathValue = (values: FormValues) => {
 
 export default NewPageURLField;
 export { getPathValue };
+export type { FieldProps };
