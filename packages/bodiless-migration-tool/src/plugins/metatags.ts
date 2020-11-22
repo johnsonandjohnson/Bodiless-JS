@@ -21,10 +21,32 @@
 import path from 'path';
 import type { OnPageCreateParams } from '../pluginManager';
 
-const onPageCreate = (prefix: string) => ({ document, api }: OnPageCreateParams) => {
+type MetatagsFactoryParams = {
+  /**
+   * prefix of the json file to which metatag data is written
+   */
+  prefix: string,
+  /**
+   * a list of metatag names that should be preserved
+   * other metatags will be filtered out
+   */
+  names?: string[],
+};
+
+/**
+ * creates json file for each metatag
+ * allows to prefix the json file
+ * allows to define a list of metatags that should be preserved
+ * @param params to create the metatag scraper plugin
+ */
+const onPageCreate = ({
+  prefix,
+  names,
+}: MetatagsFactoryParams) => ({ document, api }: OnPageCreateParams) => {
   document('meta')
     .toArray()
     .filter(item => item.attribs.name !== undefined && item.attribs.content !== undefined)
+    .filter(item => !names || names.includes(item.attribs.name))
     .forEach(item => api.writeJsonFileSync(
       path.resolve(api.getPagePath(), `${prefix}$${item.attribs.name}.json`),
       {
@@ -33,8 +55,8 @@ const onPageCreate = (prefix: string) => ({ document, api }: OnPageCreateParams)
     ));
 };
 
-const createMetatagsPlugin = (prefix: string) => ({
-  onPageCreate: onPageCreate(prefix),
+const createMetatagsPlugin = (params: MetatagsFactoryParams) => ({
+  onPageCreate: onPageCreate(params),
 });
 
 export default createMetatagsPlugin;
