@@ -73,7 +73,7 @@ const defaultImagePickerUI = {
 };
 
 // DropZonePlugin control the upload of file and only saves jpg/png files.
-function DropZonePlugin({ formApi, targetFieldName, ui }: {
+export function DropZonePlugin({ formApi, targetFieldName, ui }: {
   formApi: FormApi<Data>;
   targetFieldName:string;
   ui?: Partial<TImagePickerUI>;

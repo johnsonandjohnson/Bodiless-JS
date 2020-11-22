@@ -37,6 +37,11 @@ export type Options = {
   label: string;
   useFormElement?: () => CT<FieldProps<any, any>>,
   placeholder?: string;
+  attribute?: string;
+} & BasicOptions;
+
+export type StaticOptions = {
+  attribute?: string;
 } & BasicOptions;
 
 const withTitle$ = () => (
@@ -50,12 +55,15 @@ const withTitle$ = () => (
 
 const withMeta$ = (options: Options) => (
   HelmetComponent: CT<BaseProps>,
-) => ({ children, content, ...rest }: Props) => (
-  <HelmetComponent {...rest}>
-    {children}
-    {content && <meta name={options.name} content={content} />}
-  </HelmetComponent>
-);
+) => ({ children, content, ...rest }: Props) => {
+  const attributes = { [options.attribute ? options.attribute : 'name']: options.name };
+  return (
+    <HelmetComponent {...rest}>
+      {children}
+      {content && <meta {...attributes} content={content} />}
+    </HelmetComponent>
+  );
+};
 
 // @todo withHeadElement to its own file.
 export const withHeadElement = (renderHoc: Function) => (options: Options) => (
@@ -73,7 +81,7 @@ export const withHeadElement = (renderHoc: Function) => (options: Options) => (
 const withMeta = withHeadElement(withMeta$);
 const withTitle = withHeadElement(withTitle$);
 
-const withMetaStatic = (options: BasicOptions) => (
+const withMetaStatic = (options: StaticOptions) => (
   nodeKey?: WithNodeKeyProps, defaultContent?: string,
 ) => flowRight(
   asReadOnly,

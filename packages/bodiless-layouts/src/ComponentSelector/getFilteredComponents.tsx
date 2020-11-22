@@ -12,6 +12,21 @@
  * limitations under the License.
  */
 
+import { ComponentWithMeta } from './types';
+
+const createSearchFilter = (activeSearch: string) => (component: ComponentWithMeta<any>) => {
+  const terms = activeSearch.toLowerCase().split(' ').map(term => term.trim());
+  return terms.reduce((result, term) => {
+    const title = (component.title || '').toLowerCase().trim();
+    const description = (component.description || '').toLowerCase().trim();
+    const categories = Object.keys(component.categories).reduce(
+      (cats, next) => `${cats} ${component.categories[next].join(' ')}`,
+      '',
+    ).toLowerCase().trim();
+    return result && `${title} ${description} ${categories}`.includes(term);
+  }, true);
+};
+
 /**
  * This generates a new list of components: newComponentArr
  *
@@ -26,39 +41,23 @@ const getFilteredComponents = (
   filters: Array<any>,
   searchString: string,
 ) => {
-  if (filters.length === 0 && searchString.length === 0) {
-    return components;
-  }
-  if (searchString.length >= 1 && filters.length === 0) {
-    const newComponentArr = components.filter(component => component.title.toLowerCase()
-      .includes(searchString.toLowerCase()));
-    return newComponentArr;
-  }
+  // Filter components based on filters
+  const filtered = filters.length === 0 ? components
+    : components.filter((component, index, comps) => {
+      const { categories } = component;
+      const tempValArray: any = [];
 
-  // Make local variables available to filter's closure.
-  const f = filters;
-  const s = searchString;
-
-  // Filter components based on filters and search string.
-  const filtered = components.filter((component: any, index: number, comps: any[]) => {
-    const { categories } = component;
-    const tempValArray: any = [];
-
-    Object.keys(categories).forEach(category => {
-      Object.keys(comps[index].categories[category]).forEach(value => {
-        tempValArray.push(comps[index].categories[category][value]);
+      Object.keys(categories).forEach(category => {
+        Object.keys(comps[index].categories[category]).forEach(value => {
+          tempValArray.push(comps[index].categories[category][value]);
+        });
       });
+      return filters.every(value => tempValArray.includes(value));
     });
-
-    const found = f.every(value => tempValArray.includes(value))
-      && comps[index].title
-        .toLowerCase()
-        .includes(s.toLowerCase());
-
-    return found;
-  });
-
-  return filtered;
+  // Additional filter by search string.
+  const searchString$ = searchString.trim().toLowerCase();
+  return searchString$.length === 0
+    ? filtered : filtered.filter(createSearchFilter(searchString$));
 };
 
 export { getFilteredComponents as default, getFilteredComponents };
