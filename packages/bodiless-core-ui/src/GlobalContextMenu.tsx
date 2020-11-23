@@ -61,7 +61,7 @@ export const GlobalTooltip: FC<ReactTooltip['props']> = props => (
       if (!el) {
         el = document.createElement('div');
         el.setAttribute('id', 'global-tooltip-container');
-        el.setAttribute('style', 'position:fixed;');
+        el.setAttribute('style', 'position: fixed; z-index: 1000;');
         document.body.appendChild(el);
       }
 

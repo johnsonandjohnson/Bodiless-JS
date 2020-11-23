@@ -111,7 +111,7 @@ export class PageEditStore implements PageEditStoreInterface {
       c.getMenuOptions().forEach(op => {
         keys.add(op.name);
         const existing = map!.get(op.name);
-        const next = op;
+        const next = { ...op, context: c };
         if (existing) {
           Object.keys(existing)
             .filter(key => next[key as keyof TMenuOption] === undefined)

@@ -18,9 +18,11 @@ import React, {
 import { shallow, mount } from 'enzyme';
 import { Text } from 'informed';
 import { observer } from 'mobx-react-lite';
+import { omit } from 'lodash';
 import withEditButton from '../src/withEditButton';
 import { useEditContext } from '../src/hooks';
 import ContextMenuItem from '../src/components/ContextMenuItem';
+import { TMenuOption, EditButtonOptions } from '../src';
 
 type Props = HTMLProps<HTMLDivElement>;
 type Data = {
@@ -147,23 +149,71 @@ describe('withEditButton', () => {
     ).toBe(id);
   });
 
-  it('creates the correct context menu option', () => {
+  it('Uses custom data handlers correctly', () => {
     const options = {
+      icon: 'Icon',
+      name: 'Name',
+      renderForm: () => <></>,
+      submitValueHandler: jest.fn((data: any) => omit(data, 'bar')),
+      initialValueHandler: jest.fn((data: any) => ({ ...data, bar: 'Bar' })),
+    };
+    const props = {
+      setComponentData: jest.fn(),
+      componentData: {
+        foo: 'Foo',
+      },
+    };
+    const Foo = withEditButton<Props, Data>(options)('div');
+    const wrapper = shallow(<Foo {...props} />);
+    const menuOptions = wrapper.prop('getMenuOptions')();
+    const Form = menuOptions[0].handler();
+    const formWrapper$ = shallow(<Form closeForm={() => undefined} />);
+    const formWrapper = formWrapper$.dive();
+    expect(formWrapper.prop('initialValues')).toEqual({
+      foo: 'Foo',
+      bar: 'Bar',
+    });
+    expect(options.initialValueHandler.mock.calls[0][0]).toEqual({
+      foo: 'Foo',
+    });
+    // @ts-ignore The result of dive is somehow not recognized as always being a component.
+    formWrapper.prop('onSubmit')({ foo: 'Baz', bar: 'Bang' });
+    expect(props.setComponentData.mock.calls[0][0]).toEqual({
+      foo: 'Baz',
+    });
+    expect(options.submitValueHandler.mock.calls[0][0]).toEqual({
+      foo: 'Baz',
+      bar: 'Bang',
+    });
+  });
+
+  it('creates the correct context menu option', () => {
+    const options: EditButtonOptions<any, any> = {
       icon: Math.random().toString(),
       name: Math.random().toString(),
       renderForm: () => <></>,
+      groupLabel: Math.random().toString(),
+      groupMerge: 'merge',
       global: false,
     };
     const Foo = withEditButton<Props, Data>(options)('div');
     const wrapper = shallow(
       <Foo setComponentData={() => undefined} componentData={{}} />,
     );
-    expect(wrapper.prop('name')).toBe(options.name);
-    const menuOptions = wrapper.prop('getMenuOptions')();
-    expect(menuOptions.length).toBe(1);
-    expect(menuOptions[0].icon).toBe(options.icon);
-    expect(menuOptions[0].name).toBe(options.name);
-    expect(menuOptions[0].global).toBe(false);
-    expect(menuOptions[0].local).toBeUndefined();
+
+    // @TODO Need to be able to pass context definition overrides.
+    // expect(wrapper.prop('name')).toBe(options.name);
+    const menuOptions: TMenuOption[] = wrapper.prop('getMenuOptions')();
+    expect(menuOptions.length).toBe(2);
+    const option = menuOptions.find(o => o.name === options.name);
+    expect(option!.icon).toBe(options.icon);
+    expect(option!.global).toBe(false);
+    expect(option!.local).toBeUndefined();
+    const group = menuOptions.find(o => o.name === `${options.name}-group`);
+    expect(group!.label).toBe(options.groupLabel);
+    expect(group!.groupMerge).toBe(options.groupMerge);
+    expect(group!.global).toBe(false);
+    expect(group!.local).toBeUndefined();
+    expect(group!.Component).toBe('group');
   });
 });

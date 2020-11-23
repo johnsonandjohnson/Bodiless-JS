@@ -52,7 +52,7 @@ const BaseEmbedComponent: ComponentType<EmbedProps> = ({ components }) => {
 
 const Embed = flowRight(
   withNode,
-  designable(startComponents),
+  designable(startComponents, 'Embed'),
 )(BaseEmbedComponent);
 
 export default Embed;

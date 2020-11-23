@@ -62,6 +62,17 @@ const asToutWithPaddings = withDesign({
   Wrapper: asBlockItem,
 });
 
+const asToutTextWhite = withDesign({
+  ContentWrapper: addClasses('text-white'),
+});
+
+const asToutMainMenu = flow(
+  asToutTextWhite,
+  asToutWithPaddings,
+  asToutDefaultStyle,
+  asToutHorizontal,
+);
+
 export {
   asToutHorizontal,
   asToutVertical,
@@ -73,4 +84,6 @@ export {
   asToutOverlayCta,
   asToutNoBodyNoTitle,
   asToutWithPaddings,
+  asToutTextWhite,
+  asToutMainMenu,
 };

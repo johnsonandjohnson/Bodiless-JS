@@ -51,15 +51,14 @@ function Checkbox({
   const finalUI:FinalUI = useContext(uiContext);
   return (
     <finalUI.AccordionCheckboxWrapper>
-      <finalUI.AccordionCheckBox
-        field="accordion-checkbox"
-        onChange={onToggle}
-        checked={isChecked}
-        disabled={disabled}
-        id={type}
-        name={type}
-      />
       <finalUI.AccordionCheckboxLabel htmlFor={type}>
+        <finalUI.AccordionCheckBox
+          onChange={onToggle}
+          checked={isChecked}
+          disabled={disabled}
+          id={type}
+          name={type}
+        />
         {Capitalize(type)}
       </finalUI.AccordionCheckboxLabel>
     </finalUI.AccordionCheckboxWrapper>
@@ -90,7 +89,7 @@ function Dropdown({ children, type }: { children: any; type: any }) {
 }
 
 // The wrapper that wraps the checkboxes and dropdown menus
-export const FilterWrapper = (props: any) => {
+const FilterWrapper = (props: any) => {
   const {
     allfilters,
     filters,
@@ -136,30 +135,4 @@ export const FilterWrapper = (props: any) => {
   );
 };
 
-// The AllCheckbox component
-// If a filter or search value exist, it is unchecked
-// If checked from unchecked state will remove all existing filters
-export function AllCheckbox(props: any) {
-  const {
-    activeFilter,
-    setActiveFilters,
-    activeSearch,
-    setActiveSearch,
-  } = props;
-  const finalUI:FinalUI = useContext(uiContext);
-  return (
-    <finalUI.AllCheckboxWrapper>
-      <Checkbox
-        type="All"
-        disabled={false}
-        isChecked={activeFilter.length === 0 && activeSearch.length === 0}
-        onToggle={() => {
-          if (activeFilter.length !== 0 || activeSearch.length !== 0) {
-            setActiveFilters([]);
-            setActiveSearch('');
-          }
-        }}
-      />
-    </finalUI.AllCheckboxWrapper>
-  );
-}
+export default FilterWrapper;

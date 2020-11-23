@@ -26,6 +26,7 @@ const useMenuOptions = () => {
   return [{
     name: 'switcher',
     icon: 'compare_arrows',
+    activateContext: false,
     handler: () => context.togglePosition(),
   }];
 };

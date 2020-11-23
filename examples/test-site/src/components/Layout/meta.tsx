@@ -24,7 +24,6 @@ import {
 } from '@bodiless/components';
 import {
   useMenuOptionUI,
-  useEditContext,
 } from '@bodiless/core';
 
 const withMetaPageTitle = withTitle({
@@ -53,17 +52,13 @@ const withMetaCountry = withMetaStatic({
   name: 'bl-country',
 });
 
-const useMenuOptions = () => {
-  const context = useEditContext();
-  return [
-    {
-      name: 'seo',
-      icon: 'category',
-      label: 'SEO',
-      isHidden: () => !context.isEdit,
-    },
-  ];
-};
+const useMenuOptions = () => [
+  {
+    name: 'seo',
+    icon: 'category',
+    label: 'SEO',
+  },
+];
 
 const seoFormHeader = {
   title: 'SEO Data Management',

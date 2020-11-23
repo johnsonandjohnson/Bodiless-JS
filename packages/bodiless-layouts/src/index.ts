@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
+import './main.css';
+
 export { default as ComponentSelector } from './ComponentSelector';
 export * from './ComponentSelector/types';
 export type { FlowContainerProps } from './FlowContainer/types';
@@ -22,6 +24,7 @@ export type {
 } from './SortableResizableWrapper';
 export { default as SortableResizableWrapper } from './SortableResizableWrapper';
 export { default as SlateSortableResizable } from './SlateSortableResizable';
+export { default as SortableChild } from './FlowContainer/SortableChild';
 export {
   withTuple,
   getSnapFrom,

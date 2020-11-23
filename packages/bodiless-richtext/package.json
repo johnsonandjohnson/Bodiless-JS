@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/richtext",
-  "version": "0.0.57",
+  "version": "0.0.60",
   "description": "Provide Rich Text Component",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
   "license": "Apache-2.0",
@@ -29,12 +29,12 @@
     "postinstall": "node bin/apply-patches.js"
   },
   "dependencies": {
-    "@bodiless/core": "^0.0.57",
-    "@bodiless/fclasses": "^0.0.57",
+    "@bodiless/core": "^0.0.60",
+    "@bodiless/fclasses": "^0.0.60",
     "@emotion/core": "^10.0.14",
     "@emotion/css": "^10.0.14",
     "@emotion/styled": "^10.0.14",
-    "@material/react-material-icon": "^0.14.1",
+    "@material/react-material-icon": "^0.15.0",
     "immutable": "^4.0.0-rc.12",
     "immutable-js": "^0.3.1-6",
     "lodash": "^4.17.19",
@@ -43,9 +43,11 @@
     "mobx-react-lite": "^1.3.1",
     "rc-tooltip": "^3.7.3",
     "react-fast-compare": "^2.0.4",
-    "shelljs": "^0.8.3",
+    "shelljs": "^0.8.4",
     "slate": "^0.44.12",
+    "slate-plain-serializer": "^0.7.13",
     "slate-react": "^0.21.18",
+    "slate-react-placeholder": "^0.1.20",
     "uuid": "^3.3.2"
   },
   "peerDependencies": {
@@ -54,6 +56,7 @@
   },
   "devDependencies": {
     "@types/rc-tooltip": "^3.7.1",
+    "@types/slate-plain-serializer": "^0.7.0",
     "@types/uuid": "^3.4.4"
   }
 }

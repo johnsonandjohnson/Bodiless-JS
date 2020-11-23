@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.60](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.58...v0.0.60) (2020-11-18)
+
+
+### Features
+
+* **migration-tool:** migrate site skeleton ([#678](https://github.com/johnsonandjohnson/bodiless-js/issues/678)) ([db01c52](https://github.com/johnsonandjohnson/bodiless-js/commit/db01c52b30e3b9cc6c8440fcf54c3d4d96cf4879))
+
+
+
+
+
+## [0.0.59](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.58...v0.0.59) (2020-11-05)
+
+**Note:** Version bump only for package @bodiless/migration-tool
+
+
+
+
+
+## [0.0.58](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.57...v0.0.58) (2020-10-23)
+
+**Note:** Version bump only for package @bodiless/migration-tool
+
+
+
+
+
 ## [0.0.57](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.56...v0.0.57) (2020-10-15)
 
 **Note:** Version bump only for package @bodiless/migration-tool

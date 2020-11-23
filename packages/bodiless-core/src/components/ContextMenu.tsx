@@ -17,13 +17,29 @@ import { uniqBy } from 'lodash';
 import ContextMenuItem from './ContextMenuItem';
 import StructuredChildren from '../ContextMenu/StructuredChildren';
 import ContextMenuProvider, { getUI } from './ContextMenuContext';
-import type {
-  IContextMenuProps, ContextMenuFormProps, TMenuOption,
+import {
+  IContextMenuProps, ContextMenuFormProps, TMenuOption, MenuOptionDefaultComponents,
 } from '../Types/ContextMenuTypes';
 
-const createChildrenFromOptions = (options: TMenuOption[]) => options.map(
+const getComponent = (option: TMenuOption, defaultComponents: MenuOptionDefaultComponents) => {
+  if (typeof option.Component === 'function') return option.Component;
+  if (option.Component === 'group') return defaultComponents.group;
+  return defaultComponents.item;
+};
+
+/**
+ * @private
+ * Converts an array of context menu option objects into an array of child components.
+ *
+ * @param options The array of options
+ * @param defaultComponents Default components to be used when a component does not define one.
+ */
+const createChildrenFromOptions = (
+  options: TMenuOption[]|undefined,
+  defaultComponents: MenuOptionDefaultComponents,
+) => uniqBy((options || []).map(
   option => {
-    const Component = option.Component || ContextMenuItem;
+    const Component = getComponent(option, defaultComponents);
     return (
       <Component
         option={option}
@@ -34,7 +50,7 @@ const createChildrenFromOptions = (options: TMenuOption[]) => options.map(
       />
     );
   },
-);
+), 'key');
 
 const ContextMenuBase: FC<IContextMenuProps> = (props) => {
   if (typeof window === 'undefined') return null;
@@ -95,7 +111,10 @@ const ContextMenu: FC<IContextMenuProps> = (props) => {
   const { options, ui, children } = props;
   const { ContextMenuGroup } = getUI(ui);
   const childProps = { ui };
-  const childrenFromOptions = uniqBy(createChildrenFromOptions(options || []), 'key');
+  const childrenFromOptions = createChildrenFromOptions(
+    options,
+    { item: ContextMenuItem, group: ContextMenuGroup },
+  );
   const finalChildren = children
     ? [...React.Children.toArray(children).filter(React.isValidElement), ...childrenFromOptions]
     : childrenFromOptions;

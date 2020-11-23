@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.60](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.58...v0.0.60) (2020-11-18)
+
+
+### Bug Fixes
+
+* **gatsby-plugin-ssi:** Each child in a list should have a unique key prop ([#517](https://github.com/johnsonandjohnson/bodiless-js/issues/517)) ([78035b5](https://github.com/johnsonandjohnson/bodiless-js/commit/78035b5a0efa440abad549fe79c26de71e99a4c0))
+
+
+
+
+
+## [0.0.59](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.58...v0.0.59) (2020-11-05)
+
+**Note:** Version bump only for package @bodiless/gatsby-plugin-ssi
+
+
+
+
+
+## [0.0.58](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.57...v0.0.58) (2020-10-23)
+
+**Note:** Version bump only for package @bodiless/gatsby-plugin-ssi
+
+
+
+
+
 ## [0.0.57](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.56...v0.0.57) (2020-10-15)
 
 **Note:** Version bump only for package @bodiless/gatsby-plugin-ssi

@@ -14,21 +14,6 @@ The Product Detail Page has the following componets:
     flowContainer on right.
     * The FlowContainer on right component allows addition of customized product taggable touts.
 
-The Product Listing Page as designed has some of the following unique
-characteristics:
-
-* ExampleGTMHelmetEvent
-  * If Google Tag Manager is in use, this will render the data layer on the page.
-    ```js
-      const ExampleGTMHelmetEvent = flowRight(
-        asBodilessHelmet('datalayer'),
-        // On product pages, we may add product related datalayer info:
-        withEvent('digitalData', { event: 'Product Viewed' }, 'product-viewed'),
-      )(Helmet);
-    ```
-  * The data for this is stored in `datalayer$product-viewed.json` with each
-     product in `src/data/pages` so each product has unique data.
-
 ## Usage
 
 1. The [Product Listing Page](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/templates/product_listing.jsx) template can be copied into your `src/templates` folder and customized.

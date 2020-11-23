@@ -70,7 +70,7 @@ export const asDesignableBVComponent = (
   componentName: string,
   onLoaded?: (bvprops: BVProps) => void,
 ) => <P extends BVProps>(Component: ComponentType<P>) => flowRight(
-  designable(defaultComponents),
+  designable(defaultComponents, 'BV'),
   asBVComponent(componentName, onLoaded),
 )(Component);
 

@@ -16,7 +16,7 @@ import React, { ReactElement, useState } from 'react';
 import PropTypes from 'prop-types';
 import { pickBy } from 'lodash';
 
-import { AllCheckbox, FilterWrapper } from './FilterWrapper';
+import FilterWrapper from './FilterWrapper';
 import SearchWrapper from './SearchWrapper';
 import ItemList from './ItemListScale';
 import { getFiltersByComponentList } from './getFiltersByComponentList';
@@ -30,13 +30,19 @@ import {
   ItemListProps,
   RenderList,
 } from './types';
-import { ComponentDisplayModeProvider, ComponentDisplayMode } from '../FlowContainer/ComponentDisplayMode';
+import {
+  ComponentDisplayModeProvider,
+  ComponentDisplayMode,
+} from '../FlowContainer/ComponentDisplayMode';
 
 export { defaultUI } from './uiContext';
 
 export { uiContext };
 
-const applyMandatoryCategories = (components: any, mandatoryCategories: string[]) => {
+const applyMandatoryCategories = (
+  components: any,
+  mandatoryCategories: string[],
+) => {
   mandatoryCategories.forEach(mandatoryCategory => {
     components.forEach((component: any) => {
       if (!(mandatoryCategory in component.categories)) {
@@ -61,7 +67,10 @@ const reduceFilters = (filters: any, components: any) => pickBy(
 
 const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
   const {
-    components: allComponents, ui, onSelect, mandatoryCategories,
+    components: allComponents,
+    ui,
+    onSelect,
+    mandatoryCategories,
   } = props;
 
   const [activeFilters, setActiveFilters] = useState([]);
@@ -92,14 +101,18 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
     <ComponentDisplayModeProvider mode={ComponentDisplayMode.ComponentSelector}>
       <uiContext.Provider value={finalUI}>
         <finalUI.MasterWrapper>
-
           <finalUI.FlexSection>
-            <AllCheckbox
-              activeFilter={activeFilters}
-              setActiveFilters={setActiveFilters}
-              activeSearch={activeSearch}
-              setActiveSearch={setActiveSearch}
-            />
+            <finalUI.ComponentLinkWrapper
+              disabled={activeFilters.length === 0 && activeSearch.trim().length === 0}
+              onClick={() => {
+                if (activeFilters.length !== 0 || activeSearch.trim().length !== 0) {
+                  setActiveSearch('');
+                  setActiveFilters([]);
+                }
+              }}
+            >
+              Clear
+            </finalUI.ComponentLinkWrapper>
             <FilterWrapper
               activeFilter={activeFilters}
               setActiveFilters={setActiveFilters}
@@ -116,12 +129,8 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
               activeSearch={activeSearch}
               setActiveSearch={setActiveSearch}
             />
-            <ItemList
-              onSelect={onSelect}
-              components={newCompRender}
-            />
+            <ItemList onSelect={onSelect} components={newCompRender} />
           </finalUI.FlexSectionFull>
-
         </finalUI.MasterWrapper>
       </uiContext.Provider>
     </ComponentDisplayModeProvider>
@@ -162,7 +171,8 @@ const TextFormatSelector: React.FC<ComponentSelectorProps> = props => {
 // A HoverMenu option which will bring up the component selector form and then
 // insert an inline for the selected component.
 // See HoverMenu props definitions for the fields of an option.
-const textFormatSelectorOption = ( // eslint-ignore-line
+const textFormatSelectorOption = (
+  // eslint-ignore-line
   components: ComponentWithMeta<any>[],
   ui: ComponentSelectorUI,
   getEditor: () => {
@@ -198,8 +208,5 @@ const textFormatSelectorOption = ( // eslint-ignore-line
 });
 
 export default ComponentSelector;
-export {
-  TextFormatSelector,
-  textFormatSelectorOption,
-};
+export { TextFormatSelector, textFormatSelectorOption };
 export const UIConsumer = uiContext.Consumer;

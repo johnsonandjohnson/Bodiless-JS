@@ -51,6 +51,8 @@ class PageEditContext implements PageEditContextInterface {
 
   readonly parent: PageEditContextInterface | undefined;
 
+  readonly type: string | undefined;
+
   protected store: PageEditStoreInterface = defaultStore;
 
   hasLocalMenu = false;
@@ -61,6 +63,7 @@ class PageEditContext implements PageEditContextInterface {
       this.id = values.id;
       this.name = values.name || values.id;
       if (values.getMenuOptions) this.getMenuOptions = values.getMenuOptions;
+      if (values.type) this.type = values.type;
     }
     if (parent) {
       this.parent = parent;
@@ -141,6 +144,19 @@ class PageEditContext implements PageEditContextInterface {
     return Boolean(
       this.store.activeContext && this.store.activeContext.id === this.id,
     );
+  }
+
+  get activeContext() {
+    return this.store.activeContext;
+  }
+
+  get activeDescendants() {
+    const trail: PageEditContextInterface[] = [];
+    for (let c = this.activeContext; c; c = c.parent) {
+      if (c === this) return trail.reverse();
+      trail.push(c);
+    }
+    return undefined;
   }
 
   get isInnermostLocalMenu() {

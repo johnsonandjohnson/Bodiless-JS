@@ -44,10 +44,12 @@ jest.mock('@bodiless/core', () => ({
 const Foo: FC = Fragment;
 const Bar: FC = Fragment;
 const components: DesignableComponents = { Foo, Bar };
-const item = {
+const foo = {
   uuid: 'foo',
   type: 'Foo',
-  wrapperProps: {},
+  wrapperProps: {
+    className: 'foo-class',
+  },
 };
 
 describe('useGetMenuOptions', () => {
@@ -99,7 +101,7 @@ describe('useGetMenuOptions', () => {
       if (maxComponents) {
         props.maxComponents = maxComponents;
       }
-      const hook = useGetItemUseGetMenuOptions(props)(item);
+      const hook = useGetItemUseGetMenuOptions(props)(foo);
       logMenuOptions(hook()());
       return null;
     }
@@ -113,13 +115,13 @@ describe('useGetMenuOptions', () => {
       const { getItems } = useItemHandlers();
       // @ts-ignore jest mock methods don't exist on mocked imports.
       getItems.mockReturnValue([
-        {
-          uuid: 'foo',
-          type: 'Foo',
-        },
+        foo,
         {
           uuid: 'bar',
           type: 'Bar',
+          wrapperProps: {
+            className: 'bar-class',
+          },
         },
       ]);
     });
@@ -136,7 +138,7 @@ describe('useGetMenuOptions', () => {
       const addButton = options.find(option => option.name === 'add-item');
       expect(addButton).not.toBeUndefined();
       invokeAction(addButton!, 'Baz');
-      expectDataHandlerCall(insertFlowContainerItem, ['Baz', item]);
+      expectDataHandlerCall(insertFlowContainerItem, ['Baz', foo]);
     });
 
     it('Does not return an add button when flow container is full', () => {
@@ -145,12 +147,28 @@ describe('useGetMenuOptions', () => {
       expect(addButton).toBeUndefined();
     });
 
+    it('Returns a copy button', () => {
+      const { insertFlowContainerItem } = useFlowContainerDataHandlers();
+      const options = getMenuOptions(3);
+      const copyButton = options.find(option => option.name === 'copy-item');
+      expect(copyButton).not.toBeUndefined();
+      // @ts-ignore handler expects an event but doesn't use it
+      copyButton.handler();
+      expectDataHandlerCall(insertFlowContainerItem, ['Foo', foo, { className: 'foo-class' }]);
+    });
+
+    it('Does not return a copy button when flow container is full', () => {
+      const options = getMenuOptions(2);
+      const copyButton = options.find(option => option.name === 'copy-item');
+      expect(copyButton).toBeUndefined();
+    });
+
     it('Returns a delete button', () => {
       const { deleteFlowContainerItem } = useFlowContainerDataHandlers();
       const options = getMenuOptions();
       const button = options.find(option => option.name === 'delete');
       expect(button).not.toBeUndefined();
-      // @ts-ignore
+      // @ts-ignore handler expects an event but doesn't use it
       button.handler();
       expectDataHandlerCall(deleteFlowContainerItem, ['foo']);
     });
@@ -161,7 +179,7 @@ describe('useGetMenuOptions', () => {
       const button = options.find(option => option.name === 'swap');
       expect(button).not.toBeUndefined();
       invokeAction(button!, 'Bar');
-      expectDataHandlerCall(updateFlowContainerItem, [{ ...item, type: 'Bar' }]);
+      expectDataHandlerCall(updateFlowContainerItem, [{ ...foo, type: 'Bar' }]);
     });
   });
 
@@ -196,6 +214,7 @@ describe('useGetMenuOptions', () => {
       const options = getMenuOptions();
       expect(options).toHaveLength(0);
     });
+
     it('Returns a single add button for the flow container when it is empty', () => {
       const { getItems } = useItemHandlers();
       // @ts-ignore jest mock methods don't exist on mocked imports.
@@ -204,7 +223,6 @@ describe('useGetMenuOptions', () => {
       shallow(<LogMenuOptions />);
       const options = getMenuOptions();
       expect(options.length).toBe(1);
-      expect(options[0].name).toBe('add');
       invokeAction(options[0], 'Bar');
       expectDataHandlerCall(insertFlowContainerItem, ['Bar']);
     });

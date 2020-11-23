@@ -57,12 +57,12 @@ const asToutNoCta = withDesign({
   Link: remove,
 });
 const asToutOverlayTitle = withDesign({
-  Title: addClasses('absolute top-0 m-8 min-w-5'),
+  Title: addClasses('absolute top-0 m-8'),
   Wrapper: addClasses('relative'),
 });
 const asToutOverlayCta = withDesign({
   Link: flow(
-    addClasses('absolute bottom-0 right-0 m-8 px-8 min-w-5'),
+    addClasses('absolute bottom-0 right-0 m-8 px-8'),
     removeClasses('w-full'),
   ),
   Wrapper: addClasses('relative'),
