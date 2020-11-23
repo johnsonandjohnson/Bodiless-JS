@@ -95,7 +95,6 @@ const FilterWrapper = (props: any) => {
     filters,
     activeFilter,
     setActiveFilters,
-    localStorageKey,
   } = props;
   const finalUI:FinalUI = useContext(uiContext);
   const isTermDisabled = (category: string, term: string) => Object.entries(filters).length === 0
@@ -125,9 +124,6 @@ const FilterWrapper = (props: any) => {
                     } else {
                       newFilters = addtoArray(activeFilter, value);
                       setActiveFilters(newFilters);
-                    }
-                    if (typeof window !== 'undefined') {
-                      window.localStorage.setItem(localStorageKey, JSON.stringify(newFilters));
                     }
                   }}
                   isChecked={activeFilter.indexOf(value) !== -1}

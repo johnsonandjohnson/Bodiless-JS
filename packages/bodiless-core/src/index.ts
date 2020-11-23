@@ -19,7 +19,7 @@ import asStatic from './asStatic';
 import asReadOnly from './asReadOnly';
 import {
   useEditContext, useUUID, useContextActivator, useExtendHandler,
-  useGetter,
+  useGetter, useLocalStorage,
 } from './hooks';
 import withNode, { withNodeKey } from './withNode';
 import withSidecarNodes, { startSidecarNodes, endSidecarNodes } from './withSidecarNodes';
@@ -130,6 +130,7 @@ export {
   useEditToggle,
   useNotifications,
   useNotify,
+  useLocalStorage,
   withExtendHandler,
   useExtendHandler,
   NotificationProvider,

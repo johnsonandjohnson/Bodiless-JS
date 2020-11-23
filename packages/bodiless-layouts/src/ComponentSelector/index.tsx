@@ -16,6 +16,7 @@ import React, { ReactElement, useState } from 'react';
 import PropTypes from 'prop-types';
 import { pickBy } from 'lodash';
 
+import { useLocalStorage } from '@bodiless/core';
 import FilterWrapper from './FilterWrapper';
 import SearchWrapper from './SearchWrapper';
 import ItemList from './ItemListScale';
@@ -89,17 +90,12 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
     mandatoryCategories,
   } = props;
 
-  const names = allComponents.map(Component => (
+  const allComponentsNames = allComponents.map(Component => (
     typeof Component === 'string' ? Component : Component.displayName));
-  const keySuffix = hash(names.sort().join().trim());
+  const keySuffix = hash(allComponentsNames.sort().join().trim());
 
   const localStorageKey = `bodiless.componentLibrary.activeFilters.${keySuffix}`;
-  let storedFilters: any = [];
-  if (typeof window !== 'undefined') {
-    storedFilters = window.localStorage.getItem(localStorageKey);
-    storedFilters = storedFilters === null ? [] : JSON.parse(storedFilters);
-  }
-  const [activeFilters, setActiveFilters] = useState(storedFilters);
+  const [activeFilters, setActiveFilters] = useLocalStorage(localStorageKey, []);
   const [activeSearch, setActiveSearch] = useState('');
 
   function useUI(): FinalUI {
@@ -135,7 +131,6 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
                 if (activeFilters.length !== 0 || activeSearch.length !== 0) {
                   setActiveSearch('');
                   setActiveFilters([]);
-                  if (typeof window !== 'undefined') window.localStorage.removeItem(localStorageKey);
                 }
               }}
             >
@@ -146,7 +141,6 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
               setActiveFilters={setActiveFilters}
               allfilters={allFilters}
               filters={filters}
-              localStorageKey={localStorageKey}
             />
           </finalUI.FlexSection>
 
