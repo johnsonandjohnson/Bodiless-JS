@@ -117,13 +117,10 @@ const FilterWrapper = (props: any) => {
                   type={value}
                   disabled={isTermDisabled(category, value)}
                   onToggle={() => {
-                    let newFilters = [];
                     if (activeFilter.indexOf(value) !== -1) {
-                      newFilters = removefromArray(activeFilter, value);
-                      setActiveFilters(newFilters);
+                      setActiveFilters(removefromArray(activeFilter, value));
                     } else {
-                      newFilters = addtoArray(activeFilter, value);
-                      setActiveFilters(newFilters);
+                      setActiveFilters(addtoArray(activeFilter, value));
                     }
                   }}
                   isChecked={activeFilter.indexOf(value) !== -1}
