@@ -26,7 +26,7 @@ import path from 'path';
 const BASE_PATH_FIELD_NAME = 'basePath';
 const PAGE_URL_FIELD_NAME = 'pagePath';
 const BASE_PATH_EMPTY_VALUE = '/';
-const INPUT_FIELD_DEFAULT_CLASSES = 'bl-text-grey-900 bg-grey-100 bl-text-xs bl-min-w-xl-grid-1 bl-my-grid-2 bl-p-grid-1';
+const INPUT_FIELD_DEFAULT_CLASSES = 'bl-text-grey-900 bl-bg-grey-100 bl-text-xs bl-min-w-xl-grid-1 bl-my-grid-2 bl-p-grid-1';
 const INPUT_FIELD_INLINE_CLASSES = INPUT_FIELD_DEFAULT_CLASSES.concat(' bl-inline');
 const INPUT_FIELD_BLOCK_CLASSES = INPUT_FIELD_DEFAULT_CLASSES.concat(' bl-block bl-w-full');
 
