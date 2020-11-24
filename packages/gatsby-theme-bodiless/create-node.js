@@ -171,7 +171,7 @@ const generateGatsbyImage = async ({ file, preset, reporter }, options) => {
   if (!Object.values(GatsbyImagePresets).includes(preset)) {
     return undefined;
   }
-  const { sharpArgs } = options;
+  const { sharpArgs } = options || {};
   switch (preset) {
     case GatsbyImagePresets.Fixed:
       return fixed({
