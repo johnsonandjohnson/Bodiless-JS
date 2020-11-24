@@ -17,7 +17,7 @@
 const pathUtil = require('path');
 const slash = require('slash');
 const crypto = require('crypto');
-const { fluid, fixed } = require('gatsby-plugin-sharp');
+const { fluid: sharpFluid, fixed: sharpFixed } = require('gatsby-plugin-sharp');
 const GatsbyImagePresets = require('./dist/GatsbyImage/GatsbyImagePresets').default;
 
 const Logger = require('./Logger');
@@ -25,6 +25,16 @@ const Logger = require('./Logger');
 const logger = new Logger('gatsby');
 
 const BODILESS_NODE_TYPE = 'Bodiless';
+
+const srcSetBreakpoints = [
+  360,
+  834,
+  1024,
+];
+
+const getDefaultSharpArgs = () => ({
+  quality: 90,
+});
 
 const findFilesystemNode = ({ node, getNode }) => {
   // Find the filesystem node.
@@ -88,11 +98,73 @@ const supportedExtensions = {
   tiff: true,
 };
 
-const srcSetBreakpoints = [
-  360,
-  834,
-  1024,
-];
+const fluid = async ({
+  file,
+  args = {},
+  reporter,
+}) => {
+  let srcWebp;
+  let srcSetWebp;
+  const { toFormat, ...restArgs } = args;
+  if (toFormat === 'webp') {
+    ({ src: srcWebp, srcSet: srcSetWebp } = await sharpFluid({
+      file,
+      args: {
+        ...getDefaultSharpArgs(),
+        ...restArgs,
+      },
+      reporter,
+    }));
+  }
+  const result = await sharpFluid({
+    file,
+    args: {
+      ...getDefaultSharpArgs(),
+      ...restArgs,
+    },
+    reporter,
+  });
+  return {
+    fluid: {
+      ...result,
+      ...(toFormat === 'webp' ? { srcWebp, srcSetWebp } : {}),
+    },
+  };
+};
+
+const fixed = async ({
+  file,
+  args = {},
+  reporter,
+}) => {
+  let srcWebp; let
+    srcSetWebp;
+  const { toFormat, ...restArgs } = args;
+  if (toFormat === 'webp') {
+    ({ src: srcWebp, srcSet: srcSetWebp } = await sharpFixed({
+      file,
+      args: {
+        ...getDefaultSharpArgs(),
+        ...restArgs,
+      },
+      reporter,
+    }));
+  }
+  const result = await sharpFixed({
+    file,
+    args: {
+      ...getDefaultSharpArgs(),
+      ...restArgs,
+    },
+    reporter,
+  });
+  return {
+    fixed: {
+      ...result,
+      ...(toFormat === 'webp' ? { srcWebp, srcSetWebp } : {}),
+    },
+  };
+};
 
 const generateGatsbyImage = async ({ file, preset, reporter }, options) => {
   // skip image generation when unknown preset is passed
@@ -102,115 +174,106 @@ const generateGatsbyImage = async ({ file, preset, reporter }, options) => {
   const { sharpArgs } = options;
   switch (preset) {
     case GatsbyImagePresets.Fixed:
-      return {
-        fixed: await fixed({
-          file,
-          args: {
-            base64: true,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fixed({
+        file,
+        args: {
+          base64: true,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.FixedNoBase64:
-      return {
-        fixed: await fixed({
-          file,
-          args: {
-            base64: false,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fixed({
+        file,
+        args: {
+          base64: false,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.FixedTracedSVG:
-      return {
-        fixed: await fixed({
-          file,
-          args: {
-            generateTracedSVG: true,
-            tracedSVG: true,
-            base64: false,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fixed({
+        file,
+        args: {
+          generateTracedSVG: true,
+          tracedSVG: true,
+          base64: false,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.FixedWithWebp:
-      return {
-        fixed: await fixed({
-          file,
-          args: {
-            toFormat: 'webp',
-            base64: true,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fixed({
+        file,
+        args: {
+          toFormat: 'webp',
+          base64: true,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.FixedWithWebpNoBase64:
-      return {
-        fixed: await fixed({
-          file,
-          args: {
-            toFormat: 'webp',
-            base64: false,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fixed({
+        file,
+        args: {
+          toFormat: 'webp',
+          base64: false,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.FixedWithWebpTracedSVG:
-      return {
-        fixed: await fixed({
-          file,
-          args: {
-            toFormat: 'webp',
-            generateTracedSVG: true,
-            tracedSVG: true,
-            base64: false,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fixed({
+        file,
+        args: {
+          toFormat: 'webp',
+          generateTracedSVG: true,
+          tracedSVG: true,
+          base64: false,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.Fluid:
-      return {
-        fluid: await fluid({
-          file,
-          args: {
-            base64: true,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fluid({
+        file,
+        args: {
+          base64: true,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.FluidNoBase64:
-      return {
-        fluid: await fluid({
-          file,
-          args: {
-            base64: false,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fluid({
+        file,
+        args: {
+          base64: false,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.FluidTracedSVG:
-      return {
-        fluid: await fluid({
-          file,
-          args: {
-            generateTracedSVG: true,
-            tracedSVG: true,
-            base64: false,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fluid({
+        file,
+        args: {
+          generateTracedSVG: true,
+          tracedSVG: true,
+          base64: false,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.FluidWithWebp:
-      const { src: srcWebp, srcSet: srcSetWebp } = await fluid({
+      return fluid({
         file,
         args: {
           toFormat: 'webp',
@@ -219,47 +282,30 @@ const generateGatsbyImage = async ({ file, preset, reporter }, options) => {
         },
         reporter,
       });
-      const fallback = await fluid({
+    case GatsbyImagePresets.FluidWithWebpNoBase64:
+      return fluid({
         file,
         args: {
+          toFormat: 'webp',
+          base64: false,
           srcSetBreakpoints,
           ...sharpArgs,
         },
         reporter,
       });
-      return {
-        fluid: {
-          ...fallback,
-          srcWebp,
-          srcSetWebp,
-        },
-      };
-    case GatsbyImagePresets.FluidWithWebpNoBase64:
-      return {
-        fluid: await fluid({
-          file,
-          args: {
-            toFormat: 'webp',
-            base64: false,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
     case GatsbyImagePresets.FluidWithWebpTracedSVG:
-      return {
-        fluid: await fluid({
-          file,
-          args: {
-            toFormat: 'webp',
-            generateTracedSVG: true,
-            tracedSVG: true,
-            base64: false,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fluid({
+        file,
+        args: {
+          toFormat: 'webp',
+          generateTracedSVG: true,
+          tracedSVG: true,
+          base64: false,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     default:
       return undefined;
   }
