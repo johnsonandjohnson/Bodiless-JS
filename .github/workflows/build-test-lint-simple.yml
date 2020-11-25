@@ -39,12 +39,13 @@ jobs:
 
       - name: Build
         run: npm run setup
-#      - name: Lint
-#        run: npm run lint
+
+      - name: Lint
+        run: npm run lint
+
       - name: Test
         run: npm run test --quiet --colors
 
-#
-#      - name: Cypress tests
-#        run: |
-#          npm run test:ci
+      - name: Cypress tests
+        run: |
+          npm run test:ci
