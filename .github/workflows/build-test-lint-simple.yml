@@ -2,7 +2,6 @@ name: Build, Test, Lint for Pull Requests
 env:
   CI: true
   FORCE_COLOR: 1
-  BODILESS_BACKEND_TMP: ./temp
 
 on:
   pull_request:
@@ -33,10 +32,6 @@ jobs:
       - name: Print Git Version
         run: git --version
 
-      - name: Creat temp directory For test
-        run: mkdir ./temp
-
-
       - name: Git Log
         run: git log  --pretty=oneline | head -n 10
 
@@ -45,12 +40,11 @@ jobs:
 
       - name: Build
         run: npm run setup
-
+#      - name: Lint
+#        run: npm run lint
       - name: Test
         run: npm run test --quiet --colors
 
-#      - name: Lint
-#        run: npm run lint
 #
 #      - name: Cypress tests
 #        run: |
