@@ -22,6 +22,9 @@ jobs:
         run: |
           npm i -g @bahmutov/print-env@2
           print-env GITHUB BUILD ACTIONS || true
+      # just so we learn about available environment variables GitHub provides
+      - name: Print Git Version
+        run: echo `git --version`
 
       - name: Install dependencies
         env:
