@@ -66,7 +66,7 @@ export class DefaultContentNode<D extends object> implements ContentNode<D> {
     this.actions = actions;
     this.getters = getters;
     const path$1 = path || [];
-    this.path = Array.isArray(path$1) ? path$1 : [path$1];
+    this.path = Array.isArray(path$1) ? path$1 : path$1.split('$');
   }
 
   peer<E extends object>(path: Path) {

@@ -73,7 +73,7 @@ const defaultImagePickerUI = {
 };
 
 // DropZonePlugin control the upload of file and only saves jpg/png files.
-function DropZonePlugin({ formApi, targetFieldName, ui }: {
+export function DropZonePlugin({ formApi, targetFieldName, ui }: {
   formApi: FormApi<Data>;
   targetFieldName:string;
   ui?: Partial<TImagePickerUI>;
@@ -175,13 +175,13 @@ const options: BodilessOptions<Props, Data> = {
   icon: 'image',
   label: 'Select',
   groupLabel: 'Image',
+  formTitle: 'Image',
   name: 'Image',
   renderForm: ({ ui: formUi, formApi, componentProps }) => {
     const { ui: imagePickerUI } = componentProps;
-    const { ComponentFormTitle, ComponentFormLabel, ComponentFormText } = getUI(formUi);
+    const { ComponentFormLabel, ComponentFormText } = getUI(formUi);
     return (
       <>
-        <ComponentFormTitle>Image</ComponentFormTitle>
         <ComponentFormLabel htmlFor="image-src">Src</ComponentFormLabel>
         <ComponentFormText field="src" id="image-src" />
         <ComponentFormLabel htmlFor="image-alt">Alt</ComponentFormLabel>

@@ -1,4 +1,6 @@
-module.exports = {
+const { mergeWithBodilessConfigs } = require('@bodiless/gatsby-theme-bodiless/dist/tailwindcss');
+
+module.exports = mergeWithBodilessConfigs({
   future: {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true,
@@ -19,7 +21,6 @@ module.exports = {
   */
 
   theme: {
-
     /*
     |---------------------------------------------------------------------------
     | Colors                                https://tailwindcss.com/docs/colors
@@ -515,4 +516,4 @@ module.exports = {
 
   plugins: [
   ],
-};
+});

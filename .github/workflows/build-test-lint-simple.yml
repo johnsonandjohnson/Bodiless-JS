@@ -1,0 +1,44 @@
+name: Build, Test, Lint for Pull Requests
+
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  setup:
+    name: Setup, Build, Lint and Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # install a specific version of Node using
+      # https://github.com/actions/setup-node
+      - name: Use Node.js v12
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      # just so we learn about available environment variables GitHub provides
+      - name: Print CI env variables
+        run: |
+          npm i -g @bahmutov/print-env@2
+          print-env GITHUB BUILD ACTIONS || true
+
+      - name: Install dependencies
+        env:
+          # make sure every Cypress install prints minimal information
+          CI: 1
+        run: |
+          npm ci
+
+      - name: Build
+        run: npm run setup
+
+      - name: Test
+        run: npm run test --verbose
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Cypress tests
+        run: |
+          npm run test:ci

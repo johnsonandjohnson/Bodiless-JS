@@ -12,9 +12,12 @@
  * limitations under the License.
  */
 
-module.exports = {
-  plugins: [
-    // eslint-disable-next-line
-    require('tailwindcss')('tailwind.config.js'),
-  ],
+import { getTailwindConfigs, getBodilessConfigs } from './getBodilessConfigs';
+import { mergeConfigs, mergeWithBodilessConfigs } from './mergeConfigs';
+
+export {
+  getTailwindConfigs,
+  getBodilessConfigs,
+  mergeConfigs,
+  mergeWithBodilessConfigs,
 };

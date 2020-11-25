@@ -11,10 +11,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { flow } from 'lodash';
+import {
+  withTitle,
+  withDesc,
+} from '@bodiless/layouts';
+import {
+  varyDesign,
+  replaceWith,
+  withDesign,
+} from '@bodiless/fclasses';
 
-module.exports = {
-  plugins: [
-    // eslint-disable-next-line
-    require('tailwindcss')('tailwind.config.js'),
-  ],
+import SocialShare from '../SocialShare';
+import { withType } from './Categories';
+
+const socialShareVariation = {
+  SocialShare: flow(
+    replaceWith(SocialShare),
+    withType('SocialShare')(),
+    withTitle('SocialShare'),
+    withDesc('Social Share Component.'),
+  ),
 };
+
+export default withDesign(varyDesign(
+  socialShareVariation,
+)());
