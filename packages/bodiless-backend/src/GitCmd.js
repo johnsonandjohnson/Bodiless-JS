@@ -68,7 +68,7 @@ class GitCmd {
           return;
         }
         // Allow plumbing commands with --quiet flag to return either 0 or 1.
-        if (this.params.includes('--quiet') || 1) {
+        if (this.params.includes('--quiet')) {
           resolve({ stdout, stderr, code });
           return;
         }
