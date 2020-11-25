@@ -184,7 +184,9 @@ const getConflicts = async (target = 'upstream') => {
   // const remoteUrl = await getRemote('origin');
   const logger = new Logger('BACKEND');
   const tmpDir = path.resolve(process.env.BODILESS_BACKEND_TMP || os.tmpdir(), v1());
+  console.log('the temp dir is', tmpDir);
   const originalDir = process.cwd();
+  console.log(originalDir);
   await GitCmd.cmd().add('fetch', 'origin').exec();
   // @todo: fs directory existence check.
   const branch = await getCurrentBranch();
