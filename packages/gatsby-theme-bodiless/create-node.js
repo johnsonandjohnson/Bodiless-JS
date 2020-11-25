@@ -111,6 +111,7 @@ const fluid = async ({
       file,
       args: {
         ...getDefaultSharpArgs(),
+        toFormat,
         ...restArgs,
       },
       reporter,
@@ -145,6 +146,7 @@ const fixed = async ({
       file,
       args: {
         ...getDefaultSharpArgs(),
+        toFormat,
         ...restArgs,
       },
       reporter,
