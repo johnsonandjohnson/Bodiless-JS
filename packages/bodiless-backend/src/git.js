@@ -191,6 +191,7 @@ const getConflicts = async (target = 'upstream') => {
   const branch = await getCurrentBranch();
   const upstreamBranch = await getUpstreamTrackingBranch(branch);
   if (!upstreamBranch) {
+    console.log('tNo upstream branch found for current branch', tmpDir);
     throw new Error(`No upstream branch found for current branch ${branch}.
       Please contact your server administrator`);
   }
@@ -232,6 +233,7 @@ const getConflicts = async (target = 'upstream') => {
 
       break;
     default:
+      console.log('in default: Invalid target branch value, must be edit or upstream');
       throw new Error('Invalid target branch value, must be `edit` or `upstream`.');
   }
 
@@ -245,6 +247,7 @@ const getConflicts = async (target = 'upstream') => {
 
   await clone(rootDir, { directory: tmpDir, branch: targetBranch });
   process.chdir(tmpDir);
+  console.log('Changed directory to temp directory');
   if (files.length) {
     logger.log([`Copy Files: ${files} ${tmpDir}`, process.cwd()]);
     copyfiles(
@@ -252,6 +255,7 @@ const getConflicts = async (target = 'upstream') => {
       { error: true, up: (rootDir.match(/\//g) || []).length + 1 },
       (err) => {
         if (err) {
+          console.log('Error copying uncommitted files', err);
           throw new Error(`Error copying uncommitted files ${err}.`);
         }
       },

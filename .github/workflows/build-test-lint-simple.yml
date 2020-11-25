@@ -16,7 +16,6 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-
       # install a specific version of Node using
       # https://github.com/actions/setup-node
       - name: Use Node.js v12.19

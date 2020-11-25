@@ -14,33 +14,30 @@
 
 import { cloneGitFixture, cleanGitFixture } from './tools';
 
-const {
-  // getConflicts,
-  getUpstreamTrackingBranch,
-} = require('../src/git');
+const { getConflicts, getUpstreamTrackingBranch } = require('../src/git');
 const GitCmd = require('../src/GitCmd');
 
-// describe('getConflicts', () => {
-//   beforeEach(cloneGitFixture('get-conflicts', 'foo-test-1'));
-//
-//   afterEach(cleanGitFixture('get-conflicts'));
-//
-//   it('returns conflict files when conflict exists', async () => {
-//     const result = await getConflicts();
-//     expect(result.hasConflict).toBeTruthy();
-//     expect(result.files).toHaveLength(1);
-//     expect(result.files[0]).toMatch(/foo.txt$/);
-//   });
-//
-//   it('returns conflict false when no conflict', async () => {
-//     await GitCmd.cmd()
-//       .add('checkout', '-b', 'foo-test-2', 'origin/foo-test-2')
-//       .exec();
-//     const result = await getConflicts();
-//     expect(result.hasConflict).toBeFalsy();
-//     expect(result.files).toEqual([]);
-//   });
-// });
+describe('getConflicts', () => {
+  beforeEach(cloneGitFixture('get-conflicts', 'foo-test-1'));
+
+  afterEach(cleanGitFixture('get-conflicts'));
+
+  it('returns conflict files when conflict exists', async () => {
+    const result = await getConflicts();
+    expect(result.hasConflict).toBeTruthy();
+    expect(result.files).toHaveLength(1);
+    expect(result.files[0]).toMatch(/foo.txt$/);
+  });
+
+  // it('returns conflict false when no conflict', async () => {
+  //   await GitCmd.cmd()
+  //     .add('checkout', '-b', 'foo-test-2', 'origin/foo-test-2')
+  //     .exec();
+  //   const result = await getConflicts();
+  //   expect(result.hasConflict).toBeFalsy();
+  //   expect(result.files).toEqual([]);
+  // });
+});
 
 describe('getUpstreamBranch', () => {
   const branch = 'foo-test-upstream-tracking';
