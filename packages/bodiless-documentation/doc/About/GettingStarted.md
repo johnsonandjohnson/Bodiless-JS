@@ -102,6 +102,6 @@ Visit http://localhost:9000/ in your browser to view the site.
 - [Step-by-step walkthrough of site building](../Development/Guides/SiteBuildBasics)
 - [More ways to launch sites](../Development/LocalSites.md)
 - [Read our Core Principles](./CorePrinciples).
-- [Understand our Platform Architecture](../Development/Architecture).
+- [Understand our Platform Architecture](../Development/Architecture/).
 
 
