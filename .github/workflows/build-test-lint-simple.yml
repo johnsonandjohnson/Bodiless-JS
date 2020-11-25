@@ -4,10 +4,14 @@ on:
   pull_request:
     branches:
       - main
+  env:
+    CI: true
 jobs:
   setup:
     name: Setup, Build, Lint and Test
     runs-on: ubuntu-16.04
+    env:
+      FORCE_COLOR: 1
     steps:
       - uses: actions/checkout@v2
 
@@ -22,31 +26,22 @@ jobs:
         run: |
           npm i -g @bahmutov/print-env@2
           print-env GITHUB BUILD ACTIONS || true
-      # just so we learn about available environment variables GitHub provides
+
       - name: Print Git Version
-        run: echo `git --version`
+        run: git --version
 
       - name: Install dependencies
-        env:
-          # make sure every Cypress install prints minimal information
-          CI: 1
-        run: |
-          npm ci
+        run: npm ci
 
       - name: Build
         run: npm run setup
-        env:
-          TERM: xterm
 
       - name: Test
         run: npm run test --colors
-        env:
-          TERM: xterm
 
       - name: Lint
         run: npm run lint
-        env:
-          TERM: xterm
+
       - name: Cypress tests
         run: |
           npm run test:ci
