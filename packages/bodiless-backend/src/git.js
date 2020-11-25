@@ -181,7 +181,6 @@ const clone = async (url, options = {}) => {
  * @return {object} Results.
  */
 const getConflicts = async (target = 'upstream') => {
-  // const remoteUrl = await getRemote('origin');
   const logger = new Logger('BACKEND');
   const tmpDir = path.resolve(process.env.BODILESS_BACKEND_TMP || os.tmpdir(), v1());
   console.log('the temp dir is', tmpDir);

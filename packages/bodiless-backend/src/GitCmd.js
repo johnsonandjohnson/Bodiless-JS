@@ -72,7 +72,6 @@ class GitCmd {
           resolve({ stdout, stderr, code });
           return;
         }
-
         const error = new Error(`${stderr}`);
         error.code = `${code}`;
         error.info = { stdout, stderr, code };

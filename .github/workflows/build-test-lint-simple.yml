@@ -20,10 +20,10 @@ jobs:
 
       # install a specific version of Node using
       # https://github.com/actions/setup-node
-      - name: Use Node.js v12
+      - name: Use Node.js v12.19
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 12.19
       # just so we learn about available environment variables GitHub provides
       - name: Print CI env variables
         run: |
