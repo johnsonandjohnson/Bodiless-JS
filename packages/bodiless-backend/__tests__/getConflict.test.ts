@@ -24,7 +24,6 @@ describe('getConflicts', () => {
 
   it('returns conflict files when conflict exists', async () => {
     const result = await getConflicts();
-    console.log(result);
     expect(result.hasConflict).toBeTruthy();
     expect(result.files).toHaveLength(1);
     expect(result.files[0]).toMatch(/foo.txt$/);
@@ -35,7 +34,6 @@ describe('getConflicts', () => {
       .add('checkout', '-b', 'feat/foo-test-2', 'origin/feat/foo-test-2')
       .exec();
     const result = await getConflicts();
-    console.log(result);
     expect(result.hasConflict).toBeFalsy();
     expect(result.files).toEqual([]);
   });
@@ -43,9 +41,9 @@ describe('getConflicts', () => {
 
 describe('getUpstreamBranch', () => {
   const branch = 'feat/foo-test-upstream-tracking';
-  beforeEach(cloneGitFixture('get-conflicts-b', branch));
+  beforeEach(cloneGitFixture('get-conflicts', branch));
 
-  afterEach(cleanGitFixture('get-conflicts-b'));
+  afterEach(cleanGitFixture('get-conflicts'));
 
   it('returns remote tracking branch name', async () => {
     const result = await getUpstreamTrackingBranch(branch);
