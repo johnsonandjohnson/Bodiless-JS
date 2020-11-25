@@ -1,6 +1,7 @@
 name: Build, Test, Lint for Pull Requests
 env:
   CI: true
+  FORCE_COLOR: 1
 
 on:
   pull_request:
@@ -11,8 +12,6 @@ jobs:
   setup:
     name: Setup, Build, Lint and Test
     runs-on: ubuntu-16.04
-    env:
-      FORCE_COLOR: 1
     steps:
       - uses: actions/checkout@v2
 
@@ -38,7 +37,7 @@ jobs:
         run: npm run setup
 
       - name: Test
-        run: npm run test --colors
+        run: npm run test --quiet --colors
 
       - name: Lint
         run: npm run lint
