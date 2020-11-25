@@ -28,7 +28,7 @@ jobs:
       - name: Print CI env variables
         run: |
           npm i -g @bahmutov/print-env@2
-          print-env GITHUB BUILD ACTIONS || true
+          print-env BODILESS GITHUB BUILD ACTIONS || true
 
       - name: Print Git Version
         run: git --version
