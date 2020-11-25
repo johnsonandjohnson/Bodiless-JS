@@ -44,9 +44,9 @@ jobs:
       - name: Test
         run: npm run test --quiet --colors
 
-      - name: Lint
-        run: npm run lint
-
-      - name: Cypress tests
-        run: |
-          npm run test:ci
+#      - name: Lint
+#        run: npm run lint
+#
+#      - name: Cypress tests
+#        run: |
+#          npm run test:ci
