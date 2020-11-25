@@ -18,7 +18,7 @@ const { getConflicts, getUpstreamTrackingBranch } = require('../src/git');
 const GitCmd = require('../src/GitCmd');
 
 describe('getConflicts', () => {
-  beforeEach(cloneGitFixture('get-conflicts', 'feat/foo-test-1'));
+  beforeEach(cloneGitFixture('get-conflicts', 'foo-test-1'));
 
   afterEach(cleanGitFixture('get-conflicts'));
 
@@ -31,7 +31,7 @@ describe('getConflicts', () => {
 
   it('returns conflict false when no conflict', async () => {
     await GitCmd.cmd()
-      .add('checkout', '-b', 'feat/foo-test-2', 'origin/feat/foo-test-2')
+      .add('checkout', '-b', 'foo-test-2', 'origin/foo-test-2')
       .exec();
     const result = await getConflicts();
     expect(result.hasConflict).toBeFalsy();
@@ -40,7 +40,7 @@ describe('getConflicts', () => {
 });
 
 describe('getUpstreamBranch', () => {
-  const branch = 'feat/foo-test-upstream-tracking';
+  const branch = 'foo-test-upstream-tracking';
   beforeEach(cloneGitFixture('get-conflicts', branch));
 
   afterEach(cleanGitFixture('get-conflicts'));
@@ -51,7 +51,7 @@ describe('getUpstreamBranch', () => {
 
     // Check out another branch.
     await GitCmd.cmd()
-      .add('checkout', '-b', 'feat/foo-test-2', 'origin/feat/foo-test-2')
+      .add('checkout', '-b', 'foo-test-2', 'origin/foo-test-2')
       .exec();
 
     // Still tracking the original upstream branch.
