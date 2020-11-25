@@ -24,6 +24,7 @@ describe('getConflicts', () => {
 
   it('returns conflict files when conflict exists', async () => {
     const result = await getConflicts();
+    console.log(result);
     expect(result.hasConflict).toBeTruthy();
     expect(result.files).toHaveLength(1);
     expect(result.files[0]).toMatch(/foo.txt$/);
@@ -34,35 +35,36 @@ describe('getConflicts', () => {
       .add('checkout', '-b', 'feat/foo-test-2', 'origin/feat/foo-test-2')
       .exec();
     const result = await getConflicts();
+    console.log(result);
     expect(result.hasConflict).toBeFalsy();
     expect(result.files).toEqual([]);
   });
 });
 
-describe('getUpstreamBranch', () => {
-  const branch = 'feat/foo-test-upstream-tracking';
-  beforeEach(cloneGitFixture('get-conflicts', branch));
-
-  afterEach(cleanGitFixture('get-conflicts'));
-
-  it('returns remote tracking branch name', async () => {
-    const result = await getUpstreamTrackingBranch(branch);
-    expect(result).toBe(`origin/${branch}`);
-
-    // Check out another branch.
-    await GitCmd.cmd()
-      .add('checkout', '-b', 'feat/foo-test-2', 'origin/feat/foo-test-2')
-      .exec();
-
-    // Still tracking the original upstream branch.
-    const result1 = await getUpstreamTrackingBranch(branch);
-    expect(result1).toBe(`origin/${branch}`);
-
-    // Empty upstream branch name returned after tracking branch removed.
-    await GitCmd.cmd()
-      .add('branch', '--unset-upstream', branch)
-      .exec();
-    const result2 = await getUpstreamTrackingBranch(branch);
-    expect(result2).toBe('');
-  });
-});
+// describe('getUpstreamBranch', () => {
+//   const branch = 'feat/foo-test-upstream-tracking';
+//   beforeEach(cloneGitFixture('get-conflicts', branch));
+//
+//   afterEach(cleanGitFixture('get-conflicts'));
+//
+//   it('returns remote tracking branch name', async () => {
+//     const result = await getUpstreamTrackingBranch(branch);
+//     expect(result).toBe(`origin/${branch}`);
+//
+//     // Check out another branch.
+//     await GitCmd.cmd()
+//       .add('checkout', '-b', 'feat/foo-test-2', 'origin/feat/foo-test-2')
+//       .exec();
+//
+//     // Still tracking the original upstream branch.
+//     const result1 = await getUpstreamTrackingBranch(branch);
+//     expect(result1).toBe(`origin/${branch}`);
+//
+//     // Empty upstream branch name returned after tracking branch removed.
+//     await GitCmd.cmd()
+//       .add('branch', '--unset-upstream', branch)
+//       .exec();
+//     const result2 = await getUpstreamTrackingBranch(branch);
+//     expect(result2).toBe('');
+//   });
+// });
