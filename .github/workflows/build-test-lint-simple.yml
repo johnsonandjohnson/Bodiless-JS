@@ -30,6 +30,9 @@ jobs:
       - name: Print Git Version
         run: git --version
 
+      - name: Git Log
+        run: git log  --pretty=oneline | tail -n 10
+
       - name: Install dependencies
         run: npm ci
 
