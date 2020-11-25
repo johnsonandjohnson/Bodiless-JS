@@ -1,11 +1,12 @@
 name: Build, Test, Lint for Pull Requests
+env:
+  CI: true
 
 on:
   pull_request:
     branches:
       - main
-  env:
-    CI: true
+
 jobs:
   setup:
     name: Setup, Build, Lint and Test
