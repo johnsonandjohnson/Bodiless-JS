@@ -169,7 +169,8 @@ const clone = async (url, options = {}) => {
   if (options.branch) cmd.add('-b', options.branch);
   if (options.directory) cmd.add(options.directory);
   logger.log([`Clone to path: ${options.directory}`]);
-  return cmd.exec();
+  const ret = await cmd.exec();
+  return ret;
 };
 
 /**
