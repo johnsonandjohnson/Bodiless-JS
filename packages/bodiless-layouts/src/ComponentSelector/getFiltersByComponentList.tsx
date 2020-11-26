@@ -28,7 +28,7 @@ interface LooseObject {
 const getFiltersByComponentList = (components: any) => {
   const masterList: LooseObject = {};
   components.forEach((component: any) => {
-    const { categories } = component;
+    const { categories = {} } = component;
     Object.keys(categories).forEach(category => {
       if (!(category in masterList)) {
         masterList[category] = [];

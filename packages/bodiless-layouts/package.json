@@ -15,7 +15,7 @@
     "/lib",
     "/doc",
     "/bodiless.docs.json",
-    "/index.tailwind.css"
+    "tailwind.config.js"
   ],
   "repository": {
     "type": "git",
@@ -25,12 +25,10 @@
     "access": "public"
   },
   "scripts": {
-    "build": "npm run build:css && npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
-    "build:css": "postcss index.tailwind.css -o ./src/main.css",
+    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
     "build:api-doc": "typedoc --out doc/api --mode file",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
-    "copy": "copyfiles -u 1 \"./src/**/*.css\" \"./lib/\""
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "peerDependencies": {
     "react": "^16.8.1"
@@ -38,7 +36,6 @@
   "dependencies": {
     "@bodiless/core": "^0.0.60",
     "@bodiless/fclasses": "^0.0.60",
-    "@bodiless/gatsby-theme-bodiless": "^0.0.60",
     "@material/react-material-icon": "^0.15.0",
     "axios": "^0.21.0",
     "html2canvas": "^1.0.0-rc.3",

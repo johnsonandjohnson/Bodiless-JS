@@ -25,6 +25,36 @@ import { TMenuOption } from './Types/ContextMenuTypes';
 type UseEditFormProps<P, D> = P & EditButtonProps<D> & Pick<EditButtonOptions<P, D>, 'renderForm'|'initialValueHandler'|'submitValueHandler'>;
 
 /**
+ * Given a base option, creates a pair of menu options including
+ * the base option and a group which contains it.
+ *
+ * @param baseOption The option for which to create the group.
+ *
+ * @return The base option and a group which contains it.
+ */
+export const createMenuOptionGroup = (
+  baseOption: Omit<EditButtonOptions<any, any>, 'renderForm'>,
+):TMenuOption[] => {
+  const {
+    groupLabel,
+    groupMerge,
+    ...menuOption
+  } = baseOption;
+
+  const menuGroup:TMenuOption = {
+    name: `${menuOption.name}-group`,
+    label: groupLabel || menuOption.label,
+    groupMerge: groupMerge || 'none',
+    local: menuOption.local,
+    global: menuOption.global,
+    Component: 'group',
+  };
+
+  menuOption.group = menuGroup.name;
+  return [menuOption, menuGroup];
+};
+
+/**
  * Generates required props to pass to `ContextMenuForm`
  * using the normal bodiless data handlers. For example:
  * ```
@@ -91,8 +121,6 @@ const createMenuOptionHook = <P extends object, D extends object>(
     const options$ = typeof options === 'function' ? options(props) : options;
     const {
       renderForm,
-      groupLabel,
-      groupMerge,
       initialValueHandler,
       submitValueHandler,
       ...rest
@@ -109,18 +137,7 @@ const createMenuOptionHook = <P extends object, D extends object>(
       handler: () => render,
     };
     if (isActive) menuOption.isActive = isActive;
-    // We always create a custom menu group for this option so we have full control
-    // ovef group label and merge behavior.
-    const menuGroup:TMenuOption = {
-      name: `${menuOption.name}-group`,
-      label: groupLabel || menuOption.label,
-      groupMerge: groupMerge || 'none',
-      local: menuOption.local,
-      global: menuOption.global,
-      Component: 'group',
-    };
-    menuOption.group = menuGroup.name;
-    return [menuOption, menuGroup];
+    return createMenuOptionGroup(menuOption);
   };
 
 /**

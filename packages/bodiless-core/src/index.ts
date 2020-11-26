@@ -19,7 +19,7 @@ import asStatic from './asStatic';
 import asReadOnly from './asReadOnly';
 import {
   useEditContext, useUUID, useContextActivator, useExtendHandler,
-  useGetter,
+  useGetter, useLocalStorage,
 } from './hooks';
 import withNode, { withNodeKey } from './withNode';
 import withSidecarNodes, { startSidecarNodes, endSidecarNodes } from './withSidecarNodes';
@@ -27,7 +27,7 @@ import {
   withDefaultContent,
   withResetButton,
 } from './Contentful';
-import withEditButton, { useEditFormProps } from './withEditButton';
+import withEditButton, { useEditFormProps, createMenuOptionGroup } from './withEditButton';
 import useContextMenuForm, { contextMenuForm, ContextMenuForm } from './contextMenuForm';
 import withCompoundForm, { useRegisterSnippet } from './withCompoundForm';
 import withEditFormSnippet from './withEditFormSnippet';
@@ -49,7 +49,9 @@ import { ifToggledOff, ifToggledOn, withFlowToggle } from './withFlowToggle';
 import { ifEditable, ifReadOnly, useEditToggle } from './withEditToggle';
 import type { ContextMenuFormProps, IContextMenuItemProps, TMenuOption } from './Types/ContextMenuTypes';
 import type { PageEditContextInterface } from './PageEditContext/types';
-import type { EditButtonOptions, EditButtonProps, UseBodilessOverrides } from './Types/EditButtonTypes';
+import type {
+  OptionGroupDefinition, EditButtonOptions, EditButtonProps, UseBodilessOverrides,
+} from './Types/EditButtonTypes';
 import type { TMenuOptionGetter, MenuOptionsDefinition } from './Types/PageContextProviderTypes';
 import type { WithNodeProps, WithNodeKeyProps } from './Types/NodeTypes';
 import type { TOverlaySettings } from './Types/PageOverlayTypes';
@@ -94,6 +96,7 @@ export {
   useContextActivator,
   useUUID,
   withEditButton,
+  createMenuOptionGroup,
   useEditFormProps,
   withNode,
   withNodeKey,
@@ -130,6 +133,7 @@ export {
   useEditToggle,
   useNotifications,
   useNotify,
+  useLocalStorage,
   withExtendHandler,
   useExtendHandler,
   NotificationProvider,
@@ -147,6 +151,7 @@ export type {
   WithNodeProps,
   WithNodeKeyProps,
   EditButtonOptions,
+  OptionGroupDefinition,
   UseBodilessOverrides,
   EditButtonProps,
   TOverlaySettings,
