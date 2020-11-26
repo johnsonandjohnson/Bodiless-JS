@@ -169,8 +169,7 @@ const clone = async (url, options = {}) => {
   if (options.branch) cmd.add('-b', options.branch);
   if (options.directory) cmd.add(options.directory);
   logger.log([`Clone to path: ${options.directory}`]);
-  const ret = await cmd.exec();
-  return ret;
+  return cmd.exec();
 };
 
 /**
@@ -182,26 +181,20 @@ const clone = async (url, options = {}) => {
  * @return {object} Results.
  */
 const getConflicts = async (target = 'upstream') => {
+  // const remoteUrl = await getRemote('origin');
   const logger = new Logger('BACKEND');
   const tmpDir = path.resolve(process.env.BODILESS_BACKEND_TMP || os.tmpdir(), v1());
-  console.log('1 the temp dir is', tmpDir);
   const originalDir = process.cwd();
-  console.log(originalDir);
-  console.log('2 executing git fetch origin');
-  await GitCmd.cmd().add('fetch', 'origin').exec();
+
   // @todo: fs directory existence check.
-  console.log('3 executing getCurrentBranch');
   const branch = await getCurrentBranch();
-  console.log('4 executing getUpstreamTrackingBranch');
   const upstreamBranch = await getUpstreamTrackingBranch(branch);
   if (!upstreamBranch) {
-    console.log('5 tNo upstream branch found for current branch', tmpDir);
     throw new Error(`No upstream branch found for current branch ${branch}.
       Please contact your server administrator`);
   }
-  console.log('6 executing \'rev-parse\', \'--show-toplevel\'');
+
   const rootResult = await GitCmd.cmd().add('rev-parse', '--show-toplevel').exec();
-  console.log('executing getGitCmdOutputString');
   const rootDir = getGitCmdOutputString(rootResult);
   logger.log([`Repo root: ${rootDir}`]);
 
@@ -226,12 +219,10 @@ const getConflicts = async (target = 'upstream') => {
 
       break;
     case 'upstream':
-      console.log('7 executing upstreamBranch.replace');
       targetBranch = `origin-${upstreamBranch.replace('origin/', '')}`;
       workBranch = upstreamBranch.replace('origin/', '');
 
       // Create a new branch from remote.
-      console.log('8 executing Fetch origin workbranch targetbranch', workBranch, targetBranch);
       await GitCmd.cmd().add(
         'fetch',
         'origin',
@@ -240,25 +231,19 @@ const getConflicts = async (target = 'upstream') => {
 
       break;
     default:
-      console.log('in default: Invalid target branch value, must be edit or upstream');
       throw new Error('Invalid target branch value, must be `edit` or `upstream`.');
   }
-  console.log('outside witch');
 
   // Create a tmp origin master mapping branch for new repo merge. Remove after.
   const mergeMasterBranch = 'origin-master';
-  console.log('9 outside switch');
   await GitCmd.cmd().add(
     'fetch',
     'origin',
     `master:${mergeMasterBranch}`,
   ).exec();
-  console.log('10 executing clone');
-  await clone(rootDir, { directory: tmpDir, branch: targetBranch });
 
-  console.log('12 Changing dir');
+  await clone(rootDir, { directory: tmpDir, branch: targetBranch });
   process.chdir(tmpDir);
-  console.log('13 Changed directory to temp directory');
   if (files.length) {
     logger.log([`Copy Files: ${files} ${tmpDir}`, process.cwd()]);
     copyfiles(
@@ -266,7 +251,6 @@ const getConflicts = async (target = 'upstream') => {
       { error: true, up: (rootDir.match(/\//g) || []).length + 1 },
       (err) => {
         if (err) {
-          console.log('Error copying uncommitted files', err);
           throw new Error(`Error copying uncommitted files ${err}.`);
         }
       },
@@ -281,12 +265,10 @@ const getConflicts = async (target = 'upstream') => {
 
   let conflictFiles = [];
   try {
-    console.log('14 in try block');
     await GitCmd.cmd()
       .add('merge', '--no-commit', '--no-ff', 'origin/origin-master')
       .exec();
   } catch (e) {
-    console.log('15 in Catch block and e is ', e);
     const conflictResult = await GitCmd.cmd()
       .add('diff', '--name-only', '--diff-filter=U')
       .exec();
@@ -295,10 +277,9 @@ const getConflicts = async (target = 'upstream') => {
       .add('merge', '--abort')
       .exec();
   }
-  console.log('16 outside try catch');
+
   // cleanup tmp repo and branches.
   process.chdir(rootDir);
-  console.log('17 outside try catch');
   await GitCmd.cmd()
     .add(
       'branch',
@@ -308,7 +289,6 @@ const getConflicts = async (target = 'upstream') => {
       `${targetBranch}`,
     )
     .exec();
-  console.log('17 cleaning up');
   rimraf.sync(tmpDir);
   logger.log(`${tmpDir} removed.`);
 

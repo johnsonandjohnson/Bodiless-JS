@@ -29,14 +29,14 @@ describe('getConflicts', () => {
     expect(result.files[0]).toMatch(/foo.txt$/);
   });
 
-  // it('returns conflict false when no conflict', async () => {
-  //   await GitCmd.cmd()
-  //     .add('checkout', '-b', 'feat/foo-test-2', 'origin/feat/foo-test-2')
-  //     .exec();
-  //   const result = await getConflicts();
-  //   expect(result.hasConflict).toBeFalsy();
-  //   expect(result.files).toEqual([]);
-  // });
+  it('returns conflict false when no conflict', async () => {
+    await GitCmd.cmd()
+      .add('checkout', '-b', 'feat/foo-test-2', 'origin/feat/foo-test-2')
+      .exec();
+    const result = await getConflicts();
+    expect(result.hasConflict).toBeFalsy();
+    expect(result.files).toEqual([]);
+  });
 });
 
 describe('getUpstreamBranch', () => {
