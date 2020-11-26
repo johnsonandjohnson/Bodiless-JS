@@ -158,14 +158,14 @@ const getChanges = async () => {
  */
 const clone = async (url, options = {}) => {
   const logger = new Logger('BACKEND');
-  // let result = await GitCmd.cmd().add('config', '--get', 'user.name').exec();
-  // const configName = result.stdout.trim().replace('\n', '');
-  // result = await GitCmd.cmd().add('config', '--get', 'user.email').exec();
-  // const configEmail = result.stdout.trim().replace('\n', '');
+  let result = await GitCmd.cmd().add('config', '--get', 'user.name').exec();
+  const configName = result.stdout.trim().replace('\n', '');
+  result = await GitCmd.cmd().add('config', '--get', 'user.email').exec();
+  const configEmail = result.stdout.trim().replace('\n', '');
 
   const cmd = GitCmd.cmd().add('clone', url);
-  // cmd.add('--config', `user.email=${configEmail}`);
-  // cmd.add('--config', `user.name=${configName}`);
+  cmd.add('--config', `user.email=${configEmail}`);
+  cmd.add('--config', `user.name=${configName}`);
   if (options.branch) cmd.add('-b', options.branch);
   if (options.directory) cmd.add(options.directory);
   logger.log([`Clone to path: ${options.directory}`]);

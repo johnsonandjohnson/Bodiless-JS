@@ -31,8 +31,16 @@ jobs:
       - name: Print Git Version
         run: git --version
 
-      - name: Git Log
-        run: git log  --pretty=oneline | head -n 10
+      - name: Setup git user
+        run: |
+          git config --global user.name "$(git --no-pager log --format=format:'%an' -n 1)"
+          git config --global user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
+
+      - name: Git Info
+        run: |
+          git log  --pretty=oneline | head -n 10
+          git config --get user.name
+          git config --get user.email
 
       - name: Install dependencies
         run: npm ci
