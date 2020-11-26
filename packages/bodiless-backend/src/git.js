@@ -186,17 +186,21 @@ const getConflicts = async (target = 'upstream') => {
   console.log('the temp dir is', tmpDir);
   const originalDir = process.cwd();
   console.log(originalDir);
+  console.log('executing git fetch origin');
   await GitCmd.cmd().add('fetch', 'origin').exec();
   // @todo: fs directory existence check.
+  console.log('executing getCurrentBranch');
   const branch = await getCurrentBranch();
+  console.log('executing getUpstreamTrackingBranch');
   const upstreamBranch = await getUpstreamTrackingBranch(branch);
   if (!upstreamBranch) {
     console.log('tNo upstream branch found for current branch', tmpDir);
     throw new Error(`No upstream branch found for current branch ${branch}.
       Please contact your server administrator`);
   }
-
+  console.log('executing \'rev-parse\', \'--show-toplevel\'');
   const rootResult = await GitCmd.cmd().add('rev-parse', '--show-toplevel').exec();
+  console.log('executing getGitCmdOutputString');
   const rootDir = getGitCmdOutputString(rootResult);
   logger.log([`Repo root: ${rootDir}`]);
 
