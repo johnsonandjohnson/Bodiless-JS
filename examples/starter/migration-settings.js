@@ -16,12 +16,19 @@ module.exports = {
   /**
    * page url that should be scraped
    */
-  url: 'https://example.com/',
+  url: 'http://aesq.ucxp.com/',
+  steps: {
+    setup: false,
+    scrape: true,
+    build: true,
+    serve: false,
+  },
   /**
    * crawler settings
    */
   crawler: {
-    maxDepth: 1,
+    maxDepth: 100,
+    maxConcurrency: 1,
   },
   /**
    * page creator settings
@@ -41,6 +48,7 @@ module.exports = {
      */
     // pageIndexFile: pagePath => (new URL(pagePath)).pathname === '/' ? 'home.jsx' : 'default.jsx',
   },
+  htmltojsx: 'true',
   transformers: [
   ],
 };

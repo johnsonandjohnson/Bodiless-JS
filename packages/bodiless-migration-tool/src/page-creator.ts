@@ -16,6 +16,7 @@
 import fs from 'fs';
 import path from 'path';
 import url from 'url';
+import { flatten } from 'lodash';
 // @ts-ignore: html-to-react-components does not have type definitions
 import HtmlToJsx from 'html-to-react-components/lib/html2jsx';
 import {
@@ -39,6 +40,7 @@ import {
 } from './html-to-components';
 import ResourcesFromCssExtractor from './resources-from-css';
 import debug from './debug';
+import { EvaluateImage } from './evaluate-page';
 
 const DEFAULT_PAGE_INDEX_FILE = 'index.jsx';
 
@@ -68,7 +70,7 @@ export type PageCreatorParams = {
   inlineScripts: Array<string>,
   styles: Array<string>,
   inlineStyles: Array<string>,
-  images: Array<string>,
+  images: Array<EvaluateImage>,
   videos?: Array<string>,
   htmlTag: string,
   bodyTag: string,
@@ -78,6 +80,19 @@ export type PageCreatorParams = {
   reservedPaths?: Array<string>,
   allowFallbackHtml?: boolean,
 };
+
+type PageAsset = {
+  pagePath: string,
+  targetPath: string,
+  alt?: string,
+};
+
+enum AssetType {
+  IMAGE,
+  VIDEO,
+  SCRIPT,
+  CSS,
+}
 
 export class PageCreator {
   params: PageCreatorParams;
@@ -156,8 +171,41 @@ export class PageCreator {
     return resources;
   }
 
-  private async downloadAssetsGroup(items: Array<string>) {
-    await this.downloader.downloadFiles(items);
+  private assetToJson = (assets: PageAsset[]): void => {
+  };
+
+  private async downloadAssetsGroup(items: (Array<any>), type?: AssetType) {
+    if (!items.length) {
+      return;
+    }
+    let urls: string[] = [];
+    let alternateTexts: { [key: string]: string};
+    switch (type) {
+      case AssetType.IMAGE:
+        urls = flatten(items.map((item: EvaluateImage) => item.src));
+        items.forEach(item => {
+          alternateTexts = { ...alternateTexts, [item.src]: item.alt };
+        });
+        break;
+      default:
+        urls = items;
+        break;
+    }
+
+    try {
+      const downloaded = await this.downloader.downloadFiles(urls);
+      const downloadedAsset = downloaded.map(download => {
+        const { url: downloadUrl } = download;
+        return {
+          pagePath: this.params.pageUrl,
+          targetPath: download.targetPath.replace(this.params.staticDir, ''),
+          alt: downloadUrl in alternateTexts ? alternateTexts[downloadUrl] : '',
+        };
+      }, this);
+      this.assetToJson(downloadedAsset);
+    } catch (e) {
+      debug(e.message);
+    }
   }
 
   private async downloadAssets() {
@@ -165,7 +213,7 @@ export class PageCreator {
     const cssResources = this.getResourcesFromCSS(this.params.styles);
     await Promise.all(
       [
-        this.downloadAssetsGroup(this.params.images),
+        this.downloadAssetsGroup(this.params.images, AssetType.IMAGE),
         this.downloadAssetsGroup(this.params.videos || []),
         this.downloadAssetsGroup(this.params.scripts),
         this.downloadAssetsGroup(cssResources),

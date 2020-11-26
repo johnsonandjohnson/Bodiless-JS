@@ -12,11 +12,43 @@
  * limitations under the License.
  */
 
+export type EvaluateImage = {
+  src: string[];
+  alt: string;
+};
+
 export default function evaluatePage() {
+  const evaluateImages = (): EvaluateImage[] => {
+    const images = Array.from(document.getElementsByTagName('img'))
+      .map(item => {
+        const src = item.src ? [item.src] : [];
+        if (item.srcset && item.srcset.trim().split(/\s+/)) {
+          src.push(item.srcset.trim().split(/\s+/)[0]);
+        }
+        return ({
+          src,
+          alt: item.alt,
+        });
+      }).filter(item => (item.src.length !== 0));
+    return images;
+  };
+  const evaluatePictures = (): EvaluateImage[] => {
+    const pictures = Array.from(document.getElementsByTagName('source'))
+      .map(item => {
+        const src = item.srcset ? [item.srcset] : [];
+        return ({
+          src,
+          alt: '',
+        });
+      }).filter(item => (item.src.length !== 0));
+    return pictures;
+  };
+
   return {
     processedHtml: document.body.innerHTML,
-    metatags: Array.from(document.getElementsByTagName('meta'))
-      .map(item => item.outerHTML),
+    metatags: Array.from(document.getElementsByTagName('meta')).map(
+      item => item.outerHTML,
+    ),
     scripts: Array.from(document.getElementsByTagName('script'))
       .filter(item => item.src !== '')
       .map(item => item.src),
@@ -32,17 +64,11 @@ export default function evaluatePage() {
     links: Array.from(document.getElementsByTagName('link'))
       .filter(item => item.type !== 'text/css' && item.rel !== 'stylesheet')
       .map(item => item.outerHTML),
-    inlineStyles: Array.from(document.getElementsByTagName('style'))
-      .map(item => item.innerHTML),
-    images: Array.from(document.getElementsByTagName('img'))
-      .map(item => [item.src, item.srcset.trim().split(/\s+/)[0]])
-      // @ts-ignore - this is temporarily, needs review in future
-      .flat()
-      // @ts-ignore - this is temporarily, needs review in future
-      .filter(item => item !== ''),
-    pictures: Array.from(document.getElementsByTagName('source'))
-      .map(item => item.srcset)
-      .filter(item => item !== ''),
+    inlineStyles: Array.from(document.getElementsByTagName('style')).map(
+      item => item.innerHTML,
+    ),
+    images: evaluateImages(),
+    pictures: evaluatePictures(),
     videos: Array.from(document.querySelectorAll('video source, video'))
       // @ts-ignore - this is temporarily, needs review in future
       .map(item => item.src)
