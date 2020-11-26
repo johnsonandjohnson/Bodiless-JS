@@ -1,43 +1,61 @@
 name: Build, Test, Lint for Pull Requests
+env:
+  CI: true
+  FORCE_COLOR: 1
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
+
 jobs:
   setup:
     name: Setup, Build, Lint and Test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
     steps:
       - uses: actions/checkout@v2
-
+        with:
+          fetch-depth: 0
       # install a specific version of Node using
       # https://github.com/actions/setup-node
-      - name: Use Node.js v12
+      - name: Use Node.js v12.19
         uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 12.19
       # just so we learn about available environment variables GitHub provides
       - name: Print CI env variables
         run: |
           npm i -g @bahmutov/print-env@2
-          print-env GITHUB BUILD ACTIONS || true
+          print-env BODILESS GITHUB BUILD ACTIONS || true
+
+      - name: Print Git Version
+        run: git --version
+
+      - name: Setup git user
+        run: |
+          git config --global user.name "$(git --no-pager log --format=format:'%an' -n 1)"
+          git config --global user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
+
+      - name: Git Info
+        run: |
+          git log  --pretty=oneline | head -n 10
+          git config --get user.name
+          git config --get user.email
 
       - name: Install dependencies
-        env:
-          # make sure every Cypress install prints minimal information
-          CI: 1
-        run: |
-          npm ci
+        run: npm ci
 
       - name: Build
         run: npm run setup
 
-      - name: Test
-        run: npm run test --verbose
-
       - name: Lint
         run: npm run lint
+
+      - name: Test
+        run: npm run test --quiet --colors
 
       - name: Cypress tests
         run: |
