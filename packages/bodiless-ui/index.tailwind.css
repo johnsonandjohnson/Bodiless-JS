@@ -53,7 +53,7 @@
   */
  .bl-form-wrapper {
   width: 660px;
-  height: 728px;
+  max-height: 728px;
  }
 
  /**

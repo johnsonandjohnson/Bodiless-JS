@@ -76,8 +76,7 @@ describe('componentSelectorForm', () => {
 
   it('Passes correct onSelect handler to ComponentSelector', () => {
     const { onSelect, closeForm, wrapper } = renderComponentSelectorForm();
-    // @ts-ignore
-    wrapper.prop('onSelect')();
+    wrapper.prop('onSelect')([]);
     expect(onSelect).toHaveBeenCalledTimes(1);
     expect(closeForm).toHaveBeenCalledTimes(1);
   });

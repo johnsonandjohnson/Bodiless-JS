@@ -10,7 +10,7 @@
     "/lib",
     "/bodiless.docs.json",
     "/doc",
-    "/index.tailwind.css"
+    "tailwind.config.js"
   ],
   "repository": {
     "type": "git",
@@ -20,8 +20,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "npm run build:css && npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
-    "build:css": "postcss index.tailwind.css -o ./src/main.css",
+    "build": "npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
     "build:api-doc": "typedoc --out doc/api --mode file",
     "lint": "tslint ./src/**/*.ts?x",
@@ -45,11 +44,11 @@
     "nuka-carousel": "^4.4.7",
     "react-burger-menu": "^2.6.13",
     "react-tag-autocomplete": "^5.12.1",
+    "tailwindcss-aspect-ratio": "^3.0.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "@types/uuid": "^3.4.4",
-    "tailwindcss-aspect-ratio": "^3.0.0"
+    "@types/uuid": "^3.4.4"
   },
   "peerDependencies": {
     "react": "^16.8.4"

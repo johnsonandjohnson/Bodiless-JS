@@ -24,7 +24,6 @@ import {
   ensureDirectoryExistence,
   isUrlExternal,
   mapUrlToFilePath,
-  trimQueryParamsFromUrl,
 } from './helpers';
 import Downloader from './downloader';
 import {
@@ -41,6 +40,7 @@ import {
 import ResourcesFromCssExtractor from './resources-from-css';
 import debug from './debug';
 import { EvaluateImage } from './evaluate-page';
+import type { MigrationApiType } from './migrationApi';
 
 const DEFAULT_PAGE_INDEX_FILE = 'index.jsx';
 
@@ -59,13 +59,17 @@ export type PageCreatorParams = {
    * default: index.jsx
    */
   pageIndexFile?: string | ((pageUrl: string) => string),
+  /**
+   * migration api object
+   * stores path to the directory containing page data
+   */
+  migrationApi: MigrationApiType,
   staticDir: string,
   templatePath: string,
   templateDangerousHtml: string,
   pageUrl: string,
   headHtml: string,
   bodyHtml: string,
-  metatags: Array<string>,
   scripts: Array<string>,
   inlineScripts: Array<string>,
   styles: Array<string>,
@@ -132,15 +136,10 @@ export class PageCreator {
     }
   }
 
-  getPageFilePath(pageUrl: string, fileName?: string): string {
-    let filePath = url.parse(pageUrl).path;
-    if (filePath === undefined) {
-      return '';
-    }
-    filePath = this.removeExtension(filePath);
-    filePath = trimQueryParamsFromUrl(filePath);
+  private getPageFilePath(pageUrl: string, fileName?: string): string {
+    const filePath = this.params.migrationApi.getPagePath(pageUrl);
     const fileName$ = fileName || this.pageIndexFile;
-    return filePath === '/' ? fileName$ : (`${filePath}/${fileName$}`);
+    return filePath === '/' ? fileName$ : path.join(filePath, fileName$);
   }
 
   getHtmlFilePath(pageUrl: string): string {
@@ -221,11 +220,6 @@ export class PageCreator {
     );
   }
 
-  private removeExtension(extensionPath: string) {
-    // https://stackoverflow.com/questions/4250364/how-to-trim-a-file-extension-from-a-string-in-javascript
-    return extensionPath.replace(/\.[^/.]+$/, '');
-  }
-
   private convertToComponents() {
     if (this.params.htmlToComponents && this.params.htmlToComponentsSettings !== undefined) {
       const settings = this.params.htmlToComponentsSettings;
@@ -236,7 +230,7 @@ export class PageCreator {
         .filter(item => item.scope === ComponentScope.Local)
         .map(item => `${item.component}.jsx`);
       const htmlToComponents = new HtmlToComponents(settings);
-      const targetPageJsxPath = path.join(this.params.pagesDir, this.getPageFilePath(this.params.pageUrl, 'Page.jsx'));
+      const targetPageJsxPath = this.getPageFilePath(this.params.pageUrl, 'Page.jsx');
 
       try {
         htmlToComponents.convert(this.params.bodyHtml);
@@ -263,8 +257,7 @@ export class PageCreator {
       localComponents.forEach(component => {
         const sourcePath = path.resolve(sourceComponentsPath, component);
         if (fs.existsSync(sourcePath)) {
-          const pageFilePath = this.getPageFilePath(this.params.pageUrl, component);
-          const targetPath = path.join(this.params.pagesDir, pageFilePath);
+          const targetPath = this.getPageFilePath(this.params.pageUrl, component);
           fs.copyFileSync(sourcePath, targetPath);
         }
       });
@@ -274,10 +267,7 @@ export class PageCreator {
   private createJsxPage() {
     let content = this.processTemplate();
     this.convertToComponents();
-    const pageFilePath = path.join(
-      this.params.pagesDir,
-      this.getPageFilePath(this.params.pageUrl),
-    );
+    const pageFilePath = this.getPageFilePath(this.params.pageUrl);
     content = formatJsx(content);
     this.writeContent(pageFilePath, content);
   }

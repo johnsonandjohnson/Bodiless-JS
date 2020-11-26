@@ -21,6 +21,7 @@ import withSingleAccordionVariations from './withSingleAccordionVariations';
 import withImageVariations from './withImageVariations';
 import withIframeVariations from './withIframeVariations';
 import withYouTubeVariations from './withYouTubeVariations';
+import withSocialShare from './withSocialShare';
 
 import { asFlowContainerWithMargins } from './token';
 import withListVariations from './withListVariations';
@@ -35,10 +36,18 @@ const FlowContainerDefault = flow(
   withSingleAccordionVariations,
   withListVariations,
   withIframeVariations,
+  withSocialShare,
   withYouTubeVariations,
   asFlowContainerWithMargins,
   withMandatoryCategories(['Orientation', 'Type']),
 )(FlowContainer);
 
+const FlowContainerLimited = flow(
+  withRichTextVariations,
+  withImageVariations,
+  asFlowContainerWithMargins,
+  withMandatoryCategories(['Orientation', 'Type']),
+)(FlowContainer);
+
 // eslint-disable-next-line import/prefer-default-export
-export { FlowContainerDefault };
+export { FlowContainerDefault, FlowContainerLimited };

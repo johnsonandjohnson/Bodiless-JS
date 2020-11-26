@@ -28,7 +28,6 @@ module.exports = {
    */
   crawler: {
     maxDepth: 100,
-    maxConcurrency: 1,
   },
   /**
    * page creator settings
@@ -50,5 +49,10 @@ module.exports = {
   },
   htmltojsx: 'true',
   transformers: [
+  ],
+  /**
+   * a list of plugins that can subscribe to events emitted by the tool
+   */
+  plugins: [
   ],
 };

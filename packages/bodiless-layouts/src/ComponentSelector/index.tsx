@@ -12,23 +12,20 @@
  * limitations under the License.
  */
 
-import React, { ReactElement, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { pickBy } from 'lodash';
-
+import { useMenuOptionUI, useLocalStorage } from '@bodiless/core';
 import FilterWrapper from './FilterWrapper';
 import SearchWrapper from './SearchWrapper';
-import ItemList from './ItemListScale';
+import ItemList from './ItemList';
 import { getFiltersByComponentList } from './getFiltersByComponentList';
 import { getFilteredComponents } from './getFilteredComponents';
 import uiContext, { defaultUI } from './uiContext';
 import {
   ComponentSelectorProps,
-  ComponentSelectorUI,
-  ComponentWithMeta,
   FinalUI,
   ItemListProps,
-  RenderList,
 } from './types';
 import {
   ComponentDisplayModeProvider,
@@ -65,6 +62,22 @@ const reduceFilters = (filters: any, components: any) => pickBy(
     .every((component: any) => (category in component.categories)),
 );
 
+/*
+ * Implementation of djb2 xor algorithm to hash strings.
+ *
+ * @see http://www.cse.yorku.ca/~oz/hash.html
+ * @see https://gist.github.com/eplawless/52813b1d8ad9af510d85
+ */
+const hash = (str : string) => {
+  let h = 5381;
+  for (let i = 0; i < str.length; i += 1) {
+    // eslint-disable-next-line no-bitwise
+    h = h * 33 ^ str.charCodeAt(i);
+  }
+  // eslint-disable-next-line no-bitwise
+  return h >>> 0;
+};
+
 const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
   const {
     components: allComponents,
@@ -73,12 +86,13 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
     mandatoryCategories,
   } = props;
 
-  const [activeFilters, setActiveFilters] = useState([]);
-  const [activeSearch, setActiveSearch] = useState('');
+  const allComponentsNames = allComponents.map(Component => (
+    typeof Component === 'string' ? Component : Component.displayName));
+  const keySuffix = hash(allComponentsNames.sort().join().trim());
 
-  function useUI(): FinalUI {
-    return { ...defaultUI, ...ui };
-  }
+  const localStorageKey = `bodiless.componentLibrary.activeFilters.${keySuffix}`;
+  const [activeFilters, setActiveFilters] = useLocalStorage(localStorageKey, []);
+  const [activeSearch, setActiveSearch] = useState('');
 
   if (mandatoryCategories) {
     applyMandatoryCategories(allComponents, mandatoryCategories);
@@ -89,42 +103,40 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
     activeFilters,
     activeSearch,
   );
+  const allFilters = getFiltersByComponentList(allComponents);
+
   const filters = reduceFilters(
     getFiltersByComponentList(newCompRender),
     newCompRender,
   );
-  const allFilters = getFiltersByComponentList(allComponents);
 
-  const finalUI = useUI();
-
+  const finalUI:FinalUI = { ...defaultUI, ...useMenuOptionUI(), ...ui };
   return (
     <ComponentDisplayModeProvider mode={ComponentDisplayMode.ComponentSelector}>
       <uiContext.Provider value={finalUI}>
         <finalUI.MasterWrapper>
-          <finalUI.FlexSection>
-            <finalUI.ComponentLinkWrapper
-              disabled={activeFilters.length === 0}
-              onClick={() => {
-                if (activeFilters.length !== 0 || activeSearch.length !== 0) {
-                  setActiveSearch('');
-                  setActiveFilters([]);
-                }
-              }}
-            >
-              Clear
-            </finalUI.ComponentLinkWrapper>
-            <FilterWrapper
-              activeFilter={activeFilters}
-              setActiveFilters={setActiveFilters}
-              allfilters={allFilters}
-              filters={filters}
-            />
-          </finalUI.FlexSection>
-
+          {Object.getOwnPropertyNames(allFilters).length > 0 && (
+            <finalUI.FlexSection>
+              <finalUI.ComponentLinkWrapper
+                disabled={activeFilters.length === 0}
+                onClick={() => {
+                  if (activeFilters.length !== 0 || activeSearch.length !== 0) {
+                    setActiveSearch('');
+                    setActiveFilters([]);
+                  }
+                }}
+              >
+                Clear
+              </finalUI.ComponentLinkWrapper>
+              <FilterWrapper
+                activeFilter={activeFilters}
+                setActiveFilters={setActiveFilters}
+                allfilters={allFilters}
+                filters={filters}
+              />
+            </finalUI.FlexSection>
+          )}
           <finalUI.FlexSectionFull>
-            <finalUI.ComponentTitleWrapper>
-              Components
-            </finalUI.ComponentTitleWrapper>
             <SearchWrapper
               activeSearch={activeSearch}
               setActiveSearch={setActiveSearch}
@@ -142,7 +154,7 @@ const TextFormatList: React.FC<ItemListProps> = props => {
   const elems = components.map((Component, index) => (
     <button
       type="submit"
-      onClick={event => onSelect(event, Component.displayName)}
+      onClick={() => onSelect([Component.displayName])}
       key={index.toString()}
     >
       <Component>{Component.description || Component.name}</Component>
@@ -155,58 +167,5 @@ TextFormatList.propTypes = {
   onSelect: PropTypes.func.isRequired,
 };
 
-const TextFormatSelector: React.FC<ComponentSelectorProps> = props => {
-  const { ui } = props;
-  return (
-    <ComponentSelector
-      {...props}
-      renderList={({ components, onSelect }) => (
-        <TextFormatList onSelect={onSelect} components={components} />
-      )}
-      ui={ui}
-    />
-  );
-};
-
-// A HoverMenu option which will bring up the component selector form and then
-// insert an inline for the selected component.
-// See HoverMenu props definitions for the fields of an option.
-const textFormatSelectorOption = (
-  // eslint-ignore-line
-  components: ComponentWithMeta<any>[],
-  ui: ComponentSelectorUI,
-  getEditor: () => {
-    toggleMark(selection: any): void;
-  },
-) => ({
-  icon: 'more',
-  name: 'more',
-  isActive: () => true,
-  // All we do in our handler is return the form component which HoverMenu should render.
-  handler: (event: React.MouseEvent) => {
-    event.preventDefault();
-    return (props: {
-      renderList: RenderList;
-      onSubmit(values: any): void;
-    }): ReactElement<ComponentSelectorProps> => {
-      const { onSubmit: onSubmitFromContextMenu, ...rest } = props;
-      const onSubmit = (values: any) => {
-        onSubmitFromContextMenu(values);
-        if (!values) return;
-        getEditor().toggleMark(values);
-      };
-      return (
-        <TextFormatSelector
-          ui={ui}
-          components={components}
-          {...rest}
-          onSelect={onSubmit}
-        />
-      );
-    };
-  },
-});
-
 export default ComponentSelector;
-export { TextFormatSelector, textFormatSelectorOption };
 export const UIConsumer = uiContext.Consumer;

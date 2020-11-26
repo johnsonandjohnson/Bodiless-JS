@@ -14,3 +14,4 @@
 
 // eslint-disable-next-line import/prefer-default-export
 export { default as FlowContainer } from './FlowContainer';
+export { default as ComponentSelector } from './ComponentSelector';

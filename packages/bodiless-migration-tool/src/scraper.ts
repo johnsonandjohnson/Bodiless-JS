@@ -35,7 +35,6 @@ export interface ScrapedPage {
   rawHtml: string,
   status: number,
   processedHtml: string,
-  metatags: Array<string>,
   scripts: Array<string>,
   inlineScripts: Array<string>,
   styles: Array<string>,
