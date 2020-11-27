@@ -69,7 +69,6 @@ export default class Downloader {
 
   public async downloadFiles(resources: Array<string>): Promise<Array<Downloaded>> {
     const filteredResources = this.precheckResources(resources);
-    // const downloaded: Downloaded[] = [];
     try {
       const result = await BluebirdPromise.map(
         filteredResources.DOWNLOAD,
@@ -153,7 +152,6 @@ export default class Downloader {
               new Error(`Resource ${resource} is not available for download.`),
             );
           }
-          // let target = resource;
           if (res.request.href !== resource) {
             target = res.request.href;
           }
