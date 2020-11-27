@@ -91,6 +91,8 @@ export interface SiteFlattenerParams {
   allowFallbackHtml?: boolean,
   pluginManager?: PluginManagerType,
   exports?: Exports,
+  imageJson?: boolean,
+  imageDataPrefix?: string,
 }
 
 export class SiteFlattener {
@@ -330,6 +332,8 @@ export class SiteFlattener {
       allowFallbackHtml: this.params.allowFallbackHtml,
       htmlToComponentsSettings,
       reservedPaths: this.params.reservedPaths,
+      imageJson: this.params.imageJson,
+      imageDataPrefix: this.params.imageDataPrefix,
     };
     return pageCreatorParams;
   }

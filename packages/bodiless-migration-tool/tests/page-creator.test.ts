@@ -59,8 +59,8 @@ function getDefaultPageParams(): PageCreatorParams {
     htmlTag: '<html class="class1 class2" data-widget="globalScriptsWidget"></html>',
     bodyTag: '<body class="class3 class4"></body>',
     images: [
-      'https://localhost/gatsby.png',
-      'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+      { src: ['https://localhost/gatsby.png'], alt: '' },
+      { src: ['https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'], alt: '' },
     ],
     downloadAssets: false,
     isEnabled: false,

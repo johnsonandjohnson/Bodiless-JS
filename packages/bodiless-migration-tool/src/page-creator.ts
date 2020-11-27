@@ -83,6 +83,8 @@ export type PageCreatorParams = {
   htmlToComponentsSettings?: HtmlToComponentsSettings,
   reservedPaths?: Array<string>,
   allowFallbackHtml?: boolean,
+  imageJson?: boolean,
+  imageDataPrefix?: string,
 };
 
 type PageAsset = {
@@ -171,6 +173,18 @@ export class PageCreator {
   }
 
   private assetToJson = (assets: PageAsset[]): void => {
+    assets.forEach(asset => {
+      const pagePath = this.params.migrationApi.getPagePath(asset.pagePath);
+      const ext = path.extname(asset.targetPath);
+      const prefix = this.params.imageDataPrefix === undefined ? '' : this.params.imageDataPrefix;
+      const filePath = path.resolve(pagePath, `${prefix}${path.basename(asset.targetPath, ext)}.json`);
+      fs.writeFile(filePath, JSON.stringify({
+        src: asset.targetPath,
+        alt: asset.alt,
+      }, null, 2), (err) => {
+        if (err) throw err;
+      });
+    });
   };
 
   private async downloadAssetsGroup(items: (Array<any>), type?: AssetType) {
@@ -201,7 +215,10 @@ export class PageCreator {
           alt: downloadUrl in alternateTexts ? alternateTexts[downloadUrl] : '',
         };
       }, this);
-      this.assetToJson(downloadedAsset);
+      const imageJson = this.params.imageJson === undefined ? true : this.params.imageJson;
+      if (imageJson) {
+        this.assetToJson(downloadedAsset);
+      }
     } catch (e) {
       debug(e.message);
     }

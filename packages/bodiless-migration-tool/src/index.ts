@@ -107,6 +107,8 @@ class MigrationTool extends Command {
         ? true
         : (settings.allowFallbackHtml === true),
       pluginManager: plugins$ ? PluginManager.create(plugins$) : undefined,
+      imageJson: settings.imageJson === undefined ? true : settings.imageJson,
+      imageDataPrefix: settings.imageDataPrefix === undefined ? '' : settings.imageDataPrefix,
     };
     const flattener = new SiteFlattener(flattenerParams);
     await flattener.start();
