@@ -23,10 +23,10 @@ type ImagetagsFactoryParams = {
 };
 
 /**
- * creates json file for each metatag
+ * creates json file for each image tags
  * allows to prefix the json file
- * allows to define a list of metatags that should be preserved
- * @param params to create the metatag scraper plugin
+ *
+ * @param params to create the image tag scraper plugin
  */
 const onPageCreate = ({
   prefix,
@@ -41,7 +41,6 @@ const onPageCreate = ({
       if (downloaded.length >= 1) {
         const { targetPath } = downloaded[0];
         const ext = path.extname(targetPath);
-        console.log(asset.attribs.src, downloaded, api.getStaticPath(), targetPath, 'SSSSSSSSS');
         api.writeJsonFileSync(
           path.resolve(api.getPagePath(), `${prefix}${path.basename(targetPath, ext)}.json`),
           {

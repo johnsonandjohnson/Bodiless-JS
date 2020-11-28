@@ -91,8 +91,6 @@ export interface SiteFlattenerParams {
   allowFallbackHtml?: boolean,
   pluginManager?: PluginManagerType,
   exports?: Exports,
-  imageJson?: boolean,
-  imageDataPrefix?: string,
 }
 
 export class SiteFlattener {
