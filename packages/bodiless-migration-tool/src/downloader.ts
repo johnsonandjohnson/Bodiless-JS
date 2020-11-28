@@ -112,31 +112,31 @@ export default class Downloader {
    * let downloader decide what to download.
    */
   private precheckResources(resources: Array<string>): PrecheckResources {
-    const filterResources: PrecheckResources = {
+    const precheckResources: PrecheckResources = {
       DOWNLOAD: [],
       EXISTS: [],
       EXTERNAL: [],
     };
     resources.forEach(resource => {
       if (resource && isUrlExternal(this.pageUrl, resource)) {
-        filterResources.EXTERNAL.push(resource);
+        precheckResources.EXTERNAL.push(resource);
         return;
       }
       const targetPath = this.getTargetPath(resource);
       if (targetPath !== undefined && fs.existsSync(targetPath)) {
-        filterResources.EXISTS.push({
+        precheckResources.EXISTS.push({
           url: resource,
           targetPath,
         });
         return;
       }
       if (!isUrlRelative(resource)) {
-        filterResources.DOWNLOAD.push(resource);
+        precheckResources.DOWNLOAD.push(resource);
         return;
       }
-      filterResources.DOWNLOAD.push(new URL(resource, this.pageUrl).toString());
+      precheckResources.DOWNLOAD.push(new URL(resource, this.pageUrl).toString());
     }, this);
-    return filterResources;
+    return precheckResources;
   }
 
   private getTargetPath(resource: string): string | undefined {
