@@ -67,11 +67,17 @@ export default class Downloader {
     this.excludePaths = excludePaths;
   }
 
+  /**
+   * Downloads array of urls, returns the original url with download path.
+   *
+   * @param resources - resource urls to be downloaded
+   * @returns type Downloaded array.
+   */
   public async downloadFiles(resources: Array<string>): Promise<Array<Downloaded>> {
-    const filteredResources = this.precheckResources(resources);
+    const precheck = this.precheckResources(resources);
     try {
       const result = await BluebirdPromise.map(
-        filteredResources.DOWNLOAD,
+        precheck.DOWNLOAD,
         async (resource): Promise<Downloaded> => {
           try {
             const path = await this.downloadFile(resource);
@@ -89,7 +95,7 @@ export default class Downloader {
         },
         { concurrency: 1 },
       );
-      return [...result, ...filteredResources.EXISTS];
+      return [...result, ...precheck.EXISTS];
     } catch (err) {
       debug(err);
       return [];

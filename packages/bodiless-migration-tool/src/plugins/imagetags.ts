@@ -22,7 +22,6 @@ type ImagetagsFactoryParams = {
   prefix: string,
 };
 
-
 /**
  * creates json file for each metatag
  * allows to prefix the json file
