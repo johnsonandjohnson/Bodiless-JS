@@ -17,14 +17,13 @@ import debug from 'debug';
 // eslint-disable-next-line import/no-unresolved
 import { Request, Response } from '@bodiless/headless-chrome-crawler/lib/puppeteer';
 // @ts-ignore - ignoring as it contains functions that invoked in browser
-import evaluatePage, { EvaluateImage } from './evaluate-page';
+import evaluatePage from './evaluate-page';
 import {
   getHostNameWithoutWWW,
   isUrlExternal,
   trimQueryParamsFromUrl,
 } from './helpers';
 import debugDefault from './debug';
-
 // require due to ES6 modules cannot directly export class objects.
 const HCCrawler = require('@bodiless/headless-chrome-crawler');
 
@@ -40,8 +39,8 @@ export interface ScrapedPage {
   styles: Array<string>,
   links: Array<string>,
   inlineStyles: Array<string>,
-  images: Array<EvaluateImage>,
-  pictures?: Array<EvaluateImage>,
+  images: Array<string>,
+  pictures?: Array<string>,
   videos?: Array<string>,
 }
 

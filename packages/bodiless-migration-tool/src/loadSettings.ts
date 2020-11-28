@@ -42,8 +42,6 @@ type Settings = {
   disableTailwind?: boolean,
   allowFallbackHtml?: boolean,
   plugins?: PluginType[],
-  imageJson?: boolean,
-  imageDataPrefix?: string,
 } & Page404Params;
 
 type SettingsLoader = () => Settings | undefined;

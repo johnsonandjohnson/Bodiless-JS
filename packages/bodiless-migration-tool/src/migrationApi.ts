@@ -62,6 +62,14 @@ type MigrationApiType = {
    * @returns file system directory containing global site data
    */
   getSitePath: () => string,
+  /**
+   * return site static directory.
+   */
+  getStaticPath: () => string,
+  /**
+   * Return current page url.
+   */
+  url: string,
 };
 
 /**
@@ -98,6 +106,10 @@ class MigrationApi implements MigrationApiType {
     return new MigrationApi(params);
   }
 
+  get url() {
+    return this.pageUrl;
+  }
+
   public writeJsonFileSync(targetPath: string, data: any) {
     ensureDirectoryExistence(targetPath);
     return fs.writeFileSync(targetPath, JSON.stringify(data, null, 2));
@@ -111,6 +123,10 @@ class MigrationApi implements MigrationApiType {
 
   public getSitePath() {
     return this.app.getSiteDataDir();
+  }
+
+  public getStaticPath() {
+    return this.app.getStaticDir();
   }
 }
 
