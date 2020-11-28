@@ -142,7 +142,6 @@ export class SiteFlattener {
         debug(`scraped page from ${pageUrl}.`);
         const scrapedPage$1 = page404Handler.processScrapedPage(scrapedPage, page404Params);
         const scrapedPage$2 = this.transformScrapedPage(scrapedPage$1);
-        console.log(scrapedPage$2, 'ZZZZZZZZZZZZZ');
         const migrationApi = MigrationApi.create({
           app: this.app,
           pageUrl,
