@@ -14,6 +14,20 @@
 import Downloader from '../src/downloader';
 /* eslint-enable import/first */
 
+const mockRetryRequestDefault = () => ({
+  on: (input: string, cb: Function) => {
+    if (input === 'complete') {
+      cb();
+    }
+    return mockRetryRequestDefault();
+  },
+});
+
+jest.mock('retry-request', () => ({
+  __esModule: true,
+  default: jest.fn(() => mockRetryRequestDefault()),
+}));
+
 describe('assets download', () => {
   test('external assests are not downloaded', async () => {
     const pageUrl = 'https://localhost';
@@ -38,5 +52,24 @@ describe('assets download', () => {
     expect(downloadFileMock).toHaveBeenCalledWith('https://localhost/gatsby.png');
     expect(downloadFileMock).toHaveBeenCalledWith('https://localhost/test1.js');
     expect(downloadFileMock).toHaveBeenCalledWith('https://localhost/test2.js');
+  });
+
+  test('Download returns correct path', async () => {
+    const pageUrl = 'https://localhost';
+    const downloadPath = 'static';
+    const downloader = new Downloader(pageUrl, downloadPath);
+    const assets = [
+      'https://localhost/path/to/gatsby.png',
+      'https://external.site.com/images/not-exists.jpg',
+    ];
+    try {
+      const result = await downloader.downloadFiles(assets);
+      expect(result.length).toBe(1);
+      const { url, targetPath } = result[0];
+      expect(url).toBe('https://localhost/path/to/gatsby.png');
+      expect(targetPath).toBe(`${downloadPath}/path/to/gatsby.png`);
+    } catch (e) {
+      throw new Error('Download failed');
+    }
   });
 });
