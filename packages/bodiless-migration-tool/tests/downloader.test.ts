@@ -12,17 +12,34 @@
  * limitations under the License.
  */
 import Downloader from '../src/downloader';
-/* eslint-enable import/first */
+
+// mock fs and helpers module functions that called in downloadFile function.
+jest.mock('fs');
+const fs = require('fs');
+const helpers = require('../src/helpers');
+
+fs.createWriteStream.mockImplementation(jest.fn);
+helpers.ensureDirectoryExistence = jest.fn(() => true);
 
 const mockRetryRequestDefault = () => ({
+  pipe: () => ({
+    on: (input: string, cb: Function) => {
+      if (input === 'finish') {
+        cb();
+      }
+    },
+  }),
   on: (input: string, cb: Function) => {
-    if (input === 'complete') {
-      cb();
+    if (input === 'response') {
+      const res = {
+        statusCode: 200,
+        request: jest.fn(),
+      };
+      cb(res);
     }
     return mockRetryRequestDefault();
   },
 });
-
 jest.mock('retry-request', () => ({
   __esModule: true,
   default: jest.fn(() => mockRetryRequestDefault()),
@@ -62,14 +79,10 @@ describe('assets download', () => {
       'https://localhost/path/to/gatsby.png',
       'https://external.site.com/images/not-exists.jpg',
     ];
-    try {
-      const result = await downloader.downloadFiles(assets);
-      expect(result.length).toBe(1);
-      const { url, targetPath } = result[0];
-      expect(url).toBe('https://localhost/path/to/gatsby.png');
-      expect(targetPath).toBe(`${downloadPath}/path/to/gatsby.png`);
-    } catch (e) {
-      throw new Error('Download failed');
-    }
+    const result = await downloader.downloadFiles(assets);
+    expect(result.length).toBe(1);
+    const { url, targetPath } = result[0];
+    expect(url).toBe('https://localhost/path/to/gatsby.png');
+    expect(targetPath).toBe(`${downloadPath}/path/to/gatsby.png`);
   });
 });

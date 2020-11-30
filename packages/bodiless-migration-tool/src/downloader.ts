@@ -93,7 +93,7 @@ export default class Downloader {
             url: '',
           };
         },
-        { concurrency: 1 },
+        { concurrency: 4 },
       );
       return [...result, ...precheck.EXISTS];
     } catch (err) {
@@ -118,7 +118,11 @@ export default class Downloader {
       EXTERNAL: [],
     };
     resources.forEach(resource => {
-      if (resource && isUrlExternal(this.pageUrl, resource)) {
+      // do nothing when the resource is empty
+      if (!resource) {
+        return;
+      }
+      if (isUrlExternal(this.pageUrl, resource)) {
         precheckResources.EXTERNAL.push(resource);
         return;
       }
@@ -176,9 +180,12 @@ export default class Downloader {
             );
           }
           ensureDirectoryExistence(targetPath);
-          return req.pipe(fs.createWriteStream(targetPath));
+          return req.pipe(fs.createWriteStream(targetPath))
+            .on('finish', () => {
+              resolve(targetPath);
+            })
+            .on('error', err => reject(new Error(`error on streaming ${resource}. ${err}.`)));
         })
-        .on('complete', () => { resolve(targetPath); })
         .on('error', err => reject(new Error(`error on downloading ${resource}. ${err}.`)));
     });
   }
