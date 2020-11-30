@@ -1,6 +1,6 @@
 # Monorepo Setup
 
-This project is a broken into parts in a monorepo.  Each separate package is located in the `packages` folder.  We are using lerna to manage these repo.
+This project is broken into parts in a monorepo.  Each separate package is located in the `packages` folder.  We are using lerna to manage these repo.
 
 ## Shared items
 We have some actions that we take globally this include linting formatting and testing.  They can be executed by use of npm at the top level.
@@ -78,11 +78,10 @@ When we build with npm bootstrap we are using lerna's `--hoist` flag, this means
 created with http://asciiflow.com/
 ## Current Packages
 
-* [fclasses](../packages/fclasses/README.md): Provides functionality to inject functional class into react components
-* [bodiless-core](../packages/bodiless-core/README.md): 
-* [bodiless-backend](../packages/bodiless-core/README.md): Contains the backend server for saving data and doing git operations
-* [bodiless-context](../packages/bodiless-context/README.md):
-* [bodiless-richtext](../packages/bodiless-richtext): Provides a Rich Text component that can consume other components and make them available to the content editor.
-* [bodiless-components](../packages/bodiless-components): Provide a collection of components that can be used in the bodiless system
-* [gatsby-theme-bodiless](../packages/gatsby-theme-bodiless): Provides a gatsby theme for starting a bodiless site.
-* [bodiless-migration-tool](../packages/bodiless-migration-tool): Allows to convert an existing site (independent of its technology) into a static flattened html site.
+* [fclasses](https://github.com/johnsonandjohnson/Bodiless-JS/tree/docs/fix-broken-links-in-bodiless/packages/fclasses): Provides functionality to inject functional class into react components
+* [bodiless-core](https://github.com/johnsonandjohnson/Bodiless-JS/tree/docs/fix-broken-links-in-bodiless/packages/bodiless-core): 
+* [bodiless-backend](https://github.com/johnsonandjohnson/Bodiless-JS/tree/docs/fix-broken-links-in-bodiless/packages/bodiless-backend): Contains the backend server for saving data and doing git operations
+* [bodiless-richtext](https://github.com/johnsonandjohnson/Bodiless-JS/tree/docs/fix-broken-links-in-bodiless/packages/bodiless-richtext): Provides a Rich Text component that can consume other components and make them available to the content editor.
+* [bodiless-components](https://github.com/johnsonandjohnson/Bodiless-JS/tree/docs/fix-broken-links-in-bodiless/packages/bodiless-components): Provide a collection of components that can be used in the bodiless system
+* [gatsby-theme-bodiless](https://github.com/johnsonandjohnson/Bodiless-JS/tree/docs/fix-broken-links-in-bodiless/packages/gatsby-theme-bodiless): Provides a gatsby theme for starting a bodiless site.
+* [bodiless-migration-tool](https://github.com/johnsonandjohnson/Bodiless-JS/tree/docs/fix-broken-links-in-bodiless/packages/bodiless-migration-tool): Allows to convert an existing site (independent of its technology) into a static flattened html site.
