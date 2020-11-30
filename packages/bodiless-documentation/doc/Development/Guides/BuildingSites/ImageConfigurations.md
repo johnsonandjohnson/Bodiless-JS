@@ -76,6 +76,25 @@ If you have an image with `GatsbyImagePresets.Fluid` preset and you want to chan
 
 1. Reupload the image via BodilessJS admin interface or update preset in the corresponding json file manually.
 
+### Override image processing arguments
+
+To override default image processing arguments, use `gatsbyImage.sharpArgs` option of `@bodiless/gatsby-theme-bodiless`. For example, to override default quality
+
+```js
+  {
+    resolve: '@bodiless/gatsby-theme-bodiless',
+    options: {
+      gatsbyImage: {
+        sharpArgs: {
+          quality: 70,
+        },
+      },
+    },
+  },
+```
+
+See [gatsby-plugin-sharp](https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/) doc to get a list of options you can override.
+
 ### Default image presets
 
 | Preset                 | Description |

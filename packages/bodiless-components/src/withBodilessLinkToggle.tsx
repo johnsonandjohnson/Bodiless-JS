@@ -41,7 +41,10 @@ const withBodilessLinkToggle = (asEditableLink: AsBodilessLink): AsBodilessLink 
   nodeKey, defaultData, useOverrides,
 ) => {
   const useOverrides$ = extendOverrides<any, any>(
-    () => ({ label: useChameleonContext().isOn ? 'Edit' : 'Add' }),
+    () => ({
+      label: useChameleonContext().isOn ? 'Edit' : 'Add',
+      formTitle: useChameleonContext().isOn ? 'Edit Link' : 'Add Link',
+    }),
   )(useOverrides as UseBodilessOverrides);
   return flowRight(
     withDesign({

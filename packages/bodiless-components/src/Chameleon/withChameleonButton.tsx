@@ -17,7 +17,7 @@ import { flowRight } from 'lodash';
 import { v1 } from 'uuid';
 import {
   withMenuOptions, useContextMenuForm, useMenuOptionUI, withContextActivator, withLocalContextMenu,
-  TMenuOption, EditButtonProps, UseBodilessOverrides,
+  TMenuOption, EditButtonProps, UseBodilessOverrides, createMenuOptionGroup,
 } from '@bodiless/core';
 
 import type { ChameleonButtonProps, ChameleonData } from './types';
@@ -36,14 +36,13 @@ const useToggleButtonMenuOption = () => {
   };
 };
 
-const useSwapButtonMenuOption = (formTitle: string = 'Choose a component') => {
+const useSwapButtonMenuOption = () => {
   const { selectableComponents, activeComponent, setActiveComponent } = useChameleonContext();
   const renderForm = () => {
     const {
       ComponentFormLabel,
       ComponentFormRadioGroup,
       ComponentFormRadio,
-      ComponentFormTitle,
     } = useMenuOptionUI();
 
     const radios = Object.getOwnPropertyNames(selectableComponents).map(name => (
@@ -55,7 +54,6 @@ const useSwapButtonMenuOption = (formTitle: string = 'Choose a component') => {
     ));
     return (
       <>
-        <ComponentFormTitle>{formTitle}</ComponentFormTitle>
         <ComponentFormRadioGroup field="component">
           {radios}
         </ComponentFormRadioGroup>
@@ -75,6 +73,7 @@ const useSwapButtonMenuOption = (formTitle: string = 'Choose a component') => {
     icon: 'repeat',
     label: 'Swap',
     handler: () => render,
+    formTitle: 'Choose a component',
   };
 };
 
@@ -101,38 +100,24 @@ export const withUnwrap = <P extends object>(Component: ComponentType<P>) => {
  * @return HOC which adds the menu button.
  */
 const withChameleonButton = <P extends object, D extends object>(
-  useOverrides?: UseBodilessOverrides<P, D>,
+  useOverrides: UseBodilessOverrides<P, D> = () => ({}),
 ) => {
   const useMenuOptions = (props: P & EditButtonProps<D>) => {
+    const overrides = useOverrides(props);
+    // if useOverrides returns falsy, it means not to provide the button.
+    if (!overrides) return [];
     const { selectableComponents } = useChameleonContext();
-    const overrides = useOverrides ? useOverrides(props) : {};
-    const formTitle = typeof overrides !== 'undefined' ? overrides.formTitle : undefined;
     const extMenuOptions = Object.keys(selectableComponents).length > 1
       ? useSwapButtonMenuOption
       : useToggleButtonMenuOption;
-    const name = `chameleon-${v1()}`;
     const baseDefinition:TMenuOption = {
-      name,
-      group: `${name}-group`,
+      name: `chameleon-${v1()}`,
       global: false,
       local: true,
-      ...extMenuOptions(formTitle),
+      ...extMenuOptions(),
+      ...overrides,
     };
-    // if useOverrides returns undefined, it means not to provide the button.
-    if (overrides === undefined) return [];
-    const { groupMerge, groupLabel, ...overrides$ } = overrides;
-    const menuOption:TMenuOption = { ...baseDefinition, ...overrides$ };
-    // Create a group so we have control over name and merge behavior.
-    const menuGroup:TMenuOption = {
-      name: menuOption.group!, // We set the group above so we know it's defined.
-      label: groupLabel || menuOption.label,
-      local: menuOption.local,
-      global: menuOption.global,
-      Component: 'group',
-      groupMerge,
-    };
-    // return [menuOption];
-    return [menuOption, menuGroup];
+    return createMenuOptionGroup(baseDefinition);
   };
   return flowRight(
     withMenuOptions({ useMenuOptions, name: 'Chamelion' }),

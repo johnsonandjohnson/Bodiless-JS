@@ -24,7 +24,7 @@ import { withDefaultContent, withNodeKey, withResetButton } from '@bodiless/core
 import { flow } from 'lodash';
 import Layout from '../../../components/Layout';
 import tailWindConfig from '../../../../tailwind.config';
-import { FlowContainerDefault } from '../../../components/FlowContainer';
+import { FlowContainerDefault, FlowContainerLimited } from '../../../components/FlowContainer';
 
 const FLOW_CONTAINER_PAGE_PATH = 'flowContainer';
 
@@ -111,6 +111,8 @@ const FlowContainerPage = (props: any) => (
       />
       <h2 className="text-2xl font-bold mt-4">Contentful Flow Container</h2>
       <ContentfulFlowContainer />
+      <h2 className="text-2xl font-bold mt-4">Limited Flow Container</h2>
+      <FlowContainerLimited />
     </Layout>
   </Page>
 );

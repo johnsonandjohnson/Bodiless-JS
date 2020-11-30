@@ -12,9 +12,26 @@
  * limitations under the License.
  */
 
-module.exports = {
-  plugins: [
-    // eslint-disable-next-line
-    require('tailwindcss')('tailwind.config.js'),
+ module.exports = {
+  /**
+   * page url that should be scraped
+   */
+  url: "https://lepetitmarseillais.be/",
+  /**
+   * crawler settings
+   */
+  crawler: {
+    maxDepth: 100,
+  },
+  /**
+   * a list of rules to transform scraped html
+   */
+  transformers: [
+    {
+      rule: "replaceString",
+      selector: "\" \">",
+      replacement: "\">",
+      context: "https://lepetitmarseillais.be/fr/restons-nature"
+    }
   ],
 };

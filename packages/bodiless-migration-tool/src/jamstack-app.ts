@@ -24,23 +24,24 @@ import {
 } from './helpers';
 import debug from './debug';
 
-export interface JamStackAppParams {
+export type JamStackAppParams = {
   gitRepository?: string,
   workDir: string,
   disableTailwind?: boolean,
-}
+};
 
-export interface JamStackApp {
+export type JamStackApp = {
   clean(): void,
   setup(): Promise<void>
   startDev(): Promise<void>
   build(): Promise<void>
   serve(): Promise<void>
   getPagesDir(): string
+  getSiteDataDir(): string
   getStaticDir(): string
-}
+};
 
-export class CanvasX implements JamStackApp {
+export class GatsbyApp implements JamStackApp {
   params: JamStackAppParams;
 
   constructor(params: JamStackAppParams) {
@@ -75,21 +76,25 @@ export class CanvasX implements JamStackApp {
 
   public async serve() {
     this.setWorkDir();
-    shelljs.cd(this.getCanvasXSiteDir());
+    shelljs.cd(this.getWorkSiteDir());
     const cmd = util.format('%s serve --host=%s', path.resolve('node_modules/.bin/gatsby'), '0.0.0.0');
     shelljs.exec(cmd);
   }
 
-  public getCanvasXSiteDir() {
+  public getWorkSiteDir() {
     return this.params.workDir;
   }
 
   public getPagesDir() {
-    return path.resolve(this.getCanvasXSiteDir(), 'src/data/pages');
+    return path.resolve(this.getWorkSiteDir(), 'src/data/pages');
+  }
+
+  public getSiteDataDir() {
+    return path.resolve(this.getWorkSiteDir(), 'src/data/site');
   }
 
   public getStaticDir() {
-    return path.resolve(this.getCanvasXSiteDir(), 'static');
+    return path.resolve(this.getWorkSiteDir(), 'static');
   }
 
   private prepare() {
@@ -159,7 +164,7 @@ export class CanvasX implements JamStackApp {
   private installPackages() {
     this.setWorkDir();
     // do not use npm install --prefix due to npm issue on windows - https://github.com/npm/npm/issues/20245
-    shelljs.cd(this.getCanvasXSiteDir());
+    shelljs.cd(this.getWorkSiteDir());
     shelljs.exec('npm install --save --package-lock-only --no-package-lock html-loader');
     shelljs.exec('npm install --save --package-lock-only --no-package-lock gatsby-plugin-root-import');
     this.setWorkDir();
@@ -173,8 +178,8 @@ export class CanvasX implements JamStackApp {
   private patchApp() {
     const confPath = path.resolve(__dirname, '..', 'conf');
     const gatsbyConfig = path.resolve(confPath, 'gatsby-config.js');
-    fs.copyFileSync(gatsbyConfig, path.resolve(this.getCanvasXSiteDir(), 'gatsby-config.js'));
+    fs.copyFileSync(gatsbyConfig, path.resolve(this.getWorkSiteDir(), 'gatsby-config.js'));
     const gatsbyNode = path.resolve(confPath, 'gatsby-node.js');
-    fs.copyFileSync(gatsbyNode, path.resolve(this.getCanvasXSiteDir(), 'gatsby-node.js'));
+    fs.copyFileSync(gatsbyNode, path.resolve(this.getWorkSiteDir(), 'gatsby-node.js'));
   }
 }

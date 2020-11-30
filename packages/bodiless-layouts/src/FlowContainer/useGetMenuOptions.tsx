@@ -22,6 +22,8 @@ import type { FlowContainerDataHandlers, FlowContainerItemHandlers } from './mod
 import { useFlowContainerDataHandlers, useItemHandlers } from './model';
 import { ComponentSelectorProps } from '../ComponentSelector/types';
 import componentSelectorForm from '../ComponentSelector/componentSelectorForm';
+import { FALLBACK_SNAP_CLASSNAME } from './SortableChild';
+import { defaultSnapData } from './utils/appendTailwindWidthClass';
 
 type Handlers = FlowContainerDataHandlers & FlowContainerItemHandlers;
 
@@ -51,18 +53,27 @@ const withNoDesign = (props:EditFlowContainerProps):EditFlowContainerProps => ({
  */
 const useComponentSelectorActions = (
   handlers: Handlers,
+  props: EditFlowContainerProps,
   currentItem?: FlowContainerItem,
 ) => {
+  const {
+    getDefaultWidth = () => FALLBACK_SNAP_CLASSNAME,
+    snapData = defaultSnapData,
+  } = props;
   const { insertFlowContainerItem, updateFlowContainerItem } = handlers;
   const { setId } = useActivateOnEffect();
 
-  const insertItem: ComponentSelectorProps['onSelect'] = (event, componentName) => {
-    const { uuid } = insertFlowContainerItem(componentName, currentItem);
+  const wrapperProps = {
+    className: getDefaultWidth(snapData),
+  };
+
+  const insertItem: ComponentSelectorProps['onSelect'] = ([componentName]) => {
+    const { uuid } = insertFlowContainerItem(componentName, currentItem, wrapperProps);
     // Set the new id so it will activate on creation.
     setId(uuid);
   };
 
-  const replaceItem: ComponentSelectorProps['onSelect'] = (event, componentName) => {
+  const replaceItem: ComponentSelectorProps['onSelect'] = ([componentName]) => {
     if (currentItem) {
       const newItem: FlowContainerItem = { ...currentItem, type: componentName };
       updateFlowContainerItem(newItem);
@@ -70,6 +81,36 @@ const useComponentSelectorActions = (
   };
 
   return { insertItem, replaceItem };
+};
+
+const useCloneButton = (
+  handlers: Handlers,
+  props: EditFlowContainerProps,
+  item: FlowContainerItem,
+) => {
+  const context = useEditContext();
+  const { insertFlowContainerItem, getItems } = handlers;
+  const { maxComponents = Infinity } = props;
+  const { setId } = useActivateOnEffect();
+
+  const handler = () => {
+    const { uuid } = insertFlowContainerItem(item.type, item, item.wrapperProps);
+    setId(uuid);
+  };
+
+  const isHidden = useCallback(
+    () => !context.isEdit || getItems().length >= maxComponents, [maxComponents],
+  );
+
+  return {
+    name: 'copy-item',
+    label: 'Copy',
+    icon: 'content_copy',
+    global: false,
+    local: true,
+    handler,
+    isHidden,
+  };
 };
 
 const useDeleteButton = (
@@ -106,7 +147,7 @@ const useAddButton = (
 ) => {
   const { maxComponents = Infinity } = props;
   const context = useEditContext();
-  const { insertItem } = useComponentSelectorActions(handlers, item);
+  const { insertItem } = useComponentSelectorActions(handlers, props, item);
   const { getItems } = handlers;
   const isHidden = item
     ? useCallback(() => !context.isEdit || getItems().length >= maxComponents, [maxComponents])
@@ -121,6 +162,7 @@ const useAddButton = (
     name,
     handler: () => componentSelectorForm(props, insertItem),
     activateContext: false,
+    formTitle: 'Insert Component',
     isHidden,
   };
 };
@@ -131,7 +173,7 @@ const useSwapButton = (
   item: FlowContainerItem,
 ) => {
   const context = useEditContext();
-  const { replaceItem } = useComponentSelectorActions(handlers, item);
+  const { replaceItem } = useComponentSelectorActions(handlers, props, item);
   return {
     name: 'swap',
     label: 'Swap',
@@ -141,6 +183,7 @@ const useSwapButton = (
     handler: () => componentSelectorForm(props, replaceItem),
     activateContext: false,
     isHidden: useCallback(() => !context.isEdit, []),
+    formTitle: 'Replace Component',
   };
 };
 
@@ -187,6 +230,7 @@ const useGetItemUseGetMenuOptions = (props: EditFlowContainerProps) => {
     const buttons = [
       // These hooks are all invoked by the flow container item (not the flow container itself).
       useAddButton(handlers, props$, item),
+      useCloneButton(handlers, props$, item),
       useSwapButton(handlers, props$, item),
       useDeleteButton(handlers, item),
     ];
