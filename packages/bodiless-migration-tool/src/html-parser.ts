@@ -38,7 +38,6 @@ interface HtmlParserInterface {
   getHeadStyles(): string
   getHeadInlineStyles(): string
   getBodyInlineScripts(): string
-  getMetaTags(): string
   getImages(): string
   clean(): void
   replaceString(oldHtmlString: string, newHtmlString: string): void
@@ -135,10 +134,6 @@ export default class HtmlParser implements HtmlParserInterface {
   }
 
   getBodyInlineScripts(): string {
-    throw new Error();
-  }
-
-  getMetaTags(): string {
     throw new Error();
   }
 

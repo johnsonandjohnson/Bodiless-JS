@@ -39,18 +39,19 @@ export type ContextMenuPropsType<D> = ContextMenuFormProps & Options<D> & {
 
 export type FormChromeProps = {
   hasSubmit: boolean;
-  title?: string;
 } & ContextMenuFormProps;
 
 const FormChromeBase: FC<FormChromeProps> = (props) => {
   const {
     children,
     title,
+    description,
     hasSubmit,
     closeForm,
   } = props;
   const {
     ComponentFormTitle, ComponentFormCloseButton, ComponentFormSubmitButton,
+    ComponentFormDescription,
   } = useMenuOptionUI();
 
   return (
@@ -61,7 +62,8 @@ const FormChromeBase: FC<FormChromeProps> = (props) => {
         onClick={(e: any) => closeForm(e)}
         data-bl-component-form-close-button
       />
-      <ComponentFormTitle>{title}</ComponentFormTitle>
+      {title && <ComponentFormTitle>{title}</ComponentFormTitle>}
+      {description && <ComponentFormDescription>{description}</ComponentFormDescription>}
       {children}
       {hasSubmit && (<ComponentFormSubmitButton aria-label="Submit" />)}
     </>
@@ -79,6 +81,8 @@ export const ContextMenuForm = <D extends object>(props: ContextMenuPropsType<D>
     initialValues = {} as D,
     hasSubmit = true,
     children = () => <></>,
+    title,
+    description,
     ...rest
   } = props;
 
@@ -105,6 +109,8 @@ export const ContextMenuForm = <D extends object>(props: ContextMenuPropsType<D>
             ? hasSubmit(formState.values) && !formState.invalid
             : hasSubmit && !formState.invalid}
           closeForm={(e: KeyboardEvent | MouseEvent) => callOnClose(e, formState.values)}
+          title={title}
+          description={description}
         >
           {typeof children === 'function'
             ? children({

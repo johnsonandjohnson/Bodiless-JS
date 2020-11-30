@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import { union } from 'lodash';
 import { DefaultContentNode, Path } from '../ContentNode';
 
 export const getRelativeNodeKey = (basePath: Path, nodePath: Path) => {
@@ -20,6 +21,13 @@ export const getRelativeNodeKey = (basePath: Path, nodePath: Path) => {
   const baseNodeKeyLength = baseNodeKey.length + delimiter.length;
   const nodeKey = Array.isArray(nodePath) ? nodePath.join(delimiter) : nodePath;
   return nodeKey.startsWith(baseNodeKey) ? nodeKey.substring(baseNodeKeyLength) : nodeKey;
+};
+
+export const getAbsoluteNodeKey = (basePath: Path, contentPath: Path) => {
+  const delimiter = '$';
+  const basePathArray = Array.isArray(basePath) ? basePath : basePath.split(delimiter);
+  const contentPathArray = Array.isArray(contentPath) ? contentPath : contentPath.split(delimiter);
+  return basePathArray.concat(contentPathArray).join(delimiter);
 };
 
 // TODO: this class should expose a method that allows to check if node has value in store
@@ -60,6 +68,15 @@ export default class ContentfulNode<D extends object> extends DefaultContentNode
     // We'll need to return our default content instead of the emptyValue.
     const isNodeDataEmpty = !nodeData || Object.keys(nodeData).length === 0;
     return !isNodeDataEmpty ? nodeData : this.getDefaultContent();
+  }
+
+  get keys() {
+    const { getKeys } = this.getters;
+    return union(
+      getKeys(),
+      Object.keys(this.content)
+        .map(key => getAbsoluteNodeKey(this.baseContentPath, key)),
+    );
   }
 
   peer(path: Path) {
