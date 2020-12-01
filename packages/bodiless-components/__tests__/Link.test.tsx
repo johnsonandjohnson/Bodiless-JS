@@ -24,7 +24,9 @@ const setEditMode = (isEdit: boolean) => {
 setEditMode(true);
 
 // eslint-disable-next-line import/first
-import Link from '../src/Link';
+import { asBodilessLink } from '../src/Link';
+
+const Link = asBodilessLink()('a');
 
 let wrapper: ReactWrapper;
 let menuButton: ReactWrapper;
@@ -100,7 +102,7 @@ describe('link interactions', () => {
     menuForm = menuPopup.find('form');
     inputField = menuForm.find('input#link-href');
 
-    expect(inputField.prop('value')).toBe('ok');
+    expect(inputField.prop('value')).toBe('/ok/');
 
     wrapper.find({ ...secondLinkProps }).find('a').simulate('click');
     wrapper.find({ ...firstLinkProps }).find('a').simulate('click');
@@ -111,7 +113,7 @@ describe('link interactions', () => {
     menuPopup = wrapper.find('Tooltip[visible=true]').at(1);
     menuForm = menuPopup.find('form');
     inputField = menuForm.find('input#link-href');
-    expect(inputField.prop('value')).toBe('ok');
+    expect(inputField.prop('value')).toBe('/ok/');
   });
 
   it('context form should not save content when cancel is clicked', () => {
@@ -121,6 +123,6 @@ describe('link interactions', () => {
     const cancelButton = menuForm.find('button[aria-label="Cancel"]');
     cancelButton.simulate('submit');
     expect(wrapper.find('Popup[visible=true]')).toHaveLength(1);
-    expect(inputField.prop('value')).toBe('ok');
+    expect(inputField.prop('value')).toBe('/ok/');
   });
 });

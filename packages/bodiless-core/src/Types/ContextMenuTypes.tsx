@@ -117,7 +117,7 @@ export type TMenuOption = {
    */
   groupMerge?: 'merge'|'merge-up'|'none';
   /**
-   * An optional component used to render this item, or one of '_item' or '_group' to specify
+   * An optional component used to render this item, or one of 'item' or 'group' to specify
    * which default component should be used. If not specified, then the option will be rendered
    * using the `ContextMenuItem` component.  If `_group`, then the default group component
    * as defined in the Context Menu UI will be used instead.
@@ -127,7 +127,14 @@ export type TMenuOption = {
    * A reference to the page edit context instance which is providing this button.
    */
   context?: PageEditContextInterface;
-  formTitle?: string;
+  /**
+   * An optional title for the form.
+   */
+  formTitle?: string|(() => string);
+  /**
+   * Optional descriptive text for the form.
+   */
+  formDescription?: string|(() => string);
   /**
    * If specified, used as the aria label of the button. If not specified
    * the label will be used.
@@ -200,6 +207,8 @@ export type IContextMenuProps = {
 
 export type ContextMenuFormProps = {
   ui?: ContextMenuUI;
+  title?: string;
+  description?: string,
   closeForm: (e: any) => void;
   'aria-label'?: string;
 };

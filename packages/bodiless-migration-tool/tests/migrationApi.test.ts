@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2019 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,9 +12,18 @@
  * limitations under the License.
  */
 
-module.exports = {
-  plugins: [
-    // eslint-disable-next-line
-    require('tailwindcss')('tailwind.config.js'),
-  ],
-};
+import { getPagePathFromUrl } from '../src/migrationApi';
+
+describe('MigrationApi', () => {
+  describe('getPagePathFromUrl', () => {
+    it('converts frontpage url to path', () => {
+      expect(getPagePathFromUrl('/')).toBe('/');
+    });
+    it('converts basic 2-level url to path', () => {
+      expect(getPagePathFromUrl('/products')).toBe('/products');
+    });
+    it('converts page url with extension to path', () => {
+      expect(getPagePathFromUrl('/products.html')).toBe('/products');
+    });
+  });
+});

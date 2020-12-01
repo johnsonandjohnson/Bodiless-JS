@@ -58,7 +58,6 @@ import ImageGifSrc from './image.gif';
 import ImageJpgSrc from './image.jpg';
 import ImagePngSrc from './image.png';
 import ImageSvgSrc from './image.svg';
-import ImageWebpSrc from './image.webp';
 import ImageResponsiveSvgSrc from './responsive_asvg.svg';
 
 import ContentfulImage1 from '../../../components/Contentful/Image/image1';
@@ -69,7 +68,6 @@ const ImageGif = asEditableImageWithPlaceholder(ImageGifSrc)('gif')(Img);
 const ImageJpg = asEditableImageWithPlaceholder(ImageJpgSrc)('jpg')(Img);
 const ImagePng = asEditableImageWithPlaceholder(ImagePngSrc)('png')(Img);
 const ImageSvg = asEditableImageWithPlaceholder(ImageSvgSrc)('svg')(Img);
-const ImageWebp = asEditableImageWithPlaceholder(ImageWebpSrc)('webp')(Img);
 const ImageResponsiveSvg = asEditableImageWithPlaceholder(ImageResponsiveSvgSrc)('responsiveSvg')(Img);
 
 const LinkableImageAnimatedPng = asLinkableImage(ImageAnimatedPng)('animatedPngLink')(A);
@@ -77,7 +75,6 @@ const LinkableImageGif = asLinkableImage(ImageGif)('gifLink')(A);
 const LinkableImageJpg = asLinkableImage(ImageJpg)('jpgLink')(A);
 const LinkableImagePng = asLinkableImage(ImagePng)('pngLink')(A);
 const LinkableImageSvg = asLinkableImage(ImageSvg)('svgLink')(A);
-const LinkableImageWebp = asLinkableImage(ImageWebp)('webpLink')(A);
 const LinkableImageResponsiveSvg = asLinkableImage(ImageResponsiveSvg)('responsiveSvgLink')(A);
 
 // Define Contentful Image
@@ -197,11 +194,6 @@ export default (props: any) => (
         </ImageWrapper>
 
         <ImageWrapper>
-          <ImageTitle>WEBP</ImageTitle>
-          <ImageWebp />
-        </ImageWrapper>
-
-        <ImageWrapper>
           <ImageTitle>Animated PNG</ImageTitle>
           <ImageAnimatedPng />
         </ImageWrapper>
@@ -232,11 +224,6 @@ export default (props: any) => (
         <ImageWrapper>
           <ImageTitle>SVG</ImageTitle>
           <LinkableImageSvg />
-        </ImageWrapper>
-
-        <ImageWrapper>
-          <ImageTitle>WEBP</ImageTitle>
-          <LinkableImageWebp />
         </ImageWrapper>
 
         <ImageWrapper>

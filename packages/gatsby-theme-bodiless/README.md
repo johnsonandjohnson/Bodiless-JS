@@ -9,6 +9,30 @@ const gatsbyThemeBodiless = require('@bodiless/gatsby-theme-bodiless');
 
 // TODO: DEMONSTRATE API
 ```
+
+## Configuration
+
+### Gatsby image
+
+#### Image processing arguments
+
+To override default image processing arguments, use `gatsbyImage.sharpArgs` option. For example, to override default quality
+
+```js
+  {
+    resolve: '@bodiless/gatsby-theme-bodiless',
+    options: {
+      gatsbyImage: {
+        sharpArgs: {
+          quality: 70,
+        },
+      },
+    },
+  },
+```
+
+See [gatsby-plugin-sharp](https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/) doc to get a list of options you can override.
+
 ### Plugins
 
 #### Robots.txt

@@ -21,7 +21,7 @@ module.exports = {
    * crawler settings
    */
   crawler: {
-    maxDepth: 1,
+    maxDepth: 100,
   },
   /**
    * page creator settings
@@ -42,5 +42,10 @@ module.exports = {
     // pageIndexFile: pagePath => (new URL(pagePath)).pathname === '/' ? 'home.jsx' : 'default.jsx',
   },
   transformers: [
+  ],
+  /**
+   * a list of plugins that can subscribe to events emitted by the tool
+   */
+  plugins: [
   ],
 };

@@ -20,9 +20,10 @@ describe('Link Toggle smoke tests', function () {
   })
 
 
-  const label = 'AT - Label'
+  const label = 'AT - Label -'
   const url = 'AT-Url'
-  const editedPostfix = '-edited'
+  const normilizedUrl = '/' + url + '/'
+  const editedPostfix = 'edited'
   const labelXpath = '//*[@data-linktoggle-element="link-toggle"]//*[@class="bodiless-inline-editable"]'
   const labelPreviewXpath = '//*[@data-linktoggle-element="link-toggle"]//span'
   const linkXpath = '//*[@data-linktoggle-element="link-toggle"]//a'
@@ -66,7 +67,7 @@ describe('Link Toggle smoke tests', function () {
     cy.xpath(labelXpath)
       .should('have.text', label);
     cy.xpath(linkXpath)
-      .should('have.attr', 'href', url);
+      .should('have.attr', 'href', normilizedUrl);
   })
 
 
@@ -76,7 +77,7 @@ describe('Link Toggle smoke tests', function () {
     cy.xpath(labelPreviewXpath)
       .should('have.text', label);
     cy.xpath(linkXpath)
-      .should('have.attr', 'href', url);
+      .should('have.attr', 'href', normilizedUrl);
   })
 
 
@@ -86,7 +87,7 @@ describe('Link Toggle smoke tests', function () {
       .type(editedPostfix)
       .should('have.text', label + editedPostfix);
     cy.xpath(linkXpath)
-      .should('have.attr', 'href', url);
+      .should('have.attr', 'href', normilizedUrl);
   })
 
 
@@ -102,7 +103,7 @@ describe('Link Toggle smoke tests', function () {
     cy.xpath(labelXpath)
       .should('have.text', label + editedPostfix);
     cy.xpath(linkXpath)
-      .should('have.attr', 'href', url + editedPostfix);
+      .should('have.attr', 'href', normilizedUrl + editedPostfix + '/');
   })
 
 
@@ -112,14 +113,14 @@ describe('Link Toggle smoke tests', function () {
     cy.xpath(labelPreviewXpath)
       .should('have.text', label + editedPostfix);
     cy.xpath(linkXpath)
-      .should('have.attr', 'href', url + editedPostfix);
+      .should('have.attr', 'href', normilizedUrl + editedPostfix + '/');
   })
 
 
   it('link toggle: 8 - checking clicking the link in Preview mode', () => {
     cy.xpath(linkXpath)
       .click();
-    cy.url().should('include', url + editedPostfix);
+    cy.url().should('eq', Cypress.config().baseUrl + normilizedUrl + editedPostfix + '/');
     cy.visit('/link-toggle/');
   })
 

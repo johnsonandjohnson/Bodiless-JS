@@ -24,6 +24,9 @@ import { useMenuOptions, useGetItemUseGetMenuOptions } from '../../src/FlowConta
 
 jest.mock('../../src/ComponentSelector/componentSelectorForm');
 jest.mock('../../src/FlowContainer/model');
+jest.mock('../../src/FlowContainer/SortableChild', () => ({
+  FALLBACK_SNAP_CLASSNAME: 'w-full',
+}));
 
 const editContext = {
   activate: jest.fn(),
@@ -77,7 +80,7 @@ describe('useGetMenuOptions', () => {
     expect(componentSelectorForm).toHaveBeenCalledTimes(1);
     expect((componentSelectorForm as jest.Mock).mock.calls[0][0].components).toEqual(components);
     const action = (componentSelectorForm as jest.Mock).mock.calls[0][1];
-    action(null, selection);
+    action([selection]);
   }
 
   function expectDataHandlerCall(method: Function, args: any[]) {
