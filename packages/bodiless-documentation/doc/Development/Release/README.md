@@ -37,7 +37,7 @@ At end of Sprint, a new 0.0.x package version should be published as follows.
    ```
    npm run publish:patch
    ```
-1. Update dependencies in `package-lock.json` for each example site by following [these steps](../UpdatePackages?id=updating-example-sites39-package-lockjson).
+1. Update dependencies in `package-lock.json` for each example site by following [these steps](../Release/UpdatePackages?id=updating-example-sites39-package-lockjson).
 1. Create a PR to master from the ```release``` branch.  PR title should be, eg:
    ```
    chore: Release v0.0.45
