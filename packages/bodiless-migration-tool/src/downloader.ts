@@ -90,7 +90,7 @@ export default class Downloader {
           }
           return {
             targetPath: '',
-            url: '',
+            url: resource,
           };
         },
         { concurrency: 4 },

@@ -14,6 +14,7 @@
 
 import path from 'path';
 import type { OnPageCreateParams } from '../pluginManager';
+import debug from '../debug';
 
 type ImagetagsFactoryParams = {
   /**
@@ -36,19 +37,34 @@ const onPageCreate = ({
   document('img')
     .toArray()
     .forEach(async asset => {
+      if (!asset.attribs.src) {
+        return;
+      }
       const resourceUrl = new URL(asset.attribs.src, pageUrl);
-      // Download with downloaded info
-      const downloaded = await downloader.downloadFiles([resourceUrl.href]);
-      if (downloaded.length >= 1) {
-        const { targetPath } = downloaded[0];
-        const ext = path.extname(targetPath);
-        api.writeJsonFileSync(
-          path.resolve(api.getPagePath(), `${prefix}${path.basename(targetPath, ext)}.json`),
-          {
+      const url = resourceUrl.href;
+      try {
+        const downloaded = await downloader.downloadFiles([url]);
+        if (downloaded.length >= 1) {
+          const { targetPath } = downloaded[0];
+          if (!targetPath) {
+            return;
+          }
+          const ext = path.extname(targetPath);
+          const content = {
             src: api.getStaticRelativePath(targetPath),
             alt: asset.attribs.alt,
-          },
-        );
+          };
+          const jsonFilePath = api.getAvailableJsonFilename(
+            `${prefix}${path.basename(targetPath, ext)}.json`,
+            content,
+          );
+          api.writeJsonFileSync(
+            jsonFilePath,
+            content,
+          );
+        }
+      } catch (e) {
+        debug(`${url} is not available for image json.`);
       }
     });
 };
