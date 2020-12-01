@@ -30,8 +30,9 @@ type ImagetagsFactoryParams = {
  */
 const onPageCreate = ({
   prefix,
-}: ImagetagsFactoryParams) => ({ document, api, downloader }: OnPageCreateParams) => {
-  const pageUrl = api.url;
+}: ImagetagsFactoryParams) => ({
+  document, api, downloader, pagePath: pageUrl,
+}: OnPageCreateParams) => {
   document('img')
     .toArray()
     .forEach(async asset => {

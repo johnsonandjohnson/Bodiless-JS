@@ -70,10 +70,6 @@ type MigrationApiType = {
    * given full path of resource file, return the relative path under static folder.
    */
   getStaticRelativePath: (path: string) => string,
-  /**
-   * Return current page url.
-   */
-  url: string,
 };
 
 /**
@@ -108,10 +104,6 @@ class MigrationApi implements MigrationApiType {
 
   static create(params: MigrationApiParams) {
     return new MigrationApi(params);
-  }
-
-  get url() {
-    return this.pageUrl;
   }
 
   public writeJsonFileSync(targetPath: string, data: any) {
