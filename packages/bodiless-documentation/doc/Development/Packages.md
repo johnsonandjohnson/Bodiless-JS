@@ -78,10 +78,10 @@ When we build with npm bootstrap we are using lerna's `--hoist` flag, this means
 created with http://asciiflow.com/
 ## Current Packages
 
-* [fclasses](https://github.com/johnsonandjohnson/Bodiless-JS/tree/docs/fix-broken-links-in-bodiless/packages/fclasses): Provides functionality to inject functional class into react components
-* [bodiless-core](https://github.com/johnsonandjohnson/Bodiless-JS/tree/docs/fix-broken-links-in-bodiless/packages/bodiless-core): 
-* [bodiless-backend](https://github.com/johnsonandjohnson/Bodiless-JS/tree/docs/fix-broken-links-in-bodiless/packages/bodiless-backend): Contains the backend server for saving data and doing git operations
-* [bodiless-richtext](https://github.com/johnsonandjohnson/Bodiless-JS/tree/docs/fix-broken-links-in-bodiless/packages/bodiless-richtext): Provides a Rich Text component that can consume other components and make them available to the content editor.
-* [bodiless-components](https://github.com/johnsonandjohnson/Bodiless-JS/tree/docs/fix-broken-links-in-bodiless/packages/bodiless-components): Provide a collection of components that can be used in the bodiless system
-* [gatsby-theme-bodiless](https://github.com/johnsonandjohnson/Bodiless-JS/tree/docs/fix-broken-links-in-bodiless/packages/gatsby-theme-bodiless): Provides a gatsby theme for starting a bodiless site.
-* [bodiless-migration-tool](https://github.com/johnsonandjohnson/Bodiless-JS/tree/docs/fix-broken-links-in-bodiless/packages/bodiless-migration-tool): Allows to convert an existing site (independent of its technology) into a static flattened html site.
+* [fclasses](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/fclasses): Provides functionality to inject functional class into react components
+* [bodiless-core](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/bodiless-core): 
+* [bodiless-backend](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/bodiless-backend): Contains the backend server for saving data and doing git operations
+* [bodiless-richtext](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/bodiless-richtext): Provides a Rich Text component that can consume other components and make them available to the content editor.
+* [bodiless-components](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/bodiless-components): Provide a collection of components that can be used in the bodiless system
+* [gatsby-theme-bodiless](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/gatsby-theme-bodiless): Provides a gatsby theme for starting a bodiless site.
+* [bodiless-migration-tool](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/bodiless-migration-tool): Allows to convert an existing site (independent of its technology) into a static flattened html site.
