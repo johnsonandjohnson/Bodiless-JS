@@ -44,7 +44,7 @@ const onPageCreate = ({
         api.writeJsonFileSync(
           path.resolve(api.getPagePath(), `${prefix}${path.basename(targetPath, ext)}.json`),
           {
-            src: targetPath.replace(api.getStaticPath(), ''),
+            src: api.getStaticRelativePath(targetPath),
             alt: asset.attribs.alt,
           },
         );

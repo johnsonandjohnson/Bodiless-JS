@@ -12,7 +12,12 @@
  * limitations under the License.
  */
 
-import { getPagePathFromUrl } from '../src/migrationApi';
+import path from 'path';
+import { MigrationApi, getPagePathFromUrl } from '../src/migrationApi';
+// import * as app from '../src/jamstack-app';
+const { GatsbyApp } = require('../src/jamstack-app');
+
+jest.mock('../src/jamstack-app');
 
 describe('MigrationApi', () => {
   describe('getPagePathFromUrl', () => {
@@ -24,6 +29,24 @@ describe('MigrationApi', () => {
     });
     it('converts page url with extension to path', () => {
       expect(getPagePathFromUrl('/products.html')).toBe('/products');
+    });
+  });
+
+  describe('Static path methods', () => {
+    const workDir = '/path/to/workDir';
+    const gatsbyApp = new GatsbyApp();
+    gatsbyApp.getStaticDir = () => path.resolve(workDir, 'static');
+
+    const params = {
+      app: gatsbyApp,
+      pageUrl: 'http://host/path/to/page/',
+    };
+    const migrationApi = new MigrationApi(params);
+    it('returns correct static folder', () => {
+      expect(migrationApi.getStaticPath()).toBe(`${workDir}/static`);
+
+      const fullResourcePath = `${workDir}/static/path/to/resource`;
+      expect(migrationApi.getStaticRelativePath(fullResourcePath)).toBe('/path/to/resource');
     });
   });
 });

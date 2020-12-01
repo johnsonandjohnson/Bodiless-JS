@@ -67,6 +67,10 @@ type MigrationApiType = {
    */
   getStaticPath: () => string,
   /**
+   * given full path of resource file, return the relative path under static folder.
+   */
+  getStaticRelativePath: (path: string) => string,
+  /**
    * Return current page url.
    */
   url: string,
@@ -127,6 +131,10 @@ class MigrationApi implements MigrationApiType {
 
   public getStaticPath() {
     return this.app.getStaticDir();
+  }
+
+  public getStaticRelativePath(fullPath: string): string {
+    return fullPath.replace(this.getStaticPath(), '');
   }
 }
 
