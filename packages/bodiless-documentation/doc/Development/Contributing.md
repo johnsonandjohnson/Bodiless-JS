@@ -90,7 +90,7 @@ All work must be submitted in the form of a pull request to the master branch.
 - Unless explicitly stated in the associated issue, all pull requests must
   - Include relevant unit and integration tests
   - Include relevant documentation updates.
-  - Adhere to our [Coding Standards](../Release/Quality).
+  - Adhere to our [Coding Standards](../Development/Release/Quality).
 - There is no need to rebase a Pull Request branch, when merging in changes from other branches
 
 ## Merging Pull Request
