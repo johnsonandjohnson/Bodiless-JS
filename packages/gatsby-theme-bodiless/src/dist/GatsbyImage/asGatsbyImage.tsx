@@ -44,7 +44,7 @@ const asGatsbyImage$ = (Component: CT<any>) => {
     const { gatsbyImg, preset, ...rest } = props;
     if (gatsbyImg !== undefined) {
       return (
-        <GatsbyImg {...gatsbyImg} {...rest} />
+        <GatsbyImg {...rest} {...gatsbyImg} />
       );
     }
     return (
