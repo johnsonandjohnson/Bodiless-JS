@@ -59,7 +59,7 @@ const GATSBY_IMG_PROPS = [
   'draggable',
 ];
 
-const isGatsbyImg = ({ gatsbyImg }: GasbyImageProps) => gatsbyImg !== undefined;
+const isGatsbyImage = ({ gatsbyImg }: GasbyImageProps) => gatsbyImg !== undefined;
 
 const asGatsbyImage$ = (Component: CT<any>) => {
   const AsGatsbyImage = (props: GasbyImageProps) => {
@@ -79,7 +79,8 @@ const asGatsbyImage$ = (Component: CT<any>) => {
 
 const asGatsbyImage = flow(
   asGatsbyImage$,
-  ifToggledOn(isGatsbyImg)(withActivatorWrapper('onClick', Div)),
+  ifToggledOn(isGatsbyImage)(withActivatorWrapper('onClick', Div)),
 );
 
 export default asGatsbyImage;
+export { isGatsbyImage };
