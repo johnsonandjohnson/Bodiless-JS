@@ -29,7 +29,8 @@ export type GasbyImageProps = ImageProps & {
 };
 
 const GatsbyImgWrapper = (props: ImageProps) => {
-  const { src, alt, ...rest } = props;
+  // ToDo: get a list of wrapper activator props in a more maintainable way
+  const rest = pick(props, ['data-bl-activator', 'onClick', 'children']);
   return (
     <Div {...rest} />
   );
