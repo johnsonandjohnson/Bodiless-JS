@@ -14,9 +14,17 @@
 
 import React, { ComponentType as CT } from 'react';
 import GatsbyImg from 'gatsby-image';
-import type { GatsbyImageProps } from 'gatsby-image';
+import {
+  ifToggledOn,
+  withActivatorWrapper,
+} from '@bodiless/core';
+import type {
+  FluidObject,
+  FixedObject,
+  GatsbyImageOptionalProps,
+} from 'gatsby-image';
 import { Div } from '@bodiless/fclasses';
-import { pick } from 'lodash';
+import { pick, flow } from 'lodash';
 
 type ImageProps = {
   src: string;
@@ -25,16 +33,8 @@ type ImageProps = {
 
 export type GasbyImageProps = ImageProps & {
   preset: string;
-  gatsbyImg?: GatsbyImageProps;
-};
-
-const GatsbyImgWrapper = (props: ImageProps) => {
-  // ToDo: get a list of wrapper activator props in a more maintainable way
-  const rest = pick(props, ['data-bl-activator', 'onClick', 'children']);
-  return (
-    <Div {...rest} />
-  );
-};
+  gatsbyImg?: { fluid: FluidObject | FluidObject[] } | { fixed: FixedObject | FixedObject[] };
+} & GatsbyImageOptionalProps;
 
 // the list is taken from GatsbyImageOptionalProps interface
 const GATSBY_IMG_PROPS = [
@@ -59,15 +59,15 @@ const GATSBY_IMG_PROPS = [
   'draggable',
 ];
 
-const asGatsbyImage = (Component: CT<any>) => {
+const isGatsbyImg = ({ gatsbyImg }: GasbyImageProps) => gatsbyImg !== undefined;
+
+const asGatsbyImage$ = (Component: CT<any>) => {
   const AsGatsbyImage = (props: GasbyImageProps) => {
     const { gatsbyImg, preset, ...rest } = props;
     if (gatsbyImg !== undefined) {
-      const gatsbyImgProps = pick(props, GATSBY_IMG_PROPS);
+      const gatsbyImgProps = pick(props, GATSBY_IMG_PROPS) as GatsbyImageOptionalProps;
       return (
-        <GatsbyImgWrapper {...rest}>
-          <GatsbyImg {...gatsbyImg} {...gatsbyImgProps} />
-        </GatsbyImgWrapper>
+        <GatsbyImg {...gatsbyImg} {...gatsbyImgProps} />
       );
     }
     return (
@@ -76,5 +76,10 @@ const asGatsbyImage = (Component: CT<any>) => {
   };
   return AsGatsbyImage;
 };
+
+const asGatsbyImage = flow(
+  asGatsbyImage$,
+  ifToggledOn(isGatsbyImg)(withActivatorWrapper('onClick', Div)),
+);
 
 export default asGatsbyImage;
