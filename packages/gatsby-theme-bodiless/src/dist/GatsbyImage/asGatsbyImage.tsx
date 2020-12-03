@@ -15,6 +15,7 @@
 import React, { ComponentType as CT } from 'react';
 import GatsbyImg from 'gatsby-image';
 import {
+  ifEditable,
   ifToggledOn,
   withActivatorWrapper,
 } from '@bodiless/core';
@@ -24,7 +25,7 @@ import type {
   GatsbyImageOptionalProps,
 } from 'gatsby-image';
 import { Div } from '@bodiless/fclasses';
-import { pick, flow } from 'lodash';
+import { flow } from 'lodash';
 
 type ImageProps = {
   src: string;
@@ -36,38 +37,14 @@ export type GasbyImageProps = ImageProps & {
   gatsbyImg?: { fluid: FluidObject | FluidObject[] } | { fixed: FixedObject | FixedObject[] };
 } & GatsbyImageOptionalProps;
 
-// the list is taken from GatsbyImageOptionalProps interface
-const GATSBY_IMG_PROPS = [
-  'fadeIn',
-  'durationFadeIn',
-  'title',
-  'alt',
-  'className',
-  'critical',
-  'crossOrigin',
-  'style',
-  'imgStyle',
-  'placeholderStyle',
-  'placeholderClassName',
-  'backgroundColor',
-  'onLoad',
-  'onError',
-  'onStartLoad',
-  'Tag',
-  'itemProp',
-  'loading',
-  'draggable',
-];
-
 const isGatsbyImage = ({ gatsbyImg }: GasbyImageProps) => gatsbyImg !== undefined;
 
 const asGatsbyImage$ = (Component: CT<any>) => {
   const AsGatsbyImage = (props: GasbyImageProps) => {
     const { gatsbyImg, preset, ...rest } = props;
     if (gatsbyImg !== undefined) {
-      const gatsbyImgProps = pick(props, GATSBY_IMG_PROPS) as GatsbyImageOptionalProps;
       return (
-        <GatsbyImg {...gatsbyImg} {...gatsbyImgProps} />
+        <GatsbyImg {...gatsbyImg} {...rest} />
       );
     }
     return (
@@ -79,7 +56,9 @@ const asGatsbyImage$ = (Component: CT<any>) => {
 
 const asGatsbyImage = flow(
   asGatsbyImage$,
-  ifToggledOn(isGatsbyImage)(withActivatorWrapper('onClick', Div)),
+  ifEditable(
+    ifToggledOn(isGatsbyImage)(withActivatorWrapper('onClick', Div)),
+  ),
 );
 
 export default asGatsbyImage;
