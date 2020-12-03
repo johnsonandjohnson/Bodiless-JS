@@ -16,6 +16,7 @@ import React, { ComponentType as CT } from 'react';
 import GatsbyImg from 'gatsby-image';
 import type { GatsbyImageProps } from 'gatsby-image';
 import { Div } from '@bodiless/fclasses';
+import { pick } from 'lodash';
 
 type ImageProps = {
   src: string;
@@ -34,13 +35,37 @@ const GatsbyImgWrapper = (props: ImageProps) => {
   );
 };
 
+// the list is taken from GatsbyImageOptionalProps interface
+const GATSBY_IMG_PROPS = [
+  'fadeIn',
+  'durationFadeIn',
+  'title',
+  'alt',
+  'className',
+  'critical',
+  'crossOrigin',
+  'style',
+  'imgStyle',
+  'placeholderStyle',
+  'placeholderClassName',
+  'backgroundColor',
+  'onLoad',
+  'onError',
+  'onStartLoad',
+  'Tag',
+  'itemProp',
+  'loading',
+  'draggable',
+];
+
 const asGatsbyImage = (Component: CT<any>) => {
   const AsGatsbyImage = (props: GasbyImageProps) => {
     const { gatsbyImg, preset, ...rest } = props;
     if (gatsbyImg !== undefined) {
+      const gatsbyImgProps = pick(props, GATSBY_IMG_PROPS);
       return (
         <GatsbyImgWrapper {...rest}>
-          <GatsbyImg {...gatsbyImg} />
+          <GatsbyImg {...gatsbyImg} {...gatsbyImgProps} />
         </GatsbyImgWrapper>
       );
     }
