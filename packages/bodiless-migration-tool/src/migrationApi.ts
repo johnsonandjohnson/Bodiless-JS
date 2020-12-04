@@ -62,6 +62,19 @@ type MigrationApiType = {
    * @returns file system directory containing global site data
    */
   getSitePath: () => string,
+  /**
+   * return site static directory.
+   */
+  getStaticPath: () => string,
+  /**
+   * given full path of resource file, return the relative path under static folder.
+   */
+  getStaticRelativePath: (path: string) => string,
+  /**
+   * Given the file name, return an available file path under current page path.
+   * - content checked to prevent duplicates.
+   */
+  getAvailableJsonFilename: (filename: string, content: {}) => string,
 };
 
 /**
@@ -100,7 +113,7 @@ class MigrationApi implements MigrationApiType {
 
   public writeJsonFileSync(targetPath: string, data: any) {
     ensureDirectoryExistence(targetPath);
-    return fs.writeFileSync(targetPath, JSON.stringify(data, null, 2));
+    return fs.writeFileSync(targetPath, this.jsonToString(data));
   }
 
   public getPagePath(pageUrl?: string) {
@@ -111,6 +124,42 @@ class MigrationApi implements MigrationApiType {
 
   public getSitePath() {
     return this.app.getSiteDataDir();
+  }
+
+  public getStaticPath() {
+    return this.app.getStaticDir();
+  }
+
+  public getStaticRelativePath(fullPath: string): string {
+    return fullPath.replace(this.getStaticPath(), '');
+  }
+
+  public getAvailableJsonFilename(filename: string, content: {}): string {
+    const ext = path.extname(filename);
+    const regex = `^(.*)-(\\d+)(${ext})$`;
+    const filepath = path.resolve(this.getPagePath(), filename);
+    if (!fs.existsSync(filepath)) {
+      return filepath;
+    }
+
+    const data = fs.readFileSync(filepath, { encoding: 'utf8', flag: 'r' });
+    if (data === this.jsonToString(content)) {
+      return filepath;
+    }
+
+    let newFilename = '';
+    const parsed = filename.match(new RegExp(regex));
+    if (parsed) {
+      const next = parseInt(parsed[2], 10) + 1;
+      newFilename = `${parsed[1]}-${next}${parsed[3]}`;
+    } else {
+      newFilename = `${path.basename(filename, ext)}-1${ext}`;
+    }
+    return this.getAvailableJsonFilename(newFilename, content);
+  }
+
+  private jsonToString(json: {}): string {
+    return JSON.stringify(json, null, 2);
   }
 }
 

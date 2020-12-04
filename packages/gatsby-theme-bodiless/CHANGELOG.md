@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.62](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.61...v0.0.62) (2020-12-02)
+
+
+### Features
+
+* **gatsby-theme-bodiless:** webp image presets fallback and ability to override default sharp image processing arguments ([#613](https://github.com/johnsonandjohnson/bodiless-js/issues/613)) ([898237b](https://github.com/johnsonandjohnson/bodiless-js/commit/898237bc141b7501b595efdf2e21b49cfff083af))
+
+
+
+
+
 ## [0.0.61](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.60...v0.0.61) (2020-11-25)
 
 

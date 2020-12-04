@@ -22,19 +22,32 @@ import { BreadcrumbStoreProvider } from './BreadcrumbStoreProvider';
  * HOC that adds breadcrumb store and renders breadcrumbs.
  * @param Component that pushes its data to the store.
  */
-const withBreadcrumbs = (Component: ComponentType<any>) => {
-  const WithBreadcrumbs = (props: any) => {
+export const withBreadcrumbStore = (Component: ComponentType<any>) => {
+  const WithBreadcrumbStore = (props: any) => {
     const { node } = useNode();
     const { pagePath } = node;
     const store = new BreadcrumbStore(pagePath);
     return (
       <BreadcrumbStoreProvider store={store}>
         <Component {...props} />
-        <Breadcrumbs {...props} />
       </BreadcrumbStoreProvider>
     );
   };
-  return WithBreadcrumbs;
+  return WithBreadcrumbStore;
+};
+
+/**
+ * HOC that adds breadcrumb store and renders breadcrumbs.
+ * @param Component that pushes its data to the store.
+ */
+const withBreadcrumbs = (Component: ComponentType<any>) => {
+  const WithBreadcrumbs = (props: any) => (
+    <>
+      <Component {...props} />
+      <Breadcrumbs {...props} />
+    </>
+  );
+  return withBreadcrumbStore(WithBreadcrumbs);
 };
 
 export default withBreadcrumbs;

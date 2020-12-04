@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.62](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.61...v0.0.62) (2020-12-02)
+
+
+### Features
+
+* **components:** Normalize link Href ([#659](https://github.com/johnsonandjohnson/bodiless-js/issues/659)) ([5d99541](https://github.com/johnsonandjohnson/bodiless-js/commit/5d99541919a3f17be22a9fde522dbd9b137b03c3)), closes [#633](https://github.com/johnsonandjohnson/bodiless-js/issues/633)
+* **components, organisms:** Menu Trails ([#697](https://github.com/johnsonandjohnson/bodiless-js/issues/697)) ([b0b16b4](https://github.com/johnsonandjohnson/bodiless-js/commit/b0b16b445bdb6c38ab06c622313cb694e2d2e0bd))
+* **gatsby-theme-bodiless:** webp image presets fallback and ability to override default sharp image processing arguments ([#613](https://github.com/johnsonandjohnson/bodiless-js/issues/613)) ([898237b](https://github.com/johnsonandjohnson/bodiless-js/commit/898237bc141b7501b595efdf2e21b49cfff083af))
+* **migration-tool:** scrape bodiless data ([#682](https://github.com/johnsonandjohnson/bodiless-js/issues/682)) ([71be358](https://github.com/johnsonandjohnson/bodiless-js/commit/71be358b3d26dd2c417e6b86318a4bffc2e0b4c9))
+* **migration-tools:** create json files for scraped images ([#726](https://github.com/johnsonandjohnson/bodiless-js/issues/726)) ([51e459d](https://github.com/johnsonandjohnson/bodiless-js/commit/51e459dcb7548ec424672572ba12ca67a45ebe48))
+
+
+
+
+
 ## [0.0.61](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.60...v0.0.61) (2020-11-25)
 
 

@@ -14,8 +14,18 @@
 
 import React, { ComponentType as CT } from 'react';
 import GatsbyImg from 'gatsby-image';
-import type { GatsbyImageProps } from 'gatsby-image';
+import {
+  ifEditable,
+  ifToggledOn,
+  withActivatorWrapper,
+} from '@bodiless/core';
+import type {
+  FluidObject,
+  FixedObject,
+  GatsbyImageOptionalProps,
+} from 'gatsby-image';
 import { Div } from '@bodiless/fclasses';
+import { flow } from 'lodash';
 
 type ImageProps = {
   src: string;
@@ -24,24 +34,17 @@ type ImageProps = {
 
 export type GasbyImageProps = ImageProps & {
   preset: string;
-  gatsbyImg?: GatsbyImageProps;
-};
+  gatsbyImg?: { fluid: FluidObject | FluidObject[] } | { fixed: FixedObject | FixedObject[] };
+} & GatsbyImageOptionalProps;
 
-const GatsbyImgWrapper = (props: ImageProps) => {
-  const { src, alt, ...rest } = props;
-  return (
-    <Div {...rest} />
-  );
-};
+const isGatsbyImage = ({ gatsbyImg }: GasbyImageProps) => gatsbyImg !== undefined;
 
-const asGatsbyImage = (Component: CT<any>) => {
+const asGatsbyImage$ = (Component: CT<any>) => {
   const AsGatsbyImage = (props: GasbyImageProps) => {
     const { gatsbyImg, preset, ...rest } = props;
     if (gatsbyImg !== undefined) {
       return (
-        <GatsbyImgWrapper {...rest}>
-          <GatsbyImg {...gatsbyImg} />
-        </GatsbyImgWrapper>
+        <GatsbyImg {...rest} {...gatsbyImg} />
       );
     }
     return (
@@ -51,4 +54,12 @@ const asGatsbyImage = (Component: CT<any>) => {
   return AsGatsbyImage;
 };
 
+const asGatsbyImage = flow(
+  asGatsbyImage$,
+  ifEditable(
+    ifToggledOn(isGatsbyImage)(withActivatorWrapper('onClick', Div)),
+  ),
+);
+
 export default asGatsbyImage;
+export { isGatsbyImage };

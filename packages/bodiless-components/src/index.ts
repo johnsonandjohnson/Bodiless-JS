@@ -71,6 +71,7 @@ import {
   ifViewportIs,
   ifViewportIsNot,
 } from './withResponsiveToggle';
+import withResponsiveVariants from './withResponsiveVariants';
 import withBodilessLinkToggle from './withBodilessLinkToggle';
 
 export {
@@ -131,6 +132,7 @@ export {
   BreakpointsType,
   ifViewportIs,
   ifViewportIsNot,
+  withResponsiveVariants,
   withMetaForm,
   withMetaSnippet,
   withDataLayerItem,

@@ -13,7 +13,7 @@
  */
 
 import { flow } from 'lodash';
-import { addClasses } from '@bodiless/fclasses';
+import { addClasses, removeClasses } from '@bodiless/fclasses';
 import {
   asBodilessLink,
   asEditable as asEditableCore,
@@ -46,14 +46,20 @@ const withPadding5 = addClasses('p-5');
 
 /* Responsive design */
 const asMobileOnly = addClasses('lg:hidden');
-const asDesktopOnly = addClasses('hidden lg:flex');
+const asDesktopOnly = flow(
+  addClasses('hidden lg:flex'),
+  removeClasses('flex'),
+);
 
 /* Primary coloring */
 const asPrimaryColorBackground = addClasses('bg-gray-200');
 const asTextColorPrimary = addClasses('text-black');
 
 /* Coloring */
+const asTextWhite = addClasses('text-white');
 const asTealBackground = addClasses('bg-teal-600');
+const asLightTealBackground = addClasses('bg-teal-500');
+const asLightTealBackgroundOnHover = addClasses('hover:bg-teal-500');
 
 /* Typography */
 const asBold = addClasses('font-bold');
@@ -107,6 +113,8 @@ export {
   asPageContainer,
   asPrimaryColorBackground,
   asTealBackground,
+  asLightTealBackground,
+  asLightTealBackgroundOnHover,
   asImage,
   asEditableImage,
   asEditableLink,
@@ -116,6 +124,7 @@ export {
   asDesktopOnly,
   asSuperScript,
   asTextColorPrimary,
+  asTextWhite,
   asXMargin,
   asYMargin,
   asNegXMargin,

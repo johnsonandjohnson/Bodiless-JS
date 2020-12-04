@@ -16,12 +16,13 @@ import { flow, identity } from 'lodash';
 import {
   withNode, withNodeKey, withSidecarNodes,
 } from '@bodiless/core';
-import { replaceWith, HOC, stylable } from '@bodiless/fclasses';
 import {
-  asBodilessLink, withBodilessLinkToggle,
+  replaceWith, HOC, stylable, Span, A,
+} from '@bodiless/fclasses';
+import {
+  asBodilessLink, withBodilessLinkToggle, useBreadcrumbContext,
 } from '@bodiless/components';
 import { ToutClean } from '../Touts';
-import MenuLink from './MenuLink';
 
 export const asMenuTout = (withToutEditors: any) => flow(
   replaceWith(ToutClean),
@@ -30,10 +31,22 @@ export const asMenuTout = (withToutEditors: any) => flow(
   withNodeKey('title'),
 );
 
-export const asMenuLink = (asEditable: HOC) => flow(
-  replaceWith(MenuLink),
+/**
+ * Hook which can be used to determine if a menu item is part of
+ * the current active breadcrumb trail.
+ *
+ * This hook is only accurate if
+ * - The menu is inside a BreadcrumbStoreProvider.
+ * - The menu item has been wrapped in asBreadcrumb
+ *
+ * @return true if the item is in the active trail, false otherwise.
+ */
+export const useIsActiveTrail = () => useBreadcrumbContext()?.isActive();
+
+export const asMenuLink = (asEditable: HOC, asOff: HOC = replaceWith(Span)) => flow(
+  replaceWith(A),
   withSidecarNodes(
-    withBodilessLinkToggle(asBodilessLink)('link'),
+    withBodilessLinkToggle(asBodilessLink, asOff)('link'),
   ),
   stylable,
   asEditable,

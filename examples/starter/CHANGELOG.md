@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.62](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.61...v0.0.62) (2020-12-02)
+
+
+### Features
+
+* **components, organisms:** Menu Trails ([#697](https://github.com/johnsonandjohnson/bodiless-js/issues/697)) ([b0b16b4](https://github.com/johnsonandjohnson/bodiless-js/commit/b0b16b445bdb6c38ab06c622313cb694e2d2e0bd))
+* **migration-tool:** scrape bodiless data ([#682](https://github.com/johnsonandjohnson/bodiless-js/issues/682)) ([71be358](https://github.com/johnsonandjohnson/bodiless-js/commit/71be358b3d26dd2c417e6b86318a4bffc2e0b4c9))
+
+
+
+
+
 ## [0.0.61](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.60...v0.0.61) (2020-11-25)
 
 

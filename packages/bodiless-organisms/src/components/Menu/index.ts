@@ -15,13 +15,13 @@
 import {
   asMenuBase as asMegaMenuBase,
   withMenuDesign as withMegaMenuDesign,
-  asBreadcrumbsClean as asMegaMenuBreadcrumbs,
+  asBreadcrumbSource as asMegaMenuBreadcrumbSource,
 } from './MegaMenu';
 
 import {
   asMenuBase as asSimpleMenuBase,
   withMenuDesign as withSimpleMenuDesign,
-  asBreadcrumbsClean as asSimpleMenuBreadcrumbs,
+  asBreadcrumbSource as asSimpleMenuBreadcrumbSource,
 } from './SimpleMenu';
 
 import { useIsMenuOpen } from './withMenuContext';
@@ -31,18 +31,19 @@ import asMegaMenuTopNav from './MegaMenu.token';
 export {
   asMenuTout,
   asMenuLink,
+  useIsActiveTrail,
 } from './MenuTitles';
 
 export {
   asMegaMenuBase,
   withMegaMenuDesign,
-  asMegaMenuBreadcrumbs,
+  asMegaMenuBreadcrumbSource,
 };
 
 export {
   asSimpleMenuBase,
   withSimpleMenuDesign,
-  asSimpleMenuBreadcrumbs,
+  asSimpleMenuBreadcrumbSource,
 };
 
 export {
