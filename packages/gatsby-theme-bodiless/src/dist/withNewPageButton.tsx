@@ -15,6 +15,8 @@
 /* eslint-disable no-alert */
 import React, {
   useCallback, useEffect, useState,
+  ComponentType,
+  HTMLProps,
 } from 'react';
 import {
   contextMenuForm,
@@ -22,8 +24,12 @@ import {
   useEditContext,
   withMenuOptions,
   ContextSubMenu,
+  ContextMenuProvider,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
+import { flow } from 'lodash';
+import { addClasses, removeClasses } from '@bodiless/fclasses';
+import type { StylableProps } from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
@@ -77,6 +83,7 @@ const NewPageComp = (props : NewPageProps) => {
   const {
     status, errorMessage, newPagePath,
   } = props;
+  const defaultUI = useMenuOptionUI();
   const {
     ComponentFormLabel,
     ComponentFormDescription,
@@ -84,25 +91,44 @@ const NewPageComp = (props : NewPageProps) => {
     ComponentFormWarning,
     ComponentFormTitle,
     ComponentFormLink,
-  } = useMenuOptionUI();
+  } = defaultUI;
   const formTitle = 'Add a Blank Page';
   const { subPageTemplate } = useGatsbyPageContext();
   const template = subPageTemplate || DEFAULT_PAGE_TEMPLATE;
   switch (status) {
     case NewPageState.Init: {
+      const CustomComponentFormLabel = flow(
+        removeClasses('bl-text-xs'),
+        addClasses('bl-font-bold bl-text-sm'),
+      )(ComponentFormLabel as ComponentType<StylableProps>);
+      const CustomComponentFormLink = flow(
+        removeClasses('bl-block'),
+        addClasses('bl-italic'),
+      )(ComponentFormLink as ComponentType<StylableProps>);
+      const CustomComponentFormWarning = flow(
+        removeClasses('bl-float-left'),
+      )(ComponentFormWarning);
+      const ui = {
+        ...defaultUI,
+        ComponentFormLabel: CustomComponentFormLabel as ComponentType<HTMLProps<HTMLLabelElement>>,
+        ComponentFormLink: CustomComponentFormLink as ComponentType<HTMLProps<HTMLAnchorElement>>,
+        ComponentFormWarning: CustomComponentFormWarning,
+      };
       return (
         <>
-          <ComponentFormTitle>{formTitle}</ComponentFormTitle>
-          <ComponentFormLabel>Template</ComponentFormLabel>
-          <ComponentFormText
-            field="template"
-            disabled
-            initialValue={template}
-          />
-          <NewPageURLField
-            validateOnChange
-            validateOnBlur
-          />
+          <ContextMenuProvider ui={ui}>
+            <ComponentFormTitle>{formTitle}</ComponentFormTitle>
+            <CustomComponentFormLabel>Template</CustomComponentFormLabel>
+            <ComponentFormText
+              field="template"
+              disabled
+              initialValue={template}
+            />
+            <NewPageURLField
+              validateOnChange
+              validateOnBlur
+            />
+          </ContextMenuProvider>
         </>
       );
     }

@@ -126,16 +126,17 @@ const NewPageURLField = (props: FieldProps) => {
   const isBasePathEmpty = isEmptyValue(basePathValue) || basePathValue === BASE_PATH_EMPTY_VALUE;
   const isFullUrl = isBasePathEmpty;
 
-  const { validate, ...rest } = props;
+  const { validate, validateOnMount, ...rest } = props;
   const {
     fieldState, fieldApi, render, ref, userProps,
   } = useField({
     field: PAGE_URL_FIELD_NAME,
     validate: isFullUrl ? getPageUrlValidator(validate) : getPagePathValidator(validate),
+    validateOnMount: isFullUrl || validateOnMount,
     ...rest,
   });
   const { value } = fieldState;
-  const { setTouched, setValue } = fieldApi;
+  const { setTouched, setValue, setError } = fieldApi;
   const { onChange, onBlur, ...restUserProps } = userProps;
   const fieldLabel = isFullUrl ? 'URL' : 'Page Path';
   const inputClasses = isFullUrl ? INPUT_FIELD_BLOCK_CLASSES : INPUT_FIELD_INLINE_CLASSES;
@@ -174,14 +175,19 @@ const NewPageURLField = (props: FieldProps) => {
       {
         !isBasePathEmpty
         && (
-        <ComponentFormLink
-          onClick={() => {
-            setValue(joinPath(basePathValue, fieldValueToUrl(value)));
-            setBasePathValue(BASE_PATH_EMPTY_VALUE);
-          }}
-        >
-          Edit
-        </ComponentFormLink>
+          <div
+            className="bl-block"
+          >
+            <ComponentFormLink
+              onClick={() => {
+                setValue(joinPath(basePathValue, fieldValueToUrl(value)));
+                setBasePathValue(BASE_PATH_EMPTY_VALUE);
+                setError(undefined);
+              }}
+            >
+              Edit
+            </ComponentFormLink>
+          </div>
         )
       }
       {
