@@ -1,9 +1,0 @@
-{
-  "url": "https://example.com/",
-  "crawler": {
-    "maxDepth": 1,
-    "ignoreRobotsTxt": true
-  },
-  "transformers": [
-  ]
-}

@@ -32,14 +32,21 @@ import withSimpleBurgerMenuStyles from './SimpleBurgerMenu.token';
  * burger menu icon, close icon and hover effect.
  */
 import './burger-menu.css';
+import { asMegaMenuBreadcrumbSource, asBreadcrumbSource } from '../Breadcrumbs/MenuBreadcrumbs';
 
 const MegaBurgerMenuBody = flow(
+  // We need to register the burger menu as a second breadcrumb source
+  // bc the top menu is unmounted at smaller viewports.
+  asMegaMenuBreadcrumbSource,
   asMegaBurgerMenu,
   withMegaBurgerMenuStyles,
   asStatic,
 )(MegaMenuBase);
 
 const BurgerMenuBody = flow(
+  // We need to register the burger menu as a second breadcrumb source
+  // bc the top menu is unmounted at smaller viewports.
+  asBreadcrumbSource,
   asSimpleBurgerMenu,
   withSimpleBurgerMenuStyles,
   asStatic,

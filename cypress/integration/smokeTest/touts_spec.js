@@ -20,13 +20,13 @@ describe('Tout testing', function () {
   })
 
   const pagePath = '/touts/';
-  const title = 'AT - Title 1';
-  const description = 'AT - Description 1';
-  const ctaLabel = 'AT - CTA Link 1';
+  const title = 'AT - Title 1 -';
+  const description = 'AT - Description 1 -';
+  const ctaLabel = 'AT - CTA Link 1 -';
   const toutUrl = 'AT-toutUrl1';
+  const normilizedUrl = '/' + toutUrl + '/';
   const imageAltText = 'AT-1stToutAltText';
-  const editedPostfix = ' - edited';
-  const editedToutUrl = '-edited';
+  const editedPostfix = 'edited';
   const imagesFolderPath = "images";
   const imageNameOriginal = 'img_615x500.jpg';
   const imageNameUpdated = 'img_615x502.jpg';
@@ -120,10 +120,10 @@ describe('Tout testing', function () {
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'alt', imageAltText);
     cy.xpath(imageLinkXpath)
-      .should('have.attr', 'href', toutUrl);
+      .should('have.attr', 'href', normilizedUrl);
     cy.xpath(ctaButtonXpath)
       .click();
-    cy.url().should('include', toutUrl);
+    cy.url().should('eq', Cypress.config().baseUrl + normilizedUrl);
     cy.visit(pagePath);
   })
 
@@ -143,7 +143,7 @@ describe('Tout testing', function () {
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'alt', imageAltText);
     cy.xpath(imageLinkXpath)
-      .should('have.attr', 'href', toutUrl);
+      .should('have.attr', 'href', normilizedUrl);
   })
 
 
@@ -174,7 +174,7 @@ describe('Tout testing', function () {
     cy.xpath(linkIconCTAXpath)
       .click();
     cy.xpath(urlFieldCTAXpath)
-      .type(editedToutUrl);
+      .type(editedPostfix);
     cy.xpath(checkmarkIconLinkCTAFormXpath)
       .click();
   })
@@ -213,10 +213,10 @@ describe('Tout testing', function () {
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'alt', imageAltText + editedPostfix);
     cy.xpath(ctaButtonXpath)
-      .should('have.attr', 'href', toutUrl + editedToutUrl);
+      .should('have.attr', 'href', normilizedUrl + editedPostfix + '/');
     cy.xpath(imagePlaceholderXpath)
       .click();
-    cy.url().should('include', toutUrl + editedToutUrl);
+    cy.url().should('eq', Cypress.config().baseUrl + normilizedUrl + editedPostfix + '/');
     cy.visit(pagePath);
   })
 
@@ -236,6 +236,6 @@ describe('Tout testing', function () {
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'alt', imageAltText + editedPostfix);
     cy.xpath(imageLinkXpath)
-      .should('have.attr', 'href', toutUrl + editedToutUrl);
+      .should('have.attr', 'href', normilizedUrl + editedPostfix + '/');
   })
 })

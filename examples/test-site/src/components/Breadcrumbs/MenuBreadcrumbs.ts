@@ -13,7 +13,7 @@
  */
 
 import { flow } from 'lodash';
-import { withSidecarNodes, asReadOnly } from '@bodiless/core';
+import { withSidecarNodes, asReadOnly, withNode } from '@bodiless/core';
 import {
   addClasses,
   withDesign,
@@ -23,12 +23,10 @@ import {
   Ul,
   stylable,
 } from '@bodiless/fclasses';
-import { withoutLinkWhenLinkDataEmpty } from '@bodiless/components';
+import { withoutLinkWhenLinkDataEmpty, Breadcrumbs as BreadcrumbsBase } from '@bodiless/components';
 import {
-  asSimpleMenuBase,
-  asSimpleMenuBreadcrumbs,
-  asMegaMenuBreadcrumbs,
-  asMegaMenuBase,
+  asSimpleMenuBreadcrumbSource,
+  asMegaMenuBreadcrumbSource as asMegaMenuBreadcrumbSourceBase,
 } from '@bodiless/organisms';
 
 import { EditorSimple } from '../Editors';
@@ -88,28 +86,36 @@ const withMenuBreadcrumbsStyles = flow(
   withArrowSeparator,
 );
 
-const Breadcrumbs = flow(
-  asSimpleMenuBase(),
-  asSimpleMenuBreadcrumbs({
+const asBreadcrumbSource = flow(
+  asSimpleMenuBreadcrumbSource({
     linkNodeKey: 'title$link',
     titleNodeKey: 'title$text',
   }),
+  withNode,
+);
+
+const Breadcrumbs = flow(
   withMenuBreadcrumbSchema,
   withMenuBreadcrumbsStyles,
-)('ul');
+)(BreadcrumbsBase);
+
+const asMegaMenuBreadcrumbSource = flow(
+  asMegaMenuBreadcrumbSourceBase({
+    linkNodeKey: 'title$link',
+    titleNodeKey: 'title$text',
+  }),
+  withNode,
+);
 
 const MegaMenuBreadcrumbs = flow(
-  asMegaMenuBase(),
-  asMegaMenuBreadcrumbs({
-    linkNodeKey: 'title$link',
-    titleNodeKey: 'title$text',
-  }),
   withMenuBreadcrumbSchema,
   withMenuBreadcrumbsStyles,
-)('ul');
+)(BreadcrumbsBase);
 
 export default Breadcrumbs;
 export {
+  asBreadcrumbSource,
+  asMegaMenuBreadcrumbSource,
   DEFAULT_STARTING_TRAIL_NODE_KEY,
   DEFAULT_FINAL_TRAIL_NODE_KEY,
   MegaMenuBreadcrumbs,

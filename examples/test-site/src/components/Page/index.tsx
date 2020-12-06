@@ -14,12 +14,12 @@
 
 import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import { withPageDimensionsContext } from '@bodiless/components';
+import { withPageDimensionsContext, BreakpointsType } from '@bodiless/components';
 
 import resolveConfig from 'tailwindcss/resolveConfig';
 import tailwindConfig from '../../../tailwind.config';
 
-const getTailwindBreakpoints = () => {
+const getTailwindBreakpoints = (): BreakpointsType => {
   const { theme: { screens } } = resolveConfig(tailwindConfig);
   const breakpoints = { ...screens };
 
@@ -30,7 +30,7 @@ const getTailwindBreakpoints = () => {
   return breakpoints;
 };
 
-const breakpoints = getTailwindBreakpoints();
+const breakpoints: BreakpointsType = getTailwindBreakpoints();
 
 const asResponsivePage = flow(
   withPageDimensionsContext({ breakpoints }),

@@ -18,8 +18,7 @@ import {
   withDesign,
   Design,
   stylable,
-  replaceWith,
-  Fragment,
+  HOC,
 } from '@bodiless/fclasses';
 import {
   WithNodeKeyProps,
@@ -27,9 +26,8 @@ import {
 import {
   asBodilessList,
   withSubListDesign, withSubLists, asSubList, withDeleteNodeOnUnwrap,
-  asBreadcrumb, withBreadcrumbs,
+  asBreadcrumbSource as asBreadcrumbSourceBase,
 } from '@bodiless/components';
-import type { BreadcrumbSettings } from '@bodiless/components';
 
 import { asStylableList } from './SimpleMenu.token';
 import withMenuContext from './withMenuContext';
@@ -55,7 +53,7 @@ const asMenuSubList = flow(
  *
  * @param design
  */
-const withMenuDesign = (design: Design<any>) => {
+const withMenuDesign = (design: Design<any>|HOC) => {
   const withDesign$ = typeof design === 'function' ? design : withDesign(design);
   return flow(
     withSubListDesign(1)({
@@ -83,43 +81,8 @@ const asMenuBase = (nodeKeys?: WithNodeKeyProps) => flow(
   withMenuContext,
 );
 
-/**
- * HOC that can be applied to a menu based component,
- * it renders all list and sublist items but produces no markup.
- */
-const withEmptyMenuMarkup = flow(
-  withDesign({
-    Item: withDesign({
-      SubMenu: withDesign({
-        Item: replaceWith(Fragment),
-      }),
-    }),
-  }),
-  withMenuDesign({
-    Wrapper: replaceWith(Fragment),
-  }),
-  withSubListDesign(1)({
-    _default: replaceWith(Fragment),
-  }),
-);
-
-/**
- * Creates a HOC which can be applied to a mega menu to make it into a site's breadcrumbs
- *
- * @param settings The title and link nodekeys defining where to locate the link and title nodes.
- *
- * @return  HOC for composing a clean (unstyled) site breadcrumb component.
- */
-const asBreadcrumbsClean = (settings: BreadcrumbSettings) => flow(
-  withEmptyMenuMarkup,
-  withMenuDesign({
-    Item: flow(
-      asBreadcrumb(settings),
-    ),
-  }),
-  withBreadcrumbs,
-);
+const asBreadcrumbSource = asBreadcrumbSourceBase(withMenuDesign);
 
 export {
-  asMenuBase, asBreadcrumbsClean, withMenuDesign, asMenuSubList,
+  asMenuBase, asBreadcrumbSource, withMenuDesign, asMenuSubList,
 };

@@ -3,15 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.62](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.61...v0.0.62) (2020-12-02)
+
+
+### Features
+
+* **components:** Normalize link Href ([#659](https://github.com/johnsonandjohnson/bodiless-js/issues/659)) ([5d99541](https://github.com/johnsonandjohnson/bodiless-js/commit/5d99541919a3f17be22a9fde522dbd9b137b03c3)), closes [#633](https://github.com/johnsonandjohnson/bodiless-js/issues/633)
+* **components, organisms:** Menu Trails ([#697](https://github.com/johnsonandjohnson/bodiless-js/issues/697)) ([b0b16b4](https://github.com/johnsonandjohnson/bodiless-js/commit/b0b16b445bdb6c38ab06c622313cb694e2d2e0bd))
+* **gatsby-theme-bodiless:** webp image presets fallback and ability to override default sharp image processing arguments ([#613](https://github.com/johnsonandjohnson/bodiless-js/issues/613)) ([898237b](https://github.com/johnsonandjohnson/bodiless-js/commit/898237bc141b7501b595efdf2e21b49cfff083af))
+* **migration-tool:** scrape bodiless data ([#682](https://github.com/johnsonandjohnson/bodiless-js/issues/682)) ([71be358](https://github.com/johnsonandjohnson/bodiless-js/commit/71be358b3d26dd2c417e6b86318a4bffc2e0b4c9))
+* **migration-tools:** create json files for scraped images ([#726](https://github.com/johnsonandjohnson/bodiless-js/issues/726)) ([51e459d](https://github.com/johnsonandjohnson/bodiless-js/commit/51e459dcb7548ec424672572ba12ca67a45ebe48))
+
+
+
+
+
+## [0.0.61](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.60...v0.0.61) (2020-11-25)
+
+
+### Bug Fixes
+
+* **layouts:** Set initial width of a new item. ([#713](https://github.com/johnsonandjohnson/bodiless-js/issues/713)) ([f6aca9b](https://github.com/johnsonandjohnson/bodiless-js/commit/f6aca9be2323907d86ec8801f763cb0232284a2b))
+* moved package css compilation and purge to site level ([#707](https://github.com/johnsonandjohnson/bodiless-js/issues/707)) ([cfeb8eb](https://github.com/johnsonandjohnson/bodiless-js/commit/cfeb8eb5b3db6f896a979ce62193642d9aea7300))
+
+
+### Features
+
+* **components:** Content Library ([#696](https://github.com/johnsonandjohnson/bodiless-js/issues/696)) ([ee66fb8](https://github.com/johnsonandjohnson/bodiless-js/commit/ee66fb876754e17ef551bc2a87e257957b9bd2aa)), closes [#1](https://github.com/johnsonandjohnson/bodiless-js/issues/1) [#4](https://github.com/johnsonandjohnson/bodiless-js/issues/4) [#2](https://github.com/johnsonandjohnson/bodiless-js/issues/2) [#5](https://github.com/johnsonandjohnson/bodiless-js/issues/5) [#3](https://github.com/johnsonandjohnson/bodiless-js/issues/3)
+* **layouts:**  Component Selector Search ([#708](https://github.com/johnsonandjohnson/bodiless-js/issues/708)) ([54d2d4f](https://github.com/johnsonandjohnson/bodiless-js/commit/54d2d4fb035abef808cce5391afe24a72f389018)), closes [#667](https://github.com/johnsonandjohnson/bodiless-js/issues/667)
+* **layouts:** Flow container "copy" button ([#686](https://github.com/johnsonandjohnson/bodiless-js/issues/686)) ([60dd9c8](https://github.com/johnsonandjohnson/bodiless-js/commit/60dd9c8d46f5e02dbcc7104e7a76f95c46e35e21))
+
+
+
+
+
 ## [0.0.60](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.58...v0.0.60) (2020-11-18)
 
 
 ### Bug Fixes
 
 * **bodiless-layouts:** Add local context menu and activator to flow container items. ([#665](https://github.com/johnsonandjohnson/bodiless-js/issues/665)) ([548d2d6](https://github.com/johnsonandjohnson/bodiless-js/commit/548d2d6051413fc3cae1a8d3fae82851b2906d98))
-* **core:** Context Menu Panel for link/image/seo disappear when you mouse moves off ([#639](https://github.com/johnsonandjohnson/bodiless-js/issues/639)) ([43e0d84](https://github.com/johnsonandjohnson/bodiless-js/commit/43e0d84e3235845dc4938c41526c227c4cb5ad63))
 * **gatsby-plugin-ssi:** Each child in a list should have a unique key prop ([#517](https://github.com/johnsonandjohnson/bodiless-js/issues/517)) ([78035b5](https://github.com/johnsonandjohnson/bodiless-js/commit/78035b5a0efa440abad549fe79c26de71e99a4c0))
-* **layouts:** Various FlowContainer bugs + Snap Indicator ([#658](https://github.com/johnsonandjohnson/bodiless-js/issues/658)) ([b4fec7b](https://github.com/johnsonandjohnson/bodiless-js/commit/b4fec7bf937c73d379a847b823c823483072ccc1)), closes [#657](https://github.com/johnsonandjohnson/bodiless-js/issues/657) [#654](https://github.com/johnsonandjohnson/bodiless-js/issues/654) [#656](https://github.com/johnsonandjohnson/bodiless-js/issues/656)
 * **richtext:** [GAP] 2 clicks are needed on a newly created menu item to open Local context menu [#671](https://github.com/johnsonandjohnson/bodiless-js/issues/671) ([2710ef9](https://github.com/johnsonandjohnson/bodiless-js/commit/2710ef9910c9d0435ab88386f0788105bdf68f79))
 * **richtext:** [GAPS] RTE editor doesn't allow for inline files/components (aka inline CTA styled buttons) ([#481](https://github.com/johnsonandjohnson/bodiless-js/issues/481)) ([3647e41](https://github.com/johnsonandjohnson/bodiless-js/commit/3647e41b9e8ac23e0a24ac065a5d0229dc04223c))
 
@@ -24,7 +56,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **fclasses:** Design Keys ([#685](https://github.com/johnsonandjohnson/bodiless-js/issues/685)) ([0db060a](https://github.com/johnsonandjohnson/bodiless-js/commit/0db060ad1e7496553cd8eae3654770530d543010)), closes [#660](https://github.com/johnsonandjohnson/bodiless-js/issues/660)
 * **migration-tool:** migrate site skeleton ([#678](https://github.com/johnsonandjohnson/bodiless-js/issues/678)) ([db01c52](https://github.com/johnsonandjohnson/bodiless-js/commit/db01c52b30e3b9cc6c8440fcf54c3d4d96cf4879))
 * Purge CSS Enhancements ([#632](https://github.com/johnsonandjohnson/bodiless-js/issues/632)) ([9f9c6de](https://github.com/johnsonandjohnson/bodiless-js/commit/9f9c6dee725389887066702295ee447990d69b67))
-* **search:** component library search component ([#592](https://github.com/johnsonandjohnson/bodiless-js/issues/592)) ([faa2219](https://github.com/johnsonandjohnson/bodiless-js/commit/faa2219a5dc5b66cbb3fd2a8eba6d24a04d3d38f))
 
 
 

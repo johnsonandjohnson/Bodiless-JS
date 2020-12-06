@@ -15,8 +15,6 @@
 export default function evaluatePage() {
   return {
     processedHtml: document.body.innerHTML,
-    metatags: Array.from(document.getElementsByTagName('meta'))
-      .map(item => item.outerHTML),
     scripts: Array.from(document.getElementsByTagName('script'))
       .filter(item => item.src !== '')
       .map(item => item.src),

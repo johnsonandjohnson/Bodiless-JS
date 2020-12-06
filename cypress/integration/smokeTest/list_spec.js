@@ -66,7 +66,7 @@ describe('List (text and link versions) testing', function () {
     var i;
     for (i = 0; i < itemCount; i++) {
       cy.xpath(topTextListItem1Sublist[i])
-        .should('have.text', sublistItemLabel + ' 1.' + (i + 1).toString());
+        .should('have.text', sublistItemLabel + ' 1-' + (i + 1).toString());
     }
   })
 
@@ -92,7 +92,7 @@ describe('List (text and link versions) testing', function () {
       cy.xpath(topTextLinkListItem[i])
         .should('not.exist');
       cy.xpath(topTextListItem1Sublist[i])
-        .should('have.text', sublistItemLabel + ' 1.' + (i + 1).toString());
+        .should('have.text', sublistItemLabel + ' 1-' + (i + 1).toString());
       cy.xpath(topTextLinkSubListItem[i])
         .should('not.exist');
     }
@@ -105,7 +105,7 @@ describe('List (text and link versions) testing', function () {
     cy.xpath(topTextListItem[0])
       .should('have.text', listItemLabel + ' 1' + editedPostfix);
     cy.xpath(topTextListItem1Sublist[0])
-      .should('have.text', sublistItemLabel + ' 1.1' + editedPostfix);
+      .should('have.text', sublistItemLabel + ' 1-1' + editedPostfix);
   })
 
 
@@ -115,7 +115,7 @@ describe('List (text and link versions) testing', function () {
     cy.xpath(topTextListItem[0])
       .should('have.text', listItemLabel + ' 1' + editedPostfix);
     cy.xpath(topTextListItem1Sublist[0])
-      .should('have.text', sublistItemLabel + ' 1.1' + editedPostfix);
+      .should('have.text', sublistItemLabel + ' 1-1' + editedPostfix);
   })
 
 
@@ -157,7 +157,7 @@ describe('List (text and link versions) testing', function () {
     for (i = 0; i < itemCount; i++) {
       addUrlInListItem(topLinkListItem[i], listItemUrl + '-' + (i + 1).toString());
       cy.xpath(topLinkListItem[i])
-        .should('have.attr', 'href',  listItemUrl + '-' + (i + 1).toString());
+        .should('have.attr', 'href', `/${listItemUrl}-${i + 1}/`);
     }
   })
 
@@ -167,7 +167,7 @@ describe('List (text and link versions) testing', function () {
     var i;
     for (i = 0; i < itemCount; i++) {
       cy.xpath(topLinkListItem1Sublist[i])
-        .should('have.text', sublistItemLabel + ' 1.' + (i + 1).toString());
+        .should('have.text', sublistItemLabel + ' 1-' + (i + 1).toString());
     }
   })
 
@@ -175,9 +175,9 @@ describe('List (text and link versions) testing', function () {
   it('list: 2.4 - checking adding URL in the link sublist items in the 1st link list item', () => {
     var i;
     for (i = 0; i < itemCount; i++) {
-      addUrlInListItem(topLinkListItem1Sublist[i], listItemUrl + '-1.' + (i + 1).toString());
+      addUrlInListItem(topLinkListItem1Sublist[i], listItemUrl + '-1-' + (i + 1).toString());
       cy.xpath(topLinkListItem1Sublist[i])
-        .should('have.attr', 'href',  listItemUrl + '-1.' + (i + 1).toString());
+        .should('have.attr', 'href',  `/${listItemUrl}-1-${i + 1}/`);
     }
   })
 
@@ -189,10 +189,10 @@ describe('List (text and link versions) testing', function () {
     for (i = 0; i < itemCount; i++) {
       cy.xpath(topLinkListItem[i])
         .should('have.text', listItemLabel + ' ' + (i + 1).toString())
-        .should('have.attr', 'href',  listItemUrl + '-' + (i + 1).toString());
+        .should('have.attr', 'href',  `/${listItemUrl}-${i + 1}/`);
       cy.xpath(topLinkListItem1Sublist[i])
-        .should('have.text', sublistItemLabel + ' 1.' + (i + 1).toString())
-        .should('have.attr', 'href',  listItemUrl + '-1.' + (i + 1).toString());
+        .should('have.text', sublistItemLabel + ' 1-' + (i + 1).toString())
+        .should('have.attr', 'href',  `/${listItemUrl}-1-${i + 1}/`);
     }
   })
 
@@ -204,10 +204,10 @@ describe('List (text and link versions) testing', function () {
     addUrlInListItem(topLinkListItem1Sublist[0], editedPostfix);
     cy.xpath(topLinkListItem[0])
       .should('have.text', listItemLabel + ' 1' + editedPostfix)
-      .should('have.attr', 'href',  listItemUrl + '-1' + editedPostfix);
+      .should('have.attr', 'href',  `/${listItemUrl}-1/${editedPostfix}/`);
     cy.xpath(topLinkListItem1Sublist[0])
-      .should('have.text', sublistItemLabel + ' 1.1' + editedPostfix)
-      .should('have.attr', 'href',  listItemUrl + '-1.1' + editedPostfix);
+      .should('have.text', sublistItemLabel + ' 1-1' + editedPostfix)
+      .should('have.attr', 'href', `/${listItemUrl}-1-1/${editedPostfix}/`);
   })
 
 
@@ -216,21 +216,21 @@ describe('List (text and link versions) testing', function () {
     cy.clickEdit();
     cy.xpath(topLinkListItem[0])
       .should('have.text', listItemLabel + ' 1' + editedPostfix)
-      .should('have.attr', 'href',  listItemUrl + '-1' + editedPostfix);
+      .should('have.attr', 'href',  `/${listItemUrl}-1/${editedPostfix}/`);
     cy.xpath(topLinkListItem1Sublist[0])
-      .should('have.text', sublistItemLabel + ' 1.1' + editedPostfix)
-      .should('have.attr', 'href',  listItemUrl + '-1.1' + editedPostfix);
+      .should('have.text', sublistItemLabel + ' 1-1' + editedPostfix)
+      .should('have.attr', 'href',  `/${listItemUrl}-1-1/${editedPostfix}/`);
   })
 
 
   it('list: 2.8 - checking clicking the links in a link list and a link sublist items in Preview Mode', () => {
     cy.xpath(topLinkListItem[0])
       .click();
-    cy.url().should('include',  listItemUrl + '-1' + editedPostfix);
+    cy.url().should('eq', Cypress.config().baseUrl + `/${listItemUrl}-1/${editedPostfix}/`);
     cy.visit('/list/');
     cy.xpath(topLinkListItem1Sublist[0])
       .click();
-    cy.url().should('include',  listItemUrl + '-1.1' + editedPostfix);
+    cy.url().should('eq', Cypress.config().baseUrl + `/${listItemUrl}-1-1/${editedPostfix}/`);
     cy.visit('/list/');
   })
 
@@ -255,7 +255,7 @@ describe('List (text and link versions) testing', function () {
     cy.xpath(topLinkListItem[0])
       .should('have.text', listItemLabel + ' 1' + editedPostfix);
     cy.xpath(topLinkListItem[0])
-      .should('have.attr', 'href',  listItemUrl + '-1' + editedPostfix);
+      .should('have.attr', 'href',  `/${listItemUrl}-1/${editedPostfix}/`);
   })
 
 
@@ -305,7 +305,7 @@ describe('List (text and link versions) testing', function () {
     var i;
     for (i = 0; i < count; i++) {
       cy.xpath(sublistItemXpath[i])
-        .type(label + ' 1.' + (i + 1).toString());
+        .type(label + ' 1-' + (i + 1).toString());
       cy.hideContextMenu();
     }
   }

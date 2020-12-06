@@ -128,7 +128,7 @@ export function DropZonePlugin({ formApi, targetFieldName, ui }: {
 
   const { getRootProps, getInputProps, isDragReject } = useDropzone({
     onDrop,
-    accept: 'image/jpeg, image/png, image/svg+xml, image/gif, image/webp, image/apng',
+    accept: 'image/jpeg, image/png, image/svg+xml, image/gif, image/apng',
     multiple: false,
   });
 
@@ -175,13 +175,13 @@ const options: BodilessOptions<Props, Data> = {
   icon: 'image',
   label: 'Select',
   groupLabel: 'Image',
+  formTitle: 'Image',
   name: 'Image',
   renderForm: ({ ui: formUi, formApi, componentProps }) => {
     const { ui: imagePickerUI } = componentProps;
-    const { ComponentFormTitle, ComponentFormLabel, ComponentFormText } = getUI(formUi);
+    const { ComponentFormLabel, ComponentFormText } = getUI(formUi);
     return (
       <>
-        <ComponentFormTitle>Image</ComponentFormTitle>
         <ComponentFormLabel htmlFor="image-src">Src</ComponentFormLabel>
         <ComponentFormText field="src" id="image-src" />
         <ComponentFormLabel htmlFor="image-alt">Alt</ComponentFormLabel>

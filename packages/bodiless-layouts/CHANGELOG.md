@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.62](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.61...v0.0.62) (2020-12-02)
+
+**Note:** Version bump only for package @bodiless/layouts
+
+
+
+
+
+## [0.0.61](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.60...v0.0.61) (2020-11-25)
+
+
+### Bug Fixes
+
+* **layouts:** Set initial width of a new item. ([#713](https://github.com/johnsonandjohnson/bodiless-js/issues/713)) ([f6aca9b](https://github.com/johnsonandjohnson/bodiless-js/commit/f6aca9be2323907d86ec8801f763cb0232284a2b))
+* moved package css compilation and purge to site level ([#707](https://github.com/johnsonandjohnson/bodiless-js/issues/707)) ([cfeb8eb](https://github.com/johnsonandjohnson/bodiless-js/commit/cfeb8eb5b3db6f896a979ce62193642d9aea7300))
+
+
+### Features
+
+* **components:** Content Library ([#696](https://github.com/johnsonandjohnson/bodiless-js/issues/696)) ([ee66fb8](https://github.com/johnsonandjohnson/bodiless-js/commit/ee66fb876754e17ef551bc2a87e257957b9bd2aa)), closes [#1](https://github.com/johnsonandjohnson/bodiless-js/issues/1) [#4](https://github.com/johnsonandjohnson/bodiless-js/issues/4) [#2](https://github.com/johnsonandjohnson/bodiless-js/issues/2) [#5](https://github.com/johnsonandjohnson/bodiless-js/issues/5) [#3](https://github.com/johnsonandjohnson/bodiless-js/issues/3)
+* **layouts:**  Component Selector Search ([#708](https://github.com/johnsonandjohnson/bodiless-js/issues/708)) ([54d2d4f](https://github.com/johnsonandjohnson/bodiless-js/commit/54d2d4fb035abef808cce5391afe24a72f389018)), closes [#667](https://github.com/johnsonandjohnson/bodiless-js/issues/667)
+* **layouts:** Flow container "copy" button ([#686](https://github.com/johnsonandjohnson/bodiless-js/issues/686)) ([60dd9c8](https://github.com/johnsonandjohnson/bodiless-js/commit/60dd9c8d46f5e02dbcc7104e7a76f95c46e35e21))
+
+
+
+
+
 ## [0.0.60](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.58...v0.0.60) (2020-11-18)
 
 

@@ -35,6 +35,8 @@ const ContextMenuItem = observer((props: IProps) => {
   const label = option.label ? (typeof option.label === 'function' ? option.label() : option.label) : '';
   const ariaLabel = option.ariaLabel ? (typeof option.ariaLabel === 'function' ? option.ariaLabel() : option.ariaLabel) : (label || option.name);
   const icon = option.icon ? (typeof option.icon === 'function' ? option.icon() : option.icon) : '';
+  const title = typeof option.formTitle === 'function' ? option.formTitle() : option.formTitle;
+  const description = typeof option.formDescription === 'function' ? option.formDescription() : option.formDescription;
   const activateContext = option.activateContext
     ? (typeof option.activateContext === 'function'
       ? option.activateContext()
@@ -72,6 +74,8 @@ const ContextMenuItem = observer((props: IProps) => {
         closeForm: onFormClose,
         ui,
         'aria-label': `Context Menu ${ariaLabel} Form`,
+        title,
+        description,
       };
       return (
         <FormWrapper onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}>

@@ -185,3 +185,16 @@ export function prependProtocolToBareUrl(url$: string, protocol = 'https://') {
   }
   return url$;
 }
+
+/**
+ * function that strips extension from url
+ * @param pageUrl - page url from which extension should be stripped
+ * @returns url - path url with stripped extension
+ *
+ * @example
+ * // return /products
+ * // removeExtensionFromUrl('/products.html')
+ */
+export function removeExtensionFromUrl(pageUrl: string) {
+  return pageUrl.replace(/\.[^/.]+$/, '');
+}
