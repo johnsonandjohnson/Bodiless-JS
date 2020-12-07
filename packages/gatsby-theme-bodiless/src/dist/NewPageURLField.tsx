@@ -126,13 +126,12 @@ const NewPageURLField = (props: FieldProps) => {
   const isBasePathEmpty = isEmptyValue(basePathValue) || basePathValue === BASE_PATH_EMPTY_VALUE;
   const isFullUrl = isBasePathEmpty;
 
-  const { validate, validateOnMount, ...rest } = props;
+  const { validate, ...rest } = props;
   const {
     fieldState, fieldApi, render, ref, userProps,
   } = useField({
     field: PAGE_URL_FIELD_NAME,
     validate: isFullUrl ? getPageUrlValidator(validate) : getPagePathValidator(validate),
-    validateOnMount: isFullUrl || validateOnMount,
     ...rest,
   });
   const { value } = fieldState;
@@ -182,7 +181,7 @@ const NewPageURLField = (props: FieldProps) => {
               onClick={() => {
                 setValue(joinPath(basePathValue, fieldValueToUrl(value)));
                 setBasePathValue(BASE_PATH_EMPTY_VALUE);
-                setError(undefined);
+                if (validatePageUrl(value) === undefined) setError(undefined);
               }}
             >
               Edit
