@@ -24,7 +24,7 @@ import type {
   FixedObject,
   GatsbyImageOptionalProps,
 } from 'gatsby-image';
-import { Div } from '@bodiless/fclasses';
+import { addClasses, Div } from '@bodiless/fclasses';
 import { flow } from 'lodash';
 
 type ImageProps = {
@@ -54,10 +54,17 @@ const asGatsbyImage$ = (Component: CT<any>) => {
   return AsGatsbyImage;
 };
 
+const withActivatorWrapperDefaultStyles = addClasses('bl-contents');
+
 const asGatsbyImage = flow(
   asGatsbyImage$,
   ifEditable(
-    ifToggledOn(isGatsbyImage)(withActivatorWrapper('onClick', Div)),
+    ifToggledOn(isGatsbyImage)(
+      withActivatorWrapper(
+        'onClick',
+        withActivatorWrapperDefaultStyles(Div),
+      ),
+    ),
   ),
 );
 
