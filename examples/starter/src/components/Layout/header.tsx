@@ -22,6 +22,7 @@ import {
 } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
 import { ResponsiveSimpleMenu } from '../Menu';
+import { SimpleSearchBox } from '../Search';
 import Logo from './logo';
 
 type HeaderComponents = {
@@ -30,6 +31,7 @@ type HeaderComponents = {
   MenuContainer: ComponentType<any>,
   Menu: ComponentType<any>,
   SiteLogoReturn: ComponentType<any>,
+  Search: ComponentType<any>,
 };
 export type Props = DesignableComponentsProps<HeaderComponents> & HTMLProps<HTMLElement>;
 
@@ -39,6 +41,7 @@ const headerComponents:HeaderComponents = {
   MenuContainer: Div,
   Menu: ResponsiveSimpleMenu,
   SiteLogoReturn: Logo,
+  Search: SimpleSearchBox,
 };
 const HeaderClean: FC<Props> = ({ components }) => {
   const {
@@ -53,6 +56,7 @@ const HeaderClean: FC<Props> = ({ components }) => {
     <Wrapper>
       <Container>
         <SiteLogoReturn />
+        <SimpleSearchBox placeholder="Search" />
       </Container>
       <MenuContainer>
         <Menu />

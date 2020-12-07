@@ -15,25 +15,14 @@
 import { ComponentType } from 'react';
 import { flow } from 'lodash';
 import { asStatic } from '@bodiless/core';
+import { addClasses, withoutProps } from '@bodiless/fclasses';
 import {
-  addClasses, withDesign, replaceWith, Div,
-  withoutProps,
-} from '@bodiless/fclasses';
-import {
-  asMenuLink, asSimpleMenuBase, withSimpleMenuDesign, asSimpleMenuTopNav,
+  asSimpleMenuBase, withSimpleMenuDesign, asSimpleMenuTopNav,
 } from '@bodiless/organisms';
 
-import { withEditorSimple } from '../Editors';
+import { asMenuTitle } from './MegaMenu';
 import withSimpleMenuStyles from './SimpleMenu.token';
-import { asDesktopOnly } from '../Elements.token';
-
-const withTitleEditor = withEditorSimple('text', 'Menu Item');
-const asMenuTitle = flow(
-  asMenuLink(withTitleEditor),
-  withDesign({
-    _default: replaceWith(Div),
-  }),
-);
+import { asBreadcrumbSource } from '../Breadcrumbs/MenuBreadcrumbs';
 
 const SimpleMenuBase = flow(
   withoutProps(['design']),
@@ -45,8 +34,8 @@ const SimpleMenuBase = flow(
 
 const SimpleMenu = flow(
   withSimpleMenuStyles,
+  asBreadcrumbSource,
   asSimpleMenuTopNav,
-  asDesktopOnly,
 )(SimpleMenuBase);
 
 const SimpleMenuList = flow(
@@ -60,5 +49,4 @@ export default SimpleMenu;
 export {
   SimpleMenuBase,
   SimpleMenuList,
-  asMenuTitle,
 };

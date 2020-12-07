@@ -22,10 +22,11 @@ import {
 } from './helpers';
 import Downloader from './downloader';
 import HtmlParser from './html-parser';
-import {
-  CanvasX,
+import type {
+  JamStackApp,
   JamStackAppParams,
 } from './jamstack-app';
+import { GatsbyApp } from './jamstack-app';
 import { PageCreator } from './page-creator';
 import type { PageCreatorParams } from './page-creator';
 import {
@@ -44,6 +45,8 @@ import {
 import page404Handler, { Page404Params } from './page404-handler';
 import debug from './debug';
 import ResponseProcessor, { RedirectConfig } from './response-processor';
+import type { PluginManagerType } from './pluginManager';
+import { MigrationApi } from './migrationApi';
 
 export enum TrailingSlash {
   Skip = 'skip',
@@ -86,13 +89,14 @@ export interface SiteFlattenerParams {
   disableTailwind?: boolean,
   reservedPaths?: Array<string>,
   allowFallbackHtml?: boolean,
+  pluginManager?: PluginManagerType,
   exports?: Exports,
 }
 
 export class SiteFlattener {
   params: SiteFlattenerParams;
 
-  canvasX: CanvasX;
+  app: JamStackApp;
 
   constructor(params: SiteFlattenerParams) {
     this.params = {
@@ -105,6 +109,7 @@ export class SiteFlattener {
         ...params.scraperParams,
         pageUrls: params.scraperParams.pageUrls.map(pageUrl => prependProtocolToBareUrl(pageUrl)),
       },
+      pluginManager: params.pluginManager,
     };
 
     const jamStackAppParams: JamStackAppParams = {
@@ -112,7 +117,7 @@ export class SiteFlattener {
       workDir: this.params.workDir,
       disableTailwind: this.params.disableTailwind,
     };
-    this.canvasX = new CanvasX(jamStackAppParams);
+    this.app = new GatsbyApp(jamStackAppParams);
   }
 
   public async start() {
@@ -123,18 +128,38 @@ export class SiteFlattener {
     const scraperParams = {
       ...this.params.scraperParams,
       enableFileDownload: false,
-      downloadPath: getUrlToLocalDirectoryMapper(this.canvasX.getStaticDir()),
+      downloadPath: getUrlToLocalDirectoryMapper(this.app.getStaticDir()),
     };
     const { page404Params, exports } = this.params;
     const responseProcessor = new ResponseProcessor({ websiteUrl: this.params.websiteUrl });
+    const downloader = new Downloader(
+      this.params.websiteUrl, this.app.getStaticDir(), this.params.reservedPaths,
+    );
     const scraper = new Scraper(scraperParams);
-    scraper.on('pageReceived', async result => {
+    scraper.on('pageReceived', async scrapedPage => {
       try {
-        debug(`scraped page from ${result.pageUrl}.`);
-        const processedResult = page404Handler.processScrapedPage(result, page404Params);
-        const pageCreator = new PageCreator(this.getPageCreatorParams(processedResult));
-        debug(`creating page for ${result.pageUrl}.`);
+        const { pageUrl } = scrapedPage;
+        debug(`scraped page from ${pageUrl}.`);
+        const scrapedPage$1 = page404Handler.processScrapedPage(scrapedPage, page404Params);
+        const scrapedPage$2 = this.transformScrapedPage(scrapedPage$1);
+        const migrationApi = MigrationApi.create({
+          app: this.app,
+          pageUrl,
+        });
+        const pageCreator = new PageCreator({
+          ...this.getPageCreatorParams(scrapedPage$2),
+          migrationApi,
+        });
+        debug(`creating page for ${pageUrl}.`);
         await pageCreator.createPage();
+        if (this.params.pluginManager !== undefined) {
+          this.params.pluginManager.onPageCreate({
+            pagePath: pageUrl,
+            document: (new HtmlParser(scrapedPage$2.processedHtml)).$,
+            api: migrationApi,
+            downloader,
+          });
+        }
       } catch (error) {
         debug(error);
       }
@@ -143,15 +168,9 @@ export class SiteFlattener {
       debug(error.message);
     });
     scraper.on('fileReceived', async fileUrl => {
-      const downloader = new Downloader(
-        this.params.websiteUrl, this.canvasX.getStaticDir(), this.params.reservedPaths,
-      );
       await downloader.downloadFiles([fileUrl]);
     });
     scraper.on('requestStarted', async fileUrl => {
-      const downloader = new Downloader(
-        this.params.websiteUrl, this.canvasX.getStaticDir(), this.params.reservedPaths,
-      );
       await downloader.downloadFiles([fileUrl]);
     });
     scraper.on('responseReceived', async response => {
@@ -283,27 +302,25 @@ export class SiteFlattener {
     return settings;
   }
 
-  private getPageCreatorParams(scrapedPage: ScrapedPage): PageCreatorParams {
-    const transformedScrapedPage = this.transformScrapedPage(scrapedPage);
-    const images = transformedScrapedPage.images.concat(transformedScrapedPage.pictures || []);
-    const htmlParser = new HtmlParser(transformedScrapedPage.processedHtml);
+  private getPageCreatorParams(scrapedPage: ScrapedPage): Omit<PageCreatorParams, 'migrationApi'> {
+    const images = scrapedPage.images.concat(scrapedPage.pictures || []);
+    const htmlParser = new HtmlParser(scrapedPage.processedHtml);
     const htmlToComponentsSettings = this.getHtmlToComponentsSettings();
-    const pageCreatorParams: PageCreatorParams = {
+    const pageCreatorParams: Omit<PageCreatorParams, 'migrationApi'> = {
       ...this.params.pageCreator,
-      pagesDir: this.canvasX.getPagesDir(),
-      staticDir: this.canvasX.getStaticDir(),
+      pagesDir: this.app.getPagesDir(),
+      staticDir: this.app.getStaticDir(),
       templatePath: this.getPageTemplate(),
       templateDangerousHtml: this.getComponentTemplate('template_dangerous_html.jsx'),
-      pageUrl: transformedScrapedPage.pageUrl,
+      pageUrl: scrapedPage.pageUrl,
       headHtml: htmlParser.getHeadHtml(),
       bodyHtml: htmlParser.getBodyHtml(),
-      metatags: transformedScrapedPage.metatags,
-      scripts: transformedScrapedPage.scripts,
-      inlineScripts: transformedScrapedPage.inlineScripts,
-      styles: transformedScrapedPage.styles,
-      inlineStyles: transformedScrapedPage.inlineStyles,
+      scripts: scrapedPage.scripts,
+      inlineScripts: scrapedPage.inlineScripts,
+      styles: scrapedPage.styles,
+      inlineStyles: scrapedPage.inlineStyles,
       images,
-      videos: transformedScrapedPage.videos,
+      videos: scrapedPage.videos,
       htmlTag: htmlParser.getHtmlTag(),
       bodyTag: htmlParser.getBodyTag(),
       downloadAssets: true,

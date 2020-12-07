@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import React, { ComponentType } from 'react';
 import { flow } from 'lodash';
 import { useEditContext } from '@bodiless/core';
 import {
@@ -59,12 +60,28 @@ const asStylableList = withDesign({
   Title: stylable,
 });
 
+type WithAriaLabel = {
+  'aria-label'?: string,
+};
+
+const asNav = <P extends WithAriaLabel>(Component: ComponentType<P>) => {
+  const Nav = (props: P) => {
+    const { 'aria-label': ariaLabel = 'Navigation Menu' } = props;
+    return (
+      <nav aria-label={ariaLabel}>
+        <Component {...props} />
+      </nav>
+    );
+  };
+  return Nav;
+};
+
 /**
  * Accessibility Features
  * ===========================================
  */
 const asAccessibleMenu = withDesign({
-  Wrapper: addProps({ role: 'menubar', 'aria-label': 'Navigation Menu' }),
+  Wrapper: flow(asNav, addProps({ role: 'menubar', 'aria-label': 'Navigation Menu' })),
   Item: addProps({ tabIndex: 0, role: 'menuitem' }),
 });
 

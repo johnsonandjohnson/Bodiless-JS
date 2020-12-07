@@ -19,7 +19,7 @@ import {
   replaceWith, asComponent, addProps, stylable,
 } from '@bodiless/fclasses';
 import { Fragment } from 'react';
-import { asBodilessLink } from './Link';
+import asBodilessLink from './Link/asBodilessLink';
 import { withToggleTo, withWrapOnSubmit } from './Toggle';
 
 const EmptyToggle = flowRight(

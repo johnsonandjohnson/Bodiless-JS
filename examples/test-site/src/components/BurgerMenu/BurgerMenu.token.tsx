@@ -17,7 +17,7 @@ import { withDesign, addProps } from '@bodiless/fclasses';
 
 import { asDefaultLogoStyle } from '../Layout/token';
 import {
-  asPrimaryColorBackground, withPadding1, asTealBackground, asMobileOnly,
+  asPrimaryColorBackground, withPadding1, asTealBackground,
 } from '../Elements.token';
 
 /**
@@ -28,7 +28,6 @@ const withBurgerMenuStyles = withDesign({
   Wrapper: flow(
     withPadding1,
     asTealBackground,
-    asMobileOnly,
   ),
   Header: flow(
     asDefaultLogoStyle,

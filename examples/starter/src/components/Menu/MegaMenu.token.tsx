@@ -55,8 +55,8 @@ const withMegaMenuSubMenuStyles = withDesign({
  * ===========================================
  */
 const withMegaMenuStyles = flow(
-  withMegaMenuSubMenuStyles,
   withMegaMenuDesign(withBaseSubMenuStyles),
+  withMegaMenuSubMenuStyles,
   withBaseMenuStyles,
 );
 

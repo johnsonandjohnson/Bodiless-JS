@@ -14,13 +14,17 @@
 
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import cheerio from 'cheerio';
 import { withDefaultContent, withSidecarNodes } from '@bodiless/core';
-import { asBodilessLink, asEditable } from '@bodiless/components';
+import {
+  asBodilessLink, asEditable, withBreadcrumbStore, Breadcrumbs,
+} from '@bodiless/components';
 import { replaceWith, withDesign } from '@bodiless/fclasses';
 import { flowRight } from 'lodash';
 
-import { asBreadcrumbsClean, asMenuBase } from '../src/components/Menu/MegaMenu';
+import { asMenuBase, asBreadcrumbSource } from '../src/components/Menu/MegaMenu';
 
 const { DefaultContentNode } = require('@bodiless/core');
 
@@ -30,26 +34,47 @@ const setPagePath = (pagePath: string) => {
     writable: false,
   });
 };
-
 const createBreadcrumbComponent = ({
   content = {},
-}) => flowRight(
-  withDefaultContent(content),
-  withDesign({
-    // @ts-ignore
-    BreadcrumbLink: replaceWith(withSidecarNodes(
-      asBodilessLink(),
-    ))('a'),
-    BreadcrumbTitle: replaceWith(
-      asEditable()(React.Fragment),
-    ),
-  }),
-  asBreadcrumbsClean({
-    linkNodeKey: 'title$link',
-    titleNodeKey: 'title$text',
-  }),
-  asMenuBase('testMenu'),
-)('ul');
+}) => {
+  const Source = flowRight(
+    asBreadcrumbSource({
+      linkNodeKey: 'title$link',
+      titleNodeKey: 'title$text',
+    }),
+    asMenuBase('testMenu'),
+  )('ul');
+
+  const BreadcrumbComponent = (props: any) => (
+    <>
+      <Source />
+      <Breadcrumbs {...props} />
+    </>
+  );
+
+  return flowRight(
+    withDefaultContent(content),
+    withDesign({
+      // @ts-ignore
+      BreadcrumbLink: replaceWith(withSidecarNodes(
+        asBodilessLink(),
+      ))('a'),
+      BreadcrumbTitle: replaceWith(
+        asEditable()(React.Fragment),
+      ),
+    }),
+    withBreadcrumbStore,
+  )(BreadcrumbComponent);
+};
+
+// Helper to get the html of only the breadcrumbs.
+const breadcrumbHtml = (wrapper: ReactWrapper) => {
+  // We use cheerio directly here bc using enzyme's 'render'
+  // method generates warnings about not using layout
+  // effects on the server.
+  const $ = cheerio.load(wrapper.html());
+  return $.html($('body>ul').last());
+};
 
 const generateMegaMenuContent = (component: string) => ({
   testMenu: {
@@ -100,7 +125,7 @@ describe('asBreadcrumbsClean', () => {
       content: generateMegaMenuContent('Touts'),
     });
     const wrapper = mount(<Breadcrumb />);
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(breadcrumbHtml(wrapper)).toMatchSnapshot();
   });
   it('creates breadcrumbs for 2-level List MegaMenu', () => {
     setPagePath('/products/productA');
@@ -108,7 +133,7 @@ describe('asBreadcrumbsClean', () => {
       content: generateMegaMenuContent('List'),
     });
     const wrapper = mount(<Breadcrumb />);
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(breadcrumbHtml(wrapper)).toMatchSnapshot();
   });
   it('creates breadcrumbs for 2-level Columns MegaMenu', () => {
     setPagePath('/products/productA');
@@ -116,7 +141,7 @@ describe('asBreadcrumbsClean', () => {
       content: generateMegaMenuContent('Columns'),
     });
     const wrapper = mount(<Breadcrumb />);
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(breadcrumbHtml(wrapper)).toMatchSnapshot();
   });
   it('creates breadcrumbs for 3-level Columns MegaMenu', () => {
     setPagePath('/products/productA/subProduct');
@@ -137,6 +162,6 @@ describe('asBreadcrumbsClean', () => {
       },
     });
     const wrapper = mount(<Breadcrumb />);
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(breadcrumbHtml(wrapper)).toMatchSnapshot();
   });
 });

@@ -56,7 +56,7 @@ The tool is given URL that will crawl the existing site finding all pages, gener
 
     ```
 
-1. Prepare the migration-settings.json. All settings can be found in Configuration section
+1. Prepare the migration-settings.js. All settings can be found in Configuration section
 
 1. Execute the command to flatten the site
 
@@ -69,177 +69,146 @@ The tool is given URL that will crawl the existing site finding all pages, gener
 
 ### Configuration
 
-Using the requirements of the flattened site, prepare a build plan by adjusting `migration-settings.json`
+Using the requirements of the flattened site, prepare a build plan by adjusting `migration-settings.js`
 
 The following options control how the the site will be flattened.
 
 Options:
 
-- `url`
+  - `url`
 
-  - **Description**: Url of website that should be flattened
+    - **Description**: Url of website that should be flattened
 
-  - **Accepted Formats:**: Preface the url with http:// or https:// syntax
+    - **Accepted Formats:**: Preface the url with http:// or https:// syntax
 
-  - **Examples:**: "http://pariet10.ru/" or "https://pariet10.ru/"
+    - **Examples:**: "http://pariet10.ru/" or "https://pariet10.ru/"
 
-  - **Restrictions:**: None
+    - **Restrictions:**: None
 
-- `isPage404Disabled`
+  - `isPage404Disabled`
 
-  - **Description**: When this option is `false` (by default), all non-existing pages will not be scraped
+    - **Description**: When this option is `false` (by default), all non-existing pages will not be scraped
   and will redirect to the default 404 page instead.
 
-  - **Accepted Formats:**: `true`, `false`
+    - **Accepted Formats:**: `true`, `false`
 
-- `page404Url`
+  - `page404Url`
 
-  - **Description**: A specific url from where the default "page not found" page should be flattened.
+    - **Description**: A specific url from where the default "page not found" page should be flattened.
   When this option is not specified - a default /404 page will be used.
 
-  - **Accepted Formats:**: Absolute url to the page.
+    - **Accepted Formats:**: Absolute url to the page.
 
-  - **Examples:**: "https://pariet10.ru/404-custom-page"
+    - **Examples:**: "https://pariet10.ru/404-custom-page"
 
-  - **Restrictions:**: `isPage404Disabled` option should be set to false.
+    - **Restrictions:**: `isPage404Disabled` option should be set to false.
 
-- `steps`
+  - `crawler`
 
-  - **Description**: Specify a list of steps that should be executed by the tool
+    - **Description**: Specify configuration for the crawler
 
-  - **Recommendation**: Specify all steps and set as true.
+    - `maxDepth`
 
-- `setup`
+      - **Description**: Maximum depth for the crawler to follow links automatically
 
-		*  **Description**: Enable/disable cloning and setting up BodilessJS app locally
+      - **Accepted Formats:**: Number > 0
 
-		*  **Accepted Formats:**: "true" or "false"
+      - **Recommendation:**: 100, unless there is specific reason to limit. A higher number will allow tool to crawl the entire site.
 
-	*  `scrape`
+    - `ignoreRobotsTxt`
 
-		*  **Description**: Enable/disable site scraping and BodilessJS pages generation
+      - **Description**: Whether [robots.txt](https://developers.google.com/search/reference/robots_txt) should be ignored and whether urls disallowed in robots.txt should be scraped, default to false.
 
-		*  **Accepted Formats:**: "true" or "false"
+      - **Accepted Formats**: Boolean (true or false)
 
-	*  `build`
+      - **Recommendation**: Recommend to use default value when the whole website is scraped, set this option to true once a disallowed page should be scraped individually.
 
-		*  **Description**: Enable/disable building of static site
+  - `export`
 
-		*  **Accepted Formats:**: "true" or "false"
+    - **Description**: Setup the parameters for exporting site information.
 
-	*  `serve`
+      - `redirects`
 
-		*  **Description**: Enable/disable serving of static site
+        - **Description**: Migration site path redirect configure.
 
-		*  **Accepted Formats:**: "true" or "false"
+          - `path`
 
-- `crawler`
+            - **Description**: File path for redirect rule export.
 
-  - **Description**: Specify configuration for the crawler
+            - **Accepted Formats:**: string
 
-  - `maxDepth`
+          - `format`
 
-    - **Description**: Maximum depth for the crawler to follow links automatically
+            - **Description**: Format of redirect rule, currently supports 'yaml' format only.
 
-    - **Accepted Formats:**: Number > 0
+            - **Accepted Formats:**: string
 
-    - **Recommendation:**: 100, unless there is specific reason to limit. A higher number will allow tool to crawl the entire site.
+          - **Examples:**
+          ```js
+            {
+              ...
 
-  - `maxConcurrency`
+              "exports": {
+                "redirects": {
+                  "path": "/path/to/myexport.yaml",
+                  "format": "yaml"
+                }
+             }
+           }
+         ```
 
-    - **Description**: Maximum number of pages to open concurrently
+  - `transformers`
 
-    - **Accepted Formats:**: Number > 0
+    - **Description**: Specify rules that should be applied to the scraped page html
 
-    - **Recommendation:**: Recommend to use 1 to not impact production sites
+    - `rule`
 
-  - `ignoreRobotsTxt`
+      - **Description**: The following rules allow you to manipulate the output and either remove or replace html selector components.
 
-    - **Description**: Whether [robots.txt](https://developers.google.com/search/reference/robots_txt) should be ignored and whether urls disallowed in robots.txt should be scraped, default to false.
+      - `replace`
 
-    - **Accepted Formats**: Boolean (true or false)
-
-    - **Recommendation**: Recommend to use default value when the whole website is scraped, set this option to true once a disallowed page should be scraped individually.
-
-- `htmltojsx`
-
-  - **Description**: Enable/disable transforming html to jsx
-
-  - **Accepted Formats:**: "true" or "false"
-
-  - **Recommendation:**: "true"
-
-- `export`
-
-  - **Description**: Setup the parameters for exporting site information.
-
-    - `redirects`
-
-      - **Description**: Migration site path redirect configure.
-
-        - `path`
-
-          - **Description**: File path for redirect rule export.
-
-          - **Accepted Formats:**: string
-
-        - `format`
-
-          - **Description**: Format of redirect rule, currently supports 'yaml' format only.
-
-          - **Accepted Formats:**: string
+        - **Description**: Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed.
 
         - **Examples:**
-        ```json
+        
+          ```js
           {
-            ...
-
-            "exports": {
-              "redirects": {
-                "path": "/path/to/myexport.yaml",
-                "format": "yaml"
-              }
-            }
+            "rule":  "replace",
+            "selector":  "script[src*='cdn.cookielaw.org/consent']",
+            "replacement":  "<script charset=\"UTF-8\" src=\"https://optanon.blob.core.windows.net/consent/086a2433-54aa-4112-8ba6-331eb1d2fda7-test.js\"></script>",
+            "context":  "**"
           }
-        ```
+          ```
 
+      - `replaceString`
+
+        - **Description**: Replace string (or regex pattern) in the source html code before parsing.
+
+      - `tocomponent`
+
+        - **Description**: Extract matched elements into React components as separate modules
+
+      - Specific configuration parameters for each rule type:
+
+        - `selector`
+
+          - **Description**: Selector for the element(s) that should be processed
+
+          - **Accepted Formats:**: string
+
+        - `replacement`
+
+          - **Description**: New html content in `replace` mode. Name of React component in `tojsx` mode
+
+          - **Accepted Formats:**: string
+
+          - **Restrictions:**: Escape special characters, such as " with `\"`
   
+        - `context`
 
-- `transformers`
+          - **Description**: A list of pages in which the rule should be applied.
 
-  - **Description**: Specify rules that should be applied to the scraped page html
-
-- `rule`
-
-  - **Description**: The following rules allow you to manipulate the output and either remove or replace html selector components.
-
-  - `replace`
-
-    - **Description**: Replace each element in the set of matched elements with the provided new content and return the set of elements that was removed.
-
-  - `replaceString`
-
-    - **Description**: Replace string (or regex pattern) in the source html code before parsing.
-
-  - `tocomponent`
-
-    - **Description**: Extract matched elements into React components as separate modules
-
-- Specific configuration parameters for each rule type:
-
-  - `selector`
-
-    - **Description**: Selector for the element(s) that should be processed
-
-    - **Accepted Formats:**: string
-
-  - `replacement`
-
-    - **Description**: New html content in `replace` mode. Name of React component in `tojsx` mode
-
-    - **Accepted Formats:**: string
-
-    - **Restrictions:**: Escape special characters, such as " with `\"`
+          - **Accepted Formats:**: Please follow [minimatch](https://github.com/isaacs/minimatch) syntax to compose url pattern
 
   - `disableTailwind`
 
@@ -257,34 +226,37 @@ Options:
 
     - **Default Value:** `true`
 
+  - `pageCreator`
 
-  - `context`
+    - **Description**: Override default page creation tool behavior
 
-    - **Description**: A list of pages in which the rule should be applied.
+    - `isEnabled`
 
-    - **Accepted Formats:**: Please follow [minimatch](https://github.com/isaacs/minimatch) syntax to compose url pattern
+      - **Description:** Enable/disable default page creation
 
-- **Examples:**
+      - **Accepted Formats:**  Boolean or Function
 
-```json
-{
+    - `pageIndexFile`
 
-"rule":  "replace",
+      - **Description:** Name of created page index file.
 
-"selector":  "script[src*='cdn.cookielaw.org/consent']",
+      - **Accepted Formats:** String or Function
 
-"replacement":  "<script charset=\"UTF-8\" src=\"https://optanon.blob.core.windows.net/consent/086a2433-54aa-4112-8ba6-331eb1d2fda7-test.js\"></script>",
+  - `plugins`
 
-"context":  "**"
+    - **Description:** Subscribe and react to migration tool events. Migration tool emits an event once a page is created and once a resource is downloaded. The resource download event is not implemented yet.
 
-}
-```
+    - **Accepted Formats:**: Array of objects that implement events emitted by the tool.
+
+    - **Examples:**
+      - Write metatags data into page level json files. See examples/settings/scrape_metatags.js.sample. The example demonstrates how to activate a default plugin exported by the tool.
+      - Create templates for each scraped page. See create_site_skeleon.js.sample. This example demonstrates how to create a custom plugin.
 
 #### Rehydration (convert html elements into React Components) during Site Migration
 
 The following process will rehydrate (or replace specific html element components with React named components.)
 
-In the `packages/bodiless-migration-tool/settings.json`
+In the `migration-settings.js`
 
 Specify `tocomponent` Rules
 
@@ -304,7 +276,7 @@ make menu working.
 
 ##### Example
 
-View [examples/settings/to_components.json](examples/settings/to_components.json)
+View [examples/settings/to_components.js.sample](examples/settings/to_components.js.sample)
 
 ### Usage
 
@@ -334,7 +306,7 @@ After performing of `npm run build`:
 
 - The flattened & generated built site will be viewable at http://0.0.0.0:9000/ OR if on windows http://localhost:9000.
 
-### Full settings.json Examples
+### Full settings.js Examples
 
 Full examples can be found in [examples/settings](examples/settings).
 

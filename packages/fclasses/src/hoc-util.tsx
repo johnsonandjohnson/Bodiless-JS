@@ -12,7 +12,9 @@
  * limitations under the License.
  */
 
-import React, { ComponentType, FC } from 'react';
+import React, {
+  ComponentType, FC, useEffect, useState,
+} from 'react';
 import { flow, omit, pick } from 'lodash';
 
 export type Condition<P> = (props: P) => boolean;
@@ -67,3 +69,23 @@ export const withOnlyProps = <Q extends object>(...keys: string[]) => (
 export const hasProp = (name: string) => (
   ({ [name]: prop }: { [name: string]: any }) => Boolean(prop)
 );
+
+/**
+ * Like replaceWith, but performs the repacement on effect. Useful when you need to
+ * ensure that both versions of a component are rendered during SSR, but want to
+ * remove one when displayed in the browser (eg for responsive design).
+ *
+ * @param Replacement The component to replace with.
+ */
+export const replaceOnEffect = <P extends object>(
+  Replacement: ComponentType<P>,
+) => (
+    Component: ComponentType<P>,
+  ) => {
+    const ReplaceOnEffect = (props: P) => {
+      const [replaced, setReplaced] = useState(false);
+      useEffect(() => setReplaced(true), []);
+      return replaced ? <Replacement {...props} /> : <Component {...props} />;
+    };
+    return ReplaceOnEffect;
+  };

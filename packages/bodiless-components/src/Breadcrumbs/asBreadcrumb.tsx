@@ -13,14 +13,14 @@
  */
 
 import React, {
-  createContext, useContext, ComponentType, useRef, useEffect,
+  createContext, useContext, ComponentType, useLayoutEffect,
 } from 'react';
 import { useNode } from '@bodiless/core';
-import { v4 } from 'uuid';
 import { observer } from 'mobx-react-lite';
+import { flow } from 'lodash';
 import { BreadcrumbItem } from './BreadcrumbStore';
 import type { BreadcrumbItemType } from './BreadcrumbStore';
-import { useBreadcrumbStore } from './BreadcrumbStoreProvider';
+import { useBreadcrumbStore, asHiddenBreadcrumbSource } from './BreadcrumbStoreProvider';
 import type { LinkData } from '../Link';
 
 const breadcrumbContext = createContext<BreadcrumbItemType | undefined>(undefined);
@@ -28,22 +28,15 @@ const breadcrumbContext = createContext<BreadcrumbItemType | undefined>(undefine
 export const useBreadcrumbContext = () => useContext(breadcrumbContext);
 export const BreadcrumbContextProvider = breadcrumbContext.Provider;
 
+const isSSR = () => !(
+  typeof window !== 'undefined'
+  && window.document
+  && window.document.createElement
+);
+
 export type BreadcrumbSettings = {
   linkNodeKey: string,
   titleNodeKey: string,
-};
-
-/**
- * hook that checks whether the component is rendered the first time
- *
- * @returns true when the component is rendered the first time, otherwise false
- */
-const useIsFirstRender = () => {
-  const isMounted = useRef(false);
-  useEffect(() => {
-    isMounted.current = true;
-  }, []);
-  return !isMounted.current;
 };
 
 /**
@@ -61,15 +54,17 @@ const asBreadcrumb = ({
   titleNodeKey,
 }: BreadcrumbSettings) => <P extends object>(Component: ComponentType<P>) => {
   const AsBreadcrumb = observer((props: P) => {
+    const current = useBreadcrumbContext();
+    const store = useBreadcrumbStore();
     const { node } = useNode();
+    if (store === undefined) return <Component {...props} />;
     const titleNode = node.child<object>(titleNodeKey);
     const linkNode = node.child<LinkData>(linkNodeKey);
-    const contextUuidRef = useRef(v4());
-    const store = useBreadcrumbStore();
-    if (store === undefined) return <Component {...props} />;
-    const current = useBreadcrumbContext();
+    // We need an id which will be the same for all breadcrumb sources which
+    // render the same data.  Node path works well for this.
+    const id = node.path.join('$');
     const item = new BreadcrumbItem({
-      uuid: contextUuidRef.current,
+      uuid: id,
       title: {
         data: titleNode.data,
         nodePath: [...node.path, titleNodeKey].join('$'),
@@ -81,19 +76,21 @@ const asBreadcrumb = ({
       parent: current,
       store,
     });
-    const isFirstRender = useIsFirstRender();
-    // hit breadcrumb store during first render
-    // so that get breadcrumbs generated during server-side rendering
-    if (isFirstRender) {
+    // During SSR we need to populate the store on render, bc effects are not executed.
+    if (isSSR()) {
       store.setItem(item);
+    } else {
+      // Normally, conditional hooks violate the "rules of hooks", but here
+      // the condition evaluates the same in a given render environment, and
+      // we can't/shouldn't call useLayoutEffect during SSR.
+      useLayoutEffect(() => {
+        store.setItem(item);
+      }, [titleNode.data, linkNode.data]);
+      // deleting item from store on unmount
+      useLayoutEffect(() => () => {
+        store.deleteItem(id);
+      }, []);
     }
-    useEffect(() => {
-      store.setItem(item);
-    }, [titleNode.data, linkNode.data]);
-    // deleting item from store on unmount
-    useEffect(() => () => {
-      store.deleteItem(contextUuidRef.current);
-    }, []);
     return (
       <BreadcrumbContextProvider value={item}>
         <Component {...props} />
@@ -103,4 +100,40 @@ const asBreadcrumb = ({
   return AsBreadcrumb;
 };
 
+/**
+ * Use this HOC to wrap a menu so as to generate data for breadcrumbs
+ * and menu trails. Must be rendered within a BreadcrumbStoreContext
+ *
+ * @param Component
+ * The component providing the menu data structure.
+ *
+ * @return
+ * A version of the component which populates an enclosing
+ */
+const asBreadcrumbSource = (withMenuDesign: Function) => (
+  settings: BreadcrumbSettings,
+) => <P extends object>(
+  Component: ComponentType<P>,
+) => {
+  const Source = withMenuDesign({
+    Item: asBreadcrumb(settings),
+  })(Component);
+
+  const SSRSource = flow(
+    withMenuDesign({
+      Item: asBreadcrumb(settings),
+    }),
+    asHiddenBreadcrumbSource,
+  )(Component);
+
+  const AsBreadcrumbSource = (props: P) => (
+    <>
+      {isSSR() && <SSRSource {...props} />}
+      <Source {...props} />
+    </>
+  );
+  return AsBreadcrumbSource;
+};
+
 export default asBreadcrumb;
+export { asBreadcrumbSource };

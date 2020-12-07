@@ -36,7 +36,7 @@ export type DesignableComponents = {
  */
 export type Design<C extends DesignableComponents> = {
   [Key in keyof C]?: (component: C[Key]) => C[Key]
-} & { _final?: Design<C> };
+} & { _final?: Design<Omit<C, '_final'>> };
 
 /**
  * This is the type of the props for a designable whose underlying component
