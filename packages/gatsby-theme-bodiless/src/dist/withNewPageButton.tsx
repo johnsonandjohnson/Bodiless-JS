@@ -23,7 +23,6 @@ import {
   useMenuOptionUI,
   useEditContext,
   withMenuOptions,
-  ContextSubMenu,
   ContextMenuProvider,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
@@ -214,19 +213,11 @@ const useMenuOptions = () => {
 
   const menuOptions = [
     {
-      name: 'page',
+      name: 'newpage',
+      icon: 'note_add',
       label: 'Page',
       isHidden: useCallback(() => !context.isEdit, []),
-      icon: 'note_add',
-      Component: ContextSubMenu,
-    },
-    {
-      name: 'newpage',
-      icon: 'check_box_outline_blank',
-      label: 'Blank',
-      isHidden: useCallback(() => !context.isEdit, []),
       handler: () => formPageAdd(defaultClient),
-      group: 'page',
     },
   ];
   return menuOptions;
