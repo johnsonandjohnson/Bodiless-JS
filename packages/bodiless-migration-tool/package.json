@@ -73,7 +73,6 @@
     "mime": "^2.4.4",
     "mock-fs": "^4.9.0",
     "react-helmet": "^5.2.0",
-    "ts-jest": "^24.0.2",
     "ts-node": "^8"
   },
   "engines": {
