@@ -19,7 +19,7 @@ module.exports = {
   globals: {
     __PATH_PREFIX__: '',
     'ts-jest': {
-      tsConfig: './config/tsconfig.test.json',
+      tsconfig: './config/tsconfig.test.json',
     },
   },
   testURL: 'http://localhost',
