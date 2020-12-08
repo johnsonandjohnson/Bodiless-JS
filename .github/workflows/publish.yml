@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.19
-      - name: Build
+      - name: BodilessJS Setup
         run: npm run setup
       - name: Publish npm packages
         run: |
