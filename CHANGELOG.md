@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.63](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.62...v0.0.63) (2020-12-08)
+
+
+### Bug Fixes
+
+* **gatsby-theme-bodiless:** allow to pass props to gatsby img ([#734](https://github.com/johnsonandjohnson/bodiless-js/issues/734)) ([836f8ba](https://github.com/johnsonandjohnson/bodiless-js/commit/836f8ba75f9e708b821b7084900771668aa46fe3))
+
+
+
+
+
 ## [0.0.62](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.61...v0.0.62) (2020-12-02)
 
 
