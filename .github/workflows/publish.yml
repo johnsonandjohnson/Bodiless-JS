@@ -1,0 +1,29 @@
+name: Publish
+env:
+  CI: true
+  FORCE_COLOR: 1
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  publish:
+    name: Publish packages
+    runs-on: ubuntu-16.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Use Node.js v12.19
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.19
+      - name: Build
+        run: npm run setup
+      - name: Publish npm packages
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
+          npm run lerna:publish
