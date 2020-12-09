@@ -138,7 +138,7 @@ When not included omit the parenthesis around it.
 
 ### Squash commit title: reference
 
-**Required value**. [The reference]([reference](https://help.github.com/en/github/writing-on-github/autolinked-references-and-urls#issues-and-pull-requests)) 
+**Required value**. [The reference](https://help.github.com/en/github/writing-on-github/autolinked-references-and-urls#issues-and-pull-requests)
 to the Pull Request merged.
 
 ### Squash commit title examples
