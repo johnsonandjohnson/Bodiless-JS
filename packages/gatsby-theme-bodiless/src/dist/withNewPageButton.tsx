@@ -126,6 +126,7 @@ const NewPageComp = (props : NewPageProps) => {
             <NewPageURLField
               validateOnChange
               validateOnBlur
+              placeholder="my-page"
             />
           </ContextMenuProvider>
         </>
