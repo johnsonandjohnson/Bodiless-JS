@@ -54,7 +54,7 @@ const asGatsbyImage$ = (Component: CT<any>) => {
   return AsGatsbyImage;
 };
 
-const withActivatorWrapperDefaultStyles = addClasses('bl-contents');
+const withActivatorWrapperDefaultStyles = addClasses('bl-w-full');
 
 const asGatsbyImage = flow(
   asGatsbyImage$,
