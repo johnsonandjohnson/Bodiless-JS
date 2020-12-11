@@ -18,7 +18,7 @@ This section describes configuration steps required in order to use BV Component
 
 In order to use BV components, you need to know:
 
-* URL of main Baazarvoice script. Example: https://apps.bazaarvoice.com/deployments/<client_name>/<site_ID>/<environment>/<locale>/bv.js, or
+* URL of main Baazarvoice script. Example: `https://apps.bazaarvoice.com/deployments/<client_name>/<site_ID>/<environment>/<locale>/bv.js,` or
 * client_name, site_ID, environment and locale of your Baazarvoice account.
 
 ### How to configure

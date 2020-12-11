@@ -5,7 +5,7 @@
 The Bodiless FClasses Design API is designed to facilitate the implementation of
 a *Design System* in a React application. Before diving into the technical
 details below, it might make sense to read our
-[high level overview of Design Systems in Bodiless](../Design/DesignSystems) to
+[high level overview of Design Systems in Bodiless](../../Design/DesignSystem) to
 better understand the general patterns at work.
 
 At a high level, this API expresses *Design Tokens* as React higher-order

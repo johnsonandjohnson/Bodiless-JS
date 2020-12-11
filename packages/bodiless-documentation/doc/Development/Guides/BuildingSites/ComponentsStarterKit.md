@@ -139,7 +139,7 @@ manipulating these files. As site builder adds more components, remember the
 header and footer are components that all pages will use, so the data for them
 should be stored at site level. This can be done via specifying
 `nodeCollection="site"`. For more information, read about
-[Data](../..//Development/Architecture/Data).
+[Data](../../Development/Architecture/Data).
 
 e.g.
 ```
@@ -152,8 +152,8 @@ The Bodiless starter comes with menu that is placed in the header. It is menu
 that the data is shared site-wide so that all pages use the same menu data. In
 addition the burger menu (mobile) menu generates its menu off this desktop
 menu's data. For more details, please see
-[Menu](/Components/Organisms/MainMenu) &
-[Burger Menu](/Components/Organisms/BurgerMenu)
+[Menu](/Components/MainMenu) &
+[Burger Menu](/Components/BurgerMenu)
 
 ## Editors
 
