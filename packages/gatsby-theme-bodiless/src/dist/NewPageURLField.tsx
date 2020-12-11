@@ -136,7 +136,7 @@ const NewPageURLField = (props: FieldProps) => {
     ...rest,
   });
   const { value } = fieldState;
-  const { setTouched, setValue, setError } = fieldApi;
+  const { setValue, setError } = fieldApi;
   const { onChange, onBlur, ...restUserProps } = userProps;
   const fieldLabel = isFullUrl ? 'URL' : 'Page Path';
   const inputClasses = isFullUrl ? INPUT_FIELD_BLOCK_CLASSES : INPUT_FIELD_INLINE_CLASSES;
@@ -163,12 +163,6 @@ const NewPageURLField = (props: FieldProps) => {
           setValue(e.target.value);
           if (onChange) {
             onChange(e);
-          }
-        }}
-        onBlur={e => {
-          setTouched(true);
-          if (onBlur) {
-            onBlur(e);
           }
         }}
       />
