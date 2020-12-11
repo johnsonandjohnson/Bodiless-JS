@@ -47,10 +47,15 @@ const onPageCreate = ({
     .toArray()
     .filter(item => item.attribs.name !== undefined && item.attribs.content !== undefined)
     .filter(item => !names || names.includes(item.attribs.name))
+    .map(item => ({
+      // replace colon with hyphen to avoid issues on windows
+      name: item.attribs.name.replace(':', '-'),
+      content: item.attribs.content,
+    }))
     .forEach(item => api.writeJsonFileSync(
-      path.resolve(api.getPagePath(), `${prefix}$${item.attribs.name}.json`),
+      path.resolve(api.getPagePath(), `${prefix}$${item.name}.json`),
       {
-        content: item.attribs.content,
+        content: item.content,
       },
     ));
 };

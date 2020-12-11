@@ -56,10 +56,10 @@ in each should be isolated from the rest.
 - **React**: These principles are fundamental to the declarative, component-based
   framework we have chosen.
 - **Use functional paradigms for styling:** We adopt the paradigm of
-  ("functional" (or "atomic" or "utility first") css)[https://www.phase2technology.com/blog/defense-of-functional-css])
+  ["functional" - aka "atomic" or "utility first" - css](https://www.phase2technology.com/blog/defense-of-functional-css)
   as the best way to standardize the styling api our components.
 - **Style by composition:** All compound components should allow injection of
-  their visual elements via the [Design API](../packages/fclasses/README.md).
+  their visual elements via the [Design API](../Development/Architecture/FClasses).
 
 ## 3. Favor selection over configuration
 It's better to choose between a set of simple components than to develop more
@@ -103,7 +103,7 @@ and forms, ultimately each component is reponsible for defining a form (or
 other interface) which a user can use to modify its data.
 
 #### Examples
-- The core [Link](../packages/bodiless-components/src/Link.tsx) component defines
+- The core [Link](../../../Components/Link) component defines
   its own schema and form elements.
 
 ## 7. One workflow to rule them all

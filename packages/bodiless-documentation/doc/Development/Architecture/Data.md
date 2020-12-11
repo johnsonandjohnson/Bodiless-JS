@@ -327,7 +327,7 @@ is equivalent to
 ```
 
 This pattern becomes particularly powerful when enhancing a compound component using
-the [Design API](../FClasses). Assuming we made blurb "designable", we could
+the [Design API](../Architecture/FClasses). Assuming we made blurb "designable", we could
 easily create a "behavioral token" which adds data:
 
 ```javascript
