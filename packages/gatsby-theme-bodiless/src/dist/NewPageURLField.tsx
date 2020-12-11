@@ -137,7 +137,7 @@ const NewPageURLField = (props: FieldProps) => {
   });
   const { value } = fieldState;
   const { setValue, setError } = fieldApi;
-  const { onChange, onBlur, ...restUserProps } = userProps;
+  const { onChange, ...restUserProps } = userProps;
   const fieldLabel = isFullUrl ? 'URL' : 'Page Path';
   const inputClasses = isFullUrl ? INPUT_FIELD_BLOCK_CLASSES : INPUT_FIELD_INLINE_CLASSES;
   return render(
