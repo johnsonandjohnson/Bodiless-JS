@@ -15,7 +15,7 @@ import { flow } from 'lodash';
 import {
   SearchBox as SearchBoxClean,
   SearchResult as SearchResultClean,
-  ResponsiveSearchBox,
+  ResponsiveSearchBox as ResponsiveSearchBoxClean,
 } from '@bodiless/search';
 import {
   asSimpleSearchResult, asInlineSearch, asSimpleSearch,
@@ -25,4 +25,4 @@ import {
 export const SimpleSearchResult = flow(asSimpleSearchResult)(SearchResultClean);
 export const InlineSearchBox = flow(asInlineSearch)(SearchBoxClean);
 export const SimpleSearchBox = flow(asSimpleSearch)(SearchBoxClean);
-export const ResponsiveSearch = flow(asResponsiveSearch)(ResponsiveSearchBox);
+export const ResponsiveSearchBox = flow(asResponsiveSearch)(ResponsiveSearchBoxClean);

@@ -22,7 +22,7 @@ import {
 } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
 import { ResponsiveMegaMenu } from '../Menu';
-import { SimpleSearchBox, ResponsiveSearch } from '../Search';
+import { SimpleSearchBox, ResponsiveSearchBox } from '../Search';
 import Logo from './logo';
 
 type HeaderComponents = {
@@ -43,7 +43,7 @@ const headerComponents:HeaderComponents = {
   Menu: ResponsiveMegaMenu,
   SiteLogoReturn: Logo,
   Search: SimpleSearchBox,
-  MobileSearch: ResponsiveSearch,
+  MobileSearch: ResponsiveSearchBox,
 };
 const HeaderClean: FC<Props> = ({ components }) => {
   const {
