@@ -38,23 +38,23 @@ import { useSearchResultContext } from './SearchContextProvider';
 import { TSearchResult } from '../types';
 
 export type SearchComponents = {
-  SearchWrapper: ComponentType<StylableProps>,
-  SearchInput: ComponentType<any>,
-  SearchButton: ComponentType<any>,
+  SearchWrapper: ComponentType<StylableProps>;
+  SearchInput: ComponentType<any>;
+  SearchButton: ComponentType<any>;
 };
 
 type SearchResultComponents = {
   SearchResultWrapper: ComponentType<StylableProps>;
   SearchResultList: ComponentType<any>;
   SearchResultListItem: ComponentType<any>;
-  SearchResultSummary: ComponentType<StylableProps>,
+  SearchResultSummary: ComponentType<StylableProps>;
 };
 
 type SearchResultItemComponents = {
-  ItemList: ComponentType<StylableProps>,
-  ItemH3: ComponentType<StylableProps>,
-  ItemAnchor: ComponentType<HTMLProps<HTMLAnchorElement> & StylableProps>,
-  ItemParagraph: ComponentType<StylableProps>,
+  ItemList: ComponentType<StylableProps>;
+  ItemH3: ComponentType<StylableProps>;
+  ItemAnchor: ComponentType<HTMLProps<HTMLAnchorElement> & StylableProps>;
+  ItemParagraph: ComponentType<StylableProps>;
 };
 
 type SearchResultItemProps = DesignableComponentsProps<SearchResultItemComponents> &
