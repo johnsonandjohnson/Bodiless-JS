@@ -38,7 +38,7 @@ import { useSearchResultContext } from './SearchContextProvider';
 import { TSearchResult } from '../types';
 
 export type SearchComponents = {
-  InputWrapper: ComponentType<StylableProps>,
+  SearchWrapper: ComponentType<StylableProps>,
   SearchInput: ComponentType<any>,
   SearchButton: ComponentType<any>,
 };
@@ -68,7 +68,7 @@ const SearchInputBase: FC<HTMLProps<HTMLInputElement>> = props => {
 };
 
 export const searchComponents: SearchComponents = {
-  InputWrapper: Div,
+  SearchWrapper: Div,
   SearchInput: SearchInputBase,
   SearchButton: Button,
 };
@@ -197,9 +197,9 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
 
   const { placeholder = 'Search' } = props;
 
-  const { InputWrapper, SearchInput, SearchButton } = components;
+  const { SearchWrapper, SearchInput, SearchButton } = components;
   return (
-    <InputWrapper>
+    <SearchWrapper>
       <SearchInput
         value={queryString}
         onChange={onChangeHandler}
@@ -207,7 +207,7 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
         placeholder={placeholder}
       />
       <SearchButton onClick={onClickHandler} />
-    </InputWrapper>
+    </SearchWrapper>
   );
 };
 

@@ -30,13 +30,13 @@ const withIcon = (icon: string) => (Component: ComponentType) => (props: any) =>
   </Component>
 );
 const searchDesign = {
-  InputWrapper: addClasses('hidden lg:block my-4 border border-black align-middle border-gray-500'),
+  SearchWrapper: addClasses('hidden lg:block my-4 border border-black align-middle border-gray-500'),
   SearchInput: addClasses('px-2 align-middle text-1xl outline-none'),
   SearchButton: withIcon('search'),
 };
 
 const responsiveSearchDesign = {
-  InputWrapper: addClasses('absolute w-full p-3 flex z-10 bg-gray-700 left-0'),
+  SearchWrapper: addClasses('absolute w-full p-3 flex z-10 bg-gray-700 left-0'),
   SearchInput: addClasses('align-middle w-full p-2'),
   ToggleButton: addClasses('text-white'),
   SearchButton: flow(
@@ -46,7 +46,7 @@ const responsiveSearchDesign = {
 };
 
 const searchInlineDesign = {
-  InputWrapper: addClasses('inline-block border border-black align-middle border-gray-500'),
+  SearchWrapper: addClasses('inline-block border border-black align-middle border-gray-500'),
   SearchInput: addClasses('px-2 align-middle text-1xl outline-none'),
   SearchButton: withIcon('search'),
 };
