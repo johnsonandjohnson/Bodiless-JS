@@ -12,11 +12,17 @@
  * limitations under the License.
  */
 import { flow } from 'lodash';
-import { SearchBox as SearchBoxClean, SearchResult as SearchResultClean } from '@bodiless/search';
+import {
+  SearchBox as SearchBoxClean,
+  SearchResult as SearchResultClean,
+  ResponsiveSearchBox,
+} from '@bodiless/search';
 import {
   asSimpleSearchResult, asInlineSearch, asSimpleSearch,
+  asResponsiveSearch,
 } from './token';
 
 export const SimpleSearchResult = flow(asSimpleSearchResult)(SearchResultClean);
 export const InlineSearchBox = flow(asInlineSearch)(SearchBoxClean);
 export const SimpleSearchBox = flow(asSimpleSearch)(SearchBoxClean);
+export const ResponsiveSearch = flow(asResponsiveSearch)(ResponsiveSearchBox);

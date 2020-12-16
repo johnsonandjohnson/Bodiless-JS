@@ -17,7 +17,6 @@
   position: relative;
   width: 30px;
   height: 24px;
-  margin-left: calc(100% - 30px - 1rem);
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
 }
@@ -49,4 +48,5 @@ Note: Beware of modifying this element as it can break the animations - you shou
   position: fixed;
   height: 100%;
   top: 0;
+  left: 0;
 }

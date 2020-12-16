@@ -35,7 +35,7 @@ const withBurgerMenuStyles = withDesign({
   ),
   Menu: flow(
     asPrimaryColorBackground,
-    addProps({ noOverlay: true, width: '100%', right: true }),
+    addProps({ noOverlay: true, width: '100%' }),
   ),
 });
 

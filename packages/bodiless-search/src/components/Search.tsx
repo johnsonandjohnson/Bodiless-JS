@@ -37,10 +37,10 @@ import {
 import { useSearchResultContext } from './SearchContextProvider';
 import { TSearchResult } from '../types';
 
-type SearchComponents = {
-  SearchWrapper: ComponentType<StylableProps>;
-  SearchInput: ComponentType<any>;
-  SearchButton: ComponentType<any>;
+export type SearchComponents = {
+  InputWrapper: ComponentType<StylableProps>,
+  SearchInput: ComponentType<any>,
+  SearchButton: ComponentType<any>,
 };
 
 type SearchResultComponents = {
@@ -67,14 +67,10 @@ const SearchInputBase: FC<HTMLProps<HTMLInputElement>> = props => {
   );
 };
 
-const SearchButtonBase: FC<HTMLProps<HTMLButtonElement>> = (
-  { onClick, ...rest },
-) => <Button onClick={onClick} {...rest} />;
-
-const searchComponents: SearchComponents = {
-  SearchWrapper: Div,
+export const searchComponents: SearchComponents = {
+  InputWrapper: Div,
   SearchInput: SearchInputBase,
-  SearchButton: SearchButtonBase,
+  SearchButton: Button,
 };
 
 const searchResultItemComponents: SearchResultItemComponents = {
@@ -115,7 +111,7 @@ const searchResultComponents: SearchResultComponents = {
   SearchResultSummary: P,
 };
 
-type SearchProps = DesignableComponentsProps<SearchComponents> &
+export type SearchProps = DesignableComponentsProps<SearchComponents> &
 HTMLProps<HTMLElement>;
 type SearchResultProps = DesignableComponentsProps<SearchResultComponents> &
 HTMLProps<HTMLElement> & { resultCountMessage?: string, resultEmptyMessage?: string };
@@ -201,9 +197,9 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
 
   const { placeholder = 'Search' } = props;
 
-  const { SearchWrapper, SearchInput, SearchButton } = components;
+  const { InputWrapper, SearchInput, SearchButton } = components;
   return (
-    <SearchWrapper>
+    <InputWrapper>
       <SearchInput
         value={queryString}
         onChange={onChangeHandler}
@@ -211,7 +207,7 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
         placeholder={placeholder}
       />
       <SearchButton onClick={onClickHandler} />
-    </SearchWrapper>
+    </InputWrapper>
   );
 };
 

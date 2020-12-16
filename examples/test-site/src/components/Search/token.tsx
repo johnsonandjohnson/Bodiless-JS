@@ -30,19 +30,30 @@ const withIcon = (icon: string) => (Component: ComponentType) => (props: any) =>
   </Component>
 );
 const searchDesign = {
-  SearchWrapper: addClasses('my-4 border border-black align-middle border-gray-500'),
+  InputWrapper: addClasses('hidden lg:block my-4 border border-black align-middle border-gray-500'),
   SearchInput: addClasses('px-2 align-middle text-1xl outline-none'),
   SearchButton: withIcon('search'),
 };
 
+const responsiveSearchDesign = {
+  InputWrapper: addClasses('absolute w-full p-3 flex z-10 bg-gray-700 left-0'),
+  SearchInput: addClasses('align-middle w-full p-2'),
+  ToggleButton: addClasses('text-white'),
+  SearchButton: flow(
+    withIcon('search'),
+    addClasses('flex absolute right-0 self-center mr-4'),
+  ),
+};
+
 const searchInlineDesign = {
-  SearchWrapper: addClasses('inline-block border border-black align-middle border-gray-500'),
+  InputWrapper: addClasses('inline-block border border-black align-middle border-gray-500'),
   SearchInput: addClasses('px-2 align-middle text-1xl outline-none'),
   SearchButton: withIcon('search'),
 };
 
 const asSimpleSearch = withDesign(searchDesign);
 const asInlineSearch = withDesign(searchInlineDesign);
+const asResponsiveSearch = withDesign(responsiveSearchDesign);
 
 const searchResultDesign = {
   SearchResultWrapper: addClasses('py-2'),
@@ -61,4 +72,5 @@ export {
   asSimpleSearch,
   asInlineSearch,
   asSimpleSearchResult,
+  asResponsiveSearch,
 };

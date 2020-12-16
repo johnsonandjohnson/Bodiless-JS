@@ -20,6 +20,7 @@ import {
 import {
   asPageContainer,
   asPrimaryColorBackground,
+  asTealBackground,
 } from '../Elements.token';
 
 const asDefaultLogoStyle = withDesign({
@@ -31,7 +32,7 @@ const asDefaultLogoStyle = withDesign({
 const asSiteHeader = withDesign({
   Wrapper: flow(asPrimaryColorBackground, addClasses('')),
   Container: flow(asPageContainer, addClasses('flex justify-between min-h-16 items-center')),
-  MenuContainer: asPageContainer,
+  MenuContainer: flow(asPageContainer, asTealBackground, addClasses('flex justify-between flex-row-reverse lg:flex-row px-4 lg:px-0')),
   SiteLogoReturn: asDefaultLogoStyle,
 });
 
