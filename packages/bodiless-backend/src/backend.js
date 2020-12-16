@@ -15,7 +15,6 @@
 /* eslint no-console: 0 */
 /* eslint global-require: 0 */
 const express = require('express');
-const fs = require('fs');
 const bodyParser = require('body-parser');
 const { spawn } = require('child_process');
 const formidable = require('formidable');
@@ -617,7 +616,7 @@ class Backend {
       const page = Backend.getPage(filePath);
       page.setBasePath(backendPagePath);
       logger.log(`Start creating page for:${page.file}`);
-      if (fs.existsSync(page.file)) {
+      if (page.exists) {
         res.status(409);
         res.send(`Error: page ${pagePath} already exists`);
         return;

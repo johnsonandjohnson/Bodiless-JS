@@ -31,7 +31,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
   const imagesFolderPath = "images";
   const imageName = 'img_615x500.jpg';
   const addPageIconXpath = '//*[@aria-label="Page"]'; 
-  const fieldAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//input[@id="new-page-path"]';
+  const fieldAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//input[@name="new-page-path"]';
   const checkmarkIconAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Submit"]';
   const newPageLinkXpath = '//*[@id="new-page-link"]';
   const titleXpath = '//*[@data-product-element="title"]//*[@data-slate-editor="true"]';
