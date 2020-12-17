@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
+/* eslint-disable import/no-extraneous-dependencies, no-global-assign */
+
 const path = require('path');
 const { JSDOM } = require('jsdom');
 
