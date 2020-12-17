@@ -24,14 +24,7 @@ const toc = {
   },
   Tools: {},
   Development: {
-    Guides: {
-      IntroToBodilessConcepts: {
-        'CreatingAGalleryPage.md': '',
-        'DesignElementBasics.md': '',
-        'CreatingBodilessComponents.md': '',
-      }
-    }
-    },
+    Guides: {},
     'Packages.md': '',
     Architecture: {
       'Data.md': '',
