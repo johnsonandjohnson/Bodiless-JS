@@ -28,7 +28,7 @@ const toc = {
       IntroToBodilessConcepts: {
         'CreatingAGalleryPage.md': '',
         'DesignElementBasics.md': '',
-        'CreatingBodilessComponents': '',
+        'CreatingBodilessComponents.md': '',
       }
     }
     },
