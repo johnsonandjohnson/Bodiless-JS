@@ -1,15 +1,16 @@
-# Site Building Basics
+# Intro to BodilessJS Concepts 
 
-This section describes how to work with BodilessJS to build out a basic editable
-site. A standalone Gatsby starter will be released soon, but for now you must
-clone the Bodiless monorepo to create a new site.
+This is a tutorial to introduce basic BodilessJS concepts. This section
+describes how to work with BodilessJS to build a simple gallery page on a basic
+editable site.
 
 > Note: The API's described below are under active development and are subject to change.
 
 ## Create a Site
+
 To begin, follow the directions to
-[create a new site](../../About/GettingStarted?id=creating-a-new-site) and all the pages
-we create in this tutorial will be in this new site.
+[create a new site](../../About/GettingStarted?id=creating-a-new-site). All the
+pages created in this tutorial will be in this new site.
 
 ## Creating pages
 

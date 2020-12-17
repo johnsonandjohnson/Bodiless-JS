@@ -25,9 +25,12 @@ const toc = {
   Tools: {},
   Development: {
     Guides: {
-      'SiteBuildBasics.md': '',
-      'DesignElementBasics.md': '',
-      'CreatingBodilessComponents.md': '',
+      IntroToBodilessConcepts: {
+        'CreatingAGalleryPage.md': '',
+        'DesignElementBasics.md': '',
+        'CreatingBodilessComponents': '',
+      }
+    }
     },
     'Packages.md': '',
     Architecture: {
