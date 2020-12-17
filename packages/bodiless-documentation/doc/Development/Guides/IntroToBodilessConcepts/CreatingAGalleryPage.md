@@ -1,18 +1,20 @@
-# Intro to BodilessJS Concepts 
+# Intro to BodilessJS Concepts
 
-This is a tutorial to introduce basic BodilessJS concepts. This section
-describes how to work with BodilessJS to build a simple gallery page on a basic
+## Creating a Gallery Page
+
+This is a tutorial to introduce basic BodilessJS concepts. In this section
+you will learn how to work with BodilessJS to build a simple gallery page on a basic
 editable site.
 
 > Note: The API's described below are under active development and are subject to change.
 
-## Create a Site
+### Prerequisite: Create a Site
 
 To begin, follow the directions to
 [create a new site](../../About/GettingStarted?id=creating-a-new-site). All the
 pages created in this tutorial will be in this new site.
 
-## Creating pages
+### 1. Create a Page
 
 BodilessJS will create a page for every subdirectory under the `src/data/pages`
 directory. The URI path for the page will be the relative to the directory.
@@ -21,9 +23,10 @@ For example, if your site is served at "mysite.com", the directory at
 `src/data/pages/foo/bar` will be served at `mysite.com/foo/bar`.
 
 Create a directory at `src/data/pages/gallery` and place an `index.tsx` file in
-that directory (note, typescript is not a requirement, you can create an
+that directory (Note: typescript is not a requirement. You can create an
 `index.jsx` instead, but you will have to remove the type information from the
 examples below). You can use the following as a starting point:
+
 ```
 import React from 'react';
 import { graphql } from 'gatsby';
@@ -67,7 +70,7 @@ Now start the development server (`npm run start`) and navigate to
 `localhost:8000/gallery`. This is just a basic Gatsby page - nothing remarkable
 yet (except Gatsby itself, of course!).
 
-### Creating pages from the UI
+#### Creating Pages from the UI
 
 You can also create pages directly from the UI using the *Page* button on the
 left sidebar. You will be prompted for a path for the new page, *relative to the
@@ -75,23 +78,24 @@ current page path.* If page creation is successful, you will be redirected to
 the new page after a few seconds. The new page will be created using a default
 template located at `src/templates/_default.tsx`. After creating a page, look in
 the corresponding directory in the filesystem
-(`src/data/pages/{path/to/your/page`}). You should see an `index.json` with the
+(e.g.: `src/data/pages/{path/to/your/page`). You should see an `index.json` with the
 following contents:
+
 ```
 {
   "#template": "_default"
 }
 ```
+
 You can modify the template by editing the contents of this file - or remove the
 file entirely and replace it with a custom page component. For more information,
-see [Creating Pages](../Architecture/Data?id=creating-pages);
+see [Creating Pages](../Architecture/Data?id=creating-pages).
 
-> There is currently a known issue with pages created in this manner. Sometimes,
-> after redirection to the new page, it will not load correctly but instead
-> generate an error. This can be resolved by touching the default template or by
-> restarting the development server.
+?> There is currently a known issue with pages created in this manner.
+Sometimes, after redirection to the new page, it will not load correctly but
+instead generate an error. This can be resolved by touching the default template or by restarting the development server.
 
-## Styling using Functional CSS and Design Token HOC's
+### 2. Styling the Page Title using Functional CSS and Design Token HOC's
 
 BodilessJS allows you to style your site using any technique you prefer.
 However, we recommend using
@@ -102,12 +106,14 @@ higher-order components. This is the pattern used in the examples below, and the
 
 Begin by refactoring the page title using this pattern. Add the following
 imports to your `index.tsx`:
+
 ```
 import { addClasses, H1 } from '@bodiless/fclasses';
 ```
 
 Now, create a reusable primary header token by adding the following above the
 default export:
+
 ```
 const asPrimaryHeader = addClasses('text-3xl font-bold');
 const PrimaryHeader = asPrimaryHeader(H1);
@@ -133,14 +139,14 @@ We could have defined our token as:
 ```
 const asPrimaryHeader = flow(stylable, addClasses('text-3xl font-bold`))
 ```
-but, fortunately, we don't have to, since `@bodiless/fclasses` exports a
+but, fortunately, you don't have to, since `@bodiless/fclasses` exports a
 stylable version of every HTML element. If you revisit the
 localhost:8005/gallery the header is rendered with the h1 and new classes.
 
 You can read more about this pattern for building out a site's UI in our
 [Design System documentation](../../Design/DesignSystem).
 
-## Making something editable
+### 3. Making the Page Title Editable
 
 To make the title of our page editable BodilessJS provides some core components.
 The simplest of these is`Editable` - a simple, unformatted text field.
@@ -162,14 +168,16 @@ Navigate to `localhost:8005/gallery` again. You'll see that the "About Us" text
 has been replaced by an editable field with placeholder text. Click on the title
 and start typing. Refresh the page - the title has been saved!
 
-### What's happening here?
+#### What's happening here?
 
 The `asEditable()` HOC used above, adds a special `Editable` component as a
 child of the wrapped component. The above is exactly equivalent to (and could
 have been written as):
+
 ```
 <PrimaryHeader><Editable nodeKey="title" placeholder="Title" /></PrimaryHeader>
 ```
+
 (Again, the version using HOC's shows it's real value when using the
 [Design API](../Architecture/FClasses?id=the-design-api)).
 
@@ -182,6 +190,7 @@ The `nodeKey` you provided as an argument to `asEditable()` (or as a prop to
 `Editable`) tells BodilessJS *where* to store the JSON file. After adding some
 content, you should see a `title.json` file at `src/data/pages/gallery`, and it
 should look something like this:
+
 ```
 {
   "text": "Whatever you entered..."
@@ -195,7 +204,7 @@ a different browser window and start editing - the changes will propagate to the
 other window in near-realtime. Cool!
 
 
-### Images and Links
+### 4. Adding Images and Links to the Page
 
 BodilessJS has built-in support for editable images and links, so let's add an
 image link to our page.
@@ -256,7 +265,7 @@ allows you to compose editable primitives into reusable components. We'll come
 back to this later.
 
 
-## Site Level Data
+### 5. Editing Site Level Data
 
 Up to now, all the editable components manage content which is limited to the
 current page. All the `json` files are saved in the page's directory:
@@ -320,7 +329,7 @@ You can create additional collections by writing your own queries.
 This is because `asEditable()` does not currently support specifying a node collection.
 
 
-## Rich Text
+### 6. Configure the Rich Text Editor
 
 The BodilessJS core component:`RichText` is used to make the body of the page
 editable - allowing editors to add some text formatting.
@@ -388,6 +397,7 @@ the `json` file is determined by the `nodeKey` prop.
 To configure `RichText` editor, we specified what components should be used to
 render different text formatting options. Normally, these would be defined by
 the styleguide of a site. Here we used very simple ones:
+
 ```
 const asBold = withComponent(Strong);
 const asItalic = addClasses('');
@@ -398,6 +408,7 @@ const asLink = flow(asBodilessLink(), addClasses('text-blue-700 underline'));
 Next, we defined how the user would interact with these options (what each would
 be named, how it could be applied, what icon (if any) would represent it, etc).
 BodilessJS provides some defaults for common use cases, and we used them here:
+
 ```
 const simpleDesign = {
   Bold: asBold,
@@ -410,6 +421,7 @@ const simpleDesign = {
 Finally, we created a HOC which would add a simple rich text editor as a child
 to the component to which it was applied (just as `asEditable()` added an editor
 for unformatted text):
+
 ```
 const SimpleEditor = withDesign(simpleDesign)(RichText);
 export default withEditor(SimpleEditor);
@@ -418,7 +430,7 @@ export default withEditor(SimpleEditor);
 The BodilessJS `RichText` component is highly configurable, and supports far
 more than simple character level formats (pending documentation).
 
-## Composition
+### 7. Creating a Reusable Component
 
 So far, we have been using BodilessJS editable primitives. Now create a reusable
 component composed of these primitives: an image with a caption, and use it to
@@ -450,6 +462,7 @@ const CaptionedImage: FC<HTMLProps<HTMLElement>> = props => (
 
 export default withNode(stylable(CaptionedImage));
 ```
+
 The pattern here should be familiar: stylable primitives are imported and add
 styling and edit functionality using higher-order components. It's worth noting
 that the whole compound image is stylable. Since all props are passed on to the
@@ -459,6 +472,7 @@ wrapper (and the other internal elements) later when we introduce the Design
 API.
 
 Next create a `Gallery.tsx` file as follows:
+
 ```
 import React, { FC, HTMLProps } from 'react';
 import {
@@ -522,7 +536,7 @@ export default withNode(MyComponent);
 
 > For extra credit - make the "Gallery" title editable.
 
-## Managing Layouts
+### 8. Managing Layouts using Flow Container
 
 It is part of the philosophy of BodilessJS that complex layouts should be
 created by developers in code, not by content editors in a complex UI,
@@ -551,6 +565,7 @@ pattern can be found in
 [Design System documentation](../../Design/DesignSystem).
 
 To create the actual components add the following imports:
+
 ```
 import { flow } from 'lodash';
 import { withTerm, withTitle } from '@bodiless/layouts';
@@ -662,7 +677,7 @@ If you look in your `src/data/pages/gallery` directory, you will see new `json`
 files. Each tile you add to the grid will have its own set of files, keyed with
 a uuid.
 
-### Responsive Layout
+### 9. Responsive Layout
 
 With your viewport at desktop width, use the component selector to place two 50%
 width tiles in the gallery. Now, change your viewport to tablet width. Notice
@@ -672,7 +687,7 @@ while at tablet size. In fact, the flowContainer grid remembers the layout you
 set at every breakpoint, allowing you to create completely customized,
 responsive layouts.
 
-### Selection vs Configuration
+### 10. Selection vs Configuration
 
 BodilessJS favors selection over configuration. It follows the belief that it is
 better to create lots of simple components than to create a few complex

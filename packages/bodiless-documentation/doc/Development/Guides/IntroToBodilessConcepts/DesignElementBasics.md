@@ -1,4 +1,6 @@
-# Design Element Basics
+# Intro to Bodiless Concepts
+
+## Design Element Basics
 
 In this guide, we will continue the gallery tutorial to apply some designs and
 implement some best practices. We will also introduce the Bodiless Design API.

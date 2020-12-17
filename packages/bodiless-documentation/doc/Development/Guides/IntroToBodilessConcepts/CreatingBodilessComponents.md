@@ -1,4 +1,6 @@
-# Creating Bodiless Components
+# Intro to Bodiless Concepts
+
+## Creating Bodiless Components
 
 In the previous guides, you have seen how to use built-in Bodiless components to
 build out an editable site. But what if you have pre-built components (or even
