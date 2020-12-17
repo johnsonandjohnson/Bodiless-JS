@@ -6,6 +6,10 @@ This is a tutorial to introduce basic BodilessJS concepts. In this section
 you will learn how to work with BodilessJS to build a simple gallery page on a basic
 editable site.
 
+![](./assets/GalleryPage.jpg)
+
+You can take a look at code examples for the gallery page [here](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/test-site/src/data/pages/gallery-final).
+
 > Note: The API's described below are under active development and are subject to change.
 
 ### Prerequisite: Create a Site
