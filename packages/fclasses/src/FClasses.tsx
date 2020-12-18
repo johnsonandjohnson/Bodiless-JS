@@ -113,6 +113,10 @@ const apply = (
   return parentFClasses ? apply(parentFClasses, newClasses) : newClasses;
 };
 
+type ForwardRefProps = {
+  forwardRef?: React.Ref<any>;
+};
+
 /**
  * Makes any component or intrinsic element stylable using FClasses. When the component is
  * wrapped by `addClasses()` or `removeClasses()`, the specified operations will be applied
@@ -120,12 +124,17 @@ const apply = (
  *
  * @param Component The component to be made stylable.
  */
-const stylable = <P extends Classable>(Component: ComponentType<P> | string) => {
-  const Stylable = (props: P & StylableProps) => {
-    const { fClasses, className, ...rest } = props;
+const stylable = <P extends Classable & ForwardRefProps>(Component: ComponentType<P> | string) => {
+  const Stylable = (props: P & StylableProps & ForwardRefProps) => {
+    const {
+      fClasses,
+      className,
+      forwardRef,
+      ...rest
+    } = props;
     const classes = apply(fClasses);
     const newClassName = asClassName(className ? apply(asFClasses(className), classes) : classes);
-    return <Component {...rest as unknown as P} className={newClassName} />;
+    return <Component {...rest as unknown as P} className={newClassName} ref={forwardRef} />;
   };
   Stylable.displayName = 'Stylable';
   return Stylable;

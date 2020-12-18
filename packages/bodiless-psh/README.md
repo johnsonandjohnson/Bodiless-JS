@@ -644,7 +644,7 @@ Platform.sh integrates with Fastly via EZ platform for Fastly.
 Once completed, the master env deployed on Platform.sh should be on Fastly CDN.  You may have to fine tune the expires setting for your static resources and set certain ones (ones identify not to change often such as font files) to longer to leverage browser caching.
 
 Platform.sh References:
-* [Set Fastly Credentials on Platform.sh](https://docs.platform.sh/frameworks/ez/fastly.html#set-credentials-on-platformsh)
+* [Set Fastly Credentials on Platform.sh](https://docs.platform.sh/frameworks/ibexa/fastly.html#set-credentials-on-platformsh)
 * [HTTP Cache](https://docs.platform.sh/configuration/routes/cache.html)
 * [Router Cache](https://docs.platform.sh/languages/php/tuning.html#ensure-that-the-router-cache-is-properly-configured)
 * [Expires](https://docs.platform.sh/configuration/app/web.html#locations)

@@ -15,7 +15,7 @@ from the existing site.
 * [Prerequisites](#Prerequisites)
 * [1. Creating a New Site](#_1-create-a-new-site-with-the-bodiless-starter)
 * [2. Setting up Design System](#_2-setting-up-design-system)
-* [3. Components](#_3-components)
+* [3. Components](#_3-components-&-component-tokens)
 * [4. Templates or One-off Custom Pages](#_4-templates-or-one-off-custom-pages)
 
 ## Prerequisites
@@ -157,9 +157,9 @@ every site will probably use in some form.
 * [Touts](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Tout):
   Touts are blocks of content that can include Image, Title, Body, Call to
   Action Link.
-* [Images](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Images):
+* [Images](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Image):
   Reusable Landscape and Square Images. 
-* [Menu & Mobile Burger menu](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/componnents/Menus):
+* [Menu & Mobile Burger menu](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Menu):
   Global Menu system.
 
 For a more in-depth guide about these see

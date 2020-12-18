@@ -90,7 +90,7 @@ describe('createPages', () => {
         context: {
           slug: '/products/shampoo/',
           template: 'product',
-          subPageTemplate: '_default',
+          subPageTemplate: 'product',
         },
       };
       expect(pageObject).toStrictEqual(expected);

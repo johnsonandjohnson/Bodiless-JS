@@ -13,13 +13,12 @@
  */
 
 import { ComponentType } from 'react';
-import { Value, Editor, Operation } from 'slate';
-import Immutable from 'immutable';
-import {
-  Editor as ReactEditor,
-  BasicEditorProps,
-  EditorProps,
-} from 'slate-react';
+import { Node, Editor } from 'slate';
+import type {
+  EditableProps,
+  RenderLeafProps,
+  RenderElementProps,
+} from 'slate-react/dist/components/editable';
 import type { DesignableComponents } from '@bodiless/fclasses';
 import type { UI } from './RichTextContext';
 
@@ -38,20 +37,21 @@ export type FormProps = {
   unwrap(): void;
 };
 
+export type Value = Node[];
+
 export type NodeEditForm = ComponentType<FormProps>;
 
-export type EditorOnChange = BasicEditorProps['onChange'];
+export type EditorOnChange = (value: Value) => void;
 
 export type EditorContext = {
-  editor: Editor;
-  value: Value;
-  editorProps: EditorProps;
-  editorRef: React.RefObject<ReactEditor>;
+  value: Value,
+  plugins: Plugin[],
+  onChange: EditorOnChange,
+  editorProps: EditableProps;
 } | null;
 
 export type ToggleProps = {
   editor: Editor;
-  value: Value;
 };
 
 export type EditorButtonProps = {
@@ -64,11 +64,6 @@ export type CustomComponentProps = {
   setComponentData(Data: DataJSON): void;
   unwrap(): void;
   children: any;
-};
-
-export type Change = {
-  operations: Immutable.List<Operation>;
-  value: Value;
 };
 
 export type RichTextComponent = ComponentType<any> & {
@@ -89,9 +84,26 @@ export type RichTextComponents = {
   [key:string]: RichTextComponent,
 };
 
-export type RichTextProps<P> = {
+export type RichTextProps = {
   components: DesignableComponents,
   ui?: UI,
-  initialValue?: object,
+  initialValue?: Value,
   nodeKey?: string,
+  value?: Value;
+  onChange: EditorOnChange;
+} & Omit<EditableProps, 'value' | 'onChange'>;
+
+export type Plugin = {
+  type: string,
+  renderElement?: EditableProps['renderElement'],
+  renderLeaf?: EditableProps['renderLeaf'],
+};
+
+export type RenderElementComponentType = ComponentType<RenderElementProps>;
+export type RenderLeafComponentType = ComponentType<RenderLeafProps>;
+
+export type {
+  EditableProps,
+  RenderLeafProps,
+  RenderElementProps,
 };

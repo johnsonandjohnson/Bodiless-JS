@@ -13,6 +13,17 @@
  */
 
 import createBlockButton from './createBlockButton';
-import * as blockUtils from './blockUtils';
+import {
+  hasBlock,
+  insertBlock,
+  toggleBlock,
+  createToggleBlock,
+} from './blockUtils';
 
-export { createBlockButton, blockUtils };
+export {
+  createBlockButton,
+  createToggleBlock,
+  hasBlock,
+  toggleBlock,
+  insertBlock,
+};

@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,5 +12,15 @@
  * limitations under the License.
  */
 
-const isMod = (event: KeyboardEvent) => (event.metaKey && !event.ctrlKey) || event.ctrlKey;
-export { isMod, isMod as default };
+import { isEmpty } from 'lodash';
+import defaultValue from './default-value';
+import type { Value } from './Type';
+
+/**
+ * hooks that can be used to get initialValue for the editor
+ */
+const useInitialValue = (
+  initialValue?: Value,
+) => (initialValue !== undefined && !isEmpty(initialValue) ? initialValue : [...defaultValue]);
+
+export default useInitialValue;

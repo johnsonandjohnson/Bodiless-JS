@@ -73,7 +73,7 @@ backend server, chrome browser).
 
 ## Libraries
 
-Further documentation for this project can be found [here](./index.md).
+Further documentation for this project can be found [here](../../../).
 
 ### React {docsify-ignore}
 
