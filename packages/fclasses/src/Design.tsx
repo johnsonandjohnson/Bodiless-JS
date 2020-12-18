@@ -14,12 +14,13 @@
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {
-  intersection, flowRight, flow, mergeWith, identity,
+  intersection, flowRight, flow, identity,
 } from 'lodash';
 import React, { ComponentType, Fragment, useContext } from 'react';
 import { HOC } from './FClasses';
 import { addPropsIf } from './addProps';
 import { useShowDesignKeys } from './Context';
+import { withDisplayName } from './hoc-util';
 
 export type DesignElement<P> = (c: ComponentType<P> | string) => ComponentType<P>;
 
@@ -78,15 +79,6 @@ export const asComponent = <P extends object>(
   return AsComponent;
 };
 
-/**
- * is an HOC that will attach a displayName to an object
- * @param name the name of the displayName.
- */
-const withDisplayName = <P extends Object> (name: string) => (Component: ComponentType<P>) => {
-  const WithDisplayName = (props: P) => <Component {...props} />;
-  const newMeta = mergeWith({}, Component, { displayName: name });
-  return Object.assign(WithDisplayName, newMeta);
-};
 const designContextDefault = undefined as undefined | ComponentType<any>;
 const DesignContext = React.createContext(designContextDefault);
 export const replaceable = <P extends object> (Component:ComponentType<P>) => {

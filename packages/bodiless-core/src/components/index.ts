@@ -18,7 +18,7 @@ import LocalContextMenu from './LocalContextMenu';
 import PageEditor from './PageEditor';
 import StaticPage from './StaticPage';
 import PageOverlay from './PageOverlay';
-import { getUI } from './ContextMenuContext';
+import ContextMenuProvider, { getUI } from './ContextMenuContext';
 import type {
   IContextMenuProps as ContextMenuProps,
   ButtonVariantProps,
@@ -29,6 +29,7 @@ import ReactTagsField, { ReactTagsFieldProps, TagType, BodilessTag } from './Rea
 
 export {
   ContextMenu,
+  ContextMenuProvider,
   getUI,
   ContextWrapper,
   LocalContextMenu,

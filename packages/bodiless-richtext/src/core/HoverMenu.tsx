@@ -17,9 +17,9 @@ import React,
   useEffect, ComponentType, HTMLProps,
 } from 'react';
 import ReactDOM from 'react-dom';
+import { Range, Editor } from 'slate';
+import { ReactEditor, useSlate } from 'slate-react';
 import { useEditContext } from '@bodiless/core';
-import { useSlateContext } from './SlateEditorContext';
-import { EditorContext } from '../Type';
 
 const defaultUI = {
   Menu: 'div',
@@ -37,23 +37,27 @@ export const getUI = (ui: UI = {}) => ({
 /**
  * Update the menu's absolute position.
  */
-function updateMenu(menu: HTMLElement | null, editorContext: EditorContext) {
-  const native = window.getSelection();
+function updateMenu(menu: HTMLElement | null, editor: ReactEditor) {
+  const { selection } = editor;
 
-  if (!menu || !editorContext || !native) return;
-  const { value } = editorContext;
-  const { fragment, selection } = value;
+  if (!menu) {
+    return;
+  }
 
-  /**
-   * According to https://github.com/ianstormtaylor/slate/issues/2432
-   * we need to detect if the active editor looses the focus (isBlurred equal to true)
-   */
-  if (selection.isBlurred || selection.isCollapsed || fragment.text === '') {
+  if (
+    !selection
+    || !ReactEditor.isFocused(editor)
+    || Range.isCollapsed(selection)
+    || Editor.string(editor, selection) === ''
+  ) {
     menu.removeAttribute('style');
     return;
   }
-  const range = native.getRangeAt(0);
-  const rect = range.getBoundingClientRect();
+
+  const domSelection = window.getSelection();
+  if (!domSelection) return;
+  const domRange = domSelection.getRangeAt(0);
+  const rect = domRange.getBoundingClientRect();
   const offsetLeft = rect.left + window.pageXOffset - menu.offsetWidth / 2 + rect.width / 2;
 
   const { style } = menu;
@@ -71,7 +75,6 @@ export type HoverMenuProps = {
 
 const HoverMenu = (props: HoverMenuProps) => {
   const isEditMode = useEditContext().isEdit || null;
-  const editorContext: EditorContext = useSlateContext();
 
   const { ui } = props;
   const { Menu } = getUI(ui);
@@ -79,10 +82,11 @@ const HoverMenu = (props: HoverMenuProps) => {
   const { children, className, ...rest } = props;
   const root = typeof window !== 'undefined' ? window.document.body : null;
   const elementID = `hover-menu-${Math.random().toString(16).slice(2)}`;
+  const editor = useSlate();
 
   useEffect(() => {
     const element = document.getElementById(elementID);
-    updateMenu(element, editorContext);
+    updateMenu(element, editor);
     return () => {};
   });
   return (

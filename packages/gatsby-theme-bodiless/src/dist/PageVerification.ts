@@ -31,7 +31,11 @@ const createPageDataUrl = (path: string) => {
   return `/page-data/${fixedPath}/page-data.json`;
 };
 
-const doFetch = (url: string) => axios.get(url);
+const doFetch = (url: string) => axios.get(url, {
+  // resolve promise for all HTTP response status codes
+  // so that can get more control on retry logic
+  validateStatus: () => true,
+});
 
 const loadPageDataJson = (loadObj: PageData): Promise<boolean> => {
   const { pagePath, retries = 0 } = loadObj;

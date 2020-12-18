@@ -13,9 +13,17 @@
  */
 
 import React, {
-  ComponentType, FC, useEffect, useState,
+  ComponentType,
+  FC,
+  useEffect,
+  useState,
 } from 'react';
-import { flow, omit, pick } from 'lodash';
+import {
+  flow,
+  omit,
+  pick,
+  mergeWith,
+} from 'lodash';
 
 export type Condition<P> = (props: P) => boolean;
 
@@ -69,6 +77,18 @@ export const withOnlyProps = <Q extends object>(...keys: string[]) => (
 export const hasProp = (name: string) => (
   ({ [name]: prop }: { [name: string]: any }) => Boolean(prop)
 );
+
+/**
+ * is an HOC that will attach a displayName to an object
+ * @param name the name of the displayName.
+ */
+export const withDisplayName = <P extends Object> (name: string) => (
+  Component: ComponentType<P>,
+) => {
+  const WithDisplayName = (props: P) => <Component {...props} />;
+  const newMeta = mergeWith({}, Component, { displayName: name });
+  return Object.assign(WithDisplayName, newMeta);
+};
 
 /**
  * Like replaceWith, but performs the repacement on effect. Useful when you need to

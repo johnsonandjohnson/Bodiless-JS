@@ -46,24 +46,25 @@ describe('Tout testing', function () {
   const imageUpdPathRegex = new RegExp("images\/pages" + pagePath + "[a-zA-Z0-9]+\/" + imageNameUpdated, "");
 
   it('touts: 1 - filling in Title', () => {
-    cy.xpath(titleXpath)
-      .type(title)
+    cy.getEditor(titleXpath)
+      .typeInSlate(title)
+    cy.getEditor(titleXpath)
       .should('have.text', title);
   })
 
 
   it('touts: 2 - filling in Body', () => {
-    cy.xpath(descriptionXpath)
-      .click()
-      .type(description)
+    cy.getEditor(descriptionXpath)
+      .typeInSlate(description)
+    cy.getEditor(descriptionXpath)
       .should('have.text', description);
   })
 
 
   it('touts: 3 - filling in CTA text', () => {
-    cy.xpath(ctaLabelXpath)
-      .click()
-      .type(ctaLabel)
+    cy.getEditor(ctaLabelXpath)
+      .typeInSlate(ctaLabel)
+    cy.getEditor(ctaLabelXpath)
       .should('have.text', ctaLabel);
   })
 
@@ -148,24 +149,25 @@ describe('Tout testing', function () {
 
 
   it('touts: 9 - editing Title', () => {
-    cy.xpath(titleXpath)
-      .type(editedPostfix)
+    cy.getEditor(titleXpath)
+      .typeInSlate(editedPostfix)
+    cy.getEditor(titleXpath)
       .should('have.text', title + editedPostfix);
   })
 
 
   it('touts: 10 - editing Description', () => {
-    cy.xpath(descriptionXpath)
-      .click()
-      .type(editedPostfix)
+    cy.getEditor(descriptionXpath)
+      .typeInSlate(editedPostfix)
+    cy.getEditor(descriptionXpath)
       .should('have.text', description + editedPostfix);
   })
 
 
   it('touts: 11 - editing CTA label', () => {
-    cy.xpath(ctaLabelXpath)
-      .click()
-      .type(editedPostfix)
+    cy.getEditor(ctaLabelXpath)
+      .typeInSlate(editedPostfix)
+    cy.getEditor(ctaLabelXpath)
       .should('have.text', ctaLabel + editedPostfix);
   })
 

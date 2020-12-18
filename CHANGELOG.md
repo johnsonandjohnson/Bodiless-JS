@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.64](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.63...v0.0.64) (2020-12-16)
+
+
+### Bug Fixes
+
+* replace colon in json file names ([#751](https://github.com/johnsonandjohnson/bodiless-js/issues/751)) ([a453af5](https://github.com/johnsonandjohnson/bodiless-js/commit/a453af5e513d955a35e65f6dd222982710eac0fc))
+
+
+### Features
+
+* Modify new page creation ([#673](https://github.com/johnsonandjohnson/bodiless-js/issues/673)) ([7af4642](https://github.com/johnsonandjohnson/bodiless-js/commit/7af46424eee422b4c4d6b3a55f25d0c80eac4d61))
+* **CI/CD:** Change default branch ([#740](https://github.com/johnsonandjohnson/bodiless-js/issues/740)) ([e86fbd4](https://github.com/johnsonandjohnson/bodiless-js/commit/e86fbd4ed4831f132fd0630167ab32ef8f3ef59d))
+
+
+
+
+
 ## [0.0.63](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.62...v0.0.63) (2020-12-08)
 
 
