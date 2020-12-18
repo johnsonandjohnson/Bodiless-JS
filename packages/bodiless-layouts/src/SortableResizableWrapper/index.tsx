@@ -17,17 +17,6 @@ import React, { ComponentType, HTMLProps } from 'react';
 import CleanReresizable, { ResizeCallback, ResizableProps } from 're-resizable';
 import { SnapData } from '../FlowContainer/utils/appendTailwindWidthClass';
 
-const ENABLED_DRAG_SIDES = {
-  top: false,
-  right: true,
-  bottom: false,
-  left: false,
-  topRight: false,
-  bottomRight: false,
-  bottomLeft: false,
-  topLeft: false,
-};
-
 type FinalUI = {
   DragHandle: ComponentType<HTMLProps<HTMLSpanElement>> | string;
   ResizeHandle: ComponentType<HTMLProps<HTMLDivElement>> | string;
@@ -66,9 +55,8 @@ const Handle = SortableHandle(({ component: Component, ...rest }: any) => (
 
 const SortableResizableWrapper = SortableElement((props: Props) => {
   const {
-    isEnabled, children, className, ui, ...resizableProps
+    isEnabled, children, className, ui, direction, ...resizableProps
   } = props;
-  console.log(props);
   const { DragHandle, ResizeHandle, Reresizable } = getUI(ui);
   const childrenWithDragHandle = (
     <>
@@ -81,12 +69,17 @@ const SortableResizableWrapper = SortableElement((props: Props) => {
       {children}
     </>
   );
-  const { direction } = props;
-  console.log('direction prop', direction);
-  if (direction === 'rtl') {
-    ENABLED_DRAG_SIDES.left = true;
-    ENABLED_DRAG_SIDES.right = false;
-  }
+  const ENABLED_DRAG_SIDES = {
+    top: false,
+    right: direction !== 'rtl',
+    bottom: false,
+    left: direction === 'rtl',
+    topRight: false,
+    bottomRight: false,
+    bottomLeft: false,
+    topLeft: false,
+  };
+
   return (
     <Reresizable
       enable={ENABLED_DRAG_SIDES}
@@ -94,7 +87,8 @@ const SortableResizableWrapper = SortableElement((props: Props) => {
       scale={1}
       className={className}
       handleComponent={{
-        right: ResizeHandle,
+        right: direction === 'rtl' ? false : ResizeHandle,
+        left: direction === 'rtl' ? ResizeHandle : false,
       }}
       {...resizableProps}
     >
