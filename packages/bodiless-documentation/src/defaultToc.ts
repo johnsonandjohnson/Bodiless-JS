@@ -26,7 +26,7 @@ const toc = {
   Development: {
     Guides: {
       IntroToBodilessConcepts: {
-        'CreatingAGalleryPage.md': '',
+        'CreatingaGalleryPage.md': '',
         'DesignElementBasics.md': '',
         'CreatingBodilessComponents.md': '',
       },
