@@ -1,9 +1,6 @@
-# Intro to BodilessJS Concepts
+# Creating a Gallery Page
 
-## Creating a Gallery Page
-
-This is a tutorial to introduce basic BodilessJS concepts. In this section
-you will learn how to work with BodilessJS to build a simple gallery page on a basic
+In this section you will learn how to work with BodilessJS to build a simple gallery page on a basic
 editable site.
 
 ![](./assets/GalleryPage.jpg)
