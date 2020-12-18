@@ -195,11 +195,11 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
     searchHandler();
   }, [queryString]);
 
-  const { placeholder = 'Search' } = props;
+  const { placeholder = 'Search', ...rest } = props;
 
   const { SearchWrapper, SearchInput, SearchButton } = components;
   return (
-    <SearchWrapper>
+    <SearchWrapper {...rest}>
       <SearchInput
         value={queryString}
         onChange={onChangeHandler}

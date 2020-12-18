@@ -19,6 +19,7 @@ import {
   addClasses,
   withDesign,
 } from '@bodiless/fclasses';
+import { asPageContainer } from '../Elements.token';
 
 const Icon = flow(
   addClasses('material-icons cursor-pointer align-middle bg-white text-gray-500'),
@@ -36,7 +37,8 @@ const searchDesign = {
 };
 
 const responsiveSearchDesign = {
-  SearchWrapper: addClasses('absolute w-full p-3 flex z-10 bg-gray-700 left-0'),
+  Wrapper: addClasses('h-full'),
+  SearchWrapper: flow(asPageContainer, addClasses('absolute w-full p-3 flex z-10 bg-gray-700 inset-x-0')),
   SearchInput: addClasses('align-middle w-full p-2'),
   ToggleButton: addClasses('text-white'),
   SearchButton: flow(

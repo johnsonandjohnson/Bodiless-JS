@@ -22,50 +22,53 @@ import {
 } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
 import { ResponsiveMegaMenu } from '../Menu';
-import { SimpleSearchBox, ResponsiveSearchBox } from '../Search';
+import { ResponsiveSearchBox } from '../Search';
 import Logo from './logo';
 
 type HeaderComponents = {
   Wrapper: ComponentType<any>,
   Container: ComponentType<any>,
   MenuContainer: ComponentType<any>,
+  SearchContainer: ComponentType<any>,
   Menu: ComponentType<any>,
-  SiteLogoReturn: ComponentType<any>,
   Search: ComponentType<any>,
-  MobileSearch: ComponentType<any>,
+  SiteLogoReturn: ComponentType<any>,
 };
+
 export type Props = DesignableComponentsProps<HeaderComponents> & HTMLProps<HTMLElement>;
 
 const headerComponents:HeaderComponents = {
   Wrapper: Div,
   Container: Div,
   MenuContainer: Div,
+  SearchContainer: Div,
   Menu: ResponsiveMegaMenu,
+  Search: ResponsiveSearchBox,
   SiteLogoReturn: Logo,
-  Search: SimpleSearchBox,
-  MobileSearch: ResponsiveSearchBox,
 };
+
 const HeaderClean: FC<Props> = ({ components }) => {
   const {
     Wrapper,
     Container,
     MenuContainer,
+    SearchContainer,
     Menu,
-    SiteLogoReturn,
     Search,
-    MobileSearch,
+    SiteLogoReturn,
   } = components;
 
   return (
     <Wrapper>
       <Container>
         <SiteLogoReturn />
-        <Search placeholder="Search" />
+        <SearchContainer>
+          <Search placeholder="Search" />
+        </SearchContainer>
+        <MenuContainer>
+          <Menu />
+        </MenuContainer>
       </Container>
-      <MenuContainer>
-        <MobileSearch placeholder="Mobile Search" />
-        <Menu />
-      </MenuContainer>
     </Wrapper>
   );
 };

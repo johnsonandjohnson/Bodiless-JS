@@ -24,19 +24,20 @@ import {
 } from '../Elements.token';
 
 const asDefaultLogoStyle = withDesign({
-  SiteReturn: addClasses('flex-shrink px-2'),
-  SiteLogo: addClasses('h-16'),
+  SiteReturn: addClasses('flex-shrink px-2 order-1'),
+  SiteLogo: addClasses('h-12 lg:h-16'),
   // Do not addClasses to SiteLink as by default its Gatsby Link and not designable.
 });
 
 const asSiteHeader = withDesign({
-  Wrapper: flow(asPrimaryColorBackground, addClasses('')),
-  Container: flow(asPageContainer, addClasses('flex justify-between min-h-16 items-center')),
-  MenuContainer: flow(
+  Wrapper: asPrimaryColorBackground,
+  Container: flow(
     asPageContainer,
     asTealBackground,
-    addClasses('flex justify-between flex-row-reverse lg:flex-row px-4 lg:px-0'),
+    addClasses('flex justify-between h-12 lg:h-auto items-center flex-wrap lg:bg-transparent px-4 lg:px-0'),
   ),
+  SearchContainer: addClasses('order-1 h-full lg:h-auto'),
+  MenuContainer: addClasses('lg:w-full lg:order-1'),
   SiteLogoReturn: asDefaultLogoStyle,
 });
 
