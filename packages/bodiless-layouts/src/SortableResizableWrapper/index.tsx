@@ -29,9 +29,9 @@ const ENABLED_DRAG_SIDES = {
 };
 
 type FinalUI = {
-  DragHandle: ComponentType<HTMLProps<HTMLSpanElement>> | string,
-  ResizeHandle: ComponentType<HTMLProps<HTMLDivElement>> | string,
-  Reresizable: ComponentType<ResizableProps & { isEnabled?: boolean }>,
+  DragHandle: ComponentType<HTMLProps<HTMLSpanElement>> | string;
+  ResizeHandle: ComponentType<HTMLProps<HTMLDivElement>> | string;
+  Reresizable: ComponentType<ResizableProps & { isEnabled?: boolean }>;
 };
 
 export type UI = Partial<FinalUI>;
@@ -57,6 +57,7 @@ export type Props = {
   };
   onResizeStop?: ResizeCallback;
   ui?: UI;
+  direction?: string;
 };
 
 const Handle = SortableHandle(({ component: Component, ...rest }: any) => (
@@ -67,9 +68,8 @@ const SortableResizableWrapper = SortableElement((props: Props) => {
   const {
     isEnabled, children, className, ui, ...resizableProps
   } = props;
-
+  console.log(props);
   const { DragHandle, ResizeHandle, Reresizable } = getUI(ui);
-
   const childrenWithDragHandle = (
     <>
       <Handle
@@ -81,7 +81,12 @@ const SortableResizableWrapper = SortableElement((props: Props) => {
       {children}
     </>
   );
-
+  const { direction } = props;
+  console.log('direction prop', direction);
+  if (direction === 'rtl') {
+    ENABLED_DRAG_SIDES.left = true;
+    ENABLED_DRAG_SIDES.right = false;
+  }
   return (
     <Reresizable
       enable={ENABLED_DRAG_SIDES}

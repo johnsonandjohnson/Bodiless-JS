@@ -15,6 +15,7 @@
 import {
   addClasses,
   withDesign,
+  addProps
 } from '@bodiless/fclasses';
 
 const asFlowContainerWithMargins = withDesign({
@@ -24,10 +25,16 @@ const asFlowContainerWithMargins = withDesign({
 
 const asFlowContainerFullWidth = withDesign({
   Wrapper: addClasses('w-full'),
-  ComponentWrapper: addClasses('w-full md:w-1/3'),
+  ComponentWrapper: addClasses('w-full md:w-1/3 xxxx'),
+});
+
+const asFlowContainerRTL = withDesign({
+  Wrapper: addClasses('w-full'),
+  ComponentWrapper: addProps({direction: 'rtl'}),
 });
 
 export {
   asFlowContainerWithMargins,
   asFlowContainerFullWidth,
+  asFlowContainerRTL,
 };
