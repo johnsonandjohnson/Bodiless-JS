@@ -23,7 +23,7 @@ import withIframeVariations from './withIframeVariations';
 import withYouTubeVariations from './withYouTubeVariations';
 import withSocialShare from './withSocialShare';
 
-import { asFlowContainerWithMargins } from './token';
+import { asFlowContainerRTL, asFlowContainerWithMargins } from './token';
 import withListVariations from './withListVariations';
 
 // Order of includes currently dictates order in Component Picker
@@ -42,6 +42,21 @@ const FlowContainerDefault = flow(
   withMandatoryCategories(['Orientation', 'Type']),
 )(FlowContainer);
 
+const FlowContainerDefaultRTL = flow(
+  withRichTextVariations,
+  withImageVariations,
+  withToutVariations,
+  withContentfulTouts,
+  withSingleAccordionVariations,
+  withListVariations,
+  withIframeVariations,
+  withSocialShare,
+  withYouTubeVariations,
+  asFlowContainerWithMargins,
+  withMandatoryCategories(['Orientation', 'Type']),
+  asFlowContainerRTL,
+)(FlowContainer);
+
 const FlowContainerLimited = flow(
   withRichTextVariations,
   withImageVariations,
@@ -50,4 +65,4 @@ const FlowContainerLimited = flow(
 )(FlowContainer);
 
 // eslint-disable-next-line import/prefer-default-export
-export { FlowContainerDefault, FlowContainerLimited };
+export { FlowContainerDefault, FlowContainerLimited, FlowContainerDefaultRTL };

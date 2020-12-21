@@ -16,10 +16,12 @@ import { SortableElement, SortableHandle } from 'react-sortable-hoc';
 import React, { ComponentType, HTMLProps } from 'react';
 import CleanReresizable, { ResizeCallback, ResizableProps } from 're-resizable';
 import { SnapData } from '../FlowContainer/utils/appendTailwindWidthClass';
+import { DIRECTIONS } from '../withDirection/withDirection';
 
 type FinalUI = {
   DragHandle: ComponentType<HTMLProps<HTMLSpanElement>> | string;
   ResizeHandle: ComponentType<HTMLProps<HTMLDivElement>> | string;
+  ResizeHandleRTL: ComponentType<HTMLProps<HTMLDivElement>> | string;
   Reresizable: ComponentType<ResizableProps & { isEnabled?: boolean }>;
 };
 
@@ -28,6 +30,7 @@ export type UI = Partial<FinalUI>;
 const defaultUI: FinalUI = {
   DragHandle: 'span',
   ResizeHandle: 'div',
+  ResizeHandleRTL: 'div',
   Reresizable: CleanReresizable,
 };
 
@@ -55,9 +58,16 @@ const Handle = SortableHandle(({ component: Component, ...rest }: any) => (
 
 const SortableResizableWrapper = SortableElement((props: Props) => {
   const {
-    isEnabled, children, className, ui, direction, ...resizableProps
+    isEnabled,
+    children,
+    className,
+    ui,
+    direction,
+    ...resizableProps
   } = props;
-  const { DragHandle, ResizeHandle, Reresizable } = getUI(ui);
+  const {
+    DragHandle, ResizeHandle, ResizeHandleRTL, Reresizable,
+  } = getUI(ui);
   const childrenWithDragHandle = (
     <>
       <Handle
@@ -71,14 +81,16 @@ const SortableResizableWrapper = SortableElement((props: Props) => {
   );
   const ENABLED_DRAG_SIDES = {
     top: false,
-    right: direction !== 'rtl',
+    right: direction !== DIRECTIONS.RTL,
     bottom: false,
-    left: direction === 'rtl',
+    left: direction === DIRECTIONS.RTL,
     topRight: false,
     bottomRight: false,
     bottomLeft: false,
     topLeft: false,
   };
+  console.log('direction', direction);
+
 
   return (
     <Reresizable
@@ -86,10 +98,17 @@ const SortableResizableWrapper = SortableElement((props: Props) => {
       isEnabled={isEnabled}
       scale={1}
       className={className}
-      handleComponent={{
-        right: direction === 'rtl' ? false : ResizeHandle,
-        left: direction === 'rtl' ? ResizeHandle : false,
-      }}
+      handleComponent={
+        direction === DIRECTIONS.RTL
+          ? {
+            right: direction === DIRECTIONS.RTL ? false : ResizeHandleRTL,
+            left: direction === DIRECTIONS.RTL ? ResizeHandleRTL : false,
+          }
+          : {
+            right: direction === DIRECTIONS.RTL ? false : ResizeHandle,
+            left: direction === DIRECTIONS.RTL ? ResizeHandle : false,
+          }
+      }
       {...resizableProps}
     >
       {childrenWithDragHandle}

@@ -25,7 +25,6 @@ import { flow } from 'lodash';
 import Layout from '../../../components/Layout';
 import tailWindConfig from '../../../../tailwind.config';
 import { FlowContainerDefault, FlowContainerLimited } from '../../../components/FlowContainer';
-import {asFlowContainerRTL} from '../../../components/FlowContainer/token';
 
 const FLOW_CONTAINER_PAGE_PATH = 'flowContainer';
 
@@ -49,11 +48,6 @@ const ContentfulFlowContainer = flow(
   withDefaultContent({ contentfulFlowContainer }),
   withNodeKey('contentfulFlowContainer'),
   withResetButton({ nodeKey: 'contentfulFlowContainer' }),
-)(FlowContainerDefault);
-
-const RTLFlowContainer = flow(
-  withNodeKey('rtlFlowContainer'),
-  asFlowContainerRTL,
 )(FlowContainerDefault);
 
 const FlowContainerPage = (props: any) => (
@@ -117,8 +111,8 @@ const FlowContainerPage = (props: any) => (
       />
       <h2 className="text-2xl font-bold mt-4">Contentful Flow Container</h2>
       <ContentfulFlowContainer />
-      <h2 className="text-2xl font-bold mt-4">Flow Container RTL</h2>
-      <RTLFlowContainer id="rtl-flow-container" />
+      <h2 className="text-2xl font-bold mt-4">Limited Flow Container</h2>
+      <FlowContainerLimited />
     </Layout>
   </Page>
 );
