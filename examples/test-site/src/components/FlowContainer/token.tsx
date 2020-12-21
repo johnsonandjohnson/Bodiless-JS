@@ -12,10 +12,7 @@
  * limitations under the License.
  */
 
-import {
-  addClasses,
-  withDesign,
-} from '@bodiless/fclasses';
+import { addClasses, withDesign } from '@bodiless/fclasses';
 import { withDirection, DIRECTIONS } from '@bodiless/layouts';
 
 const asFlowContainerWithMargins = withDesign({
@@ -25,7 +22,7 @@ const asFlowContainerWithMargins = withDesign({
 
 const asFlowContainerFullWidth = withDesign({
   Wrapper: addClasses('w-full'),
-  ComponentWrapper: addClasses('w-full md:w-1/3 xxxx'),
+  ComponentWrapper: addClasses('w-full md:w-1/3'),
 });
 
 const asFlowContainerRTL = withDesign({
