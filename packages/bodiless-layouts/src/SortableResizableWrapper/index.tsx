@@ -98,14 +98,8 @@ const SortableResizableWrapper = SortableElement((props: Props) => {
       className={className}
       handleComponent={
         direction === DIRECTIONS.RTL
-          ? {
-            right: direction === DIRECTIONS.RTL ? false : ResizeHandleRTL,
-            left: direction === DIRECTIONS.RTL ? ResizeHandleRTL : false,
-          }
-          : {
-            right: direction === DIRECTIONS.RTL ? false : ResizeHandle,
-            left: direction === DIRECTIONS.RTL ? ResizeHandle : false,
-          }
+          ? { left: ResizeHandleRTL }
+          : { right: ResizeHandle }
       }
       {...resizableProps}
     >
