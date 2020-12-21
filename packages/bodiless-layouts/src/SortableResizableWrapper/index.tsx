@@ -89,8 +89,6 @@ const SortableResizableWrapper = SortableElement((props: Props) => {
     bottomLeft: false,
     topLeft: false,
   };
-  console.log('direction', direction);
-
 
   return (
     <Reresizable
