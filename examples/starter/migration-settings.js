@@ -12,8 +12,6 @@
  * limitations under the License.
  */
 
-const richtextPlugin = require('./richtextPlugin');
-
 module.exports = {
   /**
    * page url that should be scraped
@@ -49,6 +47,5 @@ module.exports = {
    * a list of plugins that can subscribe to events emitted by the tool
    */
   plugins: [
-    richtextPlugin,
   ],
 };
