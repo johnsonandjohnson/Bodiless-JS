@@ -45,6 +45,7 @@ const NODE_TEXT_NODE = 3;
 const NODE_ELEMENT_NODE = 1;
 const DEFAULT_ELEMENTS = [
   'P',
+  'BR',
 ];
 
 // @ts-ignore todo: resolve types
