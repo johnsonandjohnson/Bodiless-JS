@@ -43,6 +43,9 @@ type Deserializers = {
 
 const NODE_TEXT_NODE = 3;
 const NODE_ELEMENT_NODE = 1;
+const DEFAULT_ELEMENTS = [
+  'P',
+];
 
 // @ts-ignore todo: resolve types
 const deserializeElement: DeserializeElement = ({
@@ -76,6 +79,10 @@ const deserializeElement: DeserializeElement = ({
   );
   if (textDeserializer) {
     return children.map(child => jsx(TagName.Text, textDeserializer.map(element), child));
+  }
+
+  if (DEFAULT_ELEMENTS.includes(element.nodeName)) {
+    return jsx(TagName.Element, { type: 'paragraph' }, children);
   }
 
   return children;
