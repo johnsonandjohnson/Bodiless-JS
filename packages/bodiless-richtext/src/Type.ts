@@ -21,6 +21,7 @@ import type {
 } from 'slate-react/dist/components/editable';
 import type { DesignableComponents } from '@bodiless/fclasses';
 import type { UI } from './RichTextContext';
+import type { Deserializer } from './serializers';
 
 export enum RichTextItemType {
   block = 'BLOCK',
@@ -78,6 +79,7 @@ export type RichTextComponent = ComponentType<any> & {
     icon: string,
   };
   isAtomicBlock?: boolean,
+  htmlDeserializer: Deserializer,
 };
 
 export type RichTextComponents = {
