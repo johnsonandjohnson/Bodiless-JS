@@ -42,7 +42,8 @@ const createRichtext = () => {
 };
 
 const createPluginButtonMock = () => {
-  const createPluginButtonMockFn = jest.fn();
+  const createPluginButtonMockFn = jest.fn()
+    .mockReturnValue(() => <></>);
   jest.doMock('../src/plugin-factory/createPluginButton', () => ({
     __esModule: true,
     default: createPluginButtonMockFn,

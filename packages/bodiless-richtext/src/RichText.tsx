@@ -89,6 +89,7 @@ import {
 import withDefaults from './withDefaults';
 import { withPreview } from './RichTextPreview';
 import withDataMigrator from './withDataMigrator';
+import withHtmlPaste from './withHtmlPaste';
 import type {
   RichTextProps,
   RichTextComponents,
@@ -242,6 +243,7 @@ const BasicRichText = React.memo(<P extends object>(props: P & RichTextProps) =>
       withReact,
       withHistory,
       withEditorSettings(finalComponents),
+      withHtmlPaste(finalComponents),
     )(createEditor()) as ReactEditor,
   );
 
