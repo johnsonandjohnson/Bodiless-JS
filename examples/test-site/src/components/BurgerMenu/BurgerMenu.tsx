@@ -26,12 +26,6 @@ import withBurgerMenuStyles from './BurgerMenu.token';
 import withMegaBurgerMenuStyles from './MegaBurgerMenu.token';
 import withSimpleBurgerMenuStyles from './SimpleBurgerMenu.token';
 
-/**
- * BurgerMenuClean is built on top of the `react-burger-menu` package
- * which does not provide an API for styling and relies on .css to style
- * burger menu icon, close icon and hover effect.
- */
-import './burger-menu.css';
 import { asMegaMenuBreadcrumbSource, asBreadcrumbSource } from '../Breadcrumbs/MenuBreadcrumbs';
 
 const MegaBurgerMenuBody = flow(

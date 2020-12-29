@@ -22,33 +22,39 @@ import {
 } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
 import { ResponsiveMegaMenu } from '../Menu';
-import { SimpleSearchBox } from '../Search';
+import { ResponsiveSearchBox } from '../Search';
 import Logo from './logo';
 
 type HeaderComponents = {
   Wrapper: ComponentType<any>,
   Container: ComponentType<any>,
   MenuContainer: ComponentType<any>,
+  SearchContainer: ComponentType<any>,
   Menu: ComponentType<any>,
-  SiteLogoReturn: ComponentType<any>,
   Search: ComponentType<any>,
+  SiteLogoReturn: ComponentType<any>,
 };
+
 export type Props = DesignableComponentsProps<HeaderComponents> & HTMLProps<HTMLElement>;
 
 const headerComponents:HeaderComponents = {
   Wrapper: Div,
   Container: Div,
   MenuContainer: Div,
+  SearchContainer: Div,
   Menu: ResponsiveMegaMenu,
+  Search: ResponsiveSearchBox,
   SiteLogoReturn: Logo,
-  Search: SimpleSearchBox,
 };
+
 const HeaderClean: FC<Props> = ({ components }) => {
   const {
     Wrapper,
     Container,
     MenuContainer,
+    SearchContainer,
     Menu,
+    Search,
     SiteLogoReturn,
   } = components;
 
@@ -56,11 +62,13 @@ const HeaderClean: FC<Props> = ({ components }) => {
     <Wrapper>
       <Container>
         <SiteLogoReturn />
-        <SimpleSearchBox placeholder="Search" />
+        <SearchContainer>
+          <Search placeholder="Search" />
+        </SearchContainer>
+        <MenuContainer>
+          <Menu />
+        </MenuContainer>
       </Container>
-      <MenuContainer>
-        <Menu />
-      </MenuContainer>
     </Wrapper>
   );
 };
