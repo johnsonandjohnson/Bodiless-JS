@@ -64,5 +64,5 @@ const asLogo = flow(
   }),
 );
 
-const Logo = asLogo(LogoClean);
+const Logo = asLogo(LogoClean) as ComponentType;
 export default Logo;

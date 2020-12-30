@@ -37,7 +37,7 @@ import {
 import { useSearchResultContext } from './SearchContextProvider';
 import { TSearchResult } from '../types';
 
-type SearchComponents = {
+export type SearchComponents = {
   SearchWrapper: ComponentType<StylableProps>;
   SearchInput: ComponentType<any>;
   SearchButton: ComponentType<any>;
@@ -47,14 +47,14 @@ type SearchResultComponents = {
   SearchResultWrapper: ComponentType<StylableProps>;
   SearchResultList: ComponentType<any>;
   SearchResultListItem: ComponentType<any>;
-  SearchResultSummary: ComponentType<StylableProps>,
+  SearchResultSummary: ComponentType<StylableProps>;
 };
 
 type SearchResultItemComponents = {
-  ItemList: ComponentType<StylableProps>,
-  ItemH3: ComponentType<StylableProps>,
-  ItemAnchor: ComponentType<HTMLProps<HTMLAnchorElement> & StylableProps>,
-  ItemParagraph: ComponentType<StylableProps>,
+  ItemList: ComponentType<StylableProps>;
+  ItemH3: ComponentType<StylableProps>;
+  ItemAnchor: ComponentType<HTMLProps<HTMLAnchorElement> & StylableProps>;
+  ItemParagraph: ComponentType<StylableProps>;
 };
 
 type SearchResultItemProps = DesignableComponentsProps<SearchResultItemComponents> &
@@ -67,14 +67,10 @@ const SearchInputBase: FC<HTMLProps<HTMLInputElement>> = props => {
   );
 };
 
-const SearchButtonBase: FC<HTMLProps<HTMLButtonElement>> = (
-  { onClick, ...rest },
-) => <Button onClick={onClick} {...rest} />;
-
-const searchComponents: SearchComponents = {
+export const searchComponents: SearchComponents = {
   SearchWrapper: Div,
   SearchInput: SearchInputBase,
-  SearchButton: SearchButtonBase,
+  SearchButton: Button,
 };
 
 const searchResultItemComponents: SearchResultItemComponents = {
@@ -115,7 +111,7 @@ const searchResultComponents: SearchResultComponents = {
   SearchResultSummary: P,
 };
 
-type SearchProps = DesignableComponentsProps<SearchComponents> &
+export type SearchProps = DesignableComponentsProps<SearchComponents> &
 HTMLProps<HTMLElement>;
 type SearchResultProps = DesignableComponentsProps<SearchResultComponents> &
 HTMLProps<HTMLElement> & { resultCountMessage?: string, resultEmptyMessage?: string };
@@ -199,11 +195,11 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
     searchHandler();
   }, [queryString]);
 
-  const { placeholder = 'Search' } = props;
+  const { placeholder = 'Search', ...rest } = props;
 
   const { SearchWrapper, SearchInput, SearchButton } = components;
   return (
-    <SearchWrapper>
+    <SearchWrapper {...rest}>
       <SearchInput
         value={queryString}
         onChange={onChangeHandler}
