@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.66](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.65...v0.0.66) (2020-12-29)
+
+**Note:** Version bump only for package @bodiless/gatsby-theme-bodiless
+
+
+
+
+
+## [0.0.65](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.64...v0.0.65) (2020-12-23)
+
+
+### Bug Fixes
+
+* **test-site:** homepage hero image is not displayed in edit mode ([#741](https://github.com/johnsonandjohnson/bodiless-js/issues/741)) ([4c90827](https://github.com/johnsonandjohnson/bodiless-js/commit/4c90827f0b139d735a55a1031701d0184d7f7ac9))
+
+
+
+
+
 ## [0.0.64](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.63...v0.0.64) (2020-12-16)
 
 

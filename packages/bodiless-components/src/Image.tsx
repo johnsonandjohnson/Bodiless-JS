@@ -104,6 +104,13 @@ export function DropZonePlugin({ formApi, targetFieldName, ui }: {
   });
 
   const onDrop = useCallback(acceptedFiles => {
+    // When files are rejected by the react-dropzone,
+    // acceptedFiles is an empty array.
+    if (acceptedFiles.length < 1) {
+      setStatusText('File type not accepted or too many, try again!');
+      console.error('Unable to upload selected files.', acceptedFiles);
+      return;
+    }
     setIsUploading(true);
     setIsUploadFinished(false);
     setIsUploadingTimeout(false);

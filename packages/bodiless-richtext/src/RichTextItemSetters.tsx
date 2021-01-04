@@ -17,6 +17,7 @@ import { mergeWith, isArray } from 'lodash';
 import {
   RichTextItemType,
 } from './Type';
+import type { Deserializer } from './serializers';
 
 function customizer(objValue:any, srcValue:any) {
   if (isArray(objValue)) {
@@ -102,6 +103,13 @@ const withHoverButton = (icon:string) => (
 */
 const withButton = (icon:string) => withHoverButton(icon);
 
+/**
+ * adds html deserializer to a given RichTextItem based component
+ */
+const withHtmlDeserializer = (deserializer: Deserializer) => withMeta({
+  htmlDeserializer: deserializer,
+});
+
 export {
   withComponent,
   asBlock,
@@ -114,4 +122,5 @@ export {
   withButton,
   withGlobalButton,
   withHoverButton,
+  withHtmlDeserializer,
 };

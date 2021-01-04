@@ -11,12 +11,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { flow } from 'lodash';
-import { SearchBox as SearchBoxClean, SearchResult as SearchResultClean } from '@bodiless/search';
+
+import { ComponentType } from 'react';
+import { flow, pick } from 'lodash';
+import { withDesign, replaceWith } from '@bodiless/fclasses';
+import { withResponsiveVariants } from '@bodiless/components';
+import {
+  SearchBox as SearchBoxClean,
+  SearchResult as SearchResultClean,
+  ResponsiveSearchBox as ResponsiveSearchBoxClean,
+} from '@bodiless/search';
+
+import { breakpoints as allBreakpoints } from '../Page';
+import { asDesktopOnly, asMobileOnly } from '../Elements.token';
 import {
   asSimpleSearchResult, asInlineSearch, asSimpleSearch,
+  asResponsiveSearch as asResponsiveSearchStyles,
 } from './token';
+
+const breakpoints = pick(allBreakpoints, 'lg');
+
+const asResponsiveSearch = (DesktopSearch: ComponentType) => flow(
+  withResponsiveVariants({ breakpoints }),
+  // Note, it's important to apply responsive CSS to the 2 search components in order to
+  // avoid flicker on the static site. The search for the inactive breakpoint
+  // is rendered during SSR and unmounted as a side effect after rehydration.
+  withDesign({
+    _default: withDesign({ Wrapper: asMobileOnly }),
+    lg: flow(replaceWith(DesktopSearch), asDesktopOnly),
+  }),
+);
 
 export const SimpleSearchResult = flow(asSimpleSearchResult)(SearchResultClean);
 export const InlineSearchBox = flow(asInlineSearch)(SearchBoxClean);
 export const SimpleSearchBox = flow(asSimpleSearch)(SearchBoxClean);
+export const ResponsiveSearchBox = flow(
+  asResponsiveSearchStyles,
+  asResponsiveSearch(SimpleSearchBox),
+)(ResponsiveSearchBoxClean);
