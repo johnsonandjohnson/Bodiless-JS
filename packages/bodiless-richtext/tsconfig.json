@@ -9,6 +9,10 @@
     "composite": true,
     "allowJs": false,
     "downlevelIteration": true,
+    "lib": [
+      "dom",
+      "es2019"
+    ]
   },
   "include": [
     "src"

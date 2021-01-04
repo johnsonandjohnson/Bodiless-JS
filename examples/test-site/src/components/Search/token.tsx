@@ -19,6 +19,7 @@ import {
   addClasses,
   withDesign,
 } from '@bodiless/fclasses';
+import { asPageContainer, asDesktopOnly, asTextWhite } from '../Elements.token';
 
 const Icon = flow(
   addClasses('material-icons cursor-pointer align-middle bg-white text-gray-500'),
@@ -30,9 +31,23 @@ const withIcon = (icon: string) => (Component: ComponentType) => (props: any) =>
   </Component>
 );
 const searchDesign = {
-  SearchWrapper: addClasses('my-4 border border-black align-middle border-gray-500'),
+  SearchWrapper: flow(
+    asDesktopOnly,
+    addClasses('my-4 border border-black align-middle border-gray-500'),
+  ),
   SearchInput: addClasses('px-2 align-middle text-1xl outline-none'),
   SearchButton: withIcon('search'),
+};
+
+const responsiveSearchDesign = {
+  Wrapper: addClasses('h-full'),
+  SearchWrapper: flow(asPageContainer, addClasses('absolute w-full p-3 flex z-10 bg-gray-700 inset-x-0')),
+  SearchInput: addClasses('align-middle w-full p-2'),
+  ToggleButton: asTextWhite,
+  SearchButton: flow(
+    withIcon('search'),
+    addClasses('flex absolute right-0 self-center mr-4'),
+  ),
 };
 
 const searchInlineDesign = {
@@ -43,6 +58,7 @@ const searchInlineDesign = {
 
 const asSimpleSearch = withDesign(searchDesign);
 const asInlineSearch = withDesign(searchInlineDesign);
+const asResponsiveSearch = withDesign(responsiveSearchDesign);
 
 const searchResultDesign = {
   SearchResultWrapper: addClasses('py-2'),
@@ -61,4 +77,5 @@ export {
   asSimpleSearch,
   asInlineSearch,
   asSimpleSearchResult,
+  asResponsiveSearch,
 };
