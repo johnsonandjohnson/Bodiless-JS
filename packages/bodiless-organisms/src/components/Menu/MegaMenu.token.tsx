@@ -68,7 +68,6 @@ const asAccessibleMegaSubMenu = flow(
 );
 
 const asAccessibleMegaMenu = flow(
-  asAccessibleMenu,
   withSubListDesign(2)({
     List: asAccessibleSubMenu,
     Touts: asAccessibleMegaSubMenu,
@@ -79,6 +78,7 @@ const asAccessibleMegaMenu = flow(
       }),
     ),
   }),
+  asAccessibleMenu,
 );
 
 /*
@@ -124,8 +124,8 @@ const asMegaMenuTopNav = flow(
   withDesign({
     Item: asMegaMenuSubListStyles,
   }),
-  asAccessibleMegaMenu,
   withBaseMenuStyles,
+  asAccessibleMegaMenu,
 );
 
 export default asMegaMenuTopNav;
