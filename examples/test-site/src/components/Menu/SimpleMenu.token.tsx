@@ -19,6 +19,7 @@ import { withSimpleMenuDesign, useIsActiveTrail } from '@bodiless/organisms';
 import { ifToggledOn } from '@bodiless/core';
 import {
   asBold, asLightTealBackgroundOnHover, asLightTealBackground, asTealBackground, asTextWhite,
+  asAlignLeft,
 } from '../Elements.token';
 import { asUnderline } from '../ElementDefault.token';
 
@@ -62,7 +63,7 @@ const withBaseMenuStyles = withDesign({
     addClasses('w-full'),
   ),
   Item: addClasses('leading-loose text-sm'),
-  Title: flow(withTitleStyles, withActiveTitleStyles),
+  Title: flow(withTitleStyles, withActiveTitleStyles, asAlignLeft),
 });
 
 /**
