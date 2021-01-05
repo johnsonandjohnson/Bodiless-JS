@@ -17,6 +17,7 @@ import { flow } from 'lodash';
 import { useEditContext } from '@bodiless/core';
 import {
   withDesign, addClasses, addProps, addClassesIf, removeClassesIf, stylable,
+  addPropsIf,
 } from '@bodiless/fclasses';
 import { withSubListDesign } from '@bodiless/components';
 
@@ -54,6 +55,21 @@ const asResponsiveSublist = withDesign({
   }),
 });
 
+const asToggleableSubMenu = (Component: ComponentType) => (props: any) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <Component
+      {...props}
+      onClick={() => setIsOpen(!isOpen)}
+      onMouseLeave={() => setIsOpen(false)}
+      isSubmenuOpen={isOpen}
+    />
+  );
+};
+
+const useIsSubmenuOpen = ({ isSubmenuOpen }: any) => isSubmenuOpen;
+
 const asStylableList = withDesign({
   Wrapper: stylable,
   Item: stylable,
@@ -85,32 +101,16 @@ const asAccessibleMenu = withDesign({
   Item: addProps({ role: 'menuitem', 'aria-haspopup': false }),
 });
 
-const asAccessibleWrapperItem = (
-  openStateStyles: any = {},
-) => (Component: ComponentType) => (props: any) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { style } = props;
-
-  return (
-    <Component
-      {...props}
-      style={isOpen ? { style, ...openStateStyles } : style}
-      onClick={() => setIsOpen(!isOpen)}
-      onMouseLeave={() => setIsOpen(false)}
-      aria-expanded={isOpen}
-      aria-hidden={!isOpen}
-      aria-haspopup
-    />
-  );
-};
-
-const asAccessibleSubMenu = withDesign({
-  Wrapper: withDesign({
-    WrapperItem: asAccessibleWrapperItem({ overflow: 'visible' }),
-    List: addProps({ role: 'menu', 'aria-label': 'Navigation Sub Menu' }),
+const asAccessibleSubMenu = flow(
+  withDesign({
+    Wrapper: withDesign({
+      WrapperItem: addPropsIf(useIsSubmenuOpen)({ style: { overflow: 'visible' } }),
+      List: addProps({ role: 'menu', 'aria-label': 'Navigation Sub Menu' }),
+    }),
+    Title: addProps({ role: 'menuitem' }),
   }),
-  Title: addProps({ role: 'menuitem' }),
-});
+  asToggleableSubMenu,
+);
 
 const asAccessibleSimpleMenu = flow(
   withSubListDesign(1)({ SubMenu: asAccessibleSubMenu }),
@@ -187,5 +187,6 @@ export {
   asRelative,
   asAccessibleMenu,
   asAccessibleSubMenu,
-  asAccessibleWrapperItem,
+  asToggleableSubMenu,
+  useIsSubmenuOpen,
 };

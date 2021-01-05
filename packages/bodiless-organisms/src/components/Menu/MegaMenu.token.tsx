@@ -15,14 +15,14 @@
 import { flow } from 'lodash';
 import { useEditContext } from '@bodiless/core';
 import {
-  withDesign, addClasses, addClassesIf, removeClassesIf,
+  withDesign, addClasses, addClassesIf, removeClassesIf, addPropsIf,
 } from '@bodiless/fclasses';
 import { withSubListDesign } from '@bodiless/components';
 
 import { useIsMenuOpen } from './withMenuContext';
 import {
   withBaseSubMenuStyles, withBaseMenuStyles, asSimpleSubMenu, asRelative,
-  asAccessibleMenu, asAccessibleSubMenu, asAccessibleWrapperItem,
+  asAccessibleMenu, asAccessibleSubMenu, asToggleableSubMenu, useIsSubmenuOpen,
 } from './SimpleMenu.token';
 
 /*
@@ -62,9 +62,10 @@ const asFullWidthSublist = withDesign({
 const asAccessibleMegaSubMenu = flow(
   withDesign({
     Wrapper: withDesign({
-      WrapperItem: asAccessibleWrapperItem({ position: 'static' }),
+      WrapperItem: addPropsIf(useIsSubmenuOpen)({ style: { position: 'static' } }),
     }),
   }),
+  asToggleableSubMenu,
 );
 
 const asAccessibleMegaMenu = flow(
