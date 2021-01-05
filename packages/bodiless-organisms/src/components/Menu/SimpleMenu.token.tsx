@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React, { ComponentType, useState } from 'react';
 import { flow } from 'lodash';
 import { useEditContext } from '@bodiless/core';
 import {
@@ -82,15 +82,33 @@ const asNav = <P extends WithAriaLabel>(Component: ComponentType<P>) => {
  */
 const asAccessibleMenu = withDesign({
   Wrapper: flow(asNav, addProps({ role: 'menubar', 'aria-label': 'Navigation Menu' })),
-  Item: addProps({ tabIndex: 0, role: 'menuitem' }),
+  Item: addProps({ role: 'menuitem', 'aria-haspopup': false }),
 });
+
+const asAccessibleWrapperItem = (Component: ComponentType) => (props: any) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { className, ...rest } = props;
+  const finalClasses = `${className} ${isOpen ? 'overflow-visible' : ''}`;
+
+  return (
+    <Component
+      {...rest}
+      className={finalClasses}
+      onClick={() => setIsOpen(!isOpen)}
+      onMouseLeave={() => setIsOpen(false)}
+      aria-expanded={isOpen}
+      aria-hidden={!isOpen}
+      aria-haspopup
+    />
+  );
+};
 
 const asAccessibleSubMenu = withDesign({
   Wrapper: withDesign({
-    WrapperItem: addProps({ 'aria-haspopup': true }),
+    WrapperItem: asAccessibleWrapperItem,
     List: addProps({ role: 'menu', 'aria-label': 'Navigation Sub Menu' }),
   }),
-  Item: addProps({ role: 'none' }),
+  Item: addProps({ role: 'presentation' }),
   Title: addProps({ role: 'menuitem' }),
 });
 
@@ -105,8 +123,8 @@ const asAccessibleSimpleMenu = flow(
  */
 const withHoverStyles = withDesign({
   Item: flow(
-    addClasses('hover:overflow-visible focus:overflow-visible'),
-    removeClassesIf(useIsMenuOpen)('hover:overflow-visible focus:overflow-visible'),
+    addClasses('hover:overflow-visible'),
+    removeClassesIf(useIsMenuOpen)('hover:overflow-visible'),
   ),
 });
 
@@ -153,11 +171,11 @@ const asSimpleSubMenuStyles = withDesign({
  * ===========================================
  */
 const asSimpleMenuTopNav = flow(
+  asAccessibleSimpleMenu,
   withDesign({
     Item: asSimpleSubMenuStyles,
   }),
   withBaseMenuStyles,
-  asAccessibleSimpleMenu,
 );
 
 export default asSimpleMenuTopNav;
