@@ -88,12 +88,11 @@ const asAccessibleMenu = withDesign({
 const asAccessibleWrapperItem = (Component: ComponentType) => (props: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const { className, ...rest } = props;
-  const finalClasses = `${className} ${isOpen ? 'overflow-visible' : ''}`;
 
   return (
     <Component
       {...rest}
-      className={finalClasses}
+      className={`${className} ${isOpen ? 'overflow-visible' : ''}`}
       onClick={() => setIsOpen(!isOpen)}
       onMouseLeave={() => setIsOpen(false)}
       aria-expanded={isOpen}
@@ -171,11 +170,11 @@ const asSimpleSubMenuStyles = withDesign({
  * ===========================================
  */
 const asSimpleMenuTopNav = flow(
-  asAccessibleSimpleMenu,
   withDesign({
     Item: asSimpleSubMenuStyles,
   }),
   withBaseMenuStyles,
+  asAccessibleSimpleMenu,
 );
 
 export default asSimpleMenuTopNav;
