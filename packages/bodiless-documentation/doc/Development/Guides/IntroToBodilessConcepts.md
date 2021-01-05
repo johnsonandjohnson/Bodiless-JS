@@ -1,4 +1,4 @@
-# Creating a Gallery Page
+# Intro To Bodiless Concepts: Creating a Gallery Page
 
 In this step-by-step tutorial you will gain experience with BodilessJS concepts
 while building a simple gallery page on an editable BodilessJS site.
