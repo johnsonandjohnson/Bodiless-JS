@@ -1,6 +1,7 @@
-# Design Element Basics
+# Design Element Concepts
 
-In this guide, we will continue the gallery tutorial to apply some designs and
+In this guide, we will continue the gallery tutorial to apply some design
+element concepts and
 implement some best practices. We will also introduce the Bodiless Design API.
 You can [read more about it here](../../Design/DesignSystem), but at a high level
 this is a set of tools and patterns for applying a *Design System* to a React
@@ -11,7 +12,7 @@ to apply the same design system to multiple sites, extending it as needed.
 
 ## Prerequisites
 
-* Complete the [Site Build Basics](./SiteBuildBasics).
+* Complete the [Intro to Bodiless Concepts](./IntroToBodilessConcepts) tutorial.
   * Alternatively, if you already have a fair understanding of BodilessJS
     fundamentals and want to fast-forward to this tutorial, copy over the
     [gallery-final folder & contents](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/test-site/src/data/pages/gallery-final)
@@ -70,7 +71,7 @@ maintain.
 1. Run your site and visit the gallery page (http://localhost:8000/gallery) and
    it should run exactly as it did before.
 
-## 3. Create a re-useable Primary Header for the site 
+## 3. Create a re-useable Primary Header for the site
 
 Within `data/pages/gallery/index.jsx` (gallery page) & `data/pages/index.jsx`
 (homepage) you can see we use similar `PrimaryHeader` components, but they don't
