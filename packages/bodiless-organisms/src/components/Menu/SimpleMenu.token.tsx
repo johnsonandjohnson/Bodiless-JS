@@ -107,7 +107,6 @@ const asAccessibleSubMenu = withDesign({
     WrapperItem: asAccessibleWrapperItem,
     List: addProps({ role: 'menu', 'aria-label': 'Navigation Sub Menu' }),
   }),
-  Item: addProps({ role: 'presentation' }),
   Title: addProps({ role: 'menuitem' }),
 });
 
