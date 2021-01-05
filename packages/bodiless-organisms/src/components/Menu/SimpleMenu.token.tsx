@@ -85,14 +85,16 @@ const asAccessibleMenu = withDesign({
   Item: addProps({ role: 'menuitem', 'aria-haspopup': false }),
 });
 
-const asAccessibleWrapperItem = (Component: ComponentType) => (props: any) => {
+const asAccessibleWrapperItem = (
+  openStateStyles: any = {},
+) => (Component: ComponentType) => (props: any) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { className, ...rest } = props;
+  const { style } = props;
 
   return (
     <Component
-      {...rest}
-      className={`${className} ${isOpen ? 'overflow-visible' : ''}`}
+      {...props}
+      style={isOpen ? { style, ...openStateStyles } : style}
       onClick={() => setIsOpen(!isOpen)}
       onMouseLeave={() => setIsOpen(false)}
       aria-expanded={isOpen}
@@ -104,7 +106,7 @@ const asAccessibleWrapperItem = (Component: ComponentType) => (props: any) => {
 
 const asAccessibleSubMenu = withDesign({
   Wrapper: withDesign({
-    WrapperItem: asAccessibleWrapperItem,
+    WrapperItem: asAccessibleWrapperItem({ overflow: 'visible' }),
     List: addProps({ role: 'menu', 'aria-label': 'Navigation Sub Menu' }),
   }),
   Title: addProps({ role: 'menuitem' }),
@@ -185,4 +187,5 @@ export {
   asRelative,
   asAccessibleMenu,
   asAccessibleSubMenu,
+  asAccessibleWrapperItem,
 };

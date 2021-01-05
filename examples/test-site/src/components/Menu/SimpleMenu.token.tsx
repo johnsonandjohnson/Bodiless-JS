@@ -40,6 +40,7 @@ const withMenuForeground = asTextWhite;
 
 const withTitleStyles = flow(
   withHoverMenuBackground,
+  asAlignLeft,
   addClasses('block w-full px-3'),
 );
 
@@ -63,7 +64,7 @@ const withBaseMenuStyles = withDesign({
     addClasses('w-full'),
   ),
   Item: addClasses('leading-loose text-sm'),
-  Title: flow(withTitleStyles, withActiveTitleStyles, asAlignLeft),
+  Title: flow(withTitleStyles, withActiveTitleStyles),
 });
 
 /**

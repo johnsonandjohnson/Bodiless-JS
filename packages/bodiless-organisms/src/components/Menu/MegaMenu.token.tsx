@@ -22,7 +22,7 @@ import { withSubListDesign } from '@bodiless/components';
 import { useIsMenuOpen } from './withMenuContext';
 import {
   withBaseSubMenuStyles, withBaseMenuStyles, asSimpleSubMenu, asRelative,
-  asAccessibleMenu, asAccessibleSubMenu,
+  asAccessibleMenu, asAccessibleSubMenu, asAccessibleWrapperItem,
 } from './SimpleMenu.token';
 
 /*
@@ -37,8 +37,8 @@ const isContextNotActive = () => {
 const asStaticOnHover = withDesign({
   Wrapper: withDesign({
     WrapperItem: flow(
-      addClasses('hover:static focus:static'),
-      removeClassesIf(useIsMenuOpen)('hover:static focus:static'),
+      addClasses('hover:static'),
+      removeClassesIf(useIsMenuOpen)('hover:static'),
     ),
   }),
 });
@@ -59,18 +59,26 @@ const asFullWidthSublist = withDesign({
  * Accessibility Features
  * ===========================================
  */
+const asAccessibleMegaSubMenu = flow(
+  withDesign({
+    Wrapper: withDesign({
+      WrapperItem: asAccessibleWrapperItem({ position: 'static' }),
+    }),
+  }),
+);
+
 const asAccessibleMegaMenu = flow(
+  asAccessibleMenu,
   withSubListDesign(2)({
     List: asAccessibleSubMenu,
-    Touts: asAccessibleSubMenu,
+    Touts: asAccessibleMegaSubMenu,
     Columns: flow(
-      asAccessibleSubMenu,
+      asAccessibleMegaSubMenu,
       withDesign({
-        Item: asAccessibleSubMenu,
+        Item: asAccessibleMegaSubMenu,
       }),
     ),
   }),
-  asAccessibleMenu,
 );
 
 /*
@@ -116,8 +124,8 @@ const asMegaMenuTopNav = flow(
   withDesign({
     Item: asMegaMenuSubListStyles,
   }),
-  withBaseMenuStyles,
   asAccessibleMegaMenu,
+  withBaseMenuStyles,
 );
 
 export default asMegaMenuTopNav;
