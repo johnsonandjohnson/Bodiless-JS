@@ -180,6 +180,11 @@ export const ResizeHandle = flow(
   withChild(() => <ResizeHandleBar />),
 )(Div);
 
+export const ResizeHandleRTL = flow(
+  addClasses('bl-left-rem-1'),
+  removeClasses('bl-right-rem-1'),
+)(ResizeHandle);
+
 export const ContextSubMenu = flow(
   addClasses('bl-flex bl-text-white'),
   addProps({ role: 'toolbar', 'aria-label': 'Submenu' }),
