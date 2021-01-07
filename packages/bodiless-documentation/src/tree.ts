@@ -179,7 +179,7 @@ export const validatePaths = (pathsToDocs: string[]) => {
         ${nativePath}
         Make sure the path is case-sensitively correct.
       `;
-      console.warn('Error validating paths.', errorMessage);
+      console.warn(errorMessage);
     }
   });
 };
