@@ -169,6 +169,7 @@ export const validatePaths = (pathsToDocs: string[]) => {
     try {
       nativePath = fs.realpathSync.native(defaultPath);
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.warn('Error validating paths.', err);
     }
     if (defaultPath !== nativePath) {
@@ -179,6 +180,7 @@ export const validatePaths = (pathsToDocs: string[]) => {
         ${nativePath}
         Make sure the path is case-sensitively correct.
       `;
+      // eslint-disable-next-line no-console
       console.warn(errorMessage);
     }
   });
