@@ -164,14 +164,7 @@ export const getSimplePaths = (tree: Tree): string[] => {
 export const validatePaths = (pathsToDocs: string[]) => {
   pathsToDocs.forEach(pathToDoc => {
     const defaultPath = path.resolve(pathToDoc);
-    //
-    let nativePath;
-    try {
-      nativePath = fs.realpathSync.native(defaultPath);
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.warn('Error validating paths.', err);
-    }
+    const nativePath = fs.realpathSync.native(defaultPath);
     if (defaultPath !== nativePath) {
       const errorMessage = `
         The file path specified in docs.json is not equal to the real file path.
@@ -180,8 +173,7 @@ export const validatePaths = (pathsToDocs: string[]) => {
         ${nativePath}
         Make sure the path is case-sensitively correct.
       `;
-      // eslint-disable-next-line no-console
-      console.warn(errorMessage);
+      throw new Error(errorMessage);
     }
   });
 };
