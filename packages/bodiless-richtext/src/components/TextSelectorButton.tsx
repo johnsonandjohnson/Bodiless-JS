@@ -18,7 +18,7 @@ import MaterialIcon from '@material/react-material-icon';
 import { useUI, getUI } from '../RichTextContext';
 
 type ButtonProps = {
-  onMouseDown(e: React.MouseEvent): void;
+  className: string
 };
 
 const NodeSelectorButton = (props: ButtonProps) => {
@@ -33,53 +33,51 @@ const NodeSelectorButton = (props: ButtonProps) => {
 
 NodeSelectorButton.displayName = 'NodeSelectorButton';
 
-const CloseBtn = (props: JSX.IntrinsicElements['span']) => {
-  const { CloseButton } = getUI(useUI());
-
-  return (
-    <CloseButton {...props}>
-      <MaterialIcon icon="cancel" />
-    </CloseButton>
-  );
-};
-
 type props = {
   children: React.ReactNode,
 };
-
-export const TextSelectorContext = React.createContext({ onClose: () => {} });
 
 const TextSelectorButton = ({
   children,
 }:props) => {
   const [visible, setVisible] = useState(false);
   const { Overlay, TextSelectorWrapper } = getUI(useUI());
-  const textSelectorContextValue = { onClose: () => setVisible(false) };
+  const nodeSelectorProps = {
+    className: visible ? 'bl-active node-selector-button' : '',
+  };
 
   return (
     <RCTooltip
-      visible={visible}
+      trigger={['hover']}
       placement="topLeft"
       overlayStyle={{ opacity: 1 }}
+      visible={visible}
       align={{
         offset: [-40, -10],
       }}
+      onVisibleChange={() => { setVisible(!visible); }}
       overlay={() => (
         <Overlay>
-          <TextSelectorContext.Provider value={textSelectorContextValue}>
-            <CloseBtn onMouseDown={() => setVisible(false)} />
-            <TextSelectorWrapper>
-              { children }
-            </TextSelectorWrapper>
-          </TextSelectorContext.Provider>
+          <TextSelectorWrapper
+            onClick={(ev) => {
+              const target = ev.target as HTMLElement;
+              const currentTarget = ev.currentTarget as HTMLElement;
+              if (currentTarget !== target && currentTarget.contains(target)) {
+                const buttons = document.getElementsByClassName('node-selector-button');
+                if (buttons.length) {
+                  const button = buttons[0] as HTMLElement;
+                  button.focus();
+                }
+                setVisible(!visible);
+              }
+            }}
+          >
+            { children }
+          </TextSelectorWrapper>
         </Overlay>
       )}
     >
-      <NodeSelectorButton
-        onMouseDown={() => {
-          setVisible(true);
-        }}
-      />
+      <NodeSelectorButton {...nodeSelectorProps} />
     </RCTooltip>
   );
 };

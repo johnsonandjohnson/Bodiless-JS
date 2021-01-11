@@ -49,6 +49,11 @@ const withToggle = <P extends requiredProps> (opts:Opts) => (
             editor,
           })
         }
+        // button can be unmounted onMouseDown so the button focus can be lost
+        onMouseUp={(event: React.MouseEvent) => {
+          const currentTarget = event.currentTarget as HTMLElement;
+          currentTarget.focus();
+        }}
         className={`${
           isActive(editor) ? 'active bl-active' : ''
         } ${className}`}

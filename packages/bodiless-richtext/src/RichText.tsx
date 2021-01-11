@@ -275,6 +275,7 @@ const BasicRichText = React.memo(<P extends object>(props: P & RichTextProps) =>
               editor: editor.current,
               components: finalComponents,
             })}
+            onBlur={() => editor.current.onChange()}
             {...rest}
           />
         </RichTextProvider>
