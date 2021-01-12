@@ -56,12 +56,17 @@ const deserializeElement: DeserializeElement = ({
   if (element.nodeType === NODE_TEXT_NODE) return element.textContent;
   if (element.nodeType !== NODE_ELEMENT_NODE) return [];
 
-  const children = Array.from(element.childNodes)
+  const children$ = Array.from(element.childNodes)
     .map((element$: ChildNode) => deserializeElement({
       element: element$ as Element,
       deserializers,
     }))
     .flat();
+
+  // Ensure we don't pass an empty array of children. Slate elements must have
+  // at least an empty text node.
+  // See https://github.com/ianstormtaylor/slate/issues/3625#issuecomment-617541881
+  const children = children$.length === 0 ? [{ text: '' }] : children$;
 
   if (element.nodeName === 'BODY') {
     return jsx(TagName.Fragment, {}, children);

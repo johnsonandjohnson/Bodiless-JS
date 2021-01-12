@@ -12,10 +12,12 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT, ClipboardEvent, ComponentType } from 'react';
+import React, {
+  ComponentType as CT, ClipboardEvent, ComponentType, useState, useRef, useCallback,
+} from 'react';
 import ContentEditable from 'react-contenteditable';
 import { observer } from 'mobx-react-lite';
-import { flowRight, pickBy } from 'lodash';
+import { flowRight, pickBy, identity } from 'lodash';
 import {
   withNode,
   useNode,
@@ -26,50 +28,67 @@ import {
 } from '@bodiless/core';
 import './Editable.css';
 
-type Props = {
-  placeholder?: string;
-  children?: string;
+type EditableOverrides = {
+  sanitizer?: (text: string) => string,
+};
+
+export type UseEditableOverrides = (props: EditableProps) => EditableOverrides;
+
+type EditableProps = {
+  placeholder?: string,
+  children?: string,
+  useOverrides?: UseEditableOverrides,
 } & Partial<WithNodeProps>;
 
-type Data = {
+type EditableData = {
   text: string;
 };
 
-/** @type {{search: React.DOMAttributes}} */
-const Text = observer((props: Props) => {
-  const { placeholder } = props;
-  const { node } = useNode<Data>();
-  const text = (node.data.text !== undefined ? node.data.text : props.children) || placeholder || '';
+const Text = observer((props: EditableProps) => {
+  const { placeholder, useOverrides = () => ({}) }: EditableProps = props;
+  const { sanitizer = identity }: EditableOverrides = useOverrides(props);
+  const { node } = useNode<EditableData>();
+  const text = sanitizer(
+    (node.data.text !== undefined ? node.data.text : props.children) || placeholder || '',
+  );
   // eslint-disable-next-line react/no-danger
   return <span dangerouslySetInnerHTML={{ __html: text }} />;
 });
-const EditableText = observer((props: Props) => {
-  const { node } = useNode<Data>();
-  const onInput = (event: any) => {
-    const newText = event.currentTarget.innerHTML;
+const EditableText = observer((props: EditableProps) => {
+  const { node } = useNode<EditableData>();
+  const { placeholder = '', useOverrides = () => ({}) }: EditableProps = props;
+  const { sanitizer = identity }: EditableOverrides = useOverrides(props);
+  const text = (node.data.text !== undefined ? node.data.text : props.children) || '';
+  const [hasFocus, setFocus] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+  const onChange = useCallback(() => {
+    const newText = ref.current?.innerHTML || '';
     node.setData({ text: newText });
-  };
-  const pasteAsPlainText = (event: ClipboardEvent<HTMLDivElement>) => {
+  }, [node, ref]);
+  const onFocus = useCallback(() => { setFocus(true); }, [setFocus]);
+  const onBlur = useCallback(() => { setFocus(false); }, [setFocus]);
+  const pasteAsPlainText = useCallback((event: ClipboardEvent<HTMLDivElement>) => {
     if (event.clipboardData) {
       event.preventDefault();
-      const text = event!.clipboardData.getData('text/plain');
-      document.execCommand('insertHTML', false, text);
+      const pasteText = event!.clipboardData.getData('text/plain');
+      document.execCommand('insertHTML', false, pasteText);
     }
-  };
-  const { placeholder } = props;
-  const placeholderDataAttr = placeholder || '';
-  const text = (node.data.text !== undefined ? node.data.text : props.children) || '';
+  }, []);
   return (
     <ContentEditable
+      innerRef={ref}
       tagName="span"
       className="bodiless-inline-editable"
-      onChange={onInput}
+      onChange={onChange}
       onPaste={pasteAsPlainText}
-      html={text}
-      data-placeholder={placeholderDataAttr}
+      onFocus={onFocus}
+      onBlur={onBlur}
+      html={hasFocus ? text : sanitizer(text)}
+      data-placeholder={placeholder}
     />
   );
 });
+
 const Editable = withNode(
   observer((props: any) => {
     const { isEdit } = useEditContext();
@@ -98,13 +117,18 @@ const withPlaceholder = <P extends object> (placeholder?: string) => (Component:
  * @param placeholder A string to use as placeholder text.
  * @return A HOC to inject an editable span.
  */
-const asEditable = (nodeKeys?: WithNodeKeyProps, placeholder?: string) => (
+const asEditable = (
+  nodeKeys?: WithNodeKeyProps,
+  placeholder?: string,
+  useOverrides$?: UseEditableOverrides,
+) => (
   <P extends object>(Component: CT<P>|string) => {
+    const useOverrides = useOverrides$ || (() => ({}));
     const EditableChild = flowRight(
       withNodeKey(nodeKeys),
       withPlaceholder(placeholder),
     )(Editable);
-    const AsEditable = (props: P & Props) => {
+    const AsEditable = (props: P & EditableProps) => {
       // @TODO: Improve `withChild` to allow this kind of prop splitting.
       const {
         children,
@@ -118,14 +142,15 @@ const asEditable = (nodeKeys?: WithNodeKeyProps, placeholder?: string) => (
         nodeKey,
         nodeCollection,
         placeholder: placeholderProp,
+        // useOverrides,
       });
       return (
         <Component {...rest as P}>
-          <EditableChild {...editableProps} />
+          <EditableChild {...editableProps} useOverrides={useOverrides} />
         </Component>
       );
     };
-    return AsEditable as ComponentType<P & Props>;
+    return AsEditable as ComponentType<P & EditableProps>;
   }
 );
 
