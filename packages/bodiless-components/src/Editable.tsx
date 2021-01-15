@@ -101,7 +101,7 @@ const Editable = withNode(
 );
 const withPlaceholder = <P extends object> (placeholder?: string) => (Component:CT<P> | string) => {
   const WithPlaceholder = placeholder
-    ? (props:P) => <Component placeholder={placeholder} {...props} />
+    ? (props:P) => <Component {...props} placeholder={placeholder} />
     : (props:P) => <Component {...props} />;
   return WithPlaceholder;
 };
