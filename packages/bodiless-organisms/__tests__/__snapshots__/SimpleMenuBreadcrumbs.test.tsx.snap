@@ -13,6 +13,8 @@ exports[`asBreadcrumbsClean creates breadcrumbs for basic 2-level menu 1`] = `"<
 
 exports[`asBreadcrumbsClean does not apply current page styles to the item which is the last derived from the menu but not current page path 1`] = `"<ul><li><a href=\\"/products/\\"><span>products</span></a></li></ul>"`;
 
+exports[`asBreadcrumbsClean preserves breadcrumbs on rerender 1`] = `"<ul><li><a href=\\"/products/\\"><span>products</span></a></li><span></span><li><span>productA</span></li></ul>"`;
+
 exports[`asBreadcrumbsClean renders last menu trail item as link when current page item does not exist in store 1`] = `"<ul><li><a href=\\"/products/\\"><span>products</span></a></li></ul>"`;
 
 exports[`asBreadcrumbsClean when starting trail enabled and
