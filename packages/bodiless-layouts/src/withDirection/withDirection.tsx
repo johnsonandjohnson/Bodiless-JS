@@ -12,32 +12,18 @@
  * limitations under the License.
  */
 
-const toc = {
-  About: {
-    'GettingStarted.md': '',
-    'CorePrinciples.md': '',
-  },
-  ContentEditorUserGuide: {},
-  Design: {},
-  Components: {
-    'YouTube.md': 'YouTube',
-  },
-  Tools: {},
-  Development: {
-    Guides: {
-      'IntroToBodilessConcepts.md': '',
-      'DesignElementConcepts.md': '',
-      'CreatingBodilessComponents.md': '',
-    },
-    'Packages.md': '',
-    Architecture: {
-      'Data.md': '',
-      'Context.md': '',
-      'FClasses.md': '',
-      'Documentation.md': '',
-    },
-    Release: {},
-    'Contributing.md': '',
-  },
+import { addProps } from '@bodiless/fclasses';
+
+enum LanguageDirection {
+  LTR = 'ltr',
+  RTL = 'rtl',
+}
+
+export const DIRECTIONS = {
+  LTR: LanguageDirection.LTR,
+  RTL: LanguageDirection.RTL,
 };
-export default () => ({ bodiless: toc });
+export type Direction = LanguageDirection.RTL | LanguageDirection.LTR;
+const withDirection = (langDirection : Direction) => addProps({ direction: langDirection });
+
+export default withDirection;

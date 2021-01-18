@@ -13,6 +13,7 @@
  */
 
 import Editable, { withPlaceholder, asEditable } from './Editable';
+import type { UseEditableOverrides } from './Editable';
 import Image, {
   asBodilessImage,
   TImagePickerUI,
@@ -150,4 +151,5 @@ export type { MetaFormFieldType, YouTubePlayerSettings };
 
 export type {
   AsBodilessImage,
+  UseEditableOverrides,
 };

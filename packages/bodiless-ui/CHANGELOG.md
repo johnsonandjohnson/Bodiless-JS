@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.67](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.66...v0.0.67) (2021-01-12)
+
+
+### Features
+
+* **layout:** fix rtl flow container.  ([#775](https://github.com/johnsonandjohnson/bodiless-js/issues/775)) ([4be9cec](https://github.com/johnsonandjohnson/bodiless-js/commit/4be9ceca7a9d0986cd231d43f5eeabe28b9eea1a))
+
+
+
+
+
 ## [0.0.66](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.65...v0.0.66) (2020-12-29)
 
 **Note:** Version bump only for package @bodiless/ui

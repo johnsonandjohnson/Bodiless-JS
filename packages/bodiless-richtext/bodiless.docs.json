@@ -1,5 +1,9 @@
 {
   "Components": {
-    "RichText.md": "./README.md"
+    "RichText.md": "./README.md",
+    "assets": {
+      "SimpleRichTextNew.jpg": "./assets/SimpleRichTextNew.jpg",
+      "SimpleRichTextNew.jpg": "./assets/SimpleRichTextNew.jpg"
+    }
   }
 }

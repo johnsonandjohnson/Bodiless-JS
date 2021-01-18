@@ -32,6 +32,7 @@ import {
   asUnderline,
   asAlignJustify,
 } from './ElementDefault.token';
+import { WithNodeKeyProps } from '../../../../packages/bodiless-organisms/node_modules/@bodiless/core/lib';
 
 /* Page Structure */
 const asBlockItem = addClasses('p-1 w-full');
@@ -85,7 +86,17 @@ const asImageRounded = addClasses('rounded-lg');
 const asEditableLink = asBodilessLink;
 
 /* Edit component */
-const asEditable = asEditableCore;
+const asEditable = (nodeKeys?: WithNodeKeyProps, placeholder?: string) => asEditableCore(
+  nodeKeys,
+  placeholder,
+  // Overrides to add auto-superscript.
+  () => ({
+    sanitizer: (html: string) => html
+      .split('')
+      .map(c => ('©'.includes(c) ? `<sup>${c}</sup>` : c))
+      .join(''),
+  }),
+);
 
 // Tout Components
 const asCta = addClasses('bg-orange-700 hover:bg-orange-600 text-center text-white p-2 rounded');
