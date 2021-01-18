@@ -94,7 +94,7 @@ describe('Editor Menu (left and right)', function () {
    //  Docs icon that opens Docs app in a new tab cannot be fully tested within the current implementation
    //  Adding a test that directly checks Docs app Home page, without clicking on Docs icon
    it('editorMenu: 9 - Check Docs page', () => {
-      cy.visit('/___docs')
+      cy.visit('/___docs', { timeout: 90000 })
       cy.xpath(docsTitle)
          .click()
       cy.url().should('include', '/___docs/#/?id=bodilessjs')

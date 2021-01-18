@@ -65,7 +65,7 @@ describe('asBodilessLink', () => {
       it('invokes the default normalizer', () => {
         const A = flow(
           asBodilessLink(),
-          withMockNode,
+          withMockNode(),
         )('a');
         const wrapper = mount(<A />);
         const formWrapper = findContextMenuForm(wrapper);
@@ -78,7 +78,7 @@ describe('asBodilessLink', () => {
         const normalizeHref: HrefNormalizer = jest.fn((href?: string) => `custommock://${href}`);
         const A = flow(
           asBodilessLink(undefined, undefined, () => ({ normalizeHref })),
-          withMockNode,
+          withMockNode(),
         )('a');
         const wrapper = mount(<A />);
         const formWrapper = findContextMenuForm(wrapper);
