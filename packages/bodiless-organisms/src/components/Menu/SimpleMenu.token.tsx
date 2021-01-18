@@ -14,7 +14,7 @@
 
 import React, { ComponentType, useState } from 'react';
 import { flow } from 'lodash';
-import { useEditContext } from '@bodiless/core';
+import { useEditContext, withoutProps } from '@bodiless/core';
 import {
   withDesign, addClasses, addProps, addClassesIf, removeClassesIf, stylable,
   addPropsIf,
@@ -104,7 +104,10 @@ const asAccessibleMenu = withDesign({
 const asAccessibleSubMenu = flow(
   withDesign({
     Wrapper: withDesign({
-      WrapperItem: addPropsIf(useIsSubmenuOpen)({ style: { overflow: 'visible' } }),
+      WrapperItem: flow(
+        withoutProps('isSubmenuOpen'),
+        addPropsIf(useIsSubmenuOpen)({ style: { overflow: 'visible' } }),
+      ),
       List: addProps({ role: 'menu', 'aria-label': 'Navigation Sub Menu' }),
     }),
     Title: addProps({ role: 'menuitem' }),
