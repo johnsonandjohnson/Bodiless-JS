@@ -21,7 +21,6 @@ import React, {
 import { Editor } from 'slate';
 import { useSlate } from 'slate-react';
 import { flow } from 'lodash';
-import { useNode } from '@bodiless/core';
 import { ToggleProps } from '../Type';
 import PluginButton from '../components/PluginButton';
 import type { Props as PluginButtonProps } from '../components/PluginButton';
@@ -38,11 +37,6 @@ type Opts = {
 
 let LAST_FOCUSED_ITEM: string | null = null;
 
-const usePluginButtonKey = (icon: string) => {
-  const { node } = useNode();
-  return node.path.join('$').concat('$').concat(icon);
-};
-
 type WithFocusPreservationProps = PluginButtonProps & {
   forwardRef?: React.Ref<any>;
 };
@@ -51,7 +45,7 @@ const withFocusPreservation = (buttonId: string) => (
   Component: ComponentType<WithFocusPreservationProps>,
 ) => (props: WithFocusPreservationProps) => {
   const buttonRef = useRef<HTMLButtonElement>();
-  const buttonKey = usePluginButtonKey(buttonId);
+  const buttonKey = buttonId;
   useEffect(() => {
     if (LAST_FOCUSED_ITEM === buttonKey) {
       if (buttonRef !== undefined && buttonRef.current !== undefined) {
