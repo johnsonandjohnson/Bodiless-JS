@@ -12,18 +12,19 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, {
+  useRef,
+  useEffect,
+  ComponentType,
+  MouseEvent,
+} from 'react';
 import { Editor } from 'slate';
 import { useSlate } from 'slate-react';
+import { flow } from 'lodash';
+import { useNode } from '@bodiless/core';
 import { ToggleProps } from '../Type';
 import PluginButton from '../components/PluginButton';
-
-const defaultButton = {
-  defaultProps: {
-    name: 'Button',
-    type: 'button',
-  },
-};
+import type { Props as PluginButtonProps } from '../components/PluginButton';
 
 type requiredProps = {
   className?: string,
@@ -35,6 +36,45 @@ type Opts = {
   icon: string;
 };
 
+let LAST_FOCUSED_ITEM: string | null = null;
+
+const usePluginButtonKey = (icon: string) => {
+  const { node } = useNode();
+  return node.path.join('$').concat('$').concat(icon);
+};
+
+type WithFocusPreservationProps = PluginButtonProps & {
+  forwardRef?: React.Ref<any>;
+};
+
+const withFocusPreservation = (buttonId: string) => (
+  Component: ComponentType<WithFocusPreservationProps>,
+) => (props: WithFocusPreservationProps) => {
+  const buttonRef = useRef<HTMLButtonElement>();
+  const buttonKey = usePluginButtonKey(buttonId);
+  useEffect(() => {
+    if (LAST_FOCUSED_ITEM === buttonKey) {
+      if (buttonRef !== undefined && buttonRef.current !== undefined) {
+        buttonRef.current.focus();
+      }
+    }
+  }, []);
+  return (
+    <Component
+      {...props}
+      onMouseDown={(event: MouseEvent<HTMLButtonElement>) => {
+        LAST_FOCUSED_ITEM = buttonKey;
+        if (props.onMouseDown) props.onMouseDown(event);
+      }}
+      onMouseUp={(event: MouseEvent<HTMLButtonElement>) => {
+        LAST_FOCUSED_ITEM = null;
+        if (props.onMouseUp) props.onMouseUp(event);
+      }}
+      forwardRef={buttonRef}
+    />
+  );
+};
+
 const withToggle = <P extends requiredProps> (opts:Opts) => (
   (Component:any) => (props:P) => {
     const { toggle, isActive, icon } = opts;
@@ -42,17 +82,12 @@ const withToggle = <P extends requiredProps> (opts:Opts) => (
     const editor = useSlate();
     const componentName = Component.defaultProps ? Component.defaultProps.name : undefined;
     return (
-      <PluginButton
+      <Component
         componentName={componentName}
-        onMouseDown={
-          () => toggle({
+        onMouseDown={() => {
+          toggle({
             editor,
-          })
-        }
-        // button can be unmounted onMouseDown so the button focus can be lost
-        onMouseUp={(event: React.MouseEvent) => {
-          const currentTarget = event.currentTarget as HTMLElement;
-          currentTarget.focus();
+          });
         }}
         className={`${
           isActive(editor) ? 'active bl-active' : ''
@@ -60,11 +95,14 @@ const withToggle = <P extends requiredProps> (opts:Opts) => (
         icon={icon}
       >
         {children}
-      </PluginButton>
+      </Component>
     );
   }
 );
 
-const createPluginButton = (props:Opts) => withToggle(props)(defaultButton);
+const createPluginButton = (props: Opts) => flow(
+  withFocusPreservation(props.icon),
+  withToggle(props),
+)(PluginButton);
 export default createPluginButton;
 export { withToggle };
