@@ -285,4 +285,14 @@ describe('asBreadcrumbsClean', () => {
     const wrapper = mount(<TestBreadcrumbs />);
     expect(breadcrumbHtml(wrapper)).toMatchSnapshot();
   });
+  it('preserves breadcrumbs on rerender', () => {
+    setPagePath('/products/productA');
+    const Breadcrumb = createBreadcrumbComponent({
+      content: generate2LevelMenuContent(),
+    });
+    const wrapper = mount(<Breadcrumb />);
+    // trigger rerender
+    wrapper.setProps({});
+    expect(breadcrumbHtml(wrapper)).toMatchSnapshot();
+  });
 });

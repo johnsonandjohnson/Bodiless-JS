@@ -19,6 +19,7 @@ import { withSimpleMenuDesign, useIsActiveTrail } from '@bodiless/organisms';
 import { ifToggledOn } from '@bodiless/core';
 import {
   asBold, asLightTealBackgroundOnHover, asLightTealBackground, asTealBackground, asTextWhite,
+  asAlignLeft,
 } from '../Elements.token';
 import { asUnderline } from '../ElementDefault.token';
 
@@ -39,6 +40,7 @@ const withMenuForeground = asTextWhite;
 
 const withTitleStyles = flow(
   withHoverMenuBackground,
+  asAlignLeft,
   addClasses('block w-full px-3'),
 );
 

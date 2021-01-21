@@ -16,7 +16,7 @@ import { ComponentType } from 'react';
 import { flow } from 'lodash';
 import { asStatic } from '@bodiless/core';
 import {
-  withDesign, replaceWith, H2, addClasses, Div, withoutProps,
+  withDesign, replaceWith, H2, addClasses, Button, withoutProps,
 } from '@bodiless/fclasses';
 import {
   asMenuTout, asMegaMenuBase, withMegaMenuDesign,
@@ -33,7 +33,7 @@ const withTitleEditor = withEditorSimple('text', 'Menu Item');
 const asMenuTitle = flow(
   asMenuLink(withTitleEditor),
   withDesign({
-    _default: replaceWith(Div),
+    _default: replaceWith(Button),
   }),
 );
 
