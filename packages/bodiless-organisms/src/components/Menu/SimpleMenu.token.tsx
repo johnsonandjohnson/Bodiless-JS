@@ -51,7 +51,7 @@ const asExpandedOnActive = withDesign({
 
 const asResponsiveSublist = withDesign({
   Wrapper: withDesign({
-    List: addClasses('w-content min-w-full'),
+    List: addClasses('min-w-full'),
   }),
 });
 
