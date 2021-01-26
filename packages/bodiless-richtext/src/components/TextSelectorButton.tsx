@@ -15,21 +15,29 @@
 import React, { useState } from 'react';
 import RCTooltip from 'rc-tooltip';
 import MaterialIcon from '@material/react-material-icon';
+import { flow } from 'lodash';
 import { useUI, getUI } from '../RichTextContext';
+import {
+  withReturnFocusBackOnEffect,
+  useReturnFocusBackOnEffect,
+} from '../withReturnFocusBack';
 
 type ButtonProps = {
   className: string
 };
 
-const NodeSelectorButton = (props: ButtonProps) => {
+const NodeSelectorButton$ = (props: ButtonProps) => {
   const { Button } = getUI(useUI());
-
   return (
     <Button {...props}>
       <MaterialIcon className="bl-material-icons" icon="more_horiz" />
     </Button>
   );
 };
+
+const NodeSelectorButton = flow(
+  withReturnFocusBackOnEffect('more_horiz'),
+)(NodeSelectorButton$);
 
 NodeSelectorButton.displayName = 'NodeSelectorButton';
 
@@ -45,7 +53,7 @@ const TextSelectorButton = ({
   const nodeSelectorProps = {
     className: visible ? 'bl-active node-selector-button' : '',
   };
-
+  const { setReturnFocus } = useReturnFocusBackOnEffect('more_horiz');
   return (
     <RCTooltip
       trigger={['hover']}
@@ -59,17 +67,9 @@ const TextSelectorButton = ({
       overlay={() => (
         <Overlay>
           <TextSelectorWrapper
-            onClick={(ev) => {
-              const target = ev.target as HTMLElement;
-              const currentTarget = ev.currentTarget as HTMLElement;
-              if (currentTarget !== target && currentTarget.contains(target)) {
-                const buttons = document.getElementsByClassName('node-selector-button');
-                if (buttons.length) {
-                  const button = buttons[0] as HTMLElement;
-                  button.focus();
-                }
-                setVisible(!visible);
-              }
+            onMouseDown={() => {
+              setReturnFocus();
+              setVisible(!visible);
             }}
           >
             { children }

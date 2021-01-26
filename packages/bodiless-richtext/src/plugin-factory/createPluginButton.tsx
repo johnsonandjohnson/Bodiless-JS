@@ -12,18 +12,14 @@
  * limitations under the License.
  */
 
-import React, {
-  useRef,
-  useEffect,
-  ComponentType,
-  MouseEvent,
-} from 'react';
+import React from 'react';
 import { Editor } from 'slate';
 import { useSlate } from 'slate-react';
 import { flow } from 'lodash';
+import type { HOC } from '@bodiless/fclasses';
 import { ToggleProps } from '../Type';
 import PluginButton from '../components/PluginButton';
-import type { Props as PluginButtonProps } from '../components/PluginButton';
+import { withReturnFocusBackOnClick } from '../withReturnFocusBack';
 
 type requiredProps = {
   className?: string,
@@ -33,40 +29,6 @@ type Opts = {
   toggle(options: ToggleProps): void;
   isActive(editor: Editor): boolean;
   icon: string;
-};
-
-let LAST_FOCUSED_ITEM: string | null = null;
-
-type WithFocusPreservationProps = PluginButtonProps & {
-  forwardRef?: React.Ref<any>;
-};
-
-const withFocusPreservation = (buttonId: string) => (
-  Component: ComponentType<WithFocusPreservationProps>,
-) => (props: WithFocusPreservationProps) => {
-  const buttonRef = useRef<HTMLButtonElement>();
-  const buttonKey = buttonId;
-  useEffect(() => {
-    if (LAST_FOCUSED_ITEM === buttonKey) {
-      if (buttonRef !== undefined && buttonRef.current !== undefined) {
-        buttonRef.current.focus();
-      }
-    }
-  }, []);
-  return (
-    <Component
-      {...props}
-      onMouseDown={(event: MouseEvent<HTMLButtonElement>) => {
-        LAST_FOCUSED_ITEM = buttonKey;
-        if (props.onMouseDown) props.onMouseDown(event);
-      }}
-      onMouseUp={(event: MouseEvent<HTMLButtonElement>) => {
-        LAST_FOCUSED_ITEM = null;
-        if (props.onMouseUp) props.onMouseUp(event);
-      }}
-      forwardRef={buttonRef}
-    />
-  );
 };
 
 const withToggle = <P extends requiredProps> (opts:Opts) => (
@@ -95,7 +57,7 @@ const withToggle = <P extends requiredProps> (opts:Opts) => (
 );
 
 const createPluginButton = (props: Opts) => flow(
-  withFocusPreservation(props.icon),
+  withReturnFocusBackOnClick(props.icon) as HOC,
   withToggle(props),
 )(PluginButton);
 export default createPluginButton;
