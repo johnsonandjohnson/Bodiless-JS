@@ -21,7 +21,7 @@ import ReactDOM from 'react-dom';
 import { Range, Editor } from 'slate';
 import { ReactEditor, useSlate } from 'slate-react';
 import { useEditContext } from '@bodiless/core';
-import { getReturnFocusedItem } from '../withReturnFocusBack';
+import { getReturnFocusItem } from '../withReturnFocusBack';
 
 const defaultUI = {
   Menu: 'div',
@@ -87,7 +87,7 @@ const HoverMenu = (props: HoverMenuProps) => {
   const editor = useSlate();
 
   const onBlur = useCallback((ev: FocusEvent<HTMLDivElement>) => {
-    if (getReturnFocusedItem() !== null) return;
+    if (getReturnFocusItem() !== null) return;
     const { activeElement } = document;
     const { currentTarget } = ev;
     const relatedTarget = ev.relatedTarget as HTMLElement;

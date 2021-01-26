@@ -23,8 +23,8 @@ import React, {
 type ReturnFocusItem = string | null;
 let RETURN_FOCUS_ITEM: ReturnFocusItem = null;
 
-const setReturnFocusedItem = (item: ReturnFocusItem) => { RETURN_FOCUS_ITEM = item; };
-const getReturnFocusedItem = () => RETURN_FOCUS_ITEM;
+const setReturnFocusItem = (item: ReturnFocusItem) => { RETURN_FOCUS_ITEM = item; };
+const getReturnFocusItem = () => RETURN_FOCUS_ITEM;
 
 type Props = HTMLProps<HTMLElement> & {
   forwardRef?: React.Ref<any>;
@@ -37,7 +37,7 @@ const withReturnFocusBackOnEffect = (itemId: string) => (
   useEffect(() => {
     if (RETURN_FOCUS_ITEM === itemId) {
       if (itemRef !== undefined && itemRef.current !== undefined) {
-        setReturnFocusedItem(null);
+        setReturnFocusItem(null);
         itemRef.current.focus();
       }
     }
@@ -57,7 +57,7 @@ const withReturnFocusBackOnClick = (itemId: string) => (
   useEffect(() => {
     if (RETURN_FOCUS_ITEM === itemId) {
       if (itemRef !== undefined && itemRef.current !== undefined) {
-        setReturnFocusedItem(null);
+        setReturnFocusItem(null);
         itemRef.current.focus();
       }
     }
@@ -66,11 +66,11 @@ const withReturnFocusBackOnClick = (itemId: string) => (
     <Component
       {...props}
       onMouseDown={(event: MouseEvent<HTMLButtonElement>) => {
-        setReturnFocusedItem(itemId);
+        setReturnFocusItem(itemId);
         if (props.onMouseDown) props.onMouseDown(event);
       }}
       onMouseUp={(event: MouseEvent<HTMLButtonElement>) => {
-        setReturnFocusedItem(null);
+        setReturnFocusItem(null);
         if (props.onMouseUp) props.onMouseUp(event);
       }}
       forwardRef={itemRef}
@@ -82,7 +82,7 @@ const useReturnFocusBackOnEffect = (itemId: string) => {
   const shouldReturnFocus = useRef<boolean>(false);
   useEffect(() => {
     if (shouldReturnFocus.current) {
-      setReturnFocusedItem(itemId);
+      setReturnFocusItem(itemId);
       shouldReturnFocus.current = false;
     }
   });
@@ -92,8 +92,8 @@ const useReturnFocusBackOnEffect = (itemId: string) => {
 };
 
 export {
-  getReturnFocusedItem,
-  setReturnFocusedItem,
+  getReturnFocusItem,
+  setReturnFocusItem,
   withReturnFocusBackOnClick,
   withReturnFocusBackOnEffect,
   useReturnFocusBackOnEffect,
