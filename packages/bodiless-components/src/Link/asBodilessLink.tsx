@@ -12,42 +12,28 @@
  * limitations under the License.
  */
 
-import React, { HTMLProps, ComponentType } from 'react';
+import React, { ComponentType } from 'react';
 import {
   useMenuOptionUI,
   asBodilessComponent,
   withoutProps,
   ifEditable,
   withExtendHandler,
-  UseBodilessOverrides,
-  useNode,
   ifToggledOn,
   EditButtonOptions,
 } from '@bodiless/core';
-import type { AsBodiless, BodilessOptions } from '@bodiless/core';
+import type { BodilessOptions } from '@bodiless/core';
 import { flowRight, identity } from 'lodash';
 import {
   replaceWith,
   Fragment,
 } from '@bodiless/fclasses';
 import DefaultNormalHref from './NormalHref';
-import type { HrefNormalizer } from './NormalHref';
-
-// Type of the data used by this component.
-export type LinkData = {
-  href: string;
-};
-
-type Props = HTMLProps<HTMLAnchorElement> & {
-  unwrap?: () => void,
-};
-
-type ExtraLinkOptions = {
-  normalizeHref: HrefNormalizer,
-  instructions?: string,
-};
-
-type UseLinkOverrides = UseBodilessOverrides<Props, LinkData, ExtraLinkOptions>;
+import withGoToLinkButton from './withGoToLinkButton';
+import useEmptyLinkToggle from './useEmptyLinkToggle';
+import {
+  LinkData, UseLinkOverrides, Props, ExtraLinkOptions, AsBodilessLink,
+} from './types';
 
 const DEFAULT_INSTRUCTIONS = `
   Use a fully formed URL only for external links, e.g., https://www.example.com.
@@ -135,33 +121,17 @@ const withNormalHref = (
   return WithNormalHref;
 };
 
-export type AsBodilessLink = AsBodiless<Props, LinkData, ExtraLinkOptions>;
-
-const asBodilessLink: AsBodilessLink = (
-  nodeKeys, defaultData, useOverrides,
-) => flowRight(
-  // Prevent following the link in edit mode
-  ifEditable(
-    withExtendHandler('onClick', () => (e: MouseEvent) => e.preventDefault()),
-  ),
-  asBodilessComponent<Props, LinkData>(options)(
-    nodeKeys, defaultData, useLinkOverrides(useOverrides),
-  ),
-  withoutProps(['unwrap']),
-  withNormalHref(useLinkOverrides(useOverrides) as () => ExtraLinkOptions),
-);
-
-/**
- * hook that determines if the link data is empty
- * the hook validates the data in the current node and in the corresponding prop
- *
- * @param props - link based component props
- * @returns true when link data is empty, otherwise false
- */
-const useEmptyLinkToggle = ({ href }: Props) => {
-  const { node } = useNode<LinkData>();
-  return (href === undefined || href === '#') && node.data.href === undefined;
-};
+// Options used to create an go button.
+// export const goButtonOptions:any = {
+//   icon: 'open_in_new',
+//   label: 'go',
+//   // groupLabel: 'Link',
+//   groupMerge: 'merge',
+//   name: 'go',
+//   handler: () => console.log('love'),
+//   global: false,
+//   local: true,
+// };
 
 /**
  * HOC that can be applied to a link based component to not render the component
@@ -172,6 +142,22 @@ const useEmptyLinkToggle = ({ href }: Props) => {
  * @returns Component - Fragment when link data empty, input Component otherwise
  */
 const withoutLinkWhenLinkDataEmpty = ifToggledOn(useEmptyLinkToggle)(replaceWith(Fragment));
+
+const asBodilessLink: AsBodilessLink = (
+  nodeKeys, defaultData, useOverrides,
+) => flowRight(
+  // Prevent following the link in edit mode
+  ifEditable(
+    withExtendHandler('onClick', () => (e: MouseEvent) => e.preventDefault()),
+    // Add another button to allow the user to navigate to the link if any.
+    withGoToLinkButton(defaultData),
+  ),
+  asBodilessComponent<Props, LinkData>(options)(
+    nodeKeys, defaultData, useLinkOverrides(useOverrides),
+  ),
+  withoutProps(['unwrap']),
+  withNormalHref(useLinkOverrides(useOverrides) as () => ExtraLinkOptions),
+);
 
 export default asBodilessLink;
 export { withoutLinkWhenLinkDataEmpty };

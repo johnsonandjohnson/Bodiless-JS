@@ -1,6 +1,6 @@
 import asBodilessLink, { withoutLinkWhenLinkDataEmpty } from './asBodilessLink';
 import type { NormalHref } from './NormalHref';
-import type { AsBodilessLink, LinkData } from './asBodilessLink';
+import type { AsBodilessLink, LinkData } from './types';
 import DefaultNormalHref from './NormalHref';
 
 export { asBodilessLink, DefaultNormalHref, withoutLinkWhenLinkDataEmpty };
