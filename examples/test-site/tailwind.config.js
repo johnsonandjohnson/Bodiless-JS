@@ -271,7 +271,11 @@ module.exports = mergeWithBodilessConfigs({
     |
     */
 
-    // width: {},
+    extend: {
+      width: {
+        content: 'max-content',
+      },
+    },
 
     /*
     |---------------------------------------------------------------------------

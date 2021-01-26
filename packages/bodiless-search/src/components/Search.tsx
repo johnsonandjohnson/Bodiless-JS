@@ -112,7 +112,9 @@ const searchResultComponents: SearchResultComponents = {
 };
 
 export type SearchProps = DesignableComponentsProps<SearchComponents> &
-HTMLProps<HTMLElement>;
+HTMLProps<HTMLElement> & {
+  onSubmit?: (query: string) => void,
+};
 type SearchResultProps = DesignableComponentsProps<SearchResultComponents> &
 HTMLProps<HTMLElement> & { resultCountMessage?: string, resultEmptyMessage?: string };
 
@@ -190,12 +192,17 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
     }
   }, [queryString]);
 
+  const {
+    placeholder = 'Search',
+    onSubmit,
+    ...rest
+  } = props;
+
   const onClickHandler = useCallback((event: React.MouseEvent) => {
+    if (onSubmit) onSubmit(queryString);
     event.preventDefault();
     searchHandler();
-  }, [queryString]);
-
-  const { placeholder = 'Search', ...rest } = props;
+  }, [queryString, onSubmit]);
 
   const { SearchWrapper, SearchInput, SearchButton } = components;
   return (

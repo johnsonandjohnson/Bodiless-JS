@@ -67,7 +67,11 @@ const ResponsiveSearchBoxBase: FC<ResponsiveSearchProps> = (props) => {
         <ToggleIcon>{ isExpanded ? 'close' : 'search' }</ToggleIcon>
       </ToggleButton>
 
-      <SearchBox {...props} style={{ display: isExpanded ? 'flex' : 'none' }} />
+      <SearchBox
+        {...props}
+        style={{ display: isExpanded ? 'flex' : 'none' }}
+        onSubmit={() => setExpanded(false)}
+      />
     </Wrapper>
   );
 };

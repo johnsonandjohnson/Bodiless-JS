@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.68](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.67...v0.0.68) (2021-01-25)
+
+
+### Bug Fixes
+
+* **components:** Breadcrumbs lost when a component context is activated in edit mode ([#808](https://github.com/johnsonandjohnson/bodiless-js/issues/808)) ([f64143d](https://github.com/johnsonandjohnson/bodiless-js/commit/f64143d38be6583b6ffcd0491cb9e1b0d88a0756))
+* **docs:** missing images in docs ([#786](https://github.com/johnsonandjohnson/bodiless-js/issues/786)) ([224b66e](https://github.com/johnsonandjohnson/bodiless-js/commit/224b66e868a5f799dd3797691cc75812d562b2bb))
+
+
+
+
+
 ## [0.0.67](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.66...v0.0.67) (2021-01-12)
 
 

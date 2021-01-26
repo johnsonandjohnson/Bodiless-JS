@@ -75,7 +75,7 @@ const withBaseSubMenuStyles = withDesign({
     List: flow(
       withMenuBackground,
       withMenuForeground,
-      addClasses('z-10'),
+      addClasses('w-content z-10'),
     ),
   }),
   Item: addClasses('leading-loose text-sm'),
