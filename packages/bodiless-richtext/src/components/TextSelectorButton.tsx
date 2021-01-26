@@ -53,7 +53,7 @@ const TextSelectorButton = ({
   const nodeSelectorProps = {
     className: visible ? 'bl-active node-selector-button' : '',
   };
-  const { setReturnFocus } = useReturnFocusBackOnEffect('more_horiz');
+  const { returnFocusBack } = useReturnFocusBackOnEffect('more_horiz');
   return (
     <RCTooltip
       trigger={['hover']}
@@ -68,7 +68,7 @@ const TextSelectorButton = ({
         <Overlay>
           <TextSelectorWrapper
             onMouseDown={() => {
-              setReturnFocus();
+              returnFocusBack();
               setVisible(!visible);
             }}
           >

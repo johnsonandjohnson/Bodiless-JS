@@ -87,7 +87,7 @@ const useReturnFocusBackOnEffect = (itemId: string) => {
     }
   });
   return {
-    setReturnFocus: () => { shouldReturnFocus.current = true; },
+    returnFocusBack: () => { shouldReturnFocus.current = true; },
   };
 };
 
