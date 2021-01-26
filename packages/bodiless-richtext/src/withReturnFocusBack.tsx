@@ -70,7 +70,7 @@ const withReturnFocusBackOnClick = (itemId: string) => (
         if (props.onMouseDown) props.onMouseDown(event);
       }}
       onMouseUp={(event: MouseEvent<HTMLButtonElement>) => {
-        setReturnFocusedItem(itemId);
+        setReturnFocusedItem(null);
         if (props.onMouseUp) props.onMouseUp(event);
       }}
       forwardRef={itemRef}
