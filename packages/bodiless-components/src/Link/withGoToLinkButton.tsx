@@ -22,7 +22,7 @@ import {
 } from '@bodiless/core';
 import type { LinkData } from './types';
 
-const useMenuOptions = () => () => {
+const useMenuOptions = () => {
   const { node } = useNode<LinkData>();
   let empty = true;
   if (node.data && node.data.href) {
@@ -33,10 +33,11 @@ const useMenuOptions = () => () => {
   const menuOptions: TMenuOption[] = [
     {
       icon: 'open_in_new',
-      label: 'go',
+      label: 'Go',
+      group: 'Link-group',
       groupMerge: 'merge',
       name: 'go',
-      isDisabled: empty,
+      isHidden: empty,
       handler: () => {
         if (!empty) {
           // @ts-ignore
@@ -51,10 +52,7 @@ const useMenuOptions = () => () => {
 };
 
 const withGoToLinkButton = () => flowRight(
-  withMenuOptions({
-    useMenuOptions: useMenuOptions(),
-    name: 'Link',
-  }),
+  withMenuOptions({ useMenuOptions, name: 'go' }),
   withContextActivator('onClick'),
   withLocalContextMenu,
 );

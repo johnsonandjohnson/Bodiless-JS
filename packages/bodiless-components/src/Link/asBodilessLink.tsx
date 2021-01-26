@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import {
   ifEditable,
   withExtendHandler,
   ifToggledOn,
-  EditButtonOptions,
+  EditButtonOptions, withEditButton, useNode,
 } from '@bodiless/core';
 import type { BodilessOptions } from '@bodiless/core';
 import { flowRight, identity } from 'lodash';
@@ -122,16 +122,27 @@ const withNormalHref = (
 };
 
 // Options used to create an go button.
-// export const goButtonOptions:any = {
-//   icon: 'open_in_new',
-//   label: 'go',
-//   // groupLabel: 'Link',
-//   groupMerge: 'merge',
-//   name: 'go',
-//   handler: () => console.log('love'),
-//   global: false,
-//   local: true,
-// };
+export const goButtonOptions:any = {
+  icon: 'open_in_new',
+  label: 'go',
+  // groupLabel: 'Link',
+  groupMerge: 'merge',
+  name: 'go',
+  renderForm: () => <></>,
+  handler: () => {
+    const { node } = useNode<LinkData>();
+    let empty = true;
+    if (node.data && node.data.href) {
+      console.log(node.data.href);
+      empty = node.data.href === '#';
+    }
+    console.log('empty', empty);
+    console.log('love');
+    return false;
+  },
+  global: false,
+  local: true,
+};
 
 /**
  * HOC that can be applied to a link based component to not render the component
@@ -150,7 +161,8 @@ const asBodilessLink: AsBodilessLink = (
   ifEditable(
     withExtendHandler('onClick', () => (e: MouseEvent) => e.preventDefault()),
     // Add another button to allow the user to navigate to the link if any.
-    withGoToLinkButton(defaultData),
+    withGoToLinkButton(),
+    // withEditButton(goButtonOptions),
   ),
   asBodilessComponent<Props, LinkData>(options)(
     nodeKeys, defaultData, useLinkOverrides(useOverrides),
