@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React, { ComponentType, useRef } from 'react';
 import { useNode } from '@bodiless/core';
 import { BreadcrumbStore } from './BreadcrumbStore';
 import { Breadcrumbs } from './Breadcrumbs';
@@ -26,9 +26,10 @@ export const withBreadcrumbStore = (Component: ComponentType<any>) => {
   const WithBreadcrumbStore = (props: any) => {
     const { node } = useNode();
     const { pagePath } = node;
-    const store = new BreadcrumbStore(pagePath);
+    const storeRef = useRef<BreadcrumbStore>();
+    if (storeRef.current === undefined) storeRef.current = new BreadcrumbStore(pagePath);
     return (
-      <BreadcrumbStoreProvider store={store}>
+      <BreadcrumbStoreProvider store={storeRef.current}>
         <Component {...props} />
       </BreadcrumbStoreProvider>
     );

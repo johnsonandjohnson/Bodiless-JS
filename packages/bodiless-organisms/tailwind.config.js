@@ -30,9 +30,6 @@ module.exports = {
       '21/9': [21, 9],
     },
     extend: {
-      width: {
-        content: 'max-content',
-      },
       minWidth: {
         full: '100%',
       },

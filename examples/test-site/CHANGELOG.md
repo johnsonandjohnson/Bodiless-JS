@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.68](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.67...v0.0.68) (2021-01-25)
+
+
+### Bug Fixes
+
+* **organisms:** Fix Menu item overlap after mouseover ([#785](https://github.com/johnsonandjohnson/bodiless-js/issues/785)) ([cf4445e](https://github.com/johnsonandjohnson/bodiless-js/commit/cf4445ead6bdd80a4034048ec6ea7782ca18cc83))
+* **organisms:** Remove w-content token from Menu and move it to test site ([#818](https://github.com/johnsonandjohnson/bodiless-js/issues/818)) ([3e6847f](https://github.com/johnsonandjohnson/bodiless-js/commit/3e6847f387615846bd0e30be92c99ba647d21ebe))
+
+
+
+
+
 ## [0.0.67](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.66...v0.0.67) (2021-01-12)
 
 

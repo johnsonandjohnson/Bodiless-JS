@@ -12,11 +12,12 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React, { ComponentType, useState } from 'react';
 import { flow } from 'lodash';
-import { useEditContext } from '@bodiless/core';
+import { useEditContext, withoutProps } from '@bodiless/core';
 import {
   withDesign, addClasses, addProps, addClassesIf, removeClassesIf, stylable,
+  addPropsIf,
 } from '@bodiless/fclasses';
 import { withSubListDesign } from '@bodiless/components';
 
@@ -50,9 +51,24 @@ const asExpandedOnActive = withDesign({
 
 const asResponsiveSublist = withDesign({
   Wrapper: withDesign({
-    List: addClasses('w-content min-w-full'),
+    List: addClasses('min-w-full'),
   }),
 });
+
+const asToggleableSubMenu = (Component: ComponentType) => (props: any) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <Component
+      {...props}
+      onClick={() => setIsOpen(!isOpen)}
+      onMouseLeave={() => setIsOpen(false)}
+      isSubmenuOpen={isOpen}
+    />
+  );
+};
+
+const useIsSubmenuOpen = ({ isSubmenuOpen }: any) => isSubmenuOpen;
 
 const asStylableList = withDesign({
   Wrapper: stylable,
@@ -82,17 +98,28 @@ const asNav = <P extends WithAriaLabel>(Component: ComponentType<P>) => {
  */
 const asAccessibleMenu = withDesign({
   Wrapper: flow(asNav, addProps({ role: 'menubar', 'aria-label': 'Navigation Menu' })),
-  Item: addProps({ tabIndex: 0, role: 'menuitem' }),
+  Item: addProps({ role: 'menuitem', 'aria-haspopup': false }),
 });
 
-const asAccessibleSubMenu = withDesign({
-  Wrapper: withDesign({
-    WrapperItem: addProps({ 'aria-haspopup': true }),
-    List: addProps({ role: 'menu', 'aria-label': 'Navigation Sub Menu' }),
+const asAccessibleSubMenu = flow(
+  withDesign({
+    Wrapper: withDesign({
+      WrapperItem: flow(
+        withoutProps('isSubmenuOpen'),
+        // Note that we use 'style' here instead of the css class name to avoid
+        // issues with class specificity. For example, if `overflow-visible`
+        // class is used there is a risk of it being overwritten by the site builder
+        // by adding another `overflow` or `display` classes to `WrapperItem`
+        // which will break the functionality. 'style' is a safer alternative
+        // that will guarantee that the toggle functionality will continue to function as designed.
+        addPropsIf(useIsSubmenuOpen)({ style: { overflow: 'visible' } }),
+      ),
+      List: addProps({ role: 'menu', 'aria-label': 'Navigation Sub Menu' }),
+    }),
+    Title: addProps({ role: 'menuitem' }),
   }),
-  Item: addProps({ role: 'none' }),
-  Title: addProps({ role: 'menuitem' }),
-});
+  asToggleableSubMenu,
+);
 
 const asAccessibleSimpleMenu = flow(
   withSubListDesign(1)({ SubMenu: asAccessibleSubMenu }),
@@ -105,8 +132,8 @@ const asAccessibleSimpleMenu = flow(
  */
 const withHoverStyles = withDesign({
   Item: flow(
-    addClasses('hover:overflow-visible focus:overflow-visible'),
-    removeClassesIf(useIsMenuOpen)('hover:overflow-visible focus:overflow-visible'),
+    addClasses('hover:overflow-visible'),
+    removeClassesIf(useIsMenuOpen)('hover:overflow-visible'),
   ),
 });
 
@@ -169,4 +196,6 @@ export {
   asRelative,
   asAccessibleMenu,
   asAccessibleSubMenu,
+  asToggleableSubMenu,
+  useIsSubmenuOpen,
 };
