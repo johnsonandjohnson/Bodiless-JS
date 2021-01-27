@@ -28,7 +28,7 @@ const addProps = <P extends object, Q extends object>(propsToAdd: Q) => (
  */
 export const addPropsIf = <P extends object, Q extends object>(
   conditionHook: (props: P) => boolean,
-) => (propsToAdd: () => Q) => (Component: ComponentType<P>) => (props: P) => (conditionHook(props)
+) => (propsToAdd: Q) => (Component: ComponentType<P>) => (props: P) => (conditionHook(props)
     ? <Component {...(typeof propsToAdd === 'function' ? propsToAdd() : propsToAdd)} {...props} />
     : <Component {...props} />);
 
