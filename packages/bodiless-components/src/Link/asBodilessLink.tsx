@@ -161,11 +161,14 @@ const asBodilessLink: AsBodilessLink = (
   ifEditable(
     withExtendHandler('onClick', () => (e: MouseEvent) => e.preventDefault()),
     // Add another button to allow the user to navigate to the link if any.
-    withGoToLinkButton(),
+    // withGoToLinkButton(),
     // withEditButton(goButtonOptions),
   ),
   asBodilessComponent<Props, LinkData>(options)(
     nodeKeys, defaultData, useLinkOverrides(useOverrides),
+  ),
+  ifEditable(
+    withGoToLinkButton(),
   ),
   withoutProps(['unwrap']),
   withNormalHref(useLinkOverrides(useOverrides) as () => ExtraLinkOptions),

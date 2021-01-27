@@ -25,6 +25,7 @@ import type { LinkData } from './types';
 const useMenuOptions = () => {
   const { node } = useNode<LinkData>();
   let empty = true;
+  console.log('node', node);
   if (node.data && node.data.href) {
     console.log(node.data.href);
     empty = node.data.href === '#';
@@ -37,7 +38,7 @@ const useMenuOptions = () => {
       group: 'Link-group',
       groupMerge: 'merge',
       name: 'go',
-      isHidden: empty,
+      isDisabled: empty,
       handler: () => {
         if (!empty) {
           // @ts-ignore
@@ -52,9 +53,8 @@ const useMenuOptions = () => {
 };
 
 const withGoToLinkButton = () => flowRight(
-  withMenuOptions({ useMenuOptions, name: 'go' }),
-  withContextActivator('onClick'),
-  withLocalContextMenu,
+  withMenuOptions({ useMenuOptions, name: 'go', peer: true }),
+
 );
 
 export default withGoToLinkButton;
