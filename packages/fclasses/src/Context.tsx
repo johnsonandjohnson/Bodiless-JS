@@ -2,7 +2,7 @@ import React, { createContext, ComponentType, useContext } from 'react';
 
 type FClassesContextType = {
   showDesignKeys?: boolean,
-  dataLayerAttribute?: string;
+  designKeysAttributeName?: string;
 };
 
 const FClassesContext = createContext<FClassesContextType>({});
@@ -12,19 +12,19 @@ const FClassesContext = createContext<FClassesContextType>({});
  * all children.
  *
  * @param showDesignKey true to enable (the default), false to disable.
- * @param {string} [dataLayerAttribute].
+ * @param {string} [designKeysAttributeName].
  */
-export const withShowDesignKeys = ({
+export const withShowDesignKeys = (
   showDesignKeys = true,
-  dataLayerAttribute = 'bl-design-key',
-}) => <P extends object>(
+  designKeysAttributeName = 'bl-design-key',
+) => <P extends object>(
   C: ComponentType<P>,
 ) => {
   const WithShowDesignKeys = (props: P) => {
     const value = {
       ...useContext(FClassesContext),
       showDesignKeys,
-      dataLayerAttribute,
+      designKeysAttributeName,
     };
     return (
       <FClassesContext.Provider value={value}>
@@ -39,4 +39,4 @@ export const useShowDesignKeys = () => Boolean(
   useContext(FClassesContext).showDesignKeys,
 );
 
-export const useDataLayerAttribute = () => useContext(FClassesContext).dataLayerAttribute;
+export const useDesignKeysAttribute = () => useContext(FClassesContext).designKeysAttributeName;

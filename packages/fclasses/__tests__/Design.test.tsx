@@ -169,7 +169,7 @@ describe('withShowDesignKeys', () => {
   it('Adds design keys when enabled', () => {
     const Test: ComponentType<any> = flow(
       designable(startComponents, 'Base'),
-      withShowDesignKeys({}),
+      withShowDesignKeys(),
     )(Base);
     const wrapper = mount(<Test />);
     expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBe('Base:Foo');
@@ -179,7 +179,7 @@ describe('withShowDesignKeys', () => {
   it('Does not add a design keys when disabled', () => {
     const Test: ComponentType<any> = flow(
       designable(startComponents, 'Base'),
-      withShowDesignKeys({ showDesignKeys: false }),
+      withShowDesignKeys(false),
     )(Base);
     const wrapper = mount(<Test />);
     expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBeUndefined();
@@ -189,7 +189,7 @@ describe('withShowDesignKeys', () => {
   it('Add a componentName data attr when disabled', () => {
     const Test: ComponentType<any> = flow(
       designable(startComponents, 'Base'),
-      withShowDesignKeys({ dataLayerAttribute: 'layer-region' }),
+      withShowDesignKeys(true, 'layer-region'),
     )(Base);
     const wrapper = mount(<Test />);
     expect(wrapper.find('span#foo').prop('data-layer-region')).toBe('Base:Foo');
@@ -199,7 +199,7 @@ describe('withShowDesignKeys', () => {
   it('Does not add a componentName when disabled', () => {
     const Test: ComponentType<any> = flow(
       designable(startComponents, 'Base'),
-      withShowDesignKeys({ showDesignKeys: false, dataLayerAttribute: 'layer-region' }),
+      withShowDesignKeys(false, 'layer-region'),
     )(Base);
     const wrapper = mount(<Test />);
     expect(wrapper.find('span#foo').prop('data-layer-region')).toBeUndefined();

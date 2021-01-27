@@ -18,8 +18,8 @@ import {
 } from 'lodash';
 import React, { ComponentType, Fragment, useContext } from 'react';
 import { HOC } from './FClasses';
-import { addPropConditionally } from './addProps';
-import { useShowDesignKeys, useDataLayerAttribute } from './Context';
+import { addPropsIf } from './addProps';
+import { useShowDesignKeys, useDesignKeysAttribute } from './Context';
 import { withDisplayName } from './hoc-util';
 
 export type DesignElement<P> = (c: ComponentType<P> | string) => ComponentType<P>;
@@ -296,7 +296,11 @@ export const extendDesignable = (transformDesign: TransformDesign = identity) =>
       const designKeys = typeof start !== 'function'
         ? Object.keys(start).reduce((keys, key) => ({
           ...keys,
-          [key]: addPropConditionally(useShowDesignKeys, useDataLayerAttribute)(`${namespace}:${key}`),
+          [key]: addPropsIf(useShowDesignKeys)(
+            () => ({
+              [`data-${useDesignKeysAttribute()}`]: `${namespace}:${key}`,
+            }),
+          ),
         }), {})
         : undefined;
       const transformFixed = (props:DesignableProps<C> & P) => {

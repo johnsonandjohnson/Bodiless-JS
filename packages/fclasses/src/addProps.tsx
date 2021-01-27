@@ -28,20 +28,8 @@ const addProps = <P extends object, Q extends object>(propsToAdd: Q) => (
  */
 export const addPropsIf = <P extends object, Q extends object>(
   conditionHook: (props: P) => boolean,
-) => (propsToAdd: Q) => (Component: ComponentType<P>) => {
-    const AddPropsIf = (props: P) => (
-      conditionHook(props)
-        ? <Component {...propsToAdd} {...props} />
-        : <Component {...props} />
-    );
-    return AddPropsIf;
-  };
-
-export const addPropConditionally = <P extends object>(
-  conditionHook: (props: P) => boolean,
-  getPropKeyHook: () => string | undefined,
-) => (propValue: string) => (Component: ComponentType<P>) => (props: P) => (conditionHook(props)
-    ? <Component {...{ [`data-${getPropKeyHook()}`]: propValue }} {...props} />
+) => (propsToAdd: () => Q) => (Component: ComponentType<P>) => (props: P) => (conditionHook(props)
+    ? <Component {...(typeof propsToAdd === 'function' ? propsToAdd() : propsToAdd)} {...props} />
     : <Component {...props} />);
 
 export default addProps;
