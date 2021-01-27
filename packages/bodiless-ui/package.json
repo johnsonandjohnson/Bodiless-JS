@@ -33,7 +33,9 @@
     "@bodiless/core": "^0.0.68",
     "@bodiless/fclasses": "^0.0.68",
     "informed": "^3.9.0",
-    "lodash": "^4.17.19"
+    "lodash": "^4.17.19",
+    "tailwindcss": "^1.0",
+    "tailwindcss-dir": "^4.0.0"
   },
   "peerDependencies": {
     "rc-tooltip": "^3.7.3",
