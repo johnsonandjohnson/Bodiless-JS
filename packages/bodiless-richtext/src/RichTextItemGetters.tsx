@@ -215,13 +215,16 @@ const getSelectorButton = <P extends object> (Component: RichTextComponent) => (
     },
   }[Component.type];
   const { ClickableWrapper } = useUI();
-  const Button:ComponentType = withToggle({
-    toggle: ({ editor }) => {
-      toggleFuc({ editor, name: Component.id });
-    },
-    isActive: (editor) => has(Component.id, editor),
-    icon: 'none',
-  })(ClickableWrapper);
+  const Button = flow(
+    withToggle({
+      toggle: ({ editor }) => {
+        toggleFuc({ editor, name: Component.id });
+      },
+      isActive: (editor) => has(Component.id, editor),
+      icon: 'none',
+    }),
+    withoutProps(['componentName']),
+  )(ClickableWrapper);
   return <Button><Component {...props}>{ Component.id }</Component></Button>;
 };
 
