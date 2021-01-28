@@ -20,7 +20,7 @@ import {
   ifEditable,
   withExtendHandler,
   ifToggledOn,
-  EditButtonOptions, withEditButton, useNode,
+  EditButtonOptions,
 } from '@bodiless/core';
 import type { BodilessOptions } from '@bodiless/core';
 import { flowRight, identity } from 'lodash';
@@ -121,29 +121,6 @@ const withNormalHref = (
   return WithNormalHref;
 };
 
-// Options used to create an go button.
-export const goButtonOptions:any = {
-  icon: 'open_in_new',
-  label: 'go',
-  // groupLabel: 'Link',
-  groupMerge: 'merge',
-  name: 'go',
-  renderForm: () => <></>,
-  handler: () => {
-    const { node } = useNode<LinkData>();
-    let empty = true;
-    if (node.data && node.data.href) {
-      console.log(node.data.href);
-      empty = node.data.href === '#';
-    }
-    console.log('empty', empty);
-    console.log('love');
-    return false;
-  },
-  global: false,
-  local: true,
-};
-
 /**
  * HOC that can be applied to a link based component to not render the component
  * when the component link data is empty
@@ -160,9 +137,6 @@ const asBodilessLink: AsBodilessLink = (
   // Prevent following the link in edit mode
   ifEditable(
     withExtendHandler('onClick', () => (e: MouseEvent) => e.preventDefault()),
-    // Add another button to allow the user to navigate to the link if any.
-    // withGoToLinkButton(),
-    // withEditButton(goButtonOptions),
   ),
   asBodilessComponent<Props, LinkData>(options)(
     nodeKeys, defaultData, useLinkOverrides(useOverrides),

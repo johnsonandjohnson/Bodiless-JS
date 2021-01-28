@@ -12,14 +12,12 @@
  * limitations under the License.
  */
 
-import { flowRight } from 'lodash';
 import {
   withMenuOptions,
-  withLocalContextMenu,
-  withContextActivator,
   useNode,
   TMenuOption,
 } from '@bodiless/core';
+
 import type { LinkData } from './types';
 
 const useMenuOptions = () => {
@@ -52,9 +50,6 @@ const useMenuOptions = () => {
   return menuOptions;
 };
 
-const withGoToLinkButton = () => flowRight(
-  withMenuOptions({ useMenuOptions, name: 'go', peer: true }),
-
-);
+const withGoToLinkButton = () => withMenuOptions({ useMenuOptions, name: 'go', peer: true });
 
 export default withGoToLinkButton;
