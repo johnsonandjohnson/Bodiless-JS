@@ -15,11 +15,13 @@
 import React,
 {
   useEffect, ComponentType, HTMLProps,
+  useCallback, FocusEvent,
 } from 'react';
 import ReactDOM from 'react-dom';
 import { Range, Editor } from 'slate';
 import { ReactEditor, useSlate } from 'slate-react';
 import { useEditContext } from '@bodiless/core';
+import { getReturnFocusItem } from '../withReturnFocusBack';
 
 const defaultUI = {
   Menu: 'div',
@@ -84,6 +86,28 @@ const HoverMenu = (props: HoverMenuProps) => {
   const elementID = `hover-menu-${Math.random().toString(16).slice(2)}`;
   const editor = useSlate();
 
+  const onBlur = useCallback((ev: FocusEvent<HTMLDivElement>) => {
+    if (getReturnFocusItem() !== null) return;
+    const { activeElement } = document;
+    const { currentTarget } = ev;
+    const relatedTarget = ev.relatedTarget as HTMLElement;
+
+    if (!currentTarget) return;
+
+    // Prevent hiding menu when focus is moved to a button within menu.
+    if (relatedTarget && relatedTarget.nodeName === 'BUTTON') {
+      const parentNode = relatedTarget.parentNode as HTMLElement;
+      if (parentNode && parentNode.id === currentTarget.id) {
+        return;
+      }
+    }
+
+    if (!activeElement || activeElement.id !== currentTarget.id) {
+      ReactEditor.deselect(editor);
+      currentTarget.removeAttribute('style');
+    }
+  }, []);
+
   useEffect(() => {
     const element = document.getElementById(elementID);
     updateMenu(element, editor);
@@ -93,7 +117,7 @@ const HoverMenu = (props: HoverMenuProps) => {
     root
     && isEditMode
     && ReactDOM.createPortal(
-      <Menu {...rest} id={elementID} className={className}>
+      <Menu {...rest} id={elementID} className={className} onBlur={onBlur}>
         {children}
       </Menu>,
       root,
