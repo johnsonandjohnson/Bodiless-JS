@@ -23,12 +23,9 @@ import type { LinkData } from './types';
 const useMenuOptions = () => {
   const { node } = useNode<LinkData>();
   let empty = true;
-  console.log('node', node);
   if (node.data && node.data.href) {
-    console.log(node.data.href);
     empty = node.data.href === '#';
   }
-  console.log('empty', empty);
   const menuOptions: TMenuOption[] = [
     {
       icon: 'open_in_new',
