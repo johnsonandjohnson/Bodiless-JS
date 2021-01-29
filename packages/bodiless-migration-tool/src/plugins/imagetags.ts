@@ -53,6 +53,7 @@ const onPageCreate = ({
           const content = {
             src: api.getStaticRelativePath(targetPath),
             alt: asset.attribs.alt,
+            title: asset.attribs.title,
           };
           const jsonFilePath = api.getAvailableJsonFilename(
             `${prefix}${path.basename(targetPath, ext)}.json`,
