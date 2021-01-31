@@ -13,6 +13,7 @@
  */
 
 import axios from 'axios';
+import { TokenSet } from 'lunr';
 import {
   SearchEngineInterface,
   SearchClientInterface,
@@ -44,6 +45,25 @@ class SearchClient implements SearchClientInterface {
   search = (queryString: string): TSearchResults => {
     const filtered = this.filter(queryString);
     return this.searchEngine.search(filtered);
+  };
+
+  suggest = (queryString: string) => {
+    const index = this.searchEngine.getIndex();
+    if (!index) {
+      return [];
+    }
+    // @ts-ignore
+    const tokenSet = index.tokenSet as lunr.TokenSet;
+    const tokens = tokenSet.intersect(
+      // @ts-ignore
+      TokenSet.fromString(`${queryString}*`),
+    ).toArray()
+      .map(token => ({
+        text: token,
+        count: this.search(token).length,
+      }))
+      .sort((a, b) => (a.count < b.count ? 1 : -1));
+    return tokens;
   };
 
   // Remove the search engine specific charactors on customize search.

@@ -18,6 +18,7 @@ import {
   I,
   addClasses,
   withDesign,
+  addClassesIf,
 } from '@bodiless/fclasses';
 import { asPageContainer, asDesktopOnly, asTextWhite } from '../Elements.token';
 
@@ -30,13 +31,28 @@ const withIcon = (icon: string) => (Component: ComponentType) => (props: any) =>
     <Icon>{icon}</Icon>
   </Component>
 );
+
+const isEven = (item: number) => item % 2 === 0;
+const isOdd = (item: number) => item % 2 === 1;
+
 const searchDesign = {
   SearchWrapper: flow(
     asDesktopOnly,
-    addClasses('my-4 border border-black align-middle border-gray-500'),
+    addClasses('my-4 border border-black align-middle border-gray-500 relative'),
   ),
   SearchInput: addClasses('px-2 align-middle text-1xl outline-none'),
   SearchButton: withIcon('search'),
+  Suggestions: withDesign({
+    Wrapper: addClasses('absolute top-full z-50 w-full'),
+    Item: withDesign({
+      Wrapper: flow(
+        addClasses('flex'),
+        addClassesIf(({ position }: any) => isEven(position))('bg-white'),
+        addClassesIf(({ position }: any) => isOdd(position))('bg-gray-400'),
+      ),
+      Count: addClasses('ml-auto mr-1'),
+    }),
+  }),
 };
 
 const responsiveSearchDesign = {
@@ -48,6 +64,13 @@ const responsiveSearchDesign = {
     withIcon('search'),
     addClasses('flex absolute right-0 self-center mr-4'),
   ),
+  Suggestions: withDesign({
+    Wrapper: addClasses('absolute top-full z-50 w-full'),
+    Item: withDesign({
+      Wrapper: addClasses('flex bg-white'),
+      Count: addClasses('ml-auto mr-1'),
+    }),
+  }),
 };
 
 const searchInlineDesign = {

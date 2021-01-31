@@ -35,12 +35,16 @@ import {
   designable,
 } from '@bodiless/fclasses';
 import { useSearchResultContext } from './SearchContextProvider';
-import { TSearchResult } from '../types';
+import { TSearchResult, Suggestion } from '../types';
+import { Suggestions as BaseSuggestions } from './Suggestions';
+import type { SuggestionListProps } from './Suggestions';
+import getSearchPagePath from './getSearchPagePath';
 
 export type SearchComponents = {
   SearchWrapper: ComponentType<StylableProps>;
   SearchInput: ComponentType<any>;
   SearchButton: ComponentType<any>;
+  Suggestions: ComponentType<SuggestionListProps>,
 };
 
 type SearchResultComponents = {
@@ -71,6 +75,7 @@ export const searchComponents: SearchComponents = {
   SearchWrapper: Div,
   SearchInput: SearchInputBase,
   SearchButton: Button,
+  Suggestions: BaseSuggestions,
 };
 
 const searchResultItemComponents: SearchResultItemComponents = {
@@ -156,11 +161,14 @@ const SearchResultBase: FC<SearchResultProps> = ({
 
 const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
   const [queryString, setQueryString] = useState('');
+  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const searchResultContext = useSearchResultContext();
-  const searchPagePath = process.env.BODILESS_SEARCH_PAGE || 'search';
   const onChangeHandler = useCallback((event: any) => {
     event.preventDefault();
-    setQueryString(event.target.value);
+    const queryString$ = event.target.value;
+    setQueryString(queryString$);
+    const suggestions$ = searchResultContext.suggest(queryString$);
+    setSuggestions(suggestions$);
   }, []);
 
   /**
@@ -175,9 +183,9 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
 
   const searchLocationValidate = () => {
     if (
-      searchPagePath !== window.location.pathname.replace(/^\//, '').replace(/\/$/, '')
+      getSearchPagePath() !== window.location.pathname.replace(/^\//, '').replace(/\/$/, '')
     ) {
-      window.location.href = `/${searchPagePath}/#${encodeURIComponent(queryString)}`;
+      window.location.href = getSearchPagePath(queryString);
     }
   };
 
@@ -205,7 +213,13 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
     searchHandler();
   }, [queryString, onSubmit]);
 
-  const { SearchWrapper, SearchInput, SearchButton } = components;
+  const {
+    SearchWrapper,
+    SearchInput,
+    SearchButton,
+    Suggestions,
+  } = components;
+
   return (
     <SearchWrapper {...rest}>
       <SearchInput
@@ -215,6 +229,11 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
         placeholder={placeholder}
       />
       <SearchButton onClick={onClickHandler} />
+      {
+        queryString !== ''
+        // @ts-ignore
+        && <Suggestions suggestions={suggestions} />
+      }
     </SearchWrapper>
   );
 };
