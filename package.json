@@ -40,7 +40,7 @@
     "sites:update": "npm run sites:pack && npm run sites:install",
     "sites:launch-test": "npm run sites:clone-local test-site && npm run sites:update test-site && cd sites/test-site && npm install && npm run start",
     "start": "npm run build:watch",
-    "test": "cross-env NODE_ENV=test && jest",
+    "test": "jest",
     "test:ci": "start-server-and-test sites:launch-test http://localhost:8005 cy:run",
     "test:watch": "jest --watch"
   },
