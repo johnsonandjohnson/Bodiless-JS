@@ -24,8 +24,8 @@ export const withShowDesignKeys = (
 ) => <P extends object>(C: ComponentType<P>) => (props: P) => {
   const value = {
     ...useContext(FClassesContext),
-    ...(showDesignKeys && { showDesignKeys }),
-    ...(designKeysAttributeName && { designKeysAttributeName }),
+    ...(typeof showDesignKeys !== 'undefined' && { showDesignKeys }),
+    ...(typeof designKeysAttributeName !== 'undefined' && { designKeysAttributeName }),
   };
 
   return (
