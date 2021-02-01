@@ -46,7 +46,7 @@ const searchDesign = {
     Wrapper: addClasses('absolute top-full z-50 w-full'),
     Item: withDesign({
       Wrapper: flow(
-        addClasses('flex'),
+        addClasses('flex px-2'),
         addClassesIf(({ position }: any) => isEven(position))('bg-white'),
         addClassesIf(({ position }: any) => isOdd(position))('bg-gray-400'),
       ),
@@ -67,16 +67,31 @@ const responsiveSearchDesign = {
   Suggestions: withDesign({
     Wrapper: addClasses('absolute top-full z-50 w-full'),
     Item: withDesign({
-      Wrapper: addClasses('flex bg-white'),
+      Wrapper: flow(
+        addClasses('flex px-2'),
+        addClassesIf(({ position }: any) => isEven(position))('bg-white'),
+        addClassesIf(({ position }: any) => isOdd(position))('bg-gray-400'),
+      ),
       Count: addClasses('ml-auto mr-1'),
     }),
   }),
 };
 
 const searchInlineDesign = {
-  SearchWrapper: addClasses('inline-block border border-black align-middle border-gray-500'),
+  SearchWrapper: addClasses('inline-block border border-black align-middle border-gray-500 relative'),
   SearchInput: addClasses('px-2 align-middle text-1xl outline-none'),
   SearchButton: withIcon('search'),
+  Suggestions: withDesign({
+    Wrapper: addClasses('absolute top-full z-50 w-full'),
+    Item: withDesign({
+      Wrapper: flow(
+        addClasses('flex px-2'),
+        addClassesIf(({ position }: any) => isEven(position))('bg-white'),
+        addClassesIf(({ position }: any) => isOdd(position))('bg-gray-400'),
+      ),
+      Count: addClasses('ml-auto mr-1'),
+    }),
+  }),
 };
 
 const asSimpleSearch = withDesign(searchDesign);

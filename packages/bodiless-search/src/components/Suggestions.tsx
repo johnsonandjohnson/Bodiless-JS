@@ -22,6 +22,7 @@ import {
   Span,
   A,
   withDesign,
+  withoutProps,
 } from '@bodiless/fclasses';
 import type { Suggestion } from '../types';
 import getSearchPagePath from './getSearchPagePath';
@@ -67,8 +68,15 @@ const withSuggestionLink = (Component: ComponentType<any>) => (props: any) => {
   );
 };
 
+const withoutSuggestionProps = withoutProps(['text', 'count', 'position']);
+
 const CleanSuggestion = flow(
   designable(startSuggestionComponents, 'Suggestion'),
+  withDesign({
+    Wrapper: withoutSuggestionProps,
+    Text: withoutSuggestionProps,
+    Count: withoutSuggestionProps,
+  }),
   withDesign({
     Wrapper: withSuggestionLink,
   }),
