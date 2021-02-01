@@ -14,7 +14,7 @@
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
-import React, { ComponentType, FC } from 'react';
+import React, { ComponentType, FC, Fragment } from 'react';
 
 import { omit, flow } from 'lodash';
 import {
@@ -37,7 +37,7 @@ type MyDesignableComponents = {
 type MyDesign = Design<MyDesignableComponents>;
 
 const Span: SpanType = props => <span {...props} />;
-const hoc = (newClassName: string) => (C: SpanType):SpanType => props => {
+const hoc = (newClassName: string) => (C: SpanType):SpanType => (props) => {
   const { className = '', ...rest } = props;
   const combinedClassName = `${className} ${newClassName}`.trim();
   return <C className={combinedClassName} {...rest} />;
@@ -203,5 +203,16 @@ describe('withShowDesignKeys', () => {
     )(Base);
     const wrapper = mount(<Test />);
     expect(wrapper.find('span#foo').prop('data-layer-region')).toBeUndefined();
+  });
+
+  it('Rewrite default design keys if a component wrapped additionally with new value', () => {
+    const Test: ComponentType<any> = flow(
+      designable(startComponents, 'Base'),
+      withShowDesignKeys(),
+    )(Base);
+    const AddDesignKeys = withShowDesignKeys(true, 'test-attr')(Fragment);
+    const wrapper = mount(<AddDesignKeys><Test /></AddDesignKeys>);
+    expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBeUndefined();
+    expect(wrapper.find('span#foo').prop('data-test-attr')).toBe('Base:Foo');
   });
 });
