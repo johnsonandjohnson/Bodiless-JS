@@ -40,6 +40,7 @@ import Placeholder from './placeholder.png';
 export type Data = {
   src: string;
   alt: string;
+  title: string;
 };
 
 // Controls the time spent on file upload
@@ -193,6 +194,8 @@ const options: BodilessOptions<Props, Data> = {
         <ComponentFormText field="src" id="image-src" />
         <ComponentFormLabel htmlFor="image-alt">Alt</ComponentFormLabel>
         <ComponentFormText field="alt" id="image-alt" />
+        <ComponentFormLabel htmlFor="image-title">Title</ComponentFormLabel>
+        <ComponentFormText field="title" id="image-title" />
         <DropZonePlugin formApi={formApi} targetFieldName="src" ui={imagePickerUI} />
       </>
     );
@@ -201,7 +204,8 @@ const options: BodilessOptions<Props, Data> = {
   local: true,
   defaultData: {
     src: Placeholder,
-    alt: 'Alt Text',
+    alt: '',
+    title: '',
   },
 };
 

@@ -15,15 +15,11 @@
 import React from 'react';
 import { Editor } from 'slate';
 import { useSlate } from 'slate-react';
+import { flow } from 'lodash';
+import type { HOC } from '@bodiless/fclasses';
 import { ToggleProps } from '../Type';
 import PluginButton from '../components/PluginButton';
-
-const defaultButton = {
-  defaultProps: {
-    name: 'Button',
-    type: 'button',
-  },
-};
+import { withReturnFocusBackOnClick } from '../withReturnFocusBack';
 
 type requiredProps = {
   className?: string,
@@ -42,24 +38,27 @@ const withToggle = <P extends requiredProps> (opts:Opts) => (
     const editor = useSlate();
     const componentName = Component.defaultProps ? Component.defaultProps.name : undefined;
     return (
-      <PluginButton
+      <Component
         componentName={componentName}
-        onMouseDown={
-          () => toggle({
+        onMouseDown={() => {
+          toggle({
             editor,
-          })
-        }
+          });
+        }}
         className={`${
           isActive(editor) ? 'active bl-active' : ''
         } ${className}`}
         icon={icon}
       >
         {children}
-      </PluginButton>
+      </Component>
     );
   }
 );
 
-const createPluginButton = (props:Opts) => withToggle(props)(defaultButton);
+const createPluginButton = (props: Opts) => flow(
+  withReturnFocusBackOnClick(props.icon) as HOC,
+  withToggle(props),
+)(PluginButton);
 export default createPluginButton;
 export { withToggle };

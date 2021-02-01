@@ -30,6 +30,7 @@ import { flow } from 'lodash';
 type ImageProps = {
   src: string;
   alt: string;
+  title: string;
 };
 
 export type GasbyImageProps = ImageProps & {
