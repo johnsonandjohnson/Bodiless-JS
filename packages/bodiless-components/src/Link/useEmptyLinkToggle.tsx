@@ -12,10 +12,19 @@
  * limitations under the License.
  */
 
-import asBodilessLink, { withoutLinkWhenLinkDataEmpty } from './asBodilessLink';
-import type { NormalHref } from './NormalHref';
-import type { AsBodilessLink, LinkData } from './types';
-import DefaultNormalHref from './NormalHref';
+import { useNode } from '@bodiless/core';
+import type { LinkData, Props } from './types';
 
-export { asBodilessLink, DefaultNormalHref, withoutLinkWhenLinkDataEmpty };
-export type { NormalHref, AsBodilessLink, LinkData };
+/**
+ * hook that determines if the link data is empty
+ * the hook validates the data in the current node and in the corresponding prop
+ *
+ * @param props - link based component props
+ * @returns true when link data is empty, otherwise false
+ */
+const useEmptyLinkToggle = ({ href }: Props) => {
+  const { node } = useNode<LinkData>();
+  return (href === undefined || href === '#') && node.data.href === undefined;
+};
+
+export default useEmptyLinkToggle;

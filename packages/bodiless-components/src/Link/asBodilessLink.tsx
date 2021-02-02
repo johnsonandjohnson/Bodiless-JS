@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,42 +12,28 @@
  * limitations under the License.
  */
 
-import React, { HTMLProps, ComponentType } from 'react';
+import React, { ComponentType } from 'react';
 import {
   useMenuOptionUI,
   asBodilessComponent,
   withoutProps,
   ifEditable,
   withExtendHandler,
-  UseBodilessOverrides,
-  useNode,
   ifToggledOn,
   EditButtonOptions,
 } from '@bodiless/core';
-import type { AsBodiless, BodilessOptions } from '@bodiless/core';
+import type { BodilessOptions } from '@bodiless/core';
 import { flowRight, identity } from 'lodash';
 import {
   replaceWith,
   Fragment,
 } from '@bodiless/fclasses';
 import DefaultNormalHref from './NormalHref';
-import type { HrefNormalizer } from './NormalHref';
-
-// Type of the data used by this component.
-export type LinkData = {
-  href: string;
-};
-
-type Props = HTMLProps<HTMLAnchorElement> & {
-  unwrap?: () => void,
-};
-
-type ExtraLinkOptions = {
-  normalizeHref: HrefNormalizer,
-  instructions?: string,
-};
-
-type UseLinkOverrides = UseBodilessOverrides<Props, LinkData, ExtraLinkOptions>;
+import withGoToLinkButton from './withGoToLinkButton';
+import useEmptyLinkToggle from './useEmptyLinkToggle';
+import {
+  LinkData, UseLinkOverrides, Props, ExtraLinkOptions, AsBodilessLink,
+} from './types';
 
 const DEFAULT_INSTRUCTIONS = `
   Use a fully formed URL only for external links, e.g., https://www.example.com.
@@ -135,7 +121,15 @@ const withNormalHref = (
   return WithNormalHref;
 };
 
-export type AsBodilessLink = AsBodiless<Props, LinkData, ExtraLinkOptions>;
+/**
+ * HOC that can be applied to a link based component to not render the component
+ * when the component link data is empty
+ * Note: the component will still render its children
+ *
+ * @param Component - link based component
+ * @returns Component - Fragment when link data empty, input Component otherwise
+ */
+const withoutLinkWhenLinkDataEmpty = ifToggledOn(useEmptyLinkToggle)(replaceWith(Fragment));
 
 const asBodilessLink: AsBodilessLink = (
   nodeKeys, defaultData, useOverrides,
@@ -147,31 +141,12 @@ const asBodilessLink: AsBodilessLink = (
   asBodilessComponent<Props, LinkData>(options)(
     nodeKeys, defaultData, useLinkOverrides(useOverrides),
   ),
+  ifEditable(
+    withGoToLinkButton(),
+  ),
   withoutProps(['unwrap']),
   withNormalHref(useLinkOverrides(useOverrides) as () => ExtraLinkOptions),
 );
-
-/**
- * hook that determines if the link data is empty
- * the hook validates the data in the current node and in the corresponding prop
- *
- * @param props - link based component props
- * @returns true when link data is empty, otherwise false
- */
-const useEmptyLinkToggle = ({ href }: Props) => {
-  const { node } = useNode<LinkData>();
-  return (href === undefined || href === '#') && node.data.href === undefined;
-};
-
-/**
- * HOC that can be applied to a link based component to not render the component
- * when the component link data is empty
- * Note: the component will still render its children
- *
- * @param Component - link based component
- * @returns Component - Fragment when link data empty, input Component otherwise
- */
-const withoutLinkWhenLinkDataEmpty = ifToggledOn(useEmptyLinkToggle)(replaceWith(Fragment));
 
 export default asBodilessLink;
 export { withoutLinkWhenLinkDataEmpty };

@@ -48,7 +48,7 @@ describe('link interactions', () => {
     expect(firstLink).toHaveLength(1);
 
     firstLink.find('a').simulate('click');
-    menuButton = wrapper.find('i');
+    menuButton = wrapper.find('i').first();
     expect(menuButton.text()).toBe('link');
   });
 
@@ -95,7 +95,7 @@ describe('link interactions', () => {
 
     expect(wrapper.find('Popup[visible=true]')).toHaveLength(1);
 
-    menuButton = wrapper.find('i');
+    menuButton = wrapper.find('i').first();
     menuButton.simulate('click');
 
     menuPopup = wrapper.find('Tooltip[visible=true]').at(1);
@@ -107,7 +107,7 @@ describe('link interactions', () => {
     wrapper.find({ ...secondLinkProps }).find('a').simulate('click');
     wrapper.find({ ...firstLinkProps }).find('a').simulate('click');
 
-    menuButton = wrapper.find('i');
+    menuButton = wrapper.find('i').first();
     menuButton.simulate('click');
 
     menuPopup = wrapper.find('Tooltip[visible=true]').at(1);
