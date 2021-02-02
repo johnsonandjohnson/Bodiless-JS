@@ -12,10 +12,24 @@
  * limitations under the License.
  */
 
-import asBodilessLink, { withoutLinkWhenLinkDataEmpty } from './asBodilessLink';
-import type { NormalHref } from './NormalHref';
-import type { AsBodilessLink, LinkData } from './types';
-import DefaultNormalHref from './NormalHref';
+// Type of the data used by this component.
+import { HTMLProps } from 'react';
+import { AsBodiless, UseBodilessOverrides } from '@bodiless/core';
+import { HrefNormalizer } from './NormalHref';
 
-export { asBodilessLink, DefaultNormalHref, withoutLinkWhenLinkDataEmpty };
-export type { NormalHref, AsBodilessLink, LinkData };
+export type LinkData = {
+  href: string;
+};
+
+export type Props = HTMLProps<HTMLAnchorElement> & {
+  unwrap?: () => void,
+};
+
+export type ExtraLinkOptions = {
+  normalizeHref: HrefNormalizer,
+  instructions?: string,
+};
+
+export type UseLinkOverrides = UseBodilessOverrides<Props, LinkData, ExtraLinkOptions>;
+
+export type AsBodilessLink = AsBodiless<Props, LinkData, ExtraLinkOptions>;

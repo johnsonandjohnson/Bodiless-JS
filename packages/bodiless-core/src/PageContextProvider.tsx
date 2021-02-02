@@ -118,9 +118,9 @@ type MenuOptionsDefinition$<P> = MenuOptionsDefinition<P>|((props:P) => MenuOpti
 
 /**
  * Using supplied options, returns an HOC which adds one or more menu options (buttons).
- * This simplly wraps the supplied component with a `PageContextProvider`.
+ * This simply wraps the supplied component with a `PageContextProvider`.
  *
- * Note that, unlike `PageContexProvider` itself, this function takes a custom hook
+ * Note that, unlike `PageContextProvider` itself, this function takes a custom hook
  * (`useMenuOptions`), which is invoked to create the 'getMenuOptions' prop
  * for `PageContextProvider`.  This allows you to use props and context at render
  * time to create your `getMenuOptions` callback.
