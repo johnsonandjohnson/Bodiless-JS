@@ -166,6 +166,15 @@ describe('withShowDesignKeys', () => {
     Foo: (props: any) => <span id="foo" {...props} />,
     Bar: (props: any) => <span id="bar" {...props} />,
   };
+
+  it('No design keys was added', () => {
+    const Test: ComponentType<any> = flow(
+      designable(startComponents, 'Base'),
+    )(Base);
+    const wrapper = mount(<Test />);
+    expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBeUndefined();
+  });
+
   it('Adds design keys when enabled', () => {
     const Test: ComponentType<any> = flow(
       designable(startComponents, 'Base'),
@@ -174,8 +183,8 @@ describe('withShowDesignKeys', () => {
     const wrapper = mount(<Test />);
     expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBe('Base:Foo');
     expect(wrapper.find('span#bar').prop('data-bl-design-key')).toBe('Base:Bar');
-    expect(wrapper.find('span#foo').prop('data-layer-region')).toBeUndefined();
   });
+
   it('Does not add a design keys when disabled', () => {
     const Test: ComponentType<any> = flow(
       designable(startComponents, 'Base'),
@@ -186,33 +195,15 @@ describe('withShowDesignKeys', () => {
     expect(wrapper.find('span#bar').prop('data-bl-design-key')).toBeUndefined();
   });
 
-  it('Add a componentName data attr when disabled', () => {
-    const Test: ComponentType<any> = flow(
-      designable(startComponents, 'Base'),
-      withShowDesignKeys(true, 'layer-region'),
-    )(Base);
-    const wrapper = mount(<Test />);
-    expect(wrapper.find('span#foo').prop('data-layer-region')).toBe('Base:Foo');
-    expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBeUndefined();
-  });
-
-  it('Does not add a componentName when disabled', () => {
-    const Test: ComponentType<any> = flow(
-      designable(startComponents, 'Base'),
-      withShowDesignKeys(false, 'layer-region'),
-    )(Base);
-    const wrapper = mount(<Test />);
-    expect(wrapper.find('span#foo').prop('data-layer-region')).toBeUndefined();
-  });
-
-  it('Rewrite default design keys if a component wrapped additionally with new value', () => {
+  it('Rewrites default a componentName data attr', () => {
     const Test: ComponentType<any> = flow(
       designable(startComponents, 'Base'),
       withShowDesignKeys(),
     )(Base);
-    const AddDesignKeys = withShowDesignKeys(true, 'test-attr')(Fragment);
+    const AddDesignKeys = withShowDesignKeys(true, 'layer-region')(Fragment);
     const wrapper = mount(<AddDesignKeys><Test /></AddDesignKeys>);
-    expect(wrapper.find('span#foo').prop('data-test-attr')).toBe('Base:Foo');
+    expect(wrapper.find('span#foo').prop('data-layer-region')).toBe('Base:Foo');
+    expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBeUndefined();
   });
 
   it('Ignore NODE_ENV if component wrapped in withShowDesignKeys', () => {
