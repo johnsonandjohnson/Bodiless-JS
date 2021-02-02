@@ -206,6 +206,17 @@ describe('withShowDesignKeys', () => {
     expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBeUndefined();
   });
 
+  it('Rewrites design keys via wrapper values', () => {
+    const Test: ComponentType<any> = flow(
+      designable(startComponents, 'Base'),
+      withShowDesignKeys(false, 'bl-design-key'),
+    )(Base);
+    const AddDesignKeys = withShowDesignKeys(true, 'layer-region')(Fragment);
+    const wrapper = mount(<AddDesignKeys><Test /></AddDesignKeys>);
+    expect(wrapper.find('span#foo').prop('data-layer-region')).toBe('Base:Foo');
+    expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBeUndefined();
+  });
+
   it('Ignore NODE_ENV if component wrapped in withShowDesignKeys', () => {
     const Test: ComponentType<any> = flow(
       designable(startComponents, 'Base'),
