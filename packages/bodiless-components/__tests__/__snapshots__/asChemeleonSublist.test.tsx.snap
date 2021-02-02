@@ -4,28 +4,21 @@ exports[`asChameleonSubList works 1`] = `
 <ul>
   <li
     data-bl-activator="true"
-    data-bl-design-key="List:Item"
   >
     <span>
       Top
     </span>
-    <ul
-      data-bl-design-key="SubList:List"
-    >
+    <ul>
       <li
         class="list-disc ml-5"
         data-bl-activator="true"
-        data-bl-design-key="List:Item"
       >
         <span>
           Bulleted
         </span>
-        <ul
-          data-bl-design-key="SubList:List"
-        >
+        <ul>
           <li
             class="list-decimal ml-5"
-            data-bl-design-key="List:Item"
           >
             <span>
               Numbered

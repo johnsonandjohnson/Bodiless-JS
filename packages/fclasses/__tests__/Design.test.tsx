@@ -212,7 +212,20 @@ describe('withShowDesignKeys', () => {
     )(Base);
     const AddDesignKeys = withShowDesignKeys(true, 'test-attr')(Fragment);
     const wrapper = mount(<AddDesignKeys><Test /></AddDesignKeys>);
-    expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBeUndefined();
+    expect(wrapper.find('span#foo').prop('data-test-attr')).toBe('Base:Foo');
+  });
+
+  it('Ignore NODE_ENV if component wrapped in withShowDesignKeys', () => {
+    const Test: ComponentType<any> = flow(
+      designable(startComponents, 'Base'),
+    )(Base);
+    const WithShowDesignKeys = process.env.NODE_ENV === 'development'
+      ? withShowDesignKeys()(Fragment)
+      : Fragment;
+    const AddDesignKeys = withShowDesignKeys(true, 'test-attr')(Fragment);
+    const wrapper = mount(
+      <AddDesignKeys><WithShowDesignKeys><Test /></WithShowDesignKeys></AddDesignKeys>,
+    );
     expect(wrapper.find('span#foo').prop('data-test-attr')).toBe('Base:Foo');
   });
 });
