@@ -12,11 +12,27 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
+import React, { Fragment, ComponentType as CT } from 'react';
+import { extendDesignable } from '@bodiless/fclasses';
+import type { DesignableComponentsProps } from '@bodiless/fclasses';
+import omit from 'lodash/omit';
 
-const withChild = (Child: CT) => <P extends Object>(Parent: CT<P> | string) => (props: P) => (
-  <Parent {...props}>
-    <Child />
-  </Parent>
-);
+type HOC<P = any, Q = P> = (Component?: CT<P>|string|undefined) => CT<Q>;
+
+const withChild = <P extends object>(Child: CT, designKey = 'Child'): HOC<P> => (Parent = Fragment) => {
+  type Components = { [Child: string]: CT };
+  const startComponents: Components = { [designKey]: Child };
+  const WithChild = (props: P & DesignableComponentsProps<Components>) => {
+    const { components, ...rest } = props;
+    const { [designKey]: ChildComponent } = components;
+    return (
+      <Parent {...rest as P}>
+        <ChildComponent />
+      </Parent>
+    );
+  };
+  const applyDesign = extendDesignable(design => omit(design, [designKey]));
+  return applyDesign(startComponents, designKey)(WithChild);
+};
+
 export default withChild;
