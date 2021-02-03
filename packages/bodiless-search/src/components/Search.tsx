@@ -33,18 +33,21 @@ import {
   StylableProps,
   DesignableComponentsProps,
   designable,
+  DesignableProps,
 } from '@bodiless/fclasses';
 import { useSearchResultContext } from './SearchContextProvider';
 import { TSearchResult, Suggestion } from '../types';
 import { Suggestions as BaseSuggestions } from './Suggestions';
-import type { SuggestionListProps } from './Suggestions';
+import type { SuggestionListComponents } from './Suggestions';
 import getSearchPagePath from './getSearchPagePath';
 
 export type SearchComponents = {
   SearchWrapper: ComponentType<StylableProps>;
   SearchInput: ComponentType<any>;
   SearchButton: ComponentType<any>;
-  Suggestions: ComponentType<SuggestionListProps>,
+  Suggestions: ComponentType<DesignableProps<SuggestionListComponents> & {
+    suggestions: Suggestion[]
+  }>,
 };
 
 type SearchResultComponents = {
@@ -62,7 +65,7 @@ type SearchResultItemComponents = {
 };
 
 type SearchResultItemProps = DesignableComponentsProps<SearchResultItemComponents> &
-{value: { [key: string]: string; }};
+{ value: { [key: string]: string; } };
 
 const SearchInputBase: FC<HTMLProps<HTMLInputElement>> = props => {
   const { placeholder = 'Search', ...rest } = props;
@@ -98,7 +101,7 @@ const SearchResultItemBase: FC<SearchResultItemProps> = ({ components, ...props 
   return (
     <ItemList {...props}>
       <ItemH3>
-        <ItemAnchor href={value.link}>{ value.title }</ItemAnchor>
+        <ItemAnchor href={value.link}>{value.title}</ItemAnchor>
       </ItemH3>
       <ItemParagraph>{value.preview}</ItemParagraph>
     </ItemList>
@@ -141,7 +144,7 @@ const SearchResultBase: FC<SearchResultProps> = ({
     return (
       <SearchResultWrapper>
         <SearchResultSummary>{showResultCount}</SearchResultSummary>
-        <H3>{ resultEmptyMessage }</H3>
+        <H3>{resultEmptyMessage}</H3>
       </SearchResultWrapper>
     );
   }
@@ -231,7 +234,6 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
       <SearchButton onClick={onClickHandler} />
       {
         queryString !== ''
-        // @ts-ignore
         && <Suggestions suggestions={suggestions} />
       }
     </SearchWrapper>

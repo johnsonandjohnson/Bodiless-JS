@@ -129,7 +129,7 @@ const CleanSuggestions = (props: SuggestionListProps) => {
 
 const Suggestions = designable(
   startComponents, 'Suggestions',
-)(CleanSuggestions) as ComponentType<SuggestionListProps>;
+)(CleanSuggestions);
 
 export {
   Suggestions,
@@ -137,4 +137,5 @@ export {
 export type {
   SuggestionComponents,
   SuggestionListProps,
+  SuggestionListComponents,
 };
