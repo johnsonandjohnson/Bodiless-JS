@@ -23,6 +23,7 @@ export const withShowDesignKeys = (
     showDesignKeys: showKeys = undefined,
     designKeysAttributeName: keysAttribute = undefined,
   } = useContext(FClassesContext);
+  // Here we apply new value only if it's empty in context or reuse the previous one
   const value = {
     ...(
       showKeys !== undefined

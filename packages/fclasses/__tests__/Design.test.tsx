@@ -167,7 +167,7 @@ describe('withShowDesignKeys', () => {
     Bar: (props: any) => <span id="bar" {...props} />,
   };
 
-  it('No design keys was added', () => {
+  it('Does not add design keys without withShowDesignKeys', () => {
     const Test: ComponentType<any> = flow(
       designable(startComponents, 'Base'),
     )(Base);
@@ -217,16 +217,13 @@ describe('withShowDesignKeys', () => {
     expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBeUndefined();
   });
 
-  it('Ignore NODE_ENV if component wrapped in withShowDesignKeys', () => {
+  it('Adds design keys if component wrapped in withShowDesignKeys', () => {
     const Test: ComponentType<any> = flow(
       designable(startComponents, 'Base'),
     )(Base);
-    const WithShowDesignKeys = process.env.NODE_ENV === 'development'
-      ? withShowDesignKeys()(Fragment)
-      : Fragment;
     const AddDesignKeys = withShowDesignKeys(true, 'test-attr')(Fragment);
     const wrapper = mount(
-      <AddDesignKeys><WithShowDesignKeys><Test /></WithShowDesignKeys></AddDesignKeys>,
+      <AddDesignKeys><Test /></AddDesignKeys>,
     );
     expect(wrapper.find('span#foo').prop('data-test-attr')).toBe('Base:Foo');
   });
