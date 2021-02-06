@@ -14,14 +14,39 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
+import flow from 'lodash/flow';
 import {
   NodeViewer,
 } from '@bodiless/components';
+import { withDesign, addProps, Div } from '@bodiless/fclasses';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 
 import Layout from '../../../components/Layout';
 import { FlowContainerDefault } from '../../../components/FlowContainer';
-import { EditorBasic, EditorFullFeatured, EditorSimple } from '../../../components/Editors';
+import {
+  EditorBasic,
+  EditorSimple,
+  EditorFullFeatured,
+  withEditorFullFeatured,
+} from '../../../components/Editors';
+
+const AlphabeticFullFeaturedEditor = flow(
+  withEditorFullFeatured('alphabeticRTE', 'Type something here...'),
+  withDesign({
+    Child: addProps({
+      onKeyDown: event => {
+        if (
+          // alphabet characters
+          !(event.which >= 65 && event.which <= 120)
+          // backspace, enter, space, delete
+          && ![8, 13, 32, 46].includes(event.which)
+        ) {
+          event.preventDefault();
+        }
+      },
+    }),
+  }),
+)(Div);
 
 const RichTextPage = (props: any) => (
   <Page {...props}>
@@ -45,6 +70,13 @@ const RichTextPage = (props: any) => (
         <h3 className="p-5 font-bold">Full Rich Text:</h3>
         <div className="p-5 pt-0">
           <EditorFullFeatured className="border-solid border-4 border-gray-600 p-5" nodeKey="fullRTE" placeholder="Type something here..." />
+        </div>
+      </div>
+
+      <div className="flex flex-col w-full py-5">
+        <h3 className="p-5 font-bold">Alphabetic Full Rich Text:</h3>
+        <div className="p-5 pt-0">
+          <AlphabeticFullFeaturedEditor className="border-solid border-4 border-gray-600 p-5" />
         </div>
       </div>
 
