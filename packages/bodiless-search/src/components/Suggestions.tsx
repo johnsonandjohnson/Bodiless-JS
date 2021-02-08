@@ -116,7 +116,7 @@ const CleanSuggestions = (props: SuggestionListProps) => {
     <Wrapper>
       {
         suggestions
-          .slice(0, displayCount - 1)
+          .slice(0, displayCount)
           .map((item, index) => (
             <ItemWrapper key={item.text}>
               <Item text={item.text} count={item.count} position={index} />
