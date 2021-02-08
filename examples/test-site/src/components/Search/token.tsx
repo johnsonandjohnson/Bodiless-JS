@@ -66,7 +66,12 @@ const responsiveSearchDesign = {
     withIcon('search'),
     addClasses('flex absolute right-0 self-center mr-4'),
   ),
-  Suggestions: withSuggestionsDefaultDesign,
+  Suggestions: flow(
+    withSuggestionsDefaultDesign,
+    withDesign({
+      Wrapper: addClasses('-my-3 left-0 px-3'),
+    }),
+  ),
 };
 
 const searchInlineDesign = {

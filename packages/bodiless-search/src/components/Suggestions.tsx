@@ -99,7 +99,7 @@ type SuggestionListProps = {
   displayCount?: number;
 } & DesignableComponentsProps<SuggestionListComponents>;
 
-const DEFAULT_DISPLAY_COUNT = 10;
+const DEFAULT_DISPLAY_COUNT = 5;
 
 const CleanSuggestions = (props: SuggestionListProps) => {
   const {
