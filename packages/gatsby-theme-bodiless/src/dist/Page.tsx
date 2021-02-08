@@ -58,7 +58,7 @@ const GitButtons: FC = () => {
 };
 
 const ShowDesignKeys = (
-  process.env.NODE_ENV === 'development' || process.env.BODILESS_DEBUG === '1'
+  process.env.NODE_ENV === 'development' || process.env.BODILESS_SHOWDESIGNKEYS === '1'
 ) ? withShowDesignKeys()(Fragment) : Fragment;
 
 const Page: FC<Props> = observer(({ children, ui, ...rest }) => {

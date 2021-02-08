@@ -19,7 +19,7 @@ import {
 import React, { ComponentType, Fragment, useContext } from 'react';
 import { HOC } from './FClasses';
 import { addPropsIf } from './addProps';
-import { useShowDesignKeys } from './Context';
+import { useShowDesignKeys, useDesignKeysAttribute } from './Context';
 import { withDisplayName } from './hoc-util';
 
 export type DesignElement<P> = (c: ComponentType<P> | string) => ComponentType<P>;
@@ -296,7 +296,11 @@ export const extendDesignable = (transformDesign: TransformDesign = identity) =>
       const designKeys = typeof start !== 'function'
         ? Object.keys(start).reduce((keys, key) => ({
           ...keys,
-          [key]: addPropsIf(useShowDesignKeys)({ 'data-bl-design-key': `${namespace}:${key}` }),
+          [key]: addPropsIf(useShowDesignKeys)(
+            () => ({
+              [`data-${useDesignKeysAttribute()}`]: `${namespace}:${key}`,
+            }),
+          ),
         }), {})
         : undefined;
       const transformFixed = (props:DesignableProps<C> & P) => {
@@ -319,6 +323,9 @@ export const extendDesignable = (transformDesign: TransformDesign = identity) =>
         withTransformer({ transformFixed, transformPassthrough }),
         designKeys ? withDesign(designKeys) : identity,
       )(Component);
+
+      Designable.displayName = `extendDesignable(${namespace})`;
+
       return Designable as ComponentType<DesignableProps<C> & P>;
     }
   )
