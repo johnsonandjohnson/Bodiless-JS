@@ -25,7 +25,7 @@ import {
 } from '@bodiless/core';
 import { withDesign, withoutProps, HOC } from '@bodiless/fclasses';
 import { flow } from 'lodash';
-import React, { ComponentType as CT, FunctionComponent as FC, useContext } from 'react';
+import React, { ComponentType as CT, useContext } from 'react';
 import { v1 } from 'uuid';
 import forCells from './forCell';
 import {
