@@ -13,7 +13,6 @@
  */
 
 import React, { ComponentType as CT, FC } from 'react';
-import { pickBy } from 'lodash';
 import NodeProvider, { useNode } from './NodeProvider';
 import { WithNodeProps } from './Types/NodeTypes';
 
