@@ -33,15 +33,17 @@ const withNode = <P extends object, D extends object>(Component: CT<P>) => {
   };
   return WithNode;
 };
+type NodeKeyFunc<A> = (props:A) => string|Partial<WithNodeProps>;
 const withNodeKey = <P extends object>(
-  nodeKeys: string|Partial<WithNodeProps> = {},
+  nodeKeys: string|Partial<WithNodeProps>|NodeKeyFunc<P> = {},
 ) => (Component: CT<P> | string) => {
-    const nodeKeyProps = pickBy(
-      typeof nodeKeys === 'string' ? { nodeKey: nodeKeys } : nodeKeys,
-    );
-    const WithNodeKey: FC<P & Partial<WithNodeProps>> = props => (
-      <Component {...nodeKeyProps} {...props} />
-    );
+    const WithNodeKey: FC<P & Partial<WithNodeProps>> = props => {
+      const nodeKeysPrime = typeof nodeKeys === 'function' ? nodeKeys(props) : nodeKeys;
+      const nodeKeyProps = typeof nodeKeysPrime === 'string' ? { nodeKey: nodeKeysPrime } : nodeKeysPrime;
+      return (
+        <Component {...nodeKeyProps} {...props} />
+      );
+    };
     return WithNodeKey;
   };
 export default withNode;

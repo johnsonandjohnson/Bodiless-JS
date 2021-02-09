@@ -20,6 +20,7 @@ import {
   withMenuOptions,
   withNode,
   withNodeDataHandlers,
+  withNodeKey,
   WithNodeProps,
 } from '@bodiless/core';
 import { withDesign, withoutProps, HOC } from '@bodiless/fclasses';
@@ -38,20 +39,6 @@ import {
   RowProps,
 } from './types';
 import TableManagerContext from './TableManagerContext';
-
-type NodeKeyFunc<A> = (props:A) => string|Partial<WithNodeProps>;
-const withNodeKey = <P extends object>(
-  nodeKeys: string|Partial<WithNodeProps>|NodeKeyFunc<P> = {},
-) => (Component: CT<P> | string) => {
-    const WithNodeKey: FC<P & Partial<WithNodeProps>> = props => {
-      const nodeKeysPrime = typeof nodeKeys === 'function' ? nodeKeys(props) : nodeKeys;
-      const nodeKeyProps = typeof nodeKeysPrime === 'string' ? { nodeKey: nodeKeysPrime } : nodeKeysPrime;
-      return (
-        <Component {...nodeKeyProps} {...props} />
-      );
-    };
-    return WithNodeKey;
-  };
 
 type WithTableManagerProps = {
   componentData:TableBaseProps,
