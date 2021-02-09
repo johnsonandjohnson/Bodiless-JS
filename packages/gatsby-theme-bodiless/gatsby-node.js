@@ -89,9 +89,8 @@ const readTemplateFile = indexPath => {
 
 const findSubPageTemplateTemplate = (indexPath, basePath) => {
   const templates = readTemplateFile(indexPath);
-  if (templates.subpage_template) {
-    return templates.subpage_template;
-  }
+  if (templates.subpage_template) return templates.subpage_template;
+  if (templates.template) return templates.template;
   const parentPath = pathUtil.dirname(pathUtil.dirname(indexPath));
   if (parentPath <= basePath) {
     return '_default';

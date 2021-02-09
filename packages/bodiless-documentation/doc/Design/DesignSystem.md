@@ -290,7 +290,7 @@ styling or functionality to the second link).
 
 This has been a very high level overview of the Bodiless Design System. For some
 hands on experience, you can proceed to the
-[Design System Tutorial](../About/DesignSystemBasics). Or, you can read the full
+[Design System Tutorial](../Development/Guides/DesignElementBasics). Or, you can read the full
 documentation for the [Design API](../Development/Architecture/FClasses).
 
 For reference, here is a flow diagram showing how utility classes, element

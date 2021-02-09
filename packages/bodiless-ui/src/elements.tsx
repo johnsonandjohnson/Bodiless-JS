@@ -91,11 +91,11 @@ export const ComponentFormLabel = addClasses(
 )(Label);
 
 export const ComponentFormText = addClasses(
-  'bl-text-grey-900 bg-grey-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-block bl-my-grid-2 bl-p-grid-1',
+  'bl-text-grey-900 bl-bg-grey-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-block bl-my-grid-2 bl-p-grid-1',
 )(Text);
 
 export const ComponentFormTextArea = addClasses(
-  'bl-resize bl-text-grey-900 bg-grey-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-min-h-grid-16 bl-block bl-my-grid-2 bl-p-grid-1',
+  'bl-resize bl-text-grey-900 bl-bg-grey-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-min-h-grid-16 bl-block bl-my-grid-2 bl-p-grid-1',
 )(TextArea);
 
 export const ComponentFormRadioGroup = addClasses(
@@ -111,7 +111,7 @@ export const ComponentFormCheckBox = addClasses(
 )(CheckBox);
 
 export const ComponentFormSelect = addClasses(
-  `bl-text-grey-900 bg-grey-100 bl-text-xs bl-w-full
+  `bl-text-grey-900 bl-bg-grey-100 bl-text-xs bl-w-full
   bl-min-w-xl-grid-1 bl-block bl-my-grid-2 bl-p-grid-1`,
 )(Select);
 
@@ -179,6 +179,11 @@ export const ResizeHandle = flow(
   ),
   withChild(() => <ResizeHandleBar />),
 )(Div);
+
+export const ResizeHandleRTL = flow(
+  addClasses('bl-left-rem-1'),
+  removeClasses('bl-right-rem-1'),
+)(ResizeHandle);
 
 export const ContextSubMenu = flow(
   addClasses('bl-flex bl-text-white'),

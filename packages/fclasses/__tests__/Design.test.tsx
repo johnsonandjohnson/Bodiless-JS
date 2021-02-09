@@ -14,7 +14,7 @@
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
-import React, { ComponentType, FC } from 'react';
+import React, { ComponentType, FC, Fragment } from 'react';
 
 import { omit, flow } from 'lodash';
 import {
@@ -37,7 +37,7 @@ type MyDesignableComponents = {
 type MyDesign = Design<MyDesignableComponents>;
 
 const Span: SpanType = props => <span {...props} />;
-const hoc = (newClassName: string) => (C: SpanType):SpanType => props => {
+const hoc = (newClassName: string) => (C: SpanType):SpanType => (props) => {
   const { className = '', ...rest } = props;
   const combinedClassName = `${className} ${newClassName}`.trim();
   return <C className={combinedClassName} {...rest} />;
@@ -166,6 +166,15 @@ describe('withShowDesignKeys', () => {
     Foo: (props: any) => <span id="foo" {...props} />,
     Bar: (props: any) => <span id="bar" {...props} />,
   };
+
+  it('Does not add design keys without withShowDesignKeys', () => {
+    const Test: ComponentType<any> = flow(
+      designable(startComponents, 'Base'),
+    )(Base);
+    const wrapper = mount(<Test />);
+    expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBeUndefined();
+  });
+
   it('Adds design keys when enabled', () => {
     const Test: ComponentType<any> = flow(
       designable(startComponents, 'Base'),
@@ -175,6 +184,7 @@ describe('withShowDesignKeys', () => {
     expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBe('Base:Foo');
     expect(wrapper.find('span#bar').prop('data-bl-design-key')).toBe('Base:Bar');
   });
+
   it('Does not add a design keys when disabled', () => {
     const Test: ComponentType<any> = flow(
       designable(startComponents, 'Base'),
@@ -183,5 +193,38 @@ describe('withShowDesignKeys', () => {
     const wrapper = mount(<Test />);
     expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBeUndefined();
     expect(wrapper.find('span#bar').prop('data-bl-design-key')).toBeUndefined();
+  });
+
+  it('Rewrites default a componentName data attr', () => {
+    const Test: ComponentType<any> = flow(
+      designable(startComponents, 'Base'),
+      withShowDesignKeys(),
+    )(Base);
+    const AddDesignKeys = withShowDesignKeys(true, 'layer-region')(Fragment);
+    const wrapper = mount(<AddDesignKeys><Test /></AddDesignKeys>);
+    expect(wrapper.find('span#foo').prop('data-layer-region')).toBe('Base:Foo');
+    expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBeUndefined();
+  });
+
+  it('Rewrites design keys via wrapper values', () => {
+    const Test: ComponentType<any> = flow(
+      designable(startComponents, 'Base'),
+      withShowDesignKeys(false, 'bl-design-key'),
+    )(Base);
+    const AddDesignKeys = withShowDesignKeys(true, 'layer-region')(Fragment);
+    const wrapper = mount(<AddDesignKeys><Test /></AddDesignKeys>);
+    expect(wrapper.find('span#foo').prop('data-layer-region')).toBe('Base:Foo');
+    expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBeUndefined();
+  });
+
+  it('Adds design keys if component wrapped in withShowDesignKeys', () => {
+    const Test: ComponentType<any> = flow(
+      designable(startComponents, 'Base'),
+    )(Base);
+    const AddDesignKeys = withShowDesignKeys(true, 'test-attr')(Fragment);
+    const wrapper = mount(
+      <AddDesignKeys><Test /></AddDesignKeys>,
+    );
+    expect(wrapper.find('span#foo').prop('data-test-attr')).toBe('Base:Foo');
   });
 });

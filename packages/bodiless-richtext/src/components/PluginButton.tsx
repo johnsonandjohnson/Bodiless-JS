@@ -23,7 +23,7 @@ type uiIndexType = {
   [index: string]: any;
 };
 
-type Props = {
+export type Props = {
   componentName?: string;
   icon: string;
 } & HTMLProps<HTMLButtonElement>;

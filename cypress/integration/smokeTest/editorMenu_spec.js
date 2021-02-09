@@ -28,8 +28,8 @@ describe('Editor Menu (left and right)', function () {
    const editIcon = '//*[@aria-label="Edit"]'
    const addPageIcon = '//*[@aria-label="Page"]'
 
-   const headerAddPageForm = '//*[@aria-label="Context Menu Page Form"]//h3[text()="Add a New Page"]'
-   const fieldAddPageForm = '//*[@aria-label="Context Menu Page Form"]//input[@id="new-page-path"]'
+   const headerAddPageForm = '//*[@aria-label="Context Menu Page Form"]//h3[text()="Add a Blank Page"]'
+   const fieldAddPageForm = '//*[@aria-label="Context Menu Page Form"]//input[@name="new-page-path"]'
    const closeIconAddPageForm = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Cancel"]'
    const checkmarkIconAddPageForm = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Submit"]'
 
@@ -94,7 +94,7 @@ describe('Editor Menu (left and right)', function () {
    //  Docs icon that opens Docs app in a new tab cannot be fully tested within the current implementation
    //  Adding a test that directly checks Docs app Home page, without clicking on Docs icon
    it('editorMenu: 9 - Check Docs page', () => {
-      cy.visit('/___docs')
+      cy.visit('/___docs', { timeout: 90000 })
       cy.xpath(docsTitle)
          .click()
       cy.url().should('include', '/___docs/#/?id=bodilessjs')

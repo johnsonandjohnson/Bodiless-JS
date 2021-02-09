@@ -298,7 +298,7 @@ the links below to read more about working with the individual components.
 #### Media
 
 * [Image](../../../Components/Image)
-* [Youtube](../../../Components/Youtube) 
+* [Youtube](../../../Components/YouTube) 
 * [Carousel](../../../Components/Carousel)
 
 #### Interactions
@@ -310,7 +310,7 @@ the links below to read more about working with the individual components.
 
 #### Integrations
 
-* [Bazaarvoice](../../../Components/Bv)
+* [Bazaarvoice](../../../Components/bv)
 
 
 #### SEO

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React, { ComponentType, useRef } from 'react';
 import { useNode } from '@bodiless/core';
 import { BreadcrumbStore } from './BreadcrumbStore';
 import { Breadcrumbs } from './Breadcrumbs';
@@ -22,19 +22,33 @@ import { BreadcrumbStoreProvider } from './BreadcrumbStoreProvider';
  * HOC that adds breadcrumb store and renders breadcrumbs.
  * @param Component that pushes its data to the store.
  */
-const withBreadcrumbs = (Component: ComponentType<any>) => {
-  const WithBreadcrumbs = (props: any) => {
+export const withBreadcrumbStore = (Component: ComponentType<any>) => {
+  const WithBreadcrumbStore = (props: any) => {
     const { node } = useNode();
     const { pagePath } = node;
-    const store = new BreadcrumbStore(pagePath);
+    const storeRef = useRef<BreadcrumbStore>();
+    if (storeRef.current === undefined) storeRef.current = new BreadcrumbStore(pagePath);
     return (
-      <BreadcrumbStoreProvider store={store}>
+      <BreadcrumbStoreProvider store={storeRef.current}>
         <Component {...props} />
-        <Breadcrumbs {...props} />
       </BreadcrumbStoreProvider>
     );
   };
-  return WithBreadcrumbs;
+  return WithBreadcrumbStore;
+};
+
+/**
+ * HOC that adds breadcrumb store and renders breadcrumbs.
+ * @param Component that pushes its data to the store.
+ */
+const withBreadcrumbs = (Component: ComponentType<any>) => {
+  const WithBreadcrumbs = (props: any) => (
+    <>
+      <Component {...props} />
+      <Breadcrumbs {...props} />
+    </>
+  );
+  return withBreadcrumbStore(WithBreadcrumbs);
 };
 
 export default withBreadcrumbs;

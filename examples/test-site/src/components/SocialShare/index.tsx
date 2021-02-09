@@ -327,10 +327,10 @@ const SocialShareHelmet = flowRight(
   withSocialShareImage('og-image', ''),
   withSocialShareUrl('og-url', ''),
   withSocialShareDescription('og-description', ''),
-  withSocialShareType({ nodeKey: 'og:type', nodeCollection: 'site' }),
-  withSocialShareSitename({ nodeKey: 'og:sitename', nodeCollection: 'site' }),
-  withSocialShareTwitterCard({ nodeKey: 'twitter:card', nodeCollection: 'site' }),
-  withSocialShareTwitterSite({ nodeKey: 'twitter:site', nodeCollection: 'site' }),
+  withSocialShareType({ nodeKey: 'og-type', nodeCollection: 'site' }),
+  withSocialShareSitename({ nodeKey: 'og-sitename', nodeCollection: 'site' }),
+  withSocialShareTwitterCard({ nodeKey: 'twitter-card', nodeCollection: 'site' }),
+  withSocialShareTwitterSite({ nodeKey: 'twitter-site', nodeCollection: 'site' }),
 )(Helmet);
 
 export { SocialShareHelmet };

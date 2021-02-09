@@ -15,6 +15,7 @@
         }
     ],
     "configurations": [
+
         {
             "name": "Migrate",
             "type": "node",
@@ -47,6 +48,24 @@
             "type": "node",
             "request": "launch",
             "program": "${workspaceRoot}/scripts/postinstall"
+        },
+        {
+            "name": "Gatsby build",
+            "type": "node",
+            "request": "launch",
+            "protocol": "inspector",
+            "program": "${workspaceRoot}/node_modules/gatsby/dist/bin/gatsby",
+            "cwd": "${workspaceFolder}/examples/test-site",
+            "args": [
+                "build"
+            ],
+            "stopOnEntry": false,
+            "runtimeArgs": [
+                "--nolazy"
+            ],
+            "sourceMaps": false,
+            "trace": true,
+            "console": "integratedTerminal"
         },
         {
             "name": "Gatsby develop",
@@ -96,21 +115,6 @@
             "windows": {
                 "program": "${workspaceFolder}/node_modules/jest/bin/jest",
             }
-        },
-        {
-            "name": "Gatsby build",
-            "type": "node",
-            "request": "launch",
-            "protocol": "inspector",
-            "program": "${workspaceRoot}/node_modules/gatsby/dist/bin/gatsby",
-            "args": [
-                "build"
-            ],
-            "stopOnEntry": false,
-            "runtimeArgs": [
-                "--nolazy"
-            ],
-            "sourceMaps": false
         },
         {
             "name": "Launch Chrome",

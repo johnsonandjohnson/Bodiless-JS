@@ -16,7 +16,7 @@ import { ComponentType } from 'react';
 import { flow } from 'lodash';
 import { asStatic } from '@bodiless/core';
 import {
-  withDesign, replaceWith, H2, addClasses, Div, withoutProps,
+  withDesign, replaceWith, H2, addClasses, Button, withoutProps,
 } from '@bodiless/fclasses';
 import {
   asMenuTout, asMegaMenuBase, withMegaMenuDesign,
@@ -27,13 +27,13 @@ import { withEditorSimple } from '../Editors';
 import withMegaMenuStyles from './MegaMenu.token';
 import { asEditableTout } from '../Tout';
 import { asToutMainMenu } from '../Tout/token';
-import { asDesktopOnly } from '../Elements.token';
+import { asMegaMenuBreadcrumbSource } from '../Breadcrumbs/MenuBreadcrumbs';
 
 const withTitleEditor = withEditorSimple('text', 'Menu Item');
 const asMenuTitle = flow(
   asMenuLink(withTitleEditor),
   withDesign({
-    _default: replaceWith(Div),
+    _default: replaceWith(Button),
   }),
 );
 
@@ -70,9 +70,9 @@ const MegaMenu = flow(
       }),
     }),
   }),
+  asMegaMenuBreadcrumbSource,
   withMegaMenuStyles,
   asMegaMenuTopNav,
-  asDesktopOnly,
 )(MegaMenuBase);
 
 const MegaMenuList = flow(

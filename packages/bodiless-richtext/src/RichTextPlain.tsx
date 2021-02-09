@@ -13,19 +13,23 @@
  */
 
 import React, { ComponentType } from 'react';
-import Plain from 'slate-plain-serializer';
-import { Value } from 'slate';
 import { flowRight } from 'lodash';
 import { useNode, withNode } from '@bodiless/core';
+import { Node } from 'slate';
+import type { Value } from './Type';
 
-type Data = {
-  document: object;
-};
+const DEFAULT_DELIMITER = '\n';
+
+/**
+ * @todo make delimiter configurable similar to how it was done in slate-plain-serializer
+ * @see https://github.com/ianstormtaylor/slate/blob/slate%400.44.13/packages/slate-plain-serializer/src/index.js#L19
+ */
+const serialize = (nodes: Node[]) => nodes.map(n => Node.string(n)).join(DEFAULT_DELIMITER);
 
 const useRichtextPlainSerializer = () => {
-  const { node } = useNode<Data>();
-  const value = node.data.document ? Value.fromJSON(node.data) : undefined;
-  return value ? Plain.serialize(value) : '';
+  const { node } = useNode<Value>();
+  const value = node.data;
+  return value ? serialize(value) : '';
 };
 
 const withRichtextPlainSerializer$ = (Component: ComponentType) => {

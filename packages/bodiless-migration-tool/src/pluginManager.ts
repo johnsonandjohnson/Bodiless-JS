@@ -13,6 +13,7 @@
  */
 
 import { MigrationApiType } from './migrationApi';
+import Downloader from './downloader';
 
 /**
  * params exposed once a page create event is emitted
@@ -30,6 +31,10 @@ type OnPageCreateParams = {
    * object containing migration tool api
    */
   api: MigrationApiType,
+  /**
+   * Downloader instance provides asset download function.
+   */
+  downloader: Downloader,
 };
 
 /**

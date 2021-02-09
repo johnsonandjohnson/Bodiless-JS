@@ -3,6 +3,72 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.68](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.67...v0.0.68) (2021-01-25)
+
+
+### Bug Fixes
+
+* **docs:** Images still missing from docs ([fc16bdc](https://github.com/johnsonandjohnson/bodiless-js/commit/fc16bdc8372d4380c9df245adb915a755831f5c9))
+* **docs:** missing images in docs ([#786](https://github.com/johnsonandjohnson/bodiless-js/issues/786)) ([224b66e](https://github.com/johnsonandjohnson/bodiless-js/commit/224b66e868a5f799dd3797691cc75812d562b2bb))
+
+
+
+
+
+## [0.0.67](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.66...v0.0.67) (2021-01-12)
+
+
+### Bug Fixes
+
+* **richtext:** [#791](https://github.com/johnsonandjohnson/bodiless-js/issues/791) - Fix crash when pasting empty last element. ([#792](https://github.com/johnsonandjohnson/bodiless-js/issues/792)) ([8d5caa3](https://github.com/johnsonandjohnson/bodiless-js/commit/8d5caa3f5e84c9bc11961ebe61aa715109dc0e42))
+
+
+
+
+
+## [0.0.66](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.65...v0.0.66) (2020-12-29)
+
+
+### Features
+
+* **richtext:** paste links into richtext ([#769](https://github.com/johnsonandjohnson/bodiless-js/issues/769)) ([db78b74](https://github.com/johnsonandjohnson/bodiless-js/commit/db78b74426b1185788dc23b867664180bb388f24))
+
+
+
+
+
+## [0.0.65](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.64...v0.0.65) (2020-12-23)
+
+**Note:** Version bump only for package @bodiless/richtext
+
+
+
+
+
+## [0.0.64](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.63...v0.0.64) (2020-12-16)
+
+**Note:** Version bump only for package @bodiless/richtext
+
+
+
+
+
+## [0.0.63](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.62...v0.0.63) (2020-12-08)
+
+**Note:** Version bump only for package @bodiless/richtext
+
+
+
+
+
+## [0.0.62](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.61...v0.0.62) (2020-12-02)
+
+**Note:** Version bump only for package @bodiless/richtext
+
+
+
+
+
 ## [0.0.61](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.60...v0.0.61) (2020-11-25)
 
 **Note:** Version bump only for package @bodiless/richtext

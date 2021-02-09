@@ -12,17 +12,27 @@
  * limitations under the License.
  */
 
-import React, { ComponentType, useMemo, FC } from 'react';
-import { flowRight, pick, flow } from 'lodash';
-import type { Plugin } from 'slate-react';
-import type { SchemaProperties } from 'slate';
+import React, {
+  ComponentType,
+  useMemo,
+  FC,
+  useRef,
+} from 'react';
+import isEqual from 'react-fast-compare';
+import {
+  flowRight, pick, flow, isEmpty,
+} from 'lodash';
+import { createEditor, Editor } from 'slate';
+import type { Element } from 'slate';
+import {
+  Slate, withReact, useSlate, ReactEditor,
+} from 'slate-react';
 import { observer } from 'mobx-react-lite';
 import {
   useEditContext,
   useContextActivator,
   withNode,
   withMenuOptions,
-  withoutProps,
   ifToggledOn,
   useUUID,
 } from '@bodiless/core';
@@ -41,7 +51,10 @@ import {
   extendDesign,
   Design,
   DesignableComponents,
+  withDisplayName,
+  Fragment,
 } from '@bodiless/fclasses';
+import { withHistory } from 'slate-history';
 import {
   withSlateEditor,
   Content,
@@ -53,12 +66,12 @@ import {
   getPlugins,
   getHoverButtons,
   getGlobalButtons,
-  getSchema,
   getSelectorButtons,
+  getInlineButtons,
 } from './RichTextItemGetters';
+import useKeyBoardShortcuts from './useKeyBoardShortcuts';
 import TextSelectorButton from './components/TextSelectorButton';
 import { uiContext, getUI, UI } from './RichTextContext';
-import defaultValue from './default-value';
 import {
   withBoldMeta,
   withSuperScriptMeta,
@@ -75,7 +88,15 @@ import {
 } from './meta';
 import withDefaults from './withDefaults';
 import { withPreview } from './RichTextPreview';
-import type { RichTextProps } from './Type';
+import withDataMigrator from './withDataMigrator';
+import withHtmlPaste from './withHtmlPaste';
+import type {
+  RichTextProps,
+  RichTextComponents,
+  EditorContext,
+  Plugin,
+} from './Type';
+import useInitialValue from './useInitialValue';
 
 type WithSlateSchemaTypeProps = {
   schema: object,
@@ -125,11 +146,12 @@ const withSlateActivator = <P extends object>(Component: ComponentType<P>) => (p
     ...useContextActivator(),
   };
 
-  const slateContext = {
-    editorProps,
-    editorRef: previousSlateContext!.editorRef,
-    value: previousSlateContext!.value,
-    editor: previousSlateContext!.editor,
+  const slateContext: EditorContext = {
+    ...previousSlateContext!,
+    editorProps: {
+      ...previousSlateContext?.editorProps,
+      ...editorProps,
+    },
   };
   return (
     <SlateEditorContext.Provider value={slateContext}>
@@ -143,8 +165,7 @@ type UseMenuOptionsProps = {
 };
 // This is a call back that goes to withMenuOptions so that we can add button to the global menu
 const useMenuOptions = (props: UseMenuOptionsProps) => {
-  const slateContext = useSlateContext();
-  const { editor } = slateContext!;
+  const editor = useSlate();
   return useMemo(
     () => (props.globalButtons ? props.globalButtons(editor) : []),
     [props.globalButtons],
@@ -158,20 +179,17 @@ const ifMenuOptions = ifToggledOn((props: UseMenuOptionsProps) => {
 
 type RichTextProviderProps = {
   plugins: Plugin[],
-  schema?: SchemaProperties,
 } & UseMenuOptionsProps;
 type RichTextProviderType = ComponentType<RichTextProviderProps>;
 const RichTextProvider = flowRight(
-  withNode,
-  withNodeStateHandlers,
+  withDisplayName('RichTextProvider'),
   withSlateEditor,
   ifMenuOptions(
     withMenuOptions({ useMenuOptions, name: 'editor' }),
     withSlateActivator,
   ),
-  withoutProps(['className', 'plugins', 'globalButtons', 'readOnly']),
   withSlateSchema,
-)(React.Fragment) as RichTextProviderType;
+)(Fragment) as RichTextProviderType;
 
 /**
  * @private
@@ -185,52 +203,87 @@ const EditOnlyHoverMenu$: FC<Pick<Required<UI>, 'HoverMenu'>> = ({ HoverMenu, ch
 };
 const EditOnlyHoverMenu = observer(EditOnlyHoverMenu$);
 
-const BasicRichText = <P extends object, D extends object>(props: P & RichTextProps<D>) => {
+const withEditorSettings = (components: RichTextComponents) => (editor: Editor) => {
+  const { isInline } = editor;
+  const inlineTypes = getInlineButtons(components)
+    .map(Component => Component.id);
+  // eslint-disable-next-line no-param-reassign
+  editor.isInline = (
+    element: Element,
+  ) => (inlineTypes.includes(element.type as string) ? true : isInline(element));
+  return editor;
+};
+
+const BasicRichText = React.memo(<P extends object>(props: P & RichTextProps) => {
   const {
     initialValue,
     components,
     ui,
+    onChange,
+    value,
     ...rest
   } = props;
+
   const {
-    finalComponents, plugins, schema, globalButtons,
+    finalComponents, plugins, globalButtons,
   } = useMemo(() => {
     const finalComponents$ = withDefaults(components);
     return {
       finalComponents: finalComponents$,
       plugins: getPlugins(finalComponents$),
-      schema: getSchema(finalComponents$),
       globalButtons: getGlobalButtons(finalComponents$),
     };
   }, [components]);
   const { HoverMenu } = getUI(ui);
   const finalUI = getUI(ui);
   const selectorButtons = getSelectorButtons(finalComponents).map(C => <C key={useUUID()} />);
-  return (
-    <uiContext.Provider value={finalUI}>
-      <RichTextProvider
-        {...rest}
-        initialValue={initialValue || { ...defaultValue }}
-        plugins={plugins}
-        globalButtons={globalButtons}
-        schema={schema}
-      >
-        <EditOnlyHoverMenu HoverMenu={HoverMenu}>
-          {
-            getHoverButtons(finalComponents).map(C => <C key={useUUID()} />)
-          }
-          {
-            selectorButtons.length > 0
-            && (
-              <TextSelectorButton>{ selectorButtons }</TextSelectorButton>
-            )
-          }
-        </EditOnlyHoverMenu>
-        <Content />
-      </RichTextProvider>
-    </uiContext.Provider>
+
+  const editor = useRef<ReactEditor>(
+    flow(
+      withReact,
+      withHistory,
+      withEditorSettings(finalComponents),
+      withHtmlPaste(finalComponents),
+    )(createEditor()) as ReactEditor,
   );
-};
+
+  const initialValue$ = useInitialValue(initialValue);
+  const value$ = value !== undefined && !isEmpty(value) ? value : initialValue$;
+
+  return (
+    <Slate editor={editor.current} value={value$} onChange={onChange}>
+      <uiContext.Provider value={finalUI}>
+        <RichTextProvider
+          {...rest}
+          initialValue={initialValue$}
+          plugins={plugins}
+          globalButtons={globalButtons}
+        >
+          <EditOnlyHoverMenu HoverMenu={HoverMenu}>
+            {
+              getHoverButtons(finalComponents).map(C => <C key={useUUID()} />)
+            }
+            {
+              selectorButtons.length > 0
+              && (
+                <TextSelectorButton>{selectorButtons}</TextSelectorButton>
+              )
+            }
+          </EditOnlyHoverMenu>
+          <Content
+            {...useKeyBoardShortcuts({
+              editor: editor.current,
+              components: finalComponents,
+            })}
+            onBlur={() => editor.current.onChange()}
+            {...rest}
+          />
+        </RichTextProvider>
+      </uiContext.Provider>
+    </Slate>
+  );
+}, (prevProps, nextProps) => isEqual(prevProps.value, nextProps.value));
+
 const defaults = {
   SuperScript: Sup,
   Bold: B,
@@ -280,6 +333,9 @@ const apply = (design: Design<DesignableComponents>) => {
 };
 
 const RichText = flow(
+  withDataMigrator,
+  withNodeStateHandlers,
+  withNode,
   withPreview,
   designable(apply, 'RichText'),
 )(BasicRichText);

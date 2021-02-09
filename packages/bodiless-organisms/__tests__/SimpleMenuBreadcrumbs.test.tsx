@@ -14,9 +14,13 @@
 
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { mount } from 'enzyme';
+import { mount, ReactWrapper } from 'enzyme';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import cheerio from 'cheerio';
 import { withDefaultContent, withSidecarNodes, ifToggledOn } from '@bodiless/core';
-import { asBodilessLink, asEditable, withBreadcrumbStartingTrail } from '@bodiless/components';
+import {
+  asBodilessLink, asEditable, withBreadcrumbStartingTrail, Breadcrumbs, withBreadcrumbStore,
+} from '@bodiless/components';
 import {
   replaceWith,
   withDesign,
@@ -27,7 +31,7 @@ import type { BreadcrumbStoreItemsReducer } from '@bodiless/components';
 
 import {
   asMenuBase,
-  asBreadcrumbsClean,
+  asBreadcrumbSource,
 } from '../src/components/Menu/SimpleMenu';
 
 const { DefaultContentNode } = require('@bodiless/core');
@@ -41,23 +45,45 @@ const setPagePath = (pagePath: string) => {
 
 const createBreadcrumbComponent = ({
   content = {},
-}) => flowRight(
-  withDefaultContent(content),
-  withDesign({
-    // @ts-ignore
-    BreadcrumbLink: replaceWith(withSidecarNodes(
-      asBodilessLink(),
-    ))('a'),
-    BreadcrumbTitle: replaceWith(
-      asEditable()(React.Fragment),
-    ),
-  }),
-  asBreadcrumbsClean({
-    linkNodeKey: 'title$link',
-    titleNodeKey: 'title$text',
-  }),
-  asMenuBase('testMenu'),
-)('ul');
+}) => {
+  const Source = flowRight(
+    asBreadcrumbSource({
+      linkNodeKey: 'title$link',
+      titleNodeKey: 'title$text',
+    }),
+    asMenuBase('testMenu'),
+  )('ul');
+
+  const BreadcrumbComponent = (props: any) => (
+    <>
+      <Source />
+      <Breadcrumbs {...props} />
+    </>
+  );
+
+  return flowRight(
+    withDefaultContent(content),
+    withDesign({
+      // @ts-ignore
+      BreadcrumbLink: replaceWith(withSidecarNodes(
+        asBodilessLink(),
+      ))('a'),
+      BreadcrumbTitle: replaceWith(
+        asEditable()(React.Fragment),
+      ),
+    }),
+    withBreadcrumbStore,
+  )(BreadcrumbComponent);
+};
+
+// Helper to get the html of only the breadcrumbs.
+const breadcrumbHtml = (wrapper: ReactWrapper) => {
+  // We use cheerio directly here bc using enzyme's 'render'
+  // method generates warnings about not using layout
+  // effects on the server.
+  const $ = cheerio.load(wrapper.html());
+  return $.html($('body>ul').last());
+};
 
 const generate2LevelMenuContent = () => ({
   testMenu: {
@@ -152,7 +178,7 @@ describe('asBreadcrumbsClean', () => {
       },
     });
     const wrapper = mount(<Breadcrumb />);
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(breadcrumbHtml(wrapper)).toMatchSnapshot();
   });
   it('creates breadcrumbs for basic 2-level menu', () => {
     setPagePath('/products/productA');
@@ -160,7 +186,7 @@ describe('asBreadcrumbsClean', () => {
       content: generate2LevelMenuContent(),
     });
     const wrapper = mount(<Breadcrumb />);
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(breadcrumbHtml(wrapper)).toMatchSnapshot();
   });
   it(`when starting trail enabled and
       when menu trail starts with frontpage
@@ -198,7 +224,7 @@ describe('asBreadcrumbsClean', () => {
       withBreadcrumbStartingTrail,
     )(Breadcrumb);
     const wrapper = mount(<CustomBreadcrumb />);
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(breadcrumbHtml(wrapper)).toMatchSnapshot();
   });
   it(`allows override default items reducer
       so that do not render the first item from menu trail`,
@@ -211,7 +237,7 @@ describe('asBreadcrumbsClean', () => {
       .filter(item => !item.isFirst())
       .map(item => item.uuid);
     const wrapper = mount(<Breadcrumb itemsReducer={customReducer} />);
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(breadcrumbHtml(wrapper)).toMatchSnapshot();
   });
   it('renders last menu trail item as link when current page item does not exist in store', () => {
     setPagePath('/products/nonExistingProduct');
@@ -219,7 +245,7 @@ describe('asBreadcrumbsClean', () => {
       content: generate2LevelMenuContent(),
     });
     const wrapper = mount(<Breadcrumb />);
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(breadcrumbHtml(wrapper)).toMatchSnapshot();
   });
   it('allows to force rendering last breadcrumb item as link', () => {
     setPagePath('/products/productA');
@@ -227,36 +253,46 @@ describe('asBreadcrumbsClean', () => {
       content: generate2LevelMenuContent(),
     });
     const wrapper = mount(<Breadcrumb renderLastItemWithoutLink={false} />);
-    expect(wrapper.html()).toMatchSnapshot();
+    expect(breadcrumbHtml(wrapper)).toMatchSnapshot();
   });
   it('allows styling current page item derived from menu', () => {
     setPagePath('/products/productA');
     const BaseBreadcrumbs = createBreadcrumbComponent({
       content: generate2LevelMenuContent(),
     });
-    const Breadcrumbs = flowRight(
+    const TestBreadcrumbs = flowRight(
       withDesign({
         BreadcrumbItem: ifToggledOn(
           ({ isCurrentPage }: any) => isCurrentPage,
         )(addProps({ className: 'font-bold' })),
       }),
     )(BaseBreadcrumbs);
-    const wrapper = mount(<Breadcrumbs />);
-    expect(wrapper.html()).toMatchSnapshot();
+    const wrapper = mount(<TestBreadcrumbs />);
+    expect(breadcrumbHtml(wrapper)).toMatchSnapshot();
   });
   it('does not apply current page styles to the item which is the last derived from the menu but not current page path', () => {
     setPagePath('/products/nonExistingProduct');
     const BaseBreadcrumbs = createBreadcrumbComponent({
       content: generate2LevelMenuContent(),
     });
-    const Breadcrumbs = flowRight(
+    const TestBreadcrumbs = flowRight(
       withDesign({
         BreadcrumbItem: ifToggledOn(
           ({ isCurrentPage }: any) => isCurrentPage,
         )(addProps({ className: 'font-bold' })),
       }),
     )(BaseBreadcrumbs);
-    const wrapper = mount(<Breadcrumbs />);
-    expect(wrapper.html()).toMatchSnapshot();
+    const wrapper = mount(<TestBreadcrumbs />);
+    expect(breadcrumbHtml(wrapper)).toMatchSnapshot();
+  });
+  it('preserves breadcrumbs on rerender', () => {
+    setPagePath('/products/productA');
+    const Breadcrumb = createBreadcrumbComponent({
+      content: generate2LevelMenuContent(),
+    });
+    const wrapper = mount(<Breadcrumb />);
+    // trigger rerender
+    wrapper.setProps({});
+    expect(breadcrumbHtml(wrapper)).toMatchSnapshot();
   });
 });

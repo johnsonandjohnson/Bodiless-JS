@@ -20,13 +20,13 @@ describe('Tout testing', function () {
   })
 
   const pagePath = '/touts/';
-  const title = 'AT - Title 1';
-  const description = 'AT - Description 1';
-  const ctaLabel = 'AT - CTA Link 1';
+  const title = 'AT - Title 1 -';
+  const description = 'AT - Description 1 -';
+  const ctaLabel = 'AT - CTA Link 1 -';
   const toutUrl = 'AT-toutUrl1';
+  const normilizedUrl = '/' + toutUrl + '/';
   const imageAltText = 'AT-1stToutAltText';
-  const editedPostfix = ' - edited';
-  const editedToutUrl = '-edited';
+  const editedPostfix = 'edited';
   const imagesFolderPath = "images";
   const imageNameOriginal = 'img_615x500.jpg';
   const imageNameUpdated = 'img_615x502.jpg';
@@ -46,24 +46,25 @@ describe('Tout testing', function () {
   const imageUpdPathRegex = new RegExp("images\/pages" + pagePath + "[a-zA-Z0-9]+\/" + imageNameUpdated, "");
 
   it('touts: 1 - filling in Title', () => {
-    cy.xpath(titleXpath)
-      .type(title)
+    cy.getEditor(titleXpath)
+      .typeInSlate(title)
+    cy.getEditor(titleXpath)
       .should('have.text', title);
   })
 
 
   it('touts: 2 - filling in Body', () => {
-    cy.xpath(descriptionXpath)
-      .click()
-      .type(description)
+    cy.getEditor(descriptionXpath)
+      .typeInSlate(description)
+    cy.getEditor(descriptionXpath)
       .should('have.text', description);
   })
 
 
   it('touts: 3 - filling in CTA text', () => {
-    cy.xpath(ctaLabelXpath)
-      .click()
-      .type(ctaLabel)
+    cy.getEditor(ctaLabelXpath)
+      .typeInSlate(ctaLabel)
+    cy.getEditor(ctaLabelXpath)
       .should('have.text', ctaLabel);
   })
 
@@ -120,10 +121,10 @@ describe('Tout testing', function () {
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'alt', imageAltText);
     cy.xpath(imageLinkXpath)
-      .should('have.attr', 'href', toutUrl);
+      .should('have.attr', 'href', normilizedUrl);
     cy.xpath(ctaButtonXpath)
       .click();
-    cy.url().should('include', toutUrl);
+    cy.url().should('eq', Cypress.config().baseUrl + normilizedUrl);
     cy.visit(pagePath);
   })
 
@@ -143,29 +144,30 @@ describe('Tout testing', function () {
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'alt', imageAltText);
     cy.xpath(imageLinkXpath)
-      .should('have.attr', 'href', toutUrl);
+      .should('have.attr', 'href', normilizedUrl);
   })
 
 
   it('touts: 9 - editing Title', () => {
-    cy.xpath(titleXpath)
-      .type(editedPostfix)
+    cy.getEditor(titleXpath)
+      .typeInSlate(editedPostfix)
+    cy.getEditor(titleXpath)
       .should('have.text', title + editedPostfix);
   })
 
 
   it('touts: 10 - editing Description', () => {
-    cy.xpath(descriptionXpath)
-      .click()
-      .type(editedPostfix)
+    cy.getEditor(descriptionXpath)
+      .typeInSlate(editedPostfix)
+    cy.getEditor(descriptionXpath)
       .should('have.text', description + editedPostfix);
   })
 
 
   it('touts: 11 - editing CTA label', () => {
-    cy.xpath(ctaLabelXpath)
-      .click()
-      .type(editedPostfix)
+    cy.getEditor(ctaLabelXpath)
+      .typeInSlate(editedPostfix)
+    cy.getEditor(ctaLabelXpath)
       .should('have.text', ctaLabel + editedPostfix);
   })
 
@@ -174,7 +176,7 @@ describe('Tout testing', function () {
     cy.xpath(linkIconCTAXpath)
       .click();
     cy.xpath(urlFieldCTAXpath)
-      .type(editedToutUrl);
+      .type(editedPostfix);
     cy.xpath(checkmarkIconLinkCTAFormXpath)
       .click();
   })
@@ -213,10 +215,10 @@ describe('Tout testing', function () {
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'alt', imageAltText + editedPostfix);
     cy.xpath(ctaButtonXpath)
-      .should('have.attr', 'href', toutUrl + editedToutUrl);
+      .should('have.attr', 'href', normilizedUrl + editedPostfix + '/');
     cy.xpath(imagePlaceholderXpath)
       .click();
-    cy.url().should('include', toutUrl + editedToutUrl);
+    cy.url().should('eq', Cypress.config().baseUrl + normilizedUrl + editedPostfix + '/');
     cy.visit(pagePath);
   })
 
@@ -236,6 +238,6 @@ describe('Tout testing', function () {
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'alt', imageAltText + editedPostfix);
     cy.xpath(imageLinkXpath)
-      .should('have.attr', 'href', toutUrl + editedToutUrl);
+      .should('have.attr', 'href', normilizedUrl + editedPostfix + '/');
   })
 })

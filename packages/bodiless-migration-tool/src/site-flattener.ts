@@ -132,6 +132,9 @@ export class SiteFlattener {
     };
     const { page404Params, exports } = this.params;
     const responseProcessor = new ResponseProcessor({ websiteUrl: this.params.websiteUrl });
+    const downloader = new Downloader(
+      this.params.websiteUrl, this.app.getStaticDir(), this.params.reservedPaths,
+    );
     const scraper = new Scraper(scraperParams);
     scraper.on('pageReceived', async scrapedPage => {
       try {
@@ -154,6 +157,7 @@ export class SiteFlattener {
             pagePath: pageUrl,
             document: (new HtmlParser(scrapedPage$2.processedHtml)).$,
             api: migrationApi,
+            downloader,
           });
         }
       } catch (error) {
@@ -164,15 +168,9 @@ export class SiteFlattener {
       debug(error.message);
     });
     scraper.on('fileReceived', async fileUrl => {
-      const downloader = new Downloader(
-        this.params.websiteUrl, this.app.getStaticDir(), this.params.reservedPaths,
-      );
       await downloader.downloadFiles([fileUrl]);
     });
     scraper.on('requestStarted', async fileUrl => {
-      const downloader = new Downloader(
-        this.params.websiteUrl, this.app.getStaticDir(), this.params.reservedPaths,
-      );
       await downloader.downloadFiles([fileUrl]);
     });
     scraper.on('responseReceived', async response => {

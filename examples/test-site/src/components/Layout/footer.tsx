@@ -17,7 +17,6 @@ import { flow } from 'lodash';
 import {
   designable,
   DesignableComponentsProps,
-  DesignableProps,
   Div,
   P,
   Span,
@@ -49,7 +48,7 @@ const footerComponents:FooterComponents = {
   SiteCopyrightEditable: Span,
 };
 
-const FooterClean: FC<DesignableProps> = ({ components }) => {
+const FooterClean: FC<DesignableComponentsProps<FooterComponents>> = ({ components }) => {
   const {
     Wrapper,
     Container,
@@ -81,8 +80,8 @@ const FooterClean: FC<DesignableProps> = ({ components }) => {
 const asFooterHeader = flow(
   designable(footerComponents, 'Footer'),
   withDesign({
-    SiteTitleCopyrightEditable: asEditable({ nodeKey: 'sitetitle', nodeCollection: 'site' }, 'Insert Site Title', 'site'),
-    SiteCopyrightEditable: asEditable({ nodeKey: 'copyright', nodeCollection: 'site' }, 'Insert Copyright', 'site'),
+    SiteTitleCopyrightEditable: asEditable({ nodeKey: 'sitetitle', nodeCollection: 'site' }, 'Insert Site Title'),
+    SiteCopyrightEditable: asEditable({ nodeKey: 'copyright', nodeCollection: 'site' }, 'Insert Copyright'),
   }),
 );
 

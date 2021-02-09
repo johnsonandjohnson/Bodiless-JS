@@ -6,6 +6,11 @@
     "composite": false,
     "allowJs": true,
     "noUnusedLocals": false,
+    "downlevelIteration": true,
+    "lib": [
+      "dom",
+      "es2019"
+    ],
     "paths": {
       "react": [
         "./node_modules/@types/react/index"

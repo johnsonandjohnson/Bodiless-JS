@@ -14,3 +14,4 @@
 
 // eslint-disable-next-line import/prefer-default-export
 export { default as createMetatagsPlugin } from './metatags';
+export { default as createImagetagsPlugin } from './imagetags';

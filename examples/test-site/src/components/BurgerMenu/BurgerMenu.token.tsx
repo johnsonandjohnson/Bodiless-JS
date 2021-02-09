@@ -12,13 +12,20 @@
  * limitations under the License.
  */
 
+import React from 'react';
 import { flow } from 'lodash';
-import { withDesign, addProps } from '@bodiless/fclasses';
+import {
+  withDesign, addProps, addClasses, I,
+} from '@bodiless/fclasses';
 
 import { asDefaultLogoStyle } from '../Layout/token';
 import {
-  asPrimaryColorBackground, withPadding1, asTealBackground, asMobileOnly,
+  asPrimaryColorBackground, withPadding1, asTealBackground,
 } from '../Elements.token';
+
+const Icon = flow(
+  addClasses('material-icons cursor-pointer align-middle text-white'),
+)(I);
 
 /**
  * Burger Menu Styles
@@ -28,7 +35,7 @@ const withBurgerMenuStyles = withDesign({
   Wrapper: flow(
     withPadding1,
     asTealBackground,
-    asMobileOnly,
+    addClasses('relative'),
   ),
   Header: flow(
     asDefaultLogoStyle,
@@ -36,7 +43,13 @@ const withBurgerMenuStyles = withDesign({
   ),
   Menu: flow(
     asPrimaryColorBackground,
-    addProps({ noOverlay: true, width: '100%', right: true }),
+    addClasses('inset-0'),
+    addProps({
+      noOverlay: true,
+      width: '100%',
+      customBurgerIcon: <Icon>menu</Icon>,
+      customCrossIcon: <Icon>close</Icon>,
+    }),
   ),
 });
 

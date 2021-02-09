@@ -25,7 +25,7 @@ import withDefaults from './withDefaults';
 import PluginButton from './components/PluginButton';
 import type { RichTextProps } from './Type';
 
-const BaseRichTextPreview = <P extends object, D extends object>(props: P & RichTextProps<D>) => {
+const BaseRichTextPreview = <P extends object>(props: P & RichTextProps) => {
   const { components, ui } = props;
   const finalComponents = withDefaults(components);
   const { PreviewWrapper } = getUI(ui);
