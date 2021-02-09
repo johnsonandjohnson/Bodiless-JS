@@ -26,7 +26,7 @@ type RowProps = StylableProps & {
   section: Section,
   rowIndex: number;
 };
-type CellProps = StylableProps & RowProps & { 
+type CellProps = StylableProps & RowProps & {
   column:string,
   columnIndex:number
 };

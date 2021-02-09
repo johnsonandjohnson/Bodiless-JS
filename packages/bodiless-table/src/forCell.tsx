@@ -30,6 +30,7 @@ type CellTransFormProps = {
   func:IfCellIs,
 };
 class CellTransform extends React.Component<CellTransFormProps> {
+  // eslint-disable-next-line react/static-property-placement
   static contextType = TableManagerContext;
 
   fixedProps: CellProps;
@@ -38,7 +39,13 @@ class CellTransform extends React.Component<CellTransFormProps> {
 
   constructor(props:CellTransFormProps) {
     super(props);
-    const { hoc, func, Component, passed, ...rest } = props;
+    const {
+      hoc,
+      func,
+      Component,
+      passed,
+      ...rest
+    } = props;
     const data = this.context;
     this.fixedProps = { ...passed, ...rest };
     this.Component = func({ ...passed, data }) ? hoc(Component) : Component;

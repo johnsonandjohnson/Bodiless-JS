@@ -65,7 +65,8 @@ const withHeadRows = <A extends Object> (...rows:string[]) => (
 //     withRows(...body.map((t, i) => i.toString())),
 //     withHeadRows(...head.map((t, i) => i.toString())),
 //   ];
-//   return flow(...tableHocs, ...[...headHocs, ...bodyHocs].reduce((a, row) => [...a, ...row], []));
+//   return flow(...tableHocs, ...[...headHocs, ...bodyHocs]
+//     .reduce((a, row) => [...a, ...row], []));
 // };
 
 export default asBodilessTable()(CleanTable);
