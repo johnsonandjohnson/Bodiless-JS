@@ -13,10 +13,10 @@
  */
 
 import {
-  ifReadOnly,
   TMenuOption,
   withContextActivator,
   withData,
+  withLocalContextMenu,
   withMenuOptions,
   withNode,
   withNodeDataHandlers,
@@ -254,9 +254,7 @@ const useMenuOptionsTableOverview = () => {
 type NodeKey = string|Partial<WithNodeProps>;
 const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => flow(
   withData,
-  ifReadOnly(
-    withoutProps(['setComponentData']),
-  ),
+  withoutProps(['setComponentData']),
   withTableManager,
   withNodeDataHandlers(defaultData || {
     columns: ['1', '2', '3'],
@@ -276,9 +274,10 @@ const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => flow
       withNodeKey((p:RowProps) => p.row),
     ),
     Cell: flow(
+      withLocalContextMenu,
       withContextActivator('onClick'),
-      withNode,
       withMenuOptions({ useMenuOptions: useMenuOptionsColumns, name: 'TableColumn' }),
+      withNode,
       withNodeKey((p:CellProps) => p.column),
     ),
   }),
