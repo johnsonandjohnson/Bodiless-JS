@@ -31,6 +31,7 @@
     "@bodiless/richtext-ui": "^0.0.68",
     "@bodiless/search": "^0.0.68",
     "@bodiless/ui": "^0.0.68",
+    "@bodiless/table": "^0.0.68",
     "docsify-cli": "^4.3.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
