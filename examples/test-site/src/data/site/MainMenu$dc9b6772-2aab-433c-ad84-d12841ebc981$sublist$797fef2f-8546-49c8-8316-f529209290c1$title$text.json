@@ -1,25 +1,11 @@
-{
-  "document": {
-    "object": "document",
+[
+  {
     "data": {},
-    "nodes": [
+    "type": "paragraph",
+    "children": [
       {
-        "object": "block",
-        "type": "paragraph",
-        "data": {},
-        "nodes": [
-          {
-            "object": "text",
-            "leaves": [
-              {
-                "object": "leaf",
-                "text": "Breadcrumb",
-                "marks": []
-              }
-            ]
-          }
-        ]
+        "text": "Breadcrumb"
       }
     ]
   }
-}
+]

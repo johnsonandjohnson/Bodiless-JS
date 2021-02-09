@@ -31,6 +31,7 @@ import {
   EditorSimple,
 } from '../Editors';
 import { withType } from './Categories';
+import { StandardTable, asTableFirstLeft, asTableFirstExtraWidth } from '../Table';
 
 const richTextVariation = {
   EditorSimple: flow(
@@ -53,6 +54,20 @@ const richTextVariation = {
     withType('Rich Text')(),
     withTitle('Full Rich Text'),
     withDesc('Adds a block of text for more complex HTML.\n'),
+  ),
+  Table: flow(
+    replaceWith(StandardTable),
+    withType('Rich Text')(),
+    withTitle('Table'),
+    withDesc('A Table with Rich Text Cells.\n'),
+  ),
+  TableFirstHeader: flow(
+    replaceWith(StandardTable),
+    asTableFirstLeft,
+    asTableFirstExtraWidth,
+    withType('Rich Text')(),
+    withTitle('Table Header First Column'),
+    withDesc('A Table with Rich Text Cells. Whhere the first Column is spcial.\n'),
   ),
 };
 

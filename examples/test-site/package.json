@@ -31,6 +31,7 @@
     "@bodiless/richtext-ui": "^0.0.70",
     "@bodiless/search": "^0.0.70",
     "@bodiless/ui": "^0.0.70",
+    "@bodiless/table": "^0.0.70",
     "autoprefixer": "^10.2.4",
     "docsify-cli": "^4.3.0",
     "dotenv": "^8.2.0",

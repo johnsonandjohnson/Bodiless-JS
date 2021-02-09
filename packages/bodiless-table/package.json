@@ -1,0 +1,41 @@
+{
+  "name": "@bodiless/table",
+  "version": "0.0.68",
+  "description": "Provide a Bodiless table component and HOC to make it editable",
+  "author": "Erik Summerfield <esummer3@its.jnj.com>",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "/lib",
+    "/bodiless.docs.json",
+    "/doc"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build:watch": "npm run build -- --watch",
+    "build:api-doc": "typedoc --out doc/api --mode file",
+    "lint": "tslint ./src/**/*.ts?x",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
+  },
+  "dependencies": {
+    "@bodiless/fclasses": "^0.0.68",
+    "@bodiless/core": "^0.0.68",
+    "lodash": "^4.17.19",
+    "uuid": "^3.3.2"
+  },
+  "peerDependencies": {
+    "react": "^16.8.4"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.158",
+    "@types/uuid": "^3.4.4"
+  }
+}
