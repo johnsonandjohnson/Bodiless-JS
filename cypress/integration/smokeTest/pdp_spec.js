@@ -31,10 +31,10 @@ describe('PDP (Product Details Page) smoke tests', function () {
   const imagesFolderPath = "images";
   const imageName = 'img_615x500.jpg';
   const addPageIconXpath = '//*[@aria-label="Page"]'; 
-  const fieldAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//input[@id="new-page-path"]';
+  const fieldAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//input[@name="new-page-path"]';
   const checkmarkIconAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Submit"]';
   const newPageLinkXpath = '//*[@id="new-page-link"]';
-  const titleXpath = '//*[@data-product-element="title"]';
+  const titleXpath = '//*[@data-product-element="title"]//*[@data-slate-editor="true"]';
   const accordionOverviewBodyXpath = '//*[@data-accordion-element="accordion"][@aria-label="Overview"]//*[@data-accordion-element="accordion-body"]//*[@data-slate-editor="true"]';
   const accordionDirectionsExpandXpath = '//*[@data-accordion-element="accordion"][@aria-label="Directions"]//*[@data-accordion-icon="expand"]';
   const accordionDirectionsBodyExpandedXpath = '//*[@data-accordion-element="accordion"][@aria-label="Directions"]//*[@data-accordion-element="accordion-body"]';
@@ -63,15 +63,17 @@ describe('PDP (Product Details Page) smoke tests', function () {
 
 
   it('PDP: 2 - filling in Title', () => {
-    cy.xpath(titleXpath)
-      .type(title)
+    cy.getEditor(titleXpath)
+      .typeInSlate(title)
+    cy.getEditor(titleXpath)
       .should('have.text', title);
   })
 
 
   it('PDP: 3 - filling in Accordion item', () => {
-    cy.xpath(accordionOverviewBodyXpath)
-      .type(accordionBody)
+    cy.getEditor(accordionOverviewBodyXpath)
+      .typeInSlate(accordionBody)
+    cy.getEditor(accordionOverviewBodyXpath)
       .should('have.text', accordionBody);
     cy.xpath(accordionDirectionsExpandXpath)
       .click({ force: true });

@@ -12,32 +12,27 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
-import {
-  Value,
-  Editor,
-  SchemaProperties,
-} from 'slate';
-
+import React, { useRef, ComponentType } from 'react';
+import { Editor } from 'slate';
+import type { Range } from 'slate';
 import {
   NodeProvider, DefaultContentNode, withoutProps, useNode,
 } from '@bodiless/core';
-import { RenderNodeProps } from 'slate-react';
+import { useSlate } from 'slate-react';
 import { flow } from 'lodash';
 import {
   createBlockButton,
   createInlineButton,
   createMarkButton,
-  createNodeRenderPlugin,
-  createMarkRenderPlugin,
-  createKeyboardPlugin,
-  blockUtils,
+  createElementRenderPlugin,
+  createLeafRenderPlugin,
+  hasBlock,
   hasInline,
   hasMark,
+  insertBlock,
+  toggleBlock,
   toggleInline,
   toggleMark,
-  createToggleMark,
-  createToggleInline,
   withToggle,
   updateInline,
 } from './plugin-factory';
@@ -45,37 +40,41 @@ import {
   RichTextItemType,
   RichTextComponents,
   RichTextComponent,
+  RenderElementProps,
 } from './Type';
 import { useUI } from './RichTextContext';
 
-const addAttributes = <P extends object> (Component:ComponentType<P>) => (
-  (props:P & RenderNodeProps) => {
-    const { attributes } = props;
-    return <Component {...props} {...attributes} />;
-  }
-);
-const SlateComponentProvider = (update:Function) => (
-  <P extends object, D extends object>(Component:ComponentType<P>) => (
-    (props:P & RenderNodeProps) => {
+const SlateComponentProvider = (update: Function, type: string) => (
+  <P extends object, D extends object>(Component:ComponentType<P & RenderElementProps>) => (
+    (props: P & RenderElementProps) => {
+      const { element } = props;
       const { node: bodilessNode } = useNode();
-      const { editor, node } = props;
+      const editor = useSlate();
+      const { selection } = editor;
+      // when the editor looses focus and selection becomes null
+      // see https://github.com/ianstormtaylor/slate/issues/3412
+      const lastSelection = useRef<Range | null>(null);
+      if (selection !== null) lastSelection.current = selection;
       const getters = {
-        getNode: (path: string[]) => node.data.toJS()[path.join('$')],
+        getNode: (path: string[]) => (element.data as any)[path.join('$')],
         getKeys: () => ['slatenode'],
         hasError: () => bodilessNode.hasError(),
         getPagePath: () => bodilessNode.pagePath,
         getBaseResourcePath: () => bodilessNode.baseResourcePath,
       };
       const actions = {
-        // tslint: disable-next-line:no-unused-vars
-        setNode: (path: string[], componentData: any) => update({
-          node,
-          editor,
-          componentData: {
-            ...node.data.toJS(),
+        setNode: (path: string[], componentData: any) => {
+          const newData = {
+            ...element.data as any,
             [path.join('$')]: { ...componentData },
-          },
-        }),
+          };
+          return update({
+            editor,
+            type,
+            data: newData,
+            at: lastSelection.current,
+          });
+        },
         deleteNode: () => {},
       };
       const contentNode = new DefaultContentNode(actions, getters, 'slatenode');
@@ -104,15 +103,15 @@ const getRenderPlugin = <P extends object> (Component: RenderPluginComponent) =>
   } = Component;
   const { creates, WrappedComponent } = {
     [RichTextItemType.block]: {
-      creates: createNodeRenderPlugin,
-      WrappedComponent: SlateComponentProvider(blockUtils.updateBlock)(Component),
+      creates: createElementRenderPlugin,
+      WrappedComponent: Component,
     },
     [RichTextItemType.inline]: {
-      creates: createNodeRenderPlugin,
-      WrappedComponent: SlateComponentProvider(updateInline)(Component),
+      creates: createElementRenderPlugin,
+      WrappedComponent: SlateComponentProvider(updateInline, id)(Component),
     },
     [RichTextItemType.mark]: {
-      creates: createMarkRenderPlugin,
+      creates: createLeafRenderPlugin,
       WrappedComponent: Component,
     },
   }[type];
@@ -121,33 +120,13 @@ const getRenderPlugin = <P extends object> (Component: RenderPluginComponent) =>
     withoutProps(['isFocused', 'isSelected']),
     // Remove Children if Void Component.
     withoutProps(isVoid ? ['children'] : []),
-    addAttributes,
-  )(WrappedComponent as ComponentType<P & RenderNodeProps>);
+  )(WrappedComponent as ComponentType<P>);
   return creates({
     Component: CleanComponent,
     type: id,
   });
 };
-const getShortcutPlugin = <P extends object> (Component: RichTextComponent) => {
-  const {
-    type,
-    id,
-    keyboardKey,
-  } = Component;
-  if (!keyboardKey) {
-    throw Error('keyboardKey need to get ShortcutPlugin');
-  }
-  const toggle = {
-    [RichTextItemType.block]: blockUtils.createToggleBlock(id),
-    [RichTextItemType.mark]: createToggleMark(id),
-    [RichTextItemType.inline]: createToggleInline(id),
 
-  }[type];
-  return createKeyboardPlugin({
-    toggle,
-    key: keyboardKey,
-  });
-};
 /*
   getPlugins takes an array of data items and pass them though to getPlugin
 */
@@ -155,10 +134,6 @@ const getPlugins = (components: RichTextComponents) => [
   ...Object.values(components).map(Component => (
     getRenderPlugin(Component)
   )),
-  ...Object.values(components)
-    // eslint-disable-next-line no-prototype-builtins
-    .filter(Component => Component.hasOwnProperty('keyboardKey'))
-    .map(Component => getShortcutPlugin(Component)),
 ];
 /*
   get HoverButton takes a Item and convert it
@@ -192,7 +167,7 @@ const getGlobalButton = (Component: RichTextComponentWithGlobalButton) => (edito
   icon: Component.globalButton.icon,
   name: Component.id,
   global: true,
-  isActive: () => blockUtils.hasBlock(editor.value, Component.id),
+  isActive: () => hasBlock(Component.id, editor),
   handler: () => {
     const options = {
       editor,
@@ -200,33 +175,14 @@ const getGlobalButton = (Component: RichTextComponentWithGlobalButton) => (edito
       value: editor.value,
     };
     if (Component.isAtomicBlock) {
-      blockUtils.insertBlock(options);
+      insertBlock(options);
     } else {
-      blockUtils.toggleBlock(options);
+      toggleBlock(options);
     }
   },
 });
 
-const getSchema = <D extends object>(components: RichTextComponents) => (
-  Object.values(components).filter(Component => Component.isVoid)
-    .reduce(
-      (previous:SchemaProperties, Component) => {
-        const next = { ...previous };
-        const type = Component.type === RichTextItemType.block ? 'blocks' : 'inlines';
-        if (!(type in next)) {
-          next[type] = {};
-        }
-        if (!(Component.id in next[type]!)) {
-          next[type]![Component.id] = {};
-        }
-        next[type]![Component.id].isVoid = true;
-        return next;
-      },
-      {},
-    )
-);
 type getSelectorButtonToggleType = {
-  value: Value,
   editor: Editor,
   name: string,
 };
@@ -240,14 +196,14 @@ type getSelectorButtonToggleMarkType = {
 const getSelectorButton = <P extends object> (Component: RichTextComponent) => (props:P) => {
   const { toggleFuc, has } = {
     [RichTextItemType.block]: {
-      toggleFuc: ({ value, editor, name }:getSelectorButtonToggleType) => (
-        blockUtils.toggleBlock({ value, editor, blockType: name })
+      toggleFuc: ({ editor, name }: getSelectorButtonToggleType) => (
+        toggleBlock({ editor, blockType: name })
       ),
-      has: blockUtils.hasBlock,
+      has: hasBlock,
     },
     [RichTextItemType.inline]: {
-      toggleFuc: ({ value, editor, name }:getSelectorButtonToggleType) => (
-        toggleInline({ value, editor, inlineType: name })
+      toggleFuc: ({ editor, name }: getSelectorButtonToggleType) => (
+        toggleInline({ editor, inlineType: name })
       ),
       has: hasInline,
     },
@@ -259,15 +215,21 @@ const getSelectorButton = <P extends object> (Component: RichTextComponent) => (
     },
   }[Component.type];
   const { ClickableWrapper } = useUI();
-  const Button:ComponentType = withToggle({
-    toggle: ({ value, editor }) => {
-      toggleFuc({ value, editor, name: Component.id });
-    },
-    isActive: value => has(value, Component.id),
-    icon: 'none',
-  })(ClickableWrapper);
+  const Button = flow(
+    withToggle({
+      toggle: ({ editor }) => {
+        toggleFuc({ editor, name: Component.id });
+      },
+      isActive: (editor) => has(Component.id, editor),
+      icon: 'none',
+    }),
+    withoutProps(['componentName']),
+  )(ClickableWrapper);
   return <Button><Component {...props}>{ Component.id }</Component></Button>;
 };
+
+const getInlineButtons = (components: RichTextComponents) => Object.values(components)
+  .filter(Component => Component.type === RichTextItemType.inline);
 
 /*
   getSelectorButtons takes an array of RichTextitems and maps that to a array of buttons
@@ -294,10 +256,22 @@ const getGlobalButtons = (components: RichTextComponents) => {
   );
 };
 
+const getDeserializers = (
+  components: RichTextComponents,
+) => Object.keys(components).reduce((prev: object, key: string) => {
+  const Component = components[key];
+  return {
+    ...prev,
+    // eslint-disable-next-line no-prototype-builtins
+    ...(Component.hasOwnProperty('htmlDeserializer') ? { [key]: Component.htmlDeserializer } : {}),
+  };
+}, {});
+
 export {
   getPlugins,
   getSelectorButtons,
   getHoverButtons,
   getGlobalButtons,
-  getSchema,
+  getInlineButtons,
+  getDeserializers,
 };

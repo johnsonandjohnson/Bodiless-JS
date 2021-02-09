@@ -32,7 +32,7 @@ exports.onPreRenderHTML = (
   const ssiEntities = getSSIEntities(pluginOptions.ssiConfPath);
   const SSIComponents = Object.keys(ssiEntities).reduce((accumulator, ssiEntityKey) => {
     if (ssiEntities[ssiEntityKey].pragma) {
-      const SSIComponent = React.createElement(`ssi-element-${ssiEntityKey}`);
+      const SSIComponent = React.createElement(`ssi-element-${ssiEntityKey}`, { key: ssiEntityKey });
       accumulator.push(SSIComponent);
     }
     return accumulator;

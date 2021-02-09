@@ -12,15 +12,17 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import { flow } from 'lodash';
 import {
   Div, designable, addClasses, replaceWith,
 } from '@bodiless/fclasses';
 import { useNode, withNodeKey, ifToggledOn } from '@bodiless/core';
+import { withBreadcrumbStore } from '@bodiless/components';
 import Header from './header';
 import Footer from './footer';
 import SeoHelmet from './meta';
+import { SocialShareHelmet } from '../SocialShare';
 import { asPageContainer, asYMargin } from '../Elements.token';
 import { asSiteHeader, asSiteFooter } from './token';
 
@@ -34,16 +36,21 @@ const Container = flow(
   asYMargin,
 )(Div);
 
+const BreadcrumbProvider = withBreadcrumbStore(Fragment);
+
 const BaseLayout = ({ children, components }) => {
   const { Breadcrumbs } = components;
   return (
     <>
       <SeoHelmet />
-      <SiteHeader />
-      <Container>
-        { Breadcrumbs && <Breadcrumbs />}
-        {children}
-      </Container>
+      <BreadcrumbProvider>
+        <SocialShareHelmet />
+        <SiteHeader />
+        <Container>
+          { Breadcrumbs && <Breadcrumbs />}
+          {children}
+        </Container>
+      </BreadcrumbProvider>
       <SiteFooter />
     </>
   );

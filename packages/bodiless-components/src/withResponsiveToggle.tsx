@@ -20,7 +20,20 @@ const useResponsiveToggle = (sizes: string[] | string) => () => {
   return Array.isArray(sizes) ? sizes.includes(size) : sizes === size;
 };
 
+/**
+ * Flow toggle which applies the supplied hocs if the viewport matches a specified
+ * set of sizes.
+ *
+ * @param sizes A list of viewport sizes as defined by the `PageDimensionContext`
+ */
 const ifViewportIs = (sizes: string[] | string) => ifToggledOn(useResponsiveToggle(sizes));
+
+/**
+ * Flow toggle which applies the supplied hocs if the viewport does not match
+ * a specified set of sizes.
+ *
+ * @param sizes A list of viewport sizes as defined by the `PageDimensionContext`
+ */
 const ifViewportIsNot = (sizes: string[] | string) => ifToggledOff(useResponsiveToggle(sizes));
 
 export {

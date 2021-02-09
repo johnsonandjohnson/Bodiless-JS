@@ -14,34 +14,81 @@
 
 import { flow } from 'lodash';
 import { withDesign, addClasses } from '@bodiless/fclasses';
-import { withSimpleMenuDesign } from '@bodiless/organisms';
+import { withSimpleMenuDesign, useIsActiveTrail } from '@bodiless/organisms';
+
+import { ifToggledOn } from '@bodiless/core';
+import {
+  asBold, asLightTealBackgroundOnHover, asLightTealBackground, asTealBackground, asTextWhite,
+  asAlignLeft,
+} from '../Elements.token';
+import { asUnderline } from '../ElementDefault.token';
+
+/**
+ * Colors
+ * ===========================================
+ */
+
+const withMenuBackground = asTealBackground;
+const withActiveMenuBackground = asLightTealBackground;
+const withHoverMenuBackground = asLightTealBackgroundOnHover;
+const withMenuForeground = asTextWhite;
+
+/**
+ * Title Styles
+ * ===========================================
+ */
+
+const withTitleStyles = flow(
+  withHoverMenuBackground,
+  asAlignLeft,
+  addClasses('block w-full px-3'),
+);
+
+const withActiveTitleStyles = ifToggledOn(useIsActiveTrail)(
+  withActiveMenuBackground, asBold, asUnderline,
+);
+
+const withActiveSubTitleStyles = ifToggledOn(useIsActiveTrail)(
+  withActiveMenuBackground, asBold,
+);
 
 /**
  * Base Menu Styles
  * ===========================================
  */
+
 const withBaseMenuStyles = withDesign({
-  Wrapper: addClasses('w-full bg-teal-600 text-white'),
-  Item: addClasses('hover:bg-teal-500 leading-loose text-sm'),
-  Title: addClasses('block w-full px-3'),
+  Wrapper: flow(
+    withMenuBackground,
+    withMenuForeground,
+    addClasses('w-full'),
+  ),
+  Item: addClasses('leading-loose text-sm'),
+  Title: flow(withTitleStyles, withActiveTitleStyles),
 });
 
 /**
  * Base Sub Menu Styles
  * ===========================================
  */
+
 const withBaseSubMenuStyles = withDesign({
   Wrapper: withDesign({
-    List: addClasses('bg-teal-600 text-white z-10'),
+    List: flow(
+      withMenuBackground,
+      withMenuForeground,
+      addClasses('w-content z-10'),
+    ),
   }),
   Item: addClasses('leading-loose text-sm'),
-  Title: addClasses('hover:bg-teal-500 block w-full px-3'),
+  Title: flow(withTitleStyles, withActiveSubTitleStyles),
 });
 
 /**
  * Simple Menu Styles
  * ===========================================
  */
+
 const withSimpleMenuStyles = flow(
   withSimpleMenuDesign(withBaseSubMenuStyles),
   withBaseMenuStyles,

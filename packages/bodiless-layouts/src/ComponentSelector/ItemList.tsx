@@ -12,35 +12,90 @@
  * limitations under the License.
  */
 
-import React, { useContext, ReactNode } from 'react';
+import React, {
+  useContext,
+  ReactNode,
+  useState,
+  Fragment,
+} from 'react';
 import Tooltip from 'rc-tooltip';
-import { DefaultContentNode } from '@bodiless/core';
-import MaterialIcon from '@material/react-material-icon';
 import 'rc-tooltip/assets/bootstrap.css';
-import { uiContext } from '.';
-import { ScreenShot, titleToImageName } from './ScreenShot';
+import uiContext from './uiContext';
 import { ComponentWithMeta, ItemListProps } from './types';
+
+enum Scale {
+  Full = 1,
+  Half = 2,
+  Quarter = 4
+}
 
 const ItemList: React.FC<ItemListProps> = props => {
   const { components, onSelect } = props;
   const finalUI = useContext(uiContext);
-  const elems: ReactNode[] = components.map(
-    (Component: ComponentWithMeta<any>, index: number) => {
-      // Image is part of JS
-      // eslint-disable-next-line no-undef
-      const testerImage = new Image();
-      testerImage.src = `/images/component-previews/${titleToImageName(
-        Component.title,
-      )}`;
-      return (
-        <finalUI.ItemBox key={Component.displayName}>
-          {testerImage.width === 0 ? (
-            <ScreenShot
-              Component={Component}
-              node={DefaultContentNode.dummy(String(index), [])}
-            />
-          ) : null}
+  const [scale, setScale] = useState(Scale.Full);
+  const getRowHeight = () => {
+    if (components.length <= scale) {
+      return 'auto';
+    }
+    return `${scale * 100}%`;
+  };
+  const styles = {
+    1: {
+      transformStyle: {
+        height: getRowHeight(),
+        maxHeight: '100%',
+      },
+      boxStyle: {
+        width: '100%',
+      },
+      outerStyle: {
+      },
+    },
+    2: {
+      transformStyle: {
+        width: '200%',
+        height: getRowHeight(),
+        transform: 'scale(.5) translate(-50%, -50%)',
+      },
+      boxStyle: {
+        width: '50%',
+      },
+      outerStyle: {
+        fontSize: '200%',
+      },
+    },
+    4: {
+      transformStyle: {
+        width: '400%',
+        height: getRowHeight(),
+        transform: 'scale(.25) translate(-150%, -150%)',
+      },
+      boxStyle: {
+        width: '25%',
+      },
+      outerStyle: {
+        fontSize: '400%',
+      },
+    },
+  };
+  const { transformStyle, boxStyle, outerStyle } = styles[scale];
 
+  const maxComponents = 25;
+  const maxErrorMsg = `This result set includes items which cannot be displayed. Please 
+  reduce the result set to less than ${maxComponents} by filtering or searching.`;
+
+  const elems: ReactNode[] = components.slice(0, maxComponents).map(
+    (Component: ComponentWithMeta<any>) => (
+      <finalUI.ItemBoxWrapper style={boxStyle} key={Component.displayName}>
+        <finalUI.ItemBox key={Component.displayName}>
+          <finalUI.TitleWrapper style={outerStyle}>
+            {Component.title || Component.displayName || 'Untitled'}
+          </finalUI.TitleWrapper>
+          <div
+            className="bl-outerTransform bl-relative bl-w-full bl-bg-white"
+          >
+            <Component />
+          </div>
           <Tooltip
             placement="rightBottom"
             mouseLeaveDelay={0}
@@ -49,42 +104,63 @@ const ItemList: React.FC<ItemListProps> = props => {
             }}
             overlay={(
               <finalUI.ComponentDescriptionWrapper>
-                <h3 className="bl-text-lg bl-font-bold">{Component.title}</h3>
+                <h3>{Component.title}</h3>
                 <finalUI.ComponentDescriptionStyle>
                   <p>{Component.description}</p>
                 </finalUI.ComponentDescriptionStyle>
               </finalUI.ComponentDescriptionWrapper>
-            )}
+          )}
           >
-            <finalUI.ComponentDescriptionIcon>
+            <finalUI.ComponentDescriptionIcon style={outerStyle}>
               info
             </finalUI.ComponentDescriptionIcon>
           </Tooltip>
           <finalUI.ComponentSelectButton
             type="submit"
-            onClick={event => onSelect(event, Component.displayName)}
+            onClick={() => onSelect([Component.displayName])}
           />
-          <finalUI.ComponentPreviewStyle
-            src={`/images/component-previews/${titleToImageName(
-              Component.title,
-            )}`}
-          />
-          <finalUI.TitleWrapper>
-            {Component.title || Component.displayName || 'Untitled'}
-          </finalUI.TitleWrapper>
         </finalUI.ItemBox>
-      );
-    },
+      </finalUI.ItemBoxWrapper>
+    ),
   );
+  const MoreItems = () => (
+    <finalUI.ItemBoxWrapper style={boxStyle}>
+      <finalUI.ItemBox>
+        <finalUI.TitleWrapper>
+          {maxErrorMsg}
+        </finalUI.TitleWrapper>
+      </finalUI.ItemBox>
+    </finalUI.ItemBoxWrapper>
+  );
+  const isActive = (currentScale:Scale) => (currentScale === scale ? 'bl-bg-primary bl-text-white' : '');
   return (
     <finalUI.GridListBox>
-      <div>
-        <MaterialIcon>view_stream</MaterialIcon>
-        <MaterialIcon>view_module</MaterialIcon>
-        <MaterialIcon>view_comfy</MaterialIcon>
-      </div>
-      {elems}
+      <finalUI.ScalingHeader>
+        <finalUI.ScalingButtonFull
+          className={isActive(Scale.Full)}
+          onClick={() => setScale(Scale.Full)}
+        />
+        <finalUI.ScalingButtonHalf
+          className={isActive(Scale.Half)}
+          onClick={() => setScale(Scale.Half)}
+        />
+        <finalUI.ScalingButtonQuarter
+          className={isActive(Scale.Quarter)}
+          onClick={() => setScale(Scale.Quarter)}
+        />
+      </finalUI.ScalingHeader>
+      <finalUI.GridListBoxWrapper>
+        <finalUI.GridListBoxInner style={transformStyle} id="gridlistboxinner">
+          {elems}
+          {
+            components.length > maxComponents
+              ? <MoreItems />
+              : Fragment
+          }
+        </finalUI.GridListBoxInner>
+      </finalUI.GridListBoxWrapper>
     </finalUI.GridListBox>
   );
 };
+
 export default ItemList;

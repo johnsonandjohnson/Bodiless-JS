@@ -404,7 +404,7 @@ Let's take this step by step:
   }),
 ```
 These three HOC's provide integration to
-[the BodilessJS data flow](../Development/Architecture/Data.md). They
+[the BodilessJS data flow](../Architecture/Data). They
 ensure that the component is given a place to store its data, and
 define the "empty" value for that data. They add two props--`componentData`
 and `setComponentData`--which are used by the HOC's further down the

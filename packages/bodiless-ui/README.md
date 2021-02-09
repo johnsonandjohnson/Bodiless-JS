@@ -86,7 +86,7 @@ should make use of shared elements from this basic `bodiless-ui` package.
 
 Adds the spinner, which centers itself based on its container's dimensions.
 
-You can also override the width and height if you want a bigger or smaller spinner by adding more style rules to the exposed `.bodiless-spinner` class [here](./src/Spinner.css). 
+You can also override the width and height if you want a bigger or smaller spinner by adding more style rules to the exposed `.bodiless-spinner` class [here](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/packages/bodiless-ui/src/Spinner.css). 
 
 *Properties*
 

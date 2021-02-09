@@ -19,13 +19,14 @@ import {
   SortableResizableUI,
   SortableResizableProps,
 } from '@bodiless/layouts';
-import { ResizeHandle } from '@bodiless/ui';
+import { ResizeHandle, ResizeHandleRTL } from '@bodiless/ui';
 import Reresizable from './Reresizable';
 import DragHandle from './DragHandle';
 
 const ui: SortableResizableUI = {
   Reresizable,
   ResizeHandle,
+  ResizeHandleRTL,
   DragHandle,
 };
 

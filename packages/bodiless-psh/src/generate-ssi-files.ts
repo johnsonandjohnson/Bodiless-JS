@@ -49,7 +49,7 @@ const build = () => {
     handleNotice('skipping ssi files generation since ssi is not configured.');
     return;
   }
-  if (!fs.readFileSync(ssiConfPath)) {
+  if (!fs.existsSync(ssiConfPath)) {
     handleNotice(`skipping ssi files generation since ssi conf path: ${ssiConfPath} does not exist.`);
     return;
   }

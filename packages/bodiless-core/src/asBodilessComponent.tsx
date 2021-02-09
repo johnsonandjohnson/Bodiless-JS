@@ -49,10 +49,10 @@ export type Options<P, D> = EditButtonOptions<P, D> & {
 
 type HOC<P, Q> = (Component: CT<P>|string) => CT<Q>;
 type BodilessProps = Partial<WithNodeProps>;
-type AsBodiless<P, D> = (
+type AsBodiless<P, D, E = {}> = (
   nodeKeys?: WithNodeKeyProps,
   defaultData?: D,
-  useOverrides?: UseBodilessOverrides<P, D>,
+  useOverrides?: UseBodilessOverrides<P, D, E>,
 ) => HOC<P, P & BodilessProps>;
 
 /**

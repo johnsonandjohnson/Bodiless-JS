@@ -13,10 +13,13 @@
  */
 
 import { flow } from 'lodash';
+import { DefaultNormalHref } from '@bodiless/components';
 import {
   asBlock,
   withButton,
   withStrikeThroughMeta,
+  createLinkDeserializer,
+  withHtmlDeserializer,
 } from '@bodiless/richtext';
 import { RichText } from '@bodiless/richtext-ui';
 import {
@@ -45,6 +48,12 @@ import {
 } from '../Elements.token';
 import withEditor from './withEditor';
 
+const withLinkDeserializer = withHtmlDeserializer(
+  createLinkDeserializer({
+    normalizeHref: (href: string) => (new DefaultNormalHref(href).toString()),
+  }),
+);
+
 const simpleDesign = {
   SuperScript: asSuperScript,
 };
@@ -52,7 +61,7 @@ const basicDesign = {
   Bold: asBold,
   Italic: asItalic,
   Underline: asUnderline,
-  Link: flow(asEditableLink(), asLink),
+  Link: flow(asEditableLink(), asLink, withLinkDeserializer),
   ...simpleDesign,
   AlignLeft: asAlignLeft,
   AlignRight: asAlignRight,
@@ -70,7 +79,7 @@ const fullFeaturedDesign = {
   Italic: asItalic,
   Underline: asUnderline,
   StrikeThrough: flow(replaceWith(Strike), asStrikeThrough, withStrikeThroughMeta),
-  Link: flow(asEditableLink(), asLink),
+  Link: flow(asEditableLink(), asLink, withLinkDeserializer),
   SuperScript: asSuperScript,
   AlignLeft: asAlignLeft,
   AlignRight: asAlignRight,

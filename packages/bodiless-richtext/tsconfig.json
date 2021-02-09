@@ -7,7 +7,12 @@
     "declaration": true,
     "declarationMap": true,
     "composite": true,
-    "allowJs": false
+    "allowJs": false,
+    "downlevelIteration": true,
+    "lib": [
+      "dom",
+      "es2019"
+    ]
   },
   "include": [
     "src"

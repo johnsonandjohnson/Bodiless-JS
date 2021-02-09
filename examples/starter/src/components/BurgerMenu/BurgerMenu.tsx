@@ -26,8 +26,6 @@ import withBurgerMenuStyles from './BurgerMenu.token';
 import withMegaBurgerMenuStyles from './MegaBurgerMenu.token';
 import withSimpleBurgerMenuStyles from './SimpleBurgerMenu.token';
 
-import './burger-menu.css';
-
 const MegaBurgerMenuBody = flow(
   asMegaBurgerMenu,
   withMegaBurgerMenuStyles,

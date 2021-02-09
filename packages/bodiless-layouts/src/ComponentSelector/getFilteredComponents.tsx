@@ -30,7 +30,7 @@ const getFilteredComponents = (
     return components;
   }
   if (searchString.length >= 1 && filters.length === 0) {
-    const newComponentArr = components.filter(component => component.title.toLowerCase()
+    const newComponentArr = components.filter(component => (component.title || '').toLowerCase()
       .includes(searchString.toLowerCase()));
     return newComponentArr;
   }

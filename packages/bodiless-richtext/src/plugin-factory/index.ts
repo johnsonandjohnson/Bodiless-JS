@@ -16,5 +16,4 @@ export * from './inline';
 export * from './mark';
 export * from './block';
 export * from './render';
-export * from './keyBoardShortcut';
 export { default as createPluginButton, withToggle } from './createPluginButton';

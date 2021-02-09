@@ -79,6 +79,9 @@ const remGrid = {
   'rem-1': '1rem',
 };
 
+// eslint-disable-next-line import/no-extraneous-dependencies
+const tailwindcssDir = require('tailwindcss-dir');
+
 module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,
@@ -643,6 +646,7 @@ module.exports = {
   variants: {
     borderWidth: ['first', 'responsive'],
     margin: ['responsive', 'first', 'last'],
+    divideWidth: ['responsive', 'direction'],
   },
 
   // corePlugins: {},
@@ -701,5 +705,6 @@ module.exports = {
       addUtilities(newUtilities);
       addComponents(components);
     },
+    tailwindcssDir(),
   ],
 };

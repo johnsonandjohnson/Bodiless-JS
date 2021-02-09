@@ -12,10 +12,8 @@
  * limitations under the License.
  */
 
-import {
-  addClasses,
-  withDesign,
-} from '@bodiless/fclasses';
+import { addClasses, withDesign } from '@bodiless/fclasses';
+import { withDirection, DIRECTIONS } from '@bodiless/layouts';
 
 const asFlowContainerWithMargins = withDesign({
   Wrapper: addClasses('md:-m-5 py-5'),
@@ -27,7 +25,13 @@ const asFlowContainerFullWidth = withDesign({
   ComponentWrapper: addClasses('w-full md:w-1/3'),
 });
 
+const asFlowContainerRTL = withDesign({
+  Wrapper: addClasses('w-full'),
+  ComponentWrapper: withDirection(DIRECTIONS.RTL),
+});
+
 export {
   asFlowContainerWithMargins,
   asFlowContainerFullWidth,
+  asFlowContainerRTL,
 };

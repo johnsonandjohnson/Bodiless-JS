@@ -15,16 +15,12 @@
 import { flow } from 'lodash';
 
 import {
-  withDesign,
-  replaceWith,
-  Fragment,
+  withDesign, HOC,
 } from '@bodiless/fclasses';
 import { WithNodeKeyProps } from '@bodiless/core';
 import {
-  asBreadcrumb, withBreadcrumbs, withSubListDesign,
-  asBodilessList, asChameleonSubList,
+  asBodilessList, asChameleonSubList, asBreadcrumbSource as asBreadcrumbSourceBase,
 } from '@bodiless/components';
-import type { BreadcrumbSettings } from '@bodiless/components';
 
 import { asMenuSubList } from './SimpleMenu';
 import { asStylableList } from './SimpleMenu.token';
@@ -56,11 +52,11 @@ const withSubMenuDesign = (design: any) => {
  *
  * @param design The design object or HOC to be applied.
 */
-const withMenuDesign = (design: any) => {
+const withMenuDesign = (design: any): HOC => {
   const withDesign$ = typeof design === 'function' ? design : withDesign(design);
   return flow(
-    withSubMenuDesign(withDesign$),
-    withDesign$,
+    withSubMenuDesign(withDesign$) as HOC,
+    withDesign$ as HOC,
   );
 };
 
@@ -85,57 +81,16 @@ const asMenuBase = (nodeKeys?: WithNodeKeyProps) => flow(
   withMenuContext,
 );
 
-// Now we create breadcrumbs
+const asBreadcrumbSource = asBreadcrumbSourceBase(withMenuDesign);
 
 /**
- * HOC that can be applied to a mega menu based component,
- * it renders all list and sublist items but produces no markup.
- */
-const withEmptyMenuMarkup = flow(
-  // can not use withSubMenuDesign({ Item: replaceWith(Fragment) }) here
-  // as far as we will break Columns sublist items
-  // due to design prop removal from Columns.Item element
-  withDesign({
-    Item: withDesign({
-      List: withDesign({
-        Item: replaceWith(Fragment),
-      }),
-      Touts: withDesign({
-        Item: replaceWith(Fragment),
-      }),
-      Columns: withDesign({
-        Item: withDesign({
-          Item: replaceWith(Fragment),
-        }),
-      }),
-    }),
-  }),
-  withMenuDesign({
-    Wrapper: replaceWith(Fragment),
-  }),
-  withSubListDesign(1)({
-    _default: replaceWith(Fragment),
-  }),
-);
-
-/**
- * Creates a HOC which can be applied to a base menu to make it into a site's breadcrumbs
+ * Creates a HOC which can be applied to a base menu to make it into a data source for
+ * the site's breadcrumbs.
  *
  * @param settings The title and link nodekeys defining where to locate the link and title nodes.
  *
- * @return  HOC for composing a clean (unstyled) site breadcrumb component.
+ * @return  HOC for providing breadcrumb data from this menu.
  */
-const asBreadcrumbsClean = (settings: BreadcrumbSettings) => flow(
-  withEmptyMenuMarkup,
-  withMenuDesign({
-    Item: flow(
-      asBreadcrumb(settings),
-    ),
-  }),
-  withBreadcrumbs,
-);
-
 export {
-  asMenuSubList, asMenuBase, withMenuDesign,
-  asBreadcrumbsClean,
+  asMenuSubList, asMenuBase, withMenuDesign, asBreadcrumbSource,
 };

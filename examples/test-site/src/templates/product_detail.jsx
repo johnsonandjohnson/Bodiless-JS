@@ -41,6 +41,7 @@ import { FlowContainerDefault } from '../components/FlowContainer';
 import { withEditorBasic } from '../components/Editors';
 import asAccordionDefaultStyle from '../components/SingleAccordion/token';
 import GTMDataLayerProductHelmet from '../components/GTM/productViewed';
+import SocialShare from '../components/SocialShare';
 
 // Do not allow editors to set accordion titles.
 const NonEditableTitle = ({ producttitle, ...rest }) => (
@@ -101,7 +102,7 @@ export default (props: any) => (
       <GTMDataLayerProductHelmet />
       <SectionMargin>
         <div className="flex flex-wrap md:items-end md:flex-row-reverse">
-          <div className="w-full md:flex-1 md:flex-grow-0 md:flex-shrink-0 text-right"><p>Placeholder_for_Share</p></div>
+          <SocialShare />
           <div className="w-full md:flex-1">
             <ProductTitle />
           </div>

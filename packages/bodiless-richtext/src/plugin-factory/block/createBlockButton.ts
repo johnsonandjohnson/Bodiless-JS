@@ -13,7 +13,7 @@
  */
 
 import { ComponentType } from 'react';
-import { toggleBlock, hasBlock } from './blockUtils';
+import { createToggleBlock, createIsActive } from './blockUtils';
 import createPluginButton from '../createPluginButton';
 import { EditorButtonProps } from '../../Type';
 
@@ -24,10 +24,8 @@ type CreateBlockButton = (
 
 const createBlockButton: CreateBlockButton = (blockType, icon) => createPluginButton({
   icon,
-  toggle: ({ value, editor }) => {
-    toggleBlock({ value, editor, blockType });
-  },
-  isActive: value => hasBlock(value, blockType),
+  toggle: createToggleBlock(blockType),
+  isActive: createIsActive(blockType),
 });
 
 export default createBlockButton;

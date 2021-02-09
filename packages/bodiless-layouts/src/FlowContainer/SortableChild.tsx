@@ -21,7 +21,7 @@ import { defaultSnapData } from './utils/appendTailwindWidthClass';
 import { SortableChildProps } from './types';
 
 const RESIZE_THROTTLE_INTERVAL: number = 100;
-const FALLBACK_SNAP_CLASSNAME = 'w-full';
+export const FALLBACK_SNAP_CLASSNAME = 'w-full';
 
 /**
  * This is the component which wraps all items in the flow container. You probably

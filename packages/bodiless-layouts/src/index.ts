@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import './main.css';
+import withDirection, { DIRECTIONS } from './withDirection/withDirection';
 
 export { default as ComponentSelector } from './ComponentSelector';
 export * from './ComponentSelector/types';
@@ -32,3 +32,6 @@ export {
 } from './FlowContainer/utils/appendTailwindWidthClass';
 export * from './meta';
 export { ifComponentSelector } from './FlowContainer/ComponentDisplayMode';
+
+export * from './ContentLibrary';
+export { withDirection, DIRECTIONS };
