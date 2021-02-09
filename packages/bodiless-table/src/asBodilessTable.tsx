@@ -56,9 +56,9 @@ const withTableManager = <P extends WithTableManagerProps> (Component:CT<P>) => 
       setComponentData(componentData);
     },
     moveColumn: (currentColumnIndex) => {
-      const currentColumn = componentData.rows[currentColumnIndex];
-      componentData.rows.splice(currentColumnIndex, 1);
-      componentData.rows.splice(currentColumnIndex + 1, 0, currentColumn);
+      const currentColumn = componentData.columns[currentColumnIndex];
+      componentData.columns.splice(currentColumnIndex, 1);
+      componentData.columns.splice(currentColumnIndex + 1, 0, currentColumn);
       setComponentData(componentData);
     },
     addRow: (currentRowIndex, newRow) => {
@@ -105,9 +105,10 @@ type UseMenuOptionsTableProps = {
   group:string,
   groupLabel:string,
   index:number,
-  addIsDisabled?: boolean
-  deleteIsDisabled?: boolean
-  moveIsDisabled?: boolean
+  addIsDisabled?: boolean,
+  deleteIsDisabled?: boolean,
+  moveIsDisabled?: boolean,
+  moveIcon?: string,
 };
 type UseMenuOptionsTable = (p:UseMenuOptionsTableProps) => TMenuOption[];
 const useMenuOptionsTable:UseMenuOptionsTable = ({
@@ -120,6 +121,7 @@ const useMenuOptionsTable:UseMenuOptionsTable = ({
   addIsDisabled,
   deleteIsDisabled,
   moveIsDisabled,
+  moveIcon,
 }) => [
   {
     name: group,
@@ -157,7 +159,7 @@ const useMenuOptionsTable:UseMenuOptionsTable = ({
   },
   {
     name: `move_${group}`,
-    icon: 'keyboard_arrow_right',
+    icon: moveIcon || 'keyboard_arrow_down',
     group,
     groupMerge: 'merge',
     label: 'Move',
@@ -220,6 +222,7 @@ const useMenuOptionsColumns = (props:CellProps) => {
     index: props.columnIndex,
     deleteIsDisabled: data.columns.length === 1,
     moveIsDisabled: data.columns.length === props.columnIndex + 1,
+    moveIcon: 'keyboard_arrow_right',
   });
 };
 const useMenuOptionsTableOverview = () => {
