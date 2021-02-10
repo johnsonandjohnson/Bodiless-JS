@@ -36,10 +36,10 @@ const isEven = (item: number) => item % 2 === 0;
 const isOdd = (item: number) => item % 2 === 1;
 
 const withSuggestionsDefaultDesign = withDesign({
-  Wrapper: addClasses('absolute top-full z-50 w-full'),
+  Wrapper: addClasses('absolute top-full z-50 w-full border border-black'),
   Item: withDesign({
     Wrapper: flow(
-      addClasses('flex px-2'),
+      addClasses('flex px-2 hover:text-white hover:bg-blue-900'),
       addClassesIf(({ position }: any) => isEven(position))('bg-white'),
       addClassesIf(({ position }: any) => isOdd(position))('bg-gray-400'),
     ),
@@ -52,7 +52,7 @@ const searchDesign = {
     asDesktopOnly,
     addClasses('my-4 border border-black align-middle border-gray-500 relative'),
   ),
-  SearchInput: addClasses('px-2 align-middle text-1xl outline-none'),
+  SearchInput: addClasses('px-2 align-middle text-1xl outline-none focus:outline-darkblue'),
   SearchButton: withIcon('search'),
   Suggestions: withSuggestionsDefaultDesign,
 };
@@ -75,8 +75,8 @@ const responsiveSearchDesign = {
 };
 
 const searchInlineDesign = {
-  SearchWrapper: addClasses('inline-block border border-black align-middle border-gray-500 relative'),
-  SearchInput: addClasses('px-2 align-middle text-1xl outline-none'),
+  SearchWrapper: addClasses('inline-flex border border-black align-middle border-gray-500 relative'),
+  SearchInput: addClasses('px-2 align-middle text-1xl outline-none focus:outline-darkblue'),
   SearchButton: withIcon('search'),
   Suggestions: withSuggestionsDefaultDesign,
 };
