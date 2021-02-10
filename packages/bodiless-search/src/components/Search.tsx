@@ -234,7 +234,7 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
       />
       <SearchButton onClick={onClickHandler} />
       {
-        queryString !== ''
+        queryString !== '' && suggestions.length > 0
         && <Suggestions suggestions={suggestions} />
       }
     </SearchWrapper>

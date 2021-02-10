@@ -278,6 +278,9 @@ module.exports = mergeWithBodilessConfigs({
       width: {
         content: 'max-content',
       },
+      outline: {
+        darkblue: 'darkblue auto 1px',
+      },
     },
 
     /*
