@@ -34,6 +34,7 @@ export type EditFlowContainerProps = StaticFlowContainerProps & {
   getDefaultWidth?: (snapData: SnapData) => string;
   maxComponents?: number,
   mandatoryCategories?: string[],
+  isResizeEnabled?: boolean,
 };
 export type WidthClassTuple = {
   width: number;
@@ -68,6 +69,7 @@ export type SortableChildProps = {
   snapData?: SnapData;
   getDefaultWidth?: (snapData: SnapData) => string;
   className?: string;
+  isResizeEnabled?: boolean;
 };
 
 export type FlowContainerComponents = {

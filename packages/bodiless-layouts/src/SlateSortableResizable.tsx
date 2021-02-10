@@ -57,20 +57,22 @@ type Props = {
   onResizeStop?: ResizeCallback;
   onResize?: ResizeCallback;
   ui?: UI,
+  isResizeEnabled?: boolean,
 };
 
 type SortableResizableProps = Omit<Props, 'useGetMenuOptions'>;
 
 const SortableResizable$: FC<SortableResizableProps> = ({ children, ui, ...props }) => {
   // We wabt to activate if nessesary
-  const { uuid } = props;
+  const { isResizeEnabled, uuid } = props;
   useActivateOnEffectActivator(uuid);
   const { isActive } = useEditContext();
+  const isEnabled = isResizeEnabled !== false && isActive;
   const { Wrapper } = getUI(ui);
   // @ts-ignore
   return (
     <Wrapper
-      isEnabled={isActive}
+      isEnabled={isEnabled}
       {...useContextActivator()}
       {...props}
     >

@@ -68,6 +68,7 @@ const FlowContainerPage = (props: any) => (
         id="constrained_widths"
         nodeKey="constrained_widths"
         snapData={options}
+        isResizeEnabled={false}
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey="constrained_widths" />

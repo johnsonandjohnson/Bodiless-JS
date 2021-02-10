@@ -162,7 +162,7 @@ const getSnapFrom = (...withTuples: WithTuples[]):SnapData => props => {
     // add the class that is for the current width
     .concat(currentWidthTuples.length > 0 ? currentWidthTuples[0].className : '')
     .join(' ');
-  return { width, className };
+  return { width, className, tuples };
 };
 const defaultSnapData = getSnapFrom(
   withTuple('(min-width: 0px)')(100)('w-full'),

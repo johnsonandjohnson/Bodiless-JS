@@ -81,9 +81,9 @@ const SortableResizableWrapper = SortableElement((props: Props) => {
   );
   const ENABLED_DRAG_SIDES = {
     top: false,
-    right: direction !== DIRECTIONS.RTL,
+    right: isEnabled && direction !== DIRECTIONS.RTL,
     bottom: false,
-    left: direction === DIRECTIONS.RTL,
+    left: isEnabled && direction === DIRECTIONS.RTL,
     topRight: false,
     bottomRight: false,
     bottomLeft: false,
@@ -93,7 +93,6 @@ const SortableResizableWrapper = SortableElement((props: Props) => {
   return (
     <Reresizable
       enable={ENABLED_DRAG_SIDES}
-      isEnabled={isEnabled}
       scale={1}
       className={className}
       handleComponent={
