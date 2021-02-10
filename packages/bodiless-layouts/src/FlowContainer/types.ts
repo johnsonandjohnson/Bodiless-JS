@@ -69,7 +69,6 @@ export type SortableChildProps = {
   snapData?: SnapData;
   getDefaultWidth?: (snapData: SnapData) => string;
   className?: string;
-  isResizeEnabled?: boolean;
 };
 
 export type FlowContainerComponents = {

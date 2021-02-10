@@ -62,9 +62,14 @@ type Props = {
 
 type SortableResizableProps = Omit<Props, 'useGetMenuOptions'>;
 
-const SortableResizable$: FC<SortableResizableProps> = ({ children, ui, ...props }) => {
+const SortableResizable$: FC<SortableResizableProps> = ({
+  isResizeEnabled,
+  children,
+  ui,
+  ...props
+}) => {
   // We wabt to activate if nessesary
-  const { isResizeEnabled, uuid } = props;
+  const { uuid } = props;
   useActivateOnEffectActivator(uuid);
   const { isActive } = useEditContext();
   const isEnabled = isResizeEnabled !== false && isActive;
