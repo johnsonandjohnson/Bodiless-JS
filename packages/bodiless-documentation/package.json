@@ -44,7 +44,7 @@
     "walkdir": "^0.4.1"
   },
   "devDependencies": {
-    "@types/node": "^10",
+    "@types/node": "^12",
     "nodemon": "^1.19.1",
     "ts-node": "^8"
   }

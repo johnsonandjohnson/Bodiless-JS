@@ -132,7 +132,7 @@ export const ComponentFormCloseButton = flow(
 )(ComponentFormButton);
 
 export const ComponentFormSubmitButton = (props: HTMLProps<HTMLButtonElement>) => (
-  <div className="bl-clearfix">
+  <div className="bl-flow-root">
     <ComponentFormButton className="bl-float-right" {...props}>
       <Icon>done</Icon>
     </ComponentFormButton>

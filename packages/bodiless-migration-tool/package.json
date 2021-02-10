@@ -61,7 +61,7 @@
     "@types/mime": "^2.0.1",
     "@types/minimatch": "^3.0.3",
     "@types/mock-fs": "^3.6.30",
-    "@types/node": "^10",
+    "@types/node": "^12",
     "@types/prettier": "^1.18.0",
     "@types/react": "^16.8.24",
     "@types/react-dom": "^16.8.5",

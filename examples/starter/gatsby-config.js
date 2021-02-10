@@ -63,5 +63,11 @@ module.exports = {
   siteMetadata: {
     siteUrl: SITEURL,
   },
+  flags: {
+    PRESERVE_FILE_DOWNLOAD_CACHE: false,
+    PRESERVE_WEBPACK_CACHE: false,
+    FAST_DEV: false,
+    FAST_REFRESH: false,
+  },
   plugins,
 };

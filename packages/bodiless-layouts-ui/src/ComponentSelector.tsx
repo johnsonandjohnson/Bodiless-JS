@@ -76,7 +76,7 @@ export const ui: ComponentSelectorUI = {
   )(Span),
 
   ComponentSelectorWrapper: addClasses(
-    'bl-text-white bl-mr-grid-3  bl-whitespace-no-wrap',
+    'bl-text-white bl-mr-grid-3  bl-whitespace-nowrap',
   )(Div),
 
   SubmitButton: addClasses(
