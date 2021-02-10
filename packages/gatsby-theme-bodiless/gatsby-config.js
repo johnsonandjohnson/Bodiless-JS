@@ -106,8 +106,8 @@ module.exports = {
     title: 'Bodiless-JS',
   },
   flags: {
-    PRESERVE_FILE_DOWNLOAD_CACHE: true,
-    PRESERVE_WEBPACK_CACHE: true,
+    PRESERVE_FILE_DOWNLOAD_CACHE: false,
+    PRESERVE_WEBPACK_CACHE: false,
     FAST_DEV: true,
     FAST_REFRESH: true,
   },
