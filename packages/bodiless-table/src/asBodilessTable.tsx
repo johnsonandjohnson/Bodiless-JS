@@ -171,12 +171,19 @@ const useMenuOptionsTable:UseMenuOptionsTable = ({
     },
   },
 ];
-const useMenuOptions = (props:CellProps) => {
+type WithTableData = {
+  tableData: TableBaseProps,
+};
+const withTableData = <A extends object> (Component:CT<A>) => (props:A) => {
+  const { data } = useContext(TableManagerContext);
+  return <Component tableData={data} {...props} />;
+};
+const withoutTableData = withoutProps('tableData');
+const useMenuOptions = (props:CellProps & WithTableData) => {
   const {
     addRow,
     deleteRow,
     moveRow,
-    data,
   } = useContext(TableManagerContext);
   return useMenuOptionsTable({
     addFunc: addRow,
@@ -185,16 +192,15 @@ const useMenuOptions = (props:CellProps) => {
     group: 'row',
     groupLabel: 'Row',
     index: props.rowIndex,
-    deleteIsDisabled: data.rows.length === 1,
-    moveIsDisabled: data.rows.length === props.rowIndex + 1,
+    deleteIsDisabled: props.tableData.rows.length === 1,
+    moveIsDisabled: props.tableData.rows.length === props.rowIndex + 1,
   });
 };
-const useMenuOptionsHead = (props:CellProps) => {
+const useMenuOptionsHead = (props:CellProps & WithTableData) => {
   const {
     addHeadRow,
     deleteHeadRow,
     moveHeadRow,
-    data,
   } = useContext(TableManagerContext);
   return useMenuOptionsTable({
     addFunc: addHeadRow,
@@ -203,15 +209,14 @@ const useMenuOptionsHead = (props:CellProps) => {
     group: 'head_row',
     groupLabel: 'Header Row',
     index: props.rowIndex,
-    moveIsDisabled: data.headRows.length === props.rowIndex + 1,
+    moveIsDisabled: props.tableData.headRows.length === props.rowIndex + 1,
   });
 };
-const useMenuOptionsColumns = (props:CellProps) => {
+const useMenuOptionsColumns = (props:CellProps & WithTableData) => {
   const {
     addColumn,
     deleteColumn,
     moveColumn,
-    data,
   } = useContext(TableManagerContext);
   return useMenuOptionsTable({
     addFunc: addColumn,
@@ -220,8 +225,8 @@ const useMenuOptionsColumns = (props:CellProps) => {
     group: 'column',
     groupLabel: 'Column',
     index: props.columnIndex,
-    deleteIsDisabled: data.columns.length === 1,
-    moveIsDisabled: data.columns.length === props.columnIndex + 1,
+    deleteIsDisabled: props.tableData.columns.length === 1,
+    moveIsDisabled: props.tableData.columns.length === props.columnIndex + 1,
     moveIcon: 'keyboard_arrow_right',
   });
 };
@@ -277,6 +282,7 @@ const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => flow
       withNodeKey((p:RowProps) => p.row),
     ),
     Cell: flow(
+      withoutTableData,
       withLocalContextMenu,
       withContextActivator('onClick'),
       withMenuOptions({ useMenuOptions: useMenuOptionsColumns, name: 'TableColumn' }),
@@ -284,12 +290,15 @@ const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => flow
       withNodeKey((p:CellProps) => p.column),
     ),
   }),
-  forCells((p) => p.section === Section.body)(
+  forCells((p:CellProps) => p.section === Section.body)(
     withMenuOptions({ useMenuOptions, name: 'TableRow' }) as HOC,
   ),
-  forCells((p) => p.section === Section.head)(
+  forCells((p:CellProps) => p.section === Section.head)(
     withMenuOptions({ useMenuOptions: useMenuOptionsHead, name: 'TableRowHead' }) as HOC,
   ),
+  withDesign({
+    Cell: withTableData,
+  }),
 );
 
 export default asBodilessTable;

@@ -50,6 +50,8 @@ import {
 } from './hoc-util';
 import Fragment from './Fragment';
 
+import ifTTT, { IfThis } from './ifThisThenThat';
+
 export * from './StyledHTML';
 
 export { withShowDesignKeys } from './Context';
@@ -80,6 +82,8 @@ export {
   removeClassesIf,
   Fragment,
   withDisplayName,
+  ifTTT,
+  IfThis,
 };
 
 export type {
