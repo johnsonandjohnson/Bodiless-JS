@@ -3,8 +3,7 @@ module.exports = {
     title: 'Canvas-X',
   },
   flags: {
-    PRESERVE_FILE_DOWNLOAD_CACHE: false,
-    PRESERVE_WEBPACK_CACHE: false,
+    DEV_SSR: false,
     FAST_DEV: true,
     FAST_REFRESH: true,
   },
