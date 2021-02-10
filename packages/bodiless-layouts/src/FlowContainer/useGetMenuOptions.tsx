@@ -152,7 +152,6 @@ const useAddButton = (
   const isHidden = item
     ? useCallback(() => !context.isEdit || getItems().length >= maxComponents, [maxComponents])
     : useCallback(() => !context.isEdit || getItems().length > 0, []);
-  // @TODO For nested flow containers we'll have to give these unique names.
   const name = item ? `add-item-${item.uuid}` : 'add';
   return {
     icon: 'add',

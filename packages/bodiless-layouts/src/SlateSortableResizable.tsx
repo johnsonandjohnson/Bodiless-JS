@@ -87,6 +87,14 @@ const SortableResizable = flow(
   withLocalContextMenu,
 )(SortableResizable$);
 
+const useIsNested = (prefix = 'flexItem') => {
+  const context = useEditContext();
+  for (let c = context.parent; c; c = c.parent) {
+    if (c.id.startsWith(prefix)) return true;
+  }
+  return false;
+};
+
 const SlateSortableResizable = (props: Props) => {
   const {
     children,
@@ -95,9 +103,12 @@ const SlateSortableResizable = (props: Props) => {
     ...rest
   } = props;
 
+  const isNested = useIsNested();
+  const name = isNested ? 'Nested Component' : 'Component';
+
   return (
     <PageContextProvider
-      name="Component"
+      name={name}
       id={`flexItem-${uuid}`}
       getMenuOptions={useGetMenuOptions()}
     >
