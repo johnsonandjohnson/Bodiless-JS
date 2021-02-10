@@ -29,7 +29,7 @@ module.exports = {
     },
     "useJSXTextNode": true,
     "project": "./tsconfig.settings.json",
-    "tsconfigRootDir": "./"
+    "tsconfigRootDir": __dirname
   },
   "rules": {
     "react/require-default-props": "off",

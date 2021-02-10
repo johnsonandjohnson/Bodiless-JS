@@ -13,17 +13,20 @@
  */
 
 import { flow } from 'lodash';
-import { withSidecarNodes } from '@bodiless/core';
+import { ifEditable, withSidecarNodes } from '@bodiless/core';
 import {
   ToutClean,
 } from '@bodiless/organisms';
 import {
+  addProps,
   withDesign,
 } from '@bodiless/fclasses';
 import {
   asEditableImage, asEditableLink,
 } from '../Elements.token';
 import { withEditorBasic, withEditorSimple } from '../Editors';
+
+const asNonDraggable = addProps({ draggable: false });
 
 export const asEditableTout = flow(
   withDesign({
@@ -37,6 +40,7 @@ export const asEditableTout = flow(
       withSidecarNodes(
         asEditableLink('link', undefined, () => ({ groupLabel: 'CTA', label: 'Link' })),
       ),
+      ifEditable(asNonDraggable),
     ),
     Body: withEditorBasic('body', 'Tout Body Text'),
   }),
