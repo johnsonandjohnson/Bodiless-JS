@@ -79,10 +79,12 @@
     "null-loader": "^3.0.0",
     "slash": "^2.0.0",
     "sleep-promise": "^8.0.1",
-    "tailwindcss": "^1.0",
+    "tailwindcss": "^2.0.2",
     "universal-cookie": "^4.0.3",
     "walk": "^2.3.14",
-    "walkdir": "^0.4.1"
+    "walkdir": "^0.4.1",
+    "autoprefixer": "^10.2.4",
+    "postcss": "^8.2.4"
   },
   "peerDependencies": {
     "gatsby": "^2.0.19",
