@@ -181,6 +181,7 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
   useEffect(() => {
     if (queryString !== searchResultContext.searchTerm) {
       setQueryString(searchResultContext.searchTerm);
+      setSuggestions([]);
     }
   }, [searchResultContext.searchTerm]);
 

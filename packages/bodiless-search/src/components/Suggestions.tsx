@@ -24,6 +24,7 @@ import {
   withDesign,
   withoutProps,
 } from '@bodiless/fclasses';
+import { useSearchResultContext } from './SearchContextProvider';
 import type { Suggestion } from '../types';
 import getSearchPagePath from './getSearchPagePath';
 
@@ -63,8 +64,16 @@ const BaseSuggestion = (props: SuggestionProps) => {
 
 const withSuggestionLink = (Component: ComponentType<any>) => (props: any) => {
   const { text } = props;
+  const searchResultContext = useSearchResultContext();
   return (
-    <Component {...props} href={getSearchPagePath(text)} />
+    <Component
+      {...props}
+      href={getSearchPagePath(text)}
+      onClick={(event: React.MouseEvent) => {
+        event.preventDefault();
+        searchResultContext.setSearchTerm(text);
+      }}
+    />
   );
 };
 
