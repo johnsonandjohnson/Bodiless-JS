@@ -64,7 +64,9 @@ const TableSection = (props:TableSectionProps) => {
         <Row key={row} {...{ row, rowIndex, section }}>
           {(columns || []).map((column, columnIndex) => (
             <Cell
-              key={column}
+              // We want to refresh this component when any of this change
+              // eslint-disable-next-line react/no-array-index-key
+              key={`${rowIndex}${columnIndex}${row}${column}`}
               {...{
                 columnIndex,
                 column,

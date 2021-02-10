@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { withDesign, addClasses } from '@bodiless/fclasses';
+import { withDesign, addClasses, addClassesIf } from '@bodiless/fclasses';
 import { flow } from 'lodash';
 import {
   asBodilessTable,
@@ -28,9 +28,11 @@ const asEditableTable = flow(
   }),
 );
 const asDefaultTableStyle = flow(
-  forCells(({ columnIndex, section }) => columnIndex % 2 === 1 && section === 'body')(addClasses('bg-gray-100')),
   withDesign({
-    Cell: flow(addClasses('min-w-1 py-1 px-5')),
+    Cell: flow(
+      addClasses('min-w-1 py-1 px-5'),
+      addClassesIf(({ columnIndex, section }) => columnIndex % 2 === 1 && section === 'body')('bg-gray-100'),
+    ),
     THead: flow(addClasses('bg-orange-700 text-white')),
     Wrapper: addClasses('border border-collapse rounded border-gray-200 w-full'),
   }),
