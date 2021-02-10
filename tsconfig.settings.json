@@ -48,6 +48,8 @@
       "@bodiless/search/*": ["bodiless-search/src/*"],
       "@bodiless/ui": ["bodiless-ui/src"],
       "@bodiless/ui/*": ["bodiless-ui/src/*"],
+      "@bodiless/table": ["bodiless-table/src"],
+      "@bodiless/table/*": ["bodiless-table/src/*"],
       "@bodiless/fclasses": ["fclasses/src"],
       "@bodiless/fclasses/*": ["fclasses/src/*"],
       "@bodiless/gatsby-theme-bodiless": ["gatsby-theme-bodiless/src"],
