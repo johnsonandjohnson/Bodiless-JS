@@ -25,8 +25,9 @@ import {
 import type { BodilessOptions } from '@bodiless/core';
 import { flowRight, identity } from 'lodash';
 import {
-  replaceWith,
   Fragment,
+  addProps,
+  replaceWith,
 } from '@bodiless/fclasses';
 import DefaultNormalHref from './NormalHref';
 import withGoToLinkButton from './withGoToLinkButton';
@@ -137,6 +138,9 @@ const asBodilessLink: AsBodilessLink = (
   // Prevent following the link in edit mode
   ifEditable(
     withExtendHandler('onClick', () => (e: MouseEvent) => e.preventDefault()),
+  ),
+  ifEditable(
+    addProps({ draggable: false }),
   ),
   asBodilessComponent<Props, LinkData>(options)(
     nodeKeys, defaultData, useLinkOverrides(useOverrides),
