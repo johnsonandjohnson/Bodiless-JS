@@ -406,9 +406,9 @@ A few notes:
   the generic `withoutProps()`. This ensures that the type of the resulting
   component will include these props.
 
-### Conditional HOC based on passed props 
+### Conditional HOC based on passed props
 
-There are times where you might want to condition HOC based on props passed to the component. FClasses proves a `ifThisThenThat` function which takes a function that recives the props of the component and return a boolean, as well as an HOC It Returns an HOC that will apply the first HOC if the function returns true,
+There are times where you might want to condition HOC based on props passed to the component. FClasses proves a `flowIf` function which takes a function that recives the props of the component and return a boolean, as well as an HOC It Returns an HOC that will apply the first HOC if the function returns true.  There are also helper function  `and`, `or`, and `not`.
 
 ``` js
 type VariantProps = {
@@ -422,8 +422,9 @@ const isActive = (props: any) => hasProp('isActive')(props);
 const isFirst = (props: any) => hasProp('isFirst')(props);
 
 const ContextMenuButton = flow(
-  withoutProps<VariantProps>(['isActive', 'isFirst'),
-  addClassesIf(isActive)(conditionalHOC),
+  withoutProps<VariantProps>(['isActive', 'isFirst']),
+  flowIf(isActive)(conditionalHOC),
+  flowIf(add(isActive, isFirst))(secondConditionalHOC)
 )(Div);
 ```
 
