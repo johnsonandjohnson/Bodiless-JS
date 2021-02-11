@@ -23,11 +23,10 @@ import {
   withNodeKey,
   WithNodeProps,
 } from '@bodiless/core';
-import { withDesign, withoutProps, HOC } from '@bodiless/fclasses';
+import { withDesign, withoutProps, HOC, flowIf } from '@bodiless/fclasses';
 import { flow } from 'lodash';
 import React, { ComponentType as CT, useContext } from 'react';
 import { v1 } from 'uuid';
-import forCells from './forCell';
 import {
   CellProps,
   TableBaseProps,
@@ -171,15 +170,7 @@ const useMenuOptionsTable:UseMenuOptionsTable = ({
     },
   },
 ];
-type WithTableData = {
-  tableData: TableBaseProps,
-};
-const withTableData = <A extends object> (Component:CT<A>) => (props:A) => {
-  const { data } = useContext(TableManagerContext);
-  return <Component tableData={data} {...props} />;
-};
-const withoutTableData = withoutProps('tableData');
-const useMenuOptions = (props:CellProps & WithTableData) => {
+const useMenuOptions = (props:CellProps) => {
   const {
     addRow,
     deleteRow,
@@ -196,7 +187,7 @@ const useMenuOptions = (props:CellProps & WithTableData) => {
     moveIsDisabled: props.tableData.rows.length === props.rowIndex + 1,
   });
 };
-const useMenuOptionsHead = (props:CellProps & WithTableData) => {
+const useMenuOptionsHead = (props:CellProps) => {
   const {
     addHeadRow,
     deleteHeadRow,
@@ -212,7 +203,7 @@ const useMenuOptionsHead = (props:CellProps & WithTableData) => {
     moveIsDisabled: props.tableData.headRows.length === props.rowIndex + 1,
   });
 };
-const useMenuOptionsColumns = (props:CellProps & WithTableData) => {
+const useMenuOptionsColumns = (props:CellProps) => {
   const {
     addColumn,
     deleteColumn,
@@ -282,22 +273,18 @@ const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => flow
       withNodeKey((p:RowProps) => p.row),
     ),
     Cell: flow(
-      withoutTableData,
       withLocalContextMenu,
       withContextActivator('onClick'),
       withMenuOptions({ useMenuOptions: useMenuOptionsColumns, name: 'TableColumn' }),
+      flowIf((p:CellProps) => p.section === Section.body)(
+        withMenuOptions({ useMenuOptions, name: 'TableRow' }) as HOC
+      ),
+      flowIf((p:CellProps) => p.section === Section.head)(
+        withMenuOptions({ useMenuOptions: useMenuOptionsHead, name: 'TableRowHead' }) as HOC,
+      ),
       withNode,
       withNodeKey((p:CellProps) => p.column),
     ),
-  }),
-  forCells((p:CellProps) => p.section === Section.body)(
-    withMenuOptions({ useMenuOptions, name: 'TableRow' }) as HOC,
-  ),
-  forCells((p:CellProps) => p.section === Section.head)(
-    withMenuOptions({ useMenuOptions: useMenuOptionsHead, name: 'TableRowHead' }) as HOC,
-  ),
-  withDesign({
-    Cell: withTableData,
   }),
 );
 

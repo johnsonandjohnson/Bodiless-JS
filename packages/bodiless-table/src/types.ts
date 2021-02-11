@@ -24,7 +24,8 @@ enum Section {
 type RowProps = StylableProps & {
   row:string,
   section: Section,
-  rowIndex: number;
+  rowIndex: number,
+  tableData: TableBaseProps,
 };
 type CellProps = StylableProps & RowProps & {
   column:string,

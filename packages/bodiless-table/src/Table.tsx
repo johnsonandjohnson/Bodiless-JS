@@ -32,8 +32,8 @@ import {
   TableComponents,
 } from './types';
 
-const DefaultRow = withoutProps('row', 'section', 'rowIndex')(Tr);
-const withoutCellProps = withoutProps(['row', 'column', 'section', 'rowIndex', 'columnIndex']);
+const DefaultRow = withoutProps('row', 'section', 'rowIndex', 'tableData')(Tr);
+const withoutCellProps = withoutProps(['row', 'column', 'section', 'rowIndex', 'columnIndex', 'tableData']);
 const HeadCell = withoutCellProps(Th);
 const BodyCell = withoutCellProps(Td);
 const DefaultCell = (props:CellProps) => {
@@ -62,7 +62,15 @@ const TableSection = (props:TableSectionProps) => {
   return (
     <Wrapper>
       {(rows || []).map((row, rowIndex) => (
-        <Row key={row} {...{ row, rowIndex, section }}>
+        <Row
+          key={row}
+          {...{
+            row,
+            rowIndex,
+            section,
+            tableData,
+          }}
+        >
           {(columns || []).map((column, columnIndex) => (
             <Cell
               // We want to refresh this component when any of this change
