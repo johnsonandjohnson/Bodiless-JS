@@ -23,7 +23,12 @@ import {
   withNodeKey,
   WithNodeProps,
 } from '@bodiless/core';
-import { withDesign, withoutProps, HOC, flowIf } from '@bodiless/fclasses';
+import {
+  withDesign,
+  withoutProps,
+  HOC,
+  flowIf,
+} from '@bodiless/fclasses';
 import { flow } from 'lodash';
 import React, { ComponentType as CT, useContext } from 'react';
 import { v1 } from 'uuid';
@@ -277,7 +282,7 @@ const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => flow
       withContextActivator('onClick'),
       withMenuOptions({ useMenuOptions: useMenuOptionsColumns, name: 'TableColumn' }),
       flowIf((p:CellProps) => p.section === Section.body)(
-        withMenuOptions({ useMenuOptions, name: 'TableRow' }) as HOC
+        withMenuOptions({ useMenuOptions, name: 'TableRow' }) as HOC,
       ),
       flowIf((p:CellProps) => p.section === Section.head)(
         withMenuOptions({ useMenuOptions: useMenuOptionsHead, name: 'TableRowHead' }) as HOC,
