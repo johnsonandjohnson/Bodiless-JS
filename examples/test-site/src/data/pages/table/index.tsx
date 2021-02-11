@@ -18,12 +18,14 @@ import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../../../components/Layout';
 import {
+  asTableCenterText,
   asTableFirstExtraWidth,
   asTableFirstLeft,
   StandardTable,
 } from '../../../components/Table';
 
 const Table1 = flow(
+  asTableCenterText,
 )(StandardTable);
 const Table2 = flow(
   asTableFirstExtraWidth,

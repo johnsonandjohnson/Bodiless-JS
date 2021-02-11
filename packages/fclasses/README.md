@@ -156,7 +156,6 @@ const DesertButton = withoutClasses().withClasses('text-yellow bg-red bold')(Oce
 ```
 This is usefule when you don't have access to the original, unstyled variant of the component.
 
-
 ## The Design API
 
 The Design API provides a mechanism for applying higher order components (including those
@@ -246,7 +245,7 @@ to identify the component and its design keys is in the markup.  This can make
 it easier to locate the specific design element to which styles should be
 applied, for example:
 
-```
+``` js
 <div bl-design-key="Tout:Wrapper">
   <div bl-design-key="Tout:ImageWrapper">
   ...
@@ -407,7 +406,28 @@ A few notes:
   the generic `withoutProps()`. This ensures that the type of the resulting
   component will include these props.
 
-  ## Design Variants
+### Conditional HOC based on passed props 
+
+There are times where you might want to condition HOC based on props passed to the component. FClasses proves a `ifThisThenThat` function which takes a function that recives the props of the component and return a boolean, as well as an HOC It Returns an HOC that will apply the first HOC if the function returns true,
+
+``` js
+type VariantProps = {
+  isActive?: boolean,
+  isFirst?: boolean,
+  isEnabled?: boolean,
+};
+
+const Div = stylable<HTMLProps<HTMLDivElement>>('div');
+const isActive = (props: any) => hasProp('isActive')(props);
+const isFirst = (props: any) => hasProp('isFirst')(props);
+
+const ContextMenuButton = flow(
+  withoutProps<VariantProps>(['isActive', 'isFirst'),
+  addClassesIf(isActive)(conditionalHOC),
+)(Div);
+```
+
+## Design Variants
 
   One of the most powerful features of the Design API is the ability to
   create multiple variants of a component by composing different tokens

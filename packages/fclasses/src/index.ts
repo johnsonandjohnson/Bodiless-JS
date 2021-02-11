@@ -50,7 +50,12 @@ import {
 } from './hoc-util';
 import Fragment from './Fragment';
 
-import ifTTT, { IfThis } from './ifThisThenThat';
+import ifTTT, {
+  IfThis,
+  or,
+  and,
+  not,
+} from './ifThisThenThat';
 
 export * from './StyledHTML';
 
@@ -84,6 +89,9 @@ export {
   withDisplayName,
   ifTTT,
   IfThis,
+  and,
+  or,
+  not,
 };
 
 export type {

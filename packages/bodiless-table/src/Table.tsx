@@ -57,6 +57,7 @@ const TableSection = (props:TableSectionProps) => {
     rows,
     section,
     columns,
+    tableData,
   } = props;
   return (
     <Wrapper>
@@ -73,6 +74,7 @@ const TableSection = (props:TableSectionProps) => {
                 row,
                 rowIndex,
                 section,
+                tableData,
               }}
             />
           ))}
@@ -99,6 +101,12 @@ const TableBase:FunctionComponent<TableProps> = (props) => {
     Row,
     Cell,
   } = components;
+  const tableData = {
+    columns,
+    rows,
+    headRows,
+    footRows,
+  }
   return (
     <Wrapper {...rest}>
       <TableSection
@@ -109,6 +117,7 @@ const TableBase:FunctionComponent<TableProps> = (props) => {
           section: Section.head,
           rows: headRows,
           columns,
+          tableData,
         }}
       />
       <TableSection
@@ -119,6 +128,7 @@ const TableBase:FunctionComponent<TableProps> = (props) => {
           section: Section.body,
           rows,
           columns,
+          tableData,
         }}
       />
       <TableSection
@@ -129,6 +139,7 @@ const TableBase:FunctionComponent<TableProps> = (props) => {
           section: Section.foot,
           rows: footRows,
           columns,
+          tableData,
         }}
       />
     </Wrapper>

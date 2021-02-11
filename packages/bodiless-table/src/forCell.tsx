@@ -19,7 +19,7 @@ import {
   IfThis,
 } from '@bodiless/fclasses';
 import {
-  CellProps, Section,
+  CellProps, Section, TableBaseProps,
 } from './types';
 
 const forCells = <A extends object> (func:IfThis<CellProps>) => (hoc:HOC) => withDesign({
@@ -32,7 +32,33 @@ const forCell = (sectionIn:Section) => (rowIndexIn:number) => (columnIndexIn:num
     && columnIndex === columnIndexIn
   ))
 );
+const isEvenRow = (p:CellProps) => p.rowIndex % 2 === 1;
+const isOddRow = (p:CellProps) => p.rowIndex % 2 === 0;
+const isFirstRow = (p:CellProps) => p.rowIndex === 0;
+const isLastRow = (p:CellProps & {tableData: TableBaseProps }) => (
+  p.rowIndex === p.tableData.rows.length
+);
+const isEvenColumn = (p:CellProps) => p.columnIndex % 2 === 1;
+const isOddColumn = (p:CellProps) => p.columnIndex % 2 === 0;
+const isFirstColumn = (p:CellProps) => p.columnIndex === 0;
+const isLastColumn = (p:CellProps & {tableData: TableBaseProps }) => (
+  p.columnIndex === (p.tableData.columns.length - 1)
+);
+const isInBody = (p:CellProps) => p.section === Section.body;
+const isInHead = (p:CellProps) => p.section === Section.head;
+const isInFoot = (p:CellProps) => p.section === Section.foot;
 export default forCells;
 export {
   forCell,
+  isEvenRow,
+  isOddRow,
+  isFirstColumn,
+  isFirstRow,
+  isLastColumn,
+  isLastRow,
+  isOddColumn,
+  isInBody,
+  isEvenColumn,
+  isInHead,
+  isInFoot,
 };
