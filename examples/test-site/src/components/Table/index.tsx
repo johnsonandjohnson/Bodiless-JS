@@ -22,13 +22,10 @@ import {
 import { flow } from 'lodash';
 import {
   asBodilessTable,
-  forCells,
   CleanTable,
-  isEvenRow,
-  isEvenColumn,
   isInBody,
-  isLastColumn,
   isFirstColumn,
+  isEvenColumn,
 } from '@bodiless/table';
 import { withEditorFullFeatured } from '../Editors';
 
@@ -61,7 +58,7 @@ const asTableFirstLeft = withDesign({
 });
 const asTableCenterText = withDesign({
   Cell: addClassesIf(isInBody)('text-center'),
-})
+});
 const asTableFirstExtraWidth = withDesign({
   Cell: flow(
     addClassesIf(isFirstColumn)('w-1/2'),

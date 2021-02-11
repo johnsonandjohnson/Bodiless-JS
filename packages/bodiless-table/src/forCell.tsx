@@ -13,25 +13,9 @@
  */
 
 import {
-  HOC,
-  withDesign,
-  ifTTT,
-  IfThis,
-} from '@bodiless/fclasses';
-import {
   CellProps, Section, TableBaseProps,
 } from './types';
 
-const forCells = <A extends object> (func:IfThis<CellProps>) => (hoc:HOC) => withDesign({
-  Cell: ifTTT(func)(hoc),
-});
-const forCell = (sectionIn:Section) => (rowIndexIn:number) => (columnIndexIn:number) => (
-  forCells(({ section, rowIndex, columnIndex }: CellProps) => (
-    section === sectionIn
-    && rowIndex === rowIndexIn
-    && columnIndex === columnIndexIn
-  ))
-);
 const isEvenRow = (p:CellProps) => p.rowIndex % 2 === 1;
 const isOddRow = (p:CellProps) => p.rowIndex % 2 === 0;
 const isFirstRow = (p:CellProps) => p.rowIndex === 0;
@@ -47,9 +31,7 @@ const isLastColumn = (p:CellProps & {tableData: TableBaseProps }) => (
 const isInBody = (p:CellProps) => p.section === Section.body;
 const isInHead = (p:CellProps) => p.section === Section.head;
 const isInFoot = (p:CellProps) => p.section === Section.foot;
-export default forCells;
 export {
-  forCell,
   isEvenRow,
   isOddRow,
   isFirstColumn,

@@ -48,6 +48,18 @@ export const flowIf = (condition: (args: any) => boolean) => (
   )
 );
 
+export type FlowIfFunc<A> = (props:A) => boolean;
+
+export const and = <A extends object> (...funcs:FlowIfFunc<A>[]) => (props:A) => (
+  funcs.every(f => f(props))
+);
+export const or = <A extends object> (...funcs:FlowIfFunc<A>[]) => (props:A) => (
+  !funcs.every(f => !f(props))
+);
+export const not = <A extends object> (...funcs:FlowIfFunc<A>[]) => (props:A) => (
+  funcs.every(f => !f(props))
+);
+
 /**
  * Removes the specified props from the wrapped component.
  * @param ...keys The names of the props to remove.

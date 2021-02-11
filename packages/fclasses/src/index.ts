@@ -46,16 +46,9 @@ import type {
 } from './Design';
 import {
   flowIf, hasProp, withoutProps, withOnlyProps, replaceOnEffect,
-  withDisplayName,
+  withDisplayName, or, and, not,
 } from './hoc-util';
 import Fragment from './Fragment';
-
-import ifTTT, {
-  IfThis,
-  or,
-  and,
-  not,
-} from './ifThisThenThat';
 
 export * from './StyledHTML';
 
@@ -93,8 +86,6 @@ export {
   removeClassesIf,
   Fragment,
   withDisplayName,
-  ifTTT,
-  IfThis,
   and,
   or,
   not,
