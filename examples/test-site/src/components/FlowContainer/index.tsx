@@ -13,6 +13,7 @@
  */
 
 import { flow } from 'lodash';
+import { withDesign } from '@bodiless/fclasses';
 import { withMandatoryCategories } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withDefaultVariations from './withDefaultVariations';
@@ -30,12 +31,11 @@ const FlowContainerDefault = flow(
 )(FlowContainer);
 
 const FlowContainerDefaultRTL = flow(
-  withDefaultVariations,
-  withFlowContainerVariations,
-  asFlowContainerWithMargins,
-  withMandatoryCategories(['Orientation', 'Type']),
+  withDesign({
+    FlowContainer: asFlowContainerRTL,
+  }),
   asFlowContainerRTL,
-)(FlowContainer);
+)(FlowContainerDefault);
 
 const FlowContainerLimited = flow(
   withRichTextVariations,
