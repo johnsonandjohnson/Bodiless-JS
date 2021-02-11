@@ -106,7 +106,7 @@ const TableBase:FunctionComponent<TableProps> = (props) => {
     rows,
     headRows,
     footRows,
-  }
+  };
   return (
     <Wrapper {...rest}>
       <TableSection

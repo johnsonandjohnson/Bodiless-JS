@@ -36,7 +36,7 @@ const isEvenRow = (p:CellProps) => p.rowIndex % 2 === 1;
 const isOddRow = (p:CellProps) => p.rowIndex % 2 === 0;
 const isFirstRow = (p:CellProps) => p.rowIndex === 0;
 const isLastRow = (p:CellProps & {tableData: TableBaseProps }) => (
-  p.rowIndex === p.tableData.rows.length
+  p.rowIndex === (p.tableData.rows.length - 1)
 );
 const isEvenColumn = (p:CellProps) => p.columnIndex % 2 === 1;
 const isOddColumn = (p:CellProps) => p.columnIndex % 2 === 0;
