@@ -41,4 +41,18 @@ const ifThisThenThat = <A extends object>(func:IfThis<A>) => (hoc:HOC) => (
     />
   ));
 const ifTTT = ifThisThenThat;
+const and = <A extends object> (...funcs:IfThis<A>[]) => (props:A) => (
+  funcs.every(f => f(props))
+);
+const or = <A extends object> (...funcs:IfThis<A>[]) => (props:A) => (
+  !funcs.every(f => !f(props))
+);
+const not = <A extends object> (...funcs:IfThis<A>[]) => (props:A) => (
+  funcs.every(f => !f(props))
+);
 export default ifTTT;
+export {
+  and,
+  or,
+  not,
+};

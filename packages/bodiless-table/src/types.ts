@@ -56,6 +56,7 @@ type TableSectionProps = {
   section: Section,
   columns: string[],
   rows: string[],
+  tableData: TableBaseProps,
 };
 type AddFunc = (current:number, newItem:string) => void;
 type MoveFunc = (current:number) => void;

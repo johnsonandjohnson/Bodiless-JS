@@ -16,7 +16,20 @@ import React, { ComponentType } from 'react';
 // import { flow } from 'lodash';
 import CleanTable from './Table';
 import asBodilessTable from './asBodilessTable';
-import forCells from './forCell';
+import forCells, {
+  forCell,
+  isEvenRow,
+  isOddRow,
+  isFirstColumn,
+  isFirstRow,
+  isLastColumn,
+  isLastRow,
+  isOddColumn,
+  isInBody,
+  isEvenColumn,
+  isInHead,
+  isInFoot,
+} from './forCell';
 // import { Section } from './types';
 
 const withCols = <A extends Object> (...columns:string[]) => (
@@ -75,7 +88,19 @@ export {
   withXRows,
   withHeadRows,
   asBodilessTable,
-  forCells,
   CleanTable,
+  forCell,
+  isEvenRow,
+  isOddRow,
+  isFirstColumn,
+  isFirstRow,
+  isLastColumn,
+  isLastRow,
+  isOddColumn,
+  isInBody,
+  isEvenColumn,
+  isInHead,
+  isInFoot,
+  forCells,
   // withContent,
 };
