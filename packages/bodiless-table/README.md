@@ -21,7 +21,6 @@ const ExampleTableExample = flow(
 
 `asBodilessTable()` is used to add the editablity to the table.
 
-
 ``` js
  <TableExample nodeKey="table-1" />
 ```

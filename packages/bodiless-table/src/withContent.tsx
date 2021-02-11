@@ -30,15 +30,11 @@ const withRows = <A extends Object> (...rows:string[]) => (
   (Component:ComponentType<A>) => (props:A) => (
     <Component rows={rows} {...props} />
   ));
-const withXRows = (x:number) => {
-  const rows = (new Array(x)).fill('').map((t, i) => i.toString());
-  return withRows(...rows);
-};
+
 const withHeadRows = <A extends Object> (...rows:string[]) => (
   (Component:ComponentType<A>) => (props:A) => (
     <Component headRows={rows} {...props} />
   ));
-
 
 type TableContentRow = string[];
 type TableContent = TableContentRow[];
@@ -71,6 +67,7 @@ const withContent = (props:WithContentProps) => {
   ];
   return flow(...tableHocs, withDesign({
     Cell: flow(...flatten([...headHocs, ...bodyHocs])),
-  })
+  }));
 };
+
 export default withContent;
