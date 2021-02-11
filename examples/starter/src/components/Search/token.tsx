@@ -35,32 +35,52 @@ const withIcon = (icon: string) => (Component: ComponentType) => (props: any) =>
 const isEven = (item: number) => item % 2 === 0;
 const isOdd = (item: number) => item % 2 === 1;
 
+const withSuggestionsBorder = addClasses('border border-black');
+const withSuggestionItemStyles = withDesign({
+  Wrapper: flow(
+    addClasses('hover:text-white hover:bg-teal-400'),
+    addClassesIf(({ position }: any) => isEven(position))('bg-white'),
+    addClassesIf(({ position }: any) => isOdd(position))('bg-teal-200'),
+  ),
+});
+const withSearchInputOutline = addClasses('outline-none focus:outline-black');
+
 const withSuggestionsDefaultDesign = withDesign({
-  Wrapper: addClasses('absolute top-full z-50 w-full border border-black'),
-  Item: withDesign({
-    Wrapper: flow(
-      addClasses('flex px-2 hover:text-white hover:bg-blue-900'),
-      addClassesIf(({ position }: any) => isEven(position))('bg-white'),
-      addClassesIf(({ position }: any) => isOdd(position))('bg-gray-400'),
-    ),
-    Count: addClasses('ml-auto mr-1'),
-  }),
+  Wrapper: flow(
+    addClasses('absolute top-full z-50 w-full'),
+    withSuggestionsBorder,
+  ),
+  Item: flow(
+    withSuggestionItemStyles,
+    withDesign({
+      Wrapper: flow(
+        addClasses('flex px-2'),
+      ),
+      Count: addClasses('ml-auto mr-1'),
+    }),
+  ),
 });
 
 const searchDesign = {
   SearchWrapper: flow(
     asDesktopOnly,
-    addClasses('my-4 border border-black align-middle border-gray-500 relative'),
+    addClasses('my-4 border border-black align-middle relative'),
   ),
-  SearchInput: addClasses('px-2 align-middle text-1xl outline-none focus:outline-darkblue'),
+  SearchInput: flow(
+    withSearchInputOutline,
+    addClasses('px-2 align-middle text-1xl'),
+  ),
   SearchButton: withIcon('search'),
   Suggestions: withSuggestionsDefaultDesign,
 };
 
 const responsiveSearchDesign = {
   Wrapper: addClasses('h-full'),
-  SearchWrapper: flow(asPageContainer, addClasses('absolute w-full p-3 flex z-10 bg-gray-700 inset-x-0 relative')),
-  SearchInput: addClasses('align-middle w-full p-2'),
+  SearchWrapper: flow(asPageContainer, addClasses('absolute w-full p-3 flex z-10 bg-gray-700 inset-x-0')),
+  SearchInput: flow(
+    withSearchInputOutline,
+    addClasses('align-middle w-full p-2'),
+  ),
   ToggleButton: asTextWhite,
   SearchButton: flow(
     withIcon('search'),
@@ -76,7 +96,10 @@ const responsiveSearchDesign = {
 
 const searchInlineDesign = {
   SearchWrapper: addClasses('inline-flex border border-black align-middle border-gray-500 relative'),
-  SearchInput: addClasses('px-2 align-middle text-1xl outline-none focus:outline-darkblue'),
+  SearchInput: flow(
+    withSearchInputOutline,
+    addClasses('px-2 align-middle text-1xl'),
+  ),
   SearchButton: withIcon('search'),
   Suggestions: withSuggestionsDefaultDesign,
 };

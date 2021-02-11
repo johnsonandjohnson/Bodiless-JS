@@ -64,7 +64,7 @@ const withSuggestionsDefaultDesign = withDesign({
 const searchDesign = {
   SearchWrapper: flow(
     asDesktopOnly,
-    addClasses('my-4 border border-black align-middle border-gray-500 relative'),
+    addClasses('my-4 border border-black align-middle relative'),
   ),
   SearchInput: flow(
     withSearchInputOutline,
