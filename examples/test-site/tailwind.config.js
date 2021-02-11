@@ -360,7 +360,7 @@ module.exports = mergeWithBodilessConfigs({
     */
 
     // borderColor: theme => ({
-    //   default: theme('colors.grey-light'),
+    //   default: theme('colors.gray-light'),
     //   ...theme('colors'),
     // }),
 

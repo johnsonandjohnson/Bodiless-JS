@@ -178,9 +178,9 @@ const Div = stylable<HTMLProps<HTMLDivElement>>('div');
 
 const ContextMenuButton = flow(
   withoutProps<VariantProps>(['isActive', 'isFirst', 'isEnabled']),
-  addClasses('cursor-pointer pl-2 text-grey').flow,
+  addClasses('cursor-pointer pl-2 text-gray').flow,
   flowIf(hasProp('isActive'))(
-    flow(addClasses('text-white'), removeClasses('text-grey')),
+    flow(addClasses('text-white'), removeClasses('text-gray')),
   ),
   flowIf(hasProp('isFirst'))(
     removeClasses('pl-2'),
@@ -190,9 +190,9 @@ const ContextMenuButton = flow(
 describe('flowIf', () => {
   it('Adds and removes classes based on conditional props', () => {
     let wrapper = render(<div><ContextMenuButton /></div>);
-    expectClasses(wrapper, 'div', 'cursor-pointer pl-2 text-grey');
+    expectClasses(wrapper, 'div', 'cursor-pointer pl-2 text-gray');
     wrapper = render(<div><ContextMenuButton isFirst /></div>);
-    expectClasses(wrapper, 'div', 'cursor-pointer text-grey');
+    expectClasses(wrapper, 'div', 'cursor-pointer text-gray');
     wrapper = render(<div><ContextMenuButton isActive /></div>);
     expectClasses(wrapper, 'div', 'cursor-pointer pl-2 text-white');
     wrapper = render(<div><ContextMenuButton isActive isFirst id="foo" /></div>);

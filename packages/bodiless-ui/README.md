@@ -104,7 +104,7 @@ export default class Example extends Component {
   render() {
   return (
       <div>
-        <Spinner color="bl-bg-grey" />
+        <Spinner color="bl-bg-gray" />
       </div>
     );
   }

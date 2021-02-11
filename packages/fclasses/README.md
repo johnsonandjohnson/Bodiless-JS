@@ -367,9 +367,9 @@ const isFirst = (props: any) => hasProp('isFirst')(props);
 
 const ContextMenuButton = flow(
   withoutProps<VariantProps>(['isActive', 'isFirst'),
-  addClasses('cursor-pointer pl-2 text-grey'),
+  addClasses('cursor-pointer pl-2 text-gray'),
   addClassesIf(isActive)('text-white'),
-  removeClassesIf(isActive)('text-grey'),
+  removeClassesIf(isActive)('text-gray'),
   removeClassesIf(isFirst)('pl-2'),
 )(Div);
 ```

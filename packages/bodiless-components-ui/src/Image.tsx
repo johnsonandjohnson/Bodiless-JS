@@ -58,7 +58,7 @@ const MasterWrapper = addClasses('bl-container')(Section);
 const Wrapper = flowRight(
   withForwardedRef(
     addClasses(
-      'bl-min-h-grid-16 bl-border bl-border-dashed bl-border-grey-800 bl-bg-grey-100 bl-p-grid-3 bl-mb-grid-3 bl-text-black',
+      'bl-min-h-grid-16 bl-border bl-border-dashed bl-border-gray-800 bl-bg-gray-100 bl-p-grid-3 bl-mb-grid-3 bl-text-black',
     ),
     stylable,
   ),
@@ -78,7 +78,7 @@ const DragRejected = () => (
 const UploadTimeout = () => (
   <div className="bl-text-red">Upload failed, please try again.</div>
 );
-const Uploading = () => <Spinner color="bl-bg-grey-800 bl-my-4" />;
+const Uploading = () => <Spinner color="bl-bg-gray-800 bl-my-4" />;
 const UploadFinished = () => <div className="bl-text-center bl-text-lg bl-text-black">Done!</div>;
 const UploadStatus = ({ statusText } : { statusText: string; }) => <div>{statusText}</div>;
 
