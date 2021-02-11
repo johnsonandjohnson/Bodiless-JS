@@ -29,8 +29,8 @@ type HOC<P = any, Q = P> = (Component?: CT<P>|string|undefined) => CT<Q>;
  * @return An HOC which will add the Child to the given Parent.
  *
  * @example Example of adding 'span' as a child to 'div'.
- * Then customize the span leveraging design API.
- *
+ * Then customizing the span leveraging design API.
+ * ```
  * const Parent = props => <div {...props} />;
  * const Child = props => <span {...props} />;
  * const ParentWithChild = flow(
@@ -42,7 +42,7 @@ type HOC<P = any, Q = P> = (Component?: CT<P>|string|undefined) => CT<Q>;
  *     }),
  *   }),
  * )(Parent);
- *
+ * ```
  */
 const withChild = <P extends object>(Child: CT, designKey = 'Child'): HOC<P> => (Parent = Fragment) => {
   type Components = { [Child: string]: CT };
