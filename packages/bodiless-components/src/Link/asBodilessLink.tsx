@@ -23,7 +23,7 @@ import {
   EditButtonOptions,
 } from '@bodiless/core';
 import type { BodilessOptions } from '@bodiless/core';
-import { flowRight, identity } from 'lodash';
+import { flow, flowRight, identity } from 'lodash';
 import {
   Fragment,
   addProps,
@@ -135,18 +135,16 @@ const withoutLinkWhenLinkDataEmpty = ifToggledOn(useEmptyLinkToggle)(replaceWith
 const asBodilessLink: AsBodilessLink = (
   nodeKeys, defaultData, useOverrides,
 ) => flowRight(
-  // Prevent following the link in edit mode
-  ifEditable(
-    withExtendHandler('onClick', () => (e: MouseEvent) => e.preventDefault()),
-  ),
-  ifEditable(
-    addProps({ draggable: false }),
-  ),
   asBodilessComponent<Props, LinkData>(options)(
     nodeKeys, defaultData, useLinkOverrides(useOverrides),
   ),
   ifEditable(
-    withGoToLinkButton(),
+    flow(
+      // Prevent following the link in edit mode
+      withExtendHandler('onClick', () => (e: MouseEvent) => e.preventDefault()),
+      addProps({ draggable: false }),
+      withGoToLinkButton(),
+    ),
   ),
   withoutProps(['unwrap']),
   withNormalHref(useLinkOverrides(useOverrides) as () => ExtraLinkOptions),
