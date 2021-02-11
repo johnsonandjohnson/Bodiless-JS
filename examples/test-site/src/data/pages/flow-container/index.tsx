@@ -21,6 +21,7 @@ import {
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import resolveConfig from 'tailwindcss/resolveConfig';
 import { withDefaultContent, withNodeKey, withResetButton } from '@bodiless/core';
+import { H2 as BaseH2, addClasses } from '@bodiless/fclasses';
 import { flow } from 'lodash';
 import Layout from '../../../components/Layout';
 import tailWindConfig from '../../../../tailwind.config';
@@ -33,7 +34,7 @@ const options = getSnapFrom(
 );
 
 const snapDataFullWidth = getSnapFrom(
-  withTailwindClasses(resolveConfig(tailWindConfig))('w-full sm:w-full lg:w-full'),
+  withTailwindClasses(resolveConfig(tailWindConfig))('w-full'),
 );
 
 const contentfulFlowContainer = {
@@ -54,28 +55,30 @@ const ContentfulFlowContainer = flow(
   withResetButton({ nodeKey: 'contentfulFlowContainer' }),
 )(FlowContainerDefault);
 
+const H2 = addClasses('text-2xl font-bold mt-4')(BaseH2);
+
 const FlowContainerPage = (props: any) => (
   <Page {...props}>
     <Layout>
       <h1 className="text-3xl font-bold">FlowContainer Examples</h1>
-      <h2 className="text-2xl font-bold mt-4">Default FlowContainer</h2>
+      <H2>Default FlowContainer</H2>
       <FlowContainerDefault
         id={FLOW_CONTAINER_PAGE_PATH}
         nodeKey={FLOW_CONTAINER_PAGE_PATH}
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey={FLOW_CONTAINER_PAGE_PATH} />
-      <h2 className="text-2xl font-bold mt-4">
+      <H2>
         FlowContainer with constrained widths of 50% & 100% only
-      </h2>
+      </H2>
       <FlowContainerDefault
         id="constrained_widths"
         nodeKey="constrained_widths"
         snapData={options}
       />
-      <h2 className="text-2xl font-bold mt-4">
+      <H2>
         FlowContainer with constrained width of 100% only
-      </h2>
+      </H2>
       <FlowContainerDefault
         id="constrained_full_width"
         nodeKey="constrained_full_width"
@@ -83,7 +86,7 @@ const FlowContainerPage = (props: any) => (
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey="constrained_widths" />
-      <h2 className="text-2xl font-bold mt-4">FlowContainer restricted to 1 item</h2>
+      <H2>FlowContainer restricted to 1 item</H2>
       <FlowContainerDefault
         id="restricted"
         nodeKey="restricted"
@@ -91,39 +94,39 @@ const FlowContainerPage = (props: any) => (
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey="restricted" />
-      <h2 className="text-2xl font-bold mt-4">Default Width of 25%</h2>
+      <H2>Default Width of 25%</H2>
       <FlowContainerDefault
         id="width_25"
         nodeKey="width_25"
         getDefaultWidth={() => 'w-full lg:w-1/4'}
       />
-      <h2 className="text-2xl font-bold mt-4">Default Width of 33% (should round up to 33.33%)</h2>
+      <H2>Default Width of 33% (should round up to 33.33%)</H2>
       <FlowContainerDefault
         id="width_33"
         nodeKey="width_33"
         getDefaultWidth={() => 'w-full lg:w-1/3'}
       />
-      <h2 className="text-2xl font-bold mt-4">Default Width of 50%</h2>
+      <H2>Default Width of 50%</H2>
       <FlowContainerDefault
         id="width_50"
         nodeKey="width_50"
         getDefaultWidth={() => 'w-full lg:w-1/2'}
       />
-      <h2 className="text-2xl font-bold mt-4">Default Width of 66.66% </h2>
+      <H2>Default Width of 66.66% </H2>
       <FlowContainerDefault
         id="width_66"
         nodeKey="width_66"
         getDefaultWidth={() => 'w-full lg:w-2/3'}
       />
-      <h2 className="text-2xl font-bold mt-4">Default Width of 75%</h2>
+      <H2>Default Width of 75%</H2>
       <FlowContainerDefault
         id="width_75"
         nodeKey="width_75"
         getDefaultWidth={() => 'w-full lg:w-3/4'}
       />
-      <h2 className="text-2xl font-bold mt-4">Contentful Flow Container</h2>
+      <H2>Contentful Flow Container</H2>
       <ContentfulFlowContainer />
-      <h2 className="text-2xl font-bold mt-4">Limited Flow Container</h2>
+      <H2>Limited Flow Container</H2>
       <FlowContainerLimited />
     </Layout>
   </Page>

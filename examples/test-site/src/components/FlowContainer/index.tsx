@@ -22,8 +22,6 @@ import withFlowContainerVariations from './withFlowContainerVariations';
 
 import { asFlowContainerRTL, asFlowContainerWithMargins } from './token';
 
-// Order of includes currently dictates order in Component Picker
-// thus recommend putting more frequently used components toward top for quicker access.
 const FlowContainerDefault = flow(
   withDefaultVariations,
   withFlowContainerVariations,
@@ -33,6 +31,7 @@ const FlowContainerDefault = flow(
 
 const FlowContainerDefaultRTL = flow(
   withDefaultVariations,
+  withFlowContainerVariations,
   asFlowContainerWithMargins,
   withMandatoryCategories(['Orientation', 'Type']),
   asFlowContainerRTL,
