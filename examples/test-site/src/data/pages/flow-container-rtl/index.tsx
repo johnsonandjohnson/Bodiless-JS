@@ -21,13 +21,11 @@ import {
 import { flow } from 'lodash';
 import Helmet from 'react-helmet';
 import Layout from '../../../components/Layout';
-import { FlowContainerDefault } from '../../../components/FlowContainer';
-import { asFlowContainerRTL } from '../../../components/FlowContainer/token';
+import { FlowContainerDefaultRTL } from '../../../components/FlowContainer';
 
 const RTLFlowContainer = flow(
   withNodeKey('rtlFlowContainer'),
-  asFlowContainerRTL,
-)(FlowContainerDefault);
+)(FlowContainerDefaultRTL);
 
 const FlowContainerPage = (props: any) => (
   <Page {...props}>

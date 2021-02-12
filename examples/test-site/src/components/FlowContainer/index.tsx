@@ -12,9 +12,9 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { withDesign } from '@bodiless/fclasses';
-import { withMandatoryCategories } from '@bodiless/layouts';
+import { withMandatoryCategories, ifNotComponentSelector } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withDefaultVariations from './withDefaultVariations';
 import withRichTextVariations from './withRichTextVariations';
@@ -31,9 +31,11 @@ const FlowContainerDefault = flow(
 )(FlowContainer);
 
 const FlowContainerDefaultRTL = flow(
-  withDesign({
-    FlowContainer: asFlowContainerRTL,
-  }),
+  ifNotComponentSelector(
+    withDesign({
+      FlowContainer: asFlowContainerRTL,
+    }),
+  ),
   asFlowContainerRTL,
 )(FlowContainerDefault);
 
