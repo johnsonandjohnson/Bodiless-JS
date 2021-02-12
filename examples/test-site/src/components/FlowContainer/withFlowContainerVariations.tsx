@@ -14,6 +14,7 @@
 
 import React from 'react';
 import { flow } from 'lodash';
+import { withNodeKey } from '@bodiless/core';
 import {
   withDesign,
   replaceWith,
@@ -41,7 +42,12 @@ const asDefaultFlowContainer = flow(
 
 const withFlowContainerVariations = withDesign({
   FlowContainer: flow(
-    replaceWith(asDefaultFlowContainer(FlowContainer)),
+    replaceWith(
+      flow(
+        asDefaultFlowContainer,
+        withNodeKey('innerFC'),
+      )(FlowContainer),
+    ),
     ifComponentSelector(
       replaceWith(FlowContainerPreview),
     ),
