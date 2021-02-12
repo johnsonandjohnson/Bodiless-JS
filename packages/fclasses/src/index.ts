@@ -52,6 +52,12 @@ import Fragment from './Fragment';
 
 export * from './StyledHTML';
 
+export { asToken, withTokenFilter } from './Tokens';
+export type {
+  TokenFilterTest, Token, TokenDef,
+  TokenMeta, ComponentWithMeta, ComponentOrTag,
+} from './Tokens';
+
 export { withShowDesignKeys } from './Context';
 
 export {

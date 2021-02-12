@@ -17,8 +17,9 @@ import React, { ComponentType } from 'react';
  * HOC that adds properties to a Component
  * @param propsToAdd
  */
-const addProps = <P extends object, Q extends object>(propsToAdd: Q) => (
-  (Component: ComponentType<P>) => (
+const addProps = <P extends object = any, Q extends object = P>(propsToAdd: Q) => (
+  // @TODO Fix these typings!
+  (Component: ComponentType<any>): ComponentType<any> => (
     (props: P) => <Component {...propsToAdd} {...props} />
   )
 );
