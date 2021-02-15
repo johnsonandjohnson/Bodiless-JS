@@ -15,24 +15,67 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
+import { withNodeKey } from '@bodiless/core';
 import {
-  withNodeKey,
-} from '@bodiless/core';
+  H1 as BaseH1,
+  H2 as BaseH2,
+  addClasses,
+} from '@bodiless/fclasses';
+import { getSnapFrom, withTailwindClasses } from '@bodiless/layouts';
 import { flow } from 'lodash';
 import Helmet from 'react-helmet';
+import resolveConfig from 'tailwindcss/resolveConfig';
 import Layout from '../../../components/Layout';
 import { FlowContainerDefaultRTL } from '../../../components/FlowContainer';
+import tailWindConfig from '../../../../tailwind.config';
 
 const RTLFlowContainer = flow(
   withNodeKey('rtlFlowContainer'),
 )(FlowContainerDefaultRTL);
 
+const H1 = addClasses('text-3xl font-bold')(BaseH1);
+const H2 = addClasses('text-2xl font-bold mt-4')(BaseH2);
+
+const snapDataFullWidth = getSnapFrom(
+  withTailwindClasses(resolveConfig(tailWindConfig))('w-full'),
+);
+
 const FlowContainerPage = (props: any) => (
   <Page {...props}>
     <Helmet htmlAttributes={{ dir: 'rtl' }} />
     <Layout>
-      <h2 className="text-2xl font-bold mt-4">Flow Container RTL</h2>
-      <RTLFlowContainer id="rtl-flow-container" />
+      <H1>RTL FlowContainer Examples</H1>
+      <H2>Default Flow Container RTL</H2>
+      <RTLFlowContainer
+        id="rtl-flow-container"
+        nodeKey="rtl_default"
+      />
+      <H2>
+        FlowContainer with constrained width of 100% only
+      </H2>
+      <RTLFlowContainer
+        id="rtl-constrained-full-width"
+        nodeKey="rtl_constrained_full_width"
+        snapData={snapDataFullWidth}
+      />
+      <H2>FlowContainer restricted to 1 item</H2>
+      <RTLFlowContainer
+        id="rtl-restricted"
+        nodeKey="rtl_restricted"
+        maxComponents={1}
+      />
+      <H2>Default Width of 50%</H2>
+      <RTLFlowContainer
+        id="rl-width-50"
+        nodeKey="rtl_width_50"
+        getDefaultWidth={() => 'w-full lg:w-1/2'}
+      />
+      <H2>Default Width of 75%</H2>
+      <RTLFlowContainer
+        id="rtl-width-75"
+        nodeKey="rtl_width_75"
+        getDefaultWidth={() => 'w-full lg:w-3/4'}
+      />
     </Layout>
   </Page>
 );
