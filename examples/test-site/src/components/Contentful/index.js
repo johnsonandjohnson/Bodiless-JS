@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,9 +12,13 @@
  * limitations under the License.
  */
 
-import Image from './SiteBuildGuide.jpg';
+const path = require('path');
 
-export default {
-  src: Image,
-  alt: 'Site Build Guide',
+const getConfig = () => [
+  path.resolve(__dirname, './Tout'),
+  path.resolve(__dirname, './Image'),
+];
+
+module.exports = {
+  getConfig,
 };

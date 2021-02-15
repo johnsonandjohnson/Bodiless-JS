@@ -1,4 +1,11 @@
 const express = require('express');
+const {
+  createContentfulPlugins,
+  getContentfulConfig: getBodilessThemeContentfulConfig,
+} = require('@bodiless/gatsby-theme-bodiless/dist/Contentful');
+const {
+  getConfig: getSiteContenfulConfig,
+} = require('./src/components/Contentful');
 
 const activeEnv = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
 
@@ -36,6 +43,10 @@ const plugins = [
   {
     resolve: 'gatsby-plugin-sitemap',
   },
+  ...createContentfulPlugins(
+    ...getBodilessThemeContentfulConfig(),
+    ...getSiteContenfulConfig(),
+  ),
 ];
 
 const tagManagerEnabled = (process.env.GOOGLE_TAGMANAGER_ENABLED || '1') === '1';

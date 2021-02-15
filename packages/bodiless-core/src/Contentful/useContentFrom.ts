@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,9 +12,7 @@
  * limitations under the License.
  */
 
-import Image from './jandjwebsite.jpg';
+import type { Path, ContentNode } from '../ContentNode';
 
-export default {
-  src: Image,
-  alt: "Johnson & Johnson's website",
-};
+const useContentFrom = (path: Path) => (node: ContentNode<any>) => node.peer(path).data;
+export default useContentFrom;

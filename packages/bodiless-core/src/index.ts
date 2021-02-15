@@ -26,6 +26,7 @@ import withSidecarNodes, { startSidecarNodes, endSidecarNodes } from './withSide
 import {
   withDefaultContent,
   withResetButton,
+  useContentFrom,
 } from './Contentful';
 import withEditButton, { useEditFormProps, createMenuOptionGroup } from './withEditButton';
 import useContextMenuForm, { contextMenuForm, ContextMenuForm } from './contextMenuForm';
@@ -127,6 +128,7 @@ export {
   withChild,
   withDefaultContent,
   withResetButton,
+  useContentFrom,
   ifToggledOff,
   ifToggledOn,
   withFlowToggle,

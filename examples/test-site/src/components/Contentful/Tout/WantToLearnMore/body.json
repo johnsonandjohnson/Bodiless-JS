@@ -1,25 +1,10 @@
-{
-  "document": {
-    "object": "document",
-    "data": {},
-    "nodes": [
+[
+  {
+    "type": "paragraph",
+    "children": [
       {
-        "object": "block",
-        "type": "paragraph",
-        "data": {},
-        "nodes": [
-          {
-            "object": "text",
-            "leaves": [
-              {
-                "object": "leaf",
-                "text": "A step by step tutorial on how to work with BodilessJS to build out a basic editable site.",
-                "marks": []
-              }
-            ]
-          }
-        ]
+        "text": "A step by step tutorial on how to work with BodilessJS to build out a basic editable site."
       }
     ]
   }
-}
+]

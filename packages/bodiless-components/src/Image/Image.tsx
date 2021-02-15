@@ -31,8 +31,8 @@ import {
 
 import { useDropzone } from 'react-dropzone';
 import { FormApi } from 'informed';
-import BackendSave from './BackendSave';
-import withPropsFromPlaceholder from './withPropsFromPlaceholder';
+import BackendSave from '../BackendSave';
+import withPropsFromPlaceholder from '../withPropsFromPlaceholder';
 // @ts-ignore fails when it is imported by jest.
 import Placeholder from './placeholder.png';
 

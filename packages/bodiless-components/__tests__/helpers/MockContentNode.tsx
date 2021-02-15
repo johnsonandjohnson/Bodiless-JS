@@ -26,6 +26,8 @@ class MockContentNode<D> implements ContentNode<D> {
   peer = jest.fn(() => new MockContentNode<any>(this.data));
 
   hasError = jest.fn().mockReturnValue(false);
+
+  proxy = jest.fn();
 }
 
 /**

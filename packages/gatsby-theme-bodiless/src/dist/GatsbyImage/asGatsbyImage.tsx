@@ -57,6 +57,9 @@ const asGatsbyImage$ = (Component: CT<any>) => {
 
 const withActivatorWrapperDefaultStyles = addClasses('bl-w-full');
 
+/**
+ * @deprecated in favor of asDesignableGatsbyImage
+ */
 const asGatsbyImage = flow(
   asGatsbyImage$,
   ifEditable(

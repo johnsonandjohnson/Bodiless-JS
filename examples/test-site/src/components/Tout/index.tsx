@@ -26,8 +26,9 @@ import {
 } from '@bodiless/organisms';
 import { withDesign } from '@bodiless/fclasses';
 import {
-  asEditableImage, asEditableLink,
+  asEditableLink,
 } from '../Elements.token';
+import { asEditableImage } from '../Image';
 import {
   withEditorBasic,
   withEditorSimple,

@@ -13,6 +13,7 @@
  */
 
 /* eslint-disable no-case-declarations */
+/* eslint-disable no-underscore-dangle */
 
 const pathUtil = require('path');
 const slash = require('slash');
@@ -60,6 +61,12 @@ const findFilesystemNode = ({ node, getNode }) => {
 
 // Adapted from create-file-path.
 const createSlug = ({ node, getNode }) => {
+  if (
+    node.instanceName !== undefined
+    && node.instanceName.startsWith('bodiless-default-content')
+  ) {
+    return 'defaultContent';
+  }
   // Find the filesystem node
   const fsNode = findFilesystemNode({ node, getNode });
   if (!fsNode) return undefined;
@@ -313,7 +320,7 @@ const generateGatsbyImage = async ({ file, preset, reporter }, options) => {
   }
 };
 
-const generateImages = async ({ node, content, reporter }, options) => {
+const createImageNode = ({ node, content }) => {
   const parsedContent = JSON.parse(content);
   if (parsedContent === undefined || parsedContent.src === undefined) {
     return undefined;
@@ -327,6 +334,9 @@ const generateImages = async ({ node, content, reporter }, options) => {
   if (!supportedExtensions[fileExtension]) {
     return undefined;
   }
+  const absolutePath = pathUtil.isAbsolute(imgSrc)
+    ? pathUtil.join(process.cwd(), 'static', imgSrc)
+    : pathUtil.join(node.dir, imgSrc);
   const imageNode = {
     id: `${node.id} >>> ImageNode`,
     parent: node.id,
@@ -335,12 +345,18 @@ const generateImages = async ({ node, content, reporter }, options) => {
     extension: pathUtil.extname(imgSrc).substr(1),
     path: imgSrc,
     // this field is mandatory for grapqhql sharp queries
-    absolutePath: pathUtil.join(process.cwd(), 'static', imgSrc),
+    absolutePath,
     internal: {
       type: 'ImageNode',
       contentDigest: generateDigest(content),
     },
   };
+  return imageNode;
+};
+
+const generateImages = async ({ node, content, reporter }, options) => {
+  const imageNode = createImageNode({ node, content });
+  const parsedContent = JSON.parse(content);
   return generateGatsbyImage({
     file: imageNode,
     preset: parsedContent.preset,
@@ -369,11 +385,16 @@ const createBodilessNode = async ({
     ...(gatsbyImgData ? { gatsbyImg: gatsbyImgData } : {}),
   }) : nodeContent;
 
+  const parsedContent = JSON.parse(content);
+  const bodilessNodeName = parsedContent._nodeKey !== undefined
+    ? parsedContent._nodeKey
+    : node.name;
+
   const bodilessNode = {
     id: `${node.id} >>> ${BODILESS_NODE_TYPE}`,
     parent: node.id,
     children: [],
-    name: node.name,
+    name: bodilessNodeName,
     extension: node.extension,
     instanceName: node.sourceInstanceName,
     content,
@@ -402,8 +423,10 @@ exports.onCreateNode = ({
   }
   // check if we should create a bodiless node
   const extensions = ['json'];
+  const isBodilessSource = node.sourceInstanceName === 'data'
+    || (node.sourceInstanceName !== undefined && node.sourceInstanceName.startsWith('bodiless-default-content'));
   // 'data' is gatsby-source-filesystem name configured in gatsby-config.js
-  if (node.sourceInstanceName === 'data' && extensions.indexOf(node.extension) !== -1) {
+  if (isBodilessSource && extensions.indexOf(node.extension) !== -1) {
     createBodilessNode({
       node,
       getNode,

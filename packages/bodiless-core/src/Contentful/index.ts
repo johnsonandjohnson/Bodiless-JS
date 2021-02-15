@@ -14,8 +14,10 @@
 
 import withDefaultContent from './withDefaultContent';
 import withResetButton from './withResetButton';
+import useContentFrom from './useContentFrom';
 
 export {
   withDefaultContent,
   withResetButton,
+  useContentFrom,
 };

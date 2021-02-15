@@ -14,14 +14,15 @@
 
 import React, { ComponentType as CT } from 'react';
 import {
-  DefaultContentNode,
   NodeProvider,
   useNode,
 } from '@bodiless/core';
 import type { WithNodeProps } from '@bodiless/core';
-import GatsbyImageNode from './GatsbyImageNode';
+import GatsbyImagePresets from './GatsbyImagePresets';
 
-const withGatsbyImageNode = (preset: string) => <P extends object>(Component: CT<P>) => {
+const withGatsbyImageNode = (
+  preset: GatsbyImagePresets,
+) => <P extends object>(Component: CT<P> | string) => {
   const WithGatsbyImageNode = ({
     nodeKey,
     nodeCollection,
@@ -29,8 +30,13 @@ const withGatsbyImageNode = (preset: string) => <P extends object>(Component: CT
   }: P & WithNodeProps) => {
     if (!nodeKey) return <Component {...rest as P} />;
     const { node } = useNode(nodeCollection);
-    // eslint-disable-next-line max-len
-    const gatsbyImgNode = GatsbyImageNode.create((node as DefaultContentNode<object>), nodeKey, preset);
+    const childNode = node.child(nodeKey);
+    const gatsbyImgNode = childNode.proxy({
+      setData: (data: any) => ({
+        ...data,
+        preset,
+      }),
+    });
     return (
       <NodeProvider node={gatsbyImgNode} collection={nodeCollection}>
         <Component {...rest as P} />

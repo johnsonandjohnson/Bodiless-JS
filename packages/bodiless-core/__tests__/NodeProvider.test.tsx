@@ -44,6 +44,8 @@ class MockContentNode implements ContentNode<Data> {
   pagePath: string = '/';
 
   baseResourcePath: string = '/';
+
+  proxy = jest.fn();
 }
 
 const ShowNode: React.FC<any> = ({ collection, id }) => {

@@ -35,7 +35,7 @@ export default class ContentfulNode<D extends object> extends DefaultContentNode
   private baseContentPath: Path = [];
 
   // @ts-ignore has no initializer and is not definitely assigned in the constructor
-  private content: D;
+  private content: object;
 
   static create(node: DefaultContentNode<object>, content: object) {
     const contentfulNode = new ContentfulNode(node.getActions(), node.getGetters(), node.path);
@@ -50,10 +50,12 @@ export default class ContentfulNode<D extends object> extends DefaultContentNode
 
   private getDefaultContent() {
     const contentKey = this.getContentKey();
-    return (this.content as any)[contentKey] || {};
+    const contentValue = (this.content as any)[contentKey];
+    if (typeof contentValue === 'function') return contentValue(this.proxy({}));
+    return contentValue || {};
   }
 
-  public setContent(content: D) {
+  public setContent(content: object) {
     this.content = content;
   }
 
@@ -79,8 +81,8 @@ export default class ContentfulNode<D extends object> extends DefaultContentNode
     );
   }
 
-  peer(path: Path) {
-    const peerNode = new ContentfulNode<object>(this.actions, this.getters, path);
+  peer<E extends object>(path: Path) {
+    const peerNode = new ContentfulNode<E>(this.actions, this.getters, path);
     peerNode.setContent(this.content);
     peerNode.setBaseContentPath(this.baseContentPath);
     return peerNode;

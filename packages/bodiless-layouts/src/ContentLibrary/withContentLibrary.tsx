@@ -40,7 +40,7 @@ const copyNode = (source: ContentNode<any>, dest: ContentNode<any>, copyChildren
 };
 
 const withContentLibrary = (options: ContentLibraryOptions) => (
-  Component: ComponentType,
+  Component: ComponentType | string,
 ) => {
   const {
     DisplayComponent = Component,

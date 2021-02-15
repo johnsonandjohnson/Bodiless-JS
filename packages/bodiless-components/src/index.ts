@@ -14,13 +14,6 @@
 
 import Editable, { withPlaceholder, asEditable } from './Editable';
 import type { UseEditableOverrides } from './Editable';
-import Image, {
-  asBodilessImage,
-  TImagePickerUI,
-  withImagePlaceholder,
-  DropZonePlugin as ImageDropZone,
-} from './Image';
-import type { AsBodilessImage } from './Image';
 import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
 import List from './List_DEPRECATED';
@@ -77,11 +70,6 @@ import withBodilessLinkToggle from './withBodilessLinkToggle';
 
 export {
   withBodilessLinkToggle,
-  Image,
-  asBodilessImage,
-  ImageDropZone,
-  withImagePlaceholder,
-  TImagePickerUI,
   Editable,
   NodeViewer,
   withLinkToggle,
@@ -142,6 +130,7 @@ export {
 };
 
 export * from './Chameleon/index';
+export * from './Image';
 export * from './List';
 export * from './Link';
 
@@ -150,6 +139,5 @@ export * from './Breadcrumbs';
 export type { MetaFormFieldType, YouTubePlayerSettings };
 
 export type {
-  AsBodilessImage,
   UseEditableOverrides,
 };

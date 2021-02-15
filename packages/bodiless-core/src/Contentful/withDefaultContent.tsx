@@ -35,7 +35,7 @@ import { DefaultContentNode } from '../ContentNode';
  * An HOC providing default content to the wrapped component.
  */
 const withDefaultContent = <P extends object, D extends object>(content: D|((props:P) => D)) => (
-  (Component: CT<P>) => {
+  (Component: CT<P> | string) => {
     const WithDefaultContent = (props: P) => {
       const { node } = useNode();
       const content$ = typeof content === 'function'

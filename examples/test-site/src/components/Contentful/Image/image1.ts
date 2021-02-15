@@ -12,9 +12,6 @@
  * limitations under the License.
  */
 
-import Image from './contentful1.png';
+import { useContentFrom } from '@bodiless/core';
 
-export default {
-  src: Image,
-  alt: 'contentful 1',
-};
+export default useContentFrom(['DefaultContent', 'contentful1']);

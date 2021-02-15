@@ -12,48 +12,51 @@
  * limitations under the License.
  */
 
+/* eslint-disable max-len */
+
 import { ComponentType } from 'react';
 import {
   withChild,
-  withDefaultContent,
-  withResetButton,
   withSidecarNodes,
 } from '@bodiless/core';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 import {
   asBodilessLink,
   withImagePlaceholder,
+  withDefaultImageContent,
 } from '@bodiless/components';
 import {
-  asGatsbyImage as asBaseGatsbyImage,
-  withGatsbyImageNode,
   GatsbyImagePresets,
-  withGatsbyImageLogger,
+  withGatsbyImagePreset,
 } from '@bodiless/gatsby-theme-bodiless';
-import { A, Img } from '@bodiless/fclasses';
+import {
+  asToken,
+  stylable,
+  A,
+  Img,
+} from '@bodiless/fclasses';
 import landscapeImage from './landscape_image.png';
-import { asEditableImage } from '../Elements.token';
+import { asEditableImage as asBaseEditableImage } from '../Elements.token';
 
-type Data = {
-  src: string;
-  alt: string;
-};
+export const asEditableImagePlain = (nodeKey?, placeholder?, useOverrides?) => asToken(
+  asToken.meta.term('Component')('Image'),
+  asToken.meta.term('Category')('Editors'),
+  stylable,
+  asBaseEditableImage(nodeKey, undefined, useOverrides),
+  withImagePlaceholder(placeholder),
+);
+
+const asEditableImage = withGatsbyImagePreset(GatsbyImagePresets.FluidWithWebp)(asEditableImagePlain);
 
 // Allows to set default content for image based component.
-const asContentfulImage = (nodeContent: Partial<Data>) => (nodeKey: string) => flowRight(
-  withDefaultContent({
-    [nodeKey]: nodeContent,
-  }),
-  withResetButton(),
-  asEditableImage(nodeKey),
-);
+const asContentfulImage = withDefaultImageContent(asEditableImage);
 
 const DEFAULT_IMAGE_NODE_KEY = 'image';
 const DEFAULT_LINK_NODE_KEY = 'link';
 
 const asEditableImageWithPlaceholder = (placeholder: string) => (nodeKey: string) => flowRight(
   withImagePlaceholder({ src: placeholder }),
-  asEditableImage(nodeKey),
+  asBaseEditableImage(nodeKey),
 );
 
 const asLinkableImage = (ImageComponent: ComponentType<any>) => (nodeKey: string) => flowRight(
@@ -63,45 +66,12 @@ const asLinkableImage = (ImageComponent: ComponentType<any>) => (nodeKey: string
   withChild(ImageComponent),
 );
 
-const asSquareImage = asEditableImage;
+const asSquareImage = asBaseEditableImage;
 const SquareImage = asSquareImage(DEFAULT_IMAGE_NODE_KEY)(Img);
 const SquareLinkableImage = asLinkableImage(SquareImage)(DEFAULT_LINK_NODE_KEY)(A);
 const asLandscapeImage = asEditableImageWithPlaceholder(landscapeImage);
 const LandscapeImage = asLandscapeImage(DEFAULT_IMAGE_NODE_KEY)(Img);
 const LandscapeLinkableImage = asLinkableImage(LandscapeImage)(DEFAULT_LINK_NODE_KEY)(A);
-
-const asGatsbyImg = (preset: string) => flowRight(
-  withGatsbyImageNode(preset),
-  asEditableImage(),
-  withGatsbyImageLogger(preset),
-  asBaseGatsbyImage,
-);
-
-const asFluidGatsbyImage = asGatsbyImg(GatsbyImagePresets.Fluid);
-const asFluidNoBase64GatsbyImage = asGatsbyImg(GatsbyImagePresets.FluidNoBase64);
-const asFluidTracedSVGGatsbyImage = asGatsbyImg(GatsbyImagePresets.FluidTracedSVG);
-const asFluidWithWebpGatsbyImage = asGatsbyImg(GatsbyImagePresets.FluidWithWebp);
-const asFluidWithWebpNoBase64GatsbyImage = asGatsbyImg(GatsbyImagePresets.FluidWithWebpNoBase64);
-const asFluidWithWebpTracedSVGGatsbyImage = asGatsbyImg(GatsbyImagePresets.FluidWithWebpTracedSVG);
-const asFixedGatsbyImage = asGatsbyImg(GatsbyImagePresets.Fixed);
-const asFixedNoBase64GatsbyImage = asGatsbyImg(GatsbyImagePresets.FixedNoBase64);
-const asFixedTracedSVGGatsbyImage = asGatsbyImg(GatsbyImagePresets.FixedTracedSVG);
-const asFixedWithWebpGatsbyImage = asGatsbyImg(GatsbyImagePresets.FixedWithWebp);
-const asFixedWithWebpNoBase64GatsbyImage = asGatsbyImg(GatsbyImagePresets.FixedWithWebpNoBase64);
-const asFixedWithWebpTracedSVGGatsbyImage = asGatsbyImg(GatsbyImagePresets.FixedWithWebpTracedSVG);
-
-const FluidGatsbyImage = asFluidGatsbyImage(Img);
-const FluidNoBase64GatsbyImage = asFluidNoBase64GatsbyImage(Img);
-const FluidTracedSVGGatsbyImage = asFluidTracedSVGGatsbyImage(Img);
-const FluidWithWebpGatsbyImage = asFluidWithWebpGatsbyImage(Img);
-const FluidWithWebpNoBase64GatsbyImage = asFluidWithWebpNoBase64GatsbyImage(Img);
-const FluidWithWebpTracedSVGGatsbyImage = asFluidWithWebpTracedSVGGatsbyImage(Img);
-const FixedGatsbyImage = asFixedGatsbyImage(Img);
-const FixedNoBase64GatsbyImage = asFixedNoBase64GatsbyImage(Img);
-const FixedTracedSVGGatsbyImage = asFixedTracedSVGGatsbyImage(Img);
-const FixedWithWebpGatsbyImage = asFixedWithWebpGatsbyImage(Img);
-const FixedWithWebpNoBase64GatsbyImage = asFixedWithWebpNoBase64GatsbyImage(Img);
-const FixedWithWebpTracedSVGGatsbyImage = asFixedWithWebpTracedSVGGatsbyImage(Img);
 
 export {
   SquareImage,
@@ -112,28 +82,5 @@ export {
   asLandscapeImage,
   asEditableImageWithPlaceholder,
   asLinkableImage,
-  asFluidGatsbyImage,
-  asFluidNoBase64GatsbyImage,
-  asFluidTracedSVGGatsbyImage,
-  asFluidWithWebpGatsbyImage,
-  asFluidWithWebpNoBase64GatsbyImage,
-  asFluidWithWebpTracedSVGGatsbyImage,
-  asFixedGatsbyImage,
-  asFixedNoBase64GatsbyImage,
-  asFixedTracedSVGGatsbyImage,
-  asFixedWithWebpGatsbyImage,
-  asFixedWithWebpNoBase64GatsbyImage,
-  asFixedWithWebpTracedSVGGatsbyImage,
-  FluidGatsbyImage,
-  FluidNoBase64GatsbyImage,
-  FluidTracedSVGGatsbyImage,
-  FluidWithWebpGatsbyImage,
-  FluidWithWebpNoBase64GatsbyImage,
-  FluidWithWebpTracedSVGGatsbyImage,
-  FixedGatsbyImage,
-  FixedNoBase64GatsbyImage,
-  FixedTracedSVGGatsbyImage,
-  FixedWithWebpGatsbyImage,
-  FixedWithWebpNoBase64GatsbyImage,
-  FixedWithWebpTracedSVGGatsbyImage,
+  asEditableImage,
 };

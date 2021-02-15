@@ -14,13 +14,16 @@
 
 import React, { Fragment } from 'react';
 import { graphql } from 'gatsby';
-import { Page } from '@bodiless/gatsby-theme-bodiless';
-import path from 'path';
+import {
+  Page,
+  withGatsbyImageLibrary,
+  GatsbyImagePresets,
+} from '@bodiless/gatsby-theme-bodiless';
 
 import { asEditable } from '@bodiless/components';
 import {
   useNode, withContextActivator, withLocalContextMenu, withDefaultContent,
-  withNode, withNodeKey, ContentNode,
+  withNode, withNodeKey, useContentFrom,
 } from '@bodiless/core';
 import { H1, H2, addClasses } from '@bodiless/fclasses';
 import { withContentLibrary } from '@bodiless/layouts';
@@ -28,15 +31,9 @@ import { ComponentSelector } from '@bodiless/layouts-ui';
 import { flow } from 'lodash';
 import { observer } from 'mobx-react-lite';
 import Layout from '../../../components/Layout';
+import { asEditableImage } from '../../../components/Image';
 
-// @ts-ignore Can't find module
-import Window from './window.png';
-// @ts-ignore Can't find module
-import Door from './door.png';
-// @ts-ignore Can't find module
-import Balcony from './balcony.png';
-
-import { asHeader1, asHeader2, asEditableImage } from '../../../components/Elements.token';
+import { asHeader1, asHeader2 } from '../../../components/Elements.token';
 
 const Title = asHeader1(H1);
 const SectionTitle = flow(addClasses('mt-5'), asHeader2)(H2);
@@ -80,17 +77,9 @@ const content = {
       contain terms different from this Agreement are offered by that Contributor.
     `,
   },
-  ___content$images$window: {
-    src: Window,
-    alt: 'A view from the window',
-  },
-  ___content$images$door: {
-    src: Door,
-  },
-  ___content$images$balcony: {
-    src: Balcony,
-    alt: 'A balcony with arches',
-  },
+  ___content$images$window: useContentFrom(['Page', 'window']),
+  ___content$images$door: useContentFrom(['Page', 'door']),
+  ___content$images$balcony: useContentFrom(['Page', 'balcony']),
   ___content$images$skip: {
     text: 'not an image',
   },
@@ -133,30 +122,7 @@ const TextDemo = flow(
   withNodeKey('text'),
 )('span');
 
-const useImageLibraryNode = () => {
-  const { node } = useNode();
-  return { node: node.peer('Page$___content$images') };
-};
-
-const useImageMeta = (node: ContentNode<any>) => {
-  const { data } = node;
-  if (!data.src) return null;
-  return {
-    title: path.basename(data.src),
-    description: data.alt || '',
-  };
-};
-
-const ImageDemo = flow(
-  asEditableImage(),
-  withContentLibrary({
-    Selector: ComponentSelector,
-    useLibraryNode: useImageLibraryNode,
-    useMeta: useImageMeta,
-  }),
-  withNode,
-  withNodeKey('image'),
-)('img');
+const ImageDemo = withGatsbyImageLibrary(GatsbyImagePresets.FluidWithWebp)(asEditableImage)('Page$___content$images')('image')('img');
 
 export default (props: any) => (
   <Page {...props}>
@@ -178,5 +144,6 @@ export const query = graphql`
   query($slug: String!) {
     ...PageQuery
     ...SiteQuery
+    ...DefaultContentQuery
   }
 `;

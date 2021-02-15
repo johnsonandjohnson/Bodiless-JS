@@ -42,4 +42,17 @@ export const defaultQuery = graphql`
       }
     }
   }
+  fragment DefaultContentQuery on Query {
+    DefaultContent: allBodiless(filter: { fields: { slug: { eq: "defaultContent" } } }) {
+      edges {
+        node {
+          name
+          content
+          fields {
+            slug
+          }
+        }
+      }
+    }
+  }
 `;

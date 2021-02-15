@@ -44,8 +44,9 @@ const createNodeConsumer = (displayName?: string) => {
   const NodeConsumer: FC = () => {
     const { node } = useNode();
     const { data } = node;
+    const data$ = Object.keys(data).length === 0 ? '' : data;
     // ToDo: find a better way how to test react hooks
-    return <>{data}</>;
+    return <>{data$}</>;
   };
   NodeConsumer.displayName = displayName || 'NodeConsumer';
   return NodeConsumer;
@@ -67,6 +68,89 @@ const withRootNode = (store: Store) => <P extends object>(Component: ComponentTy
 };
 
 describe('withDefaultContent', () => {
+  it('allows passing default content for an item as an object', () => {
+    const FooConsumer = createNodeConsumer('Foo');
+    const Foo = flow(
+      withNode,
+      withNodeKey('foo'),
+      withDefaultContent({
+        foo: 'defaultFooValue',
+      }),
+    )(FooConsumer);
+    const wrapper = mount(<Foo />);
+    expect(wrapper.find('Foo').html()).toBe('defaultFooValue');
+  });
+  it('allows passing default content for an item as a function', () => {
+    const FooConsumer = createNodeConsumer('Foo');
+    const Foo = flow(
+      withNode,
+      withNodeKey('foo'),
+      withDefaultContent({
+        foo: () => 'defaultFooValue',
+      }),
+    )(FooConsumer);
+    const wrapper = mount(<Foo />);
+    expect(wrapper.find('Foo').html()).toBe('defaultFooValue');
+  });
+  it('allows passing default content for a compound component', () => {
+    const Foo = flow(
+      withNode,
+      withNodeKey('foo'),
+    )(createNodeConsumer('Foo'));
+    const Bar = flow(
+      withNode,
+      withNodeKey('bar'),
+    )(createNodeConsumer('Bar'));
+    const BazBase = () => (
+      <>
+        <Foo />
+        <Bar />
+      </>
+    );
+    const Baz = withDefaultContent({
+      foo: 'defaultFooValue',
+      bar: 'defaultBarValue',
+    })(BazBase);
+    const wrapper = mount(<Baz />);
+    expect(wrapper.find('Foo').html()).toBe('defaultFooValue');
+    expect(wrapper.find('Bar').html()).toBe('defaultBarValue');
+  });
+  describe('when default content is specified as a function for an item', () => {
+    it('passes node as an argument to the functon', () => {
+      const FooConsumer = createNodeConsumer('Foo');
+      const Foo = flow(
+        withNode,
+        withNodeKey('foo'),
+        withDefaultContent({
+          foo: (node: any) => node.path.join('$'),
+        }),
+      )(FooConsumer);
+      const wrapper = mount(<Foo />);
+      expect(wrapper.find('Foo').html()).toBe('root$foo');
+    });
+    it('allows getting sibling node data', () => {
+      const Foo = flow(
+        withNode,
+        withNodeKey('foo'),
+      )(createNodeConsumer('Foo'));
+      const Bar = flow(
+        withNode,
+        withNodeKey('bar'),
+      )(createNodeConsumer('Bar'));
+      const BazBase = () => (
+        <>
+          <Foo />
+          <Bar />
+        </>
+      );
+      const Baz = withDefaultContent({
+        foo: (node: any) => node.peer(['root', 'bar']).data,
+        bar: 'defaultBarValue',
+      })(BazBase);
+      const wrapper = mount(<Baz />);
+      expect(wrapper.find('Foo').html()).toBe('defaultBarValue');
+    });
+  });
   describe('when a component with single node is wrapped', () => {
     describe('when the wrapped component node data is not empty', () => {
       test('wrapped component takes node data from store', () => {

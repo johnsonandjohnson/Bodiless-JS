@@ -38,14 +38,16 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build": "npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
     "build:api-doc": "typedoc --out doc/api --mode file",
-    "clean": "rimraf -rf \"dist\" && rimraf index* && rimraf \"doc/api\""
+    "clean": "rimraf -rf \"dist\" && rimraf index* && rimraf \"doc/api\"",
+    "copy": "copyfiles -u 1 \"./src/dist/**/*.{json,jpg,png}\" \".\""
   },
   "dependencies": {
     "@bodiless/core": "^0.0.69",
     "@bodiless/core-ui": "^0.0.69",
+    "@bodiless/components": "^0.0.69",
     "@bodiless/fclasses": "^0.0.69",
     "@bodiless/layouts": "^0.0.69",
     "@bodiless/organisms": "^0.0.69",

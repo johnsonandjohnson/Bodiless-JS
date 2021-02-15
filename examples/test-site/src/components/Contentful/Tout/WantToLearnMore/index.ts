@@ -13,17 +13,17 @@
  */
 
 import { flow } from 'lodash';
+import { useContentFrom } from '@bodiless/core';
 import { ToutClean } from '@bodiless/organisms';
 import { asContentfulTout } from '../../../Tout';
 import { asToutDefaultStyle, asToutHorizontal } from '../../../Tout/token';
 import title from './title.json';
 import body from './body.json';
-import image from './image';
 import link from './link.json';
 import ctatext from './ctatext.json';
 
 const toutContent = {
-  image,
+  image: useContentFrom(['DefaultContent', 'SiteBuildGuide']),
   title,
   body,
   link,

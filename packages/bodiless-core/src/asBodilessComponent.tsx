@@ -16,6 +16,7 @@ import React, { ComponentType as CT } from 'react';
 import {
   pick, omit, identity, flowRight,
 } from 'lodash';
+import type { HOC } from '@bodiless/fclasses/lib/Tokens';
 import withNode, { withNodeKey } from './withNode';
 import {
   withNodeDataHandlers, withoutProps, withContextActivator, withLocalContextMenu,
@@ -47,7 +48,6 @@ export type Options<P, D> = EditButtonOptions<P, D> & {
   defaultData?: D,
 };
 
-type HOC<P, Q> = (Component: CT<P>|string) => CT<Q>;
 type BodilessProps = Partial<WithNodeProps>;
 type AsBodiless<P, D, E = {}> = (
   nodeKeys?: WithNodeKeyProps,
