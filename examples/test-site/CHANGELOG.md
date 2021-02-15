@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.69](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.68...v0.0.69) (2021-02-12)
+
+
+### Features
+
+* **core:** Make text editors designable ([#837](https://github.com/johnsonandjohnson/bodiless-js/issues/837)) ([8a507bd](https://github.com/johnsonandjohnson/bodiless-js/commit/8a507bd64ef204a37218ac0ebe80a9f15ef99d91))
+* **fclasses:** Add configurable attribute for design keys ([#822](https://github.com/johnsonandjohnson/bodiless-js/issues/822)) ([546b606](https://github.com/johnsonandjohnson/bodiless-js/commit/546b6065ec3aacb79e3335a5b82168866928e6cc))
+
+
+
+
+
 ## [0.0.68](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.67...v0.0.68) (2021-01-25)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.69](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.68...v0.0.69) (2021-02-12)
+
+
+### Features
+
+* **bodiless-components,bodiless-migration-tool,gatsby-theme-bodiless:** Bodiless Image supports Img Title ([#755](https://github.com/johnsonandjohnson/bodiless-js/issues/755)) ([45ed2aa](https://github.com/johnsonandjohnson/bodiless-js/commit/45ed2aab856af2d12fb251bb795372e42ba864e5))
+* **components:** add a go to link for bodiless links in edit mode. ([#823](https://github.com/johnsonandjohnson/bodiless-js/issues/823)) ([dd85931](https://github.com/johnsonandjohnson/bodiless-js/commit/dd85931f7d118cc9849b58bdcb80a27c612ea64e)), closes [#585](https://github.com/johnsonandjohnson/bodiless-js/issues/585)
+
+
+
+
+
 ## [0.0.68](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.67...v0.0.68) (2021-01-25)
 
 

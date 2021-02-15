@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
+/* eslint-disable react/jsx-one-expression-per-line */
+
 import React from 'react';
 import { graphql } from 'gatsby';
 import flow from 'lodash/flow';
@@ -33,7 +35,7 @@ import {
 const AlphabeticFullFeaturedEditor = flow(
   withEditorFullFeatured('alphabeticRTE', 'Type something here...'),
   withDesign({
-    Child: addProps({
+    Editor: addProps({
       onKeyDown: event => {
         if (
           // alphabet characters
@@ -75,6 +77,11 @@ const RichTextPage = (props: any) => (
 
       <div className="flex flex-col w-full py-5">
         <h3 className="p-5 font-bold">Alphabetic Full Rich Text:</h3>
+        <p className="px-5 pb-5">
+          The purpose of this rich text is to demonstrate <a className="text-blue-700 underline" href="https://github.com/johnsonandjohnson/Bodiless-JS/issues/797">API</a> that allows to customize editors which have been added to compound components.
+          This rich text accepts typing alphabetic character
+          but it does not limit pasting content with non-alphabetic characters.
+        </p>
         <div className="p-5 pt-0">
           <AlphabeticFullFeaturedEditor className="border-solid border-4 border-gray-600 p-5" />
         </div>

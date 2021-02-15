@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.69](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.68...v0.0.69) (2021-02-12)
+
+
+### Features
+
+* **bodiless-components,bodiless-migration-tool,gatsby-theme-bodiless:** Bodiless Image supports Img Title ([#755](https://github.com/johnsonandjohnson/bodiless-js/issues/755)) ([45ed2aa](https://github.com/johnsonandjohnson/bodiless-js/commit/45ed2aab856af2d12fb251bb795372e42ba864e5))
+* **fclasses:** Add configurable attribute for design keys ([#822](https://github.com/johnsonandjohnson/bodiless-js/issues/822)) ([546b606](https://github.com/johnsonandjohnson/bodiless-js/commit/546b6065ec3aacb79e3335a5b82168866928e6cc))
+
+
+
+
+
 ## [0.0.68](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.67...v0.0.68) (2021-01-25)
 
 **Note:** Version bump only for package @bodiless/gatsby-theme-bodiless

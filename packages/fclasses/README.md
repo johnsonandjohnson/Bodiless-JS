@@ -27,6 +27,190 @@ component changes. Consumers of those components can then sustainably extend and
 re-extend their look and feel, with less danger of breakage when the underlying
 component changes.
 
+## Tokens
+
+In Bodiless, you implement design tokens as React higher-order components (HOC).
+Applying the HOC to a component is equivalent to styling that component with a
+token:
+
+```js
+const ComponentWithStyles = withMyStyles(Component);
+```
+
+This pattern should be familiar to those who have worked with CSS-in-JS libraries
+like [Styled Components](https://styled-components.com/) or [Emotion](https://emotion.sh/docs/introduction).
+
+Any HOC can be used as a token, and tokens can be composed using normal
+functional programming paradigms (eg Lodash flow):
+```js
+const withComposedToken = flow(
+  withToken1,
+  withToken2,
+);
+```
+
+However, Bodiless provides a token composition utility which adds some
+additional functionality:
+
+- The ability to attach metadata to a token.
+- The ability to selectively remove tokens from a composition based on
+  their metadata (or other criteria).
+
+This is intended to promote design-system thinking when defining
+tokens, by encouraging us to think about the structure and organization
+of tokens as we implement them.  It also facilitates implementation of
+tools which allow browsing the design system (eg StorybooK), and eases
+the process of extending or customizing composed tokens without fully
+recomposing them.
+
+In general, you can use `asToken` to compose tokens the same way you
+would use Lodash flow, eg:
+
+```js
+const withComposedToken = asToken(
+  withToken1,
+  withToken2,
+);
+```
+
+However, there are a few key differences:
+
+- Metadata (static properties) attached to a component are prppagated through
+  the chain of HOC's.
+- If you are using Typescript, the type of the parameters is constrained to be an
+  HOC (or an object specifying metadata, see below).
+- There is an optional overload to accept a "TokenMeta" object which consists of
+  metadata which should be attached to the token.
+- We intruduce a special kind of Token known as a "Filter". See more
+  below.
+
+### Metadata and Filters
+
+Token metadata are properties which can be attached to tokens to help
+organize them and understand their structure. When a token is applied,
+its metadata will also be attached to the component to which it is applied.
+If a composed token is applied, metadata from all constituents will be
+aggregated and attached to the target component. See below for some examples.
+
+In addition to a normal HOC, a Token can also be a "filter". A filter is a token
+which, when composed with other tokens, *removes* any which match certain
+criteria. Filters are usually defined to test the metadata attached to other
+tokens. So, for exmple, you can compose a token which removes all 'Color' tokens
+and adds a new one.
+
+> Note that while metadata from all constituent tokens are aggregated and attached
+> to the component to which a composed token is applied, the composed token
+> itself does not have the metadata of its constituents; if it did, it would be
+> much harder to filter. Think of the metadata attached to a Token as that portion
+> of the final metadata which it will contribute.
+>
+> It's easy enough to get the aggregated metadata, eg:
+> ```
+> const finalMeta = pick(myToken(Fragment), 'categories', 'title', ...);
+> ```
+
+### Examples
+
+Given
+
+```js
+const asBold = asToken(
+  addClasses('font-bold'),
+  { categories: { Style: ['Bold'] } },
+);
+
+const asTextBlue = asToken(
+  addClasses('text-blue-500'),
+  { categories: { TextColor: ['Blue'] } },
+);
+
+const asTextRed = asToken(
+  addClasses('text-red-500'),
+  { categories: { TextColor: ['Red'] } },
+);
+// Same as:
+// const asTextRed = asToken(addClasses('text-red-500'));
+// asTextRed.meta = { categories: { TextColor: ['Red'] } };
+
+const asBgYellow = asToken(
+  addClasses('bg-yellow-500'),
+  { categories: { BgColor: ['Yellow'] } },
+)
+
+const asHeader1 = asToken(
+  asTextBlue,
+  asBold,
+  asBgYellow,
+  { categories: { Header: ['H1'] } },
+);
+
+const Header1 = asHeader1(H1);  // `H1` is a version of 'h1' stylable with fclasses, see below.
+```
+
+Then
+
+```js
+
+<Header1 /> === <h1 className="text-blue bg-yellow-500 font-bold" />
+
+// The component itself includes aggregated metadata from all composed tokens...
+Header1.categories === {
+  TextColor: ['Blue'],
+  BgColor: ['Yellow'],
+  TextStyle: ['Bold'],
+  Header: ['H1'],
+};
+
+// ... but the token itself does not.
+asHeader1.meta === {
+  categories: {
+    Header: ['H1'],
+  }
+}
+```
+
+And given
+
+```js
+const asRedHeader1 = asToken(
+  asHeader1,
+  asHeader1.meta, // We are creating a variant of asHeader1, so propagate its meta.
+  // The following creates a "filter" token. Note this must be applied after asHeader1
+  withTokenFilter(t => !t.meta.categories.includes('TextColor')),
+  // Replace the color with red.  Note this must be applied after the filter.
+  asTextRed,
+);
+
+const RedHeader1 = asRedHeader1(H1);
+```
+
+then
+
+```jsx
+<RedHeader1 /> === <h1 className="font-bold text-red-500 bg-yellow-500" />
+
+// Our new token has the metadata of `asHeader1` only because we propagated it explicitly.
+asRedHeader1.meta === {
+  categories: {
+    Header: ['H1'],
+  },
+};
+
+RedHeader1.categories === {
+  TextColor: ['Red'],
+  BgColor: ['Yellow'],
+  TextStyle: ['Bold'],
+  Header: ['H1'],
+};
+```
+
+> **Order is important**
+>
+> As you can see from the examples above, the order in
+> which you compose tokens can be significant, especially when applying filters.
+> `asToken` composes tokens in left-to-right order (Lodash `flow` as opposed to
+> `flowRight`).
+
 ## Styling Elements with FClasses
 
 ### Functional CSS
@@ -67,7 +251,9 @@ Usually, a framework is used to generate the utility classes programmatically. [
 and [Tailwind](https://tailwindcss.com/) are two such frameworks. All the
 examples below use classes generated by Tailwind.
 
-### FClasses
+
+
+## FClasses
 
 The `FClasses` API in this library provides higher-order components which can be
 used to add and remove classes from an element. They allow a single element
