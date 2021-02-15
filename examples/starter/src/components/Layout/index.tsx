@@ -19,6 +19,7 @@ import {
 } from '@bodiless/fclasses';
 import { useNode, withNodeKey, ifToggledOn } from '@bodiless/core';
 import { withBreadcrumbStore } from '@bodiless/components';
+import { withSearchResult } from '@bodiless/search';
 import Header from './header';
 import Footer from './footer';
 import SeoHelmet from './meta';
@@ -58,7 +59,7 @@ const BaseLayout = ({ children, components }) => {
 
 const isHomePage = () => useNode().node.pagePath === '/';
 
-const Layout = designable({
+const Layout$ = designable({
   Breadcrumbs: flow(
     withNodeKey({ nodeKey: 'MainMenu', nodeCollection: 'site' }),
     addClasses('pt-2'),
@@ -66,5 +67,7 @@ const Layout = designable({
     ifToggledOn(isHomePage)(replaceWith(React.Fragment)),
   )(MegaMenuBreadcrumbs),
 })(BaseLayout);
+
+const Layout = withSearchResult(Layout$);
 
 export default Layout;
