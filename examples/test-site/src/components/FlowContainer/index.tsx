@@ -16,18 +16,16 @@ import flow from 'lodash/flow';
 import { withDesign } from '@bodiless/fclasses';
 import { withMandatoryCategories, ifNotComponentSelector } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
-import withDefaultVariations from './withDefaultVariations';
 import withRichTextVariations from './withRichTextVariations';
 import withImageVariations from './withImageVariations';
 import withFlowContainerVariations from './withFlowContainerVariations';
+import asDefaultFlowContainer from './asDefaultFlowContainer';
 
 import { asFlowContainerRTL, asFlowContainerWithMargins } from './token';
 
 const FlowContainerDefault = flow(
-  withDefaultVariations,
+  asDefaultFlowContainer,
   withFlowContainerVariations,
-  asFlowContainerWithMargins,
-  withMandatoryCategories(['Orientation', 'Type']),
 )(FlowContainer);
 
 const FlowContainerDefaultRTL = flow(

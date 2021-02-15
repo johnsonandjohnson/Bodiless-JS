@@ -23,22 +23,13 @@ import {
 import {
   withTitle,
   withDesc,
-  withMandatoryCategories,
   ifComponentSelector,
 } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import { withType } from './Categories';
-import withDefaultVariations from './withDefaultVariations';
-
-import { asFlowContainerWithMargins } from './token';
+import asDefaultFlowContainer from './asDefaultFlowContainer';
 
 const FlowContainerPreview = () => <Div className="bl-bg-black">Flow Container Preview</Div>;
-
-const asDefaultFlowContainer = flow(
-  withDefaultVariations,
-  asFlowContainerWithMargins,
-  withMandatoryCategories(['Orientation', 'Type']),
-);
 
 const withFlowContainerVariations = withDesign({
   FlowContainer: flow(
