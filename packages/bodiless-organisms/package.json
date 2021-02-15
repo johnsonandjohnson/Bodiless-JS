@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/organisms",
-  "version": "0.0.68",
+  "version": "0.0.69",
   "description": "Basic components to build out sites.",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
@@ -28,13 +28,13 @@
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
-    "@bodiless/bv": "^0.0.68",
-    "@bodiless/components": "^0.0.68",
-    "@bodiless/components-ui": "^0.0.68",
-    "@bodiless/core": "^0.0.68",
-    "@bodiless/fclasses": "^0.0.68",
-    "@bodiless/richtext": "^0.0.68",
-    "@bodiless/richtext-ui": "^0.0.68",
+    "@bodiless/bv": "^0.0.69",
+    "@bodiless/components": "^0.0.69",
+    "@bodiless/components-ui": "^0.0.69",
+    "@bodiless/core": "^0.0.69",
+    "@bodiless/fclasses": "^0.0.69",
+    "@bodiless/richtext": "^0.0.69",
+    "@bodiless/richtext-ui": "^0.0.69",
     "@types/react-burger-menu": "^2.6.0",
     "@types/react-tag-autocomplete": "^5.12.0",
     "lodash": "^4.17.19",
