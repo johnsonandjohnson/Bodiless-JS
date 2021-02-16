@@ -138,7 +138,7 @@ describe('useGetMenuOptions', () => {
     it('Returns an add button', () => {
       const { insertFlowContainerItem } = useFlowContainerDataHandlers();
       const options = getMenuOptions(3);
-      const addButton = options.find(option => option.name === 'add-item');
+      const addButton = options.find(option => option.name.startsWith('add-item'));
       expect(addButton).not.toBeUndefined();
       invokeAction(addButton!, 'Baz');
       expectDataHandlerCall(insertFlowContainerItem, ['Baz', foo]);
@@ -153,7 +153,7 @@ describe('useGetMenuOptions', () => {
     it('Returns a copy button', () => {
       const { insertFlowContainerItem } = useFlowContainerDataHandlers();
       const options = getMenuOptions(3);
-      const copyButton = options.find(option => option.name === 'copy-item');
+      const copyButton = options.find(option => option.name.startsWith('copy-item'));
       expect(copyButton).not.toBeUndefined();
       // @ts-ignore handler expects an event but doesn't use it
       copyButton.handler();
@@ -162,14 +162,14 @@ describe('useGetMenuOptions', () => {
 
     it('Does not return a copy button when flow container is full', () => {
       const options = getMenuOptions(2);
-      const copyButton = options.find(option => option.name === 'copy-item');
+      const copyButton = options.find(option => option.name.startsWith('copy-item'));
       expect(copyButton).toBeUndefined();
     });
 
     it('Returns a delete button', () => {
       const { deleteFlowContainerItem } = useFlowContainerDataHandlers();
       const options = getMenuOptions();
-      const button = options.find(option => option.name === 'delete');
+      const button = options.find(option => option.name.startsWith('delete'));
       expect(button).not.toBeUndefined();
       // @ts-ignore handler expects an event but doesn't use it
       button.handler();
@@ -179,7 +179,7 @@ describe('useGetMenuOptions', () => {
     it('Returns a swap button', () => {
       const { updateFlowContainerItem } = useFlowContainerDataHandlers();
       const options = getMenuOptions();
-      const button = options.find(option => option.name === 'swap');
+      const button = options.find(option => option.name.startsWith('swap'));
       expect(button).not.toBeUndefined();
       invokeAction(button!, 'Bar');
       expectDataHandlerCall(updateFlowContainerItem, [{ ...foo, type: 'Bar' }]);

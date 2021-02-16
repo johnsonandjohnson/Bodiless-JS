@@ -103,7 +103,7 @@ const useCloneButton = (
   );
 
   return {
-    name: 'copy-item',
+    name: `copy-item-${item.uuid}`,
     label: 'Copy',
     icon: 'content_copy',
     global: false,
@@ -130,7 +130,7 @@ const useDeleteButton = (
   };
 
   return {
-    name: 'delete',
+    name: `delete-${item.uuid}`,
     label: 'Delete',
     icon: 'delete',
     global: false,
@@ -152,8 +152,7 @@ const useAddButton = (
   const isHidden = item
     ? useCallback(() => !context.isEdit || getItems().length >= maxComponents, [maxComponents])
     : useCallback(() => !context.isEdit || getItems().length > 0, []);
-  // @TODO For nested flow containers we'll have to give these unique names.
-  const name = item ? 'add-item' : 'add';
+  const name = item ? `add-item-${item.uuid}` : 'add';
   return {
     icon: 'add',
     label: 'Add',
@@ -175,7 +174,7 @@ const useSwapButton = (
   const context = useEditContext();
   const { replaceItem } = useComponentSelectorActions(handlers, props, item);
   return {
-    name: 'swap',
+    name: `swap-${item.uuid}`,
     label: 'Swap',
     icon: 'repeat',
     global: false,

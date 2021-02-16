@@ -22,6 +22,7 @@ export interface SearchClientInterface {
 export interface SearchEngineInterface {
   getEngineName: () => string,
   getIndexConfig: () => TIndexConfig | null,
+  getIndex: () => lunr.Index | null,
   setIndexConfig: (conf: TIndexConfig) => void,
   createIndex: () => lunr.Index,
   exportIndex: () => string,
@@ -65,6 +66,11 @@ export type TSearchResult = {
   link: string,
   title: string,
   preview: string,
+};
+
+export type Suggestion = {
+  text: string;
+  count: number;
 };
 
 export type TSearchResults = TSearchResult[];

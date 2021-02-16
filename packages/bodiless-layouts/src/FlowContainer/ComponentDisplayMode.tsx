@@ -14,6 +14,7 @@
 
 import React, { useContext, ComponentType } from 'react';
 import { flowIf } from '@bodiless/fclasses';
+import negate from 'lodash/negate';
 
 enum ComponentDisplayMode {
   ComponentSelector = 1,
@@ -44,12 +45,15 @@ const ComponentDisplayModeProvider: ComponentType<Props> = ({ children, mode = d
 
 // eslint-disable-next-line max-len
 const isComponentSelector = () => useComponentDisplayModeContext().mode === ComponentDisplayMode.ComponentSelector;
+const isNotComponentSelector = negate(isComponentSelector);
 
 const ifComponentSelector = flowIf(isComponentSelector);
+const ifNotComponentSelector = flowIf(isNotComponentSelector);
 
 export {
   ComponentDisplayMode,
   ComponentDisplayModeProvider,
   useComponentDisplayModeContext,
   ifComponentSelector,
+  ifNotComponentSelector,
 };
