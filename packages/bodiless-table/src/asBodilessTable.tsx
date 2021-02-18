@@ -48,54 +48,85 @@ type WithTableManagerProps = {
   componentData:TableBaseProps,
   setComponentData: (p:TableBaseProps) => void,
 };
+enum TableActionFields {
+  rows = 'rows',
+  headRows = 'headRows',
+  footRows = 'footRows',
+  columns = 'columns',
+}
+type TableActionProps = WithTableManagerProps & {
+  moveField: TableActionFields,
+};
+const moveX = (props:TableActionProps) => (currentIndex:number) => {
+  const {
+    componentData,
+    setComponentData,
+    moveField,
+  } = props;
+  const current = componentData[moveField][currentIndex];
+  componentData[moveField].splice(currentIndex, 1);
+  componentData[moveField].splice(currentIndex + 1, 0, current);
+  setComponentData(componentData);
+};
+type TableFunc = (p:WithTableManagerProps) => TableFuncs;
+const tableMangerFunc:TableFunc = ({ componentData, setComponentData }) => ({
+  addColumn: (currentColumnIndex, newColumn) => {
+    componentData.columns.splice(currentColumnIndex + 1, 0, newColumn);
+    setComponentData(componentData);
+  },
+  deleteColumn: (currentColumnIndex) => {
+    componentData.columns.splice(currentColumnIndex, 1);
+    setComponentData(componentData);
+  },
+  moveColumn: moveX({
+    componentData,
+    setComponentData,
+    moveField: TableActionFields.columns,
+  }),
+  addRow: (currentRowIndex, newRow) => {
+    componentData.rows.splice(currentRowIndex + 1, 0, newRow);
+    setComponentData(componentData);
+  },
+  deleteRow: (currentRowIndex) => {
+    componentData.rows.splice(currentRowIndex, 1);
+    setComponentData(componentData);
+  },
+  moveRow: moveX({
+    componentData,
+    setComponentData,
+    moveField: TableActionFields.rows,
+  }),
+  addHeadRow: (currentRowIndex, newRow) => {
+    componentData.headRows.splice(currentRowIndex + 1, 0, newRow);
+    setComponentData(componentData);
+  },
+  deleteHeadRow: (currentRowIndex) => {
+    componentData.headRows.splice(currentRowIndex, 1);
+    setComponentData(componentData);
+  },
+  moveHeadRow: moveX({
+    componentData,
+    setComponentData,
+    moveField: TableActionFields.headRows,
+  }),
+  addFootRow: (currentRowIndex, newRow) => {
+    componentData.footRows.splice(currentRowIndex + 1, 0, newRow);
+    setComponentData(componentData);
+  },
+  deleteFootRow: (currentRowIndex) => {
+    componentData.footRows.splice(currentRowIndex, 1);
+    setComponentData(componentData);
+  },
+  moveFootRow: moveX({
+    componentData,
+    setComponentData,
+    moveField: TableActionFields.footRows,
+  }),
+  data: componentData,
+});
 const withTableManager = <P extends WithTableManagerProps> (Component:CT<P>) => (props:P) => {
   const { componentData, setComponentData } = props;
-  const tableFunc:TableFuncs = {
-    addColumn: (currentColumnIndex, newColumn) => {
-      componentData.columns.splice(currentColumnIndex + 1, 0, newColumn);
-      setComponentData(componentData);
-    },
-    deleteColumn: (currentColumnIndex) => {
-      componentData.columns.splice(currentColumnIndex, 1);
-      setComponentData(componentData);
-    },
-    moveColumn: (currentColumnIndex) => {
-      const currentColumn = componentData.columns[currentColumnIndex];
-      componentData.columns.splice(currentColumnIndex, 1);
-      componentData.columns.splice(currentColumnIndex + 1, 0, currentColumn);
-      setComponentData(componentData);
-    },
-    addRow: (currentRowIndex, newRow) => {
-      componentData.rows.splice(currentRowIndex + 1, 0, newRow);
-      setComponentData(componentData);
-    },
-    deleteRow: (currentRowIndex) => {
-      componentData.rows.splice(currentRowIndex, 1);
-      setComponentData(componentData);
-    },
-    moveRow: (currentRowIndex) => {
-      const currentRow = componentData.rows[currentRowIndex];
-      componentData.rows.splice(currentRowIndex, 1);
-      componentData.rows.splice(currentRowIndex + 1, 0, currentRow);
-      setComponentData(componentData);
-    },
-    addHeadRow: (currentRowIndex, newRow) => {
-      componentData.headRows.splice(currentRowIndex + 1, 0, newRow);
-      setComponentData(componentData);
-    },
-    deleteHeadRow: (currentRowIndex) => {
-      componentData.headRows.splice(currentRowIndex, 1);
-      setComponentData(componentData);
-    },
-    moveHeadRow: (currentRowIndex) => {
-      const currentRow = componentData.rows[currentRowIndex];
-      componentData.headRows.splice(currentRowIndex, 1);
-      componentData.headRows.splice(currentRowIndex + 1, 0, currentRow);
-      setComponentData(componentData);
-    },
-    data: componentData,
-
-  };
+  const tableFunc:TableFuncs = tableMangerFunc({ componentData, setComponentData });
   return (
     <TableManagerContext.Provider value={tableFunc}>
       <Component {...props} />
@@ -208,6 +239,22 @@ const useMenuOptionsHead = (props:CellProps) => {
     moveIsDisabled: props.tableData.headRows.length === props.rowIndex + 1,
   });
 };
+const useMenuOptionsFoot = (props:CellProps) => {
+  const {
+    addFootRow,
+    deleteFootRow,
+    moveFootRow,
+  } = useContext(TableManagerContext);
+  return useMenuOptionsTable({
+    addFunc: addFootRow,
+    deleteFunc: deleteFootRow,
+    moveFunc: moveFootRow,
+    group: 'head_row',
+    groupLabel: 'Footer Row',
+    index: props.rowIndex,
+    moveIsDisabled: props.tableData.footRows.length === props.rowIndex + 1,
+  });
+};
 const useMenuOptionsColumns = (props:CellProps) => {
   const {
     addColumn,
@@ -228,6 +275,7 @@ const useMenuOptionsColumns = (props:CellProps) => {
 };
 const useMenuOptionsTableOverview = () => {
   const {
+    addFootRow,
     addHeadRow,
     data,
   } = useContext(TableManagerContext);
@@ -250,6 +298,18 @@ const useMenuOptionsTableOverview = () => {
       isHidden: data.headRows.length > 0,
       handler: () => {
         addHeadRow(0, v1());
+      },
+    },
+    {
+      name: 'add_footer',
+      icon: 'add',
+      group: 'table',
+      local: true,
+      global: false,
+      label: 'Footer',
+      isHidden: data.footRows.length > 0,
+      handler: () => {
+        addFootRow(0, v1());
       },
     },
 
@@ -286,6 +346,9 @@ const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => flow
       ),
       flowIf((p:CellProps) => p.section === Section.head)(
         withMenuOptions({ useMenuOptions: useMenuOptionsHead, name: 'TableRowHead' }) as HOC,
+      ),
+      flowIf((p:CellProps) => p.section === Section.foot)(
+        withMenuOptions({ useMenuOptions: useMenuOptionsFoot, name: 'TableRowFoot' }) as HOC,
       ),
       withNode,
       withNodeKey((p:CellProps) => p.column),

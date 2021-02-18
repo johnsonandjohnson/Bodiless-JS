@@ -31,5 +31,8 @@ const TableManagerContext = React.createContext({
   addHeadRow: () => undefined,
   deleteHeadRow: () => undefined,
   moveHeadRow: () => undefined,
+  addFootRow: () => undefined,
+  deleteFootRow: () => undefined,
+  moveFootRow: () => undefined,
 } as TableFuncs);
 export default TableManagerContext;
