@@ -1,4 +1,3 @@
-import { merge } from 'lodash';
 import {
   isEvenRow,
   isOddRow,
@@ -12,27 +11,8 @@ import {
   isInFoot,
   isInHead,
 } from '../src/forCell';
-import { Section, CellProps } from '../src/types';
-
-const testCellProp = (props: Partial<CellProps>) => (
-  merge(
-    {},
-    {
-      rowIndex: 0,
-      columnIndex: 0,
-      row: '1',
-      column: '1',
-      section: Section.body,
-      tableData: {
-        rows: ['0', '1', '2'],
-        columns: ['0', '1', '2'],
-        headRows: ['0'],
-        footRows: [],
-      },
-    },
-    props,
-  )
-);
+import { Section } from '../src/types';
+import testCellProp from './testCellProp';
 
 describe('ForCell HelperFunctions', () => {
   describe('isEvenRow', () => {
