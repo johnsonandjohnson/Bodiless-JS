@@ -72,6 +72,9 @@ type TableFuncs = {
   addHeadRow:AddFunc,
   deleteHeadRow:DeleteFunc,
   moveHeadRow:MoveFunc,
+  addFootRow:AddFunc,
+  deleteFootRow:DeleteFunc,
+  moveFootRow:MoveFunc,
   data: TableBaseProps,
 };
 export {
