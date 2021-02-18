@@ -20,17 +20,24 @@ enum Section {
   body = 'body',
   foot = 'foot',
 }
-
-type RowProps = StylableProps & {
+type RowBaseProps = {
   row:string,
   section: Section,
   rowIndex: number,
+};
+type RowTableProps = {
   tableData: TableBaseProps,
 };
-type CellProps = StylableProps & RowProps & {
+type RowTablePropsPartial = {
+  tableData?: Partial<TableBaseProps>;
+};
+type RowProps = StylableProps & RowBaseProps & RowTableProps;
+type CellBaseProps = RowBaseProps & {
   column:string,
   columnIndex:number
 };
+type CellProps = StylableProps & CellBaseProps & RowTableProps;
+type CellPropsPartial = Partial<StylableProps> & Partial<CellBaseProps> & RowTablePropsPartial;
 
 type TableComponents = {
   Wrapper: ComponentType<StylableProps>,
@@ -81,6 +88,7 @@ export {
   Section,
   RowProps,
   CellProps,
+  CellPropsPartial,
   TableProps,
   TableSectionProps,
   TableComponents,

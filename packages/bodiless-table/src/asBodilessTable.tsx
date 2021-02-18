@@ -357,3 +357,6 @@ const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => flow
 );
 
 export default asBodilessTable;
+export {
+  tableMangerFunc,
+};
