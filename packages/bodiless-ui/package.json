@@ -33,7 +33,7 @@
     "@bodiless/core": "^0.0.69",
     "@bodiless/fclasses": "^0.0.69",
     "autoprefixer": "^10.2.4",
-    "informed": "^3.9.0",
+    "informed": "~3.27.0",
     "lodash": "^4.17.19",
     "postcss": "^8.2.4",
     "tailwindcss": "^2.0.2",
