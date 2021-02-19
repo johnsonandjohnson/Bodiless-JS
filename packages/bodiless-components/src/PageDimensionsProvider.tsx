@@ -64,12 +64,16 @@ const PageDimensionsProvider: FC<PageDimensionsProviderProps> = ({ children, bre
   const [dimensions, setDimensions] = useState<PageDimensions>(getDimensions(breakpoints));
 
   useEffect(() => {
+    let isRendered = true;
     const handleResize = () => {
-      setDimensions(getDimensions(breakpoints));
+      if (isRendered) {
+        setDimensions(getDimensions(breakpoints));
+      }
     };
     window.addEventListener('resize', throttle(handleResize, 100));
     return () => {
-      window.removeEventListener('resize', handleResize);
+      isRendered = false;
+      window.removeEventListener('resize', throttle(handleResize, 100));
     };
   }, []);
 
