@@ -35,22 +35,34 @@ const getComponent = (option: TMenuOption, defaultComponents: MenuOptionDefaultC
  * @param defaultComponents Default components to be used when a component does not define one.
  */
 const createChildrenFromOptions = (
-  options: TMenuOption[]|undefined,
+  options: TMenuOption[] | undefined,
   defaultComponents: MenuOptionDefaultComponents,
-) => uniqBy((options || []).map(
-  option => {
-    const Component = getComponent(option, defaultComponents);
-    return (
-      <Component
-        option={option}
-        group={option.group}
-        name={option.name}
-        key={option.name}
-        aria-label={option.name}
-      />
-    );
-  },
-), 'key');
+) => {
+  let index = -1;
+  return uniqBy((options || []).map(
+    (option, i, arr) => {
+      const Component = getComponent(option, defaultComponents);
+      const isGroupComponent = option.Component === 'group';
+      const visibleGroupItemsLength = arr.filter(
+        item => item.Component === 'group'
+        && !(typeof item.isHidden === 'function' ? item.isHidden() : Boolean(item.isHidden)),
+      ).length;
+      const isIndexed = isGroupComponent && visibleGroupItemsLength > 1;
+      index = isIndexed ? index + 1 : index;
+
+      return (
+        <Component
+          key={option.name}
+          aria-label={option.name}
+          group={option.group}
+          index={isIndexed ? index : undefined}
+          name={option.name}
+          option={option}
+        />
+      );
+    },
+  ), 'key');
+};
 
 const ContextMenuBase: FC<IContextMenuProps> = (props) => {
   if (typeof window === 'undefined') return null;

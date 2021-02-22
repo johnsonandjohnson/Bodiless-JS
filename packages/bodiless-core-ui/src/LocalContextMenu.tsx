@@ -15,7 +15,12 @@
 import React, { FC } from 'react';
 import ReactTooltip from 'rc-tooltip';
 import { flow } from 'lodash';
-import { addClasses, addProps, removeClasses } from '@bodiless/fclasses';
+import {
+  addClasses,
+  addClassesIf,
+  addProps,
+  removeClasses,
+} from '@bodiless/fclasses';
 import {
   ContextMenu, ContextMenuProps, ContextMenuUI, IContextMenuItemProps,
 } from '@bodiless/core';
@@ -51,19 +56,27 @@ const LocalTooltip: FC<ReactTooltip['props']> = props => (
   />
 );
 
-const GroupTitle = flow(
-  removeClasses('bl-mb-grid-2 bl-min-w-xl-grid-1'),
-)(ComponentFormTitle);
-
-const ContextMenuGroup: FC<IContextMenuItemProps> = ({ option, children }) => {
+const ContextMenuGroup: FC<IContextMenuItemProps> = ({
+  children,
+  index,
+  option,
+}) => {
   const hidden: boolean = Boolean(option && (
     typeof option.isHidden === 'function' ? option.isHidden() : option.isHidden
   ));
   if (hidden) return null;
+  const { context, label } = option || {};
+  const onClick = context ? { onClick: () => context.activate() } : {};
+  const GroupTitle = flow(
+    removeClasses('bl-mb-grid-2 bl-min-w-xl-grid-1'),
+    addClassesIf(() => Number(index) > 0)('hover:bl-underline bl-cursor-pointer'),
+    addClassesIf(() => index === 0)('bl-underline'),
+  )(ComponentFormTitle);
+
   return (
     <div className={groupClasses}>
-      {option && option.label && (
-        <GroupTitle>{option.label}</GroupTitle>
+      {label && (
+        <GroupTitle {...onClick}>{label}</GroupTitle>
       )}
       <div className="flex">
         {children}
