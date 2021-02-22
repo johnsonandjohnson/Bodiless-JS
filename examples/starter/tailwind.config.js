@@ -58,6 +58,7 @@ module.exports = mergeWithBodilessConfigs({
       },
       teal: {
         500: '#38b2ac',
+        600: '#319795',
         700: '#2c7a7b',
       },
       blue: {
