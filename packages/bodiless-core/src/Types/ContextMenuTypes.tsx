@@ -42,7 +42,7 @@ export type IContextMenuItemProps = {
    */
   name: string,
   /**
-   * The context menu option option which this item is rendering
+   * The context menu option which this item is rendering
    */
   option?: TMenuOption;
   /**
