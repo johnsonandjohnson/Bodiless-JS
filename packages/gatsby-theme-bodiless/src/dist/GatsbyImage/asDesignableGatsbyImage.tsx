@@ -31,11 +31,12 @@ import omit from 'lodash/omit';
 
 type Components = {
   GatsbyImage: any,
-  Image: CT,
+  Image: CT<any>,
 };
 
 export type GasbyImageProps = HTMLProps<HTMLImageElement> & {
   preset: string;
+  publicUrl?: string;
   gatsbyImg?: { fluid: FluidObject | FluidObject[] } | { fixed: FixedObject | FixedObject[] };
 } & GatsbyImageOptionalProps & DesignableComponentsProps<Components>;
 
@@ -46,7 +47,7 @@ const asDesignableGatsbyImage$ = (Component: CT<any>) => {
   };
   const AsDesignableGatsbyImage = (props: GasbyImageProps) => {
     const {
-      components, gatsbyImg, preset, ...rest
+      components, gatsbyImg, preset, publicUrl, src, ...rest
     } = props;
     const {
       GatsbyImage,
@@ -57,8 +58,9 @@ const asDesignableGatsbyImage$ = (Component: CT<any>) => {
         <GatsbyImage {...rest} {...gatsbyImg} />
       );
     }
+    const publicUrl$ = publicUrl || src;
     return (
-      <Image {...rest} />
+      <Image {...rest} src={publicUrl$} />
     );
   };
   const applyDesign = extendDesignable(design => omit(design, ['GatsbyImage', 'Image']));

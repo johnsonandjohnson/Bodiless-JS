@@ -35,6 +35,7 @@ const withGatsbyImageNode = (
       setData: (data: any) => ({
         ...data,
         preset,
+        gatsbyImg: undefined,
       }),
     });
     return (

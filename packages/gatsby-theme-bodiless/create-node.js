@@ -18,6 +18,8 @@
 const pathUtil = require('path');
 const slash = require('slash');
 const crypto = require('crypto');
+const fs = require('fs-extra');
+const md5File = require('md5-file');
 const { fluid: sharpFluid, fixed: sharpFixed } = require('gatsby-plugin-sharp');
 const GatsbyImagePresets = require('./dist/GatsbyImage/GatsbyImagePresets').default;
 
@@ -91,10 +93,12 @@ const addSlugField = ({ node, getNode, actions }) => {
   });
 };
 
-const generateDigest = content => crypto
+const generateJsonContentDigest = content => crypto
   .createHash('md5')
   .update(content)
   .digest('hex');
+
+const generateFileDigest = absolutePath => md5File.sync(absolutePath);
 
 const supportedExtensions = {
   jpeg: true,
@@ -320,13 +324,49 @@ const generateGatsbyImage = async ({ file, preset, reporter }, options) => {
   }
 };
 
+/**
+ * Copy file to static directory and return public url to it
+ *
+ * leveraging logic from gatsby-source-filesystem
+ * https://github.com/gatsbyjs/gatsby/blob/39baf4eb504dcbb4d231f4baf8b109d0dcabb1da/packages/gatsby-source-filesystem/src/extend-file-node.js
+ */
+const copyFileToStatic = (node, reporter) => {
+  const fileAbsolutePath = node.absolutePath;
+  const fileName = `${node.internal.contentDigest}/${pathUtil.basename(fileAbsolutePath)}`;
+
+  const publicPath = pathUtil.join(
+    process.cwd(),
+    'public',
+    'static',
+    fileName,
+  );
+
+  if (!fs.existsSync(publicPath)) {
+    fs.copySync(
+      fileAbsolutePath,
+      publicPath,
+      { dereference: true },
+      err => {
+        if (err) {
+          reporter.panic(
+            {
+              context: {
+                sourceMessage: `error copying file from ${fileAbsolutePath} to ${publicPath}`,
+              },
+            },
+            err,
+          );
+        }
+      },
+    );
+  }
+
+  return `/static/${fileName}`;
+};
+
 const createImageNode = ({ node, content }) => {
   const parsedContent = JSON.parse(content);
   if (parsedContent === undefined || parsedContent.src === undefined) {
-    return undefined;
-  }
-  // skip image generation if preset is not set
-  if (parsedContent.preset === undefined) {
     return undefined;
   }
   const imgSrc = parsedContent.src;
@@ -344,18 +384,17 @@ const createImageNode = ({ node, content }) => {
     name: node.name,
     extension: pathUtil.extname(imgSrc).substr(1),
     path: imgSrc,
-    // this field is mandatory for grapqhql sharp queries
+    // this field is mandatory for graphql sharp queries
     absolutePath,
     internal: {
       type: 'ImageNode',
-      contentDigest: generateDigest(content),
+      contentDigest: generateFileDigest(absolutePath),
     },
   };
   return imageNode;
 };
 
-const generateImages = async ({ node, content, reporter }, options) => {
-  const imageNode = createImageNode({ node, content });
+const generateImages = async ({ imageNode, content, reporter }, options) => {
   const parsedContent = JSON.parse(content);
   return generateGatsbyImage({
     file: imageNode,
@@ -374,16 +413,27 @@ const createBodilessNode = async ({
   const { createNode, createParentChildLink } = boundActionCreators;
 
   const { gatsbyImage: gatsbyImageOptions } = pluginOptions;
-  const gatsbyImgData = await generateImages({
-    node,
-    content: nodeContent,
-    reporter,
-  }, gatsbyImageOptions);
+  const imageNode = createImageNode({ node, content: nodeContent });
+  let imageContent = {};
+  if (imageNode !== undefined) {
+    const publicUrl = pathUtil.isAbsolute(imageNode.path)
+      ? imageNode.path
+      : copyFileToStatic(imageNode, reporter);
+    const gatsbyImgData = await generateImages({
+      imageNode,
+      content: nodeContent,
+      reporter,
+    }, gatsbyImageOptions);
 
-  const content = gatsbyImgData ? JSON.stringify({
+    imageContent = {
+      ...(gatsbyImgData ? { gatsbyImg: gatsbyImgData } : {}),
+      ...(publicUrl ? { publicUrl } : {}),
+    };
+  }
+  const content = JSON.stringify({
     ...JSON.parse(nodeContent),
-    ...(gatsbyImgData ? { gatsbyImg: gatsbyImgData } : {}),
-  }) : nodeContent;
+    ...imageContent,
+  });
 
   const parsedContent = JSON.parse(content);
   const bodilessNodeName = parsedContent._nodeKey !== undefined
@@ -399,7 +449,7 @@ const createBodilessNode = async ({
     instanceName: node.sourceInstanceName,
     content,
     internal: {
-      contentDigest: generateDigest(nodeContent),
+      contentDigest: generateJsonContentDigest(nodeContent),
       type: BODILESS_NODE_TYPE,
     },
   };
