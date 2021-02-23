@@ -23,7 +23,7 @@ const getConfig = () => [
     '..',
     'GatsbyImage',
     'Contentful',
-    'Sample',
+    'sample',
   ),
 ];
 
