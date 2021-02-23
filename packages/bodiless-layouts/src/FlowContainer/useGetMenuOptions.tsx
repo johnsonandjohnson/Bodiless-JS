@@ -152,7 +152,7 @@ const useAddButton = (
   const isHidden = item
     ? useCallback(() => !context.isEdit || getItems().length >= maxComponents, [maxComponents])
     : useCallback(() => !context.isEdit || getItems().length > 0, []);
-  const name = item ? `add-item-${item.uuid}` : 'add';
+  const name = item ? `add-item-${item.uuid}` : `add-${context.id}`;
   return {
     icon: 'add',
     label: 'Add',
