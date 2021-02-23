@@ -71,7 +71,7 @@
     "gatsby-source-filesystem": "^2.0.4",
     "git-branch": "^2.0.1",
     "glob": "^7.1.6",
-    "informed": "~3.27.0",
+    "informed": "~3.13.1",
     "lodash": "^4.17.19",
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",
