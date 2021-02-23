@@ -414,7 +414,7 @@ const createBodilessNode = async ({
 
   const { gatsbyImage: gatsbyImageOptions } = pluginOptions;
   const imageNode = createImageNode({ node, content: nodeContent });
-  let imageContent = {};
+  let imageContent = undefined;
   if (imageNode !== undefined) {
     const publicUrl = pathUtil.isAbsolute(imageNode.path)
       ? imageNode.path
@@ -430,10 +430,10 @@ const createBodilessNode = async ({
       ...(publicUrl ? { publicUrl } : {}),
     };
   }
-  const content = JSON.stringify({
+  const content = imageContent ? JSON.stringify({
     ...JSON.parse(nodeContent),
     ...imageContent,
-  });
+  }) : nodeContent;
 
   const parsedContent = JSON.parse(content);
   const bodilessNodeName = parsedContent._nodeKey !== undefined
