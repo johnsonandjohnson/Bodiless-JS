@@ -84,5 +84,8 @@ module.exports = {
   siteMetadata: {
     siteUrl: SITEURL,
   },
+  flags: {
+    DEV_SSR: false,
+  },
   plugins,
 };

@@ -105,6 +105,9 @@ module.exports = {
   siteMetadata: {
     title: 'Bodiless-JS',
   },
+  flags: {
+    DEV_SSR: false,
+  },
   plugins,
   proxy: {
     prefix: process.env.GATSBY_BACKEND_PREFIX || '/___backend',

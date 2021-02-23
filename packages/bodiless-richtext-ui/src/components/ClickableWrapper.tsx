@@ -16,7 +16,7 @@ import { Button } from '@bodiless/ui';
 import { addClasses } from '@bodiless/fclasses';
 
 const ClickableWrapper = addClasses(
-  'bl-block bl-w-60 bl-highlighted bl-border bl-border-solid bl-border-gray-700 hover:bl-border-white bl-text-initial bl-cursor-pointer bl-bg-white bl-p-2 bl-my-2',
+  'bl-block bl-highlighted bl-border bl-border-solid bl-border-gray-700 hover:bl-border-white bl-text-initial bl-cursor-pointer bl-bg-white bl-p-2 bl-my-2',
 )(Button);
 
 export default ClickableWrapper;

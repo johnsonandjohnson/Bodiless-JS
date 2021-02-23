@@ -29,7 +29,7 @@
     "@bodiless/fclasses": "^0.0.69",
     "@types/react-tag-autocomplete": "^5.12.0",
     "enzyme": "^3.9.0",
-    "informed": "^3.9.0",
+    "informed": "~3.13.1",
     "lodash": "^4.17.19",
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",

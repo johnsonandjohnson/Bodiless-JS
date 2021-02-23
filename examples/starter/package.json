@@ -29,6 +29,7 @@
     "@bodiless/richtext-ui": "^0.0.69",
     "@bodiless/search": "^0.0.69",
     "@bodiless/ui": "^0.0.69",
+    "autoprefixer": "^10.2.4",
     "cross-env": "^5.2.0",
     "docsify-cli": "^4.3.0",
     "dotenv": "^8.2.0",
@@ -39,10 +40,11 @@
     "gatsby-plugin-sitemap": "^2.2.24",
     "lodash": "^4.17.19",
     "ora": "^4.0.2",
+    "postcss": "^8.2.4",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-helmet": "^5.2.0",
-    "tailwindcss": "^1.0"
+    "tailwindcss": "^2.0.2"
   },
   "files": [
     "lib"

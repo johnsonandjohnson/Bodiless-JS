@@ -28,7 +28,7 @@
     "@bodiless/core": "^0.0.69",
     "@bodiless/fclasses": "^0.0.69",
     "@bodiless/ui": "^0.0.69",
-    "informed": "^3.9.0",
+    "informed": "~3.13.1",
     "lodash": "^4.17.19",
     "rc-tooltip": "^3.7.3"
   },

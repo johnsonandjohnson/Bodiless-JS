@@ -63,7 +63,7 @@ export const Icon = flow(
 )(Span);
 
 export const ComponentFormTitle = addClasses(
-  'bl-text-lg bl-font-bold bl-text-grey-100 bl-block bl-mb-grid-2 bl-min-w-xl-grid-1',
+  'bl-text-lg bl-font-bold bl-text-gray-100 bl-block bl-mb-grid-2 bl-min-w-xl-grid-1',
 )(Title);
 
 export const ComponentFormFieldWrapper = addClasses(
@@ -71,11 +71,11 @@ export const ComponentFormFieldWrapper = addClasses(
 )(Div);
 
 export const ComponentFormFieldTitle = addClasses(
-  'bl-mb-grid-2 bl-font-bold bl-text-grey-100',
+  'bl-mb-grid-2 bl-font-bold bl-text-gray-100',
 )(Div);
 
 export const ComponentFormDescription = addClasses(
-  'bl-text-xs bl-text-grey-100 bl-block bl-mb-grid-2 bl-max-w-xl-grid-1',
+  'bl-text-xs bl-text-gray-100 bl-block bl-mb-grid-2 bl-max-w-xl-grid-1',
 )(Div);
 
 export const ComponentFormListItem = addClasses(
@@ -87,15 +87,15 @@ export const ComponentFormList = addClasses(
 )(Ul);
 
 export const ComponentFormLabel = addClasses(
-  'bl-text-xs bl-text-grey-100 bl-block',
+  'bl-text-xs bl-text-gray-100 bl-block',
 )(Label);
 
 export const ComponentFormText = addClasses(
-  'bl-text-grey-900 bl-bg-grey-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-block bl-my-grid-2 bl-p-grid-1',
+  'bl-text-gray-900 bl-bg-gray-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-block bl-my-grid-2 bl-p-grid-1',
 )(Text);
 
 export const ComponentFormTextArea = addClasses(
-  'bl-resize bl-text-grey-900 bl-bg-grey-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-min-h-grid-16 bl-block bl-my-grid-2 bl-p-grid-1',
+  'bl-resize bl-text-gray-900 bl-bg-gray-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-min-h-grid-16 bl-block bl-my-grid-2 bl-p-grid-1',
 )(TextArea);
 
 export const ComponentFormRadioGroup = addClasses(
@@ -111,14 +111,14 @@ export const ComponentFormCheckBox = addClasses(
 )(CheckBox);
 
 export const ComponentFormSelect = addClasses(
-  `bl-text-grey-900 bl-bg-grey-100 bl-text-xs bl-w-full
+  `bl-text-gray-900 bl-bg-gray-100 bl-text-xs bl-w-full
   bl-min-w-xl-grid-1 bl-block bl-my-grid-2 bl-p-grid-1`,
 )(Select);
 
 export const ComponentFormOption = Option;
 
 export const ComponentFormButton = addClasses(
-  'bl-text-grey-200 bl-cursor-pointer hover:bl-text-green',
+  'bl-text-gray-200 bl-cursor-pointer hover:bl-text-green',
 )(Button);
 
 export const ComponentFormUnwrapButton = addClasses(
@@ -132,7 +132,7 @@ export const ComponentFormCloseButton = flow(
 )(ComponentFormButton);
 
 export const ComponentFormSubmitButton = (props: HTMLProps<HTMLButtonElement>) => (
-  <div className="bl-clearfix">
+  <div className="bl-flow-root">
     <ComponentFormButton className="bl-float-right" {...props}>
       <Icon>done</Icon>
     </ComponentFormButton>
@@ -155,8 +155,8 @@ export const ToolbarButton = flow(
   addClasses('bl-cursor-pointer bl-mb-3 bl-flex bl-flex-col bl-items-center'),
   flowIf(hasProp('isDisabled'))(
     flow(
-      addClasses('bl-text-grey-600'),
-      removeClasses('bl-text-grey-200'),
+      addClasses('bl-text-gray-600'),
+      removeClasses('bl-text-gray-200'),
     ),
   ),
   addProps({ type: 'button' }),
@@ -208,6 +208,6 @@ export const ComponentFormWarning = flow(
 const isDisabled = (props: any) => hasProp('disabled')(props);
 export const ComponentFormLink = flow(
   addClasses('bl-cursor-pointer bl-text-xs bl-block bl-underline'),
-  addClassesIf(isDisabled)('bl-text-grey-600'),
-  removeClassesIf(isDisabled)('bl-cursor-pointer bl-text-grey-100 '),
+  addClassesIf(isDisabled)('bl-text-gray-600'),
+  removeClassesIf(isDisabled)('bl-cursor-pointer bl-text-gray-100 '),
 )(Anchor);

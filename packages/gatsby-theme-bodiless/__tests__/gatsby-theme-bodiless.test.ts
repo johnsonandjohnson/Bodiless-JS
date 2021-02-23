@@ -92,7 +92,7 @@ describe('GatsbyMobxStore', () => {
     // @ts-ignore
     const store = new GatsbyMobxStore(dataSource, client);
     store.updateData(data);
-    /* eslint no-console: ["error", { allow: ["log"] }] */
-    console.log(store.store);
+    const node = store.getNode(['Page', 'linkit']);
+    expect(node.href).toBe('Now is the time sdf');
   });
 });

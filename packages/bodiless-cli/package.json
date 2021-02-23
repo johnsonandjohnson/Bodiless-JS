@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
-    "@types/node": "^10",
+    "@types/node": "^12",
     "nodemon": "^1.19.1"
   },
   "oclif": {

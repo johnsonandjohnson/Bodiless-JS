@@ -1,10 +1,6 @@
 const { mergeWithBodilessConfigs } = require('@bodiless/gatsby-theme-bodiless/dist/tailwindcss');
 
 module.exports = mergeWithBodilessConfigs({
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
   purge: [
     './src/**/!(*.d).{ts,js,jsx,tsx}',
   ],
@@ -43,7 +39,33 @@ module.exports = mergeWithBodilessConfigs({
     |
     */
 
-    // colors: {},
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+
+      black: '#000',
+      white: '#fff',
+
+      gray: {
+        200: '#edf2f7',
+        500: '#a0aec0',
+        600: '#718096',
+        700: '#4a5568',
+      },
+      orange: {
+        600: '#dd6b20',
+        700: '#c05621',
+      },
+      teal: {
+        500: '#38b2ac',
+        600: '#319795',
+        700: '#2c7a7b',
+      },
+      blue: {
+        500: '#4299e1',
+        700: '#2b6cb0',
+      },
+    },
 
     /*
     |---------------------------------------------------------------------------
@@ -63,6 +85,13 @@ module.exports = mergeWithBodilessConfigs({
     | Class name: .{screen}:{utility}
     |
     */
+
+    screens: {
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+    },
 
     /*
     |---------------------------------------------------------------------------
@@ -103,7 +132,18 @@ module.exports = mergeWithBodilessConfigs({
     |
     */
 
-    // fontSize: {},
+    fontSize: {
+      xs: '0.75rem',
+      sm: '0.875rem',
+      base: '1rem',
+      lg: '1.125rem',
+      xl: '1.25rem',
+      '2xl': '1.5rem',
+      '3xl': '1.875rem',
+      '4xl': '2.25rem',
+      '5xl': '3rem',
+      '6xl': '4rem',
+    },
 
     /*
     |---------------------------------------------------------------------------

@@ -50,7 +50,7 @@ export const ui: ComponentSelectorUI = {
   )(Div),
   ItemBoxWrapper: addClasses('bl-p-grid-2')(Div),
   ItemBox: addClasses(
-    'bl-bg-grey-200 bl-flex bl-flex-col bl-items-center bl-p-grid-2 bl-h-full bl-w-full bl-relative bl-overflow-hidden bl-cursor-pointer',
+    'bl-bg-gray-200 bl-flex bl-flex-col bl-items-center bl-p-grid-2 bl-h-full bl-w-full bl-relative bl-overflow-hidden bl-cursor-pointer',
   )(Div),
   GridListBoxWrapper: addClasses(
     'bl-w-full bl-h-xl-grid-2',
@@ -64,7 +64,7 @@ export const ui: ComponentSelectorUI = {
   )(Div),
 
   TitleWrapper: addClasses(
-    'bl-font-semibold bl-text-sm bl-text-grey-800',
+    'bl-font-semibold bl-text-sm bl-text-gray-800',
   )(Span),
 
   ComponentTitleWrapper: ComponentFormTitle,
@@ -76,7 +76,7 @@ export const ui: ComponentSelectorUI = {
   )(Span),
 
   ComponentSelectorWrapper: addClasses(
-    'bl-text-white bl-mr-grid-3  bl-whitespace-no-wrap',
+    'bl-text-white bl-mr-grid-3  bl-whitespace-nowrap',
   )(Div),
 
   SubmitButton: addClasses(
@@ -108,7 +108,7 @@ export const ui: ComponentSelectorUI = {
   )(Div),
 
   SearchBar: addClasses(
-    'bl-border bl-border-grey bl-p-grid-1 bl-w-full',
+    'bl-border bl-border-gray bl-p-grid-1 bl-w-full',
   )(Input),
 
   AccordionLabel: addClasses(
@@ -132,14 +132,14 @@ export const ui: ComponentSelectorUI = {
   )(Div),
 
   ComponentDescriptionIcon: addClasses(
-    'bl-absolute bl-top-grid-0 bl-right-grid-0 material-icons bl-z-20 bl-text-grey-800 bl-m-grid-1',
+    'bl-absolute bl-top-grid-0 bl-right-grid-0 material-icons bl-z-20 bl-text-gray-800 bl-m-grid-1',
   )(Div),
 
   ComponentSelectButton: addClasses(
     'bl-absolute bl-z-10 bl-top-grid-0 bl-left-grid-0 bl-w-full bl-h-full bl-opacity-0',
   )(Button),
 
-  ScalingHeader: addClasses('bl-w-full bl-cursor-pointer bl-justify-end bl-text-grey-900 bl-p-grid-2 bl-flex')(Div),
+  ScalingHeader: addClasses('bl-w-full bl-cursor-pointer bl-justify-end bl-text-gray-900 bl-p-grid-2 bl-flex')(Div),
   ScalingButtonFull: (props:MaterialIconDefaultProps) => <MaterialIcon {...props} icon="view_stream" />,
   ScalingButtonHalf: (props:MaterialIconDefaultProps) => <MaterialIcon {...props} icon="view_module" />,
   ScalingButtonQuarter: (props:MaterialIconDefaultProps) => <MaterialIcon {...props} icon="view_comfy" />,
