@@ -127,7 +127,7 @@ const FlowContainerPage = (props: any) => (
       <H2>Contentful Flow Container</H2>
       <ContentfulFlowContainer />
       <H2>Limited Flow Container</H2>
-      <FlowContainerLimited />
+      <FlowContainerLimited nodeKey="limited" />
     </Layout>
   </Page>
 );
