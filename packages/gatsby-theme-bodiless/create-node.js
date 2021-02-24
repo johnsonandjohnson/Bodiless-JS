@@ -414,7 +414,7 @@ const createBodilessNode = async ({
 
   const { gatsbyImage: gatsbyImageOptions } = pluginOptions;
   const imageNode = createImageNode({ node, content: nodeContent });
-  let imageContent = undefined;
+  let imageContent;
   if (imageNode !== undefined) {
     const publicUrl = pathUtil.isAbsolute(imageNode.path)
       ? imageNode.path

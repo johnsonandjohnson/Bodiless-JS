@@ -12,5 +12,16 @@
  * limitations under the License.
  */
 
-export { default as createContentfulPlugins } from './createPlugins';
-export { default as getContentfulConfig } from './getConfig';
+import path from 'path';
+
+const getConfig = () => [
+  path.resolve(
+    path.relative(
+      process.cwd(),
+      __dirname,
+    ),
+    'sample',
+  ),
+];
+
+export default getConfig;

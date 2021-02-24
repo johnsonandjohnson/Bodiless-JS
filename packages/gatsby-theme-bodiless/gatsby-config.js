@@ -13,6 +13,9 @@
  */
 
 const path = require('path');
+const fg = require('fast-glob');
+const fs = require('fs');
+const { createDefaultContentPlugins } = require('./dist/DefaultContent');
 
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
@@ -100,6 +103,40 @@ if (process.env.ROBOTSTXT_ENABLED !== '0') {
 const getbuildCSSPlugins = require('./build-css');
 
 plugins.push(...getbuildCSSPlugins());
+
+/**
+ * default content plugins
+ */
+const discoverDefaultContent = (depth = 1) => {
+  let dir = path.resolve(process.cwd());
+  let currentDepth = depth;
+  let defaultContentPaths = [];
+  while (currentDepth > 0 && dir !== path.resolve(dir, '..')) {
+    const files = fg.sync([
+      `${dir}/bodiless.content.json`,
+      `${dir}/node_modules/**/bodiless.content.json`,
+    ]);
+    // eslint-disable-next-line no-loop-func
+    files.forEach(file => {
+      const fileContent = JSON.parse(fs.readFileSync(file));
+      defaultContentPaths = [
+        ...defaultContentPaths,
+        ...fileContent.map(file$ => path.resolve(path.dirname(file), file$)),
+      ];
+    });
+    currentDepth -= 1;
+    dir = path.resolve(dir, '..');
+  }
+  return defaultContentPaths;
+};
+
+if (process.env.BODILESS_DEFAULT_CONTENT_AUTO_DISCOVERY === '1') {
+  plugins.push(
+    ...createDefaultContentPlugins(
+      ...discoverDefaultContent(process.env.BODILESS_DEFAULT_CONTENT_AUTO_DISCOVERY_DEPTH || 1),
+    ),
+  );
+}
 
 module.exports = {
   siteMetadata: {

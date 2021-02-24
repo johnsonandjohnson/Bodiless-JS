@@ -12,19 +12,5 @@
  * limitations under the License.
  */
 
-import path from 'path';
-
-const getConfig = () => [
-  path.resolve(
-    path.relative(
-      process.cwd(),
-      __dirname,
-    ),
-    '..',
-    'GatsbyImage',
-    'Contentful',
-    'sample',
-  ),
-];
-
-export default getConfig;
+export { default as createDefaultContentPlugins } from './createPlugins';
+export { default as getSampleDefaultContentConfig } from './getSampleConfig';

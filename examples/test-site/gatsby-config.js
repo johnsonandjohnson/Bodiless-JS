@@ -1,10 +1,10 @@
 const express = require('express');
 const {
-  createContentfulPlugins,
-  getContentfulConfig: getBodilessThemeContentfulConfig,
-} = require('@bodiless/gatsby-theme-bodiless/dist/Contentful');
+  createDefaultContentPlugins,
+  getSampleDefaultContentConfig,
+} = require('@bodiless/gatsby-theme-bodiless/dist/DefaultContent');
 const {
-  getConfig: getSiteContenfulConfig,
+  getConfig: getSiteDefaultContentConfig,
 } = require('./src/components/Contentful');
 
 const activeEnv = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
@@ -43,9 +43,9 @@ const plugins = [
   {
     resolve: 'gatsby-plugin-sitemap',
   },
-  ...createContentfulPlugins(
-    ...getBodilessThemeContentfulConfig(),
-    ...getSiteContenfulConfig(),
+  ...createDefaultContentPlugins(
+    ...getSampleDefaultContentConfig(),
+    ...getSiteDefaultContentConfig(),
   ),
 ];
 

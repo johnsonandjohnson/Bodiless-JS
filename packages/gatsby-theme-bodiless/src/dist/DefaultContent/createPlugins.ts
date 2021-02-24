@@ -13,13 +13,15 @@
  */
 
 import path from 'path';
+import crypto from 'crypto';
 
-const createPlugins = (...paths: string[]) => paths.map(contentfulPath => ({
+const hash = (name: string) => crypto.createHash('md5').update(name).digest('hex');
+
+const createPlugins = (...paths: string[]) => paths.map(path$ => ({
   resolve: 'gatsby-source-filesystem',
   options: {
-    // @todo ensure uniqueness of name
-    name: `bodiless-default-content-${path.basename(contentfulPath)}`,
-    path: contentfulPath,
+    name: `bodiless-default-content-${path.basename(path$)}-${hash(path$)}`,
+    path: path$,
   },
 }));
 
