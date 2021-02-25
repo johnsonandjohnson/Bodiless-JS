@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/table",
-  "version": "0.0.68",
+  "version": "0.0.70",
   "description": "Provide a Bodiless table component and HOC to make it editable",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
   "license": "Apache-2.0",
