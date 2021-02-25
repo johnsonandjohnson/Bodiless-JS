@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { TableFuncs } from './types';
 
 const TableManagerContext = React.createContext({
@@ -36,4 +36,6 @@ const TableManagerContext = React.createContext({
   moveFootRow: () => undefined,
 } as TableFuncs);
 
+const useTableManagerContext = () => useContext(TableManagerContext);
 export default TableManagerContext;
+export { useTableManagerContext };

@@ -1,6 +1,5 @@
 import { Fragment } from '@bodiless/fclasses';
 import { flow } from 'lodash';
-import React, { ComponentType, Context as ContextType } from 'react';
 import { renderHook } from '@testing-library/react-hooks';
 import {
   useIsEvenRow,
@@ -117,7 +116,7 @@ describe('ForCell HelperFunctions', () => {
       const wrapper = flow(
         withContextValue(TableContext)({
           rows: [],
-          columns: ['0','1'],
+          columns: ['0', '1'],
           headRows: [],
           footRows: [],
         }),
@@ -130,7 +129,7 @@ describe('ForCell HelperFunctions', () => {
       const wrapper = flow(
         withContextValue(TableContext)({
           rows: [],
-          columns: ['0','1'],
+          columns: ['0', '1'],
           headRows: [],
           footRows: [],
         }),
@@ -145,7 +144,7 @@ describe('ForCell HelperFunctions', () => {
       const wrapper = flow(
         withContextValue(TableContext)({
           rows: [],
-          columns: ['0','1'],
+          columns: ['0', '1'],
           headRows: [],
           footRows: [],
         }),
@@ -158,7 +157,7 @@ describe('ForCell HelperFunctions', () => {
       const wrapper = flow(
         withContextValue(TableContext)({
           rows: [],
-          columns: ['0','1'],
+          columns: ['0', '1'],
           headRows: [],
           footRows: [],
         }),
