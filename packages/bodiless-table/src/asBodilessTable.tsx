@@ -30,7 +30,7 @@ import {
   flowIf,
 } from '@bodiless/fclasses';
 import { flow } from 'lodash';
-import React, { ComponentType as CT, useContext } from 'react';
+import React, { ComponentType as CT } from 'react';
 import { v1 } from 'uuid';
 import {
   TableBaseProps,
@@ -40,7 +40,7 @@ import {
   DeleteFunc,
   MoveFunc,
 } from './types';
-import TableManagerContext from './TableManagerContext';
+import TableManagerContext, { useTableManagerContext } from './TableManagerContext';
 import { useTableColumnContext, useTableContext, useTableRowContext } from './TableContext';
 import { useIsInBody, useIsInFoot, useIsInHead } from './forCell';
 
@@ -206,78 +206,48 @@ const useMenuOptionsTable:UseMenuOptionsTable = ({
     },
   },
 ];
-const useMenuOptions = () => {
-  const {
-    addRow,
-    deleteRow,
-    moveRow,
-  } = useContext(TableManagerContext);
-  return useMenuOptionsTable({
-    addFunc: addRow,
-    deleteFunc: deleteRow,
-    moveFunc: moveRow,
-    group: 'row',
-    groupLabel: 'Row',
-    index: useTableRowContext().index,
-    deleteIsDisabled: useTableContext().rows.length === 1,
-    moveIsDisabled: useTableContext().rows.length === useTableRowContext().index + 1,
-  });
-};
-const useMenuOptionsHead = () => {
-  const {
-    addHeadRow,
-    deleteHeadRow,
-    moveHeadRow,
-  } = useContext(TableManagerContext);
-  return useMenuOptionsTable({
-    addFunc: addHeadRow,
-    deleteFunc: deleteHeadRow,
-    moveFunc: moveHeadRow,
-    group: 'head_row',
-    groupLabel: 'Header Row',
-    index: useTableRowContext().index,
-    moveIsDisabled: useTableContext().headRows.length === useTableRowContext().index + 1,
-  });
-};
-const useMenuOptionsFoot = () => {
-  const {
-    addFootRow,
-    deleteFootRow,
-    moveFootRow,
-  } = useContext(TableManagerContext);
-  return useMenuOptionsTable({
-    addFunc: addFootRow,
-    deleteFunc: deleteFootRow,
-    moveFunc: moveFootRow,
-    group: 'head_row',
-    groupLabel: 'Footer Row',
-    index: useTableRowContext().index,
-    moveIsDisabled: useTableContext().footRows.length === useTableRowContext().index + 1,
-  });
-};
-const useMenuOptionsColumns = () => {
-  const {
-    addColumn,
-    deleteColumn,
-    moveColumn,
-  } = useContext(TableManagerContext);
-  return useMenuOptionsTable({
-    addFunc: addColumn,
-    deleteFunc: deleteColumn,
-    moveFunc: moveColumn,
-    group: 'column',
-    groupLabel: 'Column',
-    index: useTableColumnContext().index,
-    deleteIsDisabled: useTableContext().columns.length === 1,
-    moveIsDisabled: useTableContext().columns.length === useTableColumnContext().index + 1,
-    moveIcon: 'keyboard_arrow_right',
-  });
-};
+const useMenuOptionsBody = () => useMenuOptionsTable({
+  addFunc: useTableManagerContext().addRow,
+  deleteFunc: useTableManagerContext().deleteRow,
+  moveFunc: useTableManagerContext().moveRow,
+  group: 'row',
+  groupLabel: 'Row',
+  index: useTableRowContext().index,
+  deleteIsDisabled: useTableContext().rows.length === 1,
+  moveIsDisabled: useTableContext().rows.length === useTableRowContext().index + 1,
+});
+const useMenuOptionsHead = () => useMenuOptionsTable({
+  addFunc: useTableManagerContext().addHeadRow,
+  deleteFunc: useTableManagerContext().deleteHeadRow,
+  moveFunc: useTableManagerContext().moveHeadRow,
+  group: 'head_row',
+  groupLabel: 'Header Row',
+  index: useTableRowContext().index,
+  moveIsDisabled: useTableContext().headRows.length === useTableRowContext().index + 1,
+});
+
+const useMenuOptionsFoot = () => useMenuOptionsTable({
+  addFunc: useTableManagerContext().addFootRow,
+  deleteFunc: useTableManagerContext().deleteFootRow,
+  moveFunc: useTableManagerContext().moveFootRow,
+  group: 'head_row',
+  groupLabel: 'Footer Row',
+  index: useTableRowContext().index,
+  moveIsDisabled: useTableContext().footRows.length === useTableRowContext().index + 1,
+});
+const useMenuOptionsColumns = () => useMenuOptionsTable({
+  addFunc: useTableManagerContext().addColumn,
+  deleteFunc: useTableManagerContext().deleteColumn,
+  moveFunc: useTableManagerContext().moveColumn,
+  group: 'column',
+  groupLabel: 'Column',
+  index: useTableColumnContext().index,
+  deleteIsDisabled: useTableContext().columns.length === 1,
+  moveIsDisabled: useTableContext().columns.length === useTableColumnContext().index + 1,
+  moveIcon: 'keyboard_arrow_right',
+});
 const useMenuOptionsTableOverview = () => {
-  const {
-    addFootRow,
-    addHeadRow,
-  } = useContext(TableManagerContext);
+  const { addHeadRow, addFootRow } = useTableManagerContext();
   return [
     {
       name: 'table',
@@ -295,9 +265,7 @@ const useMenuOptionsTableOverview = () => {
       global: false,
       label: 'Header',
       isHidden: useTableContext().headRows.length > 0,
-      handler: () => {
-        addHeadRow(0, v1());
-      },
+      handler: () => addHeadRow(0, v1()),
     },
     {
       name: 'add_footer',
@@ -307,11 +275,8 @@ const useMenuOptionsTableOverview = () => {
       global: false,
       label: 'Footer',
       isHidden: useTableContext().footRows.length > 0,
-      handler: () => {
-        addFootRow(0, v1());
-      },
+      handler: () => addFootRow(0, v1()),
     },
-
   ] as TMenuOption[];
 };
 type NodeKey = string|Partial<WithNodeProps>;
@@ -341,7 +306,7 @@ const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => flow
       withContextActivator('onClick'),
       withMenuOptions({ useMenuOptions: useMenuOptionsColumns, name: 'TableColumn' }),
       flowIf(useIsInBody)(
-        withMenuOptions({ useMenuOptions, name: 'TableRow' }) as HOC,
+        withMenuOptions({ useMenuOptions: useMenuOptionsBody, name: 'TableRow' }) as HOC,
       ),
       flowIf(useIsInHead)(
         withMenuOptions({ useMenuOptions: useMenuOptionsHead, name: 'TableRowHead' }) as HOC,
