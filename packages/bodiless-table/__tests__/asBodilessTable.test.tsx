@@ -21,17 +21,17 @@ describe('asBodilessTable', () => {
         tableMangerFunc({
           componentData: testTableData({ columns: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
-            expect(result.columns).toEqual(['0', 'test', '1']);
+            expect(result.columns).toEqual(['0', 'newColumn', '1']);
           },
-        }).addColumn(0, 'test');
+        }).addColumn(0, 'newColumn');
       });
       test('should add a new column at end if index is larger then last index', () => {
         tableMangerFunc({
           componentData: testTableData({ columns: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
-            expect(result.columns).toEqual(['0', '1', 'test']);
+            expect(result.columns).toEqual(['0', '1', 'newColumn']);
           },
-        }).addColumn(10, 'test');
+        }).addColumn(10, 'newColumn');
       });
     });
     describe('addRow', () => {
@@ -39,17 +39,17 @@ describe('asBodilessTable', () => {
         tableMangerFunc({
           componentData: testTableData({ rows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
-            expect(result.rows).toEqual(['0', 'test', '1']);
+            expect(result.rows).toEqual(['0', 'newRow', '1']);
           },
-        }).addRow(0, 'test');
+        }).addRow(0, 'newRow');
       });
       test('should add a new row at end if index is larger then last index', () => {
         tableMangerFunc({
           componentData: testTableData({ rows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
-            expect(result.rows).toEqual(['0', '1', 'test']);
+            expect(result.rows).toEqual(['0', '1', 'newRow']);
           },
-        }).addRow(10, 'test');
+        }).addRow(10, 'newRow');
       });
     });
     describe('addHeadRow', () => {
@@ -57,17 +57,17 @@ describe('asBodilessTable', () => {
         tableMangerFunc({
           componentData: testTableData({ headRows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
-            expect(result.headRows).toEqual(['0', 'test', '1']);
+            expect(result.headRows).toEqual(['0', 'newHeadRow', '1']);
           },
-        }).addHeadRow(0, 'test');
+        }).addHeadRow(0, 'newHeadRow');
       });
       test('should add a new head row at end if index is larger then last index', () => {
         tableMangerFunc({
           componentData: testTableData({ headRows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
-            expect(result.headRows).toEqual(['0', '1', 'test']);
+            expect(result.headRows).toEqual(['0', '1', 'newHeadRow']);
           },
-        }).addHeadRow(10, 'test');
+        }).addHeadRow(10, 'newHeadRow');
       });
     });
     describe('addFootRow', () => {
@@ -75,17 +75,17 @@ describe('asBodilessTable', () => {
         tableMangerFunc({
           componentData: testTableData({ footRows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
-            expect(result.footRows).toEqual(['0', 'test', '1']);
+            expect(result.footRows).toEqual(['0', 'newFootRow', '1']);
           },
-        }).addFootRow(0, 'test');
+        }).addFootRow(0, 'newFootRow');
       });
       test('should add a new foot row at end if index is larger then last index', () => {
         tableMangerFunc({
           componentData: testTableData({ footRows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
-            expect(result.footRows).toEqual(['0', '1', 'test']);
+            expect(result.footRows).toEqual(['0', '1', 'newFootRow']);
           },
-        }).addFootRow(10, 'test');
+        }).addFootRow(10, 'newFootRow');
       });
     });
     describe('deleteColumn', () => {
