@@ -33,6 +33,93 @@ To override default image processing arguments, use `gatsbyImage.sharpArgs` opti
 
 See [gatsby-plugin-sharp](https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/) doc to get a list of options you can override.
 
+#### Configure Gatsby Image for default content
+
+1. Prepare default content data
+
+    Install npm packages containing default content and/or create .json files on site level.
+
+    Example of .json file containing default image data
+
+    ```json
+    {
+      "src": "./defaultImage.jpg",
+      "alt": "My Test Alt",
+      "title": "My Test Title",
+      "preset": "fluid_withWebp"
+    }
+    ```
+
+    `src` - contains path to image. The path can be relative or absolute. When relative path is specified, then the image will be resolved relative to the json. When absolute path is specified, then the image will be resolved relative to site's `static` directory.
+
+    `alt`, `title` - image data provided by Bodiless.
+
+    `preset` - image preset for which generate image variations.
+
+1. Configure default content sources
+
+   Option A. (Recommended). Use default content auto-discovery mechanism.
+    Add `bodiless.content.json` file on site level. Example of file
+
+    ```json
+      [
+        "./path/to/default/content/directory1",
+        "./path/to/default/content/directory2"
+      ]
+    ```
+
+    Option B. Use site's gatsby-config.js
+
+    ```js
+    // site gatsby-config.js
+
+    const {
+      createDefaultContentPlugins,
+    } = require('@bodiless/gatsby-theme-bodiless/dist/DefaultContent');
+
+    module.exports = {
+      plugins: {
+        // your other plugins
+        ...createDefaultContentPlugins(
+          './path/to/default/content/directory1',
+          './path/to/default/content/directory2'
+        )
+      }
+    }
+    ```
+
+1. Add `DefaultContentQuery` to each page that uses default content
+
+    Open your page index file and extend a list of exported queries with `DefaultContentQuery`.
+
+    ```js
+      export const query = graphql`
+        query($slug: String!) {
+          ...YourOtherQuery
+          ...DefaultContentQuery
+        }
+      `;
+    ```
+
+1. Use helpers to compose Gatsby Image components
+
+```js
+import { useContentFrom } from '@bodiless/core';
+import { asBodilessImage } from '@bodiless/components-ui';
+import { withDefaultImageContent } from '@bodiless/components';
+import {
+  GatsbyImagePresets,
+  withGatsbyImagePreset,
+} from '@bodiless/gatsby-theme-bodiless';
+
+const asEditableImage = withGatsbyImagePreset(GatsbyImagePresets.FluidWithWebp)(asBodilessImage);
+const useDefaultImageNode = useContentFrom(['DefaultContent', 'contentful1']);
+const Image = withDefaultImageContent(asEditableImage)(useDefaultImageNode)('image')('img');
+
+// jsx
+<Image />
+```
+
 ### Plugins
 
 #### Robots.txt
