@@ -88,3 +88,4 @@ export const asContentfulTout = (content: object) => flow(
 
 const Tout = asEditableTout(ToutClean);
 export default Tout;
+export { asTestableTout };

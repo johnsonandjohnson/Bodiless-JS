@@ -16,8 +16,10 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { flow } from 'lodash';
+import { asBodilessImage } from '@bodiless/components-ui';
+import { Img, withDesign, replaceWith } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
-import Tout from '../../../components/Tout';
+import Tout, { asTestableTout } from '../../../components/Tout';
 import {
   asToutVertical,
   asToutHorizontal,
@@ -31,7 +33,25 @@ import {
   asToutWithPaddings,
 } from '../../../components/Tout/token';
 
+/**
+ * hoc to disable gatsby image for a tout
+ */
+const withDisabledGatsbyImage = flow(
+  withDesign({
+    Image: replaceWith(asBodilessImage('image')(Img)),
+  }),
+);
+
+/**
+ * disable gatsby image for this tout so that to not break existing cypress tests for tout
+ * we can enable it back once the cypress test is refactored
+ * @todo refactor tout cypress test and enable gatsby image
+ */
 const ToutHorizontal = flow(
+  withDisabledGatsbyImage,
+  // added because of we are doing replaceWith for Image
+  // asTestableTout can be removed once gatsby image is enabled
+  asTestableTout,
   asToutWithPaddings,
   asToutDefaultStyle,
   asToutHorizontal,
