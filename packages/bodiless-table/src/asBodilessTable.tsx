@@ -33,16 +33,16 @@ import { flow } from 'lodash';
 import React, { ComponentType as CT, useContext } from 'react';
 import { v1 } from 'uuid';
 import {
-  CellProps,
   TableBaseProps,
   TableFuncs,
   Section,
   AddFunc,
   DeleteFunc,
   MoveFunc,
-  RowProps,
 } from './types';
 import TableManagerContext from './TableManagerContext';
+import { useTableColumnContext, useTableContext, useTableRowContext } from './TableContext';
+import { useIsInBody, useIsInFoot, useIsInHead } from './forCell';
 
 type WithTableManagerProps = {
   componentData:TableBaseProps,
@@ -206,7 +206,7 @@ const useMenuOptionsTable:UseMenuOptionsTable = ({
     },
   },
 ];
-const useMenuOptions = (props:CellProps) => {
+const useMenuOptions = () => {
   const {
     addRow,
     deleteRow,
@@ -218,12 +218,12 @@ const useMenuOptions = (props:CellProps) => {
     moveFunc: moveRow,
     group: 'row',
     groupLabel: 'Row',
-    index: props.rowIndex,
-    deleteIsDisabled: props.tableData.rows.length === 1,
-    moveIsDisabled: props.tableData.rows.length === props.rowIndex + 1,
+    index: useTableRowContext().index,
+    deleteIsDisabled: useTableContext().rows.length === 1,
+    moveIsDisabled: useTableContext().rows.length === useTableRowContext().index + 1,
   });
 };
-const useMenuOptionsHead = (props:CellProps) => {
+const useMenuOptionsHead = () => {
   const {
     addHeadRow,
     deleteHeadRow,
@@ -235,11 +235,11 @@ const useMenuOptionsHead = (props:CellProps) => {
     moveFunc: moveHeadRow,
     group: 'head_row',
     groupLabel: 'Header Row',
-    index: props.rowIndex,
-    moveIsDisabled: props.tableData.headRows.length === props.rowIndex + 1,
+    index: useTableRowContext().index,
+    moveIsDisabled: useTableContext().headRows.length === useTableRowContext().index + 1,
   });
 };
-const useMenuOptionsFoot = (props:CellProps) => {
+const useMenuOptionsFoot = () => {
   const {
     addFootRow,
     deleteFootRow,
@@ -251,11 +251,11 @@ const useMenuOptionsFoot = (props:CellProps) => {
     moveFunc: moveFootRow,
     group: 'head_row',
     groupLabel: 'Footer Row',
-    index: props.rowIndex,
-    moveIsDisabled: props.tableData.footRows.length === props.rowIndex + 1,
+    index: useTableRowContext().index,
+    moveIsDisabled: useTableContext().footRows.length === useTableRowContext().index + 1,
   });
 };
-const useMenuOptionsColumns = (props:CellProps) => {
+const useMenuOptionsColumns = () => {
   const {
     addColumn,
     deleteColumn,
@@ -267,9 +267,9 @@ const useMenuOptionsColumns = (props:CellProps) => {
     moveFunc: moveColumn,
     group: 'column',
     groupLabel: 'Column',
-    index: props.columnIndex,
-    deleteIsDisabled: props.tableData.columns.length === 1,
-    moveIsDisabled: props.tableData.columns.length === props.columnIndex + 1,
+    index: useTableColumnContext().index,
+    deleteIsDisabled: useTableContext().columns.length === 1,
+    moveIsDisabled: useTableContext().columns.length === useTableColumnContext().index + 1,
     moveIcon: 'keyboard_arrow_right',
   });
 };
@@ -277,7 +277,6 @@ const useMenuOptionsTableOverview = () => {
   const {
     addFootRow,
     addHeadRow,
-    data,
   } = useContext(TableManagerContext);
   return [
     {
@@ -295,7 +294,7 @@ const useMenuOptionsTableOverview = () => {
       local: true,
       global: false,
       label: 'Header',
-      isHidden: data.headRows.length > 0,
+      isHidden: useTableContext().headRows.length > 0,
       handler: () => {
         addHeadRow(0, v1());
       },
@@ -307,7 +306,7 @@ const useMenuOptionsTableOverview = () => {
       local: true,
       global: false,
       label: 'Footer',
-      isHidden: data.footRows.length > 0,
+      isHidden: useTableContext().footRows.length > 0,
       handler: () => {
         addFootRow(0, v1());
       },
@@ -335,23 +334,23 @@ const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => flow
     TFoot: flow(withNode, withNodeKey(Section.foot)),
     Row: flow(
       withNode,
-      withNodeKey((p:RowProps) => p.row),
+      withNodeKey(() => useTableRowContext().name),
     ),
     Cell: flow(
       withLocalContextMenu,
       withContextActivator('onClick'),
       withMenuOptions({ useMenuOptions: useMenuOptionsColumns, name: 'TableColumn' }),
-      flowIf((p:CellProps) => p.section === Section.body)(
+      flowIf(useIsInBody)(
         withMenuOptions({ useMenuOptions, name: 'TableRow' }) as HOC,
       ),
-      flowIf((p:CellProps) => p.section === Section.head)(
+      flowIf(useIsInHead)(
         withMenuOptions({ useMenuOptions: useMenuOptionsHead, name: 'TableRowHead' }) as HOC,
       ),
-      flowIf((p:CellProps) => p.section === Section.foot)(
+      flowIf(useIsInFoot)(
         withMenuOptions({ useMenuOptions: useMenuOptionsFoot, name: 'TableRowFoot' }) as HOC,
       ),
       withNode,
-      withNodeKey((p:CellProps) => p.column),
+      withNodeKey(() => useTableColumnContext().name),
     ),
   }),
 );

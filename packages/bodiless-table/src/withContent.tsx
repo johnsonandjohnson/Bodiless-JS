@@ -15,7 +15,8 @@
 import { flowIf, withDesign } from '@bodiless/fclasses';
 import { flatten, flow } from 'lodash';
 import React, { ComponentType } from 'react';
-import { CellProps, Section } from './types';
+import { useTableColumnContext, useTableRowContext, useTableSectionContext } from './TableContext';
+import { Section } from './types';
 
 const withInnerText = <A extends object>(text:string) => (
   (Component:ComponentType<A>) => (props:A) => (
@@ -42,10 +43,10 @@ type WithContentProps = {
   body: TableContent,
   head: TableContent,
 };
-const forCell = (section:Section, rowIndex:number, columnIndex:number) => (p:CellProps) => (
-  p.section === section
-  && p.rowIndex === rowIndex
-  && p.columnIndex === columnIndex
+const forCell = (section:Section, rowIndex:number, columnIndex:number) => () => (
+  useTableSectionContext() === section
+  && useTableRowContext().index === rowIndex
+  && useTableColumnContext().index === columnIndex
 );
 const withContent = (props:WithContentProps) => {
   const { body, head } = props;

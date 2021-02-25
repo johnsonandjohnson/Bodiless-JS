@@ -48,7 +48,7 @@ function with all Cell Props as well as table data.
 
 ```js
 import { withDesign, addClasses, addClassesIf, and, not } from '@bodiless/fclasses';
-import { isFirstColumn, isOddColumn } from '@bodiless/organisms';
+import { useIsFirstColumn, useIsOddColumnn } from '@bodiless/organisms';
 
 const asTableExampleStyle = withDesign({
   Cell:  flow(
@@ -56,9 +56,9 @@ const asTableExampleStyle = withDesign({
        * Here we apply a dark column to every other row in the Body, left align 
        * text in the first column and right align in every other column.
        */
-      addClassesIf(and(isInBody, isOddColumn))('bg-gray-200'),
-      addClassesIf(isFirstColumn)('text-left'),
-      addClassesIf(not(isFirstColumn))('text-center'),
+      addClassesIf(and(useIsInBody, useIsOddColumnn))('bg-gray-200'),
+      addClassesIf(useIsFirstColumn)('text-left'),
+      addClassesIf(not(useIsFirstColumn))('text-center'),
       /**
        * Here we use a custom function. to style the second to last column
        */
