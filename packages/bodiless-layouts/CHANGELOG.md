@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.70](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.69...v0.0.70) (2021-02-24)
+
+
+### Bug Fixes
+
+* **layouts:** nested flow container context menu order ([#863](https://github.com/johnsonandjohnson/bodiless-js/issues/863)) ([11101e2](https://github.com/johnsonandjohnson/bodiless-js/commit/11101e24e782c4942d74c30d4cc1d3ba310d195a))
+
+
+### Features
+
+* **layouts:** Enable Nested Flow Containers ([#843](https://github.com/johnsonandjohnson/bodiless-js/issues/843)) ([8fb6418](https://github.com/johnsonandjohnson/bodiless-js/commit/8fb641827f71d5ec736d9406cee4a84f79ed97b6))
+
+
+
+
+
 ## [0.0.69](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.68...v0.0.69) (2021-02-12)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.70](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.69...v0.0.70) (2021-02-24)
+
+
+### Features
+
+* **bodiless-core-ui:** activate context for group in Local context menu ([#861](https://github.com/johnsonandjohnson/bodiless-js/issues/861)) ([2581ada](https://github.com/johnsonandjohnson/bodiless-js/commit/2581adae82a986670a56e83178f93f5cfd3fe2a2))
+
+
+
+
+
 ## [0.0.69](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.68...v0.0.69) (2021-02-12)
 
 

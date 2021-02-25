@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.70](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.69...v0.0.70) (2021-02-24)
+
+
+### Bug Fixes
+
+* **components:** prevent set state for unmounted component ([#854](https://github.com/johnsonandjohnson/bodiless-js/issues/854)) ([7132142](https://github.com/johnsonandjohnson/bodiless-js/commit/71321425b827779ffc107ba4be0fadebe5979670))
+* **starter:** Highlighting Link in Tout replaced it with actual href link ([#844](https://github.com/johnsonandjohnson/bodiless-js/issues/844)) ([4f70f1e](https://github.com/johnsonandjohnson/bodiless-js/commit/4f70f1e20f2d7787f1c6340d6704dd59f8eaa22f)), closes [#616](https://github.com/johnsonandjohnson/bodiless-js/issues/616)
+
+
+
+
+
 ## [0.0.69](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.68...v0.0.69) (2021-02-12)
 
 

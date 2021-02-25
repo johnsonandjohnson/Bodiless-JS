@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.70](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.69...v0.0.70) (2021-02-24)
+
+
+### Features
+
+* **search:** Search Component - Type Ahead ([#832](https://github.com/johnsonandjohnson/bodiless-js/issues/832)) ([b2d3373](https://github.com/johnsonandjohnson/bodiless-js/commit/b2d3373bee45df7227bcbb08a930edcd23d46322))
+
+
+
+
+
 ## [0.0.69](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.68...v0.0.69) (2021-02-12)
 
 

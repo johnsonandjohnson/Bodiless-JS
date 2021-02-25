@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.70](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.69...v0.0.70) (2021-02-24)
+
+
+### Bug Fixes
+
+* **components:** prevent set state for unmounted component ([#854](https://github.com/johnsonandjohnson/bodiless-js/issues/854)) ([7132142](https://github.com/johnsonandjohnson/bodiless-js/commit/71321425b827779ffc107ba4be0fadebe5979670))
+* **layouts:** nested flow container context menu order ([#863](https://github.com/johnsonandjohnson/bodiless-js/issues/863)) ([11101e2](https://github.com/johnsonandjohnson/bodiless-js/commit/11101e24e782c4942d74c30d4cc1d3ba310d195a))
+* **starter:** Highlighting Link in Tout replaced it with actual href link ([#844](https://github.com/johnsonandjohnson/bodiless-js/issues/844)) ([4f70f1e](https://github.com/johnsonandjohnson/bodiless-js/commit/4f70f1e20f2d7787f1c6340d6704dd59f8eaa22f)), closes [#616](https://github.com/johnsonandjohnson/bodiless-js/issues/616)
+* **test-site:** Add nodekey to limited flow container. ([#890](https://github.com/johnsonandjohnson/bodiless-js/issues/890)) ([1e340ad](https://github.com/johnsonandjohnson/bodiless-js/commit/1e340ad5e1461d76d3273ec87371871c14d8cfa6))
+
+
+### Features
+
+* **bodiless-core-ui:** activate context for group in Local context menu ([#861](https://github.com/johnsonandjohnson/bodiless-js/issues/861)) ([2581ada](https://github.com/johnsonandjohnson/bodiless-js/commit/2581adae82a986670a56e83178f93f5cfd3fe2a2))
+* **layouts:** Enable Nested Flow Containers ([#843](https://github.com/johnsonandjohnson/bodiless-js/issues/843)) ([8fb6418](https://github.com/johnsonandjohnson/bodiless-js/commit/8fb641827f71d5ec736d9406cee4a84f79ed97b6))
+* **search:** Search Component - Type Ahead ([#832](https://github.com/johnsonandjohnson/bodiless-js/issues/832)) ([b2d3373](https://github.com/johnsonandjohnson/bodiless-js/commit/b2d3373bee45df7227bcbb08a930edcd23d46322))
+
+
+
+
+
 ## [0.0.69](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.68...v0.0.69) (2021-02-12)
 
 

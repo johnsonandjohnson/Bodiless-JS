@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/components-ui",
-  "version": "0.0.69",
+  "version": "0.0.70",
   "description": "Default UI for Bodiless components",
   "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
   "license": "Apache-2.0",
@@ -25,10 +25,10 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/components": "^0.0.69",
-    "@bodiless/core": "^0.0.69",
-    "@bodiless/fclasses": "^0.0.69",
-    "@bodiless/ui": "^0.0.69",
+    "@bodiless/components": "^0.0.70",
+    "@bodiless/core": "^0.0.70",
+    "@bodiless/fclasses": "^0.0.70",
+    "@bodiless/ui": "^0.0.70",
     "@material/react-material-icon": "^0.15.0",
     "lodash": "^4.17.19"
   },
