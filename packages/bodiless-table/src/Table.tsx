@@ -12,9 +12,10 @@
  * limitations under the License.
  */
 
-import React, { FunctionComponent } from 'react';
+import React, { ComponentType, FunctionComponent, HTMLProps } from 'react';
 import {
   designable,
+  StylableProps,
   Table,
   Tbody,
   Td,
@@ -22,23 +23,25 @@ import {
   Th,
   Thead,
   Tr,
-  withoutProps,
 } from '@bodiless/fclasses';
 import {
-  CellProps,
   Section,
   TableProps,
   TableSectionProps,
   TableComponents,
 } from './types';
+import TableContext, {
+  TableColumnContext,
+  TableRowContext,
+  TableSectionContext,
+  useTableSectionContext,
+} from './TableContext';
 
-const DefaultRow = withoutProps('row', 'section', 'rowIndex', 'tableData')(Tr);
-const withoutCellProps = withoutProps(['row', 'column', 'section', 'rowIndex', 'columnIndex', 'tableData']);
-const HeadCell = withoutCellProps(Th);
-const BodyCell = withoutCellProps(Td);
-const DefaultCell = (props:CellProps) => {
-  const { section } = props;
-  const Cell = section === Section.head ? HeadCell : BodyCell;
+const DefaultCell = (props:HTMLProps<StylableProps>) => {
+  const section = useTableSectionContext();
+  const Cell = section === Section.head
+    ? Th as ComponentType<StylableProps>
+    : Td as ComponentType<StylableProps>;
   return <Cell {...props} />;
 };
 const tablComponentsStart:TableComponents = {
@@ -46,7 +49,7 @@ const tablComponentsStart:TableComponents = {
   TBody: Tbody,
   THead: Thead,
   TFoot: Tfoot,
-  Row: DefaultRow,
+  Row: Tr,
   Cell: DefaultCell,
 };
 const TableSection = (props:TableSectionProps) => {
@@ -57,38 +60,31 @@ const TableSection = (props:TableSectionProps) => {
     rows,
     section,
     columns,
-    tableData,
   } = props;
   return (
-    <Wrapper>
-      {(rows || []).map((row, rowIndex) => (
-        <Row
-          key={row}
-          {...{
-            row,
-            rowIndex,
-            section,
-            tableData,
-          }}
-        >
-          {(columns || []).map((column, columnIndex) => (
-            <Cell
-              // We want to refresh this component when any of this change
-              // eslint-disable-next-line react/no-array-index-key
-              key={`${rowIndex}${columnIndex}${row}${column}`}
-              {...{
-                columnIndex,
-                column,
-                row,
-                rowIndex,
-                section,
-                tableData,
-              }}
-            />
-          ))}
-        </Row>
-      ))}
-    </Wrapper>
+    <TableSectionContext.Provider value={section}>
+      <Wrapper>
+        {(rows || []).map((row, rowIndex) => (
+          <TableRowContext.Provider value={{ name: row, index: rowIndex }}>
+            <Row
+              key={row}
+            >
+              {(columns || []).map((column, columnIndex) => (
+                <TableColumnContext.Provider value={{ name: column, index: columnIndex }}>
+                  <Cell
+                    // We want to refresh this component when any of this change
+                    // eslint-disable-next-line react/no-array-index-key
+                    key={`${rowIndex}${columnIndex}${row}${column}`}
+
+                  />
+                </TableColumnContext.Provider>
+
+              ))}
+            </Row>
+          </TableRowContext.Provider>
+        ))}
+      </Wrapper>
+    </TableSectionContext.Provider>
   );
 };
 
@@ -109,48 +105,47 @@ const TableBase:FunctionComponent<TableProps> = (props) => {
     Row,
     Cell,
   } = components;
-  const tableData = {
-    columns,
-    rows,
-    headRows,
-    footRows,
-  };
   return (
-    <Wrapper {...rest}>
-      <TableSection
-        {...{
-          Wrapper: THead,
-          Row,
-          Cell,
-          section: Section.head,
-          rows: headRows,
-          columns,
-          tableData,
-        }}
-      />
-      <TableSection
-        {...{
-          Wrapper: TBody,
-          Row,
-          Cell,
-          section: Section.body,
-          rows,
-          columns,
-          tableData,
-        }}
-      />
-      <TableSection
-        {...{
-          Wrapper: TFoot,
-          Row,
-          Cell,
-          section: Section.foot,
-          rows: footRows,
-          columns,
-          tableData,
-        }}
-      />
-    </Wrapper>
+    <TableContext.Provider value={{
+      columns,
+      rows,
+      headRows,
+      footRows,
+    }}
+    >
+      <Wrapper {...rest}>
+        <TableSection
+          {...{
+            Wrapper: THead,
+            Row,
+            Cell,
+            section: Section.head,
+            rows: headRows,
+            columns,
+          }}
+        />
+        <TableSection
+          {...{
+            Wrapper: TBody,
+            Row,
+            Cell,
+            section: Section.body,
+            rows,
+            columns,
+          }}
+        />
+        <TableSection
+          {...{
+            Wrapper: TFoot,
+            Row,
+            Cell,
+            section: Section.foot,
+            rows: footRows,
+            columns,
+          }}
+        />
+      </Wrapper>
+    </TableContext.Provider>
   );
 };
 const CleanTable = designable(tablComponentsStart, 'Table')(TableBase);

@@ -20,32 +20,13 @@ enum Section {
   body = 'body',
   foot = 'foot',
 }
-type RowBaseProps = {
-  row:string,
-  section: Section,
-  rowIndex: number,
-};
-type RowTableProps = {
-  tableData: TableBaseProps,
-};
-type RowTablePropsPartial = {
-  tableData?: Partial<TableBaseProps>;
-};
-type RowProps = StylableProps & RowBaseProps & RowTableProps;
-type CellBaseProps = RowBaseProps & {
-  column:string,
-  columnIndex:number
-};
-type CellProps = StylableProps & CellBaseProps & RowTableProps;
-type CellPropsPartial = Partial<StylableProps> & Partial<CellBaseProps> & RowTablePropsPartial;
-
 type TableComponents = {
   Wrapper: ComponentType<StylableProps>,
   TBody: ComponentType<StylableProps>,
   THead: ComponentType<StylableProps>,
   TFoot: ComponentType<StylableProps>,
-  Row: ComponentType<RowProps>,
-  Cell: ComponentType<CellProps>,
+  Row: ComponentType<StylableProps>,
+  Cell: ComponentType<StylableProps>,
 };
 
 type TableBaseProps = {
@@ -59,12 +40,11 @@ type TableProps = TableBaseProps
 
 type TableSectionProps = {
   Wrapper: ComponentType<StylableProps>,
-  Row: ComponentType<RowProps>,
-  Cell: ComponentType<CellProps>,
+  Row: ComponentType<StylableProps>,
+  Cell: ComponentType<StylableProps>,
   section: Section,
   columns: string[],
   rows: string[],
-  tableData: TableBaseProps,
 };
 type AddFunc = (current:number, newItem:string) => void;
 type MoveFunc = (current:number) => void;
@@ -86,9 +66,6 @@ type TableFuncs = {
 };
 export {
   Section,
-  RowProps,
-  CellProps,
-  CellPropsPartial,
   TableProps,
   TableSectionProps,
   TableComponents,

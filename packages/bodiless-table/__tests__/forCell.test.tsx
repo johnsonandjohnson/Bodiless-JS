@@ -1,115 +1,222 @@
+import { Fragment } from '@bodiless/fclasses';
+import { flow } from 'lodash';
+import React, { ComponentType, Context as ContextType } from 'react';
+import { renderHook } from '@testing-library/react-hooks';
 import {
-  isEvenRow,
-  isOddRow,
-  isFirstRow,
-  isLastRow,
-  isEvenColumn,
-  isLastColumn,
-  isFirstColumn,
-  isOddColumn,
-  isInBody,
-  isInFoot,
-  isInHead,
+  useIsEvenRow,
+  useIsOddRow,
+  useIsFirstRow,
+  useIsLastRow,
+  useIsEvenColumn,
+  useIsLastColumn,
+  useIsFirstColumn,
+  useIsOddColumnn,
+  useIsInBody,
+  useIsInFoot,
+  useIsInHead,
 } from '../src/forCell';
+import TableContext, {
+  TableColumnContext,
+  TableRowContext,
+  TableSectionContext,
+} from '../src/TableContext';
 import { Section } from '../src/types';
-import testCellProp from './testCellProp';
+import withContextValue from './withContextValue';
 
 describe('ForCell HelperFunctions', () => {
-  describe('isEvenRow', () => {
+  describe('useIsEvenRow', () => {
     test('returns true if Row is even', () => {
-      expect(isEvenRow(testCellProp({ rowIndex: 1 }))).toBeTruthy();
+      const wrapper = withContextValue(TableRowContext)({ index: 1, name: '' })(Fragment);
+      const { result } = renderHook(useIsEvenRow, { wrapper });
+      expect(result.current).toBeTruthy();
     });
-    test('returns false if Row is ode', () => {
-      expect(isEvenRow(testCellProp({ rowIndex: 2 }))).toBeFalsy();
+    test('returns false if Row is odd', () => {
+      const wrapper = withContextValue(TableRowContext)({ index: 2, name: '' })(Fragment);
+      const { result } = renderHook(useIsEvenRow, { wrapper });
+      expect(result.current).toBeFalsy();
     });
   });
-  describe('isOddRow', () => {
+  describe('useIsOddRow', () => {
     test('returns true if Row is odd', () => {
-      expect(isOddRow(testCellProp({ rowIndex: 2 }))).toBeTruthy();
+      const wrapper = withContextValue(TableRowContext)({ index: 2, name: '' })(Fragment);
+      const { result } = renderHook(useIsOddRow, { wrapper });
+      expect(result.current).toBeTruthy();
     });
     test('returns false if Row is even', () => {
-      expect(isOddRow(testCellProp({ rowIndex: 1 }))).toBeFalsy();
+      const wrapper = withContextValue(TableRowContext)({ index: 1, name: '' })(Fragment);
+      const { result } = renderHook(useIsOddRow, { wrapper });
+      expect(result.current).toBeFalsy();
     });
   });
-  describe('isFirstRow', () => {
+  describe('useIsFirstRow', () => {
     test('returns true if Row is first', () => {
-      expect(isFirstRow(testCellProp({ rowIndex: 0 }))).toBeTruthy();
+      const wrapper = withContextValue(TableRowContext)({ index: 0, name: '' })(Fragment);
+      const { result } = renderHook(useIsFirstRow, { wrapper });
+      expect(result.current).toBeTruthy();
     });
     test('returns false if Row is not first', () => {
-      expect(isFirstRow(testCellProp({ rowIndex: 1 }))).toBeFalsy();
+      const wrapper = withContextValue(TableRowContext)({ index: 1, name: '' })(Fragment);
+      const { result } = renderHook(useIsFirstRow, { wrapper });
+      expect(result.current).toBeFalsy();
     });
   });
-  describe('isLastRow', () => {
+  describe('useIsLastRow', () => {
     test('returns true if Row is last', () => {
-      expect(isLastRow(testCellProp({ rowIndex: 2 }))).toBeTruthy();
+      const wrapper = flow(
+        withContextValue(TableContext)({
+          rows: ['0', '1'],
+          columns: [],
+          headRows: [],
+          footRows: [],
+        }),
+        withContextValue(TableRowContext)({ index: 1, name: '' }),
+      )(Fragment);
+      const { result } = renderHook(useIsLastRow, { wrapper });
+      expect(result.current).toBeTruthy();
     });
     test('returns false if Row is not last', () => {
-      expect(isFirstRow(testCellProp({ rowIndex: 1 }))).toBeFalsy();
+      const wrapper = flow(
+        withContextValue(TableContext)({
+          rows: ['0', '1'],
+          columns: [],
+          headRows: [],
+          footRows: [],
+        }),
+        withContextValue(TableRowContext)({ index: 0, name: '' }),
+      )(Fragment);
+      const { result } = renderHook(useIsLastRow, { wrapper });
+      expect(result.current).toBeFalsy();
     });
   });
-  describe('isEvenColumn', () => {
+  describe('useIsEvenColumn', () => {
     test('returns true if Column is even', () => {
-      expect(isEvenColumn(testCellProp({ columnIndex: 1 }))).toBeTruthy();
+      const wrapper = withContextValue(TableColumnContext)({ index: 1, name: '' })(Fragment);
+      const { result } = renderHook(useIsEvenColumn, { wrapper });
+      expect(result.current).toBeTruthy();
     });
     test('returns false if Column is ode', () => {
-      expect(isEvenColumn(testCellProp({ columnIndex: 2 }))).toBeFalsy();
+      const wrapper = withContextValue(TableColumnContext)({ index: 2, name: '' })(Fragment);
+      const { result } = renderHook(useIsEvenColumn, { wrapper });
+      expect(result.current).toBeFalsy();
     });
   });
-  describe('isOddColumn', () => {
+  describe('useIsOddColumnn', () => {
     test('returns true if Column is odd', () => {
-      expect(isOddColumn(testCellProp({ columnIndex: 2 }))).toBeTruthy();
+      const wrapper = withContextValue(TableColumnContext)({ index: 0, name: '' })(Fragment);
+      const { result } = renderHook(useIsOddColumnn, { wrapper });
+      expect(result.current).toBeTruthy();
     });
     test('returns false if Column is even', () => {
-      expect(isOddColumn(testCellProp({ columnIndex: 1 }))).toBeFalsy();
+      const wrapper = withContextValue(TableColumnContext)({ index: 1, name: '' })(Fragment);
+      const { result } = renderHook(useIsOddColumnn, { wrapper });
+      expect(result.current).toBeFalsy();
     });
   });
-  describe('isFirstColumn', () => {
+  describe('useIsFirstColumn', () => {
     test('returns true if Column is first', () => {
-      expect(isFirstColumn(testCellProp({ columnIndex: 0 }))).toBeTruthy();
+      const wrapper = flow(
+        withContextValue(TableContext)({
+          rows: [],
+          columns: ['0','1'],
+          headRows: [],
+          footRows: [],
+        }),
+        withContextValue(TableColumnContext)({ index: 0, name: '' }),
+      )(Fragment);
+      const { result } = renderHook(useIsFirstColumn, { wrapper });
+      expect(result.current).toBeTruthy();
     });
     test('returns false if Column is not first', () => {
-      expect(isFirstColumn(testCellProp({ columnIndex: 1 }))).toBeFalsy();
+      const wrapper = flow(
+        withContextValue(TableContext)({
+          rows: [],
+          columns: ['0','1'],
+          headRows: [],
+          footRows: [],
+        }),
+        withContextValue(TableColumnContext)({ index: 1, name: '' }),
+      )(Fragment);
+      const { result } = renderHook(useIsFirstColumn, { wrapper });
+      expect(result.current).toBeFalsy();
     });
   });
-  describe('isLastColumn', () => {
+  describe('useIsLastColumn', () => {
     test('returns true if Column is last', () => {
-      expect(isLastColumn(testCellProp({ columnIndex: 2 }))).toBeTruthy();
+      const wrapper = flow(
+        withContextValue(TableContext)({
+          rows: [],
+          columns: ['0','1'],
+          headRows: [],
+          footRows: [],
+        }),
+        withContextValue(TableColumnContext)({ index: 1, name: '' }),
+      )(Fragment);
+      const { result } = renderHook(useIsLastColumn, { wrapper });
+      expect(result.current).toBeTruthy();
     });
     test('returns false if Column is not last', () => {
-      expect(isFirstColumn(testCellProp({ columnIndex: 1 }))).toBeFalsy();
+      const wrapper = flow(
+        withContextValue(TableContext)({
+          rows: [],
+          columns: ['0','1'],
+          headRows: [],
+          footRows: [],
+        }),
+        withContextValue(TableColumnContext)({ index: 0, name: '' }),
+      )(Fragment);
+      const { result } = renderHook(useIsLastColumn, { wrapper });
+      expect(result.current).toBeFalsy();
     });
   });
-  describe('isInHead', () => {
+  describe('useIsInHead', () => {
     test('returns true if item is in the head', () => {
-      expect(isInHead(testCellProp({ section: Section.head }))).toBeTruthy();
+      const wrapper = withContextValue(TableSectionContext)(Section.head)(Fragment);
+      const { result } = renderHook(useIsInHead, { wrapper });
+      expect(result.current).toBeTruthy();
     });
     test('returns false if item is in the body', () => {
-      expect(isInHead(testCellProp({ section: Section.body }))).toBeFalsy();
+      const wrapper = withContextValue(TableSectionContext)(Section.body)(Fragment);
+      const { result } = renderHook(useIsInHead, { wrapper });
+      expect(result.current).toBeFalsy();
     });
     test('returns false if item is in the foot', () => {
-      expect(isInHead(testCellProp({ section: Section.foot }))).toBeFalsy();
+      const wrapper = withContextValue(TableSectionContext)(Section.foot)(Fragment);
+      const { result } = renderHook(useIsInHead, { wrapper });
+      expect(result.current).toBeFalsy();
     });
   });
-  describe('isInBody', () => {
+  describe('useIsInBody', () => {
     test('returns false if item is in the head', () => {
-      expect(isInBody(testCellProp({ section: Section.head }))).toBeFalsy();
+      const wrapper = withContextValue(TableSectionContext)(Section.head)(Fragment);
+      const { result } = renderHook(useIsInBody, { wrapper });
+      expect(result.current).toBeFalsy();
     });
     test('returns true if item is in the body', () => {
-      expect(isInBody(testCellProp({ section: Section.body }))).toBeTruthy();
+      const wrapper = withContextValue(TableSectionContext)(Section.body)(Fragment);
+      const { result } = renderHook(useIsInBody, { wrapper });
+      expect(result.current).toBeTruthy();
     });
     test('returns false if item is in the foot', () => {
-      expect(isInBody(testCellProp({ section: Section.foot }))).toBeFalsy();
+      const wrapper = withContextValue(TableSectionContext)(Section.foot)(Fragment);
+      const { result } = renderHook(useIsInBody, { wrapper });
+      expect(result.current).toBeFalsy();
     });
   });
-  describe('isInFoot', () => {
+  describe('useIsInFoot', () => {
     test('returns false if item is in the head', () => {
-      expect(isInFoot(testCellProp({ section: Section.head }))).toBeFalsy();
+      const wrapper = withContextValue(TableSectionContext)(Section.head)(Fragment);
+      const { result } = renderHook(useIsInFoot, { wrapper });
+      expect(result.current).toBeFalsy();
     });
     test('returns false if item is in the body', () => {
-      expect(isInFoot(testCellProp({ section: Section.body }))).toBeFalsy();
+      const wrapper = withContextValue(TableSectionContext)(Section.body)(Fragment);
+      const { result } = renderHook(useIsInFoot, { wrapper });
+      expect(result.current).toBeFalsy();
     });
     test('returns true if item is in the foot', () => {
-      expect(isInFoot(testCellProp({ section: Section.foot }))).toBeTruthy();
+      const wrapper = withContextValue(TableSectionContext)(Section.foot)(Fragment);
+      const { result } = renderHook(useIsInFoot, { wrapper });
+      expect(result.current).toBeTruthy();
     });
   });
 });

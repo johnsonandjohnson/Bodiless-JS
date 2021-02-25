@@ -23,9 +23,9 @@ import { flow } from 'lodash';
 import {
   asBodilessTable,
   CleanTable,
-  isInBody,
-  isFirstColumn,
-  isEvenColumn,
+  useIsInBody,
+  useIsFirstColumn,
+  useIsEvenColumn,
 } from '@bodiless/table';
 import { withEditorFullFeatured } from '../Editors';
 
@@ -39,7 +39,7 @@ const asDefaultTableStyle = flow(
   withDesign({
     Cell: flow(
       addClasses('min-w-1 py-1 px-5'),
-      addClassesIf(and(isEvenColumn, isInBody))('bg-gray-100'),
+      addClassesIf(and(useIsEvenColumn, useIsInBody))('bg-gray-100'),
     ),
     THead: flow(addClasses('bg-orange-700 text-white')),
     Wrapper: addClasses('border border-collapse rounded border-gray-200 w-full'),
@@ -51,17 +51,17 @@ const StandardTable = flow(
 )(CleanTable);
 const asTableFirstLeft = withDesign({
   Cell: flow(
-    addClassesIf(isFirstColumn)('text-left'),
-    addClassesIf(and(isInBody, isFirstColumn))('bg-orange-600 text-white'),
-    addClassesIf(not(isFirstColumn))('text-center'),
+    addClassesIf(useIsFirstColumn)('text-left'),
+    addClassesIf(and(useIsInBody, useIsFirstColumn))('bg-orange-600 text-white'),
+    addClassesIf(not(useIsFirstColumn))('text-center'),
   ),
 });
 const asTableCenterText = withDesign({
-  Cell: addClassesIf(isInBody)('text-center'),
+  Cell: addClassesIf(useIsInBody)('text-center'),
 });
 const asTableFirstExtraWidth = withDesign({
   Cell: flow(
-    addClassesIf(isFirstColumn)('w-1/2'),
+    addClassesIf(useIsFirstColumn)('w-1/2'),
   ),
 });
 export {
