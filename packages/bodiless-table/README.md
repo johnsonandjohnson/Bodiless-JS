@@ -32,7 +32,7 @@ The table component follows the Bodiless Design Pattern and is easy to style. He
 ```js
 import { withDesign, addClasses } from '@bodiless/fclasses';
 
-const asAccordionExampleStyle = withDesign({
+const asTableExampleStyle = withDesign({
   Wrapper: addClasses('p-3'),
   THead: addClasses('bg-gray-200'),
   TBody: addClasses('text-primary'),

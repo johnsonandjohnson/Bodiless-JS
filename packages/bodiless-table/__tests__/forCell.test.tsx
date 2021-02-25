@@ -93,7 +93,7 @@ describe('ForCell HelperFunctions', () => {
       const { result } = renderHook(useIsEvenColumn, { wrapper });
       expect(result.current).toBeTruthy();
     });
-    test('returns false if Column is ode', () => {
+    test('returns false if Column is odd', () => {
       const wrapper = withContextValue(TableColumnContext)({ index: 2, name: '' })(Fragment);
       const { result } = renderHook(useIsEvenColumn, { wrapper });
       expect(result.current).toBeFalsy();

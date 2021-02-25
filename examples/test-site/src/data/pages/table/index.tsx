@@ -34,7 +34,7 @@ const Table2 = flow(
 export default (props: any) => (
   <Page {...props}>
     <Layout>
-      <h1 className="text-3xl font-bold">Editable List Demo</h1>
+      <h1 className="text-3xl font-bold">Editable Table Demo</h1>
       <p className="pt-4">
         The following are editable Tables. Clicking on each cell will display
         a menu with available operations. One can add rows and columns to the body or
