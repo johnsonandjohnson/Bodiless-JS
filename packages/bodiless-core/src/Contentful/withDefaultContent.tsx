@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
+import React from 'react';
+import type { ComponentOrTag } from '@bodiless/fclasses';
 import NodeProvider, { useNode } from '../NodeProvider';
 import ContentfulNode from './ContentfulNode';
 import { DefaultContentNode } from '../ContentNode';
@@ -35,7 +36,7 @@ import { DefaultContentNode } from '../ContentNode';
  * An HOC providing default content to the wrapped component.
  */
 const withDefaultContent = <P extends object, D extends object>(content: D|((props:P) => D)) => (
-  (Component: CT<P> | string) => {
+  (Component: ComponentOrTag<P>) => {
     const WithDefaultContent = (props: P) => {
       const { node } = useNode();
       const content$ = typeof content === 'function'

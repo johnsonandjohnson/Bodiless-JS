@@ -16,7 +16,7 @@ import React, { ComponentType as CT } from 'react';
 import {
   pick, omit, identity, flowRight,
 } from 'lodash';
-import type { HOC } from '@bodiless/fclasses/lib/Tokens';
+import type { HOC } from '@bodiless/fclasses';
 import withNode, { withNodeKey } from './withNode';
 import {
   withNodeDataHandlers, withoutProps, withContextActivator, withLocalContextMenu,

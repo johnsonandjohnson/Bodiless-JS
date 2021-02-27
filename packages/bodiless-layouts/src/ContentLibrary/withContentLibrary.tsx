@@ -4,6 +4,7 @@ import {
   createMenuOptionGroup, withMenuOptions, NodeProvider,
 } from '@bodiless/core';
 import type { OptionGroupDefinition } from '@bodiless/core';
+import type { ComponentOrTag } from '@bodiless/fclasses';
 import { observer } from 'mobx-react-lite';
 import { flow } from 'lodash';
 import ComponentSelector from '../ComponentSelector';
@@ -40,7 +41,7 @@ const copyNode = (source: ContentNode<any>, dest: ContentNode<any>, copyChildren
 };
 
 const withContentLibrary = (options: ContentLibraryOptions) => (
-  Component: ComponentType | string,
+  Component: ComponentOrTag<any>,
 ) => {
   const {
     DisplayComponent = Component,

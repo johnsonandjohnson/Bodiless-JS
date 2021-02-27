@@ -13,7 +13,7 @@
  */
 
 import { asToken } from '@bodiless/fclasses';
-import type { HOC } from '@bodiless/fclasses/lib/Tokens';
+import type { HOC } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
 import { withImageLibrary } from '@bodiless/components';
 import type { AsBodilessImage, AsImageToken } from '@bodiless/components';

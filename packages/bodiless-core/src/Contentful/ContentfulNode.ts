@@ -15,6 +15,10 @@
 import { union } from 'lodash';
 import { DefaultContentNode, Path } from '../ContentNode';
 
+type Content = {
+  [nodePath: string]: any,
+};
+
 export const getRelativeNodeKey = (basePath: Path, nodePath: Path) => {
   const delimiter = '$';
   const baseNodeKey = Array.isArray(basePath) ? basePath.join(delimiter) : basePath;
@@ -35,7 +39,7 @@ export default class ContentfulNode<D extends object> extends DefaultContentNode
   private baseContentPath: Path = [];
 
   // @ts-ignore has no initializer and is not definitely assigned in the constructor
-  private content: object;
+  private content: Content;
 
   static create(node: DefaultContentNode<object>, content: object) {
     const contentfulNode = new ContentfulNode(node.getActions(), node.getGetters(), node.path);
@@ -55,7 +59,7 @@ export default class ContentfulNode<D extends object> extends DefaultContentNode
     return contentValue || {};
   }
 
-  public setContent(content: object) {
+  public setContent(content: Content) {
     this.content = content;
   }
 

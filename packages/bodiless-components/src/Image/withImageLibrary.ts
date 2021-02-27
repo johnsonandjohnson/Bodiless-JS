@@ -19,7 +19,7 @@ import {
 } from '@bodiless/core';
 import type { ContentNode } from '@bodiless/core';
 import { asToken } from '@bodiless/fclasses';
-import type { HOC } from '@bodiless/fclasses/lib/Tokens';
+import type { HOC } from '@bodiless/fclasses';
 import { withContentLibrary } from '@bodiless/layouts';
 import { ComponentSelector } from '@bodiless/layouts-ui';
 import path from 'path';

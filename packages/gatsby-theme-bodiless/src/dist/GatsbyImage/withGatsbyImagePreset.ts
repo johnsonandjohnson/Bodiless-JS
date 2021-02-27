@@ -13,8 +13,7 @@
  */
 
 import { asToken } from '@bodiless/fclasses';
-import type { TokenMeta } from '@bodiless/fclasses';
-import type { HOC } from '@bodiless/fclasses/lib/Tokens';
+import type { HOC, TokenMeta } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
 import type { AsBodilessImage } from '@bodiless/components';
 import asDesignableGatsbyImage from './asDesignableGatsbyImage';
