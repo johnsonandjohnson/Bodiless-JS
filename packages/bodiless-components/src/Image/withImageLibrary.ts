@@ -19,16 +19,15 @@ import {
 } from '@bodiless/core';
 import type { ContentNode } from '@bodiless/core';
 import { asToken } from '@bodiless/fclasses';
-import type { TokenMeta } from '@bodiless/fclasses';
 import type { HOC } from '@bodiless/fclasses/lib/Tokens';
 import { withContentLibrary } from '@bodiless/layouts';
 import { ComponentSelector } from '@bodiless/layouts-ui';
 import path from 'path';
-import type { AsBodilessImage } from './Image';
+import type { AsBodilessImage, AsImageToken } from './Image';
 
 // Adds image library to an asEditableImage hoc.
 const withImageLibrary = (
-  asEditableImage: AsBodilessImage & { meta?: TokenMeta },
+  asEditableImage: AsBodilessImage,
 ) => (libraryNodeKey: string): AsBodilessImage => (
   nodeKeys,
   placeholder,
@@ -48,9 +47,10 @@ const withImageLibrary = (
     };
   };
 
+  const asImageHoc = asEditableImage(undefined, placeholder, useOverrides) as AsImageToken;
   return asToken(
-    asEditableImage.meta || {},
-    asEditableImage(undefined, placeholder, useOverrides),
+    asImageHoc.meta,
+    asImageHoc,
     withContentLibrary({
       Selector: ComponentSelector,
       useLibraryNode: useImageLibraryNode,

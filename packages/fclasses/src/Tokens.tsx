@@ -37,7 +37,7 @@ type HOC<P = any, Q = P> = (C:ComponentOrTag<P>) => ComponentWithMeta<Q>;
 /**
  * Properties of tokens.
  */
-type TokenProps<P> = {
+export type TokenProps<P> = {
   /**
    * The filter (if any) which should be applied when this token is composed.
    */
@@ -70,7 +70,7 @@ type TokenFilterTest<P> = (hoc: Token<P>) => boolean;
  * Type of the parameters to asToken.  Overloaded to accept metadata
  * objects in addition to tokens.
  */
-type TokenDef<P> = Token<P>|TokenMeta;
+type TokenDef<P> = Token<P>|TokenMeta|undefined;
 
 const isToken = (def: TokenDef<any>) => typeof def === 'function';
 

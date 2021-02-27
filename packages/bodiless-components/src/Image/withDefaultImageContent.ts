@@ -14,27 +14,29 @@
 
 import { withDefaultContent, withResetButton } from '@bodiless/core';
 import { asToken } from '@bodiless/fclasses';
-import type { TokenMeta } from '@bodiless/fclasses';
 import identity from 'lodash/identity';
-import type { AsBodilessImage, Data } from './Image';
+import type { AsBodilessImage, AsImageToken, Data } from './Image';
 
 /**
  * Adds default content to an asEditableImage hoc
  */
 const withDefaultImageContent = (
-  asEditableImage: AsBodilessImage & { meta?: TokenMeta },
+  asEditableImage: AsBodilessImage,
 ) => (nodeContent: Data): AsBodilessImage => (
   nodeKey,
   placeholder,
   useOverrides,
-) => asToken(
-  asEditableImage.meta !== undefined ? asEditableImage.meta : identity,
-  asToken.meta.term('Category')('Contentful'),
-  asEditableImage(nodeKey, placeholder, useOverrides),
-  typeof nodeKey === 'string' ? withDefaultContent({
-    [nodeKey]: nodeContent,
-  }) : identity,
-  typeof nodeKey === 'string' ? withResetButton({ nodeKey }) : withResetButton(nodeKey),
-);
+) => {
+  const asImageHoc = asEditableImage(nodeKey, placeholder, useOverrides) as AsImageToken;
+  return asToken(
+    asImageHoc.meta,
+    asToken.meta.term('Category')('Contentful'),
+    asImageHoc,
+    typeof nodeKey === 'string' ? withDefaultContent({
+      [nodeKey]: nodeContent,
+    }) : identity,
+    typeof nodeKey === 'string' ? withResetButton({ nodeKey }) : withResetButton(nodeKey),
+  );
+};
 
 export default withDefaultImageContent;

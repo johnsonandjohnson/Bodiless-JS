@@ -135,6 +135,11 @@ describe('asToken', () => {
         Type: ['Foo', 'Bar', 'Baz', 'Test'],
       });
     });
+
+    it('Adds an empty meta when composed items do not have metadata', () => {
+      const asTestToken = asToken(addProp('prop'));
+      expect(asTestToken.meta).toStrictEqual({});
+    });
   });
 
   describe('Filtering', () => {
@@ -219,6 +224,22 @@ describe('asToken', () => {
       const wrapperF = mount(<Test />);
       expect(wrapperF.find(Base).props()).toEqual({
         bar: 'bar',
+      });
+    });
+  });
+
+  describe('When undefined argument passed', () => {
+    it('accepts it and ignores it', () => {
+      const Base = () => <></>;
+      const asTestToken = asToken(
+        addProp('prop'),
+        undefined,
+      );
+      expect(asTestToken.meta).toStrictEqual({});
+      const Test = addProp('foo')(Base);
+      const wrapper = mount(<Test />);
+      expect(wrapper.find(Base).props()).toEqual({
+        foo: 'foo',
       });
     });
   });
