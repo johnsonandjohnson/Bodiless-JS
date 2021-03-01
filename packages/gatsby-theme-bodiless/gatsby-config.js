@@ -118,7 +118,12 @@ const discoverDefaultContent = (depth = 1) => {
     ]);
     // eslint-disable-next-line no-loop-func
     files.forEach(file => {
-      const fileContent = JSON.parse(fs.readFileSync(file));
+      let fileContent = [];
+      try {
+        fileContent = JSON.parse(fs.readFileSync(file));
+      } catch (e) {
+        console.error(`@bodiless/gatsby-theme-bodiless: error on reading file: ${file}. Error: ${e}.`);
+      }
       defaultContentPaths = [
         ...defaultContentPaths,
         ...fileContent.map(file$ => path.resolve(path.dirname(file), file$)),
