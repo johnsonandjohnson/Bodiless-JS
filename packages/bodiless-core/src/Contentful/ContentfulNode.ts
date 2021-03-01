@@ -55,7 +55,7 @@ export default class ContentfulNode<D extends object> extends DefaultContentNode
   private getDefaultContent() {
     const contentKey = this.getContentKey();
     const contentValue = (this.content as any)[contentKey];
-    if (typeof contentValue === 'function') return contentValue(this.proxy({}));
+    if (typeof contentValue === 'function') return contentValue(this);
     return contentValue || {};
   }
 
