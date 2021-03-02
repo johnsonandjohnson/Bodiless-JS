@@ -29,8 +29,6 @@ import {
   AsBodiless,
 } from '@bodiless/core';
 
-import type { TokenProps } from '@bodiless/fclasses';
-
 import { useDropzone } from 'react-dropzone';
 import { FormApi } from 'informed';
 import BackendSave from '../BackendSave';
@@ -214,7 +212,6 @@ const options: BodilessOptions<Props, Data> = {
 export const withImagePlaceholder = withPropsFromPlaceholder(['src']);
 
 export type AsBodilessImage = AsBodiless<ImageProps, Data>;
-export type AsImageToken = ReturnType<AsBodilessImage> & TokenProps<ImageProps>;
 
 export const asBodilessImage: AsBodilessImage = asBodilessComponent(options);
 

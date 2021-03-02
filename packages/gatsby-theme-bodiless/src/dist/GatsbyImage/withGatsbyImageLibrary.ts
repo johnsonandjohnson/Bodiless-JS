@@ -16,7 +16,7 @@ import { asToken } from '@bodiless/fclasses';
 import type { HOC } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
 import { withImageLibrary } from '@bodiless/components';
-import type { AsBodilessImage, AsImageToken } from '@bodiless/components';
+import type { AsBodilessImage } from '@bodiless/components';
 import withGatsbyImageNode from './withGatsbyImageNode';
 import GatsbyImagePresets from './GatsbyImagePresets';
 
@@ -27,7 +27,7 @@ const withGatsbyImageLibrary = (preset: GatsbyImagePresets) => (
   placeholder,
   useOverrides,
 ) => {
-  const asImageHoc = asEditableImage(undefined, placeholder, useOverrides) as AsImageToken;
+  const asImageHoc = asEditableImage(undefined, placeholder, useOverrides);
   return asToken(
     asImageHoc.meta,
     asImageHoc,

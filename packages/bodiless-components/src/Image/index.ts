@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-export type { AsBodilessImage, AsImageToken } from './Image';
+export type { AsBodilessImage } from './Image';
 export {
   default as Image,
   asBodilessImage,

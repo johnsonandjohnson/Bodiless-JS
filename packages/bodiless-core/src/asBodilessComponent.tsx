@@ -16,7 +16,7 @@ import React, { ComponentType as CT } from 'react';
 import {
   pick, omit, identity, flowRight,
 } from 'lodash';
-import type { HOC } from '@bodiless/fclasses';
+import type { Token } from '@bodiless/fclasses';
 import withNode, { withNodeKey } from './withNode';
 import {
   withNodeDataHandlers, withoutProps, withContextActivator, withLocalContextMenu,
@@ -53,7 +53,7 @@ type AsBodiless<P, D, E = {}> = (
   nodeKeys?: WithNodeKeyProps,
   defaultData?: D,
   useOverrides?: UseBodilessOverrides<P, D, E>,
-) => HOC<P, P & BodilessProps>;
+) => Token<P, P & BodilessProps>;
 
 /**
  * Given an event name and a wrapper component, provides an HOC which will wrap the base component

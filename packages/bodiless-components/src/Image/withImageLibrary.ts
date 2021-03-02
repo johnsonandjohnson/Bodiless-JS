@@ -23,7 +23,7 @@ import type { HOC } from '@bodiless/fclasses';
 import { withContentLibrary } from '@bodiless/layouts';
 import { ComponentSelector } from '@bodiless/layouts-ui';
 import path from 'path';
-import type { AsBodilessImage, AsImageToken } from './Image';
+import type { AsBodilessImage } from './Image';
 
 // Adds image library to an asEditableImage hoc.
 const withImageLibrary = (
@@ -47,7 +47,7 @@ const withImageLibrary = (
     };
   };
 
-  const asImageHoc = asEditableImage(undefined, placeholder, useOverrides) as AsImageToken;
+  const asImageHoc = asEditableImage(undefined, placeholder, useOverrides);
   return asToken(
     asImageHoc.meta,
     asImageHoc,

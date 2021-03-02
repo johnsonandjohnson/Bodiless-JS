@@ -40,8 +40,8 @@ const copyNode = (source: ContentNode<any>, dest: ContentNode<any>, copyChildren
   }
 };
 
-const withContentLibrary = (options: ContentLibraryOptions) => (
-  Component: ComponentOrTag<any>,
+const withContentLibrary = (options: ContentLibraryOptions) => <P extends object>(
+  Component: ComponentOrTag<P>,
 ) => {
   const {
     DisplayComponent = Component,
