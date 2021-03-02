@@ -16,7 +16,6 @@ import asGatsbyImage, { isGatsbyImage } from './asGatsbyImage';
 import withGatsbyImageNode from './withGatsbyImageNode';
 import GatsbyImagePresets from './GatsbyImagePresets';
 import withGatsbyImageLogger from './withGatsbyImageLogger';
-import asDesignableGatsbyImage from './asDesignableGatsbyImage';
 import withGatsbyImagePreset from './withGatsbyImagePreset';
 import withGatsbyImageLibrary from './withGatsbyImageLibrary';
 
@@ -26,7 +25,6 @@ export {
   withGatsbyImageNode,
   GatsbyImagePresets,
   withGatsbyImageLogger,
-  asDesignableGatsbyImage,
   withGatsbyImagePreset,
   withGatsbyImageLibrary,
 };

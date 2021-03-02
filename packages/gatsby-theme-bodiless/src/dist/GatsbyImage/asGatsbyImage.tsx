@@ -12,11 +12,10 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
+import React, { ComponentType as CT, HTMLProps } from 'react';
 import GatsbyImg from 'gatsby-image';
 import {
   ifEditable,
-  ifToggledOn,
   withActivatorWrapper,
 } from '@bodiless/core';
 import type {
@@ -24,53 +23,64 @@ import type {
   FixedObject,
   GatsbyImageOptionalProps,
 } from 'gatsby-image';
-import { addClasses, Div } from '@bodiless/fclasses';
-import { flow } from 'lodash';
+import {
+  addClasses, DesignableComponentsProps, Div, extendDesignable, withDesign,
+} from '@bodiless/fclasses';
+import flow from 'lodash/flow';
+import omit from 'lodash/omit';
 
-type ImageProps = {
-  src: string;
-  alt: string;
-  title: string;
+type Components = {
+  GatsbyImage: CT<any>,
+  Image: CT<any>,
 };
 
-export type GasbyImageProps = ImageProps & {
+export type GasbyImageProps = HTMLProps<HTMLImageElement> & {
   preset: string;
+  publicUrl?: string;
   gatsbyImg?: { fluid: FluidObject | FluidObject[] } | { fixed: FixedObject | FixedObject[] };
-} & GatsbyImageOptionalProps;
+} & GatsbyImageOptionalProps & DesignableComponentsProps<Components>;
 
-const isGatsbyImage = ({ gatsbyImg }: GasbyImageProps) => gatsbyImg !== undefined;
-
-const asGatsbyImage$ = (Component: CT<any>) => {
-  const AsGatsbyImage = (props: GasbyImageProps) => {
-    const { gatsbyImg, preset, ...rest } = props;
+const asDesignableGatsbyImage = (Component: CT<any>) => {
+  const startComponents: Components = {
+    GatsbyImage: GatsbyImg,
+    Image: Component,
+  };
+  const AsDesignableGatsbyImage = (props: GasbyImageProps) => {
+    const {
+      components, gatsbyImg, preset, publicUrl, src, ...rest
+    } = props;
+    const {
+      GatsbyImage,
+      Image,
+    } = components;
     if (gatsbyImg !== undefined) {
       return (
-        <GatsbyImg {...rest} {...gatsbyImg} />
+        <GatsbyImage {...rest} {...gatsbyImg} />
       );
     }
+    const publicUrl$ = publicUrl || src;
     return (
-      <Component {...rest} />
+      <Image {...rest} src={publicUrl$} />
     );
   };
-  return AsGatsbyImage;
+  const applyDesign = extendDesignable(design => omit(design, ['GatsbyImage', 'Image']));
+  return applyDesign(startComponents, 'GatsbyImage')(AsDesignableGatsbyImage);
 };
 
 const withActivatorWrapperDefaultStyles = addClasses('bl-w-full');
 
-/**
- * @deprecated in favor of asDesignableGatsbyImage
- */
 const asGatsbyImage = flow(
-  asGatsbyImage$,
-  ifEditable(
-    ifToggledOn(isGatsbyImage)(
+  asDesignableGatsbyImage,
+  withDesign({
+    GatsbyImage: ifEditable(
       withActivatorWrapper(
         'onClick',
         withActivatorWrapperDefaultStyles(Div),
       ),
     ),
-  ),
+  }),
 );
 
+export const isGatsbyImage = ({ gatsbyImg }: GasbyImageProps) => gatsbyImg !== undefined;
+
 export default asGatsbyImage;
-export { isGatsbyImage };
