@@ -13,9 +13,10 @@
  */
 
 import React from 'react';
-import { Img } from '@bodiless/fclasses';
+import { Img, withDesign, addProps } from '@bodiless/fclasses';
 /* eslint-disable-next-line import/no-extraneous-dependencies */
 import { mount } from 'enzyme';
+import flow from 'lodash/flow';
 import asGatsbyImage from '../src/dist/GatsbyImage/asGatsbyImage';
 
 const fluidShapeMock = {
@@ -44,8 +45,51 @@ describe('asGatsbyImage', () => {
     it('renders standard image', () => {
       const Foo = asGatsbyImage(Img);
       const wrapper = mount(<Foo />);
-      expect(wrapper.find('Image').length).toBe(0);
       expect(wrapper.find('img').length).toBe(1);
     });
+  });
+  it('allows adjusting GatsbyImage using design API', () => {
+    const testGatsbyImgStyle = {
+      borderWidth: 1,
+    };
+    const Foo = flow(
+      asGatsbyImage,
+      withDesign({
+        GatsbyImage: addProps({
+          style: testGatsbyImgStyle,
+        }),
+      }),
+    )(Img);
+    const props = {
+      gatsbyImg: {
+        fluid: fluidShapeMock,
+      },
+    };
+    const wrapper = mount(<Foo {...props} />);
+    expect(wrapper.find('Image').prop('style')).toBe(testGatsbyImgStyle);
+    const wrapper$ = mount(<Foo />);
+    expect(wrapper$.find('img').prop('style')).toBe(undefined);
+  });
+  it('allows adjusting standard image using design API', () => {
+    const testGatsbyImgStyle = {
+      borderWidth: 1,
+    };
+    const Foo = flow(
+      asGatsbyImage,
+      withDesign({
+        Image: addProps({
+          style: testGatsbyImgStyle,
+        }),
+      }),
+    )(Img);
+    const props = {
+      gatsbyImg: {
+        fluid: fluidShapeMock,
+      },
+    };
+    const wrapper = mount(<Foo {...props} />);
+    expect(wrapper.find('Image').prop('style')).toBe(undefined);
+    const wrapper$ = mount(<Foo />);
+    expect(wrapper$.find('img').prop('style')).toBe(testGatsbyImgStyle);
   });
 });

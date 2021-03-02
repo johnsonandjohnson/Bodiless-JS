@@ -16,7 +16,7 @@ import { asToken } from '@bodiless/fclasses';
 import type { HOC, TokenMeta } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
 import type { AsBodilessImage } from '@bodiless/components';
-import asDesignableGatsbyImage from './asDesignableGatsbyImage';
+import asGatsbyImage from './asGatsbyImage';
 import withGatsbyImageLogger from './withGatsbyImageLogger';
 import withGatsbyImageNode from './withGatsbyImageNode';
 import GatsbyImagePresets from './GatsbyImagePresets';
@@ -30,7 +30,7 @@ const withGatsbyImagePreset = (preset: GatsbyImagePresets) => (
 ) => asToken(
   asEditableImage.meta || {},
   asToken.meta.term('Preset')(preset),
-  asDesignableGatsbyImage,
+  asGatsbyImage,
   withGatsbyImageLogger(preset) as HOC,
   asEditableImage(undefined, placeholder, useOverrides),
   withGatsbyImageNode(preset) as HOC,
