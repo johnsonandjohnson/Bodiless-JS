@@ -214,6 +214,7 @@ export const withImagePlaceholder = withPropsFromPlaceholder(['src']);
 export type AsBodilessImage = AsBodiless<ImageProps, Data>;
 
 export const asBodilessImage: AsBodilessImage = asBodilessComponent(options);
+export type ImageToken = ReturnType<AsBodilessImage>;
 
 const Image = asBodilessImage()('img');
 
