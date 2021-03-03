@@ -30,6 +30,7 @@ import {
   AsBodiless,
 } from '@bodiless/core';
 
+import { useDropzone } from 'react-dropzone';
 import { withFieldApi } from 'informed';
 import type { FieldApi } from 'informed';
 import BackendSave from '../BackendSave';
