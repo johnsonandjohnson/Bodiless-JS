@@ -26,8 +26,12 @@ import {
   withDefaultImageContent,
 } from '@bodiless/components';
 import {
+  asBodilessImage,
+} from '@bodiless/components-ui';
+import {
   GatsbyImagePresets,
   withGatsbyImagePreset,
+  withoutGatsbyImageProps,
 } from '@bodiless/gatsby-theme-bodiless';
 import {
   asToken,
@@ -36,17 +40,28 @@ import {
   Img,
 } from '@bodiless/fclasses';
 import landscapeImage from './landscape_image.png';
-import { asEditableImage as asBaseEditableImage } from '../Elements.token';
 
-export const asEditableImagePlain = (nodeKey?, placeholder?, useOverrides?) => asToken(
+const asBaseEditableImagePlain = (nodeKey?, placeholder?, useOverrides?) => asToken(
   asToken.meta.term('Component')('Image'),
   asToken.meta.term('Category')('Editors'),
   stylable,
-  asBaseEditableImage(nodeKey, undefined, useOverrides),
+  asBodilessImage(nodeKey, undefined, useOverrides),
   withImagePlaceholder(placeholder),
 );
 
-const asEditableImage = withGatsbyImagePreset(GatsbyImagePresets.FluidWithWebp)(asEditableImagePlain);
+/**
+ * util function to build a hoc for rendering a non-responsive image.
+ */
+export const asEditableImagePlain = (nodeKey?, placeholder?, useOverrides?) => asToken(
+  withoutGatsbyImageProps,
+  asBaseEditableImagePlain.meta,
+  asBaseEditableImagePlain(nodeKey, placeholder, useOverrides),
+);
+
+/**
+ * util function to build a hoc for rendering a responsive image.
+ */
+const asEditableImage = withGatsbyImagePreset(GatsbyImagePresets.FluidWithWebp)(asBaseEditableImagePlain);
 
 // Allows to set default content for image based component.
 const asContentfulImage = withDefaultImageContent(asEditableImage);
@@ -56,7 +71,7 @@ const DEFAULT_LINK_NODE_KEY = 'link';
 
 const asEditableImageWithPlaceholder = (placeholder: string) => (nodeKey: string) => flowRight(
   withImagePlaceholder({ src: placeholder }),
-  asBaseEditableImage(nodeKey),
+  asEditableImagePlain(nodeKey),
 );
 
 const asLinkableImage = (ImageComponent: ComponentType<any>) => (nodeKey: string) => flowRight(
@@ -66,7 +81,7 @@ const asLinkableImage = (ImageComponent: ComponentType<any>) => (nodeKey: string
   withChild(ImageComponent),
 );
 
-const asSquareImage = asBaseEditableImage;
+const asSquareImage = asEditableImagePlain;
 const SquareImage = asSquareImage(DEFAULT_IMAGE_NODE_KEY)(Img);
 const SquareLinkableImage = asLinkableImage(SquareImage)(DEFAULT_LINK_NODE_KEY)(A);
 const asLandscapeImage = asEditableImageWithPlaceholder(landscapeImage);

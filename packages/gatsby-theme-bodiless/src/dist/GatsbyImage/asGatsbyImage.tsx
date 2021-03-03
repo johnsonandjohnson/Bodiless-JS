@@ -24,7 +24,7 @@ import type {
   GatsbyImageOptionalProps,
 } from 'gatsby-image';
 import {
-  addClasses, DesignableComponentsProps, Div, extendDesignable, withDesign,
+  addClasses, DesignableComponentsProps, Div, extendDesignable, withDesign, withoutProps,
 } from '@bodiless/fclasses';
 import flow from 'lodash/flow';
 import omit from 'lodash/omit';
@@ -82,5 +82,18 @@ const asGatsbyImage = flow(
 );
 
 export const isGatsbyImage = ({ gatsbyImg }: GasbyImageProps) => gatsbyImg !== undefined;
+
+/**
+ * hoc to remove props configured for GatsbyImage in image data
+ * and to remove props added during image gatsby nodes creation
+ *
+ * it can be useful for cases when an image is procesed by gatsby
+ * but Gatsby Image is not enabled for the image
+ */
+export const withoutGatsbyImageProps = withoutProps([
+  'preset',
+  'publicUrl',
+  'gatsbyImg',
+]);
 
 export default asGatsbyImage;

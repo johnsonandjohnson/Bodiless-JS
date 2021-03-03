@@ -46,5 +46,6 @@ export const query = graphql`
   query($slug: String!) {
     ...PageQuery
     ...SiteQuery
+    ...DefaultContentQuery
   }
 `;

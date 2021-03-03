@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import asGatsbyImage, { isGatsbyImage } from './asGatsbyImage';
+import asGatsbyImage, { isGatsbyImage, withoutGatsbyImageProps } from './asGatsbyImage';
 import withGatsbyImageNode from './withGatsbyImageNode';
 import GatsbyImagePresets from './GatsbyImagePresets';
 import withGatsbyImageLogger from './withGatsbyImageLogger';
@@ -22,6 +22,7 @@ import withGatsbyImageLibrary from './withGatsbyImageLibrary';
 export {
   asGatsbyImage,
   isGatsbyImage,
+  withoutGatsbyImageProps,
   withGatsbyImageNode,
   GatsbyImagePresets,
   withGatsbyImageLogger,
