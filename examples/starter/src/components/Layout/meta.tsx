@@ -57,6 +57,7 @@ const useMenuOptions = () => [
     name: 'seo',
     icon: 'category',
     label: 'SEO',
+    group: 'page-group',
   },
 ];
 

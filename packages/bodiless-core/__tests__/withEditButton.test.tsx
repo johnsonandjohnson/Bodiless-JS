@@ -22,12 +22,16 @@ import { omit } from 'lodash';
 import withEditButton from '../src/withEditButton';
 import { useEditContext } from '../src/hooks';
 import ContextMenuItem from '../src/components/ContextMenuItem';
-import { TMenuOption, EditButtonOptions } from '../src';
+import {
+  TMenuOption, EditButtonOptions, PageContextProvider,
+} from '../src';
 
 type Props = HTMLProps<HTMLDivElement>;
 type Data = {
   foo?: string;
 };
+
+const TestComp = () => <></>;
 
 describe('withEditButton', () => {
   it('passes props correctly to the wrapped component', () => {
@@ -47,12 +51,9 @@ describe('withEditButton', () => {
         foo: Math.random().toString(),
       },
     };
-    const Foo = withEditButton<Props, Data>(options)('div');
-    const wrapper = shallow(<Foo {...consumedProps} {...passedProps} />);
-    const div = wrapper
-      .dive()
-      .childAt(0)
-      .dive();
+    const Foo = withEditButton<Props, Data>(options)(TestComp);
+    const wrapper = mount(<Foo {...consumedProps} {...passedProps} />);
+    const div = wrapper.find(TestComp);
     Object.keys(passedProps).forEach(key => {
       // @ts-ignore passedProps[key] has implicit type any.
       expect(div.prop(key)).toBe(passedProps[key]);
@@ -118,7 +119,7 @@ describe('withEditButton', () => {
     const options = {
       icon: 'Icon',
       name: 'Name',
-      renderForm: () => <div>{id}</div>,
+      renderForm: () => <div id="test-form-element">{id}</div>,
     };
     const props = {
       setComponentData: jest.fn(),
@@ -128,25 +129,15 @@ describe('withEditButton', () => {
       unwrap: jest.fn(),
       isActive: jest.fn(),
     };
-    const Foo = withEditButton<Props, Data>(options)('div');
-    const wrapper = shallow(<Foo {...props} />);
-    const menuOptions = wrapper.prop('getMenuOptions')();
+    const Foo = withEditButton<Props, Data>(options)(TestComp);
+    const wrapper = mount(<Foo {...props} />);
+    const provider = wrapper.find(PageContextProvider);
+    const menuOptions = provider.prop('getMenuOptions')!();
+    // @ts-ignore handler expects an argument (event).
     const Form = menuOptions[0].handler();
     const closeForm = jest.fn();
-    const formWrapper$ = shallow(<Form closeForm={closeForm} />);
-    const formWrapper = formWrapper$.dive();
-    // @ts-ignore The result of dive is somehow not recognized as always being a component.
-    formWrapper.prop('onSubmit')();
-    expect(props.setComponentData.mock.calls.length).toBe(1);
-    expect(closeForm.mock.calls.length).toBe(1);
-    expect(formWrapper.prop('initialValues')).toEqual(props.componentData);
-    expect(
-      formWrapper
-        .dive()
-        .find('div')
-        .first()
-        .text(),
-    ).toBe(id);
+    const formWrapper = mount(<Form closeForm={closeForm} />);
+    expect(formWrapper.find('div[id="test-form-element"]').text()).toBe(id);
   });
 
   it('Uses custom data handlers correctly', () => {
@@ -163,13 +154,18 @@ describe('withEditButton', () => {
         foo: 'Foo',
       },
     };
-    const Foo = withEditButton<Props, Data>(options)('div');
-    const wrapper = shallow(<Foo {...props} />);
-    const menuOptions = wrapper.prop('getMenuOptions')();
-    const Form = menuOptions[0].handler();
-    const formWrapper$ = shallow(<Form closeForm={() => undefined} />);
-    const formWrapper = formWrapper$.dive();
-    expect(formWrapper.prop('initialValues')).toEqual({
+    const Foo = withEditButton<Props, Data>(options)(TestComp);
+    const wrapper = mount(<Foo {...props} />).find(PageContextProvider);
+    const menuOptions = wrapper.prop('getMenuOptions')!();
+    // @ts-ignore handler expects an argument (event).
+    const form = menuOptions[0].handler();
+    const Test = () => <>{form()}</>;
+    const formWrapper = shallow(<Test />).childAt(0).dive();
+    const initialValues: { [k: string]: any } = formWrapper.prop('initialValues');
+    expect(Object.keys(initialValues)).toHaveLength(1);
+    const snippetId = Object.keys(initialValues)[0];
+    const valuesToTest = initialValues[snippetId];
+    expect(valuesToTest).toEqual({
       foo: 'Foo',
       bar: 'Bar',
     });
@@ -177,7 +173,7 @@ describe('withEditButton', () => {
       foo: 'Foo',
     });
     // @ts-ignore The result of dive is somehow not recognized as always being a component.
-    formWrapper.prop('onSubmit')({ foo: 'Baz', bar: 'Bang' });
+    formWrapper.prop('submitValues')({ [snippetId]: { foo: 'Baz', bar: 'Bang' } });
     expect(props.setComponentData.mock.calls[0][0]).toEqual({
       foo: 'Baz',
     });
@@ -194,26 +190,25 @@ describe('withEditButton', () => {
       renderForm: () => <></>,
       groupLabel: Math.random().toString(),
       groupMerge: 'merge',
-      global: false,
     };
-    const Foo = withEditButton<Props, Data>(options)('div');
-    const wrapper = shallow(
+    const Foo = withEditButton<Props, Data>(options)(TestComp);
+    const wrapper = mount(
       <Foo setComponentData={() => undefined} componentData={{}} />,
-    );
+    ).find(PageContextProvider);
 
     // @TODO Need to be able to pass context definition overrides.
     // expect(wrapper.prop('name')).toBe(options.name);
-    const menuOptions: TMenuOption[] = wrapper.prop('getMenuOptions')();
+    const menuOptions: TMenuOption[] = wrapper.prop('getMenuOptions')!();
     expect(menuOptions.length).toBe(2);
     const option = menuOptions.find(o => o.name === options.name);
     expect(option!.icon).toBe(options.icon);
-    expect(option!.global).toBe(false);
-    expect(option!.local).toBeUndefined();
+    expect(option!.global).toBeFalsy();
+    expect(option!.local).toBeTruthy();
     const group = menuOptions.find(o => o.name === `${options.name}-group`);
     expect(group!.label).toBe(options.groupLabel);
     expect(group!.groupMerge).toBe(options.groupMerge);
-    expect(group!.global).toBe(false);
-    expect(group!.local).toBeUndefined();
+    expect(group!.global).toBeFalsy();
+    expect(group!.local).toBeTruthy();
     expect(group!.Component).toBe('group');
   });
 });

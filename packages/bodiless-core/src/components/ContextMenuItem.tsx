@@ -53,11 +53,17 @@ const ContextMenuItem = observer((props: IProps) => {
     if (menuForm) {
       if (!option.local) context.toggleLocalTooltipsDisabled(!context.areLocalTooltipsDisabled);
       setIsToolTipShown(!isToolTipShown);
+      const formProps: Partial<ContextMenuFormProps> = {
+        // @TODO Do we wnt to set the aria label here?
+        // 'aria-label': `Context Menu ${ariaLabel} Form`,
+        title,
+        description,
+      };
       // We have to pass a function to setRenderForm b/c menuForm is itself a function
       // (a render prop) and, when a function is passed to setState, react interprets
       // it as a state setter (in order to set state based on previous state)
       // see https://reactjs.org/docs/hooks-reference.html#functional-updates
-      setRenderForm(() => menuForm);
+      setRenderForm(() => (p: ContextMenuFormProps) => menuForm({ ...p, ...formProps }));
     }
   };
 

@@ -222,10 +222,12 @@ const useGitButtons = ({ client = defaultClient } = {}) => {
     () => getMenuOptions(client, context, notifyOfChanges), [notifyOfChanges],
   );
 
+  let rootContext = context;
+  while (rootContext.parent) rootContext = rootContext.parent;
   useRegisterMenuOptions({
     getMenuOptions: useGetter(menuOptions),
     name: 'Git',
-  });
+  }, rootContext);
 };
 
 export default useGitButtons;

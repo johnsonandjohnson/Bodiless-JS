@@ -69,7 +69,7 @@ const useMenuOptions = () => {
 const withNotificationButton = withMenuOptions({
   name: 'Notifications',
   useMenuOptions,
-  peer: true,
+  root: true,
 });
 
 export default withNotificationButton;

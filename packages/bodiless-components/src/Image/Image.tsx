@@ -18,6 +18,7 @@ import React, {
   useState,
   useEffect,
   ComponentType as CT,
+  ComponentType,
 } from 'react';
 import debug from 'debug';
 
@@ -29,8 +30,8 @@ import {
   AsBodiless,
 } from '@bodiless/core';
 
-import { useDropzone } from 'react-dropzone';
-import { FormApi } from 'informed';
+import { withFieldApi } from 'informed';
+import type { FieldApi } from 'informed';
 import BackendSave from '../BackendSave';
 import withPropsFromPlaceholder from '../withPropsFromPlaceholder';
 // @ts-ignore fails when it is imported by jest.
@@ -74,9 +75,8 @@ const defaultImagePickerUI = {
 };
 
 // DropZonePlugin control the upload of file and only saves jpg/png files.
-export function DropZonePlugin({ formApi, targetFieldName, ui }: {
-  formApi: FormApi<Data>;
-  targetFieldName:string;
+export function DropZonePlugin({ fieldApi, ui = {} }: {
+  fieldApi: FieldApi;
   ui?: Partial<TImagePickerUI>;
 }) {
   const [statusText, setStatusText] = useState('');
@@ -92,7 +92,7 @@ export function DropZonePlugin({ formApi, targetFieldName, ui }: {
         () => {
           if (isUploading) {
             saveRequest.cancel('Timeout exceeded');
-            formApi.setError(targetFieldName, 'Timeout exceeded');
+            fieldApi.setError('Timeout exceeded');
             setIsUploadingTimeout(true);
             setIsUploading(false);
           }
@@ -116,7 +116,7 @@ export function DropZonePlugin({ formApi, targetFieldName, ui }: {
     setIsUploadFinished(false);
     setIsUploadingTimeout(false);
     setStatusText(`File "${acceptedFiles[0].name}" selected`);
-    formApi.setError(targetFieldName, 'Uploading in progress');
+    fieldApi.setError('Uploading in progress');
     saveRequest.saveFile({
       file: acceptedFiles[0],
       nodePath: node.path.join('$'),
@@ -124,9 +124,8 @@ export function DropZonePlugin({ formApi, targetFieldName, ui }: {
     })
       .then(({ data }) => {
         // unset errors
-        formApi.setError(targetFieldName, undefined);
-        formApi.setValue(targetFieldName, data.filesPath[0]);
-        // formApi.validate();
+        fieldApi.setError(undefined);
+        fieldApi.setValue(data.filesPath[0]);
         setIsUploading(false);
         setIsUploadingTimeout(false);
         setIsUploadFinished(true);
@@ -169,14 +168,13 @@ export function DropZonePlugin({ formApi, targetFieldName, ui }: {
     </MasterWrapper>
   );
 }
-DropZonePlugin.defaultProps = {
-  ui: {},
-};
 
 // Type of the props accepted by this component.
 // Exclude the src and alt from the props accepted as we write it.
 type ImageProps = HTMLProps<HTMLImageElement>;
 type Props = ImageProps & { ui?: TImagePickerUI};
+
+const ImageDropZonePlugin: ComponentType<{ ui?: Partial<TImagePickerUI> }> = withFieldApi('src')(DropZonePlugin);
 
 // Options used to create an edit button.
 const options: BodilessOptions<Props, Data> = {
@@ -185,7 +183,7 @@ const options: BodilessOptions<Props, Data> = {
   groupLabel: 'Image',
   formTitle: 'Image',
   name: 'Image',
-  renderForm: ({ ui: formUi, formApi, componentProps }) => {
+  renderForm: ({ ui: formUi, componentProps }) => {
     const { ui: imagePickerUI } = componentProps;
     const { ComponentFormLabel, ComponentFormText } = getUI(formUi);
     return (
@@ -196,7 +194,7 @@ const options: BodilessOptions<Props, Data> = {
         <ComponentFormText field="alt" id="image-alt" />
         <ComponentFormLabel htmlFor="image-title">Title</ComponentFormLabel>
         <ComponentFormText field="title" id="image-title" />
-        <DropZonePlugin formApi={formApi} targetFieldName="src" ui={imagePickerUI} />
+        <ImageDropZonePlugin ui={imagePickerUI} />
       </>
     );
   },

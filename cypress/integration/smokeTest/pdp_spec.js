@@ -30,9 +30,10 @@ describe('PDP (Product Details Page) smoke tests', function () {
   const accordionBody = 'AT - Overview';
   const imagesFolderPath = "images";
   const imageName = 'img_615x500.jpg';
-  const addPageIconXpath = '//*[@aria-label="Page"]'; 
-  const fieldAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//input[@name="new-page-path"]';
-  const checkmarkIconAddPageFormXpath = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Submit"]';
+  const pageIconXpath = '//*[@aria-label="Page"]'; 
+  const newPageIconXpath = '//*[@aria-label="New"]'; 
+  const fieldAddPageFormXpath = '//*[@aria-label="Context Submenu Form"]//input[@name="new-page-path"]';
+  const checkmarkIconAddPageFormXpath = '//*[@aria-label="Context Submenu Form"]//*[@aria-label="Submit"]';
   const newPageLinkXpath = '//*[@id="new-page-link"]';
   const titleXpath = '//*[@data-product-element="title"]//*[@data-slate-editor="true"]';
   const accordionOverviewBodyXpath = '//*[@data-accordion-element="accordion"][@aria-label="Overview"]//*[@data-accordion-element="accordion-body"]//*[@data-slate-editor="true"]';
@@ -51,7 +52,9 @@ describe('PDP (Product Details Page) smoke tests', function () {
 
 
   it('PDP: 1 - creating a page from /products/', () => {
-    cy.xpath(addPageIconXpath)
+    cy.xpath(pageIconXpath)
+      .click();
+    cy.xpath(newPageIconXpath)
       .click();
     cy.xpath(fieldAddPageFormXpath)
       .type(pdpURL);

@@ -74,29 +74,38 @@ type Options<P, D> = {
   icon: string;
   name: string;
   label?: string;
+  groupLabel?: string;
+  group?: string;
+  groupMerge?: 'merge'|'merge-up'
   global?: boolean;
   local?: boolean;
   renderForm: FormBodyRenderer<P, D>;
-  useMenuOptions?: UseMenuOptions<P>;
+  formTitle?: string;
   activateEvent?: string,
   Wrapper?: CT<any>|string,
   defaultData?: D,
+  peer?: boolean,
+  root?: boolean,
 };
 ```
 
 | Property | Description |
 | --- | --- |
-| icon | The name of the [material icon](https://material.io/resources/icons/?style=baseline) to use for the edit button |
-| name | A unique machine name for this option |
-| label | A human readable label for the edit button |
-| global | If true, specifies that the button should appear on the global menu (the lefthand sidebar) |
-| local | If true, specifies that the button should appear in the local context menu |
-| renderForm | A render function which should the form fields. See below. |
-| useMenuOptions | A hook which will be called to provide additional menu
-buttons. |
-| activateEvent | The event which will trigger the "activation" of the components edit button. Usually "onClick".  "Activation" is usually the result of selecting the component in some way or giving it focus.  The component's button(s) will only appear in the menu when the component is activated. |
-| Wrapper | A component which will wrap this component in edit mode. Useful if the component itself cannot generate the activateEvent |
-| defaultData | Optional default data to be used for this component |
+| `icon` | The name of the [material icon](https://material.io/resources/icons/?style=baseline) to use for the edit button |
+| `name` | A unique machine name for this option |
+| `label` | A human readable label for the edit button |
+| `global` | Specifies whether the button should appear on the global admin toolbar (default is false), but see `root` below. |
+| `local` | Specifies whether the button should appear in the local context menu (default is true, but see `root` below) |
+| `group` | Optional name of a menu option group to which this button should belong. If omitted, the button will define its own group. This can be used to add the button to a group defined by another menu option. |
+| `groupLabel` | A human readable label for the group to which the edit button will belong (serves as a super-title). Ignored for global options or if `group` is specified. |
+| `groupMerge` | Defines whether and how this button group should merge with adjacent buttons groups. Possible vaules are 'merge', 'merge-up' and 'none' (the default). Ignored for global options or if `group` is specified. |
+| `renderForm` | A function which should render the form fields. See below. |
+| `formTitle` | Optional text to display as the title of the edit form. |
+| `peer` | Specifies that the options should be attached to the current context. |
+| `root` | Specifies that the options should be attached to the root (global) context. If specified, the options will appear only on the global toolbar unless overridden by `global` or `local` above.  |
+| `activateEvent` | The event which will trigger the "activation" of the components edit button. Usually "onClick".  "Activation" is usually the result of selecting the component in some way or giving it focus.  The component's button(s) will only appear in the menu when the component is activated. Ignored if `root` or `peer` is true. |
+| `Wrapper` | A component which will wrap this component in edit mode. Useful if the component itself cannot generate the activateEvent. Ignored if `root` or `peer` is true. |
+| `defaultData` | Optional default data to be used for this component |
 
 ### Defining the form
 
@@ -131,13 +140,14 @@ native Informed inputs (pending [#336](https://github.com/johnsonandjohnson/Bodi
 
 Now we're ready to complete our `asBodilessMarkdown` function:
 
-```
+```ts
 const asBodilessMarkdown = asBodilessComponent<Props, Data>({
+  name: 'edit-markdown',
   icon: 'edit',
-  name: 'edit',
+  label: 'Edit',
+  groupLabel: 'Markdown',
+  formTitle: 'Edit Markdown',
   renderForm,
-  global: false,
-  local: true,
   Wrapper: 'div',
   defaultData: { source: 'Initial Value' },
 });
@@ -157,7 +167,7 @@ drop right into our form. Here, we create one based on the open-source
 [`react-mde`](https://github.com/andrerpena/react-mde) package, using `ReactMarkdown`
 itself to generate the preview.
 
-```
+```ts
 import React, { useState } from 'react';
 import { asField } from 'informed';
 import ReactMde from 'react-mde';
@@ -196,7 +206,7 @@ documentation provides
 
 Now, we can rewrite our `renderForm` to use the above input.
 
-```
+```ts
 const renderForm = () => {
   const { ComponentFormTitle } = useMenuOptionUI();
   return (
@@ -211,251 +221,292 @@ const renderForm = () => {
 
 Putting it all together, our final, editable `PageBody` would look like this:
 
-```
-import React } from 'react';
-import { graphql } from 'gatsby';
-import { Page } from '@bodiless/gatsby-theme-bodiless';
+```ts
+import React from 'react';
 import { asBodilessComponent, useMenuOptionUI } from '@bodiless/core';
-import { asEditable } from '@bodiless/components';
-import ReactMarkdown from 'react-markdown';
+import type { ReactMarkdownProps as Props } from 'react-markdown';
 
-// Our Informed custom input in a separate file.
 import MarkdownField from './InformedMarkdown';
 
-const asBodilessMarkdown = asBodilessComponent({
+type Data = Pick<Props, 'source'>;
+
+const asBodilessMarkdown = asBodilessComponent<Props, Data>({
+  name: 'edit-markdown',
   icon: 'edit',
-  name: 'edit',
+  label: 'Edit',
+  groupLabel: 'Markdown',
+  formTitle: 'Edit Markdown',
   renderForm: () => {
-    const { ComponentFormTitle } = useMenuOptionUI();
+    const { ComponentFormLabel } = useMenuOptionUI();
     return (
-      <>
-        <ComponentFormTitle>Markdown</ComponentFormTitle>
+      <ComponentFormLabel>
+        Content
         <MarkdownField field="source" />
-      </>
+      </ComponentFormLabel>
     );
   },
-  global: false,
-  local: true,
   Wrapper: 'div',
   defaultData: { source: 'Initial Value' },
 });
 
 const Markdown = asBodilessMarkdown('body')(ReactMarkdown);
-const H1 = asEditable('title')<HTMLProps<HTMLHeadingElement>>('h1');
 
-const PageBody = ({ title, markdownContent }) => (
-  <main>
-    <H1>{title}</H1>
-    <Markdown source={markdownContent} />
-  </main>
-);
-
-export default PageBody;
+export default Markdown;
 ```
 
-## Under the Hood
+## Extending 
 
-Let's unpack the magic a bit by diving one layer deeper. `asBodilessComponent`
-is really just a composition of lower-level HOC's which together add edit
-functionality to your component. For many cases it's all you need, but sometimes
-you may want to do something which requires you to use the lower-level API
-yourself.
+An `asBodiless` HOC can be extended in various ways.
 
-As an example, let's imagine that we had a customized version of `ReactMarkdown`
-which would render a last-modified date if passed as a prop, something like:
-```
-const CustomReactMarkdown = ({ timestamp, ...rest}) => (
-  <div>
-    <ReactMarkdown {...rest} />
-    {timestamp &&
+### Adding form fields
+
+As an example, let's
+imagine that we had a customized version of `ReactMarkdown` which would render 
+last-modified data if passed as a prop, something like:
+
+```ts
+const withLastModified = (Component: ComponentType<Props>) => {
+  const WithLastModified = ({ timestamp, lastModified, ...rest }: Props) => (
     <div>
-      Last modified:
-      {timestamp}
+      <Component {...rest} />
+      <hr />
+      Last modified
+      {lastModified && ` by ${lastModified}`}
+      {timestamp && ` on ${timestamp}`}
     </div>
-    }
-);
-```
-And suppose we'd like to make this editable and automatically update the
-timestamp when the contents are saved?
-
-Using `asBodilessComponent`, we don't have access to the submit handler for
-our form; it's generated automatically and simply saves the form values
-to the Bodiless data store (from which they are serialized to JSON). It
-won't allow us to manipulate the data before they are saved (in this case to add
-a timestamp).
-
-Note: this is a bit of a contrived example. In a real-world scenario
-
-### Creating a customized edit form.
-
-The main bit of functionality we want to customize is the edit form. BodilessJS
-provides a `ContextMenuForm` component which we can use for this purpose. First,
-we build our custom form submit handler, which will then be passed as a prop to
-the `ContextMenuForm`
-
-```
-const useCustomEditFormProps = componentProps => {
-  // Get the default submit handler for an edit form.
-  const { submitValues, ...rest } = useEditFormProps(props);
-  // 
-  const customSubmitValues = values => {
-    const newValues = { ...values, timestamp: new Date().toString() };
-    submitValues(newValues);
-  };
-  return {
-    submitValues: customSubmitValues,
-    ...rest,
-  };
+  );
+  return WithLastModified;
 };
 ```
-Here we are using the BodilessJS `useEditFormProps` hook to obtain the default submit
-handler for a component edit form, and replacing it with our own. `useEditFormProps`
-takes the component's own props as a parameter and returns a default `submitValues` and
-`initialValues` props which handle loading and saving the component's data.
+And suppose that we want to add a field to our form for the editor's name,
+and update the timestamp when saved.  Note this is a bit of a contrived
+example; in the real world we'd probably want to get the updated time from
+a server rather than relying on the user's browser.
 
-Next, we define a component which renders our custom form:
- ```
-const Form = props => {
-  const { ComponentFormLabel, ComponentFormTitle } = useMenuOptionUI();
+Bodiless provides an API which allows us to extend any form created by
+`asBodilessComponent`.  First we define a render function just as we did
+for the original form:
+
+```ts
+const renderForm = () => {
+  const { ComponentFormText, ComponentFormLabel } = useMenuOptionUI();
   return (
-    <ContextMenuForm {...props}>
-      <ComponentFormTitle>Markdown</ComponentFormTitle>
-      <ComponentFormLabel>Content</ComponentFormLabel>
-      <MarkdownField field="source" />
-    </ContextMenuForm>
+    <ComponentFormLabel>
+      Last modified by
+      <ComponentFormText field="lastModified" />
+    </ComponentFormLabel>
   );
 };
 ```
 
-Note that in the previous example using `asBodilessComponent()` our render
-function returned only the actual form controls needed by our component. Here we
-must render the whole form. 
+Then, we define a data handler which will add the timestamp:
 
-Now we are ready to wire our form to the BodilessJS menu system.  To do this,
-we create a `useMenuOptions` hook which will be passed as an argument
-to the `withMenuOptions` HOC:
+```ts
+const submitValueHandler = (values: any) => ({
+  ...values,
+  timestamp: new Date().toString(),
+});
 ```
-const useMenuOptions = props => {
-  const editFormProps = useMarkdownEditFormProps(props);
-  const render = formProps => (
-    <Form {...formProps} {...editFormProps} />
-  );
-  return [{
-    icon: 'edit',
-    name: 'edit',
-    label: 'Edit',
-    global: false,
-    local: true,
-    handler: () => render,
-  }];
-};
-```
-Here we create a render function which takes our custom edit form props
-(including our submit handler) and passes them to our Form component. Note that
-this render function receives a `formProps` parameter, which must be
-passed through to the Form component along with our custom edit
-form props.
-
-We then define a menu option which whose handler simply returns our custom
-render function.
-
-The `useMenuOptions` hook will receive the component's own props as an argument,
-and should return an array of *menu options*. Each menu option is an object
-describing a button which should appear on either the sidebar "global menu", or
-the floating "local context menu". Many of these properties are the same as
-those we used in `asBodilessComponent`. The main differences are:
-- The `Wrapper` and `defaultData` props are missing.  We'll handle these later.
-- The `renderForm` prop is missing. Instead we have a `handler` prop, which is a
-  callback to execute when the button is clicked. This callback can optionally
-  return a render function. If so (as in our case), that render function will be
-  used to display a panel (usually a form). Note that the handler need not
-  return anything (useful when you want to create a button which takes an
-  immediate action without requiring user input).
-
-### Composing our bodiless component.
 
 Finally, we compose a series of core Bodiless HOC's (using Lodash `flowRight`) to
 fully integrate our component and its custom form:
-```
-const asCustomBodilessMarkdown> = (nodeKey, defaultData) => flowRight(
+
+```ts
+const withLastModifiedForm = (nodeKey: WithNodeKeyProps) => flowRight(
   withNodeKey(nodeKey),
   withNode,
-  withNodeDataHandlers(defaultData || {
-    source: 'Initial Value',
-  }),
-  ifReadOnly(
-    withoutProps(['setComponentData']),
-  ),
+  withNodeDataHandlers(),
   ifEditable(
-    withMenuOptions({ useMenuOptions }),
-    withContextActivator('onClick'),
-    withActivatorWrapper('onClick', 'div'),
-    withLocalContextMenu,
+    withEditFormSnippet({ renderForm, submitValueHandler }),
+  ),
+  ifReadOnly(
+    withoutProps('setComponentData'),
   ),
   withData,
+  withTimestamp,
 );
 ```
+
 Let's take this step by step:
-```
+
+```ts
   withNodeKey(nodeKey),
   withNode,
-  withNodeDataHandlers(defaultData || {
-    source: 'Initial Value',
+  withNodeDataHandlers({
+    lastModified: 'Unknown',
+    timestamp: 'Unknown',
   }),
 ```
+
 These three HOC's provide integration to
 [the BodilessJS data flow](../Architecture/Data). They
 ensure that the component is given a place to store its data, and
 define the "empty" value for that data. They add two props--`componentData`
 and `setComponentData`--which are used by the HOC's further down the
 chain.
-```
+
+```ts
   ifReadOnly(
     withoutProps(['setComponentData']),
   ),
 ```
+
 Bodiless components may behave differently when a site is editable than when it is
 built statically.  To facilitate different compositions for different modes,
 BodilessJS provides `ifEditable` and `ifReadOnly` meta-HOC's, which can be
 used to control what enhancements are added in each mode.  Since a component
 on a static site never alters its content, we here strip the `setComponentData`
 prop.
-```
+
+```ts
   ifEditable(
-    withMenuOptions({ useMenuOptions }),
-    withContextActivator('onClick'),
-    withActivatorWrapper('onClick', 'div'),
-    withLocalContextMenu,
+    withEditFormSnippet({ renderForm, submitValueHandler }),
   ),
 ```
-Here is where we add the actual edit functionality.  We first add our menu
-button (which includes our custom form).  We then provide a mechanism to activate
-our component's menu button: we wrap it in a `div` with an `onClick` handler
-which signals the menu system that our component is "selected" and that its
-menu button(s) should be displayed.  Finally, we attach to our component
-an instance of the local context menu, so that the floating toolbar will
-appear next to it when clicked.  All of these enhancements are wrapped in
-`ifEditable` to prevent them from being added when the component is rendered
-statically.
 
-```
+Here is where we add the actual form fields, along with our 
+
+```ts
   withData,
 ```
+
 This last HOC consumes the `componentData` prop and spreads it to the props
 of the wrapped component. In our case, it transforms:
-```
+
+```ts
 <CustomReactMarkdown componentData={{
-  source: 'Foo',
+  lastModified: 'wodenx',
   timestamp: 'Fri Jun 12 2020 07:04:37 GMT-0400',
 }} />
 ```
+
 to
-```
+
+```ts
 <CustomReactMarkdown 
-  source="Foo"
+  lastModified="wodenx"
   timestamp="Fri Jun 12 2020 07:04:37 GMT-0400"
 />
 ```
+### Using overrides
+
+Any `asBodiless` function produced by `asBodilessComponent` takes a third parameter
+usually named `useOverrides`.  This is a function (a custom React hook) which receives
+the component's props and can returns overridden values for many of the options
+passed to `asBodilessComponent`.  Let's use this to move our button to the global
+toolbar and customize its label.
+
+```ts
+const useOverrides = () => ({
+  root: true,
+  group: 'page-group',
+  label: 'Body',
+});
+```
+Note the value of the `group` attribute.  This is the name of a group provided
+by the built-in Bodiless admin UI, and we are adding our button to it.
+
+We can compose this with our form extension to create our customized version
+of `asBodilessMarkdown`:
+
+```ts
+const asCustomBodilessMarkdown = (nodeKey: WithNodeKeyProps) => flowRight(
+  asBodilessMarkdown(nodeKey, undefined, useOverrides),
+  withLastModifiedForm('last-modified'),
+  withlastModified,
+);
+```
+
+### Adding a custom button.
+
+As a final example, let's add a button which pulls content from an external URL
+populates our markdown field.
+
+Just as in the previous example, we begin by creating a form for entering the URL.
+
+
+```ts
+const Form: FC<Omit<ContextMenuPropsType<Data>, 'children'>> = props => {
+  const { ComponentFormLabel, ComponentFormText } = useMenuOptionUI();
+  return (
+    <ContextMenuForm {...props}>
+      <ComponentFormLabel>
+        URL
+        <ComponentFormText field="url" />
+      </ComponentFormLabel>
+    </ContextMenuForm>
+  );
+};
+```
+
+This should look familiar by now.  Next, we define a menu button which will render
+our form:
+
+```ts
+const useMenuOptions = () => {
+  const { node } = useNode();
+  const fetchSource = async (url: string) => {
+    try {
+      const r = await fetch(url);
+      if (!r.ok) throw new Error(r.statusText);
+      const source = await r.text();
+      node.setData({ source });
+    } catch (e) {
+      alert(`Error: ${e.message}`);
+    }
+  };
+  const render = (formProps: ContextMenuFormProps) => (
+    <Form
+      {...formProps}
+      submitValues={v => {
+        fetchSource(v.url);
+        formProps.closeForm(null);
+      }}
+    />
+  );
+  return [{
+    icon: 'cloud_download',
+    name: 'fetch-markdown',
+    label: 'Fetch',
+    group: 'page-group',
+    formTitle: 'Fetch markdown from',
+    handler: () => render,
+  }];
+};
+```
+
+This is a very over-simplified example, but basically:
+- We define a `fetchContent` function which pulls the content from the specified
+  url. Once the content is obtained, it is written to the current content node
+  via `node.setData`.  A content node represents a storage location for a component's
+  data.  In this case, we use the node that was created by `asBodilessMarkdown`, the
+  same node that is used by our edit form.
+- We define a `render` function which attaches our fetch function as a submit hanlder
+  for our form.  Note that our render function will receive a `closeForm` 
+  prop which we must use to dismiss the form when the user clicks "submit".
+- Finally, we create and return an array of menu options. In our case, there is
+  only one.  Many of the properties are the same as those we used when defining
+  our edit button.  The main difference is that, instead of providing a `renderForm`
+  callback, we provide a handler function which *returns* a render callback. This
+  handler will be invoked when a user clicks the button.  It could, of course, do
+  more than just display a form (for example - it could check the url for updates).
+
+Finally,  we can add these menu options to the `asCustomBodilessMarkdown` HOC we
+composed above:
+
+```ts
+const asCustomBodilessMarkdown = (nodeKey: WithNodeKeyProps) => flowRight(
+  asBodilessMarkdown(nodeKey, undefined, useOverrides),
+  ifEditable(
+    withMenuOptions({ useMenuOptions, root: true }),
+  );
+  withLastModifiedForm('last-modified'),
+  withlastModified,
+);
+```
+
+Mote that we add the `root` flag here (not in the menu option itself) in order to
+place this button on the global menu.
 
 ### Other use-cases
 

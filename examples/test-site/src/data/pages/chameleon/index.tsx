@@ -13,14 +13,14 @@
  */
 
 import React, {
-  FC, useState, ComponentType, useCallback,
+  FC, useState, ComponentType, useCallback, createContext, useContext,
 } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
   addClasses, H1 as H1$, H2 as H2$, withDesign,
   addProps, Div, removeClasses, HOC, replaceWith, withoutProps,
-  Section as Section$,
+  Section,
   P,
 } from '@bodiless/fclasses';
 import { flow } from 'lodash';
@@ -33,7 +33,9 @@ import {
   withChameleonComponentFormControls,
 } from '@bodiless/components';
 
-import { useMenuOptionUI, asBodilessComponent, useEditContext } from '@bodiless/core';
+import {
+  useMenuOptionUI, asBodilessComponent, useEditContext,
+} from '@bodiless/core';
 import { asHeader1, asHeader2 } from '../../../components/Elements.token';
 import Layout from '../../../components/Layout';
 
@@ -122,9 +124,10 @@ const addToCartButtonOptions = {
   icon: 'shopping_cart',
   name: 'enable-add-to-cart',
   label: () => (useChameleonContext().isOn ? 'Config' : 'Enable'),
+  groupLabel: 'Add to Cart',
   global: false,
   local: true,
-  renderForm: ({ componentProps }) => {
+  renderForm: ({ componentProps }: any) => {
     const {
       ComponentFormTitle, ComponentFormLabel, ComponentFormText, ComponentFormUnwrapButton,
     } = useMenuOptionUI();
@@ -162,7 +165,7 @@ const AddToCartToggle = flow(
   withDesign(toggleCartDesign),
 )(Div);
 
-const AvailabilityAccordion = ({ isAvailable, ...rest }) => {
+const AvailabilityAccordion = ({ isAvailable, ...rest }: any) => {
   const [expanded, setExpanded] = useState(false);
   return (
     <Div {...rest}>
@@ -197,82 +200,117 @@ const AvailabilityAccordionToggle = flow(
   withDesign(toggleDesign),
 )(AvailabilityAccordion);
 
+const LayoutContext = createContext<string|undefined>(undefined);
+const Example: FC = ({ children }) => {
+  const widthClass = useContext(LayoutContext) || 'w-1/3';
+  const className = `${widthClass} p-5`;
+  return (
+    <Section className={className}>
+      {children}
+    </Section>
+  );
+};
+const ExampleLayoutProvider = flow(
+  asBodilessChameleon('layout', undefined, () => ({
+    root: true,
+    label: 'Layout',
+    icon: 'grid_view',
+    group: 'page-group',
+    formTitle: 'Choose a layout for this page',
+  })),
+  withDesign({
+    _default: addProps({ value: 'w-1/3' }),
+    'One-Third Width Examples': addProps({ value: 'w-1/3' }),
+    'One-Half Width Items': addProps({ value: 'w-1/2' }),
+    'Full Width Items': addProps({ value: 'w-full' }),
+  }),
+)(LayoutContext.Provider);
+
 const H1 = flow(addClasses('pt-5'), asHeader1)(H1$);
 const H2 = flow(addClasses('pt-5'), asHeader2)(H2$);
 const Description = addClasses('mt-2 text-sm italic')(P);
-const Example = addClasses('w-1/3 p-5')(Section$);
+// const Example = addClasses('w-1/3 p-5')(Section$);
 const Examples = addClasses('flex flex-wrap')(Div);
 
 export default (props: any) => (
   <Page {...props}>
     <Layout>
       <H1>Chameleon</H1>
-      <Examples>
-        <Example>
-          <H2>Basic</H2>
-          <BasicChameleon>
-            <div>Chameleons!</div>
-            <div>Available Now!</div>
-          </BasicChameleon>
-          <Description>
-            Click anywhere inside the box while in edit mode to reveal a local
-            context menu button which displays a form to choose a color for the box.
-          </Description>
-        </Example>
-        <Example>
-          <H2>Toggle</H2>
-          <BaseComponent>
-            <div>Chameleons!</div>
-            <AvailabilityToggle />
-          </BaseComponent>
-          <Description>
-            Click on the availability text while in edit mode to bring up
-            a toggle button which switches between &quot;Available Now!&quot; and
-            &quot;Call for Availability&quot;.
-          </Description>
-        </Example>
-        <Example>
-          <H2>Accordion Toggle</H2>
-          <BaseComponent>
-            <div>Chameleons!</div>
-            <AvailabilityAccordionToggle />
-          </BaseComponent>
-          <Description>
-            Here the availability status is behind an accordion.  Click on the
-            &quot;Availability&quot; text to open and close the accordion. In
-            edit mode this will also display a toggle button which allows you
-            to switch between &quot;In Stock&quot; and &quot;Call&quot;. Note
-            that the accordion state is preserved as you toggle back and forth.
-          </Description>
-        </Example>
-        <Example>
-          <H2>Visibility Toggle</H2>
-          <VisibilityTogglerapper>
-            <div>Chameleons!</div>
-            <VisibilityToggle isAvailable />
-          </VisibilityTogglerapper>
-          <Description>
-            This verson shows and hides &quot;Available Now&quot; based on the
-            state of the toggle.  You can click anywhere on the box to display
-            the toggle button.
-          </Description>
-        </Example>
-        <Example>
-          <H2>Component Form Toggle</H2>
-          <BaseComponent>
-            Chameleons!
-            <AddToCartToggle>Call for availability</AddToCartToggle>
-          </BaseComponent>
-          <Description>
-            Here, instead of toggling an availability message, you can toggle
-            an &quot;Add to cart&quot; button. The button requires configuration (a product ID).
-            Click on the text to bring up a button which adds the button if it not
-            present, or edits the configuration if it is. The button can be removed
-            by clicking &quot;Disable&quot; in the lower left corner of the
-            configuration form.
-          </Description>
-        </Example>
-      </Examples>
+      <p>
+        The examples below show different uses of the Bodiess &quot;Chameleon&quot;
+        component.
+        Note: the layout of this whole page is also a chameleon! You can select
+        different layouts by clicking the &quot;Page&quot; button on the toolbar
+        and then clicking the &quot;Layout&quot; button from the submenu.
+      </p>
+      <ExampleLayoutProvider>
+        <Examples>
+          <Example>
+            <H2>Basic</H2>
+            <BasicChameleon>
+              <div>Chameleons!</div>
+              <div>Available Now!</div>
+            </BasicChameleon>
+            <Description>
+              Click anywhere inside the box while in edit mode to reveal a local
+              context menu button which displays a form to choose a color for the box.
+            </Description>
+          </Example>
+          <Example>
+            <H2>Toggle</H2>
+            <BaseComponent>
+              <div>Chameleons!</div>
+              <AvailabilityToggle />
+            </BaseComponent>
+            <Description>
+              Click on the availability text while in edit mode to bring up
+              a toggle button which switches between &quot;Available Now!&quot; and
+              &quot;Call for Availability&quot;.
+            </Description>
+          </Example>
+          <Example>
+            <H2>Accordion Toggle</H2>
+            <BaseComponent>
+              <div>Chameleons!</div>
+              <AvailabilityAccordionToggle />
+            </BaseComponent>
+            <Description>
+              Here the availability status is behind an accordion.  Click on the
+              &quot;Availability&quot; text to open and close the accordion. In
+              edit mode this will also display a toggle button which allows you
+              to switch between &quot;In Stock&quot; and &quot;Call&quot;. Note
+              that the accordion state is preserved as you toggle back and forth.
+            </Description>
+          </Example>
+          <Example>
+            <H2>Visibility Toggle</H2>
+            <VisibilityTogglerapper>
+              <div>Chameleons!</div>
+              <VisibilityToggle isAvailable />
+            </VisibilityTogglerapper>
+            <Description>
+              This verson shows and hides &quot;Available Now&quot; based on the
+              state of the toggle.  You can click anywhere on the box to display
+              the toggle button.
+            </Description>
+          </Example>
+          <Example>
+            <H2>Component Form Toggle</H2>
+            <BaseComponent>
+              Chameleons!
+              <AddToCartToggle>Call for availability</AddToCartToggle>
+            </BaseComponent>
+            <Description>
+              Here, instead of toggling an availability message, you can toggle
+              an &quot;Add to cart&quot; button. The button requires configuration (a product ID).
+              Click on the text to bring up a button which adds the button if it not
+              present, or edits the configuration if it is. The button can be removed
+              by clicking &quot;Disable&quot; in the lower left corner of the
+              configuration form.
+            </Description>
+          </Example>
+        </Examples>
+      </ExampleLayoutProvider>
     </Layout>
   </Page>
 );

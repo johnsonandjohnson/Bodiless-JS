@@ -15,10 +15,12 @@
 import React, {
   FC, ComponentType, useEffect, useLayoutEffect, useRef, useMemo,
 } from 'react';
+import { pickBy } from 'lodash';
 import PageEditContext from './PageEditContext';
 import { useEditContext, useUUID, useGetter } from './hooks';
 import { PageContextProviderProps, MenuOptionsDefinition } from './Types/PageContextProviderTypes';
 import { PageEditContextInterface } from './PageEditContext/types';
+import { TMenuOption } from './Types/ContextMenuTypes';
 
 /**
  * @private
@@ -50,8 +52,11 @@ const useNewContext = (props: PageContextProviderProps, parent?: PageEditContext
  *
  * @param props Props which define the menu options to add.
  */
-export const useRegisterMenuOptions = (props: PageContextProviderProps) => {
-  const context = useEditContext();
+export const useRegisterMenuOptions = (
+  props: PageContextProviderProps,
+  parentContext?: PageEditContextInterface,
+) => {
+  const context = parentContext || useEditContext();
   const peerContext = useNewContext(props, context.parent);
   context.registerPeer(peerContext);
 
@@ -117,6 +122,26 @@ PageContextProvider.defaultProps = {
 type MenuOptionsDefinition$<P> = MenuOptionsDefinition<P>|((props:P) => MenuOptionsDefinition<P>);
 
 /**
+ * @private
+ * Sets the default scope (global or local) for all menu options is the provided array.
+ * For any option in the array, the default scope is superceded by any explicit scope
+ * specified by the `global` or `local` attribute.
+ *
+ * @param options
+ * An array of menu options
+ * @param global
+ * Whether to set global or local scope.
+ *
+ * @returs
+ * Array of menu options with default scope set.
+ */
+const setDefaultOptionScope = (options: TMenuOption[], global: boolean) => options.map(o => ({
+  global,
+  local: !global,
+  ...pickBy(o, v => v !== undefined) as TMenuOption,
+}));
+
+/**
  * Using supplied options, returns an HOC which adds one or more menu options (buttons).
  * This simply wraps the supplied component with a `PageContextProvider`.
  *
@@ -138,14 +163,23 @@ export const withMenuOptions = <P extends object>(def$: MenuOptionsDefinition$<P
     const WithMenuOptions = (props: P) => {
       const def = typeof def$ === 'function' ? def$(props) : def$;
       const {
-        useMenuOptions, peer, ...rest
+        useMenuOptions, peer, root, ...rest
       } = def;
       const options = useMenuOptions && useMenuOptions(props);
-      const getMenuOptions = options ? useGetter(options) : undefined;
-      if (peer) {
-        useRegisterMenuOptions({ getMenuOptions, ...rest });
+      if (root || peer) {
+        // Note we do not expect root or peer to change between renders, so it's
+        // ok to use hooks inside this condition.
+        let context = useEditContext();
+        if (root) {
+          while (context.parent) context = context.parent;
+        }
+        const getMenuOptions = options && useGetter(
+          setDefaultOptionScope(options, !context.parent),
+        );
+        useRegisterMenuOptions({ getMenuOptions, ...rest }, context);
         return <Component {...props} />;
       }
+      const getMenuOptions = options && useGetter(setDefaultOptionScope(options, false));
       return (
         <PageContextProvider getMenuOptions={getMenuOptions} {...rest}>
           <Component {...props} />

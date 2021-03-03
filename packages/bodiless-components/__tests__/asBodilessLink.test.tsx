@@ -68,8 +68,9 @@ describe('asBodilessLink', () => {
           withMockNode(),
         )('a');
         const wrapper = mount(<A />);
-        const formWrapper = findContextMenuForm(wrapper);
-        formWrapper.prop('submitValues')!({ href: 'bar' });
+        const formWrapper = findContextMenuForm(wrapper).childAt(0);
+        const snippetId = Object.keys(formWrapper.prop('initialValues'))[0];
+        formWrapper.prop('submitValues')!({ [snippetId]: { href: 'bar' } });
         expect(mockCreateNormalHref).toBeCalledWith('bar');
         expect(A.node.setData).toBeCalledWith({ href: 'mock://bar' });
       });
@@ -81,8 +82,9 @@ describe('asBodilessLink', () => {
           withMockNode(),
         )('a');
         const wrapper = mount(<A />);
-        const formWrapper = findContextMenuForm(wrapper);
-        formWrapper.prop('submitValues')!({ href: 'bar' });
+        const formWrapper = findContextMenuForm(wrapper).childAt(0);
+        const snippetId = Object.keys(formWrapper.prop('initialValues'))[0];
+        formWrapper.prop('submitValues')!({ [snippetId]: { href: 'bar' } });
         expect(mockCreateNormalHref).not.toBeCalled();
         expect(A.node.setData).toBeCalledWith({ href: 'custommock://bar' });
       });

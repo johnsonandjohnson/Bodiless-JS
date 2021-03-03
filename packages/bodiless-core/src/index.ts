@@ -28,10 +28,10 @@ import {
   withResetButton,
   useContentFrom,
 } from './Contentful';
-import withEditButton, { useEditFormProps, createMenuOptionGroup } from './withEditButton';
+import withEditButton, { createMenuOptionGroup } from './withEditButton';
 import useContextMenuForm, { contextMenuForm, ContextMenuForm } from './contextMenuForm';
 import withCompoundForm, { useRegisterSnippet } from './withCompoundForm';
-import withEditFormSnippet from './withEditFormSnippet';
+import withEditFormSnippet, { useEditFormProps } from './withEditFormSnippet';
 import type { Options as EditFormSnippetOptions } from './withEditFormSnippet';
 import withData from './withData';
 import NodeProvider, { useNode, useNodeDataHandlers } from './NodeProvider';
