@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 const path = require('path');
+const util = require('util');
 const os = require('os');
 const rimraf = require('rimraf');
 const { v1 } = require('uuid');
@@ -248,23 +249,20 @@ const getConflicts = async (target = 'upstream') => {
 
   await clone(rootDir, { directory: tmpDir, branch: targetBranch });
   process.chdir(tmpDir);
+  const copyfilesPromised = util.promisify(copyfiles);
   if (files.length) {
     logger.log([`Copy Files: ${files} ${tmpDir}`, process.cwd()]);
 
     try {
-      const result = await new Promise((resolve, reject) => {
-        copyfiles(
-          [...files, tmpDir],
-          { error: true, up: (rootDir.match(/\//g) || []).length + 1 },
-          (err) => {
-            if (err) {
-              reject(new Error(`Error copying uncommitted files ${err}.`));
-            }
-            resolve('ok');
-          },
-        );
-      });
-
+      const result = await copyfilesPromised(
+        [...files, tmpDir],
+        { error: true, up: (rootDir.match(/\//g) || []).length + 1 },
+        (err) => {
+          if (err) {
+            throw new Error(`Error copying uncommitted files ${err}.`);
+          }
+        },
+      );
       logger.log(`Result: ${result}`);
 
       await GitCmd.cmd()
