@@ -121,33 +121,37 @@ const uncommitted = async () => {
  *            }
  */
 const getChanges = async () => {
-  await GitCmd.cmd().add('fetch', 'origin').exec();
-  const branch = await getCurrentBranch();
-  const upstreamBranch = await getUpstreamBranch(branch);
-  const productionBranch = 'origin/master';
-  if (!upstreamBranch) {
-    return {
-      upstream: { branch: null, commits: [], files: [] },
-      production: { branch: productionBranch, commits: [], files: [] },
-      local: { branch, commits: [], files: [] },
+  try {
+    await GitCmd.cmd().add('fetch', 'origin').exec();
+    const branch = await getCurrentBranch();
+    const upstreamBranch = await getUpstreamBranch(branch);
+    const productionBranch = 'origin/master';
+    if (!upstreamBranch) {
+      return {
+        upstream: { branch: null, commits: [], files: [] },
+        production: { branch: productionBranch, commits: [], files: [] },
+        local: { branch, commits: [], files: [] },
+      };
+    }
+    const result = await Promise.all([
+      compare(upstreamBranch, branch),
+      compare(productionBranch, upstreamBranch),
+      compare(branch, productionBranch),
+      uncommitted(),
+    ]);
+    const status = {
+      upstream: { branch: upstreamBranch, ...result[0] },
+      production: { branch: productionBranch, ...result[1] },
+      local: {
+        branch,
+        commits: [...result[2].commits],
+        files: [...result[2].files, ...result[3].files],
+      },
     };
+    return status;
+  } catch (e) {
+    throw new Error(`Error occurred: ${e.message}`);
   }
-  const result = await Promise.all([
-    compare(upstreamBranch, branch),
-    compare(productionBranch, upstreamBranch),
-    compare(branch, productionBranch),
-    uncommitted(),
-  ]);
-  const status = {
-    upstream: { branch: upstreamBranch, ...result[0] },
-    production: { branch: productionBranch, ...result[1] },
-    local: {
-      branch,
-      commits: [...result[2].commits],
-      files: [...result[2].files, ...result[3].files],
-    },
-  };
-  return status;
 };
 
 /**
@@ -246,21 +250,32 @@ const getConflicts = async (target = 'upstream') => {
   process.chdir(tmpDir);
   if (files.length) {
     logger.log([`Copy Files: ${files} ${tmpDir}`, process.cwd()]);
-    copyfiles(
-      [...files, tmpDir],
-      { error: true, up: (rootDir.match(/\//g) || []).length + 1 },
-      (err) => {
-        if (err) {
-          throw new Error(`Error copying uncommitted files ${err}.`);
-        }
-      },
-    );
-    await GitCmd.cmd()
-      .add('add', '--all')
-      .exec();
-    await GitCmd.cmd()
-      .add('commit', '-m', 'TEMPORARY COMMIT')
-      .exec();
+
+    try {
+      const result = await new Promise((resolve, reject) => {
+        copyfiles(
+          [...files, tmpDir],
+          { error: true, up: (rootDir.match(/\//g) || []).length + 1 },
+          (err) => {
+            if (err) {
+              reject(new Error(`Error copying uncommitted files ${err}.`));
+            }
+            resolve('ok');
+          },
+        );
+      });
+
+      logger.log(`Result: ${result}`);
+
+      await GitCmd.cmd()
+        .add('add', '--all')
+        .exec();
+      await GitCmd.cmd()
+        .add('commit', '-m', 'TEMPORARY COMMIT')
+        .exec();
+    } catch (e) {
+      logger.error(e);
+    }
   }
 
   let conflictFiles = [];

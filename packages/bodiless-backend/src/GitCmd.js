@@ -61,6 +61,9 @@ class GitCmd {
       cmd.stderr.on('data', data => {
         stderr += data.toString();
       });
+      cmd.on('error', (err) => {
+        stderr += err.message;
+      });
       cmd.on('close', code => {
         logger.log(stdout, stderr, code);
         if (code === 0) {
