@@ -55,9 +55,9 @@ const withImageLibrary = (
       Selector: ComponentSelector,
       useLibraryNode: useImageLibraryNode,
       useMeta: useImageMeta,
-    }),
+    }) as HOC,
     withNode as HOC,
-    withNodeKey(nodeKeys),
+    withNodeKey(nodeKeys) as HOC,
   );
 };
 

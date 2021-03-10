@@ -14,6 +14,7 @@
 
 import { withDefaultContent, withResetButton } from '@bodiless/core';
 import { asToken } from '@bodiless/fclasses';
+import type { HOC } from '@bodiless/fclasses';
 import identity from 'lodash/identity';
 import type { AsBodilessImage, Data } from './Image';
 
@@ -34,7 +35,7 @@ const withDefaultImageContent = (
     asImageHoc,
     typeof nodeKey === 'string' ? withDefaultContent({
       [nodeKey]: nodeContent,
-    }) : identity,
+    }) as HOC : identity,
     withResetButton(nodeKey),
   );
 };

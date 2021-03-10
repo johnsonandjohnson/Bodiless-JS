@@ -57,7 +57,7 @@ const withMenuDesign = (design: any): HOC => {
   return flow(
     withSubMenuDesign(withDesign$) as HOC,
     withDesign$ as HOC,
-  );
+  ) as HOC;
 };
 
 /**
