@@ -1,4 +1,4 @@
 {
-  "src": "./door.png",
+  "src": "/content-library/door.png",
   "preset": "fluid_withWebp"
 }
