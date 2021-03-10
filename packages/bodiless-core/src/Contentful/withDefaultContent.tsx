@@ -34,17 +34,19 @@ import { DefaultContentNode } from '../ContentNode';
  * @returns
  * An HOC providing default content to the wrapped component.
  */
-const withDefaultContent = <P extends object, D extends object>(content: D|((props:P) => D)) => (
+// eslint-disable-next-line max-len
+const withDefaultContent = <P extends { content?: D}, D extends object>(content: D|((props:P) => D)) => (
   (Component: CT<P>) => {
-    const WithDefaultContent = (props: P) => {
+    const WithDefaultContent = ({ content: contentFromProp, ...rest }: P) => {
       const { node } = useNode();
-      const content$ = typeof content === 'function'
-        ? (content as ((props:P) => D))(props) : content;
+      const content$ = contentFromProp || content;
+      const content$$ = typeof content$ === 'function'
+        ? (content$ as ((props:P) => D))(rest as P) : content$;
       // eslint-disable-next-line max-len
-      const nodeWithDefaultContent = ContentfulNode.create((node as DefaultContentNode<object>), content$);
+      const nodeWithDefaultContent = ContentfulNode.create((node as DefaultContentNode<object>), content$$);
       return (
         <NodeProvider node={nodeWithDefaultContent}>
-          <Component {...props} />
+          <Component {...rest as P} />
         </NodeProvider>
       );
     };

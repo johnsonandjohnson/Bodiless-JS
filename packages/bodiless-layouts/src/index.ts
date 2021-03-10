@@ -35,3 +35,4 @@ export { ifComponentSelector, ifNotComponentSelector } from './FlowContainer/Com
 
 export * from './ContentLibrary';
 export { withDirection, DIRECTIONS };
+export * from './deserializers';

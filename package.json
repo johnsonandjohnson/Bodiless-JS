@@ -21,6 +21,7 @@
     "copyright": "node ./scripts/add-copyright",
     "fix": "eslint --fix  --cache --ext .js,.jsx,.ts,.tsx packages examples",
     "fix:target": "eslint --fix  --cache --ext .js,.jsx,.ts,.tsx",
+    "fix:change": "git diff --name-only --diff-filter=d master... | grep -e 'tsx$' -e 'jsx$' -e 'js$' -e 'ts$' | xargs -L 1 npm run fix:target",
     "fresh": "npm run clean && lerna clean -y && rimraf node_modules && npm run setup",
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx packages examples --",
     "lint:target": "eslint --cache --ext .js,.jsx,.ts,.tsx",
