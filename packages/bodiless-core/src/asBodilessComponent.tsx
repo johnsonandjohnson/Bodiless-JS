@@ -54,7 +54,7 @@ type AsBodiless<P, D, E = {}> = (
   nodeKeys?: WithNodeKeyProps,
   defaultData?: D,
   useOverrides?: UseBodilessOverrides<P, D, E>,
-) => Token<P, P & BodilessProps>;
+) => Token<P & BodilessProps>;
 
 /**
  * Given an event name and a wrapper component, provides an HOC which will wrap the base component

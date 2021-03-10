@@ -33,7 +33,7 @@ const withGatsbyImageLibrary = (preset: GatsbyImagePresets) => (
     asImageHoc,
     withImageLibrary(asEditableImage)(libraryNodeKey)(undefined, placeholder, useOverrides),
     withGatsbyImageNode(preset) as HOC,
-    withNodeKey(nodeKey),
+    withNodeKey(nodeKey) as HOC,
   );
 };
 

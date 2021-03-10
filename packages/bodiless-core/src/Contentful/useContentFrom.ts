@@ -14,5 +14,12 @@
 
 import type { Path, ContentNode } from '../ContentNode';
 
-const useContentFrom = (path: Path) => (node: ContentNode<any>) => node.peer(path).data;
+/**
+ * hook to read data from a content node
+ * can be used for providing default content for a node from another node
+ * @param path - path to node read content from
+ */
+const useContentFrom = (
+  path: Path,
+) => <D extends object>(node: ContentNode<D>) => node.peer<D>(path).data;
 export default useContentFrom;

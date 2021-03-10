@@ -36,7 +36,7 @@ import type { Options as EditFormSnippetOptions } from './withEditFormSnippet';
 import withData from './withData';
 import NodeProvider, { useNode, useNodeDataHandlers } from './NodeProvider';
 import { DefaultContentNode } from './ContentNode';
-import type { ContentNode } from './ContentNode';
+import type { ContentNode, Path as ContentNodePath } from './ContentNode';
 import {
   withNodeAndHandlers,
   withNodeDataHandlers,
@@ -146,6 +146,7 @@ export {
 
 export type {
   ContentNode,
+  ContentNodePath,
   BodilessOptions,
   PageEditContextInterface,
   TMenuOption,

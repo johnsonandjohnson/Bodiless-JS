@@ -18,12 +18,13 @@ import {
   Page,
   withGatsbyImageLibrary,
   GatsbyImagePresets,
+  useImageContentFrom,
 } from '@bodiless/gatsby-theme-bodiless';
 
 import { asEditable } from '@bodiless/components';
 import {
   useNode, withContextActivator, withLocalContextMenu, withDefaultContent,
-  withNode, withNodeKey, useContentFrom,
+  withNode, withNodeKey,
 } from '@bodiless/core';
 import { H1, H2, addClasses } from '@bodiless/fclasses';
 import { withContentLibrary } from '@bodiless/layouts';
@@ -77,9 +78,9 @@ const content = {
       contain terms different from this Agreement are offered by that Contributor.
     `,
   },
-  ___content$images$window: useContentFrom(['Page', 'window']),
-  ___content$images$door: useContentFrom(['Page', 'door']),
-  ___content$images$balcony: useContentFrom(['Page', 'balcony']),
+  ___content$images$window: useImageContentFrom(['Page', 'window']),
+  ___content$images$door: useImageContentFrom(['Page', 'door']),
+  ___content$images$balcony: useImageContentFrom(['Page', 'balcony']),
   ___content$images$skip: {
     text: 'not an image',
   },

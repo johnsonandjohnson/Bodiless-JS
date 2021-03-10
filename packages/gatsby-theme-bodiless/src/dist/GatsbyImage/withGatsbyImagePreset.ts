@@ -34,7 +34,7 @@ const withGatsbyImagePreset = (preset: GatsbyImagePresets) => (
   withGatsbyImageLogger(preset) as HOC,
   asEditableImage(undefined, placeholder, useOverrides),
   withGatsbyImageNode(preset) as HOC,
-  withNodeKey(nodeKey),
+  withNodeKey(nodeKey) as HOC,
 );
 
 export default withGatsbyImagePreset;

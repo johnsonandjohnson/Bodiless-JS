@@ -18,6 +18,7 @@ import {
   ifEditable,
   withActivatorWrapper,
 } from '@bodiless/core';
+import type { ImageData } from '@bodiless/components';
 import type {
   FluidObject,
   FixedObject,
@@ -28,17 +29,21 @@ import {
 } from '@bodiless/fclasses';
 import flow from 'lodash/flow';
 import omit from 'lodash/omit';
+import GatsbyImagePresets from './GatsbyImagePresets';
 
 type Components = {
   GatsbyImage: CT<any>,
   Image: CT<any>,
 };
 
-export type GasbyImageProps = HTMLProps<HTMLImageElement> & {
-  preset: string;
-  publicUrl?: string;
+export type GatsbyImageData = ImageData & {
+  preset: GatsbyImagePresets;
   gatsbyImg?: { fluid: FluidObject | FluidObject[] } | { fixed: FixedObject | FixedObject[] };
-} & GatsbyImageOptionalProps & DesignableComponentsProps<Components>;
+};
+
+export type GasbyImageProps = HTMLProps<HTMLImageElement>
+& GatsbyImageData
+& GatsbyImageOptionalProps & DesignableComponentsProps<Components>;
 
 const asDesignableGatsbyImage = (Component: CT<any>) => {
   const startComponents: Components = {
@@ -47,7 +52,7 @@ const asDesignableGatsbyImage = (Component: CT<any>) => {
   };
   const AsDesignableGatsbyImage = (props: GasbyImageProps) => {
     const {
-      components, gatsbyImg, preset, publicUrl, src, ...rest
+      components, gatsbyImg, preset, ...rest
     } = props;
     const {
       GatsbyImage,
@@ -58,9 +63,8 @@ const asDesignableGatsbyImage = (Component: CT<any>) => {
         <GatsbyImage {...rest} {...gatsbyImg} />
       );
     }
-    const publicUrl$ = publicUrl || src;
     return (
-      <Image {...rest} src={publicUrl$} />
+      <Image {...rest} />
     );
   };
   const applyDesign = extendDesignable(design => omit(design, ['GatsbyImage', 'Image']));
@@ -92,7 +96,6 @@ export const isGatsbyImage = ({ gatsbyImg }: GasbyImageProps) => gatsbyImg !== u
  */
 export const withoutGatsbyImageProps = withoutProps([
   'preset',
-  'publicUrl',
   'gatsbyImg',
 ]);
 

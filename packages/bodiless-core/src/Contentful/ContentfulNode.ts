@@ -86,7 +86,7 @@ export default class ContentfulNode<D extends object> extends DefaultContentNode
         [this.getContentKey()]: undefined,
       });
       return defaultContent(node);
-    };
+    }
     const { getNode } = this.getters;
     const nodeData = getNode(this.path) as D;
     // @TODO: When we deprecate componentData, this will have to be updated.
