@@ -115,6 +115,18 @@ describe('withDefaultContent', () => {
     expect(wrapper.find('Foo').html()).toBe('defaultFooValue');
     expect(wrapper.find('Bar').html()).toBe('defaultBarValue');
   });
+  it('allows providing default content for current node', () => {
+    const FooConsumer = createNodeConsumer('Foo');
+    const Foo = flow(
+      withDefaultContent({
+        '': 'defaultFooValue',
+      }),
+      withNode,
+      withNodeKey('foo'),
+    )(FooConsumer);
+    const wrapper = mount(<Foo />);
+    expect(wrapper.find('Foo').html()).toBe('defaultFooValue');
+  });
   describe('when default content is specified as a function for an item', () => {
     it('passes node as an argument to the functon', () => {
       const FooConsumer = createNodeConsumer('Foo');
@@ -149,6 +161,21 @@ describe('withDefaultContent', () => {
       })(BazBase);
       const wrapper = mount(<Baz />);
       expect(wrapper.find('Foo').html()).toBe('defaultBarValue');
+    });
+    it('allows merging default content with node data', () => {
+      const FooConsumer = createNodeConsumer('Foo');
+      const Foo = flow(
+        withNode,
+        withNodeKey('foo'),
+        withDefaultContent({
+          foo: (node: any) => node.path.join('$').concat('=').concat(node.data),
+        }),
+        withRootNode({
+          root$foo: 'fooValue',
+        }),
+      )(FooConsumer);
+      const wrapper = mount(<Foo />);
+      expect(wrapper.find('Foo').html()).toBe('root$foo=fooValue');
     });
   });
   describe('when a component with single node is wrapped', () => {

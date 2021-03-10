@@ -54,8 +54,7 @@ export default class ContentfulNode<D extends object> extends DefaultContentNode
 
   private getDefaultContent() {
     const contentKey = this.getContentKey();
-    const contentValue = (this.content as any)[contentKey];
-    if (typeof contentValue === 'function') return contentValue(this);
+    const contentValue = this.content[contentKey];
     return contentValue || {};
   }
 
@@ -67,13 +66,33 @@ export default class ContentfulNode<D extends object> extends DefaultContentNode
     this.baseContentPath = path;
   }
 
+  /**
+   * when default content is not a function
+   * then take data from store
+   * if data does not exist in store then return default content
+   *
+   * when default content is a function
+   * then return data from the function
+   * assuming the function is responsible for merging store data with default data
+   */
   get data() {
+    const defaultContent = this.getDefaultContent();
+    if (typeof defaultContent === 'function') {
+      // creating a new node instead of passing this
+      // so that avoid infinitive loop
+      const node = this.peer(this.path);
+      node.setContent({
+        ...this.content,
+        [this.getContentKey()]: undefined,
+      });
+      return defaultContent(node);
+    };
     const { getNode } = this.getters;
     const nodeData = getNode(this.path) as D;
     // @TODO: When we deprecate componentData, this will have to be updated.
     // We'll need to return our default content instead of the emptyValue.
     const isNodeDataEmpty = !nodeData || Object.keys(nodeData).length === 0;
-    return !isNodeDataEmpty ? nodeData : this.getDefaultContent();
+    return !isNodeDataEmpty ? nodeData : defaultContent;
   }
 
   get keys() {
