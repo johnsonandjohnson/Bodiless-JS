@@ -46,6 +46,7 @@ describe('asToken', () => {
 
     it('Allows added props to be overridden', () => {
       const Test = addProp('foo', 'bar')(Base);
+      // @ts-ignore prop foo does not exist on test
       const wrapper = mount(<Test foo="baz" />);
       expect(wrapper.find(Base).props()).toEqual({
         foo: 'baz',
@@ -76,6 +77,20 @@ describe('asToken', () => {
       const Test = asTest(Base);
       const wrapper = mount(<Test />);
       expect(wrapper.find(Base).prop('foo')).toBe('bar');
+    });
+
+    it('Ignores undefined tokens', () => {
+      const withPossiblyUndefinedToken = (token?: Token) => asToken(
+        token,
+        addProp('bar'),
+      );
+      let Test = withPossiblyUndefinedToken()(Base);
+      let wrapper = mount(<Test />);
+      expect(wrapper.find(Base).prop('bar')).toBeTruthy();
+      Test = withPossiblyUndefinedToken(addProp('foo'))(Base);
+      wrapper = mount(<Test />);
+      expect(wrapper.find(Base).prop('bar')).toBeTruthy();
+      expect(wrapper.find(Base).prop('foo')).toBeTruthy();
     });
   });
 

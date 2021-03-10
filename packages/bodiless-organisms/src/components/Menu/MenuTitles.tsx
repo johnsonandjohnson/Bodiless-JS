@@ -43,7 +43,7 @@ export const asMenuTout = (withToutEditors: any) => flow(
  */
 export const useIsActiveTrail = () => useBreadcrumbContext()?.isActive();
 
-export const asMenuLink = (asEditable: HOC, asOff: HOC = replaceWith(Span)) => flow(
+export const asMenuLink = (asEditable: HOC, asOff: HOC = replaceWith(Span) as HOC) => flow(
   replaceWith(A),
   withSidecarNodes(
     withBodilessLinkToggle(asBodilessLink, asOff)('link'),

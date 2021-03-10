@@ -55,11 +55,10 @@ const createBreadcrumbComponent = ({
   return flowRight(
     withDefaultContent(content),
     withDesign({
-      // @ts-ignore
-      BreadcrumbLink: replaceWith(withSidecarNodes(
-        asBodilessLink(),
-      ))('a'),
-      BreadcrumbTitle: replaceWith(
+      BreadcrumbLink: replaceWith(
+        withSidecarNodes(asBodilessLink())('a'),
+      ),
+      BreadcrumbTitle: replaceWith<any>(
         asEditable()(React.Fragment),
       ),
     }),

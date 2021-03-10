@@ -32,7 +32,7 @@ type ComponentOrTag<P> = ComponentWithMeta<P>|keyof JSX.IntrinsicElements;
 /**
  * Type of a higher order component
  */
-type HOC<P = any, Q = P> = (C:ComponentOrTag<P>) => ComponentWithMeta<Q>;
+type HOC = <P extends object, Q extends object = P>(C:ComponentOrTag<P>) => ComponentWithMeta<Q>;
 
 /**
  * Properties of tokens.
@@ -59,7 +59,7 @@ export type TokenProps<P> = {
  *
  * Tokens may be composed of other tokens using the `asToken` utility.
  */
-type Token<P = any, Q = P> = HOC<P, Q> & TokenProps<P>;
+type Token<P = any> = HOC & TokenProps<P>;
 
 /**
  * Type of the filter function which should be passed to the Token#filter method.
@@ -86,8 +86,10 @@ function mergeMeta(objValue:any, srcValue:any) {
  * @private
  * Enhances an HOC so as to reserve metadata attached to the component it wraps.
  */
-const preserveMeta = <P extends object>(hoc: Token<P>): Token<P> => Component => {
-  const NewComponent = hoc(Component);
+const preserveMeta = (hoc: HOC): HOC => <P extends object, Q extends object = P>(
+  Component: ComponentOrTag<P>,
+): ComponentWithMeta<Q> => {
+  const NewComponent = hoc(Component) as ComponentWithMeta<Q>;
   const finalMeta = mergeWith({}, Component, NewComponent, mergeMeta);
   return Object.assign(NewComponent, finalMeta);
 };
@@ -98,8 +100,8 @@ const preserveMeta = <P extends object>(hoc: Token<P>): Token<P> => Component =>
  *
  * @param meta The metadata to attach.
  */
-const withMeta = <P extends object>(meta: TokenMeta): HOC<P> => Component => {
-  const WithMeta = (props: P) => <Component {...props} />;
+export const withMeta = (meta: TokenMeta): HOC => Component => {
+  const WithMeta = (props: any) => <Component {...props} />;
   return Object.assign(WithMeta, meta);
 };
 
@@ -154,7 +156,7 @@ const createTokenAndParentFilter = <P extends object>(
  * @return A flat list of filtered tokens
  */
 const filterMembers = <P extends object>(tokens: Token<P>[]): Token<P>[] => {
-  const filtered: HOC<P>[] = [];
+  const filtered: HOC[] = [];
   let rest = flattenTokens(tokens).reverse();
   while (rest.length > 0) {
     const [next, ...nextRest] = rest;
@@ -185,10 +187,12 @@ const filterMembers = <P extends object>(tokens: Token<P>[]): Token<P>[] => {
  * A composed token.
  */
 const asToken = <P extends object>(...args: TokenDef<P>[]): Token<P> => {
-  const metaBits: TokenMeta[] = args.filter(a => !isToken(a)) as TokenMeta[];
+  // We allow "undefined" in args and simply ignore them.
+  const args$ = args.filter(a => a !== undefined);
+  const metaBits: TokenMeta[] = args$.filter(a => !isToken(a)) as TokenMeta[];
   const meta = mergeWith({}, ...metaBits, mergeMeta);
   const members: Token<P>[] = [
-    ...args.filter(a => isToken(a)) as Token<P>[],
+    ...args$.filter(a => isToken(a)) as Token<P>[],
     withMeta(meta),
   ];
   const hocs = filterMembers(members);
