@@ -18,7 +18,7 @@ import {
   Page,
   withGatsbyImageLibrary,
   GatsbyImagePresets,
-  useImageContentFrom,
+  getImageContentFrom,
 } from '@bodiless/gatsby-theme-bodiless';
 
 import { asEditable } from '@bodiless/components';
@@ -78,9 +78,9 @@ const content = {
       contain terms different from this Agreement are offered by that Contributor.
     `,
   },
-  ___content$images$window: useImageContentFrom(['Page', 'window']),
-  ___content$images$door: useImageContentFrom(['Page', 'door']),
-  ___content$images$balcony: useImageContentFrom(['Page', 'balcony']),
+  ___content$images$window: getImageContentFrom(['Page', 'window']),
+  ___content$images$door: getImageContentFrom(['Page', 'door']),
+  ___content$images$balcony: getImageContentFrom(['Page', 'balcony']),
   ___content$images$skip: {
     text: 'not an image',
   },

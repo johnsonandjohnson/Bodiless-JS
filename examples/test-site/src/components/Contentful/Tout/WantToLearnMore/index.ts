@@ -13,7 +13,7 @@
  */
 
 import { flow } from 'lodash';
-import { useImageContentFrom } from '@bodiless/gatsby-theme-bodiless';
+import { getImageContentFrom } from '@bodiless/gatsby-theme-bodiless';
 import { ToutClean } from '@bodiless/organisms';
 import { asContentfulTout } from '../../../Tout';
 import { asToutDefaultStyle, asToutHorizontal } from '../../../Tout/token';
@@ -23,7 +23,7 @@ import link from './link.json';
 import ctatext from './ctatext.json';
 
 const toutContent = {
-  image: useImageContentFrom(['DefaultContent', 'SiteBuildGuide']),
+  image: getImageContentFrom(['DefaultContent', 'SiteBuildGuide']),
   title,
   body,
   link,

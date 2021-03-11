@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import { useImageContentFrom } from '@bodiless/gatsby-theme-bodiless';
+import { getImageContentFrom } from '@bodiless/gatsby-theme-bodiless';
 
-export default useImageContentFrom(['DefaultContent', 'contentful2']);
+export default getImageContentFrom(['DefaultContent', 'contentful2']);

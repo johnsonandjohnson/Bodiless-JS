@@ -12,18 +12,18 @@
  * limitations under the License.
  */
 
-import { useContentFrom } from '@bodiless/core';
+import { getContentFrom } from '@bodiless/core';
 import type { ContentNode, ContentNodePath as Path } from '@bodiless/core';
 import type { GatsbyImageData } from './asGatsbyImage';
 
 /**
- * hook to read data from a content node
+ * helper to read data from a content node
  * when node data is empty in store, then it returns default data
  * when node data is not empty in store, then it merges default content data with node store data
  * @param path - path to node read content from
  */
-const useImageContentFrom = (path: Path) => (node: ContentNode<GatsbyImageData>) => {
-  const defaultNodeData = useContentFrom(path)<GatsbyImageData>(node);
+const getImageContentFrom = (path: Path) => (node: ContentNode<GatsbyImageData>) => {
+  const defaultNodeData = getContentFrom(path)<GatsbyImageData>(node);
   const storeNodeData = node.data;
   if (Object.keys(storeNodeData).length === 0) return defaultNodeData;
   return {
@@ -39,4 +39,4 @@ const useImageContentFrom = (path: Path) => (node: ContentNode<GatsbyImageData>)
     ),
   };
 };
-export default useImageContentFrom;
+export default getImageContentFrom;

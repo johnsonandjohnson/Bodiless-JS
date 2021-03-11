@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
+/* eslint-disable max-len */
+
 import { union } from 'lodash';
 import { DefaultContentNode, Path } from '../ContentNode';
 
@@ -35,8 +37,9 @@ export const getAbsoluteNodeKey = (basePath: Path, contentPath: Path) => {
 };
 
 // TODO: this class should expose a method that allows to check if node has value in store
-export default class ContentfulNode<D extends object> extends DefaultContentNode<D> {
-  private baseContentPath: Path = [];
+export default class ContentfulNode<D extends object, K extends object> extends DefaultContentNode<D> {
+  // @ts-ignore has no initializer and is not definitely assigned in the constructor
+  private sourceNode: DefaultContentNode<K>;
 
   // @ts-ignore has no initializer and is not definitely assigned in the constructor
   private content: Content;
@@ -44,12 +47,12 @@ export default class ContentfulNode<D extends object> extends DefaultContentNode
   static create(node: DefaultContentNode<object>, content: object) {
     const contentfulNode = new ContentfulNode(node.getActions(), node.getGetters(), node.path);
     contentfulNode.setContent(content);
-    contentfulNode.setBaseContentPath(node.path);
+    contentfulNode.setSourceNode(node);
     return contentfulNode;
   }
 
   private getContentKey() {
-    return getRelativeNodeKey(this.baseContentPath, this.path);
+    return getRelativeNodeKey(this.sourceNode.path, this.path);
   }
 
   private getDefaultContent() {
@@ -62,8 +65,8 @@ export default class ContentfulNode<D extends object> extends DefaultContentNode
     this.content = content;
   }
 
-  public setBaseContentPath(path: Path) {
-    this.baseContentPath = path;
+  public setSourceNode(node: DefaultContentNode<K>) {
+    this.sourceNode = node;
   }
 
   /**
@@ -78,14 +81,7 @@ export default class ContentfulNode<D extends object> extends DefaultContentNode
   get data() {
     const defaultContent = this.getDefaultContent();
     if (typeof defaultContent === 'function') {
-      // creating a new node instead of passing this
-      // so that avoid infinitive loop
-      const node = this.peer(this.path);
-      node.setContent({
-        ...this.content,
-        [this.getContentKey()]: undefined,
-      });
-      return defaultContent(node);
+      return defaultContent(this.sourceNode.peer(this.path));
     }
     const { getNode } = this.getters;
     const nodeData = getNode(this.path) as D;
@@ -100,14 +96,14 @@ export default class ContentfulNode<D extends object> extends DefaultContentNode
     return union(
       getKeys(),
       Object.keys(this.content)
-        .map(key => getAbsoluteNodeKey(this.baseContentPath, key)),
+        .map(key => getAbsoluteNodeKey(this.sourceNode.path, key)),
     );
   }
 
   peer<E extends object>(path: Path) {
-    const peerNode = new ContentfulNode<E>(this.actions, this.getters, path);
+    const peerNode = new ContentfulNode<E, K>(this.actions, this.getters, path);
     peerNode.setContent(this.content);
-    peerNode.setBaseContentPath(this.baseContentPath);
+    peerNode.setSourceNode(this.sourceNode);
     return peerNode;
   }
 }

@@ -23,11 +23,6 @@ import {
 } from './hooks';
 import withNode, { withNodeKey } from './withNode';
 import withSidecarNodes, { startSidecarNodes, endSidecarNodes } from './withSidecarNodes';
-import {
-  withDefaultContent,
-  withResetButton,
-  useContentFrom,
-} from './Contentful';
 import withEditButton, { createMenuOptionGroup } from './withEditButton';
 import useContextMenuForm, { contextMenuForm, ContextMenuForm } from './contextMenuForm';
 import withCompoundForm, { useRegisterSnippet } from './withCompoundForm';
@@ -78,6 +73,7 @@ import withSwitcherButton from './withSwitcherButton';
 import OnNodeErrorNotification from './OnNodeErrorNotification';
 
 export * from './components';
+export * from './Contentful';
 export {
   asBodilessComponent,
   withBodilessData,
@@ -126,9 +122,6 @@ export {
   useActivateOnEffect,
   useActivateOnEffectActivator,
   withChild,
-  withDefaultContent,
-  withResetButton,
-  useContentFrom,
   ifToggledOff,
   ifToggledOn,
   withFlowToggle,

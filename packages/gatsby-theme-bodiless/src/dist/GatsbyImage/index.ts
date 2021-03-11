@@ -18,7 +18,7 @@ import GatsbyImagePresets from './GatsbyImagePresets';
 import withGatsbyImageLogger from './withGatsbyImageLogger';
 import withGatsbyImagePreset from './withGatsbyImagePreset';
 import withGatsbyImageLibrary from './withGatsbyImageLibrary';
-import useImageContentFrom from './useImageContentFrom';
+import getImageContentFrom from './getImageContentFrom';
 
 export {
   asGatsbyImage,
@@ -29,5 +29,5 @@ export {
   withGatsbyImageLogger,
   withGatsbyImagePreset,
   withGatsbyImageLibrary,
-  useImageContentFrom,
+  getImageContentFrom,
 };
