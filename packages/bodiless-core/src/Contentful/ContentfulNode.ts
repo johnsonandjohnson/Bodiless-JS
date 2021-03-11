@@ -16,6 +16,15 @@
 
 import { union } from 'lodash';
 import { DefaultContentNode, Path } from '../ContentNode';
+import type { ContentNode } from '../ContentNode';
+
+/**
+ * provides data for a particular default content key
+ * can be used for merging default content data with a node data
+ * @param node - content node of the type equal to node at the time withDefaultContent is invoked
+ * @returns data of the node
+ */
+export type GetContentFrom<D extends object, E extends object = D> = (node: ContentNode<D>) => E;
 
 type Content = {
   [nodePath: string]: any,
@@ -39,7 +48,7 @@ export const getAbsoluteNodeKey = (basePath: Path, contentPath: Path) => {
 // TODO: this class should expose a method that allows to check if node has value in store
 export default class ContentfulNode<D extends object, K extends object> extends DefaultContentNode<D> {
   // @ts-ignore has no initializer and is not definitely assigned in the constructor
-  private sourceNode: DefaultContentNode<K>;
+  protected sourceNode: DefaultContentNode<K>;
 
   // @ts-ignore has no initializer and is not definitely assigned in the constructor
   private content: Content;
@@ -81,7 +90,8 @@ export default class ContentfulNode<D extends object, K extends object> extends 
   get data() {
     const defaultContent = this.getDefaultContent();
     if (typeof defaultContent === 'function') {
-      return defaultContent(this.sourceNode.peer(this.path));
+      // passing content node of the type equal to node at the time withDefaultContent is invoked
+      return (defaultContent as GetContentFrom<D>)(this.sourceNode.peer(this.path));
     }
     const { getNode } = this.getters;
     const nodeData = getNode(this.path) as D;

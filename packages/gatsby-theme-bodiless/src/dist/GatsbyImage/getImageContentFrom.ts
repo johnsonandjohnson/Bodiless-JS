@@ -13,17 +13,20 @@
  */
 
 import { getContentFrom } from '@bodiless/core';
-import type { ContentNode, ContentNodePath as Path } from '@bodiless/core';
+import type { ContentNode, ContentNodePath as Path, GetContentFrom } from '@bodiless/core';
 import type { GatsbyImageData } from './asGatsbyImage';
 
+export type GetImageContentFrom = GetContentFrom<GatsbyImageData>;
+
 /**
- * helper to read data from a content node
+ * helper to provide image data from a different content node
  * when node data is empty in store, then it returns default data
  * when node data is not empty in store, then it merges default content data with node store data
  * @param path - path to node read content from
  */
-const getImageContentFrom = (path: Path) => (node: ContentNode<GatsbyImageData>) => {
-  const defaultNodeData = getContentFrom(path)<GatsbyImageData>(node);
+// eslint-disable-next-line max-len
+const getImageContentFrom = (path: Path): GetImageContentFrom => (node: ContentNode<GatsbyImageData>) => {
+  const defaultNodeData = getContentFrom<GatsbyImageData>(path)(node);
   const storeNodeData = node.data;
   if (Object.keys(storeNodeData).length === 0) return defaultNodeData;
   return {
