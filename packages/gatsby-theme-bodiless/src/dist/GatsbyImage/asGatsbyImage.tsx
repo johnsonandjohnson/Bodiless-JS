@@ -25,10 +25,9 @@ import type {
   GatsbyImageOptionalProps,
 } from 'gatsby-image';
 import {
-  addClasses, DesignableComponentsProps, Div, extendDesignable, withDesign, withoutProps,
+  addClasses, DesignableComponentsProps, Div, withDesign, withoutProps, designable,
 } from '@bodiless/fclasses';
 import flow from 'lodash/flow';
-import omit from 'lodash/omit';
 import GatsbyImagePresets from './GatsbyImagePresets';
 
 type Components = {
@@ -67,8 +66,7 @@ const asDesignableGatsbyImage = (Component: CT<any>) => {
       <Image {...rest} />
     );
   };
-  const applyDesign = extendDesignable(design => omit(design, ['GatsbyImage', 'Image']));
-  return applyDesign(startComponents, 'GatsbyImage')(AsDesignableGatsbyImage);
+  return designable(startComponents, 'GatsbyImage')(AsDesignableGatsbyImage);
 };
 
 const withActivatorWrapperDefaultStyles = addClasses('bl-w-full');
