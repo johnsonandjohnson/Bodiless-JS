@@ -41,7 +41,7 @@ import {
 } from '@bodiless/fclasses';
 import landscapeImage from './landscape_image.png';
 
-const asBaseEditableImagePlain = (nodeKey?, placeholder?, useOverrides?) => asToken(
+export const asBaseEditableImagePlain = (nodeKey?, placeholder?, useOverrides?) => asToken(
   asToken.meta.term('Component')('Image'),
   asToken.meta.term('Category')('Editors'),
   stylable,

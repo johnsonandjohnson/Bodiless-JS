@@ -39,7 +39,7 @@ import {
   asEditableImageWithPlaceholder,
   asLinkableImage,
   asContentfulImage,
-  asEditableImagePlain,
+  asBaseEditableImagePlain as asBaseEditableImage,
 } from '../../../components/Image';
 import {
   asHeader1,
@@ -58,18 +58,18 @@ import ImageResponsiveSvgSrc from './responsive_asvg.svg';
 import ContentfulImage1 from '../../../components/Contentful/Image/image1';
 import ContentfulImage2 from '../../../components/Contentful/Image/image2';
 
-const asFluidGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.Fluid)(asEditableImagePlain);
-const asFluidNoBase64GatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FluidNoBase64)(asEditableImagePlain);
-const asFluidTracedSVGGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FluidTracedSVG)(asEditableImagePlain);
-const asFluidWithWebpGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FluidWithWebp)(asEditableImagePlain);
-const asFluidWithWebpNoBase64GatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FluidWithWebpNoBase64)(asEditableImagePlain);
-const asFluidWithWebpTracedSVGGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FluidWithWebpTracedSVG)(asEditableImagePlain);
-const asFixedGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.Fixed)(asEditableImagePlain);
-const asFixedNoBase64GatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedNoBase64)(asEditableImagePlain);
-const asFixedTracedSVGGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedTracedSVG)(asEditableImagePlain);
-const asFixedWithWebpGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedWithWebp)(asEditableImagePlain);
-const asFixedWithWebpNoBase64GatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedWithWebpNoBase64)(asEditableImagePlain);
-const asFixedWithWebpTracedSVGGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedWithWebpTracedSVG)(asEditableImagePlain);
+const asFluidGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.Fluid)(asBaseEditableImage);
+const asFluidNoBase64GatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FluidNoBase64)(asBaseEditableImage);
+const asFluidTracedSVGGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FluidTracedSVG)(asBaseEditableImage);
+const asFluidWithWebpGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FluidWithWebp)(asBaseEditableImage);
+const asFluidWithWebpNoBase64GatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FluidWithWebpNoBase64)(asBaseEditableImage);
+const asFluidWithWebpTracedSVGGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FluidWithWebpTracedSVG)(asBaseEditableImage);
+const asFixedGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.Fixed)(asBaseEditableImage);
+const asFixedNoBase64GatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedNoBase64)(asBaseEditableImage);
+const asFixedTracedSVGGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedTracedSVG)(asBaseEditableImage);
+const asFixedWithWebpGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedWithWebp)(asBaseEditableImage);
+const asFixedWithWebpNoBase64GatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedWithWebpNoBase64)(asBaseEditableImage);
+const asFixedWithWebpTracedSVGGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedWithWebpTracedSVG)(asBaseEditableImage);
 
 const FluidGatsbyImage = asFluidGatsbyImage()(Img);
 const FluidNoBase64GatsbyImage = asFluidNoBase64GatsbyImage()(Img);
