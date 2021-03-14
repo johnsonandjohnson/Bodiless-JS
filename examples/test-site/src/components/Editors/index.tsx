@@ -29,6 +29,7 @@ import {
   replaceWith,
   Div,
 } from '@bodiless/fclasses';
+import { startWithGatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import {
   asBold,
   asItalic,
@@ -61,7 +62,7 @@ const basicDesign = {
   Bold: asBold,
   Italic: asItalic,
   Underline: asUnderline,
-  Link: flow(asEditableLink(), asLink, withLinkDeserializer),
+  Link: flow(asEditableLink(), asLink, withLinkDeserializer, startWithGatsbyLink),
   ...simpleDesign,
   AlignLeft: asAlignLeft,
   AlignRight: asAlignRight,
@@ -79,7 +80,7 @@ const fullFeaturedDesign = {
   Italic: asItalic,
   Underline: asUnderline,
   StrikeThrough: flow(replaceWith(Strike), asStrikeThrough, withStrikeThroughMeta),
-  Link: flow(asEditableLink(), asLink, withLinkDeserializer),
+  Link: flow(asEditableLink(), asLink, withLinkDeserializer, startWithGatsbyLink),
   SuperScript: asSuperScript,
   AlignLeft: asAlignLeft,
   AlignRight: asAlignRight,
