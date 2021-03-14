@@ -121,6 +121,10 @@ const GatsbyImageWrapper = flow(
   removeClasses('inline-block'),
   addClasses('block w-1/2'),
 )(ImageWrapper);
+const FixedGatsbyImageWrapper = flow(
+  removeClasses('w-1/2'),
+  addClasses('w-full lg:w-1/2'),
+)(GatsbyImageWrapper);
 const ImageSectionTitle = flow(
   addClasses('w-full'),
   asHeader2,
@@ -164,35 +168,35 @@ export default (props: any) => (
         </GatsbyImageWrapper>
       </PageSection>
       <PageSection>
-        <GatsbyImageWrapper>
+        <FixedGatsbyImageWrapper>
           <ImageTitle>Fixed</ImageTitle>
           <FixedGatsbyImage nodeKey="fixed" />
-        </GatsbyImageWrapper>
+        </FixedGatsbyImageWrapper>
 
-        <GatsbyImageWrapper>
+        <FixedGatsbyImageWrapper>
           <ImageTitle>Fixed No Base64</ImageTitle>
           <FixedNoBase64GatsbyImage nodeKey="fixedNoBase64" />
-        </GatsbyImageWrapper>
+        </FixedGatsbyImageWrapper>
 
-        <GatsbyImageWrapper>
+        <FixedGatsbyImageWrapper>
           <ImageTitle>Fixed Traced SVG</ImageTitle>
           <FixedTracedSVGGatsbyImage nodeKey="fixedTracedSVG" />
-        </GatsbyImageWrapper>
+        </FixedGatsbyImageWrapper>
 
-        <GatsbyImageWrapper>
+        <FixedGatsbyImageWrapper>
           <ImageTitle>Fixed With Webp</ImageTitle>
           <FixedWithWebpGatsbyImage nodeKey="fixedWithWebp" />
-        </GatsbyImageWrapper>
+        </FixedGatsbyImageWrapper>
 
-        <GatsbyImageWrapper>
+        <FixedGatsbyImageWrapper>
           <ImageTitle>Fixed With Webp No Base64</ImageTitle>
           <FixedWithWebpNoBase64GatsbyImage nodeKey="fixedWithWebpNoBase64" />
-        </GatsbyImageWrapper>
+        </FixedGatsbyImageWrapper>
 
-        <GatsbyImageWrapper>
+        <FixedGatsbyImageWrapper>
           <ImageTitle>Fixed With Webp Traced SVG</ImageTitle>
           <FixedWithWebpTracedSVGGatsbyImage nodeKey="fixedWithWebpTracedSVG" />
-        </GatsbyImageWrapper>
+        </FixedGatsbyImageWrapper>
       </PageSection>
 
       <EditableImagesSection>
