@@ -42,6 +42,10 @@ import {
   asBaseEditableImagePlain as asBaseEditableImage,
 } from '../../../components/Image';
 import {
+  withImageRoundedCorners,
+  withGatsbyImageRoundedCorners,
+} from '../../../components/Image/token';
+import {
   asHeader1,
   asHeader2,
   asHeader3,
@@ -71,7 +75,10 @@ const asFixedWithWebpGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.Fixe
 const asFixedWithWebpNoBase64GatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedWithWebpNoBase64)(asBaseEditableImage);
 const asFixedWithWebpTracedSVGGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedWithWebpTracedSVG)(asBaseEditableImage);
 
-const FluidGatsbyImage = asFluidGatsbyImage()(Img);
+const FluidGatsbyImage = flow(
+  asFluidGatsbyImage(),
+  withGatsbyImageRoundedCorners,
+)(Img);
 const FluidNoBase64GatsbyImage = asFluidNoBase64GatsbyImage()(Img);
 const FluidTracedSVGGatsbyImage = asFluidTracedSVGGatsbyImage()(Img);
 const FluidWithWebpGatsbyImage = asFluidWithWebpGatsbyImage()(Img);
@@ -87,6 +94,7 @@ const FixedWithWebpTracedSVGGatsbyImage = asFixedWithWebpTracedSVGGatsbyImage()(
 const ImageAnimatedPng = asEditableImageWithPlaceholder(ImageAnimatedPngSrc)('animatedPng')(Img);
 const ImageGif = asEditableImageWithPlaceholder(ImageGifSrc)('gif')(Img);
 const ImageJpg = asEditableImageWithPlaceholder(ImageJpgSrc)('jpg')(Img);
+const RoundedImageJpg = withImageRoundedCorners(ImageJpg);
 const ImagePng = asEditableImageWithPlaceholder(ImagePngSrc)('png')(Img);
 const ImageSvg = asEditableImageWithPlaceholder(ImageSvgSrc)('svg')(Img);
 const ImageResponsiveSvg = asEditableImageWithPlaceholder(ImageResponsiveSvgSrc)('responsiveSvg')(Img);
@@ -204,7 +212,7 @@ export default (props: any) => (
 
         <ImageWrapper>
           <ImageTitle>JPG</ImageTitle>
-          <ImageJpg />
+          <RoundedImageJpg />
         </ImageWrapper>
 
         <ImageWrapper>
