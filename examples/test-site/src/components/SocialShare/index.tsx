@@ -262,6 +262,7 @@ const useMenuOptions = () => [
     name: 'share',
     icon: 'share',
     label: 'Share',
+    group: 'page-group',
   },
 ];
 const withSocialShareTitle = withMeta({

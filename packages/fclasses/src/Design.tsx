@@ -19,8 +19,7 @@ import {
 import React, {
   ComponentType, Fragment, useContext, ComponentProps,
 } from 'react';
-import type { Token, ComponentOrTag } from './Tokens';
-import { HOC } from './FClasses';
+import type { Token, ComponentOrTag, HOC } from './Tokens';
 import { addPropsIf } from './addProps';
 import { useShowDesignKeys, useDesignKeysAttribute } from './Context';
 import { withDisplayName } from './hoc-util';
@@ -91,7 +90,11 @@ export const replaceable = <P extends object> (Component:ComponentOrTag<P>): Com
   const Replaceable = (props:P) => {
     const UpstreamComponent = useContext(DesignContext);
     const FinalComponent = UpstreamComponent || Component;
-    return <FinalComponent {...props} />;
+    return (
+      <DesignContext.Provider value={undefined}>
+        <FinalComponent {...props} />
+      </DesignContext.Provider>
+    );
   };
   return Replaceable;
 };
@@ -182,8 +185,25 @@ export const withDesign = <C extends DesignableComponents>(design: Design<C>) =>
   }
 );
 
-export const replaceWith = <P extends object>(Component: ComponentType<P>) => (
-  (() => Component) as HOC
+/**
+ * Returns a Token which replaces the component to which it is applied with another.
+ *
+ * @param Replacement
+ * The component or tag to use as a replacement.
+ *
+ * @example
+ * ```
+ * const Start = () => <div />
+ * const Replaced = replaceWith('span')(Start);
+ * <Start /> === '<div />'
+ * <Replaced /> ==== '<span />'
+ * ```
+ */
+export const replaceWith = <P extends object>(Replacement: ComponentOrTag<P>): Token<P> => asToken(
+  (() => {
+    const ReplaceWith = (props: P) => <Replacement {...props} />;
+    return ReplaceWith;
+  }) as HOC, // Cast is necessary bc we don't specify a component as a parameter.
 );
 export const remove = <P extends React.HTMLAttributes<HTMLBaseElement>> () => (props:P) => {
   const { children } = props;

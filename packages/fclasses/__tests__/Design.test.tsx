@@ -25,8 +25,10 @@ import {
   DesignableComponentsProps,
   designable,
   withFinalDesign,
+  startWith,
+  replaceWith,
 } from '../src/Design';
-import { withShowDesignKeys } from '../src';
+import { withShowDesignKeys, asToken } from '../src';
 
 type SpanType = ComponentType<any>;
 type MyDesignableComponents = {
@@ -226,5 +228,107 @@ describe('withShowDesignKeys', () => {
       <AddDesignKeys><Test /></AddDesignKeys>,
     );
     expect(wrapper.find('span#foo').prop('data-test-attr')).toBe('Base:Foo');
+  });
+
+  describe('startWith', () => {
+    const InnerBase = ({ components: C }: any) => (
+      <C.Component id="inner">Inner</C.Component>
+    );
+    const Inner = designable({ Component: 'div' as any }, 'ProblemInner')(
+      InnerBase,
+    );
+    const OuterBase = ({ components: C }: any) => (
+      <C.Wrapper id="outer">
+        <Inner />
+      </C.Wrapper>
+    );
+    const Outer = flow(
+      designable({ Wrapper: 'div' as any }, 'Problem'),
+      withDesign<any>({
+        Wrapper: startWith('h1' as any),
+      }),
+    )(OuterBase);
+
+    it('Replaces a component with the outermost', () => {
+      const Test = withDesign({
+        Component: flow(
+          startWith('span' as any),
+          startWith('section' as any),
+        ),
+      })(Inner);
+      const wrapper = mount(<Test />);
+      expect(wrapper.find('div#inner')).toHaveLength(0);
+      expect(wrapper.find('span#inner')).toHaveLength(0);
+      expect(wrapper.find('section#inner')).toHaveLength(1);
+    });
+
+    it('Replaces a component without altering a prior hoc', () => {
+      const Test = withDesign({
+        Component: flow(
+          (C: any) => (props: any) => <C {...props} foo="bar" />,
+          startWith('span' as any),
+        ),
+      })(Inner);
+      const wrapper = mount(<Test />);
+      expect(wrapper.find('span#inner').prop('foo')).toEqual('bar');
+    });
+
+    it('Does not propagate a starting component to an inner design', () => {
+      const wrapper = mount(<Outer />);
+      expect(wrapper.find('h1#outer')).toHaveLength(1);
+      expect(wrapper.find('h1#inner')).toHaveLength(0);
+      expect(wrapper.find('div#inner')).toHaveLength(1);
+    });
+  });
+});
+
+describe('replaceWith', () => {
+  const Start = (props: any) => <div {...props} />;
+  const Replacement = (props: any) => <span {...props} />;
+  const Base = ({ components: C }: any) => (
+    <C.Component id="test" />
+  );
+  const TestDesignable = designable({ Component: Start }, 'ProblemInner')(Base);
+
+  it('replaces a component', () => {
+    let wrapper = mount(<TestDesignable />);
+    expect(wrapper.find('div#test')).toHaveLength(1);
+    const Test = withDesign({
+      Component: replaceWith(Replacement),
+    })(TestDesignable);
+    wrapper = mount(<Test />);
+    expect(wrapper.find('div#test')).toHaveLength(0);
+    expect(wrapper.find('span#test')).toHaveLength(1);
+  });
+
+  it('erases previous hocs', () => {
+    const TestBase = withDesign({
+      Component: (C: any) => (props: any) => <C {...props} foo="bar" />,
+    })(TestDesignable);
+    let wrapper = mount(<TestBase />);
+    expect(wrapper.find('div#test').prop('foo')).toBe('bar');
+    const Test = withDesign({
+      Component: replaceWith(Replacement),
+    })(TestBase);
+    wrapper = mount(<Test />);
+    expect(wrapper.find('span#test').prop('foo')).toBeUndefined();
+  });
+
+  it('Propagates metadata without altering the replacement.', () => {
+    const Start$ = asToken({ title: 'Foo' })(Start);
+    expect(Start$.title).toBe('Foo');
+    const Test = replaceWith(Replacement)(Start$);
+    expect(Test.title).toBe('Foo');
+    // @ts-ignore
+    expect(Replacement.title).toBeUndefined();
+  });
+
+  it('Can replace with a tag inside withdesign', () => {
+    const Test = withDesign({
+      Component: replaceWith('span'),
+    })(TestDesignable);
+    const wrapper = mount(<Test />);
+    expect(wrapper.find('div#test')).toHaveLength(0);
+    expect(wrapper.find('span#test')).toHaveLength(1);
   });
 });

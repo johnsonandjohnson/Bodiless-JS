@@ -12,9 +12,10 @@
  * limitations under the License.
  */
 
-import { ReactNode } from 'react';
-import { FormBodyProps as ContextMenuFormBodyProps } from '../contextMenuForm';
-import { TMenuOption } from './ContextMenuTypes';
+import type { ReactNode } from 'react';
+import type { FormBodyProps as ContextMenuFormBodyProps } from '../contextMenuForm';
+import type { TMenuOption } from './ContextMenuTypes';
+import type { MenuOptionsDefinition } from './PageContextProviderTypes';
 
 type EditDataHandler<D> = {
   initialValueHandler?: (values: any) => D;
@@ -50,15 +51,11 @@ export type EditButtonOptions<P = any, D = any> = Omit<OptionGroupDefinition, 'h
    * Callback to render the body of the edit form.
    */
   renderForm: FormBodyRenderer<P, D>,
-  /**
-  * An optional function that determines if the created menu option displays "compound form".
-  * If the function returns true, then "compound form" is displayed.
-  * Otherwise, standard form is displayed.
-  * Default is to display standard form.
-  */
-  useCompoundForm?: () => boolean,
-} & EditDataHandler<D>;
+} & EditDataHandler<D> & Partial<MenuOptionsDefinition<P>>;
+
+export type BodilessOverrides<P = any, D = any, E = {}> =
+  Partial<EditButtonOptions<P, D> & E>;
 
 export type UseBodilessOverrides<P = any, D = any, E = {}> = (
   props: P & EditButtonProps<D>,
-) => Partial<EditButtonOptions<P, D> & E>;
+) => BodilessOverrides<P, D, E>;

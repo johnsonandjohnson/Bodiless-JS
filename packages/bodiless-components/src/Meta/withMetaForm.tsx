@@ -101,7 +101,7 @@ const withMetaForm = (
   metaFormHeader?: HeaderProps,
 ) => ifEditable(
   withCompoundForm({
-    useMenuOptions, name: 'Meta', peer: true,
+    useMenuOptions, name: 'Meta', root: true,
   }),
   withMetaFormHeader(metaFormHeader || defaultMetaFormHeader),
 );

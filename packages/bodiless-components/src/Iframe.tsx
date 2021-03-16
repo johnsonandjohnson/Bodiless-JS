@@ -45,7 +45,6 @@ const options: BodilessOptions<Props, Data> = {
   global: false,
   local: true,
   Wrapper: 'div',
-  useCompoundForm: () => true,
   renderForm: () => true,
 };
 

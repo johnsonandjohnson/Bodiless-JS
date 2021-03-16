@@ -26,12 +26,13 @@ describe('Editor Menu (left and right)', function () {
    const docsIcon = '//*[@aria-label="Docs"]'
    const docsTitle = '//*[@data-id="bodilessjs"]'
    const editIcon = '//*[@aria-label="Edit"]'
-   const addPageIcon = '//*[@aria-label="Page"]'
+   const pageIcon = '//*[@aria-label="Page"]'
+   const newPageIcon = '//*[@aria-label="New"]'
 
-   const headerAddPageForm = '//*[@aria-label="Context Menu Page Form"]//h3[text()="Add a Blank Page"]'
-   const fieldAddPageForm = '//*[@aria-label="Context Menu Page Form"]//input[@name="new-page-path"]'
-   const closeIconAddPageForm = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Cancel"]'
-   const checkmarkIconAddPageForm = '//*[@aria-label="Context Menu Page Form"]//*[@aria-label="Submit"]'
+   const headerAddPageForm = '//*[@aria-label="Context Submenu Form"]//h3[text()="Add a Blank Page"]'
+   const fieldAddPageForm = '//*[@aria-label="Context Submenu Form"]//input[@name="new-page-path"]'
+   const closeIconAddPageForm = '//*[@aria-label="Context Submenu Form"]//*[@aria-label="Cancel"]'
+   const checkmarkIconAddPageForm = '//*[@aria-label="Context Submenu Form"]//*[@aria-label="Submit"]'
 
 
    // Preview Mode
@@ -108,8 +109,8 @@ describe('Editor Menu (left and right)', function () {
          .should('be.visible')
       cy.xpath(editIcon)
          .should('be.visible')
-      cy.xpath(addPageIcon)
-         .should('not.exist')
+      cy.xpath(pageIcon)
+         .should('be.visible')
    }
 
    function checkEditorMenuButtonsEditMode() {
@@ -119,7 +120,7 @@ describe('Editor Menu (left and right)', function () {
          .should('be.visible')
       cy.xpath(editIcon)
          .should('be.visible')
-      cy.xpath(addPageIcon)
+      cy.xpath(pageIcon)
          .should('be.visible')
    }
 
@@ -140,7 +141,9 @@ describe('Editor Menu (left and right)', function () {
    }
 
    function checkAddNewPageButton() {
-      cy.xpath(addPageIcon)
+      cy.xpath(pageIcon)
+         .click()
+      cy.xpath(newPageIcon)
          .click()
       cy.xpath(headerAddPageForm)
       cy.xpath(fieldAddPageForm)

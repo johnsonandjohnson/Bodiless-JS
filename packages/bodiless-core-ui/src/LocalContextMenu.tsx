@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, ComponentType } from 'react';
 import ReactTooltip from 'rc-tooltip';
 import { flow } from 'lodash';
 import {
@@ -56,6 +56,12 @@ const LocalTooltip: FC<ReactTooltip['props']> = props => (
   />
 );
 
+const GroupTitle = flow(
+  removeClasses('bl-mb-grid-2 bl-min-w-xl-grid-1'),
+  addClassesIf(({ index }: any = {}) => Number(index) > 0)('hover:bl-underline bl-cursor-pointer'),
+  addClassesIf(({ index }: any = {}) => index === 0)('bl-underline'),
+)(ComponentFormTitle) as ComponentType<{ index?: number }>;
+
 const ContextMenuGroup: FC<IContextMenuItemProps> = ({
   children,
   index,
@@ -66,17 +72,13 @@ const ContextMenuGroup: FC<IContextMenuItemProps> = ({
   ));
   if (hidden) return null;
   const { context, label } = option || {};
+  const label$ = typeof label === 'function' ? label() : label;
   const onClick = context ? { onClick: () => context.activate() } : {};
-  const GroupTitle = flow(
-    removeClasses('bl-mb-grid-2 bl-min-w-xl-grid-1'),
-    addClassesIf(() => Number(index) > 0)('hover:bl-underline bl-cursor-pointer'),
-    addClassesIf(() => index === 0)('bl-underline'),
-  )(ComponentFormTitle);
 
   return (
     <div className={groupClasses}>
       {label && (
-        <GroupTitle {...onClick}>{label}</GroupTitle>
+        <GroupTitle index={index} {...onClick}>{label$}</GroupTitle>
       )}
       <div className="flex">
         {children}

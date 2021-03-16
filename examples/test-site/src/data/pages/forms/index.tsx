@@ -17,13 +17,25 @@ import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { asEditable } from '@bodiless/components';
 import ReactMarkdown from 'react-markdown';
 
+import flow from 'lodash/flow';
 import Layout from '../../../components/Layout';
-import asBodilessMarkdown from './asCustomBodilessMarkdown';
+import asBodilessMarkdown from './asBodilessMarkdown';
+import withLastModified from './withLastModified';
+import withMarkdownFetchButton from './withMarkdownFetchButton';
 
-const Markdown = asBodilessMarkdown('body')(ReactMarkdown);
+const Markdown = flow(
+  withLastModified('last-modified'),
+  withMarkdownFetchButton,
+  asBodilessMarkdown('body', undefined, () => ({
+    root: true,
+    group: 'page-group',
+    label: 'Body',
+  })),
+)(ReactMarkdown);
+
 const H1 = asEditable('title', 'Title')<HTMLProps<HTMLHeadingElement>>('h1');
 
-const PageBody = ({ title, markdownContent }) => (
+const PageBody = ({ title, markdownContent }: any) => (
   <main>
     <H1>{title}</H1>
     <Markdown source={markdownContent} />

@@ -95,7 +95,7 @@ const ContextMenuBase: FC<IContextMenuProps> = (props) => {
        * and if it is not defined, it will just close the form using standard setRenderForm.
        */
       // eslint-disable-next-line no-confusing-arrow
-      closeForm: (e) => e.currentTarget.hasAttribute('data-bl-component-form-close-button')
+      closeForm: (e) => e?.currentTarget.hasAttribute('data-bl-component-form-close-button')
         ? setRenderForm(undefined)
         : closeMenuForm(e),
       ui,
