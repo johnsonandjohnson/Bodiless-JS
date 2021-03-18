@@ -3,7 +3,7 @@
     {
       "uuid": "c02c2840-d04d-11ea-9f2d-452d946e4546",
       "wrapperProps": {
-        "className": " lg:w-full"
+        "className": "w-full lg:w-full"
       },
       "type": "LandscapeImage"
     },
