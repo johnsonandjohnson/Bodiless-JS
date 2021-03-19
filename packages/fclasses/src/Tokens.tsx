@@ -37,7 +37,7 @@ type HOC = <P extends object, Q extends object = P>(C:ComponentOrTag<P>) => Comp
 /**
  * Properties of tokens.
  */
-type TokenProps<P> = {
+export type TokenProps<P> = {
   /**
    * The filter (if any) which should be applied when this token is composed.
    */

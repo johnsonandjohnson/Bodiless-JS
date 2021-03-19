@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,9 +12,20 @@
  * limitations under the License.
  */
 
-import Image from './jandjwebsite.jpg';
+import { addClasses, withDesign, addProps } from '@bodiless/fclasses';
 
-export default {
-  src: Image,
-  alt: "Johnson & Johnson's website",
+const withImageRoundedCorners = addClasses('rounded-2xl');
+
+const withGatsbyImageRoundedCorners = withDesign({
+  GatsbyImage: addProps({
+    imgStyle: {
+      borderRadius: '1rem',
+    },
+  }),
+  Image: withImageRoundedCorners,
+});
+
+export {
+  withImageRoundedCorners,
+  withGatsbyImageRoundedCorners,
 };

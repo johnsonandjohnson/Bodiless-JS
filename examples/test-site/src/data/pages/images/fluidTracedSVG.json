@@ -1,5 +1,5 @@
 {
   "src": "/testImg.png",
-  "alt": "Alt Text",
+  "alt": "",
   "preset": "fluid_tracedSVG"
 }

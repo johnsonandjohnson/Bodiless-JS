@@ -15,11 +15,13 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { PageEditContext } from '@bodiless/core';
+import type { ComponentWithMeta } from '@bodiless/fclasses';
 import { flow } from 'lodash';
 import { asBodilessLink } from '../src/Link';
 import { HrefNormalizer } from '../src/Link/NormalHref';
 import { withMockNode } from './helpers/MockContentNode';
 import findContextMenuForm from './helpers/findContextMenuForm';
+import type { Props as LinkProps } from '../src/Link/types';
 
 const mockCreateNormalHref = jest.fn((href: string) => ({
   toString: () => `mock://${href}`,
@@ -36,14 +38,14 @@ describe('asBodilessLink', () => {
 
     describe('on render', () => {
       it('invokes the default normalizer', () => {
-        const A = asBodilessLink()('a');
+        const A = asBodilessLink()('a') as ComponentWithMeta<LinkProps>;
         const wrapper = mount(<A href="foo" id="test" />);
         expect(mockCreateNormalHref).toBeCalledWith('foo');
         expect(wrapper.find('a#test').prop('href')).toBe('mock://foo');
       });
       it('invokes a custom normalizer', () => {
         const normalizeHref: HrefNormalizer = jest.fn((href?: string) => `custommock://${href}`);
-        const A = asBodilessLink(undefined, undefined, () => ({ normalizeHref }))('a');
+        const A = asBodilessLink(undefined, undefined, () => ({ normalizeHref }))('a') as ComponentWithMeta<LinkProps>;
         const wrapper = mount(<A href="foo" id="test" />);
         expect(mockCreateNormalHref).not.toBeCalled();
         expect(normalizeHref).toBeCalledWith('foo');

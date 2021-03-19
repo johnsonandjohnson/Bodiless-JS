@@ -23,10 +23,6 @@ import {
 } from './hooks';
 import withNode, { withNodeKey } from './withNode';
 import withSidecarNodes, { startSidecarNodes, endSidecarNodes } from './withSidecarNodes';
-import {
-  withDefaultContent,
-  withResetButton,
-} from './Contentful';
 import withEditButton, { createMenuOptionGroup } from './withEditButton';
 import useContextMenuForm, { contextMenuForm, ContextMenuForm } from './contextMenuForm';
 import withCompoundForm, { useRegisterSnippet } from './withCompoundForm';
@@ -35,7 +31,7 @@ import type { Options as EditFormSnippetOptions } from './withEditFormSnippet';
 import withData from './withData';
 import NodeProvider, { useNode, useNodeDataHandlers } from './NodeProvider';
 import { DefaultContentNode } from './ContentNode';
-import type { ContentNode } from './ContentNode';
+import type { ContentNode, Path as ContentNodePath } from './ContentNode';
 import {
   withNodeAndHandlers,
   withNodeDataHandlers,
@@ -77,6 +73,7 @@ import withSwitcherButton from './withSwitcherButton';
 import OnNodeErrorNotification from './OnNodeErrorNotification';
 
 export * from './components';
+export * from './Contentful';
 export {
   asBodilessComponent,
   withBodilessData,
@@ -125,8 +122,6 @@ export {
   useActivateOnEffect,
   useActivateOnEffectActivator,
   withChild,
-  withDefaultContent,
-  withResetButton,
   ifToggledOff,
   ifToggledOn,
   withFlowToggle,
@@ -144,6 +139,7 @@ export {
 
 export type {
   ContentNode,
+  ContentNodePath,
   BodilessOptions,
   PageEditContextInterface,
   TMenuOption,

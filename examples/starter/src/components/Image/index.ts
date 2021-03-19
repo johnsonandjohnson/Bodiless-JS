@@ -12,33 +12,59 @@
  * limitations under the License.
  */
 
+/* eslint-disable max-len */
+
 import { ComponentType } from 'react';
 import {
   withChild,
-  withDefaultContent,
   withSidecarNodes,
 } from '@bodiless/core';
 import { flowRight } from 'lodash';
 import {
   asBodilessLink,
   withImagePlaceholder,
+  withDefaultImageContent,
 } from '@bodiless/components';
-import { A, Img } from '@bodiless/fclasses';
+import {
+  asBodilessImage,
+} from '@bodiless/components-ui';
+import {
+  asToken,
+  stylable,
+  A,
+  Img,
+} from '@bodiless/fclasses';
+import {
+  GatsbyImagePresets,
+  withGatsbyImagePreset,
+  withoutGatsbyImageProps,
+} from '@bodiless/gatsby-theme-bodiless';
 import landscapeImage from './landscape_image.png';
-import { asEditableImage } from '../Elements.token';
 
-type Data = {
-  src: string;
-  alt: string;
-};
+export const asBaseEditableImagePlain = (nodeKey?, placeholder?, useOverrides?) => asToken(
+  asToken.meta.term('Component')('Image'),
+  asToken.meta.term('Category')('Editors'),
+  stylable,
+  asBodilessImage(nodeKey, undefined, useOverrides),
+  withImagePlaceholder(placeholder),
+);
+
+/**
+ * util function to build a hoc for rendering a non-responsive image.
+ */
+export const asEditableImagePlain = (nodeKey?, placeholder?, useOverrides?) => asToken(
+  withoutGatsbyImageProps,
+  asBaseEditableImagePlain.meta,
+  asBaseEditableImagePlain(nodeKey, placeholder, useOverrides),
+);
+
+/**
+ * util function to build a hoc for rendering a responsive image.
+ */
+const asEditableImage = withGatsbyImagePreset(GatsbyImagePresets.FluidWithWebp)(asBaseEditableImagePlain);
 
 // Allows to set default content for image based component.
-const asContentfulImage = (nodeContent: Partial<Data>) => (nodeKey: string) => flowRight(
-  withDefaultContent({
-    [nodeKey]: nodeContent,
-  }),
-  asEditableImage(nodeKey),
-);
+const asContentfulImage = withDefaultImageContent(asEditableImage);
 
 const DEFAULT_IMAGE_NODE_KEY = 'image';
 const DEFAULT_LINK_NODE_KEY = 'link';
@@ -69,4 +95,5 @@ export {
   asLandscapeImage,
   asEditableImageWithPlaceholder,
   asLinkableImage,
+  asEditableImage,
 };

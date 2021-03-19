@@ -46,7 +46,8 @@ export default props => (
 
 export const query = graphql`
   query($slug: String!) {
-    ...PageQuery,
+    ...PageQuery
     ...SiteQuery
+    ...DefaultContentQuery
   }
 `;
