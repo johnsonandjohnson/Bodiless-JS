@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
+import React from 'react';
+import type { ComponentOrTag } from '@bodiless/fclasses';
 import NodeProvider, { useNode } from '../NodeProvider';
 import ContentfulNode from './ContentfulNode';
 import { DefaultContentNode } from '../ContentNode';
@@ -36,7 +37,7 @@ import { DefaultContentNode } from '../ContentNode';
  */
 // eslint-disable-next-line max-len
 const withDefaultContent = <P extends { content?: D}, D extends object>(content: D|((props:P) => D)) => (
-  (Component: CT<P>) => {
+  (Component: ComponentOrTag<P>) => {
     const WithDefaultContent = ({ content: contentFromProp, ...rest }: P) => {
       const { node } = useNode();
       const content$ = contentFromProp || content;

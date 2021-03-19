@@ -13,10 +13,13 @@
  */
 
 /* eslint-disable no-case-declarations */
+/* eslint-disable no-underscore-dangle */
 
 const pathUtil = require('path');
 const slash = require('slash');
 const crypto = require('crypto');
+const fs = require('fs-extra');
+const md5File = require('md5-file');
 const { fluid: sharpFluid, fixed: sharpFixed } = require('gatsby-plugin-sharp');
 const GatsbyImagePresets = require('./dist/GatsbyImage/GatsbyImagePresets').default;
 
@@ -60,6 +63,12 @@ const findFilesystemNode = ({ node, getNode }) => {
 
 // Adapted from create-file-path.
 const createSlug = ({ node, getNode }) => {
+  if (
+    node.instanceName !== undefined
+    && node.instanceName.startsWith('bodiless-default-content')
+  ) {
+    return 'defaultContent';
+  }
   // Find the filesystem node
   const fsNode = findFilesystemNode({ node, getNode });
   if (!fsNode) return undefined;
@@ -84,10 +93,12 @@ const addSlugField = ({ node, getNode, actions }) => {
   });
 };
 
-const generateDigest = content => crypto
+const generateStringDigest = content => crypto
   .createHash('md5')
   .update(content)
   .digest('hex');
+
+const generateFileDigest = absolutePath => md5File.sync(absolutePath);
 
 const supportedExtensions = {
   jpeg: true,
@@ -313,13 +324,49 @@ const generateGatsbyImage = async ({ file, preset, reporter }, options) => {
   }
 };
 
-const generateImages = async ({ node, content, reporter }, options) => {
+/**
+ * Copy file to static directory and return public url to it
+ *
+ * leveraging logic from gatsby-source-filesystem
+ * https://github.com/gatsbyjs/gatsby/blob/39baf4eb504dcbb4d231f4baf8b109d0dcabb1da/packages/gatsby-source-filesystem/src/extend-file-node.js
+ */
+const copyFileToStatic = (node, reporter) => {
+  const fileAbsolutePath = node.absolutePath;
+  const fileName = `${node.internal.contentDigest}/${pathUtil.basename(fileAbsolutePath)}`;
+
+  const publicPath = pathUtil.join(
+    process.cwd(),
+    'public',
+    'static',
+    fileName,
+  );
+
+  if (!fs.existsSync(publicPath)) {
+    fs.copySync(
+      fileAbsolutePath,
+      publicPath,
+      { dereference: true },
+      err => {
+        if (err) {
+          reporter.panic(
+            {
+              context: {
+                sourceMessage: `error copying file from ${fileAbsolutePath} to ${publicPath}`,
+              },
+            },
+            err,
+          );
+        }
+      },
+    );
+  }
+
+  return `/static/${fileName}`;
+};
+
+const createImageNode = ({ node, content }) => {
   const parsedContent = JSON.parse(content);
   if (parsedContent === undefined || parsedContent.src === undefined) {
-    return undefined;
-  }
-  // skip image generation if preset is not set
-  if (parsedContent.preset === undefined) {
     return undefined;
   }
   const imgSrc = parsedContent.src;
@@ -327,6 +374,12 @@ const generateImages = async ({ node, content, reporter }, options) => {
   if (!supportedExtensions[fileExtension]) {
     return undefined;
   }
+  const absolutePath = pathUtil.isAbsolute(imgSrc)
+    ? pathUtil.join(process.cwd(), 'static', imgSrc)
+    : pathUtil.join(node.dir, imgSrc);
+  const contentDigest = fs.existsSync(absolutePath)
+    ? generateFileDigest(absolutePath)
+    : generateStringDigest(absolutePath);
   const imageNode = {
     id: `${node.id} >>> ImageNode`,
     parent: node.id,
@@ -334,13 +387,18 @@ const generateImages = async ({ node, content, reporter }, options) => {
     name: node.name,
     extension: pathUtil.extname(imgSrc).substr(1),
     path: imgSrc,
-    // this field is mandatory for grapqhql sharp queries
-    absolutePath: pathUtil.join(process.cwd(), 'static', imgSrc),
+    // this field is mandatory for graphql sharp queries
+    absolutePath,
     internal: {
       type: 'ImageNode',
-      contentDigest: generateDigest(content),
+      contentDigest,
     },
   };
+  return imageNode;
+};
+
+const generateImages = async ({ imageNode, content, reporter }, options) => {
+  const parsedContent = JSON.parse(content);
   return generateGatsbyImage({
     file: imageNode,
     preset: parsedContent.preset,
@@ -358,27 +416,47 @@ const createBodilessNode = async ({
   const { createNode, createParentChildLink } = boundActionCreators;
 
   const { gatsbyImage: gatsbyImageOptions } = pluginOptions;
-  const gatsbyImgData = await generateImages({
-    node,
-    content: nodeContent,
-    reporter,
-  }, gatsbyImageOptions);
+  const imageNode = createImageNode({ node, content: nodeContent });
+  let imageContent;
+  if (imageNode !== undefined) {
+    const publicUrl = pathUtil.isAbsolute(imageNode.path)
+      ? imageNode.path
+      : copyFileToStatic(imageNode, reporter);
+    let gatsbyImgData;
+    // skip gatsby img data generation when an image from json does not exist in filesystem
+    if (fs.existsSync(imageNode.absolutePath)) {
+      gatsbyImgData = await generateImages({
+        imageNode,
+        content: nodeContent,
+        reporter,
+      }, gatsbyImageOptions);
+    }
 
-  const content = gatsbyImgData ? JSON.stringify({
+    imageContent = {
+      ...(gatsbyImgData ? { gatsbyImg: gatsbyImgData } : {}),
+      ...(publicUrl ? { src: publicUrl } : {}),
+    };
+  }
+  const content = imageContent ? JSON.stringify({
     ...JSON.parse(nodeContent),
-    ...(gatsbyImgData ? { gatsbyImg: gatsbyImgData } : {}),
+    ...imageContent,
   }) : nodeContent;
+
+  const parsedContent = JSON.parse(content);
+  const bodilessNodeName = parsedContent._nodeKey !== undefined
+    ? parsedContent._nodeKey
+    : node.name;
 
   const bodilessNode = {
     id: `${node.id} >>> ${BODILESS_NODE_TYPE}`,
     parent: node.id,
     children: [],
-    name: node.name,
+    name: bodilessNodeName,
     extension: node.extension,
     instanceName: node.sourceInstanceName,
     content,
     internal: {
-      contentDigest: generateDigest(nodeContent),
+      contentDigest: generateStringDigest(nodeContent),
       type: BODILESS_NODE_TYPE,
     },
   };
@@ -402,8 +480,10 @@ exports.onCreateNode = ({
   }
   // check if we should create a bodiless node
   const extensions = ['json'];
+  const isBodilessSource = node.sourceInstanceName === 'data'
+    || (node.sourceInstanceName !== undefined && node.sourceInstanceName.startsWith('bodiless-default-content'));
   // 'data' is gatsby-source-filesystem name configured in gatsby-config.js
-  if (node.sourceInstanceName === 'data' && extensions.indexOf(node.extension) !== -1) {
+  if (isBodilessSource && extensions.indexOf(node.extension) !== -1) {
     createBodilessNode({
       node,
       getNode,

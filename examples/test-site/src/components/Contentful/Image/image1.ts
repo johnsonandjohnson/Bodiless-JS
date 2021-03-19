@@ -12,9 +12,6 @@
  * limitations under the License.
  */
 
-import Image from './contentful1.png';
+import { getImageContentFrom } from '@bodiless/gatsby-theme-bodiless';
 
-export default {
-  src: Image,
-  alt: 'contentful 1',
-};
+export default getImageContentFrom(['DefaultContent', 'contentful1']);

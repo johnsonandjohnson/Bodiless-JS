@@ -47,6 +47,8 @@ class MockContentNode<D extends object> implements ContentNode<D> {
   constructor(key: string) {
     this.path = [key];
   }
+
+  proxy = jest.fn();
 }
 
 describe('withNode', () => {

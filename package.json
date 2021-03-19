@@ -25,7 +25,7 @@
     "fresh": "npm run clean && lerna clean -y && rimraf node_modules && npm run setup",
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx packages examples --",
     "lint:target": "eslint --cache --ext .js,.jsx,.ts,.tsx",
-    "lint:change": "git diff --name-only --diff-filter=d master... | grep -e 'tsx$' -e 'jsx$' -e 'js$' -e 'ts$' | xargs -L 1 npm run lint-target",
+    "lint:change": "git diff --name-only --diff-filter=d master... | grep -e 'tsx$' -e 'jsx$' -e 'js$' -e 'ts$' | xargs -L 1 npm run lint:target",
     "new": "node ./scripts/new-starter",
     "publish:all": "npm run build && lerna publish --registry $NPM_REGISTRY",
     "publish:from-package": "npm run build && lerna publish from-package --registry $NPM_REGISTRY",
