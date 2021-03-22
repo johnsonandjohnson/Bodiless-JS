@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import React from 'react';
 import { flow } from 'lodash';
 import {
   withContextActivator,
@@ -25,8 +24,8 @@ import {
   ToutClean,
   asTestableTout,
 } from '@bodiless/organisms';
-import { withDesign } from '@bodiless/fclasses';
-import { startWithGatsbyLink } from '@bodiless/gatsby-theme-bodiless';
+import { withDesign, startWith } from '@bodiless/fclasses';
+import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import {
   asEditableLink,
 } from '../Elements.token';
@@ -43,7 +42,7 @@ export const withToutEditors = flow(
       withSidecarNodes(
         asEditableLink('link'),
       ),
-      startWithGatsbyLink, // or startWith(GatsbyLink)
+      startWith(GatsbyLink),
     ),
     Title: withEditorSimple('title', 'Tout Title Text'),
     Link: flow(
@@ -51,7 +50,7 @@ export const withToutEditors = flow(
       withSidecarNodes(
         asEditableLink('link', undefined, () => ({ groupLabel: 'CTA' })),
       ),
-      startWithGatsbyLink // or startWith(GatsbyLink),
+      startWith(GatsbyLink),
     ),
     Body: withEditorBasic('body', 'Tout Body Text'),
   }),

@@ -14,34 +14,32 @@
 
 import React, { ComponentType as CT } from 'react';
 import { Link as BaseGatsbyLink } from 'gatsby';
+import type { GatsbyLinkProps } from 'gatsby';
 import flow from 'lodash/flow';
 import {
   designable,
   stylable,
   withDesign,
-  startWith,
   A,
   addProps,
 } from '@bodiless/fclasses';
 import { ifReadOnly } from '@bodiless/core';
-
+import type { BodilessLinkProps } from '@bodiless/components';
 
 type Components = {
-  GatsbyLink: CT<any>,
-  Link: CT<any>,
+  GatsbyLink: CT<GatsbyLinkProps<any>>,
+  Link: CT<BodilessLinkProps>,
 };
 
 /**
  * leveraging logic form gatsby
  */
-const isLocalLink = (path: string) =>
-  path &&
-  !path.startsWith(`http://`) &&
-  !path.startsWith(`https://`) &&
-  !path.startsWith(`//`);
+const isLocalLink = (path: string) => path
+  && !path.startsWith('http://')
+  && !path.startsWith('https://')
+  && !path.startsWith('//');
 
-
-const asGatsbyLink$ = (Component: CT<any>) => {
+const asGatsbyLink$ = (Component: CT<BodilessLinkProps>) => {
   const startComponents: Components = {
     GatsbyLink: BaseGatsbyLink,
     Link: Component,
@@ -73,11 +71,9 @@ const asTestableGatsbyLink = withDesign({
 });
 
 const GatsbyLink = asGatsbyLink(A);
-const startWithGatsbyLink = startWith(GatsbyLink);
 
 export {
   GatsbyLink,
   asGatsbyLink,
-  startWithGatsbyLink,
   asTestableGatsbyLink,
 };

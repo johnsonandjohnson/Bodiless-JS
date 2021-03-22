@@ -12,5 +12,4 @@
  * limitations under the License.
  */
 
- export * from './asGatsbyLink';
- 
+export * from './asGatsbyLink';
