@@ -12,11 +12,12 @@
  * limitations under the License.
  */
 
-/* eslint-disable import/prefer-default-export */
-
 import { v4 } from 'uuid';
+import type { FlowContainerItem } from './htmlDeserializer';
 
-export const createFlowContainerItem = (type: string) => ({
+export type CreateFlowContainerItem = (type: string) => FlowContainerItem;
+
+export const createFlowContainerItem: CreateFlowContainerItem = (type: string) => ({
   uuid: v4(),
   wrapperProps: {
     className: 'w-full',
