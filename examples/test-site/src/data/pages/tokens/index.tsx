@@ -26,7 +26,7 @@ import {
 } from '@bodiless/core';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import { withTitle, withDesc } from '@bodiless/layouts';
-import { useNode } from '@bodiless/core/src';
+import { useNode } from '@bodiless/core';
 import {
   TokenLibrary, withTokenNamesFromData, withTokensFromProps, TokenPrinter,
   withTokenPrinterKeys, withReactivateOnRemount,
