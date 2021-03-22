@@ -13,7 +13,6 @@
  */
 
 import React, { FC, ComponentType, HTMLProps } from 'react';
-import { Link } from 'gatsby';
 import { flow } from 'lodash';
 import {
   designable,
@@ -23,6 +22,7 @@ import {
   replaceWith,
   withDesign,
 } from '@bodiless/fclasses';
+import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import { asEditableImagePlain as asEditableImage } from '../Image';
 
 type LogoComponents = {
@@ -36,7 +36,7 @@ export type Props = DesignableComponentsProps<LogoComponents> & HTMLProps<HTMLEl
 const logoComponents:LogoComponents = {
   SiteReturn: Div,
   SiteLogo: Img,
-  SiteLink: Link,
+  SiteLink: GatsbyLink,
 };
 const LogoClean: FC<Props> = ({ components }) => {
   const {
@@ -47,7 +47,7 @@ const LogoClean: FC<Props> = ({ components }) => {
 
   return (
     <SiteReturn>
-      <SiteLink to="/">
+      <SiteLink href="/">
         <SiteLogo />
       </SiteLink>
     </SiteReturn>
