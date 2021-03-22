@@ -22,11 +22,11 @@ import {
   ToutClean, asAccordionBody, asAccodionTitle, asAccordionWrapper,
 } from '@bodiless/organisms';
 import {
-  withActivateOnEffect, withNodeKey, WithNodeKeyProps, withNode, withNodeDataHandlers,
+  withActivateOnEffect, withNodeKey, WithNodeKeyProps, withNode,
+  withNodeDataHandlers, useNode,
 } from '@bodiless/core';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import { withTitle, withDesc } from '@bodiless/layouts';
-import { useNode } from '@bodiless/core';
 import {
   TokenLibrary, withTokenNamesFromData, withTokensFromProps, TokenPrinter,
   withTokenPrinterKeys, withReactivateOnRemount,
