@@ -12,10 +12,16 @@
  * limitations under the License.
  */
 
+/* eslint-disable max-len */
+
 import React from 'react';
 import { graphql } from 'gatsby';
-import { flowRight } from 'lodash';
-import { Page } from '@bodiless/gatsby-theme-bodiless';
+import flow from 'lodash/flow';
+import {
+  Page,
+  GatsbyImagePresets,
+  withGatsbyImagePreset,
+} from '@bodiless/gatsby-theme-bodiless';
 import { withNode, withNodeKey } from '@bodiless/core';
 import {
   A,
@@ -32,20 +38,13 @@ import Layout from '../../../components/Layout';
 import {
   asEditableImageWithPlaceholder,
   asLinkableImage,
-  FluidGatsbyImage,
-  FluidNoBase64GatsbyImage,
-  FluidTracedSVGGatsbyImage,
-  FluidWithWebpGatsbyImage,
-  FluidWithWebpNoBase64GatsbyImage,
-  FluidWithWebpTracedSVGGatsbyImage,
-  FixedGatsbyImage,
-  FixedNoBase64GatsbyImage,
-  FixedTracedSVGGatsbyImage,
-  FixedWithWebpGatsbyImage,
-  FixedWithWebpNoBase64GatsbyImage,
-  FixedWithWebpTracedSVGGatsbyImage,
   asContentfulImage,
+  asBaseEditableImagePlain as asBaseEditableImage,
 } from '../../../components/Image';
+import {
+  withImageRoundedCorners,
+  withGatsbyImageRoundedCorners,
+} from '../../../components/Image/token';
 import {
   asHeader1,
   asHeader2,
@@ -63,9 +62,39 @@ import ImageResponsiveSvgSrc from './responsive_asvg.svg';
 import ContentfulImage1 from '../../../components/Contentful/Image/image1';
 import ContentfulImage2 from '../../../components/Contentful/Image/image2';
 
+const asFluidGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.Fluid)(asBaseEditableImage);
+const asFluidNoBase64GatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FluidNoBase64)(asBaseEditableImage);
+const asFluidTracedSVGGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FluidTracedSVG)(asBaseEditableImage);
+const asFluidWithWebpGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FluidWithWebp)(asBaseEditableImage);
+const asFluidWithWebpNoBase64GatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FluidWithWebpNoBase64)(asBaseEditableImage);
+const asFluidWithWebpTracedSVGGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FluidWithWebpTracedSVG)(asBaseEditableImage);
+const asFixedGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.Fixed)(asBaseEditableImage);
+const asFixedNoBase64GatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedNoBase64)(asBaseEditableImage);
+const asFixedTracedSVGGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedTracedSVG)(asBaseEditableImage);
+const asFixedWithWebpGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedWithWebp)(asBaseEditableImage);
+const asFixedWithWebpNoBase64GatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedWithWebpNoBase64)(asBaseEditableImage);
+const asFixedWithWebpTracedSVGGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedWithWebpTracedSVG)(asBaseEditableImage);
+
+const FluidGatsbyImage = flow(
+  asFluidGatsbyImage(),
+  withGatsbyImageRoundedCorners,
+)(Img);
+const FluidNoBase64GatsbyImage = asFluidNoBase64GatsbyImage()(Img);
+const FluidTracedSVGGatsbyImage = asFluidTracedSVGGatsbyImage()(Img);
+const FluidWithWebpGatsbyImage = asFluidWithWebpGatsbyImage()(Img);
+const FluidWithWebpNoBase64GatsbyImage = asFluidWithWebpNoBase64GatsbyImage()(Img);
+const FluidWithWebpTracedSVGGatsbyImage = asFluidWithWebpTracedSVGGatsbyImage()(Img);
+const FixedGatsbyImage = asFixedGatsbyImage()(Img);
+const FixedNoBase64GatsbyImage = asFixedNoBase64GatsbyImage()(Img);
+const FixedTracedSVGGatsbyImage = asFixedTracedSVGGatsbyImage()(Img);
+const FixedWithWebpGatsbyImage = asFixedWithWebpGatsbyImage()(Img);
+const FixedWithWebpNoBase64GatsbyImage = asFixedWithWebpNoBase64GatsbyImage()(Img);
+const FixedWithWebpTracedSVGGatsbyImage = asFixedWithWebpTracedSVGGatsbyImage()(Img);
+
 const ImageAnimatedPng = asEditableImageWithPlaceholder(ImageAnimatedPngSrc)('animatedPng')(Img);
 const ImageGif = asEditableImageWithPlaceholder(ImageGifSrc)('gif')(Img);
 const ImageJpg = asEditableImageWithPlaceholder(ImageJpgSrc)('jpg')(Img);
+const RoundedImageJpg = withImageRoundedCorners(ImageJpg);
 const ImagePng = asEditableImageWithPlaceholder(ImagePngSrc)('png')(Img);
 const ImageSvg = asEditableImageWithPlaceholder(ImageSvgSrc)('svg')(Img);
 const ImageResponsiveSvg = asEditableImageWithPlaceholder(ImageResponsiveSvgSrc)('responsiveSvg')(Img);
@@ -82,25 +111,32 @@ const ImageContentful1 = asContentfulImage(ContentfulImage1)('ContentfulImage1')
 const ImageContentful2 = asContentfulImage(ContentfulImage2)('ContentfulImage2')(Img);
 
 const PageTitle = asHeader1(H1);
-const PageSection = flowRight(
-  addClasses('my-4'),
+const PageSection = flow(
+  addClasses('my-4 flex flex-wrap w-full'),
 )(Section);
-const EditableImagesSection = flowRight(
+const EditableImagesSection = flow(
+  withNode,
   withNodeKey('editableImages'),
-  withNode,
 )(PageSection);
-const LinkableImagesSection = flowRight(
+const LinkableImagesSection = flow(
+  withNode,
   withNodeKey('linkableImages'),
-  withNode,
 )(PageSection);
-const ImageWrapper = flowRight(
+const ImageWrapper = flow(
   addClasses('inline-block p-2'),
 )(Div);
-const GatsbyImageWrapper = flowRight(
+const GatsbyImageWrapper = flow(
   removeClasses('inline-block'),
-  addClasses('block'),
+  addClasses('block w-1/2'),
 )(ImageWrapper);
-const ImageSectionTitle = asHeader2(H2);
+const FixedGatsbyImageWrapper = flow(
+  removeClasses('w-1/2'),
+  addClasses('w-full lg:w-1/2'),
+)(GatsbyImageWrapper);
+const ImageSectionTitle = flow(
+  addClasses('w-full'),
+  asHeader2,
+)(H2);
 const ImageTitle = asHeader3(H3);
 
 export default (props: any) => (
@@ -138,36 +174,37 @@ export default (props: any) => (
           <ImageTitle>Fluid With Webp TracedSVG</ImageTitle>
           <FluidWithWebpTracedSVGGatsbyImage nodeKey="fluidWithWebpTracedSVG" />
         </GatsbyImageWrapper>
-
-        <GatsbyImageWrapper>
+      </PageSection>
+      <PageSection>
+        <FixedGatsbyImageWrapper>
           <ImageTitle>Fixed</ImageTitle>
           <FixedGatsbyImage nodeKey="fixed" />
-        </GatsbyImageWrapper>
+        </FixedGatsbyImageWrapper>
 
-        <GatsbyImageWrapper>
+        <FixedGatsbyImageWrapper>
           <ImageTitle>Fixed No Base64</ImageTitle>
           <FixedNoBase64GatsbyImage nodeKey="fixedNoBase64" />
-        </GatsbyImageWrapper>
+        </FixedGatsbyImageWrapper>
 
-        <GatsbyImageWrapper>
+        <FixedGatsbyImageWrapper>
           <ImageTitle>Fixed Traced SVG</ImageTitle>
           <FixedTracedSVGGatsbyImage nodeKey="fixedTracedSVG" />
-        </GatsbyImageWrapper>
+        </FixedGatsbyImageWrapper>
 
-        <GatsbyImageWrapper>
+        <FixedGatsbyImageWrapper>
           <ImageTitle>Fixed With Webp</ImageTitle>
           <FixedWithWebpGatsbyImage nodeKey="fixedWithWebp" />
-        </GatsbyImageWrapper>
+        </FixedGatsbyImageWrapper>
 
-        <GatsbyImageWrapper>
+        <FixedGatsbyImageWrapper>
           <ImageTitle>Fixed With Webp No Base64</ImageTitle>
           <FixedWithWebpNoBase64GatsbyImage nodeKey="fixedWithWebpNoBase64" />
-        </GatsbyImageWrapper>
+        </FixedGatsbyImageWrapper>
 
-        <GatsbyImageWrapper>
+        <FixedGatsbyImageWrapper>
           <ImageTitle>Fixed With Webp Traced SVG</ImageTitle>
           <FixedWithWebpTracedSVGGatsbyImage nodeKey="fixedWithWebpTracedSVG" />
-        </GatsbyImageWrapper>
+        </FixedGatsbyImageWrapper>
       </PageSection>
 
       <EditableImagesSection>
@@ -175,7 +212,7 @@ export default (props: any) => (
 
         <ImageWrapper>
           <ImageTitle>JPG</ImageTitle>
-          <ImageJpg />
+          <RoundedImageJpg />
         </ImageWrapper>
 
         <ImageWrapper>
@@ -238,13 +275,13 @@ export default (props: any) => (
       </LinkableImagesSection>
       <PageSection>
         <ImageSectionTitle>Contentful Image Components</ImageSectionTitle>
-        <ImageWrapper>
+        <GatsbyImageWrapper>
           <ImageContentful1 />
-        </ImageWrapper>
+        </GatsbyImageWrapper>
 
-        <ImageWrapper>
+        <GatsbyImageWrapper>
           <ImageContentful2 />
-        </ImageWrapper>
+        </GatsbyImageWrapper>
       </PageSection>
       <PageSection>
         <ImageSectionTitle>Images in a flow container</ImageSectionTitle>
@@ -258,5 +295,6 @@ export const query = graphql`
   query($slug: String!) {
     ...PageQuery
     ...SiteQuery
+    ...DefaultContentQuery
   }
 `;

@@ -12,62 +12,89 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
+import React, { ComponentType as CT, HTMLProps } from 'react';
 import GatsbyImg from 'gatsby-image';
 import {
   ifEditable,
-  ifToggledOn,
   withActivatorWrapper,
 } from '@bodiless/core';
+import type { ImageData } from '@bodiless/components';
 import type {
   FluidObject,
   FixedObject,
   GatsbyImageOptionalProps,
 } from 'gatsby-image';
-import { addClasses, Div } from '@bodiless/fclasses';
-import { flow } from 'lodash';
+import {
+  addClasses, DesignableComponentsProps, Div, withDesign, withoutProps, designable,
+} from '@bodiless/fclasses';
+import flow from 'lodash/flow';
+import GatsbyImagePresets from './GatsbyImagePresets';
 
-type ImageProps = {
-  src: string;
-  alt: string;
-  title: string;
+type Components = {
+  GatsbyImage: CT<any>,
+  Image: CT<any>,
 };
 
-export type GasbyImageProps = ImageProps & {
-  preset: string;
+export type GatsbyImageData = ImageData & {
+  preset: GatsbyImagePresets;
   gatsbyImg?: { fluid: FluidObject | FluidObject[] } | { fixed: FixedObject | FixedObject[] };
-} & GatsbyImageOptionalProps;
+};
 
-const isGatsbyImage = ({ gatsbyImg }: GasbyImageProps) => gatsbyImg !== undefined;
+export type GasbyImageProps = HTMLProps<HTMLImageElement>
+& GatsbyImageData
+& GatsbyImageOptionalProps & DesignableComponentsProps<Components>;
 
-const asGatsbyImage$ = (Component: CT<any>) => {
-  const AsGatsbyImage = (props: GasbyImageProps) => {
-    const { gatsbyImg, preset, ...rest } = props;
+const asDesignableGatsbyImage = (Component: CT<any>) => {
+  const startComponents: Components = {
+    GatsbyImage: GatsbyImg,
+    Image: Component,
+  };
+  const AsDesignableGatsbyImage = (props: GasbyImageProps) => {
+    const {
+      components, gatsbyImg, preset, ...rest
+    } = props;
+    const {
+      GatsbyImage,
+      Image,
+    } = components;
     if (gatsbyImg !== undefined) {
       return (
-        <GatsbyImg {...rest} {...gatsbyImg} />
+        <GatsbyImage {...rest} {...gatsbyImg} />
       );
     }
     return (
-      <Component {...rest} />
+      <Image {...rest} />
     );
   };
-  return AsGatsbyImage;
+  return designable(startComponents, 'GatsbyImage')(AsDesignableGatsbyImage);
 };
 
 const withActivatorWrapperDefaultStyles = addClasses('bl-w-full');
 
 const asGatsbyImage = flow(
-  asGatsbyImage$,
-  ifEditable(
-    ifToggledOn(isGatsbyImage)(
+  asDesignableGatsbyImage,
+  withDesign({
+    GatsbyImage: ifEditable(
       withActivatorWrapper(
         'onClick',
         withActivatorWrapperDefaultStyles(Div),
       ),
     ),
-  ),
+  }),
 );
 
+export const isGatsbyImage = ({ gatsbyImg }: GasbyImageProps) => gatsbyImg !== undefined;
+
+/**
+ * hoc to remove props configured for GatsbyImage in image data
+ * and to remove props added during image gatsby nodes creation
+ *
+ * it can be useful for cases when an image is procesed by gatsby
+ * but Gatsby Image is not enabled for the image
+ */
+export const withoutGatsbyImageProps = withoutProps([
+  'preset',
+  'gatsbyImg',
+]);
+
 export default asGatsbyImage;
-export { isGatsbyImage };

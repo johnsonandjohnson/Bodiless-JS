@@ -28,8 +28,9 @@ import {
 import { withDesign } from '@bodiless/fclasses';
 import { startWithGatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import {
-  asEditableImage, asEditableLink,
+  asEditableLink,
 } from '../Elements.token';
+import { asEditableImage } from '../Image';
 import {
   withEditorBasic,
   withEditorSimple,
@@ -93,3 +94,4 @@ export const asContentfulTout = (content: object) => flow(
 
 const Tout = asEditableTout(ToutClean);
 export default Tout;
+export { asTestableTout };

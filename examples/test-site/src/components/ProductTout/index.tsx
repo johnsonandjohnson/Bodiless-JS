@@ -22,8 +22,8 @@ import { BVInlineRatings } from '@bodiless/bv';
 import { withEditorBasic, withEditorSimple } from '../Editors';
 import {
   asEditableLink,
-  asEditableImage,
 } from '../Elements.token';
+import { asEditableImagePlain as asEditableImage } from '../Image';
 import { asProductToutDefaultStyle } from './token';
 
 export const asProductTout = flow(

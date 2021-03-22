@@ -28,7 +28,8 @@
     "build-css.js",
     "create-node.js",
     "tailwind.base.config.js",
-    "/doc"
+    "/doc",
+    "bodiless.content.json"
   ],
   "repository": {
     "type": "git",
@@ -38,14 +39,16 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build": "npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
     "build:api-doc": "typedoc --out doc/api --mode file",
-    "clean": "rimraf -rf \"dist\" && rimraf index* && rimraf \"doc/api\""
+    "clean": "rimraf -rf \"dist\" && rimraf index* && rimraf \"doc/api\"",
+    "copy": "copyfiles -u 1 \"./src/dist/**/*.{json,jpg,png}\" \".\""
   },
   "dependencies": {
     "@bodiless/core": "^0.0.70",
     "@bodiless/core-ui": "^0.0.70",
+    "@bodiless/components": "^0.0.70",
     "@bodiless/fclasses": "^0.0.70",
     "@bodiless/layouts": "^0.0.70",
     "@bodiless/organisms": "^0.0.70",
@@ -57,6 +60,9 @@
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
     "find-up": "^4.1.0",
+    "md5-file": "^5.0.0",
+    "fast-glob": "^3.2.5",
+    "fs-extra": "^8.1.0",
     "gatsby-image": "^2.4.16",
     "gatsby-plugin-emotion": "^2.0.6",
     "gatsby-plugin-google-fonts": "^0.0.4",

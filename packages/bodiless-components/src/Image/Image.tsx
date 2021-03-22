@@ -33,8 +33,8 @@ import {
 import { useDropzone } from 'react-dropzone';
 import { withFieldApi } from 'informed';
 import type { FieldApi } from 'informed';
-import BackendSave from './BackendSave';
-import withPropsFromPlaceholder from './withPropsFromPlaceholder';
+import BackendSave from '../BackendSave';
+import withPropsFromPlaceholder from '../withPropsFromPlaceholder';
 // @ts-ignore fails when it is imported by jest.
 import Placeholder from './placeholder.png';
 
@@ -210,9 +210,10 @@ const options: BodilessOptions<Props, Data> = {
 
 export const withImagePlaceholder = withPropsFromPlaceholder(['src']);
 
-export type AsBodilessImage = AsBodiless<HTMLProps<HTMLImageElement>, Data>;
+export type AsBodilessImage = AsBodiless<ImageProps, Data>;
 
 export const asBodilessImage: AsBodilessImage = asBodilessComponent(options);
+export type ImageToken = ReturnType<AsBodilessImage>;
 
 const Image = asBodilessImage()('img');
 
