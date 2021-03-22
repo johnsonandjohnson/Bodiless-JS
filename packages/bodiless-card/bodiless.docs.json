@@ -1,0 +1,9 @@
+{
+  "Components": {
+    "assets": {
+      "CardFilter.jpg": "./doc/assets/CardFilter.jpg",
+      "CardResize.jpg": "./doc/assets/CardResize.jpg",
+      "CardMove.jpg": "./doc/assets/CardMove.jpg"
+    }
+  }
+}

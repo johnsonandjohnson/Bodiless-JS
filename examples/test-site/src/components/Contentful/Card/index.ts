@@ -12,14 +12,10 @@
  * limitations under the License.
  */
 
-const path = require('path');
+import GivingBackToCommunity from './GivingBackToCommunity';
+import WantToLearnMore from './WantToLearnMore';
 
-const getConfig = () => [
-  path.resolve(__dirname, './Card'),
-  path.resolve(__dirname, './Tout'),
-  path.resolve(__dirname, './Image'),
-];
-
-module.exports = {
-  getConfig,
+export {
+  GivingBackToCommunity,
+  WantToLearnMore,
 };

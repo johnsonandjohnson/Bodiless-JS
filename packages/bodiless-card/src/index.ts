@@ -12,14 +12,18 @@
  * limitations under the License.
  */
 
-const path = require('path');
+export {
+  CardClean,
+  asTestableCard,
+} from './components/Cards';
 
-const getConfig = () => [
-  path.resolve(__dirname, './Card'),
-  path.resolve(__dirname, './Tout'),
-  path.resolve(__dirname, './Image'),
-];
-
-module.exports = {
-  getConfig,
-};
+export {
+  asCardHorizontal,
+  asCardVertical,
+  asCardNoTitle,
+  asCardNoBody,
+  asCardNoBodyNoTitle,
+  asCardNoCta,
+  asCardOverlayTitle,
+  asCardOverlayCta,
+} from './components/Cards.tokens';

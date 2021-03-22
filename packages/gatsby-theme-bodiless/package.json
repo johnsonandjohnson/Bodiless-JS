@@ -53,6 +53,7 @@
     "@bodiless/layouts": "^0.0.70",
     "@bodiless/organisms": "^0.0.70",
     "@bodiless/ui": "^0.0.70",
+    "@bodiless/card": "^0.0.70",
     "@types/nodegit": "^0.26.11",
     "@types/walk": "^2.3.0",
     "autoprefixer": "^10.2.4",

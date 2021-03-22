@@ -14,6 +14,7 @@
 import { flow } from 'lodash';
 import { withMandatoryCategories } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
+import withCardVariations from './withCardVariations';
 import withToutVariations from './withToutVariations';
 import withRichTextVariations from './withRichTextVariations';
 import withImageVariations from './withImageVariations';
@@ -27,6 +28,7 @@ import { asFlowContainerWithMargins } from './token';
 const FlowContainerDefault = flow(
   withRichTextVariations,
   withImageVariations,
+  withCardVariations,
   withToutVariations,
   asFlowContainerWithMargins,
   withIframeVariations,
