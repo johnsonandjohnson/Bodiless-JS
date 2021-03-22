@@ -1,12 +1,13 @@
 import { flow } from 'lodash';
 import {
-  addClasses, withDesign, HOC, replaceWith, A, stylable,
+  addClasses, withDesign, HOC, replaceWith, stylable,
 } from '@bodiless/fclasses';
 import {
   asBodilessList,
   withSubListDesign, withSubLists, asBodilessChameleon, asEditable,
 } from '@bodiless/components';
 import { withNode } from '@bodiless/core';
+import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import { asLink, asEditableLink } from '../../../components/Elements.token';
 import { asToggledSubList } from './ListDemo';
 import { withItemMargin } from './SimpleListDemo';
@@ -16,7 +17,7 @@ import { withItemMargin } from './SimpleListDemo';
  */
 export const withLinkTitle = withDesign({
   Title: flow(
-    replaceWith(A),
+    replaceWith(GatsbyLink),
     asLink,
     asEditableLink('link'),
     asEditable('text', 'List Item'),
