@@ -14,6 +14,7 @@
 
 import React, { FC, ComponentType, HTMLProps } from 'react';
 import { flow } from 'lodash';
+import { withSidecarNodes } from '@bodiless/core';
 import {
   designable,
   DesignableComponentsProps,
@@ -21,9 +22,11 @@ import {
   Img,
   replaceWith,
   withDesign,
+  addProps,
 } from '@bodiless/fclasses';
 import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import { asEditableImagePlain as asEditableImage } from '../Image';
+import { asEditableLink } from '../Elements.token';
 
 type LogoComponents = {
   SiteReturn: ComponentType<any>,
@@ -47,7 +50,7 @@ const LogoClean: FC<Props> = ({ components }) => {
 
   return (
     <SiteReturn>
-      <SiteLink href="/">
+      <SiteLink>
         <SiteLogo />
       </SiteLink>
     </SiteReturn>
@@ -61,6 +64,14 @@ const asLogo = flow(
   designable(logoComponents, 'Logo'),
   withDesign({
     SiteLogo: replaceWith(LogoImg),
+    SiteLink: flow(
+      withSidecarNodes(
+        asEditableLink({ nodeKey: 'logolink', nodeCollection: 'site' }),
+      ),
+      addProps({
+        href: '/',
+      }),
+    ),
   }),
 );
 
