@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,15 +12,4 @@
  * limitations under the License.
  */
 
-import asBodilessLink, { withoutLinkWhenLinkDataEmpty } from './asBodilessLink';
-import type { NormalHref } from './NormalHref';
-import type { AsBodilessLink, LinkData, Props } from './types';
-import DefaultNormalHref from './NormalHref';
-
-export { asBodilessLink, DefaultNormalHref, withoutLinkWhenLinkDataEmpty };
-export type {
-  NormalHref,
-  AsBodilessLink,
-  LinkData,
-  Props as BodilessLinkProps,
-};
+export * from './asGatsbyLink';

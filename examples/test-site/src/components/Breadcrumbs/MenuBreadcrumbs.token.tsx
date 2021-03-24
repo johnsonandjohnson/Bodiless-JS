@@ -36,6 +36,7 @@ import {
   Span,
   Fragment,
 } from '@bodiless/fclasses';
+import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 
 import {
   asBold,
@@ -65,7 +66,7 @@ const withEditableStartingTrail = (
         asLink,
         withNode,
         withNodeKey(nodeKeys),
-      )(A),
+      )(GatsbyLink),
     ),
   }),
 );
