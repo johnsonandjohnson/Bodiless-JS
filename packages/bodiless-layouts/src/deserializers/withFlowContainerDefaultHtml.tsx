@@ -14,7 +14,7 @@
 
 /* eslint-disable import/prefer-default-export */
 
-import React, { ComponentType } from 'react';
+import React, { ComponentType, useMemo } from 'react';
 import { withDefaultContent } from '@bodiless/core';
 import flow from 'lodash/flow';
 import { deserializeHtml } from './htmlDeserializer';
@@ -25,7 +25,7 @@ const withFlowContainerDefaultHtml = (deserializers: Deserializer[], html?: stri
     const { html: htmlFromProps, ...rest } = props;
     const html$ = htmlFromProps || html;
     const content = deserializeHtml(html$, deserializers);
-    return <Component content={content} {...rest} />;
+    return useMemo(() => <Component content={content} {...rest} />, [html$]);
   };
   return flow(
     withDefaultContent({}),
