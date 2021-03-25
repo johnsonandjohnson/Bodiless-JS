@@ -13,15 +13,22 @@
  */
 import React from 'react';
 import { flow } from 'lodash';
+import resolveConfig from 'tailwindcss/resolveConfig';
+import { getSnapFrom, withTailwindClasses } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withProductVariations from './withProductVariations';
 import { asFilterableProductContainer } from '../ProductTout/token';
 import { asFlowContainerWithMargins, asFlowContainerFullWidth } from '../FlowContainer/token';
+import tailWindConfig from '../../../tailwind.config';
+
+const snapData = getSnapFrom(
+  withTailwindClasses(resolveConfig(tailWindConfig))('w-1/3'),
+);
 
 const withProductStrictSnapSize = Component => props => (
   <Component
     {...props}
-    snapData={() => ({ className: 'w-1/3' })}
+    snapData={snapData}
   />
 );
 
