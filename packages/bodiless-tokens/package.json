@@ -1,7 +1,7 @@
 {
-  "name": "@bodiless/fclasses",
+  "name": "@bodiless/tokens",
   "version": "0.0.70",
-  "description": "Allows for the injection of functional class into components.",
+  "description": "Utilities for browsing and organizing tokens.",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
   "license": "Apache-2.0",
@@ -30,7 +30,13 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
+    "@bodiless/fclasses": "^0.0.70",
+    "@bodiless/core": "^0.0.70",
+    "@bodiless/layouts-ui": "^0.0.70",
+    "@bodiless/layouts": "^0.0.70",
+    "informed": "~3.13.1",
     "lodash": "^4.17.19",
+    "mobx-react-lite": "^1.3.1",
     "uuid": "^3.3.2"
   },
   "peerDependencies": {

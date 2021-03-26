@@ -24,7 +24,8 @@ import {
   ToutClean,
   asTestableTout,
 } from '@bodiless/organisms';
-import { withDesign } from '@bodiless/fclasses';
+import { withDesign, startWith, Token } from '@bodiless/fclasses';
+import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import {
   asEditableLink,
 } from '../Elements.token';
@@ -37,8 +38,11 @@ import {
 export const withToutEditors = flow(
   withDesign({
     Image: asEditableImage('image'),
-    ImageLink: withSidecarNodes(
-      asEditableLink('link'),
+    ImageLink: flow(
+      withSidecarNodes(
+        asEditableLink('link'),
+      ),
+      startWith(GatsbyLink),
     ),
     Title: withEditorSimple('title', 'Tout Title Text'),
     Link: flow(
@@ -46,6 +50,7 @@ export const withToutEditors = flow(
       withSidecarNodes(
         asEditableLink('link', undefined, () => ({ groupLabel: 'CTA' })),
       ),
+      startWith(GatsbyLink),
     ),
     Body: withEditorBasic('body', 'Tout Body Text'),
   }),
@@ -77,7 +82,7 @@ export const withToutResetButtons = withDesign({
 export const asEditableTout = flow(
   withToutEditors,
   asTestableTout,
-);
+) as Token;
 
 export const asContentfulTout = (content: object) => flow(
   withToutEditors,

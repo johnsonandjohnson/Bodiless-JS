@@ -54,7 +54,6 @@ const modifyClassesIf = (operation: 'add' | 'remove') => (condition: Condition) 
     ModifyClasses.displayName = `${capitalize(operation)}Classes`;
     return ModifyClasses;
   };
-  hoc.flow = hoc as HOC;
   return hoc;
 };
 

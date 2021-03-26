@@ -15,7 +15,7 @@
 import { flow } from 'lodash';
 
 import {
-  withDesign, HOC,
+  withDesign, HOC, Token,
 } from '@bodiless/fclasses';
 import { WithNodeKeyProps } from '@bodiless/core';
 import {
@@ -57,7 +57,7 @@ const withMenuDesign = (design: any): HOC => {
   return flow(
     withSubMenuDesign(withDesign$) as HOC,
     withDesign$ as HOC,
-  ) as HOC;
+  ) as Token;
 };
 
 /**
