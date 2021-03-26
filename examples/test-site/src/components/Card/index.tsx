@@ -24,7 +24,8 @@ import {
   CardClean,
   asTestableCard,
 } from '@bodiless/card';
-import { withDesign } from '@bodiless/fclasses';
+import { withDesign, startWith, Token } from '@bodiless/fclasses';
+import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import {
   asEditableLink,
 } from '../Elements.token';
@@ -37,8 +38,11 @@ import {
 export const withCardEditors = flow(
   withDesign({
     Image: asEditableImage('image'),
-    ImageLink: withSidecarNodes(
-      asEditableLink('link'),
+    ImageLink: flow(
+      withSidecarNodes(
+        asEditableLink('link'),
+      ),
+      startWith(GatsbyLink),
     ),
     Title: withEditorSimple('title', 'Card Title Text'),
     Link: flow(
@@ -46,6 +50,7 @@ export const withCardEditors = flow(
       withSidecarNodes(
         asEditableLink('link', undefined, () => ({ groupLabel: 'CTA' })),
       ),
+      startWith(GatsbyLink),
     ),
     Body: withEditorBasic('body', 'Card Body Text'),
   }),
@@ -77,7 +82,7 @@ export const withCardResetButtons = withDesign({
 export const asEditableCard = flow(
   withCardEditors,
   asTestableCard,
-);
+) as Token;
 
 export const asContentfulCard = (content: object) => flow(
   withCardEditors,
