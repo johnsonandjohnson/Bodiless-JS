@@ -113,14 +113,12 @@ describe('htmlDeserializer', () => {
         </div>
       `;
       const flowContainerData = deserializeHtml(inputHtml, deserializers);
-      expect(flowContainerData[''].items.length).toBe(7);
+      expect(flowContainerData[''].items.length).toBe(5);
       expect(flowContainerData[''].items[0].type).toBe('RTE');
       expect(flowContainerData[''].items[1].type).toBe('List');
       expect(flowContainerData[''].items[2].type).toBe('RTE');
-      expect(flowContainerData[''].items[3].type).toBe('RTE');
-      expect(flowContainerData[''].items[4].type).toBe('List');
-      expect(flowContainerData[''].items[5].type).toBe('RTE');
-      expect(flowContainerData[''].items[6].type).toBe('RTE');
+      expect(flowContainerData[''].items[3].type).toBe('List');
+      expect(flowContainerData[''].items[4].type).toBe('RTE');
     });
   });
 });

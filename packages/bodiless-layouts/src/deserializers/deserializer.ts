@@ -12,24 +12,16 @@
  * limitations under the License.
  */
 
-/* eslint-disable import/prefer-default-export */
-
-import type { Deserializer } from './deserializer';
-import { createFlowContainerItem } from './createFlowContainerItem';
 import type { FlowContainerItem } from './createFlowContainerItem';
 
-export const createDefaultDeserializer = (type: string) => ({
-  type,
-  match: element => element.querySelectorAll('ul,ol').length === 0,
-  map: (element, elementIndex) => createFlowContainerItem({
-    type,
-    element,
-    elementIndex,
-  }),
-  deserialize: (item: FlowContainerItem) => ({
-    [item.uuid.concat('$text')]: {
-      text: `${item.type}-${item.uuid}`,
-    },
-  }),
-  merge: true,
-}) as Deserializer;
+export type FlowContainerItemData = {
+  [ itemNodeKey: string ] : any;
+};
+
+export type Deserializer = {
+  type: string,
+  match: (element: Element) => boolean,
+  map: (elements: Element[], elementIndex: number) => FlowContainerItem,
+  deserialize: (item: FlowContainerItem, elements: Element[]) => FlowContainerItemData,
+  merge: boolean,
+};

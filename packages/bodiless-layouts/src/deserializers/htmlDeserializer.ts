@@ -13,64 +13,56 @@
  */
 
 import omit from 'lodash/omit';
-
-export type FlowContainerItem = {
-  uuid: string,
-  wrapperProps: { [key: string]: string; },
-  type: string,
-};
-
-type FlowContainerItemData = {
-  [ itemNodeKey: string ] : any;
-};
+import type {
+  Deserializer,
+  FlowContainerItemData,
+} from './deserializer';
+import type { FlowContainerItem } from './createFlowContainerItem';
+import flattenElement from './flattenElement';
 
 type FlowContainerData = {
-  '': {
+  [rootNodeKey: string]: {
     items: FlowContainerItem[],
   },
 } & FlowContainerItemData;
 
-export type Deserializer = {
-  type: string,
-  match: (element: Element) => boolean,
-  map: (element: Element) => FlowContainerItem,
-  deserialize: (item: FlowContainerItem, html: string) => FlowContainerItemData,
-};
+const ROOT_NODE_KEY = '';
 
-type DeserializeElement = (element: Element, deserializers: Deserializer[]) => FlowContainerData;
-
-const deserializeElement: DeserializeElement = (
+type DeserializeElementArgs = {
   element: Element,
   deserializers: Deserializer[],
-) => {
-  const deserializer = deserializers.find(
-    deserializer$ => deserializer$.match(element),
-  );
-  if (deserializer !== undefined) {
-    const flowContainerItem = deserializer.map(element);
-    return {
-      '': {
-        items: [flowContainerItem],
-      },
-      ...deserializer.deserialize(flowContainerItem, element.outerHTML),
-    };
-  }
+};
+export type DeserializeElement = (args: DeserializeElementArgs) => FlowContainerData;
 
-  const initialFlowContainerData = { '': { items: [] } };
-  const flowContainerData = Array.from(element.children).reduce<FlowContainerData>((
-    previousValue: FlowContainerData,
-    currentValue: Element,
+const deserializeElement: DeserializeElement = ({
+  element,
+  deserializers,
+}) => {
+  const flattenedElements = flattenElement({
+    element,
+    deserializers,
+  });
+  const initialFlowContainerData = { [ROOT_NODE_KEY]: { items: [] } };
+  const flowContainerData = flattenedElements
+    .reduce<FlowContainerData>((
+    prevValue,
+    curValue,
+    index,
   ) => {
-    const currentFlowContainerData = deserializeElement(currentValue, deserializers);
+    const flowContainerItem = curValue.deserializer.map(curValue.elements, index);
+    const deserializedItems = curValue.deserializer.deserialize(
+      flowContainerItem,
+      curValue.elements,
+    );
     return {
-      '': {
+      [ROOT_NODE_KEY]: {
         items: [
-          ...previousValue[''].items,
-          ...currentFlowContainerData[''].items,
+          ...prevValue[ROOT_NODE_KEY].items,
+          flowContainerItem,
         ],
       },
-      ...omit(previousValue, ''),
-      ...omit(currentFlowContainerData, ''),
+      ...omit(prevValue, [ROOT_NODE_KEY]),
+      ...deserializedItems,
     };
   }, initialFlowContainerData);
   return flowContainerData;
@@ -84,7 +76,10 @@ const deserializeHtml = (
   if (domParser === undefined && typeof DOMParser === 'undefined') return { '': { items: [] } };
   const domParser$ = domParser || new DOMParser();
   const parsed = domParser$.parseFromString(html, 'text/html');
-  return deserializeElement(parsed.body, deserializers);
+  return deserializeElement({
+    element: parsed.body,
+    deserializers,
+  });
 };
 
 export { deserializeHtml };

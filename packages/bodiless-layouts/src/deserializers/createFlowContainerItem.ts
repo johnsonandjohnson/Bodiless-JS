@@ -12,13 +12,37 @@
  * limitations under the License.
  */
 
-import { v4 } from 'uuid';
-import type { FlowContainerItem } from './htmlDeserializer';
+const { createHash } = require('crypto');
 
-export type CreateFlowContainerItem = (type: string) => FlowContainerItem;
+export type FlowContainerItem = {
+  uuid: string,
+  wrapperProps: { [key: string]: string; },
+  type: string,
+};
 
-export const createFlowContainerItem: CreateFlowContainerItem = (type: string) => ({
-  uuid: v4(),
+export type CreateFlowContainerItemArgs = {
+  type: string,
+  element: Element | Element[],
+  elementIndex: number,
+};
+export type CreateFlowContainerItem = (args: CreateFlowContainerItemArgs) => FlowContainerItem;
+
+export const generateUuid = (
+  content: string,
+  index: number,
+) => createHash('md5')
+  .update(JSON.stringify({ content, index }))
+  .digest('hex');
+
+export const createFlowContainerItem: CreateFlowContainerItem = ({
+  type,
+  element,
+  elementIndex,
+}) => ({
+  uuid: generateUuid(
+    Array.isArray(element) ? element.map(element$ => element$.outerHTML).join('') : element.outerHTML,
+    elementIndex,
+  ),
   wrapperProps: {
     className: 'w-full',
   },

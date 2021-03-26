@@ -18,7 +18,7 @@ import React, { ComponentType, useMemo } from 'react';
 import { withDefaultContent } from '@bodiless/core';
 import flow from 'lodash/flow';
 import { deserializeHtml } from './htmlDeserializer';
-import type { Deserializer } from './htmlDeserializer';
+import type { Deserializer } from './deserializer';
 
 const withFlowContainerDefaultHtml = (deserializers: Deserializer[], html?: string) => {
   const withFlowContainerDefaultHtml$ = (Component: ComponentType<any>) => (props: any) => {

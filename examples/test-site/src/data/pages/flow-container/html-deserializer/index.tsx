@@ -53,8 +53,11 @@ const fcDeserializers = [
   createFlowContainerListDeserializer('ChameleonList'),
   {
     ...createFlowContainerDefaultDeserializer('EditorFullFeatured'),
-    deserialize: (item: FlowContainerItem, html: string) => ({
-      [item.uuid]: deserializeRTEHtml(html, createDefaultRTEDeserializers()),
+    deserialize: (item: FlowContainerItem, elements: Element[]) => ({
+      [item.uuid]: deserializeRTEHtml(
+        elements.map(element => element.outerHTML).join(''),
+        createDefaultRTEDeserializers(),
+      ),
     }),
   },
 ] as Deserializer[];

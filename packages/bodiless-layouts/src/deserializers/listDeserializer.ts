@@ -13,22 +13,21 @@
  */
 
 import { v4 } from 'uuid';
-import type { FlowContainerItem, Deserializer } from './htmlDeserializer';
+import type { Deserializer } from './deserializer';
 import { createFlowContainerItem } from './createFlowContainerItem';
+import type { FlowContainerItem } from './createFlowContainerItem';
 
 type ListData = {
   [ itemNodeKey: string ] : any;
 };
 
-const deserializeList = (item: FlowContainerItem, html: string) => {
-  const domParser = new DOMParser();
-  const parsed = domParser.parseFromString(html, 'text/html');
+const deserializeList = (item: FlowContainerItem, elements: Element[]) => {
   let result: ListData = {
     [item.uuid]: {
       items: [],
     },
   };
-  const listElement = parsed.body.firstElementChild;
+  const listElement = elements[0];
   if (listElement === null) return result;
   Array.from(listElement.children).forEach(listItem => {
     if (listItem.tagName === 'LI') {
@@ -63,8 +62,13 @@ const deserializeList = (item: FlowContainerItem, html: string) => {
 const createListDeserializer = (type: string) => ({
   type,
   match: element => ['UL', 'OL'].includes(element.tagName),
-  map: () => createFlowContainerItem(type),
+  map: (element, elementIndex) => createFlowContainerItem({
+    type,
+    element,
+    elementIndex,
+  }),
   deserialize: deserializeList,
+  merge: false,
 }) as Deserializer;
 
 export {
