@@ -53,8 +53,6 @@ const asBodilessMenu = <P extends object>(
     asStylableList,
     withMenuContext,
     withDesign({ Title: asMenuTitle }),
-    // We must use withFinalDesign to ensure that asBreadcrumb uses the correct node
-    // when the item is a sublist. Otherwise, when the item itself is wrapped
     withDesign({
       Item: asBreadcrumb(DEFAULT_NODE_KEYS),
     }),

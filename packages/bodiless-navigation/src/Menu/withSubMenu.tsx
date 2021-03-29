@@ -41,6 +41,8 @@ const asMenuSubList = (
   asStylableList,
   asStylableSubList,
   withDeleteNodeOnUnwrap('sublist'),
+  // We must use withFinalDesign to ensure that asBreadcrumb uses the correct node
+  // when the item is a sublist.
   withFinalDesign({
     Item: asBreadcrumb(DEFAULT_NODE_KEYS),
   }),
