@@ -26,7 +26,7 @@ import {
 import {
   createDefaultDeserializers as createDefaultRTEDeserializers,
   deserializeHtml as deserializeRTEHtml,
-} from '@bodiless/richtext/lib/serializers';
+} from '@bodiless/richtext';
 import {
   deserializeHtml as deserializeFlowContainerHtml,
   withFlowContainerDefaultHtml,
@@ -50,7 +50,7 @@ const TextArea = flow(
 )(BaseTextArea);
 
 const fcDeserializers = [
-  createFlowContainerListDeserializer('ChameleonList'),
+  createFlowContainerListDeserializer('ChameleonList', 'link', 'link$text'),
   {
     ...createFlowContainerDefaultDeserializer('EditorFullFeatured'),
     deserialize: (item: FlowContainerItem, elements: Element[]) => ({

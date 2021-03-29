@@ -12,16 +12,18 @@
  * limitations under the License.
  */
 
-import { v4 } from 'uuid';
 import type { Deserializer } from './deserializer';
-import { createFlowContainerItem } from './createFlowContainerItem';
+import { createFlowContainerItem, generateUuid } from './createFlowContainerItem';
 import type { FlowContainerItem } from './createFlowContainerItem';
 
 type ListData = {
   [ itemNodeKey: string ] : any;
 };
 
-const deserializeList = (item: FlowContainerItem, elements: Element[]) => {
+const deserializeList = (
+  linkKey: string,
+  titleKey: string,
+) => (item: FlowContainerItem, elements: Element[]) => {
   let result: ListData = {
     [item.uuid]: {
       items: [],
@@ -29,12 +31,12 @@ const deserializeList = (item: FlowContainerItem, elements: Element[]) => {
   };
   const listElement = elements[0];
   if (listElement === null) return result;
-  Array.from(listElement.children).forEach(listItem => {
+  Array.from(listElement.children).forEach((listItem, index) => {
     if (listItem.tagName === 'LI') {
-      const itemKey = v4();
+      const itemKey = generateUuid(listItem.innerHTML, index);
       result[item.uuid].items.push(itemKey);
-      const linkNodeKey = `${item.uuid}$${itemKey}$link`;
-      const textNodeKey = `${item.uuid}$${itemKey}$link$text`;
+      const linkNodeKey = [item.uuid, itemKey, linkKey].join('$');
+      const textNodeKey = [item.uuid, itemKey, titleKey].join('$');
       if (listItem.firstElementChild !== null && listItem.firstElementChild.tagName === 'A') {
         const href = listItem.firstElementChild.getAttribute('href');
         result = {
@@ -59,7 +61,7 @@ const deserializeList = (item: FlowContainerItem, elements: Element[]) => {
   return result;
 };
 
-const createListDeserializer = (type: string) => ({
+const createListDeserializer = (type: string, linkKey: string, titleKey: string) => ({
   type,
   match: element => ['UL', 'OL'].includes(element.tagName),
   map: (element, elementIndex) => createFlowContainerItem({
@@ -67,7 +69,7 @@ const createListDeserializer = (type: string) => ({
     element,
     elementIndex,
   }),
-  deserialize: deserializeList,
+  deserialize: deserializeList(linkKey, titleKey),
   merge: false,
 }) as Deserializer;
 
