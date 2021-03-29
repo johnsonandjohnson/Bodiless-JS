@@ -14,8 +14,8 @@
 
 import { flowRight } from 'lodash';
 import { ifReadOnly } from '@bodiless/core';
-import { withYouTubePlayerSettings } from '@bodiless/components';
-import type { YouTubePlayerSettings } from '@bodiless/components';
+import { withYouTubePlayerSettings } from '@bodiless/youtube';
+import type { YouTubePlayerSettings } from '@bodiless/youtube';
 import {
   Embed,
   asResponsiveYouTube as asBaseResponsiveYouTube,

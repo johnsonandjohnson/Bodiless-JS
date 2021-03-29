@@ -13,20 +13,14 @@
  */
 
 import React, {
-  useCallback,
-  ComponentType,
-  useState,
-  useEffect,
-  useContext,
+  useCallback, ComponentType, useState, useEffect, useContext,
 } from 'react';
 import { flowRight } from 'lodash';
 import { useMenuOptionUI } from '@bodiless/core';
-import type { AsBodiless } from '@bodiless/core';
 import { addProps } from '@bodiless/fclasses';
-import withFormHeader from './withFormHeader';
-import withFormSnippet from './withFormSnippet';
-import { asBaseBodilessIframe } from './Iframe';
-import type { IframeProps, IframeData } from './Iframe';
+import { withFormHeader, withFormSnippet, asBaseBodilessIframe } from '@bodiless/components';
+import type { AsBodiless } from '@bodiless/core';
+import type { IframeProps, IframeData } from '@bodiless/components';
 
 /**
  * YouTube embed player parameters
