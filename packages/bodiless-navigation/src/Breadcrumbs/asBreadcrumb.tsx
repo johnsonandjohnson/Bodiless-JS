@@ -16,10 +16,8 @@ import React, {
   createContext, useContext, ComponentType, useLayoutEffect,
 } from 'react';
 import { useNode } from '@bodiless/core';
-import { withDesign } from '@bodiless/fclasses';
 import type { LinkData } from '@bodiless/components';
 import { observer } from 'mobx-react-lite';
-import { flow } from 'lodash';
 import { BreadcrumbItem } from './BreadcrumbStore';
 import type { BreadcrumbItemType } from './BreadcrumbStore';
 import { useBreadcrumbStore, asHiddenBreadcrumbSource } from './BreadcrumbStoreProvider';
@@ -74,40 +72,21 @@ const asBreadcrumb = ({
     const store = useBreadcrumbStore();
     if (store === undefined) return <Component {...props} />;
     const { node } = useNode();
-
-    /*
-     * When Column Item has a submenu it adds a 'sublist' nodeKey.
-     * It results in invalid final node key for that Item. For example:
-     *
-     * SubColumn Item:
-     * MainMenu$3ece0670-b7b7-448d-9a82-15d9b2400408$sublist$default$sublist$default$title
-     *
-     * Column Title (Invalid):
-     * MainMenu$3ece0670-b7b7-448d-9a82-15d9b2400408$sublist$default$sublist$title
-     *
-     * Column Title above has an extra '$sublist' node key. Menu saves data for the Column Title as
-     * MainMenu$3ece0670-b7b7-448d-9a82-15d9b2400408$sublist$default$title
-     */
-    const nodePath = node.path[node.path.length - 1] === 'sublist'
-      ? node.path.slice(0, -1)
-      : node.path;
-
-    const node$ = node.peer(nodePath);
-    const titleNode = node$.child<object>(titleNodeKey);
-    const linkNode = node$.child<LinkData>(linkNodeKey);
+    const titleNode = node.child<object>(titleNodeKey);
+    const linkNode = node.child<LinkData>(linkNodeKey);
 
     // We need an id which will be the same for all breadcrumb sources which
     // render the same data.  Node path works well for this.
-    const id = nodePath.join('$');
+    const id = node.path.join('$');
     const item = new BreadcrumbItem({
       uuid: id,
       title: {
         data: titleNode.data,
-        nodePath: [...nodePath, titleNodeKey].join('$'),
+        nodePath: [...node.path, titleNodeKey].join('$'),
       },
       link: {
         data: linkNode.data.href,
-        nodePath: [...nodePath, linkNodeKey].join('$'),
+        nodePath: [...node.path, linkNodeKey].join('$'),
       },
       parent: current,
       store,
@@ -137,33 +116,31 @@ const asBreadcrumb = ({
 };
 
 /**
- * Use this HOC to wrap a menu so as to generate data for breadcrumbs
- * and menu trails. Must be rendered within a BreadcrumbStoreContext
+ * Use this HOC to wrap a menu so that it can serve a source of data for breadcrumbs
+ * and menu trails. It creates a hidden version of the menu which is rendered only during
+ * SSR, to ensure the breadcrumb data is pre-generated.
+ *
+ * You should wrap the whole menu in this HOC. You must also wrap the menu's items in
+ * `asBreadcrumb`, and the all must be rendered within a BreadcrumbStoreContext
  *
  * @param Component
  * The component providing the menu data structure.
  *
  * @return
- * A version of the component which populates an enclosing
+ * A version of the component which renders a hidden version of itself during SSR.
+ *
+ * @see asHiddenBreadcrumbSource
+ * @see asBreadcrumb
  */
-const asBreadcrumbSource = (settings: BreadcrumbSettings) => <P extends object>(
+const asBreadcrumbSource = <P extends object>(
   Component: ComponentType<P>,
 ) => {
-  const Source = withDesign({
-    Item: asBreadcrumb(settings),
-  })(Component);
-
-  const SSRSource = flow(
-    withDesign({
-      Item: asBreadcrumb(settings),
-    }),
-    asHiddenBreadcrumbSource,
-  )(Component);
+  const SSRSource = asHiddenBreadcrumbSource(Component);
 
   const AsBreadcrumbSource = (props: P) => (
     <>
       {isSSR() && <SSRSource {...props} />}
-      <Source {...props} />
+      <Component {...props} />
     </>
   );
   return AsBreadcrumbSource;

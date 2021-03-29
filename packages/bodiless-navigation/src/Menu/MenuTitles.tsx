@@ -22,8 +22,6 @@ import {
   withDesign, startWith, DesignableComponentsProps,
 } from '@bodiless/fclasses';
 
-import { asBreadcrumbSource as asBreadcrumbSourceBase } from '../Breadcrumbs/asBreadcrumb';
-
 type MenuTitleComponents = {
   Link: ComponentType<any>,
   Title: ComponentType<any>,
@@ -36,16 +34,6 @@ const DEFAULT_NODE_KEYS = {
   linkNodeKey: 'title$link',
   titleNodeKey: 'title$text',
 };
-
-/**
- * Token that can be applied to the menu Item to register it as a breadcrumb.
- *
- * @return Token that when applied to the menu Item registers it as a breadcrumb source.
- */
-const asBreadcrumbSource = flow(
-  asBreadcrumbSourceBase(DEFAULT_NODE_KEYS),
-  withNode,
-);
 
 const MenuTitleBase: FC<MenuTitleProps> = ({ components, ...rest }) => {
   const { Link, Title } = components;
@@ -126,5 +114,4 @@ export {
   withDefaultMenuTitleEditors,
   asMenuTout,
   asMenuTitle,
-  asBreadcrumbSource,
 };

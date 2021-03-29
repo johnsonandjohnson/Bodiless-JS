@@ -14,14 +14,17 @@
 
 import { flow } from 'lodash';
 import {
-  Token, HOC, Design, withDesign, asToken,
+  Token, HOC, Design, withDesign, asToken, withFinalDesign,
 } from '@bodiless/fclasses';
 import {
   asStylableList, asStylableSubList, asSubList, withDeleteNodeOnUnwrap,
   withSubLists, UseListOverrides,
 } from '@bodiless/components';
 
-import { asBreadcrumbSource, asMenuTitle, asMenuTout } from './MenuTitles';
+import { asBreadcrumb } from '../Breadcrumbs';
+import {
+  asMenuTitle, asMenuTout, DEFAULT_NODE_KEYS,
+} from './MenuTitles';
 
 /**
  * Creates a stylable sublist which deletes it's data when the last item is removed.
@@ -38,7 +41,9 @@ const asMenuSubList = (
   asStylableList,
   asStylableSubList,
   withDeleteNodeOnUnwrap('sublist'),
-  asBreadcrumbSource,
+  withFinalDesign({
+    Item: asBreadcrumb(DEFAULT_NODE_KEYS),
+  }),
   withDesign({
     Title: withTitleDesign,
   }),

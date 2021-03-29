@@ -34,7 +34,7 @@ const useBreadcrumbStore = () => React.useContext(BreadcrumbsStoreContext);
 /**
  * @private
  *
- * Wrap a breadcrumb source which is rend3red only on the server to populate
+ * Wrap a breadcrumb source which is rendered only on the server to populate
  * the store before any components which need breadcrumb store data are
  * rendered.
  *
