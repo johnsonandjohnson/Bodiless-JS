@@ -17,7 +17,7 @@ import { createListDeserializer } from '../src/deserializers/listDeserializer';
 import { createDefaultDeserializer } from '../src/deserializers/defaultDeserializers';
 
 const deserializers = [
-  createListDeserializer('List'),
+  createListDeserializer('List', 'link', 'text'),
   createDefaultDeserializer('RTE'),
 ];
 
