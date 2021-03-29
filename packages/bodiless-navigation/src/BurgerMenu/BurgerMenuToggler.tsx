@@ -56,12 +56,19 @@ const TogglerBase: FC<TogglerProps> = ({ components, ...rest }) => {
 const asBurgerMenuToggler = <P extends object>(Component: ComponentType<P>) => (
   props: P & { onClick?: () => any },
 ) => {
-  const { isVisible, toggle } = useBurgerMenuContext();
+  const {
+    isVisible, toggle, isTransitionComplete, setIsTransitionComplete,
+  } = useBurgerMenuContext();
   const { onClick } = props;
 
   const extendOnClick = () => {
     if (onClick && typeof onClick === 'function') onClick();
     toggle(!isVisible);
+
+    // Wait for the animations to complete then toggle isTransitionComplete.
+    // This prevents unnecessary animation plays on initial render
+    // as well as when resizing browser viewport to tablet/mobile manually.
+    setTimeout(() => setIsTransitionComplete(!isTransitionComplete), 500);
   };
 
   return <Component {...props} onClick={extendOnClick} />;

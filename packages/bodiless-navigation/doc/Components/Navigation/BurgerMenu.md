@@ -11,6 +11,7 @@ There are several burger-menu specific HOCs provided by `@bodiless/navigation` t
  - `useBurgerMenuContext` - Hook, which can be used to access `BurgerMenuContext`.
  - `useIsBurgerMenuVisible` - Hook, which can be used to determine if a submenu is visible.
  - `useIsBurgerMenuHidden` - Hook, which can be used to determine if a submenu is hidden.
+ - `useIsBurgerTransitionCompleted` - Hook which returns `true` if burger menu transitions are completed. It is almost identical to `useIsBurgerMenuHidden`, but waits untill the Burger Menu animations are completed before returning `true`. Usefull to avoid playing animations on initial component render.
  - `asSlideLeft` - An HOC that adds styles and transitions needed for a slide-in animation for the Burger menu.
 
 ### Burger Menu Structure

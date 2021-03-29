@@ -21,12 +21,16 @@ import React, {
  */
 type BurgerMenuContextType = {
   isVisible: boolean,
+  isTransitionComplete: boolean,
   toggle: React.Dispatch<React.SetStateAction<boolean>>,
+  setIsTransitionComplete: React.Dispatch<React.SetStateAction<boolean>>,
 };
 
 const BurgerMenuContext = createContext<BurgerMenuContextType>({
   isVisible: false,
+  isTransitionComplete: false,
   toggle: () => null,
+  setIsTransitionComplete: () => null,
 });
 
 /**
@@ -42,13 +46,20 @@ const useBurgerMenuContext = () => useContext(BurgerMenuContext);
  * that are passed to the provider:
  *  - `isVisible` - Boolean to toggle Burger Menu visibility.
  *  - `toggle()` - Visibility toggle function.
+ *  - `isTransitionComplete` - Boolean that determines if BM transition is completed.
+ *  - `setIsTransitionComplete()` - Transition state toggle function.
  *
  */
 const withBurgerMenuProvider = <P extends object>(Component: ComponentType<P>) => (props: P) => {
   const [isVisible, toggle] = useState<boolean>(false);
+  const [isTransitionComplete, setIsTransitionComplete] = useState<boolean>(false);
 
   return (
-    <BurgerMenuContext.Provider value={{ isVisible, toggle }}>
+    <BurgerMenuContext.Provider
+      value={{
+        isVisible, isTransitionComplete, toggle, setIsTransitionComplete,
+      }}
+    >
       <Component {...props} />
     </BurgerMenuContext.Provider>
   );
@@ -62,6 +73,19 @@ const withBurgerMenuProvider = <P extends object>(Component: ComponentType<P>) =
 const useIsBurgerMenuVisible = () => useBurgerMenuContext().isVisible;
 
 /**
+ * Hook which returns `true` if burger menu transitions are completed.
+ * Not active means Burger menu is hidden and all animations are completed.
+ * This hook useful to prevent hide animations from running when component is
+ * initially mounted, but has `isVisible = false`.
+ *
+ * @return true if the Burger Menu is hidden and all animations are completed.
+ */
+const useIsBurgerTransitionCompleted = () => {
+  const { isVisible, isTransitionComplete } = useBurgerMenuContext();
+  return isTransitionComplete && !isVisible;
+};
+
+/**
  * Hook which can be used to determine if Burger Menu is hidden.
  *
  * @return true if the Burger Menu is hidden, false otherwise.
@@ -73,4 +97,5 @@ export {
   useBurgerMenuContext,
   useIsBurgerMenuVisible,
   useIsBurgerMenuHidden,
+  useIsBurgerTransitionCompleted,
 };
