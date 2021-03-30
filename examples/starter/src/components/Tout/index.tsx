@@ -15,8 +15,8 @@
 import { flow } from 'lodash';
 import { withSidecarNodes } from '@bodiless/core';
 import {
-  CardClean,
-} from '@bodiless/card';
+  ToutClean,
+} from '@bodiless/organisms';
 import { withDesign } from '@bodiless/fclasses';
 import {
   asEditableLink,
@@ -24,22 +24,22 @@ import {
 import { asEditableImage } from '../Image';
 import { withEditorBasic, withEditorSimple } from '../Editors';
 
-export const asEditableCard = flow(
+export const asEditableTout = flow(
   withDesign({
     Image: asEditableImage('image'),
     ImageLink: withSidecarNodes(
       asEditableLink('link', undefined, () => ({ label: 'Link' })),
     ),
-    Title: withEditorSimple('title', 'Card Title Text'),
+    Title: withEditorSimple('title', 'Tout Title Text'),
     Link: flow(
       withEditorSimple('ctaText', 'CTA'),
       withSidecarNodes(
         asEditableLink('link', undefined, () => ({ groupLabel: 'CTA', label: 'Link' })),
       ),
     ),
-    Body: withEditorBasic('body', 'Card Body Text'),
+    Body: withEditorBasic('body', 'Tout Body Text'),
   }),
 );
 
-const Card = asEditableCard(CardClean);
-export default Card;
+const Tout = asEditableTout(ToutClean);
+export default Tout;
