@@ -14,7 +14,7 @@
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { shallow, mount } from 'enzyme';
-import React, { HTMLProps } from 'react';
+import React, { HTMLProps, ComponentType } from 'react';
 import { flow } from 'lodash';
 
 import {
@@ -47,7 +47,7 @@ describe('Simple FClasses', () => {
     const BigSpan = flow(
       addClasses('text-xl'),
       removeClasses('bg-yellow'),
-    )(Span);
+    )(Span) as ComponentType<HTMLProps<HTMLElement>>;
     const wrapper = mount(<BigSpan id="foo" className="text-blue bg-yellow" />);
     expect(normalize(wrapper.find('span').prop('className'))).toBe(normalize('text-blue bg-yellow text-xl'));
   });

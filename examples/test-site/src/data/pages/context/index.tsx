@@ -80,7 +80,7 @@ type VariantProps = {
 const ui = {
   ContextWrapper: flow(
     withoutProps<VariantProps>(['isActive']),
-    addClasses('border border-blue m-2 p-2').flow,
+    addClasses('border border-blue m-2 p-2'),
     flowIf(hasProp('isActive'))(
       flow(
         addClasses('border-red'),
@@ -93,7 +93,7 @@ const ui = {
 // const DemoContextWrapperDiv = flow(
 //   removeClasses('border-transparent').addClasses('border-blue m-2 p-2'),
 //   flowIf(hasProp('isActive'))(
-//     removeClasses('border-blue').flow,
+//     removeClasses('border-blue'),
 //   ),
 // )(ContextWrapper);
 

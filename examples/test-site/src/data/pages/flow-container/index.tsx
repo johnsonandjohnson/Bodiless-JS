@@ -26,15 +26,12 @@ import { flow } from 'lodash';
 import Layout from '../../../components/Layout';
 import tailWindConfig from '../../../../tailwind.config';
 import { FlowContainerDefault, FlowContainerLimited } from '../../../components/FlowContainer';
+import { withFullWidthConstraint } from '../../../components/FlowContainer/token';
 
 const FLOW_CONTAINER_PAGE_PATH = 'flowContainer';
 
 const options = getSnapFrom(
   withTailwindClasses(resolveConfig(tailWindConfig))('w-full sm:w-1/2 sm:w-full lg:w-1/2 lg:w-full'),
-);
-
-const snapDataFullWidth = getSnapFrom(
-  withTailwindClasses(resolveConfig(tailWindConfig))('w-full'),
 );
 
 const contentfulFlowContainer = {
@@ -54,6 +51,8 @@ const ContentfulFlowContainer = flow(
   withNodeKey('contentfulFlowContainer'),
   withResetButton({ nodeKey: 'contentfulFlowContainer' }),
 )(FlowContainerDefault);
+
+const FlowContainerConstrainedFullWidth = withFullWidthConstraint(FlowContainerDefault);
 
 const H2 = addClasses('text-2xl font-bold mt-4')(BaseH2);
 
@@ -79,10 +78,9 @@ const FlowContainerPage = (props: any) => (
       <H2>
         FlowContainer with constrained width of 100% only
       </H2>
-      <FlowContainerDefault
+      <FlowContainerConstrainedFullWidth
         id="constrained_full_width"
         nodeKey="constrained_full_width"
-        snapData={snapDataFullWidth}
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey="constrained_widths" />
@@ -91,6 +89,7 @@ const FlowContainerPage = (props: any) => (
         id="restricted"
         nodeKey="restricted"
         maxComponents={1}
+        minComponents={1}
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey="restricted" />

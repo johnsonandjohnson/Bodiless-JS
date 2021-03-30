@@ -14,12 +14,13 @@
 
 import React, { ComponentType } from 'react';
 import { AccordionProvider } from './AccordionContext';
+import { AccordionProviderProps } from './types';
 
 const asAccordionWrapper = <P extends Object>(
   Component: ComponentType<P> | string,
-) => (props: P) => (
-  <AccordionProvider>
-    <Component {...props} />
+) => ({ expanded, ...rest }: P & AccordionProviderProps) => (
+  <AccordionProvider expanded={expanded}>
+    <Component {...rest as P} />
   </AccordionProvider>
   );
 

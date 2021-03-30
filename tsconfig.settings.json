@@ -46,6 +46,8 @@
       "@bodiless/richtext-ui/*": ["bodiless-richtext-ui/src/*"],
       "@bodiless/search": ["bodiless-search/src"],
       "@bodiless/search/*": ["bodiless-search/src/*"],
+      "@bodiless/tokens": ["bodiless-tokens/src"],
+      "@bodiless/tokens/*": ["bodiless-tokens/src/*"],
       "@bodiless/ui": ["bodiless-ui/src"],
       "@bodiless/ui/*": ["bodiless-ui/src/*"],
       "@bodiless/fclasses": ["fclasses/src"],

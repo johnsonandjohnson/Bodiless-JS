@@ -30,6 +30,7 @@
     "@bodiless/richtext": "^0.0.70",
     "@bodiless/richtext-ui": "^0.0.70",
     "@bodiless/search": "^0.0.70",
+    "@bodiless/tokens": "^0.0.70",
     "@bodiless/ui": "^0.0.70",
     "autoprefixer": "^10.2.4",
     "docsify-cli": "^4.3.0",
