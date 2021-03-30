@@ -37,6 +37,7 @@ type YouTubePlayerSettings = {
   modestbranding: boolean | 0 | 1,
   rel: boolean | 0 | 1,
   mute: boolean | 0 | 1,
+  fs: boolean | 0 | 1,
   origin: string,
   version: number,
   playlist: string,
@@ -70,6 +71,8 @@ const withYouTubePlayerSettings = (
 ) => addProps({
   playerSettings: settings,
 });
+
+const withFullScreenEnabled = addProps({ allowFullScreen: 'allowFullScreen' });
 
 /*
 * adjust loop settings per https://developers.google.com/youtube/player_parameters#loop
@@ -214,5 +217,6 @@ export {
   ifNotYouTubePlayerAPILoaded,
   withYouTubePlayerAPI,
   YouTubePlayerAPIProvider,
+  withFullScreenEnabled,
 };
 export type { YouTubePlayerSettings };

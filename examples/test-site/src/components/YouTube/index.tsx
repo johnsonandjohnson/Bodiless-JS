@@ -17,6 +17,7 @@ import { ifReadOnly } from '@bodiless/core';
 import {
   withYouTubePlayerSettings,
   asResponsiveYouTube as asBaseResponsiveYouTube,
+  withFullScreenEnabled,
 } from '@bodiless/youtube';
 import type { YouTubePlayerSettings } from '@bodiless/youtube';
 import { Embed } from '@bodiless/organisms';
@@ -56,7 +57,10 @@ const defaultPlayerSettings: YouTubePlayerSettings = {
 };
 
 const withYouTubeDefaults = withDesign({
-  Item: withYouTubePlayerSettings(defaultPlayerSettings),
+  Item: flowRight(
+    withFullScreenEnabled,
+    withYouTubePlayerSettings(defaultPlayerSettings),
+  ),
 });
 
 const Reponsive16By9YouTube = asReponsive16By9YouTube(Embed);
