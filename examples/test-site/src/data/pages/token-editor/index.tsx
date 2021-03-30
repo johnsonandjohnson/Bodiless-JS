@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,13 +19,13 @@ import { FlowContainer } from '@bodiless/layouts-ui';
 import { Section, addClasses, H1 } from '@bodiless/fclasses';
 import flow from 'lodash/flow';
 import Layout from '../../../components/Layout';
-import withToutDemoVariation from '../../../components/Tout/withToutDemoVariation';
+import withCardDemoVariation from '../../../components/Card/withCardDemoVariation';
 import { asHeader1 } from '../../../components/Elements.token';
 import { withFullWidthConstraint } from '../../../components/FlowContainer/token';
 import withRichTextVariations from '../../../components/FlowContainer/withRichTextVariations';
 
 const DemoFlowContainer = flow(
-  withToutDemoVariation,
+  withCardDemoVariation,
   withFullWidthConstraint,
   withRichTextVariations,
 )(FlowContainer);
@@ -38,8 +38,8 @@ export default (props: any) => (
     <Layout>
       <PageTitle>Token Editor (Experimental)</PageTitle>
       <Intro>
-        You can add a token editor for a tout to the flow container below and use
-        it to explore the tokens available for touts.
+        You can add a token editor for a card to the flow container below and use
+        it to explore the tokens available for cards.
       </Intro>
       <DemoFlowContainer nodeKey="demo" />
     </Layout>

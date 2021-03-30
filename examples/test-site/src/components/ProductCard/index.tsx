@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,9 @@ import {
   asEditableLink,
 } from '../Elements.token';
 import { asEditableImagePlain as asEditableImage } from '../Image';
-import { asProductToutDefaultStyle } from './token';
+import { asProductCardDefaultStyle } from './token';
 
-export const asProductTout = flow(
+export const asProductCard = flow(
   withDesign({
     ImageLink: withSidecarNodes(
       asEditableLink('cta'),
@@ -48,7 +48,7 @@ export const asProductTout = flow(
   }),
 );
 
-export const ProductTout = flow(
-  asProductTout,
-  asProductToutDefaultStyle,
+export const ProductCard = flow(
+  asProductCard,
+  asProductCardDefaultStyle,
 )(ProductClean);

@@ -36,7 +36,7 @@ export default props => (
         </SectionMargin>
         <SectionMargin>
           <FilterByGroup>
-            <ProductListingFlowContainer nodeKey="product_listing_touts" />
+            <ProductListingFlowContainer nodeKey="product_listing_cards" />
           </FilterByGroup>
         </SectionMargin>
       </SectionContent>

@@ -16,7 +16,6 @@ const path = require('path');
 
 const getConfig = () => [
   path.resolve(__dirname, './Card'),
-  path.resolve(__dirname, './Tout'),
   path.resolve(__dirname, './Image'),
 ];
 

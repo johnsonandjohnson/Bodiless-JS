@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import {
   asTextColorPrimary,
 } from '../Elements.token';
 
-const asProductToutDefaultStyle = withDesign({
+const asProductCardDefaultStyle = withDesign({
   Wrapper: flow(asBlockItem, asTextColorPrimary),
   Image: flow(
     asImageRounded,
@@ -54,6 +54,6 @@ const asFilterableProductContainer = withDesign({
 });
 
 export {
-  asProductToutDefaultStyle,
+  asProductCardDefaultStyle,
   asFilterableProductContainer,
 };
