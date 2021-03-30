@@ -13,3 +13,4 @@
  */
 
 export * from './YouTube';
+export * from './ResponsiveYouTube';

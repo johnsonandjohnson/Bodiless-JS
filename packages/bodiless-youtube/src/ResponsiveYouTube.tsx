@@ -27,10 +27,12 @@ import {
 import {
   withoutPointerEvents,
   useIframeBodilessOptions,
+} from '@bodiless/components';
+import {
   withYouTubeFormHeader,
   withYouTubeFormSrcSnippet,
   withYouTubePlayerTransformer,
-} from '@bodiless/components';
+} from './YouTube';
 
 const ActivatorWrapper = addClasses('absolute w-full h-full inset-0')(Div);
 const asBodilessYouTube = asBodilessComponent({

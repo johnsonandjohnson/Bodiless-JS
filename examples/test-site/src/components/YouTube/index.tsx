@@ -14,12 +14,12 @@
 
 import { flowRight } from 'lodash';
 import { ifReadOnly } from '@bodiless/core';
-import { withYouTubePlayerSettings } from '@bodiless/youtube';
-import type { YouTubePlayerSettings } from '@bodiless/youtube';
 import {
-  Embed,
+  withYouTubePlayerSettings,
   asResponsiveYouTube as asBaseResponsiveYouTube,
-} from '@bodiless/organisms';
+} from '@bodiless/youtube';
+import type { YouTubePlayerSettings } from '@bodiless/youtube';
+import { Embed } from '@bodiless/organisms';
 import {
   addProps,
   withDesign,
