@@ -16,6 +16,7 @@ import React, { ComponentType, FC } from 'react';
 import {
   union, difference, capitalize,
 } from 'lodash';
+import { Token } from './Tokens';
 
 type Classes = string | string[];
 
@@ -54,7 +55,7 @@ const modifyClassesIf = (operation: 'add' | 'remove') => (condition: Condition) 
     ModifyClasses.displayName = `${capitalize(operation)}Classes`;
     return ModifyClasses;
   };
-  return hoc;
+  return hoc as Token;
 };
 
 /**
