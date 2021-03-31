@@ -61,6 +61,6 @@ const useMenuOptions = () => {
   return menuOptions;
 };
 
-const withAnchorButton = () => withMenuOptions({ useMenuOptions, name: 'Anchor', peer: true });
+const withAnchorButton = withMenuOptions({ useMenuOptions, name: 'Anchor', peer: true });
 
 export default withAnchorButton;
