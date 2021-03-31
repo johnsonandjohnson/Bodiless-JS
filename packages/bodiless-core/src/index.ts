@@ -40,6 +40,7 @@ import {
   withoutProps,
   withExtendHandler,
   withOnlyProps,
+  withResizeDetector,
 } from './hoc';
 import { ifToggledOff, ifToggledOn, withFlowToggle } from './withFlowToggle';
 import { ifEditable, ifReadOnly, useEditToggle } from './withEditToggle';
@@ -117,6 +118,7 @@ export {
   ifReadOnly,
   withoutProps,
   withOnlyProps,
+  withResizeDetector,
   ActivateOnEffectProvider,
   withActivateOnEffect,
   useActivateOnEffect,
