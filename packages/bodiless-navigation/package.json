@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/navigation",
-  "version": "0.0.70",
+  "version": "0.0.71",
   "description": "BodilessJs Navigation Components",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
@@ -28,10 +28,10 @@
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
-    "@bodiless/core": "^0.0.70",
-    "@bodiless/components": "^0.0.70",
-    "@bodiless/fclasses": "^0.0.70",
-    "@bodiless/organisms": "^0.0.70",
+    "@bodiless/core": "^0.0.71",
+    "@bodiless/components": "^0.0.71",
+    "@bodiless/fclasses": "^0.0.71",
+    "@bodiless/organisms": "^0.0.71",
     "enzyme": "^3.9.0",
     "lodash": "^4.17.19",
     "mobx": "^5.8.0",
