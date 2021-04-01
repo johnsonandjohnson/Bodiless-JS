@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /**
  * Copyright © 2020 Johnson & Johnson
  *
@@ -12,27 +13,19 @@
  * limitations under the License.
  */
 
-import React, { Fragment, HTMLProps, useCallback } from 'react';
+import React, { HTMLProps, useCallback } from 'react';
+import { flowRight, isEmpty } from 'lodash';
 import {
   asBodilessComponent,
-  ifToggledOff,
-  ifToggledOn,
   useMenuOptionUI,
-  useNode,
-  withData,
-  withDefaultContent,
 } from '@bodiless/core';
 import type {
   BodilessOptions,
   AsBodiless,
 } from '@bodiless/core';
 
-import { flowRight } from 'lodash';
-import { addProps, addPropsIf, withoutProps } from '@bodiless/fclasses';
+import { flowIf, withoutProps } from '@bodiless/fclasses';
 import withFormSnippet from '../withFormSnippet';
-import withFormHeader from '../withFormHeader';
-import { replaceWith } from '@bodiless/fclasses';
-import { toJS } from 'mobx';
 
 // Type of the data used by this component.
 export type Data = {
@@ -42,71 +35,94 @@ export type Data = {
 export type Props = HTMLProps<HTMLElement>;
 
 // Options used to create an edit button.
-const options: BodilessOptions<Props, Data> = {
-  icon: 'local_offer',
-  groupLabel: 'Anchor',
-  label: 'Anchor',
-  name: 'anchor-settings',
-  global: false,
-  local: true,
-  Wrapper: 'div',
-  renderForm: () => true,
+const useAnchorOptions: () => BodilessOptions<Props, Data> = () => {
+  const renderForm = ({ formState }) => {
+    const isValidHtmlId = (id : string) => (/^[^\s]+$/.test(value);
+    const { errors } = formState;
+    const validate = useCallback(
+      (value: string) => (!value || !isValidHtmlId(value)
+        ? 'must be a valid id.'
+        : undefined),
+      [],
+    );
+    const error = !isEmpty(errors) ? errors[Object.keys(errors)[0]] : false;
+    const { ComponentFormLabel, ComponentFormText, ComponentFormWarning } = useMenuOptionUI();
+    return (
+      <>
+        <ComponentFormLabel htmlFor="id">ID</ComponentFormLabel>
+        <ComponentFormText
+          field="id"
+          name="id"
+          validate={validate}
+          validateOnChange
+          validateOnBlur
+          placeholder="Descriptive ID"
+          key="id"
+        />
+        {error.id && (
+        <ComponentFormWarning>
+          {error.id}
+        </ComponentFormWarning>
+        )}
+      </>
+    );
+  };
+  const options = {
+    icon: 'local_offer',
+    groupLabel: 'Anchor',
+    label: 'Anchor',
+    name: 'anchor-settings',
+    global: false,
+    local: true,
+    renderForm,
+  };
+  return options;
 };
 
-const useAnchorBodilessOptions = () => options;
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const withIdSnippet = withFormSnippet({
   nodeKeys: 'id',
   defaultData: { id: '' },
   snippetOptions: {
-    renderForm: () => {
-      const { ComponentFormLabel, ComponentFormText } = useMenuOptionUI();
+    renderForm: ({ formState }) => {
+      const { errors } = formState;
+      const validate = useCallback(
+        (value: string) => (value
+          ? 'must be a valid id.'
+          : undefined),
+        [],
+      );
+      const { ComponentFormLabel, ComponentFormText, ComponentFormWarning } = useMenuOptionUI();
       return (
         <React.Fragment key="id">
           <ComponentFormLabel htmlFor="id">ID</ComponentFormLabel>
-          <ComponentFormText field="id" placeholder="Descriptive ID" />
+          <ComponentFormText
+            field="specialid"
+            validate={validate}
+            validateOnChange
+            validateOnBlur
+            placeholder="Descriptive ID"
+          />
+          {errors && (
+          <ComponentFormWarning>
+            {' '}
+            {errors.specialid}
+          </ComponentFormWarning>
+          )}
         </React.Fragment>
       );
     },
   },
 });
 
-const withAnchorFormHeader = withFormHeader({
-  title: 'Anchor Configuration',
-});
-
-const asBaseBodilessAnchor: AsBodiless<Props, Data> = (
-  nodeKeys?,
-  defaultData?,
-  useOverrides?,
-) => flowRight(
-  asBodilessComponent(useAnchorBodilessOptions())(nodeKeys, defaultData, useOverrides),
-);
-
-const useEmptyAnchorToggle = ({ id }: Props) => {
-  const { node } = useNode<Data>();
-  console.log(id);
-  console.log(toJS(node.data));
-  const ret = (id === undefined || id === '') && node.data.id === '';
-  console.log('ret', ret);
-  return ret;
-};
-const withoutIDWhenLinkDataEmpty = ifToggledOn(useEmptyAnchorToggle)(withoutProps(['id']));
-
 const asBodilessAnchor: AsBodiless<Props, Data> = (
   nodeKeys?,
   defaultData?,
   useOverrides?,
 ) => flowRight(
-  withoutIDWhenLinkDataEmpty,
-  asBaseBodilessAnchor(nodeKeys, defaultData, useOverrides),
-  withIdSnippet,
+  asBodilessComponent(useAnchorOptions())(nodeKeys, defaultData, useOverrides),
+  // withIdSnippet,
+  // flowIf(({ id }) => id.length === 0)(withoutProps('id')),
 );
 
 export default asBodilessAnchor;
-export {
-  asBaseBodilessAnchor,
-  useAnchorBodilessOptions,
-  withAnchorFormHeader,
-  withIdSnippet as withIframeFormSrcSnippet,
-};
