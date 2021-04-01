@@ -31,6 +31,17 @@ const withDefaultStartingTrailNodeKey = withDefaultNodeKeys('startingTrail');
 const withDefaultFinalTrailNodeKey = withDefaultNodeKeys('finalTrail');
 
 /**
+ * If no custom values are specified for the StartingTrail it will default to
+ * `Home` as a Title with a Link to `/` when link-toggle is ON.
+ */
+const withDefaultStartingTrailData = withDesign({
+  // Default StartingTrail Title text to 'Home'
+  Title: addProps({ children: 'Home' }),
+  // Default StartingTrail link to /
+  Link: addProps({ href: '/' }),
+});
+
+/**
  * Enables rendering of the starting trail for a Breadcrumb component with a provided Editors.
  * Uses `withDefaultMenuTitleEditors` by default, pre-configured with a link to the home page.
  *
@@ -52,12 +63,8 @@ export const withEditableStartingTrail = (
     StartingTrail: asToken(
       asMenuTitle,
       withTitleEditors,
-      addProps({ href: '/' }) as Token,
       withNodeKey(withDefaultStartingTrailNodeKey(nodeKeys)),
-      // Default StartingTrail Title text to 'Home'
-      withDesign({
-        Title: addProps({ children: 'Home' }),
-      }),
+      withDefaultStartingTrailData,
     ),
   }),
 );

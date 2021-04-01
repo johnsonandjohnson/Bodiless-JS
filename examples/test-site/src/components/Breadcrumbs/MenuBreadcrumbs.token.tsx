@@ -120,7 +120,7 @@ const withLinkToggleStyles = withDesign({
 });
 
 const withStartingTrailLinkStyles = withDesign({
-  StartingTrail: asLink,
+  StartingTrail: withLinkToggleStyles,
 });
 
 const $withBreadcrumbStyles = asToken(
