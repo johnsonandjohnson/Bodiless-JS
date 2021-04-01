@@ -26,6 +26,7 @@ export const asStylableBreadcrumbs = withDesign({
   BreadcrumbItem: stylable,
   Title: stylable,
   FinalTrail: stylable,
+  Item: stylable,
 });
 
 /**

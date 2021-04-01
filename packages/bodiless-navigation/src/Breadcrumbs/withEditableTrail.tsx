@@ -54,6 +54,10 @@ export const withEditableStartingTrail = (
       withTitleEditors,
       addProps({ href: '/' }) as Token,
       withNodeKey(withDefaultStartingTrailNodeKey(nodeKeys)),
+      // Default StartingTrail Title text to 'Home'
+      withDesign({
+        Title: addProps({ children: 'Home' }),
+      }),
     ),
   }),
 );

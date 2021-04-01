@@ -14,19 +14,25 @@
 
 /* eslint max-len: 0 */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { asReadOnly } from '@bodiless/core';
-import { withBreadcrumbStore, withEditableStartingTrail } from '@bodiless/navigation';
 import {
-  addClasses, H1 as H1$, H2 as H2$, P as P$, withDesign,
+  withBreadcrumbStore,
+  BreadcrumbsClean,
+  asBreadcrumbs,
+  withEditableStartingTrail,
+  withEditableFinalTrail,
+  withMenuTitleEditors,
+} from '@bodiless/navigation';
+import {
+  addClasses, H1 as H1$, H2 as H2$, P as P$, asToken, Fragment,
 } from '@bodiless/fclasses';
 import { flow } from 'lodash';
 
 import Layout from '../../../components/Layout';
 import Menu from '../../../components/Menu/Menu';
-import Breadcrumbs from '../../../components/Breadcrumbs/MenuBreadcrumbs';
 import {
   withStartingTrailIcon,
   withNonLinkableItems,
@@ -35,56 +41,63 @@ import {
   withSlashSeparator,
   withHiddenCurrentPageItem,
   withStartingTrailLinkStyles,
+  withNonLinkableStartingTrail,
+  $withBreadcrumbStyles,
 } from '../../../components/Breadcrumbs/MenuBreadcrumbs.token';
 import { asHeader2, asHeader1, asItalic } from '../../../components/Elements.token';
+
+const DemoBreadcrumbs = asToken(
+  asBreadcrumbs,
+  withMenuTitleEditors(undefined, asReadOnly),
+  withEditableFinalTrail(),
+  $withBreadcrumbStyles,
+)(BreadcrumbsClean);
 
 const DEFAULT_STARTING_TRAIL_NODE_KEY = 'startingTrail';
 
 const MenuBreadcrumbs = flow(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}Default`),
   withStartingTrailLinkStyles,
-)(Breadcrumbs);
+)(DemoBreadcrumbs);
 
-const BreadcrumbWithStartingTrailIcon = withStartingTrailIcon(`${DEFAULT_STARTING_TRAIL_NODE_KEY}Icon`)(Breadcrumbs);
+const BreadcrumbWithStartingTrailIcon = withStartingTrailIcon(`${DEFAULT_STARTING_TRAIL_NODE_KEY}Icon`)(DemoBreadcrumbs);
 
 const BreadcrumbWithNonLinkableItems = flow(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}NonLinkable`),
   withStartingTrailLinkStyles,
   withNonLinkableItems,
-)(Breadcrumbs);
+)(DemoBreadcrumbs);
 
 const BreadcrumbWithBoldableFinalItem = flow(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}BoldedFinal`),
   withStartingTrailLinkStyles,
   withBoldedFinalTrail,
-)(Breadcrumbs);
+)(DemoBreadcrumbs);
 
 const BreadcrumbWithVerticalBarSeparator = flow(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}VerticalBar`),
   withStartingTrailLinkStyles,
   withVerticalBarSeparator,
-)(Breadcrumbs);
+)(DemoBreadcrumbs);
 
 const BreadcrumbWithSlashSeparator = flow(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}SlashSeparator`),
   withStartingTrailLinkStyles,
   withSlashSeparator,
-)(Breadcrumbs);
+)(DemoBreadcrumbs);
 
 const BreadcrumbWithHiddenCurrentPageItem = flow(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}CurrentPage`),
   withStartingTrailLinkStyles,
   withHiddenCurrentPageItem,
-)(Breadcrumbs);
+)(DemoBreadcrumbs);
 
 const MegaMenuBreadcrumbWithNonLinkableItems = flow(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}MegaMenuNonLinkable`),
   withStartingTrailLinkStyles,
-  withDesign({
-    StartingTrail: asReadOnly,
-  }),
+  withNonLinkableStartingTrail,
   withNonLinkableItems,
-)(Breadcrumbs);
+)(DemoBreadcrumbs);
 
 const H1 = flow(addClasses('pt-5'), asHeader1)(H1$);
 const H2 = flow(addClasses('pt-5'), asHeader2)(H2$);

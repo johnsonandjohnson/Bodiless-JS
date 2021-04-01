@@ -112,8 +112,8 @@ Note that by default `Title`, `StartingTrail`, and `FinalTrail` are the same com
 ```js
 const $withBreadcrumbStyles = withDesign({
   Title: withDesign({
-  Link: addClasses(...),
-  Title: addClasses(...),
+    Link: addClasses(...),
+    Title: addClasses(...),
   }),
 });
 ```
@@ -121,11 +121,11 @@ The `Link` sub component is also by default configured as `LinkToggle`. It means
 ```js
 const $withBreadcrumbStyles = withDesign({
   Title: withDesign({
-  Link: withDesign({
-    Link: addClasses(...), // Classes for the Link when it's toggled on
-    _default: addClasses(...), // Classes for the Link when it's toggled off
-    }),
-  Title: addClasses(...),
+    Link: withDesign({
+      Link: addClasses(...), // Classes for the Link when it's toggled on
+      _default: addClasses(...), // Classes for the Link when it's toggled off
+      }),
+    Title: addClasses(...),
   }),
 });
 ```
