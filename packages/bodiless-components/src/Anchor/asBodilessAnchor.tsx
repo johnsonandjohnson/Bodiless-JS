@@ -1,4 +1,3 @@
-// @ts-nocheck
 /**
  * Copyright © 2020 Johnson & Johnson
  *
@@ -13,42 +12,101 @@
  * limitations under the License.
  */
 
-import { HTMLProps } from 'react';
+import React, { Fragment, HTMLProps, useCallback } from 'react';
 import {
-  withContextActivator,
-  withNode,
-  withNodeDataHandlers,
-  withLocalContextMenu,
-  WithNodeProps,
-  ifEditable,
-  Bodiless,
-  withNodeKey,
-  withoutProps,
+  asBodilessComponent,
+  ifToggledOff,
+  ifToggledOn,
+  useMenuOptionUI,
+  useNode,
+  withData,
+  withDefaultContent,
 } from '@bodiless/core';
-import { flowRight } from 'lodash';
-import withAnchorButton from './withAnchorButton';
-// Type of the data used by this component.
-// @Todo: Determine if this type is necessary?
-type Props = HTMLProps<HTMLElement>;
+import type {
+  BodilessOptions,
+  AsBodiless,
+} from '@bodiless/core';
 
-// Composed hoc which creates editable version of the component.
-// Note - the order is important. In particular:
-// - the node data handlers must be outermost
-// - anything relying on the context (activator, indicator) must be
-//   *after* `withEditButton()` as this establishes the context.
-// - withData must be *after* the data handlers are defiend.
-const asBodilessAnchor = (nodeKey?: string) => flowRight(
-  withNodeKey(nodeKey),
-  withNode,
-  withNodeDataHandlers(''),
-  ifEditable(
-    withAnchorButton,
-    withContextActivator('onClick'),
-    withLocalContextMenu,
-  ),
-  withoutProps([
-    'componentData',
-    'setComponentData',
-  ]),
-) as Bodiless<Props, Props & Partial<WithNodeProps>>;
+import { flowRight } from 'lodash';
+import { addProps, addPropsIf, withoutProps } from '@bodiless/fclasses';
+import withFormSnippet from '../withFormSnippet';
+import withFormHeader from '../withFormHeader';
+import { replaceWith } from '@bodiless/fclasses';
+import { toJS } from 'mobx';
+
+// Type of the data used by this component.
+export type Data = {
+  id: string;
+};
+
+export type Props = HTMLProps<HTMLElement>;
+
+// Options used to create an edit button.
+const options: BodilessOptions<Props, Data> = {
+  icon: 'local_offer',
+  groupLabel: 'Anchor',
+  label: 'Anchor',
+  name: 'anchor-settings',
+  global: false,
+  local: true,
+  Wrapper: 'div',
+  renderForm: () => true,
+};
+
+const useAnchorBodilessOptions = () => options;
+
+const withIdSnippet = withFormSnippet({
+  nodeKeys: 'id',
+  defaultData: { id: '' },
+  snippetOptions: {
+    renderForm: () => {
+      const { ComponentFormLabel, ComponentFormText } = useMenuOptionUI();
+      return (
+        <React.Fragment key="id">
+          <ComponentFormLabel htmlFor="id">ID</ComponentFormLabel>
+          <ComponentFormText field="id" placeholder="Descriptive ID" />
+        </React.Fragment>
+      );
+    },
+  },
+});
+
+const withAnchorFormHeader = withFormHeader({
+  title: 'Anchor Configuration',
+});
+
+const asBaseBodilessAnchor: AsBodiless<Props, Data> = (
+  nodeKeys?,
+  defaultData?,
+  useOverrides?,
+) => flowRight(
+  asBodilessComponent(useAnchorBodilessOptions())(nodeKeys, defaultData, useOverrides),
+);
+
+const useEmptyAnchorToggle = ({ id }: Props) => {
+  const { node } = useNode<Data>();
+  console.log(id);
+  console.log(toJS(node.data));
+  const ret = (id === undefined || id === '') && node.data.id === '';
+  console.log('ret', ret);
+  return ret;
+};
+const withoutIDWhenLinkDataEmpty = ifToggledOn(useEmptyAnchorToggle)(withoutProps(['id']));
+
+const asBodilessAnchor: AsBodiless<Props, Data> = (
+  nodeKeys?,
+  defaultData?,
+  useOverrides?,
+) => flowRight(
+  withoutIDWhenLinkDataEmpty,
+  asBaseBodilessAnchor(nodeKeys, defaultData, useOverrides),
+  withIdSnippet,
+);
+
 export default asBodilessAnchor;
+export {
+  asBaseBodilessAnchor,
+  useAnchorBodilessOptions,
+  withAnchorFormHeader,
+  withIdSnippet as withIframeFormSrcSnippet,
+};

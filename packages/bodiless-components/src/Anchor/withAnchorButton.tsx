@@ -48,7 +48,7 @@ const useMenuOptions = () => {
   const form = useContextMenuForm({ renderForm });
   const menuOptions : TMenuOption[] = [
     {
-      icon: 'open_in_new',
+      icon: 'local_offer',
       label: 'Anchor',
       group: 'Link-group',
       groupMerge: 'merge',
