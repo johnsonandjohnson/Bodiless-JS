@@ -13,7 +13,7 @@
  */
 
 import React, { HTMLProps, useCallback } from 'react';
-import { flow, isEmpty } from 'lodash';
+import { flow } from 'lodash';
 import {
   asBodilessComponent,
   useMenuOptionUI,
@@ -39,18 +39,16 @@ const anchorOptions: BodilessOptions<Props, Data> = {
   name: 'anchor-settings',
   global: false,
   local: true,
-  renderForm: ({ formState } : any) => {
+  renderForm: ({ formState, scope } : any) => {
     // eslint-disable-next-line no-useless-escape
     const isValidHtmlId = (id : string) => (/^[A-Za-z]+[\w\-\:\.]*$/.test(id));
-    const { errors } = formState;
+    const errors = scope ? formState.errors[scope] : formState.errors;
     const validate = useCallback(
       (value: string) => (value && !isValidHtmlId(value)
         ? 'Must be a valid HTML id.'
         : undefined),
       [],
     );
-      // @TODO: fix error object is not keyed by field name.
-    const error = !isEmpty(errors) ? errors[Object.keys(errors)[0]] : false;
     const { ComponentFormLabel, ComponentFormText, ComponentFormWarning } = useMenuOptionUI();
     return (
       <>
@@ -62,8 +60,8 @@ const anchorOptions: BodilessOptions<Props, Data> = {
           validateOnBlur
           placeholder="Descriptive IDx"
         />
-        {error.id && (
-          <ComponentFormWarning>{error.id}</ComponentFormWarning>
+        {errors && errors.id && (
+          <ComponentFormWarning>{errors.id}</ComponentFormWarning>
         )}
       </>
     );

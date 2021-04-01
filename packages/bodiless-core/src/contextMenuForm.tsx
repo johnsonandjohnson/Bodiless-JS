@@ -29,6 +29,7 @@ export type Options<D> = {
 export type FormBodyProps<D> = ContextMenuFormProps & Options<D> & {
   formApi: FormApi<D>;
   formState: FormState<D>;
+  scope?: string
 };
 
 export type FormBodyRenderer<D> = (props: FormBodyProps<D>) => ReactNode;
