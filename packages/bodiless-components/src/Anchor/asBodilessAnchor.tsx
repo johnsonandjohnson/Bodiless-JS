@@ -37,7 +37,7 @@ export type Props = HTMLProps<HTMLElement>;
 // Options used to create an edit button.
 const useAnchorOptions: () => BodilessOptions<Props, Data> = () => {
   const renderForm = ({ formState }) => {
-    const isValidHtmlId = (id : string) => (/^[^\s]+$/.test(value);
+    const isValidHtmlId = (id : string) => (/^[^\s]+$/.test(id));
     const { errors } = formState;
     const validate = useCallback(
       (value: string) => (!value || !isValidHtmlId(value)
@@ -121,7 +121,6 @@ const asBodilessAnchor: AsBodiless<Props, Data> = (
   useOverrides?,
 ) => flowRight(
   asBodilessComponent(useAnchorOptions())(nodeKeys, defaultData, useOverrides),
-  // withIdSnippet,
   // flowIf(({ id }) => id.length === 0)(withoutProps('id')),
 );
 
