@@ -13,7 +13,7 @@
  */
 
 import React, { HTMLProps, useCallback } from 'react';
-import { flowRight, isEmpty } from 'lodash';
+import { flow, isEmpty } from 'lodash';
 import {
   asBodilessComponent,
   useMenuOptionUI,
@@ -32,8 +32,14 @@ export type Data = {
 export type Props = HTMLProps<HTMLElement>;
 
 // Options used to create an edit button.
-const useAnchorOptions: () => BodilessOptions<Props, Data> = () => {
-  const renderForm = ({ formState } : any) => {
+const anchorOptions: BodilessOptions<Props, Data> = {
+  icon: 'local_offer',
+  groupLabel: 'Anchor',
+  label: 'Add',
+  name: 'anchor-settings',
+  global: false,
+  local: true,
+  renderForm: ({ formState } : any) => {
     // eslint-disable-next-line no-useless-escape
     const isValidHtmlId = (id : string) => (/^[A-Za-z]+[\w\-\:\.]*$/.test(id));
     const { errors } = formState;
@@ -43,7 +49,7 @@ const useAnchorOptions: () => BodilessOptions<Props, Data> = () => {
         : undefined),
       [],
     );
-    // @TODO: fix error object is not keyed by field name.
+      // @TODO: fix error object is not keyed by field name.
     const error = !isEmpty(errors) ? errors[Object.keys(errors)[0]] : false;
     const { ComponentFormLabel, ComponentFormText, ComponentFormWarning } = useMenuOptionUI();
     return (
@@ -54,32 +60,22 @@ const useAnchorOptions: () => BodilessOptions<Props, Data> = () => {
           validate={validate}
           validateOnChange
           validateOnBlur
-          placeholder="Descriptive ID"
+          placeholder="Descriptive IDx"
         />
         {error.id && (
-        <ComponentFormWarning>{error.id}</ComponentFormWarning>
+          <ComponentFormWarning>{error.id}</ComponentFormWarning>
         )}
       </>
     );
-  };
-  const options = {
-    icon: 'local_offer',
-    groupLabel: 'Anchor',
-    label: 'Anchor',
-    name: 'anchor-settings',
-    global: false,
-    local: true,
-    renderForm,
-  };
-  return options;
+  },
 };
 
 const asBodilessAnchor: AsBodiless<Props, Data> = (
   nodeKeys?,
   defaultData?,
   useOverrides?,
-) => withSidecarNodes(flowRight(
-  asBodilessComponent(useAnchorOptions())(nodeKeys, defaultData, useOverrides),
+) => withSidecarNodes(flow(
+  asBodilessComponent(anchorOptions)(nodeKeys, defaultData, useOverrides),
 ));
 
 export default asBodilessAnchor;
