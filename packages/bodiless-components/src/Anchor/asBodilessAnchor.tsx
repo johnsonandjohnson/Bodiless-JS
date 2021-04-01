@@ -1,6 +1,5 @@
-/* eslint-disable no-shadow */
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +17,12 @@ import { flowRight, isEmpty } from 'lodash';
 import {
   asBodilessComponent,
   useMenuOptionUI,
+  withSidecarNodes,
 } from '@bodiless/core';
 import type {
   BodilessOptions,
   AsBodiless,
 } from '@bodiless/core';
-import { flowIf, withoutProps } from '@bodiless/fclasses';
 
 // Type of the data used by this component.
 export type Data = {
@@ -35,14 +34,16 @@ export type Props = HTMLProps<HTMLElement>;
 // Options used to create an edit button.
 const useAnchorOptions: () => BodilessOptions<Props, Data> = () => {
   const renderForm = ({ formState } : any) => {
-    const isValidHtmlId = (id : string) => (/^[^\s]+$/.test(id));
+    // eslint-disable-next-line no-useless-escape
+    const isValidHtmlId = (id : string) => (/^[A-Za-z]+[\w\-\:\.]*$/.test(id));
     const { errors } = formState;
     const validate = useCallback(
       (value: string) => (value && !isValidHtmlId(value)
-        ? 'must be a valid id.'
+        ? 'Must be a valid HTML id.'
         : undefined),
       [],
     );
+    // @TODO: fix error object is not keyed by field name.
     const error = !isEmpty(errors) ? errors[Object.keys(errors)[0]] : false;
     const { ComponentFormLabel, ComponentFormText, ComponentFormWarning } = useMenuOptionUI();
     return (
@@ -77,8 +78,8 @@ const asBodilessAnchor: AsBodiless<Props, Data> = (
   nodeKeys?,
   defaultData?,
   useOverrides?,
-) => flowRight(
+) => withSidecarNodes(flowRight(
   asBodilessComponent(useAnchorOptions())(nodeKeys, defaultData, useOverrides),
-);
+));
 
 export default asBodilessAnchor;
