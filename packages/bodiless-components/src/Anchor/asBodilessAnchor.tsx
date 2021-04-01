@@ -23,9 +23,7 @@ import type {
   BodilessOptions,
   AsBodiless,
 } from '@bodiless/core';
-
 import { flowIf, withoutProps } from '@bodiless/fclasses';
-import withFormSnippet from '../withFormSnippet';
 
 // Type of the data used by this component.
 export type Data = {
@@ -36,11 +34,11 @@ export type Props = HTMLProps<HTMLElement>;
 
 // Options used to create an edit button.
 const useAnchorOptions: () => BodilessOptions<Props, Data> = () => {
-  const renderForm = ({ formState }) => {
+  const renderForm = ({ formState } : any) => {
     const isValidHtmlId = (id : string) => (/^[^\s]+$/.test(id));
     const { errors } = formState;
     const validate = useCallback(
-      (value: string) => (!value || !isValidHtmlId(value)
+      (value: string) => (value && !isValidHtmlId(value)
         ? 'must be a valid id.'
         : undefined),
       [],
@@ -52,17 +50,13 @@ const useAnchorOptions: () => BodilessOptions<Props, Data> = () => {
         <ComponentFormLabel htmlFor="id">ID</ComponentFormLabel>
         <ComponentFormText
           field="id"
-          name="id"
           validate={validate}
           validateOnChange
           validateOnBlur
           placeholder="Descriptive ID"
-          key="id"
         />
         {error.id && (
-        <ComponentFormWarning>
-          {error.id}
-        </ComponentFormWarning>
+        <ComponentFormWarning>{error.id}</ComponentFormWarning>
         )}
       </>
     );
@@ -79,49 +73,12 @@ const useAnchorOptions: () => BodilessOptions<Props, Data> = () => {
   return options;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const withIdSnippet = withFormSnippet({
-  nodeKeys: 'id',
-  defaultData: { id: '' },
-  snippetOptions: {
-    renderForm: ({ formState }) => {
-      const { errors } = formState;
-      const validate = useCallback(
-        (value: string) => (value
-          ? 'must be a valid id.'
-          : undefined),
-        [],
-      );
-      const { ComponentFormLabel, ComponentFormText, ComponentFormWarning } = useMenuOptionUI();
-      return (
-        <React.Fragment key="id">
-          <ComponentFormLabel htmlFor="id">ID</ComponentFormLabel>
-          <ComponentFormText
-            field="specialid"
-            validate={validate}
-            validateOnChange
-            validateOnBlur
-            placeholder="Descriptive ID"
-          />
-          {errors && (
-          <ComponentFormWarning>
-            {' '}
-            {errors.specialid}
-          </ComponentFormWarning>
-          )}
-        </React.Fragment>
-      );
-    },
-  },
-});
-
 const asBodilessAnchor: AsBodiless<Props, Data> = (
   nodeKeys?,
   defaultData?,
   useOverrides?,
 ) => flowRight(
   asBodilessComponent(useAnchorOptions())(nodeKeys, defaultData, useOverrides),
-  // flowIf(({ id }) => id.length === 0)(withoutProps('id')),
 );
 
 export default asBodilessAnchor;
