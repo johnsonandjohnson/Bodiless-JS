@@ -41,7 +41,7 @@ import {
   withSlashSeparator,
   withHiddenCurrentPageItem,
   withStartingTrailLinkStyles,
-  withNonLinkableStartingTrail,
+  withReadOnlyStartingTrail,
   $withBreadcrumbStyles,
 } from '../../../components/Breadcrumbs/MenuBreadcrumbs.token';
 import { asHeader2, asHeader1, asItalic } from '../../../components/Elements.token';
@@ -95,7 +95,7 @@ const BreadcrumbWithHiddenCurrentPageItem = flow(
 const MegaMenuBreadcrumbWithNonLinkableItems = flow(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}MegaMenuNonLinkable`),
   withStartingTrailLinkStyles,
-  withNonLinkableStartingTrail,
+  withReadOnlyStartingTrail,
   withNonLinkableItems,
 )(DemoBreadcrumbs);
 

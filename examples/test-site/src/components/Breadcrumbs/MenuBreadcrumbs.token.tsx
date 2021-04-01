@@ -21,6 +21,7 @@ import {
   withNodeKey,
   withChild,
   ifToggledOn,
+  asReadOnly,
 } from '@bodiless/core';
 import {
   withBreadcrumbStartingTrail,
@@ -75,8 +76,8 @@ const withNonLinkableItems = withDesign({
   Title: withoutLink,
 });
 
-const withNonLinkableStartingTrail = withDesign({
-  StartingTrail: withoutLink,
+const withReadOnlyStartingTrail = withDesign({
+  StartingTrail: asReadOnly,
 });
 
 const withBoldedFinalTrail = withDesign({
@@ -141,5 +142,5 @@ export {
   withSlashSeparator,
   withHiddenCurrentPageItem,
   withStartingTrailLinkStyles,
-  withNonLinkableStartingTrail,
+  withReadOnlyStartingTrail,
 };
