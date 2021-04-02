@@ -12,112 +12,24 @@
  * limitations under the License.
  */
 
-import { addClasses, asToken } from '@bodiless/fclasses';
+import { addClasses } from '@bodiless/fclasses';
 
-export const withMeta = (component: string) => (category: string) => (attribute: string) => ({
-  categories: {
-    Category: Array.isArray(category) ? category : [category],
-    Attribute: Array.isArray(attribute) ? attribute : [attribute],
-    Component: [component],
-  },
-});
-
-export const asElementToken = withMeta('Element');
-export const asListToken = withMeta('List');
-
-export const asFlex = asToken(
-  addClasses('flex'),
-  asElementToken('Layout')('Display'),
-);
-
-export const asRelative = asToken(
-  addClasses('relative'),
-  asElementToken('Layout')('Position'),
-);
-
-export const asAbsolute = asToken(
-  addClasses('absolute'),
-  asElementToken('Layout')('Position'),
-);
-
-export const asFixed = asToken(
-  addClasses('fixed'),
-  asElementToken('Layout')('Position'),
-);
-
-export const asOverflowHidden = asToken(
-  addClasses('overflow-hidden'),
-  asElementToken('Layout')('Overflow'),
-);
-
-export const withVisibleOnHoverStyles = asToken(
-  addClasses('hover:overflow-visible'),
-  asElementToken('Layout')('Overflow'),
-);
-
-export const withStaticOnHoverStyles = asToken(
-  addClasses('hover:static'),
-  asElementToken('Layout')('Overflow'),
-);
-
-export const asPositionedLeft = asToken(
-  addClasses('left-0'),
-  asElementToken('Layout')('Inset'),
-);
-
-export const withNoInsetStyles = asToken(
-  addClasses('inset-0'),
-  asElementToken('Layout')('Inset'),
-);
-
-export const withFullZIndex = asToken(
-  addClasses('z-full'),
-  asElementToken('Layout')('Position'),
-);
-
-export const withFullWidthStyles = asToken(
-  addClasses('w-full'),
-  asElementToken('Sizing')('Width'),
-);
-
-export const withFullHeightStyles = asToken(
-  addClasses('h-full'),
-  asElementToken('Sizing')('Height'),
-);
-
-export const withColumnDirectionStyles = asToken(
-  addClasses('flex-col'),
-  // @todo confirm category & term spelling
-  asElementToken('Flexbox')('Flex Direction'),
-);
-
-export const withLightGrayBg = asToken(
-  addClasses('bg-gray-200'),
-  asElementToken('Backgrounds')('Color'),
-);
-
-export const withTransformStyles = asToken(
-  addClasses('transform'),
-  asElementToken('Transforms')('Transform'),
-);
-
-export const withSlideInTranslateStyles = asToken(
-  addClasses('-translate-x-full'),
-  asElementToken('Transforms')('Translate'),
-);
-
-// @todo term for .material-icons?
-export const withMaterialIconsFont = asToken(
-  addClasses('material-icons'),
-  asElementToken('Typography')('Font Family'),
-);
-
-export const withPointerCursorStyles = asToken(
-  addClasses('cursor-pointer'),
-  asElementToken('Interactivity')('Cursor'),
-);
-
-export const asDisabled = asToken(
-  addClasses('pointer-events-none'),
-  asElementToken('Interactivity')('Pointer Events'),
-);
+export const asFlex = addClasses('flex');
+export const asRelative = addClasses('relative');
+export const asAbsolute = addClasses('absolute');
+export const asFixed = addClasses('fixed');
+export const asOverflowHidden = addClasses('overflow-hidden');
+export const withVisibleOnHoverStyles = addClasses('hover:overflow-visible');
+export const withStaticOnHoverStyles = addClasses('hover:static');
+export const asPositionedLeft = addClasses('left-0');
+export const withNoInsetStyles = addClasses('inset-0');
+export const withFullZIndex = addClasses('z-full');
+export const withFullWidthStyles = addClasses('w-full');
+export const withFullHeightStyles = addClasses('h-full');
+export const withColumnDirectionStyles = addClasses('flex-col');
+export const withLightGrayBg = addClasses('bg-gray-200');
+export const withTransformStyles = addClasses('transform');
+export const withSlideInTranslateStyles = addClasses('-translate-x-full');
+export const withMaterialIconsFont = addClasses('material-icons');
+export const withPointerCursorStyles = addClasses('cursor-pointer');
+export const asDisabled = addClasses('pointer-events-none');

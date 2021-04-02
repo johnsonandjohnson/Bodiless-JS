@@ -86,8 +86,6 @@ const withBurgerMenuSchema = asToken(
       Title: asToken(asAccodionTitle, withDisabledTitleLink),
     }),
   }),
-  asToken.meta.term('Attribute')('Submenu'),
-  asToken.meta.term('Component')('Element'),
 );
 
 /**

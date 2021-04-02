@@ -26,7 +26,7 @@ import withMenuDesign from './withMenuDesign';
 import {
   asFlex, asOverflowHidden, asRelative, asAbsolute,
   asPositionedLeft, withFullWidthStyles, withColumnDirectionStyles,
-  withStaticOnHoverStyles, withVisibleOnHoverStyles, asElementToken, asListToken,
+  withStaticOnHoverStyles, withVisibleOnHoverStyles,
 } from '../token';
 
 /*
@@ -49,25 +49,21 @@ const asVerticalSubMenu = withDesign({
 
 const asVisibleOnActive = asToken(
   addClassesIf(isContextActive)('overflow-visible'),
-  asElementToken('Layout')('Overflow'),
 );
 
 const asResponsiveSublist = withDesign({
   Wrapper: asToken(
     addClasses('min-w-full'),
-    asElementToken('Sizing')('Min-Width'),
   ),
 });
 
 const asStaticOnHover = asToken(
   withStaticOnHoverStyles,
   removeClassesIf(useIsMenuOpen)('hover:static'),
-  asElementToken('Layout')('Position'),
 );
 
 const asRelativeNotActive = asToken(
   addClassesIf(isContextNotActive)('relative'),
-  asElementToken('Layout')('Position'),
 );
 
 const asFullWidthSublist = withDesign({
@@ -78,7 +74,6 @@ const withHoverStyles = withDesign({
   Item: asToken(
     withVisibleOnHoverStyles,
     removeClassesIf(useIsMenuOpen)('hover:overflow-visible'),
-    asElementToken('Layout')('Overflow'),
   ),
 });
 
@@ -92,8 +87,6 @@ const withBaseMenuStyles = asToken(
     Wrapper: asToken(asFlex, asRelative),
     Item: asOverflowHidden,
   }),
-  // @todo Discuss Attr and Category
-  asListToken('Menu')('Main'),
 );
 
 /*
@@ -114,7 +107,6 @@ const asListSubMenu = asToken(
   withBaseSubMenuStyles,
   asVisibleOnActive,
   asRelative,
-  asListToken('Submenu')('List'),
 );
 
 /*
@@ -126,7 +118,6 @@ const asToutsSubMenu = asToken(
   asStaticOnHover,
   withBaseSubMenuStyles,
   asRelativeNotActive,
-  asListToken('Submenu')('Touts'),
 );
 
 /*
@@ -138,7 +129,6 @@ const asColumnSubMenu = asToken(
   asStaticOnHover,
   withBaseSubMenuStyles,
   asRelativeNotActive,
-  asListToken('Submenu')('Columns'),
 );
 
 /**

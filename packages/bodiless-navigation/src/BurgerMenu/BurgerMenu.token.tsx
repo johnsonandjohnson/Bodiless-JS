@@ -19,8 +19,7 @@ import {
 import { useIsBurgerMenuVisible, useIsBurgerTransitionCompleted } from './BurgerMenuContext';
 import {
   withLightGrayBg, withNoInsetStyles, withFullWidthStyles, withFullHeightStyles,
-  asFixed, withFullZIndex, withMaterialIconsFont, withPointerCursorStyles,
-  asElementToken, asDisabled,
+  asFixed, withFullZIndex, withMaterialIconsFont, withPointerCursorStyles, asDisabled,
 } from '../token';
 
 const withSlideInOutAnimation = withDesign({
@@ -33,7 +32,6 @@ const withSlideInOutAnimation = withDesign({
     // has completed all animations.
     addClassesIf(useIsBurgerTransitionCompleted)('animate-slide-out'),
     addClassesIf(useIsBurgerMenuVisible)('animate-slide-in'),
-    asElementToken('Transitions')('Animation'),
   ),
 });
 
