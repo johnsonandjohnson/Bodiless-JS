@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,122 @@
 
 import {
   addClasses,
+  addProps,
   withDesign,
+  replaceWith,
+  addPropsIf,
 } from '@bodiless/fclasses';
+import flow from 'lodash/flow';
+import negate from 'lodash/negate';
+import { ifToggledOn, withChild } from '@bodiless/core';
+import {
+  useIsCarouselItemActive,
+  useCarouselIsPlaying,
+} from '@bodiless/carousel';
+import { asBodilessChameleon } from '@bodiless/components';
+import MaterialIcon from '@material/react-material-icon';
+import 'pure-react-carousel/dist/react-carousel.es.css';
+import { LandscapeImage, LandscapeLinkableImage } from '../Image';
+import Tout from '../Tout';
+import { Reponsive16By9YouTube } from '../YouTube';
 
-// Currently doesn't add any classes but used as example to where to put them.
-const asCarouselDefaultStyle = withDesign({
-  Wrapper: addClasses(''),
-  Slider: addClasses(''),
+const withImageSlide = withDesign({
+  Slider: withDesign({
+    Title: replaceWith(LandscapeImage),
+  }),
 });
 
-export default asCarouselDefaultStyle;
+const withChameleonSlide = withDesign({
+  Slider: flow(
+    asBodilessChameleon('cham-slide', { component: 'GatsbyImage' }),
+    withDesign({
+      Linkable: withDesign({
+        Title: replaceWith(LandscapeLinkableImage),
+      }),
+      GatsbyImage: withDesign({
+        Title: replaceWith(LandscapeImage),
+      }),
+      HorizontalTout: withDesign({
+        Title: replaceWith(Tout),
+      }),
+      Video: withDesign({
+        Title: replaceWith(Reponsive16By9YouTube),
+      }),
+    }),
+  ),
+});
+
+const withAutoPlay = withDesign({
+  Wrapper: addProps({
+    isPlaying: true,
+  }),
+});
+
+const withNavButtonsStyles = withDesign({
+  SliderWrapper: addClasses('relative'),
+  ButtonNext: flow(
+    addClasses('absolute top-1/2 right-0'),
+    addProps({
+      children: 'Next',
+    }),
+  ),
+  ButtonBack: flow(
+    addClasses('absolute top-1/2 left-0'),
+    addProps({
+      children: 'Back',
+    }),
+  ),
+});
+
+const withControlsWrapperStyles = withDesign({
+  ControlsWrapper: addClasses('flex justify-center pt-2'),
+});
+
+const withDotStyles = flow(
+  withControlsWrapperStyles,
+  withDesign({
+    Dots: flow(
+      addClasses('flex items-center'),
+      withDesign({
+        Item: withDesign({
+          Dot: flow(
+            addClasses('w-2 h-2 rounded-full mx-2 p-1 inline-block border-2 border-solid align-middle'),
+            ifToggledOn(useIsCarouselItemActive)(
+              addClasses('bg-blue-700'),
+            ),
+          ),
+        }),
+      }),
+    ),
+  }),
+);
+
+const withAutoPlayButtonStyles = flow(
+  withControlsWrapperStyles,
+  withDesign({
+    ButtonPlay: flow(
+      addClasses('ml-2 rounded-full p-1 block w-8'),
+      addClasses('leading-none text-1xl bg-blue-700 text-white'),
+      withChild(MaterialIcon),
+      withDesign({
+        Child: flow(
+          addPropsIf(useCarouselIsPlaying)({
+            icon: 'pause',
+          }),
+          addPropsIf(negate(useCarouselIsPlaying))({
+            icon: 'play_arrow',
+          }),
+        ),
+      }),
+    ),
+  }),
+);
+
+export {
+  withImageSlide,
+  withAutoPlay,
+  withNavButtonsStyles,
+  withDotStyles,
+  withAutoPlayButtonStyles,
+  withChameleonSlide,
+};

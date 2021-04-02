@@ -22,6 +22,7 @@ import withIframeVariations from './withIframeVariations';
 import withYouTubeVariations from './withYouTubeVariations';
 import withSocialShare from './withSocialShare';
 import withListVariations from './withListVariations';
+import withCarouselVariations from './withCarouselVariations';
 
 // Order of includes currently dictates order in Component Picker
 // thus recommend putting more frequently used components toward top for quicker access.
@@ -35,6 +36,7 @@ const withDefaultVariations = flow(
   withIframeVariations,
   withSocialShare,
   withYouTubeVariations,
+  withCarouselVariations,
 );
 
 export default withDefaultVariations;

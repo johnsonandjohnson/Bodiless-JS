@@ -12,10 +12,10 @@
  * limitations under the License.
  */
 
-import React, { Fragment } from 'react';
+import React, { Fragment, ComponentType } from 'react';
 import { flow } from 'lodash';
 import {
-  Div, designable, addClasses, replaceWith,
+  Div, designable, addClasses, replaceWith, DesignableComponentsProps,
 } from '@bodiless/fclasses';
 import { useNode, withNodeKey, ifToggledOn } from '@bodiless/core';
 import { withBreadcrumbStore } from '@bodiless/components';
@@ -39,7 +39,13 @@ const Container = flow(
 
 const BreadcrumbProvider = withBreadcrumbStore(Fragment);
 
-const BaseLayout = ({ children, components }) => {
+type LayoutComponents = {
+  Breadcrumbs: ComponentType<any>,
+};
+
+type LayoutProps = DesignableComponentsProps<LayoutComponents>;
+
+const BaseLayout: ComponentType<LayoutProps> = ({ children, components }) => {
   const { Breadcrumbs } = components;
   return (
     <>
@@ -66,7 +72,7 @@ const Layout$ = designable({
     // hide breadcrumbs on home page
     ifToggledOn(isHomePage)(replaceWith(React.Fragment)),
   )(MegaMenuBreadcrumbs),
-})(BaseLayout);
+} as LayoutComponents)(BaseLayout);
 
 const Layout = withSearchResult(Layout$);
 

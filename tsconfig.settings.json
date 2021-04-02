@@ -28,6 +28,7 @@
       "@bodiless/bv/*": ["bodiless-bv/src/*"],
       "@bodiless/card": ["bodiless-card/src"],
       "@bodiless/card/*": ["bodiless-card/src/*"],
+      "@bodiless/carousel": ["bodiless-carousel/src"],
       "@bodiless/components": ["bodiless-components/src"],
       "@bodiless/components/*": [".bodiless-components/src/*"],
       "@bodiless/components-ui": ["bodiless-components-ui/src"],
