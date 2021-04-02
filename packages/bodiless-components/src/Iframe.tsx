@@ -62,8 +62,9 @@ const withHeightSnippet = withFormSnippet({
   nodeKeys: 'height',
   defaultData: { height: '' },
   snippetOptions: {
-    renderForm: ({ formState }) => {
-      const { errors } = formState;
+    // @TODO Better types
+    renderForm: ({ formState, scope }: any) => {
+      const errors = scope ? formState.errors[scope] : formState.errors;
       const {
         ComponentFormLabel,
         ComponentFormText,
