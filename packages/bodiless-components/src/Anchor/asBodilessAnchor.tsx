@@ -39,7 +39,7 @@ const anchorOptions: BodilessOptions<Props, Data> = {
   name: 'anchor-settings',
   global: false,
   local: true,
-  renderForm: ({ formState, scope } : any) => {
+  renderForm: ({ formState, scope }) => {
     // eslint-disable-next-line no-useless-escape
     const isValidHtmlId = (id : string) => (/^[A-Za-z]+[\w\-\:\.]*$/.test(id));
     const errors = scope ? formState.errors[scope] : formState.errors;
