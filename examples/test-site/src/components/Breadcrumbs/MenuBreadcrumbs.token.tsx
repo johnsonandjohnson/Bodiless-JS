@@ -33,6 +33,7 @@ import {
   addProps,
   withDesign,
   replaceWith,
+  startWith,
   Span,
   remove,
 } from '@bodiless/fclasses';
@@ -42,12 +43,21 @@ import {
   asBold,
   asEditableLink,
   asLink,
+  asEditable,
 } from '../Elements.token';
 
 const HomeBreadcrumbIcon = asToken(
   addProps({ children: 'home' }),
   addClasses('material-icons'),
 )(Span);
+
+const withFinalTrailEditors = withDesign({
+  // We only need an Editable for the Title and no Link for the FinalTrail.
+  Title: flow(
+    startWith(Span),
+    asEditable('text', 'Breadcrumb Final Trail'),
+  ),
+});
 
 const withStartingTrailIcon = (
   nodeKeys?: WithNodeKeyProps,
@@ -141,4 +151,5 @@ export {
   withHiddenCurrentPageItem,
   withStartingTrailLinkStyles,
   withReadOnlyStartingTrail,
+  withFinalTrailEditors,
 };

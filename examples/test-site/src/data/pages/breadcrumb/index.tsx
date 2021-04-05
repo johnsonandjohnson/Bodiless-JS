@@ -28,7 +28,6 @@ import {
 } from '@bodiless/navigation';
 import {
   addClasses, H1 as H1$, H2 as H2$, P as P$, asToken, Fragment,
-  withDesign, startWith,
 } from '@bodiless/fclasses';
 import { flow } from 'lodash';
 
@@ -44,18 +43,11 @@ import {
   withStartingTrailLinkStyles,
   withReadOnlyStartingTrail,
   $withBreadcrumbStyles,
+  withFinalTrailEditors,
 } from '../../../components/Breadcrumbs/MenuBreadcrumbs.token';
 import {
-  asHeader2, asHeader1, asItalic, asEditable,
+  asHeader2, asHeader1, asItalic,
 } from '../../../components/Elements.token';
-
-const withFinalTrailEditors = withDesign({
-  // We only need an Editable for the Title and no Link for the FinalTrail.
-  Title: flow(
-    startWith(Fragment),
-    asEditable('text', 'Breadcrumb Final Trail'),
-  ),
-});
 
 const DemoBreadcrumbs = asToken(
   asBreadcrumbs,

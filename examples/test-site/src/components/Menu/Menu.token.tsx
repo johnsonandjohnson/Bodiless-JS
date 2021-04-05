@@ -96,7 +96,7 @@ const $withColumnsSublistStyles = withDesign({
 });
 
 const $withToutsSublistStyles = withDesign({
-  Title: asToken(withMenuToutStyles, withMenuToutEditors),
+  Title: asToken(withMenuToutEditors, withMenuToutStyles),
   Item: addClasses('w-1/3'),
   Wrapper: addClasses('flex-wrap'),
 });
