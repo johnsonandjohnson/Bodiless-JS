@@ -34,7 +34,7 @@ import {
   withDesign,
   replaceWith,
   Span,
-  Fragment,
+  remove,
 } from '@bodiless/fclasses';
 import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 
@@ -69,7 +69,7 @@ const withStartingTrailIcon = (
 );
 
 const withoutLink = withDesign({
-  Link: replaceWith(Fragment),
+  Link: remove,
 });
 
 const withNonLinkableItems = withDesign({
@@ -82,9 +82,7 @@ const withReadOnlyStartingTrail = withDesign({
 
 const withBoldedFinalTrail = withDesign({
   Item: ifToggledOn(({ isCurrentPage }: any) => isCurrentPage)(asBold),
-  FinalTrail: withDesign({
-    Title: asBold,
-  }),
+  FinalTrail: asBold,
 });
 
 const withHiddenCurrentPageItem = flow(
