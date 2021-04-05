@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.72](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.71...v0.0.72) (2021-04-01)
+
+
+### Bug Fixes
+
+* **core:** Fix core dependency and update example sites lock files ([#948](https://github.com/johnsonandjohnson/bodiless-js/issues/948)) ([1b1406d](https://github.com/johnsonandjohnson/bodiless-js/commit/1b1406deab3cff7d264ccd61cec16fdeb2574a8a))
+
+
+
+
+
 ## [0.0.71](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.70...v0.0.71) (2021-03-31)
 
 
