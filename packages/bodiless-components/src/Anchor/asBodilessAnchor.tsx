@@ -13,10 +13,10 @@
  */
 
 import React, { HTMLProps, useCallback } from 'react';
-import { flow } from 'lodash';
 import {
   asBodilessComponent,
   useMenuOptionUI,
+  useNode,
   withSidecarNodes,
 } from '@bodiless/core';
 import type {
@@ -30,6 +30,23 @@ export type Data = {
 };
 
 export type Props = HTMLProps<HTMLElement>;
+
+/**
+ * hook that determines if the link data is empty
+ * the hook validates the data in the current node and in the corresponding prop
+ *
+ * @param props - link based component props
+ * @returns true when link data is empty, otherwise false
+ */
+// const useEmptyAnchorToggle = ({id}) => {
+//   console.log(id);
+//   const { node } = useNode<Data>();
+//   console.log('node', node);
+//   console.log('ID', id);
+//  return id && id.length;
+// };
+
+//const withoutLinkWhenLinkDataEmpty = ifToggledOn(useEmptyAnchorToggle)(replaceWith(Fragment));
 
 // Options used to create an edit button.
 const anchorOptions: BodilessOptions<Props, Data> = {
@@ -58,7 +75,7 @@ const anchorOptions: BodilessOptions<Props, Data> = {
           validate={validate}
           validateOnChange
           validateOnBlur
-          placeholder="Descriptive IDx"
+          placeholder="Descriptive ID"
         />
         {errors && errors.id && (
           <ComponentFormWarning>{errors.id}</ComponentFormWarning>
@@ -67,13 +84,17 @@ const anchorOptions: BodilessOptions<Props, Data> = {
     );
   },
 };
-
 const asBodilessAnchor: AsBodiless<Props, Data> = (
   nodeKeys?,
   defaultData?,
   useOverrides?,
-) => withSidecarNodes(flow(
-  asBodilessComponent(anchorOptions)(nodeKeys, defaultData, useOverrides),
-));
+) => withSidecarNodes(
+  asBodilessComponent(anchorOptions)(nodeKeys, defaultData,
+    (props) => {
+      const overrides = typeof (useOverrides) === 'function' ? useOverrides(props) : useOverrides;
+      const { id } = useNode<Data>().node.data;
+      return { label: !id ? 'Add' : 'Edit', ...overrides };
+    }),
+);
 
 export default asBodilessAnchor;
