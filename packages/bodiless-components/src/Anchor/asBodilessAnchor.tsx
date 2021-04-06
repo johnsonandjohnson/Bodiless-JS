@@ -31,7 +31,6 @@ export type Data = {
 
 export type Props = HTMLProps<HTMLElement>;
 
-// Options used to create an edit button.
 const anchorOptions: BodilessOptions<Props, Data> = {
   icon: 'local_offer',
   groupLabel: 'Anchor',
