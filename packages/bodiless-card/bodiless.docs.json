@@ -1,5 +1,6 @@
 {
   "Components": {
+    "Card.md": "./doc/Card.md",
     "assets": {
       "CardFilter.jpg": "./doc/assets/CardFilter.jpg",
       "CardResize.jpg": "./doc/assets/CardResize.jpg",

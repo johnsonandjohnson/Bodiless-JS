@@ -24,7 +24,7 @@ To place a card on your website click on the +Add button on the toolbar.
 
 1. Select the type of card you'd like to use. You can use the filters in the
 component window to narrow your selection.  
-![](./doc/assets/CardFilter.jpg)
+![](./assets/CardFilter.jpg)
 
 2. Once you have selected the appropriate card you can edit the various
 components via the context menu.
@@ -32,11 +32,11 @@ components via the context menu.
 
 3. Resize the card by clicking near the blue line on the righthand edge of the
 flow container box and dragging to expand or contract.
-![](./doc/assets/CardResize.jpg)
+![](./assets/CardResize.jpg)
 
 5. Re-position the card on the page by clicking near the two lines at the top
 left of the card's flow container box and dragging to the desired place on your
-page.  ![](./doc/assets/CardMove.jpg)
+page.  ![](./assets/CardMove.jpg)
 
 
 ---
@@ -46,7 +46,7 @@ page.  ![](./doc/assets/CardMove.jpg)
 ### Card Variations with combining tokens
 
 The card can be composed of different tokens (see
-[code](./src/components/Cards.tokens.tsx)) to
+[code](../src/components/Cards.tokens.tsx)) to
 create many card variations. These variations include:
 
 * Horizontal 
