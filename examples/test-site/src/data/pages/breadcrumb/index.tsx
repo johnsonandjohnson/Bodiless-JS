@@ -43,7 +43,6 @@ import {
   withStartingTrailLinkStyles,
   withReadOnlyStartingTrail,
   $withBreadcrumbStyles,
-  withFinalTrailEditors,
 } from '../../../components/Breadcrumbs/MenuBreadcrumbs.token';
 import {
   asHeader2, asHeader1, asItalic,
@@ -52,7 +51,7 @@ import {
 const DemoBreadcrumbs = asToken(
   asBreadcrumbs,
   withMenuTitleEditors(undefined, asReadOnly),
-  withEditableFinalTrail(withFinalTrailEditors),
+  withEditableFinalTrail(),
   $withBreadcrumbStyles,
 )(BreadcrumbsClean);
 

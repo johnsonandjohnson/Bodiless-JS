@@ -22,12 +22,12 @@ import {
 } from '@bodiless/navigation';
 import { asToken } from '@bodiless/fclasses';
 
-import { $withBreadcrumbStyles, withFinalTrailEditors } from './MenuBreadcrumbs.token';
+import { $withBreadcrumbStyles } from './MenuBreadcrumbs.token';
 
 const $withBreadcrumbEditors = asToken(
   withMenuTitleEditors(undefined, asReadOnly),
   withEditableStartingTrail(undefined, { nodeCollection: 'site' }),
-  withEditableFinalTrail(withFinalTrailEditors),
+  withEditableFinalTrail(),
 );
 
 const Breadcrumbs = asToken(
