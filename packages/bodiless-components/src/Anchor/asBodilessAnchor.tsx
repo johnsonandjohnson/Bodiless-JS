@@ -31,23 +31,6 @@ export type Data = {
 
 export type Props = HTMLProps<HTMLElement>;
 
-/**
- * hook that determines if the link data is empty
- * the hook validates the data in the current node and in the corresponding prop
- *
- * @param props - link based component props
- * @returns true when link data is empty, otherwise false
- */
-// const useEmptyAnchorToggle = ({id}) => {
-//   console.log(id);
-//   const { node } = useNode<Data>();
-//   console.log('node', node);
-//   console.log('ID', id);
-//  return id && id.length;
-// };
-
-//const withoutLinkWhenLinkDataEmpty = ifToggledOn(useEmptyAnchorToggle)(replaceWith(Fragment));
-
 // Options used to create an edit button.
 const anchorOptions: BodilessOptions<Props, Data> = {
   icon: 'local_offer',
