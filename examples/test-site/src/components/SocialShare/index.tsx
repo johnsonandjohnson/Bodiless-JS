@@ -15,7 +15,6 @@ import React, { FunctionComponent as FC } from 'react';
 import Helmet from 'react-helmet';
 import { flow, flowRight } from 'lodash';
 import { useMenuOptionUI } from '@bodiless/core';
-import type { FormBodyProps } from '@bodiless/core';
 import {
   withMeta,
   asBodilessHelmet,
@@ -26,6 +25,7 @@ import {
 } from '@bodiless/components';
 import { SocialShare as SocialShareClean } from '@bodiless/organisms';
 import type { SocialShareProvider } from '@bodiless/organisms';
+import { useFieldApi } from 'informed';
 import asSimpleSocialShare, {
   asOrangeSocialShare,
   DropZoneWrapper,
@@ -277,13 +277,13 @@ const dropZoneUI: Partial<TImagePickerUI> = {
   UploadArea: () => <DropZoneUploadArea>Drag a file or click here to upload.</DropZoneUploadArea>,
 };
 
-const SocialShareFormImage = (props: FormBodyProps) => {
+const SocialShareFormImage = () => {
   const { ComponentFormText } = useMenuOptionUI();
-  const { formapi } = props;
+  const fieldApi = useFieldApi(metaSocialShareImageName);
   return (
     <DropZoneWrapper>
       <ComponentFormText field={metaSocialShareImageName} id="social-share-img-src" />
-      <ImageDropZone formApi={formapi} targetFieldName={metaSocialShareImageName} ui={dropZoneUI} />
+      <ImageDropZone fieldApi={fieldApi} ui={dropZoneUI} />
     </DropZoneWrapper>
   );
 };
