@@ -52,7 +52,11 @@ export type Props = HTMLProps<HTMLElement>;
 const anchorOptions: BodilessOptions<Props, Data> = {
   icon: 'local_offer',
   groupLabel: 'Anchor',
-  label: 'Add',
+  label: () => {
+    const { id } = useNode<Data>().node.data;
+    console.log('node', useNode<Data>().node);
+    return id ? 'Edit' : 'Add';
+  },
   name: 'anchor-settings',
   global: false,
   local: true,
@@ -89,12 +93,7 @@ const asBodilessAnchor: AsBodiless<Props, Data> = (
   defaultData?,
   useOverrides?,
 ) => withSidecarNodes(
-  asBodilessComponent(anchorOptions)(nodeKeys, defaultData,
-    (props) => {
-      const overrides = typeof (useOverrides) === 'function' ? useOverrides(props) : useOverrides;
-      const { id } = useNode<Data>().node.data;
-      return { label: !id ? 'Add' : 'Edit', ...overrides };
-    }),
+  asBodilessComponent(anchorOptions)(nodeKeys, defaultData, useOverrides),
 );
 
 export default asBodilessAnchor;
