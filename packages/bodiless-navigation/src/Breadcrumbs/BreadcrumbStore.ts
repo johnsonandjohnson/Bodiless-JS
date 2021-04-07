@@ -99,7 +99,7 @@ export class BreadcrumbItem implements BreadcrumbItemType {
     const base = DEFAULT_URL_BASE;
     const itemURL = typeof item === 'string' ? new URL(item, base) : new URL(item.link.data, base);
     const thisURL = new URL(this.link.data, base);
-    if (this.link.data === '#' || itemURL.host !== thisURL.host || itemURL.hash !== thisURL.hash) return false;
+    if (/^#/.test(this.link.data) || itemURL.host !== thisURL.host) return false;
     return isChildOf(itemURL.pathname, thisURL.pathname);
   }
 
@@ -107,7 +107,7 @@ export class BreadcrumbItem implements BreadcrumbItemType {
     const base = DEFAULT_URL_BASE;
     const itemURL = typeof item === 'string' ? new URL(item, base) : new URL(item.link.data, base);
     const thisURL = new URL(this.link.data, base);
-    if (this.link.data === '#' || itemURL.host !== thisURL.host || itemURL.hash !== thisURL.hash) return false;
+    if (/^#/.test(this.link.data) || itemURL.host !== thisURL.host) return false;
     return trimTrailingSlash(thisURL.pathname) === trimTrailingSlash(itemURL.pathname);
   }
 
