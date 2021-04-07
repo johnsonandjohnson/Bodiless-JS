@@ -54,9 +54,9 @@ BodilessJS supports several image formats. See below for the full list.
 
 ### Callout Imagery
 
-- Since touts/callouts vary in size, layout and placement, there are no hard
+- Since cards/callouts vary in size, layout and placement, there are no hard
   limits on the imagery that can be used with them.
-- We recommend that each image be selected and fit to the tout/callout created.
+- We recommend that each image be selected and fit to the card/callout created.
 
 ### Recommended Image Sizes
 
@@ -97,11 +97,11 @@ or size ratio.
 
 ---
 
-#### Tout 50% (1 column, 2 columns)
+#### Card 50% (1 column, 2 columns)
 
-Images for touts where the image takes 50% of the page width. This is applicable to 
-touts that go in 1 columns (1 tout to the full page width, image on the left) and 
-2 columns (1 tout on the left, 1 tout on the right). There is no recommended size ratio. 
+Images for cards where the image takes 50% of the page width. This is applicable to 
+cards that go in 1 columns (1 card to the full page width, image on the left) and 
+2 columns (1 card on the left, 1 card on the right). There is no recommended size ratio. 
 You can use portrait or landscape orientation.
 
 |   Extension |   Recommended width (px) | Maximum width (px)   |   Recommended size (KB) | Maximum size (KB)   |
@@ -110,10 +110,10 @@ You can use portrait or landscape orientation.
 
 ---
 
-#### Tout 33% and 25% (3 columns, 4 columns)
+#### Card 33% and 25% (3 columns, 4 columns)
 
-Images for touts where the image takes 33% or 25% of the page width. This is applicable 
-to touts that go in 3 columns (3 touts in a row) and 4 columns (4 touts in a row). There 
+Images for cards where the image takes 33% or 25% of the page width. This is applicable 
+to cards that go in 3 columns (3 cards in a row) and 4 columns (4 cards in a row). There 
 is no recommended size ratio. Both portrait or landscape orientation is acceptable. 
 
 |   Extension |   Recommended width (px) | Maximum width (px)   |   Recommended size (KB) | Maximum size (KB)   |

@@ -538,7 +538,7 @@ Platform.sh offers two different ways to implement redirect rules, **Whole-route
               regexp: true
       ```
 
-      In this case, path "/foo/touts/bar" will be redirected to "/touts".
+      In this case, path "/foo/cards/bar" will be redirected to "/cards".
 
   1. Redirect with prefix.
 

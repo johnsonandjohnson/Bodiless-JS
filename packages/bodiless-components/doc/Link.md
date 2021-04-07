@@ -1,7 +1,7 @@
 # Link Component
 
 The Link Component allows you to easily add links to your site. Links are
-used within other components - such as touts, menus, and images to name a few.
+used within other components - such as cards, menus, and images to name a few.
 
 ## Content Editor Details
 
@@ -23,7 +23,7 @@ To set links used within components:
 
 ### Adding Links in Rich Text Editor
 
-To add a link to text in the [rich text editor](../../../Components/RichText)(e.g. in the body copy of a Tout):
+To add a link to text in the [rich text editor](../../../Components/RichText)(e.g. in the body copy of a Card):
 
 1. Highlight the text you want to add the link to.
 ![](./assets/HighlightLinkText.jpg)

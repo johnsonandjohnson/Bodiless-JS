@@ -111,12 +111,12 @@ Bodiless extends the notion of design tokens to components which are larger
 than simple elements ("molecules", "organisms", "templates" and even "pages" in
 atomic design lingo, though we don't draw much of a distinction among them). A
 "Component Token" is usually a colletion of element tokens which should be applied
-to the constituent elements of a complex component.  For example, imagine a `Tout`
+to the constituent elements of a complex component.  For example, imagine a `Card`
 component which has a title, an image, body text and a call-to-action link. We can
 then define the following HOC to apply tokens to the title and link:
 
 ``` js
-const asToutPink = withDesign({
+const asCardPink = withDesign({
   Title: addClasses('text-base text-pink font-bold'),
   Link: flow(
     addClasses('bg-pink'),
@@ -126,22 +126,22 @@ const asToutPink = withDesign({
 ```
 
 In effect, this is creating a sort of macro-token which defines one of the ways
-a tout can be styled--or, really, one of the axes of variation in tout styling.
+a card can be styled--or, really, one of the axes of variation in card styling.
 This can be combined with other tokens to create a specific variant, eg:
 ```js
-const asPinkHorizontalToutNoBody = flow(
-  asToutPink,
-  asToutHorizontal,
-  asToutNoBody,
+const asPinkHorizontalCardNoBody = flow(
+  asCardPink,
+  asCardHorizontal,
+  asCardNoBody,
 );
 ```
 
 Just like element tokens, component tokens can be extended or customized to meet local design
 requirements:
 ```js
-import { asToutPink as asToutPinkBase } from 'some-design-system';
-const asToutPink = flow(
-  asToutPinkBase,
+import { asCardPink as asCardPinkBase } from 'some-design-system';
+const asCardPink = flow(
+  asCardPinkBase,
   withDesign({
     Title: flow(
       removeClasses('text-base'),
@@ -168,14 +168,14 @@ be leveraged to make behavioral Component Tokens, eg:
 
 ```js
 import { withEditorSimple, withEditorBasic } from 'my-element-tokens';
-const asEditableTout = withDesign({
+const asEditableCard = withDesign({
   Title: withEditorSimple('title', 'Enter title here'),
   Body: withEditorBasic('body', 'Enter body text here'),
 });
 ```
 
-`asEditableTout` can now be composed with other tout tokens to make an editable
-version of all the different tout variants on your site, using standard editors
+`asEditableCard` can now be composed with other card tokens to make an editable
+version of all the different card variants on your site, using standard editors
 for each composed text element.
 
 ## Applying Tokens to Components
@@ -190,7 +190,7 @@ Component tokens, and their constituent elements should use the
 [FClasses API](../Development/Architecture/FClasses) to allow application of
 utility-based element tokens.
 
-For example, the basic tout from `@bdodiless/organisms` is very simple:
+For example, the basic card from `@bdodiless/card` is very simple:
 
 ```js
     <Wrapper {...rest}>
@@ -208,63 +208,63 @@ For example, the basic tout from `@bdodiless/organisms` is very simple:
 ```
 
 All the constitutent components default to basic HTML elements stylable
-via the FClasses API, and the tout itself is designable by the Design API.
+via the FClasses API, and the card itself is designable by the Design API.
 That's it: no additional styling or functionality is part of the component.
 
-To make an editable version of the tout, we apply a behavioral component token:
+To make an editable version of the card, we apply a behavioral component token:
 
 ``` js  
-import { ToutClean } from '@bodiless/organisms';
+import { CardClean } from '@bodiless/card';
 
-const asEditableTout = flow(
+const asEditableCard = flow(
   withDesign({
     Image: asEditableImage('image'),
     ImageLink: asEditableLink('cta'),
-    Title: withEditorSimple('title', 'Tout Title Text'),
+    Title: withEditorSimple('title', 'Card Title Text'),
     Link: flow(
       asEditableLink('cta'),
-      withEditorSimple('ctaText', 'Tout Button Text'),
+      withEditorSimple('ctaText', 'Card Button Text'),
     ),
-    Body: withEditorBasic('body', 'Tout Body Text'),
+    Body: withEditorBasic('body', 'Card Body Text'),
   }),
 );
-const Tout = asEditableTout(ToutClean);
+const Card = asEditableCard(CardClean);
 
 ```
 
-Then, to make styled variants of the editable tout, we compose various component
+Then, to make styled variants of the editable card, we compose various component
 tokens.
 
 ```js
 
-const ToutHorizontal = flow(asToutDefaultStyle, asToutHorizontal, asEditableTout)(Tout);
-const ToutHorizontalNoTitle = flow(asToutDefaultStyle, asToutHorizontal, asToutNoTitle)(Tout);
-const ToutVertical = flow(asToutDefaultStyle, asToutVertical)(Tout);
-const ToutVerticalNoTitle = flow(asToutDefaultStyle, asToutVertical, asToutNoTitle)(Tout);
-const ToutVerticalNoTitleNoBody = flow(
-  asToutDefaultStyle,
-  asToutVertical,
-  asToutNoBodyNoTitle,
-)(Tout);
+const CardHorizontal = flow(asCardDefaultStyle, asCardHorizontal, asEditableCard)(Card);
+const CardHorizontalNoTitle = flow(asCardDefaultStyle, asCardHorizontal, asCardNoTitle)(Card);
+const CardVertical = flow(asCardDefaultStyle, asCardVertical)(Card);
+const CardVerticalNoTitle = flow(asCardDefaultStyle, asCardVertical, asCardNoTitle)(Card);
+const CardVerticalNoTitleNoBody = flow(
+  asCardDefaultStyle,
+  asCardVertical,
+  asCardNoBodyNoTitle,
+)(Card);
 
 ```
 
-Generally speaking, these styled tout instances should be *local*. It is the
+Generally speaking, these styled card instances should be *local*. It is the
 *tokens*, not the *components* which we export and share. If we want to reuse a
 particular combination, we can create a composed token:
 
 ```js
-export const asToutVerticalNoTitleNoBody = flow(
-  asToutDefaultStyle,
-  asToutVertical,
-  asToutNoBodyNoTitle,
+export const asCardVerticalNoTitleNoBody = flow(
+  asCardDefaultStyle,
+  asCardVertical,
+  asCardNoBodyNoTitle,
 );
 ```
 
 The reason for this is that this token can be applied to *any component which
-implements the tout's design API*.  For example, let's imagine we needed a
-special kind of tout with two CTA links.  We could create our clean component
-to extend the existing tout template by adding this second link:
+implements the card's design API*.  For example, let's imagine we needed a
+special kind of card with two CTA links.  We could create our clean component
+to extend the existing card template by adding this second link:
 
 ```js
     <Wrapper {...rest}>
@@ -282,8 +282,8 @@ to extend the existing tout template by adding this second link:
     </Wrapper>
 ```
 
-Now, all the component tokens we defined for the original tout will still apply
-to our custom tout (though of course we will need to extend them to apply
+Now, all the component tokens we defined for the original card will still apply
+to our custom card (though of course we will need to extend them to apply
 styling or functionality to the second link).
 
 ## Conclusion
@@ -295,6 +295,6 @@ documentation for the [Design API](../Development/Architecture/FClasses).
 
 For reference, here is a flow diagram showing how utility classes, element
 tokens, component tokens and components are composed to create a basic,
-horizontal tout:
+horizontal card:
 
-![](./ToutHorizontalDefaultFlow.svg)
+![](./CardHorizontalDefaultFlow.svg)

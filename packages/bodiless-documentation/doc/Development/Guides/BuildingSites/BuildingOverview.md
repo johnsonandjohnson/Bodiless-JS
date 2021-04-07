@@ -154,8 +154,8 @@ every site will probably use in some form.
   * Basic : Superscript, Bold, Italic, Underline, Link, Align Text
   * Full Featured : adds in more functionality to Basic such as Strikethru, headers, quotes.
   * These can be easily customized or extended to support editor requirements for the site.
-* [Touts](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Tout):
-  Touts are blocks of content that can include Image, Title, Body, Call to
+* [Cards](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Card):
+  Cards are blocks of content that can include Image, Title, Body, Call to
   Action Link.
 * [Images](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Image):
   Reusable Landscape and Square Images. 
