@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,9 +12,8 @@
  * limitations under the License.
  */
 
-import Image from './jandjwebsite.jpg';
-
-export default {
-  src: Image,
-  alt: "Johnson & Johnson's website",
-};
+export * from './htmlDeserializer';
+export * from './withFlowContainerDefaultHtml';
+export * from './listDeserializer';
+export * from './defaultDeserializers';
+export * from './createFlowContainerItem';

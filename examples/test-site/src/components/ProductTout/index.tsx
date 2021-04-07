@@ -15,29 +15,33 @@
 import { flow } from 'lodash';
 import { withSidecarNodes } from '@bodiless/core';
 import {
-  withDesign,
+  withDesign, startWith,
 } from '@bodiless/fclasses';
 import { ProductClean } from '@bodiless/organisms';
 import { BVInlineRatings } from '@bodiless/bv';
+import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import { withEditorBasic, withEditorSimple } from '../Editors';
 import {
   asEditableLink,
-  asEditableImage,
 } from '../Elements.token';
+import { asEditableImagePlain as asEditableImage } from '../Image';
 import { asProductToutDefaultStyle } from './token';
 
 export const asProductTout = flow(
   withDesign({
     ImageLink: withSidecarNodes(
       asEditableLink('cta'),
+      startWith(GatsbyLink),
     ),
     Image: asEditableImage('image'),
     TitleLink: withSidecarNodes(
       asEditableLink('cta'),
+      startWith(GatsbyLink),
     ),
     Title: withEditorSimple('title', 'Product Title Text'),
     BvReviewLink: withSidecarNodes(
       asEditableLink('cta'),
+      startWith(GatsbyLink),
     ),
     BvReview: () => BVInlineRatings,
     Body: withEditorBasic('body', 'Product Body Text'),

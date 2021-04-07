@@ -1,0 +1,31 @@
+name: Doc
+env:
+  CI: true
+  FORCE_COLOR: 1
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish_doc:
+    name: Publish documentation
+    runs-on: ubuntu-16.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Use Node.js v12.19
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.19
+      - name: Setup
+        run: npm run setup
+      - name: Build docs
+        run: npm run build:doc
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./examples/test-site/doc

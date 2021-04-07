@@ -26,7 +26,7 @@ import {
   StylableProps,
   addProps,
 } from '@bodiless/fclasses';
-import { withNode } from '@bodiless/core';
+import { withNode, withResizeDetector } from '@bodiless/core';
 
 export type ToutComponents = {
   Wrapper: ComponentType<StylableProps>,
@@ -81,6 +81,7 @@ const ToutBase: FC<Props> = ({ components, ...rest }) => {
 
 const ToutClean = flow(
   designable(toutComponentStart, 'Tout'),
+  withResizeDetector,
   withNode,
 )(ToutBase);
 

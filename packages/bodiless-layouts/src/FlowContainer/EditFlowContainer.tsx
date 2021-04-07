@@ -17,7 +17,7 @@ import { arrayMove, SortEnd } from 'react-sortable-hoc';
 import { observer } from 'mobx-react-lite';
 import { flowRight } from 'lodash';
 import {
-  withActivateOnEffect, withNode, withMenuOptions,
+  withActivateOnEffect, withNode, withMenuOptions, withResizeDetector,
 } from '@bodiless/core';
 import { designable, stylable } from '@bodiless/fclasses';
 import SortableChild from './SortableChild';
@@ -101,6 +101,7 @@ EditFlowContainer.defaultProps = {
 
 const asEditFlowContainer = flowRight(
   withActivateOnEffect,
+  withResizeDetector,
   observer,
   designable(EditFlowContainerComponents, 'FlowContainer'),
   withMenuOptions({

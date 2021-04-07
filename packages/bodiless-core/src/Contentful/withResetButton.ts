@@ -21,13 +21,15 @@ import { withMenuOptions } from '../PageContextProvider';
 import { useNode } from '../NodeProvider';
 import { TMenuOption } from '../Types/ContextMenuTypes';
 
-type MenuOptionWithNodeKey = Partial<TMenuOption> & {
+type MenuOptionWithNodeKey = (Partial<TMenuOption> & {
   nodeKey?: string | string[];
-};
+}) | string;
 
 const useMenuOptions = (menuOptionWithNodeKey?: MenuOptionWithNodeKey) => () => {
   const { node } = useNode();
-  const { nodeKey, ...menuOption } = menuOptionWithNodeKey || { nodeKey: undefined };
+  const { nodeKey, ...menuOption } = typeof menuOptionWithNodeKey === 'string'
+    ? { nodeKey: menuOptionWithNodeKey }
+    : menuOptionWithNodeKey || { nodeKey: undefined };
   const nodeKeys = Array.isArray(nodeKey) ? nodeKey : [nodeKey];
   const nodeKeysToDelete = nodeKeys.map(key => (key ? node.path.concat(key) : undefined));
   // TODO: we should disable or remove the button when the node is already reverted

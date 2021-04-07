@@ -1,4 +1,11 @@
 const express = require('express');
+const {
+  createDefaultContentPlugins,
+  getSampleDefaultContentConfig,
+} = require('@bodiless/gatsby-theme-bodiless/dist/DefaultContent');
+const {
+  getConfig: getSiteDefaultContentConfig,
+} = require('./src/components/Contentful');
 
 const activeEnv = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
 
@@ -36,6 +43,10 @@ const plugins = [
   {
     resolve: 'gatsby-plugin-sitemap',
   },
+  ...createDefaultContentPlugins(
+    ...getSampleDefaultContentConfig(),
+    ...getSiteDefaultContentConfig(),
+  ),
 ];
 
 const tagManagerEnabled = (process.env.GOOGLE_TAGMANAGER_ENABLED || '1') === '1';

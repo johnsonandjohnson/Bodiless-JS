@@ -24,11 +24,11 @@ import { withEditorSimple } from '../Editors';
 import {
   asHeader1,
   asImage,
-  asEditableImage,
   asYMargin,
   asNegXMargin,
   withPadding5,
 } from '../Elements.token';
+import { asEditableImagePlain as asEditableImage } from '../Image';
 import {
   asToutWithPaddings,
   asToutDefaultStyle,

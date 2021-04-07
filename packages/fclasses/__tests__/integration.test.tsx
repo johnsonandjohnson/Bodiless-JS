@@ -178,7 +178,7 @@ const Div = stylable<HTMLProps<HTMLDivElement>>('div');
 
 const ContextMenuButton = flow(
   withoutProps<VariantProps>(['isActive', 'isFirst', 'isEnabled']),
-  addClasses('cursor-pointer pl-2 text-gray').flow,
+  addClasses('cursor-pointer pl-2 text-gray') as HOC,
   flowIf(hasProp('isActive'))(
     flow(addClasses('text-white'), removeClasses('text-gray')),
   ),

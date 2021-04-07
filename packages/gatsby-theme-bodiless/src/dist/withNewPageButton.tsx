@@ -24,6 +24,7 @@ import {
   useEditContext,
   withMenuOptions,
   ContextMenuProvider,
+  ContextSubMenu,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
 import { flow } from 'lodash';
@@ -213,10 +214,17 @@ const useMenuOptions = () => {
 
   const menuOptions = [
     {
+      name: 'page-group',
+      icon: 'description',
+      label: 'Page',
+      Component: ContextSubMenu,
+    },
+    {
       name: 'newpage',
       icon: 'note_add',
-      label: 'Page',
-      isHidden: useCallback(() => !context.isEdit, []),
+      label: 'New',
+      group: 'page-group',
+      isDisabled: useCallback(() => !context.isEdit, []),
       handler: () => formPageAdd(defaultClient),
     },
   ];
@@ -226,7 +234,7 @@ const useMenuOptions = () => {
 const withNewPageButton = withMenuOptions({
   useMenuOptions,
   name: 'NewPage',
-  peer: true,
+  root: true,
 });
 
 export default withNewPageButton;

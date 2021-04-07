@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/components",
-  "version": "0.0.70",
+  "version": "0.0.72",
   "description": "Reusable compoments",
   "author": "Heidi Vanyo <hvanyo@its.jnj.com>",
   "license": "Apache-2.0",
@@ -24,12 +24,14 @@
     "build:api-doc": "typedoc --out doc/api --mode file",
     "lint": "tslint ./src/**/*.ts?x",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
-    "copy": "copyfiles -u 1 \"./src/*.{css,png}\" \"./lib/\""
+    "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
-    "@bodiless/core": "^0.0.70",
-    "@bodiless/fclasses": "^0.0.70",
-    "@bodiless/ui": "^0.0.70",
+    "@bodiless/core": "^0.0.72",
+    "@bodiless/fclasses": "^0.0.72",
+    "@bodiless/layouts": "^0.0.72",
+    "@bodiless/layouts-ui": "^0.0.72",
+    "@bodiless/ui": "^0.0.72",
     "@types/react-helmet": "^5.0.14",
     "axios": "^0.21.0",
     "common-tags": "^1.8.0",

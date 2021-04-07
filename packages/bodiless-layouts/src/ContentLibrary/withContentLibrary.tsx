@@ -4,6 +4,7 @@ import {
   createMenuOptionGroup, withMenuOptions, NodeProvider,
 } from '@bodiless/core';
 import type { OptionGroupDefinition } from '@bodiless/core';
+import type { ComponentOrTag } from '@bodiless/fclasses';
 import { observer } from 'mobx-react-lite';
 import { flow } from 'lodash';
 import ComponentSelector from '../ComponentSelector';
@@ -39,8 +40,8 @@ const copyNode = (source: ContentNode<any>, dest: ContentNode<any>, copyChildren
   }
 };
 
-const withContentLibrary = (options: ContentLibraryOptions) => (
-  Component: ComponentType,
+const withContentLibrary = (options: ContentLibraryOptions) => <P extends object>(
+  Component: ComponentOrTag<P>,
 ) => {
   const {
     DisplayComponent = Component,
@@ -93,7 +94,6 @@ const withContentLibrary = (options: ContentLibraryOptions) => (
     const form = useContextMenuForm({ renderForm, hasSubmit: false });
     const baseOption: OptionGroupDefinition = {
       name: 'content-library',
-      group: 'content-library-group',
       label: 'Library',
       groupLabel: 'Content',
       groupMerge: 'merge',

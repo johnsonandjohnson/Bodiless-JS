@@ -64,5 +64,5 @@ export const useActivateOnEffectActivator = (uuid: string) => {
       onClick('');
       setId('');
     }
-  });
+  }, []);
 };
