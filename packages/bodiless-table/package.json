@@ -26,8 +26,8 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/fclasses": "^0.0.68",
-    "@bodiless/core": "^0.0.68",
+    "@bodiless/fclasses": "^0.0.72",
+    "@bodiless/core": "^0.0.72",
     "lodash": "^4.17.19",
     "uuid": "^3.3.2"
   },
