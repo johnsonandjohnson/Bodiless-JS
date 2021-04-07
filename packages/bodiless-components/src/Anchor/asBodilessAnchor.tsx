@@ -31,6 +31,9 @@ export type Data = {
 
 export type Props = HTMLProps<HTMLElement>;
 
+// eslint-disable-next-line no-useless-escape
+const isValidHtmlId = (id : string) => (/^[A-Za-z]+[\w\-\:\.]*$/.test(id));
+
 const anchorOptions: BodilessOptions<Props, Data> = {
   icon: 'local_offer',
   groupLabel: 'Anchor',
@@ -39,8 +42,6 @@ const anchorOptions: BodilessOptions<Props, Data> = {
   global: false,
   local: true,
   renderForm: ({ formState, scope }) => {
-    // eslint-disable-next-line no-useless-escape
-    const isValidHtmlId = (id : string) => (/^[A-Za-z]+[\w\-\:\.]*$/.test(id));
     const errors = scope ? formState.errors[scope] : formState.errors;
     const validate = useCallback(
       (value: string) => (value && !isValidHtmlId(value)
@@ -66,6 +67,15 @@ const anchorOptions: BodilessOptions<Props, Data> = {
     );
   },
 };
+
+/**
+ * HOC that can be applied to a component to add IDs to be used for anchor links.
+ *
+ * @param nodeKeys
+ * @param defaultData
+ * @param useOverrides
+ * @returns Component - bodiless componenet.
+ */
 const asBodilessAnchor: AsBodiless<Props, Data> = (
   nodeKeys?,
   defaultData?,

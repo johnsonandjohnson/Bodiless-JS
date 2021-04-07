@@ -16,7 +16,9 @@ import { flow } from 'lodash';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { asBodilessAnchor, asBodilessLink } from '@bodiless/components';
-import { A, asToken, H1, H2, Span } from '@bodiless/fclasses';
+import {
+  A, H1, H2, Span,
+} from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
 import { asHeader1, asHeader2 } from '../../../components/Elements.token';
 
