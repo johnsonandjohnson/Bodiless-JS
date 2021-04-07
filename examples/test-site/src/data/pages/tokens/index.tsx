@@ -19,7 +19,10 @@ import {
   H1, addProps, withDesign, replaceWith, H3, H2, addClasses,
 } from '@bodiless/fclasses';
 import {
-  CardClean, asAccordionBody, asAccodionTitle, asAccordionWrapper,
+  CardClean,
+} from '@bodiless/card';
+import {
+  asAccordionBody, asAccodionTitle, asAccordionWrapper,
 } from '@bodiless/organisms';
 import {
   withActivateOnEffect, withNodeKey, WithNodeKeyProps, withNode,

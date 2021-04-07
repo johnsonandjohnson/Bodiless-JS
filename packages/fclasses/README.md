@@ -352,7 +352,7 @@ provided by the FClasses API) to individual elements within a compound component
 
 Consider the following component:
 ```javascript
-const Tout: FC<{}> = () => {
+const Card: FC<{}> = () => {
   return (
     <div className="wrapper">
       <h2 className="title">This is the title</h2>
@@ -365,10 +365,10 @@ const Tout: FC<{}> = () => {
 
 With the Design API, rather than providing classes which a consumer can style
 using CSS, we provide a way for consumers to replace or modify the individual
-components of which the Tout is composed:
+components of which the Card is composed:
 
 ```javascript
-export type ToutComponents = {
+export type CardComponents = {
   Wrapper: ComponentType<StylableProps>,
   ImageWrapper: ComponentType<StylableProps>,
   ImageLink: ComponentType<StylableProps>,
@@ -378,7 +378,7 @@ export type ToutComponents = {
   Body: ComponentType<StylableProps>,
   Link: ComponentType<StylableProps>,
 };
-const toutComponentStart:ToutComponents = {
+const cardComponentStart:CardComponents = {
   Wrapper: Div,
   ImageWrapper: Div,
   ImageLink: A,
@@ -389,9 +389,9 @@ const toutComponentStart:ToutComponents = {
   Link: A,
 };
 
-type Props = DesignableComponentsProps<ToutComponents> & { };
+type Props = DesignableComponentsProps<CardComponents> & { };
 
-const ToutBase: FC<Props> = ({ components }) => {
+const CardBase: FC<Props> = ({ components }) => {
   const {
     Wrapper,
     ImageWrapper,
@@ -420,10 +420,10 @@ const ToutBase: FC<Props> = ({ components }) => {
 };
 ```
 
-Here we have defined a type of the components that we need, a starting point for those components and then we have create a componant that accepts those compoents.  Next we will combine the Start point as well as the ToutBase to make a designable tout that can take a Design prop.
+Here we have defined a type of the components that we need, a starting point for those components and then we have create a componant that accepts those compoents.  Next we will combine the Start point as well as the CardBase to make a designable card that can take a Design prop.
 
 ``` js
-const ToutDesignable = designable(toutComponentStart, 'Tout')(ToutBase);
+const CardDesignable = designable(cardComponentStart, 'Card')(CardBase);
 ```
 ### Design Key Annotations
 
@@ -433,8 +433,8 @@ it easier to locate the specific design element to which styles should be
 applied, for example:
 
 ```
-<div bl-design-key="Tout:Wrapper">
-  <div bl-design-key="Tout:ImageWrapper">
+<div bl-design-key="Card:Wrapper">
+  <div bl-design-key="Card:ImageWrapper">
   ...
 ```
 
@@ -442,7 +442,7 @@ Generation of these attributes is disabled by default.  To enable it, wrap the s
 of code for which you want the attributes generated in the `withShowDesignKeys` HOC:
 
 ```js
-const ToutWithDesignKeys = withShowDesignKeys()(ToutDesignable);
+const CardWithDesignKeys = withShowDesignKeys()(CardDesignable);
 ```
 
 or, to turn it on for a whole page, but only when not in production mode,
@@ -456,25 +456,25 @@ const PageWithDesignKeys = withDesignKeys(process.env.NODE_ENV !== 'production')
 
 ## Consuming the Design API
 
-A consumer can now style our Tout by employing the `withDesign()` API method to
+A consumer can now style our Card by employing the `withDesign()` API method to
 pass a `Design` object as a prop value. This is simply a set of higher-order
 components which will be applied to each element. For example:
 
 ```js
-const asBasicTout = withDesign({
+const asBasicCard = withDesign({
   Wrapper: addClasses('font-sans'),
   Title: addClasses('text-sm text-green'),
   Body: addClasses('my-10'),
   Cta: addClasses('block w-full bg-blue text-yellow py-1'),
 });
 
-const BasicTout = asBasicTout(Tout);
+const BasicCard = asBasicCard(Card);
 ```
 
 In ths example, we could simply have provided our design directly as a prop:
 
 ```js
-const BasicTout: FC = () => <Tout design={{
+const BasicCard: FC = () => <Card design={{
   Wrapper: addClasses('font-sans'),
   Title: addClasses('text-sm text-green'),
   Body: addClasses('my-10'),
@@ -486,10 +486,10 @@ However, by using `withDesign()` instead, our component itself will expose its o
 design prop, allowing other consumers to further extend it:
 
 ```javascript
-const asPinkTout = withDesign({
+const asPinkCard = withDesign({
   Cta: addClasses('bg-pink').removeClasses('bg-blue'),
 });
-const PinkTout = asPinkTout(BasicTout);
+const PinkCard = asPinkCard(BasicCard);
 ```
 
 In these examples, we are *extending* the default components. If we wanted
@@ -500,9 +500,9 @@ instead to *replace* one, we could write our HOC to ignore its argument
 const StylableH2 = stylable<JSX.IntrinsicElements['h2']>('h2');
 const StandardH2 = addClasses('text-xl text-blue')(StylableH2);
 
-const StandardTout = withDesign({
+const StandardCard = withDesign({
   Title: replaceWith(StandardH2), // same as () => StandardH2
-})(BasicTout);
+})(BasicCard);
 ```
 
 We can also use the `startWith()` HOC, instead of replacing the whole component, it will only replace the base component but still use any hoc that might have wrapped it.
@@ -511,22 +511,22 @@ As with FClasses, HOC's created via `withDesign()` are themselves reusable, so
 we can write:
 
 ``` js
-const asStandardTout = withDesign({
+const asStandardCard = withDesign({
   Title: replaceWith(StandardH2), // same as () => StandardH2
 });
-const StandardTout = asStandardTout(Tout);
-const StandardPinkTout = asStandardTout(PinkTout);
-const StandardRedTout = asStandardTout(RedTout);
+const StandardCard = asStandardCard(Card);
+const StandardPinkCard = asStandardCard(PinkCard);
+const StandardRedCard = asStandardCard(RedCard);
 ```
 
 And, also as with FClasses, the HOC's can be composed:
 
 ``` js
-const StandardPinkAndGreenTout = flowRight(
+const StandardPinkAndGreenCard = flowRight(
   withGreenCtaText,
-  asStandardTout,
-  asPinkTout,
-)(BasicTout);
+  asStandardCard,
+  asPinkCard,
+)(BasicCard);
 ```
 
 ## Conditional styling
