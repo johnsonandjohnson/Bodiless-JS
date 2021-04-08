@@ -58,8 +58,13 @@ class GitCmd {
       cmd.stdout.on('data', data => {
         stdout += data.toString();
       });
+      // Git cmd error handling.
       cmd.stderr.on('data', data => {
         stderr += data.toString();
+      });
+      // Spawn syscall error handling.
+      cmd.on('error', (err) => {
+        stderr += err.message;
       });
       cmd.on('close', code => {
         logger.log(stdout, stderr, code);

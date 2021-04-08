@@ -53,7 +53,7 @@ export interface DefinesLocalEditContext {
 }
 
 export interface CanBeActivated {
-  isActive: boolean
+  isActive: boolean;
   isInnermost: boolean;
   hasLocalMenu: boolean;
   isInnermostLocalMenu: boolean;

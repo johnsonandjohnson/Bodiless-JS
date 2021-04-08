@@ -6,7 +6,6 @@
     "Chameleon.md": "./doc/Chameleon.md",
     "Editable.md": "./doc/editable.md",
     "Iframe.md": "./doc/Iframe.md",
-    "YouTube.md": "./doc/YouTube.md",
     "assets": {
       "IframeComponentLibrary.jpg": "./doc/assets/IframeComponentLibrary.jpg",
       "IframeConfigButton.jpg": "./doc/assets/IframeConfigButton.jpg",
@@ -18,8 +17,7 @@
       "HighlightLinkText.jpg": "./doc/assets/HighlightLinkText.jpg",
       "ClickLinkButton.jpg": "./doc/assets/ClickLinkButton.jpg",
       "LinkButtonBefore.jpg": "./doc/assets/LinkButtonBefore.jpg",
-      "LinkButtonAfter.jpg": "./doc/assets/LinkButtonAfter.jpg",
-      "YoutubeComponentLibrary.jpg": "./doc/assets/YoutubeComponentLibrary.jpg"
+      "LinkButtonAfter.jpg": "./doc/assets/LinkButtonAfter.jpg"
     }
   }
 }

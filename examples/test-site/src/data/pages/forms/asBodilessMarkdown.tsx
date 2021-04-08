@@ -20,22 +20,20 @@ import MarkdownField from './InformedMarkdown';
 type Data = Pick<Props, 'source'>;
 
 const asBodilessMarkdown = asBodilessComponent<Props, Data>({
+  name: 'edit-markdown',
   icon: 'edit',
-  name: 'edit',
+  label: 'Edit',
+  groupLabel: 'Markdown',
+  formTitle: 'Edit Markdown',
   renderForm: () => {
-    // const { ComponentFormLabel, ComponentFormTitle, ComponentFormTextArea } = useMenuOptionUI();
-    const { ComponentFormLabel, ComponentFormTitle } = useMenuOptionUI();
+    const { ComponentFormLabel } = useMenuOptionUI();
     return (
-      <>
-        <ComponentFormTitle>Markdown</ComponentFormTitle>
-        <ComponentFormLabel>Content</ComponentFormLabel>
-        {/* <ComponentFormTextArea field="source" /> */}
+      <ComponentFormLabel>
+        Content
         <MarkdownField field="source" />
-      </>
+      </ComponentFormLabel>
     );
   },
-  global: false,
-  local: true,
   Wrapper: 'div',
   defaultData: { source: 'Initial Value' },
 });

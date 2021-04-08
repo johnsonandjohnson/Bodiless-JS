@@ -81,12 +81,15 @@ const SortableChild = observer((props: SortableChildProps) => {
     }
   }, [resizing]);
 
-  const { width: minWidth } = snapData({ width: 0, className: '' });
+  const { width: minWidth, currentMediaTuples } = snapData({ width: 0, className: '' });
+  const is1WidthContainer = currentMediaTuples.length === 1;
+  const isResizeEnabled = !is1WidthContainer;
   const className = [...widthClasses.split(' '), ...(classNameProp).split(' ')].join(' ');
   const { SnapIndicator } = getUI(ui);
   return (
     <SlateSortableResizable
       uuid={flowContainerItem.uuid}
+      isResizeEnabled={isResizeEnabled}
       onResize={onResize}
       onResizeStop={throttle(onResizeStop, RESIZE_THROTTLE_INTERVAL)}
       // Set min width a bit smaller to ensure user can drag there, and provide snap back effect.

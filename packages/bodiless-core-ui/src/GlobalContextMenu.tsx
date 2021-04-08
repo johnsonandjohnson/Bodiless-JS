@@ -44,7 +44,7 @@ const ToolbarRight = flow(
 export const FormWrapper = addClasses('bl-flex')(Div);
 
 export const ToolbarDivider = addClasses(
-  'bl-bg-grey bl-w-grid-12 bl--ml-grid-2 bl-mb-grid-3 bl-h-px',
+  'bl-bg-gray bl-w-grid-12 bl--ml-grid-2 bl-mb-grid-3 bl-h-px',
 )(Hr);
 
 export const GlobalTooltip: FC<ReactTooltip['props']> = props => (

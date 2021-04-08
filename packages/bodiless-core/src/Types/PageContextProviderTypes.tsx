@@ -19,7 +19,23 @@ export type TMenuOptionGetter = () => TMenuOption[];
 
 export type PageContextProviderProps = Partial<DefinesLocalEditContext>;
 
+/**
+ * An object which defines a group of menu options.
+ */
 export type MenuOptionsDefinition<P> = Omit<PageContextProviderProps, 'getMenuOptions'> & {
+  /**
+   * A custom hook which returns an array of menu options.  Will be passed the props of
+   * the component.
+   */
   useMenuOptions?: (props: P) => TMenuOption[],
+  /**
+   * When true, specifies that the menu options should be attached to the current context.
+   * Otherwise, a new context will be created as a child of the current context.
+   */
   peer?: boolean,
+  /**
+   * When true, specifies that the menu option sshould be attached to the root context. Options
+   * attached to the root context are always visible.
+   */
+  root?: boolean,
 };

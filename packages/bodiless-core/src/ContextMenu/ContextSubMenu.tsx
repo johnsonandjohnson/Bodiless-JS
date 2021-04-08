@@ -13,13 +13,22 @@
  */
 
 /* eslint-disable no-nested-ternary */
-import React, { FC } from 'react';
+import React, {
+  FC, createContext, useContext, ReactNode,
+} from 'react';
 import { addProps, Div } from '@bodiless/fclasses';
 import ContextMenuItem from '../components/ContextMenuItem';
 import { ContextMenuBase } from '../components/ContextMenu';
 import { useMenuOptionUI } from '../components/ContextMenuContext';
 import { FormChrome } from '../contextMenuForm';
 import type { IContextMenuItemProps, ContextMenuFormProps } from '../Types/ContextMenuTypes';
+
+// A context to hold the child menu items.
+const SubMenuContext = createContext<ReactNode>(null);
+const SubMenuChildren = () => {
+  const children = useContext(SubMenuContext);
+  return <>{children}</>;
+};
 
 const ContextSubMenu: FC<IContextMenuItemProps> = props => {
   const {
@@ -48,13 +57,23 @@ const ContextSubMenu: FC<IContextMenuItemProps> = props => {
         {...rest}
       >
         <SubMenu>
-          {children}
+          <SubMenuChildren />
         </SubMenu>
       </FormChrome>
     </ContextMenuBase>
   );
   const newOption = { ...option, handler };
-  return <ContextMenuItem option={newOption} name={option.name} {...rest} />;
+  return (
+    // We put the children into a context which is then de-referenced
+    // inside the submenu "form". This is necessary bc the handler
+    // above returns a renderForm function which captures the children
+    // in a closure and this is only regenerated when you click the button.
+    // This way, we ensure that the menu buttons re-render when their option
+    // definitions change.
+    <SubMenuContext.Provider value={children}>
+      <ContextMenuItem option={newOption} name={option.name} {...rest} />
+    </SubMenuContext.Provider>
+  );
 };
 
 export default ContextSubMenu;

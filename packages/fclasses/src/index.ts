@@ -19,7 +19,6 @@ import {
 } from './FClasses';
 
 import type {
-  HOC,
   StylableProps,
 } from './FClasses';
 
@@ -51,6 +50,13 @@ import {
 import Fragment from './Fragment';
 
 export * from './StyledHTML';
+
+export { asToken, withTokenFilter } from './Tokens';
+export type {
+  TokenFilterTest, Token, TokenDef,
+  TokenMeta, ComponentWithMeta, ComponentOrTag, TokenProps,
+  HOC,
+} from './Tokens';
 
 export { withShowDesignKeys } from './Context';
 
@@ -89,5 +95,4 @@ export type {
   DesignElement,
   DesignableComponentsProps,
   DesignableComponents,
-  HOC,
 };

@@ -36,7 +36,7 @@ export default props => (
         </SectionMargin>
         <SectionMargin>
           <FilterByGroup>
-            <ProductListingFlowContainer nodeKey="product_listing_touts" />
+            <ProductListingFlowContainer nodeKey="product_listing_cards" />
           </FilterByGroup>
         </SectionMargin>
       </SectionContent>
@@ -46,7 +46,8 @@ export default props => (
 
 export const query = graphql`
   query($slug: String!) {
-    ...PageQuery,
+    ...PageQuery
     ...SiteQuery
+    ...DefaultContentQuery
   }
 `;

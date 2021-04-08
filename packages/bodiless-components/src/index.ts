@@ -14,13 +14,6 @@
 
 import Editable, { withPlaceholder, asEditable } from './Editable';
 import type { UseEditableOverrides } from './Editable';
-import Image, {
-  asBodilessImage,
-  TImagePickerUI,
-  withImagePlaceholder,
-  DropZonePlugin as ImageDropZone,
-} from './Image';
-import type { AsBodilessImage } from './Image';
 import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
 import List from './List_DEPRECATED';
@@ -49,6 +42,7 @@ import asBodilessIframe, {
   withIframeFormSrcSnippet,
   useIframeBodilessOptions,
 } from './Iframe';
+import type { IframeData, IframeProps } from './Iframe';
 import YouTube, {
   asBaseBodilessYouTube,
   asBodilessYouTube,
@@ -75,13 +69,13 @@ import {
 import withResponsiveVariants from './withResponsiveVariants';
 import withBodilessLinkToggle from './withBodilessLinkToggle';
 
+import withFormHeader from './withFormHeader';
+import withFormSnippet from './withFormSnippet';
+
 export {
+  withFormHeader,
+  withFormSnippet,
   withBodilessLinkToggle,
-  Image,
-  asBodilessImage,
-  ImageDropZone,
-  withImagePlaceholder,
-  TImagePickerUI,
   Editable,
   NodeViewer,
   withLinkToggle,
@@ -142,14 +136,19 @@ export {
 };
 
 export * from './Chameleon/index';
+export * from './Image';
 export * from './List';
 export * from './Link';
 
 export * from './Breadcrumbs';
 
-export type { MetaFormFieldType, YouTubePlayerSettings };
+export type {
+  MetaFormFieldType,
+  YouTubePlayerSettings,
+  IframeData,
+  IframeProps,
+};
 
 export type {
-  AsBodilessImage,
   UseEditableOverrides,
 };

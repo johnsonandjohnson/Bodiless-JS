@@ -33,7 +33,7 @@ const withEditor = (Editor:ComponentType<any>) => (nodeKey?: string, placeholder
       withPlaceholder(placeholder),
       withNodeKey(nodeKey),
       withoutProps(['design']),
-    )(Editor)),
+    )(Editor), 'Editor'),
   )
 );
 export default withEditor;

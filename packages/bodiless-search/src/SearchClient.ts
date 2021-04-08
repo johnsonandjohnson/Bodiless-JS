@@ -13,12 +13,14 @@
  */
 
 import axios from 'axios';
+import { TokenSet } from 'lunr';
 import {
   SearchEngineInterface,
   SearchClientInterface,
   TSearchConf,
   TSearchResults,
   TPreview,
+  Suggestion,
 } from './types';
 import LunrSearch from './LunrSearch';
 
@@ -26,6 +28,17 @@ type SearchIndex = {
   idx: object,
   preview: { [key: string]: TPreview; },
   expires: number,
+};
+
+type SuggestionSettings = {
+  sort: (suggestions: Suggestion[]) => Suggestion[],
+};
+
+const sortByFrequency = (suggestions: Suggestion[]) => suggestions
+  .sort((a, b) => (a.count < b.count ? 1 : -1));
+
+const defaultSuggestSettings = {
+  sort: sortByFrequency,
 };
 
 /**
@@ -44,6 +57,27 @@ class SearchClient implements SearchClientInterface {
   search = (queryString: string): TSearchResults => {
     const filtered = this.filter(queryString);
     return this.searchEngine.search(filtered);
+  };
+
+  suggest = (queryString: string, settings: SuggestionSettings = defaultSuggestSettings) => {
+    const index = this.searchEngine.getIndex();
+    if (!index) {
+      return [];
+    }
+    // @ts-ignore property does not exist in lunr.Index type
+    const tokenSet = index.tokenSet as lunr.TokenSet;
+    const tokens = tokenSet.intersect(
+      // @ts-ignore fromString does not exist in TokenSet
+      TokenSet.fromString(`${queryString}*`),
+    ).toArray()
+      .map(token => ({
+        text: token,
+        count: this.search(token).length,
+      }));
+
+    const { sort } = settings;
+    const sortedTokens = sort(tokens);
+    return sortedTokens;
   };
 
   // Remove the search engine specific charactors on customize search.
