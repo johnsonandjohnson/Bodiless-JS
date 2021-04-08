@@ -25,7 +25,7 @@ import {
   asBodilessMenu, withListSubMenu, withBreadcrumbStartingTrail,
   BreadcrumbsClean, asBreadcrumbs, withBreadcrumbStore, withMenuTitleEditors,
 } from '../src';
-import type { BreadcrumbStoreItemsReducer } from '../src/Breadcrumbs/Breadcrumbs';
+import type { BreadcrumbStoreItemsReducer } from '../src/Breadcrumbs/types';
 
 const { DefaultContentNode } = require('@bodiless/core');
 
