@@ -72,7 +72,8 @@ const asBreadcrumb = ({
     const store = useBreadcrumbStore();
     if (store === undefined) return <Component {...props} />;
     const { node } = useNode();
-    const titleNode = node.child<object>(titleNodeKey);
+
+    const titleNode = node.child<{ text: string }>(titleNodeKey);
     const linkNode = node.child<LinkData>(linkNodeKey);
 
     // We need an id which will be the same for all breadcrumb sources which
@@ -81,7 +82,7 @@ const asBreadcrumb = ({
     const item = new BreadcrumbItem({
       uuid: id,
       title: {
-        data: titleNode.data,
+        data: titleNode.data.text,
         nodePath: [...node.path, titleNodeKey].join('$'),
       },
       link: {
