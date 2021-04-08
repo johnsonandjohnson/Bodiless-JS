@@ -24,7 +24,7 @@ const setEditMode = (isEdit: boolean) => {
 setEditMode(true);
 
 // eslint-disable-next-line import/first
-import Image from '../src/Image';
+import { Image } from '../src/Image';
 
 let wrapper: ReactWrapper;
 let menuButton: ReactWrapper;

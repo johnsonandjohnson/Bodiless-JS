@@ -18,7 +18,6 @@ import {
   asBodilessLink,
   asEditable as asEditableCore,
 } from '@bodiless/components';
-import { asBodilessImage } from '@bodiless/components-ui';
 import {
   asResponsive21By9Embed,
   asResponsive16By9Embed,
@@ -78,7 +77,6 @@ const asBlockQuote = addClasses('block mx-4');
 
 /* Image component */
 const asImage = addClasses('');
-const asEditableImage = asBodilessImage;
 const asImageRounded = addClasses('rounded-lg');
 
 /* Link component */
@@ -87,7 +85,7 @@ const asEditableLink = asBodilessLink;
 /* Edit component */
 const asEditable = asEditableCore;
 
-// Tout Components
+// Card Components
 const asCta = addClasses('bg-orange-700 hover:bg-orange-600 text-center text-white p-2 rounded');
 
 /* Utility Classes */
@@ -116,7 +114,6 @@ export {
   asLightTealBackground,
   asLightTealBackgroundOnHover,
   asImage,
-  asEditableImage,
   asEditableLink,
   asEditable,
   asImageRounded,

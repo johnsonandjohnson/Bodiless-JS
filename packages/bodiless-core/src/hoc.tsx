@@ -11,11 +11,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import ResizeObserver from 'resize-observer-polyfill';
 
 import { observer } from 'mobx-react-lite';
 import React, {
   ComponentType as CT, EventHandler, FC,
+  useEffect,
   useRef,
+  useState,
 } from 'react';
 import { flowRight, omit, pick } from 'lodash';
 import { useContextActivator, useExtendHandler, useClickOutside } from './hooks';
@@ -139,4 +142,53 @@ export const withClickOutside = <P extends object>(Component: CT<P> | string) =>
   };
 
   return WithClickOutside;
+};
+
+export type resizeDetectorProps = {
+  onResizeObserver?: (
+    ref:React.MutableRefObject<any>,
+    entries: ResizeObserverEntry[],
+  ) => void;
+};
+
+/**
+ * Utility hoc to add resize detector to the original component.
+ * Optionally a callback can be provided by the component.
+ * If the callback is not provided, as default the component is rendered at resize.
+ *
+ * @return An HOC which will detect resize.
+ */
+export const withResizeDetector = <P extends object>(Component: CT<P> | string) => {
+  const WithResizeDetector = (props: P & resizeDetectorProps) => {
+    const ref = useRef<HTMLDivElement>(null);
+    const [size, setSize] = useState({ width: 0, height: 0 });
+    const defaultOnResizeObserver = () => {
+      if (ref.current) {
+        const { width, height } = ref.current.getBoundingClientRect();
+        if (width !== size.width || height !== size.height) {
+          setSize({ width, height });
+        }
+      }
+    };
+
+    const { onResizeObserver = defaultOnResizeObserver } = props;
+
+    const resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[]) => {
+      onResizeObserver(ref, entries);
+    });
+
+    useEffect(() => {
+      if (ref.current) {
+        resizeObserver.observe(ref.current);
+      }
+    }, [Component]);
+
+    return (
+      <div ref={ref}>
+        <Component dimensions={size} {...props} />
+      </div>
+    );
+  };
+
+  return WithResizeDetector;
 };

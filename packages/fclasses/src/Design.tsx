@@ -14,15 +14,16 @@
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import {
-  intersection, flowRight, flow, identity,
+  intersection, identity, flow,
 } from 'lodash';
-import React, { ComponentType, Fragment, useContext } from 'react';
-import { HOC } from './FClasses';
+import React, {
+  ComponentType, Fragment, useContext, ComponentProps,
+} from 'react';
+import type { Token, ComponentOrTag, HOC } from './Tokens';
 import { addPropsIf } from './addProps';
 import { useShowDesignKeys, useDesignKeysAttribute } from './Context';
 import { withDisplayName } from './hoc-util';
-
-export type DesignElement<P> = (c: ComponentType<P> | string) => ComponentType<P>;
+import { asToken } from './Tokens';
 
 /**
  * This is the type to use for the components prop of a component with a fluid design.
@@ -31,12 +32,16 @@ export type DesignableComponents = {
   [key: string]: ComponentType<any>,
 };
 
+// Necessary for backwards compatibility with existing design definition.
+export type DesignElement<C extends ComponentType|keyof JSX.IntrinsicElements> =
+  ((component: C) => C) | Token<ComponentProps<C>>;
+
 /**
  * This is the type of a design which can be applied to a component which accepts
  * a components prop of type "C".
  */
 export type Design<C extends DesignableComponents> = {
-  [Key in keyof C]?: (component: C[Key]) => C[Key]
+  [Key in keyof C]?: DesignElement<C[Key]>
 } & { _final?: Design<Omit<C, '_final'>> };
 
 /**
@@ -81,11 +86,15 @@ export const asComponent = <P extends object>(
 
 const designContextDefault = undefined as undefined | ComponentType<any>;
 const DesignContext = React.createContext(designContextDefault);
-export const replaceable = <P extends object> (Component:ComponentType<P>) => {
+export const replaceable = <P extends object> (Component:ComponentOrTag<P>): ComponentType<any> => {
   const Replaceable = (props:P) => {
     const UpstreamComponent = useContext(DesignContext);
     const FinalComponent = UpstreamComponent || Component;
-    return <FinalComponent {...props} />;
+    return (
+      <DesignContext.Provider value={undefined}>
+        <FinalComponent {...props} />
+      </DesignContext.Provider>
+    );
   };
   return Replaceable;
 };
@@ -117,8 +126,8 @@ export const applyDesign = <C extends DesignableComponents> (
             // explicitly in C We feel safe casting this to C[string] because DesignableComponents
             // defines it as ComponentType<any>
             // We are wrapping the result in replaceable so one of the HoC could replace it.
-            [key]: incomingDesign[key]!(
-              replaceable(components[key] || DefaultComponent) as any as C[string],
+            [key]: (incomingDesign[key]! as Token<any>)(
+              replaceable(components[key] || DefaultComponent),
             ),
           } as C
         ),
@@ -159,9 +168,13 @@ export const withDesign = <C extends DesignableComponents>(design: Design<C>) =>
       if (designFromProps) {
         const keysToWrap = intersection(Object.keys(designFromProps), Object.keys(design));
         const wrappedDesign = keysToWrap.reduce(
-          (acc, key) => (
-            { ...acc, [key]: flowRight(designFromProps[key]!, design[key]!) }
-          ),
+          (acc, key) => ({
+            ...acc,
+            [key]: asToken(
+              design[key]! as Token<P>,
+              designFromProps[key]! as Token<P>,
+            ),
+          }),
           {} as Design<C>,
         );
         finalDesign = { ...design, ...designFromProps, ...wrappedDesign } as Design<C>;
@@ -172,8 +185,25 @@ export const withDesign = <C extends DesignableComponents>(design: Design<C>) =>
   }
 );
 
-export const replaceWith = <P extends object>(Component: ComponentType<P>) => (
-  (() => Component) as HOC
+/**
+ * Returns a Token which replaces the component to which it is applied with another.
+ *
+ * @param Replacement
+ * The component or tag to use as a replacement.
+ *
+ * @example
+ * ```
+ * const Start = () => <div />
+ * const Replaced = replaceWith('span')(Start);
+ * <Start /> === '<div />'
+ * <Replaced /> ==== '<span />'
+ * ```
+ */
+export const replaceWith = <P extends object>(Replacement: ComponentOrTag<P>): Token<P> => asToken(
+  (() => {
+    const ReplaceWith = (props: P) => <Replacement {...props} />;
+    return ReplaceWith;
+  }) as HOC, // Cast is necessary bc we don't specify a component as a parameter.
 );
 export const remove = <P extends React.HTMLAttributes<HTMLBaseElement>> () => (props:P) => {
   const { children } = props;
@@ -234,13 +264,13 @@ export const withTransformer = <P, Q, X extends Object> (funcs: WithTransformerP
  */
 const extendDesign$ = <C extends DesignableComponents> (design: Design<C>) => (
   (baseDesign: Design<C> = {}) => (
-    Object.getOwnPropertyNames(design).reduce(
-      (acc, key) => (
-        acc[key]
-        // We just checked for key in acc and we are iterating design.
-          ? { ...acc, [key]: flow(acc[key]!, design[key]!) } as Design<C>
-          : { ...acc, [key]: design[key] } as Design<C>
-      ),
+    Object.getOwnPropertyNames(design).filter(k => k !== '_final').reduce(
+      (acc, key) => ({
+        ...acc,
+        [key]: acc[key]
+          ? asToken(acc[key]! as Token<any>, design[key]! as Token<any>)
+          : design[key],
+      }),
       baseDesign,
     ) as Design<C>
   )
@@ -353,7 +383,13 @@ const varyDesign$ = <C extends DesignableComponents> (design:Design<C>):HOD<C> =
           Object.getOwnPropertyNames(design).reduce(
             (innerAcc, key) => (
               // We know this keys exist be cause we are iterating them
-              { ...innerAcc, [baseKey + key]: flow(baseDesign[baseKey]!, design[key]!) }
+              {
+                ...innerAcc,
+                [baseKey + key]: asToken(
+                  baseDesign[baseKey]! as Token<any>,
+                  design[key]! as Token<any>,
+                ),
+              }
             ),
             (acc),
           )
@@ -367,9 +403,7 @@ type DesignOrHod<C extends DesignableComponents> = Design<C> | HOD<C>;
 const flowDesignsWith = <C extends DesignableComponents> (func: (d:Design<C>) => HOD<C>) => (
   (...designs: DesignOrHod<C>[]) => (baseDesign: Design<C> = {}) => (
     flow(
-      ...designs.map(design => (
-        (typeof design === 'function') ? func(design()) : func(design)
-      )),
+      ...designs.map(design => (typeof design === 'function' ? func(design()) : func(design))),
     )(baseDesign)
   )
 );

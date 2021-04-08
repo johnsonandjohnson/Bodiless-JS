@@ -13,17 +13,19 @@
  */
 
 import React, {
-  ComponentType, useContext, useState, FC, useRef, useEffect,
+  ComponentType, useContext, useState, FC, useRef, useEffect, useCallback,
 } from 'react';
 import querystring from 'query-string';
 import SearchClient from '../SearchClient';
-import { TSearchResults } from '../types';
+import { TSearchResults, Suggestion } from '../types';
+import getSearchPagePath from './getSearchPagePath';
 
 type TSearchResultContextValue = {
   results: TSearchResults,
   setResult: React.Dispatch<React.SetStateAction<TSearchResults>>,
   searchTerm: string,
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>,
+  suggest: (term: string) => Suggestion[],
 };
 
 const searchClient = new SearchClient();
@@ -36,13 +38,13 @@ const defaultSearchResults: TSearchResultContextValue = {
   setResult: () => {},
   searchTerm: '',
   setSearchTerm: () => '',
+  suggest: () => [],
 };
 const searchResultContext = React.createContext<TSearchResultContextValue>(defaultSearchResults);
 export const useSearchResultContext = () => useContext(searchResultContext);
 export const SearchResultProvider: FC = ({ children }) => {
   const [results, setResult] = useState<TSearchResults>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const searchPagePath = process.env.BODILESS_SEARCH_PAGE || 'search';
 
   const search = (term: string) => {
     const searchResult = searchClient.search(term);
@@ -63,16 +65,19 @@ export const SearchResultProvider: FC = ({ children }) => {
       }
     } else if (searchTermRef.current !== searchTerm) {
       searchClient.loadIndex().then(() => search(searchTerm));
-      window.location.href = `/${searchPagePath}/#${encodeURIComponent(searchTerm)}`;
+      window.location.href = getSearchPagePath(searchTerm);
       searchTermRef.current = searchTerm;
     }
   });
+
+  const suggest = useCallback((queryString: string) => searchClient.suggest(queryString), []);
 
   const contextValue = {
     results,
     setResult,
     searchTerm,
     setSearchTerm,
+    suggest,
   };
 
   return (

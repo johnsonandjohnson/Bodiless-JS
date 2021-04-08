@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.72](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.71...v0.0.72) (2021-04-01)
+
+**Note:** Version bump only for package @bodiless/search
+
+
+
+
+
+## [0.0.71](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.70...v0.0.71) (2021-03-31)
+
+**Note:** Version bump only for package @bodiless/search
+
+
+
+
+
+## [0.0.70](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.69...v0.0.70) (2021-02-24)
+
+
+### Features
+
+* **search:** Search Component - Type Ahead ([#832](https://github.com/johnsonandjohnson/bodiless-js/issues/832)) ([b2d3373](https://github.com/johnsonandjohnson/bodiless-js/commit/b2d3373bee45df7227bcbb08a930edcd23d46322))
+
+
+
+
+
+## [0.0.69](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.68...v0.0.69) (2021-02-12)
+
+
+### Bug Fixes
+
+* close mobile search box on enter ([#821](https://github.com/johnsonandjohnson/bodiless-js/issues/821)) ([51ca2a8](https://github.com/johnsonandjohnson/bodiless-js/commit/51ca2a817d88d0232bb3b53d3621debf90814ce7))
+
+
+
+
+
 ## [0.0.68](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.67...v0.0.68) (2021-01-25)
 
 

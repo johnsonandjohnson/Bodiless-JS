@@ -1,5 +1,5 @@
 {
   "src": "/images/bodilessheader.jpg",
   "alt": "BodilessJS Header",
-  "preset": "fluid"
+  "preset": "fluid_withWebp"
 }

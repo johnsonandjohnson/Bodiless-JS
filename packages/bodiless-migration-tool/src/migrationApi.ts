@@ -86,7 +86,7 @@ type MigrationApiType = {
  */
 const getPagePathFromUrl = (pageUrl: string) => {
   let filePath = url.parse(pageUrl).path;
-  if (filePath === undefined) {
+  if (filePath === undefined || filePath === null) {
     return '';
   }
   filePath = removeExtensionFromUrl(filePath);

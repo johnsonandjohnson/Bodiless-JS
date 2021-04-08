@@ -13,12 +13,13 @@
  */
 
 import { flow } from 'lodash';
-import { addClasses, removeClasses } from '@bodiless/fclasses';
+import {
+  addClasses, removeClasses, asToken, Token,
+} from '@bodiless/fclasses';
 import {
   asBodilessLink,
   asEditable as asEditableCore,
 } from '@bodiless/components';
-import { asBodilessImage } from '@bodiless/components-ui';
 import {
   asResponsive21By9Embed,
   asResponsive16By9Embed,
@@ -32,7 +33,15 @@ import {
   asUnderline,
   asAlignJustify,
 } from './ElementDefault.token';
+
 import { WithNodeKeyProps } from '../../../../packages/bodiless-organisms/node_modules/@bodiless/core/lib';
+
+export const withCategory = <P extends object>(category?: string) => (...hocs: Token[]) => (
+  asToken(
+    ...hocs,
+    category ? asToken.meta.term('Category')(category) : undefined,
+  )
+);
 
 /* Page Structure */
 const asBlockItem = addClasses('p-1 w-full');
@@ -79,7 +88,6 @@ const asBlockQuote = addClasses('block mx-4');
 
 /* Image component */
 const asImage = addClasses('');
-const asEditableImage = asBodilessImage;
 const asImageRounded = addClasses('rounded-lg');
 
 /* Link component */
@@ -98,7 +106,7 @@ const asEditable = (nodeKeys?: WithNodeKeyProps, placeholder?: string) => asEdit
   }),
 );
 
-// Tout Components
+// Card Components
 const asCta = addClasses('bg-orange-700 hover:bg-orange-600 text-center text-white p-2 rounded');
 
 /* Utility Classes */
@@ -127,7 +135,6 @@ export {
   asLightTealBackground,
   asLightTealBackgroundOnHover,
   asImage,
-  asEditableImage,
   asEditableLink,
   asEditable,
   asImageRounded,

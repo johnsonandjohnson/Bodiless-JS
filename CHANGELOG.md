@@ -3,6 +3,93 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.72](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.71...v0.0.72) (2021-04-01)
+
+
+### Bug Fixes
+
+* **core:** Fix core dependency and update example sites lock files ([#948](https://github.com/johnsonandjohnson/bodiless-js/issues/948)) ([1b1406d](https://github.com/johnsonandjohnson/bodiless-js/commit/1b1406deab3cff7d264ccd61cec16fdeb2574a8a))
+
+
+
+
+
+## [0.0.71](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.70...v0.0.71) (2021-03-31)
+
+
+### Bug Fixes
+
+* **core:** Content library button did not merge properly. ([#927](https://github.com/johnsonandjohnson/bodiless-js/issues/927)) ([a97949e](https://github.com/johnsonandjohnson/bodiless-js/commit/a97949ea353fb3aa06a06cf35789fdda2d63ddbb))
+* **core, layouts:** Context menu doesn't move as RTE expands ([#830](https://github.com/johnsonandjohnson/bodiless-js/issues/830)) ([#937](https://github.com/johnsonandjohnson/bodiless-js/issues/937)) ([7fbe9fa](https://github.com/johnsonandjohnson/bodiless-js/commit/7fbe9fa347b5dd682f8692b9719df2163712ca91))
+* **fclasses:** Ensure startWith component does not apply to nested design keys ([#906](https://github.com/johnsonandjohnson/bodiless-js/issues/906)) ([d85f4b4](https://github.com/johnsonandjohnson/bodiless-js/commit/d85f4b4fe163291ac3c532600b1d49e41b43a7ef)), closes [#802](https://github.com/johnsonandjohnson/bodiless-js/issues/802)
+* **fclasses:** Short term fix for addClasses type error. ([#938](https://github.com/johnsonandjohnson/bodiless-js/issues/938)) ([7319a14](https://github.com/johnsonandjohnson/bodiless-js/commit/7319a1472311f92d2805303784a98b3a17440003)), closes [#919](https://github.com/johnsonandjohnson/bodiless-js/issues/919)
+* **test-site:** move GTM to page menu. ([#910](https://github.com/johnsonandjohnson/bodiless-js/issues/910)) ([c0abbb3](https://github.com/johnsonandjohnson/bodiless-js/commit/c0abbb3757b371836880a2dd78b7e4304cb926d3))
+
+
+### Features
+
+* **core,components:** Edit button improvements ([#878](https://github.com/johnsonandjohnson/bodiless-js/issues/878)) ([4d762b9](https://github.com/johnsonandjohnson/bodiless-js/commit/4d762b91f10c714dab1ad827002f4026b0beffbb)), closes [#624](https://github.com/johnsonandjohnson/bodiless-js/issues/624) [#794](https://github.com/johnsonandjohnson/bodiless-js/issues/794) [#624](https://github.com/johnsonandjohnson/bodiless-js/issues/624) [#794](https://github.com/johnsonandjohnson/bodiless-js/issues/794)
+* **gatsby-theme-bodiless:** Bodiless Image Refresh ([#860](https://github.com/johnsonandjohnson/bodiless-js/issues/860)) ([c696757](https://github.com/johnsonandjohnson/bodiless-js/commit/c69675757a448800e85fc300d5b5ceaa8ec66efe))
+* **gatsby-theme-bodiless:** gatsby link ([#928](https://github.com/johnsonandjohnson/bodiless-js/issues/928)) ([f40d23d](https://github.com/johnsonandjohnson/bodiless-js/commit/f40d23dd6b3a8d4c9018863e7c5c8a6430bf735d))
+* **layouts:** Supply HTML to Flow Container ([#916](https://github.com/johnsonandjohnson/bodiless-js/issues/916)) ([ea27cdb](https://github.com/johnsonandjohnson/bodiless-js/commit/ea27cdb1caa4ad0bb03bb32734a8e557409ebcc7))
+* **tokens:** Token Browser ([#926](https://github.com/johnsonandjohnson/bodiless-js/issues/926)) ([c09d22d](https://github.com/johnsonandjohnson/bodiless-js/commit/c09d22d9644558f370084d219fbfe698832f0cd3)), closes [#925](https://github.com/johnsonandjohnson/bodiless-js/issues/925)
+
+
+### BREAKING CHANGES
+
+* **core,components:** Structure of compound form data has changed.
+
+Fields in compound forms are now namespaced by the snippet id.
+
+Since edit forms (those created by withEditButton or asBodilessComponent) are now
+compound forms, this change affects them as well.
+
+
+
+
+
+## [0.0.70](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.69...v0.0.70) (2021-02-24)
+
+
+### Bug Fixes
+
+* **components:** prevent set state for unmounted component ([#854](https://github.com/johnsonandjohnson/bodiless-js/issues/854)) ([7132142](https://github.com/johnsonandjohnson/bodiless-js/commit/71321425b827779ffc107ba4be0fadebe5979670))
+* **layouts:** nested flow container context menu order ([#863](https://github.com/johnsonandjohnson/bodiless-js/issues/863)) ([11101e2](https://github.com/johnsonandjohnson/bodiless-js/commit/11101e24e782c4942d74c30d4cc1d3ba310d195a))
+* **starter:** Highlighting Link in Tout replaced it with actual href link ([#844](https://github.com/johnsonandjohnson/bodiless-js/issues/844)) ([4f70f1e](https://github.com/johnsonandjohnson/bodiless-js/commit/4f70f1e20f2d7787f1c6340d6704dd59f8eaa22f)), closes [#616](https://github.com/johnsonandjohnson/bodiless-js/issues/616)
+* **test-site:** Add nodekey to limited flow container. ([#890](https://github.com/johnsonandjohnson/bodiless-js/issues/890)) ([1e340ad](https://github.com/johnsonandjohnson/bodiless-js/commit/1e340ad5e1461d76d3273ec87371871c14d8cfa6))
+
+
+### Features
+
+* **bodiless-core-ui:** activate context for group in Local context menu ([#861](https://github.com/johnsonandjohnson/bodiless-js/issues/861)) ([2581ada](https://github.com/johnsonandjohnson/bodiless-js/commit/2581adae82a986670a56e83178f93f5cfd3fe2a2))
+* **layouts:** Enable Nested Flow Containers ([#843](https://github.com/johnsonandjohnson/bodiless-js/issues/843)) ([8fb6418](https://github.com/johnsonandjohnson/bodiless-js/commit/8fb641827f71d5ec736d9406cee4a84f79ed97b6))
+* **search:** Search Component - Type Ahead ([#832](https://github.com/johnsonandjohnson/bodiless-js/issues/832)) ([b2d3373](https://github.com/johnsonandjohnson/bodiless-js/commit/b2d3373bee45df7227bcbb08a930edcd23d46322))
+
+
+
+
+
+## [0.0.69](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.68...v0.0.69) (2021-02-12)
+
+
+### Bug Fixes
+
+* close mobile search box on enter ([#821](https://github.com/johnsonandjohnson/bodiless-js/issues/821)) ([51ca2a8](https://github.com/johnsonandjohnson/bodiless-js/commit/51ca2a817d88d0232bb3b53d3621debf90814ce7))
+* **richtext:** Local Context Menu with a selected style option stays visible after opening an Admin Menu form ([#795](https://github.com/johnsonandjohnson/bodiless-js/issues/795)) ([9b6858e](https://github.com/johnsonandjohnson/bodiless-js/commit/9b6858ed81d75da2049bc708efe45ffe0c1c38e6))
+
+
+### Features
+
+* **bodiless-components,bodiless-migration-tool,gatsby-theme-bodiless:** Bodiless Image supports Img Title ([#755](https://github.com/johnsonandjohnson/bodiless-js/issues/755)) ([45ed2aa](https://github.com/johnsonandjohnson/bodiless-js/commit/45ed2aab856af2d12fb251bb795372e42ba864e5))
+* **bodiless-ui,bodiless-core-ui,bodiless-layouts:** Context Menu Enhancements : RTL divider & Component Label ([#816](https://github.com/johnsonandjohnson/bodiless-js/issues/816)) ([f74bc0d](https://github.com/johnsonandjohnson/bodiless-js/commit/f74bc0d0fa63f828ecd4d7b9459c21b2d19c159b))
+* **components:** add a go to link for bodiless links in edit mode. ([#823](https://github.com/johnsonandjohnson/bodiless-js/issues/823)) ([dd85931](https://github.com/johnsonandjohnson/bodiless-js/commit/dd85931f7d118cc9849b58bdcb80a27c612ea64e)), closes [#585](https://github.com/johnsonandjohnson/bodiless-js/issues/585)
+* **core:** Make text editors designable ([#837](https://github.com/johnsonandjohnson/bodiless-js/issues/837)) ([8a507bd](https://github.com/johnsonandjohnson/bodiless-js/commit/8a507bd64ef204a37218ac0ebe80a9f15ef99d91))
+* **fclasses:** Add configurable attribute for design keys ([#822](https://github.com/johnsonandjohnson/bodiless-js/issues/822)) ([546b606](https://github.com/johnsonandjohnson/bodiless-js/commit/546b6065ec3aacb79e3335a5b82168866928e6cc))
+
+
+
+
+
 ## [0.0.68](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.67...v0.0.68) (2021-01-25)
 
 

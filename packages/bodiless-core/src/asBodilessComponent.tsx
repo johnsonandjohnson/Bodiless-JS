@@ -16,6 +16,7 @@ import React, { ComponentType as CT } from 'react';
 import {
   pick, omit, identity, flowRight,
 } from 'lodash';
+import type { Token } from '@bodiless/fclasses';
 import withNode, { withNodeKey } from './withNode';
 import {
   withNodeDataHandlers, withoutProps, withContextActivator, withLocalContextMenu,
@@ -26,6 +27,7 @@ import withData from './withData';
 import type { WithNodeProps, WithNodeKeyProps } from './Types/NodeTypes';
 import type { EditButtonOptions, EditButtonProps, UseBodilessOverrides } from './Types/EditButtonTypes';
 import { useContextActivator } from './hooks';
+import { ifToggledOn } from './withFlowToggle';
 
 /**
  * Options for making a component "bodiless".
@@ -47,13 +49,12 @@ export type Options<P, D> = EditButtonOptions<P, D> & {
   defaultData?: D,
 };
 
-type HOC<P, Q> = (Component: CT<P>|string) => CT<Q>;
 type BodilessProps = Partial<WithNodeProps>;
 type AsBodiless<P, D, E = {}> = (
   nodeKeys?: WithNodeKeyProps,
   defaultData?: D,
   useOverrides?: UseBodilessOverrides<P, D, E>,
-) => HOC<P, P & BodilessProps>;
+) => Token<P & BodilessProps>;
 
 /**
  * Given an event name and a wrapper component, provides an HOC which will wrap the base component
@@ -127,6 +128,11 @@ const asBodilessComponent = <P extends object, D extends object>(options: Option
     const editButtonOptions = useOverrides
       ? (props: P & EditButtonProps<D>) => ({ ...rest, ...useOverrides(props) })
       : rest;
+    const useHasLocalContext = (props: P & EditButtonProps<D>): boolean => {
+      const def = typeof editButtonOptions === 'function'
+        ? editButtonOptions(props) : editButtonOptions;
+      return !(def.root || def.peer);
+    };
     const finalData = { ...defaultDataOption, ...defaultData };
     return flowRight(
       withBodilessData(nodeKeys, finalData),
@@ -135,9 +141,11 @@ const asBodilessComponent = <P extends object, D extends object>(options: Option
       ),
       ifEditable(
         withEditButton(editButtonOptions),
-        withContextActivator(activateEvent),
-        withLocalContextMenu,
-        Wrapper ? withActivatorWrapper(activateEvent, Wrapper) : identity,
+        ifToggledOn(useHasLocalContext)(
+          withContextActivator(activateEvent),
+          withLocalContextMenu,
+          Wrapper ? withActivatorWrapper(activateEvent, Wrapper) : identity,
+        ),
       ),
       withData,
     );

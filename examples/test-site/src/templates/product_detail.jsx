@@ -133,7 +133,7 @@ export default (props: any) => (
       </SectionMargin>
       <SectionNegXMargin>
         <ProductFlowContainer
-          nodeKey="product_touts"
+          nodeKey="product_cards"
           maxComponents={3}
         />
       </SectionNegXMargin>
@@ -145,5 +145,6 @@ export const query = graphql`
   query($slug: String!) {
     ...PageQuery
     ...SiteQuery
+    ...DefaultContentQuery
   }
 `;

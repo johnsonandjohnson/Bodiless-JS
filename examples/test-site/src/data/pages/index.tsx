@@ -22,7 +22,7 @@ import {
 } from '@bodiless/fclasses';
 import Helmet from 'react-helmet';
 import Layout from '../../components/Layout';
-import { FluidGatsbyImage } from '../../components/Image';
+import { asEditableImage } from '../../components/Image';
 import { FlowContainerDefault } from '../../components/FlowContainer';
 import { withDataLayerPageType, withGlobalGTMForm } from '../../components/GTM';
 
@@ -52,12 +52,17 @@ const EditableBulletPoints = flow(
   }),
 )('ul');
 
+const HeaderImage = flow(
+  asEditableImage('header_image'),
+  addClasses('w-full'),
+)('img');
+
 const HomePage = (props: any) => (
   <Page {...props}>
     <GTMDataLayerHomePageHelmet />
     <Layout>
       <div className="flex my-3">
-        <FluidGatsbyImage className="w-full" nodeKey="header_image" />
+        <HeaderImage />
       </div>
       <h1 className="text-3xl font-bold">
         <Editable nodeKey="title" placeholder="Page Title" />
@@ -76,6 +81,7 @@ export const query = graphql`
   query($slug: String!) {
     ...PageQuery
     ...SiteQuery
+    ...DefaultContentQuery
   }
 `;
 

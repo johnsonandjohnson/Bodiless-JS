@@ -57,7 +57,7 @@ const asToutNoCta = withDesign({
   Link: remove,
 });
 const asToutOverlayTitle = withDesign({
-  Title: addClasses('absolute top-0 m-8'),
+  Title: addClasses('absolute left-0 right-0 top-0 m-8 w-auto'),
   Wrapper: addClasses('relative'),
 });
 const asToutOverlayCta = withDesign({

@@ -31,7 +31,8 @@ export {
   withTailwindClasses,
 } from './FlowContainer/utils/appendTailwindWidthClass';
 export * from './meta';
-export { ifComponentSelector } from './FlowContainer/ComponentDisplayMode';
+export { ifComponentSelector, ifNotComponentSelector } from './FlowContainer/ComponentDisplayMode';
 
 export * from './ContentLibrary';
 export { withDirection, DIRECTIONS };
+export * from './deserializers';

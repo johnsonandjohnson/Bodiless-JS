@@ -22,6 +22,9 @@ const mockBuilder = {
   field: jest.fn(),
   add: jest.fn(),
   build: jest.fn(),
+  pipeline: {
+    add: jest.fn(),
+  },
 };
 (Builder as jest.Mock).mockImplementation(() => mockBuilder);
 

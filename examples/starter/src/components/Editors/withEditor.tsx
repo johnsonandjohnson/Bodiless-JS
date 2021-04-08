@@ -32,7 +32,7 @@ const withEditor = (Editor:ComponentType<any>) => (nodeKey?: string, placeholder
     withChild(flow(
       withPlaceholder(placeholder),
       withNodeKey(nodeKey),
-    )(Editor)),
+    )(Editor), 'Editor'),
   )
 );
 export default withEditor;

@@ -103,7 +103,7 @@ const useCloneButton = (
   );
 
   return {
-    name: 'copy-item',
+    name: `copy-item-${item.uuid}`,
     label: 'Copy',
     icon: 'content_copy',
     global: false,
@@ -115,10 +115,12 @@ const useCloneButton = (
 
 const useDeleteButton = (
   handlers: Handlers,
+  props: EditFlowContainerProps,
   item: FlowContainerItem,
 ) => {
+  const { minComponents = 0 } = props;
   const context = useEditContext();
-  const { deleteFlowContainerItem } = handlers;
+  const { deleteFlowContainerItem, getItems } = handlers;
   const { setId } = useActivateOnEffect();
 
   const handler = () => {
@@ -130,13 +132,16 @@ const useDeleteButton = (
   };
 
   return {
-    name: 'delete',
+    name: `delete-${item.uuid}`,
     label: 'Delete',
     icon: 'delete',
     global: false,
     local: true,
     handler,
-    isHidden: useCallback(() => !context.isEdit, []),
+    isHidden: useCallback(
+      () => !context.isEdit || getItems().length <= minComponents,
+      [minComponents],
+    ),
   };
 };
 
@@ -152,8 +157,7 @@ const useAddButton = (
   const isHidden = item
     ? useCallback(() => !context.isEdit || getItems().length >= maxComponents, [maxComponents])
     : useCallback(() => !context.isEdit || getItems().length > 0, []);
-  // @TODO For nested flow containers we'll have to give these unique names.
-  const name = item ? 'add-item' : 'add';
+  const name = item ? `add-item-${item.uuid}` : `add-${context.id}`;
   return {
     icon: 'add',
     label: 'Add',
@@ -174,15 +178,16 @@ const useSwapButton = (
 ) => {
   const context = useEditContext();
   const { replaceItem } = useComponentSelectorActions(handlers, props, item);
+  const { components } = withNoDesign(props);
   return {
-    name: 'swap',
+    name: `swap-${item.uuid}`,
     label: 'Swap',
     icon: 'repeat',
     global: false,
     local: true,
     handler: () => componentSelectorForm(props, replaceItem),
     activateContext: false,
-    isHidden: useCallback(() => !context.isEdit, []),
+    isHidden: useCallback(() => (!context.isEdit || Object.keys(components).length <= 1), []),
     formTitle: 'Replace Component',
   };
 };
@@ -232,7 +237,7 @@ const useGetItemUseGetMenuOptions = (props: EditFlowContainerProps) => {
       useAddButton(handlers, props$, item),
       useCloneButton(handlers, props$, item),
       useSwapButton(handlers, props$, item),
-      useDeleteButton(handlers, item),
+      useDeleteButton(handlers, props$, item),
     ];
     return useGetter(buttons);
   };

@@ -73,6 +73,8 @@ class LunrSearch implements SearchEngineInterface {
 
   getIndexConfig = () => this.indexConfig;
 
+  getIndex = () => this.index;
+
   setIndexConfig = (conf: TIndexConfig) => { this.indexConfig = conf; };
 
   addDocuments = (doc: TDocument | TDocument[]): void => {
@@ -98,6 +100,10 @@ class LunrSearch implements SearchEngineInterface {
      * https://lunrjs.com/docs/lunr.Builder.html
      */
     const builder = new Builder();
+
+    builder.pipeline.add(
+      lunr.trimmer,
+    );
 
     // Replace non-searchable char with space char, used for tokenize content.
     const filter = (str: string) => str.replace(/:|\$|#|@|!|\^|\*|\+|-|~|%/gi, ' ');

@@ -20,7 +20,7 @@ import {
   ifNotYouTubePlayerAPILoaded,
   useYouTubePlayerAPI,
   YouTubePlayerAPIProvider,
-} from '@bodiless/components';
+} from '@bodiless/youtube';
 import {
   withDesign,
   A,
@@ -223,5 +223,6 @@ export const query = graphql`
   query($slug: String!) {
     ...PageQuery
     ...SiteQuery
+    ...DefaultContentQuery
   }
 `;

@@ -13,12 +13,15 @@
  */
 
 import React, { ComponentType } from 'react';
-import { flowRight } from 'lodash';
+import pick from 'lodash/pick';
+import flow from 'lodash/flow';
 import { v1 } from 'uuid';
 import {
   withMenuOptions, useContextMenuForm, useMenuOptionUI, withContextActivator, withLocalContextMenu,
   TMenuOption, EditButtonProps, UseBodilessOverrides, createMenuOptionGroup,
+  MenuOptionsDefinition, useEditContext,
 } from '@bodiless/core';
+import { flowIf } from '@bodiless/fclasses';
 
 import type { ChameleonButtonProps, ChameleonData } from './types';
 import { useChameleonContext, DEFAULT_KEY } from './withChameleonContext';
@@ -112,18 +115,29 @@ const withChameleonButton = <P extends object, D extends object>(
       : useToggleButtonMenuOption;
     const baseDefinition:TMenuOption = {
       name: `chameleon-${v1()}`,
-      global: false,
-      local: true,
       ...extMenuOptions(),
       ...overrides,
     };
     return createMenuOptionGroup(baseDefinition);
   };
-  return flowRight(
-    withMenuOptions({ useMenuOptions, name: 'Chamelion' }),
-    withContextActivator('onClick'),
-    withLocalContextMenu,
-    // withUnwrap,
+  const useMenuOptionsDefinition = (
+    props: P & EditButtonProps<D>,
+  ): MenuOptionsDefinition<P & EditButtonProps<D>> => ({
+    useMenuOptions,
+    name: 'Chameleon',
+    ...pick(useOverrides(props), 'root', 'peer'),
+  });
+  const useHasLocalContext = (props: P & EditButtonProps<D>): boolean => {
+    const def = useMenuOptionsDefinition(props);
+    const isRoot = def.root || (def.peer && !useEditContext().parent);
+    return !isRoot;
+  };
+  return flow(
+    flowIf(useHasLocalContext)(
+      withContextActivator('onClick'),
+      withLocalContextMenu,
+    ),
+    withMenuOptions(useMenuOptionsDefinition),
   );
 };
 

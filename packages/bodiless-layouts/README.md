@@ -75,8 +75,8 @@ higher order component: `withDesign`.
 
 ``` js
 design = {
-    Tout: flow(startWith(Tout), asDefaultTout),
-    ToutVertical: flow(startWith(Tout), asVerticalTout, asDefaultTout),
+    Card: flow(startWith(Card), asDefaultCard),
+    CardVertical: flow(startWith(Card), asVerticalCard, asDefaultCard),
   }
 const SiteFlowContainer = withDesign(design)(FlowContainer);
 
@@ -100,7 +100,7 @@ HOCs are available.
 
   ``` js
   {
-    Tout:  flow(startWith(Tout), withName('Tout')),
+    Card:  flow(startWith(Card), withName('Card')),
   }
   ```
 
@@ -113,7 +113,7 @@ HOCs are available.
 
   ``` js
   {
-    Tout:  flow(startWith(Tout), withDesc('The Tout touts something special on which an visitor can act.')),
+    Card:  flow(startWith(Card), withDesc('The Card highlights something special on which an visitor can act.')),
   }
   ```
 
@@ -127,7 +127,7 @@ use when giving facets.
   
   ``` js
   {
-    Tout:  flow(startWith(Tout), withTerm('Type')('Tout')),
+    Card:  flow(startWith(Card), withTerm('Type')('Card')),
   }
   ```
 
@@ -138,7 +138,7 @@ the category and term to the description as well as taking a hoc that will be ap
 
   ``` js
   {
-  Tout:  flow(startWith(Tout), withFacet('Color')('Red')(asRedTout)),
+  Card:  flow(startWith(Card), withFacet('Color')('Red')(asRedCard)),
   }
   ```
 
@@ -149,7 +149,7 @@ the category and term to the description as well as taking a hoc that will be ap
   > ``` js
   > const withType = withFacet('Type');
   > {
-  >  Tout:  flow(startWith(Tout), withType('Tout')(asTout)),
+  >  Card:  flow(startWith(Card), withType('Card')(asCard)),
   > } ```
   
 ---
