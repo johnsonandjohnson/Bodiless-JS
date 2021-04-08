@@ -13,8 +13,8 @@
  */
 
 import { flow } from 'lodash';
-import withToutVariations from './withToutVariations';
-import withContentfulTouts from './withContentfulTouts';
+import withCardVariations from './withCardVariations';
+import withContentfulCards from './withContentfulCards';
 import withRichTextVariations from './withRichTextVariations';
 import withSingleAccordionVariations from './withSingleAccordionVariations';
 import withImageVariations from './withImageVariations';
@@ -28,8 +28,8 @@ import withListVariations from './withListVariations';
 const withDefaultVariations = flow(
   withRichTextVariations,
   withImageVariations,
-  withToutVariations,
-  withContentfulTouts,
+  withCardVariations,
+  withContentfulCards,
   withSingleAccordionVariations,
   withListVariations,
   withIframeVariations,

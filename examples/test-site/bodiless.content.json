@@ -1,4 +1,4 @@
 [
   "./src/components/Contentful/Image",
-  "./src/components/Contentful/Tout"
+  "./src/components/Contentful/Card"
 ]

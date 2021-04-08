@@ -46,6 +46,7 @@
     "copy": "copyfiles -u 1 \"./src/dist/**/*.{json,jpg,png}\" \".\""
   },
   "dependencies": {
+    "@bodiless/card": "^0.0.72",
     "@bodiless/components": "^0.0.72",
     "@bodiless/core": "^0.0.72",
     "@bodiless/core-ui": "^0.0.72",

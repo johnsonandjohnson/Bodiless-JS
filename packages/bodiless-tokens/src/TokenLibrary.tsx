@@ -68,7 +68,7 @@ const useEditButtonOptions = (): EditButtonOptions<any, any> => {
           Target
           <ComponentFormSelect field="target">
             <Option value="typography">Typography</Option>
-            <Option value="tout">Tout</Option>
+            <Option value="card">Card</Option>
           </ComponentFormSelect>
         </ComponentFormLabel>
         <ComponentFormLabel>

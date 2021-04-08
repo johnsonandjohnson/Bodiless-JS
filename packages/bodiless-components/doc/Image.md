@@ -32,8 +32,8 @@ the checkmark or hit enter.
 6. You can resize the image by clicking and dragging on the the right hand side
 of the Flow Container.
 
-Images are parts of touts. For more information on adding images to
-touts see the [tout documentation](../../../Components/Touts).
+Images are parts of cards. For more information on adding images to
+cards see the [card documentation](../../../Components/Cards).
 
 ---
 
