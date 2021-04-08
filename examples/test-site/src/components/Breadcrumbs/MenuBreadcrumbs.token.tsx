@@ -83,7 +83,6 @@ const withReadOnlyStartingTrail = withDesign({
 
 const withBoldedFinalTrail = withDesign({
   Item: ifToggledOn(({ isCurrentPage }: any) => isCurrentPage)(asBold),
-  FinalTrail: asBold,
 });
 
 const withHiddenCurrentPageItem = flow(

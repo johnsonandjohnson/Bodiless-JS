@@ -105,7 +105,7 @@ const BreadcrumbsClean$ = (props: CleanBreadcrumbsProps) => {
         <>
           { items$.length > 0
             && <Separator key="finalTrailSeparator" />}
-          <Item key="finalTrail" position={finalTrailItemPosition} isCurrentPage={false}>
+          <Item key="finalTrail" position={finalTrailItemPosition} isCurrentPage>
             <FinalTrail />
           </Item>
         </>
