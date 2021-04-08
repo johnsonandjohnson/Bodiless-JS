@@ -13,7 +13,9 @@
  */
 
 import React, { FC, ReactNode, useCallback } from 'react';
-import { Form, FormApi, FormState } from 'informed';
+import {
+  Form, FormApi, FormState, FormValues,
+} from 'informed';
 import { flow } from 'lodash';
 import { withClickOutside } from './hoc';
 import { useMenuOptionUI } from './components/ContextMenuContext';
@@ -28,7 +30,8 @@ export type Options<D> = {
 
 export type FormBodyProps<D> = ContextMenuFormProps & Options<D> & {
   formApi: FormApi<D>;
-  formState: FormState<D>;
+  formState: FormState<D & FormValues>;
+  scope?: string;
 };
 
 export type FormBodyRenderer<D> = (props: FormBodyProps<D>) => ReactNode;

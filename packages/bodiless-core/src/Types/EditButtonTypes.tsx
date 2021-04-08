@@ -24,6 +24,7 @@ type EditDataHandler<D> = {
 
 export type FormBodyProps<P, D> = ContextMenuFormBodyProps<D> & {
   componentProps: P;
+  scope?: string;
 };
 
 export type FormBodyRenderer<P, D> = (p: FormBodyProps<P, D>) => ReactNode;

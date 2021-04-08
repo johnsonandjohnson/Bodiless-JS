@@ -20,7 +20,7 @@ import {
   ifNotYouTubePlayerAPILoaded,
   useYouTubePlayerAPI,
   YouTubePlayerAPIProvider,
-} from '@bodiless/components';
+} from '@bodiless/youtube';
 import {
   withDesign,
   A,

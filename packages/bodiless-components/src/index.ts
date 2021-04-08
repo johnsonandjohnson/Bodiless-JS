@@ -42,6 +42,7 @@ import asBodilessIframe, {
   withIframeFormSrcSnippet,
   useIframeBodilessOptions,
 } from './Iframe';
+import type { IframeData, IframeProps } from './Iframe';
 import YouTube, {
   asBaseBodilessYouTube,
   asBodilessYouTube,
@@ -68,7 +69,12 @@ import {
 import withResponsiveVariants from './withResponsiveVariants';
 import withBodilessLinkToggle from './withBodilessLinkToggle';
 
+import withFormHeader from './withFormHeader';
+import withFormSnippet from './withFormSnippet';
+
 export {
+  withFormHeader,
+  withFormSnippet,
   withBodilessLinkToggle,
   Editable,
   NodeViewer,
@@ -134,7 +140,12 @@ export * from './Image';
 export * from './List';
 export * from './Link';
 
-export type { MetaFormFieldType, YouTubePlayerSettings };
+export type {
+  MetaFormFieldType,
+  YouTubePlayerSettings,
+  IframeData,
+  IframeProps,
+};
 
 export type {
   UseEditableOverrides,

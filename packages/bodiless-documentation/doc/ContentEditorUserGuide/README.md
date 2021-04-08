@@ -293,7 +293,7 @@ the links below to read more about working with the individual components.
 
 * [Flow Container](../../../Components/FlowContainer) 
 * [Rich Media Text Editor](../../../Components/RichText)
-* [Tout](../../../Components/Tout)
+* [Card](../../../Components/Card)
 
 #### Media
 

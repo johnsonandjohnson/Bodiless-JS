@@ -180,11 +180,11 @@ nonlinkable images and a few variations of image placeholders.
 
 For more information please read [Images](/Components/Image).
 
-## Touts
+## Cards
 
-Most sites use some form of Touts. (A block that consists of Image, Title, Body
+Most sites use some form of Cards. (A block that consists of Image, Title, Body
 and Call to Action) The Bodiless starter comes with this basic form defined in
-`src/components/Tout`. These can be used as is and/or extended to meet
+`src/components/Card`. These can be used as is and/or extended to meet
 the site design requirements. This component has its own set of tokens as well
 for its different variations.
 
@@ -195,7 +195,7 @@ to select from a set of components, place them on the page, and resize them.
 
 Site builder can define set of component variations available to be placed in
 any particular FlowContainer. The starter kit provides a starting point which
-contains the example components described above (Editors, Images and Touts). As
+contains the example components described above (Editors, Images and Cards). As
 with editors, site builder can use the design api to add, remove, replace or
 style these variations. In addition, she can create different FlowContainers to
 control what components may be placed in different areas of sites. e.g. A

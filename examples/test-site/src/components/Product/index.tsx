@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import {
   addClasses,
   addProps,
 } from '@bodiless/fclasses';
-import Tout from '../Tout';
+import Card from '../Card';
 import { withEditorSimple } from '../Editors';
 import {
   asHeader1,
@@ -30,10 +30,10 @@ import {
 } from '../Elements.token';
 import { asEditableImagePlain as asEditableImage } from '../Image';
 import {
-  asToutWithPaddings,
-  asToutDefaultStyle,
-  asToutVertical,
-} from '../Tout/token';
+  asCardWithPaddings,
+  asCardDefaultStyle,
+  asCardVertical,
+} from '../Card/token';
 
 const asTestableProductTitle = addProps({ 'data-product-element': 'title' });
 export const ProductTitle = flow(
@@ -51,11 +51,11 @@ export const ProductImage = flow(
   asTestableProductImage,
 )(Img);
 
-export const ProductTout = flow(
-  asToutWithPaddings,
-  asToutDefaultStyle,
-  asToutVertical,
-)(Tout);
+export const ProductCard = flow(
+  asCardWithPaddings,
+  asCardDefaultStyle,
+  asCardVertical,
+)(Card);
 
 export const SectionContent = withPadding5(Div);
 export const SectionMargin = asYMargin(Div);

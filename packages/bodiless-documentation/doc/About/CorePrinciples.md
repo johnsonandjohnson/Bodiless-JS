@@ -66,7 +66,7 @@ It's better to choose between a set of simple components than to develop more
 complex components which are highly configurable.
 
 ### Examples
-- Rather than a "tout" component with configurable background color, create a
+- Rather than a "card" component with configurable background color, create a
   separate component for each color, and provide a UI which makes it easy for
   an editor to find the one she wants.
 
