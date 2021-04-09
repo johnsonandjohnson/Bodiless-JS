@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@ import resolveConfig from 'tailwindcss/resolveConfig';
 import { getSnapFrom, withTailwindClasses } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withProductVariations from './withProductVariations';
-import { asFilterableProductContainer } from '../ProductTout/token';
+import { asFilterableProductContainer } from '../ProductCard/token';
 import { asFlowContainerWithMargins, asFlowContainerFullWidth } from '../FlowContainer/token';
 import tailWindConfig from '../../../tailwind.config';
 

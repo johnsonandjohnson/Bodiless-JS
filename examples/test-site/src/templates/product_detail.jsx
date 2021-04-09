@@ -133,7 +133,7 @@ export default (props: any) => (
       </SectionMargin>
       <SectionNegXMargin>
         <ProductFlowContainer
-          nodeKey="product_touts"
+          nodeKey="product_cards"
           maxComponents={3}
         />
       </SectionNegXMargin>

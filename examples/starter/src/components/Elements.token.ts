@@ -85,7 +85,7 @@ const asEditableLink = asBodilessLink;
 /* Edit component */
 const asEditable = asEditableCore;
 
-// Tout Components
+// Card Components
 const asCta = addClasses('bg-orange-700 hover:bg-orange-600 text-center text-white p-2 rounded');
 
 /* Utility Classes */

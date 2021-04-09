@@ -12,7 +12,7 @@ The Product Detail Page has the following componets:
   * Product Filter (custom FilterByGroup Component)
     * This is an HOC that renders a Product Filter on left and a taggable Product
     flowContainer on right.
-    * The FlowContainer on right component allows addition of customized product taggable touts.
+    * The FlowContainer on right component allows addition of customized product taggable cards.
 
 ## Usage
 

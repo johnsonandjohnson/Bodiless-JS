@@ -41,7 +41,7 @@ const contentfulFlowContainer = {
       wrapperProps: {
         className: 'w-full',
       },
-      type: 'ToutHorizontalWithTitleBodyWithCTA',
+      type: 'CardHorizontalWithTitleBodyWithCTA',
     },
   ],
 };

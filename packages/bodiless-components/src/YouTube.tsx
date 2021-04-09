@@ -26,10 +26,7 @@ import { addProps } from '@bodiless/fclasses';
 import withFormHeader from './withFormHeader';
 import withFormSnippet from './withFormSnippet';
 import { asBaseBodilessIframe } from './Iframe';
-import type {
-  Props as IframeProps,
-  Data as IframeData,
-} from './Iframe';
+import type { IframeProps, IframeData } from './Iframe';
 
 /**
  * YouTube embed player parameters

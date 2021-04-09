@@ -13,8 +13,8 @@ original content, they can do so at the individual
 component level via a reset button in the context menu.
 
 As a site builder, if you see a component that is often reused
-through the site - say a tout on each article - it can be helpful to build this
-component as a contentful tout and then a content editor can quickly choose this
+through the site - say a card on each article - it can be helpful to build this
+component as a contentful card and then a content editor can quickly choose this
 component and skip entering the data for it.
 
 ## Developing a Contentful Component
@@ -100,39 +100,39 @@ const withDynamicDefaultImage = withDefaultContent(
 
 ### Defining a Contentful Component that consists of composition of multiple components
 
-The following is an example of defining a tout contentful component (which is a composition of set of components: link, rich text editor, image.)
+The following is an example of defining a card contentful component (which is a composition of set of components: link, rich text editor, image.)
 
 The logic is the same except that `withResetButton`'s are added to each component.
 
 * Option 1 with reset on each individual component:
   ```
-  export const withToutResetButtons = withDesign({
+  export const withCardResetButtons = withDesign({
     ImageLink: withResetButton({ nodeKey: 'cta$image' }),
     Title: withResetButton({ nodeKey: 'title' }),
     Body: withResetButton({ nodeKey: 'body' }),
     Link: withResetButton({ nodeKey: 'cta' }),
   });
 
-  export const asContentfulTout = (content: object) => flow(
-    withToutEditors,
-    withToutResetButtons,
+  export const asContentfulCard = (content: object) => flow(
+    withCardEditors,
+    withCardResetButtons,
     withDefaultContent(content),
   );
   ```
 
-* Option 2 with reset at tout level (not individual). A reset button will still
+* Option 2 with reset at card level (not individual). A reset button will still
 appear for each individual component, but data is restored for entire component
 and not per sub-component:
   ```
   
-  export const asContentfulTout = (content: object) => flow(
-    withToutEditors,
+  export const asContentfulCard = (content: object) => flow(
+    withCardEditors,
     withResetButton,
     withDefaultContent(content),
   );
   ```
 
-### Defining the data of the Tout Contentful Component
+### Defining the data of the Card Contentful Component
 
 Create a new component in `src/components/Contentful/GivingBackToCommunity` and
 within the folder create an `index.ts` that contains the definition. Besides
@@ -141,9 +141,9 @@ of the component.
 
 ```
 import { flow } from 'lodash';
-import { ToutClean } from '@bodiless/organisms';
-import { asContentfulTout } from '../../../Tout';
-import { asToutDefaultStyle, asToutHorizontal } from '../../../Tout/token';
+import { CardClean } from '@bodiless/card';
+import { asContentfulCard } from '../../../Card';
+import { asCardDefaultStyle, asCardHorizontal } from '../../../Card/token';
 
 // Import data
 import title from './title.json';
@@ -153,7 +153,7 @@ import cta from './cta.json';
 import cta$text from './cta$text.json';
 
 // Define Data Structure
-const toutContent = {
+const cardContent = {
   cta$image,
   title,
   body,
@@ -161,12 +161,12 @@ const toutContent = {
   cta$text,
 };
 
-// Define component as Contentful tout with data as well as the design tokens.
+// Define component as Contentful card with data as well as the design tokens.
 const GivingBackToCommunity = flow(
-  asContentfulTout(toutContent),
-  asToutDefaultStyle,
-  asToutHorizontal,
-)(ToutClean);
+  asContentfulCard(cardContent),
+  asCardDefaultStyle,
+  asCardHorizontal,
+)(CardClean);
 
 export default GivingBackToCommunity;
 ```
@@ -186,7 +186,7 @@ Adding your contentful components to the Flow Container is done in the normal me
 We suggest that you remember to include the same facets used for the original component as part of this variation, so it can easily be found in the same categories as defined in the original component.
 
 e.g. An example defining the contentful component from the previous example and
-define in `withContentfulTouts.tsx.`
+define in `withContentfulCards.tsx.`
 
 ```
 import { flow } from 'lodash';
@@ -199,14 +199,14 @@ import {
   withDesign,
 } from '@bodiless/fclasses';
 import { withType } from './Categories';
-import { GivingBackToCommunity } from '../Contentful/Tout';
-import { withOrientationFacet, withStructureFacet } from './withToutVariations';
+import { GivingBackToCommunity } from '../Contentful/Card';
+import { withOrientationFacet, withStructureFacet } from './withCardVariations';
 
-const contentfulTouts = {
+const contentfulCards = {
   GivingBackToCommunity: flow(
     replaceWith(GivingBackToCommunity),
     withType('Contentful')(),
-    withType('Tout')(),
+    withType('Card')(),
     withOrientationFacet('Horizontal')(),
     withStructureFacet('With Title and Body')(),
     withStructureFacet('With CTA')(),
@@ -215,7 +215,7 @@ const contentfulTouts = {
   ),
 };
 
-export default withDesign(contentfulTouts);
+export default withDesign(contentfulCards);
 ```
 
 and then simply import into the relevant Flowcontainer:
@@ -224,8 +224,8 @@ and then simply import into the relevant Flowcontainer:
 const FlowContainerDefault = flow(
   withRichTextVariations,
   withImageVariations,
-  withToutVariations,
-  withContentfulTouts,
+  withCardVariations,
+  withContentfulCards,
   withSingleAccordionVariations,
   asFlowContainerWithMargins,
 )(FlowContainer);
