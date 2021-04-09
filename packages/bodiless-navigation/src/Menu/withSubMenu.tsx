@@ -14,11 +14,11 @@
 
 import { flow } from 'lodash';
 import {
-  Token, HOC, Design, withDesign, asToken, withFinalDesign,
+  Token, HOC, Design, withDesign, asToken, withFinalDesign, flowIf,
 } from '@bodiless/fclasses';
 import {
   asStylableList, asStylableSubList, asSubList, withDeleteNodeOnUnwrap,
-  withSubLists, UseListOverrides,
+  withSubLists, UseListOverrides, useListContext,
 } from '@bodiless/components';
 
 import { asBreadcrumb } from '../Breadcrumbs';
@@ -42,9 +42,11 @@ const asMenuSubList = (
   asStylableSubList,
   withDeleteNodeOnUnwrap('sublist'),
   // We must use withFinalDesign to ensure that asBreadcrumb uses the correct node
-  // when the item is a sublist.
+  // when the item is a sublist. Skip `overview` list items.
   withFinalDesign({
-    Item: asBreadcrumb(DEFAULT_NODE_KEYS),
+    Item: flowIf(() => useListContext().currentItem !== 'overview')(
+      asBreadcrumb(DEFAULT_NODE_KEYS),
+    ),
   }),
   withDesign({
     Title: withTitleDesign,
