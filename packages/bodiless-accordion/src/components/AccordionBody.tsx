@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import {
   DesignableProps,
 } from '@bodiless/fclasses';
 import { asAccordionBodyWrapper, asAccordionBodyContent } from './Accordion.tokens';
+import { useAccordionContext } from './AccordionContext';
 import { AccordionBodyComponents, AccordionBodyProps } from './types';
 
 const AccordionBodyComponentsStart:AccordionBodyComponents = {
@@ -27,11 +28,20 @@ const AccordionBodyComponentsStart:AccordionBodyComponents = {
   Content: asAccordionBodyContent(Div),
 };
 
-const AccordionBodyBase: FC<AccordionBodyProps> = ({ components, children }) => {
+const AccordionBodyBase: FC<AccordionBodyProps> = ({
+  components, children, ...accordionMeta
+}) => {
   const { Wrapper, Content } = components;
+  const { isExpanded } = useAccordionContext();
 
   return (
-    <Wrapper>
+    <Wrapper
+      id={accordionMeta.accordionContent}
+      role="region"
+      aria-hidden={!isExpanded ? 'true' : 'false'}
+      aria-labelledby={accordionMeta.accordionTitle}
+      tabIndex={!isExpanded ? -1 : 0}
+    >
       <Content>
         { children }
       </Content>

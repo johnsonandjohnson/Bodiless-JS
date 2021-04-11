@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 import path from 'path';
 
 const whitelistedModules = [
+  '@bodiless/accordion',
   '@bodiless/card',
   '@bodiless/layouts',
   '@bodiless/organisms',

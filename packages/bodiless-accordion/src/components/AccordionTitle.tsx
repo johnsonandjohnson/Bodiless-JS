@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,10 @@
  */
 
 import { flow } from 'lodash';
-import React, { FC, ComponentType } from 'react';
+import React, {
+  FC,
+  ComponentType,
+} from 'react';
 import {
   designable,
   Div,
@@ -26,7 +29,14 @@ import {
   asAccordionLabel,
 } from './Accordion.tokens';
 import { useAccordionContext } from './AccordionContext';
-import { AccordionTitleProps, AccordionTitleComponents } from './types';
+import {
+  AccordionKeyPressHandler,
+  AccordionKeyUpHandler,
+} from './AccordionKeyboard';
+import {
+  AccordionTitleProps,
+  AccordionTitleComponents,
+} from './types';
 
 const AccordionTitleComponentsStart:AccordionTitleComponents = {
   Wrapper: asAccordionTitleWrapper(Div),
@@ -34,12 +44,31 @@ const AccordionTitleComponentsStart:AccordionTitleComponents = {
   Label: asAccordionLabel(Div),
 };
 
-const AccordionTitleBase: FC<AccordionTitleProps> = ({ components, children }) => {
+const AccordionTitleBase: FC<AccordionTitleProps> = ({
+  components, children, ...accordionMeta
+}) => {
   const { Wrapper, Label, Icon } = components;
-  const { isExpanded, setExpanded } = useAccordionContext();
+  const context = useAccordionContext();
+  const {
+    isExpanded,
+    setExpanded,
+    hasFocus,
+    setFocus,
+  } = context;
 
   return (
-    <Wrapper onClick={() => setExpanded(!isExpanded)}>
+    <Wrapper
+      onClick={() => setExpanded(!isExpanded)}
+      onFocus={() => setFocus(!hasFocus)}
+      onBlur={() => setFocus(!hasFocus)}
+      onKeyPress={(event) => AccordionKeyPressHandler(event, context)}
+      onKeyUp={(event) => AccordionKeyUpHandler(event)}
+      id={accordionMeta.accordionTitle}
+      role="button"
+      aria-controls={accordionMeta.accordionContent}
+      aria-expanded={isExpanded ? 'true' : 'false'}
+      tabIndex={0}
+    >
       <Label>{ children }</Label>
       <Icon data-accordion-icon={isExpanded ? 'collapse' : 'expand'}>
         {isExpanded ? 'remove' : 'add'}
@@ -52,7 +81,7 @@ const AccordionTitleClean = flow(
   designable(AccordionTitleComponentsStart, 'AccordionTitle'),
 )(AccordionTitleBase);
 
-const asAccodionTitle = <P extends DesignableProps<AccordionTitleComponents>>(
+const asAccordionTitle = <P extends DesignableProps<AccordionTitleComponents>>(
   Component: ComponentType<P> | string,
 ) => (props: P) => {
     const { design } = props;
@@ -65,5 +94,5 @@ const asAccodionTitle = <P extends DesignableProps<AccordionTitleComponents>>(
 
 export default AccordionTitleClean;
 export {
-  asAccodionTitle,
+  asAccordionTitle,
 };

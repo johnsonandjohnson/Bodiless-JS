@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,28 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../../../components/Layout';
-import SingleAccordion from '../../../components/SingleAccordion';
+import {
+  SingleAccordion,
+  SingleAccordionTitleBordered,
+  SingleAccordionBorderedOnFocus,
+  SingleAccordionNonExpanding,
+} from '../../../components/SingleAccordion';
 
 export default props => (
   <Page {...props}>
     <Layout>
+      <h1 className="text-3xl font-bold">Accordions</h1>
       <div style={{ margin: 100 }}>
-        <SingleAccordion expanded nodeKey="accordion-1" id="accordion-1" />
-        <SingleAccordion nodeKey="accordion-2" id="accordion-2" />
-        <SingleAccordion nodeKey="accordion-3" id="accordion-3" />
-        <SingleAccordion nodeKey="accordion-4" id="accordion-4" />
-        <SingleAccordion nodeKey="accordion-5" id="accordion-5" />
+        <h2 className="text-xl font-bold my-4 p-1">Accordion expanded</h2>
+        <SingleAccordion expanded />
+        <h2 className="text-xl font-bold my-4 p-1">Accordion collapsed</h2>
+        <SingleAccordion />
+        <h2 className="text-xl font-bold my-4 p-1">Accordion fully bordered on focus</h2>
+        <SingleAccordionBorderedOnFocus />
+        <h2 className="text-xl font-bold my-4 p-1">Accordion title bordered</h2>
+        <SingleAccordionTitleBordered />
+        <h2 className="text-xl font-bold my-4 p-1">Accordion non-collapsible</h2>
+        <SingleAccordionNonExpanding expanded />
       </div>
     </Layout>
   </Page>

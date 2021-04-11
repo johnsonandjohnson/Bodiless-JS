@@ -4,7 +4,7 @@ import {
 } from '@bodiless/fclasses';
 import type { HOC } from '@bodiless/fclasses';
 import { flow } from 'lodash';
-import { asAccordionWrapper, asAccodionTitle, asAccordionBody } from '@bodiless/organisms';
+import { asAccordionWrapper, asAccordionTitle, asAccordionBody } from '@bodiless/accordion';
 import { withChild } from '@bodiless/core';
 import {
   asHeader3, asBold, asTextWhite, asTealBackground,
@@ -32,7 +32,7 @@ export const withTokenEditorStyles = asToken(
     ),
     DetailsTitle: asToken(
       withChild(() => <>Details</>) as HOC,
-      asAccodionTitle as HOC,
+      asAccordionTitle as HOC,
       withDesign({
         Wrapper: asToken(
           asHeader3,

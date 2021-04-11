@@ -22,8 +22,8 @@ import {
   CardClean,
 } from '@bodiless/card';
 import {
-  asAccordionBody, asAccodionTitle, asAccordionWrapper,
-} from '@bodiless/organisms';
+  asAccordionBody, asAccordionTitle, asAccordionWrapper,
+} from '@bodiless/accordion';
 import {
   withActivateOnEffect, withNodeKey, WithNodeKeyProps, withNode,
   withNodeDataHandlers, useNode,
@@ -44,7 +44,7 @@ import * as availableTokens from '../../../components/Card/token';
 import { withTypographyTokenPanel } from './TypographySelector';
 
 const asFancyPanel = withDesign({
-  Title: flow(asAccodionTitle, asHeader3, asPrimaryColorBackground),
+  Title: flow(asAccordionTitle, asHeader3, asPrimaryColorBackground),
   Wrapper: asAccordionWrapper,
   Body: asAccordionBody,
   Category: flow(asBold, addClasses('mt-2')),
@@ -104,7 +104,7 @@ const TokenPrinterBody = asAccordionBody(() => (
 const TokenPrinterTitle = flow(
   asPrimaryColorBackground,
   asHeader3,
-  asAccodionTitle,
+  asAccordionTitle,
 )(H3);
 
 const TokenPrinterAccordion = asAccordionWrapper(() => (

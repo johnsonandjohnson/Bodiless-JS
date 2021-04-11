@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,8 @@ import { AccordionProviderProps } from './types';
 
 const asAccordionWrapper = <P extends Object>(
   Component: ComponentType<P> | string,
-) => ({ expanded, ...rest }: P & AccordionProviderProps) => (
-  <AccordionProvider expanded={expanded}>
+) => ({ expanded, focus, ...rest }: P & AccordionProviderProps) => (
+  <AccordionProvider expanded={expanded} focus={focus}>
     <Component {...rest as P} />
   </AccordionProvider>
   );

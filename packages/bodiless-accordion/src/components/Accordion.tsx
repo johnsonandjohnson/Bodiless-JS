@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
 
 import { flow } from 'lodash';
 import React, { FC } from 'react';
+import nextId from 'react-id-generator';
 import { designable, Div } from '@bodiless/fclasses';
 import AccordionTitleClean from './AccordionTitle';
 import AccordionBodyClean from './AccordionBody';
@@ -27,7 +28,7 @@ const AccordionComponentsStart:AccordionComponents = {
 };
 
 const AccordionBase: FC<AccordionProps & AccordionProviderProps> = ({
-  components, expanded, ...rest
+  components, collapsible, expanded, focus, ...rest
 }) => {
   const {
     Wrapper,
@@ -35,11 +36,18 @@ const AccordionBase: FC<AccordionProps & AccordionProviderProps> = ({
     Body = AccordionBodyClean,
   } = components;
 
+  const id = nextId('accordion-');
+  const accordionMeta = {
+    id: { id },
+    accordionTitle: `accordion__title-${id}`,
+    accordionContent: `accordion__content-${id}`,
+  };
+
   return (
-    <AccordionProvider expanded={expanded}>
-      <Wrapper {...rest}>
-        <Title />
-        <Body />
+    <AccordionProvider collapsible={false} expanded={expanded} focus={focus}>
+      <Wrapper {...rest} id={id}>
+        <Title {...accordionMeta} />
+        <Body {...accordionMeta} />
       </Wrapper>
     </AccordionProvider>
   );

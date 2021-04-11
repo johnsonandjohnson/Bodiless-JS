@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,7 @@
 import React, { FC, ComponentType, HTMLProps } from 'react';
 import { useNode } from '@bodiless/core';
 import { withDesign, A } from '@bodiless/fclasses';
-
-import { asAccordionWrapper, asAccodionTitle, asAccordionBody } from '../../Accordion';
+import { asAccordionWrapper, asAccordionTitle, asAccordionBody } from '@bodiless/accordion';
 import { withMenuDesign as withSimpleMenuDesign } from '../SimpleMenu';
 import { withMenuDesign as withMegaMenuDesign } from '../MegaMenu';
 
@@ -64,7 +63,7 @@ const withOverlayLinkAccordion = <P extends object>(Component: ComponentType<P>)
 const asBurgerMenuDesign = {
   Wrapper: withDesign({
     List: withOverlayLinkAccordion,
-    Title: asAccodionTitle,
+    Title: asAccordionTitle,
     WrapperItem: asAccordionWrapper,
   }),
   Item: asBurgerMenuOverviewLink,

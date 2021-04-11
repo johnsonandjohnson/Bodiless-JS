@@ -27,7 +27,7 @@ import {
 import {
   AccordionClean,
   asTestableAccordion,
-} from '@bodiless/organisms';
+} from '@bodiless/accordion';
 import Layout from '../components/Layout';
 import {
   ProductTitle,
@@ -39,7 +39,7 @@ import {
 } from '../components/Product';
 import { FlowContainerDefault } from '../components/FlowContainer';
 import { withEditorBasic } from '../components/Editors';
-import asAccordionDefaultStyle from '../components/SingleAccordion/token';
+import { asAccordionDefaultStyle } from '../components/SingleAccordion/token';
 import GTMDataLayerProductHelmet from '../components/GTM/productViewed';
 import SocialShare from '../components/SocialShare';
 

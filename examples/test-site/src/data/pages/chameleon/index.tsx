@@ -177,7 +177,6 @@ const AvailabilityAccordion = ({ isAvailable, ...rest }: any) => {
       </div>
       <div className={expanded ? '' : 'hidden'}>
         {isAvailable ? 'In Stock!' : 'Call'}
-        a
       </div>
     </Div>
   );

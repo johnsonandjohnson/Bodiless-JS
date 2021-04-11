@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +13,19 @@
  */
 
 import { flow } from 'lodash';
-import { asTestableAccordion, AccordionClean, withDisableExpandOnClick } from '@bodiless/organisms';
+import {
+  asTestableAccordion,
+  AccordionClean,
+  withDisableExpandOnClick,
+} from '@bodiless/accordion';
 import { withNode } from '@bodiless/core';
 import { withDesign } from '@bodiless/fclasses';
-import asAccordionDefaultStyle from './token';
+import {
+  asAccordionDefaultStyle,
+  asAccordionTitleBordered,
+  asAccordionBorderedOnFocus,
+  asAccordionNonExpanding,
+} from './token';
 import { withEditorSimple, withEditorBasic } from '../Editors';
 
 const asSingleAccordion = flow(
@@ -39,6 +48,29 @@ const asSingleAccordion = flow(
   asTestableAccordion,
 );
 
-const SingleAccordion = asSingleAccordion(AccordionClean);
+const asSingleAccordionTitleBordered = flow(
+  asSingleAccordion,
+  asAccordionTitleBordered,
+);
 
-export default SingleAccordion;
+const asSingleAccordionBorderedOnFocus = flow(
+  asSingleAccordion,
+  asAccordionBorderedOnFocus,
+);
+
+const asSingleAccordionNonExpanding = flow(
+  asSingleAccordion,
+  asAccordionNonExpanding,
+);
+
+const SingleAccordion = asSingleAccordion(AccordionClean);
+const SingleAccordionTitleBordered = asSingleAccordionTitleBordered(AccordionClean);
+const SingleAccordionBorderedOnFocus = asSingleAccordionBorderedOnFocus(AccordionClean);
+const SingleAccordionNonExpanding = asSingleAccordionNonExpanding(AccordionClean);
+
+export {
+  SingleAccordion,
+  SingleAccordionTitleBordered,
+  SingleAccordionBorderedOnFocus,
+  SingleAccordionNonExpanding,
+};

@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,29 +21,45 @@ import React, {
 import { AccordionProviderProps, AccordionContextType } from './types';
 
 const AccordionContext = createContext<AccordionContextType>({
+  isCollapsible: true,
   isExpanded: false,
   setExpanded: () => null,
+  hasFocus: false,
+  setFocus: () => null,
 });
 
 const useAccordionContext = () => useContext(AccordionContext);
 
-const AccordionProvider: FC<AccordionProviderProps> = ({ children, expanded = false }) => {
+const AccordionProvider: FC<AccordionProviderProps> = ({
+  children, collapsible = true, expanded = false, focus = false,
+}) => {
+  const isCollapsible = collapsible;
   const [isExpanded, setExpanded] = useState<boolean>(expanded);
+  const [hasFocus, setFocus] = useState<boolean>(focus);
 
   return (
-    <AccordionContext.Provider value={{ isExpanded, setExpanded }}>
+    <AccordionContext.Provider value={{
+      isCollapsible, isExpanded, setExpanded, hasFocus, setFocus,
+    }}
+    >
       { children }
     </AccordionContext.Provider>
   );
 };
 
-// Used for conditional fClasses.
+// Used for conditional fClasses
+const isAccordionCollapsible = () => useAccordionContext().isCollapsible;
 const isAccordionExpanded = () => useAccordionContext().isExpanded;
 const isAccordionContracted = () => !useAccordionContext().isExpanded;
+const isAccordionFocusedIn = () => useAccordionContext().hasFocus;
+const isAccordionFocusedOut = () => !useAccordionContext().hasFocus;
 
 export {
   AccordionProvider,
   useAccordionContext,
+  isAccordionCollapsible,
   isAccordionExpanded,
   isAccordionContracted,
+  isAccordionFocusedIn,
+  isAccordionFocusedOut,
 };

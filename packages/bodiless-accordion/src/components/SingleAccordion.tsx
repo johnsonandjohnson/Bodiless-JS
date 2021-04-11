@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,6 +35,7 @@ export type SingleAccordionComponents = {
   BodyWrapper: ComponentType<StylableProps>,
   Body: ComponentType<StylableProps>,
 };
+
 const singleAccordionComponentStart:SingleAccordionComponents = {
   Wrapper: Div,
   TitleWrapper: Div,
