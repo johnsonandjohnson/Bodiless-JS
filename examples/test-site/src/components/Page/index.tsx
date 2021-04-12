@@ -12,9 +12,11 @@
  * limitations under the License.
  */
 
+import React, { ComponentType } from 'react';
 import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { withPageDimensionsContext, BreakpointsType } from '@bodiless/components';
+import Helmet from 'react-helmet';
 
 import resolveConfig from 'tailwindcss/resolveConfig';
 import tailwindConfig from '../../../tailwind.config';
@@ -36,7 +38,23 @@ const asResponsivePage = flow(
   withPageDimensionsContext({ breakpoints }),
 )(Page);
 
+const asRtlPage = (PageComponent: ComponentType) => (props: any) => (
+  <>
+    <PageComponent {...props} />
+    <Helmet htmlAttributes={{ dir: 'rtl' }} />
+  </>
+);
+
+const asLtrPage = (PageComponent: ComponentType) => (props: any) => (
+  <>
+    <PageComponent {...props} />
+    <Helmet htmlAttributes={{ dir: 'ltr' }} />
+  </>
+);
+
 export default asResponsivePage;
 export {
   breakpoints,
+  asRtlPage,
+  asLtrPage,
 };

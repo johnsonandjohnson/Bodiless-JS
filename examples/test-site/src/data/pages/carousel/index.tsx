@@ -17,7 +17,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import flow from 'lodash/flow';
-import { Page } from '@bodiless/gatsby-theme-bodiless';
+import { Page as BasePage } from '@bodiless/gatsby-theme-bodiless';
 import { H1, H2, addClasses } from '@bodiless/fclasses';
 import {
   withNavigationButtons,
@@ -35,6 +35,9 @@ import {
   withAutoPlayButtonStyles,
   withAutoPlay,
 } from '../../../components/Carousel';
+import { asLtrPage } from '../../../components/Page';
+
+const Page = asLtrPage(BasePage);
 
 const Title = addClasses('text-3xl font-bold')(H1);
 const SubTitle = addClasses('text-2xl font-bold')(H2);

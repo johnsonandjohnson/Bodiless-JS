@@ -65,16 +65,20 @@ const withAutoPlay = withDesign({
   }),
 });
 
+const withNavButtonStyles = addClasses('p-2 text-white uppercase bg-blue-700');
+
 const withNavButtonsStyles = withDesign({
   SliderWrapper: addClasses('relative'),
   ButtonNext: flow(
-    addClasses('absolute top-1/2 right-0'),
+    withNavButtonStyles,
+    addClasses('absolute transform -translate-y-1/2 top-1/2 ltr:right-0 rtl:left-0 z-20'),
     addProps({
       children: 'Next',
     }),
   ),
   ButtonBack: flow(
-    addClasses('absolute top-1/2 left-0'),
+    withNavButtonStyles,
+    addClasses('absolute transform -translate-y-1/2 top-1/2 ltr:left-0 rtl:right-0 z-20'),
     addProps({
       children: 'Back',
     }),

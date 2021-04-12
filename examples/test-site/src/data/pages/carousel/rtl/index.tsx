@@ -16,14 +16,15 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import { Page } from '@bodiless/gatsby-theme-bodiless';
-import Helmet from 'react-helmet';
+import { Page as BasePage } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../../../../components/Layout';
 import { CarouselExamples } from '..';
+import { asRtlPage } from '../../../../components/Page';
+
+const Page = asRtlPage(BasePage);
 
 const CarouselPage = (props: any) => (
   <Page {...props}>
-    <Helmet htmlAttributes={{ dir: 'rtl' }} />
     <Layout>
       <CarouselExamples />
     </Layout>
