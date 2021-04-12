@@ -66,8 +66,6 @@ export {
   withDisableExpandOnClick,
 } from './components/Accordion';
 
-export * from './components/Menu';
-
 export { default as Embed } from './components/Embed';
 export {
   asResponsive21By9Embed,

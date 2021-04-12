@@ -1,10 +1,10 @@
 import asBodilessList, {
-  asSubList, withSimpleSubListDesign,
+  asSubList, withSimpleSubListDesign, asStylableList, asStylableSubList,
 } from './asBodilessList';
 
 import asChameleonSubList, { withSubLists, withSubListDesign } from './asChameleonSubList';
 
-import { asTestableList } from './List';
+import { asTestableList, useListContext } from './List';
 
 export {
   asBodilessList,
@@ -14,11 +14,14 @@ export {
   withSubLists,
   withSubListDesign,
   asTestableList,
+  asStylableList,
+  asStylableSubList,
+  useListContext,
 };
 
 export type {
-  FinalProps as ListProps,
-  ItemProps as ListItemProps,
-  ListDesignableComponents,
-  Data as ListData,
+  ListProps,
+  ListComponents,
+  UseListOverrides,
+  ListData,
 } from './types';

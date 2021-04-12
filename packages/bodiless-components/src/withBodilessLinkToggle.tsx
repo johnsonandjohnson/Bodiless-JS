@@ -57,10 +57,14 @@ const defaultAsOff = flow(
  * @param asOff
  * Optional HOC to apply when the link is toggled off.  By default, replaces the
  * wrapped component with a fragment (or with a span in edit mode).
+ *
+ * @param defaultToOn
+ * Optional boolean to toggle withBodilessLinkToggle on, false by default.
  */
 const withBodilessLinkToggle = (
   asEditableLink: AsBodilessLink,
   asOff: HOC = defaultAsOff,
+  defaultToOn: boolean = false,
 ): AsBodilessLink => (
   nodeKey, defaultData, useOverrides,
 ) => {
@@ -70,12 +74,13 @@ const withBodilessLinkToggle = (
       formTitle: useChameleonContext().isOn ? 'Edit Link' : 'Add Link',
     }),
   )(useOverrides as UseBodilessOverrides);
+  const defaultChameleonData = defaultToOn ? { component: 'Link' } : undefined;
   return flowRight(
     withDesign({
       _default: asOff,
       Link: identity,
     }),
-    withChameleonContext('link-toggle'),
+    withChameleonContext('link-toggle', defaultChameleonData),
     withChameleonComponentFormControls,
     withSidecarNodes(
       flowRight(

@@ -13,6 +13,7 @@
  */
 
 import { flow } from 'lodash';
+import { WithNodeKeyProps } from '@bodiless/core';
 import {
   addClasses, removeClasses, asToken, Token,
 } from '@bodiless/fclasses';
@@ -33,8 +34,6 @@ import {
   asUnderline,
   asAlignJustify,
 } from './ElementDefault.token';
-
-import { WithNodeKeyProps } from '../../../../packages/bodiless-organisms/node_modules/@bodiless/core/lib';
 
 export const withCategory = <P extends object>(category?: string) => (...hocs: Token[]) => (
   asToken(

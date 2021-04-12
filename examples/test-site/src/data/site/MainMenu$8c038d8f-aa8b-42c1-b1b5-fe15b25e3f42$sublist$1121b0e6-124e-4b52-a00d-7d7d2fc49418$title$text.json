@@ -1,25 +1,3 @@
 {
-  "document": {
-    "object": "document",
-    "data": {},
-    "nodes": [
-      {
-        "object": "block",
-        "type": "paragraph",
-        "data": {},
-        "nodes": [
-          {
-            "object": "text",
-            "leaves": [
-              {
-                "object": "leaf",
-                "text": "Example 1",
-                "marks": []
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+  "text": "Example 1"
 }

@@ -12,14 +12,14 @@
  * limitations under the License.
  */
 
-import React, { Fragment, ComponentType } from 'react';
+import React, { ComponentType, Fragment } from 'react';
 import { flow } from 'lodash';
 import {
   Div, designable, addClasses, replaceWith, DesignableComponentsProps,
 } from '@bodiless/fclasses';
 import { useNode, withNodeKey, ifToggledOn } from '@bodiless/core';
-import { withBreadcrumbStore } from '@bodiless/components';
 import { withSearchResult } from '@bodiless/search';
+import { withBurgerMenuProvider, withBreadcrumbStore } from '@bodiless/navigation';
 import Header from './header';
 import Footer from './footer';
 import SeoHelmet from './meta';
@@ -27,7 +27,7 @@ import { SocialShareHelmet } from '../SocialShare';
 import { asPageContainer, asYMargin } from '../Elements.token';
 import { asSiteHeader, asSiteFooter } from './token';
 
-import { MegaMenuBreadcrumbs } from '../Breadcrumbs/MenuBreadcrumbs';
+import BreadcrumbsBase from '../Breadcrumbs/MenuBreadcrumbs';
 
 const SiteHeader = asSiteHeader(Header);
 const SiteFooter = asSiteFooter(Footer);
@@ -35,9 +35,12 @@ const SiteFooter = asSiteFooter(Footer);
 const Container = flow(
   asPageContainer,
   asYMargin,
-)(Div);
+)(Div) as ComponentType;
 
-const BreadcrumbProvider = withBreadcrumbStore(Fragment);
+const SiteProviders = flow(
+  withBreadcrumbStore,
+  withBurgerMenuProvider,
+)(Fragment) as ComponentType;
 
 type LayoutComponents = {
   Breadcrumbs: ComponentType<any>,
@@ -50,14 +53,14 @@ const BaseLayout: ComponentType<LayoutProps> = ({ children, components }) => {
   return (
     <>
       <SeoHelmet />
-      <BreadcrumbProvider>
+      <SiteProviders>
         <SocialShareHelmet />
         <SiteHeader />
         <Container>
           { Breadcrumbs && <Breadcrumbs />}
           {children}
         </Container>
-      </BreadcrumbProvider>
+      </SiteProviders>
       <SiteFooter />
     </>
   );
@@ -71,8 +74,8 @@ const Layout$ = designable({
     addClasses('pt-2'),
     // hide breadcrumbs on home page
     ifToggledOn(isHomePage)(replaceWith(React.Fragment)),
-  )(MegaMenuBreadcrumbs),
-} as LayoutComponents)(BaseLayout);
+  )(BreadcrumbsBase),
+})(BaseLayout);
 
 const Layout = withSearchResult(Layout$);
 

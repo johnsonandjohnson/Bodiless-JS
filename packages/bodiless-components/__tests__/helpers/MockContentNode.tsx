@@ -5,8 +5,11 @@ import { ContentNode, NodeProvider } from '@bodiless/core';
 class MockContentNode<D> implements ContentNode<D> {
   data: D = {} as D;
 
-  constructor(data: D = {} as D) {
+  path: string[] = [];
+
+  constructor(data: D = {} as D, path: string[] = []) {
     this.data = data;
+    this.path = path;
   }
 
   setData = jest.fn();
@@ -15,15 +18,20 @@ class MockContentNode<D> implements ContentNode<D> {
 
   keys = [];
 
-  path = [];
-
   pagePath = '';
 
   baseResourcePath = '';
 
-  child = jest.fn(() => new MockContentNode<any>(this.data));
+  child = jest.fn(
+    (path: string) => new MockContentNode<any>(this.data, [...this.path, ...path.split('$')]),
+  );
 
-  peer = jest.fn(() => new MockContentNode<any>(this.data));
+  peer = jest.fn(
+    (path: string | string[]) => {
+      const path$ = typeof path === 'string' ? path.split('$') : path;
+      return new MockContentNode<any>(this.data, path$);
+    },
+  );
 
   hasError = jest.fn().mockReturnValue(false);
 
