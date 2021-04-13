@@ -82,11 +82,11 @@ const asToutOverlayCta = withCategory('Layout')(asToutOverlayCta$ as Token);
 const asToutNoBodyNoTitle = withCategory('Structure')(asToutNoBodyNoTitle$ as Token);
 const asToutWithPaddings = withCategory('Layout')(asToutWithPaddings$ as Token);
 const asToutTextWhite = withCategory('Appearance')(asToutTextWhite$ as Token);
-const asToutMainMenu = asToken(
-  asToutTextWhite,
-  asToutWithPaddings,
-  asToutDefaultStyle,
-  asToutHorizontal,
+const withMenuToutStyles = asToken(
+  asToutTextWhite$,
+  asToutWithPaddings$,
+  asToutDefaultStyle$,
+  asToutHorizontal$,
 );
 
 export {
@@ -101,5 +101,5 @@ export {
   asToutNoBodyNoTitle,
   asToutWithPaddings,
   asToutTextWhite,
-  asToutMainMenu,
+  withMenuToutStyles,
 };

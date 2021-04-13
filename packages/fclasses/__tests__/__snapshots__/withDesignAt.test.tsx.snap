@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withDesignAt Has a correct baseline 1`] = `
+<div>
+  <div
+    data-comp="outer"
+  >
+    <div
+      data-comp="middle"
+      data-key="outer-a"
+    >
+      <div
+        data-comp="inner"
+        data-key="middle-a"
+      >
+        <div
+          data-key="inner-a"
+        />
+        <div
+          data-key="inner-b"
+        />
+      </div>
+      <div
+        data-key="middle-b"
+      />
+    </div>
+    <div
+      data-key="outer-b"
+    />
+  </div>
+</div>
+`;

@@ -1,11 +1,3 @@
-[
-  {
-    "data": {},
-    "type": "paragraph",
-    "children": [
-      {
-        "text": "Rich Text"
-      }
-    ]
-  }
-]
+{
+  "text": "Rich Text"
+}

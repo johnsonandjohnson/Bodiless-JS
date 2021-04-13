@@ -14,26 +14,16 @@
 
 import { flow } from 'lodash';
 import {
-  withContextActivator,
-  withDefaultContent,
-  withMenuOptions,
-  withResetButton,
-  withSidecarNodes,
+  withContextActivator, withDefaultContent, withMenuOptions,
+  withResetButton, withSidecarNodes,
 } from '@bodiless/core';
-import {
-  ToutClean,
-  asTestableTout,
-} from '@bodiless/organisms';
+import { ToutClean, asTestableTout } from '@bodiless/organisms';
 import { withDesign, startWith, Token } from '@bodiless/fclasses';
 import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
-import {
-  asEditableLink,
-} from '../Elements.token';
+
+import { asEditableLink, asEditable } from '../Elements.token';
 import { asEditableImage } from '../Image';
-import {
-  withEditorBasic,
-  withEditorSimple,
-} from '../Editors';
+import { withEditorBasic, withEditorSimple } from '../Editors';
 
 export const withToutEditors = flow(
   withDesign({
@@ -53,6 +43,27 @@ export const withToutEditors = flow(
       startWith(GatsbyLink),
     ),
     Body: withEditorBasic('body', 'Tout Body Text'),
+  }),
+);
+
+export const withMenuToutEditors = flow(
+  withDesign({
+    Image: asEditableImage('image'),
+    ImageLink: flow(
+      withSidecarNodes(
+        asEditableLink('link'),
+      ),
+      startWith(GatsbyLink),
+    ),
+    Title: asEditable('text', 'Tout Title'),
+    Link: flow(
+      asEditable('ctatext', 'CTA'),
+      withSidecarNodes(
+        asEditableLink('link', undefined, () => ({ groupLabel: 'CTA' })),
+      ),
+      startWith(GatsbyLink),
+    ),
+    Body: withEditorBasic('body', 'Tout Body'),
   }),
 );
 

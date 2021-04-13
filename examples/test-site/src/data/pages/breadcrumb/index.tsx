@@ -14,102 +14,92 @@
 
 /* eslint max-len: 0 */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { asReadOnly } from '@bodiless/core';
-import { withBreadcrumbStore } from '@bodiless/components';
 import {
-  addClasses, H1 as H1$, H2 as H2$, P as P$, withDesign,
+  withBreadcrumbStore,
+  BreadcrumbsClean,
+  asBreadcrumbs,
+  withEditableStartingTrail,
+  withEditableFinalTrail,
+  withMenuTitleEditors,
+} from '@bodiless/navigation';
+import {
+  addClasses, H1 as H1$, H2 as H2$, P as P$, asToken, Fragment,
 } from '@bodiless/fclasses';
 import { flow } from 'lodash';
 
 import Layout from '../../../components/Layout';
-import SimpleMenu from '../../../components/Menu/SimpleMenu';
-import MegaMenu from '../../../components/Menu/MegaMenu';
-import BaseMenuBreadcrumbs, {
-  DEFAULT_STARTING_TRAIL_NODE_KEY,
-  MegaMenuBreadcrumbs as BaseMegaMenuBreadcrumbs,
-} from '../../../components/Breadcrumbs/MenuBreadcrumbs';
+import Menu from '../../../components/Menu/Menu';
 import {
-  withEditableStartingTrail,
   withStartingTrailIcon,
   withNonLinkableItems,
   withBoldedFinalTrail,
   withVerticalBarSeparator,
   withSlashSeparator,
   withHiddenCurrentPageItem,
+  withStartingTrailLinkStyles,
+  withReadOnlyStartingTrail,
+  $withBreadcrumbStyles,
 } from '../../../components/Breadcrumbs/MenuBreadcrumbs.token';
-import { asHeader2, asHeader1, asItalic } from '../../../components/Elements.token';
+import {
+  asHeader2, asHeader1, asItalic,
+} from '../../../components/Elements.token';
+
+const DemoBreadcrumbs = asToken(
+  asBreadcrumbs,
+  withMenuTitleEditors(undefined, asReadOnly),
+  withEditableFinalTrail(),
+  $withBreadcrumbStyles,
+)(BreadcrumbsClean);
+
+const DEFAULT_STARTING_TRAIL_NODE_KEY = 'startingTrail';
 
 const MenuBreadcrumbs = flow(
-  withEditableStartingTrail(
-    `${DEFAULT_STARTING_TRAIL_NODE_KEY}Default`,
-    'Enter item',
-  ),
-)(BaseMenuBreadcrumbs);
+  withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}Default`),
+  withStartingTrailLinkStyles,
+)(DemoBreadcrumbs);
 
-const BreadcrumbWithStartingTrailIcon = withStartingTrailIcon(
-  `${DEFAULT_STARTING_TRAIL_NODE_KEY}Icon`,
-)(BaseMenuBreadcrumbs);
+const BreadcrumbWithStartingTrailIcon = withStartingTrailIcon(`${DEFAULT_STARTING_TRAIL_NODE_KEY}Icon`)(DemoBreadcrumbs);
 
 const BreadcrumbWithNonLinkableItems = flow(
-  withEditableStartingTrail(
-    `${DEFAULT_STARTING_TRAIL_NODE_KEY}NonLinkable`,
-    'Enter item',
-  ),
+  withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}NonLinkable`),
+  withStartingTrailLinkStyles,
   withNonLinkableItems,
-)(BaseMenuBreadcrumbs);
+)(DemoBreadcrumbs);
 
 const BreadcrumbWithBoldableFinalItem = flow(
-  withEditableStartingTrail(
-    `${DEFAULT_STARTING_TRAIL_NODE_KEY}BoldedFinal`,
-    'Enter item',
-  ),
+  withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}BoldedFinal`),
+  withStartingTrailLinkStyles,
   withBoldedFinalTrail,
-)(BaseMenuBreadcrumbs);
+)(DemoBreadcrumbs);
 
 const BreadcrumbWithVerticalBarSeparator = flow(
-  withEditableStartingTrail(
-    `${DEFAULT_STARTING_TRAIL_NODE_KEY}VerticalBar`,
-    'Enter item',
-  ),
+  withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}VerticalBar`),
+  withStartingTrailLinkStyles,
   withVerticalBarSeparator,
-)(BaseMenuBreadcrumbs);
+)(DemoBreadcrumbs);
 
 const BreadcrumbWithSlashSeparator = flow(
-  withEditableStartingTrail(
-    `${DEFAULT_STARTING_TRAIL_NODE_KEY}SlashSeparator`,
-    'Enter item',
-  ),
+  withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}SlashSeparator`),
+  withStartingTrailLinkStyles,
   withSlashSeparator,
-)(BaseMenuBreadcrumbs);
+)(DemoBreadcrumbs);
 
 const BreadcrumbWithHiddenCurrentPageItem = flow(
-  withEditableStartingTrail(
-    `${DEFAULT_STARTING_TRAIL_NODE_KEY}CurrentPage`,
-    'Enter item',
-  ),
+  withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}CurrentPage`),
+  withStartingTrailLinkStyles,
   withHiddenCurrentPageItem,
-)(BaseMenuBreadcrumbs);
-
-const MegaMenuBreadcrumbs = flow(
-  withEditableStartingTrail(
-    `${DEFAULT_STARTING_TRAIL_NODE_KEY}MegaMenu`,
-    'Enter item',
-  ),
-)(BaseMegaMenuBreadcrumbs);
+)(DemoBreadcrumbs);
 
 const MegaMenuBreadcrumbWithNonLinkableItems = flow(
-  withEditableStartingTrail(
-    `${DEFAULT_STARTING_TRAIL_NODE_KEY}MegaMenuNonLinkable`,
-    'Enter item',
-  ),
-  withDesign({
-    StartingTrail: asReadOnly,
-  }),
+  withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}MegaMenuNonLinkable`),
+  withStartingTrailLinkStyles,
+  withReadOnlyStartingTrail,
   withNonLinkableItems,
-)(BaseMegaMenuBreadcrumbs);
+)(DemoBreadcrumbs);
 
 const H1 = flow(addClasses('pt-5'), asHeader1)(H1$);
 const H2 = flow(addClasses('pt-5'), asHeader2)(H2$);
@@ -121,21 +111,20 @@ export default (props: any) => (
   <Page {...props}>
     <Layout>
       <H1>Breadcrumb Demo</H1>
-      <H2>Simple Menu</H2>
       <BreadcrumbProvider>
-        <SimpleMenu nodeKey="simplemenu" />
+        <Menu nodeKey="bodilessMenu" />
         <H2>Breadcrumbs with editable starting trail</H2>
-        <MenuBreadcrumbs nodeKey="simplemenu" className="my-2" />
+        <MenuBreadcrumbs nodeKey="bodilessMenu" className="my-2" />
         <H2>Breadcrumbs with starting trail icon</H2>
-        <BreadcrumbWithStartingTrailIcon nodeKey="simplemenu" className="my-2" />
+        <BreadcrumbWithStartingTrailIcon nodeKey="bodilessMenu" className="my-2" />
         <H2>Breadcrumbs with non-linkable Middle Trail group</H2>
-        <BreadcrumbWithNonLinkableItems nodeKey="simplemenu" className="my-2" />
+        <BreadcrumbWithNonLinkableItems nodeKey="bodilessMenu" className="my-2" />
         <H2>Breadcrumbs with boldable final trail item</H2>
-        <BreadcrumbWithBoldableFinalItem nodeKey="simplemenu" className="my-2" />
+        <BreadcrumbWithBoldableFinalItem nodeKey="bodilessMenu" className="my-2" />
         <H2>Breadcrumbs with vertical bar separator</H2>
-        <BreadcrumbWithVerticalBarSeparator nodeKey="simplemenu" className="my-2" />
+        <BreadcrumbWithVerticalBarSeparator nodeKey="bodilessMenu" className="my-2" />
         <H2>Breadcrumbs with slash separator</H2>
-        <BreadcrumbWithSlashSeparator nodeKey="simplemenu" className="my-2" />
+        <BreadcrumbWithSlashSeparator nodeKey="bodilessMenu" className="my-2" />
         <H2>Breadcrumbs with hidden current page item</H2>
         <P>
           {`
@@ -144,15 +133,9 @@ export default (props: any) => (
           and current page is /breadcrumb, then this test component will render just Home -> Components
         `}
         </P>
-        <BreadcrumbWithHiddenCurrentPageItem nodeKey="simplemenu" className="my-2" />
-      </BreadcrumbProvider>
-      <H2>MegaMenu</H2>
-      <BreadcrumbProvider>
-        <MegaMenu nodeKey="megamenu" className="my-2" />
-        <H2>MegaMenu breadcrumbs</H2>
-        <MegaMenuBreadcrumbs nodeKey="megamenu" className="my-2" />
+        <BreadcrumbWithHiddenCurrentPageItem nodeKey="bodilessMenu" className="my-2" />
         <H2>MegaMenu breadcrumbs with non-editable starting trail and non-linkable Middle Trail group</H2>
-        <MegaMenuBreadcrumbWithNonLinkableItems nodeKey="megamenu" className="my-2" />
+        <MegaMenuBreadcrumbWithNonLinkableItems nodeKey="bodilessMenu" className="my-2" />
       </BreadcrumbProvider>
     </Layout>
   </Page>

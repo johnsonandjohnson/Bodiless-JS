@@ -14,14 +14,14 @@
 
 import { v4 } from 'uuid';
 import { useNode } from '@bodiless/core';
-import { Data, Props } from './types';
+import { ListData, ListBaseProps } from './types';
 
 /**
  * Returns a pair of functions which can be used to get or set
  * the items in the component's ContentNode.
  */
 export const useItemsAccessors = () => {
-  const { node } = useNode<Data>();
+  const { node } = useNode<ListData>();
   return {
     // We provide a default element for top level lists.
     getItems: () => node.data.items || ['default'],
@@ -37,7 +37,7 @@ export const useItemsAccessors = () => {
  * Returns a method which can be used to delete an item, or call
  * an "unwrap" handler if there is only one item in the list.
  */
-const useDeleteItem = ({ unwrap, onDelete }: Pick<Props, 'unwrap' | 'onDelete'>) => {
+const useDeleteItem = ({ unwrap, onDelete }: Pick<ListBaseProps, 'unwrap' | 'onDelete'>) => {
   const { getItems, setItems, deleteSubnode } = useItemsAccessors();
   return (item: string) => {
     const items = getItems().filter(item$ => item$ !== item);
@@ -82,7 +82,7 @@ const useAddItem = () => {
  * Returns a pair of functions which can be used to insert
  * or delete items.
  */
-export const useItemsMutators = (props?: Pick<Props, 'unwrap' | 'onDelete'>) => ({
+export const useItemsMutators = (props?: Pick<ListBaseProps, 'unwrap' | 'onDelete'>) => ({
   addItem: useAddItem(),
   deleteItem: useDeleteItem(props || { unwrap: undefined, onDelete: undefined }),
   deleteSublist: useDeleteSublist(),
