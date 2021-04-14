@@ -32,7 +32,24 @@ export type Data = {
 export type Props = HTMLProps<HTMLElement>;
 
 // eslint-disable-next-line no-useless-escape
-const isValidHtmlId = (id : string) => (/^[A-Za-z]+[\w\-\:\.]*$/.test(id));
+const isValidHtmlId = (id : string) => (/^[A-Za-z#]+[\ \w\-\:\.]*$/.test(id));
+
+/**
+ * Helper that transformes string into valid HTML id
+ *  - Removes restricted characters
+ *  - Trims Trailing and leading spaces
+ *  - Replaces all spaces with '-'
+ *  - Transforms string to lowercase
+ */
+const transformHash = (value: string) => value
+  .replace(/[^a-zA-Z-_:. ]/g, '')
+  .trim()
+  .replace(/ +/g, '-').toLowerCase();
+
+const submitValueHandler = ({ id, ...rest }: Data) => ({
+  id: transformHash(id),
+  ...rest,
+});
 
 const anchorOptions: BodilessOptions<Props, Data> = {
   icon: 'local_offer',
@@ -43,13 +60,20 @@ const anchorOptions: BodilessOptions<Props, Data> = {
   local: true,
   renderForm: ({ formState, scope }) => {
     const errors = scope ? formState.errors[scope] : formState.errors;
+    const values: any = scope ? formState.values[scope] : formState.values;
     const validate = useCallback(
       (value: string) => (value && !isValidHtmlId(value)
         ? 'Must be a valid HTML id.'
         : undefined),
       [],
     );
-    const { ComponentFormLabel, ComponentFormText, ComponentFormWarning } = useMenuOptionUI();
+    const {
+      ComponentFormLabel, ComponentFormText, ComponentFormWarning, ComponentFormDescription,
+    } = useMenuOptionUI();
+
+    const hasValues = values && values.id;
+    const hasErrors = errors && errors.id;
+
     return (
       <>
         <ComponentFormLabel htmlFor="id">ID</ComponentFormLabel>
@@ -60,7 +84,13 @@ const anchorOptions: BodilessOptions<Props, Data> = {
           validateOnBlur
           placeholder="Descriptive ID"
         />
-        {errors && errors.id && (
+        {hasValues && !hasErrors && (
+          <ComponentFormDescription>
+            Descriptive ID: #
+            {transformHash(values.id)}
+          </ComponentFormDescription>
+        )}
+        {hasErrors && (
           <ComponentFormWarning>{errors.id}</ComponentFormWarning>
         )}
       </>
@@ -85,7 +115,7 @@ const asBodilessAnchor: AsBodiless<Props, Data> = (
     (props) => {
       const overrides = typeof (useOverrides) === 'function' ? useOverrides(props) : useOverrides;
       const { id } = useNode<Data>().node.data;
-      return { label: !id ? 'Add' : 'Edit', ...overrides };
+      return { label: !id ? 'Add' : 'Edit', submitValueHandler, ...overrides };
     }),
 );
 
