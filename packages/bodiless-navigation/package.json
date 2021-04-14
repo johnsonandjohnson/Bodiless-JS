@@ -1,0 +1,46 @@
+{
+  "name": "@bodiless/navigation",
+  "version": "0.0.72",
+  "description": "BodilessJs Navigation Components",
+  "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "/lib",
+    "/bodiless.docs.json",
+    "/doc",
+    "tailwind.config.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build:watch": "npm run build -- --watch",
+    "build:api-doc": "typedoc --out doc/api --mode file",
+    "lint": "tslint ./src/**/*.ts?x",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
+    "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
+  },
+  "dependencies": {
+    "@bodiless/core": "^0.0.72",
+    "@bodiless/components": "^0.0.72",
+    "@bodiless/fclasses": "^0.0.72",
+    "@bodiless/organisms": "^0.0.72",
+    "enzyme": "^3.9.0",
+    "lodash": "^4.17.19",
+    "mobx": "^5.8.0",
+    "mobx-react-lite": "^1.3.1",
+    "react-helmet": "^5.2.0",
+    "uuid": "^3.3.2"
+  },
+  "peerDependencies": {
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  }
+}

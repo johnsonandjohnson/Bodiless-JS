@@ -73,8 +73,6 @@ export {
   asEditableCarousel,
 } from './components/Carousel';
 
-export * from './components/Menu';
-
 export { default as Embed } from './components/Embed';
 export {
   asResponsive21By9Embed,

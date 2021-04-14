@@ -20,6 +20,7 @@ import {
 import { useNode, withNodeKey, ifToggledOn } from '@bodiless/core';
 import { withBreadcrumbStore } from '@bodiless/components';
 import { withSearchResult } from '@bodiless/search';
+import { withBurgerMenuProvider } from '@bodiless/navigation';
 import Header from './header';
 import Footer from './footer';
 import SeoHelmet from './meta';
@@ -37,21 +38,24 @@ const Container = flow(
   asYMargin,
 )(Div);
 
-const BreadcrumbProvider = withBreadcrumbStore(Fragment);
+const SiteProviders = flow(
+  withBreadcrumbStore,
+  withBurgerMenuProvider,
+)(Fragment);
 
 const BaseLayout = ({ children, components }) => {
   const { Breadcrumbs } = components;
   return (
     <>
       <SeoHelmet />
-      <BreadcrumbProvider>
+      <SiteProviders>
         <SocialShareHelmet />
         <SiteHeader />
         <Container>
           { Breadcrumbs && <Breadcrumbs />}
           {children}
         </Container>
-      </BreadcrumbProvider>
+      </SiteProviders>
       <SiteFooter />
     </>
   );

@@ -13,49 +13,38 @@
  */
 
 import React, {
-  Fragment,
   ComponentType,
   FC,
-  PropsWithChildren,
+  useMemo,
 } from 'react';
 import { flow } from 'lodash';
 import { observer } from 'mobx-react-lite';
-import { withNode, withOnlyProps } from '@bodiless/core';
+import { withNode } from '@bodiless/core';
 import {
-  designable, asComponent, addProps, withDesign,
+  designable, asComponent, addProps, withDesign, Fragment,
 } from '@bodiless/fclasses';
 import { useItemsMutators, useItemsAccessors } from './model';
 import {
-  Props, FinalProps, ListDesignableComponents, ItemProps,
+  ListBaseProps, ListProps, ListComponents, ListContextValue,
 } from './types';
 
-const NodeProvider = withNode<PropsWithChildren<{}>, any>(Fragment);
-type ItemWithNodeProps = {
-  nodeKey: string,
-  component: ComponentType<any> | string,
-};
+const ListContext = React.createContext<ListContextValue>({});
+const useListContext = () => React.useContext(ListContext);
 
-const ItemWithNode: FC<ItemWithNodeProps&ItemProps> = props => {
-  const { nodeKey, component: Component, ...rest } = props;
-  return (
-    <NodeProvider nodeKey={nodeKey}>
-      <Component {...rest} />
-    </NodeProvider>
-  );
-};
+const ListItemNodeProvider = withNode<any, any>(Fragment);
 
-const startComponents: ListDesignableComponents = {
+const listComponents: ListComponents = {
   Wrapper: asComponent('ul'),
   Item: asComponent('li'),
-  // For title we have to strip the props if not wrapped.
-  Title: withOnlyProps('key', 'children')(Fragment),
-  ItemMenuOptionsProvider: Fragment,
+  Title: Fragment,
 };
 
-const BasicList: FC<Props> = ({
+const ListBase: FC<ListBaseProps> = ({
   components,
   unwrap,
   onDelete,
+  prependItems = [],
+  appendItems = [],
   ...rest
 }) => {
   const {
@@ -66,25 +55,49 @@ const BasicList: FC<Props> = ({
 
   const { addItem, deleteItem } = useItemsMutators({ unwrap, onDelete });
   const { getItems } = useItemsAccessors();
-  const itemData = getItems();
-  const canDelete = () => Boolean(getItems().length > 1 || unwrap);
+  const dataItems = getItems();
+  const items = [
+    ...prependItems,
+    ...dataItems,
+    ...appendItems,
+  ];
+
+  // We memoize the whole array to avoid conditional hooks...
+  const contextValues: ListContextValue[] = useMemo(
+    () => items.map(currentItem => {
+      const value: ListContextValue = { items, currentItem };
+      // Can only insert items after items that come from data or after the final prepend item.
+      if (dataItems.includes(currentItem)
+        || currentItem === prependItems[prependItems.length - 1]
+      ) {
+        value.addItem = () => addItem(currentItem);
+      }
+      // Can only delete items which are not static and only if it would not empty the list.
+      if (dataItems.includes(currentItem)
+        && (dataItems.length > 1 || unwrap || items.length > dataItems.length)
+      ) {
+        value.deleteItem = () => deleteItem(currentItem);
+      }
+
+      return value;
+    }),
+    [dataItems, prependItems, appendItems],
+  );
 
   // Iterate over all items in the list creating list items.
-  const items = itemData.map(item => (
-    <ItemWithNode
-      component={Item}
-      key={item}
-      nodeKey={item}
-      addItem={() => addItem(item)}
-      deleteItem={() => deleteItem(item)}
-      canDelete={canDelete}
-    >
-      <Title />
-    </ItemWithNode>
+  const itemElements = items.map((currentItem, i) => (
+    <ListContext.Provider key={currentItem} value={contextValues[i]}>
+      <ListItemNodeProvider nodeKey={currentItem}>
+        <Item>
+          <Title />
+        </Item>
+      </ListItemNodeProvider>
+    </ListContext.Provider>
   ));
+
   return (
     <Wrapper {...rest}>
-      {items}
+      {itemElements}
     </Wrapper>
   );
 };
@@ -100,10 +113,10 @@ const asTestableList = (listName: string) => withDesign({
  */
 const List = flow(
   observer,
-  designable(startComponents, 'List'),
+  designable(listComponents, 'List'),
   withNode,
-)(BasicList) as ComponentType<FinalProps>;
+)(ListBase) as ComponentType<ListProps>;
 List.displayName = 'List';
 
 export default List;
-export { asTestableList };
+export { asTestableList, useListContext };

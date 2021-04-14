@@ -33,7 +33,9 @@ const mergeConfigs = (
   variants: merge({}, ...packageConfigs, siteConfig).variants,
   // plugins setting
   plugins: [
-    ...flatten(merge(packageConfigs).map((config: TailwindConfigs) => config.plugins)),
+    ...flatten(
+      merge(packageConfigs).map((config: TailwindConfigs) => config.plugins),
+    ).filter(Boolean),
     ...(siteConfig.plugins ? siteConfig.plugins : []),
   ],
 });

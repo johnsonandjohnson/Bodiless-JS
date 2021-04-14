@@ -52,6 +52,7 @@
     "@bodiless/core-ui": "^0.0.72",
     "@bodiless/fclasses": "^0.0.72",
     "@bodiless/layouts": "^0.0.72",
+    "@bodiless/navigation": "^0.0.72",
     "@bodiless/organisms": "^0.0.72",
     "@bodiless/ui": "^0.0.72",
     "@types/nodegit": "^0.26.11",
