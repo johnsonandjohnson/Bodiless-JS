@@ -20,6 +20,7 @@ const whitelistedModules = [
   '@bodiless/card',
   '@bodiless/layouts',
   '@bodiless/organisms',
+  '@bodiless/navigation',
 ];
 
 type TailwindConfigs = {

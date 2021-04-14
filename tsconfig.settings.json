@@ -40,6 +40,8 @@
       "@bodiless/layouts/*": ["bodiless-layouts/src/*"],
       "@bodiless/layouts-ui": ["bodiless-layouts-ui/src"],
       "@bodiless/layouts-ui/*": ["bodiless-layouts-ui/src/*"],
+      "@bodiless/navigation": ["bodiless-navigation/src"],
+      "@bodiless/navigation/*": ["bodiless-navigation/src/*"],
       "@bodiless/organisms": ["bodiless-organisms/src"],
       "@bodiless/organisms/*": ["bodiless-organisms/src/*"],
       "@bodiless/richtext": ["bodiless-richtext/src"],
