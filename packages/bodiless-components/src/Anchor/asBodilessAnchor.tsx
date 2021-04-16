@@ -41,10 +41,11 @@ const isValidHtmlId = (id : string) => (/^[A-Za-z#]+[\ \w\-\:\.]*$/.test(id));
  *  - Replaces all spaces with '-'
  *  - Transforms string to lowercase
  */
-const transformHash = (value: string) => value
-  .replace(/[^a-zA-Z-_:. ]/g, '')
-  .trim()
-  .replace(/ +/g, '-').toLowerCase();
+const transformHash = (value: string) => (value
+  ? value.replace(/[^a-zA-Z-_:. ]/g, '')
+    .trim()
+    .replace(/ +/g, '-').toLowerCase()
+  : '');
 
 const submitValueHandler = ({ id, ...rest }: Data) => ({
   id: transformHash(id),
