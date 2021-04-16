@@ -11,10 +11,10 @@ To add a YouTube Component to your site:
 1. In Edit Mode, select the YouTube Component from the Component Library.
 ![](./assets/YoutubeComponentLibrary.jpg)
 
-2. Click on the YouTube Component to show the Configure button in the context menu. 
-![](./assets/YoutubeFlow.jpg)
+2. Click on the YouTube Component to show the Configure button in the context menu.
 
 3. Enter the target YouTube URL and click the checkmark or hit enter.
+![](./assets/YoutubeConfig.jpg)
 
 ?> Please note the following accepted URL formats:
 
