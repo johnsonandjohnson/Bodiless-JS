@@ -97,7 +97,7 @@ describe('Editor Menu (left and right)', function () {
    it('editorMenu: 9 - Check Docs page', () => {
       cy.visit('/___docs', { timeout: 90000 })
       cy.xpath(docsTitle)
-         .click()
+         .click({ multiple: true })
       cy.url().should('include', '/___docs/#/?id=bodilessjs')
    })
 

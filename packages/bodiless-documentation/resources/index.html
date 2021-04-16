@@ -54,7 +54,19 @@ limitations under the License.
     .sidebar-nav li.active>a,
     .sidebar-nav li>a:hover {
       color: #444444;
+      font-weight: bold;
     }
+    .sidebar-nav li>a[href^="#/"]:not([href*="?id="]):only-child {
+      background-image: none;
+    }
+    .page_toc {
+      padding-top: 120px !important;
+    }
+    @media screen and (max-width: 1300px) {
+       .page_toc {
+         padding-top: 50px !important;
+       }
+    }    
   </style>  
 </head>
 <body>
@@ -70,12 +82,17 @@ limitations under the License.
        },    
       loadNavbar: false,
       relativePath: true,
-      subMaxLevel: 6,
+      maxLevel: 2,      
+      subMaxLevel: 1,
       auto2top: true,
       themeable: {
           readyTransition : true, // default
           responsiveTables: true  // default
       },
+      'page-toc': {        
+        tocMaxLevel: 3,        
+        target: 'h1, h2, h3'      
+      },      
       pagination: {
         previousText: 'Previous',
         nextText: 'Next',
@@ -90,7 +107,10 @@ limitations under the License.
         depth: 2,
         hideOtherSidebarContent: true,
         namespace: 'bodiless',
-      },      
+      },
+      tabs: {
+        sync: false,
+      },    
       plugins: [
         function(hook) {
           const footer = [
@@ -123,6 +143,7 @@ limitations under the License.
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
   <script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
+  <script src="//unpkg.com/docsify-page-toc/dist/docsify-page-toc.js"></script>  
   <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
   <script src="//unpkg.com/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
