@@ -156,8 +156,8 @@ const withYouTubeFormSrcSnippet = withFormSnippet({
   nodeKeys: 'src',
   defaultData: { src: '' },
   snippetOptions: {
-    renderForm: ({ formState }) => {
-      const { errors } = formState;
+    renderForm: ({ formState, scope }) => {
+      const errors = scope ? formState.errors[scope] : formState.error;
       const {
         ComponentFormLabel,
         ComponentFormText,

@@ -18,7 +18,7 @@ import React, {
 import querystring from 'query-string';
 import SearchClient from '../SearchClient';
 import { TSearchResults, Suggestion } from '../types';
-import getSearchPagePath from './getSearchPagePath';
+// import getSearchPagePath from './getSearchPagePath';
 
 type TSearchResultContextValue = {
   results: TSearchResults,
@@ -65,7 +65,7 @@ export const SearchResultProvider: FC = ({ children }) => {
       }
     } else if (searchTermRef.current !== searchTerm) {
       searchClient.loadIndex().then(() => search(searchTerm));
-      window.location.href = getSearchPagePath(searchTerm);
+      // window.location.href = getSearchPagePath(searchTerm);
       searchTermRef.current = searchTerm;
     }
   });

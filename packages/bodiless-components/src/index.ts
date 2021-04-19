@@ -18,6 +18,7 @@ import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
 import List from './List_DEPRECATED';
 import asTaggableItem from './Taggable/asTaggableItem';
+import asBodilessAnchor from './Anchor/asBodilessAnchor';
 import withListTitle from './List_DEPRECATED/withListTitle';
 import asEditableList from './List_DEPRECATED/asEditableList';
 import asBasicSublist from './List_DEPRECATED/asBasicSublist';
@@ -133,6 +134,7 @@ export {
   withDataLayerItem,
   withDefaultDataLayer,
   withDataLayerScript,
+  asBodilessAnchor,
 };
 
 export * from './Chameleon/index';
