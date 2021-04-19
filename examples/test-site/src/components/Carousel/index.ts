@@ -31,6 +31,7 @@ import {
   withDotStyles,
   withAutoPlay,
   withAutoPlayButtonStyles,
+  asAccessibleCarousel,
 } from './token';
 
 export const CAROUSEL_NODE_KEY = 'slides';
@@ -52,6 +53,7 @@ const ChameleonCarousel = flow(
   withAutoPlayInterval(),
   withAutoPlayButton,
   withAutoPlayButtonStyles,
+  asAccessibleCarousel,
 )(CarouselClean);
 
 export * from './token';

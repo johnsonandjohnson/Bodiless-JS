@@ -34,6 +34,7 @@ import {
   ChameleonCarousel,
   withAutoPlayButtonStyles,
   withAutoPlay,
+  asAccessibleCarousel,
 } from '../../../components/Carousel';
 import { asLtrPage } from '../../../components/Page';
 
@@ -45,11 +46,13 @@ const SubTitle = addClasses('text-2xl font-bold')(H2);
 const OnlyNavButtonsCarousel = flow(
   withNavigationButtons,
   withNavButtonsStyles,
+  asAccessibleCarousel,
 )(Carousel);
 
 const OnlyDotsButtonsCarousel = flow(
   withCarouselDots(CAROUSEL_NODE_KEY),
   withDotStyles,
+  asAccessibleCarousel,
 )(Carousel);
 
 const AutoPlayDefaultIntervalCarousel = flow(
@@ -57,6 +60,7 @@ const AutoPlayDefaultIntervalCarousel = flow(
   withAutoPlayInterval(),
   withAutoPlayButton,
   withAutoPlayButtonStyles,
+  asAccessibleCarousel,
 )(Carousel);
 
 const NavAndDotsCarousel = flow(
@@ -64,6 +68,7 @@ const NavAndDotsCarousel = flow(
   withDotStyles,
   withNavigationButtons,
   withNavButtonsStyles,
+  asAccessibleCarousel,
 )(Carousel);
 
 const NavAndAutoplayCarousel = flow(
@@ -72,6 +77,7 @@ const NavAndAutoplayCarousel = flow(
   withAutoPlayInterval(6000),
   withAutoPlayButton,
   withAutoPlayButtonStyles,
+  asAccessibleCarousel,
 )(Carousel);
 
 const DotsAndAutoplayCarousel = flow(
@@ -81,6 +87,7 @@ const DotsAndAutoplayCarousel = flow(
   withAutoPlayInterval(5000),
   withAutoPlayButton,
   withAutoPlayButtonStyles,
+  asAccessibleCarousel,
 )(Carousel);
 
 const NavAndDotsAndAutoplayCarousel = flow(
@@ -92,6 +99,7 @@ const NavAndDotsAndAutoplayCarousel = flow(
   withAutoPlayInterval(7000),
   withAutoPlayButton,
   withAutoPlayButtonStyles,
+  asAccessibleCarousel,
 )(Carousel);
 
 const AutoPlayCustomIntervalCarousel = flow(
@@ -99,6 +107,7 @@ const AutoPlayCustomIntervalCarousel = flow(
   withAutoPlayInterval(10000),
   withAutoPlayButton,
   withAutoPlayButtonStyles,
+  asAccessibleCarousel,
 )(Carousel);
 
 const CarouselExamples = () => (
@@ -120,7 +129,7 @@ const CarouselExamples = () => (
     <NavAndDotsAndAutoplayCarousel nodeKey="navAndDotsAndAutoPlay" />
     <SubTitle>Autoplay with 10 second interval</SubTitle>
     <AutoPlayCustomIntervalCarousel nodeKey="autoplayCustomInterval" />
-    <SubTitle>Chamelon that lets you choose from 4 components: Linkable, Gastby (Performance) Image, Horizontal Tout, Video</SubTitle>
+    <SubTitle>Chameleon that lets you choose from 4 components: Linkable, Gatsby (Performance) Image, Horizontal Card, Video</SubTitle>
     <ChameleonCarousel nodeKey="chameleon" />
   </>
 );

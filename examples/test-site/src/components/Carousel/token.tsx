@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import React, { ComponentType } from 'react';
 import {
   addClasses,
   addProps,
@@ -25,12 +26,14 @@ import { ifToggledOn, withChild } from '@bodiless/core';
 import {
   useIsCarouselItemActive,
   useCarouselIsPlaying,
+  asAccessibleCarousel as asBaseAccessibleCarousel,
+  useCarouselSlideIndex,
 } from '@bodiless/carousel';
 import { asBodilessChameleon } from '@bodiless/components';
 import MaterialIcon from '@material/react-material-icon';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { LandscapeImage, LandscapeLinkableImage } from '../Image';
-import Tout from '../Tout';
+import Card from '../Card';
 import { Reponsive16By9YouTube } from '../YouTube';
 
 const withImageSlide = withDesign({
@@ -49,8 +52,8 @@ const withChameleonSlide = withDesign({
       GatsbyImage: withDesign({
         Title: replaceWith(LandscapeImage),
       }),
-      HorizontalTout: withDesign({
-        Title: replaceWith(Tout),
+      HorizontalCard: withDesign({
+        Title: replaceWith(Card),
       }),
       Video: withDesign({
         Title: replaceWith(Reponsive16By9YouTube),
@@ -71,14 +74,14 @@ const withNavButtonsStyles = withDesign({
   SliderWrapper: addClasses('relative'),
   ButtonNext: flow(
     withNavButtonStyles,
-    addClasses('absolute transform -translate-y-1/2 top-1/2 ltr:right-0 rtl:left-0 z-20'),
+    addClasses('absolute transform -translate-y-1/2 top-1/2 right-0 left-auto rtl:left-0 rtl:right-auto'),
     addProps({
       children: 'Next',
     }),
   ),
   ButtonBack: flow(
     withNavButtonStyles,
-    addClasses('absolute transform -translate-y-1/2 top-1/2 ltr:left-0 rtl:right-0 z-20'),
+    addClasses('absolute transform -translate-y-1/2 top-1/2 left-0 right-auto rtl:right-0 rtl:left-auto'),
     addProps({
       children: 'Back',
     }),
@@ -129,6 +132,36 @@ const withAutoPlayButtonStyles = flow(
   }),
 );
 
+const withSlideItemAriaLabel = (Component: ComponentType) => (props: any) => {
+  const isSlideActive = useIsCarouselItemActive();
+  const slideIndex = useCarouselSlideIndex();
+  const ariaLabel = isSlideActive ? `Current Slide: Slide ${slideIndex}` : `Slide ${slideIndex}`;
+  return <Component {...props} aria-label={ariaLabel} />;
+};
+
+const asAccessibleCarousel = flow(
+  asBaseAccessibleCarousel,
+  withDesign({
+    ButtonBack: addProps({
+      'aria-label': 'Click for the previous slide',
+    }),
+    ButtonNext: addProps({
+      'aria-label': 'Click for the next slide',
+    }),
+    Dots: withDesign({
+      Item: withSlideItemAriaLabel,
+    }),
+    ButtonPlay: flow(
+      addPropsIf(useCarouselIsPlaying)({
+        'aria-label': 'Pause to stop slides',
+      }),
+      addPropsIf(negate(useCarouselIsPlaying))({
+        'aria-label': 'Play to continue',
+      }),
+    ),
+  }),
+);
+
 export {
   withImageSlide,
   withAutoPlay,
@@ -136,4 +169,5 @@ export {
   withDotStyles,
   withAutoPlayButtonStyles,
   withChameleonSlide,
+  asAccessibleCarousel,
 };

@@ -30,7 +30,7 @@ const carouselVariation = {
     replaceWith(ChameleonCarousel),
     withType('Carousel')(),
     withTitle('Carousel'),
-    withDesc('Adds a carousel that lets you choose from 4 components: Linkable, Gastby (Performance) Image, Horizontal Tout, Video.\n'),
+    withDesc('Adds a carousel that lets you choose from 4 components: Linkable, Gastby (Performance) Image, Horizontal Card, Video.\n'),
   ),
 };
 

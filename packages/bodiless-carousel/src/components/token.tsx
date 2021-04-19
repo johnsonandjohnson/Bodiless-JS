@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import React, { ComponentType } from 'react';
 import {
   withDesign,
   addProps,
@@ -19,17 +20,20 @@ import {
   stylable,
   Ul,
   Li,
+  addPropsIf,
 } from '@bodiless/fclasses';
 import { ifEditable, withChild } from '@bodiless/core';
 import type { WithNodeKeyProps } from '@bodiless/core';
 import { asBodilessList } from '@bodiless/components';
 import flow from 'lodash/flow';
+import negate from 'lodash/negate';
 import {
   ButtonBack,
   ButtonNext,
   ButtonPlay,
 } from 'pure-react-carousel';
 import CarouselDot from './CarouselDot';
+import { useIsCarouselItemActive } from './hooks';
 
 const withIntrinsicHeight = withDesign({
   Wrapper: addProps({
@@ -55,7 +59,7 @@ const withCarouselDots = (nodeKeys?: WithNodeKeyProps) => flow(
   withDesign({
     Dots: flow(
       replaceWith(Ul),
-      asBodilessList(nodeKeys),
+      asBodilessList(nodeKeys, undefined, () => ({ groupLabel: 'Slide' })),
       withDesign({
         Item: replaceWith(
           withChild(
@@ -82,6 +86,58 @@ const withAutoPlayInterval = (interval: number = 3000) => withDesign({
   }),
 });
 
+const withCarouselItemTabIndex = (Component: ComponentType) => (props: any) => {
+  const isItemActive = useIsCarouselItemActive();
+  const tabIndex = isItemActive ? 0 : -1;
+  return <Component {...props} tabIndex={tabIndex} />;
+};
+
+const asAccessibleCarouselButton = flow(
+  addProps({
+    role: 'button',
+  }),
+);
+
+const withAriaSelectedCarouselItem = flow(
+  addPropsIf(useIsCarouselItemActive)({
+    'aria-selected': true,
+    'aria-hidden': false,
+  }),
+  addPropsIf(negate(useIsCarouselItemActive))({
+    'aria-selected': false,
+    'aria-hidden': true,
+  }),
+);
+
+const asAccessibleCarousel = withDesign({
+  Slider: flow(
+    addProps({
+      tabIndex: 'auto',
+    }),
+    withDesign({
+      Item: flow(
+        withCarouselItemTabIndex,
+        withAriaSelectedCarouselItem,
+      ),
+    }),
+  ),
+  ButtonBack: asAccessibleCarouselButton,
+  ButtonNext: asAccessibleCarouselButton,
+  Dots: withDesign({
+    Item: flow(
+      withAriaSelectedCarouselItem,
+      addProps({
+        'aria-hidden': false,
+        role: 'presentation',
+      }),
+      withDesign({
+        Dot: asAccessibleCarouselButton,
+      }),
+    ),
+  }),
+  ButtonPlay: asAccessibleCarouselButton,
+});
+
 export {
   withIntrinsicHeight,
   withNoDragIfEditable,
@@ -90,4 +146,5 @@ export {
   withNavigationButtons,
   withAutoPlayButton,
   withAutoPlayInterval,
+  asAccessibleCarousel,
 };

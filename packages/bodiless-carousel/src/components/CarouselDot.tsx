@@ -14,10 +14,10 @@
 
 import React from 'react';
 import { Dot } from 'pure-react-carousel';
-import useBodilessListItemIndex from './useBodilessListItemIndex';
+import { useCarouselSlideIndex } from './hooks';
 
 const CarouselDot = (props: any) => {
-  const slideIndex = useBodilessListItemIndex();
+  const slideIndex = useCarouselSlideIndex();
   return <Dot slide={slideIndex} {...props} />;
 };
 
