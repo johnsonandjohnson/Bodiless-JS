@@ -87,6 +87,10 @@ export default (props: any) => (
   <Page {...props}>
     <Layout>
       <h1 className="text-3xl font-bold">Editable List Demo</h1>
+      <p className="text-red-500">
+        Warning uses older list api which is deprecating, please see
+        <a className="underline text-blue-500" href="/list2"> list2 page.</a>
+      </p>
       <p className="pt-4">
         The following are editable lists. Click on each item to display
         a menu with available operations. The list allows up to 3 levels

@@ -29,15 +29,15 @@ import withFormSnippet from './withFormSnippet';
 import withFormHeader from './withFormHeader';
 
 // Type of the data used by this component.
-export type Data = {
+export type IframeData = {
   src: string;
   height: string;
 };
 
-export type Props = HTMLProps<HTMLIFrameElement>;
+export type IframeProps = HTMLProps<HTMLIFrameElement>;
 
 // Options used to create an edit button.
-const options: BodilessOptions<Props, Data> = {
+const options: BodilessOptions<IframeProps, IframeData> = {
   icon: 'settings',
   groupLabel: 'IFrame',
   label: 'Settings',
@@ -62,8 +62,8 @@ const withHeightSnippet = withFormSnippet({
   nodeKeys: 'height',
   defaultData: { height: '' },
   snippetOptions: {
-    renderForm: ({ formState }) => {
-      const { errors } = formState;
+    renderForm: ({ formState, scope }) => {
+      const errors = scope ? formState.errors[scope] : formState.errors;
       const {
         ComponentFormLabel,
         ComponentFormText,
@@ -113,7 +113,7 @@ const withIframeFormHeader = withFormHeader({
   title: 'Iframe Configuration',
 });
 
-const asBaseBodilessIframe: AsBodiless<Props, Data> = (
+const asBaseBodilessIframe: AsBodiless<IframeProps, IframeData> = (
   nodeKeys?,
   defaultData?,
   useOverrides?,
@@ -122,7 +122,7 @@ const asBaseBodilessIframe: AsBodiless<Props, Data> = (
   asBodilessComponent(useIframeBodilessOptions())(nodeKeys, defaultData, useOverrides),
 );
 
-const asBodilessIframe: AsBodiless<Props, Data> = (
+const asBodilessIframe: AsBodiless<IframeProps, IframeData> = (
   nodeKeys?,
   defaultData?,
   useOverrides?,

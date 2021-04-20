@@ -48,6 +48,7 @@ import {
   withDisplayName,
 } from './hoc-util';
 import Fragment from './Fragment';
+import withDesignAt from './withDesignAt';
 
 export * from './StyledHTML';
 
@@ -68,6 +69,7 @@ export {
   removeClasses,
   withDesign,
   withFinalDesign,
+  withDesignAt,
   applyDesign,
   replaceWith,
   replaceOnEffect,

@@ -21,6 +21,7 @@ const toc = {
   Design: {},
   Components: {
     'YouTube.md': 'YouTube',
+    'Navigation.md': 'Navigation',
   },
   Tools: {},
   Development: {

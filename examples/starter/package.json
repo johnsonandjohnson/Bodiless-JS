@@ -25,6 +25,7 @@
     "@bodiless/layouts": "^0.0.72",
     "@bodiless/layouts-ui": "^0.0.72",
     "@bodiless/migration-tool": "^0.0.72",
+    "@bodiless/navigation": "^0.0.72",
     "@bodiless/organisms": "^0.0.72",
     "@bodiless/richtext": "^0.0.72",
     "@bodiless/richtext-ui": "^0.0.72",

@@ -12,45 +12,55 @@
  * limitations under the License.
  */
 
-import type { HTMLProps, ComponentType, PropsWithChildren } from 'react';
+import type { HTMLProps, ComponentType } from 'react';
 import type { DesignableComponentsProps, DesignableProps } from '@bodiless/fclasses';
 import type { WithNodeProps, EditButtonOptions } from '@bodiless/core';
 
-export type ItemProps = {
-  addItem: () => void,
-  deleteItem: () => void,
-  canDelete: () => boolean,
-};
-
-export type ListDesignableComponents = {
+export type ListComponents = {
   Wrapper: ComponentType<any>,
-  Item: ComponentType<ItemProps>,
+  Item: ComponentType<any>,
   Title: ComponentType<any>,
-  ItemMenuOptionsProvider: ComponentType<any>,
 };
 
-export type Props = {
-  unwrap?: Function,
-  onDelete?: Function,
-} & DesignableComponentsProps<ListDesignableComponents> & HTMLProps<HTMLElement>;
+export type ListContextValue = {
+  items?: string[],
+  currentItem?: string,
+  addItem?: Function,
+  deleteItem?: Function,
+};
 
-export type FinalProps =
-  Omit<Props, keyof DesignableComponentsProps<ListDesignableComponents>>
+export type ListBaseProps = {
+  /**
+   * Callback to invoke when the last itme in the list is deleted.
+   */
+  unwrap?: Function,
+  /**
+   * Callback to invoke when an item in the list is deleted.
+   */
+  onDelete?: Function,
+  /**
+   * List of items to be prepended to those which are derived from list
+   * data. This is an array of strings which will be use as node keys for
+   * the items.
+   */
+  prependItems?: string[],
+  /**
+   * List of items to be appended to those which are derived from list
+   * data. This is an array of strings which will be used as node keys for
+   * the items.
+   */
+  appendItems?: string[],
+} & DesignableComponentsProps<ListComponents> & HTMLProps<HTMLElement>;
+
+export type ListProps =
+  Omit<ListBaseProps, keyof DesignableComponentsProps<ListComponents>>
   & WithNodeProps
-  & DesignableProps<ListDesignableComponents>;
+  & DesignableProps<ListComponents>;
 
 export type ItemsMutator = (item: string) => void;
 
-export type Data = {
+export type ListData = {
   items?: string[],
 };
 
-export type UseItemWithSublist = (Sublist: ComponentType<FinalProps>) =>
-(Item: ComponentType<PropsWithChildren<{}>>) => {
-  ItemWithSublist: ComponentType<any>,
-  ItemWithoutSublist:ComponentType<any>,
-};
-
-export type WithSublistToggle = (Sublist: ComponentType<FinalProps>) => ComponentType<FinalProps>;
-
-export type UseListOverrides<P = any> = (props: P) => Partial<EditButtonOptions<P, Data>>;
+export type UseListOverrides<P = any> = (props: P) => Partial<EditButtonOptions<P, ListData>>;

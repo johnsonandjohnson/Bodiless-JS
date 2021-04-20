@@ -18,6 +18,7 @@ import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
 import List from './List_DEPRECATED';
 import asTaggableItem from './Taggable/asTaggableItem';
+import asBodilessAnchor from './Anchor/asBodilessAnchor';
 import withListTitle from './List_DEPRECATED/withListTitle';
 import asEditableList from './List_DEPRECATED/asEditableList';
 import asBasicSublist from './List_DEPRECATED/asBasicSublist';
@@ -42,6 +43,7 @@ import asBodilessIframe, {
   withIframeFormSrcSnippet,
   useIframeBodilessOptions,
 } from './Iframe';
+import type { IframeData, IframeProps } from './Iframe';
 import YouTube, {
   asBaseBodilessYouTube,
   asBodilessYouTube,
@@ -68,7 +70,12 @@ import {
 import withResponsiveVariants from './withResponsiveVariants';
 import withBodilessLinkToggle from './withBodilessLinkToggle';
 
+import withFormHeader from './withFormHeader';
+import withFormSnippet from './withFormSnippet';
+
 export {
+  withFormHeader,
+  withFormSnippet,
   withBodilessLinkToggle,
   Editable,
   NodeViewer,
@@ -127,6 +134,7 @@ export {
   withDataLayerItem,
   withDefaultDataLayer,
   withDataLayerScript,
+  asBodilessAnchor,
 };
 
 export * from './Chameleon/index';
@@ -134,9 +142,12 @@ export * from './Image';
 export * from './List';
 export * from './Link';
 
-export * from './Breadcrumbs';
-
-export type { MetaFormFieldType, YouTubePlayerSettings };
+export type {
+  MetaFormFieldType,
+  YouTubePlayerSettings,
+  IframeData,
+  IframeProps,
+};
 
 export type {
   UseEditableOverrides,

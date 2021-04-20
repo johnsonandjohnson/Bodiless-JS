@@ -29,16 +29,8 @@ module.exports = {
       '4/3': [4, 3],
       '21/9': [21, 9],
     },
-    extend: {
-      minWidth: {
-        full: '100%',
-      },
-    },
   },
-  variants: {
-    overflow: ['responsive', 'hover', 'focus'],
-    position: ['responsive', 'hover', 'focus'],
-  },
+  variants: {},
   plugins: [
     // eslint-disable-next-line
     require('tailwindcss-aspect-ratio'),

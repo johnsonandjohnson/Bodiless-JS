@@ -54,8 +54,6 @@ export {
   asEditableCarousel,
 } from './components/Carousel';
 
-export * from './components/Menu';
-
 export { default as Embed } from './components/Embed';
 export {
   asResponsive21By9Embed,
@@ -68,10 +66,6 @@ export {
   asBaseResponsiveIframe,
   asResponsiveIframe,
 } from './components/ResponsiveIframe';
-export {
-  asBaseResponsiveYouTube,
-  asResponsiveYouTube,
-} from './components/ResponsiveYouTube';
 
 export { default as SocialShare } from './components/SocialShare';
 export type { SocialShareProvider } from './components/SocialShare/types';

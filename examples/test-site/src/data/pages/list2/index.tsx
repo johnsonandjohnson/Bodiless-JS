@@ -15,9 +15,9 @@
 import React, { ComponentType } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import { asBodilessList, asEditable } from '@bodiless/components';
+import { asBodilessList, asEditable, useListContext } from '@bodiless/components';
 import {
-  withDesign, replaceWith, Div, addClasses, H1, H3,
+  withDesign, replaceWith, Div, addClasses, H1, H3, flowIf, addProps, HOC,
 } from '@bodiless/fclasses';
 import { flow } from 'lodash';
 import Layout from '../../../components/Layout';
@@ -26,6 +26,7 @@ import ChameleonListDemo from './ChameleonListDemo';
 import ListDemo from './ListDemo';
 import SimpleListDemo from './SimpleListDemo';
 import { asHeader1, asHeader3 } from '../../../components/Elements.token';
+import ListDesignTest from './ListDesignTest';
 
 const SuperSimpleList = flow(
   asBodilessList('list'),
@@ -36,6 +37,16 @@ const SuperSimpleList = flow(
     ),
   }),
 )('ul');
+
+const ListWithPrependAndContextualStyles = flow(
+  addProps({ prependItems: ['prepend', 'prepend-2'] }) as HOC,
+  withDesign({
+    Title: flowIf(() => useListContext().currentItem === 'prepend')(
+      replaceWith(() => <span>This item cannot be edited</span>),
+    ),
+  }),
+  addProps({ appendItems: ['append'] }) as HOC,
+)(SuperSimpleList);
 
 const Wrapper = addClasses('w-1/2 p-5')(Div);
 const Title = asHeader1(H1);
@@ -78,6 +89,23 @@ export default (props: any) => (
             the list are editable links.
           </p>
           <ChameleonListDemo nodeKey="list1" />
+        </Wrapper>
+        <Wrapper>
+          <SectionHeader>List design test</SectionHeader>
+          <p>
+            This list has up to 2 levels of nested sublists. The main list itself and
+            each sublist can be switched between bullets and numbers.  The titles in
+            the list are editable links.
+          </p>
+          <ListDesignTest />
+        </Wrapper>
+        <Wrapper>
+          <SectionHeader>List with append and item context</SectionHeader>
+          <p>
+            This list has static items inserted at the beginning and end. These
+            items cannot be removed. In addition, the first item is non-editable.
+          </p>
+          <ListWithPrependAndContextualStyles />
         </Wrapper>
       </div>
     </Layout>

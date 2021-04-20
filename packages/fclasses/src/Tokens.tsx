@@ -32,7 +32,9 @@ type ComponentOrTag<P> = ComponentWithMeta<P>|keyof JSX.IntrinsicElements;
 /**
  * Type of a higher order component
  */
-type HOC = <P extends object, Q extends object = P>(C:ComponentOrTag<P>) => ComponentWithMeta<Q>;
+type HOC<P extends object = any, Q extends object = P> = (
+  C:ComponentOrTag<P>,
+) => ComponentWithMeta<Q>;
 
 /**
  * Properties of tokens.
