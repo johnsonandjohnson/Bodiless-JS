@@ -36,10 +36,10 @@ const AccordionBodyBase: FC<AccordionBodyProps> = ({
 
   return (
     <Wrapper
-      id={accordionMeta.accordionContent}
+      id={accordionMeta.accordionContentId}
       role="region"
       aria-hidden={!isExpanded ? 'true' : 'false'}
-      aria-labelledby={accordionMeta.accordionTitle}
+      aria-labelledby={accordionMeta.accordionTitleId}
       tabIndex={!isExpanded ? -1 : 0}
     >
       <Content>

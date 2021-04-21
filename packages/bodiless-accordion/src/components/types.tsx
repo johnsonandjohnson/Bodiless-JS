@@ -17,8 +17,8 @@ import { StylableProps, DesignableComponentsProps } from '@bodiless/fclasses';
 
 export type AccordionMeta = {
   accordionId: string,
-  accordionTitle: string,
-  accordionContent: string,
+  accordionTitleId: string,
+  accordionContentId: string,
 };
 
 export type AccordionProviderProps = {

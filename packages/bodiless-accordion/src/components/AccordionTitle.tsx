@@ -29,10 +29,7 @@ import {
   asAccordionLabel,
 } from './Accordion.tokens';
 import { useAccordionContext } from './AccordionContext';
-import {
-  AccordionKeyPressHandler,
-  AccordionKeyUpHandler,
-} from './AccordionKeyboard';
+import AccordionKeyPressHandler from './AccordionKeyboard';
 import {
   AccordionTitleProps,
   AccordionTitleComponents,
@@ -62,10 +59,9 @@ const AccordionTitleBase: FC<AccordionTitleProps> = ({
       onFocus={() => setFocus(!hasFocus)}
       onBlur={() => setFocus(!hasFocus)}
       onKeyPress={(event) => AccordionKeyPressHandler(event, context)}
-      onKeyUp={(event) => AccordionKeyUpHandler(event)}
-      id={accordionMeta.accordionTitle}
+      id={accordionMeta.accordionTitleId}
       role="button"
-      aria-controls={accordionMeta.accordionContent}
+      aria-controls={accordionMeta.accordionContentId}
       aria-expanded={isExpanded ? 'true' : 'false'}
       tabIndex={0}
     >

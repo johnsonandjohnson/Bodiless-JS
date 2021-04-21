@@ -1,5 +1,5 @@
 /**
- * Copyright © 2021 Johnson & Johnson
+ * Copyright © 2019 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,15 +29,15 @@ export default props => (
       <h1 className="text-3xl font-bold">Accordions</h1>
       <div style={{ margin: 100 }}>
         <h2 className="text-xl font-bold my-4 p-1">Accordion expanded</h2>
-        <SingleAccordion expanded />
+        <SingleAccordion expanded nodeKey="accordion-expanded" />
         <h2 className="text-xl font-bold my-4 p-1">Accordion collapsed</h2>
-        <SingleAccordion />
+        <SingleAccordion nodeKey="accordion-collapsed" />
         <h2 className="text-xl font-bold my-4 p-1">Accordion fully bordered on focus</h2>
-        <SingleAccordionBorderedOnFocus />
+        <SingleAccordionBorderedOnFocus nodeKey="accordion-bordered-focus" />
         <h2 className="text-xl font-bold my-4 p-1">Accordion title bordered</h2>
-        <SingleAccordionTitleBordered />
+        <SingleAccordionTitleBordered nodeKey="accordion-title-bordered" />
         <h2 className="text-xl font-bold my-4 p-1">Accordion non-collapsible</h2>
-        <SingleAccordionNonExpanding expanded />
+        <SingleAccordionNonExpanding expanded nodeKey="accordion-non-collapsible" />
       </div>
     </Layout>
   </Page>

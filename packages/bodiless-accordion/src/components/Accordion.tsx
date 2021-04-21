@@ -36,16 +36,16 @@ const AccordionBase: FC<AccordionProps & AccordionProviderProps> = ({
     Body = AccordionBodyClean,
   } = components;
 
-  const id = nextId('accordion-');
+  const accordionId = nextId('accordion-');
   const accordionMeta = {
-    id: { id },
-    accordionTitle: `accordion__title-${id}`,
-    accordionContent: `accordion__content-${id}`,
+    accordionId: { accordionId },
+    accordionTitleId: `accordion__title-${accordionId}`,
+    accordionContentId: `accordion__content-${accordionId}`,
   };
 
   return (
     <AccordionProvider collapsible={false} expanded={expanded} focus={focus}>
-      <Wrapper {...rest} id={id}>
+      <Wrapper {...rest} id={accordionId}>
         <Title {...accordionMeta} />
         <Body {...accordionMeta} />
       </Wrapper>

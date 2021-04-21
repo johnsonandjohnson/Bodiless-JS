@@ -38,31 +38,4 @@ const AccordionKeyPressHandler = (event: KeyboardEvent, context: AccordionContex
   }
 };
 
-/**
- * AccordionKeyUpHandler handles specific key up events, which can not be
- * handled by key press, to provide accessibility support for accordions
- * focus movements between title wrappers
- */
-const AccordionKeyUpHandler = (event: KeyboardEvent) => {
-  switch (event.key) {
-    case 'ArrowDown':
-      break;
-
-    case 'ArrowUp':
-      break;
-
-    case 'End':
-      break;
-
-    case 'Home':
-      break;
-
-    default:
-      break;
-  }
-};
-
-export {
-  AccordionKeyPressHandler,
-  AccordionKeyUpHandler,
-};
+export default AccordionKeyPressHandler;

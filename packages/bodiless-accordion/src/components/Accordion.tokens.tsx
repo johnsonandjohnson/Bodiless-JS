@@ -53,11 +53,11 @@ const asAccordionDefaultBorder = flow(
  * asAccordionDefaultExpanded provides expanded property
  */
 const asAccordionDefaultExpanded = flow(
-  addProps({ expanded: '' }),
+  addProps({ expanded: true }),
 );
 
 /**
- * asAccordionDefaultExpanded provides basic icon style for accordion title
+ * asAccordionIcon provides basic icon style for accordion title
  */
 const asAccordionIcon = flow(
   addClasses('material-icons cursor-pointer right-0'),
