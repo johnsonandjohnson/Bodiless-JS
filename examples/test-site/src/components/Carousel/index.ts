@@ -44,7 +44,6 @@ const Carousel = flow(
 
 const ChameleonCarousel = flow(
   asEditableCarousel(CAROUSEL_NODE_KEY),
-  withChameleonSlide,
   withCarouselDots(CAROUSEL_NODE_KEY),
   withDotStyles,
   withNavigationButtons,
@@ -54,6 +53,7 @@ const ChameleonCarousel = flow(
   withAutoPlayButton,
   withAutoPlayButtonStyles,
   asAccessibleCarousel,
+  withChameleonSlide,
 )(CarouselClean);
 
 export * from './token';

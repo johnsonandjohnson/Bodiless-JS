@@ -134,7 +134,7 @@ const withAutoPlayButtonStyles = flow(
 
 const withSlideItemAriaLabel = (Component: ComponentType) => (props: any) => {
   const isSlideActive = useIsCarouselItemActive();
-  const slideIndex = useCarouselSlideIndex();
+  const slideIndex = useCarouselSlideIndex() + 1;
   const ariaLabel = isSlideActive ? `Current Slide: Slide ${slideIndex}` : `Slide ${slideIndex}`;
   return <Component {...props} aria-label={ariaLabel} />;
 };
