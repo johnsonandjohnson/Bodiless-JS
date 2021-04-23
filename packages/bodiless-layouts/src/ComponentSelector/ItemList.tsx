@@ -33,6 +33,13 @@ const ItemList: React.FC<ItemListProps> = props => {
   const { components, onSelect } = props;
   const finalUI = useContext(uiContext);
   const [scale, setScale] = useState(Scale.Full);
+
+  // Function to build a default title for a component from its categories.
+  const title = (component: ComponentWithMeta) => component.title || component.displayName;
+
+  // Function to build a default description for a component from its categories.
+  const description = (component: ComponentWithMeta) => component.description || 'No description';
+
   const getRowHeight = () => {
     if (components.length <= scale) {
       return 'auto';
@@ -89,13 +96,14 @@ const ItemList: React.FC<ItemListProps> = props => {
       <finalUI.ItemBoxWrapper style={boxStyle} key={Component.displayName}>
         <finalUI.ItemBox key={Component.displayName}>
           <finalUI.TitleWrapper style={outerStyle}>
-            {Component.title || Component.displayName || 'Untitled'}
+            {title(Component)}
           </finalUI.TitleWrapper>
           <div
             className="bl-outerTransform bl-relative bl-w-full bl-bg-white"
           >
             <Component />
           </div>
+          {description(Component) && (
           <Tooltip
             placement="rightBottom"
             mouseLeaveDelay={0}
@@ -104,9 +112,9 @@ const ItemList: React.FC<ItemListProps> = props => {
             }}
             overlay={(
               <finalUI.ComponentDescriptionWrapper>
-                <h3>{Component.title}</h3>
+                <h3>{title(Component)}</h3>
                 <finalUI.ComponentDescriptionStyle>
-                  <p>{Component.description}</p>
+                  {description(Component)}
                 </finalUI.ComponentDescriptionStyle>
               </finalUI.ComponentDescriptionWrapper>
           )}
@@ -115,6 +123,7 @@ const ItemList: React.FC<ItemListProps> = props => {
               info
             </finalUI.ComponentDescriptionIcon>
           </Tooltip>
+          )}
           <finalUI.ComponentSelectButton
             type="submit"
             onClick={() => onSelect([Component.displayName])}
