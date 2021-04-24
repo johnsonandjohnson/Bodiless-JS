@@ -58,6 +58,7 @@ type Props = {
   onResize?: ResizeCallback;
   ui?: UI,
   isResizeEnabled?: boolean,
+  contextName?: string,
 };
 
 type SortableResizableProps = Omit<Props, 'useGetMenuOptions'>;
@@ -105,11 +106,12 @@ const SlateSortableResizable = (props: Props) => {
     children,
     uuid,
     useGetMenuOptions,
+    contextName,
     ...rest
   } = props;
 
   const isNested = useIsNested();
-  const name = isNested ? 'Nested Component' : 'Component';
+  const name = contextName || (isNested ? 'Nested Component' : 'Component');
 
   return (
     <PageContextProvider

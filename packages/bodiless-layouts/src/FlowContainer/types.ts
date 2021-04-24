@@ -37,6 +37,7 @@ export type EditFlowContainerProps = StaticFlowContainerProps & {
   mandatoryCategories?: string[],
   blacklistCategoris?: string[],
   isResizeEnabled?: boolean,
+  contextName?: string,
 };
 export type WidthClassTuple = {
   width: number;

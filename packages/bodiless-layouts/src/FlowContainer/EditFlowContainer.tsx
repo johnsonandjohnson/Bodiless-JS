@@ -45,7 +45,7 @@ const EditFlowContainerComponents: FlowContainerComponents = {
  */
 const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerProps) => {
   const {
-    components, ui, snapData, getDefaultWidth,
+    components, ui, snapData, getDefaultWidth, contextName,
   } = props;
   const items = useItemHandlers().getItems();
   const {
@@ -71,6 +71,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerPr
             return (
               <ChildNodeProvider nodeKey={flowContainerItem.uuid} key={`node-${flowContainerItem.uuid}`}>
                 <ComponentWrapper
+                  contextName={contextName}
                   ui={ui}
                   index={index}
                   flowContainerItem={flowContainerItem}
