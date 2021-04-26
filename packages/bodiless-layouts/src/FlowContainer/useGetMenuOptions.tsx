@@ -116,7 +116,7 @@ const useCloneButton = (
   );
 
   return {
-    name: useItemButtonName('copy', item.uuid),
+    name: useItemButtonName('copy-item', item.uuid),
     label: 'Copy',
     icon: 'content_copy',
     global: false,
