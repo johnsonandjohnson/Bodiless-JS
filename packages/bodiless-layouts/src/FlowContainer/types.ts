@@ -16,7 +16,7 @@ import { ComponentType } from 'react';
 import { WithNodeProps, TMenuOptionGetter } from '@bodiless/core';
 import { DesignableComponents, StylableProps } from '@bodiless/fclasses';
 import { ComponentSelectorUI } from '../ComponentSelector/types';
-import { UI as SortableResizableUI } from '../SlateSortableResizable';
+import { UI as SortableResizableUI, SlateSortableResizableProps } from '../SlateSortableResizable';
 import { SnapData } from './utils/appendTailwindWidthClass';
 import { SortableListProps } from './SortableContainer';
 
@@ -37,7 +37,14 @@ export type EditFlowContainerProps = StaticFlowContainerProps & {
   mandatoryCategories?: string[],
   blacklistCategoris?: string[],
   isResizeEnabled?: boolean,
-  contextName?: string,
+  /**
+   * The label to use for the buttons provided by an empty flow container.
+   */
+  buttonGroupLabel?: string|((props:EditFlowContainerProps) => string),
+  /**
+   * The label to use for the buttons provided by a flow container item.
+   */
+  itemButtonGroupLabel?: string|((props:SlateSortableResizableProps) => string),
 };
 export type WidthClassTuple = {
   width: number;

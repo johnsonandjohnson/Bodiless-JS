@@ -45,6 +45,19 @@ const withNoDesign = (props:EditFlowContainerProps):EditFlowContainerProps => ({
 /**
  * @private
  *
+ * Get a unique id for a buttons
+ */
+const useItemButtonName = (prefix: string, uuid: string) => {
+  const ids = [uuid, prefix];
+  const context = useEditContext();
+  for (let c = context.parent; c; c = c.parent) {
+    if (c.type === 'FC_ITEM_CONTEXT_TYPE') ids.push(c.id);
+  }
+  return ids.reverse().join('-');
+};
+/**
+ * @private
+ *
  * Returns actions which can be executed upon selecting a component in the
  * component selector.
  *
@@ -103,7 +116,7 @@ const useCloneButton = (
   );
 
   return {
-    name: `copy-item-${item.uuid}`,
+    name: useItemButtonName('copy', item.uuid),
     label: 'Copy',
     icon: 'content_copy',
     global: false,
@@ -132,7 +145,7 @@ const useDeleteButton = (
   };
 
   return {
-    name: `delete-${item.uuid}`,
+    name: useItemButtonName('delete', item.uuid),
     label: 'Delete',
     icon: 'delete',
     global: false,
@@ -157,7 +170,7 @@ const useAddButton = (
   const isHidden = item
     ? useCallback(() => !context.isEdit || getItems().length >= maxComponents, [maxComponents])
     : useCallback(() => !context.isEdit || getItems().length > 0, []);
-  const name = item ? `add-item-${item.uuid}` : `add-${context.id}`;
+  const name = item ? useItemButtonName('add-item', item.uuid) : `add-${context.id}`;
   return {
     icon: 'add',
     label: 'Add',
@@ -180,7 +193,7 @@ const useSwapButton = (
   const { replaceItem } = useComponentSelectorActions(handlers, props, item);
   const { components } = withNoDesign(props);
   return {
-    name: `swap-${item.uuid}`,
+    name: useItemButtonName('swap', item.uuid),
     label: 'Swap',
     icon: 'repeat',
     global: false,
