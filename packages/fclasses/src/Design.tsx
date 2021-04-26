@@ -412,9 +412,41 @@ type DesignOrHod<C extends DesignableComponents> = Design<C> | HOD<C>;
 const flowDesignsWith = <C extends DesignableComponents> (func: (d:Design<C>) => HOD<C>) => (
   (...designs: DesignOrHod<C>[]) => (baseDesign: Design<C> = {}) => (
     flow(
-      ...designs.map(design => (typeof design === 'function' ? func(design()) : func(design))),
+      ...designs
+        .filter(design => Object.getOwnPropertyNames(design).length > 0)
+        .map(design => (typeof design === 'function' ? func(design()) : func(design))),
     )(baseDesign)
   )
 );
+/**
+ * @deprecated
+ * @private
+ */
 export const varyDesign = flowDesignsWith(varyDesign$);
+
+/**
+ * @deprecated
+ * @private
+ */
 export const extendDesign = flowDesignsWith(extendDesign$);
+
+/**
+ * Creates a new design which consists of all possible combinations of the
+ * design keys of the specified designs.
+ *
+ * @param designs
+ */
+export const varyDesigns = <C extends DesignableComponents = DesignableComponents>(
+  ...designs: DesignOrHod<C>[]
+) => varyDesign(...designs)();
+
+/**
+ * Creates a new design which is a union of all design keys of the specified
+ * designs. If the same key exists in more than one design, the resulting
+ * design will compose the tokens for that key from all matching designs.
+ *
+ * @param designs
+ */
+export const extendDesigns = <C extends DesignableComponents = DesignableComponents>(
+  ...designs: DesignOrHod<C>[]
+) => extendDesign(...designs)();

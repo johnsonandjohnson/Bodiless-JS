@@ -42,9 +42,13 @@ const applyMandatoryCategories = (
 ) => {
   mandatoryCategories.forEach(mandatoryCategory => {
     components.forEach((component: any) => {
-      if (!(mandatoryCategory in component.categories)) {
+      const { categories = {} } = component;
+      if (!Object.getOwnPropertyNames(categories).includes(mandatoryCategory)) {
         // eslint-disable-next-line no-param-reassign
-        component.categories[mandatoryCategory] = ['N/A'];
+        component.categories = {
+          ...categories,
+          [mandatoryCategory]: ['N/A'],
+        };
       }
     });
   });
@@ -56,10 +60,10 @@ const applyMandatoryCategories = (
  * @param filters
  * @param components
  */
-const reduceFilters = (filters: any, components: any) => pickBy(
+const reduceFilters = (filters: any, components: any, blacklistCategories: string[] = []) => pickBy(
   filters,
-  (value: any, category: string) => components
-    .every((component: any) => (category in component.categories)),
+  (value: any, category: string) => !blacklistCategories.includes(category)
+    && components.every((component: any) => (category in component.categories)),
 );
 
 /*
@@ -84,6 +88,7 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
     ui,
     onSelect,
     mandatoryCategories,
+    blacklistCategories,
   } = props;
 
   const allComponentsNames = allComponents.map(Component => (
@@ -108,6 +113,7 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
   const filters = reduceFilters(
     getFiltersByComponentList(newCompRender),
     newCompRender,
+    blacklistCategories,
   );
 
   const finalUI:FinalUI = { ...defaultUI, ...useMenuOptionUI(), ...ui };
@@ -141,7 +147,11 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
               activeSearch={activeSearch}
               setActiveSearch={setActiveSearch}
             />
-            <ItemList onSelect={onSelect} components={newCompRender} />
+            <ItemList
+              onSelect={onSelect}
+              components={newCompRender}
+              blacklistCategories={blacklistCategories}
+            />
           </finalUI.FlexSectionFull>
         </finalUI.MasterWrapper>
       </uiContext.Provider>
