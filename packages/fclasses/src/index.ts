@@ -33,7 +33,9 @@ import {
   designable,
   extendDesignable,
   varyDesign,
+  varyDesigns,
   extendDesign,
+  extendDesigns,
   withFinalDesign,
 } from './Design';
 import type {
@@ -48,6 +50,7 @@ import {
   withDisplayName, or, and, not,
 } from './hoc-util';
 import Fragment from './Fragment';
+import withDesignAt from './withDesignAt';
 
 export * from './StyledHTML';
 
@@ -68,6 +71,7 @@ export {
   removeClasses,
   withDesign,
   withFinalDesign,
+  withDesignAt,
   applyDesign,
   replaceWith,
   replaceOnEffect,
@@ -80,7 +84,9 @@ export {
   designable,
   extendDesignable,
   varyDesign,
+  varyDesigns,
   extendDesign,
+  extendDesigns,
   asComponent,
   addClassesIf,
   removeClassesIf,

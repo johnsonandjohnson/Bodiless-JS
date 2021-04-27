@@ -17,8 +17,10 @@
 import path from 'path';
 
 const whitelistedModules = [
+  '@bodiless/card',
   '@bodiless/layouts',
   '@bodiless/organisms',
+  '@bodiless/navigation',
 ];
 
 type TailwindConfigs = {

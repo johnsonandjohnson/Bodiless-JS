@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 import { flow } from 'lodash';
 import { withMandatoryCategories } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
-import withToutVariations from './withToutVariations';
+import withCardVariations from './withCardVariations';
 import withRichTextVariations from './withRichTextVariations';
 import withImageVariations from './withImageVariations';
 import withIframeVariations from './withIframeVariations';
@@ -27,7 +27,7 @@ import { asFlowContainerWithMargins } from './token';
 const FlowContainerDefault = flow(
   withRichTextVariations,
   withImageVariations,
-  withToutVariations,
+  withCardVariations,
   asFlowContainerWithMargins,
   withIframeVariations,
   withYouTubeVariations,

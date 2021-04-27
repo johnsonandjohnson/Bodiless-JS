@@ -1,0 +1,43 @@
+{
+  "name": "@bodiless/carousel",
+  "version": "0.0.72",
+  "description": "Provides responsive and aria compliant carousel.",
+  "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
+  "homepage": "",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "/lib",
+    "/doc",
+    "/bodiless.docs.json"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build:watch": "npm run build -- --watch",
+    "build:api-doc": "typedoc --out doc/api --mode file",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
+  },
+  "dependencies": {
+    "@bodiless/core": "0.0.72",
+    "@bodiless/components": "0.0.72",
+    "@bodiless/fclasses": "0.0.72",
+    "lodash": "^4.17.19",
+    "mobx-react-lite": "^1.3.1",
+    "pure-react-carousel": "^1.27.6"
+  },
+  "peerDependencies": {
+    "react": "^16.8.1"
+  }
+}

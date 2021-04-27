@@ -12,12 +12,64 @@
  * limitations under the License.
  */
 
-import React, { Fragment, ComponentType as CT } from 'react';
+import React, { Fragment, ComponentType as CT, PropsWithChildren } from 'react';
 import { extendDesignable } from '@bodiless/fclasses';
 import type { DesignableComponentsProps } from '@bodiless/fclasses';
 import omit from 'lodash/omit';
 
 type HOC<P = any, Q = P> = (Component?: CT<P>|string|undefined) => CT<Q>;
+
+type InsertChildOptions = {
+  designKey: string,
+  mode?: 'append' | 'prepend',
+};
+
+/**
+ * @private
+ * Utility function to add (append or prepend) a Child to the given component
+ * so that the Child can be altered using Design API.
+ *
+ * @param Child - Component to add as a child
+ * @param options - A Design key to reach the Child and an optional mode ('append' | 'prepend').
+ *
+ * @return An HOC which will append the Child to the given Component.
+ */
+const insertChild = <P extends object>(Child: CT, options: InsertChildOptions): HOC<P> => (
+  Component = Fragment,
+) => {
+  type Components = { [Child: string]: CT };
+  const { designKey, mode } = options;
+  const startComponents: Components = { [designKey]: Child };
+  const WithChild = (props: P & PropsWithChildren<DesignableComponentsProps<Components>>) => {
+    const { components, ...rest } = props;
+    const { children, ...restWithoutChildren } = rest;
+    const { [designKey]: ChildComponent } = components;
+    switch (mode) {
+      case 'append':
+        return (
+          <Component {...restWithoutChildren as P}>
+            <ChildComponent />
+            {children}
+          </Component>
+        );
+      case 'prepend':
+        return (
+          <Component {...restWithoutChildren as P}>
+            {children}
+            <ChildComponent />
+          </Component>
+        );
+      default:
+        return (
+          <Component {...rest as P}>
+            <ChildComponent />
+          </Component>
+        );
+    }
+  };
+  const applyDesign = extendDesignable(design => omit(design, [designKey]));
+  return applyDesign(startComponents, designKey)(WithChild);
+};
 
 /**
  * Utility function to add a Child to the given Parent component
@@ -44,20 +96,38 @@ type HOC<P = any, Q = P> = (Component?: CT<P>|string|undefined) => CT<Q>;
  * )(Parent);
  * ```
  */
-const withChild = <P extends object>(Child: CT, designKey = 'Child'): HOC<P> => (Parent = Fragment) => {
-  type Components = { [Child: string]: CT };
-  const startComponents: Components = { [designKey]: Child };
-  const WithChild = (props: P & DesignableComponentsProps<Components>) => {
-    const { components, ...rest } = props;
-    const { [designKey]: ChildComponent } = components;
-    return (
-      <Parent {...rest as P}>
-        <ChildComponent />
-      </Parent>
-    );
-  };
-  const applyDesign = extendDesignable(design => omit(design, [designKey]));
-  return applyDesign(startComponents, designKey)(WithChild);
-};
+const withChild = <P extends object>(
+  Child: CT, designKey = 'Child',
+): HOC<P> => insertChild(Child, { designKey });
+
+/**
+ * Utility function to append a Child to the given component
+ * so that the Child can be altered using Design API.
+ *
+ * @param Child - Component to add as a child
+ * @param designKey - Design key to reach the Child component using Design API.
+ *
+ * @return An HOC which will append the Child to the given Component.
+ */
+const withAppendChild = <P extends object>(
+  Child: CT, designKey: string,
+): HOC<P> => insertChild(Child, { designKey, mode: 'append' });
+
+/**
+ * Utility function to prepend a Child to the given component
+ * so that the Child can be altered using Design API.
+ *
+ * @param Child - Component to add as a child
+ * @param designKey - Design key to reach the Child component using Design API.
+ *
+ * @return An HOC which will prepend the Child to the given Component.
+ */
+const withPrependChild = <P extends object>(
+  Child: CT, designKey: string,
+): HOC<P> => insertChild(Child, { designKey, mode: 'prepend' });
 
 export default withChild;
+export {
+  withAppendChild,
+  withPrependChild,
+};

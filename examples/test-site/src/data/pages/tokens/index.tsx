@@ -19,7 +19,10 @@ import {
   H1, addProps, withDesign, replaceWith, H3, H2, addClasses,
 } from '@bodiless/fclasses';
 import {
-  ToutClean, asAccordionBody, asAccodionTitle, asAccordionWrapper,
+  CardClean,
+} from '@bodiless/card';
+import {
+  asAccordionBody, asAccodionTitle, asAccordionWrapper,
 } from '@bodiless/organisms';
 import {
   withActivateOnEffect, withNodeKey, WithNodeKeyProps, withNode,
@@ -36,8 +39,8 @@ import Layout from '../../../components/Layout';
 import {
   asHeader1, asPrimaryColorBackground, asHeader3, asHeader2, asBold,
 } from '../../../components/Elements.token';
-import { asEditableTout } from '../../../components/Tout';
-import * as availableTokens from '../../../components/Tout/token';
+import { asEditableCard } from '../../../components/Card';
+import * as availableTokens from '../../../components/Card/token';
 import { withTypographyTokenPanel } from './TypographySelector';
 
 const asFancyPanel = withDesign({
@@ -80,7 +83,7 @@ const withTokenData = (nodeKey: string) => flow(
   withNodeKey(nodeKey),
 );
 
-const ToutTokenPrinter = flow(
+const CardTokenPrinter = flow(
   withTokenPrinterKeys(['Title', 'Body', 'Link']),
   withDesign({
     Title: withTokenData('title-selector'),
@@ -94,7 +97,7 @@ const ToutTokenPrinter = flow(
 const TokenPrinterBody = asAccordionBody(() => (
   <pre>
     <code>
-      <ToutTokenPrinter />
+      <CardTokenPrinter />
     </code>
   </pre>
 ));
@@ -111,14 +114,14 @@ const TokenPrinterAccordion = asAccordionWrapper(() => (
   </div>
 ));
 
-const DemoTokenPanelTout = flow(
+const DemoTokenPanelCard = flow(
   withDesign({
     Title: withReactivateOnRemount('title'),
     Body: withReactivateOnRemount('body'),
     Image: withReactivateOnRemount('image'),
     Link: withReactivateOnRemount('link'),
   }),
-  asEditableTout,
+  asEditableCard,
   withDesign({
     Title: flow(
       withTypographyTokenPanel('title-selector'),
@@ -134,21 +137,21 @@ const DemoTokenPanelTout = flow(
     ),
   }),
   withTokensFromProps,
-  withReactivateOnRemount('tout'),
+  withReactivateOnRemount('card'),
   withTokenPanelPane('selector'),
-  addProps({ availableTokens, tokenPanelTitle: 'Tout' }),
+  addProps({ availableTokens, tokenPanelTitle: 'Card' }),
   withActivateOnEffect,
-)(ToutClean);
+)(CardClean);
 
 const PageTitle = asHeader1(H1);
 const ColumnHeader = flow(asHeader2, addClasses('my-2'))(H2);
 
 const DemoFlowContainer = flow(
   withDesign({
-    Tout: flow(
-      replaceWith(DemoTokenPanelTout),
-      withTitle('Tout'),
-      withDesc('A way to tout a call to Action.'),
+    Card: flow(
+      replaceWith(DemoTokenPanelCard),
+      withTitle('Card'),
+      withDesc('A way to promote a call to Action.'),
     ),
   }),
   addProps({ maxComponents: 1 }),

@@ -14,12 +14,13 @@
 
 import { flowRight } from 'lodash';
 import { ifReadOnly } from '@bodiless/core';
-import { withYouTubePlayerSettings } from '@bodiless/components';
-import type { YouTubePlayerSettings } from '@bodiless/components';
 import {
-  Embed,
+  withYouTubePlayerSettings,
   asResponsiveYouTube as asBaseResponsiveYouTube,
-} from '@bodiless/organisms';
+  withFullScreenEnabled,
+} from '@bodiless/youtube';
+import type { YouTubePlayerSettings } from '@bodiless/youtube';
+import { Embed } from '@bodiless/organisms';
 import {
   addProps,
   withDesign,
@@ -56,7 +57,10 @@ const defaultPlayerSettings: YouTubePlayerSettings = {
 };
 
 const withYouTubeDefaults = withDesign({
-  Item: withYouTubePlayerSettings(defaultPlayerSettings),
+  Item: flowRight(
+    withFullScreenEnabled,
+    withYouTubePlayerSettings(defaultPlayerSettings),
+  ),
 });
 
 const Reponsive16By9YouTube = asReponsive16By9YouTube(Embed);

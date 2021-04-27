@@ -51,7 +51,7 @@ const getFilteredComponents = (
     });
 
     const found = f.every(value => tempValArray.includes(value))
-      && comps[index].title
+      && (comps[index].title || '')
         .toLowerCase()
         .includes(s.toLowerCase());
 

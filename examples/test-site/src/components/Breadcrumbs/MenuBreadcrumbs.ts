@@ -12,111 +12,28 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
-import { withSidecarNodes, asReadOnly, withNode } from '@bodiless/core';
+import { asReadOnly } from '@bodiless/core';
 import {
-  addClasses,
-  withDesign,
-  replaceWith,
-  A,
-  Span,
-  Ul,
-  stylable,
-} from '@bodiless/fclasses';
-import { withoutLinkWhenLinkDataEmpty, Breadcrumbs as BreadcrumbsBase } from '@bodiless/components';
-import {
-  asSimpleMenuBreadcrumbSource,
-  asMegaMenuBreadcrumbSource as asMegaMenuBreadcrumbSourceBase,
-} from '@bodiless/organisms';
-
-import { EditorSimple } from '../Editors';
-import { asEditableLink, asLink } from '../Elements.token';
-
-import {
-  withArrowSeparator,
+  BreadcrumbsClean,
+  asBreadcrumbs,
   withEditableStartingTrail,
   withEditableFinalTrail,
-} from './MenuBreadcrumbs.token';
+  withMenuTitleEditors,
+} from '@bodiless/navigation';
+import { asToken } from '@bodiless/fclasses';
 
-const DEFAULT_STARTING_TRAIL_NODE_KEY = 'startingTrail';
-const DEFAULT_FINAL_TRAIL_NODE_KEY = 'finalTrail';
+import { $withBreadcrumbStyles } from './MenuBreadcrumbs.token';
 
-const withMenuBreadcrumbSchema = flow(
-  withDesign({
-    BreadcrumbLink: flow(
-      replaceWith(
-        flow(
-          withoutLinkWhenLinkDataEmpty,
-          withSidecarNodes(
-            asEditableLink(),
-          ),
-        )(A),
-      ),
-      asReadOnly,
-    ),
-    BreadcrumbTitle: flow(
-      replaceWith(EditorSimple),
-      asReadOnly,
-    ),
-  }),
-  withEditableStartingTrail({
-    nodeKey: DEFAULT_STARTING_TRAIL_NODE_KEY,
-    nodeCollection: 'site',
-  }, 'Enter item'),
-  withEditableFinalTrail(DEFAULT_FINAL_TRAIL_NODE_KEY, 'Enter item'),
+const $withBreadcrumbEditors = asToken(
+  withMenuTitleEditors(undefined, asReadOnly),
+  withEditableStartingTrail(undefined, { nodeCollection: 'site' }),
+  withEditableFinalTrail(),
 );
 
-const withMenuBreadcrumbsStyles = flow(
-  withDesign({
-    Separator: flow(
-      replaceWith(Span),
-      addClasses('mx-1'),
-    ),
-    BreadcrumbWrapper: flow(
-      replaceWith(Ul),
-      addClasses('inline-flex'),
-    ),
-    // if we want to do replaceWith
-    // then we need to strip non-li (position, isCurrentPage) props ourself
-    // otherwise we will get runtime warning
-    // see @bodiless/components BreadcrumbStartComponents
-    BreadcrumbItem: stylable,
-    BreadcrumbLink: asLink,
-  }),
-  withArrowSeparator,
-);
-
-const asBreadcrumbSource = flow(
-  asSimpleMenuBreadcrumbSource({
-    linkNodeKey: 'title$link',
-    titleNodeKey: 'title$text',
-  }),
-  withNode,
-);
-
-const Breadcrumbs = flow(
-  withMenuBreadcrumbSchema,
-  withMenuBreadcrumbsStyles,
-)(BreadcrumbsBase);
-
-const asMegaMenuBreadcrumbSource = flow(
-  asMegaMenuBreadcrumbSourceBase({
-    linkNodeKey: 'title$link',
-    titleNodeKey: 'title$text',
-  }),
-  withNode,
-);
-
-const MegaMenuBreadcrumbs = flow(
-  withMenuBreadcrumbSchema,
-  withMenuBreadcrumbsStyles,
-)(BreadcrumbsBase);
+const Breadcrumbs = asToken(
+  asBreadcrumbs,
+  $withBreadcrumbEditors,
+  $withBreadcrumbStyles,
+)(BreadcrumbsClean);
 
 export default Breadcrumbs;
-export {
-  asBreadcrumbSource,
-  asMegaMenuBreadcrumbSource,
-  DEFAULT_STARTING_TRAIL_NODE_KEY,
-  DEFAULT_FINAL_TRAIL_NODE_KEY,
-  MegaMenuBreadcrumbs,
-};

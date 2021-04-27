@@ -12,21 +12,132 @@
  * limitations under the License.
  */
 
+/* eslint-disable max-len */
+
 import React from 'react';
 import { graphql } from 'gatsby';
-import { Page } from '@bodiless/gatsby-theme-bodiless';
-
+import flow from 'lodash/flow';
+import { Page as BasePage } from '@bodiless/gatsby-theme-bodiless';
+import { H1, H2, addClasses } from '@bodiless/fclasses';
+import {
+  withNavigationButtons,
+  withCarouselDots,
+  withAutoPlayInterval,
+  withAutoPlayButton,
+} from '@bodiless/carousel';
 import Layout from '../../../components/Layout';
-import { Carousel, AutoCarousel } from '../../../components/Carousel';
+import {
+  withNavButtonsStyles,
+  withDotStyles,
+  Carousel,
+  CAROUSEL_NODE_KEY,
+  ChameleonCarousel,
+  withAutoPlayButtonStyles,
+  withAutoPlay,
+  asAccessibleCarousel,
+} from '../../../components/Carousel';
+import { asLtrPage } from '../../../components/Page';
 
-const CarouselExample = (props: any) => (
+const Page = asLtrPage(BasePage);
+
+const Title = addClasses('text-3xl font-bold')(H1);
+const SubTitle = addClasses('text-2xl font-bold')(H2);
+
+const OnlyNavButtonsCarousel = flow(
+  withNavigationButtons,
+  withNavButtonsStyles,
+  asAccessibleCarousel,
+)(Carousel);
+
+const OnlyDotsButtonsCarousel = flow(
+  withCarouselDots(CAROUSEL_NODE_KEY),
+  withDotStyles,
+  asAccessibleCarousel,
+)(Carousel);
+
+const AutoPlayDefaultIntervalCarousel = flow(
+  withAutoPlay,
+  withAutoPlayInterval(),
+  withAutoPlayButton,
+  withAutoPlayButtonStyles,
+  asAccessibleCarousel,
+)(Carousel);
+
+const NavAndDotsCarousel = flow(
+  withCarouselDots(CAROUSEL_NODE_KEY),
+  withDotStyles,
+  withNavigationButtons,
+  withNavButtonsStyles,
+  asAccessibleCarousel,
+)(Carousel);
+
+const NavAndAutoplayCarousel = flow(
+  withNavigationButtons,
+  withNavButtonsStyles,
+  withAutoPlayInterval(6000),
+  withAutoPlayButton,
+  withAutoPlayButtonStyles,
+  asAccessibleCarousel,
+)(Carousel);
+
+const DotsAndAutoplayCarousel = flow(
+  withCarouselDots(CAROUSEL_NODE_KEY),
+  withDotStyles,
+  withAutoPlay,
+  withAutoPlayInterval(5000),
+  withAutoPlayButton,
+  withAutoPlayButtonStyles,
+  asAccessibleCarousel,
+)(Carousel);
+
+const NavAndDotsAndAutoplayCarousel = flow(
+  withCarouselDots(CAROUSEL_NODE_KEY),
+  withDotStyles,
+  withNavigationButtons,
+  withNavButtonsStyles,
+  withAutoPlay,
+  withAutoPlayInterval(7000),
+  withAutoPlayButton,
+  withAutoPlayButtonStyles,
+  asAccessibleCarousel,
+)(Carousel);
+
+const AutoPlayCustomIntervalCarousel = flow(
+  withAutoPlay,
+  withAutoPlayInterval(10000),
+  withAutoPlayButton,
+  withAutoPlayButtonStyles,
+  asAccessibleCarousel,
+)(Carousel);
+
+const CarouselExamples = () => (
+  <>
+    <Title>Carousel Test Page</Title>
+    <SubTitle>Only Nav buttons</SubTitle>
+    <OnlyNavButtonsCarousel nodeKey="navButtons" />
+    <SubTitle>Only Dots buttons</SubTitle>
+    <OnlyDotsButtonsCarousel nodeKey="dotsButtons" />
+    <SubTitle>Only Autoplay with default interval</SubTitle>
+    <AutoPlayDefaultIntervalCarousel nodeKey="autoplayDefaultInterval" />
+    <SubTitle>Nav & Dots</SubTitle>
+    <NavAndDotsCarousel nodeKey="navAndDots" />
+    <SubTitle>Nav & Autoplay with 6 second interval</SubTitle>
+    <NavAndAutoplayCarousel nodeKey="navAndAutoPlay" />
+    <SubTitle>Dots & Autoplay with 5 second interval</SubTitle>
+    <DotsAndAutoplayCarousel nodeKey="dotsAndAutoPlay" />
+    <SubTitle>Nav & Dots & Autoplay with 7 second interval</SubTitle>
+    <NavAndDotsAndAutoplayCarousel nodeKey="navAndDotsAndAutoPlay" />
+    <SubTitle>Autoplay with 10 second interval</SubTitle>
+    <AutoPlayCustomIntervalCarousel nodeKey="autoplayCustomInterval" />
+    <SubTitle>Chameleon that lets you choose from 4 components: Linkable, Gatsby (Performance) Image, Horizontal Card, Video</SubTitle>
+    <ChameleonCarousel nodeKey="chameleon" />
+  </>
+);
+
+const CarouselPage = (props: any) => (
   <Page {...props}>
     <Layout>
-      <h1 className="text-3xl font-bold">Carousel Test Page</h1>
-      <h2 className="text-2xl font-bold">Non Rotating</h2>
-      <Carousel nodeKey="nonrotating" />
-      <h2 className="text-2xl font-bold">Auto Rotating with 3 seconds</h2>
-      <AutoCarousel nodeKey="autorotating" />
+      <CarouselExamples />
     </Layout>
   </Page>
 );
@@ -39,4 +150,5 @@ export const query = graphql`
   }
 `;
 
-export default CarouselExample;
+export default CarouselPage;
+export { CarouselExamples };
