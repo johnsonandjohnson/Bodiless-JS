@@ -38,7 +38,7 @@ const tableVariation = {
     asTableFirstExtraWidth,
     withType('Table')(),
     withTitle('Table Header First Column'),
-    withDesc('A Table with Rich Text Cells. Whhere the first Column is spcial.\n'),
+    withDesc('A Table with Rich Text Cells, where the first Column is special.\n'),
   ),
 };
 
