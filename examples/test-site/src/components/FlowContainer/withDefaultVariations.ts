@@ -17,6 +17,7 @@ import withToutVariations from './withToutVariations';
 import withContentfulTouts from './withContentfulTouts';
 import withRichTextVariations from './withRichTextVariations';
 import withSingleAccordionVariations from './withSingleAccordionVariations';
+import withTableVariations from './withTableVariations';
 import withImageVariations from './withImageVariations';
 import withIframeVariations from './withIframeVariations';
 import withYouTubeVariations from './withYouTubeVariations';
@@ -27,6 +28,7 @@ import withListVariations from './withListVariations';
 // thus recommend putting more frequently used components toward top for quicker access.
 const withDefaultVariations = flow(
   withRichTextVariations,
+  withTableVariations,
   withImageVariations,
   withToutVariations,
   withContentfulTouts,

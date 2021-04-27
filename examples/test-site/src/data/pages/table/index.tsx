@@ -38,8 +38,8 @@ export default (props: any) => (
       <p className="pt-4">
         The following are editable Tables. Clicking on each cell will display
         a menu with available operations. One can add rows and columns to the body or
-        the header. We are showing two veriations one where the first column is styled
-        differently then the others.
+        the header. We are showing two variations, one where the first column is styled
+        differently than the other.
       </p>
       <div className="flex pt-4">
         <Table1 nodeKey="table1" className="w-1/2" data-list-element="outerlist" />

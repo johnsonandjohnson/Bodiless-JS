@@ -75,8 +75,10 @@ const tableMangerFunc:TableFunc = ({ componentData, setComponentData }) => ({
     setComponentData(componentData);
   },
   deleteColumn: (currentColumnIndex) => {
-    componentData.columns.splice(currentColumnIndex, 1);
-    setComponentData(componentData);
+    if (componentData.columns.length > 1) {
+      componentData.columns.splice(currentColumnIndex, 1);
+      setComponentData(componentData);
+    }
   },
   moveColumn: moveX({
     componentData,
@@ -88,8 +90,10 @@ const tableMangerFunc:TableFunc = ({ componentData, setComponentData }) => ({
     setComponentData(componentData);
   },
   deleteRow: (currentRowIndex) => {
-    componentData.rows.splice(currentRowIndex, 1);
-    setComponentData(componentData);
+    if (componentData.rows.length > 1) {
+      componentData.rows.splice(currentRowIndex, 1);
+      setComponentData(componentData);
+    }
   },
   moveRow: moveX({
     componentData,
