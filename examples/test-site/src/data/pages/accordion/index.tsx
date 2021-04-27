@@ -14,11 +14,11 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import { Page } from '@bodiless/gatsby-theme-bodiless';
+import { Page, PageProps } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../../../components/Layout';
 import SingleAccordion from '../../../components/SingleAccordion';
 
-export default props => (
+export default (props: PageProps) => (
   <Page {...props}>
     <Layout>
       <div style={{ margin: 100 }}>

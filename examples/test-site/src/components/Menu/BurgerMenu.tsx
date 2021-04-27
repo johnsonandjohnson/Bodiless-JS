@@ -12,24 +12,23 @@
  * limitations under the License.
  */
 
-import { ComponentType } from 'react';
-import { flow } from 'lodash';
 import { asStatic } from '@bodiless/core';
+import { asToken } from '@bodiless/fclasses';
 import { withBurgerMenuWrapper, BurgerMenuDefaultToggler } from '@bodiless/navigation';
 
 import { $withBurgerMenuStyles, $withTogglerStyles } from './BurgerMenu.token';
 import { $asMenuBase } from './Menu';
 
-const BurgerMenuToggler = flow(
+const BurgerMenuToggler = asToken(
   $withTogglerStyles,
 )(BurgerMenuDefaultToggler);
 
-const BurgerMenu = flow(
+const BurgerMenu = asToken(
   $asMenuBase,
   withBurgerMenuWrapper,
   $withBurgerMenuStyles,
   asStatic,
-)('ul') as ComponentType<any>;
+)('ul');
 
 export default BurgerMenu;
 export {

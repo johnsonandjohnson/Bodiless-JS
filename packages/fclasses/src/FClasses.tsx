@@ -12,11 +12,12 @@
  * limitations under the License.
  */
 
-import React, { ComponentType, FC } from 'react';
+import React, { FC } from 'react';
 import {
   union, difference, capitalize,
 } from 'lodash';
-import { Token } from './Tokens';
+import type { ComponentOrTag, Enhancer } from './types';
+import type { Condition } from './hoc-util';
 
 type Classes = string | string[];
 
@@ -34,29 +35,28 @@ type Classable = {
   className?: string,
 };
 
-export type HOC = <P extends object>(C: ComponentType<P> | string) => ComponentType<P>;
-
-export type Condition = <T extends StylableProps>(args?: T) => boolean;
 const alwaysTrueCondition = () => true;
 
-const modifyClassesIf = (operation: 'add' | 'remove') => (condition: Condition) => (classes?: Classes) => {
-  const hoc = <P extends StylableProps>(Component: ComponentType<P> | string) => {
-    const ModifyClasses: FC<P> = props => {
-      const { fClasses, ...rest } = props;
-      const newFClasses = condition(props) ? {
-        parentFClasses: fClasses,
-        operation,
-        classes,
-      } : fClasses;
-      return (
-        <Component fClasses={newFClasses} {...rest as P} />
-      );
+const modifyClassesIf = (operation: 'add' | 'remove') => <A extends object>(
+  condition: Condition<A>,
+) => (classes?: Classes) => {
+    const hoc: Enhancer<A> = Component => {
+      const ModifyClasses: FC<any> = props => {
+        const { fClasses, ...rest } = props;
+        const newFClasses = condition(props) ? {
+          parentFClasses: fClasses,
+          operation,
+          classes,
+        } : fClasses;
+        return (
+          <Component fClasses={newFClasses} {...rest as any} />
+        );
+      };
+      ModifyClasses.displayName = `${capitalize(operation)}Classes`;
+      return ModifyClasses;
     };
-    ModifyClasses.displayName = `${capitalize(operation)}Classes`;
-    return ModifyClasses;
+    return hoc;
   };
-  return hoc as Token;
-};
 
 /**
  * Allows to add classes to a component conditionally.
@@ -124,8 +124,8 @@ type ForwardRefProps = {
  *
  * @param Component The component to be made stylable.
  */
-const stylable = <P extends Classable & ForwardRefProps>(Component: ComponentType<P> | string) => {
-  const Stylable = (props: P & StylableProps & ForwardRefProps) => {
+const stylable:Enhancer<StylableProps> = (Component: ComponentOrTag<any>) => {
+  const Stylable = (props: StylableProps & ForwardRefProps & Classable) => {
     const {
       fClasses,
       className,
@@ -134,7 +134,7 @@ const stylable = <P extends Classable & ForwardRefProps>(Component: ComponentTyp
     } = props;
     const classes = apply(fClasses);
     const newClassName = asClassName(className ? apply(asFClasses(className), classes) : classes);
-    return <Component {...rest as unknown as P} className={newClassName} ref={forwardRef} />;
+    return <Component {...rest as any} className={newClassName} ref={forwardRef} />;
   };
   Stylable.displayName = 'Stylable';
   return Stylable;

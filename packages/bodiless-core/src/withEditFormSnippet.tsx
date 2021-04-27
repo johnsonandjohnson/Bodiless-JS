@@ -13,10 +13,11 @@
  */
 
 import React, {
-  ComponentType as CT,
+  FC,
 } from 'react';
 import { v1 } from 'uuid';
 import flowRight from 'lodash/flowRight';
+import { Enhancer } from '@bodiless/fclasses';
 import { EditButtonProps, EditButtonOptions } from './Types/EditButtonTypes';
 import type { FormBodyRenderer as Renderer } from './Types/EditButtonTypes';
 import type { FormBodyProps as ContextMenuFormBodyProps } from './contextMenuForm';
@@ -92,10 +93,11 @@ export const useEditFormProps = <P extends object, D extends object>(
 
 type Options$<P, D> = Options<P, D> | ((props: P) => Options<P, D>);
 
-const withEditFormSnippet = <P extends object, D extends object>(options: Options$<P, D>) => (
-  (Component: CT<P>) => {
+const withEditFormSnippet = <P extends object, D extends object>(
+  options: Options$<P, D>,
+): Enhancer<EditButtonProps<D>> => Component => {
     const id = v1();
-    const WithEditFormSnippet = (props: P & EditButtonProps<D>) => {
+    const WithEditFormSnippet: FC<any> = (props: P & EditButtonProps<D>) => {
       const options$ = typeof options === 'function' ? options(props) : options;
       const { renderForm, initialValueHandler, submitValueHandler } = options$;
       const { renderForm: render, ...rest } = useEditFormProps({
@@ -110,10 +112,9 @@ const withEditFormSnippet = <P extends object, D extends object>(options: Option
         render: render || (() => <></>),
       };
       useRegisterSnippet(snippet);
-      return <Component {...props} />;
+      return <Component {...props as any} />;
     };
     return WithEditFormSnippet;
-  }
-);
+  };
 
 export default withEditFormSnippet;

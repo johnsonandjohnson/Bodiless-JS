@@ -13,7 +13,7 @@
  */
 
 import { ComponentType, HTMLProps } from 'react';
-import { StylableProps, DesignableComponentsProps } from '@bodiless/fclasses';
+import { StylableProps, DesignableComponentsProps, DesignableProps } from '@bodiless/fclasses';
 
 export type AccordionProviderProps = {
   expanded?: boolean,
@@ -35,8 +35,8 @@ export type AccordionBodyComponents = {
   Content: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
 };
 
-export type AccordionTitleProps = DesignableComponentsProps<AccordionTitleComponents>;
-export type AccordionBodyProps = DesignableComponentsProps<AccordionBodyComponents>;
+export type AccordionTitleProps = DesignableProps<AccordionTitleComponents>;
+export type AccordionBodyProps = DesignableProps<AccordionBodyComponents>;
 
 export type AccordionComponents = {
   Wrapper: ComponentType<HTMLProps<any> & AccordionProviderProps>,

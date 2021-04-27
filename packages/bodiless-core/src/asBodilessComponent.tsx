@@ -12,14 +12,15 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
+import React from 'react';
 import {
   pick, omit, identity, flowRight,
 } from 'lodash';
-import type { Token } from '@bodiless/fclasses';
+import type { Enhancer, Token, ComponentOrTag } from '@bodiless/fclasses';
+import { withoutProps } from '@bodiless/fclasses';
 import withNode, { withNodeKey } from './withNode';
 import {
-  withNodeDataHandlers, withoutProps, withContextActivator, withLocalContextMenu,
+  withNodeDataHandlers, withContextActivator, withLocalContextMenu,
 } from './hoc';
 import { ifReadOnly, ifEditable } from './withEditToggle';
 import withEditButton from './withEditButton';
@@ -41,7 +42,7 @@ export type Options<P, D> = EditButtonOptions<P, D> & {
    * An optional component to use as a wrapper in edit mode. Useful if the underlying component
    * cannot produce an activation event (eg if it does not accept an 'onClick' prop).
    */
-  Wrapper?: CT<any>|string,
+  Wrapper?: ComponentOrTag<any>,
   /**
    * An object providing default/initial values for the editable props. Should be keyed by the
    * prop name.
@@ -49,12 +50,11 @@ export type Options<P, D> = EditButtonOptions<P, D> & {
   defaultData?: D,
 };
 
-type BodilessProps = Partial<WithNodeProps>;
 type AsBodiless<P, D, E = {}> = (
   nodeKeys?: WithNodeKeyProps,
   defaultData?: D,
   useOverrides?: UseBodilessOverrides<P, D, E>,
-) => Token<P & BodilessProps>;
+) => Enhancer<Partial<WithNodeProps>>;
 
 /**
  * Given an event name and a wrapper component, provides an HOC which will wrap the base component
@@ -63,14 +63,14 @@ type AsBodiless<P, D, E = {}> = (
  * @param Wrapper The component to wrap with
  * @private
  */
-export const withActivatorWrapper = <P extends object>(event: string, Wrapper: CT<any>|string) => (
-  (Component: CT<P>) => (props: P) => {
+export const withActivatorWrapper = (event: string, Wrapper: ComponentOrTag<any>): Token => (
+  Component => props => {
     const wrapperPropNames = Object.getOwnPropertyNames(useContextActivator(event));
     const eventProps = pick(props, wrapperPropNames);
-    const rest = omit(props, wrapperPropNames) as P;
+    const rest = omit(props, wrapperPropNames);
     return (
       <Wrapper {...eventProps}>
-        <Component {...rest} />
+        <Component {...rest as any} />
       </Wrapper>
     );
   }
@@ -83,14 +83,14 @@ export const withActivatorWrapper = <P extends object>(event: string, Wrapper: C
  *
  * @param defaultData Default data to be provided for this component.
  */
-const withBodilessData = <P extends object, D extends object>(
+const withBodilessData = <D extends object>(
   nodeKey?: WithNodeKeyProps,
   defaultData?: D,
 ) => flowRight(
     withNodeKey(nodeKey),
     withNode,
     withNodeDataHandlers(defaultData),
-  );
+  ) as Enhancer<Partial<WithNodeProps>>;
 
 /**
  * Makes a component "Bodiless" by connecting it to the Bodiless-jS data flow and giving it

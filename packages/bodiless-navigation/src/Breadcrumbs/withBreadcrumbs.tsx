@@ -14,6 +14,7 @@
 
 import React, { ComponentType, useRef } from 'react';
 import { useNode } from '@bodiless/core';
+import { Token } from '@bodiless/fclasses';
 import { BreadcrumbStore } from './BreadcrumbStore';
 import { MenuBreadcrumbs } from './Breadcrumbs';
 import { BreadcrumbStoreProvider } from './BreadcrumbStoreProvider';
@@ -22,7 +23,7 @@ import { BreadcrumbStoreProvider } from './BreadcrumbStoreProvider';
  * HOC that adds breadcrumb store and renders breadcrumbs.
  * @param Component that pushes its data to the store.
  */
-export const withBreadcrumbStore = (Component: ComponentType<any>) => {
+export const withBreadcrumbStore: Token = Component => {
   const WithBreadcrumbStore = (props: any) => {
     const { node } = useNode();
     const { pagePath } = node;

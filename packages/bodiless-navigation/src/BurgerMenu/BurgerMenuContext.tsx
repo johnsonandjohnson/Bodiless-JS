@@ -13,8 +13,9 @@
  */
 
 import React, {
-  ComponentType, createContext, useContext, useState,
+  createContext, useContext, useState,
 } from 'react';
+import { Token } from '@bodiless/fclasses';
 
 /**
  * Type of a Burger Menu Context.
@@ -50,7 +51,7 @@ const useBurgerMenuContext = () => useContext(BurgerMenuContext);
  *  - `setIsTransitionComplete()` - Transition state toggle function.
  *
  */
-const withBurgerMenuProvider = <P extends object>(Component: ComponentType<P>) => (props: P) => {
+const withBurgerMenuProvider: Token = Component => props => {
   const [isVisible, toggle] = useState<boolean>(false);
   const [isTransitionComplete, setIsTransitionComplete] = useState<boolean>(false);
 

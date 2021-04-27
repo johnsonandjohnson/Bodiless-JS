@@ -11,11 +11,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { flow } from 'lodash';
 import {
   H1,
   Img,
   addClasses,
+  asToken,
 } from '@bodiless/fclasses';
 import { withEditorSimple } from '../Editors';
 import { asLandscapeImage } from '../Image';
@@ -27,17 +27,17 @@ import {
 
 export { ProductListingFlowContainer } from './ProductListingFlowContainer';
 
-export const ProductListingTitle = flow(
+export const ProductListingTitle = asToken(
   asHeader1,
   withEditorSimple('product_listing_title', 'Product Listing Title'),
 )(H1);
 
-const asProductListingImage = flow(
+const asProductListingImage = asToken(
   asImageRounded,
   addClasses('w-full'),
 );
 
-export const ProductListingImage = flow(
+export const ProductListingImage = asToken(
   asLandscapeImage('product_listing_image'),
   asImage,
   asProductListingImage,

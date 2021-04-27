@@ -12,18 +12,17 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import { asTestableAccordion, AccordionClean, withDisableExpandOnClick } from '@bodiless/organisms';
 import { withNode } from '@bodiless/core';
-import { withDesign } from '@bodiless/fclasses';
+import { withDesign, asToken } from '@bodiless/fclasses';
 import asAccordionDefaultStyle from './token';
 import { withEditorSimple, withEditorBasic } from '../Editors';
 
-const asSingleAccordion = flow(
+const asSingleAccordion = asToken(
   withNode,
   withDesign({
     Title: withDesign({
-      Label: flow(
+      Label: asToken(
         withEditorSimple('title', 'Accordion Title'),
         withDisableExpandOnClick,
       ),

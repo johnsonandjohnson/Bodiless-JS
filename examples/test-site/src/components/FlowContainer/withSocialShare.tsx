@@ -11,7 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { flow } from 'lodash';
 import {
   withTitle,
   withDesc,
@@ -20,13 +19,14 @@ import {
   varyDesign,
   replaceWith,
   withDesign,
+  asToken,
 } from '@bodiless/fclasses';
 
 import SocialShare from '../SocialShare';
 import { withType } from './Categories';
 
 const socialShareVariation = {
-  SocialShare: flow(
+  SocialShare: asToken(
     replaceWith(SocialShare),
     withType('SocialShare')(),
     withTitle('SocialShare'),

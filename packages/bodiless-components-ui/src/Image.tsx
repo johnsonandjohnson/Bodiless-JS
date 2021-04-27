@@ -14,7 +14,7 @@
 
 import React, { ComponentType } from 'react';
 import { flowRight } from 'lodash';
-import { withoutProps } from '@bodiless/core';
+import type { HOC } from '@bodiless/fclasses';
 import { asBodilessImage as asBaseBodilessImage } from '@bodiless/components';
 import type { TImagePickerUI, AsBodilessImage } from '@bodiless/components';
 import {
@@ -23,6 +23,7 @@ import {
   stylable,
   Img,
   Section,
+  withoutProps,
 } from '@bodiless/fclasses';
 import { Spinner } from '@bodiless/ui';
 import MaterialIcon from '@material/react-material-icon';
@@ -42,8 +43,6 @@ const withForwardedRefEnd = (Component: ComponentType<any>) => {
   WithForwardedRefEnd.displayName = 'WithForwardedRefEnd';
   return WithForwardedRefEnd;
 };
-
-type HOC = (Component: ComponentType<any>) => ComponentType<any>;
 
 // Allows to pass a ref through a component to one of its children.
 // @see: https://reactjs.org/docs/forwarding-refs.html

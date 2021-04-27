@@ -13,7 +13,6 @@
  */
 
 import React, { FC, ComponentType, HTMLProps } from 'react';
-import { flow } from 'lodash';
 import {
   designable,
   DesignableComponentsProps,
@@ -21,6 +20,7 @@ import {
   P,
   Span,
   withDesign,
+  asToken,
 } from '@bodiless/fclasses';
 import { asEditable } from '../Elements.token';
 
@@ -77,7 +77,7 @@ const FooterClean: FC<DesignableComponentsProps<FooterComponents>> = ({ componen
   );
 };
 
-const asFooterHeader = flow(
+const asFooterHeader = asToken(
   designable(footerComponents, 'Footer'),
   withDesign({
     SiteTitleCopyrightEditable: asEditable({ nodeKey: 'sitetitle', nodeCollection: 'site' }, 'Insert Site Title'),

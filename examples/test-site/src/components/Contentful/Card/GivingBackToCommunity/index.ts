@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import { getImageContentFrom } from '@bodiless/gatsby-theme-bodiless';
+import { asToken } from '@bodiless/fclasses';
 import { CardClean } from '@bodiless/card';
 import { asContentfulCard } from '../../../Card';
 import { asCardDefaultStyle, asCardHorizontal } from '../../../Card/token';
@@ -30,7 +30,7 @@ const cardContent = {
   ctatext,
 };
 
-const GivingBackToCommunity = flow(
+const GivingBackToCommunity = asToken(
   asContentfulCard(cardContent),
   asCardDefaultStyle,
   asCardHorizontal,

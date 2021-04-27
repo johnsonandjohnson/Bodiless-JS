@@ -44,7 +44,7 @@ export type SocialShareButtonProps = HTMLProps<HTMLElement> & {
 export type SocialShareProvidersProps = DesignableComponentsProps<ProvidersComponents> &
 HTMLProps<HTMLElement> & {
   providers: SocialShareProvider[];
-  expanded: boolean;
+  expanded?: boolean;
 };
 
 export type SocialShareProps = DesignableComponentsProps<SocialShareComponents> &

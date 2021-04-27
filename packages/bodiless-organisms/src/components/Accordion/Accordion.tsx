@@ -12,8 +12,7 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
-import React, { FC } from 'react';
+import React, { FC, HTMLProps } from 'react';
 import { designable, Div } from '@bodiless/fclasses';
 import AccordionTitleClean from './AccordionTitle';
 import AccordionBodyClean from './AccordionBody';
@@ -26,7 +25,7 @@ const AccordionComponentsStart:AccordionComponents = {
   Body: AccordionBodyClean,
 };
 
-const AccordionBase: FC<AccordionProps & AccordionProviderProps> = ({
+const AccordionBase: FC<AccordionProps & AccordionProviderProps & HTMLProps<HTMLElement>> = ({
   components, expanded, ...rest
 }) => {
   const {
@@ -45,8 +44,6 @@ const AccordionBase: FC<AccordionProps & AccordionProviderProps> = ({
   );
 };
 
-const AccordionClean = flow(
-  designable(AccordionComponentsStart, 'Accordion'),
-)(AccordionBase);
+const AccordionClean = designable(AccordionComponentsStart, 'Accordion')(AccordionBase);
 
 export default AccordionClean;

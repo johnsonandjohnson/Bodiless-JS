@@ -20,7 +20,6 @@ import {
   withNode,
   withNodeDataHandlers,
   ifReadOnly,
-  withoutProps,
   ifEditable,
   withContextActivator,
   withLocalContextMenu,
@@ -34,6 +33,10 @@ import {
   withDesign,
   replaceWith,
   stylable,
+  asToken,
+  HOC,
+  withoutProps,
+  DesignableComponentsProps,
 } from '@bodiless/fclasses';
 import {
   List,
@@ -44,6 +47,7 @@ import {
   useTagsAccessors,
   ifViewportIs,
   ifViewportIsNot,
+  ListProps,
 } from '@bodiless/components';
 import {
   TagTitleProps,
@@ -62,7 +66,7 @@ const tagTitleComponentsStart: TagTitleComponents = {
   FilterGroupItemLabel: Label,
 };
 
-const withUnselectOnDelete = <P extends object>(Component: ComponentType<P>) => (props: P) => {
+const withUnselectOnDelete:HOC<{ onDelete?: any }> = Component => props => {
   const {
     setSelectedNode,
     setSelectedTag,
@@ -168,31 +172,34 @@ const TestFilterComponentsStart: FilterComponents = {
   CategoryList: flow(
     asEditableList,
     withDesign({
-      Title: flow(
+      Title: asToken(
         replaceWith(H3),
         asEditable('category_name', 'Category Name'),
         // cast is necessary bc asEditable produces a component whose children prop is a string.
-      ) as (C: ComponentType<any>) => ComponentType<any>,
+      ),
       Item: stylable,
       Wrapper: stylable,
     }),
   )(List),
-  TagList: flow(
+  TagList: asToken(
     withUnselectOnDelete,
+    // @ts-ignore
     asEditableList,
     withDesign({
       Title: replaceWith(TagTitle),
       Wrapper: stylable,
     }),
-  )(List),
+  )(List as ComponentType<ListProps>),
 };
 
-class FilterBase extends React.PureComponent {
+type FilterBaseProps =
+  Omit<FilterProps, 'components'> & DesignableComponentsProps<FilterComponents>;
+class FilterBase extends React.PureComponent<FilterBaseProps> {
   Filter: ComponentType<HTMLProps<HTMLHeadingElement>> = Div;
 
   RestProps = {};
 
-  constructor(props: FilterProps) {
+  constructor(props: FilterBaseProps) {
     super(props);
     const { components, ...rest } = props;
     const { TagList, CategoryList } = components;
@@ -211,9 +218,9 @@ class FilterBase extends React.PureComponent {
   }
 }
 
-const FilterClean = flow(
-  withNodeKey('filter'),
+const FilterClean: ComponentType<FilterProps> = asToken(
   designable(TestFilterComponentsStart, 'Filter'),
+  withNodeKey('filter'),
 )(FilterBase);
 
 export default FilterClean;

@@ -60,7 +60,6 @@
     "build:lib": "gatsby build",
     "build:doc": "bl-docs-build",
     "build:env-vars": "generate-env-vars",
-    "check": "tsc -p ./tsconfig.check.json",
     "clean": "rimraf ./public/* && rimraf ./.cache",
     "dev-backend": "node ./node_modules/@bodiless/backend/src/server.js",
     "dev-frontend": "gatsby develop",

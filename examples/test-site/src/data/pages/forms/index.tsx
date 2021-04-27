@@ -14,16 +14,16 @@
 import React, { HTMLProps } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
+import { asToken } from '@bodiless/fclasses';
 import { asEditable } from '@bodiless/components';
 import ReactMarkdown from 'react-markdown';
 
-import flow from 'lodash/flow';
 import Layout from '../../../components/Layout';
 import asBodilessMarkdown from './asBodilessMarkdown';
 import withLastModified from './withLastModified';
 import withMarkdownFetchButton from './withMarkdownFetchButton';
 
-const Markdown = flow(
+const Markdown = asToken(
   withLastModified('last-modified'),
   withMarkdownFetchButton,
   asBodilessMarkdown('body', undefined, () => ({

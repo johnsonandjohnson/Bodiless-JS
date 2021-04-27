@@ -76,7 +76,7 @@ describe('withDefaultContent', () => {
       withDefaultContent({
         foo: 'defaultFooValue',
       }),
-    )(FooConsumer);
+    )(FooConsumer) as ComponentType<any>;
     const wrapper = mount(<Foo />);
     expect(wrapper.find('Foo').html()).toBe('defaultFooValue');
   });
@@ -88,7 +88,7 @@ describe('withDefaultContent', () => {
       withDefaultContent({
         foo: () => 'defaultFooValue',
       }),
-    )(FooConsumer);
+    )(FooConsumer) as ComponentType<any>;
     const wrapper = mount(<Foo />);
     expect(wrapper.find('Foo').html()).toBe('defaultFooValue');
   });
@@ -96,11 +96,11 @@ describe('withDefaultContent', () => {
     const Foo = flow(
       withNode,
       withNodeKey('foo'),
-    )(createNodeConsumer('Foo'));
+    )(createNodeConsumer('Foo')) as ComponentType<any>;
     const Bar = flow(
       withNode,
       withNodeKey('bar'),
-    )(createNodeConsumer('Bar'));
+    )(createNodeConsumer('Bar')) as ComponentType<any>;
     const BazBase = () => (
       <>
         <Foo />
@@ -110,7 +110,7 @@ describe('withDefaultContent', () => {
     const Baz = withDefaultContent({
       foo: 'defaultFooValue',
       bar: 'defaultBarValue',
-    })(BazBase);
+    })(BazBase) as ComponentType<any>;
     const wrapper = mount(<Baz />);
     expect(wrapper.find('Foo').html()).toBe('defaultFooValue');
     expect(wrapper.find('Bar').html()).toBe('defaultBarValue');
@@ -123,7 +123,7 @@ describe('withDefaultContent', () => {
       }),
       withNode,
       withNodeKey('foo'),
-    )(FooConsumer);
+    )(FooConsumer) as ComponentType<any>;
     const wrapper = mount(<Foo />);
     expect(wrapper.find('Foo').html()).toBe('defaultFooValue');
   });
@@ -136,7 +136,7 @@ describe('withDefaultContent', () => {
         withDefaultContent({
           foo: (node: any) => node.path.join('$'),
         }),
-      )(FooConsumer);
+      )(FooConsumer) as ComponentType<any>;
       const wrapper = mount(<Foo />);
       expect(wrapper.find('Foo').html()).toBe('root$foo');
     });
@@ -144,11 +144,11 @@ describe('withDefaultContent', () => {
       const Foo = flow(
         withNode,
         withNodeKey('foo'),
-      )(createNodeConsumer('Foo'));
+      )(createNodeConsumer('Foo')) as ComponentType<any>;
       const Bar = flow(
         withNode,
         withNodeKey('bar'),
-      )(createNodeConsumer('Bar'));
+      )(createNodeConsumer('Bar')) as ComponentType<any>;
       const BazBase = () => (
         <>
           <Foo />

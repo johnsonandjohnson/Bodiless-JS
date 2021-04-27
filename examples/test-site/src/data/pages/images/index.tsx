@@ -16,7 +16,6 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import flow from 'lodash/flow';
 import {
   Page,
   GatsbyImagePresets,
@@ -33,6 +32,7 @@ import {
   Section,
   addClasses,
   removeClasses,
+  asToken,
 } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
 import {
@@ -52,11 +52,17 @@ import {
 } from '../../../components/Elements.token';
 import { FlowContainerDefault } from '../../../components/FlowContainer';
 
+// @ts-ignore
 import ImageAnimatedPngSrc from './animated.png';
+// @ts-ignore
 import ImageGifSrc from './image.gif';
+// @ts-ignore
 import ImageJpgSrc from './image.jpg';
+// @ts-ignore
 import ImagePngSrc from './image.png';
+// @ts-ignore
 import ImageSvgSrc from './image.svg';
+// @ts-ignore
 import ImageResponsiveSvgSrc from './responsive_asvg.svg';
 
 import ContentfulImage1 from '../../../components/Contentful/Image/image1';
@@ -75,7 +81,7 @@ const asFixedWithWebpGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.Fixe
 const asFixedWithWebpNoBase64GatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedWithWebpNoBase64)(asBaseEditableImage);
 const asFixedWithWebpTracedSVGGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedWithWebpTracedSVG)(asBaseEditableImage);
 
-const FluidGatsbyImage = flow(
+const FluidGatsbyImage = asToken(
   asFluidGatsbyImage(),
   withGatsbyImageRoundedCorners,
 )(Img);
@@ -111,29 +117,29 @@ const ImageContentful1 = asContentfulImage(ContentfulImage1)('ContentfulImage1')
 const ImageContentful2 = asContentfulImage(ContentfulImage2)('ContentfulImage2')(Img);
 
 const PageTitle = asHeader1(H1);
-const PageSection = flow(
+const PageSection = asToken(
   addClasses('my-4 flex flex-wrap w-full'),
 )(Section);
-const EditableImagesSection = flow(
+const EditableImagesSection = asToken(
   withNode,
   withNodeKey('editableImages'),
 )(PageSection);
-const LinkableImagesSection = flow(
+const LinkableImagesSection = asToken(
   withNode,
   withNodeKey('linkableImages'),
 )(PageSection);
-const ImageWrapper = flow(
+const ImageWrapper = asToken(
   addClasses('inline-block p-2'),
 )(Div);
-const GatsbyImageWrapper = flow(
+const GatsbyImageWrapper = asToken(
   removeClasses('inline-block'),
   addClasses('block w-1/2'),
 )(ImageWrapper);
-const FixedGatsbyImageWrapper = flow(
+const FixedGatsbyImageWrapper = asToken(
   removeClasses('w-1/2'),
   addClasses('w-full lg:w-1/2'),
 )(GatsbyImageWrapper);
-const ImageSectionTitle = flow(
+const ImageSectionTitle = asToken(
   addClasses('w-full'),
   asHeader2,
 )(H2);

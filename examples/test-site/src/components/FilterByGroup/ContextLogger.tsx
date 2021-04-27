@@ -13,9 +13,8 @@
  */
 
 import React, { FC, useState, useRef } from 'react';
-import { flow } from 'lodash';
 import {
-  Div, Button, addClasses,
+  Div, Button, addClasses, asToken,
 } from '@bodiless/fclasses';
 import {
   useFilterByGroupContext,
@@ -26,11 +25,11 @@ import { BodilessTag, TagType } from '@bodiless/core';
 const AddButton = addClasses('px-2 mb-2 mr-2 border border-gray-600')(Button);
 const TagComponent = addClasses('px-3 my-2 mr-2 mb-2 border border-gray-600 inline-block')(Div);
 
-type Props = {
+type ContextLoggerProps = {
   registerSuggestions: (tags: TagType[]) => any,
 };
 
-const ContextLoggerBase: FC<Props> = () => {
+const ContextLoggerBase: FC<ContextLoggerProps> = () => {
   const { getSuggestions, useRegisterSuggestions, selectedTag } = useFilterByGroupContext();
   const [allSuggestions, setAllSuggestions] = useState(getSuggestions());
   const registerSuggestions = useRegisterSuggestions();
@@ -71,7 +70,7 @@ const ContextLoggerBase: FC<Props> = () => {
   );
 };
 
-const ContextLogger = flow(
+const ContextLogger = asToken(
   withTagProps(),
 )(ContextLoggerBase);
 

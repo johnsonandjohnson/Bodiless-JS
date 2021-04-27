@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { flow } from 'lodash';
+
 import {
   withFacet,
   withDesc,
@@ -20,6 +20,7 @@ import {
   varyDesign,
   replaceWith,
   withDesign,
+  asToken,
 } from '@bodiless/fclasses';
 
 import { ProductCard } from '../ProductCard';
@@ -27,7 +28,7 @@ import { ProductCard } from '../ProductCard';
 const withProductVariations = withFacet('Product');
 
 const productVariations = {
-  FilterableProductCardVariations: flow(
+  FilterableProductCardVariations: asToken(
     replaceWith(ProductCard),
     withDesc('Filterable Product.\n'),
     withProductVariations('Filterable Product')(),

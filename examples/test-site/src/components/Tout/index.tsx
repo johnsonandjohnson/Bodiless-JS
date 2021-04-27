@@ -12,30 +12,31 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import {
   withContextActivator, withDefaultContent, withMenuOptions,
   withResetButton, withSidecarNodes,
 } from '@bodiless/core';
 import { ToutClean, asTestableTout } from '@bodiless/organisms';
-import { withDesign, startWith, Token } from '@bodiless/fclasses';
+import {
+  withDesign, startWith, asToken,
+} from '@bodiless/fclasses';
 import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 
 import { asEditableLink, asEditable } from '../Elements.token';
 import { asEditableImage } from '../Image';
 import { withEditorBasic, withEditorSimple } from '../Editors';
 
-export const withToutEditors = flow(
+export const withToutEditors = asToken(
   withDesign({
     Image: asEditableImage('image'),
-    ImageLink: flow(
+    ImageLink: asToken(
       withSidecarNodes(
         asEditableLink('link'),
       ),
       startWith(GatsbyLink),
     ),
     Title: withEditorSimple('title', 'Tout Title Text'),
-    Link: flow(
+    Link: asToken(
       withEditorSimple('ctatext', 'CTA'),
       withSidecarNodes(
         asEditableLink('link', undefined, () => ({ groupLabel: 'CTA' })),
@@ -46,17 +47,17 @@ export const withToutEditors = flow(
   }),
 );
 
-export const withMenuToutEditors = flow(
+export const withMenuToutEditors = asToken(
   withDesign({
     Image: asEditableImage('image'),
-    ImageLink: flow(
+    ImageLink: asToken(
       withSidecarNodes(
         asEditableLink('link'),
       ),
       startWith(GatsbyLink),
     ),
     Title: asEditable('text', 'Tout Title'),
-    Link: flow(
+    Link: asToken(
       asEditable('ctatext', 'CTA'),
       withSidecarNodes(
         asEditableLink('link', undefined, () => ({ groupLabel: 'CTA' })),
@@ -67,7 +68,7 @@ export const withMenuToutEditors = flow(
   }),
 );
 
-const withEmptyContext = (name: string) => flow(
+const withEmptyContext = (name: string) => asToken(
   withContextActivator('onClick'),
   withMenuOptions({
     name,
@@ -79,23 +80,23 @@ const withEmptyContext = (name: string) => flow(
 
 export const withToutResetButtons = withDesign({
   ImageLink: withResetButton({ nodeKey: ['image', 'link'] }),
-  Title: flow(
+  Title: asToken(
     withEmptyContext('Title'),
     withResetButton({ nodeKey: 'title' }),
   ),
-  Body: flow(
+  Body: asToken(
     withEmptyContext('Body'),
     withResetButton({ nodeKey: 'body' }),
   ),
   Link: withResetButton({ nodeKey: ['link', 'ctatext'] }),
 });
 
-export const asEditableTout = flow(
+export const asEditableTout = asToken(
   withToutEditors,
   asTestableTout,
-) as Token;
+);
 
-export const asContentfulTout = (content: object) => flow(
+export const asContentfulTout = (content: object) => asToken(
   withToutEditors,
   withToutResetButtons,
   withDefaultContent(content),

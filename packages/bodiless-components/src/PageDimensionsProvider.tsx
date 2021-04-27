@@ -18,9 +18,9 @@ import React, {
   useState,
   useEffect,
   useContext,
-  ComponentType,
 } from 'react';
 import { throttle } from 'lodash';
+import { Token } from '@bodiless/fclasses';
 
 type PageDimensions = {
   width: number,
@@ -92,13 +92,16 @@ const PageDimensionsProvider: FC<PageDimensionsProviderProps> = ({ children, bre
  *
  * @return HOC which wraps a component with the context provider.
  */
-const withPageDimensionsContext = <P extends object>({
-  breakpoints,
-}: PageDimensionsProviderProps) => (Component: ComponentType<P> | string) => (props: P) => (
-  <PageDimensionsProvider breakpoints={breakpoints}>
-    <Component {...props} />
-  </PageDimensionsProvider>
+const withPageDimensionsContext = (
+  { breakpoints }: PageDimensionsProviderProps,
+): Token => Component => {
+  const WithPageDimensionsContext: FC<any> = props => (
+    <PageDimensionsProvider breakpoints={breakpoints}>
+      <Component {...props} />
+    </PageDimensionsProvider>
   );
+  return WithPageDimensionsContext;
+};
 
 export default PageDimensionsProvider;
 export {

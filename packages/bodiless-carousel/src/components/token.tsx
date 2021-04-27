@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React, { FC } from 'react';
 import {
   withDesign,
   addProps,
@@ -21,11 +21,12 @@ import {
   Ul,
   Li,
   addPropsIf,
+  asToken,
+  Token,
 } from '@bodiless/fclasses';
 import { ifEditable, withChild } from '@bodiless/core';
 import type { WithNodeKeyProps } from '@bodiless/core';
 import { asBodilessList } from '@bodiless/components';
-import flow from 'lodash/flow';
 import negate from 'lodash/negate';
 import {
   ButtonBack,
@@ -55,9 +56,9 @@ const withInfinitiveLoop = withDesign({
   }),
 });
 
-const withCarouselDots = (nodeKeys?: WithNodeKeyProps) => flow(
+const withCarouselDots = (nodeKeys?: WithNodeKeyProps) => asToken(
   withDesign({
-    Dots: flow(
+    Dots: asToken(
       replaceWith(Ul),
       asBodilessList(nodeKeys, undefined, () => ({ groupLabel: 'Slide' })),
       withDesign({
@@ -86,19 +87,22 @@ const withAutoPlayInterval = (interval: number = 3000) => withDesign({
   }),
 });
 
-const withCarouselItemTabIndex = (Component: ComponentType) => (props: any) => {
-  const isItemActive = useIsCarouselItemActive();
-  const tabIndex = isItemActive ? 0 : -1;
-  return <Component {...props} tabIndex={tabIndex} />;
+const withCarouselItemTabIndex: Token = Component => {
+  const WithCarouselItemTabIndex: FC<any> = props => {
+    const isItemActive = useIsCarouselItemActive();
+    const tabIndex = isItemActive ? 0 : -1;
+    return <Component {...props} tabIndex={tabIndex} />;
+  };
+  return WithCarouselItemTabIndex;
 };
 
-const asAccessibleCarouselButton = flow(
+const asAccessibleCarouselButton = asToken(
   addProps({
     role: 'button',
   }),
 );
 
-const withAriaSelectedCarouselItem = flow(
+const withAriaSelectedCarouselItem = asToken(
   addPropsIf(useIsCarouselItemActive)({
     'aria-selected': true,
     'aria-hidden': false,
@@ -110,12 +114,12 @@ const withAriaSelectedCarouselItem = flow(
 );
 
 const asAccessibleCarousel = withDesign({
-  Slider: flow(
+  Slider: asToken(
     addProps({
       tabIndex: 'auto',
     }),
     withDesign({
-      Item: flow(
+      Item: asToken(
         withCarouselItemTabIndex,
         withAriaSelectedCarouselItem,
       ),
@@ -124,7 +128,7 @@ const asAccessibleCarousel = withDesign({
   ButtonBack: asAccessibleCarouselButton,
   ButtonNext: asAccessibleCarouselButton,
   Dots: withDesign({
-    Item: flow(
+    Item: asToken(
       withAriaSelectedCarouselItem,
       addProps({
         'aria-hidden': false,

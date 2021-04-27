@@ -43,7 +43,7 @@ const Stripslashlink = asBodilessLink(
 )(A);
 
 const doNotNormalizeOverrides = {
-  normalizeHref: (href?: string) => href,
+  normalizeHref: (href?: string) => href || '',
   instructions: 'This href will be saved as is.',
 };
 const DoNotNormalizeLink = asBodilessLink(

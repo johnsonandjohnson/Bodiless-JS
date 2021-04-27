@@ -19,11 +19,12 @@ import {
   NodeViewer,
 } from '@bodiless/components';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
+// @ts-ignore Could not find declaration file.
 import resolveConfig from 'tailwindcss/resolveConfig';
 import { withDefaultContent, withNodeKey, withResetButton } from '@bodiless/core';
-import { H2 as BaseH2, addClasses } from '@bodiless/fclasses';
-import { flow } from 'lodash';
+import { H2 as BaseH2, addClasses, asToken } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
+// @ts-ignore Could not find declaration file.
 import tailWindConfig from '../../../../tailwind.config';
 import { FlowContainerDefault, FlowContainerLimited } from '../../../components/FlowContainer';
 import { withFullWidthConstraint } from '../../../components/FlowContainer/token';
@@ -46,7 +47,7 @@ const contentfulFlowContainer = {
   ],
 };
 
-const ContentfulFlowContainer = flow(
+const ContentfulFlowContainer = asToken(
   withDefaultContent({ contentfulFlowContainer }),
   withNodeKey('contentfulFlowContainer'),
   withResetButton({ nodeKey: 'contentfulFlowContainer' }),

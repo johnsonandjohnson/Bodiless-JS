@@ -33,7 +33,7 @@ export type EditButtonProps<D> = {
   setComponentData: (componentData: D) => void;
   componentData: D;
   isActive?: () => boolean;
-  onSubmit?: () => void;
+  onSubmit?: (event?: any) => void;
 };
 
 /**

@@ -12,8 +12,9 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
+import React, { FC } from 'react';
 import { useNode } from '@bodiless/core';
+import { Token } from '@bodiless/fclasses';
 import { log } from '../fsLogHandler';
 import GatsbyImagePresets from './GatsbyImagePresets';
 
@@ -21,10 +22,10 @@ type Props = {
   preset: GatsbyImagePresets
 };
 
-const withGatsbyImageLogger = (preset: GatsbyImagePresets) => (Component: CT<Props>) => {
-  const WithGatsbyImageLogger = (props: Props) => {
+const withGatsbyImageLogger = (preset: GatsbyImagePresets): Token => Component => {
+  const WithGatsbyImageLogger: FC<any> = props => {
     const { node } = useNode();
-    const { preset: presetFromProps } = props;
+    const { preset: presetFromProps } = props as Props;
     if (preset !== presetFromProps && presetFromProps !== undefined) {
       log(`
         Data mismatch found for node with path ${node.path.join('$')}.

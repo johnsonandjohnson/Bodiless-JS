@@ -12,15 +12,13 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { flow } from 'lodash';
+import React, { ReactNode } from 'react';
 import {
   WithNodeKeyProps,
   withSidecarNodes,
   withNode,
   withNodeKey,
   withChild,
-  ifToggledOn,
   asReadOnly,
 } from '@bodiless/core';
 import { withoutLinkWhenLinkDataEmpty } from '@bodiless/components';
@@ -29,6 +27,7 @@ import {
   withoutBreadcrumbFinalTrail,
 } from '@bodiless/navigation';
 import {
+  flowIf,
   asToken,
   addClasses,
   addProps,
@@ -46,17 +45,17 @@ import {
 } from '../Elements.token';
 
 const HomeBreadcrumbIcon = asToken(
-  addProps({ children: 'home' }),
+  addProps({ children: 'home' as ReactNode }),
   addClasses('material-icons'),
 )(Span);
 
 const withStartingTrailIcon = (
   nodeKeys?: WithNodeKeyProps,
-) => flow(
+) => asToken(
   withBreadcrumbStartingTrail,
   withDesign({
     StartingTrail: replaceWith(
-      flow(
+      asToken(
         withChild(HomeBreadcrumbIcon),
         withSidecarNodes(
           asEditableLink('link'),
@@ -82,12 +81,12 @@ const withReadOnlyStartingTrail = withDesign({
 });
 
 const withBoldedFinalTrail = withDesign({
-  Item: ifToggledOn(({ isCurrentPage }: any) => isCurrentPage)(asBold),
+  Item: flowIf(({ isCurrentPage }: any) => isCurrentPage)(asBold),
 });
 
-const withHiddenCurrentPageItem = flow(
+const withHiddenCurrentPageItem = asToken(
   withDesign({
-    Item: ifToggledOn(
+    Item: flowIf(
       ({ isCurrentPage }: any) => isCurrentPage,
     )(replaceWith(() => <></>)),
   }),

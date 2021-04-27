@@ -12,16 +12,15 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React from 'react';
 import { useNode } from '@bodiless/core';
 import identity from 'lodash/identity';
 import type { WithNodeKeyProps } from '@bodiless/core';
 import type { ListData } from '@bodiless/components';
 import { observer } from 'mobx-react-lite';
+import { Token } from '@bodiless/fclasses';
 
-const withTotalSlides = (nodeKeys?: WithNodeKeyProps) => (
-  Component: ComponentType<any>,
-) => {
+const withTotalSlides = (nodeKeys?: WithNodeKeyProps):Token => Component => {
   if (nodeKeys === undefined) return identity;
   const nodeKeys$ = typeof nodeKeys === 'string'
     ? { nodeKey: nodeKeys, nodeCollection: undefined }

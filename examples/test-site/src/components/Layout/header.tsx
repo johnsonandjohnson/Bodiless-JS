@@ -13,12 +13,12 @@
  */
 
 import React, { FC, ComponentType, HTMLProps } from 'react';
-import { flow } from 'lodash';
 import {
   designable,
   DesignableComponentsProps,
   withDesign,
   Div,
+  asToken,
 } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
 import ResponsiveMenu, { BurgerMenuToggler } from '../Menu';
@@ -77,7 +77,7 @@ const HeaderClean: FC<Props> = ({ components }) => {
   );
 };
 
-const asSiteHeader = flow(
+const asSiteHeader = asToken(
   designable(headerComponents, 'Header'),
   withDesign({
     Menu: withNodeKey({ nodeKey: 'MainMenu', nodeCollection: 'site' }),

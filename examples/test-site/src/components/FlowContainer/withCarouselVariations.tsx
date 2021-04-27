@@ -11,7 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import flow from 'lodash/flow';
 import {
   withTitle,
   withDesc,
@@ -20,13 +19,14 @@ import {
   varyDesign,
   replaceWith,
   withDesign,
+  asToken,
 } from '@bodiless/fclasses';
 
 import { ChameleonCarousel } from '../Carousel';
 import { withType } from './Categories';
 
 const carouselVariation = {
-  Carousel: flow(
+  Carousel: asToken(
     replaceWith(ChameleonCarousel),
     withType('Carousel')(),
     withTitle('Carousel'),

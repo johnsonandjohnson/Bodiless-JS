@@ -13,9 +13,10 @@
  */
 
 import React, {
-  ComponentType, useContext, useState, FC, useRef, useEffect, useCallback,
+  useContext, useState, FC, useRef, useEffect, useCallback,
 } from 'react';
 import querystring from 'query-string';
+import { Token } from '@bodiless/fclasses';
 import SearchClient from '../SearchClient';
 import { TSearchResults, Suggestion } from '../types';
 // import getSearchPagePath from './getSearchPagePath';
@@ -87,8 +88,8 @@ export const SearchResultProvider: FC = ({ children }) => {
   );
 };
 
-export const withSearchResult = <P extends object>(Component: ComponentType<P>) => {
-  const WithSearchResult = (props: P) => (
+export const withSearchResult: Token = Component => {
+  const WithSearchResult: FC<any> = props => (
     <SearchResultProvider>
       <Component {...props} />
     </SearchResultProvider>

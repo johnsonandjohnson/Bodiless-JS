@@ -139,9 +139,9 @@ const asColumnSubMenu = asToken(
  * @return Token that applies default top navigation styles based on provided keys.
  */
 const asTopNav = (...keys: string[]) => {
-  const listSubmenuStyles = keys.indexOf('List') > -1 ? asListSubMenu : asToken();
-  const toutsSubmenuStyles = keys.indexOf('Touts') > -1 ? asToutsSubMenu : asToken();
-  const columnsSubmenuStyles = keys.indexOf('Columns') > -1 ? asColumnSubMenu : asToken();
+  const listSubmenuStyles = keys.indexOf('List') > -1 ? asListSubMenu : asToken({});
+  const toutsSubmenuStyles = keys.indexOf('Touts') > -1 ? asToutsSubMenu : asToken({});
+  const columnsSubmenuStyles = keys.indexOf('Columns') > -1 ? asColumnSubMenu : asToken({});
 
   return asToken(
     withMenuDesign('Main')(withBaseMenuStyles),

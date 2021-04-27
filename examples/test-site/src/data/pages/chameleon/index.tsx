@@ -13,17 +13,17 @@
  */
 
 import React, {
-  FC, useState, ComponentType, useCallback, createContext, useContext,
+  FC, useState, useCallback, createContext, useContext, ComponentType,
 } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
   addClasses, H1 as H1$, H2 as H2$, withDesign,
-  addProps, Div, removeClasses, HOC, replaceWith, withoutProps,
-  Section,
+  addProps, Div, removeClasses, replaceWith, withoutProps,
+  Section, asToken,
   P,
+  Token,
 } from '@bodiless/fclasses';
-import { flow } from 'lodash';
 import { observer } from 'mobx-react-lite';
 
 import {
@@ -51,9 +51,9 @@ const basicChameleonDesign = {
   Green: addClasses('border-green-500 text-green-500'),
 };
 
-const BasicChameleon = flow(
-  asBodilessChameleon('basic-chameleon') as HOC,
-  withDesign(basicChameleonDesign) as HOC,
+const BasicChameleon = asToken(
+  asBodilessChameleon('basic-chameleon'),
+  withDesign(basicChameleonDesign),
 )(BaseComponent);
 
 /*
@@ -68,12 +68,12 @@ const BaseAvailability: FC<AvailabilityProps> = ({ isAvailable, ...rest }) => (
 );
 
 const toggleDesign = {
-  Available: flow(
+  Available: asToken(
     addProps({ isAvailable: true }),
   ),
 };
 
-const AvailabilityToggle = flow(
+const AvailabilityToggle = asToken(
   asBodilessChameleon('basic-toggle', { component: 'Available' }, () => ({ label: 'Avail' })),
   withDesign(toggleDesign),
   withDesign({
@@ -89,16 +89,16 @@ const toggleVisibilityDesign = {
   Available: removeClasses('invisible'),
 };
 
-const VisibilityToggle = flow(
-  addClasses('invisible') as HOC,
-  applyChameleon as HOC,
-  withDesign(toggleVisibilityDesign) as HOC,
+const VisibilityToggle = asToken(
+  addClasses('invisible'),
+  applyChameleon,
+  withDesign(toggleVisibilityDesign),
 )(BaseAvailability);
 
-const VisibilityTogglerapper = flow(
-  withChameleonButton(() => ({ label: 'Avail' })) as HOC,
-  withChameleonContext('decomposed-toggle') as HOC,
-  withDesign(toggleVisibilityDesign) as HOC,
+const VisibilityTogglerapper = asToken(
+  withChameleonButton(() => ({ label: 'Avail' })),
+  withChameleonContext('decomposed-toggle'),
+  withDesign(toggleVisibilityDesign),
 )(BaseComponent);
 
 /*
@@ -155,7 +155,7 @@ const toggleCartDesign = {
   Available: replaceWith(AddToCartBase),
 };
 
-const AddToCartToggle = flow(
+const AddToCartToggle = asToken(
   withoutProps('productId'),
   applyChameleon,
   withoutProps('unwrap'),
@@ -183,19 +183,18 @@ const AvailabilityAccordion = ({ isAvailable, ...rest }: any) => {
   );
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const AvailabilityAccordionToggleDefective = flow(
-  asBodilessChameleon('basic-toggle', { component: 'Available' }, () => ({ label: 'Avail' })),
-  withDesign(toggleDesign),
-)(AvailabilityAccordion);
+// const AvailabilityAccordionToggleDefective = asToken(
+//   asBodilessChameleon('basic-toggle', { component: 'Available' }, () => ({ label: 'Avail' })),
+//   withDesign(toggleDesign),
+// )(AvailabilityAccordion);
 
-const withChameleonAvailability = <P extends object>(Component: ComponentType<P>) => (props: P) => (
+const withChameleonAvailability:Token = Component => (props: any) => (
   <Component {...props} isAvailable={useChameleonContext().isOn} />
 );
 
-const AvailabilityAccordionToggle = flow(
+const AvailabilityAccordionToggle = asToken(
   withChameleonAvailability,
-  withChameleonButton(() => ({ label: 'Avail' })) as HOC,
+  withChameleonButton(() => ({ label: 'Avail' })),
   withChameleonContext('accordion-toggle'),
   withDesign(toggleDesign),
 )(AvailabilityAccordion);
@@ -210,7 +209,7 @@ const Example: FC = ({ children }) => {
     </Section>
   );
 };
-const ExampleLayoutProvider = flow(
+const ExampleLayoutProvider = asToken(
   asBodilessChameleon('layout', undefined, () => ({
     root: true,
     label: 'Layout',
@@ -224,10 +223,10 @@ const ExampleLayoutProvider = flow(
     'One-Half Width Items': addProps({ value: 'w-1/2' }),
     'Full Width Items': addProps({ value: 'w-full' }),
   }),
-)(LayoutContext.Provider);
+)(LayoutContext.Provider) as ComponentType;
 
-const H1 = flow(addClasses('pt-5'), asHeader1)(H1$);
-const H2 = flow(addClasses('pt-5'), asHeader2)(H2$);
+const H1 = asToken(addClasses('pt-5'), asHeader1)(H1$);
+const H2 = asToken(addClasses('pt-5'), asHeader2)(H2$);
 const Description = addClasses('mt-2 text-sm italic')(P);
 // const Example = addClasses('w-1/3 p-5')(Section$);
 const Examples = addClasses('flex flex-wrap')(Div);

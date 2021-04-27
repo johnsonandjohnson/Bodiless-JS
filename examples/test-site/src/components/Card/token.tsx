@@ -12,11 +12,9 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import {
   addClasses,
   withDesign,
-  Token,
   asToken,
 } from '@bodiless/fclasses';
 import {
@@ -38,7 +36,7 @@ import {
   withCategory,
 } from '../Elements.token';
 
-const asCardHorizontal$ = flow(
+const asCardHorizontal$ = asToken(
   withDesign({
     Title: addClasses('px-2'),
     Body: addClasses('px-2'),
@@ -46,7 +44,7 @@ const asCardHorizontal$ = flow(
   }),
   asBCardHorizontal,
 );
-const asCardVertical$ = flow(
+const asCardVertical$ = asToken(
   withDesign({
     Title: addClasses('px-2'),
     Body: addClasses('px-2'),
@@ -70,17 +68,17 @@ const asCardTextWhite$ = withDesign({
   Body: addClasses('text-white'),
 });
 
-const asCardHorizontal = withCategory('Orientation')(asCardHorizontal$ as Token);
-const asCardVertical = withCategory('Orientation')(asCardVertical$ as Token);
-const asCardNoTitle = withCategory('Structure')(asCardNoTitle$ as Token);
-const asCardNoBody = withCategory('Structure')(asCardNoBody$ as Token);
-const asCardNoCta = withCategory('Structure')(asCardNoCta$ as Token);
-const asCardDefaultStyle = withCategory('Appearance')(asCardDefaultStyle$ as Token);
-const asCardOverlayTitle = withCategory('Layout')(asCardOverlayTitle$ as Token);
-const asCardOverlayCta = withCategory('Layout')(asCardOverlayCta$ as Token);
-const asCardNoBodyNoTitle = withCategory('Structure')(asCardNoBodyNoTitle$ as Token);
-const asCardWithPaddings = withCategory('Layout')(asCardWithPaddings$ as Token);
-const asCardTextWhite = withCategory('Appearance')(asCardTextWhite$ as Token);
+const asCardHorizontal = withCategory('Orientation')(asCardHorizontal$);
+const asCardVertical = withCategory('Orientation')(asCardVertical$);
+const asCardNoTitle = withCategory('Structure')(asCardNoTitle$);
+const asCardNoBody = withCategory('Structure')(asCardNoBody$);
+const asCardNoCta = withCategory('Structure')(asCardNoCta$);
+const asCardDefaultStyle = withCategory('Appearance')(asCardDefaultStyle$);
+const asCardOverlayTitle = withCategory('Layout')(asCardOverlayTitle$);
+const asCardOverlayCta = withCategory('Layout')(asCardOverlayCta$);
+const asCardNoBodyNoTitle = withCategory('Structure')(asCardNoBodyNoTitle$);
+const asCardWithPaddings = withCategory('Layout')(asCardWithPaddings$);
+const asCardTextWhite = withCategory('Appearance')(asCardTextWhite$);
 const asCardMainMenu = asToken(
   asCardTextWhite,
   asCardWithPaddings,

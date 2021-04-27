@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
+import { asToken } from '@bodiless/fclasses';
 import withCardVariations from './withCardVariations';
 import withContentfulCards from './withContentfulCards';
 import withRichTextVariations from './withRichTextVariations';
@@ -27,7 +27,7 @@ import withCarouselVariations from './withCarouselVariations';
 
 // Order of includes currently dictates order in Component Picker
 // thus recommend putting more frequently used components toward top for quicker access.
-const withDefaultVariations = flow(
+const withDefaultVariations = asToken(
   withRichTextVariations,
   withTableVariations,
   withImageVariations,

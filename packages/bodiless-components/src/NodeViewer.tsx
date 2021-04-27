@@ -12,11 +12,11 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { ComponentType } from 'react';
 import { observer } from 'mobx-react-lite';
 import { withNode, useNodeDataHandlers } from '@bodiless/core';
 
-const NodeViewer: FC<any> = withNode(
+const NodeViewer: ComponentType<any> = withNode(
   observer(() => {
     const { componentData } = useNodeDataHandlers();
     return (

@@ -11,28 +11,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from 'react';
-import { flow } from 'lodash';
+import { asToken, addProps } from '@bodiless/fclasses';
+// @ts-ignore Could not find a declaration file
 import resolveConfig from 'tailwindcss/resolveConfig';
 import { getSnapFrom, withTailwindClasses } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withProductVariations from './withProductVariations';
 import { asFilterableProductContainer } from '../ProductCard/token';
 import { asFlowContainerWithMargins, asFlowContainerFullWidth } from '../FlowContainer/token';
+// @ts-ignore Could not find a declaration file
 import tailWindConfig from '../../../tailwind.config';
 
 const snapData = getSnapFrom(
   withTailwindClasses(resolveConfig(tailWindConfig))('w-1/3'),
 );
 
-const withProductStrictSnapSize = Component => props => (
-  <Component
-    {...props}
-    snapData={snapData}
-  />
-);
+const withProductStrictSnapSize = addProps({ snapData });
 
-const ProductListingFlowContainer = flow(
+const ProductListingFlowContainer = asToken(
   asFilterableProductContainer,
   withProductStrictSnapSize,
   withProductVariations,

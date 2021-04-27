@@ -54,7 +54,7 @@ export type ListBaseProps = {
 
 export type ListProps =
   Omit<ListBaseProps, keyof DesignableComponentsProps<ListComponents>>
-  & WithNodeProps
+  & Partial<WithNodeProps>
   & DesignableProps<ListComponents>;
 
 export type ItemsMutator = (item: string) => void;

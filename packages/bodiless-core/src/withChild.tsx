@@ -14,10 +14,8 @@
 
 import React, { Fragment, ComponentType as CT, PropsWithChildren } from 'react';
 import { extendDesignable } from '@bodiless/fclasses';
-import type { DesignableComponentsProps } from '@bodiless/fclasses';
+import type { DesignableComponentsProps, HOC } from '@bodiless/fclasses';
 import omit from 'lodash/omit';
-
-type HOC<P = any, Q = P> = (Component?: CT<P>|string|undefined) => CT<Q>;
 
 type InsertChildOptions = {
   designKey: string,
@@ -34,34 +32,34 @@ type InsertChildOptions = {
  *
  * @return An HOC which will append the Child to the given Component.
  */
-const insertChild = <P extends object>(Child: CT, options: InsertChildOptions): HOC<P> => (
+const insertChild = (Child: CT, options: InsertChildOptions): HOC => (
   Component = Fragment,
 ) => {
   type Components = { [Child: string]: CT };
   const { designKey, mode } = options;
   const startComponents: Components = { [designKey]: Child };
-  const WithChild = (props: P & PropsWithChildren<DesignableComponentsProps<Components>>) => {
+  const WithChild = (props: PropsWithChildren<DesignableComponentsProps<Components>>) => {
     const { components, ...rest } = props;
     const { children, ...restWithoutChildren } = rest;
     const { [designKey]: ChildComponent } = components;
     switch (mode) {
       case 'append':
         return (
-          <Component {...restWithoutChildren as P}>
+          <Component {...restWithoutChildren as any}>
             <ChildComponent />
             {children}
           </Component>
         );
       case 'prepend':
         return (
-          <Component {...restWithoutChildren as P}>
+          <Component {...restWithoutChildren as any}>
             {children}
             <ChildComponent />
           </Component>
         );
       default:
         return (
-          <Component {...rest as P}>
+          <Component {...rest as any}>
             <ChildComponent />
           </Component>
         );

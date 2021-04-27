@@ -14,10 +14,10 @@
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { ComponentType } from 'react';
-import { withoutProps, withNode } from '@bodiless/core';
+import { withNode } from '@bodiless/core';
 import type { WithNodeProps } from '@bodiless/core';
 import {
-  asComponent, designable, addProps, Fragment, withDesign, replaceWith,
+  asComponent, designable, addProps, Fragment, withDesign, replaceWith, withoutProps,
 } from '@bodiless/fclasses';
 import { observer } from 'mobx-react-lite';
 import { flowRight } from 'lodash';
@@ -31,6 +31,7 @@ import type {
   BreadcrumbsComponents,
   CleanBreadcrumbsProps,
   CleanBreadcrumbItemType,
+  BreadcrumbsProps,
 } from './types';
 
 const ItemNodeProvider = withNode(Fragment) as ComponentType<WithNodeProps>;
@@ -136,7 +137,7 @@ const BreadcrumbsClean = designable(BreadcrumbStartComponents, 'Breadcrumbs')(Br
  * HOC that enables rendering of starting trail for a breadcrumb based component.
  * @param Component a breadcrumb based component
  */
-const withStartingTrail = addProps({
+const withStartingTrail = addProps<Pick<BreadcrumbsProps, 'hasStartingTrail'>>({
   hasStartingTrail: true,
 });
 
@@ -144,7 +145,7 @@ const withStartingTrail = addProps({
  * HOC that disables rendering of starting trail for a breadcrumb based component.
  * @param Component a breadcrumb based component
  */
-const withoutStartingTrail = addProps({
+const withoutStartingTrail = addProps<Pick<BreadcrumbsProps, 'hasStartingTrail'>>({
   hasStartingTrail: false,
 });
 
@@ -152,7 +153,7 @@ const withoutStartingTrail = addProps({
  * HOC that enables rendering of final trail for a breadcrumb based component.
  * @param Component a breadcrumb based component
  */
-const withFinalTrail = addProps({
+const withFinalTrail = addProps<Pick<BreadcrumbsProps, 'hasFinalTrail'>>({
   hasFinalTrail: true,
 });
 
@@ -160,7 +161,7 @@ const withFinalTrail = addProps({
  * HOC that disables rendering of final trail for a breadcrumb based component.
  * @param Component a breadcrumb based component
  */
-const withoutFinalTrail = addProps({
+const withoutFinalTrail = addProps<Pick<BreadcrumbsProps, 'hasFinalTrail'>>({
   hasFinalTrail: false,
 });
 

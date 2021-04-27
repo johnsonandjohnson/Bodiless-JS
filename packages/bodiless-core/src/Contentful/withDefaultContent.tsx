@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import type { ComponentOrTag } from '@bodiless/fclasses';
+import React, { FC } from 'react';
+import type { Enhancer } from '@bodiless/fclasses';
 import NodeProvider, { useNode } from '../NodeProvider';
 import ContentfulNode from './ContentfulNode';
 import { DefaultContentNode } from '../ContentNode';
@@ -37,22 +37,22 @@ import { DefaultContentNode } from '../ContentNode';
  */
 const withDefaultContent = <P extends object, D extends object>(
   content: D | ((props: P) => D),
-) => (
-    (Component: ComponentOrTag<P & { content?: D }>) => {
-      const WithDefaultContent = ({ content: contentFromProp, ...rest }: P & { content?: D }) => {
-        const { node } = useNode();
-        const content$ = contentFromProp || content;
-        const content$$ = typeof content$ === 'function'
-          ? (content$ as ((props: P) => D))(rest as P) : content$;
-        const contentNode = ContentfulNode.create((node as DefaultContentNode<object>), content$$);
-        return (
-          <NodeProvider node={contentNode}>
-            <Component {...rest as P} />
-          </NodeProvider>
-        );
-      };
-      return WithDefaultContent;
-    }
-  );
+): Enhancer<{ content?: D }> => Component => {
+    const WithDefaultContent: FC<any> = (
+      { content: contentFromProp, ...rest }: { content?: D },
+    ) => {
+      const { node } = useNode();
+      const content$ = contentFromProp || content;
+      const content$$ = typeof content$ === 'function'
+        ? (content$ as ((props: P) => D))(rest as P) : content$;
+      const contentNode = ContentfulNode.create((node as DefaultContentNode<object>), content$$);
+      return (
+        <NodeProvider node={contentNode}>
+          <Component {...rest as any} />
+        </NodeProvider>
+      );
+    };
+    return WithDefaultContent;
+  };
 
 export default withDefaultContent;

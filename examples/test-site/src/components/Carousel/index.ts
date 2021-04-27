@@ -12,10 +12,10 @@
  * limitations under the License.
  */
 
-import flow from 'lodash/flow';
 import {
   withNode,
 } from '@bodiless/core';
+import { asToken } from '@bodiless/fclasses';
 import {
   CarouselClean,
   asEditableCarousel,
@@ -36,13 +36,13 @@ import {
 
 export const CAROUSEL_NODE_KEY = 'slides';
 
-const Carousel = flow(
+const Carousel = asToken(
   asEditableCarousel(CAROUSEL_NODE_KEY),
   withImageSlide,
   withNode,
 )(CarouselClean);
 
-const ChameleonCarousel = flow(
+const ChameleonCarousel = asToken(
   asEditableCarousel(CAROUSEL_NODE_KEY),
   withCarouselDots(CAROUSEL_NODE_KEY),
   withDotStyles,

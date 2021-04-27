@@ -13,11 +13,12 @@
  */
 
 import { flow } from 'lodash';
-import React, { FC, ComponentType } from 'react';
+import React, { FC } from 'react';
 import {
   designable,
   Div,
-  DesignableProps,
+  HOC,
+  DesignableComponentsProps,
 } from '@bodiless/fclasses';
 import { asAccordionBodyWrapper, asAccordionBodyContent } from './Accordion.tokens';
 import { AccordionBodyComponents, AccordionBodyProps } from './types';
@@ -27,7 +28,10 @@ const AccordionBodyComponentsStart:AccordionBodyComponents = {
   Content: asAccordionBodyContent(Div),
 };
 
-const AccordionBodyBase: FC<AccordionBodyProps> = ({ components, children }) => {
+type AccordionBodyBaseProps =
+  Omit<AccordionBodyProps, 'design'> & DesignableComponentsProps<AccordionBodyComponents>;
+
+const AccordionBodyBase: FC<AccordionBodyBaseProps> = ({ components, children }) => {
   const { Wrapper, Content } = components;
 
   return (
@@ -43,9 +47,8 @@ const AccordionBodyClean = flow(
   designable(AccordionBodyComponentsStart, 'AccordionBody'),
 )(AccordionBodyBase);
 
-const asAccordionBody = <P extends DesignableProps<AccordionBodyComponents>>(
-  Component: ComponentType<P> | string,
-) => (props: P) => {
+const asAccordionBody: HOC = Component => {
+  const AsAccordionBody = (props: any) => {
     const { design } = props;
     return (
       <AccordionBodyClean design={design}>
@@ -53,6 +56,8 @@ const asAccordionBody = <P extends DesignableProps<AccordionBodyComponents>>(
       </AccordionBodyClean>
     );
   };
+  return AsAccordionBody;
+};
 
 export default AccordionBodyClean;
 export {

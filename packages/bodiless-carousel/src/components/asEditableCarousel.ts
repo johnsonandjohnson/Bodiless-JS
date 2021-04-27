@@ -12,20 +12,19 @@
  * limitations under the License.
  */
 
-import flow from 'lodash/flow';
 import { withNode } from '@bodiless/core';
 import type { WithNodeKeyProps } from '@bodiless/core';
 import { asBodilessList } from '@bodiless/components';
-import { withDesign, replaceWith } from '@bodiless/fclasses';
+import { withDesign, replaceWith, asToken } from '@bodiless/fclasses';
 import { Slide } from 'pure-react-carousel';
 import withTotalSlides from './withTotalSlides';
 import { withIntrinsicHeight, withNoDragIfEditable } from './token';
 
-const asEditableCarousel = (nodeKeys?: WithNodeKeyProps) => flow(
+const asEditableCarousel = (nodeKeys?: WithNodeKeyProps) => asToken(
   withNode,
   withDesign({
     Wrapper: withTotalSlides(nodeKeys),
-    Slider: flow(
+    Slider: asToken(
       asBodilessList(nodeKeys, undefined, () => ({ groupLabel: 'Slide' })),
       withDesign({
         Item: replaceWith(Slide),

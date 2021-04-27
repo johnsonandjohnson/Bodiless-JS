@@ -31,7 +31,7 @@ const ui = {
  * A FlowContainer is a component which allows a content editor to select and place
  * components.
  */
-const FlowContainer: FC<FlowContainerProps> = props => (
+const FlowContainer: FC<Omit<FlowContainerProps, 'ui'>> = props => (
   <FlowContainerClean ui={ui} {...props} />
 );
 

@@ -12,10 +12,9 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import { WithNodeKeyProps, withNode } from '@bodiless/core';
 import { asBodilessList, asStylableList, asChameleonSubList } from '@bodiless/components';
-import { withDesign } from '@bodiless/fclasses';
+import { withDesign, asToken } from '@bodiless/fclasses';
 
 import type { UseListOverrides, ListData } from '@bodiless/components';
 
@@ -43,7 +42,7 @@ const asBodilessMenu = <P extends object>(
   nodeKeys?: WithNodeKeyProps,
   defaultData?: ListData,
   useOverrides: UseListOverrides<P> = () => ({}),
-) => flow(
+) => asToken(
     asBodilessList(
       nodeKeys,
       defaultData,

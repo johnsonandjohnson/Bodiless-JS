@@ -12,17 +12,16 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import {
   withFacet,
   withDesc,
-  HOC,
 } from '@bodiless/layouts';
 import {
   varyDesign,
   extendDesign,
   replaceWith,
   withDesign,
+  asToken,
 } from '@bodiless/fclasses';
 import Card from '../Card';
 import {
@@ -40,7 +39,7 @@ export const withStructureFacet = withFacet('Card Structure');
 export const withOrientationFacet = withFacet('Orientation');
 
 const baseVariation = {
-  Card: flow(
+  Card: asToken(
     replaceWith(Card),
     withDesc('A way to promote a Call to Action.\n'),
     withType('Card')(asCardDefaultStyle),
@@ -50,24 +49,24 @@ const baseVariation = {
 // Lets make Card version that are Vertical and vary the fields that are used
 const verticalVariations = varyDesign(
   {
-    Vertical: withOrientationFacet('Vertical')(asCardVertical as HOC),
+    Vertical: withOrientationFacet('Vertical')(asCardVertical),
   },
   {
     WithTitleBody: withStructureFacet('With Title and Body')(),
-    NoTitle: withStructureFacet('No Title')(asCardNoTitle as HOC),
-    NoBody: withStructureFacet('No Body')(asCardNoBody as HOC),
-    NoTitleBody: withStructureFacet('No Title and Body')(asCardNoBodyNoTitle as HOC),
+    NoTitle: withStructureFacet('No Title')(asCardNoTitle),
+    NoBody: withStructureFacet('No Body')(asCardNoBody),
+    NoTitleBody: withStructureFacet('No Title and Body')(asCardNoBodyNoTitle),
   },
 );
 // Lets make Card version that are Horizontal and vary the fields that are used
 const horizontalVariations = varyDesign(
   {
-    Horizontal: withOrientationFacet('Horizontal')(asCardHorizontal as HOC),
+    Horizontal: withOrientationFacet('Horizontal')(asCardHorizontal),
   },
   {
     WithTitleBody: withStructureFacet('With Title and Body')(),
-    NoTitle: withStructureFacet('No Title')(asCardNoTitle as HOC),
-    NoBody: withStructureFacet('No Body')(asCardNoBody as HOC),
+    NoTitle: withStructureFacet('No Title')(asCardNoTitle),
+    NoBody: withStructureFacet('No Body')(asCardNoBody),
   },
 );
 // Lets combine the Vertical and Horizontal
@@ -78,7 +77,7 @@ const orientationVariations = extendDesign(
 
 const ctaVariations = {
   WithCTA: withStructureFacet('With CTA')(),
-  NoCTA: withStructureFacet('No CTA')(asCardNoCta as HOC),
+  NoCTA: withStructureFacet('No CTA')(asCardNoCta),
 };
 
 export default withDesign(varyDesign(

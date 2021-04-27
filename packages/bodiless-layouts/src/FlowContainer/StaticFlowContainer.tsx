@@ -18,10 +18,11 @@ import { withNode } from '@bodiless/core';
 import {
   designable,
   Div,
+  DesignableComponentsProps,
 } from '@bodiless/fclasses';
 import { observer } from 'mobx-react-lite';
 import { useItemHandlers } from './model';
-import { StaticFlowContainerProps, FlowContainerItem, FlowContainerComponents } from './types';
+import { FlowContainerItem, FlowContainerComponents } from './types';
 
 const flowContainerComponentStart: FlowContainerComponents = {
   Wrapper: Div,
@@ -30,7 +31,7 @@ const flowContainerComponentStart: FlowContainerComponents = {
 
 const NodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
 
-const StaticFlowContainer: FC<StaticFlowContainerProps> = ({ components }) => {
+const StaticFlowContainer: FC<DesignableComponentsProps> = ({ components }) => {
   const items = useItemHandlers().getItems();
   const { Wrapper, ComponentWrapper } = components;
   return (

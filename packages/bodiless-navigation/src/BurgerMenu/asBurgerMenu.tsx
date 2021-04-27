@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { ComponentType } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import { useNode, withDefaultContent } from '@bodiless/core';
 import { asAccordionWrapper, asAccodionTitle, asAccordionBody } from '@bodiless/organisms';
@@ -74,7 +73,7 @@ const withOverviewLink = (
   return flowIf(useHasOverviewLink)(
     addProps({ prependItems: ['overview'] }),
     withDefaultContent(useOverviewLinkContent),
-  ) as Token;
+  );
 };
 
 const withBurgerMenuSchema = asToken(
@@ -95,7 +94,7 @@ const withBurgerMenuSchema = asToken(
  *
  * @return Original component wrapped in the burger menu chrome with 'Menu' design key.
  */
-const withBurgerMenuWrapper = <P extends object>(Component: ComponentType<P>) => asToken(
+const withBurgerMenuWrapper: Token = Component => asToken(
   replaceWith(BurgerMenuClean),
   withDesign({
     Menu: replaceWith(Component),

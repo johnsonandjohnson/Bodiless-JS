@@ -12,12 +12,12 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import {
   addClasses,
   removeClasses,
   withDesign,
   remove,
+  asToken,
 } from '@bodiless/fclasses';
 
 /**
@@ -48,7 +48,7 @@ const asToutNoBody = withDesign({
   Title: addClasses('flex-grow'), // Add grow here because body will not exist
   Body: remove,
 });
-const asToutNoBodyNoTitle = flow(
+const asToutNoBodyNoTitle = asToken(
   asToutNoBody,
   asToutNoTitle,
   withDesign({ ImageLink: addClasses('flex-grow') }),
@@ -61,7 +61,7 @@ const asToutOverlayTitle = withDesign({
   Wrapper: addClasses('relative'),
 });
 const asToutOverlayCta = withDesign({
-  Link: flow(
+  Link: asToken(
     addClasses('absolute bottom-0 right-0 m-8 px-8'),
     removeClasses('w-full'),
   ),

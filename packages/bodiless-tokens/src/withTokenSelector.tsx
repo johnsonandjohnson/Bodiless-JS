@@ -1,4 +1,18 @@
-import React, { ComponentType } from 'react';
+/**
+ * Copyright © 2021 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import React, { ComponentType, FC } from 'react';
 import { createHash } from 'crypto';
 import {
   useMenuOptionUI, WithNodeKeyProps, withNodeKey, withNode, ifEditable,
@@ -106,13 +120,11 @@ export const withTokensFromData = <P extends TokensProps>(Component: ComponentOr
   return WithTokensFromData;
 };
 
-export const withTokenNamesFromData = <P extends TokensProps>(Component: ComponentOrTag<P>) => {
-  const WithTokenNamesFromData = (
-    props: P & EditButtonProps<TokenSelectorData> & TokenSelectorProps,
-  ) => {
+export const withTokenNamesFromData: Token = Component => {
+  const WithTokenNamesFromData: FC<any> = (props: EditButtonProps<TokenSelectorData>) => {
     const { componentData, ...rest } = props;
     const { tokens } = componentData;
-    return <Component {...rest as P} tokens={tokens} />;
+    return <Component {...rest as any} tokens={tokens} />;
   };
   return WithTokenNamesFromData;
 };

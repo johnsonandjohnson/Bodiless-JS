@@ -14,14 +14,13 @@
 
 import React, { ComponentType } from 'react';
 import pick from 'lodash/pick';
-import flow from 'lodash/flow';
 import { v1 } from 'uuid';
 import {
   withMenuOptions, useContextMenuForm, useMenuOptionUI, withContextActivator, withLocalContextMenu,
   TMenuOption, EditButtonProps, UseBodilessOverrides, createMenuOptionGroup,
   MenuOptionsDefinition, useEditContext,
 } from '@bodiless/core';
-import { flowIf } from '@bodiless/fclasses';
+import { flowIf, asToken } from '@bodiless/fclasses';
 
 import type { ChameleonButtonProps, ChameleonData } from './types';
 import { useChameleonContext, DEFAULT_KEY } from './withChameleonContext';
@@ -132,8 +131,8 @@ const withChameleonButton = <P extends object, D extends object>(
     const isRoot = def.root || (def.peer && !useEditContext().parent);
     return !isRoot;
   };
-  return flow(
-    flowIf(useHasLocalContext)(
+  return asToken(
+    flowIf(useHasLocalContext as (props: P) => boolean)(
       withContextActivator('onClick'),
       withLocalContextMenu,
     ),

@@ -19,7 +19,8 @@ import type {
   RenderLeafProps,
   RenderElementProps,
 } from 'slate-react/dist/components/editable';
-import type { DesignableComponents } from '@bodiless/fclasses';
+import type { DesignableComponents, DesignableProps } from '@bodiless/fclasses';
+import { WithNodeProps } from '@bodiless/core';
 import type { UI } from './RichTextContext';
 import type { Deserializer } from './serializers';
 
@@ -86,14 +87,16 @@ export type RichTextComponents = {
   [key:string]: RichTextComponent,
 };
 
-export type RichTextProps = {
+export type RichTextBaseProps = {
   components: DesignableComponents,
   ui?: UI,
   initialValue?: Value,
-  nodeKey?: string,
   value?: Value;
   onChange: EditorOnChange;
 } & Omit<EditableProps, 'value' | 'onChange'>;
+
+export type RichTextProps =
+  Omit<Partial<RichTextBaseProps>, 'components'> & DesignableProps & WithNodeProps;
 
 export type Plugin = {
   type: string,

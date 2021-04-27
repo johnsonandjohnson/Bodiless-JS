@@ -22,6 +22,11 @@ export type NodeMap<D> = {
   };
 };
 
+export type NodeDataHandlers<D> = {
+  setComponentData: (data: D) => void,
+  componentData: D,
+};
+
 const NodeContext = React.createContext<NodeMap<any>>({
   activeCollection: '_default',
   collections: {

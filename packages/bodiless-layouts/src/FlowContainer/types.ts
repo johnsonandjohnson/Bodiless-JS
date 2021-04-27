@@ -12,23 +12,21 @@
  * limitations under the License.
  */
 
-import { ComponentType } from 'react';
 import { WithNodeProps, TMenuOptionGetter } from '@bodiless/core';
-import { DesignableComponents, StylableProps } from '@bodiless/fclasses';
+import {
+  DesignableComponents, ComponentOrTag, DesignableComponentsProps, DesignableProps,
+} from '@bodiless/fclasses';
+import { HTMLProps } from 'react';
 import { ComponentSelectorUI } from '../ComponentSelector/types';
 import { UI as SortableResizableUI } from '../SlateSortableResizable';
 import { SnapData } from './utils/appendTailwindWidthClass';
-import { SortableListProps } from './SortableContainer';
 
 export type UI = ComponentSelectorUI & SortableResizableUI;
 
 export type FlowContainerData = {
   items: FlowContainerItem[];
 };
-export type StaticFlowContainerProps = {
-  components: DesignableComponents;
-};
-export type EditFlowContainerProps = StaticFlowContainerProps & {
+export type EditFlowContainerProps = DesignableComponentsProps & HTMLProps<HTMLDivElement> & {
   ui?: UI,
   snapData?: SnapData,
   getDefaultWidth?: (snapData: SnapData) => string;
@@ -43,7 +41,8 @@ export type WidthClassTuple = {
   media: string;
   class: string;
 };
-export type FlowContainerProps = EditFlowContainerProps & WithNodeProps;
+export type FlowContainerBaseProps = EditFlowContainerProps & WithNodeProps;
+export type FlowContainerProps = Omit<FlowContainerBaseProps, 'components'> & DesignableProps;
 export type FlowContainerComponentProps = {
   components: DesignableComponents;
   ui?: ComponentSelectorUI;
@@ -74,6 +73,6 @@ export type SortableChildProps = {
 };
 
 export type FlowContainerComponents = {
-  Wrapper: ComponentType<StylableProps & SortableListProps>,
-  ComponentWrapper: ComponentType<StylableProps & SortableChildProps>,
+  Wrapper: ComponentOrTag<any>,
+  ComponentWrapper: ComponentOrTag<any>,
 };

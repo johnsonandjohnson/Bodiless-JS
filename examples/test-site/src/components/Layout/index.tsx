@@ -12,12 +12,11 @@
  * limitations under the License.
  */
 
-import React, { ComponentType, Fragment } from 'react';
-import { flow } from 'lodash';
+import React, { ComponentType, Fragment, FC } from 'react';
 import {
-  Div, designable, addClasses, replaceWith, DesignableComponentsProps,
+  Div, designable, addClasses, replaceWith, DesignableComponentsProps, asToken, flowIf,
 } from '@bodiless/fclasses';
-import { useNode, withNodeKey, ifToggledOn } from '@bodiless/core';
+import { useNode, withNodeKey } from '@bodiless/core';
 import { withSearchResult } from '@bodiless/search';
 import { withBurgerMenuProvider, withBreadcrumbStore } from '@bodiless/navigation';
 import Header from './header';
@@ -32,15 +31,15 @@ import BreadcrumbsBase from '../Breadcrumbs/MenuBreadcrumbs';
 const SiteHeader = asSiteHeader(Header);
 const SiteFooter = asSiteFooter(Footer);
 
-const Container = flow(
+const Container = asToken(
   asPageContainer,
   asYMargin,
-)(Div) as ComponentType;
+)(Div);
 
-const SiteProviders = flow(
+const SiteProviders = asToken(
   withBreadcrumbStore,
   withBurgerMenuProvider,
-)(Fragment) as ComponentType;
+)(Fragment);
 
 type LayoutComponents = {
   Breadcrumbs: ComponentType<any>,
@@ -48,7 +47,7 @@ type LayoutComponents = {
 
 type LayoutProps = DesignableComponentsProps<LayoutComponents>;
 
-const BaseLayout: ComponentType<LayoutProps> = ({ children, components }) => {
+const BaseLayout: FC<LayoutProps> = ({ children, components }) => {
   const { Breadcrumbs } = components;
   return (
     <>
@@ -69,11 +68,11 @@ const BaseLayout: ComponentType<LayoutProps> = ({ children, components }) => {
 const isHomePage = () => useNode().node.pagePath === '/';
 
 const Layout$ = designable({
-  Breadcrumbs: flow(
+  Breadcrumbs: asToken(
     withNodeKey({ nodeKey: 'MainMenu', nodeCollection: 'site' }),
     addClasses('pt-2'),
     // hide breadcrumbs on home page
-    ifToggledOn(isHomePage)(replaceWith(React.Fragment)),
+    flowIf(isHomePage)(replaceWith(React.Fragment)),
   )(BreadcrumbsBase),
 })(BaseLayout);
 
