@@ -11,14 +11,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// @ts-nocheck
 
 import React, { ComponentType, useMemo } from 'react';
 import {
   withMenuOptions, withLocalContextMenu,
-  withContextActivator, withoutProps, ifEditable,
+  withContextActivator, ifEditable,
 } from '@bodiless/core';
 import { flow, identity } from 'lodash';
-import { Design } from '@bodiless/fclasses/lib/Design';
+import { Design, withoutProps } from '@bodiless/fclasses';
 
 import { TitleProps, FinalProps, ListDesignableComponents } from './types';
 

@@ -1,5 +1,5 @@
 /**
- * Copyright © 2021 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,15 +13,14 @@
  */
 
 import { flow } from 'lodash';
-import React, {
-  FC,
-  ComponentType,
-} from 'react';
+import React, { FC, ComponentType } from 'react';
 import {
   designable,
   Div,
   Span,
+  HOC,
   DesignableProps,
+  DesignableComponentsProps,
 } from '@bodiless/fclasses';
 import {
   asAccordionIcon,
@@ -35,13 +34,15 @@ import {
   AccordionTitleComponents,
 } from './types';
 
-const AccordionTitleComponentsStart:AccordionTitleComponents = {
+const AccordionTitleComponents:AccordionTitleComponents = {
   Wrapper: asAccordionTitleWrapper(Div),
   Icon: asAccordionIcon(Span),
   Label: asAccordionLabel(Div),
 };
 
-const AccordionTitleBase: FC<AccordionTitleProps> = ({
+type AccordionTitleBaseProps =
+  Omit<AccordionTitleProps, 'design'> & DesignableComponentsProps<AccordionTitleComponents>;
+const AccordionTitleBase: FC<AccordionTitleBaseProps> = ({
   components, children, ...accordionMeta
 }) => {
   const { Wrapper, Label, Icon } = components;
@@ -73,20 +74,22 @@ const AccordionTitleBase: FC<AccordionTitleProps> = ({
   );
 };
 
-const AccordionTitleClean = flow(
-  designable(AccordionTitleComponentsStart, 'AccordionTitle'),
+const AccordionTitleClean = designable(
+  AccordionTitleComponents,
+  'AccordionTitle',
 )(AccordionTitleBase);
 
-const asAccordionTitle = <P extends DesignableProps<AccordionTitleComponents>>(
-  Component: ComponentType<P> | string,
-) => (props: P) => {
-    const { design } = props;
+const asAccordionTitle: HOC = Component => {
+  const AsAccordionTitle: FC<any> = props => {
+    const { design } = props as DesignableProps<AccordionComponents>;
     return (
       <AccordionTitleClean design={design}>
         <Component {...props} />
       </AccordionTitleClean>
     );
   };
+  return AsAccordionTitle;
+};
 
 export default AccordionTitleClean;
 export {

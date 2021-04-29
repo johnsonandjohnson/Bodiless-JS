@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import {
   withTitle,
   withDesc,
@@ -21,6 +20,7 @@ import {
 import {
   replaceWith,
   withDesign,
+  asToken,
 } from '@bodiless/fclasses';
 import { withType } from './Categories';
 import {
@@ -33,21 +33,21 @@ import {
 const withImageFacet = withFacet('Image');
 
 const images = {
-  SquareImage: flow(
+  SquareImage: asToken(
     replaceWith(SquareImage),
     withType('Image')(),
     withImageFacet('Square')(),
     withTitle('Square Image'),
     withDesc('Adds a square image'),
   ),
-  LandscapeImage: flow(
+  LandscapeImage: asToken(
     replaceWith(LandscapeImage),
     withType('Image')(),
     withImageFacet('Landscape')(),
     withTitle('Landscape Image'),
     withDesc('Adds a landscape image'),
   ),
-  SquareLinkableImage: flow(
+  SquareLinkableImage: asToken(
     replaceWith(SquareLinkableImage),
     withType('Image')(),
     withImageFacet('Linkable')(),
@@ -55,7 +55,7 @@ const images = {
     withTitle('Square Linkable Image'),
     withDesc('Adds a square linkable image'),
   ),
-  LandscapeLinkableImage: flow(
+  LandscapeLinkableImage: asToken(
     replaceWith(LandscapeLinkableImage),
     withType('Image')(),
     withImageFacet('Linkable')(),

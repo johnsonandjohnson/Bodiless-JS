@@ -1,80 +1,27 @@
-import React, { ComponentType } from 'react';
+/**
+ * Copyright © 2021 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import React from 'react';
 import {
   isArray, mergeWith, union, flow as flowBase, identity,
 } from 'lodash';
+import type {
+  TokenDef, HOC, ComponentOrTag, ComponentWithMeta, TokenMeta,
+  Token, TokenFilterTest, AsToken as AsTokenBase,
+} from './types';
 
-/**
- * Metadata which can be attached to a token.
- *
- * When the token is applied, these metadata will also be attached to the
- * target component.  If multiple tokens are applied, their metadata will
- * be merged onto the component.
- */
-type TokenMeta = {
-  title?: string,
-  displayName?: string,
-  description?: string,
-  categories?: {
-    [cat:string]: string[],
-  }
-};
-
-/**
- * Type of component with metadata supplied by one or more tokens.
- */
-type ComponentWithMeta<P = any> = ComponentType<P> & TokenMeta;
-
-/**
- * Type of a component with meta or a JSX element.
- */
-type ComponentOrTag<P> = ComponentWithMeta<P>|keyof JSX.IntrinsicElements;
-
-/**
- * Type of a higher order component
- */
-type HOC<P extends object = any, Q extends object = P> = (
-  C:ComponentOrTag<P>,
-) => ComponentWithMeta<Q>;
-
-/**
- * Properties of tokens.
- */
-export type TokenProps<P> = {
-  /**
-   * The filter (if any) which should be applied when this token is composed.
-   */
-  filter?: TokenFilterTest<P>,
-  /**
-   * The tokens and/or filters which compose this token.
-   */
-  members?: Token<P>[],
-  /**
-   * The metadata attached to this token. This metadata will be merged recursively with
-   * any metadata provided by any other tokens which this token composes, and attached to any
-   * component to which this token is applied.
-   */
-  meta?: TokenMeta,
-};
-
-/**
- * Type of a "Token", which is an HOC with optional metadata and filtering.
- *
- * Tokens may be composed of other tokens using the `asToken` utility.
- */
-type Token<P = any> = HOC & TokenProps<P>;
-
-/**
- * Type of the filter function which should be passed to the Token#filter method.
- */
-type TokenFilterTest<P> = (hoc: Token<P>) => boolean;
-
-/**
- * Type of the parameters to asToken.  Overloaded to accept metadata
- * objects in addition to tokens.
- */
-type TokenDef<P> = Token<P>|TokenMeta|undefined;
-
-const isToken = (def: TokenDef<any>) => typeof def === 'function';
+const isToken = (def: TokenDef) => typeof def === 'function';
 
 // Custom merge behavior for token categories.
 function mergeMeta(objValue:any, srcValue:any) {
@@ -107,8 +54,8 @@ export const withMeta = (meta: TokenMeta): HOC => Component => {
   return Object.assign(WithMeta, meta);
 };
 
-type TokenWithParents<P> = Token<P> & {
-  parents?: Token<P>[],
+type TokenWithParents = Token & {
+  parents?: Token[],
 };
 
 /**
@@ -120,15 +67,15 @@ type TokenWithParents<P> = Token<P> & {
  * @param parents The current list of parents
  */
 const flattenTokens = <P extends object>(
-  tokens: Token<P>[] = [], parents: Token<P>[] = [],
-): TokenWithParents<P>[] => tokens.reduce(
+  tokens: Token[] = [], parents: Token[] = [],
+): TokenWithParents[] => tokens.reduce(
     (acc, token) => [
       ...acc,
       ...flattenTokens(token.members, [...parents, token]),
       // exclude any token with members, bc we will already be applying the members.
       ...token.members ? [] : [Object.assign(token, { parents })],
     ],
-    [] as TokenWithParents<P>[],
+    [] as TokenWithParents[],
   );
 
 /**
@@ -146,8 +93,8 @@ const flattenTokens = <P extends object>(
  * all its parents.
  */
 const createTokenAndParentFilter = <P extends object>(
-  filter: TokenFilterTest<P>,
-): TokenFilterTest<P> => (token: TokenWithParents<P>): boolean => (token.parents || []).reduce(
+  filter: TokenFilterTest,
+): TokenFilterTest => (token: TokenWithParents): boolean => (token.parents || []).reduce(
     (result, parent) => result && filter(parent),
     filter(token),
   );
@@ -157,7 +104,7 @@ const createTokenAndParentFilter = <P extends object>(
  * @param tokens The list of tokens to filter.
  * @return A flat list of filtered tokens
  */
-const filterMembers = <P extends object>(tokens: Token<P>[]): Token<P>[] => {
+const filterMembers = <P extends object>(tokens: Token[]): Token[] => {
   const filtered: HOC[] = [];
   let rest = flattenTokens(tokens).reverse();
   while (rest.length > 0) {
@@ -169,6 +116,13 @@ const filterMembers = <P extends object>(tokens: Token<P>[]): Token<P>[] => {
     filtered.push(next);
   }
   return filtered.reverse();
+};
+
+export type AsToken<B = {}> = AsTokenBase<B> & {
+  meta: {
+    term: (c: string) => (t: string) => TokenMeta;
+    cat: (c: string) => TokenMeta;
+  };
 };
 
 /**
@@ -188,13 +142,13 @@ const filterMembers = <P extends object>(tokens: Token<P>[]): Token<P>[] => {
  * @return
  * A composed token.
  */
-const asToken = <P extends object>(...args: TokenDef<P>[]): Token<P> => {
+const asToken: AsToken = (...args) => {
   // We allow "undefined" in args and simply ignore them.
   const args$ = args.filter(a => a !== undefined);
   const metaBits: TokenMeta[] = args$.filter(a => !isToken(a)) as TokenMeta[];
   const meta = mergeWith({}, ...metaBits, mergeMeta);
-  const members: Token<P>[] = [
-    ...args$.filter(a => isToken(a)) as Token<P>[],
+  const members: Token[] = [
+    ...args$.filter(a => isToken(a)) as Token[],
     withMeta(meta),
   ];
   const hocs = filterMembers(members);
@@ -213,7 +167,7 @@ const asToken = <P extends object>(...args: TokenDef<P>[]): Token<P> => {
  * @returns
  * A token filter.
  */
-const withTokenFilter = <P extends object>(test: TokenFilterTest<P>): Token<P> => (
+const withTokenFilter = <P extends object>(test: TokenFilterTest): Token => (
   Object.assign(identity, { filter: test })
 );
 
@@ -231,11 +185,6 @@ asToken.meta = {
       [c]: [],
     },
   }),
-};
-
-export type {
-  HOC, TokenFilterTest, Token, TokenDef,
-  TokenMeta, ComponentWithMeta, ComponentOrTag,
 };
 
 export { asToken, withTokenFilter };

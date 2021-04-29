@@ -110,7 +110,6 @@ export function DropZonePlugin({ fieldApi, ui = {} }: {
     // acceptedFiles is an empty array.
     if (acceptedFiles.length < 1) {
       setStatusText('File type not accepted or too many, try again!');
-      console.error('Unable to upload selected files.', acceptedFiles);
       return;
     }
     setIsUploading(true);

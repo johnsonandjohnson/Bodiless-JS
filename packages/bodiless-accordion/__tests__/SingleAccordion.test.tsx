@@ -12,6 +12,9 @@
  * limitations under the License.
  */
 
+// This is deprecastd so skip checking
+// @ts-nocheck
+
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';

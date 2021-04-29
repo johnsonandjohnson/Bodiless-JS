@@ -12,8 +12,9 @@
  * limitations under the License.
  */
 
-import { ifToggledOn } from '@bodiless/core';
-import { asToken, withDesign, addClasses } from '@bodiless/fclasses';
+import {
+  asToken, withDesign, addClasses, flowIf,
+} from '@bodiless/fclasses';
 import {
   asTopNav, useIsActiveTrail, withMenuDesign, withMenuTitleEditors,
 } from '@bodiless/navigation';
@@ -52,12 +53,12 @@ const $withTitleStyles = withDesign({
   ),
 });
 
-const withActiveTitleStyles = ifToggledOn(useIsActiveTrail)(
-  withActiveMenuBackground, asBold, asUnderline,
+const withActiveTitleStyles = flowIf(useIsActiveTrail)(
+  asUnderline, asBold, withActiveMenuBackground,
 );
 
-const withActiveSubTitleStyles = ifToggledOn(useIsActiveTrail)(
-  withActiveMenuBackground, asBold,
+const withActiveSubTitleStyles = flowIf(useIsActiveTrail)(
+  asBold, withActiveMenuBackground,
 );
 
 /**

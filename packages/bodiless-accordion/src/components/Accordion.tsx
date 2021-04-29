@@ -1,5 +1,5 @@
 /**
- * Copyright © 2021 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  */
 
 import { flow } from 'lodash';
-import React, { FC } from 'react';
+import React, { FC, HTMLProps } from 'react';
 import nextId from 'react-id-generator';
 import { designable, Div } from '@bodiless/fclasses';
 import AccordionTitleClean from './AccordionTitle';
@@ -27,7 +27,7 @@ const AccordionComponentsStart:AccordionComponents = {
   Body: AccordionBodyClean,
 };
 
-const AccordionBase: FC<AccordionProps & AccordionProviderProps> = ({
+const AccordionBase: FC<AccordionProps & AccordionProviderProps & HTMLProps<HTMLElement>> = ({
   components, collapsible, expanded, focus, ...rest
 }) => {
   const {

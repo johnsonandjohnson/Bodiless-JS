@@ -21,7 +21,7 @@ import {
   PageEditContext, PageContextProvider,
 } from '@bodiless/core';
 import { flowRight, flow, identity } from 'lodash';
-import { withDesign, withoutProps } from '@bodiless/fclasses';
+import { withDesign, withoutProps, HOC } from '@bodiless/fclasses';
 
 import {
   asBodilessChameleon, withChameleonComponentFormControls,
@@ -65,7 +65,7 @@ const withProps = (xprops: any) => (Component: ComponentType<any>|string) => (pr
   <Component {...props} {...xprops} />
 );
 
-const withTitle = (title: string) => (C: ComponentType<any>) => {
+const withTitle = (title: string): HOC => C => {
   const C1 = (props: any) => <C {...props} />;
   C1.title = title;
   return C1;
@@ -76,7 +76,7 @@ const design = {
   _default: withProps({ 'data-test-default': true }),
 };
 
-const TestChameleon = flowRight(
+const TestChameleon: ComponentType<any> = flowRight(
   withDesign(design),
   asBodilessChameleon('chameleon'),
   withoutProps('design'),

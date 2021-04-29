@@ -1,7 +1,21 @@
+/**
+ * Copyright © 2021 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import React, { FC } from 'react';
 
 import {
-  Token, withDesign, addProps, replaceWith, withoutProps,
+  Token, withDesign, addProps, replaceWith, withoutProps, Tag, asToken,
 } from '@bodiless/fclasses';
 import { withDefaultContent } from '@bodiless/core';
 import { flow } from 'lodash';
@@ -16,7 +30,7 @@ const withItemTitle = (title: string) => withDesign({
 }) as Token;
 
 describe('list styling', () => {
-  const TestList = flow(
+  const TestList = asToken(
     asBodilessList('testlist'),
     withItemTitle('TopList'),
     withSubLists(2)({
@@ -51,7 +65,7 @@ describe('list styling', () => {
         }),
       }),
     }),
-  )('ul');
+  )('ul' as Tag);
 
   const withSubListData = (levelOne?: 'A'|'B', levelTwo?: 'A'|'B') => withDefaultContent<any, any>({
     'testlist$default$cham-sublist': {
@@ -73,7 +87,6 @@ describe('list styling', () => {
     wrapper = renderTest(withSubListData()(Test));
     expect(wrapper.find('ul#top>li').prop('data-test')).toBe('foo');
     wrapper = renderTest(withSubListData('A')(Test));
-    console.log(wrapper.html());
     expect(wrapper.find('ul#top>li').prop('data-test')).toBe('foo');
     wrapper = renderTest(withSubListData('B')(Test));
     expect(wrapper.find('ul#top>li').prop('data-test')).toBe('foo');
@@ -114,8 +127,8 @@ describe('list styling', () => {
     );
     const Test = flow(
       withDesign({
-        Item: flow(
-          addProps({ 'data-item': true }),
+        Item: asToken(
+          addProps({ 'data-item': true } as any),
           withDesign({
             A: withDesign({
               OuterWrapper: flow(
@@ -131,6 +144,5 @@ describe('list styling', () => {
     )(TestList);
     wrapper = renderTest(Test);
     expect(wrapper.find('ul#top>li').prop('id')).toBe('title-sub-list');
-    console.log(wrapper.html());
   });
 });

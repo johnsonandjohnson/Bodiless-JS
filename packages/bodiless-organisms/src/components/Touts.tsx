@@ -25,8 +25,9 @@ import {
   H2,
   StylableProps,
   addProps,
+  DesignableProps,
 } from '@bodiless/fclasses';
-import { withNode, withResizeDetector } from '@bodiless/core';
+import { withNode, withResizeDetector, WithNodeProps } from '@bodiless/core';
 
 export type ToutComponents = {
   Wrapper: ComponentType<StylableProps>,
@@ -83,7 +84,7 @@ const ToutClean = flow(
   designable(toutComponentStart, 'Tout'),
   withResizeDetector,
   withNode,
-)(ToutBase);
+)(ToutBase) as ComponentType<WithNodeProps & DesignableProps<ToutComponents>>;
 
 /**
  * Adds data- identifiers to help select tout elements in automated tests.

@@ -15,7 +15,9 @@
 import React, { ComponentType } from 'react';
 import { mount } from 'enzyme';
 import { asReadOnly } from '@bodiless/core';
-import { withDesign, addProps, withoutProps } from '@bodiless/fclasses';
+import {
+  withDesign, addProps, withoutProps, HOC,
+} from '@bodiless/fclasses';
 import { flowRight } from 'lodash';
 import { BreadcrumbsClean, withBreadcrumbStartingTrail, withoutBreadcrumbFinalTrail } from '../src/Breadcrumbs';
 import { withMenuTitleEditors } from '../src';
@@ -140,7 +142,7 @@ describe('BreadcrumbsClean', () => {
         },
       },
     ];
-    const Breadcrumb = flowRight(
+    const Breadcrumb = (flowRight(
       withDesign({
         Link: flowRight(
           withAttrRename('nodeKey', 'href'),
@@ -152,7 +154,7 @@ describe('BreadcrumbsClean', () => {
         ),
       }),
       withoutBreadcrumbFinalTrail,
-    )(TestBreadcrumbs);
+    ) as HOC<any>)(TestBreadcrumbs);
     const wrapper = mount(<Breadcrumb items={items} />);
     expect(wrapper.html()).toMatchSnapshot();
   });

@@ -15,7 +15,7 @@
 import React, { FC } from 'react';
 import { flow } from 'lodash';
 import {
-  designable, Div, Button, withoutProps, H3,
+  designable, Div, Button, withoutProps, H3, DesignableComponentsProps,
 } from '@bodiless/fclasses';
 import FilterClean from './Filter';
 import { useFilterByGroupContext, withFilterByGroupContext } from './FilterByGroupContext';
@@ -32,7 +32,10 @@ const FilterByGroupComponentsStart:FilterByGroupComponents = {
   Filter: FilterClean,
 };
 
-const FilterByGroupBase: FC<FilterByGroupProps> = ({
+type FilterByGroupBaseProps =
+  Omit<FilterByGroupProps, 'design'> & DesignableComponentsProps<FilterByGroupComponents>;
+
+const FilterByGroupBase: FC<FilterByGroupBaseProps> = ({
   components,
   children,
   resetButtonText = 'Reset',

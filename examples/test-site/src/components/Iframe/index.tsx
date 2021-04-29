@@ -23,8 +23,11 @@ import {
   withDesign,
   addClasses,
   addProps,
+  asToken,
 } from '@bodiless/fclasses';
 
+import { ComponentType } from 'react';
+import { WithNodeProps } from '@bodiless/core';
 import {
   asResponsive21By9Embed,
   asResponsive16By9Embed,
@@ -33,37 +36,40 @@ import {
 } from '../Elements.token';
 
 const withPlaceholder = addProps({ src: 'https://johnsonandjohnson.github.io/Bodiless-JS/' });
-const BodilessIframe = withPlaceholder(asBodilessIframe()(Iframe));
+const BodilessIframe: ComponentType<WithNodeProps> = asToken(
+  asBodilessIframe(),
+  withPlaceholder,
+)(Iframe);
 
 const withResponsiveWidth = addClasses('w-full');
 
-const asResponsiveIframe = flowRight(
+const asResponsiveIframe = asToken(
+  asBaseResponsiveIframe,
   withDesign({
     Item: flowRight(
       withPlaceholder,
     ),
   }),
-  asBaseResponsiveIframe,
 );
 
-const asReponsive21By9Iframe = flowRight(
+const asReponsive21By9Iframe = asToken(
+  asResponsiveIframe,
   asResponsive21By9Embed,
-  asResponsiveIframe,
 );
 
-const asReponsive16By9Iframe = flowRight(
+const asReponsive16By9Iframe = asToken(
+  asResponsiveIframe,
   asResponsive16By9Embed,
-  asResponsiveIframe,
 );
 
-const asReponsive4By3Iframe = flowRight(
+const asReponsive4By3Iframe = asToken(
+  asResponsiveIframe,
   asResponsive4By3Embed,
-  asResponsiveIframe,
 );
 
-const asReponsive1By1Iframe = flowRight(
-  asResponsive1By1Embed,
+const asReponsive1By1Iframe = asToken(
   asResponsiveIframe,
+  asResponsive1By1Embed,
 );
 
 const IframeWithResponsiveWidth = withResponsiveWidth(BodilessIframe);

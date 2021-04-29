@@ -12,12 +12,12 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import {
   addClasses,
   removeClasses,
   withDesign,
   remove,
+  asToken,
 } from '@bodiless/fclasses';
 
 /**
@@ -60,7 +60,7 @@ const asCardNoBody = withDesign({
 /**
  * asCardNoBodyNoTitle removes both body and title from the card and adjusts image link
  */
-const asCardNoBodyNoTitle = flow(
+const asCardNoBodyNoTitle = asToken(
   asCardNoBody,
   asCardNoTitle,
   withDesign({ ImageLink: addClasses('flex-grow') }),
@@ -85,7 +85,7 @@ const asCardOverlayTitle = withDesign({
  * asCardOverlayCta puts the link over the card image bottom
  */
 const asCardOverlayCta = withDesign({
-  Link: flow(
+  Link: asToken(
     addClasses('absolute bottom-0 right-0 m-8 px-8'),
     removeClasses('w-full'),
   ),

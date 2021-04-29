@@ -13,18 +13,18 @@
  */
 
 import { ComponentType, HTMLProps } from 'react';
-import { TagType } from '@bodiless/core';
-import { StylableProps, DesignableComponentsProps } from '@bodiless/fclasses';
+import { TagType, WithNodeProps } from '@bodiless/core';
+import { StylableProps, DesignableComponentsProps, DesignableProps } from '@bodiless/fclasses';
 import { ListProps } from '@bodiless/components';
 
 export type FilterByGroupComponents = {
-  Wrapper: ComponentType<StylableProps>,
-  FilterWrapper: ComponentType<StylableProps>,
-  FilterHeader: ComponentType<StylableProps>,
-  FilterTitle: ComponentType<StylableProps & HTMLProps<HTMLHeadingElement>>,
-  ContentWrapper: ComponentType<StylableProps>,
-  ResetButton: ComponentType<StylableProps & HTMLProps<HTMLButtonElement>>,
-  Filter: ComponentType<StylableProps>,
+  Wrapper: ComponentType<any>,
+  FilterWrapper: ComponentType<any>,
+  FilterHeader: ComponentType<any>,
+  FilterTitle: ComponentType<any>,
+  ContentWrapper: ComponentType<any>,
+  ResetButton: ComponentType<any>,
+  Filter: ComponentType<any>,
 };
 
 export type FilterComponents = {
@@ -39,12 +39,12 @@ export type TagTitleComponents = {
   FilterInputWrapper: ComponentType<StylableProps>,
 };
 
-export type FilterProps = DesignableComponentsProps<FilterComponents>;
+export type FilterProps = DesignableProps<FilterComponents> & WithNodeProps;
 
 export type FilterByGroupProps = {
   resetButtonText?: string,
   filterTitle?: string,
-} & DesignableComponentsProps<FilterByGroupComponents>;
+} & DesignableProps<FilterByGroupComponents>;
 
 export type TagTitleProps = {
   emptyTitleText?: string,

@@ -15,12 +15,12 @@
 import React, { ComponentType } from 'react';
 import { flowRight } from 'lodash';
 import { mount } from 'enzyme';
+import type { HOC, Token } from '@bodiless/fclasses';
 import withNode, { withNodeKey } from '../src/withNode';
 import { useNode } from '../src/NodeProvider';
 import withSidecarNodes, { endSidecarNodes } from '../src/withSidecarNodes';
 import { ifToggledOn } from '../src/withFlowToggle';
 
-type HOC = (C: ComponentType<any>) => ComponentType<any>;
 type Bodiless = (key?: string) => HOC;
 
 const withPropEnhancement = (id: string) => (Component: ComponentType<any>) => (
@@ -59,13 +59,15 @@ describe('Sidecar Node Use Cases', () => {
   describe('Adding a toggle', () => {
     const mockNodeData = jest.fn();
     const useDataToggle = () => mockNodeData(useNode<any>().node.path.join('$'));
-    const withToggleTo = (ToComponent: ComponentType<any>) => (nodeKey?: string) => flowRight(
+    const withToggleTo = (ToComponent: ComponentType<any>) => (
+      nodeKey?: string,
+    ): Token => flowRight(
       withNodeKey(nodeKey),
       withNode,
       ifToggledOn(useDataToggle)(
         () => ToComponent,
       ),
-    );
+    ) as Token;
     const Span = spanWithId('test');
     it('has the correct baseline', () => {
       const Test = withFoo('foo')(Span);
@@ -77,7 +79,7 @@ describe('Sidecar Node Use Cases', () => {
       const Test = flowRight(
         withToggleTo(Bar)('toggle'),
         withFoo('foo'),
-      )(Span);
+      )(Span) as ComponentType<any>;
       it('modifies the child nodekey when toggled off', () => {
         mockNodeData.mockReset();
         mockNodeData.mockReturnValueOnce(false);

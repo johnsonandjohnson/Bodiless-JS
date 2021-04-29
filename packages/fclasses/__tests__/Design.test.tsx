@@ -28,7 +28,7 @@ import {
   startWith,
   replaceWith,
 } from '../src/Design';
-import { withShowDesignKeys, asToken } from '../src';
+import { withShowDesignKeys, asToken, HOC } from '../src';
 
 type SpanType = ComponentType<any>;
 type MyDesignableComponents = {
@@ -39,7 +39,7 @@ type MyDesignableComponents = {
 type MyDesign = Design<MyDesignableComponents>;
 
 const Span: SpanType = props => <span {...props} />;
-const hoc = (newClassName: string) => (C: SpanType):SpanType => (props) => {
+const hoc = (newClassName: string):HOC => C => (props: any) => {
   const { className = '', ...rest } = props;
   const combinedClassName = `${className} ${newClassName}`.trim();
   return <C className={combinedClassName} {...rest} />;
@@ -254,7 +254,7 @@ describe('withShowDesignKeys', () => {
         Component: flow(
           startWith('span' as any),
           startWith('section' as any),
-        ),
+        ) as HOC,
       })(Inner);
       const wrapper = mount(<Test />);
       expect(wrapper.find('div#inner')).toHaveLength(0);

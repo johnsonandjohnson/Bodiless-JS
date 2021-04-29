@@ -13,7 +13,7 @@
  */
 
 import {
-  WithNodeKeyProps, withNodeKey, useNode, NodeProvider, WithNodeProps, withOnlyProps,
+  WithNodeKeyProps, withNodeKey, useNode, NodeProvider, withOnlyProps,
 } from '@bodiless/core';
 import React, {
   Fragment, ComponentType, PropsWithChildren, FC,
@@ -21,7 +21,7 @@ import React, {
 import { flow, identity } from 'lodash';
 import {
   replaceWith, withDesign, asComponent, DesignableComponentsProps, designable, HOC,
-  withoutProps, stylable, Design,
+  withoutProps, stylable, Design, asToken, Enhancer,
 } from '@bodiless/fclasses';
 
 import withListButtons from './withListButtons';
@@ -30,21 +30,19 @@ import {
   ListData, UseListOverrides, ListProps, ListComponents,
 } from './types';
 
-type ComponentOrTag<P> = ComponentType<P>|keyof JSX.IntrinsicElements;
-
 export type TitledItemProps = PropsWithChildren<{
   title: JSX.Element,
 }>;
 
-const asTitledItem = <P extends TitledItemProps>(Item: ComponentType<P>) => {
-  const TitledItem: ComponentType<P> = ({ children, ...rest }) => {
+const asTitledItem: Enhancer<TitledItemProps> = Item => {
+  const TitledItem: FC<any> = ({ children, ...rest }) => {
     // prepare and pass the submenu title as a prop according to rc-menu <SubMenu /> specification
     // wrap the title with current node,
     // otherwise the title will read data from incorrect node when it is rendered by <SubMenu />
     const { node } = useNode();
     const children$ = <NodeProvider node={node}>{children}</NodeProvider>;
     return (
-      <Item title={children$} {...rest as any} />
+      <Item title={children$} {...rest} />
     );
   };
   return TitledItem;
@@ -88,26 +86,26 @@ const SubListWrapper = designable(sublistWrapperComponents, 'SubList')(SubListWr
  *
  * @param nodeKeys
  */
-const asBodilessList = <P extends object>(
+const asBodilessList = (
   nodeKeys?: WithNodeKeyProps,
   // @TODO - Handle default data
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   defaultData?: ListData,
-  useOverrides?: UseListOverrides<P>,
-) => (Component: ComponentOrTag<P>): ComponentType<P & WithNodeProps> => flow(
-    replaceWith(BodilessList),
-    withListButtons(useOverrides),
-    withDesign({
-      Wrapper: replaceWith(asComponent(Component)),
-      Item: withoutProps(['addItem', 'deleteItem', 'canDelete', 'unwrap']),
-    }),
-    withNodeKey(nodeKeys),
-  )(Component);
+  useOverrides?: UseListOverrides,
+): Enhancer<ListProps> => Component => flow(
+  replaceWith(BodilessList),
+  withListButtons(useOverrides),
+  withDesign({
+    Wrapper: replaceWith(asComponent(Component)),
+    Item: withoutProps(['addItem', 'deleteItem', 'canDelete', 'unwrap']),
+  }),
+  withNodeKey(nodeKeys),
+)(Component);
 
 // This ensures that the original item is used as the sublist wrapper item.
-const asSubListWrapper = (Component: any) => withDesign<SubListWrapperComponents>({
+const asSubListWrapper:HOC = Component => withDesign<SubListWrapperComponents>({
   WrapperItem: replaceWith(Component),
-})(SubListWrapper);
+})(SubListWrapper as ComponentType<any>);
 
 type SubListComponents = ListComponents & {
   OuterWrapper: ComponentType<any>,
@@ -121,7 +119,7 @@ const passWrapperDesignToSubList = (SubList: ComponentType<SubListProps>) => {
 
     const newDesign = {
       ...restDesign,
-      Wrapper: flow(
+      Wrapper: asToken(
         OuterWrapper || identity,
         withDesign({
           List: Wrapper || identity,
@@ -155,11 +153,11 @@ const asSubList = (useOverrides?: UseListOverrides) => flow(
 const withSimpleSubListDesign = (depth: number) => (withDesign$: HOC): HOC => (
   depth === 0 ? identity
     : withDesign({
-      Item: flow(
+      Item: asToken(
         withDesign$,
         withSimpleSubListDesign(depth - 1)(withDesign$),
       ),
-    }) as HOC
+    })
 );
 
 // @TODO: Should this be a part of asBodilessList?

@@ -17,3 +17,4 @@ export * from './withFlowContainerDefaultHtml';
 export * from './listDeserializer';
 export * from './defaultDeserializers';
 export * from './createFlowContainerItem';
+export * from './deserializer';

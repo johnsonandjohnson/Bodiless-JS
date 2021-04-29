@@ -15,6 +15,7 @@
 import React, { ComponentType } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { useNode, NodeProvider } from '@bodiless/core';
+import { HOC } from '@bodiless/fclasses';
 import type { BreadcrumbStoreType } from './BreadcrumbStore';
 
 const BreadcrumbsStoreContext = React.createContext<BreadcrumbStoreType | undefined>(undefined);
@@ -40,8 +41,8 @@ const useBreadcrumbStore = () => React.useContext(BreadcrumbsStoreContext);
  *
  * @param Component
  */
-const asHiddenBreadcrumbSource = <P extends object>(Component: ComponentType<P>) => {
-  const AsHiddenBreadcrumbSource = (props:P) => {
+const asHiddenBreadcrumbSource: HOC = Component => {
+  const AsHiddenBreadcrumbSource = (props: any) => {
     const store = useBreadcrumbStore();
     const { node } = useNode();
     ReactDOMServer.renderToString(

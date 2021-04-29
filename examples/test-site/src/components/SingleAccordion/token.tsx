@@ -18,6 +18,7 @@ import {
   addClasses,
   addClassesIf,
   removeClasses,
+  asToken,
 } from '@bodiless/fclasses';
 import {
   isAccordionExpanded,
@@ -32,11 +33,11 @@ import {
   asTextColorPrimary,
 } from '../Elements.token';
 
-const asAccordionDefaultStyle = flow(
+const asSingleAccordionDefaultStyle = asToken(
   withDesign({
-    Wrapper: flow(asBlockItem, asTextColorPrimary),
+    Wrapper: asToken(asBlockItem, asTextColorPrimary),
     Title: withDesign({
-      Wrapper: flow(
+      Wrapper: asToken(
         addClassesIf(isAccordionExpanded)('bg-gray-400'),
         addClassesIf(isAccordionContracted)('bg-gray-200'),
         addClasses('p-3'),

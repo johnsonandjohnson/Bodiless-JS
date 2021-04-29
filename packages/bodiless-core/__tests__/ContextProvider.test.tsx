@@ -412,6 +412,7 @@ describe('useRegisterMenuOptions', () => {
   });
 });
 
+// eslint-disable-next-line jest/no-disabled-tests
 describe.skip('React effect order', () => {
   it('runs layout effects and cleanup before normal effects', () => {
     const log: string[] = [];

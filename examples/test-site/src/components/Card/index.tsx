@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import {
   withContextActivator,
   withDefaultContent,
@@ -24,7 +23,9 @@ import {
   CardClean,
   asTestableCard,
 } from '@bodiless/card';
-import { withDesign, startWith, Token } from '@bodiless/fclasses';
+import {
+  withDesign, startWith, asToken,
+} from '@bodiless/fclasses';
 import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import {
   asEditableLink,
@@ -35,17 +36,17 @@ import {
   withEditorSimple,
 } from '../Editors';
 
-export const withCardEditors = flow(
+export const withCardEditors = asToken(
   withDesign({
     Image: asEditableImage('image'),
-    ImageLink: flow(
+    ImageLink: asToken(
       withSidecarNodes(
         asEditableLink('link'),
       ),
       startWith(GatsbyLink),
     ),
     Title: withEditorSimple('title', 'Card Title Text'),
-    Link: flow(
+    Link: asToken(
       withEditorSimple('ctatext', 'CTA'),
       withSidecarNodes(
         asEditableLink('link', undefined, () => ({ groupLabel: 'CTA' })),
@@ -56,7 +57,7 @@ export const withCardEditors = flow(
   }),
 );
 
-const withEmptyContext = (name: string) => flow(
+const withEmptyContext = (name: string) => asToken(
   withContextActivator('onClick'),
   withMenuOptions({
     name,
@@ -68,23 +69,23 @@ const withEmptyContext = (name: string) => flow(
 
 export const withCardResetButtons = withDesign({
   ImageLink: withResetButton({ nodeKey: ['image', 'link'] }),
-  Title: flow(
+  Title: asToken(
     withEmptyContext('Title'),
     withResetButton({ nodeKey: 'title' }),
   ),
-  Body: flow(
+  Body: asToken(
     withEmptyContext('Body'),
     withResetButton({ nodeKey: 'body' }),
   ),
   Link: withResetButton({ nodeKey: ['link', 'ctatext'] }),
 });
 
-export const asEditableCard = flow(
+export const asEditableCard = asToken(
   withCardEditors,
   asTestableCard,
-) as Token;
+);
 
-export const asContentfulCard = (content: object) => flow(
+export const asContentfulCard = (content: object) => asToken(
   withCardEditors,
   withCardResetButtons,
   withDefaultContent(content),

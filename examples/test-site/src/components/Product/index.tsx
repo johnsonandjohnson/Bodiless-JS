@@ -11,13 +11,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { flow } from 'lodash';
 import {
   H1,
   Div,
   Img,
   addClasses,
   addProps,
+  asToken,
 } from '@bodiless/fclasses';
 import Card from '../Card';
 import { withEditorSimple } from '../Editors';
@@ -36,7 +36,7 @@ import {
 } from '../Card/token';
 
 const asTestableProductTitle = addProps({ 'data-product-element': 'title' });
-export const ProductTitle = flow(
+export const ProductTitle = asToken(
   asHeader1,
   withEditorSimple('product_title', 'Product Title'),
   asTestableProductTitle,
@@ -44,14 +44,14 @@ export const ProductTitle = flow(
 
 const asProductImage = addClasses('w-full');
 const asTestableProductImage = addProps({ 'data-product-element': 'image' });
-export const ProductImage = flow(
+export const ProductImage = asToken(
   asProductImage,
   asImage,
   asEditableImage('product_image'),
   asTestableProductImage,
 )(Img);
 
-export const ProductCard = flow(
+export const ProductCard = asToken(
   asCardWithPaddings,
   asCardDefaultStyle,
   asCardVertical,
@@ -59,7 +59,7 @@ export const ProductCard = flow(
 
 export const SectionContent = withPadding5(Div);
 export const SectionMargin = asYMargin(Div);
-export const SectionNegXMargin = flow(
+export const SectionNegXMargin = asToken(
   asYMargin,
   asNegXMargin,
 )(Div);

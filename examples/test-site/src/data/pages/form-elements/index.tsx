@@ -124,7 +124,7 @@ const ExampleFormButtonProvider: FC = ({ children }) => {
   );
 };
 
-export default props => (
+export default (props: any) => (
   <ExampleFormButtonProvider>
     <Page {...props}>
       <Layout>

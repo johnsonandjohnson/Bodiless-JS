@@ -1,4 +1,19 @@
-import { Token, TokenMeta, asToken } from './Tokens';
+/**
+ * Copyright © 2021 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { asToken } from './Tokens';
+import type { Token, TokenMeta } from './types';
 import { Design, withDesign, DesignableComponents } from './Design';
 
 type DesignPath = string[];
@@ -8,17 +23,17 @@ const withDesignAtSingle = <C extends DesignableComponents = DesignableComponent
   designOrToken: Design<C>|Token,
 ): Token => {
   const token: Token = typeof designOrToken === 'function'
-    ? designOrToken : withDesign(designOrToken as Design<C>) as Token;
+    ? designOrToken : withDesign(designOrToken as Design<C>);
   const [next, ...rest] = path;
   if (rest.length > 0) {
     return withDesign({
       [next]: withDesignAtSingle(rest, designOrToken),
-    }) as Token;
+    });
   }
   if (next) {
     return withDesign({
       [next]: token,
-    }) as Token;
+    });
   }
   return token;
 };
@@ -76,7 +91,8 @@ const withDesignAt = <C extends DesignableComponents = DesignableComponents>(
 ) => (
     designOrToken: Design<C>|Token,
     ...meta: TokenMeta[]
-  ): Token => asToken(
+  ) => asToken(
+    {}, // necessary bc of typescript bug, see https://github.com/microsoft/TypeScript/issues/28010
     ...meta,
     ...(paths || [[]]).map(p => withDesignAtSingle(p, designOrToken)),
   );

@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,13 +12,4 @@
  * limitations under the License.
  */
 
-import {
-  BCarouselClean,
-  BAutoCarousel,
-  asEditableCarousel,
-} from '@bodiless/organisms';
-
-// Pass thru for now as using default Carousel's from Bodiless Organisms.
-// A site could modify there carousel here to have different value of slides
-export const Carousel = asEditableCarousel(BCarouselClean);
-export const AutoCarousel = BAutoCarousel;
+export * from './components';

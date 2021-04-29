@@ -16,18 +16,19 @@ import React, { ComponentType } from 'react';
 import {
   useMenuOptionUI,
   asBodilessComponent,
-  withoutProps,
   ifEditable,
   withExtendHandler,
   ifToggledOn,
   EditButtonOptions,
 } from '@bodiless/core';
 import type { BodilessOptions } from '@bodiless/core';
-import { flow, flowRight, identity } from 'lodash';
+import { flowRight, identity } from 'lodash';
 import {
   Fragment,
   addProps,
   replaceWith,
+  withoutProps,
+  asToken,
 } from '@bodiless/fclasses';
 import DefaultNormalHref from './NormalHref';
 import withGoToLinkButton from './withGoToLinkButton';
@@ -139,7 +140,7 @@ const asBodilessLink: AsBodilessLink = (
     nodeKeys, defaultData, useLinkOverrides(useOverrides),
   ),
   ifEditable(
-    flow(
+    asToken(
       // Prevent following the link in edit mode
       withExtendHandler('onClick', () => (e: MouseEvent) => e.preventDefault()),
       addProps({ draggable: false }),

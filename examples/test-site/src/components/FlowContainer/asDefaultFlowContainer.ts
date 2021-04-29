@@ -12,15 +12,15 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import {
   withMandatoryCategories,
 } from '@bodiless/layouts';
+import { asToken } from '@bodiless/fclasses';
 import withDefaultVariations from './withDefaultVariations';
 
 import { asFlowContainerWithMargins } from './token';
 
-const asDefaultFlowContainer = flow(
+const asDefaultFlowContainer = asToken(
   withDefaultVariations,
   asFlowContainerWithMargins,
   withMandatoryCategories(['Orientation', 'Type']),

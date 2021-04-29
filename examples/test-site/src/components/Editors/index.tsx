@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import { DefaultNormalHref } from '@bodiless/components';
 import {
   asBlock,
@@ -25,10 +24,11 @@ import { RichText } from '@bodiless/richtext-ui';
 import {
   withDesign,
   Blockquote,
-  Strike,
   replaceWith,
   startWith,
   Div,
+  Design,
+  asToken,
 } from '@bodiless/fclasses';
 import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import {
@@ -63,7 +63,7 @@ const basicDesign = {
   Bold: asBold,
   Italic: asItalic,
   Underline: asUnderline,
-  Link: flow(asEditableLink(), asLink, withLinkDeserializer, startWith(GatsbyLink)),
+  Link: asToken(asEditableLink(), asLink, withLinkDeserializer, startWith(GatsbyLink)),
   ...simpleDesign,
   AlignLeft: asAlignLeft,
   AlignRight: asAlignRight,
@@ -71,17 +71,17 @@ const basicDesign = {
   AlignCenter: asAlignCenter,
 };
 
-export const withQuoteBlockMeta = flow(
+export const withQuoteBlockMeta = asToken(
   asBlock,
   withButton('format_quote'),
 );
 
-const fullFeaturedDesign = {
+const fullFeaturedDesign: Design = {
   Bold: asBold,
   Italic: asItalic,
   Underline: asUnderline,
-  StrikeThrough: flow(replaceWith(Strike), asStrikeThrough, withStrikeThroughMeta),
-  Link: flow(asEditableLink(), asLink, withLinkDeserializer, startWith(GatsbyLink)),
+  StrikeThrough: asToken(asStrikeThrough, withStrikeThroughMeta),
+  Link: asToken(asEditableLink(), asLink, withLinkDeserializer, startWith(GatsbyLink)),
   SuperScript: asSuperScript,
   AlignLeft: asAlignLeft,
   AlignRight: asAlignRight,
@@ -90,9 +90,9 @@ const fullFeaturedDesign = {
   H1: asHeader1,
   H2: asHeader2,
   H3: asHeader3,
-  BlockQuote: flow(replaceWith(Blockquote), asBlockQuote, withQuoteBlockMeta),
-  CenterItalicHeader: flow(replaceWith(Div), asBlock, asHeader1, asAlignCenter, asItalic),
-  UnderlineRightHeader: flow(replaceWith(Div), asBlock, asHeader1, asAlignRight, asUnderline),
+  BlockQuote: asToken(replaceWith(Blockquote), asBlockQuote, withQuoteBlockMeta),
+  CenterItalicHeader: asToken(replaceWith(Div), asBlock, asHeader1, asAlignCenter, asItalic),
+  UnderlineRightHeader: asToken(replaceWith(Div), asBlock, asHeader1, asAlignRight, asUnderline),
 };
 
 const EditorSimple = withDesign(simpleDesign)(RichText);

@@ -24,7 +24,6 @@ import {
   Img,
   H2,
   StylableProps,
-  HOC,
 } from '@bodiless/fclasses';
 import {
   asBodilessLink,
@@ -101,11 +100,11 @@ const ProductClean = flow(
 )(ProductBase);
 
 const asEditableProduct = withDesign<ProductComponents>({
-  Image: asBodilessImage('image') as HOC,
-  ImageLink: asBodilessLink('cta') as HOC,
-  TitleLink: asBodilessLink('cta') as HOC,
+  Image: asBodilessImage('image'),
+  ImageLink: asBodilessLink('cta'),
+  TitleLink: asBodilessLink('cta'),
   Title: asEditable('title', 'Product Title Text'),
-  BvReviewLink: asBodilessLink('cta') as HOC,
+  BvReviewLink: asBodilessLink('cta'),
   BvReview: () => BVInlineRatings,
   Body: asEditable('body', 'Product Body Text'),
 });

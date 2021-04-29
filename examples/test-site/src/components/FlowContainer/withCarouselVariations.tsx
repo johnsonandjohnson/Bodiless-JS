@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2019 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,16 +11,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import {
-  addClasses,
+  withTitle,
+  withDesc,
+} from '@bodiless/layouts';
+import {
+  varyDesign,
+  replaceWith,
   withDesign,
+  asToken,
 } from '@bodiless/fclasses';
 
-// Currently doesn't add any classes but used as example to where to put them.
-const asCarouselDefaultStyle = withDesign({
-  Wrapper: addClasses(''),
-  Slider: addClasses(''),
-});
+import { ChameleonCarousel } from '../Carousel';
+import { withType } from './Categories';
 
-export default asCarouselDefaultStyle;
+const carouselVariation = {
+  Carousel: asToken(
+    replaceWith(ChameleonCarousel),
+    withType('Carousel')(),
+    withTitle('Carousel'),
+    withDesc('Adds a carousel that lets you choose from 4 components: Linkable, Gastby (Performance) Image, Horizontal Card, Video.\n'),
+  ),
+};
+
+export default withDesign(varyDesign(
+  carouselVariation,
+)());

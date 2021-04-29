@@ -12,11 +12,11 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import {
   withDesign,
   addClasses,
   addProps,
+  asToken,
 } from '@bodiless/fclasses';
 import { asTextColorPrimary } from '../Elements.token';
 
@@ -27,7 +27,7 @@ const asFilterByGroupResponsive = withDesign({
 });
 
 const withTagListStyles = withDesign({
-  Title: flow(
+  Title: asToken(
     addProps({ emptyTitleText: 'Group' }),
     withDesign({
       FilterInputWrapper: addClasses('flex pb-2 items-center'),
@@ -51,7 +51,7 @@ const asFilterByGroupDefaultStyle = withDesign({
   FilterHeader: addClasses('flex flex-col w-full bg-gray-500 p-2'),
   FilterTitle: addClasses('my-2 lg:my-0 text-xl font-bold'),
   ContentWrapper: addClasses('p-2 w-full'),
-  ResetButton: flow(
+  ResetButton: asToken(
     addClasses('my-2 underline self-start'),
     asTextColorPrimary,
   ),

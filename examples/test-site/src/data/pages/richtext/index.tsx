@@ -16,11 +16,12 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import flow from 'lodash/flow';
 import {
   NodeViewer,
 } from '@bodiless/components';
-import { withDesign, addProps, Div } from '@bodiless/fclasses';
+import {
+  withDesign, addProps, Div, asToken,
+} from '@bodiless/fclasses';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 
 import Layout from '../../../components/Layout';
@@ -32,11 +33,11 @@ import {
   withEditorFullFeatured,
 } from '../../../components/Editors';
 
-const AlphabeticFullFeaturedEditor = flow(
+const AlphabeticFullFeaturedEditor = asToken(
   withEditorFullFeatured('alphabeticRTE', 'Type something here...'),
   withDesign({
     Editor: addProps({
-      onKeyDown: event => {
+      onKeyDown: (event: any) => {
         if (
           // alphabet characters
           !(event.which >= 65 && event.which <= 120)

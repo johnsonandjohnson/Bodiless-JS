@@ -13,7 +13,6 @@
  */
 
 import React, { FC, ComponentType, HTMLProps } from 'react';
-import { flow } from 'lodash';
 import { withSidecarNodes } from '@bodiless/core';
 import {
   designable,
@@ -23,6 +22,7 @@ import {
   replaceWith,
   withDesign,
   addProps,
+  asToken,
 } from '@bodiless/fclasses';
 import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import { asEditableImagePlain as asEditableImage } from '../Image';
@@ -60,11 +60,11 @@ const LogoClean: FC<Props> = ({ components }) => {
 // Override asEditableImage nodekey to store in site nodeCollection.
 const LogoImg = asEditableImage({ nodeKey: 'image', nodeCollection: 'site' })(Img);
 
-const asLogo = flow(
+const asLogo = asToken(
   designable(logoComponents, 'Logo'),
   withDesign({
     SiteLogo: replaceWith(LogoImg),
-    SiteLink: flow(
+    SiteLink: asToken(
       withSidecarNodes(
         asEditableLink({ nodeKey: 'logolink', nodeCollection: 'site' }),
       ),

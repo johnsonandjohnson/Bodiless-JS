@@ -1,5 +1,5 @@
 /**
- * Copyright © 2021 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,16 +12,17 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React from 'react';
+import { HOC } from '@bodiless/fclasses';
 import { AccordionProvider } from './AccordionContext';
-import { AccordionProviderProps } from './types';
 
-const asAccordionWrapper = <P extends Object>(
-  Component: ComponentType<P> | string,
-) => ({ expanded, focus, ...rest }: P & AccordionProviderProps) => (
-  <AccordionProvider expanded={expanded} focus={focus}>
-    <Component {...rest as P} />
-  </AccordionProvider>
+const asAccordionWrapper:HOC = Component => {
+  const AsAccordionWrapper = ({ expanded, focus, ...rest }: any) => (
+    <AccordionProvider expanded={expanded} focus={focus}>
+      <Component {...rest} />
+    </AccordionProvider>
   );
+  return AsAccordionWrapper;
+};
 
 export default asAccordionWrapper;

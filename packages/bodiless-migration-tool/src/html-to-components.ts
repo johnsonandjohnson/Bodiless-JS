@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Copyright © 2019 Johnson & Johnson
  *

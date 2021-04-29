@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import {
   withTitle,
   withDesc,
@@ -22,6 +21,7 @@ import {
   varyDesign,
   replaceWith,
   withDesign,
+  asToken,
 } from '@bodiless/fclasses';
 import { asPreview } from '@bodiless/richtext';
 
@@ -33,21 +33,21 @@ import {
 import { withType } from './Categories';
 
 const richTextVariation = {
-  EditorSimple: flow(
+  EditorSimple: asToken(
     replaceWith(EditorSimple),
     ifComponentSelector(asPreview),
     withType('Rich Text')(),
     withTitle('Simple Rich Text'),
     withDesc('Adds a block of text for a Title.\n'),
   ),
-  EditorBasic: flow(
+  EditorBasic: asToken(
     replaceWith(EditorBasic),
     ifComponentSelector(asPreview),
     withType('Rich Text')(),
     withTitle('Basic Rich Text'),
     withDesc('Adds a block of text with basic formatting.\n'),
   ),
-  EditorFullFeatured: flow(
+  EditorFullFeatured: asToken(
     replaceWith(EditorFullFeatured),
     ifComponentSelector(asPreview),
     withType('Rich Text')(),

@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import {
   withTitle,
   withDesc,
@@ -20,13 +19,14 @@ import {
 import {
   replaceWith,
   withDesign,
+  asToken,
 } from '@bodiless/fclasses';
 import { withType } from './Categories';
 import { WantToLearnMore, GivingBackToCommunity } from '../Contentful/Card';
 import { withOrientationFacet, withStructureFacet } from './withCardVariations';
 
 const contentfulCards = {
-  GivingBackToCommunity: flow(
+  GivingBackToCommunity: asToken(
     replaceWith(GivingBackToCommunity),
     withType('Contentful')(),
     withType('Card')(),
@@ -36,7 +36,7 @@ const contentfulCards = {
     withTitle('Giving Back To Community'),
     withDesc('Custom content for community campaign.'),
   ),
-  WantToLearnMore: flow(
+  WantToLearnMore: asToken(
     replaceWith(WantToLearnMore),
     withType('Contentful')(),
     withType('Card')(),

@@ -20,16 +20,18 @@ import {
   H1 as BaseH1,
   H2 as BaseH2,
   addClasses,
+  asToken,
 } from '@bodiless/fclasses';
 import { getSnapFrom, withTailwindClasses } from '@bodiless/layouts';
-import { flow } from 'lodash';
 import Helmet from 'react-helmet';
+// @ts-ignore Could not find a declaration file...
 import resolveConfig from 'tailwindcss/resolveConfig';
 import Layout from '../../../components/Layout';
 import { FlowContainerDefaultRTL } from '../../../components/FlowContainer';
+// @ts-ignore Could not find a declaration file...
 import tailWindConfig from '../../../../tailwind.config';
 
-const RTLFlowContainer = flow(
+const RTLFlowContainer = asToken(
   withNodeKey('rtlFlowContainer'),
 )(FlowContainerDefaultRTL);
 

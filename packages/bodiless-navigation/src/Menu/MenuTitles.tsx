@@ -18,7 +18,7 @@ import { withSidecarNodes, withNode, withNodeKey } from '@bodiless/core';
 import { asEditable, asBodilessLink, withBodilessLinkToggle } from '@bodiless/components';
 import { ToutClean } from '@bodiless/organisms';
 import {
-  A, Div, HOC, Token, asToken, Fragment, designable, TokenDef,
+  A, Div, Token, asToken, Fragment, designable, TokenDef,
   withDesign, startWith, DesignableComponentsProps,
 } from '@bodiless/fclasses';
 
@@ -67,8 +67,8 @@ const asMenuLink = (asEditableLink: typeof asBodilessLink) => asToken(
  * Transforms Link into Editable Bodiless Link Toggle and Title to Editable.
  */
 const withDefaultMenuTitleEditors = withDesign({
-  Link: asMenuLink(withBodilessLinkToggle(asBodilessLink, startWith(Div) as HOC, true)),
-  Title: flow(
+  Link: asMenuLink(withBodilessLinkToggle(asBodilessLink, startWith(Div), true)),
+  Title: asToken(
     startWith(Fragment),
     asEditable('text', 'Menu Item'),
   ),
@@ -81,8 +81,8 @@ const withDefaultMenuTitleEditors = withDesign({
  * @param withTitleEditors Token that will be applied to the Title key
  */
 const withMenuTitleEditors = <P extends object>(
-  withTitleEditors: HOC | Token = withDefaultMenuTitleEditors,
-  ...tokenDefs: TokenDef<P>[]
+  withTitleEditors: Token = withDefaultMenuTitleEditors,
+  ...tokenDefs: TokenDef[]
 ) => withDesign({
     Title: asToken(withTitleEditors, ...tokenDefs),
   });
@@ -101,7 +101,7 @@ const asMenuTitle = flow(
  * Token that transforms component into Menu Tout with node and 'title' nodeKey.
  * Can be applied to the Title design key.
  */
-const asMenuTout = flow(
+const asMenuTout = asToken(
   startWith(ToutClean),
   withNode,
   withNodeKey('title'),

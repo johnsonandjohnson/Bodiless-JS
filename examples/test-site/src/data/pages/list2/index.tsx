@@ -12,14 +12,13 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { asBodilessList, asEditable, useListContext } from '@bodiless/components';
 import {
-  withDesign, replaceWith, Div, addClasses, H1, H3, flowIf, addProps, HOC,
+  withDesign, replaceWith, Div, addClasses, H1, H3, flowIf, addProps, asToken,
 } from '@bodiless/fclasses';
-import { flow } from 'lodash';
 import Layout from '../../../components/Layout';
 // import { OuterList, OuterLinkList } from './OldListDemo';
 import ChameleonListDemo from './ChameleonListDemo';
@@ -28,24 +27,24 @@ import SimpleListDemo from './SimpleListDemo';
 import { asHeader1, asHeader3 } from '../../../components/Elements.token';
 import ListDesignTest from './ListDesignTest';
 
-const SuperSimpleList = flow(
-  asBodilessList('list'),
+const SuperSimpleList = asToken(
+  asBodilessList('list0'),
   withDesign({
-    Title: flow(
-      replaceWith('span' as any as ComponentType<any>),
+    Title: asToken(
+      replaceWith('span'),
       asEditable('text', 'Item'),
     ),
   }),
 )('ul');
 
-const ListWithPrependAndContextualStyles = flow(
-  addProps({ prependItems: ['prepend', 'prepend-2'] }) as HOC,
+const ListWithPrependAndContextualStyles = asToken(
+  addProps({ prependItems: ['prepend', 'prepend-2'] }),
   withDesign({
     Title: flowIf(() => useListContext().currentItem === 'prepend')(
       replaceWith(() => <span>This item cannot be edited</span>),
     ),
   }),
-  addProps({ appendItems: ['append'] }) as HOC,
+  addProps({ appendItems: ['append'] }),
 )(SuperSimpleList);
 
 const Wrapper = addClasses('w-1/2 p-5')(Div);
@@ -64,7 +63,7 @@ export default (props: any) => (
         <Wrapper>
           <SectionHeader>Simple List</SectionHeader>
           <p>This list has one level with editable but non linkable titles.</p>
-          <SuperSimpleList nodeKey="list0" />
+          <SuperSimpleList />
         </Wrapper>
         <Wrapper>
           <SectionHeader>Basic Compound List</SectionHeader>

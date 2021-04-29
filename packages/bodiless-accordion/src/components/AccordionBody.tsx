@@ -1,5 +1,5 @@
 /**
- * Copyright © 2021 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,12 @@
  */
 
 import { flow } from 'lodash';
-import React, { FC, ComponentType } from 'react';
+import React, { FC } from 'react';
 import {
   designable,
   Div,
-  DesignableProps,
+  HOC,
+  DesignableComponentsProps,
 } from '@bodiless/fclasses';
 import { asAccordionBodyWrapper, asAccordionBodyContent } from './Accordion.tokens';
 import { useAccordionContext } from './AccordionContext';
@@ -28,7 +29,10 @@ const AccordionBodyComponentsStart:AccordionBodyComponents = {
   Content: asAccordionBodyContent(Div),
 };
 
-const AccordionBodyBase: FC<AccordionBodyProps> = ({
+type AccordionBodyBaseProps =
+  Omit<AccordionBodyProps, 'design'> & DesignableComponentsProps<AccordionBodyComponents>;
+
+const AccordionBodyBase: FC<AccordionBodyBaseProps> = ({
   components, children, ...accordionMeta
 }) => {
   const { Wrapper, Content } = components;
@@ -53,9 +57,8 @@ const AccordionBodyClean = flow(
   designable(AccordionBodyComponentsStart, 'AccordionBody'),
 )(AccordionBodyBase);
 
-const asAccordionBody = <P extends DesignableProps<AccordionBodyComponents>>(
-  Component: ComponentType<P> | string,
-) => (props: P) => {
+const asAccordionBody: HOC = Component => {
+  const AsAccordionBody = (props: any) => {
     const { design } = props;
     return (
       <AccordionBodyClean design={design}>
@@ -63,6 +66,8 @@ const asAccordionBody = <P extends DesignableProps<AccordionBodyComponents>>(
       </AccordionBodyClean>
     );
   };
+  return AsAccordionBody;
+};
 
 export default AccordionBodyClean;
 export {

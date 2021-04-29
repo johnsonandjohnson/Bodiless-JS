@@ -12,16 +12,18 @@
  * limitations under the License.
  */
 
+// @ts-nocheck
+
 import React from 'react';
 import { graphql } from 'gatsby';
-import { flow, flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
   List, Editable, asEditableList, withBasicSublist, asTestableList, asEditable,
 } from '@bodiless/components';
 import {
   withDesign, replaceWith, addClasses, stylable,
-  removeClasses,
+  removeClasses, asToken,
   A,
 } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
@@ -45,12 +47,12 @@ const LinkTitle = flowRight(
 /**
  * This is an editable list using our simple editable title.
  */
-const EditableList = flow(
+const EditableList = asToken(
   asEditableList,
   withDesign({
     Title: replaceWith(SimpleTitle),
-    Wrapper: flow(stylable, addClasses('pl-10')),
-    Item: flow(stylable, addClasses('text-red')),
+    Wrapper: asToken(stylable, addClasses('pl-10')),
+    Item: asToken(stylable, addClasses('text-red')),
   }),
   asTestableList('list'),
 )(List);
@@ -58,9 +60,9 @@ const EditableList = flow(
 /**
  * This is an editable list using our simple editable title.
  */
-const EditableLinkList = flow(
+const EditableLinkList = asToken(
   asEditableList,
-  withDesign({ Title: replaceWith(LinkTitle), Wrapper: flow(stylable, addClasses('pl-10')) }),
+  withDesign({ Title: replaceWith(LinkTitle), Wrapper: asToken(stylable, addClasses('pl-10')) }),
   asTestableList('link-list'),
 )(List);
 
@@ -69,7 +71,7 @@ const EditableLinkList = flow(
  * to demonstrate how to style a particular sublist.
  */
 const withLessPadding = withDesign({
-  Wrapper: flow(
+  Wrapper: asToken(
     addClasses('pl-4'),
     removeClasses('pl-10'),
   ),

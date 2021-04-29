@@ -1,5 +1,5 @@
 /**
- * Copyright © 2021 Johnson & Johnson
+ * Copyright © 2019 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,13 +46,6 @@ export {
   useFilterByGroupContext,
   withTagProps,
 } from './components/FilterByGroup';
-
-export {
-  BCarousel,
-  BAutoCarousel,
-  BCarouselClean,
-  asEditableCarousel,
-} from './components/Carousel';
 
 export { default as Embed } from './components/Embed';
 export {

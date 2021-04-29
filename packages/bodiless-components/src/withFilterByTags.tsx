@@ -13,12 +13,11 @@
  */
 
 import {
-  withoutProps,
   ifToggledOn,
   ifToggledOff,
   TagType,
 } from '@bodiless/core';
-import { replaceWith } from '@bodiless/fclasses';
+import { replaceWith, withoutProps, Enhancer } from '@bodiless/fclasses';
 import { flowRight, differenceWith, isEmpty } from 'lodash';
 import useTagsAccessors from './TagButton/TagModel';
 
@@ -31,9 +30,7 @@ type ToggleByTagsProps = {
  * @param selectedTags
  *  The selected tags to use.
  */
-const useToggleByTags = <P extends object>({
-  selectedTags,
-}: P & ToggleByTagsProps) => {
+const useToggleByTags = ({ selectedTags }: ToggleByTagsProps) => {
   const { getTags } = useTagsAccessors();
   const tags = getTags();
 
@@ -54,7 +51,7 @@ const useToggleByTags = <P extends object>({
 const ifTagsSelected = ifToggledOn(useToggleByTags);
 const ifTagsNotSelected = ifToggledOff(useToggleByTags);
 
-const withFilterByTags = flowRight(
+const withFilterByTags: Enhancer<ToggleByTagsProps> = flowRight(
   ifTagsNotSelected(replaceWith(() => null)),
   withoutProps(['selectedTags']),
 );

@@ -14,11 +14,11 @@
 
 import React, { FC, HTMLProps } from 'react';
 import { observer } from 'mobx-react-lite';
+import { withoutProps } from '@bodiless/fclasses';
 import { useContextActivator, useEditContext } from '../hooks';
 import { Props } from '../Types/ContextWrapperTypes';
-import { withoutProps } from '../hoc';
 
-const DefaultDiv = withoutProps<HTMLProps<HTMLDivElement>>(['isActive'])('div');
+const DefaultDiv = withoutProps(['isActive'])<HTMLProps<HTMLDivElement>>('div');
 
 const ContextWrapper: FC<Props> = ({
   ui,

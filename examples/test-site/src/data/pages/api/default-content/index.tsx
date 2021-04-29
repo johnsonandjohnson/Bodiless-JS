@@ -14,10 +14,10 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import flow from 'lodash/flow';
 import {
   A,
   H3,
+  asToken,
 } from '@bodiless/fclasses';
 import { withNode, withNodeKey, withDefaultContent } from '@bodiless/core';
 import { asBodilessLink } from '@bodiless/components';
@@ -27,7 +27,7 @@ import { asHeader3, asLink } from '../../../../components/Elements.token';
 
 const SubTitle = asHeader3(H3);
 
-const DefaultContentLink = flow(
+const DefaultContentLink = asToken(
   asBodilessLink(),
   withDefaultContent({
     '': { href: 'https://www.gatsbyjs.com/' },
@@ -37,7 +37,7 @@ const DefaultContentLink = flow(
   asLink,
 )(A);
 
-export default props => (
+export default (props: any) => (
   <Page {...props}>
     <Layout>
       <SubTitle>Default content from current node</SubTitle>

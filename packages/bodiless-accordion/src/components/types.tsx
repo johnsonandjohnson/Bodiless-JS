@@ -1,5 +1,5 @@
 /**
- * Copyright © 2021 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  */
 
 import { ComponentType, HTMLProps } from 'react';
-import { StylableProps, DesignableComponentsProps } from '@bodiless/fclasses';
+import { StylableProps, DesignableComponentsProps, DesignableProps } from '@bodiless/fclasses';
 
 export type AccordionMeta = {
   accordionId: string,
@@ -46,9 +46,9 @@ export type AccordionBodyComponents = {
   Content: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
 };
 
-export type AccordionTitleProps = DesignableComponentsProps<AccordionTitleComponents> &
+export type AccordionTitleProps = DesignableProps<AccordionTitleComponents> &
 AccordionMeta;
-export type AccordionBodyProps = DesignableComponentsProps<AccordionBodyComponents> &
+export type AccordionBodyProps = DesignableProps<AccordionBodyComponents> &
 AccordionMeta;
 
 export type AccordionComponents = {

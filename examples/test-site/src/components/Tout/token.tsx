@@ -12,11 +12,9 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import {
   addClasses,
   withDesign,
-  Token,
   asToken,
 } from '@bodiless/fclasses';
 import {
@@ -38,7 +36,7 @@ import {
   withCategory,
 } from '../Elements.token';
 
-const asToutHorizontal$ = flow(
+const asToutHorizontal$ = asToken(
   withDesign({
     Title: addClasses('px-2'),
     Body: addClasses('px-2'),
@@ -46,7 +44,7 @@ const asToutHorizontal$ = flow(
   }),
   asBToutHorizontal,
 );
-const asToutVertical$ = flow(
+const asToutVertical$ = asToken(
   withDesign({
     Title: addClasses('px-2'),
     Body: addClasses('px-2'),
@@ -71,17 +69,17 @@ const asToutTextWhite$ = withDesign({
   Body: addClasses('text-white'),
 });
 
-const asToutHorizontal = withCategory('Orientation')(asToutHorizontal$ as Token);
-const asToutVertical = withCategory('Orientation')(asToutVertical$ as Token);
-const asToutNoTitle = withCategory('Structure')(asToutNoTitle$ as Token);
-const asToutNoBody = withCategory('Structure')(asToutNoBody$ as Token);
-const asToutNoCta = withCategory('Structure')(asToutNoCta$ as Token);
-const asToutDefaultStyle = withCategory('Appearance')(asToutDefaultStyle$ as Token);
-const asToutOverlayTitle = withCategory('Layout')(asToutOverlayTitle$ as Token);
-const asToutOverlayCta = withCategory('Layout')(asToutOverlayCta$ as Token);
-const asToutNoBodyNoTitle = withCategory('Structure')(asToutNoBodyNoTitle$ as Token);
-const asToutWithPaddings = withCategory('Layout')(asToutWithPaddings$ as Token);
-const asToutTextWhite = withCategory('Appearance')(asToutTextWhite$ as Token);
+const asToutHorizontal = withCategory('Orientation')(asToutHorizontal$);
+const asToutVertical = withCategory('Orientation')(asToutVertical$);
+const asToutNoTitle = withCategory('Structure')(asToutNoTitle$);
+const asToutNoBody = withCategory('Structure')(asToutNoBody$);
+const asToutNoCta = withCategory('Structure')(asToutNoCta$);
+const asToutDefaultStyle = withCategory('Appearance')(asToutDefaultStyle$);
+const asToutOverlayTitle = withCategory('Layout')(asToutOverlayTitle$);
+const asToutOverlayCta = withCategory('Layout')(asToutOverlayCta$);
+const asToutNoBodyNoTitle = withCategory('Structure')(asToutNoBodyNoTitle$);
+const asToutWithPaddings = withCategory('Layout')(asToutWithPaddings$);
+const asToutTextWhite = withCategory('Appearance')(asToutTextWhite$);
 const withMenuToutStyles = asToken(
   asToutTextWhite$,
   asToutWithPaddings$,

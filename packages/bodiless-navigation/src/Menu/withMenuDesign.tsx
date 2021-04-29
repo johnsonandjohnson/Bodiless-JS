@@ -16,6 +16,7 @@ import {
   withDesignAt,
   TokenDef,
   asToken,
+  Token,
 } from '@bodiless/fclasses';
 
 const withSecondLevelDesign = (keys: string[]) => keys.reduce((result, item) => {
@@ -59,32 +60,33 @@ const depthDesignPathOptions = [() => [], withSecondLevelDesign, withThirdLevelD
  *
  * @return Desigh token that applies supplied list of tokens to the provided design keys.
  */
-const withMenuDesign = <P extends object>(
+const withMenuDesign = (
   keys: string|string[] = ['Main', 'List', 'Columns', 'Touts'],
   depths: number|number[] = [0, 1, 2],
-) => (...tokenDefs: TokenDef<P>[]) => {
-    const keys$ = Array.isArray(keys) ? keys : [keys];
-    const depths$ = Array.isArray(depths) ? depths : [depths];
+) => (...tokenDefs: TokenDef[]):Token => {
+  const keys$ = Array.isArray(keys) ? keys : [keys];
+  const depths$ = Array.isArray(depths) ? depths : [depths];
 
-    const submenuDesignPaths: any = [];
-    depths$
-      .filter(d => d < 3 && d > 0)
-      .forEach(
-        d => submenuDesignPaths.push(
-          ...depthDesignPathOptions[d](keys$.filter(k => k !== 'Main')),
-        ),
-      );
+  const submenuDesignPaths: any = [];
+  depths$
+    .filter(d => d < 3 && d > 0)
+    .forEach(
+      d => submenuDesignPaths.push(
+        ...depthDesignPathOptions[d](keys$.filter(k => k !== 'Main')),
+      ),
+    );
 
-    // Make sure depths take precidence.
-    // For example withMenuDesign(Main, 1) will not do anything.
-    if (keys$.includes('Main') && depths$.includes(0)) {
-      return asToken(
-        ...tokenDefs,
-        withDesignAt(...submenuDesignPaths)(asToken(...tokenDefs)),
-      );
-    }
+  // Make sure depths take precidence.
+  // For example withMenuDesign(Main, 1) will not do anything.
+  if (keys$.includes('Main') && depths$.includes(0)) {
+    return asToken(
+      {},
+      ...tokenDefs,
+      withDesignAt(...submenuDesignPaths)(asToken({}, ...tokenDefs)),
+    );
+  }
 
-    return withDesignAt(...submenuDesignPaths)(asToken(...tokenDefs));
-  };
+  return withDesignAt(...submenuDesignPaths)(asToken({}, ...tokenDefs));
+};
 
 export default withMenuDesign;

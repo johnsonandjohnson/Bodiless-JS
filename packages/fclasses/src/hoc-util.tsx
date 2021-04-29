@@ -19,46 +19,71 @@ import React, {
   useState,
 } from 'react';
 import {
-  flow,
   omit,
   pick,
   mergeWith,
 } from 'lodash';
+import type { HOC, AsToken } from './types';
+import { asToken } from './Tokens';
 
-export type Condition<P> = (props: P) => boolean;
+export type Condition<P = any> = (props: P) => boolean;
 
-// export const flowRightIf = <P extends object>(condition: Condition<P>) => (
-//   <H extends Function>(...hocs: Function[]) => (
-//     (Component: ComponentType<P> | string) => (
-//       // @ts-ignore Expected at least 1 arguments, but got 0 or more.ts(2557)
-//       (props: P) => (condition(props) ? flowRight(...hocs)(Component) : Component)
-//     )
-//   )
-// );
-
-export const flowIf = (condition: (args: any) => boolean) => (
-  <H extends Function>(...hocs: Function[]) => (
-    <P extends object>(Component: ComponentType<P> | string) => {
-      // @ts-ignore Expected at least 1 arguments, but got 0 or more.ts(2557)
-      const WrappedComponent = flow(...hocs)(Component) as ComponentType;
-      return (props: P) => (
-        condition(props) ? <WrappedComponent {...props} /> : <Component {...props} />
-      );
-    }
-  )
+/**
+ * Applies a set of HOC's if a condition is true.
+ *
+ * @param useCondition
+ * A custom react hook which returns true if the HOC's should be applied.  Will receive
+ * the components props as an argument.
+ *
+ * @returns
+ * A function which accepts a list of HOC's and returns a new HOC which will be applied
+ * to the target component only if the specified condition evaluates to true.
+ */
+export const flowIf = <P extends object>(condition: Condition<P>): AsToken<P> => (
+  (...tokens) => Component => {
+    const WrappedComponent = asToken(...tokens)(Component);
+    const FlowIf: FC<any> = props => (
+      condition(props) ? <WrappedComponent {...props} /> : <Component {...props} />
+    );
+    return FlowIf;
+  }
 );
 
 /**
- * Removes the specified props from the wrapped component.
- * @param ...keys The names of the props to remove.
+ * Removes the specified props before rendering the wrapped component.
+ *
+ * @param
+ * ...keys The names of the props to remove.
+ *
+ * @return
+ * An HOC which accepts a component and returns another which accepts the
+ * specified props and removes them before rendering.
+ *
+ * Note this expects a type parameter specifying the props which will be
+ * removed. For example
+ * ```
+ * type Foo = {
+ *   A: string,
+ * };
+ * type Bar = {
+ *   B: string,
+ *   C: String,
+ * };
+ * const F:FC<Foo> = () => <></>;
+ * const G = withoutProps('B', 'C')(F);
+ *   // ComponentWithMeta<Pick<Foo, "A"> & Partial<{ B: any } & { C: any }>>
+ * const H = withoutProps<Bar>('B', 'C')(F); // ComponentWithMeta<Pick<Foo, "A"> & Bar>
+ * const I = withoutProps<Bar>('B', 'D')(F); // expected type error: D not in keyof Bar)
+ * const J = withoutProps<Bar>('X')(F); // expected type error (X not in keyof Bar)
+ * ```
  */
-export const withoutProps = <Q extends object>(keys: string|string[], ...restKeys: string[]) => (
-  <P extends object>(Component: ComponentType<P> | string) => {
+export const withoutProps = <A extends object>(
+  keys: (keyof A)|(keyof A)[], ...restKeys: (keyof A)[]
+):HOC<{}, Partial<A>> => Component => {
     const keys$ = typeof keys === 'string' ? [keys, ...restKeys] : keys;
-    const WithoutProps = (props: P & Q) => <Component {...omit(props, keys$) as P} />;
+    const WithoutProps = (props: any) => <Component {...omit(props, keys$) as any} />;
     return WithoutProps;
-  }
-);
+  };
 
 /*
  * Creates an HOC which strips all but the specified props.

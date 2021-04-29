@@ -1,5 +1,5 @@
 /**
- * Copyright © 2021 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  */
 
 import { flow } from 'lodash';
-import { withDesign, addClasses } from '@bodiless/fclasses';
+import { withDesign, addClasses, asToken } from '@bodiless/fclasses';
 import { ifViewportIsNot } from '@bodiless/components';
 import {
   asAccordionWrapper,
@@ -21,14 +21,14 @@ import {
   asAccordionTitle,
 } from '@bodiless/accordion';
 
-const asResponsiveAccordionTitle = flow(
+const asResponsiveAccordionTitle = asToken(
   asAccordionTitle,
   withDesign({
     Icon: addClasses('lg:hidden'),
   }),
 );
 
-const asExpandedOnDesktopBody = flow(
+const asExpandedOnDesktopBody = asToken(
   asAccordionBody,
   withDesign({
     Wrapper: addClasses('lg:block'),

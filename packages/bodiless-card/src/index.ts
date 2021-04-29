@@ -12,10 +12,20 @@
  * limitations under the License.
  */
 
+import type {
+  CardComponents,
+  CardProps,
+} from './components/Cards';
+
 export {
   CardClean,
   asTestableCard,
 } from './components/Cards';
+
+export type {
+  CardComponents,
+  CardProps,
+};
 
 export {
   asCardHorizontal,

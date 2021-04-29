@@ -12,12 +12,12 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import { withSidecarNodes } from '@bodiless/core';
 import { asTaggableItem, withFilterByTags } from '@bodiless/components';
+import { asToken } from '@bodiless/fclasses';
 import { withTagProps } from './FilterByGroupContext';
 
-const asFilterableByGroup = (nodeKey: string = '_tags') => flow(
+const asFilterableByGroup = (nodeKey: string = '_tags') => asToken(
   withSidecarNodes(
     asTaggableItem(nodeKey),
     withFilterByTags,
