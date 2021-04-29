@@ -108,7 +108,8 @@ const asEditFlowContainer = flowRight(
   withMenuOptions(
     (p: EditFlowContainerProps) => ({
       useMenuOptions,
-      name: typeof p.buttonGroupLabel === 'function' ? p.buttonGroupLabel(p) : p.buttonGroupLabel,
+      name: typeof p.buttonGroupLabel === 'function'
+        ? p.buttonGroupLabel(p) : (p.buttonGroupLabel || 'Flow Container'),
     }),
   ),
   observer,
