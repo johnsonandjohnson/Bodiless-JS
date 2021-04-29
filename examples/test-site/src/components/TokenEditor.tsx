@@ -44,7 +44,7 @@ export const withTokenEditorStyles = asToken(
     ),
     DetailsTitle: asToken(
       withChild(() => <>Details</>),
-      asAccodionTitle,
+      asAccordionTitle,
       withDesign({
         Wrapper: asToken(
           asHeader3,

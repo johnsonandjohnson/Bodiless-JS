@@ -39,7 +39,7 @@ import {
 } from '../components/Product';
 import { FlowContainerDefault } from '../components/FlowContainer';
 import { withEditorBasic } from '../components/Editors';
-import { asAccordionDefaultStyle } from '../components/SingleAccordion/token';
+import { asSingleAccordionDefaultStyle } from '../components/SingleAccordion/token';
 import GTMDataLayerProductHelmet from '../components/GTM/productViewed';
 import SocialShare from '../components/SocialShare';
 
@@ -59,7 +59,7 @@ const asTestableProductAccordion = label => flow(
 
 const asProductAccordion = title => flow(
   withNode,
-  asAccordionDefaultStyle,
+  asSingleAccordionDefaultStyle,
   withDesign({
     Wrapper: removeClasses('p-1'),
     Title: withDesign({

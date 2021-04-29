@@ -53,12 +53,12 @@ const asSingleAccordionDefaultStyle = asToken(
 );
 
 const asAccordionTitleBordered = flow(
-  asAccordionDefaultStyle,
+  asSingleAccordionDefaultStyle,
   asAccordionBorder,
 );
 
 const asAccordionBorderedOnFocus = flow(
-  asAccordionDefaultStyle,
+  asSingleAccordionDefaultStyle,
   // Resets border classes from accordion default style
   withDesign({
     Body: withDesign({
@@ -71,12 +71,12 @@ const asAccordionBorderedOnFocus = flow(
 );
 
 const asAccordionNonExpanding = flow(
-  asAccordionDefaultStyle,
+  asSingleAccordionDefaultStyle,
   asNonExpandingAccordion,
 );
 
 export {
-  asAccordionDefaultStyle,
+  asSingleAccordionDefaultStyle,
   asAccordionTitleBordered,
   asAccordionBorderedOnFocus,
   asAccordionNonExpanding,

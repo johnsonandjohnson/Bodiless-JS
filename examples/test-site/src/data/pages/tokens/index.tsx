@@ -43,7 +43,7 @@ import * as availableTokens from '../../../components/Card/token';
 import { withTypographyTokenPanel } from './TypographySelector';
 
 const asFancyPanel = withDesign({
-  Title: asToken(asAccodionTitle, asHeader3, asPrimaryColorBackground),
+  Title: asToken(asAccordionTitle, asHeader3, asPrimaryColorBackground),
   Wrapper: asAccordionWrapper,
   Body: asAccordionBody,
   Category: asToken(asBold, addClasses('mt-2')),

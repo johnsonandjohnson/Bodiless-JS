@@ -35,7 +35,7 @@ const asAccordionSublist = (Sublist: ComponentType<ListProps>): HOC => Item => {
   const AccordionWrapper = asAccordionWrapper(Item) as any;
   const AccordionBody = asAccordionBody(Sublist);
   const AccordionTitle = flow(
-    asAccodionTitle,
+    asAccordionTitle,
     asComponent,
   )('div');
 

@@ -13,13 +13,12 @@
  */
 
 import { flow } from 'lodash';
-import React, { FC, ComponentType } from 'react';
+import React, { FC } from 'react';
 import {
   designable,
   Div,
   Span,
   HOC,
-  DesignableProps,
   DesignableComponentsProps,
 } from '@bodiless/fclasses';
 import {
@@ -34,7 +33,7 @@ import {
   AccordionTitleComponents,
 } from './types';
 
-const AccordionTitleComponents:AccordionTitleComponents = {
+const accordionTitleComponents:AccordionTitleComponents = {
   Wrapper: asAccordionTitleWrapper(Div),
   Icon: asAccordionIcon(Span),
   Label: asAccordionLabel(Div),
@@ -74,14 +73,13 @@ const AccordionTitleBase: FC<AccordionTitleBaseProps> = ({
   );
 };
 
-const AccordionTitleClean = designable(
-  AccordionTitleComponents,
-  'AccordionTitle',
+const AccordionTitleClean = flow(
+  designable(accordionTitleComponents, 'AccordionTitle'),
 )(AccordionTitleBase);
 
 const asAccordionTitle: HOC = Component => {
-  const AsAccordionTitle: FC<any> = props => {
-    const { design } = props as DesignableProps<AccordionComponents>;
+  const AsAccordionTitle = (props: any) => {
+    const { design } = props;
     return (
       <AccordionTitleClean design={design}>
         <Component {...props} />

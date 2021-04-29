@@ -21,7 +21,7 @@ import {
 import { withNode } from '@bodiless/core';
 import { withDesign, asToken } from '@bodiless/fclasses';
 import {
-  asAccordionDefaultStyle,
+  asSingleAccordionDefaultStyle,
   asAccordionTitleBordered,
   asAccordionBorderedOnFocus,
   asAccordionNonExpanding,
@@ -44,7 +44,7 @@ const asSingleAccordion = asToken(
       ),
     }),
   }),
-  asAccordionDefaultStyle,
+  asSingleAccordionDefaultStyle,
   asTestableAccordion,
 );
 
