@@ -53,6 +53,7 @@ import {
   DesignableComponents,
   withDisplayName,
   Fragment,
+  Token,
 } from '@bodiless/fclasses';
 import { withHistory } from 'slate-history';
 import {
@@ -92,6 +93,7 @@ import withDataMigrator from './withDataMigrator';
 import withHtmlPaste from './withHtmlPaste';
 import type {
   RichTextProps,
+  RichTextBaseProps,
   RichTextComponents,
   EditorContext,
   Plugin,
@@ -122,7 +124,7 @@ const withSlateSchema = <P extends object>(Component: ComponentType<P>) => (
   }
 );
 // create item to activate the context not sure whats up with all the old vs new
-const withSlateActivator = <P extends object>(Component: ComponentType<P>) => (props: P) => {
+const withSlateActivator: Token = Component => props => {
   const previousSlateContext = useSlateContext();
   const previousEditorProps = previousSlateContext!.editorProps;
 
@@ -179,7 +181,7 @@ const ifMenuOptions = ifToggledOn((props: UseMenuOptionsProps) => {
 
 type RichTextProviderProps = {
   plugins: Plugin[],
-} & UseMenuOptionsProps;
+} & UseMenuOptionsProps & Pick<RichTextProps, 'initialValue'>;
 type RichTextProviderType = ComponentType<RichTextProviderProps>;
 const RichTextProvider = flowRight(
   withDisplayName('RichTextProvider'),
@@ -214,7 +216,7 @@ const withEditorSettings = (components: RichTextComponents) => (editor: Editor) 
   return editor;
 };
 
-const BasicRichText = React.memo(<P extends object>(props: P & RichTextProps) => {
+const BasicRichText = React.memo((props: RichTextBaseProps) => {
   const {
     initialValue,
     components,
@@ -338,6 +340,6 @@ const RichText = flow(
   withNode,
   withPreview,
   designable(apply, 'RichText'),
-)(BasicRichText);
+)(BasicRichText) as ComponentType<RichTextProps>;
 
 export default RichText;

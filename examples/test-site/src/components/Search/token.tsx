@@ -12,24 +12,25 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
-import React, { ComponentType } from 'react';
+import React from 'react';
 import {
   I,
   addClasses,
   withDesign,
   addClassesIf,
+  asToken,
+  Design,
 } from '@bodiless/fclasses';
+import { withChild } from '@bodiless/core';
 import { asPageContainer, asDesktopOnly, asTextWhite } from '../Elements.token';
 
-const Icon = flow(
+const Icon = asToken(
   addClasses('material-icons cursor-pointer align-middle bg-white text-gray-500'),
 )(I);
 
-const withIcon = (icon: string) => (Component: ComponentType) => (props: any) => (
-  <Component {...props}>
-    <Icon>{icon}</Icon>
-  </Component>
+const withIcon = (icon: string) => withChild(
+  () => <Icon>{icon}</Icon>,
+  'Icon',
 );
 
 const isEven = (item: number) => item % 2 === 0;
@@ -37,7 +38,7 @@ const isOdd = (item: number) => item % 2 === 1;
 
 const withSuggestionsBorder = addClasses('border border-black');
 const withSuggestionItemStyles = withDesign({
-  Wrapper: flow(
+  Wrapper: asToken(
     addClasses('hover:text-white hover:bg-teal-400'),
     addClassesIf(({ position }: any) => isEven(position))('bg-white'),
     addClassesIf(({ position }: any) => isOdd(position))('bg-teal-200'),
@@ -46,14 +47,14 @@ const withSuggestionItemStyles = withDesign({
 const withSearchInputOutline = addClasses('outline-none focus:outline-black');
 
 const withSuggestionsDefaultDesign = withDesign({
-  Wrapper: flow(
+  Wrapper: asToken(
     addClasses('absolute top-full z-50 w-full'),
     withSuggestionsBorder,
   ),
-  Item: flow(
+  Item: asToken(
     withSuggestionItemStyles,
     withDesign({
-      Wrapper: flow(
+      Wrapper: asToken(
         addClasses('flex px-2'),
       ),
       Count: addClasses('ml-auto mr-1'),
@@ -61,12 +62,12 @@ const withSuggestionsDefaultDesign = withDesign({
   ),
 });
 
-const searchDesign = {
-  SearchWrapper: flow(
+const searchDesign: Design = {
+  SearchWrapper: asToken(
     asDesktopOnly,
     addClasses('my-4 border border-black align-middle relative'),
   ),
-  SearchInput: flow(
+  SearchInput: asToken(
     withSearchInputOutline,
     addClasses('px-2 align-middle text-1xl'),
   ),
@@ -76,17 +77,17 @@ const searchDesign = {
 
 const responsiveSearchDesign = {
   Wrapper: addClasses('h-full'),
-  SearchWrapper: flow(asPageContainer, addClasses('absolute w-full p-3 flex z-10 bg-gray-700 inset-x-0')),
-  SearchInput: flow(
+  SearchWrapper: asToken(asPageContainer, addClasses('absolute w-full p-3 flex z-10 bg-gray-700 inset-x-0')),
+  SearchInput: asToken(
     withSearchInputOutline,
     addClasses('align-middle w-full p-2'),
   ),
   ToggleButton: asTextWhite,
-  SearchButton: flow(
+  SearchButton: asToken(
     withIcon('search'),
     addClasses('flex absolute right-0 self-center mr-4'),
   ),
-  Suggestions: flow(
+  Suggestions: asToken(
     withSuggestionsDefaultDesign,
     withDesign({
       Wrapper: addClasses('-my-3 left-0 px-3'),
@@ -96,7 +97,7 @@ const responsiveSearchDesign = {
 
 const searchInlineDesign = {
   SearchWrapper: addClasses('inline-flex border border-black align-middle border-gray-500 relative'),
-  SearchInput: flow(
+  SearchInput: asToken(
     withSearchInputOutline,
     addClasses('px-2 align-middle text-1xl'),
   ),

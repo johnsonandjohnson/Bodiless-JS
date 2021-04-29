@@ -13,6 +13,7 @@
  */
 
 import React from 'react';
+import type { HOC } from '@bodiless/fclasses';
 import {
   withTitle,
   withAppendTitle,
@@ -23,8 +24,7 @@ import {
   withTerm,
   perserveMeta,
   withFacet,
-  HOC,
-} from '../lib/meta';
+} from '../src/meta';
 
 describe('withTitle', () => {
   it('add a title to the component', () => {

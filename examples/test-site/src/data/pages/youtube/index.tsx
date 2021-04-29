@@ -29,6 +29,7 @@ import {
   addClasses,
   addProps,
   flowIf,
+  asToken,
 } from '@bodiless/fclasses';
 import { flowRight } from 'lodash';
 import Layout from '../../../components/Layout';
@@ -41,13 +42,13 @@ import {
 // Note: it will work only for videos with own published Subtitles
 // Auto-generated Subtitles won't be shown
 // see: https://support.google.com/youtube/forum/AAAAiuErobUlyT60UUHtHE
-const withShownCaptions = flowRight(
+const withShownCaptions = asToken(
+  addProps({
+    src: 'https://www.youtube.com/embed/9No-FiEInLA',
+  }),
   withYouTubePlayerSettings({
     ...defaultPlayerSettings,
     cc_load_policy: 1,
-  }),
-  addProps({
-    src: 'https://www.youtube.com/embed/9No-FiEInLA',
   }),
 );
 
@@ -135,10 +136,10 @@ const StopButton = flowRight(
 )(YouTubeButton);
 
 const YouTubeWithJSApi = withDesign({
-  Item: flowRight(
-    withJSApi,
-    withYTPlayer(JS_API_IFRAME_ID),
+  Item: asToken(
     addProps({ id: JS_API_IFRAME_ID }),
+    withYTPlayer(JS_API_IFRAME_ID),
+    withJSApi,
   ),
 })(DefaultReponsive16By9YouTube);
 
@@ -160,14 +161,14 @@ const YouTubeWithRelatedVideos = withDesign({
   Item: withRelatedVideos,
 })(DefaultReponsive16By9YouTube);
 
-const withCustomLangPref = flowRight(
+const withCustomLangPref = asToken(
+  addProps({
+    src: 'https://www.youtube.com/embed/9No-FiEInLA',
+  }),
   withYouTubePlayerSettings({
     ...defaultPlayerSettings,
     cc_lang_pref: 'de',
     cc_load_policy: 1,
-  }),
-  addProps({
-    src: 'https://www.youtube.com/embed/9No-FiEInLA',
   }),
 );
 

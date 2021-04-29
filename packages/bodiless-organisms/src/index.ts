@@ -66,13 +66,6 @@ export {
   withDisableExpandOnClick,
 } from './components/Accordion';
 
-export {
-  BCarousel,
-  BAutoCarousel,
-  BCarouselClean,
-  asEditableCarousel,
-} from './components/Carousel';
-
 export { default as Embed } from './components/Embed';
 export {
   asResponsive21By9Embed,

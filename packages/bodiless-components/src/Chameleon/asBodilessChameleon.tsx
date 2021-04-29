@@ -12,8 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
-import { flowRight } from 'lodash';
+import React, { FC } from 'react';
 import {
   ifEditable,
   useNode,
@@ -21,6 +20,7 @@ import {
 import type {
   WithNodeKeyProps, UseBodilessOverrides,
 } from '@bodiless/core';
+import { Token, asToken } from '@bodiless/fclasses';
 import { ChameleonData } from './types';
 import withChameleonButton from './withChameleonButton';
 import applyChameleon from './applyChameleon';
@@ -33,10 +33,10 @@ import withChameleonContext from './withChameleonContext';
  */
 const withDeleteNodeOnUnwrap = (
   nodeKey?: WithNodeKeyProps,
-) => <P extends object>(Component: ComponentType<P> | string) => {
-  const WithDeleteOnUnwrap = (props: P) => {
+): Token => Component => {
+  const WithDeleteOnUnwrap: FC<any> = props => {
     const { node } = useNode();
-    const { unwrap, ...rest } = props as { unwrap?: () => void; };
+    const { unwrap, ...rest } = props;
     if (!unwrap) return <Component {...props} />;
     const unwrap$ = () => {
       const node$ = nodeKey
@@ -45,7 +45,7 @@ const withDeleteNodeOnUnwrap = (
       node$.delete();
       if (unwrap) unwrap();
     };
-    return <Component {...rest as P} unwrap={unwrap$} />;
+    return <Component {...rest} unwrap={unwrap$} />;
   };
   return WithDeleteOnUnwrap;
 };
@@ -64,12 +64,12 @@ const asBodilessChameleon = (
   nodeKeys: WithNodeKeyProps,
   defaultData?: ChameleonData,
   useOverrides?: UseBodilessOverrides,
-) => flowRight(
-  withChameleonContext(nodeKeys, defaultData),
+) => asToken(
+  applyChameleon,
   ifEditable(
     withChameleonButton(useOverrides),
   ),
-  applyChameleon,
+  withChameleonContext(nodeKeys, defaultData),
 );
 
 export default asBodilessChameleon;

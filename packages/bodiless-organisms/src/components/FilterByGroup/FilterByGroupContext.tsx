@@ -25,6 +25,7 @@ import { v1 } from 'uuid';
 import { uniqBy } from 'lodash';
 import { TagType } from '@bodiless/core';
 import { TagButtonProps } from '@bodiless/components';
+import { Injector, addProps } from '@bodiless/fclasses';
 import { FBGContextOptions, SuggestionsRefType, FBGContextType } from './types';
 
 const FilterByGroupContext = createContext<FBGContextType>({
@@ -93,13 +94,19 @@ const withFilterByGroupContext = <P extends object>(
     </FilterByGroupProvider>
   );
 
+type DefaultTagProps = {
+  getSuggestions: () => TagType[],
+  registerSuggestions: (tags: TagType[]) => void,
+  selectedTags: TagType[],
+};
+
 const withTagProps = (
   suggestionOptions?: TagButtonProps,
-) => <P extends object>(Component: ComponentType<P>) => (props: P) => {
+): Injector<DefaultTagProps> => Component => (props: any) => {
   const { getSuggestions, selectedTag, useRegisterSuggestions } = useFilterByGroupContext();
   const registerSuggestions = useRegisterSuggestions();
 
-  const defaultProps = {
+  const defaultProps: DefaultTagProps = {
     getSuggestions,
     registerSuggestions,
     selectedTags: selectedTag ? [selectedTag] : [],
@@ -110,11 +117,7 @@ const withTagProps = (
   return <Component {...props} {...suggestionProps} />;
 };
 
-const withFBGSuggestions = <P extends object>({
-  suggestions,
-}: FBGContextOptions) => (Component: ComponentType<P> | string) => (props: P) => (
-    <Component {...props} suggestions={suggestions} />
-  );
+const withFBGSuggestions = ({ suggestions }: FBGContextOptions) => addProps({ suggestions });
 
 export default FilterByGroupContext;
 export {

@@ -19,6 +19,11 @@ import { useEditContext } from '../hooks';
 import { useContextMenuContext, useMenuOptionUI } from './ContextMenuContext';
 import type { IContextMenuItemProps as IProps, ContextMenuFormProps, TMenuOption } from '../Types/ContextMenuTypes';
 
+/**
+ * @private
+ *
+ * Base component which renders an item in the context menu or admin toolbar.
+ */
 const ContextMenuItem = observer((props: IProps) => {
   const { option: option$, name, index } = props;
   const option: TMenuOption = option$ || { name };

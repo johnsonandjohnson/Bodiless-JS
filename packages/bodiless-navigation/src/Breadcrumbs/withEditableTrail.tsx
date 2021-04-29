@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import { WithNodeKeyProps, withNodeKey } from '@bodiless/core';
 import {
   Token, addProps, withDesign, asToken,
@@ -57,7 +56,7 @@ const withDefaultStartingTrailData = withDesign({
 export const withEditableStartingTrail = (
   withTitleEditors: Token = withDefaultMenuTitleEditors,
   nodeKeys?: WithNodeKeyProps,
-) => flow(
+) => asToken(
   withBreadcrumbStartingTrail,
   withDesign({
     StartingTrail: asToken(
@@ -85,7 +84,7 @@ export const withEditableStartingTrail = (
 export const withEditableFinalTrail = (
   withTitleEditors: Token = withDefaultMenuTitleEditors,
   nodeKeys?: WithNodeKeyProps,
-) => flow(
+) => asToken(
   withBreadcrumbFinalTrail,
   withDesign({
     FinalTrail: asToken(

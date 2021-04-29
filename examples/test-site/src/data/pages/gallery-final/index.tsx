@@ -15,9 +15,8 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { Page, PageProps } from '@bodiless/gatsby-theme-bodiless';
-import { flow } from 'lodash';
 import {
-  H1, addClasses, Div,
+  H1, addClasses, Div, asToken,
 } from '@bodiless/fclasses';
 import { asEditable } from '@bodiless/components';
 import { LandscapeLinkableImage } from '../../../components/Image';
@@ -26,7 +25,7 @@ import withSimpleEditor from './withSimpleEditor';
 import Gallery, { GalleryTile } from './Gallery';
 
 const asPrimaryHeader = addClasses('text-3xl font-bold');
-const PrimaryHeader = flow(
+const PrimaryHeader = asToken(
   asPrimaryHeader,
   asEditable('title', 'Title'),
 )(H1);

@@ -39,7 +39,7 @@ const DemoMenu = asToken(
   withDesign({
     _default: withDesign({ Menu: $withMenuOverviewLink }),
   }),
-)(ResponsiveMenu) as ComponentType;
+)(ResponsiveMenu);
 
 const BurgerMenuTogglerFullWidth = withDesign({
   Wrapper: asToken(
@@ -48,7 +48,7 @@ const BurgerMenuTogglerFullWidth = withDesign({
   ),
 })(BurgerMenuToggler);
 
-const NodeTreePrinter$ = () => {
+const NodeTreePrinter$ = observer(() => {
   const { node } = useNode();
   const path = node.path.join('$');
   const keys = node.keys.filter(k => k.startsWith(path));
@@ -64,9 +64,9 @@ const NodeTreePrinter$ = () => {
       <div>{chilluns}</div>
     </>
   );
-};
+});
 
-const NodeTreePrinter = asToken(observer, withNode)(NodeTreePrinter$);
+const NodeTreePrinter = withNode(NodeTreePrinter$);
 const H1 = asToken(addClasses('pt-5'), asHeader1)(H1$);
 const H2 = asToken(addClasses('pt-5'), asHeader2)(H2$);
 const Description = addClasses('text-sm mb-2 italic')(Div);

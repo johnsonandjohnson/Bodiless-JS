@@ -12,9 +12,8 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import { FilterByGroupClean, asTestableFilterByGroup, withFBGSuggestions } from '@bodiless/organisms';
-import { addProps } from '@bodiless/fclasses';
+import { addProps, asToken } from '@bodiless/fclasses';
 import { asFilterByGroupResponsive, asFilterByGroupDefaultStyle } from './token';
 
 const suggestions = [
@@ -24,7 +23,7 @@ const suggestions = [
   { id: '4', name: 'DefaultTag 4' },
 ];
 
-const asFilterByGroup = flow(
+const asFilterByGroup = asToken(
   withFBGSuggestions({ suggestions }),
   addProps({ resetButtonText: 'Show All Products' }),
   asFilterByGroupResponsive,

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ComponentType, HTMLProps } from 'react';
+import React, { ComponentType, HTMLProps, PropsWithChildren } from 'react';
 import { observer } from 'mobx-react-lite';
 import { SortableContainer, SortEndHandler } from 'react-sortable-hoc';
 import {
@@ -26,12 +26,11 @@ type FinalUI = {
 
 export type UI = Partial<FinalUI>;
 
-export type SortableListProps = {
-  children: React.ReactNode[];
+export type SortableListProps = PropsWithChildren<{
   onSortEnd: SortEndHandler;
   ui?: UI;
   className?: string;
-};
+}>;
 
 const defaultUI: FinalUI = {
   FlowContainerEmptyWrapper: 'div',
@@ -62,7 +61,8 @@ const FlowContainerEmpty = flow(
 const SortableListWrapper = SortableContainer(
   observer(
     ({ children, ui, ...rest }: SortableListProps): React.ReactElement<SortableListProps> => {
-      const content = children && children.length
+      const children$ = React.Children.toArray(children);
+      const content = children && children$.length
         ? children
         : <FlowContainerEmpty />;
       return (

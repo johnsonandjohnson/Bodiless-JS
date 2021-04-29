@@ -243,7 +243,7 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
 
 export const SearchBox = designable(
   searchComponents, 'SearchBox',
-)(SearchBoxBase) as ComponentType<SearchProps>;
+)(SearchBoxBase);
 export const SearchResult = designable(
   searchResultComponents, 'SearchResult',
-)(SearchResultBase) as ComponentType<SearchResultProps>;
+)(SearchResultBase);

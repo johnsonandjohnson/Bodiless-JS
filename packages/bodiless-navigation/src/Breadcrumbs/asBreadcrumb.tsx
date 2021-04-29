@@ -13,11 +13,12 @@
  */
 
 import React, {
-  createContext, useContext, ComponentType, useLayoutEffect,
+  createContext, useContext, useLayoutEffect, FC,
 } from 'react';
 import { useNode } from '@bodiless/core';
 import type { LinkData } from '@bodiless/components';
 import { observer } from 'mobx-react-lite';
+import { HOC, Token } from '@bodiless/fclasses';
 import { BreadcrumbItem } from './BreadcrumbStore';
 import type { BreadcrumbItemType } from './BreadcrumbStore';
 import { useBreadcrumbStore, asHiddenBreadcrumbSource } from './BreadcrumbStoreProvider';
@@ -40,7 +41,7 @@ export const BreadcrumbContextProvider = breadcrumbContext.Provider;
  *
  * @return true if the item is in the active trail, false otherwise.
  */
-export const useIsActiveTrail = () => useBreadcrumbContext()?.isActive();
+export const useIsActiveTrail = () => !!useBreadcrumbContext()?.isActive();
 
 const isSSR = () => !(
   typeof window !== 'undefined'
@@ -66,8 +67,8 @@ export type BreadcrumbSettings = {
 const asBreadcrumb = ({
   linkNodeKey,
   titleNodeKey,
-}: BreadcrumbSettings) => <P extends object>(Component: ComponentType<P>) => {
-  const AsBreadcrumb = observer((props: P) => {
+}: BreadcrumbSettings): HOC => Component => {
+  const AsBreadcrumb = observer((props: any) => {
     const current = useBreadcrumbContext();
     const store = useBreadcrumbStore();
     if (store === undefined) return <Component {...props} />;
@@ -133,12 +134,10 @@ const asBreadcrumb = ({
  * @see asHiddenBreadcrumbSource
  * @see asBreadcrumb
  */
-const asBreadcrumbSource = <P extends object>(
-  Component: ComponentType<P>,
-) => {
+const asBreadcrumbSource: Token = Component => {
   const SSRSource = asHiddenBreadcrumbSource(Component);
 
-  const AsBreadcrumbSource = (props: P) => (
+  const AsBreadcrumbSource: FC<any> = props => (
     <>
       {isSSR() && <SSRSource {...props} />}
       <Component {...props} />

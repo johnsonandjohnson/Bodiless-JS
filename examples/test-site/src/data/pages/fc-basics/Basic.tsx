@@ -7,7 +7,9 @@ import {
   withAllTitlesFromTerms, ifComponentSelector, withTailwindWidthConstraints,
 } from '@bodiless/layouts';
 import pick from 'lodash/pick';
+// @ts-ignore
 import resolveConfig from 'tailwindcss/resolveConfig';
+// @ts-ignore
 import tailwindConfig from '../../../../tailwind.config';
 import {
   asBox, asBlue, asOrange, asRounded, asSquare, withBlueBorder, withTealBorder, asTeal,

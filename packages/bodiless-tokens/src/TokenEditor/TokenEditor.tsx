@@ -1,15 +1,28 @@
-import React, { FC } from 'react';
-import type { ComponentType } from 'react';
+/**
+ * Copyright © 2021 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import React, { FC, ComponentType } from 'react';
 import {
   Div, H2, designable, H3, asToken,
-  withDesign, addProps, HOC, flowIf, replaceWith, Token,
+  withDesign, addProps, flowIf, replaceWith, Token,
 } from '@bodiless/fclasses';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import {
-  useNode, WithNodeKeyProps, withNodeKey, withNodeDataHandlers, withNode,
+  useNode, WithNodeKeyProps, withNodeKey, withNodeDataHandlers, withNode, WithNodeProps,
 } from '@bodiless/core';
-import flow from 'lodash/flow';
-import TokenPrinter from '../TokenPrinter';
+import { flow } from 'lodash';
+import TokenPrinter, { TokenPrinterProps } from '../TokenPrinter';
 import { withTokenNamesFromData } from '../withTokenSelector';
 import type { TokenEditorComponents, TokenEditorProps } from './types';
 
@@ -52,10 +65,11 @@ const TokenEditorClean = designable<TokenEditorComponents>(
  * @param nodeKey
  * The nodeKey identifying where the flow container data is stored.
  */
-const withFlowContainerFirstItemNode = (nodeKey: string) => <P extends object>(
-  Component: ComponentType<P & WithNodeKeyProps>) => {
+const withFlowContainerFirstItemNode = (
+  nodeKey: string,
+):Token<{}, Partial<WithNodeProps>> => Component => {
   const ComponentWithNode = withNode(Component);
-  const WithFlowContainerFirstItemNode = (props: P) => {
+  const WithFlowContainerFirstItemNode = (props: any) => {
     const { node } = useNode<any>();
     const { items } = node.data;
     const item = items && items[0];
@@ -66,7 +80,7 @@ const withFlowContainerFirstItemNode = (nodeKey: string) => <P extends object>(
   return flow(
     withNode,
     withNodeKey(nodeKey),
-  )(WithFlowContainerFirstItemNode);
+  )(WithFlowContainerFirstItemNode) as ComponentType<any>;
 };
 
 /**
@@ -77,20 +91,20 @@ const withFlowContainerFirstItemNode = (nodeKey: string) => <P extends object>(
 const withTokenEditorData = (nodeKey?: WithNodeKeyProps) => asToken(
   withDesign({
     Container: asToken(
-      addProps({ maxComponents: 1, minComponents: 1 }) as HOC,
-      withNodeKey(DEMO_NODE_KEY) as HOC,
+      addProps({ maxComponents: 1, minComponents: 1 }),
+      withNodeKey(DEMO_NODE_KEY),
     ),
     Printer: asToken(
-      flowIf(({ tokens = [] }) => tokens.length === 0)(
+      flowIf<TokenPrinterProps>(({ tokens = [] }) => tokens.length === 0)(
         replaceWith(() => <>No tokens selected.</>),
-      ) as Token,
-      withTokenNamesFromData as Token,
-      withNodeDataHandlers() as Token,
-      withFlowContainerFirstItemNode(DEMO_NODE_KEY) as HOC,
+      ),
+      withTokenNamesFromData,
+      withNodeDataHandlers(),
+      withFlowContainerFirstItemNode(DEMO_NODE_KEY),
     ),
-  }) as HOC,
-  withNode as Token,
-  withNodeKey(nodeKey) as Token,
+  }),
+  withNode,
+  withNodeKey(nodeKey),
 );
 
 /**

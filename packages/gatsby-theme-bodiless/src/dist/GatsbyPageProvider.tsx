@@ -26,13 +26,13 @@ const defaultGatsbyPage = {
   template: '_default',
 };
 
-export type Props = {
+export type PageProviderProps = {
   pageContext: GatsbyPage,
 };
 
 const GatsbyPageContext = React.createContext<GatsbyPage>(defaultGatsbyPage);
 
-const GatsbyPageProvider: FC<Props> = ({ children, pageContext }) => (
+const GatsbyPageProvider: FC<PageProviderProps> = ({ children, pageContext }) => (
   <GatsbyPageContext.Provider value={pageContext}>
     {children}
   </GatsbyPageContext.Provider>

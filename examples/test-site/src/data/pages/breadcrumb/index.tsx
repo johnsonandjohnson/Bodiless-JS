@@ -29,7 +29,6 @@ import {
 import {
   addClasses, H1 as H1$, H2 as H2$, P as P$, asToken, Fragment,
 } from '@bodiless/fclasses';
-import { flow } from 'lodash';
 
 import Layout from '../../../components/Layout';
 import Menu from '../../../components/Menu/Menu';
@@ -57,53 +56,53 @@ const DemoBreadcrumbs = asToken(
 
 const DEFAULT_STARTING_TRAIL_NODE_KEY = 'startingTrail';
 
-const MenuBreadcrumbs = flow(
+const MenuBreadcrumbs = asToken(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}Default`),
   withStartingTrailLinkStyles,
 )(DemoBreadcrumbs);
 
 const BreadcrumbWithStartingTrailIcon = withStartingTrailIcon(`${DEFAULT_STARTING_TRAIL_NODE_KEY}Icon`)(DemoBreadcrumbs);
 
-const BreadcrumbWithNonLinkableItems = flow(
+const BreadcrumbWithNonLinkableItems = asToken(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}NonLinkable`),
   withStartingTrailLinkStyles,
   withNonLinkableItems,
 )(DemoBreadcrumbs);
 
-const BreadcrumbWithBoldableFinalItem = flow(
+const BreadcrumbWithBoldableFinalItem = asToken(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}BoldedFinal`),
   withStartingTrailLinkStyles,
   withBoldedFinalTrail,
 )(DemoBreadcrumbs);
 
-const BreadcrumbWithVerticalBarSeparator = flow(
+const BreadcrumbWithVerticalBarSeparator = asToken(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}VerticalBar`),
   withStartingTrailLinkStyles,
   withVerticalBarSeparator,
 )(DemoBreadcrumbs);
 
-const BreadcrumbWithSlashSeparator = flow(
+const BreadcrumbWithSlashSeparator = asToken(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}SlashSeparator`),
   withStartingTrailLinkStyles,
   withSlashSeparator,
 )(DemoBreadcrumbs);
 
-const BreadcrumbWithHiddenCurrentPageItem = flow(
+const BreadcrumbWithHiddenCurrentPageItem = asToken(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}CurrentPage`),
   withStartingTrailLinkStyles,
   withHiddenCurrentPageItem,
 )(DemoBreadcrumbs);
 
-const MegaMenuBreadcrumbWithNonLinkableItems = flow(
+const MegaMenuBreadcrumbWithNonLinkableItems = asToken(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}MegaMenuNonLinkable`),
   withStartingTrailLinkStyles,
   withReadOnlyStartingTrail,
   withNonLinkableItems,
 )(DemoBreadcrumbs);
 
-const H1 = flow(addClasses('pt-5'), asHeader1)(H1$);
-const H2 = flow(addClasses('pt-5'), asHeader2)(H2$);
-const P = flow(asItalic, addClasses('text-sm'))(P$);
+const H1 = asToken(addClasses('pt-5'), asHeader1)(H1$);
+const H2 = asToken(addClasses('pt-5'), asHeader2)(H2$);
+const P = asToken(asItalic, addClasses('text-sm'))(P$);
 
 const BreadcrumbProvider = withBreadcrumbStore(Fragment);
 
@@ -114,17 +113,17 @@ export default (props: any) => (
       <BreadcrumbProvider>
         <Menu nodeKey="bodilessMenu" />
         <H2>Breadcrumbs with editable starting trail</H2>
-        <MenuBreadcrumbs nodeKey="bodilessMenu" className="my-2" />
+        <MenuBreadcrumbs nodeKey="bodilessMenu" />
         <H2>Breadcrumbs with starting trail icon</H2>
-        <BreadcrumbWithStartingTrailIcon nodeKey="bodilessMenu" className="my-2" />
+        <BreadcrumbWithStartingTrailIcon nodeKey="bodilessMenu" />
         <H2>Breadcrumbs with non-linkable Middle Trail group</H2>
-        <BreadcrumbWithNonLinkableItems nodeKey="bodilessMenu" className="my-2" />
+        <BreadcrumbWithNonLinkableItems nodeKey="bodilessMenu" />
         <H2>Breadcrumbs with boldable final trail item</H2>
-        <BreadcrumbWithBoldableFinalItem nodeKey="bodilessMenu" className="my-2" />
+        <BreadcrumbWithBoldableFinalItem nodeKey="bodilessMenu" />
         <H2>Breadcrumbs with vertical bar separator</H2>
-        <BreadcrumbWithVerticalBarSeparator nodeKey="bodilessMenu" className="my-2" />
+        <BreadcrumbWithVerticalBarSeparator nodeKey="bodilessMenu" />
         <H2>Breadcrumbs with slash separator</H2>
-        <BreadcrumbWithSlashSeparator nodeKey="bodilessMenu" className="my-2" />
+        <BreadcrumbWithSlashSeparator nodeKey="bodilessMenu" />
         <H2>Breadcrumbs with hidden current page item</H2>
         <P>
           {`
@@ -133,9 +132,9 @@ export default (props: any) => (
           and current page is /breadcrumb, then this test component will render just Home -> Components
         `}
         </P>
-        <BreadcrumbWithHiddenCurrentPageItem nodeKey="bodilessMenu" className="my-2" />
+        <BreadcrumbWithHiddenCurrentPageItem nodeKey="bodilessMenu" />
         <H2>MegaMenu breadcrumbs with non-editable starting trail and non-linkable Middle Trail group</H2>
-        <MegaMenuBreadcrumbWithNonLinkableItems nodeKey="bodilessMenu" className="my-2" />
+        <MegaMenuBreadcrumbWithNonLinkableItems nodeKey="bodilessMenu" />
       </BreadcrumbProvider>
     </Layout>
   </Page>

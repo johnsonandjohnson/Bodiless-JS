@@ -12,24 +12,16 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
+import React, { ComponentType } from 'react';
 import {
   mergeWith,
   isArray,
   flow,
 } from 'lodash';
+import { asToken, ComponentWithMeta } from '@bodiless/fclasses';
+import type { HOC } from '@bodiless/fclasses';
 
-type MetaCategory = {
-  [cat:string]: string[],
-};
-type WithMeta = {
-  title?: string,
-  displayName?: string,
-  description?: string,
-  categories?: MetaCategory,
-};
-type CTWM = CT & WithMeta;
-export type HOC = (Component?:CTWM) => CTWM;
+type CTWM = ComponentWithMeta;
 
 function customizer(objValue:any, srcValue:any) {
   if (isArray(objValue)) {
@@ -42,20 +34,20 @@ const asPassThough = (Component:CTWM) => Component;
  * Creates an HOC use it to attach meta data in an hoc.
  * @param Component The component to wrap.
  */
-const withOutMeta = <P extends Object> (Component:CTWM) => (props:P) => (<Component {...props} />);
+const withOutMeta:HOC = Component => props => <Component {...props} />;
 /**
  * withMeta creates an HOC that will add meta data to a React Component
  * @param meta the data to be side loaded in to the component
  */
-const withMeta = (meta:Object) => (Component:CTWM) => {
+const withMeta = (meta:Object): HOC => Component => {
   const newMeta = mergeWith({}, Component, meta, customizer);
-  return Object.assign(withOutMeta(Component), newMeta);
+  return Object.assign(withOutMeta(Component), newMeta) as ComponentWithMeta<any>;
 };
 /**
  * with Title returns an HOC that sideloads a title to a component
  * @param title The title to be added
  */
-const withTitle = (title: string) => (Component: CTWM) => (
+const withTitle = (title: string): HOC => Component => (
   withMeta({ title })(Component)
 );
 /**
@@ -63,8 +55,8 @@ const withTitle = (title: string) => (Component: CTWM) => (
  * Note it appends to the title with a space.
  * @param title The title to be appended
  */
-const withAppendTitle = (newTitle: string) => (Component: CTWM) => {
-  const { title } = Component;
+const withAppendTitle = (newTitle: string): HOC => Component => {
+  const { title } = Component as ComponentWithMeta;
   if (title) {
     return withTitle(`${title} ${newTitle}`)(Component);
   }
@@ -74,15 +66,15 @@ const withAppendTitle = (newTitle: string) => (Component: CTWM) => {
  * withDisplayName returns an HOC that sideloads a displayName to a component
  * @param displayName The displayName to be added
  */
-const withDisplayName = (displayName: string) => (Component: CTWM) => (
+const withDisplayName = (displayName: string): HOC => Component => (
   withMeta({ displayName })(Component)
 );
 /**
  * withAppendDisplayName returns a HOC that appends a name to the sideloaded DisplayName
  * @param newDisplayName the Display name to append
  */
-const withAppendDisplayName = (newDisplayName: string) => (Component: CTWM) => {
-  const { displayName } = Component;
+const withAppendDisplayName = (newDisplayName: string): HOC => Component => {
+  const { displayName } = Component as ComponentWithMeta;
   if (displayName) {
     return withDisplayName(displayName + newDisplayName)(Component);
   }
@@ -92,18 +84,17 @@ const withAppendDisplayName = (newDisplayName: string) => (Component: CTWM) => {
  * withDesc returns an HOC that sideloads the provided discription to the component.
  * @param description the discription to add
  */
-const withDesc = (description: string) => (Component: CTWM):CTWM => (
+const withDesc = (description: string): HOC => Component => (
   withMeta({ description })(Component)
 );
 /**
  * withAppendDesc returns an HOC that appends a description to the component sideload description.
  * @param newDescription the description to be appened
  */
-const withAppendDesc = (newDescription: string) => (Component: CTWM):CTWM => {
-  const description = Component.description
-    ? Component.description + newDescription
-    : newDescription;
-  return withDesc(description)(Component);
+const withAppendDesc = (newDescription: string): HOC => Component => {
+  const { description } = Component as ComponentWithMeta;
+  const description$ = description ? `${description}${newDescription}` : newDescription;
+  return withDesc(description$)(Component);
 };
 /**
  * withTerm returns a function that then takes a term and that returns an HOC that side loads
@@ -111,7 +102,7 @@ const withAppendDesc = (newDescription: string) => (Component: CTWM):CTWM => {
  * @param cat that category to use in adding a term
  * @param term the term to add
  */
-const withTerm = (cat: string) => (term: string) => (Component: CTWM):CTWM => (
+const withTerm = (cat: string) => (term: string):HOC => Component => (
   withMeta({ categories: { [cat]: [term] } })(Component)
 );
 /**
@@ -119,8 +110,8 @@ const withTerm = (cat: string) => (term: string) => (Component: CTWM):CTWM => (
  * theMeta data from the component.
  * @param hoc the hoc to wrap.
  */
-const perserveMeta = (hoc:HOC) => (Component:CTWM):CTWM => (
-  withMeta(Component)(hoc(Component))
+const perserveMeta = (hoc: HOC): HOC => Component => (
+  withMeta(Component)(hoc(Component) as ComponentType<any>)
 );
 
 /**
@@ -130,7 +121,7 @@ const perserveMeta = (hoc:HOC) => (Component:CTWM):CTWM => (
  * @param term the Term in the Category associated with the Component
  * @param hocs the HOC to apply to the Component
  */
-const withFacet = (cat: string) => (term: string) => (...hocs: HOC[]) => flow(
+const withFacet = (cat: string) => (term: string) => (...hocs: HOC[]) => asToken(
   perserveMeta(flow(...hocs)),
   withTerm(cat)(term),
   withAppendTitle(term),

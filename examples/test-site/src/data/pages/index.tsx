@@ -14,11 +14,10 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { Editable, asBodilessList } from '@bodiless/components';
 import {
-  withDesign, replaceWith, addClasses, stylable,
+  withDesign, replaceWith, addClasses, stylable, asToken,
 } from '@bodiless/fclasses';
 import Helmet from 'react-helmet';
 import Layout from '../../components/Layout';
@@ -43,16 +42,16 @@ const BulletPoints = (props: any) => (
   <span {...props}><Editable nodeKey="bullet" placeholder="Enter Bullet Item" /></span>
 );
 
-const EditableBulletPoints = flow(
+const EditableBulletPoints = asToken(
   asBodilessList('bulletpoints'),
   withDesign({
     Title: replaceWith(BulletPoints),
-    Wrapper: flow(stylable, addClasses('m-6 py-3 flex flex-wrap md:flex-nowrap list-disc w-full')),
-    Item: flow(stylable, addClasses('w-full md:w-auto md:flex-1')),
+    Wrapper: asToken(stylable, addClasses('m-6 py-3 flex flex-wrap md:flex-nowrap list-disc w-full')),
+    Item: asToken(stylable, addClasses('w-full md:w-auto md:flex-1')),
   }),
 )('ul');
 
-const HeaderImage = flow(
+const HeaderImage = asToken(
   asEditableImage('header_image'),
   addClasses('w-full'),
 )('img');

@@ -37,7 +37,7 @@ const ui = {
   TextSelectorWrapper,
 };
 
-const RichText = <P extends object>(props: P & RichTextProps) => (
+const RichText = (props: Omit<RichTextProps, 'ui'>) => (
   <PlainRichText {...props} ui={ui} />
 );
 

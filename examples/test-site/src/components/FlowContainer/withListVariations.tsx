@@ -11,7 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { flow } from 'lodash';
 import {
   withTitle,
   withDesc,
@@ -20,13 +19,14 @@ import {
   varyDesign,
   replaceWith,
   withDesign,
+  asToken,
 } from '@bodiless/fclasses';
 
 import ChameleonListDemo from '../../data/pages/list2/ChameleonListDemo';
 import { withType } from './Categories';
 
 const listVariations = {
-  ChameleonList: flow(
+  ChameleonList: asToken(
     replaceWith(ChameleonListDemo),
     withType('List')(),
     withTitle('Chameleon LIst'),

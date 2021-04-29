@@ -11,12 +11,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { ComponentType } from 'react';
+import React from 'react';
 import { graphql } from 'gatsby';
-import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
-  H1, addProps, withDesign, replaceWith, H3, H2, addClasses,
+  H1, addProps, withDesign, replaceWith, H3, H2, addClasses, asToken, Token, ComponentWithMeta,
 } from '@bodiless/fclasses';
 import {
   CardClean,
@@ -25,15 +24,15 @@ import {
   asAccordionBody, asAccodionTitle, asAccordionWrapper,
 } from '@bodiless/organisms';
 import {
-  withActivateOnEffect, withNodeKey, WithNodeKeyProps, withNode,
-  withNodeDataHandlers, useNode,
+  withActivateOnEffect, withNodeKey, withNode,
+  withNodeDataHandlers, useNode, WithNodeProps,
 } from '@bodiless/core';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import { withTitle, withDesc } from '@bodiless/layouts';
 import {
   TokenLibrary, withTokenNamesFromData, withTokensFromProps, TokenPrinter,
   withTokenPrinterKeys, withReactivateOnRemount,
-  TokenPanel as TokenPaneLClean, withTokenPanelPane,
+  TokenPanel as TokenPanelClean, withTokenPanelPane,
 } from '@bodiless/tokens';
 import Layout from '../../../components/Layout';
 import {
@@ -44,10 +43,10 @@ import * as availableTokens from '../../../components/Card/token';
 import { withTypographyTokenPanel } from './TypographySelector';
 
 const asFancyPanel = withDesign({
-  Title: flow(asAccodionTitle, asHeader3, asPrimaryColorBackground),
+  Title: asToken(asAccodionTitle, asHeader3, asPrimaryColorBackground),
   Wrapper: asAccordionWrapper,
   Body: asAccordionBody,
-  Category: flow(asBold, addClasses('mt-2')),
+  Category: asToken(asBold, addClasses('mt-2')),
   CheckBox: addClasses('mr-2'),
   Label: addClasses('block'),
 });
@@ -56,13 +55,13 @@ const asFancyWrapper = withDesign({
   Panel: asFancyPanel,
 });
 
-const TokenPanel = asFancyWrapper(TokenPaneLClean);
+const TokenPanel = asFancyWrapper(TokenPanelClean);
 
-const withFlowContainerFirstItemNode = (nodeKey: string) => <P extends object>(
-  Component: ComponentType<P & WithNodeKeyProps>,
-) => {
+const withFlowContainerFirstItemNode = (
+  nodeKey: string,
+): Token<{}, Partial<WithNodeProps>> => Component => {
   const ComponentWithNode = withNode(Component);
-  const WithFlowContainerFirstItemNode = (props: P) => {
+  const WithFlowContainerFirstItemNode = (props: any) => {
     const { node } = useNode<any>();
     const { items } = node.data;
     const item = items && items[0];
@@ -70,20 +69,20 @@ const withFlowContainerFirstItemNode = (nodeKey: string) => <P extends object>(
       ? <ComponentWithNode {...props} nodeKey={items[0].uuid} />
       : <Component {...props} />;
   };
-  return flow(
+  return asToken(
     withNode,
     withNodeKey(nodeKey),
-  )(WithFlowContainerFirstItemNode);
+  )(WithFlowContainerFirstItemNode) as ComponentWithMeta<any>;
 };
 
-const withTokenData = (nodeKey: string) => flow(
+const withTokenData = (nodeKey: string) => asToken(
   withTokenNamesFromData,
   withNodeDataHandlers(),
   withNode,
   withNodeKey(nodeKey),
 );
 
-const CardTokenPrinter = flow(
+const CardTokenPrinter = asToken(
   withTokenPrinterKeys(['Title', 'Body', 'Link']),
   withDesign({
     Title: withTokenData('title-selector'),
@@ -101,7 +100,7 @@ const TokenPrinterBody = asAccordionBody(() => (
     </code>
   </pre>
 ));
-const TokenPrinterTitle = flow(
+const TokenPrinterTitle = asToken(
   asPrimaryColorBackground,
   asHeader3,
   asAccodionTitle,
@@ -114,7 +113,7 @@ const TokenPrinterAccordion = asAccordionWrapper(() => (
   </div>
 ));
 
-const DemoTokenPanelCard = flow(
+const DemoTokenPanelCard = asToken(
   withDesign({
     Title: withReactivateOnRemount('title'),
     Body: withReactivateOnRemount('body'),
@@ -123,15 +122,15 @@ const DemoTokenPanelCard = flow(
   }),
   asEditableCard,
   withDesign({
-    Title: flow(
+    Title: asToken(
       withTypographyTokenPanel('title-selector'),
       addProps({ tokenPanelTitle: 'Title' }),
     ),
-    Body: flow(
+    Body: asToken(
       withTypographyTokenPanel('body-selector'),
       addProps({ tokenPanelTitle: 'Body' }),
     ),
-    Link: flow(
+    Link: asToken(
       withTypographyTokenPanel('link-selector'),
       addProps({ tokenPanelTitle: 'CTA' }),
     ),
@@ -144,11 +143,11 @@ const DemoTokenPanelCard = flow(
 )(CardClean);
 
 const PageTitle = asHeader1(H1);
-const ColumnHeader = flow(asHeader2, addClasses('my-2'))(H2);
+const ColumnHeader = asToken(asHeader2, addClasses('my-2'))(H2);
 
-const DemoFlowContainer = flow(
+const DemoFlowContainer = asToken(
   withDesign({
-    Card: flow(
+    Card: asToken(
       replaceWith(DemoTokenPanelCard),
       withTitle('Card'),
       withDesc('A way to promote a call to Action.'),

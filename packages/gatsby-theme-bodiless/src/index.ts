@@ -29,6 +29,6 @@ export {
   Page,
 };
 
-export type { Props as PageProps } from './dist/Page';
+export type { PageProps } from './dist/Page';
 export * from './dist/GatsbyLink';
 export * from './dist/GatsbyImage';

@@ -12,13 +12,14 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
-import React, { FC, ComponentType } from 'react';
+import React, { FC } from 'react';
 import {
   designable,
   Div,
   Span,
+  HOC,
   DesignableProps,
+  DesignableComponentsProps,
 } from '@bodiless/fclasses';
 import {
   asAccordionIcon,
@@ -26,15 +27,17 @@ import {
   asAccordionLabel,
 } from './Accordion.tokens';
 import { useAccordionContext } from './AccordionContext';
-import { AccordionTitleProps, AccordionTitleComponents } from './types';
+import { AccordionTitleProps, AccordionTitleComponents, AccordionComponents } from './types';
 
-const AccordionTitleComponentsStart:AccordionTitleComponents = {
+const accordionTitleComponents:AccordionTitleComponents = {
   Wrapper: asAccordionTitleWrapper(Div),
   Icon: asAccordionIcon(Span),
   Label: asAccordionLabel(Div),
 };
 
-const AccordionTitleBase: FC<AccordionTitleProps> = ({ components, children }) => {
+type AccordionTitleBaseProps =
+  Omit<AccordionTitleProps, 'design'> & DesignableComponentsProps<AccordionTitleComponents>;
+const AccordionTitleBase: FC<AccordionTitleBaseProps> = ({ components, children }) => {
   const { Wrapper, Label, Icon } = components;
   const { isExpanded, setExpanded } = useAccordionContext();
 
@@ -48,20 +51,22 @@ const AccordionTitleBase: FC<AccordionTitleProps> = ({ components, children }) =
   );
 };
 
-const AccordionTitleClean = flow(
-  designable(AccordionTitleComponentsStart, 'AccordionTitle'),
+const AccordionTitleClean = designable(
+  accordionTitleComponents,
+  'AccordionTitle',
 )(AccordionTitleBase);
 
-const asAccodionTitle = <P extends DesignableProps<AccordionTitleComponents>>(
-  Component: ComponentType<P> | string,
-) => (props: P) => {
-    const { design } = props;
+const asAccodionTitle: HOC = Component => {
+  const AsAccordionTitle: FC<any> = props => {
+    const { design } = props as DesignableProps<AccordionComponents>;
     return (
       <AccordionTitleClean design={design}>
         <Component {...props} />
       </AccordionTitleClean>
     );
   };
+  return AsAccordionTitle;
+};
 
 export default AccordionTitleClean;
 export {

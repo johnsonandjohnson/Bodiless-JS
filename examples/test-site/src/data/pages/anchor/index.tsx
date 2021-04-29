@@ -13,31 +13,30 @@
  */
 /* eslint-disable max-len */
 import React, { ComponentType } from 'react';
-import { flow } from 'lodash';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { asBodilessAnchor, asBodilessList } from '@bodiless/components';
 import { withSidecarNodes, withNode } from '@bodiless/core';
 import {
-  A, H1, H2, H4, P, Ul, Li, addClasses, withDesign, replaceWith,
+  A, H1, H2, H4, P, Ul, Li, addClasses, withDesign, replaceWith, asToken,
 } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
 import {
   asHeader1, asHeader2, asEditableLink, asEditable, asBold,
 } from '../../../components/Elements.token';
 
-const BackToTopH1 = flow(
+const BackToTopH1 = asToken(
   asHeader1,
   asBodilessAnchor(),
-)(H1) as ComponentType;
+)(H1);
 
-const AnchorTitle = flow(
+const AnchorTitle = asToken(
   asHeader2,
   asBodilessAnchor(),
   addClasses('mt-10'),
-)(H2) as ComponentType;
+)(H2);
 
-const AnchorSubtitle = flow(
+const AnchorSubtitle = asToken(
   asBodilessAnchor(),
   asBold,
   addClasses('my-2'),
@@ -45,7 +44,7 @@ const AnchorSubtitle = flow(
 
 const TextSection = addClasses('my-4')(P) as ComponentType;
 
-const asAnchorLink = flow(
+const asAnchorLink = asToken(
   replaceWith(A),
   withSidecarNodes(
     asBodilessAnchor('anchor'),
@@ -55,7 +54,7 @@ const asAnchorLink = flow(
   withNode,
 );
 
-const AnchorLinkList = flow(
+const AnchorLinkList = asToken(
   asBodilessList(),
   withDesign({
     Title: asAnchorLink,

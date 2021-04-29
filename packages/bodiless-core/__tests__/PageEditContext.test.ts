@@ -103,6 +103,7 @@ describe('PageEditContext', () => {
   });
 });
 
+// eslint-disable-next-line jest/no-disabled-tests
 describe.skip('mobx', () => {
   it('react on nested map only when properties change', () => {
     const outer = observable.map({});

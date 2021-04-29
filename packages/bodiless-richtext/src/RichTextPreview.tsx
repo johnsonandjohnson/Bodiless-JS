@@ -13,19 +13,19 @@
  */
 
 import React from 'react';
-import { withoutProps } from '@bodiless/core';
 import {
   flowIf,
   hasProp,
   addProps,
   replaceWith,
+  withoutProps,
 } from '@bodiless/fclasses';
 import { getUI } from './RichTextContext';
 import withDefaults from './withDefaults';
 import PluginButton from './components/PluginButton';
-import type { RichTextProps } from './Type';
+import type { RichTextBaseProps } from './Type';
 
-const BaseRichTextPreview = <P extends object>(props: P & RichTextProps) => {
+const BaseRichTextPreview = (props: RichTextBaseProps) => {
   const { components, ui } = props;
   const finalComponents = withDefaults(components);
   const { PreviewWrapper } = getUI(ui);

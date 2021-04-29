@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import { WithNodeKeyProps } from '@bodiless/core';
 import {
   addClasses, removeClasses, asToken, Token,
@@ -37,6 +36,7 @@ import {
 
 export const withCategory = <P extends object>(category?: string) => (...hocs: Token[]) => (
   asToken(
+    {}, // see https://github.com/microsoft/TypeScript/issues/28010
     ...hocs,
     category ? asToken.meta.term('Category')(category) : undefined,
   )
@@ -55,7 +55,7 @@ const withPadding5 = addClasses('p-5');
 
 /* Responsive design */
 const asMobileOnly = addClasses('lg:hidden');
-const asDesktopOnly = flow(
+const asDesktopOnly = asToken(
   addClasses('hidden lg:flex'),
   removeClasses('flex'),
 );
@@ -74,11 +74,11 @@ const asLightTealBackgroundOnHover = addClasses('hover:bg-teal-500');
 const asBold = addClasses('font-bold');
 const asItalic = addClasses('italic');
 const asLink = addClasses('text-blue-700 underline');
-const asActiveMenuLink = flow(asBold, addClasses('bg-teal-500'));
+const asActiveMenuLink = asToken(asBold, addClasses('bg-teal-500'));
 const asStrikeThrough = addClasses('');
 const asSuperScript = addClasses('');
 
-const asHeader1 = flow(addClasses('text-3xl'), asTextColorPrimary);
+const asHeader1 = asToken(addClasses('text-3xl'), asTextColorPrimary);
 const asHeader2 = addClasses('text-2xl');
 const asHeader3 = addClasses('text-xl');
 

@@ -13,7 +13,7 @@
  */
 
 import { flow } from 'lodash';
-import { withDesign, addClasses } from '@bodiless/fclasses';
+import { withDesign, addClasses, asToken } from '@bodiless/fclasses';
 import { ifViewportIsNot } from '@bodiless/components';
 import {
   asAccordionWrapper,
@@ -21,14 +21,14 @@ import {
   asAccodionTitle,
 } from '../Accordion';
 
-const asResponsiveAccordionTitle = flow(
+const asResponsiveAccordionTitle = asToken(
   asAccodionTitle,
   withDesign({
     Icon: addClasses('lg:hidden'),
   }),
 );
 
-const asExpandedOnDesktopBody = flow(
+const asExpandedOnDesktopBody = asToken(
   asAccordionBody,
   withDesign({
     Wrapper: addClasses('lg:block'),

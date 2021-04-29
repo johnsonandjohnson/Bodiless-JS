@@ -12,16 +12,17 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React from 'react';
+import { HOC } from '@bodiless/fclasses';
 import { AccordionProvider } from './AccordionContext';
-import { AccordionProviderProps } from './types';
 
-const asAccordionWrapper = <P extends Object>(
-  Component: ComponentType<P> | string,
-) => ({ expanded, ...rest }: P & AccordionProviderProps) => (
-  <AccordionProvider expanded={expanded}>
-    <Component {...rest as P} />
-  </AccordionProvider>
+const asAccordionWrapper:HOC = Component => {
+  const AsAccordionWrapper = ({ expanded, ...rest }: any) => (
+    <AccordionProvider expanded={expanded}>
+      <Component {...rest} />
+    </AccordionProvider>
   );
+  return AsAccordionWrapper;
+};
 
 export default asAccordionWrapper;

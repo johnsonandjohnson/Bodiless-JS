@@ -12,37 +12,53 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT, FC } from 'react';
+import React, { FC } from 'react';
 import { pickBy } from 'lodash';
+import { HOC, Injector } from '@bodiless/fclasses';
 import NodeProvider, { useNode } from './NodeProvider';
 import { WithNodeProps } from './Types/NodeTypes';
 
-const withNode = <P extends object, D extends object>(Component: CT<P>) => {
+/**
+ * HOC which gives a component a content node.  The enhanced component accepts an optional
+ * a `nodeKey` prop.  When specified, the component will be given a new node which is
+ * a child of the current node.
+ *
+ * @param Component
+ */
+const withNode:HOC<{}, WithNodeProps> = Component => {
   const WithNode = ({
     nodeKey,
     nodeCollection,
     ...rest
-  }: P & WithNodeProps) => {
-    if (!nodeKey) return <Component {...rest as P} />;
-    const node = useNode<D>(nodeCollection).node.child(nodeKey);
+  }: WithNodeProps) => {
+    if (!nodeKey) return <Component {...rest as any} />;
+    const node = useNode(nodeCollection).node.child(nodeKey);
     return (
       <NodeProvider node={node} collection={nodeCollection}>
-        <Component {...rest as P} />
+        <Component {...rest as any} />
       </NodeProvider>
     );
   };
   return WithNode;
 };
-const withNodeKey = <P extends object>(
+
+/**
+ * HOC which gives a component a node key. The enhanced component must first
+ * have been wrapped by `withNode`.  This HOC simply adds a nodeKey prop.
+ *
+ * @param Component
+ */
+const withNodeKey = (
   nodeKeys: string|Partial<WithNodeProps> = {},
-) => (Component: CT<P> | string) => {
-    const nodeKeyProps = pickBy(
-      typeof nodeKeys === 'string' ? { nodeKey: nodeKeys } : nodeKeys,
-    );
-    const WithNodeKey: FC<P & Partial<WithNodeProps>> = props => (
-      <Component {...nodeKeyProps} {...props} />
-    );
-    return WithNodeKey;
-  };
+): Injector<WithNodeProps> => Component => {
+  const nodeKeyProps = pickBy(
+    typeof nodeKeys === 'string' ? { nodeKey: nodeKeys } : nodeKeys,
+  );
+  const WithNodeKey: FC<any> = props => (
+    <Component {...nodeKeyProps} {...props} />
+  );
+  return WithNodeKey;
+};
+
 export default withNode;
 export { withNodeKey };

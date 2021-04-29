@@ -13,8 +13,8 @@
  */
 
 import { flow } from 'lodash';
-import React, { ComponentType, PropsWithChildren } from 'react';
-import { asComponent } from '@bodiless/fclasses';
+import React, { ComponentType } from 'react';
+import { asComponent, HOC } from '@bodiless/fclasses';
 import {
   ListProps,
   withToggleTo,
@@ -31,30 +31,28 @@ import { asAccodionTitle } from './AccordionTitle';
  *
  * @param Sublist The sublist component to add to the list accordion body.
  */
-const asAccordionSublist = (Sublist: ComponentType<ListProps>) => (
-  (Item: ComponentType<PropsWithChildren<{}>> | string) => {
-    const AccordionWrapper = asAccordionWrapper(Item);
-    const AccordionBody = asAccordionBody(Sublist);
-    const AccordionTitle = flow(
-      asAccodionTitle,
-      asComponent,
-    )('div');
+const asAccordionSublist = (Sublist: ComponentType<ListProps>): HOC => Item => {
+  const AccordionWrapper = asAccordionWrapper(Item) as any;
+  const AccordionBody = asAccordionBody(Sublist);
+  const AccordionTitle = flow(
+    asAccodionTitle,
+    asComponent,
+  )('div');
 
-    const ItemWithSublist: ComponentType<ListProps> = ({ children, ...rest }) => (
-      <AccordionWrapper>
-        <AccordionTitle>
-          {children}
-        </AccordionTitle>
-        <AccordionBody {...rest} />
-      </AccordionWrapper>
-    );
-    const ItemWithoutSublist: ComponentType<ListProps> = ({ wrap, nodeKey, ...rest }) => (
-      <Item {...rest} />
-    );
+  const ItemWithSublist: ComponentType<ListProps> = ({ children, ...rest }) => (
+    <AccordionWrapper>
+      <AccordionTitle>
+        {children}
+      </AccordionTitle>
+      <AccordionBody {...rest} />
+    </AccordionWrapper>
+  );
+  const ItemWithoutSublist: ComponentType<ListProps> = ({ wrap, nodeKey, ...rest }) => (
+    <Item {...rest as any} />
+  );
 
-    return withToggleTo(ItemWithoutSublist)(ItemWithSublist);
-  }
-);
+  return withToggleTo(ItemWithoutSublist)(ItemWithSublist) as any;
+};
 
 const withAccordionSublist = flow(
   withDeleteSublistOnUnwrap,

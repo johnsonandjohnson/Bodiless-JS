@@ -13,12 +13,12 @@
  */
 
 import React from 'react';
-import { flow } from 'lodash';
 import { withNodeKey } from '@bodiless/core';
 import {
   withDesign,
   replaceWith,
   Div,
+  asToken,
 } from '@bodiless/fclasses';
 import {
   withTitle,
@@ -32,9 +32,9 @@ import asDefaultFlowContainer from './asDefaultFlowContainer';
 const FlowContainerPreview = () => <Div className="bl-bg-black">Flow Container Preview</Div>;
 
 const withFlowContainerVariations = withDesign({
-  FlowContainer: flow(
+  FlowContainer: asToken(
     replaceWith(
-      flow(
+      asToken(
         asDefaultFlowContainer,
         withNodeKey('innerFC'),
       )(FlowContainer),

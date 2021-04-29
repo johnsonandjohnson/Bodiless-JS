@@ -25,11 +25,13 @@ import withNode, { withNodeKey } from './withNode';
 import withSidecarNodes, { startSidecarNodes, endSidecarNodes } from './withSidecarNodes';
 import withEditButton, { createMenuOptionGroup } from './withEditButton';
 import useContextMenuForm, { contextMenuForm, ContextMenuForm } from './contextMenuForm';
+import type { FormBodyProps, FormBodyRenderer } from './contextMenuForm';
 import withCompoundForm, { useRegisterSnippet } from './withCompoundForm';
 import withEditFormSnippet, { useEditFormProps } from './withEditFormSnippet';
 import type { Options as EditFormSnippetOptions } from './withEditFormSnippet';
 import withData from './withData';
 import NodeProvider, { useNode, useNodeDataHandlers } from './NodeProvider';
+import type { NodeDataHandlers } from './NodeProvider';
 import { DefaultContentNode } from './ContentNode';
 import type { ContentNode, Path as ContentNodePath } from './ContentNode';
 import {
@@ -37,7 +39,6 @@ import {
   withNodeDataHandlers,
   withLocalContextMenu,
   withContextActivator,
-  withoutProps,
   withExtendHandler,
   withOnlyProps,
   withResizeDetector,
@@ -116,7 +117,6 @@ export {
   DefaultContentNode,
   ifEditable,
   ifReadOnly,
-  withoutProps,
   withOnlyProps,
   withResizeDetector,
   ActivateOnEffectProvider,
@@ -151,6 +151,8 @@ export type {
   WithNodeProps,
   WithNodeKeyProps,
   EditButtonOptions,
+  FormBodyProps,
+  FormBodyRenderer,
   OptionGroupDefinition,
   UseBodilessOverrides,
   EditButtonProps,
@@ -161,6 +163,7 @@ export type {
   FormSnippet,
   MenuOptionsDefinition,
   EditFormSnippetOptions,
+  NodeDataHandlers,
 };
 
 export type Bodiless<P, Q> = (C: ComponentType<P> | string) => ComponentType<Q>;

@@ -17,6 +17,8 @@ import { render } from 'enzyme';
 import { flowRight, flow } from 'lodash';
 import React, { HTMLProps, FC, ComponentType } from 'react';
 
+import { HOC, asToken } from '../src';
+
 import {
   addClasses, removeClasses, stylable,
 } from '../src/FClasses';
@@ -37,8 +39,6 @@ type CardComponents = {
   Body: ComponentType<any>,
   Cta: ComponentType<any>,
 };
-
-type HOC = <P extends object>(Component: ComponentType<P>) => ComponentType<P>;
 
 const getCardComponents = applyDesign({
   Wrapper: stylable('div'),
@@ -89,7 +89,7 @@ const withGreenCtaText = withDesign({
   Cta: flow(
     addClasses('text-green'),
     removeClasses('text-yellow'),
-  ),
+  ) as HOC,
 });
 
 // @ts-ignore: Types of parameters are incompatible.
@@ -180,7 +180,7 @@ const ContextMenuButton = flow(
   withoutProps<VariantProps>(['isActive', 'isFirst', 'isEnabled']),
   addClasses('cursor-pointer pl-2 text-gray') as HOC,
   flowIf(hasProp('isActive'))(
-    flow(addClasses('text-white'), removeClasses('text-gray')),
+    asToken(addClasses('text-white'), removeClasses('text-gray')),
   ),
   flowIf(hasProp('isFirst'))(
     removeClasses('pl-2'),

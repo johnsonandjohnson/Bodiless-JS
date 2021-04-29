@@ -20,7 +20,7 @@ import Layout from '../../../components/Layout';
 import withBasicVariations from './Basic';
 import ChameleonBox from './ChameleonBox';
 
-const FCDemo = withBasicVariations(FlowContainer as any);
+const FCDemo = withBasicVariations(FlowContainer);
 
 export default (props: any) => (
   <Page {...props}>

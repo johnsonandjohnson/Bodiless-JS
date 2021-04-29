@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
+import React from 'react';
 import { Link as BaseGatsbyLink } from 'gatsby';
 import type { GatsbyLinkProps } from 'gatsby';
 import flow from 'lodash/flow';
@@ -22,13 +22,15 @@ import {
   withDesign,
   A,
   addProps,
+  Token,
+  ComponentOrTag,
 } from '@bodiless/fclasses';
 import { ifReadOnly } from '@bodiless/core';
 import type { BodilessLinkProps } from '@bodiless/components';
 
 type Components = {
-  GatsbyLink: CT<GatsbyLinkProps<any>>,
-  Link: CT<BodilessLinkProps>,
+  GatsbyLink: ComponentOrTag<GatsbyLinkProps<any>>,
+  Link: ComponentOrTag<BodilessLinkProps>,
 };
 
 /**
@@ -39,10 +41,10 @@ const isLocalLink = (path: string) => path
   && !path.startsWith('https://')
   && !path.startsWith('//');
 
-const asGatsbyLink$ = (Component: CT<BodilessLinkProps>) => {
+const asGatsbyLink$:Token<BodilessLinkProps> = Component => {
   const startComponents: Components = {
     GatsbyLink: BaseGatsbyLink,
-    Link: Component,
+    Link: Component as ComponentOrTag<BodilessLinkProps>,
   };
   const AsGatsbyLink = (props: any) => {
     const { components, href, ...rest } = props;
