@@ -12,30 +12,44 @@
  * limitations under the License.
  */
 
-import { flowIf, withDesign } from '@bodiless/fclasses';
-import { flatten, flow } from 'lodash';
-import React, { ComponentType } from 'react';
+import {
+  flowIf,
+  withDesign,
+  HOC,
+  asToken,
+} from '@bodiless/fclasses';
+import { flatten } from 'lodash';
+import React from 'react';
 import { useTableColumnContext, useTableRowContext, useTableSectionContext } from './TableContext';
 import { Section } from './types';
 
-const withInnerText = <A extends object>(text:string) => (
-  (Component:ComponentType<A>) => (props:A) => (
+const withInnerText = (text: string): HOC => Component => {
+  const WithInnerText = (props: any) => (
     <Component {...props}>{text}</Component>
-  )
-);
-const withCols = <A extends Object> (...columns:string[]) => (
-  (Component:ComponentType<A>) => (props:A) => (
-    <Component columns={columns} {...props} />
-  ));
-const withRows = <A extends Object> (...rows:string[]) => (
-  (Component:ComponentType<A>) => (props:A) => (
-    <Component rows={rows} {...props} />
-  ));
+  );
+  return WithInnerText;
+};
 
-const withHeadRows = <A extends Object> (...rows:string[]) => (
-  (Component:ComponentType<A>) => (props:A) => (
+const withCols = (...columns:string[]): HOC => Component => {
+  const WithCols = (props: any) => (
+    <Component columns={columns} {...props} />
+  );
+  return WithCols;
+};
+
+const withRows = (...rows:string[]): HOC => Component => {
+  const WithRows = (props: any) => (
+    <Component rows={rows} {...props} />
+  );
+  return WithRows;
+};
+
+const withHeadRows = (...rows:string[]): HOC => Component => {
+  const WithHeadRows = (props: any) => (
     <Component headRows={rows} {...props} />
-  ));
+  );
+  return WithHeadRows;
+};
 
 type TableContentRow = string[];
 type TableContent = TableContentRow[];
@@ -66,8 +80,8 @@ const withContent = (props:WithContentProps) => {
     withRows(...body.map((t, i) => i.toString())),
     withHeadRows(...head.map((t, i) => i.toString())),
   ];
-  return flow(...tableHocs, withDesign({
-    Cell: flow(...flatten([...headHocs, ...bodyHocs])),
+  return asToken(...tableHocs, withDesign({
+    Cell: asToken(...flatten([...headHocs, ...bodyHocs])),
   }));
 };
 

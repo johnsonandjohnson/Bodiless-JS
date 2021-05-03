@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import React from 'react';
 import {
   TMenuOption,
   withContextActivator,
@@ -28,9 +29,8 @@ import {
   withoutProps,
   HOC,
   flowIf,
+  asToken,
 } from '@bodiless/fclasses';
-import { flow } from 'lodash';
-import React, { ComponentType as CT } from 'react';
 import { v1 } from 'uuid';
 import {
   TableBaseProps,
@@ -69,7 +69,7 @@ const moveX = (props:TableActionProps) => (currentIndex:number) => {
   setComponentData(componentData);
 };
 type TableFunc = (p:WithTableManagerProps) => TableFuncs;
-const tableMangerFunc:TableFunc = ({ componentData, setComponentData }) => ({
+const tableManagerFunc:TableFunc = ({ componentData, setComponentData }) => ({
   addColumn: (currentColumnIndex, newColumn) => {
     componentData.columns.splice(currentColumnIndex + 1, 0, newColumn);
     setComponentData(componentData);
@@ -128,15 +128,20 @@ const tableMangerFunc:TableFunc = ({ componentData, setComponentData }) => ({
   }),
   data: componentData,
 });
-const withTableManager = <P extends WithTableManagerProps> (Component:CT<P>) => (props:P) => {
-  const { componentData, setComponentData } = props;
-  const tableFunc:TableFuncs = tableMangerFunc({ componentData, setComponentData });
-  return (
-    <TableManagerContext.Provider value={tableFunc}>
-      <Component {...props} />
-    </TableManagerContext.Provider>
-  );
+
+const withTableManager: HOC = Component => {
+  const WithTableManager = (props: any) => {
+    const { componentData, setComponentData } = props;
+    const tableFunc:TableFuncs = tableManagerFunc({ componentData, setComponentData });
+    return (
+      <TableManagerContext.Provider value={tableFunc}>
+        <Component {...props} />
+      </TableManagerContext.Provider>
+    );
+  };
+  return WithTableManager;
 };
+
 type UseMenuOptionsTableProps = {
   addFunc:AddFunc,
   deleteFunc:DeleteFunc,
@@ -234,7 +239,7 @@ const useMenuOptionsFoot = () => useMenuOptionsTable({
   addFunc: useTableManagerContext().addFootRow,
   deleteFunc: useTableManagerContext().deleteFootRow,
   moveFunc: useTableManagerContext().moveFootRow,
-  group: 'head_row',
+  group: 'footer_row',
   groupLabel: 'Footer Row',
   index: useTableRowContext().index,
   moveIsDisabled: useTableContext().footRows.length === useTableRowContext().index + 1,
@@ -284,7 +289,7 @@ const useMenuOptionsTableOverview = () => {
   ] as TMenuOption[];
 };
 type NodeKey = string|Partial<WithNodeProps>;
-const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => flow(
+const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => asToken(
   withData,
   withoutProps(['setComponentData']),
   withTableManager,
@@ -298,33 +303,33 @@ const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => flow
   withNodeKey(nodeKey),
   withDesign({
     Wrapper: withMenuOptions({ useMenuOptions: useMenuOptionsTableOverview, name: 'Table' }),
-    TBody: flow(withNode, withNodeKey(Section.body)),
-    THead: flow(withNode, withNodeKey(Section.head)),
-    TFoot: flow(withNode, withNodeKey(Section.foot)),
-    Row: flow(
+    TBody: asToken(withNode, withNodeKey(Section.body)),
+    THead: asToken(withNode, withNodeKey(Section.head)),
+    TFoot: asToken(withNode, withNodeKey(Section.foot)),
+    Row: asToken(
       withNode,
-      withNodeKey(() => useTableRowContext().name),
+      withNodeKey(String(() => useTableRowContext().name)),
     ),
-    Cell: flow(
+    Cell: asToken(
       withLocalContextMenu,
       withContextActivator('onClick'),
       withMenuOptions({ useMenuOptions: useMenuOptionsColumns, name: 'TableColumn' }),
       flowIf(useIsInBody)(
-        withMenuOptions({ useMenuOptions: useMenuOptionsBody, name: 'TableRow' }) as HOC,
+        withMenuOptions({ useMenuOptions: useMenuOptionsBody, name: 'TableRow' }),
       ),
       flowIf(useIsInHead)(
-        withMenuOptions({ useMenuOptions: useMenuOptionsHead, name: 'TableRowHead' }) as HOC,
+        withMenuOptions({ useMenuOptions: useMenuOptionsHead, name: 'TableRowHead' }),
       ),
       flowIf(useIsInFoot)(
-        withMenuOptions({ useMenuOptions: useMenuOptionsFoot, name: 'TableRowFoot' }) as HOC,
+        withMenuOptions({ useMenuOptions: useMenuOptionsFoot, name: 'TableRowFoot' }),
       ),
       withNode,
-      withNodeKey(() => useTableColumnContext().name),
+      withNodeKey(String(() => useTableColumnContext().name)),
     ),
   }),
 );
 
 export default asBodilessTable;
 export {
-  tableMangerFunc,
+  tableManagerFunc,
 };

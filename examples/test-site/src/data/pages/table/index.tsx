@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,8 +37,8 @@ export default (props: any) => (
       <h1 className="text-3xl font-bold">Editable Table Demo</h1>
       <p className="pt-4">
         The following are editable Tables. Clicking on each cell will display
-        a menu with available operations. One can add rows and columns to the body or
-        the header. We are showing two variations, one where the first column is styled
+        a menu with available operations. Content editors can add rows and columns to the body or
+        to the header. We are showing two variations, one where the first column is styled
         differently than the other.
       </p>
       <div className="flex pt-4">

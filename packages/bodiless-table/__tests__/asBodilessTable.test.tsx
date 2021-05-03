@@ -1,5 +1,5 @@
 import { merge } from 'lodash';
-import { tableMangerFunc } from '../src/asBodilessTable';
+import { tableManagerFunc } from '../src/asBodilessTable';
 import { TableBaseProps } from '../src/types';
 
 const testTableData = (props:Partial<TableBaseProps>) => (
@@ -15,10 +15,10 @@ const testTableData = (props:Partial<TableBaseProps>) => (
   )
 );
 describe('asBodilessTable', () => {
-  describe('tableMangerFunc', () => {
+  describe('tableManagerFunc', () => {
     describe('addColumn', () => {
       test('should add a new column after the one referenced', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ columns: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.columns).toEqual(['0', 'newColumn', '1']);
@@ -26,7 +26,7 @@ describe('asBodilessTable', () => {
         }).addColumn(0, 'newColumn');
       });
       test('should add a new column at end if index is larger then last index', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ columns: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.columns).toEqual(['0', '1', 'newColumn']);
@@ -36,7 +36,7 @@ describe('asBodilessTable', () => {
     });
     describe('addRow', () => {
       test('should add a new row after the one referenced', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ rows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.rows).toEqual(['0', 'newRow', '1']);
@@ -44,7 +44,7 @@ describe('asBodilessTable', () => {
         }).addRow(0, 'newRow');
       });
       test('should add a new row at end if index is larger then last index', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ rows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.rows).toEqual(['0', '1', 'newRow']);
@@ -54,7 +54,7 @@ describe('asBodilessTable', () => {
     });
     describe('addHeadRow', () => {
       test('should add a new head row after the one referenced', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ headRows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.headRows).toEqual(['0', 'newHeadRow', '1']);
@@ -62,7 +62,7 @@ describe('asBodilessTable', () => {
         }).addHeadRow(0, 'newHeadRow');
       });
       test('should add a new head row at end if index is larger then last index', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ headRows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.headRows).toEqual(['0', '1', 'newHeadRow']);
@@ -72,7 +72,7 @@ describe('asBodilessTable', () => {
     });
     describe('addFootRow', () => {
       test('should add a new foot row after the one referenced', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ footRows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.footRows).toEqual(['0', 'newFootRow', '1']);
@@ -80,7 +80,7 @@ describe('asBodilessTable', () => {
         }).addFootRow(0, 'newFootRow');
       });
       test('should add a new foot row at end if index is larger then last index', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ footRows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.footRows).toEqual(['0', '1', 'newFootRow']);
@@ -90,7 +90,7 @@ describe('asBodilessTable', () => {
     });
     describe('deleteColumn', () => {
       test('should delete the referenced column and move others up', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ columns: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.columns).toEqual(['1']);
@@ -98,7 +98,7 @@ describe('asBodilessTable', () => {
         }).deleteColumn(0);
       });
       test('should do nothing if index is out of scope', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ columns: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.columns).toEqual(['0', '1']);
@@ -108,7 +108,7 @@ describe('asBodilessTable', () => {
     });
     describe('deleteRow', () => {
       test('should delete the referenced row and move others up', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ rows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.rows).toEqual(['1']);
@@ -116,7 +116,7 @@ describe('asBodilessTable', () => {
         }).deleteRow(0);
       });
       test('should do nothing if index is out of scope', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ rows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.rows).toEqual(['0', '1']);
@@ -126,7 +126,7 @@ describe('asBodilessTable', () => {
     });
     describe('deleteHeadRow', () => {
       test('should delete the referenced head row and move others up', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ headRows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.headRows).toEqual(['1']);
@@ -134,7 +134,7 @@ describe('asBodilessTable', () => {
         }).deleteHeadRow(0);
       });
       test('should do nothing if index is out of scope', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ headRows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.headRows).toEqual(['0', '1']);
@@ -144,7 +144,7 @@ describe('asBodilessTable', () => {
     });
     describe('deleteFootRow', () => {
       test('should delete the referenced foot row and move others up', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ footRows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.footRows).toEqual(['1']);
@@ -152,7 +152,7 @@ describe('asBodilessTable', () => {
         }).deleteFootRow(0);
       });
       test('should do nothing if index is out of scope', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ footRows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.footRows).toEqual(['0', '1']);
@@ -162,7 +162,7 @@ describe('asBodilessTable', () => {
     });
     describe('moveColumn', () => {
       test('should move the column one index lower', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ columns: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.columns).toEqual(['1', '0']);
@@ -170,7 +170,7 @@ describe('asBodilessTable', () => {
         }).moveColumn(0);
       });
       test('if last column should not change anything', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ columns: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.columns).toEqual(['0', '1']);
@@ -180,7 +180,7 @@ describe('asBodilessTable', () => {
     });
     describe('moveRow', () => {
       test('should move the row one index lower', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ rows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.rows).toEqual(['1', '0']);
@@ -188,7 +188,7 @@ describe('asBodilessTable', () => {
         }).moveRow(0);
       });
       test('if last row should not change anything', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ rows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.rows).toEqual(['0', '1']);
@@ -198,7 +198,7 @@ describe('asBodilessTable', () => {
     });
     describe('moveHeadRow', () => {
       test('should move the head row one index lower', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ headRows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.headRows).toEqual(['1', '0']);
@@ -206,7 +206,7 @@ describe('asBodilessTable', () => {
         }).moveHeadRow(0);
       });
       test('if last head row should not change anything', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ headRows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.headRows).toEqual(['0', '1']);
@@ -216,7 +216,7 @@ describe('asBodilessTable', () => {
     });
     describe('moveFootRow', () => {
       test('should move the foot row one index lower', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ footRows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.footRows).toEqual(['1', '0']);
@@ -224,7 +224,7 @@ describe('asBodilessTable', () => {
         }).moveFootRow(0);
       });
       test('if last foot row should not change anything', () => {
-        tableMangerFunc({
+        tableManagerFunc({
           componentData: testTableData({ footRows: ['0', '1'] }),
           setComponentData: (result:TableBaseProps) => {
             expect(result.footRows).toEqual(['0', '1']);

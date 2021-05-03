@@ -44,7 +44,7 @@ const DefaultCell = (props:HTMLProps<StylableProps>) => {
     : Td as ComponentType<StylableProps>;
   return <Cell {...props} />;
 };
-const tablComponentsStart:TableComponents = {
+const tableComponentsStart:TableComponents = {
   Wrapper: Table,
   TBody: Tbody,
   THead: Thead,
@@ -65,20 +65,17 @@ const TableSection = (props:TableSectionProps) => {
     <TableSectionContext.Provider value={section}>
       <Wrapper>
         {(rows || []).map((row, rowIndex) => (
-          <TableRowContext.Provider value={{ name: row, index: rowIndex }}>
+          <TableRowContext.Provider key={String(`row-${row}`)} value={{ name: row, index: rowIndex }}>
             <Row
               key={row}
             >
               {(columns || []).map((column, columnIndex) => (
-                <TableColumnContext.Provider value={{ name: column, index: columnIndex }}>
+                <TableColumnContext.Provider key={String(`column-${column}`)} value={{ name: column, index: columnIndex }}>
                   <Cell
                     // We want to refresh this component when any of this change
-                    // eslint-disable-next-line react/no-array-index-key
-                    key={`${rowIndex}${columnIndex}${row}${column}`}
-
+                    key={String(`${rowIndex}${columnIndex}${row}${column}`)}
                   />
                 </TableColumnContext.Provider>
-
               ))}
             </Row>
           </TableRowContext.Provider>
@@ -148,6 +145,6 @@ const TableBase:FunctionComponent<TableProps> = (props) => {
     </TableContext.Provider>
   );
 };
-const CleanTable = designable(tablComponentsStart, 'Table')(TableBase);
+const CleanTable = designable(tableComponentsStart, 'Table')(TableBase);
 
 export default CleanTable;

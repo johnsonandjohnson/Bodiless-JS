@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import {
   withTitle,
   withDesc,
@@ -21,18 +20,19 @@ import {
   varyDesign,
   replaceWith,
   withDesign,
+  asToken,
 } from '@bodiless/fclasses';
 import { withType } from './Categories';
 import { StandardTable, asTableFirstLeft, asTableFirstExtraWidth } from '../Table';
 
 const tableVariation = {
-  Table: flow(
+  Table: asToken(
     replaceWith(StandardTable),
     withType('Table')(),
     withTitle('Table'),
     withDesc('A Table with Rich Text Cells.\n'),
   ),
-  TableFirstHeader: flow(
+  TableFirstHeader: asToken(
     replaceWith(StandardTable),
     asTableFirstLeft,
     asTableFirstExtraWidth,
