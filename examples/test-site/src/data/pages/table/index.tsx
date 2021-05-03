@@ -14,7 +14,7 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import { flow } from 'lodash';
+import { asToken } from '@bodiless/fclasses';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../../../components/Layout';
 import {
@@ -24,10 +24,10 @@ import {
   StandardTable,
 } from '../../../components/Table';
 
-const Table1 = flow(
+const Table1 = asToken(
   asTableCenterText,
 )(StandardTable);
-const Table2 = flow(
+const Table2 = asToken(
   asTableFirstExtraWidth,
   asTableFirstLeft,
 )(StandardTable);
@@ -42,8 +42,8 @@ export default (props: any) => (
         differently than the other.
       </p>
       <div className="flex pt-4">
-        <Table1 nodeKey="table1" className="w-1/2" data-list-element="outerlist" />
-        <Table2 nodeKey="table2" className="w-1/2" data-list-element="outerlinklist" />
+        <Table1 {...props} nodeKey="table1" className="w-1/2" data-list-element="outerlist" />
+        <Table2 {...props} nodeKey="table2" className="w-1/2" data-list-element="outerlinklist" />
       </div>
     </Layout>
   </Page>

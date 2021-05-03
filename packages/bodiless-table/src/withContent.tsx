@@ -20,7 +20,11 @@ import {
 } from '@bodiless/fclasses';
 import { flatten } from 'lodash';
 import React from 'react';
-import { useTableColumnContext, useTableRowContext, useTableSectionContext } from './TableContext';
+import {
+  useTableColumnContext,
+  useTableRowContext,
+  useTableSectionContext,
+} from './TableContext';
 import { Section } from './types';
 
 const withInnerText = (text: string): HOC => Component => {
