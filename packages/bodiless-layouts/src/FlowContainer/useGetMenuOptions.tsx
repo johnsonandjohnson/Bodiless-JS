@@ -24,6 +24,7 @@ import { ComponentSelectorProps } from '../ComponentSelector/types';
 import componentSelectorForm from '../ComponentSelector/componentSelectorForm';
 import { FALLBACK_SNAP_CLASSNAME } from './SortableChild';
 import { defaultSnapData } from './utils/appendTailwindWidthClass';
+import { FC_ITEM_CONTEXT_TYPE } from '../SlateSortableResizable';
 
 type Handlers = FlowContainerDataHandlers & FlowContainerItemHandlers;
 
@@ -51,7 +52,7 @@ const useItemButtonName = (prefix: string, uuid: string) => {
   const ids = [uuid, prefix];
   const context = useEditContext();
   for (let c = context.parent; c; c = c.parent) {
-    if (c.type === 'FC_ITEM_CONTEXT_TYPE') ids.push(c.id);
+    if (c.type === FC_ITEM_CONTEXT_TYPE) ids.push(c.id);
   }
   return ids.reverse().join('-');
 };
