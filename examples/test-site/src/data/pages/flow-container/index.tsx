@@ -92,7 +92,7 @@ const Region = asToken(
   withImageVariations,
   addProps({
     buttonGroupLabel: 'Content Block',
-    itemButtonGroupLabel: 'Content Bloc',
+    itemButtonGroupLabel: 'Content Block',
   } as FlowContainerProps),
 );
 const RegionContainer = asToken(
