@@ -104,7 +104,6 @@ const RegionContainer = asToken(
   withDefaultContent(regionContent),
 )(FlowContainer);
 
-
 const FlowContainerPage = (props: any) => (
   <Page {...props}>
     <Layout>
