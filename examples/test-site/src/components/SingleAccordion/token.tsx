@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import {
   withDesign,
   addClasses,
@@ -45,24 +44,24 @@ const asSingleAccordionDefaultStyle = asToken(
       ),
     }),
     Body: withDesign({
-      Wrapper: flow(
+      Wrapper: asToken(
         addClasses('p-3 border border-solid border-gray-200'),
       ),
     }),
   }),
 );
 
-const asAccordionTitleBordered = flow(
+const asAccordionTitleBordered = asToken(
   asSingleAccordionDefaultStyle,
   asAccordionBorder,
 );
 
-const asAccordionBorderedOnFocus = flow(
+const asAccordionBorderedOnFocus = asToken(
   asSingleAccordionDefaultStyle,
   // Resets border classes from accordion default style
   withDesign({
     Body: withDesign({
-      Wrapper: flow(
+      Wrapper: asToken(
         removeClasses('border border-solid border-gray-200'),
       ),
     }),
@@ -70,7 +69,7 @@ const asAccordionBorderedOnFocus = flow(
   asAccordionFocus,
 );
 
-const asAccordionNonExpanding = flow(
+const asAccordionNonExpanding = asToken(
   asSingleAccordionDefaultStyle,
   asNonExpandingAccordion,
 );

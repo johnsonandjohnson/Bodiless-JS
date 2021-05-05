@@ -21,7 +21,7 @@ import {
 
 /**
  * AccordionKeyPressHandler handles enter/space key press events to
- * provide accessibility support for accordions expanding and collapsing behavior
+ * provide accessibility support for accordions expanding and collapsing behaviors
  */
 const AccordionKeyPressHandler = (event: KeyboardEvent, context: AccordionContextType) => {
   const { isExpanded, setExpanded } = context;

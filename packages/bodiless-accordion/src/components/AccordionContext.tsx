@@ -26,20 +26,34 @@ const AccordionContext = createContext<AccordionContextType>({
   setExpanded: () => null,
   hasFocus: false,
   setFocus: () => null,
+  getMeta: {
+    accordionId: '',
+    accordionTitleId: '',
+    accordionContentId: '',
+  },
 });
 
 const useAccordionContext = () => useContext(AccordionContext);
 
 const AccordionProvider: FC<AccordionProviderProps> = ({
-  children, collapsible = true, expanded = false, focus = false,
+  children,
+  collapsible = true,
+  expanded = false,
+  focus = false,
+  meta = {
+    accordionId: '',
+    accordionTitleId: '',
+    accordionContentId: '',
+  },
 }) => {
+  const getMeta = meta;
   const isCollapsible = collapsible;
   const [isExpanded, setExpanded] = useState<boolean>(expanded);
   const [hasFocus, setFocus] = useState<boolean>(focus);
 
   return (
     <AccordionContext.Provider value={{
-      isCollapsible, isExpanded, setExpanded, hasFocus, setFocus,
+      isCollapsible, isExpanded, setExpanded, hasFocus, setFocus, getMeta,
     }}
     >
       { children }
@@ -48,6 +62,7 @@ const AccordionProvider: FC<AccordionProviderProps> = ({
 };
 
 // Used for conditional fClasses
+const getAccordionMeta = () => useAccordionContext().getMeta;
 const isAccordionCollapsible = () => useAccordionContext().isCollapsible;
 const isAccordionExpanded = () => useAccordionContext().isExpanded;
 const isAccordionContracted = () => !useAccordionContext().isExpanded;
@@ -57,6 +72,7 @@ const isAccordionFocusedOut = () => !useAccordionContext().hasFocus;
 export {
   AccordionProvider,
   useAccordionContext,
+  getAccordionMeta,
   isAccordionCollapsible,
   isAccordionExpanded,
   isAccordionContracted,

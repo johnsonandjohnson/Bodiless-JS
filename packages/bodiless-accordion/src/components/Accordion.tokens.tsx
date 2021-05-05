@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import {
   addClasses,
   addProps,
@@ -22,6 +21,7 @@ import {
   replaceWith,
   removeClasses,
   removeClassesIf,
+  asToken,
 } from '@bodiless/fclasses';
 import {
   ifEditable,
@@ -36,7 +36,7 @@ import {
 /**
  * withDisableExpandOnClick stops accordion behavior on edit mode
  */
-const withDisableExpandOnClick = flow(
+const withDisableExpandOnClick = asToken(
   ifEditable(
     withExtendHandler('onClick', () => (e: MouseEvent) => e.stopPropagation()),
   ),
@@ -45,21 +45,21 @@ const withDisableExpandOnClick = flow(
 /**
  * asAccordionDefaultBorder provides basic border style
  */
-const asAccordionDefaultBorder = flow(
+const asAccordionDefaultBorder = asToken(
   addClasses('border border-solid border-black'),
 );
 
 /**
  * asAccordionDefaultExpanded provides expanded property
  */
-const asAccordionDefaultExpanded = flow(
+const asAccordionDefaultExpanded = asToken(
   addProps({ expanded: true }),
 );
 
 /**
  * asAccordionIcon provides basic icon style for accordion title
  */
-const asAccordionIcon = flow(
+const asAccordionIcon = asToken(
   addClasses('material-icons cursor-pointer right-0'),
   addProps({ 'data-accordion-element': 'accordion-icon' }),
 );
@@ -67,14 +67,14 @@ const asAccordionIcon = flow(
 /**
  * asAccordionTitleWrapper positions accordion title wrapper
  */
-const asAccordionTitleWrapper = flow(
+const asAccordionTitleWrapper = asToken(
   addClasses('flex items-center justify-between relative'),
 );
 
 /**
  * asAccordionLabel makes title label full
  */
-const asAccordionLabel = flow(
+const asAccordionLabel = asToken(
   addClasses('w-full'),
 );
 
@@ -82,7 +82,7 @@ const asAccordionLabel = flow(
  * asAccordionBodyWrapper controls accordion body visibility according to
  * expand/collapse behavior
  */
-const asAccordionBodyWrapper = flow(
+const asAccordionBodyWrapper = asToken(
   addClassesIf(isAccordionExpanded)('block'),
   addClassesIf(isAccordionContracted)('hidden'),
 );
@@ -90,68 +90,74 @@ const asAccordionBodyWrapper = flow(
 /**
  * asAccordionBodyContent truncates accordion body content
  */
-const asAccordionBodyContent = flow(
+const asAccordionBodyContent = asToken(
   addClasses('truncate'),
 );
 
 /**
  * asAccordionBorder borders accordion title
  */
-const asAccordionBorder = withDesign({
-  Title: withDesign({
-    Wrapper: flow(
-      asAccordionDefaultBorder,
-    ),
+const asAccordionBorder = asToken(
+  withDesign({
+    Title: withDesign({
+      Wrapper: asToken(
+        asAccordionDefaultBorder,
+      ),
+    }),
   }),
-});
+);
 
 /**
  * asAccordionFocus adds border around the accordion component on focus event
  */
-const asAccordionFocus = withDesign({
-  // Title must be full bordered in case accordion is contracted,
-  // but no need for bottom border when accordion is expanded
-  Title: withDesign({
-    Wrapper: flow(
-      asAccordionDefaultBorder,
-      addClassesIf(isAccordionExpanded)('border-b-0'),
-      removeClassesIf(isAccordionFocusedOut)('border'),
-    ),
+const asAccordionFocus = asToken(
+  withDesign({
+    // Title must be full bordered in case accordion is contracted,
+    // but no need for bottom border when accordion is expanded
+    Title: withDesign({
+      Wrapper: asToken(
+        asAccordionDefaultBorder,
+        addClassesIf(isAccordionExpanded)('border-b-0'),
+        removeClassesIf(isAccordionFocusedOut)('border'),
+      ),
+    }),
+    // Body complements title bordering look when accordion is expanded
+    Body: withDesign({
+      Wrapper: asToken(
+        asAccordionDefaultBorder,
+        addClasses('border-t-0'),
+        removeClassesIf(isAccordionFocusedOut)('border'),
+      ),
+    }),
   }),
-  // Body complements title bordering look when accordion is expanded
-  Body: withDesign({
-    Wrapper: flow(
-      asAccordionDefaultBorder,
-      addClasses('border-t-0'),
-      removeClassesIf(isAccordionFocusedOut)('border'),
-    ),
-  }),
-});
+);
 
 /**
  * asNonExpandingAccordion provides default expanded accordion and
  * prevents users from collapsing it
  */
-const asNonExpandingAccordion = withDesign({
-  Wrapper: flow(
-    asAccordionDefaultExpanded,
-    addClasses('pointer-events-none'),
-    addPropsIf(isAccordionExpanded)({ 'aria-disabled': 'true' }),
-    // Pointer events none blocks user to perform any interations on
-    // the component, so it must be removed from edit mode
-    ifEditable(
-      removeClasses('pointer-events-none'),
+const asNonExpandingAccordion = asToken(
+  withDesign({
+    Wrapper: asToken(
+      asAccordionDefaultExpanded,
+      addClasses('pointer-events-none'),
+      addPropsIf(isAccordionExpanded)({ 'aria-disabled': 'true' }),
+      // Pointer events none blocks user to perform any interations on
+      // the component, so it must be removed from edit mode
+      ifEditable(
+        removeClasses('pointer-events-none'),
+      ),
     ),
-  ),
-  // Removes icon wrapper from accordion title
-  Title: withDesign({
-    Icon: flow(
-      // Using replaceWith instead of remove because the last
-      // only pulls out the span tag, but keeps the text currently inside
-      replaceWith(() => null),
-    ),
+    // Removes icon wrapper from accordion title
+    Title: withDesign({
+      Icon: asToken(
+        // Using replaceWith instead of remove because the last
+        // only pulls out the span tag, but keeps the text currently inside
+        replaceWith(() => null),
+      ),
+    }),
   }),
-});
+);
 
 export {
   withDisableExpandOnClick,

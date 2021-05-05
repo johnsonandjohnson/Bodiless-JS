@@ -42,7 +42,7 @@ const accordionTitleComponents:AccordionTitleComponents = {
 type AccordionTitleBaseProps =
   Omit<AccordionTitleProps, 'design'> & DesignableComponentsProps<AccordionTitleComponents>;
 const AccordionTitleBase: FC<AccordionTitleBaseProps> = ({
-  components, children, ...accordionMeta
+  components, children,
 }) => {
   const { Wrapper, Label, Icon } = components;
   const context = useAccordionContext();
@@ -51,6 +51,7 @@ const AccordionTitleBase: FC<AccordionTitleBaseProps> = ({
     setExpanded,
     hasFocus,
     setFocus,
+    getMeta,
   } = context;
 
   return (
@@ -59,9 +60,9 @@ const AccordionTitleBase: FC<AccordionTitleBaseProps> = ({
       onFocus={() => setFocus(!hasFocus)}
       onBlur={() => setFocus(!hasFocus)}
       onKeyPress={(event) => AccordionKeyPressHandler(event, context)}
-      id={accordionMeta.accordionTitleId}
+      id={getMeta.accordionTitleId}
       role="button"
-      aria-controls={accordionMeta.accordionContentId}
+      aria-controls={getMeta.accordionContentId}
       aria-expanded={isExpanded ? 'true' : 'false'}
       tabIndex={0}
     >

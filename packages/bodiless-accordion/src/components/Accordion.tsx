@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import React, { FC, HTMLProps } from 'react';
 import nextId from 'react-id-generator';
 import { designable, Div } from '@bodiless/fclasses';
@@ -28,33 +27,31 @@ const AccordionComponentsStart:AccordionComponents = {
 };
 
 const AccordionBase: FC<AccordionProps & AccordionProviderProps & HTMLProps<HTMLElement>> = ({
-  components, collapsible, expanded, focus, ...rest
+  components, collapsible, expanded, focus, meta, ...rest
 }) => {
   const {
     Wrapper,
     Title = AccordionTitleClean,
     Body = AccordionBodyClean,
   } = components;
-
+  // Generates accordion ids and prepares meta information to context
   const accordionId = nextId('accordion-');
   const accordionMeta = {
-    accordionId: { accordionId },
+    accordionId,
     accordionTitleId: `accordion__title-${accordionId}`,
     accordionContentId: `accordion__content-${accordionId}`,
   };
 
   return (
-    <AccordionProvider collapsible={false} expanded={expanded} focus={focus}>
+    <AccordionProvider collapsible={false} expanded={expanded} focus={focus} meta={accordionMeta}>
       <Wrapper {...rest} id={accordionId}>
-        <Title {...accordionMeta} />
-        <Body {...accordionMeta} />
+        <Title />
+        <Body />
       </Wrapper>
     </AccordionProvider>
   );
 };
 
-const AccordionClean = flow(
-  designable(AccordionComponentsStart, 'Accordion'),
-)(AccordionBase);
+const AccordionClean = designable(AccordionComponentsStart, 'Accordion')(AccordionBase);
 
 export default AccordionClean;

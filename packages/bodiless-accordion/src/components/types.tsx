@@ -25,6 +25,7 @@ export type AccordionProviderProps = {
   collapsible?: boolean,
   expanded?: boolean,
   focus?: boolean,
+  meta?: AccordionMeta,
 };
 
 export type AccordionContextType = {
@@ -33,6 +34,7 @@ export type AccordionContextType = {
   setExpanded: React.Dispatch<React.SetStateAction<boolean>>,
   hasFocus: boolean,
   setFocus: React.Dispatch<React.SetStateAction<boolean>>,
+  getMeta: AccordionMeta,
 };
 
 export type AccordionTitleComponents = {
@@ -46,10 +48,8 @@ export type AccordionBodyComponents = {
   Content: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
 };
 
-export type AccordionTitleProps = DesignableProps<AccordionTitleComponents> &
-AccordionMeta;
-export type AccordionBodyProps = DesignableProps<AccordionBodyComponents> &
-AccordionMeta;
+export type AccordionTitleProps = DesignableProps<AccordionTitleComponents>;
+export type AccordionBodyProps = DesignableProps<AccordionBodyComponents>;
 
 export type AccordionComponents = {
   Wrapper: ComponentType<HTMLProps<any> & AccordionProviderProps>,

@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import {
   asTestableAccordion,
   AccordionClean,
@@ -48,17 +47,17 @@ const asSingleAccordion = asToken(
   asTestableAccordion,
 );
 
-const asSingleAccordionTitleBordered = flow(
+const asSingleAccordionTitleBordered = asToken(
   asSingleAccordion,
   asAccordionTitleBordered,
 );
 
-const asSingleAccordionBorderedOnFocus = flow(
+const asSingleAccordionBorderedOnFocus = asToken(
   asSingleAccordion,
   asAccordionBorderedOnFocus,
 );
 
-const asSingleAccordionNonExpanding = flow(
+const asSingleAccordionNonExpanding = asToken(
   asSingleAccordion,
   asAccordionNonExpanding,
 );
