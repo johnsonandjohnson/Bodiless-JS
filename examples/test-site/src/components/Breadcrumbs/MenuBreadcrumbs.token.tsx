@@ -25,6 +25,8 @@ import { withoutLinkWhenLinkDataEmpty } from '@bodiless/components';
 import {
   withBreadcrumbStartingTrail,
   withoutBreadcrumbFinalTrail,
+  asAccessibleBreadcrumbs as asBaseAccessibleBreadcrumbs,
+  useIsBreadcrumbItemCurrentPage,
 } from '@bodiless/navigation';
 import {
   flowIf,
@@ -43,6 +45,8 @@ import {
   asEditableLink,
   asLink,
 } from '../Elements.token';
+
+const BREADCRUMB_ARIA_LABEL = 'Breadcrumb';
 
 const HomeBreadcrumbIcon = asToken(
   addProps({ children: 'home' as ReactNode }),
@@ -86,9 +90,7 @@ const withBoldedFinalTrail = withDesign({
 
 const withHiddenCurrentPageItem = asToken(
   withDesign({
-    Item: flowIf(
-      ({ isCurrentPage }: any) => isCurrentPage,
-    )(replaceWith(() => <></>)),
+    Item: flowIf(useIsBreadcrumbItemCurrentPage)(replaceWith(() => <></>)),
   }),
   withoutBreadcrumbFinalTrail,
 );
@@ -107,6 +109,13 @@ const withVerticalBarSeparator = withDesign({
 
 const withSlashSeparator = withDesign({
   Separator: withSeparator('/'),
+});
+
+const withAccessibleSeparator = withDesign({
+  Separator: asToken(
+    addClasses('border-black border-r-2 h-4 mx-1.5 rotate-12 self-center transform'),
+    withSeparator(''),
+  ),
 });
 
 // Only apply asLink to the Link component and not the _default one. ( LinkToggle )
@@ -137,6 +146,15 @@ const $withBreadcrumbStyles = asToken(
   withArrowSeparator,
 );
 
+const asAccessibleBreadcrumbs = asToken(
+  asBaseAccessibleBreadcrumbs,
+  withDesign({
+    NavWrapper: addProps({
+      'aria-label': BREADCRUMB_ARIA_LABEL,
+    }),
+  }),
+);
+
 export {
   $withBreadcrumbStyles,
   withStartingTrailIcon,
@@ -147,4 +165,6 @@ export {
   withHiddenCurrentPageItem,
   withStartingTrailLinkStyles,
   withReadOnlyStartingTrail,
+  asAccessibleBreadcrumbs,
+  withAccessibleSeparator,
 };
