@@ -23,6 +23,7 @@ import {
   withCarouselDots,
   withAutoPlayInterval,
   withAutoPlayButton,
+  withInfinitiveLoop,
 } from '@bodiless/carousel';
 import Layout from '../../../components/Layout';
 import {
@@ -101,6 +102,18 @@ const NavAndDotsAndAutoplayCarousel = asToken(
   asAccessibleCarousel,
 )(Carousel);
 
+const InfinitiveLoopCarousel = asToken(
+  withCarouselDots(CAROUSEL_NODE_KEY),
+  withDotStyles,
+  withNavigationButtons,
+  withNavButtonsStyles,
+  withAutoPlay,
+  withAutoPlayButton,
+  withAutoPlayButtonStyles,
+  withInfinitiveLoop,
+  asAccessibleCarousel,
+)(Carousel);
+
 const AutoPlayCustomIntervalCarousel = asToken(
   withAutoPlay,
   withAutoPlayInterval(10000),
@@ -128,6 +141,8 @@ const CarouselExamples = () => (
     <NavAndDotsAndAutoplayCarousel nodeKey="navAndDotsAndAutoPlay" />
     <SubTitle>Autoplay with 10 second interval</SubTitle>
     <AutoPlayCustomIntervalCarousel nodeKey="autoplayCustomInterval" />
+    <SubTitle>Infinitive loop</SubTitle>
+    <InfinitiveLoopCarousel nodeKey="infinitiveLoop" />
     <SubTitle>
       Chameleon that lets you choose from 4 components: Linkable, Gatsby (Performance) Image,
       Horizontal Card, Video
