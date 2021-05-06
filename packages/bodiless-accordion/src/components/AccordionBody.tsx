@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import React, { FC } from 'react';
 import {
   designable,
@@ -53,9 +52,7 @@ const AccordionBodyBase: FC<AccordionBodyBaseProps> = ({
   );
 };
 
-const AccordionBodyClean = flow(
-  designable(AccordionBodyComponentsStart, 'AccordionBody'),
-)(AccordionBodyBase);
+const AccordionBodyClean = designable(AccordionBodyComponentsStart, 'AccordionBody')(AccordionBodyBase);
 
 const asAccordionBody: HOC = Component => {
   const AsAccordionBody = (props: any) => {

@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import React, { FC } from 'react';
 import {
   designable,
@@ -74,9 +73,7 @@ const AccordionTitleBase: FC<AccordionTitleBaseProps> = ({
   );
 };
 
-const AccordionTitleClean = flow(
-  designable(accordionTitleComponents, 'AccordionTitle'),
-)(AccordionTitleBase);
+const AccordionTitleClean = designable(accordionTitleComponents, 'AccordionTitle')(AccordionTitleBase);
 
 const asAccordionTitle: HOC = Component => {
   const AsAccordionTitle = (props: any) => {
