@@ -641,6 +641,8 @@ module.exports = mergeWithBodilessConfigs({
 
   variants: {
     inset: ['responsive', 'direction'],
+    opacity: ['disabled'],
+    cursor: ['disabled'],
   },
 
   corePlugins: {},
