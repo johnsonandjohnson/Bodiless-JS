@@ -14,7 +14,7 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import { getSnapFrom, withTailwindClasses } from '@bodiless/layouts';
+import { getSnapFrom, withTailwindClasses, FlowContainerProps } from '@bodiless/layouts';
 import {
   NodeViewer,
 } from '@bodiless/components';
@@ -22,12 +22,16 @@ import { Page } from '@bodiless/gatsby-theme-bodiless';
 // @ts-ignore Could not find declaration file.
 import resolveConfig from 'tailwindcss/resolveConfig';
 import { withDefaultContent, withNodeKey, withResetButton } from '@bodiless/core';
-import { H2 as BaseH2, addClasses, asToken } from '@bodiless/fclasses';
+import {
+  H2 as BaseH2, addClasses, asToken, addProps, withDesign, startWith,
+} from '@bodiless/fclasses';
+import { FlowContainer } from '@bodiless/layouts-ui';
 import Layout from '../../../components/Layout';
 // @ts-ignore Could not find declaration file.
 import tailWindConfig from '../../../../tailwind.config';
 import { FlowContainerDefault, FlowContainerLimited } from '../../../components/FlowContainer';
 import { withFullWidthConstraint } from '../../../components/FlowContainer/token';
+import withImageVariations from '../../../components/FlowContainer/withImageVariations';
 
 const FLOW_CONTAINER_PAGE_PATH = 'flowContainer';
 
@@ -56,6 +60,49 @@ const ContentfulFlowContainer = asToken(
 const FlowContainerConstrainedFullWidth = withFullWidthConstraint(FlowContainerDefault);
 
 const H2 = addClasses('text-2xl font-bold mt-4')(BaseH2);
+
+const regionContent = {
+  region: {
+    items: [
+      {
+        uuid: 'item-1',
+        wrapperProps: {
+          className: 'w-full lg:w-full',
+        },
+        type: 'Region',
+      },
+    ],
+  },
+  'region$item-1': {
+    items: [
+      {
+        uuid: 'item-1',
+        wrapperProps: {
+          className: 'w-full lg:w-full',
+        },
+        type: 'SquareImage',
+      },
+    ],
+  },
+};
+
+const Region = asToken(
+  startWith(FlowContainer),
+  asToken.meta.term('Type')('Region'),
+  withImageVariations,
+  addProps({
+    buttonGroupLabel: 'Content Block',
+    itemButtonGroupLabel: 'Content Block',
+  } as FlowContainerProps),
+);
+const RegionContainer = asToken(
+  addProps({
+    buttonGroupLabel: 'Region',
+    itemButtonGroupLabel: 'Region',
+  } as FlowContainerProps),
+  withDesign({ Region }),
+  withDefaultContent(regionContent),
+)(FlowContainer);
 
 const FlowContainerPage = (props: any) => (
   <Page {...props}>
@@ -128,6 +175,8 @@ const FlowContainerPage = (props: any) => (
       <ContentfulFlowContainer />
       <H2>Limited Flow Container</H2>
       <FlowContainerLimited nodeKey="limited" />
+      <H2>Nested Flow Container with Default Items</H2>
+      <RegionContainer nodeKey="region" />
     </Layout>
   </Page>
 );
