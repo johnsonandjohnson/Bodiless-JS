@@ -50,6 +50,22 @@ const withNoDragIfEditable = withDesign({
   ),
 });
 
+const withNoAutoPlayIfEditable = withDesign({
+  Wrapper: ifEditable(
+    addProps({
+      isPlaying: false,
+    }),
+  ),
+});
+
+const withDisabledPlayButtonIfEditable = withDesign({
+  ButtonPlay: ifEditable(
+    addProps({
+      disabled: true,
+    }),
+  ),
+});
+
 const withInfinitiveLoop = withDesign({
   Wrapper: addProps({
     infinite: true,
@@ -77,9 +93,12 @@ const withNavigationButtons = withDesign({
   ButtonNext: replaceWith(stylable(ButtonNext)),
 });
 
-const withAutoPlayButton = withDesign({
-  ButtonPlay: replaceWith(stylable(ButtonPlay)),
-});
+const withAutoPlayButton = asToken(
+  withDesign({
+    ButtonPlay: replaceWith(stylable(ButtonPlay)),
+  }),
+  withDisabledPlayButtonIfEditable,
+);
 
 const withAutoPlayInterval = (interval: number = 3000) => withDesign({
   Wrapper: addProps({
@@ -151,4 +170,5 @@ export {
   withAutoPlayButton,
   withAutoPlayInterval,
   asAccessibleCarousel,
+  withNoAutoPlayIfEditable,
 };
