@@ -12,11 +12,12 @@
  * limitations under the License.
  */
 
-import React, { Fragment, ComponentType } from 'react';
+import React, { ComponentType } from 'react';
 import {
   Div,
   designable,
   stylable,
+  Fragment,
 } from '@bodiless/fclasses';
 import type { DesignableComponentsProps } from '@bodiless/fclasses';
 import {

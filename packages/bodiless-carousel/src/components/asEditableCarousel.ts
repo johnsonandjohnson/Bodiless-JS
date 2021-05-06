@@ -18,7 +18,7 @@ import { asBodilessList } from '@bodiless/components';
 import { withDesign, replaceWith, asToken } from '@bodiless/fclasses';
 import { Slide } from 'pure-react-carousel';
 import withTotalSlides from './withTotalSlides';
-import { withIntrinsicHeight, withNoDragIfEditable } from './token';
+import { withIntrinsicHeight, withNoDragIfEditable, withNoAutoPlayIfEditable } from './token';
 
 const asEditableCarousel = (nodeKeys?: WithNodeKeyProps) => asToken(
   withNode,
@@ -33,6 +33,7 @@ const asEditableCarousel = (nodeKeys?: WithNodeKeyProps) => asToken(
   }),
   withIntrinsicHeight,
   withNoDragIfEditable,
+  withNoAutoPlayIfEditable,
 );
 
 export default asEditableCarousel;
