@@ -66,7 +66,7 @@ const breadcrumbHtml = (wrapper: ReactWrapper) => {
   // method generates warnings about not using layout
   // effects on the server.
   const $ = cheerio.load(wrapper.html());
-  return $.html($('body>ul').last());
+  return $.html($('body>nav').last());
 };
 
 const generateMegaMenuContent = (component: string) => ({

@@ -39,24 +39,16 @@ const ItemNodeProvider = withNode(Fragment) as ComponentType<WithNodeProps>;
 const BreadcrumbsClean$ = (props: CleanBreadcrumbsProps) => {
   const {
     hasStartingTrail = false,
-    components,
     items = [],
     hasFinalTrail = false,
     renderLastItemWithoutLink = false,
+    components: C,
   } = props;
   const hasStartingTrail$ = typeof hasStartingTrail === 'function' ? hasStartingTrail() : hasStartingTrail;
   const hasFinalTrail$ = typeof hasFinalTrail === 'function' ? hasFinalTrail() : hasFinalTrail;
   const renderLastItemWithoutLink$ = typeof renderLastItemWithoutLink === 'function'
     ? renderLastItemWithoutLink()
     : renderLastItemWithoutLink;
-  const {
-    StartingTrail,
-    Separator,
-    Wrapper,
-    Item,
-    Title,
-    FinalTrail,
-  } = components;
   const items$ = items.map((item: CleanBreadcrumbItemType, index: number) => {
     const isLastItem = index === (items.length - 1);
     const { position, isCurrentPage } = item;
@@ -65,65 +57,68 @@ const BreadcrumbsClean$ = (props: CleanBreadcrumbsProps) => {
     if (isLastItem && renderLastItemWithoutLink$) {
       const TitleWithNoLink = withDesign({
         Link: replaceWith(Fragment),
-      })(Title);
+      })(C.Title);
       return (
         <React.Fragment key={item.uuid}>
-          <Item position={position$} isCurrentPage={isCurrentPage}>
+          <C.Item position={position$} isCurrentPage={isCurrentPage}>
             <ItemNodeProvider nodeKey={item.nodeKey} nodeCollection={item.nodeCollection}>
-              <TitleWithNoLink />
+              <TitleWithNoLink isCurrentPage={isCurrentPage} />
             </ItemNodeProvider>
-          </Item>
+          </C.Item>
         </React.Fragment>
       );
     }
     return (
       <React.Fragment key={item.uuid}>
-        <Item position={position$} isCurrentPage={isCurrentPage}>
+        <C.Item position={position$} isCurrentPage={isCurrentPage}>
           <ItemNodeProvider nodeKey={item.nodeKey} nodeCollection={item.nodeCollection}>
-            <Title />
+            <C.Title isCurrentPage={isCurrentPage} />
           </ItemNodeProvider>
-        </Item>
-        {!isLastItem && <Separator key={`separator${item.uuid}`} />}
+        </C.Item>
+        {!isLastItem && <C.Separator key={`separator${item.uuid}`} />}
       </React.Fragment>
     );
   });
   const finalTrailItemPosition = (hasStartingTrail$ ? 1 : 0) + items$.length + 1;
   return (
-    <Wrapper>
-      { hasStartingTrail$
-        && (
-        <>
-          <Item position={1} isCurrentPage={false} key="startingTrail">
-            <StartingTrail />
-          </Item>
-          { (items$.length > 0 || hasFinalTrail$)
-            && <Separator key="startingTrailSeparator" />}
-        </>
-        )}
-      {items$}
-      { hasFinalTrail$
-        && (
-        <>
-          { items$.length > 0
-            && <Separator key="finalTrailSeparator" />}
-          <Item key="finalTrail" position={finalTrailItemPosition} isCurrentPage>
-            <FinalTrail />
-          </Item>
-        </>
-        )}
-    </Wrapper>
+    <C.NavWrapper>
+      <C.Wrapper>
+        {hasStartingTrail$
+          && (
+            <>
+              <C.Item position={1} isCurrentPage={false} key="startingTrail">
+                <C.StartingTrail />
+              </C.Item>
+              {(items$.length > 0 || hasFinalTrail$)
+                && <C.Separator key="startingTrailSeparator" />}
+            </>
+          )}
+        {items$}
+        {hasFinalTrail$
+          && (
+            <>
+              {items$.length > 0
+                && <C.Separator key="finalTrailSeparator" />}
+              <C.Item key="finalTrail" position={finalTrailItemPosition} isCurrentPage>
+                <C.FinalTrail />
+              </C.Item>
+            </>
+          )}
+      </C.Wrapper>
+    </C.NavWrapper>
   );
 };
 
 const BreadcrumbStartComponents: BreadcrumbsComponents = {
   StartingTrail: MenuTitle,
   Separator: asComponent('span'),
-  Wrapper: asComponent('ul'),
+  NavWrapper: asComponent('nav'),
+  Wrapper: asComponent('ol'),
   Item: flowRight(
     withoutProps(['position', 'isCurrentPage']),
     asComponent,
   )('li'),
-  Title: MenuTitle,
+  Title: withoutProps(['isCurrentPage'])(MenuTitle),
   FinalTrail: MenuTitle,
 };
 

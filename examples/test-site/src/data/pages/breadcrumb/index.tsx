@@ -28,6 +28,7 @@ import {
 } from '@bodiless/navigation';
 import {
   addClasses, H1 as H1$, H2 as H2$, P as P$, asToken, Fragment,
+  addProps,
 } from '@bodiless/fclasses';
 
 import Layout from '../../../components/Layout';
@@ -42,6 +43,8 @@ import {
   withStartingTrailLinkStyles,
   withReadOnlyStartingTrail,
   $withBreadcrumbStyles,
+  withAccessibleSeparator,
+  asAccessibleBreadcrumbs,
 } from '../../../components/Breadcrumbs/MenuBreadcrumbs.token';
 import {
   asHeader2, asHeader1, asItalic,
@@ -52,6 +55,7 @@ const DemoBreadcrumbs = asToken(
   withMenuTitleEditors(undefined, asReadOnly),
   withEditableFinalTrail(),
   $withBreadcrumbStyles,
+  asAccessibleBreadcrumbs,
 )(BreadcrumbsClean);
 
 const DEFAULT_STARTING_TRAIL_NODE_KEY = 'startingTrail';
@@ -87,10 +91,24 @@ const BreadcrumbWithSlashSeparator = asToken(
   withSlashSeparator,
 )(DemoBreadcrumbs);
 
+const BreadcrumbWithAccessibleSeparator = asToken(
+  withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}SlashSeparator`),
+  withStartingTrailLinkStyles,
+  withAccessibleSeparator,
+)(DemoBreadcrumbs);
+
 const BreadcrumbWithHiddenCurrentPageItem = asToken(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}CurrentPage`),
   withStartingTrailLinkStyles,
   withHiddenCurrentPageItem,
+)(DemoBreadcrumbs);
+
+const BreadcrumbWithLinkableFinalTrailItem = asToken(
+  withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}LinkableFinalTrail`),
+  withStartingTrailLinkStyles,
+  addProps({
+    renderLastItemWithoutLink: false,
+  }),
 )(DemoBreadcrumbs);
 
 const MegaMenuBreadcrumbWithNonLinkableItems = asToken(
@@ -124,6 +142,8 @@ export default (props: any) => (
         <BreadcrumbWithVerticalBarSeparator nodeKey="bodilessMenu" />
         <H2>Breadcrumbs with slash separator</H2>
         <BreadcrumbWithSlashSeparator nodeKey="bodilessMenu" />
+        <H2>Breadcrumbs with accessible separator</H2>
+        <BreadcrumbWithAccessibleSeparator nodeKey="bodilessMenu" />
         <H2>Breadcrumbs with hidden current page item</H2>
         <P>
           {`
@@ -133,6 +153,8 @@ export default (props: any) => (
         `}
         </P>
         <BreadcrumbWithHiddenCurrentPageItem nodeKey="bodilessMenu" />
+        <H2>Breadcrumbs with linkable final trail item</H2>
+        <BreadcrumbWithLinkableFinalTrailItem nodeKey="bodilessMenu" />
         <H2>MegaMenu breadcrumbs with non-editable starting trail and non-linkable Middle Trail group</H2>
         <MegaMenuBreadcrumbWithNonLinkableItems nodeKey="bodilessMenu" />
       </BreadcrumbProvider>

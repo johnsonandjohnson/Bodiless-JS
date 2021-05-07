@@ -55,8 +55,7 @@ export {
   withEditableStartingTrail,
 } from './withEditableTrail';
 
-export {
-  withBreadcrumbItemToken,
-} from './Breadcrumb.token';
+export * from './Breadcrumb.token';
+export * from './hooks';
 
 export { default as withBreadcrumbs } from './withBreadcrumbs';

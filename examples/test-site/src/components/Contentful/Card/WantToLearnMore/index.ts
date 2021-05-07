@@ -23,7 +23,7 @@ import link from './link.json';
 import ctatext from './ctatext.json';
 
 const cardContent = {
-  image: getImageContentFrom(['DefaultContent', 'SiteBuildGuide']),
+  image: getImageContentFrom(['DefaultContent', 'IntroToBodilessConcepts']),
   title,
   body,
   link,

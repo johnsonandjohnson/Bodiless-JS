@@ -22,7 +22,10 @@ import {
 } from '@bodiless/navigation';
 import { asToken } from '@bodiless/fclasses';
 
-import { $withBreadcrumbStyles } from './MenuBreadcrumbs.token';
+import {
+  $withBreadcrumbStyles,
+  asAccessibleBreadcrumbs,
+} from './MenuBreadcrumbs.token';
 
 const $withBreadcrumbEditors = asToken(
   withMenuTitleEditors(undefined, asReadOnly),
@@ -34,6 +37,7 @@ const Breadcrumbs = asToken(
   asBreadcrumbs,
   $withBreadcrumbEditors,
   $withBreadcrumbStyles,
+  asAccessibleBreadcrumbs,
 )(BreadcrumbsClean);
 
 export default Breadcrumbs;
