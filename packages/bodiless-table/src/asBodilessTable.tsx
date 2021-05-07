@@ -308,7 +308,7 @@ const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => asTo
     TFoot: asToken(withNode, withNodeKey(Section.foot)),
     Row: asToken(
       withNode,
-      withNodeKey(String(() => useTableRowContext().name)),
+      withNodeKey(() => useTableRowContext().name),
     ),
     Cell: asToken(
       withLocalContextMenu,
@@ -324,7 +324,7 @@ const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => asTo
         withMenuOptions({ useMenuOptions: useMenuOptionsFoot, name: 'TableRowFoot' }),
       ),
       withNode,
-      withNodeKey(String(() => useTableColumnContext().name)),
+      withNodeKey(() => useTableColumnContext().name),
     ),
   }),
 );
