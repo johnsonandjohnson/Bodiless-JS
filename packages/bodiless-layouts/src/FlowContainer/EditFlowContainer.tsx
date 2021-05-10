@@ -45,7 +45,7 @@ const EditFlowContainerComponents: FlowContainerComponents = {
  */
 const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerProps) => {
   const {
-    components, ui, snapData, getDefaultWidth,
+    components, ui, snapData, getDefaultWidth, itemButtonGroupLabel,
   } = props;
   const items = useItemHandlers().getItems();
   const {
@@ -71,6 +71,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerPr
             return (
               <ChildNodeProvider nodeKey={flowContainerItem.uuid} key={`node-${flowContainerItem.uuid}`}>
                 <ComponentWrapper
+                  buttonGroupLabel={itemButtonGroupLabel}
                   ui={ui}
                   index={index}
                   flowContainerItem={flowContainerItem}
@@ -104,10 +105,13 @@ const asEditFlowContainer = flowRight(
   withResizeDetector,
   observer,
   designable(EditFlowContainerComponents, 'FlowContainer'),
-  withMenuOptions({
-    useMenuOptions,
-    name: 'Flow Container',
-  }),
+  withMenuOptions(
+    (p: EditFlowContainerProps) => ({
+      useMenuOptions,
+      name: typeof p.buttonGroupLabel === 'function'
+        ? p.buttonGroupLabel(p) : (p.buttonGroupLabel || 'Flow Container'),
+    }),
+  ),
   observer,
 );
 

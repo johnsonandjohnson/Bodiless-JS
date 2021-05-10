@@ -12,9 +12,15 @@
  * limitations under the License.
  */
 
-/* eslint-disable import/prefer-default-export */
-import { stylable, withDesign, asToken } from '@bodiless/fclasses';
+import { ifToggledOn } from '@bodiless/core';
+import {
+  stylable,
+  withDesign,
+  asToken,
+  addProps,
+} from '@bodiless/fclasses';
 import type { TokenDef } from '@bodiless/fclasses';
+import { useIsBreadcrumbItemCurrentPage } from './hooks';
 
 /**
  * Makes all Breadcrumb design components stylable.
@@ -39,4 +45,16 @@ export const withBreadcrumbItemToken = (...tokenDefs: TokenDef[]) => withDesign(
   StartingTrail: asToken({}, ...tokenDefs),
   FinalTrail: asToken({}, ...tokenDefs),
   Title: asToken({}, ...tokenDefs),
+});
+
+/**
+ * Hoc to make breadcrumbs accessible
+ */
+export const asAccessibleBreadcrumbs = withDesign({
+  NavWrapper: addProps({
+    'aria-label': 'Breadcrumb',
+  }),
+  Title: ifToggledOn(useIsBreadcrumbItemCurrentPage)(addProps({
+    'aria-current': 'page',
+  })),
 });

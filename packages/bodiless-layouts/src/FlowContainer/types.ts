@@ -18,7 +18,7 @@ import {
 } from '@bodiless/fclasses';
 import { HTMLProps } from 'react';
 import { ComponentSelectorUI } from '../ComponentSelector/types';
-import { UI as SortableResizableUI } from '../SlateSortableResizable';
+import { UI as SortableResizableUI, SlateSortableResizableProps } from '../SlateSortableResizable';
 import { SnapData } from './utils/appendTailwindWidthClass';
 
 export type UI = ComponentSelectorUI & SortableResizableUI;
@@ -35,6 +35,14 @@ export type EditFlowContainerProps = DesignableComponentsProps & HTMLProps<HTMLD
   mandatoryCategories?: string[],
   blacklistCategoris?: string[],
   isResizeEnabled?: boolean,
+  /**
+   * The label to use for the buttons provided by an empty flow container.
+   */
+  buttonGroupLabel?: string|((props:EditFlowContainerProps) => string),
+  /**
+   * The label to use for the buttons provided by a flow container item.
+   */
+  itemButtonGroupLabel?: string|((props:SlateSortableResizableProps) => string),
 };
 export type WidthClassTuple = {
   width: number;

@@ -22,8 +22,13 @@ import {
   Token,
   asToken,
 } from '@bodiless/fclasses';
+import flow from 'lodash/flow';
 import negate from 'lodash/negate';
-import { ifToggledOn, withChild } from '@bodiless/core';
+import {
+  ifToggledOn,
+  withChild,
+  ifReadOnly,
+} from '@bodiless/core';
 import {
   useIsCarouselItemActive,
   useCarouselIsPlaying,
@@ -33,8 +38,13 @@ import {
 import { asBodilessChameleon } from '@bodiless/components';
 import MaterialIcon from '@material/react-material-icon';
 import 'pure-react-carousel/dist/react-carousel.es.css';
+/**
+ * overrides some styles defined in the contrib library
+ */
+import './carousel.css';
 import { LandscapeImage, LandscapeLinkableImage } from '../Image';
 import Card from '../Card';
+import { asCardHorizontal, asCardDefaultStyle } from '../Card/token';
 import { Reponsive16By9YouTube } from '../YouTube';
 
 const withImageSlide = withDesign({
@@ -42,6 +52,11 @@ const withImageSlide = withDesign({
     Title: replaceWith(LandscapeImage),
   }),
 });
+
+const HorizontalCard = flow(
+  asCardHorizontal,
+  asCardDefaultStyle,
+)(Card);
 
 const withChameleonSlide = withDesign({
   Slider: asToken(
@@ -54,7 +69,7 @@ const withChameleonSlide = withDesign({
         Title: replaceWith(LandscapeImage),
       }),
       HorizontalCard: withDesign({
-        Title: replaceWith(Card),
+        Title: replaceWith(HorizontalCard),
       }),
       Video: withDesign({
         Title: replaceWith(Reponsive16By9YouTube),
@@ -63,13 +78,17 @@ const withChameleonSlide = withDesign({
   ),
 });
 
-const withAutoPlay = withDesign({
-  Wrapper: addProps({
-    isPlaying: true,
+const withAutoPlay = asToken(
+  withDesign({
+    Wrapper: ifReadOnly(
+      addProps({
+        isPlaying: true,
+      }),
+    ),
   }),
-});
+);
 
-const withNavButtonStyles = addClasses('p-2 text-white uppercase bg-blue-700');
+const withNavButtonStyles = addClasses('p-2 text-white uppercase bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed');
 
 const withNavButtonsStyles = withDesign({
   SliderWrapper: addClasses('relative'),
@@ -118,6 +137,7 @@ const withAutoPlayButtonStyles = asToken(
     ButtonPlay: asToken(
       addClasses('ml-2 rounded-full p-1 block w-8'),
       addClasses('leading-none text-1xl bg-blue-700 text-white'),
+      addClasses('disabled:opacity-50 disabled:cursor-not-allowed'),
       withChild(MaterialIcon),
       withDesign({
         Child: asToken(
