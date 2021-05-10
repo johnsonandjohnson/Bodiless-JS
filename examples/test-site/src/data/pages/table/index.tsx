@@ -42,8 +42,14 @@ export default (props: any) => (
         differently than the other.
       </p>
       <div className="flex pt-4">
-        <Table1 {...props} nodeKey="table1" className="w-1/2" data-list-element="outerlist" />
-        <Table2 {...props} nodeKey="table2" className="w-1/2" data-list-element="outerlinklist" />
+        <div className="w-1/2">
+          { /* @ts-ignore missing unnecessary rows, columns, headRows and footRows props */ }
+          <Table1 nodeKey="table1" data-list-element="outerlist" />
+        </div>
+        <div className="w-1/2">
+          { /* @ts-ignore missing unnecessary rows, columns, headRows and footRows props */ }
+          <Table2 nodeKey="table2" data-list-element="outerlinklist" />
+        </div>
       </div>
     </Layout>
   </Page>
