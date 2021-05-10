@@ -37,7 +37,7 @@ const $withTitleEditors = withMenuTitleEditors(); // Use default Title editors f
 
 const $withMenuStyles = asToken(
   // Replacement for `asSimpleMenuTopNav` and `asMegaMenuTopNav`
-  asTopNav('List', 'Columns', 'Cards'),
+  asTopNav('Main', 'List', 'Columns', 'Cards'),
   // Replacement for `withMegaMenuDesign` and `withSimpleMenuDesign`
   withMenuDesign(['Main', 'List', 'Cards', 'Columns'])($withTitleEditors),
 );
@@ -57,8 +57,8 @@ Here is an example of **old SubMenu** styling:
 const $withOldSubMenuStyles = asToken(
   withDesigh({
     Wrapper: withDesigh({
-    List: addClasses(...), // Submenu <ul> element.
-    WrapperItem: addClasses(...), // Top menu Item (<li>) for the particular submenu. 
+      List: addClasses(...), // Submenu <ul> element.
+      WrapperItem: addClasses(...), // Top menu Item (<li>) for the particular submenu. 
     }),
     Item: addClasses(...), // Submenu <li> element.
     Title: addClasses(...), // Submenu title, usually <a> element.
