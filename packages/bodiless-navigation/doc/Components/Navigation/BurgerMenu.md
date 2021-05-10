@@ -20,7 +20,7 @@ The Burger menu, as well as Bodiless Menu, is based on the List API. Burger menu
 import { asToken } from '@bodiless/fclasses';
 import {
   asBodilessMenu, withListSubMenu, withColumnSubMenu, withMenuDesign,
-  withToutSubMenu, withBurgerMenuWrapper, withMenuTitleEditors,
+  withCardsSubMenu, withBurgerMenuWrapper, withMenuTitleEditors,
 } from '@bodiless/navigation';
 
 // Define menu schema first
@@ -29,7 +29,7 @@ const $withMenuSchema = asToken(
   asBodilessMenu('demo-menu'),
   withListSubMenu(), // Add an ability to create a List submenu
   withColumnSubMenu(), // Add an ability to create a Columns submenu
-  withToutSubMenu(), // Add an ability to create a Touts submenu
+  withCardsSubMenu(), // Add an ability to create a Cards submenu
 );
 
 // Menu doesn't provide any default editors so we need to configure one.
@@ -95,8 +95,8 @@ const $withOverviewLink = withOverviewLink('Demo Overview Link');
 
 // Create a Token that adds a custom overview link to all submenus.
 const $withBurgerMenuStyles = asToken(
-  asBurgerMenu('List', 'Columns', 'Touts'),
-  withMenuDesign(['List', 'Columns', 'Touts'])($withOverviewLink),
+  asBurgerMenu('List', 'Columns', 'Cards'),
+  withMenuDesign(['List', 'Columns', 'Cards'])($withOverviewLink),
 );
 
 // We need to apply $withBurgerMenuStyles token to the `Menu` design key.
@@ -195,9 +195,9 @@ import { asBurgerMenu } from '@bodiless/navigation';
 
 // Create Menu Token
 const $withBurgerMenuStyles = asToken(
-  // Transforms List, Columns and Touts submenus into accordions.
+  // Transforms List, Columns and Cards submenus into accordions.
   // Columns submenus are also transformed into accordions.
-  asBurgerMenu('List', 'Columns', 'Touts'),
+  asBurgerMenu('List', 'Columns', 'Cards'),
 );
 
 // Apply Menu Token
@@ -226,9 +226,9 @@ const $withBoldAccordionTitle = withDesign({
 
 // Create Menu token
 const $withBurgerMenuStyles = asToken(
-  asBurgerMenu('List', 'Columns', 'Touts'),
+  asBurgerMenu('List', 'Columns', 'Cards'),
   // Apply bold accordion title to all submenu types.
-  withMenuDesign(['List', 'Columns', 'Touts'])($withBoldAccordionTitle),
+  withMenuDesign(['List', 'Columns', 'Cards'])($withBoldAccordionTitle),
 );
 
 // Apply Menu token
@@ -252,8 +252,8 @@ const $withBoldAccordionTitle = withDesign({
 });
 
 const $withBurgerMenuStyles = asToken(
-  asBurgerMenu('List', 'Columns', 'Touts'),
-  withMenuDesign(['List', 'Columns', 'Touts'])($withBoldAccordionTitle),
+  asBurgerMenu('List', 'Columns', 'Cards'),
+  withMenuDesign(['List', 'Columns', 'Cards'])($withBoldAccordionTitle),
 );
 
 export const $asDemoBurgerMenu = asToken(
@@ -293,9 +293,9 @@ const $withTitleEditors = withMenuTitleEditors();
 
 // Compose Menu Token
 const $withBurgerMenuStyles = asToken(
-  asBurgerMenu('List', 'Columns', 'Touts'),
+  asBurgerMenu('List', 'Columns', 'Cards'),
   withMenuDesign()($withTitleEditors),
-  withMenuDesign(['List', 'Columns', 'Touts'])(
+  withMenuDesign(['List', 'Columns', 'Cards'])(
     $withBoldAccordionTitle,
     $withOverviewLink,
   ),

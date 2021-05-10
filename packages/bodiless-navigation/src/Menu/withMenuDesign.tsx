@@ -45,7 +45,7 @@ const depthDesignPathOptions = [() => [], withSecondLevelDesign, withThirdLevelD
  * withMenuDesign('Columns', 2) -- Applies tokens to only the second level of Columns submenu.
  *
  * withMenuDesign('Main') -- Applies tokens to the Top menu.
- * withMenuDesign('Touts') -- Applies tokens to Touts submenu.
+ * withMenuDesign('Cards') -- Applies tokens to Cards submenu.
  * withMenuDesign('List') -- Applies tokens to List submenu.
  *
  * withMenuDesign() -- Applies tokens to the Top menu and all submenus.
@@ -61,7 +61,7 @@ const depthDesignPathOptions = [() => [], withSecondLevelDesign, withThirdLevelD
  * @return Desigh token that applies supplied list of tokens to the provided design keys.
  */
 const withMenuDesign = (
-  keys: string|string[] = ['Main', 'List', 'Columns', 'Touts'],
+  keys: string|string[] = ['Main', 'List', 'Columns', 'Cards'],
   depths: number|number[] = [0, 1, 2],
 ) => (...tokenDefs: TokenDef[]):Token => {
   const keys$ = Array.isArray(keys) ? keys : [keys];

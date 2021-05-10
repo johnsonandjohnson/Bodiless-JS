@@ -15,7 +15,7 @@
 import { ComponentType } from 'react';
 import { asToken } from '@bodiless/fclasses';
 import {
-  asBodilessMenu, withListSubMenu, withColumnSubMenu, withToutSubMenu,
+  asBodilessMenu, withListSubMenu, withColumnSubMenu, withCardsSubMenu,
 } from '@bodiless/navigation';
 
 import $asNavStyles from './Menu.token';
@@ -24,7 +24,7 @@ const $asMenuBase = asToken(
   asBodilessMenu(),
   withListSubMenu(),
   withColumnSubMenu(),
-  withToutSubMenu(),
+  withCardsSubMenu(),
 );
 
 const Menu = asToken(

@@ -19,7 +19,7 @@ import {
   withDesign, addProps, asToken,
 } from '@bodiless/fclasses';
 import {
-  withListSubMenu, withMenuDesign, withColumnSubMenu, withToutSubMenu,
+  withListSubMenu, withMenuDesign, withColumnSubMenu, withCardsSubMenu,
   withMenuTitleEditors,
 } from '../src';
 import MenuBase, { withCompleteDataStructure } from './TestMenu';
@@ -32,7 +32,7 @@ import MenuBase, { withCompleteDataStructure } from './TestMenu';
   * withMenuDesign('Columns', 2) -- Applies tokens to only the second level of Columns submenu.
   *
   * withMenuDesign('Main') -- Applies tokens to the Top menu.
-  * withMenuDesign('Touts') -- Applies tokens to Touts submenu.
+  * withMenuDesign('Cards') -- Applies tokens to Cards submenu.
   * withMenuDesign('List') -- Applies tokens to List submenu.
   *
   * withMenuDesign() -- Applies tokens to the Top menu and all submenus.
@@ -44,7 +44,7 @@ import MenuBase, { withCompleteDataStructure } from './TestMenu';
 const TestMenu = flow(
   withListSubMenu(),
   withColumnSubMenu(),
-  withToutSubMenu(),
+  withCardsSubMenu(),
   withMenuDesign()(withMenuTitleEditors()),
   withCompleteDataStructure,
   // Just some IDs to find element
@@ -56,10 +56,10 @@ const TestMenu = flow(
         Item: addProps({ id: 'list-item' }),
         Title: addProps({ id: 'list-title' }),
       }),
-      Touts: withDesign({
-        Wrapper: addProps({ id: 'touts-wrapper' }),
-        Item: addProps({ id: 'touts-item' }),
-        Title: addProps({ id: 'touts-title' }),
+      Cards: withDesign({
+        Wrapper: addProps({ id: 'cards-wrapper' }),
+        Item: addProps({ id: 'cards-item' }),
+        Title: addProps({ id: 'cards-title' }),
       }),
       Columns: withDesign({
         Wrapper: addProps({ id: 'columns-wrapper' }),
@@ -106,10 +106,10 @@ describe('withMenuDesign', () => {
 
     const wrapper = mount(<Wrapper />);
 
-    expect(wrapper.find('ul[data-test-submenu="menu"]').length).toBe(5); // Menu, List, Tout, Columns(x2)
+    expect(wrapper.find('ul[data-test-submenu="menu"]').length).toBe(5); // Menu, List, Cards, Columns(x2)
     expect(wrapper.find('a[data-test-submenu="menu-title"]').length).toBe(9); // 3 Top, 2 List, 2 Columns, 2 Sub Columns
-    expect(wrapper.find('div[data-test-submenu="menu-title"]').length).toBe(2); // 2 Touts
-    expect(wrapper.find('li[data-test-submenu="menu-item"]').length).toBe(11); // 3 Top, 2 List, 2 Touts, 2 Columns, 2 Sub Columns
+    expect(wrapper.find('div[data-test-submenu="menu-title"]').length).toBe(2); // 2 cards
+    expect(wrapper.find('li[data-test-submenu="menu-item"]').length).toBe(11); // 3 Top, 2 List, 2 cards, 2 Columns, 2 Sub Columns
   });
 
   it('Applies token to the top level menu', () => {
@@ -135,7 +135,7 @@ describe('withMenuDesign', () => {
 
     expect(wrapper.find('ul#main-wrapper').prop('data-test-main')).toBe('wrapper');
     expect(wrapper.find('ul#list-wrapper').prop('data-test-main')).toBeUndefined();
-    expect(wrapper.find('ul#touts-wrapper').prop('data-test-main')).toBeUndefined();
+    expect(wrapper.find('ul#cards-wrapper').prop('data-test-main')).toBeUndefined();
     expect(wrapper.find('ul#columns-wrapper').prop('data-test-main')).toBeUndefined();
     expect(wrapper.find('ul#main-wrapper').prop('data-test-depth')).toBe('wrapper');
     expect(wrapper.find('ul#main-wrapper').prop('data-test-wrong-key')).toBeUndefined();
@@ -144,8 +144,8 @@ describe('withMenuDesign', () => {
   it('Applies token to the list of submenu type', () => {
     const Wrapper = flow(
       withMenuDesign(['Main', 'List'])(withPropsA),
-      withMenuDesign(['Main', 'Touts'])(withPropsB),
-      withMenuDesign(['Touts', 'Columns'])(withPropsC),
+      withMenuDesign(['Main', 'Cards'])(withPropsB),
+      withMenuDesign(['Cards', 'Columns'])(withPropsC),
     )(TestMenu);
 
     const wrapper = mount(<Wrapper />);
@@ -158,9 +158,9 @@ describe('withMenuDesign', () => {
     expect(wrapper.find('ul#list-wrapper').prop('data-test-b')).toBeUndefined();
     expect(wrapper.find('ul#list-wrapper').prop('data-test-c')).toBeUndefined();
 
-    expect(wrapper.find('ul#touts-wrapper').prop('data-test-a')).toBeUndefined();
-    expect(wrapper.find('ul#touts-wrapper').prop('data-test-b')).toBe('wrapper');
-    expect(wrapper.find('ul#touts-wrapper').prop('data-test-c')).toBe('wrapper');
+    expect(wrapper.find('ul#cards-wrapper').prop('data-test-a')).toBeUndefined();
+    expect(wrapper.find('ul#cards-wrapper').prop('data-test-b')).toBe('wrapper');
+    expect(wrapper.find('ul#cards-wrapper').prop('data-test-c')).toBe('wrapper');
 
     expect(wrapper.find('ul#columns-wrapper').prop('data-test-a')).toBeUndefined();
     expect(wrapper.find('ul#columns-wrapper').prop('data-test-b')).toBeUndefined();
@@ -174,7 +174,7 @@ describe('withMenuDesign', () => {
   it('Applies token to the submenus by submenu type', () => {
     const Wrapper = flow(
       withMenuDesign('List')(withDataAttr('List')),
-      withMenuDesign('Touts')(withDataAttr('Touts')),
+      withMenuDesign('Cards')(withDataAttr('Cards')),
       withMenuDesign('Columns')(withDataAttr('Columns')),
     )(TestMenu);
 
@@ -184,9 +184,9 @@ describe('withMenuDesign', () => {
     expect(wrapper.find('a[data-test-submenu="list-title"]').length).toBe(2);
     expect(wrapper.find('li[data-test-submenu="list-item"]').length).toBe(2);
 
-    expect(wrapper.find('ul[data-test-submenu="touts"]').length).toBe(1);
-    expect(wrapper.find('div[data-test-submenu="touts-title"]').length).toBe(2);
-    expect(wrapper.find('li[data-test-submenu="touts-item"]').length).toBe(2);
+    expect(wrapper.find('ul[data-test-submenu="cards"]').length).toBe(1);
+    expect(wrapper.find('div[data-test-submenu="cards-title"]').length).toBe(2);
+    expect(wrapper.find('li[data-test-submenu="cards-item"]').length).toBe(2);
 
     expect(wrapper.find('ul[data-test-submenu="columns"]').length).toBe(2); // with sub-column
     expect(wrapper.find('a[data-test-submenu="columns-title"]').length).toBe(4);
@@ -210,9 +210,9 @@ describe('withMenuDesign', () => {
     expect(wrapper.find('ul#list-wrapper').prop('data-test-b')).toBe('wrapper');
     expect(wrapper.find('ul#list-wrapper').prop('data-test-c')).toBeUndefined();
 
-    expect(wrapper.find('ul#touts-wrapper').prop('data-test-a')).toBeUndefined();
-    expect(wrapper.find('ul#touts-wrapper').prop('data-test-b')).toBe('wrapper');
-    expect(wrapper.find('ul#touts-wrapper').prop('data-test-c')).toBeUndefined();
+    expect(wrapper.find('ul#cards-wrapper').prop('data-test-a')).toBeUndefined();
+    expect(wrapper.find('ul#cards-wrapper').prop('data-test-b')).toBe('wrapper');
+    expect(wrapper.find('ul#cards-wrapper').prop('data-test-c')).toBeUndefined();
 
     expect(wrapper.find('ul#columns-wrapper').prop('data-test-a')).toBeUndefined();
     expect(wrapper.find('ul#columns-wrapper').prop('data-test-b')).toBe('wrapper');
@@ -241,9 +241,9 @@ describe('withMenuDesign', () => {
     expect(wrapper.find('ul#list-wrapper').prop('data-test-b')).toBe('wrapper');
     expect(wrapper.find('ul#list-wrapper').prop('data-test-c')).toBeUndefined();
 
-    expect(wrapper.find('ul#touts-wrapper').prop('data-test-a')).toBeUndefined();
-    expect(wrapper.find('ul#touts-wrapper').prop('data-test-b')).toBeUndefined();
-    expect(wrapper.find('ul#touts-wrapper').prop('data-test-c')).toBeUndefined();
+    expect(wrapper.find('ul#cards-wrapper').prop('data-test-a')).toBeUndefined();
+    expect(wrapper.find('ul#cards-wrapper').prop('data-test-b')).toBeUndefined();
+    expect(wrapper.find('ul#cards-wrapper').prop('data-test-c')).toBeUndefined();
 
     expect(wrapper.find('ul#columns-wrapper').prop('data-test-a')).toBeUndefined();
     expect(wrapper.find('ul#columns-wrapper').prop('data-test-b')).toBeUndefined();
@@ -256,7 +256,7 @@ describe('withMenuDesign', () => {
 
   it('Applies multiple token to the specified depth and submenu type', () => {
     const Wrapper = flow(
-      withMenuDesign(['List', 'Touts'])(withPropsA, withPropsB, withPropsC),
+      withMenuDesign(['List', 'Cards'])(withPropsA, withPropsB, withPropsC),
     )(TestMenu);
 
     const wrapper = mount(<Wrapper />);
@@ -265,8 +265,8 @@ describe('withMenuDesign', () => {
     expect(wrapper.find('ul#list-wrapper').prop('data-test-b')).toBe('wrapper');
     expect(wrapper.find('ul#list-wrapper').prop('data-test-c')).toBe('wrapper');
 
-    expect(wrapper.find('ul#touts-wrapper').prop('data-test-a')).toBe('wrapper');
-    expect(wrapper.find('ul#touts-wrapper').prop('data-test-b')).toBe('wrapper');
-    expect(wrapper.find('ul#touts-wrapper').prop('data-test-c')).toBe('wrapper');
+    expect(wrapper.find('ul#cards-wrapper').prop('data-test-a')).toBe('wrapper');
+    expect(wrapper.find('ul#cards-wrapper').prop('data-test-b')).toBe('wrapper');
+    expect(wrapper.find('ul#cards-wrapper').prop('data-test-c')).toBe('wrapper');
   });
 });

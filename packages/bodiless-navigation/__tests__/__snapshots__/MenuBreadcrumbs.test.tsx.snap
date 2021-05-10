@@ -4,6 +4,6 @@ exports[`asBreadcrumbsClean creates breadcrumbs for 2-level Columns MegaMenu 1`]
 
 exports[`asBreadcrumbsClean creates breadcrumbs for 2-level List MegaMenu 1`] = `"<nav><ol><li><a href=\\"/products/\\"><span>products</span></a></li><span></span><li><span>ProductA</span></li></ol></nav>"`;
 
-exports[`asBreadcrumbsClean creates breadcrumbs for 2-level Touts MegaMenu 1`] = `"<nav><ol><li><a href=\\"/products/\\"><span>products</span></a></li><span></span><li><span>ProductA</span></li></ol></nav>"`;
+exports[`asBreadcrumbsClean creates breadcrumbs for 2-level Cards MegaMenu 1`] = `"<nav><ol><li><a href=\\"/products/\\"><span>products</span></a></li><span></span><li><span>ProductA</span></li></ol></nav>"`;
 
 exports[`asBreadcrumbsClean creates breadcrumbs for 3-level Columns MegaMenu 1`] = `"<nav><ol><li><a href=\\"/products/\\"><span>products</span></a></li><span></span><li><a href=\\"/products/productA/\\"><span>ProductA</span></a></li></ol></nav>"`;

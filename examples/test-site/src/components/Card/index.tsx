@@ -28,6 +28,7 @@ import {
 } from '@bodiless/fclasses';
 import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import {
+  asEditable,
   asEditableLink,
 } from '../Elements.token';
 import { asEditableImage } from '../Image';
@@ -54,6 +55,27 @@ export const withCardEditors = asToken(
       startWith(GatsbyLink),
     ),
     Body: withEditorBasic('body', 'Card Body Text'),
+  }),
+);
+
+export const withMenuCardsEditors = asToken(
+  withDesign({
+    Image: asEditableImage('image'),
+    ImageLink: asToken(
+      withSidecarNodes(
+        asEditableLink('link'),
+      ),
+      startWith(GatsbyLink),
+    ),
+    Title: asEditable('text', 'Card Title'),
+    Link: asToken(
+      asEditable('ctatext', 'CTA'),
+      withSidecarNodes(
+        asEditableLink('link', undefined, () => ({ groupLabel: 'CTA' })),
+      ),
+      startWith(GatsbyLink),
+    ),
+    Body: withEditorBasic('body', 'Card Body'),
   }),
 );
 

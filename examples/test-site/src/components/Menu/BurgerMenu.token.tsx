@@ -74,9 +74,9 @@ const $withColumnSubMenuStyles = withDesign({
 });
 
 const $withMenuStyles = asToken(
-  asBurgerMenu('List', 'Columns', 'Touts'),
+  asBurgerMenu('List', 'Columns', 'Cards'),
   withMenuDesign()($withTitleEditors),
-  withMenuDesign(['List', 'Columns', 'Touts'])($withBaseSubMenuStyles, $withBoldAccordionTitleStyles),
+  withMenuDesign(['List', 'Columns', 'Cards'])($withBaseSubMenuStyles, $withBoldAccordionTitleStyles),
   withMenuDesign('Columns')($withColumnSubMenuStyles),
 );
 

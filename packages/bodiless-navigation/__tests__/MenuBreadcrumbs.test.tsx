@@ -20,7 +20,7 @@ import { mount, ReactWrapper } from 'enzyme';
 import cheerio from 'cheerio';
 import { withDefaultContent, asReadOnly } from '@bodiless/core';
 import {
-  asBodilessMenu, withListSubMenu, withColumnSubMenu, withToutSubMenu,
+  asBodilessMenu, withListSubMenu, withColumnSubMenu, withCardsSubMenu,
   withBreadcrumbStore, asBreadcrumbs, BreadcrumbsClean, withMenuTitleEditors,
 } from '../src';
 
@@ -43,7 +43,7 @@ const createBreadcrumbComponent = ({
   const Source = flowRight(
     withListSubMenu(),
     withColumnSubMenu(),
-    withToutSubMenu(),
+    withCardsSubMenu(),
     asBodilessMenu('testMenu'),
   )('ul');
 
@@ -112,10 +112,10 @@ const generateMegaMenuContent = (component: string) => ({
 });
 
 describe('asBreadcrumbsClean', () => {
-  it('creates breadcrumbs for 2-level Touts MegaMenu', () => {
+  it('creates breadcrumbs for 2-level Cards MegaMenu', () => {
     setPagePath('/products/productA');
     const Breadcrumb = createBreadcrumbComponent({
-      content: generateMegaMenuContent('Touts'),
+      content: generateMegaMenuContent('Cards'),
     });
     const wrapper = mount(<Breadcrumb />);
     expect(breadcrumbHtml(wrapper)).toMatchSnapshot();

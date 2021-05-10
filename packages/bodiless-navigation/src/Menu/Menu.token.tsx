@@ -132,13 +132,13 @@ const asTopNav = (...keys: string[]) => {
     ? withBaseMenuStyles
     : asToken({});
   const listSubmenuStyles = keys.indexOf('List') > -1 ? asListSubMenu : asToken({});
-  const toutsSubmenuStyles = keys.indexOf('Touts') > -1 ? asFullWidthSubMenu : asToken({});
+  const cardsSubmenuStyles = keys.indexOf('Cards') > -1 ? asFullWidthSubMenu : asToken({});
   const columnsSubmenuStyles = keys.indexOf('Columns') > -1 ? asFullWidthSubMenu : asToken({});
 
   return asToken(
     withMenuDesign('Main')(mainMenuStyles),
     withMenuDesign('List')(listSubmenuStyles),
-    withMenuDesign('Touts')(toutsSubmenuStyles),
+    withMenuDesign('Cards')(cardsSubmenuStyles),
     withMenuDesign('Columns', 1)(columnsSubmenuStyles),
   );
 };
