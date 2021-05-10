@@ -36,6 +36,11 @@ export type {
   BreadcrumbItemType,
 } from './BreadcrumbStore';
 
+export type {
+  BreadcrumbsComponents,
+  CleanBreadcrumbsProps,
+} from './types';
+
 export {
   asBreadcrumbs,
   BreadcrumbsClean,

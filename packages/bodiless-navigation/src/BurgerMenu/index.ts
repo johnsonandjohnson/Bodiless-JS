@@ -43,3 +43,7 @@ export type {
   BurgerMenuProps,
   BurgerMenuComponents,
 } from './BurgerMenuClean';
+
+export type {
+  TogglerComponents,
+} from './BurgerMenuToggler';

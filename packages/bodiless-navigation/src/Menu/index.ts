@@ -14,7 +14,7 @@
 
 import asBodilessMenu from './asBodilessMenu';
 import withMenuDesign from './withMenuDesign';
-import asTopNav from './Menu.token';
+import asTopNav, { isMenuContextActive, isMenuContextNotActive } from './Menu.token';
 import { useIsMenuOpen } from './withMenuContext';
 import { withListSubMenu, withToutSubMenu, withColumnSubMenu } from './withSubMenu';
 import { withMenuTitleEditors, withDefaultMenuTitleEditors } from './MenuTitles';
@@ -27,6 +27,8 @@ export {
   withColumnSubMenu,
   withMenuDesign,
   asTopNav,
+  isMenuContextActive,
+  isMenuContextNotActive,
   withMenuTitleEditors,
   withDefaultMenuTitleEditors,
 };

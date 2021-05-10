@@ -21,7 +21,7 @@ import {
 import { useBurgerMenuContext } from './BurgerMenuContext';
 import { withBurgerMenuTogglerStyles } from './BurgerMenu.token';
 
-type TogglerComponents = {
+export type TogglerComponents = {
   Wrapper: ComponentType<any>,
   Button: ComponentType<any>,
 };

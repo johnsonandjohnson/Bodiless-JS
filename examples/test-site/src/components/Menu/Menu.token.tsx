@@ -103,7 +103,7 @@ const $withToutsSublistStyles = withDesign({
 });
 
 const $asNavStyles = asToken(
-  asTopNav('List', 'Columns', 'Touts'),
+  asTopNav('Main', 'List', 'Columns', 'Touts'),
   withMenuDesign(['Main', 'List', 'Columns'])($withTitleEditors),
   withMenuDesign()($withTitleStyles),
   withMenuDesign('Main')($withBaseMenuStyles),
