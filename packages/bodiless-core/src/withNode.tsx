@@ -13,7 +13,6 @@
  */
 
 import React, { FC } from 'react';
-import { pickBy } from 'lodash';
 import { HOC, Injector } from '@bodiless/fclasses';
 import NodeProvider, { useNode } from './NodeProvider';
 import { WithNodeProps } from './Types/NodeTypes';
@@ -41,7 +40,11 @@ const withNode:HOC<{}, WithNodeProps> = Component => {
   };
   return WithNode;
 };
+type WithNodeKeyFunction = (props:any) => string|Partial<WithNodeProps>;
 
+const toNodeProps = (nodeKeys:string|Partial<WithNodeProps>) => (
+  typeof nodeKeys === 'string' ? { nodeKey: nodeKeys } : nodeKeys
+);
 /**
  * HOC which gives a component a node key. The enhanced component must first
  * have been wrapped by `withNode`.  This HOC simply adds a nodeKey prop.
@@ -49,14 +52,14 @@ const withNode:HOC<{}, WithNodeProps> = Component => {
  * @param Component
  */
 const withNodeKey = (
-  nodeKeys: string|Partial<WithNodeProps> = {},
+  nodeKeys: string|Partial<WithNodeProps>|WithNodeKeyFunction = {},
 ): Injector<WithNodeProps> => Component => {
-  const nodeKeyProps = pickBy(
-    typeof nodeKeys === 'string' ? { nodeKey: nodeKeys } : nodeKeys,
-  );
-  const WithNodeKey: FC<any> = props => (
-    <Component {...nodeKeyProps} {...props} />
-  );
+  const WithNodeKey: FC<any> = props => {
+    const nodeKeyProps = typeof nodeKeys === 'function'
+      ? toNodeProps(nodeKeys(props))
+      : toNodeProps(nodeKeys);
+    return <Component {...nodeKeyProps} {...props} />;
+  };
   return WithNodeKey;
 };
 
