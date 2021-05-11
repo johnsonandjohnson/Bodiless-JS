@@ -33,6 +33,7 @@
     "@bodiless/richtext": "^0.2.0",
     "@bodiless/richtext-ui": "^0.2.0",
     "@bodiless/search": "^0.2.0",
+    "@bodiless/table": "^0.2.0",
     "@bodiless/tokens": "^0.2.0",
     "@bodiless/ui": "^0.2.0",
     "@bodiless/youtube": "^0.2.0",

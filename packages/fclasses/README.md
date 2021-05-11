@@ -798,7 +798,7 @@ which produces
 }
 ```
 Note in all the above examples, the design keys produced by `varyDesign` are
-constructed simply by concatinating the keys of all the keys which are composed
+constructed simply by concatenating the keys of all the keys which are composed
 in each.
 
 Note also that all the tokens composed above could *themselves* be designs which

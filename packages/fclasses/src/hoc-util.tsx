@@ -49,6 +49,18 @@ export const flowIf = <P extends object>(condition: Condition<P>): AsToken<P> =>
   }
 );
 
+export type FlowIfFunc<A> = (props:A) => boolean;
+
+export const and = <A extends object> (...funcs:FlowIfFunc<A>[]) => (props:A) => (
+  funcs.every(f => f(props))
+);
+export const or = <A extends object> (...funcs:FlowIfFunc<A>[]) => (props:A) => (
+  !funcs.every(f => !f(props))
+);
+export const not = <A extends object> (...funcs:FlowIfFunc<A>[]) => (props:A) => (
+  funcs.every(f => !f(props))
+);
+
 /**
  * Removes the specified props before rendering the wrapped component.
  *
