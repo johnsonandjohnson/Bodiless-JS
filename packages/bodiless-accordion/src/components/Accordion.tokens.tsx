@@ -62,10 +62,8 @@ const asAccordionDefaultExpanded = asToken(
  */
 const asAccordionIcon = asToken(
   addClasses('material-icons cursor-pointer right-0'),
-  addProps({
-    'data-accordion-element': 'accordion-icon',
-    'aria-label': 'Expand Accordion',
-  }),
+  addProps({ 'data-accordion-element': 'accordion-icon' }),
+  addPropsIf(isAccordionContracted)({ 'aria-label': 'Expand Accordion' }),
   addPropsIf(isAccordionExpanded)({ 'aria-label': 'Collapse Accordion' }),
 );
 
