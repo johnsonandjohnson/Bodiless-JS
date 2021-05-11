@@ -100,10 +100,10 @@ const withColumnsSubmenuItems = (...items: string[]) => {
  *     <div href="#" data-test="menu-title"><span>Item 3</span></div>
  *     <ul>
  *       <li>
- *         <div href="#"><span>Tout 1</span></div>
+ *         <div href="#"><span>Card 1</span></div>
  *       </li>
  *       <li>
- *         <div href="#"><span>Tout 2</span></div>
+ *         <div href="#"><span>Card 2</span></div>
  *       </li>
  *     </ul>
  *   </li>
@@ -159,16 +159,16 @@ const withCompleteDataStructure = withDefaultContent({
     'text': 'Sub-Col 2',
   },
   'testMenu$27f231b7-354a-462d-b05a-70d075d60e8e$cham-sublist': {
-    'component': 'Touts',
+    'component': 'Cards',
   },
   'testMenu$27f231b7-354a-462d-b05a-70d075d60e8e$sublist$default$title$text': {
-    'text': 'Tout 1',
+    'text': 'Card 1',
   },
   'testMenu$27f231b7-354a-462d-b05a-70d075d60e8e$sublist': {
     'items': ['default', '9e1b1d19-e2bb-4fef-9b04-bb878757a5f7'],
   },
   'testMenu$27f231b7-354a-462d-b05a-70d075d60e8e$sublist$9e1b1d19-e2bb-4fef-9b04-bb878757a5f7$title$text': {
-    'text': 'Tout 2',
+    'text': 'Card 2',
   },
 });
 
@@ -185,13 +185,13 @@ const MenuBase = flow(
 
 const withListSubmenuItems = withSubmenuItems('List');
 
-const withToutsSubmenuItems = withSubmenuItems('Touts');
+const withCardsSubmenuItems = withSubmenuItems('Cards');
 
 export default MenuBase;
 export {
   withMainMenuItems,
   withListSubmenuItems,
   withColumnsSubmenuItems,
-  withToutsSubmenuItems,
+  withCardsSubmenuItems,
   withCompleteDataStructure,
 };

@@ -29,7 +29,7 @@ const $asMenuBase = asToken(
   asBodilessMenu(), // Replacement for `asSimpleMenuBase` and `asMegaMenuBase`
   withListSubMenu(), // Adds a List submenu
   withColumnSubMenu(), // Adds a Columns submenu
-  withToutSubMenu(), // Adds a Touts submenu
+  withCardsSubMenu(), // Adds a Cards submenu
 );
 
 // Then we provide menu Title Editors and menu styles:
@@ -37,9 +37,9 @@ const $withTitleEditors = withMenuTitleEditors(); // Use default Title editors f
 
 const $withMenuStyles = asToken(
   // Replacement for `asSimpleMenuTopNav` and `asMegaMenuTopNav`
-  asTopNav('List', 'Columns', 'Touts'),
+  asTopNav('Main', 'List', 'Columns', 'Cards'),
   // Replacement for `withMegaMenuDesign` and `withSimpleMenuDesign`
-  withMenuDesign(['Main', 'List', 'Tout', 'Columns'])($withTitleEditors),
+  withMenuDesign(['Main', 'List', 'Cards', 'Columns'])($withTitleEditors),
 );
 
 // Lastly we compose two pieces together:
@@ -57,8 +57,8 @@ Here is an example of **old SubMenu** styling:
 const $withOldSubMenuStyles = asToken(
   withDesigh({
     Wrapper: withDesigh({
-    List: addClasses(...), // Submenu <ul> element.
-    WrapperItem: addClasses(...), // Top menu Item (<li>) for the particular submenu. 
+      List: addClasses(...), // Submenu <ul> element.
+      WrapperItem: addClasses(...), // Top menu Item (<li>) for the particular submenu. 
     }),
     Item: addClasses(...), // Submenu <li> element.
     Title: addClasses(...), // Submenu title, usually <a> element.
@@ -183,7 +183,7 @@ const $withOverviewLink = withOverviewLink('Demo Overview Link');
 
 // Create a Token that adds a custom overview link to all submenus.
 const $withBurgerMenuStyles = asToken(
-  asBurgerMenu('List', 'Columns', 'Touts'),
-  withMenuDesign(['List', 'Columns', 'Touts'])($withOverviewLink),
+  asBurgerMenu('List', 'Columns', 'Cards'),
+  withMenuDesign(['List', 'Columns', 'Cards'])($withOverviewLink),
 );
 ```

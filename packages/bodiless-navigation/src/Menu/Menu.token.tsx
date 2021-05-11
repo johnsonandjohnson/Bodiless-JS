@@ -33,12 +33,12 @@ import {
  * Utility Styles
  * ===========================================
  */
-const isContextActive = () => {
+const isMenuContextActive = () => {
   const { isActive, isEdit } = useEditContext();
   return isEdit && isActive;
 };
 
-const isContextNotActive = () => {
+const isMenuContextNotActive = () => {
   const { isActive, isEdit } = useEditContext();
   return isEdit ? !isActive : true;
 };
@@ -48,7 +48,7 @@ const asVerticalSubMenu = withDesign({
 });
 
 const asVisibleOnActive = asToken(
-  addClassesIf(isContextActive)('overflow-visible'),
+  addClassesIf(isMenuContextActive)('overflow-visible'),
 );
 
 const asResponsiveSublist = withDesign({
@@ -63,7 +63,7 @@ const asStaticOnHover = asToken(
 );
 
 const asRelativeNotActive = asToken(
-  addClassesIf(isContextNotActive)('relative'),
+  addClassesIf(isMenuContextNotActive)('relative'),
 );
 
 const asFullWidthSublist = withDesign({
@@ -110,21 +110,10 @@ const asListSubMenu = asToken(
 );
 
 /*
- * Touts Sub Menu Styles
+ * Full Width Submenu Styles
  * ===========================================
  */
-const asToutsSubMenu = asToken(
-  asFullWidthSublist,
-  asStaticOnHover,
-  withBaseSubMenuStyles,
-  asRelativeNotActive,
-);
-
-/*
- * Columns Sub Menu Styles
- * ===========================================
- */
-const asColumnSubMenu = asToken(
+const asFullWidthSubMenu = asToken(
   asFullWidthSublist,
   asStaticOnHover,
   withBaseSubMenuStyles,
@@ -139,16 +128,23 @@ const asColumnSubMenu = asToken(
  * @return Token that applies default top navigation styles based on provided keys.
  */
 const asTopNav = (...keys: string[]) => {
+  const mainMenuStyles = (keys.length === 0 || keys.indexOf('Main') > -1)
+    ? withBaseMenuStyles
+    : asToken({});
   const listSubmenuStyles = keys.indexOf('List') > -1 ? asListSubMenu : asToken({});
-  const toutsSubmenuStyles = keys.indexOf('Touts') > -1 ? asToutsSubMenu : asToken({});
-  const columnsSubmenuStyles = keys.indexOf('Columns') > -1 ? asColumnSubMenu : asToken({});
+  const cardsSubmenuStyles = keys.indexOf('Cards') > -1 ? asFullWidthSubMenu : asToken({});
+  const columnsSubmenuStyles = keys.indexOf('Columns') > -1 ? asFullWidthSubMenu : asToken({});
 
   return asToken(
-    withMenuDesign('Main')(withBaseMenuStyles),
+    withMenuDesign('Main')(mainMenuStyles),
     withMenuDesign('List')(listSubmenuStyles),
-    withMenuDesign('Touts')(toutsSubmenuStyles),
+    withMenuDesign('Cards')(cardsSubmenuStyles),
     withMenuDesign('Columns', 1)(columnsSubmenuStyles),
   );
 };
 
 export default asTopNav;
+export {
+  isMenuContextActive,
+  isMenuContextNotActive,
+};

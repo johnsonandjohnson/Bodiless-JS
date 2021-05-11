@@ -79,7 +79,7 @@ const asCardOverlayCta = withCategory('Layout')(asCardOverlayCta$);
 const asCardNoBodyNoTitle = withCategory('Structure')(asCardNoBodyNoTitle$);
 const asCardWithPaddings = withCategory('Layout')(asCardWithPaddings$);
 const asCardTextWhite = withCategory('Appearance')(asCardTextWhite$);
-const asCardMainMenu = asToken(
+const withMenuCardStyles = asToken(
   asCardTextWhite,
   asCardWithPaddings,
   asCardDefaultStyle,
@@ -98,5 +98,5 @@ export {
   asCardNoBodyNoTitle,
   asCardWithPaddings,
   asCardTextWhite,
-  asCardMainMenu,
+  withMenuCardStyles,
 };

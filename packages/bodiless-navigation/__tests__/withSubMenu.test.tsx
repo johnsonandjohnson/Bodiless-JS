@@ -19,11 +19,11 @@ import { withDesign, addProps } from '@bodiless/fclasses';
 import { mount } from 'enzyme';
 
 import {
-  withListSubMenu, withMenuDesign, withColumnSubMenu, withToutSubMenu,
+  withListSubMenu, withMenuDesign, withColumnSubMenu, withCardsSubMenu,
   withMenuTitleEditors, withDefaultMenuTitleEditors,
 } from '../src';
 import MenuBase, {
-  withListSubmenuItems, withColumnsSubmenuItems, withToutsSubmenuItems, withMainMenuItems,
+  withListSubmenuItems, withColumnsSubmenuItems, withCardsSubmenuItems, withMainMenuItems,
 } from './TestMenu';
 
 const withSubMenuDesign = (submenuType: string = 'List') => withMenuDesign(submenuType)(
@@ -95,18 +95,18 @@ describe('Bodiless Menu', () => {
     columnSubMenuTitles.forEach((title, i) => expect(title.text()).toBe(subMenuItems[i]));
   });
 
-  it('withToutSubMenu may be used to add a Columns submenu', () => {
-    const subMenuItems = ['Tout 1', 'Tout 2', 'Tout 3'];
-    const MenuWithTouts = flow(
-      withToutSubMenu(withDefaultMenuTitleEditors),
-      withToutsSubmenuItems(...subMenuItems),
-      withSubMenuDesign('Touts'),
+  it('withCardsSubMenu may be used to add a Columns submenu', () => {
+    const subMenuItems = ['Card 1', 'Card 2', 'Card 3'];
+    const MenuWithCards = flow(
+      withCardsSubMenu(withDefaultMenuTitleEditors),
+      withCardsSubmenuItems(...subMenuItems),
+      withSubMenuDesign('Cards'),
     )(MenuBase);
 
-    const wrapper = mount(<MenuWithTouts />);
-    expect(wrapper.find('ul[data-test-submenu="touts-submenu"]').length).toBe(1);
+    const wrapper = mount(<MenuWithCards />);
+    expect(wrapper.find('ul[data-test-submenu="cards-submenu"]').length).toBe(1);
 
-    const subMenuTouts = wrapper.find('div[data-test-submenu="touts-submenu-title"]');
-    expect(subMenuTouts.length).toBe(subMenuItems.length);
+    const subMenuCards = wrapper.find('div[data-test-submenu="cards-submenu-title"]');
+    expect(subMenuCards.length).toBe(subMenuItems.length);
   });
 });

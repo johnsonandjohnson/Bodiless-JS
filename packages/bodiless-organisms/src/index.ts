@@ -13,30 +13,10 @@
  */
 
 export {
-  ToutClean,
-  asTestableTout,
-} from './components/Touts';
-
-export type {
-  ToutComponents,
-} from './components/Touts';
-
-export {
   Product,
   ProductClean,
   asEditableProduct,
 } from './components/Products';
-
-export {
-  asToutHorizontal,
-  asToutVertical,
-  asToutNoTitle,
-  asToutNoBody,
-  asToutNoCta,
-  asToutOverlayTitle,
-  asToutOverlayCta,
-  asToutNoBodyNoTitle,
-} from './components/Touts.tokens';
 
 export {
   FilterByGroupClean,
