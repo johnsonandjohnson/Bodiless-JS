@@ -55,6 +55,8 @@
       "@bodiless/tokens/*": ["bodiless-tokens/src/*"],
       "@bodiless/ui": ["bodiless-ui/src"],
       "@bodiless/ui/*": ["bodiless-ui/src/*"],
+      "@bodiless/table": ["bodiless-table/src"],
+      "@bodiless/table/*": ["bodiless-table/src/*"],
       "@bodiless/youtube": ["bodiless-youtube/src"],
       "@bodiless/youtube/*": ["bodiless-youtube/src/*"],
       "@bodiless/fclasses": ["fclasses/src"],

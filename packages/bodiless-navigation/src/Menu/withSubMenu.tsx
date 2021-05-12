@@ -23,7 +23,7 @@ import {
 
 import { asBreadcrumb } from '../Breadcrumbs';
 import {
-  asMenuTitle, asMenuTout, DEFAULT_NODE_KEYS,
+  asMenuTitle, asMenuCard, DEFAULT_NODE_KEYS,
 } from './MenuTitles';
 
 /**
@@ -70,14 +70,14 @@ const withListSubMenu = (withTitleDesign?: HOC | Token) => withSubMenuDesign({
 });
 
 /**
- * Helper which can be used to add a Touts submenu option to the menu.
+ * Helper which can be used to add a Cards submenu option to the menu.
  *
  * @param withTitleDesign optional token which will be applied to the sublist title.
  *
  */
-const withToutSubMenu = (withTitleDesign?: HOC | Token) => withSubMenuDesign({
-  Touts: asMenuSubList(
-    asToken(asMenuTout, withTitleDesign),
+const withCardsSubMenu = (withTitleDesign?: HOC | Token) => withSubMenuDesign({
+  Cards: asMenuSubList(
+    asToken(asMenuCard, withTitleDesign),
   ),
 });
 
@@ -103,6 +103,6 @@ const withColumnSubMenu = (withTitleDesign?: HOC | Token) => withSubMenuDesign({
 
 export {
   withListSubMenu,
-  withToutSubMenu,
+  withCardsSubMenu,
   withColumnSubMenu,
 };

@@ -1,0 +1,7 @@
+/**
+* reset will-change property set in the contrib library css
+* in order to resolve stacking context issues found on rtl pages
+*/
+.carousel__slider .carousel__slider-tray {
+  will-change: auto;
+}

@@ -7,7 +7,7 @@ There are several menu-specific HOCs provided by `@bodiless/navigation` that can
 
  - `asBodilessMenu` - Bodiless HOC generator which creates the basic structure of the Bodiless Menu. This serves as a base for various views on the Menu data, including a site's main menu, a burger menu, and breadcrumbs.
  - `withListSubMenu` - Helper, which can be used to add a List submenu option to the menu.
- - `withToutSubMenu` - Helper, which can be used to add a Touts submenu option to the menu.
+ - `withCardsSubMenu` - Helper, which can be used to add a Cards submenu option to the menu.
  - `withColumnSubMenu` - Helper, which can be used to add a Columns submenu option to the menu.
  - `asTopNav` - Helper, which allows specifying which submenu types should have default navigation styling added.
  - `withMenuDesign` - Helper, which makes it easier to target a particular type of submenu. The first parameter is a list of the submenu key(s), and the second param is the design keys depth to which the tokens provided as a second argument should be applied. It also accepts the special key 'Main' to apply the design to the top-level menu.
@@ -38,23 +38,23 @@ The `DemoMenu` above will create a simple one-level **unstyled** list with Edita
 ```js
 import { asToken } from '@bodiless/fclasses';
 import {
-  asBodilessMenu, withListSubMenu, withColumnSubMenu, withToutSubMenu,
+  asBodilessMenu, withListSubMenu, withColumnSubMenu, withCardsSubMenu,
 } from '@bodiless/navigation';
 
 export const DemoMenu = asToken(
   asBodilessMenu('menu-demo'),
   withListSubMenu(), // Add an ability to create a List submenu
   withColumnSubMenu(), // Add an ability to create a Columns submenu
-  withToutSubMenu(), // Add an ability to create a Touts submenu
+  withCardsSubMenu(), // Add an ability to create a Cards submenu
 )('ul');
 ```
 
 Adding `with...SubMenu` HOCs provides each top menu item with the `Sub`, which offers you a choice of three types of submenu:
  - `List` - Plain list submenu. It functions exactly like a simple menu.
- - `Touts` - Each submenu item is a tout. You can edit tout components as with any other tout.
+ - `Cards` - Each submenu item is a card. You can edit card components as with any other card.
  - `Columns` - Each submenu item is a column that itself has an optional third level of submenu.
 
-Once you have added a submenu, the `Sub` button allows you to swap it out for a different type. The data model for each kind of submenu is the same so that when you swap it, the title and link are preserved (for touts, the title becomes the tout title, and the link becomes the CTA link).
+Once you have added a submenu, the `Sub` button allows you to swap it out for a different type. The data model for each kind of submenu is the same so that when you swap it, the title and link are preserved (for Cards, the title becomes the card title, and the link becomes the CTA link).
 
 Each of the `with...SubMenu` HOCs takes an optional token which will be applied to the sublist title. For example:
 ```js
@@ -113,8 +113,8 @@ There is a `asTopNav` helper exported by the `@bodiless/navigation` that may be 
 It accepts an optional list of submenu keys to which default styling has to be applied to:
 ```js
 const $asSiteNavStyles = asToken(
-  // Add default position and interaction styles for List, Columns and Touts submenus.
-  asTopNav('List', 'Columns', 'Touts'),
+  // Add default position and interaction styles for List, Columns and Cards submenus.
+  asTopNav('Main', 'List', 'Columns', 'Cards'),
 );
 ```
 
@@ -125,7 +125,7 @@ There are two arguments that `withMenuDesign(keys, depths)(...tokenDefs)` accept
 
 For example, if you had a common menu styles to apply to the top menu and all submenus, you could write:
 ```js
-withMenuDesign(['Main', 'List', 'Touts', 'Columns'])($withCommonMenuStyles);
+withMenuDesign(['Main', 'List', 'Cards', 'Columns'])($withCommonMenuStyles);
 // or
 withMenuDesign()($withCommonMenuStyles);
 ```
@@ -137,7 +137,7 @@ Here are some more examples of `withMenuDesign` usage:
 withMenuDesign() // Applies tokens to the Top menu and all submenus.
 
 withMenuDesign('Main') // Applies tokens to the Top menu.
-withMenuDesign('Touts') // Applies tokens to Touts submenu.
+withMenuDesign('Cards') // Applies tokens to Cards submenu.
 withMenuDesign('List') // Applies tokens to List submenu.
 withMenuDesign('Columns') // Applies tokens to all levels of columns submenu.
 
@@ -167,7 +167,7 @@ Here is the complete example of the demo bodiless menu:
 ```js
 import { asToken } from '@bodiless/fclasses';
 import {
-  asTopNav, withMenuDesign, asBodilessMenu, withColumnSubMenu, withToutSubMenu,
+  asTopNav, withMenuDesign, asBodilessMenu, withColumnSubMenu, withCardsSubMenu,
   withMenuTitleEditors,
 } from '@bodiless/navigation';
 import {
@@ -181,17 +181,17 @@ const $withMenuSchema = asToken(
   asBodilessMenu('demo-menu'),
   withListSubMenu(),
   withColumnSubMenu(),
-  withToutSubMenu(),
+  withCardsSubMenu(),
 );
 
 const $withTitleEditors = withMenuTitleEditors();
 
 const $withMenuDesign = asToken(
-  asTopNav('List', 'Columns', 'Touts'),
+  asTopNav('Main', 'List', 'Columns', 'Cards'),
   withMenuDesign()($withTitleStyles),
   withMenuDesign(['Main', 'List', 'Columns'])($withTitleEditors),
   withMenuDesign('Main')($withBaseMenuStyles),
-  withMenuDesign(['List', 'Columns', 'Touts'])($withBaseSubMenuStyles),
+  withMenuDesign(['List', 'Columns', 'Cards'])($withBaseSubMenuStyles),
   withMenuDesign('Columns', 2)($withColumnsSublistStyles),
 );
 

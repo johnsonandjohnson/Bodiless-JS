@@ -14,19 +14,21 @@
 
 import asBodilessMenu from './asBodilessMenu';
 import withMenuDesign from './withMenuDesign';
-import asTopNav from './Menu.token';
+import asTopNav, { isMenuContextActive, isMenuContextNotActive } from './Menu.token';
 import { useIsMenuOpen } from './withMenuContext';
-import { withListSubMenu, withToutSubMenu, withColumnSubMenu } from './withSubMenu';
+import { withListSubMenu, withCardsSubMenu, withColumnSubMenu } from './withSubMenu';
 import { withMenuTitleEditors, withDefaultMenuTitleEditors } from './MenuTitles';
 
 export {
   asBodilessMenu,
   useIsMenuOpen,
   withListSubMenu,
-  withToutSubMenu,
+  withCardsSubMenu,
   withColumnSubMenu,
   withMenuDesign,
   asTopNav,
+  isMenuContextActive,
+  isMenuContextNotActive,
   withMenuTitleEditors,
   withDefaultMenuTitleEditors,
 };

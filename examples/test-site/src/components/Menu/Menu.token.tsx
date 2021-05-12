@@ -24,8 +24,8 @@ import {
   asLightTealBackgroundOnHover, asTealBackground, asTextWhite,
 } from '../Elements.token';
 import { asUnderline } from '../ElementDefault.token';
-import { withMenuToutStyles } from '../Tout/token';
-import { withMenuToutEditors } from '../Tout/index';
+import { withMenuCardStyles } from '../Card/token';
+import { withMenuCardsEditors } from '../Card/index';
 
 /**
  * Colors
@@ -96,21 +96,21 @@ const $withColumnsSublistStyles = withDesign({
   Title: addClasses('pl-6'),
 });
 
-const $withToutsSublistStyles = withDesign({
-  Title: asToken(withMenuToutEditors, withMenuToutStyles),
+const $withCardsSublistStyles = withDesign({
+  Title: asToken(withMenuCardsEditors, withMenuCardStyles),
   Item: addClasses('w-1/3'),
   Wrapper: addClasses('flex-wrap'),
 });
 
 const $asNavStyles = asToken(
-  asTopNav('List', 'Columns', 'Touts'),
+  asTopNav('Main', 'List', 'Columns', 'Cards'),
   withMenuDesign(['Main', 'List', 'Columns'])($withTitleEditors),
   withMenuDesign()($withTitleStyles),
   withMenuDesign('Main')($withBaseMenuStyles),
-  withMenuDesign(['List', 'Columns', 'Touts'])($withBaseSubMenuStyles),
+  withMenuDesign(['List', 'Columns', 'Cards'])($withBaseSubMenuStyles),
   withMenuDesign('Columns', 2)($withColumnsSublistStyles),
   withMenuDesign('List')($withListSubmenuStyles),
-  withMenuDesign('Touts')($withToutsSublistStyles),
+  withMenuDesign('Cards')($withCardsSublistStyles),
 );
 
 export default $asNavStyles;

@@ -21,6 +21,7 @@ import type { BreadcrumbItemType as BreadcrumbStoreItemType } from './Breadcrumb
 type BreadcrumbsComponents = {
   StartingTrail: ComponentType<any>,
   Separator: ComponentType<HTMLProps<HTMLSpanElement>>,
+  NavWrapper: ComponentType<HTMLProps<HTMLDivElement>>,
   Wrapper: ComponentType<HTMLProps<HTMLUListElement>>,
   Item: ComponentType<HTMLProps<HTMLLIElement> & {
     position: number;

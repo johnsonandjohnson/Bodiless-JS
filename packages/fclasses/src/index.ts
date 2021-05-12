@@ -47,7 +47,7 @@ import type {
 } from './Design';
 import {
   flowIf, hasProp, withoutProps, withOnlyProps, replaceOnEffect,
-  withDisplayName,
+  withDisplayName, or, and, not,
 } from './hoc-util';
 import type { Condition } from './hoc-util';
 import Fragment from './Fragment';
@@ -89,6 +89,9 @@ export {
   removeClassesIf,
   Fragment,
   withDisplayName,
+  and,
+  or,
+  not,
 };
 
 export type {

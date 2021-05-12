@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.0](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.72...v0.2.0) (2021-04-28)
+
+
+### Bug Fixes
+
+* **core:** Cannot read property 'href' of undefined' ([#951](https://github.com/johnsonandjohnson/bodiless-js/issues/951)) ([c2da714](https://github.com/johnsonandjohnson/bodiless-js/commit/c2da714c528a8ca3e63a5dc70001c536c1d18c73)), closes [#950](https://github.com/johnsonandjohnson/bodiless-js/issues/950) [#950](https://github.com/johnsonandjohnson/bodiless-js/issues/950) [#950](https://github.com/johnsonandjohnson/bodiless-js/issues/950)
+* **test-site:** Broken image upload for share ([#955](https://github.com/johnsonandjohnson/bodiless-js/issues/955)) ([#956](https://github.com/johnsonandjohnson/bodiless-js/issues/956)) ([60d9655](https://github.com/johnsonandjohnson/bodiless-js/commit/60d9655f7528a5e35eaab566e2683c20ed3035cd))
+
+
+### Features
+
+* **carousel:** Component Library: Carousel ([#962](https://github.com/johnsonandjohnson/bodiless-js/issues/962)) ([bb79dde](https://github.com/johnsonandjohnson/bodiless-js/commit/bb79dde65a907020c4b7c2568e64a3c146e0b76e))
+* **components:** ability to create anchor links ([#943](https://github.com/johnsonandjohnson/bodiless-js/issues/943)) ([18e3728](https://github.com/johnsonandjohnson/bodiless-js/commit/18e3728d31f9bb86fde205373c1374c34c32ec71)), closes [#904](https://github.com/johnsonandjohnson/bodiless-js/issues/904)
+* **components, youtube:** Youtube allow full screen ([#939](https://github.com/johnsonandjohnson/bodiless-js/issues/939)) ([bea046a](https://github.com/johnsonandjohnson/bodiless-js/commit/bea046a16daafdaed5f72086738ec39ea751589c))
+* **layouts:** Flow container enhancements ([#965](https://github.com/johnsonandjohnson/bodiless-js/issues/965)) ([339b29e](https://github.com/johnsonandjohnson/bodiless-js/commit/339b29e62b46b6595ca34ef4b28b75553ba31535))
+* **navigation, organisms, components:** Better DX for Menu, Breadcrumbs, BurgerMenu ([#841](https://github.com/johnsonandjohnson/bodiless-js/issues/841)) ([ad1d8dd](https://github.com/johnsonandjohnson/bodiless-js/commit/ad1d8ddb4308ab2883ba15fb918f4393f09e53c2))
+
+
+### BREAKING CHANGES
+
+* **navigation, organisms, components:**  - There is now a new `@bodiless/navigation` package for the new menu API.
+ - All menu-related code is removed from `@bodiless/organisms`.
+ - `withSimpleMenuDesign` and `withMegaMenuDesign` were deprecated. Use `withMenuDesign` from `@bodiless/organisms`  instead.
+ - `asSimpleMenuTopNav` and `asMegaMenuTopNav` were depricated. Use `asTopNav()` from `@bodiless/organisms` instead.
+ - Breadcrumbs are now configured by default for each menu item. No need for `asBreadcrumbSource`.
+ - List and Menu design keys have changed. Removed extra `Wrapper` component from submenus.
+ - Breadcrumb design keys have changed. Breadcrumb `Title` is now the same component as `MenuTitle` by default. The `BreadcrumbLink` design key has been deprecated. `Link` is available in `MenuTitle`. Renamed `BreadcrumbWrapper` and `BreadcrumbItem` to `Wrapper` and `Item` respectively.
+- Please refer to the Upgrade Guide in `@bodiless/organisms` readme file.
+* **components, youtube:** YouTube and ResponsiveYouTube components were moved to the `@bodiless/YouTube`
+
+
+
+
+
 ## [0.0.72](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.71...v0.0.72) (2021-04-01)
 
 

@@ -31,7 +31,7 @@ import MenuTitle, { DEFAULT_NODE_KEYS } from '../Menu/MenuTitles';
  * item.  If the parent menu item is not a link, no overview link will be
  * rendered.
  *
- * This HOC has to be applied on the List level (List, Tout or Column submenus).
+ * This HOC has to be applied on the List level (List, Cards or Column submenus).
  *
  * @param overviewText
  * The text to display or, if your menu titles render using something other
@@ -110,9 +110,9 @@ const withBurgerMenuWrapper: Token = Component => asToken(
  * @return Token that applies default burger menu styles based on provided keys.
  */
 const asBurgerMenu = (...keys: string[]) => asToken(
-  // We need to replace Tout with the MenuTitle in burger menu.
-  keys.includes('Touts')
-    ? withMenuDesign('Touts')(withDesign({ Title: startWith(MenuTitle) }))
+  // We need to replace Card with the MenuTitle in burger menu.
+  keys.includes('Cards')
+    ? withMenuDesign('Cards')(withDesign({ Title: startWith(MenuTitle) }))
     : {},
   withMenuDesign(keys)(withBurgerMenuSchema),
 );

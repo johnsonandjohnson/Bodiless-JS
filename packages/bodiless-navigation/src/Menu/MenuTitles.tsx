@@ -16,7 +16,7 @@ import React, { ComponentType, FC } from 'react';
 import { flow } from 'lodash';
 import { withSidecarNodes, withNode, withNodeKey } from '@bodiless/core';
 import { asEditable, asBodilessLink, withBodilessLinkToggle } from '@bodiless/components';
-import { ToutClean } from '@bodiless/organisms';
+import { CardClean } from '@bodiless/card';
 import {
   A, Div, Token, asToken, Fragment, designable, TokenDef,
   withDesign, startWith, DesignableComponentsProps,
@@ -98,11 +98,11 @@ const asMenuTitle = flow(
 );
 
 /**
- * Token that transforms component into Menu Tout with node and 'title' nodeKey.
+ * Token that transforms component into Menu Card with node and 'title' nodeKey.
  * Can be applied to the Title design key.
  */
-const asMenuTout = asToken(
-  startWith(ToutClean),
+const asMenuCard = asToken(
+  startWith(CardClean),
   withNode,
   withNodeKey('title'),
 );
@@ -112,6 +112,6 @@ export {
   DEFAULT_NODE_KEYS,
   withMenuTitleEditors,
   withDefaultMenuTitleEditors,
-  asMenuTout,
+  asMenuCard,
   asMenuTitle,
 };

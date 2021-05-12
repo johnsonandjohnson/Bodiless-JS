@@ -36,6 +36,11 @@ export type {
   BreadcrumbItemType,
 } from './BreadcrumbStore';
 
+export type {
+  BreadcrumbsComponents,
+  CleanBreadcrumbsProps,
+} from './types';
+
 export {
   asBreadcrumbs,
   BreadcrumbsClean,
@@ -55,8 +60,7 @@ export {
   withEditableStartingTrail,
 } from './withEditableTrail';
 
-export {
-  withBreadcrumbItemToken,
-} from './Breadcrumb.token';
+export * from './Breadcrumb.token';
+export * from './hooks';
 
 export { default as withBreadcrumbs } from './withBreadcrumbs';

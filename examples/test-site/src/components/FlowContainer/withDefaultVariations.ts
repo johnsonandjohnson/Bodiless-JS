@@ -17,6 +17,7 @@ import withCardVariations from './withCardVariations';
 import withContentfulCards from './withContentfulCards';
 import withRichTextVariations from './withRichTextVariations';
 import withSingleAccordionVariations from './withSingleAccordionVariations';
+import withTableVariations from './withTableVariations';
 import withImageVariations from './withImageVariations';
 import withIframeVariations from './withIframeVariations';
 import withYouTubeVariations from './withYouTubeVariations';
@@ -28,6 +29,7 @@ import withCarouselVariations from './withCarouselVariations';
 // thus recommend putting more frequently used components toward top for quicker access.
 const withDefaultVariations = asToken(
   withRichTextVariations,
+  withTableVariations,
   withImageVariations,
   withCardVariations,
   withContentfulCards,

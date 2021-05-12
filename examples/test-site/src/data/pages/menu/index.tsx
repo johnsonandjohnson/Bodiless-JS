@@ -27,7 +27,7 @@ import { asHeader2, asHeader1, asTealBackground } from '../../../components/Elem
 import ResponsiveMenu, { BurgerMenuToggler } from '../../../components/Menu';
 
 // Example of custom OverviewLink
-const $withMenuOverviewLink = withMenuDesign(['List', 'Columns', 'Touts'])(
+const $withMenuOverviewLink = withMenuDesign(['List', 'Columns', 'Cards'])(
   withOverviewLink('Custom Overview Link'),
 );
 
@@ -98,9 +98,9 @@ export default (props: any) => (
             functions exactly as a simple menu&apos;s submenus.
           </li>
           <li>
-            <strong>Touts:</strong>
+            <strong>Cards:</strong>
             &nbsp;
-            Each submenu item is a tout. You can edit tout components as with any other tout.
+            Each submenu item is a card. You can edit card components as with any other card.
           </li>
           <li>
             <strong>Columns:</strong>
@@ -112,7 +112,7 @@ export default (props: any) => (
           Once you have added a submenu, the &quot;Sub&quot; button allows you to swap
           it out for a different type.
           The data model for each type of submenu is the same, so that when you swap
-          the title and link are preserved (for touts, the title becomes the tout
+          the title and link are preserved (for Cards, the title becomes the card
           title and the link becomes the CTA link).
         </p>
       </Description>
