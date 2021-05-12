@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/components",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Reusable compoments",
   "author": "Heidi Vanyo <hvanyo@its.jnj.com>",
   "license": "Apache-2.0",
@@ -27,11 +27,11 @@
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
-    "@bodiless/core": "^0.2.0",
-    "@bodiless/fclasses": "^0.2.0",
-    "@bodiless/layouts": "^0.2.0",
-    "@bodiless/layouts-ui": "^0.2.0",
-    "@bodiless/ui": "^0.2.0",
+    "@bodiless/core": "^0.2.1",
+    "@bodiless/fclasses": "^0.2.1",
+    "@bodiless/layouts": "^0.2.1",
+    "@bodiless/layouts-ui": "^0.2.1",
+    "@bodiless/ui": "^0.2.1",
     "@types/react-helmet": "^5.0.14",
     "axios": "^0.21.0",
     "common-tags": "^1.8.0",

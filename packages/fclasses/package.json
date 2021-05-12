@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/fclasses",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Allows for the injection of functional class into components.",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",

@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/card",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Basic components to build out sites.",
   "author": "Guilherme Zeni <gzeni@its.jnj.com>",
   "license": "Apache-2.0",
@@ -28,8 +28,8 @@
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
-    "@bodiless/core": "^0.2.0",
-    "@bodiless/fclasses": "^0.2.0",
+    "@bodiless/core": "^0.2.1",
+    "@bodiless/fclasses": "^0.2.1",
     "lodash": "^4.17.19",
     "uuid": "^3.3.2"
   },
