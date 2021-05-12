@@ -27,23 +27,43 @@ const AccordionComponentsStart:AccordionComponents = {
 };
 
 const AccordionBase: FC<AccordionProps & AccordionProviderProps & HTMLProps<HTMLElement>> = ({
-  components, collapsible, expanded, focus, meta, ...rest
+  ...props
 }) => {
+  const {
+    id,
+    components,
+    collapsible,
+    expanded,
+    focus,
+    meta,
+    ...rest
+  } = props;
   const {
     Wrapper,
     Title = AccordionTitleClean,
     Body = AccordionBodyClean,
   } = components;
   // Generates accordion ids and prepares meta information to context
-  const accordionId = nextId('accordion-');
+  // In case props already provides id, use it instead of generating new ones
+  const accordionId = id ?? nextId('accordion-');
+
   const accordionMeta = {
     accordionId,
     accordionTitleId: `accordion__title-${accordionId}`,
     accordionContentId: `accordion__content-${accordionId}`,
   };
 
+  // Gets URL anchor, without the # character
+  const anchor = window.location.hash ? window.location.hash.substring(1) : '';
+  const initialExpanded = (anchor === accordionId) ? true : expanded;
+
   return (
-    <AccordionProvider collapsible={false} expanded={expanded} focus={focus} meta={accordionMeta}>
+    <AccordionProvider
+      collapsible={collapsible}
+      expanded={initialExpanded}
+      focus={focus}
+      meta={accordionMeta}
+    >
       <Wrapper {...rest} id={accordionId}>
         <Title />
         <Body />

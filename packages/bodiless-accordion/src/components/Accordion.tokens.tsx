@@ -53,7 +53,7 @@ const asAccordionDefaultBorder = asToken(
  * asAccordionDefaultExpanded provides expanded property
  */
 const asAccordionDefaultExpanded = asToken(
-  addProps({ expanded: true }),
+  addProps({ expanded: 'true' }),
 );
 
 /**

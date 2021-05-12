@@ -30,12 +30,12 @@ export default (props: PageProps) => (
       <div style={{ margin: 100 }}>
         <h2 className="text-xl font-bold my-4 p-1">Accordion expanded</h2>
         <SingleAccordion expanded nodeKey="accordion-expanded" />
-        <h2 className="text-xl font-bold my-4 p-1">Accordion collapsed</h2>
+        <h2 className="text-xl font-bold my-4 p-1">Accordion collapsed (#accordion-2)</h2>
         <SingleAccordion nodeKey="accordion-collapsed" />
-        <h2 className="text-xl font-bold my-4 p-1">Accordion fully bordered on focus</h2>
-        <SingleAccordionBorderedOnFocus nodeKey="accordion-bordered-focus" />
-        <h2 className="text-xl font-bold my-4 p-1">Accordion title bordered</h2>
-        <SingleAccordionTitleBordered nodeKey="accordion-title-bordered" />
+        <h2 className="text-xl font-bold my-4 p-1">Accordion fully bordered on focus (#faq3)</h2>
+        <SingleAccordionBorderedOnFocus id="faq3" nodeKey="accordion-bordered-focus" />
+        <h2 className="text-xl font-bold my-4 p-1">Accordion title bordered (#bordered)</h2>
+        <SingleAccordionTitleBordered id="bordered" nodeKey="accordion-title-bordered" />
         <h2 className="text-xl font-bold my-4 p-1">Accordion non-collapsible</h2>
         <SingleAccordionNonExpanding expanded nodeKey="accordion-non-collapsible" />
       </div>

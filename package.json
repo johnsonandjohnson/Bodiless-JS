@@ -61,7 +61,6 @@
     "html2canvas": "^1.0.0-rc.3",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-id-generator": "^3.0.1",
     "start-server-and-test": "^1.12.0",
     "symlink-dir": "^3.0.3"
   },
