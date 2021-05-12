@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.0...v0.2.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **carousel:** carousel remediation ([#975](https://github.com/johnsonandjohnson/bodiless-js/issues/975)) ([37f64a2](https://github.com/johnsonandjohnson/bodiless-js/commit/37f64a269d1fc0a8a31f18d409c46c8febb5f8a8)), closes [#1](https://github.com/johnsonandjohnson/bodiless-js/issues/1)
+* **homepage:** Fix 'View Site Build Basics' link goes to 404 ([#989](https://github.com/johnsonandjohnson/bodiless-js/issues/989)) ([#989](https://github.com/johnsonandjohnson/bodiless-js/issues/989)) ([c378014](https://github.com/johnsonandjohnson/bodiless-js/commit/c378014d02df7f1efd502a295ad1e34d9e18c285))
+* **navigation, organisms, test-site:** Fix asTopNav and rename Touts to Cards ([#991](https://github.com/johnsonandjohnson/bodiless-js/issues/991)) ([3c89c62](https://github.com/johnsonandjohnson/bodiless-js/commit/3c89c625e7530b87c321c427dda3a2e26853e387))
+
+
+### Features
+
+* **layouts:** Nested flow container enhancementws ([#972](https://github.com/johnsonandjohnson/bodiless-js/issues/972)) ([7dc7e36](https://github.com/johnsonandjohnson/bodiless-js/commit/7dc7e36ec0b97cc884e658136269a7e6f0100eda))
+* **navigation:** Breadcrumbs Accessibility ([#974](https://github.com/johnsonandjohnson/bodiless-js/issues/974)) ([2b70053](https://github.com/johnsonandjohnson/bodiless-js/commit/2b7005360ce5b2bcc707afe69f1e08e842645cdf))
+
+
+### BREAKING CHANGES
+
+* **navigation, organisms, test-site:** - Renamed `withToutsSubMenu` to `withCardsSubMenu`.
+- `asTopNav()` now accepts `Main` key to apply default navigation styles to the Main Menu.
+- `asTopNav('List' | 'Columns' | 'Cards')` is no longer applies `asTopNav('Main')` by default.
+
+
+
+
+
 ## [0.0.72](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.71...v0.0.72) (2021-04-01)
 
 

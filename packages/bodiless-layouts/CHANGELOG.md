@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.0...v0.2.1) (2021-05-12)
+
+
+### Features
+
+* **layouts:** Nested flow container enhancementws ([#972](https://github.com/johnsonandjohnson/bodiless-js/issues/972)) ([7dc7e36](https://github.com/johnsonandjohnson/bodiless-js/commit/7dc7e36ec0b97cc884e658136269a7e6f0100eda))
+
+
+
+
+
 ## [0.2.0](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.72...v0.2.0) (2021-04-28)
 
 ### Features
