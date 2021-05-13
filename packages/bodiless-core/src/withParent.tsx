@@ -3,7 +3,6 @@ import React, { ComponentType, PropsWithChildren } from 'react';
 import { Token, DesignableComponentsProps, extendDesignable } from '@bodiless/fclasses';
 
 /**
- * @TODO This should be in bodiless.
  * Utility function to add a Parent component to the given Child component
  * so that the Parent may be altered using the Design API.
  *
