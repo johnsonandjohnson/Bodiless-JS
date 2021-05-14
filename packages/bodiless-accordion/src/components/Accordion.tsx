@@ -53,19 +53,10 @@ const AccordionBase: FC<AccordionProps & AccordionProviderProps & HTMLProps<HTML
     accordionContentId: `accordion__content-${accordionId}`,
   };
 
-  let anchor = '';
-
-  if (typeof window !== 'undefined') {
-    // Gets URL anchor, without the # character
-    anchor = window.location.hash ? window.location.hash.substring(1) : '';
-  }
-
-  const initialExpanded = (anchor === accordionId) ? true : expanded;
-
   return (
     <AccordionProvider
       collapsible={collapsible}
-      expanded={initialExpanded}
+      expanded={expanded}
       focus={focus}
       meta={accordionMeta}
     >
