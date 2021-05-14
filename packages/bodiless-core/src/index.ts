@@ -67,6 +67,7 @@ import {
 } from './NotificationProvider';
 import withNotificationButton from './withNotificationButton';
 import withChild, { withAppendChild, withPrependChild } from './withChild';
+import withParent from './withParent';
 import asBodilessComponent, { withActivatorWrapper, withBodilessData } from './asBodilessComponent';
 import type { Options as BodilessOptions, AsBodiless } from './asBodilessComponent';
 import { useMenuOptionUI } from './components/ContextMenuContext';
@@ -124,6 +125,7 @@ export {
   useActivateOnEffect,
   useActivateOnEffectActivator,
   withChild,
+  withParent,
   withAppendChild,
   withPrependChild,
   ifToggledOff,
