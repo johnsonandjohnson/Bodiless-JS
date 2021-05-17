@@ -27,6 +27,7 @@ import {
   withoutBreadcrumbFinalTrail,
   asAccessibleBreadcrumbs as asBaseAccessibleBreadcrumbs,
   useIsBreadcrumbItemCurrentPage,
+  withAccessibleDefaultMenuTitleEditor,
 } from '@bodiless/navigation';
 import {
   flowIf,
@@ -148,6 +149,7 @@ const $withBreadcrumbStyles = asToken(
 
 const asAccessibleBreadcrumbs = asToken(
   asBaseAccessibleBreadcrumbs,
+  withAccessibleDefaultMenuTitleEditor,
   withDesign({
     NavWrapper: addProps({
       'aria-label': BREADCRUMB_ARIA_LABEL,

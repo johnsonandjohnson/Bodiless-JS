@@ -12,10 +12,12 @@
  * limitations under the License.
  */
 
-/* eslint-disable import/prefer-default-export */
-
 const useIsBreadcrumbItemCurrentPage = ({ isCurrentPage }: any) => isCurrentPage;
+const useIsLastBreadcrumbItemRenderedAsALink = ({
+  renderLastItemWithoutLink = true,
+}: any) => !renderLastItemWithoutLink;
 
 export {
   useIsBreadcrumbItemCurrentPage,
+  useIsLastBreadcrumbItemRenderedAsALink,
 };
