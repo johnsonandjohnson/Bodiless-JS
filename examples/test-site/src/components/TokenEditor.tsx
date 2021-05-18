@@ -16,7 +16,7 @@ import React from 'react';
 import {
   withDesign, addClasses, asToken, stylable, startWith, Pre,
 } from '@bodiless/fclasses';
-import { asAccordionWrapper, asAccodionTitle, asAccordionBody } from '@bodiless/organisms';
+import { asAccordionWrapper, asAccordionTitle, asAccordionBody } from '@bodiless/accordion';
 import { withChild } from '@bodiless/core';
 import {
   asHeader3, asBold, asTextWhite, asTealBackground,
@@ -44,7 +44,7 @@ export const withTokenEditorStyles = asToken(
     ),
     DetailsTitle: asToken(
       withChild(() => <>Details</>),
-      asAccodionTitle,
+      asAccordionTitle,
       withDesign({
         Wrapper: asToken(
           asHeader3,

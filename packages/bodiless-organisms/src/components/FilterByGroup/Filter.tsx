@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 /* eslint-disable arrow-body-style, max-len, @typescript-eslint/no-unused-vars */
 import React, { FC, ComponentType, HTMLProps } from 'react';
 import { flow, isEmpty } from 'lodash';
+import { withAccordionSublist } from '@bodiless/accordion';
 import {
   withNodeKey,
   withNode,
@@ -57,7 +58,6 @@ import {
 } from './types';
 import { useFilterByGroupContext, withTagProps } from './FilterByGroupContext';
 import { asExpandedOnDesktopBody } from './token';
-import { withAccordionSublist } from '../Accordion';
 
 const tagTitleComponentsStart: TagTitleComponents = {
   FilterInputWrapper: Div,

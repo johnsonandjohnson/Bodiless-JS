@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import {
 } from '@bodiless/components';
 import asAccordionWrapper from './AccordionWrapper';
 import { asAccordionBody } from './AccordionBody';
-import { asAccodionTitle } from './AccordionTitle';
+import { asAccordionTitle } from './AccordionTitle';
 
 /**
  * Takes a sublist component and returns a HOC which, when applied to a list item,
@@ -35,7 +35,7 @@ const asAccordionSublist = (Sublist: ComponentType<ListProps>): HOC => Item => {
   const AccordionWrapper = asAccordionWrapper(Item) as any;
   const AccordionBody = asAccordionBody(Sublist);
   const AccordionTitle = flow(
-    asAccodionTitle,
+    asAccordionTitle,
     asComponent,
   )('div');
 

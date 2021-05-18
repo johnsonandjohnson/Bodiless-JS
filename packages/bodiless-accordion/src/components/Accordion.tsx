@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
  */
 
 import React, { FC, HTMLProps } from 'react';
+import nextId from 'react-id-generator';
 import { designable, Div } from '@bodiless/fclasses';
 import AccordionTitleClean from './AccordionTitle';
 import AccordionBodyClean from './AccordionBody';
@@ -26,17 +27,40 @@ const AccordionComponentsStart:AccordionComponents = {
 };
 
 const AccordionBase: FC<AccordionProps & AccordionProviderProps & HTMLProps<HTMLElement>> = ({
-  components, expanded, ...rest
+  ...props
 }) => {
+  const {
+    id,
+    components,
+    collapsible,
+    expanded,
+    focus,
+    meta,
+    ...rest
+  } = props;
   const {
     Wrapper,
     Title = AccordionTitleClean,
     Body = AccordionBodyClean,
   } = components;
+  // Generates accordion ids and prepares meta information to context
+  // In case props already provides id, use it instead of generating new ones
+  const accordionId = id ?? nextId('accordion-');
+
+  const accordionMeta = {
+    accordionId,
+    accordionTitleId: `accordion__title-${accordionId}`,
+    accordionContentId: `accordion__content-${accordionId}`,
+  };
 
   return (
-    <AccordionProvider expanded={expanded}>
-      <Wrapper {...rest}>
+    <AccordionProvider
+      collapsible={collapsible}
+      expanded={expanded}
+      focus={focus}
+      meta={accordionMeta}
+    >
+      <Wrapper {...rest} id={accordionId}>
         <Title />
         <Body />
       </Wrapper>

@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  */
 
 import React, { ComponentType, useState } from 'react';
-import { flow } from 'lodash';
 import { observer } from 'mobx-react-lite';
 import {
   withDesign,
@@ -22,6 +21,7 @@ import {
   H2,
   StylableProps,
   addProps,
+  asToken,
 } from '@bodiless/fclasses';
 import {
   asEditable,
@@ -35,6 +35,7 @@ export type SingleAccordionComponents = {
   BodyWrapper: ComponentType<StylableProps>,
   Body: ComponentType<StylableProps>,
 };
+
 const singleAccordionComponentStart:SingleAccordionComponents = {
   Wrapper: Div,
   TitleWrapper: Div,
@@ -95,29 +96,31 @@ const SingleAccordionBase = observer(({
   );
 });
 
-const asSingleAccordion = withDesign({
-  Title: asEditable('title', 'SingleAccordion Title Text'),
-  Body: asEditable('body', 'SingleAccordion Body Text'),
-});
+const asSingleAccordion = asToken(
+  withDesign({
+    Title: asEditable('title', 'SingleAccordion Title Text'),
+    Body: asEditable('body', 'SingleAccordion Body Text'),
+  }),
+);
 
-const asTestableSingleAccordion = withDesign({
-  Wrapper: addProps({ 'data-accordion-element': 'accordion' }),
-  TitleWrapper: addProps({ 'data-accordion-element': 'accordion-title-wrapper' }),
-  Title: addProps({ 'data-accordion-element': 'accordion-title' }),
-  BodyWrapper: addProps({ 'data-accordion-element': 'accordion-body-wrapper' }),
-  Body: addProps({ 'data-accordion-element': 'accordion-body' }),
-});
+const asTestableSingleAccordion = asToken(
+  withDesign({
+    Wrapper: addProps({ 'data-accordion-element': 'accordion' }),
+    TitleWrapper: addProps({ 'data-accordion-element': 'accordion-title-wrapper' }),
+    Title: addProps({ 'data-accordion-element': 'accordion-title' }),
+    BodyWrapper: addProps({ 'data-accordion-element': 'accordion-body-wrapper' }),
+    Body: addProps({ 'data-accordion-element': 'accordion-body' }),
+  }),
+);
 
-const SingleAccordionClean = flow(
-  designable(singleAccordionComponentStart, 'Accordion'),
-)(SingleAccordionBase);
+const SingleAccordionClean = designable(singleAccordionComponentStart, 'Accordion')(SingleAccordionBase);
 
-const SingleAccordion = flow(
+const SingleAccordion = asToken(
   asSingleAccordion,
   withNode,
 )(SingleAccordionClean);
 
-const TestableSingleAccordion = flow(
+const TestableSingleAccordion = asToken(
   asTestableSingleAccordion,
   withNode,
 )(SingleAccordionClean);

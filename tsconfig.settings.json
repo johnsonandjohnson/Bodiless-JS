@@ -24,6 +24,8 @@
     "paths": {
       "@bodiless/accessibility": ["bodiless-accessibility/src"],
       "@bodiless/accessibility/*": ["bodiless-accessibility/src/*"],
+      "@bodiless/accordion": ["bodiless-accordion/src"],
+      "@bodiless/accordion/*": ["bodiless-accordion/src/*"],
       "@bodiless/bv": ["bodiless-bv/src"],
       "@bodiless/bv/*": ["bodiless-bv/src/*"],
       "@bodiless/card": ["bodiless-card/src"],

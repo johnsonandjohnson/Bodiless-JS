@@ -18,11 +18,11 @@ import { ifViewportIsNot } from '@bodiless/components';
 import {
   asAccordionWrapper,
   asAccordionBody,
-  asAccodionTitle,
-} from '../Accordion';
+  asAccordionTitle,
+} from '@bodiless/accordion';
 
 const asResponsiveAccordionTitle = asToken(
-  asAccodionTitle,
+  asAccordionTitle,
   withDesign({
     Icon: addClasses('lg:hidden'),
   }),

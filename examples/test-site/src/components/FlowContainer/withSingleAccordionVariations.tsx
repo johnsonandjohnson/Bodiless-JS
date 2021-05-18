@@ -22,7 +22,7 @@ import {
   asToken,
 } from '@bodiless/fclasses';
 
-import SingleAccordion from '../SingleAccordion';
+import { SingleAccordion } from '../SingleAccordion';
 import { withType } from './Categories';
 
 const singleAccordionVariation = {

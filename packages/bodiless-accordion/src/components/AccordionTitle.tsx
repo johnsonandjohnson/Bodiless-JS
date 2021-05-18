@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ import {
   Div,
   Span,
   HOC,
-  DesignableProps,
   DesignableComponentsProps,
 } from '@bodiless/fclasses';
 import {
@@ -27,7 +26,11 @@ import {
   asAccordionLabel,
 } from './Accordion.tokens';
 import { useAccordionContext } from './AccordionContext';
-import { AccordionTitleProps, AccordionTitleComponents, AccordionComponents } from './types';
+import AccordionKeyPressHandler from './AccordionKeyboard';
+import {
+  AccordionTitleProps,
+  AccordionTitleComponents,
+} from './types';
 
 const accordionTitleComponents:AccordionTitleComponents = {
   Wrapper: asAccordionTitleWrapper(Div),
@@ -37,12 +40,31 @@ const accordionTitleComponents:AccordionTitleComponents = {
 
 type AccordionTitleBaseProps =
   Omit<AccordionTitleProps, 'design'> & DesignableComponentsProps<AccordionTitleComponents>;
-const AccordionTitleBase: FC<AccordionTitleBaseProps> = ({ components, children }) => {
+const AccordionTitleBase: FC<AccordionTitleBaseProps> = ({
+  components, children,
+}) => {
   const { Wrapper, Label, Icon } = components;
-  const { isExpanded, setExpanded } = useAccordionContext();
+  const context = useAccordionContext();
+  const {
+    isExpanded,
+    setExpanded,
+    hasFocus,
+    setFocus,
+    getMeta,
+  } = context;
 
   return (
-    <Wrapper onClick={() => setExpanded(!isExpanded)}>
+    <Wrapper
+      onClick={() => setExpanded(!isExpanded)}
+      onFocus={() => setFocus(!hasFocus)}
+      onBlur={() => setFocus(!hasFocus)}
+      onKeyPress={(event) => AccordionKeyPressHandler(event, context)}
+      id={getMeta.accordionTitleId}
+      role="button"
+      aria-controls={getMeta.accordionContentId}
+      aria-expanded={isExpanded ? 'true' : 'false'}
+      tabIndex={0}
+    >
       <Label>{ children }</Label>
       <Icon data-accordion-icon={isExpanded ? 'collapse' : 'expand'}>
         {isExpanded ? 'remove' : 'add'}
@@ -51,14 +73,11 @@ const AccordionTitleBase: FC<AccordionTitleBaseProps> = ({ components, children 
   );
 };
 
-const AccordionTitleClean = designable(
-  accordionTitleComponents,
-  'AccordionTitle',
-)(AccordionTitleBase);
+const AccordionTitleClean = designable(accordionTitleComponents, 'AccordionTitle')(AccordionTitleBase);
 
-const asAccodionTitle: HOC = Component => {
-  const AsAccordionTitle: FC<any> = props => {
-    const { design } = props as DesignableProps<AccordionComponents>;
+const asAccordionTitle: HOC = Component => {
+  const AsAccordionTitle = (props: any) => {
+    const { design } = props;
     return (
       <AccordionTitleClean design={design}>
         <Component {...props} />
@@ -70,5 +89,5 @@ const asAccodionTitle: HOC = Component => {
 
 export default AccordionTitleClean;
 export {
-  asAccodionTitle,
+  asAccordionTitle,
 };

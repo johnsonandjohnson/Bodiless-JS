@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.9.0",
+    "@bodiless/accordion": "^0.2.1",
     "@bodiless/backend": "^0.2.1",
     "@bodiless/bv": "^0.2.1",
     "@bodiless/card": "^0.2.1",

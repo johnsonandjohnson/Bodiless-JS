@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,9 +13,19 @@
  */
 
 import {
-  withDesign, addClasses, addClassesIf, asToken,
+  withDesign,
+  addClasses,
+  addClassesIf,
+  removeClasses,
+  asToken,
 } from '@bodiless/fclasses';
-import { isAccordionExpanded, isAccordionContracted } from '@bodiless/organisms';
+import {
+  isAccordionExpanded,
+  isAccordionContracted,
+  asAccordionBorder,
+  asAccordionFocus,
+  asNonExpandingAccordion,
+} from '@bodiless/accordion';
 import {
   asHeader2,
   asBlockItem,
@@ -34,9 +44,39 @@ const asSingleAccordionDefaultStyle = asToken(
       ),
     }),
     Body: withDesign({
-      Wrapper: addClasses('p-3 border border-solid border-gray-200'),
+      Wrapper: asToken(
+        addClasses('p-3 border border-solid border-gray-200'),
+      ),
     }),
   }),
 );
 
-export default asSingleAccordionDefaultStyle;
+const asAccordionTitleBordered = asToken(
+  asSingleAccordionDefaultStyle,
+  asAccordionBorder,
+);
+
+const asAccordionBorderedOnFocus = asToken(
+  asSingleAccordionDefaultStyle,
+  // Resets border classes from accordion default style
+  withDesign({
+    Body: withDesign({
+      Wrapper: asToken(
+        removeClasses('border border-solid border-gray-200'),
+      ),
+    }),
+  }),
+  asAccordionFocus,
+);
+
+const asAccordionNonExpanding = asToken(
+  asSingleAccordionDefaultStyle,
+  asNonExpandingAccordion,
+);
+
+export {
+  asSingleAccordionDefaultStyle,
+  asAccordionTitleBordered,
+  asAccordionBorderedOnFocus,
+  asAccordionNonExpanding,
+};

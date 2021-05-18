@@ -16,17 +16,28 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Page, PageProps } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../../../components/Layout';
-import SingleAccordion from '../../../components/SingleAccordion';
+import {
+  SingleAccordion,
+  SingleAccordionTitleBordered,
+  SingleAccordionBorderedOnFocus,
+  SingleAccordionNonExpanding,
+} from '../../../components/SingleAccordion';
 
 export default (props: PageProps) => (
   <Page {...props}>
     <Layout>
+      <h1 className="text-3xl font-bold">Accordions</h1>
       <div style={{ margin: 100 }}>
-        <SingleAccordion expanded nodeKey="accordion-1" id="accordion-1" />
-        <SingleAccordion nodeKey="accordion-2" id="accordion-2" />
-        <SingleAccordion nodeKey="accordion-3" id="accordion-3" />
-        <SingleAccordion nodeKey="accordion-4" id="accordion-4" />
-        <SingleAccordion nodeKey="accordion-5" id="accordion-5" />
+        <h2 className="text-xl font-bold my-4 p-1">Accordion expanded</h2>
+        <SingleAccordion expanded nodeKey="accordion-expanded" />
+        <h2 className="text-xl font-bold my-4 p-1">Accordion collapsed (#accordion-2)</h2>
+        <SingleAccordion nodeKey="accordion-collapsed" />
+        <h2 className="text-xl font-bold my-4 p-1">Accordion fully bordered on focus (#faq3)</h2>
+        <SingleAccordionBorderedOnFocus id="faq3" nodeKey="accordion-bordered-focus" />
+        <h2 className="text-xl font-bold my-4 p-1">Accordion title bordered (#bordered)</h2>
+        <SingleAccordionTitleBordered id="bordered" nodeKey="accordion-title-bordered" />
+        <h2 className="text-xl font-bold my-4 p-1">Accordion non-collapsible</h2>
+        <SingleAccordionNonExpanding expanded nodeKey="accordion-non-collapsible" />
       </div>
     </Layout>
   </Page>

@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,13 +15,26 @@
 import { ComponentType, HTMLProps } from 'react';
 import { StylableProps, DesignableComponentsProps, DesignableProps } from '@bodiless/fclasses';
 
+export type AccordionMeta = {
+  accordionId: string,
+  accordionTitleId: string,
+  accordionContentId: string,
+};
+
 export type AccordionProviderProps = {
+  collapsible?: boolean,
   expanded?: boolean,
+  focus?: boolean,
+  meta?: AccordionMeta,
 };
 
 export type AccordionContextType = {
+  isCollapsible: boolean,
   isExpanded: boolean,
   setExpanded: React.Dispatch<React.SetStateAction<boolean>>,
+  hasFocus: boolean,
+  setFocus: React.Dispatch<React.SetStateAction<boolean>>,
+  getMeta: AccordionMeta,
 };
 
 export type AccordionTitleComponents = {

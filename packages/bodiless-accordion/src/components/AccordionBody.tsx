@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import React, { FC } from 'react';
 import {
   designable,
@@ -21,6 +20,7 @@ import {
   DesignableComponentsProps,
 } from '@bodiless/fclasses';
 import { asAccordionBodyWrapper, asAccordionBodyContent } from './Accordion.tokens';
+import { useAccordionContext } from './AccordionContext';
 import { AccordionBodyComponents, AccordionBodyProps } from './types';
 
 const AccordionBodyComponentsStart:AccordionBodyComponents = {
@@ -31,11 +31,20 @@ const AccordionBodyComponentsStart:AccordionBodyComponents = {
 type AccordionBodyBaseProps =
   Omit<AccordionBodyProps, 'design'> & DesignableComponentsProps<AccordionBodyComponents>;
 
-const AccordionBodyBase: FC<AccordionBodyBaseProps> = ({ components, children }) => {
+const AccordionBodyBase: FC<AccordionBodyBaseProps> = ({
+  components, children,
+}) => {
   const { Wrapper, Content } = components;
+  const { isExpanded, getMeta } = useAccordionContext();
 
   return (
-    <Wrapper>
+    <Wrapper
+      id={getMeta.accordionContentId}
+      role="region"
+      aria-hidden={!isExpanded ? 'true' : 'false'}
+      aria-labelledby={getMeta.accordionTitleId}
+      tabIndex={!isExpanded ? -1 : 0}
+    >
       <Content>
         { children }
       </Content>
@@ -43,9 +52,7 @@ const AccordionBodyBase: FC<AccordionBodyBaseProps> = ({ components, children })
   );
 };
 
-const AccordionBodyClean = flow(
-  designable(AccordionBodyComponentsStart, 'AccordionBody'),
-)(AccordionBodyBase);
+const AccordionBodyClean = designable(AccordionBodyComponentsStart, 'AccordionBody')(AccordionBodyBase);
 
 const asAccordionBody: HOC = Component => {
   const AsAccordionBody = (props: any) => {

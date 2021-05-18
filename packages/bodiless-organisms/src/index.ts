@@ -13,13 +13,6 @@
  */
 
 export {
-  SingleAccordion,
-  SingleAccordionClean,
-  asSingleAccordion,
-  asTestableSingleAccordion,
-} from './components/SingleAccordion';
-
-export {
   Product,
   ProductClean,
   asEditableProduct,
@@ -33,18 +26,6 @@ export {
   useFilterByGroupContext,
   withTagProps,
 } from './components/FilterByGroup';
-
-export {
-  AccordionClean,
-  useAccordionContext,
-  asAccordionWrapper,
-  asAccodionTitle,
-  asAccordionBody,
-  asTestableAccordion,
-  isAccordionExpanded,
-  isAccordionContracted,
-  withDisableExpandOnClick,
-} from './components/Accordion';
 
 export { default as Embed } from './components/Embed';
 export {

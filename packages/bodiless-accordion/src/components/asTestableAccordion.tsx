@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,18 +11,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { withDesign, addProps } from '@bodiless/fclasses';
+import { withDesign, addProps, asToken } from '@bodiless/fclasses';
 
-const asTestableAccordion = withDesign({
-  Wrapper: addProps({ 'data-accordion-element': 'accordion' }),
-  Title: withDesign({
-    Wrapper: addProps({ 'data-accordion-element': 'accordion-title-wrapper' }),
-    Label: addProps({ 'data-accordion-element': 'accordion-title' }),
+const asTestableAccordion = asToken(
+  withDesign({
+    Wrapper: addProps({ 'data-accordion-element': 'accordion' }),
+    Title: withDesign({
+      Wrapper: addProps({ 'data-accordion-element': 'accordion-title-wrapper' }),
+      Label: addProps({ 'data-accordion-element': 'accordion-title' }),
+    }),
+    Body: withDesign({
+      Wrapper: addProps({ 'data-accordion-element': 'accordion-body-wrapper' }),
+      Content: addProps({ 'data-accordion-element': 'accordion-body' }),
+    }),
   }),
-  Body: withDesign({
-    Wrapper: addProps({ 'data-accordion-element': 'accordion-body-wrapper' }),
-    Content: addProps({ 'data-accordion-element': 'accordion-body' }),
-  }),
-});
+);
 
 export default asTestableAccordion;

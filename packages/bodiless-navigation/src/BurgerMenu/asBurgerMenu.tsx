@@ -14,7 +14,7 @@
 
 import isEmpty from 'lodash/isEmpty';
 import { useNode, withDefaultContent } from '@bodiless/core';
-import { asAccordionWrapper, asAccodionTitle, asAccordionBody } from '@bodiless/organisms';
+import { asAccordionWrapper, asAccordionTitle, asAccordionBody } from '@bodiless/accordion';
 import {
   Fragment, withDesign, replaceWith, asToken, addProps, Token, flowIf, startWith,
 } from '@bodiless/fclasses';
@@ -82,7 +82,7 @@ const withBurgerMenuSchema = asToken(
   withDesign({
     Wrapper: asAccordionBody,
     OuterWrapper: withDesign({
-      Title: asToken(asAccodionTitle, withDisabledTitleLink),
+      Title: asToken(asAccordionTitle, withDisabledTitleLink),
     }),
   }),
 );
