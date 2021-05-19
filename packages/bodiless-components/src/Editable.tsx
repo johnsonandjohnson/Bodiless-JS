@@ -13,11 +13,11 @@
  */
 
 import React, {
-  ClipboardEvent, useState, useRef, useCallback, ComponentType, HTMLProps,
+  ClipboardEvent, useState, useRef, useCallback, FC,
 } from 'react';
 import ContentEditable from 'react-contenteditable';
 import { observer } from 'mobx-react-lite';
-import { identity } from 'lodash';
+import { pickBy, identity } from 'lodash';
 import {
   withNode,
   useNode,
@@ -25,16 +25,9 @@ import {
   WithNodeProps,
   WithNodeKeyProps,
   withNodeKey,
-  withChild,
 } from '@bodiless/core';
 import './Editable.css';
-import {
-  HOC,
-  asToken,
-  withoutProps,
-  addProps,
-  ComponentWithMeta,
-} from '@bodiless/fclasses';
+import { HOC, asToken } from '@bodiless/fclasses';
 
 type EditableOverrides = {
   sanitizer?: (text: string) => string,
@@ -46,27 +39,21 @@ type EditableProps = {
   placeholder?: string,
   children?: string,
   useOverrides?: UseEditableOverrides,
-} & Partial<WithNodeProps> & HTMLProps<HTMLSpanElement>;
+} & Partial<WithNodeProps>;
 
 type EditableData = {
   text: string;
 };
 
 const Text = observer((props: EditableProps) => {
-  const {
-    placeholder,
-    useOverrides = () => ({}),
-    children,
-    nodeKey,
-    ...rest
-  }: EditableProps = props;
+  const { placeholder, useOverrides = () => ({}) }: EditableProps = props;
   const { sanitizer = identity }: EditableOverrides = useOverrides(props);
   const { node } = useNode<EditableData>();
   const text = sanitizer(
-    (node.data.text !== undefined ? node.data.text : children) || placeholder || '',
+    (node.data.text !== undefined ? node.data.text : props.children) || placeholder || '',
   );
   // eslint-disable-next-line react/no-danger
-  return <span dangerouslySetInnerHTML={{ __html: text }} {...rest} />;
+  return <span dangerouslySetInnerHTML={{ __html: text }} />;
 });
 const EditableText = observer((props: EditableProps) => {
   const { node } = useNode<EditableData>();
@@ -138,19 +125,33 @@ const asEditable = (
   placeholder?: string,
   useOverrides$?: UseEditableOverrides,
 ): HOC<{}, EditableProps> => Component => {
+  // @TODO: Use withChild.
   const useOverrides = useOverrides$ || (() => ({}));
   const EditableChild = asToken(
     withPlaceholder(placeholder),
     withNodeKey(nodeKeys),
-    addProps({
-      useOverrides,
-    }),
   )(Editable);
-  const editableProps = ['nodeKey', 'nodeCollection', 'placeholder'];
-  const AsEditable = asToken(
-    withoutProps(editableProps),
-    withChild(EditableChild as ComponentType, 'Editor'),
-  )(Component) as ComponentWithMeta;
+  const AsEditable: FC<any> = props => {
+    const {
+      children,
+      nodeKey,
+      nodeCollection,
+      placeholder: placeholderProp,
+      ...rest
+    } = props;
+    const editableProps = pickBy({
+      children,
+      nodeKey,
+      nodeCollection,
+      placeholder: placeholderProp,
+      // useOverrides,
+    });
+    return (
+      <Component {...rest}>
+        <EditableChild {...editableProps} useOverrides={useOverrides} />
+      </Component>
+    );
+  };
   return AsEditable;
 };
 

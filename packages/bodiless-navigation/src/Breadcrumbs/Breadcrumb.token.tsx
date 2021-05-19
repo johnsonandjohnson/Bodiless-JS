@@ -51,33 +51,6 @@ export const withBreadcrumbItemToken = (...tokenDefs: TokenDef[]) => withDesign(
   Title: asToken({}, ...tokenDefs),
 });
 
-export const withAccessibleDefaultMenuTitleEditor = asToken(
-  ifToggledOn(negate(useIsLastBreadcrumbItemRenderedAsALink))(
-    withDesign({
-      Title: ifToggledOn(useIsBreadcrumbItemCurrentPage)(
-        withDesign({
-          Title: withDesign({
-            Editor: addProps({
-              'aria-current': 'page',
-            }),
-          }),
-        }),
-      ),
-    }),
-  ),
-  ifToggledOn(useIsLastBreadcrumbItemRenderedAsALink)(
-    withDesign({
-      Title: ifToggledOn(useIsBreadcrumbItemCurrentPage)(
-        withDesign({
-          Link: addProps({
-            'aria-current': 'page',
-          }),
-        }),
-      ),
-    }),
-  ),
-);
-
 /**
  * Hoc to make breadcrumbs accessible
  */
@@ -87,4 +60,13 @@ export const asAccessibleBreadcrumbs = asToken(
       'aria-label': 'Breadcrumb',
     }),
   }),
+  ifToggledOn(negate(useIsLastBreadcrumbItemRenderedAsALink))(
+    withDesign({
+      Item: ifToggledOn(useIsBreadcrumbItemCurrentPage)(
+        addProps({
+          'aria-current': 'page',
+        }),
+      ),
+    }),
+  ),
 );

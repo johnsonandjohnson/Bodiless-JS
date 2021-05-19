@@ -12,10 +12,15 @@
  * limitations under the License.
  */
 
-const useIsBreadcrumbItemCurrentPage = ({ isCurrentPage }: any) => isCurrentPage;
+import { CleanBreadcrumbsProps, CleanBreadcrumbItemType } from './types';
+
+const useIsBreadcrumbItemCurrentPage = ({
+  isCurrentPage,
+}: CleanBreadcrumbItemType) => isCurrentPage;
+
 const useIsLastBreadcrumbItemRenderedAsALink = ({
   renderLastItemWithoutLink = true,
-}: any) => !renderLastItemWithoutLink;
+}: Partial<CleanBreadcrumbsProps>) => !renderLastItemWithoutLink;
 
 export {
   useIsBreadcrumbItemCurrentPage,
