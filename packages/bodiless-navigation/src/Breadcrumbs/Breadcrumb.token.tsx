@@ -13,6 +13,7 @@
  */
 
 import { ifToggledOn } from '@bodiless/core';
+import negate from 'lodash/negate';
 import {
   stylable,
   withDesign,
@@ -20,7 +21,10 @@ import {
   addProps,
 } from '@bodiless/fclasses';
 import type { TokenDef } from '@bodiless/fclasses';
-import { useIsBreadcrumbItemCurrentPage } from './hooks';
+import {
+  useIsBreadcrumbItemCurrentPage,
+  useIsLastBreadcrumbItemRenderedAsALink,
+} from './hooks';
 
 /**
  * Makes all Breadcrumb design components stylable.
@@ -50,11 +54,19 @@ export const withBreadcrumbItemToken = (...tokenDefs: TokenDef[]) => withDesign(
 /**
  * Hoc to make breadcrumbs accessible
  */
-export const asAccessibleBreadcrumbs = withDesign({
-  NavWrapper: addProps({
-    'aria-label': 'Breadcrumb',
+export const asAccessibleBreadcrumbs = asToken(
+  withDesign({
+    NavWrapper: addProps({
+      'aria-label': 'Breadcrumb',
+    }),
   }),
-  Title: ifToggledOn(useIsBreadcrumbItemCurrentPage)(addProps({
-    'aria-current': 'page',
-  })),
-});
+  ifToggledOn(negate(useIsLastBreadcrumbItemRenderedAsALink))(
+    withDesign({
+      Item: ifToggledOn(useIsBreadcrumbItemCurrentPage)(
+        addProps({
+          'aria-current': 'page',
+        }),
+      ),
+    }),
+  ),
+);

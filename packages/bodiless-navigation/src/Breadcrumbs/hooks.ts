@@ -12,10 +12,17 @@
  * limitations under the License.
  */
 
-/* eslint-disable import/prefer-default-export */
+import { CleanBreadcrumbsProps, CleanBreadcrumbItemType } from './types';
 
-const useIsBreadcrumbItemCurrentPage = ({ isCurrentPage }: any) => isCurrentPage;
+const useIsBreadcrumbItemCurrentPage = ({
+  isCurrentPage,
+}: CleanBreadcrumbItemType) => isCurrentPage;
+
+const useIsLastBreadcrumbItemRenderedAsALink = ({
+  renderLastItemWithoutLink = true,
+}: Partial<CleanBreadcrumbsProps>) => !renderLastItemWithoutLink;
 
 export {
   useIsBreadcrumbItemCurrentPage,
+  useIsLastBreadcrumbItemRenderedAsALink,
 };

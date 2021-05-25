@@ -20,6 +20,7 @@ import {
   withNodeKey,
   withChild,
   asReadOnly,
+  ifToggledOn,
 } from '@bodiless/core';
 import { withoutLinkWhenLinkDataEmpty } from '@bodiless/components';
 import {
@@ -27,6 +28,7 @@ import {
   withoutBreadcrumbFinalTrail,
   asAccessibleBreadcrumbs as asBaseAccessibleBreadcrumbs,
   useIsBreadcrumbItemCurrentPage,
+  useIsLastBreadcrumbItemRenderedAsALink,
 } from '@bodiless/navigation';
 import {
   flowIf,
@@ -153,6 +155,17 @@ const asAccessibleBreadcrumbs = asToken(
       'aria-label': BREADCRUMB_ARIA_LABEL,
     }),
   }),
+  ifToggledOn(useIsLastBreadcrumbItemRenderedAsALink)(
+    withDesign({
+      Title: ifToggledOn(useIsBreadcrumbItemCurrentPage)(
+        withDesign({
+          Link: addProps({
+            'aria-current': 'page',
+          }),
+        }),
+      ),
+    }),
+  ),
 );
 
 export {
