@@ -23,6 +23,7 @@ import {
   P,
 } from '@bodiless/fclasses';
 import { FileUploadStatus } from '@bodiless/components';
+import { truncateFileName } from '@bodiless/components-ui';
 import type { UploadStatusProps } from '@bodiless/components';
 import flow from 'lodash/flow';
 
@@ -65,12 +66,14 @@ const CustomAllowedTypesLink = flow(
 )(A);
 
 const CUSTOM_FILE_REJECTED_MESSAGE = 'File type is not accepted, the acceptable file types are Word (doc/docx) and PDFs';
+const UPLOAD_STATUS_MAX_FILENAME_LENGTH = 30;
 
 const CustomUploadStatus = ({ status, selectedFile }: UploadStatusProps) => {
   let statusText;
+  const selectedFile$ = selectedFile ? truncateFileName(selectedFile, UPLOAD_STATUS_MAX_FILENAME_LENGTH) : '';
   switch (status) {
     case FileUploadStatus.FileAccepted:
-      statusText = `File "${selectedFile}" selected`;
+      statusText = `File "${selectedFile$}" selected`;
       break;
     case FileUploadStatus.FileRejected:
       statusText = CUSTOM_FILE_REJECTED_MESSAGE;

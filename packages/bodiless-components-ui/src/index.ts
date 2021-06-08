@@ -13,10 +13,12 @@
  */
 
 import Image, { asBodilessImage } from './Image';
+import { truncateFileName } from './FileUpload';
 
 export {
   asBodilessImage,
   Image,
+  truncateFileName,
 };
 
 export * from './Link';

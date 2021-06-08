@@ -79,11 +79,28 @@ const Uploading = () => <Spinner color="bl-bg-gray-800 bl-my-4" />;
 const UploadFinished = () => (
   <div className="bl-text-center bl-text-lg bl-text-black">{`${FileUploadStrings.UploadFinished}`}</div>
 );
+
+const truncateFileName = (file: string, length: number) => {
+  if (file.length <= length) return file;
+  const ellipsis = '...';
+  const ext = file.split('.').pop();
+  const filename = file.split('.').slice(0, -1).join('.');
+  const reducedFileNameLength = length - ellipsis.length - (ext ? ext.length + 1 : 0);
+  const midPoint = Math.ceil(reducedFileNameLength / 2);
+  const reducedFileName = filename.substr(0, midPoint)
+    + ellipsis
+    + filename.substr(filename.length - midPoint);
+  return reducedFileName + (ext ? `.${ext}` : '');
+};
+
+const UPLOAD_STATUS_MAX_FILENAME_LENGTH = 30;
+
 const UploadStatus = ({ status, selectedFile }: UploadStatusProps) => {
   let statusText;
+  const selectedFile$ = selectedFile ? truncateFileName(selectedFile, UPLOAD_STATUS_MAX_FILENAME_LENGTH) : '';
   switch (status) {
     case FileUploadStatus.FileAccepted:
-      statusText = `File "${selectedFile}" selected`;
+      statusText = `File "${selectedFile$}" selected`;
       break;
     case FileUploadStatus.FileRejected:
       statusText = FileUploadStrings.FileRejected;
@@ -92,7 +109,7 @@ const UploadStatus = ({ status, selectedFile }: UploadStatusProps) => {
       statusText = '';
   }
   return (
-    <div>{statusText}</div>
+    <div className="bl-overflow-clip bl-overflow-hidden">{statusText}</div>
   );
 };
 
@@ -120,4 +137,5 @@ const withUI = <P extends UI>(ui: UI) => (
 export {
   fileUploadUI,
   withUI,
+  truncateFileName,
 };
