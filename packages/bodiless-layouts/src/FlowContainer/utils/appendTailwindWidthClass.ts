@@ -14,20 +14,49 @@
 
 import { flowRight } from 'lodash';
 import { addProps } from '@bodiless/fclasses';
-
+/**
+ * A combination of a width and media string that link to a class or set of classes
+*/
 export type Tuple = {
+  /**
+   * A width (0-100) translates to a percent.
+   */
   width: number,
+  /**
+   * A list of class space seperated
+   */
   className: string,
+  /**
+   * A media query
+   */
   media: string,
 };
 type SnapDataProps = {
+  /**
+   * A width (0-100) translates to a percent.
+   */
   width?: number,
+  /**
+   * a space seperated list of the current classes.
+   */
   className: string,
+  /**
+   * A function to use to validate the current media query (e.g. Window.matchMedia())
+   */
   matchMedia?: Function,
 };
 type SnapDataReturn = {
+  /**
+   * A width (0-100) translates to a percent.
+   */
   width: number,
+  /**
+   *  a space seperated list of updated classes.
+   */
   className: string,
+  /**
+   * TODO: removed this.
+   */
   currentMediaTuples: Tuple[],
 };
 type WithTuples = (tuples: Tuple[]) => Tuple[];
