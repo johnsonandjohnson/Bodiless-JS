@@ -19,15 +19,16 @@ import {
   withSingleAllowedTag,
   // withMultipleAllowedTags,
 } from '@bodiless/filtering';
-import Layout from '../components/Layout';
-import { SectionContent, SectionMargin } from '../components/Product';
-import Page from '../components/Page';
+import Helmet from 'react-helmet';
+import Layout from '../../../../../components/Layout';
+import { SectionContent, SectionMargin } from '../../../../../components/Product';
+import Page from '../../../../../components/Page';
 import {
   ProductListingTitle,
   ProductListingImage,
   ProductListingFlowContainer,
-} from '../components/ProductListing';
-import BaseFilterByGroup from '../components/FilterByGroup';
+} from '../../../../../components/ProductListing';
+import BaseFilterByGroup from '../../../../../components/FilterByGroup';
 
 const FilterByGroup = flow(
   withSingleAllowedTag,
@@ -36,6 +37,7 @@ const FilterByGroup = flow(
 
 export default props => (
   <Page {...props}>
+    <Helmet htmlAttributes={{ dir: 'rtl' }} />
     <Layout>
       <SectionContent>
         <SectionMargin>
@@ -55,9 +57,9 @@ export default props => (
 );
 
 export const query = graphql`
-  query($slug: String!) {
-    ...PageQuery
-    ...SiteQuery
-    ...DefaultContentQuery
-  }
-`;
+     query($slug: String!) {
+       ...PageQuery
+       ...SiteQuery
+       ...DefaultContentQuery
+     }
+   `;
