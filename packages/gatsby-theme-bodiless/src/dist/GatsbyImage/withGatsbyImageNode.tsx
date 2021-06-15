@@ -30,10 +30,17 @@ const withGatsbyImageNode = (
     const { node } = useNode(nodeCollection);
     const childNode = node.child(nodeKey);
     const gatsbyImgNode = childNode.proxy({
+      // Setter which saves the preset, making it available to the Gatsby node API.
       setData: (data: any) => ({
         ...data,
         preset,
         gatsbyImg: undefined,
+      }),
+      // Getter which attaches the preset as defined in code, so that
+      // the logger can flag any discrepancies.
+      getData: (data: any) => ({
+        ...data,
+        canonicalPreset: preset,
       }),
     });
     return (

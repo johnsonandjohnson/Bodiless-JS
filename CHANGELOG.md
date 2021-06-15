@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.3](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.2...v0.2.3) (2021-06-14)
+
+
+### Bug Fixes
+
+* **components:** Allow link target to be passed as prop. ([#1007](https://github.com/johnsonandjohnson/bodiless-js/issues/1007)) ([7bed795](https://github.com/johnsonandjohnson/bodiless-js/commit/7bed795ad1b7b52444472354c253d743ff11d77d))
+
+
+### Features
+
+* **gatsby-theme-bodiless:** Inject canonical preset to gatsby image node. ([#998](https://github.com/johnsonandjohnson/bodiless-js/issues/998)) ([713356e](https://github.com/johnsonandjohnson/bodiless-js/commit/713356e8de8f8df7dc4b4cbdf5e7f3b910083005))
+
+
+
+
+
 ## [0.2.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.1...v0.2.2) (2021-06-08)
 
 
