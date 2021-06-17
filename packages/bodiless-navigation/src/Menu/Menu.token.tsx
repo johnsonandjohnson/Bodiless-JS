@@ -13,6 +13,7 @@
  */
 
 import { useEditContext } from '@bodiless/core';
+import type { Token } from '@bodiless/fclasses';
 import {
   addClasses,
   removeClassesIf,
@@ -128,19 +129,16 @@ const asFullWidthSubMenu = asToken(
  * @return Token that applies default top navigation styles based on provided keys.
  */
 const asTopNav = (...keys: string[]) => {
-  const mainMenuStyles = (keys.length === 0 || keys.indexOf('Main') > -1)
-    ? withBaseMenuStyles
-    : asToken({});
-  const listSubmenuStyles = keys.indexOf('List') > -1 ? asListSubMenu : asToken({});
-  const cardsSubmenuStyles = keys.indexOf('Cards') > -1 ? asFullWidthSubMenu : asToken({});
-  const columnsSubmenuStyles = keys.indexOf('Columns') > -1 ? asFullWidthSubMenu : asToken({});
+  const TopNavDesign: { [key: string]: Token } = {
+    Main: withMenuDesign('Main')(withBaseMenuStyles),
+    List: withMenuDesign('List')(asListSubMenu),
+    Cards: withMenuDesign('Cards')(asFullWidthSubMenu),
+    Columns: withMenuDesign('Columns', 1)(asFullWidthSubMenu),
+  };
 
-  return asToken(
-    withMenuDesign('Main')(mainMenuStyles),
-    withMenuDesign('List')(listSubmenuStyles),
-    withMenuDesign('Cards')(cardsSubmenuStyles),
-    withMenuDesign('Columns', 1)(columnsSubmenuStyles),
-  );
+  return keys.length === 0
+    ? asToken(TopNavDesign.Main)
+    : asToken(...keys.map(key => TopNavDesign[key]));
 };
 
 export default asTopNav;

@@ -116,4 +116,9 @@ const $asNavStyles = asToken(
 export default $asNavStyles;
 export {
   $withTitleEditors,
+  $withBaseMenuStyles,
+  $withBaseSubMenuStyles,
+  $withTitleStyles,
+  $withListSubmenuStyles,
+  $withColumnsSublistStyles,
 };
