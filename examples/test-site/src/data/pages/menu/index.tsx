@@ -20,11 +20,18 @@ import {
 } from '@bodiless/fclasses';
 import { observer } from 'mobx-react-lite';
 import { useNode, withNode, withNodeKey } from '@bodiless/core';
-import { withBurgerMenuProvider, withOverviewLink, withMenuDesign } from '@bodiless/navigation';
+import {
+  withBurgerMenuProvider, withOverviewLink, withMenuDesign,
+  asBodilessMenu, asTopNav, withListSubMenu, withColumnSubMenu,
+} from '@bodiless/navigation';
 
 import Layout from '../../../components/Layout';
 import { asHeader2, asHeader1, asTealBackground } from '../../../components/Elements.token';
 import ResponsiveMenu, { BurgerMenuToggler } from '../../../components/Menu';
+import {
+  $withTitleEditors, $withBaseMenuStyles, $withBaseSubMenuStyles, $withListSubmenuStyles,
+  $withTitleStyles, $withColumnsSublistStyles,
+} from '../../../components/Menu/Menu.token';
 
 // Example of custom OverviewLink
 const $withMenuOverviewLink = withMenuDesign(['List', 'Columns', 'Cards'])(
@@ -40,6 +47,27 @@ const DemoMenu = asToken(
     _default: withDesign({ Menu: $withMenuOverviewLink }),
   }),
 )(ResponsiveMenu);
+
+const DemoListMenu = asToken(
+  asBodilessMenu('demo-list-menu'),
+  withListSubMenu(),
+  asTopNav('Main', 'List'),
+  withMenuDesign('Main')($withBaseMenuStyles),
+  withMenuDesign(['Main', 'List'])($withTitleEditors, $withTitleStyles),
+  withMenuDesign('List')($withBaseSubMenuStyles, $withListSubmenuStyles),
+)(Ul) as ComponentType<any>;
+
+const DemoListAndColumnsMenu = asToken(
+  asBodilessMenu('demo-list-and-columns-menu'),
+  withListSubMenu(),
+  withColumnSubMenu(),
+  asTopNav('Main', 'List', 'Columns'),
+  withMenuDesign('Main')($withBaseMenuStyles),
+  withMenuDesign(['Main', 'List', 'Columns'])($withTitleEditors, $withTitleStyles),
+  withMenuDesign(['List', 'Columns'])($withBaseSubMenuStyles),
+  withMenuDesign('List')($withListSubmenuStyles),
+  withMenuDesign('Columns', 2)($withColumnsSublistStyles),
+)(Ul) as ComponentType<any>;
 
 const BurgerMenuTogglerFullWidth = withDesign({
   Wrapper: asToken(
@@ -116,6 +144,26 @@ export default (props: any) => (
           title and the link becomes the CTA link).
         </p>
       </Description>
+
+      <H2>Bodiless List Menu</H2>
+      <Description>
+        <p>
+          This is an example of the menu where only one type of the submenu ( List ) is allowed.
+          Note that this is not a &quot;Responsive&quot; menu and
+          will not be transformed to the Burger Menu.
+        </p>
+      </Description>
+      <DemoListMenu />
+
+      <H2>Bodiless List and Columns Menu</H2>
+      <Description>
+        <p>
+          This is an example of the menu where List and Columns submenus are configured.
+          Note that this is not a &quot;Responsive&quot; menu and
+          will not be transformed to the Burger Menu.
+        </p>
+      </Description>
+      <DemoListAndColumnsMenu />
 
       <DataPreviewContainer>
         <H2>Data</H2>

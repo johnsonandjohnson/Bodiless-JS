@@ -22,11 +22,13 @@ type Props = {
   preset: GatsbyImagePresets
 };
 
-const withGatsbyImageLogger = (preset: GatsbyImagePresets): Token => Component => {
+const withGatsbyImageLogger = (preset?: GatsbyImagePresets): Token => Component => {
   const WithGatsbyImageLogger: FC<any> = props => {
-    const { node } = useNode();
+    const { node } = useNode<any>();
     const { preset: presetFromProps } = props as Props;
-    if (preset !== presetFromProps && presetFromProps !== undefined) {
+    const { canonicalPreset } = node.data;
+    const expectedPreset = preset || canonicalPreset || undefined;
+    if (expectedPreset !== presetFromProps && presetFromProps !== undefined) {
       log(`
         Data mismatch found for node with path ${node.path.join('$')}.
         Image preset passed as a prop ${presetFromProps}.

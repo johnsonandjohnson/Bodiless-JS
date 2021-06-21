@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.3](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.2...v0.2.3) (2021-06-14)
+
+
+### Bug Fixes
+
+* **components:** Allow link target to be passed as prop. ([#1007](https://github.com/johnsonandjohnson/bodiless-js/issues/1007)) ([7bed795](https://github.com/johnsonandjohnson/bodiless-js/commit/7bed795ad1b7b52444472354c253d743ff11d77d))
+
+
+### Features
+
+* **gatsby-theme-bodiless:** Inject canonical preset to gatsby image node. ([#998](https://github.com/johnsonandjohnson/bodiless-js/issues/998)) ([713356e](https://github.com/johnsonandjohnson/bodiless-js/commit/713356e8de8f8df7dc4b4cbdf5e7f3b910083005))
+
+
+
+
+
+## [0.2.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.1...v0.2.2) (2021-06-08)
+
+
+### Bug Fixes
+
+* enhanced tailwind.config.js resolution ([#935](https://github.com/johnsonandjohnson/bodiless-js/issues/935)) ([732dc60](https://github.com/johnsonandjohnson/bodiless-js/commit/732dc6026e34b4cccb2caa41381df133cf78a358))
+* **backend:** backend failed due to incomplete git operation ([#983](https://github.com/johnsonandjohnson/bodiless-js/issues/983)) ([d75ac97](https://github.com/johnsonandjohnson/bodiless-js/commit/d75ac97d0a1db845669d0618da0f928788b1a3db)), closes [#982](https://github.com/johnsonandjohnson/bodiless-js/issues/982)
+* **components:** remove withResizeDetector that breaks cards equal height ([2258f1b](https://github.com/johnsonandjohnson/bodiless-js/commit/2258f1b524ccc5d22c12a938459681187877dd57))
+* **components:** selected file styles in the file upload form ([#1003](https://github.com/johnsonandjohnson/bodiless-js/issues/1003)) ([2208809](https://github.com/johnsonandjohnson/bodiless-js/commit/220880907014d7af850935f59f40acb4278888b6))
+* **navigation:** breadcrumb current-page attribute ([#997](https://github.com/johnsonandjohnson/bodiless-js/issues/997)) ([c92773f](https://github.com/johnsonandjohnson/bodiless-js/commit/c92773f2159b02e53716d81ab154e07f331d3688))
+
+
+### Features
+
+* **components:** Link to Downloadable Files ([#985](https://github.com/johnsonandjohnson/bodiless-js/issues/985)) ([f8782b4](https://github.com/johnsonandjohnson/bodiless-js/commit/f8782b4b77964ce93b733052c9e3c31f88cac901))
+* **core:** Implement withParent ([#995](https://github.com/johnsonandjohnson/bodiless-js/issues/995)) ([dfce96e](https://github.com/johnsonandjohnson/bodiless-js/commit/dfce96ec0e8fa71c64a45523ede7f7b50d7444e9))
+
+
+
+
+
 ## [0.2.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.0...v0.2.1) (2021-05-12)
 
 

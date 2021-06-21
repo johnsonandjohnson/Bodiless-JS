@@ -152,6 +152,7 @@ const withLinkTarget = (
 ) => (Component : ComponentType<Props>) => {
   const WithLinkTarget = (props: Props) => {
     const { target } = useOverrides();
+    if (!target) return <Component {...props} />;
     return (
       <Component
         target={target}

@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.3](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.2...v0.2.3) (2021-06-14)
+
+**Note:** Version bump only for package @bodiless/test-site
+
+
+
+
+
+## [0.2.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.1...v0.2.2) (2021-06-08)
+
+
+### Bug Fixes
+
+* **components:** selected file styles in the file upload form ([#1003](https://github.com/johnsonandjohnson/bodiless-js/issues/1003)) ([2208809](https://github.com/johnsonandjohnson/bodiless-js/commit/220880907014d7af850935f59f40acb4278888b6))
+* **navigation:** breadcrumb current-page attribute ([#997](https://github.com/johnsonandjohnson/bodiless-js/issues/997)) ([c92773f](https://github.com/johnsonandjohnson/bodiless-js/commit/c92773f2159b02e53716d81ab154e07f331d3688))
+
+
+### Features
+
+* **components:** Link to Downloadable Files ([#985](https://github.com/johnsonandjohnson/bodiless-js/issues/985)) ([f8782b4](https://github.com/johnsonandjohnson/bodiless-js/commit/f8782b4b77964ce93b733052c9e3c31f88cac901))
+
+
+
+
+
 ## [0.2.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.0...v0.2.1) (2021-05-12)
 
 

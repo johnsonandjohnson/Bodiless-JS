@@ -34,7 +34,7 @@ const FilterByGroup = flow(
   // withMultipleAllowedTags,
 )(BaseFilterByGroup);
 
-export default props => (
+export default (props: any) => (
   <Page {...props}>
     <Layout>
       <SectionContent>

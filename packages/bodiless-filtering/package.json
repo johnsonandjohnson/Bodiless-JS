@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/filtering",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "Provides a control to filter content by group/tag.",
   "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
   "homepage": "",
