@@ -49,13 +49,14 @@ import {
   withTagButton,
 } from '@bodiless/components';
 import { asAccordionBody, asAccordionTitle, asAccordionWrapper } from '@bodiless/accordion';
+import { TAG_ANY_KEY } from './FilterByGroupStore';
 import {
   TagTitleProps,
   TagTitleComponents,
 } from './types';
 import { useFilterByGroupContext, withTagProps } from './FilterByGroupContext';
 import { useTagsAccessors } from './FilterModel';
-import { withCategoryListContextProvider } from './CategoryListContext';
+import { withCategoryListContextProvider, useCategoryListContext } from './CategoryListContext';
 
 const tagTitleComponentsStart: TagTitleComponents = {
   FilterInputWrapper: Div,
@@ -88,6 +89,7 @@ const TagTitleBase: FC<TagTitleProps> = ({
   } = components;
 
   const { tag } = useTagsAccessors();
+  const { categoryId } = useCategoryListContext();
 
   const {
     selectTag,
@@ -99,21 +101,22 @@ const TagTitleBase: FC<TagTitleProps> = ({
   if (tag === undefined) return <></>;
 
   const onSelect = () => (isTagSelected(tag) ? unSelectTag(tag) : selectTag(tag));
+  const htmlId = tag.id === TAG_ANY_KEY ? categoryId : tag.id;
 
   return (
     <FilterInputWrapper {...rest} key={tag.id}>
       <FilterGroupItemInput
         type={multipleAllowedTags ? 'checkbox' : 'radio'}
-        name="filter-item"
+        name={categoryId}
         value={tag.id}
-        id={tag.id}
+        id={htmlId}
         onChange={() => onSelect()}
         checked={isTagSelected(tag)}
       />
       {
         isEmpty(tag.name)
-          ? (<FilterGroupItemPlaceholder htmlFor={tag.id}>{ emptyTitleText }</FilterGroupItemPlaceholder>)
-          : (<FilterGroupItemLabel htmlFor={tag.id}>{ tag.name }</FilterGroupItemLabel>)
+          ? (<FilterGroupItemPlaceholder htmlFor={htmlId}>{ emptyTitleText }</FilterGroupItemPlaceholder>)
+          : (<FilterGroupItemLabel htmlFor={htmlId}>{ tag.name }</FilterGroupItemLabel>)
       }
     </FilterInputWrapper>
   );
@@ -155,6 +158,20 @@ const TagTitle = flow(
   designable(tagTitleComponentsStart, 'TagTitle'),
 )(TagTitleBase);
 
+const asResponsiveFilter = ifViewportIsNot(['lg', 'xl', '2xl'])(
+  withDesign({
+    Item: asToken(
+      asAccordionWrapper,
+      withDesign({
+        SubList: withDesign({
+          Wrapper: asAccordionBody,
+        }),
+      }),
+    ),
+    Title: asAccordionTitle,
+  }),
+);
+
 const asFilter = asToken(
   asBodilessList(undefined, undefined, () => ({ groupLabel: 'Category' })),
   withDesign({
@@ -180,19 +197,6 @@ const asFilter = asToken(
         ),
       }),
     ),
-  ),
-  ifViewportIsNot(['lg', 'xl', 'xxl'])(
-    withDesign({
-      Item: asToken(
-        asAccordionWrapper,
-        withDesign({
-          SubList: withDesign({
-            Wrapper: asAccordionBody,
-          }),
-        }),
-      ),
-      Title: asAccordionTitle,
-    }),
   ),
 );
 
@@ -249,3 +253,6 @@ const FilterClean = asToken(
 )('ul');
 
 export default FilterClean;
+export {
+  asResponsiveFilter,
+};

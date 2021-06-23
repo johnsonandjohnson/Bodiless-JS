@@ -28,7 +28,6 @@ import withDataLayerItem, { withDefaultDataLayer, withDataLayerScript } from './
 import { withToggle, withToggleTo, withToggleButton } from './Toggle';
 import withEditPlaceholder from './Placeholder';
 import { TagButtonProps, withTagButton, useTagsAccessors } from './TagButton';
-import withFilterByTags from './withFilterByTags';
 import asBodilessIframe, {
   asBaseBodilessIframe,
   withoutPointerEvents,
@@ -88,7 +87,6 @@ export {
   withTagButton,
   TagButtonProps,
   asTaggableItem,
-  withFilterByTags,
   useTagsAccessors,
   asBaseBodilessIframe,
   asBodilessIframe,

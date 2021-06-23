@@ -44,7 +44,7 @@ const asExpandedOnDesktopBody = asToken(
 );
 
 const asResponsiveFilterByGroup = flow(
-  ifViewportIsNot(['lg', 'xl', 'xxl'])(
+  ifViewportIsNot(['lg', 'xl', '2xl'])(
     withDesign({
       FilterWrapper: asAccordionWrapper,
       FilterTitle: asResponsiveAccordionTitle,

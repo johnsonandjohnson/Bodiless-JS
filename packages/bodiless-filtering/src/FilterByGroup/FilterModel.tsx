@@ -21,7 +21,7 @@ import { Tag, TAG_ANY_KEY } from './FilterByGroupStore';
 
 /* eslint-disable import/prefer-default-export */
 
-const TAG_ANY_LABEL = 'Any';
+const TAG_ANY_LABEL = '- Any -';
 
 const useTagsAccessors = () => {
   const { categoryId } = useCategoryListContext();

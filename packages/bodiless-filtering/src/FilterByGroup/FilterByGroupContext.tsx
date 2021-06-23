@@ -31,6 +31,7 @@ import {
   TagType,
 } from './types';
 import { useFilterByGroupStore } from './FilterByGroupStore';
+import { useTagsAccessors } from './FilterModel';
 
 const FilterByGroupContext = createContext<FBGContextType>({
   getSuggestions: () => [],
@@ -44,6 +45,10 @@ const FilterByGroupContext = createContext<FBGContextType>({
 });
 
 const useFilterByGroupContext = () => useContext(FilterByGroupContext);
+const useIsFilterTagSelected = () => {
+  const { tag } = useTagsAccessors();
+  return useFilterByGroupContext().isTagSelected(tag);
+};
 
 const FilterByGroupProvider: FC<FBGContextOptions> = ({
   children,
@@ -151,4 +156,5 @@ export {
   withFilterByGroupContext,
   withFBGSuggestions,
   withTagProps,
+  useIsFilterTagSelected,
 };

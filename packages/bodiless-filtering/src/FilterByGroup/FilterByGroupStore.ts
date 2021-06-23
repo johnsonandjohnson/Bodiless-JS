@@ -59,7 +59,8 @@ const updateUrlQueryParams = (tags: Tag[]) => {
   tags.forEach(tag => {
     queryParams.append(tag.categoryId || '', tag.id);
   });
-  const newurl = `${protocol}//${host}${pathname}?${queryParams}`;
+  const query = tags.length > 0 ? `?${queryParams}` : '';
+  const newurl = `${protocol}//${host}${pathname}${query}`;
   window.history.pushState({ path: newurl }, '', newurl);
 };
 

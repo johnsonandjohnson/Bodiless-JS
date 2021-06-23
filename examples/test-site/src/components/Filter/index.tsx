@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 
-import { asTaggableItem, withFilterByTags } from '@bodiless/components';
+import { asTaggableItem } from '@bodiless/components';
+import { withFilterByTags } from '@bodiless/filtering';
 import {
   Span, addClasses, Button, asToken,
 } from '@bodiless/fclasses';
