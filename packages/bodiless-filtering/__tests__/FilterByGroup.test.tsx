@@ -63,7 +63,7 @@ describe('Filter By Group', () => {
       <FilterByGroup />,
     );
 
-    expect(wrapper.find(Filter).length).toBeGreaterThan(1);
+    expect(wrapper.find(Filter).length).toBe(1);
     expect(wrapper.find('div[data-filter-by-group="content-wrapper"]').length).toBe(1);
     expect(wrapper.find('button[aria-label="Reset Button"]').length).toBe(1);
   });

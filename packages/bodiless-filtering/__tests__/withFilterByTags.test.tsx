@@ -17,10 +17,10 @@ import { flow } from 'lodash';
 import {
   withNode, DefaultContentNode, NodeProvider, TagType,
 } from '@bodiless/core';
-
+import type { TagsNodeType } from '@bodiless/components';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
-import withFilterByTags from '../src/withFilterByTags';
-import { TagsNodeType } from '../src/TagButton/types';
+import withFilterByTags from '../src/FilterByGroup/withFilterByTags';
 
 type TestData = { [key: string]: TagsNodeType };
 
