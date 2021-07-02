@@ -19,7 +19,7 @@ import { asEditable, withBodilessLinkToggle } from '@bodiless/components';
 import { asBodilessLink } from '@bodiless/components-ui';
 import { CardClean } from '@bodiless/card';
 import {
-  A, Div, Token, asToken, Fragment, designable, TokenDef,
+  A, Span, Token, asToken, Fragment, designable, TokenDef,
   withDesign, startWith, DesignableComponentsProps,
 } from '@bodiless/fclasses';
 
@@ -68,7 +68,7 @@ const asMenuLink = (asEditableLink: typeof asBodilessLink) => asToken(
  * Transforms Link into Editable Bodiless Link Toggle and Title to Editable.
  */
 const withDefaultMenuTitleEditors = withDesign({
-  Link: asMenuLink(withBodilessLinkToggle(asBodilessLink, startWith(Div), true)),
+  Link: asMenuLink(withBodilessLinkToggle(asBodilessLink, startWith(Span), true)),
   Title: asToken(
     startWith(Fragment),
     asEditable('text', 'Menu Item'),

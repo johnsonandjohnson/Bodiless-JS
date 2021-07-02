@@ -45,7 +45,10 @@ module.exports = {
     },
   },
   variants: {
-    overflow: ['responsive', 'hover', 'focus'],
-    position: ['responsive', 'hover', 'focus'],
+    extend: {
+      overflow: ['responsive', 'hover', 'focus', 'group-hover'],
+      position: ['responsive', 'hover', 'focus', 'group-hover'],
+      display: ['responsive', 'hover', 'focus', 'group-hover'],
+    },
   },
 };

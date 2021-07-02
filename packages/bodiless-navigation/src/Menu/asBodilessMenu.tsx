@@ -18,7 +18,7 @@ import { withDesign, asToken } from '@bodiless/fclasses';
 
 import type { UseListOverrides, ListData } from '@bodiless/components';
 
-import withMenuContext from './withMenuContext';
+import { withMenuEditContext } from './withMenuContext';
 import { asMenuTitle, DEFAULT_NODE_KEYS } from './MenuTitles';
 import { asBreadcrumbSource, asBreadcrumb } from '../Breadcrumbs';
 
@@ -50,7 +50,7 @@ const asBodilessMenu = <P extends object>(
     ),
     withChameleonSublist,
     asStylableList,
-    withMenuContext,
+    withMenuEditContext,
     withDesign({ Title: asMenuTitle }),
     withDesign({
       Item: asBreadcrumb(DEFAULT_NODE_KEYS),

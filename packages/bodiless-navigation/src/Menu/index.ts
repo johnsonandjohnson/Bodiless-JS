@@ -32,3 +32,5 @@ export {
   withMenuTitleEditors,
   withDefaultMenuTitleEditors,
 };
+
+export * from './asAccessibleMenu';

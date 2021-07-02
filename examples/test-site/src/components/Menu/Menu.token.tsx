@@ -86,6 +86,7 @@ const $withBaseSubMenuStyles = withDesign({
     addClasses('z-10'),
   ),
   Title: withActiveSubTitleStyles,
+  SubmenuIndicator: addClasses('text-sm text-white'),
 });
 
 const $withListSubmenuStyles = withDesign({

@@ -12,14 +12,59 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React, {
+  FC,
+  createContext,
+  useContext,
+  useState,
+  ComponentType,
+} from 'react';
 import { PageContextProvider, useEditContext, useUUID } from '@bodiless/core';
+
+type MenuContextType = {
+  activeSubmenu?: string,
+  setActiveSubmenu: (id?: string) => void,
+};
+
+const MenuContext = createContext<MenuContextType>({
+  activeSubmenu: undefined,
+  setActiveSubmenu: () => null,
+});
+
+/**
+ * Hook which can be used to get a current active submenu ID
+ * and a setter to set active submenu.
+ */
+const useMenuContext = () => useContext(MenuContext);
+
+const MenuContextProvider: FC = ({ children }) => {
+  const [activeSubmenu, setActiveSubmenu] = useState<string>();
+
+  return (
+    <MenuContext.Provider value={{ activeSubmenu, setActiveSubmenu }}>
+      { children }
+    </MenuContext.Provider>
+  );
+};
+
+/**
+ * HOC that wrapps component in MenuContextProvider.
+ * It stores `activeSubmenu` along with `setActiveSubmenu` setter.
+ * Note that `activeSubmenu` is a string and corresponds to the top menu item node id.
+ */
+const withMenuContext = <P extends Object>(
+  Component: ComponentType<P> | string,
+) => (props: P) => (
+  <MenuContextProvider>
+    <Component {...props} />
+  </MenuContextProvider>
+  );
 
 /**
  * HOC that wrapps component in PageContextProvider with type="menu" and unique id.
  * Used by useIsMenuOpen() to determine if menu context is active.
  */
-const withMenuContext = <P extends Object>(
+const withMenuEditContext = <P extends Object>(
   Component: ComponentType<P> | string,
 ) => (props: P) => (
   <PageContextProvider type="menu" name={`menu-${useUUID()}`} id={`menu-${useUUID()}`}>
@@ -28,7 +73,7 @@ const withMenuContext = <P extends Object>(
   );
 
 /**
- * Hook which can be used to determine if any of submenus are open and have it's context activated.
+ * Hook which can be used to determine if menu context is activated.
  *
  * @return true if context for any of Items is active, false otherwise.
  */
@@ -43,5 +88,7 @@ const useIsMenuOpen = () => {
 
 export default withMenuContext;
 export {
+  withMenuEditContext,
   useIsMenuOpen,
+  useMenuContext,
 };
