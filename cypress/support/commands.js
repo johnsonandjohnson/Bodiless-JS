@@ -56,6 +56,12 @@ Cypress.Commands.add("clickEdit", () => {
     .click()
 })
 
+
+Cypress.Commands.add("hideContextMenu", () => {
+  cy.xpath('//h1')
+    .click();
+})
+
 Cypress.Commands.add("toggleEditMode", () => {
   cy.window().then(win => {
     const isEdit = win.sessionStorage.getItem('isEdit')
