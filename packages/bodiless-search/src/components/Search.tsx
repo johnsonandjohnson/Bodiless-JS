@@ -50,21 +50,21 @@ export type SearchComponents = {
   }>,
 };
 
-type SearchResultComponents = {
+export type SearchResultComponents = {
   SearchResultWrapper: ComponentType<StylableProps>;
   SearchResultList: ComponentType<any>;
   SearchResultListItem: ComponentType<any>;
   SearchResultSummary: ComponentType<StylableProps>;
 };
 
-type SearchResultItemComponents = {
+export type SearchResultItemComponents = {
   ItemList: ComponentType<StylableProps>;
   ItemH3: ComponentType<StylableProps>;
   ItemAnchor: ComponentType<HTMLProps<HTMLAnchorElement> & StylableProps>;
   ItemParagraph: ComponentType<StylableProps>;
 };
 
-type SearchResultItemProps = DesignableComponentsProps<SearchResultItemComponents> &
+export type SearchResultItemProps = DesignableComponentsProps<SearchResultItemComponents> &
 { value: { [key: string]: string; } };
 
 const SearchInputBase: FC<HTMLProps<HTMLInputElement>> = props => {
@@ -123,7 +123,7 @@ export type SearchProps = DesignableComponentsProps<SearchComponents> &
 HTMLProps<HTMLElement> & {
   onSubmit?: (query: string) => void,
 };
-type SearchResultProps = DesignableComponentsProps<SearchResultComponents> &
+export type SearchResultProps = DesignableComponentsProps<SearchResultComponents> &
 HTMLProps<HTMLElement> & { resultCountMessage?: string, resultEmptyMessage?: string };
 
 const defaultResultCountMessage = 'Showing %count% result(s).';

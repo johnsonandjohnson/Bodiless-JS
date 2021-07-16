@@ -13,6 +13,17 @@
  */
 import ResponsiveSearchBox from './components/ResponsiveSearchBox';
 
-export { SearchBox, SearchResult } from './components/Search';
+export {
+  SearchBox,
+  SearchResult,
+} from './components/Search';
 export { withSearchResult, useSearchResultContext } from './components/SearchContextProvider';
 export { ResponsiveSearchBox };
+
+export type {
+  SearchProps,
+  SearchResultProps,
+  SearchComponents,
+  SearchResultComponents,
+  SearchResultItemComponents,
+} from './components/Search';
