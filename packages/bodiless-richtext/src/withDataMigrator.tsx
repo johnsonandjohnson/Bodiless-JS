@@ -91,7 +91,7 @@ const migrateNode = (oldNode: Node) => {
 const withDataMigrator = (Component: any) => (
   ({ value, ...rest }: any) => {
     let newValue = value;
-    if (value.document !== undefined) {
+    if (value?.document !== undefined) {
       const nodes = removeLeaves(value.document.nodes);
       newValue = nodes.map(migrateNode) || [];
     }
