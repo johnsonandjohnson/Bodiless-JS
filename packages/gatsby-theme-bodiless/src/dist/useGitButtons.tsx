@@ -166,7 +166,7 @@ const getMenuOptions = (
       name: 'resetchanges',
       label: 'Revert',
       icon: 'undo',
-      isHidden: () => !context.isEdit,
+      isDisabled: () => !context.isEdit,
       handler: () => formGitReset(client),
       group: 'file',
     },
