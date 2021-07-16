@@ -70,12 +70,18 @@ const withSuggestionLink:HOC<{}, SuggestionLinkProps> = Component => {
   const WithSuggestionLink = (props: SuggestionLinkProps) => {
     const { text, ...rest } = props;
     const searchResultContext = useSearchResultContext();
+    const searchPath = getSearchPagePath(text);
     return (
       <Component
         {...rest as any}
-        href={getSearchPagePath(text)}
+        href={searchPath}
         onClick={(event: React.MouseEvent) => {
           event.preventDefault();
+          if (
+            getSearchPagePath() !== window.location.pathname.replace(/^\//, '').replace(/\/$/, '')
+          ) {
+            window.location.href = searchPath;
+          }
           searchResultContext.setSearchTerm(text);
         }}
       />
