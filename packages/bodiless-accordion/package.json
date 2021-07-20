@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/accordion",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Basic accordion component.",
   "author": "Guilherme Zeni <gzeni@its.jnj.com>",
   "license": "Apache-2.0",
@@ -26,9 +26,9 @@
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
-    "@bodiless/components": "^0.2.6",
-    "@bodiless/core": "^0.2.6",
-    "@bodiless/fclasses": "^0.2.6",
+    "@bodiless/components": "^0.2.7",
+    "@bodiless/core": "^0.2.7",
+    "@bodiless/fclasses": "^0.2.7",
     "@types/react-helmet": "^5.0.14",
     "lodash": "^4.17.19",
     "mobx": "^5.8.0",
