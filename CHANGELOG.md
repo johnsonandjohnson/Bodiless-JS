@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.6](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.5...v0.2.6) (2021-07-20)
+
+
+### Bug Fixes
+
+* **search:** Typeahead/suggestion item click does not trigger the search ([#1024](https://github.com/johnsonandjohnson/bodiless-js/issues/1024)) ([47aa0c4](https://github.com/johnsonandjohnson/bodiless-js/commit/47aa0c4add0ff3e6c22af369b0c250df174aa94c))
+
+
+
+
+
 ## [0.2.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.4...v0.2.5) (2021-07-16)
 
 
