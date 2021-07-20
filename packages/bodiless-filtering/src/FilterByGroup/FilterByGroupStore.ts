@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const TAG_ANY_KEY = 'any';
 
@@ -65,7 +65,12 @@ const updateUrlQueryParams = (tags: Tag[]) => {
 };
 
 const useFilterByGroupStore = (settings: FilterByGroupStoreSettings) => {
-  const [selectedTags, setSelectedTags] = useState<Tag[]>(readTagsFromQueryParams());
+  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+
+  useEffect(() => {
+    const tags = readTagsFromQueryParams();
+    setSelectedTags(tags);
+  }, []);
 
   const { multipleAllowedTags = false } = settings;
 
