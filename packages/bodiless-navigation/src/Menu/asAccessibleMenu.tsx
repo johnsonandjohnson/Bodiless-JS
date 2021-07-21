@@ -29,6 +29,7 @@ import {
   designable,
   flowIf,
   not,
+  startWith,
 } from '@bodiless/fclasses';
 
 import { useMenuContext } from './withMenuContext';
@@ -45,6 +46,11 @@ const useHasLink = () => {
   return Boolean(linkHref.data.href);
 };
 
+const ClickOutside = React.forwardRef<any, any>((props, ref) => {
+  useClickOutside(ref as React.MutableRefObject<HTMLLIElement>, props.onClickOutside);
+  return null;
+});
+
 const withSubmenuToggle = (Component: ComponentType<any> | string) => (props: any) => {
   const { activeSubmenu, setActiveSubmenu } = useMenuContext();
   const { node } = useNode();
@@ -56,17 +62,34 @@ const withSubmenuToggle = (Component: ComponentType<any> | string) => (props: an
       : setActiveSubmenu(nodeID)
   );
 
-  // @TODO -- This is not ideal. We need a way to close submenu on click outside
-  // without adding another html element for ref
-  const ref = useRef(null);
-  useClickOutside(ref, () => setActiveSubmenu(undefined));
-
   return (
-    <button type="button" ref={ref} onClick={toggleSubmenu}>
+    <button type="button" onClick={toggleSubmenu}>
       <Component {...props} tabIndex={-1} />
     </button>
   );
 };
+
+const AccessibleMenuItem: FC<any> = props => {
+  const { activeSubmenu, setActiveSubmenu } = useMenuContext();
+  const { node } = useNode();
+  const nodeID = node.path[node.path.length - 2];
+
+  const ref = useRef(null);
+
+  return (
+    <>
+      <li ref={ref} {...props} />
+      {
+        activeSubmenu === nodeID
+          && <ClickOutside ref={ref} onClickOutside={() => setActiveSubmenu(undefined)} />
+      }
+    </>
+  );
+};
+
+const withAccessibleSubmenuItem = withDesign({
+  OuterWrapper: startWith(AccessibleMenuItem),
+});
 
 type SubmenuIndicatorComponents = {
   Button: ComponentType<any>,
@@ -116,7 +139,7 @@ const withMenuNav = asToken(
   withDesign({
     Nav: asToken(
       addClasses('w-full'),
-      addProps({ 'aria-label': 'Main Site Navigation Menu' }),
+      addProps({ 'aria-label': 'Main Site Navigation Menu', role: 'navigation' }),
     ),
   }),
 );
@@ -171,6 +194,7 @@ const withAccessibleSubMenuAttr = withDesign({
  * and accessibility attributes to the submenu items.
  */
 const asAccessibleSubMenu = asToken(
+  withAccessibleSubmenuItem,
   withSubmenuIndicator,
   withAccessibleSubMenuAttr,
 );
