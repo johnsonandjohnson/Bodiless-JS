@@ -51,6 +51,30 @@ const ClickOutside = React.forwardRef<any, any>((props, ref) => {
   return null;
 });
 
+// const withSubmenuToggle = (Component: ComponentType<any> | string) => (props: any) => {
+//   const { activeSubmenu, setActiveSubmenu } = useMenuContext();
+//   const { node } = useNode();
+//   const nodeID = node.path[node.path.length - 1];
+
+//   const toggleSubmenu = () => (
+//     activeSubmenu === nodeID
+//       ? setActiveSubmenu(undefined)
+//       : setActiveSubmenu(nodeID)
+//   );
+
+//   return (
+//     <button
+//       type="button"
+//       role="menuitem"
+//       aria-label={useSubmenuContext().menuItemTitle}
+//       aria-expanded={activeSubmenu === nodeID}
+//       onClick={toggleSubmenu}
+//     >
+//       <Component {...props} tabIndex={-1} />
+//     </button>
+//   );
+// };
+
 const withSubmenuToggle = (Component: ComponentType<any> | string) => (props: any) => {
   const { activeSubmenu, setActiveSubmenu } = useMenuContext();
   const { node } = useNode();
@@ -62,11 +86,7 @@ const withSubmenuToggle = (Component: ComponentType<any> | string) => (props: an
       : setActiveSubmenu(nodeID)
   );
 
-  return (
-    <button type="button" onClick={toggleSubmenu}>
-      <Component {...props} tabIndex={-1} />
-    </button>
-  );
+  return <Component {...props} onClick={toggleSubmenu} />;
 };
 
 const AccessibleMenuItem: FC<any> = props => {
@@ -180,10 +200,21 @@ const asAccessibleMenu = asToken(
 );
 
 /**
+ * HOC that adds the accessibility attributes to the Submenu Wrapper.
+ * This includes 'role' and dynamic `aria-labelledby` that corresponds to
+ * the menu Item this submenu belongs to.
+ */
+const withSubmenuWrapperAttrs = <P extends Object>(
+  Component: ComponentType<P> | string,
+) => (props: P) => (
+  <Component role='menu' aria-labelledby={useSubmenuContext().menuItemId} {...props} />
+);
+
+/**
  * Token that adds an accessibility attributes to the Sub Menu.
  */
 const withAccessibleSubMenuAttr = withDesign({
-  Wrapper: addProps({ role: 'menu' }),
+  Wrapper: withSubmenuWrapperAttrs,
   Title: addProps({ role: 'menuitem' }),
   Item: addProps({ role: 'none' }),
 });
