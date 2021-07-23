@@ -41,7 +41,9 @@ const SubmenuContext = createContext<SubmenuContextType>({
 
 const useSubmenuContext = () => useContext(SubmenuContext);
 
-const SubmenuProvider: FC<SubmenuProviderType> = ({ children, hasSubmenu, menuItemId, menuItemTitle }) => (
+const SubmenuProvider: FC<SubmenuProviderType> = ({
+  children, hasSubmenu, menuItemId, menuItemTitle,
+}) => (
   <SubmenuContext.Provider value={{ hasSubmenu, menuItemId, menuItemTitle }}>
     { children }
   </SubmenuContext.Provider>
@@ -54,20 +56,20 @@ const SubmenuProvider: FC<SubmenuProviderType> = ({ children, hasSubmenu, menuIt
 const withSubmenuContext = <P extends Object>(
   Component: ComponentType<P> | string,
 ) => (props: P) => {
-  // Generate Random Menu Item ID for submenu linking purposes.
-  const menuItemId = `menu-item-${Math.random().toString(36).slice(-6)}`;
+    // Generate Random Menu Item ID for submenu linking purposes.
+    const menuItemId = `menu-item-${Math.random().toString(36).slice(-6)}`;
 
-  const { node } = useNode();
-  const parentNode = node.peer(node.path.slice(0, node.path.length - 1));
-  const menuItemTextNode = parentNode.child<{ text: string }>(DEFAULT_NODE_KEYS.titleNodeKey);
-  const menuItemText = menuItemTextNode.data.text;
+    const { node } = useNode();
+    const parentNode = node.peer(node.path.slice(0, node.path.length - 1));
+    const menuItemTextNode = parentNode.child<{ text: string }>(DEFAULT_NODE_KEYS.titleNodeKey);
+    const menuItemText = menuItemTextNode.data.text;
 
-  return (
-    <SubmenuProvider hasSubmenu menuItemId={menuItemId} menuItemTitle={menuItemText}>
-      <Component label={menuItemId} {...props} />
-    </SubmenuProvider>
-  );
-};
+    return (
+      <SubmenuProvider hasSubmenu menuItemId={menuItemId} menuItemTitle={menuItemText}>
+        <Component label={menuItemId} {...props} />
+      </SubmenuProvider>
+    );
+  };
 
 export {
   withSubmenuContext,

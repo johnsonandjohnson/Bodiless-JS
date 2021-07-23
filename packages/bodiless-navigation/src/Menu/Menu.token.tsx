@@ -29,7 +29,7 @@ import {
   asFlex, asRelative, withColumnDirectionStyles,
   withStaticOnHoverStyles,
 } from '../token';
-import { asAccessibleMenu, asAccessibleSubMenu } from './asAccessibleMenu';
+import { asAccessibleMenu, asAccessibleSubMenu, withAccessibleSubMenuAttr } from './asAccessibleMenu';
 import { withSubmenuContext } from './withMenuItemContext';
 
 /*
@@ -149,7 +149,10 @@ const asTopNav = (...keys: string[]) => {
     Main: withMenuDesign('Main')(withBaseMenuStyles, asAccessibleMenu),
     List: withMenuDesign('List')(asListSubMenu),
     Cards: withMenuDesign('Cards')(asFullWidthSubMenu),
-    Columns: withMenuDesign('Columns', 1)(asFullWidthSubMenu),
+    Columns: asToken(
+      withMenuDesign('Columns', 1)(asFullWidthSubMenu),
+      withMenuDesign('Columns', 2)(withAccessibleSubMenuAttr),
+    ),
   };
 
   return keys.length === 0
