@@ -20,7 +20,6 @@ import {
   addClassesIf,
   withDesign,
   asToken,
-  not,
 } from '@bodiless/fclasses';
 
 import withMenuContext, { useIsMenuOpen, useMenuContext } from './withMenuContext';
@@ -73,6 +72,8 @@ const useIsSubmenuExpanded = () => {
   return (activeSubmenu === parentNodeId) || (isEdit && isActive);
 };
 
+const useIsHoverEnabled = () => !useIsMenuOpen() && useMenuContext().activeSubmenu === undefined;
+
 const useIsSubmenuContracted = () => {
   const { isActive, isEdit } = useEditContext();
   const { activeSubmenu } = useMenuContext();
@@ -85,7 +86,7 @@ const useIsSubmenuContracted = () => {
 };
 
 const withHoverStyles = withDesign({
-  OuterWrapper: addClassesIf(not(useIsMenuOpen) && useIsSubmenuContracted)('group'),
+  OuterWrapper: addClassesIf(useIsHoverEnabled)('group'),
   Wrapper: asToken(
     addClasses('group-hover:flex'),
     addClassesIf(useIsSubmenuContracted)('hidden'),
@@ -166,4 +167,5 @@ export {
   isMenuContextNotActive,
   useIsSubmenuExpanded,
   useIsSubmenuContracted,
+  useIsHoverEnabled,
 };
