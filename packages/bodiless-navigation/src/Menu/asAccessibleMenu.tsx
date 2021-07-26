@@ -12,7 +12,9 @@
  * limitations under the License.
  */
 
-import React, { ComponentType, FC, useRef } from 'react';
+import React, {
+  ComponentType, FC, useRef, useCallback, useEffect,
+} from 'react';
 import {
   withParent, withPrependChild, useNode, useClickOutside,
 } from '@bodiless/core';
@@ -46,8 +48,36 @@ const useHasLink = () => {
   return Boolean(linkHref.data.href);
 };
 
-const ClickOutside = React.forwardRef<any, any>((props, ref) => {
+const ClickOutside = React.forwardRef<HTMLLIElement, any>((props, ref) => {
   useClickOutside(ref as React.MutableRefObject<HTMLLIElement>, props.onClickOutside);
+  return null;
+});
+
+const FocusOnEsc = React.forwardRef<any, any>((props, ref) => {
+  if (typeof ref === 'function') return null;
+  if (ref && ref.current) {
+    const escFunction = useCallback((event) => {
+      // Listen for ESC key only
+      if (event.keyCode === 27) {
+        // Search through all refs element Children
+        for (let i = ref.current.children.length - 1; i >= 0; i -= 1) {
+          // Find Button ( List:Title element ) and set focus on it when submenu closes with ESC key
+          if (ref.current.children[i].tagName === 'BUTTON') {
+            ref.current.children[i].focus();
+          }
+        }
+      }
+    }, []);
+
+    useEffect(() => {
+      ref.current.addEventListener('keydown', escFunction, false);
+
+      return () => {
+        ref.current.removeEventListener('keydown', escFunction, false);
+      };
+    }, []);
+  }
+
   return null;
 });
 
@@ -97,7 +127,12 @@ const AccessibleMenuItem: FC<any> = props => {
       <li ref={ref} {...props} />
       {
         activeSubmenu === nodeID
-          && <ClickOutside ref={ref} onClickOutside={() => setActiveSubmenu(undefined)} />
+          && (
+            <>
+              <ClickOutside ref={ref} onClickOutside={() => setActiveSubmenu(undefined)} />
+              <FocusOnEsc ref={ref} />
+            </>
+          )
       }
     </>
   );
