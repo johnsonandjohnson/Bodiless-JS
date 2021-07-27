@@ -13,7 +13,7 @@
  */
 
 import {
-  asToken, withDesign, addClasses, flowIf,
+  asToken, withDesign, addClasses, flowIf, addProps,
 } from '@bodiless/fclasses';
 import {
   asTopNav, useIsActiveTrail, withMenuDesign, withMenuTitleEditors,
@@ -86,7 +86,17 @@ const $withBaseSubMenuStyles = withDesign({
     addClasses('z-10'),
   ),
   Title: withActiveSubTitleStyles,
-  SubmenuIndicator: addClasses('text-sm text-white'),
+  SubmenuIndicator: asToken(
+    addClasses('text-sm text-white'),
+    withDesign({
+      // Example of the Submenu Indicator 'aria-label' suffix.
+      // Suffix is appended to the Menu Item Title, usually to indicate
+      // that there are more options available. For example if the Menu Title
+      // is 'Products' and the Suffix is 'More' then the aria-label of SubmenuIndicator
+      // would be 'Products - More'. Defaults to `More`.
+      Button: addProps({ ariaLabelSuffix: 'More' }),
+    }),
+  ),
 });
 
 const $withListSubmenuStyles = withDesign({

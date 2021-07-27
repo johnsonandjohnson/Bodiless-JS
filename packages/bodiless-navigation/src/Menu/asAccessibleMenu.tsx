@@ -58,7 +58,8 @@ const FocusOnEsc = React.forwardRef<any, any>((props, ref) => {
   if (ref && ref.current) {
     const escFunction = useCallback((event) => {
       // Listen for ESC key only
-      if (event.keyCode === 27) {
+      const key = event.key || event.keyCode;
+      if (key === 'Escape' || key === 'Esc' || key === 27) {
         // Search through all refs element Children
         for (let i = ref.current.children.length - 1; i >= 0; i -= 1) {
           // Find Button ( List:Title element ) and set focus on it when submenu closes with ESC key
@@ -70,10 +71,10 @@ const FocusOnEsc = React.forwardRef<any, any>((props, ref) => {
     }, []);
 
     useEffect(() => {
-      ref.current.addEventListener('keydown', escFunction, false);
+      ref.current.addEventListener('keyup', escFunction, false);
 
       return () => {
-        ref.current.removeEventListener('keydown', escFunction, false);
+        ref.current.removeEventListener('keyup', escFunction, false);
       };
     }, []);
   }
@@ -83,14 +84,14 @@ const FocusOnEsc = React.forwardRef<any, any>((props, ref) => {
 
 const asAccessibleMenuTitle = (
   isSubmenuIndicator: boolean = false,
-) => (Component: ComponentType<any> | string) => (props: any) => {
+) => (Component: ComponentType<any> | string) => ({ ariaLabelSuffix, ...rest }: any) => {
   const { node } = useNode();
   const titleText = node.child<{ text: string }>(DEFAULT_NODE_KEYS.titleNodeKey).data.text;
   const ariaLabel = isSubmenuIndicator
-    ? `${titleText} - More`
+    ? `${titleText} - ${ariaLabelSuffix || 'More'}`
     : titleText;
 
-  return <Component role="menuitem" aria-label={ariaLabel} {...props} />;
+  return <Component role="menuitem" aria-label={ariaLabel} {...rest} />;
 };
 
 const asAccessibleSubMenuTitle = (Component: ComponentType<any> | string) => (props: any) => {
@@ -98,7 +99,7 @@ const asAccessibleSubMenuTitle = (Component: ComponentType<any> | string) => (pr
   const { node } = useNode();
   const nodeID = node.path[node.path.length - 1];
 
-  return <Component area-haspopup="true" aria-expanded={activeSubmenu === nodeID} {...props} />;
+  return <Component aria-haspopup="true" aria-expanded={activeSubmenu === nodeID} {...props} />;
 };
 
 const withSubmenuToggle = (Component: ComponentType<any> | string) => (props: any) => {
