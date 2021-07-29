@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.8](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.7...v0.2.8) (2021-07-28)
+
+
+### Bug Fixes
+
+* **navigation:** Menu Accessibility Remediation ([#1029](https://github.com/johnsonandjohnson/bodiless-js/issues/1029)) ([2f13256](https://github.com/johnsonandjohnson/bodiless-js/commit/2f13256d6aa75df6355cdfb2b79e7ba5fa995811))
+
+
+
+
+
 ## [0.2.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.6...v0.2.7) (2021-07-20)
 
 **Note:** Version bump only for package @bodiless/test-site

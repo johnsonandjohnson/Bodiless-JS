@@ -12,14 +12,15 @@
  * limitations under the License.
  */
 
-import React, { ComponentType, FC, useRef } from 'react';
+import React, {
+  ComponentType, FC, useRef, useCallback, useEffect,
+} from 'react';
 import {
   withParent, withPrependChild, useNode, useClickOutside,
 } from '@bodiless/core';
 import type { LinkData } from '@bodiless/components';
 import {
   addProps,
-  addPropsIf,
   addClasses,
   withDesign,
   asToken,
@@ -29,6 +30,9 @@ import {
   designable,
   flowIf,
   not,
+  startWith,
+  Button,
+  withFinalDesign,
 } from '@bodiless/fclasses';
 
 import { useMenuContext } from './withMenuContext';
@@ -36,13 +40,66 @@ import { useSubmenuContext } from './withMenuItemContext';
 import { DEFAULT_NODE_KEYS } from './MenuTitles';
 
 const useHasSubmenu = () => useSubmenuContext().hasSubmenu;
-const useIsSubmenuExpanded = () => useMenuContext().activeSubmenu !== undefined;
 const useHasLink = () => {
   const { linkNodeKey } = DEFAULT_NODE_KEYS;
   const { node } = useNode();
   const linkHref = node.child<LinkData>(linkNodeKey);
 
   return Boolean(linkHref.data.href);
+};
+
+const ClickOutside = React.forwardRef<HTMLLIElement, any>((props, ref) => {
+  useClickOutside(ref as React.MutableRefObject<HTMLLIElement>, props.onClickOutside);
+  return null;
+});
+
+const FocusOnEsc = React.forwardRef<any, any>((props, ref) => {
+  if (typeof ref === 'function') return null;
+  if (ref && ref.current) {
+    const escFunction = useCallback((event) => {
+      // Listen for ESC key only
+      const key = event.key || event.keyCode;
+      if (key === 'Escape' || key === 'Esc' || key === 27) {
+        // Search through all refs element Children
+        for (let i = ref.current.children.length - 1; i >= 0; i -= 1) {
+          // Find Button ( List:Title element ) and set focus on it when submenu closes with ESC key
+          if (ref.current.children[i].tagName === 'BUTTON') {
+            ref.current.children[i].focus();
+          }
+        }
+      }
+    }, []);
+
+    useEffect(() => {
+      ref.current.addEventListener('keyup', escFunction, false);
+
+      return () => {
+        ref.current.removeEventListener('keyup', escFunction, false);
+      };
+    }, []);
+  }
+
+  return null;
+});
+
+const asAccessibleMenuTitle = (
+  isSubmenuIndicator: boolean = false,
+) => (Component: ComponentType<any> | string) => ({ ariaLabelSuffix, ...rest }: any) => {
+  const { node } = useNode();
+  const titleText = node.child<{ text: string }>(DEFAULT_NODE_KEYS.titleNodeKey).data.text;
+  const ariaLabel = isSubmenuIndicator
+    ? `${titleText} - ${ariaLabelSuffix || 'More'}`
+    : titleText;
+
+  return <Component role="menuitem" aria-label={ariaLabel} {...rest} />;
+};
+
+const asAccessibleSubMenuTitle = (Component: ComponentType<any> | string) => (props: any) => {
+  const { activeSubmenu } = useMenuContext();
+  const { node } = useNode();
+  const nodeID = node.path[node.path.length - 1];
+
+  return <Component aria-haspopup="true" aria-expanded={activeSubmenu === nodeID} {...props} />;
 };
 
 const withSubmenuToggle = (Component: ComponentType<any> | string) => (props: any) => {
@@ -56,17 +113,35 @@ const withSubmenuToggle = (Component: ComponentType<any> | string) => (props: an
       : setActiveSubmenu(nodeID)
   );
 
-  // @TODO -- This is not ideal. We need a way to close submenu on click outside
-  // without adding another html element for ref
+  return <Component {...props} onClick={toggleSubmenu} />;
+};
+
+const AccessibleMenuItem: FC<any> = props => {
+  const { activeSubmenu, setActiveSubmenu } = useMenuContext();
+  const { node } = useNode();
+  const nodeID = node.path[node.path.length - 2];
+
   const ref = useRef(null);
-  useClickOutside(ref, () => setActiveSubmenu(undefined));
 
   return (
-    <button type="button" ref={ref} onClick={toggleSubmenu}>
-      <Component {...props} tabIndex={-1} />
-    </button>
+    <>
+      <li ref={ref} {...props} />
+      {
+        activeSubmenu === nodeID
+          && (
+            <>
+              <ClickOutside ref={ref} onClickOutside={() => setActiveSubmenu(undefined)} />
+              <FocusOnEsc ref={ref} />
+            </>
+          )
+      }
+    </>
   );
 };
+
+const withAccessibleSubmenuItem = withDesign({
+  OuterWrapper: startWith(AccessibleMenuItem),
+});
 
 type SubmenuIndicatorComponents = {
   Button: ComponentType<any>,
@@ -82,7 +157,7 @@ const SubmenuIndicatorBase: FC<SubmenuIndicatorProps> = ({ components: C, ...res
 );
 
 const SubmenuIndicatorComponents: SubmenuIndicatorComponents = {
-  Button: Span,
+  Button,
   Title: Span,
 };
 
@@ -95,7 +170,11 @@ const SubmenuIndicatorClean = designable(SubmenuIndicatorComponents, 'SubmenuInd
 const SubmenuIndicator = asToken(
   withSubmenuToggle,
   withDesign({
-    Button: addClasses('flex items-center'),
+    Button: asToken(
+      asAccessibleMenuTitle(true),
+      asAccessibleSubMenuTitle,
+      addClasses('flex items-center'),
+    ),
     Title: asToken(
       addClasses('material-icons'),
       addProps({ children: 'expand_more' }),
@@ -103,6 +182,10 @@ const SubmenuIndicator = asToken(
   }),
 )(SubmenuIndicatorClean);
 
+/**
+ * Token that adds SubmenuIndicator to the Menu Item if
+ * it has a submenu and it's title is a link.
+ */
 const withSubmenuIndicator = flowIf(useHasLink)(
   withPrependChild(SubmenuIndicator, 'SubmenuIndicator'),
 );
@@ -116,7 +199,7 @@ const withMenuNav = asToken(
   withDesign({
     Nav: asToken(
       addClasses('w-full'),
-      addProps({ 'aria-label': 'Main Site Navigation Menu' }),
+      addProps({ 'aria-label': 'Main Site Navigation Menu', role: 'navigation' }),
     ),
   }),
 );
@@ -127,10 +210,15 @@ const withMenuNav = asToken(
 const withAccessibleMenuAttr = withDesign({
   Wrapper: addProps({ role: 'menubar', 'aria-label': 'Navigation Menu' }),
   Title: asToken(
-    addProps({ role: 'menuitem', tabIndex: 0 }),
-    flowIf(useHasSubmenu)(
-      addProps({ 'aria-haspopup': 'true', 'aria-expanded': 'false' }),
-      addPropsIf(useIsSubmenuExpanded)({ 'aria-expanded': 'true' }),
+    asAccessibleMenuTitle(),
+    flowIf(() => useHasSubmenu() && !useHasLink())(
+      asAccessibleSubMenuTitle,
+      withFinalDesign({
+        Link: withDesign({
+          Link: startWith(Button),
+          _default: startWith(Button),
+        }),
+      }),
     ),
   ),
   Item: addProps({ role: 'none' }),
@@ -157,11 +245,22 @@ const asAccessibleMenu = asToken(
 );
 
 /**
+ * HOC that adds the accessibility attributes to the Submenu Wrapper.
+ * This includes 'role' and dynamic `aria-labelledby` that corresponds to
+ * the menu Item this submenu belongs to.
+ */
+const withSubmenuWrapperAttrs = <P extends Object>(
+  Component: ComponentType<P> | string,
+) => (props: P) => (
+  <Component role="menu" aria-labelledby={useSubmenuContext().menuItemId} {...props} />
+  );
+
+/**
  * Token that adds an accessibility attributes to the Sub Menu.
  */
 const withAccessibleSubMenuAttr = withDesign({
-  Wrapper: addProps({ role: 'menu' }),
-  Title: addProps({ role: 'menuitem' }),
+  Wrapper: withSubmenuWrapperAttrs,
+  Title: asAccessibleMenuTitle(),
   Item: addProps({ role: 'none' }),
 });
 
@@ -171,6 +270,7 @@ const withAccessibleSubMenuAttr = withDesign({
  * and accessibility attributes to the submenu items.
  */
 const asAccessibleSubMenu = asToken(
+  withAccessibleSubmenuItem,
   withSubmenuIndicator,
   withAccessibleSubMenuAttr,
 );
@@ -181,4 +281,5 @@ export {
   withAccessibleMenuInteractions,
   asAccessibleMenu,
   asAccessibleSubMenu,
+  asAccessibleMenuTitle,
 };

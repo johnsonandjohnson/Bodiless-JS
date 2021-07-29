@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/filtering",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "Provides a control to filter content by group/tag.",
   "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
   "homepage": "",
@@ -30,11 +30,11 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/accordion": "^0.2.7",
-    "@bodiless/components": "^0.2.7",
-    "@bodiless/core": "^0.2.7",
-    "@bodiless/fclasses": "^0.2.7",
-    "@bodiless/organisms": "^0.2.7",
+    "@bodiless/accordion": "^0.2.8",
+    "@bodiless/components": "^0.2.8",
+    "@bodiless/core": "^0.2.8",
+    "@bodiless/fclasses": "^0.2.8",
+    "@bodiless/organisms": "^0.2.8",
     "lodash": "^4.17.19",
     "uuid": "^3.3.2"
   },

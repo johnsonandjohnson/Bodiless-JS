@@ -18,23 +18,33 @@ import React, {
   useContext,
   ComponentType,
 } from 'react';
+import { useNode } from '@bodiless/core';
+import { DEFAULT_NODE_KEYS } from './MenuTitles';
 
 type SubmenuContextType = {
   hasSubmenu: boolean,
+  menuItemId: string,
+  menuItemTitle: string,
 };
 
 type SubmenuProviderType = {
   hasSubmenu: boolean,
+  menuItemId: string,
+  menuItemTitle: string,
 };
 
 const SubmenuContext = createContext<SubmenuContextType>({
   hasSubmenu: false,
+  menuItemId: '',
+  menuItemTitle: '',
 });
 
 const useSubmenuContext = () => useContext(SubmenuContext);
 
-const SubmenuProvider: FC<SubmenuProviderType> = ({ children, hasSubmenu }) => (
-  <SubmenuContext.Provider value={{ hasSubmenu }}>
+const SubmenuProvider: FC<SubmenuProviderType> = ({
+  children, hasSubmenu, menuItemId, menuItemTitle,
+}) => (
+  <SubmenuContext.Provider value={{ hasSubmenu, menuItemId, menuItemTitle }}>
     { children }
   </SubmenuContext.Provider>
 );
@@ -45,11 +55,21 @@ const SubmenuProvider: FC<SubmenuProviderType> = ({ children, hasSubmenu }) => (
  */
 const withSubmenuContext = <P extends Object>(
   Component: ComponentType<P> | string,
-) => (props: P) => (
-  <SubmenuProvider hasSubmenu>
-    <Component {...props} />
-  </SubmenuProvider>
-  );
+) => (props: P) => {
+    // Generate Random Menu Item ID for submenu linking purposes.
+    const menuItemId = `menu-item-${Math.random().toString(36).slice(-6)}`;
+
+    const { node } = useNode();
+    const parentNode = node.peer(node.path.slice(0, node.path.length - 1));
+    const menuItemTextNode = parentNode.child<{ text: string }>(DEFAULT_NODE_KEYS.titleNodeKey);
+    const menuItemText = menuItemTextNode.data.text;
+
+    return (
+      <SubmenuProvider hasSubmenu menuItemId={menuItemId} menuItemTitle={menuItemText}>
+        <Component label={menuItemId} {...props} />
+      </SubmenuProvider>
+    );
+  };
 
 export {
   withSubmenuContext,

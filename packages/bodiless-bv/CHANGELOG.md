@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.8](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.7...v0.2.8) (2021-07-28)
+
+
+### Features
+
+* **bv:** Enable sites to configure BV per page. ([#1033](https://github.com/johnsonandjohnson/bodiless-js/issues/1033)) ([88feba7](https://github.com/johnsonandjohnson/bodiless-js/commit/88feba73564dbf50d90a42293041b04e122b3e6a))
+
+
+
+
+
 ## [0.2.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.6...v0.2.7) (2021-07-20)
 
 **Note:** Version bump only for package @bodiless/bv

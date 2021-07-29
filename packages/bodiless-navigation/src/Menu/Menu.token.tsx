@@ -20,7 +20,6 @@ import {
   addClassesIf,
   withDesign,
   asToken,
-  not,
 } from '@bodiless/fclasses';
 
 import withMenuContext, { useIsMenuOpen, useMenuContext } from './withMenuContext';
@@ -29,7 +28,7 @@ import {
   asFlex, asRelative, withColumnDirectionStyles,
   withStaticOnHoverStyles,
 } from '../token';
-import { asAccessibleMenu, asAccessibleSubMenu } from './asAccessibleMenu';
+import { asAccessibleMenu, asAccessibleSubMenu, withAccessibleSubMenuAttr } from './asAccessibleMenu';
 import { withSubmenuContext } from './withMenuItemContext';
 
 /*
@@ -73,6 +72,8 @@ const useIsSubmenuExpanded = () => {
   return (activeSubmenu === parentNodeId) || (isEdit && isActive);
 };
 
+const useIsHoverEnabled = () => !useIsMenuOpen() && useMenuContext().activeSubmenu === undefined;
+
 const useIsSubmenuContracted = () => {
   const { isActive, isEdit } = useEditContext();
   const { activeSubmenu } = useMenuContext();
@@ -85,7 +86,7 @@ const useIsSubmenuContracted = () => {
 };
 
 const withHoverStyles = withDesign({
-  OuterWrapper: addClassesIf(not(useIsMenuOpen) && useIsSubmenuContracted)('group'),
+  OuterWrapper: addClassesIf(useIsHoverEnabled)('group'),
   Wrapper: asToken(
     addClasses('group-hover:flex'),
     addClassesIf(useIsSubmenuContracted)('hidden'),
@@ -149,7 +150,10 @@ const asTopNav = (...keys: string[]) => {
     Main: withMenuDesign('Main')(withBaseMenuStyles, asAccessibleMenu),
     List: withMenuDesign('List')(asListSubMenu),
     Cards: withMenuDesign('Cards')(asFullWidthSubMenu),
-    Columns: withMenuDesign('Columns', 1)(asFullWidthSubMenu),
+    Columns: asToken(
+      withMenuDesign('Columns', 1)(asFullWidthSubMenu),
+      withMenuDesign('Columns', 2)(withAccessibleSubMenuAttr),
+    ),
   };
 
   return keys.length === 0
@@ -163,4 +167,5 @@ export {
   isMenuContextNotActive,
   useIsSubmenuExpanded,
   useIsSubmenuContracted,
+  useIsHoverEnabled,
 };
