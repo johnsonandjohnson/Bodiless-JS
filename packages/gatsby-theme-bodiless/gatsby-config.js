@@ -74,6 +74,7 @@ if (process.env.GOOGLE_FONTS_ENABLED !== '0') {
     resolve: 'gatsby-plugin-google-fonts',
     options: {
       fonts: ['material icons', 'roboto:300,400,500,700'],
+      display: 'swap',
     },
   });
 }
