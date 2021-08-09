@@ -55,6 +55,7 @@ type SearchResultComponents = {
   SearchResultList: ComponentType<any>;
   SearchResultListItem: ComponentType<any>;
   SearchResultSummary: ComponentType<StylableProps>;
+  GtmHelmet: ComponentType<StylableProps>;
 };
 
 type SearchResultItemComponents = {
@@ -117,6 +118,7 @@ const searchResultComponents: SearchResultComponents = {
   SearchResultList: Ul,
   SearchResultListItem: SearchResultItemClean,
   SearchResultSummary: P,
+  GtmHelmet: Div,
 };
 
 export type SearchProps = DesignableComponentsProps<SearchComponents> &
@@ -135,7 +137,7 @@ const SearchResultBase: FC<SearchResultProps> = ({
 }) => {
   const searchResultContext = useSearchResultContext();
   const {
-    SearchResultWrapper, SearchResultList, SearchResultListItem, SearchResultSummary,
+    SearchResultWrapper, SearchResultList, SearchResultListItem, SearchResultSummary, GtmHelmet,
   } = components;
   const showResultCount = resultCountMessage.replace(
     '%count%', searchResultContext.results.length.toString(),
@@ -143,6 +145,7 @@ const SearchResultBase: FC<SearchResultProps> = ({
   if (!searchResultContext.results.length) {
     return (
       <SearchResultWrapper>
+        <GtmHelmet />
         <SearchResultSummary>{showResultCount}</SearchResultSummary>
         <H3>{resultEmptyMessage}</H3>
       </SearchResultWrapper>
@@ -150,6 +153,7 @@ const SearchResultBase: FC<SearchResultProps> = ({
   }
   return (
     <SearchResultWrapper>
+      <GtmHelmet />
       <SearchResultSummary>{showResultCount}</SearchResultSummary>
       <SearchResultList>
         {
