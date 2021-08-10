@@ -32,6 +32,7 @@ import {
   SortableChildProps,
 } from './types';
 import { ComponentDisplayModeProvider, ComponentDisplayMode } from './ComponentDisplayMode';
+import { getBreakTag } from './utils/flowContainerUtils';
 
 const ChildNodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
 
@@ -85,6 +86,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerPr
                 >
                   <ChildComponent />
                 </ComponentWrapper>
+                {getBreakTag(flowContainerItem)}
               </ChildNodeProvider>
             );
           },

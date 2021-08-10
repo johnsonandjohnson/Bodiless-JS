@@ -31,6 +31,7 @@ export {
   withTailwindClasses,
   withTailwindWidthConstraints,
 } from './FlowContainer/utils/appendTailwindWidthClass';
+export * from './FlowContainer/utils/flowContainerUtils';
 export * from './meta';
 export { ifComponentSelector, ifNotComponentSelector } from './FlowContainer/ComponentDisplayMode';
 

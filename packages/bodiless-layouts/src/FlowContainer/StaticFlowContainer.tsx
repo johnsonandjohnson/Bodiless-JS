@@ -23,6 +23,7 @@ import {
 import { observer } from 'mobx-react-lite';
 import { useItemHandlers } from './model';
 import { FlowContainerItem, FlowContainerComponents } from './types';
+import { getBreakTag } from './utils/flowContainerUtils';
 
 const flowContainerComponentStart: FlowContainerComponents = {
   Wrapper: Div,
@@ -55,6 +56,7 @@ const StaticFlowContainer: FC<DesignableComponentsProps> = ({ components }) => {
               >
                 <ChildComponent />
               </ComponentWrapper>
+              {getBreakTag(flowContainerItem)}
             </NodeProvider>
           );
         })

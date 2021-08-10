@@ -13,7 +13,7 @@
  */
 
 import { useCallback } from 'react';
-import { omit } from 'lodash';
+import omit from 'lodash/omit';
 import {
   useEditContext, useActivateOnEffect, useGetter, TMenuOption,
 } from '@bodiless/core';
@@ -206,6 +206,64 @@ const useSwapButton = (
   };
 };
 
+const useMarginButton = (
+  handlers: Handlers,
+  props: EditFlowContainerProps,
+  item: FlowContainerItem,
+) => {
+  const context = useEditContext();
+  const { components } = withNoDesign(props);
+  const isActive = item.margin;
+  const { updateFlowContainerItem } = handlers;
+  const handler = () => {
+    // Toogles margin prop in flow container item.
+    const newItem: FlowContainerItem = isActive ? omit(item, 'margin') : { ...item, margin: 'mb-10' };
+    updateFlowContainerItem(newItem);
+  };
+
+  return {
+    name: useItemButtonName('margin', item.uuid),
+    label: 'Margin',
+    icon: 'document_scanner',
+    formTitle: 'Add Component Margin',
+    global: false,
+    local: true,
+    activateContext: false,
+    isHidden: useCallback(() => (!context.isEdit || Object.keys(components).length <= 1), []),
+    isActive,
+    handler,
+  };
+};
+
+const useBreakButton = (
+  handlers: Handlers,
+  props: EditFlowContainerProps,
+  item: FlowContainerItem,
+) => {
+  const context = useEditContext();
+  const { components } = withNoDesign(props);
+  const isActive = item.break;
+  const { updateFlowContainerItem } = handlers;
+  const handler = () => {
+    // Toogles break prop in flow container item.
+    const newItem: FlowContainerItem = isActive ? omit(item, 'break') : { ...item, break: true };
+    updateFlowContainerItem(newItem);
+  };
+
+  return {
+    name: useItemButtonName('break', item.uuid),
+    label: 'Break',
+    icon: 'horizontal_rule',
+    formTitle: 'Break Component',
+    global: false,
+    local: true,
+    activateContext: false,
+    isHidden: useCallback(() => (!context.isEdit || Object.keys(components).length <= 1), []),
+    isActive,
+    handler,
+  };
+};
+
 /**
  * @private
  * Gets the context menu options for the flow container itself (an add button when the
@@ -251,6 +309,8 @@ const useGetItemUseGetMenuOptions = (props: EditFlowContainerProps) => {
       useAddButton(handlers, props$, item),
       useCloneButton(handlers, props$, item),
       useSwapButton(handlers, props$, item),
+      useMarginButton(handlers, props$, item),
+      useBreakButton(handlers, props$, item),
       useDeleteButton(handlers, props$, item),
     ];
     return useGetter(buttons);
