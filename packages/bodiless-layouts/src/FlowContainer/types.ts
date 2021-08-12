@@ -67,7 +67,6 @@ export interface FlowContainerItem {
   uuid: string;
   wrapperProps: FlowContainerItemProps;
   break?: boolean;
-  margin?: string;
 }
 
 export type SortableChildProps = {

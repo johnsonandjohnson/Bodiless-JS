@@ -8,11 +8,11 @@ import { FlowContainerItem } from '../types';
  *
  * @param item Flow container item
  *
- * @returns Non-visible HR Tag or, if break is disabled, empty string
+ * @returns Non-visible HR Tag or, if break is disabled, null
  */
 export const getBreakTag = (item: FlowContainerItem) => {
   const className = 'w-full border-transparent border-0';
-  return (item.break) ? <Hr className={className} /> : '';
+  return (item.break) ? <Hr className={className} /> : null;
 };
 
 export default {

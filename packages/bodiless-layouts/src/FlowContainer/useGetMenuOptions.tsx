@@ -22,6 +22,7 @@ import type { FlowContainerDataHandlers, FlowContainerItemHandlers } from './mod
 import { useFlowContainerDataHandlers, useItemHandlers } from './model';
 import { ComponentSelectorProps } from '../ComponentSelector/types';
 import componentSelectorForm from '../ComponentSelector/componentSelectorForm';
+import { componentMarginForm } from '../ComponentMargin';
 import { FALLBACK_SNAP_CLASSNAME } from './SortableChild';
 import { defaultSnapData } from './utils/appendTailwindWidthClass';
 import { FC_ITEM_CONTEXT_TYPE } from '../SlateSortableResizable';
@@ -213,11 +214,45 @@ const useMarginButton = (
 ) => {
   const context = useEditContext();
   const { components } = withNoDesign(props);
-  const isActive = item.margin;
   const { updateFlowContainerItem } = handlers;
-  const handler = () => {
-    // Toogles margin prop in flow container item.
-    const newItem: FlowContainerItem = isActive ? omit(item, 'margin') : { ...item, margin: 'mb-10' };
+
+  const getMarginPrefixes = () => ['mb-'];
+
+  const getFilteredClasses = (classes: string, filters: string[]): string => {
+    if (classes === '') return classes;
+
+    let itemClasses = classes.split(' ');
+    Object.values(filters).forEach(filter => {
+      itemClasses = itemClasses.filter(itemClass => itemClass.indexOf(filter) === -1);
+    });
+
+    return itemClasses.join(' ');
+  };
+
+  const isActive = (): boolean => {
+    const marginPrefixes = getMarginPrefixes();
+    const itemClasses = item.wrapperProps.className ? item.wrapperProps.className : '';
+    let hasMargin = false;
+
+    Object.values(marginPrefixes).forEach(marginPrefix => {
+      if (itemClasses.indexOf(marginPrefix) !== -1) hasMargin = true;
+    });
+
+    return hasMargin;
+  };
+
+  const toggleMargin = () => {
+    const itemClasses = item.wrapperProps.className
+      ? item.wrapperProps.className : '';
+
+    const newItem = {
+      ...item,
+      wrapperProps: {
+        className: isActive()
+          ? getFilteredClasses(itemClasses, getMarginPrefixes())
+          : `${itemClasses} mb-10`,
+      },
+    };
     updateFlowContainerItem(newItem);
   };
 
@@ -230,8 +265,7 @@ const useMarginButton = (
     local: true,
     activateContext: false,
     isHidden: useCallback(() => (!context.isEdit || Object.keys(components).length <= 1), []),
-    isActive,
-    handler,
+    handler: () => componentMarginForm(props, toggleMargin),
   };
 };
 
@@ -245,7 +279,7 @@ const useBreakButton = (
   const isActive = item.break;
   const { updateFlowContainerItem } = handlers;
   const handler = () => {
-    // Toogles break prop in flow container item.
+    // Toggles break prop in flow container item.
     const newItem: FlowContainerItem = isActive ? omit(item, 'break') : { ...item, break: true };
     updateFlowContainerItem(newItem);
   };
