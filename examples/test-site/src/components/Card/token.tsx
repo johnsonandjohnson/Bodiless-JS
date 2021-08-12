@@ -71,7 +71,7 @@ const asCardTextWhite$ = withDesign({
 const asRtlCard$ = withDesign({
   Title: addClasses('rtl:text-right'),
   Body: addClasses('rtl:text-right'),
-})
+});
 
 const asCardHorizontal = withCategory('Orientation')(asCardHorizontal$);
 const asCardVertical = withCategory('Orientation')(asCardVertical$);
