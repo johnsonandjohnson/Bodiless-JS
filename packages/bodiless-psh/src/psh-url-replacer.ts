@@ -82,7 +82,7 @@ const deploy = () => {
     return;
   }
   if (!fs.existsSync(tmpFile)) {
-    handleNotice(`[deploy] skipping file processing since source file(${srcFile}) does not exist`);
+    handleNotice(`[deploy] skipping file processing since source file(${tmpFile}) does not exist`);
     return;
   }
   fs.readFile(tmpFile, 'utf8', (err, data) => {
