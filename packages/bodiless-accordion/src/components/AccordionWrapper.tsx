@@ -16,9 +16,13 @@ import React from 'react';
 import { HOC } from '@bodiless/fclasses';
 import { AccordionProvider } from './AccordionContext';
 
-const asAccordionWrapper:HOC = Component => {
-  const AsAccordionWrapper = ({ expanded, focus, ...rest }: any) => (
-    <AccordionProvider expanded={expanded} focus={focus}>
+const asAccordionWrapper: HOC = Component => {
+  const AsAccordionWrapper = (
+    {
+      expanded, focus, meta, ...rest
+    }: any,
+  ) => (
+    <AccordionProvider expanded={expanded} focus={focus} meta={meta}>
       <Component {...rest} />
     </AccordionProvider>
   );
