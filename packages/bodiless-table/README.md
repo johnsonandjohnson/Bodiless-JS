@@ -1,5 +1,63 @@
 # Table Component
 
+This tool allows you to place a table into a Bodiless site. It also allows you to
+add, delete, or move rows and columns.
+
+## Content Editor Details
+
+Bodiless-JS allows you to insert two types of tables. One type has headers in the top
+row, and other type has headers in a side column.
+
+### Place a Table
+
+First, click the Insert Component button and select "Table" on the left side of the
+window. Click on the table to insert it into your Website.
+
+![Place a Table](./assets/Table_1.png)
+
+### Name the Table
+
+The top row of a table is called the Header. Click the header of the table and type
+the name. You can also delete the header by clicking it and clicking the "Delete"
+button.
+
+![Table Name](./assets/Table_2.png)
+
+### Adding Data to a Table
+
+All new tables in Bodiless start with 3 columns and 3 rows. To add data to a cell,
+click on the cell and start typing. Clicking tab will move the cursor one cell to
+the right. You can format text in a cell using the same tools as in the Full Rich
+Text editor.
+
+![Text Options](./assets/Table_3.png)
+
+### Working With Columns and Rows
+
+![Table Toolbar](./assets/Table_4.png)
+
+You can add rows to a table by clicking on a row and then clicking the Add button
+under Row on the Table toolbar. The new row will appear under the row where your
+cursor was placed when you clicked Add. You can add columns by clicking the add
+button under Column. The new column will appar to the right of the row where your
+cursor was placed when you clicked Add.
+
+> Here would be instructions regarding moving a row or column, but this feature
+> appears incomplete, as you can only move a column to the right and a row down, 
+> not the reverse.
+
+To remove a column or row, click a cell and select the Delete button under Column
+Row. The selected column or row will vanish.
+
+### Footer
+
+> I don't think this feature is fully implemented, as clicking the button to add a
+> footer only adds a normal row.
+
+---
+
+## Site Builder Details
+
 - Purpose
   - A way for editors to add tabular data.
 - Editable areas
@@ -7,7 +65,7 @@
 - Styling
   - Can be implemented in the appropriate token.tsx file by adding necessary tailwind classes - check [asTableDefaultStyle](../../examples/test-site/src/components/Table/index.tsx)
 
-## Usage
+### Usage
 
 ``` js
 const ExampleTableExample = flow(
@@ -25,7 +83,7 @@ const ExampleTableExample = flow(
  <TableExample nodeKey="table-1" />
 ```
 
-## Design Components
+### Design Components
 
 The table component follows the Bodiless Design Pattern and is easy to style. Here is an example demonstrating all possible design components:
 

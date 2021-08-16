@@ -33,3 +33,24 @@ test-report.xml
 
 # API doc
 **/doc/api
+packages/bodiless-card/bodiless.docs.json
+packages/bodiless-card/CHANGELOG.md
+packages/bodiless-card/LICENSE
+packages/bodiless-card/package.json
+packages/bodiless-card/README.md
+packages/bodiless-card/src/components/Cards.tokens.tsx
+packages/bodiless-card/src/components/Cards.tsx
+packages/bodiless-card/src/index.ts
+packages/bodiless-card/tailwind.config.js
+packages/bodiless-card/tsconfig.json
+packages/bodiless-card/bodiless.docs.json
+packages/bodiless-card/CHANGELOG.md
+packages/bodiless-card/LICENSE
+packages/bodiless-card/package.json
+packages/bodiless-card/README.md
+packages/bodiless-card/src/components/Cards.tokens.tsx
+packages/bodiless-card/src/components/Cards.tsx
+packages/bodiless-card/src/index.ts
+packages/bodiless-card/tailwind.config.js
+packages/bodiless-card/tsconfig.json
+.lando.yml
