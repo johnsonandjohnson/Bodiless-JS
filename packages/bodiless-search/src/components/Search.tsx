@@ -46,7 +46,8 @@ export type SearchComponents = {
   SearchInput: ComponentType<any>;
   SearchButton: ComponentType<any>;
   Suggestions: ComponentType<DesignableProps<SuggestionListComponents> & {
-    suggestions: Suggestion[]
+    suggestions: Suggestion[];
+    searchTerm?: string;
   }>,
 };
 
@@ -239,7 +240,7 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
       <SearchButton onClick={onClickHandler} />
       {
         queryString !== '' && suggestions.length > 0
-        && <Suggestions suggestions={suggestions} />
+        && <Suggestions suggestions={suggestions} searchTerm={queryString} />
       }
     </SearchWrapper>
   );
