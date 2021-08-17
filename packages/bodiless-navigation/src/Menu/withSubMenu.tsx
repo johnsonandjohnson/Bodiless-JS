@@ -17,7 +17,7 @@ import {
   Token, HOC, Design, withDesign, asToken, withFinalDesign, flowIf,
 } from '@bodiless/fclasses';
 import {
-  asStylableList, asStylableSubList, asSubList, withDeleteNodeOnUnwrap,
+  asStylableSubList, asSubList, withDeleteNodeOnUnwrap,
   withSubLists, UseListOverrides, useListContext,
 } from '@bodiless/components';
 
@@ -38,7 +38,6 @@ const asMenuSubList = (
   useOverrides: UseListOverrides = () => ({}),
 ) => flow(
   asSubList((props) => ({ groupLabel: 'Sub-Menu Item', ...useOverrides(props) })),
-  asStylableList,
   asStylableSubList,
   withDeleteNodeOnUnwrap('sublist'),
   // We must use withFinalDesign to ensure that asBreadcrumb uses the correct node

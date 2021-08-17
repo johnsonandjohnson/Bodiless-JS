@@ -40,7 +40,7 @@ const ContextSubMenu: FC<IContextMenuItemProps> = props => {
 
   const finalUi = {
     ...useMenuOptionUI(),
-    Toolbar: addProps({ 'aria-label': `Context Submenu ${option.label} form` })(Div),
+    Toolbar: addProps<any>({ 'aria-label': `Context Submenu ${option.label} form` })(Div),
     ToolbarButton: HorizontalToolbarButton,
   };
 

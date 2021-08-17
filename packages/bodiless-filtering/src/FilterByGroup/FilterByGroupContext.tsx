@@ -18,31 +18,49 @@ import React, {
   useContext,
   createContext,
   FC,
-  useState,
-  ComponentType,
 } from 'react';
 import { v1 } from 'uuid';
 import { uniqBy } from 'lodash';
-import { TagType } from '@bodiless/core';
 import { TagButtonProps } from '@bodiless/components';
-import { Injector, addProps } from '@bodiless/fclasses';
-import { FBGContextOptions, SuggestionsRefType, FBGContextType } from './types';
+import { Injector, addProps, Enhancer } from '@bodiless/fclasses';
+import {
+  FBGContextOptions,
+  SuggestionsRefType,
+  FBGContextType,
+  TagType,
+} from './types';
+import { useFilterByGroupStore } from './FilterByGroupStore';
+import { useTagsAccessors } from './FilterModel';
 
 const FilterByGroupContext = createContext<FBGContextType>({
   getSuggestions: () => [],
   useRegisterSuggestions: () => () => undefined,
-  setSelectedTag: () => undefined,
-  setSelectedNode: () => undefined,
+  selectTag: () => { },
+  getSelectedTags: () => [],
+  unSelectTag: () => { },
+  isTagSelected: () => false,
+  clearSelectedTags: () => { },
+  multipleAllowedTags: false,
 });
 
 const useFilterByGroupContext = () => useContext(FilterByGroupContext);
+const useIsFilterTagSelected = () => {
+  const { tag } = useTagsAccessors();
+  return useFilterByGroupContext().isTagSelected(tag);
+};
 
 const FilterByGroupProvider: FC<FBGContextOptions> = ({
   children,
   suggestions,
+  multipleAllowedTags,
 }) => {
-  const [selectedTag, setSelectedTag] = useState<TagType>();
-  const [selectedNode, setSelectedNode] = useState<string>();
+  const {
+    selectTag,
+    unSelectTag,
+    getSelectedTags,
+    isTagSelected,
+    clearSelectedTags,
+  } = useFilterByGroupStore({ multipleAllowedTags });
 
   const refs = useRef<any>([]);
 
@@ -72,10 +90,12 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
   const newValue = {
     getSuggestions,
     useRegisterSuggestions,
-    selectedTag,
-    selectedNode,
-    setSelectedTag,
-    setSelectedNode,
+    selectTag,
+    getSelectedTags,
+    unSelectTag,
+    isTagSelected,
+    multipleAllowedTags: multipleAllowedTags || false,
+    clearSelectedTags,
   };
 
   return (
@@ -85,14 +105,17 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
   );
 };
 
-const withFilterByGroupContext = <P extends object>(
-  Component: ComponentType<P> | string,
-) => (props: P & FBGContextOptions) => (
-    // eslint-disable-next-line react/destructuring-assignment
-    <FilterByGroupProvider suggestions={props.suggestions}>
-      <Component {...props} />
-    </FilterByGroupProvider>
+const withFilterByGroupContext: Enhancer<FBGContextOptions> = Component => props => {
+  const { suggestions, multipleAllowedTags } = props as FBGContextOptions;
+  return (
+      <FilterByGroupProvider
+        suggestions={suggestions}
+        multipleAllowedTags={multipleAllowedTags}
+      >
+        <Component {...props} />
+      </FilterByGroupProvider>
   );
+};
 
 type DefaultTagProps = {
   getSuggestions: () => TagType[],
@@ -103,13 +126,17 @@ type DefaultTagProps = {
 const withTagProps = (
   suggestionOptions?: TagButtonProps,
 ): Injector<DefaultTagProps> => Component => (props: any) => {
-  const { getSuggestions, selectedTag, useRegisterSuggestions } = useFilterByGroupContext();
+  const {
+    getSuggestions,
+    useRegisterSuggestions,
+    getSelectedTags,
+  } = useFilterByGroupContext();
   const registerSuggestions = useRegisterSuggestions();
 
   const defaultProps: DefaultTagProps = {
     getSuggestions,
     registerSuggestions,
-    selectedTags: selectedTag ? [selectedTag] : [],
+    selectedTags: getSelectedTags(),
   };
 
   const suggestionProps = Object.assign(defaultProps, suggestionOptions);
@@ -126,4 +153,5 @@ export {
   withFilterByGroupContext,
   withFBGSuggestions,
   withTagProps,
+  useIsFilterTagSelected,
 };

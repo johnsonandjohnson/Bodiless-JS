@@ -171,7 +171,10 @@ const asStylableList = withDesign({
 const asStylableSubList = flow(
   stylable,
   withDesign({
+    OuterWrapper: stylable,
     Wrapper: stylable,
+    Item: stylable,
+    Title: stylable,
   }),
 );
 

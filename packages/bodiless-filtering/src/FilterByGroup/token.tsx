@@ -12,14 +12,24 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
-import { withDesign, addClasses, asToken } from '@bodiless/fclasses';
-import { ifViewportIsNot } from '@bodiless/components';
+import {
+  withDesign,
+  addClasses,
+  asToken,
+  addProps,
+  replaceWith,
+  addPropsIf,
+} from '@bodiless/fclasses';
+import { ifViewportIsNot, ifViewportIs } from '@bodiless/components';
 import {
   asAccordionWrapper,
   asAccordionBody,
   asAccordionTitle,
+  useAccordionContext,
 } from '@bodiless/accordion';
+import {
+  withAnyTag,
+} from './Filter.token';
 
 const asResponsiveAccordionTitle = asToken(
   asAccordionTitle,
@@ -35,15 +45,46 @@ const asExpandedOnDesktopBody = asToken(
   }),
 );
 
-const asResponsiveFilterByGroup = flow(
-  ifViewportIsNot(['lg', 'xl', 'xxl'])(
+const useRefineButtonProps = () => {
+  const { setExpanded } = useAccordionContext();
+  return {
+    children: 'Refine',
+    onClick: () => setExpanded(false),
+  };
+};
+
+const asResponsiveFilterByGroup = asToken(
+  ifViewportIsNot(['lg', 'xl', '2xl'])(
     withDesign({
       FilterWrapper: asAccordionWrapper,
       FilterTitle: asResponsiveAccordionTitle,
-      Filter: asExpandedOnDesktopBody,
+      FilterBody: asExpandedOnDesktopBody,
       ResetButton: asExpandedOnDesktopBody,
+      RefineButton: addPropsIf(() => true)(useRefineButtonProps),
     }),
   ),
+  ifViewportIs(['lg', 'xl', '2xl'])(
+    withDesign({
+      RefineButton: replaceWith(() => null),
+    }),
+  ),
+);
+
+export const withMultipleAllowedTags = asToken(
+  addProps({
+    multipleAllowedTags: true,
+  }),
+);
+
+export const withSingleAllowedTag = asToken(
+  addProps({
+    multipleAllowedTags: false,
+  }),
+  withDesign({
+    Filter: asToken(
+      withAnyTag,
+    ),
+  }),
 );
 
 export {

@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,17 +12,16 @@
  * limitations under the License.
  */
 
-import { ComponentType } from 'react';
-import { replaceWith, withDesign } from '@bodiless/fclasses';
+import {
+  withDesign,
+  addProps,
+} from '@bodiless/fclasses';
+import { TAG_ANY_KEY } from './FilterByGroupStore';
 
-import { TitleProps as ListTitleProps } from './types';
+/* eslint-disable import/prefer-default-export */
 
-/**
- * HOC that replaces the Title of List Component with given component
- * @param title
- */
-const withListTitle = (title: ComponentType<ListTitleProps>) => withDesign({
-  Title: replaceWith(title),
+export const withAnyTag = withDesign({
+  TagList: addProps({
+    prependItems: [TAG_ANY_KEY],
+  }),
 });
-
-export default withListTitle;

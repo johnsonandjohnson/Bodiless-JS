@@ -56,6 +56,7 @@ const ListBase: FC<ListBaseProps> = ({
   const { addItem, deleteItem } = useItemsMutators({ unwrap, onDelete });
   const { getItems } = useItemsAccessors();
   const dataItems = getItems();
+
   const items = [
     ...prependItems,
     ...dataItems,

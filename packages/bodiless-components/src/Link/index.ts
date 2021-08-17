@@ -16,8 +16,14 @@ import asBodilessLink, { withoutLinkWhenLinkDataEmpty } from './asBodilessLink';
 import type { NormalHref } from './NormalHref';
 import type { AsBodilessLink, LinkData, Props } from './types';
 import DefaultNormalHref from './NormalHref';
+import useEmptyLinkToggle from './useEmptyLinkToggle';
 
-export { asBodilessLink, DefaultNormalHref, withoutLinkWhenLinkDataEmpty };
+export {
+  asBodilessLink,
+  DefaultNormalHref,
+  withoutLinkWhenLinkDataEmpty,
+  useEmptyLinkToggle,
+};
 export type {
   NormalHref,
   AsBodilessLink,

@@ -16,20 +16,17 @@ import React, { FC } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
 
-import FilterByGroup from '../src/components/FilterByGroup/FilterByGroupTestable';
-import Filter from '../src/components/FilterByGroup/Filter';
-import { useFilterByGroupContext } from '../src/components/FilterByGroup/FilterByGroupContext';
-
-type TagType = {
-  id: string,
-  name: string,
-};
+import FilterByGroup from '../src/FilterByGroup/FilterByGroupTestable';
+import Filter from '../src/FilterByGroup/Filter';
+import { useFilterByGroupContext } from '../src/FilterByGroup/FilterByGroupContext';
+import { Tag } from '../src/FilterByGroup/FilterByGroupStore';
+import type { TagType } from '../src/FilterByGroup/types';
 
 type WithRegisterSuggestions = (tags: TagType[]) => void;
 
 type Props = {
   onAdd: (registerSuggestion: WithRegisterSuggestions) => void,
-  onSelect: (selectFn: (tag?: TagType) => void) => void,
+  onSelect: (selectFn: (tag: TagType) => void) => void,
   force: string,
 };
 
@@ -37,9 +34,10 @@ type Props = {
 const ContextLogger: FC<Props> = ({ onAdd, onSelect }) => {
   const {
     getSuggestions,
-    setSelectedTag,
+    selectTag,
     useRegisterSuggestions,
-    selectedTag,
+    getSelectedTags,
+    clearSelectedTags,
   } = useFilterByGroupContext();
 
   const allSuggestions = getSuggestions() as TagType[];
@@ -50,10 +48,10 @@ const ContextLogger: FC<Props> = ({ onAdd, onSelect }) => {
   return (
     <>
       <button type="button" id="add-tag-button" onClick={() => onAdd(registerSuggestion)}>Add</button>
-      <button type="button" id="select-tag-button" onClick={() => onSelect(setSelectedTag)}>Select</button>
-      <button type="button" id="tag-reset" onClick={() => setSelectedTag()}>Reset</button>
+      <button type="button" id="select-tag-button" onClick={() => onSelect(selectTag)}>Select</button>
+      <button type="button" id="tag-reset" onClick={() => clearSelectedTags()}>Reset</button>
       <span id="all-tags">{tags.length}</span>
-      <span id="selected-tag">{ selectedTag ? selectedTag.name : '' }</span>
+      <span id="selected-tag">{ getSelectedTags().length > 0 ? getSelectedTags()[0].name : '' }</span>
       {tags}
     </>
   );
@@ -91,10 +89,10 @@ describe('Filter By Group', () => {
 
   it('should provide a method to add tags to the context', () => {
     const suggestions = [
-      { id: 'test-id-1', name: 'Test Tag 1' },
-      { id: 'test-id-2', name: 'Test Tag 2' },
+      new Tag('test-id-1', 'Test Tag 1'),
+      new Tag('test-id-2', 'Test Tag 2'),
     ];
-    const newTag = { id: 'new-tag-id', name: 'New Tag' };
+    const newTag = new Tag('new-tag-id', 'New Tag');
     const addNewTag = (registerSuggestion: WithRegisterSuggestions) => registerSuggestion([newTag]);
 
     const Test: FC<Props> = ({ force, onAdd }) => (
@@ -113,7 +111,7 @@ describe('Filter By Group', () => {
   });
 
   it('should provide a method to set selected tag', () => {
-    const tagToSelect = { id: '1', name: 'Selected Tag' };
+    const tagToSelect = new Tag('1', 'Selected Tag');
 
     const Test: FC<Props> = ({ force, onAdd, onSelect }) => (
       <FilterByGroup>

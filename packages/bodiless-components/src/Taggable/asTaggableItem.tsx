@@ -22,8 +22,9 @@ import {
   withNodeKey,
 } from '@bodiless/core';
 import { withTagButton, TagsNodeType } from '../TagButton';
+import type { UseTagButtonOverrides } from '../TagButton';
 
-const emptyValue:TagsNodeType = {
+const emptyValue: TagsNodeType = {
   tags: [],
 };
 
@@ -33,7 +34,11 @@ const emptyValue:TagsNodeType = {
 // - anything relying on the context (activator, indicator) must be
 //   *after* `withEditButton()` as this establishes the context.
 // - withData must be *after* the data handlers are defiend.
-const asTaggableItem = (nodeKey?: string) => asToken(
+const asTaggableItem = (
+  nodeKey?: string,
+  defaultData = emptyValue,
+  useOverrides?: UseTagButtonOverrides,
+) => asToken(
   withoutProps([
     'registerSuggestions',
     'getSuggestions',
@@ -47,11 +52,11 @@ const asTaggableItem = (nodeKey?: string) => asToken(
     'setComponentData',
   ]),
   ifEditable(
-    withTagButton,
+    withTagButton(useOverrides),
     withContextActivator('onClick'),
     withLocalContextMenu,
   ),
-  withNodeDataHandlers(emptyValue),
+  withNodeDataHandlers(defaultData),
   withNode,
   withNodeKey(nodeKey),
 );

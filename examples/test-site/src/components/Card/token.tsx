@@ -68,6 +68,11 @@ const asCardTextWhite$ = withDesign({
   Body: addClasses('text-white'),
 });
 
+const asRtlCard$ = withDesign({
+  Title: addClasses('rtl:text-right'),
+  Body: addClasses('rtl:text-right'),
+});
+
 const asCardHorizontal = withCategory('Orientation')(asCardHorizontal$);
 const asCardVertical = withCategory('Orientation')(asCardVertical$);
 const asCardNoTitle = withCategory('Structure')(asCardNoTitle$);
@@ -79,11 +84,13 @@ const asCardOverlayCta = withCategory('Layout')(asCardOverlayCta$);
 const asCardNoBodyNoTitle = withCategory('Structure')(asCardNoBodyNoTitle$);
 const asCardWithPaddings = withCategory('Layout')(asCardWithPaddings$);
 const asCardTextWhite = withCategory('Appearance')(asCardTextWhite$);
+const asRtlCard = withCategory('Appearance')(asRtlCard$);
 const withMenuCardStyles = asToken(
   asCardTextWhite,
   asCardWithPaddings,
   asCardDefaultStyle,
   asCardHorizontal,
+  asRtlCard,
 );
 
 export {

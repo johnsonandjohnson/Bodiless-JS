@@ -13,9 +13,8 @@
  */
 
 import React, { FC } from 'react';
-import { flow } from 'lodash';
 import {
-  designable, Div, Button, withoutProps, H3, DesignableComponentsProps,
+  designable, Div, Button, withoutProps, H3, DesignableComponentsProps, asToken,
 } from '@bodiless/fclasses';
 import FilterClean from './Filter';
 import { useFilterByGroupContext, withFilterByGroupContext } from './FilterByGroupContext';
@@ -29,7 +28,9 @@ const FilterByGroupComponentsStart:FilterByGroupComponents = {
   FilterTitle: H3,
   ContentWrapper: Div,
   ResetButton: Button,
+  FilterBody: Div,
   Filter: FilterClean,
+  RefineButton: Button,
 };
 
 type FilterByGroupBaseProps =
@@ -49,14 +50,16 @@ const FilterByGroupBase: FC<FilterByGroupBaseProps> = ({
     FilterTitle,
     ContentWrapper,
     ResetButton,
+    FilterBody,
     Filter,
+    RefineButton,
   } = components;
 
-  const { setSelectedTag } = useFilterByGroupContext();
+  const { clearSelectedTags } = useFilterByGroupContext();
 
   const onReset = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    setSelectedTag();
+    clearSelectedTags();
   };
 
   return (
@@ -66,7 +69,10 @@ const FilterByGroupBase: FC<FilterByGroupBaseProps> = ({
           <FilterTitle>{filterTitle}</FilterTitle>
           <ResetButton onClick={onReset}>{resetButtonText}</ResetButton>
         </FilterHeader>
-        <Filter />
+        <FilterBody>
+          <Filter />
+          <RefineButton />
+        </FilterBody>
       </FilterWrapper>
       <ContentWrapper>
         {children}
@@ -75,7 +81,7 @@ const FilterByGroupBase: FC<FilterByGroupBaseProps> = ({
   );
 };
 
-const FilterByGroupClean = flow(
+const FilterByGroupClean = asToken(
   withoutProps(['suggestions']),
   designable(FilterByGroupComponentsStart, 'FilterByGroup'),
   asResponsiveFilterByGroup,

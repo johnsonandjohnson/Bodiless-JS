@@ -12,25 +12,22 @@
  * limitations under the License.
  */
 
-import React, { FC, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import {
-  Div, Button, addClasses, asToken,
+  Div, Button, addClasses, asToken, ComponentOrTag,
 } from '@bodiless/fclasses';
 import {
   useFilterByGroupContext,
   withTagProps,
-} from '@bodiless/organisms';
+  Tag,
+} from '@bodiless/filtering';
 import { BodilessTag, TagType } from '@bodiless/core';
 
 const AddButton = addClasses('px-2 mb-2 mr-2 border border-gray-600')(Button);
 const TagComponent = addClasses('px-3 my-2 mr-2 mb-2 border border-gray-600 inline-block')(Div);
 
-type ContextLoggerProps = {
-  registerSuggestions: (tags: TagType[]) => any,
-};
-
-const ContextLoggerBase: FC<ContextLoggerProps> = () => {
-  const { getSuggestions, useRegisterSuggestions, selectedTag } = useFilterByGroupContext();
+const ContextLoggerBase: ComponentOrTag<any> = () => {
+  const { getSuggestions, useRegisterSuggestions, getSelectedTags } = useFilterByGroupContext();
   const [allSuggestions, setAllSuggestions] = useState(getSuggestions());
   const registerSuggestions = useRegisterSuggestions();
 
@@ -44,7 +41,7 @@ const ContextLoggerBase: FC<ContextLoggerProps> = () => {
     /* eslint-disable no-bitwise */
     const newTag = new BodilessTag(`#${(Math.random() * 0xFFFFFF << 0).toString(16)}`);
     randomSuggestions.current.push(newTag);
-    registerSuggestions(randomSuggestions.current);
+    registerSuggestions(randomSuggestions.current.map(tag => new Tag(tag.id.toString(), tag.name)));
     setAllSuggestions(getSuggestions());
   };
 
@@ -55,7 +52,7 @@ const ContextLoggerBase: FC<ContextLoggerProps> = () => {
       <br />
       <strong>Selected Tag: </strong>
       <pre>
-        {JSON.stringify(selectedTag, null, 2)}
+        {JSON.stringify(getSelectedTags(), null, 2)}
       </pre>
 
       <strong>All Tags: </strong>

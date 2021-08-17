@@ -17,7 +17,7 @@ import {
   withDesign,
   asToken,
 } from '@bodiless/fclasses';
-import { asFilterableByGroup } from '@bodiless/organisms';
+import { asFilterableByGroup } from '@bodiless/filtering';
 import {
   asImageRounded,
   asXMargin,

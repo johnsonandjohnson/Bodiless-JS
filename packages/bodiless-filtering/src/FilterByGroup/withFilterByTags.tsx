@@ -15,11 +15,13 @@
 import {
   ifToggledOn,
   ifToggledOff,
-  TagType,
 } from '@bodiless/core';
 import { replaceWith, withoutProps, Enhancer } from '@bodiless/fclasses';
 import { flowRight, differenceWith, isEmpty } from 'lodash';
-import useTagsAccessors from './TagButton/TagModel';
+import { useTagsAccessors } from '@bodiless/components';
+import { useFilterByGroupContext } from './FilterByGroupContext';
+import { TAG_ANY_KEY } from './FilterByGroupStore';
+import type { TagType } from './types';
 
 type ToggleByTagsProps = {
   selectedTags: TagType[];
@@ -31,6 +33,7 @@ type ToggleByTagsProps = {
  *  The selected tags to use.
  */
 const useToggleByTags = ({ selectedTags }: ToggleByTagsProps) => {
+  const { multipleAllowedTags } = useFilterByGroupContext();
   const { getTags } = useTagsAccessors();
   const tags = getTags();
 
@@ -39,11 +42,29 @@ const useToggleByTags = ({ selectedTags }: ToggleByTagsProps) => {
     return true;
   }
 
+  if (multipleAllowedTags) {
+    const selectedCategories = tags.reduce((prev, curr) => {
+      const selectedTag = selectedTags.find(tag => tag.id === curr.id);
+      const categoryId = selectedTag ? selectedTag.categoryId : undefined;
+      return {
+        ...prev,
+        ...(
+          categoryId ? {
+            [categoryId]: true,
+          } : {}
+        ),
+      };
+    }, {}) as { [category: string]: boolean };
+
+    return selectedTags
+      .find(selectedTag => !selectedCategories[selectedTag.categoryId]) === undefined;
+  }
+
   return (
     differenceWith(
       selectedTags,
       tags,
-      (selectedTag, itemTag) => selectedTag.name === itemTag.name,
+      (selectedTag, itemTag) => (selectedTag.id === TAG_ANY_KEY || selectedTag.id === itemTag.id),
     ).length === 0
   );
 };

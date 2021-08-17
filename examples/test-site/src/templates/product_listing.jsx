@@ -14,6 +14,11 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
+import flow from 'lodash/flow';
+import {
+  withSingleAllowedTag,
+  // withMultipleAllowedTags,
+} from '@bodiless/filtering';
 import Layout from '../components/Layout';
 import { SectionContent, SectionMargin } from '../components/Product';
 import Page from '../components/Page';
@@ -22,7 +27,12 @@ import {
   ProductListingImage,
   ProductListingFlowContainer,
 } from '../components/ProductListing';
-import FilterByGroup from '../components/FilterByGroup';
+import BaseFilterByGroup from '../components/FilterByGroup';
+
+const FilterByGroup = flow(
+  withSingleAllowedTag,
+  // withMultipleAllowedTags,
+)(BaseFilterByGroup);
 
 export default props => (
   <Page {...props}>

@@ -22,7 +22,6 @@ import { asAccordionTitle } from './components/AccordionTitle';
 import { asAccordionBody } from './components/AccordionBody';
 import asAccordionWrapper from './components/AccordionWrapper';
 import asTestableAccordion from './components/asTestableAccordion';
-import { withAccordionSublist } from './components/asAccordionSublist';
 import {
   withDisableExpandOnClick,
   asAccordionDefaultExpanded,
@@ -46,7 +45,6 @@ export {
   asAccordionBody,
   asAccordionWrapper,
   asTestableAccordion,
-  withAccordionSublist,
   withDisableExpandOnClick,
   asAccordionDefaultExpanded,
   asAccordionBorder,

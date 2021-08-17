@@ -59,6 +59,7 @@ const asFilterByGroupDefaultStyle = withDesign({
     TagList: withTagListStyles,
     CategoryList: withCategoryList,
   }),
+  RefineButton: addClasses('block mb-2 px-4 py-1 border border-black text-center mx-auto'),
 });
 
 export default asFilterByGroupResponsive;

@@ -13,9 +13,15 @@
  */
 
 import { ComponentType, HTMLProps } from 'react';
-import { TagType, WithNodeProps } from '@bodiless/core';
+import { TagType as BaseTagType, WithNodeProps } from '@bodiless/core';
 import { StylableProps, DesignableComponentsProps, DesignableProps } from '@bodiless/fclasses';
 import { ListProps } from '@bodiless/components';
+
+export type TagType = Omit<BaseTagType, 'id'> & {
+  id: string,
+  isEqual: (tag: TagType) => boolean,
+  categoryId: string,
+};
 
 export type FilterByGroupComponents = {
   Wrapper: ComponentType<any>,
@@ -24,7 +30,9 @@ export type FilterByGroupComponents = {
   FilterTitle: ComponentType<any>,
   ContentWrapper: ComponentType<any>,
   ResetButton: ComponentType<any>,
+  FilterBody: ComponentType<any>,
   Filter: ComponentType<any>,
+  RefineButton: ComponentType<any>,
 };
 
 export type FilterComponents = {
@@ -56,6 +64,7 @@ export type NodeTagType = {
 
 export type FBGContextOptions = {
   suggestions?: TagType[],
+  multipleAllowedTags?: boolean,
 };
 
 export type SuggestionsRefType = {
@@ -70,8 +79,10 @@ export type RegisterSuggestionsProps = {
 export type FBGContextType = {
   getSuggestions: () => TagType[],
   useRegisterSuggestions: () => (tags: TagType[]) => void,
-  setSelectedTag: (tag?: TagType) => void,
-  setSelectedNode: (nodeId?: string) => void,
-  selectedTag?: TagType,
-  selectedNode?: string,
+  selectTag: (tag: TagType) => void,
+  getSelectedTags: () => TagType[],
+  unSelectTag: (tag: TagType) => void,
+  isTagSelected: (tag: TagType) => boolean,
+  clearSelectedTags: () => void,
+  multipleAllowedTags: boolean,
 };

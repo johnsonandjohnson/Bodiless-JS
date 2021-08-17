@@ -14,16 +14,17 @@
 import React, { useState } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import { TagType } from '@bodiless/core';
 import { H2 } from '@bodiless/fclasses';
+import { Tag } from '@bodiless/filtering';
+import type { TagType } from '@bodiless/filtering';
 import Layout from '../../../components/Layout';
 import TaggableFilterableItem, { TagButton } from '../../../components/Filter';
 
 const getSuggestions = () => [
-  { id: 'fooId', name: 'foo' },
-  { id: 'barId', name: 'bar' },
-  { id: 'batId', name: 'bat' },
-  { id: 'bazId', name: 'baz' },
+  new Tag('fooId', 'foo'),
+  new Tag('barId', 'bar'),
+  new Tag('batId', 'bat'),
+  new Tag('bazId', 'baz'),
 ];
 const TaggableFilterSelector = () => {
   const [tags, setTags] = useState<TagType[]>([]);

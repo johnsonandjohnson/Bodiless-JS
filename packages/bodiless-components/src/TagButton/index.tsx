@@ -13,6 +13,7 @@
  */
 
 import withTagButton from './withTagButton';
+import type { UseTagButtonOverrides } from './withTagButton';
 import useTagsAccessors from './TagModel';
 import { TagButtonProps, TagsNodeType } from './types';
 
@@ -22,3 +23,4 @@ export {
   withTagButton,
   useTagsAccessors,
 };
+export type { UseTagButtonOverrides };

@@ -14,6 +14,7 @@
 
 import React, { ComponentType } from 'react';
 import { graphql } from 'gatsby';
+import Helmet from 'react-helmet';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
   withDesign, asToken, addClasses, H1 as H1$, H2 as H2$, Ul, Div,
@@ -101,9 +102,24 @@ const Description = addClasses('text-sm mb-2 italic')(Div);
 const DataPreviewContainer = addClasses('overflow-scroll')(Div);
 const DescList = addClasses('list-disc ml-5')(Ul);
 
+const RTLToggle = () => {
+  const [isRtl, setRtl] = React.useState(false);
+  return (
+    <>
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+      <label className="py-4 block">
+        <input className="mx-2" type="checkbox" checked={isRtl} onClick={() => setRtl(v => !v)} />
+        Is page RTL
+      </label>
+      <Helmet htmlAttributes={{ dir: isRtl ? 'rtl' : 'ltr' }} />
+    </>
+  );
+};
+
 export default (props: any) => (
   <Page {...props}>
     <Layout>
+      <RTLToggle />
       <H1>Bodiless Menu</H1>
       <Description>
         This page showcases Bodiless Menu. Menu is shown as a top nav and also

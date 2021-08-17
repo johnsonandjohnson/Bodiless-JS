@@ -18,15 +18,6 @@ export {
   asEditableProduct,
 } from './components/Products';
 
-export {
-  FilterByGroupClean,
-  asTestableFilterByGroup,
-  asFilterableByGroup,
-  withFBGSuggestions,
-  useFilterByGroupContext,
-  withTagProps,
-} from './components/FilterByGroup';
-
 export { default as Embed } from './components/Embed';
 export {
   asResponsive21By9Embed,

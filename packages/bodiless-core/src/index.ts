@@ -19,7 +19,7 @@ import asStatic from './asStatic';
 import asReadOnly from './asReadOnly';
 import {
   useEditContext, useUUID, useContextActivator, useExtendHandler,
-  useGetter, useLocalStorage,
+  useGetter, useLocalStorage, useClickOutside,
 } from './hooks';
 import withNode, { withNodeKey } from './withNode';
 import withSidecarNodes, { startSidecarNodes, endSidecarNodes } from './withSidecarNodes';
@@ -42,6 +42,7 @@ import {
   withExtendHandler,
   withOnlyProps,
   withResizeDetector,
+  withClickOutside,
 } from './hoc';
 import { ifToggledOff, ifToggledOn, withFlowToggle } from './withFlowToggle';
 import { ifEditable, ifReadOnly, useEditToggle } from './withEditToggle';
@@ -120,6 +121,7 @@ export {
   ifReadOnly,
   withOnlyProps,
   withResizeDetector,
+  withClickOutside,
   ActivateOnEffectProvider,
   withActivateOnEffect,
   useActivateOnEffect,
@@ -135,6 +137,7 @@ export {
   useNotifications,
   useNotify,
   useLocalStorage,
+  useClickOutside,
   withExtendHandler,
   useExtendHandler,
   NotificationProvider,

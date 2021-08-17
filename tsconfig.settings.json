@@ -39,6 +39,8 @@
       "@bodiless/core/*": ["bodiless-core/src/*"],
       "@bodiless/core-ui": ["bodiless-core-ui/src"],
       "@bodiless/core-ui/*": ["bodiless-core-ui/src/*"],
+      "@bodiless/filtering": ["bodiless-filtering/src"],
+      "@bodiless/filtering/*": ["bodiless-filtering/src/*"],
       "@bodiless/layouts": ["bodiless-layouts/src"],
       "@bodiless/layouts/*": ["bodiless-layouts/src/*"],
       "@bodiless/layouts-ui": ["bodiless-layouts-ui/src"],

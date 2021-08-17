@@ -13,9 +13,10 @@
  */
 
 import React, {
-  FC, useEffect, useContext, useState, ComponentType as CT,
+  FC, useEffect, useContext, useState,
 } from 'react';
 
+import { Enhancer } from '@bodiless/fclasses';
 import getBVScriptUrl from '../getBVScriptUrl';
 
 type BVConfig = {
@@ -40,12 +41,12 @@ const defaultValue = {
 
 const BVLoaderContext = React.createContext<BVLoaderData>(defaultValue);
 
-export const BVLoaderProvider: FC<Props> = ({ children, scriptUrl }) => {
+export const BVLoaderProvider: FC<Props> = ({ children, scriptUrl, bvConfig }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     const scriptId = 'bvloader';
     if (!document.getElementById(scriptId)) {
-      const scriptUrl$ = scriptUrl || getBVScriptUrl();
+      const scriptUrl$ = scriptUrl || getBVScriptUrl(bvConfig);
       const script = document.createElement('script');
       script.id = scriptId;
       script.type = 'text/javascript';
@@ -73,8 +74,11 @@ export const BVLoaderProvider: FC<Props> = ({ children, scriptUrl }) => {
 
 export const useBVLoader = () => useContext(BVLoaderContext);
 
-export const withBVLoader = <P extends object>(Component: CT<P>) => (props: P) => (
-  <BVLoaderProvider>
-    <Component {...props} />
-  </BVLoaderProvider>
-);
+export const withBVLoader: Enhancer<Props> = Component => props => {
+  const { scriptUrl, bvConfig, ...rest } = props;
+  return (
+    <BVLoaderProvider scriptUrl={scriptUrl} bvConfig={bvConfig}>
+      <Component {...rest as any} />
+    </BVLoaderProvider>
+  );
+};

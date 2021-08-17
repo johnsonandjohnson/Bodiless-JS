@@ -16,14 +16,8 @@ import Editable, { withPlaceholder, asEditable } from './Editable';
 import type { UseEditableOverrides } from './Editable';
 import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
-import List from './List_DEPRECATED';
 import asTaggableItem from './Taggable/asTaggableItem';
 import asBodilessAnchor from './Anchor/asBodilessAnchor';
-import withListTitle from './List_DEPRECATED/withListTitle';
-import asEditableList from './List_DEPRECATED/asEditableList';
-import asBasicSublist from './List_DEPRECATED/asBasicSublist';
-import withSublist, { withBasicSublist } from './List_DEPRECATED/withSublist';
-import withDeleteSublistOnUnwrap from './List_DEPRECATED/withDeleteSublistOnUnwrap';
 import {
   withMeta, withMetaStatic, withMetaHtml, withTitle,
 } from './Meta/Meta';
@@ -34,7 +28,7 @@ import withDataLayerItem, { withDefaultDataLayer, withDataLayerScript } from './
 import { withToggle, withToggleTo, withToggleButton } from './Toggle';
 import withEditPlaceholder from './Placeholder';
 import { TagButtonProps, withTagButton, useTagsAccessors } from './TagButton';
-import withFilterByTags from './withFilterByTags';
+import type { TagsNodeType } from './TagButton';
 import asBodilessIframe, {
   asBaseBodilessIframe,
   withoutPointerEvents,
@@ -80,13 +74,6 @@ export {
   Editable,
   NodeViewer,
   withLinkToggle,
-  List,
-  asEditableList,
-  asBasicSublist,
-  withBasicSublist,
-  withSublist,
-  withDeleteSublistOnUnwrap,
-  withListTitle,
   withToggle,
   withToggleTo,
   withToggleButton,
@@ -101,7 +88,6 @@ export {
   withTagButton,
   TagButtonProps,
   asTaggableItem,
-  withFilterByTags,
   useTagsAccessors,
   asBaseBodilessIframe,
   asBodilessIframe,
@@ -152,4 +138,5 @@ export type {
 
 export type {
   UseEditableOverrides,
+  TagsNodeType,
 };
