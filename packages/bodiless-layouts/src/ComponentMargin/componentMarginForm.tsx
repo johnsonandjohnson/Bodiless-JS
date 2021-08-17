@@ -23,19 +23,27 @@ import uiContext, { defaultUI } from './uiContext';
 export const ComponentMargin: React.FC<ComponentMarginProps> = props => {
   const {
     ui,
+    onChange,
+    marginValue,
+    hasMarginClasses,
   } = props;
-  const finalUI:FinalUI = { ...defaultUI, ...useMenuOptionUI(), ...ui };
+
+  const finalUI: FinalUI = { ...defaultUI, ...useMenuOptionUI(), ...ui };
 
   return (
     <uiContext.Provider value={finalUI}>
       <finalUI.MasterWrapper className="flex flex-col">
-        <finalUI.MarginSideCheckboxesWrapper>
-          <finalUI.MarginSideCheckboxLabel htmlFor="Bottom">
+        <finalUI.MarginSideCheckboxesWrapper className="bl-my-grid-1">
+          <finalUI.MarginSideCheckboxLabel htmlFor="Bottom" className="text-base">
             <finalUI.MarginSideCheckbox
               key="enable-mb"
               type="checkbox"
               id="Bottom"
               name="Bottom"
+              className="mr-2"
+              onChange={(e) => onChange(e, 'checkbox')}
+              checked={hasMarginClasses}
+              value={hasMarginClasses ? 'on' : 'off'}
             />
             Enable margin bottom
           </finalUI.MarginSideCheckboxLabel>
@@ -43,8 +51,11 @@ export const ComponentMargin: React.FC<ComponentMarginProps> = props => {
         <finalUI.MarginValueInput
           type="number"
           id="margin-value"
-          placeholder="value..."
-          className="w-36"
+          placeholder="Value..."
+          className="w-52 bl-mb-grid-1 p-1 text-base text-black "
+          onChange={(e) => onChange(e, 'textfield')}
+          value={marginValue}
+          disabled={!hasMarginClasses}
         />
       </finalUI.MasterWrapper>
     </uiContext.Provider>
@@ -55,13 +66,16 @@ export const ComponentMargin: React.FC<ComponentMarginProps> = props => {
  * Returns a margin settings component wrapped in a context menu form.
  *
  * @param props Props passed to the edit flow container.
- * @param onSelect The action to perform when margin settings are changed.
+ * @param hasMarginClasses The callback to check whether the item has margin classes or not.
+ * @param getMargin The callback to get the margin updated value.
+ * @param onChange The action to perform when margin settings are changed.
  */
 export const componentMarginForm = (
   props: EditFlowContainerProps,
+  hasMarginClasses: () => boolean,
+  getMargin: () => string,
   onChange: ComponentMarginProps['onChange'],
 ) => contextMenuForm({
-  initialValues: { selection: '' },
   hasSubmit: false,
 })(
   ({ ui, closeForm }) => (
@@ -69,7 +83,9 @@ export const componentMarginForm = (
       {...props}
       ui={{ ...ui as ComponentMarginUI, ...props.ui as ComponentMarginUI }}
       closeForm={closeForm}
-      onChange={(...args) => { onChange(...args); closeForm(null); }}
+      onChange={(...args) => { onChange(...args); }}
+      marginValue={getMargin()}
+      hasMarginClasses={hasMarginClasses()}
     />
   ),
 );

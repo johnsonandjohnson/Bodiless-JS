@@ -22,7 +22,7 @@ import type { FlowContainerDataHandlers, FlowContainerItemHandlers } from './mod
 import { useFlowContainerDataHandlers, useItemHandlers } from './model';
 import { ComponentSelectorProps } from '../ComponentSelector/types';
 import componentSelectorForm from '../ComponentSelector/componentSelectorForm';
-import { componentMarginForm } from '../ComponentMargin';
+import { ComponentMarginProps, componentMarginForm } from '../ComponentMargin';
 import { FALLBACK_SNAP_CLASSNAME } from './SortableChild';
 import { defaultSnapData } from './utils/appendTailwindWidthClass';
 import { FC_ITEM_CONTEXT_TYPE } from '../SlateSortableResizable';
@@ -216,47 +216,99 @@ const useMarginButton = (
   const { components } = withNoDesign(props);
   const { updateFlowContainerItem } = handlers;
 
-  const getMarginPrefixes = () => ['mb-'];
+  // TODO: extend functionality to set other margin sides values.
+  const marginPrefix = 'mb-';
 
-  const getFilteredClasses = (classes: string, filters: string[]): string => {
-    if (classes === '') return classes;
+  // Keeps a copy from original item so we can exchange values modifications with the UI.
+  let itemCopy = item;
 
-    let itemClasses = classes.split(' ');
-    Object.values(filters).forEach(filter => {
-      itemClasses = itemClasses.filter(itemClass => itemClass.indexOf(filter) === -1);
+  // Provides initial margin value. Sets a default in case item has none.
+  const getInitialMargin = (prefix: string, classes: string): string => {
+    const itemClasses = classes.split(' ');
+
+    let marginValue = '10';
+
+    Object.values(itemClasses).forEach(itemClass => {
+      if (itemClass.indexOf(prefix) !== -1) marginValue = itemClass.replace(prefix, '');
     });
 
-    return itemClasses.join(' ');
+    return marginValue;
   };
 
-  const isActive = (): boolean => {
-    const marginPrefixes = getMarginPrefixes();
-    const itemClasses = item.wrapperProps.className ? item.wrapperProps.className : '';
+  // Returns all item classes.
+  const getItemClasses = (): string => (
+    itemCopy.wrapperProps.className ? itemCopy.wrapperProps.className : ''
+  );
+
+  // Margin initial value.
+  // It is updated as the editor changes the component margin value.
+  let margin = getInitialMargin(marginPrefix, getItemClasses());
+
+  // Callback to get latest updated margin value.
+  const getMargin = (): string => margin;
+
+  // Callback to check if item has margin classes.
+  const hasMarginClasses = (): boolean => {
+    const itemClasses = getItemClasses();
     let hasMargin = false;
 
-    Object.values(marginPrefixes).forEach(marginPrefix => {
-      if (itemClasses.indexOf(marginPrefix) !== -1) hasMargin = true;
-    });
+    if (itemClasses.indexOf(marginPrefix) !== -1) hasMargin = true;
 
     return hasMargin;
   };
 
-  const toggleMargin = () => {
-    const itemClasses = item.wrapperProps.className
-      ? item.wrapperProps.className : '';
+  // Filters item classes.
+  const getFilteredClasses = (classes: string, filter: string): string => {
+    if (classes === '') return classes;
 
+    let itemClasses = classes.split(' ');
+    itemClasses = itemClasses.filter(itemClass => itemClass.indexOf(filter) === -1);
+
+    return itemClasses.join(' ');
+  };
+
+  const toggleMargin = (hasMargin: boolean, itemClasses: string, classMargin: string) => {
+    // Creates new item with updated margins or without them.
     const newItem = {
-      ...item,
+      ...itemCopy,
       wrapperProps: {
-        className: isActive()
-          ? getFilteredClasses(itemClasses, getMarginPrefixes())
-          : `${itemClasses} mb-10`,
+        className: !hasMargin ? `${itemClasses} ${classMargin}` : itemClasses,
       },
     };
+
+    // Updates component item data.
     updateFlowContainerItem(newItem);
+    // Refreshes copied item to let UI know about the component updates.
+    itemCopy = newItem;
+  };
+
+  const handleChange: ComponentMarginProps['onChange'] = (e: any, fieldType: string) => {
+    // Form field values.
+    const inputValue = e.target.value;
+
+    // Flag to indicate if margin classes are assigned to the component item.
+    // If editor user disabled margin option, force false to remove margin from component.
+    const hasMargin = inputValue === 'on' && hasMarginClasses();
+
+    // Gets item without any margin classes.
+    const itemClasses = getFilteredClasses(
+      getItemClasses(),
+      marginPrefix,
+    );
+
+    // Updates margin as the editor changes the value from UI.
+    if (fieldType === 'textfield') margin = inputValue;
+
+    // Formats margin bottom class, handling both positive and negative values.
+    const classMarginBottom = margin.indexOf('-') === -1
+      ? `${marginPrefix}${margin}` : `-${marginPrefix}${margin.replace('-', '')}`;
+
+    // Updates margin with/without margin.
+    toggleMargin(hasMargin, itemClasses, classMarginBottom);
   };
 
   return {
+    // Passes original item uuid to prevent uuid modifications on copied object.
     name: useItemButtonName('margin', item.uuid),
     label: 'Margin',
     icon: 'document_scanner',
@@ -265,7 +317,7 @@ const useMarginButton = (
     local: true,
     activateContext: false,
     isHidden: useCallback(() => (!context.isEdit || Object.keys(components).length <= 1), []),
-    handler: () => componentMarginForm(props, toggleMargin),
+    handler: () => componentMarginForm(props, hasMarginClasses, getMargin, handleChange),
   };
 };
 

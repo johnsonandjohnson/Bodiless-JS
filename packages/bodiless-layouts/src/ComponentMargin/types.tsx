@@ -14,46 +14,33 @@
 
 import type { ComponentType, HTMLProps } from 'react';
 
+/**
+ * Props passed to the list of items within the component margin.
+ */
+export type ItemListProps = {
+  /**
+   * Callback to handle changes on existing fields.
+   */
+  onChange: (e: any, fieldType: string) => void,
+};
+
 export type ComponentMarginProps = ItemListProps & {
   /**
-   * Calback to close the form.
+   * Callback to close the form.
    */
   closeForm?: (e?: any) => void;
   /**
    * Styled components to use in the component selector UI.
    */
   ui?: ComponentMarginUI;
-};
-
-/**
- * Component metadata used to display information about margin settings.
- */
-export type Meta = {
   /**
-   * default static prop for react component to distingush it in the render tree
+   * Margin value assigned to the component.
    */
-  displayName: string;
+  marginValue?: string,
   /**
-   * Title to show in the item selector menu
+   * Flag o let UI know if item has margin classes.
    */
-  title: string;
-  /**
-   * Description to display in the item selector
-   */
-  description: string;
-};
-
-export type ComponentWithMeta<P = any> = ComponentType<P> & Meta;
-export type ComponentWithPartialMeta<P = any> = ComponentType<P> & Partial<Meta>;
-
-/**
- * Props passed to the list of items within the component margin.
- */
-export type ItemListProps = {
-  /**
-   * Callback when one or more settings are changed.
-   */
-  onChange: (names: string[]) => void,
+  hasMarginClasses?: boolean,
 };
 
 export type FinalUI = {
