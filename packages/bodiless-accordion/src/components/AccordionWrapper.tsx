@@ -13,19 +13,29 @@
  */
 
 import React from 'react';
+import nextId from 'react-id-generator';
 import { HOC } from '@bodiless/fclasses';
 import { AccordionProvider } from './AccordionContext';
 
 const asAccordionWrapper: HOC = Component => {
   const AsAccordionWrapper = (
     {
-      expanded, focus, meta, ...rest
+      expanded, focus, meta, id, ...rest
     }: any,
-  ) => (
-    <AccordionProvider expanded={expanded} focus={focus} meta={meta}>
-      <Component {...rest} />
-    </AccordionProvider>
-  );
+  ) => {
+    const accordionId = id ?? nextId('accordion-');
+
+    const accordionMeta = {
+      accordionId,
+      accordionTitleId: `accordion__title-${accordionId}`,
+      accordionContentId: `accordion__content-${accordionId}`,
+    };
+    return (
+      <AccordionProvider expanded={expanded} focus={focus} meta={accordionMeta}>
+        <Component {...rest} />
+      </AccordionProvider>
+    );
+  };
   return AsAccordionWrapper;
 };
 
