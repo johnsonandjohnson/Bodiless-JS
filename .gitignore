@@ -54,3 +54,5 @@ packages/bodiless-card/src/index.ts
 packages/bodiless-card/tailwind.config.js
 packages/bodiless-card/tsconfig.json
 .lando.yml
+lando.yml
+examples/test-site/package.json
