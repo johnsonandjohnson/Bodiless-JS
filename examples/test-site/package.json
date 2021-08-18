@@ -81,7 +81,7 @@
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "rimraf ./public/* ./.cache",
     "dev-backend": "node ./node_modules/@bodiless/backend/src/server.js",
-    "gatsby develop -p 8005 --host 0.0.0.0",
+    "gatsby develop -p 8005",
     "serve": "gatsby serve",
     "prebuild:watch": "run-s build:env-vars build:doc",
     "start": "npm run build:watch",
