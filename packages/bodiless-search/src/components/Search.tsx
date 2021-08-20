@@ -143,6 +143,11 @@ const SearchResultBase: FC<SearchResultProps> = ({
   const showResultCount = resultCountMessage.replace(
     '%count%', searchResultContext.results.length.toString(),
   );
+
+  if (!searchResultContext.results.length && searchResultContext.searchTerm === '') {
+    return null;
+  }
+
   if (!searchResultContext.results.length) {
     return (
       <SearchResultWrapper>

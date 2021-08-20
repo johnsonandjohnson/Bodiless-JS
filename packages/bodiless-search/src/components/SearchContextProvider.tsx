@@ -47,10 +47,10 @@ export const SearchResultProvider: FC = ({ children }) => {
   const [results, setResult] = useState<TSearchResults>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
 
-  const search = (term: string) => {
+  const search = useCallback((term: string) => {
     const searchResult = searchClient.search(term);
     setResult(searchResult);
-  };
+  }, [searchTerm]);
 
   const didMountRef = useRef(false);
   const searchTermRef = useRef('');
