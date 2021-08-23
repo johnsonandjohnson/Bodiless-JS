@@ -61,13 +61,17 @@ export const SearchResultProvider: FC = ({ children }) => {
         parseFragmentIdentifier: true,
       }).fragmentIdentifier || '';
       if (typeof q === 'string') {
-        searchClient.loadIndex().then(() => search(q));
-        setSearchTerm(q);
+        searchClient.loadIndex().then(() => {
+          search(q);
+          setSearchTerm(q);
+        });
       }
     } else if (searchTermRef.current !== searchTerm) {
-      searchClient.loadIndex().then(() => search(searchTerm));
+      searchClient.loadIndex().then(() => {
+        search(searchTerm);
+        searchTermRef.current = searchTerm;
+      });
       // window.location.href = getSearchPagePath(searchTerm);
-      searchTermRef.current = searchTerm;
     }
   });
 
