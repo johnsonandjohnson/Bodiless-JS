@@ -641,6 +641,7 @@ module.exports = mergeWithBodilessConfigs({
 
   variants: {
     inset: ['responsive', 'direction'],
+    textAlign: ['responsive', 'direction'],
     opacity: ['disabled'],
     cursor: ['disabled'],
   },
