@@ -5,8 +5,9 @@ add, delete, or move rows and columns.
 
 ## Content Editor Details
 
-Bodiless-JS allows you to insert two types of tables. One type has headers in the top
-row, and other type has headers in a side column.
+Bodiless-JS allows you to insert two default styles of table. One type has headers in the top
+row, and other type has headers in a side column. Designers can create other styles
+if needed.
 
 ### Place a Table
 
@@ -51,8 +52,8 @@ Row. The selected column or row will vanish.
 
 ### Footer
 
-> I don't think this feature is fully implemented, as clicking the button to add a
-> footer only adds a normal row.
+Adding a Footer row creates a normal row, but at the bottom of the table.
+
 
 ---
 
