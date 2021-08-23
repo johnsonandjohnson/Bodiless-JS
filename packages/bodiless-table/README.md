@@ -52,7 +52,7 @@ Row. The selected column or row will vanish.
 
 ### Footer
 
-Adding a Footer row creates a normal row, but at the bottom of the table.
+Adding a Footer row creates a row intended for footer content using the `<tfoot>` tag.
 
 
 ---
