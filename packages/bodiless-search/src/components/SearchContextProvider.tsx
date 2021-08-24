@@ -13,7 +13,7 @@
  */
 
 import React, {
-  useContext, useState, FC, useRef, useEffect, useCallback,
+  useContext, useState, FC, useRef, useEffect, useCallback, useMemo,
 } from 'react';
 import querystring from 'query-string';
 import { Token } from '@bodiless/fclasses';
@@ -62,9 +62,12 @@ export const SearchResultProvider: FC = ({ children }) => {
       }).fragmentIdentifier || '';
       if (typeof q === 'string') {
         searchClient.loadIndex().then(() => {
-          search(q);
           setSearchTerm(q);
         });
+      }
+
+      if (q === '') {
+        search(q);
       }
     } else if (searchTermRef.current !== searchTerm) {
       searchClient.loadIndex().then(() => {
@@ -85,11 +88,11 @@ export const SearchResultProvider: FC = ({ children }) => {
     suggest,
   };
 
-  return (
+  return useMemo(() => (
     <searchResultContext.Provider value={contextValue}>
       {children}
     </searchResultContext.Provider>
-  );
+  ), [results]);
 };
 
 export const withSearchResult: Token = Component => {

@@ -20,6 +20,7 @@ import React, {
   useCallback,
   useEffect,
   useState,
+  useMemo,
 } from 'react';
 import {
   A,
@@ -137,18 +138,19 @@ const SearchResultBase: FC<SearchResultProps> = ({
   resultEmptyMessage = defaultResultEmptyMessage,
 }) => {
   const searchResultContext = useSearchResultContext();
+  const { searchTerm, results } = searchResultContext;
   const {
     SearchResultWrapper, SearchResultList, SearchResultListItem, SearchResultSummary, SearchHelmet,
   } = components;
   const showResultCount = resultCountMessage.replace(
-    '%count%', searchResultContext.results.length.toString(),
+    '%count%', results.length.toString(),
   );
 
-  if (!searchResultContext.results.length && searchResultContext.searchTerm === '') {
+  if (!results.length && searchTerm === '') {
     return null;
   }
 
-  if (!searchResultContext.results.length) {
+  if (!results.length) {
     return (
       <SearchResultWrapper>
         <SearchHelmet />
@@ -157,19 +159,19 @@ const SearchResultBase: FC<SearchResultProps> = ({
       </SearchResultWrapper>
     );
   }
-  return (
+  return useMemo(() => (
     <SearchResultWrapper>
       <SearchHelmet />
       <SearchResultSummary>{showResultCount}</SearchResultSummary>
       <SearchResultList>
         {
-          searchResultContext.results.map((item: TSearchResult) => (
+          results.map((item: TSearchResult) => (
             <SearchResultListItem key={item.id} value={item} />
           ))
         }
       </SearchResultList>
     </SearchResultWrapper>
-  );
+  ), [searchTerm, results]);
 };
 
 const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
