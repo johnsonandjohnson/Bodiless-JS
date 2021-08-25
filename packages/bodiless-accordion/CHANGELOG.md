@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.9](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.8...v0.2.9) (2021-08-20)
+
+
+### Bug Fixes
+
+* **accordion:** 'aria-labelledby' refers to a missing element, or is empty ([#1047](https://github.com/johnsonandjohnson/bodiless-js/issues/1047)) ([a898b46](https://github.com/johnsonandjohnson/bodiless-js/commit/a898b46dffbdbd061cc99a972e75b974b233c230))
+
+
+
+
+
 ## [0.2.8](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.7...v0.2.8) (2021-07-28)
 
 **Note:** Version bump only for package @bodiless/accordion
