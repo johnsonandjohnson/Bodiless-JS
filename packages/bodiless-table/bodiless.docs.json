@@ -1,5 +1,15 @@
 {
   "Components": {
-    "Table.md": "./README.md"
+    "Table.md": "./doc/table.md",
+   "assets": {
+    "Table_1.png": "./doc/assets/Table_1.png", 
+    "Table_2.png": "./doc/assets/Table_2.png",
+    "Table_3.png": "./doc/assets/Table_3.png",
+    "Table_4.png": "./doc/assets/Table_4.png",
+    "Table_5.png": "./doc/assets/Table_5.png",
+    "Table_6.png": "./doc/assets/Table_6.png",
+    "Table_7.png": "./doc/assets/Table_7.png",
+    "Table_8.png": "./doc/assets/Table_8.png"
+  }
   }
 }
