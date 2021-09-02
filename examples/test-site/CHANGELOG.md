@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.9](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.8...v0.2.9) (2021-08-20)
+
+
+### Features
+
+* **navigation:** Menu Supports RTL ([#1037](https://github.com/johnsonandjohnson/bodiless-js/issues/1037)) ([c7afa01](https://github.com/johnsonandjohnson/bodiless-js/commit/c7afa01c1f83431daeb0fc41addaca3837285f44))
+
+
+
+
+
 ## [0.2.8](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.7...v0.2.8) (2021-07-28)
 
 
