@@ -44,7 +44,7 @@
     "sites:launch-test": "npm run sites:clone-local test-site && npm run sites:update test-site && cd sites/test-site && npm install && npm run start",
     "start": "npm run build:watch",
     "test": "jest",
-    "test:ci": "WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-test http://localhost:8005 cy:run",
+    "test:ci": "WAIT_ON_TIMEOUT=600000 NODE_OPTIONS='--max-old-space-size=4096' start-server-and-test sites:launch-test http://localhost:8005 cy:run",
     "test:watch": "jest --watch"
   },
   "husky": {
