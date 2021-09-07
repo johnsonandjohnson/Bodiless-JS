@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType as CT, HTMLProps } from 'react';
-import { GatsbyImage as GatsbyImg } from 'gatsby-plugin-image';
+import GatsbyImg from 'gatsby-image';
 import {
   ifEditable,
   withActivatorWrapper,
@@ -40,7 +40,6 @@ export type GatsbyImageData = ImageData & {
   gatsbyImg?: { fluid: FluidObject | FluidObject[] } | { fixed: FixedObject | FixedObject[] };
 };
 
-// @todo: replace the gatsby image types with new plugin types
 export type GasbyImageProps = HTMLProps<HTMLImageElement>
 & GatsbyImageData
 & GatsbyImageOptionalProps & DesignableComponentsProps<Components>;
@@ -50,7 +49,7 @@ const asDesignableGatsbyImage = (Component: CT<any>) => {
     GatsbyImage: GatsbyImg,
     Image: Component,
   };
-  const AsDesignableGatsbyImage = (props: any) => {
+  const AsDesignableGatsbyImage = (props: GasbyImageProps) => {
     const {
       components, gatsbyImg, preset, ...rest
     } = props;
@@ -59,39 +58,8 @@ const asDesignableGatsbyImage = (Component: CT<any>) => {
       Image,
     } = components;
     if (gatsbyImg !== undefined) {
-      // @todo: convert bodiless GatsbyImageData into ImageDataLike
-      // so getImage could use to return a IGatsbyImageData
-      let fallback;
-      if (gatsbyImg.fluid) {
-        fallback = gatsbyImg.fluid.tracedSVG || gatsbyImg.fluid.base64 || '';
-      } else {
-        fallback = '';
-      }
-      const imageData: any = {
-        layout: 'fullWidth',
-        width: gatsbyImg.fluid ? gatsbyImg.fluid.presentationWidth : 0,
-        height: gatsbyImg.fluid ? gatsbyImg.fluid.presentationHeight : 0,
-        src: gatsbyImg.fluid ? gatsbyImg.fluid.src : '',
-        srcSet: gatsbyImg.fluid ? gatsbyImg.fluid.srcSet : '',
-        // backgroundColor?: string;
-        aspectRatio: gatsbyImg.fluid ? gatsbyImg.fluid.aspectRatio : 1,
-        images: {
-          sources: [{
-            sizes: gatsbyImg.fluid ? gatsbyImg.fluid.sizes : '',
-            type: gatsbyImg.fluid ? gatsbyImg.fluid.srcSetType : '',
-            srcSet: gatsbyImg.fluid ? gatsbyImg.fluid.srcSet : '',
-          }],
-        },
-        placeholder: {
-          // @todo: using placeholder to render the blurup and SVG preview effect.
-          // fallback: gatsbyImg.fluid.base64,
-          fallback,
-        },
-      };
-
-      // const image = getImage(imageData);
       return (
-        <GatsbyImage {...rest} image={imageData} />
+        <GatsbyImage {...rest} {...gatsbyImg} />
       );
     }
     return (

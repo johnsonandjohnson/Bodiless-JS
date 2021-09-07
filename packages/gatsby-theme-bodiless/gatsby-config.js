@@ -60,8 +60,6 @@ const plugins = [
   {
     resolve: 'gatsby-plugin-sharp',
   },
-  'gatsby-transformer-sharp',
-  'gatsby-plugin-image',
   // 'gatsby-plugin-offline',
   // 'gatsby-plugin-remove-serviceworker',
 ];
