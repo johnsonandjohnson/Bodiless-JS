@@ -45,6 +45,7 @@ type SuggestionProps = DesignableComponentsProps<SuggestionComponents> & {
   text: string,
   count: number,
   position: number,
+  searchTerm: string,
 };
 
 const BaseSuggestion = (props: SuggestionProps) => {
@@ -65,10 +66,14 @@ const BaseSuggestion = (props: SuggestionProps) => {
 
 type SuggestionLinkProps = {
   text: string,
+  searchTerm?: string,
+  additionalHandler?: {
+    (source: any): any;
+  },
 };
 const withSuggestionLink:HOC<{}, SuggestionLinkProps> = Component => {
   const WithSuggestionLink = (props: SuggestionLinkProps) => {
-    const { text, ...rest } = props;
+    const { text, searchTerm, ...rest } = props;
     const searchResultContext = useSearchResultContext();
     const searchPath = getSearchPagePath(text);
     return (
@@ -77,6 +82,9 @@ const withSuggestionLink:HOC<{}, SuggestionLinkProps> = Component => {
         href={searchPath}
         onClick={(event: React.MouseEvent) => {
           event.preventDefault();
+          if (props.additionalHandler) {
+            props.additionalHandler({ text, searchTerm });
+          }
           if (
             getSearchPagePath() !== window.location.pathname.replace(/^\//, '').replace(/\/$/, '')
           ) {
@@ -90,7 +98,7 @@ const withSuggestionLink:HOC<{}, SuggestionLinkProps> = Component => {
   return WithSuggestionLink;
 };
 
-const withoutSuggestionProps = withoutProps(['text', 'count', 'position']);
+const withoutSuggestionProps = withoutProps(['text', 'count', 'position', 'searchTerm']);
 
 const CleanSuggestion = flow(
   designable(startSuggestionComponents, 'Suggestion'),
@@ -128,6 +136,7 @@ const CleanSuggestions = (props: SuggestionListProps) => {
     components,
     suggestions,
     displayCount = DEFAULT_DISPLAY_COUNT,
+    ...rest
   } = props;
   const {
     Wrapper,
@@ -141,7 +150,12 @@ const CleanSuggestions = (props: SuggestionListProps) => {
           .slice(0, displayCount)
           .map((item, index) => (
             <ItemWrapper key={item.text}>
-              <Item text={item.text} count={item.count} position={index} />
+              <Item
+                text={item.text}
+                count={item.count}
+                position={index}
+                {...rest}
+              />
             </ItemWrapper>
           ))
       }
