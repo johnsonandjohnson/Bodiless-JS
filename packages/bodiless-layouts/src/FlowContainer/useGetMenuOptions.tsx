@@ -22,7 +22,8 @@ import type { FlowContainerDataHandlers, FlowContainerItemHandlers } from './mod
 import { useFlowContainerDataHandlers, useItemHandlers } from './model';
 import { ComponentSelectorProps } from '../ComponentSelector/types';
 import componentSelectorForm from '../ComponentSelector/componentSelectorForm';
-import { ComponentMarginProps, componentMarginForm } from '../ComponentMargin';
+import { styleTokensValues } from '../ComponentStyle/token';
+import { ComponentStyleProps, componentStyleForm } from '../ComponentStyle';
 import { FALLBACK_SNAP_CLASSNAME } from './SortableChild';
 import { defaultSnapData } from './utils/appendTailwindWidthClass';
 import { FC_ITEM_CONTEXT_TYPE } from '../SlateSortableResizable';
@@ -216,46 +217,13 @@ const useMarginButton = (
   const { components } = withNoDesign(props);
   const { updateFlowContainerItem } = handlers;
 
-  // TODO: extend functionality to set other margin sides values.
-  const marginPrefix = 'mb-';
-
   // Keeps a copy from original item so we can exchange values modifications with the UI.
   let itemCopy = item;
-
-  // Provides initial margin value. Sets a default in case item has none.
-  const getInitialMargin = (prefix: string, classes: string): string => {
-    const itemClasses = classes.split(' ');
-
-    let marginValue = '10';
-
-    Object.values(itemClasses).forEach(itemClass => {
-      if (itemClass.indexOf(prefix) !== -1) marginValue = itemClass.replace(prefix, '');
-    });
-
-    return marginValue;
-  };
 
   // Returns all item classes.
   const getItemClasses = (): string => (
     itemCopy.wrapperProps.className ? itemCopy.wrapperProps.className : ''
   );
-
-  // Margin initial value.
-  // It is updated as the editor changes the component margin value.
-  let margin = getInitialMargin(marginPrefix, getItemClasses());
-
-  // Callback to get latest updated margin value.
-  const getMargin = (): string => margin;
-
-  // Callback to check if item has margin classes.
-  const hasMarginClasses = (): boolean => {
-    const itemClasses = getItemClasses();
-    let hasMargin = false;
-
-    if (itemClasses.indexOf(marginPrefix) !== -1) hasMargin = true;
-
-    return hasMargin;
-  };
 
   // Filters item classes.
   const getFilteredClasses = (classes: string, filter: string): string => {
@@ -267,12 +235,13 @@ const useMarginButton = (
     return itemClasses.join(' ');
   };
 
-  const toggleMargin = (hasMargin: boolean, itemClasses: string, classMargin: string) => {
-    // Creates new item with updated margins or without them.
+  const toggleStyle = (itemClasses: string, styleClass: string) => {
+    // Creates new item with updated style classes or without them.
     const newItem = {
       ...itemCopy,
       wrapperProps: {
-        className: !hasMargin ? `${itemClasses} ${classMargin}` : itemClasses,
+        className: (itemClasses.indexOf(styleClass) === -1)
+          ? `${itemClasses} ${styleClass}` : getFilteredClasses(itemClasses, styleClass),
       },
     };
 
@@ -282,42 +251,38 @@ const useMarginButton = (
     itemCopy = newItem;
   };
 
-  const handleChange: ComponentMarginProps['onChange'] = (e: any, fieldType: string) => {
-    // Form field values.
-    const inputValue = e.target.value;
+  const handleChange: ComponentStyleProps['onChange'] = (e: any) => {
+    // Changed checkbox value.
+    const styleClass = e.target.value;
 
-    // Flag to indicate if margin classes are assigned to the component item.
-    // If editor user disabled margin option, force false to remove margin from component.
-    const hasMargin = inputValue === 'on' && hasMarginClasses();
-
-    // Gets item without any margin classes.
-    const itemClasses = getFilteredClasses(
+    // Updates flow container item with/without style class.
+    toggleStyle(
       getItemClasses(),
-      marginPrefix,
+      styleClass,
     );
+  };
 
-    // Updates margin as the editor changes the value from UI.
-    if (fieldType === 'textfield') margin = inputValue;
+  const isActive = () => {
+    let active = false;
+    Object.values(styleTokensValues.classes).forEach(styleClass => {
+      if (getItemClasses().indexOf(styleClass) !== -1) active = true;
+    });
 
-    // Formats margin bottom class, handling both positive and negative values.
-    const classMarginBottom = margin.indexOf('-') === -1
-      ? `${marginPrefix}${margin}` : `-${marginPrefix}${margin.replace('-', '')}`;
-
-    // Updates margin with/without margin.
-    toggleMargin(hasMargin, itemClasses, classMarginBottom);
+    return active;
   };
 
   return {
     // Passes original item uuid to prevent uuid modifications on copied object.
-    name: useItemButtonName('margin', item.uuid),
-    label: 'Margin',
+    name: useItemButtonName('styles', item.uuid),
+    label: 'Styles',
     icon: 'document_scanner',
-    formTitle: 'Add Component Margin',
+    formTitle: 'Add Component Styles',
     global: false,
     local: true,
     activateContext: false,
     isHidden: useCallback(() => (!context.isEdit || Object.keys(components).length <= 1), []),
-    handler: () => componentMarginForm(props, hasMarginClasses, getMargin, handleChange),
+    handler: () => componentStyleForm(props, getItemClasses, handleChange),
+    isActive,
   };
 };
 

@@ -15,16 +15,16 @@
 import type { ComponentType, HTMLProps } from 'react';
 
 /**
- * Props passed to the list of items within the component margin.
+ * Props passed to the list of items within the component style.
  */
 export type ItemListProps = {
   /**
    * Callback to handle changes on existing fields.
    */
-  onChange: (e: any, fieldType: string) => void,
+  onChange: (e: any) => void,
 };
 
-export type ComponentMarginProps = ItemListProps & {
+export type ComponentStyleProps = ItemListProps & {
   /**
    * Callback to close the form.
    */
@@ -32,15 +32,11 @@ export type ComponentMarginProps = ItemListProps & {
   /**
    * Styled components to use in the component selector UI.
    */
-  ui?: ComponentMarginUI;
+  ui?: ComponentStyleUI;
   /**
-   * Margin value assigned to the component.
+   * Style values assigned to the component.
    */
-  marginValue?: string,
-  /**
-   * Flag o let UI know if item has margin classes.
-   */
-  hasMarginClasses?: boolean,
+  styleValues?: string,
 };
 
 export type FinalUI = {
@@ -51,4 +47,4 @@ export type FinalUI = {
   MarginValueInput: ComponentType<HTMLProps<HTMLInputElement>> | string;
 };
 
-export type ComponentMarginUI = Partial<FinalUI>;
+export type ComponentStyleUI = Partial<FinalUI>;
