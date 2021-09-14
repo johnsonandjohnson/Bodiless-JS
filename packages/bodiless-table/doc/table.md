@@ -1,31 +1,31 @@
 # Table Component
 
-This tool allows you to place a table into a Bodiless site. It also allows you to
+This tool allows you to place a table into a BodilessJS site. It also allows you to
 add, delete, or move rows and columns.
 
 ## Content Editor Details
 
-Bodiless-JS allows you to insert two types of tables. One type has headers in the top
-row, and other type has headers in a side column.
+BodilessJS allows you to insert two variations of tables. One variation has headers in the top
+row, and other has headers in a side column.
 
 ### Place a Table
 
 First, click the Insert Component button and select "Table" on the left side of the
-window. Click on the table to insert it into your Website.
+window. Click on the table preview to insert it into your Website.
 
 ![Place a Table](./assets/Table_1.png)
 
 ### Name the Table
 
 The top row of a table is called the Header. Click the header of the table and type
-the name. You can also delete the header by clicking it and clicking the "Delete"
+the name. You can also delete the header row by clicking it and clicking the "Delete"
 button.
 
 ![Table Name](./assets/Table_2.png)
 
 ### Adding Data to a Table
 
-All new tables in Bodiless start with 3 columns and 3 rows. To add data to a cell,
+All new tables in BodilessJS start with 3 columns and 3 rows. To add data to a cell,
 click on the cell and start typing. Clicking tab will move the cursor one cell to
 the right. You can format text in a cell using the same tools as in the Full Rich
 Text editor.
@@ -39,7 +39,7 @@ Text editor.
 You can add rows to a table by clicking on a row and then clicking the Add button
 under Row on the Table toolbar. The new row will appear under the row where your
 cursor was placed when you clicked Add. You can add columns by clicking the add
-button under Column. The new column will appar to the right of the row where your
+button under Column. The new column will appear to the right of the row where your
 cursor was placed when you clicked Add.
 
 To move a columm to the right, click in a cell and click the "Move" button under "Column." To move a row down, click in a cell and click the "Move" button under "Row." 
@@ -61,7 +61,7 @@ Row. The selected column or row will vanish.
 
 ### Footer
 
-Adding a footer inserts a final row that looks nornmal, but uses the `<ifoot>` tag.
+Adding a footer inserts a final row that looks normal, but uses the `<ifoot>` tag.
 
 
 ---
@@ -95,7 +95,7 @@ const ExampleTableExample = flow(
 
 ### Design Components
 
-The table component follows the Bodiless Design Pattern and is easy to style. Here is an example demonstrating all possible design components:
+The table component follows the BodilessJS Design Pattern and is easy to style. Here is an example demonstrating all possible design components:
 
 ```js
 import { withDesign, addClasses } from '@bodiless/fclasses';
