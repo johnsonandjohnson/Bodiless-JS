@@ -46,15 +46,15 @@ const insertChild = (Child: CT, options: InsertChildOptions): HOC => (
       case 'append':
         return (
           <Component {...restWithoutChildren as any}>
-            <ChildComponent />
             {children}
+            <ChildComponent />
           </Component>
         );
       case 'prepend':
         return (
           <Component {...restWithoutChildren as any}>
-            {children}
             <ChildComponent />
+            {children}
           </Component>
         );
       default:

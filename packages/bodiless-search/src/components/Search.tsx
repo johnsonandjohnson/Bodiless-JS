@@ -20,6 +20,7 @@ import React, {
   useCallback,
   useEffect,
   useState,
+  useMemo,
 } from 'react';
 import {
   A,
@@ -46,7 +47,8 @@ export type SearchComponents = {
   SearchInput: ComponentType<any>;
   SearchButton: ComponentType<any>;
   Suggestions: ComponentType<DesignableProps<SuggestionListComponents> & {
-    suggestions: Suggestion[]
+    suggestions: Suggestion[];
+    searchTerm?: string;
   }>,
 };
 
@@ -55,6 +57,7 @@ type SearchResultComponents = {
   SearchResultList: ComponentType<any>;
   SearchResultListItem: ComponentType<any>;
   SearchResultSummary: ComponentType<StylableProps>;
+  SearchHelmet: ComponentType<StylableProps>;
 };
 
 type SearchResultItemComponents = {
@@ -117,6 +120,7 @@ const searchResultComponents: SearchResultComponents = {
   SearchResultList: Ul,
   SearchResultListItem: SearchResultItemClean,
   SearchResultSummary: P,
+  SearchHelmet: Div,
 };
 
 export type SearchProps = DesignableComponentsProps<SearchComponents> &
@@ -134,32 +138,40 @@ const SearchResultBase: FC<SearchResultProps> = ({
   resultEmptyMessage = defaultResultEmptyMessage,
 }) => {
   const searchResultContext = useSearchResultContext();
+  const { searchTerm, results } = searchResultContext;
   const {
-    SearchResultWrapper, SearchResultList, SearchResultListItem, SearchResultSummary,
+    SearchResultWrapper, SearchResultList, SearchResultListItem, SearchResultSummary, SearchHelmet,
   } = components;
   const showResultCount = resultCountMessage.replace(
-    '%count%', searchResultContext.results.length.toString(),
+    '%count%', results.length.toString(),
   );
-  if (!searchResultContext.results.length) {
+
+  if (!results.length && searchTerm === '') {
+    return null;
+  }
+
+  if (!results.length) {
     return (
       <SearchResultWrapper>
+        <SearchHelmet />
         <SearchResultSummary>{showResultCount}</SearchResultSummary>
         <H3>{resultEmptyMessage}</H3>
       </SearchResultWrapper>
     );
   }
-  return (
+  return useMemo(() => (
     <SearchResultWrapper>
+      <SearchHelmet />
       <SearchResultSummary>{showResultCount}</SearchResultSummary>
       <SearchResultList>
         {
-          searchResultContext.results.map((item: TSearchResult) => (
+          results.map((item: TSearchResult) => (
             <SearchResultListItem key={item.id} value={item} />
           ))
         }
       </SearchResultList>
     </SearchResultWrapper>
-  );
+  ), [searchTerm, results]);
 };
 
 const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
@@ -235,7 +247,7 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
       <SearchButton onClick={onClickHandler} />
       {
         queryString !== '' && suggestions.length > 0
-        && <Suggestions suggestions={suggestions} />
+        && <Suggestions suggestions={suggestions} searchTerm={queryString} />
       }
     </SearchWrapper>
   );
