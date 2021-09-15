@@ -12,24 +12,20 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
-import React, { ComponentType } from 'react';
+import { ComponentType } from 'react';
 import { withChild, withNodeKey } from '@bodiless/core';
-import { addClasses, withoutProps } from '@bodiless/fclasses';
+import {
+  addClasses, withoutProps, asToken, addProps, Token,
+} from '@bodiless/fclasses';
 
-type WithInitialValue = {
-  placeholder: string;
-};
-const withPlaceholder = (placeholder: string) => (
-  <P extends Object> (Component: ComponentType<P & WithInitialValue>) => (props:P) => (
-    <Component placeholder={placeholder} {...props} />
-  )
-);
+const withPlaceholder = (
+  placeholder?: string,
+): Token|undefined => (placeholder === undefined ? undefined : addProps({ placeholder }));
 
 const withEditor = (Editor:ComponentType<any>) => (nodeKey?: string, placeholder?: string) => (
-  flow(
+  asToken(
     addClasses('overflow-hidden'),
-    withChild(flow(
+    withChild(asToken(
       withPlaceholder(placeholder),
       withNodeKey(nodeKey),
       withoutProps(['design']),

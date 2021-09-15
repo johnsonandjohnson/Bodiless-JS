@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`asBreadcrumbsClean allows override default items reducer
+      so that do not render the first item from menu trail 1`] = `"<nav><ol></ol></nav>"`;
+
+exports[`asBreadcrumbsClean allows styling current page item derived from menu 1`] = `"<nav><ol><li><a href=\\"/products/\\"><span>products</span></a></li></ol></nav>"`;
+
+exports[`asBreadcrumbsClean allows to force rendering last breadcrumb item as link 1`] = `"<nav><ol><li><a href=\\"/products/\\"><span>products</span></a></li></ol></nav>"`;
+
+exports[`asBreadcrumbsClean creates breadcrumbs for basic 1-level menu 1`] = `"<nav><ol><li><span>products</span></li></ol></nav>"`;
+
+exports[`asBreadcrumbsClean creates breadcrumbs for basic 2-level menu 1`] = `"<nav><ol><li><a href=\\"/products/\\"><span>products</span></a></li></ol></nav>"`;
+
+exports[`asBreadcrumbsClean does not apply current page styles to the item which is the last derived from the menu but not current page path 1`] = `"<nav><ol><li><a href=\\"/products/\\"><span>products</span></a></li></ol></nav>"`;
+
+exports[`asBreadcrumbsClean preserves breadcrumbs on rerender 1`] = `"<nav><ol><li><a href=\\"/products/\\"><span>products</span></a></li></ol></nav>"`;
+
+exports[`asBreadcrumbsClean renders last menu trail item as link when current page item does not exist in store 1`] = `"<nav><ol><li><a href=\\"/products/\\"><span>products</span></a></li></ol></nav>"`;
+
+exports[`asBreadcrumbsClean when starting trail enabled and
+      when menu trail starts with frontpage
+      then it does not render home link twice by default 1`] = `"<nav><ol><li><span>home</span></li></ol></nav>"`;

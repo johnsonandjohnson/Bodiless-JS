@@ -13,7 +13,6 @@
  */
 
 import { asToken } from '@bodiless/fclasses';
-import type { HOC } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
 import { withImageLibrary } from '@bodiless/components';
 import type { AsBodilessImage } from '@bodiless/components';
@@ -32,8 +31,8 @@ const withGatsbyImageLibrary = (preset: GatsbyImagePresets) => (
     asImageHoc.meta,
     asImageHoc,
     withImageLibrary(asEditableImage)(libraryNodeKey)(undefined, placeholder, useOverrides),
-    withGatsbyImageNode(preset) as HOC,
-    withNodeKey(nodeKey) as HOC,
+    withGatsbyImageNode(preset),
+    withNodeKey(nodeKey),
   );
 };
 

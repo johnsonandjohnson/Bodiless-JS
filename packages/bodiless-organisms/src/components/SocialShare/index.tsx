@@ -66,7 +66,7 @@ const ProvidersClean: FC<SocialShareProvidersProps> = ({
 
   const ProvidersWrapperStyled = flow(
     addClassesIf(() => !expanded)('hidden'),
-    addClassesIf(() => expanded)('flex'),
+    addClassesIf(() => !!expanded)('flex'),
   )(ProvidersWrapper);
 
   return (

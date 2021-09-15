@@ -19,7 +19,6 @@ import {
 } from '@bodiless/core';
 import type { ContentNode } from '@bodiless/core';
 import { asToken } from '@bodiless/fclasses';
-import type { HOC } from '@bodiless/fclasses';
 import { withContentLibrary } from '@bodiless/layouts';
 import { ComponentSelector } from '@bodiless/layouts-ui';
 import path from 'path';
@@ -55,9 +54,9 @@ const withImageLibrary = (
       Selector: ComponentSelector,
       useLibraryNode: useImageLibraryNode,
       useMeta: useImageMeta,
-    }) as HOC,
-    withNode as HOC,
-    withNodeKey(nodeKeys) as HOC,
+    }),
+    withNode,
+    withNodeKey(nodeKeys),
   );
 };
 

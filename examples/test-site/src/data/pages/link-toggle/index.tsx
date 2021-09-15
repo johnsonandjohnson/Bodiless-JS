@@ -15,8 +15,9 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
-  withBodilessLinkToggle, asEditable, asBodilessLink, DefaultNormalHref,
+  withBodilessLinkToggle, asEditable, DefaultNormalHref,
 } from '@bodiless/components';
+import { asBodilessLink } from '@bodiless/components-ui';
 import { A, H2, H1 } from '@bodiless/fclasses';
 import { flowRight } from 'lodash';
 import { withNode, withNodeKey } from '@bodiless/core';
@@ -43,7 +44,7 @@ const Stripslashlink = asBodilessLink(
 )(A);
 
 const doNotNormalizeOverrides = {
-  normalizeHref: (href?: string) => href,
+  normalizeHref: (href?: string) => href || '',
   instructions: 'This href will be saved as is.',
 };
 const DoNotNormalizeLink = asBodilessLink(

@@ -17,10 +17,13 @@
 import React, { ComponentType, useMemo } from 'react';
 import { withDefaultContent } from '@bodiless/core';
 import flow from 'lodash/flow';
+import { Enhancer } from '@bodiless/fclasses';
 import { deserializeHtml } from './htmlDeserializer';
 import type { Deserializer } from './deserializer';
 
-const withFlowContainerDefaultHtml = (deserializers: Deserializer[], html?: string) => {
+const withFlowContainerDefaultHtml = (
+  deserializers: Deserializer[], html?: string,
+): Enhancer<{ html?: string}> => {
   const withFlowContainerDefaultHtml$ = (Component: ComponentType<any>) => (props: any) => {
     const { html: htmlFromProps, ...rest } = props;
     const html$ = htmlFromProps || html;

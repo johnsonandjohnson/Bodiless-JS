@@ -12,19 +12,23 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
-import { FilterByGroupClean, asTestableFilterByGroup, withFBGSuggestions } from '@bodiless/organisms';
-import { addProps } from '@bodiless/fclasses';
+import {
+  FilterByGroupClean,
+  asTestableFilterByGroup,
+  withFBGSuggestions,
+  Tag,
+} from '@bodiless/filtering';
+import { addProps, asToken } from '@bodiless/fclasses';
 import { asFilterByGroupResponsive, asFilterByGroupDefaultStyle } from './token';
 
 const suggestions = [
-  { id: '1', name: 'DefaultTag 1' },
-  { id: '2', name: 'DefaultTag 2' },
-  { id: '3', name: 'DefaultTag 3' },
-  { id: '4', name: 'DefaultTag 4' },
+  new Tag('1', 'DefaultTag 1'),
+  new Tag('2', 'DefaultTag 2'),
+  new Tag('3', 'DefaultTag 3'),
+  new Tag('4', 'DefaultTag 4'),
 ];
 
-const asFilterByGroup = flow(
+const asFilterByGroup = asToken(
   withFBGSuggestions({ suggestions }),
   addProps({ resetButtonText: 'Show All Products' }),
   asFilterByGroupResponsive,

@@ -1,12 +1,25 @@
+/**
+ * Copyright © 2021 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import { createHash } from 'crypto';
 import {
   addClasses, withDesign, HOC,
-  addProps, asToken, startWith, Token, Design,
+  addProps, asToken, startWith, Design,
 } from '@bodiless/fclasses';
 import {
   withDefaultContent, useNode, withContextActivator, withActivatorWrapper,
 } from '@bodiless/core';
-import flow from 'lodash/flow';
 import { ifComponentSelector } from '@bodiless/layouts';
 import withTokensFromProps from '../withTokensFromProps';
 import { withTokenPanelPane } from '../TokenPanelPane';
@@ -27,34 +40,38 @@ const useNodeKeyHash = () => {
 };
 
 /**
- * Creates an HOC which adds a component to a token editor.
+ * Creates an HOC which sets the target component for a token editor.
+ * This is the component to which the tokens in the editor will apply.
  *
  * @param def
  * The definition of the component to be added.
  *
  * @param panelDesign
  * Optional design to apply to the token panel for this component.
+ *
+ * @returns
+ * An HOC which adds the specifie component
  */
 const withTokenEditorComponent = (
   def: TokenEditorComponentDef,
   panelDesign: Design<TokenPanelComponents> = {},
-) => {
+): HOC => {
   const { Component, tokens, name = 'Demo' } = def;
   const design = {
     [name]: asToken(
-      startWith(Component) as HOC,
-      withActivatorWrapper('onClick', 'div') as HOC,
-      withContextActivator('onClick') as HOC,
-      withTokensFromProps as HOC,
+      startWith(Component),
+      withActivatorWrapper('onClick', 'div'),
+      withContextActivator('onClick'),
+      withTokensFromProps,
       withTokenPanelPane(),
-      addProps({ availableTokens: tokens }) as HOC,
-      withTokenPanelButton({ panelDesign }) as HOC,
+      addProps({ availableTokens: tokens }),
+      withTokenPanelButton({ panelDesign }),
     ),
   };
-  return flow(
+  return asToken(
     withDesign({
       Container: withDesign(design),
-    }) as HOC,
+    }),
     withDefaultContent(() => ({
       [DEMO_NODE_KEY]: {
         items: [
@@ -105,7 +122,7 @@ const withTokenEditorFlowContainerItem = (
   const { name = 'Demo' } = def;
   return withDesign({
     [name]: asToken(
-      startWith(TokenEditor) as HOC,
+      startWith(TokenEditor),
       withTokenEditorComponent(def, panelDesign),
       ifComponentSelector(
         withDesign({
@@ -113,7 +130,7 @@ const withTokenEditorFlowContainerItem = (
           // @todo move this to bodiless layouts ui
           Wrapper: addClasses('text-black'),
         }),
-      ) as Token,
+      ),
       {
         categories: {
           Type: ['Token Browser'],

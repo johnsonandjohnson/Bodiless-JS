@@ -19,6 +19,7 @@ import React, {
   MouseEvent,
   HTMLProps,
 } from 'react';
+import { Token } from '@bodiless/fclasses';
 
 type ReturnFocusItem = string | null;
 let RETURN_FOCUS_ITEM: ReturnFocusItem = null;
@@ -50,9 +51,7 @@ const withReturnFocusBackOnEffect = (itemId: string) => (
   );
 };
 
-const withReturnFocusBackOnClick = (itemId: string) => (
-  Component: ComponentType<Props>,
-) => (props: Props) => {
+const withReturnFocusBackOnClick = (itemId: string): Token<Props> => Component => (props: any) => {
   const itemRef = useRef<HTMLButtonElement>();
   useEffect(() => {
     if (RETURN_FOCUS_ITEM === itemId) {

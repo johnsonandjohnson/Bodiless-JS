@@ -19,17 +19,19 @@ import asStatic from './asStatic';
 import asReadOnly from './asReadOnly';
 import {
   useEditContext, useUUID, useContextActivator, useExtendHandler,
-  useGetter, useLocalStorage,
+  useGetter, useLocalStorage, useClickOutside,
 } from './hooks';
 import withNode, { withNodeKey } from './withNode';
 import withSidecarNodes, { startSidecarNodes, endSidecarNodes } from './withSidecarNodes';
 import withEditButton, { createMenuOptionGroup } from './withEditButton';
 import useContextMenuForm, { contextMenuForm, ContextMenuForm } from './contextMenuForm';
+import type { FormBodyProps, FormBodyRenderer } from './contextMenuForm';
 import withCompoundForm, { useRegisterSnippet } from './withCompoundForm';
 import withEditFormSnippet, { useEditFormProps } from './withEditFormSnippet';
 import type { Options as EditFormSnippetOptions } from './withEditFormSnippet';
 import withData from './withData';
 import NodeProvider, { useNode, useNodeDataHandlers } from './NodeProvider';
+import type { NodeDataHandlers } from './NodeProvider';
 import { DefaultContentNode } from './ContentNode';
 import type { ContentNode, Path as ContentNodePath } from './ContentNode';
 import {
@@ -37,10 +39,10 @@ import {
   withNodeDataHandlers,
   withLocalContextMenu,
   withContextActivator,
-  withoutProps,
   withExtendHandler,
   withOnlyProps,
   withResizeDetector,
+  withClickOutside,
 } from './hoc';
 import { ifToggledOff, ifToggledOn, withFlowToggle } from './withFlowToggle';
 import { ifEditable, ifReadOnly, useEditToggle } from './withEditToggle';
@@ -65,7 +67,8 @@ import {
   useNotify,
 } from './NotificationProvider';
 import withNotificationButton from './withNotificationButton';
-import withChild from './withChild';
+import withChild, { withAppendChild, withPrependChild } from './withChild';
+import withParent from './withParent';
 import asBodilessComponent, { withActivatorWrapper, withBodilessData } from './asBodilessComponent';
 import type { Options as BodilessOptions, AsBodiless } from './asBodilessComponent';
 import { useMenuOptionUI } from './components/ContextMenuContext';
@@ -116,14 +119,17 @@ export {
   DefaultContentNode,
   ifEditable,
   ifReadOnly,
-  withoutProps,
   withOnlyProps,
   withResizeDetector,
+  withClickOutside,
   ActivateOnEffectProvider,
   withActivateOnEffect,
   useActivateOnEffect,
   useActivateOnEffectActivator,
   withChild,
+  withParent,
+  withAppendChild,
+  withPrependChild,
   ifToggledOff,
   ifToggledOn,
   withFlowToggle,
@@ -131,6 +137,7 @@ export {
   useNotifications,
   useNotify,
   useLocalStorage,
+  useClickOutside,
   withExtendHandler,
   useExtendHandler,
   NotificationProvider,
@@ -149,6 +156,8 @@ export type {
   WithNodeProps,
   WithNodeKeyProps,
   EditButtonOptions,
+  FormBodyProps,
+  FormBodyRenderer,
   OptionGroupDefinition,
   UseBodilessOverrides,
   EditButtonProps,
@@ -159,6 +168,7 @@ export type {
   FormSnippet,
   MenuOptionsDefinition,
   EditFormSnippetOptions,
+  NodeDataHandlers,
 };
 
 export type Bodiless<P, Q> = (C: ComponentType<P> | string) => ComponentType<Q>;

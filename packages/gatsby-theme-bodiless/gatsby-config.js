@@ -122,6 +122,7 @@ const discoverDefaultContent = (depth = 1) => {
       try {
         fileContent = JSON.parse(fs.readFileSync(file));
       } catch (e) {
+        // eslint-disable-next-line no-console
         console.error(`@bodiless/gatsby-theme-bodiless: error on reading file: ${file}. Error: ${e}.`);
       }
       defaultContentPaths = [

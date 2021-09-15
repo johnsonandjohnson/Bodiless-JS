@@ -60,25 +60,34 @@ Toggle" /></LinkToggle>
 You can use this to place a link (usually an `a` tag) on the page, that uses the
 BodilessJS edit system and allow the href to be editable.
 
-  ``` 
-  js import Link from '@bodiless/components';
+  ```js
+  import { asBodilessLink } from '@bodiless/components';
+  const Link = asBodilessLink('link')('a');
 
-  <Link nodeKey="linkit">This is an editable Nodelink.</Link> 
+  <Link>This is an editable Nodelink.</Link> 
   ```
 
-You can also use the HOC version of this which can then be apply to other
-components. But the underlying component must accept the same props as an `a`
-tag. Simply pass the node key to the asBodilessLink function and then use the
-returned HOC
+You can apply `asBodilessLink` to any component which accepts the same props as an `a`
+tag.
 
-  ```
-  js import { CustomLink } from 'my-library'; import { asBodilessLink } from
-  '@bodiless/components';
+## Customizing link behavior
 
-  const Link = asBodilessLink('linkit')(CustomLink)
+`asBodilessLink`, like any other `asBodiless...` function, accepts a node key, a
+default value and a `useOverrides` hook, and returns an HOC which makes a link
+editable.  You can use the `useOverrides` hook to customize the link editor. In
+particular, you can define a custom function which will be used to normalize
+the href when the link is saved or displayed. By default, `asBodilessLink`
+performs some basic normalization.  Here's an example of how to disable it:
 
-  <Link>This is an editable Nodelink.</Link>
-  ```
+```ts
+const useOverrides = () => ({
+  normalizeHref: (href?: string) => href,
+  instructions: 'This href will be saved as is.',
+});
+const DoNotNormalizeLink = asBodilessLink(
+  'specify-your-node-key-here', undefined, useOverrides,
+)(A);
+```
 
 ### withLinkToggle
 

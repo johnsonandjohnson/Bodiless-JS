@@ -31,7 +31,9 @@ const createItalicDeserializer = () => ({
   map: () => ({ Italic: true }),
 });
 
-const createLinkDeserializer = ({ normalizeHref } = { normalizeHref: identity }) => ({
+const createLinkDeserializer = (
+  { normalizeHref }: { normalizeHref: (h: string) => string} = { normalizeHref: identity },
+) => ({
   ...createDeserializer({
     nodeName: 'A',
     tagName: TagName.Element,
@@ -40,7 +42,7 @@ const createLinkDeserializer = ({ normalizeHref } = { normalizeHref: identity })
     type: 'Link',
     data: {
       slatenode: {
-        href: normalizeHref(element.getAttribute('href')),
+        href: normalizeHref(element.getAttribute('href') || ''),
       },
     },
   }),

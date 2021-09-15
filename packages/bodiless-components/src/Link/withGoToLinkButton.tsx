@@ -18,14 +18,16 @@ import {
   TMenuOption,
 } from '@bodiless/core';
 
-import type { LinkData } from './types';
+import type { LinkData, ExtraLinkOptions } from './types';
 
-const useMenuOptions = () => {
+const useGoToLinkMenuOptions = (useOverrides: () => ExtraLinkOptions) => {
   const { node } = useNode<LinkData>();
   let empty = true;
   if (node.data && node.data.href) {
     empty = node.data.href === '#';
   }
+  const { target } = useOverrides();
+  const isNewTab = target === '_blank';
   const menuOptions: TMenuOption[] = [
     {
       icon: 'open_in_new',
@@ -35,7 +37,11 @@ const useMenuOptions = () => {
       name: 'go',
       isDisabled: empty,
       handler: () => {
-        if (!empty) {
+        if (empty) return;
+        if (isNewTab) {
+          // @ts-ignore
+          window.open(node.data.href);
+        } else {
           // @ts-ignore
           window.location = node.data.href;
         }
@@ -47,6 +53,12 @@ const useMenuOptions = () => {
   return menuOptions;
 };
 
-const withGoToLinkButton = () => withMenuOptions({ useMenuOptions, name: 'go', peer: true });
+const withGoToLinkButton = (
+  useOverrides: () => ExtraLinkOptions,
+) => withMenuOptions({
+  useMenuOptions: () => useGoToLinkMenuOptions(useOverrides),
+  name: 'go',
+  peer: true,
+});
 
 export default withGoToLinkButton;

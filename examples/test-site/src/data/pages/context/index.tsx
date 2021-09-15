@@ -12,15 +12,16 @@
  * limitations under the License.
  */
 
+// @ts-nocheck
+
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { HTMLProps, FC } from 'react';
 import { graphql } from 'gatsby';
 
 import { observer } from 'mobx-react-lite';
-import { flow } from 'lodash';
 import {
   flowIf, hasProp, addClasses, withoutProps, StylableProps,
-  removeClasses,
+  removeClasses, asToken,
   A,
 } from '@bodiless/fclasses';
 import { Div } from '@bodiless/ui';
@@ -78,11 +79,11 @@ type VariantProps = {
 };
 
 const ui = {
-  ContextWrapper: flow(
+  ContextWrapper: asToken(
     withoutProps<VariantProps>(['isActive']),
     addClasses('border border-blue m-2 p-2'),
     flowIf(hasProp('isActive'))(
-      flow(
+      asToken(
         addClasses('border-red'),
         removeClasses('border-blue'),
       ),
@@ -90,7 +91,7 @@ const ui = {
   )(Div),
 };
 
-// const DemoContextWrapperDiv = flow(
+// const DemoContextWrapperDiv = asToken(
 //   removeClasses('border-transparent').addClasses('border-blue m-2 p-2'),
 //   flowIf(hasProp('isActive'))(
 //     removeClasses('border-blue'),

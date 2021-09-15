@@ -13,11 +13,11 @@
  */
 
 import React, {
-  ComponentType as CT, ClipboardEvent, ComponentType, useState, useRef, useCallback,
+  ClipboardEvent, useState, useRef, useCallback, FC,
 } from 'react';
 import ContentEditable from 'react-contenteditable';
 import { observer } from 'mobx-react-lite';
-import { flowRight, pickBy, identity } from 'lodash';
+import { pickBy, identity } from 'lodash';
 import {
   withNode,
   useNode,
@@ -27,6 +27,7 @@ import {
   withNodeKey,
 } from '@bodiless/core';
 import './Editable.css';
+import { HOC, asToken } from '@bodiless/fclasses';
 
 type EditableOverrides = {
   sanitizer?: (text: string) => string,
@@ -90,7 +91,7 @@ const EditableText = observer((props: EditableProps) => {
 });
 
 const Editable = withNode(
-  observer((props: any) => {
+  observer((props: EditableProps) => {
     const { isEdit } = useEditContext();
     return isEdit ? (
       <EditableText {...props} />
@@ -99,12 +100,14 @@ const Editable = withNode(
     );
   }),
 );
-const withPlaceholder = <P extends object> (placeholder?: string) => (Component:CT<P> | string) => {
-  const WithPlaceholder = placeholder
-    ? (props:P) => <Component placeholder={placeholder} {...props} />
-    : (props:P) => <Component {...props} />;
-  return WithPlaceholder;
-};
+const withPlaceholder = <P extends object> (
+  placeholder?: string,
+): HOC<Pick<EditableProps, 'placeholder'>> => Component => {
+    const WithPlaceholder = placeholder
+      ? (props:any) => <Component placeholder={placeholder} {...props} />
+      : (props:any) => <Component {...props} />;
+    return WithPlaceholder;
+  };
 
 /**
  * asEditable takes a nodeKey and a placeholder, and returns an HOC which injects
@@ -121,38 +124,36 @@ const asEditable = (
   nodeKeys?: WithNodeKeyProps,
   placeholder?: string,
   useOverrides$?: UseEditableOverrides,
-) => (
-  <P extends object>(Component: CT<P>|string) => {
-    const useOverrides = useOverrides$ || (() => ({}));
-    const EditableChild = flowRight(
-      withNodeKey(nodeKeys),
-      withPlaceholder(placeholder),
-    )(Editable);
-    const AsEditable = (props: P & EditableProps) => {
-      // @TODO: Improve `withChild` to allow this kind of prop splitting.
-      const {
-        children,
-        nodeKey,
-        nodeCollection,
-        placeholder: placeholderProp,
-        ...rest
-      } = props;
-      const editableProps = pickBy({
-        children,
-        nodeKey,
-        nodeCollection,
-        placeholder: placeholderProp,
-        // useOverrides,
-      });
-      return (
-        <Component {...rest as P}>
-          <EditableChild {...editableProps} useOverrides={useOverrides} />
-        </Component>
-      );
-    };
-    return AsEditable as ComponentType<P & EditableProps>;
-  }
-);
+): HOC<{}, EditableProps> => Component => {
+  // @TODO: Use withChild.
+  const useOverrides = useOverrides$ || (() => ({}));
+  const EditableChild = asToken(
+    withPlaceholder(placeholder),
+    withNodeKey(nodeKeys),
+  )(Editable);
+  const AsEditable: FC<any> = props => {
+    const {
+      children,
+      nodeKey,
+      nodeCollection,
+      placeholder: placeholderProp,
+      ...rest
+    } = props;
+    const editableProps = pickBy({
+      children,
+      nodeKey,
+      nodeCollection,
+      placeholder: placeholderProp,
+      // useOverrides,
+    });
+    return (
+      <Component {...rest}>
+        <EditableChild {...editableProps} useOverrides={useOverrides} />
+      </Component>
+    );
+  };
+  return AsEditable;
+};
 
 export default Editable;
 export {

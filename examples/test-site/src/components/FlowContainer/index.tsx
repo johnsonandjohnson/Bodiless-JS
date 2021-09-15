@@ -12,8 +12,7 @@
  * limitations under the License.
  */
 
-import flow from 'lodash/flow';
-import { withDesign } from '@bodiless/fclasses';
+import { withDesign, asToken } from '@bodiless/fclasses';
 import { withMandatoryCategories, ifNotComponentSelector } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withRichTextVariations from './withRichTextVariations';
@@ -23,12 +22,12 @@ import asDefaultFlowContainer from './asDefaultFlowContainer';
 
 import { asFlowContainerRTL, asFlowContainerWithMargins } from './token';
 
-const FlowContainerDefault = flow(
+const FlowContainerDefault = asToken(
   asDefaultFlowContainer,
   withFlowContainerVariations,
 )(FlowContainer);
 
-const FlowContainerDefaultRTL = flow(
+const FlowContainerDefaultRTL = asToken(
   ifNotComponentSelector(
     withDesign({
       FlowContainer: asFlowContainerRTL,
@@ -37,7 +36,7 @@ const FlowContainerDefaultRTL = flow(
   asFlowContainerRTL,
 )(FlowContainerDefault);
 
-const FlowContainerLimited = flow(
+const FlowContainerLimited = asToken(
   withRichTextVariations,
   withImageVariations,
   asFlowContainerWithMargins,

@@ -15,11 +15,16 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
+import { asEditable } from '@bodiless/components';
+import { H1 } from '@bodiless/fclasses';
 import Layout from '../../components/Layout';
 import { FlowContainerDefault } from '../../components/FlowContainer';
 
+const PrimaryHeader = asEditable('title', 'Page Title')(H1);
+
 export default (props: any) => (
   <Page {...props}>
+    <PrimaryHeader className="text-3xl font-bold" />
     <Layout>
       <FlowContainerDefault nodeKey="homepage" />
     </Layout>

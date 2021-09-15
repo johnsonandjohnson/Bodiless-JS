@@ -13,8 +13,8 @@
  */
 
 import { withDefaultContent, withResetButton } from '@bodiless/core';
+import type { DefaultNodeContent } from '@bodiless/core';
 import { asToken } from '@bodiless/fclasses';
-import type { HOC } from '@bodiless/fclasses';
 import identity from 'lodash/identity';
 import type { AsBodilessImage, Data } from './Image';
 
@@ -23,7 +23,7 @@ import type { AsBodilessImage, Data } from './Image';
  */
 const withDefaultImageContent = (
   asEditableImage: AsBodilessImage,
-) => (nodeContent: Data): AsBodilessImage => (
+) => <D extends {} = Data>(nodeContent: DefaultNodeContent<D>): AsBodilessImage => (
   nodeKey,
   placeholder,
   useOverrides,
@@ -35,7 +35,7 @@ const withDefaultImageContent = (
     asImageHoc,
     typeof nodeKey === 'string' ? withDefaultContent({
       [nodeKey]: nodeContent,
-    }) as HOC : identity,
+    }) : identity,
     withResetButton(nodeKey),
   );
 };

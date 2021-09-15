@@ -12,12 +12,5 @@
  * limitations under the License.
  */
 
-import { getTailwindConfigs, getBodilessConfigs } from './getBodilessConfigs';
-import { mergeConfigs, mergeWithBodilessConfigs } from './mergeConfigs';
-
-export {
-  getTailwindConfigs,
-  getBodilessConfigs,
-  mergeConfigs,
-  mergeWithBodilessConfigs,
-};
+export * from './getBodilessPackages';
+export * from './mergeConfigs';

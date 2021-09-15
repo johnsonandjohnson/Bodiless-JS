@@ -12,9 +12,8 @@
  * limitations under the License.
  */
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, FC } from 'react';
 import { graphql } from 'gatsby';
-import flow from 'lodash/flow';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { withNodeKey, withResetButton, withNode } from '@bodiless/core';
 import {
@@ -22,6 +21,7 @@ import {
   Textarea as BaseTextArea,
   addClasses,
   addProps,
+  asToken,
 } from '@bodiless/fclasses';
 import {
   createDefaultDeserializers as createDefaultRTEDeserializers,
@@ -41,7 +41,7 @@ import Layout from '../../../../components/Layout';
 import { FlowContainerDefault } from '../../../../components/FlowContainer';
 
 const H3 = addClasses('text-xl font-bold mt-4')(BaseH3);
-const TextArea = flow(
+const TextArea = asToken(
   addProps({
     rows: 10,
     cols: 100,
@@ -62,7 +62,7 @@ const fcDeserializers = [
   },
 ] as Deserializer[];
 
-const ContentfulFlowContainer = flow(
+const ContentfulFlowContainer = asToken(
   withFlowContainerDefaultHtml(fcDeserializers),
   withResetButton(),
   withNode,
@@ -95,7 +95,7 @@ const HtmlStorageContext = React.createContext<HtmlStorage>({
   setHtml: () => {},
 });
 
-const HtmlStorageProvider = ({ children }) => {
+const HtmlStorageProvider: FC = ({ children }) => {
   const [html, setHtml] = useState(defaultHtml);
   return (
     <HtmlStorageContext.Provider value={{ html, setHtml }}>
@@ -110,7 +110,7 @@ const FlowContainerDemo = () => {
     <>
       <H3>Supply HTML to Flow Container</H3>
       <TextArea
-        onChange={event => setHtml(event.target.value)}
+        onChange={event => setHtml((event.target as HTMLFormElement).value)}
         value={html}
       />
       <H3>Output</H3>

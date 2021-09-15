@@ -16,7 +16,9 @@ import { addClasses, withDesign, addProps } from '@bodiless/fclasses';
 import {
   withDirection, DIRECTIONS, getSnapFrom, withTailwindClasses,
 } from '@bodiless/layouts';
+// @ts-ignore Could not find a declaration file
 import resolveConfig from 'tailwindcss/resolveConfig';
+// @ts-ignore Could not find a declaration file
 import tailWindConfig from '../../../tailwind.config';
 
 const asFlowContainerWithMargins = withDesign({

@@ -12,11 +12,12 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { ComponentType } from 'react';
 import { Editor } from 'slate';
 import { useSlate } from 'slate-react';
-import { flow } from 'lodash';
-import type { HOC } from '@bodiless/fclasses';
+import {
+  asToken, ComponentOrTag, Token,
+} from '@bodiless/fclasses';
 import { ToggleProps } from '../Type';
 import PluginButton from '../components/PluginButton';
 import { withReturnFocusBackOnClick } from '../withReturnFocusBack';
@@ -31,12 +32,13 @@ type Opts = {
   icon: string;
 };
 
-const withToggle = <P extends requiredProps> (opts:Opts) => (
-  (Component:any) => (props:P) => {
+const withToggle = (opts:Opts): Token<{}, requiredProps, { icon: string }> => (
+  (Component: ComponentOrTag<any>) => (props: any) => {
     const { toggle, isActive, icon } = opts;
-    const { children, className = '' } = props;
+    const { children, className = '' } = props as requiredProps;
     const editor = useSlate();
-    const componentName = Component.defaultProps ? Component.defaultProps.name : undefined;
+    const { defaultProps } = Component as ComponentType<any>;
+    const componentName = defaultProps ? defaultProps.name : undefined;
     return (
       <Component
         componentName={componentName}
@@ -56,8 +58,8 @@ const withToggle = <P extends requiredProps> (opts:Opts) => (
   }
 );
 
-const createPluginButton = (props: Opts) => flow(
-  withReturnFocusBackOnClick(props.icon) as HOC,
+const createPluginButton = (props: Opts) => asToken(
+  withReturnFocusBackOnClick(props.icon),
   withToggle(props),
 )(PluginButton);
 export default createPluginButton;

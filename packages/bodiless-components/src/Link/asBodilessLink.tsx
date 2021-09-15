@@ -16,25 +16,32 @@ import React, { ComponentType } from 'react';
 import {
   useMenuOptionUI,
   asBodilessComponent,
-  withoutProps,
   ifEditable,
   withExtendHandler,
   ifToggledOn,
   EditButtonOptions,
 } from '@bodiless/core';
 import type { BodilessOptions } from '@bodiless/core';
-import { flow, flowRight, identity } from 'lodash';
+import { flowRight, identity } from 'lodash';
 import {
   Fragment,
   addProps,
   replaceWith,
+  withoutProps,
+  asToken,
 } from '@bodiless/fclasses';
+import { withFieldApi } from 'informed';
 import DefaultNormalHref from './NormalHref';
 import withGoToLinkButton from './withGoToLinkButton';
 import useEmptyLinkToggle from './useEmptyLinkToggle';
 import {
-  LinkData, UseLinkOverrides, Props, ExtraLinkOptions, AsBodilessLink,
+  LinkData,
+  UseLinkOverrides,
+  Props,
+  ExtraLinkOptions,
+  AsBodilessLink,
 } from './types';
+import { FileUpload as BaseFileUpload, FileUploadProps } from '../FileUpload';
 
 const DEFAULT_INSTRUCTIONS = `
   Use a fully formed URL only for external links, e.g., https://www.example.com.
@@ -44,6 +51,17 @@ const DEFAULT_INSTRUCTIONS = `
   the site root.  All links will have a trailing slash appended.
 `;
 
+const DEFAULT_ALLOWED_FILE_TYPES = [
+  // pdf
+  'application/pdf',
+  // doc
+  'application/msword',
+  // docx
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+];
+
+const FileUpload: ComponentType<Omit<FileUploadProps, 'fieldApi'>> = withFieldApi('href')(BaseFileUpload);
+
 const useLinkOverrides = (useOverrides: UseLinkOverrides = () => ({})): UseLinkOverrides => (
   props => {
     const overrides = useOverrides(props);
@@ -51,7 +69,9 @@ const useLinkOverrides = (useOverrides: UseLinkOverrides = () => ({})): UseLinkO
       submitValueHandler: submitValueHandler$ = identity,
       normalizeHref = (href?: string) => new DefaultNormalHref(href).toString(),
       instructions = DEFAULT_INSTRUCTIONS,
+      fileUpload = {},
     } = overrides;
+    const { accept: fileUploadAccept = DEFAULT_ALLOWED_FILE_TYPES } = fileUpload;
     const submitValueHandler = ({ href }: LinkData) => submitValueHandler$({
       href: normalizeHref(href),
     });
@@ -59,7 +79,10 @@ const useLinkOverrides = (useOverrides: UseLinkOverrides = () => ({})): UseLinkO
       ...overrides,
       normalizeHref,
       submitValueHandler,
-      renderForm: ({ componentProps: { unwrap }, closeForm }) => {
+      renderForm: ({
+        componentProps: { unwrap, ui: { fileUpload: fileUploadUI } = {} },
+        closeForm,
+      }) => {
         const {
           ComponentFormTitle,
           ComponentFormLabel,
@@ -82,6 +105,8 @@ const useLinkOverrides = (useOverrides: UseLinkOverrides = () => ({})): UseLinkO
             <ComponentFormDescription id="description">
               {instructions}
             </ComponentFormDescription>
+            <ComponentFormLabel>File Upload</ComponentFormLabel>
+            <FileUpload ui={fileUploadUI} accept={fileUploadAccept} />
             {unwrap && (
             <ComponentFormUnwrapButton type="button" onClick={removeLinkHandler}>
               Remove Link
@@ -122,6 +147,22 @@ const withNormalHref = (
   return WithNormalHref;
 };
 
+const withLinkTarget = (
+  useOverrides: () => ExtraLinkOptions,
+) => (Component : ComponentType<Props>) => {
+  const WithLinkTarget = (props: Props) => {
+    const { target } = useOverrides();
+    if (!target) return <Component {...props} />;
+    return (
+      <Component
+        target={target}
+        {...props}
+      />
+    );
+  };
+  return WithLinkTarget;
+};
+
 /**
  * HOC that can be applied to a link based component to not render the component
  * when the component link data is empty
@@ -139,15 +180,16 @@ const asBodilessLink: AsBodilessLink = (
     nodeKeys, defaultData, useLinkOverrides(useOverrides),
   ),
   ifEditable(
-    flow(
+    asToken(
       // Prevent following the link in edit mode
       withExtendHandler('onClick', () => (e: MouseEvent) => e.preventDefault()),
       addProps({ draggable: false }),
-      withGoToLinkButton(),
+      withGoToLinkButton(useLinkOverrides(useOverrides) as () => ExtraLinkOptions),
     ),
   ),
   withoutProps(['unwrap']),
   withNormalHref(useLinkOverrides(useOverrides) as () => ExtraLinkOptions),
+  withLinkTarget(useLinkOverrides(useOverrides) as () => ExtraLinkOptions),
 );
 
 export default asBodilessLink;

@@ -14,6 +14,7 @@
 
 import React, { ComponentType } from 'react';
 import { mergeWith, isArray } from 'lodash';
+import { ComponentOrTag } from '@bodiless/fclasses';
 import {
   RichTextItemType,
 } from './Type';
@@ -25,8 +26,10 @@ function customizer(objValue:any, srcValue:any) {
   }
   return undefined;
 }
-type WithMeta = Object;
-type CTWM = ComponentType & WithMeta;
+// type WithMeta = Object;
+// type CTWM = ComponentType & WithMeta;
+type CTWM = ComponentOrTag<any>;
+
 const withOutMeta = <P extends Object> (Component:CTWM) => (props:P) => (<Component {...props} />);
 /**
  * withMeta creates an HOC that will add meta data to a React Component

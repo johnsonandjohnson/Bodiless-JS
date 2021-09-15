@@ -13,9 +13,10 @@
  */
 
 import React, {
-  FC, ComponentType, useEffect, useLayoutEffect, useRef, useMemo,
+  FC, useEffect, useLayoutEffect, useRef, useMemo,
 } from 'react';
 import { pickBy } from 'lodash';
+import { HOC } from '@bodiless/fclasses';
 import PageEditContext from './PageEditContext';
 import { useEditContext, useUUID, useGetter } from './hooks';
 import { PageContextProviderProps, MenuOptionsDefinition } from './Types/PageContextProviderTypes';
@@ -158,9 +159,10 @@ const setDefaultOptionScope = (options: TMenuOption[], global: boolean) => optio
  * @return An HOC which will cause the component it enhances to contribute the specified
  *         menu options when placed.
  */
-export const withMenuOptions = <P extends object>(def$: MenuOptionsDefinition$<P>) => (
-  (Component: ComponentType<P> | string) => {
-    const WithMenuOptions = (props: P) => {
+export const withMenuOptions = <P extends object>(
+  def$: MenuOptionsDefinition$<P>,
+): HOC => Component => {
+    const WithMenuOptions: FC<any> = props => {
       const def = typeof def$ === 'function' ? def$(props) : def$;
       const {
         useMenuOptions, peer, root, ...rest
@@ -187,7 +189,6 @@ export const withMenuOptions = <P extends object>(def$: MenuOptionsDefinition$<P
       );
     };
     return WithMenuOptions;
-  }
-);
+  };
 
 export default PageContextProvider;

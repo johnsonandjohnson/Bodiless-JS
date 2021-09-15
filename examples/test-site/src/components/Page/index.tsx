@@ -12,11 +12,15 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
+import React from 'react';
+import { asToken, Token } from '@bodiless/fclasses';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { withPageDimensionsContext, BreakpointsType } from '@bodiless/components';
+import Helmet from 'react-helmet';
 
+// @ts-ignore Could not find a declaration file
 import resolveConfig from 'tailwindcss/resolveConfig';
+// @ts-ignore Could not find a declaration file
 import tailwindConfig from '../../../tailwind.config';
 
 const getTailwindBreakpoints = (): BreakpointsType => {
@@ -32,11 +36,27 @@ const getTailwindBreakpoints = (): BreakpointsType => {
 
 const breakpoints: BreakpointsType = getTailwindBreakpoints();
 
-const asResponsivePage = flow(
+const asResponsivePage = asToken(
   withPageDimensionsContext({ breakpoints }),
 )(Page);
+
+const asRtlPage: Token = PageComponent => props => (
+  <>
+    <PageComponent {...props} />
+    <Helmet htmlAttributes={{ dir: 'rtl' }} />
+  </>
+);
+
+const asLtrPage: Token = PageComponent => props => (
+  <>
+    <PageComponent {...props} />
+    <Helmet htmlAttributes={{ dir: 'ltr' }} />
+  </>
+);
 
 export default asResponsivePage;
 export {
   breakpoints,
+  asRtlPage,
+  asLtrPage,
 };

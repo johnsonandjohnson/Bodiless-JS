@@ -12,10 +12,9 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import { withSidecarNodes } from '@bodiless/core';
 import {
-  withDesign, startWith,
+  withDesign, startWith, asToken,
 } from '@bodiless/fclasses';
 import { ProductClean } from '@bodiless/organisms';
 import { BVInlineRatings } from '@bodiless/bv';
@@ -27,7 +26,7 @@ import {
 import { asEditableImagePlain as asEditableImage } from '../Image';
 import { asProductCardDefaultStyle } from './token';
 
-export const asProductCard = flow(
+export const asProductCard = asToken(
   withDesign({
     ImageLink: withSidecarNodes(
       asEditableLink('cta'),
@@ -48,7 +47,7 @@ export const asProductCard = flow(
   }),
 );
 
-export const ProductCard = flow(
+export const ProductCard = asToken(
   asProductCard,
   asProductCardDefaultStyle,
 )(ProductClean);

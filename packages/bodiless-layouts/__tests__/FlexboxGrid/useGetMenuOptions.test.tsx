@@ -38,7 +38,9 @@ const activateOnEffect = {
 const contextMenuFormInner = jest.fn();
 jest.mock('@bodiless/core', () => ({
   useEditContext: jest.fn(() => editContext),
+  withContextActivator: jest.fn(() => (c:any) => c),
   useActivateOnEffect: jest.fn(() => activateOnEffect),
+  withLocalContextMenu: jest.fn((c:any) => c),
   useNode: jest.fn(),
   contextMenuForm: jest.fn(() => contextMenuFormInner),
   useGetter: jest.fn((options: any) => () => options),

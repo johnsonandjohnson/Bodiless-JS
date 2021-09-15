@@ -14,26 +14,19 @@
 
 import React, {
   HTMLProps,
-  useCallback,
-  useState,
-  useEffect,
-  ComponentType as CT,
   ComponentType,
 } from 'react';
-import debug from 'debug';
-
+import flow from 'lodash/flow';
 import {
   getUI,
   asBodilessComponent,
   BodilessOptions,
-  useNode,
   AsBodiless,
 } from '@bodiless/core';
-
-import { useDropzone } from 'react-dropzone';
+import { addProps } from '@bodiless/fclasses';
 import { withFieldApi } from 'informed';
-import type { FieldApi } from 'informed';
-import BackendSave from '../BackendSave';
+import { FileUpload } from '../FileUpload';
+import type { FileUploadPickerUI } from '../FileUpload';
 import withPropsFromPlaceholder from '../withPropsFromPlaceholder';
 // @ts-ignore fails when it is imported by jest.
 import Placeholder from './placeholder.png';
@@ -45,130 +38,14 @@ export type Data = {
   title: string;
 };
 
-// Controls the time spent on file upload
-const MaxTimeout:number = 10000;
-
-const errorLog = debug('Image');
-
-type UploadStatusProps = HTMLProps<HTMLElement> & { statusText: string; };
-export type TImagePickerUI = {
-  MasterWrapper: CT<HTMLProps<HTMLElement>>,
-  Wrapper: CT<HTMLProps<HTMLElement>>,
-  Input: CT<HTMLProps<HTMLInputElement>>,
-  UploadArea: CT<HTMLProps<HTMLElement>>,
-  Uploading: CT<HTMLProps<HTMLElement>>,
-  DragRejected: CT<HTMLProps<HTMLElement>>,
-  UploadTimeout: CT<HTMLProps<HTMLElement>>,
-  UploadFinished: CT<HTMLProps<HTMLElement>>,
-  UploadStatus: CT<UploadStatusProps>,
-};
-
-const defaultImagePickerUI = {
-  MasterWrapper: 'section',
-  Wrapper: 'div',
-  Input: 'input',
-  UploadArea: () => <div>Drag a file or click here to upload.</div>,
-  Uploading: () => <div>Upload is in progress</div>,
-  DragRejected: () => <div>File type not accepted or too many, try again!</div>,
-  UploadTimeout: () => <div>Upload failed, please try again.</div>,
-  UploadFinished: () => <div>Done!</div>,
-  UploadStatus: ({ statusText }: UploadStatusProps) => <div>{statusText}</div>,
-};
+export type TImagePickerUI = FileUploadPickerUI;
 
 // DropZonePlugin control the upload of file and only saves jpg/png files.
-export function DropZonePlugin({ fieldApi, ui = {} }: {
-  fieldApi: FieldApi;
-  ui?: Partial<TImagePickerUI>;
-}) {
-  const [statusText, setStatusText] = useState('');
-  const [isUploading, setIsUploading] = useState(false);
-  const [isUploadTimeout, setIsUploadingTimeout] = useState(false);
-  const [isUploadFinished, setIsUploadFinished] = useState(false);
-  const saveRequest = new BackendSave();
-  const { node } = useNode<any>();
-
-  useEffect(() => {
-    if (isUploading) {
-      const timer = setTimeout(
-        () => {
-          if (isUploading) {
-            saveRequest.cancel('Timeout exceeded');
-            fieldApi.setError('Timeout exceeded');
-            setIsUploadingTimeout(true);
-            setIsUploading(false);
-          }
-        },
-        MaxTimeout,
-      );
-      return () => clearTimeout(timer);
-    }
-    return () => null;
-  });
-
-  const onDrop = useCallback(acceptedFiles => {
-    // When files are rejected by the react-dropzone,
-    // acceptedFiles is an empty array.
-    if (acceptedFiles.length < 1) {
-      setStatusText('File type not accepted or too many, try again!');
-      console.error('Unable to upload selected files.', acceptedFiles);
-      return;
-    }
-    setIsUploading(true);
-    setIsUploadFinished(false);
-    setIsUploadingTimeout(false);
-    setStatusText(`File "${acceptedFiles[0].name}" selected`);
-    fieldApi.setError('Uploading in progress');
-    saveRequest.saveFile({
-      file: acceptedFiles[0],
-      nodePath: node.path.join('$'),
-      baseResourcePath: node.baseResourcePath,
-    })
-      .then(({ data }) => {
-        // unset errors
-        fieldApi.setError(undefined);
-        fieldApi.setValue(data.filesPath[0]);
-        setIsUploading(false);
-        setIsUploadingTimeout(false);
-        setIsUploadFinished(true);
-      })
-      .catch(errorLog);
-  }, []);
-
-  const { getRootProps, getInputProps, isDragReject } = useDropzone({
-    onDrop,
+export const DropZonePlugin = flow(
+  addProps({
     accept: 'image/jpeg, image/png, image/svg+xml, image/gif, image/apng',
-    multiple: false,
-  });
-
-  const {
-    MasterWrapper,
-    Wrapper,
-    Input,
-    UploadArea,
-    Uploading,
-    DragRejected,
-    UploadTimeout,
-    UploadFinished,
-    UploadStatus,
-  } = {
-    ...defaultImagePickerUI,
-    ...ui,
-  };
-
-  return (
-    <MasterWrapper>
-      <Wrapper {...getRootProps()}>
-        <Input {...getInputProps()} />
-        <UploadArea />
-        {isDragReject && <DragRejected />}
-        {isUploadTimeout && <UploadTimeout />}
-        {isUploading && <Uploading />}
-        {isUploadFinished && <UploadFinished />}
-        <UploadStatus statusText={statusText} />
-      </Wrapper>
-    </MasterWrapper>
-  );
-}
+  }),
+)(FileUpload);
 
 // Type of the props accepted by this component.
 // Exclude the src and alt from the props accepted as we write it.

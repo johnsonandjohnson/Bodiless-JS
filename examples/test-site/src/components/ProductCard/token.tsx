@@ -12,12 +12,12 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import {
   addClasses,
   withDesign,
+  asToken,
 } from '@bodiless/fclasses';
-import { asFilterableByGroup } from '@bodiless/organisms';
+import { asFilterableByGroup } from '@bodiless/filtering';
 import {
   asImageRounded,
   asXMargin,
@@ -28,22 +28,22 @@ import {
 } from '../Elements.token';
 
 const asProductCardDefaultStyle = withDesign({
-  Wrapper: flow(asBlockItem, asTextColorPrimary),
-  Image: flow(
+  Wrapper: asToken(asBlockItem, asTextColorPrimary),
+  Image: asToken(
     asImageRounded,
     addClasses('w-full'),
   ),
-  Title: flow(
+  Title: asToken(
     asHeader2,
     asXMargin,
     asYMargin,
   ),
-  BvReviewLink: flow(
+  BvReviewLink: asToken(
     asXMargin,
     asYMargin,
     addClasses('block'),
   ),
-  Body: flow(
+  Body: asToken(
     asXMargin,
     asYMargin,
   ),

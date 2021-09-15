@@ -33,30 +33,30 @@ import {
   designable,
   extendDesignable,
   varyDesign,
+  varyDesigns,
   extendDesign,
+  extendDesigns,
   withFinalDesign,
 } from './Design';
 import type {
   Design,
+  Designable,
   DesignableProps,
-  DesignElement,
   DesignableComponentsProps,
   DesignableComponents,
 } from './Design';
 import {
   flowIf, hasProp, withoutProps, withOnlyProps, replaceOnEffect,
-  withDisplayName,
+  withDisplayName, or, and, not,
 } from './hoc-util';
+import type { Condition } from './hoc-util';
 import Fragment from './Fragment';
+import withDesignAt from './withDesignAt';
 
 export * from './StyledHTML';
 
 export { asToken, withTokenFilter } from './Tokens';
-export type {
-  TokenFilterTest, Token, TokenDef,
-  TokenMeta, ComponentWithMeta, ComponentOrTag, TokenProps,
-  HOC,
-} from './Tokens';
+export * from './types';
 
 export { withShowDesignKeys } from './Context';
 
@@ -68,6 +68,7 @@ export {
   removeClasses,
   withDesign,
   withFinalDesign,
+  withDesignAt,
   applyDesign,
   replaceWith,
   replaceOnEffect,
@@ -80,19 +81,25 @@ export {
   designable,
   extendDesignable,
   varyDesign,
+  varyDesigns,
   extendDesign,
+  extendDesigns,
   asComponent,
   addClassesIf,
   removeClassesIf,
   Fragment,
   withDisplayName,
+  and,
+  or,
+  not,
 };
 
 export type {
   StylableProps,
   Design,
+  Designable,
   DesignableProps,
-  DesignElement,
   DesignableComponentsProps,
   DesignableComponents,
+  Condition,
 };

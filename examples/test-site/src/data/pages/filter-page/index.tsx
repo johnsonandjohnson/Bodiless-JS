@@ -14,10 +14,30 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
+import { withSingleAllowedTag } from '@bodiless/filtering';
 import Page from '../../../components/Page';
 
 import Layout from '../../../components/Layout';
 import FilterByGroup, { ContextLogger } from '../../../components/FilterByGroup';
+
+const FilterByGroupSingle = withSingleAllowedTag(FilterByGroup);
+
+const Switcher = () => {
+  const [multiple, setMultiple] = React.useState(false);
+  const Filter = multiple ? FilterByGroup : FilterByGroupSingle;
+  return (
+    <>
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+      <label className="py-4 block">
+        <input className="mr-2" type="checkbox" checked={multiple} onClick={() => setMultiple(v => !v)} />
+        Allow selecting multiple terms in each category
+      </label>
+      <Filter>
+        <ContextLogger />
+      </Filter>
+    </>
+  );
+};
 
 export default (props: any) => (
   <Page {...props}>
@@ -34,9 +54,7 @@ export default (props: any) => (
         neque sint ratione cupiditate laudantium?
       </p>
       <div className="my-10">
-        <FilterByGroup>
-          <ContextLogger />
-        </FilterByGroup>
+        <Switcher />
       </div>
     </Layout>
   </Page>

@@ -25,8 +25,9 @@ import {
   H2,
   StylableProps,
   addProps,
+  DesignableProps,
 } from '@bodiless/fclasses';
-import { withNode, withResizeDetector } from '@bodiless/core';
+import { withNode } from '@bodiless/core';
 
 export type CardComponents = {
   Wrapper: ComponentType<StylableProps>,
@@ -49,9 +50,10 @@ const cardComponentStart:CardComponents = {
   Link: A,
 };
 
-type Props = DesignableComponentsProps<CardComponents> & HTMLProps<HTMLElement>;
+export type CardProps = DesignableProps<CardComponents> & HTMLProps<HTMLElement>;
+type CardBaseProps = DesignableComponentsProps<CardComponents> & HTMLProps<HTMLElement>;
 
-const CardBase: FC<Props> = ({ components, ...rest }) => {
+const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
   const {
     Wrapper,
     ImageWrapper,
@@ -81,7 +83,6 @@ const CardBase: FC<Props> = ({ components, ...rest }) => {
 
 const CardClean = flow(
   designable(cardComponentStart, 'Card'),
-  withResizeDetector,
   withNode,
 )(CardBase);
 

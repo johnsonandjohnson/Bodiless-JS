@@ -18,15 +18,21 @@ describe('tailwindcss', () => {
   describe('mergeConfigs', () => {
     it('merges purge settings', () => {
       const packageA = {
-        purge: [
-          'packageA',
-        ],
+        root: '',
+        tailwindConfig: {
+          purge: [
+            'packageA',
+          ],
+        },
       };
       const packageB = {
-        purge: [
-          'packageB1',
-          'packageB2',
-        ],
+        root: '',
+        tailwindConfig: {
+          purge: [
+            'packageB1',
+            'packageB2',
+          ],
+        },
       };
       const site = {
         purge: [
@@ -45,15 +51,21 @@ describe('tailwindcss', () => {
     });
     it('merges plugins settings', () => {
       const packageA = {
-        plugins: [
-          'pluginA',
-        ],
+        root: '',
+        tailwindConfig: {
+          plugins: [
+            'pluginA',
+          ],
+        },
       };
       const packageB = {
-        plugins: [
-          'pluginB1',
-          'pluginB2',
-        ],
+        root: '',
+        tailwindConfig: {
+          plugins: [
+            'pluginB1',
+            'pluginB2',
+          ],
+        },
       };
       const site = {
         plugins: [
@@ -72,13 +84,19 @@ describe('tailwindcss', () => {
     });
     it('merges theme settings', () => {
       const packageA = {
-        theme: {
-          foo: 1,
+        root: '',
+        tailwindConfig: {
+          theme: {
+            foo: 1,
+          },
         },
       };
       const packageB = {
-        theme: {
-          bar: 2,
+        root: '',
+        tailwindConfig: {
+          theme: {
+            bar: 2,
+          },
         },
       };
       const site = {

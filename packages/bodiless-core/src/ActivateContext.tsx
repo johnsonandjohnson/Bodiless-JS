@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { FC } from 'react';
+import { Token } from '@bodiless/fclasses';
 import { useContextActivator } from './hooks';
 
 type ActivateOnEffectState = {
@@ -38,11 +39,14 @@ export const ActivateOnEffectProvider:React.FunctionComponent = ({ children }) =
  * WithActivateContext is a HOC that wraps the Component in a ActivateContextProvider
  * @param Component The component to wrap
  */
-export const withActivateOnEffect = (
-  <P extends Object> (Component:React.FunctionComponent<P>) => (props:P) => (
-    <ActivateOnEffectProvider><Component {...props} /></ActivateOnEffectProvider>
-  )
-);
+export const withActivateOnEffect: Token = Component => {
+  const WithActivateOnEffect: FC<any> = props => (
+    <ActivateOnEffectProvider>
+      <Component {...props} />
+    </ActivateOnEffectProvider>
+  );
+  return WithActivateOnEffect;
+};
 
 /**
  * useActivateContext is a hook that returns the ActivateContext

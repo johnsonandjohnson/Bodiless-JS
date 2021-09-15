@@ -16,15 +16,16 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { FlowContainer } from '@bodiless/layouts-ui';
-import { Section, addClasses, H1 } from '@bodiless/fclasses';
-import flow from 'lodash/flow';
+import {
+  Section, addClasses, H1, asToken,
+} from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
 import withCardDemoVariation from '../../../components/Card/withCardDemoVariation';
 import { asHeader1 } from '../../../components/Elements.token';
 import { withFullWidthConstraint } from '../../../components/FlowContainer/token';
 import withRichTextVariations from '../../../components/FlowContainer/withRichTextVariations';
 
-const DemoFlowContainer = flow(
+const DemoFlowContainer = asToken(
   withCardDemoVariation,
   withFullWidthConstraint,
   withRichTextVariations,

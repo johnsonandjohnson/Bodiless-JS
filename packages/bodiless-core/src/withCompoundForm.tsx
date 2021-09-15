@@ -13,9 +13,10 @@
  */
 
 import React, {
-  createContext, ComponentType as CT, useRef, useContext, MutableRefObject,
+  createContext, useRef, useContext, MutableRefObject, FC,
 } from 'react';
 import { useFormState, useFormApi, Scope } from 'informed';
+import { Token } from '@bodiless/fclasses';
 import { ContextMenuForm, FormBodyProps, FormBodyRenderer } from './contextMenuForm';
 import type { ContextMenuFormProps } from './Types/ContextMenuTypes';
 import type { MenuOptionsDefinition } from './Types/PageContextProviderTypes';
@@ -52,8 +53,29 @@ type FormProps<D> = ContextMenuFormProps & {
   snippets: Snippet<D>[],
 };
 
+/**
+ * @private
+ */
 const Context = createContext<SnippetRegister<any>>(() => {});
 const SnippetContext = createContext<MutableRefObject<Snippet<any>[]>|undefined>(undefined);
+
+const Snippets = <D extends object>(props$: FormProps<D>) => {
+  const { snippets: snippets$, ...rest$ } = props$;
+  const renderProps: FormBodyProps<D> = {
+    formState: useFormState(),
+    formApi: useFormApi(),
+    ...rest$,
+  };
+  return (
+    <>
+      {snippets$.map(s => (
+        <Scope scope={s.id} key={s.id}>
+          {s.render({ ...renderProps, scope: s.id })}
+        </Scope>
+      ))}
+    </>
+  );
+};
 
 /**
  * @private
@@ -82,24 +104,6 @@ const Form = <D extends object>(props: FormProps<D>) => {
   );
 
   const formProps = { submitValues, initialValues };
-
-  const Snippets = (props$: FormProps<D>) => {
-    const { snippets: snippets$, ...rest$ } = props$;
-    const renderProps: FormBodyProps<D> = {
-      formState: useFormState(),
-      formApi: useFormApi(),
-      ...rest$,
-    };
-    return (
-      <>
-        {snippets$.map(s => (
-          <Scope scope={s.id} key={s.id}>
-            {s.render({ ...renderProps, scope: s.id })}
-          </Scope>
-        ))}
-      </>
-    );
-  };
 
   return (
     <ContextMenuForm {...rest} {...formProps}>
@@ -151,34 +155,34 @@ const createMenuOptionDefinition = <P extends object>(def$: MenuOptionsDefinitio
  * - a submit handler which will be passed all submitted values from the form.
  * @param option A context menu option (minus the handler).
  */
-const withCompoundForm = <P extends object>(def$: MenuOptionsDefinition$<P>) => (
-  Component: CT<P>,
-) => {
-  const useMenuOptionDefinition = createMenuOptionDefinition(def$);
-  const ComponentWithButton = withMenuOptions(useMenuOptionDefinition)(Component);
+const withCompoundForm = <P extends object>(
+  def$: MenuOptionsDefinition$<P>,
+): Token => Component => {
+    const useMenuOptionDefinition = createMenuOptionDefinition(def$);
+    const ComponentWithButton = withMenuOptions(useMenuOptionDefinition)(Component);
 
-  const WithCompoundForm = (props:P) => {
+    const WithCompoundForm: FC<any> = props => {
     // This ref will hold all snippets registered by child components.
-    const snippets = useRef<Snippet<any>[]>([]);
-    // This callback will be used by child components to contribute their snippets.
-    const registerSnippet = (snippet: Snippet<any>) => {
+      const snippets = useRef<Snippet<any>[]>([]);
+      // This callback will be used by child components to contribute their snippets.
+      const registerSnippet = (snippet: Snippet<any>) => {
       // Ensure that there is only a single entry for each snippet.
-      const existsAt = snippets.current.findIndex(s => s.id === snippet.id);
-      if (existsAt >= 0) snippets.current.splice(existsAt, 1, snippet);
-      else snippets.current.push(snippet);
-    };
+        const existsAt = snippets.current.findIndex(s => s.id === snippet.id);
+        if (existsAt >= 0) snippets.current.splice(existsAt, 1, snippet);
+        else snippets.current.push(snippet);
+      };
 
-    // Wrap the original component with a context containing the register snippet callback
-    return (
-      <Context.Provider value={registerSnippet}>
-        <SnippetContext.Provider value={snippets}>
-          <ComponentWithButton {...props} />
-        </SnippetContext.Provider>
-      </Context.Provider>
-    );
+      // Wrap the original component with a context containing the register snippet callback
+      return (
+        <Context.Provider value={registerSnippet}>
+          <SnippetContext.Provider value={snippets}>
+            <ComponentWithButton {...props} />
+          </SnippetContext.Provider>
+        </Context.Provider>
+      );
+    };
+    return WithCompoundForm;
   };
-  return WithCompoundForm;
-};
 
 export default withCompoundForm;
 

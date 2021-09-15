@@ -1,19 +1,21 @@
 {
   "name": "bodiless-js",
   "description": "Bodiless-JS",
-  "version": "0.0.72",
+  "version": "0.2.9",
   "keywords": [
     "gatsby"
   ],
   "license": "Apache-2.0",
   "scripts": {
     "bootstrap": "npx lerna bootstrap --hoist --strict",
-    "build": "cross-env NODE_ENV=production lerna run build --stream",
+    "build": "cross-env NODE_ENV=production lerna run build --stream --ignore @bodiless/gatsby-starter-bodiless",
+    "build:only": "cross-env NODE_ENV=production lerna run build --stream --scope ",
     "build:packages": "cross-env NODE_ENV=production lerna run build --stream --no-private",
     "build:watch": "cross-env NODE_ENV=development lerna run build:watch --parallel",
     "build:env-vars": "cross-env NODE_ENV=production lerna run build:env-vars --stream",
     "build:doc": "cross-env NODE_ENV=production lerna run build:doc --stream",
     "build:api-doc": "cross-env NODE_ENV=production lerna run build:api-doc --stream",
+    "check": "cross-env NODE_ENV=production lerna run check --stream",
     "clean": "lerna run clean && rimraf .eslintcache examples/*/.env.development examples/*/.env.production",
     "cy:run": "cypress run --browser chrome --record --key 0dcfb624-e152-453a-9375-aa710adb57ab",
     "cy:open": "cypress open",
@@ -42,12 +44,12 @@
     "sites:launch-test": "npm run sites:clone-local test-site && npm run sites:update test-site && cd sites/test-site && npm install && npm run start",
     "start": "npm run build:watch",
     "test": "jest",
-    "test:ci": "start-server-and-test sites:launch-test http://localhost:8005 cy:run",
+    "test:ci": "WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-test http://localhost:8005 cy:run",
     "test:watch": "jest --watch"
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run lint"
+      "pre-push": "npm run lint && npm run check"
     }
   },
   "dependencies": {

@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import { getImageContentFrom } from '@bodiless/gatsby-theme-bodiless';
+import { asToken } from '@bodiless/fclasses';
 import { CardClean } from '@bodiless/card';
 import { asContentfulCard } from '../../../Card';
 import { asCardDefaultStyle, asCardHorizontal } from '../../../Card/token';
@@ -23,14 +23,14 @@ import link from './link.json';
 import ctatext from './ctatext.json';
 
 const cardContent = {
-  image: getImageContentFrom(['DefaultContent', 'SiteBuildGuide']),
+  image: getImageContentFrom(['DefaultContent', 'IntroToBodilessConcepts']),
   title,
   body,
   link,
   ctatext,
 };
 
-const WantToLearnMore = flow(
+const WantToLearnMore = asToken(
   asContentfulCard(cardContent),
   asCardDefaultStyle,
   asCardHorizontal,

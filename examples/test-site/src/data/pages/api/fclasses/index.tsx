@@ -12,15 +12,15 @@
  * limitations under the License.
  */
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, FC } from 'react';
 import { graphql } from 'gatsby';
-import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
   addClasses,
   addClassesIf,
   Button as BaseButton,
   H3,
+  asToken,
 } from '@bodiless/fclasses';
 import Layout from '../../../../components/Layout';
 import { asHeader3 } from '../../../../components/Elements.token';
@@ -30,7 +30,7 @@ const ToggleContext = React.createContext({
   toggle: () => {},
 });
 
-const ToggleProvider = ({ children }) => {
+const ToggleProvider: FC = ({ children }) => {
   const [state, setState] = useState(false);
   const contextValue = {
     state,
@@ -47,19 +47,19 @@ const useStateContext = () => useContext(ToggleContext);
 
 const isToggled = () => useStateContext().state;
 
-const Button = props => {
+const Button: FC = props => {
   const { toggle } = useStateContext();
   return <BaseButton {...props} onClick={toggle} />;
 };
 
-const StyledButton = flow(
+const StyledButton = asToken(
   addClassesIf(isToggled)('bg-green-200'),
   addClasses('border p-2 my-2'),
 )(Button);
 
 const SubTitle = asHeader3(H3);
 
-export default props => (
+export default (props: any) => (
   <Page {...props}>
     <Layout>
       <SubTitle>Adding classes to a component conditionally</SubTitle>

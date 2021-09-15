@@ -257,11 +257,6 @@ const getConflicts = async (target = 'upstream') => {
       const result = await copyfilesPromised(
         [...files, tmpDir],
         { error: true, up: (rootDir.match(/\//g) || []).length + 1 },
-        (err) => {
-          if (err) {
-            throw new Error(`Error copying uncommitted files ${err}.`);
-          }
-        },
       );
       logger.log(`Result: ${result}`);
 

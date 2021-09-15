@@ -12,25 +12,19 @@
  * limitations under the License.
  */
 
-import { HTMLProps } from 'react';
+import { withoutProps, asToken } from '@bodiless/fclasses';
 import {
   withContextActivator,
   withNode,
   withNodeDataHandlers,
   withLocalContextMenu,
-  WithNodeProps,
   ifEditable,
-  Bodiless,
   withNodeKey,
-  withoutProps,
 } from '@bodiless/core';
-import { flowRight } from 'lodash';
 import { withTagButton, TagsNodeType } from '../TagButton';
-// Type of the data used by this component.
-// @Todo: Determine if this type is necessary?
-type Props = HTMLProps<HTMLElement>;
+import type { UseTagButtonOverrides } from '../TagButton';
 
-const emptyValue:TagsNodeType = {
+const emptyValue: TagsNodeType = {
   tags: [],
 };
 
@@ -40,15 +34,11 @@ const emptyValue:TagsNodeType = {
 // - anything relying on the context (activator, indicator) must be
 //   *after* `withEditButton()` as this establishes the context.
 // - withData must be *after* the data handlers are defiend.
-const asTaggableItem = (nodeKey?: string) => flowRight(
-  withNodeKey(nodeKey),
-  withNode,
-  withNodeDataHandlers(emptyValue),
-  ifEditable(
-    withTagButton,
-    withContextActivator('onClick'),
-    withLocalContextMenu,
-  ),
+const asTaggableItem = (
+  nodeKey?: string,
+  defaultData = emptyValue,
+  useOverrides?: UseTagButtonOverrides,
+) => asToken(
   withoutProps([
     'registerSuggestions',
     'getSuggestions',
@@ -61,5 +51,13 @@ const asTaggableItem = (nodeKey?: string) => flowRight(
     'formTitle',
     'setComponentData',
   ]),
-) as Bodiless<Props, Props & Partial<WithNodeProps>>;
+  ifEditable(
+    withTagButton(useOverrides),
+    withContextActivator('onClick'),
+    withLocalContextMenu,
+  ),
+  withNodeDataHandlers(defaultData),
+  withNode,
+  withNodeKey(nodeKey),
+);
 export default asTaggableItem;

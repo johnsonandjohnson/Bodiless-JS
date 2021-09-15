@@ -26,8 +26,18 @@ import type { ContentNode } from '../ContentNode';
  */
 export type GetContentFrom<D extends object, E extends object = D> = (node: ContentNode<D>) => E;
 
-type Content = {
-  [nodePath: string]: any,
+/**
+ * Type of an entry in a default content map. May be an object representing the
+ * default content, or a function which receives the existing node and returns,
+ * the content for that node (this allows merging actual content with default content.)
+ */
+export type DefaultNodeContent<D extends {} = any, E extends {} = D> = E|GetContentFrom<D, E>;
+
+/**
+ * Type of default content which should be supplied to `withDefaultContent`.
+ */
+export type DefaultContent = {
+  [nodePath: string]: DefaultNodeContent,
 };
 
 export const getRelativeNodeKey = (basePath: Path, nodePath: Path) => {
@@ -51,7 +61,7 @@ export default class ContentfulNode<D extends object, K extends object> extends 
   protected sourceNode: DefaultContentNode<K>;
 
   // @ts-ignore has no initializer and is not definitely assigned in the constructor
-  private content: Content;
+  private content: DefaultContent;
 
   static create(node: DefaultContentNode<object>, content: object) {
     const contentfulNode = new ContentfulNode(node.getActions(), node.getGetters(), node.path);
@@ -70,7 +80,7 @@ export default class ContentfulNode<D extends object, K extends object> extends 
     return contentValue || {};
   }
 
-  public setContent(content: Content) {
+  public setContent(content: DefaultContent) {
     this.content = content;
   }
 

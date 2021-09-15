@@ -193,7 +193,6 @@ const BaseAvailabilityAccordion = ({ isAvailable, ...rest }) => {
       </div>
       <div className={expanded ? '' : 'hidden'}>
         {isAvailable ? 'In Stock!' : 'Call'}
-        a
       </div>
     </Div>
   );

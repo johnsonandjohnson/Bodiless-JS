@@ -21,11 +21,12 @@ import {
 } from '@bodiless/core';
 import flowRight from 'lodash/flowRight';
 import {
-  asBodilessLink,
   withImagePlaceholder,
   withDefaultImageContent,
+  AsBodilessImage,
 } from '@bodiless/components';
 import {
+  asBodilessLink,
   asBodilessImage,
 } from '@bodiless/components-ui';
 import {
@@ -39,9 +40,10 @@ import {
   A,
   Img,
 } from '@bodiless/fclasses';
+// @ts-ignore Cannotfind module
 import landscapeImage from './landscape_image.png';
 
-export const asBaseEditableImagePlain = (nodeKey?, placeholder?, useOverrides?) => asToken(
+export const asBaseEditableImagePlain: AsBodilessImage = (nodeKey?, placeholder?, useOverrides?) => asToken(
   asToken.meta.term('Component')('Image'),
   asToken.meta.term('Category')('Editors'),
   stylable,
@@ -52,10 +54,12 @@ export const asBaseEditableImagePlain = (nodeKey?, placeholder?, useOverrides?) 
 /**
  * util function to build a hoc for rendering a non-responsive image.
  */
-export const asEditableImagePlain = (nodeKey?, placeholder?, useOverrides?) => asToken(
+export const asEditableImagePlain: AsBodilessImage = (
+  nodeKey?, placeholder?, useOverrides?,
+) => asToken(
   withoutGatsbyImageProps,
-  asBaseEditableImagePlain.meta,
   asBaseEditableImagePlain(nodeKey, placeholder, useOverrides),
+  asBaseEditableImagePlain(nodeKey, placeholder, useOverrides).meta,
 );
 
 /**
