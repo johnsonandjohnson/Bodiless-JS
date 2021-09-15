@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { withPrependChild } from '@bodiless/core';
+import { withAppendChild } from '@bodiless/core';
 import {
   Div, asToken, replaceWith, startWith, withDesign, addClasses, withoutProps,
 } from '@bodiless/fclasses';
@@ -47,7 +47,7 @@ const $withBurgerMenuHeaderStyles = asToken(
   withDesign({
     SiteReturn: asToken(
       withoutProps('design'),
-      withPrependChild(BurgerMenuDefaultToggler, 'MenuToggler'),
+      withAppendChild(BurgerMenuDefaultToggler, 'MenuToggler'),
       asTealBackground,
       withDesign({
         MenuToggler: $withTogglerStyles,
