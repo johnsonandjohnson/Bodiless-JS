@@ -157,8 +157,21 @@ Here we've decomposed `asBodilessChameleon` into three constituent parts:
 - `withChameleonContext` establishes a connection to the Bodiless data system
   and makes the current state of the chameleon available to its children. It takes
   the `nodeKey` and `defaultData` as arguments.
-- `withChamelionButton` provides the context menu button which provides the
-  Chameleon UX.  It takes the `useOverrides` hook as an argument.
+- `withChamelionButton` adds a context menu button which provides the Chameleon
+  UX. It takes a normal Bodiless `useOverrides` hook as an argument. This can be
+  used, for example, to modify the behavior or appearance of the button based on
+  its state.
+  > Note: If you need to access the state of the chameleon in the `useOverrides`
+  > hook, don't try to access its data directly via `useNode`: Use the
+  > `useChameleonContext` hook instead. For example:
+  > ``` 
+  > const useOverrides = () => {
+  >   const { activeComponent } = useChameleonContext();
+  >   return {
+  >     isActive: activeComponent === 'Foo',
+  >   };
+  > }
+  > ```
 - `applyChameleon` uses the chameleon state established by
   `withChameleonContext` to apply the appropriate HOC's from a design to the
   underlying components.
