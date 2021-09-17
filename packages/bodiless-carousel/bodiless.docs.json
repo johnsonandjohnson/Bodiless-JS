@@ -1,5 +1,12 @@
 {
   "Components": {
-    "Carousel.md": "./doc/Carousel.md"
+    "Carousel.md": "./doc/Carousel.md",
+  "assets": {
+    "Carousel_1.png": "./doc/assets/Carousel_1.png",
+    "Carousel_2.png": "./doc/assets/Carousel_2.png",
+    "Carousel_3.png": "./doc/assets/Carousel_3.png",
+    "Carousel_4.png": "./doc/assets/Carousel_4.png",
+    "Carousel_5.png": "./doc/assets/Carousel_5.png"
   }
+}
 }
