@@ -47,6 +47,7 @@ export default class BackendClient {
   }
 
   post(resourcePath: string, data: any) {
+    console.log(this.root + resourcePath);
     return axios.post(this.root + resourcePath, data);
   }
 
@@ -87,6 +88,10 @@ export default class BackendClient {
       template,
     };
     return this.post(`${this.prefix}/pages`, payload);
+  }
+
+  deletePage(path$: string) {
+    return this.delete(path$);
   }
 
   commit(
