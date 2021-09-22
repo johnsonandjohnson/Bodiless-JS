@@ -148,8 +148,7 @@ const formPageDel = (client: Client) => contextMenuForm({
     status: DeletePageState.Init,
   });
   const context = useEditContext();
-  // const path = getPathValue(values);
-  const path = '/table/teste3';
+  const path = (typeof window !== 'undefined') ? window.location.pathname : '';
   useEffect(() => {
     // If the form is submitted and valid then lets try to creat a page.
     if (submits && path && invalid === false) {

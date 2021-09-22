@@ -52,6 +52,8 @@ export default class BackendClient {
   }
 
   delete(resourcePath: string) {
+    console.log(axios.delete(this.root + resourcePath));
+    console.log(this.root + resourcePath);
     return axios.delete(this.root + resourcePath);
   }
 
@@ -91,7 +93,7 @@ export default class BackendClient {
   }
 
   deletePage(path$: string) {
-    return this.delete(path$);
+    return this.deletePath(`/pages${path$}/index`);
   }
 
   commit(
