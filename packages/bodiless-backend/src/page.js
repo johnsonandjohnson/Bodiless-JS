@@ -82,6 +82,18 @@ class Page {
     return readPromise;
   }
 
+  rename(newPath) {
+    const readPromise = new Promise((resolve, reject) => {
+      fs.rename(this.path, newPath, err => {
+        if (err) {
+          reject(err);
+        }
+        resolve(this);
+      });
+    });
+    return readPromise;
+  }
+
   delete() {
     const readPromise = new Promise((resolve, reject) => {
       ensureDirectoryExistence(this.file);

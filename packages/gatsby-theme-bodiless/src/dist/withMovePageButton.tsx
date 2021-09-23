@@ -26,20 +26,20 @@ import {
   ContextMenuProvider,
   ContextSubMenu,
 } from '@bodiless/core';
-import { AxiosPromise } from 'axios';
+// import { AxiosPromise } from 'axios';
 import { flow } from 'lodash';
 import { addClasses, removeClasses } from '@bodiless/fclasses';
 import type { StylableProps } from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
-import BackendClient from './BackendClient';
-import handle from './ResponseHandler';
-import verifyPage from './PageVerification';
+// import BackendClient from './BackendClient';
 // import { useGatsbyPageContext } from './GatsbyPageProvider';
 import MovePageURLField, { getPathValue } from './MovePageURLField';
 
-type Client = {
-  savePage: (path: string, template?: string) => AxiosPromise<any>;
-};
+const fs = require('fs');
+
+// type Client = {
+//   savePage: (path: string, template?: string) => AxiosPromise<any>;
+// };
 
 // const DEFAULT_PAGE_TEMPLATE = '_default';
 
@@ -57,27 +57,6 @@ type PageStatus = {
 };
 
 type MovePageProps = PageStatus;
-
-const createPage = async ({ path, client, template } : any) => {
-  // Create the page.
-  const result = await handle(client.savePage(path, template));
-  // If the page was created successfully:
-  if (result.response) {
-    // Verify the creation of the page.
-    const isPageVerified = await verifyPage(path);
-    if (!isPageVerified) {
-      const errorMessage = `Unable to verify page creation.
-        It is likely that your new page was created but is not yet available.
-        Click ok to visit the new page; if it does not load, wait a while and reload.`;
-      return Promise.reject(new Error(errorMessage));
-    }
-    return Promise.resolve(path);
-  }
-  if (result.message) {
-    return Promise.reject(new Error(result.message));
-  }
-  return Promise.reject(new Error('An internal error occurred. Please try again later.'));
-};
 
 const MovePageComp = (props : MovePageProps) => {
   const {
@@ -132,7 +111,7 @@ const MovePageComp = (props : MovePageProps) => {
     case MovePageState.Pending:
       return (
         <>
-          <ComponentFormTitle>Creating Page</ComponentFormTitle>
+          <ComponentFormTitle>Moving Page</ComponentFormTitle>
           <ComponentFormSpinner />
         </>
       );
@@ -156,7 +135,7 @@ const MovePageComp = (props : MovePageProps) => {
   }
 };
 
-const formPageAdd = (client: Client) => contextMenuForm({
+const formPageAdd = () => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
 })(({ formState, formApi } : any) => {
@@ -168,15 +147,15 @@ const formPageAdd = (client: Client) => contextMenuForm({
     status: MovePageState.Init,
   });
   const context = useEditContext();
-  const { template } = values;
+  // const { template } = values;
   const path = getPathValue(values);
   useEffect(() => {
     // If the form is submitted and valid then lets try to creat a page.
     if (submits && path && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
       setState({ status: MovePageState.Pending });
-      // Create the page.
-      createPage({ path, client, template })
+      // Move the page.
+      fs.rename(currentPath, path) // colocar o path atual aqui
         .then((movePagePath: string) => {
           if (movePagePath) {
             setState({ status: MovePageState.Complete, movePagePath });
@@ -204,8 +183,6 @@ const formPageAdd = (client: Client) => contextMenuForm({
   );
 });
 
-const defaultClient = new BackendClient();
-
 const useMenuOptions = () => {
   const context = useEditContext();
 
@@ -222,7 +199,7 @@ const useMenuOptions = () => {
       label: 'Move',
       group: 'page-group',
       isDisabled: useCallback(() => !context.isEdit, []),
-      handler: () => formPageAdd(defaultClient),
+      handler: () => formPageAdd(),
     },
   ];
   return menuOptions;
