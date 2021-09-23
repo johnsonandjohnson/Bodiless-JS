@@ -33,6 +33,7 @@ import type { StylableProps } from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
+import NewPageURLField, { getPathValue } from './NewPageURLField';
 
 type Client = {
   deletePage: (path: string) => AxiosPromise<any>;
@@ -54,9 +55,7 @@ type PageStatus = {
 type DeletePageProps = PageStatus;
 
 const deletePage = async ({ path, client } : any) => {
-  // Delete the page.
   const result = await handle(client.deletePage(path));
-  // If the page was deleted successfully:
   if (result.response) {
     return Promise.resolve(path);
   }
@@ -105,6 +104,7 @@ const DeletePageComp = (props : DeletePageProps) => {
             <ComponentFormTitle>
               Are you sure you want to delete the current page?
             </ComponentFormTitle>
+            <NewPageURLField hidden />
           </ContextMenuProvider>
         </>
       );
@@ -142,16 +142,17 @@ const formPageDel = (client: Client) => contextMenuForm({
 })(({ formState, formApi } : any) => {
   const { ComponentFormText } = useMenuOptionUI();
   const {
-    submits, invalid,
+    submits, values,
   } = formState;
   const [state, setState] = useState<PageStatus>({
     status: DeletePageState.Init,
   });
   const context = useEditContext();
-  const path = (typeof window !== 'undefined') ? window.location.pathname : '';
+  const path = getPathValue(values);
+
   useEffect(() => {
     // If the form is submitted and valid then lets try to creat a page.
-    if (submits && path && invalid === false) {
+    if (submits && path /* && invalid === false */) {
       context.showPageOverlay({ hasSpinner: false });
       setState({ status: DeletePageState.Pending });
       // Delete the page.
@@ -187,7 +188,6 @@ const defaultClient = new BackendClient();
 
 const useMenuOptions = () => {
   const context = useEditContext();
-
   const menuOptions = [
     {
       name: 'page-group',

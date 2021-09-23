@@ -20,6 +20,11 @@ const logger = new Logger('BACKEND');
 
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
 
+const getDirectories = (dir) => (
+  fs.readdirSync(dir).filter((file) => fs.statSync(
+    `${dir}/${file}`,
+  ).isDirectory())
+);
 // once we on node > 10.12.0
 // we can leverage fs.mkdir since it supports { recursive: true }
 function ensureDirectoryExistence(filePath) {
@@ -59,6 +64,10 @@ class Page {
     return `${this.getBasePath()}/${this.path}.json`;
   }
 
+  get directory() {
+    return `${this.getBasePath()}/${this.path}`;
+  }
+
   read() {
     const readPromise = new Promise(resolve => {
       fs.readFile(this.file, (err, data) => {
@@ -93,6 +102,31 @@ class Page {
       });
     });
     return readPromise;
+  }
+
+  deleteDirectory() {
+    return new Promise((resolve) => {
+      /**
+       * DANGER: fs.rmdir() can delete anything in the code (and it is recursive).
+       *         So make sure the directory to delete is inside a region of pages,
+       *         and it is not the whole pages directory.
+       */
+      const [, pageRelativeDir] = this.directory.split('/data/pages/');
+      if (!pageRelativeDir) {
+        resolve(`Invalid directory "${this.directory}" to delete`);
+        return;
+      }
+
+      const subdirs = getDirectories(this.directory);
+      if (subdirs.length !== 0) {
+        resolve(`Directory "${this.directory}" has subdiretories`);
+        return;
+      }
+
+      fs.rmdir(this.directory, { recursive: true }, err => {
+        resolve(err && err.message);
+      });
+    });
   }
 }
 

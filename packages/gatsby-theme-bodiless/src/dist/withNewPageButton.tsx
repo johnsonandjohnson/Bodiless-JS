@@ -173,6 +173,7 @@ const formPageAdd = (client: Client) => contextMenuForm({
   const context = useEditContext();
   const { template } = values;
   const path = getPathValue(values);
+
   useEffect(() => {
     // If the form is submitted and valid then lets try to creat a page.
     if (submits && path && invalid === false) {

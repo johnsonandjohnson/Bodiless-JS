@@ -47,13 +47,10 @@ export default class BackendClient {
   }
 
   post(resourcePath: string, data: any) {
-    console.log(this.root + resourcePath);
     return axios.post(this.root + resourcePath, data);
   }
 
   delete(resourcePath: string) {
-    console.log(axios.delete(this.root + resourcePath));
-    console.log(this.root + resourcePath);
     return axios.delete(this.root + resourcePath);
   }
 
@@ -89,11 +86,14 @@ export default class BackendClient {
       path: path$,
       template,
     };
-    return this.post(`${this.prefix}/pages`, payload);
+
+    const url = `${this.prefix}/pages`;
+    return this.post(url, payload);
   }
 
   deletePage(path$: string) {
-    return this.deletePath(`/pages${path$}/index`);
+    const url = `${this.prefix}/remove/${path$}`;
+    return this.delete(url);
   }
 
   commit(
