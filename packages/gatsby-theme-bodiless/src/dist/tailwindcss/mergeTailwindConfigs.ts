@@ -16,18 +16,30 @@ import fs from 'fs';
 import path from 'path';
 import locateFiles from './locateFiles';
 import { TailwindConfig, mergeConfigs } from './mergeConfigs';
+
 /**
  * reads package.json and returns name of the package
  * returns undefined if package.json does not exist or if there is a file parsing error
  * @param packageJsonPath path to package.json.
  */
-const getPackageNameFromPackageJson = (packageJsonPath: string): string | undefined => {
+export const getDependencies = (packageJsonPath: string): string[] | undefined => {
+  let dependencies;
+  try {
+    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+    dependencies = packageJson.dependencies;
+  } catch {
+    console.log(`Error reading package.json from ${packageJsonPath}`);
+  }
+  return Object.keys(dependencies);
+};
+
+export const getPackageNameFromPackageJson = (packageJsonPath: string): string | undefined => {
   let packageName;
   try {
     const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
     packageName = packageJson.name;
   } catch {
-    // console.log(`Error reading package.json from ${packageJsonPath}`);
+    console.log(`Error reading package.json from ${packageJsonPath}`);
   }
   return packageName;
 };
@@ -35,26 +47,45 @@ const getPackageNameFromPackageJson = (packageJsonPath: string): string | undefi
 /**
  * Finds all tailwindcss configuration files.
  */
-const findTailwindConfigPaths = async () => locateFiles({
+export const findTailwindConfigPaths = async () => locateFiles({
   startingRoot: './',
   filePattern: new RegExp('/tailwind.config.js$'),
   action: filePath => {
     const packagePath = path.resolve(filePath, '..');
     const packageNameFromPackageJson = getPackageNameFromPackageJson(path.resolve(packagePath, 'package.json'));
     const packageName = packageNameFromPackageJson || path.basename(packagePath);
+
     return Promise.resolve({
       [packageName]: packagePath,
     });
   },
 });
 
-export const getBodilessTailwindConfig = async () => {
+/**
+ * Combination of all available tailwind configs.
+ * @param deps Site level dependencies
+ */
+export const getBodilessTailwindConfig = async (deps: string[]) => {
   const paths = await findTailwindConfigPaths();
-  return Promise.resolve(paths);
+  const paths$1 = paths.reduce((prevVal, curVal) => ({ ...prevVal, ...curVal }), {});
+  return Object.keys(paths$1)
+    .filter(packageName => deps.indexOf(packageName) > -1)
+    .map(packageName => ({
+      root: paths$1[packageName],
+      // eslint-disable-next-line import/no-dynamic-require, global-require
+      tailwindConfig: require(`${paths$1[packageName]}/tailwind.config`),
+    }));
 };
 
-export const mergeWithBodilessConfigs = (config: TailwindConfig) => mergeConfigs(
-  config,
-  [],
-  // @TODO getBodilessTailwindConfig(),
-);
+/**
+ * Merge site levle tailwind config and all bodiless tailwind configs.
+ * @param config Site level tailwind config
+ * @param deps Site level bodiless dependencies
+ */
+export const mergeTailwindConfigs = async (config: TailwindConfig, deps: string[]) => {
+  const bodilessTailwindConfigs = await getBodilessTailwindConfig(deps);
+  return mergeConfigs(
+    config,
+    bodilessTailwindConfigs,
+  );
+};
