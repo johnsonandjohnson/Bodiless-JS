@@ -15,14 +15,13 @@
 import fs from 'fs';
 import path from 'path';
 import locateFiles from './locateFiles';
-import { TailwindConfig, mergeConfigs } from './mergeConfigs';
 
 /**
  * reads package.json and returns name of the package
  * returns undefined if package.json does not exist or if there is a file parsing error
  * @param packageJsonPath path to package.json.
  */
-export const getDependencies = (packageJsonPath: string): string[] | undefined => {
+export const getDependencies = (packageJsonPath: string): string[] => {
   let dependencies;
   try {
     const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
@@ -71,21 +70,7 @@ export const getBodilessTailwindConfig = async (deps: string[]) => {
   return Object.keys(paths$1)
     .filter(packageName => deps.indexOf(packageName) > -1)
     .map(packageName => ({
+      package: packageName,
       root: paths$1[packageName],
-      // eslint-disable-next-line import/no-dynamic-require, global-require
-      tailwindConfig: require(`${paths$1[packageName]}/tailwind.config`),
     }));
-};
-
-/**
- * Merge site levle tailwind config and all bodiless tailwind configs.
- * @param config Site level tailwind config
- * @param deps Site level bodiless dependencies
- */
-export const mergeTailwindConfigs = async (config: TailwindConfig, deps: string[]) => {
-  const bodilessTailwindConfigs = await getBodilessTailwindConfig(deps);
-  return mergeConfigs(
-    config,
-    bodilessTailwindConfigs,
-  );
 };

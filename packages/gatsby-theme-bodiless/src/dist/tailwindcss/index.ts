@@ -14,4 +14,3 @@
 
 export * from './getBodilessPackages';
 export * from './mergeConfigs';
-export * from './mergeTailwindConfigs';
