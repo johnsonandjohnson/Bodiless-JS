@@ -27,8 +27,8 @@ button.
 
 All new tables in BodilessJS start with 3 columns and 3 rows. To add data to a cell,
 click on the cell and start typing. Clicking tab will move the cursor one cell to
-the right. You can format text in a cell using the same tools as in the Full Rich
-Text editor.
+the right. You can format text in a cell using the same tools as in the 
+[Full Rich Text editor](./RichText).
 
 ![Text Options](./assets/Table_3.png)
 
@@ -42,7 +42,8 @@ cursor was placed when you clicked Add. You can add columns by clicking the add
 button under Column. The new column will appear to the right of the row where your
 cursor was placed when you clicked Add.
 
-To move a columm to the right, click in a cell and click the "Move" button under "Column." To move a row down, click in a cell and click the "Move" button under "Row." 
+To move a columm to the right, click in a cell and click the "Move" button under "Column."
+To move a row down, click in a cell and click the "Move" button under "Row." 
 
 ![Moving a Column- before](./assets/Table_5.png)
 

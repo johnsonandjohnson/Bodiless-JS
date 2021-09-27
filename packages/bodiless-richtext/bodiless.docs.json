@@ -1,10 +1,13 @@
 {
   "Components": {
-    "RichText.md": "./README.md",
+    "RichText.md": "./doc/RichText.md",
     "assets": {
-      "SimpleRichTextNew.jpg": "./assets/SimpleRichTextNew.jpg",
-      "BasicRichTextNew.jpg": "./assets/BasicRichTextNew.jpg",
-      "FullRichTextNew.jpg": "./assets/FullRichTextNew.jpg"
+      "RichText_1.png": "./assets/RichText_1.png",
+      "RichText_2.png": "./assets/RichText_2.png",
+      "RichText_3.png": "./assets/RichText_3.png",
+      "RichText_4.png": "./assets/RichText_4.png",
+      "RichText_5.png": "./assets/RichText_5.png",
+      "RichText_6.png": "./assets/RichText_6.png"
     }
   }
 }
