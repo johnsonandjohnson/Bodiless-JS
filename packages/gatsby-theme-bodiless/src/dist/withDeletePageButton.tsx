@@ -136,9 +136,30 @@ const DeletePageComp = (props : DeletePageProps) => {
   }
 };
 
+const redirectPage = (values: {keepOpen: boolean, path?: string}) => {
+  if (values.keepOpen) return;
+
+  if (typeof window !== 'undefined') {
+    const { href } = window.location;
+    const hrefArray = href.split('/');
+
+    // Handle paths withtout '/' at the end.
+    if (hrefArray[hrefArray.length - 1] !== '') hrefArray.push('');
+
+    // Removes last child path from href array.
+    hrefArray.splice(-2, 1);
+
+    const parentHref = hrefArray.join('/');
+
+    // Uses replace to redirect since child page no longer exists.
+    window.location.replace(parentHref);
+  }
+};
+
 const formPageDel = (client: Client) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
+  onClose: redirectPage,
 })(({ formState, formApi } : any) => {
   const { ComponentFormText } = useMenuOptionUI();
   const {
