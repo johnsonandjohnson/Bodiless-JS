@@ -18,7 +18,7 @@ window. Click on the table preview to insert it into your Website.
 ### Name the Table
 
 The top row of a table is called the Header. Click the header of the table and type
-the name. You can also delete the header row by clicking it and clicking the "Delete"
+the name. You can also delete the header row by selecting it and clicking the "Delete"
 button.
 
 ![Table Name](./assets/Table_2.png)
