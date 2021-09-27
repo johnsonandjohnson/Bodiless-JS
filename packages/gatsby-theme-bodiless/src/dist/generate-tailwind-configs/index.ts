@@ -15,7 +15,7 @@
 
 import { resolve as resolvePath } from 'path';
 import {
-  getDependencies,
+  getDependenciesFromPackageJson,
   getBodilessTailwindConfig,
 } from './getTailwindConfigs';
 import { writeToFile } from '../generate-env-vars/utils';
@@ -30,9 +30,13 @@ const template = `
     tailwindConfig: require('#pkg/tailwind.config'),
   }`;
 
+/*
+ * This command will auto discover all tailwind configuration files
+ * and generate the configuration list in the site package
+ */
 const init = async () => {
   const pkg = resolvePath('package.json');
-  const deps = getDependencies(pkg);
+  const deps = Object.keys(getDependenciesFromPackageJson(pkg));
   const cfg = await getBodilessTailwindConfig(deps);
   const cfgs = cfg.map(item => template.replace(/#pkg/g, item)).join(',');
   await writeToFile('.tailwindConfigs.js', templateWrap.replace(/#pkgs/g, cfgs));

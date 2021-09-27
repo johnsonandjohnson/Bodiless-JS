@@ -17,31 +17,31 @@ import path from 'path';
 import locateFiles from '../generate-env-vars/locateFiles';
 
 /**
- * reads package.json and returns name of the package
+ * reads package.json and returns content of key of the package
  * returns undefined if package.json does not exist or if there is a file parsing error
  * @param packageJsonPath path to package.json.
  */
-const getDependencies = (packageJsonPath: string): string[] => {
-  let dependencies;
+const getVauleFromPackageJson = (
+  packageJsonPath: string,
+  key: string,
+): any => {
+  let content;
   try {
     const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-    dependencies = packageJson.dependencies;
+    content = packageJson[key];
   } catch {
     console.log(`Error reading package.json from ${packageJsonPath}`);
   }
-  return Object.keys(dependencies);
+  return content;
 };
 
-const getPackageNameFromPackageJson = (packageJsonPath: string): string | undefined => {
-  let packageName;
-  try {
-    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-    packageName = packageJson.name;
-  } catch {
-    console.log(`Error reading package.json from ${packageJsonPath}`);
-  }
-  return packageName;
-};
+const getDependenciesFromPackageJson = (
+  packageJsonPath: string,
+): string[] => getVauleFromPackageJson(packageJsonPath, 'dependencies');
+
+const getPackageNameFromPackageJson = (
+  packageJsonPath: string,
+): string => getVauleFromPackageJson(packageJsonPath, 'name');
 
 /**
  * Finds all tailwindcss configuration files.
@@ -70,7 +70,7 @@ const getBodilessTailwindConfig = async (deps: string[]) => {
 };
 
 export {
-  getDependencies,
+  getDependenciesFromPackageJson,
   getPackageNameFromPackageJson,
   getBodilessTailwindConfig,
 };
