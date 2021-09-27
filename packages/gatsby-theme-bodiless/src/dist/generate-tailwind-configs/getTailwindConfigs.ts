@@ -14,14 +14,14 @@
 
 import fs from 'fs';
 import path from 'path';
-import locateFiles from './locateFiles';
+import locateFiles from '../generate-env-vars/locateFiles';
 
 /**
  * reads package.json and returns name of the package
  * returns undefined if package.json does not exist or if there is a file parsing error
  * @param packageJsonPath path to package.json.
  */
-export const getDependencies = (packageJsonPath: string): string[] => {
+const getDependencies = (packageJsonPath: string): string[] => {
   let dependencies;
   try {
     const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
@@ -32,7 +32,7 @@ export const getDependencies = (packageJsonPath: string): string[] => {
   return Object.keys(dependencies);
 };
 
-export const getPackageNameFromPackageJson = (packageJsonPath: string): string | undefined => {
+const getPackageNameFromPackageJson = (packageJsonPath: string): string | undefined => {
   let packageName;
   try {
     const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
@@ -46,31 +46,31 @@ export const getPackageNameFromPackageJson = (packageJsonPath: string): string |
 /**
  * Finds all tailwindcss configuration files.
  */
-export const findTailwindConfigPaths = async () => locateFiles({
+const findTailwindConfigPaths = async () => locateFiles({
   startingRoot: './',
-  filePattern: new RegExp('/tailwind.config.js$'),
-  action: filePath => {
-    const packagePath = path.resolve(filePath, '..');
-    const packageNameFromPackageJson = getPackageNameFromPackageJson(path.resolve(packagePath, 'package.json'));
-    const packageName = packageNameFromPackageJson || path.basename(packagePath);
-
-    return Promise.resolve({
-      [packageName]: packagePath,
-    });
-  },
+  filePattern: new RegExp('^tailwind.config.js$'),
 });
 
 /**
  * Combination of all available tailwind configs.
  * @param deps Site level dependencies
  */
-export const getBodilessTailwindConfig = async (deps: string[]) => {
+const getBodilessTailwindConfig = async (deps: string[]) => {
   const paths = await findTailwindConfigPaths();
-  const paths$1 = paths.reduce((prevVal, curVal) => ({ ...prevVal, ...curVal }), {});
-  return Object.keys(paths$1)
-    .filter(packageName => deps.indexOf(packageName) > -1)
-    .map(packageName => ({
-      package: packageName,
-      root: paths$1[packageName],
-    }));
+  const paths$1 = paths.map(filePath => {
+    const packagePath = path.resolve(filePath, '..');
+    const packageNameFromPackageJson = getPackageNameFromPackageJson(
+      path.resolve(packagePath, 'package.json'),
+    );
+    const packageName = packageNameFromPackageJson || path.basename(packagePath);
+    return packageName;
+  });
+
+  return paths$1.filter(packageName => deps.indexOf(packageName) > -1);
+};
+
+export {
+  getDependencies,
+  getPackageNameFromPackageJson,
+  getBodilessTailwindConfig,
 };

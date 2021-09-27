@@ -20,7 +20,10 @@ import {
 } from './getTailwindConfigs';
 import { writeToFile } from '../generate-env-vars/utils';
 
-const templateWrap = 'const getTailwindConfigPackages = (getPackageRoot) => [#pkgs];';
+const templateWrap = `
+// This file is generated automatically, please don't change it
+module.exports = (getPackageRoot) => [#pkgs];
+`;
 const template = `
   {
     root: getPackageRoot(require.resolve('#pkg')),
@@ -31,7 +34,7 @@ const init = async () => {
   const pkg = resolvePath('package.json');
   const deps = getDependencies(pkg);
   const cfg = await getBodilessTailwindConfig(deps);
-  const cfgs = cfg.map(item => template.replace(/#pkg/g, item.package)).join(',');
+  const cfgs = cfg.map(item => template.replace(/#pkg/g, item)).join(',');
   await writeToFile('.tailwindConfigs.js', templateWrap.replace(/#pkgs/g, cfgs));
 };
 
