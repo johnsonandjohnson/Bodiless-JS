@@ -26,7 +26,7 @@ button.
 ### Adding Data to a Table
 
 All new tables in BodilessJS start with 3 columns and 3 rows. To add data to a cell,
-click on the cell and start typing. Clicking tab will move the cursor one cell to
+click on the cell and start typing. The tab key will move the cursor one cell to
 the right. You can format text in a cell using the same tools as in the 
 [Full Rich Text editor](./RichText).
 
@@ -74,7 +74,8 @@ Adding a footer inserts a final row that looks normal, but uses the `<ifoot>` ta
 - Editable areas
   - Allow for table Rows and Columns to be added deleted and moved
 - Styling
-  - Can be implemented in the appropriate token.tsx file by adding necessary tailwind classes - check [asTableDefaultStyle](../../examples/test-site/src/components/Table/index.tsx)
+  - Can be implemented in the appropriate token.tsx file by adding necessary tailwind
+classes - check [asTableDefaultStyle](../../examples/test-site/src/components/Table/index.tsx)
 
 ### Usage
 
@@ -96,7 +97,8 @@ const ExampleTableExample = flow(
 
 ### Design Components
 
-The table component follows the BodilessJS Design Pattern and is easy to style. Here is an example demonstrating all possible design components:
+The table component follows the BodilessJS Design Pattern and is easy to style. Here is an
+example demonstrating all possible design components:
 
 ```js
 import { withDesign, addClasses } from '@bodiless/fclasses';
