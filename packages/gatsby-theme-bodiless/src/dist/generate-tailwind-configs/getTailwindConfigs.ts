@@ -48,7 +48,7 @@ const getPackageNameFromPackageJson = (
  */
 const findTailwindConfigPaths = async () => locateFiles({
   startingRoot: './',
-  filePattern: new RegExp('^tailwind.config.js$'),
+  filePattern: new RegExp('^site.tailwind.config.js$'),
 });
 
 /**

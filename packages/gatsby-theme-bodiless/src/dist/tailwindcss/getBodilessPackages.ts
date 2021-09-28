@@ -21,23 +21,23 @@ const getPackageRoot = (packagePath: string) => path.dirname(path.dirname(packag
 const getBodilessPackages = () => [
   {
     root: getPackageRoot(require.resolve('@bodiless/accordion')),
-    tailwindConfig: require('@bodiless/accordion/tailwind.config'),
+    tailwindConfig: require('@bodiless/accordion/site.tailwind.config'),
   },
   {
     root: getPackageRoot(require.resolve('@bodiless/card')),
-    tailwindConfig: require('@bodiless/card/tailwind.config'),
+    tailwindConfig: require('@bodiless/card/site.tailwind.config'),
   },
   {
     root: getPackageRoot(require.resolve('@bodiless/navigation')),
-    tailwindConfig: require('@bodiless/navigation/tailwind.config'),
+    tailwindConfig: require('@bodiless/navigation/site.tailwind.config'),
   },
   {
     root: getPackageRoot(require.resolve('@bodiless/layouts')),
-    tailwindConfig: require('@bodiless/layouts/tailwind.config'),
+    tailwindConfig: require('@bodiless/layouts/site.tailwind.config'),
   },
   {
     root: getPackageRoot(require.resolve('@bodiless/organisms')),
-    tailwindConfig: require('@bodiless/organisms/tailwind.config'),
+    tailwindConfig: require('@bodiless/organisms/site.tailwind.config'),
   },
 ];
 

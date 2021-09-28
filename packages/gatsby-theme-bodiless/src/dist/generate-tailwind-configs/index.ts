@@ -22,12 +22,20 @@ import { writeToFile } from '../generate-env-vars/utils';
 
 const templateWrap = `
 // This file is generated automatically, please don't change it
-module.exports = (getPackageRoot) => [#pkgs];
+const siteConfig = require('./site.tailwind.config');
+const {
+  mergeConfigs,
+  getPackageRoot,
+} = require('@bodiless/gatsby-theme-bodiless/dist/tailwindcss');
+
+const bodilessCanvasxConfigs = [#pkgs];
+
+module.exports = mergeConfigs(siteConfig, bodilessCanvasxConfigs);
 `;
 const template = `
   {
     root: getPackageRoot(require.resolve('#pkg')),
-    tailwindConfig: require('#pkg/tailwind.config'),
+    tailwindConfig: require('#pkg/site.tailwind.config'),
   }`;
 
 /*
@@ -39,7 +47,7 @@ const init = async () => {
   const deps = Object.keys(getDependenciesFromPackageJson(pkg));
   const cfg = await getBodilessTailwindConfig(deps);
   const cfgs = cfg.map(item => template.replace(/#pkg/g, item)).join(',');
-  await writeToFile('.tailwindConfigs.js', templateWrap.replace(/#pkgs/g, cfgs));
+  await writeToFile('tailwind.config.js', templateWrap.replace(/#pkgs/g, cfgs));
 };
 
 export default init;
