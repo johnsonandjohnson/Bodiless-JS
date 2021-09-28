@@ -25,20 +25,20 @@ import {
   withMenuOptions,
   ContextMenuProvider,
   ContextSubMenu,
+  useNode,
 } from '@bodiless/core';
 // import { AxiosPromise } from 'axios';
 import { flow } from 'lodash';
 import { addClasses, removeClasses } from '@bodiless/fclasses';
 import type { StylableProps } from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
-// import BackendClient from './BackendClient';
-// import { useGatsbyPageContext } from './GatsbyPageProvider';
+import BackendClient from './BackendClient';
+import handle from './ResponseHandler';
+// import NewPageURLField, { getPathValue } from './NewPageURLField';
 import MovePageURLField, { getPathValue } from './MovePageURLField';
 
-const fs = require('fs');
-
 // type Client = {
-//   savePage: (path: string, template?: string) => AxiosPromise<any>;
+//   movePage: (origin: string, destiny: string) => AxiosPromise<any>;
 // };
 
 // const DEFAULT_PAGE_TEMPLATE = '_default';
@@ -58,10 +58,32 @@ type PageStatus = {
 
 type MovePageProps = PageStatus;
 
+const usePagePath = () => useNode().node.pagePath;
+
+const movePage = async ({ origin, destiny, client } : any) => {
+  
+  console.log('(1) ----======> client', client);
+  console.log('(1) ----======> origin', origin);
+
+  const result = await handle(client.movePage(origin, destiny));
+
+  console.log('(2) ----======> result', result);
+
+  if (result.response) {
+    return Promise.resolve(destiny);
+  }
+  if (result.message) {
+    return Promise.reject(new Error(result.message));
+  }
+  return Promise.reject(new Error('An internal error occurred. Please try again later.'));
+};
+
 const MovePageComp = (props : MovePageProps) => {
   const {
     status, errorMessage, movePagePath,
   } = props;
+  const basePathValue = usePagePath();
+
   const defaultUI = useMenuOptionUI();
   const {
     ComponentFormLabel,
@@ -99,7 +121,7 @@ const MovePageComp = (props : MovePageProps) => {
             <ComponentFormTitle>{formTitle}</ComponentFormTitle>
             <ComponentFormDescription>Move this page to a new URL.</ComponentFormDescription>
             <CustomComponentFormLabel>Current URL</CustomComponentFormLabel>
-            <ComponentFormDescription>{window.location.href}</ComponentFormDescription>
+            <ComponentFormDescription>{basePathValue}</ComponentFormDescription>
             <MovePageURLField
               validateOnChange
               validateOnBlur
@@ -135,11 +157,15 @@ const MovePageComp = (props : MovePageProps) => {
   }
 };
 
-const formPageAdd = () => contextMenuForm({
+const formPageMove = (client: any) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 })(({ formState, formApi } : any) => {
   const { ComponentFormText } = useMenuOptionUI();
+
+  const origin = usePagePath();
+
   const {
     submits, invalid, values,
   } = formState;
@@ -147,15 +173,21 @@ const formPageAdd = () => contextMenuForm({
     status: MovePageState.Init,
   });
   const context = useEditContext();
-  // const { template } = values;
   const path = getPathValue(values);
   useEffect(() => {
-    // If the form is submitted and valid then lets try to creat a page.
     if (submits && path && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
       setState({ status: MovePageState.Pending });
-      // Move the page.
-      fs.rename(currentPath, path) // colocar o path atual aqui
+
+      const pathArray = path.split('/');
+      pathArray.splice(-2, 1);
+      const destiny = pathArray.join('/');
+
+      movePage({
+        origin,
+        destiny,
+        client,
+      })
         .then((movePagePath: string) => {
           if (movePagePath) {
             setState({ status: MovePageState.Complete, movePagePath });
@@ -183,6 +215,8 @@ const formPageAdd = () => contextMenuForm({
   );
 });
 
+const defaultClient = new BackendClient();
+
 const useMenuOptions = () => {
   const context = useEditContext();
 
@@ -199,7 +233,7 @@ const useMenuOptions = () => {
       label: 'Move',
       group: 'page-group',
       isDisabled: useCallback(() => !context.isEdit, []),
-      handler: () => formPageAdd(),
+      handler: () => formPageMove(defaultClient),
     },
   ];
   return menuOptions;

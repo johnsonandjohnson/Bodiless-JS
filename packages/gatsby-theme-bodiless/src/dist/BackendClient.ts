@@ -151,4 +151,14 @@ export default class BackendClient {
   mergeMaster() {
     return this.post(`${this.prefix}/merge/master`, {});
   }
+
+  movePage(origin: string, destiny: string) {
+    console.log('---->>>>>>> BackendClient origin', origin);
+    const payload = {
+      origin,
+      destiny,
+    };
+    const url = `${this.prefix}/move`;
+    return this.post(url, payload);
+  }
 }

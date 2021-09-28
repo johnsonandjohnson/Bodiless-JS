@@ -15,6 +15,7 @@
 /* eslint no-console: 0 */
 /* eslint global-require: 0 */
 const express = require('express');
+const fs = require('fs');
 const bodyParser = require('body-parser');
 const { spawn } = require('child_process');
 const formidable = require('formidable');
@@ -26,6 +27,8 @@ const GitCmd = require('./GitCmd');
 const { getChanges, getConflicts, mergeMaster } = require('./git');
 const { copyAllFiles } = require('./fileHelper');
 const Logger = require('./logger');
+
+const fsPromises = fs.promises;
 
 const backendPrefix = process.env.GATSBY_BACKEND_PREFIX || '/___backend';
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
@@ -282,6 +285,7 @@ class Backend {
     this.setRoute(`${backendPrefix}/content/*`, Backend.setContent);
     this.setRoute(`${backendPrefix}/log`, Backend.log);
     this.setRoute(`${backendPrefix}/pages`, Backend.setPages);
+    this.setRoute(`${backendPrefix}/move`, Backend.movePage);
   }
 
   setRoute(route, action) {
@@ -603,6 +607,44 @@ class Backend {
 
   static getPage(pagePath) {
     return new Page(pagePath);
+  }
+
+  static movePage(route) {
+    route.post((req, res) => {
+      const { body: { origin, destiny } } = req;
+
+      console.log('===>>>> backend origin, destiny =', origin, destiny);
+      console.log('===>>>> backend backendPagePath =', backendPagePath);
+
+      const destinyFullPath = `${backendPagePath}${destiny}`;
+      const originFullPath = `${backendPagePath}${origin}`;
+
+
+      logger.log(`---> Start moving page ${originFullPath} to:${destinyFullPath}`);
+
+      // TODO: start here....
+
+      res.send({});
+
+      // await fsPromises.stat()
+
+      // if (page.exists) {
+      //   res.status(409);
+      //   res.send(`Error: page ${pagePath} already exists`);
+      //   return;
+      // }
+      // page
+      //   .write(pageContent)
+      //   .then(data => {
+      //     logger.log('Sending', data);
+      //     res.status(201);
+      //     res.send(data);
+      //   })
+      //   .catch(reason => {
+      //     logger.log(reason);
+      //     res.send({});
+      //   });
+    });
   }
 
   static setPages(route) {

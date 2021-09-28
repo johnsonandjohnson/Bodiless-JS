@@ -123,7 +123,11 @@ const NewPageURLField = (props: FieldProps) => {
     ...restBasePathProps
   } = useBasePathField();
 
-  const isBasePathEmpty = isEmptyValue(basePathValue) || basePathValue === BASE_PATH_EMPTY_VALUE;
+  const basePathArray = basePathValue.split('/');
+  basePathArray.splice(-2, 1);
+  const parentBasePathValue = basePathArray.join('/');
+
+  const isBasePathEmpty = isEmptyValue(parentBasePathValue) || parentBasePathValue === BASE_PATH_EMPTY_VALUE;
   const isFullUrl = isBasePathEmpty;
 
   const { validate, ...rest } = props;
@@ -145,13 +149,13 @@ const NewPageURLField = (props: FieldProps) => {
       <ComponentFormLabel htmlFor="new-page-path">{fieldLabel}</ComponentFormLabel>
       {
         !isFullUrl
-          ? (<span className="mr-1">{`${basePathValue}`}</span>)
+          ? (<span className="mr-1">{`${parentBasePathValue}`}</span>)
           : null
       }
       <input
         {...restBasePathProps}
         type="hidden"
-        value={isBasePathEmpty ? BASE_PATH_EMPTY_VALUE : basePathValue}
+        value={isBasePathEmpty ? BASE_PATH_EMPTY_VALUE : parentBasePathValue}
       />
       <input
         name="new-page-path"
@@ -174,7 +178,7 @@ const NewPageURLField = (props: FieldProps) => {
           >
             <ComponentFormLink
               onClick={() => {
-                setValue(joinPath(basePathValue, fieldValueToUrl(value)));
+                setValue(joinPath(parentBasePathValue, fieldValueToUrl(value)));
                 setBasePathValue(BASE_PATH_EMPTY_VALUE);
                 if (validatePageUrl(value) === undefined) setError(undefined);
               }}
