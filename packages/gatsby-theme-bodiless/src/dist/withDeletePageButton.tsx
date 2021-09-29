@@ -48,7 +48,6 @@ enum DeletePageState {
 
 type PageStatus = {
   status: DeletePageState;
-  parentPagePath?: string;
   errorMessage?: string;
 };
 
@@ -56,18 +55,19 @@ type DeletePageProps = PageStatus;
 
 const deletePage = async ({ path, client } : any) => {
   const result = await handle(client.deletePage(path));
+
   if (result.response) {
-    return Promise.resolve(path);
-  }
-  if (result.message) {
-    return Promise.reject(new Error(result.message));
+    if (result.message !== 'Success' && typeof (result.message) === 'string') {
+      return Promise.reject(new Error(result.message));
+    }
+    return Promise.resolve();
   }
   return Promise.reject(new Error('An internal error occurred. Please try again later.'));
 };
 
 const DeletePageComp = (props : DeletePageProps) => {
   const {
-    status, errorMessage, parentPagePath,
+    status, errorMessage,
   } = props;
   const defaultUI = useMenuOptionUI();
   const {
@@ -121,7 +121,7 @@ const DeletePageComp = (props : DeletePageProps) => {
         <>
           <ComponentFormTitle>Delete operation was successful.</ComponentFormTitle>
           <ComponentFormDescription>
-            <ComponentFormLink href={parentPagePath} id="parent-page-link">Upon closing this dialog you will be redirected to the deleted page’s parent page.</ComponentFormLink>
+            Upon closing this dialog you will be redirected to the deleted page’s parent page.
           </ComponentFormDescription>
         </>
       );
@@ -178,10 +178,9 @@ const formPageDel = (client: Client) => contextMenuForm({
       setState({ status: DeletePageState.Pending });
       // Delete the page.
       deletePage({ path, client })
-        .then((parentPagePath: string) => {
-          if (parentPagePath) {
-            setState({ status: DeletePageState.Complete, parentPagePath });
-          }
+        .then((data) => {
+          console.log('---> Front Promisse:', data);
+          setState({ status: DeletePageState.Complete });
         })
         .catch((err: Error) => {
           setState({ status: DeletePageState.Errored, errorMessage: err.message });
@@ -192,14 +191,13 @@ const formPageDel = (client: Client) => contextMenuForm({
         });
     }
   }, [submits]);
-  const { status, errorMessage, parentPagePath } = state;
+  const { status, errorMessage } = state;
   return (
     <>
       <ComponentFormText type="hidden" field="keepOpen" initialValue />
       <DeletePageComp
         status={status}
         errorMessage={errorMessage}
-        parentPagePath={parentPagePath}
       />
     </>
   );

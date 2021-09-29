@@ -620,7 +620,7 @@ class Backend {
           .then(error => {
             if (error) {
               logger.log(error);
-              res.send({ error });
+              res.send(error);
             } else {
               res.send({});
             }

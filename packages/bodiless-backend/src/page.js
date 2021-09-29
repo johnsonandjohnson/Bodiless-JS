@@ -105,7 +105,7 @@ class Page {
   }
 
   deleteDirectory() {
-    return new Promise((resolve) => {
+    const readPromise = new Promise((resolve, reject) => {
       /**
        * DANGER: fs.rmdir() can delete anything in the code (and it is recursive).
        *         So make sure the directory to delete is inside a region of pages,
@@ -119,14 +119,18 @@ class Page {
 
       const subdirs = getDirectories(this.directory);
       if (subdirs.length !== 0) {
-        resolve(`Directory "${this.directory}" has subdiretories`);
+        resolve('The page cannot be deleted it has child pages. To delete this page, first delete or move all child pages, and retry.');
         return;
       }
 
       fs.rmdir(this.directory, { recursive: true }, err => {
-        resolve(err && err.message);
+        if (err) {
+          reject(err);
+        }
+        resolve(this);
       });
     });
+    return readPromise;
   }
 }
 
