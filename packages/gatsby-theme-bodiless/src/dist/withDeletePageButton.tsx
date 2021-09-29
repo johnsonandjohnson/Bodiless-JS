@@ -178,8 +178,7 @@ const formPageDel = (client: Client) => contextMenuForm({
       setState({ status: DeletePageState.Pending });
       // Delete the page.
       deletePage({ path, client })
-        .then((data) => {
-          console.log('---> Front Promisse:', data);
+        .then(() => {
           setState({ status: DeletePageState.Complete });
         })
         .catch((err: Error) => {
