@@ -63,7 +63,7 @@ const deletePage = async ({ path, client } : any) => {
     }
     return Promise.resolve();
   }
-  return Promise.reject(new Error('An internal error occurred. Please try again later.'));
+  return Promise.reject(new Error('The page cannot be deleted.'));
 };
 
 const DeletePageComp = (props : DeletePageProps) => {
