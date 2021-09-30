@@ -78,12 +78,12 @@ const Page: FC<PageProps> = observer(({ children, ui, ...rest }) => {
               <Editor>
                 <OnNodeErrorNotification />
                 <NewPageButton />
-                <DeletePageButton />
                 <DisablePageButton />
                 <GitButtons />
                 <Wrapper clickable>
                   {children}
                 </Wrapper>
+                <DeletePageButton />
               </Editor>
             </NotificationProvider>
           </GatsbyPageProvider>
