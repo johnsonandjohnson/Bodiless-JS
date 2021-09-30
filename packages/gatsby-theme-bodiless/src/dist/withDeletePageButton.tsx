@@ -53,9 +53,10 @@ type PageStatus = {
 
 type DeletePageProps = PageStatus;
 
+let actualState: number = -1;
+
 const deletePage = async ({ path, client } : any) => {
   const result = await handle(client.deletePage(path));
-
   if (result.response) {
     if (result.message !== 'Success' && typeof (result.message) === 'string') {
       return Promise.reject(new Error(result.message));
@@ -136,24 +137,26 @@ const DeletePageComp = (props : DeletePageProps) => {
   }
 };
 
-const redirectPage = (values: {keepOpen: boolean, path?: string}) => {
-  if (values.keepOpen) return;
-
-  if (typeof window !== 'undefined') {
-    const { href } = window.location;
-    const hrefArray = href.split('/');
-
-    // Handle paths withtout '/' at the end.
-    if (hrefArray[hrefArray.length - 1] !== '') hrefArray.push('');
-
-    // Removes last child path from href array.
-    hrefArray.splice(-2, 1);
-
-    const parentHref = hrefArray.join('/');
-
-    // Uses replace to redirect since child page no longer exists.
-    window.location.replace(parentHref);
+const redirectPage = (values: {keepOpen: boolean, path?: string }) => {
+  if (values.keepOpen || actualState === DeletePageState.Errored || typeof window === 'undefined') {
+    actualState = -1;
+    return;
   }
+
+  actualState = -1;
+
+  const { href } = window.location;
+  const hrefArray = href.split('/');
+
+  // Handle paths withtout '/' at the end.
+  if (hrefArray[hrefArray.length - 1] !== '') hrefArray.push('');
+
+  // Removes last child path from href array.
+  hrefArray.splice(-2, 1);
+
+  const parentHref = hrefArray.join('/');
+  // Uses replace to redirect since child page no longer exists.
+  window.location.replace(parentHref);
 };
 
 const formPageDel = (client: Client) => contextMenuForm({
@@ -172,16 +175,19 @@ const formPageDel = (client: Client) => contextMenuForm({
   const path = getPathValue(values);
 
   useEffect(() => {
-    // If the form is submitted and valid then lets try to creat a page.
-    if (submits && path /* && invalid === false */) {
+    if (submits && path) {
       context.showPageOverlay({ hasSpinner: false });
+      actualState = DeletePageState.Pending;
       setState({ status: DeletePageState.Pending });
+
       // Delete the page.
       deletePage({ path, client })
         .then(() => {
+          actualState = DeletePageState.Complete;
           setState({ status: DeletePageState.Complete });
         })
         .catch((err: Error) => {
+          actualState = DeletePageState.Errored;
           setState({ status: DeletePageState.Errored, errorMessage: err.message });
         })
         .finally(() => {
@@ -191,6 +197,7 @@ const formPageDel = (client: Client) => contextMenuForm({
     }
   }, [submits]);
   const { status, errorMessage } = state;
+
   return (
     <>
       <ComponentFormText type="hidden" field="keepOpen" initialValue />
