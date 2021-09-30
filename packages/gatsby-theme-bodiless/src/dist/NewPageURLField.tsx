@@ -141,6 +141,7 @@ const NewPageURLField = (props: FieldProps) => {
   const fieldLabel = isFullUrl ? 'URL' : 'Page Path';
   const inputClasses = isFullUrl ? INPUT_FIELD_BLOCK_CLASSES : INPUT_FIELD_INLINE_CLASSES;
 
+  // Do not move this validation above the hook useField.
   if (hidden) {
     return null;
   }
