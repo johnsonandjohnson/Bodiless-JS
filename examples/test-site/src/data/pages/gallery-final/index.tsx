@@ -38,7 +38,7 @@ export default (props: PageProps) => (
       <LandscapeLinkableImage />
       <PrimaryHeader />
       <Body />
-      <Gallery nodeKey="gallery">
+      <Gallery nodeKey="gallery-content">
         <GalleryTile nodeKey="tile1" />
         <GalleryTile nodeKey="tile2" />
       </Gallery>
