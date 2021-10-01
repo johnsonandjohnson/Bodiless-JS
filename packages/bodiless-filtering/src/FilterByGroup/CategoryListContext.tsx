@@ -16,22 +16,33 @@ import React, {
   createContext,
   useContext,
 } from 'react';
+import { useNode } from '@bodiless/core';
 import { useListContext } from '@bodiless/components';
 import type { ComponentOrTag } from '@bodiless/fclasses';
 
 type CategoryListContextType = {
   categoryId?: string,
+  categoryName?: string,
 };
 
 const CategoryListContext = createContext<CategoryListContextType>({});
-
 const useCategoryListContext = () => useContext(CategoryListContext);
+
 const withCategoryListContextProvider = (Component: ComponentOrTag<any>) => {
   const WithCategoryListContextProvider = (props: any) => {
     const { currentItem } = useListContext();
+    // Grab the categoryName from the node and pass it to the context.
+    const { node } = useNode();
+    const categoryNameNodePath = node.peer<{ text: string }>([
+      ...node.path.slice(0, node.path.length - 1),
+      'category_name',
+    ]);
+
     const categoryListValue = {
       categoryId: currentItem,
+      categoryName: categoryNameNodePath.data.text,
     };
+
     return (
       <CategoryListContext.Provider value={categoryListValue}>
         <Component {...props} />

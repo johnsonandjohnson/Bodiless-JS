@@ -16,7 +16,7 @@ import React, {
   ComponentType, FC, useRef, useCallback, useEffect,
 } from 'react';
 import {
-  withParent, withPrependChild, useNode, useClickOutside,
+  withParent, withAppendChild, useNode, useClickOutside,
 } from '@bodiless/core';
 import type { LinkData } from '@bodiless/components';
 import {
@@ -187,7 +187,7 @@ const SubmenuIndicator = asToken(
  * it has a submenu and it's title is a link.
  */
 const withSubmenuIndicator = flowIf(useHasLink)(
-  withPrependChild(SubmenuIndicator, 'SubmenuIndicator'),
+  withAppendChild(SubmenuIndicator, 'SubmenuIndicator'),
 );
 
 /**

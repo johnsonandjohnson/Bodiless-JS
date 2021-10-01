@@ -28,7 +28,7 @@ import {
   useAccordionContext,
 } from '@bodiless/accordion';
 import {
-  withAnyTag,
+  withAnyTag, withoutAnyTag,
 } from './Filter.token';
 
 const asResponsiveAccordionTitle = asToken(
@@ -73,6 +73,11 @@ const asResponsiveFilterByGroup = asToken(
 export const withMultipleAllowedTags = asToken(
   addProps({
     multipleAllowedTags: true,
+  }),
+  withDesign({
+    Filter: asToken(
+      withoutAnyTag,
+    ),
   }),
 );
 

@@ -563,7 +563,7 @@ import Gallery, { GalleryTile } from './Gallery';
 And place it on the page after the `<Body />` tag:
 
 ```
-<Gallery nodeKey="gallery">
+<Gallery nodeKey="gallery-content">
   <GalleryTile nodeKey="tile1" />
   <GalleryTile nodeKey="tile2" />
 </Gallery>
@@ -572,15 +572,15 @@ And place it on the page after the `<Body />` tag:
 Using the edit UI, upload images and add captions to your two new components. 
 
 Look at the contents of `src/data/pages/gallery`. You should see new `json`
-files whose names begin with `gallery$tile1$` and `gallery$tile2$...`. These
-names correspond to the `nodeKey` props on the `Gallery` and `CaptionedImage`
-components you added to `index.tsx` and `Gallery.tsx` respectively. The rest of
-those filenames (`...image` and `...caption`) are derived from the `nodeKey`
-specified in your `CaptionedImage` component. Each is namespaced by the
-`nodeKey` of the parent component. As a result, you can add any number of
-`CaptionedImage` components to the same gallery, and any number of `Gallery`
-components on the same page, as long as each has a distinct `nodeKey`, they will
-not collide.
+files whose names begin with `gallery-content$tile1$` and
+`gallery-content$tile2$...`. These names correspond to the `nodeKey` props on
+the `Gallery` and `CaptionedImage` components you added to `index.tsx` and
+`Gallery.tsx` respectively. The rest of those filenames (`...image` and
+`...caption`) are derived from the `nodeKey` specified in your `CaptionedImage`
+component. Each is namespaced by the `nodeKey` of the parent component. As a
+result, you can add any number of `CaptionedImage` components to the same
+gallery, and any number of `Gallery` components on the same page, as long as
+each has a distinct `nodeKey`, they will not collide.
 
 It's the `withNode()` HOC (imported from `@bodiless/core`) which adds the
 `nodeKey` prop to your `CaptionedImage` and `Gallery` components. Anytime you
@@ -681,14 +681,14 @@ to
 Now remove the following from `index.tsx`:
 
 ```ts
-<Gallery nodeKey="gallery">
+<Gallery nodeKey="gallery-content">
   <GalleryTile nodeKey="tile1" />
   <GalleryTile nodeKey="tile2" />
 </Gallery>
 ```
 And replace with:
 ```ts
-<Gallery nodeKey="gallery" />
+<Gallery nodeKey="gallery-content" />
 ```
 
 Be sure to update the imports in `Gallery.tsx`.  They should now be:

@@ -14,24 +14,36 @@
 
 /* eslint-disable react/jsx-indent */
 import React, {
+  useState,
+  useEffect,
   useRef,
   useContext,
+  useMemo,
   createContext,
   FC,
 } from 'react';
 import { v1 } from 'uuid';
 import { uniqBy } from 'lodash';
-import { TagButtonProps } from '@bodiless/components';
-import { Injector, addProps, Enhancer } from '@bodiless/fclasses';
+import { Injector, Enhancer } from '@bodiless/fclasses';
 import {
   FBGContextOptions,
   SuggestionsRefType,
   FBGContextType,
   TagType,
+  FilteredItemType,
+  RegisterItemContextType,
 } from './types';
 import { useFilterByGroupStore } from './FilterByGroupStore';
-import { useTagsAccessors } from './FilterModel';
+import { TagButtonProps } from '../TagButton';
 
+const RegisterItemContext = React.createContext<RegisterItemContextType>({
+  registerItem: () => undefined,
+});
+
+/**
+ * @private
+ * The context which provides access to the current state of the filters.
+ */
 const FilterByGroupContext = createContext<FBGContextType>({
   getSuggestions: () => [],
   useRegisterSuggestions: () => () => undefined,
@@ -41,18 +53,28 @@ const FilterByGroupContext = createContext<FBGContextType>({
   isTagSelected: () => false,
   clearSelectedTags: () => { },
   multipleAllowedTags: false,
+  getFilteredItems: () => [],
+  filtersInitialized: false,
 });
 
+/**
+ * Hook which provides access to the current state of the filters, an methods
+ * for registering tag autocomplete suggestions and selecting/unselecting tags.
+ *
+ * @returns
+ * The current value of the FilterByGroup context.
+ */
 const useFilterByGroupContext = () => useContext(FilterByGroupContext);
-const useIsFilterTagSelected = () => {
-  const { tag } = useTagsAccessors();
-  return useFilterByGroupContext().isTagSelected(tag);
-};
 
+/**
+ * @private
+ * Context provider for the FilterByGroup context.
+ */
 const FilterByGroupProvider: FC<FBGContextOptions> = ({
   children,
   suggestions,
   multipleAllowedTags,
+  items = [],
 }) => {
   const {
     selectTag,
@@ -60,6 +82,7 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
     getSelectedTags,
     isTagSelected,
     clearSelectedTags,
+    filtersInitialized,
   } = useFilterByGroupStore({ multipleAllowedTags });
 
   const refs = useRef<any>([]);
@@ -96,8 +119,9 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
     isTagSelected,
     multipleAllowedTags: multipleAllowedTags || false,
     clearSelectedTags,
+    getFilteredItems: () => items,
+    filtersInitialized,
   };
-
   return (
     <FilterByGroupContext.Provider value={newValue}>
       {children}
@@ -105,14 +129,64 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
   );
 };
 
+/**
+ * @private
+ * Provider for the context which allows filterable items to register themselves.
+ */
+const FBGRegisterItemsProvider: FC<any> = ({
+  children,
+  setItems,
+}) => {
+  const registerItem = (newItem: FilteredItemType) => setItems(
+    (oldItems: FilteredItemType[]) => {
+      const items = [...oldItems];
+      const itemIndex = items.findIndex(x => x.id === newItem.id);
+
+      if (itemIndex === -1) {
+        items.push(newItem);
+      } else {
+        items[itemIndex] = newItem;
+      }
+
+      return items;
+    },
+  );
+
+  const contextValue = useMemo(() => ({ registerItem }), [setItems]);
+
+  return (
+    <RegisterItemContext.Provider value={contextValue}>
+      {children}
+    </RegisterItemContext.Provider>
+  );
+};
+
+/**
+ * HOC which provides the context necessary to enable filtering by groups/tags. Must enclose
+ * the filters and all filterable items.
+ *
+ * @param Component
+ * The component to receive the context.
+ *
+ * @returns
+ * A version of the component wrapped in the context.
+ */
 const withFilterByGroupContext: Enhancer<FBGContextOptions> = Component => props => {
-  const { suggestions, multipleAllowedTags } = props as FBGContextOptions;
+  const { suggestions, multipleAllowedTags, ...rest } = props;
+  const [items, setItems] = useState<FilteredItemType[]>([]);
+
   return (
       <FilterByGroupProvider
         suggestions={suggestions}
         multipleAllowedTags={multipleAllowedTags}
+        items={items}
       >
-        <Component {...props} />
+        <FBGRegisterItemsProvider
+          setItems={setItems}
+          items={items}
+        >
+          <Component {...rest as any} />
+        </FBGRegisterItemsProvider>
       </FilterByGroupProvider>
   );
 };
@@ -144,14 +218,41 @@ const withTagProps = (
   return <Component {...props} {...suggestionProps} />;
 };
 
-const withFBGSuggestions = ({ suggestions }: FBGContextOptions) => addProps({ suggestions });
+/**
+ * Hook which should be used in a filterable item to register itself on effect.
+ *
+ * Items register themselves in order to provide a source of truth
+ * about which items are visible with the currently selected tags. Items
+ * may also attach arbitrary data when they register themselves. This allows
+ * for things like pagination, dynamically updated TOC's, etc.
+ *
+ * Note: an item which uses this *must not* observe the FilterByGroupContext.
+ * Doing so will result in a render loop.
+ *.
+ * @param item
+ * The item which which to register itself.
+ *
+ * @see withFilterByTags
+ */
+const useRegisterItem = (item: FilteredItemType) => {
+  const { id, isDisplayed } = item;
+  const { registerItem } = useContext(RegisterItemContext);
+  const { filtersInitialized } = useFilterByGroupContext();
+  useEffect(
+    () => {
+      // Only register the item once the filters have been initialized from query params.
+      // This avoids registering all items on page load.
+      if (filtersInitialized) {
+        registerItem(item);
+      }
+    },
+    [registerItem, id, filtersInitialized, isDisplayed],
+  );
+};
 
-export default FilterByGroupContext;
 export {
-  FilterByGroupContext,
   useFilterByGroupContext,
   withFilterByGroupContext,
-  withFBGSuggestions,
   withTagProps,
-  useIsFilterTagSelected,
+  useRegisterItem,
 };

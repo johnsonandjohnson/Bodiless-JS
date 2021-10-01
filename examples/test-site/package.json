@@ -46,6 +46,7 @@
     "express": "^4.17.1",
     "gatsby": "^2.19.17",
     "gatsby-plugin-canonical-urls": "^2.1.18",
+    "gatsby-plugin-exclude": "^1.0.2",
     "gatsby-plugin-google-tagmanager": "^2.1.4",
     "gatsby-plugin-sitemap": "^2.2.24",
     "informed": "~3.13.1",

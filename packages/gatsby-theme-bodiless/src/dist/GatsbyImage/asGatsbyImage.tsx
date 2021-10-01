@@ -28,6 +28,7 @@ import {
   addClasses, DesignableComponentsProps, Div, withDesign, withoutProps, designable,
 } from '@bodiless/fclasses';
 import flow from 'lodash/flow';
+import omit from 'lodash/omit';
 import GatsbyImagePresets from './GatsbyImagePresets';
 
 type Components = {
@@ -63,7 +64,7 @@ const asDesignableGatsbyImage = (Component: CT<any>) => {
       );
     }
     return (
-      <Image {...rest} />
+      <Image {...omit(rest, 'canonicalPreset', 'imgStyle')} />
     );
   };
   return designable(startComponents, 'GatsbyImage')(AsDesignableGatsbyImage);

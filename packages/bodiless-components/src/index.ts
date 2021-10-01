@@ -16,7 +16,6 @@ import Editable, { withPlaceholder, asEditable } from './Editable';
 import type { UseEditableOverrides } from './Editable';
 import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
-import asTaggableItem from './Taggable/asTaggableItem';
 import asBodilessAnchor from './Anchor/asBodilessAnchor';
 import {
   withMeta, withMetaStatic, withMetaHtml, withTitle,
@@ -27,8 +26,6 @@ import asBodilessHelmet from './Helmet/Helmet';
 import withDataLayerItem, { withDefaultDataLayer, withDataLayerScript } from './GTM/gtm';
 import { withToggle, withToggleTo, withToggleButton } from './Toggle';
 import withEditPlaceholder from './Placeholder';
-import { TagButtonProps, withTagButton, useTagsAccessors } from './TagButton';
-import type { TagsNodeType } from './TagButton';
 import asBodilessIframe, {
   asBaseBodilessIframe,
   withoutPointerEvents,
@@ -66,6 +63,7 @@ import withBodilessLinkToggle from './withBodilessLinkToggle';
 
 import withFormHeader from './withFormHeader';
 import withFormSnippet from './withFormSnippet';
+import withPageDisableButton, { useIsPageDisabled } from './PageDisableButton';
 
 export {
   withFormHeader,
@@ -85,10 +83,6 @@ export {
   withMetaHtml,
   asBodilessHelmet,
   withEditPlaceholder,
-  withTagButton,
-  TagButtonProps,
-  asTaggableItem,
-  useTagsAccessors,
   asBaseBodilessIframe,
   asBodilessIframe,
   withoutPointerEvents,
@@ -121,6 +115,8 @@ export {
   withDefaultDataLayer,
   withDataLayerScript,
   asBodilessAnchor,
+  withPageDisableButton,
+  useIsPageDisabled,
 };
 
 export * from './Chameleon/index';
@@ -138,5 +134,4 @@ export type {
 
 export type {
   UseEditableOverrides,
-  TagsNodeType,
 };
