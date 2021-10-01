@@ -20,13 +20,13 @@ import FilterByGroup from '../src/FilterByGroup/FilterByGroupTestable';
 import Filter from '../src/FilterByGroup/Filter';
 import { useFilterByGroupContext } from '../src/FilterByGroup/FilterByGroupContext';
 import { Tag } from '../src/FilterByGroup/FilterByGroupStore';
-import type { TagType } from '../src/FilterByGroup/types';
+import type { TagType, FilterTagType } from '../src/FilterByGroup/types';
 
 type WithRegisterSuggestions = (tags: TagType[]) => void;
 
 type Props = {
   onAdd: (registerSuggestion: WithRegisterSuggestions) => void,
-  onSelect: (selectFn: (tag: TagType) => void) => void,
+  onSelect: (selectFn: (tag: FilterTagType) => void) => void,
   force: string,
 };
 
@@ -40,7 +40,7 @@ const ContextLogger: FC<Props> = ({ onAdd, onSelect }) => {
     clearSelectedTags,
   } = useFilterByGroupContext();
 
-  const allSuggestions = getSuggestions() as TagType[];
+  const allSuggestions = getSuggestions() as FilterTagType[];
 
   const tags = allSuggestions.map(tag => (<span id={tag.id} key={tag.id}>{tag.name}</span>));
   const registerSuggestion = useRegisterSuggestions();
