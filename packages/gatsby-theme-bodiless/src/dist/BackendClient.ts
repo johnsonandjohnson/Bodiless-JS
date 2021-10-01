@@ -86,7 +86,8 @@ export default class BackendClient {
       path: path$,
       template,
     };
-    return this.post(`${this.prefix}/pages`, payload);
+    const url = `${this.prefix}/pages`;
+    return this.post(url, payload);
   }
 
   commit(
@@ -152,11 +153,10 @@ export default class BackendClient {
     return this.post(`${this.prefix}/merge/master`, {});
   }
 
-  movePage(origin: string, destiny: string) {
-    console.log('---->>>>>>> BackendClient origin', origin);
+  movePage(origin: string, destination: string) {
     const payload = {
       origin,
-      destiny,
+      destination,
     };
     const url = `${this.prefix}/move`;
     return this.post(url, payload);

@@ -20,6 +20,11 @@ const logger = new Logger('BACKEND');
 
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
 
+const getDirectories = (dir) => (
+  fs.readdirSync(dir).filter((file) => fs.statSync(
+    `${dir}/${file}`,
+  ).isDirectory())
+);
 // once we on node > 10.12.0
 // we can leverage fs.mkdir since it supports { recursive: true }
 function ensureDirectoryExistence(filePath) {
@@ -59,6 +64,10 @@ class Page {
     return `${this.getBasePath()}/${this.path}.json`;
   }
 
+  get directory() {
+    return `${this.getBasePath()}/${this.path}`;
+  }
+
   read() {
     const readPromise = new Promise(resolve => {
       fs.readFile(this.file, (err, data) => {
@@ -82,18 +91,6 @@ class Page {
     return readPromise;
   }
 
-  rename(newPath) {
-    const readPromise = new Promise((resolve, reject) => {
-      fs.rename(this.path, newPath, err => {
-        if (err) {
-          reject(err);
-        }
-        resolve(this);
-      });
-    });
-    return readPromise;
-  }
-
   delete() {
     const readPromise = new Promise((resolve, reject) => {
       ensureDirectoryExistence(this.file);
@@ -106,6 +103,25 @@ class Page {
     });
     return readPromise;
   }
-}
 
+  renameDirectory(newDirectory) {
+    return new Promise((resolve) => {
+      const [, pageRelativeDir] = this.directory.split('/data/pages/');
+      if (!pageRelativeDir) {
+        resolve(`Invalid directory "${this.directory}" to move`);
+        return;
+      }
+
+      const subdirs = getDirectories(this.directory);
+      if (subdirs.length !== 0) {
+        resolve('The page cannot be moved');
+        return;
+      }
+
+      fs.rename(this.directory, newDirectory, { recursive: true }, err => {
+        resolve(err && err.message);
+      });
+    });
+  }
+}
 module.exports = Page;

@@ -611,46 +611,41 @@ class Backend {
 
   static movePage(route) {
     route.post((req, res) => {
-      const { body: { origin, destiny } } = req;
+      const pagePath = req.params[0];
+      const page = Backend.getPage(pagePath);
+      page.setBasePath(backendPagePath);
+      const { body: { origin, destination } } = req;
 
-      console.log('===>>>> backend origin, destiny =', origin, destiny);
+      console.log('===>>>> backend origin, destination =', origin, destination);
       console.log('===>>>> backend backendPagePath =', backendPagePath);
 
-      const destinyFullPath = `${backendPagePath}${destiny}`;
+      const destinationFullPath = `${backendPagePath}${destination}`;
       const originFullPath = `${backendPagePath}${origin}`;
 
-
-      logger.log(`---> Start moving page ${originFullPath} to:${destinyFullPath}`);
+      logger.log(`---> Start moving page ${originFullPath} to:${destinationFullPath}`);
 
       // TODO: start here....
 
       res.send({});
 
-      // await fsPromises.stat()
-
-      // if (page.exists) {
-      //   res.status(409);
-      //   res.send(`Error: page ${pagePath} already exists`);
-      //   return;
-      // }
-      // page
-      //   .write(pageContent)
-      //   .then(data => {
-      //     logger.log('Sending', data);
-      //     res.status(201);
-      //     res.send(data);
-      //   })
-      //   .catch(reason => {
-      //     logger.log(reason);
-      //     res.send({});
-      //   });
+      page
+        .renameDirectory()
+        .then(error => {
+          if (error) {
+            logger.log(error);
+            res.send(error);
+          } else {
+            res.send({});
+          }
+        });
     });
   }
 
   static setPages(route) {
     route.post((req, res) => {
-      const pagePath = req.body.path || '';
-      const template = req.body.template || '_default';
+      const { body } = req;
+      const pagePath = body.path || '';
+      const template = body.template || '_default';
       const filePath = path.join(pagePath, 'index');
       const pageContent = {
         '#template': template,

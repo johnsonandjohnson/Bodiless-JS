@@ -127,7 +127,8 @@ const NewPageURLField = (props: FieldProps) => {
   basePathArray.splice(-2, 1);
   const parentBasePathValue = basePathArray.join('/');
 
-  const isBasePathEmpty = isEmptyValue(parentBasePathValue) || parentBasePathValue === BASE_PATH_EMPTY_VALUE;
+  const isBasePathEmpty = isEmptyValue(parentBasePathValue)
+  || parentBasePathValue === BASE_PATH_EMPTY_VALUE;
   const isFullUrl = isBasePathEmpty;
 
   const { validate, ...rest } = props;

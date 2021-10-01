@@ -38,7 +38,7 @@ import handle from './ResponseHandler';
 import MovePageURLField, { getPathValue } from './MovePageURLField';
 
 // type Client = {
-//   movePage: (origin: string, destiny: string) => AxiosPromise<any>;
+//   movePage: (origin: string, destination: string) => AxiosPromise<any>;
 // };
 
 // const DEFAULT_PAGE_TEMPLATE = '_default';
@@ -60,22 +60,21 @@ type MovePageProps = PageStatus;
 
 const usePagePath = () => useNode().node.pagePath;
 
-const movePage = async ({ origin, destiny, client } : any) => {
-  
-  console.log('(1) ----======> client', client);
-  console.log('(1) ----======> origin', origin);
+const movePage = async ({ origin, destination, client } : any) => {
+  // console.log('(1) ----======> client', client);
+  // console.log('(1) ----======> origin', origin);
 
-  const result = await handle(client.movePage(origin, destiny));
+  const result = await handle(client.movePage(origin, destination));
 
-  console.log('(2) ----======> result', result);
+  // console.log('(2) ----======> result', result);
 
   if (result.response) {
-    return Promise.resolve(destiny);
+    return Promise.resolve(destination);
   }
   if (result.message) {
     return Promise.reject(new Error(result.message));
   }
-  return Promise.reject(new Error('An internal error occurred. Please try again later.'));
+  return Promise.reject(new Error('The page cannot be moved.'));
 };
 
 const MovePageComp = (props : MovePageProps) => {
@@ -142,7 +141,9 @@ const MovePageComp = (props : MovePageProps) => {
         <>
           <ComponentFormTitle>Operation Complete</ComponentFormTitle>
           <ComponentFormDescription>
-            <ComponentFormLink href={movePagePath} id="new-page-link">{`Click here to visit the new page: ${movePagePath}`}</ComponentFormLink>
+            Move operation was successful. Upon closing this dialog you will be redirected to the
+            new page’s url.
+            <ComponentFormLink hidden href={movePagePath} id="new-page-link">{`Click here to visit the new page: ${movePagePath}`}</ComponentFormLink>
           </ComponentFormDescription>
         </>
       );
@@ -157,9 +158,30 @@ const MovePageComp = (props : MovePageProps) => {
   }
 };
 
+const redirectPage = (values: {keepOpen: boolean, path?: string}) => {
+  if (values.keepOpen) return;
+
+  if (typeof window !== 'undefined') {
+    const { href } = window.location;
+    const hrefArray = href.split('/');
+
+    // Handle paths withtout '/' at the end.
+    if (hrefArray[hrefArray.length - 1] !== '') hrefArray.push('');
+
+    // Removes last child path from href array.
+    hrefArray.splice(-2, 1);
+
+    const parentHref = hrefArray.join('/');
+
+    // Uses replace to redirect since child page no longer exists.
+    window.location.replace(parentHref);
+  }
+};
+
 const formPageMove = (client: any) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
+  onClose: redirectPage,
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 })(({ formState, formApi } : any) => {
   const { ComponentFormText } = useMenuOptionUI();
@@ -181,11 +203,11 @@ const formPageMove = (client: any) => contextMenuForm({
 
       const pathArray = path.split('/');
       pathArray.splice(-2, 1);
-      const destiny = pathArray.join('/');
+      const destination = pathArray.join('/');
 
       movePage({
         origin,
-        destiny,
+        destination,
         client,
       })
         .then((movePagePath: string) => {
