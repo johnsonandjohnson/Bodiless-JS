@@ -1,6 +1,6 @@
 {
   "Components": {
-    "Table.md": "./doc/table.md",
+    "Table.md": "./doc/Table.md",
    "assets": {
     "Table_1.png": "./doc/assets/Table_1.png", 
     "Table_2.png": "./doc/assets/Table_2.png",

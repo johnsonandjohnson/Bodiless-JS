@@ -66,7 +66,6 @@ Adding a footer inserts a final row that looks normal, but uses the `<ifoot>` ta
 
 
 ---
-
 ## Site Builder Details
 
 - Purpose
