@@ -16,7 +16,7 @@ import withDirection, { DIRECTIONS } from './withDirection/withDirection';
 
 export { default as ComponentSelector } from './ComponentSelector';
 export * from './ComponentSelector/types';
-export type { FlowContainerProps } from './FlowContainer/types';
+export type { FlowContainerProps, FlowContainerWrapperProps } from './FlowContainer/types';
 export { default as FlowContainer, withMandatoryCategories } from './FlowContainer';
 export type {
   Props as SortableResizableProps,

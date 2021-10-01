@@ -80,6 +80,10 @@ export type SortableChildProps = {
   className?: string;
 };
 
+export type FlowContainerWrapperProps = {
+  itemCount: number,
+};
+
 export type FlowContainerComponents = {
   Wrapper: ComponentOrTag<any>,
   ComponentWrapper: ComponentOrTag<any>,

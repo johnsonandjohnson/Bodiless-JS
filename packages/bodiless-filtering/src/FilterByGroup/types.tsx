@@ -13,7 +13,7 @@
  */
 
 import { ComponentType, HTMLProps } from 'react';
-import { TagType as BaseTagType, WithNodeProps } from '@bodiless/core';
+import { TagType as BaseTagType, WithNodeProps, ContentNode } from '@bodiless/core';
 import { StylableProps, DesignableComponentsProps, DesignableProps } from '@bodiless/fclasses';
 import { ListProps } from '@bodiless/components';
 
@@ -56,15 +56,29 @@ export type FilterByGroupProps = {
 
 export type TagTitleProps = {
   emptyTitleText?: string,
+  onChange?: () => any,
 } & DesignableComponentsProps<TagTitleComponents>;
 
 export type NodeTagType = {
   tags: TagType[],
 };
 
+export type FilteredItemType<D = any> = {
+  id: string,
+  isDisplayed?: boolean,
+  data: D,
+};
+
+export type RegisterItem = (item: FilteredItemType) => void;
+
+export type RegisterItemContextType = {
+  registerItem: RegisterItem,
+};
+
 export type FBGContextOptions = {
   suggestions?: TagType[],
   multipleAllowedTags?: boolean,
+  items?: FilteredItemType[],
 };
 
 export type SuggestionsRefType = {
@@ -76,13 +90,70 @@ export type RegisterSuggestionsProps = {
   registerSuggestions: (tags: TagType[]) => undefined,
 };
 
+export type FilterTagType = TagType & {
+  categoryId: string,
+  categoryName: string,
+};
+
+/**
+ * Type of the context which supports filtering by tags/groups.
+ */
 export type FBGContextType = {
+  /**
+   * Returns a list of suggestions for the autocomplete tag field.
+   */
   getSuggestions: () => TagType[],
+  /**
+   * Registers the tags assigned to an item as possible suggestions for the
+   * autocomplete tag field.
+   */
   useRegisterSuggestions: () => (tags: TagType[]) => void,
-  selectTag: (tag: TagType) => void,
-  getSelectedTags: () => TagType[],
-  unSelectTag: (tag: TagType) => void,
-  isTagSelected: (tag: TagType) => boolean,
+  /**
+   * Selects the specified tag.  It will be used to filter items.
+   */
+  selectTag: (tag: FilterTagType, callback?: Function) => void,
+  /**
+   * Returns the list of selected tags.
+   */
+  getSelectedTags: () => FilterTagType[],
+  /**
+   * Unselects the specified tag.  It will no longer be used to filter items.
+   */
+  unSelectTag: (tag: FilterTagType, callback?: Function) => void,
+  /**
+   * Tests whetherthe specified tag is currently selected.
+   */
+  isTagSelected: (tag: FilterTagType) => boolean,
+  /**
+   * Removes all selected tags.  All filters will be cleared.
+   */
   clearSelectedTags: () => void,
+  /**
+   * Indicates whether or not more than one tag can be selected.
+   */
   multipleAllowedTags: boolean,
+  /**
+   * Returns a list of all registered filterable items. Note that this list
+   * will contain all items (even those hidden by the filtering). The `isDisplayed`
+   * property on the item indicates whether that item is currently visible.
+   */
+  getFilteredItems: () => FilteredItemType[],
+  /**
+   * True when the filters have been fully initialized from query parameters.
+   */
+  filtersInitialized?: boolean,
+};
+
+/**
+ * Type of the props expected by a filtereable item.
+ */
+export type WithFilterByTagsProps = {
+  /**
+   * The currently selected tags.
+   */
+  selectedTags: FilterTagType[],
+  /**
+   * Callback to append data to the item when it registers itself.
+   */
+  getFilteredItemData?: (node: ContentNode<any>) => any,
 };

@@ -25,7 +25,7 @@ const setEditMode = (isEdit: boolean) => {
 setEditMode(true);
 
 // eslint-disable-next-line import/first
-import asTaggableItem from '../src/Taggable/asTaggableItem';
+import { asTaggableItem } from '../src/Taggable/asTaggableItem';
 
 const getSuggestions = () => [
   { id: 'a', name: 'Bananas' },

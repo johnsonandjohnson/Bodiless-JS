@@ -46,7 +46,6 @@ import {
   asSubList, withDeleteNodeOnUnwrap,
   withSubLists,
   ifViewportIsNot,
-  withTagButton,
 } from '@bodiless/components';
 import { asAccordionBody, asAccordionTitle, asAccordionWrapper } from '@bodiless/accordion';
 import { TAG_ANY_KEY } from './FilterByGroupStore';
@@ -57,6 +56,7 @@ import {
 import { useFilterByGroupContext, withTagProps } from './FilterByGroupContext';
 import { useTagsAccessors } from './FilterModel';
 import { withCategoryListContextProvider, useCategoryListContext } from './CategoryListContext';
+import withTagButton from '../TagButton/withTagButton';
 
 const tagTitleComponentsStart: TagTitleComponents = {
   FilterInputWrapper: Div,
@@ -78,6 +78,7 @@ const withUnselectOnDelete: HOC<{ onDelete?: any }> = Component => props => {
 
 const TagTitleBase: FC<TagTitleProps> = ({
   components,
+  onChange,
   emptyTitleText = 'Select Tag...',
   ...rest
 }) => {
@@ -99,8 +100,9 @@ const TagTitleBase: FC<TagTitleProps> = ({
   } = useFilterByGroupContext();
 
   if (tag === undefined) return <></>;
+  const checked = isTagSelected(tag);
 
-  const onSelect = () => (isTagSelected(tag) ? unSelectTag(tag) : selectTag(tag));
+  const onSelect = () => (isTagSelected(tag) ? unSelectTag(tag, onChange) : selectTag(tag, onChange));
   const htmlId = tag.id === TAG_ANY_KEY ? categoryId : tag.id;
 
   return (
@@ -110,8 +112,8 @@ const TagTitleBase: FC<TagTitleProps> = ({
         name={categoryId}
         value={tag.id}
         id={htmlId}
-        onChange={() => onSelect()}
-        checked={isTagSelected(tag)}
+        onChange={onSelect}
+        checked={checked}
       />
       {
         isEmpty(tag.name)

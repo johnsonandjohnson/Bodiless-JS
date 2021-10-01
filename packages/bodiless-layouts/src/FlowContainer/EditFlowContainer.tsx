@@ -58,6 +58,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerPr
   return (
     <ComponentDisplayModeProvider mode={ComponentDisplayMode.EditFlowContainer}>
       <Wrapper
+        itemCount={items.length}
         onSortEnd={(sort: SortEnd) => {
           const { oldIndex, newIndex } = sort;
           setFlowContainerItems(arrayMove(items, oldIndex, newIndex));
