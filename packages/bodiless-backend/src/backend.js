@@ -15,7 +15,6 @@
 /* eslint no-console: 0 */
 /* eslint global-require: 0 */
 const express = require('express');
-const fs = require('fs');
 const bodyParser = require('body-parser');
 const { spawn } = require('child_process');
 const formidable = require('formidable');
@@ -27,8 +26,6 @@ const GitCmd = require('./GitCmd');
 const { getChanges, getConflicts, mergeMaster } = require('./git');
 const { copyAllFiles } = require('./fileHelper');
 const Logger = require('./logger');
-
-const fsPromises = fs.promises;
 
 const backendPrefix = process.env.GATSBY_BACKEND_PREFIX || '/___backend';
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
