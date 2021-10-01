@@ -13,7 +13,9 @@
  */
 
 import React from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import Tooltip, { TooltipProps } from 'rc-tooltip/lib/Tooltip';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { mount, ReactWrapper } from 'enzyme';
 import { flow } from 'lodash';
 
