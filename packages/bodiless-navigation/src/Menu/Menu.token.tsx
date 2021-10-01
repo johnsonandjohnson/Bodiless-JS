@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import { observer } from 'mobx-react-lite';
 import { useEditContext, useNode } from '@bodiless/core';
 import type { Token } from '@bodiless/fclasses';
 import {
@@ -90,7 +91,9 @@ const withHoverStyles = withDesign({
   Wrapper: asToken(
     addClasses('group-hover:flex'),
     addClassesIf(useIsSubmenuContracted)('hidden'),
+    observer as Token,
     addClassesIf(useIsSubmenuExpanded)('flex'),
+    observer as Token,
   ),
 });
 
