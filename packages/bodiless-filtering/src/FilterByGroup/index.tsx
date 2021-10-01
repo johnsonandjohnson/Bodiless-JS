@@ -16,6 +16,7 @@ import FilterByGroupClean from './FilterByGroupClean';
 import { TestableFilterByGroup, asTestableFilterByGroup } from './FilterByGroupTestable';
 import {
   useFilterByGroupContext,
+  useIsFilterTagSelected,
   withTagProps,
   useRegisterItem,
 } from './FilterByGroupContext';
@@ -36,6 +37,7 @@ export {
   asTestableFilterByGroup,
   asFilterableByGroup,
   useFilterByGroupContext,
+  useIsFilterTagSelected,
   withTagProps,
   useRegisterItem,
   Tag,

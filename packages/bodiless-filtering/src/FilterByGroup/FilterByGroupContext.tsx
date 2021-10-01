@@ -33,6 +33,7 @@ import {
   FilteredItemType,
   RegisterItemContextType,
 } from './types';
+import { useTagsAccessors } from './FilterModel';
 import { useFilterByGroupStore } from './FilterByGroupStore';
 import { TagButtonProps } from '../TagButton';
 
@@ -65,6 +66,10 @@ const FilterByGroupContext = createContext<FBGContextType>({
  * The current value of the FilterByGroup context.
  */
 const useFilterByGroupContext = () => useContext(FilterByGroupContext);
+const useIsFilterTagSelected = () => {
+  const { tag } = useTagsAccessors();
+  return useFilterByGroupContext().isTagSelected(tag);
+};
 
 /**
  * @private
@@ -254,5 +259,6 @@ export {
   useFilterByGroupContext,
   withFilterByGroupContext,
   withTagProps,
+  useIsFilterTagSelected,
   useRegisterItem,
 };
