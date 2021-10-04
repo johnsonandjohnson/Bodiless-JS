@@ -87,7 +87,10 @@ const useIsSubmenuContracted = () => {
 };
 
 const withHoverStyles = withDesign({
-  OuterWrapper: addClassesIf(useIsHoverEnabled)('group'),
+  OuterWrapper: asToken(
+    addClassesIf(useIsHoverEnabled)('group'),
+    observer as Token,
+  ),
   Wrapper: asToken(
     addClasses('group-hover:flex'),
     addClassesIf(useIsSubmenuContracted)('hidden'),
