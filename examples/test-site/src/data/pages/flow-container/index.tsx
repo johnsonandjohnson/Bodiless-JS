@@ -29,7 +29,11 @@ import { FlowContainer } from '@bodiless/layouts-ui';
 import Layout from '../../../components/Layout';
 // @ts-ignore Could not find declaration file.
 import tailWindConfig from '../../../../tailwind.config';
-import { FlowContainerDefault, FlowContainerLimited } from '../../../components/FlowContainer';
+import {
+  FlowContainerDefault,
+  FlowContainerLimited,
+  FlowContainerDefaultWithLibrary,
+} from '../../../components/FlowContainer';
 import { withFullWidthConstraint } from '../../../components/FlowContainer/token';
 import withImageVariations from '../../../components/FlowContainer/withImageVariations';
 
@@ -109,7 +113,7 @@ const FlowContainerPage = (props: any) => (
     <Layout>
       <h1 className="text-3xl font-bold">FlowContainer Examples</h1>
       <H2>Default FlowContainer</H2>
-      <FlowContainerDefault
+      <FlowContainerDefaultWithLibrary
         id={FLOW_CONTAINER_PAGE_PATH}
         nodeKey={FLOW_CONTAINER_PAGE_PATH}
       />

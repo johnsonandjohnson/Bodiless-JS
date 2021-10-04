@@ -13,7 +13,7 @@
  */
 
 import { withDesign, asToken } from '@bodiless/fclasses';
-import { withMandatoryCategories, ifNotComponentSelector } from '@bodiless/layouts';
+import { withMandatoryCategories, ifNotComponentSelector, withLibraryComponents } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withRichTextVariations from './withRichTextVariations';
 import withImageVariations from './withImageVariations';
@@ -26,6 +26,10 @@ const FlowContainerDefault = asToken(
   asDefaultFlowContainer,
   withFlowContainerVariations,
 )(FlowContainer);
+
+const FlowContainerDefaultWithLibrary = asToken(
+  withLibraryComponents,
+)(FlowContainerDefault);
 
 const FlowContainerDefaultRTL = asToken(
   ifNotComponentSelector(
@@ -44,4 +48,9 @@ const FlowContainerLimited = asToken(
 )(FlowContainer);
 
 // eslint-disable-next-line import/prefer-default-export
-export { FlowContainerDefault, FlowContainerLimited, FlowContainerDefaultRTL };
+export {
+  FlowContainerDefault,
+  FlowContainerLimited,
+  FlowContainerDefaultRTL,
+  FlowContainerDefaultWithLibrary,
+};
