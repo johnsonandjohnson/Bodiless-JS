@@ -145,6 +145,12 @@ const TableBase:FunctionComponent<TableProps> = (props) => {
     </TableContext.Provider>
   );
 };
+
 const CleanTable = designable(tableComponentsStart, 'Table')(TableBase);
+
+type D = Required<ComponentProps<typeof CleanTable>>['design'];
+export type TableComponents = Required<{
+  [k in keyof D]: ComponentType<any>
+}>;
 
 export default CleanTable;

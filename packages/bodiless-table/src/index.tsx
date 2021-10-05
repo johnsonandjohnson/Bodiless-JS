@@ -32,6 +32,7 @@ export default asBodilessTable()(CleanTable);
 export {
   asBodilessTable,
   CleanTable,
+  TableComponents,
   useIsEvenRow,
   useIsOddRow,
   useIsFirstColumn,
