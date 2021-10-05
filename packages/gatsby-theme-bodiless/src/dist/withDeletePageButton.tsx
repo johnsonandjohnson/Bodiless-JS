@@ -66,7 +66,7 @@ const deletePage = async ({ path, client } : any) => {
   return Promise.reject(new Error('The page cannot be deleted.'));
 };
 
-const DeletePageComp = (props : DeletePageProps) => {
+const DeletePageForm = (props : DeletePageProps) => {
   const {
     status, errorMessage,
   } = props;
@@ -201,7 +201,7 @@ const formPageDel = (client: Client) => contextMenuForm({
   return (
     <>
       <ComponentFormText type="hidden" field="keepOpen" initialValue />
-      <DeletePageComp
+      <DeletePageForm
         status={status}
         errorMessage={errorMessage}
       />
