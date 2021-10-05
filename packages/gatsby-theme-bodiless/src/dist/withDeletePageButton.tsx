@@ -15,8 +15,6 @@
 /* eslint-disable no-alert */
 import React, {
   useCallback, useEffect, useState,
-  ComponentType,
-  HTMLProps,
 } from 'react';
 import {
   contextMenuForm,
@@ -27,9 +25,9 @@ import {
   ContextSubMenu,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
-import { flow } from 'lodash';
-import { addClasses, removeClasses } from '@bodiless/fclasses';
-import type { StylableProps } from '@bodiless/fclasses';
+import {
+  addClasses, asToken, removeClasses,
+} from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
@@ -70,31 +68,18 @@ const DeletePageForm = (props : DeletePageProps) => {
   } = props;
   const defaultUI = useMenuOptionUI();
   const {
-    ComponentFormLabel,
     ComponentFormDescription,
     ComponentFormWarning,
     ComponentFormTitle,
-    ComponentFormLink,
   } = defaultUI;
   const formTitle = 'Delete (this) Page';
   switch (status) {
     case DeletePageState.Init: {
-      const CustomComponentFormLabel = flow(
-        removeClasses('bl-text-xs'),
-        addClasses('bl-font-bold bl-text-sm'),
-      )(ComponentFormLabel as ComponentType<StylableProps>);
-      const CustomComponentFormLink = flow(
-        removeClasses('bl-block'),
-        addClasses('bl-italic'),
-      )(ComponentFormLink as ComponentType<StylableProps>);
-      const CustomComponentFormWarning = flow(
-        removeClasses('bl-float-left'),
-      )(ComponentFormWarning);
-      const ui = {
+      const ui: object = {
         ...defaultUI,
-        ComponentFormLabel: CustomComponentFormLabel as ComponentType<HTMLProps<HTMLLabelElement>>,
-        ComponentFormLink: CustomComponentFormLink as ComponentType<HTMLProps<HTMLAnchorElement>>,
-        ComponentFormWarning: CustomComponentFormWarning,
+        ComponentFormLabel: asToken(removeClasses('bl-text-xs'), addClasses('bl-font-bold bl-text-sm')),
+        ComponentFormLink: asToken(removeClasses('bl-block'), addClasses('bl-italic')),
+        ComponentFormWarning: removeClasses('bl-float-left'),
       };
       return (
         <>
