@@ -131,12 +131,13 @@ const redirectPage = (values: {keepOpen: boolean, path?: string }) => {
   const { href } = window.location;
   const hrefArray = href.split('/');
 
-  // Handle paths without '/' at the end.
-  const newHrefArray = hrefArray[hrefArray.length - 1] !== '' ? hrefArray.splice(-1, 1) : hrefArray.splice(-2, 1);
+  // Handle paths withtout '/' at the end.
+  if (hrefArray[hrefArray.length - 1] !== '') hrefArray.push('');
 
   // Removes last child path from href array.
+  hrefArray.splice(-2, 1);
 
-  const parentHref = newHrefArray.join('/');
+  const parentHref = hrefArray.join('/');
   // Uses replace to redirect since child page no longer exists.
   window.location.replace(parentHref);
 };
@@ -207,7 +208,7 @@ const useMenuOptions = () => {
       icon: 'delete',
       label: 'Delete',
       group: 'page-group',
-      isDisabled: useCallback(() => !context.isEdit, []),
+      isHidden: useCallback(() => !context.isEdit, []),
       handler: () => formPageDel(defaultClient),
     },
   ];
