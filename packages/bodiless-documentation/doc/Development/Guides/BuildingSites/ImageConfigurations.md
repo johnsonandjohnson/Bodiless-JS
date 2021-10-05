@@ -8,17 +8,17 @@ BodilessJS provides integration with [gatsby-image](https://www.gatsbyjs.com/plu
 
     ```ts
     import {
-    asGatsbyImage as asBaseGatsbyImage,
-    withGatsbyImageNode,
-    withGatsbyImageLogger,
+      asGatsbyImage as asBaseGatsbyImage,
+      withGatsbyImageNode,
+      withGatsbyImageLogger,
     } from '@bodiless/gatsby-theme-bodiless';
     import { asBodilessImage } from '@bodiless/components-ui';
 
     const asGatsbyImg = (preset: string) => flowRight(
-    withGatsbyImageNode(preset),
-    asBodilessImage(),
-    withGatsbyImageLogger(preset),
-    asBaseGatsbyImage,
+      withGatsbyImageNode(preset),
+      asBodilessImage(),
+      withGatsbyImageLogger(preset),
+      asBaseGatsbyImage,
     );
     ```
 
@@ -34,7 +34,6 @@ BodilessJS provides integration with [gatsby-image](https://www.gatsbyjs.com/plu
 
     const asFluidGatsbyImage = asGatsbyImg(GatsbyImagePresets.Fluid);
     const asFluidWithWebpGatsbyImage = asGatsbyImg(GatsbyImagePresets.FluidWithWebp);
-    );
     ```
 
     > Note: BodilessJS uses default image presets exposed by `@bodiless/gatsby-theme-bodiless`. Visit [default image presets](#default-image-presets) section to get a list of available presets.

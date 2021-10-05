@@ -25,3 +25,9 @@ export const withAnyTag = withDesign({
     prependItems: [TAG_ANY_KEY],
   }),
 });
+
+export const withoutAnyTag = withDesign({
+  TagList: addProps({
+    prependItems: [],
+  }),
+});

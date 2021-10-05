@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useMenuOptionUI, useNode } from '@bodiless/core';
 import { useField } from 'informed';
 import type {
@@ -84,19 +84,17 @@ const validatePagePath = (
 type FieldProps = Omit<BaseFieldProps, 'field'>;
 type FieldValidate = (value: FormValue, values: FormValues) => FormError;
 
-const getPageUrlValidator = (validate?: FieldValidate) => useCallback(
-  (value: FormValue, values: FormValues) => validateEmptyField(value)
+const getPageUrlValidator = (validate?: FieldValidate) => (
+  value: FormValue, values: FormValues,
+) => validateEmptyField(value)
     || validatePageUrl(value)
-    || (validate && validate(value, values)),
-  [],
-);
+    || (validate && validate(value, values));
 
-const getPagePathValidator = (validate?: FieldValidate) => useCallback(
-  (value: FormValue, values: FormValues) => validateEmptyField(value)
+const getPagePathValidator = (validate?: FieldValidate) => (
+  value: FormValue, values: FormValues,
+) => validateEmptyField(value)
     || validatePagePath(value)
-    || (validate && validate(value, values)),
-  [],
-);
+    || (validate && validate(value, values));
 
 const joinPath = (path1: string, path2: string) => path.join(path1, path2);
 

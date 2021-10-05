@@ -15,7 +15,6 @@
 import {
   FilterByGroupClean,
   asTestableFilterByGroup,
-  withFBGSuggestions,
   Tag,
 } from '@bodiless/filtering';
 import { addProps, asToken } from '@bodiless/fclasses';
@@ -29,7 +28,7 @@ const suggestions = [
 ];
 
 const asFilterByGroup = asToken(
-  withFBGSuggestions({ suggestions }),
+  addProps({ suggestions }),
   addProps({ resetButtonText: 'Show All Products' }),
   asFilterByGroupResponsive,
   asFilterByGroupDefaultStyle,

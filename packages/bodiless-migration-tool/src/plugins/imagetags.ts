@@ -37,10 +37,10 @@ const onPageCreate = ({
   document('img')
     .toArray()
     .forEach(async asset => {
-      if (!asset.attribs.src) {
+      if (!(asset as cheerio.TagElement).attribs.src) {
         return;
       }
-      const resourceUrl = new URL(asset.attribs.src, pageUrl);
+      const resourceUrl = new URL((asset as cheerio.TagElement).attribs.src, pageUrl);
       const url = resourceUrl.href;
       try {
         const downloaded = await downloader.downloadFiles([url]);
@@ -52,8 +52,8 @@ const onPageCreate = ({
           const ext = path.extname(targetPath);
           const content = {
             src: api.getStaticRelativePath(targetPath),
-            alt: asset.attribs.alt,
-            title: asset.attribs.title,
+            alt: (asset as cheerio.TagElement).attribs.alt,
+            title: (asset as cheerio.TagElement).attribs.title,
           };
           const jsonFilePath = api.getAvailableJsonFilename(
             `${prefix}${path.basename(targetPath, ext)}.json`,

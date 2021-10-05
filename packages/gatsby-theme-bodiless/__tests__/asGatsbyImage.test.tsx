@@ -13,6 +13,7 @@
  */
 
 import React from 'react';
+import { GatsbyImage } from 'gatsby-plugin-image';
 import { Img, withDesign, addProps } from '@bodiless/fclasses';
 /* eslint-disable-next-line import/no-extraneous-dependencies */
 import { mount } from 'enzyme';
@@ -36,9 +37,10 @@ describe('asGatsbyImage', () => {
         gatsbyImg: {
           fluid: fluidShapeMock,
         },
+        alt: 'mock',
       };
       const wrapper = mount(<Foo {...props} />);
-      expect(wrapper.find('Image').length).toBe(1);
+      expect(wrapper.find('GatsbyImage').length).toBe(1);
     });
   });
   describe('when gatsbyImg prop is not passed', () => {
@@ -64,9 +66,10 @@ describe('asGatsbyImage', () => {
       gatsbyImg: {
         fluid: fluidShapeMock,
       },
+      alt: 'mock',
     };
     const wrapper = mount(<Foo {...props} />);
-    expect(wrapper.find('Image').prop('style')).toBe(testGatsbyImgStyle);
+    expect(wrapper.find(GatsbyImage).prop('style')).toBe(testGatsbyImgStyle);
     const wrapper$ = mount(<Foo />);
     expect(wrapper$.find('img').prop('style')).toBe(undefined);
   });
@@ -86,9 +89,10 @@ describe('asGatsbyImage', () => {
       gatsbyImg: {
         fluid: fluidShapeMock,
       },
+      alt: 'mock',
     };
     const wrapper = mount(<Foo {...props} />);
-    expect(wrapper.find('Image').prop('style')).toBe(undefined);
+    expect(wrapper.find('GatsbyImage').prop('style')).toBe(undefined);
     const wrapper$ = mount(<Foo />);
     expect(wrapper$.find('img').prop('style')).toBe(testGatsbyImgStyle);
   });

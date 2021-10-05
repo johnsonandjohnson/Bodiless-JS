@@ -106,7 +106,7 @@ const CardOverlayTitleNoBody = flow(
   asCardNoBody,
 )(Card);
 
-export default props => (
+const main = props => (
   <Page {...props}>
     <Layout>
       <h1 className="text-3xl font-bold">Cards</h1>
@@ -145,6 +145,7 @@ export default props => (
     </Layout>
   </Page>
 );
+export default main;
 
 export const query = graphql`
   query($slug: String!) {

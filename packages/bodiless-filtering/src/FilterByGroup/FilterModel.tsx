@@ -13,18 +13,18 @@
  */
 
 import {
-  useTagsAccessors as useBaseTagsAccessors,
   useListContext,
 } from '@bodiless/components';
 import { useCategoryListContext } from './CategoryListContext';
 import { Tag, TAG_ANY_KEY } from './FilterByGroupStore';
+import { useTagsAccessors as useBaseTagsAccessors } from '../TagButton';
 
 /* eslint-disable import/prefer-default-export */
 
 const TAG_ANY_LABEL = '- Any -';
 
 const useTagsAccessors = () => {
-  const { categoryId } = useCategoryListContext();
+  const { categoryId, categoryName } = useCategoryListContext();
   const { currentItem } = useListContext();
   let { tag } = useBaseTagsAccessors();
   if (currentItem === TAG_ANY_KEY) {
@@ -34,7 +34,7 @@ const useTagsAccessors = () => {
     };
   }
   return {
-    tag: new Tag(tag.id.toString(), tag.name, categoryId || ''),
+    tag: new Tag(tag.id.toString(), tag.name, categoryId, categoryName),
   };
 };
 
