@@ -46,12 +46,10 @@ enum DeletePageState {
   Errored,
 }
 
-type PageStatus = {
+type DeletePageProps = {
   status: DeletePageState;
   errorMessage?: string;
 };
-
-type DeletePageProps = PageStatus;
 
 let actualState: number = -1;
 
@@ -168,7 +166,7 @@ const formPageDel = (client: Client) => contextMenuForm({
   const {
     submits, values,
   } = formState;
-  const [state, setState] = useState<PageStatus>({
+  const [state, setState] = useState<DeletePageProps>({
     status: DeletePageState.Init,
   });
   const context = useEditContext();
