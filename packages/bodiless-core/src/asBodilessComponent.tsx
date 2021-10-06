@@ -58,7 +58,8 @@ type AsBodiless<P, D, E = {}> = (
 
 /**
  * Given an event name and a wrapper component, provides an HOC which will wrap the base component
- * the wrapper, passing the event prop to the wrapper, and all other props to the base compoent.
+ * the wrapper, passing the event prop to the wrapper, and all other props to the base component.
+ *
  * @param event The event name.
  * @param Wrapper The component to wrap with
  * @private

@@ -56,7 +56,7 @@ The following diagram illustrates the flow of data for page edit contexts:
 6. The "global context menu"(../packages/bodiless-core/src/components/PageEditor.tsx)
    is one such observer component, and re-renders itself with all menu options
    contributed by the newly activated context and all its parents. Thus, for
-   example, when you activate the contet of an image within a grid, the menu
+   example, when you activate the context of an image within a grid, the menu
    options of the image (eg set source) are added to those of the grid (eg
    insert/delete items), which in turn are added to the page level items (eg
    toggle edit on/off).
@@ -151,7 +151,7 @@ const Example = observer(props => {
 ```
 
 Note that `useContextActivator()` can be used to provide a handler for other
-events besides `onClick`, and can invoke another hanlder passed in as a prop:
+events besides `onClick`, and can invoke another handler passed in as a prop:
 
 ```
 const TextareaActivator = ({ onFocus: onFocus$1, ...rest }) => {
@@ -180,7 +180,7 @@ const ComponentWithMenuOption = flowRight(
 )(AnyComponent)
 ```
 
-Now, when you click on `AnyComponent` it will activate the provdied context, and
+Now, when you click on `AnyComponent` it will activate the provided context, and
 the associated menu options will be displayed.
 
 Note - the above will only work if `AnyComponent` can accept an `onClick` prop.
@@ -230,7 +230,7 @@ members:
 > `Component` can be provided either as a primitive value or as a function
 > returning that value - eg `{ isActive: true }` or `{ isActive: () => true; }`
 > The latter is useful if the value depends on some external state which is not
-> used by the component providing the button, to allow the button to udpate
+> used by the component providing the button, to allow the button to update
 > without re-rendering the component. If you provide callbacks, it is important
 > to memoize any such callbacks to avoid unnecessary renders of the button
 > itself. The `handler` callback, however, need not be memoized.

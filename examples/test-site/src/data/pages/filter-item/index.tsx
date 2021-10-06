@@ -15,8 +15,7 @@ import React, { useState } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { H2 } from '@bodiless/fclasses';
-import { Tag } from '@bodiless/filtering';
-import type { TagType } from '@bodiless/filtering';
+import { Tag, FilterTagType } from '@bodiless/filtering';
 import Layout from '../../../components/Layout';
 import TaggableFilterableItem, { TagButton } from '../../../components/Filter';
 
@@ -27,7 +26,7 @@ const getSuggestions = () => [
   new Tag('bazId', 'baz'),
 ];
 const TaggableFilterSelector = () => {
-  const [tags, setTags] = useState<TagType[]>([]);
+  const [tags, setTags] = useState<FilterTagType[]>([]);
   const FilterButtons = getSuggestions().map(tag => (
     <TagButton key={tag.id} onClick={() => setTags([tag])}>
       {tag.name}

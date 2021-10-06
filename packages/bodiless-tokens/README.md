@@ -17,7 +17,7 @@ classes.
 A compound component using this API will expose a styling API (a `design` prop) which
 describes the UI elements of which it is composed. Consumers then supply a
 list of higher-order components which should be applied to each element to modify
-its appearence or behavior. The framework allows nested wrapping of components
+its appearance or behavior. The framework allows nested wrapping of components
 to selectively extend or override individual elements. It also provides a tool
 for adding and removing classes to/from individual elements.
 
@@ -81,7 +81,7 @@ However, there are a few key differences:
   HOC (or an object specifying metadata, see below).
 - There is an optional overload to accept a "TokenMeta" object which consists of
   metadata which should be attached to the token.
-- We intruduce a special kind of Token known as a "Filter". See more
+- We introduce a special kind of Token known as a "Filter". See more
   below.
 
 ### Metadata and Filters
@@ -420,7 +420,7 @@ const CardBase: FC<Props> = ({ components }) => {
 };
 ```
 
-Here we have defined a type of the components that we need, a starting point for those components and then we have create a componant that accepts those compoents.  Next we will combine the Start point as well as the CardBase to make a designable card that can take a Design prop.
+Here we have defined a type of the components that we need, a starting point for those components and then we have create a component that accepts those components.  Next we will combine the Start point as well as the CardBase to make a designable card that can take a Design prop.
 
 ``` js
 const CardDesignable = designable(cardComponentStart, 'Card')(CardBase);

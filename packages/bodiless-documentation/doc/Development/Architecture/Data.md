@@ -113,8 +113,8 @@ In order to take advantage of the Bodiless data flow, your page-level component
 `default template` is a good example and can be copied to form the basis of your
 pages.
 
-Note that the Gatsby page query exported by the default template uses a GraphQL
-"fragment":
+Note that the Gatsby page query exported by the default template uses GraphQL
+"fragments":
 
 ```javascript
 export const query = graphql`
@@ -125,9 +125,10 @@ export const query = graphql`
 `;
 ```
 
-The fragment is defined by Gatsby Theme Bodiless and queries the contents of all
-json files in the directory corresponding to the page. This can be used as-is,
-or the page query could be extended in case the page requires additional data.
+The fragments are defined by Gatsby Theme Bodiless. The first queries the
+contents of all json files in the directory corresponding to the page, while the
+second queries those in a directory containing site-wide data. These can be used
+as-is, or extended in case the page requires additional data.
 
 ### Component Data
 
@@ -211,6 +212,13 @@ So, in the above example, there would be 4 files:
   blurb-2$title.json
   blurb-2$body.json
 ```
+
+> Note: be sure that you do not use a node key which results in a json file with
+> the same name as a source module in the same directory. For example, don't use
+> a node key of 'foo' (producing a `foo.json`) if you have a 'foo.ts(x)' file in
+> the same directory. Doing so can cause issues with module resolution if you
+> set the `resolveJsonModules` directive to `true` in your projects
+> `tsconfig.json`.
 
 ### "Sidecar" nodes.
 

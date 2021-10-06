@@ -105,7 +105,11 @@ export default class HtmlParser implements HtmlParserInterface {
 
   getHeadElements(): string[] {
     const { $ } = this;
-    return Array.from($('head')[0].childNodes).filter(elem => $.html(elem) !== undefined && $.html(elem).trim() !== '').map(elem => $.html(elem));
+    const head = $('head')[0] as cheerio.TagElement;
+    if (head.childNodes === null) {
+      return [];
+    }
+    return Array.from(head.childNodes).filter(elem => $.html(elem) !== undefined && $.html(elem).trim() !== '').map(elem => $.html(elem));
   }
 
   getBaseUrl(): string | undefined {
@@ -233,7 +237,7 @@ export default class HtmlParser implements HtmlParserInterface {
       if (self.shouldTransformCfEmail(element)) {
         const parentLink = this.getCfParentLink(element);
         if (parentLink !== undefined) {
-          const email = cfDecodeEmail(element.attribs[dataFieldName]);
+          const email = cfDecodeEmail((element as cheerio.TagElement).attribs[dataFieldName]);
           $(parentLink).attr('href', `mailto:${email}`);
           $(element.parent).find(`${tag}[${dataFieldName}]`).replaceWith(email);
         }
@@ -244,17 +248,19 @@ export default class HtmlParser implements HtmlParserInterface {
   manipulateAttributes(transformAttr: (oldAttr: string) => string): void {
     const { $ } = this;
     $('*').each((i: number, element: cheerio.Element) => {
-      Object.keys(element.attribs).forEach(attrName => {
-        const newAttr = transformAttr(attrName);
-        if (attrName !== newAttr) {
-          debug(`replacing ${attrName} attribute with ${newAttr}`);
-          this.replaceAttribute(element, attrName, newAttr);
-        }
-      });
+      if (typeof (element as cheerio.TagElement).attribs !== 'undefined') {
+        Object.keys((element as cheerio.TagElement).attribs).forEach(attrName => {
+          const newAttr = transformAttr(attrName);
+          if (attrName !== newAttr) {
+            debug(`replacing ${attrName} attribute with ${newAttr}`);
+            this.replaceAttribute((element as cheerio.TagElement), attrName, newAttr);
+          }
+        });
+      }
     });
   }
 
-  replaceAttribute(element: cheerio.Element, oldAttr: string, newAttr: string) {
+  replaceAttribute(element: cheerio.TagElement, oldAttr: string, newAttr: string) {
     const { $ } = this;
     const attrValue = element.attribs[oldAttr];
     $(element).removeAttr(oldAttr);
@@ -306,11 +312,11 @@ export default class HtmlParser implements HtmlParserInterface {
   }
 
   private isHrefLangElement(element: cheerio.Element): boolean {
-    return element.tagName === 'link' && cheerio(element).attr('hreflang') !== undefined;
+    return (element as cheerio.TagElement).tagName === 'link' && cheerio(element).attr('hreflang') !== undefined;
   }
 
   private isCanonical(element: cheerio.Element): boolean {
-    return element.tagName === 'link' && cheerio(element).attr('rel') === 'canonical';
+    return (element as cheerio.TagElement).tagName === 'link' && cheerio(element).attr('rel') === 'canonical';
   }
 
   private shouldSkipTextToAttributeTransformation(tag: string, element: cheerio.Element): boolean {
@@ -353,17 +359,17 @@ export default class HtmlParser implements HtmlParserInterface {
   private shouldTransformCfEmail(element: cheerio.Element): boolean {
     const className = '__cf_email__';
     const hrefPatern = '/cdn-cgi/l/email-protection';
-    if (element.attribs.class !== className) {
+    if ((element as cheerio.TagElement).attribs.class !== className) {
       return false;
     }
     const parentLink = this.getCfParentLink(element);
     return parentLink !== undefined
-      && parentLink.attribs.href !== undefined
-      && parentLink.attribs.href.includes(hrefPatern);
+      && (parentLink as cheerio.TagElement).attribs.href !== undefined
+      && (parentLink as cheerio.TagElement).attribs.href.includes(hrefPatern);
   }
 
   private shouldTransformNewLine(element: cheerio.Element): boolean {
-    return element.tagName === 'script'
+    return (element as cheerio.TagElement).tagName === 'script'
           && !cheerio(element).attr('src')
           && cheerio(element).attr('type') !== 'application/ld+json';
   }

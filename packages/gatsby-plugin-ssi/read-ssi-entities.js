@@ -16,6 +16,8 @@ const fs = require('fs');
 
 const defaultSSIConfPath = 'ssi/ssi_conf.json';
 
+// @todo: replace unsafe fs
+// https://www.gatsbyjs.com/docs/reference/release-notes/migrating-from-v2-to-v3/#using-fs-in-ssr
 const getSSIEntities = ssiConfPath => {
   const confPath = ssiConfPath || defaultSSIConfPath;
   try {

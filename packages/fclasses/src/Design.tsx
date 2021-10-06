@@ -177,7 +177,7 @@ export const applyDesign = <C extends DesignableComponents> (
 /**
  * Creates an HOC which applies a specified design to the wrapped component.
  *
- * A design is a keyed set of HOC's which should be applied to constituant elements
+ * A design is a keyed set of HOC's which should be applied to constituent elements
  * of the wrapped component. The wrapped component itself should accept a components
  * prop, and be wrapped in the `designable` HOC to define a set of base components
  * to which the HOC's should apply.
