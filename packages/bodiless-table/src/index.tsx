@@ -29,11 +29,11 @@ import {
 } from './forCell';
 import type { TableComponents } from './types';
 
+export type { TableComponents };
 export default asBodilessTable()(CleanTable);
 export {
   asBodilessTable,
   CleanTable,
-  TableComponents,
   useIsEvenRow,
   useIsOddRow,
   useIsFirstColumn,
