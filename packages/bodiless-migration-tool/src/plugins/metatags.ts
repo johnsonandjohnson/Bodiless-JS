@@ -45,12 +45,13 @@ const onPageCreate = ({
 }: MetatagsFactoryParams) => ({ document, api }: OnPageCreateParams) => {
   document('meta')
     .toArray()
-    .filter(item => item.attribs.name !== undefined && item.attribs.content !== undefined)
-    .filter(item => !names || names.includes(item.attribs.name))
+    .filter(item => (item as cheerio.TagElement).attribs.name !== undefined
+    && (item as cheerio.TagElement).attribs.content !== undefined)
+    .filter(item => !names || names.includes((item as cheerio.TagElement).attribs.name))
     .map(item => ({
       // replace colon with hyphen to avoid issues on windows
-      name: item.attribs.name.replace(':', '-'),
-      content: item.attribs.content,
+      name: (item as cheerio.TagElement).attribs.name.replace(':', '-'),
+      content: (item as cheerio.TagElement).attribs.content,
     }))
     .forEach(item => api.writeJsonFileSync(
       path.resolve(api.getPagePath(), `${prefix}$${item.name}.json`),

@@ -13,7 +13,6 @@
  */
 
 import { observable, action } from 'mobx';
-import { isString } from 'util';
 import identity from 'lodash/identity';
 
 class DummyContentNodeStore {
@@ -140,7 +139,7 @@ export class DefaultContentNode<D extends object> implements ContentNode<D> {
 
   delete(path?: Path) {
     const { deleteNode } = this.actions;
-    const path$ = isString(path) ? [path] : path;
+    const path$ = (typeof path === 'string') ? [path] : path;
     const path$$ = path$ || this.path;
     deleteNode(path$$);
   }

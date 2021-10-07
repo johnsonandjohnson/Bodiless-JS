@@ -11,7 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import { withoutProps, asToken } from '@bodiless/fclasses';
 import {
   withContextActivator,
@@ -60,4 +59,6 @@ const asTaggableItem = (
   withNode,
   withNodeKey(nodeKey),
 );
-export default asTaggableItem;
+
+// eslint-disable-next-line import/prefer-default-export
+export { asTaggableItem };
