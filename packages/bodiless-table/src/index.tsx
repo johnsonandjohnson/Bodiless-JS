@@ -27,12 +27,13 @@ import {
   useIsInHead,
   useIsInFoot,
 } from './forCell';
+import type { TableComponents } from './types';
 
-export * from './types';
 export default asBodilessTable()(CleanTable);
 export {
   asBodilessTable,
   CleanTable,
+  TableComponents,
   useIsEvenRow,
   useIsOddRow,
   useIsFirstColumn,
