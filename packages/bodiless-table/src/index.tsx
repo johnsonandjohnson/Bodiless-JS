@@ -13,9 +13,6 @@
  */
 
 import CleanTable from './Table';
-import {
-  TableComponents,
-} from './types';
 import asBodilessTable from './asBodilessTable';
 import {
   useIsEvenRow,
@@ -31,11 +28,11 @@ import {
   useIsInFoot,
 } from './forCell';
 
+export * from './types';
 export default asBodilessTable()(CleanTable);
 export {
   asBodilessTable,
   CleanTable,
-  TableComponents,
   useIsEvenRow,
   useIsOddRow,
   useIsFirstColumn,
