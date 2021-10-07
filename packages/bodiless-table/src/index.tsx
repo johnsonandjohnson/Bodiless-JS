@@ -28,6 +28,7 @@ import {
   useIsInFoot,
 } from './forCell';
 
+export * from './types';
 export default asBodilessTable()(CleanTable);
 export {
   asBodilessTable,
