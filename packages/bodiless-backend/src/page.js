@@ -14,6 +14,8 @@
 
 const fs = require('fs');
 const path = require('path');
+
+console.log('---> Const Path:', path);
 const Logger = require('./logger');
 
 const logger = new Logger('BACKEND');
@@ -40,6 +42,7 @@ class Page {
   supportedExtensions = ['json', 'tsx', 'jsx', 'js'];
 
   constructor(pagePath) {
+    console.log('Construtor', pagePath);
     this.path = pagePath;
   }
 
@@ -104,21 +107,24 @@ class Page {
     return readPromise;
   }
 
-  renameDirectory(newDirectory) {
+  renameDirectory(OriginDirectory, newDirectory) {
     return new Promise((resolve) => {
-      const [, pageRelativeDir] = this.directory.split('/data/pages/');
+      const pathDirectory = this.getBasePath() + OriginDirectory;
+      const newPathDirectory = this.getBasePath() + newDirectory;
+      const [, pageRelativeDir] = pathDirectory.split('/data/pages/');
+
       if (!pageRelativeDir) {
-        resolve(`Invalid directory "${this.directory}" to move`);
+        resolve(`Invalid directory "${pathDirectory}" to move`);
         return;
       }
 
-      const subdirs = getDirectories(this.directory);
+      const subdirs = getDirectories(pathDirectory);
       if (subdirs.length !== 0) {
         resolve('The page cannot be moved');
         return;
       }
 
-      fs.rename(this.directory, newDirectory, { recursive: true }, err => {
+      fs.rename(pathDirectory, newPathDirectory, err => {
         resolve(err && err.message);
       });
     });

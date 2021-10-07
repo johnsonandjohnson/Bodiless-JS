@@ -61,12 +61,12 @@ type MovePageProps = PageStatus;
 const usePagePath = () => useNode().node.pagePath;
 
 const movePage = async ({ origin, destination, client } : any) => {
-  // console.log('(1) ----======> client', client);
-  // console.log('(1) ----======> origin', origin);
+  console.log('(1) ----======> client', client);
+  console.log('(1) ----======> origin', origin);
 
   const result = await handle(client.movePage(origin, destination));
 
-  // console.log('(2) ----======> result', result);
+  console.log('Result Front-End:', result);
 
   if (result.response) {
     return Promise.resolve(destination);
@@ -254,7 +254,7 @@ const useMenuOptions = () => {
       icon: 'drive_file_move',
       label: 'Move',
       group: 'page-group',
-      isDisabled: useCallback(() => !context.isEdit, []),
+      isHidden: useCallback(() => !context.isEdit, []),
       handler: () => formPageMove(defaultClient),
     },
   ];

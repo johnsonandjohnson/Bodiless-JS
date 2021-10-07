@@ -626,7 +626,7 @@ class Backend {
       res.send({});
 
       page
-        .renameDirectory()
+        .renameDirectory(origin, destination)
         .then(error => {
           if (error) {
             logger.log(error);
