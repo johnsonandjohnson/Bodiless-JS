@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
+import React, { FC } from 'react';
+import type { Enhancer } from '@bodiless/fclasses';
 import NodeProvider, { useNode } from '../NodeProvider';
 import ContentfulNode from './ContentfulNode';
 import { DefaultContentNode } from '../ContentNode';
@@ -34,22 +35,24 @@ import { DefaultContentNode } from '../ContentNode';
  * @returns
  * An HOC providing default content to the wrapped component.
  */
-const withDefaultContent = <P extends object, D extends object>(content: D|((props:P) => D)) => (
-  (Component: CT<P>) => {
-    const WithDefaultContent = (props: P) => {
+const withDefaultContent = <P extends object, D extends object>(
+  content: D | ((props: P) => D),
+): Enhancer<{ content?: D }> => Component => {
+    const WithDefaultContent: FC<any> = (
+      { content: contentFromProp, ...rest }: { content?: D },
+    ) => {
       const { node } = useNode();
-      const content$ = typeof content === 'function'
-        ? (content as ((props:P) => D))(props) : content;
-      // eslint-disable-next-line max-len
-      const nodeWithDefaultContent = ContentfulNode.create((node as DefaultContentNode<object>), content$);
+      const content$ = contentFromProp || content;
+      const content$$ = typeof content$ === 'function'
+        ? (content$ as ((props: P) => D))(rest as P) : content$;
+      const contentNode = ContentfulNode.create((node as DefaultContentNode<object>), content$$);
       return (
-        <NodeProvider node={nodeWithDefaultContent}>
-          <Component {...props} />
+        <NodeProvider node={contentNode}>
+          <Component {...rest as any} />
         </NodeProvider>
       );
     };
     return WithDefaultContent;
-  }
-);
+  };
 
 export default withDefaultContent;

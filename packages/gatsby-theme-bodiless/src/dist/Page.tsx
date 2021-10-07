@@ -24,10 +24,11 @@ import {
 import { withShowDesignKeys } from '@bodiless/fclasses';
 import { observer } from 'mobx-react-lite';
 import { ContextWrapper, PageEditor } from '@bodiless/core-ui';
+import { withPageDisableButton } from '@bodiless/components';
 import GatsbyNodeProvider, {
   Props as NodeProviderProps,
 } from './GatsbyNodeProvider';
-import GatsbyPageProvider, { Props as PageProviderProps } from './GatsbyPageProvider';
+import GatsbyPageProvider, { PageProviderProps } from './GatsbyPageProvider';
 import withNewPageButton from './withNewPageButton';
 import useGitButtons from './useGitButtons';
 
@@ -37,7 +38,7 @@ type FinalUI = {
 };
 type UI = Partial<FinalUI>;
 
-export type Props = NodeProviderProps & PageProviderProps & {
+export type PageProps = NodeProviderProps & PageProviderProps & {
   ui?: UI,
 };
 
@@ -51,6 +52,7 @@ const getUI = (ui: UI = {}): FinalUI => ({ ...defaultUI, ...ui });
 const NotificationButton = withNotificationButton(Fragment);
 const SwitcherButton = withSwitcherButton(Fragment);
 const NewPageButton = withNewPageButton(Fragment);
+const DisablePageButton = withPageDisableButton(Fragment);
 
 const GitButtons: FC = () => {
   useGitButtons();
@@ -58,10 +60,10 @@ const GitButtons: FC = () => {
 };
 
 const ShowDesignKeys = (
-  process.env.NODE_ENV === 'development' || process.env.BODILESS_DEBUG === '1'
+  process.env.NODE_ENV === 'development' || process.env.BODILESS_SHOWDESIGNKEYS === '1'
 ) ? withShowDesignKeys()(Fragment) : Fragment;
 
-const Page: FC<Props> = observer(({ children, ui, ...rest }) => {
+const Page: FC<PageProps> = observer(({ children, ui, ...rest }) => {
   const { PageEditor: Editor, ContextWrapper: Wrapper } = getUI(ui);
   if (process.env.NODE_ENV === 'development') {
     return (
@@ -74,6 +76,7 @@ const Page: FC<Props> = observer(({ children, ui, ...rest }) => {
               <Editor>
                 <OnNodeErrorNotification />
                 <NewPageButton />
+                <DisablePageButton />
                 <GitButtons />
                 <Wrapper clickable>
                   {children}

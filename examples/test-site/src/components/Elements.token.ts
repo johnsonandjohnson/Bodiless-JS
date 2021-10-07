@@ -12,13 +12,14 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
-import { addClasses } from '@bodiless/fclasses';
+import { WithNodeKeyProps } from '@bodiless/core';
 import {
-  asBodilessLink,
+  addClasses, removeClasses, asToken, Token,
+} from '@bodiless/fclasses';
+import {
   asEditable as asEditableCore,
 } from '@bodiless/components';
-import { asBodilessImage } from '@bodiless/components-ui';
+import { asBodilessLink } from '@bodiless/components-ui';
 import {
   asResponsive21By9Embed,
   asResponsive16By9Embed,
@@ -33,6 +34,14 @@ import {
   asAlignJustify,
 } from './ElementDefault.token';
 
+export const withCategory = <P extends object>(category?: string) => (...hocs: Token[]) => (
+  asToken(
+    {}, // see https://github.com/microsoft/TypeScript/issues/28010
+    ...hocs,
+    category ? asToken.meta.term('Category')(category) : undefined,
+  )
+);
+
 /* Page Structure */
 const asBlockItem = addClasses('p-1 w-full');
 const asPageContainer = addClasses('container mx-auto');
@@ -46,23 +55,30 @@ const withPadding5 = addClasses('p-5');
 
 /* Responsive design */
 const asMobileOnly = addClasses('lg:hidden');
-const asDesktopOnly = addClasses('hidden lg:flex');
+const asDesktopOnly = asToken(
+  addClasses('hidden lg:flex'),
+  removeClasses('flex'),
+);
 
 /* Primary coloring */
 const asPrimaryColorBackground = addClasses('bg-gray-200');
 const asTextColorPrimary = addClasses('text-black');
 
 /* Coloring */
+const asTextWhite = addClasses('text-white');
 const asTealBackground = addClasses('bg-teal-600');
+const asLightTealBackground = addClasses('bg-teal-500');
+const asLightTealBackgroundOnHover = addClasses('hover:bg-teal-500');
 
 /* Typography */
 const asBold = addClasses('font-bold');
 const asItalic = addClasses('italic');
 const asLink = addClasses('text-blue-700 underline');
+const asActiveMenuLink = asToken(asBold, addClasses('bg-teal-500'));
 const asStrikeThrough = addClasses('');
 const asSuperScript = addClasses('');
 
-const asHeader1 = flow(addClasses('text-3xl'), asTextColorPrimary);
+const asHeader1 = asToken(addClasses('text-3xl'), asTextColorPrimary);
 const asHeader2 = addClasses('text-2xl');
 const asHeader3 = addClasses('text-xl');
 
@@ -71,16 +87,25 @@ const asBlockQuote = addClasses('block mx-4');
 
 /* Image component */
 const asImage = addClasses('');
-const asEditableImage = asBodilessImage;
 const asImageRounded = addClasses('rounded-lg');
 
 /* Link component */
 const asEditableLink = asBodilessLink;
 
 /* Edit component */
-const asEditable = asEditableCore;
+const asEditable = (nodeKeys?: WithNodeKeyProps, placeholder?: string) => asEditableCore(
+  nodeKeys,
+  placeholder,
+  // Overrides to add auto-superscript.
+  () => ({
+    sanitizer: (html: string) => html
+      .split('')
+      .map(c => ('©'.includes(c) ? `<sup>${c}</sup>` : c))
+      .join(''),
+  }),
+);
 
-// Tout Components
+// Card Components
 const asCta = addClasses('bg-orange-700 hover:bg-orange-600 text-center text-white p-2 rounded');
 
 /* Utility Classes */
@@ -91,6 +116,7 @@ export {
   asItalic,
   asUnderline,
   asLink,
+  asActiveMenuLink,
   asStrikeThrough,
   asAlignLeft,
   asAlignRight,
@@ -105,8 +131,9 @@ export {
   asPageContainer,
   asPrimaryColorBackground,
   asTealBackground,
+  asLightTealBackground,
+  asLightTealBackgroundOnHover,
   asImage,
-  asEditableImage,
   asEditableLink,
   asEditable,
   asImageRounded,
@@ -114,6 +141,7 @@ export {
   asDesktopOnly,
   asSuperScript,
   asTextColorPrimary,
+  asTextWhite,
   asXMargin,
   asYMargin,
   asNegXMargin,

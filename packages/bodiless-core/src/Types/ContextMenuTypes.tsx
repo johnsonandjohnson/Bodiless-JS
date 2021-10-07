@@ -42,7 +42,7 @@ export type IContextMenuItemProps = {
    */
   name: string,
   /**
-   * The context menu option option which this item is rendering
+   * The context menu option which this item is rendering
    */
   option?: TMenuOption;
   /**
@@ -117,7 +117,7 @@ export type TMenuOption = {
    */
   groupMerge?: 'merge'|'merge-up'|'none';
   /**
-   * An optional component used to render this item, or one of '_item' or '_group' to specify
+   * An optional component used to render this item, or one of 'item' or 'group' to specify
    * which default component should be used. If not specified, then the option will be rendered
    * using the `ContextMenuItem` component.  If `_group`, then the default group component
    * as defined in the Context Menu UI will be used instead.
@@ -127,7 +127,14 @@ export type TMenuOption = {
    * A reference to the page edit context instance which is providing this button.
    */
   context?: PageEditContextInterface;
-  formTitle?: string;
+  /**
+   * An optional title for the form.
+   */
+  formTitle?: string|(() => string);
+  /**
+   * Optional descriptive text for the form.
+   */
+  formDescription?: string|(() => string);
   /**
    * If specified, used as the aria label of the button. If not specified
    * the label will be used.
@@ -143,6 +150,10 @@ export type ButtonVariantProps = HTMLProps<HTMLDivElement> & {
 
 type IconVariantProps = HTMLProps<HTMLSpanElement> & {
   isActive?: boolean;
+};
+
+export type TooltipProps = {
+  overlay: ReactNode | (() => ReactNode);
 };
 
 /**
@@ -176,7 +187,7 @@ export type ContextMenuUI = {
   ComponentFormWarning?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   ComponentFormLink?: ComponentType<HTMLProps<HTMLAnchorElement>> | string;
   Form?: ComponentType<HTMLProps<HTMLFormElement>> | string;
-  Tooltip?: ComponentType<Tooltip['props']>;
+  Tooltip?: typeof Tooltip | ComponentType<TooltipProps>;
   ReactTags?: ComponentType<ReactTagsFieldProps>;
   ComponentFormList?: ComponentType<HTMLProps<HTMLUListElement>> | string;
   ComponentFormListItem?: ComponentType<HTMLProps<HTMLLIElement>> | string;
@@ -200,6 +211,8 @@ export type IContextMenuProps = {
 
 export type ContextMenuFormProps = {
   ui?: ContextMenuUI;
+  title?: string;
+  description?: string,
   closeForm: (e: any) => void;
   'aria-label'?: string;
 };

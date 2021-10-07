@@ -22,6 +22,9 @@ import type { FlowContainerDataHandlers, FlowContainerItemHandlers } from './mod
 import { useFlowContainerDataHandlers, useItemHandlers } from './model';
 import { ComponentSelectorProps } from '../ComponentSelector/types';
 import componentSelectorForm from '../ComponentSelector/componentSelectorForm';
+import { FALLBACK_SNAP_CLASSNAME } from './SortableChild';
+import { defaultSnapData } from './utils/appendTailwindWidthClass';
+import { FC_ITEM_CONTEXT_TYPE } from '../SlateSortableResizable';
 
 type Handlers = FlowContainerDataHandlers & FlowContainerItemHandlers;
 
@@ -43,6 +46,19 @@ const withNoDesign = (props:EditFlowContainerProps):EditFlowContainerProps => ({
 /**
  * @private
  *
+ * Get a unique id for a buttons
+ */
+const useItemButtonName = (prefix: string, uuid: string) => {
+  const ids = [uuid, prefix];
+  const context = useEditContext();
+  for (let c = context.parent; c; c = c.parent) {
+    if (c.type === FC_ITEM_CONTEXT_TYPE) ids.push(c.id);
+  }
+  return ids.reverse().join('-');
+};
+/**
+ * @private
+ *
  * Returns actions which can be executed upon selecting a component in the
  * component selector.
  *
@@ -51,18 +67,27 @@ const withNoDesign = (props:EditFlowContainerProps):EditFlowContainerProps => ({
  */
 const useComponentSelectorActions = (
   handlers: Handlers,
+  props: EditFlowContainerProps,
   currentItem?: FlowContainerItem,
 ) => {
+  const {
+    getDefaultWidth = () => FALLBACK_SNAP_CLASSNAME,
+    snapData = defaultSnapData,
+  } = props;
   const { insertFlowContainerItem, updateFlowContainerItem } = handlers;
   const { setId } = useActivateOnEffect();
 
-  const insertItem: ComponentSelectorProps['onSelect'] = (event, componentName) => {
-    const { uuid } = insertFlowContainerItem(componentName, currentItem);
+  const wrapperProps = {
+    className: getDefaultWidth(snapData),
+  };
+
+  const insertItem: ComponentSelectorProps['onSelect'] = ([componentName]) => {
+    const { uuid } = insertFlowContainerItem(componentName, currentItem, wrapperProps);
     // Set the new id so it will activate on creation.
     setId(uuid);
   };
 
-  const replaceItem: ComponentSelectorProps['onSelect'] = (event, componentName) => {
+  const replaceItem: ComponentSelectorProps['onSelect'] = ([componentName]) => {
     if (currentItem) {
       const newItem: FlowContainerItem = { ...currentItem, type: componentName };
       updateFlowContainerItem(newItem);
@@ -92,7 +117,7 @@ const useCloneButton = (
   );
 
   return {
-    name: 'copy-item',
+    name: useItemButtonName('copy-item', item.uuid),
     label: 'Copy',
     icon: 'content_copy',
     global: false,
@@ -104,10 +129,12 @@ const useCloneButton = (
 
 const useDeleteButton = (
   handlers: Handlers,
+  props: EditFlowContainerProps,
   item: FlowContainerItem,
 ) => {
+  const { minComponents = 0 } = props;
   const context = useEditContext();
-  const { deleteFlowContainerItem } = handlers;
+  const { deleteFlowContainerItem, getItems } = handlers;
   const { setId } = useActivateOnEffect();
 
   const handler = () => {
@@ -119,13 +146,16 @@ const useDeleteButton = (
   };
 
   return {
-    name: 'delete',
+    name: useItemButtonName('delete', item.uuid),
     label: 'Delete',
     icon: 'delete',
     global: false,
     local: true,
     handler,
-    isHidden: useCallback(() => !context.isEdit, []),
+    isHidden: useCallback(
+      () => !context.isEdit || getItems().length <= minComponents,
+      [minComponents],
+    ),
   };
 };
 
@@ -136,13 +166,12 @@ const useAddButton = (
 ) => {
   const { maxComponents = Infinity } = props;
   const context = useEditContext();
-  const { insertItem } = useComponentSelectorActions(handlers, item);
+  const { insertItem } = useComponentSelectorActions(handlers, props, item);
   const { getItems } = handlers;
   const isHidden = item
     ? useCallback(() => !context.isEdit || getItems().length >= maxComponents, [maxComponents])
     : useCallback(() => !context.isEdit || getItems().length > 0, []);
-  // @TODO For nested flow containers we'll have to give these unique names.
-  const name = item ? 'add-item' : 'add';
+  const name = item ? useItemButtonName('add-item', item.uuid) : `add-${context.id}`;
   return {
     icon: 'add',
     label: 'Add',
@@ -151,6 +180,7 @@ const useAddButton = (
     name,
     handler: () => componentSelectorForm(props, insertItem),
     activateContext: false,
+    formTitle: 'Insert Component',
     isHidden,
   };
 };
@@ -161,16 +191,18 @@ const useSwapButton = (
   item: FlowContainerItem,
 ) => {
   const context = useEditContext();
-  const { replaceItem } = useComponentSelectorActions(handlers, item);
+  const { replaceItem } = useComponentSelectorActions(handlers, props, item);
+  const { components } = withNoDesign(props);
   return {
-    name: 'swap',
+    name: useItemButtonName('swap', item.uuid),
     label: 'Swap',
     icon: 'repeat',
     global: false,
     local: true,
     handler: () => componentSelectorForm(props, replaceItem),
     activateContext: false,
-    isHidden: useCallback(() => !context.isEdit, []),
+    isHidden: useCallback(() => (!context.isEdit || Object.keys(components).length <= 1), []),
+    formTitle: 'Replace Component',
   };
 };
 
@@ -219,7 +251,7 @@ const useGetItemUseGetMenuOptions = (props: EditFlowContainerProps) => {
       useAddButton(handlers, props$, item),
       useCloneButton(handlers, props$, item),
       useSwapButton(handlers, props$, item),
-      useDeleteButton(handlers, item),
+      useDeleteButton(handlers, props$, item),
     ];
     return useGetter(buttons);
   };

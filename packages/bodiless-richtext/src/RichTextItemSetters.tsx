@@ -14,9 +14,11 @@
 
 import React, { ComponentType } from 'react';
 import { mergeWith, isArray } from 'lodash';
+import { ComponentOrTag } from '@bodiless/fclasses';
 import {
   RichTextItemType,
 } from './Type';
+import type { Deserializer } from './serializers';
 
 function customizer(objValue:any, srcValue:any) {
   if (isArray(objValue)) {
@@ -24,8 +26,10 @@ function customizer(objValue:any, srcValue:any) {
   }
   return undefined;
 }
-type WithMeta = Object;
-type CTWM = ComponentType & WithMeta;
+// type WithMeta = Object;
+// type CTWM = ComponentType & WithMeta;
+type CTWM = ComponentOrTag<any>;
+
 const withOutMeta = <P extends Object> (Component:CTWM) => (props:P) => (<Component {...props} />);
 /**
  * withMeta creates an HOC that will add meta data to a React Component
@@ -102,6 +106,13 @@ const withHoverButton = (icon:string) => (
 */
 const withButton = (icon:string) => withHoverButton(icon);
 
+/**
+ * adds html deserializer to a given RichTextItem based component
+ */
+const withHtmlDeserializer = (deserializer: Deserializer) => withMeta({
+  htmlDeserializer: deserializer,
+});
+
 export {
   withComponent,
   asBlock,
@@ -114,4 +125,5 @@ export {
   withButton,
   withGlobalButton,
   withHoverButton,
+  withHtmlDeserializer,
 };

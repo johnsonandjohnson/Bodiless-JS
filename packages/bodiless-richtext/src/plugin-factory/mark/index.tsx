@@ -12,58 +12,14 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { Plugin, EventHook, RenderMarkProps } from 'slate-react';
 import { hasMark, createToggleMark, toggleMark } from './markUtils';
-
-//
-// Keyboard
-//
-import MarkKeyboardShortcut from './markKeyboardShortcut';
 
 //
 // External
 //
 import createMarkButton from './createMarkButton';
 
-type MarkOptions = {
-  keyboardKey?: string;
-};
-
-type CreateMarkPlugin = (
-  Mark: React.ComponentType<RenderMarkProps>,
-  markType: string,
-  options: MarkOptions,
-) => Plugin;
-
-const createMarkPlugin: CreateMarkPlugin = (Mark, markType, options = {}) => {
-  const plugin: Plugin = {
-    renderMark: (props, editor, next) => {
-      switch (props.mark.type) {
-        case markType:
-          return <Mark {...props} />;
-        default:
-          return next();
-      }
-    },
-  };
-
-  if (options.keyboardKey) {
-    const onKeyDown: EventHook = (event, editor, next) => MarkKeyboardShortcut(
-      options.keyboardKey!,
-      createToggleMark(markType),
-      event as KeyboardEvent,
-      editor,
-      next,
-    );
-    plugin.onKeyDown = onKeyDown;
-  }
-
-  return plugin;
-};
-
 export {
-  createMarkPlugin,
   createMarkButton,
   hasMark,
   createToggleMark,

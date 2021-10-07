@@ -38,6 +38,12 @@ type D2 = {
 };
 
 describe('ContentNode', () => {
+  it('Correctly splits a compound path', () => {
+    const { actions, getters } = mockStore();
+    const node = new DefaultContentNode(actions, getters, 'foo$bar$baz');
+    expect(node.path).toEqual(['foo', 'bar', 'baz']);
+  });
+
   it('Invokes getters and setters correctly', () => {
     const keys = [Math.random().toString(), Math.random().toString()];
     const { actions, getters } = mockStore();

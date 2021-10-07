@@ -13,7 +13,8 @@
  */
 
 import { mount } from 'enzyme';
-import React, { ComponentType } from 'react';
+import React from 'react';
+import { Token } from '@bodiless/fclasses';
 import { ifToggledOff, ifToggledOn, withFlowToggle } from '../src/withFlowToggle';
 
 describe('withFlowToggle', () => {
@@ -32,10 +33,10 @@ describe('withFlowToggle', () => {
   });
 });
 
-const hocA = (PassedComponent: ComponentType) => (props: JSX.IntrinsicAttributes) => (
+const hocA: Token = PassedComponent => props => (
   <PassedComponent {...props} data-id="A" />
 );
-const hocB = (PassedComponent: ComponentType) => (props: JSX.IntrinsicAttributes) => (
+const hocB: Token = PassedComponent => props => (
   <PassedComponent {...props} data-id="B" />
 );
 const C = () => <span />;

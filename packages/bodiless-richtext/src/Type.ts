@@ -13,15 +13,16 @@
  */
 
 import { ComponentType } from 'react';
-import { Value, Editor, Operation } from 'slate';
-import Immutable from 'immutable';
-import {
-  Editor as ReactEditor,
-  BasicEditorProps,
-  EditorProps,
-} from 'slate-react';
-import type { DesignableComponents } from '@bodiless/fclasses';
+import { Node, Editor } from 'slate';
+import type {
+  EditableProps,
+  RenderLeafProps,
+  RenderElementProps,
+} from 'slate-react/dist/components/editable';
+import type { DesignableComponents, DesignableProps } from '@bodiless/fclasses';
+import { WithNodeProps } from '@bodiless/core';
 import type { UI } from './RichTextContext';
+import type { Deserializer } from './serializers';
 
 export enum RichTextItemType {
   block = 'BLOCK',
@@ -38,20 +39,21 @@ export type FormProps = {
   unwrap(): void;
 };
 
+export type Value = Node[];
+
 export type NodeEditForm = ComponentType<FormProps>;
 
-export type EditorOnChange = BasicEditorProps['onChange'];
+export type EditorOnChange = (value: Value) => void;
 
 export type EditorContext = {
-  editor: Editor;
-  value: Value;
-  editorProps: EditorProps;
-  editorRef: React.RefObject<ReactEditor>;
+  value: Value,
+  plugins: Plugin[],
+  onChange: EditorOnChange,
+  editorProps: EditableProps;
 } | null;
 
 export type ToggleProps = {
   editor: Editor;
-  value: Value;
 };
 
 export type EditorButtonProps = {
@@ -66,11 +68,6 @@ export type CustomComponentProps = {
   children: any;
 };
 
-export type Change = {
-  operations: Immutable.List<Operation>;
-  value: Value;
-};
-
 export type RichTextComponent = ComponentType<any> & {
   isVoid?: boolean,
   type: RichTextItemType,
@@ -83,15 +80,35 @@ export type RichTextComponent = ComponentType<any> & {
     icon: string,
   };
   isAtomicBlock?: boolean,
+  htmlDeserializer: Deserializer,
 };
 
 export type RichTextComponents = {
   [key:string]: RichTextComponent,
 };
 
-export type RichTextProps<P> = {
+export type RichTextBaseProps = {
   components: DesignableComponents,
   ui?: UI,
-  initialValue?: object,
-  nodeKey?: string,
+  initialValue?: Value,
+  value?: Value;
+  onChange: EditorOnChange;
+} & Omit<EditableProps, 'value' | 'onChange'>;
+
+export type RichTextProps =
+  Omit<Partial<RichTextBaseProps>, 'components'> & DesignableProps & WithNodeProps;
+
+export type Plugin = {
+  type: string,
+  renderElement?: EditableProps['renderElement'],
+  renderLeaf?: EditableProps['renderLeaf'],
+};
+
+export type RenderElementComponentType = ComponentType<RenderElementProps>;
+export type RenderLeafComponentType = ComponentType<RenderLeafProps>;
+
+export type {
+  EditableProps,
+  RenderLeafProps,
+  RenderElementProps,
 };

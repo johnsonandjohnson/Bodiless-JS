@@ -1,4 +1,12 @@
+const fs = require('fs');
 const express = require('express');
+const {
+  createDefaultContentPlugins,
+  getSampleDefaultContentConfig,
+} = require('@bodiless/gatsby-theme-bodiless/dist/DefaultContent');
+const {
+  getConfig: getSiteDefaultContentConfig,
+} = require('./src/components/Contentful');
 
 const activeEnv = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
 
@@ -8,6 +16,26 @@ require('dotenv').config({
 
 const SITEURL = process.env.SITE_URL;
 
+const getDisabledPages = () => {
+  try {
+    const json = fs.readFileSync('./src/data/site/disabled-pages.json');
+    const data = JSON.parse(json.toString());
+    const disabledPages$ = data.disabledPages || {};
+    const disabledPages = Object.keys(disabledPages$).filter(
+      item => disabledPages$[item].pageDisabled === true,
+    );
+    return disabledPages;
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      console.log("No pages to disable. The file doesn't exist:", error.path);
+    } else {
+      console.error(error);
+    }
+    return [];
+  }
+};
+const disabledPages = getDisabledPages();
+
 // Gatsby plugins list.
 const plugins = [
   {
@@ -16,7 +44,16 @@ const plugins = [
       modules: ['@bodiless/gatsby-theme-bodiless'],
     },
   },
-  '@bodiless/gatsby-theme-bodiless',
+  {
+    resolve: '@bodiless/gatsby-theme-bodiless',
+    options: {
+      gatsbyImage: {
+        sharpArgs: {
+          quality: 90,
+        },
+      },
+    },
+  },
   '@bodiless/gatsby-plugin-ssi',
   {
     resolve: 'gatsby-plugin-canonical-urls',
@@ -26,7 +63,12 @@ const plugins = [
   },
   {
     resolve: 'gatsby-plugin-sitemap',
+    options: { excludes: disabledPages },
   },
+  ...createDefaultContentPlugins(
+    ...getSampleDefaultContentConfig(),
+    ...getSiteDefaultContentConfig(),
+  ),
 ];
 
 const tagManagerEnabled = (process.env.GOOGLE_TAGMANAGER_ENABLED || '1') === '1';
@@ -49,6 +91,13 @@ if (tagManagerEnabled) {
   });
 }
 
+if (process.env.NODE_ENV === 'production' && disabledPages.length > 0) {
+  plugins.push({
+    resolve: 'gatsby-plugin-exclude',
+    options: { paths: disabledPages },
+  });
+}
+
 const robotsTxtPolicy = [
   {
     userAgent: '*',
@@ -63,6 +112,9 @@ module.exports = {
   },
   siteMetadata: {
     siteUrl: SITEURL,
+  },
+  flags: {
+    DEV_SSR: false,
   },
   plugins,
 };

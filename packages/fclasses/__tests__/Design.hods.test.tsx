@@ -1,6 +1,6 @@
 import React, { ComponentType, Fragment } from 'react';
 import { varyDesign, extendDesign, FluidDesign } from '../src/Design';
-import { HOC } from '../src/FClasses';
+import { HOC } from '../src';
 
 /**
  * Copyright © 2019 Johnson & Johnson
@@ -18,11 +18,11 @@ import { HOC } from '../src/FClasses';
 type TestComponent = ComponentType<any> & {
   testText?: string,
 };
-const testHOC = (text: string) => (Component: TestComponent) => {
+const testHOC = (text: string): HOC => ((Component: TestComponent) => {
   const ReturnComponent = () => <Component />;
   ReturnComponent.testText = (Component.testText || '') + text;
   return ReturnComponent;
-};
+}) as HOC;
 const getTestText = (hoc: HOC | undefined) => {
   if (typeof hoc === 'undefined') return '';
   const Item1 = hoc(Fragment) as TestComponent;

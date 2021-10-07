@@ -23,7 +23,7 @@ import {
   replaceWith,
   withDesign,
 } from '@bodiless/fclasses';
-import { asEditableImage } from '../Elements.token';
+import { asEditableImagePlain as asEditableImage } from '../Image';
 
 type LogoComponents = {
   SiteReturn: ComponentType<any>,

@@ -12,13 +12,14 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
 import { PageEditContext } from '@bodiless/core';
 import {
   withDesign,
 } from '@bodiless/fclasses';
+import type { HOC } from '@bodiless/fclasses';
 import { flow } from 'lodash';
 import {
   asMark,
@@ -43,10 +44,11 @@ const createRichtext = () => {
   return RichText as any;
 };
 
-const applyTestHoc = (Component: ComponentType) => (props: any) => <Component {...props} />;
+const applyTestHoc: HOC = Component => props => <Component {...props as any} />;
 
 const createBlockButtonMock = () => {
-  const createBlockButtonMockFn = jest.fn();
+  const createBlockButtonMockFn = jest.fn()
+    .mockReturnValue(() => <></>);
   jest.doMock('../src/plugin-factory/block/createBlockButton', () => ({
     __esModule: true,
     default: createBlockButtonMockFn,
@@ -55,7 +57,8 @@ const createBlockButtonMock = () => {
 };
 
 const createInlineButtonMock = () => {
-  const createInlineButtonMockFn = jest.fn();
+  const createInlineButtonMockFn = jest.fn()
+    .mockReturnValue(() => <></>);
   jest.doMock('../src/plugin-factory/inline/createInlineButton', () => ({
     __esModule: true,
     default: createInlineButtonMockFn,
@@ -64,7 +67,8 @@ const createInlineButtonMock = () => {
 };
 
 const createMarkButtonMock = () => {
-  const createMarkButtonFn = jest.fn();
+  const createMarkButtonFn = jest.fn()
+    .mockReturnValue(() => <></>);
   jest.doMock('../src/plugin-factory/mark/createMarkButton', () => ({
     __esModule: true,
     default: createMarkButtonFn,

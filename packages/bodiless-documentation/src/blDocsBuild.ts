@@ -62,7 +62,11 @@ const blDocsBuild = async () => {
   );
 
   // Validate the paths for letter-case typos.
-  validatePaths(getSimplePaths(paths));
+  try {
+    validatePaths(getSimplePaths(paths));
+  } catch (error) {
+    console.warn('Error validating paths', error);
+  }
 
   // Now we use the tree we created above to write symlinks, sidebar and navbar.
   console.log('Writing symlinks');

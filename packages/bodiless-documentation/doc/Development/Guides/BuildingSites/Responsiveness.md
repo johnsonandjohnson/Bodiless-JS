@@ -60,7 +60,7 @@ BodilessJS provides the following tools to work with these breakpoints:
   can be called to define a different behavior for a screen size.
 
 The following example is from
-[menu](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/starter-site/src/components/Menus/index.tsx):
+[menu](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/starter/src/components/Menu/index.tsx):
 
 ```
 const ResponsiveMenu = flow(
@@ -78,6 +78,6 @@ Some of the components that have specific responsive behavior:
 * [FilterByGroup](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/packages/bodiless-organisms/src/components/FilterByGroup/Filter.tsx)
   the filter will render uncollapsed lists on larger devices and smaller devices
   will collapse into accordions.
-* [Menu](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/starter-site/src/components/Menus/index.tsx)
+* [Menu](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/starter/src/components/Menu/index.tsx)
   will show a traditional horizontal menu on larger devices and mobile burger
   menu on smaller devices.

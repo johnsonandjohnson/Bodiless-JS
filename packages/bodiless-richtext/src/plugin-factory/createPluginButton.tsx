@@ -12,21 +12,15 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { Value } from 'slate';
+import React, { ComponentType } from 'react';
+import { Editor } from 'slate';
+import { useSlate } from 'slate-react';
 import {
-  EditorContext,
-  ToggleProps,
-} from '../Type';
-import { useSlateContext } from '../core';
+  asToken, ComponentOrTag, Token,
+} from '@bodiless/fclasses';
+import { ToggleProps } from '../Type';
 import PluginButton from '../components/PluginButton';
-
-const defaultButton = {
-  defaultProps: {
-    name: 'Button',
-    type: 'button',
-  },
-};
+import { withReturnFocusBackOnClick } from '../withReturnFocusBack';
 
 type requiredProps = {
   className?: string,
@@ -34,36 +28,39 @@ type requiredProps = {
 };
 type Opts = {
   toggle(options: ToggleProps): void;
-  isActive(value: Value): boolean;
+  isActive(editor: Editor): boolean;
   icon: string;
 };
 
-const withToggle = <P extends requiredProps> (opts:Opts) => (
-  (Component:any) => (props:P) => {
+const withToggle = (opts:Opts): Token<{}, requiredProps, { icon: string }> => (
+  (Component: ComponentOrTag<any>) => (props: any) => {
     const { toggle, isActive, icon } = opts;
-    const { children, className = '' } = props;
-    const editorContext: EditorContext = useSlateContext();
-    const componentName = Component.defaultProps ? Component.defaultProps.name : undefined;
+    const { children, className = '' } = props as requiredProps;
+    const editor = useSlate();
+    const { defaultProps } = Component as ComponentType<any>;
+    const componentName = defaultProps ? defaultProps.name : undefined;
     return (
-      <PluginButton
+      <Component
         componentName={componentName}
-        onMouseDown={
-          () => toggle({
-            editor: editorContext!.editor,
-            value: editorContext!.value,
-          })
-        }
+        onMouseDown={() => {
+          toggle({
+            editor,
+          });
+        }}
         className={`${
-          isActive(editorContext!.value) ? 'active bl-active' : ''
+          isActive(editor) ? 'active bl-active' : ''
         } ${className}`}
         icon={icon}
       >
         {children}
-      </PluginButton>
+      </Component>
     );
   }
 );
 
-const createPluginButton = (props:Opts) => withToggle(props)(defaultButton);
+const createPluginButton = (props: Opts) => asToken(
+  withReturnFocusBackOnClick(props.icon),
+  withToggle(props),
+)(PluginButton);
 export default createPluginButton;
 export { withToggle };

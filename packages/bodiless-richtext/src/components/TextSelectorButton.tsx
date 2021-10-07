@@ -15,15 +15,19 @@
 import React, { useState } from 'react';
 import RCTooltip from 'rc-tooltip';
 import MaterialIcon from '@material/react-material-icon';
+import { flow } from 'lodash';
 import { useUI, getUI } from '../RichTextContext';
+import {
+  withReturnFocusBackOnEffect,
+  useReturnFocusBackOnEffect,
+} from '../withReturnFocusBack';
 
 type ButtonProps = {
-  onMouseDown(e: React.MouseEvent): void;
+  className: string
 };
 
-const NodeSelectorButton = (props: ButtonProps) => {
+const NodeSelectorButton$ = (props: ButtonProps) => {
   const { Button } = getUI(useUI());
-
   return (
     <Button {...props}>
       <MaterialIcon className="bl-material-icons" icon="more_horiz" />
@@ -31,55 +35,49 @@ const NodeSelectorButton = (props: ButtonProps) => {
   );
 };
 
+const NodeSelectorButton = flow(
+  withReturnFocusBackOnEffect('more_horiz'),
+)(NodeSelectorButton$);
+
 NodeSelectorButton.displayName = 'NodeSelectorButton';
-
-const CloseBtn = (props: JSX.IntrinsicElements['span']) => {
-  const { CloseButton } = getUI(useUI());
-
-  return (
-    <CloseButton {...props}>
-      <MaterialIcon icon="cancel" />
-    </CloseButton>
-  );
-};
 
 type props = {
   children: React.ReactNode,
 };
-
-export const TextSelectorContext = React.createContext({ onClose: () => {} });
 
 const TextSelectorButton = ({
   children,
 }:props) => {
   const [visible, setVisible] = useState(false);
   const { Overlay, TextSelectorWrapper } = getUI(useUI());
-  const textSelectorContextValue = { onClose: () => setVisible(false) };
-
+  const nodeSelectorProps = {
+    className: visible ? 'bl-active node-selector-button' : '',
+  };
+  const { returnFocusBack } = useReturnFocusBackOnEffect('more_horiz');
   return (
     <RCTooltip
-      visible={visible}
+      trigger={['hover']}
       placement="topLeft"
       overlayStyle={{ opacity: 1 }}
+      visible={visible}
       align={{
         offset: [-40, -10],
       }}
+      onVisibleChange={() => { setVisible(!visible); }}
       overlay={() => (
         <Overlay>
-          <TextSelectorContext.Provider value={textSelectorContextValue}>
-            <CloseBtn onMouseDown={() => setVisible(false)} />
-            <TextSelectorWrapper>
-              { children }
-            </TextSelectorWrapper>
-          </TextSelectorContext.Provider>
+          <TextSelectorWrapper
+            onMouseDown={() => {
+              returnFocusBack();
+              setVisible(!visible);
+            }}
+          >
+            { children }
+          </TextSelectorWrapper>
         </Overlay>
       )}
     >
-      <NodeSelectorButton
-        onMouseDown={() => {
-          setVisible(true);
-        }}
-      />
+      <NodeSelectorButton {...nodeSelectorProps} />
     </RCTooltip>
   );
 };

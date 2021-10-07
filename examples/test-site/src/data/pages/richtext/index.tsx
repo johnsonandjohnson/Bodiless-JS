@@ -12,16 +12,44 @@
  * limitations under the License.
  */
 
+/* eslint-disable react/jsx-one-expression-per-line */
+
 import React from 'react';
 import { graphql } from 'gatsby';
 import {
   NodeViewer,
 } from '@bodiless/components';
+import {
+  withDesign, addProps, Div, asToken,
+} from '@bodiless/fclasses';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 
 import Layout from '../../../components/Layout';
 import { FlowContainerDefault } from '../../../components/FlowContainer';
-import { EditorBasic, EditorFullFeatured, EditorSimple } from '../../../components/Editors';
+import {
+  EditorBasic,
+  EditorSimple,
+  EditorFullFeatured,
+  withEditorFullFeatured,
+} from '../../../components/Editors';
+
+const AlphabeticFullFeaturedEditor = asToken(
+  withEditorFullFeatured('alphabeticRTE', 'Type something here...'),
+  withDesign({
+    Editor: addProps({
+      onKeyDown: (event: any) => {
+        if (
+          // alphabet characters
+          !(event.which >= 65 && event.which <= 120)
+          // backspace, enter, space, delete
+          && ![8, 13, 32, 46].includes(event.which)
+        ) {
+          event.preventDefault();
+        }
+      },
+    }),
+  }),
+)(Div);
 
 const RichTextPage = (props: any) => (
   <Page {...props}>
@@ -49,6 +77,18 @@ const RichTextPage = (props: any) => (
       </div>
 
       <div className="flex flex-col w-full py-5">
+        <h3 className="p-5 font-bold">Alphabetic Full Rich Text:</h3>
+        <p className="px-5 pb-5">
+          The purpose of this rich text is to demonstrate <a className="text-blue-700 underline" href="https://github.com/johnsonandjohnson/Bodiless-JS/issues/797">API</a> that allows to customize editors which have been added to compound components.
+          This rich text accepts typing alphabetic character
+          but it does not limit pasting content with non-alphabetic characters.
+        </p>
+        <div className="p-5 pt-0">
+          <AlphabeticFullFeaturedEditor className="border-solid border-4 border-gray-600 p-5" />
+        </div>
+      </div>
+
+      <div className="flex flex-col w-full py-5">
         <h3 className="p-5 font-bold">Component Picker with Rich Text:</h3>
         <div className="p-5 pt-0">
           <div className="border-solid border-4 border-gray-600 p-5">
@@ -67,6 +107,7 @@ export const query = graphql`
   query($slug: String!) {
     ...PageQuery
     ...SiteQuery
+    ...DefaultContentQuery
   }
 `;
 export default RichTextPage;

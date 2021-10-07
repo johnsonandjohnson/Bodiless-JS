@@ -32,6 +32,8 @@ function ensureDirectoryExistence(filePath) {
 }
 
 class Page {
+  supportedExtensions = ['json', 'tsx', 'jsx', 'js'];
+
   constructor(pagePath) {
     this.path = pagePath;
   }
@@ -42,6 +44,15 @@ class Page {
 
   setBasePath(basePath) {
     this.basePath = basePath;
+  }
+
+  get supportedExtensions() {
+    return this.supportedExtensions;
+  }
+
+  get exists() {
+    const files = this.supportedExtensions.map(extension => path.join(this.getBasePath(), `${this.path}.${extension}`));
+    return files.some(file => fs.existsSync(file));
   }
 
   get file() {

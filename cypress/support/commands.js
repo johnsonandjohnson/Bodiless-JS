@@ -103,3 +103,42 @@ Cypress.Commands.add("hideContextMenu", () => {
   cy.xpath('//h1')
     .click()
 })
+
+
+const sleep = ms => x => new Promise(resolve => setTimeout(() => resolve(x), ms));
+
+// slate js commands suggested in https://github.com/ianstormtaylor/slate/issues/3476#issuecomment-617594068
+Cypress.Commands.add('getEditor', (selector) => {
+  return cy.xpath(selector)
+    .click()
+})
+
+Cypress.Commands.add('typeInSlate', { prevSubject: true }, (subject, text) => {
+  return cy.wrap(subject)
+    .then(subject => {
+      subject[0].dispatchEvent(new InputEvent('beforeinput', { inputType: 'insertText', data: text }));
+      return subject;
+    })
+    // a race condition identified
+    // cypress assertion is made before the inserted text is available
+    // which led to sporadically failing cypress tests
+    // having added the timeout, mitigated this problem
+    // @todo find a better solution for the problem with race condition
+    .then(sleep(500))
+})
+ 
+Cypress.Commands.add('clearInSlate', { prevSubject: true }, (subject) => {
+  return cy.wrap(subject)
+    .then(subject => {
+      subject[0].dispatchEvent(new InputEvent('beforeinput', { inputType: 'deleteHardLineBackward' }))
+      return subject;
+    })
+})
+
+const resizeObserverLoopErrRe = /^[^(ResizeObserver loop limit exceeded)]/
+Cypress.on('uncaught:exception', (err) => {
+    /* returning false here prevents Cypress from failing the test */
+    if (resizeObserverLoopErrRe.test(err.message)) {
+        return false
+    }
+})

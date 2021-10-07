@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,32 +11,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { flow } from 'lodash';
 import {
   H1,
   Div,
   Img,
   addClasses,
   addProps,
+  asToken,
 } from '@bodiless/fclasses';
-import Tout from '../Tout';
+import Card from '../Card';
 import { withEditorSimple } from '../Editors';
 import {
   asHeader1,
   asImage,
-  asEditableImage,
   asYMargin,
   asNegXMargin,
   withPadding5,
 } from '../Elements.token';
+import { asEditableImagePlain as asEditableImage } from '../Image';
 import {
-  asToutWithPaddings,
-  asToutDefaultStyle,
-  asToutVertical,
-} from '../Tout/token';
+  asCardWithPaddings,
+  asCardDefaultStyle,
+  asCardVertical,
+} from '../Card/token';
 
 const asTestableProductTitle = addProps({ 'data-product-element': 'title' });
-export const ProductTitle = flow(
+export const ProductTitle = asToken(
   asHeader1,
   withEditorSimple('product_title', 'Product Title'),
   asTestableProductTitle,
@@ -44,22 +44,22 @@ export const ProductTitle = flow(
 
 const asProductImage = addClasses('w-full');
 const asTestableProductImage = addProps({ 'data-product-element': 'image' });
-export const ProductImage = flow(
+export const ProductImage = asToken(
   asProductImage,
   asImage,
   asEditableImage('product_image'),
   asTestableProductImage,
 )(Img);
 
-export const ProductTout = flow(
-  asToutWithPaddings,
-  asToutDefaultStyle,
-  asToutVertical,
-)(Tout);
+export const ProductCard = asToken(
+  asCardWithPaddings,
+  asCardDefaultStyle,
+  asCardVertical,
+)(Card);
 
 export const SectionContent = withPadding5(Div);
 export const SectionMargin = asYMargin(Div);
-export const SectionNegXMargin = flow(
+export const SectionNegXMargin = asToken(
   asYMargin,
   asNegXMargin,
 )(Div);

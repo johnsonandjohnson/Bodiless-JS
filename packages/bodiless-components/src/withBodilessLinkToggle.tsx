@@ -18,7 +18,10 @@ import {
 } from '@bodiless/core';
 import type { UseBodilessOverrides, EditButtonProps } from '@bodiless/core';
 import { flowRight, identity } from 'lodash';
-import { replaceWith, withoutProps, withDesign } from '@bodiless/fclasses';
+import {
+  replaceWith, withDesign, withoutProps, asToken,
+} from '@bodiless/fclasses';
+import type { HOC } from '@bodiless/fclasses';
 import type { AsBodilessLink } from './Link';
 import {
   withChameleonComponentFormControls, applyChameleon, withChameleonContext, useChameleonContext,
@@ -26,7 +29,7 @@ import {
 } from './Chameleon';
 
 const SafeFragment = withOnlyProps('key', 'children')(Fragment);
-const Span = withoutProps('')('span');
+const SafeSpan = withoutProps('href')('span');
 
 const extendOverrides = <P extends object, D extends object>(
   useOverrides: UseBodilessOverrides<P, D> = () => ({}),
@@ -37,21 +40,49 @@ const extendOverrides = <P extends object, D extends object>(
     ...extender(props),
   });
 
-const withBodilessLinkToggle = (asEditableLink: AsBodilessLink): AsBodilessLink => (
+/**
+ * @private
+ * Default hoc used to replace link when toggled off.
+ */
+const defaultAsOff: HOC = asToken(
+  ifEditable(replaceWith(SafeSpan)),
+  ifReadOnly(replaceWith(SafeFragment)),
+);
+
+/**
+ * Creates an AsBodiless... HOC factory which can be used to wrap a component
+ * in a toggled bodiless link.
+ *
+ * @param asEditableLink
+ * HOC factory which should be used to create the plain link.
+ *
+ * @param asOff
+ * Optional HOC to apply when the link is toggled off.  By default, replaces the
+ * wrapped component with a fragment (or with a span in edit mode).
+ *
+ * @param defaultToOn
+ * Optional boolean to toggle withBodilessLinkToggle on, false by default.
+ */
+const withBodilessLinkToggle = (
+  asEditableLink: AsBodilessLink,
+  asOff: HOC = defaultAsOff,
+  defaultToOn: boolean = false,
+): AsBodilessLink => (
   nodeKey, defaultData, useOverrides,
 ) => {
   const useOverrides$ = extendOverrides<any, any>(
-    () => ({ label: useChameleonContext().isOn ? 'Edit' : 'Add' }),
+    () => ({
+      label: useChameleonContext().isOn ? 'Edit' : 'Add',
+      formTitle: useChameleonContext().isOn ? 'Edit Link' : 'Add Link',
+    }),
   )(useOverrides as UseBodilessOverrides);
+  const defaultChameleonData = defaultToOn ? { component: 'Link' } : undefined;
   return flowRight(
     withDesign({
-      _default: flowRight(
-        ifEditable(replaceWith(Span)),
-        ifReadOnly(replaceWith(SafeFragment)),
-      ),
+      _default: asOff,
       Link: identity,
     }),
-    withChameleonContext('link-toggle'),
+    withChameleonContext('link-toggle', defaultChameleonData),
     withChameleonComponentFormControls,
     withSidecarNodes(
       flowRight(

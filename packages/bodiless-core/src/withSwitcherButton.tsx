@@ -34,7 +34,7 @@ const useMenuOptions = () => {
 const withSwitcherButton = withMenuOptions({
   useMenuOptions,
   name: 'Switcher',
-  peer: true,
+  root: true,
 });
 
 export default withSwitcherButton;

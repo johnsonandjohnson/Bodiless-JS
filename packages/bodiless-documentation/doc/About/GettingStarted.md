@@ -3,10 +3,10 @@
 ## Prerequisites
 
 Ensure you have the following installed locally:
-- NodeJS: https://nodejs.org/en/download/ 
+- NodeJS: https://nodejs.org/en/download/
   - We are currently using the LTS version 12.19.0.
+  - Node 14.x is *not yet supported*.
   - We use `npm` as a package manager. If you prefer `yarn` feel free to try it. YMMV.
-- [NPM](https://docs.npmjs.com/) version 6.13.1+ is required.
 
 ## Creating a New Site
 
@@ -102,6 +102,6 @@ Visit http://localhost:9000/ in your browser to view the site.
 - [Step-by-step walkthrough of site building](../Development/Guides/SiteBuildBasics)
 - [More ways to launch sites](../Development/LocalSites.md)
 - [Read our Core Principles](./CorePrinciples).
-- [Understand our Platform Architecture](../Development/Architecture).
+- [Understand our Platform Architecture](../Development/Architecture/Data).
 
 

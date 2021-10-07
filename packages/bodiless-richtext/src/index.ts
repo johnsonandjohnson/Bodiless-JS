@@ -25,3 +25,4 @@ export * from './components';
 export * from './core';
 export * from './meta';
 export * from './RichTextPlain';
+export * from './serializers';

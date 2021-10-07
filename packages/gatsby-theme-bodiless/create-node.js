@@ -12,10 +12,15 @@
  * limitations under the License.
  */
 
+/* eslint-disable no-case-declarations */
+/* eslint-disable no-underscore-dangle */
+
 const pathUtil = require('path');
 const slash = require('slash');
 const crypto = require('crypto');
-const { fluid, fixed } = require('gatsby-plugin-sharp');
+const fs = require('fs-extra');
+const md5File = require('md5-file');
+const { fluid: sharpFluid, fixed: sharpFixed } = require('gatsby-plugin-sharp');
 const GatsbyImagePresets = require('./dist/GatsbyImage/GatsbyImagePresets').default;
 
 const Logger = require('./Logger');
@@ -23,6 +28,16 @@ const Logger = require('./Logger');
 const logger = new Logger('gatsby');
 
 const BODILESS_NODE_TYPE = 'Bodiless';
+
+const srcSetBreakpoints = [
+  360,
+  834,
+  1024,
+];
+
+const getDefaultSharpArgs = () => ({
+  quality: 90,
+});
 
 const findFilesystemNode = ({ node, getNode }) => {
   // Find the filesystem node.
@@ -48,6 +63,12 @@ const findFilesystemNode = ({ node, getNode }) => {
 
 // Adapted from create-file-path.
 const createSlug = ({ node, getNode }) => {
+  if (
+    node.instanceName !== undefined
+    && node.instanceName.startsWith('bodiless-default-content')
+  ) {
+    return 'defaultContent';
+  }
   // Find the filesystem node
   const fsNode = findFilesystemNode({ node, getNode });
   if (!fsNode) return undefined;
@@ -72,10 +93,12 @@ const addSlugField = ({ node, getNode, actions }) => {
   });
 };
 
-const generateDigest = content => crypto
+const generateStringDigest = content => crypto
   .createHash('md5')
   .update(content)
   .digest('hex');
+
+const generateFileDigest = absolutePath => md5File.sync(absolutePath);
 
 const supportedExtensions = {
   jpeg: true,
@@ -86,175 +109,264 @@ const supportedExtensions = {
   tiff: true,
 };
 
-const srcSetBreakpoints = [
-  360,
-  834,
-  1024,
-];
+const fluid = async ({
+  file,
+  args = {},
+  reporter,
+}) => {
+  let srcWebp;
+  let srcSetWebp;
+  const { toFormat, ...restArgs } = args;
+  if (toFormat === 'webp') {
+    ({ src: srcWebp, srcSet: srcSetWebp } = await sharpFluid({
+      file,
+      args: {
+        ...getDefaultSharpArgs(),
+        toFormat,
+        ...restArgs,
+      },
+      reporter,
+    }));
+  }
+  const result = await sharpFluid({
+    file,
+    args: {
+      ...getDefaultSharpArgs(),
+      ...restArgs,
+    },
+    reporter,
+  });
+  return {
+    fluid: {
+      ...result,
+      ...(toFormat === 'webp' ? { srcWebp, srcSetWebp } : {}),
+    },
+  };
+};
 
-const generateGatsbyImage = async ({ file, preset, reporter }) => {
+const fixed = async ({
+  file,
+  args = {},
+  reporter,
+}) => {
+  let srcWebp; let
+    srcSetWebp;
+  const { toFormat, ...restArgs } = args;
+  if (toFormat === 'webp') {
+    ({ src: srcWebp, srcSet: srcSetWebp } = await sharpFixed({
+      file,
+      args: {
+        ...getDefaultSharpArgs(),
+        toFormat,
+        ...restArgs,
+      },
+      reporter,
+    }));
+  }
+  const result = await sharpFixed({
+    file,
+    args: {
+      ...getDefaultSharpArgs(),
+      ...restArgs,
+    },
+    reporter,
+  });
+  return {
+    fixed: {
+      ...result,
+      ...(toFormat === 'webp' ? { srcWebp, srcSetWebp } : {}),
+    },
+  };
+};
+
+const generateGatsbyImage = async ({ file, preset, reporter }, options) => {
   // skip image generation when unknown preset is passed
   if (!Object.values(GatsbyImagePresets).includes(preset)) {
     return undefined;
   }
+  const { sharpArgs } = options || {};
   switch (preset) {
     case GatsbyImagePresets.Fixed:
-      return {
-        fixed: await fixed({
-          file,
-          args: {
-            base64: true,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fixed({
+        file,
+        args: {
+          base64: true,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.FixedNoBase64:
-      return {
-        fixed: await fixed({
-          file,
-          args: {
-            base64: false,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fixed({
+        file,
+        args: {
+          base64: false,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.FixedTracedSVG:
-      return {
-        fixed: await fixed({
-          file,
-          args: {
-            generateTracedSVG: true,
-            tracedSVG: true,
-            base64: false,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fixed({
+        file,
+        args: {
+          generateTracedSVG: true,
+          tracedSVG: true,
+          base64: false,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.FixedWithWebp:
-      return {
-        fixed: await fixed({
-          file,
-          args: {
-            toFormat: 'webp',
-            base64: true,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fixed({
+        file,
+        args: {
+          toFormat: 'webp',
+          base64: true,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.FixedWithWebpNoBase64:
-      return {
-        fixed: await fixed({
-          file,
-          args: {
-            toFormat: 'webp',
-            base64: false,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fixed({
+        file,
+        args: {
+          toFormat: 'webp',
+          base64: false,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.FixedWithWebpTracedSVG:
-      return {
-        fixed: await fixed({
-          file,
-          args: {
-            toFormat: 'webp',
-            generateTracedSVG: true,
-            tracedSVG: true,
-            base64: false,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fixed({
+        file,
+        args: {
+          toFormat: 'webp',
+          generateTracedSVG: true,
+          tracedSVG: true,
+          base64: false,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.Fluid:
-      return {
-        fluid: await fluid({
-          file,
-          args: {
-            base64: true,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fluid({
+        file,
+        args: {
+          base64: true,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.FluidNoBase64:
-      return {
-        fluid: await fluid({
-          file,
-          args: {
-            base64: false,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fluid({
+        file,
+        args: {
+          base64: false,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.FluidTracedSVG:
-      return {
-        fluid: await fluid({
-          file,
-          args: {
-            generateTracedSVG: true,
-            tracedSVG: true,
-            base64: false,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fluid({
+        file,
+        args: {
+          generateTracedSVG: true,
+          tracedSVG: true,
+          base64: false,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.FluidWithWebp:
-      return {
-        fluid: await fluid({
-          file,
-          args: {
-            toFormat: 'webp',
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fluid({
+        file,
+        args: {
+          toFormat: 'webp',
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.FluidWithWebpNoBase64:
-      return {
-        fluid: await fluid({
-          file,
-          args: {
-            toFormat: 'webp',
-            base64: false,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fluid({
+        file,
+        args: {
+          toFormat: 'webp',
+          base64: false,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     case GatsbyImagePresets.FluidWithWebpTracedSVG:
-      return {
-        fluid: await fluid({
-          file,
-          args: {
-            toFormat: 'webp',
-            generateTracedSVG: true,
-            tracedSVG: true,
-            base64: false,
-            srcSetBreakpoints,
-          },
-          reporter,
-        }),
-      };
+      return fluid({
+        file,
+        args: {
+          toFormat: 'webp',
+          generateTracedSVG: true,
+          tracedSVG: true,
+          base64: false,
+          srcSetBreakpoints,
+          ...sharpArgs,
+        },
+        reporter,
+      });
     default:
       return undefined;
   }
 };
 
-const generateImages = async ({ node, content, reporter }) => {
+/**
+ * Copy file to static directory and return public url to it
+ *
+ * leveraging logic from gatsby-source-filesystem
+ * https://github.com/gatsbyjs/gatsby/blob/39baf4eb504dcbb4d231f4baf8b109d0dcabb1da/packages/gatsby-source-filesystem/src/extend-file-node.js
+ */
+const copyFileToStatic = (node, reporter) => {
+  const fileAbsolutePath = node.absolutePath;
+  const fileName = `${node.internal.contentDigest}/${pathUtil.basename(fileAbsolutePath)}`;
+
+  const publicPath = pathUtil.join(
+    process.cwd(),
+    'public',
+    'static',
+    fileName,
+  );
+
+  if (!fs.existsSync(publicPath)) {
+    fs.copySync(
+      fileAbsolutePath,
+      publicPath,
+      { dereference: true },
+      err => {
+        if (err) {
+          reporter.panic(
+            {
+              context: {
+                sourceMessage: `error copying file from ${fileAbsolutePath} to ${publicPath}`,
+              },
+            },
+            err,
+          );
+        }
+      },
+    );
+  }
+
+  return `/static/${fileName}`;
+};
+
+const createImageNode = ({ node, content }) => {
   const parsedContent = JSON.parse(content);
   if (parsedContent === undefined || parsedContent.src === undefined) {
-    return undefined;
-  }
-  // skip image generation if preset is not set
-  if (parsedContent.preset === undefined) {
     return undefined;
   }
   const imgSrc = parsedContent.src;
@@ -262,6 +374,12 @@ const generateImages = async ({ node, content, reporter }) => {
   if (!supportedExtensions[fileExtension]) {
     return undefined;
   }
+  const absolutePath = pathUtil.isAbsolute(imgSrc)
+    ? pathUtil.join(process.cwd(), 'static', imgSrc)
+    : pathUtil.join(node.dir, imgSrc);
+  const contentDigest = fs.existsSync(absolutePath)
+    ? generateFileDigest(absolutePath)
+    : generateStringDigest(absolutePath);
   const imageNode = {
     id: `${node.id} >>> ImageNode`,
     parent: node.id,
@@ -269,50 +387,76 @@ const generateImages = async ({ node, content, reporter }) => {
     name: node.name,
     extension: pathUtil.extname(imgSrc).substr(1),
     path: imgSrc,
-    // this field is mandatory for grapqhql sharp queries
-    absolutePath: pathUtil.join(process.cwd(), 'static', imgSrc),
+    // this field is mandatory for graphql sharp queries
+    absolutePath,
     internal: {
       type: 'ImageNode',
-      contentDigest: generateDigest(content),
+      contentDigest,
     },
   };
+  return imageNode;
+};
+
+const generateImages = async ({ imageNode, content, reporter }, options) => {
+  const parsedContent = JSON.parse(content);
   return generateGatsbyImage({
     file: imageNode,
     preset: parsedContent.preset,
     reporter,
-  });
+  }, options);
 };
 
 const createBodilessNode = async ({
   node,
-  boundActionCreators,
+  actions,
   loadNodeContent,
   reporter,
-}) => {
+}, pluginOptions) => {
   const nodeContent = await loadNodeContent(node);
-  const { createNode, createParentChildLink } = boundActionCreators;
+  const { createNode, createParentChildLink } = actions;
 
-  const gatsbyImgData = await generateImages({
-    node,
-    content: nodeContent,
-    reporter,
-  });
+  const { gatsbyImage: gatsbyImageOptions } = pluginOptions;
+  const imageNode = createImageNode({ node, content: nodeContent });
+  let imageContent;
+  if (imageNode !== undefined) {
+    const publicUrl = pathUtil.isAbsolute(imageNode.path)
+      ? imageNode.path
+      : copyFileToStatic(imageNode, reporter);
+    let gatsbyImgData;
+    // skip gatsby img data generation when an image from json does not exist in filesystem
+    if (fs.existsSync(imageNode.absolutePath)) {
+      gatsbyImgData = await generateImages({
+        imageNode,
+        content: nodeContent,
+        reporter,
+      }, gatsbyImageOptions);
+    }
 
-  const content = gatsbyImgData ? JSON.stringify({
+    imageContent = {
+      ...(gatsbyImgData ? { gatsbyImg: gatsbyImgData } : {}),
+      ...(publicUrl ? { src: publicUrl } : {}),
+    };
+  }
+  const content = imageContent ? JSON.stringify({
     ...JSON.parse(nodeContent),
-    ...(gatsbyImgData ? { gatsbyImg: gatsbyImgData } : {}),
+    ...imageContent,
   }) : nodeContent;
+
+  const parsedContent = JSON.parse(content);
+  const bodilessNodeName = parsedContent._nodeKey !== undefined
+    ? parsedContent._nodeKey
+    : node.name;
 
   const bodilessNode = {
     id: `${node.id} >>> ${BODILESS_NODE_TYPE}`,
     parent: node.id,
     children: [],
-    name: node.name,
+    name: bodilessNodeName,
     extension: node.extension,
     instanceName: node.sourceInstanceName,
     content,
     internal: {
-      contentDigest: generateDigest(nodeContent),
+      contentDigest: generateStringDigest(nodeContent),
       type: BODILESS_NODE_TYPE,
     },
   };
@@ -325,10 +469,9 @@ exports.onCreateNode = ({
   node,
   getNode,
   actions,
-  boundActionCreators,
   loadNodeContent,
   reporter,
-}) => {
+}, pluginOptions) => {
   // Add slug field to Bodiless node
   if (node.internal.type === BODILESS_NODE_TYPE) {
     addSlugField({ node, getNode, actions });
@@ -336,16 +479,17 @@ exports.onCreateNode = ({
   }
   // check if we should create a bodiless node
   const extensions = ['json'];
+  const isBodilessSource = node.sourceInstanceName === 'data'
+    || (node.sourceInstanceName !== undefined && node.sourceInstanceName.startsWith('bodiless-default-content'));
   // 'data' is gatsby-source-filesystem name configured in gatsby-config.js
-  if (node.sourceInstanceName === 'data' && extensions.indexOf(node.extension) !== -1) {
+  if (isBodilessSource && extensions.indexOf(node.extension) !== -1) {
     createBodilessNode({
       node,
       getNode,
       actions,
-      boundActionCreators,
       loadNodeContent,
       reporter,
-    });
+    }, pluginOptions);
   }
 };
 

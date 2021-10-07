@@ -14,19 +14,19 @@
 import React, { useState } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import { TagType } from '@bodiless/core';
 import { H2 } from '@bodiless/fclasses';
+import { Tag, FilterTagType } from '@bodiless/filtering';
 import Layout from '../../../components/Layout';
 import TaggableFilterableItem, { TagButton } from '../../../components/Filter';
 
 const getSuggestions = () => [
-  { id: 'fooId', name: 'foo' },
-  { id: 'barId', name: 'bar' },
-  { id: 'batId', name: 'bat' },
-  { id: 'bazId', name: 'baz' },
+  new Tag('fooId', 'foo'),
+  new Tag('barId', 'bar'),
+  new Tag('batId', 'bat'),
+  new Tag('bazId', 'baz'),
 ];
 const TaggableFilterSelector = () => {
-  const [tags, setTags] = useState<TagType[]>([]);
+  const [tags, setTags] = useState<FilterTagType[]>([]);
   const FilterButtons = getSuggestions().map(tag => (
     <TagButton key={tag.id} onClick={() => setTags([tag])}>
       {tag.name}
@@ -83,5 +83,6 @@ export const query = graphql`
   query($slug: String!) {
     ...PageQuery
     ...SiteQuery
+    ...DefaultContentQuery
   }
 `;

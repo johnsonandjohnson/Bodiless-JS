@@ -12,125 +12,92 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { flow } from 'lodash';
+import React, { ReactNode } from 'react';
 import {
   WithNodeKeyProps,
   withSidecarNodes,
   withNode,
   withNodeKey,
   withChild,
+  asReadOnly,
   ifToggledOn,
 } from '@bodiless/core';
+import { withoutLinkWhenLinkDataEmpty } from '@bodiless/components';
 import {
   withBreadcrumbStartingTrail,
-  withBreadcrumbFinalTrail,
   withoutBreadcrumbFinalTrail,
-} from '@bodiless/components';
+  asAccessibleBreadcrumbs as asBaseAccessibleBreadcrumbs,
+  useIsBreadcrumbItemCurrentPage,
+  useIsLastBreadcrumbItemRenderedAsALink,
+} from '@bodiless/navigation';
 import {
+  flowIf,
+  asToken,
   addClasses,
   addProps,
   withDesign,
   replaceWith,
-  A,
   Span,
-  Fragment,
+  remove,
 } from '@bodiless/fclasses';
+import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 
 import {
   asBold,
-  asEditable,
   asEditableLink,
   asLink,
 } from '../Elements.token';
 
-const withEditableStartingTrail = (
-  nodeKeys?: WithNodeKeyProps,
-  placeholder?: string,
-) => flow(
-  withBreadcrumbStartingTrail,
-  withDesign({
-    StartingTrail: replaceWith(
-      flow(
-        asEditable('text', placeholder),
-        addProps({
-          children: 'Home',
-        }),
-        withSidecarNodes(
-          asEditableLink('link'),
-        ),
-        addProps({
-          href: '/',
-        }),
-        asLink,
-        withNode,
-        withNodeKey(nodeKeys),
-      )(A),
-    ),
-  }),
-);
+const BREADCRUMB_ARIA_LABEL = 'Breadcrumb';
+
+const HomeBreadcrumbIcon = asToken(
+  addProps({ children: 'home' as ReactNode }),
+  addClasses('material-icons'),
+)(Span);
 
 const withStartingTrailIcon = (
   nodeKeys?: WithNodeKeyProps,
-) => flow(
+) => asToken(
   withBreadcrumbStartingTrail,
   withDesign({
     StartingTrail: replaceWith(
-      flow(
-        withChild(
-          flow(
-            addProps({
-              children: 'home',
-            }),
-            addClasses('material-icons'),
-          )(Span),
-        ),
-        addClasses('material-icons'),
+      asToken(
+        withChild(HomeBreadcrumbIcon),
         withSidecarNodes(
           asEditableLink('link'),
         ),
-        addProps({
-          href: '/',
-        }),
+        addProps({ href: '/' }),
         withNode,
         withNodeKey(nodeKeys),
-      )(A),
+      )(GatsbyLink),
     ),
   }),
 );
+
+const withoutLink = withDesign({
+  Link: remove,
+});
 
 const withNonLinkableItems = withDesign({
-  BreadcrumbLink: replaceWith(Fragment),
+  Title: withoutLink,
 });
 
-const withEditableFinalTrail = (
-  nodeKeys?: WithNodeKeyProps,
-  placeholder?: string,
-) => flow(
-  withDesign({
-    FinalTrail: flow(
-      replaceWith(Span),
-      asEditable(nodeKeys, placeholder),
-    ),
-  }),
-  withBreadcrumbFinalTrail,
-);
+const withReadOnlyStartingTrail = withDesign({
+  StartingTrail: asReadOnly,
+});
 
 const withBoldedFinalTrail = withDesign({
-  BreadcrumbItem: ifToggledOn(({ isCurrentPage }: any) => isCurrentPage)(asBold),
-  FinalTrail: asBold,
+  Item: flowIf(({ isCurrentPage }: any) => isCurrentPage)(asBold),
 });
 
-const withHiddenCurrentPageItem = flow(
+const withHiddenCurrentPageItem = asToken(
   withDesign({
-    BreadcrumbItem: ifToggledOn(
-      ({ isCurrentPage }: any) => isCurrentPage,
-    )(replaceWith(() => <></>)),
+    Item: flowIf(useIsBreadcrumbItemCurrentPage)(replaceWith(() => <></>)),
   }),
   withoutBreadcrumbFinalTrail,
 );
 
-export const withSeparator = (separator: string) => addProps({
+const withSeparator = (separator: string) => addProps({
   children: separator,
 });
 
@@ -146,14 +113,71 @@ const withSlashSeparator = withDesign({
   Separator: withSeparator('/'),
 });
 
+const withAccessibleSeparator = withDesign({
+  Separator: asToken(
+    addClasses('border-black border-r-2 h-4 mx-1.5 rotate-12 self-center transform'),
+    withSeparator(''),
+  ),
+});
+
+// Only apply asLink to the Link component and not the _default one. ( LinkToggle )
+const withLinkToggleStyles = withDesign({
+  Link: withDesign({
+    Link: asLink,
+  }),
+});
+
+const withStartingTrailLinkStyles = withDesign({
+  StartingTrail: withLinkToggleStyles,
+});
+
+const withFinalTrailLinkStyles = withDesign({
+  FinalTrail: withDesign({
+    Link: withoutLinkWhenLinkDataEmpty,
+  }),
+});
+
+const $withBreadcrumbStyles = asToken(
+  withDesign({
+    Separator: addClasses('mx-1'),
+    Wrapper: addClasses('inline-flex'),
+    Title: withLinkToggleStyles,
+  }),
+  withStartingTrailLinkStyles,
+  withFinalTrailLinkStyles,
+  withArrowSeparator,
+);
+
+const asAccessibleBreadcrumbs = asToken(
+  asBaseAccessibleBreadcrumbs,
+  withDesign({
+    NavWrapper: addProps({
+      'aria-label': BREADCRUMB_ARIA_LABEL,
+    }),
+  }),
+  ifToggledOn(useIsLastBreadcrumbItemRenderedAsALink)(
+    withDesign({
+      Title: ifToggledOn(useIsBreadcrumbItemCurrentPage)(
+        withDesign({
+          Link: addProps({
+            'aria-current': 'page',
+          }),
+        }),
+      ),
+    }),
+  ),
+);
+
 export {
-  withEditableStartingTrail,
+  $withBreadcrumbStyles,
   withStartingTrailIcon,
   withNonLinkableItems,
-  withEditableFinalTrail,
   withBoldedFinalTrail,
-  withArrowSeparator,
   withVerticalBarSeparator,
   withSlashSeparator,
   withHiddenCurrentPageItem,
+  withStartingTrailLinkStyles,
+  withReadOnlyStartingTrail,
+  asAccessibleBreadcrumbs,
+  withAccessibleSeparator,
 };

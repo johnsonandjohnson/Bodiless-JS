@@ -12,130 +12,42 @@
  * limitations under the License.
  */
 
-import { Selection } from 'slate';
-
 export const MARK_TYPE = 'custom_mark';
 
-export const activeValue = {
-  document: {
-    nodes: [
+export const activeValue = [
+  {
+    type: 'paragraph',
+    children: [
       {
-        object: 'block',
-        type: 'paragraph',
-        nodes: [
-          {
-            object: 'text',
-            leaves: [
-              {
-                text: 'rich',
-                marks: [
-                  {
-                    type: MARK_TYPE,
-                  },
-                ],
-              },
-            ],
-          },
-        ],
+        text: 'rich',
+        [MARK_TYPE]: true,
       },
     ],
   },
-  selection: new Selection({
-    object: 'selection',
-    anchor: {
-      object: 'point',
-      offset: 3,
-      path: [0, 0],
-    },
-    focus: {
-      object: 'point',
-      offset: 3,
-      path: [0, 0],
-    },
-    isFocused: true,
-    marks: null,
-  }),
-};
+];
 
-export const inactiveValueWithMark = {
-  document: {
-    nodes: [
+export const inactiveValueWithMark = [
+  {
+    type: 'paragraph',
+    children: [
       {
-        object: 'block',
-        type: 'paragraph',
-        nodes: [
-          {
-            object: 'text',
-            leaves: [
-              {
-                text: 'rich',
-                marks: [
-                  {
-                    type: MARK_TYPE,
-                  },
-                ],
-              },
-              {
-                text: ' text',
-                marks: [],
-              },
-            ],
-          },
-        ],
+        text: 'rich',
+        [MARK_TYPE]: true,
+      },
+      {
+        text: 'text',
       },
     ],
   },
-  selection: new Selection({
-    object: 'selection',
-    anchor: {
-      object: 'point',
-      offset: 7,
-      path: [0, 0],
-    },
-    focus: {
-      object: 'point',
-      offset: 7,
-      path: [0, 0],
-    },
-    isFocused: true,
-    marks: null,
-  }),
-};
+];
 
-export const inactiveValueWithoutMark = {
-  document: {
-    nodes: [
+export const inactiveValueWithoutMark = [
+  {
+    type: 'paragraph',
+    children: [
       {
-        object: 'block',
-        type: 'paragraph',
-        nodes: [
-          {
-            object: 'text',
-            leaves: [
-              {
-                text: 'rich',
-                marks: [],
-              },
-            ],
-          },
-        ],
+        text: 'rich',
       },
     ],
   },
-
-  selection: new Selection({
-    object: 'selection',
-    anchor: {
-      object: 'point',
-      offset: 3,
-      path: [0, 0],
-    },
-    focus: {
-      object: 'point',
-      offset: 3,
-      path: [0, 0],
-    },
-    isFocused: true,
-    marks: null,
-  }),
-};
+];

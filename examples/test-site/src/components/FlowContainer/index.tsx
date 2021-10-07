@@ -11,36 +11,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { flow } from 'lodash';
-import { withMandatoryCategories } from '@bodiless/layouts';
+
+import { withDesign, asToken } from '@bodiless/fclasses';
+import { withMandatoryCategories, ifNotComponentSelector } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
-import withToutVariations from './withToutVariations';
-import withContentfulTouts from './withContentfulTouts';
 import withRichTextVariations from './withRichTextVariations';
-import withSingleAccordionVariations from './withSingleAccordionVariations';
 import withImageVariations from './withImageVariations';
-import withIframeVariations from './withIframeVariations';
-import withYouTubeVariations from './withYouTubeVariations';
-import withSocialShare from './withSocialShare';
+import withFlowContainerVariations from './withFlowContainerVariations';
+import asDefaultFlowContainer from './asDefaultFlowContainer';
 
-import { asFlowContainerWithMargins } from './token';
-import withListVariations from './withListVariations';
+import { asFlowContainerRTL, asFlowContainerWithMargins } from './token';
 
-// Order of includes currently dictates order in Component Picker
-// thus recommend putting more frequently used components toward top for quicker access.
-const FlowContainerDefault = flow(
+const FlowContainerDefault = asToken(
+  asDefaultFlowContainer,
+  withFlowContainerVariations,
+)(FlowContainer);
+
+const FlowContainerDefaultRTL = asToken(
+  ifNotComponentSelector(
+    withDesign({
+      FlowContainer: asFlowContainerRTL,
+    }),
+  ),
+  asFlowContainerRTL,
+)(FlowContainerDefault);
+
+const FlowContainerLimited = asToken(
   withRichTextVariations,
   withImageVariations,
-  withToutVariations,
-  withContentfulTouts,
-  withSingleAccordionVariations,
-  withListVariations,
-  withIframeVariations,
-  withSocialShare,
-  withYouTubeVariations,
   asFlowContainerWithMargins,
   withMandatoryCategories(['Orientation', 'Type']),
 )(FlowContainer);
 
 // eslint-disable-next-line import/prefer-default-export
-export { FlowContainerDefault };
+export { FlowContainerDefault, FlowContainerLimited, FlowContainerDefaultRTL };

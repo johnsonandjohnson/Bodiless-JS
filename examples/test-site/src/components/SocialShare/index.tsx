@@ -11,11 +11,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { FunctionComponent as FC } from 'react';
+import React, { FunctionComponent as FC, MouseEvent } from 'react';
 import Helmet from 'react-helmet';
-import { flow, flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 import { useMenuOptionUI } from '@bodiless/core';
-import type { FormBodyProps } from '@bodiless/core';
 import {
   withMeta,
   asBodilessHelmet,
@@ -24,8 +23,10 @@ import {
   ImageDropZone,
   TImagePickerUI,
 } from '@bodiless/components';
+import { asToken } from '@bodiless/fclasses';
 import { SocialShare as SocialShareClean } from '@bodiless/organisms';
 import type { SocialShareProvider } from '@bodiless/organisms';
+import { useFieldApi } from 'informed';
 import asSimpleSocialShare, {
   asOrangeSocialShare,
   DropZoneWrapper,
@@ -37,17 +38,23 @@ import asSimpleSocialShare, {
   LogoNoBackground,
   DropZoneDesign,
 } from './token';
+// @ts-ignore Cannot find module
 import imgFacebook from './images/facebook.png';
+// @ts-ignore Cannot find module
 import imgFacebookRnd from './images/facebookimg.png';
+// @ts-ignore Cannot find module
 import imgTwitter from './images/twitter.png';
+// @ts-ignore Cannot find module
 import imgTwitterRnd from './images/twitterimg.png';
+// @ts-ignore Cannot find module
 import imgEmail from './images/email.png';
+// @ts-ignore Cannot find module
 import imgEmailRnd from './images/emailimg.png';
 
 type ProviderProps = {
-  name: string;
-  icon: JSX.Element;
-  onclick: Function;
+  name: string,
+  icon: string,
+  onclick: (event: MouseEvent) => void,
 };
 
 const Icon = (icon: string): JSX.Element => (
@@ -120,7 +127,7 @@ const pageResources = (): {url: string, title: string, desc: string} => {
   if (typeof document !== 'undefined') {
     const linkElem = document.querySelector("link[rel='canonical']");
     const linkUrl = linkElem ? linkElem.getAttribute('href') || '' : '';
-    const ogUrlMeta = document.querySelector('meta[property="og:url"]');
+    const ogUrlMeta = document.querySelector<HTMLMetaElement>('meta[property="og:url"]');
     const ogUrl = ogUrlMeta ? ogUrlMeta.content : '';
     if (linkUrl) {
       sharedUrl = linkUrl;
@@ -129,10 +136,10 @@ const pageResources = (): {url: string, title: string, desc: string} => {
     } else if (typeof window !== 'undefined') {
       sharedUrl = window.location.href;
     }
-    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const ogTitle = document.querySelector<HTMLMetaElement>('meta[property="og:title"]');
     sharedTitle = ogTitle ? ogTitle.content : '';
-    const ogDescription = document.querySelector('meta[property="og:description"]');
-    sharedDescription = ogDescription ? ogDescription.content : '';
+    const ogDesc = document.querySelector<HTMLMetaElement>('meta[property="og:description"]');
+    sharedDescription = ogDesc ? ogDesc.content : '';
   }
 
   return {
@@ -237,8 +244,8 @@ const providersEmailOnly: SocialShareProvider[] = [
   emailRound,
 ];
 
-const SimpleSocialShare = flow(asSimpleSocialShare)(SocialShareClean);
-const CustomizedSocialShare = flow(asOrangeSocialShare)(SocialShareClean);
+const SimpleSocialShare = asToken(asSimpleSocialShare)(SocialShareClean);
+const CustomizedSocialShare = asToken(asOrangeSocialShare)(SocialShareClean);
 const IconOnlySocialShare = () => (
   <CustomizedSocialShare providers={providersCustomized} buttonContent={Icon('share')} />
 );
@@ -262,6 +269,7 @@ const useMenuOptions = () => [
     name: 'share',
     icon: 'share',
     label: 'Share',
+    group: 'page-group',
   },
 ];
 const withSocialShareTitle = withMeta({
@@ -276,13 +284,13 @@ const dropZoneUI: Partial<TImagePickerUI> = {
   UploadArea: () => <DropZoneUploadArea>Drag a file or click here to upload.</DropZoneUploadArea>,
 };
 
-const SocialShareFormImage = (props: FormBodyProps) => {
+const SocialShareFormImage = () => {
   const { ComponentFormText } = useMenuOptionUI();
-  const { formapi } = props;
+  const fieldApi = useFieldApi(metaSocialShareImageName);
   return (
     <DropZoneWrapper>
       <ComponentFormText field={metaSocialShareImageName} id="social-share-img-src" />
-      <ImageDropZone formApi={formapi} targetFieldName={metaSocialShareImageName} ui={dropZoneUI} />
+      <ImageDropZone fieldApi={fieldApi} ui={dropZoneUI} />
     </DropZoneWrapper>
   );
 };
@@ -327,10 +335,10 @@ const SocialShareHelmet = flowRight(
   withSocialShareImage('og-image', ''),
   withSocialShareUrl('og-url', ''),
   withSocialShareDescription('og-description', ''),
-  withSocialShareType({ nodeKey: 'og:type', nodeCollection: 'site' }),
-  withSocialShareSitename({ nodeKey: 'og:sitename', nodeCollection: 'site' }),
-  withSocialShareTwitterCard({ nodeKey: 'twitter:card', nodeCollection: 'site' }),
-  withSocialShareTwitterSite({ nodeKey: 'twitter:site', nodeCollection: 'site' }),
+  withSocialShareType({ nodeKey: 'og-type', nodeCollection: 'site' }),
+  withSocialShareSitename({ nodeKey: 'og-sitename', nodeCollection: 'site' }),
+  withSocialShareTwitterCard({ nodeKey: 'twitter-card', nodeCollection: 'site' }),
+  withSocialShareTwitterSite({ nodeKey: 'twitter-site', nodeCollection: 'site' }),
 )(Helmet);
 
 export { SocialShareHelmet };

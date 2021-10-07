@@ -14,7 +14,7 @@
 
 import React from 'react';
 import { contextMenuForm } from '@bodiless/core';
-import { ComponentSelectorProps, ComponentSelectorUI } from './types';
+import { ComponentSelectorProps, ComponentSelectorUI, ComponentWithMeta } from './types';
 import ComponentSelector from '.';
 import { EditFlowContainerProps } from '../FlowContainer/types';
 /**
@@ -37,7 +37,7 @@ const componentSelectorForm = (
       ui={{ ...ui as ComponentSelectorUI, ...props.ui as ComponentSelectorUI }}
       closeForm={closeForm}
       onSelect={(...args) => { onSelect(...args); closeForm(null); }}
-      components={Object.values(props.components)}
+      components={Object.values(props.components) as ComponentWithMeta[]}
       mandatoryCategories={props.mandatoryCategories}
     />
   ),

@@ -13,7 +13,7 @@
  */
 
 import { ComponentType } from 'react';
-import { removeInline, insertInline, hasInline } from './inlineUtils';
+import { createToggleInline, createIsActive } from './inlineUtils';
 import createPluginButton from '../createPluginButton';
 import { EditorButtonProps } from '../../Type';
 
@@ -24,14 +24,8 @@ type CreateInlineButton = (
 
 const createInlineButton: CreateInlineButton = (inlineType, icon) => createPluginButton({
   icon,
-  toggle: ({ value, editor }) => {
-    if (hasInline(value, inlineType)) {
-      removeInline(editor, inlineType);
-    } else {
-      insertInline({ value, editor, inlineType });
-    }
-  },
-  isActive: value => hasInline(value, inlineType),
+  toggle: createToggleInline(inlineType),
+  isActive: createIsActive(inlineType),
 });
 
 export default createInlineButton;

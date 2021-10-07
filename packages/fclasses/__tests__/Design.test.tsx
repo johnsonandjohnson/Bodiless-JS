@@ -14,7 +14,7 @@
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
-import React, { ComponentType, FC } from 'react';
+import React, { ComponentType, FC, Fragment } from 'react';
 
 import { omit, flow } from 'lodash';
 import {
@@ -25,8 +25,10 @@ import {
   DesignableComponentsProps,
   designable,
   withFinalDesign,
+  startWith,
+  replaceWith,
 } from '../src/Design';
-import { withShowDesignKeys } from '../src';
+import { withShowDesignKeys, asToken, HOC } from '../src';
 
 type SpanType = ComponentType<any>;
 type MyDesignableComponents = {
@@ -37,7 +39,7 @@ type MyDesignableComponents = {
 type MyDesign = Design<MyDesignableComponents>;
 
 const Span: SpanType = props => <span {...props} />;
-const hoc = (newClassName: string) => (C: SpanType):SpanType => props => {
+const hoc = (newClassName: string):HOC => C => (props: any) => {
   const { className = '', ...rest } = props;
   const combinedClassName = `${className} ${newClassName}`.trim();
   return <C className={combinedClassName} {...rest} />;
@@ -166,6 +168,15 @@ describe('withShowDesignKeys', () => {
     Foo: (props: any) => <span id="foo" {...props} />,
     Bar: (props: any) => <span id="bar" {...props} />,
   };
+
+  it('Does not add design keys without withShowDesignKeys', () => {
+    const Test: ComponentType<any> = flow(
+      designable(startComponents, 'Base'),
+    )(Base);
+    const wrapper = mount(<Test />);
+    expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBeUndefined();
+  });
+
   it('Adds design keys when enabled', () => {
     const Test: ComponentType<any> = flow(
       designable(startComponents, 'Base'),
@@ -175,6 +186,7 @@ describe('withShowDesignKeys', () => {
     expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBe('Base:Foo');
     expect(wrapper.find('span#bar').prop('data-bl-design-key')).toBe('Base:Bar');
   });
+
   it('Does not add a design keys when disabled', () => {
     const Test: ComponentType<any> = flow(
       designable(startComponents, 'Base'),
@@ -183,5 +195,140 @@ describe('withShowDesignKeys', () => {
     const wrapper = mount(<Test />);
     expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBeUndefined();
     expect(wrapper.find('span#bar').prop('data-bl-design-key')).toBeUndefined();
+  });
+
+  it('Rewrites default a componentName data attr', () => {
+    const Test: ComponentType<any> = flow(
+      designable(startComponents, 'Base'),
+      withShowDesignKeys(),
+    )(Base);
+    const AddDesignKeys = withShowDesignKeys(true, 'layer-region')(Fragment);
+    const wrapper = mount(<AddDesignKeys><Test /></AddDesignKeys>);
+    expect(wrapper.find('span#foo').prop('data-layer-region')).toBe('Base:Foo');
+    expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBeUndefined();
+  });
+
+  it('Rewrites design keys via wrapper values', () => {
+    const Test: ComponentType<any> = flow(
+      designable(startComponents, 'Base'),
+      withShowDesignKeys(false, 'bl-design-key'),
+    )(Base);
+    const AddDesignKeys = withShowDesignKeys(true, 'layer-region')(Fragment);
+    const wrapper = mount(<AddDesignKeys><Test /></AddDesignKeys>);
+    expect(wrapper.find('span#foo').prop('data-layer-region')).toBe('Base:Foo');
+    expect(wrapper.find('span#foo').prop('data-bl-design-key')).toBeUndefined();
+  });
+
+  it('Adds design keys if component wrapped in withShowDesignKeys', () => {
+    const Test: ComponentType<any> = flow(
+      designable(startComponents, 'Base'),
+    )(Base);
+    const AddDesignKeys = withShowDesignKeys(true, 'test-attr')(Fragment);
+    const wrapper = mount(
+      <AddDesignKeys><Test /></AddDesignKeys>,
+    );
+    expect(wrapper.find('span#foo').prop('data-test-attr')).toBe('Base:Foo');
+  });
+
+  describe('startWith', () => {
+    const InnerBase = ({ components: C }: any) => (
+      <C.Component id="inner">Inner</C.Component>
+    );
+    const Inner = designable({ Component: 'div' as any }, 'ProblemInner')(
+      InnerBase,
+    );
+    const OuterBase = ({ components: C }: any) => (
+      <C.Wrapper id="outer">
+        <Inner />
+      </C.Wrapper>
+    );
+    const Outer = flow(
+      designable({ Wrapper: 'div' as any }, 'Problem'),
+      withDesign<any>({
+        Wrapper: startWith('h1' as any),
+      }),
+    )(OuterBase);
+
+    it('Replaces a component with the outermost', () => {
+      const Test = withDesign({
+        Component: flow(
+          startWith('span' as any),
+          startWith('section' as any),
+        ) as HOC,
+      })(Inner);
+      const wrapper = mount(<Test />);
+      expect(wrapper.find('div#inner')).toHaveLength(0);
+      expect(wrapper.find('span#inner')).toHaveLength(0);
+      expect(wrapper.find('section#inner')).toHaveLength(1);
+    });
+
+    it('Replaces a component without altering a prior hoc', () => {
+      const Test = withDesign({
+        Component: flow(
+          (C: any) => (props: any) => <C {...props} foo="bar" />,
+          startWith('span' as any),
+        ),
+      })(Inner);
+      const wrapper = mount(<Test />);
+      expect(wrapper.find('span#inner').prop('foo')).toEqual('bar');
+    });
+
+    it('Does not propagate a starting component to an inner design', () => {
+      const wrapper = mount(<Outer />);
+      expect(wrapper.find('h1#outer')).toHaveLength(1);
+      expect(wrapper.find('h1#inner')).toHaveLength(0);
+      expect(wrapper.find('div#inner')).toHaveLength(1);
+    });
+  });
+});
+
+describe('replaceWith', () => {
+  const Start = (props: any) => <div {...props} />;
+  const Replacement = (props: any) => <span {...props} />;
+  const Base = ({ components: C }: any) => (
+    <C.Component id="test" />
+  );
+  const TestDesignable = designable({ Component: Start }, 'ProblemInner')(Base);
+
+  it('replaces a component', () => {
+    let wrapper = mount(<TestDesignable />);
+    expect(wrapper.find('div#test')).toHaveLength(1);
+    const Test = withDesign({
+      Component: replaceWith(Replacement),
+    })(TestDesignable);
+    wrapper = mount(<Test />);
+    expect(wrapper.find('div#test')).toHaveLength(0);
+    expect(wrapper.find('span#test')).toHaveLength(1);
+  });
+
+  it('erases previous hocs', () => {
+    const TestBase = withDesign({
+      Component: (C: any) => (props: any) => <C {...props} foo="bar" />,
+    })(TestDesignable);
+    let wrapper = mount(<TestBase />);
+    expect(wrapper.find('div#test').prop('foo')).toBe('bar');
+    const Test = withDesign({
+      Component: replaceWith(Replacement),
+    })(TestBase);
+    wrapper = mount(<Test />);
+    expect(wrapper.find('span#test').prop('foo')).toBeUndefined();
+  });
+
+  it('Propagates metadata without altering the replacement.', () => {
+    const Start$ = asToken({ title: 'Foo' })(Start);
+    expect(Start$.title).toBe('Foo');
+    const Test = replaceWith(Replacement)(Start$);
+    expect(Test.title).toBe('Foo');
+    // @ts-ignore
+    expect(Replacement.title).toBeUndefined();
+  });
+
+  it('Can replace with a tag inside withdesign', () => {
+    const Test = withDesign({
+      Component: replaceWith('span'),
+    })(TestDesignable);
+    const wrapper = mount(<Test />);
+    expect(wrapper.find('div#test')).toHaveLength(0);
+    expect(wrapper.find('span#test')).toHaveLength(1);
   });
 });

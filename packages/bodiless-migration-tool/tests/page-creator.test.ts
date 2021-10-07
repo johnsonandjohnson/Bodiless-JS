@@ -26,19 +26,20 @@ import {
   HtmlToComponentsSettings,
 } from '../src/html-to-components';
 import debug from '../src/debug';
+import { MigrationApi } from '../src/migrationApi';
+import { GatsbyApp } from '../src/jamstack-app';
 
 function getDefaultPageParams(): PageCreatorParams {
+  jest.spyOn(fs, 'mkdirSync').mockImplementation(() => true);
+  const defaultPageUrl = 'https://localhost';
+  const sitePath = '/app/examples/test-site';
   return {
-    pagesDir: 'app/examples/test-site/src/data/pages',
-    staticDir: 'app/examples/test-site/static',
+    pagesDir: path.join(sitePath, 'src/data/pages'),
+    staticDir: path.join(sitePath, 'static'),
     templatePath: path.resolve(__dirname, 'data/canvasx_template.jsx'),
     templateDangerousHtml: path.resolve(__dirname, 'data/template_dangerous_html.jsx'),
-    pageUrl: 'https://localhost',
+    pageUrl: defaultPageUrl,
     bodyHtml: '<h1>Hello World</h1>',
-    metatags: [
-      '<meta name = "MobileOptimized" content = "width">',
-      '<meta name = "pagetype" content = "home" />',
-    ],
     scripts: [
       'https://localhost/test1.js',
       '/test2.js',
@@ -77,6 +78,12 @@ function getDefaultPageParams(): PageCreatorParams {
       <script>var a = 4;</script>
       <style>.wrapper { max-width: 980px; }</style>
     `,
+    migrationApi: MigrationApi.create({
+      pageUrl: defaultPageUrl,
+      app: new GatsbyApp({
+        workDir: sitePath,
+      }),
+    }),
   };
 }
 
@@ -88,10 +95,6 @@ function getExpectedContent(filePath: string): string {
 
 function getFrontPageParams(): PageCreatorParams {
   return { ...getDefaultPageParams() };
-}
-
-function getPageParamsWithExtensionAtTheEnd(): PageCreatorParams {
-  return { ...getDefaultPageParams(), pageUrl: 'https://localhost/product2.html' };
 }
 
 function getProductsListingPageParams(): PageCreatorParams {
@@ -139,22 +142,8 @@ describe('creation of pages', () => {
     const writeFileSyncSpy = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => true);
     const pageCreator = new PageCreator(params);
     await pageCreator.createPage();
-    expect(writeFileSyncSpy.mock.calls[0][0]).toBe(path.join(params.pagesDir, '/products/index.jsx'));
+    expect(writeFileSyncSpy.mock.calls[0][0]).toBe(path.join(params.pagesDir, 'products', 'index.jsx'));
     expect(writeFileSyncSpy.mock.calls[0][1]).toBe(expectedFileContent);
-  });
-});
-
-describe('conversion of urls to canvax page path', () => {
-  test('products page', () => {
-    const params = getProductsListingPageParams();
-    const pageCreator = new PageCreator(params);
-    expect(pageCreator.getPageFilePath(params.pageUrl)).toBe('/products/index.jsx');
-  });
-
-  test('conversion of a page with extension to canvasx page', () => {
-    const params = getPageParamsWithExtensionAtTheEnd();
-    const pageCreator = new PageCreator(params);
-    expect(pageCreator.getPageFilePath(params.pageUrl)).toBe('/product2/index.jsx');
   });
 });
 

@@ -1,8 +1,6 @@
-module.exports = {
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
+const { mergeWithBodilessConfigs } = require('@bodiless/gatsby-theme-bodiless/dist/tailwindcss');
+
+module.exports = mergeWithBodilessConfigs({
   purge: [
     './src/**/!(*.d).{ts,js,jsx,tsx}',
   ],
@@ -19,7 +17,6 @@ module.exports = {
   */
 
   theme: {
-
     /*
     |---------------------------------------------------------------------------
     | Colors                                https://tailwindcss.com/docs/colors
@@ -42,7 +39,33 @@ module.exports = {
     |
     */
 
-    // colors: {},
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+
+      black: '#000',
+      white: '#fff',
+
+      gray: {
+        200: '#edf2f7',
+        500: '#a0aec0',
+        600: '#718096',
+        700: '#4a5568',
+      },
+      orange: {
+        600: '#dd6b20',
+        700: '#c05621',
+      },
+      teal: {
+        500: '#38b2ac',
+        600: '#319795',
+        700: '#2c7a7b',
+      },
+      blue: {
+        500: '#4299e1',
+        700: '#2b6cb0',
+      },
+    },
 
     /*
     |---------------------------------------------------------------------------
@@ -62,6 +85,13 @@ module.exports = {
     | Class name: .{screen}:{utility}
     |
     */
+
+    screens: {
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+    },
 
     /*
     |---------------------------------------------------------------------------
@@ -102,7 +132,18 @@ module.exports = {
     |
     */
 
-    // fontSize: {},
+    fontSize: {
+      xs: '0.75rem',
+      sm: '0.875rem',
+      base: '1rem',
+      lg: '1.125rem',
+      xl: '1.25rem',
+      '2xl': '1.5rem',
+      '3xl': '1.875rem',
+      '4xl': '2.25rem',
+      '5xl': '3rem',
+      '6xl': '4rem',
+    },
 
     /*
     |---------------------------------------------------------------------------
@@ -268,7 +309,37 @@ module.exports = {
     |
     */
 
-    // width: {},
+    extend: {
+      inset: {
+        full: '100%',
+      },
+      width: {
+        content: 'max-content',
+      },
+      outline: {
+        black: 'black auto 1px',
+      },
+      /**
+       * @TODO This should be moved to @bodiless/navigation
+       * ===========================================
+       */
+      zIndex: {
+        full: '999',
+      },
+      keyframes: {
+        'slide-in': {
+          '100%': { transform: 'translateX(0%)' },
+        },
+        'slide-out': {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+      },
+      animation: {
+        'slide-in': 'slide-in .5s forwards',
+        'slide-out': 'slide-out .5s forwards',
+      },
+    },
 
     /*
     |---------------------------------------------------------------------------
@@ -513,4 +584,4 @@ module.exports = {
 
   plugins: [
   ],
-};
+});

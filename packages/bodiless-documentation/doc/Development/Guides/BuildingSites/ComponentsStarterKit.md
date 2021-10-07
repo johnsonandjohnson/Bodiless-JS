@@ -139,7 +139,7 @@ manipulating these files. As site builder adds more components, remember the
 header and footer are components that all pages will use, so the data for them
 should be stored at site level. This can be done via specifying
 `nodeCollection="site"`. For more information, read about
-[Data](../..//Development/Architecture/Data).
+[Data](../../Development/Architecture/Data).
 
 e.g.
 ```
@@ -152,8 +152,8 @@ The Bodiless starter comes with menu that is placed in the header. It is menu
 that the data is shared site-wide so that all pages use the same menu data. In
 addition the burger menu (mobile) menu generates its menu off this desktop
 menu's data. For more details, please see
-[Menu](/Components/Organisms/MainMenu) &
-[Burger Menu](/Components/Organisms/BurgerMenu)
+[Menu](/Components/MainMenu) &
+[Burger Menu](/Components/BurgerMenu)
 
 ## Editors
 
@@ -180,11 +180,11 @@ nonlinkable images and a few variations of image placeholders.
 
 For more information please read [Images](/Components/Image).
 
-## Touts
+## Cards
 
-Most sites use some form of Touts. (A block that consists of Image, Title, Body
+Most sites use some form of Cards. (A block that consists of Image, Title, Body
 and Call to Action) The Bodiless starter comes with this basic form defined in
-`src/components/Tout`. These can be used as is and/or extended to meet
+`src/components/Card`. These can be used as is and/or extended to meet
 the site design requirements. This component has its own set of tokens as well
 for its different variations.
 
@@ -195,7 +195,7 @@ to select from a set of components, place them on the page, and resize them.
 
 Site builder can define set of component variations available to be placed in
 any particular FlowContainer. The starter kit provides a starting point which
-contains the example components described above (Editors, Images and Touts). As
+contains the example components described above (Editors, Images and Cards). As
 with editors, site builder can use the design api to add, remove, replace or
 style these variations. In addition, she can create different FlowContainers to
 control what components may be placed in different areas of sites. e.g. A

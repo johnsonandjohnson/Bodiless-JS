@@ -15,13 +15,20 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
-import { Value, ValueJSON, Editor } from 'slate';
 import createMarkButton from '../createMarkButton';
 import { inactiveValueWithMark, activeValue } from './fixtures/markState';
 import SlateEditorContext from '../../../core/SlateEditorContext';
 
 const toggleStub = jest.fn();
 const isActiveStub = jest.fn(() => true);
+
+jest.mock('slate-react', () => ({
+  useSlate: () => ({
+    editor: {
+      selection: [],
+    },
+  }),
+}));
 
 jest.mock('../markUtils', () => ({
   createIsActive: () => isActiveStub,
@@ -39,13 +46,8 @@ describe('createBlockButton:', () => {
   });
 
   test('Button click triggers toggle and isActive on and off', () => {
-    const valueInstance = Value.fromJSON(inactiveValueWithMark as ValueJSON);
-    const editorInstance = new Editor({
-      value: valueInstance,
-    });
     const contextValue = {
-      editor: editorInstance,
-      value: editorInstance.value,
+      value: inactiveValueWithMark,
     };
     // @ts-ignore
     const wrapper = mount(
@@ -60,26 +62,15 @@ describe('createBlockButton:', () => {
 
     expect(toggleStub.mock.calls.length).toBe(1);
     expect(isActiveStub.mock.calls.length).toBe(1);
-    expect(toggleStub.mock.calls[0][0].value).toBeInstanceOf(Value);
-    expect(toggleStub.mock.calls[0][0].editor).toBe(editorInstance);
-    // @ts-ignore
-    expect(isActiveStub.mock.calls[0][0]).toBeInstanceOf(Value);
 
     button.simulate('mousedown');
 
     expect(toggleStub.mock.calls.length).toBe(2);
-    expect(toggleStub.mock.calls[1][0].value).toBeInstanceOf(Value);
-    expect(toggleStub.mock.calls[1][0].editor).toBe(editorInstance);
   });
 
   test('Button becomes active when the selection with mark is highlighted', () => {
-    const valueInstance = Value.fromJSON(activeValue as ValueJSON);
-    const editorInstance = new Editor({
-      value: valueInstance,
-    });
     const contextValue = {
-      editor: editorInstance,
-      value: editorInstance.value,
+      value: activeValue,
     };
     // @ts-ignore
     const wrapper = mount(

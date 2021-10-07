@@ -24,6 +24,9 @@ import { useMenuOptions, useGetItemUseGetMenuOptions } from '../../src/FlowConta
 
 jest.mock('../../src/ComponentSelector/componentSelectorForm');
 jest.mock('../../src/FlowContainer/model');
+jest.mock('../../src/FlowContainer/SortableChild', () => ({
+  FALLBACK_SNAP_CLASSNAME: 'w-full',
+}));
 
 const editContext = {
   activate: jest.fn(),
@@ -35,7 +38,9 @@ const activateOnEffect = {
 const contextMenuFormInner = jest.fn();
 jest.mock('@bodiless/core', () => ({
   useEditContext: jest.fn(() => editContext),
+  withContextActivator: jest.fn(() => (c:any) => c),
   useActivateOnEffect: jest.fn(() => activateOnEffect),
+  withLocalContextMenu: jest.fn((c:any) => c),
   useNode: jest.fn(),
   contextMenuForm: jest.fn(() => contextMenuFormInner),
   useGetter: jest.fn((options: any) => () => options),
@@ -77,7 +82,7 @@ describe('useGetMenuOptions', () => {
     expect(componentSelectorForm).toHaveBeenCalledTimes(1);
     expect((componentSelectorForm as jest.Mock).mock.calls[0][0].components).toEqual(components);
     const action = (componentSelectorForm as jest.Mock).mock.calls[0][1];
-    action(null, selection);
+    action([selection]);
   }
 
   function expectDataHandlerCall(method: Function, args: any[]) {
@@ -135,7 +140,7 @@ describe('useGetMenuOptions', () => {
     it('Returns an add button', () => {
       const { insertFlowContainerItem } = useFlowContainerDataHandlers();
       const options = getMenuOptions(3);
-      const addButton = options.find(option => option.name === 'add-item');
+      const addButton = options.find(option => option.name.startsWith('add-item'));
       expect(addButton).not.toBeUndefined();
       invokeAction(addButton!, 'Baz');
       expectDataHandlerCall(insertFlowContainerItem, ['Baz', foo]);
@@ -150,7 +155,7 @@ describe('useGetMenuOptions', () => {
     it('Returns a copy button', () => {
       const { insertFlowContainerItem } = useFlowContainerDataHandlers();
       const options = getMenuOptions(3);
-      const copyButton = options.find(option => option.name === 'copy-item');
+      const copyButton = options.find(option => option.name.startsWith('copy-item'));
       expect(copyButton).not.toBeUndefined();
       // @ts-ignore handler expects an event but doesn't use it
       copyButton.handler();
@@ -159,14 +164,14 @@ describe('useGetMenuOptions', () => {
 
     it('Does not return a copy button when flow container is full', () => {
       const options = getMenuOptions(2);
-      const copyButton = options.find(option => option.name === 'copy-item');
+      const copyButton = options.find(option => option.name.startsWith('copy-item'));
       expect(copyButton).toBeUndefined();
     });
 
     it('Returns a delete button', () => {
       const { deleteFlowContainerItem } = useFlowContainerDataHandlers();
       const options = getMenuOptions();
-      const button = options.find(option => option.name === 'delete');
+      const button = options.find(option => option.name.startsWith('delete'));
       expect(button).not.toBeUndefined();
       // @ts-ignore handler expects an event but doesn't use it
       button.handler();
@@ -176,7 +181,7 @@ describe('useGetMenuOptions', () => {
     it('Returns a swap button', () => {
       const { updateFlowContainerItem } = useFlowContainerDataHandlers();
       const options = getMenuOptions();
-      const button = options.find(option => option.name === 'swap');
+      const button = options.find(option => option.name.startsWith('swap'));
       expect(button).not.toBeUndefined();
       invokeAction(button!, 'Bar');
       expectDataHandlerCall(updateFlowContainerItem, [{ ...foo, type: 'Bar' }]);

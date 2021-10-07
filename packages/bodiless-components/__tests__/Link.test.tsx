@@ -13,6 +13,7 @@
  */
 
 import React from 'react';
+import Tooltip, { TooltipProps } from 'rc-tooltip/lib/Tooltip';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount, ReactWrapper } from 'enzyme';
 
@@ -24,12 +25,14 @@ const setEditMode = (isEdit: boolean) => {
 setEditMode(true);
 
 // eslint-disable-next-line import/first
-import Link from '../src/Link';
+import { asBodilessLink } from '../src/Link';
+
+const Link = asBodilessLink()('a');
 
 let wrapper: ReactWrapper;
 let menuButton: ReactWrapper;
 let menuForm: ReactWrapper;
-let menuPopup: ReactWrapper;
+let menuPopup: ReactWrapper<TooltipProps>;
 
 const firstLinkProps = { nodeKey: 'oneLink' };
 const secondLinkProps = { nodeKey: 'anotherLink' };
@@ -46,20 +49,20 @@ describe('link interactions', () => {
     expect(firstLink).toHaveLength(1);
 
     firstLink.find('a').simulate('click');
-    menuButton = wrapper.find('i');
+    menuButton = wrapper.find('i').first();
     expect(menuButton.text()).toBe('link');
   });
 
   it('link button should toggle context menu visibility when clicked', () => {
     menuButton.simulate('click');
-    let tooltips = wrapper.find('Tooltip');
+    let tooltips = wrapper.find(Tooltip);
 
     menuPopup = tooltips.at(1);
     expect(menuPopup.prop('visible')).toBeTruthy();
 
     menuButton.simulate('click');
 
-    tooltips = wrapper.find('Tooltip');
+    tooltips = wrapper.find(Tooltip);
 
     menuPopup = tooltips.at(1);
     expect(menuPopup.prop('visible')).toBeFalsy();
@@ -67,7 +70,7 @@ describe('link interactions', () => {
 
   it('context form should have link-href input field with cancel and done buttons', () => {
     menuButton.simulate('click');
-    const tooltips = wrapper.find('Tooltip');
+    const tooltips = wrapper.find(Tooltip);
     menuPopup = tooltips.at(1);
     menuForm = menuPopup.find('form');
 
@@ -93,25 +96,25 @@ describe('link interactions', () => {
 
     expect(wrapper.find('Popup[visible=true]')).toHaveLength(1);
 
-    menuButton = wrapper.find('i');
+    menuButton = wrapper.find('i').first();
     menuButton.simulate('click');
 
-    menuPopup = wrapper.find('Tooltip[visible=true]').at(1);
+    menuPopup = wrapper.find(Tooltip).filter('[visible=true]').at(1);
     menuForm = menuPopup.find('form');
     inputField = menuForm.find('input#link-href');
 
-    expect(inputField.prop('value')).toBe('ok');
+    expect(inputField.prop('value')).toBe('/ok/');
 
     wrapper.find({ ...secondLinkProps }).find('a').simulate('click');
     wrapper.find({ ...firstLinkProps }).find('a').simulate('click');
 
-    menuButton = wrapper.find('i');
+    menuButton = wrapper.find('i').first();
     menuButton.simulate('click');
 
-    menuPopup = wrapper.find('Tooltip[visible=true]').at(1);
+    menuPopup = wrapper.find(Tooltip).filter('[visible=true]').at(1);
     menuForm = menuPopup.find('form');
     inputField = menuForm.find('input#link-href');
-    expect(inputField.prop('value')).toBe('ok');
+    expect(inputField.prop('value')).toBe('/ok/');
   });
 
   it('context form should not save content when cancel is clicked', () => {
@@ -121,6 +124,6 @@ describe('link interactions', () => {
     const cancelButton = menuForm.find('button[aria-label="Cancel"]');
     cancelButton.simulate('submit');
     expect(wrapper.find('Popup[visible=true]')).toHaveLength(1);
-    expect(inputField.prop('value')).toBe('ok');
+    expect(inputField.prop('value')).toBe('/ok/');
   });
 });

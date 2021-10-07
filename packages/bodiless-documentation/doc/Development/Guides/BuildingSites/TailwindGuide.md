@@ -120,73 +120,42 @@ Common usages for using custom css:
 
 ## Tailwind configuration for a package
 
-1. Install postcss-cli as a dev dependency via npm.
+1. Create tailwind configuration file.
 
     ```sh
-    npm i -D postcss-cli
+    npx tailwindcss init
     ```
-    
-1. Add Tailwind to package CSS
 
-    Create new or update existing CSS file with Tailwind's `base`, `components`, and `utilities` styles.
+1. Configure [CSS Purging](#configure-css-puring).
+
+    Set purging paths to the compiled templates containing tailwind classes. Assuming your package compilation output directory is `lib`, your purge configuration will be
 
     ```js
-    @tailwind base;
-
-    @tailwind components;
-
-    @tailwind utilities;
+    purge: [
+      './lib/**/!(*.d).{ts,js,jsx,tsx}',
+    ],
     ```
 
-1. Create tailwind and postcss configuration file.
+1. Export a function to merge your package tailwind configs with site configs.
 
-    ```sh
-    npx tailwindcss init -p
-    ```
+    * for @bodiless packages
 
-1. Process package CSS with Tailwind.
+       Whitelist the bodiless package in `packages/gatsby-theme-bodiless/src/dist/tailwindcss/getBodilessConfigs.ts`
 
-    Update postcss.config.js with the following content
+    * for non-@bodiless packages
 
-    ```js
-    module.exports = {
-      plugins: [
-        require('tailwindcss')('tailwind.config.js'),
-      ],
-    };
-    ```
+      Export a function that merges your package tailwind configuration with site configuration. You may leverage `mergeConfigs` and `getTailwindConfigs` from `@bodiless/gatsby-theme-bodiless`.
 
-1. Include css compilation to your package build.
+      ```js
+      import {
+        mergeConfigs,
+        getTailwindConfigs,
+      } from '@bodiless/gatsby-theme-bodiless/dist/tailwindcss';
 
-    Assuming your package.json contains build command with typescript compilation,
+      const packageMergeConfigs = siteConfig => mergeConfigs(siteConfig, getTailwindConfigs(['yourpackagename']));
 
-    ```json
-      "build": "tsc -p ./tsconfig.json",
-    ```
-
-    extend the build command by adding a build css and copy compiled css steps:
-
-    ```json
-      "build": "npm run build:css && npm run copy && tsc -p ./tsconfig.json",
-      "build:css": "postcss index.tailwind.css -o ./src/main.css",
-      "copy": "copyfiles -u 1 \"./src/**/*.css\" \"./lib/\""
-    ```
-
-1. Import compiled css in your code.
-
-    Add compiled css import to your package index file
-
-    ```js
-    import './main.css';
-    ```
-
-1. Add the compiled css to .gitignore.
-
-    Update package level .gitignore with:
-
-    ```txt
-    src/main.css
-    ```
+      export default packageMergeConfigs;
+      ```
 
 ## Configure CSS Purging
 
@@ -197,3 +166,4 @@ Common usages for using custom css:
       './src/**/!(*.d).{ts,js,jsx,tsx}',
     ],
     ```
+> :warning: **If you are configuring purgin for a package**: Paths should point to the compiled templates.

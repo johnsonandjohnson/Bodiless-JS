@@ -19,9 +19,9 @@ import {
 } from '@bodiless/core';
 import { v1 } from 'uuid';
 
-import { withFinalDesign } from '@bodiless/fclasses';
-import { flow } from 'lodash';
-import { ItemProps, UseListOverrides } from './types';
+import { withFinalDesign, asToken } from '@bodiless/fclasses';
+import { UseListOverrides } from './types';
+import { useListContext } from './List';
 
 const hasChildSubList = (context: PageEditContextInterface, count: number = 1): boolean => {
   const descendants = context.activeDescendants || [];
@@ -30,10 +30,10 @@ const hasChildSubList = (context: PageEditContextInterface, count: number = 1): 
   return descendants.filter(c => c.type === 'list-item').length > count;
 };
 
-const useMenuOptions = (useOverrides: UseListOverrides = () => ({})) => (props: ItemProps) => {
+const useMenuOptions = (useOverrides: UseListOverrides = () => ({})) => (props: any) => {
   const {
-    addItem, deleteItem, canDelete,
-  } = props;
+    addItem, deleteItem,
+  } = useListContext();
 
   // Search for parent lists to set the default group label
   const context = useEditContext();
@@ -53,7 +53,8 @@ const useMenuOptions = (useOverrides: UseListOverrides = () => ({})) => (props: 
       name: `add-${id}`,
       icon: 'add',
       label: 'Add',
-      handler: addItem,
+      isDisabled: !addItem,
+      handler: addItem as TMenuOption['handler'] || (() => undefined),
       global,
       local,
       group,
@@ -62,8 +63,8 @@ const useMenuOptions = (useOverrides: UseListOverrides = () => ({})) => (props: 
       name: `remove-${id}`,
       icon: 'delete',
       label: 'Delete',
-      isHidden: () => !canDelete(),
-      handler: deleteItem,
+      isDisabled: !deleteItem,
+      handler: deleteItem as TMenuOption['handler'] || (() => undefined),
       global,
       local,
       group,
@@ -75,7 +76,7 @@ const useMenuOptions = (useOverrides: UseListOverrides = () => ({})) => (props: 
       local,
       Component: 'group',
     },
-  ]), []);
+  ]), [addItem, deleteItem]);
 
   return menuOptions;
 };
@@ -85,7 +86,7 @@ const useMenuOptions = (useOverrides: UseListOverrides = () => ({})) => (props: 
  */
 const withListButtons = (useOverrides?: UseListOverrides) => ifEditable(
   withFinalDesign({
-    Item: flow(
+    Item: asToken(
       withContextActivator('onClick'),
       withLocalContextMenu,
       withMenuOptions({

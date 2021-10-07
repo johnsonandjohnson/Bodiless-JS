@@ -20,6 +20,7 @@ import type {
   Transformer,
   Exports,
 } from './site-flattener';
+import type { PluginType } from './pluginManager';
 import { TrailingSlash } from './site-flattener';
 import { Page404Params } from './page404-handler';
 
@@ -40,6 +41,7 @@ type Settings = {
   exports?: Exports,
   disableTailwind?: boolean,
   allowFallbackHtml?: boolean,
+  plugins?: PluginType[],
 } & Page404Params;
 
 type SettingsLoader = () => Settings | undefined;

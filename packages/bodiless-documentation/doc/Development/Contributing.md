@@ -90,7 +90,7 @@ All work must be submitted in the form of a pull request to the master branch.
 - Unless explicitly stated in the associated issue, all pull requests must
   - Include relevant unit and integration tests
   - Include relevant documentation updates.
-  - Adhere to our [Coding Standards](Development/Release/Quality).
+  - Adhere to our [Coding Standards](../Development/Release/Quality).
 - There is no need to rebase a Pull Request branch, when merging in changes from other branches
 
 ## Merging Pull Request
@@ -138,7 +138,7 @@ When not included omit the parenthesis around it.
 
 ### Squash commit title: reference
 
-**Required value**. [The reference]([reference](https://help.github.com/en/github/writing-on-github/autolinked-references-and-urls#issues-and-pull-requests)) 
+**Required value**. [The reference](https://help.github.com/en/github/writing-on-github/autolinked-references-and-urls#issues-and-pull-requests)
 to the Pull Request merged.
 
 ### Squash commit title examples

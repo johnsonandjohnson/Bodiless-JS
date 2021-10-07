@@ -39,21 +39,22 @@ const isBVConfigValid = (conf: BVConfig): boolean => {
   return true;
 };
 
-const getBVScriptUrl = () => {
+const getBVScriptUrl = (bvConfig: Partial<BVConfig> = {}) => {
   if (process.env.BV_SCRIPT) {
     return process.env.BV_SCRIPT;
   }
   if (process.env.BV_CLIENT_NAME) {
-    const bvConfig = {
+    const bvConfig$: BVConfig = {
       client_name: process.env.BV_CLIENT_NAME || defaultBVConfig.client_name,
       site_ID: process.env.BV_SITE_ID || defaultBVConfig.site_ID,
       environment: process.env.BV_ENVIRONMENT || defaultBVConfig.environment,
       locale: process.env.BV_LOCALE || defaultBVConfig.locale,
+      ...bvConfig,
     };
-    if (!isBVConfigValid(bvConfig)) {
+    if (!isBVConfigValid(bvConfig$)) {
       return '';
     }
-    return getBVScriptUrlFromConfig(bvConfig);
+    return getBVScriptUrlFromConfig(bvConfig$);
   }
   // @ts-ignore
   if (typeof window.$BV_SCRIPT !== 'undefined') {

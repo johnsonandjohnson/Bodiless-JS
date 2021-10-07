@@ -12,25 +12,34 @@
  * limitations under the License.
  */
 
-import { Value, Mark, Editor } from 'slate';
+import { Editor } from 'slate';
 
-export const createIsActive = (markType: string) => (value: Value) => (
-  value.marks.some((mark: Mark | undefined) => Boolean(mark && mark.type === markType))
-);
+const isMarkActive = (editor: Editor, format: string) => {
+  const marks = Editor.marks(editor);
+  return marks ? marks[format] === true : false;
+};
+
+export const createIsActive = (format: string) => (editor: Editor) => isMarkActive(editor, format);
 
 export type CreateToggleMark = {
   editor: Editor,
 };
-export const createToggleMark = (markType: string) => ({
-  editor,
-}: CreateToggleMark) => editor.toggleMark(markType).focus();
+export const createToggleMark = (format: string) => ({ editor }: CreateToggleMark) => {
+  const isActive = isMarkActive(editor, format);
+
+  if (isActive) {
+    Editor.removeMark(editor, format);
+  } else {
+    Editor.addMark(editor, format, true);
+  }
+};
 
 export type ToggleMarkOptions = {
   editor: Editor,
   markType: string;
 };
-export const toggleMark = ({ markType, editor }:ToggleMarkOptions) => (
+export const toggleMark = ({ markType, editor } : ToggleMarkOptions) => (
   createToggleMark(markType)({ editor })
 );
 
-export const hasMark = (value: Value, markType: string) => createIsActive(markType)(value);
+export const hasMark = (format: string, editor: Editor) => isMarkActive(editor, format);

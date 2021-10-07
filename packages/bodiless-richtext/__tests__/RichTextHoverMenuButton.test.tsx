@@ -12,12 +12,12 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
+import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
 import { PageEditContext } from '@bodiless/core';
 import {
-  withDesign,
+  withDesign, HOC,
 } from '@bodiless/fclasses';
 import { flow } from 'lodash';
 import {
@@ -42,7 +42,8 @@ const createRichtext = () => {
 };
 
 const createPluginButtonMock = () => {
-  const createPluginButtonMockFn = jest.fn();
+  const createPluginButtonMockFn = jest.fn()
+    .mockReturnValue(() => <></>);
   jest.doMock('../src/plugin-factory/createPluginButton', () => ({
     __esModule: true,
     default: createPluginButtonMockFn,
@@ -50,7 +51,7 @@ const createPluginButtonMock = () => {
   return createPluginButtonMockFn;
 };
 
-const applyTestHoc = (Component: ComponentType) => (props: any) => <Component {...props} />;
+const applyTestHoc: HOC = Component => props => <Component {...props as any} />;
 
 describe('RichText hover menu button', () => {
   beforeEach(() => {

@@ -25,7 +25,7 @@ const createMockStore = (storeData: StoreData) => {
     return storeData[key] || '';
   };
   const setNode = jest.fn();
-  const getKeys = jest.fn(() => ['foo']);
+  const getKeys = jest.fn(() => Object.keys(storeData));
   const getPagePath = jest.fn(() => '/');
   const getBaseResourcePath = jest.fn(() => '/');
   const hasError = jest.fn();
@@ -43,6 +43,19 @@ const defaultStoreData = {
 };
 
 describe('ContentfulNode', () => {
+  it('Includes default content keys in list of keys', () => {
+    const { actions, getters } = createMockStore(defaultStoreData);
+    const rootNode = new DefaultContentNode(actions, getters, 'root');
+    const defaultContent = {
+      foo: 'fooDefaultContent',
+      foo$bar: 'fooBarDefaultContent',
+      baz: 'bazDefaultContent',
+    };
+    const contentfulNode = ContentfulNode.create(rootNode, defaultContent);
+    const finalKeys = ['root$foo', 'root$foo$bar', 'root$baz'];
+    expect(contentfulNode.keys.sort()).toEqual(finalKeys.sort());
+  });
+
   describe('when there is a single node', () => {
     describe('when node data exists in store', () => {
       it('returns data from store', () => {

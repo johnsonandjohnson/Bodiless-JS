@@ -113,6 +113,7 @@ class PageEditContext implements PageEditContextInterface {
   // See https://github.com/mobxjs/mobx-react/issues/471.
   // eslint-disable-next-line react/prop-types
   static Consumer: FC<ConsumerProps<PageEditContextInterface>> = ({ children }) => (
+    // eslint-disable-next-line react/jsx-pascal-case
     <PageEditContext.context.Consumer>
       {value => <Observer>{() => children(value)}</Observer>}
     </PageEditContext.context.Consumer>

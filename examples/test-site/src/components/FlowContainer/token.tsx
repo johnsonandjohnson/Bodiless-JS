@@ -12,10 +12,14 @@
  * limitations under the License.
  */
 
+import { addClasses, withDesign, addProps } from '@bodiless/fclasses';
 import {
-  addClasses,
-  withDesign,
-} from '@bodiless/fclasses';
+  withDirection, DIRECTIONS, getSnapFrom, withTailwindClasses,
+} from '@bodiless/layouts';
+// @ts-ignore Could not find a declaration file
+import resolveConfig from 'tailwindcss/resolveConfig';
+// @ts-ignore Could not find a declaration file
+import tailWindConfig from '../../../tailwind.config';
 
 const asFlowContainerWithMargins = withDesign({
   Wrapper: addClasses('md:-m-5 py-5'),
@@ -27,7 +31,20 @@ const asFlowContainerFullWidth = withDesign({
   ComponentWrapper: addClasses('w-full md:w-1/3'),
 });
 
+const asFlowContainerRTL = withDesign({
+  Wrapper: addClasses('w-full'),
+  ComponentWrapper: withDirection(DIRECTIONS.RTL),
+});
+
+const withFullWidthConstraint = addProps({
+  snapData: getSnapFrom(
+    withTailwindClasses(resolveConfig(tailWindConfig))('w-full'),
+  ),
+});
+
 export {
   asFlowContainerWithMargins,
   asFlowContainerFullWidth,
+  asFlowContainerRTL,
+  withFullWidthConstraint,
 };

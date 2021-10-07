@@ -13,17 +13,20 @@
  */
 
 import React, {
-  ComponentType, useContext, useState, FC, useRef, useEffect,
+  useContext, useState, FC, useRef, useEffect, useCallback, useMemo,
 } from 'react';
 import querystring from 'query-string';
+import { Token } from '@bodiless/fclasses';
 import SearchClient from '../SearchClient';
-import { TSearchResults } from '../types';
+import { TSearchResults, Suggestion } from '../types';
+// import getSearchPagePath from './getSearchPagePath';
 
 type TSearchResultContextValue = {
   results: TSearchResults,
   setResult: React.Dispatch<React.SetStateAction<TSearchResults>>,
   searchTerm: string,
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>,
+  suggest: (term: string) => Suggestion[],
 };
 
 const searchClient = new SearchClient();
@@ -36,18 +39,18 @@ const defaultSearchResults: TSearchResultContextValue = {
   setResult: () => {},
   searchTerm: '',
   setSearchTerm: () => '',
+  suggest: () => [],
 };
 const searchResultContext = React.createContext<TSearchResultContextValue>(defaultSearchResults);
 export const useSearchResultContext = () => useContext(searchResultContext);
 export const SearchResultProvider: FC = ({ children }) => {
   const [results, setResult] = useState<TSearchResults>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const searchPagePath = process.env.BODILESS_SEARCH_PAGE || 'search';
 
-  const search = (term: string) => {
+  const search = useCallback((term: string) => {
     const searchResult = searchClient.search(term);
     setResult(searchResult);
-  };
+  }, [searchTerm]);
 
   const didMountRef = useRef(false);
   const searchTermRef = useRef('');
@@ -58,32 +61,42 @@ export const SearchResultProvider: FC = ({ children }) => {
         parseFragmentIdentifier: true,
       }).fragmentIdentifier || '';
       if (typeof q === 'string') {
-        searchClient.loadIndex().then(() => search(q));
-        setSearchTerm(q);
+        searchClient.loadIndex().then(() => {
+          setSearchTerm(q);
+        });
+      }
+
+      if (q === '') {
+        search(q);
       }
     } else if (searchTermRef.current !== searchTerm) {
-      searchClient.loadIndex().then(() => search(searchTerm));
-      window.location.href = `/${searchPagePath}/#${encodeURIComponent(searchTerm)}`;
-      searchTermRef.current = searchTerm;
+      searchClient.loadIndex().then(() => {
+        search(searchTerm);
+        searchTermRef.current = searchTerm;
+      });
+      // window.location.href = getSearchPagePath(searchTerm);
     }
   });
+
+  const suggest = useCallback((queryString: string) => searchClient.suggest(queryString), []);
 
   const contextValue = {
     results,
     setResult,
     searchTerm,
     setSearchTerm,
+    suggest,
   };
 
-  return (
+  return useMemo(() => (
     <searchResultContext.Provider value={contextValue}>
       {children}
     </searchResultContext.Provider>
-  );
+  ), [results]);
 };
 
-export const withSearchResult = <P extends object>(Component: ComponentType<P>) => {
-  const WithSearchResult = (props: P) => (
+export const withSearchResult: Token = Component => {
+  const WithSearchResult: FC<any> = props => (
     <SearchResultProvider>
       <Component {...props} />
     </SearchResultProvider>

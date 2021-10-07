@@ -11,6 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// @ts-nocheck
 import { flowRight } from 'lodash';
 import {
   ifEditable, withNode, ifReadOnly, withOnlyProps,
@@ -19,7 +20,7 @@ import {
   replaceWith, asComponent, addProps, stylable,
 } from '@bodiless/fclasses';
 import { Fragment } from 'react';
-import { asBodilessLink } from './Link';
+import asBodilessLink from './Link/asBodilessLink';
 import { withToggleTo, withWrapOnSubmit } from './Toggle';
 
 const EmptyToggle = flowRight(
@@ -34,6 +35,9 @@ const EmptyToggle = flowRight(
   withOnlyProps('key', 'children'),
 )(Fragment);
 
+/**
+ * @deprecated
+ */
 const withLinkToggle = flowRight(
   stylable,
   ifEditable(

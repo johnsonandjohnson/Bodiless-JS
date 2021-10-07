@@ -43,9 +43,9 @@ export default class GatsbyMobxStoreItem {
 
   store: GatsbyMobxStore;
 
-  lockTimeout?: NodeJS.Timeout;
+  lockTimeout?: ReturnType<typeof setTimeout>;
 
-  requestTimeout?: NodeJS.Timeout;
+  requestTimeout?: ReturnType<typeof setTimeout>;
 
   requestDelay: number = DEFAULT_REQUEST_DELAY;
 

@@ -31,7 +31,7 @@ const GTMDataLayerPageHelmet = withGlobalGTMForm(
   withDataLayerPageType('page-type'),
 )(Helmet);
 
-export default props => (
+const main = props => (
   <Page {...props}>
     <GTMDataLayerPageHelmet />
     <Layout>
@@ -39,10 +39,12 @@ export default props => (
     </Layout>
   </Page>
 );
+export default main;
 
 export const query = graphql`
   query($slug: String!) {
-    ...PageQuery,
+    ...PageQuery
     ...SiteQuery
+    ...DefaultContentQuery
   }
 `;

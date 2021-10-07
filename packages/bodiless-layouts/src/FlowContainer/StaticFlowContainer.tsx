@@ -18,24 +18,26 @@ import { withNode } from '@bodiless/core';
 import {
   designable,
   Div,
+  DesignableComponentsProps,
+  withoutProps,
 } from '@bodiless/fclasses';
 import { observer } from 'mobx-react-lite';
 import { useItemHandlers } from './model';
-import { StaticFlowContainerProps, FlowContainerItem, FlowContainerComponents } from './types';
+import { FlowContainerItem, FlowContainerComponents } from './types';
 
 const flowContainerComponentStart: FlowContainerComponents = {
-  Wrapper: Div,
+  Wrapper: withoutProps('itemCount')(Div),
   ComponentWrapper: Div,
 };
 
 const NodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
 
-const StaticFlowContainer: FC<StaticFlowContainerProps> = ({ components }) => {
+const StaticFlowContainer: FC<DesignableComponentsProps> = ({ components }) => {
   const items = useItemHandlers().getItems();
   const { Wrapper, ComponentWrapper } = components;
   return (
     // When in a static mode we don't want to use `bl-*` prefixed classes.
-    <Wrapper>
+    <Wrapper itemCount={items.length}>
       {items
         .map((flowContainerItem: FlowContainerItem) => {
           const ChildComponent = components[flowContainerItem.type];

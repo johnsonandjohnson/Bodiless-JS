@@ -13,12 +13,14 @@
  */
 
 import React, { ComponentType } from 'react';
-import { flowRight } from 'lodash';
+import pick from 'lodash/pick';
 import { v1 } from 'uuid';
 import {
   withMenuOptions, useContextMenuForm, useMenuOptionUI, withContextActivator, withLocalContextMenu,
-  TMenuOption, EditButtonProps, UseBodilessOverrides,
+  TMenuOption, EditButtonProps, UseBodilessOverrides, createMenuOptionGroup,
+  MenuOptionsDefinition, useEditContext,
 } from '@bodiless/core';
+import { flowIf, asToken } from '@bodiless/fclasses';
 
 import type { ChameleonButtonProps, ChameleonData } from './types';
 import { useChameleonContext, DEFAULT_KEY } from './withChameleonContext';
@@ -36,14 +38,13 @@ const useToggleButtonMenuOption = () => {
   };
 };
 
-const useSwapButtonMenuOption = (formTitle: string = 'Choose a component') => {
+const useSwapButtonMenuOption = () => {
   const { selectableComponents, activeComponent, setActiveComponent } = useChameleonContext();
   const renderForm = () => {
     const {
       ComponentFormLabel,
       ComponentFormRadioGroup,
       ComponentFormRadio,
-      ComponentFormTitle,
     } = useMenuOptionUI();
 
     const radios = Object.getOwnPropertyNames(selectableComponents).map(name => (
@@ -55,7 +56,6 @@ const useSwapButtonMenuOption = (formTitle: string = 'Choose a component') => {
     ));
     return (
       <>
-        <ComponentFormTitle>{formTitle}</ComponentFormTitle>
         <ComponentFormRadioGroup field="component">
           {radios}
         </ComponentFormRadioGroup>
@@ -75,6 +75,7 @@ const useSwapButtonMenuOption = (formTitle: string = 'Choose a component') => {
     icon: 'repeat',
     label: 'Swap',
     handler: () => render,
+    formTitle: 'Choose a component',
   };
 };
 
@@ -101,44 +102,41 @@ export const withUnwrap = <P extends object>(Component: ComponentType<P>) => {
  * @return HOC which adds the menu button.
  */
 const withChameleonButton = <P extends object, D extends object>(
-  useOverrides?: UseBodilessOverrides<P, D>,
+  useOverrides: UseBodilessOverrides<P, D> = () => ({}),
 ) => {
   const useMenuOptions = (props: P & EditButtonProps<D>) => {
+    const overrides = useOverrides(props);
+    // if useOverrides returns falsy, it means not to provide the button.
+    if (!overrides) return [];
     const { selectableComponents } = useChameleonContext();
-    const overrides = useOverrides ? useOverrides(props) : {};
-    const formTitle = typeof overrides !== 'undefined' ? overrides.formTitle : undefined;
     const extMenuOptions = Object.keys(selectableComponents).length > 1
       ? useSwapButtonMenuOption
       : useToggleButtonMenuOption;
-    const name = `chameleon-${v1()}`;
     const baseDefinition:TMenuOption = {
-      name,
-      group: `${name}-group`,
-      global: false,
-      local: true,
-      ...extMenuOptions(formTitle),
+      name: `chameleon-${v1()}`,
+      ...extMenuOptions(),
+      ...overrides,
     };
-    // if useOverrides returns undefined, it means not to provide the button.
-    if (overrides === undefined) return [];
-    const { groupMerge, groupLabel, ...overrides$ } = overrides;
-    const menuOption:TMenuOption = { ...baseDefinition, ...overrides$ };
-    // Create a group so we have control over name and merge behavior.
-    const menuGroup:TMenuOption = {
-      name: menuOption.group!, // We set the group above so we know it's defined.
-      label: groupLabel || menuOption.label,
-      local: menuOption.local,
-      global: menuOption.global,
-      Component: 'group',
-      groupMerge,
-    };
-    // return [menuOption];
-    return [menuOption, menuGroup];
+    return createMenuOptionGroup(baseDefinition);
   };
-  return flowRight(
-    withMenuOptions({ useMenuOptions, name: 'Chamelion' }),
-    withContextActivator('onClick'),
-    withLocalContextMenu,
-    // withUnwrap,
+  const useMenuOptionsDefinition = (
+    props: P & EditButtonProps<D>,
+  ): MenuOptionsDefinition<P & EditButtonProps<D>> => ({
+    useMenuOptions,
+    name: 'Chameleon',
+    ...pick(useOverrides(props), 'root', 'peer'),
+  });
+  const useHasLocalContext = (props: P & EditButtonProps<D>): boolean => {
+    const def = useMenuOptionsDefinition(props);
+    const isRoot = def.root || (def.peer && !useEditContext().parent);
+    return !isRoot;
+  };
+  return asToken(
+    flowIf(useHasLocalContext as (props: P) => boolean)(
+      withContextActivator('onClick'),
+      withLocalContextMenu,
+    ),
+    withMenuOptions(useMenuOptionsDefinition),
   );
 };
 

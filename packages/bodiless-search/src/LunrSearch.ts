@@ -51,7 +51,6 @@ class LunrSearch implements SearchEngineInterface {
 
   search = (queryString: string): TSearchResults => {
     if (!this.index) {
-      console.log('No search index is available.');
       return [];
     }
     if (!this.previews) {
@@ -72,6 +71,8 @@ class LunrSearch implements SearchEngineInterface {
   getEngineName = () => this.name;
 
   getIndexConfig = () => this.indexConfig;
+
+  getIndex = () => this.index;
 
   setIndexConfig = (conf: TIndexConfig) => { this.indexConfig = conf; };
 
@@ -98,6 +99,10 @@ class LunrSearch implements SearchEngineInterface {
      * https://lunrjs.com/docs/lunr.Builder.html
      */
     const builder = new Builder();
+
+    builder.pipeline.add(
+      lunr.trimmer,
+    );
 
     // Replace non-searchable char with space char, used for tokenize content.
     const filter = (str: string) => str.replace(/:|\$|#|@|!|\^|\*|\+|-|~|%/gi, ' ');

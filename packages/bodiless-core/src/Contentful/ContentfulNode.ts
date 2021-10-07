@@ -12,7 +12,33 @@
  * limitations under the License.
  */
 
+/* eslint-disable max-len */
+
+import { union } from 'lodash';
 import { DefaultContentNode, Path } from '../ContentNode';
+import type { ContentNode } from '../ContentNode';
+
+/**
+ * provides data for a particular default content key
+ * can be used for merging default content data with a node data
+ * @param node - content node of the type equal to node at the time withDefaultContent is invoked
+ * @returns data of the node
+ */
+export type GetContentFrom<D extends object, E extends object = D> = (node: ContentNode<D>) => E;
+
+/**
+ * Type of an entry in a default content map. May be an object representing the
+ * default content, or a function which receives the existing node and returns,
+ * the content for that node (this allows merging actual content with default content.)
+ */
+export type DefaultNodeContent<D extends {} = any, E extends {} = D> = E|GetContentFrom<D, E>;
+
+/**
+ * Type of default content which should be supplied to `withDefaultContent`.
+ */
+export type DefaultContent = {
+  [nodePath: string]: DefaultNodeContent,
+};
 
 export const getRelativeNodeKey = (basePath: Path, nodePath: Path) => {
   const delimiter = '$';
@@ -22,50 +48,82 @@ export const getRelativeNodeKey = (basePath: Path, nodePath: Path) => {
   return nodeKey.startsWith(baseNodeKey) ? nodeKey.substring(baseNodeKeyLength) : nodeKey;
 };
 
+export const getAbsoluteNodeKey = (basePath: Path, contentPath: Path) => {
+  const delimiter = '$';
+  const basePathArray = Array.isArray(basePath) ? basePath : basePath.split(delimiter);
+  const contentPathArray = Array.isArray(contentPath) ? contentPath : contentPath.split(delimiter);
+  return basePathArray.concat(contentPathArray).join(delimiter);
+};
+
 // TODO: this class should expose a method that allows to check if node has value in store
-export default class ContentfulNode<D extends object> extends DefaultContentNode<D> {
-  private baseContentPath: Path = [];
+export default class ContentfulNode<D extends object, K extends object> extends DefaultContentNode<D> {
+  // @ts-ignore has no initializer and is not definitely assigned in the constructor
+  protected sourceNode: DefaultContentNode<K>;
 
   // @ts-ignore has no initializer and is not definitely assigned in the constructor
-  private content: D;
+  private content: DefaultContent;
 
   static create(node: DefaultContentNode<object>, content: object) {
     const contentfulNode = new ContentfulNode(node.getActions(), node.getGetters(), node.path);
     contentfulNode.setContent(content);
-    contentfulNode.setBaseContentPath(node.path);
+    contentfulNode.setSourceNode(node);
     return contentfulNode;
   }
 
   private getContentKey() {
-    return getRelativeNodeKey(this.baseContentPath, this.path);
+    return getRelativeNodeKey(this.sourceNode.path, this.path);
   }
 
   private getDefaultContent() {
     const contentKey = this.getContentKey();
-    return (this.content as any)[contentKey] || {};
+    const contentValue = this.content[contentKey];
+    return contentValue || {};
   }
 
-  public setContent(content: D) {
+  public setContent(content: DefaultContent) {
     this.content = content;
   }
 
-  public setBaseContentPath(path: Path) {
-    this.baseContentPath = path;
+  public setSourceNode(node: DefaultContentNode<K>) {
+    this.sourceNode = node;
   }
 
+  /**
+   * when default content is not a function
+   * then take data from store
+   * if data does not exist in store then return default content
+   *
+   * when default content is a function
+   * then return data from the function
+   * assuming the function is responsible for merging store data with default data
+   */
   get data() {
+    const defaultContent = this.getDefaultContent();
+    if (typeof defaultContent === 'function') {
+      // passing content node of the type equal to node at the time withDefaultContent is invoked
+      return (defaultContent as GetContentFrom<D>)(this.sourceNode.peer(this.path));
+    }
     const { getNode } = this.getters;
     const nodeData = getNode(this.path) as D;
     // @TODO: When we deprecate componentData, this will have to be updated.
     // We'll need to return our default content instead of the emptyValue.
     const isNodeDataEmpty = !nodeData || Object.keys(nodeData).length === 0;
-    return !isNodeDataEmpty ? nodeData : this.getDefaultContent();
+    return !isNodeDataEmpty ? nodeData : defaultContent;
   }
 
-  peer(path: Path) {
-    const peerNode = new ContentfulNode<object>(this.actions, this.getters, path);
+  get keys() {
+    const { getKeys } = this.getters;
+    return union(
+      getKeys(),
+      Object.keys(this.content)
+        .map(key => getAbsoluteNodeKey(this.sourceNode.path, key)),
+    );
+  }
+
+  peer<E extends object>(path: Path) {
+    const peerNode = new ContentfulNode<E, K>(this.actions, this.getters, path);
     peerNode.setContent(this.content);
-    peerNode.setBaseContentPath(this.baseContentPath);
+    peerNode.setSourceNode(this.sourceNode);
     return peerNode;
   }
 }

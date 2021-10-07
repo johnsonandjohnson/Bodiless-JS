@@ -12,16 +12,23 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
+import React, { FC } from 'react';
 import { useNode } from '@bodiless/core';
+import { Token } from '@bodiless/fclasses';
 import { log } from '../fsLogHandler';
-import type { GasbyImageProps } from './asGatsbyImage';
+import GatsbyImagePresets from './GatsbyImagePresets';
 
-const withGatsbyImageLogger = (preset: string) => (Component: CT<GasbyImageProps>) => {
-  const WithGatsbyImageLogger = (props: GasbyImageProps) => {
-    const { node } = useNode();
-    const { preset: presetFromProps } = props;
-    if (preset !== presetFromProps) {
+type Props = {
+  preset: GatsbyImagePresets
+};
+
+const withGatsbyImageLogger = (preset?: GatsbyImagePresets): Token => Component => {
+  const WithGatsbyImageLogger: FC<any> = props => {
+    const { node } = useNode<any>();
+    const { preset: presetFromProps } = props as Props;
+    const { canonicalPreset } = node.data;
+    const expectedPreset = preset || canonicalPreset || undefined;
+    if (expectedPreset !== presetFromProps && presetFromProps !== undefined) {
       log(`
         Data mismatch found for node with path ${node.path.join('$')}.
         Image preset passed as a prop ${presetFromProps}.

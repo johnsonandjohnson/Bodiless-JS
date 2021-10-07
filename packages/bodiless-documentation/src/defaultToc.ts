@@ -21,12 +21,13 @@ const toc = {
   Design: {},
   Components: {
     'YouTube.md': 'YouTube',
+    'Navigation.md': 'Navigation',
   },
   Tools: {},
   Development: {
     Guides: {
-      'SiteBuildBasics.md': '',
-      'DesignElementBasics.md': '',
+      'IntroToBodilessConcepts.md': '',
+      'DesignElementConcepts.md': '',
       'CreatingBodilessComponents.md': '',
     },
     'Packages.md': '',

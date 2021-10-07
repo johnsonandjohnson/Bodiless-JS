@@ -15,6 +15,7 @@
 import React, { FC } from 'react';
 import { shallow, mount } from 'enzyme';
 import { observable } from 'mobx';
+import type { Tag } from '@bodiless/fclasses';
 import {
   withContextActivator, withLocalContextMenu, withNodeDataHandlers, withOnlyProps,
 } from '../src/hoc';
@@ -44,10 +45,10 @@ describe('withContextActivator', () => {
 
 describe('withLocalContextMenu', () => {
   it('should wrap component and suffix its name with `WithLocalContextMenu`', () => {
-    const ContextMenuChild = withLocalContextMenu('div');
+    const ContextMenuChild = withLocalContextMenu('div' as Tag);
     const withMenu = mount(<ContextMenuChild id="testDiv" />);
     expect(withMenu.find('#testDiv')).toHaveLength(2);
-    expect(withMenu.name()).toEqual('divWithLocalContextMenu');
+    expect(withMenu.name()).toEqual('WithLocalContextMenu');
   });
 });
 

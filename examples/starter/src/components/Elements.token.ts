@@ -13,12 +13,11 @@
  */
 
 import { flow } from 'lodash';
-import { addClasses } from '@bodiless/fclasses';
+import { addClasses, removeClasses } from '@bodiless/fclasses';
 import {
   asBodilessLink,
   asEditable as asEditableCore,
 } from '@bodiless/components';
-import { asBodilessImage } from '@bodiless/components-ui';
 import {
   asResponsive21By9Embed,
   asResponsive16By9Embed,
@@ -46,19 +45,27 @@ const withPadding5 = addClasses('p-5');
 
 /* Responsive design */
 const asMobileOnly = addClasses('lg:hidden');
-const asDesktopOnly = addClasses('hidden lg:flex');
+const asDesktopOnly = flow(
+  addClasses('hidden lg:flex'),
+  removeClasses('flex'),
+);
 
 /* Primary coloring */
 const asPrimaryColorBackground = addClasses('bg-gray-200');
 const asTextColorPrimary = addClasses('text-black');
 
 /* Coloring */
+const asTextWhite = addClasses('text-white');
 const asTealBackground = addClasses('bg-teal-600');
+const asLightTealBackground = addClasses('bg-teal-500');
+const asLightTealBackgroundOnHover = addClasses('hover:bg-teal-500');
 
 /* Typography */
-const asBold = addClasses('');
-const asItalic = addClasses('');
+const asBold = addClasses('font-bold');
+const asItalic = addClasses('italic');
 const asLink = addClasses('text-blue-700 underline');
+const asActiveMenuLink = flow(asBold, addClasses('bg-teal-500'));
+const asStrikeThrough = addClasses('');
 const asSuperScript = addClasses('');
 
 const asHeader1 = flow(addClasses('text-3xl'), asTextColorPrimary);
@@ -70,7 +77,6 @@ const asBlockQuote = addClasses('block mx-4');
 
 /* Image component */
 const asImage = addClasses('');
-const asEditableImage = asBodilessImage;
 const asImageRounded = addClasses('rounded-lg');
 
 /* Link component */
@@ -79,7 +85,7 @@ const asEditableLink = asBodilessLink;
 /* Edit component */
 const asEditable = asEditableCore;
 
-// Tout Components
+// Card Components
 const asCta = addClasses('bg-orange-700 hover:bg-orange-600 text-center text-white p-2 rounded');
 
 /* Utility Classes */
@@ -90,11 +96,12 @@ export {
   asItalic,
   asUnderline,
   asLink,
+  asActiveMenuLink,
+  asStrikeThrough,
   asAlignLeft,
   asAlignRight,
   asAlignCenter,
   asAlignJustify,
-  asDesktopOnly,
   asHeader1,
   asHeader2,
   asHeader3,
@@ -104,14 +111,17 @@ export {
   asPageContainer,
   asPrimaryColorBackground,
   asTealBackground,
+  asLightTealBackground,
+  asLightTealBackgroundOnHover,
   asImage,
-  asEditableImage,
   asEditableLink,
   asEditable,
   asImageRounded,
   asMobileOnly,
+  asDesktopOnly,
   asSuperScript,
   asTextColorPrimary,
+  asTextWhite,
   asXMargin,
   asYMargin,
   asNegXMargin,

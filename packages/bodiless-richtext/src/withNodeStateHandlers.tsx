@@ -12,43 +12,27 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { ComponentType } from 'react';
 import { observer } from 'mobx-react-lite';
-import { EditorProps } from 'slate-react';
-import { Value } from 'slate';
-import { useEditContext } from '@bodiless/core';
 import useNodeStateHandlers from './useNodeStateHandlers';
+import type { RichTextProps } from './Type';
+import useInitialValue from './useInitialValue';
 
-export interface SlateEditorProps extends EditorProps {
-  children?: any;
-  initialValue: object;
-}
-
-type NodeStateHandlers = {
-  onChange: Function; // (change: Change) => void;
-  value: Value;
-};
-
-export type Props = Pick<
-SlateEditorProps,
-Exclude<keyof SlateEditorProps, 'value'>
->;
-
-const withNodeStateHandlers = (Editor: React.FC<SlateEditorProps>) => (
-  observer(({ initialValue, onChange: originalOnChange, ...rest }: Props) => {
-    const { value, onChange }: NodeStateHandlers = useNodeStateHandlers({
-      initialValue,
+const withNodeStateHandlers = (Component: ComponentType<RichTextProps>) => (
+  observer(({ initialValue, onChange: originalOnChange, ...rest }: RichTextProps) => {
+    const initialValue$ = useInitialValue(initialValue);
+    const { value, onChange } = useNodeStateHandlers({
+      initialValue: initialValue$,
       onChange: originalOnChange,
     });
-    const { isEdit } = useEditContext();
-    const finalEditorProps = {
+
+    const finalEditorProps: RichTextProps = {
       ...rest,
       value,
       onChange,
-      readOnly: !isEdit,
-    } as SlateEditorProps;
+    };
 
-    return <Editor {...finalEditorProps} />;
+    return <Component {...finalEditorProps} />;
   })
 );
 

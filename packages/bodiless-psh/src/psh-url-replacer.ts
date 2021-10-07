@@ -48,7 +48,7 @@ const build = () => {
     return;
   }
   if (!fs.existsSync(srcFile)) {
-    handleNotice('skipping file processing since source file does not exist');
+    handleNotice(`[build] skipping file processing since source file(${srcFile}) does not exist`);
     return;
   }
   fs.rename(srcFile, tmpFile, err => {
@@ -82,7 +82,7 @@ const deploy = () => {
     return;
   }
   if (!fs.existsSync(tmpFile)) {
-    handleNotice('skipping file processing since source file does not exist');
+    handleNotice(`[deploy] skipping file processing since source file(${tmpFile}) does not exist`);
     return;
   }
   fs.readFile(tmpFile, 'utf8', (err, data) => {

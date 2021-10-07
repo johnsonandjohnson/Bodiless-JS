@@ -13,6 +13,7 @@
  */
 
 import { flowRight } from 'lodash';
+import { addProps } from '@bodiless/fclasses';
 
 export type Tuple = {
   width: number,
@@ -27,6 +28,7 @@ type SnapDataProps = {
 type SnapDataReturn = {
   width: number,
   className: string,
+  currentMediaTuples: Tuple[],
 };
 type WithTuples = (tuples: Tuple[]) => Tuple[];
 export type SnapData = (props: SnapDataProps) => SnapDataReturn;
@@ -162,7 +164,7 @@ const getSnapFrom = (...withTuples: WithTuples[]):SnapData => props => {
     // add the class that is for the current width
     .concat(currentWidthTuples.length > 0 ? currentWidthTuples[0].className : '')
     .join(' ');
-  return { width, className };
+  return { width, className, currentMediaTuples };
 };
 const defaultSnapData = getSnapFrom(
   withTuple('(min-width: 0px)')(100)('w-full'),
@@ -180,9 +182,16 @@ const defaultSnapData = getSnapFrom(
   withTuple('(min-width: 992px)')(100)('lg:w-full'),
 );
 
+const withTailwindWidthConstraints = (config: any) => (classes: string) => addProps({
+  snapData: getSnapFrom(
+    withTailwindClasses(config)(classes),
+  ),
+});
+
 export {
   getSnapFrom,
   withTuple,
   defaultSnapData,
   withTailwindClasses,
+  withTailwindWidthConstraints,
 };

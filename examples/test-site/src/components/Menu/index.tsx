@@ -12,59 +12,33 @@
  * limitations under the License.
  */
 
-import React, { FC, ComponentType } from 'react';
-import { flow } from 'lodash';
-import { withPageDimensionsContext, ifViewportIs, ifViewportIsNot } from '@bodiless/components';
-import {
-  withDesign,
-  designable,
-  DesignableComponentsProps,
-  Div,
-} from '@bodiless/fclasses';
+import { ComponentType } from 'react';
+import pick from 'lodash/pick';
+import { withDesign, replaceWith, asToken } from '@bodiless/fclasses';
+import { withResponsiveVariants } from '@bodiless/components';
 
-import SimpleMenu from './SimpleMenu';
-import MegaMenu from './MegaMenu';
+import { breakpoints as allBreakpoints } from '../Page';
+import { asDesktopOnly, asMobileOnly } from '../Elements.token';
 
-import { SimpleBurgerMenu, MegaBurgerMenu } from '../BurgerMenu';
-import { breakpoints } from '../Page';
+import Menu from './Menu';
+import BurgerMenu, { BurgerMenuToggler } from './BurgerMenu';
 
-type MenuComponents = {
-  Menu: ComponentType<any>,
-};
+const breakpoints = pick(allBreakpoints, 'lg');
 
-type MenuType = (Menu: ComponentType<any>) => ComponentType<any>;
+const asResponsiveMenu = (DesktopMenu: ComponentType) => asToken(
+  withResponsiveVariants({ breakpoints }),
+  // Note, it's important to apply responsive CSS to the 2 menus in order to
+  // avoid flicker on the static site. The menu for the inactive breakpoint
+  // is rendered during SSR and unmounted as a side effect after rehydration.
+  withDesign({
+    _default: withDesign({ Wrapper: asMobileOnly }),
+    lg: asToken(replaceWith(DesktopMenu), asDesktopOnly),
+  }),
+);
 
-const menuComponentsStart:MenuComponents = {
-  Menu: Div,
-};
+const ResponsiveMenu = asResponsiveMenu(Menu)(BurgerMenu);
 
-const MenuClean: FC<DesignableComponentsProps<MenuComponents>> = ({ components, ...rest }) => {
-  const { Menu } = components;
-
-  return (
-    <nav aria-label="Navigation Menu">
-      <Menu {...rest} />
-    </nav>
-  );
-};
-
-const ResponsiveMenuClean = designable(menuComponentsStart)(MenuClean);
-
-const withMenu = (Menu: MenuType) => withDesign<MenuComponents>({ Menu });
-
-const ResponsiveSimpleMenu = flow(
-  ifViewportIs(['lg', 'xl', 'xxl'])(withMenu(() => SimpleMenu)),
-  ifViewportIsNot(['lg', 'xl', 'xxl'])(withMenu(() => SimpleBurgerMenu)),
-  withPageDimensionsContext({ breakpoints }),
-)(ResponsiveMenuClean);
-
-const ResponsiveMegaMenu = flow(
-  ifViewportIs(['lg', 'xl', 'xxl'])(withMenu(() => MegaMenu)),
-  ifViewportIsNot(['lg', 'xl', 'xxl'])(withMenu(() => MegaBurgerMenu)),
-  withPageDimensionsContext({ breakpoints }),
-)(ResponsiveMenuClean);
-
+export default ResponsiveMenu;
 export {
-  ResponsiveSimpleMenu,
-  ResponsiveMegaMenu,
+  BurgerMenuToggler,
 };
