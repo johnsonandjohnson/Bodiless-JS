@@ -13,6 +13,7 @@
  */
 
 import React from 'react';
+import Tooltip, { TooltipProps } from 'rc-tooltip/lib/Tooltip';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount, ReactWrapper } from 'enzyme';
 
@@ -29,7 +30,7 @@ import { Image } from '../src/Image';
 let wrapper: ReactWrapper;
 let menuButton: ReactWrapper;
 let menuForm: ReactWrapper;
-let menuPopup: ReactWrapper;
+let menuPopup: ReactWrapper<TooltipProps>;
 
 const imageProps = { nodeKey: 'imageKey' };
 
@@ -51,14 +52,14 @@ describe('image interactions', () => {
 
   it('menu button should toggle context menu visibility when clicked', () => {
     menuButton.simulate('click');
-    let tooltips = wrapper.find('Tooltip');
+    let tooltips = wrapper.find(Tooltip);
 
     menuPopup = tooltips.at(1);
     expect(menuPopup.prop('visible')).toBeTruthy();
 
     menuButton.simulate('click');
 
-    tooltips = wrapper.find('Tooltip');
+    tooltips = wrapper.find(Tooltip);
 
     menuPopup = tooltips.at(1);
     expect(menuPopup.prop('visible')).toBeFalsy();
@@ -66,7 +67,7 @@ describe('image interactions', () => {
 
   it('context form should have src and alt input fields with cancel and done buttons', () => {
     menuButton.simulate('click');
-    const tooltips = wrapper.find('Tooltip');
+    const tooltips = wrapper.find(Tooltip);
     menuPopup = tooltips.at(1);
     menuForm = menuPopup.find('form');
 
@@ -104,7 +105,7 @@ describe('image interactions', () => {
     menuButton = wrapper.find('i');
     menuButton.simulate('click');
 
-    menuPopup = wrapper.find('Tooltip[visible=true]').at(1);
+    menuPopup = wrapper.find(Tooltip).filter('[visible=true]').at(1);
     menuForm = menuPopup.find('form');
     imageSrc = menuForm.find('input#image-src');
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.10](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.9...v0.2.10) (2021-10-01)
+
+
+### Bug Fixes
+
+* **core:** Update withAppendChild and withPrependChild ([#1074](https://github.com/johnsonandjohnson/bodiless-js/issues/1074)) ([0623663](https://github.com/johnsonandjohnson/bodiless-js/commit/06236633d61de4dba09d005eb9b87e8fab4e8d1c))
+
+
+
+
+
 ## [0.2.9](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.8...v0.2.9) (2021-08-20)
 
 **Note:** Version bump only for package @bodiless/core

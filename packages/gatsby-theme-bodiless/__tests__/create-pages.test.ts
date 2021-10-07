@@ -30,7 +30,7 @@ type EdgeFile = {
 };
 
 const graphql = jest.fn();
-const boundActionCreators = {
+const actions = {
   createPage: jest.fn(),
 };
 const getNode = jest.fn();
@@ -82,8 +82,8 @@ describe('createPages', () => {
     ];
     it('creates a page with the specified template', async () => {
       prepareMocks(files);
-      await createPages({ actions: boundActionCreators, graphql, getNode });
-      const pageObject = boundActionCreators.createPage.mock.calls[0][0];
+      await createPages({ actions, graphql, getNode });
+      const pageObject = actions.createPage.mock.calls[0][0];
       const expected = {
         path: '/products/shampoo/',
         component: './src/templates/product.jsx',
@@ -116,8 +116,8 @@ describe('createPages', () => {
     ];
     it('creates subpage with template specified in the parent page', async () => {
       prepareMocks(files);
-      await createPages({ actions: boundActionCreators, graphql, getNode });
-      const parentPageObject = boundActionCreators.createPage.mock.calls[0][0];
+      await createPages({ actions, graphql, getNode });
+      const parentPageObject = actions.createPage.mock.calls[0][0];
       const parentExpected = {
         path: '/products/',
         component: './src/templates/_default.jsx',
@@ -128,7 +128,7 @@ describe('createPages', () => {
         },
       };
       expect(parentPageObject).toStrictEqual(parentExpected);
-      const childPageObject = boundActionCreators.createPage.mock.calls[1][0];
+      const childPageObject = actions.createPage.mock.calls[1][0];
       const childExpected = {
         path: '/products/shampoo/',
         component: './src/templates/product.jsx',

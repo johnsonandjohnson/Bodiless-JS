@@ -34,7 +34,7 @@ const FilterByGroup = flow(
   // withMultipleAllowedTags,
 )(BaseFilterByGroup);
 
-export default props => (
+const main = props => (
   <Page {...props}>
     <Layout>
       <SectionContent>
@@ -53,6 +53,7 @@ export default props => (
     </Layout>
   </Page>
 );
+export default main;
 
 export const query = graphql`
   query($slug: String!) {

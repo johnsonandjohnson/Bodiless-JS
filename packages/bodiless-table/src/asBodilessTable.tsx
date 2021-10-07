@@ -25,11 +25,11 @@ import {
   WithNodeProps,
 } from '@bodiless/core';
 import {
-  withDesign,
   withoutProps,
   HOC,
   flowIf,
   asToken,
+  withFinalDesign,
 } from '@bodiless/fclasses';
 import { v1 } from 'uuid';
 import {
@@ -301,7 +301,7 @@ const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => asTo
   } as TableBaseProps),
   withNode,
   withNodeKey(nodeKey),
-  withDesign({
+  withFinalDesign({
     Wrapper: withMenuOptions({ useMenuOptions: useMenuOptionsTableOverview, name: 'Table' }),
     TBody: asToken(withNode, withNodeKey(Section.body)),
     THead: asToken(withNode, withNodeKey(Section.head)),
