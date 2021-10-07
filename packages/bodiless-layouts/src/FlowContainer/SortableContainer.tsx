@@ -18,7 +18,8 @@ import { SortableContainer, SortEndHandler } from 'react-sortable-hoc';
 import {
   useContextActivator, useEditContext, withLocalContextMenu, withContextActivator,
 } from '@bodiless/core';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
+import omit from 'lodash/omit';
 
 type FinalUI = {
   FlowContainerEmptyWrapper: ComponentType<HTMLProps<HTMLDivElement>> | string,
@@ -87,7 +88,7 @@ const EditListView = ({
     transitionDuration={0}
     onSortEnd={onSortEnd}
     ui={ui}
-    {...rest}
+    {...omit(rest, 'itemCount')}
   >
     {children}
   </SortableListWrapper>

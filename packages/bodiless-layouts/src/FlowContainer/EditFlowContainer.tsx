@@ -43,7 +43,7 @@ const EditFlowContainerComponents: FlowContainerComponents = {
 /**
  * An editable version of the FlowContainer container.
  */
-const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerProps) => {
+const EditFlowContainer: FC<EditFlowContainerProps> = (props: EditFlowContainerProps) => {
   const {
     components, ui, snapData, getDefaultWidth, itemButtonGroupLabel,
   } = props;
@@ -58,6 +58,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerPr
   return (
     <ComponentDisplayModeProvider mode={ComponentDisplayMode.EditFlowContainer}>
       <Wrapper
+        itemCount={items.length}
         onSortEnd={(sort: SortEnd) => {
           const { oldIndex, newIndex } = sort;
           setFlowContainerItems(arrayMove(items, oldIndex, newIndex));

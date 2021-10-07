@@ -27,7 +27,7 @@ components. You can filter the components by:
 (you can undo this by clicking the "select all" checkbox at the top).
 * Using the search box field to search across all of the component titles.
 
-You can hover over the infomation icon to see a description of the component.
+You can hover over the information icon to see a description of the component.
 
 When you have found the right component, simply click on it, and it will be
 added at the end of the activated flowContainer.
@@ -86,7 +86,7 @@ Use the `startWith` HOC to declare the base component and
 then use any other hoc that will add to this specific version.
 
 > Note that we import the flow container from `@bodiless/layouts-ui`, not
-> directlly from `@bodiless/layouts`.  All Bodiless components which
+> directly from `@bodiless/layouts`.  All Bodiless components which
 > have a content-editor facing UI have a corresponding UI package
 > which defines the look and feel of that UI.
 
@@ -150,13 +150,13 @@ const FCWithBlacklistedCategory = asToken(
   withDesign({
     BlueCard: asToken(startWith(Card), asDefaultCard, asBlueCard),
   }),
-  addProps({ blacklistCateogries: ['Design System'] }),
+  addProps({ blacklistCategories: ['Design System'] }),
 )(FlowContainer);
 ```
 Only the "Color" filter will be displayed (not the "Design System" filter).
 
 #### Other metadata
-In addition to categories, compnents can have `title` and a `description`
+In addition to categories, components can have `title` and a `description`
 properties. These are used to provide more information about the component
 to the editor, and for searching.
 ```js
@@ -297,7 +297,7 @@ then the add button will not be visible. If a component is removed and the
 number of components is less than the max value then the add button will
 reappear.
 
-**`minComponents`** will limit the number of componetns that can be removed from
+**`minComponents`** will limit the number of components that can be removed from
 th Flow Container. If the number of components is less than or equal to the
 value of minComponents then the delete button will not be visible.
 
@@ -328,7 +328,7 @@ const variations = varyDesigns<any>(
   { '': withCustomPreview },
 );
 ```
-Here, `ifComponentSelector` consumes the context provided by the flow ontainer
+Here, `ifComponentSelector` consumes the context provided by the flow container
 and provides a
 [flow toggle](../../Development/Architecture/FClasses#flow-toggles) which
 applies a set of tokens only if the component is being rendered as a preview
