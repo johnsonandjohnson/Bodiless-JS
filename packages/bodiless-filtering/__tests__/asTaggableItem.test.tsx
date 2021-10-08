@@ -14,6 +14,8 @@
 
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
+import Tooltip, { TooltipProps } from 'rc-tooltip/lib/Tooltip';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { mount, ReactWrapper } from 'enzyme';
 import { flow } from 'lodash';
 
@@ -53,7 +55,7 @@ const Taggable = flow(asTaggableItem())('span');
 let wrapper: ReactWrapper;
 let menuButton: ReactWrapper;
 let menuForm: ReactWrapper;
-let menuPopup: ReactWrapper;
+let menuPopup: ReactWrapper<TooltipProps>;
 
 const itemProps = { nodeKey: 'tags', ...props };
 
@@ -73,14 +75,14 @@ describe('Filter item interactions', () => {
 
   it('menu button should toggle context menu visibility when clicked', () => {
     menuButton.simulate('click');
-    let tooltips = wrapper.find('Tooltip');
+    let tooltips = wrapper.find(Tooltip);
 
     menuPopup = tooltips.at(1);
     expect(menuPopup.prop('visible')).toBeTruthy();
 
     menuButton.simulate('click');
 
-    tooltips = wrapper.find('Tooltip');
+    tooltips = wrapper.find(Tooltip);
 
     menuPopup = tooltips.at(1);
     expect(menuPopup.prop('visible')).toBeFalsy();
@@ -97,7 +99,7 @@ describe('Filter item interactions', () => {
   it('context form should have all tags button and when clicked display all ', () => {
     // All tags
     menuButton.simulate('click');
-    const tooltips = wrapper.find('Tooltip');
+    const tooltips = wrapper.find(Tooltip);
     menuPopup = tooltips.at(1);
     menuForm = menuPopup.find('form');
     const allTags = menuForm.find('button').at(1);
@@ -107,7 +109,7 @@ describe('Filter item interactions', () => {
 
   it('context form should have interactive all tags button', () => {
     menuButton.simulate('click');
-    const tooltips = wrapper.find('Tooltip');
+    const tooltips = wrapper.find(Tooltip);
     menuPopup = tooltips.at(1);
     menuForm = menuPopup.find('form');
     // Test for input fields:
@@ -137,7 +139,7 @@ describe('Filter item interactions', () => {
     menuButton = wrapper.find('i');
     menuButton.simulate('click');
 
-    menuPopup = wrapper.find('Tooltip[visible=true]').at(1);
+    menuPopup = wrapper.find(Tooltip).filter('[visible=true]').at(1);
     menuForm = menuPopup.find('form');
     input = menuForm.find('input[name="tags"]');
     expect(input.prop('value')).toStrictEqual([testTag]);
@@ -153,7 +155,7 @@ describe('Filter item interactions', () => {
 
     menuButton.simulate('click');
 
-    menuPopup = wrapper.find('Tooltip[visible=true]').at(1);
+    menuPopup = wrapper.find(Tooltip).filter('[visible=true]').at(1);
     menuForm = menuPopup.find('form');
     input = menuForm.find('input[name="tags"]');
     expect(input.prop('value')).toStrictEqual([]);

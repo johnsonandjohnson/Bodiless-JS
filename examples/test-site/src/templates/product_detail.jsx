@@ -96,7 +96,7 @@ const asTestableFlowContainer = withDesign({
 });
 const ProductFlowContainer = asTestableFlowContainer(FlowContainerDefault);
 
-export default (props: any) => (
+const main = props => (
   <Page {...props}>
     <Layout>
       <GTMDataLayerProductHelmet />
@@ -140,6 +140,7 @@ export default (props: any) => (
     </Layout>
   </Page>
 );
+export default main;
 
 export const query = graphql`
   query($slug: String!) {

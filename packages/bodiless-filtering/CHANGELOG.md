@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.10](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.9...v0.2.10) (2021-10-01)
+
+
+### Bug Fixes
+
+* **filtering:** Fix missing export ([#1135](https://github.com/johnsonandjohnson/bodiless-js/issues/1135)) ([8b0698d](https://github.com/johnsonandjohnson/bodiless-js/commit/8b0698d0dace5dd2b8292d82484f0d56db9b7660))
+
+
+### Features
+
+* **filtering:** Register filterable items ([#1107](https://github.com/johnsonandjohnson/bodiless-js/issues/1107)) ([97b50bc](https://github.com/johnsonandjohnson/bodiless-js/commit/97b50bc2971e8a18a0cf31b7c37cf161d0a50576))
+
+
+
+
+
 ## [0.2.9](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.8...v0.2.9) (2021-08-20)
 
 **Note:** Version bump only for package @bodiless/filtering

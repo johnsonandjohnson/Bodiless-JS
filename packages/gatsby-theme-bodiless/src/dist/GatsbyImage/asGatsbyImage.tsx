@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,58 +13,213 @@
  */
 
 import React, { ComponentType as CT, HTMLProps } from 'react';
-import GatsbyImg from 'gatsby-image';
+import flow from 'lodash/flow';
+import omit from 'lodash/omit';
+import {
+  GatsbyImage as GatsbyPluginImage,
+  GatsbyImageProps as GatsbyPluginImageProps,
+  IGatsbyImageData,
+  Layout,
+} from 'gatsby-plugin-image';
 import {
   ifEditable,
   withActivatorWrapper,
 } from '@bodiless/core';
+import {
+  addClasses,
+  DesignableComponentsProps,
+  Div,
+  withDesign,
+  withoutProps,
+  designable,
+} from '@bodiless/fclasses';
 import type { ImageData } from '@bodiless/components';
 import type {
   FluidObject,
   FixedObject,
   GatsbyImageOptionalProps,
 } from 'gatsby-image';
-import {
-  addClasses, DesignableComponentsProps, Div, withDesign, withoutProps, designable,
-} from '@bodiless/fclasses';
-import flow from 'lodash/flow';
-import omit from 'lodash/omit';
 import GatsbyImagePresets from './GatsbyImagePresets';
 
-type Components = {
-  GatsbyImage: CT<any>,
+type BodilessImageComponents = {
+  GatsbyImage: CT<GatsbyPluginImageProps>,
   Image: CT<any>,
 };
 
+export type BodilessFluidObject = FluidObject & {
+  srcSetType: string;
+  presentationWidth: number;
+  presentationHeight: number;
+};
+export type BodilessFixedObject = FixedObject;
+
 export type GatsbyImageData = ImageData & {
   preset: GatsbyImagePresets;
-  gatsbyImg?: { fluid: FluidObject | FluidObject[] } | { fixed: FixedObject | FixedObject[] };
+  gatsbyImg?: { fluid: BodilessFluidObject | BodilessFluidObject[] }
+  | { fixed: BodilessFixedObject | BodilessFixedObject[] };
+};
+export type GatsbyPluginImageData = Omit<GatsbyPluginImageProps, 'image' | 'alt'> & {
+  image: IGatsbyImageData | undefined,
+  alt?: string,
 };
 
-export type GasbyImageProps = HTMLProps<HTMLImageElement>
+export type GatsbyImageProps = HTMLProps<HTMLImageElement>
 & GatsbyImageData
-& GatsbyImageOptionalProps & DesignableComponentsProps<Components>;
+& GatsbyImageOptionalProps & DesignableComponentsProps<BodilessImageComponents>;
 
-const asDesignableGatsbyImage = (Component: CT<any>) => {
-  const startComponents: Components = {
-    GatsbyImage: GatsbyImg,
-    Image: Component,
+export type BodilessGatsbyImageProps = HTMLProps<HTMLImageElement>
+& GatsbyPluginImageData
+& DesignableComponentsProps<BodilessImageComponents>;
+
+/**
+ * props GatsbyImageProps is defined for legacy GatsbyImage package
+ * https://www.gatsbyjs.com/plugins/gatsby-image/
+ * with data generated from gatsby node creation process using Sharp API.
+ *
+ * When replacing old GatsbyImage component with new gatsby-plugin-image
+ * component, we convert legacy data into new format according to gatsby-plugin-image API:
+ * https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-plugin-image/#gatsbyimage
+ *
+ * @param props legacy GatsbyImage props.
+ * @returns gatsby-plugin-image GatsbyImage props.
+ */
+const getGatsbyPluginImageProps = (props: GatsbyImageProps): BodilessGatsbyImageProps => {
+  const {
+    components,
+    gatsbyImg,
+    preset,
+    backgroundColor: bgColor,
+    alt = '',
+    as,
+    loading,
+    durationFadeIn,
+    crossOrigin,
+    onError,
+    onStartLoad,
+    ...rest
+  } = props;
+
+  if (gatsbyImg !== undefined) {
+    /**
+     * fallback for placeholder, dominantColor | blurred | tracedSVG
+     */
+    let placeholderFallback: string;
+    let layout: Layout = 'fullWidth';
+    let width: number;
+    let height: number;
+    let images: IGatsbyImageData['images'];
+    const backgroundColor = (typeof bgColor === 'string') ? bgColor : undefined;
+
+    if ('fluid' in gatsbyImg) {
+      const fluid = ((Array.isArray(gatsbyImg.fluid) && gatsbyImg.fluid.length)
+        ? gatsbyImg.fluid[0] : gatsbyImg.fluid) as BodilessFluidObject;
+      placeholderFallback = fluid.tracedSVG || fluid.base64 || '';
+      layout = 'fullWidth';
+      width = fluid.presentationWidth;
+      height = fluid.presentationHeight;
+
+      images = {
+        fallback: {
+          sizes: fluid.sizes,
+          src: fluid.src,
+          srcSet: fluid.srcSet,
+        },
+        sources: [
+          {
+            sizes: fluid.sizes,
+            type: fluid.srcSetType,
+            srcSet: fluid.srcSet,
+          },
+        ],
+      };
+
+      if (fluid.srcSetWebp) {
+        const webp = {
+          sizes: '',
+          type: 'image/webp',
+          srcSet: '',
+        };
+        webp.srcSet = fluid.srcSetWebp;
+        webp.sizes = fluid.sizes;
+        images.sources?.push(webp);
+      }
+    } else {
+      const fixed = ((Array.isArray(gatsbyImg.fixed) && gatsbyImg.fixed.length)
+        ? gatsbyImg.fixed[0] : gatsbyImg.fixed) as FixedObject;
+      placeholderFallback = fixed.tracedSVG || fixed.base64 || '';
+      layout = 'fixed';
+      width = fixed.width;
+      height = fixed.height;
+      images = {
+        fallback: {
+          srcSet: fixed.srcSet,
+          src: fixed.src,
+        },
+      };
+    }
+
+    const image: IGatsbyImageData = {
+      layout,
+      width,
+      height,
+      backgroundColor,
+      images,
+      placeholder: {
+        fallback: placeholderFallback,
+      },
+    };
+
+    return {
+      components,
+      image,
+      alt,
+      backgroundColor,
+      ...rest,
+    };
+  }
+
+  return {
+    components,
+    image: undefined,
+    alt,
+    ...rest,
   };
-  const AsDesignableGatsbyImage = (props: GasbyImageProps) => {
+};
+
+const asDesignableGatsbyImage = (ImageComponent: CT<any>) => {
+  const startComponents: BodilessImageComponents = {
+    GatsbyImage: GatsbyPluginImage,
+    Image: ImageComponent,
+  };
+
+  const AsDesignableGatsbyImage = (props: GatsbyImageProps) => {
     const {
-      components, gatsbyImg, preset, ...rest
-    } = props;
+      components,
+      image: imageData,
+      alt = '',
+      ...rest
+    } = getGatsbyPluginImageProps(props);
+
     const {
       GatsbyImage,
       Image,
     } = components;
-    if (gatsbyImg !== undefined) {
+
+    if (imageData !== undefined) {
       return (
-        <GatsbyImage {...rest} {...gatsbyImg} />
+        <GatsbyImage {...omit(rest, 'canonicalPreset', '_nodeKey')} alt={alt} image={imageData} />
       );
     }
+
+    const {
+      components: componentsImg,
+      gatsbyImg,
+      preset,
+      ...restImg
+    } = props;
+
     return (
-      <Image {...omit(rest, 'canonicalPreset', 'imgStyle')} />
+      <Image {...omit(restImg, 'canonicalPreset', '_nodeKey', 'imgStyle')} />
     );
   };
   return designable(startComponents, 'GatsbyImage')(AsDesignableGatsbyImage);
@@ -84,13 +239,13 @@ const asGatsbyImage = flow(
   }),
 );
 
-export const isGatsbyImage = ({ gatsbyImg }: GasbyImageProps) => gatsbyImg !== undefined;
+export const isGatsbyImage = ({ gatsbyImg }: GatsbyImageProps) => gatsbyImg !== undefined;
 
 /**
  * hoc to remove props configured for GatsbyImage in image data
  * and to remove props added during image gatsby nodes creation
  *
- * it can be useful for cases when an image is procesed by gatsby
+ * it can be useful for cases when an image is processed by gatsby
  * but Gatsby Image is not enabled for the image
  */
 export const withoutGatsbyImageProps = withoutProps([

@@ -33,7 +33,7 @@ export type EditFlowContainerProps = DesignableComponentsProps & HTMLProps<HTMLD
   maxComponents?: number,
   minComponents?: number,
   mandatoryCategories?: string[],
-  blacklistCategoris?: string[],
+  blacklistCategories?: string[],
   isResizeEnabled?: boolean,
   /**
    * The label to use for the buttons provided by an empty flow container.
