@@ -13,3 +13,4 @@ yarn-error.log
 .cache
 public
 src/components/index.css
+tailwind.config.js
