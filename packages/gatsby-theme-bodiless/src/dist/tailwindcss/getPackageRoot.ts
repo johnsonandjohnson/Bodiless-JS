@@ -18,30 +18,7 @@ import path from 'path';
 
 const getPackageRoot = (packagePath: string) => path.dirname(path.dirname(packagePath));
 
-const getBodilessPackages = () => [
-  {
-    root: getPackageRoot(require.resolve('@bodiless/accordion')),
-    tailwindConfig: require('@bodiless/accordion/site.tailwind.config'),
-  },
-  {
-    root: getPackageRoot(require.resolve('@bodiless/card')),
-    tailwindConfig: require('@bodiless/card/site.tailwind.config'),
-  },
-  {
-    root: getPackageRoot(require.resolve('@bodiless/navigation')),
-    tailwindConfig: require('@bodiless/navigation/site.tailwind.config'),
-  },
-  {
-    root: getPackageRoot(require.resolve('@bodiless/layouts')),
-    tailwindConfig: require('@bodiless/layouts/site.tailwind.config'),
-  },
-  {
-    root: getPackageRoot(require.resolve('@bodiless/organisms')),
-    tailwindConfig: require('@bodiless/organisms/site.tailwind.config'),
-  },
-];
-
 export {
+  // eslint-disable-next-line import/prefer-default-export
   getPackageRoot,
-  getBodilessPackages,
 };
