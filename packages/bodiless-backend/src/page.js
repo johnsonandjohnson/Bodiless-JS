@@ -113,13 +113,7 @@ class Page {
        */
       const [, pageRelativeDir] = this.directory.split('/data/pages/');
       if (!pageRelativeDir) {
-        resolve(`Invalid directory "${this.directory}" to delete`);
-        return;
-      }
-
-      const subdirs = getDirectories(this.directory);
-      if (subdirs.length !== 0) {
-        resolve('The page cannot be deleted it has child pages. To delete this page, first delete or move all child pages, and retry.');
+        resolve('The page cannot be deleted.');
         return;
       }
 
@@ -129,6 +123,18 @@ class Page {
         }
         resolve(this);
       });
+    });
+    return readPromise;
+  }
+
+  hasChildDirectory() {
+    const readPromise = new Promise((resolve) => {
+      const subdirs = getDirectories(this.directory);
+      if (subdirs.length !== 0) {
+        resolve('The page cannot be deleted it has child pages. To delete this page, first delete or move all child pages, and retry.');
+      } else {
+        resolve('Success');
+      }
     });
     return readPromise;
   }

@@ -31,7 +31,7 @@ import {
 import { ComponentFormSpinner } from '@bodiless/ui';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
-import NewPageURLField, { getPathValue } from './NewPageURLField';
+import NewPageURLField from './NewPageURLField';
 
 type Client = {
   deletePage: (path: string) => AxiosPromise<any>;
@@ -50,6 +50,14 @@ type DeletePageProps = {
 };
 
 let actualState: number = -1;
+
+const hasPageChild = async ({ path, client } : any) => {
+  const result = await handle(client.directoryChild(path));
+  if (result.response && result.message === 'Success') {
+    return Promise.resolve();
+  }
+  return Promise.reject(new Error(result.message));
+};
 
 const deletePage = async ({ path, client } : any) => {
   const result = await handle(client.deletePage(path));
@@ -73,6 +81,7 @@ const DeletePageForm = (props : DeletePageProps) => {
     ComponentFormTitle,
   } = defaultUI;
   const formTitle = 'Delete (this) Page';
+
   switch (status) {
     case DeletePageState.Init: {
       const ui: object = {
@@ -149,15 +158,27 @@ const formPageDel = (client: Client) => contextMenuForm({
 })(({ formState, formApi } : any) => {
   const { ComponentFormText } = useMenuOptionUI();
   const {
-    submits, values,
+    submits,
   } = formState;
   const [state, setState] = useState<DeletePageProps>({
     status: DeletePageState.Init,
   });
   const context = useEditContext();
-  const path = getPathValue(values);
+  const path = (typeof window !== 'undefined') ? window.location.pathname : '';
 
   useEffect(() => {
+    if (path === '/') {
+      actualState = DeletePageState.Errored;
+      setState({ status: DeletePageState.Errored, errorMessage: 'The page cannot be deleted.' });
+    } else {
+      hasPageChild({ path, client })
+        .catch((err: Error) => {
+          actualState = DeletePageState.Errored;
+          setState({ status: DeletePageState.Errored, errorMessage: err.message });
+          formApi.setValue('keepOpen', false);
+        });
+    }
+
     if (submits && path) {
       context.showPageOverlay({ hasSpinner: false });
       actualState = DeletePageState.Pending;

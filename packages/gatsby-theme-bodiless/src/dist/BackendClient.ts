@@ -96,6 +96,11 @@ export default class BackendClient {
     return this.delete(url);
   }
 
+  directoryChild(path$: string) {
+    const url = `${this.prefix}/directory/child${path$}`;
+    return this.delete(url);
+  }
+
   commit(
     message: string,
     directories: string[],
