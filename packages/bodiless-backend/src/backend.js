@@ -613,18 +613,6 @@ class Backend {
       page.setBasePath(backendPagePath);
       const { body: { origin, destination } } = req;
 
-      console.log('===>>>> backend origin, destination =', origin, destination);
-      console.log('===>>>> backend backendPagePath =', backendPagePath);
-
-      const destinationFullPath = `${backendPagePath}${destination}`;
-      const originFullPath = `${backendPagePath}${origin}`;
-
-      logger.log(`---> Start moving page ${originFullPath} to:${destinationFullPath}`);
-
-      // TODO: start here....
-
-      res.send({});
-
       page
         .renameDirectory(origin, destination)
         .then(error => {

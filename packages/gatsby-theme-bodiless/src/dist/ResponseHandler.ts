@@ -31,7 +31,7 @@ const handle = (promise: AxiosPromise<any>) => promise
     }
     return {
       response: true,
-      message: 'Success!',
+      message: res.data || 'Success!',
     };
   })
   .catch(err => {

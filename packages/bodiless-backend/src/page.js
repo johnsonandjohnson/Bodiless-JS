@@ -14,8 +14,6 @@
 
 const fs = require('fs');
 const path = require('path');
-
-console.log('---> Const Path:', path);
 const Logger = require('./logger');
 
 const logger = new Logger('BACKEND');
@@ -42,7 +40,6 @@ class Page {
   supportedExtensions = ['json', 'tsx', 'jsx', 'js'];
 
   constructor(pagePath) {
-    console.log('Construtor', pagePath);
     this.path = pagePath;
   }
 
@@ -108,7 +105,7 @@ class Page {
   }
 
   renameDirectory(OriginDirectory, newDirectory) {
-    return new Promise((resolve) => {
+    const readPromise = new Promise((resolve, reject) => {
       const pathDirectory = this.getBasePath() + OriginDirectory;
       const newPathDirectory = this.getBasePath() + newDirectory;
       const [, pageRelativeDir] = pathDirectory.split('/data/pages/');
@@ -125,9 +122,13 @@ class Page {
       }
 
       fs.rename(pathDirectory, newPathDirectory, err => {
-        resolve(err && err.message);
+        if (err) {
+          reject(err);
+        }
+        resolve(this);
       });
     });
+    return readPromise;
   }
 }
 module.exports = Page;

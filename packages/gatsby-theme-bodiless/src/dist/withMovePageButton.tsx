@@ -15,8 +15,6 @@
 /* eslint-disable no-alert */
 import React, {
   useCallback, useEffect, useState,
-  ComponentType,
-  HTMLProps,
 } from 'react';
 import {
   contextMenuForm,
@@ -27,21 +25,18 @@ import {
   ContextSubMenu,
   useNode,
 } from '@bodiless/core';
-// import { AxiosPromise } from 'axios';
-import { flow } from 'lodash';
-import { addClasses, removeClasses } from '@bodiless/fclasses';
-import type { StylableProps } from '@bodiless/fclasses';
+import { AxiosPromise } from 'axios';
+import {
+  addClasses, removeClasses, asToken,
+} from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
-// import NewPageURLField, { getPathValue } from './NewPageURLField';
 import MovePageURLField, { getPathValue } from './MovePageURLField';
 
-// type Client = {
-//   movePage: (origin: string, destination: string) => AxiosPromise<any>;
-// };
-
-// const DEFAULT_PAGE_TEMPLATE = '_default';
+type Client = {
+  movePage: (origin: string, destination: string) => AxiosPromise<any>;
+};
 
 enum MovePageState {
   Init,
@@ -50,36 +45,31 @@ enum MovePageState {
   Errored,
 }
 
-type PageStatus = {
+type MovePageProps = {
   status: MovePageState;
-  movePagePath?: string;
   errorMessage?: string;
 };
 
-type MovePageProps = PageStatus;
+let actualState: number = -1;
+
+let destinationGlb: string = '';
 
 const usePagePath = () => useNode().node.pagePath;
 
 const movePage = async ({ origin, destination, client } : any) => {
-  console.log('(1) ----======> client', client);
-  console.log('(1) ----======> origin', origin);
-
   const result = await handle(client.movePage(origin, destination));
-
-  console.log('Result Front-End:', result);
-
   if (result.response) {
-    return Promise.resolve(destination);
-  }
-  if (result.message) {
-    return Promise.reject(new Error(result.message));
+    if (result.message !== 'Success' && typeof (result.message) === 'string') {
+      return Promise.reject(new Error(result.message));
+    }
+    return Promise.resolve();
   }
   return Promise.reject(new Error('The page cannot be moved.'));
 };
 
 const MovePageComp = (props : MovePageProps) => {
   const {
-    status, errorMessage, movePagePath,
+    status, errorMessage,
   } = props;
   const basePathValue = usePagePath();
 
@@ -87,39 +77,24 @@ const MovePageComp = (props : MovePageProps) => {
   const {
     ComponentFormLabel,
     ComponentFormDescription,
-    // ComponentFormText,
     ComponentFormWarning,
     ComponentFormTitle,
-    ComponentFormLink,
   } = defaultUI;
   const formTitle = 'Move';
-  // const { subPageTemplate } = useGatsbyPageContext();
-  // const template = subPageTemplate || DEFAULT_PAGE_TEMPLATE;
   switch (status) {
     case MovePageState.Init: {
-      const CustomComponentFormLabel = flow(
-        removeClasses('bl-text-xs'),
-        addClasses('bl-font-bold bl-text-sm'),
-      )(ComponentFormLabel as ComponentType<StylableProps>);
-      const CustomComponentFormLink = flow(
-        removeClasses('bl-block'),
-        addClasses('bl-italic'),
-      )(ComponentFormLink as ComponentType<StylableProps>);
-      const CustomComponentFormWarning = flow(
-        removeClasses('bl-float-left'),
-      )(ComponentFormWarning);
-      const ui = {
+      const ui: object = {
         ...defaultUI,
-        ComponentFormLabel: CustomComponentFormLabel as ComponentType<HTMLProps<HTMLLabelElement>>,
-        ComponentFormLink: CustomComponentFormLink as ComponentType<HTMLProps<HTMLAnchorElement>>,
-        ComponentFormWarning: CustomComponentFormWarning,
+        ComponentFormLabel: asToken(removeClasses('bl-text-xs'), addClasses('bl-font-bold bl-text-sm')),
+        ComponentFormLink: asToken(removeClasses('bl-block'), addClasses('bl-italic')),
+        ComponentFormWarning: removeClasses('bl-float-left'),
       };
       return (
         <>
           <ContextMenuProvider ui={ui}>
             <ComponentFormTitle>{formTitle}</ComponentFormTitle>
             <ComponentFormDescription>Move this page to a new URL.</ComponentFormDescription>
-            <CustomComponentFormLabel>Current URL</CustomComponentFormLabel>
+            <ComponentFormLabel>Current URL</ComponentFormLabel>
             <ComponentFormDescription>{basePathValue}</ComponentFormDescription>
             <MovePageURLField
               validateOnChange
@@ -143,7 +118,6 @@ const MovePageComp = (props : MovePageProps) => {
           <ComponentFormDescription>
             Move operation was successful. Upon closing this dialog you will be redirected to the
             new page’s url.
-            <ComponentFormLink hidden href={movePagePath} id="new-page-link">{`Click here to visit the new page: ${movePagePath}`}</ComponentFormLink>
           </ComponentFormDescription>
         </>
       );
@@ -159,63 +133,76 @@ const MovePageComp = (props : MovePageProps) => {
 };
 
 const redirectPage = (values: {keepOpen: boolean, path?: string}) => {
-  if (values.keepOpen) return;
-
-  if (typeof window !== 'undefined') {
-    const { href } = window.location;
-    const hrefArray = href.split('/');
-
-    // Handle paths withtout '/' at the end.
-    if (hrefArray[hrefArray.length - 1] !== '') hrefArray.push('');
-
-    // Removes last child path from href array.
-    hrefArray.splice(-2, 1);
-
-    const parentHref = hrefArray.join('/');
-
-    // Uses replace to redirect since child page no longer exists.
-    window.location.replace(parentHref);
+  if (values.keepOpen || actualState === MovePageState.Errored || typeof window === 'undefined') {
+    actualState = -1;
+    return;
   }
+
+  actualState = -1;
+
+  const { href } = window.location;
+  const hrefArray = href.split('/');
+
+  // Handle paths withtout '/' at the end.
+  if (hrefArray[hrefArray.length - 1] !== '') hrefArray.push('');
+
+  // Removes last child path from href array.
+  hrefArray.splice(-2, 1);
+  hrefArray.pop();
+
+  const destinationArray = destinationGlb.split('/');
+  const destinationDir = destinationArray.pop();
+  if (destinationDir) {
+    hrefArray.push(destinationDir);
+    destinationGlb = '';
+  } else {
+    return;
+  }
+
+  const parentHref = hrefArray.join('/');
+  // Uses replace to redirect since child page no longer exists.
+  window.location.replace(parentHref);
 };
 
-const formPageMove = (client: any) => contextMenuForm({
+const formPageMove = (client: Client) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
   onClose: redirectPage,
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 })(({ formState, formApi } : any) => {
   const { ComponentFormText } = useMenuOptionUI();
 
   const origin = usePagePath();
 
   const {
-    submits, invalid, values,
+    submits, values,
   } = formState;
-  const [state, setState] = useState<PageStatus>({
+  const [state, setState] = useState<MovePageProps>({
     status: MovePageState.Init,
   });
   const context = useEditContext();
   const path = getPathValue(values);
   useEffect(() => {
-    if (submits && path && invalid === false) {
+    if (submits && path) {
       context.showPageOverlay({ hasSpinner: false });
+      actualState = MovePageState.Pending;
       setState({ status: MovePageState.Pending });
 
       const pathArray = path.split('/');
       pathArray.splice(-2, 1);
       const destination = pathArray.join('/');
+      destinationGlb = destination;
 
       movePage({
         origin,
         destination,
         client,
       })
-        .then((movePagePath: string) => {
-          if (movePagePath) {
-            setState({ status: MovePageState.Complete, movePagePath });
-          }
+        .then(() => {
+          actualState = MovePageState.Complete;
+          setState({ status: MovePageState.Complete });
         })
         .catch((err: Error) => {
+          actualState = MovePageState.Errored;
           setState({ status: MovePageState.Errored, errorMessage: err.message });
         })
         .finally(() => {
@@ -224,14 +211,13 @@ const formPageMove = (client: any) => contextMenuForm({
         });
     }
   }, [submits]);
-  const { status, errorMessage, movePagePath } = state;
+  const { status, errorMessage } = state;
   return (
     <>
       <ComponentFormText type="hidden" field="keepOpen" initialValue />
       <MovePageComp
         status={status}
         errorMessage={errorMessage}
-        movePagePath={movePagePath}
       />
     </>
   );
