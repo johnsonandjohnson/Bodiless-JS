@@ -18,7 +18,9 @@ import { flow } from 'lodash';
 import {
   addClasses, removeClasses, addProps,
 } from '@bodiless/fclasses';
-import { ContextMenu, ContextMenuUI, ContextMenuProps } from '@bodiless/core';
+import {
+  ContextMenu, ContextMenuUI, ContextMenuProps, TooltipProps,
+} from '@bodiless/core';
 import {
   ComponentFormTitle, ComponentFormCloseButton, ComponentFormLabel, ComponentFormText,
   ComponentFormButton, ToolbarIcon, Div, Hr, ToolbarButton, ComponentFormUnwrapButton,
@@ -47,11 +49,8 @@ export const ToolbarDivider = addClasses(
   'bl-bg-gray bl-w-grid-12 bl--ml-grid-2 bl-mb-grid-3 bl-h-px',
 )(Hr);
 
-export const GlobalTooltip: FC<ReactTooltip['props']> = props => (
+export const GlobalTooltip: FC<TooltipProps> = (props: TooltipProps) => (
   <ReactTooltip
-    align={{
-      offset: [5, 0],
-    }}
     {...props}
     placement="rightTop"
     overlayStyle={{ position: 'fixed', opacity: 1 }}
@@ -69,15 +68,6 @@ export const GlobalTooltip: FC<ReactTooltip['props']> = props => (
     }}
   />
 );
-
-const GlobalTooltipRight = flow(
-  addProps({
-    align: {
-      offset: [5, 0],
-      useCssRight: true,
-    },
-  }),
-)(GlobalTooltip);
 
 const ui: ContextMenuUI = {
   ComponentFormTitle,
@@ -119,7 +109,7 @@ const GlobalContextMenu: FC<ContextMenuProps> = props => {
     const updatedUi = {
       ...ui,
       Toolbar: ToolbarRight,
-      Tooltip: GlobalTooltipRight,
+      Tooltip: GlobalTooltip,
     };
     return <ContextMenu {...props} ui={updatedUi} />;
   }

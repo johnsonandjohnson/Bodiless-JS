@@ -26,7 +26,7 @@ type EdgeFile = {
 };
 
 const graphql = jest.fn();
-const boundActionCreators = {
+const actions = {
   createPage: jest.fn(),
 };
 const getNode = jest.fn();
@@ -60,7 +60,7 @@ describe('createPages', () => {
     it('generates preview pages on development environment', async () => {
       process.env.NODE_ENV = 'development';
       prepareMocks(templates);
-      await createPages({ actions: boundActionCreators, graphql, getNode });
+      await createPages({ actions, graphql, getNode });
       const expectedPage = {
         path: '/___templates/_default/',
         component: './src/templates/_default.jsx',
@@ -68,13 +68,13 @@ describe('createPages', () => {
           slug: '/___templates/_default/',
         },
       };
-      expect(boundActionCreators.createPage.mock.calls[0][0]).toStrictEqual(expectedPage);
+      expect(actions.createPage.mock.calls[0][0]).toStrictEqual(expectedPage);
     });
     it('does not generate templates on production environment', async () => {
       process.env.NODE_ENV = 'production';
       prepareMocks(templates);
-      await createPages({ actions: boundActionCreators, graphql, getNode });
-      expect(boundActionCreators.createPage).not.toHaveBeenCalled();
+      await createPages({ actions, graphql, getNode });
+      expect(actions.createPage).not.toHaveBeenCalled();
     });
   });
 });

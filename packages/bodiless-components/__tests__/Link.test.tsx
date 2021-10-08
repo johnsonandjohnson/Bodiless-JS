@@ -13,6 +13,7 @@
  */
 
 import React from 'react';
+import Tooltip, { TooltipProps } from 'rc-tooltip/lib/Tooltip';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount, ReactWrapper } from 'enzyme';
 
@@ -31,7 +32,7 @@ const Link = asBodilessLink()('a');
 let wrapper: ReactWrapper;
 let menuButton: ReactWrapper;
 let menuForm: ReactWrapper;
-let menuPopup: ReactWrapper;
+let menuPopup: ReactWrapper<TooltipProps>;
 
 const firstLinkProps = { nodeKey: 'oneLink' };
 const secondLinkProps = { nodeKey: 'anotherLink' };
@@ -54,14 +55,14 @@ describe('link interactions', () => {
 
   it('link button should toggle context menu visibility when clicked', () => {
     menuButton.simulate('click');
-    let tooltips = wrapper.find('Tooltip');
+    let tooltips = wrapper.find(Tooltip);
 
     menuPopup = tooltips.at(1);
     expect(menuPopup.prop('visible')).toBeTruthy();
 
     menuButton.simulate('click');
 
-    tooltips = wrapper.find('Tooltip');
+    tooltips = wrapper.find(Tooltip);
 
     menuPopup = tooltips.at(1);
     expect(menuPopup.prop('visible')).toBeFalsy();
@@ -69,7 +70,7 @@ describe('link interactions', () => {
 
   it('context form should have link-href input field with cancel and done buttons', () => {
     menuButton.simulate('click');
-    const tooltips = wrapper.find('Tooltip');
+    const tooltips = wrapper.find(Tooltip);
     menuPopup = tooltips.at(1);
     menuForm = menuPopup.find('form');
 
@@ -98,7 +99,7 @@ describe('link interactions', () => {
     menuButton = wrapper.find('i').first();
     menuButton.simulate('click');
 
-    menuPopup = wrapper.find('Tooltip[visible=true]').at(1);
+    menuPopup = wrapper.find(Tooltip).filter('[visible=true]').at(1);
     menuForm = menuPopup.find('form');
     inputField = menuForm.find('input#link-href');
 
@@ -110,7 +111,7 @@ describe('link interactions', () => {
     menuButton = wrapper.find('i').first();
     menuButton.simulate('click');
 
-    menuPopup = wrapper.find('Tooltip[visible=true]').at(1);
+    menuPopup = wrapper.find(Tooltip).filter('[visible=true]').at(1);
     menuForm = menuPopup.find('form');
     inputField = menuForm.find('input#link-href');
     expect(inputField.prop('value')).toBe('/ok/');

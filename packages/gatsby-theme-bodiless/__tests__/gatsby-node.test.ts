@@ -24,7 +24,7 @@ jest.mock('path', () => ({
 }));
 
 describe('gatsby-node', () => {
-  const boundActionCreators: any = {};
+  const actions: any = {};
   const generateData = (n: number) => {
     const edges = Array.from({ length: n }, (v, k) => k + 1).map((val, i) => ({
       node: {
@@ -51,7 +51,7 @@ describe('gatsby-node', () => {
     beforeEach(() => {
       jest.clearAllMocks();
 
-      boundActionCreators.createPage = jest.fn();
+      actions.createPage = jest.fn();
       graphql = jest.fn();
       getNode = jest.fn();
     });
@@ -61,10 +61,10 @@ describe('gatsby-node', () => {
       fs.existsSync.mockReturnValue(true);
 
       graphql.mockResolvedValue(generateData(countPages));
-      return createPages({ actions: boundActionCreators, graphql, getNode })
+      return createPages({ actions, graphql, getNode })
         .then(() => {
-          // expect(boundActionCreators.createPage.mock.calls).toMatchSnapshot();
-          expect(boundActionCreators.createPage.mock.calls.length).toBe(countPages);
+          // expect(actions.createPage.mock.calls).toMatchSnapshot();
+          expect(actions.createPage.mock.calls.length).toBe(countPages);
         });
     });
 
@@ -73,10 +73,10 @@ describe('gatsby-node', () => {
       fs.existsSync.mockReturnValueOnce(true);
 
       graphql.mockResolvedValue(generateData(countPages));
-      return createPages({ actions: boundActionCreators, graphql, getNode })
+      return createPages({ actions, graphql, getNode })
         .then(() => {
-          // expect(boundActionCreators.createPage.mock.calls).toMatchSnapshot();
-          expect(boundActionCreators.createPage.mock.calls.length).toBe(countPages);
+          // expect(actions.createPage.mock.calls).toMatchSnapshot();
+          expect(actions.createPage.mock.calls.length).toBe(countPages);
         });
     });
 
@@ -85,10 +85,10 @@ describe('gatsby-node', () => {
       fs.existsSync.mockReturnValueOnce(false);
 
       graphql.mockResolvedValue(generateData(countPages));
-      return createPages({ actions: boundActionCreators, graphql, getNode })
+      return createPages({ actions, graphql, getNode })
         .then(() => {
-          // expect(boundActionCreators.createPage.mock.calls).toMatchSnapshot();
-          expect(boundActionCreators.createPage.mock.calls.length).toBe(countPages);
+          // expect(actions.createPage.mock.calls).toMatchSnapshot();
+          expect(actions.createPage.mock.calls.length).toBe(countPages);
         });
     });
   });

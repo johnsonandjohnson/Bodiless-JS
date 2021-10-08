@@ -110,7 +110,7 @@ export type FinalUI = {
   AccordionIconContract: ComponentType<HTMLProps<HTMLSpanElement>> | string;
   // A span element containing the icon for the expanded menu
   AccordionIconExpand: ComponentType<HTMLProps<HTMLSpanElement>> | string;
-  // A span element containting icon for the close menu button
+  // A span element containing icon for the close menu button
   CloseMenuIcon: ComponentType<HTMLProps<HTMLSpanElement>> | string;
   // A div the wraps an individual component box
   ItemBox: ComponentType<HTMLProps<HTMLDivElement>> | string;

@@ -142,7 +142,7 @@ include:
 * `defaultGrid` - For general use throughout the app.
 * `xlGrid` - Extra Large values that are
 handy when we work with max-width, max-height etc.
-* `negativeGrid` - Usefull when we need negative
+* `negativeGrid` - Useful when we need negative
 margins or with top, bottom, left, right styles.
 * `percentGrid` - For the places where we need %
 values. (`bl-w-full` --> ``width: 100%``).

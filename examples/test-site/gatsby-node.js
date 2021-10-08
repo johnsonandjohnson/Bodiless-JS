@@ -21,7 +21,10 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
     const reactPath = path.resolve('./node_modules', 'react');
     const reactAlias = fs.existsSync(reactPath) ? { react: reactPath } : {};
     actions.setWebpackConfig({
-      devtool: 'cheap-module-source-map',
+      // Set devtool to `false` below to disable sourcemap on performance improvement.
+      // or set devtool as 'cheap-module-source-map' to re-enable sourcemap.
+      // See https://webpack.js.org/configuration/devtool/
+      devtool: false,
       resolve: {
         plugins: [new TsconfigPathsPlugin()],
         alias: reactAlias,

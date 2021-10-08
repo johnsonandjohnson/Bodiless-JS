@@ -16,6 +16,7 @@ describe('Card testing', function () {
 
   before(function () {
     cy.visit(pagePath);
+    cy.wait(5000);
     cy.clickEdit();
   })
 
