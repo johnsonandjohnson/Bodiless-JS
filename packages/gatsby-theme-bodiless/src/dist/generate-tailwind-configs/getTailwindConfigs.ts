@@ -13,8 +13,14 @@
  */
 
 import fs from 'fs';
+import { merge } from 'lodash';
 import path from 'path';
 import locateFiles from '../generate-env-vars/locateFiles';
+
+type Pkg = {
+  packageName: string,
+  packagePath: string,
+};
 
 /**
  * reads package.json and returns content of key of the package
@@ -52,21 +58,45 @@ const findTailwindConfigPaths = async () => locateFiles({
 });
 
 /**
- * Combination of all available tailwind configs.
- * @param deps Site level dependencies
+ * Merge all dependencies by giving pkgs.
  */
-const getBodilessTailwindConfig = async (deps: string[]) => {
+const getAllDeps = (pkgs: Pkg[]) => {
+  let allDeps = {};
+  pkgs.forEach(item => {
+    const deps = getDependenciesFromPackageJson(
+      path.resolve(item.packagePath, 'package.json'),
+    );
+    allDeps = merge(allDeps, deps);
+  });
+  return Object.keys(allDeps);
+};
+
+/**
+ * Combination of all available tailwind configs.
+ * @param siteDeps Site level dependencies
+ */
+const getBodilessTailwindConfig = async (siteDeps: string[]) => {
+  // 1. walking the node_modules to find the packages which has the site.tailwind.config.js file
   const paths = await findTailwindConfigPaths();
-  const paths$1 = paths.map(filePath => {
+  const pkgsHaveTailwindConfig = paths.map(filePath => {
     const packagePath = path.resolve(filePath, '..');
     const packageNameFromPackageJson = getPackageNameFromPackageJson(
       path.resolve(packagePath, 'package.json'),
     );
     const packageName = packageNameFromPackageJson || path.basename(packagePath);
-    return packageName;
+    return { packageName, packagePath };
   });
 
-  return paths$1.filter(packageName => deps.indexOf(packageName) > -1);
+  // 2. filter the packages by site's dependencies
+  const pkgsInSite = pkgsHaveTailwindConfig
+    .filter(item => siteDeps.indexOf(item.packageName) > -1);
+
+  // 3. merge all package's(whose dependencies should be searched) dependencies to one array
+  const allDeps = getAllDeps(pkgsInSite);
+
+  // 4. filter the final list by the array(from step 3)
+  return pkgsHaveTailwindConfig
+    .filter(item => allDeps.indexOf(item.packageName) > -1);
 };
 
 export {
