@@ -89,6 +89,8 @@ const getBodilessTailwindConfig = async (siteName: string, siteDeps: string[]) =
           if (siteDeps.indexOf(item.packageName) === -1) {
             console.warn(`warn - Please add ${item.packageName} to site dependencies`);
           }
+        } else {
+          reject();
         }
         return true;
       });
