@@ -16,6 +16,7 @@
 import { resolve as resolvePath } from 'path';
 import {
   getDependenciesFromPackageJson,
+  getPackageNameFromPackageJson,
   getBodilessTailwindConfig,
 } from './getTailwindConfigs';
 import { writeToFile } from '../generate-env-vars/utils';
@@ -44,8 +45,9 @@ const template = `
  */
 const init = async () => {
   const pkg = resolvePath('package.json');
+  const pdgName = getPackageNameFromPackageJson(pkg);
   const deps = Object.keys(getDependenciesFromPackageJson(pkg));
-  const cfg = await getBodilessTailwindConfig(deps);
+  const cfg = await getBodilessTailwindConfig(pdgName, deps);
   const cfgs = cfg.map(item => template.replace(/#pkg/g, item.packageName)).join(',');
   await writeToFile('tailwind.config.js', templateWrap.replace(/#pkgs/g, cfgs));
 };

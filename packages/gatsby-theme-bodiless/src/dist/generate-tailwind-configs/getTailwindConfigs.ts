@@ -13,7 +13,7 @@
  */
 
 import fs from 'fs';
-import { merge } from 'lodash';
+import { exec } from 'child_process';
 import path from 'path';
 import locateFiles from '../generate-env-vars/locateFiles';
 
@@ -58,24 +58,11 @@ const findTailwindConfigPaths = async () => locateFiles({
 });
 
 /**
- * Merge all dependencies by giving pkgs.
- */
-const getAllDeps = (pkgs: Pkg[]) => {
-  let allDeps = {};
-  pkgs.forEach(item => {
-    const deps = getDependenciesFromPackageJson(
-      path.resolve(item.packagePath, 'package.json'),
-    );
-    allDeps = merge(allDeps, deps);
-  });
-  return Object.keys(allDeps);
-};
-
-/**
  * Combination of all available tailwind configs.
+ * @param siteName Site package name
  * @param siteDeps Site level dependencies
  */
-const getBodilessTailwindConfig = async (siteDeps: string[]) => {
+const getBodilessTailwindConfig = async (siteName: string, siteDeps: string[]) => {
   // 1. walking the node_modules to find the packages which has the site.tailwind.config.js file
   const paths = await findTailwindConfigPaths();
   const pkgsHaveTailwindConfig = paths.map(filePath => {
@@ -85,18 +72,37 @@ const getBodilessTailwindConfig = async (siteDeps: string[]) => {
     );
     const packageName = packageNameFromPackageJson || path.basename(packagePath);
     return { packageName, packagePath };
+  }).filter(item => item.packageName !== siteName);
+
+  const pkgs: Pkg[] = [];
+  const pkgFilters: Promise<boolean>[] = [];
+
+  // 2. make sure the packages have been used in the site package,
+  //    even the packages are not listing in site directly.
+  pkgsHaveTailwindConfig.forEach(item => {
+    pkgFilters.push(new Promise((resolve, reject) => {
+      exec(`npm ls --json ${item.packageName}`, (err, stdout) => {
+        if (err) {
+          reject(err);
+          return false;
+        }
+
+        if (stdout.indexOf(item.packageName) > -1) {
+          resolve(true);
+          pkgs.push(item);
+          // if the package is not listed in site package, print a warning
+          if (siteDeps.indexOf(item.packageName) === -1) {
+            console.warn(`warn - Please add ${item.packageName} to site dependencies`);
+          }
+        }
+        return true;
+      });
+    }));
   });
 
-  // 2. filter the packages by site's dependencies
-  const pkgsInSite = pkgsHaveTailwindConfig
-    .filter(item => siteDeps.indexOf(item.packageName) > -1);
+  await Promise.all(pkgFilters);
 
-  // 3. merge all package's(whose dependencies should be searched) dependencies to one array
-  const allDeps = getAllDeps(pkgsInSite);
-
-  // 4. filter the final list by the array(from step 3)
-  return pkgsHaveTailwindConfig
-    .filter(item => allDeps.indexOf(item.packageName) > -1);
+  return pkgs;
 };
 
 export {
