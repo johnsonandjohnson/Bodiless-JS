@@ -82,11 +82,6 @@ const getBodilessTailwindConfig = async (siteName: string, siteDeps: string[]) =
   pkgsHaveTailwindConfig.forEach(item => {
     pkgFilters.push(new Promise((resolve, reject) => {
       exec(`npm ls --json ${item.packageName}`, (err, stdout) => {
-        if (err) {
-          reject(err);
-          return false;
-        }
-
         if (stdout.indexOf(item.packageName) > -1) {
           resolve(true);
           pkgs.push(item);
