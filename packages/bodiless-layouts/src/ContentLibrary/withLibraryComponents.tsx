@@ -1,13 +1,46 @@
 import React, { FC } from 'react';
-import { useContextMenuForm, createMenuOptionGroup, useMenuOptionUI } from '@bodiless/core';
+import {
+  useContextMenuForm,
+  createMenuOptionGroup,
+  useMenuOptionUI,
+  useNode,
+  ContentNode,
+  withAbsoluteNode,
+} from '@bodiless/core';
 import type { OptionGroupDefinition } from '@bodiless/core';
 import {
   withDesign, HOC, asToken,
 } from '@bodiless/fclasses';
-// import type { SortableChildProps } from '../FlowContainer/types';
+import { withFacet, withTitle, withDesc } from '../meta';
+import { useFlowContainerDataHandlers } from '../FlowContainer/model';
+import type { FlowContainerItem } from '../FlowContainer/types';
+import type { FlowContainerDataHandlers } from '../FlowContainer/model';
 
-const withLibraryMenuOptions: HOC<string, number, boolean> = Component => {
-  const useMenuOptions = () => {
+export type LibraryNodeData = {
+  componentKey: string,
+  title?: string,
+  description?: string,
+};
+
+type LibraryMenuOptionSubmitValues = {
+  'library-name': string;
+  'library-description': string;
+};
+
+type LibraryMetaValues = {
+  title: string;
+  description: string;
+  componentKey: string
+};
+
+const DEFAULT_CONTENT_LIBRARY_PATH = ['Site', 'default-library'];
+
+const withLibraryMenuOptions: HOC = Component => {
+  const useContentLibMenuOptions = (
+    item: FlowContainerItem,
+    sourceNode: ContentNode<any>,
+    handler: FlowContainerDataHandlers,
+  ) => {
     const renderForm = () => {
       const {
         ComponentFormLabel,
@@ -18,26 +51,80 @@ const withLibraryMenuOptions: HOC<string, number, boolean> = Component => {
       return (
         <>
           <ComponentFormFieldWrapper>
-            <ComponentFormLabel htmlFor="name-library-name">Name</ComponentFormLabel>
-            <ComponentFormText field="new-library-name" id="name-library-name" aria-describedby="name" placeholder="" />
+            <ComponentFormLabel htmlFor="id-library-name">Name</ComponentFormLabel>
+            <ComponentFormText field="library-name" id="id-library-name" aria-describedby="name" placeholder="Default Name" />
           </ComponentFormFieldWrapper>
           <ComponentFormFieldWrapper>
-            <ComponentFormLabel htmlFor="name-library-description">Description</ComponentFormLabel>
-            <ComponentFormText field="new-library-description" id="name-library-description" aria-describedby="description" placeholder="" />
+            <ComponentFormLabel htmlFor="id-library-description">Description</ComponentFormLabel>
+            <ComponentFormText field="library-description" id="id-library-description" aria-describedby="description" placeholder="" />
           </ComponentFormFieldWrapper>
         </>
       );
     };
 
-    const submitValues = (value: any) => {
-      // @todo: add to library
-      console.log('Save library', value);
+    const submitValues = (values: LibraryMenuOptionSubmitValues) => {
+      const childKeys = (nodeParent: ContentNode<any>) => {
+        const aParent = nodeParent.path;
+        const aCandidates = nodeParent.keys.map(key => key.split('$'));
+        return Object.keys(aCandidates.reduce(
+          (acc, next) => {
+            if (next.length <= aParent.length) return acc;
+            for (let i = 0; i < aParent.length; i += 1) {
+              if (aParent[i] !== next[i]) return acc;
+            }
+            return { ...acc, [next[aParent.length]]: true };
+          },
+          {},
+        ));
+      };
+
+      // @todo: move to @bodiless/core? ./util
+      const moveNode = (
+        source: ContentNode<any>,
+        dest: ContentNode<any>,
+        copyChildren: boolean,
+      ) => {
+        dest.setData(source.data);
+        if (copyChildren) {
+          childKeys(source).forEach(key => moveNode(source.child(key), dest.child(key), true));
+        }
+        source.delete();
+      };
+
+      const addNodeMetaData = (
+        dest: ContentNode<any>,
+        data: LibraryMetaValues,
+      ) => {
+        Object.assign(dest.data, data);
+        dest.setData(dest.data);
+      };
+
+      /**
+       * Move the original flow container node to content library node,
+       * with path under DEFAULT_CONTENT_LIBRARY_PATH, and update flow container
+       * item to new type as 'ContentLibrary'.
+       */
+      const destNodePath = [
+        ...DEFAULT_CONTENT_LIBRARY_PATH,
+        item.uuid,
+      ].join('$');
+      const destNode = sourceNode.peer(destNodePath);
+      moveNode(sourceNode, destNode, true);
+      const { updateFlowContainerItem } = handler;
+      updateFlowContainerItem({ ...item, type: 'ContentLibrary' });
+
+      // Library content meta data
+      addNodeMetaData(destNode, {
+        title: values['library-name'],
+        description: values['library-description'],
+        componentKey: item.type,
+      });
     };
 
     const form = useContextMenuForm({ renderForm, submitValues });
     const baseOption: OptionGroupDefinition = {
       name: 'content-library',
-      label: 'Library',
+      label: item.type === 'ContentLibrary' ? 'Unlink' : 'Library',
       groupLabel: 'Content',
       groupMerge: 'none',
       icon: 'account_balance',
@@ -50,7 +137,6 @@ const withLibraryMenuOptions: HOC<string, number, boolean> = Component => {
     };
     const finalOption = {
       ...baseOption,
-      // @todo: ...useOverrides(props),
       handler: () => form,
     };
     return createMenuOptionGroup(finalOption);
@@ -59,34 +145,101 @@ const withLibraryMenuOptions: HOC<string, number, boolean> = Component => {
   const WithLibraryMenuOptions: FC<any> = (props: any) => {
     const {
       useGetMenuOptions,
+      flowContainerItem,
       ...rest
     } = props;
 
-    const libMenuOptions = useMenuOptions();
+    const { node } = useNode<any>();
+    const handler = useFlowContainerDataHandlers();
+    const contentLibMenuOptions = useContentLibMenuOptions(flowContainerItem, node, handler);
     const newUseGetMenuOptions = (fcProps: any) => {
       const defaultMenuOptions = useGetMenuOptions(fcProps);
       return () => [
         ...defaultMenuOptions(),
-        ...libMenuOptions,
+        ...contentLibMenuOptions,
       ];
     };
 
-    // @todo: remove debug log
-    console.log(
-      Object.keys(props),
-      'withLibraryMenuOptions',
+    return (
+      <Component
+        {...rest}
+        flowContainerItem={flowContainerItem}
+        useGetMenuOptions={newUseGetMenuOptions}
+      />
     );
-    // console.log(useGetMenuOptions, 'useGetMenuOptions');
-    // console.log(flowContainerItem, 'flowContainerItem');
-    return <Component {...rest} useGetMenuOptions={newUseGetMenuOptions} />;
   };
   return WithLibraryMenuOptions;
 };
 
-const withLibraryComponents = withDesign({
-  ComponentWrapper: asToken(
-    withLibraryMenuOptions,
-  ),
-});
+// @todo: type any should be refactored.
+export const withLibraryNodeDesigns: HOC = Component => {
+  const WithLibraryNodeDesign: FC<any> = (props: any) => {
+    const {
+      design,
+      ...rest
+    } = props;
 
-export default withLibraryComponents;
+    const { node } = useNode();
+    const ContentLibraryKeys = node.keys.filter((key: string) => (
+      key.startsWith(DEFAULT_CONTENT_LIBRARY_PATH.join('$')))).filter((key: string) => (
+      (key.split('$').length === 3)));
+
+    const libraryNodes: ContentNode<LibraryNodeData>[] = ContentLibraryKeys.map((key: string) => (
+      node.peer<LibraryNodeData>(key)
+    ));
+
+    const libraryDesigns = {};
+    const withType = withFacet('Type');
+    libraryNodes.forEach((libNode: ContentNode<LibraryNodeData>) => {
+      const {
+        componentKey, title = '', description = '',
+      } = libNode.data;
+
+      const libraryComponent = asToken(
+        withType('Content Library')(),
+        withTitle(title),
+        withDesc(description),
+        withAbsoluteNode(libNode),
+      );
+      Object.assign(libraryDesigns, {
+        [componentKey]: libraryComponent,
+      });
+    });
+
+    // const libraryDesigns = libraryNodes.reduce(
+    //   (d, libraryNode) => ({
+    //     ...d,
+    //     [`Lib:${libraryNode.data.componentKey}`]: asToken(
+    //       design[libraryNode.data.componentKey],
+    //       withAbsoluteNode(libraryNode),
+    //     ),
+    //   }),
+    //   {},
+    // );
+
+    const extDesign = {
+      ...design,
+      ...libraryDesigns,
+    };
+
+    return (
+      <Component
+        {...rest}
+        design={extDesign}
+      />
+    );
+  };
+
+  return WithLibraryNodeDesign;
+};
+
+const withLibraryComponents = asToken(
+  withDesign({
+    ComponentWrapper: asToken(
+      withLibraryMenuOptions,
+    ),
+  }),
+  withLibraryNodeDesigns,
+);
+
+export { withLibraryComponents };

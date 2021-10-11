@@ -21,7 +21,7 @@ import {
   useEditContext, useUUID, useContextActivator, useExtendHandler,
   useGetter, useLocalStorage, useClickOutside,
 } from './hooks';
-import withNode, { withNodeKey } from './withNode';
+import withNode, { withNodeKey, withAbsoluteNode } from './withNode';
 import withSidecarNodes, { startSidecarNodes, endSidecarNodes } from './withSidecarNodes';
 import withEditButton, { createMenuOptionGroup } from './withEditButton';
 import useContextMenuForm, { contextMenuForm, ContextMenuForm } from './contextMenuForm';
@@ -100,6 +100,7 @@ export {
   createMenuOptionGroup,
   useEditFormProps,
   withNode,
+  withAbsoluteNode,
   withNodeKey,
   withSidecarNodes,
   withCompoundForm,

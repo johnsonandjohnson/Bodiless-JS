@@ -116,7 +116,7 @@ const perserveMeta = (hoc: HOC): HOC => Component => (
 
 /**
  * withFacet is expect to be passed to an on function and takes a term and and hoc (using curring)
- *  and returns a Varient that can be used in the on function
+ *  and returns a Variant that can be used in the on function
  * @param cat Category that the Component will be apart
  * @param term the Term in the Category associated with the Component
  * @param hocs the HOC to apply to the Component

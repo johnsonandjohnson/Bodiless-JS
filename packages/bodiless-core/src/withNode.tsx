@@ -15,6 +15,7 @@
 import React, { FC } from 'react';
 import { HOC, Injector } from '@bodiless/fclasses';
 import NodeProvider, { useNode } from './NodeProvider';
+import { ContentNode } from './ContentNode';
 import { WithNodeProps } from './Types/NodeTypes';
 
 /**
@@ -61,6 +62,22 @@ const withNodeKey = (
     return <Component {...nodeKeyProps} {...props} />;
   };
   return WithNodeKey;
+};
+
+/**
+ * HOC provides the content node directly to component without nodeKey. This is
+ * used in case of data NOT from parent content node.
+ *
+ * @param node
+ * @returns HOC
+ */
+export const withAbsoluteNode = (node: ContentNode<any>): HOC => Component => {
+  const WithAbsoluteNode = (props: any) => (
+    <NodeProvider node={node}>
+      <Component {...props} />
+    </NodeProvider>
+  );
+  return WithAbsoluteNode;
 };
 
 export default withNode;

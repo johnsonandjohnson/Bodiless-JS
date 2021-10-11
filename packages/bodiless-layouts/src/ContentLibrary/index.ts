@@ -13,7 +13,7 @@
  */
 
 import withContentLibrary from './withContentLibrary';
-import withLibraryComponents from './withLibraryComponents';
+import { withLibraryComponents } from './withLibraryComponents';
 
 // eslint-disable-next-line import/prefer-default-export
 export { withContentLibrary, withLibraryComponents };
