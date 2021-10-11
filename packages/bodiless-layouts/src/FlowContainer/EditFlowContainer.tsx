@@ -43,7 +43,7 @@ const EditFlowContainerComponents: FlowContainerComponents = {
 /**
  * An editable version of the FlowContainer container.
  */
-const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerProps) => {
+const EditFlowContainer: FC<EditFlowContainerProps> = (props: EditFlowContainerProps) => {
   const {
     components, ui, snapData, getDefaultWidth, itemButtonGroupLabel,
   } = props;

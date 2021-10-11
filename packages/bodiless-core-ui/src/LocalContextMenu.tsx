@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC, ComponentType } from 'react';
+import React, { FC, ComponentType, ReactNode } from 'react';
 import ReactTooltip from 'rc-tooltip';
 import { flow } from 'lodash';
 import {
@@ -49,7 +49,10 @@ const Toolbar = flow(
   addProps({ role: 'toolbar', 'aria-label': 'Local Context Menu' }),
 )(Div);
 
-const LocalTooltip: FC<ReactTooltip['props']> = props => (
+type Props = {
+  overlay: ReactNode | (() => ReactNode);
+};
+const LocalTooltip: FC<Props> = (props: Props) => (
   <ReactTooltip
     {...props}
     placement="bottomLeft"

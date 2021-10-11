@@ -14,4 +14,5 @@
 
 import React from 'react';
 
-export default () => <h1>Special Template</h1>;
+const main = () => <h1>Special Template</h1>;
+export default main;

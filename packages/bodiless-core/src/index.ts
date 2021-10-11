@@ -46,7 +46,9 @@ import {
 } from './hoc';
 import { ifToggledOff, ifToggledOn, withFlowToggle } from './withFlowToggle';
 import { ifEditable, ifReadOnly, useEditToggle } from './withEditToggle';
-import type { ContextMenuFormProps, IContextMenuItemProps, TMenuOption } from './Types/ContextMenuTypes';
+import type {
+  ContextMenuFormProps, IContextMenuItemProps, TMenuOption, TooltipProps,
+} from './Types/ContextMenuTypes';
 import type { PageEditContextInterface } from './PageEditContext/types';
 import type {
   OptionGroupDefinition, EditButtonOptions, EditButtonProps, UseBodilessOverrides,
@@ -170,6 +172,7 @@ export type {
   MenuOptionsDefinition,
   EditFormSnippetOptions,
   NodeDataHandlers,
+  TooltipProps,
 };
 
 export type Bodiless<P, Q> = (C: ComponentType<P> | string) => ComponentType<Q>;
