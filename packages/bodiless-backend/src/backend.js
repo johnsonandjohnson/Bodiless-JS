@@ -283,6 +283,7 @@ class Backend {
     this.setRoute(`${backendPrefix}/log`, Backend.log);
     this.setRoute(`${backendPrefix}/pages`, Backend.setPages);
     this.setRoute(`${backendPrefix}/move`, Backend.movePage);
+    this.setRoute(`${backendPrefix}/directory/child/*`, Backend.directoryChild);
   }
 
   setRoute(route, action) {
@@ -624,6 +625,29 @@ class Backend {
           }
         });
     });
+  }
+
+  static directoryChild(route) {
+    route
+      .delete((req, res) => {
+        const pagePath = req.params[0];
+        const page = Backend.getPage(pagePath);
+
+        page.setBasePath(backendPagePath);
+
+        logger.log(`Start verify page child directory: ${page.directory}`);
+
+        page
+          .hasChildDirectory()
+          .then(error => {
+            if (error) {
+              logger.log(error);
+              res.send(error);
+            } else {
+              res.send({});
+            }
+          });
+      });
   }
 
   static setPages(route) {

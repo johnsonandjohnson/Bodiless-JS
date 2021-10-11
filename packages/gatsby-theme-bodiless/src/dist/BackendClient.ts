@@ -90,6 +90,11 @@ export default class BackendClient {
     return this.post(url, payload);
   }
 
+  directoryChild(path$: string) {
+    const url = `${this.prefix}/directory/child${path$}`;
+    return this.delete(url);
+  }
+
   commit(
     message: string,
     directories: string[],

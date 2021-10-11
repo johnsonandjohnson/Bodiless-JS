@@ -56,6 +56,14 @@ let destinationGlb: string = '';
 
 const usePagePath = () => useNode().node.pagePath;
 
+const hasPageChild = async ({ pathChild, client } : any) => {
+  const result = await handle(client.directoryChild(pathChild));
+  if (result.response && result.message === 'Success') {
+    return Promise.resolve();
+  }
+  return Promise.reject(new Error(result.message));
+};
+
 const movePage = async ({ origin, destination, client } : any) => {
   const result = await handle(client.movePage(origin, destination));
   if (result.response) {
@@ -96,6 +104,7 @@ const MovePageComp = (props : MovePageProps) => {
             <ComponentFormDescription>Move this page to a new URL.</ComponentFormDescription>
             <ComponentFormLabel>Current URL</ComponentFormLabel>
             <ComponentFormDescription>{basePathValue}</ComponentFormDescription>
+            <ComponentFormLabel>New URL</ComponentFormLabel>
             <MovePageURLField
               validateOnChange
               validateOnBlur
@@ -181,7 +190,21 @@ const formPageMove = (client: Client) => contextMenuForm({
   });
   const context = useEditContext();
   const path = getPathValue(values);
+  const pathChild = (typeof window !== 'undefined') ? window.location.pathname : '';
+
   useEffect(() => {
+    if (pathChild === '/') {
+      actualState = MovePageState.Errored;
+      setState({ status: MovePageState.Errored, errorMessage: 'The page cannot be moved.' });
+    } else {
+      hasPageChild({ pathChild, client })
+        .catch(() => {
+          actualState = MovePageState.Errored;
+          setState({ status: MovePageState.Errored, errorMessage: 'The page cannot be moved.' });
+          formApi.setValue('keepOpen', false);
+        });
+    }
+
     if (submits && path) {
       context.showPageOverlay({ hasSpinner: false });
       actualState = MovePageState.Pending;

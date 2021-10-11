@@ -76,10 +76,10 @@ const validatePagePath = (
 );
 
 /**
- * props that can be passed to NewPageURLField
+ * props that can be passed to MovePageURLField
  * disallow overriding field prop
  * if we decide to allow overriding it in the future
- * then also we need to allow overriding the second NewPageURLField input
+ * then also we need to allow overriding the second MovePageURLField input
  */
 type FieldProps = Omit<BaseFieldProps, 'field'>;
 type FieldValidate = (value: FormValue, values: FormValues) => FormError;
@@ -111,7 +111,7 @@ const fieldValueToUrl = (value: FormValue) => (typeof value === 'string'
  * and to get result page path after the form containing this field is submitted
  * @param props informed field props
  */
-const NewPageURLField = (props: FieldProps) => {
+const MovePageURLField = (props: FieldProps) => {
   const {
     ComponentFormLabel,
     ComponentFormLink,
@@ -137,13 +137,13 @@ const NewPageURLField = (props: FieldProps) => {
   } = useField({
     field: PAGE_URL_FIELD_NAME,
     validate: isFullUrl ? getPageUrlValidator(validate) : getPagePathValidator(validate),
-    placeholder: isFullUrl ? '/mypath/mypage' : 'my-page',
+    placeholder: 'thispage',
     ...rest,
   });
   const { value } = fieldState;
   const { setValue, setError } = fieldApi;
   const { onChange, ...restUserProps } = userProps;
-  const fieldLabel = isFullUrl ? 'New URL' : 'Page Path';
+  const fieldLabel = 'New URL';
   const inputClasses = isFullUrl ? INPUT_FIELD_BLOCK_CLASSES : INPUT_FIELD_INLINE_CLASSES;
   return render(
     <>
@@ -201,7 +201,7 @@ const NewPageURLField = (props: FieldProps) => {
 /**
  * function that can be used to get new page path value
  * this function should usually be invoked after an informed form
- * containing NewPageURLField field is submitted
+ * containing MovePageURLField field is submitted
  * @param values informed form values
  * @returns new page path
  */
@@ -213,6 +213,6 @@ const getPathValue = (values: FormValues) => {
   return joinPath(fieldValueToUrl(basePagePath), fieldValueToUrl(pageUrl));
 };
 
-export default NewPageURLField;
+export default MovePageURLField;
 export { getPathValue };
 export type { FieldProps };

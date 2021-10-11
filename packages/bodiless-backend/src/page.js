@@ -111,12 +111,6 @@ class Page {
       const [, pageRelativeDir] = pathDirectory.split('/data/pages/');
 
       if (!pageRelativeDir) {
-        resolve(`Invalid directory "${pathDirectory}" to move`);
-        return;
-      }
-
-      const subdirs = getDirectories(pathDirectory);
-      if (subdirs.length !== 0) {
         resolve('The page cannot be moved');
         return;
       }
@@ -130,5 +124,18 @@ class Page {
     });
     return readPromise;
   }
+
+  hasChildDirectory() {
+    const readPromise = new Promise((resolve) => {
+      const subdirs = getDirectories(this.directory);
+      if (subdirs.length !== 0) {
+        resolve('The page cannot be deleted it has child pages. To delete this page, first delete or move all child pages, and retry.');
+      } else {
+        resolve('Success');
+      }
+    });
+    return readPromise;
+  }
 }
+
 module.exports = Page;
