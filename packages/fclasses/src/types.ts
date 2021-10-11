@@ -47,9 +47,9 @@ type PP<P, A, R> = Omit<P & A, keyof R> & Partial<R>;
  *   to infer these.  If specified, this HOC can only be applied to a component whose
  *   props are of this type.
  * - A: (Added Props) The type of any props which will be *added* to the base component
- *   by this HOC.  The type of the resulting coponent's props will be the union of the base
+ *   by this HOC.  The type of the resulting component's props will be the union of the base
  *   component's props type and this type.
- * - R: (Removed Props) The tupe of any props which will *removed* from the base component.
+ * - R: (Removed Props) The type of any props which will *removed* from the base component.
  *   The type of the resulting component's props will be the the base components props with
  *   these removed.
  */
@@ -87,7 +87,7 @@ export type Token<B = {}, A = {}, R = {}> = HOC<B, A, R> & TokenProps;
 
 /**
  * An "Enhancer" is a token which produces a component which accepts additional props.
- * The new props are added to the signature of the enhanced compoennt.
+ * The new props are added to the signature of the enhanced component.
  *
  * @param A
  * The new props to be added.

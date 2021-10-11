@@ -408,12 +408,12 @@ const generateImages = async ({ imageNode, content, reporter }, options) => {
 
 const createBodilessNode = async ({
   node,
-  boundActionCreators,
+  actions,
   loadNodeContent,
   reporter,
 }, pluginOptions) => {
   const nodeContent = await loadNodeContent(node);
-  const { createNode, createParentChildLink } = boundActionCreators;
+  const { createNode, createParentChildLink } = actions;
 
   const { gatsbyImage: gatsbyImageOptions } = pluginOptions;
   const imageNode = createImageNode({ node, content: nodeContent });
@@ -469,7 +469,6 @@ exports.onCreateNode = ({
   node,
   getNode,
   actions,
-  boundActionCreators,
   loadNodeContent,
   reporter,
 }, pluginOptions) => {
@@ -488,7 +487,6 @@ exports.onCreateNode = ({
       node,
       getNode,
       actions,
-      boundActionCreators,
       loadNodeContent,
       reporter,
     }, pluginOptions);

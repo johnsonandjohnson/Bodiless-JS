@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC, ComponentType } from 'react';
+import React, { FC, ComponentType, ReactElement } from 'react';
 import { observer } from 'mobx-react-lite';
 import Tooltip from 'rc-tooltip';
 
@@ -33,7 +33,7 @@ import { PageEditContextInterface } from '../PageEditContext/types';
  */
 const onPopupAlign = (domNode: Element) => {
   const element = domNode as HTMLElement;
-  if (element.getBoundingClientRect().left <= 0) {
+  if (element.getBoundingClientRect().left < 0) {
     element.style.visibility = 'hidden';
   } else {
     element.style.visibility = 'visible';
@@ -220,7 +220,7 @@ const ContextMenuOverlay = observer<{}>(() => {
  * Wraps its children in a tooltip displaying local context menu options, but only if the
  * current context is the innermost context to which a local context menu has been assigned.
  */
-const LocalContextMenu: FC = ({ children }) => {
+const LocalContextMenu: FC<{children: ReactElement}> = ({ children }) => {
   const context = useEditContext();
   // console.log('render tooltip for', context.name);
   // let the context know it has a localMenu

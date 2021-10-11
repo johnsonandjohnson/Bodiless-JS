@@ -44,4 +44,5 @@ module.exports = {
     "browser": true,
     "node": true
   },
+  ignorePatterns: ['.eslintrc.js'],
 };

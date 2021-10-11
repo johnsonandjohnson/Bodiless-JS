@@ -1,7 +1,7 @@
 {
   "name": "bodiless-js",
   "description": "Bodiless-JS",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "keywords": [
     "gatsby"
   ],
@@ -89,7 +89,7 @@
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.3.5",
-    "eslint": "^6.8.0",
+    "eslint": "^7.27.0",
     "eslint-config-airbnb": "18.1.0",
     "eslint-config-airbnb-typescript": "^7.2.1",
     "eslint-config-prettier": "^4.2.0",
@@ -106,7 +106,7 @@
     "jest-haste-map": "^24.5.0",
     "jest-resolve": "^24.5.0",
     "jest-sonar-reporter": "^2.0.0",
-    "lerna": "^3.11.0",
+    "lerna": "^4.0.0",
     "npm-run-all": "^4.1.5",
     "ora": "^4.0.2",
     "postcss-cli": "^7.1.0",

@@ -12,27 +12,33 @@
  * limitations under the License.
  */
 
+import React, { FC } from 'react';
+import differenceWith from 'lodash/differenceWith';
+import isEmpty from 'lodash/isEmpty';
+import omit from 'lodash/omit';
+import negate from 'lodash/negate';
+import { useNode } from '@bodiless/core';
 import {
-  ifToggledOn,
-  ifToggledOff,
-} from '@bodiless/core';
-import { replaceWith, withoutProps, Enhancer } from '@bodiless/fclasses';
-import { flowRight, differenceWith, isEmpty } from 'lodash';
-import { useTagsAccessors } from '@bodiless/components';
-import { useFilterByGroupContext } from './FilterByGroupContext';
-import { TAG_ANY_KEY } from './FilterByGroupStore';
-import type { TagType } from './types';
+  Enhancer, flowIf,
+} from '@bodiless/fclasses';
 
-type ToggleByTagsProps = {
-  selectedTags: TagType[];
-};
+import type { WithFilterByTagsProps } from './types';
+import { useFilterByGroupContext, useRegisterItem } from './FilterByGroupContext';
+import { TAG_ANY_KEY } from './FilterByGroupStore';
+import { useTagsAccessors } from '../TagButton';
 
 /**
- * Determine which component to show based on selected tags.
+ * @private
+ * Determine whether a component should be displayed based on currently selected
+ * tags.
+ *
  * @param selectedTags
- *  The selected tags to use.
+ * The selected tags to use.
+ *
+ * @returns
+ * True if the component should be displayed, false otherwise.
  */
-const useToggleByTags = ({ selectedTags }: ToggleByTagsProps) => {
+const useToggleByTags = ({ selectedTags }: WithFilterByTagsProps) => {
   const { multipleAllowedTags } = useFilterByGroupContext();
   const { getTags } = useTagsAccessors();
   const tags = getTags();
@@ -69,13 +75,31 @@ const useToggleByTags = ({ selectedTags }: ToggleByTagsProps) => {
   );
 };
 
-const ifTagsSelected = ifToggledOn(useToggleByTags);
-const ifTagsNotSelected = ifToggledOff(useToggleByTags);
+/**
+ * Flow toggle to apply HOCs only if an item has all selected tags.
+ */
+const ifTagsSelected = flowIf(useToggleByTags);
 
-const withFilterByTags: Enhancer<ToggleByTagsProps> = flowRight(
-  ifTagsNotSelected(replaceWith(() => null)),
-  withoutProps(['selectedTags']),
-);
+/**
+ * Flow toggle to apply HOCs only if an item does not have all selected tags.
+ */
+const ifTagsNotSelected = flowIf(negate(useToggleByTags));
 
-export { ifTagsSelected, ifTagsNotSelected };
+/**
+ * HOC to make an item filterable by tags. Must be applied with access to the
+ * node containing the item's tags, and within the FilterByGroup context.
+ */
+const withFilterByTags: Enhancer<WithFilterByTagsProps> = Component => {
+  const WithFilterByTags: FC<any> = (props: WithFilterByTagsProps) => {
+    const { node } = useNode();
+    const [id] = node.path.slice(-2);
+    const isDisplayed = useToggleByTags(props);
+    const { getFilteredItemData = () => {}, ...rest } = props;
+    useRegisterItem({ id, isDisplayed, data: getFilteredItemData(node) });
+    return isDisplayed ? <Component {...omit(rest, 'selectedTags') as any} /> : <></>;
+  };
+  return WithFilterByTags;
+};
+
+export { ifTagsSelected, ifTagsNotSelected, useToggleByTags };
 export default withFilterByTags;

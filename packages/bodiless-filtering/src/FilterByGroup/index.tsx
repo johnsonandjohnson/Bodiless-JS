@@ -17,12 +17,17 @@ import { TestableFilterByGroup, asTestableFilterByGroup } from './FilterByGroupT
 import {
   useFilterByGroupContext,
   useIsFilterTagSelected,
-  withFBGSuggestions,
   withTagProps,
+  useRegisterItem,
 } from './FilterByGroupContext';
 import asFilterableByGroup from './asFilterableByGroup';
 import { Tag } from './FilterByGroupStore';
-import type { FilterByGroupComponents, TagType } from './types';
+import type {
+  FilterByGroupComponents,
+  TagType,
+  FilterTagType,
+  FilteredItemType,
+} from './types';
 import { asResponsiveFilter } from './Filter';
 import withFilterByTags from './withFilterByTags';
 
@@ -31,10 +36,10 @@ export {
   TestableFilterByGroup,
   asTestableFilterByGroup,
   asFilterableByGroup,
-  withFBGSuggestions,
   useFilterByGroupContext,
   useIsFilterTagSelected,
   withTagProps,
+  useRegisterItem,
   Tag,
   asResponsiveFilter,
   withFilterByTags,
@@ -43,6 +48,9 @@ export {
 export type {
   FilterByGroupComponents,
   TagType,
+  FilterTagType,
+  FilteredItemType,
 };
 
+export * from './CategoryListContext';
 export * from './token';

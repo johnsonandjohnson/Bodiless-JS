@@ -32,4 +32,5 @@ module.exports = {
     "no-param-reassign": 0,
     "no-bitwise": 0,
   },
+  ignorePatterns: ['.eslintrc.js'],
 }
