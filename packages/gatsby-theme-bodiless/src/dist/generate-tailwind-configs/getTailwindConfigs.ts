@@ -17,11 +17,6 @@ import { exec } from 'child_process';
 import path from 'path';
 import locateFiles from '../generate-env-vars/locateFiles';
 
-type Pkg = {
-  packageName: string,
-  packagePath: string,
-};
-
 /**
  * reads package.json and returns content of key of the package
  * returns undefined if package.json does not exist or if there is a file parsing error
@@ -74,7 +69,7 @@ const getBodilessTailwindConfig = async (siteName: string, siteDeps: string[]) =
     return { packageName, packagePath };
   }).filter(item => item.packageName !== siteName);
 
-  const pkgs: Pkg[] = [];
+  const pkgs: string[] = [];
   const pkgFilters: Promise<boolean>[] = [];
 
   // 2. make sure the packages have been used in the site package,
@@ -82,16 +77,19 @@ const getBodilessTailwindConfig = async (siteName: string, siteDeps: string[]) =
   pkgsHaveTailwindConfig.forEach(item => {
     pkgFilters.push(new Promise((resolve, reject) => {
       exec(`npm ls --json ${item.packageName}`, (err, stdout) => {
-        if (stdout.indexOf(item.packageName) > -1) {
-          resolve(true);
-          pkgs.push(item);
-          // if the package is not listed in site package, print a warning
-          if (siteDeps.indexOf(item.packageName) === -1) {
-            console.warn(`warn - Please add ${item.packageName} to site dependencies`);
-          }
-        } else {
+        if (stdout.indexOf(item.packageName) === -1) {
           reject();
+          return false;
         }
+
+        if (siteDeps.indexOf(item.packageName) > -1) {
+          pkgs.push(item.packageName);
+        } else {
+          // if the package is not listed in site package, use absolute path
+          pkgs.push(item.packagePath);
+        }
+
+        resolve(true);
         return true;
       });
     }));
