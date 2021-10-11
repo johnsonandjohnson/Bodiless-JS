@@ -29,7 +29,7 @@ const mockBackendResponse = (data: ResponseData, status = 200) => ({
       ...data.upstream,
     },
     production: {
-      branch: 'origin/master',
+      branch: 'origin/main',
       ...data.production,
     },
     local: {
@@ -79,7 +79,7 @@ const upstreamChangesOnlyClient = mockClient({
 const mockChangesClient = mockClient({
   ...defaultResponse,
   production: {
-    branch: 'origin/master',
+    branch: 'origin/main',
     commits: ['Test Commit'],
     files: ['packages/gatsby-theme-bodiless/src/dist/RemoteChanges.tsx'],
   },
@@ -88,7 +88,7 @@ const mockChangesClient = mockClient({
 const nonPullableChangesClient = mockClient({
   ...defaultResponse,
   production: {
-    branch: 'origin/master',
+    branch: 'origin/main',
     commits: ['Test Commit'],
     files: ['packages/gatsby-theme-bodiless/src/dist/package-lock.json'],
   },
