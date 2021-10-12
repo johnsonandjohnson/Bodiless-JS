@@ -24,12 +24,13 @@ import {
 import { withShowDesignKeys } from '@bodiless/fclasses';
 import { observer } from 'mobx-react-lite';
 import { ContextWrapper, PageEditor } from '@bodiless/core-ui';
-import { withPageDisableButton, withPageCloneButton } from '@bodiless/components';
+import { withPageDisableButton } from '@bodiless/components';
 import GatsbyNodeProvider, {
   Props as NodeProviderProps,
 } from './GatsbyNodeProvider';
 import GatsbyPageProvider, { PageProviderProps } from './GatsbyPageProvider';
 import withNewPageButton from './withNewPageButton';
+import withClonePageButton from './withClonePageButton';
 import useGitButtons from './useGitButtons';
 
 type FinalUI = {
@@ -53,7 +54,7 @@ const NotificationButton = withNotificationButton(Fragment);
 const SwitcherButton = withSwitcherButton(Fragment);
 const NewPageButton = withNewPageButton(Fragment);
 const DisablePageButton = withPageDisableButton(Fragment);
-const PageCloneButton = withPageCloneButton(Fragment);
+const ClonePageButton = withClonePageButton(Fragment);
 
 const GitButtons: FC = () => {
   useGitButtons();
@@ -78,7 +79,7 @@ const Page: FC<PageProps> = observer(({ children, ui, ...rest }) => {
                 <OnNodeErrorNotification />
                 <NewPageButton />
                 <DisablePageButton />
-                <PageCloneButton />
+                <ClonePageButton />
                 <GitButtons />
                 <Wrapper clickable>
                   {children}

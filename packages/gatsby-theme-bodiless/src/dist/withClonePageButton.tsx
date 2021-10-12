@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-/* eslint-disable no-alert */
 import React, {
   useCallback, useEffect, useState,
   ComponentType,
@@ -24,7 +23,6 @@ import {
   useEditContext,
   withMenuOptions,
   ContextMenuProvider,
-  ContextSubMenu,
 } from '@bodiless/core';
 import { flow } from 'lodash';
 import { addClasses, removeClasses } from '@bodiless/fclasses';
@@ -33,19 +31,17 @@ import { ComponentFormSpinner } from '@bodiless/ui';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
 import verifyPage from './PageVerification';
-import { useGatsbyPageContext } from './GatsbyPageProvider';
 import {
   PageState,
   PageStatus,
-  DEFAULT_PAGE_TEMPLATE,
   Client,
-  PageURLField as NewPageURLField,
+  PageURLField,
   getPathValue,
 } from './PageOperations';
 
-type NewPageProps = PageStatus;
+type ClonePageProps = PageStatus;
 
-const createPage = async ({ path, client, template } : any) => {
+const clonePage = async ({ path, client, template } : any) => {
   // Create the page.
   const result = await handle(client.savePage(path, template));
   // If the page was created successfully:
@@ -54,8 +50,8 @@ const createPage = async ({ path, client, template } : any) => {
     const isPageVerified = await verifyPage(path);
     if (!isPageVerified) {
       const errorMessage = `Unable to verify page creation.
-        It is likely that your new page was created but is not yet available.
-        Click ok to visit the new page; if it does not load, wait a while and reload.`;
+        It is likely that your cloned page was created but is not yet available.
+        Click ok to visit the cloned page; if it does not load, wait a while and reload.`;
       return Promise.reject(new Error(errorMessage));
     }
     return Promise.resolve(path);
@@ -66,7 +62,7 @@ const createPage = async ({ path, client, template } : any) => {
   return Promise.reject(new Error('An internal error occurred. Please try again later.'));
 };
 
-const NewPageComp = (props : NewPageProps) => {
+const ClonePageComp = (props : ClonePageProps) => {
   const {
     status, errorMessage, pagePath,
   } = props;
@@ -74,14 +70,11 @@ const NewPageComp = (props : NewPageProps) => {
   const {
     ComponentFormLabel,
     ComponentFormDescription,
-    ComponentFormText,
     ComponentFormWarning,
     ComponentFormTitle,
     ComponentFormLink,
   } = defaultUI;
-  const formTitle = 'Add a Blank Page';
-  const { subPageTemplate } = useGatsbyPageContext();
-  const template = subPageTemplate || DEFAULT_PAGE_TEMPLATE;
+  const formTitle = 'Clone (this) Page';
   switch (status) {
     case PageState.Init: {
       const CustomComponentFormLabel = flow(
@@ -105,13 +98,7 @@ const NewPageComp = (props : NewPageProps) => {
         <>
           <ContextMenuProvider ui={ui}>
             <ComponentFormTitle>{formTitle}</ComponentFormTitle>
-            <CustomComponentFormLabel>Template</CustomComponentFormLabel>
-            <ComponentFormText
-              field="template"
-              disabled
-              initialValue={template}
-            />
-            <NewPageURLField
+            <PageURLField
               validateOnChange
               validateOnBlur
             />
@@ -131,7 +118,7 @@ const NewPageComp = (props : NewPageProps) => {
         <>
           <ComponentFormTitle>Operation Complete</ComponentFormTitle>
           <ComponentFormDescription>
-            <ComponentFormLink href={pagePath} id="new-page-link">{`Click here to visit the new page: ${pagePath}`}</ComponentFormLink>
+            <ComponentFormLink href={pagePath} id="clone-page-link">{`Click here to visit the cloned page: ${pagePath}`}</ComponentFormLink>
           </ComponentFormDescription>
         </>
       );
@@ -146,7 +133,7 @@ const NewPageComp = (props : NewPageProps) => {
   }
 };
 
-const formPageAdd = (client: Client) => contextMenuForm({
+const formPageClone = (client: Client) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
 })(({ formState, formApi } : any) => {
@@ -165,8 +152,7 @@ const formPageAdd = (client: Client) => contextMenuForm({
     if (submits && path && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
       setState({ status: PageState.Pending });
-      // Create the page.
-      createPage({ path, client, template })
+      clonePage({ path, client, template })
         .then((pagePath: string) => {
           if (pagePath) {
             setState({ status: PageState.Complete, pagePath });
@@ -185,7 +171,7 @@ const formPageAdd = (client: Client) => contextMenuForm({
   return (
     <>
       <ComponentFormText type="hidden" field="keepOpen" initialValue />
-      <NewPageComp
+      <ClonePageComp
         status={status}
         errorMessage={errorMessage}
         pagePath={pagePath}
@@ -201,27 +187,21 @@ const useMenuOptions = () => {
 
   const menuOptions = [
     {
-      name: 'page-group',
-      icon: 'description',
-      label: 'Page',
-      Component: ContextSubMenu,
-    },
-    {
-      name: 'newpage',
-      icon: 'note_add',
-      label: 'New',
+      name: 'page-clone',
+      icon: 'collections',
+      label: 'Clone',
       group: 'page-group',
-      isDisabled: useCallback(() => !context.isEdit, []),
-      handler: () => formPageAdd(defaultClient),
+      isHidden: useCallback(() => !context.isEdit, []),
+      handler: () => formPageClone(defaultClient),
     },
   ];
   return menuOptions;
 };
 
-const withNewPageButton = withMenuOptions({
+const withClonePageButton = withMenuOptions({
   useMenuOptions,
-  name: 'NewPage',
+  name: 'ClonePage',
   root: true,
 });
 
-export default withNewPageButton;
+export default withClonePageButton;

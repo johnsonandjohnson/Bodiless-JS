@@ -76,10 +76,10 @@ const validatePagePath = (
 );
 
 /**
- * props that can be passed to NewPageURLField
+ * props that can be passed to PageURLField
  * disallow overriding field prop
  * if we decide to allow overriding it in the future
- * then also we need to allow overriding the second NewPageURLField input
+ * then also we need to allow overriding the second PageURLField input
  */
 type FieldProps = Omit<BaseFieldProps, 'field'>;
 type FieldValidate = (value: FormValue, values: FormValues) => FormError;
@@ -109,7 +109,7 @@ const fieldValueToUrl = (value: FormValue) => (typeof value === 'string'
  * and to get result page path after the form containing this field is submitted
  * @param props informed field props
  */
-const NewPageURLField = (props: FieldProps) => {
+const PageURLField = (props: FieldProps) => {
   const {
     ComponentFormLabel,
     ComponentFormLink,
@@ -194,7 +194,7 @@ const NewPageURLField = (props: FieldProps) => {
 /**
  * function that can be used to get new page path value
  * this function should usually be invoked after an informed form
- * containing NewPageURLField field is submitted
+ * containing PageURLField field is submitted
  * @param values informed form values
  * @returns new page path
  */
@@ -206,6 +206,5 @@ const getPathValue = (values: FormValues) => {
   return joinPath(fieldValueToUrl(basePagePath), fieldValueToUrl(pageUrl));
 };
 
-export default NewPageURLField;
-export { getPathValue };
+export { PageURLField, getPathValue };
 export type { FieldProps };
