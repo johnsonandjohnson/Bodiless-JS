@@ -8,11 +8,10 @@ import {
   withAbsoluteNode,
 } from '@bodiless/core';
 import type { OptionGroupDefinition } from '@bodiless/core';
-import {
-  withDesign, HOC, asToken,
-} from '@bodiless/fclasses';
+import { withDesign, HOC, asToken } from '@bodiless/fclasses';
+import type { Design } from '@bodiless/fclasses';
 import { withFacet, withTitle, withDesc } from '../meta';
-import { useFlowContainerDataHandlers } from '../FlowContainer/model';
+import { childKeys } from './withContentLibrary';
 import type { FlowContainerItem } from '../FlowContainer/types';
 import type { FlowContainerDataHandlers } from '../FlowContainer/model';
 
@@ -34,12 +33,26 @@ type LibraryMetaValues = {
 };
 
 const DEFAULT_CONTENT_LIBRARY_PATH = ['Site', 'default-library'];
+const CONTENT_LIBRARY_TYPE_PREFIX = 'ContentLibrary';
+
+// @todo: move to @bodiless/core? ./util
+const moveNode = (
+  source: ContentNode<any>,
+  dest: ContentNode<any>,
+  copyChildren: boolean,
+) => {
+  dest.setData(source.data);
+  if (copyChildren) {
+    childKeys(source).forEach(key => moveNode(source.child(key), dest.child(key), true));
+  }
+  source.delete();
+};
 
 const withLibraryMenuOptions: HOC = Component => {
   const useContentLibMenuOptions = (
     item: FlowContainerItem,
     sourceNode: ContentNode<any>,
-    handler: FlowContainerDataHandlers,
+    handlers: FlowContainerDataHandlers,
   ) => {
     const renderForm = () => {
       const {
@@ -63,34 +76,6 @@ const withLibraryMenuOptions: HOC = Component => {
     };
 
     const submitValues = (values: LibraryMenuOptionSubmitValues) => {
-      const childKeys = (nodeParent: ContentNode<any>) => {
-        const aParent = nodeParent.path;
-        const aCandidates = nodeParent.keys.map(key => key.split('$'));
-        return Object.keys(aCandidates.reduce(
-          (acc, next) => {
-            if (next.length <= aParent.length) return acc;
-            for (let i = 0; i < aParent.length; i += 1) {
-              if (aParent[i] !== next[i]) return acc;
-            }
-            return { ...acc, [next[aParent.length]]: true };
-          },
-          {},
-        ));
-      };
-
-      // @todo: move to @bodiless/core? ./util
-      const moveNode = (
-        source: ContentNode<any>,
-        dest: ContentNode<any>,
-        copyChildren: boolean,
-      ) => {
-        dest.setData(source.data);
-        if (copyChildren) {
-          childKeys(source).forEach(key => moveNode(source.child(key), dest.child(key), true));
-        }
-        source.delete();
-      };
-
       const addNodeMetaData = (
         dest: ContentNode<any>,
         data: LibraryMetaValues,
@@ -110,8 +95,10 @@ const withLibraryMenuOptions: HOC = Component => {
       ].join('$');
       const destNode = sourceNode.peer(destNodePath);
       moveNode(sourceNode, destNode, true);
-      const { updateFlowContainerItem } = handler;
-      updateFlowContainerItem({ ...item, type: 'ContentLibrary' });
+      const { updateFlowContainerItem } = handlers;
+
+      const newItemType = `${CONTENT_LIBRARY_TYPE_PREFIX}:${item.type}:${item.uuid}`;
+      updateFlowContainerItem({ ...item, type: newItemType });
 
       // Library content meta data
       addNodeMetaData(destNode, {
@@ -124,7 +111,7 @@ const withLibraryMenuOptions: HOC = Component => {
     const form = useContextMenuForm({ renderForm, submitValues });
     const baseOption: OptionGroupDefinition = {
       name: 'content-library',
-      label: item.type === 'ContentLibrary' ? 'Unlink' : 'Library',
+      label: item && item.type.startsWith('ContentLibrary') ? 'Unlink' : 'Library',
       groupLabel: 'Content',
       groupMerge: 'none',
       icon: 'account_balance',
@@ -146,12 +133,12 @@ const withLibraryMenuOptions: HOC = Component => {
     const {
       useGetMenuOptions,
       flowContainerItem,
+      handlers,
       ...rest
     } = props;
 
     const { node } = useNode<any>();
-    const handler = useFlowContainerDataHandlers();
-    const contentLibMenuOptions = useContentLibMenuOptions(flowContainerItem, node, handler);
+    const contentLibMenuOptions = useContentLibMenuOptions(flowContainerItem, node, handlers);
     const newUseGetMenuOptions = (fcProps: any) => {
       const defaultMenuOptions = useGetMenuOptions(fcProps);
       return () => [
@@ -179,43 +166,42 @@ export const withLibraryNodeDesigns: HOC = Component => {
       ...rest
     } = props;
 
-    const { node } = useNode();
-    const ContentLibraryKeys = node.keys.filter((key: string) => (
-      key.startsWith(DEFAULT_CONTENT_LIBRARY_PATH.join('$')))).filter((key: string) => (
-      (key.split('$').length === 3)));
-
-    const libraryNodes: ContentNode<LibraryNodeData>[] = ContentLibraryKeys.map((key: string) => (
-      node.peer<LibraryNodeData>(key)
-    ));
-
-    const libraryDesigns = {};
+    const { node } = useNode('site');
+    const libraryNode = node.child(DEFAULT_CONTENT_LIBRARY_PATH[1]);
+    const LibraryNodeKeys = childKeys(libraryNode);
     const withType = withFacet('Type');
-    libraryNodes.forEach((libNode: ContentNode<LibraryNodeData>) => {
-      const {
-        componentKey, title = '', description = '',
-      } = libNode.data;
 
-      const libraryComponent = asToken(
-        withType('Content Library')(),
-        withTitle(title),
-        withDesc(description),
-        withAbsoluteNode(libNode),
-      );
-      Object.assign(libraryDesigns, {
-        [componentKey]: libraryComponent,
-      });
-    });
+    /**
+     * For each library node,
+     * - add meta info to design component.
+     * - collect design info from mapped design (via saved componentKey).
+     * - add library design to Flow Container.
+     */
+    const libraryDesigns: Design = LibraryNodeKeys.reduce(
+      (libDesign: Design, key: string) => {
+        const libraryItemNode = libraryNode.child<LibraryNodeData>(key);
+        const {
+          data: {
+            componentKey,
+            title = '',
+            description = '',
+          },
+        } = libraryItemNode;
+        const libraryItemDesignKey = `${CONTENT_LIBRARY_TYPE_PREFIX}:${componentKey}:${key}`;
 
-    // const libraryDesigns = libraryNodes.reduce(
-    //   (d, libraryNode) => ({
-    //     ...d,
-    //     [`Lib:${libraryNode.data.componentKey}`]: asToken(
-    //       design[libraryNode.data.componentKey],
-    //       withAbsoluteNode(libraryNode),
-    //     ),
-    //   }),
-    //   {},
-    // );
+        return ({
+          ...libDesign,
+          [libraryItemDesignKey]: asToken(
+            design[componentKey],
+            withType('Content Library')(),
+            withTitle(title),
+            withDesc(description),
+            withAbsoluteNode(libraryItemNode),
+          ),
+        });
+      },
+      {},
+    );
 
     const extDesign = {
       ...design,
