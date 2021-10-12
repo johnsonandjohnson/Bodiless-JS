@@ -27,9 +27,14 @@ const FlowContainerDefault = asToken(
   withFlowContainerVariations,
 )(FlowContainer);
 
-const FlowContainerDefaultWithLibrary = asToken(
+const ContentLibraryFlowContainer = asToken(
   withLibraryComponents,
-)(FlowContainerDefault);
+)(FlowContainer);
+
+const FlowContainerDefaultWithContentLibrary = asToken(
+  asDefaultFlowContainer,
+  withFlowContainerVariations,
+)(ContentLibraryFlowContainer);
 
 const FlowContainerDefaultRTL = asToken(
   ifNotComponentSelector(
@@ -52,5 +57,5 @@ export {
   FlowContainerDefault,
   FlowContainerLimited,
   FlowContainerDefaultRTL,
-  FlowContainerDefaultWithLibrary,
+  FlowContainerDefaultWithContentLibrary,
 };

@@ -54,6 +54,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props: EditFlowContainerP
   } = useFlowContainerDataHandlers();
   const { Wrapper, ComponentWrapper } = components;
   const getItemUseGetMenuOptions = useGetItemUseGetMenuOptions(props);
+  const handlers = { ...useFlowContainerDataHandlers(), ...useItemHandlers() };
 
   return (
     <ComponentDisplayModeProvider mode={ComponentDisplayMode.EditFlowContainer}>
@@ -83,6 +84,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props: EditFlowContainerP
                     // eslint-disable-next-line max-len
                     (flowContainerItemProps: FlowContainerItemProps) => onFlowContainerItemResize(flowContainerItem.uuid, flowContainerItemProps)
                   }
+                  handlers={handlers}
                 >
                   <ChildComponent />
                 </ComponentWrapper>

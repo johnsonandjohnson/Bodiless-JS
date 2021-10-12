@@ -32,7 +32,8 @@ export type ContentLibraryOptions = {
   useOverrides?: (props: any) => Partial<OptionGroupDefinition>,
 };
 
-const childKeys = (node: ContentNode<any>) => {
+// @todo: move to core?
+export const childKeys = (node: ContentNode<any>) => {
   const aParent = node.path;
   const aCandidates = node.keys.map(key => key.split('$'));
   return Object.keys(aCandidates.reduce(

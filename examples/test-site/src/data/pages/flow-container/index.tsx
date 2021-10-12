@@ -32,7 +32,7 @@ import tailWindConfig from '../../../../tailwind.config';
 import {
   FlowContainerDefault,
   FlowContainerLimited,
-  FlowContainerDefaultWithLibrary,
+  FlowContainerDefaultWithContentLibrary,
 } from '../../../components/FlowContainer';
 import { withFullWidthConstraint } from '../../../components/FlowContainer/token';
 import withImageVariations from '../../../components/FlowContainer/withImageVariations';
@@ -113,7 +113,7 @@ const FlowContainerPage = (props: any) => (
     <Layout>
       <h1 className="text-3xl font-bold">FlowContainer Examples</h1>
       <H2>Default FlowContainer</H2>
-      <FlowContainerDefaultWithLibrary
+      <FlowContainerDefaultWithContentLibrary
         id={FLOW_CONTAINER_PAGE_PATH}
         nodeKey={FLOW_CONTAINER_PAGE_PATH}
       />
