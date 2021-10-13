@@ -170,6 +170,7 @@ const formPageDel = (client: Client) => contextMenuForm({
     if (path === '/') {
       actualState = DeletePageState.Errored;
       setState({ status: DeletePageState.Errored, errorMessage: 'The page cannot be deleted.' });
+      formApi.setValue('keepOpen', false);
     } else {
       hasPageChild({ path, client })
         .catch((err: Error) => {
