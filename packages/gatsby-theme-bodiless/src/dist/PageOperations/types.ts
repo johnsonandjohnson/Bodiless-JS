@@ -1,20 +1,29 @@
 import { AxiosPromise } from 'axios';
 
-export const DEFAULT_PAGE_TEMPLATE = '_default';
+const DEFAULT_PAGE_TEMPLATE = '_default';
 
-export enum PageState {
+enum PageState {
   Init,
   Pending,
   Complete,
   Errored,
 }
 
-export type PageStatus = {
+type PageStatus = {
   status: PageState;
   pagePath?: string;
   errorMessage?: string;
+  completeMessage?: string;
+  titlePending?: string;
 };
 
-export type Client = {
+type Client = {
   savePage: (path: string, template?: string) => AxiosPromise<any>;
+};
+
+export {
+  DEFAULT_PAGE_TEMPLATE,
+  PageState,
+  PageStatus,
+  Client,
 };

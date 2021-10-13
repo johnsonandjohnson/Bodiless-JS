@@ -14,20 +14,13 @@
 
 import React, {
   useCallback, useEffect, useState,
-  ComponentType,
-  HTMLProps,
 } from 'react';
 import {
   contextMenuForm,
   useMenuOptionUI,
   useEditContext,
   withMenuOptions,
-  ContextMenuProvider,
 } from '@bodiless/core';
-import { flow } from 'lodash';
-import { addClasses, removeClasses } from '@bodiless/fclasses';
-import type { StylableProps } from '@bodiless/fclasses';
-import { ComponentFormSpinner } from '@bodiless/ui';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
 import verifyPage from './PageVerification';
@@ -35,22 +28,20 @@ import {
   PageState,
   PageStatus,
   Client,
-  PageURLField,
   getPathValue,
+  PageForm,
 } from './PageOperations';
 
-type ClonePageProps = PageStatus;
-
 const clonePage = async ({ path, client, template } : any) => {
-  // Create the page.
+  // Clone the page.
   const result = await handle(client.savePage(path, template));
-  // If the page was created successfully:
+  // If the page was cloned successfully:
   if (result.response) {
-    // Verify the creation of the page.
+    // Verify the clone of the page.
     const isPageVerified = await verifyPage(path);
     if (!isPageVerified) {
-      const errorMessage = `Unable to verify page creation.
-        It is likely that your cloned page was created but is not yet available.
+      const errorMessage = `Unable to verify page clone.
+        It is likely that your cloned page was cloned but is not yet available.
         Click ok to visit the cloned page; if it does not load, wait a while and reload.`;
       return Promise.reject(new Error(errorMessage));
     }
@@ -60,77 +51,6 @@ const clonePage = async ({ path, client, template } : any) => {
     return Promise.reject(new Error(result.message));
   }
   return Promise.reject(new Error('An internal error occurred. Please try again later.'));
-};
-
-const ClonePageComp = (props : ClonePageProps) => {
-  const {
-    status, errorMessage, pagePath,
-  } = props;
-  const defaultUI = useMenuOptionUI();
-  const {
-    ComponentFormLabel,
-    ComponentFormDescription,
-    ComponentFormWarning,
-    ComponentFormTitle,
-    ComponentFormLink,
-  } = defaultUI;
-  const formTitle = 'Clone (this) Page';
-  switch (status) {
-    case PageState.Init: {
-      const CustomComponentFormLabel = flow(
-        removeClasses('bl-text-xs'),
-        addClasses('bl-font-bold bl-text-sm'),
-      )(ComponentFormLabel as ComponentType<StylableProps>);
-      const CustomComponentFormLink = flow(
-        removeClasses('bl-block'),
-        addClasses('bl-italic'),
-      )(ComponentFormLink as ComponentType<StylableProps>);
-      const CustomComponentFormWarning = flow(
-        removeClasses('bl-float-left'),
-      )(ComponentFormWarning);
-      const ui = {
-        ...defaultUI,
-        ComponentFormLabel: CustomComponentFormLabel as ComponentType<HTMLProps<HTMLLabelElement>>,
-        ComponentFormLink: CustomComponentFormLink as ComponentType<HTMLProps<HTMLAnchorElement>>,
-        ComponentFormWarning: CustomComponentFormWarning,
-      };
-      return (
-        <>
-          <ContextMenuProvider ui={ui}>
-            <ComponentFormTitle>{formTitle}</ComponentFormTitle>
-            <PageURLField
-              validateOnChange
-              validateOnBlur
-            />
-          </ContextMenuProvider>
-        </>
-      );
-    }
-    case PageState.Pending:
-      return (
-        <>
-          <ComponentFormTitle>Creating Page</ComponentFormTitle>
-          <ComponentFormSpinner />
-        </>
-      );
-    case PageState.Complete:
-      return (
-        <>
-          <ComponentFormTitle>Operation Complete</ComponentFormTitle>
-          <ComponentFormDescription>
-            <ComponentFormLink href={pagePath} id="clone-page-link">{`Click here to visit the cloned page: ${pagePath}`}</ComponentFormLink>
-          </ComponentFormDescription>
-        </>
-      );
-    case PageState.Errored:
-      return (
-        <>
-          <ComponentFormTitle>{formTitle}</ComponentFormTitle>
-          <ComponentFormWarning>{errorMessage}</ComponentFormWarning>
-        </>
-      );
-    default: return (<></>);
-  }
 };
 
 const formPageClone = (client: Client) => contextMenuForm({
@@ -148,7 +68,7 @@ const formPageClone = (client: Client) => contextMenuForm({
   const { template } = values;
   const path = getPathValue(values);
   useEffect(() => {
-    // If the form is submitted and valid then lets try to creat a page.
+    // If the form is submitted and valid then lets try to clone a page.
     if (submits && path && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
       setState({ status: PageState.Pending });
@@ -171,9 +91,11 @@ const formPageClone = (client: Client) => contextMenuForm({
   return (
     <>
       <ComponentFormText type="hidden" field="keepOpen" initialValue />
-      <ClonePageComp
+      <PageForm
         status={status}
         errorMessage={errorMessage}
+        completeMessage="Click here to visit the cloned page"
+        titlePending="Cloning Page"
         pagePath={pagePath}
       />
     </>

@@ -66,6 +66,7 @@ const createPage = async ({ path, client, template } : any) => {
   return Promise.reject(new Error('An internal error occurred. Please try again later.'));
 };
 
+// @TODO resue './PageOperations/PageForm' instead
 const NewPageComp = (props : NewPageProps) => {
   const {
     status, errorMessage, pagePath,
