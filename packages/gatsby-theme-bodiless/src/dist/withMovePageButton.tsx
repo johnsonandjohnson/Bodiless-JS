@@ -196,6 +196,7 @@ const formPageMove = (client: Client) => contextMenuForm({
     if (pathChild === '/') {
       actualState = MovePageState.Errored;
       setState({ status: MovePageState.Errored, errorMessage: 'The page cannot be moved.' });
+      formApi.setValue('keepOpen', false);
     } else {
       hasPageChild({ pathChild, client })
         .catch(() => {
