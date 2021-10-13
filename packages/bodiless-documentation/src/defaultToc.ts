@@ -20,8 +20,8 @@ const toc = {
   ContentEditorUserGuide: {},
   Design: {},
   Components: {
-    'YouTube.md': 'YouTube',
-    'Navigation.md': 'Navigation',
+    'YouTube.md': '',
+    'Navigation.md': '',
   },
   Tools: {},
   Development: {
