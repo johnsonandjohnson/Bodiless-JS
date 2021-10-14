@@ -20,6 +20,7 @@ import {
   useMenuOptionUI,
   useEditContext,
   withMenuOptions,
+  useNode,
 } from '@bodiless/core';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
@@ -32,20 +33,21 @@ import {
   PageForm,
 } from './PageOperations';
 
-const clonePage = async ({ path, client, template } : any) => {
+const clonePage = async ({ origin, destination, client } : any) => {
   // Clone the page.
-  const result = await handle(client.savePage(path, template));
+  const result = await handle(client.clonePage(origin, destination));
+
   // If the page was cloned successfully:
   if (result.response) {
     // Verify the clone of the page.
-    const isPageVerified = await verifyPage(path);
+    const isPageVerified = await verifyPage(destination);
     if (!isPageVerified) {
       const errorMessage = `Unable to verify page clone.
         It is likely that your cloned page was cloned but is not yet available.
         Click ok to visit the cloned page; if it does not load, wait a while and reload.`;
       return Promise.reject(new Error(errorMessage));
     }
-    return Promise.resolve(path);
+    return Promise.resolve(destination);
   }
   if (result.message) {
     return Promise.reject(new Error(result.message));
@@ -65,14 +67,15 @@ const formPageClone = (client: Client) => contextMenuForm({
     status: PageState.Init,
   });
   const context = useEditContext();
-  const { template } = values;
-  const path = getPathValue(values);
+  const origin = useNode().node.pagePath;
+  const destination = getPathValue(values);
+
   useEffect(() => {
     // If the form is submitted and valid then lets try to clone a page.
-    if (submits && path && invalid === false) {
+    if (submits && destination && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
       setState({ status: PageState.Pending });
-      clonePage({ path, client, template })
+      clonePage({ origin, destination, client })
         .then((pagePath: string) => {
           if (pagePath) {
             setState({ status: PageState.Complete, pagePath });

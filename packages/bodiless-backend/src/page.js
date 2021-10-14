@@ -13,6 +13,7 @@
  */
 
 const fs = require('fs');
+const fse = require('fs-extra');
 const path = require('path');
 const Logger = require('./logger');
 
@@ -93,6 +94,24 @@ class Page {
       });
     });
     return readPromise;
+  }
+
+  copyDirectory(origin, destination) {
+    const bp = this.basePath;
+    const originPath = `${bp}${origin}`;
+    const destinationPath = `${bp}${destination}`;
+
+    return new Promise((resove, reject) => {
+      fse.copySync(originPath, destinationPath, (err) => {
+        if (err) {
+          console.error(err);
+          reject(err);
+        } else {
+          resove();
+          console.log('success!');
+        }
+      });
+    });
   }
 }
 

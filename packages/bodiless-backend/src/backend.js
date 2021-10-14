@@ -282,6 +282,7 @@ class Backend {
     this.setRoute(`${backendPrefix}/content/*`, Backend.setContent);
     this.setRoute(`${backendPrefix}/log`, Backend.log);
     this.setRoute(`${backendPrefix}/pages`, Backend.setPages);
+    this.setRoute(`${backendPrefix}/clone`, Backend.clonePage);
   }
 
   setRoute(route, action) {
@@ -631,6 +632,25 @@ class Backend {
         .catch(reason => {
           logger.log(reason);
           res.send({});
+        });
+    });
+  }
+
+  static clonePage(route) {
+    route.post((req, res) => {
+      const page = Backend.getPage();
+      page.setBasePath(backendPagePath);
+      const { body: { origin, destination } } = req;
+
+      page
+        .copyDirectory(origin, destination)
+        .then(error => {
+          if (error) {
+            logger.log(error);
+            res.send(error);
+          } else {
+            res.send({});
+          }
         });
     });
   }
