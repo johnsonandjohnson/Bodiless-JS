@@ -283,6 +283,7 @@ class Backend {
     this.setRoute(`${backendPrefix}/log`, Backend.log);
     this.setRoute(`${backendPrefix}/pages`, Backend.setPages);
     this.setRoute(`${backendPrefix}/move`, Backend.movePage);
+    this.setRoute(`${backendPrefix}/remove/*`, Backend.removePage);
     this.setRoute(`${backendPrefix}/directory/child/*`, Backend.directoryChild);
   }
 
@@ -625,6 +626,28 @@ class Backend {
           }
         });
     });
+  }
+
+  static removePage(route) {
+    route
+      .delete((req, res) => {
+        const pagePath = req.params[0];
+        const page = Backend.getPage(pagePath);
+        page.setBasePath(backendPagePath);
+
+        logger.log(`Start deleting page:${page.directory}`);
+
+        page
+          .deleteDirectory()
+          .then(error => {
+            if (error) {
+              logger.log(error);
+              res.send(error);
+            } else {
+              res.send({});
+            }
+          });
+      });
   }
 
   static directoryChild(route) {

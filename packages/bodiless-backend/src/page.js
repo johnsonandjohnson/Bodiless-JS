@@ -125,6 +125,29 @@ class Page {
     return readPromise;
   }
 
+  deleteDirectory() {
+    const readPromise = new Promise((resolve, reject) => {
+      /**
+       * DANGER: fs.rmdir() can delete anything in the code (and it is recursive).
+       *         So make sure the directory to delete is inside a region of pages,
+       *         and it is not the whole pages directory.
+       */
+      const [, pageRelativeDir] = this.directory.split('/data/pages/');
+      if (!pageRelativeDir) {
+        resolve('The page cannot be deleted.');
+        return;
+      }
+
+      fs.rmdir(this.directory, { recursive: true }, err => {
+        if (err) {
+          reject(err);
+        }
+        resolve(this);
+      });
+    });
+    return readPromise;
+  }
+
   hasChildDirectory() {
     const readPromise = new Promise((resolve) => {
       const subdirs = getDirectories(this.directory);
