@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { observer } from 'mobx-react-lite';
 import {
   useContextMenuForm,
   createMenuOptionGroup,
@@ -8,7 +9,9 @@ import {
   withAbsoluteNode,
 } from '@bodiless/core';
 import type { OptionGroupDefinition } from '@bodiless/core';
-import { withDesign, HOC, asToken } from '@bodiless/fclasses';
+import {
+  withDesign, HOC, asToken,
+} from '@bodiless/fclasses';
 import type { Design } from '@bodiless/fclasses';
 import { withFacet, withTitle, withDesc } from '../meta';
 import { childKeys } from './withContentLibrary';
@@ -47,6 +50,22 @@ const moveNode = (
   }
   source.delete();
 };
+const isLibraryItem = (item: FlowContainerItem) => (
+  item && item.type.startsWith('ContentLibrary'));
+
+/**
+ * add meta data to FC item content node.
+ *
+ * @param dest ContentNode
+ * @param data LibraryMetaValues
+ */
+const addNodeMetaData = (
+  dest: ContentNode<any>,
+  data: LibraryMetaValues,
+) => {
+  Object.assign(dest.data, data);
+  dest.setData(dest.data);
+};
 
 const withLibraryMenuOptions: HOC = Component => {
   const useContentLibMenuOptions = (
@@ -62,63 +81,69 @@ const withLibraryMenuOptions: HOC = Component => {
       } = useMenuOptionUI();
 
       return (
-        <>
-          <ComponentFormFieldWrapper>
-            <ComponentFormLabel htmlFor="id-library-name">Name</ComponentFormLabel>
-            <ComponentFormText field="library-name" id="id-library-name" aria-describedby="name" placeholder="Default Name" />
-          </ComponentFormFieldWrapper>
-          <ComponentFormFieldWrapper>
-            <ComponentFormLabel htmlFor="id-library-description">Description</ComponentFormLabel>
-            <ComponentFormText field="library-description" id="id-library-description" aria-describedby="description" placeholder="" />
-          </ComponentFormFieldWrapper>
-        </>
+        isLibraryItem(item) ? (
+          <></>
+        ) : (
+          <>
+            <ComponentFormFieldWrapper>
+              <ComponentFormLabel htmlFor="id-library-name">Name</ComponentFormLabel>
+              <ComponentFormText field="library-name" id="id-library-name" aria-describedby="name" placeholder="Default Name" />
+            </ComponentFormFieldWrapper>
+            <ComponentFormFieldWrapper>
+              <ComponentFormLabel htmlFor="id-library-description">Description</ComponentFormLabel>
+              <ComponentFormText field="library-description" id="id-library-description" aria-describedby="description" placeholder="" />
+            </ComponentFormFieldWrapper>
+          </>
+        )
       );
     };
 
     const submitValues = (values: LibraryMenuOptionSubmitValues) => {
-      const addNodeMetaData = (
-        dest: ContentNode<any>,
-        data: LibraryMetaValues,
-      ) => {
-        Object.assign(dest.data, data);
-        dest.setData(dest.data);
-      };
-
-      /**
-       * Move the original flow container node to content library node,
-       * with path under DEFAULT_CONTENT_LIBRARY_PATH, and update flow container
-       * item to new type as 'ContentLibrary'.
-       */
-      const destNodePath = [
-        ...DEFAULT_CONTENT_LIBRARY_PATH,
-        item.uuid,
-      ].join('$');
-      const destNode = sourceNode.peer(destNodePath);
-      moveNode(sourceNode, destNode, true);
+      // Get flow container update handler
       const { updateFlowContainerItem } = handlers;
 
-      const newItemType = `${CONTENT_LIBRARY_TYPE_PREFIX}:${item.type}:${item.uuid}`;
-      updateFlowContainerItem({ ...item, type: newItemType });
+      if (isLibraryItem(item)) {
+        const newItemType = item.type.split(':')[1];
+        updateFlowContainerItem({ ...item, type: newItemType });
+      } else {
+        /**
+         * Move the original flow container node to content library node,
+         * with path under DEFAULT_CONTENT_LIBRARY_PATH, and update flow container
+         * item to new type as 'ContentLibrary'.
+         */
+        const destNodePath = [
+          ...DEFAULT_CONTENT_LIBRARY_PATH,
+          item.uuid,
+        ].join('$');
+        const destNode = sourceNode.peer(destNodePath);
+        moveNode(sourceNode, destNode, true);
 
-      // Library content meta data
-      addNodeMetaData(destNode, {
-        title: values['library-name'],
-        description: values['library-description'],
-        componentKey: item.type,
-      });
+        const newItemType = `${CONTENT_LIBRARY_TYPE_PREFIX}:${item.type}:${item.uuid}`;
+        updateFlowContainerItem({ ...item, type: newItemType });
+
+        // Library content meta data
+        addNodeMetaData(destNode, {
+          title: values['library-name'],
+          description: values['library-description'],
+          componentKey: item.type,
+        });
+      }
     };
 
     const form = useContextMenuForm({ renderForm, submitValues });
     const baseOption: OptionGroupDefinition = {
       name: 'content-library',
-      label: item && item.type.startsWith('ContentLibrary') ? 'Unlink' : 'Library',
+      label: isLibraryItem(item) ? 'Unlink' : 'Library',
+      isActive: isLibraryItem(item),
       groupLabel: 'Content',
       groupMerge: 'none',
       icon: 'account_balance',
       local: true,
       global: false,
       formTitle: 'Content Library',
-      formDescription: `This action will create a library item. 
+      formDescription: isLibraryItem(item) ? `This action will remove the instance of the
+      component from the library and it will be independent. If this was the last instance,
+      the library item will be deleted.` : `This action will create a library item. 
       Edit of any instance of the library item will update all instances.`,
       isHidden: false,
     };
@@ -160,7 +185,7 @@ const withLibraryMenuOptions: HOC = Component => {
 
 // @todo: type any should be refactored.
 export const withLibraryNodeDesigns: HOC = Component => {
-  const WithLibraryNodeDesign: FC<any> = (props: any) => {
+  const WithLibraryNodeDesign: FC<any> = observer((props: any) => {
     const {
       design,
       ...rest
@@ -202,19 +227,17 @@ export const withLibraryNodeDesigns: HOC = Component => {
       },
       {},
     );
-
     const extDesign = {
       ...design,
       ...libraryDesigns,
     };
-
     return (
       <Component
         {...rest}
         design={extDesign}
       />
     );
-  };
+  });
 
   return WithLibraryNodeDesign;
 };
