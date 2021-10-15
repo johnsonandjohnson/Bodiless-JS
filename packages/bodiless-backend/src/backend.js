@@ -637,20 +637,25 @@ class Backend {
   }
 
   static clonePage(route) {
-    route.post((req, res) => {
-      const page = Backend.getPage();
-      page.setBasePath(backendPagePath);
+    route.post(async (req, res) => {
       const { body: { origin, destination } } = req;
+      const page = Backend.getPage(destination);
+      page.setBasePath(backendPagePath);
+      logger.log(`Start cloning page for:${destination}`);
 
       page
         .copyDirectory(origin, destination)
-        .then(error => {
-          if (error) {
-            logger.log(error);
-            res.send(error);
+        .then(data => {
+          if (data) {
+            logger.log(data);
+            res.send(data);
           } else {
             res.send({});
           }
+        })
+        .catch(reason => {
+          logger.log(reason);
+          res.status(500).send(`${reason}`);
         });
     });
   }

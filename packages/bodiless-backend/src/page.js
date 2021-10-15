@@ -96,22 +96,45 @@ class Page {
     return readPromise;
   }
 
-  copyDirectory(origin, destination) {
-    const bp = this.basePath;
-    const originPath = `${bp}${origin}`;
-    const destinationPath = `${bp}${destination}`;
+  static dirHasFiles(dirPath) {
+    return new Promise((resove) => {
+      try {
+        fs.readdir(dirPath, { withFileTypes: true }, (err, files) => {
+          if (err) {
+            return resove(false);
+          }
 
-    return new Promise((resove, reject) => {
-      fse.copySync(originPath, destinationPath, (err) => {
-        if (err) {
-          console.error(err);
-          reject(err);
-        } else {
-          resove();
-          console.log('success!');
-        }
-      });
+          const filteredFiles = files
+            .filter(dirent => dirent.isFile())
+            .map(dirent => dirent.name);
+
+          if (!filteredFiles.length) {
+            return resove(false);
+          }
+          return resove(true);
+        });
+      } catch (error) {
+        resove(false);
+      }
     });
+  }
+
+  async copyDirectory(origin, destination) {
+    const bp = this.basePath;
+    const originPath = (`${bp}${origin}`).replace(/\/$/, '');
+    const destinationPath = (`${bp}${destination}`).replace(/\/$/, '');
+    // console.log(`originPath: ${originPath}`);
+    // console.log(`destinationPath: ${destinationPath}`);
+
+    const exists = await Page.dirHasFiles(destinationPath);
+    if (exists) {
+      return Promise.reject(
+        new Error(`page ${destination} already exists`),
+      );
+    }
+    fs.mkdirSync(destinationPath, { recursive: true });
+    const result = await fse.copy(originPath, destinationPath);
+    return result;
   }
 }
 
