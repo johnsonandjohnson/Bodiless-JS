@@ -85,7 +85,7 @@ const withAbsoluteNode = (node: ContentNode<any>): HOC => Component => {
 };
 
 const withLibraryMenuOptions = (
-  libPath: LibraryNodePath = DEFAULT_CONTENT_LIBRARY_PATH,
+  libPath: LibraryNodePath,
 ): HOC => Component => {
   const useContentLibMenuOptions = (
     item: FlowContainerItem,
@@ -133,7 +133,8 @@ const withLibraryMenuOptions = (
       } else {
         /**
          * Move the original flow container node to content library node,
-         * with path under DEFAULT_CONTENT_LIBRARY_PATH, and update flow container
+         * with path under DEFAULT_CONTENT_LIBRARY_PATH or with user provided
+         * content library path, and update flow container
          * item to new type as 'ContentLibrary'.
          */
         const destNodePath = [
@@ -232,7 +233,7 @@ const withKeyFromDesign = (Component: ComponentOrTag<any>) => {
  * @param Component - flow container component
  * @returns HOC of flow container.
  */
-const withDesignFromLibrary: HOC = Component => {
+const withDesignFromLibrary = (libPath: LibraryNodePath): HOC => Component => {
   const WithLibraryNodeDesign: FC<any> = observer((props: any) => {
     const {
       design,
@@ -240,7 +241,7 @@ const withDesignFromLibrary: HOC = Component => {
     } = props;
 
     const { node } = useNode();
-    const libraryNode = node.peer(DEFAULT_CONTENT_LIBRARY_PATH);
+    const libraryNode = node.peer(libPath);
     const LibraryNodeKeys = childKeys(libraryNode);
     const withType = withFacet('Type');
 
@@ -288,14 +289,16 @@ const withDesignFromLibrary: HOC = Component => {
   return WithLibraryNodeDesign;
 };
 
-const withLibraryComponents = (path?: LibraryNodePath) => asToken(
+const withLibraryComponents = (
+  path: LibraryNodePath = DEFAULT_CONTENT_LIBRARY_PATH,
+) => asToken(
   withDesign({
     ComponentWrapper: asToken(
       withLibraryMenuOptions(path),
     ),
   }),
   withKeyFromDesign,
-  withDesignFromLibrary,
+  withDesignFromLibrary(path),
 );
 
 export { withLibraryComponents };
