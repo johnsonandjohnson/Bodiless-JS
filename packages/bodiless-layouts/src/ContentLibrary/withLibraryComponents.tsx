@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { observer } from 'mobx-react-lite';
+import { createHash } from 'crypto';
 import {
   useContextMenuForm,
   createMenuOptionGroup,
@@ -10,7 +11,7 @@ import {
 } from '@bodiless/core';
 import type { OptionGroupDefinition } from '@bodiless/core';
 import {
-  withDesign, HOC, asToken,
+  withDesign, HOC, asToken, ComponentOrTag,
 } from '@bodiless/fclasses';
 import type { Design } from '@bodiless/fclasses';
 import { withFacet, withTitle, withDesc } from '../meta';
@@ -183,8 +184,23 @@ const withLibraryMenuOptions: HOC = Component => {
   return WithLibraryMenuOptions;
 };
 
+/**
+ * Forces wrapped component to re-mount when component design components changed.
+ *
+ * @param Component The component to remount
+ */
+const withKeyFromDesign = (Component: ComponentOrTag<any>) => {
+  const WithKeyFromDesign = (props: any) => {
+    const { design } = props;
+    const json = JSON.stringify(Object.keys(design).sort());
+    const key = createHash('md5').update(json).digest('hex');
+    return <Component {...props} key={key} />;
+  };
+  return WithKeyFromDesign;
+};
+
 // @todo: type any should be refactored.
-export const withLibraryNodeDesigns: HOC = Component => {
+export const withDesignFromLibrary: HOC = Component => {
   const WithLibraryNodeDesign: FC<any> = observer((props: any) => {
     const {
       design,
@@ -248,7 +264,8 @@ const withLibraryComponents = asToken(
       withLibraryMenuOptions,
     ),
   }),
-  withLibraryNodeDesigns,
+  withKeyFromDesign,
+  withDesignFromLibrary,
 );
 
 export { withLibraryComponents };

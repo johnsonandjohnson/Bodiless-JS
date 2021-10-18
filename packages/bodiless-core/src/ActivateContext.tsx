@@ -55,7 +55,7 @@ export const useActivateOnEffect = () => React.useContext(activateOnEffect);
 
 /**
  * useActivateOnEffect is a hook that will check if a id is stored in the ActivateContext
- * if it is it will run the iseContextActivator hook
+ * if it is it will run the useContextActivator hook
  * @param uuid id of the component to check
  */
 export const useActivateOnEffectActivator = (uuid: string) => {

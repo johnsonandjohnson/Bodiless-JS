@@ -118,5 +118,5 @@ const asEditFlowContainer = flowRight(
   observer,
 );
 
-// Wrap the EditFlowContainer in a wthActivateContext so we can activate new items
+// Wrap the EditFlowContainer in a withActivateContext so we can activate new items
 export default asEditFlowContainer(EditFlowContainer);

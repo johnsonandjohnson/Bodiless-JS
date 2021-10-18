@@ -81,15 +81,15 @@ const withAppendDisplayName = (newDisplayName: string): HOC => Component => {
   return withDisplayName(newDisplayName)(Component);
 };
 /**
- * withDesc returns an HOC that sideloads the provided discription to the component.
- * @param description the discription to add
+ * withDesc returns an HOC that sideloads the provided description to the component.
+ * @param description the description to add
  */
 const withDesc = (description: string): HOC => Component => (
   withMeta({ description })(Component)
 );
 /**
  * withAppendDesc returns an HOC that appends a description to the component sideload description.
- * @param newDescription the description to be appened
+ * @param newDescription the description to be appended
  */
 const withAppendDesc = (newDescription: string): HOC => Component => {
   const { description } = Component as ComponentWithMeta;

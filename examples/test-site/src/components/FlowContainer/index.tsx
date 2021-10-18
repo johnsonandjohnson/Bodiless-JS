@@ -13,7 +13,11 @@
  */
 
 import { withDesign, asToken } from '@bodiless/fclasses';
-import { withMandatoryCategories, ifNotComponentSelector, withLibraryComponents } from '@bodiless/layouts';
+import {
+  withMandatoryCategories,
+  ifNotComponentSelector,
+  withLibraryComponents,
+} from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withRichTextVariations from './withRichTextVariations';
 import withImageVariations from './withImageVariations';
@@ -27,14 +31,11 @@ const FlowContainerDefault = asToken(
   withFlowContainerVariations,
 )(FlowContainer);
 
-const ContentLibraryFlowContainer = asToken(
-  withLibraryComponents,
-)(FlowContainer);
-
 const FlowContainerDefaultWithContentLibrary = asToken(
+  withLibraryComponents,
   asDefaultFlowContainer,
   withFlowContainerVariations,
-)(ContentLibraryFlowContainer);
+)(FlowContainer);
 
 const FlowContainerDefaultRTL = asToken(
   ifNotComponentSelector(
