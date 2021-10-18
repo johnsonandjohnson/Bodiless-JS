@@ -7,6 +7,7 @@
   "license": "Apache-2.0",
   "bin": {
     "generate-env-vars": "./bin/generate-env-vars",
+    "generate-tailwind-configs": "./bin/generate-tailwind-configs",
     "bl-validate-logs": "./bin/bl-validate-logs",
     "bl-clear-logs": "./bin/bl-clear-logs"
   },
