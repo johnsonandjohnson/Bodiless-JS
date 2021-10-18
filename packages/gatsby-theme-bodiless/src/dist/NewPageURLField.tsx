@@ -124,7 +124,7 @@ const NewPageURLField = (props: FieldProps) => {
   const isBasePathEmpty = isEmptyValue(basePathValue) || basePathValue === BASE_PATH_EMPTY_VALUE;
   const isFullUrl = isBasePathEmpty;
 
-  const { validate, ...rest } = props;
+  const { validate, hidden, ...rest } = props;
   const {
     fieldState, fieldApi, render, ref, userProps,
   } = useField({
@@ -138,6 +138,12 @@ const NewPageURLField = (props: FieldProps) => {
   const { onChange, ...restUserProps } = userProps;
   const fieldLabel = isFullUrl ? 'URL' : 'Page Path';
   const inputClasses = isFullUrl ? INPUT_FIELD_BLOCK_CLASSES : INPUT_FIELD_INLINE_CLASSES;
+
+  // Do not move this validation above the hook useField.
+  if (hidden) {
+    return null;
+  }
+
   return render(
     <>
       <ComponentFormLabel htmlFor="new-page-path">{fieldLabel}</ComponentFormLabel>
