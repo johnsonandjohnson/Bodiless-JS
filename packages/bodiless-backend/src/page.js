@@ -96,44 +96,88 @@ class Page {
     return readPromise;
   }
 
-  static dirHasFiles(dirPath) {
+  static dirHasSubObjects(dirPath, objType) {
     return new Promise((resove) => {
       try {
         fs.readdir(dirPath, { withFileTypes: true }, (err, files) => {
           if (err) {
-            return resove(false);
+            return resove([]);
           }
 
-          const filteredFiles = files
-            .filter(dirent => dirent.isFile())
-            .map(dirent => dirent.name);
+          const filteredObjects = files
+            .filter(dirent => {
+              if (objType === 'file') {
+                return dirent.isFile();
+              }
+              if (objType === 'directory') {
+                return dirent.isDirectory();
+              }
+              return true;
+            });
 
-          if (!filteredFiles.length) {
-            return resove(false);
+          if (!filteredObjects.length) {
+            return resove([]);
           }
-          return resove(true);
+          return resove(filteredObjects);
         });
       } catch (error) {
-        resove(false);
+        resove([]);
       }
     });
+  }
+
+  static dirHasFiles(dirPath) {
+    return Page.dirHasSubObjects(dirPath, 'file');
+  }
+
+  static dirHasDirectories(dirPath) {
+    return Page.dirHasSubObjects(dirPath, 'directory');
+  }
+
+  static rmDirectories(destinationPath, dirPaths) {
+    const dels = [];
+    dirPaths.forEach(dir => {
+      dels.push(new Promise((resove) => {
+        fse.remove(`${destinationPath}/${dir.name}`, err => {
+          if (err) return console.error(err);
+          return resove();
+        });
+      }));
+    });
+    return Promise.resolve(Promise.all(dels));
   }
 
   async copyDirectory(origin, destination) {
     const bp = this.basePath;
     const originPath = (`${bp}${origin}`).replace(/\/$/, '');
     const destinationPath = (`${bp}${destination}`).replace(/\/$/, '');
-    // console.log(`originPath: ${originPath}`);
-    // console.log(`destinationPath: ${destinationPath}`);
 
-    const exists = await Page.dirHasFiles(destinationPath);
-    if (exists) {
+    const isDestinationPathExists = await Page.dirHasFiles(destinationPath);
+    if (isDestinationPathExists.length) {
       return Promise.reject(
         new Error(`page ${destination} already exists`),
       );
     }
+
+    const isOriginPathExists = await Page.dirHasFiles(originPath);
+    if (!isOriginPathExists.length) {
+      return Promise.reject(
+        new Error(`page ${origin} is not exists`),
+      );
+    }
+
+    // Make sure the destination tree exist
     fs.mkdirSync(destinationPath, { recursive: true });
+
+    // Clone page
     const result = await fse.copy(originPath, destinationPath);
+
+    // If the sub directories have been copied, delete them
+    const resultHasDir = await Page.dirHasDirectories(destinationPath);
+    if (resultHasDir.length) {
+      await Page.rmDirectories(destinationPath, resultHasDir);
+    }
+
     return result;
   }
 }
