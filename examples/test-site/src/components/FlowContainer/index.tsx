@@ -31,7 +31,7 @@ const FlowContainerDefault = asToken(
 )(FlowContainer);
 
 const FlowContainerDefaultWithContentLibrary = asToken(
-  withLibraryComponents,
+  withLibraryComponents(),
   asDefaultFlowContainer,
   withFlowContainerVariations,
 )(FlowContainer);

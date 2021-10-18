@@ -25,6 +25,8 @@ export type LibraryNodeData = {
   description?: string,
 };
 
+export type LibraryNodePath = string | string[];
+
 type LibraryMenuOptionSubmitValues = {
   'library-name': string;
   'library-description': string;
@@ -82,7 +84,9 @@ const withAbsoluteNode = (node: ContentNode<any>): HOC => Component => {
   return WithAbsoluteNode;
 };
 
-const withLibraryMenuOptions: HOC = Component => {
+const withLibraryMenuOptions = (
+  libPath: LibraryNodePath = DEFAULT_CONTENT_LIBRARY_PATH,
+): HOC => Component => {
   const useContentLibMenuOptions = (
     item: FlowContainerItem,
     sourceNode: ContentNode<any>,
@@ -121,6 +125,8 @@ const withLibraryMenuOptions: HOC = Component => {
       // Get flow container update handler
       const { updateFlowContainerItem } = handlers;
 
+      const destPath$ = Array.isArray(libPath) ? libPath : [libPath];
+
       if (isLibraryItem(item)) {
         const newItemType = item.type.split(':')[1];
         updateFlowContainerItem({ ...item, type: newItemType });
@@ -131,7 +137,7 @@ const withLibraryMenuOptions: HOC = Component => {
          * item to new type as 'ContentLibrary'.
          */
         const destNodePath = [
-          ...DEFAULT_CONTENT_LIBRARY_PATH,
+          ...destPath$,
           item.uuid,
         ].join('$');
         const destNode = sourceNode.peer(destNodePath);
@@ -282,10 +288,10 @@ const withDesignFromLibrary: HOC = Component => {
   return WithLibraryNodeDesign;
 };
 
-const withLibraryComponents = asToken(
+const withLibraryComponents = (path?: LibraryNodePath) => asToken(
   withDesign({
     ComponentWrapper: asToken(
-      withLibraryMenuOptions,
+      withLibraryMenuOptions(path),
     ),
   }),
   withKeyFromDesign,
