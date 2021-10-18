@@ -86,7 +86,19 @@ export default class BackendClient {
       path: path$,
       template,
     };
-    return this.post(`${this.prefix}/pages`, payload);
+
+    const url = `${this.prefix}/pages`;
+    return this.post(url, payload);
+  }
+
+  deletePage(path$: string) {
+    const url = `${this.prefix}/remove/${path$}`;
+    return this.delete(url);
+  }
+
+  directoryChild(path$: string) {
+    const url = `${this.prefix}/directory/child${path$}`;
+    return this.delete(url);
   }
 
   commit(

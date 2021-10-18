@@ -282,6 +282,8 @@ class Backend {
     this.setRoute(`${backendPrefix}/content/*`, Backend.setContent);
     this.setRoute(`${backendPrefix}/log`, Backend.log);
     this.setRoute(`${backendPrefix}/pages`, Backend.setPages);
+    this.setRoute(`${backendPrefix}/remove/*`, Backend.removePage);
+    this.setRoute(`${backendPrefix}/directory/child/*`, Backend.directoryChild);
   }
 
   setRoute(route, action) {
@@ -605,10 +607,56 @@ class Backend {
     return new Page(pagePath);
   }
 
+  static removePage(route) {
+    route
+      .delete((req, res) => {
+        const pagePath = req.params[0];
+        const page = Backend.getPage(pagePath);
+        page.setBasePath(backendPagePath);
+
+        logger.log(`Start deleting page:${page.directory}`);
+
+        page
+          .deleteDirectory()
+          .then(error => {
+            if (error) {
+              logger.log(error);
+              res.send(error);
+            } else {
+              res.send({});
+            }
+          });
+      });
+  }
+
+  static directoryChild(route) {
+    route
+      .delete((req, res) => {
+        const pagePath = req.params[0];
+        const page = Backend.getPage(pagePath);
+
+        page.setBasePath(backendPagePath);
+
+        logger.log(`Start verify page child directory: ${page.directory}`);
+
+        page
+          .hasChildDirectory()
+          .then(error => {
+            if (error) {
+              logger.log(error);
+              res.send(error);
+            } else {
+              res.send({});
+            }
+          });
+      });
+  }
+
   static setPages(route) {
     route.post((req, res) => {
-      const pagePath = req.body.path || '';
-      const template = req.body.template || '_default';
+      const { body } = req;
+      const pagePath = body.path || '';
+      const template = body.template || '_default';
       const filePath = path.join(pagePath, 'index');
       const pageContent = {
         '#template': template,
