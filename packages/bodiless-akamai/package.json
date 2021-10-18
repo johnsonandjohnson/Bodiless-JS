@@ -1,7 +1,7 @@
 {
-  "name": "@bodiless/akamai",
+  "name": "@bodiless/oidc",
   "version": "0.2.10",
-  "description": "API for Customer Identity and Access Management (CIAM) with Akamai Identity Cloud",
+  "description": "Library to provide OpenID Connect (OIDC) and OAuth2 protocol support for client-side",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
   "main": "lib/index.js",

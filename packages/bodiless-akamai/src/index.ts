@@ -12,4 +12,4 @@
  * limitations under the License.
  */
 
-export * from './AkamaiClient';
+export * from './OIDCClient';

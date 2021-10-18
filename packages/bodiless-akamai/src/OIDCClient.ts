@@ -14,31 +14,50 @@
 
 import axios from 'axios';
 
-export type AkamaiClientConfig = {
+export type OIDCClientConfig = {
   baseUrl?: string,
+  client_id: string,
   secret: string,
 };
 
-export class AkamaiClient {
+export type OIDCAuthParams = {
+  client_id: string,
+  redirect_uri: string,
+  scope: string, // 'openid email phone' | openid is required.
+  response_type: string,
+  state: string,
+};
+
+export class OIDCClient {
   private baseUrl: string;
+
+  // private client_id: string;
 
   private secret: string;
 
-  constructor(akamaiClientConfig: AkamaiClientConfig) {
+  // private scope: string = 'openid email phone';
+
+  constructor(oidcClientConfig: OIDCClientConfig) {
     const {
       baseUrl = '',
+      // client_id,
       secret,
-    } = akamaiClientConfig;
+    } = oidcClientConfig;
 
     this.baseUrl = baseUrl;
     this.secret = secret;
+    // this.client_id = client_id;
   }
 
-  get(resourcePath: string) {
+  get(resourcePath: string, params: any) {
     const headers = {
       Authorization: this.secret,
     };
 
-    return axios.get(`${this.baseUrl}/${resourcePath}`, { headers });
+    return axios.get(`${this.baseUrl}/${resourcePath}`, { headers, params });
+  }
+
+  authorize(params: OIDCAuthParams) {
+    return this.get('/login/authorize', params);
   }
 }
