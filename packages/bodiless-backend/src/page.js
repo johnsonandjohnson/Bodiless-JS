@@ -147,6 +147,39 @@ class Page {
     return Promise.resolve(Promise.all(dels));
   }
 
+  static jsFilesPathResolve(originPath, destinationPath, files) {
+    const actions = [];
+    const reg = /from ('|")(\..*)('|")/g;
+
+    const readF = (file) => new Promise((resove, reject) => {
+      const filePath = `${destinationPath}/${file.name}`;
+      fs.readFile(filePath, 'utf8', (err, content) => {
+        if (err) return reject();
+        const matchs = content.match(reg);
+        if (!matchs.length) return reject();
+        let newContent = content;
+        matchs.forEach(item => {
+          const p = item.split(' ')[1].replace(/'/g, '').replace(/"/g, '');
+          const from = path.dirname(filePath);
+          const to = path.normalize(`${originPath}/${p}`);
+          const relativePath = path.relative(from, to);
+          newContent = newContent.replace(p, relativePath);
+        });
+        fs.writeFile(filePath, newContent, writeErr => {
+          if (writeErr) return reject();
+          return resove();
+        });
+        return true;
+      });
+    });
+
+    files.forEach(file => {
+      actions.push(readF(file));
+    });
+
+    return Promise.resolve(Promise.all(actions));
+  }
+
   async copyDirectory(origin, destination) {
     const bp = this.basePath;
     const originPath = (`${bp}${origin}`).replace(/\/$/, '');
@@ -176,6 +209,18 @@ class Page {
     const resultHasDir = await Page.dirHasDirectories(destinationPath);
     if (resultHasDir.length) {
       await Page.rmDirectories(destinationPath, resultHasDir);
+    }
+
+    // Update require paths for js files
+    const jsFiles = isOriginPathExists
+      .filter(file => {
+        const exts = ['.tsx', '.jsx', '.js', '.ts'];
+        const fileExtname = path.extname(file.name);
+
+        return exts.indexOf(fileExtname) > -1;
+      });
+    if (jsFiles.length) {
+      await Page.jsFilesPathResolve(originPath, destinationPath, jsFiles);
     }
 
     return result;
