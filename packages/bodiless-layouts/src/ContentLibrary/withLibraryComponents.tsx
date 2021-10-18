@@ -7,7 +7,7 @@ import {
   useMenuOptionUI,
   useNode,
   ContentNode,
-  withAbsoluteNode,
+  NodeProvider,
 } from '@bodiless/core';
 import type { OptionGroupDefinition } from '@bodiless/core';
 import {
@@ -39,7 +39,6 @@ type LibraryMetaValues = {
 const DEFAULT_CONTENT_LIBRARY_PATH = ['Site', 'default-library'];
 const CONTENT_LIBRARY_TYPE_PREFIX = 'ContentLibrary';
 
-// @todo: move to @bodiless/core? ./util
 const moveNode = (
   source: ContentNode<any>,
   dest: ContentNode<any>,
@@ -64,8 +63,23 @@ const addNodeMetaData = (
   dest: ContentNode<any>,
   data: LibraryMetaValues,
 ) => {
-  Object.assign(dest.data, data);
-  dest.setData(dest.data);
+  dest.setData({ ...dest.data, ...data });
+};
+
+/**
+ * HOC provides the content node directly to component without nodeKey. This is
+ * used in case of data NOT from parent content node.
+ *
+ * @param node
+ * @returns HOC
+ */
+const withAbsoluteNode = (node: ContentNode<any>): HOC => Component => {
+  const WithAbsoluteNode = (props: any) => (
+    <NodeProvider node={node}>
+      <Component {...props} />
+    </NodeProvider>
+  );
+  return WithAbsoluteNode;
 };
 
 const withLibraryMenuOptions: HOC = Component => {
@@ -87,12 +101,16 @@ const withLibraryMenuOptions: HOC = Component => {
         ) : (
           <>
             <ComponentFormFieldWrapper>
-              <ComponentFormLabel htmlFor="id-library-name">Name</ComponentFormLabel>
-              <ComponentFormText field="library-name" id="id-library-name" aria-describedby="name" placeholder="Default Name" />
+              <ComponentFormLabel>
+                Name
+                <ComponentFormText field="library-name" id="id-library-name" aria-describedby="name" placeholder="Default Name" />
+              </ComponentFormLabel>
             </ComponentFormFieldWrapper>
             <ComponentFormFieldWrapper>
-              <ComponentFormLabel htmlFor="id-library-description">Description</ComponentFormLabel>
-              <ComponentFormText field="library-description" id="id-library-description" aria-describedby="description" placeholder="" />
+              <ComponentFormLabel>
+                Description
+                <ComponentFormText field="library-description" id="id-library-description" aria-describedby="description" placeholder="" />
+              </ComponentFormLabel>
             </ComponentFormFieldWrapper>
           </>
         )
@@ -199,25 +217,31 @@ const withKeyFromDesign = (Component: ComponentOrTag<any>) => {
   return WithKeyFromDesign;
 };
 
-// @todo: type any should be refactored.
-export const withDesignFromLibrary: HOC = Component => {
+/**
+ * HOC adds content library to wrapped component as design, so the created
+ * library item is available as filter in component selector, which also makes
+ * the library component type available for flow container to render library
+ * item.
+ *
+ * @param Component - flow container component
+ * @returns HOC of flow container.
+ */
+const withDesignFromLibrary: HOC = Component => {
   const WithLibraryNodeDesign: FC<any> = observer((props: any) => {
     const {
       design,
       ...rest
     } = props;
 
-    const { node } = useNode('site');
-    const libraryNode = node.child(DEFAULT_CONTENT_LIBRARY_PATH[1]);
+    const { node } = useNode();
+    const libraryNode = node.peer(DEFAULT_CONTENT_LIBRARY_PATH);
     const LibraryNodeKeys = childKeys(libraryNode);
     const withType = withFacet('Type');
 
-    /**
-     * For each library node,
-     * - add meta info to design component.
-     * - collect design info from mapped design (via saved componentKey).
-     * - add library design to Flow Container.
-     */
+    // For each library node, this function
+    // - adds meta info to design component.
+    // - collects design info from mapped designs (via saved componentKey).
+    // - adds library design to wrapped Flow Container.
     const libraryDesigns: Design = LibraryNodeKeys.reduce(
       (libDesign: Design, key: string) => {
         const libraryItemNode = libraryNode.child<LibraryNodeData>(key);

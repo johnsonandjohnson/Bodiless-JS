@@ -23,7 +23,6 @@ import withRichTextVariations from './withRichTextVariations';
 import withImageVariations from './withImageVariations';
 import withFlowContainerVariations from './withFlowContainerVariations';
 import asDefaultFlowContainer from './asDefaultFlowContainer';
-
 import { asFlowContainerRTL, asFlowContainerWithMargins } from './token';
 
 const FlowContainerDefault = asToken(
