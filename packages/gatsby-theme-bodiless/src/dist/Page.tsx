@@ -30,6 +30,7 @@ import GatsbyNodeProvider, {
 } from './GatsbyNodeProvider';
 import GatsbyPageProvider, { PageProviderProps } from './GatsbyPageProvider';
 import withNewPageButton from './withNewPageButton';
+import withDeletePageButton from './withDeletePageButton';
 import useGitButtons from './useGitButtons';
 
 type FinalUI = {
@@ -52,6 +53,7 @@ const getUI = (ui: UI = {}): FinalUI => ({ ...defaultUI, ...ui });
 const NotificationButton = withNotificationButton(Fragment);
 const SwitcherButton = withSwitcherButton(Fragment);
 const NewPageButton = withNewPageButton(Fragment);
+const DeletePageButton = withDeletePageButton(Fragment);
 const DisablePageButton = withPageDisableButton(Fragment);
 
 const GitButtons: FC = () => {
@@ -81,6 +83,7 @@ const Page: FC<PageProps> = observer(({ children, ui, ...rest }) => {
                 <Wrapper clickable>
                   {children}
                 </Wrapper>
+                <DeletePageButton />
               </Editor>
             </NotificationProvider>
           </GatsbyPageProvider>
