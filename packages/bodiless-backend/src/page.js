@@ -203,7 +203,16 @@ class Page {
     fs.mkdirSync(destinationPath, { recursive: true });
 
     // Clone page
-    const result = await fse.copy(originPath, destinationPath);
+    await Promise.all(isOriginPathExists.map(file => {
+      const from = `${originPath}/${file.name}`;
+      const to = `${destinationPath}/${file.name}`;
+      return new Promise((resove, reject) => {
+        fse.copy(from, to, err => {
+          if (err) return reject(err);
+          return resove();
+        });
+      });
+    }));
 
     // If the sub directories have been copied, delete them
     const resultHasDir = await Page.dirHasDirectories(destinationPath);
@@ -223,7 +232,7 @@ class Page {
       await Page.jsFilesPathResolve(originPath, destinationPath, jsFiles);
     }
 
-    return result;
+    return 'success';
   }
 }
 
