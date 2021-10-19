@@ -1,6 +1,4 @@
-const { mergeWithBodilessConfigs } = require('@bodiless/gatsby-theme-bodiless/dist/tailwindcss');
-
-module.exports = mergeWithBodilessConfigs({
+module.exports = {
   purge: [
     './src/**/!(*.d).{ts,js,jsx,tsx}',
   ],
@@ -584,4 +582,4 @@ module.exports = mergeWithBodilessConfigs({
 
   plugins: [
   ],
-});
+};

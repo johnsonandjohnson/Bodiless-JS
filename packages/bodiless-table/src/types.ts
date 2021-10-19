@@ -20,7 +20,7 @@ enum Section {
   body = 'body',
   foot = 'foot',
 }
-type TableComponents = {
+export type TableComponents = {
   Wrapper: ComponentType<StylableProps>,
   TBody: ComponentType<StylableProps>,
   THead: ComponentType<StylableProps>,
@@ -68,7 +68,6 @@ export {
   Section,
   TableProps,
   TableSectionProps,
-  TableComponents,
   TableBaseProps,
   TableFuncs,
   AddFunc,

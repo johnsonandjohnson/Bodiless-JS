@@ -27,7 +27,9 @@ import {
   useIsInHead,
   useIsInFoot,
 } from './forCell';
+import type { TableComponents } from './types';
 
+export type { TableComponents };
 export default asBodilessTable()(CleanTable);
 export {
   asBodilessTable,
