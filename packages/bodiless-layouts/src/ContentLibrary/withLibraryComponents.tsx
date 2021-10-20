@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { observer } from 'mobx-react-lite';
-import { createHash } from 'crypto';
 import {
   useContextMenuForm,
   createMenuOptionGroup,
@@ -12,7 +11,7 @@ import {
 } from '@bodiless/core';
 import type { OptionGroupDefinition } from '@bodiless/core';
 import {
-  withDesign, HOC, asToken, ComponentOrTag, flowIf,
+  withDesign, HOC, asToken, flowIf,
 } from '@bodiless/fclasses';
 import type { Design } from '@bodiless/fclasses';
 import { withFacet, withTitle, withDesc } from '../meta';
@@ -211,21 +210,6 @@ const withLibraryMenuOptions = (
 };
 
 /**
- * Forces wrapped component to re-mount when component design components changed.
- *
- * @param Component The component to remount
- */
-const withKeyFromDesign = (Component: ComponentOrTag<any>) => {
-  const WithKeyFromDesign = (props: any) => {
-    const { design } = props;
-    const json = JSON.stringify(Object.keys(design).sort());
-    const key = createHash('md5').update(json).digest('hex');
-    return <Component {...props} key={key} />;
-  };
-  return WithKeyFromDesign;
-};
-
-/**
  * HOC adds content library to wrapped component as design, so the created
  * library item is available as filter in component selector, which also makes
  * the library component type available for flow container to render library
@@ -298,7 +282,6 @@ const withLibraryComponents = (
       withLibraryMenuOptions(path),
     ),
   }),
-  withKeyFromDesign,
   withDesignFromLibrary(path),
 );
 

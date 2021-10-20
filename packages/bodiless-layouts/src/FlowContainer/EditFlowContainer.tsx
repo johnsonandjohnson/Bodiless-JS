@@ -13,18 +13,15 @@
  */
 
 import React, { FC, PropsWithChildren } from 'react';
-import { v4 } from 'uuid';
+import { createHash } from 'crypto';
 import { arrayMove, SortEnd } from 'react-sortable-hoc';
 import { observer } from 'mobx-react-lite';
 import { flowRight } from 'lodash';
 import {
-  withActivateOnEffect, withNode, withMenuOptions, withResizeDetector,
-  useActivateOnEffect,
-  useActivateOnEffectActivator,
-  useEditContext,
+  withNode, withMenuOptions, withResizeDetector, withActivateOnEffect, withReactivateOnRemount,
 } from '@bodiless/core';
 import {
-  designable, stylable, HOC, DesignableComponents,
+  designable, stylable, DesignableComponents, ComponentOrTag,
 } from '@bodiless/fclasses';
 import SortableChild from './SortableChild';
 import SortableContainer, { SortableListProps } from './SortableContainer';
@@ -46,20 +43,19 @@ const EditFlowContainerComponents: FlowContainerComponents = {
   ComponentWrapper: stylable<SortableChildProps>(SortableChild),
 };
 
-export const useReactivateOnRemount = (uuid: string) => {
-  const context = useEditContext();
-  const { setId } = useActivateOnEffect();
-  if (context.isInnermost) setId(uuid);
-  useActivateOnEffectActivator(uuid);
-};
-export const withReactivateOnRemount = (
-  uuid: string = v4(),
-): HOC => Component => {
-  const WithReactivateOnRemount: FC<any> = props => {
-    useReactivateOnRemount(uuid);
-    return <Component {...props} />;
+/**
+ * Forces wrapped component to re-mount when component design components changed.
+ *
+ * @param Component The component to re-mount
+ */
+const withKeyFromDesign = (Component: ComponentOrTag<any>) => {
+  const WithKeyFromDesign = (props: any) => {
+    const { design } = props;
+    const json = JSON.stringify(Object.keys(design).sort());
+    const key = createHash('md5').update(json).digest('hex');
+    return <Component {...props} key={key} />;
   };
-  return WithReactivateOnRemount;
+  return WithKeyFromDesign;
 };
 
 /**
@@ -79,14 +75,12 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props: EditFlowContainerP
   const handlers = { ...useFlowContainerDataHandlers(), ...useItemHandlers() };
 
   let componentsWithActivator: DesignableComponents = {};
-  // useEffect(() => {
   items.forEach((item: FlowContainerItem) => {
     componentsWithActivator = {
       ...componentsWithActivator,
       [item.type]: withReactivateOnRemount(item.uuid)(components[item.type]),
     };
   });
-  // }, [items]);
 
   return (
     <ComponentDisplayModeProvider mode={ComponentDisplayMode.EditFlowContainer}>
@@ -136,7 +130,10 @@ EditFlowContainer.defaultProps = {
 };
 
 const asEditFlowContainer = flowRight(
+  // with ActivateOnEffectProvider should be applied after withKeyFromDesign in
+  // order to keep state after re-mount.
   withActivateOnEffect,
+  withKeyFromDesign,
   withResizeDetector,
   observer,
   designable(EditFlowContainerComponents, 'FlowContainer'),

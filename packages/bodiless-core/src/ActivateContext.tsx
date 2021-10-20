@@ -13,8 +13,9 @@
  */
 
 import React, { FC } from 'react';
-import { Token } from '@bodiless/fclasses';
-import { useContextActivator } from './hooks';
+import { v4 } from 'uuid';
+import { Token, HOC } from '@bodiless/fclasses';
+import { useContextActivator, useEditContext } from './hooks';
 
 type ActivateOnEffectState = {
   id: string,
@@ -39,7 +40,7 @@ export const ActivateOnEffectProvider:React.FunctionComponent = ({ children }) =
  * WithActivateContext is a HOC that wraps the Component in a ActivateContextProvider
  * @param Component The component to wrap
  */
-export const withActivateOnEffect: Token = Component => {
+export const withActivateOnEffect: Token = (Component: any) => {
   const WithActivateOnEffect: FC<any> = props => (
     <ActivateOnEffectProvider>
       <Component {...props} />
@@ -69,4 +70,21 @@ export const useActivateOnEffectActivator = (uuid: string) => {
       setId('');
     }
   }, []);
+};
+
+export const useReactivateOnRemount = (uuid: string) => {
+  const context = useEditContext();
+  const { setId } = useActivateOnEffect();
+  if (context.isInnermost) setId(uuid);
+  useActivateOnEffectActivator(uuid);
+};
+
+export const withReactivateOnRemount = (
+  uuid: string = v4(),
+): HOC => (Component: any) => {
+  const WithReactivateOnRemount: FC<any> = props => {
+    useReactivateOnRemount(uuid);
+    return <Component {...props} />;
+  };
+  return WithReactivateOnRemount;
 };

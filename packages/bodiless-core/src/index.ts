@@ -62,6 +62,7 @@ import {
   withActivateOnEffect,
   useActivateOnEffect,
   useActivateOnEffectActivator,
+  withReactivateOnRemount,
 } from './ActivateContext';
 import {
   NotificationProvider,
@@ -128,6 +129,7 @@ export {
   withActivateOnEffect,
   useActivateOnEffect,
   useActivateOnEffectActivator,
+  withReactivateOnRemount,
   withChild,
   withParent,
   withAppendChild,
