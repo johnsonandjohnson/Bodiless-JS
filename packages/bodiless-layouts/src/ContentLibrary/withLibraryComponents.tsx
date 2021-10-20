@@ -8,10 +8,11 @@ import {
   useNode,
   ContentNode,
   NodeProvider,
+  useEditContext,
 } from '@bodiless/core';
 import type { OptionGroupDefinition } from '@bodiless/core';
 import {
-  withDesign, HOC, asToken, ComponentOrTag,
+  withDesign, HOC, asToken, ComponentOrTag, flowIf,
 } from '@bodiless/fclasses';
 import type { Design } from '@bodiless/fclasses';
 import { withFacet, withTitle, withDesc } from '../meta';
@@ -293,7 +294,7 @@ const withLibraryComponents = (
   path: LibraryNodePath = DEFAULT_CONTENT_LIBRARY_PATH,
 ) => asToken(
   withDesign({
-    ComponentWrapper: asToken(
+    ComponentWrapper: flowIf(() => useEditContext().isEdit)(
       withLibraryMenuOptions(path),
     ),
   }),
