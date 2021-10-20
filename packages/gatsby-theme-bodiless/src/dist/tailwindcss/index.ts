@@ -12,5 +12,5 @@
  * limitations under the License.
  */
 
-export * from './getBodilessPackages';
+export * from './getPackageRoot';
 export * from './mergeConfigs';
