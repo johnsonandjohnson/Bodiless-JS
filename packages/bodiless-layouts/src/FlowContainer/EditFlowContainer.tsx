@@ -13,13 +13,19 @@
  */
 
 import React, { FC, PropsWithChildren } from 'react';
+import { v4 } from 'uuid';
 import { arrayMove, SortEnd } from 'react-sortable-hoc';
 import { observer } from 'mobx-react-lite';
 import { flowRight } from 'lodash';
 import {
   withActivateOnEffect, withNode, withMenuOptions, withResizeDetector,
+  useActivateOnEffect,
+  useActivateOnEffectActivator,
+  useEditContext,
 } from '@bodiless/core';
-import { designable, stylable } from '@bodiless/fclasses';
+import {
+  designable, stylable, HOC, DesignableComponents,
+} from '@bodiless/fclasses';
 import SortableChild from './SortableChild';
 import SortableContainer, { SortableListProps } from './SortableContainer';
 import { useItemHandlers, useFlowContainerDataHandlers } from './model';
@@ -40,6 +46,22 @@ const EditFlowContainerComponents: FlowContainerComponents = {
   ComponentWrapper: stylable<SortableChildProps>(SortableChild),
 };
 
+export const useReactivateOnRemount = (uuid: string) => {
+  const context = useEditContext();
+  const { setId } = useActivateOnEffect();
+  if (context.isInnermost) setId(uuid);
+  useActivateOnEffectActivator(uuid);
+};
+export const withReactivateOnRemount = (
+  uuid: string = v4(),
+): HOC => Component => {
+  const WithReactivateOnRemount: FC<any> = props => {
+    useReactivateOnRemount(uuid);
+    return <Component {...props} />;
+  };
+  return WithReactivateOnRemount;
+};
+
 /**
  * An editable version of the FlowContainer container.
  */
@@ -56,6 +78,16 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props: EditFlowContainerP
   const getItemUseGetMenuOptions = useGetItemUseGetMenuOptions(props);
   const handlers = { ...useFlowContainerDataHandlers(), ...useItemHandlers() };
 
+  let componentsWithActivator: DesignableComponents = {};
+  // useEffect(() => {
+  items.forEach((item: FlowContainerItem) => {
+    componentsWithActivator = {
+      ...componentsWithActivator,
+      [item.type]: withReactivateOnRemount(item.uuid)(components[item.type]),
+    };
+  });
+  // }, [items]);
+
   return (
     <ComponentDisplayModeProvider mode={ComponentDisplayMode.EditFlowContainer}>
       <Wrapper
@@ -68,7 +100,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props: EditFlowContainerP
       >
         {items.map(
           (flowContainerItem: FlowContainerItem, index: number): React.ReactNode => {
-            const ChildComponent = components[flowContainerItem.type];
+            const ChildComponent = componentsWithActivator[flowContainerItem.type];
             if (!ChildComponent) return null;
             return (
               <ChildNodeProvider nodeKey={flowContainerItem.uuid} key={`node-${flowContainerItem.uuid}`}>
