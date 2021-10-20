@@ -80,7 +80,7 @@ const DeletePageForm = (props : DeletePageProps) => {
     ComponentFormWarning,
     ComponentFormTitle,
   } = defaultUI;
-  const formTitle = 'Delete (this) Page';
+  const formTitle = 'Delete Page';
 
   switch (status) {
     case DeletePageState.Init: {
