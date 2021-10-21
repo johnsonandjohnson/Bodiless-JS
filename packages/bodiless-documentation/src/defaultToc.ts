@@ -26,10 +26,7 @@ const toc = {
     VersionControlWorkflow: {},
   },
   Design: {},
-  Components: {
-    'YouTube.md': '',
-    'Navigation.md': '',
-  },
+  Components: {},
   Tools: {},
   Development: {
     Guides: {
