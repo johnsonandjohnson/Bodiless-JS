@@ -32,8 +32,7 @@ import { FlowContainer } from '@bodiless/layouts-ui';
 import { withTitle, withDesc } from '@bodiless/layouts';
 import {
   TokenLibrary, withTokenNamesFromData, withTokensFromProps, TokenPrinter,
-  withTokenPrinterKeys,
-  TokenPanel as TokenPanelClean, withTokenPanelPane,
+  withTokenPrinterKeys, TokenPanel as TokenPanelClean, withTokenPanelPane,
 } from '@bodiless/tokens';
 import Layout from '../../../components/Layout';
 import {

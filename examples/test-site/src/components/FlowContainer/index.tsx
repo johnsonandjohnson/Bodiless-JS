@@ -31,6 +31,7 @@ const FlowContainerDefault = asToken(
 )(FlowContainer);
 
 const FlowContainerDefaultWithContentLibrary = asToken(
+  // withLibraryComponents should be applied before any other HOC designs.
   withLibraryComponents(),
   asDefaultFlowContainer,
   withFlowContainerVariations,
