@@ -32,7 +32,15 @@ export type ContentLibraryOptions = {
   useOverrides?: (props: any) => Partial<OptionGroupDefinition>,
 };
 
-// @todo: move to core?
+/**
+ * Get child key of given node.
+ *
+ * Might refactor to @bodiless/core
+ * https://github.com/johnsonandjohnson/Bodiless-JS/issues/1160
+ *
+ * @param node ContentNode
+ * @returns keys string[]
+ */
 export const childKeys = (node: ContentNode<any>) => {
   const aParent = node.path;
   const aCandidates = node.keys.map(key => key.split('$'));

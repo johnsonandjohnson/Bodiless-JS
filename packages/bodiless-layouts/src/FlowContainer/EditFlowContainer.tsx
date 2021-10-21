@@ -44,7 +44,9 @@ const EditFlowContainerComponents: FlowContainerComponents = {
 };
 
 /**
- * Forces wrapped component to re-mount when component design components changed.
+ * @private
+ *
+ * Forces wrapped component to re-mount when its design keys changed.
  *
  * @param Component The component to re-mount
  */

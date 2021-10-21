@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { v4 } from 'uuid';
 import { Token, HOC } from '@bodiless/fclasses';
 import { useContextActivator, useEditContext } from './hooks';
@@ -40,7 +40,7 @@ export const ActivateOnEffectProvider:React.FunctionComponent = ({ children }) =
  * WithActivateContext is a HOC that wraps the Component in a ActivateContextProvider
  * @param Component The component to wrap
  */
-export const withActivateOnEffect: Token = (Component: any) => {
+export const withActivateOnEffect: Token = Component => {
   const WithActivateOnEffect: FC<any> = props => (
     <ActivateOnEffectProvider>
       <Component {...props} />
@@ -75,13 +75,15 @@ export const useActivateOnEffectActivator = (uuid: string) => {
 export const useReactivateOnRemount = (uuid: string) => {
   const context = useEditContext();
   const { setId } = useActivateOnEffect();
-  if (context.isInnermost) setId(uuid);
+  useEffect(() => {
+    if (context.isInnermost) setId(uuid);
+  }, [context.isInnermost, uuid]);
   useActivateOnEffectActivator(uuid);
 };
 
 export const withReactivateOnRemount = (
   uuid: string = v4(),
-): HOC => (Component: any) => {
+): HOC => Component => {
   const WithReactivateOnRemount: FC<any> = props => {
     useReactivateOnRemount(uuid);
     return <Component {...props} />;

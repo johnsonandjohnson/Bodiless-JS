@@ -219,7 +219,7 @@ const withLibraryMenuOptions = (
  * @returns HOC of flow container.
  */
 const withDesignFromLibrary = (libPath: LibraryNodePath): HOC => Component => {
-  const WithLibraryNodeDesign: FC<any> = observer((props: any) => {
+  const WithDesignFromLibrary: FC<any> = observer((props: any) => {
     const {
       design,
       ...rest
@@ -271,9 +271,20 @@ const withDesignFromLibrary = (libPath: LibraryNodePath): HOC => Component => {
     );
   });
 
-  return WithLibraryNodeDesign;
+  return WithDesignFromLibrary;
 };
 
+/**
+ * Adds content library support to Bodiless flow container component to allow saving
+ * item component with all its content.
+ *
+ * withLibraryComponents provides flow container menu options for adding library name
+ * and description. Also adding library design to flow container so it displays item component
+ * with saved library type.
+ *
+ * @param path user specified library node path for data storage.
+ * @returns Token
+ */
 const withLibraryComponents = (
   path: LibraryNodePath = DEFAULT_CONTENT_LIBRARY_PATH,
 ) => asToken(
