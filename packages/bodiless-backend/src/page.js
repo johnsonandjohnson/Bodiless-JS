@@ -114,12 +114,12 @@ class Page {
           }
 
           const filteredObjects = files
-            .filter(dirent => {
+            .filter(item => {
               if (objType === 'file') {
-                return dirent.isFile();
+                return item.isFile();
               }
               if (objType === 'directory') {
-                return dirent.isDirectory();
+                return item.isDirectory();
               }
               return true;
             });
