@@ -1,13 +1,12 @@
 # Page Menu
 
-Click the **Page** button in the [Toolbar](/ContentEditorUserGuide/#toolbar) to open the _Page_
-menu.
+Click the **Page** button in the [Toolbar](../#toolbar) to open the _Page_ menu.
 
 ![Page icon](../assets/PageIcon.jpg ':size=60')
 
 The _Page_ menu contains a list of features that enable you to perform actions on, and configure,
 the current page, as well as add a new page. To access all of these features, you will need to be in
-[Edit Mode](/ContentEditorUserGuide/#edit-mode).
+[Edit Mode](../#edit-mode).
 
 **Review Mode**  
 ![Page menu in Review Mode](./assets/PageMenuReviewMode.jpg ':size=50%')
