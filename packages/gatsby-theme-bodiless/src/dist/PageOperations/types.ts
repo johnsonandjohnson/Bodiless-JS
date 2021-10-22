@@ -1,3 +1,7 @@
+import {
+  ComponentType,
+  HTMLProps,
+} from 'react';
 import { AxiosPromise } from 'axios';
 
 const DEFAULT_PAGE_TEMPLATE = '_default';
@@ -15,6 +19,9 @@ type PageStatus = {
   errorMessage?: string;
   completeMessage?: string;
   titlePending?: string;
+  formTitle?: string,
+  linkId?: string,
+  FormFields?: (Label: ComponentType<HTMLProps<HTMLLabelElement>>) => void,
 };
 
 type Client = {

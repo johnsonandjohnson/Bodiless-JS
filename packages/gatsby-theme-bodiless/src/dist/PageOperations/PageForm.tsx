@@ -23,6 +23,9 @@ const PageForm = (props : PageStatus) => {
     completeMessage,
     pagePath,
     titlePending,
+    formTitle,
+    linkId,
+    FormFields,
   } = props;
   const defaultUI = useMenuOptionUI();
   const {
@@ -32,7 +35,6 @@ const PageForm = (props : PageStatus) => {
     ComponentFormTitle,
     ComponentFormLink,
   } = defaultUI;
-  const formTitle = 'Clone (this) Page';
   switch (status) {
     case PageState.Init: {
       const CustomComponentFormLabel = flow(
@@ -56,6 +58,7 @@ const PageForm = (props : PageStatus) => {
         <>
           <ContextMenuProvider ui={ui}>
             <ComponentFormTitle>{formTitle}</ComponentFormTitle>
+            {FormFields && FormFields(CustomComponentFormLabel)}
             <PageURLField
               validateOnChange
               validateOnBlur
@@ -76,7 +79,7 @@ const PageForm = (props : PageStatus) => {
         <>
           <ComponentFormTitle>Operation Complete</ComponentFormTitle>
           <ComponentFormDescription>
-            <ComponentFormLink href={pagePath} id="page-link">{`${completeMessage}: ${pagePath}`}</ComponentFormLink>
+            <ComponentFormLink href={pagePath} id={linkId}>{`${completeMessage}: ${pagePath}`}</ComponentFormLink>
           </ComponentFormDescription>
         </>
       );

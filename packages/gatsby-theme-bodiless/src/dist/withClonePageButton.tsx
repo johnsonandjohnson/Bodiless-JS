@@ -95,11 +95,13 @@ const formPageClone = (client: Client) => contextMenuForm({
     <>
       <ComponentFormText type="hidden" field="keepOpen" initialValue />
       <PageForm
+        formTitle="Clone (this) Page"
         status={status}
         errorMessage={errorMessage}
         completeMessage="Click here to visit the cloned page"
         titlePending="Cloning Page"
         pagePath={pagePath}
+        linkId="clone-page-link"
       />
     </>
   );

@@ -23,13 +23,8 @@ import {
   useMenuOptionUI,
   useEditContext,
   withMenuOptions,
-  ContextMenuProvider,
   ContextSubMenu,
 } from '@bodiless/core';
-import { flow } from 'lodash';
-import { addClasses, removeClasses } from '@bodiless/fclasses';
-import type { StylableProps } from '@bodiless/fclasses';
-import { ComponentFormSpinner } from '@bodiless/ui';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
 import verifyPage from './PageVerification';
@@ -39,11 +34,9 @@ import {
   PageStatus,
   DEFAULT_PAGE_TEMPLATE,
   Client,
-  PageURLField as NewPageURLField,
   getPathValue,
+  PageForm,
 } from './PageOperations';
-
-type NewPageProps = PageStatus;
 
 const createPage = async ({ path, client, template } : any) => {
   // Create the page.
@@ -64,87 +57,6 @@ const createPage = async ({ path, client, template } : any) => {
     return Promise.reject(new Error(result.message));
   }
   return Promise.reject(new Error('An internal error occurred. Please try again later.'));
-};
-
-// @TODO resue './PageOperations/PageForm' instead
-const NewPageComp = (props : NewPageProps) => {
-  const {
-    status, errorMessage, pagePath,
-  } = props;
-  const defaultUI = useMenuOptionUI();
-  const {
-    ComponentFormLabel,
-    ComponentFormDescription,
-    ComponentFormText,
-    ComponentFormWarning,
-    ComponentFormTitle,
-    ComponentFormLink,
-  } = defaultUI;
-  const formTitle = 'Add a Blank Page';
-  const { subPageTemplate } = useGatsbyPageContext();
-  const template = subPageTemplate || DEFAULT_PAGE_TEMPLATE;
-  switch (status) {
-    case PageState.Init: {
-      const CustomComponentFormLabel = flow(
-        removeClasses('bl-text-xs'),
-        addClasses('bl-font-bold bl-text-sm'),
-      )(ComponentFormLabel as ComponentType<StylableProps>);
-      const CustomComponentFormLink = flow(
-        removeClasses('bl-block'),
-        addClasses('bl-italic'),
-      )(ComponentFormLink as ComponentType<StylableProps>);
-      const CustomComponentFormWarning = flow(
-        removeClasses('bl-float-left'),
-      )(ComponentFormWarning);
-      const ui = {
-        ...defaultUI,
-        ComponentFormLabel: CustomComponentFormLabel as ComponentType<HTMLProps<HTMLLabelElement>>,
-        ComponentFormLink: CustomComponentFormLink as ComponentType<HTMLProps<HTMLAnchorElement>>,
-        ComponentFormWarning: CustomComponentFormWarning,
-      };
-      return (
-        <>
-          <ContextMenuProvider ui={ui}>
-            <ComponentFormTitle>{formTitle}</ComponentFormTitle>
-            <CustomComponentFormLabel>Template</CustomComponentFormLabel>
-            <ComponentFormText
-              field="template"
-              disabled
-              initialValue={template}
-            />
-            <NewPageURLField
-              validateOnChange
-              validateOnBlur
-            />
-          </ContextMenuProvider>
-        </>
-      );
-    }
-    case PageState.Pending:
-      return (
-        <>
-          <ComponentFormTitle>Creating Page</ComponentFormTitle>
-          <ComponentFormSpinner />
-        </>
-      );
-    case PageState.Complete:
-      return (
-        <>
-          <ComponentFormTitle>Operation Complete</ComponentFormTitle>
-          <ComponentFormDescription>
-            <ComponentFormLink href={pagePath} id="new-page-link">{`Click here to visit the new page: ${pagePath}`}</ComponentFormLink>
-          </ComponentFormDescription>
-        </>
-      );
-    case PageState.Errored:
-      return (
-        <>
-          <ComponentFormTitle>{formTitle}</ComponentFormTitle>
-          <ComponentFormWarning>{errorMessage}</ComponentFormWarning>
-        </>
-      );
-    default: return (<></>);
-  }
 };
 
 const formPageAdd = (client: Client) => contextMenuForm({
@@ -183,13 +95,29 @@ const formPageAdd = (client: Client) => contextMenuForm({
     }
   }, [submits]);
   const { status, errorMessage, pagePath } = state;
+  const { subPageTemplate } = useGatsbyPageContext();
+  const currentTemplate = subPageTemplate || DEFAULT_PAGE_TEMPLATE;
   return (
     <>
       <ComponentFormText type="hidden" field="keepOpen" initialValue />
-      <NewPageComp
+      <PageForm
+        formTitle="Add a Blank Page"
         status={status}
         errorMessage={errorMessage}
+        completeMessage="Click here to visit the new page"
+        titlePending="Creating Page"
         pagePath={pagePath}
+        linkId="new-page-link"
+        FormFields={(Label: ComponentType<HTMLProps<HTMLLabelElement>>) => (
+          <>
+            <Label>Template</Label>
+            <ComponentFormText
+              field="template"
+              disabled
+              initialValue={currentTemplate}
+            />
+          </>
+        )}
       />
     </>
   );
