@@ -87,7 +87,7 @@ icon.
 Click the **Alerts** button to display the notifications and receive details on how to resolve any
 issues (e.g., "Your branch is outdated. Please pull remote changes.").
 
-For more information, please see: [Version Control Workflow](./VersionControlWorkflow/).
+For more information, please see: [File Menu](./FileMenu/).
 
 #### Docs
 
@@ -132,7 +132,7 @@ Click the **File** button to open the _File_ menu and interact with your site's 
 
 ![File menu](./assets/FileMenu.jpg ':size=50%')
 
-For more information, please see: [Version Control Workflow](./VersionControlWorkflow/).
+For more information, please see: [File Menu](./FileMenu/).
 
 ### Page Layout
 

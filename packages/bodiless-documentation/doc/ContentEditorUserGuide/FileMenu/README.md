@@ -1,4 +1,4 @@
-# Version Control Workflow
+# File Menu
 
 Click the **File** button to open the _File_ menu and interact with your site's repository.
 

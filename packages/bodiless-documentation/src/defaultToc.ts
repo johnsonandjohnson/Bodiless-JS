@@ -23,7 +23,7 @@ const toc = {
       Disable: {},
       SEO: {},
     },
-    VersionControlWorkflow: {},
+    FileMenu: {},
   },
   Design: {},
   Components: {},
