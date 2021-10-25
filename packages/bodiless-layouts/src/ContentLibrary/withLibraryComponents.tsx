@@ -135,14 +135,19 @@ const withLibraryMenuOptions = (
          * Move the original flow container node to content library node,
          * with path under DEFAULT_CONTENT_LIBRARY_PATH or with user provided
          * content library path, and update flow container
-         * item to new type as 'ContentLibrary'.
+         * item to new type prefixed with `CONTENT_LIBRARY_TYPE_PREFIX`.
          */
         const destNodePath = [
           ...destPath$,
           item.uuid,
-        ].join('$');
-        const destNode = sourceNode.peer(destNodePath);
-        moveNode(sourceNode, destNode, true);
+        ];
+        const destNodeDataPath = [
+          ...destNodePath,
+          'data',
+        ];
+        const destNode = sourceNode.peer(destNodePath.join('$'));
+        const destNodeData = sourceNode.peer(destNodeDataPath.join('$'));
+        moveNode(sourceNode, destNodeData, true);
 
         const newItemType = `${CONTENT_LIBRARY_TYPE_PREFIX}:${item.type}:${item.uuid}`;
         updateFlowContainerItem({ ...item, type: newItemType });
@@ -245,6 +250,7 @@ const withDesignFromLibrary = (libPath: LibraryNodePath): HOC => Component => {
           },
         } = libraryItemNode;
         const libraryItemDesignKey = `${CONTENT_LIBRARY_TYPE_PREFIX}:${componentKey}:${key}`;
+        const libraryItemNodeData = libraryItemNode.child<LibraryNodeData>('data');
 
         return ({
           ...libDesign,
@@ -253,7 +259,7 @@ const withDesignFromLibrary = (libPath: LibraryNodePath): HOC => Component => {
             withType('Content Library')(),
             withTitle(title),
             withDesc(description),
-            withAbsoluteNode(libraryItemNode),
+            withAbsoluteNode(libraryItemNodeData),
           ),
         });
       },

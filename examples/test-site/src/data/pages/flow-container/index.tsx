@@ -112,13 +112,23 @@ const FlowContainerPage = (props: any) => (
   <Page {...props}>
     <Layout>
       <h1 className="text-3xl font-bold">FlowContainer Examples</h1>
-      <H2>Default FlowContainer</H2>
+
+      <H2>Content Library FlowContainer</H2>
       <FlowContainerDefaultWithContentLibrary
         id={FLOW_CONTAINER_PAGE_PATH}
         nodeKey={FLOW_CONTAINER_PAGE_PATH}
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey={FLOW_CONTAINER_PAGE_PATH} />
+
+      <H2>Default FlowContainer</H2>
+      <FlowContainerDefault
+        id="defaultFlowContainer"
+        nodeKey="defaultFlowContainer"
+      />
+      <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
+      <NodeViewer nodeKey="defaultFlowContainer" />
+
       <H2>
         FlowContainer with constrained widths of 50% & 100% only
       </H2>

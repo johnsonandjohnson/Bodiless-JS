@@ -80,9 +80,10 @@ export const useActivateOnEffectActivator = (uuid: string) => {
 const useReactivateOnRemount = (uuid: string) => {
   const context = useEditContext();
   const { setId } = useActivateOnEffect();
+  const { isInnermost } = context;
   useEffect(() => {
-    if (context.isInnermost) setId(uuid);
-  }, [context.isInnermost, uuid]);
+    if (isInnermost) setId(uuid);
+  }, [isInnermost, uuid]);
   useActivateOnEffectActivator(uuid);
 };
 
