@@ -19,7 +19,7 @@ In the _Page_ menu, you will find the following items:
 * [New](./New/)
 * Move<sup>*</sup>
 * [Disable](./Disable/)<sup>*</sup>
-* Delete<sup>*</sup>
+* [Delete](./Delete/)<sup>*</sup>
 * GTM<sup>*</sup>
 * [SEO](./SEO/)<sup>*</sup>
 * Share<sup>*</sup>
