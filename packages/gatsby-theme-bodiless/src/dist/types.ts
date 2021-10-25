@@ -13,6 +13,12 @@
  */
 
 import { AxiosPromise } from 'axios';
+import type {
+  BaseFieldProps,
+  FormValue,
+  FormValues,
+  FormError,
+} from 'informed';
 
 export enum ItemStateEvent {
   UpdateFromServer,
@@ -43,3 +49,12 @@ export type GitClient = {
   pull: () => AxiosPromise<any>,
   reset: () => AxiosPromise<any>,
 };
+
+/**
+ * props that can be passed to NewPageURLField
+ * disallow overriding field prop
+ * if we decide to allow overriding it in the future
+ * then also we need to allow overriding the second NewPageURLField input
+ */
+export type FieldProps = Omit<BaseFieldProps, 'field'>;
+export type FieldValidate = (value: FormValue, values: FormValues) => FormError;

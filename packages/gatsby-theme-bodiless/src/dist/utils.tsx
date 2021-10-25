@@ -16,12 +16,11 @@ import { useCallback } from 'react';
 import { useNode } from '@bodiless/core';
 import { useField } from 'informed';
 import type {
-  BaseFieldProps,
   FormValue,
   FormValues,
-  FormError,
 } from 'informed';
 import path from 'path';
+import type { FieldValidate } from './types';
 
 const BASE_PATH_FIELD_NAME = 'basePath';
 const PAGE_URL_FIELD_NAME = 'pagePath';
@@ -72,15 +71,6 @@ const validatePagePath = (
     : undefined
 );
 
-/**
- * props that can be passed to NewPageURLField
- * disallow overriding field prop
- * if we decide to allow overriding it in the future
- * then also we need to allow overriding the second NewPageURLField input
- */
-type FieldProps = Omit<BaseFieldProps, 'field'>;
-type FieldValidate = (value: FormValue, values: FormValues) => FormError;
-
 const getPageUrlValidator = (validate?: FieldValidate) => useCallback(
   (value: FormValue, values: FormValues) => validateEmptyField(value)
     || validatePageUrl(value)
@@ -128,9 +118,4 @@ export {
   joinPath,
   fieldValueToUrl,
   getPathValue,
-};
-
-export type {
-  FieldProps,
-  FieldValidate,
 };

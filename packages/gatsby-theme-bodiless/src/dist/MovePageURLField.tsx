@@ -24,7 +24,7 @@ import {
   joinPath,
   fieldValueToUrl,
 } from './utils';
-import type { FieldProps } from './utils';
+import type { FieldProps } from './types';
 
 const PAGE_URL_FIELD_NAME = 'pagePath';
 const BASE_PATH_EMPTY_VALUE = '/';
