@@ -5,9 +5,13 @@ the current page, or the page itself.
 
 ![Disable icon](./assets/PageDisableIcon.jpg ':size=60')
 
+<!-- TODO: Link "Delete" to the corresponding page once it's documented. -->
 The disablement of a page means that the page will not be rendered/available on the Preview site
-(i.e., the published static site), but will still be present in [Edit](../../#edit-mode) and [Review
-Mode](../../#review-mode).
+(i.e., the published static site), but will still exist in [Edit](../../#edit-mode) and [Review
+Mode](../../#review-mode). This allows you to temporarily take a page offline but retain its
+content. If you believe the page will be permanently offline, we recommend you use the **Delete**
+operation to remove the page from your site (_Note:_ This _will_ result in a loss of that page's
+content).
 
 Disabling the more granular features related to a page will alter the Preview/Review/Edit Mode
 experiences differently, depending upon the feature(s) selected.
@@ -38,13 +42,6 @@ To disable features:
 
 ## Disable Page
 
-<!-- TODO: Link "Delete" to the corresponding page once it's documented. -->
-Disablement of a page means that the page will not be rendered on the Preview (Static) site, but
-will still exist in Edit and Review Mode. This allows you to temporarily take a page offline but
-retain its content. If you believe the page will be permanently offline, we recommend you use the
-**Delete** operation to remove the page from your site (_Note:_ This _will_ result in a loss of that
-page's content).
-
 Select the "Page" checkbox to mark the page and all the nested features for disablement:
 
 * [Menu links](#disable-menu-links)
@@ -74,7 +71,7 @@ disabled — even if the page itself has been disabled.
 
 Select the "Non-menu links" checkbox to disable all links leading to the current page that appear in
 components utilizing the BodilessJS [Link Component](/Components/Link) (e.g., links created using
-the [Rich Text Editor Component](/Components/RichText)).
+the [Rich Text Editor Component](/Components/RichText) or [Card Component](/Components/Card)).
 
 When disabled, any links targeting the current page — that aren't in menus — will not be rendered in
 Preview (Static) or Review Mode (i.e., for each of the affected links, the anchor element will not

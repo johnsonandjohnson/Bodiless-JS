@@ -24,7 +24,7 @@ const toc = {
       Delete: {},
       SEO: {},
     },
-    VersionControlWorkflow: {},
+    FileMenu: {},
   },
   Design: {},
   Components: {},
