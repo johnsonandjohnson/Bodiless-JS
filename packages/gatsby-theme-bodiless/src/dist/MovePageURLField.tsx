@@ -18,11 +18,8 @@ import { useField } from 'informed';
 import {
   useBasePathField,
   isEmptyValue,
-  validatePageUrl,
   getPageUrlValidator,
   getPagePathValidator,
-  joinPath,
-  fieldValueToUrl,
 } from './utils';
 import type { FieldProps } from './types';
 
@@ -42,7 +39,6 @@ const INPUT_FIELD_BLOCK_CLASSES = INPUT_FIELD_DEFAULT_CLASSES.concat(' bl-block 
 const MovePageURLField = (props: FieldProps) => {
   const {
     ComponentFormLabel,
-    ComponentFormLink,
     ComponentFormWarning,
   } = useMenuOptionUI();
   const {
@@ -69,7 +65,7 @@ const MovePageURLField = (props: FieldProps) => {
     ...rest,
   });
   const { value } = fieldState;
-  const { setValue, setError } = fieldApi;
+  const { setValue } = fieldApi;
   const { onChange, ...restUserProps } = userProps;
   const fieldLabel = 'New URL';
   const inputClasses = isFullUrl ? INPUT_FIELD_BLOCK_CLASSES : INPUT_FIELD_INLINE_CLASSES;
@@ -99,24 +95,6 @@ const MovePageURLField = (props: FieldProps) => {
           }
         }}
       />
-      {
-        !isBasePathEmpty
-        && (
-          <div
-            className="bl-block"
-          >
-            <ComponentFormLink
-              onClick={() => {
-                setValue(joinPath(parentBasePathValue, fieldValueToUrl(value)));
-                setBasePathValue(BASE_PATH_EMPTY_VALUE);
-                if (validatePageUrl(value) === undefined) setError(undefined);
-              }}
-            >
-              Edit
-            </ComponentFormLink>
-          </div>
-        )
-      }
       {
         fieldState.error ? (
           <ComponentFormWarning>{fieldState.error}</ComponentFormWarning>

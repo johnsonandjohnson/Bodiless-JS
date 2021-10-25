@@ -18,6 +18,7 @@ import React, {
   useEffect,
   useState,
   ComponentType,
+  HTMLProps,
 } from 'react';
 import { flow } from 'lodash';
 import {
@@ -110,8 +111,8 @@ const MovePageComp = (props : MovePageProps) => {
       )(ComponentFormWarning);
       const ui: object = {
         ...defaultUI,
-        ComponentFormLabel: CustomComponentFormLabel,
-        ComponentFormLink: CustomComponentFormLink,
+        ComponentFormLabel: CustomComponentFormLabel as ComponentType<HTMLProps<HTMLLabelElement>>,
+        ComponentFormLink: CustomComponentFormLink as ComponentType<HTMLProps<HTMLAnchorElement>>,
         ComponentFormWarning: CustomComponentFormWarning,
       };
       return (
@@ -119,9 +120,8 @@ const MovePageComp = (props : MovePageProps) => {
           <ContextMenuProvider ui={ui}>
             <ComponentFormTitle>{formTitle}</ComponentFormTitle>
             <ComponentFormDescription>Move this page to a new URL.</ComponentFormDescription>
-            <ComponentFormLabel>Current URL</ComponentFormLabel>
+            <CustomComponentFormLabel>Current URL</CustomComponentFormLabel>
             <ComponentFormDescription>{basePathValue}</ComponentFormDescription>
-            <ComponentFormLabel>New URL</ComponentFormLabel>
             <MovePageURLField
               validateOnChange
               validateOnBlur
@@ -222,7 +222,6 @@ const formPageMove = (client: Client) => contextMenuForm({
           formApi.setValue('keepOpen', false);
         });
     }
-
     if (submits && path) {
       context.showPageOverlay({ hasSpinner: false });
       actualState = MovePageState.Pending;
