@@ -32,7 +32,8 @@ import {
 import { ComponentFormSpinner } from '@bodiless/ui';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
-import MovePageURLField, { getPathValue } from './MovePageURLField';
+import MovePageURLField from './MovePageURLField';
+import { getPathValue } from './utils';
 
 type Client = {
   movePage: (origin: string, destination: string) => AxiosPromise<any>;

@@ -35,7 +35,8 @@ import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
 import verifyPage from './PageVerification';
 import { useGatsbyPageContext } from './GatsbyPageProvider';
-import NewPageURLField, { getPathValue } from './NewPageURLField';
+import NewPageURLField from './NewPageURLField';
+import { getPathValue } from './utils';
 
 type Client = {
   savePage: (path: string, template?: string) => AxiosPromise<any>;
