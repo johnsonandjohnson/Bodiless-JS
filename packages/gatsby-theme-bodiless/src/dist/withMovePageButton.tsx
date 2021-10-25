@@ -14,8 +14,12 @@
 
 /* eslint-disable no-alert */
 import React, {
-  useCallback, useEffect, useState,
+  useCallback,
+  useEffect,
+  useState,
+  ComponentType,
 } from 'react';
+import { flow } from 'lodash';
 import {
   contextMenuForm,
   useMenuOptionUI,
@@ -27,7 +31,7 @@ import {
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
 import {
-  addClasses, removeClasses, asToken,
+  addClasses, removeClasses, StylableProps,
 } from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
 import BackendClient from './BackendClient';
@@ -85,6 +89,7 @@ const MovePageComp = (props : MovePageProps) => {
   const defaultUI = useMenuOptionUI();
   const {
     ComponentFormLabel,
+    ComponentFormLink,
     ComponentFormDescription,
     ComponentFormWarning,
     ComponentFormTitle,
@@ -92,11 +97,22 @@ const MovePageComp = (props : MovePageProps) => {
   const formTitle = 'Move';
   switch (status) {
     case MovePageState.Init: {
+      const CustomComponentFormLabel = flow(
+        removeClasses('bl-text-xs'),
+        addClasses('bl-font-bold bl-text-sm'),
+      )(ComponentFormLabel as ComponentType<StylableProps>);
+      const CustomComponentFormLink = flow(
+        removeClasses('bl-block'),
+        addClasses('bl-italic'),
+      )(ComponentFormLink as ComponentType<StylableProps>);
+      const CustomComponentFormWarning = flow(
+        removeClasses('bl-float-left'),
+      )(ComponentFormWarning);
       const ui: object = {
         ...defaultUI,
-        ComponentFormLabel: asToken(removeClasses('bl-text-xs'), addClasses('bl-font-bold bl-text-sm')),
-        ComponentFormLink: asToken(removeClasses('bl-block'), addClasses('bl-italic')),
-        ComponentFormWarning: removeClasses('bl-float-left'),
+        ComponentFormLabel: CustomComponentFormLabel,
+        ComponentFormLink: CustomComponentFormLink,
+        ComponentFormWarning: CustomComponentFormWarning,
       };
       return (
         <>
