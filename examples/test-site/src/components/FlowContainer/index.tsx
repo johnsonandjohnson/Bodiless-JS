@@ -21,7 +21,7 @@ import {
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withRichTextVariations from './withRichTextVariations';
 import withImageVariations from './withImageVariations';
-import withFlowContainerVariations from './withFlowContainerVariations';
+import withFlowContainerVariations, { withLibraryFlowContainerVariations } from './withFlowContainerVariations';
 import asDefaultFlowContainer from './asDefaultFlowContainer';
 import { asFlowContainerRTL, asFlowContainerWithMargins } from './token';
 
@@ -34,7 +34,7 @@ const FlowContainerDefaultWithContentLibrary = asToken(
   // withLibraryComponents should be applied before any other HOC designs.
   withLibraryComponents(),
   asDefaultFlowContainer,
-  withFlowContainerVariations,
+  withLibraryFlowContainerVariations,
 )(FlowContainer);
 
 const FlowContainerDefaultRTL = asToken(
@@ -45,6 +45,17 @@ const FlowContainerDefaultRTL = asToken(
   ),
   asFlowContainerRTL,
 )(FlowContainerDefault);
+
+const FlowContainerDefaultWithContentLibraryRTL = asToken(
+  withLibraryComponents(),
+  ifNotComponentSelector(
+    withDesign({
+      FlowContainer: asFlowContainerRTL,
+    }),
+  ),
+  asDefaultFlowContainer,
+  asFlowContainerRTL,
+)(FlowContainer);
 
 const FlowContainerLimited = asToken(
   withRichTextVariations,
@@ -59,4 +70,5 @@ export {
   FlowContainerLimited,
   FlowContainerDefaultRTL,
   FlowContainerDefaultWithContentLibrary,
+  FlowContainerDefaultWithContentLibraryRTL,
 };

@@ -27,7 +27,10 @@ import Helmet from 'react-helmet';
 // @ts-ignore Could not find a declaration file...
 import resolveConfig from 'tailwindcss/resolveConfig';
 import Layout from '../../../components/Layout';
-import { FlowContainerDefaultRTL } from '../../../components/FlowContainer';
+import {
+  FlowContainerDefaultRTL,
+  FlowContainerDefaultWithContentLibraryRTL,
+} from '../../../components/FlowContainer';
 // @ts-ignore Could not find a declaration file...
 import tailWindConfig from '../../../../tailwind.config';
 
@@ -47,6 +50,13 @@ const FlowContainerPage = (props: any) => (
     <Helmet htmlAttributes={{ dir: 'rtl' }} />
     <Layout>
       <H1>RTL FlowContainer Examples</H1>
+
+      <H2>Content Library FlowContainer RTL</H2>
+      <FlowContainerDefaultWithContentLibraryRTL
+        id="rtl=flow-container-with-library"
+        nodeKey="rtl_flow_container_with_library"
+      />
+
       <H2>Default Flow Container RTL</H2>
       <RTLFlowContainer
         id="rtl-flow-container"
