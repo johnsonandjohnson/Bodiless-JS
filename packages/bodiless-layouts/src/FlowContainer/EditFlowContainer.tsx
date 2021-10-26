@@ -18,7 +18,7 @@ import { arrayMove, SortEnd } from 'react-sortable-hoc';
 import { observer } from 'mobx-react-lite';
 import { flowRight } from 'lodash';
 import {
-  withNode, withMenuOptions, withResizeDetector, withActivateOnEffect, withReactivateOnRemount,
+  withNode, withMenuOptions, withResizeDetector, withActivateOnEffect,
 } from '@bodiless/core';
 import {
   designable, stylable, DesignableComponents, ComponentOrTag,
@@ -83,7 +83,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props: EditFlowContainerP
   items.forEach((item: FlowContainerItem) => {
     componentsWithActivator = {
       ...componentsWithActivator,
-      [item.type]: withReactivateOnRemount(item.uuid)(components[item.type]),
+      [item.type]: components[item.type],
     };
   });
 

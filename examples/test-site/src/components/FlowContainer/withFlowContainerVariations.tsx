@@ -24,6 +24,7 @@ import {
   withTitle,
   withDesc,
   ifComponentSelector,
+  withLibraryComponents,
 } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import { withType } from './Categories';
@@ -45,6 +46,24 @@ const withFlowContainerVariations = withDesign({
     withType('Flow Container')(),
     withTitle('Flow Container'),
     withDesc('Adds a flow container'),
+  ),
+});
+
+export const withLibraryFlowContainerVariations = withDesign({
+  FlowContainer: asToken(
+    replaceWith(
+      asToken(
+        withLibraryComponents(),
+        asDefaultFlowContainer,
+        withNodeKey('innerLibraryFC'),
+      )(FlowContainer),
+    ),
+    ifComponentSelector(
+      replaceWith(FlowContainerPreview),
+    ),
+    withType('Flow Container with Library')(),
+    withTitle('Flow Container with Library'),
+    withDesc('Adds a flow container with library'),
   ),
 });
 

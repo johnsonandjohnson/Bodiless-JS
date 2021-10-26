@@ -164,9 +164,9 @@ const withLibraryMenuOptions = (
     const form = useContextMenuForm({ renderForm, submitValues });
     const baseOption: OptionGroupDefinition = {
       name: 'content-library',
-      label: isLibraryItem(item) ? 'Unlink' : 'Library',
+      label: isLibraryItem(item) ? 'Unlink' : 'Add',
       isActive: isLibraryItem(item),
-      groupLabel: 'Content',
+      groupLabel: 'Library',
       groupMerge: 'none',
       icon: 'account_balance',
       local: true,
