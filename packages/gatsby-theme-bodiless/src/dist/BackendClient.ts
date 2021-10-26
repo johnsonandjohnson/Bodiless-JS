@@ -101,6 +101,15 @@ export default class BackendClient {
     return this.delete(url);
   }
 
+  clonePage(origin: string, destination: string) {
+    const payload = {
+      origin,
+      destination,
+    };
+    const url = `${this.prefix}/clone`;
+    return this.post(url, payload);
+  }
+
   commit(
     message: string,
     directories: string[],
