@@ -38,7 +38,6 @@ const INPUT_FIELD_BLOCK_CLASSES = INPUT_FIELD_DEFAULT_CLASSES.concat(' bl-block 
  */
 const MovePageURLField = (props: FieldProps) => {
   const {
-    ComponentFormLabel,
     ComponentFormWarning,
   } = useMenuOptionUI();
   const {
