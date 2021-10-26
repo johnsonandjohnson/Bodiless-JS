@@ -18,7 +18,6 @@ import { useField } from 'informed';
 import {
   useBasePathField,
   isEmptyValue,
-  getPageUrlValidator,
   getPagePathValidator,
 } from './utils';
 import type { FieldProps } from './types';
@@ -27,7 +26,6 @@ const PAGE_URL_FIELD_NAME = 'pagePath';
 const BASE_PATH_EMPTY_VALUE = '/';
 const INPUT_FIELD_DEFAULT_CLASSES = 'bl-text-gray-900 bl-bg-gray-100 bl-text-xs bl-min-w-xl-grid-1 bl-my-grid-2 bl-p-grid-1';
 const INPUT_FIELD_INLINE_CLASSES = INPUT_FIELD_DEFAULT_CLASSES.concat(' bl-inline');
-const INPUT_FIELD_BLOCK_CLASSES = INPUT_FIELD_DEFAULT_CLASSES.concat(' bl-block bl-w-full');
 
 /**
  * informed custom field that provides ability to enter new page path
@@ -52,28 +50,22 @@ const MovePageURLField = (props: FieldProps) => {
 
   const isBasePathEmpty = isEmptyValue(parentBasePathValue)
   || parentBasePathValue === BASE_PATH_EMPTY_VALUE;
-  const isFullUrl = isBasePathEmpty;
 
   const { validate, ...rest } = props;
   const {
     fieldState, fieldApi, render, ref, userProps,
   } = useField({
     field: PAGE_URL_FIELD_NAME,
-    validate: isFullUrl ? getPageUrlValidator(validate) : getPagePathValidator(validate),
+    validate: getPagePathValidator(validate),
     placeholder: 'thispage',
     ...rest,
   });
   const { value } = fieldState;
   const { setValue } = fieldApi;
   const { onChange, ...restUserProps } = userProps;
-  const inputClasses = isFullUrl ? INPUT_FIELD_BLOCK_CLASSES : INPUT_FIELD_INLINE_CLASSES;
+  const inputClasses = INPUT_FIELD_INLINE_CLASSES;
   return render(
     <>
-      {
-        !isFullUrl
-          ? (<span className="mr-1">{`${parentBasePathValue}`}</span>)
-          : null
-      }
       <input
         {...restBasePathProps}
         type="hidden"

@@ -115,6 +115,12 @@ class Page {
         return;
       }
 
+      fs.access(newPathDirectory, err => {
+        if (!err) {
+          resolve('The page cannot be moved');
+        }
+      });
+
       fs.rename(pathDirectory, newPathDirectory, err => {
         if (err) {
           reject(err);
