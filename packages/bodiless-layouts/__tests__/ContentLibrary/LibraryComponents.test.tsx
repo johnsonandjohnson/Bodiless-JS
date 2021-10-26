@@ -13,44 +13,13 @@
  */
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-// import {
-//   withNode,
-//   DefaultContentNode,
-//   NodeProvider,
-// } from '@bodiless/core';
-// import type { ContentNode } from '@bodiless/core';
 import {
   asToken,
-  replaceWith,
   withDesign,
 } from '@bodiless/fclasses';
-import {
-  withTitle,
-  withDesc,
-  withFacet,
-} from '../../src/meta';
 import { withLibraryComponents } from '../../src/ContentLibrary/withLibraryComponents';
 import EditFlowContainer from '../../src/FlowContainer/EditFlowContainer';
 
-// const contentLibPath = '/path/to/library';
-// const contentLibData = {
-// };
-// const getMockNode = (): ContentNode<any> => {
-//   const getters = {
-//     getNode: jest.fn((path: string[]) => contentLibData[path[path.length - 1]]),
-//     getKeys: jest.fn(() => Object.keys(contentLibData)),
-//     hasError: jest.fn(),
-//     getPagePath: jest.fn(() => '/'),
-//     getBaseResourcePath: jest.fn(() => '/'),
-//   };
-//   const actions = {
-//     setNode: jest.fn(),
-//     deleteNode: jest.fn(),
-//   };
-//   return new DefaultContentNode(actions, getters, '');
-// };
-
-const withType = withFacet('Type');
 describe('withLibraryComponents', () => {
   it('adds empty design if no content library data exists.', () => {
     const ComponentWithLibrary = withLibraryComponents()(EditFlowContainer);
