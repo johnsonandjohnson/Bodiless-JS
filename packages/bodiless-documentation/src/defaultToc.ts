@@ -21,6 +21,7 @@ const toc = {
     PageMenu: {
       New: {},
       Disable: {},
+      Clone: {},
       SEO: {},
     },
     FileMenu: {},
