@@ -53,6 +53,9 @@ const EditFlowContainerComponents: FlowContainerComponents = {
 const withKeyFromDesign = (Component: ComponentOrTag<any>) => {
   const WithKeyFromDesign = (props: any) => {
     const { design } = props;
+    if (!design) {
+      return <Component {...props} />;
+    }
     const json = JSON.stringify(Object.keys(design).sort());
     const key = createHash('md5').update(json).digest('hex');
     return <Component {...props} key={key} />;
