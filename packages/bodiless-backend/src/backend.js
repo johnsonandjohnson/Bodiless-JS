@@ -282,6 +282,7 @@ class Backend {
     this.setRoute(`${backendPrefix}/content/*`, Backend.setContent);
     this.setRoute(`${backendPrefix}/log`, Backend.log);
     this.setRoute(`${backendPrefix}/pages`, Backend.setPages);
+    this.setRoute(`${backendPrefix}/clone`, Backend.clonePage);
     this.setRoute(`${backendPrefix}/remove/*`, Backend.removePage);
     this.setRoute(`${backendPrefix}/directory/child/*`, Backend.directoryChild);
   }
@@ -679,6 +680,30 @@ class Backend {
         .catch(reason => {
           logger.log(reason);
           res.send({});
+        });
+    });
+  }
+
+  static clonePage(route) {
+    route.post(async (req, res) => {
+      const { body: { origin, destination } } = req;
+      const page = Backend.getPage(destination);
+      page.setBasePath(backendPagePath);
+      logger.log(`Start cloning page for:${destination}`);
+
+      page
+        .copyDirectory(origin, destination)
+        .then(data => {
+          if (data) {
+            logger.log(data);
+            res.send(data);
+          } else {
+            res.send({});
+          }
+        })
+        .catch(reason => {
+          logger.log(reason);
+          res.status(500).send(`${reason}`);
         });
     });
   }

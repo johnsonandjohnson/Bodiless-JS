@@ -30,6 +30,7 @@ import GatsbyNodeProvider, {
 } from './GatsbyNodeProvider';
 import GatsbyPageProvider, { PageProviderProps } from './GatsbyPageProvider';
 import withNewPageButton from './withNewPageButton';
+import withClonePageButton from './withClonePageButton';
 import withDeletePageButton from './withDeletePageButton';
 import useGitButtons from './useGitButtons';
 
@@ -55,6 +56,7 @@ const SwitcherButton = withSwitcherButton(Fragment);
 const NewPageButton = withNewPageButton(Fragment);
 const DeletePageButton = withDeletePageButton(Fragment);
 const DisablePageButton = withPageDisableButton(Fragment);
+const ClonePageButton = withClonePageButton(Fragment);
 
 const GitButtons: FC = () => {
   useGitButtons();
@@ -79,6 +81,7 @@ const Page: FC<PageProps> = observer(({ children, ui, ...rest }) => {
                 <OnNodeErrorNotification />
                 <NewPageButton />
                 <DisablePageButton />
+                <ClonePageButton />
                 <GitButtons />
                 <Wrapper clickable>
                   {children}
