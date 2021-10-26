@@ -32,8 +32,8 @@ When providing a path/URL for the cloned page, there are some restrictions to be
 
 * You cannot create or clone a page using a path/URL with uppercase letters.
   * For SEO reasons, BodilessJS enforces lowercase URLs.
-* You cannot create pages beginning or ending with `-` or `_`, as pages named with these patterns
-  are considered special pages by Gatsby.
+* You cannot create/clone pages beginning or ending with `-` or `_`, as pages named with these
+  patterns are considered special pages by Gatsby.
   * If either of these cases are needed for a page on your site, a developer will need to create the
     page via code.
 
