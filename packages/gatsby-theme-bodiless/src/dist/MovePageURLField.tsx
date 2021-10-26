@@ -67,11 +67,9 @@ const MovePageURLField = (props: FieldProps) => {
   const { value } = fieldState;
   const { setValue } = fieldApi;
   const { onChange, ...restUserProps } = userProps;
-  const fieldLabel = 'New URL';
   const inputClasses = isFullUrl ? INPUT_FIELD_BLOCK_CLASSES : INPUT_FIELD_INLINE_CLASSES;
   return render(
     <>
-      <ComponentFormLabel htmlFor="new-page-path">{fieldLabel}</ComponentFormLabel>
       {
         !isFullUrl
           ? (<span className="mr-1">{`${parentBasePathValue}`}</span>)

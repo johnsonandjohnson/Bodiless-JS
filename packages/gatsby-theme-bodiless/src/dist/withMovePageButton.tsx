@@ -122,6 +122,7 @@ const MovePageComp = (props : MovePageProps) => {
             <ComponentFormDescription>Move this page to a new URL.</ComponentFormDescription>
             <CustomComponentFormLabel>Current URL</CustomComponentFormLabel>
             <ComponentFormDescription>{basePathValue}</ComponentFormDescription>
+            <CustomComponentFormLabel>New URL</CustomComponentFormLabel>
             <MovePageURLField
               validateOnChange
               validateOnBlur
@@ -140,7 +141,7 @@ const MovePageComp = (props : MovePageProps) => {
     case MovePageState.Complete:
       return (
         <>
-          <ComponentFormTitle>Operation Complete</ComponentFormTitle>
+          <ComponentFormTitle>{formTitle}</ComponentFormTitle>
           <ComponentFormDescription>
             Move operation was successful. Upon closing this dialog you will be redirected to the
             new page’s url.
