@@ -200,7 +200,7 @@ const formPageMove = (client: Client) => contextMenuForm({
   const origin = usePagePath();
 
   const {
-    submits, values,
+    submits, invalid, values,
   } = formState;
   const [state, setState] = useState<MovePageProps>({
     status: MovePageState.Init,
@@ -222,7 +222,7 @@ const formPageMove = (client: Client) => contextMenuForm({
           formApi.setValue('keepOpen', false);
         });
     }
-    if (submits && path) {
+    if (submits && path && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
       actualState = MovePageState.Pending;
       setState({ status: MovePageState.Pending });
