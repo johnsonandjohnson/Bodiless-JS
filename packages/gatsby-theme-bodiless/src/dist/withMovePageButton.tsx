@@ -223,33 +223,41 @@ const formPageMove = (client: Client) => contextMenuForm({
           formApi.setValue('keepOpen', false);
         });
     }
-    if (submits && path && invalid === false) {
-      context.showPageOverlay({ hasSpinner: false });
-      actualState = MovePageState.Pending;
-      setState({ status: MovePageState.Pending });
 
+    if (submits && path && invalid === false) {
       const pathArray = path.split('/');
       pathArray.splice(-2, 1);
       const destination = pathArray.join('/');
       destinationGlb = destination;
+      const originClear = origin.slice(0, -1);
 
-      movePage({
-        origin,
-        destination,
-        client,
-      })
-        .then(() => {
-          actualState = MovePageState.Complete;
-          setState({ status: MovePageState.Complete });
+      if (destination === originClear) {
+        actualState = MovePageState.Errored;
+        setState({ status: MovePageState.Errored, errorMessage: 'The page cannot be moved.' });
+        formApi.setValue('keepOpen', false);
+      } else {
+        context.showPageOverlay({ hasSpinner: false });
+        actualState = MovePageState.Pending;
+        setState({ status: MovePageState.Pending });
+
+        movePage({
+          origin,
+          destination,
+          client,
         })
-        .catch((err: Error) => {
-          actualState = MovePageState.Errored;
-          setState({ status: MovePageState.Errored, errorMessage: err.message });
-        })
-        .finally(() => {
-          context.hidePageOverlay();
-          formApi.setValue('keepOpen', false);
-        });
+          .then(() => {
+            actualState = MovePageState.Complete;
+            setState({ status: MovePageState.Complete });
+          })
+          .catch((err: Error) => {
+            actualState = MovePageState.Errored;
+            setState({ status: MovePageState.Errored, errorMessage: err.message });
+          })
+          .finally(() => {
+            context.hidePageOverlay();
+            formApi.setValue('keepOpen', false);
+          });
+      }
     }
   }, [submits]);
   const { status, errorMessage } = state;
