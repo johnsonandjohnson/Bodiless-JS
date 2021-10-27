@@ -14,6 +14,8 @@
 
 /* eslint-disable no-alert */
 import React, {
+  ComponentType,
+  HTMLProps,
   useCallback, useEffect, useState,
 } from 'react';
 import {
@@ -26,12 +28,15 @@ import {
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
 import {
-  addClasses, asToken, removeClasses,
+  addClasses, asToken, removeClasses, StylableProps,
 } from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
+import flow from 'lodash/flow';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
-import NewPageURLField from './NewPageURLField';
+import {
+  PageURLField as NewPageURLField,
+} from './PageOperations';
 
 type Client = {
   deletePage: (path: string) => AxiosPromise<any>;
@@ -79,24 +84,30 @@ const DeletePageForm = (props : DeletePageProps) => {
     ComponentFormDescription,
     ComponentFormWarning,
     ComponentFormTitle,
+    ComponentFormLabel,
   } = defaultUI;
-  const formTitle = 'Delete (this) Page';
+  const formTitle = 'Delete Page';
 
   switch (status) {
     case DeletePageState.Init: {
+      const CustomComponentFormLabel = flow(
+        removeClasses('bl-text-xs'),
+        addClasses('bl-font-bold bl-text-base'),
+      )(ComponentFormLabel as ComponentType<StylableProps>);
       const ui: object = {
         ...defaultUI,
-        ComponentFormLabel: asToken(removeClasses('bl-text-xs'), addClasses('bl-font-bold bl-text-sm')),
+        ComponentFormLabel: CustomComponentFormLabel as ComponentType<HTMLProps<HTMLLabelElement>>,
         ComponentFormLink: asToken(removeClasses('bl-block'), addClasses('bl-italic')),
         ComponentFormWarning: removeClasses('bl-float-left'),
+        ComponentFormTitle: addClasses('bl-italic'),
       };
       return (
         <>
           <ContextMenuProvider ui={ui}>
             <ComponentFormTitle>{formTitle}</ComponentFormTitle>
-            <ComponentFormTitle>
+            <CustomComponentFormLabel>
               Are you sure you want to delete the current page?
-            </ComponentFormTitle>
+            </CustomComponentFormLabel>
             <NewPageURLField hidden />
           </ContextMenuProvider>
         </>
@@ -109,15 +120,28 @@ const DeletePageForm = (props : DeletePageProps) => {
           <ComponentFormSpinner />
         </>
       );
-    case DeletePageState.Complete:
+    case DeletePageState.Complete: {
+      const CustomComponentFormLabel = flow(
+        removeClasses('bl-text-xs'),
+        addClasses('bl-font-bold bl-text-base'),
+      )(ComponentFormLabel as ComponentType<StylableProps>);
+      const ui: object = {
+        ...defaultUI,
+        ComponentFormLabel: CustomComponentFormLabel as ComponentType<HTMLProps<HTMLLabelElement>>,
+      };
       return (
         <>
-          <ComponentFormTitle>Delete operation was successful.</ComponentFormTitle>
-          <ComponentFormDescription>
-            Upon closing this dialog you will be redirected to the deleted page’s parent page.
-          </ComponentFormDescription>
+          <ContextMenuProvider ui={ui}>
+            <ComponentFormTitle>{formTitle}</ComponentFormTitle>
+            <CustomComponentFormLabel>Delete operation was successful.</CustomComponentFormLabel>
+            <ComponentFormDescription>
+              Upon closing this dialog you will be redirected to the deleted page’s parent page.
+            </ComponentFormDescription>
+          </ContextMenuProvider>
+
         </>
       );
+    }
     case DeletePageState.Errored:
       return (
         <>

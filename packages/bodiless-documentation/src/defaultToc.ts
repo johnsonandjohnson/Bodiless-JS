@@ -17,12 +17,17 @@ const toc = {
     'GettingStarted.md': '',
     'CorePrinciples.md': '',
   },
-  ContentEditorUserGuide: {},
-  Design: {},
-  Components: {
-    'YouTube.md': '',
-    'Navigation.md': '',
+  ContentEditorUserGuide: {
+    PageMenu: {
+      New: {},
+      Disable: {},
+      Delete: {},
+      SEO: {},
+    },
+    FileMenu: {},
   },
+  Design: {},
+  Components: {},
   Tools: {},
   Development: {
     Guides: {
