@@ -12,6 +12,5 @@
  * limitations under the License.
  */
 
-export * from './OIDCClient';
-export * from './Context';
-export * from './authenticationService';
+export * from './AuthenticationContext';
+export * from './AuthenticationProvider';

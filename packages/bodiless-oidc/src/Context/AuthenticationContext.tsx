@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { createContext, useContext, ComponentType } from 'react';
+import { createContext, useContext } from 'react';
 import { User, UserManagerEvents, UserManager } from 'oidc-client-ts';
 
 export type oidcContext = {
@@ -22,7 +22,7 @@ export type oidcContext = {
   logout: Function;
   signinSilent: Function;
   events: UserManagerEvents;
-  authenticating: ComponentType;
+  // authenticating: ComponentType;
   isLoading: boolean;
   isLoggingOut: boolean;
   userManager: UserManager;

@@ -30,6 +30,7 @@
     "@bodiless/layouts": "^0.2.10",
     "@bodiless/layouts-ui": "^0.2.10",
     "@bodiless/navigation": "^0.2.10",
+    "@bodiless/oidc": "^0.2.10",
     "@bodiless/organisms": "^0.2.10",
     "@bodiless/psh": "^0.2.10",
     "@bodiless/richtext": "^0.2.10",
