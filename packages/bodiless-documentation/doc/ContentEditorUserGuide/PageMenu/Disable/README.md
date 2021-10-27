@@ -56,7 +56,9 @@ To disable menu links leading to the current page, select the "Menu links" check
 
 When disabled, any menu links targeting the current page will not be visible in Preview (Static) or
 Review Mode (i.e., for each of the affected links, neither the anchor element or the link text will
-be rendered). Disabled menu links _will_, however, still be visible and functional in Edit Mode.
+be rendered). For disabled menu items with _submenu_ items, the submenu links will also be disabled
+and no longer visible. Disabled menu links _will_, however, still be visible and functional in Edit
+Mode.
 
 **Review Mode**  
 ![Disabled menu link - Review Mode](./assets/DisabledMenuLinkReviewMode.jpg)
