@@ -12,5 +12,18 @@
  * limitations under the License.
  */
 
-export * from './AuthenticationContext';
-export * from './AuthenticationProvider';
+import React, { useContext } from 'react';
+import { AuthContextProps } from './types';
+
+/**
+ * @private
+ * Authorization Context.
+ * @see AuthContextProps
+ */
+export const AuthContext = React.createContext<AuthContextProps | undefined>(undefined);
+
+/**
+ * Authorization Context.
+ * @see AuthContextProps
+ */
+export const useBodilessOidc = () => useContext(AuthContext);
