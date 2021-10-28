@@ -38,7 +38,6 @@ import ReactTagsField from './ReactTags';
 // Horizontal
 const toolbarClasses = 'bl-flex bl-divide-x rtl:bl-divide-x-reverse bl-divide-white';
 const groupClasses = 'bl-px-3';
-const itemClasses = 'bl-flex bl-items-center bl-justify-center';
 // Vertical
 // const toolbarClasses = '';
 // eslint-disable-next-line max-len
@@ -84,7 +83,7 @@ const ContextMenuGroup: FC<IContextMenuItemProps> = ({
       {label && (
         <GroupTitle index={index} {...onClick}>{label$}</GroupTitle>
       )}
-      <div className={itemClasses}>
+      <div className="flex">
         {children}
       </div>
     </div>
