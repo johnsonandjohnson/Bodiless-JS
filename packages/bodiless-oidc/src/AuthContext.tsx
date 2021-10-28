@@ -23,7 +23,7 @@ import { AuthContextProps } from './types';
 export const AuthContext = React.createContext<AuthContextProps | undefined>(undefined);
 
 /**
- * Authorization Context.
+ * Hook that can be used to access the Authorization Context.
  * @see AuthContextProps
  */
 export const useBodilessOidc = () => useContext(AuthContext);

@@ -30,22 +30,14 @@ const asLoginButton = (WrappedButton: ComponentType) => (props: any) => {
   // Property 'signIn' does not exist on type 'AuthContextProps | undefined'
   // @ts-ignore
   const { signIn } = useBodilessOidc();
-  const onClick = () => {
-    console.log('LOGGING IN...');
-    signIn();
-  };
-  return <WrappedButton {...props} onClick={onClick} />;
+  return <WrappedButton {...props} onClick={signIn} />;
 };
 
 const asLogoutButton = (WrappedButton: ComponentType) => (props: any) => {
   // Property 'signOut' does not exist on type 'AuthContextProps | undefined'
   // @ts-ignore
   const { signOut } = useBodilessOidc();
-  const onClick = () => {
-    console.log('LOGGING OUT...');
-    signOut();
-  };
-  return <WrappedButton {...props} onClick={onClick} />;
+  return <WrappedButton {...props} onClick={signOut} />;
 };
 
 const withLogContext = (WrappedButton: ComponentType) => (props: any) => {
@@ -59,6 +51,7 @@ const withLogContext = (WrappedButton: ComponentType) => (props: any) => {
 const H1 = asToken(addClasses('pt-5'), asHeader1)(H1$);
 const Description = addClasses('text-sm mb-2 italic')(Div);
 const Button = addClasses('py-2 px-4 mr-3 border border-gray-600')(ButtonBase);
+const UserWrapper = addClasses('p-4 border border-gray-600 max-w-md mx-auto my-4')(Div);
 
 const LoginButton = asLoginButton(Button);
 const LogoutButton = asLogoutButton(Button);
@@ -72,6 +65,78 @@ const oidcConfig = {
   autoSignIn: false,
 };
 
+const UserPreview = () => {
+  // Property 'userData' does not exist on type 'AuthContextProps | undefined'.
+  // @ts-ignore
+  const { userData, userManager } = useBodilessOidc();
+
+  if (!userData) {
+    return (
+      <UserWrapper>
+        <h3 className="font-bold text-lg">You are not Logged In!</h3>
+        <hr className="mb-4 mt-1" />
+
+        <div className="">
+          <strong className="pr-3">Authority: </strong>
+          <span>{userManager.settings.authority}</span>
+        </div>
+
+        <div className="">
+          <strong className="pr-3">Client Id: </strong>
+          <span>{userManager.settings.client_id}</span>
+        </div>
+
+        <div className="">
+          <strong className="pr-3">Redirect URI: </strong>
+          <span>{userManager.settings.redirect_uri}</span>
+        </div>
+
+        <hr className="my-4" />
+
+        <div className="text-center">
+          <LoginButton>Login</LoginButton>
+          <LogContextButton>Log Context</LogContextButton>
+        </div>
+      </UserWrapper>
+    );
+  }
+
+  const { profile } = userData;
+
+  return (
+    <UserWrapper>
+      <h3 className="font-bold text-lg">
+        Hi
+        {profile.given_name}
+        !
+      </h3>
+      <hr className="mb-4 mt-1" />
+
+      <div className="">
+        <strong className="pr-3">Logged In As:</strong>
+        <span>{profile.name}</span>
+      </div>
+
+      <div className="">
+        <strong className="pr-3">Email:</strong>
+        <span>{profile.email}</span>
+      </div>
+
+      <div className="">
+        <strong className="pr-3">User Profile: </strong>
+        <pre className="text-sm font-mono p-2 bg-gray-200 my-2">{JSON.stringify(profile, undefined, 2)}</pre>
+      </div>
+
+      <hr className="my-4" />
+
+      <div className="text-center">
+        <LogoutButton>Log Out</LogoutButton>
+        <LogContextButton>Log Context</LogContextButton>
+      </div>
+    </UserWrapper>
+  );
+};
+
 export default (props: any) => (
   <Page {...props}>
     <Layout>
@@ -80,9 +145,7 @@ export default (props: any) => (
         <Description>
           Demo Page for OIDC.
         </Description>
-        <LoginButton>Login</LoginButton>
-        <LogoutButton>Log Out</LogoutButton>
-        <LogContextButton>Log Context</LogContextButton>
+        <UserPreview />
       </AuthProvider>
     </Layout>
   </Page>

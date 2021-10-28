@@ -24,8 +24,11 @@ import { initUserManager, hasCodeInUrl } from './UserManager';
 import { AuthProviderProps } from './types';
 
 /**
+ * An AuthProvider represents a particular state of the currently
+ * authenticated user. If no user is logged in, `userData` will be `null`.
  *
  * @param props AuthProviderProps
+ * @see AuthProviderProps
  */
 export const AuthProvider: FC<AuthProviderProps> = ({
   children,
