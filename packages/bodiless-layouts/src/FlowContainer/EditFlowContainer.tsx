@@ -21,7 +21,7 @@ import {
   withNode, withMenuOptions, withResizeDetector, withActivateOnEffect,
 } from '@bodiless/core';
 import {
-  designable, stylable, DesignableComponents, ComponentOrTag,
+  designable, stylable, ComponentOrTag,
 } from '@bodiless/fclasses';
 import SortableChild from './SortableChild';
 import SortableContainer, { SortableListProps } from './SortableContainer';
@@ -79,14 +79,6 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props: EditFlowContainerP
   const getItemUseGetMenuOptions = useGetItemUseGetMenuOptions(props);
   const handlers = { ...useFlowContainerDataHandlers(), ...useItemHandlers() };
 
-  let componentsWithActivator: DesignableComponents = {};
-  items.forEach((item: FlowContainerItem) => {
-    componentsWithActivator = {
-      ...componentsWithActivator,
-      [item.type]: components[item.type],
-    };
-  });
-
   return (
     <ComponentDisplayModeProvider mode={ComponentDisplayMode.EditFlowContainer}>
       <Wrapper
@@ -99,7 +91,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props: EditFlowContainerP
       >
         {items.map(
           (flowContainerItem: FlowContainerItem, index: number): React.ReactNode => {
-            const ChildComponent = componentsWithActivator[flowContainerItem.type];
+            const ChildComponent = components[flowContainerItem.type];
             if (!ChildComponent) return null;
             return (
               <ChildNodeProvider nodeKey={flowContainerItem.uuid} key={`node-${flowContainerItem.uuid}`}>
