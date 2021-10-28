@@ -1,165 +1,138 @@
 # Content Editor Guide
 
-BodilessJS provides tools which allow non-developers to edit content inline
-using a browser, referred to in this document as the Edit Interface. For more
-information about launching the Edit Interface please see the [Getting Started
-documentation](../../../About/GettingStarted?id=creating-a-new-site) - _note this 
-will require some technical experience._
+BodilessJS provides tools which allow non-developers to edit content inline using a web browser; in
+this document, this set of tools will be referred to as the _Edit Interface_. For more information
+about launching the Edit Interface, please see the [Getting Started
+documentation](../../../About/GettingStarted?id=creating-a-new-site) — _note this will require some
+technical experience._
 
-This guide focuses on 3 main parts:
-1. Edit Interface - including how to work with the tool bar and the editing
-modes.
-1. Page Layout and working with the Flow Container.
-1. How to work with Components to create content.
+This guide focuses on three main parts:
 
-To learn how to launch the Edit Interface please see the [Getting Started
-documentation](../../../About/GettingStarted?id=creating-a-new-site)
+01. [The Edit Interface](#the-edit-interface) — including how to work with the Toolbar and the
+    editor modes;
+01. [Page Layout](#page-layout) and working with the Flow Container; and
+01. [Working with Content](#working-with-content) — how to use components.
 
+## The Edit Interface
 
-## Edit Interface
+The Edit Interface has two modes: [Review Mode](#review-mode) and [Edit Mode](#edit-mode). _Review
+Mode_ allows you to interact with your site as an end user would; while _Edit Mode_ allows you to
+edit content directly on your site. The **Edit** button on the [Toolbar](#toolbar) lets you quickly
+toggle back and forth between Edit Mode and Review Mode.
 
-The Edit Interface has two modes: **Review Mode** and **Edit Mode**. Review Mode
-allows you to interact with your site as an end user would, while Edit Mode
-allows you to edit content directly on your site. The Edit button on the Toolbar
-lets you quickly toggle back and forth between edit mode and review mode.
-
-![](./assets/ReviewmodeHome.jpg)
+![Example screenshot of page in Review Mode](./assets/ReviewmodeHome.jpg)
 
 ### Review Mode
 
-The Edit Interface defaults to the Review mode. In Review Mode, you can navigate
-through the pages of the site to quickly access and assess what you need to edit.
-You use the site's navigation to quickly access the content you need to edit.
+The Edit Interface defaults to Review Mode. In Review Mode, you can navigate through the pages of
+your site as an end user would, and assess what you would like to edit.
 
-In Review Mode, the toolbar on the lefthand side of the screen offers a subset
-of functionality to interact with the site.
+While in Review Mode, the Toolbar on the side of the screen offers only a subset of the
+functionality available when in Edit Mode.
 
 ### Edit Mode
 
-The Edit mode is where you can do the actual work of updating the site content. 
+Edit Mode is where you can do the actual work of updating your site content.
 
-Clicking on the **Edit** pencil icon in the Tool Bar will transition the site into Edit
-Mode. Point and click to where you want to be on the page, and then make the
-change directly on the page. You can see your changes in the context of your
-site's content.
+Click the **Edit** pencil icon in the Toolbar to transition your site into Edit Mode. While in Edit
+Mode, you can click on a [Component](../Components/) that you want to edit, and then make changes to
+it directly on the page. Depending upon the component you've selected, a contextual menu may pop up,
+providing specific edit operations for that component. This inline-editing experience will allow you
+to see all of your changes within the context of your site's content.
 
-_In Edit Mode the *Edit* icon will appear highlighted in blue._ 
+As a visual indicator, while in Edit Mode, the **Edit** icon will be highlighted in blue.
 
 ### Toolbar
 
-In your site's edit interface - in both Review mode and Edit mode - you will
-find a toolbar. The toolbar will appear differently depending on the mode. By
-default, the edit interface begins in review mode. 
+In your site's Edit Interface — in both Review Mode and Edit Mode — you will see the Toolbar. By
+default, the Edit Interface begins in Review Mode.
 
-| Review Mode | Edit Mode |
-|-------------|-----------|
-| ![](./assets/ToolbarReview.jpg) | ![](./assets/ToolbarEdit.jpg) |
+<!-- Hardcoding a table to place list alongside Toolbar image. -->
+<table>
+  <tr><!-- Empty row to trigger alternate cell background color for next row. --></tr>
+  <tr>
+    <td>
+      <img src="/___docs/ContentEditorUserGuide/assets/Toolbar.jpg" alt="The BodilessJS Toolbar" width="50">
+    </td>
+    <td>
+      Out of the box, the Toolbar has the following items:
+      <ul>
+        <li><a href="#/ContentEditorUserGuide/?id=switcher">Switcher</a> (the "compare arrows" icon)</li>
+        <li><a href="#/ContentEditorUserGuide/?id=alerts">Alerts</a></li>
+        <li><a href="#/ContentEditorUserGuide/?id=docs">Docs</a></li>
+        <li><a href="#/ContentEditorUserGuide/?id=edit">Edit</a></li>
+        <li><a href="#/ContentEditorUserGuide/?id=page">Page</a></li>
+        <li><a href="#/ContentEditorUserGuide/?id=file">File</a></li>
+      </ul>
+    </td>
+  </tr>
+</table>
 
+#### Switcher
 
-* #### Location Switcher
+![Location Switcher icon](./assets/SwitcherIcon.jpg ':size=60')
 
-  ![](./assets/Switcher)
+The default position of the Toolbar is the left-hand side of the page. Click the Location Switcher
+button to toggle the Toolbar back and forth between the left- and right-hand sides of the page. This
+is useful if the Toolbar is obscuring content you're trying to review or edit.
 
-  The default position of this toolbar is the lefthand side of the page. You can
-  click the location switcher button to move the admin toolbar to the righthand
-  side of the page, or back again, if it obscures content.
+#### Alerts
 
+![Alerts icon](./assets/AlertsIcon.jpg ':size=60')
 
-* #### Alerts
+The **Alerts** button on the Toolbar notifies you when there have been changes in your site's
+environment. If changes exist, the button will be highlighted in blue and display a "!" in the bell
+icon.
 
-  ![](./assets/Alerts.jpg)
+Click the **Alerts** button to display the notifications and receive details on how to resolve any
+issues (e.g., "Your branch is outdated. Please pull remote changes.").
 
-  The **Alerts** button on the Toolbar notifies you when there have been changes
-  in your site's environment. If changes exist the Alerts button will be
-  highlighted with blue and display a ''!'' in the bell icon. Clicking on the
-  Alerts button will display the notifications and give you details on how to
-  resolve the issue (e.g. "Your branch is outdated. Please pull remote
-  changes.")
+For more information, please see: [File Menu](./FileMenu/).
 
-* #### Docs
+#### Docs
 
-  ![](./assets/Docs.jpg)
+![Docs icon](./assets/DocsIcon.jpg ':size=60')
 
-  The **Docs** button opens BodilessJS documentation in a new browser tab.
+Click the **Docs** button to open the BodilessJS documentation in a new browser tab.
 
-### Workflow
+#### Edit
 
-![](./assets/File1.jpg)
+![Edit button in Review Mode][]
 
-The **File** icon gives you the ability to manage your site's workflow. The
-following options are available in the File submenu: Pull, Push, Revert,
-History.
+Click the **Edit** button to toggle back and forth between [Review Mode](#review-mode) and [Edit
+Mode](#edit-mode).
 
-![](./assets/File.jpg)
+| Review Mode                     | Edit Mode                     |
+|:-------------------------------:|:-----------------------------:|
+| ![Edit button in Review Mode][] | ![Edit button in Edit Mode][] |
 
-* #### Pull
-
-  The Pull button will pull the latest code from your site's repository.
-
-* #### Push
-
-  With the Push button you can commit your local changes to your site and push
-  them to the appropriate branch.
-
-* #### Revert
-
-  The Revert button can be used to undo your local changes.
-
-* #### History
-
-  The History button allows you to view the most recent changes to your site's
-  code.
-
-#### SEO Metadata
-
-Metadata is used by search engines such as google to understand information
-about a webpage. Search engines can use this information for ranking purposes or
-to display snippets in search results. The SEO icon offers an interface so that
-you can manage your site's metadata. Here you can enter a page's Title,
-Description and Page Type so that your page's search engine result page will be
-as effective as possible. 
-
-![](./assets/Seo.jpg)
-
-* Title: Usually shown as title in search results 
-* Description: Usually shown
-in snippet for search results.  
-* Page Type: Used to categorize web pages. 
-
-
-#### Edit Mode
-
-Clicking on the *Edit* icon in the Tool Bar will transition the site into Edit
-Mode. _In Edit Mode the *Edit* icon will appear highlighted in blue._
-
-![](./assets/EditScreen.jpg)
+[Edit button in Review Mode]: ./assets/EditIcon.jpg ':size=60'
+[Edit button in Edit Mode]: ./assets/EditIconHighlighted.jpg ':size=60'
 
 #### Page
 
-![](./assets/PageIcon.jpg)
+![Page icon](./assets/PageIcon.jpg ':size=60')
 
-Clicking the Page button will create a new page for your site. 
+Click the **Page** button in the Toolbar to open the _Page_ menu.
 
-When you click on the Page button you will be prompted to enter the url you wish
-to use for the new page. 
+The _Page_ menu contains a list of features that enable you to perform actions on, and configure,
+the current page, as well as add a new page. To access all of these features, you will need to be in
+[Edit Mode](#edit-mode).
 
-![](./assets/AddPage1.jpg)
+![Page menu](./assets/PageMenu.jpg ':size=50%')
 
-Enter the new url and then click the checkmark to finish creating the new page.
+For more information on the _Page_ menu and the features it provides, please see: [Page
+Menu](./PageMenu/).
 
-![](./assets/AddPage2.jpg)
+#### File
 
-In BodilessJS, pages utilize
-[templates](../../../Development/Guides/BuildingSites/Templates/?id=templates-overview).
-Developers use templates to define page layout to maintain uniformity and
-consistency across content types and sections.
+![File icon](./assets/FileIcon.jpg ':size=60')
 
-Pages are added as part of the section in which it was created. The newly
-created page will use the
-[template](../../../Development/Guides/BuildingSites/Templates/?id=templates-overview)
-associated with that section.
+Click the **File** button to open the _File_ menu and interact with your site's repository.
 
-To create a new page click on the "Page" button in the toolbar.
+![File menu](./assets/FileMenu.jpg ':size=50%')
+
+For more information, please see: [File Menu](./FileMenu/).
 
 ### Page Layout
 
