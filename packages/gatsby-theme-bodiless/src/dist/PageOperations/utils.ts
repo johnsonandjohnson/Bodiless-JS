@@ -20,7 +20,9 @@ import type {
   FormValues,
 } from 'informed';
 import path from 'path';
-import type { FieldValidate } from './types';
+import type {
+  FieldValidate,
+} from './types';
 
 const BASE_PATH_FIELD_NAME = 'basePath';
 const PAGE_URL_FIELD_NAME = 'pagePath';
@@ -55,19 +57,34 @@ const validateEmptyField = (value: FormValue) => (isEmptyValue(value)
   : undefined
 );
 
+const VALIDATEMSG = 'No special characters, capital letters or spaces allowed, no beginning or ending with - or _';
+const pagePathReg = /^[a-z0-9](?:[_-]?[a-z0-9]+)*$/;
+const pagePathvalidate = (url: string) => {
+  const hasInvalidParts = url.split('/').filter(item => {
+    if (item === '') {
+      return false;
+    }
+    if (!RegExp(pagePathReg).test(item)) {
+      return true;
+    }
+    return false;
+  });
+  return hasInvalidParts.length > 0;
+};
+
 const validatePageUrl = (
   value: FormValue,
 ) => (
-  typeof value === 'string' && !RegExp(/^[a-z0-9_/-]+$/i).test(value)
-    ? 'No special characters or spaces allowed'
+  typeof value === 'string' && (pagePathvalidate(value) || !RegExp(/^[a-z0-9_/-]+$/).test(value))
+    ? VALIDATEMSG
     : undefined
 );
 
 const validatePagePath = (
   value: FormValue,
 ) => (
-  typeof value === 'string' && !RegExp(/^[a-z0-9_-]+$/i).test(value)
-    ? 'No special characters or spaces allowed'
+  typeof value === 'string' && !RegExp(pagePathReg).test(value)
+    ? VALIDATEMSG
     : undefined
 );
 
@@ -94,7 +111,7 @@ const fieldValueToUrl = (value: FormValue) => (typeof value === 'string'
 /**
  * function that can be used to get new page path value
  * this function should usually be invoked after an informed form
- * containing NewPageURLField field is submitted
+ * containing PageURLField field is submitted
  * @param values informed form values
  * @returns new page path
  */
