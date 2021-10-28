@@ -36,10 +36,11 @@ import {
 import { ComponentFormSpinner } from '@bodiless/ui';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
-import PageURLField, {
+import {
   getPathValue,
   hasPageChild,
   usePagePath,
+  MovePageURLField,
 } from './PageOperations';
 
 type Client = {
@@ -61,8 +62,6 @@ type MovePageProps = {
 let actualState: number = -1;
 
 let destinationGlb: string = '';
-
-const MovePageURLField = PageURLField.Move;
 
 const movePage = async ({ origin, destination, client } : any) => {
   const result = await handle(client.movePage(origin, destination));

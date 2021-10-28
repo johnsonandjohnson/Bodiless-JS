@@ -41,7 +41,7 @@ const INPUT_FIELD_BLOCK_CLASSES = INPUT_FIELD_DEFAULT_CLASSES.concat(' bl-block 
  * and to get result page path after the form containing this field is submitted
  * @param props informed field props
  */
-const New = (props: FieldProps) => {
+const PageURLField = (props: FieldProps) => {
   const {
     ComponentFormLabel,
     ComponentFormLink,
@@ -136,7 +136,7 @@ const New = (props: FieldProps) => {
  * and to get result page path after the form containing this field is submitted
  * @param props informed field props
  */
-const Move = (props: FieldProps) => {
+const MovePageURLField = (props: FieldProps) => {
   const {
     ComponentFormWarning,
   } = useMenuOptionUI();
@@ -195,9 +195,7 @@ const Move = (props: FieldProps) => {
   );
 };
 
-const PageURLField = {
-  New,
-  Move,
+export {
+  PageURLField,
+  MovePageURLField,
 };
-
-export default PageURLField;
