@@ -8,6 +8,7 @@ import {
   ContentNode,
   NodeProvider,
   useEditContext,
+  useGetter,
 } from '@bodiless/core';
 import type { OptionGroupDefinition } from '@bodiless/core';
 import {
@@ -197,10 +198,10 @@ const withLibraryMenuOptions = (
     const contentLibMenuOptions = useContentLibMenuOptions(flowContainerItem, node, handlers);
     const newUseGetMenuOptions = (fcProps: any) => {
       const defaultMenuOptions = useGetMenuOptions(fcProps);
-      return () => [
+      return useGetter([
         ...defaultMenuOptions(),
         ...contentLibMenuOptions,
-      ];
+      ]);
     };
 
     return (
