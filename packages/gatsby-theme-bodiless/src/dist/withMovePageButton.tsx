@@ -28,7 +28,6 @@ import {
   withMenuOptions,
   ContextMenuProvider,
   ContextSubMenu,
-  useNode,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
 import {
@@ -37,8 +36,11 @@ import {
 import { ComponentFormSpinner } from '@bodiless/ui';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
-import MovePageURLField from './PageOperations/MovePageURLField';
-import { getPathValue } from './PageOperations/utils';
+import PageURLField, {
+  getPathValue,
+  hasPageChild,
+  usePagePath,
+} from './PageOperations';
 
 type Client = {
   movePage: (origin: string, destination: string) => AxiosPromise<any>;
@@ -60,15 +62,7 @@ let actualState: number = -1;
 
 let destinationGlb: string = '';
 
-const usePagePath = () => useNode().node.pagePath;
-
-const hasPageChild = async ({ pathChild, client } : any) => {
-  const result = await handle(client.directoryChild(pathChild));
-  if (result.response && result.message === 'Success') {
-    return Promise.resolve();
-  }
-  return Promise.reject(new Error(result.message));
-};
+const MovePageURLField = PageURLField.Move;
 
 const movePage = async ({ origin, destination, client } : any) => {
   const result = await handle(client.movePage(origin, destination));

@@ -23,6 +23,7 @@ import path from 'path';
 import type {
   FieldValidate,
 } from './types';
+import handle from '../ResponseHandler';
 
 const BASE_PATH_FIELD_NAME = 'basePath';
 const PAGE_URL_FIELD_NAME = 'pagePath';
@@ -102,6 +103,14 @@ const getPagePathValidator = (validate?: FieldValidate) => useCallback(
   [],
 );
 
+const hasPageChild = async ({ pagePath, client } : any) => {
+  const result = await handle(client.directoryChild(pagePath));
+  if (result.response && result.message === 'Success') {
+    return Promise.resolve();
+  }
+  return Promise.reject(new Error(result.message));
+};
+
 const joinPath = (path1: string, path2: string) => path.join(path1, path2);
 
 const fieldValueToUrl = (value: FormValue) => (typeof value === 'string'
@@ -132,6 +141,7 @@ export {
   validatePagePath,
   getPageUrlValidator,
   getPagePathValidator,
+  hasPageChild,
   joinPath,
   fieldValueToUrl,
   getPathValue,
