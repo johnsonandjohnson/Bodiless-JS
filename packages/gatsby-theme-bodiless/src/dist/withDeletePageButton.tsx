@@ -16,9 +16,7 @@
 import React, {
   ComponentType,
   HTMLProps,
-  useCallback,
-  useEffect,
-  useState,
+  useCallback, useEffect, useState,
 } from 'react';
 import {
   contextMenuForm,
@@ -36,7 +34,7 @@ import { ComponentFormSpinner } from '@bodiless/ui';
 import flow from 'lodash/flow';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
-import { hasPageChild, PageURLField } from './PageOperations';
+import { PageURLField } from './PageOperations';
 
 type Client = {
   deletePage: (path: string) => AxiosPromise<any>;
@@ -55,6 +53,14 @@ type DeletePageProps = {
 };
 
 let actualState: number = -1;
+
+const hasPageChild = async ({ path, client } : any) => {
+  const result = await handle(client.directoryChild(path));
+  if (result.response && result.message === 'Success') {
+    return Promise.resolve();
+  }
+  return Promise.reject(new Error(result.message));
+};
 
 const deletePage = async ({ path, client } : any) => {
   const result = await handle(client.deletePage(path));

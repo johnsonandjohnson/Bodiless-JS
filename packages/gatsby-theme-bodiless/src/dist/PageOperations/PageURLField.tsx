@@ -130,7 +130,7 @@ const PageURLField = (props: FieldProps) => {
 };
 
 /**
- * informed custom field that provides ability to move page into different path
+ * informed custom field that provides ability to move existing page page into new path
  * the field contains 2 inputs: base path and page path
  * it is recommended to use getPathValue function to merge these 2 inputs
  * and to get result page path after the form containing this field is submitted
@@ -174,7 +174,7 @@ const MovePageURLField = (props: FieldProps) => {
         value={isBasePathEmpty ? BASE_PATH_EMPTY_VALUE : parentBasePathValue}
       />
       <input
-        name="move-page-path"
+        name="new-page-path"
         className={inputClasses}
         {...restUserProps}
         ref={ref}
@@ -196,6 +196,6 @@ const MovePageURLField = (props: FieldProps) => {
 };
 
 export {
-  PageURLField,
   MovePageURLField,
+  PageURLField,
 };
