@@ -34,7 +34,7 @@ import { ComponentFormSpinner } from '@bodiless/ui';
 import flow from 'lodash/flow';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
-import PageURLField from './PageOperations/PageURLField';
+import { PageURLField } from './PageOperations';
 
 type Client = {
   deletePage: (path: string) => AxiosPromise<any>;

@@ -14,7 +14,7 @@ import {
   PageState,
   PageStatus,
 } from './types';
-import PageURLField from './PageURLField';
+import { PageURLField } from './PageURLField';
 
 const PageForm = (props : PageStatus) => {
   const {

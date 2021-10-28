@@ -129,4 +129,73 @@ const PageURLField = (props: FieldProps) => {
   );
 };
 
-export default PageURLField;
+/**
+ * informed custom field that provides ability to move existing page page into new path
+ * the field contains 2 inputs: base path and page path
+ * it is recommended to use getPathValue function to merge these 2 inputs
+ * and to get result page path after the form containing this field is submitted
+ * @param props informed field props
+ */
+const MovePageURLField = (props: FieldProps) => {
+  const {
+    ComponentFormWarning,
+  } = useMenuOptionUI();
+  const {
+    value: basePathValue,
+    setValue: setBasePathValue,
+    ...restBasePathProps
+  } = useBasePathField();
+
+  const basePathArray = basePathValue.split('/');
+  basePathArray.splice(-2, 1);
+  const parentBasePathValue = basePathArray.join('/');
+
+  const isBasePathEmpty = isEmptyValue(parentBasePathValue)
+  || parentBasePathValue === BASE_PATH_EMPTY_VALUE;
+
+  const { validate, ...rest } = props;
+  const {
+    fieldState, fieldApi, render, ref, userProps,
+  } = useField({
+    field: PAGE_URL_FIELD_NAME,
+    validate: getPagePathValidator(validate),
+    placeholder: 'thispage',
+    ...rest,
+  });
+  const { value } = fieldState;
+  const { setValue } = fieldApi;
+  const { onChange, ...restUserProps } = userProps;
+  const inputClasses = INPUT_FIELD_INLINE_CLASSES;
+  return render(
+    <>
+      <input
+        {...restBasePathProps}
+        type="hidden"
+        value={isBasePathEmpty ? BASE_PATH_EMPTY_VALUE : parentBasePathValue}
+      />
+      <input
+        name="new-page-path"
+        className={inputClasses}
+        {...restUserProps}
+        ref={ref}
+        value={isEmptyValue(value) ? '' : value}
+        onChange={e => {
+          setValue(e.target.value);
+          if (onChange) {
+            onChange(e);
+          }
+        }}
+      />
+      {
+        fieldState.error ? (
+          <ComponentFormWarning>{fieldState.error}</ComponentFormWarning>
+        ) : null
+      }
+    </>,
+  );
+};
+
+export {
+  MovePageURLField,
+  PageURLField,
+};
