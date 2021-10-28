@@ -22,6 +22,7 @@ const toc = {
       New: {},
       Move: {},
       Disable: {},
+      Clone: {},
       Delete: {},
       SEO: {},
     },
