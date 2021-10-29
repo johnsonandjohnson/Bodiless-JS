@@ -54,7 +54,7 @@ const moveNode = (
   source.delete();
 };
 const isLibraryItem = (item: FlowContainerItem) => (
-  item && item.type.startsWith('ContentLibrary'));
+  item && item.type.startsWith(CONTENT_LIBRARY_TYPE_PREFIX));
 
 /**
  * add meta data to FC item content node.
