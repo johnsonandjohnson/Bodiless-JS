@@ -12,7 +12,9 @@
  * limitations under the License.
  */
 
-import React, { useContext } from 'react';
+import React, { useContext, ComponentType } from 'react';
+import type { SignoutRedirectArgs, SigninRedirectArgs } from 'oidc-client-ts';
+
 import { AuthContextProps } from './types';
 
 /**
@@ -27,3 +29,61 @@ export const AuthContext = React.createContext<AuthContextProps | undefined>(und
  * @see AuthContextProps
  */
 export const useBodilessOidc = () => useContext(AuthContext);
+
+/**
+ * Hook that adds an `onClick` event to the underlying component
+ * and invokes OIDC `signIn` handler when executed.
+ *
+ * @param args OIDC Sign In arguments
+ * @see SigninRedirectArgs
+ */
+export const withSignInOnClick = (
+  args?: SigninRedirectArgs,
+) => (Component: ComponentType) => (props: any) => {
+  // Property 'signIn' does not exist on type 'AuthContextProps | undefined'
+  // @ts-ignore
+  const { signIn } = useBodilessOidc();
+  return <Component {...props} onClick={() => signIn(args)} />;
+};
+
+/**
+ * Hook that adds an `onClick` event to the underlying component
+ * and invokes OIDC `signOut` handler when executed.
+ *
+ * @see AuthContextProps
+ */
+export const withSignOutOnClick = (Component: ComponentType) => (props: any) => {
+  // Property 'signOut' does not exist on type 'AuthContextProps | undefined'
+  // @ts-ignore
+  const { signOut } = useBodilessOidc();
+  return <Component {...props} onClick={signOut} />;
+};
+
+/**
+ * Hook that adds an `onClick` event to the underlying component
+ * and invokes OIDC `signInPopup` handler when executed.
+ *
+ * @see AuthContextProps
+ */
+export const withSignInPopupOnClick = (Component: ComponentType) => (props: any) => {
+  // Property 'signInPopup' does not exist on type 'AuthContextProps | undefined'
+  // @ts-ignore
+  const { signInPopup } = useBodilessOidc();
+  return <Component {...props} onClick={signInPopup} />;
+};
+
+/**
+ * Hook that adds an `onClick` event to the underlying component
+ * and invokes OIDC `signOutRedirect` handler when executed.
+ *
+ * @param args OIDC Sign Out Redirect arguments
+ * @see SignoutRedirectArgs
+ */
+export const withSignOutRedirectOnClick = (
+  args?: SignoutRedirectArgs,
+) => (Component: ComponentType) => (props: any) => {
+  // Property 'signOutRedirect' does not exist on type 'AuthContextProps | undefined'
+  // @ts-ignore
+  const { signOutRedirect } = useBodilessOidc();
+  return <Component {...props} onClick={() => signOutRedirect(args)} />;
+};

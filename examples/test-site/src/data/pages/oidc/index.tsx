@@ -21,24 +21,13 @@ import {
 import {
   AuthProvider,
   useBodilessOidc,
+  withSignInOnClick,
+  withSignOutOnClick,
+  withSignInPopupOnClick,
 } from '@bodiless/oidc';
 
 import Layout from '../../../components/Layout';
 import { asHeader1 } from '../../../components/Elements.token';
-
-const asLoginButton = (WrappedButton: ComponentType) => (props: any) => {
-  // Property 'signIn' does not exist on type 'AuthContextProps | undefined'
-  // @ts-ignore
-  const { signIn } = useBodilessOidc();
-  return <WrappedButton {...props} onClick={signIn} />;
-};
-
-const asLogoutButton = (WrappedButton: ComponentType) => (props: any) => {
-  // Property 'signOut' does not exist on type 'AuthContextProps | undefined'
-  // @ts-ignore
-  const { signOut } = useBodilessOidc();
-  return <WrappedButton {...props} onClick={signOut} />;
-};
 
 const withLogContext = (WrappedButton: ComponentType) => (props: any) => {
   const context = useBodilessOidc();
@@ -53,8 +42,9 @@ const Description = addClasses('text-sm mb-2 italic')(Div);
 const Button = addClasses('py-2 px-4 mr-3 border border-gray-600')(ButtonBase);
 const UserWrapper = addClasses('p-4 border border-gray-600 max-w-md mx-auto my-4')(Div);
 
-const LoginButton = asLoginButton(Button);
-const LogoutButton = asLogoutButton(Button);
+const LoginButton = withSignInOnClick()(Button);
+const LoginPopupButton = withSignInPopupOnClick(Button);
+const LogoutButton = withSignOutOnClick(Button);
 const LogContextButton = withLogContext(Button);
 
 const oidcConfig = {
@@ -95,6 +85,7 @@ const UserPreview = () => {
 
         <div className="text-center">
           <LoginButton>Login</LoginButton>
+          <LoginPopupButton>Login Popup</LoginPopupButton>
           <LogContextButton>Log Context</LogContextButton>
         </div>
       </UserWrapper>
