@@ -23,7 +23,7 @@ const path = require('path');
 const uniq = require('lodash/uniq');
 const Page = require('./page');
 const GitCmd = require('./GitCmd');
-const { getChanges, getConflicts, mergeMaster } = require('./git');
+const { getChanges, getConflicts, mergeMain } = require('./git');
 const { copyAllFiles } = require('./fileHelper');
 const Logger = require('./logger');
 
@@ -275,7 +275,7 @@ class Backend {
     this.setRoute(`${backendPrefix}/change/push`, Backend.setChangePush);
     this.setRoute(`${backendPrefix}/change/reset`, Backend.setChangeReset);
     this.setRoute(`${backendPrefix}/change/pull`, Backend.setChangePull);
-    this.setRoute(`${backendPrefix}/merge/master`, Backend.mergeMaster);
+    this.setRoute(`${backendPrefix}/merge/main`, Backend.mergeMain);
     this.setRoute(`${backendPrefix}/asset/*`, Backend.setAsset);
     this.setRoute(`${backendPrefix}/set/current`, Backend.setSetCurrent);
     this.setRoute(`${backendPrefix}/set/list`, Backend.setSetList);
@@ -426,10 +426,10 @@ class Backend {
     });
   }
 
-  static mergeMaster(route) {
+  static mergeMain(route) {
     route.post(async (req, res) => {
       try {
-        const status = await mergeMaster();
+        const status = await mergeMain();
         res.send(status);
       } catch (error) {
         logger.log(error);

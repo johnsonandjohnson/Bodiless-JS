@@ -10,7 +10,7 @@ assignees: ''
 <!--
   Before submitting an issue:
 
-  - Please read our contribution guidelines (https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/packages/bodiless-documentation/doc/Development/Contributing.md).
+  - Please read our contribution guidelines (https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/bodiless-documentation/doc/Development/Contributing.md).
   - Please search existing issues (https://github.com/johnsonandjohnson/Bodiless-JS/issues) to see if something similar has already been reported.
 
   Please fill out each section below; otherwise, your issue will be closed. 

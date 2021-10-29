@@ -64,4 +64,4 @@ EXAMPLES
   $ bodiless pack -s /path/to/site
 ```
 
-_See code: [lib/commands/pack.js](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/bodiless-cli/src)_
+_See code: [lib/commands/pack.js](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/bodiless-cli/src)_

@@ -169,7 +169,7 @@ export default class BackendClient {
     return this.get(`${this.prefix}/changes/conflicts${$param}`);
   }
 
-  mergeMaster() {
-    return this.post(`${this.prefix}/merge/master`, {});
+  mergeMain() {
+    return this.post(`${this.prefix}/merge/main`, {});
   }
 }

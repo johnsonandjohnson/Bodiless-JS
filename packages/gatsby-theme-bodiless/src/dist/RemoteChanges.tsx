@@ -56,10 +56,10 @@ enum MessageCode {
   PullSuccess = 1003,
   PullConflictConfirm = 1004,
   PullConflictAbort = 1005,
-  PullMasterAbort = 1006,
+  PullMainAbort = 1006,
   PullUpstreamAbort = 1007,
   PullChangeAvailable = 1008,
-  PullMasterAvailable = 1009,
+  PullMainAvailable = 1009,
   PullNonContentOnly = 1010,
 }
 
@@ -106,8 +106,8 @@ const isContentOnly = (files: string[]) => files.every(file => file.search(/\.js
 
 const FormMessages = ({ messageCode, messageData } : MessageProps) => {
   switch (messageCode) {
-    case MessageCode.PullMasterAvailable:
-      return (<>There are master changes available to be pulled. Click check (✓) to initiate.</>);
+    case MessageCode.PullMainAvailable:
+      return (<>There are main changes available to be pulled. Click check (✓) to initiate.</>);
 
     case MessageCode.PullConflictConfirm: {
       const pages = messageData.pages.map((page: string) => (<li>{page}</li>));
@@ -146,7 +146,7 @@ assistance. (Code: ${MessageCode.PullConflictAbort})`
         </>
       );
 
-    case MessageCode.PullMasterAbort:
+    case MessageCode.PullMainAbort:
       return (
         <>
           <ComponentFormWarning>
@@ -239,30 +239,30 @@ const FetchChanges = (
           formApi.setValue('keepOpen', true);
           if (production.files.some(file => file.includes('package-lock.json'))) {
             setState({ messageCode: MessageCode.PullRestartRequired, messageData: [] });
-            formApi.setValue('mergeMaster', false);
+            formApi.setValue('mergeMain', false);
             formApi.setValue('keepOpen', false);
           } else if (!local.hasUpdates && !upstream.hasUpdates) {
             // No local changes.
             setState({ messageCode: MessageCode.PullChangeAvailable, messageData: [] });
-            formApi.setValue('mergeMaster', true);
+            formApi.setValue('mergeMain', true);
           } else {
             // Check production-upstream branch conflict.
             const upstreamConflicts = await client.getConflicts();
 
             if (upstreamConflicts.status !== 200) {
-              throw new Error(`Error checking conflicts with the master branch, status=${response.status}`);
+              throw new Error(`Error checking conflicts with the main branch, status=${response.status}`);
             }
 
             if (upstreamConflicts.data.hasConflict) {
               if (!isContentOnly(upstreamConflicts.data.files)) {
                 setState({ messageCode: MessageCode.PullNonContentOnly, messageData: [] });
-                formApi.setValue('mergeMaster', false);
+                formApi.setValue('mergeMain', false);
                 formApi.setValue('keepOpen', false);
               } else if (upstream.hasUpdates) {
                 // Production conflict with upstream with un-pulled upstream updates
                 // Updates can't be merged.
                 setState({ messageCode: MessageCode.PullConflictAbort, messageData: [] });
-                formApi.setValue('mergeMaster', false);
+                formApi.setValue('mergeMain', false);
                 formApi.setValue('keepOpen', false);
               } else {
                 // Production conflict with upstream and no extra commits on upstream to local,
@@ -280,7 +280,7 @@ const FetchChanges = (
                   messageCode: MessageCode.PullConflictConfirm,
                   messageData: { pages, site },
                 });
-                formApi.setValue('mergeMaster', true);
+                formApi.setValue('mergeMain', true);
               }
             } else {
               // No production/upstream conflict, further check produciton/local
@@ -292,22 +292,22 @@ const FetchChanges = (
                   messageCode: MessageCode.PullConflictConfirm,
                   messageData: { pages, site },
                 });
-                formApi.setValue('mergeMaster', true);
+                formApi.setValue('mergeMain', true);
               } else {
                 // If there are conflicts between CHANGESET and EDIT, but no conflicts with
                 // PRODUCTION, then these are resolved silently in favor of EDIT.
                 setState({ messageCode: MessageCode.PullChangeAvailable, messageData: [] });
-                formApi.setValue('mergeMaster', true);
+                formApi.setValue('mergeMain', true);
               }
             }
           }
         } else if (upstream.hasUpdates) {
           setState({ messageCode: MessageCode.PullChangeAvailable, messageData: [] });
-          formApi.setValue('mergeMaster', true);
+          formApi.setValue('mergeMain', true);
           formApi.setValue('keepOpen', true);
         } else {
           setState({ messageCode: MessageCode.PullNoChange, messageData: [] });
-          formApi.setValue('mergeMaster', false);
+          formApi.setValue('mergeMain', false);
           formApi.setValue('keepOpen', false);
         }
       } catch (error) {
@@ -354,12 +354,12 @@ const PullChanges = (
           hasSpinner: false,
         });
 
-        if (formApi.getValue('mergeMaster')) {
-          const mergeResponse = await client.mergeMaster();
+        if (formApi.getValue('mergeMain')) {
+          const mergeResponse = await client.mergeMain();
           if (mergeResponse.status !== 200) {
             throw new Error(`Error merging production changes to upstream, status=${mergeResponse.status}`);
           }
-          formApi.setValue('mergeMaster', false);
+          formApi.setValue('mergeMain', false);
         }
 
         const response = await client.pull();

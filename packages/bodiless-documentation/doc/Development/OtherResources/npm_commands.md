@@ -4,7 +4,7 @@ NPM commands, that are defined in the root `package.json` file and their purpose
 
 | Command                | Purpose |
 |------------------------|---------|
-| `bootstrap`            | Install all dependencies and bootstrap packages in the current Lerna repo with [hoist option](https://github.com/lerna/lerna/blob/master/commands/bootstrap/README.md#--hoist-glob). Also builds all packages. |
+| `bootstrap`            | Install all dependencies and bootstrap packages in the current Lerna repo with [hoist option](https://github.com/lerna/lerna/blob/main/commands/bootstrap/README.md#--hoist-glob). Also builds all packages. |
 | `build`                | Build production version of all packages and production static versions of the example sites |
 | `build:packages`       | Build production version of all packages |
 | `build:watch` .        | Build development version of all packages, watch for changes, and launch `gatsby develop` on the test site |
@@ -15,7 +15,7 @@ NPM commands, that are defined in the root `package.json` file and their purpose
 | `fresh`                | Clean everything, remove node_modules and then run `bootstrap` |
 | `lint`                 | Runs an eslint scan of the entire project |
 | `lint:target`          | Runs an eslint scan of a particular file or directory |
-| `lint:change`          | Runs an eslint scan on all files which differ from the master branch. Can be slow. |
+| `lint:change`          | Runs an eslint scan on all files which differ from the main branch. Can be slow. |
 | `new`                  | Creates a new BodilessJS site in the specified directory |
 | `publish:all`          | Creates new package versions and publishes all of them to NPM repo specified in $NPM_REGISTRY environment variable. | 
 | `publish:from-package` | Does not create new package versions. Should be run by automation after running `lerna version` manually to publish updated packages to the NPM repo specified in $NPM_REGISTRY environment variable. }

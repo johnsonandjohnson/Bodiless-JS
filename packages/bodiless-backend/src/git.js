@@ -117,7 +117,7 @@ const uncommitted = async () => {
  * @return {object} changes between branches.
  *            {
  *              upstream,   // Commits from upstream branch.
- *              production, // Commits from origin/master.
+ *              production, // Commits from origin/main.
  *              local,      // Commits made on local branch.
  *            }
  */
@@ -178,7 +178,7 @@ const clone = async (url, options = {}) => {
 };
 
 /**
- * Get origin master to upstream or local branch merge conflict status.
+ * Get origin main to upstream or local branch merge conflict status.
  *
  * @param {target} branch type to check conflict against production.
  *        Can be 'upstream' (default) or ed'it.
@@ -239,12 +239,12 @@ const getConflicts = async (target = 'upstream') => {
       throw new Error('Invalid target branch value, must be `edit` or `upstream`.');
   }
 
-  // Create a tmp origin master mapping branch for new repo merge. Remove after.
-  const mergeMasterBranch = 'origin-main';
+  // Create a tmp origin main mapping branch for new repo merge. Remove after.
+  const mergeMainBranch = 'origin-main';
   await GitCmd.cmd().add(
     'fetch',
     'origin',
-    `main:${mergeMasterBranch}`,
+    `main:${mergeMainBranch}`,
   ).exec();
 
   await clone(rootDir, { directory: tmpDir, branch: targetBranch });
@@ -293,7 +293,7 @@ const getConflicts = async (target = 'upstream') => {
       'branch',
       '--delete',
       '--force',
-      `${mergeMasterBranch}`,
+      `${mergeMainBranch}`,
       `${targetBranch}`,
     )
     .exec();
@@ -312,9 +312,9 @@ const getConflicts = async (target = 'upstream') => {
 };
 
 /**
- * Merge latest origin master to upstream branch.
+ * Merge latest origin main to upstream branch.
  */
-const mergeMaster = async () => {
+const mergeMain = async () => {
   const logger = new Logger('BACKEND');
   const tmpDir = path.resolve(process.env.BODILESS_BACKEND_TMP || os.tmpdir(), v1());
   const originalDir = process.cwd();
@@ -371,5 +371,5 @@ module.exports = {
   getConflicts,
   getMergeBase,
   compare,
-  mergeMaster,
+  mergeMain,
 };

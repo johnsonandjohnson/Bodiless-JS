@@ -49,11 +49,11 @@ and the sub pages would use the product detail template. This would require two 
 
 Let's take a look at the Bodiless templates in the Examples/Test-Site and review each of
 these. In the Bodiless Test Site there are currently three types of
-[templates](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/test-site/src/templates)
+[templates](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/examples/test-site/src/templates)
 in use.
 
 * **Default:**
-  * View [code of _default template](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/templates/_default.jsx).
+  * View [code of _default template](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/test-site/src/templates/_default.jsx).
   * This provides a simple page with the sites page layout that includes:
     * ![Default template screenshot](/assets/default.jpg ':size=400')
     * Site's page layout that includes header/footer.
@@ -65,7 +65,7 @@ in use.
   * This template is part of the starter kit as well.
 
 * **Product Listing Page:**
-  * View [code of product_listing template](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/templates/product_listing.jsx).
+  * View [code of product_listing template](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/test-site/src/templates/product_listing.jsx).
   * This is a template that contains:
     * ![PLP screenshot](/assets/plp.jpg ':size=400')
     * Sites page layout that includes header/footer.
@@ -73,9 +73,9 @@ in use.
     * An editable image.
     * A special flowContainer area that can only add variation of cards that
       have special product features.
-      * [View code of specific type of Flowcontainer](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/components/ProductListing/ProductListingFlowContainer.tsx).
+      * [View code of specific type of Flowcontainer](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/test-site/src/components/ProductListing/ProductListingFlowContainer.tsx).
     * Tagging components to allow product filtering.
-      * [View code of filtering component](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/components/FilterByGroup/index.tsx).
+      * [View code of filtering component](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/test-site/src/components/FilterByGroup/index.tsx).
   * This page is very restrictive template that site editor can only:
     * Edit the title.
     * Change the header image.
@@ -87,7 +87,7 @@ in use.
   * Read more about [how to build out the Product Listing page](./Types/ProductListingPage.md)
 
 * **Product Detail Page:**
-  * View [code of product_detail template](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/templates/product_detail.jsx).
+  * View [code of product_detail template](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/test-site/src/templates/product_detail.jsx).
   * This is a template page that creates a product detail pages with:
     * ![PDP screenshot](/assets/pdp.jpg ':size=400')  
     * Sites page layout that includes header/footer.

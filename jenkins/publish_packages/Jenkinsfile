@@ -82,7 +82,7 @@ pipeline {
 
 Boolean isCI() {
     //def isTag = sh(returnStdout: true, script: "git tag --contains ${scmVars.GIT_COMMIT}")
-    //return env.GIT_BRANCH == "master" && !isTag
+    //return env.GIT_BRANCH == "main" && !isTag
     return false
 }
 String withHttpsProtocol(String url) {

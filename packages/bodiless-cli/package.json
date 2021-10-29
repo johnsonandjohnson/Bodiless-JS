@@ -51,7 +51,7 @@
   },
   "oclif": {
     "commands": "./lib/commands",
-    "repositoryPrefix": "https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/bodiless-cli/src",
+    "repositoryPrefix": "https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/bodiless-cli/src",
     "bin": "bodiless",
     "plugins": [
       "@oclif/plugin-help"

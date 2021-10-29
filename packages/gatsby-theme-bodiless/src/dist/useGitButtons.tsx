@@ -93,7 +93,7 @@ const formGitPull = (client: GitClient, notifyOfChanges: ChangeNotifier) => cont
     <>
       <ComponentFormTitle>Pull Changes</ComponentFormTitle>
       <ComponentFormText type="hidden" field="keepOpen" initialValue={false} />
-      <ComponentFormText type="hidden" field="mergeMaster" initialValue={false} />
+      <ComponentFormText type="hidden" field="mergeMain" initialValue={false} />
       <ComponentFormText type="hidden" field="refreshWhenDone" initialValue={false} />
       <RemoteChanges client={client} notifyOfChanges={notifyOfChanges} />
     </>
@@ -181,7 +181,7 @@ const useGitButtons = ({ client = defaultClient } = {}) => {
 
   useNotify(notifications);
 
-  // Quickly [double-]check for changes in the upstream and master branches
+  // Quickly [double-]check for changes in the upstream and main branches
   // and send notifications to the "Alerts" section.
   // Will perform on page load and after each fetch or push action initiated from UI.
   const notifyOfChanges: ChangeNotifier = useCallback(
