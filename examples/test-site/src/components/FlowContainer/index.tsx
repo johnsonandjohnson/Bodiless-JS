@@ -54,6 +54,7 @@ const FlowContainerDefaultWithContentLibraryRTL = asToken(
     }),
   ),
   asDefaultFlowContainer,
+  withLibraryFlowContainerVariations,
   asFlowContainerRTL,
 )(FlowContainer);
 
