@@ -126,7 +126,7 @@ const getChanges = async () => {
     await GitCmd.cmd().add('fetch', 'origin').exec();
     const branch = await getCurrentBranch();
     const upstreamBranch = await getUpstreamBranch(branch);
-    const productionBranch = 'origin/master';
+    const productionBranch = 'origin/main';
     if (!upstreamBranch) {
       return {
         upstream: { branch: null, commits: [], files: [] },
@@ -240,11 +240,11 @@ const getConflicts = async (target = 'upstream') => {
   }
 
   // Create a tmp origin master mapping branch for new repo merge. Remove after.
-  const mergeMasterBranch = 'origin-master';
+  const mergeMasterBranch = 'origin-main';
   await GitCmd.cmd().add(
     'fetch',
     'origin',
-    `master:${mergeMasterBranch}`,
+    `main:${mergeMasterBranch}`,
   ).exec();
 
   await clone(rootDir, { directory: tmpDir, branch: targetBranch });
@@ -274,7 +274,7 @@ const getConflicts = async (target = 'upstream') => {
   let conflictFiles = [];
   try {
     await GitCmd.cmd()
-      .add('merge', '--no-commit', '--no-ff', 'origin/origin-master')
+      .add('merge', '--no-commit', '--no-ff', 'origin/origin-main')
       .exec();
   } catch (e) {
     const conflictResult = await GitCmd.cmd()
@@ -342,7 +342,7 @@ const mergeMaster = async () => {
       .exec();
 
     await GitCmd.cmd()
-      .add('merge', 'origin/master', '--no-edit', '-Xours')
+      .add('merge', 'origin/main', '--no-edit', '-Xours')
       .exec();
 
     await GitCmd.cmd()
