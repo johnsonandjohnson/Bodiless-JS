@@ -12,9 +12,8 @@
  * limitations under the License.
  */
 
-/* eslint-disable import/prefer-default-export */
 import React, {
-  FC, useState, useEffect, useRef,
+  FC, useState, useEffect, useRef, ComponentType,
 } from 'react';
 import { User, UserManager } from 'oidc-client-ts';
 import type { SignoutRedirectArgs, SigninRedirectArgs } from 'oidc-client-ts';
@@ -86,7 +85,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({
   }, [location, userManager, autoSignIn, onBeforeSignIn, onSignIn]);
 
   useEffect(() => {
-    // for refreshing react state when new state is available in e.g. session storage
+    // For refreshing react state when new state is available in e.g. session storage
     const updateUserData = async () => {
       const user = await userManager.getUser();
       if (isMountedRef.current) setUserData(user);
@@ -123,3 +122,17 @@ export const AuthProvider: FC<AuthProviderProps> = ({
     </AuthContext.Provider>
   );
 };
+
+/**
+ * HOC that wrapps component in AuthProvider.
+ *
+ * @param oidcConfig OIDC Configuration props.
+ * @see AuthProviderProps
+ */
+export const withOidcProvider = (oidcConfig: AuthProviderProps) => <P extends Object>(
+  Component: ComponentType<P> | string,
+) => (props: P) => (
+  <AuthProvider {...oidcConfig}>
+    <Component {...props} />
+  </AuthProvider>
+  );

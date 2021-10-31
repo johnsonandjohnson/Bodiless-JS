@@ -147,7 +147,7 @@ export type AuthContextProps = {
    */
   signOut: () => Promise<void>;
   /**
-   *
+   * Alias for userManager.signoutRedirect
    */
   signOutRedirect: (args?: SignoutRedirectArgs) => Promise<void>;
   /**

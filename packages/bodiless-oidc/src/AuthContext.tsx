@@ -31,7 +31,7 @@ export const AuthContext = React.createContext<AuthContextProps | undefined>(und
 export const useBodilessOidc = () => useContext(AuthContext);
 
 /**
- * Hook that adds an `onClick` event to the underlying component
+ * HOC that adds an `onClick` event to the underlying component
  * and invokes OIDC `signIn` handler when executed.
  *
  * @param args OIDC Sign In arguments
@@ -47,7 +47,7 @@ export const withSignInOnClick = (
 };
 
 /**
- * Hook that adds an `onClick` event to the underlying component
+ * HOC that adds an `onClick` event to the underlying component
  * and invokes OIDC `signOut` handler when executed.
  *
  * @see AuthContextProps
@@ -60,7 +60,7 @@ export const withSignOutOnClick = (Component: ComponentType) => (props: any) => 
 };
 
 /**
- * Hook that adds an `onClick` event to the underlying component
+ * HOC that adds an `onClick` event to the underlying component
  * and invokes OIDC `signInPopup` handler when executed.
  *
  * @see AuthContextProps
@@ -73,7 +73,7 @@ export const withSignInPopupOnClick = (Component: ComponentType) => (props: any)
 };
 
 /**
- * Hook that adds an `onClick` event to the underlying component
+ * HOC that adds an `onClick` event to the underlying component
  * and invokes OIDC `signOutRedirect` handler when executed.
  *
  * @param args OIDC Sign Out Redirect arguments
