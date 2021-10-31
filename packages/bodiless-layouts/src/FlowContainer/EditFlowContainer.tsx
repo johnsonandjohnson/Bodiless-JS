@@ -38,7 +38,7 @@ import { ComponentDisplayModeProvider, ComponentDisplayMode } from './ComponentD
 
 const ChildNodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
 
-const EditFlowContainerComponents: FlowContainerComponents = {
+export const EditFlowContainerComponents: FlowContainerComponents = {
   Wrapper: stylable<SortableListProps>(SortableContainer),
   ComponentWrapper: stylable<SortableChildProps>(SortableChild),
 };

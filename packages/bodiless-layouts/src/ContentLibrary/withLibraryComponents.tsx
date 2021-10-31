@@ -39,8 +39,8 @@ type LibraryMetaValues = {
   componentKey: string
 };
 
-const DEFAULT_CONTENT_LIBRARY_PATH = ['Site', 'default-library'];
-const CONTENT_LIBRARY_TYPE_PREFIX = 'ContentLibrary';
+export const DEFAULT_CONTENT_LIBRARY_PATH = ['Site', 'default-library'];
+export const CONTENT_LIBRARY_TYPE_PREFIX = 'ContentLibrary';
 
 const moveNode = (
   source: ContentNode<any>,
