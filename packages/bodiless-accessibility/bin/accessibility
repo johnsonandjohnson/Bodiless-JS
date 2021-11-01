@@ -1,4 +1,0 @@
-#!/usr/bin/env node
-
-require = require('esm')(module);
-require('../src/accessibility').audit(process.argv);

@@ -1,9 +1,0 @@
-{
-  "Components": {
-    "YouTube.md": "./README.md",
-    "assets": {
-      "YoutubeComponentLibrary.jpg": "./assets/YoutubeComponentLibrary.jpg",
-      "YoutubeConfig.jpg": "./assets/YoutubeConfig.jpg"
-    }
-  }
-}

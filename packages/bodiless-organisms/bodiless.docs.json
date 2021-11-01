@@ -1,8 +1,0 @@
-{
-  "Components": {
-    "SingleAccordion.md": "./doc/SingleAccordion.md",
-    "FilterByGroup.md": "./doc/FilterByGroup.md",
-    "Embed.md": "./doc/Embed.md",
-    "SocialShare.md": "./doc/SocialShare.md"
-  }
-}
