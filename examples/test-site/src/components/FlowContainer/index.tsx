@@ -30,7 +30,7 @@ const FlowContainerDefault = asToken(
   withFlowContainerVariations,
 )(FlowContainer);
 
-const FlowContainerDefaultWithContentLibrary = asToken(
+const FlowContainerWithContentLibrary = asToken(
   // withLibraryComponents should be applied before any other HOC designs.
   withLibraryComponents(),
   asDefaultFlowContainer,
@@ -46,15 +46,15 @@ const FlowContainerDefaultRTL = asToken(
   asFlowContainerRTL,
 )(FlowContainerDefault);
 
-const FlowContainerDefaultWithContentLibraryRTL = asToken(
+const FlowContainerWithContentLibraryRTL = asToken(
   withLibraryComponents(),
+  asDefaultFlowContainer,
+  withLibraryFlowContainerVariations,
   ifNotComponentSelector(
     withDesign({
       FlowContainer: asFlowContainerRTL,
     }),
   ),
-  asDefaultFlowContainer,
-  withLibraryFlowContainerVariations,
   asFlowContainerRTL,
 )(FlowContainer);
 
@@ -70,6 +70,6 @@ export {
   FlowContainerDefault,
   FlowContainerLimited,
   FlowContainerDefaultRTL,
-  FlowContainerDefaultWithContentLibrary,
-  FlowContainerDefaultWithContentLibraryRTL,
+  FlowContainerWithContentLibrary,
+  FlowContainerWithContentLibraryRTL,
 };
