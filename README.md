@@ -1,1 +1,1 @@
-./packages/bodiless-documentation/doc/README.md
+The default branch of this repository is "main".
