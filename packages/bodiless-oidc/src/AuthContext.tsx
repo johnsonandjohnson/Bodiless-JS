@@ -40,9 +40,7 @@ export const useBodilessOidc = () => useContext(AuthContext);
 export const withSignInOnClick = (
   args?: SigninRedirectArgs,
 ) => (Component: ComponentType) => (props: any) => {
-  // Property 'signIn' does not exist on type 'AuthContextProps | undefined'
-  // @ts-ignore
-  const { signIn } = useBodilessOidc();
+  const { signIn } = useBodilessOidc() as AuthContextProps;
   return <Component {...props} onClick={() => signIn(args)} />;
 };
 
@@ -53,9 +51,7 @@ export const withSignInOnClick = (
  * @see AuthContextProps
  */
 export const withSignOutOnClick = (Component: ComponentType) => (props: any) => {
-  // Property 'signOut' does not exist on type 'AuthContextProps | undefined'
-  // @ts-ignore
-  const { signOut } = useBodilessOidc();
+  const { signOut } = useBodilessOidc() as AuthContextProps;
   return <Component {...props} onClick={signOut} />;
 };
 
@@ -66,9 +62,7 @@ export const withSignOutOnClick = (Component: ComponentType) => (props: any) => 
  * @see AuthContextProps
  */
 export const withSignInPopupOnClick = (Component: ComponentType) => (props: any) => {
-  // Property 'signInPopup' does not exist on type 'AuthContextProps | undefined'
-  // @ts-ignore
-  const { signInPopup } = useBodilessOidc();
+  const { signInPopup } = useBodilessOidc() as AuthContextProps;
   return <Component {...props} onClick={signInPopup} />;
 };
 
@@ -82,8 +76,6 @@ export const withSignInPopupOnClick = (Component: ComponentType) => (props: any)
 export const withSignOutRedirectOnClick = (
   args?: SignoutRedirectArgs,
 ) => (Component: ComponentType) => (props: any) => {
-  // Property 'signOutRedirect' does not exist on type 'AuthContextProps | undefined'
-  // @ts-ignore
-  const { signOutRedirect } = useBodilessOidc();
+  const { signOutRedirect } = useBodilessOidc() as AuthContextProps;
   return <Component {...props} onClick={() => signOutRedirect(args)} />;
 };
