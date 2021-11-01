@@ -23,7 +23,6 @@ import {
   Section,
 } from '@bodiless/fclasses';
 import { Spinner } from '@bodiless/ui';
-import MaterialIcon from '@material/react-material-icon';
 import merge from 'lodash/merge';
 
 const withForwardedRefStart = (Component: ComponentType<any>) => {
@@ -66,7 +65,7 @@ const Input = withForwardedRef()('input');
 const UploadArea = () => (
   <div className="bl-font-bold bl-text-base bl-text-center">
     {`${FileUploadStrings.DragOrClickToUpload}`}
-    <MaterialIcon className="bl-w-full" icon="cloud_upload" />
+    <span className="material-icons bl-w-full">cloud_upload</span>
   </div>
 );
 const DragRejected = () => (

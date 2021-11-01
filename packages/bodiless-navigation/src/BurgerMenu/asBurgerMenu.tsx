@@ -24,6 +24,7 @@ import BurgerMenuClean from './BurgerMenuClean';
 import { withDisabledTitleLink } from './BurgerMenu.token';
 import withMenuDesign from '../Menu/withMenuDesign';
 import MenuTitle, { DEFAULT_NODE_KEYS } from '../Menu/MenuTitles';
+import { ComponentType } from 'react';
 
 /**
  * HOC that adds an overview link to a burger menu sublist.  The overview link
@@ -99,7 +100,8 @@ const withBurgerMenuWrapper: Token = Component => asToken(
   withDesign({
     Menu: replaceWith(Component),
   }),
-)(Fragment);
+)(Fragment) as ComponentType<any>;
+
 
 /**
  * Helper which allows specifying which submenu types are configured

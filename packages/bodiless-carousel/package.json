@@ -26,7 +26,7 @@
   "scripts": {
     "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
-    "build:api-doc": "typedoc --out doc/api --mode file",
+    "build:api-doc": "typedoc --out doc/api src",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
@@ -38,6 +38,6 @@
     "pure-react-carousel": "^1.27.6"
   },
   "peerDependencies": {
-    "react": "^16.8.1"
+    "react": "^17.0.2"
   }
 }

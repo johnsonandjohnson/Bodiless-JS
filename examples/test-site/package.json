@@ -40,12 +40,11 @@
     "@bodiless/tokens": "^0.2.10",
     "@bodiless/ui": "^0.2.10",
     "@bodiless/youtube": "^0.2.10",
-    "@material/react-material-icon": "^0.15.0",
     "autoprefixer": "^9.8.6",
     "docsify-cli": "^4.3.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "gatsby": "^3.6.1",
+    "gatsby": "~3.13.0",
     "gatsby-plugin-canonical-urls": "^3.6.0",
     "gatsby-plugin-google-tagmanager": "^3.6.0",
     "gatsby-plugin-sitemap": "^4.2.0",
@@ -57,8 +56,8 @@
     "postcss": "^8.2.4",
     "pure-react-carousel": "^1.27.6",
     "rc-tooltip": "^5.1.1",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-helmet": "^5.2.0",
     "react-markdown": "^4.3.1",
     "react-mde": "^10.0.3",
@@ -102,6 +101,6 @@
     "gatsby-plugin-compile-es6-packages": "^1.1.0",
     "npm-run-all": "^4.1.5",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
-    "typescript": "^3.9.7"
+    "typescript": "^4.0.0"
   }
 }

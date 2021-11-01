@@ -12,10 +12,9 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { ComponentType } from 'react';
 import { Link as BaseGatsbyLink } from 'gatsby';
 import type { GatsbyLinkProps } from 'gatsby';
-import flow from 'lodash/flow';
 import {
   designable,
   stylable,
@@ -24,6 +23,8 @@ import {
   addProps,
   Token,
   ComponentOrTag,
+  DesignableProps,
+  asToken,
 } from '@bodiless/fclasses';
 import { ifReadOnly } from '@bodiless/core';
 import type { BodilessLinkProps } from '@bodiless/components';
@@ -43,7 +44,7 @@ const isLocalLink = (path: string) => path
 
 const isFile = (path: string) => /\.[0-9a-z]+$/i.test(path);
 
-const asGatsbyLink$:Token<BodilessLinkProps> = Component => {
+const asGatsbyLink$:Token<BodilessLinkProps, DesignableProps<Components>> = Component => {
   const startComponents: Components = {
     GatsbyLink: BaseGatsbyLink,
     Link: Component as ComponentOrTag<BodilessLinkProps>,
@@ -57,10 +58,10 @@ const asGatsbyLink$:Token<BodilessLinkProps> = Component => {
     if (!isLocalLink(href) || isFile(href)) return <Link {...rest} href={href} />;
     return <GatsbyLink {...rest} to={href} />;
   };
-  return designable(startComponents, 'GatsbyLink')(AsGatsbyLink);
+  return designable(startComponents, 'GatsbyLink')(AsGatsbyLink) as ComponentType<any>;
 };
 
-const asGatsbyLink = flow(
+const asGatsbyLink = asToken(
   ifReadOnly(
     withDesign({
       GatsbyLink: stylable,

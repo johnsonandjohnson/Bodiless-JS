@@ -20,7 +20,7 @@ import fs from 'fs';
  * @param startRoot
  * @param excludes
  */
-const cleanSymlinks = (startRoot:string, excludes:string[]) => new Promise(resolve => {
+const cleanSymlinks = (startRoot:string, excludes:string[]) => new Promise<void>(resolve => {
   const filter = (dirPath:string, files:string[]) => (
     files.filter((name:string) => (
       !excludes.includes(name)

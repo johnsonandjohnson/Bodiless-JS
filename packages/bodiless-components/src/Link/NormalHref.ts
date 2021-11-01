@@ -126,13 +126,13 @@ class DefaultNormalHref implements NormalHref {
     return true;
   }
 
-  isSamePage(that: NormalHref | string) {
+  isSamePage(that: NormalHref | string): boolean {
     const that$ = typeof that === 'string' ? new DefaultNormalHref(that) : that;
     if (!this.canCompare(that$)) return false;
     return this.pathname === that$.pathname;
   }
 
-  get parentPage() {
+  get parentPage(): NormalHref|undefined {
     if (this.pathname === '/') return undefined;
     const parent = new DefaultNormalHref(this.toString());
     parent.url.pathname = path.dirname(this.pathname);

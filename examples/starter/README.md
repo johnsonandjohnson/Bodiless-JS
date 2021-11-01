@@ -4,8 +4,8 @@
 
 Ensure you have the following installed locally:
 - NodeJS: https://nodejs.org/en/download/ 
-  - We are currently using the LTS version 12.19.0.
-  - We use `npm` as a package manager. If you prefer `yarn` feel free to try it.
+  - We are currently using the LTS version 16.9.
+  - We use `npm` (v7) as a package manager. If you prefer `yarn` feel free to try it.
     YMMV.
 
 ## Creating a New Site

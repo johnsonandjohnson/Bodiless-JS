@@ -18,7 +18,7 @@
 name: 'static'
 
 # The type key specifies the language and version for your application.
-type: 'nodejs:12'
+type: 'nodejs:16'
 
 build:
     flavor: none

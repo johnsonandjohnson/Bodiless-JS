@@ -12,14 +12,11 @@
  * limitations under the License.
  */
 
-const enzyme = require("enzyme");
-const EnzymeAdapter = require("enzyme-adapter-react-16");
+const enzyme = require('enzyme');
+const EnzymeAdapter = require('@wojtekmaj/enzyme-adapter-react-17');
 
 enzyme.configure({ adapter: new EnzymeAdapter() });
 
-global.window.getSelection = () => {
-  return {
-    removeAllRanges: () => {
-    },
-  };
-};
+global.window.getSelection = () => ({
+  removeAllRanges: () => {},
+});

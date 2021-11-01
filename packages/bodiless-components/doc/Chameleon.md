@@ -114,6 +114,42 @@ const RedAvailabilityToggle = withDesign({
 )(AvailabilityToggle);
 ```
 
+## Component Selector
+By default, a chameleon will use a toggle button if there are only two keys in
+the design, and a set of radio buttons if there are more than two, but it is
+possible to customize this behavior via the `useOverrides` parameter. In
+particular, you can instruct the Chameleon to use a component selector (exactly
+as is used for the flow container):
+
+```ts
+import { useChameleonSelectorForm } from '@bodiless/components-ui';
+
+const BasicChameleonWithComponentSelector = asToken(
+  asBodilessChameleon('selector-chameleon', undefined, useChameleonSelectorForm),
+  withDesign(basicChameleonDesign),
+)(BaseComponent);
+```
+
+This will function exactly as the first example above, except that a component
+selector will be used to choose the active component.
+
+You can pass arguments to the component selector by adding or modifying props,
+for example:
+
+```ts
+const BasicChameleonWithComponentSelector = asToken(
+  asBodilessChameleon('selector-chameleon', undefined, useChameleonSelectorForm),
+  addProps({
+    blacklistCategories: ['Color'],
+    mandatoryCategories: ['Border'],
+    scale: ComponentSelectorScale.Half,
+  }),
+  withAllTitlesFromTerms(),
+  withDesign(basicChameleonDesign),
+)(BaseComponent);
+```
+
+
 ## Advanced Use cases
 
 ### Toggling Visibility

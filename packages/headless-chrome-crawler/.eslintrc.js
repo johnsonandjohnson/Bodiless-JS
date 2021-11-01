@@ -31,6 +31,9 @@ module.exports = {
     "no-void": 0,
     "no-param-reassign": 0,
     "no-bitwise": 0,
+    "no-use-before-define": 0,
+    "no-undef": 0,
+    "no-unused-vars": 0
   },
   ignorePatterns: ['.eslintrc.js'],
 }

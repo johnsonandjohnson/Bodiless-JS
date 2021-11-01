@@ -32,7 +32,7 @@ type AccordionBodyBaseProps =
   Omit<AccordionBodyProps, 'design'> & DesignableComponentsProps<AccordionBodyComponents>;
 
 const AccordionBodyBase: FC<AccordionBodyBaseProps> = ({
-  components, children,
+  components, children, ...rest
 }) => {
   const { Wrapper, Content } = components;
   const { isExpanded, getMeta } = useAccordionContext();
@@ -44,6 +44,7 @@ const AccordionBodyBase: FC<AccordionBodyBaseProps> = ({
       aria-hidden={!isExpanded ? 'true' : 'false'}
       aria-labelledby={getMeta.accordionTitleId}
       tabIndex={!isExpanded ? -1 : 0}
+      {...rest}
     >
       <Content>
         { children }

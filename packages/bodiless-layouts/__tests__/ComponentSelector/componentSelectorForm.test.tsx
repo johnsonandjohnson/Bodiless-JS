@@ -55,7 +55,7 @@ describe('componentSelectorForm', () => {
       ui: {},
       closeForm,
     };
-    componentSelectorForm(props, onSelect);
+    componentSelectorForm({ ...props, onSelect });
     const render = mockContextMenuFormInner.mock.calls[0][0];
     const C = () => <>{render(renderProps)}</>;
     const wrapper = shallow(<C />).find(ComponentSelector);

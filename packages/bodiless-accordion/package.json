@@ -20,7 +20,7 @@
   "scripts": {
     "build": "npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
-    "build:api-doc": "typedoc --out doc/api --mode file",
+    "build:api-doc": "typedoc --out doc/api src",
     "lint": "tslint ./src/**/*.ts?x",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
@@ -44,7 +44,7 @@
     "@types/uuid": "^3.4.4"
   },
   "peerDependencies": {
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }

@@ -13,11 +13,11 @@
  */
 
 import React, {
-  createContext, useContext, FC, Fragment,
+  createContext, useContext, FC,
 } from 'react';
 import { WithNodeKeyProps, withSidecarNodes, withBodilessData } from '@bodiless/core';
 import {
-  applyDesign, extendDesignable, ComponentOrTag, Token,
+  applyDesign, extendDesignable, ComponentOrTag, Token, Fragment,
 } from '@bodiless/fclasses';
 import type { Designable, Design } from '@bodiless/fclasses';
 import { omit } from 'lodash';
@@ -77,11 +77,15 @@ const applyChameleonDesign = (Component: ComponentOrTag<any>): Designable => {
 const withChameleonContext = (
   nodeKeys: WithNodeKeyProps,
   defaultData?: ChameleonData,
+  /** */
+  RootComponent: ComponentOrTag<any> = Fragment,
 ): Token => Component => {
   const WithChameleonContext: FC<any> = props => (
     <ChameleonContext.Provider value={{
       isOn: getIsOn(props),
       activeComponent: getActiveComponent(props),
+      // eslint-disable-next-line react/destructuring-assignment
+      components: props.components,
       selectableComponents: getSelectableComponents(props),
       setActiveComponent: (component: string|null) => props.setComponentData({ component }),
     }}
@@ -93,9 +97,7 @@ const withChameleonContext = (
   );
 
   return withSidecarNodes(
-    // We apply the design to a fragment here so as to get the keys. We can't get the actual
-    // components until `applyChameleon` bc we don't yet know the start component.
-    applyChameleonDesign(Fragment),
+    applyChameleonDesign(RootComponent),
     withBodilessData(nodeKeys, defaultData),
   )(WithChameleonContext);
 };

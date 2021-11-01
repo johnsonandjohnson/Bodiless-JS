@@ -18,7 +18,7 @@
 name: 'edit'
 
 # The type key specifies the language and version for your application.
-type: 'nodejs:12'
+type: 'nodejs:16'
 
 # The size of the persistent disk of the application (in MB).
 disk: 8192
@@ -29,7 +29,7 @@ resources:
 
 dependencies:
     nodejs:
-        pm2: "^3.5.1"
+        pm2: "^5.1.2"
 
 # The 'mounts' describe writable, persistent filesystem mounts in the application.
 # The keys are directory paths relative to the application root. The values are a

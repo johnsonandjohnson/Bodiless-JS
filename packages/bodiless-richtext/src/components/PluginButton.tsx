@@ -13,7 +13,6 @@
  */
 
 import React, { ComponentType, HTMLProps } from 'react';
-import MaterialIcon from '@material/react-material-icon';
 import { Button } from '@bodiless/fclasses';
 import { useUI } from '../RichTextContext';
 
@@ -47,7 +46,7 @@ const PluginButton: ComponentType<Props> = props => {
 
   return (
     <StyledComponent {...rest}>
-      {children || <MaterialIcon className="bl-material-icons" icon={icon} />}
+      {children || <span className="material-icons bl-material-icons">{icon}</span>}
     </StyledComponent>
   );
 };

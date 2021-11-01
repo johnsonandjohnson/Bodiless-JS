@@ -23,6 +23,7 @@ describe('getConflicts', () => {
   afterEach(cleanGitFixture('get-conflicts'));
 
   it('returns conflict files when conflict exists', async () => {
+    jest.setTimeout(30000);
     const result = await getConflicts();
     expect(result.hasConflict).toBeTruthy();
     expect(result.files).toHaveLength(1);
@@ -30,6 +31,7 @@ describe('getConflicts', () => {
   });
 
   it('returns conflict false when no conflict', async () => {
+    jest.setTimeout(30000);
     await GitCmd.cmd()
       .add('checkout', '-b', 'feat/foo-test-2', 'origin/feat/foo-test-2')
       .exec();
