@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v0.2.10...v0.3.0) (2021-11-01)
+
+
+### Features
+
+* **bodiless-backend,gatsby-theme-bodiless:** Add page clone button  ([#1144](https://github.com/johnsonandjohnson/Bodiless-JS/issues/1144)) ([6aa65c1](https://github.com/johnsonandjohnson/Bodiless-JS/commit/6aa65c146e7c30b23b467fa22cd9bc5f7cb80f35))
+* **gatsby-theme-bodiless:** Implements delete page functionality ([#392](https://github.com/johnsonandjohnson/Bodiless-JS/issues/392)) ([#1125](https://github.com/johnsonandjohnson/Bodiless-JS/issues/1125)) ([8f52447](https://github.com/johnsonandjohnson/Bodiless-JS/commit/8f52447c5a03222c068d8cfb1a973e34d944f21c))
+
+
+
+
+
 ## [0.2.10](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v0.2.9...v0.2.10) (2021-10-01)
 
 **Note:** Version bump only for package @bodiless/backend

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.10...v0.3.0) (2021-11-01)
+
+
+### Features
+
+* **components, layouts:** Enable use of component selector in chameleons. ([#1187](https://github.com/johnsonandjohnson/bodiless-js/issues/1187)) ([770a187](https://github.com/johnsonandjohnson/bodiless-js/commit/770a187498d8376225e20a9edd87d29c331045f7))
+
+
+
+
+
 ## [0.2.10](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.9...v0.2.10) (2021-10-01)
 
 

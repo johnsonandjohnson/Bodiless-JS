@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.10...v0.3.0) (2021-11-01)
+
+
+### Features
+
+* **bodiless-backend,gatsby-theme-bodiless:** Add page clone button  ([#1144](https://github.com/johnsonandjohnson/bodiless-js/issues/1144)) ([6aa65c1](https://github.com/johnsonandjohnson/bodiless-js/commit/6aa65c146e7c30b23b467fa22cd9bc5f7cb80f35))
+* **components, layouts:** Enable use of component selector in chameleons. ([#1187](https://github.com/johnsonandjohnson/bodiless-js/issues/1187)) ([770a187](https://github.com/johnsonandjohnson/bodiless-js/commit/770a187498d8376225e20a9edd87d29c331045f7))
+* **gatsby-theme-bodiless:** Implements delete page functionality - Fixes ([#392](https://github.com/johnsonandjohnson/bodiless-js/issues/392))  ([#1162](https://github.com/johnsonandjohnson/bodiless-js/issues/1162)) ([768414c](https://github.com/johnsonandjohnson/bodiless-js/commit/768414c0491b7e183949bdb0040681fbab82b669))
+* **gatsby-theme-bodiless:** Implements delete page functionality ([#392](https://github.com/johnsonandjohnson/bodiless-js/issues/392)) ([#1125](https://github.com/johnsonandjohnson/bodiless-js/issues/1125)) ([8f52447](https://github.com/johnsonandjohnson/bodiless-js/commit/8f52447c5a03222c068d8cfb1a973e34d944f21c))
+
+
+
+
+
 ## [0.2.10](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.9...v0.2.10) (2021-10-01)
 
 
