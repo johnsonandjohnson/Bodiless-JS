@@ -26,9 +26,9 @@ export default (props: any) => (
   <Page {...props}>
     <Layout>
       <AuthProvider {...oidcConfig}>
-    // Access to `UserManager`, `userData`, `signIn`, `signInPopup`,
-    // `signOut` and `signOutRedirect` as well as `isLoading` indicator.
-    ...
+        // Access to `UserManager`, `userData`, `signIn`, `signInPopup`,
+        // `signOut` and `signOutRedirect` as well as `isLoading` indicator.
+        ...
       </AuthProvider>
     </Layout>
   </Page>
@@ -59,8 +59,8 @@ export default (props: any) => (
   <Page {...props}>
     <PageLayout>
       // Access to `UserManager`, `userData`, `signIn`, `signInPopup`,
-    // `signOut` and `signOutRedirect` as well as `isLoading` indicator.
-    ...
+      // `signOut` and `signOutRedirect` as well as `isLoading` indicator.
+      ...
     </PageLayout>
   </Page>
 );
@@ -184,15 +184,17 @@ const UserPreview:FC<any> = props => {
   // If `userData` is `null` it means user in not authenticated.
   if (userData) {
     return (
-    <div>
+      <div>
         <h3>Hi! My name is {userData.profile.given_name}!</h3>
         <button onClick={()=>signOut()}>Sign Out</button>
       </div>
-      );
-    // If not logged in display Sign In button.
-    } else {
-    <button onClick={()=>signIn()}>Sign In</button>
-    }
+    );
+  // If not logged in display Sign In button.
+  } else {
+    return (
+      <button onClick={()=>signIn()}>Sign In</button>
+    );
+  }
 };
 ```
 
@@ -232,7 +234,7 @@ export type AuthContextProps = {
 ```
 
 #### Helper HOCs
-There are several HOCs exported from the `@bodiless/oidc` package that may be used to add OIDC functionality to thhe components:
+There are several HOCs exported from the `@bodiless/oidc` package that may be used to add OIDC functionality to the components:
 
  - `withSignInOnClick` - HOC that adds an `onClick` event to the underlying component and invokes OIDC `signIn` handler when executed.
  - `withSignOutOnClick` - HOC that adds an `onClick` event to the underlying component and invokes OIDC `signOut` handler when executed.
@@ -251,13 +253,15 @@ const UserPreview:FC<any> = props => {
 
   if (userData) {
     return (
-    <div>
+      <div>
         <h3>Hi! My name is {userData.profile.given_name}!</h3>
         <SignOutButton>Sign Out</SignOutButton>
       </div>
-      );
-    } else {
-    <SignInButton}>Sign In</SignInButton>
-    }
+    );
+  } else {
+    return (
+      <SignInButton}>Sign In</SignInButton>
+    );
+  }
 };
 ```
