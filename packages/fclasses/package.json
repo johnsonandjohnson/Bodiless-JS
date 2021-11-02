@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/fclasses",
-  "version": "0.2.10",
+  "version": "0.3.0",
   "description": "Allows for the injection of functional class into components.",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
@@ -26,7 +26,7 @@
   "scripts": {
     "build": "tsc --version && tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
-    "build:api-doc": "typedoc --out doc/api --mode file",
+    "build:api-doc": "typedoc --out doc/api src",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
@@ -34,6 +34,6 @@
     "uuid": "^3.3.2"
   },
   "peerDependencies": {
-    "react": "^16.8.1"
+    "react": "^17.0.2"
   }
 }

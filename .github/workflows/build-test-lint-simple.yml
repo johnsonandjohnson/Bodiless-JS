@@ -6,7 +6,7 @@ env:
 on:
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   setup:
@@ -18,10 +18,10 @@ jobs:
           fetch-depth: 0
       # install a specific version of Node using
       # https://github.com/actions/setup-node
-      - name: Use Node.js v12.19
+      - name: Use Node.js v16.9
         uses: actions/setup-node@v1
         with:
-          node-version: 12.19
+          node-version: 16.9
       # just so we learn about available environment variables GitHub provides
       - name: Print CI env variables
         run: |

@@ -78,6 +78,10 @@ import { useMenuOptionUI } from './components/ContextMenuContext';
 import ContextSubMenu from './ContextMenu/ContextSubMenu';
 import withSwitcherButton from './withSwitcherButton';
 import OnNodeErrorNotification from './OnNodeErrorNotification';
+import {
+  getFromSessionStorage,
+  saveToSessionStorage,
+} from './SessionStorage';
 
 export * from './components';
 export * from './Contentful';
@@ -148,6 +152,8 @@ export {
   withNotificationButton,
   withSwitcherButton,
   OnNodeErrorNotification,
+  getFromSessionStorage,
+  saveToSessionStorage,
 };
 
 export type {

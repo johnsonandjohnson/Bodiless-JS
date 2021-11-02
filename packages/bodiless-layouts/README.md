@@ -215,7 +215,7 @@ fully resolved tailwind configuration, and it returns a function which accepts a
 list of tailwind width classes and returns a token which constrains flow
 container items to those widths:
 ```js
-import rewolveConfig from 'tailwindcss/resolveconfig';
+import resolveConfig from 'tailwindcss/resolveconfig';
 import tailwindConfig from './path/to/your/tailwind.config';
 
 const withWidthConstraints = flow(
@@ -338,3 +338,115 @@ Note how we applied `withCustomPreview` to all variations by adding a
 design with a single key to the list of designs provided to `varyDesigns`.
 Because there is only one key which is being applied to all variations, we
 can use an empty string.
+
+### Component Selector Scale
+The component selector displays component previews in a grid with one, two
+or four items per row.  By default the initial scale is one item per row,
+but this can be controlled via the `scale` prop.  For example:
+
+```ts
+import { ComponentSelectorScale } from '@bodiless/layouts`;
+import { FlowContainer } from '@bodiless/layouts-ui`;
+<FlowContainer scale={ComponentSelectorScale.Quarter}>
+```
+
+The above will set the initial scale to 4 items per row.
+
+### Using the Component Selector outside the Flow Container
+
+The Bodiless component selector can be rendered independently of
+the flow container. You can use it anywhere you want to give the user
+a choice of components.  One use-case might be to provide a styleguide
+page which allows a user to browse all components available in a
+design system:
+
+```js
+import { ComponentSelector } from '@bodiless/layouts-ui';
+// Use the same design you would use to populate the flow container.
+import { flowContainerDesign } from 'my-flow-container';
+
+const StyleGuideBase = props => {
+  const { components, ...rest } = props;
+  return (
+    <ComponentSelector
+      {...rest}
+      components={Object.values(components)}
+    />
+  );
+};
+const StyleGuide = asToken(
+  designable({}, 'StyleGuide'),
+  withDesign(flowContainerDesign),
+  onSelect={() => null}
+)(StyleGuideBase);
+```
+
+A few things to note when using the component selector independently:
+
+- the `components` prop accepted by the component selector is different from
+  that created by `designable`. In order to use the same design as that
+  accepted by the flow container, we convert this object to an array
+  in the `StyleGuideBase` component above.
+- You must provide an `onSelect` prop which will be invoked when the
+  user clicks on one of the components.  Above, we do nothing, but you
+  could easily modify this, for example, to redirect the user to a
+  page containing documentation for the selected component.
+- You must provide a `ui` prop to define the elements used in the
+  component selector UI.  You can use the default `ui` by importing
+  the component selector from `@bodiless/layouts-ui`.  You can also
+  customize this UI to meet your needs:
+  ```ts
+  import { ComponentSelector } from '@bodiless/layouts';
+  import { componentSelectorUi } from '@bodiless/layouts-ui';
+
+  const ui = {
+    ...componentSelectorUi,
+    MasterWrapper: removeClasses('bl-text-white')(componentSelectorUi.MasterWrapper),
+  };
+  ...
+  <ComponentSelector ui={ui} />
+  ```
+- By default, the component selector will display all components in their
+  [preview mode](#component-selector-preview) if available.  If you want
+  instead to display the components normally, as they would appear on a page,
+  you can override the default behavior via the `mode` prop:
+  ```ts
+  import { ComponentDisplayMode } from '@bodiless/layouts';
+  ...
+  <ComponentSelector mode={ComponentDisplayMode.EditFlowContainer} />;
+  ```
+- The default component selector UI overlays all components with a button
+  (clicking this button invokes the `onSelect` prop). As a result, the
+  components are not editable.  One way to defeat this behavior, is to
+  modify the default UI `ComponentSelectButton` element:
+  ```ts
+  import { componentSelectorUi } from '@bodiless/layouts-ui';
+
+  const ui = {
+    ...componentSelectorUi,
+    ComponentSelectButton: () => null,
+  };
+  ```
+- By default, the component selector does not provide an independent content
+  node to each item.  If you want to make the components editable, you may
+  want to do so yourself, again by modifying the default UI:
+  ```ts
+  import { componentSelectorUi } from '@bodiless/layouts-ui';
+
+  const withNodeKeyFromItemId: HOC = Component => {
+    const WithNodeKeyFromItemId: FC<any> = props => (
+      <Component {...props} nodeKey={props['data-item-id']} />
+    );
+    return WithNodeKeyFromItemId;
+  };
+
+  const ui = {
+    ...componentSelectorUi,
+    ItemBox: asToken(
+      withNode,
+      withNodeKeyFromDisplayName,
+    )(componentSelectorUi.ItemBox),
+  };
+  ```
+  In the example above, we leverage the `data-item-id` prop which is passed
+  to the `ItemBox` component.  This is the unique key identifying the component.

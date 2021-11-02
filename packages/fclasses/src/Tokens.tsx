@@ -21,7 +21,7 @@ import type {
   Token, TokenFilterTest, AsToken as AsTokenBase,
 } from './types';
 
-const isToken = (def: TokenDef) => typeof def === 'function';
+const isToken = (def: TokenDef<any, any, any>) => typeof def === 'function';
 
 // Custom merge behavior for token categories.
 function mergeMeta(objValue:any, srcValue:any) {

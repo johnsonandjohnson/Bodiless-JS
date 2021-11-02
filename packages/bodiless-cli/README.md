@@ -6,7 +6,7 @@ $ npm install -g @bodiless/cli
 $ bodiless COMMAND
 running command...
 $ bodiless (-v|--version|version)
-@bodiless/cli/0.0.52 darwin-x64 node-v12.9.1
+@bodiless/cli/0.0.52 darwin-x64 node-v16.9.1
 $ bodiless --help [COMMAND]
 USAGE
   $ bodiless COMMAND
@@ -64,4 +64,4 @@ EXAMPLES
   $ bodiless pack -s /path/to/site
 ```
 
-_See code: [lib/commands/pack.js](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/bodiless-cli/src)_
+_See code: [lib/commands/pack.js](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/bodiless-cli/src)_

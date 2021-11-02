@@ -25,7 +25,7 @@ non-editable (static) meta data into head section from
 `src/components/Layout/meta.tsx`.
 
 For full code, please
-[review code](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Layout/meta.tsx).
+[review code](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/examples/starter/src/components/Layout/meta.tsx).
 
 See below for instructions on how to add meta data to a page's head and make it editable for site
 editors.

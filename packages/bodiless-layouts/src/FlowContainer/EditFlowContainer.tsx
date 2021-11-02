@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC, PropsWithChildren } from 'react';
+import React, { FC } from 'react';
 import { createHash } from 'crypto';
 import { arrayMove, SortEnd } from 'react-sortable-hoc';
 import { observer } from 'mobx-react-lite';
@@ -36,7 +36,7 @@ import {
 } from './types';
 import { ComponentDisplayModeProvider, ComponentDisplayMode } from './ComponentDisplayMode';
 
-const ChildNodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
+const ChildNodeProvider = withNode(React.Fragment);
 
 export const EditFlowContainerComponents: FlowContainerComponents = {
   Wrapper: stylable<SortableListProps>(SortableContainer),

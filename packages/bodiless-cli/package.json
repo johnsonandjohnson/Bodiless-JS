@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/cli",
-  "version": "0.2.10",
+  "version": "0.3.0",
   "description": "A cli tool for Bodiless-JS",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
@@ -46,12 +46,12 @@
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
-    "@types/node": "^12",
+    "@types/node": "^16",
     "nodemon": "^1.19.1"
   },
   "oclif": {
     "commands": "./lib/commands",
-    "repositoryPrefix": "https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/bodiless-cli/src",
+    "repositoryPrefix": "https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/bodiless-cli/src",
     "bin": "bodiless",
     "plugins": [
       "@oclif/plugin-help"

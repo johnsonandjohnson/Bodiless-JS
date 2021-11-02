@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/documentation",
-  "version": "0.2.10",
+  "version": "0.3.0",
   "description": "A tool to aggregate markdown files for rendering by docsify",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
   "homepage": "",
@@ -44,7 +44,7 @@
     "walkdir": "^0.4.1"
   },
   "devDependencies": {
-    "@types/node": "^12",
+    "@types/node": "^16",
     "nodemon": "^1.19.1",
     "ts-node": "^8"
   }

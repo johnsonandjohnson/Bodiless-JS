@@ -75,7 +75,7 @@ components.
 Here is a sampling of tokens that could be used. For full set of tokens, after
 site builder generates a new site from the starter site, reference the site's
 `src/components/Elements.token.ts` file for full set or
-[see it on GitHub](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/starter/src/components/Elements.token.ts).
+[see it on GitHub](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/starter/src/components/Elements.token.ts).
 
 The following are examples of some tokens:
 
@@ -138,28 +138,28 @@ The following components are part of the Starter Kit and site builder can start
 modifying to meet the site's requirements. The starter kit has elements that
 every site will probably use in some form.
 
-* [Header](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/starter/src/components/Layout/header.tsx):
+* [Header](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/starter/src/components/Layout/header.tsx):
   The reusable header section for all pages, usually containing the site logo,
   title, main nav, etc.
-* [Footer](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/starter/src/components/Layout/footer.tsx):
+* [Footer](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/starter/src/components/Layout/footer.tsx):
   The reusable footer section for all pages, usually containing copyright,
   footer menus, etc.
-* [Layout](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/starter/src/components/Layout/index.tsx):
+* [Layout](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/starter/src/components/Layout/index.tsx):
   The main page that combines header, content, & footer of the page. This may
   also contain meta data inserted into head of pages.
-* [Logo](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/starter/src/components/Layout/logo.tsx):
+* [Logo](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/starter/src/components/Layout/logo.tsx):
   Logo used with the desktop header and mobile burger menu.
-* [Rich Text Editors](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Editors):
+* [Rich Text Editors](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/examples/starter/src/components/Editors):
   * Simple : Superscript Only
   * Basic : Superscript, Bold, Italic, Underline, Link, Align Text
   * Full Featured : adds in more functionality to Basic such as Strikethru, headers, quotes.
   * These can be easily customized or extended to support editor requirements for the site.
-* [Cards](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Card):
+* [Cards](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/examples/starter/src/components/Card):
   Cards are blocks of content that can include Image, Title, Body, Call to
   Action Link.
-* [Images](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Image):
+* [Images](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/examples/starter/src/components/Image):
   Reusable Landscape and Square Images. 
-* [Menu & Mobile Burger menu](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Menu):
+* [Menu & Mobile Burger menu](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/examples/starter/src/components/Menu):
   Global Menu system.
 
 For a more in-depth guide about these see
@@ -251,7 +251,7 @@ A site may have a custom unique layout for a single page. For example, a
 homepage often has unique layout or complex layout that is not reused. This page
 can be created as page directly within `src/pages/` in the correct path for
 display. An example of this is the
-[homepage of test site](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/data/pages/index.tsx).
+[homepage of test site](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/test-site/src/data/pages/index.tsx).
 
 If similar pages are added in the future, this one-off, custom page could be
 refactored into a template.

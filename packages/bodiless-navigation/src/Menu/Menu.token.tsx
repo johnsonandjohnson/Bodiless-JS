@@ -13,7 +13,8 @@
  */
 
 import { observer } from 'mobx-react-lite';
-import { useEditContext, useNode } from '@bodiless/core';
+import { useListContext } from '@bodiless/components';
+import { useEditContext } from '@bodiless/core';
 import type { Token } from '@bodiless/fclasses';
 import {
   addClasses,
@@ -66,11 +67,8 @@ const asFullWidthSublist = withDesign({
 const useIsSubmenuExpanded = () => {
   const { isActive, isEdit } = useEditContext();
   const { activeSubmenu } = useMenuContext();
-
-  const { node } = useNode();
-  const parentNodeId = node.path[node.path.length - 2];
-
-  return (activeSubmenu === parentNodeId) || (isEdit && isActive);
+  const { currentItem } = useListContext();
+  return (activeSubmenu === currentItem) || (isEdit && isActive);
 };
 
 const useIsHoverEnabled = () => !useIsMenuOpen() && useMenuContext().activeSubmenu === undefined;
@@ -78,12 +76,9 @@ const useIsHoverEnabled = () => !useIsMenuOpen() && useMenuContext().activeSubme
 const useIsSubmenuContracted = () => {
   const { isActive, isEdit } = useEditContext();
   const { activeSubmenu } = useMenuContext();
+  const { currentItem } = useListContext();
   const isNotActive = isEdit ? !isActive : true;
-
-  const { node } = useNode();
-  const parentNodeId = node.path[node.path.length - 2];
-
-  return (activeSubmenu !== parentNodeId) && isNotActive;
+  return (activeSubmenu !== currentItem) && isNotActive;
 };
 
 const withHoverStyles = withDesign({

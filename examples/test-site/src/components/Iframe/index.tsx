@@ -36,7 +36,7 @@ import {
 } from '../Elements.token';
 
 const withPlaceholder = addProps({ src: 'https://johnsonandjohnson.github.io/Bodiless-JS/' });
-const BodilessIframe: ComponentType<WithNodeProps> = asToken(
+const BodilessIframe: ComponentType<Partial<WithNodeProps>> = asToken(
   asBodilessIframe(),
   withPlaceholder,
 )(Iframe);

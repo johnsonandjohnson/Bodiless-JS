@@ -452,9 +452,9 @@ branch from bitbucket. *Please delete obsolete branches*.
 You can also remove an environment without deleting your branch by checking
 out the branch locally and executing `platform env:delete -y`.
 
-#### Merging to master
+#### Merging to main
 
-When you merge a feature branch to master, the updated master branch will be automatically deployed
+When you merge a feature branch to main, the updated main branch will be automatically deployed
 to the static environment on platform.sh.  To deploy changes to the edit environment, you must follow the same process as in [Pushing Changes](#pushing-changes) above.
 
 
@@ -598,7 +598,7 @@ see [Platform.sh Documentation Redirects](https://docs.platform.sh/configuration
 
 ### Generate redirect rules for migration sites
 
-BodilessJS [Site Migration Tool](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/bodiless-migration-tool) package comes with a feature that allows user to export site redirection into file. See [Tools/Migration](/#/Tools/Migration?id=configuration) for configuration.
+BodilessJS [Site Migration Tool](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/bodiless-migration-tool) package comes with a feature that allows user to export site redirection into file. See [Tools/Migration](/#/Tools/Migration?id=configuration) for configuration.
 
 User can apply these exported redirect rules to routers.yaml before deploying to platform.sh.
 
@@ -621,11 +621,11 @@ User can apply these exported redirect rules to routers.yaml before deploying to
 Platform.sh integrates with Fastly via EZ platform for Fastly.  
 
 1. Obtain your Fastly Service ID & Key from Fastly.   
-1. Once Fastly Service ID & Key is obtained, these variables can be set at Master environment.
+1. Once Fastly Service ID & Key is obtained, these variables can be set at Main environment.
     ```
-    platform variable:create -e master --level environment env:HTTPCACHE_PURGE_TYPE --value 'fastly'
-    platform variable:create -e master --level environment env:FASTLY_SERVICE_ID --value 'YOUR_ID_HERE'
-    platform variable:create -e master --level environment env:FASTLY_KEY --value 'YOUR_ID_HERE'
+    platform variable:create -e main --level environment env:HTTPCACHE_PURGE_TYPE --value 'fastly'
+    platform variable:create -e main --level environment env:FASTLY_SERVICE_ID --value 'YOUR_ID_HERE'
+    platform variable:create -e main --level environment env:FASTLY_KEY --value 'YOUR_ID_HERE'
     ```
 1. Verify or Update your `routes.yaml` to enable caching for your site by setting `enabled: true`
     ```
@@ -641,7 +641,7 @@ Platform.sh integrates with Fastly via EZ platform for Fastly.
                 expires: 6h  
     ```
 
-Once completed, the master env deployed on Platform.sh should be on Fastly CDN.  You may have to fine tune the expires setting for your static resources and set certain ones (ones identify not to change often such as font files) to longer to leverage browser caching.
+Once completed, the main env deployed on Platform.sh should be on Fastly CDN.  You may have to fine tune the expires setting for your static resources and set certain ones (ones identify not to change often such as font files) to longer to leverage browser caching.
 
 Platform.sh References:
 * [Set Fastly Credentials on Platform.sh](https://docs.platform.sh/frameworks/ibexa/fastly.html#set-credentials-on-platformsh)
@@ -762,7 +762,7 @@ hooks:
 ## Known limitations
 
 - PR Branches and Feature branches created in bitbucket will always inherit from
-  master. This means that you must manually configure basic authentication for
+  main. This means that you must manually configure basic authentication for
   these branches if you want them protected from the public internet.
 - There is a 64-character limit on hostnames for TLS, and platform.sh uses 43 of
   them. Since hostnames are created based on branch names, and since the edit

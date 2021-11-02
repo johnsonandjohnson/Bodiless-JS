@@ -130,7 +130,7 @@ export default class Pack extends Command {
           const tarball = `${tarballName}-${packageJsonData.version}.tgz`;
           return { ...map, [packageJsonData.name]: { tarball, dir } };
         } catch (e) {
-          this.warn(e);
+          this.warn(e as Error);
         }
       }
       return map;
@@ -167,7 +167,7 @@ export default class Pack extends Command {
       }
       this.log('Done');
     } catch (e) {
-      this.error(e);
+      this.error(e as Error);
     }
   }
 }

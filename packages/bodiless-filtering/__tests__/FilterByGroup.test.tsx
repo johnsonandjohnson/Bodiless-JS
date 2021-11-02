@@ -26,7 +26,9 @@ type WithRegisterSuggestions = (tags: TagType[]) => void;
 
 type Props = {
   onAdd: (registerSuggestion: WithRegisterSuggestions) => void,
+  // eslint-disable-next-line react/no-unused-prop-types
   onSelect: (selectFn: (tag: FilterTagType) => void) => void,
+  // eslint-disable-next-line react/no-unused-prop-types
   force: string,
 };
 
