@@ -35,7 +35,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({
   onBeforeSignIn,
   onSignIn,
   onSignOut,
-  location = window.location,
+  location = typeof window !== 'undefined' ? window.location : undefined,
   ...props
 }) => {
   const [isLoading, setIsLoading] = useState(true);

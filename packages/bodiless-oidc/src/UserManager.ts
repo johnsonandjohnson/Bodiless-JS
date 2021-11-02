@@ -21,7 +21,8 @@ import { AuthProviderProps } from './types';
  *
  * @param location - window.location by default.
  */
-export const hasCodeInUrl = (location: Location): boolean => {
+export const hasCodeInUrl = (location?: Location): boolean => {
+  if (!location) return false;
   const searchParams = new URLSearchParams(location.search);
   const hashParams = new URLSearchParams(location.hash.replace('#', '?'));
 
