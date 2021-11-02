@@ -41,7 +41,7 @@ const withParent = (Parent: ComponentType, designKey: string = 'Parent'): Token 
     );
   };
   const applyDesign = extendDesignable(design => omit(design, [designKey]));
-  return applyDesign(startComponents, designKey)(WithParent);
+  return applyDesign(startComponents, designKey)(WithParent) as ComponentType<any>;
 };
 
 export default withParent;

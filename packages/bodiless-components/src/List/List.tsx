@@ -31,7 +31,7 @@ import {
 const ListContext = React.createContext<ListContextValue>({});
 const useListContext = () => React.useContext(ListContext);
 
-const ListItemNodeProvider = withNode<any, any>(Fragment);
+const ListItemNodeProvider = withNode(Fragment);
 
 const listComponents: ListComponents = {
   Wrapper: asComponent('ul'),

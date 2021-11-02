@@ -81,7 +81,7 @@ describe('useGetMenuOptions', () => {
     button.handler();
     expect(componentSelectorForm).toHaveBeenCalledTimes(1);
     expect((componentSelectorForm as jest.Mock).mock.calls[0][0].components).toEqual(components);
-    const action = (componentSelectorForm as jest.Mock).mock.calls[0][1];
+    const action = (componentSelectorForm as jest.Mock).mock.calls[0][0].onSelect;
     action([selection]);
   }
 

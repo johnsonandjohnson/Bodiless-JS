@@ -15,7 +15,7 @@ same design system to multiple sites, extending it as needed.
 * Complete the [Intro to Bodiless Concepts](./IntroToBodilessConcepts) tutorial.
   * Alternatively, if you already have a fair understanding of BodilessJS
     fundamentals and want to fast-forward to this tutorial, copy over the
-    [gallery-final folder & contents](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/test-site/src/data/pages/gallery-final)
+    [gallery-final folder & contents](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/examples/test-site/src/data/pages/gallery-final)
     and place in a [new site](../../About/GettingStarted?id=creating-a-new-site) at
     `src/data/pages/gallery`. Remember to rename the folder from `gallery-final`
     to `gallery`.
@@ -361,7 +361,7 @@ to make it more flexible and reusable.
     
    * Then we define what to render by default for each component; we use the
      stylable versions of basic HTML elements exported by
-     [`@bodiless/fclasses`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/packages/fclasses/src/StyledHTML.tsx).
+     [`@bodiless/fclasses`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/fclasses/src/StyledHTML.tsx).
      ```ts
      const captionedImageComponents:CaptionedImageComponents = {
        Wrapper: Section,

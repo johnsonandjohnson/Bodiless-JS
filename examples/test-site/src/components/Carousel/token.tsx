@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import {
   addClasses,
   addProps,
@@ -36,7 +36,6 @@ import {
   useCarouselSlideIndex,
 } from '@bodiless/carousel';
 import { asBodilessChameleon } from '@bodiless/components';
-import MaterialIcon from '@material/react-material-icon';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 /**
  * overrides some styles defined in the contrib library
@@ -138,14 +137,15 @@ const withAutoPlayButtonStyles = asToken(
       addClasses('ml-2 rounded-full p-1 block w-8'),
       addClasses('leading-none text-1xl bg-blue-700 text-white'),
       addClasses('disabled:opacity-50 disabled:cursor-not-allowed'),
-      withChild(MaterialIcon),
+      addClasses('material-icons'),
+      withChild(Fragment),
       withDesign({
         Child: asToken(
           addPropsIf(useCarouselIsPlaying)({
-            icon: 'pause',
+            children: 'pause',
           }),
           addPropsIf(negate(useCarouselIsPlaying))({
-            icon: 'play_arrow',
+            children: 'play_arrow',
           }),
         ),
       }),

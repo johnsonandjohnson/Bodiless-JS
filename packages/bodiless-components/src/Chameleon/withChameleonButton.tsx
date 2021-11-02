@@ -15,13 +15,18 @@
 import React, { ComponentType } from 'react';
 import pick from 'lodash/pick';
 import { v1 } from 'uuid';
+// @todo We should not depend on a ui package (bu we already do for withImageLibary)
+import { componentSelectorForm } from '@bodiless/layouts';
 import {
   withMenuOptions, useContextMenuForm, useMenuOptionUI, withContextActivator, withLocalContextMenu,
   TMenuOption, EditButtonProps, UseBodilessOverrides, createMenuOptionGroup,
   MenuOptionsDefinition, useEditContext,
 } from '@bodiless/core';
-import { flowIf, asToken } from '@bodiless/fclasses';
+import {
+  flowIf, asToken, DesignableComponents, withoutProps,
+} from '@bodiless/fclasses';
 
+import type { ComponentSelectorFormProps } from '@bodiless/layouts';
 import type { ChameleonButtonProps, ChameleonData } from './types';
 import { useChameleonContext, DEFAULT_KEY } from './withChameleonContext';
 
@@ -38,7 +43,16 @@ const useToggleButtonMenuOption = () => {
   };
 };
 
-const useSwapButtonMenuOption = () => {
+/**
+ * Bodiless `useOverrides` hook which forces a chameleon buton to use the "swap"
+ * form in all cases.
+ *
+ * @example
+ * ```ts
+ * withChameleonButton('node-key', defaultData, useChameleonSwapForm);
+ * ```
+ */
+export const useChameleonSwapForm = () => {
   const { selectableComponents, activeComponent, setActiveComponent } = useChameleonContext();
   const renderForm = () => {
     const {
@@ -79,6 +93,32 @@ const useSwapButtonMenuOption = () => {
   };
 };
 
+/**
+ * Bodiless `useOverrides` hook which forces a chameleon buton to use the component selector
+ * form in all cases.
+ *
+ * @example
+ * ```ts
+ * withChameleonButton('node-key', defaultData, useChameleonSelectorForm);
+ * ```
+ */
+export const useChameleonSelectorForm = (
+  props: Omit<ComponentSelectorFormProps, 'onSelect'>,
+) => {
+  const { selectableComponents, setActiveComponent } = useChameleonContext();
+  const onSelect = ([componentName]: string[]) => setActiveComponent(componentName);
+  return {
+    icon: 'repeat',
+    label: 'Swap',
+    handler: () => componentSelectorForm({
+      ...props,
+      components: selectableComponents as DesignableComponents,
+      onSelect,
+    }),
+    formTitle: 'Choose a component',
+  };
+};
+
 export const withUnwrap = <P extends object>(Component: ComponentType<P>) => {
   const WithUnwrapChameleon = (props: P & ChameleonButtonProps) => {
     const { isOn, setActiveComponent } = useChameleonContext();
@@ -88,6 +128,16 @@ export const withUnwrap = <P extends object>(Component: ComponentType<P>) => {
   };
   return WithUnwrapChameleon;
 };
+
+/**
+ * Removes props used by the component selector in withChameleonButton
+ */
+export const withoutChameleonButtonProps = withoutProps(
+  'blacklistCategories',
+  'mandatoryCategories',
+  'scale',
+  'mode',
+);
 
 /**
  * Adds a menu button which controls the state of the chameleon.
@@ -107,10 +157,9 @@ const withChameleonButton = <P extends object, D extends object>(
   const useMenuOptions = (props: P & EditButtonProps<D>) => {
     const overrides = useOverrides(props);
     // if useOverrides returns falsy, it means not to provide the button.
-    if (!overrides) return [];
     const { selectableComponents } = useChameleonContext();
     const extMenuOptions = Object.keys(selectableComponents).length > 1
-      ? useSwapButtonMenuOption
+      ? useChameleonSwapForm
       : useToggleButtonMenuOption;
     const baseDefinition:TMenuOption = {
       name: `chameleon-${v1()}`,
@@ -136,6 +185,7 @@ const withChameleonButton = <P extends object, D extends object>(
       withContextActivator('onClick'),
       withLocalContextMenu,
     ),
+    withoutChameleonButtonProps,
     withMenuOptions(useMenuOptionsDefinition),
   );
 };

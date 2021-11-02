@@ -34,7 +34,7 @@ Backend package provides a set of web API endpoints to allow developers working 
 
 - ```changes/conflicts```
 
-  Find conflicts between origin master and upstream branch.
+  Find conflicts between origin main and upstream branch.
 
   **Request**
   - *Method:* GET

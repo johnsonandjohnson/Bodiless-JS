@@ -52,7 +52,7 @@ export class HtmlToComponents {
     };
     try {
       return extractReactComponents(labeledHtml, options);
-    } catch (error) {
+    } catch (error: any) {
       if (error.name === 'SyntaxError'
         && error.message.startsWith('Unexpected token')) {
         console.log('HTML source of this page is invalid.');

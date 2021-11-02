@@ -117,6 +117,7 @@ const PageContextProvider: FC<PageContextProviderProps> = ({ children, ...rest }
 };
 
 PageContextProvider.defaultProps = {
+  // eslint-disable-next-line react/default-props-match-prop-types
   getMenuOptions: () => [],
 };
 

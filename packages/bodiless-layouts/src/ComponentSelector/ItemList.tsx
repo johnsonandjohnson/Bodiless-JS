@@ -21,18 +21,12 @@ import React, {
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css';
 import uiContext from './uiContext';
-import { ComponentWithMeta, ItemListProps } from './types';
-
-enum Scale {
-  Full = 1,
-  Half = 2,
-  Quarter = 4
-}
+import { ComponentWithMeta, ItemListProps, ComponentSelectorScale as Scale } from './types';
 
 const ItemList: React.FC<ItemListProps> = props => {
-  const { components, onSelect } = props;
+  const { components, onSelect, scale: startScale = Scale.Full } = props;
   const finalUI = useContext(uiContext);
-  const [scale, setScale] = useState(Scale.Full);
+  const [scale, setScale] = useState(startScale);
 
   // Function to build a default title for a component from its categories.
   const title = (component: ComponentWithMeta) => component.title || component.displayName;
@@ -94,7 +88,7 @@ const ItemList: React.FC<ItemListProps> = props => {
   const elems: ReactNode[] = components.slice(0, maxComponents).map(
     (Component: ComponentWithMeta<any>) => (
       <finalUI.ItemBoxWrapper style={boxStyle} key={Component.displayName}>
-        <finalUI.ItemBox key={Component.displayName}>
+        <finalUI.ItemBox key={Component.displayName} data-item-id={Component.displayName}>
           <finalUI.TitleWrapper style={outerStyle}>
             {title(Component)}
           </finalUI.TitleWrapper>
@@ -141,7 +135,9 @@ const ItemList: React.FC<ItemListProps> = props => {
       </finalUI.ItemBox>
     </finalUI.ItemBoxWrapper>
   );
-  const isActive = (currentScale:Scale) => (currentScale === scale ? 'bl-bg-primary bl-text-white' : '');
+  const isActive = (currentScale:Scale) => (
+    currentScale === scale ? 'bl-bg-primary bl-text-white' : ''
+  );
   return (
     <finalUI.GridListBox>
       <finalUI.ScalingHeader>

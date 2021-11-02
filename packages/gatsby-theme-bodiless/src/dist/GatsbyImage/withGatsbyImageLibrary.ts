@@ -14,7 +14,7 @@
 
 import { asToken } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
-import { withImageLibrary } from '@bodiless/components';
+import { withImageLibrary } from '@bodiless/components-ui';
 import type { AsBodilessImage } from '@bodiless/components';
 import withGatsbyImageNode from './withGatsbyImageNode';
 import GatsbyImagePresets from './GatsbyImagePresets';

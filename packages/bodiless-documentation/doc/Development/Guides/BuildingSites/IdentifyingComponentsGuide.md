@@ -26,7 +26,7 @@ as an example. It consists of:
 
 The Header, Menu, Logo, & Footer components are global components.
 So thus it leaves the actual page components that are coming from
-[homepage](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/data/pages/index.tsx)
+[homepage](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/test-site/src/data/pages/index.tsx)
 and if you inspect the code, you can see it was implemented with
 
 * Image component for Header Image

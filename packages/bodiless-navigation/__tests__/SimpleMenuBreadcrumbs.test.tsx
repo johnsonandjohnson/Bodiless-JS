@@ -17,8 +17,8 @@ import React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import cheerio from 'cheerio';
-import { withDefaultContent, ifToggledOn, asReadOnly } from '@bodiless/core';
-import { replaceWith, withDesign, addProps } from '@bodiless/fclasses';
+import { withDefaultContent, ifToggledOn, asReadOnly, withNodeKey } from '@bodiless/core';
+import { replaceWith, withDesign, addProps, asToken } from '@bodiless/fclasses';
 import { flow, flowRight } from 'lodash';
 
 import {
@@ -44,9 +44,10 @@ const setPagePath = (pagePath: string) => {
 const createBreadcrumbComponent = ({
   content = {},
 }) => {
-  const Source = flowRight(
-    withListSubMenu(),
+  const Source = asToken(
     asBodilessMenu('testMenu'),
+    withListSubMenu(),
+    withNodeKey(),
   )('ul');
 
   const BreadcrumbComponent = (props: any) => (
@@ -56,9 +57,9 @@ const createBreadcrumbComponent = ({
     </>
   );
 
-  return flowRight(
-    withDefaultContent(content),
+  return asToken(
     withBreadcrumbStore,
+    withDefaultContent(content),
   )(BreadcrumbComponent);
 };
 
@@ -203,11 +204,11 @@ describe('asBreadcrumbsClean', () => {
         },
       },
     });
-    const CustomBreadcrumb = flowRight(
+    const CustomBreadcrumb = asToken(
+      withBreadcrumbStartingTrail,
       withDesign({
         StartingTrail: replaceWith(() => <span>home</span>),
       }),
-      withBreadcrumbStartingTrail,
     )(Breadcrumb);
     const wrapper = mount(<CustomBreadcrumb />);
     expect(breadcrumbHtml(wrapper)).toMatchSnapshot();

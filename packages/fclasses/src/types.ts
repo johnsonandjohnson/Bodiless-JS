@@ -54,9 +54,7 @@ type PP<P, A, R> = Omit<P & A, keyof R> & Partial<R>;
  *   these removed.
  */
 export type HOC<B = {}, A = {}, R = {}> =
-  <P extends B, Q extends Omit<P & A, keyof R> = PP<P, A, R>>(
-    C: ComponentOrTag<P>
-  ) => ComponentWithMeta<Q>;
+  <P extends B>(C: ComponentOrTag<P>) => ComponentWithMeta<PP<P, A, R>>;
 
 /**
  * Properties of tokens.

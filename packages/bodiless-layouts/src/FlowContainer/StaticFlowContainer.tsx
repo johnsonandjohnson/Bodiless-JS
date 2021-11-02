@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC, PropsWithChildren } from 'react';
+import React, { FC } from 'react';
 import { flow } from 'lodash';
 import { withNode } from '@bodiless/core';
 import {
@@ -30,7 +30,7 @@ const flowContainerComponentStart: FlowContainerComponents = {
   ComponentWrapper: Div,
 };
 
-const NodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
+const NodeProvider = withNode(React.Fragment);
 
 const StaticFlowContainer: FC<DesignableComponentsProps> = ({ components }) => {
   const items = useItemHandlers().getItems();

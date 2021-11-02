@@ -16,13 +16,17 @@ import React, { FC } from 'react';
 import {
   ifEditable,
   useNode,
+  ifReadOnly,
 } from '@bodiless/core';
 import type {
   WithNodeKeyProps, UseBodilessOverrides,
 } from '@bodiless/core';
-import { Token, asToken } from '@bodiless/fclasses';
+import {
+  Token, asToken, Enhancer,
+} from '@bodiless/fclasses';
+import { ComponentSelectorOptions } from '@bodiless/layouts';
 import { ChameleonData } from './types';
-import withChameleonButton from './withChameleonButton';
+import withChameleonButton, { withoutChameleonButtonProps } from './withChameleonButton';
 import applyChameleon from './applyChameleon';
 import withChameleonContext from './withChameleonContext';
 
@@ -64,13 +68,19 @@ const asBodilessChameleon = (
   nodeKeys: WithNodeKeyProps,
   defaultData?: ChameleonData,
   useOverrides?: UseBodilessOverrides,
-) => asToken(
-  applyChameleon,
-  ifEditable(
-    withChameleonButton(useOverrides),
-  ),
-  withChameleonContext(nodeKeys, defaultData),
-);
+): Enhancer<ComponentSelectorOptions> => Component => {
+  const hoc = asToken(
+    applyChameleon,
+    ifEditable(
+      withChameleonButton(useOverrides),
+    ),
+    ifReadOnly(
+      withoutChameleonButtonProps,
+    ),
+    withChameleonContext(nodeKeys, defaultData, Component),
+  ) as Enhancer<ComponentSelectorOptions>;
+  return hoc(Component);
+};
 
 export default asBodilessChameleon;
 

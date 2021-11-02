@@ -14,7 +14,6 @@
 
 import React, { useState } from 'react';
 import RCTooltip from 'rc-tooltip';
-import MaterialIcon from '@material/react-material-icon';
 import { flow } from 'lodash';
 import { useUI, getUI } from '../RichTextContext';
 import {
@@ -30,7 +29,7 @@ const NodeSelectorButton$ = (props: ButtonProps) => {
   const { Button } = getUI(useUI());
   return (
     <Button {...props}>
-      <MaterialIcon className="bl-material-icons" icon="more_horiz" />
+      <i className="material-icons bl-material-icons">more_horiz</i>
     </Button>
   );
 };

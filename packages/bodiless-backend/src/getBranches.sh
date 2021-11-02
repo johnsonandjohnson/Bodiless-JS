@@ -33,7 +33,7 @@ function listBranchWithDescription() {
     clean_branch_name=${branch//\*\ /}
     # replace colors
     clean_branch_name=`echo $clean_branch_name | tr -d '[:cntrl:]' | sed -E "s/\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"`
-    # replace symbolic-ref like `HEAD -> master`
+    # replace symbolic-ref like `HEAD -> main`
     clean_branch_name=`echo $clean_branch_name | sed -E "s/^.+ -> //g"`
 
     description=`git config branch.$clean_branch_name.description`
@@ -50,7 +50,7 @@ function listBranchWithDescription() {
 
   # example output
   # $ ./branches.sh
-  # * master        this is master branch
+  # * main          this is main branch
   # one             this is simple branch for testing
 }
 

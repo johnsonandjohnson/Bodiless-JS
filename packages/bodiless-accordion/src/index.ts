@@ -19,7 +19,7 @@ import {
   isAccordionContracted,
 } from './components/AccordionContext';
 import { asAccordionTitle } from './components/AccordionTitle';
-import AccordionBodyBodiless, { asAccordionBody } from './components/AccordionBody';
+import AccordionBodyClean, { asAccordionBody } from './components/AccordionBody';
 import asAccordionWrapper from './components/AccordionWrapper';
 import asTestableAccordion from './components/asTestableAccordion';
 import {
@@ -38,7 +38,7 @@ export * from './components/types';
 
 export {
   AccordionClean,
-  AccordionBodyBodiless,
+  AccordionBodyClean,
   useAccordionContext,
   isAccordionExpanded,
   isAccordionContracted,

@@ -12,12 +12,13 @@
  * limitations under the License.
  */
 
+import { ComponentOrTag } from '@bodiless/fclasses';
 import React,
 {
   ComponentType, HTMLProps, createContext, useContext,
 } from 'react';
 
-const defaultUI = {
+const defaultUI: Required<UI & PreviewUI> = {
   // This is to differentiate unstyled HoverMenu in tests.
   HoverMenu: () => (<div />),
   Button: 'button',
@@ -29,12 +30,12 @@ const defaultUI = {
 };
 
 export type UI = {
-  HoverMenu?: ComponentType<HTMLProps<HTMLDivElement>> | string;
-  Button?: ComponentType<HTMLProps<HTMLButtonElement>> | string;
-  Overlay?: ComponentType<HTMLProps<HTMLDivElement>> | string;
-  CloseButton?: ComponentType<HTMLProps<HTMLSpanElement>> | string;
-  ClickableWrapper?: ComponentType<HTMLProps<HTMLButtonElement>> | string;
-  TextSelectorWrapper?: ComponentType<HTMLProps<HTMLDivElement>> | string;
+  HoverMenu?: ComponentOrTag<HTMLProps<HTMLDivElement>>;
+  Button?: ComponentOrTag<HTMLProps<HTMLButtonElement>>;
+  Overlay?: ComponentOrTag<HTMLProps<HTMLDivElement>>;
+  CloseButton?: ComponentOrTag<HTMLProps<HTMLSpanElement>>;
+  ClickableWrapper?: ComponentOrTag<HTMLProps<HTMLButtonElement>>;
+  TextSelectorWrapper?: ComponentOrTag<HTMLProps<HTMLDivElement>>;
 };
 
 export type PreviewUI = {
@@ -46,5 +47,5 @@ export const getUI = (ui: UI & PreviewUI = {}) => ({
   ...ui,
 });
 
-export const uiContext = createContext<UI>(defaultUI);
+export const uiContext = createContext<Required<UI>>(defaultUI);
 export const useUI = () => useContext(uiContext);

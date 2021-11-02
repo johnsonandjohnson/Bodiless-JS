@@ -15,7 +15,7 @@ pipeline {
     parameters {
         string (
             name: 'tag',
-            defaultValue: 'master',
+            defaultValue: 'main',
             description: 'specify git tag that should be cloned and which packages should be published. ex: refs/tags/v0.0.9'
         )
     }

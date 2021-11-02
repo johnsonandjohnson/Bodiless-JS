@@ -14,31 +14,34 @@
 
 import React from 'react';
 import { contextMenuForm } from '@bodiless/core';
+import { DesignableComponents } from '@bodiless/fclasses';
 import { ComponentSelectorProps, ComponentSelectorUI, ComponentWithMeta } from './types';
 import ComponentSelector from '.';
-import { EditFlowContainerProps } from '../FlowContainer/types';
+
+export type ComponentSelectorFormProps =
+  Omit<ComponentSelectorProps, 'closeForm'|'components'|'mode'> & {
+    components: DesignableComponents,
+  };
+
 /**
  * Returns a component selector wrapped in a context menu form.
  *
  * @param props Props passed to the edit flow container.
  * @param onSelect The action to perform when a component is selected.
  */
-const componentSelectorForm = (
-  // @TODO: Separate component selector props from edit flow container props.
-  props: EditFlowContainerProps,
-  onSelect: ComponentSelectorProps['onSelect'],
-) => contextMenuForm({
+const componentSelectorForm = (props: ComponentSelectorFormProps) => contextMenuForm({
   initialValues: { selection: '' },
   hasSubmit: false,
 })(
   ({ ui, closeForm }) => (
     <ComponentSelector
-      {...props}
       ui={{ ...ui as ComponentSelectorUI, ...props.ui as ComponentSelectorUI }}
       closeForm={closeForm}
-      onSelect={(...args) => { onSelect(...args); closeForm(null); }}
+      onSelect={(...args) => { props.onSelect(...args); closeForm(null); }}
       components={Object.values(props.components) as ComponentWithMeta[]}
       mandatoryCategories={props.mandatoryCategories}
+      blacklistCategories={props.blacklistCategories}
+      scale={props.scale}
     />
   ),
 );
