@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { UserManager } from 'oidc-client-ts';
+import { UserManager, WebStorageStateStore } from 'oidc-client-ts';
 import { AuthProviderProps } from './types';
 
 /**
@@ -44,6 +44,19 @@ export const hasCodeInUrl = (location?: Location): boolean => {
  */
 export const initUserManager = (props: AuthProviderProps): UserManager => {
   if (props.userManager) return props.userManager;
+
+  /**
+   * We can't initialize UserManager.userStore during SSR.
+   * There is a bug in the `oidc-client-ts` package where it assigns
+   * a `sessionStorage` to the `userStore` without a check to see if a `sessionStorage` defined.
+   *
+   * From `UserManagerSettingsStore` at `oidc-client-ts/src/UserManagerSettings.ts`:
+   *   - `userStore = new WebStorageStateStore({ store: sessionStorage })`
+   */
+  const userStore = typeof window !== undefined
+    ? new WebStorageStateStore({ store: window.sessionStorage })
+    : undefined;
+
   const {
     authority,
     clientId,
@@ -74,5 +87,6 @@ export const initUserManager = (props: AuthProviderProps): UserManager => {
     popupWindowFeatures,
     popupWindowTarget,
     automaticSilentRenew,
+    userStore,
   });
 };
