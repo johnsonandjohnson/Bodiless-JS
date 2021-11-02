@@ -15,6 +15,7 @@
 const path = require('path');
 const fg = require('fast-glob');
 const fs = require('fs');
+const { getDisabledPages } = require('@bodiless/components/lib/PageDisable/utils');
 const { createDefaultContentPlugins } = require('./dist/DefaultContent');
 
 require('dotenv').config({
@@ -82,19 +83,35 @@ if (process.env.GOOGLE_FONTS_ENABLED !== '0') {
  * Robots.txt plugin.
  */
 if (process.env.ROBOTSTXT_ENABLED !== '0') {
-  const policy = process.env.ROBOTSTXT_POLICY;
+  const disablePageList = getDisabledPages();
+  const disabledPages = Object.keys(disablePageList).filter(
+    item => disablePageList[item].pageDisabled === true || disablePageList[item].indexingDisabled,
+  );
+  const policyEnv = process.env.ROBOTSTXT_POLICY;
   const defaultPolicy = [
     {
       userAgent: '*',
       allow: '/',
     },
   ];
+  const policy = policyEnv ? JSON.parse(policyEnv) : defaultPolicy;
+  if (!policy[0]['disallow']) {
+    policy[0]['disallow'] = disabledPages;
+  } else {
+    const disallow = policy[0]['disallow'];
+    if (typeof disallow === 'string') {
+      policy[0]['disallow'] = [disallow, ...disabledPages];
+    } else {
+      policy[0]['disallow'] = [...disallow, ...disabledPages];
+    }
+  }
+
   plugins.push({
     resolve: 'gatsby-plugin-robots-txt',
     options: {
       host: process.env.ROBOTSTXT_HOST,
       sitemap: process.env.ROBOTSTXT_SITEMAP,
-      policy: policy ? JSON.parse(policy) : defaultPolicy,
+      policy: policy,
     },
   });
 }
