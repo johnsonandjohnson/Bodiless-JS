@@ -36,6 +36,12 @@ export const hasCodeInUrl = (location?: Location): boolean => {
   );
 };
 
+const isSSR = () => !(
+  typeof window !== 'undefined'
+  && window.document
+  && window.document.createElement
+);
+
 /**
  * @private
  * Helper to initialize new UserManager
@@ -53,9 +59,9 @@ export const initUserManager = (props: AuthProviderProps): UserManager => {
    * From `UserManagerSettingsStore` at `oidc-client-ts/src/UserManagerSettings.ts`:
    *   - `userStore = new WebStorageStateStore({ store: sessionStorage })`
    */
-  const userStore = typeof window !== undefined
+  const userStore = !isSSR()
     ? new WebStorageStateStore({ store: window.sessionStorage })
-    : undefined;
+    : new WebStorageStateStore({ store: undefined });
 
   const {
     authority,
