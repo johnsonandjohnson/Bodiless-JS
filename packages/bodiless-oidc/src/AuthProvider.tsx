@@ -22,6 +22,12 @@ import { AuthContext } from './AuthContext';
 import { initUserManager, hasCodeInUrl } from './UserManager';
 import { AuthProviderProps } from './types';
 
+const isSSR = () => !(
+  typeof window !== 'undefined'
+  && window.document
+  && window.document.createElement
+);
+
 /**
  * An AuthProvider represents a particular state of the currently
  * authenticated user. If no user is logged in, `userData` will be `null`.
@@ -38,6 +44,16 @@ export const AuthProvider: FC<AuthProviderProps> = ({
   location = typeof window !== 'undefined' ? window.location : undefined,
   ...props
 }) => {
+  /**
+   * We can't initialize UserManager during SSR.
+   * There is a bug in the `oidc-client-ts` package where it assigns
+   * a `sessionStorage` to the `userStore` without a check to see if a `sessionStorage` defined.
+   *
+   * From `UserManagerSettingsStore` at `oidc-client-ts/src/UserManagerSettings.ts`:
+   *   - `userStore = new WebStorageStateStore({ store: sessionStorage })`
+   */
+  if (isSSR()) return <>{children}</>;
+
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState<User | null>(null);
   const [userManager] = useState<UserManager>(initUserManager(props));

@@ -31,11 +31,10 @@ import { asHeader1 } from '../../../components/Elements.token';
 
 const withLogContext = (WrappedButton: ComponentType) => (props: any) => {
   const context = useBodilessOidc();
-  const onClick = () => {
-    console.log('AUTH CONTEXT:', context);
-  };
-  return <WrappedButton {...props} onClick={onClick} />;
+  return <WrappedButton {...props} onClick={() => console.log('AUTH CONTEXT:', context)} />;
 };
+
+const clearUrl = () => window.history.replaceState({}, document.documentURI, '/oidc');
 
 const H1 = asToken(addClasses('pt-5'), asHeader1)(H1$);
 const Description = addClasses('text-sm mb-2 italic')(Div);
@@ -123,6 +122,7 @@ const UserPreview = () => {
       <div className="text-center">
         <LogoutButton>Log Out</LogoutButton>
         <LogContextButton>Log Context</LogContextButton>
+        <Button onClick={clearUrl}>Clear URL</Button>
       </div>
     </UserWrapper>
   );
