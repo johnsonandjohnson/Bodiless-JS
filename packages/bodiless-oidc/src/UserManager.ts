@@ -14,6 +14,7 @@
 
 import { UserManager, WebStorageStateStore } from 'oidc-client-ts';
 import { AuthProviderProps } from './types';
+import { SSRStorage, isSSR } from './SSRStorage';
 
 /**
  * @private
@@ -36,12 +37,6 @@ export const hasCodeInUrl = (location?: Location): boolean => {
   );
 };
 
-const isSSR = () => !(
-  typeof window !== 'undefined'
-  && window.document
-  && window.document.createElement
-);
-
 /**
  * @private
  * Helper to initialize new UserManager
@@ -61,11 +56,11 @@ export const initUserManager = (props: AuthProviderProps): UserManager => {
    */
   const userStore = !isSSR()
     ? new WebStorageStateStore({ store: window.sessionStorage })
-    : new WebStorageStateStore({ store: undefined });
+    : new WebStorageStateStore({ store: new SSRStorage() });
 
   const stateStore = !isSSR()
     ? new WebStorageStateStore({ store: window.localStorage })
-    : new WebStorageStateStore({ store: undefined });
+    : new WebStorageStateStore({ store: new SSRStorage() });
 
   const {
     authority,
