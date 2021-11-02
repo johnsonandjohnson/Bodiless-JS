@@ -52,7 +52,7 @@ export const initUserManager = (props: AuthProviderProps): UserManager => {
   if (props.userManager) return props.userManager;
 
   /**
-   * We can't initialize UserManager.userStore during SSR.
+   * We can't initialize UserManager.userStore or UserManager.stateStore during SSR.
    * There is a bug in the `oidc-client-ts` package where it assigns
    * a `sessionStorage` to the `userStore` without a check to see if a `sessionStorage` defined.
    *
@@ -61,6 +61,10 @@ export const initUserManager = (props: AuthProviderProps): UserManager => {
    */
   const userStore = !isSSR()
     ? new WebStorageStateStore({ store: window.sessionStorage })
+    : new WebStorageStateStore({ store: undefined });
+
+  const stateStore = !isSSR()
+    ? new WebStorageStateStore({ store: window.localStorage })
     : new WebStorageStateStore({ store: undefined });
 
   const {
@@ -94,5 +98,6 @@ export const initUserManager = (props: AuthProviderProps): UserManager => {
     popupWindowTarget,
     automaticSilentRenew,
     userStore,
+    stateStore,
   });
 };
