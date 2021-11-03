@@ -54,13 +54,13 @@ export const initUserManager = (props: AuthProviderProps): UserManager => {
    * From `UserManagerSettingsStore` at `oidc-client-ts/src/UserManagerSettings.ts`:
    *   - `userStore = new WebStorageStateStore({ store: sessionStorage })`
    */
-  const userStore = !isSSR()
-    ? new WebStorageStateStore({ store: window.sessionStorage })
-    : new WebStorageStateStore({ store: new SSRStorage() });
+  const userStore = isSSR()
+    ? new WebStorageStateStore({ store: new SSRStorage() })
+    : new WebStorageStateStore({ store: window.sessionStorage });
 
-  const stateStore = !isSSR()
-    ? new WebStorageStateStore({ store: window.localStorage })
-    : new WebStorageStateStore({ store: new SSRStorage() });
+  const stateStore = isSSR()
+    ? new WebStorageStateStore({ store: new SSRStorage() })
+    : new WebStorageStateStore({ store: window.localStorage });
 
   const {
     authority,

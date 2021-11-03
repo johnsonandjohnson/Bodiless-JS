@@ -5,7 +5,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 
-import { UserManager } from 'oidc-client-ts';
+import { UserManager, WebStorageStateStore } from 'oidc-client-ts';
 import { AuthContext } from '../src/AuthContext';
 import { AuthProvider } from '../src/AuthProvider';
 
@@ -20,7 +20,9 @@ jest.mock('oidc-client-ts', () => ({
     signinRedirect: jest.fn(),
     events,
   })),
+  WebStorageStateStore: jest.fn(),
 }));
+
 describe('AuthProvider', () => {
   it('should check for user and redirect', async () => {
     await act(async () => {
@@ -49,6 +51,7 @@ describe('AuthProvider', () => {
       });
     });
   });
+
   it('should redirect when asked', async () => {
     await act(async () => {
       const u = {
@@ -82,6 +85,7 @@ describe('AuthProvider', () => {
       });
     });
   });
+
   it('should open Popup when asked', async () => {
     const u = {
       getUser: jest.fn(),
@@ -114,6 +118,7 @@ describe('AuthProvider', () => {
       expect(u.signinPopup).toHaveBeenCalled();
     });
   });
+
   it('should not redirect when asked', async () => {
     const u = {
       getUser: jest.fn(),
@@ -133,6 +138,7 @@ describe('AuthProvider', () => {
       expect(u.getUser).toHaveBeenCalled();
     });
   });
+
   it('should generate a UserManager', async () => {
     const oidcConfig = {
       clientId: 'client-id-test',
@@ -145,6 +151,7 @@ describe('AuthProvider', () => {
       expect(UserManager).toHaveBeenCalled();
     });
   });
+
   it('should use post-logout redirect URI when given', async () => {
     const oidcConfig = {
       clientId: 'client-id-test',
@@ -163,6 +170,7 @@ describe('AuthProvider', () => {
       );
     });
   });
+
   it('should fall back to redirectUri when post-logout redirect URI is not given', async () => {
     const oidcConfig = {
       clientId: 'client-id-test',
@@ -179,6 +187,7 @@ describe('AuthProvider', () => {
       );
     });
   });
+
   it('should use silent redirect URI when given', async () => {
     const oidcConfig = {
       clientId: 'client-id-test',
@@ -195,6 +204,7 @@ describe('AuthProvider', () => {
       );
     });
   });
+
   it('should fall back to redirectUri when silent redirect URI is not given', async () => {
     const oidcConfig = {
       clientId: 'client-id-test',
@@ -210,6 +220,7 @@ describe('AuthProvider', () => {
       );
     });
   });
+
   it('should get userData', async () => {
     await act(async () => {
       const userManager = {
@@ -245,6 +256,7 @@ describe('AuthProvider', () => {
       });
     });
   });
+
   it('should refresh userData when new data is available', async () => {
     await act(async () => {
       const userManager = {
@@ -283,6 +295,7 @@ describe('AuthProvider', () => {
       });
     });
   });
+
   it('should login the user', async () => {
     await act(async () => {
       const userManager = {
@@ -315,6 +328,7 @@ describe('AuthProvider', () => {
       });
     });
   });
+
   it('should logout the user', async () => {
     await act(async () => {
       const userManager = {
@@ -355,6 +369,7 @@ describe('AuthProvider', () => {
       });
     });
   });
+
   it('should end session and logout the user when signoutRedirect is true', async () => {
     await act(async () => {
       const userManager = {
