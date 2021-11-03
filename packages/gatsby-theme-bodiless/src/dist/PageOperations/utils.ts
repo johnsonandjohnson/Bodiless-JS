@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { useCallback } from 'react';
 import { useNode } from '@bodiless/core';
 import { useField } from 'informed';
 import type {
@@ -89,19 +88,17 @@ const validatePagePath = (
     : undefined
 );
 
-const getPageUrlValidator = (validate?: FieldValidate) => useCallback(
-  (value: FormValue, values: FormValues) => validateEmptyField(value)
+const getPageUrlValidator = (validate?: FieldValidate) => (
+  value: FormValue, values: FormValues,
+) => validateEmptyField(value)
     || validatePageUrl(value)
-    || (validate && validate(value, values)),
-  [],
-);
+    || (validate && validate(value, values));
 
-const getPagePathValidator = (validate?: FieldValidate) => useCallback(
-  (value: FormValue, values: FormValues) => validateEmptyField(value)
+const getPagePathValidator = (validate?: FieldValidate) => (
+  value: FormValue, values: FormValues,
+) => validateEmptyField(value)
     || validatePagePath(value)
-    || (validate && validate(value, values)),
-  [],
-);
+    || (validate && validate(value, values));
 
 const hasPageChild = async ({ pagePath, client } : any) => {
   const result = await handle(client.directoryChild(pagePath));
