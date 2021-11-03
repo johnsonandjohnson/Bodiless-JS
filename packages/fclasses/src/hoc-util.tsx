@@ -128,7 +128,7 @@ export const withDisplayName = <P extends Object> (name: string) => (
 };
 
 /**
- * Like replaceWith, but performs the repacement on effect. Useful when you need to
+ * Like replaceWith, but performs the replacement on effect. Useful when you need to
  * ensure that both versions of a component are rendered during SSR, but want to
  * remove one when displayed in the browser (eg for responsive design).
  *

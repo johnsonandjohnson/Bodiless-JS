@@ -81,15 +81,15 @@ const withAppendDisplayName = (newDisplayName: string): HOC => Component => {
   return withDisplayName(newDisplayName)(Component);
 };
 /**
- * withDesc returns an HOC that sideloads the provided discription to the component.
- * @param description the discription to add
+ * withDesc returns an HOC that sideloads the provided description to the component.
+ * @param description the description to add
  */
 const withDesc = (description: string): HOC => Component => (
   withMeta({ description })(Component)
 );
 /**
  * withAppendDesc returns an HOC that appends a description to the component sideload description.
- * @param newDescription the description to be appened
+ * @param newDescription the description to be appended
  */
 const withAppendDesc = (newDescription: string): HOC => Component => {
   const { description } = Component as ComponentWithMeta;
@@ -116,7 +116,7 @@ const perserveMeta = (hoc: HOC): HOC => Component => (
 
 /**
  * withFacet is expect to be passed to an on function and takes a term and and hoc (using curring)
- *  and returns a Varient that can be used in the on function
+ *  and returns a Variant that can be used in the on function
  * @param cat Category that the Component will be apart
  * @param term the Term in the Category associated with the Component
  * @param hocs the HOC to apply to the Component

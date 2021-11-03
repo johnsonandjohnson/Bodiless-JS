@@ -26,13 +26,13 @@ import {
 import {
   withActivateOnEffect, withNodeKey, withNode,
   withNodeDataHandlers, useNode, WithNodeProps,
+  withReactivateOnRemount,
 } from '@bodiless/core';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import { withTitle, withDesc } from '@bodiless/layouts';
 import {
   TokenLibrary, withTokenNamesFromData, withTokensFromProps, TokenPrinter,
-  withTokenPrinterKeys, withReactivateOnRemount,
-  TokenPanel as TokenPanelClean, withTokenPanelPane,
+  withTokenPrinterKeys, TokenPanel as TokenPanelClean, withTokenPanelPane,
 } from '@bodiless/tokens';
 import Layout from '../../../components/Layout';
 import {

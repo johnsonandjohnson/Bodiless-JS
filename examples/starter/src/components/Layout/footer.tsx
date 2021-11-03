@@ -17,7 +17,6 @@ import { flow } from 'lodash';
 import {
   designable,
   DesignableComponentsProps,
-  DesignableProps,
   Div,
   P,
   Span,
@@ -49,7 +48,7 @@ const footerComponents:FooterComponents = {
   SiteCopyrightEditable: Span,
 };
 
-const FooterClean: FC<DesignableProps> = ({ components }) => {
+const FooterClean: FC<Props> = ({ components }) => {
   const {
     Wrapper,
     Container,

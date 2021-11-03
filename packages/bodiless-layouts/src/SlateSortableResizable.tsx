@@ -84,13 +84,14 @@ const SortableResizable$: FC<SortableResizableProps> = ({
   ui,
   ...props
 }) => {
-  // We wabt to activate if nessesary
+  // We want to activate if necessary
   const { uuid } = props;
   useActivateOnEffectActivator(uuid);
   const { isActive } = useEditContext();
-  const isEnabled = isResizeEnabled !== false && isActive && !useHasActiveChildItem();
+  const hasActiveChildItem = useHasActiveChildItem();
+  const isEnabled = isResizeEnabled !== false && isActive && !hasActiveChildItem;
   const { Wrapper } = getUI(ui);
-  // @ts-ignore
+
   return (
     <Wrapper
       isEnabled={isEnabled}

@@ -4,8 +4,8 @@ The Bodiless design system expresses tokens as React higher order components,
 which can be a bit tricky to type correctly. Fortunately, Bodiless exposes
 a number of utility types which simplify the process.
 
-Before proceding, you should have a solid understanding of
-[higher order compoennts in React](https://reactjs.org/docs/higher-order-components.html)
+Before proceeding, you should have a solid understanding of
+[higher order components in React](https://reactjs.org/docs/higher-order-components.html)
 as well as the basics of how to type them traditionally.
 [This excellent article by James Ravenscroft](https://medium.com/@jrwebdev/react-higher-order-component-patterns-in-typescript-42278f7590fb)
 is a good introduction to the latter. You should also have read and be familiar
@@ -68,9 +68,9 @@ const A1T2 = <A1 foo="foo" />;
 const A1T3 = <A1 foo="foo" bar="bar" baz="baz" />;
 ```
 Some things to note:
-- We give the enhanced component an explicit name (`Withld`) so that it is
+- We give the enhanced component an explicit name (`WithChild`) so that it is
   easily identifiable in the React debugger.
-- We do not eplicitly type the base component parameter (`C`); this is handled
+- We do not explicitly type the base component parameter (`C`); this is handled
   by the `Token` type.
 - We type the enhanced component as `FC<any>`. Again the `Token` type will assure
   that the actual type of the enhanced component will be correctly inferred when
@@ -226,7 +226,7 @@ const R2 = composed(Base2);
 ### `flowif`
 The `flowIf` composition utility allows you to apply tokens only if a certain
 condition is met.  It passes received props to the condition hook. If the
-cnodition requires a prop which does not exist on the base component, we want
+condition requires a prop which does not exist on the base component, we want
 to be sure that the enhanced component requires that prop. `flowIf` will
 correctly infer this from the type of the condition:
 
