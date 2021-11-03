@@ -292,3 +292,11 @@ the links below to read more about working with the individual components.
 * Robots.txt 
 * [Metatags](../../../Development/Guides/BuildingSites/ComponentsStarterKit?id=metadata-component) 
 
+### Content Library
+
+Using the _Content Library_, you can save components that you've created, along with their embedded
+content, allowing you to reuse them elsewhere on your site. The Content Library can be configured
+for use in [Flow Containers](/Components/FlowContainer); once enabled, you will be able to:
+
+* Save components in your Flow Container to the Content Library; and
+* Add components saved in the Content Library to your Flow Container.
