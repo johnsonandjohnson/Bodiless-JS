@@ -95,14 +95,14 @@ if (process.env.ROBOTSTXT_ENABLED !== '0') {
     },
   ];
   const policy = policyEnv ? JSON.parse(policyEnv) : defaultPolicy;
-  if (!policy[0]['disallow']) {
-    policy[0]['disallow'] = disabledPages;
+  if (!policy[0].disallow) {
+    policy[0].disallow = disabledPages;
   } else {
-    const disallow = policy[0]['disallow'];
+    const disallow = policy[0].disallow;
     if (typeof disallow === 'string') {
-      policy[0]['disallow'] = [disallow, ...disabledPages];
+      policy[0].disallow = [disallow, ...disabledPages];
     } else {
-      policy[0]['disallow'] = [...disallow, ...disabledPages];
+      policy[0].disallow = [...disallow, ...disabledPages];
     }
   }
 

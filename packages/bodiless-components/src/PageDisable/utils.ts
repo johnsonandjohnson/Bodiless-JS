@@ -8,7 +8,7 @@ export const getDisabledPages = () => {
     const json = fs.readFileSync(disablePagesPath);
     const data = JSON.parse(json.toString());
     return data.disabledPages || {};
-  } catch (error) {
+  } catch (error: any) {
     if (error.code === 'ENOENT') {
       console.log("No pages to disable. The file doesn't exist:", error.path);
     } else {
