@@ -27,10 +27,10 @@
   "dependencies": {
     "enzyme": "^3.9.0",
     "oidc-client-ts": "^2.0.0-beta.2",
-    "axios": "^0.21.0",
-    "react-dom": "^17.0.2"
+    "axios": "^0.21.0"
   },
   "peerDependencies": {
-    "react": "^17.0.2"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }
