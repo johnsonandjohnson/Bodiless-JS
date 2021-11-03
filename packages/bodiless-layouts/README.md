@@ -29,8 +29,9 @@ components. You can filter the components by:
 * Using search facets to filter out components that do not match the selection 
 (you can undo this by clicking the "select all" checkbox at the top).
 * Using the search box field to search across all of the component titles.
-* If the Content Library has been enabled in the current Flow Container, you can select the "Content
-  Library" checkbox (under "Type") to filter for components saved in the Content Library.
+* If the Content Library has been enabled in the current Flow Container, and there is existing
+  content data available in the library, you can select the "Content Library" checkbox (under
+  "Type") to filter for components saved in the Content Library.
 
 You can hover over the information icon to see a description of the component.
 
@@ -83,7 +84,7 @@ you will be able to reuse this component anywhere on your site by adding it to a
 same Flow Container.
 
 ?> **Note:** Editing the Content Library component — from anywhere — will update the content in all
-  places the component is used.
+places the component is used.
 
 ---
 
@@ -530,6 +531,10 @@ export const withLibraryFlowContainerVariations = withDesign({
   ),
 });
 ```
+
+?> **Note:** When defining a FlowContainer with the Content Library, `withLibraryComponents` should
+be applied before any other "withDesign" HOCs, as the Content Library needs to know all the designs
+being added.
 
 ```tsx
 import { withLibraryComponents } from '@bodiless/layouts';

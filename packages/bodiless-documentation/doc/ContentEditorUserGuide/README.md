@@ -298,5 +298,8 @@ Using the _Content Library_, you can save components that you've created, along 
 content, allowing you to reuse them elsewhere on your site. The Content Library can be configured
 for use in [Flow Containers](/Components/FlowContainer); once enabled, you will be able to:
 
-* Save components in your Flow Container to the Content Library; and
+* Save components in your Flow Container to the Content Library.
+  * See: [Add a new component](/Components/FlowContainer#add-a-new-component)
 * Add components saved in the Content Library to your Flow Container.
+  * See: [Saving a component in the Content
+    Library](/Components/FlowContainer#saving-a-component-in-the-content-library)
