@@ -48,7 +48,7 @@ const LogContextButton = withLogContext(Button);
 
 const oidcConfig = {
   clientId: 'interactive.public',
-  redirectUri: 'http://localhost:8005/oidc',
+  redirectUri: typeof window === undefined ? '' : window.location.href,
   scope: 'openid profile email api offline_access',
   authority: 'https://demo.identityserver.io',
   autoSignIn: false,
