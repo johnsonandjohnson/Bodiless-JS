@@ -13,16 +13,20 @@
  */
 
 import {
-  WithNodeKeyProps, withNodeKey, useNode, NodeProvider, withOnlyProps,
+  WithNodeKeyProps, withNodeKey, useNode, NodeProvider, withOnlyProps, useEditContext,
 } from '@bodiless/core';
 import React, {
-  Fragment, ComponentType, PropsWithChildren, FC,
+  ComponentType, PropsWithChildren, FC,
 } from 'react';
 import { flow, identity } from 'lodash';
 import {
   replaceWith, withDesign, asComponent, DesignableComponentsProps, designable, HOC,
-  withoutProps, stylable, Design, asToken, Enhancer,
+  withoutProps, stylable, Design, asToken, Enhancer, Token, Fragment,
 } from '@bodiless/fclasses';
+
+import { useGetLinkHref } from '../Link';
+import { useGetDisabledPages } from '../PageDisable';
+import type { PageDisabledDataItems } from '../PageDisable';
 
 import withListButtons from './withListButtons';
 import BodilessList from './List';
@@ -80,6 +84,26 @@ const SubListWrapper$: FC<SubListWrapperProps> = ({
 const SubListWrapper = designable(sublistWrapperComponents, 'SubList')(SubListWrapper$);
 
 /**
+ * Don't render the list item if the target page
+ * is disabled by a user.
+ */
+const asDisabledListItem: Token = Component => props => {
+  const { node } = useNode();
+  const { isEdit } = useEditContext();
+  // Let's consider the lists stored at site level as menu lists.
+  // Disabled links at page level will be handled differently.
+  if (isEdit || node.path?.[0] !== 'Site') {
+    return <Component {...props} />;
+  }
+  const disabledPages: PageDisabledDataItems = useGetDisabledPages(node);
+  const href = useGetLinkHref(node);
+  if (href && disabledPages[href]?.menuLinksDisabled) {
+    return <Fragment />;
+  }
+  return <Component {...props} />;
+};
+
+/**
  * Converts a component or tag to a "bodiless" list. The component itself (usually
  * a variant of 'ul' or 'ol') will be used as the wrapper for the list, and the data
  * will be taken from bodiless data.
@@ -97,8 +121,12 @@ const asBodilessList = (
   withListButtons(useOverrides),
   withDesign({
     Wrapper: replaceWith(asComponent(Component)),
-    Item: withoutProps(['addItem', 'deleteItem', 'canDelete', 'unwrap']),
+    Item: asToken(
+      asDisabledListItem,
+      withoutProps(['addItem', 'deleteItem', 'canDelete', 'unwrap']),
+    ),
   }),
+  asDisabledListItem,
   withNodeKey(nodeKeys),
 )(Component);
 

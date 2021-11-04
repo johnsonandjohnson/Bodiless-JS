@@ -62,6 +62,8 @@ const SlateComponentProvider = (update: Function, type: string) => (
         hasError: () => bodilessNode.hasError(),
         getPagePath: () => bodilessNode.pagePath,
         getBaseResourcePath: () => bodilessNode.baseResourcePath,
+        getParentNode: () => bodilessNode,
+        getParentPeer: (path:string|string[]) => bodilessNode.peer(path),
       };
       const actions = {
         setNode: (path: string[], componentData: any) => {

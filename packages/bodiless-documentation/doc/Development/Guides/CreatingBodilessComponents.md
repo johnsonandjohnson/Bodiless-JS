@@ -212,7 +212,7 @@ const renderForm = () => {
   return (
     <>
       <ComponentFormTitle>Edit Page Body</ComponentFormTitle>
-      classes={{ reactMde: 'bl-text-black' }}
+      Content
       <MarkdownField field="source" classes={{ reactMde: 'bl-text-black' }} />
     </>
   );
@@ -505,7 +505,7 @@ const asCustomBodilessMarkdown = (nodeKey: WithNodeKeyProps) => flowRight(
 );
 ```
 
-Mote that we add the `root` flag here (not in the menu option itself) in order to
+Note that we add the `root` flag here (not in the menu option itself) in order to
 place this button on the global menu.
 
 ### Other use-cases

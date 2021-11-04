@@ -17,12 +17,14 @@ import type { NormalHref } from './NormalHref';
 import type { AsBodilessLink, LinkData, Props } from './types';
 import DefaultNormalHref from './NormalHref';
 import useEmptyLinkToggle from './useEmptyLinkToggle';
+import useGetLinkHref from './useGetLinkHref';
 
 export {
   asBodilessLink,
   DefaultNormalHref,
   withoutLinkWhenLinkDataEmpty,
   useEmptyLinkToggle,
+  useGetLinkHref,
 };
 export type {
   NormalHref,

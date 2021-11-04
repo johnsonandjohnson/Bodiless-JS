@@ -12,8 +12,17 @@
  * limitations under the License.
  */
 
-import withContentLibrary from './withContentLibrary';
-import { withLibraryComponents } from './withLibraryComponents';
+export type PageDisabledDataItem = {
+  pageDisabled: boolean,
+  menuLinksDisabled: boolean,
+  contentLinksDisabled: boolean,
+  indexingDisabled: boolean,
+};
 
-// eslint-disable-next-line import/prefer-default-export
-export { withContentLibrary, withLibraryComponents };
+export type PageDisabledDataItems = {
+  [path: string]: PageDisabledDataItem,
+};
+
+export type PageDisabledData = {
+  disabledPages?: PageDisabledDataItems,
+};

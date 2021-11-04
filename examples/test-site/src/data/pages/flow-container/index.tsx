@@ -29,7 +29,11 @@ import { FlowContainer } from '@bodiless/layouts-ui';
 import Layout from '../../../components/Layout';
 // @ts-ignore Could not find declaration file.
 import tailWindConfig from '../../../../tailwind.config';
-import { FlowContainerDefault, FlowContainerLimited } from '../../../components/FlowContainer';
+import {
+  FlowContainerDefault,
+  FlowContainerLimited,
+  FlowContainerWithContentLibrary,
+} from '../../../components/FlowContainer';
 import { withFullWidthConstraint } from '../../../components/FlowContainer/token';
 import withImageVariations from '../../../components/FlowContainer/withImageVariations';
 
@@ -115,6 +119,15 @@ const FlowContainerPage = (props: any) => (
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey={FLOW_CONTAINER_PAGE_PATH} />
+
+      <H2>Content Library FlowContainer</H2>
+      <FlowContainerWithContentLibrary
+        id="flowContainerWithLibrary"
+        nodeKey="flowContainerWithLibrary"
+      />
+      <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
+      <NodeViewer nodeKey="flowContainerWithLibrary" />
+
       <H2>
         FlowContainer with constrained widths of 50% & 100% only
       </H2>
