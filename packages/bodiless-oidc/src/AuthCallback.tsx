@@ -38,11 +38,11 @@ export const AuthCallback: FC<AuthCallbackProps> = ({
 }) => {
   const { userManager, setUserData, onSignIn, onSignOut } = useBodilessOidc();
 
-  /**
-   * Check if the user is returning back from OIDC.
-   */
-  if (hasCodeInUrl(window.location)) {
-    useEffect(() => {
+  useEffect(() => {
+    /**
+     * Check if the user is returning back from OIDC.
+     */
+    if (hasCodeInUrl(window.location)) {
       const getUser = async (): Promise<void> => {
         try {
           const user = await userManager.signinCallback();
@@ -54,9 +54,7 @@ export const AuthCallback: FC<AuthCallbackProps> = ({
         }
       };
       getUser();
-    }, [userManager, onSignIn]);
-  } else {
-    useEffect(() => {
+    } else {
       const signOut = async (): Promise<void> => {
         try {
           await userManager.signoutCallback();
@@ -68,8 +66,8 @@ export const AuthCallback: FC<AuthCallbackProps> = ({
         }
       };
       signOut();
-    }, [userManager, onSignOut]);
-  }
+    }
+  }, [userManager, onSignIn, onSignOut]);
 
   return <>{children}</>;
 };
