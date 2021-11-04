@@ -493,12 +493,13 @@ When the Content Editor adds a component to the Content Library:
 * Editing the Content Library component — from anywhere — will update the content in all places the
   component is used.
 
-**How to enable the Content Library feature on a Flow Container**
+#### How to enable the Content Library feature on a Flow Container
 
-`@bodiless/layouts` package exports a `withLibraryComponents` HOC that adds Content Library feature
-to wrapped Flow Container.
+The `@bodiless/layouts` package exports a `withLibraryComponents` HOC that adds the Content Library
+feature to a wrapped Flow Container.
 
-For example, to create a Flow Container with Content Library enabled,
+For example, to create a Flow Container with the Content Library enabled:
+
 ```tsx
 ...
 import { FlowContainer } from '@bodiless/layouts-ui';
@@ -516,7 +517,8 @@ const FlowContainerWithContentLibrary = asToken(
 )(FlowContainer);
 ```
 
-Then use this Flow Container on the site page.
+Then use this Flow Container on the site page:
+
 ```tsx
 const MY_PAGE_PATH = 'myPage';
 
@@ -526,14 +528,17 @@ const MY_PAGE_PATH = 'myPage';
 />
 ```
 
-`withContentLibrary` function also takes one optional path parameter, which typed as `LibraryNodePath`, so site builder can specify a customized content library storage 
-path. Or leave it null, the path will default to `['Site', 'default-library']`.
+The `withContentLibrary` function also takes one optional path parameter, which is typed as
+`LibraryNodePath`, so the Site Builder can specify a customized Content Library storage path; if
+not provided, the path will default to `['Site', 'default-library']`.
 
 ?> **Note:** When defining a FlowContainer with the Content Library, `withLibraryComponents` should
 be applied before any other "withDesign" HOCs, as the Content Library needs to know all the designs
 being added.
 
-To support nested Flow Container with Content Library feature, a variant HOC can be created like below,
+To support a nested Flow Container with the Content Library feature, a variant HOC can be created
+like the following:
+
 ```tsx
 ...
 
@@ -556,7 +561,8 @@ export const withLibraryFlowContainerVariations = withDesign({
 });
 ```
 
-Then apply it to a Flow Container component like we created previously,
+Then apply it to a Flow Container component like we created previously:
+
 ```tsx
 ...
 
