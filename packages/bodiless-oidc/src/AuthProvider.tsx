@@ -16,11 +16,11 @@ import React, {
   FC, useState, useEffect, useRef, ComponentType,
 } from 'react';
 import { User, UserManager } from 'oidc-client-ts';
-import type { SignoutRedirectArgs, SigninRedirectArgs } from 'oidc-client-ts';
+import type { SigninRedirectArgs } from 'oidc-client-ts';
 
 import { AuthContext } from './AuthContext';
 import { initUserManager } from './UserManager';
-import { AuthProviderProps } from './types';
+import type { AuthProviderProps, SignOutRedirectArgs } from './types';
 
 /**
  * An AuthProvider represents a particular state of the currently
@@ -98,7 +98,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({
           await userManager.removeUser();
           await signOutHooks();
         },
-        signOutRedirect: async (args?: SignoutRedirectArgs): Promise<void> => {
+        signOutRedirect: async (args?: SignOutRedirectArgs): Promise<void> => {
           await userManager.signoutRedirect(args);
           await signOutHooks();
         },

@@ -34,6 +34,10 @@ export type AuthProviderSignOutProps = {
   signoutRedirect?: boolean | unknown;
 };
 
+export type SignOutRedirectArgs = SignoutRedirectArgs & {
+  post_logout_redirect_uri?: string;
+};
+
 export type AuthProviderProps = {
   /**
    * See [UserManager](https://github.com/IdentityModel/oidc-client-js/wiki#usermanager) for more details.
@@ -149,7 +153,7 @@ export type AuthContextProps = {
   /**
    * Alias for userManager.signoutRedirect
    */
-  signOutRedirect: (args?: SignoutRedirectArgs) => Promise<void>;
+  signOutRedirect: (args?: SignOutRedirectArgs) => Promise<void>;
   /**
    * See [UserManager](https://github.com/IdentityModel/oidc-client-js/wiki#usermanager) for more details.
    */
@@ -177,4 +181,4 @@ export type AuthContextProps = {
   onSignOut?: (options?: AuthProviderSignOutProps) => Promise<void> | void;
 };
 
-export { User, UserManager };
+export type { User, UserManager, SigninRedirectArgs };

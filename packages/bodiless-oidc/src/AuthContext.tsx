@@ -13,9 +13,7 @@
  */
 
 import React, { useContext, ComponentType } from 'react';
-import type { SignoutRedirectArgs, SigninRedirectArgs } from 'oidc-client-ts';
-
-import { AuthContextProps } from './types';
+import { AuthContextProps, SignOutRedirectArgs, SigninRedirectArgs } from './types';
 
 /**
  * @private
@@ -69,12 +67,13 @@ export const withSignInPopupOnClick = (Component: ComponentType) => (props: any)
 /**
  * HOC that adds an `onClick` event to the underlying component
  * and invokes OIDC `signOutRedirect` handler when executed.
+ * Accepts `post_logout_redirect_uri` and `state` arguments.
  *
  * @param args OIDC Sign Out Redirect arguments
- * @see SignoutRedirectArgs
+ * @see SignOutRedirectArgs
  */
 export const withSignOutRedirectOnClick = (
-  args?: SignoutRedirectArgs,
+  args?: SignOutRedirectArgs,
 ) => (Component: ComponentType) => (props: any) => {
   const { signOutRedirect } = useBodilessOidc();
   return <Component {...props} onClick={() => signOutRedirect(args)} />;

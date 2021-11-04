@@ -43,7 +43,11 @@ const UserWrapper = addClasses('p-4 border border-gray-600 max-w-md mx-auto my-4
 const LoginButton = withSignInOnClick()(Button);
 const LoginPopupButton = withSignInPopupOnClick(Button);
 const LogoutButton = withSignOutOnClick(Button);
-const LogoutRedirectButton = withSignOutRedirectOnClick()(Button);
+const LogoutRedirectButton = withSignOutRedirectOnClick({
+  post_logout_redirect_uri: typeof window !== 'undefined'
+    ? window.location.href
+    : '',
+})(Button);
 const LogContextButton = withLogContext(Button);
 
 /**

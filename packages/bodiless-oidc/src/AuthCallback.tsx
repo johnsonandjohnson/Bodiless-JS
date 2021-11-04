@@ -36,7 +36,7 @@ export const AuthCallback: FC<AuthCallbackProps> = ({
   onError,
   children,
 }) => {
-  const { userManager, setUserData, onSignIn, onSignOut } = useBodilessOidc();
+  const { userManager, setUserData, onSignIn } = useBodilessOidc();
 
   useEffect(() => {
     /**
@@ -54,20 +54,8 @@ export const AuthCallback: FC<AuthCallbackProps> = ({
         }
       };
       getUser();
-    } else {
-      const signOut = async (): Promise<void> => {
-        try {
-          await userManager.signoutCallback();
-          setUserData(null);
-          if (onSignOut) onSignOut();
-          if (onSuccess) onSuccess(null);
-        } catch (e: any) {
-          if (onError) onError(e);
-        }
-      };
-      signOut();
     }
-  }, [userManager, onSignIn, onSignOut]);
+  }, [userManager, onSignIn]);
 
   return <>{children}</>;
 };

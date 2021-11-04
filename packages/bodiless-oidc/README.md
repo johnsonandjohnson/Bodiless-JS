@@ -1,4 +1,5 @@
 
+
 # Bodiless OIDC
 
 Bodiless OICD is a library that provides OpenID Connect (OIDC) and OAuth2 protocol support.
@@ -86,12 +87,6 @@ The OIDC config is used to pass required props to the `AuthProvider`. The follow
    * Usually a page with the `<AuthCallback />` component.
    */
   redirectUri: string;
-  /**
-   * A space-delimited list of permissions that the application requires.
-   * Even though it is optional param, at least an `openid` is required.
-   * Check the scope required with your OIDC/OAuth2 provider.
-   */
-  scope?: string;
 }
 ```
 
@@ -289,7 +284,27 @@ import { Button } from '@bodiless/fclasses';
 import { withSignInOnClick, withSignOutOnClick } from '@bodiless/oidc';
 
 const SignInButton = withSignInOnClick(Button);
+/**
+ * `withSignOutOnClick` does not end provider session,
+ * only the local session is closed. When user tries to login after
+ * this type of Sign Out, provider will usually authorize user without
+ * a need to re-enter credentials.
+ */
 const SignOutButton = withSignOutOnClick(Button);
+
+/**
+ * `withSignOutRedirectOnClick` closes both: local and provider sessions.
+ * This is the complete Sign Out and user credentials will be required
+ * to login next time.
+ *
+ * Accepts optional `post_logout_redirect_uri` and `state` arguments.
+ * `post_logout_redirect_uri` is the redirect after successfull closing
+ * of the provider session.
+ */
+const SignOutRedirectButton = withSignOutRedirectOnClick({
+  // Redirect to the current page when Sign Out is complete.
+  post_logout_redirect_uri: window.location.href,
+})(Button);
 
 const UserPreview:FC<any> = props => {
   const { userData } = useBodilessOidc();
@@ -299,6 +314,7 @@ const UserPreview:FC<any> = props => {
       <div>
         <h3>Hi! My name is {userData.profile.given_name}!</h3>
         <SignOutButton>Sign Out</SignOutButton>
+        <SignOutRedirectButton>Sign Out Redirect</SignOutRedirectButton>
       </div>
     );
   } else {
