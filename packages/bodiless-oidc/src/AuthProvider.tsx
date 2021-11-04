@@ -31,7 +31,7 @@ import { AuthProviderProps } from './types';
  */
 export const AuthProvider: FC<AuthProviderProps> = ({
   children,
-  autoSignIn = true,
+  autoSignIn = false,
   onBeforeSignIn,
   onSignIn,
   onSignOut,

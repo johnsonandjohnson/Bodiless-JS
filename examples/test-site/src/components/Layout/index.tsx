@@ -45,7 +45,6 @@ const oidcConfig = {
     : '',
   scope: 'openid profile email api offline_access',
   authority: 'https://demo.identityserver.io',
-  autoSignIn: false,
   onSignIn: () => console.log('On Sign In Callback'),
   onSignOut: () => console.log('On Sign Out Callback'),
 };
