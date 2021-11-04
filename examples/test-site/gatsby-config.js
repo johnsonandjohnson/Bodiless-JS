@@ -4,7 +4,7 @@ const {
   createDefaultContentPlugins,
   getSampleDefaultContentConfig,
 } = require('@bodiless/gatsby-theme-bodiless/dist/DefaultContent');
-const { getDisabledPages } = require('@bodiless/components/lib/PageDisable/utils');
+const { getDisabledPages } = require('@bodiless/components/node-api');
 const {
   getConfig: getSiteDefaultContentConfig,
 } = require('./src/components/Contentful');
