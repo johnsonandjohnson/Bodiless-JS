@@ -284,8 +284,9 @@ class Backend {
     this.setRoute(`${backendPrefix}/pages`, Backend.setPages);
     this.setRoute(`${backendPrefix}/clone`, Backend.clonePage);
     this.setRoute(`${backendPrefix}/move`, Backend.movePage);
-    this.setRoute(`${backendPrefix}/remove/*`, Backend.removePage);
+    this.setRoute(`${backendPrefix}/remove/`, Backend.removePage);
     this.setRoute(`${backendPrefix}/directory/child/*`, Backend.directoryChild);
+    this.setRoute(`${backendPrefix}/remove/file/*`, Backend.removeFile);
   }
 
   setRoute(route, action) {
@@ -640,6 +641,28 @@ class Backend {
 
         page
           .deleteDirectory()
+          .then(error => {
+            if (error) {
+              logger.log(error);
+              res.send(error);
+            } else {
+              res.send({});
+            }
+          });
+      });
+  }
+
+  static removeFile(route) {
+    route
+      .delete((req, res) => {
+        const pagePath = req.params[0];
+        const page = Backend.getPage(pagePath);
+        page.setBasePath(backendPagePath);
+        const origin = `/${pagePath}index.json`;
+        logger.log(`Start deleting file:${origin}`);
+
+        page
+          .deleteFile(origin)
           .then(error => {
             if (error) {
               logger.log(error);

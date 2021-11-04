@@ -271,6 +271,19 @@ class Page {
     return readPromise;
   }
 
+  deleteFile(origin) {
+    console.log('=====> file deleteFile', origin);
+    const readPromise = new Promise((resolve, reject) => {
+      fs.unlink(origin, err => {
+        if (err) {
+          reject(err);
+        }
+        resolve(this);
+      });
+    });
+    return readPromise;
+  }
+
   deleteDirectory() {
     const readPromise = new Promise((resolve, reject) => {
       /**

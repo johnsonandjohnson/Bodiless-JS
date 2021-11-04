@@ -37,7 +37,7 @@ import {
 import { ComponentFormSpinner } from '@bodiless/ui';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
-import { getPathValue, MovePageURLField } from './PageOperations';
+import { getPathValue, PageURLField } from './PageOperations';
 
 type Client = {
   movePage: (origin: string, destination: string) => AxiosPromise<any>;
@@ -70,14 +70,38 @@ const hasPageChild = async ({ pathChild, client } : any) => {
 };
 
 const movePage = async ({ origin, destination, client } : any) => {
-  const result = await handle(client.movePage(origin, destination));
-  if (result.response) {
-    if (result.message !== 'Success' && typeof (result.message) === 'string') {
-      return Promise.reject(new Error(result.message));
-    }
-    return Promise.resolve();
+  console.log('=====> destination', destination);
+  try {
+    await handle(client.clonePage(origin, destination));
+  } catch (e) {
+    console.log('=====> error clone', e);
+    return Promise.reject(new Error(e.message));
   }
-  return Promise.reject(new Error('The page cannot be moved.'));
+
+  const result = await handle(client.directoryChild(origin));
+  if (result.response && result.message === 'Success') {
+    try {
+      await handle(client.deletePage(origin));
+    } catch (e) {
+      console.log('=====> error delete', e);
+      return Promise.reject(new Error(e.message));
+    }
+  } else {
+    try {
+      await handle(client.removeFile(origin));
+    } catch (e) {
+      console.log('=====> error delete index', e);
+      return Promise.reject(new Error(e.message));
+    }
+  }
+  return Promise.resolve();
+  // if (result.response) {
+  //   if (result.message !== 'Success' && typeof (result.message) === 'string') {
+  //     return Promise.reject(new Error(result.message));
+  //   }
+  //   return Promise.resolve();
+  // }
+  // return Promise.reject(new Error('The page cannot be moved.'));
 };
 
 const MovePageComp = (props : MovePageProps) => {
@@ -121,8 +145,7 @@ const MovePageComp = (props : MovePageProps) => {
             <ComponentFormDescription>Move this page to a new URL.</ComponentFormDescription>
             <CustomComponentFormLabel>Current URL</CustomComponentFormLabel>
             <ComponentFormDescription>{basePathValue}</ComponentFormDescription>
-            <CustomComponentFormLabel>New URL</CustomComponentFormLabel>
-            <MovePageURLField
+            <PageURLField
               validateOnChange
               validateOnBlur
             />
@@ -218,7 +241,7 @@ const formPageMove = (client: Client) => contextMenuForm({
       hasPageChild({ pathChild, client })
         .catch(() => {
           actualState = MovePageState.Errored;
-          setState({ status: MovePageState.Errored, errorMessage: 'The page cannot be moved.' });
+          setState({ status: MovePageState.Errored, errorMessage: 'The page cannot be moved while it has child pages.' });
           formApi.setValue('keepOpen', false);
         });
     }
@@ -241,7 +264,7 @@ const formPageMove = (client: Client) => contextMenuForm({
 
         movePage({
           origin,
-          destination,
+          destination: path,
           client,
         })
           .then(() => {
