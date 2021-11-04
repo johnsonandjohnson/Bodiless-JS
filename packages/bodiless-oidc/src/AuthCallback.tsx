@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC, useEffect } from 'react';
+import React, { ComponentType, FC, useEffect } from 'react';
 import { User } from 'oidc-client-ts';
 
 import { useBodilessOidc } from './AuthContext';
@@ -71,3 +71,18 @@ export const AuthCallback: FC<AuthCallbackProps> = ({
 
   return <>{children}</>;
 };
+
+/**
+ * HOC that wrapps given component in AuthCallback.
+ * AuthCallback handles OIDC Sign In and Sign Out responses.
+ *
+ * @param callbackProps `onSuccess` and `onError` optional handlers.
+ * @see AuthCallbackProps
+ */
+export const withAuthCallback = (callbackProps: AuthCallbackProps) => <P extends Object>(
+  Component: ComponentType<P> | string,
+) => (props: P) => (
+  <AuthCallback {...callbackProps}>
+    <Component {...props} />
+  </AuthCallback>
+  );

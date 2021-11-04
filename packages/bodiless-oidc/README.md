@@ -1,3 +1,4 @@
+
 # Bodiless OIDC
 
 Bodiless OICD is a library that provides OpenID Connect (OIDC) and OAuth2 protocol support.
@@ -35,13 +36,14 @@ export default (props: any) => (
 );
 ```
 
-#### withOidcProvider
+#### Use `withOidcProvider`
 The other way to wrap something with the `AuthProvider` is to use `withOidcProvider` HOC. It accepts `oidcConfig` as a prop and wraps the provided component with the `AuthProvider`:
 
 ```js
 import React from 'react';
-import Layout from '../../../components/Layout';
+import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { withOidcProvider } from '@bodiless/oidc';
+import Layout from '../../../components/Layout';
 
 // Create the OIDC config.
 // See `AuthProviderProps` for the full config props list.
@@ -66,7 +68,35 @@ export default (props: any) => (
 );
 ```
 
-#### OIDC Config:
+### OIDC Config:
+The OIDC config is used to pass required props to the `AuthProvider`. The following props are required:
+```js
+{
+  /**
+   * The URL of the OIDC/OAuth2 provider. (Okta, Akamai, etc)
+   */
+  authority: string;
+  /**
+   * Your client application's identifier as registered with the OIDC/OAuth2 provider.
+   */
+  clientId: string;
+  /**
+   * The redirect URI of your client application
+   * to receive a response from the OIDC/OAuth2 provider.
+   * Usually a page with the `<AuthCallback />` component.
+   */
+  redirectUri: string;
+  /**
+   * A space-delimited list of permissions that the application requires.
+   * Even though it is optional param, at least an `openid` is required.
+   * Check the scope required with your OIDC/OAuth2 provider.
+   */
+  scope?: string;
+}
+```
+
+You may also find usefull `onSignIn` and `onSignOut` callbacks that you can pass to the `AuthProviderProps`. These are the callbacks that will be executed after successfull Sign In or Sign Out. You may redirect a user to a particular page or display a confirmation message.
+
 The full list of the `oidcConfig` corresponds to the `AuthProviderProps` and includes the following props:
 ```ts
 export type AuthProviderProps = {
@@ -169,7 +199,7 @@ export type AuthProviderProps = {
 };
 ```
 
-#### Consume `AuthContext`:
+### Consume `AuthContext`:
 To consume `AuthContext` you may use `useBodilessOidc` hook:
 
 ```js
@@ -246,7 +276,7 @@ export type AuthContextProps = {
 };
 ```
 
-#### Helper HOCs
+### Helper HOCs
 There are several HOCs exported from the `@bodiless/oidc` package that may be used to add OIDC functionality to the components:
 
  - `withSignInOnClick` - HOC that adds an `onClick` event to the underlying component and invokes OIDC `signIn` handler when executed.
@@ -273,8 +303,65 @@ const UserPreview:FC<any> = props => {
     );
   } else {
     return (
-      <SignInButton}>Sign In</SignInButton>
+      <SignInButton>Sign In</SignInButton>
     );
   }
 };
+```
+
+### `AuthCallback` Component
+This component handles OIDC Sign In and Sign Out responses. It reads the OIDC/OAuth2 provider response data from the URL and initializes `signinCallback` or `signoutCallback` with this data.
+
+When you define OIDC config, `redirectUri` and `postLogoutRedirectUri` should point to the page with `<AuthCallback />` component.
+
+```js
+import { Page } from '@bodiless/gatsby-theme-bodiless';
+import { AuthCallback } from '@bodiless/oidc';
+
+/**
+ * In addition to the `onSignIn` and `onSignOut` callbacks
+ * from the OIDC config, we can add `onSuccess` and `onError` handlers
+ * to the `<AuthCallback />` component.
+ */
+const onSuccess = (user: User | null) => {
+  // ... do something when auth callback is successfull.
+};
+
+const onError = (error) => {
+  // ... do something when auth callback has failed.
+};
+
+export default (props: any) => (
+  <Page {...props}>
+    <Layout>
+      <AuthCallback onSuccess={onSuccess} onError={onError} />
+    </Layout>
+  </Page>
+);
+
+```
+
+#### Use `withAuthCallback`
+You can wrap any page or component with `withAuthCallback()` HOC. It takes `onSuccess` and `onError` optional params.
+```js
+import React from 'react';
+import { Page } from '@bodiless/gatsby-theme-bodiless';
+import { withAuthCallback } from '@bodiless/oidc';
+import Layout from '../../../components/Layout';
+
+// Create onSuccess handler
+const onSuccess = (user: User | null) => {...};
+
+// Wrap the default Layout component with the `AuthCallback`.
+const PageLayout = withAuthCallback({ onSuccess })(Layout);
+
+export default (props: any) => (
+  <Page {...props}>
+    <PageLayout>
+      // OIDC redirects to this page with valid response in URL
+      // will Sign In or Sign Out user.
+      ...
+    </PageLayout>
+  </Page>
+);
 ```
