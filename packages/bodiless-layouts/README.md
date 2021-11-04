@@ -493,25 +493,49 @@ When the Content Editor adds a component to the Content Library:
 * Editing the Content Library component — from anywhere — will update the content in all places the
   component is used.
 
-```tsx
-import { withNodeKey } from '@bodiless/core';
-import {
-  withDesign,
-  replaceWith,
-  Div,
-  asToken,
-} from '@bodiless/fclasses';
-import {
-  withTitle,
-  withDesc,
-  ifComponentSelector,
-  withLibraryComponents,
-} from '@bodiless/layouts';
-import { FlowContainer } from '@bodiless/layouts-ui';
-import { withType } from './Categories';
-import asDefaultFlowContainer from './asDefaultFlowContainer';
+**How to enable the Content Library feature on a Flow Container**
 
-const FlowContainerPreview = () => <Div className="bl-bg-black">Flow Container Preview</Div>;
+`@bodiless/layouts` package exports a `withLibraryComponents` HOC that adds Content Library feature
+to wrapped Flow Container.
+
+For example, to create a Flow Container with Content Library enabled,
+```tsx
+...
+import { FlowContainer } from '@bodiless/layouts-ui';
+import { withLibraryComponents } from '@bodiless/layouts';
+
+// Add variant component designs, includes RTE, Image, Card etc, for component selector filtering.
+import withDefaultVariations from './withDefaultVariations';
+...
+
+// Create a Flow Container with Content Library enabled.
+const FlowContainerWithContentLibrary = asToken(
+  // Apply Content Library HOC before other design variants.
+  withLibraryComponents(),
+  asDefaultFlowContainer,
+)(FlowContainer);
+```
+
+Then use this Flow Container on the site page.
+```tsx
+const MY_PAGE_PATH = 'myPage';
+
+<FlowContainerWithContentLibrary
+  id={MY_PAGE_PATH}
+  nodeKey={MY_PAGE_PATH}
+/>
+```
+
+`withContentLibrary` function also takes one optional path parameter, which typed as `LibraryNodePath`, so site builder can specify a customized content library storage 
+path. Or leave it null, the path will default to `['Site', 'default-library']`.
+
+?> **Note:** When defining a FlowContainer with the Content Library, `withLibraryComponents` should
+be applied before any other "withDesign" HOCs, as the Content Library needs to know all the designs
+being added.
+
+To support nested Flow Container with Content Library feature, a variant HOC can be created like below,
+```tsx
+...
 
 export const withLibraryFlowContainerVariations = withDesign({
   FlowContainer: asToken(
@@ -532,29 +556,13 @@ export const withLibraryFlowContainerVariations = withDesign({
 });
 ```
 
-?> **Note:** When defining a FlowContainer with the Content Library, `withLibraryComponents` should
-be applied before any other "withDesign" HOCs, as the Content Library needs to know all the designs
-being added.
-
+Then apply it to a Flow Container component like we created previously,
 ```tsx
-import { withLibraryComponents } from '@bodiless/layouts';
-import { FlowContainer } from '@bodiless/layouts-ui';
-import { withLibraryFlowContainerVariations } from './withFlowContainerVariations';
-import asDefaultFlowContainer from './asDefaultFlowContainer';
+...
 
 const FlowContainerDefaultWithContentLibrary = asToken(
-  // withLibraryComponents should be applied before any other HOC designs.
   withLibraryComponents(),
   asDefaultFlowContainer,
   withLibraryFlowContainerVariations,
 )(FlowContainer);
-```
-
-```tsx
-const MY_PAGE_PATH = 'myPage';
-
-<FlowContainerDefaultWithContentLibrary
-  id={MY_PAGE_PATH}
-  nodeKey={MY_PAGE_PATH}
-/>
 ```
