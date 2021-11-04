@@ -19,6 +19,7 @@ import {
   asToken, addClasses, H1 as H1$, Div, Button as ButtonBase,
 } from '@bodiless/fclasses';
 import {
+  User,
   useBodilessOidc,
   withSignInOnClick,
   withSignOutOnClick,
@@ -34,8 +35,6 @@ const withLogContext = (WrappedButton: ComponentType) => (props: any) => {
   return <WrappedButton {...props} onClick={() => console.log('AUTH CONTEXT:', context)} />;
 };
 
-const clearUrl = () => window.history.replaceState({}, document.documentURI, '/oidc');
-
 const H1 = asToken(addClasses('pt-5'), asHeader1)(H1$);
 const Description = addClasses('text-sm mb-2 italic')(Div);
 const Button = addClasses('py-2 px-4 mr-3 border border-gray-600')(ButtonBase);
@@ -46,6 +45,28 @@ const LoginPopupButton = withSignInPopupOnClick(Button);
 const LogoutButton = withSignOutOnClick(Button);
 const LogoutRedirectButton = withSignOutRedirectOnClick()(Button);
 const LogContextButton = withLogContext(Button);
+
+/**
+ * This fixes a ts error:
+ * Property 'given_name' does not exist on type 'UserProfile'.
+ *
+ * 'UserProfile' interface from 'oidc-client-ts' does not have any info about user.
+ *
+ * export interface UserProfile {
+ *   sub?: string;
+ *   sid?: string;
+ *   azp?: string;
+ *   at_hash?: string;
+ *   auth_time?: number;
+ * }
+ */
+type UserData = User & {
+  profile: {
+    given_name: string,
+    name: string,
+    email: string,
+  },
+};
 
 const UserPreview = () => {
   const { userData, userManager } = useBodilessOidc();
@@ -82,7 +103,7 @@ const UserPreview = () => {
     );
   }
 
-  const { profile } = userData;
+  const { profile } = userData as UserData;
 
   return (
     <UserWrapper>

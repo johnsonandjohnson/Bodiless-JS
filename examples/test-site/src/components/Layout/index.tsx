@@ -15,6 +15,7 @@
 import React, { ComponentType, Fragment, FC } from 'react';
 import {
   Div, designable, addClasses, replaceWith, DesignableComponentsProps, asToken, flowIf,
+  Token,
 } from '@bodiless/fclasses';
 import { useNode, withNodeKey } from '@bodiless/core';
 import { withSearchResult } from '@bodiless/search';
@@ -37,10 +38,6 @@ const Container = asToken(
   asYMargin,
 )(Div);
 
-const redirectUri = typeof window !== 'undefined'
-  ? new URL('/oidc-redirect', window.location.origin).href
-  : '';
-
 const oidcConfig = {
   clientId: 'interactive.public',
   redirectUri: typeof window !== 'undefined'
@@ -56,7 +53,7 @@ const oidcConfig = {
 const SiteProviders = asToken(
   withBreadcrumbStore,
   withBurgerMenuProvider,
-  withOidcProvider(oidcConfig),
+  withOidcProvider(oidcConfig) as Token,
 )(Fragment);
 
 type LayoutComponents = {

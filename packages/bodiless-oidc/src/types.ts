@@ -176,3 +176,5 @@ export type AuthContextProps = {
    */
   onSignOut?: (options?: AuthProviderSignOutProps) => Promise<void> | void;
 };
+
+export { User, UserManager };
