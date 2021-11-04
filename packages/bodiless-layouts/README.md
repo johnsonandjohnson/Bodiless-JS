@@ -5,6 +5,9 @@ place them on the page, and resize them. The Flow Container is  defined by page 
 These templates are created by a developer and define the spaces available to add content 
 (components).
 
+Flow Containers can be configured to utilize the _Content Library_, allowing Content Editors to save
+components that they've created for reuse elsewhere on your site.
+
 ## Content Editor Details
 
 When an empty Flow Container is on the page you will only see a box bounded by dotted line.
@@ -26,6 +29,9 @@ components. You can filter the components by:
 * Using search facets to filter out components that do not match the selection 
 (you can undo this by clicking the "select all" checkbox at the top).
 * Using the search box field to search across all of the component titles.
+* If the Content Library has been enabled in the current Flow Container, and there is existing
+  content data available in the library, you can select the "Content Library" checkbox (under
+  "Type") to filter for components saved in the Content Library.
 
 You can hover over the information icon to see a description of the component.
 
@@ -62,6 +68,23 @@ To replace a component, use the swap button from the toolbar. It will replace th
 without losing data (as long as the data is applicable in the replacement component). 
 You can also replace a component by deleting it and adding a new component in its place
 via the add button on the toolbar. 
+
+### Saving a component in the Content Library
+
+If the instance of the current Flow Container has been configured to use it, then you will be able
+to save components and their content to the Content Library.
+
+Within the context menu of any component in the Flow Container, you will see a "Library" subsection
+with an **Add** button.
+
+![Context Menu with Library subsection](./assets/ContextMenuWithLibrary.jpg ':size=50%')
+
+Click **Add** to save your component, along with its embedded content, to the Content Library. Now,
+you will be able to reuse this component anywhere on your site by adding it to any instance of the
+same Flow Container.
+
+?> **Note:** Editing the Content Library component — from anywhere — will update the content in all
+places the component is used.
 
 ---
 
@@ -450,3 +473,102 @@ A few things to note when using the component selector independently:
   ```
   In the example above, we leverage the `data-item-id` prop which is passed
   to the `ItemBox` component.  This is the unique key identifying the component.
+
+### Enable Content Library
+
+You can configure a Flow Container to use the Content Library, providing Content Editors with a
+"Library" section within the context menu of components added to that Flow Container.
+
+When the Content Editor adds a component to the Content Library:
+
+* The component's data is copied to the Content Library, along with the component key which
+  identifies the component in the Flow Container;
+* The component is replaced with a "library" version of the component containing the current
+  content;
+* The component is then available to be added to any instance of the same Flow Container on any page
+  of the site;
+* The metadata of the "library version" of the component is the same as that of the original
+  component (except for the "Name" and "Description" provided by the Content Editor upon adding it
+  to the Content Library);
+* Editing the Content Library component — from anywhere — will update the content in all places the
+  component is used.
+
+#### How to enable the Content Library feature on a Flow Container
+
+The `@bodiless/layouts` package exports a `withLibraryComponents` HOC that adds the Content Library
+feature to a wrapped Flow Container.
+
+For example, to create a Flow Container with the Content Library enabled:
+
+```tsx
+...
+import { FlowContainer } from '@bodiless/layouts-ui';
+import { withLibraryComponents } from '@bodiless/layouts';
+
+// Add variant component designs, includes RTE, Image, Card etc, for component selector filtering.
+import withDefaultVariations from './withDefaultVariations';
+...
+
+// Create a Flow Container with Content Library enabled.
+const FlowContainerWithContentLibrary = asToken(
+  // Apply Content Library HOC before other design variants.
+  withLibraryComponents(),
+  asDefaultFlowContainer,
+)(FlowContainer);
+```
+
+Then use this Flow Container on the site page:
+
+```tsx
+const MY_PAGE_PATH = 'myPage';
+
+<FlowContainerWithContentLibrary
+  id={MY_PAGE_PATH}
+  nodeKey={MY_PAGE_PATH}
+/>
+```
+
+The `withContentLibrary` function also takes one optional path parameter, which is typed as
+`LibraryNodePath`, so the Site Builder can specify a customized Content Library storage path; if
+not provided, the path will default to `['Site', 'default-library']`.
+
+?> **Note:** When defining a FlowContainer with the Content Library, `withLibraryComponents` should
+be applied before any other "withDesign" HOCs, as the Content Library needs to know all the designs
+being added.
+
+To support a nested Flow Container with the Content Library feature, a variant HOC can be created
+like the following:
+
+```tsx
+...
+
+export const withLibraryFlowContainerVariations = withDesign({
+  FlowContainer: asToken(
+    replaceWith(
+      asToken(
+        withLibraryComponents(),
+        asDefaultFlowContainer,
+        withNodeKey('innerLibraryFC'),
+      )(FlowContainer),
+    ),
+    ifComponentSelector(
+      replaceWith(FlowContainerPreview),
+    ),
+    withType('Flow Container with Library')(),
+    withTitle('Flow Container with Library'),
+    withDesc('Adds a flow container with library'),
+  ),
+});
+```
+
+Then apply it to a Flow Container component like we created previously:
+
+```tsx
+...
+
+const FlowContainerDefaultWithContentLibrary = asToken(
+  withLibraryComponents(),
+  asDefaultFlowContainer,
+  withLibraryFlowContainerVariations,
+)(FlowContainer);
+```
