@@ -20,6 +20,9 @@ import {
   withExtendHandler,
   ifToggledOn,
   EditButtonOptions,
+  useEditContext,
+  useNode,
+  ContentNode,
 } from '@bodiless/core';
 import type { BodilessOptions } from '@bodiless/core';
 import { flowRight, identity } from 'lodash';
@@ -29,11 +32,14 @@ import {
   replaceWith,
   withoutProps,
   asToken,
+  Token,
 } from '@bodiless/fclasses';
 import { withFieldApi } from 'informed';
+import { useGetDisabledPages } from '../PageDisable';
 import DefaultNormalHref from './NormalHref';
 import withGoToLinkButton from './withGoToLinkButton';
 import useEmptyLinkToggle from './useEmptyLinkToggle';
+import useGetLinkHref from './useGetLinkHref';
 import {
   LinkData,
   UseLinkOverrides,
@@ -173,6 +179,43 @@ const withLinkTarget = (
  */
 const withoutLinkWhenLinkDataEmpty = ifToggledOn(useEmptyLinkToggle)(replaceWith(Fragment));
 
+// @TODO: Move to richtext types?
+type ParentGetters = {
+  getParentNode: () => ContentNode<object>,
+  getParentPeer: (path: string|string[]) => ContentNode<object>,
+};
+type SlateNodeWithParentGetters<T> = {
+  node: ContentNode<T> & {
+    getGetters: () => ParentGetters,
+  }
+};
+
+/**
+ * Allows to disable non-menu links on the page.
+ */
+const asDisabledPageLink: Token = Component => props => {
+  const { node } = useNode() as SlateNodeWithParentGetters<LinkData>;
+  const { isEdit } = useEditContext();
+  if (
+    isEdit || !node.path
+    || (node.path[0] !== 'slatenode' && node.path[0] !== 'Page')
+  ) {
+    return <Component {...props} />;
+  }
+  const href = useGetLinkHref(node);
+  if (href) {
+    const node$ = node.path[0] === 'slatenode' ? node.getGetters().getParentNode() : node;
+    const disabledPages = useGetDisabledPages(node$);
+    const { href: href$, ...rest }: any = props;
+    if (disabledPages?.[href]?.contentLinksDisabled === true) {
+      return (
+        <Component {...rest} />
+      );
+    }
+  }
+  return <Component {...props} />;
+};
+
 const asBodilessLink: AsBodilessLink = (
   nodeKeys, defaultData, useOverrides,
 ) => flowRight(
@@ -190,6 +233,7 @@ const asBodilessLink: AsBodilessLink = (
   withoutProps(['unwrap']),
   withNormalHref(useLinkOverrides(useOverrides) as () => ExtraLinkOptions),
   withLinkTarget(useLinkOverrides(useOverrides) as () => ExtraLinkOptions),
+  asDisabledPageLink,
 );
 
 export default asBodilessLink;
