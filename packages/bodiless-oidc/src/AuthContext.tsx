@@ -28,7 +28,7 @@ export const AuthContext = React.createContext<AuthContextProps | undefined>(und
  * Hook that can be used to access the Authorization Context.
  * @see AuthContextProps
  */
-export const useBodilessOidc = () => useContext(AuthContext);
+export const useBodilessOidc = () => useContext(AuthContext)!;
 
 /**
  * HOC that adds an `onClick` event to the underlying component
@@ -40,7 +40,7 @@ export const useBodilessOidc = () => useContext(AuthContext);
 export const withSignInOnClick = (
   args?: SigninRedirectArgs,
 ) => (Component: ComponentType) => (props: any) => {
-  const { signIn } = useBodilessOidc() as AuthContextProps;
+  const { signIn } = useBodilessOidc();
   return <Component {...props} onClick={() => signIn(args)} />;
 };
 
@@ -51,7 +51,7 @@ export const withSignInOnClick = (
  * @see AuthContextProps
  */
 export const withSignOutOnClick = (Component: ComponentType) => (props: any) => {
-  const { signOut } = useBodilessOidc() as AuthContextProps;
+  const { signOut } = useBodilessOidc();
   return <Component {...props} onClick={signOut} />;
 };
 
@@ -62,7 +62,7 @@ export const withSignOutOnClick = (Component: ComponentType) => (props: any) => 
  * @see AuthContextProps
  */
 export const withSignInPopupOnClick = (Component: ComponentType) => (props: any) => {
-  const { signInPopup } = useBodilessOidc() as AuthContextProps;
+  const { signInPopup } = useBodilessOidc();
   return <Component {...props} onClick={signInPopup} />;
 };
 
@@ -76,6 +76,6 @@ export const withSignInPopupOnClick = (Component: ComponentType) => (props: any)
 export const withSignOutRedirectOnClick = (
   args?: SignoutRedirectArgs,
 ) => (Component: ComponentType) => (props: any) => {
-  const { signOutRedirect } = useBodilessOidc() as AuthContextProps;
+  const { signOutRedirect } = useBodilessOidc();
   return <Component {...props} onClick={() => signOutRedirect(args)} />;
 };

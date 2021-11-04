@@ -19,11 +19,11 @@ import {
   asToken, addClasses, H1 as H1$, Div, Button as ButtonBase,
 } from '@bodiless/fclasses';
 import {
-  AuthProvider,
   useBodilessOidc,
   withSignInOnClick,
   withSignOutOnClick,
   withSignInPopupOnClick,
+  withSignOutRedirectOnClick,
 } from '@bodiless/oidc';
 
 import Layout from '../../../components/Layout';
@@ -44,19 +44,10 @@ const UserWrapper = addClasses('p-4 border border-gray-600 max-w-md mx-auto my-4
 const LoginButton = withSignInOnClick()(Button);
 const LoginPopupButton = withSignInPopupOnClick(Button);
 const LogoutButton = withSignOutOnClick(Button);
+const LogoutRedirectButton = withSignOutRedirectOnClick()(Button);
 const LogContextButton = withLogContext(Button);
 
-const oidcConfig = {
-  clientId: 'interactive.public',
-  redirectUri: typeof window !== 'undefined' ? window.location.href : '',
-  scope: 'openid profile email api offline_access',
-  authority: 'https://demo.identityserver.io',
-  autoSignIn: false,
-};
-
 const UserPreview = () => {
-  // Property 'userData' does not exist on type 'AuthContextProps | undefined'.
-  // @ts-ignore
   const { userData, userManager } = useBodilessOidc();
 
   if (!userData) {
@@ -97,7 +88,7 @@ const UserPreview = () => {
     <UserWrapper>
       <h3 className="font-bold text-lg">
         Hi
-        {profile.given_name}
+        {' ' + profile.given_name}
         !
       </h3>
       <hr className="mb-4 mt-1" />
@@ -120,9 +111,9 @@ const UserPreview = () => {
       <hr className="my-4" />
 
       <div className="text-center">
-        <LogoutButton>Log Out</LogoutButton>
+        <LogoutButton>Remove User</LogoutButton>
         <LogContextButton>Log Context</LogContextButton>
-        <Button onClick={clearUrl}>Clear URL</Button>
+        <LogoutRedirectButton>Log Out</LogoutRedirectButton>
       </div>
     </UserWrapper>
   );
@@ -131,13 +122,11 @@ const UserPreview = () => {
 export default (props: any) => (
   <Page {...props}>
     <Layout>
-      <AuthProvider {...oidcConfig}>
-        <H1>Bodiless OIDC</H1>
-        <Description>
-          Demo Page for OIDC.
-        </Description>
-        <UserPreview />
-      </AuthProvider>
+      <H1>Bodiless OIDC</H1>
+      <Description>
+        Demo Page for OIDC.
+      </Description>
+      <UserPreview />
     </Layout>
   </Page>
 );

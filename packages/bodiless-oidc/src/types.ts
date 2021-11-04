@@ -123,7 +123,7 @@ export type AuthProviderProps = {
    */
   onBeforeSignIn?: () => void;
   /**
-   * On sign out hook. Can be a async function.
+   * On sign in hook. Can be a async function.
    * @param userData User
    */
   onSignIn?: (userData: User | null) => Promise<void> | void;
@@ -159,7 +159,20 @@ export type AuthContextProps = {
    */
   userData?: User | null;
   /**
+   * State setter that may be used to update `userData`.
+   */
+  setUserData: React.Dispatch<React.SetStateAction<User | null>>
+  /**
    * Auth state: True until the library has been initialized.
    */
   isLoading: boolean;
+  /**
+   * On sign in hook. Can be a async function.
+   * @param userData User
+   */
+  onSignIn?: (userData: User | null) => Promise<void> | void;
+  /**
+   * On sign out hook. Can be a async function.
+   */
+  onSignOut?: (options?: AuthProviderSignOutProps) => Promise<void> | void;
 };

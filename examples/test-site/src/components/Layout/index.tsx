@@ -19,6 +19,7 @@ import {
 import { useNode, withNodeKey } from '@bodiless/core';
 import { withSearchResult } from '@bodiless/search';
 import { withBurgerMenuProvider, withBreadcrumbStore } from '@bodiless/navigation';
+import { withOidcProvider } from '@bodiless/oidc';
 import Header from './header';
 import Footer from './footer';
 import SeoHelmet from './meta';
@@ -36,9 +37,26 @@ const Container = asToken(
   asYMargin,
 )(Div);
 
+const redirectUri = typeof window !== 'undefined'
+  ? new URL('/oidc-redirect', window.location.origin).href
+  : '';
+
+const oidcConfig = {
+  clientId: 'interactive.public',
+  redirectUri: typeof window !== 'undefined'
+    ? new URL('/oidc-redirect', window.location.origin).href
+    : '',
+  scope: 'openid profile email api offline_access',
+  authority: 'https://demo.identityserver.io',
+  autoSignIn: false,
+  onSignIn: () => console.log('On Sign In Callback'),
+  onSignOut: () => console.log('On Sign Out Callback'),
+};
+
 const SiteProviders = asToken(
   withBreadcrumbStore,
   withBurgerMenuProvider,
+  withOidcProvider(oidcConfig),
 )(Fragment);
 
 type LayoutComponents = {

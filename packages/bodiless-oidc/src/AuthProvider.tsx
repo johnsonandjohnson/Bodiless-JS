@@ -19,7 +19,7 @@ import { User, UserManager } from 'oidc-client-ts';
 import type { SignoutRedirectArgs, SigninRedirectArgs } from 'oidc-client-ts';
 
 import { AuthContext } from './AuthContext';
-import { initUserManager, hasCodeInUrl } from './UserManager';
+import { initUserManager } from './UserManager';
 import { AuthProviderProps } from './types';
 
 /**
@@ -61,17 +61,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({
 
   useEffect(() => {
     const getUser = async (): Promise<void> => {
-      /**
-       * Check if the user is returning back from OIDC.
-       */
-      if (hasCodeInUrl(location)) {
-        const user = await userManager.signinCallback();
-        setUserData(user);
-        setIsLoading(false);
-        if (onSignIn) onSignIn(user);
-        return;
-      }
-
       const user = await userManager!.getUser();
       if ((!user || user.expired) && autoSignIn) {
         if (onBeforeSignIn) onBeforeSignIn();
@@ -115,6 +104,9 @@ export const AuthProvider: FC<AuthProviderProps> = ({
         },
         userManager,
         userData,
+        setUserData,
+        onSignIn,
+        onSignOut,
         isLoading,
       }}
     >
