@@ -18,6 +18,8 @@ const fs = require('fs');
 const { getDisabledPages } = require('@bodiless/components/node-api');
 const { createDefaultContentPlugins } = require('./dist/DefaultContent');
 
+const disablePageList = getDisabledPages();
+
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
@@ -83,7 +85,6 @@ if (process.env.GOOGLE_FONTS_ENABLED !== '0') {
  * Robots.txt plugin.
  */
 if (process.env.ROBOTSTXT_ENABLED !== '0') {
-  const disablePageList = getDisabledPages();
   const disabledPages = Object.keys(disablePageList).filter(
     item => disablePageList[item].pageDisabled === true || disablePageList[item].indexingDisabled,
   );
@@ -161,6 +162,19 @@ if (process.env.BODILESS_DEFAULT_CONTENT_AUTO_DISCOVERY === '1') {
       ...discoverDefaultContent(process.env.BODILESS_DEFAULT_CONTENT_AUTO_DISCOVERY_DEPTH || 1),
     ),
   );
+}
+
+if (process.env.NODE_ENV === 'production') {
+  const disabledPages = Object.keys(disablePageList).filter(
+    item => disablePageList[item].pageDisabled === true,
+  );
+
+  if (disabledPages.length > 0) {
+    plugins.push({
+      resolve: 'gatsby-plugin-exclude',
+      options: { paths: disabledPages },
+    });
+  }
 }
 
 module.exports = {

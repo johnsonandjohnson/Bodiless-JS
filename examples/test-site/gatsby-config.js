@@ -77,13 +77,6 @@ if (tagManagerEnabled) {
   });
 }
 
-if (process.env.NODE_ENV === 'production' && disabledPages.length > 0) {
-  plugins.push({
-    resolve: 'gatsby-plugin-exclude',
-    options: { paths: disabledPages },
-  });
-}
-
 const robotsTxtPolicy = [
   {
     userAgent: '*',
