@@ -72,7 +72,7 @@ const hasPageChild = async ({ pathChild, client } : any) => {
 const movePage = async ({ origin, destination, client } : any) => {
   const directoryExists = await handle(client.directoryExists(destination));
 
-  if (!directoryExists.response && directoryExists.message === 'Sucess') {
+  if (directoryExists.message !== 'The page cannot be moved. Directory exists') {
     try {
       await handle(client.clonePage(origin, destination));
     } catch (e) {

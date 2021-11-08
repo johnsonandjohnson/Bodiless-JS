@@ -246,36 +246,9 @@ class Page {
 
   checkDirectory(newDirectory) {
     const readPromise = new Promise((resolve) => {
-      const newPathDirectory = this.getBasePath() + newDirectory;
-      fs.access(newPathDirectory, err => {
+      fs.access(newDirectory, err => {
         if (!err) {
-          resolve('The page cannot be moved');
-        }
-      });
-    });
-    return readPromise;
-  }
-
-  renameDirectory(OriginDirectory, newDirectory) {
-    const readPromise = new Promise((resolve, reject) => {
-      const pathDirectory = this.getBasePath() + OriginDirectory;
-      const newPathDirectory = this.getBasePath() + newDirectory;
-      const [, pageRelativeDir] = pathDirectory.split('/data/pages/');
-
-      if (!pageRelativeDir) {
-        resolve('The page cannot be moved');
-        return;
-      }
-
-      fs.access(newPathDirectory, err => {
-        if (!err) {
-          resolve('The page cannot be moved');
-        }
-      });
-
-      fs.rename(pathDirectory, newPathDirectory, err => {
-        if (err) {
-          reject(err);
+          resolve('The page cannot be moved. Directory exists');
         }
         resolve(this);
       });

@@ -283,10 +283,9 @@ class Backend {
     this.setRoute(`${backendPrefix}/log`, Backend.log);
     this.setRoute(`${backendPrefix}/pages`, Backend.setPages);
     this.setRoute(`${backendPrefix}/clone`, Backend.clonePage);
-    this.setRoute(`${backendPrefix}/move`, Backend.movePage);
     this.setRoute(`${backendPrefix}/remove/*`, Backend.removePage);
     this.setRoute(`${backendPrefix}/directory/child/*`, Backend.directoryChild);
-    this.setRoute(`${backendPrefix}/directory/exists/*`, Backend.directoryChild);
+    this.setRoute(`${backendPrefix}/directory/exists/*`, Backend.directoryExists);
     this.setRoute(`${backendPrefix}/file/remove/*`, Backend.removeFile);
   }
 
@@ -611,26 +610,6 @@ class Backend {
     return new Page(pagePath);
   }
 
-  static movePage(route) {
-    route.post((req, res) => {
-      const pagePath = req.params[0];
-      const page = Backend.getPage(pagePath);
-      page.setBasePath(backendPagePath);
-      const { body: { origin, destination } } = req;
-
-      page
-        .renameDirectory(origin, destination)
-        .then(error => {
-          if (error) {
-            logger.log(error);
-            res.send(error);
-          } else {
-            res.send({});
-          }
-        });
-    });
-  }
-
   static removePage(route) {
     route
       .delete((req, res) => {
@@ -709,7 +688,7 @@ class Backend {
         logger.log(`Start verifying new page exists: ${page.directory}`);
 
         page
-          .checkDirectory()
+          .checkDirectory(page.directory)
           .then(error => {
             if (error) {
               logger.log(error);
