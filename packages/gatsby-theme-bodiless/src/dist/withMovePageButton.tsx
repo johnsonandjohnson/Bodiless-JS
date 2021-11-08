@@ -234,8 +234,6 @@ const formPageMove = (client: Client) => contextMenuForm({
       const destination = pathArray.join('/');
       destinationGlb = path;
       const originClear = origin.slice(0, -1);
-      console.log('destination', destination);
-      console.log('originClear', originClear);
 
       if (destination === originClear) {
         actualState = MovePageState.Errored;
