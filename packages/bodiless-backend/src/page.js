@@ -244,6 +244,18 @@ class Page {
     return 'success';
   }
 
+  checkDirectory(newDirectory) {
+    const readPromise = new Promise((resolve) => {
+      const newPathDirectory = this.getBasePath() + newDirectory;
+      fs.access(newPathDirectory, err => {
+        if (!err) {
+          resolve('The page cannot be moved');
+        }
+      });
+    });
+    return readPromise;
+  }
+
   renameDirectory(OriginDirectory, newDirectory) {
     const readPromise = new Promise((resolve, reject) => {
       const pathDirectory = this.getBasePath() + OriginDirectory;

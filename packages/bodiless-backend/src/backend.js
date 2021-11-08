@@ -286,6 +286,7 @@ class Backend {
     this.setRoute(`${backendPrefix}/move`, Backend.movePage);
     this.setRoute(`${backendPrefix}/remove/*`, Backend.removePage);
     this.setRoute(`${backendPrefix}/directory/child/*`, Backend.directoryChild);
+    this.setRoute(`${backendPrefix}/directory/exists/*`, Backend.directoryChild);
     this.setRoute(`${backendPrefix}/file/remove/*`, Backend.removeFile);
   }
 
@@ -686,6 +687,29 @@ class Backend {
 
         page
           .hasChildDirectory()
+          .then(error => {
+            if (error) {
+              logger.log(error);
+              res.send(error);
+            } else {
+              res.send({});
+            }
+          });
+      });
+  }
+
+  static directoryExists(route) {
+    route
+      .delete((req, res) => {
+        const pagePath = req.params[0];
+        const page = Backend.getPage(pagePath);
+
+        page.setBasePath(backendPagePath);
+
+        logger.log(`Start verifying new page exists: ${page.directory}`);
+
+        page
+          .checkDirectory()
           .then(error => {
             if (error) {
               logger.log(error);

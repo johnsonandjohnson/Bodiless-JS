@@ -106,6 +106,11 @@ export default class BackendClient {
     return this.delete(url);
   }
 
+  directoryExists(path$: string) {
+    const url = `${this.prefix}/directory/exists${path$}`;
+    return this.delete(url);
+  }
+
   clonePage(origin: string, destination: string) {
     const payload = {
       origin,

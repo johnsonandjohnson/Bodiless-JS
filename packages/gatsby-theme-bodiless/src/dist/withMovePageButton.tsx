@@ -70,32 +70,38 @@ const hasPageChild = async ({ pathChild, client } : any) => {
 };
 
 const movePage = async ({ origin, destination, client } : any) => {
-  try {
-    await handle(client.clonePage(origin, destination));
-  } catch (e) {
-    return Promise.reject(new Error(e.message));
-  }
+  const directoryExists = await handle(client.directoryExists(destination));
 
-  const result = await handle(client.directoryChild(origin));
-  if (result.response && result.message === 'Success') {
+  if (!directoryExists.response && directoryExists.message === 'Sucess') {
     try {
-      await handle(client.deletePage(origin));
+      await handle(client.clonePage(origin, destination));
     } catch (e) {
       return Promise.reject(new Error(e.message));
     }
-  } else {
-    try {
-      await handle(client.removeFile(origin));
-    } catch (e) {
-      return Promise.reject(new Error(e.message));
-    }
-  }
 
-  if (result.response) {
-    if (result.message !== 'Success' && typeof (result.message) === 'string') {
-      return Promise.reject(new Error(result.message));
+    const result = await handle(client.directoryChild(origin));
+
+    if (result.response && result.message === 'Success') {
+      try {
+        await handle(client.deletePage(origin));
+      } catch (e) {
+        return Promise.reject(new Error(e.message));
+      }
+    } else {
+      try {
+        await handle(client.removeFile(origin));
+      } catch (e) {
+        return Promise.reject(new Error(e.message));
+      }
     }
-    return Promise.resolve();
+
+    if (result.response) {
+      if (result.message !== 'Success' && typeof (result.message) === 'string') {
+        return Promise.reject(new Error(result.message));
+      }
+      return Promise.resolve();
+    }
+    return Promise.reject(new Error('The page cannot be moved.'));
   }
   return Promise.reject(new Error('The page cannot be moved.'));
 };
@@ -228,6 +234,8 @@ const formPageMove = (client: Client) => contextMenuForm({
       const destination = pathArray.join('/');
       destinationGlb = path;
       const originClear = origin.slice(0, -1);
+      console.log('destination', destination);
+      console.log('originClear', originClear);
 
       if (destination === originClear) {
         actualState = MovePageState.Errored;
