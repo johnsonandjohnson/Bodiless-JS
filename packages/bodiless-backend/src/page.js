@@ -168,11 +168,16 @@ class Page {
         if (!matchs.length) return reject();
         let newContent = content;
         matchs.forEach(item => {
-          const p = item.split(' ')[1].replace(/'/g, '').replace(/"/g, '');
+          const delimiter = item[item.search(/'|"/)];
+          const oldPath = item.split(' ')[1].replace(/'|"/g, '');
           const from = path.dirname(filePath);
-          const to = path.normalize(`${originPath}/${p}`);
-          const relativePath = path.relative(from, to);
-          newContent = newContent.replace(p, relativePath);
+          const to = path.normalize(`${originPath}/${oldPath}`);
+          const newPath = path.relative(from, to);
+
+          newContent = newContent.replace(
+            `${delimiter}${oldPath}${delimiter}`,
+            `${delimiter}${newPath}${delimiter}`,
+          );
         });
         fs.writeFile(filePath, newContent, writeErr => {
           if (writeErr) return reject();
