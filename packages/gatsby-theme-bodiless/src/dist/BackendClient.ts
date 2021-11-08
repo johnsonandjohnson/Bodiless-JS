@@ -97,7 +97,7 @@ export default class BackendClient {
   }
 
   removeFile(path$: string) {
-    const url = `${this.prefix}/remove/file/${path$}`;
+    const url = `${this.prefix}/file/remove/${path$}`;
     return this.delete(url);
   }
 

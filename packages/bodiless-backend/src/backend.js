@@ -284,9 +284,9 @@ class Backend {
     this.setRoute(`${backendPrefix}/pages`, Backend.setPages);
     this.setRoute(`${backendPrefix}/clone`, Backend.clonePage);
     this.setRoute(`${backendPrefix}/move`, Backend.movePage);
-    this.setRoute(`${backendPrefix}/remove/`, Backend.removePage);
+    this.setRoute(`${backendPrefix}/remove/*`, Backend.removePage);
     this.setRoute(`${backendPrefix}/directory/child/*`, Backend.directoryChild);
-    this.setRoute(`${backendPrefix}/remove/file/*`, Backend.removeFile);
+    this.setRoute(`${backendPrefix}/file/remove/*`, Backend.removeFile);
   }
 
   setRoute(route, action) {
@@ -658,8 +658,8 @@ class Backend {
         const pagePath = req.params[0];
         const page = Backend.getPage(pagePath);
         page.setBasePath(backendPagePath);
-        const origin = `/${pagePath}index.json`;
-        logger.log(`Start deleting file:${origin}`);
+        const origin = `./src/data/pages/${pagePath}index.json`;
+        logger.log(`Start deleting file: ${origin}`);
 
         page
           .deleteFile(origin)
@@ -733,6 +733,7 @@ class Backend {
       const { body: { origin, destination } } = req;
       const page = Backend.getPage(destination);
       page.setBasePath(backendPagePath);
+
       logger.log(`Start cloning page for:${destination}`);
 
       page

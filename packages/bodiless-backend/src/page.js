@@ -272,7 +272,6 @@ class Page {
   }
 
   deleteFile(origin) {
-    console.log('=====> file deleteFile', origin);
     const readPromise = new Promise((resolve, reject) => {
       fs.unlink(origin, err => {
         if (err) {

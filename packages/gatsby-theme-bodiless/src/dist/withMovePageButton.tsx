@@ -70,11 +70,9 @@ const hasPageChild = async ({ pathChild, client } : any) => {
 };
 
 const movePage = async ({ origin, destination, client } : any) => {
-  console.log('=====> destination', destination);
   try {
     await handle(client.clonePage(origin, destination));
   } catch (e) {
-    console.log('=====> error clone', e);
     return Promise.reject(new Error(e.message));
   }
 
@@ -83,25 +81,23 @@ const movePage = async ({ origin, destination, client } : any) => {
     try {
       await handle(client.deletePage(origin));
     } catch (e) {
-      console.log('=====> error delete', e);
       return Promise.reject(new Error(e.message));
     }
   } else {
     try {
       await handle(client.removeFile(origin));
     } catch (e) {
-      console.log('=====> error delete index', e);
       return Promise.reject(new Error(e.message));
     }
   }
-  return Promise.resolve();
-  // if (result.response) {
-  //   if (result.message !== 'Success' && typeof (result.message) === 'string') {
-  //     return Promise.reject(new Error(result.message));
-  //   }
-  //   return Promise.resolve();
-  // }
-  // return Promise.reject(new Error('The page cannot be moved.'));
+
+  if (result.response) {
+    if (result.message !== 'Success' && typeof (result.message) === 'string') {
+      return Promise.reject(new Error(result.message));
+    }
+    return Promise.resolve();
+  }
+  return Promise.reject(new Error('The page cannot be moved.'));
 };
 
 const MovePageComp = (props : MovePageProps) => {
@@ -189,28 +185,8 @@ const redirectPage = (values: {keepOpen: boolean, path?: string}) => {
 
   actualState = -1;
 
-  const { href } = window.location;
-  const hrefArray = href.split('/');
-
-  // Handle paths withtout '/' at the end.
-  if (hrefArray[hrefArray.length - 1] !== '') hrefArray.push('');
-
-  // Removes last child path from href array.
-  hrefArray.splice(-2, 1);
-  hrefArray.pop();
-
-  const destinationArray = destinationGlb.split('/');
-  const destinationDir = destinationArray.pop();
-  if (destinationDir) {
-    hrefArray.push(destinationDir);
-    destinationGlb = '';
-  } else {
-    return;
-  }
-
-  const parentHref = hrefArray.join('/');
   // Uses replace to redirect since child page no longer exists.
-  window.location.replace(parentHref);
+  window.location.replace(destinationGlb);
 };
 
 const formPageMove = (client: Client) => contextMenuForm({
@@ -250,7 +226,7 @@ const formPageMove = (client: Client) => contextMenuForm({
       const pathArray = path.split('/');
       pathArray.splice(-2, 1);
       const destination = pathArray.join('/');
-      destinationGlb = destination;
+      destinationGlb = path;
       const originClear = origin.slice(0, -1);
 
       if (destination === originClear) {
