@@ -19,7 +19,7 @@ const SITEURL = process.env.SITE_URL;
 
 const disablePageList = getDisabledPages();
 const disabledPages = Object.keys(disablePageList).filter(
-  item => disablePageList[item].pageDisabled === true,
+  item => disablePageList[item].pageDisabled === true || disablePageList[item].indexingDisabled,
 );
 
 // Gatsby plugins list.
