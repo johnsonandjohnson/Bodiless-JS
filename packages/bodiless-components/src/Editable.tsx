@@ -145,7 +145,7 @@ const asEditable = (
       nodeCollection,
       placeholder: placeholderProp,
       // useOverrides,
-    });
+    }) as React.ComponentProps<typeof EditableChild>;
     return (
       <Component {...rest}>
         <EditableChild {...editableProps} useOverrides={useOverrides} />

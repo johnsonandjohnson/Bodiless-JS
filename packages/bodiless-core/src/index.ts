@@ -62,6 +62,7 @@ import {
   withActivateOnEffect,
   useActivateOnEffect,
   useActivateOnEffectActivator,
+  withReactivateOnRemount,
 } from './ActivateContext';
 import {
   NotificationProvider,
@@ -77,6 +78,10 @@ import { useMenuOptionUI } from './components/ContextMenuContext';
 import ContextSubMenu from './ContextMenu/ContextSubMenu';
 import withSwitcherButton from './withSwitcherButton';
 import OnNodeErrorNotification from './OnNodeErrorNotification';
+import {
+  getFromSessionStorage,
+  saveToSessionStorage,
+} from './SessionStorage';
 
 export * from './components';
 export * from './Contentful';
@@ -128,6 +133,7 @@ export {
   withActivateOnEffect,
   useActivateOnEffect,
   useActivateOnEffectActivator,
+  withReactivateOnRemount,
   withChild,
   withParent,
   withAppendChild,
@@ -146,6 +152,8 @@ export {
   withNotificationButton,
   withSwitcherButton,
   OnNodeErrorNotification,
+  getFromSessionStorage,
+  saveToSessionStorage,
 };
 
 export type {

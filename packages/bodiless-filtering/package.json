@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/filtering",
-  "version": "0.2.10",
+  "version": "0.3.0",
   "description": "Provides a control to filter content by group/tag.",
   "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
   "homepage": "",
@@ -26,19 +26,19 @@
   "scripts": {
     "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
-    "build:api-doc": "typedoc --out doc/api --mode file",
+    "build:api-doc": "typedoc --out doc/api src",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/accordion": "^0.2.10",
-    "@bodiless/components": "^0.2.10",
-    "@bodiless/core": "^0.2.10",
-    "@bodiless/fclasses": "^0.2.10",
-    "@bodiless/organisms": "^0.2.10",
+    "@bodiless/accordion": "^0.3.0",
+    "@bodiless/components": "^0.3.0",
+    "@bodiless/core": "^0.3.0",
+    "@bodiless/fclasses": "^0.3.0",
+    "@bodiless/organisms": "^0.3.0",
     "lodash": "^4.17.19",
     "uuid": "^3.3.2"
   },
   "peerDependencies": {
-    "react": "^16.8.1"
+    "react": "^17.0.2"
   }
 }

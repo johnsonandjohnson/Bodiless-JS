@@ -18,7 +18,7 @@ import React, {
 import {
   withParent, withAppendChild, useNode, useClickOutside,
 } from '@bodiless/core';
-import type { LinkData } from '@bodiless/components';
+import { LinkData, useListContext } from '@bodiless/components';
 import {
   addProps,
   addClasses,
@@ -96,21 +96,19 @@ const asAccessibleMenuTitle = (
 
 const asAccessibleSubMenuTitle = (Component: ComponentType<any> | string) => (props: any) => {
   const { activeSubmenu } = useMenuContext();
-  const { node } = useNode();
-  const nodeID = node.path[node.path.length - 1];
+  const { currentItem } = useListContext();
 
-  return <Component aria-haspopup="true" aria-expanded={activeSubmenu === nodeID} {...props} />;
+  return <Component aria-haspopup="true" aria-expanded={activeSubmenu === currentItem} {...props} />;
 };
 
 const withSubmenuToggle = (Component: ComponentType<any> | string) => (props: any) => {
   const { activeSubmenu, setActiveSubmenu } = useMenuContext();
-  const { node } = useNode();
-  const nodeID = node.path[node.path.length - 1];
+  const { currentItem } = useListContext();
 
   const toggleSubmenu = () => (
-    activeSubmenu === nodeID
+    activeSubmenu === currentItem
       ? setActiveSubmenu(undefined)
-      : setActiveSubmenu(nodeID)
+      : setActiveSubmenu(currentItem)
   );
 
   return <Component {...props} onClick={toggleSubmenu} />;
@@ -118,8 +116,7 @@ const withSubmenuToggle = (Component: ComponentType<any> | string) => (props: an
 
 const AccessibleMenuItem: FC<any> = props => {
   const { activeSubmenu, setActiveSubmenu } = useMenuContext();
-  const { node } = useNode();
-  const nodeID = node.path[node.path.length - 2];
+  const { currentItem } = useListContext();
 
   const ref = useRef(null);
 
@@ -127,7 +124,7 @@ const AccessibleMenuItem: FC<any> = props => {
     <>
       <li ref={ref} {...props} />
       {
-        activeSubmenu === nodeID
+        activeSubmenu === currentItem
           && (
             <>
               <ClickOutside ref={ref} onClickOutside={() => setActiveSubmenu(undefined)} />

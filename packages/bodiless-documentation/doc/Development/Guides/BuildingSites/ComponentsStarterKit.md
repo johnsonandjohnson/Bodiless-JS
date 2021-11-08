@@ -25,7 +25,7 @@ non-editable (static) meta data into head section from
 `src/components/Layout/meta.tsx`.
 
 For full code, please
-[review code](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/starter/src/components/Layout/meta.tsx).
+[review code](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/examples/starter/src/components/Layout/meta.tsx).
 
 See below for instructions on how to add meta data to a page's head and make it editable for site
 editors.
@@ -200,6 +200,8 @@ with editors, site builder can use the design api to add, remove, replace or
 style these variations. In addition, she can create different FlowContainers to
 control what components may be placed in different areas of sites. e.g. A
 FlowContainer for a sidebar could have reduced set of components to select from.
+A FlowContainer can also be configured to use the Content Library, allowing
+editors to save components for reuse throughout the site.
 
 For more information, please read [FlowContainer](/Components/FlowContainer).
 

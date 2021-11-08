@@ -67,7 +67,7 @@ export const withOnlyProps = <Q extends object>(...keys: string[]) => (
 );
 
 /**
- * Creates an HOC which provides the base componejt event handler which activates the current
+ * Creates an HOC which provides the base component event handler which activates the current
  * context.
  *
  * @param event

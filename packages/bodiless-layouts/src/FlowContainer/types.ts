@@ -17,7 +17,7 @@ import {
   DesignableComponents, ComponentOrTag, DesignableComponentsProps, DesignableProps,
 } from '@bodiless/fclasses';
 import { HTMLProps } from 'react';
-import { ComponentSelectorUI } from '../ComponentSelector/types';
+import { ComponentSelectorUI, ComponentSelectorProps } from '../ComponentSelector/types';
 import { UI as SortableResizableUI, SlateSortableResizableProps } from '../SlateSortableResizable';
 import { SnapData } from './utils/appendTailwindWidthClass';
 
@@ -26,24 +26,27 @@ export type UI = ComponentSelectorUI & SortableResizableUI;
 export type FlowContainerData = {
   items: FlowContainerItem[];
 };
-export type EditFlowContainerProps = DesignableComponentsProps & HTMLProps<HTMLDivElement> & {
-  ui?: UI,
-  snapData?: SnapData,
-  getDefaultWidth?: (snapData: SnapData) => string;
-  maxComponents?: number,
-  minComponents?: number,
-  mandatoryCategories?: string[],
-  blacklistCategories?: string[],
-  isResizeEnabled?: boolean,
-  /**
-   * The label to use for the buttons provided by an empty flow container.
-   */
-  buttonGroupLabel?: string|((props:EditFlowContainerProps) => string),
-  /**
-   * The label to use for the buttons provided by a flow container item.
-   */
-  itemButtonGroupLabel?: string|((props:SlateSortableResizableProps) => string),
-};
+export type EditFlowContainerProps =
+  DesignableComponentsProps
+  & HTMLProps<HTMLDivElement>
+  & Pick<ComponentSelectorProps, 'mandatoryCategories'|'blacklistCategories'|'scale'>
+  & {
+    ui?: UI,
+    snapData?: SnapData,
+    getDefaultWidth?: (snapData: SnapData) => string;
+    maxComponents?: number,
+    minComponents?: number,
+    isResizeEnabled?: boolean,
+    /**
+     * The label to use for the context menu buttons provided by an empty flow container.
+     */
+    buttonGroupLabel?: string|((props:EditFlowContainerProps) => string),
+    /**
+     * The label to use for the context menu buttons provided by a flow container item.
+     */
+    itemButtonGroupLabel?: string|((props:SlateSortableResizableProps) => string),
+  };
+
 export type WidthClassTuple = {
   width: number;
   media: string;

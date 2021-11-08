@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { Fragment, ComponentType as CT, PropsWithChildren } from 'react';
+import React, { Fragment, ComponentType as CT, PropsWithChildren, FC, ComponentType } from 'react';
 import { extendDesignable } from '@bodiless/fclasses';
 import type { DesignableComponentsProps, HOC } from '@bodiless/fclasses';
 import omit from 'lodash/omit';
@@ -38,7 +38,7 @@ const insertChild = (Child: CT, options: InsertChildOptions): HOC => (
   type Components = { [Child: string]: CT };
   const { designKey, mode } = options;
   const startComponents: Components = { [designKey]: Child };
-  const WithChild = (props: PropsWithChildren<DesignableComponentsProps<Components>>) => {
+  const WithChild: FC<any> = (props: PropsWithChildren<DesignableComponentsProps<Components>>) => {
     const { components, ...rest } = props;
     const { children, ...restWithoutChildren } = rest;
     const { [designKey]: ChildComponent } = components;
@@ -66,7 +66,7 @@ const insertChild = (Child: CT, options: InsertChildOptions): HOC => (
     }
   };
   const applyDesign = extendDesignable(design => omit(design, [designKey]));
-  return applyDesign(startComponents, designKey)(WithChild);
+  return applyDesign(startComponents, designKey)(WithChild) as ComponentType<any>;
 };
 
 /**

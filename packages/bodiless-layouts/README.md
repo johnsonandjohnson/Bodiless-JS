@@ -5,6 +5,9 @@ place them on the page, and resize them. The Flow Container is  defined by page 
 These templates are created by a developer and define the spaces available to add content 
 (components).
 
+Flow Containers can be configured to utilize the _Content Library_, allowing Content Editors to save
+components that they've created for reuse elsewhere on your site.
+
 ## Content Editor Details
 
 When an empty Flow Container is on the page you will only see a box bounded by dotted line.
@@ -26,6 +29,9 @@ components. You can filter the components by:
 * Using search facets to filter out components that do not match the selection 
 (you can undo this by clicking the "select all" checkbox at the top).
 * Using the search box field to search across all of the component titles.
+* If the Content Library has been enabled in the current Flow Container, and there is existing
+  content data available in the library, you can select the "Content Library" checkbox (under
+  "Type") to filter for components saved in the Content Library.
 
 You can hover over the information icon to see a description of the component.
 
@@ -62,6 +68,23 @@ To replace a component, use the swap button from the toolbar. It will replace th
 without losing data (as long as the data is applicable in the replacement component). 
 You can also replace a component by deleting it and adding a new component in its place
 via the add button on the toolbar. 
+
+### Saving a component in the Content Library
+
+If the instance of the current Flow Container has been configured to use it, then you will be able
+to save components and their content to the Content Library.
+
+Within the context menu of any component in the Flow Container, you will see a "Library" subsection
+with an **Add** button.
+
+![Context Menu with Library subsection](./assets/ContextMenuWithLibrary.jpg ':size=50%')
+
+Click **Add** to save your component, along with its embedded content, to the Content Library. Now,
+you will be able to reuse this component anywhere on your site by adding it to any instance of the
+same Flow Container.
+
+?> **Note:** Editing the Content Library component — from anywhere — will update the content in all
+places the component is used.
 
 ---
 
@@ -215,7 +238,7 @@ fully resolved tailwind configuration, and it returns a function which accepts a
 list of tailwind width classes and returns a token which constrains flow
 container items to those widths:
 ```js
-import rewolveConfig from 'tailwindcss/resolveconfig';
+import resolveConfig from 'tailwindcss/resolveconfig';
 import tailwindConfig from './path/to/your/tailwind.config';
 
 const withWidthConstraints = flow(
@@ -338,3 +361,214 @@ Note how we applied `withCustomPreview` to all variations by adding a
 design with a single key to the list of designs provided to `varyDesigns`.
 Because there is only one key which is being applied to all variations, we
 can use an empty string.
+
+### Component Selector Scale
+The component selector displays component previews in a grid with one, two
+or four items per row.  By default the initial scale is one item per row,
+but this can be controlled via the `scale` prop.  For example:
+
+```ts
+import { ComponentSelectorScale } from '@bodiless/layouts`;
+import { FlowContainer } from '@bodiless/layouts-ui`;
+<FlowContainer scale={ComponentSelectorScale.Quarter}>
+```
+
+The above will set the initial scale to 4 items per row.
+
+### Using the Component Selector outside the Flow Container
+
+The Bodiless component selector can be rendered independently of
+the flow container. You can use it anywhere you want to give the user
+a choice of components.  One use-case might be to provide a styleguide
+page which allows a user to browse all components available in a
+design system:
+
+```js
+import { ComponentSelector } from '@bodiless/layouts-ui';
+// Use the same design you would use to populate the flow container.
+import { flowContainerDesign } from 'my-flow-container';
+
+const StyleGuideBase = props => {
+  const { components, ...rest } = props;
+  return (
+    <ComponentSelector
+      {...rest}
+      components={Object.values(components)}
+    />
+  );
+};
+const StyleGuide = asToken(
+  designable({}, 'StyleGuide'),
+  withDesign(flowContainerDesign),
+  onSelect={() => null}
+)(StyleGuideBase);
+```
+
+A few things to note when using the component selector independently:
+
+- the `components` prop accepted by the component selector is different from
+  that created by `designable`. In order to use the same design as that
+  accepted by the flow container, we convert this object to an array
+  in the `StyleGuideBase` component above.
+- You must provide an `onSelect` prop which will be invoked when the
+  user clicks on one of the components.  Above, we do nothing, but you
+  could easily modify this, for example, to redirect the user to a
+  page containing documentation for the selected component.
+- You must provide a `ui` prop to define the elements used in the
+  component selector UI.  You can use the default `ui` by importing
+  the component selector from `@bodiless/layouts-ui`.  You can also
+  customize this UI to meet your needs:
+  ```ts
+  import { ComponentSelector } from '@bodiless/layouts';
+  import { componentSelectorUi } from '@bodiless/layouts-ui';
+
+  const ui = {
+    ...componentSelectorUi,
+    MasterWrapper: removeClasses('bl-text-white')(componentSelectorUi.MasterWrapper),
+  };
+  ...
+  <ComponentSelector ui={ui} />
+  ```
+- By default, the component selector will display all components in their
+  [preview mode](#component-selector-preview) if available.  If you want
+  instead to display the components normally, as they would appear on a page,
+  you can override the default behavior via the `mode` prop:
+  ```ts
+  import { ComponentDisplayMode } from '@bodiless/layouts';
+  ...
+  <ComponentSelector mode={ComponentDisplayMode.EditFlowContainer} />;
+  ```
+- The default component selector UI overlays all components with a button
+  (clicking this button invokes the `onSelect` prop). As a result, the
+  components are not editable.  One way to defeat this behavior, is to
+  modify the default UI `ComponentSelectButton` element:
+  ```ts
+  import { componentSelectorUi } from '@bodiless/layouts-ui';
+
+  const ui = {
+    ...componentSelectorUi,
+    ComponentSelectButton: () => null,
+  };
+  ```
+- By default, the component selector does not provide an independent content
+  node to each item.  If you want to make the components editable, you may
+  want to do so yourself, again by modifying the default UI:
+  ```ts
+  import { componentSelectorUi } from '@bodiless/layouts-ui';
+
+  const withNodeKeyFromItemId: HOC = Component => {
+    const WithNodeKeyFromItemId: FC<any> = props => (
+      <Component {...props} nodeKey={props['data-item-id']} />
+    );
+    return WithNodeKeyFromItemId;
+  };
+
+  const ui = {
+    ...componentSelectorUi,
+    ItemBox: asToken(
+      withNode,
+      withNodeKeyFromDisplayName,
+    )(componentSelectorUi.ItemBox),
+  };
+  ```
+  In the example above, we leverage the `data-item-id` prop which is passed
+  to the `ItemBox` component.  This is the unique key identifying the component.
+
+### Enable Content Library
+
+You can configure a Flow Container to use the Content Library, providing Content Editors with a
+"Library" section within the context menu of components added to that Flow Container.
+
+When the Content Editor adds a component to the Content Library:
+
+* The component's data is copied to the Content Library, along with the component key which
+  identifies the component in the Flow Container;
+* The component is replaced with a "library" version of the component containing the current
+  content;
+* The component is then available to be added to any instance of the same Flow Container on any page
+  of the site;
+* The metadata of the "library version" of the component is the same as that of the original
+  component (except for the "Name" and "Description" provided by the Content Editor upon adding it
+  to the Content Library);
+* Editing the Content Library component — from anywhere — will update the content in all places the
+  component is used.
+
+#### How to enable the Content Library feature on a Flow Container
+
+The `@bodiless/layouts` package exports a `withLibraryComponents` HOC that adds the Content Library
+feature to a wrapped Flow Container.
+
+For example, to create a Flow Container with the Content Library enabled:
+
+```tsx
+...
+import { FlowContainer } from '@bodiless/layouts-ui';
+import { withLibraryComponents } from '@bodiless/layouts';
+
+// Add variant component designs, includes RTE, Image, Card etc, for component selector filtering.
+import withDefaultVariations from './withDefaultVariations';
+...
+
+// Create a Flow Container with Content Library enabled.
+const FlowContainerWithContentLibrary = asToken(
+  // Apply Content Library HOC before other design variants.
+  withLibraryComponents(),
+  asDefaultFlowContainer,
+)(FlowContainer);
+```
+
+Then use this Flow Container on the site page:
+
+```tsx
+const MY_PAGE_PATH = 'myPage';
+
+<FlowContainerWithContentLibrary
+  id={MY_PAGE_PATH}
+  nodeKey={MY_PAGE_PATH}
+/>
+```
+
+The `withContentLibrary` function also takes one optional path parameter, which is typed as
+`LibraryNodePath`, so the Site Builder can specify a customized Content Library storage path; if
+not provided, the path will default to `['Site', 'default-library']`.
+
+?> **Note:** When defining a FlowContainer with the Content Library, `withLibraryComponents` should
+be applied before any other "withDesign" HOCs, as the Content Library needs to know all the designs
+being added.
+
+To support a nested Flow Container with the Content Library feature, a variant HOC can be created
+like the following:
+
+```tsx
+...
+
+export const withLibraryFlowContainerVariations = withDesign({
+  FlowContainer: asToken(
+    replaceWith(
+      asToken(
+        withLibraryComponents(),
+        asDefaultFlowContainer,
+        withNodeKey('innerLibraryFC'),
+      )(FlowContainer),
+    ),
+    ifComponentSelector(
+      replaceWith(FlowContainerPreview),
+    ),
+    withType('Flow Container with Library')(),
+    withTitle('Flow Container with Library'),
+    withDesc('Adds a flow container with library'),
+  ),
+});
+```
+
+Then apply it to a Flow Container component like we created previously:
+
+```tsx
+...
+
+const FlowContainerDefaultWithContentLibrary = asToken(
+  withLibraryComponents(),
+  asDefaultFlowContainer,
+  withLibraryFlowContainerVariations,
+)(FlowContainer);
+```

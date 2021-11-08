@@ -6,7 +6,7 @@ while building a simple gallery page on an editable BodilessJS site.
 ![](./assets/GalleryPage.jpg)
 
 Upon completion of this tutorial you will end up with code similar to that found
-[here](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/examples/test-site/src/data/pages/gallery-final).
+[here](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/examples/test-site/src/data/pages/gallery-final).
 As you go through the tutorial feel free to reference this code as needed.
 
 > Note: The API's described below are under active development and are subject

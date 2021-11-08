@@ -67,7 +67,7 @@ if (bodilessDependencies.length < 1) {
 }
 
 // Install local packages.
-const args = `install --no-package-lock --package-lock-only ${bodilessDependencies.join(' ')}`.split(' ');
+const args = `install --legacy-peer-deps --no-package-lock --package-lock-only ${bodilessDependencies.join(' ')}`.split(' ');
 const child = spawn('npm', args, {
   stdio: 'inherit',
   shell: true,
@@ -81,7 +81,7 @@ child.on('close', code => {
     console.log('Updated local package.json');
   }
   fs.copySync('../../package-lock.json', './package-lock.json');
-  const child$ = spawn('npm', ['install'], {
+  const child$ = spawn('npm', ['install', '--legacy-peer-deps'], {
     stdio: 'inherit',
     shell: true,
   });

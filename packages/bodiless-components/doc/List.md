@@ -373,4 +373,4 @@ const asNestedMenu = flow(
 
 ## Architectural Details
 
-For architectural details for different list types please see [List source folder](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/bodiless-components/src/List) in @bodiless-components. 
+For architectural details for different list types please see [List source folder](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/bodiless-components/src/List) in @bodiless-components. 

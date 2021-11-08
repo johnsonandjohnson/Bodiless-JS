@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/richtext",
-  "version": "0.2.10",
+  "version": "0.3.0",
   "description": "Provide Rich Text Component",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
   "license": "Apache-2.0",
@@ -23,18 +23,17 @@
   "scripts": {
     "build": "tsc --version && tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
-    "build:api-doc": "typedoc --out doc/api --mode file",
+    "build:api-doc": "typedoc --out doc/api src",
     "lint": "tslint ./src/**/*.ts?x",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
     "postinstall": "node bin/apply-patches.js"
   },
   "dependencies": {
-    "@bodiless/core": "^0.2.10",
-    "@bodiless/fclasses": "^0.2.10",
+    "@bodiless/core": "^0.3.0",
+    "@bodiless/fclasses": "^0.3.0",
     "@emotion/core": "^10.0.14",
     "@emotion/css": "^10.0.14",
     "@emotion/styled": "^10.0.14",
-    "@material/react-material-icon": "^0.15.0",
     "is-hotkey": "^0.1.6",
     "lodash": "^4.17.19",
     "mobx": "^5.8.0",
@@ -50,8 +49,8 @@
     "uuid": "^3.3.2"
   },
   "peerDependencies": {
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@types/rc-tooltip": "^3.7.1",

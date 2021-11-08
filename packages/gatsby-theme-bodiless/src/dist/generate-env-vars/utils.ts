@@ -14,10 +14,9 @@
 
 /* eslint-disable no-console, no-return-assign, max-len */
 import findUp from 'find-up';
-import { writeFile } from 'fs';
+import fs, { writeFile } from 'fs';
 import { promisify } from 'util';
-import { Repository, Reference } from 'nodegit';
-import { resolve as resolvePath } from 'path';
+import git from 'isomorphic-git';
 import { Tree } from './type';
 
 const writeFilePromise = promisify(writeFile);
@@ -40,26 +39,19 @@ export const jsonToEnv = async (envConfig:Tree, appEnv:string):Promise<void> => 
 
 export const findGitFolder = async (): Promise<string> => await findUp('.git', { type: 'directory' }) || '';
 
-export const getGitRepository = (repositoryPath:string): Promise<Repository> => Repository.open(resolvePath(repositoryPath));
-
-export const handleDetachedState = (repo:Repository): Repository => {
-  if (repo.headDetached()) {
-    console.warn('You are in "detached HEAD" state...');
-  }
-
-  return repo;
-};
+export const getGitRepository = async (gitDir: string) => await git.currentBranch({ fs, gitdir: gitDir }) ?? undefined;
 
 export const getCurrentGitBranch = async (): Promise<string> => {
   let gitBranchName = process.env.PLATFORM_BRANCH || '';
 
   try {
     const gitDir = await findGitFolder();
-    const repo = await getGitRepository(gitDir);
-    const currentBranch: Reference = await handleDetachedState(repo).getCurrentBranch();
+    const currentBranch = await getGitRepository(gitDir);
 
     if (currentBranch) {
-      gitBranchName = currentBranch.shorthand() as string;
+      gitBranchName = currentBranch;
+    } else {
+      console.warn('You are in "detached HEAD" state...');
     }
   } catch (e) {
     console.warn(e);

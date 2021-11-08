@@ -12,13 +12,16 @@
  * limitations under the License.
  */
 
-import Image, { asBodilessImage } from './Image';
+import Image, { asBodilessImage, withImageLibrary } from './Image';
 import { truncateFileName } from './FileUpload';
+import { useChameleonSelectorForm } from './useChameleonSelectorForm';
 
 export {
   asBodilessImage,
   Image,
   truncateFileName,
+  useChameleonSelectorForm,
+  withImageLibrary,
 };
 
 export * from './Link';

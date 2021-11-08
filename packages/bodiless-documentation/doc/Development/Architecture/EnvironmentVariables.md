@@ -26,8 +26,8 @@ module.exports = {
     const currentGitBranch = await getCurrentGitBranch();
 
     // Here we define all env variables that the current package controls
-    // based on the `currentGitBranch`. We aslo recommend to have a 'default' value.
-    const config = currentGitBranch === 'master'
+    // based on the `currentGitBranch`. We also recommend to have a 'default' value.
+    const config = currentGitBranch === 'main'
       ? { default: { ...defaultEnvValues, BODILESS_BACKEND_SAVE_ENABLED: '0' } }
       : { default: { ...defaultEnvValues } }
 

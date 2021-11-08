@@ -43,7 +43,7 @@ export default function postBuild(staticDir: string) {
         return;
       }
       replaceAttributes(pageHtmlPath);
-    } catch (e) {
+    } catch (e:any) {
       debug(`an error during processing of ${pageDataFile}. error message: ${e.message}`);
     }
   });

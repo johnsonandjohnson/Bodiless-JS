@@ -24,9 +24,9 @@ At end of Sprint, a new 0.0.x package version should be published as follows.
    ```
    git checkout -b release origin/release
    ```
-1. Merge in latest commits from master
+1. Merge in latest commits from main
    ```
-   git merge master
+   git merge main
    ```
 1. Initialize all dependencies and build the project:
    ```
@@ -38,7 +38,7 @@ At end of Sprint, a new 0.0.x package version should be published as follows.
    npm run publish:patch
    ```
 1. Update dependencies in `package-lock.json` for each example site by following [these steps](../Release/UpdatePackages?id=updating-example-sites39-package-lockjson).
-1. Create a PR to master from the ```release``` branch.  PR title should be, eg:
+1. Create a PR to main from the ```release``` branch.  PR title should be, eg:
    ```
    chore: Release v0.0.45
    ```
@@ -52,5 +52,5 @@ At end of Sprint, a new 0.0.x package version should be published as follows.
   normal semver bumps which would be created by conventional-commits are not
   appropriate. We use the `--conventional-commits` option to generate the
   changelog.
-- We push the commit to a release branch which must be merged to master using
+- We push the commit to a release branch which must be merged to main using
   the standard PR process.

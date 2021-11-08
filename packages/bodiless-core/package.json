@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/core",
-  "version": "0.2.10",
+  "version": "0.3.0",
   "description": "Edit context for BodilessJS site editor",
   "author": "Chris Oden <coden@its.jnj.com>",
   "license": "Apache-2.0",
@@ -21,12 +21,12 @@
   "scripts": {
     "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
-    "build:api-doc": "typedoc --excludePrivate --out doc/api --mode file",
+    "build:api-doc": "typedoc --out doc/api src",
     "lint": "tslint ./src/**/*.ts?x",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/fclasses": "^0.2.10",
+    "@bodiless/fclasses": "^0.3.0",
     "@types/react-tag-autocomplete": "^5.12.0",
     "enzyme": "^3.9.0",
     "informed": "~3.13.1",
@@ -40,8 +40,8 @@
     "uuid": "^3.3.2"
   },
   "peerDependencies": {
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@types/rc-tooltip": "^3.7.1",

@@ -19,14 +19,14 @@ import {
 } from '@bodiless/core';
 import type { ContentNode } from '@bodiless/core';
 import { asToken } from '@bodiless/fclasses';
-import { withContentLibrary } from '@bodiless/layouts';
-import { ComponentSelector } from '@bodiless/layouts-ui';
+import { withContentLibrary, ComponentSelector } from '@bodiless/layouts';
 import path from 'path';
 import type { AsBodilessImage } from './Image';
 
 // Adds image library to an asEditableImage hoc.
 const withImageLibrary = (
   asEditableImage: AsBodilessImage,
+  Selector = ComponentSelector,
 ) => (libraryNodeKey: string): AsBodilessImage => (
   nodeKeys,
   placeholder,
@@ -51,7 +51,7 @@ const withImageLibrary = (
     asImageHoc.meta,
     asImageHoc,
     withContentLibrary({
-      Selector: ComponentSelector,
+      Selector,
       useLibraryNode: useImageLibraryNode,
       useMeta: useImageMeta,
     }),

@@ -23,6 +23,7 @@ describe('getChanges', () => {
   afterEach(cleanGitFixture('get-changes'));
 
   it('properly lists no changes when none are there', async () => {
+    jest.setTimeout(30000);
     const result = await getChanges();
     expect(result.upstream.branch).toBe('origin/test-upstream-changes');
     expect(result.upstream.commits).toHaveLength(0);
@@ -30,6 +31,7 @@ describe('getChanges', () => {
   });
 
   it('lists no changes when there is no upstream branch', async () => {
+    jest.setTimeout(30000);
     await GitCmd.cmd().add('reset', '--hard', 'test-upstream-changes-local').exec();
     await GitCmd.cmd().add('checkout', '-b', 'foo').exec();
     const result = await getChanges();
@@ -39,6 +41,7 @@ describe('getChanges', () => {
   });
 
   it('lists upstream changes when they exist', async () => {
+    jest.setTimeout(30000);
     await GitCmd.cmd().add('reset', '--hard', 'test-upstream-changes-local').exec();
     const result = await getChanges();
     expect(result).not.toBeUndefined();

@@ -13,14 +13,13 @@
  */
 
 import React, { ComponentType, HTMLProps } from 'react';
-import { withNode, WithNodeProps } from '@bodiless/core';
+import { withNode } from '@bodiless/core';
 import {
   designable,
   DesignableComponentsProps,
   Div,
   Embed as BaseEmbed,
   asToken,
-  DesignableProps,
 } from '@bodiless/fclasses';
 
 type EmbedDesignableComponents = {
@@ -36,7 +35,6 @@ const startComponents: EmbedDesignableComponents = {
 };
 
 type EmbedBaseProps = DesignableComponentsProps<EmbedDesignableComponents>;
-type EmbedProps = DesignableProps<EmbedDesignableComponents> & WithNodeProps;
 
 const BaseEmbedComponent: ComponentType<EmbedBaseProps> = ({ components }) => {
   const {
@@ -52,7 +50,7 @@ const BaseEmbedComponent: ComponentType<EmbedBaseProps> = ({ components }) => {
   );
 };
 
-const Embed: ComponentType<EmbedProps> = asToken(
+const Embed = asToken(
   designable(startComponents, 'Embed'),
   withNode,
 )(BaseEmbedComponent);

@@ -30,7 +30,7 @@ import { MigrationApi } from '../src/migrationApi';
 import { GatsbyApp } from '../src/jamstack-app';
 
 function getDefaultPageParams(): PageCreatorParams {
-  jest.spyOn(fs, 'mkdirSync').mockImplementation(() => true);
+  jest.spyOn(fs, 'mkdirSync').mockImplementation(() => '/fake/path');
   const defaultPageUrl = 'https://localhost';
   const sitePath = '/app/examples/test-site';
   return {
@@ -122,7 +122,7 @@ describe('creation of pages', () => {
       downloadAssets: false,
     };
     const expectedFileContent = getExpectedContent('data/canvasx_test_page.jsx');
-    jest.spyOn(fs, 'mkdirSync').mockImplementation(() => true);
+    jest.spyOn(fs, 'mkdirSync').mockImplementation(() => '/fake/path');
     const writeFileSyncSpy = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => true);
     const pageCreator = new PageCreator(params);
     await pageCreator.createPage();
@@ -138,7 +138,7 @@ describe('creation of pages', () => {
       downloadAssets: false,
     };
     const expectedFileContent = getExpectedContent('data/canvasx_test_page.jsx');
-    jest.spyOn(fs, 'mkdirSync').mockImplementation(() => true);
+    jest.spyOn(fs, 'mkdirSync').mockImplementation(() => '/fake/path');
     const writeFileSyncSpy = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => true);
     const pageCreator = new PageCreator(params);
     await pageCreator.createPage();
@@ -165,7 +165,7 @@ describe('extract and downloads assets from css', () => {
   const params = getDefaultPageParams();
   const pageCreator = new PageCreator(params);
   test('extract assets from two css files', () => {
-    jest.spyOn(fs, 'mkdirSync').mockImplementation(() => true);
+    jest.spyOn(fs, 'mkdirSync').mockImplementation(() => '/fake/path');
     jest.spyOn(fs, 'writeFileSync').mockImplementation(() => true);
     jest.spyOn(fs, 'readFileSync').mockImplementation((resource: any) => {
       switch (resource) {
@@ -227,7 +227,7 @@ describe('break monolithic html down to jsx components', () => {
     const babelTypes = fs.readFileSync(require.resolve('@babel/types/package.json'));
     const jsesc = fs.readFileSync(require.resolve('jsesc/package.json'));
     const components: { [s: string]: string } = {};
-    jest.spyOn(fs, 'mkdirSync').mockImplementation(() => true);
+    jest.spyOn(fs, 'mkdirSync').mockImplementation(() => '/fake/path');
     jest.spyOn(fs, 'writeFileSync').mockImplementation(
       (path$: any, data: any) => {
         settings.rules.forEach(rule => {

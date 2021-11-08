@@ -23,8 +23,8 @@ import React, { FC } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount, ReactWrapper } from 'enzyme';
 import { flow } from 'lodash';
-import type { ComponentSelectorProps, ComponentWithMeta } from '../src/ComponentSelector/types';
-import withContentLibrary from '../src/ContentLibrary/withContentLibrary';
+import type { ComponentSelectorProps, ComponentWithMeta } from '../../src/ComponentSelector/types';
+import withContentLibrary from '../../src/ContentLibrary/withContentLibrary';
 
 const findContextMenuForm = (wrapper: ReactWrapper) => {
   const provider = wrapper.find(PageContextProvider);

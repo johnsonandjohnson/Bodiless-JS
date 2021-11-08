@@ -21,7 +21,7 @@ import type {
   Token, TokenFilterTest, AsToken as AsTokenBase,
 } from './types';
 
-const isToken = (def: TokenDef) => typeof def === 'function';
+const isToken = (def: TokenDef<any, any, any>) => typeof def === 'function';
 
 // Custom merge behavior for token categories.
 function mergeMeta(objValue:any, srcValue:any) {
@@ -130,7 +130,7 @@ export type AsToken<B = {}> = AsTokenBase<B> & {
  *
  * Tokens will be composed left-to-right (in lodash "flow" order).
  *
- * You can also attach metadata to this token by provding plain TokenMeta
+ * You can also attach metadata to this token by providing plain TokenMeta
  * objects as arguments in addition to tokens.
  *
  * @see TokenProps
@@ -161,7 +161,7 @@ const asToken: AsToken = (...args) => {
  * filters out those which match a provided test function.
  *
  * @param filter
- * The test functino which will be used to determine whether tokens
+ * The test function which will be used to determine whether tokens
  * should be filtered.
  *
  * @returns

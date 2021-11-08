@@ -45,8 +45,7 @@ const useMenuOptions = () => {
       if (!r.ok) throw new Error(r.statusText);
       const source = await r.text();
       node.setData({ source });
-    } catch (e) {
-      // eslint-disable-next-line no-alert
+    } catch (e: any) {
       alert(`Error: ${e.message}`);
     }
   };

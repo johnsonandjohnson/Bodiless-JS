@@ -75,11 +75,10 @@ const getBodilessTailwindConfig = async (siteName: string, siteDeps: string[]) =
   // 2. make sure the packages have been used in the site package,
   //    even the packages are not listing in site directly.
   pkgsHaveTailwindConfig.forEach(item => {
-    pkgFilters.push(new Promise((resolve, reject) => {
+    pkgFilters.push(new Promise((resolve) => {
       exec(`npm ls --json ${item.packageName}`, (err, stdout) => {
         if (stdout.indexOf(item.packageName) === -1) {
-          reject();
-          return false;
+          return resolve(false);
         }
 
         if (siteDeps.indexOf(item.packageName) > -1) {
