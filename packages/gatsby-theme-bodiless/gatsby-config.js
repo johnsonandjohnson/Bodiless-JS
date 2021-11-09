@@ -164,19 +164,6 @@ if (process.env.BODILESS_DEFAULT_CONTENT_AUTO_DISCOVERY === '1') {
   );
 }
 
-if (process.env.NODE_ENV === 'production') {
-  const disabledPages = Object.keys(disablePageList).filter(
-    item => disablePageList[item].pageDisabled === true,
-  );
-
-  if (disabledPages.length > 0) {
-    plugins.push({
-      resolve: 'gatsby-plugin-exclude',
-      options: { paths: disabledPages },
-    });
-  }
-}
-
 module.exports = {
   siteMetadata: {
     title: 'Bodiless-JS',
