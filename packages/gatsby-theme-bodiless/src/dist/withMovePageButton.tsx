@@ -75,29 +75,34 @@ const movePage = async ({ origin, destination, client } : any) => {
   if (directoryExists.message !== 'The page cannot be moved. Directory exists') {
     try {
       await handle(client.clonePage(origin, destination));
-    } catch (e) {
+    } catch (e: any) {
       return Promise.reject(new Error(e.message));
     }
 
-    const result = await handle(client.directoryChild(origin));
+    const hasChild = await handle(client.directoryChild(origin));
 
-    if (result.response && result.message === 'Success') {
+    console.log('result.response', hasChild.response);
+    console.log('result.message', hasChild.message);
+
+    let deleteResult;
+
+    if (hasChild.response && hasChild.message === 'Success') {
       try {
-        await handle(client.deletePage(origin));
-      } catch (e) {
+        deleteResult = await handle(client.deletePage(origin));
+      } catch (e: any) {
         return Promise.reject(new Error(e.message));
       }
     } else {
       try {
-        await handle(client.removeFile(origin));
-      } catch (e) {
+        deleteResult = await handle(client.removeFile(origin));
+      } catch (e: any) {
         return Promise.reject(new Error(e.message));
       }
     }
 
-    if (result.response) {
-      if (result.message !== 'Success' && typeof (result.message) === 'string') {
-        return Promise.reject(new Error(result.message));
+    if (deleteResult.response) {
+      if (deleteResult.message !== 'Success' && typeof (deleteResult.message) === 'string') {
+        return Promise.reject(new Error(deleteResult.message));
       }
       return Promise.resolve();
     }
