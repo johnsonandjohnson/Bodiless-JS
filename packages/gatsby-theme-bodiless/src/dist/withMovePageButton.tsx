@@ -81,9 +81,6 @@ const movePage = async ({ origin, destination, client } : any) => {
 
     const hasChild = await handle(client.directoryChild(origin));
 
-    console.log('result.response', hasChild.response);
-    console.log('result.message', hasChild.message);
-
     let deleteResult;
 
     if (hasChild.response && hasChild.message === 'Success') {
