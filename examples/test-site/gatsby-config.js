@@ -21,6 +21,9 @@ const disablePageList = getDisabledPages();
 const disabledPages = Object.keys(disablePageList).filter(
   item => disablePageList[item].pageDisabled === true || disablePageList[item].indexingDisabled,
 );
+const disabledPagesFully = Object.keys(disablePageList).filter(
+  item => disablePageList[item].pageDisabled === true,
+);
 
 // Gatsby plugins list.
 const plugins = [
@@ -77,10 +80,10 @@ if (tagManagerEnabled) {
   });
 }
 
-if (process.env.NODE_ENV === 'production' && disabledPages.length > 0) {
+if (process.env.NODE_ENV === 'production' && disabledPagesFully.length > 0) {
   plugins.push({
     resolve: 'gatsby-plugin-exclude',
-    options: { paths: disabledPages },
+    options: { paths: disabledPagesFully },
   });
 }
 
