@@ -14,22 +14,27 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
+import Helmet from 'react-helmet';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { withNodeKey } from '@bodiless/core';
 import {
   H1 as BaseH1,
   H2 as BaseH2,
   addClasses,
+  asToken,
 } from '@bodiless/fclasses';
 import { getSnapFrom, withTailwindClasses } from '@bodiless/layouts';
-import { flow } from 'lodash';
-import Helmet from 'react-helmet';
+// @ts-ignore Could not find a declaration file...
 import resolveConfig from 'tailwindcss/resolveConfig';
 import Layout from '../../../components/Layout';
-import { FlowContainerDefaultRTL } from '../../../components/FlowContainer';
+import {
+  FlowContainerDefaultRTL,
+  FlowContainerWithContentLibraryRTL,
+} from '../../../components/FlowContainer';
+// @ts-ignore Could not find a declaration file...
 import tailWindConfig from '../../../../tailwind.config';
 
-const RTLFlowContainer = flow(
+const RTLFlowContainer = asToken(
   withNodeKey('rtlFlowContainer'),
 )(FlowContainerDefaultRTL);
 
@@ -45,11 +50,19 @@ const FlowContainerPage = (props: any) => (
     <Helmet htmlAttributes={{ dir: 'rtl' }} />
     <Layout>
       <H1>RTL FlowContainer Examples</H1>
+
       <H2>Default Flow Container RTL</H2>
       <RTLFlowContainer
         id="rtl-flow-container"
         nodeKey="rtl_default"
       />
+
+      <H2>Content Library FlowContainer RTL</H2>
+      <FlowContainerWithContentLibraryRTL
+        id="rtl-flow-container-with-library"
+        nodeKey="rtl_flow_container_with_library"
+      />
+
       <H2>
         FlowContainer with constrained width of 100% only
       </H2>
@@ -84,6 +97,7 @@ export const query = graphql`
   query($slug: String!) {
     ...PageQuery
     ...SiteQuery
+    ...DefaultContentQuery
   }
 `;
 export default FlowContainerPage;

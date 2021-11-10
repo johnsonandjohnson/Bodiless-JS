@@ -21,18 +21,19 @@ import React, {
 import Tooltip from 'rc-tooltip';
 import 'rc-tooltip/assets/bootstrap.css';
 import uiContext from './uiContext';
-import { ComponentWithMeta, ItemListProps } from './types';
-
-enum Scale {
-  Full = 1,
-  Half = 2,
-  Quarter = 4
-}
+import { ComponentWithMeta, ItemListProps, ComponentSelectorScale as Scale } from './types';
 
 const ItemList: React.FC<ItemListProps> = props => {
-  const { components, onSelect } = props;
+  const { components, onSelect, scale: startScale = Scale.Full } = props;
   const finalUI = useContext(uiContext);
-  const [scale, setScale] = useState(Scale.Full);
+  const [scale, setScale] = useState(startScale);
+
+  // Function to build a default title for a component from its categories.
+  const title = (component: ComponentWithMeta) => component.title || component.displayName;
+
+  // Function to build a default description for a component from its categories.
+  const description = (component: ComponentWithMeta) => component.description || 'No description';
+
   const getRowHeight = () => {
     if (components.length <= scale) {
       return 'auto';
@@ -87,15 +88,16 @@ const ItemList: React.FC<ItemListProps> = props => {
   const elems: ReactNode[] = components.slice(0, maxComponents).map(
     (Component: ComponentWithMeta<any>) => (
       <finalUI.ItemBoxWrapper style={boxStyle} key={Component.displayName}>
-        <finalUI.ItemBox key={Component.displayName}>
+        <finalUI.ItemBox key={Component.displayName} data-item-id={Component.displayName}>
           <finalUI.TitleWrapper style={outerStyle}>
-            {Component.title || Component.displayName || 'Untitled'}
+            {title(Component)}
           </finalUI.TitleWrapper>
           <div
             className="bl-outerTransform bl-relative bl-w-full bl-bg-white"
           >
             <Component />
           </div>
+          {description(Component) && (
           <Tooltip
             placement="rightBottom"
             mouseLeaveDelay={0}
@@ -104,9 +106,9 @@ const ItemList: React.FC<ItemListProps> = props => {
             }}
             overlay={(
               <finalUI.ComponentDescriptionWrapper>
-                <h3>{Component.title}</h3>
+                <h3>{title(Component)}</h3>
                 <finalUI.ComponentDescriptionStyle>
-                  <p>{Component.description}</p>
+                  {description(Component)}
                 </finalUI.ComponentDescriptionStyle>
               </finalUI.ComponentDescriptionWrapper>
           )}
@@ -115,6 +117,7 @@ const ItemList: React.FC<ItemListProps> = props => {
               info
             </finalUI.ComponentDescriptionIcon>
           </Tooltip>
+          )}
           <finalUI.ComponentSelectButton
             type="submit"
             onClick={() => onSelect([Component.displayName])}
@@ -132,7 +135,9 @@ const ItemList: React.FC<ItemListProps> = props => {
       </finalUI.ItemBox>
     </finalUI.ItemBoxWrapper>
   );
-  const isActive = (currentScale:Scale) => (currentScale === scale ? 'bl-bg-primary bl-text-white' : '');
+  const isActive = (currentScale:Scale) => (
+    currentScale === scale ? 'bl-bg-primary bl-text-white' : ''
+  );
   return (
     <finalUI.GridListBox>
       <finalUI.ScalingHeader>

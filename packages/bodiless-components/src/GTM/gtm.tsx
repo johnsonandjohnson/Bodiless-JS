@@ -110,7 +110,7 @@ const withDataLayerScript = (HelmetComponent: CT<BaseProps>) => (
   return (
     <HelmetComponent {...rest}>
       {children}
-      <script>{generateDataLayer(dataLayerData, dataLayerName)}</script>
+      <script data-cfasync="false">{generateDataLayer(dataLayerData, dataLayerName)}</script>
     </HelmetComponent>
   );
 };

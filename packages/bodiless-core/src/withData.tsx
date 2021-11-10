@@ -12,16 +12,18 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
+import React from 'react';
+import { HOC } from '@bodiless/fclasses';
 
 export type HasDataProp<D> = {
   componentData: D;
 };
 
-const withData = <P extends object, D extends Object>(
-  Component: CT<P | D> | string,
-) => ({ componentData, ...rest }: P & HasDataProp<D>) => (
-  <Component {...rest} {...componentData} />
+const withData: HOC<{}, HasDataProp<any>> = Component => {
+  const WithData = ({ componentData, ...rest }: HasDataProp<any>) => (
+    <Component {...rest} {...componentData} />
   );
+  return WithData;
+};
 
 export default withData;

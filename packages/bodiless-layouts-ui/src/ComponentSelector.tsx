@@ -13,13 +13,16 @@
  */
 
 import React, { FC } from 'react';
-import MaterialIcon, { MaterialIconDefaultProps } from '@material/react-material-icon';
 import { addClasses } from '@bodiless/fclasses';
 import {
   SubmitButton as SubmitButtonBase, Div, Span, Label, Input,
   Button, Anchor, ComponentFormTitle, ComponentFormLink,
 } from '@bodiless/ui';
-import { ComponentSelector as CleanComponentSelector, ComponentSelectorUI, ComponentSelectorProps } from '@bodiless/layouts';
+import {
+  ComponentSelector as CleanComponentSelector,
+  componentSelectorForm as componentSelectorFormClean,
+} from '@bodiless/layouts';
+import type { ComponentSelectorUI, ComponentSelectorProps, ComponentSelectorFormProps } from '@bodiless/layouts';
 
 /**
  * Checkbox component used on flow container.
@@ -50,7 +53,7 @@ export const ui: ComponentSelectorUI = {
   )(Div),
   ItemBoxWrapper: addClasses('bl-p-grid-2')(Div),
   ItemBox: addClasses(
-    'bl-bg-grey-200 bl-flex bl-flex-col bl-items-center bl-p-grid-2 bl-h-full bl-w-full bl-relative bl-overflow-hidden bl-cursor-pointer',
+    'bl-bg-gray-200 bl-flex bl-flex-col bl-items-center bl-p-grid-2 bl-h-full bl-w-full bl-relative bl-overflow-hidden bl-cursor-pointer',
   )(Div),
   GridListBoxWrapper: addClasses(
     'bl-w-full bl-h-xl-grid-2',
@@ -64,7 +67,7 @@ export const ui: ComponentSelectorUI = {
   )(Div),
 
   TitleWrapper: addClasses(
-    'bl-font-semibold bl-text-sm bl-text-grey-800',
+    'bl-font-semibold bl-text-sm bl-text-gray-800',
   )(Span),
 
   ComponentTitleWrapper: ComponentFormTitle,
@@ -76,7 +79,7 @@ export const ui: ComponentSelectorUI = {
   )(Span),
 
   ComponentSelectorWrapper: addClasses(
-    'bl-text-white bl-mr-grid-3  bl-whitespace-no-wrap',
+    'bl-text-white bl-mr-grid-3  bl-whitespace-nowrap',
   )(Div),
 
   SubmitButton: addClasses(
@@ -108,7 +111,7 @@ export const ui: ComponentSelectorUI = {
   )(Div),
 
   SearchBar: addClasses(
-    'bl-border bl-border-grey bl-p-grid-1 bl-w-full',
+    'bl-border bl-border-gray bl-p-grid-1 bl-w-full',
   )(Input),
 
   AccordionLabel: addClasses(
@@ -116,11 +119,11 @@ export const ui: ComponentSelectorUI = {
   )(Label),
 
   AccordionIconContract: () => (
-    <MaterialIcon className="bl-mr-2" icon="expand_less" />
+    <span className="material-icons bl-mr-2">expand_less</span>
   ),
 
   AccordionIconExpand: () => (
-    <MaterialIcon className="bl-mr-2" icon="expand_more" />
+    <span className="material-icons bl-mr-2">expand_more</span>
   ),
 
   ComponentDescriptionWrapper: addClasses(
@@ -132,21 +135,25 @@ export const ui: ComponentSelectorUI = {
   )(Div),
 
   ComponentDescriptionIcon: addClasses(
-    'bl-absolute bl-top-grid-0 bl-right-grid-0 material-icons bl-z-20 bl-text-grey-800 bl-m-grid-1',
+    'bl-absolute bl-top-grid-0 bl-right-grid-0 material-icons bl-z-20 bl-text-gray-800 bl-m-grid-1',
   )(Div),
 
   ComponentSelectButton: addClasses(
     'bl-absolute bl-z-10 bl-top-grid-0 bl-left-grid-0 bl-w-full bl-h-full bl-opacity-0',
   )(Button),
 
-  ScalingHeader: addClasses('bl-w-full bl-cursor-pointer bl-justify-end bl-text-grey-900 bl-p-grid-2 bl-flex')(Div),
-  ScalingButtonFull: (props:MaterialIconDefaultProps) => <MaterialIcon {...props} icon="view_stream" />,
-  ScalingButtonHalf: (props:MaterialIconDefaultProps) => <MaterialIcon {...props} icon="view_module" />,
-  ScalingButtonQuarter: (props:MaterialIconDefaultProps) => <MaterialIcon {...props} icon="view_comfy" />,
+  ScalingHeader: addClasses('bl-w-full bl-cursor-pointer bl-justify-end bl-text-gray-900 bl-p-grid-2 bl-flex')(Div),
+  ScalingButtonFull: (props) => <span className="material-icons"><span {...props}>view_stream</span></span>,
+  ScalingButtonHalf: (props) => <span className="material-icons"><span {...props}>view_module</span></span>,
+  ScalingButtonQuarter: (props) => <span className="material-icons"><span {...props}>view_comfy</span></span>,
 };
 
 const ComponentSelector: FC<ComponentSelectorProps> = props => (
   <CleanComponentSelector ui={ui} {...props} />
 );
+
+export const componentSelectorForm = (
+  props: ComponentSelectorFormProps,
+) => componentSelectorFormClean({ ...props, ui });
 
 export default ComponentSelector;

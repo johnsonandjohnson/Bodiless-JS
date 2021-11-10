@@ -67,13 +67,13 @@ Additional labels that can be used as needed:
 
 ## Commits
 
-We do not commit directly to the `master` branch, and since all pull requests will get squashed during merge, 
+We do not commit directly to the `main` branch, and since all pull requests will get squashed during merge, 
 standalone commits' messages do not matter. Commit message format or commit frequency is not regulated. 
 However commit messages should not contain spam, harassment, and other immoral or illegal content.  
 
 ## Pull Requests
 
-All work must be submitted in the form of a pull request to the master branch.
+All work must be submitted in the form of a pull request to the main branch.
 
 ## Raising Pull Requests
 
@@ -96,12 +96,12 @@ All work must be submitted in the form of a pull request to the master branch.
 ## Merging Pull Request
 
 Once a pull request receives the required approvals, it will be merged to the
-master branch.
+main branch.
 
 All pull requests must be merged using [Squash and merge](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits) strategy. 
 
 When using Squash and merge strategy, a new squash commit that contains all the changes from 
-the pull request is created by the GitHub. This commit is going to get merged into the master branch. 
+the pull request is created by the GitHub. This commit is going to get merged into the main branch. 
 
 In the UI GitHub breaks the commit message into 2 fields: commit title and description. Technically title is
 just the first line of the git commit message, and the description is all the other lines, separated from the title 

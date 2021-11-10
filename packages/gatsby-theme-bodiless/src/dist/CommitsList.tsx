@@ -117,7 +117,7 @@ const CommitsList = ({ client, ui }: Props) => {
           content: handleResponse(response.data),
         });
         context.hidePageOverlay();
-      } catch (error) {
+      } catch (error: any) {
         const errorMessage = error.message || 'An unexpected error has occurred';
         setState({
           content: <ComponentFormWarning>{errorMessage}</ComponentFormWarning>,

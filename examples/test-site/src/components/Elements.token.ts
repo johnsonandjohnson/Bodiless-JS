@@ -12,13 +12,14 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
-import { addClasses, removeClasses } from '@bodiless/fclasses';
+import { WithNodeKeyProps } from '@bodiless/core';
 import {
-  asBodilessLink,
+  addClasses, removeClasses, asToken, Token,
+} from '@bodiless/fclasses';
+import {
   asEditable as asEditableCore,
 } from '@bodiless/components';
-import { asBodilessImage } from '@bodiless/components-ui';
+import { asBodilessLink } from '@bodiless/components-ui';
 import {
   asResponsive21By9Embed,
   asResponsive16By9Embed,
@@ -32,7 +33,14 @@ import {
   asUnderline,
   asAlignJustify,
 } from './ElementDefault.token';
-import { WithNodeKeyProps } from '../../../../packages/bodiless-organisms/node_modules/@bodiless/core/lib';
+
+export const withCategory = <P extends object>(category?: string) => (...hocs: Token[]) => (
+  asToken(
+    {}, // see https://github.com/microsoft/TypeScript/issues/28010
+    ...hocs,
+    category ? asToken.meta.term('Category')(category) : undefined,
+  )
+);
 
 /* Page Structure */
 const asBlockItem = addClasses('p-1 w-full');
@@ -47,7 +55,7 @@ const withPadding5 = addClasses('p-5');
 
 /* Responsive design */
 const asMobileOnly = addClasses('lg:hidden');
-const asDesktopOnly = flow(
+const asDesktopOnly = asToken(
   addClasses('hidden lg:flex'),
   removeClasses('flex'),
 );
@@ -66,11 +74,11 @@ const asLightTealBackgroundOnHover = addClasses('hover:bg-teal-500');
 const asBold = addClasses('font-bold');
 const asItalic = addClasses('italic');
 const asLink = addClasses('text-blue-700 underline');
-const asActiveMenuLink = flow(asBold, addClasses('bg-teal-500'));
+const asActiveMenuLink = asToken(asBold, addClasses('bg-teal-500'));
 const asStrikeThrough = addClasses('');
 const asSuperScript = addClasses('');
 
-const asHeader1 = flow(addClasses('text-3xl'), asTextColorPrimary);
+const asHeader1 = asToken(addClasses('text-3xl'), asTextColorPrimary);
 const asHeader2 = addClasses('text-2xl');
 const asHeader3 = addClasses('text-xl');
 
@@ -79,7 +87,6 @@ const asBlockQuote = addClasses('block mx-4');
 
 /* Image component */
 const asImage = addClasses('');
-const asEditableImage = asBodilessImage;
 const asImageRounded = addClasses('rounded-lg');
 
 /* Link component */
@@ -98,7 +105,7 @@ const asEditable = (nodeKeys?: WithNodeKeyProps, placeholder?: string) => asEdit
   }),
 );
 
-// Tout Components
+// Card Components
 const asCta = addClasses('bg-orange-700 hover:bg-orange-600 text-center text-white p-2 rounded');
 
 /* Utility Classes */
@@ -127,7 +134,6 @@ export {
   asLightTealBackground,
   asLightTealBackgroundOnHover,
   asImage,
-  asEditableImage,
   asEditableLink,
   asEditable,
   asImageRounded,

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, ComponentType } from 'react';
 import { observer } from 'mobx-react-lite';
 import { flow } from 'lodash';
 import {
@@ -26,7 +26,7 @@ import {
 } from '@bodiless/fclasses';
 import EditFlowContainer from './EditFlowContainer';
 import StaticFlowContainer from './StaticFlowContainer';
-import { EditFlowContainerProps } from './types';
+import { EditFlowContainerProps, FlowContainerProps } from './types';
 
 const FlowContainerBasic: FC<EditFlowContainerProps> = props => {
   const { isEdit } = useEditContext();
@@ -46,6 +46,6 @@ const withMandatoryCategories = (categories: string[]) => addProps({
   mandatoryCategories: categories,
 });
 
-const FlowContainer = withNode(FlowContainerDesignable);
+const FlowContainer = withNode(FlowContainerDesignable) as ComponentType<FlowContainerProps>;
 export default FlowContainer;
 export { withMandatoryCategories };

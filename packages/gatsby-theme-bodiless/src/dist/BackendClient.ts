@@ -86,7 +86,28 @@ export default class BackendClient {
       path: path$,
       template,
     };
-    return this.post(`${this.prefix}/pages`, payload);
+
+    const url = `${this.prefix}/pages`;
+    return this.post(url, payload);
+  }
+
+  deletePage(path$: string) {
+    const url = `${this.prefix}/remove/${path$}`;
+    return this.delete(url);
+  }
+
+  directoryChild(path$: string) {
+    const url = `${this.prefix}/directory/child${path$}`;
+    return this.delete(url);
+  }
+
+  clonePage(origin: string, destination: string) {
+    const payload = {
+      origin,
+      destination,
+    };
+    const url = `${this.prefix}/clone`;
+    return this.post(url, payload);
   }
 
   commit(
@@ -148,7 +169,7 @@ export default class BackendClient {
     return this.get(`${this.prefix}/changes/conflicts${$param}`);
   }
 
-  mergeMaster() {
-    return this.post(`${this.prefix}/merge/master`, {});
+  mergeMain() {
+    return this.post(`${this.prefix}/merge/main`, {});
   }
 }

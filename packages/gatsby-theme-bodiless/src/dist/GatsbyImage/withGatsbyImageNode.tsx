@@ -12,28 +12,40 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
+import React, { FC } from 'react';
 import {
-  DefaultContentNode,
   NodeProvider,
   useNode,
+  WithNodeProps,
 } from '@bodiless/core';
-import type { WithNodeProps } from '@bodiless/core';
-import GatsbyImageNode from './GatsbyImageNode';
+import { Token } from '@bodiless/fclasses';
+import GatsbyImagePresets from './GatsbyImagePresets';
 
-const withGatsbyImageNode = (preset: string) => <P extends object>(Component: CT<P>) => {
-  const WithGatsbyImageNode = ({
-    nodeKey,
-    nodeCollection,
-    ...rest
-  }: P & WithNodeProps) => {
-    if (!nodeKey) return <Component {...rest as P} />;
+const withGatsbyImageNode = (
+  preset: GatsbyImagePresets,
+): Token => Component => {
+  const WithGatsbyImageNode: FC<any> = props => {
+    const { nodeKey, nodeCollection, ...rest } = props as WithNodeProps;
+    if (!nodeKey) return <Component {...rest as any} />;
     const { node } = useNode(nodeCollection);
-    // eslint-disable-next-line max-len
-    const gatsbyImgNode = GatsbyImageNode.create((node as DefaultContentNode<object>), nodeKey, preset);
+    const childNode = node.child(nodeKey);
+    const gatsbyImgNode = childNode.proxy({
+      // Setter which saves the preset, making it available to the Gatsby node API.
+      setData: (data: any) => ({
+        ...data,
+        preset,
+        gatsbyImg: undefined,
+      }),
+      // Getter which attaches the preset as defined in code, so that
+      // the logger can flag any discrepancies.
+      getData: (data: any) => ({
+        ...data,
+        canonicalPreset: preset,
+      }),
+    });
     return (
       <NodeProvider node={gatsbyImgNode} collection={nodeCollection}>
-        <Component {...rest as P} />
+        <Component {...rest as any} />
       </NodeProvider>
     );
   };

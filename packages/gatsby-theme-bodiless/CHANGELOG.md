@@ -3,6 +3,165 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.10...v0.3.0) (2021-11-01)
+
+
+### Features
+
+* **bodiless-backend,gatsby-theme-bodiless:** Add page clone button  ([#1144](https://github.com/johnsonandjohnson/bodiless-js/issues/1144)) ([6aa65c1](https://github.com/johnsonandjohnson/bodiless-js/commit/6aa65c146e7c30b23b467fa22cd9bc5f7cb80f35))
+* **components, layouts:** Enable use of component selector in chameleons. ([#1187](https://github.com/johnsonandjohnson/bodiless-js/issues/1187)) ([770a187](https://github.com/johnsonandjohnson/bodiless-js/commit/770a187498d8376225e20a9edd87d29c331045f7))
+* **gatsby-theme-bodiless:** Implements delete page functionality - Fixes ([#392](https://github.com/johnsonandjohnson/bodiless-js/issues/392))  ([#1162](https://github.com/johnsonandjohnson/bodiless-js/issues/1162)) ([768414c](https://github.com/johnsonandjohnson/bodiless-js/commit/768414c0491b7e183949bdb0040681fbab82b669))
+* **gatsby-theme-bodiless:** Implements delete page functionality ([#392](https://github.com/johnsonandjohnson/bodiless-js/issues/392)) ([#1125](https://github.com/johnsonandjohnson/bodiless-js/issues/1125)) ([8f52447](https://github.com/johnsonandjohnson/bodiless-js/commit/8f52447c5a03222c068d8cfb1a973e34d944f21c))
+
+
+
+
+
+## [0.2.10](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.9...v0.2.10) (2021-10-01)
+
+
+### Features
+
+* **components:** Add page disable button ([cfbfc20](https://github.com/johnsonandjohnson/bodiless-js/commit/cfbfc20592d7cd7ad630deb0fabbf6432d002d70))
+* **filtering:** Register filterable items ([#1107](https://github.com/johnsonandjohnson/bodiless-js/issues/1107)) ([97b50bc](https://github.com/johnsonandjohnson/bodiless-js/commit/97b50bc2971e8a18a0cf31b7c37cf161d0a50576))
+
+
+
+
+
+## [0.2.9](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.8...v0.2.9) (2021-08-20)
+
+**Note:** Version bump only for package @bodiless/gatsby-theme-bodiless
+
+
+
+
+
+## [0.2.8](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.7...v0.2.8) (2021-07-28)
+
+**Note:** Version bump only for package @bodiless/gatsby-theme-bodiless
+
+
+
+
+
+## [0.2.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.6...v0.2.7) (2021-07-20)
+
+**Note:** Version bump only for package @bodiless/gatsby-theme-bodiless
+
+
+
+
+
+## [0.2.6](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.5...v0.2.6) (2021-07-20)
+
+**Note:** Version bump only for package @bodiless/gatsby-theme-bodiless
+
+
+
+
+
+## [0.2.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.4...v0.2.5) (2021-07-16)
+
+
+### Features
+
+* **filtering:** Filter Enhancements ([#1021](https://github.com/johnsonandjohnson/bodiless-js/issues/1021)) ([20bd3e1](https://github.com/johnsonandjohnson/bodiless-js/commit/20bd3e1afe534629be1deedf69bdf8e27c71f151))
+
+
+
+
+
+## [0.2.4](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.3...v0.2.4) (2021-07-02)
+
+**Note:** Version bump only for package @bodiless/gatsby-theme-bodiless
+
+
+
+
+
+## [0.2.3](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.2...v0.2.3) (2021-06-14)
+
+
+### Features
+
+* **gatsby-theme-bodiless:** Inject canonical preset to gatsby image node. ([#998](https://github.com/johnsonandjohnson/bodiless-js/issues/998)) ([713356e](https://github.com/johnsonandjohnson/bodiless-js/commit/713356e8de8f8df7dc4b4cbdf5e7f3b910083005))
+
+
+
+
+
+## [0.2.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.1...v0.2.2) (2021-06-08)
+
+
+### Bug Fixes
+
+* enhanced tailwind.config.js resolution ([#935](https://github.com/johnsonandjohnson/bodiless-js/issues/935)) ([732dc60](https://github.com/johnsonandjohnson/bodiless-js/commit/732dc6026e34b4cccb2caa41381df133cf78a358))
+
+
+### Features
+
+* **components:** Link to Downloadable Files ([#985](https://github.com/johnsonandjohnson/bodiless-js/issues/985)) ([f8782b4](https://github.com/johnsonandjohnson/bodiless-js/commit/f8782b4b77964ce93b733052c9e3c31f88cac901))
+
+
+
+
+
+## [0.2.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.0...v0.2.1) (2021-05-12)
+
+**Note:** Version bump only for package @bodiless/gatsby-theme-bodiless
+
+
+
+
+
+## [0.2.0](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.72...v0.2.0) (2021-04-28)
+
+**Note:** Version bump only for package @bodiless/gatsby-theme-bodiless
+
+
+
+
+
+## [0.0.72](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.71...v0.0.72) (2021-04-01)
+
+**Note:** Version bump only for package @bodiless/gatsby-theme-bodiless
+
+
+
+
+
+## [0.0.71](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.70...v0.0.71) (2021-03-31)
+
+
+### Features
+
+* **core,components:** Edit button improvements ([#878](https://github.com/johnsonandjohnson/bodiless-js/issues/878)) ([4d762b9](https://github.com/johnsonandjohnson/bodiless-js/commit/4d762b91f10c714dab1ad827002f4026b0beffbb)), closes [#624](https://github.com/johnsonandjohnson/bodiless-js/issues/624) [#794](https://github.com/johnsonandjohnson/bodiless-js/issues/794) [#624](https://github.com/johnsonandjohnson/bodiless-js/issues/624) [#794](https://github.com/johnsonandjohnson/bodiless-js/issues/794)
+* **gatsby-theme-bodiless:** Bodiless Image Refresh ([#860](https://github.com/johnsonandjohnson/bodiless-js/issues/860)) ([c696757](https://github.com/johnsonandjohnson/bodiless-js/commit/c69675757a448800e85fc300d5b5ceaa8ec66efe))
+* **gatsby-theme-bodiless:** gatsby link ([#928](https://github.com/johnsonandjohnson/bodiless-js/issues/928)) ([f40d23d](https://github.com/johnsonandjohnson/bodiless-js/commit/f40d23dd6b3a8d4c9018863e7c5c8a6430bf735d))
+
+
+### BREAKING CHANGES
+
+* **core,components:** Structure of compound form data has changed.
+
+Fields in compound forms are now namespaced by the snippet id.
+
+Since edit forms (those created by withEditButton or asBodilessComponent) are now
+compound forms, this change affects them as well.
+
+
+
+
+
+## [0.0.70](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.69...v0.0.70) (2021-02-24)
+
+**Note:** Version bump only for package @bodiless/gatsby-theme-bodiless
+
+
+
+
+
 ## [0.0.69](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.68...v0.0.69) (2021-02-12)
 
 

@@ -17,7 +17,6 @@ import React, {
   ComponentType,
 } from 'react';
 import SlateEditorContext from './SlateEditorContext';
-import '@material/react-material-icon/dist/material-icon.css';
 import {
   EditorOnChange,
   EditableProps,

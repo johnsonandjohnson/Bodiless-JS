@@ -13,7 +13,9 @@
  */
 
 import React, { FC, ReactNode, useCallback } from 'react';
-import { Form, FormApi, FormState } from 'informed';
+import {
+  Form, FormApi, FormState, FormValues,
+} from 'informed';
 import { flow } from 'lodash';
 import { withClickOutside } from './hoc';
 import { useMenuOptionUI } from './components/ContextMenuContext';
@@ -26,11 +28,21 @@ export type Options<D> = {
   hasSubmit?: ((componentData: D) => boolean) | boolean;
 };
 
+/**
+ * The type of the props that are passed to a form body renderer.
+ */
 export type FormBodyProps<D> = ContextMenuFormProps & Options<D> & {
   formApi: FormApi<D>;
-  formState: FormState<D>;
+  formState: FormState<D & FormValues>;
+  scope?: string;
 };
 
+/**
+ * The type of the render function which may be provided as the `children`
+ * prop to a `ContextMenuForm`
+ *
+ * @see ContextMenuForm
+ */
 export type FormBodyRenderer<D> = (props: FormBodyProps<D>) => ReactNode;
 
 export type ContextMenuPropsType<D> = ContextMenuFormProps & Options<D> & {

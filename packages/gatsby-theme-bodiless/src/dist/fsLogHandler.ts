@@ -15,11 +15,8 @@
 /* eslint-disable global-require */
 
 declare global {
-  namespace NodeJS {
-    interface Global {
-      BODILESS_GATSBY_LOGS: string[];
-    }
-  }
+  // eslint-disable-next-line
+  var BODILESS_GATSBY_LOGS: string[];
 }
 
 const LOG_FILE = 'gatsby_error.log';
@@ -65,7 +62,7 @@ const clear = () => {
     const { unlinkSync } = require('fs');
     unlinkSync(LOG_FILE);
   } catch (e) {
-    if (e.code !== 'ENOENT') {
+    if ((e as any).code !== 'ENOENT') {
       throw e;
     }
   }

@@ -23,7 +23,7 @@ const path = require('path');
 const uniq = require('lodash/uniq');
 const Page = require('./page');
 const GitCmd = require('./GitCmd');
-const { getChanges, getConflicts, mergeMaster } = require('./git');
+const { getChanges, getConflicts, mergeMain } = require('./git');
 const { copyAllFiles } = require('./fileHelper');
 const Logger = require('./logger');
 
@@ -275,13 +275,16 @@ class Backend {
     this.setRoute(`${backendPrefix}/change/push`, Backend.setChangePush);
     this.setRoute(`${backendPrefix}/change/reset`, Backend.setChangeReset);
     this.setRoute(`${backendPrefix}/change/pull`, Backend.setChangePull);
-    this.setRoute(`${backendPrefix}/merge/master`, Backend.mergeMaster);
+    this.setRoute(`${backendPrefix}/merge/main`, Backend.mergeMain);
     this.setRoute(`${backendPrefix}/asset/*`, Backend.setAsset);
     this.setRoute(`${backendPrefix}/set/current`, Backend.setSetCurrent);
     this.setRoute(`${backendPrefix}/set/list`, Backend.setSetList);
     this.setRoute(`${backendPrefix}/content/*`, Backend.setContent);
     this.setRoute(`${backendPrefix}/log`, Backend.log);
     this.setRoute(`${backendPrefix}/pages`, Backend.setPages);
+    this.setRoute(`${backendPrefix}/clone`, Backend.clonePage);
+    this.setRoute(`${backendPrefix}/remove/*`, Backend.removePage);
+    this.setRoute(`${backendPrefix}/directory/child/*`, Backend.directoryChild);
   }
 
   setRoute(route, action) {
@@ -423,10 +426,10 @@ class Backend {
     });
   }
 
-  static mergeMaster(route) {
+  static mergeMain(route) {
     route.post(async (req, res) => {
       try {
-        const status = await mergeMaster();
+        const status = await mergeMain();
         res.send(status);
       } catch (error) {
         logger.log(error);
@@ -605,10 +608,56 @@ class Backend {
     return new Page(pagePath);
   }
 
+  static removePage(route) {
+    route
+      .delete((req, res) => {
+        const pagePath = req.params[0];
+        const page = Backend.getPage(pagePath);
+        page.setBasePath(backendPagePath);
+
+        logger.log(`Start deleting page:${page.directory}`);
+
+        page
+          .deleteDirectory()
+          .then(error => {
+            if (error) {
+              logger.log(error);
+              res.send(error);
+            } else {
+              res.send({});
+            }
+          });
+      });
+  }
+
+  static directoryChild(route) {
+    route
+      .delete((req, res) => {
+        const pagePath = req.params[0];
+        const page = Backend.getPage(pagePath);
+
+        page.setBasePath(backendPagePath);
+
+        logger.log(`Start verify page child directory: ${page.directory}`);
+
+        page
+          .hasChildDirectory()
+          .then(error => {
+            if (error) {
+              logger.log(error);
+              res.send(error);
+            } else {
+              res.send({});
+            }
+          });
+      });
+  }
+
   static setPages(route) {
     route.post((req, res) => {
-      const pagePath = req.body.path || '';
-      const template = req.body.template || '_default';
+      const { body } = req;
+      const pagePath = body.path || '';
+      const template = body.template || '_default';
       const filePath = path.join(pagePath, 'index');
       const pageContent = {
         '#template': template,
@@ -631,6 +680,30 @@ class Backend {
         .catch(reason => {
           logger.log(reason);
           res.send({});
+        });
+    });
+  }
+
+  static clonePage(route) {
+    route.post(async (req, res) => {
+      const { body: { origin, destination } } = req;
+      const page = Backend.getPage(destination);
+      page.setBasePath(backendPagePath);
+      logger.log(`Start cloning page for:${destination}`);
+
+      page
+        .copyDirectory(origin, destination)
+        .then(data => {
+          if (data) {
+            logger.log(data);
+            res.send(data);
+          } else {
+            res.send({});
+          }
+        })
+        .catch(reason => {
+          logger.log(reason);
+          res.status(500).send(`${reason}`);
         });
     });
   }

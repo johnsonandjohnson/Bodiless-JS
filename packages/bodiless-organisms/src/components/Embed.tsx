@@ -13,13 +13,13 @@
  */
 
 import React, { ComponentType, HTMLProps } from 'react';
-import { flowRight } from 'lodash';
 import { withNode } from '@bodiless/core';
 import {
   designable,
   DesignableComponentsProps,
   Div,
   Embed as BaseEmbed,
+  asToken,
 } from '@bodiless/fclasses';
 
 type EmbedDesignableComponents = {
@@ -34,9 +34,9 @@ const startComponents: EmbedDesignableComponents = {
   Item: BaseEmbed,
 };
 
-type EmbedProps = DesignableComponentsProps<EmbedDesignableComponents>;
+type EmbedBaseProps = DesignableComponentsProps<EmbedDesignableComponents>;
 
-const BaseEmbedComponent: ComponentType<EmbedProps> = ({ components }) => {
+const BaseEmbedComponent: ComponentType<EmbedBaseProps> = ({ components }) => {
   const {
     Wrapper,
     AspectRatio,
@@ -50,9 +50,9 @@ const BaseEmbedComponent: ComponentType<EmbedProps> = ({ components }) => {
   );
 };
 
-const Embed = flowRight(
-  withNode,
+const Embed = asToken(
   designable(startComponents, 'Embed'),
+  withNode,
 )(BaseEmbedComponent);
 
 export default Embed;

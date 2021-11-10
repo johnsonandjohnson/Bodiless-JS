@@ -12,14 +12,17 @@
  * limitations under the License.
  */
 
-import React, { FC, PropsWithChildren } from 'react';
+import React, { FC } from 'react';
+import { createHash } from 'crypto';
 import { arrayMove, SortEnd } from 'react-sortable-hoc';
 import { observer } from 'mobx-react-lite';
 import { flowRight } from 'lodash';
 import {
-  withActivateOnEffect, withNode, withMenuOptions,
+  withNode, withMenuOptions, withResizeDetector, withActivateOnEffect,
 } from '@bodiless/core';
-import { designable, stylable } from '@bodiless/fclasses';
+import {
+  designable, stylable, ComponentOrTag,
+} from '@bodiless/fclasses';
 import SortableChild from './SortableChild';
 import SortableContainer, { SortableListProps } from './SortableContainer';
 import { useItemHandlers, useFlowContainerDataHandlers } from './model';
@@ -33,19 +36,39 @@ import {
 } from './types';
 import { ComponentDisplayModeProvider, ComponentDisplayMode } from './ComponentDisplayMode';
 
-const ChildNodeProvider = withNode<PropsWithChildren<{}>, any>(React.Fragment);
+const ChildNodeProvider = withNode(React.Fragment);
 
-const EditFlowContainerComponents: FlowContainerComponents = {
+export const EditFlowContainerComponents: FlowContainerComponents = {
   Wrapper: stylable<SortableListProps>(SortableContainer),
   ComponentWrapper: stylable<SortableChildProps>(SortableChild),
 };
 
 /**
+ * @private
+ *
+ * Forces wrapped component to re-mount when its design keys changed.
+ *
+ * @param Component The component to re-mount
+ */
+const withKeyFromDesign = (Component: ComponentOrTag<any>) => {
+  const WithKeyFromDesign = (props: any) => {
+    const { design } = props;
+    if (!design) {
+      return <Component {...props} />;
+    }
+    const json = JSON.stringify(Object.keys(design).sort());
+    const key = createHash('md5').update(json).digest('hex');
+    return <Component {...props} key={key} />;
+  };
+  return WithKeyFromDesign;
+};
+
+/**
  * An editable version of the FlowContainer container.
  */
-const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerProps) => {
+const EditFlowContainer: FC<EditFlowContainerProps> = (props: EditFlowContainerProps) => {
   const {
-    components, ui, snapData, getDefaultWidth,
+    components, ui, snapData, getDefaultWidth, itemButtonGroupLabel,
   } = props;
   const items = useItemHandlers().getItems();
   const {
@@ -54,10 +77,12 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerPr
   } = useFlowContainerDataHandlers();
   const { Wrapper, ComponentWrapper } = components;
   const getItemUseGetMenuOptions = useGetItemUseGetMenuOptions(props);
+  const handlers = { ...useFlowContainerDataHandlers(), ...useItemHandlers() };
 
   return (
     <ComponentDisplayModeProvider mode={ComponentDisplayMode.EditFlowContainer}>
       <Wrapper
+        itemCount={items.length}
         onSortEnd={(sort: SortEnd) => {
           const { oldIndex, newIndex } = sort;
           setFlowContainerItems(arrayMove(items, oldIndex, newIndex));
@@ -71,6 +96,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerPr
             return (
               <ChildNodeProvider nodeKey={flowContainerItem.uuid} key={`node-${flowContainerItem.uuid}`}>
                 <ComponentWrapper
+                  buttonGroupLabel={itemButtonGroupLabel}
                   ui={ui}
                   index={index}
                   flowContainerItem={flowContainerItem}
@@ -81,6 +107,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props:EditFlowContainerPr
                     // eslint-disable-next-line max-len
                     (flowContainerItemProps: FlowContainerItemProps) => onFlowContainerItemResize(flowContainerItem.uuid, flowContainerItemProps)
                   }
+                  handlers={handlers}
                 >
                   <ChildComponent />
                 </ComponentWrapper>
@@ -100,15 +127,22 @@ EditFlowContainer.defaultProps = {
 };
 
 const asEditFlowContainer = flowRight(
+  // with ActivateOnEffectProvider should be applied after withKeyFromDesign in
+  // order to keep state after re-mount.
   withActivateOnEffect,
+  withKeyFromDesign,
+  withResizeDetector,
   observer,
   designable(EditFlowContainerComponents, 'FlowContainer'),
-  withMenuOptions({
-    useMenuOptions,
-    name: 'Flow Container',
-  }),
+  withMenuOptions(
+    (p: EditFlowContainerProps) => ({
+      useMenuOptions,
+      name: typeof p.buttonGroupLabel === 'function'
+        ? p.buttonGroupLabel(p) : (p.buttonGroupLabel || 'Flow Container'),
+    }),
+  ),
   observer,
 );
 
-// Wrap the EditFlowContainer in a wthActivateContext so we can activate new items
+// Wrap the EditFlowContainer in a withActivateContext so we can activate new items
 export default asEditFlowContainer(EditFlowContainer);

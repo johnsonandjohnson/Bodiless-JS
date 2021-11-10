@@ -12,29 +12,33 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
-import withToutVariations from './withToutVariations';
-import withContentfulTouts from './withContentfulTouts';
+import { asToken } from '@bodiless/fclasses';
+import withCardVariations from './withCardVariations';
+import withContentfulCards from './withContentfulCards';
 import withRichTextVariations from './withRichTextVariations';
 import withSingleAccordionVariations from './withSingleAccordionVariations';
+import withTableVariations from './withTableVariations';
 import withImageVariations from './withImageVariations';
 import withIframeVariations from './withIframeVariations';
 import withYouTubeVariations from './withYouTubeVariations';
 import withSocialShare from './withSocialShare';
 import withListVariations from './withListVariations';
+import withCarouselVariations from './withCarouselVariations';
 
 // Order of includes currently dictates order in Component Picker
 // thus recommend putting more frequently used components toward top for quicker access.
-const withDefaultVariations = flow(
+const withDefaultVariations = asToken(
   withRichTextVariations,
+  withTableVariations,
   withImageVariations,
-  withToutVariations,
-  withContentfulTouts,
+  withCardVariations,
+  withContentfulCards,
   withSingleAccordionVariations,
   withListVariations,
   withIframeVariations,
   withSocialShare,
   withYouTubeVariations,
+  withCarouselVariations,
 );
 
 export default withDefaultVariations;

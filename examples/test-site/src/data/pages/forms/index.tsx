@@ -14,16 +14,28 @@
 import React, { HTMLProps } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
+import { asToken } from '@bodiless/fclasses';
 import { asEditable } from '@bodiless/components';
 import ReactMarkdown from 'react-markdown';
 
 import Layout from '../../../components/Layout';
-import asBodilessMarkdown from './asCustomBodilessMarkdown';
+import asBodilessMarkdown from './asBodilessMarkdown';
+import withLastModified from './withLastModified';
+import withMarkdownFetchButton from './withMarkdownFetchButton';
 
-const Markdown = asBodilessMarkdown('body')(ReactMarkdown);
+const Markdown = asToken(
+  withLastModified('last-modified'),
+  withMarkdownFetchButton,
+  asBodilessMarkdown('body', undefined, () => ({
+    root: true,
+    group: 'page-group',
+    label: 'Body',
+  })),
+)(ReactMarkdown);
+
 const H1 = asEditable('title', 'Title')<HTMLProps<HTMLHeadingElement>>('h1');
 
-const PageBody = ({ title, markdownContent }) => (
+const PageBody = ({ title, markdownContent }: any) => (
   <main>
     <H1>{title}</H1>
     <Markdown source={markdownContent} />
@@ -45,5 +57,6 @@ export const query = graphql`
   query($slug: String!) {
     ...PageQuery
     ...SiteQuery
+    ...DefaultContentQuery
   }
 `;

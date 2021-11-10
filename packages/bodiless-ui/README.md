@@ -86,7 +86,7 @@ should make use of shared elements from this basic `bodiless-ui` package.
 
 Adds the spinner, which centers itself based on its container's dimensions.
 
-You can also override the width and height if you want a bigger or smaller spinner by adding more style rules to the exposed `.bodiless-spinner` class [here](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/packages/bodiless-ui/src/Spinner.css). 
+You can also override the width and height if you want a bigger or smaller spinner by adding more style rules to the exposed `.bodiless-spinner` class [here](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/bodiless-ui/src/Spinner.css). 
 
 *Properties*
 
@@ -104,7 +104,7 @@ export default class Example extends Component {
   render() {
   return (
       <div>
-        <Spinner color="bl-bg-grey" />
+        <Spinner color="bl-bg-gray" />
       </div>
     );
   }
@@ -142,7 +142,7 @@ include:
 * `defaultGrid` - For general use throughout the app.
 * `xlGrid` - Extra Large values that are
 handy when we work with max-width, max-height etc.
-* `negativeGrid` - Usefull when we need negative
+* `negativeGrid` - Useful when we need negative
 margins or with top, bottom, left, right styles.
 * `percentGrid` - For the places where we need %
 values. (`bl-w-full` --> ``width: 100%``).

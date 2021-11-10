@@ -12,15 +12,15 @@
  * limitations under the License.
  */
 
+import { withoutProps } from '@bodiless/fclasses';
 import {
   withNode,
   withNodeDataHandlers,
   ifReadOnly,
   withNodeKey,
-  withoutProps,
   withData,
 } from '@bodiless/core';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 
 const emptyValue = {
   productId: '',

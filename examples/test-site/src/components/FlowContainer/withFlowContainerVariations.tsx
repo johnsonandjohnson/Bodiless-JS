@@ -13,17 +13,18 @@
  */
 
 import React from 'react';
-import { flow } from 'lodash';
 import { withNodeKey } from '@bodiless/core';
 import {
   withDesign,
   replaceWith,
   Div,
+  asToken,
 } from '@bodiless/fclasses';
 import {
   withTitle,
   withDesc,
   ifComponentSelector,
+  withLibraryComponents,
 } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import { withType } from './Categories';
@@ -32,9 +33,9 @@ import asDefaultFlowContainer from './asDefaultFlowContainer';
 const FlowContainerPreview = () => <Div className="bl-bg-black">Flow Container Preview</Div>;
 
 const withFlowContainerVariations = withDesign({
-  FlowContainer: flow(
+  FlowContainer: asToken(
     replaceWith(
-      flow(
+      asToken(
         asDefaultFlowContainer,
         withNodeKey('innerFC'),
       )(FlowContainer),
@@ -45,6 +46,24 @@ const withFlowContainerVariations = withDesign({
     withType('Flow Container')(),
     withTitle('Flow Container'),
     withDesc('Adds a flow container'),
+  ),
+});
+
+export const withLibraryFlowContainerVariations = withDesign({
+  FlowContainer: asToken(
+    replaceWith(
+      asToken(
+        withLibraryComponents(),
+        asDefaultFlowContainer,
+        withNodeKey('innerLibraryFC'),
+      )(FlowContainer),
+    ),
+    ifComponentSelector(
+      replaceWith(FlowContainerPreview),
+    ),
+    withType('Flow Container with Library')(),
+    withTitle('Flow Container with Library'),
+    withDesc('Adds a flow container with library'),
   ),
 });
 

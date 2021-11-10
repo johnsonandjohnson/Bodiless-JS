@@ -12,11 +12,11 @@
  * limitations under the License.
  */
 
-import React, { ComponentType, FC } from 'react';
-import { withoutProps } from '@bodiless/fclasses';
-import { flow } from 'lodash';
+import React, { FC } from 'react';
+import { withoutProps, asToken, HOC } from '@bodiless/fclasses';
 import { applyChameleonDesign, useChameleonContext } from './withChameleonContext';
 import { ChameleonProps } from './types';
+import { ComponentType } from 'enzyme';
 
 /**
  * Applies the appropriate design to the wrapped component depending on the
@@ -44,17 +44,17 @@ import { ChameleonProps } from './types';
  *
  * @return The wrapped component enhanced by the appropriate HOC's from the design.
  */
-const applyChameleon = <P extends object>(Component: ComponentType<P>|string) => {
-  const Chameleon: FC<P & ChameleonProps> = props => {
+const applyChameleon: HOC = Component => {
+  const Chameleon: FC<Pick<ChameleonProps, 'components'>> = props => {
     const { activeComponent } = useChameleonContext();
     const { components, ...rest } = props;
     const ActiveComponent = components[activeComponent];
-    return <ActiveComponent {...rest as P} />;
+    return <ActiveComponent {...rest} />;
   };
-  return flow(
+  return asToken(
     withoutProps('design'),
     applyChameleonDesign(Component),
-  )(Chameleon);
+  )(Chameleon) as ComponentType<any>;
 };
 
 export default applyChameleon;

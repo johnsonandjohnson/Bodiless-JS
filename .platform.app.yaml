@@ -18,7 +18,7 @@
 name: 'static'
 
 # The type key specifies the language and version for your application.
-type: 'nodejs:12'
+type: 'nodejs:16'
 
 build:
     flavor: none
@@ -70,7 +70,7 @@ hooks:
         node $PLATFORM_APP_DIR/packages/bodiless-psh/lib/generate-ssi-files.js deploy       
 
 # The size of the persistent disk of the application (in MB).
-disk: 256
+disk: 320
 
 mounts:
     'volume':

@@ -23,6 +23,7 @@
     "allowJs": false,
     "strictNullChecks": true,
     "noEmit": false,
+    "resolveJsonModule": true,
   },
   "include": [
     "./src/scripts/**/*"

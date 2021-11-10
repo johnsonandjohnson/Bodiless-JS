@@ -16,13 +16,12 @@ import React, { FC, HTMLProps } from 'react';
 import { asBodilessImage } from '@bodiless/components-ui';
 import { withNode } from '@bodiless/core';
 import {
-  Img, Section, Div, addClasses, stylable,
+  Img, Section, Div, addClasses, stylable, asToken,
 } from '@bodiless/fclasses';
-import { flow } from 'lodash';
 import withSimpleEditor from './withSimpleEditor';
 
 const Wrapper = Section;
-const Image = flow(addClasses('w-full'), asBodilessImage('image'))(Img);
+const Image = asToken(addClasses('w-full'), asBodilessImage('image'))(Img);
 const Body = withSimpleEditor('caption', 'Caption')(Div);
 
 const CaptionedImage: FC<HTMLProps<HTMLElement>> = props => (
@@ -32,4 +31,7 @@ const CaptionedImage: FC<HTMLProps<HTMLElement>> = props => (
   </Wrapper>
 );
 
-export default withNode(stylable(CaptionedImage));
+export default asToken(
+  stylable,
+  withNode,
+)(CaptionedImage);

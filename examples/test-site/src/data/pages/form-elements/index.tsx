@@ -124,7 +124,7 @@ const ExampleFormButtonProvider: FC = ({ children }) => {
   );
 };
 
-export default props => (
+export default (props: any) => (
   <ExampleFormButtonProvider>
     <Page {...props}>
       <Layout>
@@ -140,5 +140,6 @@ export const query = graphql`
   query($slug: String!) {
     ...PageQuery
     ...SiteQuery
+    ...DefaultContentQuery
   }
 `;

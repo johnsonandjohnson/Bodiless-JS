@@ -44,7 +44,7 @@ export default class Spawner {
   spawn(...[cmd, ...args]: string[]) {
     return new Promise<Error|number>((resolve, reject) => {
       const child = spawn(cmd, args, this.options);
-      child.on('close', code => resolve(code));
+      child.on('close', code => resolve(code as number));
       child.on('error', error => reject(error));
     });
   }

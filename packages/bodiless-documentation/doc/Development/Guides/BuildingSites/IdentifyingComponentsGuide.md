@@ -21,12 +21,12 @@ as an example. It consists of:
 * Header Landscape Image
 * Title
 * Bullet Points
-* Touts
+* Cards
 * Footer with Copyright
 
 The Header, Menu, Logo, & Footer components are global components.
 So thus it leaves the actual page components that are coming from
-[homepage](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/data/pages/index.tsx)
+[homepage](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/test-site/src/data/pages/index.tsx)
 and if you inspect the code, you can see it was implemented with
 
 * Image component for Header Image
@@ -35,7 +35,7 @@ and if you inspect the code, you can see it was implemented with
   * `<Editable nodeKey="title" placeholder="Page Title" />`
 * List Component extended for Bullet Points
   * `<EditableBulletPoints nodeKey="bulletpoints" />`
-* FlowContainer area where Touts (or actually any component) can be added.
+* FlowContainer area where Cards (or actually any component) can be added.
   * `<FlowContainerDefault nodeKey={HOME_PAGE_PATH} />`
 
 Thus we would have to build out or extend these components to create the page.

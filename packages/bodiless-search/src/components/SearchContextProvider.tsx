@@ -13,12 +13,13 @@
  */
 
 import React, {
-  ComponentType, useContext, useState, FC, useRef, useEffect, useCallback,
+  useContext, useState, FC, useRef, useEffect, useCallback, useMemo,
 } from 'react';
 import querystring from 'query-string';
+import { Token } from '@bodiless/fclasses';
 import SearchClient from '../SearchClient';
 import { TSearchResults, Suggestion } from '../types';
-import getSearchPagePath from './getSearchPagePath';
+// import getSearchPagePath from './getSearchPagePath';
 
 type TSearchResultContextValue = {
   results: TSearchResults,
@@ -46,10 +47,10 @@ export const SearchResultProvider: FC = ({ children }) => {
   const [results, setResult] = useState<TSearchResults>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
 
-  const search = (term: string) => {
+  const search = useCallback((term: string) => {
     const searchResult = searchClient.search(term);
     setResult(searchResult);
-  };
+  }, [searchTerm]);
 
   const didMountRef = useRef(false);
   const searchTermRef = useRef('');
@@ -60,13 +61,20 @@ export const SearchResultProvider: FC = ({ children }) => {
         parseFragmentIdentifier: true,
       }).fragmentIdentifier || '';
       if (typeof q === 'string') {
-        searchClient.loadIndex().then(() => search(q));
-        setSearchTerm(q);
+        searchClient.loadIndex().then(() => {
+          setSearchTerm(q);
+        });
+      }
+
+      if (q === '') {
+        search(q);
       }
     } else if (searchTermRef.current !== searchTerm) {
-      searchClient.loadIndex().then(() => search(searchTerm));
-      window.location.href = getSearchPagePath(searchTerm);
-      searchTermRef.current = searchTerm;
+      searchClient.loadIndex().then(() => {
+        search(searchTerm);
+        searchTermRef.current = searchTerm;
+      });
+      // window.location.href = getSearchPagePath(searchTerm);
     }
   });
 
@@ -80,15 +88,15 @@ export const SearchResultProvider: FC = ({ children }) => {
     suggest,
   };
 
-  return (
+  return useMemo(() => (
     <searchResultContext.Provider value={contextValue}>
       {children}
     </searchResultContext.Provider>
-  );
+  ), [results]);
 };
 
-export const withSearchResult = <P extends object>(Component: ComponentType<P>) => {
-  const WithSearchResult = (props: P) => (
+export const withSearchResult: Token = Component => {
+  const WithSearchResult: FC<any> = props => (
     <SearchResultProvider>
       <Component {...props} />
     </SearchResultProvider>

@@ -15,8 +15,9 @@
 import React, { ComponentType as CT, PropsWithChildren } from 'react';
 import { HelmetProps } from 'react-helmet';
 import { FieldProps } from 'informed';
+import { withoutProps } from '@bodiless/fclasses';
 import {
-  useNode, withNodeKey, withNode, withSidecarNodes, withNodeDataHandlers, withoutProps,
+  useNode, withNodeKey, withNode, withSidecarNodes, withNodeDataHandlers,
   withData, ifEditable, asReadOnly,
 } from '@bodiless/core';
 import type { WithNodeKeyProps } from '@bodiless/core';

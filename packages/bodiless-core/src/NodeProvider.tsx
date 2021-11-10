@@ -22,6 +22,11 @@ export type NodeMap<D> = {
   };
 };
 
+export type NodeDataHandlers<D> = {
+  setComponentData: (data: D) => void,
+  componentData: D,
+};
+
 const NodeContext = React.createContext<NodeMap<any>>({
   activeCollection: '_default',
   collections: {
@@ -32,7 +37,7 @@ const NodeContext = React.createContext<NodeMap<any>>({
 const useNode = <D extends object>(collection?: string) => {
   const map = React.useContext(NodeContext);
   // If no collection is specified, then return a node from the
-  // collection which was set by the most recent NodeProvier.
+  // collection which was set by the most recent NodeProvider.
   const key = collection || map.activeCollection || '_default';
   return {
     node: map.collections[key] as ContentNode<D>,

@@ -38,7 +38,9 @@ const activateOnEffect = {
 const contextMenuFormInner = jest.fn();
 jest.mock('@bodiless/core', () => ({
   useEditContext: jest.fn(() => editContext),
+  withContextActivator: jest.fn(() => (c:any) => c),
   useActivateOnEffect: jest.fn(() => activateOnEffect),
+  withLocalContextMenu: jest.fn((c:any) => c),
   useNode: jest.fn(),
   contextMenuForm: jest.fn(() => contextMenuFormInner),
   useGetter: jest.fn((options: any) => () => options),
@@ -79,7 +81,7 @@ describe('useGetMenuOptions', () => {
     button.handler();
     expect(componentSelectorForm).toHaveBeenCalledTimes(1);
     expect((componentSelectorForm as jest.Mock).mock.calls[0][0].components).toEqual(components);
-    const action = (componentSelectorForm as jest.Mock).mock.calls[0][1];
+    const action = (componentSelectorForm as jest.Mock).mock.calls[0][0].onSelect;
     action([selection]);
   }
 

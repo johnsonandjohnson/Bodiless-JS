@@ -15,8 +15,10 @@
 import withDirection, { DIRECTIONS } from './withDirection/withDirection';
 
 export { default as ComponentSelector } from './ComponentSelector';
+export { default as componentSelectorForm } from './ComponentSelector/componentSelectorForm';
+export type { ComponentSelectorFormProps } from './ComponentSelector/componentSelectorForm';
 export * from './ComponentSelector/types';
-export type { FlowContainerProps } from './FlowContainer/types';
+export type { FlowContainerProps, FlowContainerWrapperProps } from './FlowContainer/types';
 export { default as FlowContainer, withMandatoryCategories } from './FlowContainer';
 export type {
   Props as SortableResizableProps,
@@ -29,9 +31,13 @@ export {
   withTuple,
   getSnapFrom,
   withTailwindClasses,
+  withTailwindWidthConstraints,
 } from './FlowContainer/utils/appendTailwindWidthClass';
 export * from './meta';
-export { ifComponentSelector, ifNotComponentSelector } from './FlowContainer/ComponentDisplayMode';
+export {
+  ifComponentSelector, ifNotComponentSelector, ComponentDisplayMode,
+} from './FlowContainer/ComponentDisplayMode';
 
 export * from './ContentLibrary';
 export { withDirection, DIRECTIONS };
+export * from './deserializers';

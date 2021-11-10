@@ -26,10 +26,7 @@ import { addProps } from '@bodiless/fclasses';
 import withFormHeader from './withFormHeader';
 import withFormSnippet from './withFormSnippet';
 import { asBaseBodilessIframe } from './Iframe';
-import type {
-  Props as IframeProps,
-  Data as IframeData,
-} from './Iframe';
+import type { IframeProps, IframeData } from './Iframe';
 
 /**
  * YouTube embed player parameters
@@ -159,8 +156,8 @@ const withYouTubeFormSrcSnippet = withFormSnippet({
   nodeKeys: 'src',
   defaultData: { src: '' },
   snippetOptions: {
-    renderForm: ({ formState }) => {
-      const { errors } = formState;
+    renderForm: ({ formState, scope }) => {
+      const errors = scope ? formState.errors[scope] : formState.error;
       const {
         ComponentFormLabel,
         ComponentFormText,

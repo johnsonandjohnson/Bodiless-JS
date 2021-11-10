@@ -277,7 +277,7 @@ substitutes a value of search results found.
 
 
 > Note: for complete search component implementation example, please check 
-[Test-Site/Search Component](https://github.com/johnsonandjohnson/Bodiless-JS/blob/master/examples/test-site/src/components/Search/index.tsx).
+[Test-Site/Search Component](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/test-site/src/components/Search/index.tsx).
 
 ### Site Build Troubleshooting Guide.
 
@@ -354,7 +354,7 @@ export const NoSearch = flow(
 
 ## Architectural Details
 
-For more information see the [source folder for the Search Component](https://github.com/johnsonandjohnson/Bodiless-JS/tree/master/packages/bodiless-search/src). 
+For more information see the [source folder for the Search Component](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/bodiless-search/src). 
 
 #### SearchBoxClean
 

@@ -42,7 +42,7 @@ export type IContextMenuItemProps = {
    */
   name: string,
   /**
-   * The context menu option option which this item is rendering
+   * The context menu option which this item is rendering
    */
   option?: TMenuOption;
   /**
@@ -152,6 +152,10 @@ type IconVariantProps = HTMLProps<HTMLSpanElement> & {
   isActive?: boolean;
 };
 
+export type TooltipProps = {
+  overlay: ReactNode | (() => ReactNode);
+};
+
 /**
  * Type of the UI for the context menu.
  */
@@ -183,7 +187,7 @@ export type ContextMenuUI = {
   ComponentFormWarning?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   ComponentFormLink?: ComponentType<HTMLProps<HTMLAnchorElement>> | string;
   Form?: ComponentType<HTMLProps<HTMLFormElement>> | string;
-  Tooltip?: ComponentType<Tooltip['props']>;
+  Tooltip?: typeof Tooltip | ComponentType<TooltipProps>;
   ReactTags?: ComponentType<ReactTagsFieldProps>;
   ComponentFormList?: ComponentType<HTMLProps<HTMLUListElement>> | string;
   ComponentFormListItem?: ComponentType<HTMLProps<HTMLLIElement>> | string;

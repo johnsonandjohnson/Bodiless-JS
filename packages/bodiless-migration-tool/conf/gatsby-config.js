@@ -2,6 +2,9 @@ module.exports = {
   siteMetadata: {
     title: 'Canvas-X',
   },
+  flags: {
+    DEV_SSR: false,
+  },
   plugins: [
     {
       resolve: 'gatsby-plugin-compile-es6-packages',

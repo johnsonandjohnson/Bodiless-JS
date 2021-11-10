@@ -12,30 +12,41 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import { RichText } from '@bodiless/richtext-ui';
 import {
   Strong,
   addClasses,
   withDesign,
+  asToken,
+  Design,
+  startWith,
 } from '@bodiless/fclasses';
-import {
-  withComponent,
-} from '@bodiless/richtext';
-import { asBodilessLink } from '@bodiless/components';
-import withEditor from '../../../components/Editors/withEditor';
+import { withPlaceholder } from '@bodiless/components';
+import { asBodilessLink } from '@bodiless/components-ui';
+import { withNodeKey, withChild } from '@bodiless/core';
 
-const asBold = withComponent(Strong);
+const asBold = startWith(Strong);
 const asItalic = addClasses('');
 const asUnderline = addClasses('underline');
-const asLink = flow(asBodilessLink(), addClasses('text-blue-700 underline'));
+const asLink = asToken(asBodilessLink(), addClasses('text-blue-700 underline'));
 
-const simpleDesign = {
+const simpleDesign: Design = {
   Bold: asBold,
   Italic: asItalic,
   Underline: asUnderline,
   Link: asLink,
 };
 
-const SimpleEditor = withDesign(simpleDesign)(RichText);
-export default withEditor(SimpleEditor);
+const withSimpleEditor = (nodeKey?: string, placeholder?: string) => asToken(
+  addClasses('overflow-hidden'),
+  withChild(
+    asToken(
+      withDesign(simpleDesign),
+      withPlaceholder(placeholder),
+      withNodeKey(nodeKey),
+    )(RichText),
+    'Editor',
+  ),
+);
+
+export default withSimpleEditor;

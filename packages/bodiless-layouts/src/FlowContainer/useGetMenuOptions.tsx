@@ -24,6 +24,7 @@ import { ComponentSelectorProps } from '../ComponentSelector/types';
 import componentSelectorForm from '../ComponentSelector/componentSelectorForm';
 import { FALLBACK_SNAP_CLASSNAME } from './SortableChild';
 import { defaultSnapData } from './utils/appendTailwindWidthClass';
+import { FC_ITEM_CONTEXT_TYPE } from '../SlateSortableResizable';
 
 type Handlers = FlowContainerDataHandlers & FlowContainerItemHandlers;
 
@@ -42,6 +43,19 @@ const withNoDesign = (props:EditFlowContainerProps):EditFlowContainerProps => ({
   components: omit(props.components, ['Wrapper', 'ComponentWrapper']),
 });
 
+/**
+ * @private
+ *
+ * Get a unique id for a buttons
+ */
+const useItemButtonName = (prefix: string, uuid: string) => {
+  const ids = [uuid, prefix];
+  const context = useEditContext();
+  for (let c = context.parent; c; c = c.parent) {
+    if (c.type === FC_ITEM_CONTEXT_TYPE) ids.push(c.id);
+  }
+  return ids.reverse().join('-');
+};
 /**
  * @private
  *
@@ -103,7 +117,7 @@ const useCloneButton = (
   );
 
   return {
-    name: `copy-item-${item.uuid}`,
+    name: useItemButtonName('copy-item', item.uuid),
     label: 'Copy',
     icon: 'content_copy',
     global: false,
@@ -115,10 +129,12 @@ const useCloneButton = (
 
 const useDeleteButton = (
   handlers: Handlers,
+  props: EditFlowContainerProps,
   item: FlowContainerItem,
 ) => {
+  const { minComponents = 0 } = props;
   const context = useEditContext();
-  const { deleteFlowContainerItem } = handlers;
+  const { deleteFlowContainerItem, getItems } = handlers;
   const { setId } = useActivateOnEffect();
 
   const handler = () => {
@@ -130,13 +146,16 @@ const useDeleteButton = (
   };
 
   return {
-    name: `delete-${item.uuid}`,
+    name: useItemButtonName('delete', item.uuid),
     label: 'Delete',
     icon: 'delete',
     global: false,
     local: true,
     handler,
-    isHidden: useCallback(() => !context.isEdit, []),
+    isHidden: useCallback(
+      () => !context.isEdit || getItems().length <= minComponents,
+      [minComponents],
+    ),
   };
 };
 
@@ -152,14 +171,14 @@ const useAddButton = (
   const isHidden = item
     ? useCallback(() => !context.isEdit || getItems().length >= maxComponents, [maxComponents])
     : useCallback(() => !context.isEdit || getItems().length > 0, []);
-  const name = item ? `add-item-${item.uuid}` : 'add';
+  const name = item ? useItemButtonName('add-item', item.uuid) : `add-${context.id}`;
   return {
     icon: 'add',
     label: 'Add',
     global: false,
     local: true,
     name,
-    handler: () => componentSelectorForm(props, insertItem),
+    handler: () => componentSelectorForm({ ...props, onSelect: insertItem }),
     activateContext: false,
     formTitle: 'Insert Component',
     isHidden,
@@ -173,15 +192,16 @@ const useSwapButton = (
 ) => {
   const context = useEditContext();
   const { replaceItem } = useComponentSelectorActions(handlers, props, item);
+  const { components } = withNoDesign(props);
   return {
-    name: `swap-${item.uuid}`,
+    name: useItemButtonName('swap', item.uuid),
     label: 'Swap',
     icon: 'repeat',
     global: false,
     local: true,
-    handler: () => componentSelectorForm(props, replaceItem),
+    handler: () => componentSelectorForm({ ...props, onSelect: replaceItem }),
     activateContext: false,
-    isHidden: useCallback(() => !context.isEdit, []),
+    isHidden: useCallback(() => (!context.isEdit || Object.keys(components).length <= 1), []),
     formTitle: 'Replace Component',
   };
 };
@@ -231,7 +251,7 @@ const useGetItemUseGetMenuOptions = (props: EditFlowContainerProps) => {
       useAddButton(handlers, props$, item),
       useCloneButton(handlers, props$, item),
       useSwapButton(handlers, props$, item),
-      useDeleteButton(handlers, item),
+      useDeleteButton(handlers, props$, item),
     ];
     return useGetter(buttons);
   };

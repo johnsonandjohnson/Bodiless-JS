@@ -13,6 +13,10 @@
  */
 
 const path = require('path');
+const fg = require('fast-glob');
+const fs = require('fs');
+const { getDisabledPages } = require('@bodiless/components/node-api');
+const { createDefaultContentPlugins } = require('./dist/DefaultContent');
 
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
@@ -57,6 +61,8 @@ const plugins = [
   {
     resolve: 'gatsby-plugin-sharp',
   },
+  'gatsby-transformer-sharp',
+  'gatsby-plugin-image',
   // 'gatsby-plugin-offline',
   // 'gatsby-plugin-remove-serviceworker',
 ];
@@ -77,19 +83,35 @@ if (process.env.GOOGLE_FONTS_ENABLED !== '0') {
  * Robots.txt plugin.
  */
 if (process.env.ROBOTSTXT_ENABLED !== '0') {
-  const policy = process.env.ROBOTSTXT_POLICY;
+  const disablePageList = getDisabledPages();
+  const disabledPages = Object.keys(disablePageList).filter(
+    item => disablePageList[item].pageDisabled === true || disablePageList[item].indexingDisabled,
+  );
+  const policyEnv = process.env.ROBOTSTXT_POLICY;
   const defaultPolicy = [
     {
       userAgent: '*',
       allow: '/',
     },
   ];
+  const policy = policyEnv ? JSON.parse(policyEnv) : defaultPolicy;
+  if (!policy[0].disallow) {
+    policy[0].disallow = disabledPages;
+  } else {
+    const disallow = policy[0].disallow;
+    if (typeof disallow === 'string') {
+      policy[0].disallow = [disallow, ...disabledPages];
+    } else {
+      policy[0].disallow = [...disallow, ...disabledPages];
+    }
+  }
+
   plugins.push({
     resolve: 'gatsby-plugin-robots-txt',
     options: {
       host: process.env.ROBOTSTXT_HOST,
       sitemap: process.env.ROBOTSTXT_SITEMAP,
-      policy: policy ? JSON.parse(policy) : defaultPolicy,
+      policy: policy,
     },
   });
 }
@@ -101,9 +123,52 @@ const getbuildCSSPlugins = require('./build-css');
 
 plugins.push(...getbuildCSSPlugins());
 
+/**
+ * default content plugins
+ */
+const discoverDefaultContent = (depth = 1) => {
+  let dir = path.resolve(process.cwd());
+  let currentDepth = depth;
+  let defaultContentPaths = [];
+  while (currentDepth > 0 && dir !== path.resolve(dir, '..')) {
+    const files = fg.sync([
+      `${dir}/bodiless.content.json`,
+      `${dir}/node_modules/**/bodiless.content.json`,
+    ]);
+    // eslint-disable-next-line no-loop-func
+    files.forEach(file => {
+      let fileContent = [];
+      try {
+        fileContent = JSON.parse(fs.readFileSync(file));
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(`@bodiless/gatsby-theme-bodiless: error on reading file: ${file}. Error: ${e}.`);
+      }
+      defaultContentPaths = [
+        ...defaultContentPaths,
+        ...fileContent.map(file$ => path.resolve(path.dirname(file), file$)),
+      ];
+    });
+    currentDepth -= 1;
+    dir = path.resolve(dir, '..');
+  }
+  return defaultContentPaths;
+};
+
+if (process.env.BODILESS_DEFAULT_CONTENT_AUTO_DISCOVERY === '1') {
+  plugins.push(
+    ...createDefaultContentPlugins(
+      ...discoverDefaultContent(process.env.BODILESS_DEFAULT_CONTENT_AUTO_DISCOVERY_DEPTH || 1),
+    ),
+  );
+}
+
 module.exports = {
   siteMetadata: {
     title: 'Bodiless-JS',
+  },
+  flags: {
+    DEV_SSR: false,
   },
   plugins,
   proxy: {

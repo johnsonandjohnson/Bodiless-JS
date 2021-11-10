@@ -13,12 +13,13 @@
  */
 
 import React, {
-  createContext, useContext, FC, ComponentType, Fragment,
+  createContext, useContext, FC,
 } from 'react';
 import { WithNodeKeyProps, withSidecarNodes, withBodilessData } from '@bodiless/core';
 import {
-  HOC, applyDesign, asComponent, Design, extendDesignable,
+  applyDesign, extendDesignable, ComponentOrTag, Token, Fragment,
 } from '@bodiless/fclasses';
+import type { Designable, Design } from '@bodiless/fclasses';
 import { omit } from 'lodash';
 import type {
   ChameleonState, ChameleonData, ChameleonButtonProps, ChameleonComponents,
@@ -62,13 +63,12 @@ const useChameleonContext = (): ChameleonState => {
  *
  * @param Component
  */
-const applyChameleonDesign = <P extends object>(Component: ComponentType<P> | string) => {
+const applyChameleonDesign = (Component: ComponentOrTag<any>): Designable => {
   const apply = (design: Design<ChameleonComponents> = {}) => {
-    const Component$ = asComponent(Component as ComponentType<P>);
     const start = Object.keys(design).reduce((acc, key) => ({
       ...acc,
-      [key]: Component$,
-    }), { [DEFAULT_KEY]: Component$ });
+      [key]: Component,
+    }), { [DEFAULT_KEY]: Component });
     return applyDesign(start)(design);
   };
   return extendDesignable()(apply, 'Chameleon');
@@ -77,25 +77,27 @@ const applyChameleonDesign = <P extends object>(Component: ComponentType<P> | st
 const withChameleonContext = (
   nodeKeys: WithNodeKeyProps,
   defaultData?: ChameleonData,
-): HOC => <P extends object>(Component: ComponentType<P>|string) => {
-  const WithChameleonContext: FC<P & ChameleonButtonProps> = props => (
+  /** */
+  RootComponent: ComponentOrTag<any> = Fragment,
+): Token => Component => {
+  const WithChameleonContext: FC<any> = props => (
     <ChameleonContext.Provider value={{
       isOn: getIsOn(props),
       activeComponent: getActiveComponent(props),
+      // eslint-disable-next-line react/destructuring-assignment
+      components: props.components,
       selectableComponents: getSelectableComponents(props),
       setActiveComponent: (component: string|null) => props.setComponentData({ component }),
     }}
     >
       <Component
-        {...omit(props, 'componentData', 'components', 'setComponentData') as P}
+        {...omit(props, 'componentData', 'components', 'setComponentData') as any}
       />
     </ChameleonContext.Provider>
   );
 
   return withSidecarNodes(
-    // We apply the design to a fragment here so as to get the keys. We can't get the actual
-    // components until `applyChameleon` bc we don't yet know the start component.
-    applyChameleonDesign(Fragment),
+    applyChameleonDesign(RootComponent),
     withBodilessData(nodeKeys, defaultData),
   )(WithChameleonContext);
 };

@@ -16,25 +16,38 @@ import React, { ComponentType } from 'react';
 import {
   useMenuOptionUI,
   asBodilessComponent,
-  withoutProps,
   ifEditable,
   withExtendHandler,
   ifToggledOn,
   EditButtonOptions,
+  useEditContext,
+  useNode,
+  ContentNode,
 } from '@bodiless/core';
 import type { BodilessOptions } from '@bodiless/core';
-import { flow, flowRight, identity } from 'lodash';
+import { flowRight, identity } from 'lodash';
 import {
   Fragment,
   addProps,
   replaceWith,
+  withoutProps,
+  asToken,
+  Token,
 } from '@bodiless/fclasses';
+import { withFieldApi } from 'informed';
+import { useGetDisabledPages } from '../PageDisable';
 import DefaultNormalHref from './NormalHref';
 import withGoToLinkButton from './withGoToLinkButton';
 import useEmptyLinkToggle from './useEmptyLinkToggle';
+import useGetLinkHref from './useGetLinkHref';
 import {
-  LinkData, UseLinkOverrides, Props, ExtraLinkOptions, AsBodilessLink,
+  LinkData,
+  UseLinkOverrides,
+  Props,
+  ExtraLinkOptions,
+  AsBodilessLink,
 } from './types';
+import { FileUpload as BaseFileUpload, FileUploadProps } from '../FileUpload';
 
 const DEFAULT_INSTRUCTIONS = `
   Use a fully formed URL only for external links, e.g., https://www.example.com.
@@ -44,6 +57,17 @@ const DEFAULT_INSTRUCTIONS = `
   the site root.  All links will have a trailing slash appended.
 `;
 
+const DEFAULT_ALLOWED_FILE_TYPES = [
+  // pdf
+  'application/pdf',
+  // doc
+  'application/msword',
+  // docx
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+];
+
+const FileUpload: ComponentType<Omit<FileUploadProps, 'fieldApi'>> = withFieldApi('href')(BaseFileUpload);
+
 const useLinkOverrides = (useOverrides: UseLinkOverrides = () => ({})): UseLinkOverrides => (
   props => {
     const overrides = useOverrides(props);
@@ -51,7 +75,9 @@ const useLinkOverrides = (useOverrides: UseLinkOverrides = () => ({})): UseLinkO
       submitValueHandler: submitValueHandler$ = identity,
       normalizeHref = (href?: string) => new DefaultNormalHref(href).toString(),
       instructions = DEFAULT_INSTRUCTIONS,
+      fileUpload = {},
     } = overrides;
+    const { accept: fileUploadAccept = DEFAULT_ALLOWED_FILE_TYPES } = fileUpload;
     const submitValueHandler = ({ href }: LinkData) => submitValueHandler$({
       href: normalizeHref(href),
     });
@@ -59,7 +85,10 @@ const useLinkOverrides = (useOverrides: UseLinkOverrides = () => ({})): UseLinkO
       ...overrides,
       normalizeHref,
       submitValueHandler,
-      renderForm: ({ componentProps: { unwrap }, closeForm }) => {
+      renderForm: ({
+        componentProps: { unwrap, ui: { fileUpload: fileUploadUI } = {} },
+        closeForm,
+      }) => {
         const {
           ComponentFormTitle,
           ComponentFormLabel,
@@ -82,6 +111,8 @@ const useLinkOverrides = (useOverrides: UseLinkOverrides = () => ({})): UseLinkO
             <ComponentFormDescription id="description">
               {instructions}
             </ComponentFormDescription>
+            <ComponentFormLabel>File Upload</ComponentFormLabel>
+            <FileUpload ui={fileUploadUI} accept={fileUploadAccept} />
             {unwrap && (
             <ComponentFormUnwrapButton type="button" onClick={removeLinkHandler}>
               Remove Link
@@ -122,6 +153,22 @@ const withNormalHref = (
   return WithNormalHref;
 };
 
+const withLinkTarget = (
+  useOverrides: () => ExtraLinkOptions,
+) => (Component : ComponentType<Props>) => {
+  const WithLinkTarget = (props: Props) => {
+    const { target } = useOverrides();
+    if (!target) return <Component {...props} />;
+    return (
+      <Component
+        target={target}
+        {...props}
+      />
+    );
+  };
+  return WithLinkTarget;
+};
+
 /**
  * HOC that can be applied to a link based component to not render the component
  * when the component link data is empty
@@ -132,6 +179,43 @@ const withNormalHref = (
  */
 const withoutLinkWhenLinkDataEmpty = ifToggledOn(useEmptyLinkToggle)(replaceWith(Fragment));
 
+// @TODO: Move to richtext types?
+type ParentGetters = {
+  getParentNode: () => ContentNode<object>,
+  getParentPeer: (path: string|string[]) => ContentNode<object>,
+};
+type SlateNodeWithParentGetters<T> = {
+  node: ContentNode<T> & {
+    getGetters: () => ParentGetters,
+  }
+};
+
+/**
+ * Allows to disable non-menu links on the page.
+ */
+const asDisabledPageLink: Token = Component => props => {
+  const { node } = useNode() as SlateNodeWithParentGetters<LinkData>;
+  const { isEdit } = useEditContext();
+  if (
+    isEdit || !node.path
+    || (node.path[0] !== 'slatenode' && node.path[0] !== 'Page')
+  ) {
+    return <Component {...props} />;
+  }
+  const href = useGetLinkHref(node);
+  if (href) {
+    const node$ = node.path[0] === 'slatenode' ? node.getGetters().getParentNode() : node;
+    const disabledPages = useGetDisabledPages(node$);
+    const { href: href$, ...rest }: any = props;
+    if (disabledPages?.[href]?.contentLinksDisabled === true) {
+      return (
+        <Component {...rest} />
+      );
+    }
+  }
+  return <Component {...props} />;
+};
+
 const asBodilessLink: AsBodilessLink = (
   nodeKeys, defaultData, useOverrides,
 ) => flowRight(
@@ -139,15 +223,17 @@ const asBodilessLink: AsBodilessLink = (
     nodeKeys, defaultData, useLinkOverrides(useOverrides),
   ),
   ifEditable(
-    flow(
+    asToken(
       // Prevent following the link in edit mode
       withExtendHandler('onClick', () => (e: MouseEvent) => e.preventDefault()),
       addProps({ draggable: false }),
-      withGoToLinkButton(),
+      withGoToLinkButton(useLinkOverrides(useOverrides) as () => ExtraLinkOptions),
     ),
   ),
   withoutProps(['unwrap']),
   withNormalHref(useLinkOverrides(useOverrides) as () => ExtraLinkOptions),
+  withLinkTarget(useLinkOverrides(useOverrides) as () => ExtraLinkOptions),
+  asDisabledPageLink,
 );
 
 export default asBodilessLink;

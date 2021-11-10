@@ -16,20 +16,34 @@
 import { HTMLProps } from 'react';
 import { AsBodiless, UseBodilessOverrides } from '@bodiless/core';
 import { HrefNormalizer } from './NormalHref';
+import { FileUploadPickerUI } from '../FileUpload';
 
 export type LinkData = {
   href: string;
 };
 
+export type UI = {
+  fileUpload?: FileUploadPickerUI,
+};
+
 export type Props = HTMLProps<HTMLAnchorElement> & {
   unwrap?: () => void,
+  ui?: UI,
 };
 
 export type ExtraLinkOptions = {
   normalizeHref: HrefNormalizer,
+  target?: string,
   instructions?: string,
 };
 
-export type UseLinkOverrides = UseBodilessOverrides<Props, LinkData, ExtraLinkOptions>;
+export type FileUploadOptions = {
+  fileUpload?: {
+    accept?: string | string[]
+  },
+};
 
-export type AsBodilessLink = AsBodiless<Props, LinkData, ExtraLinkOptions>;
+// eslint-disable-next-line max-len
+export type UseLinkOverrides = UseBodilessOverrides<Props, LinkData, ExtraLinkOptions & FileUploadOptions>;
+
+export type AsBodilessLink = AsBodiless<Props, LinkData, ExtraLinkOptions & FileUploadOptions>;

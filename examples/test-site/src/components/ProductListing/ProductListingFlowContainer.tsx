@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,21 +11,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from 'react';
-import { flow } from 'lodash';
+import { asToken, addProps } from '@bodiless/fclasses';
+// @ts-ignore Could not find a declaration file
+import resolveConfig from 'tailwindcss/resolveConfig';
+import { getSnapFrom, withTailwindClasses } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withProductVariations from './withProductVariations';
-import { asFilterableProductContainer } from '../ProductTout/token';
+import { asFilterableProductContainer } from '../ProductCard/token';
 import { asFlowContainerWithMargins, asFlowContainerFullWidth } from '../FlowContainer/token';
+// @ts-ignore Could not find a declaration file
+import tailWindConfig from '../../../tailwind.config';
 
-const withProductStrictSnapSize = Component => props => (
-  <Component
-    {...props}
-    snapData={() => ({ className: 'w-1/3' })}
-  />
+const snapData = getSnapFrom(
+  withTailwindClasses(resolveConfig(tailWindConfig))('w-1/3'),
 );
 
-const ProductListingFlowContainer = flow(
+const withProductStrictSnapSize = addProps({ snapData });
+
+const ProductListingFlowContainer = asToken(
   asFilterableProductContainer,
   withProductStrictSnapSize,
   withProductVariations,

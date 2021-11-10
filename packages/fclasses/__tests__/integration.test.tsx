@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,8 @@ import { render } from 'enzyme';
 import { flowRight, flow } from 'lodash';
 import React, { HTMLProps, FC, ComponentType } from 'react';
 
+import { HOC, asToken } from '../src';
+
 import {
   addClasses, removeClasses, stylable,
 } from '../src/FClasses';
@@ -31,29 +33,27 @@ import {
   DesignableProps,
 } from '../src/Design';
 
-type ToutComponents = {
+type CardComponents = {
   Wrapper: ComponentType<any>,
   Title: ComponentType<any>,
   Body: ComponentType<any>,
   Cta: ComponentType<any>,
 };
 
-type HOC = <P extends object>(Component: ComponentType<P>) => ComponentType<P>;
-
-const getToutComponents = applyDesign({
+const getCardComponents = applyDesign({
   Wrapper: stylable('div'),
   Title: stylable('h2'),
   Body: stylable('div'),
   Cta: stylable('a'),
-} as ToutComponents);
+} as CardComponents);
 
-const Tout: FC<DesignableProps<ToutComponents>> = ({ design }) => {
+const Card: FC<DesignableProps<CardComponents>> = ({ design }) => {
   const {
     Wrapper,
     Title,
     Body,
     Cta,
-  } = getToutComponents(design) as ToutComponents;
+  } = getCardComponents(design) as CardComponents;
   return (
     <Wrapper id="wrapper">
       <Title id="title">This is the title</Title>
@@ -63,14 +63,14 @@ const Tout: FC<DesignableProps<ToutComponents>> = ({ design }) => {
   );
 };
 
-const asBasicTout = withDesign<ToutComponents>({
+const asBasicCard = withDesign<CardComponents>({
   Wrapper: addClasses('font-sans'),
   Title: addClasses('text-sm text-green'),
   Body: addClasses('my-10'),
   Cta: addClasses('block w-full bg-blue text-yellow py-1'),
 });
 
-const asPinkTout = withDesign({
+const asPinkCard = withDesign({
   Cta: flow(
     addClasses('bg-pink'),
     removeClasses('bg-blue'),
@@ -81,7 +81,7 @@ const asPinkTout = withDesign({
 const StylableH2 = stylable<JSX.IntrinsicElements['h2']>('h2');
 const ReusableH2 = addClasses('text-xl text-blue')(StylableH2);
 
-const asStandardTout = withDesign({
+const asStandardCard = withDesign({
   Title: replaceWith(ReusableH2), // () => ReusableH2
 });
 
@@ -89,19 +89,19 @@ const withGreenCtaText = withDesign({
   Cta: flow(
     addClasses('text-green'),
     removeClasses('text-yellow'),
-  ),
+  ) as HOC,
 });
 
 // @ts-ignore: Types of parameters are incompatible.
-const BasicTout = asBasicTout(Tout);
-const PinkTout = asPinkTout(BasicTout);
-// const StandardTout = asStandardTout(BasicTout);asSta
-const StandardPinkTout = asStandardTout(PinkTout);
-const StandardPinkAndGreenTout = flowRight(
+const BasicCard = asBasicCard(Card);
+const PinkCard = asPinkCard(BasicCard);
+// const StandardCard = asStandardCard(BasicCard);asSta
+const StandardPinkCard = asStandardCard(PinkCard);
+const StandardPinkAndGreenCard = flowRight(
   withGreenCtaText,
-  asStandardTout,
-  asPinkTout,
-)(BasicTout);
+  asStandardCard,
+  asPinkCard,
+)(BasicCard);
 
 function expectClasses(wrapper: cheerio.Cheerio, selector: string, classes: string) {
   const normalize = (className: string) => className.split(' ').filter(Boolean).sort().join(' ');
@@ -111,10 +111,10 @@ function expectClasses(wrapper: cheerio.Cheerio, selector: string, classes: stri
 }
 
 describe('Design with FClasses', () => {
-  it('Renders a basic tout correctly', () => {
-    // const mounted = mount(<PinkTout />);
+  it('Renders a basic card correctly', () => {
+    // const mounted = mount(<PinkCard />);
     // console.log(mounted.debug());
-    const wrapper = render(<div><BasicTout /></div>);
+    const wrapper = render(<div><BasicCard /></div>);
     expect(wrapper.find('#wrapper').is('div')).toBeTruthy();
     expectClasses(wrapper, '#wrapper', 'font-sans');
     expect(wrapper.find('#title').is('h2')).toBeTruthy();
@@ -125,10 +125,10 @@ describe('Design with FClasses', () => {
     expectClasses(wrapper, '#cta', 'block w-full bg-blue text-yellow py-1');
   });
 
-  it('Renders a restyled tout correctly', () => {
-    // const mounted = mount(<PinkTout />);
+  it('Renders a restyled card correctly', () => {
+    // const mounted = mount(<PinkCard />);
     // console.log(mounted.debug());
-    const wrapper = render(<div><PinkTout /></div>);
+    const wrapper = render(<div><PinkCard /></div>);
     expect(wrapper.find('#wrapper').is('div')).toBeTruthy();
     expectClasses(wrapper, '#wrapper', 'font-sans');
     expect(wrapper.find('#title').is('h2')).toBeTruthy();
@@ -139,10 +139,10 @@ describe('Design with FClasses', () => {
     expectClasses(wrapper, '#cta', 'block w-full bg-pink text-yellow py-1');
   });
 
-  it('Renders a twice restyled tout correctly', () => {
-    // const mounted = mount(<PinkTout />);
+  it('Renders a twice restyled card correctly', () => {
+    // const mounted = mount(<PinkCard />);
     // console.log(mounted.debug());
-    const wrapper = render(<div><StandardPinkTout /></div>);
+    const wrapper = render(<div><StandardPinkCard /></div>);
     expect(wrapper.find('#wrapper').is('div')).toBeTruthy();
     expectClasses(wrapper, '#wrapper', 'font-sans');
     expect(wrapper.find('#title').is('h2')).toBeTruthy();
@@ -154,9 +154,9 @@ describe('Design with FClasses', () => {
   });
 
   it('Renders a complex styling flow correctly', () => {
-    // const mounted = mount(<PinkTout />);
+    // const mounted = mount(<PinkCard />);
     // console.log(mounted.debug());
-    const wrapper = render(<div><StandardPinkAndGreenTout /></div>);
+    const wrapper = render(<div><StandardPinkAndGreenCard /></div>);
     expect(wrapper.find('#wrapper').is('div')).toBeTruthy();
     expectClasses(wrapper, '#wrapper', 'font-sans');
     expect(wrapper.find('#title').is('h2')).toBeTruthy();
@@ -178,9 +178,9 @@ const Div = stylable<HTMLProps<HTMLDivElement>>('div');
 
 const ContextMenuButton = flow(
   withoutProps<VariantProps>(['isActive', 'isFirst', 'isEnabled']),
-  addClasses('cursor-pointer pl-2 text-grey').flow,
+  addClasses('cursor-pointer pl-2 text-gray') as HOC,
   flowIf(hasProp('isActive'))(
-    flow(addClasses('text-white'), removeClasses('text-grey')),
+    asToken(addClasses('text-white'), removeClasses('text-gray')),
   ),
   flowIf(hasProp('isFirst'))(
     removeClasses('pl-2'),
@@ -190,9 +190,9 @@ const ContextMenuButton = flow(
 describe('flowIf', () => {
   it('Adds and removes classes based on conditional props', () => {
     let wrapper = render(<div><ContextMenuButton /></div>);
-    expectClasses(wrapper, 'div', 'cursor-pointer pl-2 text-grey');
+    expectClasses(wrapper, 'div', 'cursor-pointer pl-2 text-gray');
     wrapper = render(<div><ContextMenuButton isFirst /></div>);
-    expectClasses(wrapper, 'div', 'cursor-pointer text-grey');
+    expectClasses(wrapper, 'div', 'cursor-pointer text-gray');
     wrapper = render(<div><ContextMenuButton isActive /></div>);
     expectClasses(wrapper, 'div', 'cursor-pointer pl-2 text-white');
     wrapper = render(<div><ContextMenuButton isActive isFirst id="foo" /></div>);

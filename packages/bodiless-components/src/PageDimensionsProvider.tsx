@@ -18,9 +18,9 @@ import React, {
   useState,
   useEffect,
   useContext,
-  ComponentType,
 } from 'react';
 import { throttle } from 'lodash';
+import { Token } from '@bodiless/fclasses';
 
 type PageDimensions = {
   width: number,
@@ -43,7 +43,7 @@ const PageDimensionsContext = createContext<PageDimensions>({
 });
 
 const mapBreakpointsSize = (breakpoints: BreakpointsType = {}, width: number) => (
-  Object.keys(breakpoints).slice().reverse().find(item => width >= breakpoints[item]) || 'sm'
+  Object.keys(breakpoints).slice().reverse().find(item => width >= breakpoints[item]) || '_default'
 );
 
 const usePageDimensionsContext = () => useContext(PageDimensionsContext);
@@ -64,12 +64,16 @@ const PageDimensionsProvider: FC<PageDimensionsProviderProps> = ({ children, bre
   const [dimensions, setDimensions] = useState<PageDimensions>(getDimensions(breakpoints));
 
   useEffect(() => {
+    let isRendered = true;
     const handleResize = () => {
-      setDimensions(getDimensions(breakpoints));
+      if (isRendered) {
+        setDimensions(getDimensions(breakpoints));
+      }
     };
     window.addEventListener('resize', throttle(handleResize, 100));
     return () => {
-      window.removeEventListener('resize', handleResize);
+      isRendered = false;
+      window.removeEventListener('resize', throttle(handleResize, 100));
     };
   }, []);
 
@@ -88,13 +92,16 @@ const PageDimensionsProvider: FC<PageDimensionsProviderProps> = ({ children, bre
  *
  * @return HOC which wraps a component with the context provider.
  */
-const withPageDimensionsContext = <P extends object>({
-  breakpoints,
-}: PageDimensionsProviderProps) => (Component: ComponentType<P> | string) => (props: P) => (
-  <PageDimensionsProvider breakpoints={breakpoints}>
-    <Component {...props} />
-  </PageDimensionsProvider>
+const withPageDimensionsContext = (
+  { breakpoints }: PageDimensionsProviderProps,
+): Token => Component => {
+  const WithPageDimensionsContext: FC<any> = props => (
+    <PageDimensionsProvider breakpoints={breakpoints}>
+      <Component {...props} />
+    </PageDimensionsProvider>
   );
+  return WithPageDimensionsContext;
+};
 
 export default PageDimensionsProvider;
 export {

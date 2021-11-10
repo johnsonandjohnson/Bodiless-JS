@@ -14,27 +14,33 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import { getSnapFrom, withTailwindClasses } from '@bodiless/layouts';
+import { getSnapFrom, withTailwindClasses, FlowContainerProps } from '@bodiless/layouts';
 import {
   NodeViewer,
 } from '@bodiless/components';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
+// @ts-ignore Could not find declaration file.
 import resolveConfig from 'tailwindcss/resolveConfig';
 import { withDefaultContent, withNodeKey, withResetButton } from '@bodiless/core';
-import { H2 as BaseH2, addClasses } from '@bodiless/fclasses';
-import { flow } from 'lodash';
+import {
+  H2 as BaseH2, addClasses, asToken, addProps, withDesign, startWith,
+} from '@bodiless/fclasses';
+import { FlowContainer } from '@bodiless/layouts-ui';
 import Layout from '../../../components/Layout';
+// @ts-ignore Could not find declaration file.
 import tailWindConfig from '../../../../tailwind.config';
-import { FlowContainerDefault, FlowContainerLimited } from '../../../components/FlowContainer';
+import {
+  FlowContainerDefault,
+  FlowContainerLimited,
+  FlowContainerWithContentLibrary,
+} from '../../../components/FlowContainer';
+import { withFullWidthConstraint } from '../../../components/FlowContainer/token';
+import withImageVariations from '../../../components/FlowContainer/withImageVariations';
 
 const FLOW_CONTAINER_PAGE_PATH = 'flowContainer';
 
 const options = getSnapFrom(
   withTailwindClasses(resolveConfig(tailWindConfig))('w-full sm:w-1/2 sm:w-full lg:w-1/2 lg:w-full'),
-);
-
-const snapDataFullWidth = getSnapFrom(
-  withTailwindClasses(resolveConfig(tailWindConfig))('w-full'),
 );
 
 const contentfulFlowContainer = {
@@ -44,18 +50,63 @@ const contentfulFlowContainer = {
       wrapperProps: {
         className: 'w-full',
       },
-      type: 'ToutHorizontalWithTitleBodyWithCTA',
+      type: 'CardHorizontalWithTitleBodyWithCTA',
     },
   ],
 };
 
-const ContentfulFlowContainer = flow(
+const ContentfulFlowContainer = asToken(
   withDefaultContent({ contentfulFlowContainer }),
   withNodeKey('contentfulFlowContainer'),
   withResetButton({ nodeKey: 'contentfulFlowContainer' }),
 )(FlowContainerDefault);
 
+const FlowContainerConstrainedFullWidth = withFullWidthConstraint(FlowContainerDefault);
+
 const H2 = addClasses('text-2xl font-bold mt-4')(BaseH2);
+
+const regionContent = {
+  region: {
+    items: [
+      {
+        uuid: 'item-1',
+        wrapperProps: {
+          className: 'w-full lg:w-full',
+        },
+        type: 'Region',
+      },
+    ],
+  },
+  'region$item-1': {
+    items: [
+      {
+        uuid: 'item-1',
+        wrapperProps: {
+          className: 'w-full lg:w-full',
+        },
+        type: 'SquareImage',
+      },
+    ],
+  },
+};
+
+const Region = asToken(
+  startWith(FlowContainer),
+  asToken.meta.term('Type')('Region'),
+  withImageVariations,
+  addProps({
+    buttonGroupLabel: 'Content Block',
+    itemButtonGroupLabel: 'Content Block',
+  } as FlowContainerProps),
+);
+const RegionContainer = asToken(
+  addProps({
+    buttonGroupLabel: 'Region',
+    itemButtonGroupLabel: 'Region',
+  } as FlowContainerProps),
+  withDesign({ Region }),
+  withDefaultContent(regionContent),
+)(FlowContainer);
 
 const FlowContainerPage = (props: any) => (
   <Page {...props}>
@@ -68,6 +119,15 @@ const FlowContainerPage = (props: any) => (
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey={FLOW_CONTAINER_PAGE_PATH} />
+
+      <H2>Content Library FlowContainer</H2>
+      <FlowContainerWithContentLibrary
+        id="flowContainerWithLibrary"
+        nodeKey="flowContainerWithLibrary"
+      />
+      <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
+      <NodeViewer nodeKey="flowContainerWithLibrary" />
+
       <H2>
         FlowContainer with constrained widths of 50% & 100% only
       </H2>
@@ -79,10 +139,9 @@ const FlowContainerPage = (props: any) => (
       <H2>
         FlowContainer with constrained width of 100% only
       </H2>
-      <FlowContainerDefault
+      <FlowContainerConstrainedFullWidth
         id="constrained_full_width"
         nodeKey="constrained_full_width"
-        snapData={snapDataFullWidth}
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey="constrained_widths" />
@@ -91,6 +150,7 @@ const FlowContainerPage = (props: any) => (
         id="restricted"
         nodeKey="restricted"
         maxComponents={1}
+        minComponents={1}
       />
       <h3 className="text-lg font-bold">This shows the json content of the grid:</h3>
       <NodeViewer nodeKey="restricted" />
@@ -127,7 +187,9 @@ const FlowContainerPage = (props: any) => (
       <H2>Contentful Flow Container</H2>
       <ContentfulFlowContainer />
       <H2>Limited Flow Container</H2>
-      <FlowContainerLimited />
+      <FlowContainerLimited nodeKey="limited" />
+      <H2>Nested Flow Container with Default Items</H2>
+      <RegionContainer nodeKey="region" />
     </Layout>
   </Page>
 );
@@ -136,6 +198,7 @@ export const query = graphql`
   query($slug: String!) {
     ...PageQuery
     ...SiteQuery
+    ...DefaultContentQuery
   }
 `;
 export default FlowContainerPage;

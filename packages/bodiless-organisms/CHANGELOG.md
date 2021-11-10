@@ -3,6 +3,164 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.10...v0.3.0) (2021-11-01)
+
+**Note:** Version bump only for package @bodiless/organisms
+
+
+
+
+
+## [0.2.10](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.9...v0.2.10) (2021-10-01)
+
+**Note:** Version bump only for package @bodiless/organisms
+
+
+
+
+
+## [0.2.9](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.8...v0.2.9) (2021-08-20)
+
+**Note:** Version bump only for package @bodiless/organisms
+
+
+
+
+
+## [0.2.8](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.7...v0.2.8) (2021-07-28)
+
+**Note:** Version bump only for package @bodiless/organisms
+
+
+
+
+
+## [0.2.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.6...v0.2.7) (2021-07-20)
+
+**Note:** Version bump only for package @bodiless/organisms
+
+
+
+
+
+## [0.2.6](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.5...v0.2.6) (2021-07-20)
+
+**Note:** Version bump only for package @bodiless/organisms
+
+
+
+
+
+## [0.2.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.4...v0.2.5) (2021-07-16)
+
+**Note:** Version bump only for package @bodiless/organisms
+
+
+
+
+
+## [0.2.4](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.3...v0.2.4) (2021-07-02)
+
+
+### Features
+
+* **filtering:** Enhancing the Filter ([#1002](https://github.com/johnsonandjohnson/bodiless-js/issues/1002)) ([6c1425c](https://github.com/johnsonandjohnson/bodiless-js/commit/6c1425ce57136641605ed410cca12201547b1b25))
+
+
+
+
+
+## [0.2.3](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.2...v0.2.3) (2021-06-14)
+
+**Note:** Version bump only for package @bodiless/organisms
+
+
+
+
+
+## [0.2.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.1...v0.2.2) (2021-06-08)
+
+**Note:** Version bump only for package @bodiless/organisms
+
+
+
+
+
+## [0.2.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.0...v0.2.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **navigation, organisms, test-site:** Fix asTopNav and rename Touts to Cards ([#991](https://github.com/johnsonandjohnson/bodiless-js/issues/991)) ([3c89c62](https://github.com/johnsonandjohnson/bodiless-js/commit/3c89c625e7530b87c321c427dda3a2e26853e387))
+
+
+### BREAKING CHANGES
+
+* **navigation, organisms, test-site:** - Renamed `withToutsSubMenu` to `withCardsSubMenu`.
+- `asTopNav()` now accepts `Main` key to apply default navigation styles to the Main Menu.
+- `asTopNav('List' | 'Columns' | 'Cards')` is no longer applies `asTopNav('Main')` by default.
+
+
+
+
+
+## [0.2.0](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.72...v0.2.0) (2021-04-28)
+
+### Features
+
+* **components, youtube:** Youtube allow full screen ([#939](https://github.com/johnsonandjohnson/bodiless-js/issues/939)) ([bea046a](https://github.com/johnsonandjohnson/bodiless-js/commit/bea046a16daafdaed5f72086738ec39ea751589c))
+* **navigation, organisms, components:** Better DX for Menu, Breadcrumbs, BurgerMenu ([#841](https://github.com/johnsonandjohnson/bodiless-js/issues/841)) ([ad1d8dd](https://github.com/johnsonandjohnson/bodiless-js/commit/ad1d8ddb4308ab2883ba15fb918f4393f09e53c2))
+
+
+### BREAKING CHANGES
+
+* **navigation, organisms, components:**  - There is now a new `@bodiless/navigation` package for the new menu API.
+ - All menu-related code is removed from `@bodiless/organisms`.
+ - `withSimpleMenuDesign` and `withMegaMenuDesign` were deprecated. Use `withMenuDesign` from `@bodiless/organisms`  instead.
+ - `asSimpleMenuTopNav` and `asMegaMenuTopNav` were depricated. Use `asTopNav()` from `@bodiless/organisms` instead.
+ - Breadcrumbs are now configured by default for each menu item. No need for `asBreadcrumbSource`.
+ - List and Menu design keys have changed. Removed extra `Wrapper` component from submenus.
+ - Breadcrumb design keys have changed. Breadcrumb `Title` is now the same component as `MenuTitle` by default. The `BreadcrumbLink` design key has been deprecated. `Link` is available in `MenuTitle`. Renamed `BreadcrumbWrapper` and `BreadcrumbItem` to `Wrapper` and `Item` respectively.
+- Please refer to the Upgrade Guide in `@bodiless/organisms` readme file.
+
+
+
+
+
+## [0.0.72](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.71...v0.0.72) (2021-04-01)
+
+**Note:** Version bump only for package @bodiless/organisms
+
+
+
+
+
+## [0.0.71](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.70...v0.0.71) (2021-03-31)
+
+
+### Bug Fixes
+
+* **core, layouts:** Context menu doesn't move as RTE expands ([#830](https://github.com/johnsonandjohnson/bodiless-js/issues/830)) ([#937](https://github.com/johnsonandjohnson/bodiless-js/issues/937)) ([7fbe9fa](https://github.com/johnsonandjohnson/bodiless-js/commit/7fbe9fa347b5dd682f8692b9719df2163712ca91))
+* **fclasses:** Ensure startWith component does not apply to nested design keys ([#906](https://github.com/johnsonandjohnson/bodiless-js/issues/906)) ([d85f4b4](https://github.com/johnsonandjohnson/bodiless-js/commit/d85f4b4fe163291ac3c532600b1d49e41b43a7ef)), closes [#802](https://github.com/johnsonandjohnson/bodiless-js/issues/802)
+
+
+### Features
+
+* **gatsby-theme-bodiless:** Bodiless Image Refresh ([#860](https://github.com/johnsonandjohnson/bodiless-js/issues/860)) ([c696757](https://github.com/johnsonandjohnson/bodiless-js/commit/c69675757a448800e85fc300d5b5ceaa8ec66efe))
+* **tokens:** Token Browser ([#926](https://github.com/johnsonandjohnson/bodiless-js/issues/926)) ([c09d22d](https://github.com/johnsonandjohnson/bodiless-js/commit/c09d22d9644558f370084d219fbfe698832f0cd3)), closes [#925](https://github.com/johnsonandjohnson/bodiless-js/issues/925)
+
+
+
+
+
+## [0.0.70](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.69...v0.0.70) (2021-02-24)
+
+**Note:** Version bump only for package @bodiless/organisms
+
+
+
+
+
 ## [0.0.69](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.68...v0.0.69) (2021-02-12)
 
 **Note:** Version bump only for package @bodiless/organisms

@@ -14,7 +14,7 @@ To speedup validation process you may scan only changed files:
 ```
 npm run lint-change
 ```
-This command will scan your changes in **current** branch against **master** branch.
+This command will scan your changes in **current** branch against **main** branch.
 
 To automate this process we are using [husky](https://www.npmjs.com/package/husky) package and git hook **pre-push**.
 Husky will run code scan before each git push and stop push if any code style error detected.

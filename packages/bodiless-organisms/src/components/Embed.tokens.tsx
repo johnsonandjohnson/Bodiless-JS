@@ -12,40 +12,39 @@
  * limitations under the License.
  */
 
-import { withDesign, addClasses } from '@bodiless/fclasses';
-import { flowRight } from 'lodash';
+import { withDesign, addClasses, asToken } from '@bodiless/fclasses';
 
 const asResponsiveEmbed = withDesign({
   Wrapper: addClasses('relative overflow-hidden w-full'),
   Item: addClasses('absolute w-full h-full inset-0'),
 });
 
-const asResponsive21By9Embed = flowRight(
+const asResponsive21By9Embed = asToken(
+  asResponsiveEmbed,
   withDesign({
     AspectRatio: addClasses('aspect-ratio-21/9'),
   }),
-  asResponsiveEmbed,
 );
 
-const asResponsive16By9Embed = flowRight(
+const asResponsive16By9Embed = asToken(
+  asResponsiveEmbed,
   withDesign({
     AspectRatio: addClasses('aspect-ratio-16/9'),
   }),
-  asResponsiveEmbed,
 );
 
-const asResponsive4By3Embed = flowRight(
+const asResponsive4By3Embed = asToken(
+  asResponsiveEmbed,
   withDesign({
     AspectRatio: addClasses('aspect-ratio-4/3'),
   }),
-  asResponsiveEmbed,
 );
 
-const asResponsive1By1Embed = flowRight(
+const asResponsive1By1Embed = asToken(
+  asResponsiveEmbed,
   withDesign({
     AspectRatio: addClasses('aspect-ratio-square'),
   }),
-  asResponsiveEmbed,
 );
 
 export {

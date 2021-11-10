@@ -28,6 +28,8 @@ import { observer } from 'mobx-react-lite';
 import { flow } from 'lodash';
 import CleanWrapper, { Props as WrapperProps } from './SortableResizableWrapper';
 
+export const FC_ITEM_CONTEXT_TYPE = 'flow-container-item';
+
 export type FinalUI = {
   Wrapper: ComponentType<WrapperProps & SortableElementProps>,
   SnapIndicator: ComponentType<HTMLProps<HTMLDivElement>>|string,
@@ -39,7 +41,7 @@ const defaultUI: FinalUI = {
 };
 export const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });
 
-type Props = {
+export type SlateSortableResizableProps = {
   children: React.ReactNode;
   uuid: string;
   index: number;
@@ -58,9 +60,23 @@ type Props = {
   onResize?: ResizeCallback;
   ui?: UI,
   isResizeEnabled?: boolean,
+  /**
+   * The label to use for the group of context menu buttons provided by this item.
+   */
+  buttonGroupLabel?: string|((p: SlateSortableResizableProps) => string),
 };
 
-type SortableResizableProps = Omit<Props, 'useGetMenuOptions'>;
+const useHasActiveChildItem = () => {
+  const { id, activeContext, isActive } = useEditContext();
+  if (!isActive) return false;
+  for (let c = activeContext; c; c = c.parent) {
+    if (c.id === id) break;
+    if (c.type === FC_ITEM_CONTEXT_TYPE) return true;
+  }
+  return false;
+};
+
+type SortableResizableProps = Omit<SlateSortableResizableProps, 'useGetMenuOptions'>;
 
 const SortableResizable$: FC<SortableResizableProps> = ({
   isResizeEnabled,
@@ -68,13 +84,14 @@ const SortableResizable$: FC<SortableResizableProps> = ({
   ui,
   ...props
 }) => {
-  // We wabt to activate if nessesary
+  // We want to activate if necessary
   const { uuid } = props;
   useActivateOnEffectActivator(uuid);
   const { isActive } = useEditContext();
-  const isEnabled = isResizeEnabled !== false && isActive;
+  const hasActiveChildItem = useHasActiveChildItem();
+  const isEnabled = isResizeEnabled !== false && isActive && !hasActiveChildItem;
   const { Wrapper } = getUI(ui);
-  // @ts-ignore
+
   return (
     <Wrapper
       isEnabled={isEnabled}
@@ -92,29 +109,30 @@ const SortableResizable = flow(
   withLocalContextMenu,
 )(SortableResizable$);
 
-const useIsNested = (prefix = 'flexItem') => {
+const useIsNested = () => {
   const context = useEditContext();
   for (let c = context.parent; c; c = c.parent) {
-    if (c.id.startsWith(prefix)) return true;
+    if (c.type === FC_ITEM_CONTEXT_TYPE) return true;
   }
   return false;
 };
 
-const SlateSortableResizable = (props: Props) => {
+const SlateSortableResizable = (props: SlateSortableResizableProps) => {
   const {
     children,
     uuid,
     useGetMenuOptions,
+    buttonGroupLabel,
     ...rest
   } = props;
 
-  const isNested = useIsNested();
-  const name = isNested ? 'Nested Component' : 'Component';
+  const name$ = typeof buttonGroupLabel === 'function' ? buttonGroupLabel(props) : buttonGroupLabel;
+  const name = name$ || (useIsNested() ? 'Nested Component' : 'Component');
 
   return (
     <PageContextProvider
       name={name}
-      id={`flexItem-${uuid}`}
+      type={FC_ITEM_CONTEXT_TYPE}
       getMenuOptions={useGetMenuOptions()}
     >
       <SortableResizable uuid={uuid} {...rest}>

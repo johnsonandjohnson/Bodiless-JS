@@ -15,11 +15,12 @@
 import React, { useRef, ComponentType } from 'react';
 import { Editor } from 'slate';
 import type { Range } from 'slate';
+import { withoutProps } from '@bodiless/fclasses';
 import {
-  NodeProvider, DefaultContentNode, withoutProps, useNode,
+  NodeProvider, DefaultContentNode, useNode,
 } from '@bodiless/core';
 import { useSlate } from 'slate-react';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import {
   createBlockButton,
   createInlineButton,
@@ -61,6 +62,8 @@ const SlateComponentProvider = (update: Function, type: string) => (
         hasError: () => bodilessNode.hasError(),
         getPagePath: () => bodilessNode.pagePath,
         getBaseResourcePath: () => bodilessNode.baseResourcePath,
+        getParentNode: () => bodilessNode,
+        getParentPeer: (path:string|string[]) => bodilessNode.peer(path),
       };
       const actions = {
         setNode: (path: string[], componentData: any) => {

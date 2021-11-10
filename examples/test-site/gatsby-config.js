@@ -1,4 +1,13 @@
+const fs = require('fs');
 const express = require('express');
+const {
+  createDefaultContentPlugins,
+  getSampleDefaultContentConfig,
+} = require('@bodiless/gatsby-theme-bodiless/dist/DefaultContent');
+const { getDisabledPages } = require('@bodiless/components/node-api');
+const {
+  getConfig: getSiteDefaultContentConfig,
+} = require('./src/components/Contentful');
 
 const activeEnv = process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || 'development';
 
@@ -7,6 +16,14 @@ require('dotenv').config({
 });
 
 const SITEURL = process.env.SITE_URL;
+
+const disablePageList = getDisabledPages();
+const disabledPages = Object.keys(disablePageList).filter(
+  item => disablePageList[item].pageDisabled === true || disablePageList[item].indexingDisabled,
+);
+const disabledPagesFully = Object.keys(disablePageList).filter(
+  item => disablePageList[item].pageDisabled === true,
+);
 
 // Gatsby plugins list.
 const plugins = [
@@ -35,7 +52,12 @@ const plugins = [
   },
   {
     resolve: 'gatsby-plugin-sitemap',
+    options: { excludes: disabledPages },
   },
+  ...createDefaultContentPlugins(
+    ...getSampleDefaultContentConfig(),
+    ...getSiteDefaultContentConfig(),
+  ),
 ];
 
 const tagManagerEnabled = (process.env.GOOGLE_TAGMANAGER_ENABLED || '1') === '1';
@@ -58,6 +80,13 @@ if (tagManagerEnabled) {
   });
 }
 
+if (process.env.NODE_ENV === 'production' && disabledPagesFully.length > 0) {
+  plugins.push({
+    resolve: 'gatsby-plugin-exclude',
+    options: { paths: disabledPagesFully },
+  });
+}
+
 const robotsTxtPolicy = [
   {
     userAgent: '*',
@@ -72,6 +101,9 @@ module.exports = {
   },
   siteMetadata: {
     siteUrl: SITEURL,
+  },
+  flags: {
+    DEV_SSR: false,
   },
   plugins,
 };

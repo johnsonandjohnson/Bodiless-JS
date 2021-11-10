@@ -19,10 +19,10 @@ import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
   useMenuOptionUI, withCompoundForm,
   withNodeDataHandlers,
-  withNodeKey, withNode, withEditFormSnippet, withoutProps,
+  withNodeKey, withNode, withEditFormSnippet,
   WithNodeKeyProps, withData,
 } from '@bodiless/core';
-import { Div } from '@bodiless/fclasses';
+import { Div, withoutProps } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
 
 const useMenuOptions = () => [{
@@ -90,5 +90,6 @@ export const query = graphql`
   query($slug: String!) {
     ...PageQuery
     ...SiteQuery
+    ...DefaultContentQuery
   }
 `;

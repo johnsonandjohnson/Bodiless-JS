@@ -15,7 +15,6 @@
 import React, {
   FC, ComponentType, useState, HTMLProps,
 } from 'react';
-import { flow } from 'lodash';
 import {
   I,
   Div,
@@ -25,6 +24,7 @@ import {
   withDesign,
   DesignableComponentsProps,
   StylableProps,
+  asToken,
 } from '@bodiless/fclasses';
 
 import {
@@ -76,7 +76,7 @@ const ResponsiveSearchBoxBase: FC<ResponsiveSearchProps> = (props) => {
   );
 };
 
-const ResponsiveSearchBox = flow(
+const ResponsiveSearchBox = asToken(
   designable(responsiveSearchComponents, 'ResponsiveSearchBox'),
   withResponsiveDesign,
 )(ResponsiveSearchBoxBase) as ComponentType<SearchProps>;

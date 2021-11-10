@@ -3,6 +3,7 @@
     "FlowContainer.md": "./doc/FlowContainer.md",
     "assets": {
       "ComponentLibraryNew.jpg": "./doc/assets/ComponentLibraryNew.jpg",
+      "ContextMenuWithLibrary.jpg": "./doc/assets/ContextMenuWithLibrary.jpg",
       "EmptyFlowcontainer.jpg": "./doc/assets/EmptyFlowcontainer.jpg"
     }
   }

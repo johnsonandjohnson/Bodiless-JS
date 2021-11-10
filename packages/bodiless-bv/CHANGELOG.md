@@ -3,6 +3,129 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.10...v0.3.0) (2021-11-01)
+
+**Note:** Version bump only for package @bodiless/bv
+
+
+
+
+
+## [0.2.10](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.9...v0.2.10) (2021-10-01)
+
+**Note:** Version bump only for package @bodiless/bv
+
+
+
+
+
+## [0.2.9](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.8...v0.2.9) (2021-08-20)
+
+**Note:** Version bump only for package @bodiless/bv
+
+
+
+
+
+## [0.2.8](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.7...v0.2.8) (2021-07-28)
+
+
+### Features
+
+* **bv:** Enable sites to configure BV per page. ([#1033](https://github.com/johnsonandjohnson/bodiless-js/issues/1033)) ([88feba7](https://github.com/johnsonandjohnson/bodiless-js/commit/88feba73564dbf50d90a42293041b04e122b3e6a))
+
+
+
+
+
+## [0.2.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.6...v0.2.7) (2021-07-20)
+
+**Note:** Version bump only for package @bodiless/bv
+
+
+
+
+
+## [0.2.6](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.5...v0.2.6) (2021-07-20)
+
+**Note:** Version bump only for package @bodiless/bv
+
+
+
+
+
+## [0.2.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.4...v0.2.5) (2021-07-16)
+
+**Note:** Version bump only for package @bodiless/bv
+
+
+
+
+
+## [0.2.4](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.3...v0.2.4) (2021-07-02)
+
+**Note:** Version bump only for package @bodiless/bv
+
+
+
+
+
+## [0.2.3](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.2...v0.2.3) (2021-06-14)
+
+**Note:** Version bump only for package @bodiless/bv
+
+
+
+
+
+## [0.2.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.1...v0.2.2) (2021-06-08)
+
+**Note:** Version bump only for package @bodiless/bv
+
+
+
+
+
+## [0.2.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.0...v0.2.1) (2021-05-12)
+
+**Note:** Version bump only for package @bodiless/bv
+
+
+
+
+
+## [0.2.0](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.72...v0.2.0) (2021-04-28)
+
+**Note:** Version bump only for package @bodiless/bv
+
+
+
+
+
+## [0.0.72](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.71...v0.0.72) (2021-04-01)
+
+**Note:** Version bump only for package @bodiless/bv
+
+
+
+
+
+## [0.0.71](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.70...v0.0.71) (2021-03-31)
+
+**Note:** Version bump only for package @bodiless/bv
+
+
+
+
+
+## [0.0.70](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.69...v0.0.70) (2021-02-24)
+
+**Note:** Version bump only for package @bodiless/bv
+
+
+
+
+
 ## [0.0.69](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.0.68...v0.0.69) (2021-02-12)
 
 **Note:** Version bump only for package @bodiless/bv

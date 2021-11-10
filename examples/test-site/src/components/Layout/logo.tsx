@@ -13,8 +13,7 @@
  */
 
 import React, { FC, ComponentType, HTMLProps } from 'react';
-import { Link } from 'gatsby';
-import { flow } from 'lodash';
+import { withSidecarNodes } from '@bodiless/core';
 import {
   designable,
   DesignableComponentsProps,
@@ -22,8 +21,12 @@ import {
   Img,
   replaceWith,
   withDesign,
+  addProps,
+  asToken,
 } from '@bodiless/fclasses';
-import { asEditableImage } from '../Elements.token';
+import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
+import { asEditableImagePlain as asEditableImage } from '../Image';
+import { asEditableLink } from '../Elements.token';
 
 type LogoComponents = {
   SiteReturn: ComponentType<any>,
@@ -36,7 +39,7 @@ export type Props = DesignableComponentsProps<LogoComponents> & HTMLProps<HTMLEl
 const logoComponents:LogoComponents = {
   SiteReturn: Div,
   SiteLogo: Img,
-  SiteLink: Link,
+  SiteLink: GatsbyLink,
 };
 const LogoClean: FC<Props> = ({ components }) => {
   const {
@@ -47,7 +50,7 @@ const LogoClean: FC<Props> = ({ components }) => {
 
   return (
     <SiteReturn>
-      <SiteLink to="/">
+      <SiteLink>
         <SiteLogo />
       </SiteLink>
     </SiteReturn>
@@ -57,10 +60,18 @@ const LogoClean: FC<Props> = ({ components }) => {
 // Override asEditableImage nodekey to store in site nodeCollection.
 const LogoImg = asEditableImage({ nodeKey: 'image', nodeCollection: 'site' })(Img);
 
-const asLogo = flow(
+const asLogo = asToken(
   designable(logoComponents, 'Logo'),
   withDesign({
     SiteLogo: replaceWith(LogoImg),
+    SiteLink: asToken(
+      withSidecarNodes(
+        asEditableLink({ nodeKey: 'logolink', nodeCollection: 'site' }),
+      ),
+      addProps({
+        href: '/',
+      }),
+    ),
   }),
 );
 

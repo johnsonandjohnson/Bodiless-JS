@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/organisms",
-  "version": "0.0.69",
+  "version": "0.3.0",
   "description": "Basic components to build out sites.",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
@@ -10,7 +10,7 @@
     "/lib",
     "/bodiless.docs.json",
     "/doc",
-    "tailwind.config.js"
+    "site.tailwind.config.js"
   ],
   "repository": {
     "type": "git",
@@ -22,26 +22,26 @@
   "scripts": {
     "build": "npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
-    "build:api-doc": "typedoc --out doc/api --mode file",
+    "build:api-doc": "typedoc --out doc/api src",
     "lint": "tslint ./src/**/*.ts?x",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
-    "@bodiless/bv": "^0.0.69",
-    "@bodiless/components": "^0.0.69",
-    "@bodiless/components-ui": "^0.0.69",
-    "@bodiless/core": "^0.0.69",
-    "@bodiless/fclasses": "^0.0.69",
-    "@bodiless/richtext": "^0.0.69",
-    "@bodiless/richtext-ui": "^0.0.69",
+    "@bodiless/accordion": "^0.3.0",
+    "@bodiless/bv": "^0.3.0",
+    "@bodiless/components": "^0.3.0",
+    "@bodiless/components-ui": "^0.3.0",
+    "@bodiless/core": "^0.3.0",
+    "@bodiless/fclasses": "^0.3.0",
+    "@bodiless/richtext": "^0.3.0",
+    "@bodiless/richtext-ui": "^0.3.0",
     "@types/react-burger-menu": "^2.6.0",
     "@types/react-tag-autocomplete": "^5.12.0",
     "lodash": "^4.17.19",
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",
     "mobx-react-lite": "^1.3.1",
-    "nuka-carousel": "^4.4.7",
     "react-burger-menu": "^2.6.13",
     "react-tag-autocomplete": "^5.12.1",
     "tailwindcss-aspect-ratio": "^3.0.0",
@@ -51,6 +51,6 @@
     "@types/uuid": "^3.4.4"
   },
   "peerDependencies": {
-    "react": "^16.8.4"
+    "react": "^17.0.2"
   }
 }

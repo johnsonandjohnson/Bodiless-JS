@@ -12,14 +12,15 @@
  * limitations under the License.
  */
 
-import React, { Fragment } from 'react';
-import { flow } from 'lodash';
+import React, { ComponentType, Fragment, FC } from 'react';
 import {
-  Div, designable, addClasses, replaceWith,
+  Div, designable, addClasses, replaceWith, DesignableComponentsProps, asToken, flowIf,
+  Token,
 } from '@bodiless/fclasses';
-import { useNode, withNodeKey, ifToggledOn } from '@bodiless/core';
-import { withBreadcrumbStore } from '@bodiless/components';
+import { useNode, withNodeKey } from '@bodiless/core';
 import { withSearchResult } from '@bodiless/search';
+import { withBurgerMenuProvider, withBreadcrumbStore } from '@bodiless/navigation';
+import { withOidcProvider } from '@bodiless/oidc';
 import Header from './header';
 import Footer from './footer';
 import SeoHelmet from './meta';
@@ -27,31 +28,52 @@ import { SocialShareHelmet } from '../SocialShare';
 import { asPageContainer, asYMargin } from '../Elements.token';
 import { asSiteHeader, asSiteFooter } from './token';
 
-import { MegaMenuBreadcrumbs } from '../Breadcrumbs/MenuBreadcrumbs';
+import BreadcrumbsBase from '../Breadcrumbs/MenuBreadcrumbs';
 
 const SiteHeader = asSiteHeader(Header);
 const SiteFooter = asSiteFooter(Footer);
 
-const Container = flow(
+const Container = asToken(
   asPageContainer,
   asYMargin,
 )(Div);
 
-const BreadcrumbProvider = withBreadcrumbStore(Fragment);
+const oidcConfig = {
+  clientId: 'interactive.public',
+  redirectUri: typeof window !== 'undefined'
+    ? new URL('/oidc-redirect', window.location.origin).href
+    : '',
+  scope: 'openid profile email api offline_access',
+  authority: 'https://demo.identityserver.io',
+  onSignIn: () => console.log('On Sign In Callback'),
+  onSignOut: () => console.log('On Sign Out Callback'),
+};
 
-const BaseLayout = ({ children, components }) => {
+const SiteProviders = asToken(
+  withBreadcrumbStore,
+  withBurgerMenuProvider,
+  withOidcProvider(oidcConfig) as Token,
+)(Fragment);
+
+type LayoutComponents = {
+  Breadcrumbs: ComponentType<any>,
+};
+
+type LayoutProps = DesignableComponentsProps<LayoutComponents>;
+
+const BaseLayout: FC<LayoutProps> = ({ children, components }) => {
   const { Breadcrumbs } = components;
   return (
     <>
       <SeoHelmet />
-      <BreadcrumbProvider>
+      <SiteProviders>
         <SocialShareHelmet />
         <SiteHeader />
         <Container>
           { Breadcrumbs && <Breadcrumbs />}
           {children}
         </Container>
-      </BreadcrumbProvider>
+      </SiteProviders>
       <SiteFooter />
     </>
   );
@@ -60,12 +82,12 @@ const BaseLayout = ({ children, components }) => {
 const isHomePage = () => useNode().node.pagePath === '/';
 
 const Layout$ = designable({
-  Breadcrumbs: flow(
+  Breadcrumbs: asToken(
     withNodeKey({ nodeKey: 'MainMenu', nodeCollection: 'site' }),
     addClasses('pt-2'),
     // hide breadcrumbs on home page
-    ifToggledOn(isHomePage)(replaceWith(React.Fragment)),
-  )(MegaMenuBreadcrumbs),
+    flowIf(isHomePage)(replaceWith(React.Fragment)),
+  )(BreadcrumbsBase),
 })(BaseLayout);
 
 const Layout = withSearchResult(Layout$);

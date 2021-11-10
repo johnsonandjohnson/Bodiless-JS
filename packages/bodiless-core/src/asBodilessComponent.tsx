@@ -12,13 +12,15 @@
  * limitations under the License.
  */
 
-import React, { ComponentType as CT } from 'react';
+import React from 'react';
 import {
   pick, omit, identity, flowRight,
 } from 'lodash';
+import type { Enhancer, Token, ComponentOrTag } from '@bodiless/fclasses';
+import { withoutProps } from '@bodiless/fclasses';
 import withNode, { withNodeKey } from './withNode';
 import {
-  withNodeDataHandlers, withoutProps, withContextActivator, withLocalContextMenu,
+  withNodeDataHandlers, withContextActivator, withLocalContextMenu,
 } from './hoc';
 import { ifReadOnly, ifEditable } from './withEditToggle';
 import withEditButton from './withEditButton';
@@ -26,6 +28,7 @@ import withData from './withData';
 import type { WithNodeProps, WithNodeKeyProps } from './Types/NodeTypes';
 import type { EditButtonOptions, EditButtonProps, UseBodilessOverrides } from './Types/EditButtonTypes';
 import { useContextActivator } from './hooks';
+import { ifToggledOn } from './withFlowToggle';
 
 /**
  * Options for making a component "bodiless".
@@ -39,7 +42,7 @@ export type Options<P, D> = EditButtonOptions<P, D> & {
    * An optional component to use as a wrapper in edit mode. Useful if the underlying component
    * cannot produce an activation event (eg if it does not accept an 'onClick' prop).
    */
-  Wrapper?: CT<any>|string,
+  Wrapper?: ComponentOrTag<any>,
   /**
    * An object providing default/initial values for the editable props. Should be keyed by the
    * prop name.
@@ -47,29 +50,28 @@ export type Options<P, D> = EditButtonOptions<P, D> & {
   defaultData?: D,
 };
 
-type HOC<P, Q> = (Component: CT<P>|string) => CT<Q>;
-type BodilessProps = Partial<WithNodeProps>;
 type AsBodiless<P, D, E = {}> = (
   nodeKeys?: WithNodeKeyProps,
   defaultData?: D,
   useOverrides?: UseBodilessOverrides<P, D, E>,
-) => HOC<P, P & BodilessProps>;
+) => Enhancer<Partial<WithNodeProps>>;
 
 /**
  * Given an event name and a wrapper component, provides an HOC which will wrap the base component
- * the wrapper, passing the event prop to the wrapper, and all other props to the base compoent.
+ * the wrapper, passing the event prop to the wrapper, and all other props to the base component.
+ *
  * @param event The event name.
  * @param Wrapper The component to wrap with
  * @private
  */
-export const withActivatorWrapper = <P extends object>(event: string, Wrapper: CT<any>|string) => (
-  (Component: CT<P>) => (props: P) => {
+export const withActivatorWrapper = (event: string, Wrapper: ComponentOrTag<any>): Token => (
+  Component => props => {
     const wrapperPropNames = Object.getOwnPropertyNames(useContextActivator(event));
     const eventProps = pick(props, wrapperPropNames);
-    const rest = omit(props, wrapperPropNames) as P;
+    const rest = omit(props, wrapperPropNames);
     return (
       <Wrapper {...eventProps}>
-        <Component {...rest} />
+        <Component {...rest as any} />
       </Wrapper>
     );
   }
@@ -82,14 +84,14 @@ export const withActivatorWrapper = <P extends object>(event: string, Wrapper: C
  *
  * @param defaultData Default data to be provided for this component.
  */
-const withBodilessData = <P extends object, D extends object>(
+const withBodilessData = <D extends object>(
   nodeKey?: WithNodeKeyProps,
   defaultData?: D,
 ) => flowRight(
     withNodeKey(nodeKey),
     withNode,
     withNodeDataHandlers(defaultData),
-  );
+  ) as Enhancer<Partial<WithNodeProps>>;
 
 /**
  * Makes a component "Bodiless" by connecting it to the Bodiless-jS data flow and giving it
@@ -127,6 +129,11 @@ const asBodilessComponent = <P extends object, D extends object>(options: Option
     const editButtonOptions = useOverrides
       ? (props: P & EditButtonProps<D>) => ({ ...rest, ...useOverrides(props) })
       : rest;
+    const useHasLocalContext = (props: P & EditButtonProps<D>): boolean => {
+      const def = typeof editButtonOptions === 'function'
+        ? editButtonOptions(props) : editButtonOptions;
+      return !(def.root || def.peer);
+    };
     const finalData = { ...defaultDataOption, ...defaultData };
     return flowRight(
       withBodilessData(nodeKeys, finalData),
@@ -135,9 +142,11 @@ const asBodilessComponent = <P extends object, D extends object>(options: Option
       ),
       ifEditable(
         withEditButton(editButtonOptions),
-        withContextActivator(activateEvent),
-        withLocalContextMenu,
-        Wrapper ? withActivatorWrapper(activateEvent, Wrapper) : identity,
+        ifToggledOn(useHasLocalContext)(
+          withContextActivator(activateEvent),
+          withLocalContextMenu,
+          Wrapper ? withActivatorWrapper(activateEvent, Wrapper) : identity,
+        ),
       ),
       withData,
     );

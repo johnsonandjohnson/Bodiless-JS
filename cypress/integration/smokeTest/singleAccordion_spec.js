@@ -19,20 +19,20 @@ describe('Single Accordion smoke tests', function () {
     cy.toggleEditMode()
   })
 
-  after(function() {
+  after(function () {
     cy.togglePreviewMode();
   })
 
   const title = 'AT - Title 1'
   const body = 'AT - Description 1'
   const editedPostfix = ' - edited'
-  const titleFirstXpath = '//*[@id="accordion-1"]//*[@data-accordion-element="accordion-title"]//*[@data-slate-editor="true"]'
-  const bodyFirstXpath = '//*[@id="accordion-1"]//*[@data-accordion-element="accordion-body"]//*[@data-slate-editor="true"]'
-  const plusIconFirstXpath = '//*[@id="accordion-1"]//*[@data-accordion-icon="expand"]'
-  const minusIconFirstXpath = '//*[@id="accordion-1"]//*[@data-accordion-icon="collapse"]'
-  const bodySecondXpath = '//*[@id="accordion-2"]//*[@data-accordion-element="accordion-body"]'
-  const plusIconSecondXpath = '//*[@id="accordion-2"]//*[@data-accordion-icon="expand"]'
-  const minusIconSecondXpath = '//*[@id="accordion-2"]//*[@data-accordion-icon="collapse"]'
+  const titleFirstXpath = '//*[@id="accordion-4"]//*[@data-accordion-element="accordion-title"]//*[@data-slate-editor="true"]'
+  const bodyFirstXpath = '//*[@id="accordion-4"]//*[@data-accordion-element="accordion-body"]//*[@data-slate-editor="true"]'
+  const plusIconFirstXpath = '//*[@id="accordion-4"]//*[@data-accordion-icon="expand"]'
+  const minusIconFirstXpath = '//*[@id="accordion-4"]//*[@data-accordion-icon="collapse"]'
+  const bodySecondXpath = '//*[@id="accordion-5"]//*[@data-accordion-element="accordion-body"]'
+  const plusIconSecondXpath = '//*[@id="accordion-5"]//*[@data-accordion-icon="expand"]'
+  const minusIconSecondXpath = '//*[@id="accordion-5"]//*[@data-accordion-icon="collapse"]'
 
 
   it('accordions: 1 - filling in Title in 1st accordion', () => {
@@ -189,4 +189,4 @@ describe('Single Accordion smoke tests', function () {
     cy.xpath(bodyFirstXpath)
       .should('have.text', body + editedPostfix)
   })
-})   
+})

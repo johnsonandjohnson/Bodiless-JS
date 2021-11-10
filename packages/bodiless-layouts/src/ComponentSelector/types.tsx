@@ -13,6 +13,13 @@
  */
 
 import type { ComponentType, HTMLProps } from 'react';
+import { ComponentDisplayMode } from '../FlowContainer/ComponentDisplayMode';
+
+export enum ComponentSelectorScale {
+  Full = 1,
+  Half = 2,
+  Quarter = 4
+}
 
 export type ComponentSelectorProps = ItemListProps & {
   /**
@@ -27,6 +34,10 @@ export type ComponentSelectorProps = ItemListProps & {
    * List of categories which should always be shown in the filters.
    */
   mandatoryCategories?: string[];
+  /**
+   *
+   */
+  mode?: ComponentDisplayMode,
 };
 
 export type Categories = {
@@ -71,6 +82,14 @@ export type ItemListProps = {
    * Callback when one or more components are selected.
    */
   onSelect: (names: string[]) => void,
+  /**
+   * List of categories which should never be shown in the filters.
+   */
+  blacklistCategories?: string[];
+  /**
+   * Initial scale
+   */
+  scale?: ComponentSelectorScale,
 };
 
 export type FinalUI = {
@@ -106,7 +125,7 @@ export type FinalUI = {
   AccordionIconContract: ComponentType<HTMLProps<HTMLSpanElement>> | string;
   // A span element containing the icon for the expanded menu
   AccordionIconExpand: ComponentType<HTMLProps<HTMLSpanElement>> | string;
-  // A span element containting icon for the close menu button
+  // A span element containing icon for the close menu button
   CloseMenuIcon: ComponentType<HTMLProps<HTMLSpanElement>> | string;
   // A div the wraps an individual component box
   ItemBox: ComponentType<HTMLProps<HTMLDivElement>> | string;
@@ -149,3 +168,6 @@ export type FinalUI = {
   ScalingButtonQuarter: ComponentType<HTMLProps<HTMLElement>> | string;
 };
 export type ComponentSelectorUI = Partial<FinalUI>;
+
+export type ComponentSelectorOptions =
+  Pick<ComponentSelectorProps, 'mandatoryCategories'|'blacklistCategories'>;

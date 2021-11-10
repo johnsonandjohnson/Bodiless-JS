@@ -85,7 +85,7 @@ export default class Downloader {
               targetPath: path,
               url: resource,
             };
-          } catch (e) {
+          } catch (e: any) {
             debug(e.message);
           }
           return {

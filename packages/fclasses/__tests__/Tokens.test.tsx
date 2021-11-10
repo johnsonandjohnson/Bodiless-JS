@@ -1,3 +1,17 @@
+/**
+ * Copyright © 2021 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import React, { Fragment } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
@@ -46,6 +60,7 @@ describe('asToken', () => {
 
     it('Allows added props to be overridden', () => {
       const Test = addProp('foo', 'bar')(Base);
+      // @ts-ignore prop foo does not exist on test
       const wrapper = mount(<Test foo="baz" />);
       expect(wrapper.find(Base).props()).toEqual({
         foo: 'baz',
@@ -76,6 +91,20 @@ describe('asToken', () => {
       const Test = asTest(Base);
       const wrapper = mount(<Test />);
       expect(wrapper.find(Base).prop('foo')).toBe('bar');
+    });
+
+    it('Ignores undefined tokens', () => {
+      const withPossiblyUndefinedToken = (token?: Token) => asToken(
+        token,
+        addProp('bar'),
+      );
+      let Test = withPossiblyUndefinedToken()(Base);
+      let wrapper = mount(<Test />);
+      expect(wrapper.find(Base).prop('bar')).toBeTruthy();
+      Test = withPossiblyUndefinedToken(addProp('foo'))(Base);
+      wrapper = mount(<Test />);
+      expect(wrapper.find(Base).prop('bar')).toBeTruthy();
+      expect(wrapper.find(Base).prop('foo')).toBeTruthy();
     });
   });
 
@@ -134,6 +163,11 @@ describe('asToken', () => {
       expect(Test.categories).toEqual({
         Type: ['Foo', 'Bar', 'Baz', 'Test'],
       });
+    });
+
+    it('Adds an empty meta when composed items do not have metadata', () => {
+      const asTestToken = asToken(addProp('prop'));
+      expect(asTestToken.meta).toStrictEqual({});
     });
   });
 
@@ -219,6 +253,22 @@ describe('asToken', () => {
       const wrapperF = mount(<Test />);
       expect(wrapperF.find(Base).props()).toEqual({
         bar: 'bar',
+      });
+    });
+  });
+
+  describe('When undefined argument passed', () => {
+    it('accepts it and ignores it', () => {
+      const Base = () => <></>;
+      const asTestToken = asToken(
+        addProp('prop'),
+        undefined,
+      );
+      expect(asTestToken.meta).toStrictEqual({});
+      const Test = addProp('foo')(Base);
+      const wrapper = mount(<Test />);
+      expect(wrapper.find(Base).props()).toEqual({
+        foo: 'foo',
       });
     });
   });

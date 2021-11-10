@@ -17,6 +17,7 @@ import {
   useNode, TMenuOption, withMenuOptions, withOnlyProps,
 } from '@bodiless/core';
 import { observer } from 'mobx-react-lite';
+import { ComponentOrTag, HOC } from '@bodiless/fclasses';
 
 type Data = {
   on: boolean,
@@ -32,17 +33,15 @@ const useAccessors = () => {
   };
 };
 
-const withToggleTo = <Q extends object>(OffComp: ComponentType<Q> | string) => (
-  <P extends object>(OnComp: ComponentType<P>) => observer(
-    (props: P | Q) => {
-      const { isOn, setOn } = useAccessors();
-      const unwrap = () => setOn(false);
-      const wrap = () => setOn(true);
-      return isOn()
-        ? <OnComp {...props as P} unwrap={unwrap} nodeKey="component" />
-        : <OffComp {...props as Q} wrap={wrap} nodeKey="component" />;
-    },
-  )
+const withToggleTo = (OffComp: ComponentOrTag<any>): HOC => OnComp => observer(
+  (props: any) => {
+    const { isOn, setOn } = useAccessors();
+    const unwrap = () => setOn(false);
+    const wrap = () => setOn(true);
+    return isOn()
+      ? <OnComp {...props} unwrap={unwrap} nodeKey="component" />
+      : <OffComp {...props} wrap={wrap} nodeKey="component" />;
+  },
 );
 
 const withToggle = withToggleTo(withOnlyProps('key', 'children')(Fragment));

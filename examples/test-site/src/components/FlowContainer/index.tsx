@@ -12,23 +12,32 @@
  * limitations under the License.
  */
 
-import flow from 'lodash/flow';
-import { withDesign } from '@bodiless/fclasses';
-import { withMandatoryCategories, ifNotComponentSelector } from '@bodiless/layouts';
+import { withDesign, asToken } from '@bodiless/fclasses';
+import {
+  withMandatoryCategories,
+  ifNotComponentSelector,
+  withLibraryComponents,
+} from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withRichTextVariations from './withRichTextVariations';
 import withImageVariations from './withImageVariations';
-import withFlowContainerVariations from './withFlowContainerVariations';
+import withFlowContainerVariations, { withLibraryFlowContainerVariations } from './withFlowContainerVariations';
 import asDefaultFlowContainer from './asDefaultFlowContainer';
-
 import { asFlowContainerRTL, asFlowContainerWithMargins } from './token';
 
-const FlowContainerDefault = flow(
+const FlowContainerDefault = asToken(
   asDefaultFlowContainer,
   withFlowContainerVariations,
 )(FlowContainer);
 
-const FlowContainerDefaultRTL = flow(
+const FlowContainerWithContentLibrary = asToken(
+  // withLibraryComponents should be applied before any other HOC designs.
+  withLibraryComponents(),
+  asDefaultFlowContainer,
+  withLibraryFlowContainerVariations,
+)(FlowContainer);
+
+const FlowContainerDefaultRTL = asToken(
   ifNotComponentSelector(
     withDesign({
       FlowContainer: asFlowContainerRTL,
@@ -37,7 +46,19 @@ const FlowContainerDefaultRTL = flow(
   asFlowContainerRTL,
 )(FlowContainerDefault);
 
-const FlowContainerLimited = flow(
+const FlowContainerWithContentLibraryRTL = asToken(
+  withLibraryComponents(),
+  asDefaultFlowContainer,
+  withLibraryFlowContainerVariations,
+  ifNotComponentSelector(
+    withDesign({
+      FlowContainer: asFlowContainerRTL,
+    }),
+  ),
+  asFlowContainerRTL,
+)(FlowContainer);
+
+const FlowContainerLimited = asToken(
   withRichTextVariations,
   withImageVariations,
   asFlowContainerWithMargins,
@@ -45,4 +66,10 @@ const FlowContainerLimited = flow(
 )(FlowContainer);
 
 // eslint-disable-next-line import/prefer-default-export
-export { FlowContainerDefault, FlowContainerLimited, FlowContainerDefaultRTL };
+export {
+  FlowContainerDefault,
+  FlowContainerLimited,
+  FlowContainerDefaultRTL,
+  FlowContainerWithContentLibrary,
+  FlowContainerWithContentLibraryRTL,
+};

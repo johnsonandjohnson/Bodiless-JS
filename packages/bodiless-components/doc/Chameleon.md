@@ -8,7 +8,7 @@ components in this package, including lists (with toggled sublists) and link
 toggles.
 
 The Chameleon API builds on [the Design API](..).  A component wrapped in
-`asBodilessChamelion()` will accept a variable design (similar to the
+`asBodilessChameleon()` will accept a variable design (similar to the
 [Flow Container](..)). It also provides a context menu button which allows
 the user to choose among the designs which were provided.  Here is a 
 simple example (using the [FClasses API](..) and TailwindCSS for styling):
@@ -114,6 +114,42 @@ const RedAvailabilityToggle = withDesign({
 )(AvailabilityToggle);
 ```
 
+## Component Selector
+By default, a chameleon will use a toggle button if there are only two keys in
+the design, and a set of radio buttons if there are more than two, but it is
+possible to customize this behavior via the `useOverrides` parameter. In
+particular, you can instruct the Chameleon to use a component selector (exactly
+as is used for the flow container):
+
+```ts
+import { useChameleonSelectorForm } from '@bodiless/components-ui';
+
+const BasicChameleonWithComponentSelector = asToken(
+  asBodilessChameleon('selector-chameleon', undefined, useChameleonSelectorForm),
+  withDesign(basicChameleonDesign),
+)(BaseComponent);
+```
+
+This will function exactly as the first example above, except that a component
+selector will be used to choose the active component.
+
+You can pass arguments to the component selector by adding or modifying props,
+for example:
+
+```ts
+const BasicChameleonWithComponentSelector = asToken(
+  asBodilessChameleon('selector-chameleon', undefined, useChameleonSelectorForm),
+  addProps({
+    blacklistCategories: ['Color'],
+    mandatoryCategories: ['Border'],
+    scale: ComponentSelectorScale.Half,
+  }),
+  withAllTitlesFromTerms(),
+  withDesign(basicChameleonDesign),
+)(BaseComponent);
+```
+
+
 ## Advanced Use cases
 
 ### Toggling Visibility
@@ -139,7 +175,7 @@ const VisibilityToggle = flow(
   withDesign(toggleVisibilityDesign),
 )(BaseAvailability);
 
-const VisibilityTogglerapper = flow(
+const VisibilityToggleWrapper = flow(
   withChameleonButton(() => ({ label: 'Avail' })),
   withChameleonContext('decomposed-toggle', { component: 'Available' }),
   withDesign(toggleVisibilityDesign),
@@ -147,18 +183,31 @@ const VisibilityTogglerapper = flow(
 
 ...
 
-<VisibilityTogglerapper>
+<VisibilityToggleWrapper>
   <div>Chameleons!</div>
   <VisibilityToggle isAvailable />
-</VisibilityTogglerapper>
+</VisibilityToggleWrapper>
 ```
 
 Here we've decomposed `asBodilessChameleon` into three constituent parts:
 - `withChameleonContext` establishes a connection to the Bodiless data system
   and makes the current state of the chameleon available to its children. It takes
   the `nodeKey` and `defaultData` as arguments.
-- `withChamelionButton` provides the context menu button which provides the
-  Chameleon UX.  It takes the `useOverrides` hook as an argument.
+- `withChameleonButton` adds a context menu button which provides the Chameleon
+  UX. It takes a normal Bodiless `useOverrides` hook as an argument. This can be
+  used, for example, to modify the behavior or appearance of the button based on
+  its state.
+  > Note: If you need to access the state of the chameleon in the `useOverrides`
+  > hook, don't try to access its data directly via `useNode`: Use the
+  > `useChameleonContext` hook instead. For example:
+  > ``` 
+  > const useOverrides = () => {
+  >   const { activeComponent } = useChameleonContext();
+  >   return {
+  >     isActive: activeComponent === 'Foo',
+  >   };
+  > }
+  > ```
 - `applyChameleon` uses the chameleon state established by
   `withChameleonContext` to apply the appropriate HOC's from a design to the
   underlying components.
@@ -193,7 +242,6 @@ const BaseAvailabilityAccordion = ({ isAvailable, ...rest }) => {
       </div>
       <div className={expanded ? '' : 'hidden'}>
         {isAvailable ? 'In Stock!' : 'Call'}
-        a
       </div>
     </Div>
   );
@@ -241,7 +289,7 @@ const AvailabilityAccordionToggle = flow(
 
 In `withChameleonAvailability` we invoke the `useChameleonContext()` hook to
 get current state of the Chameleon, and use that information to set the prop
-directly. This is essentially a custom version of `applyChamelion` which
+directly. This is essentially a custom version of `applyChameleon` which
 avoids re-creating the child tree.
 
 ### Component Form Toggle
@@ -346,7 +394,7 @@ A few things to note:
 - We need to remove the 'productId' prop (provided by `asAddToCart`) because
   this prop doesn't make sense for the underlying component. We do this *inside*
   `applyChameleon` so that it won't be stripped when the toggle state is on.
-- We use `withChameleoonCompnentFormControls` to provide an `unwrap` and
+- We use `withChameleonComponentFormControls` to provide an `unwrap` and
   `onSubmit` prop to our context menu form. These allow the form to return the
   chameleon state off and on respectively.
 - We need to remove the 'unwrap' prop which after it is consumed by our context

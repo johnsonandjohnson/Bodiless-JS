@@ -13,7 +13,7 @@
  */
 
 import { observable, action } from 'mobx';
-import { isString } from 'util';
+import identity from 'lodash/identity';
 
 class DummyContentNodeStore {
   @observable data = {};
@@ -53,7 +53,46 @@ export type ContentNode<D> = {
   child<E extends object>(path: string): ContentNode<E>;
   peer<E extends object>(path: Path): ContentNode<E>;
   hasError: () => boolean;
+  proxy: (processors: Processors<D>) => ContentNode<D>;
 };
+
+type Processors<D> = {
+  getData?: (data: D) => D,
+  setData?: (data: D) => D,
+  getKeys?: (keys: string[]) => string,
+};
+
+// @ts-ignore
+class ContentNodeProxy<D> implements ContentNode<D> {
+  constructor(node: ContentNode<D>, processors: Processors<D>) {
+    const {
+      getData, setData, getKeys,
+    }: Required<Processors<D>> = {
+      getData: identity,
+      setData: identity,
+      getKeys: identity,
+      ...processors,
+    };
+    const handlers = {
+      get: function get(target: ContentNode<D>, prop: keyof ContentNode<D>, receiver: any) {
+        switch (prop) {
+          case 'data':
+            return getData(target.data);
+          case 'keys':
+            return getKeys(target.keys);
+          case 'setData':
+            return (data: D) => target.setData(setData(data));
+          case 'peer':
+            return (path: Path) => target.peer<any>(path).proxy(processors);
+          default:
+            // return target[prop];
+            return Reflect.get(target, prop, receiver);
+        }
+      },
+    };
+    return new Proxy(node, handlers);
+  }
+}
 
 export class DefaultContentNode<D extends object> implements ContentNode<D> {
   protected actions: Actions;
@@ -100,7 +139,7 @@ export class DefaultContentNode<D extends object> implements ContentNode<D> {
 
   delete(path?: Path) {
     const { deleteNode } = this.actions;
-    const path$ = isString(path) ? [path] : path;
+    const path$ = (typeof path === 'string') ? [path] : path;
     const path$$ = path$ || this.path;
     deleteNode(path$$);
   }
@@ -113,6 +152,11 @@ export class DefaultContentNode<D extends object> implements ContentNode<D> {
   get hasError() {
     const { hasError } = this.getters;
     return hasError;
+  }
+
+  proxy(processors: Processors<D>): ContentNode<D> {
+    // @ts-ignore
+    return new ContentNodeProxy<D>(this, processors);
   }
 
   getGetters() {
