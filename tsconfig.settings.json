@@ -47,6 +47,8 @@
       "@bodiless/layouts-ui/*": ["bodiless-layouts-ui/src/*"],
       "@bodiless/navigation": ["bodiless-navigation/src"],
       "@bodiless/navigation/*": ["bodiless-navigation/src/*"],
+      "@bodiless/oidc": ["bodiless-oidc/src"],
+      "@bodiless/oidc/*": ["bodiless-oidc/src/*"],
       "@bodiless/organisms": ["bodiless-organisms/src"],
       "@bodiless/organisms/*": ["bodiless-organisms/src/*"],
       "@bodiless/richtext": ["bodiless-richtext/src"],
