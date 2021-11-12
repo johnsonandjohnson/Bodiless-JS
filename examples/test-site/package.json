@@ -59,9 +59,7 @@
     "react-dom": "^17.0.2",
     "react-helmet": "^5.2.0",
     "react-markdown": "^4.3.1",
-    "react-mde": "^10.0.3",
-    "tailwindcss": "^2.0.2",
-    "tailwindcss-dir": "^4.0.0"
+    "react-mde": "^10.0.3"
   },
   "files": [
     "lib"
@@ -99,6 +97,8 @@
     "copyfiles": "^2.1.1",
     "gatsby-plugin-compile-es6-packages": "^1.1.0",
     "npm-run-all": "^4.1.5",
+    "tailwindcss": "^2.0.2",
+    "tailwindcss-dir": "^4.0.0",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
     "typescript": "^4.0.0"
   }

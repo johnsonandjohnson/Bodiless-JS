@@ -14,3 +14,4 @@
 
 export * from './getPackageRoot';
 export * from './mergeConfigs';
+export * from './resolveConfig';
