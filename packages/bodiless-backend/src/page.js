@@ -248,13 +248,13 @@ class Page {
       await Page.jsFilesPathResolve(originPath, destinationPath, jsFiles);
     }
     // Clone images for page & update page data
-    await clonedPageImages(origin, destination);
+    await Page.clonedPageImages(origin, destination);
 
     return 'success';
   }
 
   static clonedPageImages(origin, destination) {
-    clonePageAssets(origin, destination, '/images/pages');
+    Page.clonePageAssets(origin, destination, '/images/pages');
   }
 
   static async clonePageAssets(origin, destination, target) {
