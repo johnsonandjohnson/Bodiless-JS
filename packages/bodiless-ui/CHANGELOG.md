@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.0...v0.3.1) (2021-11-15)
+
+
+### Bug Fixes
+
+* **backend:** clone page breaking with certain pages ([#1183](https://github.com/johnsonandjohnson/bodiless-js/issues/1183)) ([96754f7](https://github.com/johnsonandjohnson/bodiless-js/commit/96754f7765eecc984e0e06ac10af3b6797820096))
+
+
+### Features
+
+* **unpublish:** User can see a link is disabled in edit mode ([#1207](https://github.com/johnsonandjohnson/bodiless-js/issues/1207)) ([dd002f3](https://github.com/johnsonandjohnson/bodiless-js/commit/dd002f39522b445619b3a318b0417e1ba620bdb7))
+
+
+
+
+
 # [0.3.0](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.10...v0.3.0) (2021-11-01)
 
 **Note:** Version bump only for package @bodiless/ui
