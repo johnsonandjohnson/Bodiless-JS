@@ -700,6 +700,10 @@ module.exports = {
         '.rotate-180deg': {
           transform: 'rotate(180deg)',
         },
+        '.link-disabled': {
+          outline: '3px #ff00d1 dashed',
+          'background-color': '#ff00d166',
+        },
       };
 
       const components = {
