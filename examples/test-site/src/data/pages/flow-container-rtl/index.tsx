@@ -24,15 +24,15 @@ import {
   asToken,
 } from '@bodiless/fclasses';
 import { getSnapFrom, withTailwindClasses } from '@bodiless/layouts';
+import resolvedConfigs from
+  '@bodiless/gatsby-theme-bodiless/src/dist/tailwindcss/resolveConfig';
 // @ts-ignore Could not find a declaration file...
-import resolveConfig from 'tailwindcss/resolveConfig';
 import Layout from '../../../components/Layout';
 import {
   FlowContainerDefaultRTL,
   FlowContainerWithContentLibraryRTL,
 } from '../../../components/FlowContainer';
 // @ts-ignore Could not find a declaration file...
-import tailWindConfig from '../../../../tailwind.config';
 
 const RTLFlowContainer = asToken(
   withNodeKey('rtlFlowContainer'),
@@ -42,7 +42,7 @@ const H1 = addClasses('text-3xl font-bold')(BaseH1);
 const H2 = addClasses('text-2xl font-bold mt-4')(BaseH2);
 
 const snapDataFullWidth = getSnapFrom(
-  withTailwindClasses(resolveConfig(tailWindConfig))('w-full'),
+  withTailwindClasses(resolvedConfigs)('w-full'),
 );
 
 const FlowContainerPage = (props: any) => (

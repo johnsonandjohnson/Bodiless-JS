@@ -12,23 +12,13 @@
  * limitations under the License.
  */
 
-import path from 'path';
 import React from 'react';
 import { asToken, Token } from '@bodiless/fclasses';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { withPageDimensionsContext, BreakpointsType } from '@bodiless/components';
 import Helmet from 'react-helmet';
-
-// @ts-ignore Could not find a declaration file
-// import resolveConfig from 'tailwindcss/resolveConfig';
-// @ts-ignore Could not find a declaration file
-// import tailwindConfig from '../../../tailwind.config';
-
-import {
-  resolveConfig,
-} from '@bodiless/gatsby-theme-bodiless/dist/tailwindcss';
-
-const resolvedConfigs = resolveConfig('../../../site.tailwind.config');
+import resolvedConfigs from
+  '@bodiless/gatsby-theme-bodiless/src/dist/tailwindcss/resolveConfig';
 
 const getTailwindBreakpoints = (): BreakpointsType => {
   const { theme: { screens } } = resolvedConfigs;
