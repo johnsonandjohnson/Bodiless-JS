@@ -9,7 +9,6 @@
   "scripts": {
     "bootstrap": "npx lerna bootstrap --hoist --strict -- --legacy-peer-deps",
     "build": "cross-env NODE_ENV=production lerna run build --stream --ignore @bodiless/gatsby-starter-bodiless",
-    "build:site": "cross-env NODE_ENV=production lerna run build --stream --scope '{@bodiless/gatsby-theme-bodiless,@bodiless/test-site}'",
     "build:only": "cross-env NODE_ENV=production lerna run build --stream --scope ",
     "build:packages": "cross-env NODE_ENV=production lerna run build --stream --no-private",
     "build:watch": "cross-env NODE_ENV=development lerna run build:watch --parallel",
