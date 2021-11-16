@@ -8,7 +8,9 @@
   "typings": "lib/index.d.ts",
   "files": [
     "/lib",
-    "site.tailwind.config.js"
+    "site.tailwind.config.js",
+    "/doc",
+    "/bodiless.docs.json"
   ],
   "repository": {
     "type": "git",
