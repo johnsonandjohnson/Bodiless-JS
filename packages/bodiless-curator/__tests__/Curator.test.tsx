@@ -33,7 +33,7 @@ describe('Curator', () => {
       mockBodilessCore(true);
       mockCuratorContext(true);
       const wrapper = mount(<CuratorPlaceholder />);
-      expect(wrapper.find(CuratorPlaceholder)).toBe(1);
+      expect(wrapper.find(CuratorPlaceholder).length).toBe(1);
     });
   });
   describe('when on preview mode', () => {
