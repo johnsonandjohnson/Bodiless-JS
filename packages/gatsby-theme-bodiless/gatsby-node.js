@@ -21,6 +21,7 @@
 const pathUtil = require('path');
 const fs = require('fs');
 
+const { getDisabledPages } = require('@bodiless/components/node-api');
 const { createFilePath } = require('gatsby-source-filesystem');
 const { onCreateNode, createSlug } = require('./create-node');
 
@@ -29,6 +30,11 @@ const Logger = require('./Logger');
 const logger = new Logger('gatsby');
 
 exports.onCreateNode = onCreateNode;
+
+const disablePageList = getDisabledPages();
+const disabledPages = Object.keys(disablePageList).filter(
+  item => disablePageList[item].pageDisabled === true,
+) || [];
 
 // exports.onCreateBabelConfig = ({ actions: { setBabelPlugin } }) => {
 exports.onCreateBabelConfig = args => {
@@ -114,7 +120,7 @@ const findTemplate = (indexPath, basePath, isFirst = true) => {
 };
 
 const createPagesFromFS = async ({ actions, graphql, getNode }) => {
-  const { createPage } = actions;
+  const { createPage, deletePage } = actions;
 
   const result = await graphql(`
     {
@@ -171,7 +177,13 @@ const createPagesFromFS = async ({ actions, graphql, getNode }) => {
       pageData.context.subPageTemplate = findSubPageTemplateTemplate(indexPath, basePath);
 
       logger.log('Creating page ', slug, pageData.path, pageData.component);
+
       createPage(pageData);
+
+      if (process.env.NODE_ENV === 'production' && disabledPages.indexOf(pageData.path) > -1) {
+        deletePage(pageData);
+      }
+
     } catch (exception) {
       logger.warn(`Error trying to create ${pageData.path}`, exception);
     }
