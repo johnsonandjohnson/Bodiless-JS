@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.0...v0.3.1) (2021-11-15)
+
+
+### Features
+
+* **components:** Allow users disabling pages, content links and menu items ([#1143](https://github.com/johnsonandjohnson/bodiless-js/issues/1143)) ([367e888](https://github.com/johnsonandjohnson/bodiless-js/commit/367e88821188b23ada367e59f43bdb12b5c280d7))
+* **unpublish:** User can see a link is disabled in edit mode ([#1207](https://github.com/johnsonandjohnson/bodiless-js/issues/1207)) ([dd002f3](https://github.com/johnsonandjohnson/bodiless-js/commit/dd002f39522b445619b3a318b0417e1ba620bdb7))
+
+
+
+
+
 # [0.3.0](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.10...v0.3.0) (2021-11-01)
 
 
