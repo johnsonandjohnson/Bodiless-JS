@@ -5,13 +5,12 @@ the current page, or the page itself.
 
 ![Disable icon](./assets/PageDisableIcon.jpg ':size=60')
 
-<!-- TODO: Link "Delete" to the corresponding page once it's documented. -->
 The disablement of a page means that the page will not be rendered/available on the Preview site
 (i.e., the published static site), but will still exist in [Edit](../../#edit-mode) and [Review
 Mode](../../#review-mode). This allows you to temporarily take a page offline but retain its
-content. If you believe the page will be permanently offline, we recommend you use the **Delete**
-operation to remove the page from your site (_Note:_ This _will_ result in a loss of that page's
-content).
+content. If you believe the page will be permanently offline, we recommend you use the
+[**Delete**](../Delete/) operation to remove the page from your site (_Note:_ This _will_ result in
+a loss of that page's content).
 
 Disabling the more granular features related to a page will alter the Preview/Review/Edit Mode
 experiences differently, depending upon the feature(s) selected.
