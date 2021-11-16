@@ -248,11 +248,18 @@ class Page {
       await Page.jsFilesPathResolve(originPath, destinationPath, jsFiles);
     }
 
+    // Clone Image assets
+    Page.clonePageImgAssets(origin, destination, this.basePath);
+
     return 'success';
   }
 
-  async clonePageAssets(origin, destination, target) {
-    const bp = this.basePath;
+  static clonePageImgAssets(origin, destination, basePath) {
+    Page.clonePageAssets(origin, destination, basePath, '/images/pages');
+  }
+  
+  static async clonePageAssets(origin, destination, basePath, target) {
+    const bp = basePath;
     const bsp = backendStaticPath;
 
     const originStaticPath = `${bsp}${target}${origin}`.replace(/\/$/, '');

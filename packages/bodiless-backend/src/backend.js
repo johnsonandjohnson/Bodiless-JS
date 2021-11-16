@@ -700,15 +700,7 @@ class Backend {
         .then((data) => {
           if (data) {
             logger.log(data);
-            page
-              .clonePageAssets(origin, destination, '/images/pages')
-              .then((data) => {
-                res.send(data);
-              })
-              .catch((err) => {
-                logger.log(err);
-                res.status(500).send(`${err}`);
-              });
+            res.send(data);
           } else {
             res.send({});
           }
