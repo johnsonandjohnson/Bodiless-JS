@@ -44,13 +44,20 @@ social media posts are rendered within the component.
     the Curator Feed you want rendered in the component.  
     ![Social Wall Settings Form](./assets/SocialWallSettingsForm.jpg ':size=50%')
     - **Feed ID:** The unique ID of a Curator Feed.
-    - **Container ID:** The identifier attribute (Element `id`) value you want associated with the
+      - This can be obtained from your [Curator Dashboard](https://app.curator.io/), under **Style >
+        Feed Public Key**.
+    - **Container ID:** The HTML identifier attribute (Element `id`) value associated with the
       Curator Container `<div>` element.
+      - This can be obtained from your [Curator Dashboard](https://app.curator.io/), under **Style >
+        Advanced**, in the _Container ID_ field.
 01. Click the checkmark in the bottom-right of the form to apply your configuration.
 01. Switch to [Review Mode](/ContentEditorUserGuide/#review-mode) to ensure that your Social Wall is
     rendering properly.
 
-?> **Note:** You can't place two Social Wall Components with the same Feed ID on the same page.
+!>  **Important:** If your page will consist of more than one Social Wall Component, you need to
+    ensure that each component has a unique Container ID.  
+    From your [Curator Dashboard](https://app.curator.io/), under **Style > Advanced**, you can edit
+    the _Container ID_ to be used.
 
 ## Site Builder Details
 
