@@ -31,10 +31,13 @@ const backendPrefix = process.env.GATSBY_BACKEND_PREFIX || '/___backend';
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
 const defaultBackendPagePath = path.resolve(backendFilePath, 'pages');
 const defaultBackendSitePath = path.resolve(backendFilePath, 'site');
-const backendPagePath = process.env.BODILESS_BACKEND_DATA_PAGE_PATH || defaultBackendPagePath;
+const backendPagePath =
+  process.env.BODILESS_BACKEND_DATA_PAGE_PATH || defaultBackendPagePath;
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
-const backendPublicPath = process.env.BODILESS_BACKEND_PUBLIC_PAGE_PATH || 'public/page-data';
-const isExtendedLogging = (process.env.BODILESS_BACKEND_EXTENDED_LOGGING_ENABLED || '0') === '1';
+const backendPublicPath =
+  process.env.BODILESS_BACKEND_PUBLIC_PAGE_PATH || 'public/page-data';
+const isExtendedLogging =
+  (process.env.BODILESS_BACKEND_EXTENDED_LOGGING_ENABLED || '0') === '1';
 const canCommit = (process.env.BODILESS_BACKEND_COMMIT_ENABLED || '0') === '1';
 
 const logger = new Logger('BACKEND');
@@ -45,25 +48,23 @@ This Class holds all of the interaction with Git
 */
 class Git {
   static setCurrent(branch) {
-    return Git.cmd()
-      .add('checkout', branch)
-      .exec();
+    return Git.cmd().add('checkout', branch).exec();
   }
 
   static getCurrent() {
     return Git.cmd()
       .add('rev-parse', '--abbrev-ref', 'HEAD')
       .exec()
-      .catch(data => logger.log(data))
-      .then(data => data.stdout);
+      .catch((data) => logger.log(data))
+      .then((data) => data.stdout);
   }
 
   static list() {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       const cmdName = path.join(__dirname, 'getBranches.sh');
       const cmd = spawn('bash', [cmdName]);
       const results = [];
-      cmd.stdout.on('data', data => {
+      cmd.stdout.on('data', (data) => {
         const values = data.toString().split('||');
         if (values.length === 4) {
           results.push({
@@ -104,32 +105,24 @@ class GitCommit {
   }
 
   addPaths(...paths) {
-    this.files.push(...paths.map(p => `${backendFilePath}/${p}.json`));
+    this.files.push(...paths.map((p) => `${backendFilePath}/${p}.json`));
     return this;
   }
 
   addFiles(...files) {
-    this.files.push(...files.map(p => `${backendStaticPath}/${p}`));
+    this.files.push(...files.map((p) => `${backendStaticPath}/${p}`));
     return this;
   }
 
   async pull() {
     const { remote } = this;
-    await GitCmd.cmd()
-      .add('fetch', remote)
-      .exec();
+    await GitCmd.cmd().add('fetch', remote).exec();
 
     // Check if there are any unstaged files left before rebasing.
-    const dirty = await GitCmd.cmd()
-      .add('diff', '--quiet')
-      .exec();
+    const dirty = await GitCmd.cmd().add('diff', '--quiet').exec();
     if (dirty.code) {
-      await GitCmd.cmd()
-        .add('add', '--all')
-        .exec();
-      await GitCmd.cmd()
-        .add('commit', '-m', 'TEMPORARY COMMIT')
-        .exec();
+      await GitCmd.cmd().add('add', '--all').exec();
+      await GitCmd.cmd().add('commit', '-m', 'TEMPORARY COMMIT').exec();
     }
 
     // Get current branch name.
@@ -154,9 +147,7 @@ class GitCommit {
         // Abort rebase only if it's in progress (i.e. merge conflict).
         try {
           logger.log('Found error during rebase, attempting to abort rebase.');
-          await GitCmd.cmd()
-            .add('rebase', '--abort')
-            .exec();
+          await GitCmd.cmd().add('rebase', '--abort').exec();
         } catch (abortErr) {
           logger.log('Found error while attempting to abort rebase.');
           logger.error(abortErr);
@@ -167,10 +158,8 @@ class GitCommit {
       throw rebaseErr;
     } finally {
       // If there was a temporary commit, rewind working directory back one commit.
-      if (dirty.code && (result.stdout.search('Already applied') === -1)) {
-        await GitCmd.cmd()
-          .add('reset', 'HEAD^')
-          .exec();
+      if (dirty.code && result.stdout.search('Already applied') === -1) {
+        await GitCmd.cmd().add('reset', 'HEAD^').exec();
       }
     }
     return result;
@@ -218,14 +207,10 @@ class GitCommit {
 
     try {
       // Push changes after succesful rebase.
-      await GitCmd.cmd()
-        .add('push', remote)
-        .exec();
+      await GitCmd.cmd().add('push', remote).exec();
     } catch (pushError) {
       // Walk back last commit, and put it's contents into the working directory.
-      GitCmd.cmd()
-        .add('reset', '--mixed', 'HEAD^')
-        .exec();
+      GitCmd.cmd().add('reset', '--mixed', 'HEAD^').exec();
       throw pushError;
     }
 
@@ -256,7 +241,9 @@ class Backend {
     if (isMorganEnabled()) {
       const morgan = require('morgan');
       const morganBody = require('morgan-body');
-      this.app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
+      this.app.use(
+        morgan(':method :url :status :res[content-length] - :response-time ms'),
+      );
       morganBody(this.app);
     }
     this.app.use((req, res, next) => {
@@ -335,15 +322,28 @@ class Backend {
       const target = req.query.target || undefined;
       try {
         const conflicts = await getConflicts(target);
-        const pages = uniq(conflicts.files.filter(file => (file.search(backendPagePath) !== -1))
-          .map(file => (
-            path.dirname(file).replace(backendPagePath, '').replace(/^\/|\/$/g, '') || 'homepage'
-          )));
-        const site = uniq(conflicts.files.filter(
-          file => (file.search(defaultBackendSitePath) !== -1),
-        ).map(file => (
-          path.dirname(file).replace(defaultBackendSitePath, '').replace(/^\/|\/$/g, '') || 'site'
-        )));
+        const pages = uniq(
+          conflicts.files
+            .filter((file) => file.search(backendPagePath) !== -1)
+            .map(
+              (file) =>
+                path
+                  .dirname(file)
+                  .replace(backendPagePath, '')
+                  .replace(/^\/|\/$/g, '') || 'homepage',
+            ),
+        );
+        const site = uniq(
+          conflicts.files
+            .filter((file) => file.search(defaultBackendSitePath) !== -1)
+            .map(
+              (file) =>
+                path
+                  .dirname(file)
+                  .replace(defaultBackendSitePath, '')
+                  .replace(/^\/|\/$/g, '') || 'site',
+            ),
+        );
         res.send({ ...conflicts, pages, site });
       } catch (error) {
         logger.log(error);
@@ -381,27 +381,33 @@ class Backend {
             .add('rev-parse', '--show-cdup')
             .exec();
           const reGetDeletedAndUntracked = /(?<= D |\?\? ).*/gm;
-          const deletedAndUntracked = gitStatus.stdout.match(reGetDeletedAndUntracked);
+          const deletedAndUntracked = gitStatus.stdout.match(
+            reGetDeletedAndUntracked,
+          );
           if (deletedAndUntracked !== null) {
             const dataPagePath = path.join(backendFilePath, 'pages');
-            const obsoletePublicPages = deletedAndUntracked.map(gitPath => {
-              const publicPagePath = gitPath.replace(dataPagePath, backendPublicPath);
-              // Get absolute path considering location of .git folder
-              return path.resolve(
-                gitRootRelPath.stdout.trim(),
-                publicPagePath,
+            const obsoletePublicPages = deletedAndUntracked.map((gitPath) => {
+              const publicPagePath = gitPath.replace(
+                dataPagePath,
+                backendPublicPath,
               );
+              // Get absolute path considering location of .git folder
+              return path.resolve(gitRootRelPath.stdout.trim(), publicPagePath);
             });
             // Have to loop through every path since 'git clean' can work incorrectly when passing
             // all the paths at once.
-            await Promise.all(obsoletePublicPages.map(
-              async (gitPath) => GitCmd.cmd().add('clean', '-dfx').addFiles(gitPath).exec(),
-            ));
+            await Promise.all(
+              obsoletePublicPages.map(async (gitPath) =>
+                GitCmd.cmd().add('clean', '-dfx').addFiles(gitPath).exec(),
+              ),
+            );
           }
           // Clean up data folder.
-          await Promise.all([backendFilePath, backendStaticPath].map(
-            async (gitPath) => GitCmd.cmd().add('clean', '-df').addFiles(gitPath).exec(),
-          ));
+          await Promise.all(
+            [backendFilePath, backendStaticPath].map(async (gitPath) =>
+              GitCmd.cmd().add('clean', '-df').addFiles(gitPath).exec(),
+            ),
+          );
         }
         // Discard changes in existing files.
         const cleanExisting = await GitCmd.cmd()
@@ -420,9 +426,9 @@ class Backend {
       logger.log('Start pull');
       new GitCommit()
         .pull()
-        .then(data => res.send(data.stdout))
+        .then((data) => res.send(data.stdout))
         // Need to inform user of merge operation fails.
-        .catch(error => Backend.exitWithErrorResponse(error, res));
+        .catch((error) => Backend.exitWithErrorResponse(error, res));
     });
   }
 
@@ -446,8 +452,8 @@ class Backend {
       Git.commit()
         .addPaths(...req.body.paths)
         .amend()
-        .then(data => res.send(data.stdout))
-        .catch(data => logger.log(data));
+        .then((data) => res.send(data.stdout))
+        .catch((data) => logger.log(data));
     });
   }
 
@@ -464,11 +470,11 @@ class Backend {
         .addFiles(...files)
         .commit(`[CONTENT] ${req.body.message}`, author)
         // .then(Git.cmd().add('push').exec())
-        .then(data => {
+        .then((data) => {
           res.send(data.stdout);
         })
         // Need to inform user of merge operation fails.
-        .catch(error => Backend.exitWithErrorResponse(error, res));
+        .catch((error) => Backend.exitWithErrorResponse(error, res));
     });
   }
 
@@ -479,21 +485,17 @@ class Backend {
       new GitCmd()
         .add('symbolic-ref', '--short', 'HEAD')
         .exec()
-        .then(data => {
+        .then((data) => {
           const branch = data.stdout.trim();
           logger.log(`Branch = ${branch}`);
           Git.cmd()
             .add('rebase', `origin/${branch}`)
             .exec()
-            .then(
-              Git.cmd()
-                .add('push', 'origin', branch)
-                .exec(),
-            )
-            .then(addData => res.send(addData.stdout))
-            .catch(addData => logger.error(addData));
+            .then(Git.cmd().add('push', 'origin', branch).exec())
+            .then((addData) => res.send(addData.stdout))
+            .catch((addData) => logger.error(addData));
         })
-        .catch(data => logger.log(data));
+        .catch((data) => logger.log(data));
     });
   }
 
@@ -507,17 +509,23 @@ class Backend {
   static setAsset(route) {
     route.post((req, res) => {
       const baseResourcePath = Backend.getPath(req);
-      const tmpDir = tmp.dirSync({ mode: '0755', unsafeCleanup: true, prefix: 'backendTmpDir_' });
+      const tmpDir = tmp.dirSync({
+        mode: '0755',
+        unsafeCleanup: true,
+        prefix: 'backendTmpDir_',
+      });
       const form = formidable({ multiples: true, uploadDir: tmpDir.name });
 
       form.parse(req, (err, fields, files) => {
         const { nodePath } = fields;
-        copyAllFiles(files, baseResourcePath, nodePath).then((filesPath) => {
-          res.json({ filesPath });
-        }).catch(copyErr => {
-          console.log(copyErr);
-          res.send(copyErr);
-        });
+        copyAllFiles(files, baseResourcePath, nodePath)
+          .then((filesPath) => {
+            res.json({ filesPath });
+          })
+          .catch((copyErr) => {
+            console.log(copyErr);
+            res.send(copyErr);
+          });
       });
     });
   }
@@ -526,16 +534,16 @@ class Backend {
     route
       .get((req, res) => {
         logger.log('Start get current set');
-        Git.getCurrent().then(data => res.send(data));
+        Git.getCurrent().then((data) => res.send(data));
       })
       .post((req, res) => {
         logger.log(`Start Post current Set:${req.body}`);
         Git.setCurrent(req.body.name)
           .then(Git.list())
-          .then(data => {
+          .then((data) => {
             res.send(data);
           })
-          .catch(reason => {
+          .catch((reason) => {
             logger.log(reason);
           });
       });
@@ -544,7 +552,7 @@ class Backend {
   static setSetList(route) {
     route.get((req, res) => {
       logger.log('Start Get Set List');
-      Git.list().then(data => res.send(data));
+      Git.list().then((data) => res.send(data));
     });
   }
 
@@ -557,7 +565,7 @@ class Backend {
         logger.log(`Start get content for:${page.file}`);
         page
           .read()
-          .then(data => {
+          .then((data) => {
             res.send(data);
           })
           .catch(() => res.send({}));
@@ -568,11 +576,11 @@ class Backend {
         logger.log(`Start post content for:${page.file}`);
         page
           .write(req.body)
-          .then(data => {
+          .then((data) => {
             logger.log('Sending', data);
             res.send(data);
           })
-          .catch(reason => {
+          .catch((reason) => {
             logger.log(reason);
             res.send({});
           });
@@ -582,11 +590,11 @@ class Backend {
         logger.log(`Start deletion for:${page.file}`);
         page
           .delete()
-          .then(data => {
+          .then((data) => {
             logger.log('Sending', data);
             res.send(data);
           })
-          .catch(reason => {
+          .catch((reason) => {
             logger.log(reason);
             res.send({});
           });
@@ -609,48 +617,42 @@ class Backend {
   }
 
   static removePage(route) {
-    route
-      .delete((req, res) => {
-        const pagePath = req.params[0];
-        const page = Backend.getPage(pagePath);
-        page.setBasePath(backendPagePath);
+    route.delete((req, res) => {
+      const pagePath = req.params[0];
+      const page = Backend.getPage(pagePath);
+      page.setBasePath(backendPagePath);
 
-        logger.log(`Start deleting page:${page.directory}`);
+      logger.log(`Start deleting page:${page.directory}`);
 
-        page
-          .deleteDirectory()
-          .then(error => {
-            if (error) {
-              logger.log(error);
-              res.send(error);
-            } else {
-              res.send({});
-            }
-          });
+      page.deleteDirectory().then((error) => {
+        if (error) {
+          logger.log(error);
+          res.send(error);
+        } else {
+          res.send({});
+        }
       });
+    });
   }
 
   static directoryChild(route) {
-    route
-      .delete((req, res) => {
-        const pagePath = req.params[0];
-        const page = Backend.getPage(pagePath);
+    route.delete((req, res) => {
+      const pagePath = req.params[0];
+      const page = Backend.getPage(pagePath);
 
-        page.setBasePath(backendPagePath);
+      page.setBasePath(backendPagePath);
 
-        logger.log(`Start verify page child directory: ${page.directory}`);
+      logger.log(`Start verify page child directory: ${page.directory}`);
 
-        page
-          .hasChildDirectory()
-          .then(error => {
-            if (error) {
-              logger.log(error);
-              res.send(error);
-            } else {
-              res.send({});
-            }
-          });
+      page.hasChildDirectory().then((error) => {
+        if (error) {
+          logger.log(error);
+          res.send(error);
+        } else {
+          res.send({});
+        }
       });
+    });
   }
 
   static setPages(route) {
@@ -672,12 +674,12 @@ class Backend {
       }
       page
         .write(pageContent)
-        .then(data => {
+        .then((data) => {
           logger.log('Sending', data);
           res.status(201);
           res.send(data);
         })
-        .catch(reason => {
+        .catch((reason) => {
           logger.log(reason);
           res.send({});
         });
@@ -686,22 +688,32 @@ class Backend {
 
   static clonePage(route) {
     route.post(async (req, res) => {
-      const { body: { origin, destination } } = req;
+      const {
+        body: { origin, destination },
+      } = req;
       const page = Backend.getPage(destination);
       page.setBasePath(backendPagePath);
       logger.log(`Start cloning page for:${destination}`);
 
       page
         .copyDirectory(origin, destination)
-        .then(data => {
+        .then((data) => {
           if (data) {
             logger.log(data);
-            res.send(data);
+            page
+              .clonePageAssets(origin, destination, '/images/pages')
+              .then((data) => {
+                res.send(data);
+              })
+              .catch((err) => {
+                logger.log(err);
+                res.status(500).send(`${err}`);
+              });
           } else {
             res.send({});
           }
         })
-        .catch(reason => {
+        .catch((reason) => {
           logger.log(reason);
           res.status(500).send(`${reason}`);
         });
@@ -714,7 +726,9 @@ class Backend {
 
   start(port) {
     logger.log('Start');
-    this.app.listen(port, () => logger.log(`Backend listening on Port: ${port}`));
+    this.app.listen(port, () =>
+      logger.log(`Backend listening on Port: ${port}`),
+    );
   }
 }
 
