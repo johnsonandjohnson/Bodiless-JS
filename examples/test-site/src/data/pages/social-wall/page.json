@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "uuid": "98aa0f90-4233-11ec-b9d5-f565b78fb93a",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "EditorFullFeatured"
+    },
+    {
+      "uuid": "17151730-4239-11ec-ba15-a9ac30317bf8",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "Curator"
+    },
+    {
+      "uuid": "323c8980-4239-11ec-ba15-a9ac30317bf8",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "Curator"
+    }
+  ]
+}
