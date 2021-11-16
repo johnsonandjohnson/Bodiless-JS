@@ -57,6 +57,8 @@ To disable menu links leading to the current page, select the "Menu links" check
 When disabled, any menu links targeting the current page will not be visible in Preview (Static) or
 Review Mode (i.e., for each of the affected links, neither the anchor element or the link text will
 be rendered). Disabled menu links _will_, however, still be visible and functional in Edit Mode.
+While in Edit Mode, disabled menu links will be made visibly clear by being highlighted in fuchsia,
+and will display "Link Disabled" on hover.
 
 **Review Mode**  
 ![Disabled menu link - Review Mode](./assets/DisabledMenuLinkReviewMode.jpg)
@@ -76,9 +78,12 @@ the [Rich Text Editor Component](/Components/RichText) or [Card Component](/Comp
 When disabled, any links targeting the current page — that aren't in menus — will not be rendered in
 Preview (Static) or Review Mode (i.e., for each of the affected links, the anchor element will not
 be rendered, but the link text will be). Disabled non-menu links _will_, however, still be visible
-and functional in Edit Mode.
+and functional in Edit Mode. While in Edit Mode, disabled menu links will be made visibly clear by
+being highlighted in fuchsia. In all modes, non-menu links will display "Link Disabled" on hover.
 
-![Disabled non-menu links - Review Mode vs. Edit Mode](./assets/DisableNonMenuLinkReviewVsEdit.jpg)
+| Review Mode | Edit Mode |
+| ----------- | --------- |
+| ![Disabled non-menu link - Review Mode](./assets/DisabledNonMenuLinkReviewMode.jpg) | ![Disabled non-menu link - Edit Mode](./assets/DisabledNonMenuLinkEditMode.jpg) |
 
 ?> **Note:** The page will still be reachable directly (via its URL), regardless of non-menu links
 being disabled — even if the page itself has been disabled.
