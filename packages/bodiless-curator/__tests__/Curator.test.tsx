@@ -1,5 +1,4 @@
 import React from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
 import { CuratorClean } from '../src/components/Curator';
 import CuratorPlaceholder from '../src/components/CuratorPlaceHolder';
