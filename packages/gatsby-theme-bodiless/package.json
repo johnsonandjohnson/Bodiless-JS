@@ -31,7 +31,8 @@
     "create-node.js",
     "tailwind.base.config.js",
     "/doc",
-    "bodiless.content.json"
+    "bodiless.content.json",
+    "src/dist/tailwindcss/resolveConfig.ts"
   ],
   "repository": {
     "type": "git",
