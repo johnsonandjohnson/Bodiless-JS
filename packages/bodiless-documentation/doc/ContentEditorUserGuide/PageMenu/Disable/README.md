@@ -69,8 +69,8 @@ and will display "Link Disabled" on hover.
 **Edit Mode**  
 ![Disabled menu link - Edit Mode](./assets/DisabledMenuLinkEditMode.jpg)
 
-?> **Note:** The page will still be reachable directly (via its URL), regardless of menu links being
-disabled — even if the page itself has been disabled.
+?>  **Note:** The page will still be reachable directly (via its URL), regardless of menu links
+    being disabled — even if the page itself has been disabled.
 
 ## Disable Non-Menu Links
 
@@ -88,8 +88,8 @@ being highlighted in fuchsia. In all modes, non-menu links will display "Link Di
 | ----------- | --------- |
 | ![Disabled non-menu link - Review Mode](./assets/DisabledNonMenuLinkReviewMode.jpg) | ![Disabled non-menu link - Edit Mode](./assets/DisabledNonMenuLinkEditMode.jpg) |
 
-?> **Note:** The page will still be reachable directly (via its URL), regardless of non-menu links
-being disabled — even if the page itself has been disabled.
+?>  **Note:** The page will still be reachable directly (via its URL), regardless of non-menu links
+    being disabled — even if the page itself has been disabled.
 
 ## Disable Indexing
 
@@ -97,4 +97,4 @@ Select the "Indexing" checkbox to remove the page's URL from the `sitemap.xml` f
 the `robots.txt` file. This will prevent search engines from discovering the page, as well as block
 them from indexing it if it has already been discovered.
 
-?> **Note:** This feature is still under development.
+?>  **Note:** This feature is still under development.
