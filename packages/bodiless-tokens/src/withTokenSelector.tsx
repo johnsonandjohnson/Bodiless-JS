@@ -22,7 +22,8 @@ import {
   UseBodilessOverrides,
 } from '@bodiless/core';
 import type { Token, ComponentOrTag } from '@bodiless/fclasses';
-import { flowRight, pick } from 'lodash';
+import flowRight from 'lodash/flowRight';
+import pick from 'lodash/pick';
 import { v4 } from 'uuid';
 import type { TokensProps } from './withTokensFromProps';
 import TokenMap from './TokenMap';

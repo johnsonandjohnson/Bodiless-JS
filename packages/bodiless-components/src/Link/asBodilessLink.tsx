@@ -25,7 +25,8 @@ import {
   ContentNode,
 } from '@bodiless/core';
 import type { BodilessOptions } from '@bodiless/core';
-import { flowRight, identity } from 'lodash';
+import flowRight from 'lodash/flowRight';
+import identity from 'lodash/identity';
 import {
   Fragment,
   addProps,

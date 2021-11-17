@@ -14,7 +14,7 @@
 
 import React, { FC, ComponentType, ReactNode } from 'react';
 import ReactTooltip from 'rc-tooltip';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import {
   addClasses,
   addClassesIf,

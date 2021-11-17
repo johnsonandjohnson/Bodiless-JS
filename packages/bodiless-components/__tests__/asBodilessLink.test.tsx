@@ -16,7 +16,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { PageEditContext } from '@bodiless/core';
 import type { ComponentWithMeta } from '@bodiless/fclasses';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { asBodilessLink } from '../src/Link';
 import { HrefNormalizer } from '../src/Link/NormalHref';
 import { withMockNode } from './helpers/MockContentNode';

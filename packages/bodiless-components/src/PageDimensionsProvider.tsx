@@ -19,7 +19,7 @@ import React, {
   useEffect,
   useContext,
 } from 'react';
-import { throttle } from 'lodash';
+import throttle from 'lodash/throttle';
 import { Token } from '@bodiless/fclasses';
 
 type PageDimensions = {

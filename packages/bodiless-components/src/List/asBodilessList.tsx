@@ -18,7 +18,8 @@ import {
 import React, {
   ComponentType, PropsWithChildren, FC,
 } from 'react';
-import { flow, identity } from 'lodash';
+import flow from 'lodash/flow';
+import identity from 'lodash/identity';
 import {
   replaceWith, withDesign, asComponent, DesignableComponentsProps, designable, HOC,
   withoutProps, stylable, Design, asToken, Enhancer, Token, Fragment,

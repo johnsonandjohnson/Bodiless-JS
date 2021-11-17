@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { TreeHO, Tree } from '../lib/type';
 import { treeHOPromiseFlow } from '../lib/promiseUtils';
 

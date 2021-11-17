@@ -14,7 +14,7 @@
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC, ComponentType, HTMLProps } from 'react';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import {
   withDesign,
   designable,

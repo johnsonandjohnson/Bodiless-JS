@@ -20,7 +20,7 @@ import {
   asComponent, designable, addProps, Fragment, withDesign, replaceWith, withoutProps,
 } from '@bodiless/fclasses';
 import { observer } from 'mobx-react-lite';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 import { asStylableBreadcrumbs } from './Breadcrumb.token';
 
 import withBreadcrumbItemsFromStore from './withBreadcrumbItemsFromStore';

@@ -14,7 +14,7 @@
 
 /* eslint-disable max-len */
 
-import { union } from 'lodash';
+import union from 'lodash/union';
 import { DefaultContentNode, Path } from '../ContentNode';
 import type { ContentNode } from '../ContentNode';
 

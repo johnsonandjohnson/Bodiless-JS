@@ -13,9 +13,11 @@
  */
 
 import React from 'react';
-import {
-  isArray, mergeWith, union, flow as flowBase, identity,
-} from 'lodash';
+import isArray from 'lodash/isArray';
+import mergeWith from 'lodash/mergeWith';
+import union from 'lodash/union';
+import flow from 'lodash/flow';
+import identity from 'lodash/identity';
 import type {
   TokenDef, HOC, ComponentOrTag, ComponentWithMeta, TokenMeta,
   Token, TokenFilterTest, AsToken as AsTokenBase,
@@ -153,7 +155,7 @@ const asToken: AsToken = (...args) => {
   ];
   const hocs = filterMembers(members);
   const hocs$ = hocs.map(t => preserveMeta(t));
-  return Object.assign(flowBase(hocs$), { meta, members, hocs });
+  return Object.assign(flow(hocs$), { meta, members, hocs });
 };
 
 /**

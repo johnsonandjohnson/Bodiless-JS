@@ -533,7 +533,7 @@ to make it more flexible and reusable.
     import type {
       StylableProps, DesignableComponentsProps, TokenDef
     } from '@bodiless/fclasses';
-    import { flow } from 'lodash';
+    import flow from 'lodash/flow';
     import { withSimpleEditor, asElementToken } from '../Element';
     ```
 

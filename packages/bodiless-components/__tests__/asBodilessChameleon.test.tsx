@@ -20,7 +20,9 @@ import {
   DefaultContentNode, NodeProvider, useNode, withNodeKey, withNode,
   PageEditContext, PageContextProvider,
 } from '@bodiless/core';
-import { flowRight, flow, identity } from 'lodash';
+import flowRight from 'lodash/flowRight';
+import flow from 'lodash/flow';
+import identity from 'lodash/identity';
 import { withDesign, withoutProps, HOC } from '@bodiless/fclasses';
 
 import {

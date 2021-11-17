@@ -13,7 +13,7 @@
  */
 
 import React from 'react';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { mount } from 'enzyme';
 import {
   withDesign, addProps, asToken,

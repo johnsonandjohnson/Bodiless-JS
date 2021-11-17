@@ -13,7 +13,7 @@
  */
 
 import React, { FC, ComponentType } from 'react';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import {
   Fragment, A, DesignableComponentsProps, designable,
 } from '@bodiless/fclasses';
