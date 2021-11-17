@@ -257,31 +257,26 @@ class Page {
   static clonePageImgAssets(origin, destination, basePath) {
     Page.clonePageAssets(origin, destination, basePath, '/images/pages');
   }
-  
-  static async clonePageAssets(origin, destination, basePath, target) {
-    const bp = basePath;
-    const bsp = backendStaticPath;
 
-    const originStaticPath = `${bsp}${target}${origin}`.replace(/\/$/, '');
-    const destinationStaticPath = `${bsp}${target}${destination}`.replace(
-      /\/$/,
-      '',
-    );
-    const originPath = `${bp}${origin}`.replace(/\/$/, '');
-    const destinationPath = `${bp}${destination}`.replace(/\/$/, '');
+  static async clonePageAssets(origin, destination, basePath, target) {
+    const originPath = origin.replace(/\/$/, '');
+    const destinationPath = destination.replace(/\/$/, '');
+
+    const originStaticPath = `${backendStaticPath}${target}${originPath}`;
+    const destinationStaticPath = `${backendStaticPath}${target}${destinationPath}`;
+
+    const originPagePath = `${basePath}${originPath}`;
+    const destinationPagePath = `${basePath}${destinationPath}`;
+
     try {
       // Check if any directory exist at origin file path and it has any files.
-      const isStaticDirsExistAtOrigin = fs.existsSync(originStaticPath);
-      if (isStaticDirsExistAtOrigin) {
-        // Check for all files & Dirs at origin static directory to get list of dirs and files
-        // available apart from list from above origin page data directory
+      if (fs.existsSync(originStaticPath)) {
+        // Scan origin directory (page being cloned) to get list of existing directories name
+        const subDirsAtOrigin = await Page.dirHasDirectories(
+          originPagePath,
+        ).then((dirent) => dirent.map((dirent) => dirent.name));
 
-        // Scan origin directory (page being cloned) to get existing directories name
-        const subDirsAtOrigin = await Page.dirHasDirectories(originPath).then(
-          (dirent) => dirent.map((dirent) => dirent.name),
-        );
-
-        // Get list dirs & files at static origin
+        // Get list dirs & files at origin static location
         const subDirsAtStaticOrigin = await Page.dirHasSubObjects(
           originStaticPath,
         ).then((dirent) => dirent.map((dirent) => dirent.name));
@@ -292,33 +287,37 @@ class Page {
         );
 
         if (assetsToBeCopied.length) {
-          const copyAssets = await Page.copyAssetsPromise(
-            originStaticPath,
-            destinationStaticPath,
-            subDirsAtOrigin,
+          // Clone Assets
+          await Promise.all(
+            assetsToBeCopied.map((item) => {
+              const fromPath = path.join(originStaticPath, item);
+              const toPath = path.join(destinationStaticPath, item);
+              return new Promise((resolve, reject) => {
+                fse.copy(fromPath, toPath, (err) => {
+                  if (err) return reject(err);
+                  return resolve();
+                });
+              });
+            }),
           );
 
-          if (copyAssets === 'success') {
-            // Update cloned page files with newly copied assets destination path
-            const clonedPageFilesAtDestination = await Page.dirHasFiles(
-              destinationPath,
-            ).then((results) => results.map((dirent) => dirent.name));
-            if (clonedPageFilesAtDestination.length) {
-              const pathFrom = origin.replace(/\/$/, '');
-              const pathTo = destination.replace(/\/$/, '');
+          // Update cloned page files with newly copied assets destination path
+          const clonedPageFilesAtDestination = await Page.dirHasFiles(
+            destinationPagePath,
+          ).then((results) => results.map((dirent) => dirent.name));
 
-              await Promise.all(
-                clonedPageFilesAtDestination.map(async (file) => {
-                  const fileToBeUpdated = path.join(destinationPath, file);
-                  const options = {
-                    files: fileToBeUpdated,
-                    from: new RegExp(pathFrom, 'g'),
-                    to: pathTo,
-                  };
-                  return Page.updateFileContent(options);
-                }),
-              );
-            }
+          if (clonedPageFilesAtDestination.length) {
+            await Promise.all(
+              clonedPageFilesAtDestination.map(async (item) => {
+                const fileToBeUpdated = path.join(destinationPagePath, item);
+                const options = {
+                  files: fileToBeUpdated,
+                  from: new RegExp(originPath, 'g'),
+                  to: destinationPath,
+                };
+                return Page.updateFileContent(options);
+              }),
+            );
           }
         }
       }
@@ -326,29 +325,6 @@ class Page {
       if (err) logger.log(err);
     }
     return 'success';
-  }
-
-  static copyAssetsPromise(origin, destination, excludedDirs = []) {
-    return new Promise((resolve, reject) => {
-      fse.copy(
-        origin,
-        destination,
-        {
-          filter: (src) => {
-            if (excludedDirs.length) {
-              return excludedDirs.some((v) =>
-                src.split(origin).pop().split('/').includes(v),
-              );
-            }
-            return true;
-          },
-        },
-        (err) => {
-          if (err) return reject(err);
-          return resolve('success');
-        },
-      );
-    });
   }
 
   static updateFileContent(options) {
