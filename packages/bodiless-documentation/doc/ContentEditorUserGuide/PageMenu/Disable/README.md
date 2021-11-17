@@ -59,6 +59,10 @@ be rendered). Disabled menu links _will_, however, still be visible and function
 While in Edit Mode, disabled menu links will be made visibly clear by being highlighted in fuchsia,
 and will display "Link Disabled" on hover.
 
+!>  **IMPORTANT:** Your site may exhibit different behavior than that depicted in the proceeding
+    screenshots, as the site-level styling of the menu will take precedence and may
+    hide/override/camouflage the editor's styling.
+
 **Review Mode**  
 ![Disabled menu link - Review Mode](./assets/DisabledMenuLinkReviewMode.jpg)
 
