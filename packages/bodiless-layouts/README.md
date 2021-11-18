@@ -71,8 +71,10 @@ via the add button on the toolbar.
 
 ### Saving a component in the Content Library
 
-If the instance of the current Flow Container has been configured to use it, then you will be able
-to save components and their content to the Content Library.
+Using the _Content Library_, you can save components that you've created, along with their embedded
+content, allowing you to reuse them elsewhere on your site. If the instance of the current Flow
+Container has been configured to use it, then you will be able to save components and their content
+to the Content Library.
 
 Within the context menu of any component in the Flow Container, you will see a "Library" subsection
 with an **Add** button.
@@ -102,7 +104,8 @@ unlink a component from the Content Library, its content is not removed — it s
 connection to the associated Library Item, allowing you to edit it as an independent component
 (i.e., edits to the component will not update the instances of the previously linked Library Item).
 
-To unlink a component that is a Library Item, click **Unlink** from its context menu.
+To unlink a component that is a Library Item, under the "Library" subsection of its context menu,
+click **Unlink**.
 
 ![Context Menu with "Unlink" button](./assets/ContextMenuWithLibraryUnlink.jpg ':size=50%')
 
