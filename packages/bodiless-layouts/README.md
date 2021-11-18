@@ -79,12 +79,36 @@ with an **Add** button.
 
 ![Context Menu with Library subsection](./assets/ContextMenuWithLibrary.jpg ':size=50%')
 
-Click **Add** to save your component, along with its embedded content, to the Content Library. Now,
-you will be able to reuse this component anywhere on your site by adding it to any instance of the
-same Flow Container.
+Click **Add** to save your component, along with its embedded content, to the Content Library. Once
+added, a label will appear in the top-left of your component, indicating that it is a "Library
+Item"; clicking on the "info" icon (the circled "i") within that label will open this documentation
+in a new browser tab. It's also worth noting that the dashed border box around your component will
+now be orange (as opposed to blue), and the **Add** button in the context menu will now be an
+**Unlink** button highlighted in blue (see: [Unlinking a component from the Content
+Library](#unlinking-a-component-from-the-content-library)).
 
-?> **Note:** Editing the Content Library component — from anywhere — will update the content in all
-places the component is used.
+![Content Library Item and context menu](./assets/ContentLibraryItemAndContextMenu.jpg ':size=50%')
+
+Now, you will be able to reuse this component anywhere on your site by adding it to any instance of
+the same Flow Container (see: [Add a new component](#add-a-new-component)).
+
+?>  **Note:** Editing the Content Library component — from anywhere — will update the content in all
+    places the component is used.
+
+### Unlinking a component from the Content Library
+
+Components that are Library Items are able to be _unlinked_ from the Content Library. When you
+unlink a component from the Content Library, its content is not removed — it simply loses its
+connection to the associated Library Item, allowing you to edit it as an independent component
+(i.e., edits to the component will not update the instances of the previously linked Library Item).
+
+To unlink a component that is a Library Item, click **Unlink** from its context menu.
+
+![Context Menu with "Unlink" button](./assets/ContextMenuWithLibraryUnlink.jpg ':size=50%')
+
+?>  **Note:** If you add a component to the Content Library that had been unlinked, this will create
+    a _new_ Library Item and will not replace the Library Item from which the component had been
+    previously linked.
 
 ---
 

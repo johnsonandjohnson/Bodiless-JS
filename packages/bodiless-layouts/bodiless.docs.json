@@ -3,7 +3,9 @@
     "FlowContainer.md": "./README.md",
     "assets": {
       "ComponentLibraryNew.jpg": "./assets/ComponentLibraryNew.jpg",
+      "ContentLibraryItemAndContextMenu.jpg": "./assets/ContentLibraryItemAndContextMenu.jpg",
       "ContextMenuWithLibrary.jpg": "./assets/ContextMenuWithLibrary.jpg",
+      "ContextMenuWithLibraryUnlink.jpg": "./assets/ContextMenuWithLibraryUnlink.jpg",
       "EmptyFlowcontainer.jpg": "./assets/EmptyFlowcontainer.jpg"
     }
   }
