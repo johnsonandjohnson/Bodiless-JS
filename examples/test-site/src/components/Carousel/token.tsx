@@ -55,9 +55,6 @@ const withImageSlide = withDesign({
 });
 
 const withThumbbailDots = withDesign({
-  Slider: withDesign({
-    Title: replaceWith(LandscapeImage),
-  }),
   Dots: withDesign({
     Item: withDesign({
       Dot: withAppendChild(SquareImage, 'Thumbnail'),
@@ -124,6 +121,10 @@ const withControlsWrapperStyles = withDesign({
   ControlsWrapper: addClasses('flex justify-center pt-2'),
 });
 
+const withControlsWrapperStylesLeftAligned = withDesign({
+  ControlsWrapper: addClasses('flex justify-left pt-2'),
+});
+
 const withDotStyles = asToken(
   withControlsWrapperStyles,
   withDesign({
@@ -144,14 +145,14 @@ const withDotStyles = asToken(
 );
 
 const withThumbnailStyles = asToken(
-  withControlsWrapperStyles,
+  withControlsWrapperStylesLeftAligned,
   withDesign({
     Dots: asToken(
       addClasses('flex items-center'),
       withDesign({
         Item: withDesign({
           Dot: asToken(
-            addClasses('mx-5 inline-block align-middle'),
+            addClasses('mr-5 inline-block align-middle'),
             withDesign({
               Thumbnail: asToken(
                 asImageRounded,

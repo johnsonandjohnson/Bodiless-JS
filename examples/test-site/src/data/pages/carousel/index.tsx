@@ -155,7 +155,7 @@ const CarouselExamples = () => (
     <ThumbnailCarousel nodeKey="thumbnail" />
     </div>
     <SubTitle>Thumbnail Carousel -- Two sets of slide with Different Image for Thumbnail</SubTitle>
-    <p>Limitation: For each Main Image added, add corresponding Thumbnail image.</p>
+    <p>Limitation: For each Main Slide added, add corresponding Thumbnail Image.</p>
     <div className="w-full md:w-1/2">
     <ThumbnailCarouselDifferentImages nodeKey="thumbnaildifferent" />
     </div>

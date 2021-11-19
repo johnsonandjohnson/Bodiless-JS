@@ -45,6 +45,7 @@ const Carousel = asToken(
   withNode,
 )(CarouselClean);
 
+/* Thumbnail & Image that will share the same image */
 const ThumbnailCarousel = asToken(
   asEditableCarousel(CAROUSEL_NODE_KEY),
   withCarouselDots(CAROUSEL_NODE_KEY),
@@ -54,13 +55,14 @@ const ThumbnailCarousel = asToken(
   withImageSlide,
 )(CarouselClean);
 
+/* Unique images for the Carousel & Thumbnails per slide */
 const ThumbnailCarouselDifferentImages = asToken(
   asEditableCarousel(CAROUSEL_NODE_KEY),
   withCarouselDots(CAROUSEL_THUMB_NODE_KEY),
   withThumbbailDots,
   withThumbnailStyles,
   asAccessibleCarousel,
-  withImageSlide,
+  withChameleonSlide,
 )(CarouselClean);
 
 const ChameleonCarousel = asToken(
