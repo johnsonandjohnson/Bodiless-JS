@@ -262,11 +262,15 @@ class Page {
     const originPath = origin.replace(/\/$/, '');
     const destinationPath = destination.replace(/\/$/, '');
 
-    const originStaticPath = `${backendStaticPath}${target}${originPath}`;
-    const destinationStaticPath = `${backendStaticPath}${target}${destinationPath}`;
+    const originStaticPath = path.join(backendStaticPath, target, originPath);
+    const destinationStaticPath = path.join(
+      backendStaticPath,
+      target,
+      destinationPath,
+    );
 
-    const originPagePath = `${basePath}${originPath}`;
-    const destinationPagePath = `${basePath}${destinationPath}`;
+    const originPagePath = path.join(basePath, originPath);
+    const destinationPagePath = path.join(basePath, destinationPath);
 
     try {
       // Check if any directory exist at origin file path and it has any files.
