@@ -32,6 +32,8 @@ import {
   Carousel,
   CAROUSEL_NODE_KEY,
   ChameleonCarousel,
+  ThumbnailCarousel,
+  ThumbnailCarouselDifferentImages,
   withAutoPlayButtonStyles,
   withAutoPlay,
   asAccessibleCarousel,
@@ -148,6 +150,15 @@ const CarouselExamples = () => (
       Horizontal Card, Video
     </SubTitle>
     <ChameleonCarousel nodeKey="chameleon" />
+    <SubTitle>Thumbnail Carousel -- Shared Image for both Slider and Thumbnail</SubTitle>
+    <div className="w-full md:w-1/2">
+    <ThumbnailCarousel nodeKey="thumbnail" />
+    </div>
+    <SubTitle>Thumbnail Carousel -- Two sets of slide with Different Image for Thumbnail</SubTitle>
+    <p>Limitation: For each Main Image added, add corresponding Thumbnail image.</p>
+    <div className="w-full md:w-1/2">
+    <ThumbnailCarouselDifferentImages nodeKey="thumbnaildifferent" />
+    </div>
   </>
 );
 

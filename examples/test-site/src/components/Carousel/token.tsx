@@ -28,6 +28,7 @@ import {
   ifToggledOn,
   withChild,
   ifReadOnly,
+  withAppendChild,
 } from '@bodiless/core';
 import {
   useIsCarouselItemActive,
@@ -41,14 +42,26 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
  * overrides some styles defined in the contrib library
  */
 import './carousel.css';
-import { LandscapeImage, LandscapeLinkableImage } from '../Image';
+import { LandscapeImage, SquareImage, LandscapeLinkableImage } from '../Image';
 import Card from '../Card';
 import { asCardHorizontal, asCardDefaultStyle } from '../Card/token';
 import { Reponsive16By9YouTube } from '../YouTube';
+import { asImageRounded } from '../Elements.token';
 
 const withImageSlide = withDesign({
   Slider: withDesign({
     Title: replaceWith(LandscapeImage),
+  }),
+});
+
+const withThumbbailDots = withDesign({
+  Slider: withDesign({
+    Title: replaceWith(LandscapeImage),
+  }),
+  Dots: withDesign({
+    Item: withDesign({
+      Dot: withAppendChild(SquareImage, 'Thumbnail'),
+    }),
   }),
 });
 
@@ -130,6 +143,30 @@ const withDotStyles = asToken(
   }),
 );
 
+const withThumbnailStyles = asToken(
+  withControlsWrapperStyles,
+  withDesign({
+    Dots: asToken(
+      addClasses('flex items-center'),
+      withDesign({
+        Item: withDesign({
+          Dot: asToken(
+            addClasses('mx-5 inline-block align-middle'),
+            withDesign({
+              Thumbnail: asToken(
+                asImageRounded,
+                ifToggledOn(useIsCarouselItemActive)(
+                  addClasses('border-2 border-black'),
+                ),
+              ),
+            }),
+          ),
+        }),
+      }),
+    ),
+  }),
+);
+
 const withAutoPlayButtonStyles = asToken(
   withControlsWrapperStyles,
   withDesign({
@@ -188,6 +225,8 @@ export {
   withAutoPlay,
   withNavButtonsStyles,
   withDotStyles,
+  withThumbnailStyles,
+  withThumbbailDots,
   withAutoPlayButtonStyles,
   withChameleonSlide,
   asAccessibleCarousel,

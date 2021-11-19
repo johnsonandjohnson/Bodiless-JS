@@ -29,17 +29,38 @@ import {
   withChameleonSlide,
   withNavButtonsStyles,
   withDotStyles,
+  withThumbnailStyles,
+  withThumbbailDots,
   withAutoPlay,
   withAutoPlayButtonStyles,
   asAccessibleCarousel,
 } from './token';
 
 export const CAROUSEL_NODE_KEY = 'slides';
+export const CAROUSEL_THUMB_NODE_KEY = 'slides-thumbs';
 
 const Carousel = asToken(
   asEditableCarousel(CAROUSEL_NODE_KEY),
   withImageSlide,
   withNode,
+)(CarouselClean);
+
+const ThumbnailCarousel = asToken(
+  asEditableCarousel(CAROUSEL_NODE_KEY),
+  withCarouselDots(CAROUSEL_NODE_KEY),
+  withThumbbailDots,
+  withThumbnailStyles,
+  asAccessibleCarousel,
+  withImageSlide,
+)(CarouselClean);
+
+const ThumbnailCarouselDifferentImages = asToken(
+  asEditableCarousel(CAROUSEL_NODE_KEY),
+  withCarouselDots(CAROUSEL_THUMB_NODE_KEY),
+  withThumbbailDots,
+  withThumbnailStyles,
+  asAccessibleCarousel,
+  withImageSlide,
 )(CarouselClean);
 
 const ChameleonCarousel = asToken(
@@ -60,4 +81,6 @@ export * from './token';
 export {
   Carousel,
   ChameleonCarousel,
+  ThumbnailCarousel,
+  ThumbnailCarouselDifferentImages,
 };
