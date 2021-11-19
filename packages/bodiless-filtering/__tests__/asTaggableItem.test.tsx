@@ -17,7 +17,7 @@ import React from 'react';
 import Tooltip, { TooltipProps } from 'rc-tooltip/lib/Tooltip';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount, ReactWrapper } from 'enzyme';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 
 const setEditMode = (isEdit: boolean) => {
   // @TODO bodiless-core internals should not be touched

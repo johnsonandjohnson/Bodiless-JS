@@ -14,7 +14,7 @@
 
 import React, { useState } from 'react';
 import RCTooltip from 'rc-tooltip';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { useUI, getUI } from '../RichTextContext';
 import {
   withReturnFocusBackOnEffect,

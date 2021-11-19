@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { TreeHO } from './type';
 
 export const TreeBob = () => false;

@@ -16,7 +16,7 @@ import React, { FC } from 'react';
 // import { observable, action } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import { mount } from 'enzyme';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 import { withMenuOptions } from '../src/PageContextProvider';
 import { useEditContext } from '../src/hooks';
 import { withContextActivator } from '../src/hoc';

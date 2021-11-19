@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType } from 'react';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 import { FileUploadStatus, FileUploadStrings } from '@bodiless/components';
 import type { UploadStatusProps } from '@bodiless/components';
 import type { HOC } from '@bodiless/fclasses';

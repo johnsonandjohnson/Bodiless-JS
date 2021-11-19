@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/components",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Reusable compoments",
   "author": "Heidi Vanyo <hvanyo@its.jnj.com>",
   "license": "Apache-2.0",
@@ -9,7 +9,8 @@
   "files": [
     "/lib",
     "/bodiless.docs.json",
-    "/doc"
+    "/doc",
+    "node-api"
   ],
   "repository": {
     "type": "git",
@@ -27,16 +28,16 @@
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
-    "@bodiless/core": "^0.3.0",
-    "@bodiless/fclasses": "^0.3.0",
-    "@bodiless/layouts": "^0.3.0",
+    "@bodiless/core": "^0.3.1",
+    "@bodiless/fclasses": "^0.3.1",
+    "@bodiless/layouts": "^0.3.1",
     "@types/react-helmet": "^5.0.14",
     "axios": "^0.21.0",
     "common-tags": "^1.8.0",
     "copyfiles": "^2.1.1",
     "debug": "^4.1.1",
     "enzyme": "^3.9.0",
-    "informed": "~3.13.1",
+    "informed": "^3.34.0",
     "lodash": "^4.17.19",
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",

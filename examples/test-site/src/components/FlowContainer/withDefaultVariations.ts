@@ -24,6 +24,7 @@ import withYouTubeVariations from './withYouTubeVariations';
 import withSocialShare from './withSocialShare';
 import withListVariations from './withListVariations';
 import withCarouselVariations from './withCarouselVariations';
+import withCuratorVariations from './withCuratorVariations';
 
 // Order of includes currently dictates order in Component Picker
 // thus recommend putting more frequently used components toward top for quicker access.
@@ -39,6 +40,7 @@ const withDefaultVariations = asToken(
   withSocialShare,
   withYouTubeVariations,
   withCarouselVariations,
+  withCuratorVariations,
 );
 
 export default withDefaultVariations;

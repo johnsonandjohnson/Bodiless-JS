@@ -1,5 +1,5 @@
 import { Fragment } from '@bodiless/fclasses';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { renderHook } from '@testing-library/react-hooks';
 import {
   useIsEvenRow,

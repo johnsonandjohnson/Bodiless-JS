@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import merge from 'lodash/merge';
 import { tableManagerFunc } from '../src/asBodilessTable';
 import { TableBaseProps } from '../src/types';
 

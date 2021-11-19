@@ -24,7 +24,7 @@ const ensureTrailingSlash = (href: string) => (href.endsWith('/') ? href : `${hr
  * contains href.
  * Can be used in a richtext item (slatenode), list (menu) item or link component itself.
  * @param node: content node object.
- * @returns href: sting or undefined.
+ * @returns href: string or undefined.
  */
 const useGetLinkHref = (node: ContentNode<any>) => {
   if (node.data === undefined) {

@@ -24,7 +24,7 @@ import type {
 } from '@bodiless/core';
 import { addProps } from '@bodiless/fclasses';
 
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 import withFormSnippet from './withFormSnippet';
 import withFormHeader from './withFormHeader';
 

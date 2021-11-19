@@ -23,7 +23,6 @@ import {
   isEmptyValue,
   validatePageUrl,
   getPageUrlValidator,
-  getPagePathValidator,
   joinPath,
   fieldValueToUrl,
 } from './utils';
@@ -61,7 +60,7 @@ const PageURLField = (props: FieldProps) => {
     fieldState, fieldApi, render, ref, userProps,
   } = useField({
     field: PAGE_URL_FIELD_NAME,
-    validate: isFullUrl ? getPageUrlValidator(validate) : getPagePathValidator(validate),
+    validate: getPageUrlValidator(validate),
     placeholder: isFullUrl ? '/mypath/mypage' : 'my-page',
     ...rest,
   });

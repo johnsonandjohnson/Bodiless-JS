@@ -13,11 +13,9 @@
  */
 
 import React, { ComponentType } from 'react';
-import {
-  mergeWith,
-  isArray,
-  flow,
-} from 'lodash';
+import mergeWith from 'lodash/mergeWith';
+import isArray from 'lodash/isArray';
+import flow from 'lodash/flow';
 import { asToken, ComponentWithMeta } from '@bodiless/fclasses';
 import type { HOC } from '@bodiless/fclasses';
 

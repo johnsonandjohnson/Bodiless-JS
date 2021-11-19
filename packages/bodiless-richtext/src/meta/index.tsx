@@ -13,7 +13,7 @@
  */
 
 /* tslint:disable:max-line-length */
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import {
   asBlock,
   asMark,

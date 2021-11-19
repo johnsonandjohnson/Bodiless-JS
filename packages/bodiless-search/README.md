@@ -141,7 +141,7 @@ Bodiless Search package, namely `SearchBox` and `SearchResult`. Site builder can
 import them and apply custom styling.
 
 ```
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { SearchBox as SearchBoxClean, SearchResult as SearchResultClean } 
   from '@bodiless/search';
 import {
