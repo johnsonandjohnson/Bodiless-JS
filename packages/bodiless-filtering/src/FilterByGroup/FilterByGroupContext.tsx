@@ -23,7 +23,7 @@ import React, {
   FC,
 } from 'react';
 import { v1 } from 'uuid';
-import { uniqBy } from 'lodash';
+import uniqBy from 'lodash/uniqBy';
 import { Injector, Enhancer } from '@bodiless/fclasses';
 import {
   FBGContextOptions,

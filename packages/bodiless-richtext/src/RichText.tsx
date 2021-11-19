@@ -19,9 +19,10 @@ import React, {
   useRef,
 } from 'react';
 import isEqual from 'react-fast-compare';
-import {
-  flowRight, pick, flow, isEmpty,
-} from 'lodash';
+import flowRight from 'lodash/flowRight';
+import pick from 'lodash/pick';
+import flow from 'lodash/flow';
+import isEmpty from 'lodash/isEmpty';
 import { createEditor, Editor } from 'slate';
 import type { Element } from 'slate';
 import {

@@ -14,7 +14,8 @@
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from 'enzyme';
-import { flowRight, flow } from 'lodash';
+import flowRight from 'lodash/flowRight';
+import flow from 'lodash/flow';
 import React, { HTMLProps, FC, ComponentType } from 'react';
 
 import { HOC, asToken } from '../src';

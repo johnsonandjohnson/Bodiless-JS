@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { isEmpty } from 'lodash';
+import isEmpty from 'lodash/isEmpty';
 import defaultValue from './default-value';
 import type { Value } from './Type';
 

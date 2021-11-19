@@ -74,18 +74,10 @@ const pagePathvalidate = (url: string) => {
   return hasInvalidParts.length > 0;
 };
 
-const validatePageUrl = (
+export const validatePageUrl = (
   value: FormValue,
 ) => (
   typeof value === 'string' && (pagePathvalidate(value) || !RegExp(/^[a-z0-9_/-]+$/).test(value))
-    ? VALIDATEMSG
-    : undefined
-);
-
-const validatePagePath = (
-  value: FormValue,
-) => (
-  typeof value === 'string' && !RegExp(pagePathReg).test(value)
     ? VALIDATEMSG
     : undefined
 );
@@ -103,12 +95,6 @@ const getPageUrlValidator = (validate?: FieldValidate) => (
   value: FormValue, values: FormValues,
 ) => validateEmptyField(value)
     || validatePageUrl(value)
-    || (validate && validate(value, values));
-
-const getPagePathValidator = (validate?: FieldValidate) => (
-  value: FormValue, values: FormValues,
-) => validateEmptyField(value)
-    || validatePagePath(value)
     || (validate && validate(value, values));
 
 const joinPath = (path1: string, path2: string) => path.join(path1, path2);
@@ -144,7 +130,7 @@ const PageURLField = (props: FieldProps) => {
     fieldState, fieldApi, render, ref, userProps,
   } = useField({
     field: PAGE_URL_FIELD_NAME,
-    validate: isFullUrl ? getPageUrlValidator(validate) : getPagePathValidator(validate),
+    validate: getPageUrlValidator(validate),
     placeholder: isFullUrl ? '/mypath/mypage' : 'my-page',
     ...rest,
   });

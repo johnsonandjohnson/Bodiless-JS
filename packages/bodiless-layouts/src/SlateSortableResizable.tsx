@@ -25,7 +25,7 @@ import {
   withLocalContextMenu,
 } from '@bodiless/core';
 import { observer } from 'mobx-react-lite';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import CleanWrapper, { Props as WrapperProps } from './SortableResizableWrapper';
 
 export const FC_ITEM_CONTEXT_TYPE = 'flow-container-item';

@@ -19,7 +19,7 @@ import React, {
   useEffect,
   useContext,
 } from 'react';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 import { useMenuOptionUI } from '@bodiless/core';
 import type { AsBodiless } from '@bodiless/core';
 import { addProps } from '@bodiless/fclasses';

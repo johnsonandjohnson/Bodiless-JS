@@ -16,7 +16,7 @@ import React, { FC, ComponentType, ReactElement } from 'react';
 import { observer } from 'mobx-react-lite';
 import Tooltip from 'rc-tooltip';
 
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { useEditContext } from '../hooks';
 import { useUI } from './PageEditor';
 import { TMenuOption } from '../Types/ContextMenuTypes';

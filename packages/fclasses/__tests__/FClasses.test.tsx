@@ -15,7 +15,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { shallow, mount } from 'enzyme';
 import React, { HTMLProps, ComponentType } from 'react';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 
 import {
   addClasses,

@@ -13,7 +13,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import lodash from 'lodash';
+import uniq from 'lodash/uniq';
 import { useEditContext } from '@bodiless/core';
 import { ComponentFormSpinner, ComponentFormWarning } from '@bodiless/ui';
 import { useFormApi } from 'informed';
@@ -268,11 +268,11 @@ const FetchChanges = (
                 // Production conflict with upstream and no extra commits on upstream to local,
                 // then check production/local conflict to get conflict file list.
                 const localConflictsResponse = await client.getConflicts('edit');
-                const pages = lodash.uniq([
+                const pages = uniq([
                   ...upstreamConflicts.data.pages,
                   ...localConflictsResponse.data.pages,
                 ]);
-                const site = lodash.uniq([
+                const site = uniq([
                   ...upstreamConflicts.data.site,
                   ...localConflictsResponse.data.site,
                 ]);
