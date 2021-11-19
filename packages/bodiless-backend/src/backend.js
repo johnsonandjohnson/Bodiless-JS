@@ -642,7 +642,7 @@ class Backend {
         logger.log(`Start deleting file: ${origin}`);
 
         page
-          .deleteFile(origin)
+          .removeFile(origin)
           .then(error => {
             if (error) {
               logger.log(error);
@@ -688,7 +688,7 @@ class Backend {
         logger.log(`Start verifying new page exists: ${page.directory}`);
 
         page
-          .checkDirectory(page.directory)
+          .directoryExists(page.directory)
           .then(error => {
             if (error) {
               logger.log(error);

@@ -249,7 +249,7 @@ class Page {
     return 'success';
   }
 
-  checkDirectory(newDirectory) {
+  directoryExists(newDirectory) {
     const readPromise = new Promise((resolve) => {
       fs.access(newDirectory, err => {
         if (!err) {
@@ -261,7 +261,7 @@ class Page {
     return readPromise;
   }
 
-  deleteFile(origin) {
+  removeFile(origin) {
     const readPromise = new Promise((resolve, reject) => {
       fs.unlink(origin, err => {
         if (err) {

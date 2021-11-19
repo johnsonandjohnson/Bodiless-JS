@@ -134,6 +134,7 @@ const PageURLField = (props: FieldProps) => {
 const MovePageURLField = (props: FieldProps) => {
   const {
     ComponentFormWarning,
+    ComponentFormLabel,
   } = useMenuOptionUI();
   const {
     value: basePathValue,
@@ -153,16 +154,18 @@ const MovePageURLField = (props: FieldProps) => {
     fieldState, fieldApi, render, ref, userProps,
   } = useField({
     field: PAGE_URL_FIELD_NAME,
-    validate: getPagePathValidator(validate),
-    placeholder: 'thispage',
+    validate: getPageUrlValidator(validate),
+    placeholder: '/parentpage/thispage',
     ...rest,
   });
   const { value } = fieldState;
   const { setValue } = fieldApi;
   const { onChange, ...restUserProps } = userProps;
+  const fieldLabel = 'New URL';
   const inputClasses = INPUT_FIELD_INLINE_CLASSES;
   return render(
     <>
+      <ComponentFormLabel htmlFor="new-page-path">{fieldLabel}</ComponentFormLabel>
       <input
         {...restBasePathProps}
         type="hidden"

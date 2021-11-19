@@ -37,7 +37,7 @@ import {
 import { ComponentFormSpinner } from '@bodiless/ui';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
-import { getPathValue, PageURLField } from './PageOperations';
+import { getPathValue, MovePageURLField } from './PageOperations';
 
 type Client = {
   movePage: (origin: string, destination: string) => AxiosPromise<any>;
@@ -149,7 +149,7 @@ const MovePageComp = (props : MovePageProps) => {
             <ComponentFormDescription>Move this page to a new URL.</ComponentFormDescription>
             <CustomComponentFormLabel>Current URL</CustomComponentFormLabel>
             <ComponentFormDescription>{basePathValue}</ComponentFormDescription>
-            <PageURLField
+            <MovePageURLField
               validateOnChange
               validateOnBlur
             />
@@ -231,10 +231,15 @@ const formPageMove = (client: Client) => contextMenuForm({
     }
 
     if (submits && path && invalid === false) {
-      const pathArray = path.split('/');
-      pathArray.splice(-2, 1);
-      const destination = pathArray.join('/');
-      destinationGlb = path;
+      let destination = '';
+      if (values.pagePath[0] === '/') {
+        destination = values.pagePath;
+      } else {
+        const pathArray = path.split('/');
+        pathArray.splice(-2, 1);
+        destination = pathArray.join('/');
+      }
+      destinationGlb = destination;
       const originClear = origin.slice(0, -1);
 
       if (destination === originClear) {
@@ -248,7 +253,7 @@ const formPageMove = (client: Client) => contextMenuForm({
 
         movePage({
           origin,
-          destination: path,
+          destination,
           client,
         })
           .then(() => {
