@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { validatePageUrl } from '../src/dist/PageOperations/PageURLField';
+import { validatePageUrl } from '../src/dist/PageOperations/utils';
 
 describe('validatePath', () => {
   it('Should return undefined when the path is valid.', () => {
