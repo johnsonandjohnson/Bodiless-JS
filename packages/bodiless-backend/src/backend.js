@@ -23,7 +23,7 @@ const path = require('path');
 const uniq = require('lodash/uniq');
 const Page = require('./page');
 const GitCmd = require('./GitCmd');
-const { getChanges, getConflicts, mergeMain } = require('./git');
+const { getChanges, getConflicts, clone, mergeMain } = require('./git');
 const { copyAllFiles } = require('./fileHelper');
 const Logger = require('./logger');
 
@@ -276,6 +276,7 @@ class Backend {
     this.setRoute(`${backendPrefix}/change/reset`, Backend.setChangeReset);
     this.setRoute(`${backendPrefix}/change/pull`, Backend.setChangePull);
     this.setRoute(`${backendPrefix}/merge/main`, Backend.mergeMain);
+    this.setRoute(`${backendPrefix}/repo/clone`, Backend.cloneRepo);
     this.setRoute(`${backendPrefix}/asset/*`, Backend.setAsset);
     this.setRoute(`${backendPrefix}/set/current`, Backend.setSetCurrent);
     this.setRoute(`${backendPrefix}/set/list`, Backend.setSetList);
@@ -435,6 +436,24 @@ class Backend {
         logger.log(error);
         error.code = 500;
         Backend.exitWithErrorResponse(error, res);
+      }
+    });
+  }
+
+  static cloneRepo(route) {
+    route.post(async (req, res) => {
+      try {
+        const { body } = req;
+        const { url, dest } = body;
+
+        if (url && dest) {
+          logger.log(`Start cloning ${url} at ${dest}`);
+  
+          const status = await clone(url, { directory: dest });
+          res.send(status);
+        }
+      } catch (error) {
+        res.send(error.info);
       }
     });
   }
