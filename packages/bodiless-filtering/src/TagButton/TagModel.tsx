@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { isEmpty } from 'lodash';
+import isEmpty from 'lodash/isEmpty';
 import { useNode } from '@bodiless/core';
 import { TagsNodeType } from './types';
 

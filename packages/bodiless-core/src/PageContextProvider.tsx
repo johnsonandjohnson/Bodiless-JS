@@ -15,7 +15,7 @@
 import React, {
   FC, useEffect, useLayoutEffect, useRef, useMemo,
 } from 'react';
-import { pickBy } from 'lodash';
+import pickBy from 'lodash/pickBy';
 import { HOC } from '@bodiless/fclasses';
 import PageEditContext from './PageEditContext';
 import { useEditContext, useUUID, useGetter } from './hooks';

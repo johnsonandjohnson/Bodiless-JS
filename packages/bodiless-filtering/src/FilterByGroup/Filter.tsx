@@ -14,7 +14,8 @@
 
 /* eslint-disable arrow-body-style, max-len, @typescript-eslint/no-unused-vars */
 import React, { FC } from 'react';
-import { flow, isEmpty } from 'lodash';
+import flow from 'lodash/flow';
+import isEmpty from 'lodash/isEmpty';
 import {
   withNodeKey,
   withNode,

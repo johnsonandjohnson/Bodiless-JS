@@ -15,7 +15,7 @@
 /* eslint class-methods-use-this: 0 */
 import path from 'path';
 import minimatch from 'minimatch';
-import { isEmpty } from 'lodash';
+import isEmpty from 'lodash/isEmpty';
 import {
   getUrlToLocalDirectoryMapper,
   prependProtocolToBareUrl,

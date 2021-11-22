@@ -20,7 +20,7 @@ import {
   applyDesign, extendDesignable, ComponentOrTag, Token, Fragment,
 } from '@bodiless/fclasses';
 import type { Designable, Design } from '@bodiless/fclasses';
-import { omit } from 'lodash';
+import omit from 'lodash/omit';
 import type {
   ChameleonState, ChameleonData, ChameleonButtonProps, ChameleonComponents,
 } from './types';

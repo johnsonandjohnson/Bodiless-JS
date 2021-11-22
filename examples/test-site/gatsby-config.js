@@ -4,6 +4,7 @@ const {
   createDefaultContentPlugins,
   getSampleDefaultContentConfig,
 } = require('@bodiless/gatsby-theme-bodiless/dist/DefaultContent');
+const { getDisabledPages } = require('@bodiless/components/node-api');
 const {
   getConfig: getSiteDefaultContentConfig,
 } = require('./src/components/Contentful');
@@ -16,25 +17,10 @@ require('dotenv').config({
 
 const SITEURL = process.env.SITE_URL;
 
-const getDisabledPages = () => {
-  try {
-    const json = fs.readFileSync('./src/data/site/disabled-pages.json');
-    const data = JSON.parse(json.toString());
-    const disabledPages$ = data.disabledPages || {};
-    const disabledPages = Object.keys(disabledPages$).filter(
-      item => disabledPages$[item].pageDisabled === true,
-    );
-    return disabledPages;
-  } catch (error) {
-    if (error.code === 'ENOENT') {
-      console.log("No pages to disable. The file doesn't exist:", error.path);
-    } else {
-      console.error(error);
-    }
-    return [];
-  }
-};
-const disabledPages = getDisabledPages();
+const disablePageList = getDisabledPages();
+const disabledPages = Object.keys(disablePageList).filter(
+  item => disablePageList[item].pageDisabled === true || disablePageList[item].indexingDisabled,
+);
 
 // Gatsby plugins list.
 const plugins = [
@@ -88,13 +74,6 @@ if (tagManagerEnabled) {
       // gtmPreview: 'YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_PREVIEW_NAME',
       dataLayerName: 'globalDataLayer',
     },
-  });
-}
-
-if (process.env.NODE_ENV === 'production' && disabledPages.length > 0) {
-  plugins.push({
-    resolve: 'gatsby-plugin-exclude',
-    options: { paths: disabledPages },
   });
 }
 

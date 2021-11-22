@@ -13,7 +13,7 @@
  */
 
 import lunr, { Builder } from 'lunr';
-import { truncate } from 'lodash';
+import truncate from 'lodash/truncate';
 import {
   SearchEngineInterface, TDocument, TIndexConfig, TPreview, TSearchResults,
 } from './types';

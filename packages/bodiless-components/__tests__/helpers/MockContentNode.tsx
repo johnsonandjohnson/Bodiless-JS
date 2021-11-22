@@ -56,8 +56,8 @@ class MockContentNode<D> implements ContentNode<D> {
  * HOC which Wraps the component with a mock node.  The resulting component
  * has a .node property with a reference to the actual mock node.
  */
-export const withMockNode = (data?: any) => (Component: ComponentType<any>) => {
-  const node = new MockContentNode(data);
+export const withMockNode = (data?: any, path?: string[]) => (Component: ComponentType<any>) => {
+  const node = new MockContentNode(data, path);
   const WithMockNode = (props: any) => (
     <NodeProvider node={node}>
       <Component {...props} />

@@ -20,20 +20,28 @@ import {
   withExtendHandler,
   ifToggledOn,
   EditButtonOptions,
+  useEditContext,
+  useNode,
+  ContentNode,
 } from '@bodiless/core';
 import type { BodilessOptions } from '@bodiless/core';
-import { flowRight, identity } from 'lodash';
+import flowRight from 'lodash/flowRight';
+import identity from 'lodash/identity';
 import {
   Fragment,
   addProps,
   replaceWith,
   withoutProps,
   asToken,
+  flowIf,
+  addClassesIf,
 } from '@bodiless/fclasses';
 import { withFieldApi } from 'informed';
+import { useGetDisabledPages } from '../PageDisable';
 import DefaultNormalHref from './NormalHref';
 import withGoToLinkButton from './withGoToLinkButton';
 import useEmptyLinkToggle from './useEmptyLinkToggle';
+import useGetLinkHref from './useGetLinkHref';
 import {
   LinkData,
   UseLinkOverrides,
@@ -173,6 +181,51 @@ const withLinkTarget = (
  */
 const withoutLinkWhenLinkDataEmpty = ifToggledOn(useEmptyLinkToggle)(replaceWith(Fragment));
 
+// @TODO: Move to richtext types?
+type ParentGetters = {
+  getParentNode: () => ContentNode<object>,
+  getParentPeer: (path: string|string[]) => ContentNode<object>,
+};
+type SlateNodeWithParentGetters<T> = {
+  node: ContentNode<T> & {
+    getGetters: () => ParentGetters,
+  }
+};
+
+/**
+ * Hook that returns true if the current link is Disabled, false otherwise.
+ */
+const useIsLinkDisabled = () => {
+  const { node } = useNode() as SlateNodeWithParentGetters<LinkData>;
+  const href = useGetLinkHref(node);
+  if (!href) {
+    return false;
+  }
+  const node$ = node.path[0] === 'slatenode' ? node.getGetters().getParentNode() : node;
+  const disabledPages = useGetDisabledPages(node$);
+  // Content links
+  if (disabledPages?.[href]?.contentLinksDisabled === true && node.path[0] !== 'Site') {
+    return true;
+  }
+  // Menu links
+  if (disabledPages?.[href]?.menuLinksDisabled === true && node.path[0] === 'Site') {
+    return true;
+  }
+
+  return false;
+};
+
+/**
+ * Token that disables non-menu links on the page.
+ */
+const asDisabledPageLink = flowIf(useIsLinkDisabled)(
+  withoutProps('href'),
+  addProps({
+    title: 'Link Disabled'
+  }),
+  addClassesIf(() => useEditContext().isEdit)('bl-link-disabled'),
+);
+
 const asBodilessLink: AsBodilessLink = (
   nodeKeys, defaultData, useOverrides,
 ) => flowRight(
@@ -190,7 +243,8 @@ const asBodilessLink: AsBodilessLink = (
   withoutProps(['unwrap']),
   withNormalHref(useLinkOverrides(useOverrides) as () => ExtraLinkOptions),
   withLinkTarget(useLinkOverrides(useOverrides) as () => ExtraLinkOptions),
+  asDisabledPageLink,
 );
 
 export default asBodilessLink;
-export { withoutLinkWhenLinkDataEmpty };
+export { withoutLinkWhenLinkDataEmpty, useIsLinkDisabled };

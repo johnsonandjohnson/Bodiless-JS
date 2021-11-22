@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType } from 'react';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import {
   designable,
   DesignableComponentsProps,

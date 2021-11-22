@@ -13,9 +13,9 @@
  */
 
 import React, { FC } from 'react';
-import {
-  union, difference, capitalize,
-} from 'lodash';
+import union from 'lodash/union';
+import difference from 'lodash/difference';
+import capitalize from 'lodash/capitalize';
 import type { ComponentOrTag, Enhancer } from './types';
 import type { Condition } from './hoc-util';
 

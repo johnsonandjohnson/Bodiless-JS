@@ -14,7 +14,7 @@
 
 import React, { ComponentType } from 'react';
 import ReactDOMServer from 'react-dom/server';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import cheerio from 'cheerio';
 import { replaceWith, withDesign } from '@bodiless/fclasses';

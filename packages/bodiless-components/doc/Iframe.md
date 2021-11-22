@@ -74,7 +74,7 @@ compose width snippet and compose the custom `EditableWidthIframe` component.
     useMenuOptionUI,
   } from '@bodiless/core';
   import { asBaseBodilessIframe, withIframeFormSrcSnippet, } from '@bodiless/components';
-  import { flowRight } from 'lodash';
+  import flowRight from 'lodash/flowRight';
 
   const withIframeWidthSnippet = flowRight(
     withNodeKey('width'),

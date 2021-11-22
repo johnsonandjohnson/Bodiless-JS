@@ -17,7 +17,7 @@ import { Div } from '@bodiless/ui';
 import { addClasses, withoutProps } from '@bodiless/fclasses';
 import { HoverMenu } from '@bodiless/richtext';
 import type { HoverMenuProps } from '@bodiless/richtext';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 
 const Menu = flow(
   withoutProps<HoverMenuProps>(['ui']),

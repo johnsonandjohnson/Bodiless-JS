@@ -62,7 +62,7 @@ At its simplest, a list needs a `Title` to render for each item:
 ```ts
 import { withDesign, replaceWIth } from '@bodiless/fclasses';
 import { asEditable, asBodilessList } from '@bodiless/components';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 
 const withSimpleTitle = withDesign({
   Title: flow(

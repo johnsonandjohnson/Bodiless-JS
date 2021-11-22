@@ -13,9 +13,10 @@
  */
 
 import React from 'react';
-import {
-  pick, omit, identity, flowRight,
-} from 'lodash';
+import pick from 'lodash/pick';
+import omit from 'lodash/omit';
+import identity from 'lodash/identity';
+import flowRight from 'lodash/flowRight';
 import type { Enhancer, Token, ComponentOrTag } from '@bodiless/fclasses';
 import { withoutProps } from '@bodiless/fclasses';
 import withNode, { withNodeKey } from './withNode';

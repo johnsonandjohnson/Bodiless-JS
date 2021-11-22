@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.0...v0.3.1) (2021-11-15)
+
+
+### Bug Fixes
+
+* **backend:** clone page breaking with certain pages ([#1183](https://github.com/johnsonandjohnson/bodiless-js/issues/1183)) ([96754f7](https://github.com/johnsonandjohnson/bodiless-js/commit/96754f7765eecc984e0e06ac10af3b6797820096))
+* **richtext:** Ensure slate editor has valid data. ([#1197](https://github.com/johnsonandjohnson/bodiless-js/issues/1197)) ([c486ee2](https://github.com/johnsonandjohnson/bodiless-js/commit/c486ee25679c926436cd5a5fe4aace60c466a606)), closes [#1196](https://github.com/johnsonandjohnson/bodiless-js/issues/1196)
+
+
+### Features
+
+* **components:** Allow users disabling pages, content links and menu items ([#1143](https://github.com/johnsonandjohnson/bodiless-js/issues/1143)) ([367e888](https://github.com/johnsonandjohnson/bodiless-js/commit/367e88821188b23ada367e59f43bdb12b5c280d7))
+* **Content library:** Content editor can create Library Item ([#1191](https://github.com/johnsonandjohnson/bodiless-js/issues/1191)) ([0569087](https://github.com/johnsonandjohnson/bodiless-js/commit/05690870ba6ee2d17c168b981e69e6184ebaac8a)), closes [#839](https://github.com/johnsonandjohnson/bodiless-js/issues/839)
+* **oidc:** Akamai Hosted Login ([#1190](https://github.com/johnsonandjohnson/bodiless-js/issues/1190)) ([145adb8](https://github.com/johnsonandjohnson/bodiless-js/commit/145adb87a8494cf0c80056231b78cc88f2c6f615))
+* **unpublish:** User can see a link is disabled in edit mode ([#1207](https://github.com/johnsonandjohnson/bodiless-js/issues/1207)) ([dd002f3](https://github.com/johnsonandjohnson/bodiless-js/commit/dd002f39522b445619b3a318b0417e1ba620bdb7))
+
+
+
+
+
 # [0.3.0](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.10...v0.3.0) (2021-11-01)
 
 

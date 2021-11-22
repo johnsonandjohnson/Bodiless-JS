@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { omit } from 'lodash';
+import omit from 'lodash/omit';
 
 export type BVProps = {
   productId: string | number,

@@ -11,10 +11,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import { WithNodeKeyProps, withNode } from '@bodiless/core';
-import { asBodilessList, asStylableList, asChameleonSubList } from '@bodiless/components';
-import { withDesign, asToken } from '@bodiless/fclasses';
+import {
+  WithNodeKeyProps, withNode,
+} from '@bodiless/core';
+import {
+  asBodilessList, asStylableList, asChameleonSubList,
+} from '@bodiless/components';
+import {
+  withDesign, asToken,
+} from '@bodiless/fclasses';
 
 import type { UseListOverrides, ListData } from '@bodiless/components';
 
@@ -53,7 +58,9 @@ const asBodilessMenu = <P extends object>(
     withMenuEditContext,
     withDesign({ Title: asMenuTitle }),
     withDesign({
-      Item: asBreadcrumb(DEFAULT_NODE_KEYS),
+      Item: asToken(
+        asBreadcrumb(DEFAULT_NODE_KEYS),
+      ),
     }),
     asBreadcrumbSource,
     withNode,

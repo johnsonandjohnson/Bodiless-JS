@@ -12,17 +12,20 @@
  * limitations under the License.
  */
 
-import asBodilessLink, { withoutLinkWhenLinkDataEmpty } from './asBodilessLink';
+import asBodilessLink, { withoutLinkWhenLinkDataEmpty, useIsLinkDisabled } from './asBodilessLink';
 import type { NormalHref } from './NormalHref';
 import type { AsBodilessLink, LinkData, Props } from './types';
 import DefaultNormalHref from './NormalHref';
 import useEmptyLinkToggle from './useEmptyLinkToggle';
+import useGetLinkHref from './useGetLinkHref';
 
 export {
   asBodilessLink,
   DefaultNormalHref,
   withoutLinkWhenLinkDataEmpty,
+  useIsLinkDisabled,
   useEmptyLinkToggle,
+  useGetLinkHref,
 };
 export type {
   NormalHref,
