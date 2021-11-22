@@ -110,6 +110,10 @@ export default class BackendClient {
     return this.post(url, payload);
   }
 
+  cloneRepo(url: string, dest: string) {
+    return this.post(`${this.prefix}/repo/clone`, { url, dest });
+  }
+
   commit(
     message: string,
     directories: string[],
