@@ -371,5 +371,6 @@ module.exports = {
   getConflicts,
   getMergeBase,
   compare,
+  clone,
   mergeMain,
 };
