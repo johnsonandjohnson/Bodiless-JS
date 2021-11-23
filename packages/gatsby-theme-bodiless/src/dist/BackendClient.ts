@@ -101,16 +101,19 @@ export default class BackendClient {
     return this.delete(url);
   }
 
-  clonePage(origin: string, destination: string) {
+  clonePage(origin: string, destination: string, isOriginTmp: boolean = false) {
     const payload = {
       origin,
       destination,
+      isOriginTmp,
     };
     const url = `${this.prefix}/clone`;
     return this.post(url, payload);
   }
 
   cloneRepo(url: string, dest: string) {
+    console.log('Url to clone: ', url);
+    console.log('Destination: ', dest);
     return this.post(`${this.prefix}/repo/clone`, { url, dest });
   }
 
