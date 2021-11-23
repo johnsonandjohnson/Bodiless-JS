@@ -276,7 +276,7 @@ class Page {
     return readPromise;
   }
 
-  hasChildDirectory() {
+  deleteDirectoryChildren() {
     const readPromise = new Promise((resolve) => {
       const subdirs = getDirectories(this.directory);
       if (subdirs.length !== 0) {
@@ -284,6 +284,15 @@ class Page {
       } else {
         resolve('Success');
       }
+    });
+    return readPromise;
+  }
+
+  getDirectoryChildren() {
+    const readPromise = new Promise((resolve) => {
+      const subdirs = getDirectories(this.directory);
+      resolve(subdirs);
+      return;
     });
     return readPromise;
   }

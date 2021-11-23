@@ -29,8 +29,10 @@ const Logger = require('./logger');
 
 const backendPrefix = process.env.GATSBY_BACKEND_PREFIX || '/___backend';
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
+const backendTmpPath = process.env.BODILESS_BACKEND_TMP_PATH || 'tmp';
 const defaultBackendPagePath = path.resolve(backendFilePath, 'pages');
 const defaultBackendSitePath = path.resolve(backendFilePath, 'site');
+const defaultBackendTmpPath = path.resolve(backendTmpPath);
 const backendPagePath = process.env.BODILESS_BACKEND_DATA_PAGE_PATH || defaultBackendPagePath;
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
 const backendPublicPath = process.env.BODILESS_BACKEND_PUBLIC_PAGE_PATH || 'public/page-data';
@@ -651,6 +653,27 @@ class Backend {
 
   static directoryChild(route) {
     route
+      .post((req, res) => {
+        const { body } = req;
+        const { origin, isOriginTmp } = body;
+        const page = Backend.getPage(origin);
+        const path = isOriginTmp ? defaultBackendTmpPath : backendPagePath;
+
+        page.setBasePath(path);
+
+        logger.log(`Start verifying if '${page.directory}' has children`);
+
+        page
+          .getDirectoryChildren()
+          .then(data => {
+            if (data) {
+              console.log('DATA: ', data);
+              res.send(data);
+            } else {
+              res.send({});
+            }
+          });
+      })
       .delete((req, res) => {
         const pagePath = req.params[0];
         const page = Backend.getPage(pagePath);
@@ -660,7 +683,7 @@ class Backend {
         logger.log(`Start verify page child directory: ${page.directory}`);
 
         page
-          .hasChildDirectory()
+          .deleteDirectoryChildren()
           .then(error => {
             if (error) {
               logger.log(error);
