@@ -20,6 +20,8 @@ const Logger = require('./logger');
 const logger = new Logger('BACKEND');
 
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
+const backendTmpPath = process.env.BODILESS_BACKEND_TMP_PATH || 'tmp';
+const defaultBackendTmpPath = path.resolve(backendTmpPath);
 
 const getDirectories = (dir) => (
   fs.readdirSync(dir).filter((file) => fs.statSync(
@@ -194,10 +196,12 @@ class Page {
     return Promise.resolve(Promise.all(actions));
   }
 
-  async copyDirectory(origin, destination) {
-    const bp = this.basePath;
-    const originPath = (`${bp}${origin}`).replace(/\/$/, '');
+  async copyDirectory(origin, destination, isOriginTmp = false) {
+    let bp = this.basePath;
     const destinationPath = (`${bp}${destination}`).replace(/\/$/, '');
+
+    if (isOriginTmp) bp = defaultBackendTmpPath;
+    const originPath = (`${bp}${origin}`).replace(/\/$/, '');
 
     const isDestinationPathExists = await Page.dirHasFiles(destinationPath);
     if (isDestinationPathExists.length) {

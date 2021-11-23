@@ -447,7 +447,7 @@ class Backend {
         const { url, dest } = body;
 
         if (url && dest) {
-          logger.log(`Start cloning ${url} at ${dest}`);
+          logger.log(`Start cloning ${url} at '${dest}'`);
   
           const status = await clone(url, { directory: dest });
           res.send(status);
@@ -705,13 +705,15 @@ class Backend {
 
   static clonePage(route) {
     route.post(async (req, res) => {
-      const { body: { origin, destination } } = req;
+      const { body } = req;
+      const { origin, destination, isOriginTmp } = body;
       const page = Backend.getPage(destination);
+
       page.setBasePath(backendPagePath);
-      logger.log(`Start cloning page for:${destination}`);
+      logger.log(`Start cloning page for: ${destination}`);
 
       page
-        .copyDirectory(origin, destination)
+        .copyDirectory(origin, destination, isOriginTmp)
         .then(data => {
           if (data) {
             logger.log(data);
