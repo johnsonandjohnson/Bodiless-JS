@@ -19,6 +19,7 @@ import useGitButtons from './dist/useGitButtons';
 import GatsbyPageProvider, { useGatsbyPageContext } from './dist/GatsbyPageProvider';
 import Page from './dist/Page';
 import { PageURLField } from './dist/PageOperations/PageURLField';
+import handle from './dist/ResponseHandler';
 
 export {
   GatsbyMobxStore,
@@ -29,6 +30,7 @@ export {
   useGatsbyPageContext,
   Page,
   PageURLField,
+  handle,
 };
 
 export type { PageProps } from './dist/Page';
