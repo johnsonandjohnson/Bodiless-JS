@@ -18,6 +18,7 @@ import BackendClient from './dist/BackendClient';
 import useGitButtons from './dist/useGitButtons';
 import GatsbyPageProvider, { useGatsbyPageContext } from './dist/GatsbyPageProvider';
 import Page from './dist/Page';
+import { PageURLField } from './dist/PageOperations/PageURLField';
 
 export {
   GatsbyMobxStore,
@@ -27,6 +28,7 @@ export {
   GatsbyPageProvider,
   useGatsbyPageContext,
   Page,
+  PageURLField,
 };
 
 export type { PageProps } from './dist/Page';
