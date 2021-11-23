@@ -101,12 +101,22 @@ export default class BackendClient {
     return this.delete(url);
   }
 
+  getDirectoryChildren(path: string, isOriginTmp: boolean = false) {
+    const payload = {
+      origin: path,
+      isOriginTmp,
+    };
+    const url = `${this.prefix}/directory/child${path}`;
+    return this.post(url, payload);
+  }
+
   clonePage(origin: string, destination: string, isOriginTmp: boolean = false) {
     const payload = {
       origin,
       destination,
       isOriginTmp,
     };
+    console.log(payload);
     const url = `${this.prefix}/clone`;
     return this.post(url, payload);
   }
