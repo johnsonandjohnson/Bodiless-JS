@@ -112,8 +112,6 @@ export default class BackendClient {
   }
 
   cloneRepo(url: string, dest: string) {
-    console.log('Url to clone: ', url);
-    console.log('Destination: ', dest);
     return this.post(`${this.prefix}/repo/clone`, { url, dest });
   }
 
