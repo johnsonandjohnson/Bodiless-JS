@@ -17,7 +17,7 @@ the current page, as well as add a new page. To access all of these features, yo
 In the _Page_ menu, you will find the following items:
 
 * [New](./New/)
-* Move<sup>*</sup>
+* [Move](./Move/)<sup>*</sup>
 * [Disable](./Disable/)<sup>*</sup>
 * [Clone](./Clone/)<sup>*</sup>
 * [Delete](./Delete/)<sup>*</sup>

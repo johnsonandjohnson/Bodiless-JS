@@ -34,9 +34,6 @@ import { ComponentFormSpinner } from '@bodiless/ui';
 import flow from 'lodash/flow';
 import BackendClient from './BackendClient';
 import handle from './ResponseHandler';
-import {
-  PageURLField as NewPageURLField,
-} from './PageOperations';
 
 type Client = {
   deletePage: (path: string) => AxiosPromise<any>;
@@ -108,7 +105,6 @@ const DeletePageForm = (props : DeletePageProps) => {
             <CustomComponentFormLabel>
               Are you sure you want to delete the current page?
             </CustomComponentFormLabel>
-            <NewPageURLField hidden />
           </ContextMenuProvider>
         </>
       );
