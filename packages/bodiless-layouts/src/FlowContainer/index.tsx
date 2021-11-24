@@ -14,7 +14,7 @@
 
 import React, { FC, ComponentType } from 'react';
 import { observer } from 'mobx-react-lite';
-import flow from 'lodash/flow';
+import { flow, uniq, pick, omit } from 'lodash';
 import {
   withNode,
   useEditContext,
@@ -23,10 +23,12 @@ import {
   withDesign,
   addClasses,
   addProps,
+  HOC,
 } from '@bodiless/fclasses';
 import EditFlowContainer from './EditFlowContainer';
 import StaticFlowContainer from './StaticFlowContainer';
 import { EditFlowContainerProps, FlowContainerProps } from './types';
+import { useItemHandlers } from './model';
 
 const FlowContainerBasic: FC<EditFlowContainerProps> = props => {
   const { isEdit } = useEditContext();
@@ -35,7 +37,22 @@ const FlowContainerBasic: FC<EditFlowContainerProps> = props => {
     : <StaticFlowContainer {...props} />;
 };
 
+const withSplitDesign: HOC = Component => {
+  const WithSplitDesign: FC<any> = (props: any) => {
+    const { design, ...rest } = props;
+    const items = useItemHandlers().getItems();
+    const types = uniq(items.map(item => item.type));
+    types.push('Wrapper', 'ComponentWrapper');
+    const fcDesign = pick(design, types);
+    const csDesign = omit(design, 'Wrapper', 'ComponentWrapper');
+    return <Component {...rest} design={fcDesign} csDesign={csDesign} />;
+  };
+  return WithSplitDesign;
+};
+
 const FlowContainerDesignable = flow(
+  observer,
+  withSplitDesign,
   observer,
   withDesign({
     Wrapper: addClasses('flex flex-wrap'),

@@ -14,13 +14,14 @@
 
 import React from 'react';
 import { contextMenuForm } from '@bodiless/core';
-import { DesignableComponents } from '@bodiless/fclasses';
+import { DesignableComponents, Design, applyDesign } from '@bodiless/fclasses';
 import { ComponentSelectorProps, ComponentSelectorUI, ComponentWithMeta } from './types';
 import ComponentSelector from '.';
 
 export type ComponentSelectorFormProps =
   Omit<ComponentSelectorProps, 'closeForm'|'components'|'mode'> & {
     components: DesignableComponents,
+    csDesign: Design,
   };
 
 /**
@@ -29,21 +30,25 @@ export type ComponentSelectorFormProps =
  * @param props Props passed to the edit flow container.
  * @param onSelect The action to perform when a component is selected.
  */
-const componentSelectorForm = (props: ComponentSelectorFormProps) => contextMenuForm({
-  initialValues: { selection: '' },
-  hasSubmit: false,
-})(
-  ({ ui, closeForm }) => (
-    <ComponentSelector
-      ui={{ ...ui as ComponentSelectorUI, ...props.ui as ComponentSelectorUI }}
-      closeForm={closeForm}
-      onSelect={(...args) => { props.onSelect(...args); closeForm(null); }}
-      components={Object.values(props.components) as ComponentWithMeta[]}
-      mandatoryCategories={props.mandatoryCategories}
-      blacklistCategories={props.blacklistCategories}
-      scale={props.scale}
-    />
-  ),
-);
+const componentSelectorForm = (props: ComponentSelectorFormProps) => {
+  const components = props.csDesign
+    ? applyDesign({})(props.csDesign) : props.components;
+  return contextMenuForm({
+    initialValues: { selection: '' },
+    hasSubmit: false,
+  })(
+    ({ ui, closeForm }) => (
+      <ComponentSelector
+        ui={{ ...ui as ComponentSelectorUI, ...props.ui as ComponentSelectorUI }}
+        closeForm={closeForm}
+        onSelect={(...args) => { props.onSelect(...args); closeForm(null); }}
+        components={Object.values(components) as ComponentWithMeta[]}
+        mandatoryCategories={props.mandatoryCategories}
+        blacklistCategories={props.blacklistCategories}
+        scale={props.scale}
+      />
+    ),
+  );
+};
 
 export default componentSelectorForm;

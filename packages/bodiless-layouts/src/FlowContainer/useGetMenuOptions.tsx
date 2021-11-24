@@ -178,6 +178,7 @@ const useAddButton = (
     global: false,
     local: true,
     name,
+    // @ts-ignore
     handler: () => componentSelectorForm({ ...props, onSelect: insertItem }),
     activateContext: false,
     formTitle: 'Insert Component',
@@ -199,6 +200,7 @@ const useSwapButton = (
     icon: 'repeat',
     global: false,
     local: true,
+    // @ts-ignore
     handler: () => componentSelectorForm({ ...props, onSelect: replaceItem }),
     activateContext: false,
     isHidden: useCallback(() => (!context.isEdit || Object.keys(components).length <= 1), []),
