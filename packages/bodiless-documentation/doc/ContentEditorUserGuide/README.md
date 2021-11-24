@@ -47,26 +47,16 @@ As a visual indicator, while in Edit Mode, the **Edit** icon will be highlighted
 In your site's Edit Interface — in both Review Mode and Edit Mode — you will see the Toolbar. By
 default, the Edit Interface begins in Review Mode.
 
-<!-- Hardcoding a table to place list alongside Toolbar image. -->
-<table>
-  <tr><!-- Empty row to trigger alternate cell background color for next row. --></tr>
-  <tr>
-    <td>
-      <img src="/___docs/ContentEditorUserGuide/assets/Toolbar.jpg" alt="The BodilessJS Toolbar" width="50">
-    </td>
-    <td>
-      Out of the box, the Toolbar has the following items:
-      <ul>
-        <li><a href="#/ContentEditorUserGuide/?id=switcher">Switcher</a> (the "compare arrows" icon)</li>
-        <li><a href="#/ContentEditorUserGuide/?id=alerts">Alerts</a></li>
-        <li><a href="#/ContentEditorUserGuide/?id=docs">Docs</a></li>
-        <li><a href="#/ContentEditorUserGuide/?id=edit">Edit</a></li>
-        <li><a href="#/ContentEditorUserGuide/?id=page">Page</a></li>
-        <li><a href="#/ContentEditorUserGuide/?id=file">File</a></li>
-      </ul>
-    </td>
-  </tr>
-</table>
+Out of the box, the Toolbar has the following items:
+
+* [Switcher](#switcher) (the "compare arrows" icon)
+* [Alerts](#alerts)
+* [Docs](#docs)
+* [Edit](#edit)
+* [Page](#page)
+* [File](#file)
+
+![The BodilessJS Toolbar](./assets/Toolbar.jpg ':size=50')
 
 #### Switcher
 
