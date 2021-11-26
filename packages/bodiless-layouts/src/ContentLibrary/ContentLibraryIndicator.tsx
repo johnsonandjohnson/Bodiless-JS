@@ -60,7 +60,7 @@ const LibraryIndicatorBase: FC<LibraryIndicatorProps> = ({ components: C, ...res
 export const LibraryItemIndicatorClean = designable(LibraryItemIndicatorComponents, 'LibraryItemIndicator')(LibraryIndicatorBase);
 
 const asDefaultLibraryItemIndicator = withDesign({
-  Wrapper: addClasses('hidden group-hover:flex bl-text-white bl-bg-gray-900 absolute bl-px-2 bl-py-1 md:-mt-5 md:-ml-5'),
+  Wrapper: addClasses('hidden group-hover:flex bl-text-white bl-bg-gray-900 absolute bl-px-2 bl-py-1 md:-mt-5 md:-ml-5 bl-z-10'),
   Icon: asToken(
     addClasses('material-icons bl-mr-2'),
     addProps({ children: 'account_balance' }),
