@@ -13,16 +13,18 @@
  */
 
 import React, { FC } from 'react';
+import pick from 'lodash/pick';
 import {
   ifEditable,
   useNode,
   ifReadOnly,
+  withBodilessData,
 } from '@bodiless/core';
 import type {
   WithNodeKeyProps, UseBodilessOverrides,
 } from '@bodiless/core';
 import {
-  Token, asToken, Enhancer,
+  Token, asToken, Enhancer, HOC,
 } from '@bodiless/fclasses';
 import { ComponentSelectorOptions } from '@bodiless/layouts';
 import { ChameleonData } from './types';
@@ -54,6 +56,31 @@ const withDeleteNodeOnUnwrap = (
   return WithDeleteOnUnwrap;
 };
 
+export const withPrunedDesign: HOC = Component => {
+  const WithPrunedDesign: FC<any> = props => {
+    const { design } = props;
+    const newDesign = pick(design, 'Wrapper', 'ComponentWrapper');
+    return <Component {...props} design={newDesign} />;
+  };
+  return WithPrunedDesign;
+};
+
+export const withSplitDesign: HOC = Component => {
+  const WithSplitDesign: FC<any> = (props: any) => {
+    console.log('withSplitDesign_props', props);
+    // const { node: { data: { component = '_default' }} } = useNode();
+    const { componentData: { component }} = props;
+    console.log('withSplitDesign_component', JSON.stringify(component));
+    const { design, ...rest } = props;
+    const newDesign = pick(design, 'Wrapper', 'ComponentWrapper', component);
+    console.log('withSplitDesign_design', design);
+    console.log('withSplitDesign_newDesign', newDesign);
+    rest.children = <div>{component}</div>;
+    return <Component {...rest} design={newDesign} csDesign={design} />;
+  };
+  return WithSplitDesign;
+};
+
 /**
  * Transforms the wrapped component into a "chameleon".  The chameleon accepts a design and
  * applies one of the design elements to itself depending on the chameleon state, which
@@ -78,6 +105,8 @@ const asBodilessChameleon = (
       withoutChameleonButtonProps,
     ),
     withChameleonContext(nodeKeys, defaultData, Component),
+    // withPrunedDesign,
+    // withBodilessData(nodeKeys, defaultData),
   ) as Enhancer<ComponentSelectorOptions>;
   return hoc(Component);
 };

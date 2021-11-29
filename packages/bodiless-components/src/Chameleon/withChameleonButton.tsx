@@ -137,6 +137,7 @@ export const withoutChameleonButtonProps = withoutProps(
   'mandatoryCategories',
   'scale',
   'mode',
+  'csDesign',
 );
 
 /**
