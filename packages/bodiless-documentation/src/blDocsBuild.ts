@@ -14,7 +14,7 @@
  */
 
 /* eslint-disable no-console */
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import fs from 'fs-extra';
 // import cleanSymlinks from './cleanSymlinks';
 import locateFiles from './locateFiles';

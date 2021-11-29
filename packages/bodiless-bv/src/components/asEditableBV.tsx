@@ -22,7 +22,7 @@ import {
   withLocalContextMenu,
   ifEditable,
 } from '@bodiless/core';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 import { DataType as BVNodeDataType, withBVDataHandlers } from './asBodilessBV';
 
 // Options used to create an edit button.

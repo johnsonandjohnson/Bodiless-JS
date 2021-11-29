@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 import { addProps } from '@bodiless/fclasses';
 
 export type Tuple = {

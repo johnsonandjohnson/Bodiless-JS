@@ -13,7 +13,7 @@
  */
 
 /* eslint-disable quote-props */
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { withDefaultContent } from '@bodiless/core';
 import { withDesign, addProps } from '@bodiless/fclasses';
 import { asBodilessMenu } from '../src';

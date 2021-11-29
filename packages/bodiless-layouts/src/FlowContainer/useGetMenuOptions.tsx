@@ -13,7 +13,7 @@
  */
 
 import { useCallback } from 'react';
-import { omit } from 'lodash';
+import omit from 'lodash/omit';
 import {
   useEditContext, useActivateOnEffect, useGetter, TMenuOption,
 } from '@bodiless/core';

@@ -140,7 +140,7 @@ defining structure we can also combine it with style tokens to define the look
 of the component.
 
 ```
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { CardClean } from '@bodiless/card';
 import { asContentfulCard } from '../../../Card';
 import { asCardDefaultStyle, asCardHorizontal } from '../../../Card/token';
@@ -189,7 +189,7 @@ e.g. An example defining the contentful component from the previous example and
 define in `withContentfulCards.tsx.`
 
 ```
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import {
   withTitle,
   withDesc,

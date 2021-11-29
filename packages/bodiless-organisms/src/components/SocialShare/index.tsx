@@ -16,7 +16,7 @@ import React, {
   FunctionComponent as FC,
   useState,
 } from 'react';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import {
   Div,
   Button,

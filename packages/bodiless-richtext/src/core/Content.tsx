@@ -28,7 +28,7 @@ import {
   DefaultLeaf,
   useSlate,
 } from 'slate-react';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { useSlateContext } from './SlateEditorContext';
 import {
   RenderLeafProps,

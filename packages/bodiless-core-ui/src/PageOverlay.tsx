@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType, HTMLProps } from 'react';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 
 import { Div, Spinner, ComponentFormCloseButton } from '@bodiless/ui';
 import { PageOverlay as CleanPageOverlay } from '@bodiless/core';

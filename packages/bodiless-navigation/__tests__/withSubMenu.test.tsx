@@ -14,7 +14,7 @@
 
 /* eslint-disable quote-props */
 import React from 'react';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { withDesign, addProps } from '@bodiless/fclasses';
 import { mount } from 'enzyme';
 

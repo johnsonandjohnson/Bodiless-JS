@@ -13,7 +13,7 @@
  */
 
 import React, { FC, HTMLProps } from 'react';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import {
   Text as BaseText,
   TextArea as BaseTextArea,

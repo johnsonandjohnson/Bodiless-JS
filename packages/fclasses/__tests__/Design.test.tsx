@@ -16,7 +16,8 @@
 import { mount } from 'enzyme';
 import React, { ComponentType, FC, Fragment } from 'react';
 
-import { omit, flow } from 'lodash';
+import omit from 'lodash/omit';
+import flow from 'lodash/flow';
 import {
   withDesign,
   DesignableProps,

@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType, useMemo } from 'react';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 import {
   withContextActivator,
   withLocalContextMenu,

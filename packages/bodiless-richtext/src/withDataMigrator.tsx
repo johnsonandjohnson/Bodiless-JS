@@ -13,7 +13,7 @@
  */
 
 import React from 'react';
-import { isEmpty } from 'lodash';
+import isEmpty from 'lodash/isEmpty';
 
 type Node = {
   type: string,

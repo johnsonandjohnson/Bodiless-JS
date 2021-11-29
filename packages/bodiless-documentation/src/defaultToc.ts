@@ -20,6 +20,7 @@ const toc = {
   ContentEditorUserGuide: {
     PageMenu: {
       New: {},
+      Move: {},
       Disable: {},
       Clone: {},
       Delete: {},

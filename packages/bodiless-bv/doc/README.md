@@ -120,7 +120,7 @@ You need to import the base component and the list of HOCs to compose your custo
 
 ``` js
 import { BVInlineRatingsBaseV1, withBVLoader, asBodilessBV } from '@bodiless/bv';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 ```
 
 Then you need to compose the custom component
@@ -149,7 +149,7 @@ You need to import the base component and the list of HOCs to compose your custo
 
 ``` js
 import { BVReviewsBaseV1, withBVLoader, asBodilessBV } from '@bodiless/bv';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 ```
 
 Then you need to compose the custom component
@@ -177,7 +177,7 @@ You need to import the base component and the list of HOCs to compose your custo
 
 ``` js
 import { BVInlineRatingsBaseV1, withBVLoader, asBodilessBV } from '@bodiless/bv';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 ```
 
 Then you need to compose the custom component
@@ -205,7 +205,7 @@ You need to import the base component and the list of HOCs to compose your custo
 
 ``` js
 import { BVRatingsSummaryBaseV1, withBVLoader, asBodilessBV } from '@bodiless/bv';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 ```
 
 Then you need to compose the custom component
@@ -371,7 +371,7 @@ You need to import the base component and the list of HOCs to compose your custo
 
 ``` js
 import { BVReviewsBase, withBVLoader, asBodilessBV } from '@bodiless/bv';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 ```
 
 Then you need to compose the custom component
@@ -399,7 +399,7 @@ You need to import the base component and the list of HOCs to compose your custo
 
 ``` js
 import { BVInlineRatingsBase, withBVLoader, asBodilessBV } from '@bodiless/bv';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 ```
 
 Then you need to compose the custom component
@@ -427,7 +427,7 @@ You need to import the base component and the list of HOCs to compose your custo
 
 ``` js
 import { BVRatingsSummaryBase, withBVLoader, asBodilessBV } from '@bodiless/bv';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 ```
 
 Then you need to compose the custom component

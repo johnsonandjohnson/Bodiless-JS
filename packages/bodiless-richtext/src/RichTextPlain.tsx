@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType } from 'react';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 import { useNode, withNode } from '@bodiless/core';
 import { Node } from 'slate';
 import type { Value } from './Type';

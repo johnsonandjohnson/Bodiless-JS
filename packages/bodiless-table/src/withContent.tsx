@@ -18,7 +18,7 @@ import {
   HOC,
   asToken,
 } from '@bodiless/fclasses';
-import { flatten } from 'lodash';
+import flatten from 'lodash/flatten';
 import React from 'react';
 import {
   useTableColumnContext,

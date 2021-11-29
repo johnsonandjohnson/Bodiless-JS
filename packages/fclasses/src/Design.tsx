@@ -13,9 +13,9 @@
  */
 
 // eslint-disable-next-line import/no-extraneous-dependencies
-import {
-  intersection, identity, flow,
-} from 'lodash';
+import intersection from 'lodash/intersection';
+import identity from 'lodash/identity';
+import flow from 'lodash/flow';
 import React, {
   ComponentType, Fragment, useContext, FC,
 } from 'react';

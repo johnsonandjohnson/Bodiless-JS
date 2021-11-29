@@ -21,7 +21,7 @@ import { FlowContainer } from '@bodiless/layouts-ui';
 import {
   useNode, WithNodeKeyProps, withNodeKey, withNodeDataHandlers, withNode, WithNodeProps,
 } from '@bodiless/core';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import TokenPrinter, { TokenPrinterProps } from '../TokenPrinter';
 import { withTokenNamesFromData } from '../withTokenSelector';
 import type { TokenEditorComponents, TokenEditorProps } from './types';

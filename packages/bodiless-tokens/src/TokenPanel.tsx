@@ -16,7 +16,7 @@ import React, { ComponentType, FC, HTMLProps } from 'react';
 import {
   useEditContext,
 } from '@bodiless/core';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { observer } from 'mobx-react-lite';
 import {
   DesignableComponentsProps, designable, StylableProps, Div,

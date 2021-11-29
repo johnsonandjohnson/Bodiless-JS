@@ -14,7 +14,7 @@
 
 import React, { FC, ComponentType } from 'react';
 import { mount } from 'enzyme';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { DefaultContentNode } from '../src/ContentNode';
 import NodeProvider, { useNode } from '../src/NodeProvider';
 import withNode, { withNodeKey } from '../src/withNode';

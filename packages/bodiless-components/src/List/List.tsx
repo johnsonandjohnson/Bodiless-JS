@@ -17,7 +17,7 @@ import React, {
   FC,
   useMemo,
 } from 'react';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { observer } from 'mobx-react-lite';
 import { withNode } from '@bodiless/core';
 import {
