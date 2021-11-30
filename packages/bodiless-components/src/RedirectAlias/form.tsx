@@ -27,22 +27,39 @@ import {
   asToken,
   withOnlyProps,
   HOC,
+  addClasses,
 } from '@bodiless/fclasses';
 import type {
   ContextMenuFormProps,
 } from '@bodiless/core';
 import { withToolsButton } from '../Tools';
 
+const REDIRECT_ALIASES = 'Redirect Aliases';
+const CONFIRMATION = 'Redirect Aliases file validated and saved.';
+
 const FormBodyBase = () => {
   const {
     ComponentFormTitle,
+    ComponentFormTextArea,
+    ComponentFormDescription,
   } = useMenuOptionUI();
+
+  const ConfirmationForm = () => (
+    <ComponentFormDescription>
+      {CONFIRMATION}
+    </ComponentFormDescription>
+  );
 
   return (
     <>
       <ComponentFormTitle>
-        Redirect Aliases
+        { REDIRECT_ALIASES }
       </ComponentFormTitle>
+      <ComponentFormTextArea
+        field="text-area"
+        placeholder={REDIRECT_ALIASES}
+      />
+      <ConfirmationForm />
     </>
   );
 };
