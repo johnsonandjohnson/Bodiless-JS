@@ -68,7 +68,7 @@ const asDefaultLibraryItemIndicator = withDesign({
   Label: addProps({ children: 'Library Item' }),
   InfoIcon: asToken(
     addClasses('material-icons bl-ml-3'),
-    addProps({ children: 'info', href: '/___docs/', target: '_blank' }),
+    addProps({ children: 'info', href: '/___docs/#/ContentEditorUserGuide/?id=content-library', target: '_blank' }),
   ),
 });
 
