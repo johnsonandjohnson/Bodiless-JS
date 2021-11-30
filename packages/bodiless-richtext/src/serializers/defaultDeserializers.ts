@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { identity } from 'lodash';
+import identity from 'lodash/identity';
 import { createDeserializer, TagName } from './htmlSerializer';
 
 const createBoldDeserializer = () => ({

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.0...v0.3.1) (2021-11-15)
+
+
+### Bug Fixes
+
+* **richtext:** Ensure slate editor has valid data. ([#1197](https://github.com/johnsonandjohnson/bodiless-js/issues/1197)) ([c486ee2](https://github.com/johnsonandjohnson/bodiless-js/commit/c486ee25679c926436cd5a5fe4aace60c466a606)), closes [#1196](https://github.com/johnsonandjohnson/bodiless-js/issues/1196)
+
+
+### Features
+
+* **components:** Allow users disabling pages, content links and menu items ([#1143](https://github.com/johnsonandjohnson/bodiless-js/issues/1143)) ([367e888](https://github.com/johnsonandjohnson/bodiless-js/commit/367e88821188b23ada367e59f43bdb12b5c280d7))
+
+
+
+
+
 # [0.3.0](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.10...v0.3.0) (2021-11-01)
 
 **Note:** Version bump only for package @bodiless/richtext

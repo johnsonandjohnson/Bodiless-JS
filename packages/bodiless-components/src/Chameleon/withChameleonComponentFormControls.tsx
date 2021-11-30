@@ -14,7 +14,7 @@
 
 import React, { ComponentType, FC } from 'react';
 
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 import { ChameleonButtonProps } from './types';
 import { DEFAULT_KEY, useChameleonContext } from './withChameleonContext';
 import { withUnwrap } from './withChameleonButton';

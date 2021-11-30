@@ -23,7 +23,8 @@ import {
   DesignableComponentsProps, designable, Div, H4, H5,
   Label as StylableLabel, Input, withoutProps, DesignableProps,
 } from '@bodiless/fclasses';
-import { flow, flowRight } from 'lodash';
+import flow from 'lodash/flow';
+import flowRight from 'lodash/flowRight';
 import { observer } from 'mobx-react-lite';
 import { v4 } from 'uuid';
 import {

@@ -13,7 +13,7 @@
  */
 
 import React, { FC, HTMLProps } from 'react';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 import { withBVLoader } from './BVLoader';
 import asBVComponent from './asBVComponent';
 import { BVProps } from './BVProps';

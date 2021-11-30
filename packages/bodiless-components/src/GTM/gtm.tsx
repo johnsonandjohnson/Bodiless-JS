@@ -15,7 +15,7 @@
 import React, { ComponentType as CT, PropsWithChildren } from 'react';
 import { stripIndent } from 'common-tags';
 import { HelmetProps } from 'react-helmet';
-import * as _ from 'lodash';
+import set from 'lodash/set';
 import { WithNodeKeyProps } from '@bodiless/core';
 import { withHeadElement, Options as BaseOptions } from '../Meta/Meta';
 
@@ -64,7 +64,7 @@ const withDataLayerItem$ = (options: Options) => (HelmetComponent: CT<ItemProps>
   const { path } = options;
   const value = content !== undefined ? content : '';
   if (path) {
-    _.set(dataLayerData, path, value);
+    set(dataLayerData, path, value);
   }
   return (
     <HelmetComponent
@@ -83,7 +83,7 @@ const withDefaultDataLayer : Function = (dataLayer: DataLayer) => (
 ) => (props: Props) => {
   const { dataLayerData: defaultData, ...rest } = props;
   if (defaultData !== undefined) {
-    _.set(dataLayer, 'dataLayerData', {
+    set(dataLayer, 'dataLayerData', {
       ...defaultData,
       ...dataLayer.dataLayerData,
     });

@@ -15,7 +15,7 @@
 import path from 'path';
 import fs from 'fs-extra';
 import walkdir from 'walkdir';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { Tree, TreeHO } from './type';
 import { treeHOPromiseFlow } from './promiseUtils';
 

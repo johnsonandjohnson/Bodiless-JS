@@ -13,7 +13,8 @@
  */
 
 import React from 'react';
-import { flow, flowRight } from 'lodash';
+import flow from 'lodash/flow';
+import flowRight from 'lodash/flowRight';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount, ReactWrapper } from 'enzyme';
 // eslint-disable-next-line import/no-extraneous-dependencies

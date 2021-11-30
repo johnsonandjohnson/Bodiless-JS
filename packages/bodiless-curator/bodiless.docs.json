@@ -1,0 +1,9 @@
+{
+  "Components": {
+    "SocialWall.md": "./doc/SocialWall.md",
+    "assets": {
+      "SocialWallExample.jpg": "./doc/assets/SocialWallExample.jpg",
+      "SocialWallSettingsForm.jpg": "./doc/assets/SocialWallSettingsForm.jpg"
+    }
+  }
+}

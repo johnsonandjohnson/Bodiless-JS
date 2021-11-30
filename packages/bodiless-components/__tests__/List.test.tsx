@@ -16,7 +16,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import { mount, render } from 'enzyme';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { withDesign, replaceWith } from '@bodiless/fclasses';
 import { useNode } from '@bodiless/core';
 import List, { useListContext } from '../src/List/List';

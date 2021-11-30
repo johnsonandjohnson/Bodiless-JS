@@ -6,7 +6,7 @@ import {
   useMenuOptionUI,
   ContextMenuProvider,
 } from '@bodiless/core';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { addClasses, removeClasses } from '@bodiless/fclasses';
 import type { StylableProps } from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';

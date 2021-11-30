@@ -16,7 +16,7 @@ import React, { FC, ReactNode, useCallback } from 'react';
 import {
   Form, FormApi, FormState, FormValues,
 } from 'informed';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { withClickOutside } from './hoc';
 import { useMenuOptionUI } from './components/ContextMenuContext';
 import type { ContextMenuFormProps } from './Types/ContextMenuTypes';

@@ -21,7 +21,7 @@ import {
   withData, ifEditable, asReadOnly,
 } from '@bodiless/core';
 import type { WithNodeKeyProps } from '@bodiless/core';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 import { withMetaSnippet } from './withMetaForm';
 
 type BaseProps = PropsWithChildren<HelmetProps>;

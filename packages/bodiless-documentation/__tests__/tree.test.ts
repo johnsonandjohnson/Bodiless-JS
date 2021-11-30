@@ -14,7 +14,7 @@
 
 import path from 'path';
 import fs from 'fs-extra';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import {
   withTree,
   prependPath,

@@ -17,7 +17,7 @@ import {
   Text, TextArea, Radio, RadioGroup, Checkbox, Option, Select,
 } from 'informed';
 import ReactTooltip from 'rc-tooltip';
-import { omit } from 'lodash';
+import omit from 'lodash/omit';
 import ReactTagsField from './ReactTagsField';
 import type { ContextMenuUI, ContextMenuFormProps } from '../Types/ContextMenuTypes';
 

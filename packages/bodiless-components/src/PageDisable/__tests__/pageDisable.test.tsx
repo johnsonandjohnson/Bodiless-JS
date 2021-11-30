@@ -13,7 +13,8 @@
  */
 
 import React from 'react';
-import { render } from 'enzyme';
+import { render, mount } from 'enzyme';
+import { PageEditContext } from '@bodiless/core';
 import { asToken, A, HOC } from '@bodiless/fclasses';
 import { asBodilessLink } from '../../Link';
 import { withMockNode } from '../../../__tests__/helpers/MockContentNode';
@@ -52,15 +53,15 @@ const withPageLink = (pagePath: string) => asToken(
 )(A);
 
 describe('Disabled page', () => {
+  const PageLink1 = withPageLink('/all-disabled/');
+  const PageLink2 = withPageLink('/disabled-content-links/');
+  const PageLink3 = withPageLink('/disabled-menu-links/');
+  const PageLink4 = withPageLink('/all-enabled/');
+  const wrapper1 = render(<PageLink1 />);
+  const wrapper2 = render(<PageLink2 />);
+  const wrapper3 = render(<PageLink3 />);
+  const wrapper4 = render(<PageLink4 />);
   describe('Disabled content (non-menu) link', () => {
-    const PageLink1 = withPageLink('/all-disabled/');
-    const PageLink2 = withPageLink('/disabled-content-links/');
-    const PageLink3 = withPageLink('/disabled-menu-links/');
-    const PageLink4 = withPageLink('/all-enabled/');
-    const wrapper1 = render(<PageLink1 />);
-    const wrapper2 = render(<PageLink2 />);
-    const wrapper3 = render(<PageLink3 />);
-    const wrapper4 = render(<PageLink4 />);
     it('Renders without "href" if the link leads to disabled page', () => {
       expect(wrapper1.prop('href')).toBeUndefined();
       expect(wrapper2.prop('href')).toBeUndefined();
@@ -71,7 +72,16 @@ describe('Disabled page', () => {
     it('Renders as usual link if all page disabling options are enabled', () => {
       expect(wrapper4.prop('href')).toBeDefined();
     });
-  });
-  describe('Disabled menu item', () => {
+    it('Does not highlight disabled links in preview mode', () => {
+      const wrapper1 = mount(<PageLink1 />);
+      expect(wrapper1.hasClass('bl-link-disabled')).toBeFalsy();
+    });
+    it('Highlights disabled links in edit mode', () => {
+      let mockIsEdit: jest.SpyInstance;
+      mockIsEdit = jest.spyOn(PageEditContext.prototype, 'isEdit', 'get').mockReturnValue(true);
+      const wrapper1 = mount(<PageLink1 />);
+      expect(wrapper1.render().hasClass('bl-link-disabled')).toBeTruthy();
+      mockIsEdit.mockRestore();
+    });
   });
 });

@@ -13,7 +13,7 @@
  */
 
 import React, { FC } from 'react';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { withNode } from '@bodiless/core';
 import {
   designable,

@@ -13,7 +13,8 @@
  */
 
 import React, { ComponentType } from 'react';
-import { mergeWith, isArray } from 'lodash';
+import mergeWith from 'lodash/mergeWith';
+import isArray from 'lodash/isArray';
 import { ComponentOrTag } from '@bodiless/fclasses';
 import {
   RichTextItemType,

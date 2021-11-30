@@ -18,7 +18,7 @@ import { asReadOnly } from '@bodiless/core';
 import {
   withDesign, addProps, withoutProps, HOC,
 } from '@bodiless/fclasses';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 import { BreadcrumbsClean, withBreadcrumbStartingTrail, withoutBreadcrumbFinalTrail } from '../src/Breadcrumbs';
 import { withMenuTitleEditors } from '../src';
 

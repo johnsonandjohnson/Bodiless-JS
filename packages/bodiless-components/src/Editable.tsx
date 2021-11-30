@@ -17,7 +17,8 @@ import React, {
 } from 'react';
 import ContentEditable from 'react-contenteditable';
 import { observer } from 'mobx-react-lite';
-import { pickBy, identity } from 'lodash';
+import pickBy from 'lodash/pickBy';
+import identity from 'lodash/identity';
 import {
   withNode,
   useNode,

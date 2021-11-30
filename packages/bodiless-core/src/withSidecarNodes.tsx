@@ -14,7 +14,7 @@
 
 import React, { createContext, useContext } from 'react';
 import type { HOC, Token } from '@bodiless/fclasses';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 import { NodeContext } from './NodeProvider';
 import type { NodeMap } from './NodeProvider';
 

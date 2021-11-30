@@ -13,7 +13,7 @@
  */
 
 import { ComponentType } from 'react';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { DesignableComponents } from '@bodiless/fclasses';
 import { withId, asMark } from './RichTextItemSetters';
 import {

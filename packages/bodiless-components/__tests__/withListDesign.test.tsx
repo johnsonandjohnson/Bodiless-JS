@@ -18,7 +18,7 @@ import {
   Token, withDesign, addProps, replaceWith, withoutProps, Tag, asToken,
 } from '@bodiless/fclasses';
 import { withDefaultContent } from '@bodiless/core';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { render, ComponentType } from 'enzyme';
 import { withSubLists } from '../src/List/asChameleonSubList';
 import asBodilessList, { asSubList } from '../src/List/asBodilessList';
