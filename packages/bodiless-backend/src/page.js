@@ -346,6 +346,30 @@ class Page {
     });
   }
 
+  directoryExists(newDirectory) {
+    const readPromise = new Promise((resolve) => {
+      fs.access(newDirectory, err => {
+        if (!err) {
+          resolve('The page cannot be moved. Directory exists');
+        }
+        resolve(this);
+      });
+    });
+    return readPromise;
+  }
+
+  removeFile(origin) {
+    const readPromise = new Promise((resolve, reject) => {
+      fs.unlink(origin, err => {
+        if (err) {
+          reject(err);
+        }
+        resolve(this);
+      });
+    });
+    return readPromise;
+  }
+
   deleteDirectory() {
     const readPromise = new Promise((resolve, reject) => {
       /**
