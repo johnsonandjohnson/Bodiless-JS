@@ -13,15 +13,15 @@
  * limitations under the License.
  */
 
-import React, {
-  useCallback
-} from 'react';
+import React from 'react';
 import {
-  useNode,
-  useEditContext,
-  withMenuOptions,
-  TMenuOption,
+  ContextMenuForm,
   MenuOptionsDefinition,
+  TMenuOption,
+  useMenuOptionUI,
+  withMenuOptions,
+  withNode,
+  withNodeKey,
 } from '@bodiless/core';
 import {
   asToken,
@@ -33,14 +33,43 @@ import type {
 } from '@bodiless/core';
 import { withToolsButton } from '../Tools';
 
+const FormBodyBase = () => {
+  const {
+    ComponentFormTitle,
+  } = useMenuOptionUI();
+
+  return (
+    <>
+      <ComponentFormTitle>
+        Redirect Aliases
+      </ComponentFormTitle>
+    </>
+  );
+};
+
+const FormBody: any = asToken(
+  withNode,
+  withNodeKey({
+    nodeKey: 'redirect-aliases',
+    nodeCollection: 'site',
+  }),
+)(FormBodyBase);
+
+const Form = (props: ContextMenuFormProps) => (
+  <ContextMenuForm {...props} hasSubmit={false}>
+    <FormBody />
+  </ContextMenuForm>
+);
+
 const useMenuOptions = (): TMenuOption[] => {
+  const render = (props: ContextMenuFormProps) => <Form {...props} />;
   const menuOptions$: TMenuOption[] = [
     {
-      name: 'page-alias',
+      name: 'redirect-alias',
       icon: 'route',
       label: 'Aliases',
       group: 'tools-group',
-      // handler: () => render,
+      handler: () => render,
     },
   ];
   return menuOptions$;
@@ -49,16 +78,16 @@ const useMenuOptions = (): TMenuOption[] => {
 
 const menuOptions: MenuOptionsDefinition<object> = {
   useMenuOptions,
-  name: 'UrlAlias',
+  name: 'RedirectAlias',
   root: true,
 };
 
-const withUrlAliasButton = asToken(
+const withRedirectAliasButton = asToken(
   withOnlyProps('key', 'children') as HOC,
   withMenuOptions(menuOptions),
   withToolsButton,
 );
 
 export {
-  withUrlAliasButton,
+  withRedirectAliasButton,
 };
