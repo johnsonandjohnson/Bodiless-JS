@@ -52,7 +52,7 @@ const applyChameleon: HOC = Component => {
   };
   return asToken(
     withoutProps('design'),
-    applyChameleonDesign(Component),
+    // applyChameleonDesign(Component),
   )(Chameleon) as ComponentType<any>;
 };
 

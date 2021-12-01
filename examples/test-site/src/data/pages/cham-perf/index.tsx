@@ -76,38 +76,38 @@ const baseDesign = {
   Box: startWith(Box),
 };
 
-const heavyDesign = varyDesigns(
-  baseDesign,
-  createColorDesign('bg'),
-  createColorDesign('border'),
-  createColorDesign('text'),
-  // createTextDesign(5), // 1715 items // ≈ 11 sec
-  createTextDesign(10) // 3430 items // ≈ 19 sec
-  // createTextDesign(20) // 6860 items // ≈ 80 sec
-);
+// const heavyDesign = varyDesigns(
+//   baseDesign,
+//   createColorDesign('bg'),
+//   createColorDesign('border'),
+//   createColorDesign('text'),
+//   // createTextDesign(5), // 1715 items // ≈ 11 sec
+//   createTextDesign(10) // 3430 items // ≈ 19 sec
+//   // createTextDesign(20) // 6860 items // ≈ 80 sec
+// );
 
 /*
  * Primitive Chamelion
  */
 const PrimitiveChameleon = asToken(
-  // asBodilessChameleon('primitive-chameleon', undefined, useChameleonSelectorForm),
-  asBodilessChameleon('primitive-chameleon'),
-  withDesign(toggleDesign),
-  // withDesign(lightDesign), // 2 items // ≈ 3 sec
+  asBodilessChameleon('primitive-chameleon', undefined, useChameleonSelectorForm),
+  // asBodilessChameleon('primitive-chameleon'),
+  // withDesign(toggleDesign),
+  withDesign(lightDesign), // 2 items // ≈ 3 sec
   // withDesign(heavyDesign),
   // withDesign(spawnDesign(2000)), // ≈ 8 sec
   // withDesign(spawnDesign(4000)), // ≈ 20 sec
-  // withDesign(spawnDesign(1000))
+  // withDesign(spawnDesign(4000))
 )(Box);
 
 export default (props: any) => (
   <Page {...props}>
-    {/* <Layout> */}
+    <Layout>
       <H2>Primitive Chameleon</H2>
       <PrimitiveChameleon>
         <div>Chameleon</div>
       </PrimitiveChameleon>
-    {/* </Layout> */}
+    </Layout>
   </Page>
 );
 
