@@ -103,11 +103,18 @@ Components that are Library Items are able to be _unlinked_ from the Content Lib
 unlink a component from the Content Library, its content is not removed — it simply loses its
 connection to the associated Library Item, allowing you to edit it as an independent component
 (i.e., edits to the component will not update the instances of the previously linked Library Item).
+This is useful for customizing an existing component without having to recreate it from scratch.
 
-To unlink a component that is a Library Item, under the "Library" subsection of its context menu,
-click **Unlink**.
+To unlink a component that is a Library Item:
 
-![Context Menu with "Unlink" button](./assets/ContextMenuWithLibraryUnlink.jpg ':size=50%')
+01. Under the "Library" subsection of its context menu, click **Unlink**.
+    ![Context Menu with "Unlink" button](./assets/ContextMenuWithLibraryUnlink.jpg ':size=50%')
+01. A warning message describing the "Unlink" action will pop up.
+    * Click the checkmark to confirm.
+    * Click the "X" icon to cancel.
+
+!>  **IMPORTANT:** If you unlink the _last_ instance of a Library Item, the Library Item will be
+    deleted.
 
 ?>  **Note:** If you add a component to the Content Library that had been unlinked, this will create
     a _new_ Library Item and will not replace the Library Item from which the component had been
