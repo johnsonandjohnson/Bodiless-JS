@@ -16,6 +16,7 @@ import type { EditButtonProps } from '@bodiless/core';
 import type {
   DesignableComponents,
   DesignableProps,
+  Design,
 } from '@bodiless/fclasses';
 import type { ComponentSelectorOptions } from '@bodiless/layouts';
 
@@ -29,8 +30,9 @@ export type ChameleonState = {
   isOn: boolean,
   activeComponent: string,
   setActiveComponent: (key: string|null) => void,
-  selectableComponents: Partial<ChameleonComponents>,
-  components: ChameleonComponents,
+  // selectableComponents: Partial<ChameleonComponents>,
+  components?: ChameleonComponents,
+  design: Design,
 };
 
 export type ChameleonProps =

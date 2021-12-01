@@ -13,7 +13,7 @@
  */
 
 import React, { FC } from 'react';
-import { withoutProps, asToken, HOC } from '@bodiless/fclasses';
+import { withoutProps, asToken, HOC, extendDesignable, applyDesign } from '@bodiless/fclasses';
 import { applyChameleonDesign, useChameleonContext } from './withChameleonContext';
 import { ChameleonProps } from './types';
 
@@ -44,17 +44,16 @@ import { ChameleonProps } from './types';
  * @return The wrapped component enhanced by the appropriate HOC's from the design.
  */
 const applyChameleon: HOC = Component => {
-  const Chameleon: FC<Pick<ChameleonProps, 'components'>> = props => {
-    const { activeComponent } = useChameleonContext();
-    console.log('applyChameleon_activeComponent', activeComponent);
-    const { components, ...rest } = props;
-    const ActiveComponent = components[activeComponent];
-    return <ActiveComponent {...rest} />;
+  const Chameleon: FC = props => {
+    const { activeComponent, design } = useChameleonContext();
+    const activeDesign = design[activeComponent];
+    const ActiveComponent = activeDesign ? activeDesign(Component) : Component;
+    return <ActiveComponent {...props} />;
   };
   return asToken(
     withoutProps('design'),
     applyChameleonDesign(Component),
-  )(Chameleon);
+  )(Chameleon) as ComponentType<any>;
 };
 
 export default applyChameleon;

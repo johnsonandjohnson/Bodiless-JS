@@ -23,19 +23,19 @@ import {
   MenuOptionsDefinition, useEditContext,
 } from '@bodiless/core';
 import {
-  flowIf, asToken, DesignableComponents, withoutProps,
+  flowIf, asToken, DesignableComponents, withoutProps, withDesign, applyDesign,
 } from '@bodiless/fclasses';
 
 import type { ComponentSelectorFormProps } from '@bodiless/layouts';
 import type { ChameleonButtonProps, ChameleonData } from './types';
-import { useChameleonContext, DEFAULT_KEY } from './withChameleonContext';
+import { useChameleonContext, DEFAULT_KEY, applyChameleonDesign } from './withChameleonContext';
 
 const useToggleButtonMenuOption = () => {
   const {
-    isOn, selectableComponents, setActiveComponent,
+    isOn, design, setActiveComponent,
   } = useChameleonContext();
   const newKey = isOn ? null
-    : Object.keys(selectableComponents).find(key => key !== DEFAULT_KEY) || null;
+    : Object.keys(design).find(key => key !== DEFAULT_KEY) || null;
   return {
     label: 'Toggle',
     icon: isOn ? 'toggle_off' : 'toggle_on',
@@ -53,7 +53,7 @@ const useToggleButtonMenuOption = () => {
  * ```
  */
 export const useChameleonSwapForm = () => {
-  const { selectableComponents, activeComponent, setActiveComponent } = useChameleonContext();
+  const { design, activeComponent, setActiveComponent } = useChameleonContext();
   const renderForm = () => {
     const {
       ComponentFormLabel,
@@ -61,11 +61,11 @@ export const useChameleonSwapForm = () => {
       ComponentFormRadio,
     } = useMenuOptionUI();
 
-    const radios = Object.getOwnPropertyNames(selectableComponents).map(name => (
+    const radios = Object.getOwnPropertyNames(design).map(name => (
       <ComponentFormLabel id={`bl-component-form-chameleon-radio-${name}`} key={name}>
         <ComponentFormRadio value={name} />
         {/* @ts-ignore */}
-        {selectableComponents[name].title || name}
+        {design[name].title || name}
       </ComponentFormLabel>
     ));
     return (
@@ -79,7 +79,7 @@ export const useChameleonSwapForm = () => {
   const render = useContextMenuForm({
     initialValues: {
       component: activeComponent === DEFAULT_KEY
-        ? Object.keys(selectableComponents)[0]
+        ? Object.keys(design)[0]
         : activeComponent,
     },
     submitValues: (d: ChameleonData) => setActiveComponent(d.component || null),
@@ -105,14 +105,15 @@ export const useChameleonSwapForm = () => {
 export const useChameleonSelectorForm = (
   props: Omit<ComponentSelectorFormProps, 'onSelect'>,
 ) => {
-  const { selectableComponents, setActiveComponent } = useChameleonContext();
+  const { setActiveComponent, design } = useChameleonContext();
   const onSelect = ([componentName]: string[]) => setActiveComponent(componentName);
   return {
     icon: 'repeat',
     label: 'Swap',
     handler: () => componentSelectorForm({
       ...props,
-      components: selectableComponents as DesignableComponents,
+      // components: selectableComponents as DesignableComponents,
+      components: applyDesign({})(design),
       onSelect,
     }),
     formTitle: 'Choose a component',
@@ -158,8 +159,8 @@ const withChameleonButton = <P extends object, D extends object>(
   const useMenuOptions = (props: P & EditButtonProps<D>) => {
     const overrides = useOverrides(props);
     // if useOverrides returns falsy, it means not to provide the button.
-    const { selectableComponents } = useChameleonContext();
-    const extMenuOptions = Object.keys(selectableComponents).length > 1
+    const { design } = useChameleonContext();
+    const extMenuOptions = Object.keys(design).length > 1
       ? useChameleonSwapForm
       : useToggleButtonMenuOption;
     const baseDefinition:TMenuOption = {

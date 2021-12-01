@@ -67,16 +67,11 @@ export const withPrunedDesign: HOC = Component => {
 
 export const withSplitDesign: HOC = Component => {
   const WithSplitDesign: FC<any> = (props: any) => {
-    console.log('withSplitDesign_props', props);
-    // const { node: { data: { component = '_default' }} } = useNode();
-    const { componentData: { component }} = props;
-    console.log('withSplitDesign_component', JSON.stringify(component));
+    // const { componentData: { component }} = props;
     const { design, ...rest } = props;
-    const newDesign = pick(design, 'Wrapper', 'ComponentWrapper', component);
-    console.log('withSplitDesign_design', design);
-    console.log('withSplitDesign_newDesign', newDesign);
-    rest.children = <div>{component}</div>;
-    return <Component {...rest} design={newDesign} csDesign={design} />;
+    // const newDesign = pick(design, component);
+    // rest.children = <div>{component}</div>;
+    return <Component {...rest} design={{}} csDesign={design} />;
   };
   return WithSplitDesign;
 };

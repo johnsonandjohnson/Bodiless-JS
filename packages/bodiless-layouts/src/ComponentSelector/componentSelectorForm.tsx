@@ -31,6 +31,7 @@ export type ComponentSelectorFormProps =
  * @param onSelect The action to perform when a component is selected.
  */
 const componentSelectorForm = (props: ComponentSelectorFormProps) => {
+  console.log('componentSelectorForm_props', props);
   const components = props.csDesign
     ? applyDesign({})(props.csDesign) : props.components;
   return contextMenuForm({

@@ -31,6 +31,11 @@ import {
 } from '@bodiless/components-ui';
 import Layout from '../../../components/Layout';
 
+
+const toggleDesign = {
+  Blue: addClasses('bg-blue-500'),
+};
+
 const lightDesign = {
   Blue: addClasses('bg-blue-500'),
   Red: addClasses('bg-red-500'),
@@ -85,10 +90,11 @@ const heavyDesign = varyDesigns(
  * Primitive Chamelion
  */
 const PrimitiveChameleon = asToken(
-  asBodilessChameleon('primitive-chameleon', undefined, useChameleonSelectorForm),
-  // asBodilessChameleon('primitive-chameleon'),
+  // asBodilessChameleon('primitive-chameleon', undefined, useChameleonSelectorForm),
+  asBodilessChameleon('primitive-chameleon'),
+  withDesign(toggleDesign),
   // withDesign(lightDesign), // 2 items // ≈ 3 sec
-  withDesign(heavyDesign),
+  // withDesign(heavyDesign),
   // withDesign(spawnDesign(2000)), // ≈ 8 sec
   // withDesign(spawnDesign(4000)), // ≈ 20 sec
   // withDesign(spawnDesign(1000))
