@@ -18,11 +18,9 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import {
-  omit,
-  pick,
-  mergeWith,
-} from 'lodash';
+import omit from 'lodash/omit';
+import pick from 'lodash/pick';
+import mergeWith from 'lodash/mergeWith';
 import type { HOC, AsToken } from './types';
 import { asToken } from './Tokens';
 

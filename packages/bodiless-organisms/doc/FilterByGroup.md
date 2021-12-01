@@ -26,7 +26,7 @@ const suggestions = [
 
 ## Styling
 ```js
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { FilterByGroupClean } from '@bodiless/organisms';
 import { withDesign, addClasses, addProps } from '@bodiless/fclasses';
 import { asTextColorPrimary } from '../Elements.token';

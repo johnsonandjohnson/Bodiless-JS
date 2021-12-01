@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 // @ts-nocheck
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 import {
   ifEditable, withNode, ifReadOnly, withOnlyProps,
 } from '@bodiless/core';

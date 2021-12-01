@@ -19,7 +19,7 @@ import { PageEditContext } from '@bodiless/core';
 import {
   withDesign, HOC,
 } from '@bodiless/fclasses';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import {
   asMark,
   withButton,

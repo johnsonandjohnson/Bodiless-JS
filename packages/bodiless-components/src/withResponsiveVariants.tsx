@@ -19,7 +19,7 @@ import {
   Design, DesignableComponents, DesignableComponentsProps,
   designable, DesignableProps, Enhancer,
 } from '@bodiless/fclasses';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { withPageDimensionsContext, PageDimensionsProviderProps, usePageDimensionsContext } from './PageDimensionsProvider';
 
 type FinalComponents = {

@@ -17,7 +17,8 @@ import {
   withSidecarNodes, ifReadOnly, ifEditable, withOnlyProps,
 } from '@bodiless/core';
 import type { UseBodilessOverrides, EditButtonProps } from '@bodiless/core';
-import { flowRight, identity } from 'lodash';
+import flowRight from 'lodash/flowRight';
+import identity from 'lodash/identity';
 import {
   replaceWith, withDesign, withoutProps, asToken,
 } from '@bodiless/fclasses';

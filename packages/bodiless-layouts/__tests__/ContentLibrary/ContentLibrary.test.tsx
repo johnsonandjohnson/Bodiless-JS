@@ -22,7 +22,7 @@ import {
 import React, { FC } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount, ReactWrapper } from 'enzyme';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import type { ComponentSelectorProps, ComponentWithMeta } from '../../src/ComponentSelector/types';
 import withContentLibrary from '../../src/ContentLibrary/withContentLibrary';
 

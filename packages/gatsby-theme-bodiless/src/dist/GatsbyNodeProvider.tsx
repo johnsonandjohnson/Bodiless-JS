@@ -13,7 +13,7 @@
  */
 
 import React, { Component } from 'react';
-import { pick } from 'lodash';
+import pick from 'lodash/pick';
 import path from 'path';
 import { DefaultContentNode, NodeProvider } from '@bodiless/core';
 import GatsbyMobxStore, { DataSource } from './GatsbyMobxStore';

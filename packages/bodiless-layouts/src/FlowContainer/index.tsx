@@ -14,7 +14,7 @@
 
 import React, { FC, ComponentType } from 'react';
 import { observer } from 'mobx-react-lite';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import {
   withNode,
   useEditContext,

@@ -1,10 +1,10 @@
 {
   "Components": {
-    "RichText.md": "./README.md",
+    "RichText.md": "./doc/RichTextEditor.md",
     "assets": {
-      "SimpleRichTextNew.jpg": "./assets/SimpleRichTextNew.jpg",
-      "BasicRichTextNew.jpg": "./assets/BasicRichTextNew.jpg",
-      "FullRichTextNew.jpg": "./assets/FullRichTextNew.jpg"
+      "SimpleRichTextNew.jpg": "./doc/assets/SimpleRichTextNew.jpg",
+      "BasicRichTextNew.jpg": "./doc/assets/BasicRichTextNew.jpg",
+      "FullRichTextNew.jpg": "./doc/assets/FullRichTextNew.jpg"
     }
   }
 }

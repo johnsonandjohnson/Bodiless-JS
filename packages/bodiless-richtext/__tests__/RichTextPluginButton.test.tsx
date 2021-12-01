@@ -20,7 +20,7 @@ import {
   withDesign,
 } from '@bodiless/fclasses';
 import type { HOC } from '@bodiless/fclasses';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import {
   asMark,
   asBlock,

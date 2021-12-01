@@ -22,7 +22,7 @@ import {
 import { addClasses, asToken } from '@bodiless/fclasses';
 import { Option } from 'informed';
 import { observer } from 'mobx-react-lite';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import { Tokens } from './TokenMap';
 
 type TokenData = {

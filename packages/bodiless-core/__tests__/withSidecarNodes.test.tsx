@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType } from 'react';
-import { flowRight } from 'lodash';
+import flowRight from 'lodash/flowRight';
 import { mount } from 'enzyme';
 import type { HOC, Token } from '@bodiless/fclasses';
 import withNode, { withNodeKey } from '../src/withNode';

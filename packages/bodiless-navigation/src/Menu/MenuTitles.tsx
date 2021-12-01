@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType, FC } from 'react';
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 import {
   withSidecarNodes, withNode, withNodeKey,
 } from '@bodiless/core';
