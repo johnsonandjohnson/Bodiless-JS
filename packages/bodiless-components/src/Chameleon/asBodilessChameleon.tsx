@@ -13,7 +13,6 @@
  */
 
 import React, { FC } from 'react';
-import pick from 'lodash/pick';
 import {
   ifEditable,
   useNode,
@@ -23,7 +22,7 @@ import type {
   WithNodeKeyProps, UseBodilessOverrides,
 } from '@bodiless/core';
 import {
-  Token, asToken, Enhancer, HOC,
+  Token, asToken, Enhancer,
 } from '@bodiless/fclasses';
 import { ComponentSelectorOptions } from '@bodiless/layouts';
 import { ChameleonData } from './types';
@@ -53,26 +52,6 @@ const withDeleteNodeOnUnwrap = (
     return <Component {...rest} unwrap={unwrap$} />;
   };
   return WithDeleteOnUnwrap;
-};
-
-export const withPrunedDesign: HOC = Component => {
-  const WithPrunedDesign: FC<any> = props => {
-    const { design } = props;
-    const newDesign = pick(design, 'Wrapper', 'ComponentWrapper');
-    return <Component {...props} design={newDesign} />;
-  };
-  return WithPrunedDesign;
-};
-
-export const withSplitDesign: HOC = Component => {
-  const WithSplitDesign: FC<any> = (props: any) => {
-    // const { componentData: { component }} = props;
-    const { design, ...rest } = props;
-    // const newDesign = pick(design, component);
-    // rest.children = <div>{component}</div>;
-    return <Component {...rest} design={{}} csDesign={design} />;
-  };
-  return WithSplitDesign;
 };
 
 /**
