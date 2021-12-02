@@ -21,7 +21,6 @@ import {
   asToken,
   varyDesigns,
   startWith,
-  HOC,
 } from '@bodiless/fclasses';
 import {
   asBodilessChameleon
@@ -32,7 +31,7 @@ import {
 import Layout from '../../../components/Layout';
 
 
-const toggleDesign = {
+export const toggleDesign = {
   Blue: addClasses('bg-blue-500'),
 };
 
@@ -46,7 +45,7 @@ export const spawnDesign = (i: number) => {
   for (i;  i > 0; i--) {
     design[`d${i}`] = addClasses(`d-${i}`);
   }
-  return design;
+  return design as any;
 };
 
 const colors = ['red', 'blue', 'teal', 'green', 'yellow', 'purple', 'orange'];
