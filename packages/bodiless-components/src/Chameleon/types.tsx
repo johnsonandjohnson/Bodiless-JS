@@ -11,7 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import type { EditButtonProps } from '@bodiless/core';
 import type {
   DesignableComponents,
@@ -30,8 +29,6 @@ export type ChameleonState = {
   isOn: boolean,
   activeComponent: string,
   setActiveComponent: (key: string|null) => void,
-  // selectableComponents: Partial<ChameleonComponents>,
-  components?: ChameleonComponents,
   design: Design,
 };
 

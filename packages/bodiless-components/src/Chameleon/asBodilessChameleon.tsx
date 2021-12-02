@@ -18,7 +18,6 @@ import {
   ifEditable,
   useNode,
   ifReadOnly,
-  withBodilessData,
 } from '@bodiless/core';
 import type {
   WithNodeKeyProps, UseBodilessOverrides,
@@ -99,9 +98,7 @@ const asBodilessChameleon = (
     ifReadOnly(
       withoutChameleonButtonProps,
     ),
-    withChameleonContext(nodeKeys, defaultData, Component),
-    // withPrunedDesign,
-    // withBodilessData(nodeKeys, defaultData),
+    withChameleonContext(nodeKeys, defaultData),
   ) as Enhancer<ComponentSelectorOptions>;
   return hoc(Component);
 };

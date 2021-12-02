@@ -23,12 +23,12 @@ import {
   MenuOptionsDefinition, useEditContext,
 } from '@bodiless/core';
 import {
-  flowIf, asToken, DesignableComponents, withoutProps, withDesign, applyDesign,
+  flowIf, asToken, withoutProps, applyDesign,
 } from '@bodiless/fclasses';
 
 import type { ComponentSelectorFormProps } from '@bodiless/layouts';
 import type { ChameleonButtonProps, ChameleonData } from './types';
-import { useChameleonContext, DEFAULT_KEY, applyChameleonDesign } from './withChameleonContext';
+import { useChameleonContext, DEFAULT_KEY } from './withChameleonContext';
 
 const useToggleButtonMenuOption = () => {
   const {

@@ -21,23 +21,22 @@ import {
   HOC, asToken,
 } from '@bodiless/fclasses';
 import type { Designable, Design } from '@bodiless/fclasses';
-import { omit, pick, identity } from 'lodash';
+import omit from 'lodash/omit';
 import type {
-  ChameleonState, ChameleonData, ChameleonButtonProps, ChameleonComponents,
+  ChameleonState, ChameleonData, ChameleonButtonProps,
 } from './types';
-import { withSplitDesign } from './asBodilessChameleon';
 
 const ChameleonContext = createContext<ChameleonState|undefined>(undefined);
 
 export const DEFAULT_KEY = '_default';
 
-const getSelectableComponents = (props: ChameleonButtonProps) => {
-  // console.log('getSelectableComponents_props', props);
-  const { components } = props;
-  // @ts-ignore @TODO need to add metadata to component type
-  if (components[DEFAULT_KEY].title) return components;
-  return omit(components, DEFAULT_KEY);
-};
+// const getSelectableComponents = (props: ChameleonButtonProps) => {
+//   // console.log('getSelectableComponents_props', props);
+//   const { components } = props;
+//   // @ts-ignore @TODO need to add metadata to component type
+//   if (components[DEFAULT_KEY].title) return components;
+//   return omit(components, DEFAULT_KEY);
+// };
 
 const getActiveComponent = (props: ChameleonButtonProps) => {
   const { componentData: { component } } = props;
@@ -68,39 +67,29 @@ const useChameleonContext = (): ChameleonState => {
 //  *
 //  * @param Component
 //  */
-const applyChameleonDesign = (Component: ComponentOrTag<any>): Designable => {
-  const apply = (design: Design<ChameleonComponents> = {}) => {
-    const start = Object.keys(design).reduce((acc, key) => ({
-      ...acc,
-      [key]: Component,
-    }), { [DEFAULT_KEY]: Component });
-    console.log('applyChameleonDesign_start', start);
-    return applyDesign(start)(design);
-  };
-  return extendDesignable()(apply, 'Chameleon');
-};
-
-const withTest: HOC = Component => (props: any) => {
-  console.log('withTest_props', props);
-  return <Component {...props} />;
-};
+// const applyChameleonDesign = (Component: ComponentOrTag<any>): Designable => {
+//   const apply = (design: Design<ChameleonComponents> = {}) => {
+//     const start = Object.keys(design).reduce((acc, key) => ({
+//       ...acc,
+//       [key]: Component,
+//     }), { [DEFAULT_KEY]: Component });
+//     console.log('applyChameleonDesign_start', start);
+//     return applyDesign(start)(design);
+//   };
+//   return extendDesignable()(apply, 'Chameleon');
+// };
 
 const withChameleonContext = (
   nodeKeys: WithNodeKeyProps,
   defaultData?: ChameleonData,
-  /** */
-  RootComponent: ComponentOrTag<any> = Fragment,
 ): Token => Component => {
   const WithChameleonContext: FC<any> = props => {
-    console.log('withChameleonContext_props', props);
     return (
       <ChameleonContext.Provider value={{
         isOn: getIsOn(props),
         activeComponent: getActiveComponent(props),
         // eslint-disable-next-line react/destructuring-assignment
         design: props.design || {},
-        // components: props.components,
-        // selectableComponents: getSelectableComponents(props),
         setActiveComponent: (component: string|null) => props.setComponentData({ component }),
       }}
       >
@@ -113,17 +102,8 @@ const withChameleonContext = (
 
   return withSidecarNodes(
     withBodilessData(nodeKeys, defaultData),
-    // withSplitDesign,
-    // applyChameleonDesign(RootComponent),
-    // withTest,
   )(WithChameleonContext);
-
-  // return asToken(
-  //   withSplitDesign,
-  //   withBodilessData(nodeKeys, defaultData),
-  //   applyChameleonDesign(RootComponent),
-  // )(WithChameleonContext);
 };
 
 export default withChameleonContext;
-export { useChameleonContext, applyChameleonDesign };
+export { useChameleonContext };
