@@ -293,3 +293,6 @@ for use in [Flow Containers](/Components/FlowContainer); once enabled, you will 
 * Add components saved in the Content Library to your Flow Container.
   * See: [Saving a component in the Content
     Library](/Components/FlowContainer#saving-a-component-in-the-content-library)
+* Unlink components from Content Library Items.
+  * See: [Unlinking a component from the Content
+    Library](/Components/FlowContainer#unlinking-a-component-from-the-content-library)

@@ -34,10 +34,8 @@ import {
   withDesc,
   withFacet,
 } from '../../src/meta';
-import {
-  withLibraryComponents,
-  CONTENT_LIBRARY_TYPE_PREFIX,
-} from '../../src/ContentLibrary/withLibraryComponents';
+import { withLibraryComponents } from '../../src/ContentLibrary/withLibraryComponents';
+import { CONTENT_LIBRARY_TYPE_PREFIX } from '../../src/ContentLibrary/withLibraryContext';
 import EditFlowContainer, { EditFlowContainerComponents } from '../../src/FlowContainer/EditFlowContainer';
 
 // Mock method (from appendTailwindWidthClass.ts) which are not implemented in JSDOM. See
