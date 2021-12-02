@@ -15,8 +15,16 @@ import {
   withDesign, HOC, asToken, flowIf,
 } from '@bodiless/fclasses';
 import type { Design } from '@bodiless/fclasses';
+
 import { withFacet, withTitle, withDesc } from '../meta';
 import { childKeys } from './withContentLibrary';
+import {
+  withLibraryItemContext,
+  CONTENT_LIBRARY_TYPE_PREFIX,
+  isLibraryItem,
+  useIsLibraryItem,
+} from './withLibraryContext';
+import { withLibraryItemIndicator } from './ContentLibraryIndicator';
 import type { FlowContainerItem } from '../FlowContainer/types';
 import type { FlowContainerDataHandlers } from '../FlowContainer/model';
 
@@ -40,7 +48,6 @@ type LibraryMetaValues = {
 };
 
 export const DEFAULT_CONTENT_LIBRARY_PATH = ['Site', 'default-library'];
-export const CONTENT_LIBRARY_TYPE_PREFIX = 'ContentLibrary';
 
 const moveNode = (
   source: ContentNode<any>,
@@ -53,8 +60,6 @@ const moveNode = (
   }
   source.delete();
 };
-const isLibraryItem = (item: FlowContainerItem) => (
-  item && item.type.startsWith(CONTENT_LIBRARY_TYPE_PREFIX));
 
 /**
  * add meta data to FC item content node.
@@ -297,7 +302,9 @@ const withLibraryComponents = (
 ) => asToken(
   withDesign({
     ComponentWrapper: flowIf(() => useEditContext().isEdit)(
+      flowIf(useIsLibraryItem)(withLibraryItemIndicator),
       withLibraryMenuOptions(path),
+      withLibraryItemContext,
     ),
   }),
   withDesignFromLibrary(path),

@@ -96,8 +96,18 @@ export default class BackendClient {
     return this.delete(url);
   }
 
+  removeFile(path$: string) {
+    const url = `${this.prefix}/file/remove/${path$}`;
+    return this.delete(url);
+  }
+
   directoryChild(path$: string) {
     const url = `${this.prefix}/directory/child${path$}`;
+    return this.delete(url);
+  }
+
+  directoryExists(path$: string) {
+    const url = `${this.prefix}/directory/exists${path$}`;
     return this.delete(url);
   }
 
@@ -171,5 +181,14 @@ export default class BackendClient {
 
   mergeMain() {
     return this.post(`${this.prefix}/merge/main`, {});
+  }
+
+  movePage(origin: string, destination: string) {
+    const payload = {
+      origin,
+      destination,
+    };
+    const url = `${this.prefix}/move`;
+    return this.post(url, payload);
   }
 }
