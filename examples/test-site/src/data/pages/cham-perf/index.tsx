@@ -41,7 +41,7 @@ const lightDesign = {
   Red: addClasses('bg-red-500'),
 };
 
-const spawnDesign = (i: number) => {
+export const spawnDesign = (i: number) => {
   let design = {};
   for (i;  i > 0; i--) {
     design[`d${i}`] = addClasses(`d-${i}`);
@@ -76,15 +76,15 @@ const baseDesign = {
   Box: startWith(Box),
 };
 
-// const heavyDesign = varyDesigns(
-//   baseDesign,
-//   createColorDesign('bg'),
-//   createColorDesign('border'),
-//   createColorDesign('text'),
-//   // createTextDesign(5), // 1715 items // ≈ 11 sec
-//   createTextDesign(10) // 3430 items // ≈ 19 sec
-//   // createTextDesign(20) // 6860 items // ≈ 80 sec
-// );
+export const heavyDesign = varyDesigns(
+  baseDesign,
+  createColorDesign('bg'),
+  createColorDesign('border'),
+  createColorDesign('text'),
+  // createTextDesign(5), // 1715 items // ≈ 11 sec
+  createTextDesign(10) // 3430 items // ≈ 19 sec
+  // createTextDesign(20) // 6860 items // ≈ 80 sec
+);
 
 /*
  * Primitive Chamelion

@@ -13,14 +13,10 @@
  */
 
 import React, {
-  createContext, useContext, FC, ComponentType, useRef, useMemo,
+  createContext, useContext, FC
 } from 'react';
-import { WithNodeKeyProps, withSidecarNodes, withBodilessData, useNode } from '@bodiless/core';
-import {
-  applyDesign, extendDesignable, ComponentOrTag, Token, Fragment, DesignableComponents,
-  HOC, asToken,
-} from '@bodiless/fclasses';
-import type { Designable, Design } from '@bodiless/fclasses';
+import { WithNodeKeyProps, withSidecarNodes, withBodilessData } from '@bodiless/core';
+import { Token } from '@bodiless/fclasses';
 import omit from 'lodash/omit';
 import type {
   ChameleonState, ChameleonData, ChameleonButtonProps,
