@@ -40,13 +40,13 @@ const lightDesign = {
   Red: addClasses('bg-red-500'),
 };
 
-export const spawnDesign = (i: number) => {
-  let design = {};
-  for (i;  i > 0; i--) {
-    design[`d${i}`] = addClasses(`d-${i}`);
-  }
-  return design as any;
-};
+// export const spawnDesign = (i: number) => {
+//   let design = {};
+//   for (i;  i > 0; i--) {
+//     design[`d${i}`] = addClasses(`d-${i}`);
+//   }
+//   return design;
+// };
 
 const colors = ['red', 'blue', 'teal', 'green', 'yellow', 'purple', 'orange'];
 const createColorDesign = (prefix: string) => colors.reduce(
