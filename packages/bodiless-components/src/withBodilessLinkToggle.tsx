@@ -92,7 +92,8 @@ const withBodilessLinkToggle = (
       ),
     ),
     applyChameleon,
-  );
+  // @TODO before merge: fix types.
+  ) as any;
 };
 
 export default withBodilessLinkToggle;
