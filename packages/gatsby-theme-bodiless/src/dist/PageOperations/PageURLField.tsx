@@ -13,95 +13,25 @@
  */
 
 import React from 'react';
-import { useMenuOptionUI, useNode } from '@bodiless/core';
+import { useMenuOptionUI } from '@bodiless/core';
 import { useField } from 'informed';
 import type {
-  BaseFieldProps,
-  FormValue,
-  FormValues,
-  FormError,
-} from 'informed';
-import path from 'path';
+  FieldProps,
+} from './types';
+import {
+  useBasePathField,
+  isEmptyValue,
+  validatePageUrl,
+  getPageUrlValidator,
+  joinPath,
+  fieldValueToUrl,
+} from './utils';
 
-const BASE_PATH_FIELD_NAME = 'basePath';
 const PAGE_URL_FIELD_NAME = 'pagePath';
 const BASE_PATH_EMPTY_VALUE = '/';
 const INPUT_FIELD_DEFAULT_CLASSES = 'bl-text-gray-900 bl-bg-gray-100 bl-text-xs bl-min-w-xl-grid-1 bl-my-grid-2 bl-p-grid-1';
 const INPUT_FIELD_INLINE_CLASSES = INPUT_FIELD_DEFAULT_CLASSES.concat(' bl-inline');
 const INPUT_FIELD_BLOCK_CLASSES = INPUT_FIELD_DEFAULT_CLASSES.concat(' bl-block bl-w-full');
-
-const usePagePath = () => useNode().node.pagePath;
-
-const useBasePathField = () => {
-  const basePath = usePagePath();
-  const {
-    fieldState, fieldApi, ref, userProps,
-  } = useField({
-    field: BASE_PATH_FIELD_NAME,
-    initialValue: basePath,
-  });
-  const { value } = fieldState;
-  const { setValue } = fieldApi;
-  const { onChange, onBlur, ...rest } = userProps;
-  return {
-    ref,
-    value,
-    setValue,
-    onChange,
-    ...rest,
-  };
-};
-
-const isEmptyValue = (value : FormValue) => Boolean(value) === false;
-
-const validateEmptyField = (value: FormValue) => (isEmptyValue(value)
-  ? 'Field can not be empty'
-  : undefined
-);
-
-const VALIDATEMSG = 'No special characters, capital letters or spaces allowed, no beginning or ending with - or _';
-const pagePathReg = /^[a-z0-9](?:[_-]?[a-z0-9]+)*$/;
-const pagePathvalidate = (url: string) => {
-  const hasInvalidParts = url.split('/').filter(item => {
-    if (item === '') {
-      return false;
-    }
-    if (!RegExp(pagePathReg).test(item)) {
-      return true;
-    }
-    return false;
-  });
-  return hasInvalidParts.length > 0;
-};
-
-export const validatePageUrl = (
-  value: FormValue,
-) => (
-  typeof value === 'string' && (pagePathvalidate(value) || !RegExp(/^[a-z0-9_/-]+$/).test(value))
-    ? VALIDATEMSG
-    : undefined
-);
-
-/**
- * props that can be passed to PageURLField
- * disallow overriding field prop
- * if we decide to allow overriding it in the future
- * then also we need to allow overriding the second PageURLField input
- */
-type FieldProps = Omit<BaseFieldProps, 'field'>;
-type FieldValidate = (value: FormValue, values: FormValues) => FormError;
-
-const getPageUrlValidator = (validate?: FieldValidate) => (
-  value: FormValue, values: FormValues,
-) => validateEmptyField(value)
-    || validatePageUrl(value)
-    || (validate && validate(value, values));
-
-const joinPath = (path1: string, path2: string) => path.join(path1, path2);
-
-const fieldValueToUrl = (value: FormValue) => (typeof value === 'string'
-  ? value || BASE_PATH_EMPTY_VALUE
-  : BASE_PATH_EMPTY_VALUE);
 
 /**
  * informed custom field that provides ability to enter new page path
@@ -125,7 +55,7 @@ const PageURLField = (props: FieldProps) => {
   const isBasePathEmpty = isEmptyValue(basePathValue) || basePathValue === BASE_PATH_EMPTY_VALUE;
   const isFullUrl = isBasePathEmpty;
 
-  const { validate, hidden, ...rest } = props;
+  const { validate, ...rest } = props;
   const {
     fieldState, fieldApi, render, ref, userProps,
   } = useField({
@@ -139,11 +69,6 @@ const PageURLField = (props: FieldProps) => {
   const { onChange, ...restUserProps } = userProps;
   const fieldLabel = isFullUrl ? 'URL' : 'Page Path';
   const inputClasses = isFullUrl ? INPUT_FIELD_BLOCK_CLASSES : INPUT_FIELD_INLINE_CLASSES;
-
-  // Do not move this validation above the hook useField.
-  if (hidden) {
-    return null;
-  }
 
   return render(
     <>
@@ -199,19 +124,75 @@ const PageURLField = (props: FieldProps) => {
 };
 
 /**
- * function that can be used to get new page path value
- * this function should usually be invoked after an informed form
- * containing PageURLField field is submitted
- * @param values informed form values
- * @returns new page path
+ * informed custom field that provides ability to move existing page page into new path
+ * the field contains 2 inputs: base path and page path
+ * it is recommended to use getPathValue function to merge these 2 inputs
+ * and to get result page path after the form containing this field is submitted
+ * @param props informed field props
  */
-const getPathValue = (values: FormValues) => {
+const MovePageURLField = (props: FieldProps) => {
   const {
-    [BASE_PATH_FIELD_NAME]: basePagePath,
-    [PAGE_URL_FIELD_NAME]: pageUrl,
-  } = values;
-  return joinPath(fieldValueToUrl(basePagePath), fieldValueToUrl(pageUrl));
+    ComponentFormWarning,
+    ComponentFormLabel,
+  } = useMenuOptionUI();
+  const {
+    value: basePathValue,
+    setValue: setBasePathValue,
+    ...restBasePathProps
+  } = useBasePathField();
+
+  const basePathArray = basePathValue.split('/');
+  basePathArray.splice(-2, 1);
+  const parentBasePathValue = basePathArray.join('/');
+
+  const isBasePathEmpty = isEmptyValue(parentBasePathValue)
+  || parentBasePathValue === BASE_PATH_EMPTY_VALUE;
+
+  const { validate, ...rest } = props;
+  const {
+    fieldState, fieldApi, render, ref, userProps,
+  } = useField({
+    field: PAGE_URL_FIELD_NAME,
+    validate: getPageUrlValidator(validate),
+    placeholder: '/parentpage/thispage',
+    ...rest,
+  });
+  const { value } = fieldState;
+  const { setValue } = fieldApi;
+  const { onChange, ...restUserProps } = userProps;
+  const fieldLabel = 'New URL';
+  const inputClasses = INPUT_FIELD_INLINE_CLASSES;
+  return render(
+    <>
+      <ComponentFormLabel htmlFor="new-page-path">{fieldLabel}</ComponentFormLabel>
+      <input
+        {...restBasePathProps}
+        type="hidden"
+        value={isBasePathEmpty ? BASE_PATH_EMPTY_VALUE : parentBasePathValue}
+      />
+      <input
+        name="new-page-path"
+        className={inputClasses}
+        {...restUserProps}
+        ref={ref}
+        value={isEmptyValue(value) ? '' : value}
+        onChange={e => {
+          setValue(e.target.value);
+          if (onChange) {
+            onChange(e);
+          }
+        }}
+      />
+      {
+        fieldState.error ? (
+          <ComponentFormWarning>{fieldState.error}</ComponentFormWarning>
+        ) : null
+      }
+    </>,
+  );
 };
 
-export { PageURLField, getPathValue };
-export type { FieldProps };
+export {
+  MovePageURLField,
+  PageURLField,
+};
