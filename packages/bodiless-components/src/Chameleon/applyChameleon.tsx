@@ -45,8 +45,8 @@ import { useChameleonContext } from './withChameleonContext';
 // @TODO fix types.
 const applyChameleon: any = (Component: any) => {
   const Chameleon: FC = props => {
-    const { activeComponent, design } = useChameleonContext();
-    const activeDesign = design[activeComponent];
+    const { activeComponent, selectableDesigns } = useChameleonContext();
+    const activeDesign = selectableDesigns[activeComponent];
     const ActiveComponent = activeDesign ? activeDesign(Component) : Component;
     return <ActiveComponent {...props} />;
   };

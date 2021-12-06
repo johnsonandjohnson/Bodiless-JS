@@ -110,9 +110,9 @@ const toggleDesign = {
 const AvailabilityToggle = asToken(
   asBodilessChameleon('basic-toggle', { component: 'Available' }, () => ({ label: 'Avail' })),
   withDesign(toggleDesign),
-  withDesign({
-    _default: addClasses('text-red-500'),
-  }),
+  // withDesign({
+  //   _default: addClasses('text-red-500'),
+  // }),
 )(BaseAvailability);
 
 /*

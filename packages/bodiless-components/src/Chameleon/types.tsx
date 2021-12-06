@@ -30,6 +30,7 @@ export type ChameleonState = {
   activeComponent: string,
   setActiveComponent: (key: string|null) => void,
   design: Design,
+  selectableDesigns: Design,
 };
 
 export type ChameleonProps =

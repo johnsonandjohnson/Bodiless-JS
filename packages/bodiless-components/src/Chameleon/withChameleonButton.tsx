@@ -32,10 +32,10 @@ import { useChameleonContext, DEFAULT_KEY } from './withChameleonContext';
 
 const useToggleButtonMenuOption = () => {
   const {
-    isOn, design, setActiveComponent,
+    isOn, selectableDesigns, setActiveComponent,
   } = useChameleonContext();
   const newKey = isOn ? null
-    : Object.keys(design).find(key => key !== DEFAULT_KEY) || null;
+    : Object.keys(selectableDesigns).find(key => key !== DEFAULT_KEY) || null;
   return {
     label: 'Toggle',
     icon: isOn ? 'toggle_off' : 'toggle_on',
@@ -53,7 +53,7 @@ const useToggleButtonMenuOption = () => {
  * ```
  */
 export const useChameleonSwapForm = () => {
-  const { design, activeComponent, setActiveComponent } = useChameleonContext();
+  const { selectableDesigns, activeComponent, setActiveComponent } = useChameleonContext();
   const renderForm = () => {
     const {
       ComponentFormLabel,
@@ -61,11 +61,11 @@ export const useChameleonSwapForm = () => {
       ComponentFormRadio,
     } = useMenuOptionUI();
 
-    const radios = Object.getOwnPropertyNames(design).map(name => (
+    const radios = Object.getOwnPropertyNames(selectableDesigns).map(name => (
       <ComponentFormLabel id={`bl-component-form-chameleon-radio-${name}`} key={name}>
         <ComponentFormRadio value={name} />
         {/* @ts-ignore */}
-        {design[name].title || name}
+        {selectableDesigns[name].title || name}
       </ComponentFormLabel>
     ));
     return (
@@ -79,7 +79,7 @@ export const useChameleonSwapForm = () => {
   const render = useContextMenuForm({
     initialValues: {
       component: activeComponent === DEFAULT_KEY
-        ? Object.keys(design)[0]
+        ? Object.keys(selectableDesigns)[0]
         : activeComponent,
     },
     submitValues: (d: ChameleonData) => setActiveComponent(d.component || null),
@@ -105,7 +105,7 @@ export const useChameleonSwapForm = () => {
 export const useChameleonSelectorForm = (
   props: Omit<ComponentSelectorFormProps, 'onSelect'>,
 ) => {
-  const { setActiveComponent, design } = useChameleonContext();
+  const { setActiveComponent, selectableDesigns } = useChameleonContext();
   const onSelect = ([componentName]: string[]) => setActiveComponent(componentName);
   return {
     icon: 'repeat',
@@ -113,7 +113,7 @@ export const useChameleonSelectorForm = (
     handler: () => componentSelectorForm({
       ...props,
       // components: selectableComponents as DesignableComponents,
-      components: applyDesign({})(design),
+      components: applyDesign({})(selectableDesigns),
       onSelect,
     }),
     formTitle: 'Choose a component',
@@ -159,8 +159,8 @@ const withChameleonButton = <P extends object, D extends object>(
   const useMenuOptions = (props: P & EditButtonProps<D>) => {
     const overrides = useOverrides(props);
     // if useOverrides returns falsy, it means not to provide the button.
-    const { design } = useChameleonContext();
-    const extMenuOptions = Object.keys(design).length > 1
+    const { selectableDesigns } = useChameleonContext();
+    const extMenuOptions = Object.keys(selectableDesigns).length > 1
       ? useChameleonSwapForm
       : useToggleButtonMenuOption;
     const baseDefinition:TMenuOption = {

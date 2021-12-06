@@ -16,7 +16,7 @@ import React, {
   createContext, useContext, FC
 } from 'react';
 import { WithNodeKeyProps, withSidecarNodes, withBodilessData } from '@bodiless/core';
-import { Token } from '@bodiless/fclasses';
+import { Token, Design } from '@bodiless/fclasses';
 import omit from 'lodash/omit';
 import type {
   ChameleonState, ChameleonData, ChameleonButtonProps,
@@ -33,6 +33,14 @@ export const DEFAULT_KEY = '_default';
 //   if (components[DEFAULT_KEY].title) return components;
 //   return omit(components, DEFAULT_KEY);
 // };
+
+const getSelectableDesigns = (props: ChameleonButtonProps): Design => {
+  // console.log('getSelectableComponents_props', props);
+  const { design } = props;
+  // @ts-ignore @TODO need to add metadata to component type
+  if (design[DEFAULT_KEY]?.title) return design;
+  return omit(design, DEFAULT_KEY);
+};
 
 const getActiveComponent = (props: ChameleonButtonProps) => {
   const { componentData: { component } } = props;
@@ -85,7 +93,8 @@ const withChameleonContext = (
         isOn: getIsOn(props),
         activeComponent: getActiveComponent(props),
         // eslint-disable-next-line react/destructuring-assignment
-        design: props.design || {},
+        design: props.design,
+        selectableDesigns: getSelectableDesigns(props),
         setActiveComponent: (component: string|null) => props.setComponentData({ component }),
       }}
       >
