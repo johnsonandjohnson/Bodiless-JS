@@ -15,14 +15,18 @@ is either specific to Bodiless applications of Tailwind or important enough to
 call out to help direct to the specific Tailwind documentation.
 
 ## Tailwind Configuration File
-The sites tailwind configuration file, `tailwind.config.js`, can be found in
-root directory of the site.
 
-Adding custom styling can be done by editing `tailwind.config.js` following
-[Tailwind documentation](https://tailwindcss.com/docs/configuration).
+Your site's Tailwind configuration file, `site.tailwind.config.js`, can be found in the root
+directory of the site.
 
-The starter kit has a empty Tailwind configuration which means that site will
-use all Tailwind's default settings and place into a generated index.css file.
+Adding custom styling can be done by editing `site.tailwind.config.js`, following [Tailwind's
+documentation](https://tailwindcss.com/docs/configuration).
+
+If your site doesn't have a Tailwind configuration file in its root directory, then your site will
+use all of Tailwind's default settings and they'll be placed into a generated `index.css` file.
+
+The Starter Kit has an empty Tailwind configuration, meaning that the starter site (out of the box)
+uses Tailwind's default settings.
 
 ## Extend vs Replace
 Tailwind allows replacing or extending the settings. If site builder is using
