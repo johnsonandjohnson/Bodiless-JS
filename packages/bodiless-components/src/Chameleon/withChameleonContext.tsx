@@ -95,6 +95,7 @@ const withChameleonContext = (
 ): Token => Component => {
   const WithChameleonContext: FC<any> = props => (
     <ChameleonContext.Provider value={{
+      RootComponent: RootComponent,
       isOn: getIsOn(props),
       activeComponent: getActiveComponent(props),
       components: props.components,

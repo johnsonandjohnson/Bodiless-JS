@@ -17,6 +17,7 @@ import type {
   DesignableProps,
   DesignableComponentsProps,
   Design,
+  ComponentOrTag,
 } from '@bodiless/fclasses';
 import type { ComponentSelectorOptions } from '@bodiless/layouts';
 
@@ -27,6 +28,7 @@ export type ChameleonData = {
 export type ChameleonComponents = DesignableComponents;
 
 export type ChameleonState = {
+  RootComponent: ComponentOrTag<any>,
   isOn: boolean,
   activeComponent: string,
   setActiveComponent: (key: string|null) => void,

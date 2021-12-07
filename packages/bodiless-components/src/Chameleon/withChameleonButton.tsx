@@ -107,14 +107,22 @@ export const useChameleonSwapForm = () => {
 export const useChameleonSelectorForm = (
   props: Omit<ComponentSelectorFormProps, 'onSelect'>,
 ) => {
-  const { setActiveComponent, selectableDesigns } = useChameleonContext();
+  const { setActiveComponent, selectableDesigns, RootComponent } = useChameleonContext();
   const onSelect = ([componentName]: string[]) => setActiveComponent(componentName);
+  const apply = () => {
+    const start = Object.keys(selectableDesigns).reduce((acc, key) => ({
+      ...acc,
+      [key]: RootComponent,
+    }), {});
+    return applyDesign(start)(selectableDesigns);
+  };
+  const components = apply();
   return {
     icon: 'repeat',
     label: 'Swap',
     handler: () => componentSelectorForm({
       ...props,
-      components: applyDesign({})(selectableDesigns),
+      components,
       onSelect,
     }),
     formTitle: 'Choose a component',
