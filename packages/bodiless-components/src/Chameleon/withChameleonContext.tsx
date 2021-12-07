@@ -93,23 +93,21 @@ const withChameleonContext = (
   defaultData?: ChameleonData,
   RootComponent: ComponentOrTag<any> = Fragment,
 ): Token => Component => {
-  const WithChameleonContext: FC<any> = props => {
-    return (
-      <ChameleonContext.Provider value={{
-        isOn: getIsOn(props),
-        activeComponent: getActiveComponent(props),
-        components: props.components,
-        design: props.design,
-        selectableDesigns: getSelectableDesigns(props),
-        setActiveComponent: (component: string|null) => props.setComponentData({ component }),
-      }}
-      >
-        <Component
-          {...omit(props, 'componentData', 'components', 'setComponentData') as any}
-        />
-      </ChameleonContext.Provider>
-    );
-  };
+  const WithChameleonContext: FC<any> = props => (
+    <ChameleonContext.Provider value={{
+      isOn: getIsOn(props),
+      activeComponent: getActiveComponent(props),
+      components: props.components,
+      design: props.design,
+      selectableDesigns: getSelectableDesigns(props),
+      setActiveComponent: (component: string|null) => props.setComponentData({ component }),
+    }}
+    >
+      <Component
+        {...omit(props, 'componentData', 'components', 'setComponentData') as any}
+      />
+    </ChameleonContext.Provider>
+  );
 
   return withSidecarNodes(
     flowIf(useIsChameleonToggleable)(
