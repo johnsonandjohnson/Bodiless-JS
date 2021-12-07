@@ -1,3 +1,4 @@
+
 /**
  * Copyright © 2020 Johnson & Johnson
  *
@@ -53,7 +54,8 @@ const useToggleButtonMenuOption = () => {
  * ```
  */
 export const useChameleonSwapForm = () => {
-  const { selectableDesigns, activeComponent, setActiveComponent } = useChameleonContext();
+  const { selectableDesigns, components, activeComponent, setActiveComponent } = useChameleonContext();
+  const items = components ? components : selectableDesigns;
   const renderForm = () => {
     const {
       ComponentFormLabel,
@@ -61,11 +63,11 @@ export const useChameleonSwapForm = () => {
       ComponentFormRadio,
     } = useMenuOptionUI();
 
-    const radios = Object.getOwnPropertyNames(selectableDesigns).map(name => (
+    const radios = Object.getOwnPropertyNames(items).map(name => (
       <ComponentFormLabel id={`bl-component-form-chameleon-radio-${name}`} key={name}>
         <ComponentFormRadio value={name} />
         {/* @ts-ignore */}
-        {selectableDesigns[name].title || name}
+        {items[name].title || name}
       </ComponentFormLabel>
     ));
     return (
@@ -79,7 +81,7 @@ export const useChameleonSwapForm = () => {
   const render = useContextMenuForm({
     initialValues: {
       component: activeComponent === DEFAULT_KEY
-        ? Object.keys(selectableDesigns)[0]
+        ? Object.keys(items)[0]
         : activeComponent,
     },
     submitValues: (d: ChameleonData) => setActiveComponent(d.component || null),
@@ -112,7 +114,6 @@ export const useChameleonSelectorForm = (
     label: 'Swap',
     handler: () => componentSelectorForm({
       ...props,
-      // components: selectableComponents as DesignableComponents,
       components: applyDesign({})(selectableDesigns),
       onSelect,
     }),

@@ -69,7 +69,6 @@ const applyChameleonDesign = (Component: ComponentOrTag<any>): Designable => {
       ...acc,
       [key]: Component,
     }), { [DEFAULT_KEY]: Component });
-    console.log('applyChameleonDesign_start', start);
     return applyDesign(start)(design);
   };
   return extendDesignable()(apply, 'Chameleon');
@@ -99,6 +98,7 @@ const withChameleonContext = (
       <ChameleonContext.Provider value={{
         isOn: getIsOn(props),
         activeComponent: getActiveComponent(props),
+        components: props.components,
         design: props.design,
         selectableDesigns: getSelectableDesigns(props),
         setActiveComponent: (component: string|null) => props.setComponentData({ component }),

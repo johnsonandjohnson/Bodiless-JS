@@ -14,7 +14,7 @@
 
 import React, { FC, useMemo } from 'react';
 import { withoutProps, asToken } from '@bodiless/fclasses';
-import { useChameleonContext } from './withChameleonContext';
+import { applyChameleonDesign, useChameleonContext } from './withChameleonContext';
 
 /**
  * Applies the appropriate design to the wrapped component depending on the
