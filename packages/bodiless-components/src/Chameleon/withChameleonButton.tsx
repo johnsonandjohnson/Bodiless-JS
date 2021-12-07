@@ -15,6 +15,7 @@
 
 import React, { ComponentType } from 'react';
 import pick from 'lodash/pick';
+import omit from 'lodash/omit';
 import { v1 } from 'uuid';
 // @todo We should not depend on a ui package (bu we already do for withImageLibary)
 import { componentSelectorForm } from '@bodiless/layouts';
@@ -109,20 +110,22 @@ export const useChameleonSelectorForm = (
 ) => {
   const { setActiveComponent, selectableDesigns, RootComponent } = useChameleonContext();
   const onSelect = ([componentName]: string[]) => setActiveComponent(componentName);
-  const apply = () => {
+  const getComponentsFromDesign = () => {
     const start = Object.keys(selectableDesigns).reduce((acc, key) => ({
       ...acc,
       [key]: RootComponent,
     }), {});
-    return applyDesign(start)(selectableDesigns);
+    const allComponents = applyDesign(start)(selectableDesigns);
+    // @ts-ignore @TODO need to add metadata to component type
+    if (allComponents[DEFAULT_KEY]?.title) return allComponents;
+    return omit(allComponents, DEFAULT_KEY);
   };
-  const components = apply();
   return {
     icon: 'repeat',
     label: 'Swap',
     handler: () => componentSelectorForm({
       ...props,
-      components,
+      components: getComponentsFromDesign(),
       onSelect,
     }),
     formTitle: 'Choose a component',
