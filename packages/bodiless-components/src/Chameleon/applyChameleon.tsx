@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { withoutProps, asToken } from '@bodiless/fclasses';
 import { useChameleonContext } from './withChameleonContext';
 
@@ -47,7 +47,9 @@ const applyChameleon: any = (Component: any) => {
   const Chameleon: FC = props => {
     const { activeComponent, selectableDesigns } = useChameleonContext();
     const activeDesign = selectableDesigns[activeComponent];
-    const ActiveComponent = activeDesign ? activeDesign(Component) : Component;
+    const ActiveComponent = activeDesign ?
+      useMemo(() => activeDesign(Component), [activeComponent]) :
+      Component;
     return <ActiveComponent {...props} />;
   };
   return asToken(

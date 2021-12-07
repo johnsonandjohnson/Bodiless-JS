@@ -77,7 +77,7 @@ const asBodilessChameleon = (
     ifReadOnly(
       withoutChameleonButtonProps,
     ),
-    withChameleonContext(nodeKeys, defaultData),
+    withChameleonContext(nodeKeys, defaultData, Component),
   ) as Enhancer<ComponentSelectorOptions>;
   return hoc(Component);
 };
