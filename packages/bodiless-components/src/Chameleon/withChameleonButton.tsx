@@ -109,7 +109,7 @@ export const useChameleonSwapForm = () => {
  * ```
  */
 export const useChameleonSelectorForm = (
-  props: Omit<ComponentSelectorFormProps, 'onSelect'> & { RootComponent: ComponentType },
+  props: Omit<ComponentSelectorFormProps, 'onSelect'> & { RootComponent?: ComponentType },
 ) => {
   const { RootComponent = Fragment } = props; 
   const { setActiveComponent, design } = useChameleonContext();
