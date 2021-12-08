@@ -25,7 +25,7 @@ import {
   MenuOptionsDefinition, useEditContext,
 } from '@bodiless/core';
 import {
-  flowIf, asToken, withoutProps, applyDesign, Fragment,
+  flowIf, asToken, withoutProps, applyDesign, Fragment, ComponentOrTag,
 } from '@bodiless/fclasses';
 
 import type { ComponentSelectorFormProps } from '@bodiless/layouts';
@@ -109,9 +109,10 @@ export const useChameleonSwapForm = () => {
  * ```
  */
 export const useChameleonSelectorForm = (
-  props: Omit<ComponentSelectorFormProps, 'onSelect'>,
+  props: Omit<ComponentSelectorFormProps, 'onSelect'> & { RootComponent: ComponentType },
 ) => {
-  const { setActiveComponent, design, RootComponent } = useChameleonContext();
+  const { RootComponent = Fragment } = props; 
+  const { setActiveComponent, design } = useChameleonContext();
   const onSelect = ([componentName]: string[]) => setActiveComponent(componentName);
   const getComponentsFromDesign = () => {
     const allComponents = applyDesign({}, RootComponent)(design);
@@ -175,12 +176,15 @@ const useShowToggleButton = () => {
  */
 const withChameleonButton = <P extends object, D extends object>(
   useOverrides: UseBodilessOverrides<P, D> = () => ({}),
+  RootComponent: ComponentOrTag<any> = Fragment,
 ) => {
   const useMenuOptions = (props: P & EditButtonProps<D>) => {
-    const overrides = useOverrides(props);
+    const propsWithRootComponent = {
+      ...props,
+      RootComponent,
+    };
+    const overrides = useOverrides(propsWithRootComponent);
     // if useOverrides returns falsy, it means not to provide the button.
-    // const { design } = useChameleonContext();
-    console.log('useShowToggleButton()', useShowToggleButton());
     const extMenuOptions = useShowToggleButton()
       ? useToggleButtonMenuOption
       : useChameleonSwapForm;

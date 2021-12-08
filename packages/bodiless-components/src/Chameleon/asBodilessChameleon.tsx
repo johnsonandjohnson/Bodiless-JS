@@ -72,12 +72,12 @@ const asBodilessChameleon = (
   const hoc = asToken(
     applyChameleon,
     ifEditable(
-      withChameleonButton(useOverrides),
+      withChameleonButton(useOverrides, Component),
     ),
     ifReadOnly(
       withoutChameleonButtonProps,
     ),
-    withChameleonContext(nodeKeys, defaultData, Component),
+    withChameleonContext(nodeKeys, defaultData),
   ) as Enhancer<ComponentSelectorOptions>;
   return hoc(Component);
 };
