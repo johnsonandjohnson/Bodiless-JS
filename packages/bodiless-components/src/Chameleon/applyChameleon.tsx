@@ -13,7 +13,7 @@
  */
 
 import React, { FC, useMemo, ComponentType } from 'react';
-import { withoutProps, asToken, HOC, ComponentOrTag } from '@bodiless/fclasses';
+import { withoutProps, asToken, HOC, ComponentOrTag, applyDesign } from '@bodiless/fclasses';
 import { useChameleonContext } from './withChameleonContext';
  
 /**
@@ -47,7 +47,9 @@ const applyChameleon: HOC = (Component: ComponentOrTag<any>) => {
     const { activeComponent, design } = useChameleonContext();
     const ActiveComponent = useMemo(
       () => design[activeComponent] ?
-        design[activeComponent](Component) :
+        // @TODO fix types.
+        // @ts-ignore
+        applyDesign({}, Component)({ [activeComponent]: design[activeComponent] })[activeComponent] :
         Component,
       [activeComponent]
     );

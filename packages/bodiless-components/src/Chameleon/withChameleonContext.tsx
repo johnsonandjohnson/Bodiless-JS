@@ -16,9 +16,6 @@ import React, {
   createContext, useContext, FC
 } from 'react';
 import { WithNodeKeyProps, withSidecarNodes, withBodilessData } from '@bodiless/core';
-import {
-  ComponentOrTag, Fragment,
-} from '@bodiless/fclasses';
 import type { Token } from '@bodiless/fclasses';
 import omit from 'lodash/omit';
 import type {
@@ -47,29 +44,9 @@ const useChameleonContext = (): ChameleonState => {
   return value;
 };
 
-// /**
-//  * @private
-//  *
-//  * HOC makes the wrapped component designable using the wrapped component itself as the start
-//  * for every key in the design.
-//  *
-//  * @param Component
-//  */
-// const applyChameleonDesign = (Component: ComponentOrTag<any>): Designable => {
-//   const apply = (design: Design<ChameleonComponents> = {}) => {
-//     const start = Object.keys(design).reduce((acc, key) => ({
-//       ...acc,
-//       [key]: Component,
-//     }), { [DEFAULT_KEY]: Component });
-//     return applyDesign(start)(design);
-//   };
-//   return extendDesignable()(apply, 'Chameleon');
-// };
-
 const withChameleonContext = (
   nodeKeys: WithNodeKeyProps,
   defaultData?: ChameleonData,
-  RootComponent: ComponentOrTag<any> = Fragment,
 ): Token => Component => {
   const WithChameleonContext: FC<any> = props => (
     <ChameleonContext.Provider value={{
