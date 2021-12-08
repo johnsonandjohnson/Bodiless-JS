@@ -52,6 +52,9 @@ import Layout from '../../../components/Layout';
 const BaseComponent = addClasses('border-8 py-5 text-center')(Div);
 
 const basicChameleonDesign = {
+  _default: asToken(
+    addClasses('border-blue-500 text-gray-500'),
+  ),
   Red: addClasses('border-red-500 text-red-500'),
   Blue: addClasses('border-blue-500 text-blue-500'),
   Green: addClasses('border-green-500 text-green-500'),
@@ -110,9 +113,9 @@ const toggleDesign = {
 const AvailabilityToggle = asToken(
   asBodilessChameleon('basic-toggle', { component: 'Available' }, () => ({ label: 'Avail' })),
   withDesign(toggleDesign),
-  // withDesign({
-  //   _default: addClasses('text-red-500'),
-  // }),
+  withDesign({
+    _default: addClasses('text-red-500'),
+  }),
 )(BaseAvailability);
 
 /*

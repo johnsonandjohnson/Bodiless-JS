@@ -25,7 +25,7 @@ import {
   MenuOptionsDefinition, useEditContext,
 } from '@bodiless/core';
 import {
-  flowIf, asToken, withoutProps, applyDesign,
+  flowIf, asToken, withoutProps, applyDesign, Fragment,
 } from '@bodiless/fclasses';
 
 import type { ComponentSelectorFormProps } from '@bodiless/layouts';
@@ -66,8 +66,7 @@ export const useChameleonSwapForm = () => {
     const radios = Object.getOwnPropertyNames(design).map(name => (
       <ComponentFormLabel id={`bl-component-form-chameleon-radio-${name}`} key={name}>
         <ComponentFormRadio value={name} />
-        {/* @ts-ignore */}
-        {items[name].title || name}
+        {design[name](Fragment).title || name}
       </ComponentFormLabel>
     ));
     return (
@@ -152,6 +151,15 @@ export const withoutChameleonButtonProps = withoutProps(
   'csDesign',
 );
 
+const useShowToggleButton = () => {
+  const { design } = useChameleonContext();
+  if (Object.keys(design).length < 2) return true;
+  if (Object.keys(design).length > 2) return false;
+  if (design[DEFAULT_KEY] === undefined) return false;
+  const test = design[DEFAULT_KEY](Fragment);
+  return test.title === undefined;
+};
+
 /**
  * Adds a menu button which controls the state of the chameleon.
  *
@@ -170,10 +178,11 @@ const withChameleonButton = <P extends object, D extends object>(
   const useMenuOptions = (props: P & EditButtonProps<D>) => {
     const overrides = useOverrides(props);
     // if useOverrides returns falsy, it means not to provide the button.
-    const { design } = useChameleonContext();
-    const extMenuOptions = Object.keys(design).length > 1
-      ? useChameleonSwapForm
-      : useToggleButtonMenuOption;
+    // const { design } = useChameleonContext();
+    console.log('useShowToggleButton()', useShowToggleButton());
+    const extMenuOptions = useShowToggleButton()
+      ? useToggleButtonMenuOption
+      : useChameleonSwapForm;
     const baseDefinition:TMenuOption = {
       name: `chameleon-${v1()}`,
       ...extMenuOptions(),
