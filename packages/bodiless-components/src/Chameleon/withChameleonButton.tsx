@@ -63,12 +63,17 @@ export const useChameleonSwapForm = () => {
       ComponentFormRadio,
     } = useMenuOptionUI();
 
-    const radios = Object.getOwnPropertyNames(design).map(name => (
-      <ComponentFormLabel id={`bl-component-form-chameleon-radio-${name}`} key={name}>
-        <ComponentFormRadio value={name} />
-        {design[name](Fragment).title || name}
-      </ComponentFormLabel>
-    ));
+    const selectableDesigns = design[DEFAULT_KEY](Fragment).title ?
+      design :
+      omit(design, DEFAULT_KEY);
+
+    const radios = Object.getOwnPropertyNames(selectableDesigns)
+      .map(name => (
+        <ComponentFormLabel id={`bl-component-form-chameleon-radio-${name}`} key={name}>
+          <ComponentFormRadio value={name} />
+          {design[name](Fragment).title || name}
+        </ComponentFormLabel>
+      ));
     return (
       <>
         <ComponentFormRadioGroup field="component">
