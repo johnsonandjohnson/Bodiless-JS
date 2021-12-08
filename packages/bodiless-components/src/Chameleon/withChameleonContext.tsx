@@ -17,25 +17,17 @@ import React, {
 } from 'react';
 import { WithNodeKeyProps, withSidecarNodes, withBodilessData } from '@bodiless/core';
 import {
-  applyDesign, ComponentOrTag, Designable, DesignableProps, extendDesignable, Fragment,
-  flowIf
+  ComponentOrTag, Fragment,
 } from '@bodiless/fclasses';
-import type { Token, Design } from '@bodiless/fclasses';
+import type { Token } from '@bodiless/fclasses';
 import omit from 'lodash/omit';
 import type {
-  ChameleonState, ChameleonData, ChameleonButtonProps, ChameleonComponents,
+  ChameleonState, ChameleonData, ChameleonButtonProps,
 } from './types';
 
 const ChameleonContext = createContext<ChameleonState|undefined>(undefined);
 
 export const DEFAULT_KEY = '_default';
-
-const getSelectableDesigns = (props: ChameleonButtonProps): Design => {
-  const { design = {}, components = {}} = props;
-  // @ts-ignore @TODO need to add metadata to component type
-  if (components[DEFAULT_KEY]?.title) return design;
-  return omit(design, DEFAULT_KEY);
-};
 
 const getActiveComponent = (props: ChameleonButtonProps) => {
   const { componentData: { component } } = props;
@@ -55,38 +47,24 @@ const useChameleonContext = (): ChameleonState => {
   return value;
 };
 
-/**
- * @private
- *
- * HOC makes the wrapped component designable using the wrapped component itself as the start
- * for every key in the design.
- *
- * @param Component
- */
-const applyChameleonDesign = (Component: ComponentOrTag<any>): Designable => {
-  const apply = (design: Design<ChameleonComponents> = {}) => {
-    const start = Object.keys(design).reduce((acc, key) => ({
-      ...acc,
-      [key]: Component,
-    }), { [DEFAULT_KEY]: Component });
-    return applyDesign(start)(design);
-  };
-  return extendDesignable()(apply, 'Chameleon');
-};
-
-/**
- * @returns true if number of designs <= 2.
- * Then we will need to apply the default design in order to check if
- * it has a title in its metadata, and based on that decide
- * whether to show 'toggle' or 'swap' form.
- */
-const useIsChameleonToggleable = (props: DesignableProps) => {
-  const { design = {} } = props;
-  if (Object.keys(design).length <= 2) {
-    return true;
-  }
-  return false;
-};
+// /**
+//  * @private
+//  *
+//  * HOC makes the wrapped component designable using the wrapped component itself as the start
+//  * for every key in the design.
+//  *
+//  * @param Component
+//  */
+// const applyChameleonDesign = (Component: ComponentOrTag<any>): Designable => {
+//   const apply = (design: Design<ChameleonComponents> = {}) => {
+//     const start = Object.keys(design).reduce((acc, key) => ({
+//       ...acc,
+//       [key]: Component,
+//     }), { [DEFAULT_KEY]: Component });
+//     return applyDesign(start)(design);
+//   };
+//   return extendDesignable()(apply, 'Chameleon');
+// };
 
 const withChameleonContext = (
   nodeKeys: WithNodeKeyProps,
@@ -98,9 +76,7 @@ const withChameleonContext = (
       RootComponent: RootComponent,
       isOn: getIsOn(props),
       activeComponent: getActiveComponent(props),
-      components: props.components,
       design: props.design,
-      selectableDesigns: getSelectableDesigns(props),
       setActiveComponent: (component: string|null) => props.setComponentData({ component }),
     }}
     >
@@ -111,9 +87,6 @@ const withChameleonContext = (
   );
 
   return withSidecarNodes(
-    flowIf(useIsChameleonToggleable)(
-      applyChameleonDesign(RootComponent),
-    ),
     withBodilessData(nodeKeys, defaultData),
   )(WithChameleonContext);
 };

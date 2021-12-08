@@ -21,9 +21,9 @@ import { withUnwrap } from './withChameleonButton';
 
 const withWrapOnSubmit = <P extends object>(Component: ComponentType<P>) => {
   const WithWrapOnSubmit: FC<P & ChameleonButtonProps> = props => {
-    const { isOn, setActiveComponent, selectableDesigns } = useChameleonContext();
+    const { isOn, setActiveComponent, design } = useChameleonContext();
     if (isOn) return <Component {...props} />;
-    const newKey = Object.keys(selectableDesigns).find(key => key !== DEFAULT_KEY) || null;
+    const newKey = Object.keys(design).find(key => key !== DEFAULT_KEY) || null;
     return <Component {...props} onSubmit={() => setActiveComponent(newKey)} />;
   };
   return WithWrapOnSubmit;
