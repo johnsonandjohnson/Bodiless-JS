@@ -13,10 +13,9 @@
  */
 
 import React, { FC, useMemo } from 'react';
-import { withoutProps, asToken, HOC } from '@bodiless/fclasses';
+import { withoutProps, asToken, HOC, ComponentOrTag } from '@bodiless/fclasses';
 import { useChameleonContext } from './withChameleonContext';
 import { ComponentType } from 'enzyme';
-import { ChameleonProps } from './types';
  
 /**
   * Applies the appropriate design to the wrapped component depending on the
@@ -44,15 +43,15 @@ import { ChameleonProps } from './types';
   *
   * @return The wrapped component enhanced by the appropriate HOC's from the design.
   */
-const applyChameleon: HOC = Component => {
-  const Chameleon: FC<Pick<ChameleonProps, 'components'>> = props => {
-    const { RootComponent, activeComponent, design } = useChameleonContext();
+const applyChameleon: HOC = (Component: ComponentOrTag<any>) => {
+  const Chameleon: FC = props => {
+    const { activeComponent, design } = useChameleonContext();
     const ActiveComponent = useMemo(
       () => design[activeComponent] ?
-        design[activeComponent](RootComponent) :
-        RootComponent,
+        design[activeComponent](Component) :
+        Component,
       [activeComponent]
-    ); // assumes that RootComponent and design don't change.
+    );
     return <ActiveComponent {...props} />;
   };
   return asToken(
