@@ -12,10 +12,9 @@
  * limitations under the License.
  */
 
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, ComponentType } from 'react';
 import { withoutProps, asToken, HOC, ComponentOrTag } from '@bodiless/fclasses';
 import { useChameleonContext } from './withChameleonContext';
-import { ComponentType } from 'enzyme';
  
 /**
   * Applies the appropriate design to the wrapped component depending on the

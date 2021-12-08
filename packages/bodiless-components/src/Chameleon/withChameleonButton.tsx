@@ -114,11 +114,7 @@ export const useChameleonSelectorForm = (
   const { setActiveComponent, design, RootComponent } = useChameleonContext();
   const onSelect = ([componentName]: string[]) => setActiveComponent(componentName);
   const getComponentsFromDesign = () => {
-    const start = Object.keys(design).reduce((acc, key) => ({
-      ...acc,
-      [key]: RootComponent,
-    }), {});
-    const allComponents = applyDesign(start)(design);
+    const allComponents = applyDesign({}, RootComponent)(design);
     // @ts-ignore @TODO need to add metadata to component type
     if (allComponents[DEFAULT_KEY]?.title) return allComponents;
     return omit(allComponents, DEFAULT_KEY);

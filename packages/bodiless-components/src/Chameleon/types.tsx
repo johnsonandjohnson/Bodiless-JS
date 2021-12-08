@@ -11,13 +11,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { ComponentType } from 'react';
 import type { EditButtonProps } from '@bodiless/core';
 import type {
   DesignableComponents,
   DesignableProps,
   DesignableComponentsProps,
   Token,
-  ComponentOrTag,
 } from '@bodiless/fclasses';
 import type { ComponentSelectorOptions } from '@bodiless/layouts';
 
@@ -28,7 +28,7 @@ export type ChameleonData = {
 export type ChameleonComponents = DesignableComponents;
 
 export type ChameleonState = {
-  RootComponent: ComponentOrTag<any>,
+  RootComponent: ComponentType,
   isOn: boolean,
   activeComponent: string,
   setActiveComponent: (key: string|null) => void,
