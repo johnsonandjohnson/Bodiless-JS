@@ -12,24 +12,12 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { withoutProps, asToken, HOC, Token } from '@bodiless/fclasses';
+import React, { FC, useMemo } from 'react';
+import { withoutProps, asToken, HOC } from '@bodiless/fclasses';
 import { useChameleonContext } from './withChameleonContext';
 import { ComponentType } from 'enzyme';
+import { ChameleonProps } from './types';
  
-/**
- * Gets active component name from the context and applies appropriate design.
- */
-const withAppliedActiveChameleonDesign: Token = Component => props => {
-  const { design, activeComponent } = useChameleonContext();
-  const activeDesign = design[activeComponent];
-  if (activeDesign) {
-    const ActiveComponent = activeDesign(Component);
-    return <ActiveComponent {...props} />;
-  }
-  return <Component {...props} />;
-};
-
 /**
   * Applies the appropriate design to the wrapped component depending on the
   * chameleon state.  Must be called within a context defined by `withChameleonContext`.
@@ -40,14 +28,14 @@ const withAppliedActiveChameleonDesign: Token = Component => props => {
   * to which the edit form was added), eg:
   *
   * ```
-  * flowRight(
+  * asToken(
+  *   applyChameleon,
+  *   asBodilessLink('link')
+  *   withChameleonComponenFormConrols,
+  *   withChameleonContext('link-chameleon'),
   *   withDesign({
   *     Disabled: flow(replaceWith('span'), withoutProps('href'), withTitle('Disabled'))
   *   }),
-  *   withChameleonContext('link-chameleon'),
-  *   withChameleonComponenFormConrols,
-  *   asBodilessLink('link')
-  *   applyChameleon,
   * )('a');
   * ```
   *
@@ -57,10 +45,19 @@ const withAppliedActiveChameleonDesign: Token = Component => props => {
   * @return The wrapped component enhanced by the appropriate HOC's from the design.
   */
 const applyChameleon: HOC = Component => {
+  const Chameleon: FC<Pick<ChameleonProps, 'components'>> = props => {
+    const { RootComponent, activeComponent, design } = useChameleonContext();
+    const ActiveComponent = useMemo(
+      () => design[activeComponent] ?
+        design[activeComponent](RootComponent) :
+        RootComponent,
+      [activeComponent]
+    ); // assumes that RootComponent and design don't change.
+    return <ActiveComponent {...props} />;
+  };
   return asToken(
     withoutProps('design'),
-    withAppliedActiveChameleonDesign,
-  )(Component) as ComponentType<any>;
+  )(Chameleon) as ComponentType<any>;
 };
 
 export default applyChameleon;
