@@ -21,13 +21,9 @@ jest.mock('@bodiless/layouts');
 const contextValue = {
   isOn: true,
   activeComponent: 'Foo',
-  components: {
-    Foo: Fragment,
-    Bar: Fragment,
-  },
-  selectableComponents: {
-    Foo: Fragment,
-    Bar: Fragment,
+  design: {
+    Foo: jest.fn(() => Fragment),
+    Bar: jest.fn(() => Fragment),
   },
   setActiveComponent: jest.fn(),
 };
@@ -37,12 +33,7 @@ jest.mock('../src/Chameleon/withChameleonContext', () => ({
 }));
 
 describe('useChameleonSelectorForm', () => {
-  const components = {
-    Foo: Fragment,
-    Bar: Fragment,
-  };
   const props = {
-    components,
     mandatoryCategories: ['foo'],
     blacklistCategories: ['bar'],
   };
@@ -54,7 +45,6 @@ describe('useChameleonSelectorForm', () => {
     expect(mock.calls.length).toBe(1);
     expect(mock.calls[0][0].mandatoryCategories).toEqual(props.mandatoryCategories);
     expect(mock.calls[0][0].blacklistCategories).toEqual(props.blacklistCategories);
-    expect(mock.calls[0][0].components).toEqual(props.components);
     mock.calls[0][0].onSelect(['Foo']);
 
     expect(contextValue.setActiveComponent.mock.calls.length).toBe(1);

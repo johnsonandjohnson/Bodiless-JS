@@ -27,8 +27,8 @@ const ChameleonContext = createContext<ChameleonState|undefined>(undefined);
 export const DEFAULT_KEY = '_default';
 
 const getActiveComponent = (props: ChameleonButtonProps) => {
-  const { componentData: { component } } = props;
-  return component || DEFAULT_KEY;
+  const { componentData: { component }, design = {} } = props;
+  return (component && design[component]) ? component : DEFAULT_KEY;
 };
 
 const getIsOn = (props: ChameleonButtonProps) => getActiveComponent(props) !== DEFAULT_KEY;
@@ -52,7 +52,7 @@ const withChameleonContext = (
     <ChameleonContext.Provider value={{
       isOn: getIsOn(props),
       activeComponent: getActiveComponent(props),
-      design: props.design,
+      design: props.design || {},
       setActiveComponent: (component: string|null) => props.setComponentData({ component }),
     }}
     >

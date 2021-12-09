@@ -21,7 +21,7 @@ import ComponentSelector from '.';
 export type ComponentSelectorFormProps =
   Omit<ComponentSelectorProps, 'closeForm'|'components'|'mode'> & {
     components: DesignableComponents,
-    csDesign: Design,
+    csDesign?: Design,
   };
 
 /**
