@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-const { createHash } = require('crypto');
+import { createHash } from 'crypto';
 
 export type FlowContainerItem = {
   uuid: string,

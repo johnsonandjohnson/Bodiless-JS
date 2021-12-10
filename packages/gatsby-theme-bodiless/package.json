@@ -5,6 +5,7 @@
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
   "license": "Apache-2.0",
+  "sideEffects": false,
   "bin": {
     "generate-env-vars": "./bin/generate-env-vars",
     "generate-tailwind-configs": "./bin/generate-tailwind-configs",
