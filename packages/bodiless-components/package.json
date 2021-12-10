@@ -5,6 +5,9 @@
   "author": "Heidi Vanyo <hvanyo@its.jnj.com>",
   "license": "Apache-2.0",
   "main": "lib/index.js",
+  "sideEffects": [
+    "./src/Editable.css"
+  ],
   "typings": "lib/index.d.ts",
   "files": [
     "/lib",

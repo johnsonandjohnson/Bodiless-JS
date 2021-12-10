@@ -13,7 +13,7 @@
  */
 
 import isHotkey from 'is-hotkey';
-import { ReactEditor } from 'slate-react';
+import { Editor } from 'slate';
 import type { RichTextBaseProps } from './Type';
 import { RichTextItemType, RichTextComponent } from './Type';
 import {
@@ -44,7 +44,7 @@ const useKeyBoardShortcut = (Component: RichTextComponent) => {
 
 type UseKeyBoardShortcuts = {
   components: RichTextBaseProps['components'],
-  editor: ReactEditor,
+  editor: Editor,
 };
 
 const useKeyBoardShortcuts = (props: UseKeyBoardShortcuts) => {
