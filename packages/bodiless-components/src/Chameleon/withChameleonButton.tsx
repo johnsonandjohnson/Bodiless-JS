@@ -25,7 +25,7 @@ import {
   MenuOptionsDefinition, useEditContext,
 } from '@bodiless/core';
 import {
-  flowIf, asToken, withoutProps, applyDesign, Fragment, ComponentOrTag,
+  flowIf, asToken, withoutProps, applyDesign, Fragment, ComponentOrTag, Design,
 } from '@bodiless/fclasses';
 
 import type { ComponentSelectorFormProps } from '@bodiless/layouts';
@@ -100,6 +100,22 @@ export const useChameleonSwapForm = () => {
 };
 
 /**
+ * A function that applies each design from the passed list to the root component and
+ * omits the default component if id doesn't have a title metadata.
+ * @returns collection of components.
+ */
+export const getComponentsFromDesign = (
+  design: Design,
+  RootComponent: ComponentType = Fragment,
+  defaultKey: string = DEFAULT_KEY
+) => {
+  const allComponents = applyDesign({}, RootComponent)(design);
+  // @ts-ignore @TODO need to add metadata to component type
+  if (allComponents[defaultKey]?.title) return allComponents;
+  return omit(allComponents, DEFAULT_KEY);
+};
+
+/**
  * Bodiless `useOverrides` hook which forces a chameleon buton to use the component selector
  * form in all cases.
  *
@@ -114,18 +130,12 @@ export const useChameleonSelectorForm = (
   const { RootComponent = Fragment } = props; 
   const { setActiveComponent, design } = useChameleonContext();
   const onSelect = ([componentName]: string[]) => setActiveComponent(componentName);
-  const getComponentsFromDesign = () => {
-    const allComponents = applyDesign({}, RootComponent)(design);
-    // @ts-ignore @TODO need to add metadata to component type
-    if (allComponents[DEFAULT_KEY]?.title) return allComponents;
-    return omit(allComponents, DEFAULT_KEY);
-  };
   return {
     icon: 'repeat',
     label: 'Swap',
     handler: () => componentSelectorForm({
       ...props,
-      components: getComponentsFromDesign(),
+      components: getComponentsFromDesign(design, RootComponent),
       onSelect,
     }),
     formTitle: 'Choose a component',

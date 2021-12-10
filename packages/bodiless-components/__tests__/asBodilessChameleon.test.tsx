@@ -27,8 +27,10 @@ import { withDesign, withoutProps, HOC } from '@bodiless/fclasses';
 
 import {
   asBodilessChameleon, withChameleonComponentFormControls,
-  withChameleonContext} from '../src/Chameleon';
+  withChameleonContext, useChameleonContext,
+} from '../src/Chameleon';
 import { DEFAULT_KEY } from '../src/Chameleon/withChameleonContext';
+import { getComponentsFromDesign } from '../src/Chameleon/withChameleonButton';
 
 const mockSetNode = jest.fn();
 // @ts-ignore Unused
@@ -312,6 +314,26 @@ describe('asBodilessChameleon', () => {
       Foo: withTitle('FooTitle'),
       Baz: identity,
       [DEFAULT_KEY]: withTitle('DefaultTitle'),
+    });
+
+    it('Applies a design correctly', () => {
+      const PropCatcher:any = () => null;
+      const Test$ = () => {
+        const { design } = useChameleonContext();
+        const selectableComponents = getComponentsFromDesign(design);
+        const map = Object.keys(selectableComponents).reduce((acc, key) => (
+          // @ts-ignore
+          { ...acc, [key]: selectableComponents[key].title }
+        ), {});
+        return <PropCatcher map={map} />;
+      };
+      const Test = flowRight(
+        withTestDesign,
+        withChameleonContext('chameleon'),
+      )(Test$);
+      const wrapper = mount(<Test />);
+      expect(wrapper.find(PropCatcher).prop('map'))
+        .toEqual({ Foo: 'FooTitle', _default: 'DefaultTitle' });
     });
   });
 });
