@@ -15,8 +15,17 @@ import {
   withDesign, HOC, asToken, flowIf,
 } from '@bodiless/fclasses';
 import type { Design } from '@bodiless/fclasses';
+
 import { withFacet, withTitle, withDesc } from '../meta';
-import { childKeys } from './withContentLibrary';
+import { copyNode, childKeys } from './withContentLibrary';
+import {
+  withLibraryItemContext,
+  CONTENT_LIBRARY_TYPE_PREFIX,
+  isLibraryItem,
+  useIsLibraryItem,
+  useLibraryItemContext,
+} from './withLibraryContext';
+import { withLibraryItemIndicator } from './ContentLibraryIndicator';
 import type { FlowContainerItem } from '../FlowContainer/types';
 import type { FlowContainerDataHandlers } from '../FlowContainer/model';
 
@@ -40,7 +49,6 @@ type LibraryMetaValues = {
 };
 
 export const DEFAULT_CONTENT_LIBRARY_PATH = ['Site', 'default-library'];
-export const CONTENT_LIBRARY_TYPE_PREFIX = 'ContentLibrary';
 
 const moveNode = (
   source: ContentNode<any>,
@@ -53,8 +61,6 @@ const moveNode = (
   }
   source.delete();
 };
-const isLibraryItem = (item: FlowContainerItem) => (
-  item && item.type.startsWith(CONTENT_LIBRARY_TYPE_PREFIX));
 
 /**
  * add meta data to FC item content node.
@@ -93,6 +99,8 @@ const withLibraryMenuOptions = (
     sourceNode: ContentNode<any>,
     handlers: FlowContainerDataHandlers,
   ) => {
+    const { setIsLibraryItem } = useLibraryItemContext();
+
     const renderForm = () => {
       const {
         ComponentFormLabel,
@@ -129,8 +137,20 @@ const withLibraryMenuOptions = (
       const destPath$ = Array.isArray(libPath) ? libPath : [libPath];
 
       if (isLibraryItem(item)) {
+        /* Copy the library item to current node */
+        const uuid = item.type.split(':')[2];
+        const sourceNodeDataPath = [
+          ...destPath$,
+          uuid,
+          'data',
+        ];
+        const sourceNodeData = sourceNode.peer(sourceNodeDataPath.join('$'));
+
+        copyNode(sourceNodeData, sourceNode, true);
+
         const newItemType = item.type.split(':')[1];
         updateFlowContainerItem({ ...item, type: newItemType });
+        setIsLibraryItem(false);
       } else {
         /**
          * Move the original flow container node to content library node,
@@ -297,7 +317,9 @@ const withLibraryComponents = (
 ) => asToken(
   withDesign({
     ComponentWrapper: flowIf(() => useEditContext().isEdit)(
+      flowIf(useIsLibraryItem)(withLibraryItemIndicator),
       withLibraryMenuOptions(path),
+      withLibraryItemContext,
     ),
   }),
   withDesignFromLibrary(path),

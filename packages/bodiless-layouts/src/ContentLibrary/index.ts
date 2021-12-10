@@ -15,5 +15,8 @@
 import withContentLibrary from './withContentLibrary';
 import { withLibraryComponents } from './withLibraryComponents';
 
-// eslint-disable-next-line import/prefer-default-export
-export { withContentLibrary, withLibraryComponents };
+export * from './withLibraryContext';
+export {
+  withContentLibrary,
+  withLibraryComponents,
+};
