@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { User, UserManager } from 'oidc-client-ts';
+import { User, UserManager, UserManagerSettings } from 'oidc-client-ts';
 import type { SignoutRedirectArgs, SigninRedirectArgs } from 'oidc-client-ts';
 
 export type AuthProviderSignOutProps = {
@@ -105,9 +105,9 @@ export type AuthProviderProps = {
   /**
    * The features parameter to window.open for the popup signin window
    *
-   * defaults to 'location=no,toolbar=no,width=500,height=500,left=100,top=100'
+   * defaults to { location: false, menubar: false, height: 640 }
    */
-  popupWindowFeatures?: string;
+  popupWindowFeatures?: UserManagerSettings['popupWindowFeatures'];
   /**
    * The URL for the page containing the call to signinPopupCallback
    * to handle the callback from the OIDC/OAuth2

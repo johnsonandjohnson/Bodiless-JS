@@ -125,4 +125,4 @@ class MigrationTool extends Command {
   }
 }
 
-export = MigrationTool;
+export default MigrationTool;
