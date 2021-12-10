@@ -12,13 +12,12 @@
  * limitations under the License.
  */
 
-import { Transforms } from 'slate';
-import { ReactEditor } from 'slate-react';
+import { Editor, Transforms } from 'slate';
 import { getDeserializers } from './RichTextItemGetters';
 import type { RichTextComponents } from './Type';
 import { deserializeHtml } from './serializers';
 
-const withHtmlPaste = (components: RichTextComponents) => (editor: ReactEditor) => {
+const withHtmlPaste = (components: RichTextComponents) => (editor: Editor) => {
   const { insertData } = editor;
 
   const deserializers = getDeserializers(components);

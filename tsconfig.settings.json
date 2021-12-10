@@ -3,7 +3,7 @@
     "outDir": "lib",
     "moduleResolution": "node",
     "target": "es5",
-    "module": "commonjs",
+    "module": "es2015",
     "skipDefaultLibCheck": true,
     "noUnusedLocals": true,
     "lib": ["es7", "dom"],

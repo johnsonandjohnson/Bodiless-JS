@@ -47,7 +47,6 @@
     "express": "^4.17.1",
     "gatsby": "~3.13.0",
     "gatsby-plugin-canonical-urls": "^3.6.0",
-    "gatsby-plugin-google-tagmanager": "^3.6.0",
     "gatsby-plugin-sitemap": "^4.2.0",
     "informed": "^3.34.0",
     "lodash": "^4.17.19",
