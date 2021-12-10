@@ -5,6 +5,10 @@
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
   "main": "lib/index.js",
+  "sideEffects": [
+    "./src/bodiless.index.css",
+    "./src/Spinner.css"
+  ],
   "typings": "lib/index.d.ts",
   "files": [
     "/lib",

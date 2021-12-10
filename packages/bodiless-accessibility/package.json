@@ -5,6 +5,7 @@
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
   "main": "./index.js",
+  "sideEffects": false,
   "bin": {
     "pa11y-audit": "bin/accessibility"
   },
