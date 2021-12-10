@@ -35,10 +35,10 @@ export const toggleDesign = {
   Blue: addClasses('bg-blue-500'),
 };
 
-const lightDesign = {
-  Blue: addClasses('bg-blue-500'),
-  Red: addClasses('bg-red-500'),
-};
+// const lightDesign = {
+//   Blue: addClasses('bg-blue-500'),
+//   Red: addClasses('bg-red-500'),
+// };
 
 // export const spawnDesign = (i: number) => {
 //   let design = {};

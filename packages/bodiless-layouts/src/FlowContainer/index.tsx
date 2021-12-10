@@ -14,7 +14,10 @@
 
 import React, { FC, ComponentType } from 'react';
 import { observer } from 'mobx-react-lite';
-import { flow, uniq, pick, omit } from 'lodash';
+import flow from 'lodash/flow';
+import uniq from 'lodash/uniq';
+import pick from 'lodash/pick';
+import omit from 'lodash/omit';
 import {
   withNode,
   useEditContext,
