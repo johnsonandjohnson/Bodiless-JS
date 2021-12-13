@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useFormApi, useFormState } from 'informed';
 import {
   ContextMenuForm,
   MenuOptionsDefinition,
@@ -22,6 +23,7 @@ import {
   withMenuOptions,
   withNode,
   withNodeKey,
+  useNode,
 } from '@bodiless/core';
 import {
   asToken,
@@ -33,9 +35,20 @@ import type {
   ContextMenuFormProps,
 } from '@bodiless/core';
 import { withToolsButton } from '../Tools';
+import { useGetRedirectAliases } from './hooks';
 
-const REDIRECT_ALIASES = 'Redirect Aliases';
+const REDIRECT_ALIASES = 'Redirect Aliases dd';
 const CONFIRMATION = 'Redirect Aliases file validated and saved.';
+
+const FormState = () => {
+  const formState = useFormState();
+
+  return (
+    <pre>
+      <code>{JSON.stringify(formState, null, 2)}</code>
+    </pre>
+  );
+};
 
 const FormBodyBase = () => {
   const {
@@ -43,6 +56,23 @@ const FormBodyBase = () => {
     ComponentFormTextArea,
     ComponentFormDescription,
   } = useMenuOptionUI();
+  const {
+    setValues,
+  } = useFormApi();
+  // const { values: formValues, step } = useFormState();
+
+  const { node } = useNode();
+
+  useEffect(() => {
+    // Get initial values from node.
+    const aliases = JSON.stringify(useGetRedirectAliases(node));
+    const values = {
+      aliases,
+    };
+  
+    setValues(values);
+  }, []);
+
 
   const ConfirmationForm = () => (
     <ComponentFormDescription>
@@ -56,10 +86,11 @@ const FormBodyBase = () => {
         { REDIRECT_ALIASES }
       </ComponentFormTitle>
       <ComponentFormTextArea
-        field="text-area"
+        field="aliases"
         placeholder={REDIRECT_ALIASES}
       />
       <ConfirmationForm />
+      <FormState />
     </>
   );
 };

@@ -12,5 +12,14 @@
  * limitations under the License.
  */
 
-export * from './form';
-export * from './hooks';
+import { ContentNode } from '@bodiless/core';
+
+/**
+ * Get list of redirect aliases.
+ * @param node - the content node of the current component of its child/peer.
+ * @returns key/value collection of disabled items or an empty object.
+ */
+export const useGetRedirectAliases = (node: ContentNode<any>): any => {
+  const aliases = node.peer<any>(['Site', 'redirect-aliases']).data;
+  return aliases;
+};
