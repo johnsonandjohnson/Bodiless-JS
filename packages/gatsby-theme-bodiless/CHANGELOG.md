@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v0.3.2) (2021-12-13)
+
+
+### Bug Fixes
+
+* **informed:** Unlock "informed" package version, fix related issues ([#1212](https://github.com/johnsonandjohnson/bodiless-js/issues/1212)) ([7742a3f](https://github.com/johnsonandjohnson/bodiless-js/commit/7742a3ff614b0c58a35b5c028852e74645266591))
+
+
+### Features
+
+* Add tree shaking support to all browser packages ([#1251](https://github.com/johnsonandjohnson/bodiless-js/issues/1251)) ([0c73113](https://github.com/johnsonandjohnson/bodiless-js/commit/0c73113c7c2d0c9dcc2dd8be922048173b1e9138)), closes [#1254](https://github.com/johnsonandjohnson/bodiless-js/issues/1254) [#1244](https://github.com/johnsonandjohnson/bodiless-js/issues/1244) [#1245](https://github.com/johnsonandjohnson/bodiless-js/issues/1245) [#1261](https://github.com/johnsonandjohnson/bodiless-js/issues/1261) [#1283](https://github.com/johnsonandjohnson/bodiless-js/issues/1283)
+* **gatsby-theme-bodiless:** Implements move page functionality ([#1054](https://github.com/johnsonandjohnson/bodiless-js/issues/1054)) ([#1252](https://github.com/johnsonandjohnson/bodiless-js/issues/1252)) ([1d2b9a0](https://github.com/johnsonandjohnson/bodiless-js/commit/1d2b9a092751f5de01153a7fb398cffbe9f8a63f))
+
+
+
+
+
 ## [0.3.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.0...v0.3.1) (2021-11-15)
 
 **Note:** Version bump only for package @bodiless/gatsby-theme-bodiless
