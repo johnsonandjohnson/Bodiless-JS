@@ -12,7 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { withMenuOptions, ContextSubMenu } from '@bodiless/core';
+import { useCallback } from 'react';
+import {
+  withMenuOptions,
+  ContextSubMenu,
+  useEditContext,
+} from '@bodiless/core';
 
 const withToolsButton = withMenuOptions({
   useMenuOptions: () => [{
@@ -20,9 +25,11 @@ const withToolsButton = withMenuOptions({
     name: 'tools-group',
     label: 'Tools',
     Component: ContextSubMenu,
+    isHidden: useCallback(() => !useEditContext().isEdit, []),
   }],
   root: true,
 });
+
 
 export {
   withToolsButton,

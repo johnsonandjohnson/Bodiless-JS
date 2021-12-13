@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 /**
  * Copyright © 2021 Johnson & Johnson
  *
@@ -13,11 +12,12 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   ContextMenuForm,
   MenuOptionsDefinition,
   TMenuOption,
+  useEditContext,
   useMenuOptionUI,
   withMenuOptions,
   withNode,
@@ -27,7 +27,7 @@ import {
   asToken,
   withOnlyProps,
   HOC,
-  addClasses,
+  // addClasses,
 } from '@bodiless/fclasses';
 import type {
   ContextMenuFormProps,
@@ -79,6 +79,7 @@ const Form = (props: ContextMenuFormProps) => (
 );
 
 const useMenuOptions = (): TMenuOption[] => {
+  const context = useEditContext();
   const render = (props: ContextMenuFormProps) => <Form {...props} />;
   const menuOptions$: TMenuOption[] = [
     {
@@ -86,6 +87,7 @@ const useMenuOptions = (): TMenuOption[] => {
       icon: 'route',
       label: 'Aliases',
       group: 'tools-group',
+      isHidden: useCallback(() => !context.isEdit, []),
       handler: () => render,
     },
   ];
