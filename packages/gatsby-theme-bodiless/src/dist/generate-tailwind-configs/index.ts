@@ -23,15 +23,15 @@ import {
 import { writeToFile } from '../generate-env-vars/utils';
 
 const siteConfig = fs.existsSync('./site.tailwind.config.js')
-  ? "const siteConfig = require('./site.tailwind.config');"
-  : '';
+  ? "require('./site.tailwind.config');"
+  : '{}';
 const templateWrap = `/* eslint-disable */
 // This file is generated automatically, please don't change it
 const {
   mergeConfigs,
   getPackageRoot,
 } = require('@bodiless/gatsby-theme-bodiless/dist/tailwindcss');
-${siteConfig}
+const siteConfig = ${siteConfig};
 
 const bodilessCanvasxConfigs = [#pkgs];
 
