@@ -41,6 +41,7 @@ describe('tailwindcss', () => {
       };
       const expected = {
         purge: [
+          './src/**/!(*.d).{ts,js,jsx,tsx}',
           'packageA',
           'packageB1',
           'packageB2',
