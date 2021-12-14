@@ -36,18 +36,20 @@ import type {
 } from '@bodiless/core';
 import { withToolsButton } from '../Tools';
 import { useGetRedirectAliases } from './hooks';
+import type { AliasItem } from './types';
 
-const REDIRECT_ALIASES = 'Redirect Aliases dd';
+enum Steps { Edit, Confirmation }
+
+const REDIRECT_ALIASES = 'Redirect Aliases';
 const CONFIRMATION = 'Redirect Aliases file validated and saved.';
 
-const FormState = () => {
-  const formState = useFormState();
-
-  return (
-    <pre>
-      <code>{JSON.stringify(formState, null, 2)}</code>
-    </pre>
-  );
+const convertAliasJsonToText = (aliases: [AliasItem]): string => {
+  if (!(aliases && aliases.length)) {
+    return '';
+  }
+  return aliases.map((e: AliasItem) => {
+    return `${e.fromPath} ${e.toPath} ${e.statusCode}`;
+  }).join('\n');
 };
 
 const FormBodyBase = () => {
@@ -55,24 +57,46 @@ const FormBodyBase = () => {
     ComponentFormTitle,
     ComponentFormTextArea,
     ComponentFormDescription,
+    ComponentFormSubmitButton,
   } = useMenuOptionUI();
   const {
     setValues,
+    setStep,
   } = useFormApi();
-  // const { values: formValues, step } = useFormState();
-
+  const { values: formValues, step } = useFormState();
   const { node } = useNode();
 
-  useEffect(() => {
-    // Get initial values from node.
-    const aliases = JSON.stringify(useGetRedirectAliases(node));
-    const values = {
-      aliases,
-    };
-  
-    setValues(values);
-  }, []);
+  const hanldeSubmit = (e: any) => {
+    e.preventDefault();
+    const { aliases } = formValues;
+    node.setData({ aliases });
+    setStep(Steps.Confirmation);
+  };
 
+  const EditForm = useCallback(() => {
+    useEffect(() => {
+      // Get initial values from node.
+      const aliases = convertAliasJsonToText(useGetRedirectAliases(node));
+      const values = {
+        aliases,
+      };
+    
+      setValues(values);
+    }, []);
+
+    return (
+      <>
+        <ComponentFormTextArea
+          field="aliases"
+          placeholder={REDIRECT_ALIASES}
+        />
+        <ComponentFormSubmitButton
+          aria-label="Submit"
+          onClick={hanldeSubmit}
+        />
+      </>
+    );
+  }, [formValues]);
 
   const ConfirmationForm = () => (
     <ComponentFormDescription>
@@ -85,12 +109,8 @@ const FormBodyBase = () => {
       <ComponentFormTitle>
         { REDIRECT_ALIASES }
       </ComponentFormTitle>
-      <ComponentFormTextArea
-        field="aliases"
-        placeholder={REDIRECT_ALIASES}
-      />
-      <ConfirmationForm />
-      <FormState />
+      { step === Steps.Edit && <EditForm /> }
+      { step === Steps.Confirmation && <ConfirmationForm /> }
     </>
   );
 };
@@ -139,5 +159,6 @@ const withRedirectAliasButton = asToken(
 );
 
 export {
+  convertAliasJsonToText,
   withRedirectAliasButton,
 };
