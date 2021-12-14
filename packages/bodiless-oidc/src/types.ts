@@ -105,7 +105,7 @@ export type AuthProviderProps = {
   /**
    * The features parameter to window.open for the popup signin window
    *
-   * defaults to 'location=no,toolbar=no,width=500,height=500,left=100,top=100'
+   * defaults to { location: false, menubar: false, height: 640 }
    */
   popupWindowFeatures?: UserManagerSettings['popupWindowFeatures'];
   /**
