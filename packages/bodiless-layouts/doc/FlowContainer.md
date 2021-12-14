@@ -81,12 +81,11 @@ with an **Add** button.
 
 ![Context Menu with Library subsection](./assets/ContextMenuWithLibrary.jpg ':size=50%')
 
-Click **Add** to save your component, along with its embedded content, to the Content Library. Once
+Click **Add** to save your component (along with its embedded content) to the Content Library. Once
 added, a label will appear in the top-left of your component, indicating that it is a "Library
-Item"; clicking on the "info" icon (the circled "i") within that label will open this documentation
-in a new browser tab. It's also worth noting that the dashed border box around your component will
-now be orange (as opposed to blue), and the **Add** button in the context menu will now be an
-**Unlink** button highlighted in blue (see: [Unlinking a component from the Content
+Item". It's also worth noting that the dashed border box around your component will now be orange
+(as opposed to blue), and the **Add** button in the context menu will now be an **Unlink** button
+highlighted in blue (see: [Unlinking a component from the Content
 Library](#unlinking-a-component-from-the-content-library)).
 
 ![Content Library Item and context menu](./assets/ContentLibraryItemAndContextMenu.jpg ':size=50%')
@@ -105,16 +104,10 @@ connection to the associated Library Item, allowing you to edit it as an indepen
 (i.e., edits to the component will not update the instances of the previously linked Library Item).
 This is useful for customizing an existing component without having to recreate it from scratch.
 
-To unlink a component that is a Library Item:
+To unlink a component that is a Library Item, under the "Library" subsection of its context menu,
+click **Unlink**.
 
-01. Under the "Library" subsection of its context menu, click **Unlink**.
-    ![Context Menu with "Unlink" button](./assets/ContextMenuWithLibraryUnlink.jpg ':size=50%')
-01. A warning message describing the "Unlink" action will pop up.
-    * Click the checkmark to confirm.
-    * Click the "X" icon to cancel.
-
-!>  **IMPORTANT:** If you unlink the _last_ instance of a Library Item, the Library Item will be
-    deleted.
+![Context Menu with "Unlink" button](./assets/ContextMenuWithLibraryUnlink.jpg ':size=50%')
 
 ?>  **Note:** If you add a component to the Content Library that had been unlinked, this will create
     a _new_ Library Item and will not replace the Library Item from which the component had been
