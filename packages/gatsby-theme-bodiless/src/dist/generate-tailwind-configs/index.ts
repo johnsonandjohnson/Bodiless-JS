@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 
+import fs from 'fs';
 import { resolve as resolvePath } from 'path';
 import {
   getDependenciesFromPackageJson,
@@ -21,13 +22,16 @@ import {
 } from './getTailwindConfigs';
 import { writeToFile } from '../generate-env-vars/utils';
 
+const siteConfig = fs.existsSync('./site.tailwind.config.js')
+  ? "const siteConfig = require('./site.tailwind.config');"
+  : '';
 const templateWrap = `/* eslint-disable */
 // This file is generated automatically, please don't change it
 const {
   mergeConfigs,
   getPackageRoot,
 } = require('@bodiless/gatsby-theme-bodiless/dist/tailwindcss');
-const siteConfig = require('./site.tailwind.config');
+${siteConfig}
 
 const bodilessCanvasxConfigs = [#pkgs];
 
