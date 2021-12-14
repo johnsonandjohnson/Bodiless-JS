@@ -39,7 +39,7 @@ export const getUI = (ui: UI = {}) => ({
 /**
  * Update the menu's absolute position.
  */
-function updateMenu(menu: HTMLElement | null, editor: ReactEditor) {
+function updateMenu(menu: HTMLElement | null, editor: Editor) {
   const { selection } = editor;
 
   if (!menu) {
