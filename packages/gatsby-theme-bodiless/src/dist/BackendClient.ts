@@ -192,11 +192,8 @@ export default class BackendClient {
     return this.post(url, payload);
   }
 
-  deleteStaticAssets(origin: string) {
-    const payload = {
-      origin,
-    };
-    const url = `${this.prefix}/assets/remove`;
-    return this.post(url, payload);
+  deleteStaticAssets(path$: string) {
+    const url = `${this.prefix}/assets/remove/${path$}`;
+    return this.delete(url);
   }
 }
