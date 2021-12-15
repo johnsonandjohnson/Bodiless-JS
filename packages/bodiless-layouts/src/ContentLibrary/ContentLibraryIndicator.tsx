@@ -15,7 +15,6 @@
 import React, { ComponentType, FC } from 'react';
 import { withPrependChild } from '@bodiless/core';
 import {
-  A,
   Div,
   Span,
   asToken,
