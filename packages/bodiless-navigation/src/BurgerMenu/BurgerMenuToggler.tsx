@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC, ComponentType } from 'react';
+import React, { FC, ComponentType, KeyboardEvent } from 'react';
 import flow from 'lodash/flow';
 import {
   Fragment, A, DesignableComponentsProps, designable,
@@ -20,6 +20,7 @@ import {
 
 import { useBurgerMenuContext } from './BurgerMenuContext';
 import { withBurgerMenuTogglerStyles } from './BurgerMenu.token';
+import BurgerMenuKeyPressHandler from './BurgerMenuKeyboard';
 
 export type TogglerComponents = {
   Wrapper: ComponentType<any>,
@@ -35,11 +36,16 @@ const TogglerComponents: TogglerComponents = {
 
 const TogglerBase: FC<TogglerProps> = ({ components, ...rest }) => {
   const { Wrapper, Button } = components;
-  const { isVisible } = useBurgerMenuContext();
+  const { isVisible, toggle } = useBurgerMenuContext();
 
   return (
     <Wrapper>
-      <Button {...rest}>
+      <Button {...rest} 
+        tabindex="0" 
+        role="button"
+        onKeyPress={(event: KeyboardEvent) => BurgerMenuKeyPressHandler(event, isVisible, toggle)}
+        aria-expanded={isVisible ? true : false}
+        >
         {isVisible ? 'close' : 'menu' }
       </Button>
     </Wrapper>
