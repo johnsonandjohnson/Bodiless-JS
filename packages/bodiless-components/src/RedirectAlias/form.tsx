@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useFormApi, useFormState } from 'informed';
 import {
   ContextMenuForm,
@@ -42,6 +42,8 @@ enum Steps { Edit, Confirmation }
 
 const REDIRECT_ALIASES = 'Redirect Aliases';
 const CONFIRMATION = 'Redirect Aliases file validated and saved.';
+const INVALIDATED = 'The redirects are not valid, please correct.';
+const ALIASPARTSCOUNT = 3;
 
 const convertAliasJsonToText = (aliases: [AliasItem]): string => {
   if (!(aliases && aliases.length)) {
@@ -50,6 +52,50 @@ const convertAliasJsonToText = (aliases: [AliasItem]): string => {
   return aliases.map((e: AliasItem) => {
     return `${e.fromPath} ${e.toPath} ${e.statusCode}`;
   }).join('\n');
+};
+
+const convertAliasTextToJson = (text: string) => {
+  if (text === '') return [];
+  return text.split('\n').map(item => {
+    const items = item.split(' ');
+    return {
+      fromPath: items[0],
+      toPath: items[1],
+      statusCode: items[2],
+    };
+  });
+};
+
+const isTextValidate = (text: string): boolean => {
+  if (text === '') return true;
+
+  try {
+    const aliases = text.split('\n');
+    const validatedAliases = aliases.filter(item => {
+      const items = item.split(' ');
+      if (items.length !== ALIASPARTSCOUNT) {
+        return false;
+      }
+
+      if (typeof items[0] !== 'string') {
+        return false;
+      }
+
+      if (typeof items[1] !== 'string') {
+        return false;
+      }
+
+      if (typeof parseInt(items[2]) !== 'number') {
+        return false;
+      }
+
+      return true;
+    });
+
+    return validatedAliases.length === aliases.length;
+  } catch (error) {
+    return false;
+  }
 };
 
 const FormBodyBase = () => {
@@ -65,13 +111,20 @@ const FormBodyBase = () => {
   } = useFormApi();
   const { values: formValues, step } = useFormState();
   const { node } = useNode();
+  const [isValidate, setIsValidate] = useState(false);
 
-  const hanldeSubmit = (e: any) => {
+  const hanldeSubmit = useCallback((e: any) => {
     e.preventDefault();
     const { aliases } = formValues;
-    node.setData({ aliases });
+    if (!isTextValidate(aliases as string)) {
+      setIsValidate(true);
+      return;
+    }
+
+    setIsValidate(false);
+    node.setData(convertAliasTextToJson(aliases as string));
     setStep(Steps.Confirmation);
-  };
+  }, [isValidate, formValues]);
 
   const EditForm = useCallback(() => {
     useEffect(() => {
@@ -90,13 +143,14 @@ const FormBodyBase = () => {
           field="aliases"
           placeholder={REDIRECT_ALIASES}
         />
+        <i>{ isValidate && INVALIDATED }</i>
         <ComponentFormSubmitButton
           aria-label="Submit"
           onClick={hanldeSubmit}
         />
       </>
     );
-  }, [formValues]);
+  }, [isValidate, formValues]);
 
   const ConfirmationForm = () => (
     <ComponentFormDescription>
