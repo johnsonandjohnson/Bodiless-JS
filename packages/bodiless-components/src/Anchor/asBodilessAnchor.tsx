@@ -42,7 +42,7 @@ const isValidHtmlId = (id : string) => (/^[A-Za-z#]+[\ \w\-\:\.]*$/.test(id));
  *  - Transforms string to lowercase
  */
 const transformHash = (value: string) => (value
-  ? value.replace(/[^a-zA-Z-_:. ]/g, '')
+  ? value.replace(/[^a-zA-Z-_\d:. ]/g, '')
     .trim()
     .replace(/ +/g, '-').toLowerCase()
   : '');
