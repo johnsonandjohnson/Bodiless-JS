@@ -15,9 +15,10 @@
 
 // @todo: use oclif/command
 import SearchTool from '../SearchTool';
+import dotenv from 'dotenv';
 import type { TSearchConf, TSearchIndexSettings } from '../types';
 
-require('dotenv').config({
+dotenv.config({
   path: '.env.development',
 });
 
