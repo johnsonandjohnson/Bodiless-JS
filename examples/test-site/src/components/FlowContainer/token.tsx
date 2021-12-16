@@ -17,9 +17,9 @@ import {
   withDirection, DIRECTIONS, getSnapFrom, withTailwindClasses,
 } from '@bodiless/layouts';
 // @ts-ignore Could not find a declaration file
-import resolveConfig from 'tailwindcss/resolveConfig';
+import resolvedConfigs from
+  '@bodiless/gatsby-theme-bodiless/src/dist/tailwindcss/resolveConfig';
 // @ts-ignore Could not find a declaration file
-import tailWindConfig from '../../../tailwind.config';
 
 const asFlowContainerWithMargins = withDesign({
   Wrapper: addClasses('md:-m-5 py-5'),
@@ -38,7 +38,7 @@ const asFlowContainerRTL = withDesign({
 
 const withFullWidthConstraint = addProps({
   snapData: getSnapFrom(
-    withTailwindClasses(resolveConfig(tailWindConfig))('w-full'),
+    withTailwindClasses(resolvedConfigs)('w-full'),
   ),
 });
 

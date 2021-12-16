@@ -17,14 +17,11 @@ import { asToken, Token } from '@bodiless/fclasses';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { withPageDimensionsContext, BreakpointsType } from '@bodiless/components';
 import Helmet from 'react-helmet';
-
-// @ts-ignore Could not find a declaration file
-import resolveConfig from 'tailwindcss/resolveConfig';
-// @ts-ignore Could not find a declaration file
-import tailwindConfig from '../../../tailwind.config';
+import resolvedConfigs from
+  '@bodiless/gatsby-theme-bodiless/src/dist/tailwindcss/resolveConfig';
 
 const getTailwindBreakpoints = (): BreakpointsType => {
-  const { theme: { screens } } = resolveConfig(tailwindConfig);
+  const { theme: { screens } } = resolvedConfigs;
   const breakpoints = { ...screens };
 
   Object.keys(breakpoints).forEach(key => {
