@@ -20,7 +20,8 @@ import {
 } from '@bodiless/components';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 // @ts-ignore Could not find declaration file.
-import resolveConfig from 'tailwindcss/resolveConfig';
+import resolvedConfigs from
+  '@bodiless/gatsby-theme-bodiless/src/dist/tailwindcss/resolveConfig';
 import { withDefaultContent, withNodeKey, withResetButton } from '@bodiless/core';
 import {
   H2 as BaseH2, addClasses, asToken, addProps, withDesign, startWith,
@@ -28,7 +29,6 @@ import {
 import { FlowContainer } from '@bodiless/layouts-ui';
 import Layout from '../../../components/Layout';
 // @ts-ignore Could not find declaration file.
-import tailWindConfig from '../../../../tailwind.config';
 import {
   FlowContainerDefault,
   FlowContainerLimited,
@@ -40,7 +40,7 @@ import withImageVariations from '../../../components/FlowContainer/withImageVari
 const FLOW_CONTAINER_PAGE_PATH = 'flowContainer';
 
 const options = getSnapFrom(
-  withTailwindClasses(resolveConfig(tailWindConfig))('w-full sm:w-1/2 sm:w-full lg:w-1/2 lg:w-full'),
+  withTailwindClasses(resolvedConfigs)('w-full sm:w-1/2 sm:w-full lg:w-1/2 lg:w-full'),
 );
 
 const contentfulFlowContainer = {

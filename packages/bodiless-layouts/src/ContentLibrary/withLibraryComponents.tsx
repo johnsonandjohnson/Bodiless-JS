@@ -194,8 +194,7 @@ const withLibraryMenuOptions = (
       global: false,
       formTitle: 'Content Library',
       formDescription: isLibraryItem(item) ? `This action will remove the instance of the
-      component from the library and it will be independent. If this was the last instance,
-      the library item will be deleted.` : `This action will create a library item. 
+      component from the library and it will be independent.` : `This action will create a library item. 
       Edit of any instance of the library item will update all instances.`,
       isHidden: false,
     };

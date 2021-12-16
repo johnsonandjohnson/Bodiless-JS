@@ -8,9 +8,10 @@ import {
 } from '@bodiless/layouts';
 import pick from 'lodash/pick';
 // @ts-ignore
-import resolveConfig from 'tailwindcss/resolveConfig';
+import resolvedConfigs from
+  '@bodiless/gatsby-theme-bodiless/src/dist/tailwindcss/resolveConfig';
+
 // @ts-ignore
-import tailwindConfig from '../../../../tailwind.config';
 import {
   asBox, asBlue, asOrange, asRounded, asSquare, withBlueBorder, withTealBorder, asTeal,
 } from './Box';
@@ -86,9 +87,8 @@ export const basicDesign = {
 // a token which constrains the widths of flow container items. This
 // is usually done at the site level, using the sites tailwind config.
 export const withWidthConstraints = flow(
-  resolveConfig,
   withTailwindWidthConstraints,
-)(tailwindConfig);
+)(resolvedConfigs);
 
 const TestCase = startWith(() => <div>This is a component with no metadata</div>);
 
