@@ -6,8 +6,7 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "sideEffects": [
-    "./src/bodiless.index.css",
-    "./src/Spinner.css"
+    "*.css"
   ],
   "typings": "lib/index.d.ts",
   "files": [
@@ -39,7 +38,9 @@
     "autoprefixer": "^9.8.6",
     "informed": "^3.34.0",
     "lodash": "^4.17.19",
-    "postcss": "^8.2.4",
+    "postcss": "^8.2.4"
+  },
+  "devDependencies": {
     "tailwindcss": "^2.0.2",
     "tailwindcss-dir": "^4.0.0"
   },

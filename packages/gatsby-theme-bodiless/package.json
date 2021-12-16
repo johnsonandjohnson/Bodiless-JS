@@ -31,7 +31,8 @@
     "create-node.js",
     "tailwind.base.config.js",
     "/doc",
-    "bodiless.content.json"
+    "bodiless.content.json",
+    "src/dist/tailwindcss/resolveConfig.ts"
   ],
   "repository": {
     "type": "git",
@@ -99,10 +100,13 @@
     "slash": "^2.0.0",
     "sleep-promise": "^8.0.1",
     "stream-browserify": "^3.0.0",
-    "tailwindcss": "^2.0.2",
     "universal-cookie": "^4.0.3",
     "walk": "^2.3.14",
     "walkdir": "^0.4.1"
+  },
+  "devDependencies": {
+    "babel-plugin-preval": "5.0.0",
+    "tailwindcss": "^2.0.2"
   },
   "peerDependencies": {
     "gatsby": "^3.0.0",
