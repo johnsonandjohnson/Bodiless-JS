@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 
-import React, { useCallback, useEffect, useState } from 'react';
+import flow from 'lodash/flow';
+import React, { useCallback, useEffect } from 'react';
 import { useFormApi, useFormState } from 'informed';
 import {
   ContextMenuForm,
@@ -29,7 +30,7 @@ import {
   asToken,
   withOnlyProps,
   HOC,
-  // addClasses,
+  addClasses,
 } from '@bodiless/fclasses';
 import type {
   ContextMenuFormProps,
@@ -104,53 +105,62 @@ const FormBodyBase = () => {
     ComponentFormTextArea,
     ComponentFormDescription,
     ComponentFormSubmitButton,
+    ComponentFormCheckBox,
   } = useMenuOptionUI();
+  const ComponentFormIsValidate = flow(
+    addClasses('hidden')
+  )(ComponentFormCheckBox);
   const {
+    setValue,
     setValues,
     setStep,
   } = useFormApi();
   const { values: formValues, step } = useFormState();
   const { node } = useNode();
-  const [isValidate, setIsValidate] = useState(false);
+  const initialAliases = convertAliasJsonToText(useGetRedirectAliases(node));
 
-  const hanldeSubmit = useCallback((e: any) => {
+  const hanldeSubmit = (e: any) => {
     e.preventDefault();
+
     const { aliases } = formValues;
     if (!isTextValidate(aliases as string)) {
-      setIsValidate(true);
+      setValue('isValidate', false);
       return;
     }
 
-    setIsValidate(false);
+    setValue('isValidate', true);
     node.setData(convertAliasTextToJson(aliases as string));
     setStep(Steps.Confirmation);
-  }, [isValidate, formValues]);
+  };
 
   const EditForm = useCallback(() => {
     useEffect(() => {
       // Get initial values from node.
-      const aliases = convertAliasJsonToText(useGetRedirectAliases(node));
       const values = {
-        aliases,
+        aliases: initialAliases,
+        isValidate: true,
       };
     
       setValues(values);
+
     }, []);
 
     return (
       <>
         <ComponentFormTextArea
+          keepState
           field="aliases"
           placeholder={REDIRECT_ALIASES}
         />
-        <i>{ isValidate && INVALIDATED }</i>
+        <ComponentFormIsValidate keepState field="isValidate" />
+        <i>{ !formValues.isValidate && INVALIDATED }</i>
         <ComponentFormSubmitButton
           aria-label="Submit"
           onClick={hanldeSubmit}
         />
       </>
     );
-  }, [isValidate, formValues]);
+  }, [formValues]);
 
   const ConfirmationForm = () => (
     <ComponentFormDescription>
@@ -198,7 +208,6 @@ const useMenuOptions = (): TMenuOption[] => {
   ];
   return menuOptions$;
 };
-
 
 const menuOptions: MenuOptionsDefinition<object> = {
   useMenuOptions,
