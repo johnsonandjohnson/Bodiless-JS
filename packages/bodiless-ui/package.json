@@ -6,8 +6,7 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "sideEffects": [
-    "./src/bodiless.index.css",
-    "./src/Spinner.css"
+    "*.css"
   ],
   "typings": "lib/index.d.ts",
   "files": [

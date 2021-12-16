@@ -6,7 +6,7 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "sideEffects": [
-    "./src/Editable.css"
+    "*.css"
   ],
   "typings": "lib/index.d.ts",
   "files": [
