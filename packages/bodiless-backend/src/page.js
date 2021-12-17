@@ -409,11 +409,11 @@ class Page {
 
   removePageAssets(path) {
     return new Promise((resolve, reject) => {
-      fs.rmdir(path, { recursive: true }, (err) => {
+      fse.remove(path, err => {
         if (err) {
           reject(err);
         }
-        resolve(this);
+        resolve();
       });
     });
   }
