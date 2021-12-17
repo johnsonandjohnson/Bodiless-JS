@@ -38,14 +38,15 @@ import { useTagsAccessors } from '../TagButton';
  * @returns
  * True if the component should be displayed, false otherwise.
  */
-const useToggleByTags = ({ selectedTags }: WithFilterByTagsProps) => {
+const useToggleByTags = (props: WithFilterByTagsProps) => {
+  const { selectedTags, showWhenNoTagSelected = true } = props;
   const { multipleAllowedTags } = useFilterByGroupContext();
   const { getTags } = useTagsAccessors();
   const tags = getTags();
 
-  // Show all items if there is no selected tag.
+  // Show or hide if there is no selected tag.
   if (isEmpty(selectedTags)) {
-    return true;
+    return showWhenNoTagSelected;
   }
 
   if (multipleAllowedTags) {
@@ -96,7 +97,9 @@ const withFilterByTags: Enhancer<WithFilterByTagsProps> = Component => {
     const isDisplayed = useToggleByTags(props);
     const { getFilteredItemData = () => {}, ...rest } = props;
     useRegisterItem({ id, isDisplayed, data: getFilteredItemData(node) });
-    return isDisplayed ? <Component {...omit(rest, 'selectedTags') as any} /> : <></>;
+    return isDisplayed
+      ? <Component {...omit(rest, 'selectedTags', 'showWhenNoTagSelected') as any} />
+      : <></>;
   };
   return WithFilterByTags;
 };
