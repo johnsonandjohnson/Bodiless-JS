@@ -77,9 +77,8 @@ export type RegisterItemContextType = {
 
 export type FBGContextOptions = {
   suggestions?: TagType[],
-  multipleAllowedTags?: boolean,
   items?: FilteredItemType[],
-};
+} & Pick<Partial<FBGContextType>, 'multipleAllowedTags'>;
 
 export type SuggestionsRefType = {
   id: string,
@@ -156,4 +155,8 @@ export type WithFilterByTagsProps = {
    * Callback to append data to the item when it registers itself.
    */
   getFilteredItemData?: (node: ContentNode<any>) => any,
+  /**
+   * Determines whether an item should display itself when no tags are selected.
+   */
+  showWhenNoTagSelected?: boolean,
 };
