@@ -141,3 +141,7 @@ const withContentLibrary = (options: ContentLibraryOptions) => <P extends object
 };
 
 export default withContentLibrary;
+
+export {
+  copyNode,
+};

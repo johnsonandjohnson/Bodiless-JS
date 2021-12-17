@@ -1,11 +1,12 @@
 {
   "name": "@bodiless/fclasses",
-  "version": "0.3.1",
+  "version": "0.3.4",
   "description": "Allows for the injection of functional class into components.",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
   "license": "Apache-2.0",
   "main": "lib/index.js",
+  "sideEffects": false,
   "typings": "lib/index.d.ts",
   "directories": {
     "lib": "lib",
