@@ -761,6 +761,7 @@ hooks:
 
 ## Known limitations
 
+### General
 - PR Branches and Feature branches created in bitbucket will always inherit from
   main. This means that you must manually configure basic authentication for
   these branches if you want them protected from the public internet.
@@ -771,7 +772,26 @@ hooks:
 - When you create a bitbucket integration, a webhook is added to your bitbucket
   repository. However, deleting the integration does not remove the webhook, you
   must do this manually.
+### Environment memory
+On development environments, the `edit` site environment can use a large amount
+of memory when running, which might cause out-of-memory issues when building 
+pages. This is caused by webpack's caching system, and there are two ways
+to circumvent the issue:
 
+#### Increasing container memory
+Use [Large development containers](https://docs.platform.sh/overview/pricing.html#development)
+to increase the total memory available to containers. This is the preferred way 
+to solve this problem, as it's easier and faster. Note that this will increase costs.
+
+#### Disable build cache
+Disabling webpack's cache will drastically reduce memory consumption, but
+will also increase build times. This might be specially noticeable when doing
+simple operations like creating, cloning or moving pages.
+
+To disable a site's cache, add `cache: false` to its webpack configuration. This
+is done in the `gatsby-node.js` file on the site root. Read [Gatsby's documentation](https://www.gatsbyjs.com/docs/how-to/custom-configuration/add-custom-webpack-config/#examples)
+for an example, and refer to [Webpacks's documentation](https://webpack.js.org/configuration/cache/)
+if you want to understand how its caching system works.
 ## Troubleshooting
 
 ### Viewing Logs

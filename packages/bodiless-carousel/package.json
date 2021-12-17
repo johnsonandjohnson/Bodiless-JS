@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/carousel",
-  "version": "0.3.2",
+  "version": "0.3.4",
   "description": "Provides responsive and aria compliant carousel.",
   "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
   "homepage": "",
@@ -31,9 +31,9 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/components": "^0.3.2",
-    "@bodiless/core": "^0.3.2",
-    "@bodiless/fclasses": "^0.3.2",
+    "@bodiless/components": "^0.3.4",
+    "@bodiless/core": "^0.3.4",
+    "@bodiless/fclasses": "^0.3.4",
     "lodash": "^4.17.19",
     "mobx-react-lite": "^1.3.1",
     "pure-react-carousel": "^1.27.6"

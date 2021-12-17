@@ -16,11 +16,11 @@ import { flow } from 'lodash';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { withPageDimensionsContext } from '@bodiless/components';
 
-import resolveConfig from 'tailwindcss/resolveConfig';
-import tailwindConfig from '../../../site.tailwind.config';
+import resolvedConfigs from
+  '@bodiless/gatsby-theme-bodiless/src/dist/tailwindcss/resolveConfig';
 
 const getTailwindBreakpoints = () => {
-  const { theme: { screens } } = resolveConfig(tailwindConfig);
+  const { theme: { screens } } = resolvedConfigs;
   const breakpoints = { ...screens };
 
   Object.keys(breakpoints).forEach(key => {

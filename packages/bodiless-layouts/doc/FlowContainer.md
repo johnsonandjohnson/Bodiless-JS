@@ -265,8 +265,7 @@ fully resolved tailwind configuration, and it returns a function which accepts a
 list of tailwind width classes and returns a token which constrains flow
 container items to those widths:
 ```js
-import resolveConfig from 'tailwindcss/resolveconfig';
-import tailwindConfig from './path/to/your/tailwind.config';
+import resolveConfig from '@bodiless/gatsby-theme-bodiless/src/dist/tailwindcss/resolveConfig';
 
 const withWidthConstraints = flow(
   resolveConfig,

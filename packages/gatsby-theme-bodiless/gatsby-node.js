@@ -50,6 +50,9 @@ exports.onCreateBabelConfig = args => {
     name: '@babel/plugin-proposal-class-properties',
     options: { loose: true },
   });
+  setBabelPlugin({
+    name: 'babel-plugin-preval',
+  });
 };
 
 /**

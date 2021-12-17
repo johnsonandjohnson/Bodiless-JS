@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/components-ui",
-  "version": "0.3.2",
+  "version": "0.3.4",
   "description": "Default UI for Bodiless components",
   "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
   "license": "Apache-2.0",
@@ -26,12 +26,12 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/components": "^0.3.2",
-    "@bodiless/core": "^0.3.2",
-    "@bodiless/fclasses": "^0.3.2",
-    "@bodiless/layouts": "^0.3.2",
-    "@bodiless/layouts-ui": "^0.3.2",
-    "@bodiless/ui": "^0.3.2",
+    "@bodiless/components": "^0.3.4",
+    "@bodiless/core": "^0.3.4",
+    "@bodiless/fclasses": "^0.3.4",
+    "@bodiless/layouts": "^0.3.4",
+    "@bodiless/layouts-ui": "^0.3.4",
+    "@bodiless/ui": "^0.3.4",
     "lodash": "^4.17.19"
   },
   "peerDependencies": {
