@@ -27,6 +27,7 @@ const getSuggestions = () => [
 ];
 const TaggableFilterSelector = () => {
   const [tags, setTags] = useState<FilterTagType[]>([]);
+  const [showAll, setShowAll] = useState(true);
   const FilterButtons = getSuggestions().map(tag => (
     <TagButton key={tag.id} onClick={() => setTags([tag])}>
       {tag.name}
@@ -41,24 +42,34 @@ const TaggableFilterSelector = () => {
     formBodyText: 'Select from available groups:',
     allowNew: true,
     noSuggestionsText: 'No matching groups found.',
+    showWhenNoTagSelected: showAll,
   };
   return (
     <div>
       <div>
         <H2>Select a tag to filter by</H2>
-        {FilterButtons}
-        <TagButton id="foo-bar" onClick={() => setTags(getSuggestions().slice(0, 2))}>
-          multiple (foo, bar)
-        </TagButton>
-        <TagButton id="all-tags-selected" onClick={() => setTags(getSuggestions())}>
-          multiple (foo, bar, baz, bat)
-        </TagButton>
-
-        <TagButton id="show-all" onClick={() => setTags([])}>
-          All
-        </TagButton>
+        <div>
+          {FilterButtons}
+          <TagButton id="foo-bar" onClick={() => setTags(getSuggestions().slice(0, 2))}>
+            multiple (foo, bar)
+          </TagButton>
+          <TagButton id="all-tags-selected" onClick={() => setTags(getSuggestions())}>
+            multiple (foo, bar, baz, bat)
+          </TagButton>
+          <TagButton id="show-all" onClick={() => setTags([])}>
+            None
+          </TagButton>
+        </div>
       </div>
+      <label className="py-4 block">
+        <input className="mr-2" type="checkbox" defaultChecked={showAll} onClick={() => setShowAll(v => !v)} />
+        Show all items when no tag selected.
+      </label>
       <div>
+        <h2>Selected Tags</h2>
+        <p>{tags.map(t => t.name).join(' ')}&nbsp;</p>
+      </div>
+      <div className="pt-4">
         <h2>Filtered Components</h2>
         <TaggableFilterableItem {...props} id="item1" nodeKey="item1" key="item1" selectedTags={tags}>Item 1</TaggableFilterableItem>
         <TaggableFilterableItem {...props} id="item2" nodeKey="item2" key="item2" selectedTags={tags}>Item 2</TaggableFilterableItem>
