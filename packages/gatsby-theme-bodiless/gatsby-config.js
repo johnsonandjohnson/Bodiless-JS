@@ -163,6 +163,8 @@ if (process.env.BODILESS_DEFAULT_CONTENT_AUTO_DISCOVERY === '1') {
   );
 }
 
+plugins.push('gatsby-plugin-meta-redirect');
+
 module.exports = {
   siteMetadata: {
     title: 'Bodiless-JS',

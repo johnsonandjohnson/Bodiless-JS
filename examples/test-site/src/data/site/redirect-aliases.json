@@ -1,0 +1,13 @@
+[{
+  "fromPath": "/menu",
+  "toPath": "/carousel",
+  "statusCode": 301
+}, {
+  "fromPath": "/page-a",
+  "toPath": "/carousel",
+  "statusCode": 301
+}, {
+  "fromPath": "/page-b/",
+  "toPath": "https://www.google.com",
+  "statusCode": 301
+}]
