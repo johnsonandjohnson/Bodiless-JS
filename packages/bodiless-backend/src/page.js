@@ -314,10 +314,27 @@ class Page {
             await Promise.all(
               clonedPageFilesAtDestination.map(async (item) => {
                 const fileToBeUpdated = path.join(destinationPagePath, item);
+                let fromPattern = originPath;
+                let toPattern = destinationPath;
+
+                if (path.extname(item) === '.json') {
+                  try {
+                    const Obj = await fse.readJson(fileToBeUpdated);
+                    let fromPath = fromPattern.replace(/\//g, '\\');
+
+                    if (Obj.src && Obj.src.includes(fromPath)) {
+                      toPattern = toPattern.replace(/\//g, '\\\\');
+                      fromPattern = fromPattern.replace(/\//g, '\\\\\\\\');
+                    }
+                  } catch (err) {
+                    if (err) logger.log(err);
+                  }
+                }
+
                 const options = {
                   files: fileToBeUpdated,
-                  from: new RegExp(originPath, 'g'),
-                  to: destinationPath,
+                  from: new RegExp(fromPattern, 'g'),
+                  to: toPattern,
                 };
                 return Page.updateFileContent(options);
               }),
