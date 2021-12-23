@@ -70,7 +70,7 @@ const plugins = [
 /**
  * Google Fonts plugin.
  */
-if (process.env.GOOGLE_FONTS_ENABLED !== '0') {
+if (process.env.NODE_ENV === 'development' || process.env.GOOGLE_FONTS_ENABLED === '1') {
   plugins.push({
     resolve: 'gatsby-plugin-google-fonts',
     options: {
