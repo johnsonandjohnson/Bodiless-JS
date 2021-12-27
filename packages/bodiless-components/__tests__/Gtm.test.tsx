@@ -22,7 +22,10 @@ import {
   PageEditContext,
   useEditContext,
 } from '@bodiless/core';
-import withDataLayerItem, { withDefaultDataLayer, withDataLayerScript } from '../src/GTM/gtm';
+import withDataLayerItem, {
+  withDefaultDataLayer,
+  withDataLayerScript,
+} from '../src/GTM/gtm';
 
 const getMockNode = (data: string) => {
   const getters = {
@@ -41,11 +44,15 @@ const getMockNode = (data: string) => {
 
 class EditOnlyContext extends PageEditContext {
   // eslint-disable-next-line class-methods-use-this
-  get isEdit() { return true; }
+  get isEdit() {
+    return true;
+  }
 }
 class NonEditContext extends PageEditContext {
   // eslint-disable-next-line class-methods-use-this
-  get isEdit() { return false; }
+  get isEdit() {
+    return false;
+  }
 }
 
 const testDefaultDataLayer = {
@@ -80,7 +87,8 @@ describe('DataLayer process', () => {
         path: 'customKey.pageType',
       });
 
-      const expectedScript = 'window.dataLayer = window.dataLayer || [];window.dataLayer.push({"foo":"foo value","bar":{"bat":"bat value"},"pageType":"Page Type"});';
+      const expectedScript =
+        'window.dataLayer = window.dataLayer || [];window.dataLayer.push({ event_data: null });window.dataLayer.push({"foo":"foo value","bar":{"bat":"bat value"},"pageType":"Page Type"});';
       const PageDataLayer = flowRight(
         withDefaultDataLayer(testDefaultDataLayer) as () => React.ComponentType,
         withDataLayerItemPageType(data.key),
@@ -129,7 +137,6 @@ describe('DataLayer process', () => {
         name: data.name,
         label: data.label,
         path: '0.pageType',
-
       });
 
       const PageType = flowRight(withDataLayerItemPageType(data.key))(Helmet);
