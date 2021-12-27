@@ -14,22 +14,26 @@
 
 import React from 'react';
 import {
-  I,
+  Img,
   addClasses,
   withDesign,
   addClassesIf,
   asToken,
   Design,
+  addProps,
 } from '@bodiless/fclasses';
 import { withChild } from '@bodiless/core';
 import { asPageContainer, asDesktopOnly, asTextWhite } from '../Elements.token';
+// @ts-ignore Cannot find module.
+import iconSearch from '../../../static/images/search_black_24dp.svg';
 
 const Icon = asToken(
-  addClasses('material-icons cursor-pointer align-middle bg-white text-gray-500'),
-)(I);
+  addClasses('cursor-pointer align-middle bg-white text-gray-500'),
+  addProps({ 'src': iconSearch }),
+)(Img);
 
-const withIcon = (icon: string) => withChild(
-  () => <Icon>{icon}</Icon>,
+const withIcon = () => withChild(
+  () => <Icon />,
   'Icon',
 );
 
@@ -71,7 +75,7 @@ const searchDesign: Design = {
     withSearchInputOutline,
     addClasses('px-2 align-middle text-1xl'),
   ),
-  SearchButton: withIcon('search'),
+  SearchButton: withIcon(),
   Suggestions: withSuggestionsDefaultDesign,
 };
 
@@ -84,7 +88,7 @@ const responsiveSearchDesign = {
   ),
   ToggleButton: asTextWhite,
   SearchButton: asToken(
-    withIcon('search'),
+    withIcon(),
     addClasses('flex absolute right-0 self-center mr-4'),
   ),
   Suggestions: asToken(
@@ -101,7 +105,7 @@ const searchInlineDesign = {
     withSearchInputOutline,
     addClasses('px-2 align-middle text-1xl'),
   ),
-  SearchButton: withIcon('search'),
+  SearchButton: withIcon(),
   Suggestions: withSuggestionsDefaultDesign,
 };
 
