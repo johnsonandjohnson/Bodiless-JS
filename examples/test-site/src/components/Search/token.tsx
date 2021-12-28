@@ -25,7 +25,7 @@ import {
 import { withChild } from '@bodiless/core';
 import { asPageContainer, asDesktopOnly, asTextWhite } from '../Elements.token';
 // @ts-ignore Cannot find module.
-import iconSearch from '../../../static/images/search_black_24dp.svg';
+import iconSearch from '../../images/search_black_24dp.svg';
 
 const Icon = asToken(
   addClasses('cursor-pointer align-middle bg-white text-gray-500'),

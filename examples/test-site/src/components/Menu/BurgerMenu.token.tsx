@@ -12,20 +12,25 @@
  * limitations under the License.
  */
 
-import { withAppendChild } from '@bodiless/core';
+import negate from 'lodash/negate';
+import { withAppendChild, withChild } from '@bodiless/core';
 import {
-  Div, asToken, replaceWith, startWith, withDesign, addClasses, withoutProps,
+  Div, asToken, replaceWith, startWith, withDesign, addClasses, withoutProps, Img, addPropsIf, Token,
 } from '@bodiless/fclasses';
 import {
-  asBurgerMenu, withMenuDesign, BurgerMenuDefaultToggler, asSlideLeft,
+  asBurgerMenu, withMenuDesign, BurgerMenuDefaultToggler, asSlideLeft, useIsBurgerMenuVisible,
 } from '@bodiless/navigation';
 
 import { $withTitleEditors } from './Menu.token';
 import Logo from '../Layout/logo';
 import { asDefaultLogoStyle } from '../Layout/token';
 import {
-  asTealBackground, asTextWhite, asMobileOnly, asBold,
+  asTealBackground, asMobileOnly, asBold,
 } from '../Elements.token';
+// @ts-ignore Cannot find module.
+import iconMenu from '../../images/menu_white_24dp.svg';
+// @ts-ignore Cannot find module.
+import iconClose from '../../images/close_white_24dp.svg';
 
 /**
  * Tokens
@@ -33,7 +38,12 @@ import {
  */
 const $withTogglerStyles = asToken(
   withDesign({
-    Button: asToken(asTextWhite, asMobileOnly),
+    Button: asToken(withChild(
+      asToken(
+        addPropsIf(useIsBurgerMenuVisible)({ 'src': iconClose }) as Token,
+        addPropsIf(negate(useIsBurgerMenuVisible))({ 'src': iconMenu }) as Token,
+      )(Img),
+    ), asMobileOnly),
     Wrapper: asToken(
       replaceWith(Div),
       asMobileOnly,
