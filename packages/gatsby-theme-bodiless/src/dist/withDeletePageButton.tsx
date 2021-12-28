@@ -67,6 +67,11 @@ const deletePage = async ({ path, client } : any) => {
     if (result.message !== 'Success' && typeof (result.message) === 'string') {
       return Promise.reject(new Error(result.message));
     }
+    try {
+      await handle(client.deleteStaticAssets(path));
+    } catch (e: any) {
+      return Promise.reject(new Error(e.message));
+    }
     return Promise.resolve();
   }
   return Promise.reject(new Error('The page cannot be deleted.'));
