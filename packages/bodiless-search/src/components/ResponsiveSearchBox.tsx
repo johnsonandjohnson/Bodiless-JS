@@ -16,7 +16,7 @@ import React, {
   FC, ComponentType, useState, HTMLProps,
 } from 'react';
 import {
-  I,
+  Img,
   Div,
   Button,
   addClasses,
@@ -25,7 +25,13 @@ import {
   DesignableComponentsProps,
   StylableProps,
   asToken,
+  addProps,
 } from '@bodiless/fclasses';
+
+// @ts-ignore Cannot find module.
+import iconSearch from '../../assets/search_black_24dp.svg';
+// @ts-ignore Cannot find module.
+import iconClose from '../../assets/close_black_24dp.svg';
 
 import {
   SearchBox,
@@ -37,7 +43,7 @@ import {
 type ResponsiveSearchComponents = {
   Wrapper: ComponentType<StylableProps>,
   ToggleButton: ComponentType<HTMLProps<HTMLButtonElement>>,
-  ToggleIcon: ComponentType<HTMLProps<HTMLElement>>
+  ToggleIcon: ComponentType<StylableProps>
 } & SearchComponents;
 
 type ResponsiveSearchProps = DesignableComponentsProps<ResponsiveSearchComponents> &
@@ -52,7 +58,7 @@ const responsiveSearchComponents: ResponsiveSearchComponents = {
   ...searchComponents,
   Wrapper: Div,
   ToggleButton: Button,
-  ToggleIcon: addClasses('material-icons cursor-pointer align-middle')(I),
+  ToggleIcon: addClasses('cursor-pointer align-middle')(Img),
 };
 
 const ResponsiveSearchBoxBase: FC<ResponsiveSearchProps> = (props) => {
@@ -61,10 +67,14 @@ const ResponsiveSearchBoxBase: FC<ResponsiveSearchProps> = (props) => {
   const { components } = props;
   const { Wrapper, ToggleButton, ToggleIcon } = components;
 
+  const ToggleIconSvg = addProps({
+    'src': isExpanded ? iconClose : iconSearch,
+  })(ToggleIcon);
+
   return (
     <Wrapper>
       <ToggleButton onClick={() => setExpanded(!isExpanded)}>
-        <ToggleIcon>{ isExpanded ? 'close' : 'search' }</ToggleIcon>
+        <ToggleIconSvg />
       </ToggleButton>
 
       <SearchBox
