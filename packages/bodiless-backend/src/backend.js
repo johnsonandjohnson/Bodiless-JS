@@ -287,6 +287,7 @@ class Backend {
     this.setRoute(`${backendPrefix}/directory/child/*`, Backend.directoryChild);
     this.setRoute(`${backendPrefix}/directory/exists/*`, Backend.directoryExists);
     this.setRoute(`${backendPrefix}/file/remove/*`, Backend.removeFile);
+    this.setRoute(`${backendPrefix}/assets/remove/*`, Backend.removeAssets);
   }
 
   setRoute(route, action) {
@@ -752,6 +753,29 @@ class Backend {
         .catch(reason => {
           logger.log(reason);
           res.status(500).send(`${reason}`);
+        });
+    });
+  }
+
+  static removeAssets(route) {
+    route.delete(async (req, res) => {
+      const origin = req.params[0];
+      const page = Backend.getPage(origin);
+
+      logger.log(`Start removing assets for:${origin}`);
+
+      const originPath = origin.replace(/\/$/, '');
+      const originStaticPath = path.join(backendStaticPath, '/images/pages', originPath);
+
+      page
+        .removePageAssets(originStaticPath)
+        .then(error => {
+          if (error) {
+            logger.log(error);
+            res.send(error);
+          } else {
+            res.send({});
+          }
         });
     });
   }
