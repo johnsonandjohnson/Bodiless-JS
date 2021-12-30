@@ -108,6 +108,7 @@
     "walkdir": "^0.4.1"
   },
   "devDependencies": {
+    "@svgr/webpack": "^6.1.2",
     "tailwindcss": "^2.0.2"
   },
   "peerDependencies": {

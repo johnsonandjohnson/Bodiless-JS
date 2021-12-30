@@ -20,6 +20,7 @@ import {
 import {
   asBurgerMenu, withMenuDesign, BurgerMenuDefaultToggler, asSlideLeft, useIsBurgerMenuVisible,
 } from '@bodiless/navigation';
+import { asAccordionIconSvg } from '@bodiless/accordion';
 
 import { $withTitleEditors } from './Menu.token';
 import Logo from '../Layout/logo';
@@ -71,6 +72,7 @@ const $withBoldAccordionTitleStyles = withDesign({
   OuterWrapper: withDesign({
     Title: withDesign({
       Label: asBold,
+      Icon: asAccordionIconSvg,
     }),
   }),
 });

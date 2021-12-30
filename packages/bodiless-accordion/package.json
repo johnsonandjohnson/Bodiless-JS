@@ -24,7 +24,7 @@
     "build:api-doc": "typedoc --out doc/api src",
     "lint": "tslint ./src/**/*.ts?x",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
-    "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
+    "copy": "copyfiles -u 1 \"./src/**/*.{css,png,csvg}\" \"./lib/\""
   },
   "dependencies": {
     "@bodiless/components": "^0.3.4",

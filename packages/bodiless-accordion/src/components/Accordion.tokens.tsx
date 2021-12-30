@@ -22,16 +22,27 @@ import {
   removeClasses,
   removeClassesIf,
   asToken,
+  stylable,
 } from '@bodiless/fclasses';
 import {
   ifEditable,
   withExtendHandler,
+  withChild,
+  ifToggledOn,
 } from '@bodiless/core';
 import {
   isAccordionExpanded,
   isAccordionContracted,
   isAccordionFocusedOut,
 } from './AccordionContext';
+
+// @ts-ignore Cannot find module.
+import iconAdd from '../assets/add_white_24dp_cpnt.csvg';
+// @ts-ignore Cannot find module.
+import iconRemove from '../assets/remove_white_24dp_cpnt.csvg';
+
+const IconAdd = addClasses('fill-current')(stylable(iconAdd));
+const IconRemove = addClasses('fill-current')(stylable(iconRemove));
 
 /**
  * withDisableExpandOnClick stops accordion behavior on edit mode
@@ -65,6 +76,16 @@ const asAccordionIcon = asToken(
   addProps({ 'data-accordion-element': 'accordion-icon' }),
   addPropsIf(isAccordionContracted)({ 'aria-label': 'Expand Accordion' }),
   addPropsIf(isAccordionExpanded)({ 'aria-label': 'Collapse Accordion' }),
+);
+
+/**
+ * asAccordionIcon provides svg icon token for accordion title,
+ * base on asAccordionIcon
+ */
+const asAccordionIconSvg = asToken(
+  asAccordionIcon,
+  ifToggledOn(isAccordionExpanded)(withChild(IconRemove)),
+  ifToggledOn(isAccordionContracted)(withChild(IconAdd)),
 );
 
 /**
@@ -166,6 +187,7 @@ export {
   withDisableExpandOnClick,
   asAccordionDefaultExpanded,
   asAccordionIcon,
+  asAccordionIconSvg,
   asAccordionTitleWrapper,
   asAccordionLabel,
   asAccordionBodyWrapper,
