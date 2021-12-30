@@ -80,8 +80,9 @@ const useLinkOverrides = (useOverrides: UseLinkOverrides = () => ({})): UseLinkO
       fileUpload = {},
     } = overrides;
     const { accept: fileUploadAccept = DEFAULT_ALLOWED_FILE_TYPES } = fileUpload;
-    const submitValueHandler = ({ href }: LinkData) => submitValueHandler$({
+    const submitValueHandler = ({ href, 'aria-label': ariaLabel }: LinkData) => submitValueHandler$({
       href: normalizeHref(href),
+      'aria-label': ariaLabel,
     });
     const finalOverrides: Partial<EditButtonOptions<Props, LinkData>> & ExtraLinkOptions = {
       ...overrides,
@@ -113,6 +114,8 @@ const useLinkOverrides = (useOverrides: UseLinkOverrides = () => ({})): UseLinkO
             <ComponentFormDescription id="description">
               {instructions}
             </ComponentFormDescription>
+            <ComponentFormLabel htmlFor="aria-label">Aria Label</ComponentFormLabel>
+            <ComponentFormText field="aria-label" id="aria-label" aria-describedby="description" placeholder="aria-label" />
             <ComponentFormLabel>File Upload</ComponentFormLabel>
             <FileUpload ui={fileUploadUI} accept={fileUploadAccept} />
             {unwrap && (
@@ -140,6 +143,7 @@ const options: BodilessOptions<Props, LinkData> = {
   local: true,
   defaultData: {
     href: '',
+    'aria-label': undefined,
   },
 };
 
