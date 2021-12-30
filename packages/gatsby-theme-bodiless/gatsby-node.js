@@ -24,6 +24,7 @@ const fs = require('fs');
 const { getDisabledPages } = require('@bodiless/components/node-api');
 const { createFilePath } = require('gatsby-source-filesystem');
 const { onCreateNode, createSlug } = require('./create-node');
+const createRedirectAlias = require('./create-redirect-alias');
 
 const Logger = require('./Logger');
 
@@ -240,6 +241,7 @@ const createPreviewPagesForTemplates = async ({ actions, graphql, getNode }) => 
 };
 
 exports.createPages = async ({ actions, graphql, getNode }) => {
+  await createRedirectAlias({ actions }, logger);
   await createPagesFromFS({ actions, graphql, getNode });
   if (process.env.NODE_ENV === 'development') {
     await createPreviewPagesForTemplates({ actions, graphql, getNode });
