@@ -19,7 +19,7 @@ import {
   asToken,
   Design,
 } from '@bodiless/fclasses';
-import { withSearchIconSvg } from '@bodiless/search';
+import { withSearchIconSvg, withSearchToggleIconSvg } from '@bodiless/search';
 import { asPageContainer, asDesktopOnly, asTextWhite } from '../Elements.token';
 
 const withSearchButtonIcon = asToken(
@@ -76,7 +76,10 @@ const responsiveSearchDesign = {
     withSearchInputOutline,
     addClasses('align-middle w-full p-2'),
   ),
-  ToggleButton: asTextWhite,
+  ToggleButton: asToken(
+    asTextWhite,
+    withSearchToggleIconSvg,
+  ),
   SearchButton: asToken(
     withSearchButtonIcon,
     addClasses('flex absolute right-0 self-center mr-4'),

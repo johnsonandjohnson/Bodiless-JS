@@ -23,11 +23,12 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build": "npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
     "build:api-doc": "typedoc --out doc/api src",
     "lint": "tslint ./src/**/*.ts?x",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
+    "copy": "copyfiles -u 1 \"./src/**/*.{css,png,csvg}\" \"./lib/\""
   },
   "dependencies": {
     "@bodiless/core": "^0.3.5",
