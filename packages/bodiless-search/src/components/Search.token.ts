@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,9 +11,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import ResponsiveSearchBox from './components/ResponsiveSearchBox';
 
-export { SearchBox, SearchResult } from './components/Search';
-export { withSearchResult, useSearchResultContext } from './components/SearchContextProvider';
-export { ResponsiveSearchBox };
-export * from './components/Search.token';
+import { addClasses, asToken, stylable } from '@bodiless/fclasses';
+import { withChild } from '@bodiless/core';
+
+// @ts-ignore Cannot find module.
+import iconSearch from '../assets/search_black_24dp.csvg';
+
+const IconSearch = addClasses('fill-current')(stylable(iconSearch));
+
+const withSearchIconSvg = asToken(
+  addClasses('cursor-pointer align-middle'),
+  withChild(IconSearch),
+);
+
+export {
+  withSearchIconSvg,
+};

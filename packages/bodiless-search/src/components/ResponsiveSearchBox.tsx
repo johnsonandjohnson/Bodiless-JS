@@ -29,9 +29,9 @@ import {
 } from '@bodiless/fclasses';
 
 // @ts-ignore Cannot find module.
-import iconSearch from '../../assets/search_black_24dp.svg';
+import iconSearch from '../assets/search_black_24dp.svg';
 // @ts-ignore Cannot find module.
-import iconClose from '../../assets/close_black_24dp.svg';
+import iconClose from '../assets/close_black_24dp.svg';
 
 import {
   SearchBox,
