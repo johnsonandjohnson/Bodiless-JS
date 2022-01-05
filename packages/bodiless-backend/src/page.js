@@ -377,7 +377,9 @@ class Page {
        *         So make sure the directory to delete is inside a region of pages,
        *         and it is not the whole pages directory.
        */
-      const [, pageRelativeDir] = this.directory.split('/data/pages/');
+      const { sep, normalize } = path;
+      const dirPath = normalize(this.directory);
+      const [, pageRelativeDir] = dirPath.split(`${sep}data${sep}pages${sep}`);
       if (!pageRelativeDir) {
         resolve('The page cannot be deleted.');
         return;
