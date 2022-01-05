@@ -12,10 +12,10 @@
  * limitations under the License.
  */
 
-import negate from 'lodash/negate';
-import { withAppendChild, withChild } from '@bodiless/core';
+
+import { ifToggledOff, ifToggledOn, withAppendChild, withChild } from '@bodiless/core';
 import {
-  Div, asToken, replaceWith, startWith, withDesign, addClasses, withoutProps, Img, addPropsIf, Token,
+  Div, asToken, replaceWith, startWith, withDesign, addClasses, withoutProps, stylable,
 } from '@bodiless/fclasses';
 import {
   asBurgerMenu, withMenuDesign, BurgerMenuDefaultToggler, asSlideLeft, useIsBurgerMenuVisible,
@@ -28,10 +28,13 @@ import { asDefaultLogoStyle } from '../Layout/token';
 import {
   asTealBackground, asMobileOnly, asBold,
 } from '../Elements.token';
-// @ts-ignore Cannot find module.
-import iconMenu from '../../images/menu_white_24dp.svg';
-// @ts-ignore Cannot find module.
-import iconClose from '../../images/close_white_24dp.svg';
+// @ts-ignore missing csvg extension declaration
+import BurgerIcon from '../../images/menu_white_24dp.csvg';
+// @ts-ignore missing csvg extension declaration
+import CloseIcon from '../../images/close_white_24dp.csvg';
+
+const OpenMenuIcon = addClasses('fill-current')(stylable(BurgerIcon));
+const CloseMenuIcon = addClasses('fill-current')(stylable(CloseIcon));
 
 /**
  * Tokens
@@ -39,16 +42,15 @@ import iconClose from '../../images/close_white_24dp.svg';
  */
 const $withTogglerStyles = asToken(
   withDesign({
-    Button: asToken(withChild(
-      asToken(
-        addPropsIf(useIsBurgerMenuVisible)({ 'src': iconClose }) as Token,
-        addPropsIf(negate(useIsBurgerMenuVisible))({ 'src': iconMenu }) as Token,
-      )(Img),
-    ), asMobileOnly),
+    Button: asToken(
+      ifToggledOn(useIsBurgerMenuVisible)(withChild(CloseMenuIcon)),
+      ifToggledOff(useIsBurgerMenuVisible)(withChild(OpenMenuIcon)),
+      asMobileOnly,
+    ),
     Wrapper: asToken(
       replaceWith(Div),
       asMobileOnly,
-      addClasses('flex'),
+      addClasses('flex text-white'),
     ),
   }),
 );
