@@ -281,20 +281,4 @@ exports.onCreateWebpackConfig = (
       },
     });
   }
-
-  if (stage === 'develop') {
-    actions.setWebpackConfig({
-      // On development, we want changes on Bodiless packages to trigger
-      // new builds. Webpack won't watch packages inside node_modules by
-      // default, so we remove the @bodiless folder from its default list.
-      //
-      // See: https://webpack.js.org/configuration/other-options/#snapshot
-      snapshot: {
-        managedPaths: glob.sync(
-          './node_modules/!(@bodiless)*', 
-          { absolute: true }
-        ),
-      }
-    });
-  }
 };
