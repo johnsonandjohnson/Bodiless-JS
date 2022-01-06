@@ -15,6 +15,7 @@
 const fs = require('fs');
 const fse = require('fs-extra');
 const path = require('path');
+const os = require('os');
 const replace = require('replace-in-file');
 const Logger = require('./logger');
 
@@ -260,6 +261,9 @@ class Page {
 
   static async clonePageAssets(origin, destination, basePath, target) {
     const originPath = origin.replace(/\/$/, '');
+    const originPathCrossPlatform = os.platform() === 'win32' ?
+      originPath.replace('/', '\\\\') :
+      originPath;
     const destinationPath = destination.replace(/\/$/, '');
 
     const originStaticPath = path.join(backendStaticPath, target, originPath);
@@ -316,7 +320,7 @@ class Page {
                 const fileToBeUpdated = path.join(destinationPagePath, item);
                 const options = {
                   files: fileToBeUpdated,
-                  from: new RegExp(originPath, 'g'),
+                  from: new RegExp(originPathCrossPlatform, 'g'),
                   to: destinationPath,
                 };
                 return Page.updateFileContent(options);
