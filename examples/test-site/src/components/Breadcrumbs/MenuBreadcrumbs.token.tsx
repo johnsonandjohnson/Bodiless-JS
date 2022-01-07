@@ -39,21 +39,20 @@ import {
   replaceWith,
   Span,
   remove,
+  stylable,
 } from '@bodiless/fclasses';
 import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
-
 import {
   asBold,
   asEditableLink,
   asLink,
 } from '../Elements.token';
+//@ts-ignore missing csvg extension declaration
+import HomeIcon from './assets/home_white_24dp.csvg';
 
 const BREADCRUMB_ARIA_LABEL = 'Breadcrumb';
 
-const HomeBreadcrumbIcon = asToken(
-  addProps({ children: 'home' as ReactNode }),
-  addClasses('material-icons'),
-)(Span);
+const HomeBreadcrumbIcon = addClasses('fill-current')(stylable(HomeIcon));
 
 const withStartingTrailIcon = (
   nodeKeys?: WithNodeKeyProps,
