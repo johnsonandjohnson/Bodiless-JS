@@ -17,9 +17,13 @@ import {
   withDesign,
   Img,
   Div,
-  Span,
   Label,
+  stylable,
+  asToken,
+  removeClasses,
 } from '@bodiless/fclasses';
+// @ts-ignore missing csvg extension declaration
+import ShareIcon from './images/share_white_24dp.csvg';
 
 const providersDesign = {
   ProvidersWrapper: addClasses('m-2'),
@@ -38,8 +42,8 @@ const socialShareOrangeDesign = {
   SocialShareProdviders: withDesign(providersDesign),
 };
 
-export const StyledIcon = addClasses('material-icons cursor-pointer align-middle text-white mr-2')(Span);
-export const WhiteIcon = addClasses('material-icons cursor-pointer align-middle text-white')(Span);
+export const StyledIcon = addClasses('fill-current inline-block mr-2')(stylable(ShareIcon));
+export const WhiteStyledIcon = asToken(addClasses('text-white'), removeClasses('mr-2'))(StyledIcon);
 export const StyledLabel = addClasses('cursor-pointer')(Label);
 export const Logo = addClasses('bg-blue-500 w-full rounded-full cursor-pointer transition duration-500 ease-in-out hover:bg-black transform hover:-translate-y-1 hover:scale-110')(Img);
 export const LogoNoBackground = addClasses('w-full cursor-pointer')(Img);
