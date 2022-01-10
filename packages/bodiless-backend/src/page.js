@@ -163,10 +163,10 @@ class Page {
 
   static jsFilesPathResolve(originPath, destinationPath, files) {
     const actions = [];
-    const reg = /from ('|")(\..*)('|")/g;
+    const reg = /from ('|")(\.\..*)('|")/g;
 
     const readF = (file) =>
-      new Promise((resove, reject) => {
+      new Promise((resolve, reject) => {
         const filePath = `${destinationPath}/${file.name}`;
         fs.readFile(filePath, 'utf8', (err, content) => {
           if (err) return reject();
@@ -178,7 +178,7 @@ class Page {
             const oldPath = item.split(' ')[1].replace(/'|"/g, '');
             const from = path.dirname(filePath);
             const to = path.normalize(`${originPath}/${oldPath}`);
-            const newPath = path.relative(from, to);
+            const newPath = path.relative(from, to).replace(/\\/g, '/');
 
             newContent = newContent.replace(
               `${delimiter}${oldPath}${delimiter}`,
@@ -187,7 +187,7 @@ class Page {
           });
           fs.writeFile(filePath, newContent, (writeErr) => {
             if (writeErr) return reject();
-            return resove();
+            return resolve();
           });
           return true;
         });
@@ -246,7 +246,7 @@ class Page {
       return exts.indexOf(fileExtname) > -1;
     });
     if (jsFiles.length) {
-      await Page.jsFilesPathResolve(originPath, destinationPath, jsFiles);
+      // await Page.jsFilesPathResolve(originPath, destinationPath, jsFiles);
     }
 
     // Clone Image assets
