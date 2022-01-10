@@ -25,7 +25,6 @@ const { createFilePath } = require('gatsby-source-filesystem');
 const { onCreateNode, createSlug } = require('./create-node');
 const createRedirectAlias = require('./create-redirect-alias');
 const Logger = require('./Logger');
-const glob = require('glob');
 
 const logger = new Logger('gatsby');
 
