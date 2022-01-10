@@ -246,7 +246,7 @@ class Page {
       return exts.indexOf(fileExtname) > -1;
     });
     if (jsFiles.length) {
-      // await Page.jsFilesPathResolve(originPath, destinationPath, jsFiles);
+      await Page.jsFilesPathResolve(originPath, destinationPath, jsFiles);
     }
 
     // Clone Image assets
