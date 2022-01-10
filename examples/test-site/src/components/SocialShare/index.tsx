@@ -59,12 +59,12 @@ type ProviderProps = {
 
 const Icon = (): JSX.Element => (
   <StyledLabel>
-    <WhiteStyledIcon/>
+    <WhiteStyledIcon />
   </StyledLabel>
 );
 const IconWithLabel = (label?: string): JSX.Element => (
   <StyledLabel>
-    <StyledIcon/>
+    <StyledIcon />
     {label}
   </StyledLabel>
 );
