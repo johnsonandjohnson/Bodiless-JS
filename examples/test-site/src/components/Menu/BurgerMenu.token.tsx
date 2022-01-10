@@ -15,7 +15,7 @@
 
 import { ifToggledOff, ifToggledOn, withAppendChild, withChild } from '@bodiless/core';
 import {
-  Div, asToken, replaceWith, startWith, withDesign, addClasses, withoutProps, stylable,
+  Div, asToken, replaceWith, startWith, withDesign, addClasses, withoutProps,
 } from '@bodiless/fclasses';
 import {
   asBurgerMenu, withMenuDesign, BurgerMenuDefaultToggler, asSlideLeft, useIsBurgerMenuVisible,
@@ -28,13 +28,11 @@ import { asDefaultLogoStyle } from '../Layout/token';
 import {
   asTealBackground, asMobileOnly, asBold,
 } from '../Elements.token';
-// @ts-ignore missing csvg extension declaration
-import BurgerIcon from '../../images/menu_white_24dp.csvg';
-// @ts-ignore missing csvg extension declaration
-import CloseIcon from '../../images/close_white_24dp.csvg';
+import MenuIcon from './icons/Menu';
+import CloseIcon from './icons/Close';
 
-const OpenMenuIcon = addClasses('fill-current')(stylable(BurgerIcon));
-const CloseMenuIcon = addClasses('fill-current')(stylable(CloseIcon));
+const OpenMenuIcon = addClasses('fill-current')(MenuIcon);
+const CloseMenuIcon = addClasses('fill-current')(CloseIcon);
 
 /**
  * Tokens

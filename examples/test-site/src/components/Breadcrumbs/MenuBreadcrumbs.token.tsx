@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ReactNode } from 'react';
+import React from 'react';
 import {
   WithNodeKeyProps,
   withSidecarNodes,
@@ -37,9 +37,7 @@ import {
   addProps,
   withDesign,
   replaceWith,
-  Span,
   remove,
-  stylable,
 } from '@bodiless/fclasses';
 import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import {
@@ -47,12 +45,11 @@ import {
   asEditableLink,
   asLink,
 } from '../Elements.token';
-//@ts-ignore missing csvg extension declaration
-import HomeIcon from './assets/home_white_24dp.csvg';
+import HomeIcon from './icons/Home';
 
 const BREADCRUMB_ARIA_LABEL = 'Breadcrumb';
 
-const HomeBreadcrumbIcon = addClasses('fill-current')(stylable(HomeIcon));
+const HomeBreadcrumbIcon = addClasses('fill-current')(HomeIcon);
 
 const withStartingTrailIcon = (
   nodeKeys?: WithNodeKeyProps,

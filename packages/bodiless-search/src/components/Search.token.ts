@@ -13,26 +13,23 @@
  */
 
 import negate from 'lodash/negate';
-import { addClasses, asToken, stylable } from '@bodiless/fclasses';
+import { addClasses, asToken } from '@bodiless/fclasses';
 import { withChild, ifToggledOn } from '@bodiless/core';
 import { isSearchToggleButtonExpanded } from './ResponsiveSearchBox';
+import SearchIcon from '../icons/Search';
+import CloseIcon from '../icons/Close';
 
-// @ts-ignore Cannot find module.
-import iconSearch from '../assets/search_black_24dp.csvg';
-// @ts-ignore Cannot find module.
-import iconClose from '../assets/close_black_24dp.csvg';
-
-const IconSearch = addClasses('fill-current')(stylable(iconSearch));
-const IconClose = addClasses('fill-current')(stylable(iconClose));
+const SearchButtonIcon = addClasses('fill-current')(SearchIcon);
+const CloseButtonIcon = addClasses('fill-current')(CloseIcon);
 
 const withSearchIconSvg = asToken(
   addClasses('cursor-pointer align-middle'),
-  withChild(IconSearch),
+  withChild(SearchButtonIcon),
 );
 
 const withSearchToggleIconSvg = asToken(
-  ifToggledOn(isSearchToggleButtonExpanded)(withChild(IconClose)),
-  ifToggledOn(negate(isSearchToggleButtonExpanded))(withChild(IconSearch)),
+  ifToggledOn(isSearchToggleButtonExpanded)(withChild(CloseButtonIcon)),
+  ifToggledOn(negate(isSearchToggleButtonExpanded))(withChild(SearchButtonIcon)),
 );
 
 export {

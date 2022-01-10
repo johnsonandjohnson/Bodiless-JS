@@ -22,7 +22,6 @@ import {
   removeClasses,
   removeClassesIf,
   asToken,
-  stylable,
 } from '@bodiless/fclasses';
 import {
   ifEditable,
@@ -35,14 +34,11 @@ import {
   isAccordionContracted,
   isAccordionFocusedOut,
 } from './AccordionContext';
+import AddIcon from '../icons/Add';
+import RemoveIcon from '../icons/Remove';
 
-// @ts-ignore Cannot find module.
-import iconAdd from '../assets/add_white_24dp_cpnt.csvg';
-// @ts-ignore Cannot find module.
-import iconRemove from '../assets/remove_white_24dp_cpnt.csvg';
-
-const IconAdd = addClasses('fill-current')(stylable(iconAdd));
-const IconRemove = addClasses('fill-current')(stylable(iconRemove));
+const OpenAccordionIcon = addClasses('fill-current')(AddIcon);
+const CloseAccordionIcon = addClasses('fill-current')(RemoveIcon);
 
 /**
  * withDisableExpandOnClick stops accordion behavior on edit mode
@@ -84,8 +80,8 @@ const asAccordionIcon = asToken(
  */
 const asAccordionIconSvg = asToken(
   asAccordionIcon,
-  ifToggledOn(isAccordionExpanded)(withChild(IconRemove)),
-  ifToggledOn(isAccordionContracted)(withChild(IconAdd)),
+  ifToggledOn(isAccordionExpanded)(withChild(CloseAccordionIcon)),
+  ifToggledOn(isAccordionContracted)(withChild(OpenAccordionIcon)),
 );
 
 /**

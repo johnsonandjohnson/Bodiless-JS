@@ -46,10 +46,8 @@ import { LandscapeImage, LandscapeLinkableImage } from '../Image';
 import Card from '../Card';
 import { asCardHorizontal, asCardDefaultStyle } from '../Card/token';
 import { Reponsive16By9YouTube } from '../YouTube';
-//@ts-ignore missing csvg extension definition
-import PlayIcon from './assets/play_arrow_white_24dp.csvg';
-//@ts-ignore missing csvg extension definition
-import PauseIcon from './assets/pause_white_24dp.csvg';
+import PlayIcon from './icons/Play';
+import PauseIcon from './icons/Pause';
 
 const withImageSlide = withDesign({
   Slider: withDesign({
