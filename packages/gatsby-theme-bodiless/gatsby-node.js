@@ -20,12 +20,10 @@
  */
 const pathUtil = require('path');
 const fs = require('fs');
-
 const { getDisabledPages } = require('@bodiless/components/node-api');
 const { createFilePath } = require('gatsby-source-filesystem');
 const { onCreateNode, createSlug } = require('./create-node');
 const createRedirectAlias = require('./create-redirect-alias');
-
 const Logger = require('./Logger');
 
 const logger = new Logger('gatsby');
