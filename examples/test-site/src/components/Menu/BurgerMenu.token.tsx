@@ -12,20 +12,27 @@
  * limitations under the License.
  */
 
-import { withAppendChild } from '@bodiless/core';
+
+import { ifToggledOff, ifToggledOn, withAppendChild, withChild } from '@bodiless/core';
 import {
   Div, asToken, replaceWith, startWith, withDesign, addClasses, withoutProps,
 } from '@bodiless/fclasses';
 import {
-  asBurgerMenu, withMenuDesign, BurgerMenuDefaultToggler, asSlideLeft,
+  asBurgerMenu, withMenuDesign, BurgerMenuDefaultToggler, asSlideLeft, useIsBurgerMenuVisible,
 } from '@bodiless/navigation';
+import { asAccordionIconSvg } from '@bodiless/accordion';
 
 import { $withTitleEditors } from './Menu.token';
 import Logo from '../Layout/logo';
 import { asDefaultLogoStyle } from '../Layout/token';
 import {
-  asTealBackground, asTextWhite, asMobileOnly, asBold,
+  asTealBackground, asMobileOnly, asBold,
 } from '../Elements.token';
+import MenuIcon from './icons/Menu';
+import CloseIcon from './icons/Close';
+
+const OpenMenuIcon = addClasses('fill-current')(MenuIcon);
+const CloseMenuIcon = addClasses('fill-current')(CloseIcon);
 
 /**
  * Tokens
@@ -33,11 +40,15 @@ import {
  */
 const $withTogglerStyles = asToken(
   withDesign({
-    Button: asToken(asTextWhite, asMobileOnly),
+    Button: asToken(
+      ifToggledOn(useIsBurgerMenuVisible)(withChild(CloseMenuIcon)),
+      ifToggledOff(useIsBurgerMenuVisible)(withChild(OpenMenuIcon)),
+      asMobileOnly,
+    ),
     Wrapper: asToken(
       replaceWith(Div),
       asMobileOnly,
-      addClasses('flex'),
+      addClasses('flex text-white'),
     ),
   }),
 );
@@ -61,6 +72,7 @@ const $withBoldAccordionTitleStyles = withDesign({
   OuterWrapper: withDesign({
     Title: withDesign({
       Label: asBold,
+      Icon: asAccordionIconSvg,
     }),
   }),
 });

@@ -25,6 +25,7 @@ import {
   asAccordionBorder,
   asAccordionFocus,
   asNonExpandingAccordion,
+  asAccordionIconSvg,
 } from '@bodiless/accordion';
 import {
   asHeader2,
@@ -42,6 +43,7 @@ const asSingleAccordionDefaultStyle = asToken(
         addClasses('p-3'),
         asHeader2,
       ),
+      Icon: asAccordionIconSvg,
     }),
     Body: withDesign({
       Wrapper: asToken(

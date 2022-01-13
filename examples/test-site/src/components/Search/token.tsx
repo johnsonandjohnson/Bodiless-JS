@@ -12,25 +12,19 @@
  * limitations under the License.
  */
 
-import React from 'react';
 import {
-  I,
   addClasses,
   withDesign,
   addClassesIf,
   asToken,
   Design,
 } from '@bodiless/fclasses';
-import { withChild } from '@bodiless/core';
+import { withSearchIconSvg, withSearchToggleIconSvg } from '@bodiless/search';
 import { asPageContainer, asDesktopOnly, asTextWhite } from '../Elements.token';
 
-const Icon = asToken(
-  addClasses('material-icons cursor-pointer align-middle bg-white text-gray-500'),
-)(I);
-
-const withIcon = (icon: string) => withChild(
-  () => <Icon>{icon}</Icon>,
-  'Icon',
+const withSearchButtonIcon = asToken(
+  addClasses('bg-white text-gray-500'),
+  withSearchIconSvg,
 );
 
 const isEven = (item: number) => item % 2 === 0;
@@ -71,7 +65,7 @@ const searchDesign: Design = {
     withSearchInputOutline,
     addClasses('px-2 align-middle text-1xl'),
   ),
-  SearchButton: withIcon('search'),
+  SearchButton: withSearchButtonIcon,
   Suggestions: withSuggestionsDefaultDesign,
 };
 
@@ -82,9 +76,12 @@ const responsiveSearchDesign = {
     withSearchInputOutline,
     addClasses('align-middle w-full p-2'),
   ),
-  ToggleButton: asTextWhite,
+  ToggleButton: asToken(
+    asTextWhite,
+    withSearchToggleIconSvg,
+  ),
   SearchButton: asToken(
-    withIcon('search'),
+    withSearchButtonIcon,
     addClasses('flex absolute right-0 self-center mr-4'),
   ),
   Suggestions: asToken(
@@ -101,7 +98,7 @@ const searchInlineDesign = {
     withSearchInputOutline,
     addClasses('px-2 align-middle text-1xl'),
   ),
-  SearchButton: withIcon('search'),
+  SearchButton: withSearchButtonIcon,
   Suggestions: withSuggestionsDefaultDesign,
 };
 

@@ -28,6 +28,7 @@ import {
   ifToggledOn,
   withChild,
   ifReadOnly,
+  ifToggledOff,
 } from '@bodiless/core';
 import {
   useIsCarouselItemActive,
@@ -45,6 +46,8 @@ import { LandscapeImage, LandscapeLinkableImage } from '../Image';
 import Card from '../Card';
 import { asCardHorizontal, asCardDefaultStyle } from '../Card/token';
 import { Reponsive16By9YouTube } from '../YouTube';
+import PlayIcon from './icons/Play';
+import PauseIcon from './icons/Pause';
 
 const withImageSlide = withDesign({
   Slider: withDesign({
@@ -137,16 +140,11 @@ const withAutoPlayButtonStyles = asToken(
       addClasses('ml-2 rounded-full p-1 block w-8'),
       addClasses('leading-none text-1xl bg-blue-700 text-white'),
       addClasses('disabled:opacity-50 disabled:cursor-not-allowed'),
-      addClasses('material-icons'),
       withChild(Fragment),
       withDesign({
         Child: asToken(
-          addPropsIf(useCarouselIsPlaying)({
-            children: 'pause',
-          }),
-          addPropsIf(negate(useCarouselIsPlaying))({
-            children: 'play_arrow',
-          }),
+          ifToggledOn(useCarouselIsPlaying)(withChild(PauseIcon)),
+          ifToggledOff(useCarouselIsPlaying)(withChild(PlayIcon)),
         ),
       }),
     ),

@@ -13,7 +13,7 @@
  */
 
 import React, {
-  FC, ComponentType, useState, HTMLProps,
+  FC, ComponentType, useState, HTMLProps, createContext, useContext,
 } from 'react';
 import {
   I,
@@ -55,6 +55,17 @@ const responsiveSearchComponents: ResponsiveSearchComponents = {
   ToggleIcon: addClasses('material-icons cursor-pointer align-middle')(I),
 };
 
+type ToggleButtonContext = {
+  isExpanded: boolean,
+  setExpanded: Function,
+};
+const searchToggleButtonContext = createContext<ToggleButtonContext>({
+  isExpanded: false,
+  setExpanded: () => false,
+});
+export const useSearchToggleButtonContext = () => useContext(searchToggleButtonContext);
+export const isSearchToggleButtonExpanded = () => useSearchToggleButtonContext().isExpanded;
+
 const ResponsiveSearchBoxBase: FC<ResponsiveSearchProps> = (props) => {
   const [isExpanded, setExpanded] = useState<boolean>(false);
 
@@ -63,15 +74,17 @@ const ResponsiveSearchBoxBase: FC<ResponsiveSearchProps> = (props) => {
 
   return (
     <Wrapper>
-      <ToggleButton onClick={() => setExpanded(!isExpanded)}>
-        <ToggleIcon>{ isExpanded ? 'close' : 'search' }</ToggleIcon>
-      </ToggleButton>
+      <searchToggleButtonContext.Provider value={{ isExpanded, setExpanded }}>
+        <ToggleButton onClick={() => setExpanded(!isExpanded)}>
+          <ToggleIcon>{ isExpanded ? 'close' : 'search' }</ToggleIcon>
+        </ToggleButton>
 
-      <SearchBox
-        {...props}
-        style={{ display: isExpanded ? 'flex' : 'none' }}
-        onSubmit={() => setExpanded(false)}
-      />
+        <SearchBox
+          {...props}
+          style={{ display: isExpanded ? 'flex' : 'none' }}
+          onSubmit={() => setExpanded(false)}
+        />
+      </searchToggleButtonContext.Provider>
     </Wrapper>
   );
 };
