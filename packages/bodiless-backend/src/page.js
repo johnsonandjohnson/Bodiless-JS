@@ -265,6 +265,9 @@ class Page {
       originPath.replace('/', '\\\\') :
       originPath;
     const destinationPath = destination.replace(/\/$/, '');
+    const destinationPathCrossPlatform = os.platform() === 'win32' ?
+      destinationPath.replace('/', '\\') :
+      destinationPath;
 
     const originStaticPath = path.join(backendStaticPath, target, originPath);
     const destinationStaticPath = path.join(
@@ -321,7 +324,7 @@ class Page {
                 const options = {
                   files: fileToBeUpdated,
                   from: new RegExp(originPathCrossPlatform, 'g'),
-                  to: destinationPath,
+                  to: destinationPathCrossPlatform,
                 };
                 return Page.updateFileContent(options);
               }),
