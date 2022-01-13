@@ -1,6 +1,9 @@
 {
   "Components": {
-    "Search.md": "./doc/Search.md",
+    "Search": {
+      "README.md": "./doc/Search.md",
+      "Configure.md": "./doc/ConfigureSearch.md"
+    },
     "assets": {
       "search.jpg": "./doc/assets/search.jpg"
     }

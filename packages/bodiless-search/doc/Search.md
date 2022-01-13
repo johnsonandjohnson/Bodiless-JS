@@ -3,7 +3,7 @@
 The BodilessJS Search Component provides a search box which allows users to search for site content.
 It also provides search results components to display results on a designated search page.
 
-![Search Box](./assets/search.jpg)
+![Search Box](../assets/search.jpg)
 
 ?> **Note:** The BodilessJS Search Component requires search index to be built prior to searching.
 The Search Component is intended for use in a static environment (i.e., not an edit environment). In
@@ -28,52 +28,28 @@ of searchable content — while performing the search behind the scenes on clien
 index will be quicker than using a server-side service, as there is no network overhead, and will
 remain available and usable even without a network connection.
 
-### 1. Installation
+### 1. Install Bodiless Search
 
-Install the Bodiless search package:
+Install the Bodiless Search package:
 
 ```shell-session
 npm install @bodiless/search
 ```
 
-### 2. Set Up Search Configuration in Env File
+### 2. Configure Search
 
-To enable the search on a site, the site builder needs to add search
-configurations inside the environment setting file. 
+To enable search on your site, you'll need to configure a combination of environment variables and
+JSON properties across two files:
 
-#### Configuration
+01. [Configure `.env.site`](Configure#configure-envsite).
+01. [Configure `search.config.json`](Configure#configure-searchconfigjson).
 
-Set the following configuration options in `.env.site` based on search
-requirement.
-
-```
-# .env.site
-
-## This is the URL path of the search results landing page. 
-## When you create this page, you must use this same page path when you
-## perform step 6 - 
-## "Add search results pages..."
-BODILESS_SEARCH_PAGE='search'
-
-## Set in-browser search index expiration time period in seconds. 
-## By default, the index expires in one hour (86400 seconds) from time of load.
-BODILESS_SEARCH_EXPIRES='86400'
-
-## Where index file is located, used by index generating script. 
-## ./public is the recommended path where gatsby builds the static site.  
-BODILESS_SEARCH_SOURCE_PATH='./public'
-
-## CSS selectors used to specify the content elements for indexing. 
-## This allows you to define class selectors to exclude indexing that content. 
-## Recommend adding menus or other global items in header and footer.
-BODILESS_SEARCH_INDEX_SELECTOR='body *'
-
-## CSS selectors used to exclude content element from indexing.
-BODILESS_SEARCH_INDEX_EXCLUDE_SELECTOR='script,noscript,style,.bg-gray-200,h1'
-
-## Number of charactors displayed in preview section.
-BODILESS_SEARCH_INDEX_PREVIEW_LENGTH='300'
-```
+?> **Note:** For backward-compatibility, search configured _solely_ in your `.env.site` file is
+still supported. However, some newer features aren't configurable with environment variables (e.g.,
+exclude a path/page), and must be configured via the `search.config.json` file.  
+<br>
+For more information on this, see [Backward-Compatibility
+Support](Configure#backward-compatibility-support).
 
 ### 3. Support Search Indexing
 
