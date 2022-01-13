@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2022 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,9 +11,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import ResponsiveSearchBox from './components/ResponsiveSearchBox';
 
-export { SearchBox, SearchResult } from './components/Search';
-export { withSearchResult, useSearchResultContext } from './components/SearchContextProvider';
-export { ResponsiveSearchBox };
-export * from './components/Search.token';
+import React from 'react';
+import { stylable } from '@bodiless/fclasses';
+
+// Source: https://fonts.google.com/icons?selected=Material%20Icons%3Aremove%3A
+const Remove = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    height="24px"
+    viewBox="0 0 24 24"
+    width="24px"
+    fill="#FFFFFF"
+    {...props}
+  >
+    <path d="M0 0h24v24H0z" fill="none" />
+    <path d="M19 13H5v-2h14v2z" />
+  </svg>
+);
+
+const RemoveIcon = stylable(Remove);
+
+export default RemoveIcon;

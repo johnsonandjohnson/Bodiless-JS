@@ -35,17 +35,38 @@ const loadConfigs = () => {
 describe('gatsby-plugin-google-fonts', () => {
   const googleFontsPluginName = 'gatsby-plugin-google-fonts';
   let flattenedPlugins = loadConfigs();
+
   describe('by default', () => {
+    it('should not be in the list of plugins', () => {
+      expect(flattenedPlugins.includes(googleFontsPluginName)).toBe(false);
+    });
+  });
+
+  describe('when in the edit site', () => {
+    let env: any;
+
+    beforeAll(() => {
+      env = process.env.NODE_ENV;
+      process.env.NODE_ENV = 'development';
+      jest.resetModules();
+      flattenedPlugins = loadConfigs();
+    });
+
+    afterAll(() => {
+      process.env.NODE_ENV = env;
+    });
+
     it('should be in the list of plugins', () => {
       expect(flattenedPlugins.includes(googleFontsPluginName)).toBe(true);
     });
   });
-  describe('when toggle is disabled', () => {
+
+  describe('when toggle is enabled', () => {
     let env: any;
 
     beforeAll(() => {
       env = process.env.GOOGLE_FONTS_ENABLED;
-      process.env.GOOGLE_FONTS_ENABLED = '0';
+      process.env.GOOGLE_FONTS_ENABLED = '1';
       jest.resetModules();
       flattenedPlugins = loadConfigs();
     });
@@ -54,8 +75,8 @@ describe('gatsby-plugin-google-fonts', () => {
       process.env.GOOGLE_FONTS_ENABLED = env;
     });
 
-    it('should not be in the list of plugins', () => {
-      expect(flattenedPlugins.includes(googleFontsPluginName)).toBe(false);
+    it('should be in the list of plugins', () => {
+      expect(flattenedPlugins.includes(googleFontsPluginName)).toBe(true);
     });
   });
 });

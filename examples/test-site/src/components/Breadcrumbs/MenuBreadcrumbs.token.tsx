@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ReactNode } from 'react';
+import React from 'react';
 import {
   WithNodeKeyProps,
   withSidecarNodes,
@@ -37,23 +37,19 @@ import {
   addProps,
   withDesign,
   replaceWith,
-  Span,
   remove,
 } from '@bodiless/fclasses';
 import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
-
 import {
   asBold,
   asEditableLink,
   asLink,
 } from '../Elements.token';
+import HomeIcon from './icons/Home';
 
 const BREADCRUMB_ARIA_LABEL = 'Breadcrumb';
 
-const HomeBreadcrumbIcon = asToken(
-  addProps({ children: 'home' as ReactNode }),
-  addClasses('material-icons'),
-)(Span);
+const HomeBreadcrumbIcon = addClasses('fill-current')(HomeIcon);
 
 const withStartingTrailIcon = (
   nodeKeys?: WithNodeKeyProps,
