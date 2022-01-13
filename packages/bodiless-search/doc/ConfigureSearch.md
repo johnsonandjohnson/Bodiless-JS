@@ -223,8 +223,22 @@ The following properties are applicable for each language:
 - `searchPath`: The URL of the search page.
   - E.g., `"fr/search"`.
 
-?> **Note:** For properties that expect path values (e.g., `sourcePaths`), you may use glob patterns
-to define your paths (e.g., `"api/**"`).
+<div class="warn">
+<strong>Note:</strong> For properties that expect path values, you may use glob patterns to define
+your paths.
+
+For example:
+
+```js
+"excludePaths": [
+  "foo/**",               // /foo/, as a parent page, and all its children are excluded.
+  "bar/index.html",       // Only the specific page is excluded.
+  "baz/qux/index.*",      // Only the specific page is excluded.
+  "quuz/!(index.html)/**" // All child pages of /quuz/ -- but not /quuz/ -- are excluded.
+]
+```
+
+</div>
 
 Example:
 
@@ -306,6 +320,23 @@ BODILESS_SEARCH_INDEX_SELECTOR='body *'
 BODILESS_SEARCH_INDEX_EXCLUDE_SELECTOR='script,noscript,style,.bg-gray-200'
 BODILESS_SEARCH_EXCLUDE_PATH='404/*|404.*'
 ```
+
+<div class="warn">
+<strong>Note:</strong> For properties that expect path values, you may use glob patterns to define
+your paths.
+
+For example:
+
+```shell
+BODILESS_SEARCH_EXCLUDE_PATH='foo/**|bar/index.html|baz/qux/index.*|quuz/!(index.*)/**'
+```
+
+- `foo/**`: `/foo/`, as a parent page, and all its children are excluded.
+- `bar/index.html`: Only the specific page is excluded.
+- `baz/qux/index.*`: Only the specific page is excluded.
+- `quuz/!(index.*)/**`: All child pages of `/quuz/` — but not `/quuz/` — are excluded.
+
+</div>
 
 ?> **Note:** If [`BODILESS_SEARCH_CONFIG`](#bodiless_search_config) is defined, and the associated
 JSON file is configured (e.g., `search.config.json`), that configuration will override the
