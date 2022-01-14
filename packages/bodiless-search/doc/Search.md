@@ -5,6 +5,9 @@ It also provides search results components to display results on a designated se
 
 ![Search Box](../assets/search.jpg)
 
+Multilingual search is supported. When a user is browsing your site under a given language, then
+search only returns results for that language.
+
 ?> **Note:** The BodilessJS Search Component requires search index to be built prior to searching.
 The Search Component is intended for use in a static environment (i.e., not an edit environment). In
 the edit environment, search may work locally but the search index may be out of date. For example,
@@ -80,14 +83,20 @@ Make the following changes (Steps 3a, 3b, 3c) in the `scripts` section of `packa
 #### Usage of Building Search Index
 
 To manually run and build the search index, you can do the following command; otherwise, it will be
-automatically created every time `npm run build` is executed (_see step 3c above_):
+automatically created every time `npm run build` is executed (_see Step 3c above_):
 
 ```shell-session
 npm run search-index
 ```
 
-This will create the search index under path specified by `BODILESS_SEARCH_INDEX_PATH` from
-configuration.
+This will create the search index under the path specified by
+[`languages[x].indexFilePath`](Configure#languages) in your
+[`search.config.json`](Configure#configure-searchconfigjson) file (where `x` is the index of a
+language in the `languages` array).
+
+?> **Note:** If you're [only using `.env.site`](Configure#backward-compatibility-support) for
+configuring search, then this will create the search index under the path specified by the
+`BODILESS_SEARCH_INDEX_PATH` environment variable.
 
 ### 4. Create Search HOCs
 
@@ -241,11 +250,11 @@ const SearchPage = (props: any) => (
   const defaultResultEmptyMessage = 'No content matches your request, please enter new keywords.';
   ```
 
-</div>
+  These can be overwritten by specifying your own string. When placing the Search Result Component
+  and strings, utilize the count token (`%count%`), which substitutes the value of search results
+  found.
 
-?> **Note:** These can be overwritten by specifying your own string. When placing the Search Result
-Component and strings, utilize the count token (`%count%`), which substitutes the value of search
-results found.
+</div>
 
 ?> **Note:** For a complete Search Component implementation example, please see: [Test-Site/Search
 Component](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/test-site/src/components/Search/index.tsx).
@@ -264,17 +273,27 @@ To clear the search index cache:
 
 ### Define What is Indexed
 
-Indexing on your site is defined by the `BODILESS_SEARCH_INDEX_SELECTOR` environment variable. It is
-recommended that you set it to the body of your content or the body of your articles. It accepts
-classes, IDs, or other selectors; and is comma-separated. If you want to index all items in the body
-of your page use "`body *`", and all content within the body will be indexed.
+Indexing on your site is defined by the [`contentSelectors`](Configure#contentselectors) property in
+your [`search.config.json`](Configure#configure-searchconfigjson) file. It is recommended that you
+set it to the body of your content or the body of your articles. It accepts classes, IDs, or other
+selectors; and is comma-separated. If you want to index all items in the body of your page use
+"`body *`", and all content within the body will be indexed.
+
+?> **Note:** If you're [only using `.env.site`](Configure#backward-compatibility-support) for
+configuring search, then indexing on your site is defined by the `BODILESS_SEARCH_INDEX_SELECTOR`
+environment variable.
 
 For example, if you want to index article content, you can use "`.article-content *`" to target
 article content specifically.
 
-In addition, you can exclude items from search via the environment variable
-`BODILESS_SEARCH_INDEX_EXCLUDE_SELECTOR`. By default, we suggest adding `script`, `noscript`, and
-`style`, so they aren't indexed.
+In addition, you can exclude items from search via the
+[`contentExcluders`](Configure#contentexcluders) property in your
+[`search.config.json`](Configure#configure-searchconfigjson) file. By default, we suggest adding
+`script`, `noscript`, and `style`, so they aren't indexed.
+
+?> **Note:** If you're [only using `.env.site`](Configure#backward-compatibility-support) for
+configuring search, then excluded items from search are defined by the
+`BODILESS_SEARCH_INDEX_EXCLUDE_SELECTOR` environment variable.
 
 #### Add a `no-search` Class
 
