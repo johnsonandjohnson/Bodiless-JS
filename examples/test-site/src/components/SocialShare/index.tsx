@@ -31,10 +31,10 @@ import asSimpleSocialShare, {
   asOrangeSocialShare,
   DropZoneWrapper,
   StyledIcon,
+  WhiteStyledIcon,
   StyledLabel,
   LogoWrapper,
   Logo,
-  WhiteIcon,
   LogoNoBackground,
   DropZoneDesign,
 } from './token';
@@ -57,14 +57,14 @@ type ProviderProps = {
   onclick: (event: MouseEvent) => void,
 };
 
-const Icon = (icon: string): JSX.Element => (
+const Icon = (): JSX.Element => (
   <StyledLabel>
-    <WhiteIcon>{icon}</WhiteIcon>
+    <WhiteStyledIcon />
   </StyledLabel>
 );
-const IconWithLabel = (icon: string, label?: string): JSX.Element => (
+const IconWithLabel = (label?: string): JSX.Element => (
   <StyledLabel>
-    <StyledIcon>{icon}</StyledIcon>
+    <StyledIcon />
     {label}
   </StyledLabel>
 );
@@ -247,13 +247,13 @@ const providersEmailOnly: SocialShareProvider[] = [
 const SimpleSocialShare = asToken(asSimpleSocialShare)(SocialShareClean);
 const CustomizedSocialShare = asToken(asOrangeSocialShare)(SocialShareClean);
 const IconOnlySocialShare = () => (
-  <CustomizedSocialShare providers={providersCustomized} buttonContent={Icon('share')} />
+  <CustomizedSocialShare providers={providersCustomized} buttonContent={Icon()} />
 );
 const EmailOnlySocialShare = () => (
-  <SimpleSocialShare providers={providersEmailOnly} buttonContent={IconWithLabel('share', 'Email Share')} />
+  <SimpleSocialShare providers={providersEmailOnly} buttonContent={IconWithLabel('Email Share')} />
 );
 export default () => (
-  <SimpleSocialShare providers={providers} buttonContent={IconWithLabel('share', 'Share')} />
+  <SimpleSocialShare providers={providers} buttonContent={IconWithLabel('Share')} />
 );
 export { IconOnlySocialShare, EmailOnlySocialShare };
 

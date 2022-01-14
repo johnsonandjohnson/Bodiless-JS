@@ -1,10 +1,11 @@
 {
   "name": "@bodiless/accessibility",
-  "version": "0.3.1",
+  "version": "0.3.5",
   "description": "Accessibility tools for bodiless",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
   "main": "./index.js",
+  "sideEffects": false,
   "bin": {
     "pa11y-audit": "bin/accessibility"
   },

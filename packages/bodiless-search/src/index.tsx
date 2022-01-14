@@ -16,3 +16,4 @@ import ResponsiveSearchBox from './components/ResponsiveSearchBox';
 export { SearchBox, SearchResult } from './components/Search';
 export { withSearchResult, useSearchResultContext } from './components/SearchContextProvider';
 export { ResponsiveSearchBox };
+export * from './components/Search.token';

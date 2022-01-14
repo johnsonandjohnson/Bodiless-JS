@@ -1,11 +1,12 @@
 {
   "name": "@bodiless/filtering",
-  "version": "0.3.1",
+  "version": "0.3.5",
   "description": "Provides a control to filter content by group/tag.",
   "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
   "homepage": "",
   "license": "Apache-2.0",
   "main": "lib/index.js",
+  "sideEffects": false,
   "typings": "lib/index.d.ts",
   "directories": {
     "lib": "lib",
@@ -30,11 +31,11 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/accordion": "^0.3.1",
-    "@bodiless/components": "^0.3.1",
-    "@bodiless/core": "^0.3.1",
-    "@bodiless/fclasses": "^0.3.1",
-    "@bodiless/organisms": "^0.3.1",
+    "@bodiless/accordion": "^0.3.5",
+    "@bodiless/components": "^0.3.5",
+    "@bodiless/core": "^0.3.5",
+    "@bodiless/fclasses": "^0.3.5",
+    "@bodiless/organisms": "^0.3.5",
     "lodash": "^4.17.19",
     "uuid": "^3.3.2"
   },

@@ -13,10 +13,9 @@
  */
 
 import React from 'react';
+import html2canvas from 'html2canvas';
 import BackendClient from './BackendClient';
 import { COMPONENTS_PREVIEW_BASE_URL } from './config';
-
-const html2canvas = typeof window !== 'undefined' ? require('html2canvas') : undefined;
 
 const BASE_URL_NO_PREFIX_SLASH = COMPONENTS_PREVIEW_BASE_URL.split('/').filter(Boolean).join('/');
 

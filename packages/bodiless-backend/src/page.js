@@ -406,6 +406,17 @@ class Page {
     });
     return readPromise;
   }
+
+  removePageAssets(path) {
+    return new Promise((resolve, reject) => {
+      fse.remove(path, err => {
+        if (err) {
+          reject(err);
+        }
+        resolve();
+      });
+    });
+  }
 }
 
 module.exports = Page;

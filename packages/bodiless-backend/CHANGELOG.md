@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.5](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v0.3.4...v0.3.5) (2021-12-29)
+
+**Note:** Version bump only for package @bodiless/backend
+
+
+
+
+
+## [0.3.4](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v0.3.3...v0.3.4) (2021-12-16)
+
+**Note:** Version bump only for package @bodiless/backend
+
+
+
+
+
+## [0.3.3](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v0.3.2...v0.3.3) (2021-12-15)
+
+**Note:** Version bump only for package @bodiless/backend
+
+
+
+
+
+## [0.3.2](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v0.3.1...v0.3.2) (2021-12-13)
+
+
+### Features
+
+* **gatsby-theme-bodiless:** Implements move page functionality ([#1054](https://github.com/johnsonandjohnson/Bodiless-JS/issues/1054)) ([#1252](https://github.com/johnsonandjohnson/Bodiless-JS/issues/1252)) ([1d2b9a0](https://github.com/johnsonandjohnson/Bodiless-JS/commit/1d2b9a092751f5de01153a7fb398cffbe9f8a63f))
+
+
+
+
+
 ## [0.3.1](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v0.3.0...v0.3.1) (2021-11-15)
 
 

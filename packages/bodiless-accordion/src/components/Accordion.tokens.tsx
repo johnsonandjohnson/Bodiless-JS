@@ -26,12 +26,19 @@ import {
 import {
   ifEditable,
   withExtendHandler,
+  withChild,
+  ifToggledOn,
 } from '@bodiless/core';
 import {
   isAccordionExpanded,
   isAccordionContracted,
   isAccordionFocusedOut,
 } from './AccordionContext';
+import AddIcon from '../icons/Add';
+import RemoveIcon from '../icons/Remove';
+
+const OpenAccordionIcon = addClasses('fill-current')(AddIcon);
+const CloseAccordionIcon = addClasses('fill-current')(RemoveIcon);
 
 /**
  * withDisableExpandOnClick stops accordion behavior on edit mode
@@ -65,6 +72,16 @@ const asAccordionIcon = asToken(
   addProps({ 'data-accordion-element': 'accordion-icon' }),
   addPropsIf(isAccordionContracted)({ 'aria-label': 'Expand Accordion' }),
   addPropsIf(isAccordionExpanded)({ 'aria-label': 'Collapse Accordion' }),
+);
+
+/**
+ * asAccordionIcon provides svg icon token for accordion title,
+ * base on asAccordionIcon
+ */
+const asAccordionIconSvg = asToken(
+  asAccordionIcon,
+  ifToggledOn(isAccordionExpanded)(withChild(CloseAccordionIcon)),
+  ifToggledOn(isAccordionContracted)(withChild(OpenAccordionIcon)),
 );
 
 /**
@@ -166,6 +183,7 @@ export {
   withDisableExpandOnClick,
   asAccordionDefaultExpanded,
   asAccordionIcon,
+  asAccordionIconSvg,
   asAccordionTitleWrapper,
   asAccordionLabel,
   asAccordionBodyWrapper,

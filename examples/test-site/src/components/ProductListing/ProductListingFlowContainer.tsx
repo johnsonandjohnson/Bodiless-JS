@@ -13,17 +13,17 @@
  */
 import { asToken, addProps } from '@bodiless/fclasses';
 // @ts-ignore Could not find a declaration file
-import resolveConfig from 'tailwindcss/resolveConfig';
+import resolvedConfigs from
+  '@bodiless/gatsby-theme-bodiless/src/dist/tailwindcss/resolveConfig';
 import { getSnapFrom, withTailwindClasses } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withProductVariations from './withProductVariations';
 import { asFilterableProductContainer } from '../ProductCard/token';
 import { asFlowContainerWithMargins, asFlowContainerFullWidth } from '../FlowContainer/token';
 // @ts-ignore Could not find a declaration file
-import tailWindConfig from '../../../tailwind.config';
 
 const snapData = getSnapFrom(
-  withTailwindClasses(resolveConfig(tailWindConfig))('w-1/3'),
+  withTailwindClasses(resolvedConfigs)('w-1/3'),
 );
 
 const withProductStrictSnapSize = addProps({ snapData });

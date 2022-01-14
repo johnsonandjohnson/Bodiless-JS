@@ -15,7 +15,6 @@
 import React, { ComponentType, FC } from 'react';
 import { withPrependChild } from '@bodiless/core';
 import {
-  A,
   Div,
   Span,
   asToken,
@@ -33,7 +32,6 @@ export type LibraryItemIndicatorComponentsType = {
   Wrapper: ComponentType<any>,
   Icon: ComponentType<any>,
   Label: ComponentType<any>,
-  InfoIcon: ComponentType<any>,
 };
 
 type LibraryIndicatorProps = DesignableComponentsProps<LibraryItemIndicatorComponentsType>;
@@ -42,20 +40,18 @@ const LibraryItemIndicatorComponents: LibraryItemIndicatorComponentsType = {
   Wrapper: Div,
   Icon: Span,
   Label: Span,
-  InfoIcon: A,
 };
 
 const LibraryIndicatorBase: FC<LibraryIndicatorProps> = ({ components: C, ...rest }) => (
   <C.Wrapper {...rest}>
     <C.Icon />
     <C.Label />
-    <C.InfoIcon />
   </C.Wrapper>
 );
 
 /**
  * Clean Library Item Indicator component.
- * It has Library `Icon`, `Label` and `InfoIcon` designable components.
+ * It has Library `Icon` and `Label` designable components.
  */
 export const LibraryItemIndicatorClean = designable(LibraryItemIndicatorComponents, 'LibraryItemIndicator')(LibraryIndicatorBase);
 
@@ -66,10 +62,6 @@ const asDefaultLibraryItemIndicator = withDesign({
     addProps({ children: 'account_balance' }),
   ),
   Label: addProps({ children: 'Library Item' }),
-  InfoIcon: asToken(
-    addClasses('material-icons bl-ml-3'),
-    addProps({ children: 'info', href: '/___docs/#/ContentEditorUserGuide/?id=content-library', target: '_blank' }),
-  ),
 });
 
 /**

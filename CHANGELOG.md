@@ -3,6 +3,66 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.4...v0.3.5) (2021-12-29)
+
+
+### Bug Fixes
+
+* **bodiless-oidc:** Lock oidc-client-ts dependency to v2.0.0-rc.2 ([#1318](https://github.com/johnsonandjohnson/bodiless-js/issues/1318)) ([91fb1d1](https://github.com/johnsonandjohnson/bodiless-js/commit/91fb1d16fe901a93d2fbdf4284a0f2114d0924dc))
+* **GTM:** nested GTM DataLayer ([#1288](https://github.com/johnsonandjohnson/bodiless-js/issues/1288)) ([683e5a8](https://github.com/johnsonandjohnson/bodiless-js/commit/683e5a8ec130ee63abe6b4c5af7df6fe0be10b31))
+
+
+### Features
+
+* **component:** Redirect via clientside ([#1272](https://github.com/johnsonandjohnson/bodiless-js/issues/1272)) ([0aa63e4](https://github.com/johnsonandjohnson/bodiless-js/commit/0aa63e4c292dda4ec60252c36885b237feb13cf5))
+* **filtering:** Enable optional hiding of filterable item when no ta… ([#1231](https://github.com/johnsonandjohnson/bodiless-js/issues/1231)) ([c037111](https://github.com/johnsonandjohnson/bodiless-js/commit/c037111800eddf96565494a0abb2adfa3e0c0952))
+
+
+
+
+
+## [0.3.4](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.3...v0.3.4) (2021-12-16)
+
+
+### Bug Fixes
+
+* **unlink:** Fix warning when unlinking library ([#1306](https://github.com/johnsonandjohnson/bodiless-js/issues/1306)) ([24ffecd](https://github.com/johnsonandjohnson/bodiless-js/commit/24ffecd2e2b91d79b2e90c06a499e6f9f17b5c7f))
+
+
+
+
+
+## [0.3.3](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.2...v0.3.3) (2021-12-15)
+
+
+### Bug Fixes
+
+* **adminui:** Fix admin ui issue ([#1307](https://github.com/johnsonandjohnson/bodiless-js/issues/1307)) ([df9df32](https://github.com/johnsonandjohnson/bodiless-js/commit/df9df323b7561c255db4899828a9173e8ca5b35a))
+* **bodiless-components:** Allow digits in anchor id ([#1291](https://github.com/johnsonandjohnson/bodiless-js/issues/1291)) ([12d7a67](https://github.com/johnsonandjohnson/bodiless-js/commit/12d7a674898f07a5c3fa0f673d07b7b7af7001da))
+
+
+
+
+
+## [0.3.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v0.3.2) (2021-12-13)
+
+
+### Bug Fixes
+
+* **informed:** Unlock "informed" package version, fix related issues ([#1212](https://github.com/johnsonandjohnson/bodiless-js/issues/1212)) ([7742a3f](https://github.com/johnsonandjohnson/bodiless-js/commit/7742a3ff614b0c58a35b5c028852e74645266591))
+
+
+### Features
+
+* Add tree shaking support to all browser packages ([#1251](https://github.com/johnsonandjohnson/bodiless-js/issues/1251)) ([0c73113](https://github.com/johnsonandjohnson/bodiless-js/commit/0c73113c7c2d0c9dcc2dd8be922048173b1e9138)), closes [#1254](https://github.com/johnsonandjohnson/bodiless-js/issues/1254) [#1244](https://github.com/johnsonandjohnson/bodiless-js/issues/1244) [#1245](https://github.com/johnsonandjohnson/bodiless-js/issues/1245) [#1261](https://github.com/johnsonandjohnson/bodiless-js/issues/1261) [#1283](https://github.com/johnsonandjohnson/bodiless-js/issues/1283)
+* **gatsby-theme-bodiless:** Implements move page functionality ([#1054](https://github.com/johnsonandjohnson/bodiless-js/issues/1054)) ([#1252](https://github.com/johnsonandjohnson/bodiless-js/issues/1252)) ([1d2b9a0](https://github.com/johnsonandjohnson/bodiless-js/commit/1d2b9a092751f5de01153a7fb398cffbe9f8a63f))
+* **layouts, layouts-ui:** UX Identification of Library Components ([#1227](https://github.com/johnsonandjohnson/bodiless-js/issues/1227)) ([d44ef46](https://github.com/johnsonandjohnson/bodiless-js/commit/d44ef46706060fde4486441b5a715d5978113fb4)), closes [#1083](https://github.com/johnsonandjohnson/bodiless-js/issues/1083)
+* **library:** Unlink Library Item ([#1247](https://github.com/johnsonandjohnson/bodiless-js/issues/1247)) ([d3cb88c](https://github.com/johnsonandjohnson/bodiless-js/commit/d3cb88cfd0bbe240d6a75ee69922f4f7913f3382))
+
+
+
+
+
 ## [0.3.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.0...v0.3.1) (2021-11-15)
 
 

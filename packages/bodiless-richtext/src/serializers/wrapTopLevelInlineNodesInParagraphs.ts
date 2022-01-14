@@ -13,7 +13,7 @@
  */
 
 import { jsx } from 'slate-hyperscript';
-import { Text } from 'slate';
+import { Text, Element } from 'slate';
 import type { Node as SlateNode } from 'slate';
 
 /**
@@ -31,7 +31,7 @@ const wrapTopLevelInlineNodesInParagraphs = (fragment: SlateNode[]) => {
   };
 
   fragment.forEach(node => {
-    if (Text.isText(node) || node.type === 'Link') {
+    if (Text.isText(node) || (node as Element).type === 'Link') {
       inlineNodes.push(node);
     } else {
       maybePushInlineNodeParagraph();

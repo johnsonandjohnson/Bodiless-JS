@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.4...v0.3.5) (2021-12-29)
+
+**Note:** Version bump only for package @bodiless/layouts
+
+
+
+
+
+## [0.3.4](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.3...v0.3.4) (2021-12-16)
+
+
+### Bug Fixes
+
+* **unlink:** Fix warning when unlinking library ([#1306](https://github.com/johnsonandjohnson/bodiless-js/issues/1306)) ([24ffecd](https://github.com/johnsonandjohnson/bodiless-js/commit/24ffecd2e2b91d79b2e90c06a499e6f9f17b5c7f))
+
+
+
+
+
+## [0.3.3](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.2...v0.3.3) (2021-12-15)
+
+**Note:** Version bump only for package @bodiless/layouts
+
+
+
+
+
+## [0.3.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v0.3.2) (2021-12-13)
+
+
+### Bug Fixes
+
+* **informed:** Unlock "informed" package version, fix related issues ([#1212](https://github.com/johnsonandjohnson/bodiless-js/issues/1212)) ([7742a3f](https://github.com/johnsonandjohnson/bodiless-js/commit/7742a3ff614b0c58a35b5c028852e74645266591))
+
+
+### Features
+
+* Add tree shaking support to all browser packages ([#1251](https://github.com/johnsonandjohnson/bodiless-js/issues/1251)) ([0c73113](https://github.com/johnsonandjohnson/bodiless-js/commit/0c73113c7c2d0c9dcc2dd8be922048173b1e9138)), closes [#1254](https://github.com/johnsonandjohnson/bodiless-js/issues/1254) [#1244](https://github.com/johnsonandjohnson/bodiless-js/issues/1244) [#1245](https://github.com/johnsonandjohnson/bodiless-js/issues/1245) [#1261](https://github.com/johnsonandjohnson/bodiless-js/issues/1261) [#1283](https://github.com/johnsonandjohnson/bodiless-js/issues/1283)
+* **layouts, layouts-ui:** UX Identification of Library Components ([#1227](https://github.com/johnsonandjohnson/bodiless-js/issues/1227)) ([d44ef46](https://github.com/johnsonandjohnson/bodiless-js/commit/d44ef46706060fde4486441b5a715d5978113fb4)), closes [#1083](https://github.com/johnsonandjohnson/bodiless-js/issues/1083)
+* **library:** Unlink Library Item ([#1247](https://github.com/johnsonandjohnson/bodiless-js/issues/1247)) ([d3cb88c](https://github.com/johnsonandjohnson/bodiless-js/commit/d3cb88cfd0bbe240d6a75ee69922f4f7913f3382))
+
+
+
+
+
 ## [0.3.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.0...v0.3.1) (2021-11-15)
 
 

@@ -28,6 +28,7 @@ import {
   asAccordionBorder,
   asAccordionFocus,
   asNonExpandingAccordion,
+  asAccordionIconSvg,
 } from './components/Accordion.tokens';
 import {
   asSingleAccordion,
@@ -53,4 +54,5 @@ export {
   asNonExpandingAccordion,
   asSingleAccordion,
   asTestableSingleAccordion,
+  asAccordionIconSvg,
 };
