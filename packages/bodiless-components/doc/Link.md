@@ -10,12 +10,11 @@ components — such as cards, menus, and images, to name a few.
 When you are able to add a link to a component, you will see an **Edit** button — depicted with a
 link icon — within its context menu; click on this button to open the _Link_ form.
 
-<!-- TODO: Update screenshot to capture new Aria field, and include "Edit" button. -->
 ![Link form](./assets/LinkForm.jpg ':size=50%')
 
 Using the _Link_ form, you can provide an existing URL to link to, or upload a file to link to.
 
-- To use an existing URL, enter it into the _URL_ field.
+- **URL:** To use an existing URL, enter it into the _URL_ field.
   - For _external_ links:
     - Use a fully formed URL (e.g., <https://example.com>).
   - For _internal_ links:
@@ -24,7 +23,11 @@ Using the _Link_ form, you can provide an existing URL to link to, or upload a f
     - Internal links that _don't_ begin with "./" will be auto-prefixed with "/" and be relative
       to the site root.
   - All links will have a trailing slash ("/") appended to them.
-- To upload a file, drag it into the _File Upload_ area, or click the area and select the file.
+- **Aria Label:** To improve the screen reader experience, provide an aria label for the link.
+  - An aria label entered here will override a programmatically-generated one.
+    - This is notable in the event that an auto-generated aria label proves insufficient.
+- **File Upload:** To upload a file, drag it into the _File Upload_ area, or click the area and
+  select the file.
   - If successful, you will see a confirmation message and the _URL_ field will be auto-filled
     with the relative path to the uploaded file.  
     ![File Upload Done](./assets/FileUploadDone.jpg ':size=50%')
@@ -39,6 +42,7 @@ To set links used within components:
     ![Linkable Image context menu with Link icon and "Edit" label](./assets/EditLinkIconInImageContextMenu.jpg ':size=50%')
 01. Using the [_Link_ form](#the-link-form), provide an existing URL to link to, or upload a file to
     link to.
+    - If desired, provide an aria label.
 01. Click the checkmark to apply your link.
 
 ### Add a Link in the Rich Text Editor
@@ -53,7 +57,8 @@ To add a link to text in the [Rich Text Editor](./RichText) (e.g., in the body c
     (depicted with a link icon).  
     ![Rich Text context menu with Link icon and "Edit" label](./assets/RichTextLinkEditButtonInContextMenu.jpg ':size=25%')
 01. Using the [_Link_ form](#the-link-form), provide an existing URL to link to, or upload a file to
-    link to.  
+    link to.
+    - If desired, provide an aria label.
 01. Click the checkmark to apply your link.
 
 ---
