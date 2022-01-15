@@ -89,6 +89,13 @@ const movePage = async ({ origin, destination, client } : any) => {
       } catch (e: any) {
         return Promise.reject(new Error(e.message));
       }
+      if (deleteResult.response){
+        try {
+          await handle(client.deleteStaticAssets(origin));
+        } catch (e: any) {
+          return Promise.reject(new Error(e.message));
+        }
+      }
     } else {
       try {
         deleteResult = await handle(client.removeFile(origin));
