@@ -108,11 +108,20 @@ const withDataLayerScript = (HelmetComponent: CT<BaseProps>) => (
     dataLayerData, dataLayerName, children, ...rest
   } = props;
 
+  var addpriority = '';
+  var datapriority = '2';
+
+  if (dataLayerData && dataLayerData.pageView && dataLayerData.pageView.event && dataLayerData.pageView.event === 'page_view') {
+    addpriority =  'data-gtm-priority';
+    datapriority = '1';
+  }
+ 
+  // For now trying both key and attribute -- probably only need attribute.
   return (
-    <HelmetComponent {...rest}>
-      {children}
-      <script data-cfasync="false">{generateDataLayer(dataLayerData, dataLayerName)}</script>
-    </HelmetComponent>
+     <HelmetComponent {...rest}>
+       {children}
+       <script data-cfasync="false" key={addpriority} data-gtm-priority={datapriority} >{generateDataLayer(dataLayerData, dataLayerName)}</script>
+     </HelmetComponent>
   );
 };
 
