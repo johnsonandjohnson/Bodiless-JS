@@ -23,6 +23,7 @@ const logger = new Logger('BACKEND');
 
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
+const IMG_ASSETS_PATH = '/images/pages';
 
 const getDirectories = (dir) =>
   fs
@@ -256,7 +257,7 @@ class Page {
   }
 
   static clonePageImgAssets(origin, destination, basePath) {
-    Page.clonePageAssets(origin, destination, basePath, '/images/pages');
+    Page.clonePageAssets(origin, destination, basePath, IMG_ASSETS_PATH);
   }
 
   static async clonePageAssets(origin, destination, basePath, target) {
@@ -321,10 +322,13 @@ class Page {
             await Promise.all(
               clonedPageFilesAtDestination.map(async (item) => {
                 const fileToBeUpdated = path.join(destinationPagePath, item);
+                // Make sure to not replace '/images/pages' part of the path
+                // .e.g if the source page path is '/images';
+                const originPathRegExp = new RegExp('(' + IMG_ASSETS_PATH + '.*' + ')' + originPathCrossPlatform, 'g');
                 const options = {
                   files: fileToBeUpdated,
-                  from: new RegExp(originPathCrossPlatform, 'g'),
-                  to: destinationPathCrossPlatform,
+                  from: originPathRegExp,
+                  to: (match) => match.replace(originPathRegExp, '$1' + destinationPathCrossPlatform),
                 };
                 return Page.updateFileContent(options);
               }),
