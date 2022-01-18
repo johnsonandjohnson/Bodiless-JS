@@ -23,7 +23,7 @@ const logger = new Logger('BACKEND');
 
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
-const IMG_ASSETS_PATH = '/images/pages';
+const IMG_ASSETS_PATH = `/images${path.sep}pages`;
 
 const getDirectories = (dir) =>
   fs
@@ -324,11 +324,12 @@ class Page {
                 const fileToBeUpdated = path.join(destinationPagePath, item);
                 // Make sure to not replace '/images/pages' part of the path
                 // .e.g if the source page path is '/images';
-                const originPathRegExp = new RegExp('(' + IMG_ASSETS_PATH + '.*' + ')' + originPathCrossPlatform, 'g');
+                const imgAssetsPathRegExp = IMG_ASSETS_PATH.replace('\\', '\\\\\\\\');
+                const originPathRegExp = new RegExp('(' + imgAssetsPathRegExp + '.*' + ')' + originPathCrossPlatform, 'g');
                 const options = {
                   files: fileToBeUpdated,
                   from: originPathRegExp,
-                  to: (match) => match.replace(originPathRegExp, '$1' + destinationPathCrossPlatform),
+                  to: match => match.replace(originPathRegExp, '$1' + destinationPathCrossPlatform),
                 };
                 return Page.updateFileContent(options);
               }),
