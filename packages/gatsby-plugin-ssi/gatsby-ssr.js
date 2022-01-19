@@ -28,7 +28,7 @@ exports.onPreRenderHTML = (
   { getHeadComponents, replaceHeadComponents },
   pluginOptions,
 ) => {
-  const { ssiEntities } = pluginOptions;
+  const { ssiEntities = {} } = pluginOptions;
   const SSIComponents = Object.keys(ssiEntities).reduce((accumulator, ssiEntityKey) => {
     if (ssiEntities[ssiEntityKey].pragma) {
       const SSIComponent = React.createElement(`ssi-element-${ssiEntityKey}`, { key: ssiEntityKey });
