@@ -108,16 +108,17 @@ const withDataLayerScript = (HelmetComponent: CT<BaseProps>) => (
     dataLayerData, dataLayerName, children, ...rest
   } = props;
 
-  return (dataLayerData && dataLayerData.pageView && dataLayerData.pageView.event && dataLayerData.pageView.event === 'page_view') ?
-     <HelmetComponent {...rest}>
-       {children}
-       <script data-cfasync="false" data-gtm-priority="true" >{generateDataLayer(dataLayerData, dataLayerName)}</script>
-     </HelmetComponent>
-     :
+  // Only render on clientside
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
+    return null;
+  }
+
+  return (
      <HelmetComponent {...rest}>
        {children}
        <script data-cfasync="false" >{generateDataLayer(dataLayerData, dataLayerName)}</script>
      </HelmetComponent>
+  );
 };
 
 const withDataLayerItem: (
