@@ -94,8 +94,8 @@ Example:
         }
       ],
       "excludePaths": [
-        "fr",
-        "404"
+        "fr/**",
+        "404/**"
       ],
       "indexFileName": "lunr.en.json",
       "indexUrlName": "",
@@ -109,7 +109,7 @@ Example:
         "public/fr"
       ],
       "excludePaths": [
-        "fr/404"
+        "404/**"
       ],
       "indexFileName": "lunr.fr.json",
       "indexUrlName": "",
@@ -209,11 +209,15 @@ The following properties are applicable for each language:
       (E.g., `{ "path": "dist", "exclude": ["api/**", "404*/**"] }`.)
       - `path` is a directory.
       - `exclude` is a set of paths — under the `path` directory — to exclude from indexing.
+        - Ensure that you are using proper glob patterns for these paths, or these exclusions may
+          not work as expected.
       - In the example above, the `dist` directory is being _included_; and paths matching
         `dist/api/**` and `dist/404*/**` are being _excluded_.
   - E.g., `["public", { "path": "dist", "exclude": ["api/**", "404*/**"] }]`.
 - `excludePaths`: The set of content directories to exclude from the language's search.
-  - E.g., `["fr", "404*/**"]`.
+  - Ensure that you are using proper glob patterns for these paths, or these exclusions may not work
+    as expected.
+  - E.g., `["fr/**", "404*/**"]`.
 - `indexFileName`: The name of the index file for the particular language.
   - This is used for both front-end and back-end search processes.
   - E.g., `"lunr.json"`.
@@ -226,6 +230,9 @@ The following properties are applicable for each language:
 <div class="warn">
 <strong>Note:</strong> For properties that expect path values, you may use glob patterns to define
 your paths.
+
+For properties defining exclusionary paths (i.e., `excludePath` and `exclude`), you **must** use
+glob patterns.
 
 For example:
 
@@ -259,8 +266,8 @@ Example:
         }
       ],
       "excludePaths": [
-        "fr",
-        "404"
+        "fr/**",
+        "404/**"
       ],
       "indexFileName": "lunr.en.json",
       "indexUrlName": "",
@@ -274,7 +281,7 @@ Example:
         "public/fr"
       ],
       "excludePaths": [
-        "fr/404"
+        "404/**"
       ],
       "indexFileName": "lunr.fr.json",
       "indexUrlName": "",
@@ -324,6 +331,9 @@ BODILESS_SEARCH_EXCLUDE_PATH='404/*|404.*'
 <div class="warn">
 <strong>Note:</strong> For properties that expect path values, you may use glob patterns to define
 your paths.
+
+For variables defining exclusionary paths (i.e., `BODILESS_SEARCH_EXCLUDE_PATH`), you **must** use
+glob patterns.
 
 For example:
 
