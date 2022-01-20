@@ -12,8 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
-import { ComponentType } from 'enzyme';
+import React, { FC, ComponentType } from 'react';
 import { withoutProps, asToken, HOC } from '@bodiless/fclasses';
 import { applyChameleonDesign, useChameleonContext } from './withChameleonContext';
 import { ChameleonProps } from './types';
@@ -33,7 +32,7 @@ import { ChameleonProps } from './types';
  *     Disabled: flow(replaceWith('span'), withoutProps('href'), withTitle('Disabled'))
  *   }),
  *   withChameleonContext('link-chameleon'),
- *   withChameleonComponenFormConrols,
+ *   withChameleonComponentFormControls,
  *   asBodilessLink('link')
  *   applyChameleon,
  * )('a');
