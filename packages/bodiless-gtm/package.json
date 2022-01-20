@@ -1,0 +1,42 @@
+{
+  "name": "@bodiless/gtm",
+  "version": "0.3.5",
+  "description": "Provides integration to support DataLayer in GTM",
+  "author": "Heidi Vanyo <hvanyo@its.jnj.com>",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "/lib",
+    "/doc",
+    "/bodiless.docs.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build:watch": "npm run build -- --watch",
+    "build:api-doc": "typedoc --out doc/api src",
+    "lint": "tslint ./src/**/*.ts?x",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
+    "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
+  },
+  "dependencies": {
+    "@bodiless/components": "^0.3.5",
+    "@bodiless/core": "^0.3.5",
+    "common-tags": "^1.8.0",    
+    "lodash": "^4.17.19",
+    "react-helmet": "^5.2.0"    
+  },
+  "devDependencies": {
+    "enzyme": "^3.9.0"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2"
+  }
+}
