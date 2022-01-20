@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /**
  * Copyright © 2020 Johnson & Johnson
  *
@@ -67,7 +68,10 @@ const TaggableFilterSelector = () => {
       </label>
       <div>
         <h2>Selected Tags</h2>
-        <p>{tags.map(t => t.name).join(' ')}&nbsp;</p>
+        <p>
+          {tags.map(t => t.name).join(' ')}
+          &nbsp;
+        </p>
       </div>
       <div className="pt-4">
         <h2>Filtered Components</h2>

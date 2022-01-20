@@ -78,6 +78,7 @@ describe('Disabled page', () => {
     });
     it('Highlights disabled links in edit mode', () => {
       let mockIsEdit: jest.SpyInstance;
+      // eslint-disable-next-line prefer-const
       mockIsEdit = jest.spyOn(PageEditContext.prototype, 'isEdit', 'get').mockReturnValue(true);
       const wrapper1 = mount(<PageLink1 />);
       expect(wrapper1.render().hasClass('bl-link-disabled')).toBeTruthy();

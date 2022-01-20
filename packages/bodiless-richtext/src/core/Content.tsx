@@ -79,21 +79,19 @@ const renderElement = (props: RenderElementProps) => {
 const renderPlaceholder = ({
   attributes,
   children,
-}: RenderPlaceholderProps) => {
-  return (
-    <DefaultPlaceholder
-      attributes={{
-        ...attributes,
-        style: {
-          ...attributes.style,
-          whiteSpace: 'nowrap',
-        },
-      }}
-    >
-      {children}
-    </DefaultPlaceholder>
-  );
-};
+}: RenderPlaceholderProps) => (
+  <DefaultPlaceholder
+    attributes={{
+      ...attributes,
+      style: {
+        ...attributes.style,
+        whiteSpace: 'nowrap',
+      },
+    }}
+  >
+    {children}
+  </DefaultPlaceholder>
+);
 
 const useIsEmptyEditor = () => {
   const editor = useSlate();

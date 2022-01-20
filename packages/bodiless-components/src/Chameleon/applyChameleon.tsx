@@ -13,10 +13,10 @@
  */
 
 import React, { FC } from 'react';
+import { ComponentType } from 'enzyme';
 import { withoutProps, asToken, HOC } from '@bodiless/fclasses';
 import { applyChameleonDesign, useChameleonContext } from './withChameleonContext';
 import { ChameleonProps } from './types';
-import { ComponentType } from 'enzyme';
 
 /**
  * Applies the appropriate design to the wrapped component depending on the

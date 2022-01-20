@@ -66,7 +66,8 @@ const asDefaultLibraryItemIndicator = withDesign({
 
 /**
  * HOC that may be applied to a `ComponentWrapper` component of a Flow Container.
- * It Prepends a designable `LibraryItemIndicator` child component that appears on the `ComponentWrapper` hover.
+ * It Prepends a designable `LibraryItemIndicator` child component that appears
+ * on the `ComponentWrapper` hover.
  */
 export const withLibraryItemIndicator = asToken(
   addClasses('group'),
