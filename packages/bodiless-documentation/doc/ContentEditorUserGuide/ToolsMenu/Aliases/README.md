@@ -65,9 +65,20 @@ To edit page redirect aliases:
 <div class="warn">
   <strong>Note:</strong>
 
-  - Added/Modified redirect aliases will take effect immediately after saving.
+  - _Added_ redirect aliases will take effect immediately after saving.
   - For _removed_ redirect aliases to take effect, you must first restart your edit environment.
     - You may need to contact a developer to restart the edit environment for you.
+  - _Modified_ redirect aliases will take effect differently, depending on which of the paths was
+    modified.
+    - If only the _To Path_ was modified, the updated alias will take effect immediately.
+      - For example, if you change `/page-1/ /page-2/` to `/page-1/ /page-3/`, this will take effect
+        when you save.
+    - If the _From Path_ was modified (regardless of whether or not the _To Path_ was), this change
+      will be seen as an addition of the updated redirect and a removal of the original one. In this
+      way, until you restart the edit environment, both the old and the new redirects will be
+      active.
+      - For example, if you change `/page-1/ /page-2/` to `/page-3/ /page-2/`, then, until the edit
+        environment is restarted, both `/page-1/` and `/page-3/` will redirect to `/page-2/`.
 
 </div>
 
@@ -100,7 +111,9 @@ the _To Path_, this will create a circular reference and result in a `RangeError
 stack size exceeded." BodilessJS does not check for circular redirects, and, therefore, does not
 make any attempt to correct them, nor provide any warning.
 
-Remove or correct the redirect alias causing the circular reference.
+01. Remove or correct the redirect alias causing the circular reference.
+01. If needed, restart your edit environment for your update to take effect.
+    - **Note:** You may need to contact a developer to perform this action for you.
 
 ?> **Note:** Redirects can be configured elsewhere.  
 <br>
