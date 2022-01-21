@@ -15,37 +15,17 @@
 
 // @todo: use oclif/command
 import dotenv from 'dotenv';
-import SearchTool from '../SearchTool';
-import type { TSearchConf, TSearchIndexSettings } from '../types';
+import SearchTool, { SearchConfig } from '../SearchTool';
+import type { TSearchConf } from '../types';
 
 dotenv.config({
   path: '.env.development',
 });
 
-const config: TSearchConf = {};
+// @todo: combine search config and settings into one param object.
+const config: TSearchConf = SearchConfig.getConfig();
 
 const tool = new SearchTool(config);
 
-/**
-  * Search index creation configures
-  *
-  * - sourcePath: Valid data source folder.
-  * - sourceType: Specified data file extensions for indexing.
-  * - targetPath: Target folder for saving generated index file.
-  * - indexConfig: Document index configuration.
-  */
-const settings: TSearchIndexSettings = {
-  sourcePath: process.env.BODILESS_SEARCH_SOURCE_PATH || './public',
-  sourceTypes: process.env.BODILESS_SEARCH_SOURCE_TYPE ? process.env.BODILESS_SEARCH_SOURCE_TYPE.split('|') : ['html', 'htm'],
-  targetPath: process.env.BODILESS_SEARCH_INDEX_PATH ? process.env.BODILESS_SEARCH_INDEX_PATH : './public/default.idx',
-  indexConfig: {
-    ref: 'id',
-    fields: [
-      { name: 'title', attributes: { boost: 2 } },
-      { name: 'body' },
-    ],
-  },
-};
-
 // Create and save index to target path.
-tool.generateIndex(settings);
+tool.generateIndex();
