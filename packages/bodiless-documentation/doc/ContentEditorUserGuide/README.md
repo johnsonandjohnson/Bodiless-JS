@@ -55,8 +55,13 @@ Out of the box, the Toolbar has the following items:
 * [Edit](#edit)
 * [Page](#page)
 * [File](#file)
+* [Tools](#tools)<sup>*</sup>
 
-![The BodilessJS Toolbar](./assets/Toolbar.jpg ':size=50')
+<sup>*</sup> _Available in Edit Mode only._
+
+| Review Mode | Edit Mode |
+|:-----------:|:---------:|
+| ![The BodilessJS Toolbar in Review Mode](./assets/ToolbarReviewMode.jpg ':size=50') | ![The BodilessJS Toolbar in Edit Mode](./assets/ToolbarEditMode.jpg ':size=50') |
 
 #### Switcher
 
@@ -123,6 +128,18 @@ Click the **File** button to open the _File_ menu and interact with your site's 
 ![File menu](./assets/FileMenu.jpg ':size=50%')
 
 For more information, please see: [File Menu](./FileMenu/).
+
+#### Tools
+
+![Tools icon](./assets/ToolsIcon.jpg ':size=60')
+
+Click the **Tools** button to open the _Tools_ menu and access various utilities to help you
+edit/manage the content of and build your site.
+
+![Tools menu](./assets/ToolsMenu.jpg ':size=50%')
+
+For more information on the _Tools_ menu and the utilities it provides, please see: [Tools
+Menu](./ToolsMenu/).
 
 ### Page Layout
 
