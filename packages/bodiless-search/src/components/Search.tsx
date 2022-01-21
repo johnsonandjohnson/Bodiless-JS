@@ -13,6 +13,7 @@
  */
 
 import flow from 'lodash/flow';
+import uniqueId from 'lodash/uniqueId';
 import React, {
   FunctionComponent as FC,
   ComponentType,
@@ -20,6 +21,7 @@ import React, {
   useCallback,
   useEffect,
   useState,
+  useRef,
   useMemo,
 } from 'react';
 import {
@@ -35,6 +37,7 @@ import {
   DesignableComponentsProps,
   designable,
   DesignableProps,
+  Span,
 } from '@bodiless/fclasses';
 import { useSearchResultContext } from './SearchContextProvider';
 import { TSearchResult, Suggestion } from '../types';
@@ -49,7 +52,9 @@ export type SearchComponents = {
   Suggestions: ComponentType<DesignableProps<SuggestionListComponents> & {
     suggestions: Suggestion[];
     searchTerm?: string;
+    ariaId: string;
   }>,
+  SuggestionAnnouncer: ComponentType<any>
 };
 
 type SearchResultComponents = {
@@ -58,6 +63,7 @@ type SearchResultComponents = {
   SearchResultListItem: ComponentType<any>;
   SearchResultSummary: ComponentType<StylableProps>;
   SearchHelmet: ComponentType<StylableProps>;
+  SearchResultMessage: ComponentType<StylableProps>;
 };
 
 type SearchResultItemComponents = {
@@ -82,6 +88,7 @@ export const searchComponents: SearchComponents = {
   SearchInput: SearchInputBase,
   SearchButton: Button,
   Suggestions: BaseSuggestions,
+  SuggestionAnnouncer: Span,
 };
 
 const searchResultItemComponents: SearchResultItemComponents = {
@@ -121,45 +128,54 @@ const searchResultComponents: SearchResultComponents = {
   SearchResultListItem: SearchResultItemClean,
   SearchResultSummary: P,
   SearchHelmet: Div,
+  SearchResultMessage: H3,
 };
 
-export type SearchProps = DesignableComponentsProps<SearchComponents> &
-HTMLProps<HTMLElement> & {
+export type SearchProps = DesignableComponentsProps<SearchComponents> & HTMLProps<HTMLElement> & {
   onSubmit?: (query: string) => void,
+  suggetionTotalMessage?: string,
+  suggestionMessage?: string,
 };
-type SearchResultProps = DesignableComponentsProps<SearchResultComponents> &
-HTMLProps<HTMLElement> & { resultCountMessage?: string, resultEmptyMessage?: string };
+
+type SearchResultProps = DesignableComponentsProps<SearchResultComponents> & HTMLProps<HTMLElement> & { 
+  resultCountMessage?: string, 
+  searchResultMessage?: string 
+};
 
 const defaultResultCountMessage = 'Showing %count% result(s).';
 const defaultResultEmptyMessage = 'No content matches your request, please enter new keywords.';
+
 const SearchResultBase: FC<SearchResultProps> = ({
   components,
   resultCountMessage = defaultResultCountMessage,
-  resultEmptyMessage = defaultResultEmptyMessage,
+  searchResultMessage = defaultResultEmptyMessage,
 }) => {
   const searchResultContext = useSearchResultContext();
-  const { searchTerm, results } = searchResultContext;
+  const { results } = searchResultContext;
   const {
     SearchResultWrapper, SearchResultList, SearchResultListItem, SearchResultSummary, SearchHelmet,
+    SearchResultMessage,
   } = components;
-  const showResultCount = resultCountMessage.replace(
-    '%count%', results.length.toString(),
+
+  let showResultCount = '';
+  let message = '';
+
+  showResultCount = resultCountMessage.replace(
+    '%count%', searchResultContext.results.length.toString(),
   );
+  message = searchResultMessage;
 
-  if (!results.length && searchTerm === '') {
-    return null;
-  }
-
-  if (!results.length) {
+  if (!searchResultContext.results.length) {
     return (
       <SearchResultWrapper>
         <SearchHelmet />
         <SearchResultSummary>{showResultCount}</SearchResultSummary>
-        <H3>{resultEmptyMessage}</H3>
+        <SearchResultMessage>{message}</SearchResultMessage>
       </SearchResultWrapper>
     );
   }
-  return useMemo(() => (
+
+  return (
     <SearchResultWrapper>
       <SearchHelmet />
       <SearchResultSummary>{showResultCount}</SearchResultSummary>
@@ -171,13 +187,37 @@ const SearchResultBase: FC<SearchResultProps> = ({
         }
       </SearchResultList>
     </SearchResultWrapper>
-  ), [searchTerm, results]);
+  );
 };
 
-const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
+const defaultSuggetionTotalMessage = '%total% search suggestions.';
+const defaultSuggestionMessage = '%suggestion%, %count% results.';
+
+const SearchBoxBase: FC<SearchProps> = ({ 
+  components,
+  suggetionTotalMessage = defaultSuggetionTotalMessage,
+  suggestionMessage = defaultSuggestionMessage,
+  ...props 
+}) => {
   const [queryString, setQueryString] = useState('');
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
+  const ariaId = useRef(uniqueId('bl_search_'));
   const searchResultContext = useSearchResultContext();
+  const shouldShowSuggestions = queryString !== '' && suggestions.length > 0;
+
+  const announcerMessage = useMemo(() => {
+    if (!shouldShowSuggestions) return '';
+
+    const totalResults = suggetionTotalMessage.replace(
+      '%total%', String(Math.min(suggestions.length, 5))
+    );
+    const suggestionList = suggestions.slice(0, 5).map(s => {
+      return suggestionMessage.replace('%suggestion%', s.text).replace('%count%', String(s.count));
+    }).join(' ');
+
+    return `${totalResults} ${suggestionList}`;
+  }, [suggestions, shouldShowSuggestions]);
+
   const onChangeHandler = useCallback((event: any) => {
     event.preventDefault();
     const queryString$ = event.target.value;
@@ -234,20 +274,38 @@ const SearchBoxBase: FC<SearchProps> = ({ components, ...props }) => {
     SearchInput,
     SearchButton,
     Suggestions,
+    SuggestionAnnouncer,
   } = components;
 
   return (
-    <SearchWrapper {...rest}>
+    <SearchWrapper role="search" {...rest}>
       <SearchInput
         value={queryString}
         onChange={onChangeHandler}
         onKeyPress={onKeyPressHandler}
         placeholder={placeholder}
+        role="combobox"
+        aria-autocomplete="list"
+        aria-expanded={shouldShowSuggestions}
+        aria-owns={ariaId.current}
       />
       <SearchButton onClick={onClickHandler} />
+      <SuggestionAnnouncer 
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        style={{ position: 'absolute', top: '-10000px'}}
+      >
+        {announcerMessage}
+      </SuggestionAnnouncer>
       {
-        queryString !== '' && suggestions.length > 0
-        && <Suggestions suggestions={suggestions} searchTerm={queryString} />
+        shouldShowSuggestions && (
+          <Suggestions 
+            suggestions={suggestions} 
+            searchTerm={queryString} 
+            ariaId={ariaId.current}
+          />
+        )
       }
     </SearchWrapper>
   );

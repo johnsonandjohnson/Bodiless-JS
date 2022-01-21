@@ -34,13 +34,13 @@ import {
   SearchComponents,
 } from './Search';
 
-type ResponsiveSearchComponents = {
+export type ResponsiveSearchComponents = {
   Wrapper: ComponentType<StylableProps>,
   ToggleButton: ComponentType<HTMLProps<HTMLButtonElement>>,
   ToggleIcon: ComponentType<HTMLProps<HTMLElement>>
 } & SearchComponents;
 
-type ResponsiveSearchProps = DesignableComponentsProps<ResponsiveSearchComponents> &
+export type ResponsiveSearchProps = DesignableComponentsProps<ResponsiveSearchComponents> &
 SearchProps;
 
 const withResponsiveDesign = withDesign({
@@ -89,9 +89,7 @@ const ResponsiveSearchBoxBase: FC<ResponsiveSearchProps> = (props) => {
   );
 };
 
-const ResponsiveSearchBox = asToken(
+export const ResponsiveSearchBox = asToken(
   designable(responsiveSearchComponents, 'ResponsiveSearchBox'),
   withResponsiveDesign,
 )(ResponsiveSearchBoxBase) as ComponentType<SearchProps>;
-
-export default ResponsiveSearchBox;

@@ -342,6 +342,25 @@ export const NoSearch = flow(
 </NoSearch>
 ```
 
+### Debug what files are being indexed
+Eventually, you may need some help to understand why some files are being
+indexed or not. You can set the `BODILESS_SEARCH_DEBUG_PATHS` variable to `1` 
+on your .env file to display what paths are being used to search for files, 
+which paths are being excluded and which files were found in the end.
+
+Tip: on Unix systems, it's easier to use this variable temporarily on the terminal:
+```bash
+$ BODILESS_SEARCH_DEBUG_PATHS=1 npm run search-index
+
+[English] Source path: /home/example-user/Bodiless-JS/examples/test-site/public
+[English] Excluded paths:  [ '404*/**' ]
+[English] Found files:  [
+  '/home/example-user/Bodiless-JS/examples/test-site/public/accordion/index.html',
+  '/home/example-user/Bodiless-JS/examples/test-site/public/anchor/index.html',
+  ...
+]
+```
+
 ---
 
 ## Architectural Details

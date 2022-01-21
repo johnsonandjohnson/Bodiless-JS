@@ -80,7 +80,7 @@ class SearchClient implements SearchClientInterface {
     return sortedTokens;
   };
 
-  // Remove the search engine specific charactors on customize search.
+  // Remove the search engine specific characters on customize search.
   private filter = (qs: string) => qs.replace(/:|\$|#|@|!|\^|\*|\+|-|~|%/g, ' ');
 
   validateIndex = (index: SearchIndex | false): boolean => {
@@ -102,6 +102,9 @@ class SearchClient implements SearchClientInterface {
     }
   };
 
+  /**
+   * Load search by language.
+   */
   loadIndex = async () => {
     try {
       let index = this.getLocalIndex() as SearchIndex;
@@ -115,7 +118,7 @@ class SearchClient implements SearchClientInterface {
       this.searchEngine.loadIndex(index.idx);
       this.loadPreviews(index.preview);
     } catch (error) {
-      console.log('Failed to load search index file.');
+      console.log('Failed to load search index file.', error);
     }
   };
 
