@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /**
  * Copyright © 2021 Johnson & Johnson
  *
@@ -81,9 +82,9 @@ const isTextValid = (text: string): boolean => {
       // Last value, if provided, must be validated as a number to represent status code.
       if (
         (items.length !== ALIAS_PARTS_COUNT && items.length !== (ALIAS_PARTS_COUNT - 1))
-        || typeof items[0] !== 'string' || !Number.isNaN(parseInt(items[0], 10))
-        || typeof items[1] !== 'string' || !Number.isNaN(parseInt(items[1], 10))
-        || (typeof items[2] !== 'undefined' && Number.isNaN(parseInt(items[2], 10)))
+        || typeof items[0] !== 'string' || !isNaN(parseInt(items[0], 10))
+        || typeof items[1] !== 'string' || !isNaN(parseInt(items[1], 10))
+        || (typeof items[2] !== 'undefined' && isNaN(parseInt(items[2], 10)))
       ) {
         return false;
       }
