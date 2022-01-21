@@ -11,6 +11,11 @@ to edit or remove existing page redirects, as well as add new ones.
 When a user navigates to a path that has an alias configured, they will be redirected to the given
 URL, and the associated status code will be returned.
 
+The configuration data for these redirect aliases is stored in a JSON file:
+`/src/data/site/redirect-aliases.json`.  
+For an example, see:
+[`redirect-aliases.json`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/test-site/src/data/site/redirect-aliases.json).
+
 To edit page redirect aliases:
 
 01. While in [Edit Mode](../../#edit-mode), from the [Toolbar](../../#toolbar), click **Tools >
@@ -40,6 +45,14 @@ To edit page redirect aliases:
       /example/campaign/special /
       /page-3/ https://example.com 301
       ```
+    - If you want to remove all the aliases configured in this form, you can clear all the text; the
+      form will save even if left blank.
+    - For URL-paths that differ only by a trailing slash, a redirect is unnecessary, as the platform
+      will handle this automatically.
+      - For example, you do not need to do this:
+        ```
+        /products /products/ 301
+        ```
 01. Click the checkmark to confirm.
     - If successful, you will see the following confirmation message:  
       "Redirect aliases file validated and saved."
@@ -54,6 +67,7 @@ To edit page redirect aliases:
 
   - Added/Modified redirect aliases will take effect immediately after saving.
   - For _removed_ redirect aliases to take effect, you must first restart your edit environment.
+    - You may need to contact a developer to restart the edit environment for you.
 
 </div>
 
@@ -74,7 +88,8 @@ If you want to edit a page that is being redirected, you will need to remove the
 in order to reach the page, so that you are able to edit it.
 
 01. Remove the redirect alias.
-01. Refresh your edit environment.
+01. Restart your edit environment.
+    - **Note:** You may need to contact a developer to perform this action for you.
 01. Go to the desired page, and make your edits.
 01. Re-add the redirect alias.
 
@@ -82,15 +97,24 @@ in order to reach the page, so that you are able to edit it.
 
 If you should accidentally create a redirect alias with the same URL for both the _From Path_ and
 the _To Path_, this will create a circular reference and result in a `RangeError` — "Maximum call
-stack size exceeded."
+stack size exceeded." BodilessJS does not check for circular redirects, and, therefore, does not
+make any attempt to correct them, nor provide any warning.
 
 Remove or correct the redirect alias causing the circular reference.
+
+?> **Note:** Redirects can be configured elsewhere.  
+<br>
+If you are experiencing circular redirect errors or multiple redirects, but don't see anything
+erroneous with your configuration within the _Redirect Aliases_ form, please be aware that your site
+may have redirects configured elsewhere. Developers have the opportunity to define redirects in
+platform configuration files or within the CDN. No matter where the redirects are configured, they
+all must work together and not duplicate/contradict one another.
 
 ### Page Redirects Multiple Times
 
 If you encounter a page that redirects multiple times, a chain of redirects may have been created.
 BodilessJS does not check for chained redirects, and, therefore, does not make any attempt to
-consolidate them into a single redirect, nor provide warning.
+consolidate them into a single redirect, nor provide any warning.
 
 For example, given the following redirects, when you navigate to `/page-1/`, BodilessJS will not
 simply redirect you to `/page-4/`; instead, you will be redirected from `/page-1/` to `/page-2/` to
@@ -110,3 +134,11 @@ configure your redirect aliases as follows:
 /page-2/ /page-4/
 /page-3/ /page-4/
 ```
+
+?> **Note:** Redirects can be configured elsewhere.  
+<br>
+If you are experiencing circular redirect errors or multiple redirects, but don't see anything
+erroneous with your configuration within the _Redirect Aliases_ form, please be aware that your site
+may have redirects configured elsewhere. Developers have the opportunity to define redirects in
+platform configuration files or within the CDN. No matter where the redirects are configured, they
+all must work together and not duplicate/contradict one another.
