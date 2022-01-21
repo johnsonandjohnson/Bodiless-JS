@@ -19,7 +19,6 @@
  *
  */
 const React = require('react');
-const getSSIEntities = require('./read-ssi-entities');
 
 /*
  * Called after every page Gatsby server renders while building HTML
@@ -29,7 +28,7 @@ exports.onPreRenderHTML = (
   { getHeadComponents, replaceHeadComponents },
   pluginOptions,
 ) => {
-  const ssiEntities = getSSIEntities(pluginOptions.ssiConfPath);
+  const { ssiEntities = {} } = pluginOptions;
   const SSIComponents = Object.keys(ssiEntities).reduce((accumulator, ssiEntityKey) => {
     if (ssiEntities[ssiEntityKey].pragma) {
       const SSIComponent = React.createElement(`ssi-element-${ssiEntityKey}`, { key: ssiEntityKey });

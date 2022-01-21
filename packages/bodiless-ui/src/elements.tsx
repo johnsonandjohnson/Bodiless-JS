@@ -95,7 +95,7 @@ export const ComponentFormText = addClasses(
 )(Text);
 
 export const ComponentFormTextArea = addClasses(
-  'bl-resize bl-text-gray-900 bl-bg-gray-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-min-h-grid-16 bl-block bl-my-grid-2 bl-p-grid-1',
+  'bl-text-gray-900 bl-bg-gray-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-min-h-grid-16 bl-block bl-my-grid-2 bl-p-grid-1 bl-resize-none overflow-auto whitespace-pre',
 )(TextArea);
 
 export const ComponentFormRadioGroup = addClasses(
@@ -211,3 +211,10 @@ export const ComponentFormLink = flow(
   addClassesIf(isDisabled)('bl-text-gray-600'),
   removeClassesIf(isDisabled)('bl-cursor-pointer bl-text-gray-100 '),
 )(Anchor);
+
+export const ComponentFormDefaultPanelWidth = addClasses('bl-w-xl-grid-2');
+export const ComponentFormDefaultPanelHeight = addClasses('bl-h-xl-grid-1');
+export const ComponentFormDefaultPanelSize = flow(
+  ComponentFormDefaultPanelWidth,
+  ComponentFormDefaultPanelHeight,
+);
