@@ -29,7 +29,8 @@ type TSearchResultContextValue = {
   suggest: (term: string) => Suggestion[],
 };
 
-const searchClient = new SearchClient();
+const conf = JSON.parse(process.env.BODILESS_SEARCH_PARAMS || '{}');
+const searchClient = new SearchClient(conf);
 
 /**
  * Search result context
@@ -47,13 +48,14 @@ export const SearchResultProvider: FC = ({ children }) => {
   const [results, setResult] = useState<TSearchResults>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
 
-  const search = useCallback((term: string) => {
+  const search = (term: string) => {
     const searchResult = searchClient.search(term);
     setResult(searchResult);
-  }, [searchTerm]);
+  };
 
   const didMountRef = useRef(false);
   const searchTermRef = useRef('');
+
   useEffect(() => {
     if (!didMountRef.current) {
       didMountRef.current = true;
@@ -74,13 +76,12 @@ export const SearchResultProvider: FC = ({ children }) => {
         search(searchTerm);
         searchTermRef.current = searchTerm;
       });
-      // window.location.href = getSearchPagePath(searchTerm);
     }
   });
 
   const suggest = useCallback((queryString: string) => searchClient.suggest(queryString), []);
 
-  const contextValue = {
+  const contextValue: TSearchResultContextValue = {
     results,
     setResult,
     searchTerm,
