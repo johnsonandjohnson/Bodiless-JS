@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,15 +13,25 @@
  */
 
 import fs from 'fs';
+import path from 'path';
 import glob from 'glob';
-// import { Index } from 'lunr';
-import SearchTool from '../src/SearchTool';
+import SearchTool, { SearchConfig } from '../src/SearchTool';
+import type { TLanguageSetting } from '../src/types';
 
-const searchTool = new SearchTool({});
+process.env.BODILESS_SEARCH_CONFIG = path.resolve(__dirname, '..', 'search.config.json.example');
+const config = SearchConfig.getConfig();
+const searchTool = new SearchTool(config);
 describe('Search Tool', () => {
-  const settings = {
-    sourcePath: '/path/to/source',
-    sourceTypes: ['html', 'htm'],
+  const settings: TLanguageSetting = {
+    name: 'English',
+    code: 'en',
+    sourcePaths: ['/path/to/source'],
+    excludePaths: [],
+    // sourceTypes: ['html', 'htm'],
+    indexFileName: '',
+    indexUrlName: '',
+    indexFilePath: '',
+    searchPath: '',
   };
 
   beforeEach(() => {
@@ -49,9 +59,16 @@ describe('Search Tool', () => {
       expect.objectContaining({ cwd: '/path/to/source' }),
     );
 
-    const settingsRelativePath = {
-      sourcePath: 'relative_path/to/source',
-      sourceTypes: ['html', 'htm'],
+    const settingsRelativePath: TLanguageSetting = {
+      sourcePaths: ['relative_path/to/source'],
+      // sourceTypes: ['html', 'htm'],
+      name: 'English',
+      code: 'en',
+      excludePaths: [],
+      indexFileName: '',
+      indexUrlName: '',
+      indexFilePath: '',
+      searchPath: '',
     };
     searchTool.findSourceFiles(settingsRelativePath);
     expect(sync).toHaveBeenCalledWith(
@@ -139,7 +156,7 @@ describe('Search Tool', () => {
     ];
 
     htmlSamples.forEach(item => {
-      const { title, body } = searchTool.htmlToDocument(item.html, item.selector, item.exclude);
+      const { title, body } = searchTool.htmlToDocument(item.html, [item.selector], [item.exclude]);
       expect(title).toBe(item.title);
       expect(body).toBe(item.body);
     });
