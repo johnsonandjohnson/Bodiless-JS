@@ -26,8 +26,8 @@ To edit page redirect aliases:
     - Each alias needs to be configured on a separate line within the textarea, represented as three
       values delimited by a _single_ space:
       - **From Path:** The old URL — a path on your site.
-        - If you don't provide one at the beginning of your path, a leading forward slash (`/`) will
-          be applied automatically when you save your configuration.
+        - If you don't provide a forward slash (`/`) at the beginning of your path, one will be
+          applied automatically when you save your configuration.
       - **To Path:** The URL to which the user will be forwarded.
         - This can be a URL-path (on your site) or an absolute URL.
         - If this is a URL-path, and you don't provide a leading forward slash (`/`), one will be
@@ -58,6 +58,9 @@ To edit page redirect aliases:
       "Redirect aliases file validated and saved."
     - If your configuration is invalid, you will see the following:  
       "The redirects are not valid, please correct."
+      - **Note:** When you reapply focus to the textarea to fix your configuration, the invalid
+        message will disappear; it will reappear if you attempt to submit another invalid
+        configuration.
       - For troubleshooting assistance, see: [Troubleshooting : Invalid
         Redirects](#invalid-redirects).
 
