@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2022 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import {
 import withDataLayerItem, {
   withDefaultDataLayer,
   withDataLayerScript,
-} from '../src/GTM/gtm';
+} from '../src/gtm';
 
 const getMockNode = (data: string) => {
   const getters = {

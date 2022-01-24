@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2022 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,8 +11,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './components/ResponsiveSearchBox';
-export * from './components/Search';
-export * from './components/SearchContextProvider';
-export * from './types';
-export * from './components/Search.token';
+import withDataLayerItem, { withDefaultDataLayer, withDataLayerScript } from './gtm';
+
+export {
+  withDataLayerItem,
+  withDefaultDataLayer,
+  withDataLayerScript,
+};
