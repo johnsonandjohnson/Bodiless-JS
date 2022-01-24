@@ -1,5 +1,6 @@
+/* eslint-disable import/prefer-default-export */
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,8 +12,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './components/ResponsiveSearchBox';
-export * from './components/Search';
-export * from './components/SearchContextProvider';
-export * from './types';
-export * from './components/Search.token';
+import { useCallback } from 'react';
+import {
+  withMenuOptions,
+  ContextSubMenu,
+  useEditContext,
+} from '@bodiless/core';
+
+const withToolsButton = withMenuOptions({
+  useMenuOptions: () => [{
+    icon: 'construction',
+    name: 'tools-group',
+    label: 'Tools',
+    Component: ContextSubMenu,
+    isHidden: useCallback(() => !useEditContext().isEdit, []),
+  }],
+  root: true,
+});
+
+
+export {
+  withToolsButton,
+};

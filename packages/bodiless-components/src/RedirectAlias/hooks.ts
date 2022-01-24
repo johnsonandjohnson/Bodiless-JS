@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,8 +11,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './components/ResponsiveSearchBox';
-export * from './components/Search';
-export * from './components/SearchContextProvider';
-export * from './types';
-export * from './components/Search.token';
+
+import { ContentNode } from '@bodiless/core';
+
+/**
+ * Gets a list of redirect aliases.
+ * @param node - the content node of the current component of its child/peer.
+ * @returns key/value collection of disabled items or an empty object.
+ */
+export const useGetRedirectAliases = (node: ContentNode<any>): any => {
+  const aliases = node.peer<any>(['Site', 'redirect-aliases']).data;
+  return aliases;
+};
