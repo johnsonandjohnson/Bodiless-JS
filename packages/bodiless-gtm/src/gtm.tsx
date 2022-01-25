@@ -58,7 +58,7 @@ const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
 
 /**
  * HOC that adds Data Layer to Helmet Component
- * 
+ *
  * @return A composed token.
  */
 const withDataLayerItem$ = (options: Options) => (HelmetComponent: CT<ItemProps>) => (
@@ -85,7 +85,7 @@ const withDataLayerItem$ = (options: Options) => (HelmetComponent: CT<ItemProps>
  * HOC that adds Default Datalayer to a Component
  *
  * @param dataLayer DataLayer
- * 
+ *
  * @return A composed token.
  */
 const withDefaultDataLayer : Function = (dataLayer: DataLayer) => (
@@ -107,13 +107,15 @@ const tagManagerEnabled = (process.env.GOOGLE_TAGMANAGER_ENABLED || '1') === '1'
  * HOC that renders the dataLayer script.
  *
  * @param HelmetComponent
- * 
+ *
  * @param clientside - Boolean value whether to render on clientside only.
  * @param attributes - Object that cans attributes you can add to script tag.
- * 
+ *
  * @return A composed token.
  */
-const withDataLayerScript = (HelmetComponent: CT<BaseProps>, clientside?: boolean, attributes?: object) => (
+const withDataLayerScript = (
+  HelmetComponent: CT<BaseProps>, clientside?: boolean, attributes?: object
+) => (
   props: Props,
 ) => {
   if (!tagManagerEnabled) {
@@ -124,23 +126,23 @@ const withDataLayerScript = (HelmetComponent: CT<BaseProps>, clientside?: boolea
   } = props;
 
   // Only render on clientside
-  if (clientside) { 
-    if ( typeof window === 'undefined' || typeof document === 'undefined') {
+  if (clientside) {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
       return null;
     }
   }
 
   return (
-     <HelmetComponent {...rest}>
-       {children}
-       <script {...(attributes)}>{generateDataLayer(dataLayerData, dataLayerName)}</script>
-     </HelmetComponent>
+    <HelmetComponent {...rest}>
+      {children}
+      <script {...(attributes)}>{generateDataLayer(dataLayerData, dataLayerName)}</script>
+    </HelmetComponent>
   );
 };
 
 /**
  * HOC that retrieves the data from nodekey and populates the data layer in helmt.
- * 
+ *
  * @return A composed token.
  */
 const withDataLayerItem: (

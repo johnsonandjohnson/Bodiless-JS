@@ -24,7 +24,7 @@ import {
   asBodilessHelmet,
   withMetaForm,
 } from '@bodiless/components';
-import { 
+import {
   withDataLayerItem,
   withDataLayerScript,
   withDefaultDataLayer
