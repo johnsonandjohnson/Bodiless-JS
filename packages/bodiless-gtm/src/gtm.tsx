@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2022 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@ import { stripIndent } from 'common-tags';
 import { HelmetProps } from 'react-helmet';
 import set from 'lodash/set';
 import { WithNodeKeyProps } from '@bodiless/core';
-import { withHeadElement, Options as BaseOptions } from '../Meta/Meta';
+import { withHeadElement, HeadBaseOptions as BaseOptions } from '@bodiless/components';
 
 type BaseProps = PropsWithChildren<HelmetProps>;
 type Data = {
@@ -37,7 +37,7 @@ type Options = BaseOptions & {
 };
 
 /**
- * Generate the dataLayer script.
+ * Generates the dataLayer script.
  *
  * @param {any} dataLayer - The dataLayer Object.
  * @param {string} dataLayerName - The dataLayer name.
@@ -56,6 +56,11 @@ const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
   return stripIndent`${result}`;
 };
 
+/**
+ * HOC that adds Data Layer to Helmet Component
+ * 
+ * @return A composed token.
+ */
 const withDataLayerItem$ = (options: Options) => (HelmetComponent: CT<ItemProps>) => (
   props: Props,
 ) => {
@@ -78,6 +83,10 @@ const withDataLayerItem$ = (options: Options) => (HelmetComponent: CT<ItemProps>
 
 /**
  * HOC that adds Default Datalayer to a Component
+ *
+ * @param dataLayer DataLayer
+ * 
+ * @return A composed token.
  */
 const withDefaultDataLayer : Function = (dataLayer: DataLayer) => (
   HelmetComponent: CT<BaseProps>,
@@ -93,12 +102,18 @@ const withDefaultDataLayer : Function = (dataLayer: DataLayer) => (
 };
 
 const tagManagerEnabled = (process.env.GOOGLE_TAGMANAGER_ENABLED || '1') === '1';
+
 /**
- * An HOC that renders the dataLayer scrip.
+ * HOC that renders the dataLayer script.
  *
  * @param HelmetComponent
+ * 
+ * @param clientside - Boolean value whether to render on clientside only.
+ * @param attributes - Object that cans attributes you can add to script tag.
+ * 
+ * @return A composed token.
  */
-const withDataLayerScript = (HelmetComponent: CT<BaseProps>) => (
+const withDataLayerScript = (HelmetComponent: CT<BaseProps>, clientside?: boolean, attributes?: object) => (
   props: Props,
 ) => {
   if (!tagManagerEnabled) {
@@ -108,14 +123,26 @@ const withDataLayerScript = (HelmetComponent: CT<BaseProps>) => (
     dataLayerData, dataLayerName, children, ...rest
   } = props;
 
+  // Only render on clientside
+  if (clientside) { 
+    if ( typeof window === 'undefined' || typeof document === 'undefined') {
+      return null;
+    }
+  }
+
   return (
-    <HelmetComponent {...rest}>
-      {children}
-      <script data-cfasync="false">{generateDataLayer(dataLayerData, dataLayerName)}</script>
-    </HelmetComponent>
+     <HelmetComponent {...rest}>
+       {children}
+       <script {...(attributes)}>{generateDataLayer(dataLayerData, dataLayerName)}</script>
+     </HelmetComponent>
   );
 };
 
+/**
+ * HOC that retrieves the data from nodekey and populates the data layer in helmt.
+ * 
+ * @return A composed token.
+ */
 const withDataLayerItem: (
   options: Options,
 ) => (
