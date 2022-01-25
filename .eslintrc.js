@@ -14,6 +14,7 @@
 
 module.exports = {
   "extends": [
+    "airbnb",
     "airbnb-typescript",
     "plugin:jest/recommended",
     "plugin:import/typescript"

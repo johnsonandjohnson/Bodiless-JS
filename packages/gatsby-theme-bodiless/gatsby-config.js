@@ -98,7 +98,7 @@ if (process.env.ROBOTSTXT_ENABLED !== '0') {
   if (!policy[0].disallow) {
     policy[0].disallow = disabledPages;
   } else {
-    const disallow = policy[0].disallow;
+    const { disallow } = policy[0];
     if (typeof disallow === 'string') {
       policy[0].disallow = [disallow, ...disabledPages];
     } else {
@@ -111,7 +111,7 @@ if (process.env.ROBOTSTXT_ENABLED !== '0') {
     options: {
       host: process.env.ROBOTSTXT_HOST,
       sitemap: process.env.ROBOTSTXT_SITEMAP,
-      policy: policy,
+      policy,
     },
   });
 }

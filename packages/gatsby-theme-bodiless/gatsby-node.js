@@ -185,7 +185,6 @@ const createPagesFromFS = async ({ actions, graphql, getNode }) => {
       if (process.env.NODE_ENV === 'production' && disabledPages.indexOf(pageData.path) > -1) {
         deletePage(pageData);
       }
-
     } catch (exception) {
       logger.warn(`Error trying to create ${pageData.path}`, exception);
     }

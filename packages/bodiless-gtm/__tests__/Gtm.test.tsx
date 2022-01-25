@@ -87,8 +87,7 @@ describe('DataLayer process', () => {
         path: 'customKey.pageType',
       });
 
-      const expectedScript =
-        'window.dataLayer = window.dataLayer || [];window.dataLayer.push({ event_data: null });window.dataLayer.push({"foo":"foo value","bar":{"bat":"bat value"},"pageType":"Page Type"});';
+      const expectedScript = 'window.dataLayer = window.dataLayer || [];window.dataLayer.push({ event_data: null });window.dataLayer.push({"foo":"foo value","bar":{"bat":"bat value"},"pageType":"Page Type"});';
       const PageDataLayer = flowRight(
         withDefaultDataLayer(testDefaultDataLayer) as () => React.ComponentType,
         withDataLayerItemPageType(data.key),

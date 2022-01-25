@@ -12,11 +12,10 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, ComponentType } from 'react';
 import { withoutProps, asToken, HOC } from '@bodiless/fclasses';
 import { applyChameleonDesign, useChameleonContext } from './withChameleonContext';
 import { ChameleonProps } from './types';
-import { ComponentType } from 'enzyme';
 
 /**
  * Applies the appropriate design to the wrapped component depending on the
@@ -33,7 +32,7 @@ import { ComponentType } from 'enzyme';
  *     Disabled: flow(replaceWith('span'), withoutProps('href'), withTitle('Disabled'))
  *   }),
  *   withChameleonContext('link-chameleon'),
- *   withChameleonComponenFormConrols,
+ *   withChameleonComponentFormControls,
  *   asBodilessLink('link')
  *   applyChameleon,
  * )('a');
