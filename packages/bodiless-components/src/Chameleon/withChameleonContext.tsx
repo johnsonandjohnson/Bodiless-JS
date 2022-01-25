@@ -87,6 +87,7 @@ const withChameleonContext = (
       // eslint-disable-next-line react/destructuring-assignment
       components: props.components,
       selectableComponents: getSelectableComponents(props),
+      // eslint-disable-next-line react/destructuring-assignment
       setActiveComponent: (component: string|null) => props.setComponentData({ component }),
     }}
     >

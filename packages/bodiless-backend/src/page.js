@@ -23,10 +23,9 @@ const logger = new Logger('BACKEND');
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
 
-const getDirectories = (dir) =>
-  fs
-    .readdirSync(dir)
-    .filter((file) => fs.statSync(`${dir}/${file}`).isDirectory());
+const getDirectories = (dir) => fs
+  .readdirSync(dir)
+  .filter((file) => fs.statSync(`${dir}/${file}`).isDirectory());
 // once we on node > 10.12.0
 // we can leverage fs.mkdir since it supports { recursive: true }
 function ensureDirectoryExistence(filePath) {
@@ -58,9 +57,9 @@ class Page {
   }
 
   get exists() {
-    const files = this.supportedExtensions.map((extension) =>
-      path.join(this.getBasePath(), `${this.path}.${extension}`),
-    );
+    const files = this.supportedExtensions.map((extension) => path.join(
+      this.getBasePath(), `${this.path}.${extension}`
+    ));
     return files.some((file) => fs.existsSync(file));
   }
 
@@ -164,33 +163,32 @@ class Page {
     const actions = [];
     const reg = /from ('|")(\..*)('|")/g;
 
-    const readF = (file) =>
-      new Promise((resove, reject) => {
-        const filePath = `${destinationPath}/${file.name}`;
-        fs.readFile(filePath, 'utf8', (err, content) => {
-          if (err) return reject();
-          const matchs = content.match(reg);
-          if (!matchs.length) return reject();
-          let newContent = content;
-          matchs.forEach((item) => {
-            const delimiter = item[item.search(/'|"/)];
-            const oldPath = item.split(' ')[1].replace(/'|"/g, '');
-            const from = path.dirname(filePath);
-            const to = path.normalize(`${originPath}/${oldPath}`);
-            const newPath = path.relative(from, to);
+    const readF = (file) => new Promise((resove, reject) => {
+      const filePath = `${destinationPath}/${file.name}`;
+      fs.readFile(filePath, 'utf8', (err, content) => {
+        if (err) return reject();
+        const matchs = content.match(reg);
+        if (!matchs.length) return reject();
+        let newContent = content;
+        matchs.forEach((item) => {
+          const delimiter = item[item.search(/'|"/)];
+          const oldPath = item.split(' ')[1].replace(/'|"/g, '');
+          const from = path.dirname(filePath);
+          const to = path.normalize(`${originPath}/${oldPath}`);
+          const newPath = path.relative(from, to);
 
-            newContent = newContent.replace(
-              `${delimiter}${oldPath}${delimiter}`,
-              `${delimiter}${newPath}${delimiter}`,
-            );
-          });
-          fs.writeFile(filePath, newContent, (writeErr) => {
-            if (writeErr) return reject();
-            return resove();
-          });
-          return true;
+          newContent = newContent.replace(
+            `${delimiter}${oldPath}${delimiter}`,
+            `${delimiter}${newPath}${delimiter}`,
+          );
         });
+        fs.writeFile(filePath, newContent, (writeErr) => {
+          if (writeErr) return reject();
+          return resove();
+        });
+        return true;
       });
+    });
 
     files.forEach((file) => {
       actions.push(readF(file));
@@ -407,6 +405,7 @@ class Page {
     return readPromise;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   removePageAssets(path) {
     return new Promise((resolve, reject) => {
       fse.remove(path, err => {

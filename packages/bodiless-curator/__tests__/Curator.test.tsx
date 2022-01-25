@@ -22,7 +22,7 @@ const mockBodilessCore = (isEdit: boolean) => {
 describe('Curator', () => {
   it('renders Curator when curatorId and curatorSrc are empty', () => {
     mockCuratorContext(true);
-    const wrapper = mount(<CuratorClean containerId='' curatorSrc='' />);
+    const wrapper = mount(<CuratorClean containerId="" curatorSrc="" />);
     expect(wrapper.find(CuratorClean).length).toBe(1);
     expect(wrapper.find(CuratorClean).prop('curatorSrc')).toBe('');
     expect(wrapper.find(CuratorClean).prop('containerId')).toBe('');
