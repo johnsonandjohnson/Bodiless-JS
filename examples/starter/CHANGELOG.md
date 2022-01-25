@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.6](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.5...v0.3.6) (2022-01-24)
+
+
+### Bug Fixes
+
+* **gatsby-theme-bodiless:** Fix changes on bodiless packages not triggering rebuilds ([#1328](https://github.com/johnsonandjohnson/bodiless-js/issues/1328)) ([d80f7dc](https://github.com/johnsonandjohnson/bodiless-js/commit/d80f7dc1ffb0d5c27f0e6c0aa602056f4e12da76))
+
+
+### Features
+
+* **icon:** Remove material icons font from production build ([#1322](https://github.com/johnsonandjohnson/bodiless-js/issues/1322)) ([d980889](https://github.com/johnsonandjohnson/bodiless-js/commit/d9808898b5ae3d95746816ada62daa91963cbeab))
+
+
+
+
+
 ## [0.3.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.4...v0.3.5) (2021-12-29)
 
 **Note:** Version bump only for package @bodiless/gatsby-starter-bodiless
