@@ -31,7 +31,7 @@ const withLogContext = (WrappedButton: ComponentType) => (props: any) => {
   return <WrappedButton {...props} onClick={() => console.log('AUTH CONTEXT:', context)} />;
 };
 
-const onSuccess = (user: any) => console.log('OIDC callback is successfull. User: ', user ? user : '');
+const onSuccess = (user: any) => console.log('OIDC callback is successfull. User: ', user || '');
 
 const H1 = asToken(addClasses('pt-5'), asHeader1)(H1$);
 const Button = addClasses('py-2 px-4 mr-3 border border-gray-600')(ButtonBase);

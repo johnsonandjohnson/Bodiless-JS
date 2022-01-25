@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /**
  * Copyright © 2021 Johnson & Johnson
  *
@@ -69,7 +70,7 @@ const isTextValid = (text: string): boolean => {
     const aliases = text.split('\n');
     const validatedAliases = aliases.filter(item => {
       // For each item, first and last chars must not be whitespace.
-      if (item[0] == ' ' || item[item.length - 1] == ' ') {
+      if (item[0] === ' ' || item[item.length - 1] === ' ') {
         return false;
       }
 
@@ -80,10 +81,10 @@ const isTextValid = (text: string): boolean => {
       // First and second values can not be numbers.
       // Last value, if provided, must be validated as a number to represent status code.
       if (
-        items.length !== ALIAS_PARTS_COUNT && items.length !== (ALIAS_PARTS_COUNT - 1)
-        || typeof items[0] !== 'string' || !isNaN(parseInt(items[0]))
-        || typeof items[1] !== 'string' || !isNaN(parseInt(items[1])) 
-        || typeof items[2] !== 'undefined' && isNaN(parseInt(items[2]))
+        (items.length !== ALIAS_PARTS_COUNT && items.length !== (ALIAS_PARTS_COUNT - 1))
+        || typeof items[0] !== 'string' || !isNaN(parseInt(items[0], 10))
+        || typeof items[1] !== 'string' || !isNaN(parseInt(items[1], 10))
+        || (typeof items[2] !== 'undefined' && isNaN(parseInt(items[2], 10)))
       ) {
         return false;
       }
@@ -102,9 +103,7 @@ const convertAliasJsonToText = (aliases: [AliasItem]): string => {
   if (!(aliases && aliases.length)) {
     return '';
   }
-  return aliases.map((e: AliasItem) => {
-    return `${e.fromPath} ${e.toPath} ${e.statusCode}`;
-  }).join('\n');
+  return aliases.map((e: AliasItem) => `${e.fromPath} ${e.toPath} ${e.statusCode}`).join('\n');
 };
 
 const convertAliasTextToJson = (text: string) => {
@@ -169,7 +168,7 @@ const FormBodyBase = () => {
         aliases: initialAliases,
         isValid: true,
       };
-    
+
       setValues(values);
     }, []);
 

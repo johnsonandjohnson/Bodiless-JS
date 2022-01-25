@@ -21,11 +21,14 @@ import { flowRight } from 'lodash';
 import { HOC } from '@bodiless/fclasses';
 import Helmet from 'react-helmet';
 import {
-  withDefaultDataLayer,
   asBodilessHelmet,
-  withDataLayerScript,
-  withMetaForm, withDataLayerItem,
+  withMetaForm,
 } from '@bodiless/components';
+import {
+  withDataLayerItem,
+  withDataLayerScript,
+  withDefaultDataLayer
+} from '@bodiless/gtm';
 import { ComponentType } from 'react';
 
 // Define the global dataLayer default data.

@@ -14,8 +14,8 @@
  */
 
 // @todo: use oclif/command
-import SearchTool, { SearchConfig } from '../SearchTool';
 import dotenv from 'dotenv';
+import SearchTool, { SearchConfig } from '../SearchTool';
 import type { TSearchConf } from '../types';
 
 dotenv.config({

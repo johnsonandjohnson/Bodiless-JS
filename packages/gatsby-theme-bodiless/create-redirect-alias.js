@@ -45,7 +45,6 @@ module.exports = async ({ actions }, logger) => {
         fromPath: item.fromPath,
         ...baseItem,
       });
-
     });
   }
 };

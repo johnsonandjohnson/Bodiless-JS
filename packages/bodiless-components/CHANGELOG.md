@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.6](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.5...v0.3.6) (2022-01-24)
+
+
+### Bug Fixes
+
+* **bodiless-gtm:** Add bodiless/gtm and make withDataLayerScript more flexible ([#1340](https://github.com/johnsonandjohnson/bodiless-js/issues/1340)) ([77abac2](https://github.com/johnsonandjohnson/bodiless-js/commit/77abac25cd2cf6054bdcd59645665fc65ce92903))
+
+
+### Features
+
+* **aria-label:** Add Aria Label Type ([f9309ef](https://github.com/johnsonandjohnson/bodiless-js/commit/f9309ef1d682d8f22cbb94e6f3dd363b84e577ad))
+* **aria-label:** Add Skelenton Helpers To Convert Id Into Props ([3d31de1](https://github.com/johnsonandjohnson/bodiless-js/commit/3d31de1e0d0f4109cc4fc6855c1c15dd459d8a24))
+* **aria-label:** Adjust Aria Label Id ([4169f57](https://github.com/johnsonandjohnson/bodiless-js/commit/4169f57b4cbfbe5a05dcba1a29a978105deefc73))
+* **aria-label:** Edit Aria Label Field And Add It To Submit Handler ([a4c0e2e](https://github.com/johnsonandjohnson/bodiless-js/commit/a4c0e2ebf43bd49ea6d8b44d4165a4e39df7960b))
+* **aria-label:** Fixing aria-label field logic ([171af80](https://github.com/johnsonandjohnson/bodiless-js/commit/171af805fea685f85e72ee1cf77e6a4825424bf2))
+* **aria-label:** Implement hook to add aria-label props ([da7a154](https://github.com/johnsonandjohnson/bodiless-js/commit/da7a154884ddbd1abe545583deb52e11957ba94b))
+* **aria-label:** Implementing aria-label overwrite ([82f9e8f](https://github.com/johnsonandjohnson/bodiless-js/commit/82f9e8f97ef7e176febb7fa8a0e04cc004ef8221))
+* **redirect:** Ability edit redirects ([#1330](https://github.com/johnsonandjohnson/bodiless-js/issues/1330)) ([aad069b](https://github.com/johnsonandjohnson/bodiless-js/commit/aad069bcc82f065c681d78cde59249d56350d938))
+
+
+
+
+
 ## [0.3.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.4...v0.3.5) (2021-12-29)
 
 

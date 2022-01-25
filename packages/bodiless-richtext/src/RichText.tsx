@@ -252,7 +252,7 @@ const BasicRichText = React.memo((props: RichTextBaseProps) => {
   const initialValue$ = useInitialValue(initialValue);
   const value$ = value !== undefined && !isEmpty(value) ? value : initialValue$;
 
-  // Manually setting the children prop is required after slate@0.67. The value 
+  // Manually setting the children prop is required after slate@0.67. The value
   // prop is now only used as the editor's initial value.
   // See: https://github.com/ianstormtaylor/slate/pull/4540#issuecomment-951380551
   editor.current.children = value$;

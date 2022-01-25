@@ -27,7 +27,7 @@ exports.onCreateWebpackConfig = ({ actions, stage }) => {
       // See: https://webpack.js.org/configuration/other-options/#snapshot
       snapshot: {
         managedPaths: glob.sync(
-          './node_modules/!(@bodiless)*', 
+          './node_modules/!(@bodiless)*',
           { absolute: true },
         ),
       },
