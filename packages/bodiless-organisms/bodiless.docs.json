@@ -3,6 +3,15 @@
     "SingleAccordion.md": "./doc/SingleAccordion.md",
     "FilterByGroup.md": "./doc/FilterByGroup.md",
     "Embed.md": "./doc/Embed.md",
-    "SocialShare.md": "./doc/SocialShare.md"
+    "SocialShare.md": "./doc/SocialShare.md",
+    "assets": {
+      "CategoryContextMenu.jpg": "./doc/assets/CategoryContextMenu.jpg",
+      "FilterByGroupCheckboxes.jpg": "./doc/assets/FilterByGroupCheckboxes.jpg",
+      "FilterByGroupContextMenu.jpg": "./doc/assets/FilterByGroupContextMenu.jpg",
+      "FilterByGroupRadioButtons.jpg": "./doc/assets/FilterByGroupRadioButtons.jpg",
+      "GroupContextMenu.jpg": "./doc/assets/GroupContextMenu.jpg",
+      "GroupMembershipForm.jpg": "./doc/assets/GroupMembershipForm.jpg",
+      "GroupMembershipFormGroupSelected.jpg": "./doc/assets/GroupMembershipFormGroupSelected.jpg"
+    }
   }
 }
