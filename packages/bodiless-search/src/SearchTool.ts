@@ -82,7 +82,7 @@ class SearchTool implements SearchToolInterface {
     return sourcePaths.map(source => {
       const sourcePath = typeof source === 'string' ? source : source.path;
       const folderPath = path.resolve(process.cwd(), sourcePath);
-      const exclude = typeof source !== 'string' && source.exclude || excludePaths;
+      const exclude = (typeof source !== 'string' && source.exclude) || excludePaths;
 
       if (!fs.existsSync(folderPath)) {
         throw new Error(`Invalid source path for the ${settings.name} language: ${folderPath}`);
@@ -101,10 +101,10 @@ class SearchTool implements SearchToolInterface {
         console.log(`[${settings.name}] Excluded paths: `, exclude);
         console.log(`[${settings.name}] Found files: `, files);
       }
-      
+
       return {
         path: sourcePath,
-        files: files,
+        files,
       };
     });
   };
@@ -116,7 +116,7 @@ class SearchTool implements SearchToolInterface {
     const documents: TDocument[] = [];
     const selectors = this.config.contentSelectors;
     const excluders = this.config.contentExcluders;
-    
+
     sources.forEach(source => {
       source.files
         .filter(filePath => fs.statSync(filePath).isFile())
@@ -146,7 +146,7 @@ class SearchTool implements SearchToolInterface {
           }
         });
     });
-    
+
     return documents;
   };
 
@@ -204,7 +204,7 @@ export class SearchConfig {
         languages,
         indexConfig,
       } = JSON.parse(fs.readFileSync(configFile, 'utf8'));
-      
+
       return {
         sourceTypes,
         contentSelectors,
@@ -216,14 +216,14 @@ export class SearchConfig {
 
     let searchEngine: SearchEngineInterface;
     const engine = env2string('BODILESS_SEARCH_ENGINE', '');
-    
+
     switch (engine) {
       case 'lunr':
       default:
         searchEngine = new LunrSearch();
         break;
     }
-    
+
     const sourcePaths = env2array('BODILESS_SEARCH_SOURCE_PATH', ['./public']);
     const sourceTypes = env2array('BODILESS_SEARCH_SOURCE_TYPE', ['html', 'htm']);
     const indexFilePath = env2string('BODILESS_SEARCH_INDEX_PATH', './public');

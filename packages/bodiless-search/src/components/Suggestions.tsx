@@ -82,8 +82,9 @@ const withSuggestionLink:HOC<{}, SuggestionLinkProps> = Component => {
         href={searchPath}
         onClick={(event: React.MouseEvent) => {
           event.preventDefault();
-          if (props.additionalHandler) {
-            props.additionalHandler({ text, searchTerm });
+          const { additionalHandler } = props;
+          if (additionalHandler) {
+            additionalHandler({ text, searchTerm });
           }
           if (
             getSearchPagePath() !== window.location.pathname.replace(/^\//, '').replace(/\/$/, '')

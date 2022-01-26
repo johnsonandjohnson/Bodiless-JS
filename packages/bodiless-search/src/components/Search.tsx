@@ -137,9 +137,10 @@ export type SearchProps = DesignableComponentsProps<SearchComponents> & HTMLProp
   suggestionMessage?: string,
 };
 
-type SearchResultProps = DesignableComponentsProps<SearchResultComponents> & HTMLProps<HTMLElement> & { 
-  resultCountMessage?: string, 
-  searchResultMessage?: string 
+type SearchResultProps = DesignableComponentsProps<SearchResultComponents>
+& HTMLProps<HTMLElement> & {
+  resultCountMessage?: string,
+  searchResultMessage?: string
 };
 
 const defaultResultCountMessage = 'Showing %count% result(s).';
@@ -193,11 +194,11 @@ const SearchResultBase: FC<SearchResultProps> = ({
 const defaultSuggetionTotalMessage = '%total% search suggestions.';
 const defaultSuggestionMessage = '%suggestion%, %count% results.';
 
-const SearchBoxBase: FC<SearchProps> = ({ 
+const SearchBoxBase: FC<SearchProps> = ({
   components,
   suggetionTotalMessage = defaultSuggetionTotalMessage,
   suggestionMessage = defaultSuggestionMessage,
-  ...props 
+  ...props
 }) => {
   const [queryString, setQueryString] = useState('');
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
@@ -211,9 +212,8 @@ const SearchBoxBase: FC<SearchProps> = ({
     const totalResults = suggetionTotalMessage.replace(
       '%total%', String(Math.min(suggestions.length, 5))
     );
-    const suggestionList = suggestions.slice(0, 5).map(s => {
-      return suggestionMessage.replace('%suggestion%', s.text).replace('%count%', String(s.count));
-    }).join(' ');
+    const suggestionList = suggestions.slice(0, 5).map(s => suggestionMessage
+      .replace('%suggestion%', s.text).replace('%count%', String(s.count))).join(' ');
 
     return `${totalResults} ${suggestionList}`;
   }, [suggestions, shouldShowSuggestions]);
@@ -290,7 +290,7 @@ const SearchBoxBase: FC<SearchProps> = ({
         aria-owns={ariaId.current}
       />
       <SearchButton onClick={onClickHandler} />
-      <SuggestionAnnouncer 
+      <SuggestionAnnouncer
         role="status"
         aria-live="polite"
         aria-atomic="true"
@@ -300,9 +300,9 @@ const SearchBoxBase: FC<SearchProps> = ({
       </SuggestionAnnouncer>
       {
         shouldShowSuggestions && (
-          <Suggestions 
-            suggestions={suggestions} 
-            searchTerm={queryString} 
+          <Suggestions
+            suggestions={suggestions}
+            searchTerm={queryString}
             ariaId={ariaId.current}
           />
         )

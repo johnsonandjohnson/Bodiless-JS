@@ -12,8 +12,9 @@
  * limitations under the License.
  */
 
-
-import { ifToggledOff, ifToggledOn, withAppendChild, withChild } from '@bodiless/core';
+import {
+  ifToggledOff, ifToggledOn, withAppendChild, withChild
+} from '@bodiless/core';
 import {
   Div, asToken, replaceWith, startWith, withDesign, addClasses, withoutProps,
 } from '@bodiless/fclasses';

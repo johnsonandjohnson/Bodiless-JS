@@ -25,10 +25,9 @@ const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
 const IMG_ASSETS_PATH = `/images${path.sep}pages`;
 
-const getDirectories = (dir) =>
-  fs
-    .readdirSync(dir)
-    .filter((file) => fs.statSync(`${dir}/${file}`).isDirectory());
+const getDirectories = (dir) => fs
+  .readdirSync(dir)
+  .filter((file) => fs.statSync(`${dir}/${file}`).isDirectory());
 // once we on node > 10.12.0
 // we can leverage fs.mkdir since it supports { recursive: true }
 function ensureDirectoryExistence(filePath) {
@@ -60,9 +59,9 @@ class Page {
   }
 
   get exists() {
-    const files = this.supportedExtensions.map((extension) =>
-      path.join(this.getBasePath(), `${this.path}.${extension}`),
-    );
+    const files = this.supportedExtensions.map((extension) => path.join(
+      this.getBasePath(), `${this.path}.${extension}`
+    ));
     return files.some((file) => fs.existsSync(file));
   }
 
@@ -166,33 +165,32 @@ class Page {
     const actions = [];
     const reg = /from ('|")(\.\..*)('|")/g;
 
-    const readF = (file) =>
-      new Promise((resolve, reject) => {
-        const filePath = `${destinationPath}/${file.name}`;
-        fs.readFile(filePath, 'utf8', (err, content) => {
-          if (err) return reject();
-          const matchs = content.match(reg);
-          if (!matchs.length) return reject();
-          let newContent = content;
-          matchs.forEach((item) => {
-            const delimiter = item[item.search(/'|"/)];
-            const oldPath = item.split(' ')[1].replace(/'|"/g, '');
-            const from = path.dirname(filePath);
-            const to = path.normalize(`${originPath}/${oldPath}`);
-            const newPath = path.relative(from, to).replace(/\\/g, '/');
+    const readF = (file) => new Promise((resolve, reject) => {
+      const filePath = `${destinationPath}/${file.name}`;
+      fs.readFile(filePath, 'utf8', (err, content) => {
+        if (err) return reject();
+        const matchs = content.match(reg);
+        if (!matchs.length) return reject();
+        let newContent = content;
+        matchs.forEach((item) => {
+          const delimiter = item[item.search(/'|"/)];
+          const oldPath = item.split(' ')[1].replace(/'|"/g, '');
+          const from = path.dirname(filePath);
+          const to = path.normalize(`${originPath}/${oldPath}`);
+          const newPath = path.relative(from, to).replace(/\\/g, '/');
 
-            newContent = newContent.replace(
-              `${delimiter}${oldPath}${delimiter}`,
-              `${delimiter}${newPath}${delimiter}`,
-            );
-          });
-          fs.writeFile(filePath, newContent, (writeErr) => {
-            if (writeErr) return reject();
-            return resolve();
-          });
-          return true;
+          newContent = newContent.replace(
+            `${delimiter}${oldPath}${delimiter}`,
+            `${delimiter}${newPath}${delimiter}`,
+          );
         });
+        fs.writeFile(filePath, newContent, (writeErr) => {
+          if (writeErr) return reject();
+          return resolve();
+        });
+        return true;
       });
+    });
 
     files.forEach((file) => {
       actions.push(readF(file));
@@ -262,13 +260,13 @@ class Page {
 
   static async clonePageAssets(origin, destination, basePath, target) {
     const originPath = origin.replace(/\/$/, '');
-    const originPathCrossPlatform = os.platform() === 'win32' ?
-      originPath.replace('/', '\\\\') :
-      originPath;
+    const originPathCrossPlatform = os.platform() === 'win32'
+      ? originPath.replace('/', '\\\\')
+      : originPath;
     const destinationPath = destination.replace(/\/$/, '');
-    const destinationPathCrossPlatform = os.platform() === 'win32' ?
-      destinationPath.replace('/', '\\') :
-      destinationPath;
+    const destinationPathCrossPlatform = os.platform() === 'win32'
+      ? destinationPath.replace('/', '\\')
+      : destinationPath;
 
     const originStaticPath = path.join(backendStaticPath, target, originPath);
     const destinationStaticPath = path.join(
@@ -325,11 +323,13 @@ class Page {
                 // Make sure to not replace '/images/pages' part of the path
                 // .e.g if the source page path is '/images';
                 const imgAssetsPathRegExp = IMG_ASSETS_PATH.replace('\\', '\\\\\\\\');
-                const originPathRegExp = new RegExp('(' + imgAssetsPathRegExp + '.*' + ')' + originPathCrossPlatform, 'g');
+                const originPathRegExp = new RegExp(
+                  `(${imgAssetsPathRegExp}.*)${originPathCrossPlatform}`, 'g'
+                );
                 const options = {
                   files: fileToBeUpdated,
                   from: originPathRegExp,
-                  to: match => match.replace(originPathRegExp, '$1' + destinationPathCrossPlatform),
+                  to: match => match.replace(originPathRegExp, `$1${destinationPathCrossPlatform}`),
                 };
                 return Page.updateFileContent(options);
               }),
@@ -421,6 +421,7 @@ class Page {
     return readPromise;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   removePageAssets(path) {
     return new Promise((resolve, reject) => {
       fse.remove(path, err => {

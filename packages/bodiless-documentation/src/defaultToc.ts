@@ -27,6 +27,9 @@ const toc = {
       SEO: {},
     },
     FileMenu: {},
+    ToolsMenu: {
+      Aliases: {},
+    },
   },
   Design: {},
   Components: {},

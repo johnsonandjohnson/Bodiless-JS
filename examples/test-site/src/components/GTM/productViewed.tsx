@@ -19,7 +19,7 @@
 import Helmet from 'react-helmet';
 import {
   withDefaultDataLayer, withDataLayerItem,
-} from '@bodiless/components';
+} from '@bodiless/gtm';
 import { withDataLayerPageType, withGlobalGTMForm } from './index';
 // Define the product dataLayer default data.
 const productDefaultDataLayer = {

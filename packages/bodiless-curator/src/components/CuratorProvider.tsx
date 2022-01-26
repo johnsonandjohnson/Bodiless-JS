@@ -15,6 +15,7 @@
 import { useEditContext } from '@bodiless/core';
 import React, { ComponentType, useEffect, useState } from 'react';
 import CuratorContext from './CuratorContext';
+
 declare global {
   interface Window {
     /**

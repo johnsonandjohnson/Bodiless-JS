@@ -80,7 +80,7 @@ export const LibraryItemProvider: FC<LibraryItemProviderProps> = ({ isLibrary, c
   const [isLibraryItem, setIsLibraryItem] = useState(isLibrary);
 
   return (
-    <LibraryItemContext.Provider value={{ isLibraryItem, setIsLibraryItem }} >
+    <LibraryItemContext.Provider value={{ isLibraryItem, setIsLibraryItem }}>
       {children}
     </LibraryItemContext.Provider>
   );
@@ -93,8 +93,8 @@ export const LibraryItemProvider: FC<LibraryItemProviderProps> = ({ isLibrary, c
  * @see LibraryItemContextProps
  */
 export const withLibraryItemContext: HOC<any> = Component => props => (
+  // eslint-disable-next-line react/destructuring-assignment
   <LibraryItemProvider isLibrary={isLibraryItem(props.flowContainerItem)}>
     <Component {...props} />
   </LibraryItemProvider>
 );
-
