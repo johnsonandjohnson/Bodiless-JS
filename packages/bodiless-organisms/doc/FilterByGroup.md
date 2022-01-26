@@ -205,7 +205,7 @@ To remove a Preset Filter:
 ### Usage
 
 ```jsx
-import { FilterByGroupClean } from '@bodiless/filtering';
+import { FilterByGroupClean as FilterByGroup } from '@bodiless/filtering';
 
 const suggestions = [
   { id: '1', name: 'Tag 1' },
