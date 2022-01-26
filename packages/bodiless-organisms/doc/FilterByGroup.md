@@ -26,8 +26,8 @@ For configuration instructions, see: [Site Builder Details](#site-builder-detail
 |:-----------------------------:|:-------------------------:|
 | ![Filter By Group Component with Radio Buttons](./assets/FilterByGroupRadioButtons.jpg ':size=300') | ![Filter By Group Component with Checkboxes](./assets/FilterByGroupCheckboxes.jpg ':size=300')
 
-Filter By Group Components on separate pages can be configured to use the same site-wide data
-source, essentially, linking the filters. By doing this, the Categories and Groups listed in these
+Filter By Group Components on separate pages can be configured to use the same sitewide data source,
+essentially, linking the filters. By doing this, the Categories and Groups listed in these
 components will be shared between the linked filters on their respective pages.
 
 ## Content Editor Details
@@ -37,11 +37,11 @@ the Groups listed in the component, as well as how they're categorized, using th
 
 ![Filter By Group Context Menu](./assets/FilterByGroupContextMenu.jpg ':size=50%')
 
-?> **Note:** If you're doing something where you would benefit from having full access to a Filter
-By Group Component (e.g., manipulating Groups, adding new Products, etc.), you should use your
-site's primary listing page (e.g., `/products/`), where there is no [Preset
-Filter](#configure-a-preset-filter) configured; this will allow you to see all the items in the
-filter, as well as edit the Groups as needed.
+?> **Note:** If you're editing where you would benefit from having full access to a Filter By Group
+Component (e.g., manipulating Groups, adding new Products, etc.), you should use your site's primary
+listing page (e.g., `/products/`), where there is no [Preset Filter](#configure-a-preset-filter)
+configured; this will allow you to see all the items in the filter, as well as edit the Groups as
+needed.
 
 ### Add a Category
 
@@ -55,7 +55,8 @@ To add a Category to a Filter By Group Component:
       be an unnamed Category item (with the placeholder text "Category Name") present in the
       otherwise empty Filter body; skip to Step 3.
     - If you intend to add multiple Categories, you may click **Add** once for each Category you
-      wish to add.
+      wish to add (assuming you want all these Categories listed sequentially from where you've
+      selected).
 01. Click elsewhere on the page to dismiss the context menu.
 01. Select the unnamed Category item(s) (with the placeholder text "Category Name"), and enter a
     name for it.
@@ -124,7 +125,7 @@ making it local to the page; in this way, you can have multiple pages with Filte
 Components, each with independently configured saved filters.
 
 ?> **Note:** As mentioned previously, Filter By Group Components can be configured to use the same
-site-wide data source. While linked filters will share Categories and Groups across pages, Preset
+sitewide data source. While linked filters will share Categories and Groups across pages, Preset
 Filters are saved at page-level and not shared.
 
 By creating a Preset Filter, you will be locking the Filter UI — disabling the
@@ -293,3 +294,62 @@ const InsideFilterByGroup = (props) => {
   const resetSelected = () => setSelectedTag();
 }
 ```
+
+### Add Preset Filters
+
+To use Preset Filters, your site expects to share a node key with the primary filter's Groups and
+Categories.
+
+The suggested pattern is to move your primary filtered data to a sitewide collection by setting
+`withNodeKey` to use the `nodeCollection` 'site'.  
+For example:
+
+```tsx
+const ProductListingFlowContainer = asToken(
+  asFilterableProductContainer,
+  withProductStrictSnapSize,
+  withProductVariations,
+  asFlowContainerFullWidth,
+  asFlowContainerWithMargins,
+  withNodeKey({ nodeKey: 'product_listing_cards', nodeCollection: 'site' }),
+)(FlowContainer);
+```
+
+If any content already exists on your site, move the files to `/src/data/site`.
+
+Then, where you define your filter tokens, the primary filter will use a `FilterByGroup` component
+(e.g., `FilterByGroupSingleSiteWide`).  
+For example:
+
+```tsx
+const main = (props) => (
+  <Page {...props}>
+    <Layout>
+      <SectionContent>
+        <SectionMargin>
+          <FilterByGroupSingleSiteWideNoReset>
+            <ProductListingFlowContainer />
+          </FilterByGroupSingleSiteWideNoReset>
+        </SectionMargin>
+      </SectionContent>
+    </Layout>
+  </Page>
+);
+```
+
+Note, adding the token `withSiteWideFilter` will add the reset feature to a filter.
+
+If your primary filter (e.g., on the Products (`/products`) page) and your Preset Filter won't use
+the same tokens (say, one needs a reset button and one doesn't), then we suggest you compose two
+tokens — but they both must include `withSiteWideFilter`. Remember, as well, that they must share
+the same filter node key that is stored at site level.
+
+<!-- Inlining HTML to add multi-line info block with unordered list. -->
+<div class="warn">
+  <strong>Note:</strong> For additional context, the above code snippets were borrowed from the
+  BodilessJS Test Site:
+
+  - [`/src/components/ProductListing/ProductListingFlowContainer.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ff5b9a01e83b13eae171a07fedfdf186c3184f77/examples/test-site/src/components/ProductListing/ProductListingFlowContainer.tsx#L32-L39)
+  - [`/src/data/pages/default-filter/index.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ff5b9a01e83b13eae171a07fedfdf186c3184f77/examples/test-site/src/data/pages/default-filter/index.tsx#L28-L40)
+
+</div>
