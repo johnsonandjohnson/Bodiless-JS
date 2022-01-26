@@ -297,52 +297,38 @@ const InsideFilterByGroup = (props) => {
 
 ### Add Preset Filters
 
-To use Preset Filters, your site expects to share a node key with the primary filter's Groups and
-Categories.
+To use Preset Filters, your site expects to share a node key with the primary filter's Categories
+and Groups.
 
 The suggested pattern is to move your primary filtered data to a sitewide collection by setting
 `withNodeKey` to use the `nodeCollection` 'site'.  
 For example:
 
-```tsx
-const ProductListingFlowContainer = asToken(
-  asFilterableProductContainer,
-  withProductStrictSnapSize,
-  withProductVariations,
-  asFlowContainerFullWidth,
-  asFlowContainerWithMargins,
-  withNodeKey({ nodeKey: 'product_listing_cards', nodeCollection: 'site' }),
-)(FlowContainer);
-```
+01. Move the data being filtered to a sitewide collection:
+    ```tsx
+    const ProductListingFlowContainer = asToken(
+      asFilterableProductContainer,
+      withProductStrictSnapSize,
+      withProductVariations,
+      asFlowContainerFullWidth,
+      asFlowContainerWithMargins,
+      withNodeKey({ nodeKey: 'product_listing_cards', nodeCollection: 'site' }),
+    )(FlowContainer);
+    ```
+01. Move the Categories and Groups of your filter to a sitewide collection:
+    ```tsx
+    const withSiteWideFilter = withDesign({
+      Filter: withNodeKey({ nodeKey: 'filter', nodeCollection: 'site' }),
+    });
 
-If any content already exists on your site, move the files to `/src/data/site`.
-
-Then, where you define your filter tokens, the primary filter will use a `FilterByGroup` component
-(e.g., `FilterByGroupSingleSiteWide`).  
-For example:
-
-```tsx
-const main = (props) => (
-  <Page {...props}>
-    <Layout>
-      <SectionContent>
-        <SectionMargin>
-          <FilterByGroupSingleSiteWideNoReset>
-            <ProductListingFlowContainer />
-          </FilterByGroupSingleSiteWideNoReset>
-        </SectionMargin>
-      </SectionContent>
-    </Layout>
-  </Page>
-);
-```
-
-Note, adding the token `withSiteWideFilter` will add the reset feature to a filter.
-
-If your primary filter (e.g., on the Products (`/products`) page) and your Preset Filter won't use
-the same tokens (say, one needs a reset button and one doesn't), then we suggest you compose two
-tokens — but they both must include `withSiteWideFilter`. Remember, as well, that they must share
-the same filter node key that is stored at site level.
+    export const FilterByGroupSingleSiteWide = flow(
+      asFilterByGroup,
+      withSingleAllowedTag,
+      withSiteWideFilter,
+    )(FilterByGroupClean);
+    ```
+    - **Note:** The Preset Filter requires sitewide data and a sitewide token; adding the token
+      `withSiteWideFilter` will add the sitewide filter feature to a filter.
 
 <!-- Inlining HTML to add multi-line info block with unordered list. -->
 <div class="warn">
@@ -350,6 +336,15 @@ the same filter node key that is stored at site level.
   BodilessJS Test Site:
 
   - [`/src/components/ProductListing/ProductListingFlowContainer.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ff5b9a01e83b13eae171a07fedfdf186c3184f77/examples/test-site/src/components/ProductListing/ProductListingFlowContainer.tsx#L32-L39)
-  - [`/src/data/pages/default-filter/index.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ff5b9a01e83b13eae171a07fedfdf186c3184f77/examples/test-site/src/data/pages/default-filter/index.tsx#L28-L40)
+  - [`/src/components/FilterByGroup/index.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/ff5b9a01e83b13eae171a07fedfdf186c3184f77/examples/test-site/src/components/FilterByGroup/index.tsx#L60-L68)
 
 </div>
+
+?> **Note:** If any content already exists on your site, move the JSON files to `/src/data/site`.
+
+Then, apply your filter and data container tokens in the page/template/component.
+
+If your primary filter (e.g., on the Products (`/products`) page) and your Preset Filter won't use
+the same tokens (say, one needs a reset button and one doesn't), then we suggest you compose two
+tokens — but they both must include `withSiteWideFilter`. Remember, as well, that they must share
+the same filter node key that is stored at site level.
