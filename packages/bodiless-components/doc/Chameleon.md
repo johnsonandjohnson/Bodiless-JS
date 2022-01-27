@@ -172,7 +172,6 @@ const toggleVisibilityDesign = {
 const VisibilityToggle = flow(
   addClasses('invisible'),
   applyChameleon,
-  withDesign(toggleVisibilityDesign),
 )(BaseAvailability);
 
 const VisibilityToggleWrapper = flow(
@@ -215,11 +214,6 @@ Here we've decomposed `asBodilessChameleon` into three constituent parts:
 First, We create a wrapper component (`VisibilityToggleWrapper`) which
 establishes the context and provides the menu button. Then we create an inner
 component (`VisibilityToggle`) which uses the data to toggle the visibility.
-
-> Note that we've had to apply the design to both components. This is because
-> the component providing the button needs to know the possible states so it can
-> properly render the form, while the component providing the actual toggle
-> needs to know the complete design so it can apply it.
 
 ### Toggling Stateful Components
 

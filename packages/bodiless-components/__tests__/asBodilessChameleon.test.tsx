@@ -182,8 +182,7 @@ describe('asBodilessChameleon', () => {
         ));
         const Form = getForm(wrapper);
         const form = mount(<Form />);
-        // First component is selected by default
-        expect(form.find('input[value="A"]').prop('checked')).toBeTruthy();
+        expect(form.find('input[value="A"]').prop('checked')).toBeFalsy();
         expect(form.find('input[value="B"]').prop('checked')).toBeFalsy();
         expect(form.find('label#bl-component-form-chameleon-radio-A').text()).toBe('A');
         expect(form.find('label#bl-component-form-chameleon-radio-B').text()).toBe('B');

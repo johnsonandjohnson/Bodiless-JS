@@ -19,6 +19,7 @@ import {
   addProps,
   replaceWith,
   addPropsIf,
+  Span,
 } from '@bodiless/fclasses';
 import { ifViewportIsNot, ifViewportIs } from '@bodiless/components';
 import {
@@ -65,6 +66,7 @@ const asResponsiveFilterByGroup = asToken(
   ),
   ifViewportIs(['lg', 'xl', '2xl'])(
     withDesign({
+      FilterBody: replaceWith(Span),
       RefineButton: replaceWith(() => null),
     }),
   ),

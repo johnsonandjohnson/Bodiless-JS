@@ -22,7 +22,7 @@ import {
   withNode, withMenuOptions, withResizeDetector, withActivateOnEffect,
 } from '@bodiless/core';
 import {
-  designable, stylable, ComponentOrTag,
+  stylable, ComponentOrTag,
 } from '@bodiless/fclasses';
 import SortableChild from './SortableChild';
 import SortableContainer, { SortableListProps } from './SortableContainer';
@@ -36,6 +36,7 @@ import {
   SortableChildProps,
 } from './types';
 import { ComponentDisplayModeProvider, ComponentDisplayMode } from './ComponentDisplayMode';
+import { useSelectorComponents } from '../ComponentSelector/SelectorComponents';
 
 const ChildNodeProvider = withNode(React.Fragment);
 
@@ -69,9 +70,18 @@ const withKeyFromDesign = (Component: ComponentOrTag<any>) => {
  */
 const EditFlowContainer: FC<EditFlowContainerProps> = (props: EditFlowContainerProps) => {
   const {
-    components, ui, snapData, getDefaultWidth, itemButtonGroupLabel,
+    design, ui, snapData, getDefaultWidth, itemButtonGroupLabel,
   } = props;
   const items = useItemHandlers().getItems();
+  const { components } = useSelectorComponents({
+    design,
+    startComponents: EditFlowContainerComponents,
+    selectedComponents: [
+      ...items.map(item => item.type),
+      'ComponentWrapper',
+      'Wrapper',
+    ],
+  });
   const {
     onFlowContainerItemResize,
     setFlowContainerItems,
@@ -123,10 +133,6 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props: EditFlowContainerP
 
 EditFlowContainer.displayName = 'EditFlowContainer';
 
-EditFlowContainer.defaultProps = {
-  components: {},
-};
-
 const asEditFlowContainer = flowRight(
   // with ActivateOnEffectProvider should be applied after withKeyFromDesign in
   // order to keep state after re-mount.
@@ -134,7 +140,6 @@ const asEditFlowContainer = flowRight(
   withKeyFromDesign,
   withResizeDetector,
   observer,
-  designable(EditFlowContainerComponents, 'FlowContainer'),
   withMenuOptions(
     (p: EditFlowContainerProps) => ({
       useMenuOptions,
