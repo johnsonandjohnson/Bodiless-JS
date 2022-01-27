@@ -213,31 +213,35 @@ So, in the above example, there would be 4 files:
   blurb-2$body.json
 ```
 
-> Note: be sure that you do not use a node key which results in a json file with
-> the same name as a source module in the same directory. For example, don't use
-> a node key of 'foo' (producing a `foo.json`) if you have a 'foo.ts(x)' file in
-> the same directory. Doing so can cause issues with module resolution if you
-> set the `resolveJsonModules` directive to `true` in your projects
-> `tsconfig.json`.
+?> **Note:** Be sure that you do not use a node key which results in a JSON file with the same name
+as a source module in the same directory. For example, don't use a node key of 'foo' (producing a
+`foo.json`) if you have a `foo.ts(x)` file in the same directory; doing so can cause issues with
+module resolution if you set the `resolveJsonModules` directive to `true` in your project's
+`tsconfig.json`.
 
-### "Sidecar" nodes.
+### "Sidecar" Nodes
 
 There are some cases in which having the data model mirror the component hierarchy
 can be undesirable. For example, suppose we wanted to enhance our component above
 to add an `aria-label` attribute whose text was stored as content:
-```
+
+```tsx
 const ComponentWithAriaLabel = withNode(
   props => <ComponentWithData {...props} aria-label={useNode().node.data} />
 );
 ```
+
 Or, better, you could encapsulate this enhancement in a simple, reusable HOC.
-```
+
+```tsx
 const withAriaLabel = Component => withNode(
   props => (<Component {...props} aria-label={useNode().node.data} />)
 );
 ```
-And then
-```
+
+And then:
+
+```tsx
 const ComponentWithAriaLabel = withAriaLabel(ComponentWithData);
 ...
 <ComponentWithAriaLabel nodeKey="content" />
@@ -250,16 +254,20 @@ are only specifying a `nodeKey` to the outer component.
 
 This could be solved by ensuring that our aria-label component provides a
 `nodeKey` to its child:
-```
+
+```tsx
 const withAriaLabel = Component => withNode(
   props => (<Component nodeKey="component" {...props} aria-label={useNode().node.data} />)
 );
 ```
+
 This will work, but consider the resulting node hierarchy:
+
 ```
 content.json // This contains the aria-label data
 content$component.json // This contains the actual content of the original component.
 ```
+
 The original component's data are now stored as a child of the aria-label, which
 seems backwards. And it's worse if the original component had already been
 placed on a site and was rendering actual data. When replaced with the enhanced
@@ -269,21 +277,26 @@ aria-label, and the actual text displayed on the screen will be lost.
 What we really want to to attach the aria-label data alongside the original
 component. This will leave the original data intact and give us a more rational
 hierarchy. To achieve this, Bodiless provides the notion of a sidecar node:
-```
+
+```tsx
 const ComponentWithAriaLabel = withSidecarNodes(
   withNodeKey('aria-label'),
   withAriaLabel,
 )(ComponentWithData);
 ```
+
 In effect, this creates a sub-hierarchy off of the current node which is used
 for all the enclosed enhancements. The resulting hierarchy makes much more
 sense:
+
 ```
 content.json // contains the orignial content.
 aria-label.json // contains the aria-label data.
+```
 
 If you wanted to bundle these together, you could create a parent node which owns both:
-```
+
+```tsx
 const ComponentWithAriaLabel = flowRight(
   withNode,
   withSidecarNodes(
@@ -293,7 +306,9 @@ const ComponentWithAriaLabel = flowRight(
   withNodeKey('component'),
 )(ComponentWithData);
 ```
-giving
+
+Giving:
+
 ```
 content$aria-label.json
 content$component.json
@@ -305,7 +320,8 @@ The examples above can be refactored to make them more composable.
 
 Instead of defining our `ComponentWithData` as a Component, we can abstract that functionality
 to an HOC (a very common pattern in BodilessJS).
-```
+
+```tsx
 const asComponentWithData = BaseComponent => {
   const ComponentWithData = props => (
     <BaseComponent {...props}>
@@ -324,13 +340,16 @@ export default nodeKey => flowRight(
 
 Note the use of `withNodeKey()` in the above. This is simply providing a shorthand way
 to provide our enhancement with a node key.
-```
+
+```tsx
 const Blurb1 = withNodeKey('blurb-1');
 ...
 <Blurb1 />
 ```
-is equivalent to
-```
+
+is equivalent to:
+
+```tsx
 <Blurb nodeKey="blurb-1" />
 ```
 
@@ -340,10 +359,43 @@ easily create a "behavioral token" which adds data:
 
 ```javascript
 const asBlurbWithData = flow(
-  withNode, 
+  withNode,
   withDesign({
     Title: asComponentWithData('title'),
     Body: asComponentWithData('body'),
   }
 );
 ```
+
+### Node Collections
+
+For content that should appear on multiple pages — or, even, on _every_ page — BodilessJS uses _Node
+Collections_.
+
+For example, to create a sitewide footer, you could:
+
+```tsx
+const Footer = asEditable(
+  { nodeKey: 'footer', nodeCollection: 'site' },
+  'Enter footer text here...',
+)(Section);
+```
+
+And, then, you could place the footer by inserting `<Footer />` just before your closing `</Layout>`
+tag.
+
+BodilessJS provides two default Node Collections: `page` and `site`. The _page_ collection contains
+content limited to the current page, while the _site_ collection contains data available to all the
+pages on your site. The content provided in these collections is defined by the GraphQL query
+fragments you include in your page query:
+
+```tsx
+export const query = graphql`
+  query($slug: String!) {
+    ...PageQuery,
+    ...SiteQuery,
+  }
+`;
+```
+
+You can create additional collections by writing your own queries.

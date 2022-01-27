@@ -145,7 +145,7 @@ To create or modify a Preset Filter:
       01. Select a Category or Group in the Filter By Group Component.
           - If no Categories or Groups have been added yet, select the unnamed Category item (with
             the placeholder text "Category Name") that's at the top of the empty filter.
-      01. If the context menu has a "Filter" section with a **Page** icon, then the Preset Filter
+      01. If the context menu has a "Filter" section with a **Page** button, then the Preset Filter
           feature is enabled for that page; otherwise, you will need to contact a Site Builder /
           Developer to enable it for you.
 01. Using the instructions above, set up a Filter By Group Component with the desired Categories and
@@ -297,8 +297,12 @@ const InsideFilterByGroup = (props) => {
 
 ### Add Preset Filters
 
-To use Preset Filters, your site expects to share a node key with the primary filter's Categories
-and Groups.
+To use Preset Filters, the feature expects that node data is being shared by being placed at the
+_site_ [Node Collection](/Development/Architecture/Data#node-collections) level, and that the node
+key is shared with the primary filter's Categories and Groups.
+
+?> **Tip:** Passing `nodeCollection: 'site'` in `withNodeKey({ nodeKey: 'filter', nodeCollection:
+'site' })` will save data at site-level instead of page-level.
 
 The suggested pattern is to move your primary filtered data to a sitewide collection by setting
 `withNodeKey` to use the `nodeCollection` 'site'.  
@@ -342,9 +346,28 @@ For example:
 
 ?> **Note:** If any content already exists on your site, move the JSON files to `/src/data/site`.
 
-Then, apply your filter and data container tokens in the page/template/component.
+Then, apply your filter and data container tokens in the relevant page, template, or component.
 
-If your primary filter (e.g., on the Products (`/products`) page) and your Preset Filter won't use
-the same tokens (say, one needs a reset button and one doesn't), then we suggest you compose two
-tokens — but they both must include `withSiteWideFilter`. Remember, as well, that they must share
-the same filter node key that is stored at site level.
+If your primary filter (e.g., on the Products (`/products`) page) and your Preset Filter component
+won't use the same tokens (say, one needs a reset button and one doesn't), then we suggest you
+compose two tokens — but they both must include `withSiteWideFilter`. Remember, as well, that they
+must share the same filter node key that is stored at site level.  
+For example:
+
+```tsx
+const withSiteWideFilter = withDesign({
+  Filter: withNodeKey({ nodeKey: 'filter', nodeCollection: 'site' }),
+});
+
+export const FilterByGroupPresetSingleSiteWide = flow(
+  asFilterByGroup,
+  withSingleAllowedTag,
+  withSiteWideFilter,
+)(FilterByGroupClean);
+
+export const FilterByGroupSingleSiteWideNoReset = flow(
+  asFilterByGroup,
+  withSiteWideFilter,
+  withSingleAllowedTagNoReset,
+)(FilterByGroupClean);
+```
