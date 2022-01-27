@@ -13,7 +13,7 @@
  */
 
 import React, {
-  FC, useState, useCallback, createContext, useContext, ComponentType,
+  FC, useState, useCallback, createContext, useContext, ComponentType, ReactNode,
 } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
@@ -40,7 +40,7 @@ import {
 import { withAllTitlesFromTerms, ComponentSelectorScale } from '@bodiless/layouts';
 
 import {
-  useMenuOptionUI, asBodilessComponent, useEditContext,
+  useMenuOptionUI, asBodilessComponent,
 } from '@bodiless/core';
 import { asHeader1, asHeader2 } from '../../../components/Elements.token';
 import Layout from '../../../components/Layout';
@@ -48,7 +48,6 @@ import Layout from '../../../components/Layout';
 /*
  * Basic Chaemelion
  */
-
 const BaseComponent = addClasses('border-8 py-5 text-center')(Div);
 
 const basicChameleonDesign = {
@@ -62,6 +61,53 @@ const BasicChameleon = asToken(
   withDesign(basicChameleonDesign),
 )(BaseComponent);
 
+/**
+ * Chameleon with dynamic start components
+ */
+const DefaultStart = addProps({
+  children: (
+    <>
+      <div>Chameleons!</div>
+      <div>Available now!</div>
+    </>
+  ) as ReactNode,
+})(BaseComponent);
+// This is the starting component to be used when the Red key is applied.
+const RedStart = addProps({
+  children: (
+    <>
+      <div>Red Chameleons!</div>
+      <div>Available now!</div>
+    </>
+  ) as ReactNode,
+})(BaseComponent);
+// This starting component does not exist in the design.
+const YellowStart = asToken(
+  addProps({
+    children: (
+      <>
+        <div>Yellow Chameleons!</div>
+        <div>Available now!</div>
+      </>
+    ) as ReactNode,
+  }),
+  addClasses('border-yellow-500 text-yellow-500'),
+)(BaseComponent);
+
+const DynamicStartChameleon = asToken(
+  asBodilessChameleon('dynamic-start-chameleon'),
+  withDesign(basicChameleonDesign),
+  addProps({
+    startComponents: {
+      Red: RedStart,
+      Yellow: YellowStart,
+    },
+  })
+)(DefaultStart);
+
+/**
+ * Selector Chameleon
+ */
 const borderDesign = {
   '': removeClasses('border-8'),
   Thick: asToken(asToken.meta.term('Border')('Thick')),
@@ -126,7 +172,7 @@ const toggleVisibilityDesign = {
 const VisibilityToggle = asToken(
   addClasses('invisible'),
   applyChameleon,
-  withDesign(toggleVisibilityDesign),
+  // withDesign(toggleVisibilityDesign),
 )(BaseAvailability);
 
 const VisibilityTogglerapper = asToken(
@@ -141,7 +187,6 @@ const VisibilityTogglerapper = asToken(
 
 type AddToCartProps = { productId?: string };
 const AddToCartBase = observer(({ productId, ...rest }: AddToCartProps) => {
-  const { isEdit } = useEditContext();
   const onClick = useCallback(() => {
     // @TODO: Wire this to your cart provider...
     // eslint-disable-next-line no-alert
@@ -149,7 +194,7 @@ const AddToCartBase = observer(({ productId, ...rest }: AddToCartProps) => {
   }, [productId]);
   return (
     <div {...rest}>
-      <button type="button" onClick={isEdit ? onClick : undefined}>Add to cart</button>
+      <button type="button" onClick={onClick}>Add to cart</button>
     </div>
   );
 });
@@ -297,6 +342,16 @@ export default (props: any) => (
             <Description>
               Like the previous example, except that the swap button uses a component
               selector to choose the color of the box.
+            </Description>
+          </Example>
+          <Example>
+            <H2>Dynamic starting components</H2>
+            <DynamicStartChameleon />
+            <Description>
+              In this example, starting components for some keys are provided dynamically
+              as a prop. When you select &lsquo;Red&rsquo; or &lsquo;Yellow&rsquo;,
+              a custom starting component
+              will be displayed.
             </Description>
           </Example>
           <Example>
