@@ -14,7 +14,7 @@
 
 import { WithNodeProps, TMenuOptionGetter } from '@bodiless/core';
 import {
-  DesignableComponents, ComponentOrTag, DesignableComponentsProps, DesignableProps,
+  DesignableComponents, ComponentOrTag, DesignableProps,
 } from '@bodiless/fclasses';
 import { HTMLProps } from 'react';
 import { ComponentSelectorUI, ComponentSelectorProps } from '../ComponentSelector/types';
@@ -27,7 +27,7 @@ export type FlowContainerData = {
   items: FlowContainerItem[];
 };
 export type EditFlowContainerProps =
-  DesignableComponentsProps
+  DesignableProps
   & HTMLProps<HTMLDivElement>
   & Pick<ComponentSelectorProps, 'mandatoryCategories'|'blacklistCategories'|'scale'>
   & {

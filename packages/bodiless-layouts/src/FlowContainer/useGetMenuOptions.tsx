@@ -17,6 +17,7 @@ import omit from 'lodash/omit';
 import {
   useEditContext, useActivateOnEffect, useGetter, TMenuOption,
 } from '@bodiless/core';
+import { DesignableComponents } from '@bodiless/fclasses';
 import { EditFlowContainerProps, FlowContainerItem } from './types';
 import type { FlowContainerDataHandlers, FlowContainerItemHandlers } from './model';
 import { useFlowContainerDataHandlers, useItemHandlers } from './model';
@@ -25,23 +26,38 @@ import componentSelectorForm from '../ComponentSelector/componentSelectorForm';
 import { FALLBACK_SNAP_CLASSNAME } from './SortableChild';
 import { defaultSnapData } from './utils/appendTailwindWidthClass';
 import { FC_ITEM_CONTEXT_TYPE } from '../SlateSortableResizable';
+import { SelectorComponents } from '../ComponentSelector/SelectorComponents';
 
 type Handlers = FlowContainerDataHandlers & FlowContainerItemHandlers;
+
+type ButtonProps = Omit<EditFlowContainerProps, 'design'> & {
+  components: DesignableComponents,
+};
 
 /**
  * @private
  *
- * Removes components from the design which are part of the actual flow container design,
- * not intended to appear as options in the component selector.
+ * Replaces the `design` prop with a `components` prop which
+ * is a set of selectable components, created by applying the design.
+ *
+ * Should only be executed in a button handler to avoid creating
+ * unnecessary components on render.
  *
  * @param props The original props of the flow container.
  *
- * @return The props with irrelevant components removed.
+ * @return The props with `components` replacing `design`
  */
-const withNoDesign = (props:EditFlowContainerProps):EditFlowContainerProps => ({
-  ...props,
-  components: omit(props.components, ['Wrapper', 'ComponentWrapper']),
-});
+const withComponentsFromDesign = (props:EditFlowContainerProps):ButtonProps => {
+  const { design, ...rest } = props;
+  const { selectableComponents: components } = new SelectorComponents({
+    design: omit(design, ['Wrapper', 'ComponentWrapper']),
+    selectedComponents: [],
+  });
+  return {
+    ...rest,
+    components,
+  };
+};
 
 /**
  * @private
@@ -178,7 +194,10 @@ const useAddButton = (
     global: false,
     local: true,
     name,
-    handler: () => componentSelectorForm({ ...props, onSelect: insertItem }),
+    handler: () => componentSelectorForm({
+      ...withComponentsFromDesign(props),
+      onSelect: insertItem
+    }),
     activateContext: false,
     formTitle: 'Insert Component',
     isHidden,
@@ -192,16 +211,18 @@ const useSwapButton = (
 ) => {
   const context = useEditContext();
   const { replaceItem } = useComponentSelectorActions(handlers, props, item);
-  const { components } = withNoDesign(props);
   return {
     name: useItemButtonName('swap', item.uuid),
     label: 'Swap',
     icon: 'repeat',
     global: false,
     local: true,
-    handler: () => componentSelectorForm({ ...props, onSelect: replaceItem }),
+    handler: () => componentSelectorForm({
+      ...withComponentsFromDesign(props),
+      onSelect: replaceItem
+    }),
     activateContext: false,
-    isHidden: useCallback(() => (!context.isEdit || Object.keys(components).length <= 1), []),
+    isHidden: !context.isEdit,
     formTitle: 'Replace Component',
   };
 };
@@ -215,7 +236,7 @@ const useSwapButton = (
  */
 function useMenuOptions(props: EditFlowContainerProps) {
   const handlers = { ...useFlowContainerDataHandlers(), ...useItemHandlers() };
-  const addButton: TMenuOption = useAddButton(handlers, withNoDesign(props));
+  const addButton: TMenuOption = useAddButton(handlers, props);
   return [addButton];
 }
 
@@ -244,14 +265,13 @@ const useGetItemUseGetMenuOptions = (props: EditFlowContainerProps) => {
   // We have to obtain the handlers in the flow container context, and we have
   // to do it only once to avoid hook sequencing errors.
   const handlers = { ...useFlowContainerDataHandlers(), ...useItemHandlers() };
-  const props$ = withNoDesign(props);
   return (item: FlowContainerItem) => () => {
     const buttons = [
       // These hooks are all invoked by the flow container item (not the flow container itself).
-      useAddButton(handlers, props$, item),
-      useCloneButton(handlers, props$, item),
-      useSwapButton(handlers, props$, item),
-      useDeleteButton(handlers, props$, item),
+      useAddButton(handlers, props, item),
+      useCloneButton(handlers, props, item),
+      useSwapButton(handlers, props, item),
+      useDeleteButton(handlers, props, item),
     ];
     return useGetter(buttons);
   };

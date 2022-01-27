@@ -52,10 +52,10 @@ const useToggleOverrides = ():Partial<EditButtonOptions<any, any>> => {
 const getUseOverrides = (
   useOverrides: UseBodilessOverrides = () => ({}),
 ): UseBodilessOverrides => props => {
-  const { selectableComponents } = useChameleonContext();
-  return Object.keys(selectableComponents).length > 1
-    ? { ...useChameleonOverrides(), ...useOverrides(props) }
-    : { ...useToggleOverrides(), ...useOverrides(props) };
+  const { isToggle } = useChameleonContext();
+  return isToggle
+    ? { ...useToggleOverrides(), ...useOverrides(props) }
+    : { ...useChameleonOverrides(), ...useOverrides(props) };
 };
 
 const asChameleonSubList = (useOverrides?: UseBodilessOverrides) => flow(
