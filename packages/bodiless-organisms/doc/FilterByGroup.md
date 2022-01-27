@@ -148,6 +148,8 @@ To create or modify a Preset Filter:
       01. If the context menu has a "Filter" section with a **Page** button, then the Preset Filter
           feature is enabled for that page; otherwise, you will need to contact a Site Builder /
           Developer to enable it for you.
+          - For instructions on enabling this feature, see: [Add Preset
+            Filters](#add-preset-filters).
 01. Using the instructions above, set up a Filter By Group Component with the desired Categories and
     Groups.
     - [Add a Category](#add-a-category)
