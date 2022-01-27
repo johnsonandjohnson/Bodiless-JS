@@ -108,9 +108,11 @@ const renderForm = (props: ContextMenuFormProps) => {
     }
   }, []);
 
+  // eslint-disable-next-line consistent-return
   const handleSubmit = useCallback((e: React.SyntheticEvent) => {
     e.preventDefault();
     const v = values[Object.keys(values)[0]] as any;
+    // eslint-disable-next-line default-case
     switch (v.filterSelectionAction) {
       case FilterSelectionAction.clear: {
         const submitValues = { tags: [] };

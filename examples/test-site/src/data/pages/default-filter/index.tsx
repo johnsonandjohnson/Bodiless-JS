@@ -24,7 +24,6 @@ import {
 } from '../../../components/ProductListing';
 import { FilterByGroupSingleSiteWideNoReset } from '../../../components/FilterByGroup';
 
-
 const main = props => (
   <Page {...props}>
     <Layout>

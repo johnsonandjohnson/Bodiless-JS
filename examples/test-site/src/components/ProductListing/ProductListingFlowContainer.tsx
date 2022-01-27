@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 import { asToken, addProps } from '@bodiless/fclasses';
+import { withNodeKey } from '@bodiless/core';
 // @ts-ignore Could not find a declaration file
 import resolvedConfigs from
   '@bodiless/gatsby-theme-bodiless/src/dist/tailwindcss/resolveConfig';
@@ -20,7 +21,6 @@ import { FlowContainer } from '@bodiless/layouts-ui';
 import withProductVariations from './withProductVariations';
 import { asFilterableProductContainer } from '../ProductCard/token';
 import { asFlowContainerWithMargins, asFlowContainerFullWidth } from '../FlowContainer/token';
-import { withNodeKey } from '@bodiless/core';
 // @ts-ignore Could not find a declaration file
 
 const snapData = getSnapFrom(
