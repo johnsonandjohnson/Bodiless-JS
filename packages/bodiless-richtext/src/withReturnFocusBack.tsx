@@ -66,10 +66,12 @@ const withReturnFocusBackOnClick = (itemId: string): Token<Props> => Component =
       {...props}
       onMouseDown={(event: MouseEvent<HTMLButtonElement>) => {
         setReturnFocusItem(itemId);
+        // eslint-disable-next-line react/destructuring-assignment
         if (props.onMouseDown) props.onMouseDown(event);
       }}
       onMouseUp={(event: MouseEvent<HTMLButtonElement>) => {
         setReturnFocusItem(null);
+        // eslint-disable-next-line react/destructuring-assignment
         if (props.onMouseUp) props.onMouseUp(event);
       }}
       forwardRef={itemRef}

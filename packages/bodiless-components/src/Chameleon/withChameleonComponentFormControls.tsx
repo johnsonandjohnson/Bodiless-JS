@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ComponentType, FC } from 'react';
+import React, { ComponentType, FC, useCallback } from 'react';
 
 import flowRight from 'lodash/flowRight';
 import { ChameleonButtonProps } from './types';
@@ -21,10 +21,15 @@ import { withUnwrap } from './withChameleonButton';
 
 const withWrapOnSubmit = <P extends object>(Component: ComponentType<P>) => {
   const WithWrapOnSubmit: FC<P & ChameleonButtonProps> = props => {
-    const { isOn, setActiveComponent, selectableComponents } = useChameleonContext();
+    const context = useChameleonContext();
+    const { isOn } = context;
     if (isOn) return <Component {...props} />;
-    const newKey = Object.keys(selectableComponents).find(key => key !== DEFAULT_KEY) || null;
-    return <Component {...props} onSubmit={() => setActiveComponent(newKey)} />;
+    const onSubmit = useCallback(() => {
+      const { setActiveComponent, selectableComponents } = context;
+      const newKey = Object.keys(selectableComponents).find(key => key !== DEFAULT_KEY) || null;
+      setActiveComponent(newKey);
+    }, [context]);
+    return <Component {...props} onSubmit={onSubmit} />;
   };
   return WithWrapOnSubmit;
 };

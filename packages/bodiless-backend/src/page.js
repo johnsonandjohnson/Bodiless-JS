@@ -15,6 +15,7 @@
 const fs = require('fs');
 const fse = require('fs-extra');
 const path = require('path');
+const os = require('os');
 const replace = require('replace-in-file');
 const Logger = require('./logger');
 
@@ -22,11 +23,11 @@ const logger = new Logger('BACKEND');
 
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
+const IMG_ASSETS_PATH = `/images${path.sep}pages`;
 
-const getDirectories = (dir) =>
-  fs
-    .readdirSync(dir)
-    .filter((file) => fs.statSync(`${dir}/${file}`).isDirectory());
+const getDirectories = (dir) => fs
+  .readdirSync(dir)
+  .filter((file) => fs.statSync(`${dir}/${file}`).isDirectory());
 // once we on node > 10.12.0
 // we can leverage fs.mkdir since it supports { recursive: true }
 function ensureDirectoryExistence(filePath) {
@@ -58,9 +59,9 @@ class Page {
   }
 
   get exists() {
-    const files = this.supportedExtensions.map((extension) =>
-      path.join(this.getBasePath(), `${this.path}.${extension}`),
-    );
+    const files = this.supportedExtensions.map((extension) => path.join(
+      this.getBasePath(), `${this.path}.${extension}`
+    ));
     return files.some((file) => fs.existsSync(file));
   }
 
@@ -162,35 +163,34 @@ class Page {
 
   static jsFilesPathResolve(originPath, destinationPath, files) {
     const actions = [];
-    const reg = /from ('|")(\..*)('|")/g;
+    const reg = /from ('|")(\.\..*)('|")/g;
 
-    const readF = (file) =>
-      new Promise((resove, reject) => {
-        const filePath = `${destinationPath}/${file.name}`;
-        fs.readFile(filePath, 'utf8', (err, content) => {
-          if (err) return reject();
-          const matchs = content.match(reg);
-          if (!matchs.length) return reject();
-          let newContent = content;
-          matchs.forEach((item) => {
-            const delimiter = item[item.search(/'|"/)];
-            const oldPath = item.split(' ')[1].replace(/'|"/g, '');
-            const from = path.dirname(filePath);
-            const to = path.normalize(`${originPath}/${oldPath}`);
-            const newPath = path.relative(from, to);
+    const readF = (file) => new Promise((resolve, reject) => {
+      const filePath = `${destinationPath}/${file.name}`;
+      fs.readFile(filePath, 'utf8', (err, content) => {
+        if (err) return reject();
+        const matchs = content.match(reg);
+        if (!matchs.length) return reject();
+        let newContent = content;
+        matchs.forEach((item) => {
+          const delimiter = item[item.search(/'|"/)];
+          const oldPath = item.split(' ')[1].replace(/'|"/g, '');
+          const from = path.dirname(filePath);
+          const to = path.normalize(`${originPath}/${oldPath}`);
+          const newPath = path.relative(from, to).replace(/\\/g, '/');
 
-            newContent = newContent.replace(
-              `${delimiter}${oldPath}${delimiter}`,
-              `${delimiter}${newPath}${delimiter}`,
-            );
-          });
-          fs.writeFile(filePath, newContent, (writeErr) => {
-            if (writeErr) return reject();
-            return resove();
-          });
-          return true;
+          newContent = newContent.replace(
+            `${delimiter}${oldPath}${delimiter}`,
+            `${delimiter}${newPath}${delimiter}`,
+          );
         });
+        fs.writeFile(filePath, newContent, (writeErr) => {
+          if (writeErr) return reject();
+          return resolve();
+        });
+        return true;
       });
+    });
 
     files.forEach((file) => {
       actions.push(readF(file));
@@ -255,12 +255,18 @@ class Page {
   }
 
   static clonePageImgAssets(origin, destination, basePath) {
-    Page.clonePageAssets(origin, destination, basePath, '/images/pages');
+    Page.clonePageAssets(origin, destination, basePath, IMG_ASSETS_PATH);
   }
 
   static async clonePageAssets(origin, destination, basePath, target) {
     const originPath = origin.replace(/\/$/, '');
+    const originPathCrossPlatform = os.platform() === 'win32'
+      ? originPath.replace('/', '\\\\')
+      : originPath;
     const destinationPath = destination.replace(/\/$/, '');
+    const destinationPathCrossPlatform = os.platform() === 'win32'
+      ? destinationPath.replace('/', '\\')
+      : destinationPath;
 
     const originStaticPath = path.join(backendStaticPath, target, originPath);
     const destinationStaticPath = path.join(
@@ -314,10 +320,16 @@ class Page {
             await Promise.all(
               clonedPageFilesAtDestination.map(async (item) => {
                 const fileToBeUpdated = path.join(destinationPagePath, item);
+                // Make sure to not replace '/images/pages' part of the path
+                // .e.g if the source page path is '/images';
+                const imgAssetsPathRegExp = IMG_ASSETS_PATH.replace('\\', '\\\\\\\\');
+                const originPathRegExp = new RegExp(
+                  `(${imgAssetsPathRegExp}.*)${originPathCrossPlatform}`, 'g'
+                );
                 const options = {
                   files: fileToBeUpdated,
-                  from: new RegExp(originPath, 'g'),
-                  to: destinationPath,
+                  from: originPathRegExp,
+                  to: match => match.replace(originPathRegExp, `$1${destinationPathCrossPlatform}`),
                 };
                 return Page.updateFileContent(options);
               }),
@@ -377,7 +389,9 @@ class Page {
        *         So make sure the directory to delete is inside a region of pages,
        *         and it is not the whole pages directory.
        */
-      const [, pageRelativeDir] = this.directory.split('/data/pages/');
+      const { sep, normalize } = path;
+      const dirPath = normalize(this.directory);
+      const [, pageRelativeDir] = dirPath.split(`${sep}data${sep}pages${sep}`);
       if (!pageRelativeDir) {
         resolve('The page cannot be deleted.');
         return;
@@ -407,6 +421,7 @@ class Page {
     return readPromise;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   removePageAssets(path) {
     return new Promise((resolve, reject) => {
       fse.remove(path, err => {

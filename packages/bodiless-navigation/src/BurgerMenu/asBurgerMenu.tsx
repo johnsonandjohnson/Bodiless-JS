@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import { ComponentType } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import { useNode, withDefaultContent } from '@bodiless/core';
 import { asAccordionWrapper, asAccordionTitle, asAccordionBody } from '@bodiless/accordion';
@@ -24,7 +25,6 @@ import BurgerMenuClean from './BurgerMenuClean';
 import { withDisabledTitleLink } from './BurgerMenu.token';
 import withMenuDesign from '../Menu/withMenuDesign';
 import MenuTitle, { DEFAULT_NODE_KEYS } from '../Menu/MenuTitles';
-import { ComponentType } from 'react';
 
 /**
  * HOC that adds an overview link to a burger menu sublist.  The overview link
@@ -101,7 +101,6 @@ const withBurgerMenuWrapper: Token = Component => asToken(
     Menu: replaceWith(Component),
   }),
 )(Fragment) as ComponentType<any>;
-
 
 /**
  * Helper which allows specifying which submenu types are configured

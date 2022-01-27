@@ -2,9 +2,7 @@ import {
   KeyboardEvent,
 } from 'react';
 
-
 const BurgerMenuKeyPressHandler = (event: KeyboardEvent, isVisible: boolean, toggle: Function) => {
-
   switch (event.key) {
     case 'Enter':
     case ' ':
@@ -14,7 +12,6 @@ const BurgerMenuKeyPressHandler = (event: KeyboardEvent, isVisible: boolean, tog
 
     default:
       break;
-
   }
 };
 

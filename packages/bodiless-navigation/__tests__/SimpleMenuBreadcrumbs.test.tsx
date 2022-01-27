@@ -17,8 +17,12 @@ import React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import cheerio from 'cheerio';
-import { withDefaultContent, ifToggledOn, asReadOnly, withNodeKey } from '@bodiless/core';
-import { replaceWith, withDesign, addProps, asToken } from '@bodiless/fclasses';
+import {
+  withDefaultContent, ifToggledOn, asReadOnly, withNodeKey,
+} from '@bodiless/core';
+import {
+  replaceWith, withDesign, addProps, asToken
+} from '@bodiless/fclasses';
 import flow from 'lodash/flow';
 import flowRight from 'lodash/flowRight';
 

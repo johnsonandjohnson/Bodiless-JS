@@ -38,7 +38,7 @@ describe('add ssi components', () => {
     jest.clearAllMocks();
     jest.resetAllMocks();
   });
-  describe('durring ssr phase', () => {
+  describe('during ssr phase', () => {
     it('should add fake ssi elements to head', () => {
       const pragma = '<!--# include virtual="/foo.html" -->';
       const ssiConf = {
@@ -56,13 +56,13 @@ describe('add ssi components', () => {
       generateMock(ssiConfDefaultPath, ssiConf);
       const getHeadComponents = () => [];
       const replaceHeadComponents = jest.fn();
-      onPreRenderHTML({ getHeadComponents, replaceHeadComponents }, {});
+      onPreRenderHTML({ getHeadComponents, replaceHeadComponents }, { ssiEntities: ssiConf });
       const ssiElement = replaceHeadComponents.mock.calls[0][0][0];
       const wrapper = shallow(ssiElement);
       expect(wrapper.html()).toBe('<ssi-element-foo></ssi-element-foo>');
     });
   });
-  describe('durring postBuild phase', () => {
+  describe('during postBuild phase', () => {
     it('should replace fake ssi elements', () => {
       const pragma = '<!--# include virtual="/foo.html" -->';
       const ssiConf = {
@@ -86,7 +86,7 @@ describe('add ssi components', () => {
     });
   });
   describe('when ssi not configured', () => {
-    describe('durring ssr phase', () => {
+    describe('during ssr phase', () => {
       it('should not trigger adding elements to head', () => {
         const getHeadComponents = () => [];
         const replaceHeadComponents = jest.fn();
@@ -94,7 +94,7 @@ describe('add ssi components', () => {
         expect(replaceHeadComponents).toHaveBeenCalledTimes(0);
       });
     });
-    describe('durring postBuild phase', () => {
+    describe('during postBuild phase', () => {
       it('should not process html files of generated pages', () => {
         onPostBuild({}, {});
         expect(replace.sync).toHaveBeenCalledTimes(0);

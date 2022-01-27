@@ -89,6 +89,16 @@ const movePage = async ({ origin, destination, client } : any) => {
       } catch (e: any) {
         return Promise.reject(new Error(e.message));
       }
+      // Deleting the static assets on move leads to a gatsby image rendering issue.
+      // To be resolved with another aproach:
+      // https://github.com/johnsonandjohnson/Bodiless-JS/issues/1348
+      // if (deleteResult.response){
+      //   try {
+      //     await handle(client.deleteStaticAssets(origin));
+      //   } catch (e: any) {
+      //     return Promise.reject(new Error(e.message));
+      //   }
+      // }
     } else {
       try {
         deleteResult = await handle(client.removeFile(origin));

@@ -31,6 +31,7 @@ export const Spinner: FC<SpipperProps> = (props: any) => {
     barStyle.transform = `rotate(${(i * (MaxDegrees / BarsCount))}deg) translate(146%)`;
     barStyle.WebkitTransform = barStyle.transform;
     bars.push(
+      // eslint-disable-next-line react/destructuring-assignment
       <div style={barStyle} className={`${props.color || ''} bodiless-spinner_bar`} key={i} />,
     );
   }

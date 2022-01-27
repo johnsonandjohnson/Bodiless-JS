@@ -13,17 +13,16 @@
  */
 
 import React, { FC } from 'react';
-import flow from 'lodash/flow';
 import { withNode } from '@bodiless/core';
 import {
-  designable,
   Div,
-  DesignableComponentsProps,
   withoutProps,
+  DesignableProps,
 } from '@bodiless/fclasses';
 import { observer } from 'mobx-react-lite';
 import { useItemHandlers } from './model';
 import { FlowContainerItem, FlowContainerComponents } from './types';
+import { SelectorComponents } from '../ComponentSelector/SelectorComponents';
 
 const flowContainerComponentStart: FlowContainerComponents = {
   Wrapper: withoutProps('itemCount')(Div),
@@ -32,8 +31,17 @@ const flowContainerComponentStart: FlowContainerComponents = {
 
 const NodeProvider = withNode(React.Fragment);
 
-const StaticFlowContainer: FC<DesignableComponentsProps> = ({ components }) => {
+const StaticFlowContainer: FC<DesignableProps> = ({ design }) => {
   const items = useItemHandlers().getItems();
+  const { components } = new SelectorComponents({
+    design,
+    startComponents: flowContainerComponentStart,
+    selectedComponents: [
+      ...items.map(item => item.type),
+      'ComponentWrapper',
+      'Wrapper',
+    ],
+  });
   const { Wrapper, ComponentWrapper } = components;
   return (
     // When in a static mode we don't want to use `bl-*` prefixed classes.
@@ -66,9 +74,4 @@ const StaticFlowContainer: FC<DesignableComponentsProps> = ({ components }) => {
 
 StaticFlowContainer.displayName = 'FlowContainer';
 
-const asStaticFlowContainer = flow(
-  observer,
-  designable(flowContainerComponentStart, 'FlowContainer'),
-);
-
-export default asStaticFlowContainer(StaticFlowContainer);
+export default observer(StaticFlowContainer);

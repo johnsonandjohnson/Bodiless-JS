@@ -40,12 +40,13 @@ const TogglerBase: FC<TogglerProps> = ({ components, ...rest }) => {
 
   return (
     <Wrapper>
-      <Button {...rest} 
-        tabindex="0" 
+      <Button
+        {...rest}
+        tabindex="0"
         role="button"
         onKeyPress={(event: KeyboardEvent) => BurgerMenuKeyPressHandler(event, isVisible, toggle)}
-        aria-expanded={isVisible ? true : false}
-        >
+        aria-expanded={!!isVisible}
+      >
         {isVisible ? 'close' : 'menu' }
       </Button>
     </Wrapper>

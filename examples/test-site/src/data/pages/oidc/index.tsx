@@ -113,7 +113,7 @@ const UserPreview = () => {
     <UserWrapper>
       <h3 className="font-bold text-lg">
         Hi
-        {' ' + profile.given_name}
+        {` ${profile.given_name}`}
         !
       </h3>
       <hr className="mb-4 mt-1" />
