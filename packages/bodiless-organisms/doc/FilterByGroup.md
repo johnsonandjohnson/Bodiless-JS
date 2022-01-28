@@ -361,12 +361,26 @@ const withSiteWideFilter = withDesign({
   Filter: withNodeKey({ nodeKey: 'filter', nodeCollection: 'site' }),
 });
 
-export const FilterByGroupPresetSingleSiteWide = flow(
+export const FilterByGroupSingleSiteWide = flow(
   asFilterByGroup,
   withSingleAllowedTag,
   withSiteWideFilter,
 )(FilterByGroupClean);
 
+const withSingleAllowedTagNoReset = asToken(
+  addProps({
+    multipleAllowedTags: false,
+    resetButtonText: '',
+  }),
+  withDesign({
+    ResetButton: asToken(
+      replaceWith(Fragment),
+    ),
+    Filter: withFilterSelection(),  // Preset Filter feature
+  }),
+);
+
+// Preset Filter component
 export const FilterByGroupSingleSiteWideNoReset = flow(
   asFilterByGroup,
   withSiteWideFilter,
