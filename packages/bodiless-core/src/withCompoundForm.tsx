@@ -51,6 +51,7 @@ type SnippetRegister<D> = (snippet: Snippet<D>) => void;
 
 type FormProps<D> = ContextMenuFormProps & {
   snippets: Snippet<D>[],
+  hasSubmit?: boolean,
 };
 
 /**
@@ -132,7 +133,13 @@ const createMenuOptionDefinition = <P extends object>(def$: MenuOptionsDefinitio
     const baseOptions = useMenuOptionsBase(props) || [];
     const [compoundFormOption, ...otherOptions] = baseOptions;
     const snippets = useContext(SnippetContext);
-    const render = (p: ContextMenuFormProps) => <Form {...p} snippets={snippets!.current} />;
+    const render = (p: ContextMenuFormProps) => (
+      <Form
+        {...p}
+        snippets={snippets!.current}
+        hasSubmit={def?.hasSubmit}
+      />
+    );
     return [
       {
         ...compoundFormOption,

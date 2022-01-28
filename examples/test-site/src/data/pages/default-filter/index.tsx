@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,32 +12,26 @@
  * limitations under the License.
  */
 
+// @ts-nocheck
+
 import React from 'react';
 import { graphql } from 'gatsby';
-import Layout from '../components/Layout';
-import { SectionContent, SectionMargin } from '../components/Product';
-import Page from '../components/Page';
+import Layout from '../../../components/Layout';
+import { SectionContent, SectionMargin } from '../../../components/Product';
+import Page from '../../../components/Page';
 import {
-  ProductListingTitle,
-  ProductListingImage,
   ProductListingFlowContainer,
-} from '../components/ProductListing';
-import { FilterByGroupSingleSiteWide } from '../components/FilterByGroup';
+} from '../../../components/ProductListing';
+import { FilterByGroupSingleSiteWideNoReset } from '../../../components/FilterByGroup';
 
 const main = props => (
   <Page {...props}>
     <Layout>
       <SectionContent>
         <SectionMargin>
-          <ProductListingTitle />
-        </SectionMargin>
-        <SectionMargin>
-          <ProductListingImage />
-        </SectionMargin>
-        <SectionMargin>
-          <FilterByGroupSingleSiteWide>
+          <FilterByGroupSingleSiteWideNoReset>
             <ProductListingFlowContainer />
-          </FilterByGroupSingleSiteWide>
+          </FilterByGroupSingleSiteWideNoReset>
         </SectionMargin>
       </SectionContent>
     </Layout>

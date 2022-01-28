@@ -107,12 +107,12 @@ export interface PageEditContextInterface extends
    */
   readonly getMenuOptions: TMenuOptionGetter;
   /**
-   * Spawn a child of this context (another context which, when activaged, will also activate
+   * Spawn a child of this context (another context which, when activated, will also activate
    * this one and all of its ancestors).
    */
   spawn: (v: DefinesLocalEditContext) => PageEditContextInterface;
   /**
-   * Register a peer of this context (another context which will be activagted along with this one)
+   * Register a peer of this context (another context which will be activated along with this one)
    */
   registerPeer: (c: PageEditContextInterface) => void;
   /**

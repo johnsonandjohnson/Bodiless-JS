@@ -252,6 +252,7 @@ const withFilterDesignTransformer = <P extends object>(Component: ComponentOrTag
 const FilterClean = asToken(
   asFilter,
   withFilterDesignTransformer as HOC,
+  // This probably should not be in Clean...
   withNodeKey('filter'),
 )('ul');
 

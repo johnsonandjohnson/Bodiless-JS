@@ -38,4 +38,5 @@ export type MenuOptionsDefinition<P> = Omit<PageContextProviderProps, 'getMenuOp
    * attached to the root context are always visible.
    */
   root?: boolean,
+  hasSubmit?: boolean,
 };

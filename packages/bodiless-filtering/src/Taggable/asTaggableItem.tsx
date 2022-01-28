@@ -32,7 +32,7 @@ const emptyValue: TagsNodeType = {
 // - the node data handlers must be outermost
 // - anything relying on the context (activator, indicator) must be
 //   *after* `withEditButton()` as this establishes the context.
-// - withData must be *after* the data handlers are defiend.
+// - withData must be *after* the data handlers are defined.
 const asTaggableItem = (
   nodeKey?: string,
   defaultData = emptyValue,

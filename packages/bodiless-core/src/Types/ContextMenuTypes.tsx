@@ -73,7 +73,7 @@ export type TMenuOption = {
   label?: (() => string) | string;
   /**
    * Callback or boolean defining whether this option is "active". Active buttons are rendered
-   * differently in thi UI.  Usually used to inicate that a state managed by the button is
+   * differently in thi UI.  Usually used to indicate that a state managed by the button is
    * in effect (eg formatting applied). Also, most edit form buttons are shown as active when
    * their form is open.
    */
@@ -93,7 +93,7 @@ export type TMenuOption = {
   /**
    * Callback to invoke when the button is clicked.  May return a render function, in which
    * case, clicking the button will open a tooltip whose contents are determined by the return
-   * value of the render fuction.
+   * value of the render function.
    */
   handler?: (event: React.MouseEvent) => any;
   activateContext?: (() => boolean) | boolean;
@@ -203,7 +203,7 @@ export type IContextMenuProps = {
   isPositionToggled?: boolean;
   renderInTooltip?: boolean;
   /**
-   * `closeForm` prop used to override the default `closeForm` behaviour if provided.
+   * `closeForm` prop used to override the default `closeForm` behavior if provided.
    * Currently it will only be triggered by clicking outside of `ComponentFormCloseButton`.
    */
   closeForm?: (e: any) => void;
@@ -215,4 +215,5 @@ export type ContextMenuFormProps = {
   description?: string,
   closeForm: (e: any) => void;
   'aria-label'?: string;
+  // hasSubmit?: boolean,
 };

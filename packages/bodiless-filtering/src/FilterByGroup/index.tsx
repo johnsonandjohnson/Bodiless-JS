@@ -30,6 +30,7 @@ import type {
 } from './types';
 import { asResponsiveFilter } from './Filter';
 import withFilterByTags from './withFilterByTags';
+import withFilterSelection from './withFilterSelection';
 
 export {
   FilterByGroupClean,
@@ -43,6 +44,7 @@ export {
   Tag,
   asResponsiveFilter,
   withFilterByTags,
+  withFilterSelection,
 };
 
 export type {

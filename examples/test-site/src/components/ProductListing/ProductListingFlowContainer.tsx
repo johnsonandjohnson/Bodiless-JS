@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 import { asToken, addProps } from '@bodiless/fclasses';
+import { withNodeKey } from '@bodiless/core';
 // @ts-ignore Could not find a declaration file
 import resolvedConfigs from
   '@bodiless/gatsby-theme-bodiless/src/dist/tailwindcss/resolveConfig';
@@ -34,6 +35,7 @@ const ProductListingFlowContainer = asToken(
   withProductVariations,
   asFlowContainerFullWidth,
   asFlowContainerWithMargins,
+  withNodeKey({ nodeKey: 'product_listing_cards', nodeCollection: 'site' }),
 )(FlowContainer);
 
 // eslint-disable-next-line import/prefer-default-export

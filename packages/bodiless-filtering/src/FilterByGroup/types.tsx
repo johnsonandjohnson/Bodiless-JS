@@ -120,9 +120,17 @@ export type FBGContextType = {
    */
   unSelectTag: (tag: FilterTagType, callback?: Function) => void,
   /**
-   * Tests whetherthe specified tag is currently selected.
+   * Tests whether the specified tag is currently selected.
    */
   isTagSelected: (tag: FilterTagType) => boolean,
+  /**
+   * Set selected tags with given filter tag array.
+   */
+  updateSelectedTags: (tags: FilterTagType[]) => void,
+  /**
+   * Return true if filter selection parameters presented in url.
+   */
+  hasTagFromQueryParams: () => Boolean,
   /**
    * Removes all selected tags.  All filters will be cleared.
    */

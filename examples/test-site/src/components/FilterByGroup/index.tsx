@@ -12,12 +12,19 @@
  * limitations under the License.
  */
 
+import { flow } from 'lodash';
 import {
   FilterByGroupClean,
   asTestableFilterByGroup,
   Tag,
+  withSingleAllowedTag,
+  withFilterSelection,
+  // withMultipleAllowedTags,
 } from '@bodiless/filtering';
-import { addProps, asToken } from '@bodiless/fclasses';
+import {
+  addProps, asToken, withDesign, Fragment, replaceWith,
+} from '@bodiless/fclasses';
+import { withNodeKey } from '@bodiless/core';
 import { asFilterByGroupResponsive, asFilterByGroupDefaultStyle } from './token';
 
 const suggestions = [
@@ -36,6 +43,35 @@ const asFilterByGroup = asToken(
 );
 
 const FilterByGroup = asFilterByGroup(FilterByGroupClean);
+
+const withSingleAllowedTagNoReset = asToken(
+  addProps({
+    multipleAllowedTags: false,
+    resetButtonText: '',
+  }),
+  withDesign({
+    ResetButton: asToken(
+      replaceWith(Fragment),
+    ),
+    Filter: withFilterSelection(),
+  }),
+);
+
+const withSiteWideFilter = withDesign({
+  Filter: withNodeKey({ nodeKey: 'filter', nodeCollection: 'site' }),
+});
+
+export const FilterByGroupSingleSiteWide = flow(
+  asFilterByGroup,
+  withSingleAllowedTag,
+  withSiteWideFilter,
+)(FilterByGroupClean);
+
+export const FilterByGroupSingleSiteWideNoReset = flow(
+  asFilterByGroup,
+  withSiteWideFilter,
+  withSingleAllowedTagNoReset,
+)(FilterByGroupClean);
 
 export default FilterByGroup;
 export {
