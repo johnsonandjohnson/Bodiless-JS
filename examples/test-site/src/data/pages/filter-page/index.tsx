@@ -14,18 +14,17 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import { withSingleAllowedTag, withMultipleAllowedTags } from '@bodiless/filtering';
+import { withSingleAllowedTag } from '@bodiless/filtering';
 import Page from '../../../components/Page';
 
 import Layout from '../../../components/Layout';
 import FilterByGroup, { ContextLogger } from '../../../components/FilterByGroup';
 
 const FilterByGroupSingle = withSingleAllowedTag(FilterByGroup);
-const FilterByGroupMultiple = withMultipleAllowedTags(FilterByGroup);
 
 const Switcher = () => {
   const [multiple, setMultiple] = React.useState(false);
-  const Filter = multiple ? FilterByGroupMultiple : FilterByGroupSingle;
+  const Filter = multiple ? FilterByGroup : FilterByGroupSingle;
   return (
     <>
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
