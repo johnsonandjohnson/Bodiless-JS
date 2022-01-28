@@ -143,12 +143,16 @@ const useFilterByGroupStore = (settings: FilterByGroupStoreSettings) => {
 
   const clearSelectedTags = () => updateSelectedTags([]);
 
+  const hasTagFromQueryParams = (): Boolean => (!!readTagsFromQueryParams().length);
+
   return {
     selectTag,
     unSelectTag,
     getSelectedTags,
     isTagSelected,
     clearSelectedTags,
+    updateSelectedTags,
+    hasTagFromQueryParams,
     filtersInitialized,
   };
 };
