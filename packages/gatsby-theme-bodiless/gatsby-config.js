@@ -86,7 +86,7 @@ if (process.env.ROBOTSTXT_ENABLED !== '0') {
   const disablePageList = getDisabledPages();
   const disabledPages = Object.keys(disablePageList).filter(
     item => disablePageList[item].pageDisabled === true || disablePageList[item].indexingDisabled,
-  );
+  ) || [];
   const policyEnv = process.env.ROBOTSTXT_POLICY;
   const defaultPolicy = [
     {
