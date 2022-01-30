@@ -46,4 +46,18 @@ export default class BackendClient {
     payload.append('file', file);
     return this.post(`${this.prefix}/asset/`, payload);
   }
+
+  /**
+   * Copy asset.
+   *
+   * @param pathFrom string
+   * @param pathTo string
+   * @returns Promise<AxiosResponse<any>>
+   */
+  copyAsset(pathFrom: string, pathTo: string) {
+    return this.post(`${this.prefix}/assets/copy/`, {
+      path_from: pathFrom,
+      path_to: pathTo,
+    });
+  }
 }

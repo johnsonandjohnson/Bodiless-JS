@@ -15,9 +15,8 @@ import {
   withDesign, HOC, asToken, flowIf,
 } from '@bodiless/fclasses';
 import type { Design } from '@bodiless/fclasses';
-
 import { withFacet, withTitle, withDesc } from '../meta';
-import { copyNode, childKeys } from './withContentLibrary';
+import { copyNode, childKeys, moveNode } from '../utils/NodeTools';
 import {
   withLibraryItemContext,
   CONTENT_LIBRARY_TYPE_PREFIX,
@@ -49,18 +48,6 @@ type LibraryMetaValues = {
 };
 
 export const DEFAULT_CONTENT_LIBRARY_PATH = ['Site', 'default-library'];
-
-const moveNode = (
-  source: ContentNode<any>,
-  dest: ContentNode<any>,
-  copyChildren: boolean,
-) => {
-  dest.setData(source.data);
-  if (copyChildren) {
-    childKeys(source).forEach(key => moveNode(source.child(key), dest.child(key), true));
-  }
-  source.delete();
-};
 
 /**
  * add meta data to FC item content node.
@@ -168,17 +155,20 @@ const withLibraryMenuOptions = (
         ];
         const destNode = sourceNode.peer(destNodePath.join('$'));
         const destNodeData = sourceNode.peer(destNodeDataPath.join('$'));
-        moveNode(sourceNode, destNodeData, true);
+        moveNode(sourceNode, destNodeData)
+          .then(() => {
+            const newItemType = `${CONTENT_LIBRARY_TYPE_PREFIX}:${item.type}:${item.uuid}`;
+            updateFlowContainerItem({ ...item, type: newItemType });
 
-        const newItemType = `${CONTENT_LIBRARY_TYPE_PREFIX}:${item.type}:${item.uuid}`;
-        updateFlowContainerItem({ ...item, type: newItemType });
-
-        // Library content meta data
-        addNodeMetaData(destNode, {
-          title: values['library-name'],
-          description: values['library-description'],
-          componentKey: item.type,
-        });
+            // Library content meta data
+            addNodeMetaData(destNode, {
+              title: values['library-name'],
+              description: values['library-description'],
+              componentKey: item.type,
+            });
+          }).catch(err => {
+            console.error(`Failed to copy data to library (${err.message})`);
+          });
       }
     };
 
