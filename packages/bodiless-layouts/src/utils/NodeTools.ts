@@ -58,9 +58,10 @@ export const updateLibData = async (
     } else {
       dest.setData(source.data);
     }
-
-    await childKeys(source).forEach(
-      key => updateLibData(source.child(key), dest.child(key), isCopy)
+    childKeys(source).forEach(
+      async (key) => {
+        await updateLibData(source.child(key), dest.child(key), isCopy);
+      }
     );
     if (!isCopy) {
       source.delete();
