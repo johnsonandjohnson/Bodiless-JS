@@ -22,12 +22,20 @@ import {
   addProps,
   withDesign,
   replaceWith,
+  addClasses,
   removeClasses,
+  startWith,
+  asToken,
+  Ul,
+  stylable,
 } from '@bodiless/fclasses';
 import {
   AccordionClean,
   asTestableAccordion,
 } from '@bodiless/accordion';
+import {
+  asBodilessList, asEditable, asSubList, withSimpleSubListDesign,
+} from '@bodiless/components';
 import Layout from '../components/Layout';
 import {
   ProductTitle,
@@ -76,12 +84,67 @@ const asProductAccordion = title => flow(
   asTestableProductAccordion(title),
 );
 
+export const withSimpleTitle = withDesign({
+  Title: asToken(
+    replaceWith('span'),
+    asEditable('text', 'Item'),
+  ),
+});
+const withListDesign = withSimpleSubListDesign(2);
+
+export const withItemTheme = withDesign({
+  Item: asToken(stylable, addClasses('test-accordion-parent-li')),
+});
+export const withSubItemTheme = withDesign({
+  Wrapper: asToken(stylable, addClasses('test-accordion-sub-ul')),
+  Item: asToken(stylable, addClasses('test-accordion-sub-li')),
+});
+
+const IngredientList = asToken(
+  asBodilessList(),
+  withSimpleTitle,
+  withItemTheme,
+  withListDesign(asToken(
+    asSubList(),
+    withSimpleTitle,
+    withSubItemTheme,
+  )),
+);
+
+const asAccordionWithList = title => flow(
+  withNode,
+  asSingleAccordionDefaultStyle,
+  withDesign({
+    Wrapper: flow(
+      addClasses('test-accordion-wrapper'),
+      removeClasses('p-1'),
+    ),
+    Title: withDesign({
+      Wrapper: flow(
+        addClasses('test-accordion-title-wrapper'),
+        removeClasses('text-2xl'),
+      ),
+      Label: replaceWith(props => <NonEditableTitle {...props} producttitle={title} />),
+    }),
+    Body: flow(
+      addClasses('test-accordion-body'),
+      withDesign({
+        Content: asToken(
+          startWith(Ul),
+          IngredientList,
+          addClasses('test-accordion-ul'),
+        ),
+      }),
+    ),
+  }),
+);
+
 const ProductOverAcc = asProductAccordion('Overview')(AccordionClean);
 const ProductDirsAcc = asProductAccordion('Directions')(AccordionClean);
 const ProductHowAcc = asProductAccordion('How To Use')(AccordionClean);
 const ProductNutAcc = asProductAccordion('Nutrition')(AccordionClean);
-const ProductActIngAcc = asProductAccordion('Active Ingredients')(AccordionClean);
-const ProductInactIngAcc = asProductAccordion('Inactive Ingredients')(AccordionClean);
+const ProductActIngAcc = asAccordionWithList('Active Ingredients')(AccordionClean);
+const ProductInactIngAcc = asAccordionWithList('Inactive Ingredients')(AccordionClean);
 const ProductStorAcc = asProductAccordion('Storage')(AccordionClean);
 const ProductWarnAcc = asProductAccordion('Warnings')(AccordionClean);
 
