@@ -784,32 +784,40 @@ class Backend {
 
   static copyAssets(route) {
     route.post((req, res) => {
-      const {path_from, path_to} = req.body;
-      const assetStaticPathFrom = path.join(backendStaticPath, path_from);
-      const assetStaticPathTo = path.join(backendStaticPath, path_to);
-      logger.log(`Copy asset from: ${assetStaticPathFrom} to ${assetStaticPathTo}, cwd: ${process.cwd()}`);
+      const {
+        body: {
+          path_from: pathFrom, path_to: pathTo,
+        }
+      } = req;
+      const assetStaticPathFrom = path.join(backendStaticPath, pathFrom);
+      const assetStaticPathTo = path.join(backendStaticPath, pathTo);
+      logger.log(`Copy assets from: ${assetStaticPathFrom} to ${assetStaticPathTo}, cwd: ${process.cwd()}`);
       try {
         copyFile(assetStaticPathFrom, assetStaticPathTo);
         res.send();
       } catch (error) {
         logger.log(error);
-        res.status(500).send(`${error}`);
+        res.status(500).send(error);
       }
     });
   }
 
   static moveAssets(route) {
     route.post((req, res) => {
-      const {path_from, path_to} = req.body;
-      const assetStaticPathFrom = path.join(backendStaticPath, path_from);
-      const assetStaticPathTo = path.join(backendStaticPath, path_to);
+      const {
+        body: {
+          path_from: pathFrom, path_to: pathTo,
+        }
+      } = req;
+      const assetStaticPathFrom = path.join(backendStaticPath, pathFrom);
+      const assetStaticPathTo = path.join(backendStaticPath, pathTo);
       logger.log(`Move asset from: ${assetStaticPathFrom} to ${assetStaticPathTo}, cwd: ${process.cwd()}`);
       try {
         moveFile(assetStaticPathFrom, assetStaticPathTo);
         res.send();
       } catch (error) {
         logger.log(error);
-        res.status(500).send(`${error}`);
+        res.status(500).send(error);
       }
     });
   }

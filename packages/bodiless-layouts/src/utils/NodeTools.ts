@@ -22,7 +22,7 @@ import BackendClient from './BackendClient';
  * @param node ContentNode
  * @returns boolean - true if it is an image node.
  */
-const isAssetNode = (node: ContentNode<any>): boolean => {
+const isImageNode = (node: ContentNode<any>): boolean => {
   const { path } = node;
   return (path[path.length - 1] === 'image');
 };
@@ -43,15 +43,16 @@ export const updateLibData = async (
   isCopy: boolean,
 ) => {
   try {
-    if (isAssetNode(source)) {
+    if (isImageNode(source)) {
       const backend = new BackendClient();
+      const { data: { src }} = source;
       if (isCopy) {
-        const destDataSrc = source.data.src.replace('site/', dest.baseResourcePath);
-        await backend.copyAsset(source.data.src, destDataSrc);
+        const destDataSrc = src.replace('site/', dest.baseResourcePath);
+        await backend.copyAsset(src, destDataSrc);
         dest.setData({...source.data, src: destDataSrc});
       } else {
-        const destDataSrc = source.data.src.replace(source.baseResourcePath, 'site/');
-        await backend.moveAsset(source.data.src, destDataSrc);
+        const destDataSrc = src.replace(source.baseResourcePath, 'site/');
+        await backend.moveAsset(src, destDataSrc);
         dest.setData({...source.data, src: destDataSrc});
       }
     } else {

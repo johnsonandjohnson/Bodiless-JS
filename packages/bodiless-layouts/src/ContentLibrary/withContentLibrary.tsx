@@ -33,13 +33,6 @@ export type ContentLibraryOptions = {
   useOverrides?: (props: any) => Partial<OptionGroupDefinition>,
 };
 
-// const copyNode = (source: ContentNode<any>, dest: ContentNode<any>, copyChildren: boolean) => {
-//   dest.setData(source.data);
-//   if (copyChildren) {
-//     childKeys(source).forEach(key => copyNode(source.child(key), dest.child(key), true));
-//   }
-// };
-
 const withContentLibrary = (options: ContentLibraryOptions) => <P extends object>(
   Component: ComponentOrTag<P>,
 ) => {
@@ -118,7 +111,3 @@ const withContentLibrary = (options: ContentLibraryOptions) => <P extends object
 };
 
 export default withContentLibrary;
-
-// export {
-//   copyNode,
-// };
