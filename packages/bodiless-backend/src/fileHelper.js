@@ -87,7 +87,7 @@ const copyFile = (pathFrom, pathTo) => {
  */
 const moveFile = (pathFrom, pathTo) => {
   try {
-    fse.moveSync(pathFrom, pathTo);
+    fse.moveSync(pathFrom, pathTo, { overwrite: true });
   } catch (err) {
     throw new Error(`Failed to move file from ${pathFrom} to ${pathTo}: ${err.message}`);
   }
