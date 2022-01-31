@@ -60,4 +60,18 @@ export default class BackendClient {
       path_to: pathTo,
     });
   }
+
+  /**
+   * Move asset.
+   *
+   * @param pathFrom string
+   * @param pathTo string
+   * @returns Promise<AxiosResponse<any>>
+   */
+  moveAsset(pathFrom: string, pathTo: string) {
+    return this.post(`${this.prefix}/assets/move/`, {
+      path_from: pathFrom,
+      path_to: pathTo,
+    });
+  }
 }

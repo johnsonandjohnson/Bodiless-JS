@@ -71,15 +71,30 @@ const copyAllFiles = (files, baseResourcePath, nodePath) => {
  * @param pathFrom string - source file path
  * @param pathTo string - destination file path
  */
-const copyFile = async (pathFrom, pathTo) => {
+const copyFile = (pathFrom, pathTo) => {
   try {
-    await fse.copy(pathFrom, pathTo);
+    fse.copySync(pathFrom, pathTo);
   } catch (err) {
     throw new Error(`Failed to copy file from ${pathFrom} to ${pathTo}: ${err.message}`);
   }
 };
 
+/**
+ * Move file from location pathFrom to pathTo, create directories if not exist.
+ *
+ * @param pathFrom string - source file path
+ * @param pathTo string - destination file path
+ */
+const moveFile = (pathFrom, pathTo) => {
+  try {
+    fse.moveSync(pathFrom, pathTo);
+  } catch (err) {
+    throw new Error(`Failed to move file from ${pathFrom} to ${pathTo}: ${err.message}`);
+  }
+};
+
 module.exports = {
   copyAllFiles,
+  moveFile,
   copyFile,
 };

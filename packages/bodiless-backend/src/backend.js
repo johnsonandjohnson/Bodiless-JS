@@ -24,7 +24,7 @@ const uniq = require('lodash/uniq');
 const Page = require('./page');
 const GitCmd = require('./GitCmd');
 const { getChanges, getConflicts, mergeMain } = require('./git');
-const { copyAllFiles, copyFile } = require('./fileHelper');
+const { copyAllFiles, copyFile, moveFile } = require('./fileHelper');
 const Logger = require('./logger');
 
 const backendPrefix = process.env.GATSBY_BACKEND_PREFIX || '/___backend';
@@ -783,13 +783,29 @@ class Backend {
   }
 
   static copyAssets(route) {
-    route.post(async (req, res) => {
+    route.post((req, res) => {
       const {path_from, path_to} = req.body;
       const assetStaticPathFrom = path.join(backendStaticPath, path_from);
       const assetStaticPathTo = path.join(backendStaticPath, path_to);
       logger.log(`Copy asset from: ${assetStaticPathFrom} to ${assetStaticPathTo}, cwd: ${process.cwd()}`);
       try {
-        await copyFile(assetStaticPathFrom, assetStaticPathTo);
+        copyFile(assetStaticPathFrom, assetStaticPathTo);
+        res.send();
+      } catch (error) {
+        logger.log(error);
+        res.status(500).send(`${error}`);
+      }
+    });
+  }
+
+  static moveAssets(route) {
+    route.post((req, res) => {
+      const {path_from, path_to} = req.body;
+      const assetStaticPathFrom = path.join(backendStaticPath, path_from);
+      const assetStaticPathTo = path.join(backendStaticPath, path_to);
+      logger.log(`Move asset from: ${assetStaticPathFrom} to ${assetStaticPathTo}, cwd: ${process.cwd()}`);
+      try {
+        moveFile(assetStaticPathFrom, assetStaticPathTo);
         res.send();
       } catch (error) {
         logger.log(error);

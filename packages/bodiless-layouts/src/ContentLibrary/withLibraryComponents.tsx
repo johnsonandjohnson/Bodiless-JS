@@ -16,7 +16,7 @@ import {
 } from '@bodiless/fclasses';
 import type { Design } from '@bodiless/fclasses';
 import { withFacet, withTitle, withDesc } from '../meta';
-import { copyNode, childKeys, moveNode } from '../utils/NodeTools';
+import { childKeys, updateLibData } from '../utils/NodeTools';
 import {
   withLibraryItemContext,
   CONTENT_LIBRARY_TYPE_PREFIX,
@@ -133,11 +133,14 @@ const withLibraryMenuOptions = (
         ];
         const sourceNodeData = sourceNode.peer(sourceNodeDataPath.join('$'));
 
-        copyNode(sourceNodeData, sourceNode, true);
-
-        const newItemType = item.type.split(':')[1];
-        updateFlowContainerItem({ ...item, type: newItemType });
-        setIsLibraryItem(false);
+        updateLibData(sourceNodeData, sourceNode, true)
+          .then(() => {
+            const newItemType = item.type.split(':')[1];
+            updateFlowContainerItem({ ...item, type: newItemType });
+            setIsLibraryItem(false);
+          }).catch(err => {
+            console.error(`Failed to copy data from library (${err.message}) to page.`);
+          });
       } else {
         /**
          * Move the original flow container node to content library node,
@@ -155,7 +158,7 @@ const withLibraryMenuOptions = (
         ];
         const destNode = sourceNode.peer(destNodePath.join('$'));
         const destNodeData = sourceNode.peer(destNodeDataPath.join('$'));
-        moveNode(sourceNode, destNodeData)
+        updateLibData(sourceNode, destNodeData, false)
           .then(() => {
             const newItemType = `${CONTENT_LIBRARY_TYPE_PREFIX}:${item.type}:${item.uuid}`;
             updateFlowContainerItem({ ...item, type: newItemType });
@@ -167,7 +170,7 @@ const withLibraryMenuOptions = (
               componentKey: item.type,
             });
           }).catch(err => {
-            console.error(`Failed to copy data to library (${err.message})`);
+            console.error(`Failed to move data to library (${err.message})`);
           });
       }
     };

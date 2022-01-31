@@ -33,27 +33,37 @@ const isAssetNode = (node: ContentNode<any>): boolean => {
  *
  * @param source ContentNode - source node to be moved.
  * @param dest ContentNode - node destination to be moved to.
- * @param copyChildren boolean - true if child to be moved as well.
+ * @param isCopy boolean
+ *        - True if copy node data and asset.
+ *        - False if move node data and asset.
  */
-export const moveNode = async (
+export const updateLibData = async (
   source: ContentNode<any>,
   dest: ContentNode<any>,
+  isCopy: boolean,
 ) => {
   try {
-    if (
-      isAssetNode(source)
-      && (source.data.src.indexOf(source.baseResourcePath) !== -1)
-    ) {
-      const destDataSrc = source.data.src.replace(source.baseResourcePath, 'site/');
+    if (isAssetNode(source)) {
       const backend = new BackendClient();
-      await backend.copyAsset(source.data.src, destDataSrc);
-      dest.setData({...source.data, src: destDataSrc});
+      if (isCopy) {
+        const destDataSrc = source.data.src.replace('site/', dest.baseResourcePath);
+        await backend.copyAsset(source.data.src, destDataSrc);
+        dest.setData({...source.data, src: destDataSrc});
+      } else {
+        const destDataSrc = source.data.src.replace(source.baseResourcePath, 'site/');
+        await backend.moveAsset(source.data.src, destDataSrc);
+        dest.setData({...source.data, src: destDataSrc});
+      }
     } else {
       dest.setData(source.data);
     }
 
-    childKeys(source).forEach(key => moveNode(source.child(key), dest.child(key)));
-    source.delete();
+    await childKeys(source).forEach(
+      key => updateLibData(source.child(key), dest.child(key), isCopy)
+    );
+    if (!isCopy) {
+      source.delete();
+    }
   } catch (error: any) {
     console.error(`Asset moving failed ${error.message}`);
   }
