@@ -794,7 +794,9 @@ class Backend {
       logger.log(`Copy assets from: ${assetStaticPathFrom} to ${assetStaticPathTo}, cwd: ${process.cwd()}`);
       try {
         copyFile(assetStaticPathFrom, assetStaticPathTo);
-        res.send();
+        setTimeout(() => {
+          res.send({status: 'success'});
+        }, 300);
       } catch (error) {
         logger.log(error);
         res.status(500).send(error);
@@ -814,7 +816,9 @@ class Backend {
       logger.log(`Move asset from: ${assetStaticPathFrom} to ${assetStaticPathTo}, cwd: ${process.cwd()}`);
       try {
         moveFile(assetStaticPathFrom, assetStaticPathTo);
-        res.send();
+        setTimeout(() => {
+          res.send({status: 'success'});
+        }, 300);
       } catch (error) {
         logger.log(error);
         res.status(500).send(error);

@@ -58,11 +58,12 @@ export const updateLibData = async (
     } else {
       dest.setData(source.data);
     }
-    childKeys(source).forEach(
-      async (key) => {
-        await updateLibData(source.child(key), dest.child(key), isCopy);
-      }
-    );
+    const keys = childKeys(source);
+    for (let index = 0; index < keys.length; index += 1) {
+      const key = keys[index];
+      // eslint-disable-next-line no-await-in-loop
+      await updateLibData(source.child(key), dest.child(key), isCopy);
+    }
     if (!isCopy) {
       source.delete();
     }
