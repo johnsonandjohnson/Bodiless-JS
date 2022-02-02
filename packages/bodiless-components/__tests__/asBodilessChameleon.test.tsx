@@ -18,12 +18,14 @@ import {
 } from 'enzyme';
 import {
   DefaultContentNode, NodeProvider, useNode, withNodeKey, withNode,
-  PageEditContext, PageContextProvider,
+  PageEditContext, PageContextProvider, ifToggledOff,
 } from '@bodiless/core';
 import flowRight from 'lodash/flowRight';
 import flow from 'lodash/flow';
 import identity from 'lodash/identity';
-import { withDesign, withoutProps, HOC } from '@bodiless/fclasses';
+import {
+  withDesign, withoutProps, HOC, asToken, startWith
+} from '@bodiless/fclasses';
 
 import {
   asBodilessChameleon, withChameleonComponentFormControls,
@@ -220,6 +222,17 @@ describe('asBodilessChameleon', () => {
     wrapper = mount(<Test data={{}} />);
     expect(wrapper.find('span#test').prop('data-test-a')).toBeUndefined();
     expect(wrapper.find('span#test').prop('data-test-default')).toBe(true);
+  });
+
+  it('Supports startWith', () => {
+    const Test = asToken(
+      asBodilessChameleon('foo'),
+      withDesign({
+        _default: startWith(() => <div id="test" className="foo" />),
+      }),
+    )(() => <div id="test" className="bar" />);
+    const wrapper = mount(<Test />);
+    expect(wrapper.find('div#test').prop('className')).toBe('foo');
   });
 
   it('Preserves the node path of the wrapped component', () => {
