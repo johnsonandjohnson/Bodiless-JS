@@ -796,7 +796,7 @@ class Backend {
         copyFile(assetStaticPathFrom, assetStaticPathTo);
         setTimeout(() => {
           res.send({status: 'success'});
-        }, 300);
+        }, 500);
       } catch (error) {
         logger.log(error);
         res.status(500).send(error);
@@ -818,7 +818,7 @@ class Backend {
         moveFile(assetStaticPathFrom, assetStaticPathTo);
         setTimeout(() => {
           res.send({status: 'success'});
-        }, 300);
+        }, 500);
       } catch (error) {
         logger.log(error);
         res.status(500).send(error);
