@@ -16,6 +16,7 @@
 import React, {
   useState, useEffect, useCallback, useMemo,
 } from 'react';
+<<<<<<< Updated upstream:packages/gatsby-theme-bodiless/src/dist/useGitButtons.tsx
 import {
   contextMenuForm,
   getUI,
@@ -27,6 +28,16 @@ import {
   useGetter,
 } from '@bodiless/core';
 import BackendClient from './BackendClient';
+=======
+import type { TMenuOption } from '../Types/ContextMenuTypes';
+import ContextSubMenu from '../ContextMenu/ContextSubMenu';
+import { useRegisterMenuOptions } from '../PageContextProvider';
+import { contextMenuForm } from '../contextMenuForm';
+import { getUI } from '../components';
+import { useEditContext, useGetter } from '../hooks';
+import { useNotify } from '../NotificationProvider';
+import { BodilessBackendClient } from '../BackendClient';
+>>>>>>> Stashed changes:packages/bodiless-core/src/Git/useGitButtons.tsx
 import CommitsList from './CommitsList';
 import RemoteChanges from './RemoteChanges';
 import Reset from './Reset';
