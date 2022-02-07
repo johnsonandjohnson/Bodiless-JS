@@ -133,14 +133,10 @@ const withLibraryMenuOptions = (
         ];
         const sourceNodeData = sourceNode.peer(sourceNodeDataPath.join('$'));
 
-        updateLibData(sourceNodeData, sourceNode, true)
-          .then(() => {
-            const newItemType = item.type.split(':')[1];
-            updateFlowContainerItem({ ...item, type: newItemType });
-            setIsLibraryItem(false);
-          }).catch(err => {
-            console.error(`Failed to copy data from library (${err.message}) to page.`);
-          });
+        updateLibData(sourceNodeData, sourceNode, true);
+        const newItemType = item.type.split(':')[1];
+        updateFlowContainerItem({ ...item, type: newItemType });
+        setIsLibraryItem(false);
       } else {
         /**
          * Move the original flow container node to content library node,
@@ -158,20 +154,16 @@ const withLibraryMenuOptions = (
         ];
         const destNode = sourceNode.peer(destNodePath.join('$'));
         const destNodeData = sourceNode.peer(destNodeDataPath.join('$'));
-        updateLibData(sourceNode, destNodeData, false)
-          .then(() => {
-            const newItemType = `${CONTENT_LIBRARY_TYPE_PREFIX}:${item.type}:${item.uuid}`;
-            updateFlowContainerItem({ ...item, type: newItemType });
+        updateLibData(sourceNode, destNodeData, false);
+        const newItemType = `${CONTENT_LIBRARY_TYPE_PREFIX}:${item.type}:${item.uuid}`;
+        updateFlowContainerItem({ ...item, type: newItemType });
 
-            // Library content meta data
-            addNodeMetaData(destNode, {
-              title: values['library-name'],
-              description: values['library-description'],
-              componentKey: item.type,
-            });
-          }).catch(err => {
-            console.error(`Failed to move data to library (${err.message})`);
-          });
+        // Library content meta data
+        addNodeMetaData(destNode, {
+          title: values['library-name'],
+          description: values['library-description'],
+          componentKey: item.type,
+        });
       }
     };
 
