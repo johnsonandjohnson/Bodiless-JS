@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { extname, normalize } from 'path';
+import { extname } from 'path';
 import { AxiosResponse } from 'axios';
 import { ContentNode } from '@bodiless/core';
 import BackendClient from './BackendClient';
@@ -64,7 +64,7 @@ export const convertAssetImagePath = (
   type: AssetImagePathConvertType,
 ): string => {
   let convertedSrc = '';
-  const posixSrc = normalize(src.replace(/\\/g, '/'));
+  const posixSrc = src.replace(/\\+/g, '/');
   switch (type) {
     case AssetImagePathConvertType.Page:
       convertedSrc = posixSrc.replace('site/', basePath);

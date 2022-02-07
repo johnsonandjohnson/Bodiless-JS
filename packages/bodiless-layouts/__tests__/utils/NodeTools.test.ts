@@ -111,7 +111,7 @@ describe('isImageNode', () => {
 
 describe('convertAssetImagePath', () => {
   const pageImageSrc = '/images/pages/flow-container/3fd47b03572bc5a70c2e6b34bed296c5/p6.jpg';
-  const pageImageSrcWin = '/images\\pages\\flow-container\\3fd47b03572bc5a70c2e6b34bed296c5\\p6.jpg';
+  const pageImageSrcWin = '/images\\pages\\\\flow-container\\3fd47b03572bc5a70c2e6b34bed296c5\\p6.jpg';
   const siteImageSrc = '/images/site/3fd47b03572bc5a70c2e6b34bed296c5/site.jpg';
   it('converts page level image path to site level path', () => {
     const expectedSrc = '/images/site/3fd47b03572bc5a70c2e6b34bed296c5/p6.jpg';
@@ -165,6 +165,5 @@ describe('updateLibData', () => {
 
     updateLibData(node1, nodeDest, false);
     expect(axios.post).toHaveBeenCalled();
-    console.log('3333333333333333', Array.from(mockStore.keys()), Array.from(mockStore.values()));
   });
 });
