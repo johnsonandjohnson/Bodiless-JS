@@ -60,6 +60,7 @@
     "@bodiless/navigation": "^0.3.6",
     "@bodiless/organisms": "^0.3.6",
     "@bodiless/ui": "^0.3.6",
+    "@bodiless/cli": "^0.3.6",
     "@types/walk": "^2.3.0",
     "autoprefixer": "^9.8.6",
     "axios": "^0.21.0",

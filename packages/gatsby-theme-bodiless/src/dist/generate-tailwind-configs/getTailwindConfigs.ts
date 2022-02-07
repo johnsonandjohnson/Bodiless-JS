@@ -15,7 +15,8 @@
 import fs from 'fs';
 import { exec } from 'child_process';
 import path from 'path';
-import locateFiles from '../generate-env-vars/locateFiles';
+// change it after moving current utility to bodiless/cli.
+import locateFiles from '@bodiless/cli/lib/commands/generate-env-vars/locateFiles';
 
 /**
  * reads package.json and returns content of key of the package
