@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+const generateEnvVars = require('../lib/commands/generate-env-vars');
+generateEnvVars.default();
