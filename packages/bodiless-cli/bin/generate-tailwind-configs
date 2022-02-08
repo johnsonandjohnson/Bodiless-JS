@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+const generateTailwindConfigs = require('../lib/commands/generate-tailwind-configs');
+generateTailwindConfigs.default();

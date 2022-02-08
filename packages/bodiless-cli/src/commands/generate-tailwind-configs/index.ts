@@ -15,8 +15,7 @@
 
 import fs from 'fs';
 import { resolve as resolvePath } from 'path';
-// change the path after moving current utitity to @bodiless/cli
-import { writeToFile } from '@bodiless/cli/lib/commands/generate-env-vars/utils';
+import { writeToFile } from '../generate-env-vars/utils';
 import {
   getDependenciesFromPackageJson,
   getPackageNameFromPackageJson,

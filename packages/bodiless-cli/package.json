@@ -8,7 +8,8 @@
   "main": "./lib/index.js",
   "bin": {
     "bodiless": "./bin/bodiless",
-    "generate-env-vars": "./bin/generate-env-vars"
+    "generate-env-vars": "./bin/generate-env-vars",
+    "generate-tailwind-configs": "./bin/generate-tailwind-configs"
   },
   "directories": {
     "lib": "lib",
@@ -41,17 +42,17 @@
     "@types/fs-extra": "^8.0.0",
     "@types/lodash": "^4.14.158",
     "@types/lodash.flow": "^3.5.6",
+    "dotenv": "^8.2.0",
+    "find-up": "^4.1.0",
     "fs-extra": "^8.1.0",
     "globby": "^10",
+    "isomorphic-git": "^1.10.1",
     "lodash": "^4.17.19",
-    "dotenv": "^8.2.0",
-    "walkdir": "^0.4.1",
-    "find-up": "^4.1.0",
-    "isomorphic-git": "^1.10.1"
+    "walkdir": "^0.4.1"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
-    "@types/node": "^16",
+    "@types/node": "^16.11.22",
     "nodemon": "^1.19.1"
   },
   "oclif": {
