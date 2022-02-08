@@ -147,5 +147,12 @@ export const query = graphql`
     ...PageQuery
     ...SiteQuery
     ...DefaultContentQuery
+    allSite(filter: {pathPrefix: {eq: $slug}}) {
+      edges {
+        node {
+          buildTime
+        }
+      }
+    }
   }
 `;
