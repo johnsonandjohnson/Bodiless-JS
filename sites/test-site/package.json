@@ -77,7 +77,7 @@
     "build:lib": "bl-clear-logs && gatsby build && bl-validate-logs",
     "build:scripts": "tsc -p ./tsconfig.json",
     "build:search": "npm run search-index",
-    "build:tailwind-configs": "generate-tailwind-configs",
+    "build:tailwind-configs": "BODILESS_NPM_ROOT='../..' generate-tailwind-configs",
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "rimraf ./public/* ./.cache",
     "dev-backend": "node ./node_modules/@bodiless/backend/src/server.js",
