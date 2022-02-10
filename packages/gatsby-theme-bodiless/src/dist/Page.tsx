@@ -26,12 +26,14 @@ import { withShowDesignKeys } from '@bodiless/fclasses';
 import { observer } from 'mobx-react-lite';
 import { ContextWrapper, PageEditor } from '@bodiless/core-ui';
 import { withPageDisableButton, withRedirectAliasButton } from '@bodiless/components';
+import {
+  withClonePageButton,
+  withDeletePageButton,
+  withMovePageButton,
+  withNewPageButton,
+} from '@bodiless/page';
 import GatsbyNodeProvider from './GatsbyNodeProvider';
 import GatsbyPageProvider, { PageProviderProps } from './GatsbyPageProvider';
-import withNewPageButton from './withNewPageButton';
-import withMovePageButton from './withMovePageButton';
-import withClonePageButton from './withClonePageButton';
-import withDeletePageButton from './withDeletePageButton';
 
 type FinalUI = {
   ContextWrapper: ComponentType<ContextWrapperProps>;

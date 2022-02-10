@@ -13,25 +13,23 @@
  */
 
 import React from 'react';
-import { useMenuOptionUI } from '@bodiless/core';
 import { useField } from 'informed';
-import type {
-  FieldProps,
-} from './types';
+import { usePageMenuOptionUI } from '../MenuOptionUI';
 import {
-  useBasePathField,
-  isEmptyValue,
-  validatePageUrl,
-  getPageUrlValidator,
-  joinPath,
+  PAGE_URL_FIELD_NAME,
+  BASE_PATH_EMPTY_VALUE,
+  INPUT_FIELD_INLINE_CLASSES,
+  INPUT_FIELD_BLOCK_CLASSES,
+} from '../constants';
+import type { FieldProps } from '../types';
+import {
   fieldValueToUrl,
-} from './utils';
-
-const PAGE_URL_FIELD_NAME = 'pagePath';
-const BASE_PATH_EMPTY_VALUE = '/';
-const INPUT_FIELD_DEFAULT_CLASSES = 'bl-text-gray-900 bl-bg-gray-100 bl-text-xs bl-min-w-xl-grid-1 bl-my-grid-2 bl-p-grid-1';
-const INPUT_FIELD_INLINE_CLASSES = INPUT_FIELD_DEFAULT_CLASSES.concat(' bl-inline');
-const INPUT_FIELD_BLOCK_CLASSES = INPUT_FIELD_DEFAULT_CLASSES.concat(' bl-block bl-w-full');
+  getPageUrlValidator,
+  isEmptyValue,
+  joinPath,
+  useBasePathField,
+  validatePageUrl,
+} from '../utils';
 
 /**
  * informed custom field that provides ability to enter new page path
@@ -42,10 +40,10 @@ const INPUT_FIELD_BLOCK_CLASSES = INPUT_FIELD_DEFAULT_CLASSES.concat(' bl-block 
  */
 const PageURLField = (props: FieldProps) => {
   const {
-    ComponentFormLabel,
-    ComponentFormLink,
+    ComponentFormLabelSmall,
+    ComponentFormLinkEdit,
     ComponentFormWarning,
-  } = useMenuOptionUI();
+  } = usePageMenuOptionUI();
   const {
     value: basePathValue,
     setValue: setBasePathValue,
@@ -55,7 +53,9 @@ const PageURLField = (props: FieldProps) => {
   const isBasePathEmpty = isEmptyValue(basePathValue) || basePathValue === BASE_PATH_EMPTY_VALUE;
   const isFullUrl = isBasePathEmpty;
 
-  const { validate, ...rest } = props;
+  const {
+    fieldLabel, fieldFull, validate, ...rest
+  } = props;
   const {
     fieldState, fieldApi, render, ref, userProps,
   } = useField({
@@ -67,14 +67,15 @@ const PageURLField = (props: FieldProps) => {
   const { value } = fieldState;
   const { setValue, setError } = fieldApi;
   const { onChange, ...restUserProps } = userProps;
-  const fieldLabel = isFullUrl ? 'URL' : 'Page Path';
+
+  const label = fieldLabel || (isFullUrl ? 'URL' : 'Page Path');
   const inputClasses = isFullUrl ? INPUT_FIELD_BLOCK_CLASSES : INPUT_FIELD_INLINE_CLASSES;
 
   return render(
     <>
-      <ComponentFormLabel htmlFor="new-page-path">{fieldLabel}</ComponentFormLabel>
+      <ComponentFormLabelSmall htmlFor="new-page-path">{label}</ComponentFormLabelSmall>
       {
-        !isFullUrl
+        fieldFull && !isFullUrl
           ? (<span className="mr-1">{`${basePathValue}`}</span>)
           : null
       }
@@ -97,12 +98,12 @@ const PageURLField = (props: FieldProps) => {
         }}
       />
       {
-        !isBasePathEmpty
+        fieldFull && !isBasePathEmpty
         && (
           <div
             className="bl-block"
           >
-            <ComponentFormLink
+            <ComponentFormLinkEdit
               onClick={() => {
                 setValue(joinPath(basePathValue, fieldValueToUrl(value)));
                 setBasePathValue(BASE_PATH_EMPTY_VALUE);
@@ -110,7 +111,7 @@ const PageURLField = (props: FieldProps) => {
               }}
             >
               Edit
-            </ComponentFormLink>
+            </ComponentFormLinkEdit>
           </div>
         )
       }
@@ -133,8 +134,8 @@ const PageURLField = (props: FieldProps) => {
 const MovePageURLField = (props: FieldProps) => {
   const {
     ComponentFormWarning,
-    ComponentFormLabel,
-  } = useMenuOptionUI();
+    ComponentFormLabelSmall,
+  } = usePageMenuOptionUI();
   const {
     value: basePathValue,
     setValue: setBasePathValue,
@@ -164,7 +165,7 @@ const MovePageURLField = (props: FieldProps) => {
   const inputClasses = INPUT_FIELD_INLINE_CLASSES;
   return render(
     <>
-      <ComponentFormLabel htmlFor="new-page-path">{fieldLabel}</ComponentFormLabel>
+      <ComponentFormLabelSmall htmlFor="new-page-path">{fieldLabel}</ComponentFormLabelSmall>
       <input
         {...restBasePathProps}
         type="hidden"

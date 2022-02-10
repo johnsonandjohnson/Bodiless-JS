@@ -13,25 +13,24 @@
  */
 
 import React, {
-  useCallback, useEffect, useState,
+  useEffect,
+  useState,
 } from 'react';
 import {
   contextMenuForm,
-  useMenuOptionUI,
-  useEditContext,
-  withMenuOptions,
-  useNode,
-  BodilessBackendClient,
   handleBackendResponse,
+  useEditContext,
+  useNode,
 } from '@bodiless/core';
-import verifyPage from './PageVerification';
+import { usePageMenuOptionUI } from '../MenuOptionUI';
+import { verifyPage } from '../Operations';
 import {
-  PageState,
+  PageClient,
   PageStatus,
-  Client,
-  getPathValue,
-  PageForm,
-} from './PageOperations';
+  PageState,
+} from '../types';
+import { getPathValue } from '../utils';
+import { MenuFormPage } from './MenuFormPage';
 
 const clonePage = async ({ origin, destination, client } : any) => {
   // Clone the page.
@@ -55,16 +54,16 @@ const clonePage = async ({ origin, destination, client } : any) => {
   return Promise.reject(new Error('An internal error occurred. Please try again later.'));
 };
 
-const formPageClone = (client: Client) => contextMenuForm({
+const menuFormPageClone = (client: PageClient) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
 })(({ formState, formApi } : any) => {
-  const { ComponentFormText } = useMenuOptionUI();
+  const { ComponentFormText } = usePageMenuOptionUI();
   const {
     submits, invalid, values,
   } = formState;
-  const [state, setState] = useState<PageStatus>({
-    status: PageState.Init,
+  const [state, setState] = useState<PageState>({
+    status: PageStatus.Init,
   });
   const context = useEditContext();
   const origin = useNode().node.pagePath;
@@ -74,15 +73,15 @@ const formPageClone = (client: Client) => contextMenuForm({
     // If the form is submitted and valid then lets try to clone a page.
     if (submits && destination && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
-      setState({ status: PageState.Pending });
+      setState({ status: PageStatus.Pending });
       clonePage({ origin, destination, client })
         .then((pagePath: string) => {
           if (pagePath) {
-            setState({ status: PageState.Complete, pagePath });
+            setState({ status: PageStatus.Complete, pagePath });
           }
         })
         .catch((err: Error) => {
-          setState({ status: PageState.Errored, errorMessage: err.message });
+          setState({ status: PageStatus.Errored, errorMessage: err.message });
         })
         .finally(() => {
           context.hidePageOverlay();
@@ -94,7 +93,7 @@ const formPageClone = (client: Client) => contextMenuForm({
   return (
     <>
       <ComponentFormText type="hidden" field="keepOpen" initialValue />
-      <PageForm
+      <MenuFormPage
         formTitle="Clone (this) Page"
         status={status}
         errorMessage={errorMessage}
@@ -107,28 +106,6 @@ const formPageClone = (client: Client) => contextMenuForm({
   );
 });
 
-const defaultClient = new BodilessBackendClient();
-
-const useMenuOptions = () => {
-  const context = useEditContext();
-
-  const menuOptions = [
-    {
-      name: 'page-clone',
-      icon: 'collections',
-      label: 'Clone',
-      group: 'page-group',
-      isHidden: useCallback(() => !context.isEdit, []),
-      handler: () => formPageClone(defaultClient),
-    },
-  ];
-  return menuOptions;
+export {
+  menuFormPageClone,
 };
-
-const withClonePageButton = withMenuOptions({
-  useMenuOptions,
-  name: 'ClonePage',
-  root: true,
-});
-
-export default withClonePageButton;

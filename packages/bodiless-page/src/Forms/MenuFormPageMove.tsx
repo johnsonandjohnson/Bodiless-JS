@@ -12,82 +12,55 @@
  * limitations under the License.
  */
 
-/* eslint-disable no-alert */
 import React, {
-  useCallback,
   useEffect,
   useState,
-  ComponentType,
-  HTMLProps,
 } from 'react';
-import flow from 'lodash/flow';
 import {
-  contextMenuForm,
-  useMenuOptionUI,
-  useEditContext,
-  withMenuOptions,
   ContextMenuProvider,
-  ContextSubMenu,
+  contextMenuForm,
+  handleBackendResponse,
+  useEditContext,
   useNode,
-  handleBackendResponse as handle,
-  BodilessBackendClient,
 } from '@bodiless/core';
-import { AxiosPromise } from 'axios';
-import {
-  addClasses, removeClasses, StylableProps,
-} from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
-import { getPathValue, MovePageURLField } from './PageOperations';
-
-type Client = {
-  movePage: (origin: string, destination: string) => AxiosPromise<any>;
-};
-
-enum MovePageState {
-  Init,
-  Pending,
-  Complete,
-  Errored,
-}
-
-type MovePageProps = {
-  status: MovePageState;
-  errorMessage?: string;
-};
+import { usePageMenuOptionUI } from '../MenuOptionUI';
+import { createRedirect } from '../Operations';
+import {
+  PageClient,
+  PageStatus,
+  PageState,
+} from '../types';
+import {
+  getPathValue,
+  hasPageChild,
+  usePagePath,
+} from '../utils';
+import { MovePageURLField } from './MenuFormFields';
 
 let actualState: number = -1;
 
 let destinationGlb: string = '';
 
-const usePagePath = () => useNode().node.pagePath;
-
-const hasPageChild = async ({ pathChild, client } : any) => {
-  const result = await handle(client.directoryChild(pathChild));
-  if (result.response && result.message === 'Success') {
-    return Promise.resolve();
-  }
-  return Promise.reject(new Error(result.message));
-};
-
 const movePage = async ({ origin, destination, client } : any) => {
-  const directoryExists = await handle(client.directoryExists(destination));
+  const directoryExists = await handleBackendResponse(client.directoryExists(destination));
 
   if (directoryExists.message !== 'The page cannot be moved. Directory exists') {
     try {
-      await handle(client.clonePage(origin, destination));
-    } catch (e) {
-      return Promise.reject(new Error((e as Error).message));
+      await handleBackendResponse(client.clonePage(origin, destination));
+    } catch (e: any) {
+      return Promise.reject(new Error(e.message));
     }
 
-    const hasChild = await handle(client.directoryChild(origin));
+    const hasChild = await handleBackendResponse(client.directoryChild(origin));
 
     let deleteResult;
 
     if (hasChild.response && hasChild.message === 'Success') {
       try {
-        deleteResult = await handle(client.deletePage(origin));
-      } catch (e) {
-        return Promise.reject(new Error((e as Error).message));
+        deleteResult = await handleBackendResponse(client.deletePage(origin));
+      } catch (e: any) {
+        return Promise.reject(new Error(e.message));
       }
       // Deleting the static assets on move leads to a gatsby image rendering issue.
       // To be resolved with another aproach:
@@ -101,9 +74,9 @@ const movePage = async ({ origin, destination, client } : any) => {
       // }
     } else {
       try {
-        deleteResult = await handle(client.removeFile(origin));
-      } catch (e) {
-        return Promise.reject(new Error((e as Error).message));
+        deleteResult = await handleBackendResponse(client.removeFile(origin));
+      } catch (e: any) {
+        return Promise.reject(new Error(e.message));
       }
     }
 
@@ -118,63 +91,56 @@ const movePage = async ({ origin, destination, client } : any) => {
   return Promise.reject(new Error('The page cannot be moved.'));
 };
 
-const MovePageComp = (props : MovePageProps) => {
+const MovePageComp = (props : PageState) => {
   const {
     status, errorMessage,
   } = props;
   const basePathValue = usePagePath();
 
-  const defaultUI = useMenuOptionUI();
+  const defaultUI = usePageMenuOptionUI();
   const {
-    ComponentFormLabel,
-    ComponentFormLink,
+    ComponentFormCheckBox,
     ComponentFormDescription,
-    ComponentFormWarning,
+    ComponentFormLabel,
+    ComponentFormLabelSmall,
     ComponentFormTitle,
+    ComponentFormWarning,
   } = defaultUI;
+
   const formTitle = 'Move';
   switch (status) {
-    case MovePageState.Init: {
-      const CustomComponentFormLabel = flow(
-        removeClasses('bl-text-xs'),
-        addClasses('bl-font-bold bl-text-sm'),
-      )(ComponentFormLabel as ComponentType<StylableProps>);
-      const CustomComponentFormLink = flow(
-        removeClasses('bl-block'),
-        addClasses('bl-italic'),
-      )(ComponentFormLink as ComponentType<StylableProps>);
-      const CustomComponentFormWarning = flow(
-        removeClasses('bl-float-left'),
-      )(ComponentFormWarning);
-      const ui: object = {
-        ...defaultUI,
-        ComponentFormLabel: CustomComponentFormLabel as ComponentType<HTMLProps<HTMLLabelElement>>,
-        ComponentFormLink: CustomComponentFormLink as ComponentType<HTMLProps<HTMLAnchorElement>>,
-        ComponentFormWarning: CustomComponentFormWarning,
-      };
+    case PageStatus.Init: {
       return (
         <>
-          <ContextMenuProvider ui={ui}>
+          <ContextMenuProvider ui={defaultUI}>
             <ComponentFormTitle>{formTitle}</ComponentFormTitle>
             <ComponentFormDescription>Move this page to a new URL.</ComponentFormDescription>
-            <CustomComponentFormLabel>Current URL</CustomComponentFormLabel>
+            <ComponentFormLabelSmall>Current URL</ComponentFormLabelSmall>
             <ComponentFormDescription>{basePathValue}</ComponentFormDescription>
             <MovePageURLField
               validateOnChange
               validateOnBlur
             />
+            <ComponentFormLabel>
+              <ComponentFormCheckBox
+                field="redirectEnabled"
+                initialValue
+                keepState
+              />
+              Redirect
+            </ComponentFormLabel>
           </ContextMenuProvider>
         </>
       );
     }
-    case MovePageState.Pending:
+    case PageStatus.Pending:
       return (
         <>
           <ComponentFormTitle>Moving Page</ComponentFormTitle>
           <ComponentFormSpinner />
         </>
       );
-    case MovePageState.Complete:
+    case PageStatus.Complete:
       return (
         <>
           <ComponentFormTitle>{formTitle}</ComponentFormTitle>
@@ -184,7 +150,7 @@ const MovePageComp = (props : MovePageProps) => {
           </ComponentFormDescription>
         </>
       );
-    case MovePageState.Errored:
+    case PageStatus.Errored:
       return (
         <>
           <ComponentFormTitle>{formTitle}</ComponentFormTitle>
@@ -196,7 +162,7 @@ const MovePageComp = (props : MovePageProps) => {
 };
 
 const redirectPage = (values: {keepOpen: boolean, path?: string}) => {
-  if (values.keepOpen || actualState === MovePageState.Errored || typeof window === 'undefined') {
+  if (values.keepOpen || actualState === PageStatus.Errored || typeof window === 'undefined') {
     actualState = -1;
     return;
   }
@@ -207,35 +173,39 @@ const redirectPage = (values: {keepOpen: boolean, path?: string}) => {
   window.location.replace(destinationGlb);
 };
 
-const formPageMove = (client: Client) => contextMenuForm({
+const menuFormPageMove = (client: PageClient) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
   onClose: redirectPage,
 })(({ formState, formApi } : any) => {
-  const { ComponentFormText } = useMenuOptionUI();
+  const { ComponentFormText } = usePageMenuOptionUI();
+
+  const { node } = useNode();
 
   const origin = usePagePath();
 
   const {
     submits, invalid, values,
   } = formState;
-  const [state, setState] = useState<MovePageProps>({
-    status: MovePageState.Init,
+  const [state, setState] = useState<PageState>({
+    status: PageStatus.Init,
   });
+
   const context = useEditContext();
   const path = getPathValue(values);
   const pathChild = (typeof window !== 'undefined') ? window.location.pathname : '';
+  const { redirectEnabled } = values;
 
   useEffect(() => {
     if (pathChild === '/') {
-      actualState = MovePageState.Errored;
-      setState({ status: MovePageState.Errored, errorMessage: 'The page cannot be moved.' });
+      actualState = PageStatus.Errored;
+      setState({ status: PageStatus.Errored, errorMessage: 'The page cannot be moved.' });
       formApi.setValue('keepOpen', false);
     } else {
-      hasPageChild({ pathChild, client })
+      hasPageChild({ pagePath: pathChild, client })
         .catch(() => {
-          actualState = MovePageState.Errored;
-          setState({ status: MovePageState.Errored, errorMessage: 'The page cannot be moved while it has child pages.' });
+          actualState = PageStatus.Errored;
+          setState({ status: PageStatus.Errored, errorMessage: 'The page cannot be moved while it has child pages.' });
           formApi.setValue('keepOpen', false);
         });
     }
@@ -253,13 +223,13 @@ const formPageMove = (client: Client) => contextMenuForm({
       const originClear = origin.slice(0, -1);
 
       if (destination === originClear) {
-        actualState = MovePageState.Errored;
-        setState({ status: MovePageState.Errored, errorMessage: 'The page cannot be moved.' });
+        actualState = PageStatus.Errored;
+        setState({ status: PageStatus.Errored, errorMessage: 'The page cannot be moved.' });
         formApi.setValue('keepOpen', false);
       } else {
         context.showPageOverlay({ hasSpinner: false });
-        actualState = MovePageState.Pending;
-        setState({ status: MovePageState.Pending });
+        actualState = PageStatus.Pending;
+        setState({ status: PageStatus.Pending });
 
         movePage({
           origin,
@@ -267,12 +237,15 @@ const formPageMove = (client: Client) => contextMenuForm({
           client,
         })
           .then(() => {
-            actualState = MovePageState.Complete;
-            setState({ status: MovePageState.Complete });
+            if (redirectEnabled) {
+              createRedirect(node, originClear, destination);
+            }
+            actualState = PageStatus.Complete;
+            setState({ status: PageStatus.Complete });
           })
           .catch((err: Error) => {
-            actualState = MovePageState.Errored;
-            setState({ status: MovePageState.Errored, errorMessage: err.message });
+            actualState = PageStatus.Errored;
+            setState({ status: PageStatus.Errored, errorMessage: err.message });
           })
           .finally(() => {
             context.hidePageOverlay();
@@ -293,34 +266,6 @@ const formPageMove = (client: Client) => contextMenuForm({
   );
 });
 
-const defaultClient = new BodilessBackendClient();
-
-const useMenuOptions = () => {
-  const context = useEditContext();
-
-  const menuOptions = [
-    {
-      name: 'page-group',
-      icon: 'description',
-      label: 'Page',
-      Component: ContextSubMenu,
-    },
-    {
-      name: 'move',
-      icon: 'drive_file_move',
-      label: 'Move',
-      group: 'page-group',
-      isHidden: useCallback(() => !context.isEdit, []),
-      handler: () => formPageMove(defaultClient),
-    },
-  ];
-  return menuOptions;
+export {
+  menuFormPageMove,
 };
-
-const withMovePageButton = withMenuOptions({
-  useMenuOptions,
-  name: 'MovePage',
-  root: true,
-});
-
-export default withMovePageButton;

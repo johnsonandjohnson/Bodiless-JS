@@ -53,6 +53,8 @@
       "@bodiless/oidc/*": ["bodiless-oidc/src/*"],
       "@bodiless/organisms": ["bodiless-organisms/src"],
       "@bodiless/organisms/*": ["bodiless-organisms/src/*"],
+      "@bodiless/page": ["bodiless-page/src"],
+      "@bodiless/page/*": ["bodiless-page/src/*"],
       "@bodiless/richtext": ["bodiless-richtext/src"],
       "@bodiless/richtext/*": ["bodiless-richtext/src/*"],
       "@bodiless/richtext-ui": ["bodiless-richtext-ui/src"],

@@ -14,11 +14,7 @@
 
 import axios from 'axios';
 import sleep from 'sleep-promise';
-
-type PageData = {
-  pagePath: string;
-  retries?: number;
-};
+import { PageData } from '../types';
 
 const stripSurroundingSlashes = (path: string): string => {
   let path$ = path[0] === '/' ? path.slice(1) : path;
@@ -69,4 +65,6 @@ const loadPageDataJson = (loadObj: PageData): Promise<boolean> => {
 const verifyPage = (pagePath: string): Promise<boolean> => sleep(2000)
   .then(() => loadPageDataJson({ pagePath }));
 
-export default verifyPage;
+export {
+  verifyPage,
+};

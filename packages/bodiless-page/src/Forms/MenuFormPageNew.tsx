@@ -12,35 +12,32 @@
  * limitations under the License.
  */
 
-/* eslint-disable no-alert */
 import React, {
-  useCallback, useEffect, useState,
   ComponentType,
   HTMLProps,
+  useEffect,
+  useState,
 } from 'react';
 import {
   contextMenuForm,
-  useMenuOptionUI,
+  handleBackendResponse,
   useEditContext,
-  withMenuOptions,
-  ContextSubMenu,
-  BodilessBackendClient,
-  handleBackendResponse as handle,
 } from '@bodiless/core';
-import verifyPage from './PageVerification';
-import { useGatsbyPageContext } from './GatsbyPageProvider';
+// import { useGatsbyPageContext } from '@bodiless/gatsby-theme-bodiless';
+import { usePageMenuOptionUI } from '../MenuOptionUI';
+import { verifyPage } from '../Operations';
+import { DEFAULT_PAGE_TEMPLATE } from '../constants';
 import {
-  PageState,
+  PageClient,
   PageStatus,
-  DEFAULT_PAGE_TEMPLATE,
-  Client,
-  getPathValue,
-  PageForm,
-} from './PageOperations';
+  PageState,
+} from '../types';
+import { getPathValue } from '../utils';
+import { MenuFormPage } from './MenuFormPage';
 
 const createPage = async ({ path, client, template } : any) => {
   // Create the page.
-  const result = await handle(client.savePage(path, template));
+  const result = await handleBackendResponse(client.savePage(path, template));
   // If the page was created successfully:
   if (result.response) {
     // Verify the creation of the page.
@@ -59,16 +56,16 @@ const createPage = async ({ path, client, template } : any) => {
   return Promise.reject(new Error('An internal error occurred. Please try again later.'));
 };
 
-const formPageAdd = (client: Client) => contextMenuForm({
+const menuFormPageNew = (client: PageClient) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
 })(({ formState, formApi } : any) => {
-  const { ComponentFormText } = useMenuOptionUI();
+  const { ComponentFormText } = usePageMenuOptionUI();
   const {
     submits, invalid, values,
   } = formState;
-  const [state, setState] = useState<PageStatus>({
-    status: PageState.Init,
+  const [state, setState] = useState<PageState>({
+    status: PageStatus.Init,
   });
   const context = useEditContext();
   const { template } = values;
@@ -77,16 +74,16 @@ const formPageAdd = (client: Client) => contextMenuForm({
     // If the form is submitted and valid then lets try to creat a page.
     if (submits && path && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
-      setState({ status: PageState.Pending });
+      setState({ status: PageStatus.Pending });
       // Create the page.
       createPage({ path, client, template })
         .then((pagePath: string) => {
           if (pagePath) {
-            setState({ status: PageState.Complete, pagePath });
+            setState({ status: PageStatus.Complete, pagePath });
           }
         })
         .catch((err: Error) => {
-          setState({ status: PageState.Errored, errorMessage: err.message });
+          setState({ status: PageStatus.Errored, errorMessage: err.message });
         })
         .finally(() => {
           context.hidePageOverlay();
@@ -95,12 +92,15 @@ const formPageAdd = (client: Client) => contextMenuForm({
     }
   }, [submits]);
   const { status, errorMessage, pagePath } = state;
-  const { subPageTemplate } = useGatsbyPageContext();
-  const currentTemplate = subPageTemplate || DEFAULT_PAGE_TEMPLATE;
+  // @TODO: After (refactoring) Page Component is decoupled from gatsby theme bodiless,
+  // Add gatsby theme bodiless dep for page package and revert lines below.
+  // const { subPageTemplate } = useGatsbyPageContext();
+  // const currentTemplate = subPageTemplate || DEFAULT_PAGE_TEMPLATE;
+  const currentTemplate = DEFAULT_PAGE_TEMPLATE;
   return (
     <>
       <ComponentFormText type="hidden" field="keepOpen" initialValue />
-      <PageForm
+      <MenuFormPage
         formTitle="Add a Blank Page"
         status={status}
         errorMessage={errorMessage}
@@ -123,34 +123,6 @@ const formPageAdd = (client: Client) => contextMenuForm({
   );
 });
 
-const defaultClient = new BodilessBackendClient();
-
-const useMenuOptions = () => {
-  const context = useEditContext();
-
-  const menuOptions = [
-    {
-      name: 'page-group',
-      icon: 'description',
-      label: 'Page',
-      Component: ContextSubMenu,
-    },
-    {
-      name: 'newpage',
-      icon: 'note_add',
-      label: 'New',
-      group: 'page-group',
-      isDisabled: useCallback(() => !context.isEdit, []),
-      handler: () => formPageAdd(defaultClient),
-    },
-  ];
-  return menuOptions;
+export {
+  menuFormPageNew,
 };
-
-const withNewPageButton = withMenuOptions({
-  useMenuOptions,
-  name: 'NewPage',
-  root: true,
-});
-
-export default withNewPageButton;

@@ -58,6 +58,7 @@
     "@bodiless/layouts": "^0.3.6",
     "@bodiless/navigation": "^0.3.6",
     "@bodiless/organisms": "^0.3.6",
+    "@bodiless/page": "^0.3.6",
     "@bodiless/ui": "^0.3.6",
     "@bodiless/cli": "^0.3.6",
     "@types/walk": "^2.3.0",

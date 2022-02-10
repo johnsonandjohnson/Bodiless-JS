@@ -19,7 +19,23 @@ import { ContentNode } from '@bodiless/core';
  * @param node - the content node of the current component of its child/peer.
  * @returns key/value collection of disabled items or an empty object.
  */
-export const useGetRedirectAliases = (node: ContentNode<any>): any => {
+const useGetRedirectAliases = (node: ContentNode<any>): any => {
   const aliases = node.peer<any>(['Site', 'redirect-aliases']).data;
   return aliases;
+};
+
+/**
+ * Sets a list of redirect aliases.
+ * Be careful, new aliases will replace old ones completely.
+ *
+ * @param node - the content node of the current component of its child/peer.
+ * @param aliases - aliases object to be set.
+ */
+const useSetRedirectAliases = (node: ContentNode<any>, aliases: object) => {
+  node.peer<any>(['Site', 'redirect-aliases']).setData(aliases);
+};
+
+export {
+  useGetRedirectAliases,
+  useSetRedirectAliases,
 };
