@@ -48,6 +48,7 @@ type LibraryMetaValues = {
 };
 
 export const DEFAULT_CONTENT_LIBRARY_PATH = ['Site', 'default-library'];
+export const DEFAULT_CONTENT_LIBRARY_COLLECTION = 'site';
 
 /**
  * add meta data to FC item content node.
@@ -219,6 +220,11 @@ const withLibraryMenuOptions = (
   return WithLibraryMenuOptions;
 };
 
+type libProps = {
+  libPath: LibraryNodePath,
+  libCollection: string,
+};
+
 /**
  * HOC adds content library to wrapped component as design, so the created
  * library item is available as filter in component selector, which also makes
@@ -228,14 +234,17 @@ const withLibraryMenuOptions = (
  * @param Component - flow container component
  * @returns HOC of flow container.
  */
-const withDesignFromLibrary = (libPath: LibraryNodePath): HOC => Component => {
+const withDesignFromLibrary = ({
+  libPath,
+  libCollection
+}: libProps): HOC => Component => {
   const WithDesignFromLibrary: FC<any> = observer((props: any) => {
     const {
       design,
       ...rest
     } = props;
 
-    const { node } = useNode();
+    const { node } = useNode('site');
     const libraryNode = node.peer(libPath);
     const LibraryNodeKeys = childKeys(libraryNode);
     const withType = withFacet('Type');
@@ -298,6 +307,7 @@ const withDesignFromLibrary = (libPath: LibraryNodePath): HOC => Component => {
  */
 const withLibraryComponents = (
   path: LibraryNodePath = DEFAULT_CONTENT_LIBRARY_PATH,
+  collection: string = DEFAULT_CONTENT_LIBRARY_COLLECTION
 ) => asToken(
   withDesign({
     ComponentWrapper: flowIf(() => useEditContext().isEdit)(
@@ -306,7 +316,7 @@ const withLibraryComponents = (
       withLibraryItemContext,
     ),
   }),
-  withDesignFromLibrary(path),
+  withDesignFromLibrary({libPath: path, libCollection: collection}),
 );
 
 export { withLibraryComponents };
