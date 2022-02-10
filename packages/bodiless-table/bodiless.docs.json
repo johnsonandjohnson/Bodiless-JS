@@ -1,5 +1,17 @@
 {
   "Components": {
-    "Table.md": "./README.md"
+    "Table.md": "./README.md",
+    "assets": {
+      "AddTableComponent.jpg": "./doc/assets/AddTableComponent.jpg",
+      "ColumnContextMenu.jpg": "./doc/assets/ColumnContextMenu.jpg",
+      "ColumnRowContextMenu.jpg": "./doc/assets/ColumnRowContextMenu.jpg",
+      "DefaultTableVariations.jpg": "./doc/assets/DefaultTableVariations.jpg",
+      "FooterRowContextMenu.jpg": "./doc/assets/FooterRowContextMenu.jpg",
+      "HeaderRowContextMenu.jpg": "./doc/assets/HeaderRowContextMenu.jpg",
+      "RowContextMenu.jpg": "./doc/assets/RowContextMenu.jpg",
+      "RTEFormattingToolbar.jpg": "./doc/assets/RTEFormattingToolbar.jpg",
+      "TableComponentContextMenu.jpg": "./doc/assets/TableComponentContextMenu.jpg",
+      "TableSectionContextMenu.jpg": "./doc/assets/TableSectionContextMenu.jpg"
+    }
   }
 }
