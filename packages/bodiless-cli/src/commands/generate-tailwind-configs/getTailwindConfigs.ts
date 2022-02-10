@@ -17,6 +17,12 @@ import { exec } from 'child_process';
 import path from 'path';
 import locateFiles from '../generate-env-vars/locateFiles';
 
+const {
+  mergeConfigs,
+  getPackageRoot,
+// eslint-disable-next-line import/no-extraneous-dependencies
+} = require('@bodiless/gatsby-theme-bodiless/dist/tailwindcss');
+
 const NPM_ROOT = path.resolve(process.env.BODILESS_NPM_ROOT || '.');
 
 /**
@@ -59,7 +65,7 @@ const findTailwindConfigPaths = async () => locateFiles({
  * @param siteName Site package name
  * @param siteDeps Site level dependencies
  */
-const getBodilessTailwindConfig = async (siteName: string, siteDeps: string[]) => {
+const getBodilessTailwindConfigOld = async (siteName: string, siteDeps: string[]) => {
   // 1. walking the node_modules to find the packages which has the site.tailwind.config.js file
   const paths = await findTailwindConfigPaths();
   const pkgsHaveTailwindConfig = paths.map(filePath => {
@@ -104,8 +110,44 @@ const getBodilessTailwindConfig = async (siteName: string, siteDeps: string[]) =
   return pkgs;
 };
 
+/**
+ * Checks if the given package contains site.tailwind.config file and returs its exported value.
+ * @param pkg name of the namespace/package, e.g. '@bodiless/core'.
+ * @returns tailwind config object.
+ */
+export const getPackageTailwindConfig = (pkg: string): object => {
+  try {
+    // eslint-disable-next-line global-require, import/no-dynamic-require
+    const twConfig = require(`${pkg}/site.tailwind.config`);
+    return twConfig;
+  } catch (error) {
+    return {};
+  }
+};
+
+const getBodilessTailwindConfig = () => {
+  const pkg = path.resolve('package.json');
+  const pkgName = getPackageNameFromPackageJson(pkg);
+  const siteDeps = Object.keys(getDependenciesFromPackageJson(pkg));
+  const depsTwConfigs: any[] = siteDeps.reduce((accum: any[], currDep) => {
+    const pkgTwConfig = getPackageTailwindConfig(currDep);
+    if (Object.keys(pkgTwConfig).length) {
+      accum.push({
+        root: getPackageRoot(require.resolve(currDep)),
+        tailwindConfig: pkgTwConfig,
+      });
+    }
+    return accum;
+  }, []);
+  const siteTwConfig = getPackageTailwindConfig(pkgName);
+  const mergedConfigs = mergeConfigs(siteTwConfig, depsTwConfigs);
+
+  return mergedConfigs;
+};
+
 export {
   getDependenciesFromPackageJson,
   getPackageNameFromPackageJson,
   getBodilessTailwindConfig,
+  getBodilessTailwindConfigOld,
 };

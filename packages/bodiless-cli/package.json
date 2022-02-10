@@ -8,8 +8,7 @@
   "main": "./lib/index.js",
   "bin": {
     "bodiless": "./bin/bodiless",
-    "generate-env-vars": "./bin/generate-env-vars",
-    "generate-tailwind-configs": "./bin/generate-tailwind-configs"
+    "generate-env-vars": "./bin/generate-env-vars"
   },
   "directories": {
     "lib": "lib",

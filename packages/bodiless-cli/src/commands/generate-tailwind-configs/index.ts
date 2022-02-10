@@ -13,47 +13,8 @@
  * limitations under the License.
  */
 
-import fs from 'fs';
-import { resolve as resolvePath } from 'path';
-import { writeToFile } from '../generate-env-vars/utils';
 import {
-  getDependenciesFromPackageJson,
-  getPackageNameFromPackageJson,
   getBodilessTailwindConfig,
 } from './getTailwindConfigs';
 
-const siteConfig = fs.existsSync('./site.tailwind.config.js')
-  ? "require('./site.tailwind.config');"
-  : '{}';
-const templateWrap = `/* eslint-disable */
-// This file is generated automatically, please don't change it
-const {
-  mergeConfigs,
-  getPackageRoot,
-} = require('@bodiless/gatsby-theme-bodiless/dist/tailwindcss');
-const siteConfig = ${siteConfig};
-
-const bodilessCanvasxConfigs = [#pkgs];
-
-module.exports = mergeConfigs(siteConfig, bodilessCanvasxConfigs);
-`;
-const template = `
-  {
-    root: getPackageRoot(require.resolve('#pkg')),
-    tailwindConfig: require('#pkg/site.tailwind.config'),
-  }`;
-
-/*
- * This command will auto discover all tailwind configuration files
- * and generate the configuration list in the site package
- */
-const init = async () => {
-  const pkg = resolvePath('package.json');
-  const pdgName = getPackageNameFromPackageJson(pkg);
-  const deps = Object.keys(getDependenciesFromPackageJson(pkg));
-  const cfg = await getBodilessTailwindConfig(pdgName, deps);
-  const cfgs = cfg.map(pkgPath => template.replace(/#pkg/g, pkgPath)).join(',');
-  await writeToFile('tailwind.config.js', templateWrap.replace(/#pkgs/g, cfgs));
-};
-
-export default init;
+export { getBodilessTailwindConfig };
