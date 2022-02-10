@@ -244,7 +244,7 @@ const withDesignFromLibrary = ({
       ...rest
     } = props;
 
-    const { node } = useNode('site');
+    const { node } = useNode(libCollection);
     const libraryNode = node.peer(libPath);
     const LibraryNodeKeys = childKeys(libraryNode);
     const withType = withFacet('Type');
