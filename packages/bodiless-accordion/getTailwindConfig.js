@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,8 +11,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// eslint-disable-next-line import/no-extraneous-dependencies
+const { getPackageTailwindConfig } = require(
+  '@bodiless/cli'
+);
 
-// eslint-disable-next-line import/prefer-default-export
-export { run } from '@oclif/command';
-export * from './mergeConfigs';
-export * from './getPackageTailwindConfig';
+const getTailwindConfig = () => getPackageTailwindConfig(__dirname);
+
+module.exports = getTailwindConfig;

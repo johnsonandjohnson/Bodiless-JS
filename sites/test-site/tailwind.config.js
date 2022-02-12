@@ -1,5 +1,7 @@
-const { getBodilessTailwindConfig } = require(
-  '@bodiless/cli/lib/commands/generate-tailwind-configs/getTailwindConfigs',
+const { getPackageTailwindConfig } = require(
+  '@bodiless/cli'
 );
 
-module.exports = getBodilessTailwindConfig();
+const getTailwindConfig = () => getPackageTailwindConfig(__dirname);
+
+module.exports = getTailwindConfig();
