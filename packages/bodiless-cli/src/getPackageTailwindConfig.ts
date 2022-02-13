@@ -11,12 +11,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { mergeConfigs } from './mergeConfigs';
+import type { Package } from './mergeConfigs';
 
 export const getPackageTailwindConfig = (rootPath: string) => {
   try {
-    // eslint-disable-next-line global-require, import/no-dynamic-require
-    const startingConfig = require(`${rootPath}/site.tailwind.config`);
+    const startingConfig: Package[] = [{
+      root: rootPath,
+      // eslint-disable-next-line global-require, import/no-dynamic-require
+      tailwindConfig: require(`${rootPath}/site.tailwind.config`),
+    }];
     // eslint-disable-next-line global-require, import/no-dynamic-require
     const pgkJson = require(`${rootPath}/package.json`);
     const deps = Object.keys(pgkJson.dependencies);
@@ -25,14 +28,10 @@ export const getPackageTailwindConfig = (rootPath: string) => {
         try {
           // eslint-disable-next-line global-require, import/no-dynamic-require
           const nextConfig = require(`${next}/getTailwindConfig`);
-          const mergedConfigs = mergeConfigs(
-            config,
-            [{
-              root: require.resolve(next),
-              tailwindConfig: nextConfig(),
-            }]
-          );
-          return mergedConfigs;
+          const addedPaths = config.map(item => item.root);
+          const dedupedConfigs = nextConfig()
+            .filter((item: Package) => addedPaths.includes(item.root) === false);
+          return config.concat(dedupedConfigs);
         } catch (e) {
           return config;
         }

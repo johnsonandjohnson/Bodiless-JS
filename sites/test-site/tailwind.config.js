@@ -1,7 +1,7 @@
-const { getPackageTailwindConfig } = require(
+const { getPackageTailwindConfig, mergeConfigs } = require(
   '@bodiless/cli'
 );
 
 const getTailwindConfig = () => getPackageTailwindConfig(__dirname);
 
-module.exports = getTailwindConfig();
+module.exports = mergeConfigs({}, getTailwindConfig());
