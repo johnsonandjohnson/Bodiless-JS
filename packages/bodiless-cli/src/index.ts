@@ -14,5 +14,5 @@
 
 // eslint-disable-next-line import/prefer-default-export
 export { run } from '@oclif/command';
-export * from './mergeConfigs';
-export * from './getPackageTailwindConfig';
+export * from './helpers/mergeConfigs';
+export * from './helpers/getPackageTailwindConfig';
