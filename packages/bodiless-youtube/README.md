@@ -8,22 +8,27 @@ a 16:9 ratio by default.
 
 To add a YouTube Component to your site:
 
-1. In Edit Mode, select the YouTube Component from the Component Library.
-![](./assets/YoutubeComponentLibrary.jpg)
+01. In [Edit Mode](/ContentEditorUserGuide/#edit-mode), select the YouTube Component from the
+    Component Library.  
+    ![YouTube Component in Component Library](./assets/YoutubeComponentLibrary.jpg ':size=75%')
 
-2. Click on the YouTube Component to show the Configure button in the context menu.
+01. Click on your newly added YouTube Component, and, within its context menu, under "YouTube,"
+    click **Settings**.  
+    ![YouTube Configuration form](./assets/YoutubeConfig.jpg ':size=50%')
 
-3. Enter the target YouTube URL and click the checkmark or hit enter.
-![](./assets/YoutubeConfig.jpg)
+01. Enter the target YouTube URL, and click the checkmark (or press Enter) to confirm.
 
-?> Please note the following accepted URL formats:
+    <!-- Inlining HTML to add multi-line info block with unordered list. -->
+    <div class="warn">
+      <strong>Note:</strong> Please note the following accepted URL formats:
 
-  * **Share** (e.g. https://youtu.be/Rqla3gsl1Ik)
-  * **Watch** (e.g. https://www.youtube.com/watch?v=Rqla3gsl1Ik)
-  * **Embed** (e.g. https://www.youtube.com/embed/Rqla3gsl1Ik)
+      * **Share** (e.g., https://youtu.be/_LBdqpscwi0)
+      * **Watch** (e.g., https://www.youtube.com/watch?v=_LBdqpscwi0)
+      * **Embed** (e.g., https://www.youtube.com/embed/_LBdqpscwi0)
 
-4. Resize or reposition the YouTube component using the Flow Container controls.
+    </div>
 
+01. Resize or reposition the YouTube Component using the Flow Container controls.
 
 ---
 
