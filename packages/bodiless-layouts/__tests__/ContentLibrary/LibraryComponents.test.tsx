@@ -114,7 +114,7 @@ describe('withLibraryComponents', () => {
   });
 
   it('adds empty design if no content library data exists.', () => {
-    const ComponentWithLibrary = withLibraryComponents()(EditFlowContainer);
+    const ComponentWithLibrary = withLibraryComponents(undefined, '_default')(EditFlowContainer);
     const wrapper = shallow(<ComponentWithLibrary />);
     expect(wrapper.props()).toEqual(expect.objectContaining({ design: {} }));
   });
@@ -129,7 +129,7 @@ describe('withLibraryComponents', () => {
     };
     const ComponentWithLibrary = asToken(
       withDesign(design$a),
-      withLibraryComponents(),
+      withLibraryComponents(undefined, '_default'),
       withDesign(design$b),
     )(EditFlowContainer);
     const wrapper = mount(<ComponentWithLibrary />);
@@ -147,7 +147,7 @@ describe('withLibraryComponents', () => {
 
     const FlowContainerWithLibrary = asToken(
       withNode,
-      withLibraryComponents(['root', 'my_lib']),
+      withLibraryComponents(['root', 'my_lib'], '_default'),
       withDesign(variants1),
       withDesign(variants2),
       withDefaultContent(mockFlowContainerContent),
