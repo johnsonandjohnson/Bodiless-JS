@@ -1,7 +1,10 @@
-const { getPackageTailwindConfig, mergeConfigs } = require(
-  '@bodiless/cli'
+const requireEsm = require('esm')(module);
+
+const { getPackageTailwindConfig, mergeConfigs } = requireEsm(
+  '@bodiless/fclasses'
 );
-// We need the line below only for watching for changes.
+
+// We need this 'require' only for watching for changes.
 const siteConfig = require('./site.tailwind.config');
 
 const getTailwindConfig = () => getPackageTailwindConfig(__dirname);

@@ -11,11 +11,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-// eslint-disable-next-line import/no-extraneous-dependencies
-const { getPackageTailwindConfig } = require(
-  '@bodiless/cli'
+import path from 'path';
+import { getPackageTailwindConfig } from '@bodiless/fclasses';
+
+const getTailwindConfig = () => getPackageTailwindConfig(
+  path.resolve(__dirname, '..')
 );
 
-const getTailwindConfig = () => getPackageTailwindConfig(__dirname);
-
-module.exports = getTailwindConfig;
+export {
+  getTailwindConfig
+};

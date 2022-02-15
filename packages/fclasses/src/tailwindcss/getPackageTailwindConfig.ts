@@ -27,9 +27,9 @@ export const getPackageTailwindConfig = (rootPath: string) => {
       (config, next) => {
         try {
           // eslint-disable-next-line global-require, import/no-dynamic-require
-          const nextConfig = require(`${next}/getTailwindConfig`);
+          const nextConfig = require(`${next}/lib/getTailwindConfig`).getTailwindConfig();
           const addedPaths = config.map(item => item.root);
-          const dedupedConfigs = nextConfig()
+          const dedupedConfigs = nextConfig
             .filter((item: Package) => addedPaths.includes(item.root) === false);
           return config.concat(dedupedConfigs);
         } catch (e) {
