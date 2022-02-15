@@ -15,9 +15,8 @@ import {
   withDesign, HOC, asToken, flowIf,
 } from '@bodiless/fclasses';
 import type { Design } from '@bodiless/fclasses';
-
 import { withFacet, withTitle, withDesc } from '../meta';
-import { copyNode, childKeys } from './withContentLibrary';
+import { childKeys, updateLibData } from '../utils/NodeTools';
 import {
   withLibraryItemContext,
   CONTENT_LIBRARY_TYPE_PREFIX,
@@ -49,18 +48,7 @@ type LibraryMetaValues = {
 };
 
 export const DEFAULT_CONTENT_LIBRARY_PATH = ['Site', 'default-library'];
-
-const moveNode = (
-  source: ContentNode<any>,
-  dest: ContentNode<any>,
-  copyChildren: boolean,
-) => {
-  dest.setData(source.data);
-  if (copyChildren) {
-    childKeys(source).forEach(key => moveNode(source.child(key), dest.child(key), true));
-  }
-  source.delete();
-};
+export const DEFAULT_CONTENT_LIBRARY_COLLECTION = 'site';
 
 /**
  * add meta data to FC item content node.
@@ -146,8 +134,7 @@ const withLibraryMenuOptions = (
         ];
         const sourceNodeData = sourceNode.peer(sourceNodeDataPath.join('$'));
 
-        copyNode(sourceNodeData, sourceNode, true);
-
+        updateLibData(sourceNodeData, sourceNode, true);
         const newItemType = item.type.split(':')[1];
         updateFlowContainerItem({ ...item, type: newItemType });
         setIsLibraryItem(false);
@@ -168,8 +155,7 @@ const withLibraryMenuOptions = (
         ];
         const destNode = sourceNode.peer(destNodePath.join('$'));
         const destNodeData = sourceNode.peer(destNodeDataPath.join('$'));
-        moveNode(sourceNode, destNodeData, true);
-
+        updateLibData(sourceNode, destNodeData, false);
         const newItemType = `${CONTENT_LIBRARY_TYPE_PREFIX}:${item.type}:${item.uuid}`;
         updateFlowContainerItem({ ...item, type: newItemType });
 
@@ -234,6 +220,11 @@ const withLibraryMenuOptions = (
   return WithLibraryMenuOptions;
 };
 
+type libProps = {
+  libPath: LibraryNodePath,
+  libCollection: string,
+};
+
 /**
  * HOC adds content library to wrapped component as design, so the created
  * library item is available as filter in component selector, which also makes
@@ -243,14 +234,17 @@ const withLibraryMenuOptions = (
  * @param Component - flow container component
  * @returns HOC of flow container.
  */
-const withDesignFromLibrary = (libPath: LibraryNodePath): HOC => Component => {
+const withDesignFromLibrary = ({
+  libPath,
+  libCollection
+}: libProps): HOC => Component => {
   const WithDesignFromLibrary: FC<any> = observer((props: any) => {
     const {
       design,
       ...rest
     } = props;
 
-    const { node } = useNode();
+    const { node } = useNode(libCollection);
     const libraryNode = node.peer(libPath);
     const LibraryNodeKeys = childKeys(libraryNode);
     const withType = withFacet('Type');
@@ -313,6 +307,7 @@ const withDesignFromLibrary = (libPath: LibraryNodePath): HOC => Component => {
  */
 const withLibraryComponents = (
   path: LibraryNodePath = DEFAULT_CONTENT_LIBRARY_PATH,
+  collection: string = DEFAULT_CONTENT_LIBRARY_COLLECTION
 ) => asToken(
   withDesign({
     ComponentWrapper: flowIf(() => useEditContext().isEdit)(
@@ -321,7 +316,7 @@ const withLibraryComponents = (
       withLibraryItemContext,
     ),
   }),
-  withDesignFromLibrary(path),
+  withDesignFromLibrary({libPath: path, libCollection: collection}),
 );
 
 export { withLibraryComponents };

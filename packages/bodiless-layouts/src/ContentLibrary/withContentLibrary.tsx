@@ -23,6 +23,7 @@ import { observer } from 'mobx-react-lite';
 import flow from 'lodash/flow';
 import ComponentSelector from '../ComponentSelector';
 import type { ComponentSelectorProps, Meta, ComponentWithMeta } from '../ComponentSelector/types';
+import { copyNode, childKeys } from '../utils/NodeTools';
 
 export type ContentLibraryOptions = {
   useLibraryNode: (props: any) => { node: ContentNode<any> },
@@ -30,37 +31,6 @@ export type ContentLibraryOptions = {
   Selector?: ComponentType<ComponentSelectorProps>,
   useMeta?: (node: ContentNode<any>) => Partial<Meta>|null,
   useOverrides?: (props: any) => Partial<OptionGroupDefinition>,
-};
-
-/**
- * Get child key of given node.
- *
- * Might refactor to @bodiless/core
- * https://github.com/johnsonandjohnson/Bodiless-JS/issues/1160
- *
- * @param node ContentNode
- * @returns keys string[]
- */
-export const childKeys = (node: ContentNode<any>) => {
-  const aParent = node.path;
-  const aCandidates = node.keys.map(key => key.split('$'));
-  return Object.keys(aCandidates.reduce(
-    (acc, next) => {
-      if (next.length <= aParent.length) return acc;
-      for (let i = 0; i < aParent.length; i += 1) {
-        if (aParent[i] !== next[i]) return acc;
-      }
-      return { ...acc, [next[aParent.length]]: true };
-    },
-    {},
-  ));
-};
-
-const copyNode = (source: ContentNode<any>, dest: ContentNode<any>, copyChildren: boolean) => {
-  dest.setData(source.data);
-  if (copyChildren) {
-    childKeys(source).forEach(key => copyNode(source.child(key), dest.child(key), true));
-  }
 };
 
 const withContentLibrary = (options: ContentLibraryOptions) => <P extends object>(
@@ -141,7 +111,3 @@ const withContentLibrary = (options: ContentLibraryOptions) => <P extends object
 };
 
 export default withContentLibrary;
-
-export {
-  copyNode,
-};
