@@ -25,13 +25,12 @@ const asTestableFilterByGroup = withDesign({
   FilterHeader: addProps({ 'data-filter-by-group': 'filter-header' }),
   FilterTitle: addProps({ 'data-filter-by-group': 'filter-title' }),
   ContentWrapper: addProps({ 'data-filter-by-group': 'content-wrapper' }),
-  ResetButton: addProps({ 'aria-label': 'Reset Button' }),
+  ResetButton: addProps({ 'data-filter-by-group': 'reset-button' }),
   Filter: withDesign({
     TagList: withDesign({
       Title: flow(
         withDesign({
           FilterInputWrapper: addProps({ 'data-filter-by-group': 'filter-input-wrapper' }),
-          FilterGroupItemInput: addProps({ 'aria-label': 'Radio Button Select' }),
           FilterGroupItemPlaceholder: addProps({ 'data-filter-by-group': 'filter-tag-placeholder' }),
           FilterGroupItemLabel: addProps({ 'data-filter-by-group': 'filter-tag-label' }),
         }),

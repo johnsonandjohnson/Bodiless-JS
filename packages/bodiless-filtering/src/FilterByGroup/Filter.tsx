@@ -28,11 +28,9 @@ import {
 import {
   designable,
   Div,
-  H3,
   Input,
   Label,
   withDesign,
-  replaceWith,
   stylable,
   asToken,
   HOC,
@@ -40,6 +38,7 @@ import {
   startWith,
   ComponentOrTag,
   ComponentWithMeta,
+  Fieldset,
 } from '@bodiless/fclasses';
 import {
   asEditable,
@@ -58,6 +57,7 @@ import { useFilterByGroupContext, withTagProps } from './FilterByGroupContext';
 import { useTagsAccessors } from './FilterModel';
 import { withCategoryListContextProvider, useCategoryListContext } from './CategoryListContext';
 import withTagButton from '../TagButton/withTagButton';
+import { CategoryTitleClean, asFilterCategoryRegion } from './FilterCategory';
 
 const tagTitleComponentsStart: TagTitleComponents = {
   FilterInputWrapper: Div,
@@ -104,7 +104,8 @@ const TagTitleBase: FC<TagTitleProps> = ({
   const checked = isTagSelected(tag);
 
   const onSelect = () => (isTagSelected(tag) ? unSelectTag(tag, onChange) : selectTag(tag, onChange));
-  const htmlId = tag.id === TAG_ANY_KEY ? categoryId : tag.id;
+
+  const htmlId = `filter-category-${categoryId}-input-${tag.id === TAG_ANY_KEY ? categoryId : tag.id}`;
 
   return (
     <FilterInputWrapper {...rest} key={tag.id}>
@@ -117,9 +118,15 @@ const TagTitleBase: FC<TagTitleProps> = ({
         checked={checked}
       />
       {
-        isEmpty(tag.name)
-          ? (<FilterGroupItemPlaceholder htmlFor={htmlId}>{ emptyTitleText }</FilterGroupItemPlaceholder>)
-          : (<FilterGroupItemLabel htmlFor={htmlId}>{ tag.name }</FilterGroupItemLabel>)
+        isEmpty(tag.name) ? (
+          <FilterGroupItemPlaceholder htmlFor={htmlId}>
+            { emptyTitleText }
+          </FilterGroupItemPlaceholder>
+        ) : (
+          <FilterGroupItemLabel htmlFor={htmlId}>
+            { tag.name }
+          </FilterGroupItemLabel>
+        )
       }
     </FilterInputWrapper>
   );
@@ -179,7 +186,7 @@ const asFilter = asToken(
   asBodilessList(undefined, undefined, () => ({ groupLabel: 'Category' })),
   withDesign({
     Title: asToken(
-      replaceWith(H3),
+      startWith(CategoryTitleClean),
       asEditable('category_name', 'Category Name'),
     ),
     Item: asToken(
@@ -196,8 +203,11 @@ const asFilter = asToken(
       withDesign({
         Title: startWith(TagTitle),
         Wrapper: flow(
+          startWith(Fieldset),
           stylable,
+          asFilterCategoryRegion
         ),
+        Item: startWith(Div)
       }),
     ),
   ),

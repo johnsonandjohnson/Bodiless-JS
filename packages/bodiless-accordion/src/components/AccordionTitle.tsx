@@ -20,6 +20,7 @@ import {
   HOC,
   DesignableComponentsProps,
 } from '@bodiless/fclasses';
+import { AddIcon, RemoveIcon } from '../icons';
 import {
   asAccordionIcon,
   asAccordionTitleWrapper,
@@ -36,6 +37,8 @@ const accordionTitleComponents:AccordionTitleComponents = {
   Wrapper: asAccordionTitleWrapper(Div),
   Icon: asAccordionIcon(Span),
   Label: asAccordionLabel(Div),
+  OpenIcon: AddIcon,
+  CloseIcon: RemoveIcon,
 };
 
 type AccordionTitleBaseProps =
@@ -43,7 +46,9 @@ type AccordionTitleBaseProps =
 const AccordionTitleBase: FC<AccordionTitleBaseProps> = ({
   components, children,
 }) => {
-  const { Wrapper, Label, Icon } = components;
+  const {
+    Wrapper, Label, Icon, OpenIcon, CloseIcon
+  } = components;
   const context = useAccordionContext();
   const {
     isExpanded,
@@ -67,7 +72,7 @@ const AccordionTitleBase: FC<AccordionTitleBaseProps> = ({
     >
       <Label>{ children }</Label>
       <Icon data-accordion-icon={isExpanded ? 'collapse' : 'expand'}>
-        {isExpanded ? 'remove' : 'add'}
+        {isExpanded ? <CloseIcon /> : <OpenIcon />}
       </Icon>
     </Wrapper>
   );

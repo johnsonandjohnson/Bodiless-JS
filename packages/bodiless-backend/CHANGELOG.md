@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.7](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v0.3.6...v0.3.7) (2022-02-16)
+
+
+### Bug Fixes
+
+* **lint:** fixing ESlint detecting common syntax issue ([#1343](https://github.com/johnsonandjohnson/Bodiless-JS/issues/1343)) ([92f0099](https://github.com/johnsonandjohnson/Bodiless-JS/commit/92f00996f35dcd4e6b58d2d6344d596b02307237))
+* **page move:** Move assets on moved pages. ([#1326](https://github.com/johnsonandjohnson/Bodiless-JS/issues/1326)) ([51ca192](https://github.com/johnsonandjohnson/Bodiless-JS/commit/51ca192f35b369f4664667ea356759e5d7752690))
+
+
+### Features
+
+* **Layout, Content library:** content Library item created on a deleted page uses src of this … ([#1358](https://github.com/johnsonandjohnson/Bodiless-JS/issues/1358)) ([86d132d](https://github.com/johnsonandjohnson/Bodiless-JS/commit/86d132dc3a322dc3dd07036192a5a27a503ef61a))
+
+
+
+
+
 ## [0.3.6](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v0.3.5...v0.3.6) (2022-01-24)
 
 **Note:** Version bump only for package @bodiless/backend

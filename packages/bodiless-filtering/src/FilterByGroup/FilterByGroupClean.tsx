@@ -19,7 +19,7 @@ import {
 import FilterClean from './Filter';
 import { useFilterByGroupContext, withFilterByGroupContext } from './FilterByGroupContext';
 import { FilterByGroupComponents, FilterByGroupProps } from './types';
-import { asResponsiveFilterByGroup } from './token';
+import { asResponsiveFilterByGroup, asAccessibleFilterByGroup } from './token';
 
 const FilterByGroupComponentsStart:FilterByGroupComponents = {
   Wrapper: Div,
@@ -85,6 +85,7 @@ const FilterByGroupClean = asToken(
   withoutProps(['suggestions']),
   designable(FilterByGroupComponentsStart, 'FilterByGroup'),
   asResponsiveFilterByGroup,
+  asAccessibleFilterByGroup,
   withFilterByGroupContext,
 )(FilterByGroupBase);
 
