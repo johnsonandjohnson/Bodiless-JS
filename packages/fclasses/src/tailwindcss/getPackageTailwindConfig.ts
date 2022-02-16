@@ -11,23 +11,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import path from 'path';
 import type { Package } from './mergeConfigs';
+
+const { join } = path;
 
 export const getPackageTailwindConfig = (rootPath: string) => {
   try {
     const startingConfig: Package[] = [{
       root: rootPath,
       // eslint-disable-next-line global-require, import/no-dynamic-require
-      tailwindConfig: require(`${rootPath}/site.tailwind.config`),
+      tailwindConfig: require(join(rootPath, 'site.tailwind.config')),
     }];
     // eslint-disable-next-line global-require, import/no-dynamic-require
-    const pgkJson = require(`${rootPath}/package.json`);
-    const deps = Object.keys(pgkJson.dependencies);
+    const pkgJson = require(join(rootPath, '/package.json'));
+    const deps = Object.keys({
+      ...pkgJson.dependencies,
+      ...pkgJson.devDependencies,
+    });
     const configs = deps.reduce(
       (config, next) => {
         try {
           // eslint-disable-next-line global-require, import/no-dynamic-require
-          const nextConfig = require(`${next}/lib/getTailwindConfig`).getTailwindConfig();
+          const nextConfig = require(join(next, 'lib/getTailwindConfig')).getTailwindConfig();
           const addedPaths = config.map(item => item.root);
           const dedupedConfigs = nextConfig
             .filter((item: Package) => addedPaths.includes(item.root) === false);
