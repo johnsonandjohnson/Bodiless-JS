@@ -30,8 +30,7 @@
     "create-redirect-alias.js",
     "tailwind.base.config.js",
     "/doc",
-    "bodiless.content.json",
-    "src/dist/tailwindcss/resolveConfig.ts"
+    "bodiless.content.json"
   ],
   "repository": {
     "type": "git",

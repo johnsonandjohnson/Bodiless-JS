@@ -22,11 +22,6 @@ module.exports = {
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {
-    colors: {
-      teal: {
-        600: 'purple'
-      }
-    },
     aspectRatio: { // defaults to {}
       none: 0,
       square: [1, 1],

@@ -9,7 +9,7 @@ import {
 import pick from 'lodash/pick';
 // @ts-ignore
 import resolvedConfigs from
-  '@bodiless/fclasses/lib/tailwindcss/resolveConfig';
+  '@bodiless/fclasses/src/tailwindcss/resolveConfig';
 
 // @ts-ignore
 import {

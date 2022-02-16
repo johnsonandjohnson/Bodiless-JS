@@ -17,7 +17,7 @@ import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { withPageDimensionsContext } from '@bodiless/components';
 
 import resolvedConfigs from
-  '@bodiless/fclasses/lib/tailwindcss/resolveConfig';
+  '@bodiless/fclasses/src/tailwindcss/resolveConfig';
 
 const getTailwindBreakpoints = () => {
   const { theme: { screens } } = resolvedConfigs;

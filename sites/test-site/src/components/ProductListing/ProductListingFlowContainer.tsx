@@ -15,7 +15,7 @@ import { asToken, addProps } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
 // @ts-ignore Could not find a declaration file
 import resolvedConfigs from
-  '@bodiless/fclasses/lib/tailwindcss/resolveConfig';
+  '@bodiless/fclasses/src/tailwindcss/resolveConfig';
 import { getSnapFrom, withTailwindClasses } from '@bodiless/layouts';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import withProductVariations from './withProductVariations';
