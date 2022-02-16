@@ -36,3 +36,15 @@ When providing a new path/URL for the page, there are some restrictions to be aw
 
 Triggering any of these restrictions will result in a warning message, and you will need to enter a
 new value into the _New URL_ field.
+
+## Site Builder Details
+
+### Asset Duplication
+
+When a page with uploaded assets is moved, you may notice a duplication of said assets.
+
+Due to a technical limitation, when a page's path is changed, its assets are not _simply_ moved:
+
+01. Assets are _copied_ — as opposed to _moved_ — to the new namespace.
+01. Data is updated to point to the assets in the new namespace.
+01. The assets in the old namespace are deleted during the next build process.
