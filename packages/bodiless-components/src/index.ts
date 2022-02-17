@@ -121,7 +121,7 @@ export * from './List';
 export * from './Link';
 export * from './FileUpload';
 export * from './PageDisable';
-export * from './RedirectAlias';
+export * from './Tools';
 
 export type {
   MetaFormFieldType,

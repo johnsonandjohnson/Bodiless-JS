@@ -8,4 +8,7 @@ export {
   withGitContextProvider,
 };
 
-export type { GitContextProps } from './types';
+export type {
+  GitContextProps,
+  GitContextProviderProps,
+} from './types';

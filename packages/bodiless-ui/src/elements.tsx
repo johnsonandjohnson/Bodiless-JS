@@ -214,7 +214,7 @@ export const ComponentFormLink = flow(
 
 export const ComponentFormDefaultPanelWidth = addClasses('bl-w-xl-grid-2');
 export const ComponentFormDefaultPanelHeight = addClasses('bl-h-xl-grid-1');
-export const ComponentFormDefaultPanelSize = flow(
+export const ComponentFormDefaultPanelSize = flowHoc(
   ComponentFormDefaultPanelWidth,
   ComponentFormDefaultPanelHeight,
 );

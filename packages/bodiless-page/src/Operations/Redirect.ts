@@ -12,13 +12,13 @@
  * limitations under the License.
  */
 
+import { ContentNode } from '@bodiless/core';
 import {
   convertAliasJsonToText,
   convertAliasTextToJson,
   useGetRedirectAliases,
   useSetRedirectAliases,
-} from '@bodiless/components';
-import { ContentNode } from '@bodiless/core';
+} from '../RedirectAlias';
 import { DEFAULT_PAGE_REDIRECT_STATUS } from '../constants';
 
 const createRedirect = (node: ContentNode<object>, origin: string, destination: string) => {

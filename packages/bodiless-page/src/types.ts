@@ -44,7 +44,7 @@ type PageClient = {
   savePage: (path: string, template?: string) => AxiosPromise<any>;
 };
 
-type PageData = {
+type PageProps = {
   pagePath: string;
   retries?: number;
 };
@@ -64,12 +64,23 @@ type CustomFieldProps = {
 type FieldProps = Omit<BaseFieldProps, 'field'> & CustomFieldProps;
 type FieldValidate = (value: FormValue, values: FormValues) => FormError;
 
+type PageDataContextProps = {
+  subPageTemplate: string,
+  template: string,
+};
+
+type PageDataContextProviderProps = {
+  pageData: PageDataContextProps,
+};
+
 export {
   PageClient,
-  PageData,
+  PageProps,
   PageMenuOptions,
   PageStatus,
   PageState,
   FieldProps,
   FieldValidate,
+  PageDataContextProps,
+  PageDataContextProviderProps,
 };

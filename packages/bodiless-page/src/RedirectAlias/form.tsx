@@ -13,9 +13,12 @@
  * limitations under the License.
  */
 
-import flow from 'lodash/flow';
 import React, { useCallback, useEffect } from 'react';
 import { useFormApi, useFormState } from 'informed';
+import {
+  DefaultNormalHref,
+  withToolsButton,
+} from '@bodiless/components';
 import {
   ContextMenuForm,
   MenuOptionsDefinition,
@@ -27,6 +30,9 @@ import {
   withNodeKey,
   useNode,
 } from '@bodiless/core';
+import type {
+  ContextMenuFormProps,
+} from '@bodiless/core';
 import {
   flowHoc,
   withOnlyProps,
@@ -34,14 +40,9 @@ import {
   addClasses,
   removeClasses,
 } from '@bodiless/fclasses';
-import type {
-  ContextMenuFormProps,
-} from '@bodiless/core';
 import { ComponentFormDefaultPanelSize } from '@bodiless/ui';
-import { withToolsButton } from '../Tools';
 import { useGetRedirectAliases } from './hooks';
 import type { AliasItem } from './types';
-import { DefaultNormalHref } from '../Link';
 
 enum Steps { Edit, Confirmation }
 
@@ -126,14 +127,14 @@ const FormBodyBase = () => {
     ComponentFormSubmitButton,
     ComponentFormCheckBox,
   } = useMenuOptionUI();
-  const ComponentFormIsValid = flow(
+  const ComponentFormIsValid = flowHoc(
     addClasses('hidden')
   )(ComponentFormCheckBox);
-  const ComponentFormTextAreaSize = flow(
+  const ComponentFormTextAreaSize = flowHoc(
     removeClasses('bl-w-full bl-min-w-xl-grid-1 bl-min-h-grid-16'),
     ComponentFormDefaultPanelSize,
   );
-  const CustomComponentFormTextArea = flow(
+  const CustomComponentFormTextArea = flowHoc(
     ComponentFormTextAreaSize,
   )(ComponentFormTextArea);
   const {
