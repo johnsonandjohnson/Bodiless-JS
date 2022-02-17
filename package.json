@@ -18,7 +18,7 @@
     "build:api-doc": "cross-env NODE_ENV=production lerna run build:api-doc --stream",
     "check": "cross-env NODE_ENV=production lerna run check --stream",
     "clean": "lerna run clean && rimraf .eslintcache examples/*/.env.development examples/*/.env.production",
-    "cy:run": "cypress run --browser chrome --record --key 0dcfb624-e152-453a-9375-aa710adb57ab",
+    "cy:run": "cypress run --browser chrome --record --key 71b6c76b-9f61-432a-bc66-dfa59d51ea00",
     "cy:open": "cypress open",
     "cypress": "run-p -r start cy:open",
     "copyright": "node ./scripts/add-copyright",
