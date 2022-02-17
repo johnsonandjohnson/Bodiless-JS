@@ -17,6 +17,7 @@ To delete a page:
     * This will create a redirect with an HTTP response status code of `301`; if you want to create
       a redirect with a different status code, you can use the [Aliases](../../ToolsMenu/Aliases/)
       tool.
+    * **Note:** Spaces are not allowed in the redirect path/URL.
 01. Click the checkmark to confirm. (Or click the "X" icon to cancel.)
     * A spinner will appear while your page is being deleted.
     * If successful, you will see a confirmation message, and, upon closing it, you'll be redirected

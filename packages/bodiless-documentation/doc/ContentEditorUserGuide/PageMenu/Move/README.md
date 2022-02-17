@@ -19,8 +19,8 @@ To move an existing page:
     ![Move Page form](./assets/PageMovePage.jpg ':size=50%')
 01. In the _New URL_ field, enter the URL you wish to move the page to.
     * **Note:** There are [restrictions](#restrictions) on the URL provided.
-01. By default, the _Redirect_ checkbox is checked: upon page move, a 301 redirect will be created,
-    redirecting your users from the _Current URL_ to the _New URL_.
+01. By default, the _Add Redirect_ checkbox is checked: upon page move, a 301 redirect will be
+    created, redirecting your users from the _Current URL_ to the _New URL_.
     * Uncheck this box if you don't want to create a redirect.
     * If you want to create a redirect with an HTTP response status code other than `301`, you can
       use the [Aliases](../../ToolsMenu/Aliases/) tool.
