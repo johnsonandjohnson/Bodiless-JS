@@ -1,5 +1,7 @@
 {
-  "Components": {
-    "Page.md": "./README.md"
+  "Development": {
+    "Architecture": {
+      "Page.md": "./README.md"
+    }
   }
 }
