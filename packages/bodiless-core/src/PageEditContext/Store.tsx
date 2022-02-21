@@ -114,12 +114,17 @@ export class PageEditStore implements PageEditStoreInterface {
         const existing = map!.get(op.name);
         const next = { ...op, context: c };
         if (existing) {
+          // Delete existing entries which aren't in the updated set
           Object.keys(existing)
             .filter(key => next[key as keyof TMenuOption] === undefined)
             .forEach(key => delete existing[key as keyof TMenuOption]);
           const newProps = Object.keys(next)
             .filter(key => existing[key as keyof TMenuOption] === undefined)
             .reduce((acc, key) => ({ ...acc, [key]: next[key as keyof TMenuOption] }), {});
+          // Remove new props from object.assign.  These will be added by extendObservable
+          Object.keys(newProps).forEach(
+            k => delete next[k as keyof typeof next]
+          );
           Object.assign(existing, next);
           extendObservable(existing, newProps);
         } else {
