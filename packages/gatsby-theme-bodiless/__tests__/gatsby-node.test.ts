@@ -15,8 +15,6 @@
 export {};
 
 const fs = require('fs');
-// const git = require('isomorphic-git');
-const { createGitInfo } = require('../create-node');
 const { createPages } = require('../gatsby-node');
 
 jest.mock('fs');
