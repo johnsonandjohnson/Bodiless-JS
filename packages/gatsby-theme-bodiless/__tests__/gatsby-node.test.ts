@@ -18,6 +18,14 @@ const fs = require('fs');
 const { createPages } = require('../gatsby-node');
 
 jest.mock('fs');
+jest.mock('../create-node', () => {
+  const originalModule = jest.requireActual('../create-node');
+  return {
+    __esModule: true,
+    ...originalModule,
+    createGitInfo: jest.fn(),
+  };
+});
 jest.mock('path', () => ({
   ...jest.requireActual('path'),
   resolve: (...pathSegment: any) => [...pathSegment].join('/'),

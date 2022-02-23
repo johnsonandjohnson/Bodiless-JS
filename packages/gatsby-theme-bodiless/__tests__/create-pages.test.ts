@@ -18,6 +18,14 @@ const fs = require('fs');
 const { createPages } = require('../gatsby-node');
 
 jest.mock('fs');
+jest.mock('../create-node', () => {
+  const originalModule = jest.requireActual('../create-node');
+  return {
+    __esModule: true,
+    ...originalModule,
+    createGitInfo: async () => Promise.resolve({ repo: '', sha: '', branch: '' }),
+  };
+});
 jest.mock('path', () => ({
   ...jest.requireActual('path'),
   resolve: (...pathSegment: any) => [...pathSegment].join('/'),
@@ -88,6 +96,7 @@ describe('createPages', () => {
         path: '/products/shampoo_1/',
         component: './src/templates/product.jsx',
         context: {
+          gitInfo: { repo: '', sha: '', branch: '' },
           slug: '/products/shampoo_1/',
           template: 'product',
           subPageTemplate: 'product',
@@ -122,6 +131,7 @@ describe('createPages', () => {
         path: '/products/',
         component: './src/templates/_default.jsx',
         context: {
+          gitInfo: { repo: '', sha: '', branch: '' },
           slug: '/products/',
           subPageTemplate: 'product',
           template: '_default',
@@ -133,6 +143,7 @@ describe('createPages', () => {
         path: '/products/shampoo_1/',
         component: './src/templates/product.jsx',
         context: {
+          gitInfo: { repo: '', sha: '', branch: '' },
           slug: '/products/shampoo_1/',
           subPageTemplate: 'product',
           template: 'product',
