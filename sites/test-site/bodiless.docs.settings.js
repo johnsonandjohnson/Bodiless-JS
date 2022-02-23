@@ -13,8 +13,12 @@
  */
 
 const { defaultToc } = require('@bodiless/documentation');
+// const localToc = require('./bodiless.docs.toc.json');
 
 const settings = () => ({
-  toc: defaultToc(),
+  toc: {
+    ...defaultToc(),
+    // bodiless: localToc,
+  }
 });
 module.exports.default = settings;

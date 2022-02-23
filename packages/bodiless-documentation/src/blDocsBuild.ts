@@ -14,10 +14,11 @@
  */
 
 /* eslint-disable no-console */
+import path from 'path';
 import flow from 'lodash/flow';
 import fs from 'fs-extra';
 // import cleanSymlinks from './cleanSymlinks';
-import locateFiles from './locateFiles';
+// import locateFiles from './locateFiles';
 import { withTreeFromFile, getSimplePaths, validatePaths } from './tree';
 import {
   writeTree, writeResources, copyFile, symlinkFile,
@@ -27,15 +28,61 @@ import { Tree } from './type';
 import readSettings from './readSettings';
 import buildApiDoc, { updateNavigation as apiDocUpdateNavigation } from './blApiDocsBuild';
 
+export const getPackageDocsJson = (rootPath: string, nameSpace: string = 'bodiless'): string[] => {
+  try {
+    const paths: string[] = [];
+    // eslint-disable-next-line global-require, import/no-dynamic-require
+    const pkgJson = require(path.join(rootPath, '/package.json'));
+    const deps = Object.keys({
+      ...pkgJson.dependencies,
+      ...pkgJson.devDependencies,
+    });
+
+    try {
+      const docsJsonPath = path.join(rootPath, `${nameSpace}.docs.json`);
+      // eslint-disable-next-line global-require, import/no-dynamic-require
+      require(docsJsonPath);
+      paths.push(docsJsonPath);
+    } catch (e) {
+      // do nothing
+    }
+
+    deps.forEach(dep => {
+      try {
+        // eslint-disable-next-line global-require, import/no-dynamic-require
+        const depDocsJsonPath = require(path.join(dep, 'lib/getBodilessDocs'))
+          .getBodilessDocs(nameSpace);
+        paths.push(depDocsJsonPath[0]);
+      } catch (e) {
+        // do nothing
+      }
+    });
+    return paths;
+  } catch (e) {
+    return [];
+  }
+};
+
 const buildSubTree = async (toc: any, namespace: string) => {
   // We start by using locateFiles and withTreeFromFile to build up an array of TreeHO and
   // at the same time we clean up the symlinks
-  const updates = await locateFiles({
-    filePattern: new RegExp(`${namespace}.docs.json$`),
-    // filePattern: /docs.json$/,
-    startingRoot: './',
-    action: withTreeFromFile,
-  });
+
+  const initPath = path.resolve();
+  const docsJsonPaths = getPackageDocsJson(initPath, namespace);
+
+  // console.log('docsJsonPaths', docsJsonPaths);
+
+  // const updates = await locateFiles({
+  //   filePattern: new RegExp(`${namespace}.docs.json$`),
+  //   // filePattern: /docs.json$/,
+  //   startingRoot: './',
+  //   action: withTreeFromFile,
+  // });
+
+  const updates = await Promise.all(
+    docsJsonPaths.map(path => withTreeFromFile(path))
+  );
+
   const paths = flow(updates)(toc) as Tree;
   return paths;
 };
