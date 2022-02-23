@@ -65,6 +65,7 @@ type FieldProps = Omit<BaseFieldProps, 'field'> & CustomFieldProps;
 type FieldValidate = (value: FormValue, values: FormValues) => FormError;
 
 type PageDataContextProps = {
+  pagePath: string,
   subPageTemplate: string,
   template: string,
 };

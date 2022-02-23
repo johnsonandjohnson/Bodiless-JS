@@ -22,6 +22,7 @@ import type {
 } from '../types';
 
 const defaultPageData: PageDataContextProps = {
+  pagePath: '/',
   subPageTemplate: '_default',
   template: '_default',
 };
