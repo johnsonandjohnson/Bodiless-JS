@@ -45,7 +45,6 @@ import {
   asBodilessList,
   asSubList, withDeleteNodeOnUnwrap,
   withSubLists,
-  ifViewportIsNot,
 } from '@bodiless/components';
 import { asAccordionBody, asAccordionTitle, asAccordionWrapper } from '@bodiless/accordion';
 import { TAG_ANY_KEY } from './FilterByGroupStore';
@@ -168,19 +167,17 @@ const TagTitle = flow(
   designable(tagTitleComponentsStart, 'TagTitle'),
 )(TagTitleBase);
 
-const asResponsiveFilter = ifViewportIsNot(['lg', 'xl', '2xl'])(
-  withDesign({
-    Item: flowHoc(
-      asAccordionWrapper,
-      withDesign({
-        SubList: withDesign({
-          Wrapper: asAccordionBody,
-        }),
+const asResponsiveFilter = withDesign({
+  Item: flowHoc(
+    asAccordionWrapper,
+    withDesign({
+      SubList: withDesign({
+        Wrapper: asAccordionBody,
       }),
-    ),
-    Title: asAccordionTitle,
-  }),
-);
+    }),
+  ),
+  Title: asAccordionTitle,
+});
 
 const asFilter = flowHoc(
   asBodilessList(undefined, undefined, () => ({ groupLabel: 'Category' })),

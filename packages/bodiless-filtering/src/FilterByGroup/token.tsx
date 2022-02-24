@@ -17,12 +17,9 @@ import {
   addClasses,
   flowHoc,
   addProps,
-  replaceWith,
   addPropsIf,
-  Span,
   withoutProps,
 } from '@bodiless/fclasses';
-import { ifViewportIsNot, ifViewportIs } from '@bodiless/components';
 import {
   asAccordionWrapper,
   asAccordionBody,
@@ -84,23 +81,13 @@ const asAccessibleFilterByGroup = flowHoc(
   }),
 );
 
-const asResponsiveFilterByGroup = flowHoc(
-  ifViewportIsNot(['lg', 'xl', '2xl'])(
-    withDesign({
-      FilterWrapper: asAccordionWrapper,
-      FilterTitle: asResponsiveAccordionTitle,
-      FilterBody: asExpandedOnDesktopBody,
-      ResetButton: asExpandedOnDesktopResetButtonBody,
-      RefineButton: addPropsIf(() => true)(useRefineButtonProps),
-    }),
-  ),
-  ifViewportIs(['lg', 'xl', '2xl'])(
-    withDesign({
-      FilterBody: replaceWith(Span),
-      RefineButton: replaceWith(() => null),
-    }),
-  ),
-);
+const asResponsiveFilterByGroup = withDesign({
+  FilterWrapper: asAccordionWrapper,
+  FilterTitle: asResponsiveAccordionTitle,
+  FilterBody: asExpandedOnDesktopBody,
+  ResetButton: asExpandedOnDesktopResetButtonBody,
+  RefineButton: addPropsIf(() => true)(useRefineButtonProps),
+});
 
 export const withMultipleAllowedTags = flowHoc(
   addProps({
