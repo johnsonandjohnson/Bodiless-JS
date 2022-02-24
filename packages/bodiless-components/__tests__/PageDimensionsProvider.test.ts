@@ -26,8 +26,8 @@ describe('mapBreakpointsSize', () => {
       max: 1160,
       sm: 640,
       xl: 1280,
-    }
-    
+    };
+
     const sizeDefault = mapBreakpointsSize(breakpoints, 300);
     const sizeXs = mapBreakpointsSize(breakpoints, 320);
     const sizeLg1 = mapBreakpointsSize(breakpoints, 1024);

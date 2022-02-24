@@ -43,16 +43,16 @@ const PageDimensionsContext = createContext<PageDimensions>({
 });
 
 /**
- * From large to small, find the first matching breakpoint from BreakpointsType 
+ * From large to small, find the first matching breakpoint from BreakpointsType
  * using given width value.
- * 
+ *
  * @param breakpoints BreakpointsType set of user defined screen breakpoints.
  * @param width number current screen width
  * @returns string screen size
  */
-const mapBreakpointsSize = (breakpoints: BreakpointsType = {}, width: number): string => {
+const mapBreakpointsSize = (breakpoints: BreakpointsType = {}, width: number = 0): string => {
   const breakpointSorted = Object.keys(breakpoints)
-    .filter(v => (!isNaN(breakpoints[v])))
+    .filter(v => (!Number.isNaN(breakpoints[v])))
     .map(breakpoint => ({ name: breakpoint, value: Number(breakpoints[breakpoint]) }))
     .sort((prev, next) => (next.value > prev.value ? 1 : -1))
     .map(item => item.name);
@@ -120,4 +120,5 @@ export default PageDimensionsProvider;
 export {
   withPageDimensionsContext,
   usePageDimensionsContext,
+  mapBreakpointsSize,
 };
