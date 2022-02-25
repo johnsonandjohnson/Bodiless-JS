@@ -113,10 +113,11 @@ limitations under the License.
       },    
       plugins: [
         function(hook) {
+          const currentYY = new Date().getFullYear().toString().slice(-2);
           const footer = [
             '<hr/>',
             '<footer>',
-            '<span>&copy; Copyright 2019-20 Johnson &amp; Johnson</span>',
+            `<span>&copy; Copyright 2019-${currentYY} Johnson &amp; Johnson</span>`,
             '</footer>',
           ].join('');
           hook.afterEach(function(html, next) {
