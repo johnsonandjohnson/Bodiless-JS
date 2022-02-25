@@ -1,7 +1,7 @@
 {
   "Components": {
     "Image": {
-      "README.md": "./doc/Image.md"
+      "CX_Image.md": "./doc/Image.md"
     }
   }
 }
