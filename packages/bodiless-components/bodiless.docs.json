@@ -1,21 +1,23 @@
 {
   "Components": {
-    "Image.md": "./doc/Image.md",
+    "Image": {
+      "README.md": "./doc/Image.md"
+    },
     "Link.md": "./doc/Link.md",
     "List.md": "./doc/List.md",
     "Chameleon.md": "./doc/Chameleon.md",
     "Editable.md": "./doc/editable.md",
     "Iframe.md": "./doc/Iframe.md",
     "assets": {
+      "AddImageComponent.jpg": "./doc/assets/AddImageComponent.jpg",
       "ClickLinkButton.jpg": "./doc/assets/ClickLinkButton.jpg",
-      "ContextMenuImage.jpg": "./doc/assets/ContextMenuImage.jpg",
       "EditLinkIconInImageContextMenu.jpg": "./doc/assets/EditLinkIconInImageContextMenu.jpg",
       "FileUploadDone.jpg": "./doc/assets/FileUploadDone.jpg",
       "HighlightLinkText.jpg": "./doc/assets/HighlightLinkText.jpg",
       "IframeComponentLibrary.jpg": "./doc/assets/IframeComponentLibrary.jpg",
       "IframeConfigButton.jpg": "./doc/assets/IframeConfigButton.jpg",
       "IframeConfig.jpg": "./doc/assets/IframeConfig.jpg",
-      "ImageComponentLibraryAll.jpg": "./doc/assets/ImageComponentLibraryAll.jpg",
+      "ImageModal.jpg": "./doc/assets/ImageModal.jpg",
       "LinkForm.jpg": "./doc/assets/LinkForm.jpg",
       "RichTextLinkEditButtonInContextMenu.jpg": "./doc/assets/RichTextLinkEditButtonInContextMenu.jpg"
     }
