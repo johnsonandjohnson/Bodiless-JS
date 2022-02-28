@@ -13,6 +13,7 @@
  */
 
 import cheerio from 'cheerio';
+// @ts-ignore cheerio has no exported member 'Node'.
 import type { Node as CheerioNode } from 'cheerio';
 import fs from 'fs';
 import glob from 'glob';
