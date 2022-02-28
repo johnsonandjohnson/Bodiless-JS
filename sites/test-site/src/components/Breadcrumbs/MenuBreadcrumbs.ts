@@ -33,11 +33,11 @@ const $withBreadcrumbEditors = flowHoc(
   withEditableFinalTrail(),
 );
 
-const Breadcrumbs = flowHoc(
+const BreadcrumbsBase = flowHoc(
   asBreadcrumbs,
   $withBreadcrumbEditors,
   $withBreadcrumbStyles,
   asAccessibleBreadcrumbs,
 )(BreadcrumbsClean);
 
-export default Breadcrumbs;
+export default BreadcrumbsBase;
