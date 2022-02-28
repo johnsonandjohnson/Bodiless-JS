@@ -23,6 +23,7 @@
     "@bodiless/core": "^0.3.7",
     "@bodiless/core-ui": "^0.3.7",
     "@bodiless/curator": "^0.3.7",
+    "@bodiless/cx-layout": "^0.3.7",
     "@bodiless/documentation": "^0.3.7",
     "@bodiless/fclasses": "^0.3.7",
     "@bodiless/filtering": "^0.3.7",
