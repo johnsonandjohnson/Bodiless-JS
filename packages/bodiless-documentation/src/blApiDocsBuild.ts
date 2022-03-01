@@ -12,13 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import pathUtil from 'path';
 import fs from 'fs';
 import { ensureDirSync } from 'fs-extra';
 import locateFiles from './locateFiles';
 import type { Copier } from './write';
 import { Tree } from './type';
+
+require('dotenv').config({ path: '.env.site' });
 
 // determine if api doc generation is enabled
 // when enabled, api doc files are copied to doc server and a link is added to navigation bar.
@@ -107,6 +108,7 @@ const copyApiDocs = async ({ paths, targetDocPath, copier }: Props & { paths: Pa
  * Generates index page and navigation bar for API docs.
  */
 const buildApiDoc = async (props: Props) => {
+  console.log('process.env', process.env);
   if (!isEnabled()) {
     console.warn('API doc build is disabled. Set BODILESS_DOCS_API_ENABLED environment variable to "1" to enable it');
   }

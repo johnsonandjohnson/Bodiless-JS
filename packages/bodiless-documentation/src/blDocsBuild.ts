@@ -28,6 +28,8 @@ import { Tree } from './type';
 import readSettings from './readSettings';
 import buildApiDoc, { updateNavigation as apiDocUpdateNavigation } from './blApiDocsBuild';
 
+require('dotenv').config({ path: '.env.site' });
+
 export const getPackageDocsJson = (rootPath: string, nameSpace: string = 'bodiless'): string[] => {
   try {
     const paths: string[] = [];

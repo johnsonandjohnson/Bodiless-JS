@@ -41,7 +41,8 @@
     "fs-extra": "^8.1.0",
     "lodash": "^4.17.19",
     "walk": "^2.3.14",
-    "walkdir": "^0.4.1"
+    "walkdir": "^0.4.1",
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
     "@types/node": "^16",
