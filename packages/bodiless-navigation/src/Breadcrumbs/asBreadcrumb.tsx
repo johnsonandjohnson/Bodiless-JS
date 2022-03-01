@@ -94,24 +94,29 @@ const asBreadcrumb = ({
       parent: current,
       store,
     });
+
     if (!isEdit) {
       // To avoid flicker, we need to populate the store on render
       // otherwise the breadcrumbs render with no items before
       // a layout effect is executed.
       store.setItem(item);
     }
+
     useLayoutEffect(() => {
-      if (!isEdit) return;
-      store.setItem(item);
+      if (!isSSR()) {
+        store.setItem(item);
+      }
     }, [titleNode.data, linkNode.data]);
-    // deleting item from store on unmount
+
+    // Deleting item from store on unmount.
     useLayoutEffect(() => () => {
       // Only necessary in edit mode since items are not added or removed
       // under any other circumstances.
-      if (!isEdit) return;
-      store.deleteItem(id);
+      if (isEdit) {
+        store.deleteItem(id);
+      }
     }, []);
-    // }
+
     return (
       <BreadcrumbContextProvider value={item}>
         <Component {...props} />
