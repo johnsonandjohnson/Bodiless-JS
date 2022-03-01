@@ -108,7 +108,6 @@ const copyApiDocs = async ({ paths, targetDocPath, copier }: Props & { paths: Pa
  * Generates index page and navigation bar for API docs.
  */
 const buildApiDoc = async (props: Props) => {
-  console.log('process.env', process.env);
   if (!isEnabled()) {
     console.warn('API doc build is disabled. Set BODILESS_DOCS_API_ENABLED environment variable to "1" to enable it');
   }
