@@ -22,27 +22,12 @@ By default, the editable components include:
 
 ## Site Builder Details
 
-You can use the CX Header Component (`cxHeader`) as is, or you can compose the tokens into a new
-header to meet your site's requirements.
+From a Site Builder perspective, CX Header (`cxHeader`) is a token collection — not a component. You
+can use the default CX Header token (`cxHeader.Default`) as is, or you can recompose it to meet your
+site's requirements.
 
 ## Architectural Details
 
-The CX Header Component provides a `<header>` element wrapper around the following elements:
-
-```tsx
-<Wrapper>
-  <Container>
-    <MenuToggler />
-    <Logo />
-    <SearchToggler />
-    <MenuContainer>
-      <Menu />
-      <ActionMenuContainer>
-        <DesktopSearch />
-        <UtilityMenu />
-        <LanguageButton />
-      </ActionMenuContainer>
-    </MenuContainer>
-  </Container>
-</Wrapper>
-```
+CX Header provides a `<header>` element wrapper around its internal elements. To see how these
+elements are structured within the wrapper, please see:
+[`HeaderClean.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-layout/src/components/Header/HeaderClean.tsx)
