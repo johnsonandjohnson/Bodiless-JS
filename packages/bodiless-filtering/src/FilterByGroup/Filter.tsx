@@ -46,7 +46,6 @@ import {
   asSubList, withDeleteNodeOnUnwrap,
   withSubLists,
 } from '@bodiless/components';
-import { asAccordionBody, asAccordionTitle, asAccordionWrapper } from '@bodiless/accordion';
 import { TAG_ANY_KEY } from './FilterByGroupStore';
 import {
   TagTitleProps,
