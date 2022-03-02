@@ -17,7 +17,7 @@ import { withPrependChild } from '@bodiless/core';
 import {
   Div,
   Span,
-  asToken,
+  flowHoc,
   addProps,
   addClasses,
   withDesign,
@@ -57,7 +57,7 @@ export const LibraryItemIndicatorClean = designable(LibraryItemIndicatorComponen
 
 const asDefaultLibraryItemIndicator = withDesign({
   Wrapper: addClasses('hidden group-hover:flex bl-text-white bl-bg-gray-900 absolute bl-px-2 bl-py-1 md:-mt-5 md:-ml-5 bl-z-10'),
-  Icon: asToken(
+  Icon: flowHoc(
     addClasses('material-icons bl-mr-2'),
     addProps({ children: 'account_balance' }),
   ),
@@ -69,7 +69,7 @@ const asDefaultLibraryItemIndicator = withDesign({
  * It Prepends a designable `LibraryItemIndicator` child component that appears
  * on the `ComponentWrapper` hover.
  */
-export const withLibraryItemIndicator = asToken(
+export const withLibraryItemIndicator = flowHoc(
   addClasses('group'),
   withPrependChild(LibraryItemIndicatorClean, 'LibraryItemIndicator'),
   withDesign({

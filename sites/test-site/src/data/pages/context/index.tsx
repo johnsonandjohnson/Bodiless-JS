@@ -18,10 +18,10 @@
 import React, { HTMLProps, FC } from 'react';
 import { graphql } from 'gatsby';
 
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import {
   flowIf, hasProp, addClasses, withoutProps, StylableProps,
-  removeClasses, asToken,
+  removeClasses, flowHoc,
   A,
 } from '@bodiless/fclasses';
 import { Div } from '@bodiless/ui';
@@ -79,11 +79,11 @@ type VariantProps = {
 };
 
 const ui = {
-  ContextWrapper: asToken(
+  ContextWrapper: flowHoc(
     withoutProps<VariantProps>(['isActive']),
     addClasses('border border-blue m-2 p-2'),
     flowIf(hasProp('isActive'))(
-      asToken(
+      flowHoc(
         addClasses('border-red'),
         removeClasses('border-blue'),
       ),
@@ -91,7 +91,7 @@ const ui = {
   )(Div),
 };
 
-// const DemoContextWrapperDiv = asToken(
+// const DemoContextWrapperDiv = flowHoc(
 //   removeClasses('border-transparent').addClasses('border-blue m-2 p-2'),
 //   flowIf(hasProp('isActive'))(
 //     removeClasses('border-blue'),

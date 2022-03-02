@@ -28,7 +28,7 @@ import {
   startWith,
   Div,
   Design,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import {
@@ -63,7 +63,7 @@ const basicDesign = {
   Bold: asBold,
   Italic: asItalic,
   Underline: asUnderline,
-  Link: asToken(asEditableLink(), asLink, withLinkDeserializer, startWith(GatsbyLink)),
+  Link: flowHoc(asEditableLink(), asLink, withLinkDeserializer, startWith(GatsbyLink)),
   ...simpleDesign,
   AlignLeft: asAlignLeft,
   AlignRight: asAlignRight,
@@ -71,7 +71,7 @@ const basicDesign = {
   AlignCenter: asAlignCenter,
 };
 
-export const withQuoteBlockMeta = asToken(
+export const withQuoteBlockMeta = flowHoc(
   asBlock,
   withButton('format_quote'),
 );
@@ -80,8 +80,8 @@ const fullFeaturedDesign: Design = {
   Bold: asBold,
   Italic: asItalic,
   Underline: asUnderline,
-  StrikeThrough: asToken(asStrikeThrough, withStrikeThroughMeta),
-  Link: asToken(asEditableLink(), asLink, withLinkDeserializer, startWith(GatsbyLink)),
+  StrikeThrough: flowHoc(asStrikeThrough, withStrikeThroughMeta),
+  Link: flowHoc(asEditableLink(), asLink, withLinkDeserializer, startWith(GatsbyLink)),
   SuperScript: asSuperScript,
   AlignLeft: asAlignLeft,
   AlignRight: asAlignRight,
@@ -90,9 +90,9 @@ const fullFeaturedDesign: Design = {
   H1: asHeader1,
   H2: asHeader2,
   H3: asHeader3,
-  BlockQuote: asToken(replaceWith(Blockquote), asBlockQuote, withQuoteBlockMeta),
-  CenterItalicHeader: asToken(replaceWith(Div), asBlock, asHeader1, asAlignCenter, asItalic),
-  UnderlineRightHeader: asToken(replaceWith(Div), asBlock, asHeader1, asAlignRight, asUnderline),
+  BlockQuote: flowHoc(replaceWith(Blockquote), asBlockQuote, withQuoteBlockMeta),
+  CenterItalicHeader: flowHoc(replaceWith(Div), asBlock, asHeader1, asAlignCenter, asItalic),
+  UnderlineRightHeader: flowHoc(replaceWith(Div), asBlock, asHeader1, asAlignRight, asUnderline),
 };
 
 const EditorSimple = withDesign(simpleDesign)(RichText);

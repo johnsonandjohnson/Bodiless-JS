@@ -15,7 +15,7 @@ import {
   H1,
   Img,
   addClasses,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import { withEditorSimple } from '../Editors';
 import { asLandscapeImage } from '../Image';
@@ -27,17 +27,17 @@ import {
 
 export { ProductListingFlowContainer } from './ProductListingFlowContainer';
 
-export const ProductListingTitle = asToken(
+export const ProductListingTitle = flowHoc(
   asHeader1,
   withEditorSimple('product_listing_title', 'Product Listing Title'),
 )(H1);
 
-const asProductListingImage = asToken(
+const asProductListingImage = flowHoc(
   asImageRounded,
   addClasses('w-full'),
 );
 
-export const ProductListingImage = asToken(
+export const ProductListingImage = flowHoc(
   asLandscapeImage('product_listing_image'),
   asImage,
   asProductListingImage,

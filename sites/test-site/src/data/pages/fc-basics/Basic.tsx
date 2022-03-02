@@ -1,7 +1,7 @@
 import React from 'react';
 import flow from 'lodash/flow';
 import {
-  withDesign, asToken, varyDesigns, Div, addProps, HOC, startWith, addClasses,
+  withDesign, flowHoc, varyDesigns, Div, addProps, HOC, startWith, addClasses,
 } from '@bodiless/fclasses';
 import {
   withAllTitlesFromTerms, ifComponentSelector, withTailwindWidthConstraints,
@@ -22,7 +22,7 @@ const blacklistCategories = ['Category', 'Attribute', 'Component'];
 
 // This is the base component which will be included in all variations.
 const base = {
-  Box: asToken(startWith(Div) as HOC, asBox),
+  Box: flowHoc(startWith(Div) as HOC, asBox),
 };
 
 // Available colors
@@ -77,10 +77,10 @@ const variations = varyDesigns<any>(
 );
 
 export const basicDesign = {
-  Default: asToken(startWith(Div), asBox),
-  Orange: asToken(startWith(Div), asBox, asOrange),
-  Blue: asToken(startWith(Div), asBox, asBlue),
-  Teal: asToken(startWith(Div), asBox, asTeal),
+  Default: flowHoc(startWith(Div), asBox),
+  Orange: flowHoc(startWith(Div), asBox, asOrange),
+  Blue: flowHoc(startWith(Div), asBox, asBlue),
+  Teal: flowHoc(startWith(Div), asBox, asTeal),
 };
 
 // Create a function which takes a set of tailwind classes and returns
@@ -92,7 +92,7 @@ export const withWidthConstraints = flow(
 
 const TestCase = startWith(() => <div>This is a component with no metadata</div>);
 
-const asBasicFlowContainer = asToken(
+const asBasicFlowContainer = flowHoc(
   // withDesign(basicDesign),
   withAllTitlesFromTerms({ blacklistCategories }),
   withDesign(variations) as HOC,

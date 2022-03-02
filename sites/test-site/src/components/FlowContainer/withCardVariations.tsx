@@ -20,7 +20,7 @@ import {
   extendDesign,
   replaceWith,
   withDesign,
-  asToken,
+  flowHoc,
   varyDesigns,
 } from '@bodiless/fclasses';
 import Card from '../Card';
@@ -39,7 +39,7 @@ export const withStructureFacet = withFacet('Card Structure');
 export const withOrientationFacet = withFacet('Orientation');
 
 const baseVariation = {
-  Card: asToken(
+  Card: flowHoc(
     replaceWith(Card),
     withDesc('A way to promote a Call to Action.\n'),
     withType('Card')(asCardDefaultStyle),

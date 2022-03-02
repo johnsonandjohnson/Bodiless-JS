@@ -20,7 +20,7 @@ import flow from 'lodash/flow';
 import identity from 'lodash/identity';
 import type {
   TokenDef, HOCBase, ComponentOrTag, ComponentWithMeta, TokenMeta,
-  HOC, TokenFilterTest, AsToken as AsTokenBase,
+  HOC, TokenFilterTest, FlowHoc as AsTokenBase,
 } from './types';
 
 const isToken = (def: TokenDef<any, any, any>) => typeof def === 'function';
@@ -40,9 +40,15 @@ function mergeMeta(objValue:any, srcValue:any) {
 const preserveMeta = (hoc: HOCBase): HOCBase => <P extends object, Q extends object = P>(
   Component: ComponentOrTag<P>,
 ): ComponentWithMeta<Q> => {
-  const NewComponent = hoc(Component) as ComponentWithMeta<Q>;
-  const finalMeta = mergeWith({}, Component, NewComponent, mergeMeta);
-  return Object.assign(NewComponent, finalMeta);
+  try {
+    const NewComponent = hoc(Component) as ComponentWithMeta<Q>;
+    const finalMeta = mergeWith({}, Component, NewComponent, mergeMeta);
+    return Object.assign(NewComponent, finalMeta);
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.log(e);
+    return Component as ComponentWithMeta;
+  }
 };
 
 /**
@@ -120,7 +126,7 @@ const filterMembers = <P extends object>(tokens: HOC[]): HOC[] => {
   return filtered.reverse();
 };
 
-type AsToken<B = {}> = AsTokenBase<B> & {
+type FlowHoc<B = {}> = AsTokenBase<B> & {
   meta: {
     term: (c: string) => (t: string) => TokenMeta;
     cat: (c: string) => TokenMeta;
@@ -144,7 +150,7 @@ type AsToken<B = {}> = AsTokenBase<B> & {
  * @return
  * A composed token.
  */
-const asToken: AsToken = (...args) => {
+const flowHoc: FlowHoc = (...args) => {
   // We allow "undefined" in args and simply ignore them.
   const args$ = args.filter(a => a !== undefined);
   const metaBits: TokenMeta[] = args$.filter(a => !isToken(a)) as TokenMeta[];
@@ -176,7 +182,7 @@ const withTokenFilter = <P extends object>(test: TokenFilterTest): HOC => (
 /**
  * Utilities for adding metadata to tokens.
  */
-asToken.meta = {
+flowHoc.meta = {
   term: (c: string) => (t: string) => ({
     categories: {
       [c]: [t],
@@ -208,4 +214,4 @@ const extendMeta = (
   return undefined;
 });
 
-export { asToken, withTokenFilter, extendMeta };
+export { flowHoc, withTokenFilter, extendMeta };

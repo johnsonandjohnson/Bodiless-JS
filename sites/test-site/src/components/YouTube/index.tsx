@@ -24,14 +24,14 @@ import { Embed } from '@bodiless/organisms';
 import {
   addProps,
   withDesign,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 
 import { asResponsive16By9Embed } from '../Elements.token';
 
 const withPlaceholder = addProps({ src: 'https://www.youtube.com/embed/_LBdqpscwi0' });
 
-const asResponsiveYouTube = asToken(
+const asResponsiveYouTube = flowHoc(
   asBaseResponsiveYouTube,
   withDesign({
     Item: flowRight(
@@ -40,7 +40,7 @@ const asResponsiveYouTube = asToken(
   }),
 );
 
-const asReponsive16By9YouTube = asToken(
+const asReponsive16By9YouTube = flowHoc(
   asResponsiveYouTube,
   asResponsive16By9Embed,
 );
@@ -58,7 +58,7 @@ const defaultPlayerSettings: Partial<YouTubePlayerSettings> = {
 };
 
 const withYouTubeDefaults = withDesign({
-  Item: asToken(
+  Item: flowHoc(
     withYouTubePlayerSettings(defaultPlayerSettings),
     withFullScreenEnabled,
   ),
@@ -77,7 +77,7 @@ const withAutoPlaySettings = withDesign({
   ),
 });
 
-const Reponsive16By9AutoPlayYouTube = asToken(
+const Reponsive16By9AutoPlayYouTube = flowHoc(
   asReponsive16By9YouTube,
   withYouTubeDefaults,
   withAutoPlaySettings,

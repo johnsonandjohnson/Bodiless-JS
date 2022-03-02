@@ -36,12 +36,12 @@ export const DemoMenu = flow(
 #### Menu Sublists
 The `DemoMenu` above will create a simple one-level **unstyled** list with Editable menu titles by default. This menu may be extended with different types of submenus:
 ```js
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import {
   asBodilessMenu, withListSubMenu, withColumnSubMenu, withCardsSubMenu,
 } from '@bodiless/navigation';
 
-export const DemoMenu = asToken(
+export const DemoMenu = flowHoc(
   asBodilessMenu('menu-demo'),
   withListSubMenu(), // Add an ability to create a List submenu
   withColumnSubMenu(), // Add an ability to create a Columns submenu
@@ -62,7 +62,7 @@ withListSubMenu($asEditableMenuTitle);
 ```
 is equivalent to
 ```js
-asToken(
+flowHoc(
   withListSubMenu(),
   withDesign({
     Item: withDesign({
@@ -83,7 +83,7 @@ On the high-level the Menu is a list composed of three components:
 
 Here is an example of the site-level styling token for the **top-level menu**:
 ```js
-const $withSiteTopMenuStyles = asToken(
+const $withSiteTopMenuStyles = flowHoc(
   withDesigh({
     Wrapper: addClasses(...), // Menu <ul> element
     Item: addClasses(...), // Menu <li> element
@@ -94,7 +94,7 @@ const $withSiteTopMenuStyles = asToken(
 
 The same applies for the **submenus** with one additional Design key:
 ```js
-const $withListSubMenuStyles = asToken(
+const $withListSubMenuStyles = flowHoc(
   addClasses(...), // Top menu Item (<li>) for the particular submenu.
   withDesigh({
     OuterWrapper: addClasses(...), // Top menu Item (<li>) for the particular submenu. Same as addClasses() above. 
@@ -112,7 +112,7 @@ There is a `asTopNav` helper exported by the `@bodiless/navigation` that may be 
 
 It accepts an optional list of submenu keys to which default styling has to be applied to:
 ```js
-const $asSiteNavStyles = asToken(
+const $asSiteNavStyles = flowHoc(
   // Add default position and interaction styles for List, Columns and Cards submenus.
   asTopNav('Main', 'List', 'Columns', 'Cards'),
 );
@@ -165,7 +165,7 @@ const withActiveTitleStyles = ifToggledOn(useIsActiveTrail)(
 ### Bodiless Menu Example
 Here is the complete example of the demo bodiless menu:
 ```js
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import {
   asTopNav, withMenuDesign, asBodilessMenu, withColumnSubMenu, withCardsSubMenu,
   withMenuTitleEditors,
@@ -177,7 +177,7 @@ import {
   $withColumnsSublistStyles,
 } from './DemoMenu.token';
 
-const $withMenuSchema = asToken(
+const $withMenuSchema = flowHoc(
   asBodilessMenu('demo-menu'),
   withListSubMenu(),
   withColumnSubMenu(),
@@ -186,7 +186,7 @@ const $withMenuSchema = asToken(
 
 const $withTitleEditors = withMenuTitleEditors();
 
-const $withMenuDesign = asToken(
+const $withMenuDesign = flowHoc(
   asTopNav('Main', 'List', 'Columns', 'Cards'),
   withMenuDesign()($withTitleStyles),
   withMenuDesign(['Main', 'List', 'Columns'])($withTitleEditors),
@@ -195,7 +195,7 @@ const $withMenuDesign = asToken(
   withMenuDesign('Columns', 2)($withColumnsSublistStyles),
 );
 
-export const SiteDemoMenu = asToken(
+export const SiteDemoMenu = flowHoc(
   $withMenuSchema,
   $withMenuDesign,
 )('ul');

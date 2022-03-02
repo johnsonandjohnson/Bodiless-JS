@@ -15,16 +15,16 @@
 import { withNode } from '@bodiless/core';
 import type { WithNodeKeyProps } from '@bodiless/core';
 import { asBodilessList } from '@bodiless/components';
-import { withDesign, replaceWith, asToken } from '@bodiless/fclasses';
+import { withDesign, replaceWith, flowHoc } from '@bodiless/fclasses';
 import { Slide } from 'pure-react-carousel';
 import withTotalSlides from './withTotalSlides';
 import { withIntrinsicHeight, withNoDragIfEditable, withNoAutoPlayIfEditable } from './token';
 
-const asEditableCarousel = (nodeKeys?: WithNodeKeyProps) => asToken(
+const asEditableCarousel = (nodeKeys?: WithNodeKeyProps) => flowHoc(
   withNode,
   withDesign({
     Wrapper: withTotalSlides(nodeKeys),
-    Slider: asToken(
+    Slider: flowHoc(
       asBodilessList(nodeKeys, undefined, () => ({ groupLabel: 'Slide' })),
       withDesign({
         Item: replaceWith(Slide),

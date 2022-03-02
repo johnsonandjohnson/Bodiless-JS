@@ -148,17 +148,17 @@ the metadata attached to all the tokens which have been applied to the
 component:
 
 ```js
-const asBlueCard = asToken({
+const asBlueCard = flowHoc({
   withDesign({ Wrapper: withBlueBorder }),
-  asToken.meta.term('Color')('Blue'),
+  flowHoc.meta.term('Color')('Blue'),
 });
-const asRedCard = asToken({
+const asRedCard = flowHoc({
   withDesign({ Wrapper: withRedBorder }),
-  asToken.meta.term('Color')('Red'),
+  flowHoc.meta.term('Color')('Red'),
 });
 const ColoredCardsFC = withDesign({
-  BlueCard: asToken(startWith(Card), asDefaultCard, asBlueCard),
-  RedCard: asToken(startWith(Card), asDefaultCard, asRedCard),
+  BlueCard: flowHoc(startWith(Card), asDefaultCard, asBlueCard),
+  RedCard: flowHoc(startWith(Card), asDefaultCard, asRedCard),
 })(FlowContainer);
 ```
 The above will cause the component selector to display a "Color" filter
@@ -171,9 +171,9 @@ term. For example:
 
 ```js
 const ColoredCardsFC = withDesign({
-  PlainCard: asToken(startWith(Card), asDefaultCard),
-  BlueCard: asToken(startWith(Card), asDefaultCard, asBlueCard),
-  RedCard: asToken(startWith(Card), asDefaultCard, asRedCard),
+  PlainCard: flowHoc(startWith(Card), asDefaultCard),
+  BlueCard: flowHoc(startWith(Card), asDefaultCard, asBlueCard),
+  RedCard: flowHoc(startWith(Card), asDefaultCard, asRedCard),
 })(FlowContainer);
 ```
 
@@ -191,14 +191,14 @@ Depending on the kind of metadata you attach to tokens, it may be desirable
 to exclude certain categories from appearing.  This can be done via the
 `blacklistCategories` prop:
 ```js
-const asBlueCard = asToken({
+const asBlueCard = flowHoc({
   withDesign({ Wrapper: withBlueBorder }),
-  asToken.meta.term('Color')('Blue'),
-  asToken.meta.term('Design System')('JnJ'),
+  flowHoc.meta.term('Color')('Blue'),
+  flowHoc.meta.term('Design System')('JnJ'),
 });
-const FCWithBlacklistedCategory = asToken(
+const FCWithBlacklistedCategory = flowHoc(
   withDesign({
-    BlueCard: asToken(startWith(Card), asDefaultCard, asBlueCard),
+    BlueCard: flowHoc(startWith(Card), asDefaultCard, asBlueCard),
   }),
   addProps({ blacklistCategories: ['Design System'] }),
 )(FlowContainer);
@@ -211,9 +211,9 @@ properties. These are used to provide more information about the component
 to the editor, and for searching.
 ```js
 const ColoredCardsFC = withDesign({
-  PlainCard: asToken(startWith(Card), asDefaultCard, { title: 'Card with no color' }),
-  BlueCard: asToken(startWith(Card), asDefaultCard, asBlueCard, { title: 'Blue Card' }),
-  RedCard: asToken(startWith(Card), asDefaultCard, asRedCard, { title: 'Red Card; }),
+  PlainCard: flowHoc(startWith(Card), asDefaultCard, { title: 'Card with no color' }),
+  BlueCard: flowHoc(startWith(Card), asDefaultCard, asBlueCard, { title: 'Blue Card' }),
+  RedCard: flowHoc(startWith(Card), asDefaultCard, asRedCard, { title: 'Red Card; }),
 })(FlowContainer);
 ```
 
@@ -221,11 +221,11 @@ Often an explicit title is not necessary, and `@bodiless/layouts` provides
 a helper token which causes all the components in the flow container
 to receive a default title based on their metadata:
 ```js
-const ColoredCardsFCWithDefaultTitles = asToken({
+const ColoredCardsFCWithDefaultTitles = flowHoc({
   withDesign({
-    PlainCard: asToken(startWith(Card), asDefaultCard),
-    BlueCard: asToken(startWith(Card), asDefaultCard, asBlueCard),
-    RedCard: asToken(startWith(Card), asDefaultCard, asRedCard),
+    PlainCard: flowHoc(startWith(Card), asDefaultCard),
+    BlueCard: flowHoc(startWith(Card), asDefaultCard, asBlueCard),
+    RedCard: flowHoc(startWith(Card), asDefaultCard, asRedCard),
   }),
   withAllTitlesFromTerms({ blacklistCategories: ['Design System'] }),
 })(FlowContainer);
@@ -240,10 +240,10 @@ available in a flow container, it can be tiresome to list them all in
 a design, eg:
 ```js
 const FCWithManyCardVariations = withDesign({
-  BlueRoundedHorizontalCard = asToken(startWith(Card), asDefaultCard, asBlueCard, asRoundedCard, asHorizontalCard),
-  BlueRoundedVerticalCard = asToken(startWith(Card), asDefaultCard, asBlueCard, asRoundedCard, asVerticalCard),
-  BlueSquareHorizontalCard = asToken(startWith(Card), asDefaultCard, asBlueCard, asHorizontalCard),
-  BlueSquareVerticalCard = asToken(startWith(Card), asDefaultCard, asBlueCard, asVerticalCard),
+  BlueRoundedHorizontalCard = flowHoc(startWith(Card), asDefaultCard, asBlueCard, asRoundedCard, asHorizontalCard),
+  BlueRoundedVerticalCard = flowHoc(startWith(Card), asDefaultCard, asBlueCard, asRoundedCard, asVerticalCard),
+  BlueSquareHorizontalCard = flowHoc(startWith(Card), asDefaultCard, asBlueCard, asHorizontalCard),
+  BlueSquareVerticalCard = flowHoc(startWith(Card), asDefaultCard, asBlueCard, asVerticalCard),
   ...
 })(FlowContainer);
 ```
@@ -423,7 +423,7 @@ const StyleGuideBase = props => {
     />
   );
 };
-const StyleGuide = asToken(
+const StyleGuide = flowHoc(
   designable({}, 'StyleGuide'),
   withDesign(flowContainerDesign),
   onSelect={() => null}
@@ -491,7 +491,7 @@ A few things to note when using the component selector independently:
 
   const ui = {
     ...componentSelectorUi,
-    ItemBox: asToken(
+    ItemBox: flowHoc(
       withNode,
       withNodeKeyFromDisplayName,
     )(componentSelectorUi.ItemBox),
@@ -536,7 +536,7 @@ import withDefaultVariations from './withDefaultVariations';
 ...
 
 // Create a Flow Container with Content Library enabled.
-const FlowContainerWithContentLibrary = asToken(
+const FlowContainerWithContentLibrary = flowHoc(
   // Apply Content Library HOC before other design variants.
   withLibraryComponents(),
   asDefaultFlowContainer,
@@ -569,9 +569,9 @@ like the following:
 ...
 
 export const withLibraryFlowContainerVariations = withDesign({
-  FlowContainer: asToken(
+  FlowContainer: flowHoc(
     replaceWith(
-      asToken(
+      flowHoc(
         withLibraryComponents(),
         asDefaultFlowContainer,
         withNodeKey('innerLibraryFC'),
@@ -592,7 +592,7 @@ Then apply it to a Flow Container component like we created previously:
 ```tsx
 ...
 
-const FlowContainerDefaultWithContentLibrary = asToken(
+const FlowContainerDefaultWithContentLibrary = flowHoc(
   withLibraryComponents(),
   asDefaultFlowContainer,
   withLibraryFlowContainerVariations,

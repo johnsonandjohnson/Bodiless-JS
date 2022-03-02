@@ -16,7 +16,7 @@ import React, { FC } from 'react';
 import { graphql } from 'gatsby';
 import { Page as BasePage } from '@bodiless/gatsby-theme-bodiless';
 import {
-  H1, H2, addClasses, asToken,
+  H1, H2, addClasses, flowHoc,
 } from '@bodiless/fclasses';
 import {
   withNavigationButtons,
@@ -43,19 +43,19 @@ const Page = asLtrPage(BasePage);
 const Title = addClasses('text-3xl font-bold')(H1);
 const SubTitle = addClasses('text-2xl font-bold')(H2);
 
-const OnlyNavButtonsCarousel = asToken(
+const OnlyNavButtonsCarousel = flowHoc(
   withNavigationButtons,
   withNavButtonsStyles,
   asAccessibleCarousel,
 )(Carousel);
 
-const OnlyDotsButtonsCarousel = asToken(
+const OnlyDotsButtonsCarousel = flowHoc(
   withCarouselDots(CAROUSEL_NODE_KEY),
   withDotStyles,
   asAccessibleCarousel,
 )(Carousel);
 
-const AutoPlayDefaultIntervalCarousel = asToken(
+const AutoPlayDefaultIntervalCarousel = flowHoc(
   withAutoPlay,
   withAutoPlayInterval(),
   withAutoPlayButton,
@@ -63,7 +63,7 @@ const AutoPlayDefaultIntervalCarousel = asToken(
   asAccessibleCarousel,
 )(Carousel);
 
-const NavAndDotsCarousel = asToken(
+const NavAndDotsCarousel = flowHoc(
   withCarouselDots(CAROUSEL_NODE_KEY),
   withDotStyles,
   withNavigationButtons,
@@ -71,7 +71,7 @@ const NavAndDotsCarousel = asToken(
   asAccessibleCarousel,
 )(Carousel);
 
-const NavAndAutoplayCarousel = asToken(
+const NavAndAutoplayCarousel = flowHoc(
   withNavigationButtons,
   withNavButtonsStyles,
   withAutoPlayInterval(6000),
@@ -80,7 +80,7 @@ const NavAndAutoplayCarousel = asToken(
   asAccessibleCarousel,
 )(Carousel);
 
-const DotsAndAutoplayCarousel = asToken(
+const DotsAndAutoplayCarousel = flowHoc(
   withCarouselDots(CAROUSEL_NODE_KEY),
   withDotStyles,
   withAutoPlay,
@@ -90,7 +90,7 @@ const DotsAndAutoplayCarousel = asToken(
   asAccessibleCarousel,
 )(Carousel);
 
-const NavAndDotsAndAutoplayCarousel = asToken(
+const NavAndDotsAndAutoplayCarousel = flowHoc(
   withCarouselDots(CAROUSEL_NODE_KEY),
   withDotStyles,
   withNavigationButtons,
@@ -102,7 +102,7 @@ const NavAndDotsAndAutoplayCarousel = asToken(
   asAccessibleCarousel,
 )(Carousel);
 
-const InfinitiveLoopCarousel = asToken(
+const InfinitiveLoopCarousel = flowHoc(
   withCarouselDots(CAROUSEL_NODE_KEY),
   withDotStyles,
   withNavigationButtons,
@@ -114,7 +114,7 @@ const InfinitiveLoopCarousel = asToken(
   asAccessibleCarousel,
 )(Carousel);
 
-const AutoPlayCustomIntervalCarousel = asToken(
+const AutoPlayCustomIntervalCarousel = flowHoc(
   withAutoPlay,
   withAutoPlayInterval(10000),
   withAutoPlayButton,

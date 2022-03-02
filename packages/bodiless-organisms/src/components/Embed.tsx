@@ -19,7 +19,7 @@ import {
   DesignableComponentsProps,
   Div,
   Embed as BaseEmbed,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 
 type EmbedDesignableComponents = {
@@ -50,7 +50,7 @@ const BaseEmbedComponent: ComponentType<EmbedBaseProps> = ({ components }) => {
   );
 };
 
-const Embed = asToken(
+const Embed = flowHoc(
   designable(startComponents, 'Embed'),
   withNode,
 )(BaseEmbedComponent);

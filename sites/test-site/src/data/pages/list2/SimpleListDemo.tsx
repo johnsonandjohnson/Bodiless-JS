@@ -16,21 +16,21 @@ import {
   asSubList, asBodilessList, asEditable, withSimpleSubListDesign,
 } from '@bodiless/components';
 import {
-  withDesign, addClasses, stylable, replaceWith, asToken,
+  withDesign, addClasses, stylable, replaceWith, flowHoc,
 } from '@bodiless/fclasses';
 
 export const withSimpleTitle = withDesign({
-  Title: asToken(
+  Title: flowHoc(
     replaceWith('span'),
     asEditable('text', 'Item'),
   ),
 });
 
 export const withItemMargin = withDesign({
-  Item: asToken(stylable, addClasses('ml-5')),
+  Item: flowHoc(stylable, addClasses('ml-5')),
 });
 
-// const BasicCompoundListVerbose = asToken(
+// const BasicCompoundListVerbose = flowHoc(
 //   asBodilessList(),
 //   withSimpleTitle,
 //   withSubLists,
@@ -39,10 +39,10 @@ export const withItemMargin = withDesign({
 // )('ul');
 
 const withListDesign = withSimpleSubListDesign(2);
-const BasicCompoundList = asToken(
+const BasicCompoundList = flowHoc(
   asBodilessList(),
   withSimpleTitle,
-  withListDesign(asToken(
+  withListDesign(flowHoc(
     asSubList(),
     withSimpleTitle,
     withItemMargin,

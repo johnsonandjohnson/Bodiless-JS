@@ -28,7 +28,7 @@ import {
 } from 'informed';
 import {
   Li, Ul, stylable, addClasses, StylableProps, withoutProps, flowIf, hasProp, addProps,
-  removeClasses, addClassesIf, removeClassesIf, asToken,
+  removeClasses, addClassesIf, removeClassesIf, flowHoc,
 } from '@bodiless/fclasses';
 import { ButtonVariantProps, withChild } from '@bodiless/core';
 
@@ -154,7 +154,7 @@ export const ToolbarButton = flow(
   withoutProps<ButtonVariantProps>(['isActive', 'isFirst', 'isDisabled']),
   addClasses('bl-cursor-pointer bl-mb-3 bl-flex bl-flex-col bl-items-center'),
   flowIf(hasProp('isDisabled'))(
-    asToken(
+    flowHoc(
       addClasses('bl-text-gray-600'),
       removeClasses('bl-text-gray-200'),
     ),
@@ -214,7 +214,7 @@ export const ComponentFormLink = flow(
 
 export const ComponentFormDefaultPanelWidth = addClasses('bl-w-xl-grid-2');
 export const ComponentFormDefaultPanelHeight = addClasses('bl-h-xl-grid-1');
-export const ComponentFormDefaultPanelSize = flow(
+export const ComponentFormDefaultPanelSize = flowHoc(
   ComponentFormDefaultPanelWidth,
   ComponentFormDefaultPanelHeight,
 );

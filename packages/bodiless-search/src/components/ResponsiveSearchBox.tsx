@@ -24,7 +24,7 @@ import {
   withDesign,
   DesignableComponentsProps,
   StylableProps,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 
 import {
@@ -89,7 +89,7 @@ const ResponsiveSearchBoxBase: FC<ResponsiveSearchProps> = (props) => {
   );
 };
 
-export const ResponsiveSearchBox = asToken(
+export const ResponsiveSearchBox = flowHoc(
   designable(responsiveSearchComponents, 'ResponsiveSearchBox'),
   withResponsiveDesign,
 )(ResponsiveSearchBoxBase) as ComponentType<SearchProps>;

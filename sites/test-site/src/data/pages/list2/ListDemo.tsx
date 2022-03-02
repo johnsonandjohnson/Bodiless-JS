@@ -13,7 +13,7 @@
  */
 
 import {
-  withDesign, addClasses, removeClasses, asToken,
+  withDesign, addClasses, removeClasses, flowHoc,
 } from '@bodiless/fclasses';
 import {
   asSubList, withDeleteNodeOnUnwrap, asBodilessList,
@@ -25,23 +25,23 @@ import { withItemMargin, withSimpleTitle } from './SimpleListDemo';
 /**
  * Defines the all sublists
  */
-export const asToggledSubList = asToken(
+export const asToggledSubList = flowHoc(
   asSubList(),
   withDeleteNodeOnUnwrap('sublist'),
 );
 
-const ListDemo = asToken(
+const ListDemo = flowHoc(
   asBodilessList(),
   withSimpleTitle,
   withSubLists(2)(asToggledSubList),
-  withSubListDesign(3)(asToken(
+  withSubListDesign(3)(flowHoc(
     withSimpleTitle,
     withItemMargin,
   )),
 )('ul') as ComponentType<any>;
 
 const withLessItemMargin = withDesign({
-  Item: asToken(removeClasses('ml-5'), addClasses('ml-2')),
+  Item: flowHoc(removeClasses('ml-5'), addClasses('ml-2')),
 });
 
 const withLessMarginOnInnerList = withDesign({

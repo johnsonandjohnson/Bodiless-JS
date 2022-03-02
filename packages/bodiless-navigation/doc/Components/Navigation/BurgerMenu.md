@@ -17,7 +17,7 @@ There are several burger-menu specific HOCs provided by `@bodiless/navigation` t
 ### Burger Menu Structure
 The Burger menu, as well as Bodiless Menu, is based on the List API. Burger menu is, in most cases, an extension of the site top menu. `withBurgerMenuWrapper` is used to wrap top-menu schema in the burger menu chrome.
 ```js
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import {
   asBodilessMenu, withListSubMenu, withColumnSubMenu, withMenuDesign,
   withCardsSubMenu, withBurgerMenuWrapper, withMenuTitleEditors,
@@ -25,7 +25,7 @@ import {
 
 // Define menu schema first
 // Note that $withMenuSchema is the same for the Top Menu and Burger Menu.
-const $withMenuSchema = asToken(
+const $withMenuSchema = flowHoc(
   asBodilessMenu('demo-menu'),
   withListSubMenu(), // Add an ability to create a List submenu
   withColumnSubMenu(), // Add an ability to create a Columns submenu
@@ -38,7 +38,7 @@ const $withMenuSchema = asToken(
 const $withTitleEditors = withMenuTitleEditors();
 
 // Compose burger menu by wrapping menu schema into burger menu chrome.
-const DemoBurgerMenu = asToken(
+const DemoBurgerMenu = flowHoc(
   $withMenuSchema
   withBurgerMenuWrapper,
   // Configure title editors for all Titles.
@@ -59,7 +59,7 @@ The code above would wrap `DemoMenuBase` in the burger menu chrome. The final co
 #### Burger Menu Header
 You can add a custom burger menu header by targeting the `Header` design key:
 ```js
-import { asToken, replaceWith, withDesign } from '@bodiless/fclasses';
+import { flowHoc, replaceWith, withDesign } from '@bodiless/fclasses';
 import { withBurgerMenuWrapper } from '@bodiless/navigation';
 
 import { DemoMenuBase } from './Menu';
@@ -67,14 +67,14 @@ import Logo from '../Layout/logo';
 import { asDefaultLogoStyle } from '../Layout/token';
 
 const withBurgerMenuHeader = withDesign({
-  Header: asToken(
+  Header: flowHoc(
     replaceWith(Logo),
     asDefaultLogoStyle,
   ),
 });
 
 // Wrap DemoMenuBase in the burger menu chrome and then add custom Header.
-const DemoBurgerMenu = asToken(
+const DemoBurgerMenu = flowHoc(
   withBurgerMenuWrapper,
   withBurgerMenuHeader, // Note that this should go after we wrapped DemoMenuBase with BM chrome.
 )(DemoMenuBase);
@@ -85,7 +85,7 @@ Burger Menu transforms submenus into accordions. Any item which has children ren
 
 The default "Overview" item is  `<a href="..." ...>Overview</a>`  however you can provide your Overview Link component if needed.
 ```js
-import { asToken, withDesign } from '@bodiless/fclasses';
+import { flowHoc, withDesign } from '@bodiless/fclasses';
 import { asBurgerMenu, withMenuDesign, withOverviewLink } from '@bodiless/navigation';
 
 import  { DemoMenuBase }  from  './Menu';
@@ -94,21 +94,21 @@ import  { DemoMenuBase }  from  './Menu';
 const $withOverviewLink = withOverviewLink('Demo Overview Link');
 
 // Create a Token that adds a custom overview link to all submenus.
-const $withBurgerMenuStyles = asToken(
+const $withBurgerMenuStyles = flowHoc(
   asBurgerMenu('List', 'Columns', 'Cards'),
   withMenuDesign(['List', 'Columns', 'Cards'])($withOverviewLink),
 );
 
 // We need to apply $withBurgerMenuStyles token to the `Menu` design key.
 // So lets create a top-level design token for the BM
-const $asDemoBurgerMenu = asToken(
+const $asDemoBurgerMenu = flowHoc(
   withDesign({
     Menu: $withBurgerMenuStyles,
   }),
 );
 
 // Finally we apply the top-level design token to the demo burger menu
-export const DemoBurgerMenu = asToken(
+export const DemoBurgerMenu = flowHoc(
   withBurgerMenuWrapper,
   $asDemoBurgerMenu,
 )(DemoMenuBase);
@@ -154,10 +154,10 @@ Burger Menu Toggler is a button that toggles burger menu visibility. It usually 
 
 There is a `BurgerMenuDefaultToggler` component exported by the `@bodiless/navigation`. It is a stylable component that toggles the burger menu visibility and its icon from `menu` when the burger menu is hidden to `close` when burger menu is visible.
 ```js
-import { asToken, withDesign, addClasses } from '@bodiless/fclasses';
+import { flowHoc, withDesign, addClasses } from '@bodiless/fclasses';
 import { BurgerMenuDefaultToggler } from '@bodiless/navigation';
 
-export const BurgerMenuToggler = asToken(
+export const BurgerMenuToggler = flowHoc(
   withDesign({
     Wrapper: addClasses(...), // `Fragment` by default.
     Button: addClasses(...), // `Button` by default
@@ -190,11 +190,11 @@ See [Styling Bodiless Menu](./Menu.md) for more information on styling Menus.
 By default, there are no layout or interaction styles added to the Burger menu, and it is rendered as a plain list. There is a `asBurgerMenu` helper that can be used to transform menu items with submenus into accordions. It accepts a list of submenu keys.
 
 ```js
-import { withDesign, asToken } from '@bodiless/fclasses';
+import { withDesign, flowHoc } from '@bodiless/fclasses';
 import { asBurgerMenu } from '@bodiless/navigation';
 
 // Create Menu Token
-const $withBurgerMenuStyles = asToken(
+const $withBurgerMenuStyles = flowHoc(
   // Transforms List, Columns and Cards submenus into accordions.
   // Columns submenus are also transformed into accordions.
   asBurgerMenu('List', 'Columns', 'Cards'),
@@ -210,7 +210,7 @@ export const $asDemoBurgerMenu = withDesign({
 You can use `withMenuDesign` to style the burger menu list the same way you would [style Bodiless Menu](./Menu.md). It is important to remember that If you transformed burger submenus into accordions with `asBurgerMenu()`, menu `Item`'s will have nested Accordion design keys:
 
 ```js
-import { withDesign, asToken, addClasses } from '@bodiless/fclasses';
+import { withDesign, flowHoc, addClasses } from '@bodiless/fclasses';
 import { asBurgerMenu } from '@bodiless/navigation';
 
 // Lets make accordion Labels bold.
@@ -225,7 +225,7 @@ const $withBoldAccordionTitle = withDesign({
 });
 
 // Create Menu token
-const $withBurgerMenuStyles = asToken(
+const $withBurgerMenuStyles = flowHoc(
   asBurgerMenu('List', 'Columns', 'Cards'),
   // Apply bold accordion title to all submenu types.
   withMenuDesign(['List', 'Columns', 'Cards'])($withBoldAccordionTitle),
@@ -240,7 +240,7 @@ export const $asDemoBurgerMenu = withDesign({
 #### Burger Menu Animations
 The Burger menu does not have any default animations configured. There is a `asSlideLeft` token exported by the package that adds a slide-in/slide-out transition to the burger menu.
 ```js
-import { withDesign, asToken, addClasses } from '@bodiless/fclasses';
+import { withDesign, flowHoc, addClasses } from '@bodiless/fclasses';
 import { asBurgerMenu, withMenuDesign, asSlideLeft } from '@bodiless/navigation';
 
 const $withBoldAccordionTitle = withDesign({
@@ -251,12 +251,12 @@ const $withBoldAccordionTitle = withDesign({
   }),
 });
 
-const $withBurgerMenuStyles = asToken(
+const $withBurgerMenuStyles = flowHoc(
   asBurgerMenu('List', 'Columns', 'Cards'),
   withMenuDesign(['List', 'Columns', 'Cards'])($withBoldAccordionTitle),
 );
 
-export const $asDemoBurgerMenu = asToken(
+export const $asDemoBurgerMenu = flowHoc(
   withDesign({
     Menu: $withBurgerMenuStyles,
   }),
@@ -268,7 +268,7 @@ export const $asDemoBurgerMenu = asToken(
 ### Burger Menu Example
 Here is the complete example of the demo burger menu with custom overview link and bold accordion titles:
 ```js
-import { withDesign, asToken, addClasses } from '@bodiless/fclasses';
+import { withDesign, flowHoc, addClasses } from '@bodiless/fclasses';
 import {
   withOverviewLink, asBurgerMenu, withMenuDesign, asSlideLeft,
   withBurgerMenuWrapper, withMenuTitleEditors,
@@ -292,7 +292,7 @@ const $withBoldAccordionTitle = withDesign({
 const $withTitleEditors = withMenuTitleEditors();
 
 // Compose Menu Token
-const $withBurgerMenuStyles = asToken(
+const $withBurgerMenuStyles = flowHoc(
   asBurgerMenu('List', 'Columns', 'Cards'),
   withMenuDesign()($withTitleEditors),
   withMenuDesign(['List', 'Columns', 'Cards'])(
@@ -302,7 +302,7 @@ const $withBurgerMenuStyles = asToken(
 );
 
 // Compose Burger Menu Design Token
-const $asDemoBurgerMenu = asToken(
+const $asDemoBurgerMenu = flowHoc(
   withDesign({
     Menu: $withBurgerMenuStyles,
   }),
@@ -310,7 +310,7 @@ const $asDemoBurgerMenu = asToken(
 );
 
 // Create Burger Menu Component
-export const DemoBurgerMenu = asToken(
+export const DemoBurgerMenu = flowHoc(
   withBurgerMenuWrapper,
   $asDemoBurgerMenu,
 )(DemoMenuBase);

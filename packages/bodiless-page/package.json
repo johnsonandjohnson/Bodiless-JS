@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/page",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "BodilessJS page operations",
   "author": "Guilherme Zeni <gzeni@its.jnj.com>",
   "license": "Apache-2.0",
@@ -31,10 +31,10 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/components": "^0.3.6",
-    "@bodiless/core": "^0.3.6",
-    "@bodiless/fclasses": "^0.3.6",
-    "@bodiless/ui": "^0.3.6",
+    "@bodiless/components": "^0.3.7",
+    "@bodiless/core": "^0.3.7",
+    "@bodiless/fclasses": "^0.3.7",
+    "@bodiless/ui": "^0.3.7",
     "axios": "^0.21.0",
     "informed": "^3.34.0",
     "lodash": "^4.17.19",

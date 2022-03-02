@@ -15,7 +15,7 @@
 import {
   withDesignAt,
   TokenDef,
-  asToken,
+  flowHoc,
   HOC,
 } from '@bodiless/fclasses';
 
@@ -79,14 +79,14 @@ const withMenuDesign = (
   // Make sure depths take precidence.
   // For example withMenuDesign(Main, 1) will not do anything.
   if (keys$.includes('Main') && depths$.includes(0)) {
-    return asToken(
+    return flowHoc(
       {},
       ...tokenDefs,
-      withDesignAt(...submenuDesignPaths)(asToken({}, ...tokenDefs)),
+      withDesignAt(...submenuDesignPaths)(flowHoc({}, ...tokenDefs)),
     );
   }
 
-  return withDesignAt(...submenuDesignPaths)(asToken({}, ...tokenDefs));
+  return withDesignAt(...submenuDesignPaths)(flowHoc({}, ...tokenDefs));
 };
 
 export default withMenuDesign;

@@ -14,7 +14,7 @@
 
 import React, { FC } from 'react';
 // import { observable, action } from 'mobx';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { mount } from 'enzyme';
 import flowRight from 'lodash/flowRight';
 import { withMenuOptions } from '../src/PageContextProvider';

@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { asToken, addProps } from '@bodiless/fclasses';
+import { flowHoc, addProps } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
 // @ts-ignore Could not find a declaration file
 import resolvedConfigs from
@@ -29,7 +29,7 @@ const snapData = getSnapFrom(
 
 const withProductStrictSnapSize = addProps({ snapData });
 
-const ProductListingFlowContainer = asToken(
+const ProductListingFlowContainer = flowHoc(
   asFilterableProductContainer,
   withProductStrictSnapSize,
   withProductVariations,

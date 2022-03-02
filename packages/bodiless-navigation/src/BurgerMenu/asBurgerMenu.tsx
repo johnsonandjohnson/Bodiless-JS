@@ -17,7 +17,7 @@ import isEmpty from 'lodash/isEmpty';
 import { useNode, withDefaultContent } from '@bodiless/core';
 import { asAccordionWrapper, asAccordionTitle, asAccordionBody } from '@bodiless/accordion';
 import {
-  Fragment, withDesign, replaceWith, asToken, addProps, HOC, flowIf, startWith,
+  Fragment, withDesign, replaceWith, flowHoc, addProps, HOC, flowIf, startWith,
 } from '@bodiless/fclasses';
 import { LinkData } from '@bodiless/components';
 import BurgerMenuClean from './BurgerMenuClean';
@@ -77,13 +77,13 @@ const withOverviewLink = (
   );
 };
 
-const withBurgerMenuSchema = asToken(
+const withBurgerMenuSchema = flowHoc(
   asAccordionWrapper,
   withOverviewLink(),
   withDesign({
     Wrapper: asAccordionBody,
     OuterWrapper: withDesign({
-      Title: asToken(asAccordionTitle, withDisabledTitleLink),
+      Title: flowHoc(asAccordionTitle, withDisabledTitleLink),
     }),
   }),
 );
@@ -95,7 +95,7 @@ const withBurgerMenuSchema = asToken(
  *
  * @return Original component wrapped in the burger menu chrome with 'Menu' design key.
  */
-const withBurgerMenuWrapper: HOC = Component => asToken(
+const withBurgerMenuWrapper: HOC = Component => flowHoc(
   replaceWith(BurgerMenuClean),
   withDesign({
     Menu: replaceWith(Component),
@@ -110,7 +110,7 @@ const withBurgerMenuWrapper: HOC = Component => asToken(
  *
  * @return HOC that applies default burger menu styles based on provided keys.
  */
-const asBurgerMenu = (...keys: string[]) => asToken(
+const asBurgerMenu = (...keys: string[]) => flowHoc(
   // We need to replace Card with the MenuTitle in burger menu.
   keys.includes('Cards')
     ? withMenuDesign('Cards')(withDesign({ Title: startWith(MenuTitle) }))

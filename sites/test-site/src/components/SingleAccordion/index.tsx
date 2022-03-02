@@ -18,7 +18,7 @@ import {
   withDisableExpandOnClick,
 } from '@bodiless/accordion';
 import { withNode } from '@bodiless/core';
-import { withDesign, asToken } from '@bodiless/fclasses';
+import { withDesign, flowHoc } from '@bodiless/fclasses';
 import {
   asSingleAccordionDefaultStyle,
   asAccordionTitleBordered,
@@ -27,11 +27,11 @@ import {
 } from './token';
 import { withEditorSimple, withEditorBasic } from '../Editors';
 
-const asSingleAccordion = asToken(
+const asSingleAccordion = flowHoc(
   withNode,
   withDesign({
     Title: withDesign({
-      Label: asToken(
+      Label: flowHoc(
         withEditorSimple('title', 'Accordion Title'),
         withDisableExpandOnClick,
       ),
@@ -47,17 +47,17 @@ const asSingleAccordion = asToken(
   asTestableAccordion,
 );
 
-const asSingleAccordionTitleBordered = asToken(
+const asSingleAccordionTitleBordered = flowHoc(
   asSingleAccordion,
   asAccordionTitleBordered,
 );
 
-const asSingleAccordionBorderedOnFocus = asToken(
+const asSingleAccordionBorderedOnFocus = flowHoc(
   asSingleAccordion,
   asAccordionBorderedOnFocus,
 );
 
-const asSingleAccordionNonExpanding = asToken(
+const asSingleAccordionNonExpanding = flowHoc(
   asSingleAccordion,
   asAccordionNonExpanding,
 );

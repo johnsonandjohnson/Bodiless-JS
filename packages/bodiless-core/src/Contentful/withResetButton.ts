@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { asToken, HOC } from '@bodiless/fclasses';
+import { flowHoc, HOC } from '@bodiless/fclasses';
 import {
   withContextActivator,
   withLocalContextMenu,
@@ -56,7 +56,7 @@ const useMenuOptions = (menuOptionWithNodeKey?: MenuOptionWithNodeKey) => () => 
   return menuOptions;
 };
 
-const withResetButton = (menuOptionWithNodeKey?: MenuOptionWithNodeKey): HOC => asToken(
+const withResetButton = (menuOptionWithNodeKey?: MenuOptionWithNodeKey): HOC => flowHoc(
   withLocalContextMenu,
   withContextActivator('onClick'),
   withMenuOptions({

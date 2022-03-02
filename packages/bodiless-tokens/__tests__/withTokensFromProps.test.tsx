@@ -18,7 +18,7 @@ import { mount } from 'enzyme';
 import type { HTMLProps } from 'react';
 import { v4 } from 'uuid';
 import {
-  ComponentOrTag, HOC, asToken, Tag,
+  ComponentOrTag, HOC, flowHoc, Tag,
 } from '@bodiless/fclasses';
 import { withTokensFromProps } from '../src';
 
@@ -60,7 +60,7 @@ describe('withTokensFromProps', () => {
   it('updates tokens when wrapped in withRandomKey', () => {
     const token1 = createTestToken('data-token1');
     const token2 = createTestToken('data-token2');
-    const Test = asToken(
+    const Test = flowHoc(
       withTokensFromProps,
       withRandomKey,
     )('span' as Tag);

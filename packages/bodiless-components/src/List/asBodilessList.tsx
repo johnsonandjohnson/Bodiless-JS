@@ -22,7 +22,7 @@ import flow from 'lodash/flow';
 import identity from 'lodash/identity';
 import {
   replaceWith, withDesign, DesignableComponentsProps, designable,
-  withoutProps, stylable, Design, asToken, Enhancer, HOC, Fragment, as, ComponentOrTag,
+  withoutProps, stylable, Design, flowHoc, Enhancer, HOC, Fragment, as, ComponentOrTag,
 } from '@bodiless/fclasses';
 
 import { useGetLinkHref } from '../Link';
@@ -122,7 +122,7 @@ const asBodilessList = (
   withListButtons(useOverrides),
   withDesign({
     Wrapper: replaceWith(Component),
-    Item: asToken(
+    Item: flowHoc(
       asDisabledListItem,
       withoutProps(['addItem', 'deleteItem', 'canDelete', 'unwrap']),
     ),
@@ -148,7 +148,7 @@ const passWrapperDesignToSubList = (SubList: ComponentType<SubListProps>) => {
 
     const newDesign = {
       ...restDesign,
-      Wrapper: asToken(
+      Wrapper: flowHoc(
         as(OuterWrapper || identity),
         withDesign<any>({
           List: Wrapper || identity,
@@ -182,7 +182,7 @@ const asSubList = (useOverrides?: UseListOverrides) => flow(
 const withSimpleSubListDesign = (depth: number) => (withDesign$: HOC): HOC => (
   depth === 0 ? identity
     : withDesign({
-      Item: asToken(
+      Item: flowHoc(
         withDesign$,
         withSimpleSubListDesign(depth - 1)(withDesign$),
       ),
@@ -197,7 +197,7 @@ const asStylableList = withDesign({
 });
 
 // @TODO: Should this be a part of asSubListWrapper?
-const asStylableSubList = asToken(
+const asStylableSubList = flowHoc(
   stylable,
   withDesign({
     OuterWrapper: stylable,

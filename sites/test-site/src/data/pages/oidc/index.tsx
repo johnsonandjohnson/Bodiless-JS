@@ -16,7 +16,7 @@ import React, { ComponentType } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
-  asToken, addClasses, H1 as H1$, Div, Button as ButtonBase,
+  flowHoc, addClasses, H1 as H1$, Div, Button as ButtonBase,
 } from '@bodiless/fclasses';
 import {
   User,
@@ -35,7 +35,7 @@ const withLogContext = (WrappedButton: ComponentType) => (props: any) => {
   return <WrappedButton {...props} onClick={() => console.log('AUTH CONTEXT:', context)} />;
 };
 
-const H1 = asToken(addClasses('pt-5'), asHeader1)(H1$);
+const H1 = flowHoc(addClasses('pt-5'), asHeader1)(H1$);
 const Description = addClasses('text-sm mb-2 italic')(Div);
 const Button = addClasses('py-2 px-4 mr-3 border border-gray-600')(ButtonBase);
 const UserWrapper = addClasses('p-4 border border-gray-600 max-w-md mx-auto my-4')(Div);

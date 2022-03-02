@@ -15,7 +15,7 @@
 import {
   withNode,
 } from '@bodiless/core';
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import {
   CarouselClean,
   asEditableCarousel,
@@ -36,13 +36,13 @@ import {
 
 export const CAROUSEL_NODE_KEY = 'slides';
 
-const Carousel = asToken(
+const Carousel = flowHoc(
   asEditableCarousel(CAROUSEL_NODE_KEY),
   withImageSlide,
   withNode,
 )(CarouselClean);
 
-const ChameleonCarousel = asToken(
+const ChameleonCarousel = flowHoc(
   asEditableCarousel(CAROUSEL_NODE_KEY),
   withCarouselDots(CAROUSEL_NODE_KEY),
   withDotStyles,

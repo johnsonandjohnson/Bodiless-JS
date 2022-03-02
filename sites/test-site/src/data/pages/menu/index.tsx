@@ -17,9 +17,9 @@ import { graphql } from 'gatsby';
 import Helmet from 'react-helmet';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
-  withDesign, asToken, addClasses, H1 as H1$, H2 as H2$, Ul, Div,
+  withDesign, flowHoc, addClasses, H1 as H1$, H2 as H2$, Ul, Div,
 } from '@bodiless/fclasses';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { useNode, withNode, withNodeKey } from '@bodiless/core';
 import {
   withBurgerMenuProvider, withOverviewLink, withMenuDesign,
@@ -41,7 +41,7 @@ const $withMenuOverviewLink = withMenuDesign(['List', 'Columns', 'Cards'])(
 
 const BurgerMenuProvider = withBurgerMenuProvider(Div) as ComponentType;
 
-const DemoMenu = asToken(
+const DemoMenu = flowHoc(
   withNodeKey({ nodeKey: 'DemoMenu' }),
   $withMenuOverviewLink,
   withDesign({
@@ -49,7 +49,7 @@ const DemoMenu = asToken(
   }),
 )(ResponsiveMenu);
 
-const DemoListMenu = asToken(
+const DemoListMenu = flowHoc(
   asBodilessMenu('demo-list-menu'),
   withListSubMenu(),
   asTopNav('Main', 'List'),
@@ -58,7 +58,7 @@ const DemoListMenu = asToken(
   withMenuDesign('List')($withBaseSubMenuStyles, $withListSubmenuStyles),
 )(Ul) as ComponentType<any>;
 
-const DemoListAndColumnsMenu = asToken(
+const DemoListAndColumnsMenu = flowHoc(
   asBodilessMenu('demo-list-and-columns-menu'),
   withListSubMenu(),
   withColumnSubMenu(),
@@ -71,7 +71,7 @@ const DemoListAndColumnsMenu = asToken(
 )(Ul) as ComponentType<any>;
 
 const BurgerMenuTogglerFullWidth = withDesign({
-  Wrapper: asToken(
+  Wrapper: flowHoc(
     asTealBackground,
     addClasses('w-full py-1'),
   ),
@@ -96,8 +96,8 @@ const NodeTreePrinter$ = observer(() => {
 });
 
 const NodeTreePrinter = withNode(NodeTreePrinter$);
-const H1 = asToken(addClasses('pt-5'), asHeader1)(H1$);
-const H2 = asToken(addClasses('pt-5'), asHeader2)(H2$);
+const H1 = flowHoc(addClasses('pt-5'), asHeader1)(H1$);
+const H2 = flowHoc(addClasses('pt-5'), asHeader2)(H2$);
 const Description = addClasses('text-sm mb-2 italic')(Div);
 const DataPreviewContainer = addClasses('overflow-scroll')(Div);
 const DescList = addClasses('list-disc ml-5')(Ul);

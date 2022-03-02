@@ -5,7 +5,7 @@ import { mount, shallow } from 'enzyme';
 import { identity, flow } from 'lodash';
 import {
   DesignableComponentsProps, Span, designable, Div, addClasses, removeClasses,
-  withDesign, HOC, asToken, flowIf, withoutProps,
+  withDesign, HOC, flowHoc, flowIf, withoutProps,
   asTokenSpec, as, extendMeta, $TokenSpec,
 } from '../src';
 
@@ -48,9 +48,9 @@ const asTestTokenSpec = asTokenSpec<TestComponents, typeof defaultDomains>(defau
 
 describe('extendMeta', () => {
   it('Merges categories properly', () => {
-    const foobar = asToken.meta.term('Foo')('Bar');
-    const foobaz = asToken.meta.term('Foo')('Baz');
-    const bingbang = asToken.meta.term('Bing')('Bang');
+    const foobar = flowHoc.meta.term('Foo')('Bar');
+    const foobaz = flowHoc.meta.term('Foo')('Baz');
+    const bingbang = flowHoc.meta.term('Bing')('Bang');
     const test = extendMeta(foobar, foobaz, bingbang);
     expect(test).toEqual({
       categories: {
@@ -60,7 +60,7 @@ describe('extendMeta', () => {
     });
   });
   // eslint-disable-next-line jest/expect-expect
-  it('Does not allow non-tokenmeta arguments', () => {
+  it('Does not allow non-token meta arguments', () => {
     // @ts-expect-error
     extendMeta({ Foo: 'Bar'});
     // @ts-expect-error
@@ -208,8 +208,8 @@ describe('extend', () => {
   });
 
   it('Combines metadata properly', () => {
-    const A = asTestTokenSpec({ Meta: asToken.meta.term('Foo')('Bar') });
-    const B = asTestTokenSpec({ Meta: asToken.meta.term('Foo')('Baz') });
+    const A = asTestTokenSpec({ Meta: flowHoc.meta.term('Foo')('Bar') });
+    const B = asTestTokenSpec({ Meta: flowHoc.meta.term('Foo')('Baz') });
     const C = asTestTokenSpec({ Meta: { title: 'Title' }});
     const Test = asTestTokenSpec(A, B, C);
     expect(Test).toEqual(asTestTokenSpec({

@@ -13,13 +13,8 @@
  */
 
 import React from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { mount, ReactWrapper } from 'enzyme';
-// eslint-disable-next-line import/no-extraneous-dependencies
-// import TestRenderer from 'react-test-renderer';
-import { act } from 'react-dom/test-utils';
+import { mount } from 'enzyme';
 import CommitsList from '../src/Git/CommitsList';
-// const { act } = TestRenderer;
 
 const mockedGitLogOutput = `
   hash 1

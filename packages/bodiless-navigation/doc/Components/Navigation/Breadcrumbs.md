@@ -27,11 +27,11 @@ import {
   withEditableFinalTrail,
   withMenuTitleEditors,
 } from '@bodiless/navigation';
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 
 import { $withBreadcrumbStyles } from './MenuBreadcrumbs.token';
 
-const $withBreadcrumbEditors = asToken(
+const $withBreadcrumbEditors = flowHoc(
   // First we specify what Editors we will use for the breadcrumb Items.
   // We use `withMenuTitleEditors` since Menu Titles and Breadcrumb Titles
   // have the same structure. `withMenuTitleEditors` comes with pre-configured
@@ -45,7 +45,7 @@ const $withBreadcrumbEditors = asToken(
   withEditableFinalTrail(),
 );
 
-const Breadcrumbs = asToken(
+const Breadcrumbs = flowHoc(
   // `asBreadcrumbs` allows to retreive Breadcrumb Items from the store and
   // pass it as an `item` prop to the `BreadcrumbsClean` component.
   asBreadcrumbs,
@@ -140,11 +140,11 @@ import {
   withEditableFinalTrail,
   withMenuTitleEditors,
 } from '@bodiless/navigation';
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 
 import { $withBreadcrumbStyles } from './MenuBreadcrumbs.token';
 
-const $withBreadcrumbEditors = asToken(
+const $withBreadcrumbEditors = flowHoc(
   withMenuTitleEditors(undefined, asReadOnly),
   withEditableStartingTrail(undefined, { nodeCollection: 'site' }),
   withEditableFinalTrail(),
@@ -161,7 +161,7 @@ const withArrowSeparator = withDesign({
   Separator: addProps({ children: '>' }),
 });
 
-const $withBreadcrumbStyles = asToken(
+const $withBreadcrumbStyles = flowHoc(
   withDesign({
     Separator: addClasses('mx-1'),
     Wrapper: addClasses('inline-flex'),
@@ -170,7 +170,7 @@ const $withBreadcrumbStyles = asToken(
   withArrowSeparator,
 );
 
-const Breadcrumbs = asToken(
+const Breadcrumbs = flowHoc(
   asBreadcrumbs,
   $withBreadcrumbEditors,
   $withBreadcrumbStyles,

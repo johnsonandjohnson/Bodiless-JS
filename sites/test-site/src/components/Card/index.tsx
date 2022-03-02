@@ -24,7 +24,7 @@ import {
   asTestableCard,
 } from '@bodiless/card';
 import {
-  withDesign, startWith, asToken,
+  withDesign, startWith, flowHoc,
 } from '@bodiless/fclasses';
 import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import {
@@ -37,17 +37,17 @@ import {
   withEditorSimple,
 } from '../Editors';
 
-export const withCardEditors = asToken(
+export const withCardEditors = flowHoc(
   withDesign({
     Image: asEditableImage('image'),
-    ImageLink: asToken(
+    ImageLink: flowHoc(
       withSidecarNodes(
         asEditableLink('link'),
       ),
       startWith(GatsbyLink),
     ),
     Title: withEditorSimple('title', 'Card Title Text'),
-    Link: asToken(
+    Link: flowHoc(
       withEditorSimple('ctatext', 'CTA'),
       withSidecarNodes(
         asEditableLink('link', undefined, () => ({ groupLabel: 'CTA' })),
@@ -58,17 +58,17 @@ export const withCardEditors = asToken(
   }),
 );
 
-export const withMenuCardsEditors = asToken(
+export const withMenuCardsEditors = flowHoc(
   withDesign({
     Image: asEditableImage('image'),
-    ImageLink: asToken(
+    ImageLink: flowHoc(
       withSidecarNodes(
         asEditableLink('link'),
       ),
       startWith(GatsbyLink),
     ),
     Title: asEditable('text', 'Card Title'),
-    Link: asToken(
+    Link: flowHoc(
       asEditable('ctatext', 'CTA'),
       withSidecarNodes(
         asEditableLink('link', undefined, () => ({ groupLabel: 'CTA' })),
@@ -79,7 +79,7 @@ export const withMenuCardsEditors = asToken(
   }),
 );
 
-const withEmptyContext = (name: string) => asToken(
+const withEmptyContext = (name: string) => flowHoc(
   withContextActivator('onClick'),
   withMenuOptions({
     name,
@@ -91,23 +91,23 @@ const withEmptyContext = (name: string) => asToken(
 
 export const withCardResetButtons = withDesign({
   ImageLink: withResetButton({ nodeKey: ['image', 'link'] }),
-  Title: asToken(
+  Title: flowHoc(
     withEmptyContext('Title'),
     withResetButton({ nodeKey: 'title' }),
   ),
-  Body: asToken(
+  Body: flowHoc(
     withEmptyContext('Body'),
     withResetButton({ nodeKey: 'body' }),
   ),
   Link: withResetButton({ nodeKey: ['link', 'ctatext'] }),
 });
 
-export const asEditableCard = asToken(
+export const asEditableCard = flowHoc(
   withCardEditors,
   asTestableCard,
 );
 
-export const asContentfulCard = (content: object) => asToken(
+export const asContentfulCard = (content: object) => flowHoc(
   withCardEditors,
   withCardResetButtons,
   withDefaultContent(content),

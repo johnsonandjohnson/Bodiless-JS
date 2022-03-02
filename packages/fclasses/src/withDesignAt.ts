@@ -57,7 +57,7 @@ const withDesignAtSingle = <C extends DesignableComponents = DesignableComponent
  * ```
  * is the same as:
  * ```js
- * asToken(
+ * flowHoc(
  *   withDesign({
  *     A: myToken,
  *   }),
@@ -76,7 +76,7 @@ const withDesignAtSingle = <C extends DesignableComponents = DesignableComponent
  * is the same as
  * ```
  * withDesignAt(['A'])(
- *   asToken(withDesign(myDesign), myTokenMeta)
+ *   flowHoc(withDesign(myDesign), myTokenMeta)
  * )
  * ```
  * Here, `myDesign` is a design object, not a function, eg:

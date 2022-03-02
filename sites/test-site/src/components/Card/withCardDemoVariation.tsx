@@ -16,7 +16,7 @@ import { withTokenEditorFlowContainerItem } from '@bodiless/tokens';
 import type { TokenEditorComponentDef } from '@bodiless/tokens';
 
 import {
-  withDesign, addProps, HOC, asToken,
+  withDesign, addProps, HOC, flowHoc,
 } from '@bodiless/fclasses';
 import { CardComponents, CardClean } from '@bodiless/card';
 import { asEditableCard } from '.';
@@ -45,7 +45,7 @@ const def = {
 };
 
 // @ts-ignore
-export default asToken(
+export default flowHoc(
   withTokenEditorFlowContainerItem(def, tokenPanelStyles),
   withDesign({
     Card: withTokenEditorStyles,

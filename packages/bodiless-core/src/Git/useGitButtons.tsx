@@ -125,7 +125,7 @@ const formGitReset = (client: GitClient) => contextMenuForm({
 const defaultClient = new BodilessBackendClient();
 
 const getMenuOptions = (
-  client: GitClient = defaultClient,
+  client: GitClient,
   context: any,
   notifyOfChanges: ChangeNotifier,
 ): TMenuOption[] => {

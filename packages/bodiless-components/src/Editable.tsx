@@ -16,7 +16,7 @@ import React, {
   ClipboardEvent, useState, useRef, useCallback, FC,
 } from 'react';
 import ContentEditable from 'react-contenteditable';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import pickBy from 'lodash/pickBy';
 import identity from 'lodash/identity';
 import {
@@ -28,7 +28,7 @@ import {
   withNodeKey,
 } from '@bodiless/core';
 import './Editable.css';
-import { HOC, asToken } from '@bodiless/fclasses';
+import { HOC, flowHoc } from '@bodiless/fclasses';
 
 type EditableOverrides = {
   sanitizer?: (text: string) => string,
@@ -128,7 +128,7 @@ const asEditable = (
 ): HOC<{}, EditableProps> => Component => {
   // @TODO: Use withChild.
   const useOverrides = useOverrides$ || (() => ({}));
-  const EditableChild = asToken(
+  const EditableChild = flowHoc(
     withPlaceholder(placeholder),
     withNodeKey(nodeKeys),
   )(Editable);

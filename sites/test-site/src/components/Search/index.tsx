@@ -14,7 +14,7 @@
 
 import { ComponentType } from 'react';
 import pick from 'lodash/pick';
-import { withDesign, replaceWith, asToken } from '@bodiless/fclasses';
+import { withDesign, replaceWith, flowHoc } from '@bodiless/fclasses';
 import { withResponsiveVariants } from '@bodiless/components';
 import {
   SearchBox as SearchBoxClean,
@@ -31,21 +31,21 @@ import {
 
 const breakpoints = pick(allBreakpoints, 'lg');
 
-const asResponsiveSearch = (DesktopSearch: ComponentType) => asToken(
+const asResponsiveSearch = (DesktopSearch: ComponentType) => flowHoc(
   withResponsiveVariants({ breakpoints }),
   // Note, it's important to apply responsive CSS to the 2 search components in order to
   // avoid flicker on the static site. The search for the inactive breakpoint
   // is rendered during SSR and unmounted as a side effect after rehydration.
   withDesign({
     _default: withDesign({ Wrapper: asMobileOnly }),
-    lg: asToken(replaceWith(DesktopSearch), asDesktopOnly),
+    lg: flowHoc(replaceWith(DesktopSearch), asDesktopOnly),
   }),
 );
 
-export const SimpleSearchResult = asToken(asSimpleSearchResult)(SearchResultClean);
+export const SimpleSearchResult = flowHoc(asSimpleSearchResult)(SearchResultClean);
 export const InlineSearchBox = asInlineSearch(SearchBoxClean);
 export const SimpleSearchBox = asSimpleSearch(SearchBoxClean);
-export const ResponsiveSearchBox = asToken(
+export const ResponsiveSearchBox = flowHoc(
   asResponsiveSearchStyles,
   asResponsiveSearch(SimpleSearchBox),
 )(ResponsiveSearchBoxClean);

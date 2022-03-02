@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import withCardVariations from './withCardVariations';
 import withContentfulCards from './withContentfulCards';
 import withRichTextVariations from './withRichTextVariations';
@@ -28,7 +28,7 @@ import withCuratorVariations from './withCuratorVariations';
 
 // Order of includes currently dictates order in Component Picker
 // thus recommend putting more frequently used components toward top for quicker access.
-const withDefaultVariations = asToken(
+const withDefaultVariations = flowHoc(
   withRichTextVariations,
   withTableVariations,
   withImageVariations,

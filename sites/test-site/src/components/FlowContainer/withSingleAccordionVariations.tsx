@@ -19,14 +19,14 @@ import {
   varyDesign,
   replaceWith,
   withDesign,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 
 import { SingleAccordion } from '../SingleAccordion';
 import { withType } from './Categories';
 
 const singleAccordionVariation = {
-  SingleAccordionBasic: asToken(
+  SingleAccordionBasic: flowHoc(
     replaceWith(SingleAccordion),
     withType('Accordion')(),
     withTitle('Single Accordion'),

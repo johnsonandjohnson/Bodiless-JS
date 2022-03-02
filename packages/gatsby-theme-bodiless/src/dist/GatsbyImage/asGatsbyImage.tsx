@@ -32,7 +32,7 @@ import {
   withoutProps,
   designable,
   HOC,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import type { ImageData } from '@bodiless/components';
 import type {
@@ -228,7 +228,7 @@ const asDesignableGatsbyImage = (ImageComponent: CT<any>) => {
 
 const withActivatorWrapperDefaultStyles = addClasses('bl-w-full');
 
-const asGatsbyImage = asToken(
+const asGatsbyImage = flowHoc(
   // @todo this cast should not be necessary.
   asDesignableGatsbyImage as HOC,
   withDesign({

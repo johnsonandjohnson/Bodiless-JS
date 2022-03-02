@@ -13,7 +13,7 @@
  */
 
 import React, { FC, ComponentType } from 'react';
-import { withoutProps, asToken, HOC } from '@bodiless/fclasses';
+import { withoutProps, flowHoc, HOC } from '@bodiless/fclasses';
 import { useChameleonContext } from './withChameleonContext';
 
 /**
@@ -49,7 +49,7 @@ const applyChameleon: HOC = Component => {
     const ActiveComponent = React.useMemo(() => apply(Component), [activeComponent]);
     return <ActiveComponent {...props} />;
   };
-  return asToken(
+  return flowHoc(
     withoutProps('design'),
   )(Chameleon) as ComponentType<any>;
 };

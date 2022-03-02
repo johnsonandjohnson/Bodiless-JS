@@ -13,7 +13,7 @@
  */
 
 import { getImageContentFrom } from '@bodiless/gatsby-theme-bodiless';
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import { CardClean } from '@bodiless/card';
 import { asContentfulCard } from '../../../Card';
 import { asCardDefaultStyle, asCardHorizontal } from '../../../Card/token';
@@ -30,7 +30,7 @@ const cardContent = {
   ctatext,
 };
 
-const WantToLearnMore = asToken(
+const WantToLearnMore = flowHoc(
   asContentfulCard(cardContent),
   asCardDefaultStyle,
   asCardHorizontal,

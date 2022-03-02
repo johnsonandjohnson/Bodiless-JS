@@ -21,7 +21,7 @@
 
 import React, { FC } from 'react';
 import {
-  HOC, ComponentOrTag, asToken, Enhancer, Injector, flowIf,
+  HOC, ComponentOrTag, flowHoc, Enhancer, Injector, flowIf,
 } from '../src';
 
 type BaseProps = {
@@ -97,8 +97,8 @@ describe('Enhancers', () => {
     const C1T3 = <C1 foo="foo" bar="bar" />;
   });
 
-  test('asToken propagates the type of an enhancer', () => {
-    const C4 = asToken(withToggle)(Base);
+  test('flowHoc propagates the type of an enhancer', () => {
+    const C4 = flowHoc(withToggle)(Base);
     const C4T1 = <C4 toggle foo="foo" bar="bar" />;
     // @ts-expect-error prop baz does not exist
     const C4T2 = <C4 toggle foo="foo" bar="bar" baz="baz" />;
@@ -165,8 +165,8 @@ describe('Composed token type inference', () => {
   const injector: Injector<Pick<BaseProps, 'foo'>> = () => () => null;
   const constrainer: HOC<BaseProps> = () => () => null;
 
-  test('asToken correctly infers types when composing all token types', () => {
-    const composed = asToken(
+  test('flowHoc correctly infers types when composing all token types', () => {
+    const composed = flowHoc(
       constrainer,
       enhancer,
       injector,

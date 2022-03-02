@@ -24,7 +24,7 @@ import {
 } from '@bodiless/core';
 
 import {
-  asToken,
+  flowHoc,
   withDesign,
   startWith,
 } from '@bodiless/fclasses';
@@ -62,15 +62,15 @@ const Foo1: FC<any> = () => {
 };
 Foo1.displayName = 'Foo1';
 const variants1 = {
-  foo1: asToken(
+  foo1: flowHoc(
     startWith(Foo1),
   ),
-  foo2: asToken(
+  foo2: flowHoc(
     startWith(() => <></>),
   ),
 };
 const variants2 = {
-  foo3: asToken(
+  foo3: flowHoc(
     startWith(() => (<span>V3</span>)),
     withType('Type v3')(),
     withTitle('Title v3'),
@@ -121,13 +121,13 @@ describe('withLibraryComponents', () => {
 
   it('keeps design added from other FC design variants.', () => {
     const design$a = {
-      foo1: asToken(),
-      foo2: asToken(),
+      foo1: flowHoc(),
+      foo2: flowHoc(),
     };
     const design$b = {
-      foo3: asToken(),
+      foo3: flowHoc(),
     };
-    const ComponentWithLibrary = asToken(
+    const ComponentWithLibrary = flowHoc(
       withDesign(design$a),
       withLibraryComponents(undefined, '_default'),
       withDesign(design$b),
@@ -145,7 +145,7 @@ describe('withLibraryComponents', () => {
       ComponentWrapper: CT<any>,
     };
 
-    const FlowContainerWithLibrary = asToken(
+    const FlowContainerWithLibrary = flowHoc(
       withNode,
       withLibraryComponents(['root', 'my_lib'], '_default'),
       withDesign(variants1),

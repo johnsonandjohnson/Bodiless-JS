@@ -13,7 +13,7 @@
  */
 
 import {
-  addClasses, addClassesIf, asToken, withDesign,
+  addClasses, addClassesIf, flowHoc, withDesign,
 } from '@bodiless/fclasses';
 
 import { useIsBurgerMenuVisible, useIsBurgerTransitionCompleted } from './BurgerMenuContext';
@@ -23,7 +23,7 @@ import {
 } from '../token';
 
 const withSlideInOutAnimation = withDesign({
-  Wrapper: asToken(
+  Wrapper: flowHoc(
     addClasses('transform -translate-x-full'),
     // Since Burger Menu is Hidden by default,
     // we can not use useIsBurgerMenuHidden to add 'animate-slide-out'
@@ -36,7 +36,7 @@ const withSlideInOutAnimation = withDesign({
 });
 
 const asFullScreen = withDesign({
-  Wrapper: asToken(
+  Wrapper: flowHoc(
     withFullWidthStyles,
     withFullHeightStyles,
     withNoInsetStyles,
@@ -57,7 +57,7 @@ const withDefaultBackground = withDesign({
  * @return HOC that adds styles to the Button component.
  */
 const withBurgerMenuTogglerStyles = withDesign({
-  Button: asToken(
+  Button: flowHoc(
     withMaterialIconsFont,
     withPointerCursorStyles,
   ),
@@ -77,7 +77,7 @@ const withDisabledTitleLink = withDesign({
  *
  * @return HOC that applies required styles for slide-in animation.
  */
-const asSlideLeft = asToken(
+const asSlideLeft = flowHoc(
   withSlideInOutAnimation,
   asFullScreen,
   withDefaultBackground,

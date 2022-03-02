@@ -29,7 +29,7 @@ import {
   addClasses,
   addProps,
   flowIf,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import { flowRight } from 'lodash';
 import Layout from '../../../components/Layout';
@@ -42,7 +42,7 @@ import {
 // Note: it will work only for videos with own published Subtitles
 // Auto-generated Subtitles won't be shown
 // see: https://support.google.com/youtube/forum/AAAAiuErobUlyT60UUHtHE
-const withShownCaptions = asToken(
+const withShownCaptions = flowHoc(
   addProps({
     src: 'https://www.youtube.com/embed/9No-FiEInLA',
   }),
@@ -136,7 +136,7 @@ const StopButton = flowRight(
 )(YouTubeButton);
 
 const YouTubeWithJSApi = withDesign({
-  Item: asToken(
+  Item: flowHoc(
     addProps({ id: JS_API_IFRAME_ID }),
     withYTPlayer(JS_API_IFRAME_ID),
     withJSApi,
@@ -161,7 +161,7 @@ const YouTubeWithRelatedVideos = withDesign({
   Item: withRelatedVideos,
 })(DefaultReponsive16By9YouTube);
 
-const withCustomLangPref = asToken(
+const withCustomLangPref = flowHoc(
   addProps({
     src: 'https://www.youtube.com/embed/9No-FiEInLA',
   }),

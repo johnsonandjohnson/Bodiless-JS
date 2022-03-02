@@ -17,7 +17,7 @@
 import React, {
   FC, createContext, useContext, useEffect, useCallback,
 } from 'react';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 
 import ContextMenu from './ContextMenu';
 import { useEditContext } from '../hooks';
@@ -49,6 +49,7 @@ const GlobalContextMenu: FC<Props> = observer(() => {
   const options = contextMenuOptions.filter(
     (op: TMenuOption) => op.global !== false,
   );
+
   return (
     <Menu options={options} isPositionToggled={isPositionToggled} />
   );
@@ -93,7 +94,9 @@ const PageEditor: FC<Props> = ({ children, ui }) => {
     getMenuOptions,
     name: 'Editor',
   });
-  useEffect(() => { if (!context.isActive) context.activate(); }, []);
+  useEffect(() => {
+    if (!context.isActive) context.activate();
+  }, []);
 
   return (
     <uiContext.Provider value={newUI}>

@@ -17,7 +17,7 @@ import {
   addClasses,
   addClassesIf,
   removeClasses,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import {
   isAccordionExpanded,
@@ -33,11 +33,11 @@ import {
   asTextColorPrimary,
 } from '../Elements.token';
 
-const asSingleAccordionDefaultStyle = asToken(
+const asSingleAccordionDefaultStyle = flowHoc(
   withDesign({
-    Wrapper: asToken(asBlockItem, asTextColorPrimary),
+    Wrapper: flowHoc(asBlockItem, asTextColorPrimary),
     Title: withDesign({
-      Wrapper: asToken(
+      Wrapper: flowHoc(
         addClassesIf(isAccordionExpanded)('bg-gray-400'),
         addClassesIf(isAccordionContracted)('bg-gray-200'),
         addClasses('p-3'),
@@ -46,24 +46,24 @@ const asSingleAccordionDefaultStyle = asToken(
       Icon: asAccordionIconSvg,
     }),
     Body: withDesign({
-      Wrapper: asToken(
+      Wrapper: flowHoc(
         addClasses('p-3 border border-solid border-gray-200'),
       ),
     }),
   }),
 );
 
-const asAccordionTitleBordered = asToken(
+const asAccordionTitleBordered = flowHoc(
   asSingleAccordionDefaultStyle,
   asAccordionBorder,
 );
 
-const asAccordionBorderedOnFocus = asToken(
+const asAccordionBorderedOnFocus = flowHoc(
   asSingleAccordionDefaultStyle,
   // Resets border classes from accordion default style
   withDesign({
     Body: withDesign({
-      Wrapper: asToken(
+      Wrapper: flowHoc(
         removeClasses('border border-solid border-gray-200'),
       ),
     }),
@@ -71,7 +71,7 @@ const asAccordionBorderedOnFocus = asToken(
   asAccordionFocus,
 );
 
-const asAccordionNonExpanding = asToken(
+const asAccordionNonExpanding = flowHoc(
   asSingleAccordionDefaultStyle,
   asNonExpandingAccordion,
 );

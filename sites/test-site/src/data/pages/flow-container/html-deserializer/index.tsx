@@ -21,7 +21,7 @@ import {
   Textarea as BaseTextArea,
   addClasses,
   addProps,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import {
   createDefaultDeserializers as createDefaultRTEDeserializers,
@@ -41,7 +41,7 @@ import Layout from '../../../../components/Layout';
 import { FlowContainerDefault } from '../../../../components/FlowContainer';
 
 const H3 = addClasses('text-xl font-bold mt-4')(BaseH3);
-const TextArea = asToken(
+const TextArea = flowHoc(
   addProps({
     rows: 10,
     cols: 100,
@@ -62,7 +62,7 @@ const fcDeserializers = [
   },
 ] as Deserializer[];
 
-const ContentfulFlowContainer = asToken(
+const ContentfulFlowContainer = flowHoc(
   withFlowContainerDefaultHtml(fcDeserializers),
   withResetButton(),
   withNode,

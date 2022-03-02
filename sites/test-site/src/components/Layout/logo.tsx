@@ -22,7 +22,7 @@ import {
   replaceWith,
   withDesign,
   addProps,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import { asEditableImagePlain as asEditableImage } from '../Image';
@@ -60,11 +60,11 @@ const LogoClean: FC<Props> = ({ components }) => {
 // Override asEditableImage nodekey to store in site nodeCollection.
 const LogoImg = asEditableImage({ nodeKey: 'image', nodeCollection: 'site' })(Img);
 
-const asLogo = asToken(
+const asLogo = flowHoc(
   designable(logoComponents, 'Logo'),
   withDesign({
     SiteLogo: replaceWith(LogoImg),
-    SiteLink: asToken(
+    SiteLink: flowHoc(
       withSidecarNodes(
         asEditableLink({ nodeKey: 'logolink', nodeCollection: 'site' }),
       ),

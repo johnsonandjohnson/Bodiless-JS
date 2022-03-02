@@ -15,7 +15,7 @@
 import { ComponentType } from 'react';
 import { withChild, withNodeKey } from '@bodiless/core';
 import {
-  addClasses, withoutProps, asToken, addProps, HOC,
+  addClasses, withoutProps, flowHoc, addProps, HOC,
 } from '@bodiless/fclasses';
 
 const withPlaceholder = (
@@ -23,9 +23,9 @@ const withPlaceholder = (
 ): HOC|undefined => (placeholder === undefined ? undefined : addProps({ placeholder }));
 
 const withEditor = (Editor:ComponentType<any>) => (nodeKey?: string, placeholder?: string) => (
-  asToken(
+  flowHoc(
     addClasses('overflow-hidden'),
-    withChild(asToken(
+    withChild(flowHoc(
       withPlaceholder(placeholder),
       withNodeKey(nodeKey),
       withoutProps(['design']),

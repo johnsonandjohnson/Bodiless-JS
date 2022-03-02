@@ -27,6 +27,11 @@ import {
   BASE_PATH_FIELD_NAME,
   PAGE_URL_FIELD_NAME,
   PAGE_URL_INVALID_MESSAGE,
+  PAGE_URL_NOT_ALLOWED_EMPTY_FIELD,
+  PAGE_URL_NOT_ALLOWED_SPACES,
+  PATTERN_HAS_SPACES,
+  PATTERN_PAGE_PATH,
+  PATTERN_PAGE_URL,
 } from './constants';
 import type {
   FieldValidate,
@@ -56,18 +61,16 @@ const useBasePathField = () => {
 
 const isEmptyValue = (value : FormValue) => Boolean(value) === false;
 
-const validateEmptyField = (value: FormValue) => (isEmptyValue(value)
-  ? 'Field can not be empty'
-  : undefined
+const validateEmptyField = (value: FormValue) => (
+  isEmptyValue(value) ? PAGE_URL_NOT_ALLOWED_EMPTY_FIELD : undefined
 );
 
-const pagePathReg = /^[a-z0-9](?:[_-]?[a-z0-9]+)*$/;
 const pagePathvalidate = (url: string) => {
   const hasInvalidParts = url.split('/').filter(item => {
     if (item === '') {
       return false;
     }
-    if (!RegExp(pagePathReg).test(item)) {
+    if (!RegExp(PATTERN_PAGE_PATH).test(item)) {
       return true;
     }
     return false;
@@ -78,7 +81,7 @@ const pagePathvalidate = (url: string) => {
 const validatePageUrl = (
   value: FormValue,
 ) => (
-  typeof value === 'string' && (pagePathvalidate(value) || !RegExp(/^[a-z0-9_/-]+$/).test(value))
+  typeof value === 'string' && (pagePathvalidate(value) || !RegExp(PATTERN_PAGE_URL).test(value))
     ? PAGE_URL_INVALID_MESSAGE
     : undefined
 );
@@ -86,22 +89,29 @@ const validatePageUrl = (
 const validatePagePath = (
   value: FormValue,
 ) => (
-  typeof value === 'string' && !RegExp(pagePathReg).test(value)
+  typeof value === 'string' && !RegExp(PATTERN_PAGE_PATH).test(value)
     ? PAGE_URL_INVALID_MESSAGE
     : undefined
 );
 
-const getPageUrlValidator = (validate?: FieldValidate) => (
-  value: FormValue, values: FormValues,
-) => validateEmptyField(value)
-    || validatePageUrl(value)
-    || (validate && validate(value, values));
+const validatePageSimple = (
+  value: FormValue,
+) => (
+  typeof value === 'string' && RegExp(PATTERN_HAS_SPACES).test(value)
+    ? PAGE_URL_NOT_ALLOWED_SPACES
+    : undefined
+);
 
-const getPagePathValidator = (validate?: FieldValidate) => (
-  value: FormValue, values: FormValues,
-) => validateEmptyField(value)
-    || validatePagePath(value)
-    || (validate && validate(value, values));
+const getPageUrlValidator = (
+  validate?: FieldValidate,
+  required?: boolean,
+  simpleValidation?: boolean,
+) => (value: FormValue, values: FormValues) => (
+  (required && validateEmptyField(value))
+  || (simpleValidation && validatePageSimple(value))
+  || (!simpleValidation && validatePageUrl(value))
+  || (validate && validate(value, values))
+);
 
 const hasPageChild = async ({ pagePath, client }: any) => {
   const result = await handleBackendResponse(client.directoryChild(pagePath));
@@ -134,7 +144,6 @@ const getPathValue = (values: FormValues) => {
 
 export {
   fieldValueToUrl,
-  getPagePathValidator,
   getPageUrlValidator,
   getPathValue,
   hasPageChild,

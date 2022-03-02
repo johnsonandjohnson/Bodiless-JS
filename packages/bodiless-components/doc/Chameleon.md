@@ -124,7 +124,7 @@ as is used for the flow container):
 ```ts
 import { useChameleonSelectorForm } from '@bodiless/components-ui';
 
-const BasicChameleonWithComponentSelector = asToken(
+const BasicChameleonWithComponentSelector = flowHoc(
   asBodilessChameleon('selector-chameleon', undefined, useChameleonSelectorForm),
   withDesign(basicChameleonDesign),
 )(BaseComponent);
@@ -137,7 +137,7 @@ You can pass arguments to the component selector by adding or modifying props,
 for example:
 
 ```ts
-const BasicChameleonWithComponentSelector = asToken(
+const BasicChameleonWithComponentSelector = flowHoc(
   asBodilessChameleon('selector-chameleon', undefined, useChameleonSelectorForm),
   addProps({
     blacklistCategories: ['Color'],

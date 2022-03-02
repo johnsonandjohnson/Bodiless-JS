@@ -14,7 +14,7 @@
 
 import React, { FC, ComponentType } from 'react';
 import {
-  Div, H2, designable, H3, asToken,
+  Div, H2, designable, H3, flowHoc,
   withDesign, addProps, flowIf, replaceWith, HOC,
 } from '@bodiless/fclasses';
 import { FlowContainer } from '@bodiless/layouts-ui';
@@ -88,13 +88,13 @@ const withFlowContainerFirstItemNode = (
  *
  * Connects a token editor to token data.
  */
-const withTokenEditorData = (nodeKey?: WithNodeKeyProps) => asToken(
+const withTokenEditorData = (nodeKey?: WithNodeKeyProps) => flowHoc(
   withDesign({
-    Container: asToken(
+    Container: flowHoc(
       addProps({ maxComponents: 1, minComponents: 1 }),
       withNodeKey(DEMO_NODE_KEY),
     ),
-    Printer: asToken(
+    Printer: flowHoc(
       flowIf<TokenPrinterProps>(({ tokens = [] }) => tokens.length === 0)(
         replaceWith(() => <>No tokens selected.</>),
       ),

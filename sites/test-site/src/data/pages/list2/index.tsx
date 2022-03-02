@@ -17,7 +17,7 @@ import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { asBodilessList, asEditable, useListContext } from '@bodiless/components';
 import {
-  withDesign, replaceWith, Div, addClasses, H1, H3, flowIf, addProps, asToken,
+  withDesign, replaceWith, Div, addClasses, H1, H3, flowIf, addProps, flowHoc,
 } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
 // import { OuterList, OuterLinkList } from './OldListDemo';
@@ -27,17 +27,17 @@ import SimpleListDemo from './SimpleListDemo';
 import { asHeader1, asHeader3 } from '../../../components/Elements.token';
 import ListDesignTest from './ListDesignTest';
 
-const SuperSimpleList = asToken(
+const SuperSimpleList = flowHoc(
   asBodilessList('list0'),
   withDesign({
-    Title: asToken(
+    Title: flowHoc(
       replaceWith('span'),
       asEditable('text', 'Item'),
     ),
   }),
 )('ul');
 
-const ListWithPrependAndContextualStyles = asToken(
+const ListWithPrependAndContextualStyles = flowHoc(
   addProps({ prependItems: ['prepend', 'prepend-2'] }),
   withDesign({
     Title: flowIf(() => useListContext().currentItem === 'prepend')(

@@ -20,7 +20,7 @@ import { asEditable, withBodilessLinkToggle } from '@bodiless/components';
 import { asBodilessLink } from '@bodiless/components-ui';
 import { CardClean } from '@bodiless/card';
 import {
-  A, HOC, asToken, Fragment, designable, TokenDef,
+  A, HOC, flowHoc, Fragment, designable, TokenDef,
   withDesign, startWith, DesignableComponentsProps,
 } from '@bodiless/fclasses';
 
@@ -58,7 +58,7 @@ const MenuTitleComponents: MenuTitleComponents = {
  */
 const MenuTitle = designable(MenuTitleComponents, 'MenuTitle')(MenuTitleBase);
 
-const asMenuLink = (asEditableLink: typeof asBodilessLink) => asToken(
+const asMenuLink = (asEditableLink: typeof asBodilessLink) => flowHoc(
   withSidecarNodes(
     asEditableLink('link', undefined, () => ({ groupLabel: 'Menu Link' })),
   ),
@@ -70,7 +70,7 @@ const asMenuLink = (asEditableLink: typeof asBodilessLink) => asToken(
  */
 const withDefaultMenuTitleEditors = withDesign({
   Link: asMenuLink(withBodilessLinkToggle(asBodilessLink, startWith(A), true)),
-  Title: asToken(
+  Title: flowHoc(
     startWith(Fragment),
     asEditable('text', 'Menu Item'),
   ),
@@ -86,14 +86,14 @@ const withMenuTitleEditors = <P extends object>(
   withTitleEditors: HOC = withDefaultMenuTitleEditors,
   ...tokenDefs: TokenDef[]
 ) => withDesign({
-    Title: asToken(withTitleEditors, ...tokenDefs),
+    Title: flowHoc(withTitleEditors, ...tokenDefs),
   });
 
 /**
  * HOC that transforms component into MenuTitle with node and 'title' nodeKey.
  * MenuTitle has Link and Title design keys. Can be applied to the Title design key.
  */
-const asMenuTitle = asToken(
+const asMenuTitle = flowHoc(
   startWith(MenuTitle),
   withNode,
   withNodeKey('title'),
@@ -103,7 +103,7 @@ const asMenuTitle = asToken(
  * HOC that transforms component into Menu Card with node and 'title' nodeKey.
  * Can be applied to the Title design key.
  */
-const asMenuCard = asToken(
+const asMenuCard = flowHoc(
   startWith(CardClean),
   withNode,
   withNodeKey('title'),

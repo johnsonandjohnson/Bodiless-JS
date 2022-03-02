@@ -24,7 +24,7 @@ import {
   withContextActivator,
   withLocalContextMenu,
 } from '@bodiless/core';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import flow from 'lodash/flow';
 import CleanWrapper, { Props as WrapperProps } from './SortableResizableWrapper';
 

@@ -22,7 +22,7 @@ import {
   // withMultipleAllowedTags,
 } from '@bodiless/filtering';
 import {
-  addProps, asToken, withDesign, Fragment, replaceWith,
+  addProps, flowHoc, withDesign, Fragment, replaceWith,
 } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
 import { asFilterByGroupResponsive, asFilterByGroupDefaultStyle } from './token';
@@ -34,7 +34,7 @@ const suggestions = [
   new Tag('4', 'DefaultTag 4'),
 ];
 
-const asFilterByGroup = asToken(
+const asFilterByGroup = flowHoc(
   addProps({ suggestions }),
   addProps({ resetButtonText: 'Show All Products' }),
   asFilterByGroupResponsive,
@@ -44,13 +44,13 @@ const asFilterByGroup = asToken(
 
 const FilterByGroup = asFilterByGroup(FilterByGroupClean);
 
-const withSingleAllowedTagNoReset = asToken(
+const withSingleAllowedTagNoReset = flowHoc(
   addProps({
     multipleAllowedTags: false,
     resetButtonText: '',
   }),
   withDesign({
-    ResetButton: asToken(
+    ResetButton: flowHoc(
       replaceWith(Fragment),
     ),
     Filter: withFilterSelection(),

@@ -20,7 +20,7 @@ import {
   varyDesign,
   replaceWith,
   withDesign,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 
 import { ProductCard } from '../ProductCard';
@@ -28,7 +28,7 @@ import { ProductCard } from '../ProductCard';
 const withProductVariations = withFacet('Product');
 
 const productVariations = {
-  FilterableProductCardVariations: asToken(
+  FilterableProductCardVariations: flowHoc(
     replaceWith(ProductCard),
     withDesc('Filterable Product.\n'),
     withProductVariations('Filterable Product')(),

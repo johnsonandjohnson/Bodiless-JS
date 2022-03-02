@@ -21,7 +21,7 @@ import {
   useNode,
   withMenuOptions,
 } from '@bodiless/core';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 
 type Data = {
   float: string,

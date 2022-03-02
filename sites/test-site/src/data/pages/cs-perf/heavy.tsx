@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  asToken, addClasses, Div, addProps, startWith, varyDesigns, HOC, withDesign
+  flowHoc, addClasses, Div, addProps, startWith, varyDesigns, HOC, withDesign
 } from '@bodiless/fclasses';
 import type { FC, ReactNode } from 'react';
 import pick from 'lodash/pick';
@@ -12,20 +12,20 @@ const colors = ['red', 'blue', 'teal', 'green', 'yellow', 'purple', 'orange'];
 const createColorDesign = (prefix: string) => colors.reduce(
   (acc, next) => ({
     ...acc,
-    [`${prefix}${next}4`]: asToken(addClasses(`${prefix}-${next}-400`), asToken.meta.term(prefix)(`${prefix}-${next}`)),
+    [`${prefix}${next}4`]: flowHoc(addClasses(`${prefix}-${next}-400`), flowHoc.meta.term(prefix)(`${prefix}-${next}`)),
   }),
   {},
 );
-const Box = asToken(
+const Box = flowHoc(
   addClasses('w-12 h-12 p-2 border-2'),
 )(Div);
 
 const createTextDesign = (n: number) => {
   const design: any = {};
   for (let i = 0; i < n; i += 1) {
-    design[`Text${i}`] = asToken(
+    design[`Text${i}`] = flowHoc(
       addProps({ children: `Foo ${i}` }),
-      asToken.meta.term('Copy')(`${i}`),
+      flowHoc.meta.term('Copy')(`${i}`),
     );
   }
   return design;
@@ -52,7 +52,7 @@ export const withPrunedDesign: HOC = Component => {
   return WithPrunedDesign;
 };
 
-export const createHeavyFlowContainer = (n: number = 1) => asToken(
+export const createHeavyFlowContainer = (n: number = 1) => flowHoc(
   // withPrunedDesign,
   withDesign(heavyDesign),
   withNodeKey(`fc-${n}`),
@@ -63,7 +63,7 @@ export const createHeavyFlowContainer = (n: number = 1) => asToken(
   })
 )(FlowContainer);
 
-export const createHeavyChameleon = (n: number = 1) => asToken(
+export const createHeavyChameleon = (n: number = 1) => flowHoc(
   asBodilessChameleon(`chameleon-${n}`),
   // withPrunedDesign,
   withDesign(heavyDesign),

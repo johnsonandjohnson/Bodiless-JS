@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { withDesign, asToken } from '@bodiless/fclasses';
+import { withDesign, flowHoc } from '@bodiless/fclasses';
 import {
   withMandatoryCategories,
   ifNotComponentSelector,
@@ -25,19 +25,19 @@ import withFlowContainerVariations, { withLibraryFlowContainerVariations } from 
 import asDefaultFlowContainer from './asDefaultFlowContainer';
 import { asFlowContainerRTL, asFlowContainerWithMargins } from './token';
 
-const FlowContainerDefault = asToken(
+const FlowContainerDefault = flowHoc(
   asDefaultFlowContainer,
   withFlowContainerVariations,
 )(FlowContainer);
 
-const FlowContainerWithContentLibrary = asToken(
+const FlowContainerWithContentLibrary = flowHoc(
   // withLibraryComponents should be applied before any other HOC designs.
   withLibraryComponents(),
   asDefaultFlowContainer,
   withLibraryFlowContainerVariations,
 )(FlowContainer);
 
-const FlowContainerDefaultRTL = asToken(
+const FlowContainerDefaultRTL = flowHoc(
   ifNotComponentSelector(
     withDesign({
       FlowContainer: asFlowContainerRTL,
@@ -46,7 +46,7 @@ const FlowContainerDefaultRTL = asToken(
   asFlowContainerRTL,
 )(FlowContainerDefault);
 
-const FlowContainerWithContentLibraryRTL = asToken(
+const FlowContainerWithContentLibraryRTL = flowHoc(
   withLibraryComponents(),
   asDefaultFlowContainer,
   withLibraryFlowContainerVariations,
@@ -58,7 +58,7 @@ const FlowContainerWithContentLibraryRTL = asToken(
   asFlowContainerRTL,
 )(FlowContainer);
 
-const FlowContainerLimited = asToken(
+const FlowContainerLimited = flowHoc(
   withRichTextVariations,
   withImageVariations,
   asFlowContainerWithMargins,

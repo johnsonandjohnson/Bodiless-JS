@@ -14,7 +14,7 @@
 import React, { HTMLProps } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc, ComponentOrTag } from '@bodiless/fclasses';
 import { asEditable } from '@bodiless/components';
 import ReactMarkdown from 'react-markdown';
 
@@ -23,7 +23,7 @@ import asBodilessMarkdown from './asBodilessMarkdown';
 import withLastModified from './withLastModified';
 import withMarkdownFetchButton from './withMarkdownFetchButton';
 
-const Markdown = asToken(
+const Markdown = flowHoc(
   withLastModified('last-modified'),
   withMarkdownFetchButton,
   asBodilessMarkdown('body', undefined, () => ({
@@ -31,14 +31,16 @@ const Markdown = asToken(
     group: 'page-group',
     label: 'Body',
   })),
-)(ReactMarkdown);
+)(ReactMarkdown as ComponentOrTag<any>);
 
 const H1 = asEditable('title', 'Title')<HTMLProps<HTMLHeadingElement>>('h1');
 
 const PageBody = ({ title, markdownContent }: any) => (
   <main>
     <H1>{title}</H1>
-    <Markdown source={markdownContent} />
+    <Markdown>
+      {markdownContent}
+    </Markdown>
   </main>
 );
 

@@ -20,7 +20,7 @@ import {
   P,
   Span,
   withDesign,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import { asEditable } from '../Elements.token';
 
@@ -77,7 +77,7 @@ const FooterClean: FC<DesignableComponentsProps<FooterComponents>> = ({ componen
   );
 };
 
-const asFooterHeader = asToken(
+const asFooterHeader = flowHoc(
   designable(footerComponents, 'Footer'),
   withDesign({
     SiteTitleCopyrightEditable: asEditable({ nodeKey: 'sitetitle', nodeCollection: 'site' }, 'Insert Site Title'),

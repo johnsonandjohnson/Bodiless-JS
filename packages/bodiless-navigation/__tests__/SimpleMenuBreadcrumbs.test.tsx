@@ -21,7 +21,7 @@ import {
   withDefaultContent, ifToggledOn, asReadOnly, withNodeKey,
 } from '@bodiless/core';
 import {
-  replaceWith, withDesign, addProps, asToken
+  replaceWith, withDesign, addProps, flowHoc
 } from '@bodiless/fclasses';
 import flow from 'lodash/flow';
 import flowRight from 'lodash/flowRight';
@@ -49,7 +49,7 @@ const setPagePath = (pagePath: string) => {
 const createBreadcrumbComponent = ({
   content = {},
 }) => {
-  const Source = asToken(
+  const Source = flowHoc(
     asBodilessMenu('testMenu'),
     withListSubMenu(),
     withNodeKey(),
@@ -62,7 +62,7 @@ const createBreadcrumbComponent = ({
     </>
   );
 
-  return asToken(
+  return flowHoc(
     withBreadcrumbStore,
     withDefaultContent(content),
   )(BreadcrumbComponent);
@@ -209,7 +209,7 @@ describe('asBreadcrumbsClean', () => {
         },
       },
     });
-    const CustomBreadcrumb = asToken(
+    const CustomBreadcrumb = flowHoc(
       withBreadcrumbStartingTrail,
       withDesign({
         StartingTrail: replaceWith(() => <span>home</span>),

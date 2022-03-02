@@ -18,7 +18,7 @@ import {
   Img,
   Div,
   Label,
-  asToken,
+  flowHoc,
   removeClasses,
 } from '@bodiless/fclasses';
 import ShareIcon from './icons/Share';
@@ -41,7 +41,7 @@ const socialShareOrangeDesign = {
 };
 
 export const StyledIcon = addClasses('fill-current inline-block mr-2')(ShareIcon);
-export const WhiteStyledIcon = asToken(addClasses('text-white'), removeClasses('mr-2'))(StyledIcon);
+export const WhiteStyledIcon = flowHoc(addClasses('text-white'), removeClasses('mr-2'))(StyledIcon);
 export const StyledLabel = addClasses('cursor-pointer')(Label);
 export const Logo = addClasses('bg-blue-500 w-full rounded-full cursor-pointer transition duration-500 ease-in-out hover:bg-black transform hover:-translate-y-1 hover:scale-110')(Img);
 export const LogoNoBackground = addClasses('w-full cursor-pointer')(Img);

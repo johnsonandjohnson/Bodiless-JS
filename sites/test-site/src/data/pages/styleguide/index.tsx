@@ -21,7 +21,7 @@ import { withNode } from '@bodiless/core';
 import { ComponentSelector, ComponentDisplayMode } from '@bodiless/layouts';
 import { componentSelectorUi } from '@bodiless/layouts-ui';
 import {
-  designable, asToken, addProps, DesignableComponentsProps, removeClasses, HOC,
+  designable, flowHoc, addProps, DesignableComponentsProps, removeClasses, HOC,
 } from '@bodiless/fclasses';
 import type { ComponentSelectorProps, ComponentWithMeta } from '@bodiless/layouts';
 import Layout from '../../../components/Layout';
@@ -49,7 +49,7 @@ const StyleGuideBase: FC<StyleGuideProps> = props => {
     ComponentSelectorWrapper: removeClasses(
       'bl-text-white',
     )(componentSelectorUi.ComponentSelectorWrapper as ComponentType<any>),
-    ItemBox: asToken(
+    ItemBox: flowHoc(
       withNode, withNodeKeyFromItemId,
     )(componentSelectorUi.ItemBox as ComponentType<any>),
   };
@@ -66,7 +66,7 @@ const StyleGuideBase: FC<StyleGuideProps> = props => {
   );
 };
 
-const StyleGuide = asToken(
+const StyleGuide = flowHoc(
   designable({}, 'StyleGuide'),
   withDefaultVariations,
   addProps({

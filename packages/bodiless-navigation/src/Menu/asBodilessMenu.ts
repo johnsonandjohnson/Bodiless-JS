@@ -18,7 +18,7 @@ import {
   asBodilessList, asStylableList, asChameleonSubList,
 } from '@bodiless/components';
 import {
-  withDesign, asToken,
+  withDesign, flowHoc,
 } from '@bodiless/fclasses';
 
 import type { UseListOverrides, ListData } from '@bodiless/components';
@@ -47,7 +47,7 @@ const asBodilessMenu = <P extends object>(
   nodeKeys?: WithNodeKeyProps,
   defaultData?: ListData,
   useOverrides: UseListOverrides<P> = () => ({}),
-) => asToken(
+) => flowHoc(
     asBodilessList(
       nodeKeys,
       defaultData,
@@ -58,7 +58,7 @@ const asBodilessMenu = <P extends object>(
     withMenuEditContext,
     withDesign({ Title: asMenuTitle }),
     withDesign({
-      Item: asToken(
+      Item: flowHoc(
         asBreadcrumb(DEFAULT_NODE_KEYS),
       ),
     }),

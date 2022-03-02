@@ -14,7 +14,7 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import Layout from '../../../components/Layout';
 import {
@@ -24,10 +24,10 @@ import {
   StandardTable,
 } from '../../../components/Table';
 
-const Table1 = asToken(
+const Table1 = flowHoc(
   asTableCenterText,
 )(StandardTable);
-const Table2 = asToken(
+const Table2 = flowHoc(
   asTableFirstExtraWidth,
   asTableFirstLeft,
 )(StandardTable);

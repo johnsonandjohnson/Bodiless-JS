@@ -27,7 +27,7 @@ import { createEditor, Editor } from 'slate';
 import {
   Slate, withReact, useSlate
 } from 'slate-react';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import {
   useEditContext,
   useContextActivator,

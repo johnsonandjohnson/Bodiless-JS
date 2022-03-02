@@ -23,7 +23,7 @@ import {
 } from '@bodiless/core';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { flowRight } from 'lodash';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { v1 } from 'uuid';
 import Layout from '../../../components/Layout';

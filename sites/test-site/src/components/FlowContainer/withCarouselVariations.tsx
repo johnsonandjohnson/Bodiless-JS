@@ -19,14 +19,14 @@ import {
   varyDesign,
   replaceWith,
   withDesign,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 
 import { ChameleonCarousel } from '../Carousel';
 import { withType } from './Categories';
 
 const carouselVariation = {
-  Carousel: asToken(
+  Carousel: flowHoc(
     replaceWith(ChameleonCarousel),
     withType('Carousel')(),
     withTitle('Carousel'),

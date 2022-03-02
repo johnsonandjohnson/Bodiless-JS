@@ -18,7 +18,7 @@ import {
   withDesign,
   replaceWith,
   Div,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import {
   withTitle,
@@ -33,9 +33,9 @@ import asDefaultFlowContainer from './asDefaultFlowContainer';
 const FlowContainerPreview = () => <Div className="bl-bg-black">Flow Container Preview</Div>;
 
 const withFlowContainerVariations = withDesign({
-  FlowContainer: asToken(
+  FlowContainer: flowHoc(
     replaceWith(
-      asToken(
+      flowHoc(
         asDefaultFlowContainer,
         withNodeKey('innerFC'),
       )(FlowContainer),
@@ -50,9 +50,9 @@ const withFlowContainerVariations = withDesign({
 });
 
 export const withLibraryFlowContainerVariations = withDesign({
-  FlowContainer: asToken(
+  FlowContainer: flowHoc(
     replaceWith(
-      asToken(
+      flowHoc(
         withLibraryComponents(),
         asDefaultFlowContainer,
         withNodeKey('innerLibraryFC'),

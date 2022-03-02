@@ -20,13 +20,13 @@ import {
   asReadOnly,
 } from '@bodiless/core';
 import type { StylableProps } from '@bodiless/fclasses';
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import Tooltip from 'rc-tooltip';
 import Layout from '../../../components/Layout';
 import { withEditorSimple } from '../../../components/Editors';
 
 const Editor1 = withEditorSimple('shared-editor', 'Editor 1')<HTMLProps<HTMLDivElement> & StylableProps>('div');
-const Editor2 = asToken(
+const Editor2 = flowHoc(
   withEditorSimple('shared-editor', 'Editor 2'),
   asReadOnly,
 )('div');

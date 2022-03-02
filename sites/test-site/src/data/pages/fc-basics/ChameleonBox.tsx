@@ -1,5 +1,5 @@
 import { asBodilessChameleon, useChameleonContext } from '@bodiless/components';
-import { withDesign, asToken, Div } from '@bodiless/fclasses';
+import { withDesign, flowHoc, Div } from '@bodiless/fclasses';
 import {
   asBox, asBlue, asOrange, asTeal, withBlueBorder,
 } from './Box';
@@ -16,13 +16,13 @@ export const useSwapOverrides = () => ({
   groupLabel: 'Fill',
 });
 
-const ChameleonBox = asToken(
+const ChameleonBox = flowHoc(
   asBox,
   asBodilessChameleon('chameleon', undefined, useToggleOverrides),
   // asBodilessChameleon('chameleon', undefined, useSwapOverrides),
   withBlueBorder,
   withDesign({
-    Teal: asToken(asTeal, { title: 'Color Teal' }),
+    Teal: flowHoc(asTeal, { title: 'Color Teal' }),
     Orange: asOrange,
     _default: asBlue,
   }),

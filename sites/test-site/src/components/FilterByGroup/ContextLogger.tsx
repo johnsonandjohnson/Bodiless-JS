@@ -14,7 +14,7 @@
 
 import React, { useState, useRef } from 'react';
 import {
-  Div, Button, addClasses, asToken, ComponentOrTag,
+  Div, Button, addClasses, flowHoc, ComponentOrTag,
 } from '@bodiless/fclasses';
 import {
   useFilterByGroupContext,
@@ -67,7 +67,7 @@ const ContextLoggerBase: ComponentOrTag<any> = () => {
   );
 };
 
-const ContextLogger = asToken(
+const ContextLogger = flowHoc(
   withTagProps(),
 )(ContextLoggerBase);
 

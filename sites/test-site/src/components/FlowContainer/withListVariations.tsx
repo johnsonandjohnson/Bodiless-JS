@@ -19,14 +19,14 @@ import {
   varyDesign,
   replaceWith,
   withDesign,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 
 import ChameleonListDemo from '../../data/pages/list2/ChameleonListDemo';
 import { withType } from './Categories';
 
 const listVariations = {
-  ChameleonList: asToken(
+  ChameleonList: flowHoc(
     replaceWith(ChameleonListDemo),
     withType('List')(),
     withTitle('Chameleon LIst'),

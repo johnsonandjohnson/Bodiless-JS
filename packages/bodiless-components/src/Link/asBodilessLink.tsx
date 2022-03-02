@@ -32,7 +32,7 @@ import {
   addProps,
   replaceWith,
   withoutProps,
-  asToken,
+  flowHoc,
   flowIf,
   addClassesIf,
 } from '@bodiless/fclasses';
@@ -237,7 +237,7 @@ const asBodilessLink: AsBodilessLink = (
     nodeKeys, defaultData, useLinkOverrides(useOverrides),
   ),
   ifEditable(
-    asToken(
+    flowHoc(
       // Prevent following the link in edit mode
       withExtendHandler('onClick', () => (e: MouseEvent) => e.preventDefault()),
       addProps({ draggable: false }),

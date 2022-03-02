@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { observable, action } from 'mobx';
+import { observable, action, makeObservable } from 'mobx';
 import identity from 'lodash/identity';
 
 class DummyContentNodeStore {
@@ -23,6 +23,7 @@ class DummyContentNodeStore {
   }
 
   constructor(initialData: any) {
+    makeObservable(this);
     this.data = { ...initialData };
   }
 }

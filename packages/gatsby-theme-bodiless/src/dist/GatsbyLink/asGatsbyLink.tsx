@@ -24,7 +24,7 @@ import {
   HOC,
   ComponentOrTag,
   DesignableProps,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import { ifReadOnly } from '@bodiless/core';
 import type { BodilessLinkProps } from '@bodiless/components';
@@ -61,7 +61,7 @@ const asGatsbyLink$: HOC<BodilessLinkProps, DesignableProps<Components>> = Compo
   return designable(startComponents, 'GatsbyLink')(AsGatsbyLink) as ComponentType<any>;
 };
 
-const asGatsbyLink = asToken(
+const asGatsbyLink = flowHoc(
   ifReadOnly(
     withDesign({
       GatsbyLink: stylable,

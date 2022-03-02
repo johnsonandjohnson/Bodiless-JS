@@ -9,15 +9,22 @@ new URL you wish to use for the page.
 
 * In changing the path/URL of the page, the move operation will relocate the page and its associated
   JSON files within the file structure.
+* If desired, the move operation can also create a 301 redirect, sending users from the previous
+  path/URL to the new one.
 
 To move an existing page:
 
 01. Navigate to the page you wish to move.
 01. From the [Toolbar](../../#toolbar), click **Page > Move** to open the _Move_ form.  
     ![Move Page form](./assets/PageMovePage.jpg ':size=50%')
-01. In the _New URL_ field, enter the URL you wish to move the page to, and click the checkmark to
-    confirm.
+01. In the _New URL_ field, enter the URL you wish to move the page to.
     * **Note:** There are [restrictions](#restrictions) on the URL provided.
+01. By default, the _Add Redirect_ checkbox is checked: upon page move, a 301 redirect will be
+    created, redirecting your users from the _Current URL_ to the _New URL_.
+    * Uncheck this box if you don't want to create a redirect.
+    * If you want to create a redirect with an HTTP response status code other than `301`, you can
+      use the [Aliases](../../ToolsMenu/Aliases/) tool.
+01. Click the checkmark to confirm.
     * A spinner will appear while your page is being moved.
 01. Once your page has been moved, you will see a modal confirming that the "Move operation was
     successful," and, upon closing it, you will be redirected to the page's new URL.  

@@ -19,14 +19,14 @@ import {
 import {
   replaceWith,
   withDesign,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import { withType } from './Categories';
 import { WantToLearnMore, GivingBackToCommunity } from '../Contentful/Card';
 import { withOrientationFacet, withStructureFacet } from './withCardVariations';
 
 const contentfulCards = {
-  GivingBackToCommunity: asToken(
+  GivingBackToCommunity: flowHoc(
     replaceWith(GivingBackToCommunity),
     withType('Contentful')(),
     withType('Card')(),
@@ -36,7 +36,7 @@ const contentfulCards = {
     withTitle('Giving Back To Community'),
     withDesc('Custom content for community campaign.'),
   ),
-  WantToLearnMore: asToken(
+  WantToLearnMore: flowHoc(
     replaceWith(WantToLearnMore),
     withType('Contentful')(),
     withType('Card')(),

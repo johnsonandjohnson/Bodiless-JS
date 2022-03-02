@@ -24,7 +24,7 @@ import flowRight from 'lodash/flowRight';
 import flow from 'lodash/flow';
 import identity from 'lodash/identity';
 import {
-  withDesign, withoutProps, HOC, asToken, startWith
+  withDesign, withoutProps, HOC, flowHoc, startWith
 } from '@bodiless/fclasses';
 
 import {
@@ -225,7 +225,7 @@ describe('asBodilessChameleon', () => {
   });
 
   it('Supports startWith', () => {
-    const Test = asToken(
+    const Test = flowHoc(
       asBodilessChameleon('foo'),
       withDesign({
         _default: startWith(() => <div id="test" className="foo" />),

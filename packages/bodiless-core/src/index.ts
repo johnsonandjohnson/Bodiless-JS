@@ -13,6 +13,7 @@
  */
 
 import { ComponentType } from 'react';
+import { configure } from 'mobx';
 import PageContextProvider, { withMenuOptions, useRegisterMenuOptions } from './PageContextProvider';
 import PageEditContext from './PageEditContext';
 import asStatic from './asStatic';
@@ -82,6 +83,10 @@ import {
   getFromSessionStorage,
   saveToSessionStorage,
 } from './SessionStorage';
+
+configure({
+  enforceActions: 'never',
+});
 
 export * from './components';
 export * from './Contentful';

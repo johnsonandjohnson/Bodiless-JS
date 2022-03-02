@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { HOC, asToken } from '@bodiless/fclasses';
+import { HOC, flowHoc } from '@bodiless/fclasses';
 
 export type Tokens = {
   [key: string]: HOC,
@@ -71,7 +71,7 @@ class TokenMap<P> {
       if (!hoc) return [...hocs];
       return [...hocs, hoc];
     }, [] as HOC[]);
-    return asToken(
+    return flowHoc(
       {}, // see https://github.com/microsoft/TypeScript/issues/28010
       ...tokenHOCs,
     );

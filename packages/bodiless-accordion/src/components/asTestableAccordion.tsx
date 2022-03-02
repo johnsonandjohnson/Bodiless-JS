@@ -11,9 +11,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { withDesign, addProps, asToken } from '@bodiless/fclasses';
+import { withDesign, addProps, flowHoc } from '@bodiless/fclasses';
 
-const asTestableAccordion = asToken(
+const asTestableAccordion = flowHoc(
   withDesign({
     Wrapper: addProps({ 'data-accordion-element': 'accordion' }),
     Title: withDesign({

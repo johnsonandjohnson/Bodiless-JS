@@ -15,7 +15,7 @@
 import React, { FC } from 'react';
 import { createHash } from 'crypto';
 import { arrayMove, SortEnd } from 'react-sortable-hoc';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import flowRight from 'lodash/flowRight';
 
 import {

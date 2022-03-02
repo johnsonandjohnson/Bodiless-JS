@@ -54,13 +54,14 @@ const PageURLField = (props: FieldProps) => {
   const isFullUrl = isBasePathEmpty;
 
   const {
-    fieldLabel, fieldFull, validate, ...rest
+    fieldLabel, fieldFull, required, simpleValidation, validate, ...rest
   } = props;
+
   const {
     fieldState, fieldApi, render, ref, userProps,
   } = useField({
     field: PAGE_URL_FIELD_NAME,
-    validate: getPageUrlValidator(validate),
+    validate: getPageUrlValidator(validate, required, simpleValidation),
     placeholder: isFullUrl ? '/mypath/mypage' : 'my-page',
     ...rest,
   });
@@ -149,12 +150,12 @@ const MovePageURLField = (props: FieldProps) => {
   const isBasePathEmpty = isEmptyValue(parentBasePathValue)
   || parentBasePathValue === BASE_PATH_EMPTY_VALUE;
 
-  const { validate, ...rest } = props;
+  const { required, validate, ...rest } = props;
   const {
     fieldState, fieldApi, render, ref, userProps,
   } = useField({
     field: PAGE_URL_FIELD_NAME,
-    validate: getPageUrlValidator(validate),
+    validate: getPageUrlValidator(validate, required),
     placeholder: '/parentpage/thispage',
     ...rest,
   });

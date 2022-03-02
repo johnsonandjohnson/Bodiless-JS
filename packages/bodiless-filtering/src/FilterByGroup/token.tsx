@@ -15,11 +15,12 @@
 import {
   withDesign,
   addClasses,
-  asToken,
+  flowHoc,
   addProps,
   replaceWith,
   addPropsIf,
   Span,
+  withoutProps,
 } from '@bodiless/fclasses';
 import { ifViewportIsNot, ifViewportIs } from '@bodiless/components';
 import {
@@ -32,17 +33,37 @@ import {
   withAnyTag, withoutAnyTag,
 } from './Filter.token';
 
-const asResponsiveAccordionTitle = asToken(
+const asResponsiveAccordionTitle = flowHoc(
   asAccordionTitle,
   withDesign({
     Icon: addClasses('lg:hidden'),
+    OpenIcon: addClasses('fill-current'),
+    CloseIcon: addClasses('fill-current'),
   }),
 );
 
-const asExpandedOnDesktopBody = asToken(
+/**
+ * asAccordionBodyFilter extends asAccordionBody to remove tabIndex prop
+ * for accessibility purposes.
+ */
+const asAccordionBodyFilter = flowHoc(
   asAccordionBody,
   withDesign({
+    Wrapper: withoutProps('tabIndex'),
+  }),
+);
+
+const asExpandedOnDesktopBody = flowHoc(
+  asAccordionBodyFilter,
+  withDesign({
     Wrapper: addClasses('lg:block'),
+  }),
+);
+
+const asExpandedOnDesktopResetButtonBody = flowHoc(
+  asExpandedOnDesktopBody,
+  withDesign({
+    Wrapper: withoutProps(['role', 'aria-labelledby']),
   }),
 );
 
@@ -54,13 +75,22 @@ const useRefineButtonProps = () => {
   };
 };
 
-const asResponsiveFilterByGroup = asToken(
+const asAccessibleFilterByGroup = flowHoc(
+  withDesign({
+    FilterWrapper: addProps({
+      role: 'region',
+      'aria-label': 'Product filters'
+    })
+  }),
+);
+
+const asResponsiveFilterByGroup = flowHoc(
   ifViewportIsNot(['lg', 'xl', '2xl'])(
     withDesign({
       FilterWrapper: asAccordionWrapper,
       FilterTitle: asResponsiveAccordionTitle,
       FilterBody: asExpandedOnDesktopBody,
-      ResetButton: asExpandedOnDesktopBody,
+      ResetButton: asExpandedOnDesktopResetButtonBody,
       RefineButton: addPropsIf(() => true)(useRefineButtonProps),
     }),
   ),
@@ -72,23 +102,23 @@ const asResponsiveFilterByGroup = asToken(
   ),
 );
 
-export const withMultipleAllowedTags = asToken(
+export const withMultipleAllowedTags = flowHoc(
   addProps({
     multipleAllowedTags: true,
   }),
   withDesign({
-    Filter: asToken(
+    Filter: flowHoc(
       withoutAnyTag,
     ),
   }),
 );
 
-export const withSingleAllowedTag = asToken(
+export const withSingleAllowedTag = flowHoc(
   addProps({
     multipleAllowedTags: false,
   }),
   withDesign({
-    Filter: asToken(
+    Filter: flowHoc(
       withAnyTag,
     ),
   }),
@@ -97,4 +127,5 @@ export const withSingleAllowedTag = asToken(
 export {
   asExpandedOnDesktopBody,
   asResponsiveFilterByGroup,
+  asAccessibleFilterByGroup,
 };

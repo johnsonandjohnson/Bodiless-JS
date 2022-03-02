@@ -16,7 +16,7 @@ import React, { ComponentType } from 'react';
 import mergeWith from 'lodash/mergeWith';
 import isArray from 'lodash/isArray';
 import flow from 'lodash/flow';
-import { asToken, ComponentWithMeta } from '@bodiless/fclasses';
+import { flowHoc, ComponentWithMeta } from '@bodiless/fclasses';
 import type { HOC } from '@bodiless/fclasses';
 
 type CTWM = ComponentWithMeta;
@@ -119,7 +119,7 @@ const perserveMeta = (hoc: HOC): HOC => Component => (
  * @param term the Term in the Category associated with the Component
  * @param hocs the HOC to apply to the Component
  */
-const withFacet = (cat: string) => (term: string) => (...hocs: HOC[]) => asToken(
+const withFacet = (cat: string) => (term: string) => (...hocs: HOC[]) => flowHoc(
   perserveMeta(flow(...hocs)),
   withTerm(cat)(term),
   withAppendTitle(term),

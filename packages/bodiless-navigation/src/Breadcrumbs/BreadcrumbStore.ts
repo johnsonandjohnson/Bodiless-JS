@@ -14,7 +14,9 @@
 
 /* eslint-disable no-underscore-dangle */
 
-import { observable, action, computed } from 'mobx';
+import {
+  observable, action, computed, makeObservable,
+} from 'mobx';
 
 type BreadcrumbItemTitle = {
   // ToDo: Remove it, there is no need to store it here
@@ -205,6 +207,7 @@ export class BreadcrumbStore implements BreadcrumbStoreType {
 
   constructor(pagePath: string) {
     this.pagePath = pagePath;
+    makeObservable(this);
   }
 
   @action private setActiveItem(item: BreadcrumbItemType | undefined) {

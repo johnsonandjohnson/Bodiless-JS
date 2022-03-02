@@ -13,7 +13,7 @@
  */
 
 import React, { FC, ComponentType, ReactElement } from 'react';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import Tooltip from 'rc-tooltip';
 
 import flow from 'lodash/flow';
@@ -210,7 +210,7 @@ const useLocalOptions = () => {
  *
  * Renders children inside an rc-tooltip whose overlay contents contain all local menu option icons.
  */
-const ContextMenuOverlay = observer<{}>(() => {
+const ContextMenuOverlay = observer(() => {
   const { LocalContextMenu: Menu } = useUI();
   const options = useLocalOptions();
   return <Menu options={options} />;

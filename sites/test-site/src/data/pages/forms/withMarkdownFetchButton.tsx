@@ -43,10 +43,10 @@ const useMenuOptions = () => {
     try {
       const r = await fetch(url);
       if (!r.ok) throw new Error(r.statusText);
-      const source = await r.text();
-      node.setData({ source });
-    } catch (e: any) {
-      alert(`Error: ${e.message}`);
+      const children = await r.text();
+      node.setData({ children });
+    } catch (e) {
+      alert(`Error: ${(e as Error).message}`);
     }
   };
   const render = (formProps: ContextMenuFormProps) => (

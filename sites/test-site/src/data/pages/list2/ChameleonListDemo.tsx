@@ -13,7 +13,7 @@
  */
 
 import {
-  addClasses, withDesign, HOC, replaceWith, stylable, asToken,
+  addClasses, withDesign, HOC, replaceWith, stylable, flowHoc,
 } from '@bodiless/fclasses';
 import {
   asBodilessList,
@@ -29,7 +29,7 @@ import { withItemMargin } from './SimpleListDemo';
  * Defines the title for all list items.
  */
 export const withLinkTitle = withDesign({
-  Title: asToken(
+  Title: flowHoc(
     replaceWith(GatsbyLink),
     asLink,
     asEditableLink('link'),
@@ -38,19 +38,19 @@ export const withLinkTitle = withDesign({
 });
 
 const asBulletedList = withDesign({
-  Item: asToken(stylable, addClasses('list-disc')),
+  Item: flowHoc(stylable, addClasses('list-disc')),
 });
 
 const asNumberedList = withDesign({
-  Item: asToken(stylable, addClasses('list-decimal')),
+  Item: flowHoc(stylable, addClasses('list-decimal')),
 });
 
 const subLists = {
-  Bulleted: asToken(
+  Bulleted: flowHoc(
     asToggledSubList,
     asBulletedList,
   ),
-  Numbered: asToken(
+  Numbered: flowHoc(
     asToggledSubList,
     asNumberedList,
   ),
@@ -61,11 +61,11 @@ const withSubListDesigns = (withDesign$: HOC) => withSubListDesign(2)({
   Numbered: withDesign$,
 });
 
-const List = asToken(
+const List = flowHoc(
   asBodilessList(),
   withLinkTitle,
   withSubLists(2)(subLists),
-  withSubListDesigns(asToken(
+  withSubListDesigns(flowHoc(
     withItemMargin,
     withLinkTitle,
   )),

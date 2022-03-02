@@ -40,6 +40,7 @@ const MenuFormPage = (props : PageState) => {
             {FormFields && FormFields(ComponentFormLabelSmall)}
             <PageURLField
               fieldFull
+              required
               validateOnChange
               validateOnBlur
             />

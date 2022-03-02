@@ -18,7 +18,7 @@ import {
   addClassesIf,
   and,
   not,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import {
   asBodilessTable,
@@ -29,49 +29,49 @@ import {
 } from '@bodiless/table';
 import { withEditorFullFeatured } from '../Editors';
 
-const asEditableTable = asToken(
+const asEditableTable = flowHoc(
   asBodilessTable(),
   withDesign({
     Cell: withEditorFullFeatured('cell', ''),
   }),
 );
-const asDefaultTableStyle = asToken(
+const asDefaultTableStyle = flowHoc(
   withDesign({
-    Cell: asToken(
+    Cell: flowHoc(
       addClasses('min-w-1 py-1 px-5'),
       addClassesIf(and(useIsEvenColumn, useIsInBody))('bg-gray-100'),
     ),
-    THead: asToken(
+    THead: flowHoc(
       addClasses('bg-orange-700 text-white'),
     ),
-    Wrapper: asToken(
+    Wrapper: flowHoc(
       addClasses('border border-collapse rounded border-gray-200 w-full'),
     ),
   }),
 );
-const StandardTable = asToken(
+const StandardTable = flowHoc(
   asEditableTable,
   asDefaultTableStyle,
 )(CleanTable);
-const asTableFirstLeft = asToken(
+const asTableFirstLeft = flowHoc(
   withDesign({
-    Cell: asToken(
+    Cell: flowHoc(
       addClassesIf(useIsFirstColumn)('text-left'),
       addClassesIf(and(useIsInBody, useIsFirstColumn))('bg-orange-600 text-white'),
       addClassesIf(not(useIsFirstColumn))('text-center'),
     ),
   }),
 );
-const asTableCenterText = asToken(
+const asTableCenterText = flowHoc(
   withDesign({
-    Cell: asToken(
+    Cell: flowHoc(
       addClassesIf(useIsInBody)('text-center'),
     ),
   }),
 );
-const asTableFirstExtraWidth = asToken(
+const asTableFirstExtraWidth = flowHoc(
   withDesign({
-    Cell: asToken(
+    Cell: flowHoc(
       addClassesIf(useIsFirstColumn)('w-1/2'),
     ),
   }),

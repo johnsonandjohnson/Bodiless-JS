@@ -17,7 +17,7 @@ import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { Editable, asBodilessList } from '@bodiless/components';
 import {
-  withDesign, replaceWith, addClasses, stylable, asToken,
+  withDesign, replaceWith, addClasses, stylable, flowHoc,
 } from '@bodiless/fclasses';
 import Helmet from 'react-helmet';
 import Layout from '../../components/Layout';
@@ -42,16 +42,16 @@ const BulletPoints = (props: any) => (
   <span {...props}><Editable nodeKey="bullet" placeholder="Enter Bullet Item" /></span>
 );
 
-const EditableBulletPoints = asToken(
+const EditableBulletPoints = flowHoc(
   asBodilessList('bulletpoints'),
   withDesign({
     Title: replaceWith(BulletPoints),
-    Wrapper: asToken(stylable, addClasses('m-6 py-3 flex flex-wrap md:flex-nowrap list-disc w-full')),
-    Item: asToken(stylable, addClasses('w-full md:w-auto md:flex-1')),
+    Wrapper: flowHoc(stylable, addClasses('m-6 py-3 flex flex-wrap md:flex-nowrap list-disc w-full')),
+    Item: flowHoc(stylable, addClasses('w-full md:w-auto md:flex-1')),
   }),
 )('ul');
 
-const HeaderImage = asToken(
+const HeaderImage = flowHoc(
   asEditableImage('header_image'),
   addClasses('w-full'),
 )('img');

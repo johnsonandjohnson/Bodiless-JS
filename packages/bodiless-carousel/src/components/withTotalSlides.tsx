@@ -17,7 +17,7 @@ import { useNode } from '@bodiless/core';
 import identity from 'lodash/identity';
 import type { WithNodeKeyProps } from '@bodiless/core';
 import type { ListData } from '@bodiless/components';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { HOC } from '@bodiless/fclasses';
 
 const withTotalSlides = (nodeKeys?: WithNodeKeyProps): HOC => Component => {

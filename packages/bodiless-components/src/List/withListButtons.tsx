@@ -19,7 +19,7 @@ import {
 } from '@bodiless/core';
 import { v1 } from 'uuid';
 
-import { withFinalDesign, asToken } from '@bodiless/fclasses';
+import { withFinalDesign, flowHoc } from '@bodiless/fclasses';
 import { UseListOverrides } from './types';
 import { useListContext } from './List';
 
@@ -86,7 +86,7 @@ const useMenuOptions = (useOverrides: UseListOverrides = () => ({})) => (props: 
  */
 const withListButtons = (useOverrides?: UseListOverrides) => ifEditable(
   withFinalDesign({
-    Item: asToken(
+    Item: flowHoc(
       withContextActivator('onClick'),
       withLocalContextMenu,
       withMenuOptions({

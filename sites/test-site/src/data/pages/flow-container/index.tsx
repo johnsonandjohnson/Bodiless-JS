@@ -24,7 +24,7 @@ import resolvedConfigs from
   '@bodiless/fclasses/src/tailwindcss/resolveConfig';
 import { withDefaultContent, withNodeKey, withResetButton } from '@bodiless/core';
 import {
-  H2 as BaseH2, addClasses, asToken, addProps, withDesign, startWith,
+  H2 as BaseH2, addClasses, flowHoc, addProps, withDesign, startWith,
 } from '@bodiless/fclasses';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import Layout from '../../../components/Layout';
@@ -55,7 +55,7 @@ const contentfulFlowContainer = {
   ],
 };
 
-const ContentfulFlowContainer = asToken(
+const ContentfulFlowContainer = flowHoc(
   withDefaultContent({ contentfulFlowContainer }),
   withNodeKey('contentfulFlowContainer'),
   withResetButton({ nodeKey: 'contentfulFlowContainer' }),
@@ -90,16 +90,16 @@ const regionContent = {
   },
 };
 
-const Region = asToken(
+const Region = flowHoc(
   startWith(FlowContainer),
-  asToken.meta.term('Type')('Region'),
+  flowHoc.meta.term('Type')('Region'),
   withImageVariations,
   addProps({
     buttonGroupLabel: 'Content Block',
     itemButtonGroupLabel: 'Content Block',
   } as FlowContainerProps),
 );
-const RegionContainer = asToken(
+const RegionContainer = flowHoc(
   addProps({
     buttonGroupLabel: 'Region',
     itemButtonGroupLabel: 'Region',

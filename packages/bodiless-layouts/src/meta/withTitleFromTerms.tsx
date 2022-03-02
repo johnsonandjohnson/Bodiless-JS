@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import {
-  asToken, ComponentWithMeta, HOC, ComponentOrTag, varyDesign,
+  flowHoc, ComponentWithMeta, HOC, ComponentOrTag, varyDesign,
 } from '@bodiless/fclasses';
 
 /**
@@ -65,7 +65,7 @@ const getTitleFromTerms = (
  * A token which adds a title.
  */
 const withTitleFromTerms = (ops: WithTitleFromTermsProps = {}): HOC => (
-  (Component: ComponentOrTag<any>) => asToken({
+  (Component: ComponentOrTag<any>) => flowHoc({
     title: getTitleFromTerms(Component as ComponentWithMeta<any>, ops),
   })(Component)
 );

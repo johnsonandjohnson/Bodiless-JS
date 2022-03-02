@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import {
   useContextMenuForm,
   createMenuOptionGroup,
@@ -12,7 +12,7 @@ import {
 } from '@bodiless/core';
 import type { OptionGroupDefinition } from '@bodiless/core';
 import {
-  withDesign, HOC, asToken, flowIf,
+  withDesign, HOC, flowHoc, flowIf,
 } from '@bodiless/fclasses';
 import type { Design } from '@bodiless/fclasses';
 import { withFacet, withTitle, withDesc } from '../meta';
@@ -268,7 +268,7 @@ const withDesignFromLibrary = ({
 
         return ({
           ...libDesign,
-          [libraryItemDesignKey]: asToken(
+          [libraryItemDesignKey]: flowHoc(
             design[componentKey],
             withType('Content Library')(),
             withTitle(title),
@@ -308,7 +308,7 @@ const withDesignFromLibrary = ({
 const withLibraryComponents = (
   path: LibraryNodePath = DEFAULT_CONTENT_LIBRARY_PATH,
   collection: string = DEFAULT_CONTENT_LIBRARY_COLLECTION
-) => asToken(
+) => flowHoc(
   withDesign({
     ComponentWrapper: flowIf(() => useEditContext().isEdit)(
       flowIf(useIsLibraryItem)(withLibraryItemIndicator),

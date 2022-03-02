@@ -22,7 +22,7 @@ import type {
   WithNodeKeyProps, UseBodilessOverrides,
 } from '@bodiless/core';
 import {
-  HOC, asToken, Enhancer,
+  HOC, flowHoc, Enhancer,
 } from '@bodiless/fclasses';
 import { ComponentSelectorOptions } from '@bodiless/layouts';
 import { ChameleonData } from './types';
@@ -69,7 +69,7 @@ const asBodilessChameleon = (
   defaultData?: ChameleonData,
   useOverrides?: UseBodilessOverrides,
 ): Enhancer<ComponentSelectorOptions> => Component => {
-  const hoc = asToken(
+  const hoc = flowHoc(
     applyChameleon,
     ifEditable(
       withChameleonButton(useOverrides),

@@ -20,7 +20,7 @@ import {
   replaceWith,
   addPropsIf,
   HOC,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import flow from 'lodash/flow';
 import negate from 'lodash/negate';
@@ -61,7 +61,7 @@ const HorizontalCard = flow(
 )(Card);
 
 const withChameleonSlide = withDesign({
-  Slider: asToken(
+  Slider: flowHoc(
     asBodilessChameleon('cham-slide', { component: 'GatsbyImage' }),
     withDesign({
       Linkable: withDesign({
@@ -80,7 +80,7 @@ const withChameleonSlide = withDesign({
   ),
 });
 
-const withAutoPlay = asToken(
+const withAutoPlay = flowHoc(
   withDesign({
     Wrapper: ifReadOnly(
       addProps({
@@ -94,14 +94,14 @@ const withNavButtonStyles = addClasses('p-2 text-white uppercase bg-blue-700 dis
 
 const withNavButtonsStyles = withDesign({
   SliderWrapper: addClasses('relative'),
-  ButtonNext: asToken(
+  ButtonNext: flowHoc(
     withNavButtonStyles,
     addClasses('absolute transform -translate-y-1/2 top-1/2 right-0 left-auto rtl:left-0 rtl:right-auto'),
     addProps({
       children: 'Next',
     }),
   ),
-  ButtonBack: asToken(
+  ButtonBack: flowHoc(
     withNavButtonStyles,
     addClasses('absolute transform -translate-y-1/2 top-1/2 left-0 right-auto rtl:right-0 rtl:left-auto'),
     addProps({
@@ -114,14 +114,14 @@ const withControlsWrapperStyles = withDesign({
   ControlsWrapper: addClasses('flex justify-center pt-2'),
 });
 
-const withDotStyles = asToken(
+const withDotStyles = flowHoc(
   withControlsWrapperStyles,
   withDesign({
-    Dots: asToken(
+    Dots: flowHoc(
       addClasses('flex items-center'),
       withDesign({
         Item: withDesign({
-          Dot: asToken(
+          Dot: flowHoc(
             addClasses('w-2 h-2 rounded-full mx-2 p-1 inline-block border-2 border-solid align-middle'),
             ifToggledOn(useIsCarouselItemActive)(
               addClasses('bg-blue-700'),
@@ -133,16 +133,16 @@ const withDotStyles = asToken(
   }),
 );
 
-const withAutoPlayButtonStyles = asToken(
+const withAutoPlayButtonStyles = flowHoc(
   withControlsWrapperStyles,
   withDesign({
-    ButtonPlay: asToken(
+    ButtonPlay: flowHoc(
       addClasses('ml-2 rounded-full p-1 block w-8'),
       addClasses('leading-none text-1xl bg-blue-700 text-white'),
       addClasses('disabled:opacity-50 disabled:cursor-not-allowed'),
       withChild(Fragment),
       withDesign({
-        Child: asToken(
+        Child: flowHoc(
           ifToggledOn(useCarouselIsPlaying)(withChild(PauseIcon)),
           ifToggledOff(useCarouselIsPlaying)(withChild(PlayIcon)),
         ),
@@ -158,7 +158,7 @@ const withSlideItemAriaLabel: HOC = Component => props => {
   return <Component {...props} aria-label={ariaLabel} />;
 };
 
-const asAccessibleCarousel = asToken(
+const asAccessibleCarousel = flowHoc(
   asBaseAccessibleCarousel,
   withDesign({
     ButtonBack: addProps({
@@ -170,7 +170,7 @@ const asAccessibleCarousel = asToken(
     Dots: withDesign({
       Item: withSlideItemAriaLabel,
     }),
-    ButtonPlay: asToken(
+    ButtonPlay: flowHoc(
       addPropsIf(useCarouselIsPlaying)({
         'aria-label': 'Pause to stop slides',
       }),

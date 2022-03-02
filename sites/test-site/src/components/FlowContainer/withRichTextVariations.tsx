@@ -21,7 +21,7 @@ import {
   varyDesign,
   replaceWith,
   withDesign,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import { asPreview } from '@bodiless/richtext';
 
@@ -33,21 +33,21 @@ import {
 import { withType } from './Categories';
 
 const richTextVariation = {
-  EditorSimple: asToken(
+  EditorSimple: flowHoc(
     replaceWith(EditorSimple),
     ifComponentSelector(asPreview),
     withType('Rich Text')(),
     withTitle('Simple Rich Text'),
     withDesc('Adds a block of text for a Title.\n'),
   ),
-  EditorBasic: asToken(
+  EditorBasic: flowHoc(
     replaceWith(EditorBasic),
     ifComponentSelector(asPreview),
     withType('Rich Text')(),
     withTitle('Basic Rich Text'),
     withDesc('Adds a block of text with basic formatting.\n'),
   ),
-  EditorFullFeatured: asToken(
+  EditorFullFeatured: flowHoc(
     replaceWith(EditorFullFeatured),
     ifComponentSelector(asPreview),
     withType('Rich Text')(),

@@ -20,7 +20,7 @@ import {
   addClassesIf,
   Button as BaseButton,
   H3,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import Layout from '../../../../components/Layout';
 import { asHeader3 } from '../../../../components/Elements.token';
@@ -52,7 +52,7 @@ const Button: FC = props => {
   return <BaseButton {...props} onClick={toggle} />;
 };
 
-const StyledButton = asToken(
+const StyledButton = flowHoc(
   addClassesIf(isToggled)('bg-green-200'),
   addClasses('border p-2 my-2'),
 )(Button);

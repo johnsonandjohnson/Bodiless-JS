@@ -29,7 +29,7 @@ import {
   startWith,
   replaceWith,
   as,
-  withShowDesignKeys, asToken, HOC
+  withShowDesignKeys, flowHoc, HOC
 } from '../src';
 
 type SpanType = ComponentType<any>;
@@ -317,7 +317,7 @@ describe('replaceWith', () => {
   });
 
   it('Propagates metadata without altering the replacement.', () => {
-    const Start$ = asToken({ title: 'Foo' })(Start);
+    const Start$ = flowHoc({ title: 'Foo' })(Start);
     expect(Start$.title).toBe('Foo');
     const Test = replaceWith(Replacement)(Start$);
     expect(Test.title).toBe('Foo');

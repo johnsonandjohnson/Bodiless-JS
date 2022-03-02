@@ -16,7 +16,7 @@ import React, { ComponentType } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
-  asToken, addClasses, H1 as H1$, Div, Button as ButtonBase,
+  flowHoc, addClasses, H1 as H1$, Div, Button as ButtonBase,
 } from '@bodiless/fclasses';
 import {
   AuthCallback,
@@ -33,7 +33,7 @@ const withLogContext = (WrappedButton: ComponentType) => (props: any) => {
 
 const onSuccess = (user: any) => console.log('OIDC callback is successfull. User: ', user || '');
 
-const H1 = asToken(addClasses('pt-5'), asHeader1)(H1$);
+const H1 = flowHoc(addClasses('pt-5'), asHeader1)(H1$);
 const Button = addClasses('py-2 px-4 mr-3 border border-gray-600')(ButtonBase);
 const Description = addClasses('text-sm mb-2 italic')(Div);
 const LogContextButton = withLogContext(Button);

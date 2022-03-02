@@ -19,14 +19,14 @@ import {
   varyDesign,
   replaceWith,
   withDesign,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 
 import { IframeWithResponsiveWidth } from '../Iframe';
 import { withType } from './Categories';
 
 const iframeVariation = {
-  Iframe: asToken(
+  Iframe: flowHoc(
     replaceWith(IframeWithResponsiveWidth),
     withType('Iframe')(),
     withTitle('Iframe'),

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.6...v0.3.7) (2022-02-16)
+
+
+### Bug Fixes
+
+* **components:** Ensure chameleon base component is replaceable. ([#1363](https://github.com/johnsonandjohnson/bodiless-js/issues/1363)) ([c6aad8d](https://github.com/johnsonandjohnson/bodiless-js/commit/c6aad8d9343fe3e383ff4781ec1fe2b50aaff15c)), closes [#1362](https://github.com/johnsonandjohnson/bodiless-js/issues/1362)
+
+
+### Performance Improvements
+
+* **components,layouts:** Improve performance of heavy component selectors ([#1308](https://github.com/johnsonandjohnson/bodiless-js/issues/1308)) ([050fa7b](https://github.com/johnsonandjohnson/bodiless-js/commit/050fa7b641ded750abb284bbb329da0ebed71ee5)), closes [#1236](https://github.com/johnsonandjohnson/bodiless-js/issues/1236)
+
+
+
+
+
 ## [0.3.6](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.5...v0.3.6) (2022-01-24)
 
 **Note:** Version bump only for package @bodiless/fclasses

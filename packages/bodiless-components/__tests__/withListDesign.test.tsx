@@ -15,7 +15,7 @@
 import React, { FC } from 'react';
 
 import {
-  HOC, withDesign, addProps, replaceWith, withoutProps, Tag, asToken,
+  HOC, withDesign, addProps, replaceWith, withoutProps, Tag, flowHoc,
 } from '@bodiless/fclasses';
 import { withDefaultContent } from '@bodiless/core';
 import flow from 'lodash/flow';
@@ -30,7 +30,7 @@ const withItemTitle = (title: string) => withDesign({
 }) as HOC;
 
 describe('list styling', () => {
-  const TestList = asToken(
+  const TestList = flowHoc(
     asBodilessList('testlist'),
     withItemTitle('TopList'),
     withSubLists(2)({
@@ -127,7 +127,7 @@ describe('list styling', () => {
     );
     const Test = flow(
       withDesign({
-        Item: asToken(
+        Item: flowHoc(
           addProps({ 'data-item': true } as any),
           withDesign({
             A: withDesign({

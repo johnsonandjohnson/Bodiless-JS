@@ -13,7 +13,7 @@
  */
 
 import React from 'react';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { mount } from 'enzyme';
 import { useEditContext } from '../src/hooks';
 import PageEditor from '../src/components/PageEditor';

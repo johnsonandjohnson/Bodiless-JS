@@ -11,13 +11,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import { asBodilessComponent, useMenuOptionUI } from '@bodiless/core';
-import type { ReactMarkdownProps as Props } from 'react-markdown';
 
+import ReactMarkdown from 'react-markdown';
 import MarkdownField from './InformedMarkdown';
 
-type Data = Pick<Props, 'source'>;
+type Props = ComponentProps<typeof ReactMarkdown>;
+
+type Data = Pick<Props, 'children'>;
 
 const asBodilessMarkdown = asBodilessComponent<Props, Data>({
   name: 'edit-markdown',
@@ -30,12 +32,12 @@ const asBodilessMarkdown = asBodilessComponent<Props, Data>({
     return (
       <ComponentFormLabel>
         Content
-        <MarkdownField field="source" />
+        <MarkdownField field="children" />
       </ComponentFormLabel>
     );
   },
   Wrapper: 'div',
-  defaultData: { source: 'Initial Value' },
+  defaultData: { children: 'Initial Value' },
 });
 
 export default asBodilessMarkdown;

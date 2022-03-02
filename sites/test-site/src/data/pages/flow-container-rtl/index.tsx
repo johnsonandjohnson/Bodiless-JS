@@ -21,7 +21,7 @@ import {
   H1 as BaseH1,
   H2 as BaseH2,
   addClasses,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import { getSnapFrom, withTailwindClasses } from '@bodiless/layouts';
 import resolvedConfigs from
@@ -34,7 +34,7 @@ import {
 } from '../../../components/FlowContainer';
 // @ts-ignore Could not find a declaration file...
 
-const RTLFlowContainer = asToken(
+const RTLFlowContainer = flowHoc(
   withNodeKey('rtlFlowContainer'),
 )(FlowContainerDefaultRTL);
 

@@ -30,7 +30,7 @@ import {
   getUI,
 } from '@bodiless/core';
 import {
-  asToken,
+  flowHoc,
   withDesign,
   withoutProps,
   addProps,
@@ -293,7 +293,7 @@ const withFilterDefaultSelection = <P extends object>(Component: ComponentOrTag<
 const withFilterSelection = (
   nodeKey = 'default-filters',
   defaultData = { tags: [] },
-) => asToken(
+) => flowHoc(
   withoutProps(['componentData', 'setComponentData']),
   withSidecarNodes(
     withNodeKey(nodeKey),

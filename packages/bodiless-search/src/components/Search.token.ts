@@ -13,7 +13,7 @@
  */
 
 import negate from 'lodash/negate';
-import { addClasses, asToken } from '@bodiless/fclasses';
+import { addClasses, flowHoc } from '@bodiless/fclasses';
 import { withChild, ifToggledOn } from '@bodiless/core';
 import { isSearchToggleButtonExpanded } from './ResponsiveSearchBox';
 import SearchIcon from '../icons/Search';
@@ -22,12 +22,12 @@ import CloseIcon from '../icons/Close';
 const SearchButtonIcon = addClasses('fill-current')(SearchIcon);
 const CloseButtonIcon = addClasses('fill-current')(CloseIcon);
 
-const withSearchIconSvg = asToken(
+const withSearchIconSvg = flowHoc(
   addClasses('cursor-pointer align-middle'),
   withChild(SearchButtonIcon),
 );
 
-const withSearchToggleIconSvg = asToken(
+const withSearchToggleIconSvg = flowHoc(
   ifToggledOn(isSearchToggleButtonExpanded)(withChild(CloseButtonIcon)),
   ifToggledOn(negate(isSearchToggleButtonExpanded))(withChild(SearchButtonIcon)),
 );

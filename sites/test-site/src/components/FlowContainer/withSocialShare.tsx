@@ -19,14 +19,14 @@ import {
   varyDesign,
   replaceWith,
   withDesign,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 
 import SocialShare from '../SocialShare';
 import { withType } from './Categories';
 
 const socialShareVariation = {
-  SocialShare: asToken(
+  SocialShare: flowHoc(
     replaceWith(SocialShare),
     withType('SocialShare')(),
     withTitle('SocialShare'),

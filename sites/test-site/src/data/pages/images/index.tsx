@@ -32,7 +32,7 @@ import {
   Section,
   addClasses,
   removeClasses,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
 import {
@@ -81,7 +81,7 @@ const asFixedWithWebpGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.Fixe
 const asFixedWithWebpNoBase64GatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedWithWebpNoBase64)(asBaseEditableImage);
 const asFixedWithWebpTracedSVGGatsbyImage = withGatsbyImagePreset(GatsbyImagePresets.FixedWithWebpTracedSVG)(asBaseEditableImage);
 
-const FluidGatsbyImage = asToken(
+const FluidGatsbyImage = flowHoc(
   asFluidGatsbyImage(),
   withGatsbyImageRoundedCorners,
 )(Img);
@@ -117,29 +117,29 @@ const ImageContentful1 = asContentfulImage(ContentfulImage1)('ContentfulImage1')
 const ImageContentful2 = asContentfulImage(ContentfulImage2)('ContentfulImage2')(Img);
 
 const PageTitle = asHeader1(H1);
-const PageSection = asToken(
+const PageSection = flowHoc(
   addClasses('my-4 flex flex-wrap w-full'),
 )(Section);
-const EditableImagesSection = asToken(
+const EditableImagesSection = flowHoc(
   withNode,
   withNodeKey('editableImages'),
 )(PageSection);
-const LinkableImagesSection = asToken(
+const LinkableImagesSection = flowHoc(
   withNode,
   withNodeKey('linkableImages'),
 )(PageSection);
-const ImageWrapper = asToken(
+const ImageWrapper = flowHoc(
   addClasses('inline-block p-2'),
 )(Div);
-const GatsbyImageWrapper = asToken(
+const GatsbyImageWrapper = flowHoc(
   removeClasses('inline-block'),
   addClasses('block w-1/2'),
 )(ImageWrapper);
-const FixedGatsbyImageWrapper = asToken(
+const FixedGatsbyImageWrapper = flowHoc(
   removeClasses('w-1/2'),
   addClasses('w-full lg:w-1/2'),
 )(GatsbyImageWrapper);
-const ImageSectionTitle = asToken(
+const ImageSectionTitle = flowHoc(
   addClasses('w-full'),
   asHeader2,
 )(H2);

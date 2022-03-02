@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/cli",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "A cli tool for Bodiless-JS",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
@@ -51,8 +51,7 @@
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
-    "@types/node": "^16",
-    "nodemon": "^1.19.1"
+    "@types/node": "^16"
   },
   "oclif": {
     "commands": "./lib/commands",

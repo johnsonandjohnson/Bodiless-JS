@@ -17,7 +17,7 @@ import {
   Img,
   addClasses,
   addProps,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import Card from '../Card';
 import { withEditorSimple } from '../Editors';
@@ -36,7 +36,7 @@ import {
 } from '../Card/token';
 
 const asTestableProductTitle = addProps({ 'data-product-element': 'title' });
-export const ProductTitle = asToken(
+export const ProductTitle = flowHoc(
   asHeader1,
   withEditorSimple('product_title', 'Product Title'),
   asTestableProductTitle,
@@ -44,14 +44,14 @@ export const ProductTitle = asToken(
 
 const asProductImage = addClasses('w-full');
 const asTestableProductImage = addProps({ 'data-product-element': 'image' });
-export const ProductImage = asToken(
+export const ProductImage = flowHoc(
   asProductImage,
   asImage,
   asEditableImage('product_image'),
   asTestableProductImage,
 )(Img);
 
-export const ProductCard = asToken(
+export const ProductCard = flowHoc(
   asCardWithPaddings,
   asCardDefaultStyle,
   asCardVertical,
@@ -59,7 +59,7 @@ export const ProductCard = asToken(
 
 export const SectionContent = withPadding5(Div);
 export const SectionMargin = asYMargin(Div);
-export const SectionNegXMargin = asToken(
+export const SectionNegXMargin = flowHoc(
   asYMargin,
   asNegXMargin,
 )(Div);

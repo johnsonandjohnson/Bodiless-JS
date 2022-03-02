@@ -65,7 +65,7 @@
   margin-left: 8px;
 }
 
-.bl-react-tags__search-input input {
+.react-tags__search-wrapper input {
   /* prevent autoresize overflowing the container */
   max-width: 100%;
   min-width: 250px;

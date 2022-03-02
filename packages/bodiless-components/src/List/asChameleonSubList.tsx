@@ -17,7 +17,7 @@ import identity from 'lodash/identity';
 import flow from 'lodash/flow';
 import type { EditButtonOptions, UseBodilessOverrides } from '@bodiless/core';
 import {
-  withDesign, HOC, Design, withoutProps, asToken,
+  withDesign, HOC, Design, withoutProps, flowHoc,
 } from '@bodiless/fclasses';
 import {
   useChameleonContext, withChameleonContext,
@@ -69,7 +69,7 @@ const asChameleonSubList = (useOverrides?: UseBodilessOverrides) => flow(
 const withSubListDesign$ = (depth: number) => (design: Design<any>, hoc: HOC = identity): HOC => (
   depth === 0 ? identity
     : withDesign({
-      Item: asToken(
+      Item: flowHoc(
         hoc,
         withDesign(design),
         withDesign(

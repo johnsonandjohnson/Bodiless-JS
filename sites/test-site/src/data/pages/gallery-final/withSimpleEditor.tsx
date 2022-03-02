@@ -17,7 +17,7 @@ import {
   Strong,
   addClasses,
   withDesign,
-  asToken,
+  flowHoc,
   Design,
   startWith,
 } from '@bodiless/fclasses';
@@ -28,7 +28,7 @@ import { withNodeKey, withChild } from '@bodiless/core';
 const asBold = startWith(Strong);
 const asItalic = addClasses('');
 const asUnderline = addClasses('underline');
-const asLink = asToken(asBodilessLink(), addClasses('text-blue-700 underline'));
+const asLink = flowHoc(asBodilessLink(), addClasses('text-blue-700 underline'));
 
 const simpleDesign: Design = {
   Bold: asBold,
@@ -37,10 +37,10 @@ const simpleDesign: Design = {
   Link: asLink,
 };
 
-const withSimpleEditor = (nodeKey?: string, placeholder?: string) => asToken(
+const withSimpleEditor = (nodeKey?: string, placeholder?: string) => flowHoc(
   addClasses('overflow-hidden'),
   withChild(
-    asToken(
+    flowHoc(
       withDesign(simpleDesign),
       withPlaceholder(placeholder),
       withNodeKey(nodeKey),

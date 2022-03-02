@@ -15,7 +15,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
-  H1, addProps, withDesign, replaceWith, H3, H2, addClasses, asToken, HOC, ComponentWithMeta,
+  H1, addProps, withDesign, replaceWith, H3, H2, addClasses, flowHoc, HOC, ComponentWithMeta,
 } from '@bodiless/fclasses';
 import {
   CardClean,
@@ -43,10 +43,10 @@ import * as availableTokens from '../../../components/Card/token';
 import { withTypographyTokenPanel } from './TypographySelector';
 
 const asFancyPanel = withDesign({
-  Title: asToken(asAccordionTitle, asHeader3, asPrimaryColorBackground),
+  Title: flowHoc(asAccordionTitle, asHeader3, asPrimaryColorBackground),
   Wrapper: asAccordionWrapper,
   Body: asAccordionBody,
-  Category: asToken(asBold, addClasses('mt-2')),
+  Category: flowHoc(asBold, addClasses('mt-2')),
   CheckBox: addClasses('mr-2'),
   Label: addClasses('block'),
 });
@@ -69,20 +69,20 @@ const withFlowContainerFirstItemNode = (
       ? <ComponentWithNode {...props} nodeKey={items[0].uuid} />
       : <Component {...props} />;
   };
-  return asToken(
+  return flowHoc(
     withNode,
     withNodeKey(nodeKey),
   )(WithFlowContainerFirstItemNode) as ComponentWithMeta<any>;
 };
 
-const withTokenData = (nodeKey: string) => asToken(
+const withTokenData = (nodeKey: string) => flowHoc(
   withTokenNamesFromData,
   withNodeDataHandlers(),
   withNode,
   withNodeKey(nodeKey),
 );
 
-const CardTokenPrinter = asToken(
+const CardTokenPrinter = flowHoc(
   withTokenPrinterKeys(['Title', 'Body', 'Link']),
   withDesign({
     Title: withTokenData('title-selector'),
@@ -100,7 +100,7 @@ const TokenPrinterBody = asAccordionBody(() => (
     </code>
   </pre>
 ));
-const TokenPrinterTitle = asToken(
+const TokenPrinterTitle = flowHoc(
   asPrimaryColorBackground,
   asHeader3,
   asAccordionTitle,
@@ -113,7 +113,7 @@ const TokenPrinterAccordion = asAccordionWrapper(() => (
   </div>
 ));
 
-const DemoTokenPanelCard = asToken(
+const DemoTokenPanelCard = flowHoc(
   withDesign({
     Title: withReactivateOnRemount('title'),
     Body: withReactivateOnRemount('body'),
@@ -122,15 +122,15 @@ const DemoTokenPanelCard = asToken(
   }),
   asEditableCard,
   withDesign({
-    Title: asToken(
+    Title: flowHoc(
       withTypographyTokenPanel('title-selector'),
       addProps({ tokenPanelTitle: 'Title' }),
     ),
-    Body: asToken(
+    Body: flowHoc(
       withTypographyTokenPanel('body-selector'),
       addProps({ tokenPanelTitle: 'Body' }),
     ),
-    Link: asToken(
+    Link: flowHoc(
       withTypographyTokenPanel('link-selector'),
       addProps({ tokenPanelTitle: 'CTA' }),
     ),
@@ -143,11 +143,11 @@ const DemoTokenPanelCard = asToken(
 )(CardClean);
 
 const PageTitle = asHeader1(H1);
-const ColumnHeader = asToken(asHeader2, addClasses('my-2'))(H2);
+const ColumnHeader = flowHoc(asHeader2, addClasses('my-2'))(H2);
 
-const DemoFlowContainer = asToken(
+const DemoFlowContainer = flowHoc(
   withDesign({
-    Card: asToken(
+    Card: flowHoc(
       replaceWith(DemoTokenPanelCard),
       withTitle('Card'),
       withDesc('A way to promote a call to Action.'),

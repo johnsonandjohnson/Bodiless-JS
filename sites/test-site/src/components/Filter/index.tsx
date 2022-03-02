@@ -14,12 +14,12 @@
 
 import { withFilterByTags, asTaggableItem } from '@bodiless/filtering';
 import {
-  Span, addClasses, Button, asToken,
+  Span, addClasses, Button, flowHoc,
 } from '@bodiless/fclasses';
 
 const TagSpan = addClasses('px-2 mb-2 mr-2')(Span);
 const TagButton = addClasses('px-2 mb-2 mr-2 border border-gray-600')(Button);
-const TaggableFilterableItem = asToken(
+const TaggableFilterableItem = flowHoc(
   withFilterByTags,
   asTaggableItem(),
 )(TagSpan);

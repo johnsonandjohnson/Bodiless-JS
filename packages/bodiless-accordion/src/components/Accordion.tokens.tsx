@@ -21,7 +21,7 @@ import {
   replaceWith,
   removeClasses,
   removeClassesIf,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import {
   ifEditable,
@@ -34,8 +34,7 @@ import {
   isAccordionContracted,
   isAccordionFocusedOut,
 } from './AccordionContext';
-import AddIcon from '../icons/Add';
-import RemoveIcon from '../icons/Remove';
+import { AddIcon, RemoveIcon } from '../icons';
 
 const OpenAccordionIcon = addClasses('fill-current')(AddIcon);
 const CloseAccordionIcon = addClasses('fill-current')(RemoveIcon);
@@ -43,7 +42,7 @@ const CloseAccordionIcon = addClasses('fill-current')(RemoveIcon);
 /**
  * withDisableExpandOnClick stops accordion behavior on edit mode
  */
-const withDisableExpandOnClick = asToken(
+const withDisableExpandOnClick = flowHoc(
   ifEditable(
     withExtendHandler('onClick', () => (e: MouseEvent) => e.stopPropagation()),
   ),
@@ -52,14 +51,14 @@ const withDisableExpandOnClick = asToken(
 /**
  * asAccordionDefaultBorder provides basic border style
  */
-const asAccordionDefaultBorder = asToken(
+const asAccordionDefaultBorder = flowHoc(
   addClasses('border border-solid border-black'),
 );
 
 /**
  * asAccordionDefaultExpanded provides expanded property
  */
-const asAccordionDefaultExpanded = asToken(
+const asAccordionDefaultExpanded = flowHoc(
   addProps({ expanded: 'true' }),
 );
 
@@ -67,7 +66,7 @@ const asAccordionDefaultExpanded = asToken(
  * asAccordionIcon provides basic icon style for accordion title,
  * as well as accessibility label support
  */
-const asAccordionIcon = asToken(
+const asAccordionIcon = flowHoc(
   addClasses('material-icons cursor-pointer right-0'),
   addProps({ 'data-accordion-element': 'accordion-icon' }),
   addPropsIf(isAccordionContracted)({ 'aria-label': 'Expand Accordion' }),
@@ -78,7 +77,7 @@ const asAccordionIcon = asToken(
  * asAccordionIcon provides svg icon token for accordion title,
  * base on asAccordionIcon
  */
-const asAccordionIconSvg = asToken(
+const asAccordionIconSvg = flowHoc(
   asAccordionIcon,
   ifToggledOn(isAccordionExpanded)(withChild(CloseAccordionIcon)),
   ifToggledOn(isAccordionContracted)(withChild(OpenAccordionIcon)),
@@ -87,14 +86,15 @@ const asAccordionIconSvg = asToken(
 /**
  * asAccordionTitleWrapper positions accordion title wrapper
  */
-const asAccordionTitleWrapper = asToken(
+const asAccordionTitleWrapper = flowHoc(
   addClasses('flex items-center justify-between relative'),
+  addProps({ 'aria-label': 'Filter' }),
 );
 
 /**
  * asAccordionLabel makes title label full
  */
-const asAccordionLabel = asToken(
+const asAccordionLabel = flowHoc(
   addClasses('w-full'),
 );
 
@@ -102,7 +102,7 @@ const asAccordionLabel = asToken(
  * asAccordionBodyWrapper controls accordion body visibility according to
  * expand/collapse behavior
  */
-const asAccordionBodyWrapper = asToken(
+const asAccordionBodyWrapper = flowHoc(
   addClassesIf(isAccordionExpanded)('block'),
   addClassesIf(isAccordionContracted)('hidden'),
 );
@@ -110,17 +110,17 @@ const asAccordionBodyWrapper = asToken(
 /**
  * asAccordionBodyContent truncates accordion body content
  */
-const asAccordionBodyContent = asToken(
+const asAccordionBodyContent = flowHoc(
   addClasses('truncate'),
 );
 
 /**
  * asAccordionBorder borders accordion title
  */
-const asAccordionBorder = asToken(
+const asAccordionBorder = flowHoc(
   withDesign({
     Title: withDesign({
-      Wrapper: asToken(
+      Wrapper: flowHoc(
         asAccordionDefaultBorder,
       ),
     }),
@@ -130,12 +130,12 @@ const asAccordionBorder = asToken(
 /**
  * asAccordionFocus adds border around the accordion component on focus event
  */
-const asAccordionFocus = asToken(
+const asAccordionFocus = flowHoc(
   withDesign({
     // Title must be full bordered in case accordion is contracted,
     // but no need for bottom border when accordion is expanded
     Title: withDesign({
-      Wrapper: asToken(
+      Wrapper: flowHoc(
         asAccordionDefaultBorder,
         addClassesIf(isAccordionExpanded)('border-b-0'),
         removeClassesIf(isAccordionFocusedOut)('border'),
@@ -143,7 +143,7 @@ const asAccordionFocus = asToken(
     }),
     // Body complements title bordering look when accordion is expanded
     Body: withDesign({
-      Wrapper: asToken(
+      Wrapper: flowHoc(
         asAccordionDefaultBorder,
         addClasses('border-t-0'),
         removeClassesIf(isAccordionFocusedOut)('border'),
@@ -156,9 +156,9 @@ const asAccordionFocus = asToken(
  * asNonExpandingAccordion provides default expanded accordion and
  * prevents users from collapsing it
  */
-const asNonExpandingAccordion = asToken(
+const asNonExpandingAccordion = flowHoc(
   withDesign({
-    Wrapper: asToken(
+    Wrapper: flowHoc(
       asAccordionDefaultExpanded,
       addClasses('pointer-events-none'),
       addPropsIf(isAccordionExpanded)({ 'aria-disabled': 'true' }),
@@ -170,7 +170,7 @@ const asNonExpandingAccordion = asToken(
     ),
     // Removes icon wrapper from accordion title
     Title: withDesign({
-      Icon: asToken(
+      Icon: flowHoc(
         // Using replaceWith instead of remove because the last
         // only pulls out the span tag, but keeps the text currently inside
         replaceWith(() => null),

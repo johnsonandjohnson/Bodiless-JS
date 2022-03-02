@@ -19,7 +19,7 @@ import type { WithNodeProps } from '@bodiless/core';
 import {
   designable, addProps, Fragment, withDesign, replaceWith, withoutProps, ComponentOrTag,
 } from '@bodiless/fclasses';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import flowRight from 'lodash/flowRight';
 import { asStylableBreadcrumbs } from './Breadcrumb.token';
 

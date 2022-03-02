@@ -18,7 +18,8 @@ import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
 import asBodilessAnchor from './Anchor/asBodilessAnchor';
 import {
-  withMeta, withMetaStatic, withMetaHtml, withTitle, withHeadElement, Options as HeadBaseOptions
+  withMeta, withMetaStatic, withMetaHtml, withTitle, withHeadElement, Options as HeadBaseOptions,
+  withMetaSiteInfo,
 } from './Meta/Meta';
 import withMetaForm, { withMetaSnippet } from './Meta/withMetaForm';
 import type { FieldType as MetaFormFieldType } from './Meta/withMetaForm';
@@ -80,6 +81,7 @@ export {
   withHeadElement,
   withMetaStatic,
   withMetaHtml,
+  withMetaSiteInfo,
   asBodilessHelmet,
   withEditPlaceholder,
   asBaseBodilessIframe,
@@ -119,7 +121,7 @@ export * from './List';
 export * from './Link';
 export * from './FileUpload';
 export * from './PageDisable';
-export * from './RedirectAlias';
+export * from './Tools';
 
 export type {
   MetaFormFieldType,

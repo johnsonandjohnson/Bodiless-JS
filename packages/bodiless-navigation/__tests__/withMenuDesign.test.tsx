@@ -16,7 +16,7 @@ import React from 'react';
 import flow from 'lodash/flow';
 import { mount } from 'enzyme';
 import {
-  withDesign, addProps, asToken,
+  withDesign, addProps, flowHoc,
 } from '@bodiless/fclasses';
 import {
   withListSubMenu, withMenuDesign, withColumnSubMenu, withCardsSubMenu,
@@ -63,7 +63,7 @@ const TestMenu = flow(
       }),
       Columns: withDesign({
         Wrapper: addProps({ id: 'columns-wrapper' }),
-        Item: asToken(
+        Item: flowHoc(
           addProps({ id: 'columns-item' }),
           withDesign({
             SubList: withDesign({

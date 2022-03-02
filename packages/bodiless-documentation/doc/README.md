@@ -29,7 +29,8 @@ npm run start
 
 Then Visit `localhost:8005` in your browser.
 
-> Requires [NodeJS](https://nodejs.org/en/download/) (v16.9+ only)
+> Requires [NodeJS](https://nodejs.org/en/download/) (LTS Gallium: node
+> 16.13+/npm 8.0+ only)
 
 ## Links
 

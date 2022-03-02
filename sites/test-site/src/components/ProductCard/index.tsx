@@ -14,7 +14,7 @@
 
 import { withSidecarNodes } from '@bodiless/core';
 import {
-  withDesign, startWith, asToken,
+  withDesign, startWith, flowHoc,
 } from '@bodiless/fclasses';
 import { ProductClean } from '@bodiless/organisms';
 import { BVInlineRatings } from '@bodiless/bv';
@@ -26,7 +26,7 @@ import {
 import { asEditableImagePlain as asEditableImage } from '../Image';
 import { asProductCardDefaultStyle } from './token';
 
-export const asProductCard = asToken(
+export const asProductCard = flowHoc(
   withDesign({
     ImageLink: withSidecarNodes(
       asEditableLink('cta'),
@@ -47,7 +47,7 @@ export const asProductCard = asToken(
   }),
 );
 
-export const ProductCard = asToken(
+export const ProductCard = flowHoc(
   asProductCard,
   asProductCardDefaultStyle,
 )(ProductClean);

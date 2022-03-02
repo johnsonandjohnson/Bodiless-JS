@@ -5,12 +5,12 @@ import identity from 'lodash/identity';
 import { pick } from 'lodash';
 import { startWith } from './replaceable';
 import type {
-  TokenDef, // AsToken,
+  TokenDef, // FlowHoc,
   DesignableComponents, HocDesign, TokenSpec,
   ReservedDomains, Design, Token, HOCBase, HOD, TokenSpecBase,
 } from './types';
 import { $TokenSpec } from './types';
-import { asToken, extendMeta } from './flowHoc';
+import { flowHoc, extendMeta } from './flowHoc';
 import { addClasses } from './addClasses';
 import { withHocDesign } from './withHocDesign';
 // import omit from 'lodash/omit';
@@ -83,9 +83,9 @@ function as<D extends object = any>(
     if (arg.Flow) {
       return arg.Flow(...specTokens);
     }
-    return asToken(...specTokens);
+    return flowHoc(...specTokens);
   });
-  return asToken(...tokens);
+  return flowHoc(...tokens);
 }
 
 /**
@@ -109,7 +109,7 @@ function withDesign<C extends DesignableComponents = any, D extends object = any
       }),
       {} as HocDesign<any>
     );
-  return asToken(
+  return flowHoc(
     as(design._) as HOCBase,
     withHocDesign(hocDesign)
   );

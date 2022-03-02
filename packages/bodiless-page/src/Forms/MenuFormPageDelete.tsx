@@ -43,11 +43,14 @@ const deletePage = async ({ path, client } : any) => {
     if (result.message !== 'Success' && typeof (result.message) === 'string') {
       return Promise.reject(new Error(result.message));
     }
-    try {
-      await handleBackendResponse(client.deleteStaticAssets(path));
-    } catch (e: any) {
-      return Promise.reject(new Error(e.message));
-    }
+    // Deleting the static assets on delete leads to a gatsby image rendering issue.
+    // To be resolved with another approach:
+    // https://github.com/johnsonandjohnson/Bodiless-JS/issues/1348
+    // try {
+    //   await handleBackendResponse(client.deleteStaticAssets(path));
+    // } catch (e: any) {
+    //   return Promise.reject(new Error(e.message));
+    // }
     return Promise.resolve();
   }
   return Promise.reject(new Error('The page cannot be deleted.'));
@@ -55,12 +58,12 @@ const deletePage = async ({ path, client } : any) => {
 
 const DeletePageForm = (props : PageState) => {
   const {
-    status, errorMessage,
+    status, errorMessage, isRedirectActive,
   } = props;
-
   const defaultUI = usePageMenuOptionUI();
   const {
     ComponentFormDescription,
+    ComponentFormDescriptionEmphasis,
     ComponentFormFieldWrapper,
     ComponentFormLabelBase,
     ComponentFormTitle,
@@ -83,6 +86,7 @@ const DeletePageForm = (props : PageState) => {
             <PageURLField
               fieldLabel="Add optional redirect"
               placeholder="/redirectpage"
+              simpleValidation
               validateOnChange
               validateOnBlur
             />
@@ -106,8 +110,14 @@ const DeletePageForm = (props : PageState) => {
             <ComponentFormDescription>
               Upon closing this dialog you will be redirected to the deleted page’s parent page.
             </ComponentFormDescription>
+            {
+              isRedirectActive ? (
+                <ComponentFormDescriptionEmphasis>
+                  Redirect Active
+                </ComponentFormDescriptionEmphasis>
+              ) : null
+            }
           </ContextMenuProvider>
-
         </>
       );
     }
@@ -151,6 +161,7 @@ const menuFormPageDelete = (client: PageClient) => contextMenuForm({
 })(({ formState, formApi } : any) => {
   const { ComponentFormText } = usePageMenuOptionUI();
   const {
+    invalid,
     submits,
     values,
   } = formState;
@@ -160,6 +171,7 @@ const menuFormPageDelete = (client: PageClient) => contextMenuForm({
   const [state, setState] = useState<PageState>({
     status: PageStatus.Init,
   });
+  const [isRedirectActive, setRedirectActive] = useState<boolean>(false);
 
   const context = useEditContext();
   const { node } = useNode();
@@ -181,7 +193,7 @@ const menuFormPageDelete = (client: PageClient) => contextMenuForm({
         });
     }
 
-    if (submits && path) {
+    if (submits && path && !invalid) {
       context.showPageOverlay({ hasSpinner: false });
       actualState = PageStatus.Pending;
       setState({ status: PageStatus.Pending });
@@ -194,6 +206,7 @@ const menuFormPageDelete = (client: PageClient) => contextMenuForm({
               ? redirectPathInput
               : `/${redirectPathInput}`;
             createRedirect(node, path, redirectPath);
+            setRedirectActive(true);
           }
           actualState = PageStatus.Complete;
           setState({ status: PageStatus.Complete });
@@ -216,6 +229,7 @@ const menuFormPageDelete = (client: PageClient) => contextMenuForm({
       <DeletePageForm
         status={status}
         errorMessage={errorMessage}
+        isRedirectActive={isRedirectActive}
       />
     </>
   );

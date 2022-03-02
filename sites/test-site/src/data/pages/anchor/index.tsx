@@ -18,25 +18,25 @@ import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { asBodilessAnchor, asBodilessList } from '@bodiless/components';
 import { withSidecarNodes, withNode } from '@bodiless/core';
 import {
-  A, H1, H2, H4, P, Ul, Li, addClasses, withDesign, replaceWith, asToken,
+  A, H1, H2, H4, P, Ul, Li, addClasses, withDesign, replaceWith, flowHoc,
 } from '@bodiless/fclasses';
 import Layout from '../../../components/Layout';
 import {
   asHeader1, asHeader2, asEditableLink, asEditable, asBold,
 } from '../../../components/Elements.token';
 
-const BackToTopH1 = asToken(
+const BackToTopH1 = flowHoc(
   asHeader1,
   asBodilessAnchor(),
 )(H1);
 
-const AnchorTitle = asToken(
+const AnchorTitle = flowHoc(
   asHeader2,
   asBodilessAnchor(),
   addClasses('mt-10'),
 )(H2);
 
-const AnchorSubtitle = asToken(
+const AnchorSubtitle = flowHoc(
   asBodilessAnchor(),
   asBold,
   addClasses('my-2'),
@@ -44,7 +44,7 @@ const AnchorSubtitle = asToken(
 
 const TextSection = addClasses('my-4')(P) as ComponentType;
 
-const asAnchorLink = asToken(
+const asAnchorLink = flowHoc(
   replaceWith(A),
   withSidecarNodes(
     asBodilessAnchor('anchor'),
@@ -54,7 +54,7 @@ const asAnchorLink = asToken(
   withNode,
 );
 
-const AnchorLinkList = asToken(
+const AnchorLinkList = flowHoc(
   asBodilessList(),
   withDesign({
     Title: asAnchorLink,

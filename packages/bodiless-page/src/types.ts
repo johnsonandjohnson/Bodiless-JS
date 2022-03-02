@@ -25,6 +25,7 @@ type PageState = {
   titlePending?: string;
   formTitle?: string,
   linkId?: string,
+  isRedirectActive?: boolean,
   FormFields?: (Label: ComponentType<HTMLProps<HTMLLabelElement>>) => void,
 };
 
@@ -43,7 +44,7 @@ type PageClient = {
   savePage: (path: string, template?: string) => AxiosPromise<any>;
 };
 
-type PageData = {
+type PageProps = {
   pagePath: string;
   retries?: number;
 };
@@ -54,19 +55,33 @@ type PageData = {
  * if we decide to allow overriding it in the future
  * then also we need to allow overriding the second PageURLField input
  */
-type FieldLabel = {
+type CustomFieldProps = {
   fieldFull?: boolean,
   fieldLabel?: string,
+  required?: boolean,
+  simpleValidation?: boolean,
 };
-type FieldProps = Omit<BaseFieldProps, 'field'> & FieldLabel;
+type FieldProps = Omit<BaseFieldProps, 'field'> & CustomFieldProps;
 type FieldValidate = (value: FormValue, values: FormValues) => FormError;
+
+type PageDataContextProps = {
+  pagePath: string,
+  subPageTemplate: string,
+  template: string,
+};
+
+type PageDataContextProviderProps = {
+  pageData: PageDataContextProps,
+};
 
 export {
   PageClient,
-  PageData,
+  PageProps,
   PageMenuOptions,
   PageStatus,
   PageState,
   FieldProps,
   FieldValidate,
+  PageDataContextProps,
+  PageDataContextProviderProps,
 };

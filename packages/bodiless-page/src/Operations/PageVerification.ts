@@ -14,7 +14,7 @@
 
 import axios from 'axios';
 import sleep from 'sleep-promise';
-import { PageData } from '../types';
+import { PageProps } from '../types';
 
 const stripSurroundingSlashes = (path: string): string => {
   let path$ = path[0] === '/' ? path.slice(1) : path;
@@ -33,7 +33,7 @@ const doFetch = (url: string) => axios.get(url, {
   validateStatus: () => true,
 });
 
-const loadPageDataJson = (loadObj: PageData): Promise<boolean> => {
+const loadPageDataJson = (loadObj: PageProps): Promise<boolean> => {
   const { pagePath, retries = 0 } = loadObj;
   const url = createPageDataUrl(pagePath);
   return doFetch(url).then(req => {

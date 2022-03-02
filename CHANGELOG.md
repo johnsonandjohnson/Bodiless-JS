@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.6...v0.3.7) (2022-02-16)
+
+
+### Bug Fixes
+
+* **components:** Ensure chameleon base component is replaceable. ([#1363](https://github.com/johnsonandjohnson/bodiless-js/issues/1363)) ([c6aad8d](https://github.com/johnsonandjohnson/bodiless-js/commit/c6aad8d9343fe3e383ff4781ec1fe2b50aaff15c)), closes [#1362](https://github.com/johnsonandjohnson/bodiless-js/issues/1362)
+* **lint:** fixing ESlint detecting common syntax issue ([#1343](https://github.com/johnsonandjohnson/bodiless-js/issues/1343)) ([92f0099](https://github.com/johnsonandjohnson/bodiless-js/commit/92f00996f35dcd4e6b58d2d6344d596b02307237))
+* **page move:** Move assets on moved pages. ([#1326](https://github.com/johnsonandjohnson/bodiless-js/issues/1326)) ([51ca192](https://github.com/johnsonandjohnson/bodiless-js/commit/51ca192f35b369f4664667ea356759e5d7752690))
+
+
+### Features
+
+* **bodiless-filtering, listing:** Listing Page - Flow Container - Default Filter ([#1273](https://github.com/johnsonandjohnson/bodiless-js/issues/1273)) ([4e27dc2](https://github.com/johnsonandjohnson/bodiless-js/commit/4e27dc220571168b0acc83a6d0c5dd0a86650b56))
+* **Layout, Content library:** content Library item created on a deleted page uses src of this … ([#1358](https://github.com/johnsonandjohnson/bodiless-js/issues/1358)) ([86d132d](https://github.com/johnsonandjohnson/bodiless-js/commit/86d132dc3a322dc3dd07036192a5a27a503ef61a))
+
+
+### Performance Improvements
+
+* **components,layouts:** Improve performance of heavy component selectors ([#1308](https://github.com/johnsonandjohnson/bodiless-js/issues/1308)) ([050fa7b](https://github.com/johnsonandjohnson/bodiless-js/commit/050fa7b641ded750abb284bbb329da0ebed71ee5)), closes [#1236](https://github.com/johnsonandjohnson/bodiless-js/issues/1236)
+
+
+
+
+
 ## [0.3.6](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.5...v0.3.6) (2022-01-24)
 
 

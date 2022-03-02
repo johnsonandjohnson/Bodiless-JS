@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.6...v0.3.7) (2022-02-16)
+
+
+### Features
+
+* **bodiless-filtering, listing:** Listing Page - Flow Container - Default Filter ([#1273](https://github.com/johnsonandjohnson/bodiless-js/issues/1273)) ([4e27dc2](https://github.com/johnsonandjohnson/bodiless-js/commit/4e27dc220571168b0acc83a6d0c5dd0a86650b56))
+
+
+
+
+
 ## [0.3.6](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.5...v0.3.6) (2022-01-24)
 
 **Note:** Version bump only for package @bodiless/filtering

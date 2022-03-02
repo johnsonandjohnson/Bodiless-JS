@@ -13,7 +13,7 @@
  */
 
 import React from 'react';
-import { asToken, HOC } from '@bodiless/fclasses';
+import { flowHoc, HOC } from '@bodiless/fclasses';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { withPageDimensionsContext, BreakpointsType } from '@bodiless/components';
 import Helmet from 'react-helmet';
@@ -33,7 +33,7 @@ const getTailwindBreakpoints = (): BreakpointsType => {
 
 const breakpoints: BreakpointsType = getTailwindBreakpoints();
 
-const asResponsivePage = asToken(
+const asResponsivePage = flowHoc(
   withPageDimensionsContext({ breakpoints }),
 )(Page);
 

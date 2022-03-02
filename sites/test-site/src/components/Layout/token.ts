@@ -15,7 +15,7 @@
 import {
   addClasses,
   withDesign,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import {
   asPageContainer,
@@ -31,7 +31,7 @@ const asDefaultLogoStyle = withDesign({
 
 const asSiteHeader = withDesign({
   Wrapper: asPrimaryColorBackground,
-  Container: asToken(
+  Container: flowHoc(
     asPageContainer,
     asTealBackground,
     addClasses('flex justify-between h-12 lg:h-auto items-center flex-wrap lg:bg-transparent px-4 lg:px-0'),
@@ -43,7 +43,7 @@ const asSiteHeader = withDesign({
 
 const asSiteFooter = withDesign({
   Wrapper: asPrimaryColorBackground,
-  Container: asToken(asPageContainer, addClasses('py-3')),
+  Container: flowHoc(asPageContainer, addClasses('py-3')),
 });
 
 export {

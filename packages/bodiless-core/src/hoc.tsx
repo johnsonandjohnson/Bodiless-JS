@@ -13,7 +13,7 @@
  */
 import ResizeObserver from 'resize-observer-polyfill';
 
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import React, {
   ComponentType as CT, EventHandler, FC,
   useEffect,

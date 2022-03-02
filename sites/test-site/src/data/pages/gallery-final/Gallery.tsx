@@ -20,7 +20,7 @@ import {
   stylable,
   varyDesign,
   replaceWith,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import { withNode } from '@bodiless/core';
 import { withTitle, withFacet } from '@bodiless/layouts';
@@ -36,7 +36,7 @@ const withRedBorder = addClasses('border-red-400');
 
 const galleryDesign = varyDesign(
   {
-    ImageTile: asToken(
+    ImageTile: flowHoc(
       replaceWith(CaptionedImage),
       stylable,
       asGalleryTile,
@@ -62,7 +62,7 @@ const Gallery: FC<HTMLProps<HTMLDivElement>> = ({ children, ...rest }) => (
   </Wrapper>
 );
 
-export default asToken(
+export default flowHoc(
   withNode,
   stylable,
 )(Gallery);

@@ -18,7 +18,7 @@ import {
   DesignableComponentsProps,
   withDesign,
   Div,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
 import ResponsiveMenu, { BurgerMenuToggler } from '../Menu';
@@ -77,7 +77,7 @@ const HeaderClean: FC<Props> = ({ components }) => {
   );
 };
 
-const asSiteHeader = asToken(
+const asSiteHeader = flowHoc(
   designable(headerComponents, 'Header'),
   withDesign({
     Menu: withNodeKey({ nodeKey: 'MainMenu', nodeCollection: 'site' }),

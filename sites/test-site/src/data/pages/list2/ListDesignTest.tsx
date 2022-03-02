@@ -14,7 +14,7 @@
 
 import React from 'react';
 import {
-  withDesign, addProps, asToken,
+  withDesign, addProps, flowHoc,
 } from '@bodiless/fclasses';
 import {
   asSubList, asBodilessList, withSubLists,
@@ -22,17 +22,17 @@ import {
 // import { withDefaultContent } from '@bodiless/core';
 
 const withItemTitle = (title: string) => withDesign({
-  Title: asToken(
+  Title: flowHoc(
     () => (props: any) => <span {...props}>{title}</span>,
   ),
 });
 
-const TestList = asToken(
+const TestList = flowHoc(
   asBodilessList('testlist'),
   withItemTitle('TopList'),
   withSubLists(2)({
-    A: asToken(asSubList(), withItemTitle('SublistA')),
-    B: asToken(asSubList(), withItemTitle('SubListB')),
+    A: flowHoc(asSubList(), withItemTitle('SublistA')),
+    B: flowHoc(asSubList(), withItemTitle('SubListB')),
   }),
   // Add some id's so we can find the elements.
   withDesign({

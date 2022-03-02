@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType } from 'react';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { withNode, useNodeDataHandlers } from '@bodiless/core';
 
 const NodeViewer: ComponentType<any> = withNode(

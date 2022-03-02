@@ -312,7 +312,7 @@ For example:
 
 01. Move the data being filtered to a sitewide collection:
     ```tsx
-    const ProductListingFlowContainer = asToken(
+    const ProductListingFlowContainer = flowHoc(
       asFilterableProductContainer,
       withProductStrictSnapSize,
       withProductVariations,
@@ -367,13 +367,13 @@ export const FilterByGroupSingleSiteWide = flow(
   withSiteWideFilter,
 )(FilterByGroupClean);
 
-const withSingleAllowedTagNoReset = asToken(
+const withSingleAllowedTagNoReset = flowHoc(
   addProps({
     multipleAllowedTags: false,
     resetButtonText: '',
   }),
   withDesign({
-    ResetButton: asToken(
+    ResetButton: flowHoc(
       replaceWith(Fragment),
     ),
     Filter: withFilterSelection(),  // Preset Filter feature

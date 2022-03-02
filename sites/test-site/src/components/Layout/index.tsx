@@ -14,7 +14,7 @@
 
 import React, { ComponentType, Fragment, FC } from 'react';
 import {
-  Div, designable, addClasses, replaceWith, DesignableComponentsProps, asToken, flowIf,
+  Div, designable, addClasses, replaceWith, DesignableComponentsProps, flowHoc, flowIf,
   HOC,
 } from '@bodiless/fclasses';
 import { useNode, withNodeKey } from '@bodiless/core';
@@ -33,7 +33,7 @@ import BreadcrumbsBase from '../Breadcrumbs/MenuBreadcrumbs';
 const SiteHeader = asSiteHeader(Header);
 const SiteFooter = asSiteFooter(Footer);
 
-const Container = asToken(
+const Container = flowHoc(
   asPageContainer,
   asYMargin,
 )(Div);
@@ -49,7 +49,7 @@ const oidcConfig = {
   onSignOut: () => console.log('On Sign Out Callback'),
 };
 
-const SiteProviders = asToken(
+const SiteProviders = flowHoc(
   withBreadcrumbStore,
   withBurgerMenuProvider,
   withOidcProvider(oidcConfig) as HOC,
@@ -82,7 +82,7 @@ const BaseLayout: FC<LayoutProps> = ({ children, components }) => {
 const isHomePage = () => useNode().node.pagePath === '/';
 
 const Layout$ = designable({
-  Breadcrumbs: asToken(
+  Breadcrumbs: flowHoc(
     withNodeKey({ nodeKey: 'MainMenu', nodeCollection: 'site' }),
     addClasses('pt-2'),
     // hide breadcrumbs on home page

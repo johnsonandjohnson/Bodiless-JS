@@ -17,7 +17,7 @@ import React, {
   useCallback, useEffect,
 } from 'react';
 import { useFormApi, useFormState } from 'informed';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import {
   withNode,
   useNode,
@@ -30,7 +30,7 @@ import {
   withNodeKey,
 } from '@bodiless/core';
 import {
-  asToken,
+  flowHoc,
   withOnlyProps,
   HOC,
 } from '@bodiless/fclasses';
@@ -188,7 +188,7 @@ const FormBodyBase = () => {
   );
 };
 
-const FormBody: any = asToken(
+const FormBody: any = flowHoc(
   withNode,
   withNodeKey({
     nodeKey: 'disabled-pages',
@@ -233,7 +233,7 @@ const menuOptions: MenuOptionsDefinition<object> = {
   root: true,
 };
 
-const withPageDisableButton = asToken(
+const withPageDisableButton = flowHoc(
   withOnlyProps('key', 'children') as HOC,
   withMenuOptions(menuOptions),
   withNodeObserver,

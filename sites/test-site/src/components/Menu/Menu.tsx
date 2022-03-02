@@ -13,21 +13,21 @@
  */
 
 import { ComponentType } from 'react';
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import {
   asBodilessMenu, withListSubMenu, withColumnSubMenu, withCardsSubMenu,
 } from '@bodiless/navigation';
 
 import $asNavStyles from './Menu.token';
 
-const $asMenuBase = asToken(
+const $asMenuBase = flowHoc(
   asBodilessMenu(),
   withListSubMenu(),
   withColumnSubMenu(),
   withCardsSubMenu(),
 );
 
-const Menu = asToken(
+const Menu = flowHoc(
   $asMenuBase,
   $asNavStyles,
 )('ul') as ComponentType<any>;

@@ -20,7 +20,7 @@ import {
   NodeViewer,
 } from '@bodiless/components';
 import {
-  withDesign, addProps, Div, asToken,
+  withDesign, addProps, Div, flowHoc,
 } from '@bodiless/fclasses';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 
@@ -33,7 +33,7 @@ import {
   withEditorFullFeatured,
 } from '../../../components/Editors';
 
-const AlphabeticFullFeaturedEditor = asToken(
+const AlphabeticFullFeaturedEditor = flowHoc(
   withEditorFullFeatured('alphabeticRTE', 'Type something here...'),
   withDesign({
     Editor: addProps({

@@ -15,7 +15,7 @@
 import {
   addClasses,
   withDesign,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import { asFilterableByGroup } from '@bodiless/filtering';
 import {
@@ -28,22 +28,22 @@ import {
 } from '../Elements.token';
 
 const asProductCardDefaultStyle = withDesign({
-  Wrapper: asToken(asBlockItem, asTextColorPrimary),
-  Image: asToken(
+  Wrapper: flowHoc(asBlockItem, asTextColorPrimary),
+  Image: flowHoc(
     asImageRounded,
     addClasses('w-full'),
   ),
-  Title: asToken(
+  Title: flowHoc(
     asHeader2,
     asXMargin,
     asYMargin,
   ),
-  BvReviewLink: asToken(
+  BvReviewLink: flowHoc(
     asXMargin,
     asYMargin,
     addClasses('block'),
   ),
-  Body: asToken(
+  Body: flowHoc(
     asXMargin,
     asYMargin,
   ),

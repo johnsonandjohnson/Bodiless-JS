@@ -81,7 +81,7 @@ export const Overlay = ({ settings, ui }: { settings: TOverlaySettings, ui: Full
   );
 };
 
-export const OverlayPortal = observer(({ store, ui }) => {
+export const OverlayPortal = observer(({ store, ui }: any) => {
   const root = typeof window !== 'undefined' ? window.document.body : null;
   return store.data.isActive
   && root

@@ -20,13 +20,13 @@ import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
   addClasses, H1 as H1$, H2 as H2$, withDesign,
   addProps, Div, removeClasses, replaceWith, withoutProps,
-  Section, asToken,
+  Section, flowHoc,
   P,
   HOC,
   extendDesign,
   varyDesigns,
 } from '@bodiless/fclasses';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 
 import {
   asBodilessChameleon, withChameleonContext, withChameleonButton,
@@ -56,7 +56,7 @@ const basicChameleonDesign = {
   Green: addClasses('border-green-500 text-green-500'),
 };
 
-const BasicChameleon = asToken(
+const BasicChameleon = flowHoc(
   asBodilessChameleon('basic-chameleon'),
   withDesign(basicChameleonDesign),
 )(BaseComponent);
@@ -82,7 +82,7 @@ const RedStart = addProps({
   ) as ReactNode,
 })(BaseComponent);
 // This starting component does not exist in the design.
-const YellowStart = asToken(
+const YellowStart = flowHoc(
   addProps({
     children: (
       <>
@@ -94,7 +94,7 @@ const YellowStart = asToken(
   addClasses('border-yellow-500 text-yellow-500'),
 )(BaseComponent);
 
-const DynamicStartChameleon = asToken(
+const DynamicStartChameleon = flowHoc(
   asBodilessChameleon('dynamic-start-chameleon'),
   withDesign(basicChameleonDesign),
   addProps({
@@ -110,22 +110,22 @@ const DynamicStartChameleon = asToken(
  */
 const borderDesign = {
   '': removeClasses('border-8'),
-  Thick: asToken(asToken.meta.term('Border')('Thick')),
-  Thin: asToken(
-    removeClasses('border-8'), addClasses('border-2'), asToken.meta.term('Border')('Thin'),
+  Thick: flowHoc(flowHoc.meta.term('Border')('Thick')),
+  Thin: flowHoc(
+    removeClasses('border-8'), addClasses('border-2'), flowHoc.meta.term('Border')('Thin'),
   ),
 };
 
 const selectorDesign = varyDesigns(
   extendDesign(basicChameleonDesign, {
-    Red: asToken(asToken.meta.term('Color')('Red')),
-    Blue: asToken(asToken.meta.term('Color')('Blue')),
-    Green: asToken(asToken.meta.term('Color')('Green')),
+    Red: flowHoc(flowHoc.meta.term('Color')('Red')),
+    Blue: flowHoc(flowHoc.meta.term('Color')('Blue')),
+    Green: flowHoc(flowHoc.meta.term('Color')('Green')),
   }),
   borderDesign,
 );
 
-const SelectorChameleon = asToken(
+const SelectorChameleon = flowHoc(
   asBodilessChameleon('selector-chameleon', undefined, useChameleonSelectorForm),
   addProps({
     blacklistCategories: ['Color'],
@@ -148,12 +148,12 @@ const BaseAvailability: FC<AvailabilityProps> = ({ isAvailable, ...rest }) => (
 );
 
 const toggleDesign = {
-  Available: asToken(
+  Available: flowHoc(
     addProps({ isAvailable: true }),
   ),
 };
 
-const AvailabilityToggle = asToken(
+const AvailabilityToggle = flowHoc(
   asBodilessChameleon('basic-toggle', { component: 'Available' }, () => ({ label: 'Avail' })),
   withDesign(toggleDesign),
   withDesign({
@@ -169,13 +169,13 @@ const toggleVisibilityDesign = {
   Available: removeClasses('invisible'),
 };
 
-const VisibilityToggle = asToken(
+const VisibilityToggle = flowHoc(
   addClasses('invisible'),
   applyChameleon,
   // withDesign(toggleVisibilityDesign),
 )(BaseAvailability);
 
-const VisibilityTogglerapper = asToken(
+const VisibilityTogglerapper = flowHoc(
   withChameleonButton(() => ({ label: 'Avail' })),
   withChameleonContext('decomposed-toggle'),
   withDesign(toggleVisibilityDesign),
@@ -234,7 +234,7 @@ const toggleCartDesign = {
   Available: replaceWith(AddToCartBase),
 };
 
-const AddToCartToggle = asToken(
+const AddToCartToggle = flowHoc(
   withoutProps('productId'),
   applyChameleon,
   withoutProps('unwrap'),
@@ -261,7 +261,7 @@ const AvailabilityAccordion = ({ isAvailable, ...rest }: any) => {
   );
 };
 
-// const AvailabilityAccordionToggleDefective = asToken(
+// const AvailabilityAccordionToggleDefective = flowHoc(
 //   asBodilessChameleon('basic-toggle', { component: 'Available' }, () => ({ label: 'Avail' })),
 //   withDesign(toggleDesign),
 // )(AvailabilityAccordion);
@@ -270,7 +270,7 @@ const withChameleonAvailability: HOC = Component => (props: any) => (
   <Component {...props} isAvailable={useChameleonContext().isOn} />
 );
 
-const AvailabilityAccordionToggle = asToken(
+const AvailabilityAccordionToggle = flowHoc(
   withChameleonAvailability,
   withChameleonButton(() => ({ label: 'Avail' })),
   withChameleonContext('accordion-toggle'),
@@ -287,7 +287,7 @@ const Example: FC = ({ children }) => {
     </Section>
   );
 };
-const ExampleLayoutProvider = asToken(
+const ExampleLayoutProvider = flowHoc(
   asBodilessChameleon('layout', undefined, () => ({
     root: true,
     label: 'Layout',
@@ -303,8 +303,8 @@ const ExampleLayoutProvider = asToken(
   }),
 )(LayoutContext.Provider) as ComponentType;
 
-const H1 = asToken(addClasses('pt-5'), asHeader1)(H1$);
-const H2 = asToken(addClasses('pt-5'), asHeader2)(H2$);
+const H1 = flowHoc(addClasses('pt-5'), asHeader1)(H1$);
+const H2 = flowHoc(addClasses('pt-5'), asHeader2)(H2$);
 const Description = addClasses('mt-2 text-sm italic')(P);
 // const Example = addClasses('w-1/3 p-5')(Section$);
 const Examples = addClasses('flex flex-wrap')(Div);

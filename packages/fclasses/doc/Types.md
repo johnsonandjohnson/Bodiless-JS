@@ -188,9 +188,9 @@ const D4 = withFoo('hello')(Base4); // ok
 
 ## Type inference for composed tokens
 
-### `asToken`
+### `flowHoc`
 
-The Bodiless `asToken` composition utility will produce a token which can
+The Bodiless `flowHoc` composition utility will produce a token which can
 correctly infer the type of an enhanced component based on the signature of the
 base component and the types of the composed tokens.
 
@@ -201,7 +201,7 @@ Given:
   const enhancer: Enhancer<Base2Props> = () => () => null;
   const injector: Injector<Pick<BaseProps, 'foo'>> = () => () => null;
   const constrainer: Token<BaseProps> = () => () => null;
-  const composed = asToken(
+  const composed = flowHoc(
     constrainer,
     enhancer,
     injector,

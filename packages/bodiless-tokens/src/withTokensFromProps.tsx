@@ -15,7 +15,7 @@
 import React, { ComponentType } from 'react';
 
 import {
-  ComponentOrTag, HOC, asToken, Enhancer,
+  ComponentOrTag, HOC, flowHoc, Enhancer,
 } from '@bodiless/fclasses';
 
 export type Tokens = { [key: string]: HOC };
@@ -41,7 +41,7 @@ const withTokensFromProps:Enhancer<TokensProps> = Component => {
     constructor(props: TokensProps) {
       super(props);
       const { tokens } = props;
-      this.Component = asToken(
+      this.Component = flowHoc(
         {}, // necessary bc of ts bug, see https://github.com/microsoft/TypeScript/issues/28010
         ...tokens,
       )(Component);

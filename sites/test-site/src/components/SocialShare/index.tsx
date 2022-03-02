@@ -23,7 +23,7 @@ import {
   ImageDropZone,
   TImagePickerUI,
 } from '@bodiless/components';
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import { SocialShare as SocialShareClean } from '@bodiless/organisms';
 import type { SocialShareProvider } from '@bodiless/organisms';
 import { useFieldApi } from 'informed';
@@ -244,8 +244,8 @@ const providersEmailOnly: SocialShareProvider[] = [
   emailRound,
 ];
 
-const SimpleSocialShare = asToken(asSimpleSocialShare)(SocialShareClean);
-const CustomizedSocialShare = asToken(asOrangeSocialShare)(SocialShareClean);
+const SimpleSocialShare = flowHoc(asSimpleSocialShare)(SocialShareClean);
+const CustomizedSocialShare = flowHoc(asOrangeSocialShare)(SocialShareClean);
 const IconOnlySocialShare = () => (
   <CustomizedSocialShare providers={providersCustomized} buttonContent={Icon()} />
 );

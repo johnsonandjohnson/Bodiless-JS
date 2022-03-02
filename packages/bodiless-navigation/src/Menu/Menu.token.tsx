@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { useListContext } from '@bodiless/components';
 import { useEditContext } from '@bodiless/core';
 import type { HOC } from '@bodiless/fclasses';
@@ -21,7 +21,7 @@ import {
   removeClassesIf,
   addClassesIf,
   withDesign,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 
 import withMenuContext, { useIsMenuOpen, useMenuContext } from './withMenuContext';
@@ -55,7 +55,7 @@ const asResponsiveSublist = withDesign({
   Wrapper: addClasses('min-w-full'),
 });
 
-const asStaticOnHover = asToken(
+const asStaticOnHover = flowHoc(
   withStaticOnHoverStyles,
   removeClassesIf(useIsMenuOpen)('hover:static'),
 );
@@ -82,11 +82,11 @@ const useIsSubmenuContracted = () => {
 };
 
 const withHoverStyles = withDesign({
-  OuterWrapper: asToken(
+  OuterWrapper: flowHoc(
     addClassesIf(useIsHoverEnabled)('group'),
     observer as HOC,
   ),
-  Wrapper: asToken(
+  Wrapper: flowHoc(
     addClasses('group-hover:flex'),
     addClassesIf(useIsSubmenuContracted)('hidden'),
     observer as HOC,
@@ -100,7 +100,7 @@ const withHoverStyles = withDesign({
  * ===========================================
  */
 const withBaseMenuStyles = withDesign({
-  Wrapper: asToken(asFlex, asRelative, withMenuContext),
+  Wrapper: flowHoc(asFlex, asRelative, withMenuContext),
   Item: asFlex,
 });
 
@@ -118,7 +118,7 @@ const withBaseSubMenuStyles = withDesign({
  * List Sub Menu Styles
  * ===========================================
  */
-const asListSubMenu = asToken(
+const asListSubMenu = flowHoc(
   withBaseSubMenuStyles,
   asAccessibleSubMenu,
   asResponsiveSublist,
@@ -131,7 +131,7 @@ const asListSubMenu = asToken(
  * Full Width Submenu Styles
  * ===========================================
  */
-const asFullWidthSubMenu = asToken(
+const asFullWidthSubMenu = flowHoc(
   withBaseSubMenuStyles,
   asAccessibleSubMenu,
   asFullWidthSublist,
@@ -151,15 +151,15 @@ const asTopNav = (...keys: string[]) => {
     Main: withMenuDesign('Main')(withBaseMenuStyles, asAccessibleMenu),
     List: withMenuDesign('List')(asListSubMenu),
     Cards: withMenuDesign('Cards')(asFullWidthSubMenu),
-    Columns: asToken(
+    Columns: flowHoc(
       withMenuDesign('Columns', 1)(asFullWidthSubMenu),
       withMenuDesign('Columns', 2)(withAccessibleSubMenuAttr),
     ),
   };
 
   return keys.length === 0
-    ? asToken(TopNavDesign.Main)
-    : asToken(...keys.map(key => TopNavDesign[key]));
+    ? flowHoc(TopNavDesign.Main)
+    : flowHoc(...keys.map(key => TopNavDesign[key]));
 };
 
 export default asTopNav;

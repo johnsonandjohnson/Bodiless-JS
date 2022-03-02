@@ -14,7 +14,7 @@
 
 import path from 'path';
 import {
-  observable, action,
+  observable, action, makeObservable,
 } from 'mobx';
 import type { BodilessStoreConfig } from './types';
 import { ItemState, ItemStateEvent } from './types';
@@ -161,6 +161,7 @@ export class StoreItem {
     initialData = {},
     event = ItemStateEvent.UpdateFromBrowser,
   ) {
+    makeObservable(this);
     this.storeConfig = storeConfig;
     this.key = key;
     this.setData(initialData);

@@ -63,11 +63,11 @@ tools which allow browsing the design system (eg StorybooK), and eases
 the process of extending or customizing composed tokens without fully
 recomposing them.
 
-In general, you can use `asToken` to compose tokens the same way you
+In general, you can use `flowHoc` to compose tokens the same way you
 would use Lodash flow, eg:
 
 ```js
-const withComposedToken = asToken(
+const withComposedToken = flowHoc(
   withToken1,
   withToken2,
 );
@@ -114,30 +114,30 @@ and adds a new one.
 Given
 
 ```js
-const asBold = asToken(
+const asBold = flowHoc(
   addClasses('font-bold'),
   { categories: { Style: ['Bold'] } },
 );
 
-const asTextBlue = asToken(
+const asTextBlue = flowHoc(
   addClasses('text-blue-500'),
   { categories: { TextColor: ['Blue'] } },
 );
 
-const asTextRed = asToken(
+const asTextRed = flowHoc(
   addClasses('text-red-500'),
   { categories: { TextColor: ['Red'] } },
 );
 // Same as:
-// const asTextRed = asToken(addClasses('text-red-500'));
+// const asTextRed = flowHoc(addClasses('text-red-500'));
 // asTextRed.meta = { categories: { TextColor: ['Red'] } };
 
-const asBgYellow = asToken(
+const asBgYellow = flowHoc(
   addClasses('bg-yellow-500'),
   { categories: { BgColor: ['Yellow'] } },
 )
 
-const asHeader1 = asToken(
+const asHeader1 = flowHoc(
   asTextBlue,
   asBold,
   asBgYellow,
@@ -172,7 +172,7 @@ asHeader1.meta === {
 And given
 
 ```js
-const asRedHeader1 = asToken(
+const asRedHeader1 = flowHoc(
   asHeader1,
   asHeader1.meta, // We are creating a variant of asHeader1, so propagate its meta.
   // The following creates a "filter" token. Note this must be applied after asHeader1
@@ -208,7 +208,7 @@ RedHeader1.categories === {
 >
 > As you can see from the examples above, the order in
 > which you compose tokens can be significant, especially when applying filters.
-> `asToken` composes tokens in left-to-right order (Lodash `flow` as opposed to
+> `flowHoc` composes tokens in left-to-right order (Lodash `flow` as opposed to
 > `flowRight`).
 
 ## Styling Elements with FClasses

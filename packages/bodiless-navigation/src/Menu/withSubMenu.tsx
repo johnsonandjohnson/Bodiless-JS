@@ -14,7 +14,7 @@
 
 import flow from 'lodash/flow';
 import {
-  HOC, Design, withDesign, asToken, withFinalDesign, flowIf,
+  HOC, Design, withDesign, flowHoc, withFinalDesign, flowIf,
 } from '@bodiless/fclasses';
 import {
   asStylableSubList, asSubList, withDeleteNodeOnUnwrap,
@@ -64,7 +64,7 @@ const withSubMenuDesign = (design: Design<any>) => withDesign({
  */
 const withListSubMenu = (withTitleDesign?: HOC | HOC) => withSubMenuDesign({
   List: asMenuSubList(
-    asToken(asMenuTitle, withTitleDesign),
+    flowHoc(asMenuTitle, withTitleDesign),
   ),
 });
 
@@ -76,7 +76,7 @@ const withListSubMenu = (withTitleDesign?: HOC | HOC) => withSubMenuDesign({
  */
 const withCardsSubMenu = (withTitleDesign?: HOC | HOC) => withSubMenuDesign({
   Cards: asMenuSubList(
-    asToken(asMenuCard, withTitleDesign),
+    flowHoc(asMenuCard, withTitleDesign),
   ),
 });
 
@@ -87,13 +87,13 @@ const withCardsSubMenu = (withTitleDesign?: HOC | HOC) => withSubMenuDesign({
  *
  */
 const withColumnSubMenu = (withTitleDesign?: HOC | HOC) => withSubMenuDesign({
-  Columns: asToken(
+  Columns: flowHoc(
     asMenuSubList(
-      asToken(asMenuTitle, withTitleDesign),
+      flowHoc(asMenuTitle, withTitleDesign),
     ),
     withSubLists(1)(
       asMenuSubList(
-        asToken(asMenuTitle, withTitleDesign),
+        flowHoc(asMenuTitle, withTitleDesign),
         () => ({ groupLabel: 'Column Sub-Menu Item' }),
       ),
     ),

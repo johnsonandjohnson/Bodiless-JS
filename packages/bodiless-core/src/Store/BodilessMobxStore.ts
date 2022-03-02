@@ -13,7 +13,7 @@
  */
 
 import {
-  observable, action,
+  observable, action, makeObservable,
 } from 'mobx';
 import { StoreItem } from './StoreItem';
 import type { BodilessStoreBackend, BodilessStoreConfig, BodilessStore } from './types';
@@ -51,6 +51,7 @@ export abstract class BodilessMobxStore<D> implements BodilessStore<D> {
   data: any = {};
 
   constructor(config: BodilessStoreConfig = {}) {
+    makeObservable(this);
     this.slug = config.slug;
     this.client = config.client;
     addPageLeaver(this.getPendingItems.bind(this));

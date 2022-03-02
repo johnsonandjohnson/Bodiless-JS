@@ -6,7 +6,7 @@ import React, {
   useEffect,
 } from 'react';
 import { HOCBase, ComponentOrTag, HOC } from './types';
-import { asToken } from './flowHoc';
+import { flowHoc } from './flowHoc';
 
 const designContextDefault = undefined as undefined | ComponentType<any>;
 const DesignContext = React.createContext(designContextDefault);
@@ -87,7 +87,7 @@ export const startWith = (ReplacementComponent: ComponentType<any>): HOCBase => 
  * ```
  */
 
-export const replaceWith = <P extends object>(Replacement: ComponentOrTag<P>) => asToken(
+export const replaceWith = <P extends object>(Replacement: ComponentOrTag<P>) => flowHoc(
   (() => {
     const ReplaceWith = (props: P) => <Replacement {...props} />;
     return ReplaceWith;

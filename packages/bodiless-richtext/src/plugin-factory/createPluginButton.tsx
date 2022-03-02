@@ -16,7 +16,7 @@ import React, { ComponentType } from 'react';
 import { Editor } from 'slate';
 import { useSlate } from 'slate-react';
 import {
-  asToken, ComponentOrTag, HOC,
+  flowHoc, ComponentOrTag, HOC,
 } from '@bodiless/fclasses';
 import { ToggleProps } from '../Type';
 import PluginButton from '../components/PluginButton';
@@ -58,7 +58,7 @@ const withToggle = (opts:Opts): HOC<{}, requiredProps, { icon: string }> => (
   }
 );
 
-const createPluginButton = (props: Opts) => asToken(
+const createPluginButton = (props: Opts) => flowHoc(
   withReturnFocusBackOnClick(props.icon),
   withToggle(props),
 )(PluginButton);

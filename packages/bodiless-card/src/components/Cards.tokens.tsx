@@ -17,7 +17,7 @@ import {
   removeClasses,
   withDesign,
   remove,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 
 /**
@@ -60,7 +60,7 @@ const asCardNoBody = withDesign({
 /**
  * asCardNoBodyNoTitle removes both body and title from the card and adjusts image link
  */
-const asCardNoBodyNoTitle = asToken(
+const asCardNoBodyNoTitle = flowHoc(
   asCardNoBody,
   asCardNoTitle,
   withDesign({ ImageLink: addClasses('flex-grow') }),
@@ -85,7 +85,7 @@ const asCardOverlayTitle = withDesign({
  * asCardOverlayCta puts the link over the card image bottom
  */
 const asCardOverlayCta = withDesign({
-  Link: asToken(
+  Link: flowHoc(
     addClasses('absolute bottom-0 right-0 m-8 px-8'),
     removeClasses('w-full'),
   ),

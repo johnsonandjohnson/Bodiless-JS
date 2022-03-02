@@ -35,7 +35,7 @@ import {
   withoutGatsbyImageProps,
 } from '@bodiless/gatsby-theme-bodiless';
 import {
-  asToken,
+  flowHoc,
   stylable,
   A,
   Img,
@@ -43,9 +43,9 @@ import {
 // @ts-ignore Cannotfind module
 import landscapeImage from './landscape_image.png';
 
-export const asBaseEditableImagePlain: AsBodilessImage = (nodeKey?, placeholder?, useOverrides?) => asToken(
-  asToken.meta.term('Component')('Image'),
-  asToken.meta.term('Category')('Editors'),
+export const asBaseEditableImagePlain: AsBodilessImage = (nodeKey?, placeholder?, useOverrides?) => flowHoc(
+  flowHoc.meta.term('Component')('Image'),
+  flowHoc.meta.term('Category')('Editors'),
   stylable,
   asBodilessImage(nodeKey, undefined, useOverrides),
   withImagePlaceholder(placeholder),
@@ -56,7 +56,7 @@ export const asBaseEditableImagePlain: AsBodilessImage = (nodeKey?, placeholder?
  */
 export const asEditableImagePlain: AsBodilessImage = (
   nodeKey?, placeholder?, useOverrides?,
-) => asToken(
+) => flowHoc(
   withoutGatsbyImageProps,
   asBaseEditableImagePlain(nodeKey, placeholder, useOverrides),
   asBaseEditableImagePlain(nodeKey, placeholder, useOverrides).meta,

@@ -33,3 +33,13 @@ export type GitClient = {
   pull: () => AxiosPromise<any>,
   reset: () => AxiosPromise<any>,
 };
+
+export type GitContextProps = {
+  origin: string,
+  sha: string,
+  branch: string,
+};
+
+export type GitContextProviderProps = {
+  gitInfo: GitContextProps,
+};

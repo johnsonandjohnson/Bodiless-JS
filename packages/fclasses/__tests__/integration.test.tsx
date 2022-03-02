@@ -19,7 +19,7 @@ import flow from 'lodash/flow';
 import React, { HTMLProps, FC, ComponentType } from 'react';
 
 import {
-  HOC, asToken,
+  HOC, flowHoc,
   applyDesign,
   withDesign,
   replaceWith,
@@ -175,7 +175,7 @@ const ContextMenuButton = flow(
   withoutProps<VariantProps>(['isActive', 'isFirst', 'isEnabled']),
   addClasses('cursor-pointer pl-2 text-gray') as HOC,
   flowIf(hasProp('isActive'))(
-    asToken(addClasses('text-white'), removeClasses('text-gray')),
+    flowHoc(addClasses('text-white'), removeClasses('text-gray')),
   ),
   flowIf(hasProp('isFirst'))(
     removeClasses('pl-2'),

@@ -23,7 +23,7 @@ import {
   MenuOptionsDefinition, useEditContext,
 } from '@bodiless/core';
 import {
-  flowIf, asToken, DesignableComponents, withoutProps,
+  flowIf, flowHoc, DesignableComponents, withoutProps,
 } from '@bodiless/fclasses';
 
 import type { ComponentSelectorFormProps } from '@bodiless/layouts';
@@ -191,7 +191,7 @@ const withChameleonButton = <P extends object, D extends object>(
     const isRoot = def.root || (def.peer && !useEditContext().parent);
     return !isRoot;
   };
-  return asToken(
+  return flowHoc(
     flowIf(useHasLocalContext as (props: P) => boolean)(
       withContextActivator('onClick'),
       withLocalContextMenu,

@@ -13,7 +13,7 @@
  */
 
 import { WithNodeKeyProps } from '@bodiless/core';
-import { addProps, asToken } from '@bodiless/fclasses';
+import { addProps, flowHoc } from '@bodiless/fclasses';
 import type { HOC } from '@bodiless/fclasses';
 import React, { FC } from 'react';
 import {
@@ -49,7 +49,7 @@ const availableTokens = {
   asPrimaryColorBackground: withCategory('Color')(asPrimaryColorBackground),
   asSuperScript: withCategory('Style')(asSuperScript),
   asTextColorPrimary: withCategory('Color')(asTextColorPrimary),
-  // asTextWhite: asToken('Clor')(addClasses('text-white')),
+  // asTextWhite: flowHoc('Clor')(addClasses('text-white')),
 };
 
 const withDataTokens = (target: string): HOC => Component => {
@@ -70,7 +70,7 @@ const withDataTokens = (target: string): HOC => Component => {
 //   nodeKey: WithNodeKeyProps,
 //   defaultData?: any,
 //   useOverrides?: UseBodilessOverrides<any, any>,
-// ) => asToken(
+// ) => flowHoc(
 //   withTokensFromProps,
 //   withTokenSelector(nodeKey, defaultData, useOverrides),
 //   withDataTokens('typography'),
@@ -81,7 +81,7 @@ const withDataTokens = (target: string): HOC => Component => {
 export const withTypographyTokenPanel = (
   nodeKey: WithNodeKeyProps,
   defaultData?: any,
-) => asToken(
+) => flowHoc(
   withTokensFromProps,
   withTokenPanelPane(nodeKey, defaultData),
   withDataTokens('typography'),

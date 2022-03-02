@@ -23,9 +23,9 @@ import {
   handleBackendResponse,
   useEditContext,
 } from '@bodiless/core';
-// import { useGatsbyPageContext } from '@bodiless/gatsby-theme-bodiless';
 import { usePageMenuOptionUI } from '../MenuOptionUI';
 import { verifyPage } from '../Operations';
+import { usePageDataContext } from '../Provider';
 import { DEFAULT_PAGE_TEMPLATE } from '../constants';
 import {
   PageClient,
@@ -71,7 +71,7 @@ const menuFormPageNew = (client: PageClient) => contextMenuForm({
   const { template } = values;
   const path = getPathValue(values);
   useEffect(() => {
-    // If the form is submitted and valid then lets try to creat a page.
+    // If the form is submitted and valid then lets try to create a page.
     if (submits && path && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
       setState({ status: PageStatus.Pending });
@@ -91,12 +91,11 @@ const menuFormPageNew = (client: PageClient) => contextMenuForm({
         });
     }
   }, [submits]);
+
   const { status, errorMessage, pagePath } = state;
-  // @TODO: After (refactoring) Page Component is decoupled from gatsby theme bodiless,
-  // Add gatsby theme bodiless dep for page package and revert lines below.
-  // const { subPageTemplate } = useGatsbyPageContext();
-  // const currentTemplate = subPageTemplate || DEFAULT_PAGE_TEMPLATE;
-  const currentTemplate = DEFAULT_PAGE_TEMPLATE;
+  const { subPageTemplate } = usePageDataContext();
+  const currentTemplate = subPageTemplate || DEFAULT_PAGE_TEMPLATE;
+
   return (
     <>
       <ComponentFormText type="hidden" field="keepOpen" initialValue />

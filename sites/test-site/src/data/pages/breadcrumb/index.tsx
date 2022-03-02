@@ -27,7 +27,7 @@ import {
   withMenuTitleEditors,
 } from '@bodiless/navigation';
 import {
-  addClasses, H1 as H1$, H2 as H2$, P as P$, asToken, Fragment,
+  addClasses, H1 as H1$, H2 as H2$, P as P$, flowHoc, Fragment,
   addProps,
 } from '@bodiless/fclasses';
 
@@ -50,7 +50,7 @@ import {
   asHeader2, asHeader1, asItalic,
 } from '../../../components/Elements.token';
 
-const DemoBreadcrumbs = asToken(
+const DemoBreadcrumbs = flowHoc(
   asBreadcrumbs,
   withMenuTitleEditors(undefined, asReadOnly),
   withEditableFinalTrail(),
@@ -60,50 +60,50 @@ const DemoBreadcrumbs = asToken(
 
 const DEFAULT_STARTING_TRAIL_NODE_KEY = 'startingTrail';
 
-const MenuBreadcrumbs = asToken(
+const MenuBreadcrumbs = flowHoc(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}Default`),
   withStartingTrailLinkStyles,
 )(DemoBreadcrumbs);
 
 const BreadcrumbWithStartingTrailIcon = withStartingTrailIcon(`${DEFAULT_STARTING_TRAIL_NODE_KEY}Icon`)(DemoBreadcrumbs);
 
-const BreadcrumbWithNonLinkableItems = asToken(
+const BreadcrumbWithNonLinkableItems = flowHoc(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}NonLinkable`),
   withStartingTrailLinkStyles,
   withNonLinkableItems,
 )(DemoBreadcrumbs);
 
-const BreadcrumbWithBoldableFinalItem = asToken(
+const BreadcrumbWithBoldableFinalItem = flowHoc(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}BoldedFinal`),
   withStartingTrailLinkStyles,
   withBoldedFinalTrail,
 )(DemoBreadcrumbs);
 
-const BreadcrumbWithVerticalBarSeparator = asToken(
+const BreadcrumbWithVerticalBarSeparator = flowHoc(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}VerticalBar`),
   withStartingTrailLinkStyles,
   withVerticalBarSeparator,
 )(DemoBreadcrumbs);
 
-const BreadcrumbWithSlashSeparator = asToken(
+const BreadcrumbWithSlashSeparator = flowHoc(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}SlashSeparator`),
   withStartingTrailLinkStyles,
   withSlashSeparator,
 )(DemoBreadcrumbs);
 
-const BreadcrumbWithAccessibleSeparator = asToken(
+const BreadcrumbWithAccessibleSeparator = flowHoc(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}SlashSeparator`),
   withStartingTrailLinkStyles,
   withAccessibleSeparator,
 )(DemoBreadcrumbs);
 
-const BreadcrumbWithHiddenCurrentPageItem = asToken(
+const BreadcrumbWithHiddenCurrentPageItem = flowHoc(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}CurrentPage`),
   withStartingTrailLinkStyles,
   withHiddenCurrentPageItem,
 )(DemoBreadcrumbs);
 
-const BreadcrumbWithLinkableFinalTrailItem = asToken(
+const BreadcrumbWithLinkableFinalTrailItem = flowHoc(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}LinkableFinalTrail`),
   withStartingTrailLinkStyles,
   addProps({
@@ -111,16 +111,16 @@ const BreadcrumbWithLinkableFinalTrailItem = asToken(
   }),
 )(DemoBreadcrumbs);
 
-const MegaMenuBreadcrumbWithNonLinkableItems = asToken(
+const MegaMenuBreadcrumbWithNonLinkableItems = flowHoc(
   withEditableStartingTrail(undefined, `${DEFAULT_STARTING_TRAIL_NODE_KEY}MegaMenuNonLinkable`),
   withStartingTrailLinkStyles,
   withReadOnlyStartingTrail,
   withNonLinkableItems,
 )(DemoBreadcrumbs);
 
-const H1 = asToken(addClasses('pt-5'), asHeader1)(H1$);
-const H2 = asToken(addClasses('pt-5'), asHeader2)(H2$);
-const P = asToken(asItalic, addClasses('text-sm'))(P$);
+const H1 = flowHoc(addClasses('pt-5'), asHeader1)(H1$);
+const H2 = flowHoc(addClasses('pt-5'), asHeader2)(H2$);
+const P = flowHoc(asItalic, addClasses('text-sm'))(P$);
 
 const BreadcrumbProvider = withBreadcrumbStore(Fragment);
 

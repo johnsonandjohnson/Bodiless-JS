@@ -14,7 +14,7 @@
 
 import React from 'react';
 import {
-  withDesign, addClasses, asToken, stylable, startWith, Pre,
+  withDesign, addClasses, flowHoc, stylable, startWith, Pre,
 } from '@bodiless/fclasses';
 import { asAccordionWrapper, asAccordionTitle, asAccordionBody } from '@bodiless/accordion';
 import { withChild } from '@bodiless/core';
@@ -25,7 +25,7 @@ import {
 export const tokenPanelStyles = {
   Panel: withDesign({
     Title: asHeader3,
-    Category: asToken(asBold, addClasses('mt-2')),
+    Category: flowHoc(asBold, addClasses('mt-2')),
     CheckBox: addClasses('mr-2'),
     Label: addClasses('block'),
     CategoryWrapper: addClasses('w-48'),
@@ -33,20 +33,20 @@ export const tokenPanelStyles = {
   }),
 };
 
-export const withTokenEditorStyles = asToken(
+export const withTokenEditorStyles = flowHoc(
   withDesign({
     Container: withDesign({
-      Wrapper: asToken(stylable, addClasses('border-blue-700 border-solid border-2 p-5')),
+      Wrapper: flowHoc(stylable, addClasses('border-blue-700 border-solid border-2 p-5')),
     }),
-    DetailsWrapper: asToken(
+    DetailsWrapper: flowHoc(
       asAccordionWrapper,
       addClasses('border-teal-700 bortder-2'),
     ),
-    DetailsTitle: asToken(
+    DetailsTitle: flowHoc(
       withChild(() => <>Details</>),
       asAccordionTitle,
       withDesign({
-        Wrapper: asToken(
+        Wrapper: flowHoc(
           asHeader3,
           asTextWhite,
           asTealBackground,
@@ -54,7 +54,7 @@ export const withTokenEditorStyles = asToken(
         ),
       }),
     ),
-    DetailsBody: asToken(
+    DetailsBody: flowHoc(
       startWith(Pre),
       asAccordionBody,
       addClasses('p-2'),

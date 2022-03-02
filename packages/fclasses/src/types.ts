@@ -85,7 +85,7 @@ export type TokenProps = {
 /**
  * Type of a "Token", which is an HOC with optional metadata and filtering.
  *
- * Tokens may be composed of other tokens using the `asToken` utility.
+ * Tokens may be composed of other tokens using the `flowHoc` utility.
  */
 export type HOC<B = {}, A = {}, R = {}> = HOCBase<B, A, R> & TokenProps;
 
@@ -124,7 +124,7 @@ export type Injector<R, B = {}> = HOC<B & Partial<R>, {}, R>;
 export type TokenFilterTest = (token: HOC) => boolean;
 
 /**
- * Type of the parameters to asToken.  Overloaded to accept metadata
+ * Type of the parameters to flowHoc  Overloaded to accept metadata
  * objects (or undefined) in addition to tokens.
  */
 export type TokenDef<B = {}, A = {}, R = {}> = HOC<B, A, R> | TokenMeta | undefined;
@@ -139,7 +139,7 @@ export type TokenDef<B = {}, A = {}, R = {}> = HOC<B, A, R> | TokenMeta | undefi
  *
  * > Type inference will only be correct for up to 10 composed tokens.
  */
-export type AsToken<A = {}> =
+export type FlowHoc<A = {}> =
   <B1, A1, R1, A2, R2, A3, R3, A4, R4, A5, R5, A6, R6, A7, R7, A8, R8, A9, R9>(
     t1?: TokenDef<B1, A1, R1>,
     // @todo Ensure that the output of each token matches the constraint of the next, eg
@@ -223,7 +223,7 @@ export type ReservedDomains<
      * so it will not have access to any contexts or content nodes provided by
      * the token itself.
      */
-  Flow?: AsToken,
+  Flow?: FlowHoc,
   /**
      * Metadata which should be attached to this token (and to any component to
      * to which the token is applied).

@@ -18,7 +18,7 @@ import React, {
 } from 'react';
 import { WithNodeKeyProps, withSidecarNodes, withBodilessData } from '@bodiless/core';
 import {
-  ComponentOrTag, Fragment, DesignableComponents, Design, HOC, asToken, replaceWith, as,
+  ComponentOrTag, Fragment, DesignableComponents, Design, HOC, flowHoc, replaceWith, as,
   replaceable,
 } from '@bodiless/fclasses';
 import { SelectorComponents, SelectorComponentsProps } from '@bodiless/layouts';
@@ -82,7 +82,7 @@ class ChameleonContextValue extends SelectorComponents implements ChameleonState
       isOn: activeComponent !== DEFAULT_KEY,
       setActiveComponent: (component: string|null) => setComponentData({ component }),
       apply: startComponents?.[activeComponent]
-        ? asToken(replaceWith(startComponents[activeComponent]), apply) : apply,
+        ? flowHoc(replaceWith(startComponents[activeComponent]), apply) : apply,
     };
   }
 

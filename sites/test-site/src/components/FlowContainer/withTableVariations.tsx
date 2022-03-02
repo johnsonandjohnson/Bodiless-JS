@@ -20,19 +20,19 @@ import {
   varyDesign,
   replaceWith,
   withDesign,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import { withType } from './Categories';
 import { StandardTable, asTableFirstLeft, asTableFirstExtraWidth } from '../Table';
 
 const tableVariation = {
-  Table: asToken(
+  Table: flowHoc(
     replaceWith(StandardTable),
     withType('Table')(),
     withTitle('Table'),
     withDesc('A Table with Rich Text Cells.\n'),
   ),
-  TableFirstHeader: asToken(
+  TableFirstHeader: flowHoc(
     replaceWith(StandardTable),
     asTableFirstLeft,
     asTableFirstExtraWidth,

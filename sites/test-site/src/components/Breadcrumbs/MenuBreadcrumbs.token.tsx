@@ -32,7 +32,7 @@ import {
 } from '@bodiless/navigation';
 import {
   flowIf,
-  asToken,
+  flowHoc,
   addClasses,
   addProps,
   withDesign,
@@ -53,11 +53,11 @@ const HomeBreadcrumbIcon = addClasses('fill-current')(HomeIcon);
 
 const withStartingTrailIcon = (
   nodeKeys?: WithNodeKeyProps,
-) => asToken(
+) => flowHoc(
   withBreadcrumbStartingTrail,
   withDesign({
     StartingTrail: replaceWith(
-      asToken(
+      flowHoc(
         withChild(HomeBreadcrumbIcon),
         withSidecarNodes(
           asEditableLink('link'),
@@ -86,7 +86,7 @@ const withBoldedFinalTrail = withDesign({
   Item: flowIf(({ isCurrentPage }: any) => isCurrentPage)(asBold),
 });
 
-const withHiddenCurrentPageItem = asToken(
+const withHiddenCurrentPageItem = flowHoc(
   withDesign({
     Item: flowIf(useIsBreadcrumbItemCurrentPage)(replaceWith(() => <></>)),
   }),
@@ -110,7 +110,7 @@ const withSlashSeparator = withDesign({
 });
 
 const withAccessibleSeparator = withDesign({
-  Separator: asToken(
+  Separator: flowHoc(
     addClasses('border-black border-r-2 h-4 mx-1.5 rotate-12 self-center transform'),
     withSeparator(''),
   ),
@@ -133,7 +133,7 @@ const withFinalTrailLinkStyles = withDesign({
   }),
 });
 
-const $withBreadcrumbStyles = asToken(
+const $withBreadcrumbStyles = flowHoc(
   withDesign({
     Separator: addClasses('mx-1'),
     Wrapper: addClasses('inline-flex'),
@@ -144,7 +144,7 @@ const $withBreadcrumbStyles = asToken(
   withArrowSeparator,
 );
 
-const asAccessibleBreadcrumbs = asToken(
+const asAccessibleBreadcrumbs = flowHoc(
   asBaseAccessibleBreadcrumbs,
   withDesign({
     NavWrapper: addProps({

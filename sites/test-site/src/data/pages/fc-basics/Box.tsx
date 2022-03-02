@@ -1,46 +1,46 @@
-import { asToken, addClasses } from '@bodiless/fclasses';
+import { flowHoc, addClasses } from '@bodiless/fclasses';
 
-export const asBox = asToken(
+export const asBox = flowHoc(
   addClasses('w-full h-36'),
-  asToken.meta.term('Component')('Box'),
-  asToken.meta.term('Attribute')('Styles'),
-  asToken.meta.term('Type')('Box'),
+  flowHoc.meta.term('Component')('Box'),
+  flowHoc.meta.term('Attribute')('Styles'),
+  flowHoc.meta.term('Type')('Box'),
 );
 
-export const withBlueBorder = asToken(
+export const withBlueBorder = flowHoc(
   addClasses('border-blue-800 border-8'),
-  asToken.meta.term('Color')('Blue-Border'),
-  asToken.meta.term('Attribute')('border'),
+  flowHoc.meta.term('Color')('Blue-Border'),
+  flowHoc.meta.term('Attribute')('border'),
 );
 
-export const withTealBorder = asToken(
+export const withTealBorder = flowHoc(
   addClasses('border-teal-800 border-8'),
-  asToken.meta.term('Color')('Teal-Border'),
-  asToken.meta.term('Attribute')('border'),
+  flowHoc.meta.term('Color')('Teal-Border'),
+  flowHoc.meta.term('Attribute')('border'),
 );
 
-export const asRounded = asToken(
+export const asRounded = flowHoc(
   addClasses('rounded-2xl'),
-  asToken.meta.term('Border')('Rounded'),
-  asToken.meta.term('Attribute')('border-radius'),
+  flowHoc.meta.term('Border')('Rounded'),
+  flowHoc.meta.term('Attribute')('border-radius'),
 );
 
-export const asSquare = asToken(
-  asToken.meta.term('Border')('Square'),
+export const asSquare = flowHoc(
+  flowHoc.meta.term('Border')('Square'),
 );
 
-export const asBlue = asToken(
+export const asBlue = flowHoc(
   addClasses('bg-blue-800'),
-  asToken.meta.term('Color')('Blue'),
-  asToken.meta.term('Attribute')('bg-color'),
+  flowHoc.meta.term('Color')('Blue'),
+  flowHoc.meta.term('Attribute')('bg-color'),
 );
-export const asOrange = asToken(
+export const asOrange = flowHoc(
   addClasses('bg-orange-800'),
-  asToken.meta.term('Color')('Orange'),
-  asToken.meta.term('Attribute')('bg-color'),
+  flowHoc.meta.term('Color')('Orange'),
+  flowHoc.meta.term('Attribute')('bg-color'),
 );
-export const asTeal = asToken(
+export const asTeal = flowHoc(
   addClasses('bg-teal-800'),
-  asToken.meta.term('Color')('Teal'),
-  asToken.meta.term('Attribute')('bg-color'),
+  flowHoc.meta.term('Color')('Teal'),
+  flowHoc.meta.term('Attribute')('bg-color'),
 );

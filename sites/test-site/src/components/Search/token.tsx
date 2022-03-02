@@ -16,13 +16,13 @@ import {
   addClasses,
   withDesign,
   addClassesIf,
-  asToken,
+  flowHoc,
   Design,
 } from '@bodiless/fclasses';
 import { withSearchIconSvg, withSearchToggleIconSvg } from '@bodiless/search';
 import { asPageContainer, asDesktopOnly, asTextWhite } from '../Elements.token';
 
-const withSearchButtonIcon = asToken(
+const withSearchButtonIcon = flowHoc(
   addClasses('bg-white text-gray-500'),
   withSearchIconSvg,
 );
@@ -32,7 +32,7 @@ const isOdd = (item: number) => item % 2 === 1;
 
 const withSuggestionsBorder = addClasses('border border-black');
 const withSuggestionItemStyles = withDesign({
-  Wrapper: asToken(
+  Wrapper: flowHoc(
     addClasses('hover:text-white hover:bg-teal-400'),
     addClassesIf(({ position }: any) => isEven(position))('bg-white'),
     addClassesIf(({ position }: any) => isOdd(position))('bg-teal-200'),
@@ -41,14 +41,14 @@ const withSuggestionItemStyles = withDesign({
 const withSearchInputOutline = addClasses('outline-none focus:outline-black');
 
 const withSuggestionsDefaultDesign = withDesign({
-  Wrapper: asToken(
+  Wrapper: flowHoc(
     addClasses('absolute top-full z-50 w-full'),
     withSuggestionsBorder,
   ),
-  Item: asToken(
+  Item: flowHoc(
     withSuggestionItemStyles,
     withDesign({
-      Wrapper: asToken(
+      Wrapper: flowHoc(
         addClasses('flex px-2'),
       ),
       Count: addClasses('ml-auto mr-1'),
@@ -57,11 +57,11 @@ const withSuggestionsDefaultDesign = withDesign({
 });
 
 const searchDesign: Design = {
-  SearchWrapper: asToken(
+  SearchWrapper: flowHoc(
     asDesktopOnly,
     addClasses('my-4 border border-black align-middle relative'),
   ),
-  SearchInput: asToken(
+  SearchInput: flowHoc(
     withSearchInputOutline,
     addClasses('px-2 align-middle text-1xl'),
   ),
@@ -71,20 +71,20 @@ const searchDesign: Design = {
 
 const responsiveSearchDesign = {
   Wrapper: addClasses('h-full'),
-  SearchWrapper: asToken(asPageContainer, addClasses('absolute w-full p-3 flex z-10 bg-gray-700 inset-x-0')),
-  SearchInput: asToken(
+  SearchWrapper: flowHoc(asPageContainer, addClasses('absolute w-full p-3 flex z-10 bg-gray-700 inset-x-0')),
+  SearchInput: flowHoc(
     withSearchInputOutline,
     addClasses('align-middle w-full p-2'),
   ),
-  ToggleButton: asToken(
+  ToggleButton: flowHoc(
     asTextWhite,
     withSearchToggleIconSvg,
   ),
-  SearchButton: asToken(
+  SearchButton: flowHoc(
     withSearchButtonIcon,
     addClasses('flex absolute right-0 self-center mr-4'),
   ),
-  Suggestions: asToken(
+  Suggestions: flowHoc(
     withSuggestionsDefaultDesign,
     withDesign({
       Wrapper: addClasses('-my-3 left-0 px-3'),
@@ -94,7 +94,7 @@ const responsiveSearchDesign = {
 
 const searchInlineDesign = {
   SearchWrapper: addClasses('inline-flex border border-black align-middle border-gray-500 relative'),
-  SearchInput: asToken(
+  SearchInput: flowHoc(
     withSearchInputOutline,
     addClasses('px-2 align-middle text-1xl'),
   ),

@@ -23,7 +23,7 @@ import {
   withDesign,
   addClasses,
   addProps,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 
 import { ComponentType } from 'react';
@@ -36,14 +36,14 @@ import {
 } from '../Elements.token';
 
 const withPlaceholder = addProps({ src: 'https://johnsonandjohnson.github.io/Bodiless-JS/' });
-const BodilessIframe: ComponentType<Partial<WithNodeProps>> = asToken(
+const BodilessIframe: ComponentType<Partial<WithNodeProps>> = flowHoc(
   asBodilessIframe(),
   withPlaceholder,
 )(Iframe);
 
 const withResponsiveWidth = addClasses('w-full');
 
-const asResponsiveIframe = asToken(
+const asResponsiveIframe = flowHoc(
   asBaseResponsiveIframe,
   withDesign({
     Item: flowRight(
@@ -52,22 +52,22 @@ const asResponsiveIframe = asToken(
   }),
 );
 
-const asReponsive21By9Iframe = asToken(
+const asReponsive21By9Iframe = flowHoc(
   asResponsiveIframe,
   asResponsive21By9Embed,
 );
 
-const asReponsive16By9Iframe = asToken(
+const asReponsive16By9Iframe = flowHoc(
   asResponsiveIframe,
   asResponsive16By9Embed,
 );
 
-const asReponsive4By3Iframe = asToken(
+const asReponsive4By3Iframe = flowHoc(
   asResponsiveIframe,
   asResponsive4By3Embed,
 );
 
-const asReponsive1By1Iframe = asToken(
+const asReponsive1By1Iframe = flowHoc(
   asResponsiveIframe,
   asResponsive1By1Embed,
 );

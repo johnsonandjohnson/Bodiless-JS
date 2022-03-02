@@ -19,7 +19,7 @@ import {
   withoutProps,
   DesignableProps,
 } from '@bodiless/fclasses';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { useItemHandlers } from './model';
 import { FlowContainerItem, FlowContainerComponents } from './types';
 import { SelectorComponents } from '../ComponentSelector/SelectorComponents';

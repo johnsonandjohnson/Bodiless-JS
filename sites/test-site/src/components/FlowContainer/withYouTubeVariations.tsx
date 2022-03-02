@@ -19,14 +19,14 @@ import {
   varyDesign,
   replaceWith,
   withDesign,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 
 import { DefaultReponsive16By9YouTube } from '../YouTube';
 import { withType } from './Categories';
 
 const youtubeVariation = {
-  YouTube: asToken(
+  YouTube: flowHoc(
     replaceWith(DefaultReponsive16By9YouTube),
     withType('YouTube')(),
     withTitle('YouTube'),

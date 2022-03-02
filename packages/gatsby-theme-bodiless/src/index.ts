@@ -14,14 +14,11 @@
 
 import GatsbyMobxStore from './dist/GatsbyMobxStore';
 import GatsbyNodeProvider from './dist/GatsbyNodeProvider';
-import GatsbyPageProvider, { useGatsbyPageContext } from './dist/GatsbyPageProvider';
 import Page from './dist/Page';
 
 export {
   GatsbyMobxStore,
   GatsbyNodeProvider,
-  GatsbyPageProvider,
-  useGatsbyPageContext,
   Page,
 };
 

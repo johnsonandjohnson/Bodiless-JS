@@ -17,7 +17,7 @@ import { graphql } from 'gatsby';
 import {
   A,
   H3,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import { withNode, withNodeKey, withDefaultContent } from '@bodiless/core';
 import { asBodilessLink } from '@bodiless/components-ui';
@@ -27,7 +27,7 @@ import { asHeader3, asLink } from '../../../../components/Elements.token';
 
 const SubTitle = asHeader3(H3);
 
-const DefaultContentLink = asToken(
+const DefaultContentLink = flowHoc(
   asBodilessLink(),
   withDefaultContent({
     '': { href: 'https://www.gatsbyjs.com/' },

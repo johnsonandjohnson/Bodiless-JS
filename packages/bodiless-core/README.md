@@ -134,7 +134,7 @@ To access the current page edit context, simply use the `useEditContext()`
 and/or `useContextActivator()` hooks.
 
 ```javascript
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 const Example = observer(props => {
   const { isActive, isEdit } = useEditContext();
   const { onClick } = useContextActivator();
@@ -169,7 +169,7 @@ determine if we are in edit mode. Note also that we wrap our component in a
 updates properly if the active context or edit mode changes.
 
 > Important! For functional components using hooks, we must use the version of
-> `observer` from mobx-react-lite.
+> `observer` from mobx-react.
 
 It is also possible to use the `withContextActivator` HOC to provide an activation
 event to a pre-existing component:

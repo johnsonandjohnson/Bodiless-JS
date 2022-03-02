@@ -15,7 +15,7 @@
 import React from 'react';
 import { render, mount } from 'enzyme';
 import { PageEditContext } from '@bodiless/core';
-import { asToken, A, HOC } from '@bodiless/fclasses';
+import { flowHoc, A, HOC } from '@bodiless/fclasses';
 import { asBodilessLink } from '../../Link';
 import { withMockNode } from '../../../__tests__/helpers/MockContentNode';
 import { PageDisabledDataItems } from '../types';
@@ -47,7 +47,7 @@ const mockDisabledPages: PageDisabledDataItems = {
   },
 };
 
-const withPageLink = (pagePath: string) => asToken(
+const withPageLink = (pagePath: string) => flowHoc(
   asBodilessLink(),
   withMockNode({ href: pagePath, disabled: mockDisabledPages }, ['Page']) as HOC,
 )(A);

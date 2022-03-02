@@ -16,7 +16,7 @@ import {
   ifToggledOff, ifToggledOn, withAppendChild, withChild
 } from '@bodiless/core';
 import {
-  Div, asToken, replaceWith, startWith, withDesign, addClasses, withoutProps,
+  Div, flowHoc, replaceWith, startWith, withDesign, addClasses, withoutProps,
 } from '@bodiless/fclasses';
 import {
   asBurgerMenu, withMenuDesign, BurgerMenuDefaultToggler, asSlideLeft, useIsBurgerMenuVisible,
@@ -39,14 +39,14 @@ const CloseMenuIcon = addClasses('fill-current')(CloseIcon);
  * Tokens
  * ===========================================
  */
-const $withTogglerStyles = asToken(
+const $withTogglerStyles = flowHoc(
   withDesign({
-    Button: asToken(
+    Button: flowHoc(
       ifToggledOn(useIsBurgerMenuVisible)(withChild(CloseMenuIcon)),
       ifToggledOff(useIsBurgerMenuVisible)(withChild(OpenMenuIcon)),
       asMobileOnly,
     ),
-    Wrapper: asToken(
+    Wrapper: flowHoc(
       replaceWith(Div),
       asMobileOnly,
       addClasses('flex text-white'),
@@ -54,10 +54,10 @@ const $withTogglerStyles = asToken(
   }),
 );
 
-const $withBurgerMenuHeaderStyles = asToken(
+const $withBurgerMenuHeaderStyles = flowHoc(
   asDefaultLogoStyle,
   withDesign({
-    SiteReturn: asToken(
+    SiteReturn: flowHoc(
       withoutProps('design'),
       withAppendChild(BurgerMenuDefaultToggler, 'MenuToggler'),
       asTealBackground,
@@ -86,18 +86,18 @@ const $withColumnSubMenuStyles = withDesign({
   Item: addClasses('pl-8'),
 });
 
-const $withMenuStyles = asToken(
+const $withMenuStyles = flowHoc(
   asBurgerMenu('List', 'Columns', 'Cards'),
   withMenuDesign()($withTitleEditors),
   withMenuDesign(['List', 'Columns', 'Cards'])($withBaseSubMenuStyles, $withBoldAccordionTitleStyles),
   withMenuDesign('Columns')($withColumnSubMenuStyles),
 );
 
-const $withBurgerMenuStyles = asToken(
+const $withBurgerMenuStyles = flowHoc(
   withDesign({
     Menu: $withMenuStyles,
     Nav: addClasses('p-3'),
-    Header: asToken(
+    Header: flowHoc(
       startWith(Logo),
       $withBurgerMenuHeaderStyles,
     ),

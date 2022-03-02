@@ -27,18 +27,18 @@ import {
   withNode, withNodeKey,
 } from '@bodiless/core';
 import {
-  H1, H2, addClasses, asToken,
+  H1, H2, addClasses, flowHoc,
 } from '@bodiless/fclasses';
 import { withContentLibrary } from '@bodiless/layouts';
 import { ComponentSelector } from '@bodiless/layouts-ui';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import Layout from '../../../components/Layout';
 import { asEditableImage } from '../../../components/Image';
 
 import { asHeader1, asHeader2 } from '../../../components/Elements.token';
 
 const Title = asHeader1(H1);
-const SectionTitle = asToken(addClasses('mt-5'), asHeader2)(H2);
+const SectionTitle = flowHoc(addClasses('mt-5'), asHeader2)(H2);
 
 const PageKeys = observer(() => {
   const { node } = useNode();
@@ -110,7 +110,7 @@ const TextDisplay = () => {
   );
 };
 
-const TextDemo = asToken(
+const TextDemo = flowHoc(
   asEditable(undefined, 'Click me to see library button'),
   withContextActivator('onClick'),
   withLocalContextMenu,

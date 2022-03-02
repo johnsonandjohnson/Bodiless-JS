@@ -15,12 +15,12 @@
 import {
   withMandatoryCategories,
 } from '@bodiless/layouts';
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import withDefaultVariations from './withDefaultVariations';
 
 import { asFlowContainerWithMargins } from './token';
 
-const asDefaultFlowContainer = asToken(
+const asDefaultFlowContainer = flowHoc(
   withDefaultVariations,
   asFlowContainerWithMargins,
   withMandatoryCategories(['Orientation', 'Type']),

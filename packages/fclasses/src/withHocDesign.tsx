@@ -3,7 +3,7 @@ import { intersection } from 'lodash';
 import type {
   HocDesign, DesignableComponents, TokenMeta, HOCBase
 } from './types';
-import { asToken } from './flowHoc';
+import { flowHoc } from './flowHoc';
 
 /**
  * Creates an HOC which applies a specified design to the wrapped component.
@@ -27,7 +27,7 @@ import { asToken } from './flowHoc';
 export const withHocDesign = <C extends DesignableComponents = any>(
   design: HocDesign<C>,
   ...meta: TokenMeta[]
-): HOCBase => asToken(
+): HOCBase => flowHoc(
     Component => {
       const WithDesign = (props: any) => {
         const { design: designFromProps } = props;
@@ -37,7 +37,7 @@ export const withHocDesign = <C extends DesignableComponents = any>(
           const wrappedDesign = keysToWrap.reduce(
             (acc, key) => ({
               ...acc,
-              [key]: asToken(
+              [key]: flowHoc(
                 design[key]!,
                 designFromProps[key]!,
               ),

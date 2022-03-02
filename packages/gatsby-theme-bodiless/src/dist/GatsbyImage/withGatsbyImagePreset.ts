@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { asToken, HOC } from '@bodiless/fclasses';
+import { flowHoc, HOC } from '@bodiless/fclasses';
 import type { TokenMeta } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
 import type { AsBodilessImage } from '@bodiless/components';
@@ -27,9 +27,9 @@ const withGatsbyImagePreset = (preset: GatsbyImagePresets) => (
   nodeKey,
   placeholder,
   useOverrides,
-) => asToken(
+) => flowHoc(
   asEditableImage.meta || {},
-  asToken.meta.term('Preset')(preset),
+  flowHoc.meta.term('Preset')(preset),
   asGatsbyImage as HOC,
   withGatsbyImageLogger(preset),
   asEditableImage(undefined, placeholder, useOverrides),
