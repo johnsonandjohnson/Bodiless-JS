@@ -61,5 +61,4 @@ jobs:
         run: npm run test --quiet --colors
 
       - name: Cypress tests
-        run: |
-          npm run test:ci
+        run: npm run test:ci

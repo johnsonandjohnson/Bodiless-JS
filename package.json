@@ -47,7 +47,7 @@
     "sites:clone-local": "node ./scripts/sites-clone",
     "sites:install": "node ./scripts/sites-install",
     "sites:update": "npm run sites:pack && npm run sites:install",
-    "sites:launch-test": "npm run sites:clone-local test-site && npm run sites:update test-site && cd sites/test-site && npm install --legacy-peer-deps && npm run start",
+    "sites:launch-test": "npm run sites:clone-local test-site && npm run sites:update test-site && cd sites/test-site && npm install && npm run start",
     "start": "npm run start --workspace=@bodiless/test-site",
     "sync:fix": "syncpack fix-mismatches",
     "sync:check": "syncpack list-mismatches",
