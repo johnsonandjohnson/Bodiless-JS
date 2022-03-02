@@ -13,12 +13,14 @@
  */
 
 import { flow } from 'lodash';
+import pick from 'lodash/pick';
 import {
   FilterByGroupClean,
   asTestableFilterByGroup,
   Tag,
   withSingleAllowedTag,
   withFilterSelection,
+  asResponsiveFilterByGroup,
   // withMultipleAllowedTags,
 } from '@bodiless/filtering';
 import {
@@ -26,6 +28,7 @@ import {
 } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
 import { asFilterByGroupResponsive, asFilterByGroupDefaultStyle } from './token';
+import { breakpoints as allBreakpoints } from '../Page';
 
 const suggestions = [
   new Tag('1', 'DefaultTag 1'),
@@ -34,12 +37,15 @@ const suggestions = [
   new Tag('4', 'DefaultTag 4'),
 ];
 
+const breakpoints = pick(allBreakpoints, 'lg');
+
 const asFilterByGroup = flowHoc(
   addProps({ suggestions }),
   addProps({ resetButtonText: 'Show All Products' }),
   asFilterByGroupResponsive,
   asFilterByGroupDefaultStyle,
   asTestableFilterByGroup,
+  asResponsiveFilterByGroup(breakpoints),
 );
 
 const FilterByGroup = asFilterByGroup(FilterByGroupClean);

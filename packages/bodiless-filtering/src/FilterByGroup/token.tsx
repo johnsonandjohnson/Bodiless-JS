@@ -13,10 +13,12 @@
  */
 
 import {
+  as,
   withDesign,
   addClasses,
   flowHoc,
   addProps,
+  replaceWith,
   addPropsIf,
   withoutProps,
 } from '@bodiless/fclasses';
@@ -26,6 +28,7 @@ import {
   asAccordionTitle,
   useAccordionContext,
 } from '@bodiless/accordion';
+import { BreakpointsType, withResponsiveVariants } from '@bodiless/components';
 import {
   withAnyTag, withoutAnyTag,
 } from './Filter.token';
@@ -81,14 +84,6 @@ const asAccessibleFilterByGroup = flowHoc(
   }),
 );
 
-const asResponsiveFilterByGroup = withDesign({
-  FilterWrapper: asAccordionWrapper,
-  FilterTitle: asResponsiveAccordionTitle,
-  FilterBody: asExpandedOnDesktopBody,
-  ResetButton: asExpandedOnDesktopResetButtonBody,
-  RefineButton: addPropsIf(() => true)(useRefineButtonProps),
-});
-
 export const withMultipleAllowedTags = flowHoc(
   addProps({
     multipleAllowedTags: true,
@@ -111,8 +106,30 @@ export const withSingleAllowedTag = flowHoc(
   }),
 );
 
+const asDesktopFilterByGroup = withDesign({
+  RefineButton: replaceWith(() => null),
+});
+
+const asMobileFilterByGroup = withDesign({
+  FilterWrapper: asAccordionWrapper,
+  FilterTitle: asResponsiveAccordionTitle,
+  FilterBody: asExpandedOnDesktopBody,
+  ResetButton: asExpandedOnDesktopResetButtonBody,
+  RefineButton: addPropsIf(() => true)(useRefineButtonProps),
+});
+
+const asResponsiveFilterByGroup = (breakpoints: BreakpointsType) => flowHoc(
+  withResponsiveVariants({ breakpoints }),
+  withDesign({
+    _default: as(asMobileFilterByGroup, 'red'),
+    lg: as(asDesktopFilterByGroup, 'green'),
+  }),
+);
+
 export {
   asExpandedOnDesktopBody,
   asResponsiveFilterByGroup,
+  asMobileFilterByGroup,
+  asDesktopFilterByGroup,
   asAccessibleFilterByGroup,
 };

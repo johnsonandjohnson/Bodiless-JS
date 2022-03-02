@@ -167,18 +167,6 @@ const TagTitle = flow(
   designable(tagTitleComponentsStart, 'TagTitle'),
 )(TagTitleBase);
 
-const asResponsiveFilter = withDesign({
-  Item: flowHoc(
-    asAccordionWrapper,
-    withDesign({
-      SubList: withDesign({
-        Wrapper: asAccordionBody,
-      }),
-    }),
-  ),
-  Title: asAccordionTitle,
-});
-
 const asFilter = flowHoc(
   asBodilessList(undefined, undefined, () => ({ groupLabel: 'Category' })),
   withDesign({
@@ -264,6 +252,3 @@ const FilterClean = flowHoc(
 )('ul');
 
 export default FilterClean;
-export {
-  asResponsiveFilter,
-};
