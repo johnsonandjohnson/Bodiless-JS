@@ -22,9 +22,37 @@ By default, the editable components include:
 
 ## Site Builder Details
 
-From a Site Builder perspective, CX Header (`cxHeader`) is a token collection — not a component. You
-can use the default CX Header token (`cxHeader.Default`) as is, or you can recompose it to meet your
-site's requirements.
+From a Site Builder perspective, CX Header is comprised of a token collection (`cxHeader`) and a
+Header component (`HeaderClean`). You can use the default CX Header token (`cxHeader.Default`) as
+is, or you can recompose it to meet your site's requirements.
+
+### Usage
+
+```tsx
+import React, { FC } from 'react';
+import { cxHeader, HeaderClean } from '@bodiless/cx-layout';
+import { as } from '@bodiless/fclasses';
+import { withNode, withNodeKey } from '@bodiless/core';
+import { SiteWrapper, ContentWrapper } from './wrapperComponents';
+const Header = as(
+  // You can compose or create a new header token
+  // from scratch, but we'll use the default one here.
+  cxHeader.Default,
+  // Apply a node to the header so inner nodes
+  // are organized into its namespace.
+  withNode,
+  withNodeKey('header'),
+)(HeaderClean);
+const Layout: FC = ({ children }) => (
+  <SiteWrapper>
+    <Header />
+    <ContentWrapper>
+      {children}
+    </ContentWrapper>
+  </SiteWrapper>
+);
+export default Layout;
+```
 
 ## Architectural Details
 
