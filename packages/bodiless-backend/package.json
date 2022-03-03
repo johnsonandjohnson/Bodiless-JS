@@ -7,6 +7,9 @@
     "/bodiless.docs.json",
     "/src"
   ],
+  "bin": {
+    "bodiless-dev-backend": "./bin/bodiless-dev-backend"
+  },
   "dependencies": {
     "body-parser": "^1.18.3",
     "copyfiles": "^2.1.1",
