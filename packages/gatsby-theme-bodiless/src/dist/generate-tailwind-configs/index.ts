@@ -52,7 +52,11 @@ const init = async () => {
   const pdgName = getPackageNameFromPackageJson(pkg);
   const deps = Object.keys(getDependenciesFromPackageJson(pkg));
   const cfg = await getBodilessTailwindConfig(pdgName, deps);
-  const cfgs = cfg.map(pkgPath => template.replace(/#pkg/g, pkgPath)).join(',');
+  const cfgs = cfg.map(pkgPath => {
+    // Temp fix for windows.
+    const pkgPath$ = pkgPath.replace(/\\/g, '/');
+    return template.replace(/#pkg/g, pkgPath$);
+  }).join(',');
   await writeToFile('tailwind.config.js', templateWrap.replace(/#pkgs/g, cfgs));
 };
 

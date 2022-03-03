@@ -30,6 +30,7 @@
     "@bodiless/components-ui": "^0.3.7",
     "@bodiless/core": "^0.3.7",
     "@bodiless/cx-elements": "^0.3.7",
+    "@bodiless/cx-editors": "^0.3.7",
     "@bodiless/cx-image": "^0.3.7",
     "@bodiless/fclasses": "^0.3.7",
     "@bodiless/gatsby-theme-bodiless": "^0.3.7",

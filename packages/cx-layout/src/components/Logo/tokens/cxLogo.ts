@@ -16,9 +16,6 @@ import {
   as, startWith,
 } from '@bodiless/fclasses';
 import {
-  cxElement,
-} from '@bodiless/cx-elements';
-import {
   cxImage
 } from '@bodiless/cx-image';
 import {
@@ -31,11 +28,6 @@ import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import { asLogoToken } from '../LogoClean';
 
 const Base = asLogoToken({
-  Layout: {
-    Wrapper: as(
-      cxElement.WithFlexCenterXY,
-    ),
-  },
   Spacing: {
     Wrapper: 'w-full max-w-48 lg:max-w-56',
     Image: 'max-h-full',

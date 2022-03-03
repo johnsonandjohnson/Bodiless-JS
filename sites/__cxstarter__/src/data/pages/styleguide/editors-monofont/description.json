@@ -1,0 +1,18 @@
+[
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "This page demonstrated the editor components with MonoFont for verifying behavior of Auto Superscript (®) on a font that doesn't already appear superscripted in the give font."
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "Font set below is: Mono"
+      }
+    ]
+  }
+]

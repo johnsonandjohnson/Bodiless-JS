@@ -1,2 +1,2 @@
 export * from './LogoClean';
-export * from './tokens';
+export { cxLogo, cxLogoStatic } from './tokens';

@@ -13,7 +13,7 @@
  */
 
 import Editable, { withPlaceholder, asEditable } from './Editable';
-import type { UseEditableOverrides } from './Editable';
+import type { UseEditableOverrides, EditableData } from './Editable';
 import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
 import asBodilessAnchor from './Anchor/asBodilessAnchor';
@@ -127,4 +127,5 @@ export type {
 
 export type {
   UseEditableOverrides,
+  EditableData,
 };
