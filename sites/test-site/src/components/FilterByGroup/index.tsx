@@ -68,15 +68,15 @@ const withSiteWideFilter = withDesign({
 });
 
 export const FilterByGroupSingleSiteWide = flow(
-  asFilterByGroup,
   withSingleAllowedTag,
   withSiteWideFilter,
+  asFilterByGroup,
 )(FilterByGroupClean);
 
 export const FilterByGroupSingleSiteWideNoReset = flow(
-  asFilterByGroup,
   withSiteWideFilter,
   withSingleAllowedTagNoReset,
+  asFilterByGroup,
 )(FilterByGroupClean);
 
 export default FilterByGroup;

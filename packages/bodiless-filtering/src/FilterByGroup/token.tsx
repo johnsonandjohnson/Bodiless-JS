@@ -13,7 +13,6 @@
  */
 
 import {
-  as,
   withDesign,
   addClasses,
   flowHoc,
@@ -121,8 +120,8 @@ const asMobileFilterByGroup = withDesign({
 const asResponsiveFilterByGroup = (breakpoints: BreakpointsType) => flowHoc(
   withResponsiveVariants({ breakpoints }),
   withDesign({
-    _default: as(asMobileFilterByGroup, 'red'),
-    lg: as(asDesktopFilterByGroup, 'green'),
+    _default: asMobileFilterByGroup,
+    lg: asDesktopFilterByGroup,
   }),
 );
 
