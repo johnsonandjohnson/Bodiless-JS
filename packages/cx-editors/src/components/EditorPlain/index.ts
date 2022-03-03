@@ -1,4 +1,7 @@
 import { Editable } from '@bodiless/components';
 
-export { cxEditorPlain, cxEditorPlainStatic } from './tokens';
-export { Editable as EditorPlainClean };
+// Eventually this can be done at bodiless level.
+const EditorPlainClean = withoutHydration(Editable);
+
+export { cxEditorPlain } from './tokens';
+export {  EditorPlainClean };

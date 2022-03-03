@@ -12,5 +12,10 @@
  * limitations under the License.
  */
 
-export { cxLink as cxLinkStatick } from './tokens';
-export * from './index.common';
+// The following exports are the same for both static and edit apps
+export { cxLink } from './tokens';
+export {
+  useExternalLinkToggle, useIsDownloadLink, asEditableLink, anchorTo,
+} from './util';
+export { LinkClean, asLinkToken } from './LinkClean';
+export type { LinkComponents, LinkBaseProps } from './types';

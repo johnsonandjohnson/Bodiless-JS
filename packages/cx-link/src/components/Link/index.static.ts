@@ -12,5 +12,5 @@
  * limitations under the License.
  */
 
-export { cxLink as cxLinkStatick } from './tokens';
+export const cxLinkStatic = {};
 export * from './index.common';

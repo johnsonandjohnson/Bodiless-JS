@@ -1,2 +1,2 @@
-export * from './tokens';
-export * from './RichTextClean';
+export { cxRichText } from './tokens';
+export { RichTextClean } from './RichTextClean';
