@@ -43,6 +43,11 @@ export const heavyDesign = varyDesigns(
   createTextDesign(5),
 );
 
+// @TODO: Investigate withDesign performance.
+// With old withDesign implementation, every call passing heavyDesign takes less than 1ms
+// To process, but the new implementation after upgrade deps takes more than 500ms in average.
+export const withHeavyDesign = withDesign(heavyDesign);
+
 export const withPrunedDesign: HOC = Component => {
   const WithPrunedDesign: FC<any> = props => {
     const { design } = props;
@@ -54,7 +59,7 @@ export const withPrunedDesign: HOC = Component => {
 
 export const createHeavyFlowContainer = (n: number = 1) => flowHoc(
   // withPrunedDesign,
-  withDesign(heavyDesign),
+  withHeavyDesign,
   withNodeKey(`fc-${n}`),
   addProps({ key: `fc-${n}` }),
   withParent(Div),
@@ -66,7 +71,7 @@ export const createHeavyFlowContainer = (n: number = 1) => flowHoc(
 export const createHeavyChameleon = (n: number = 1) => flowHoc(
   asBodilessChameleon(`chameleon-${n}`),
   // withPrunedDesign,
-  withDesign(heavyDesign),
+  withHeavyDesign,
   addProps({ key: `chameleon-${n}` }),
 )(Box);
 
