@@ -29,9 +29,11 @@ const getSiteEnvConfig = async (appEnv:string = 'production'): Promise<Tree> => 
   const siteEnvConfig = resolvePath('bodiless.env.config.js');
 
   if (existsSync(siteEnvConfig)) {
+    const siteConfig = await require(siteEnvConfig).configure(siteEnvFile, appEnv);
+    console.log('siteConfig', siteConfig);
     return {
       ...siteEnvFile,
-      ...await require(siteEnvConfig).configure(siteEnvFile, appEnv),
+      ...siteConfig,
     };
   }
 

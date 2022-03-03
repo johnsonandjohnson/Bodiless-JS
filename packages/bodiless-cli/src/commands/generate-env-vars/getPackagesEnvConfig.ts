@@ -15,15 +15,47 @@
 /* eslint-disable max-len, global-require, import/no-dynamic-require */
 import path from 'path';
 import fs from 'fs';
-import locateFiles from './locateFiles';
 
 import { Tree } from './type';
 
+export const getPackageEnvConfig = (rootPath: string): string[] => {
+  try {
+    const paths: string[] = [];
+    // eslint-disable-next-line global-require, import/no-dynamic-require
+    const pkgJson = require(path.join(rootPath, '/package.json'));
+    const deps = Object.keys({
+      ...pkgJson.dependencies,
+      ...pkgJson.devDependencies,
+    });
+
+    try {
+      const docsJsonPath = path.join(rootPath, 'bodiless.env.config.js');
+      // eslint-disable-next-line global-require, import/no-dynamic-require
+      require(docsJsonPath);
+      paths.push(docsJsonPath);
+    } catch (e) {
+      // do nothing
+    }
+
+    deps.forEach(dep => {
+      try {
+        // eslint-disable-next-line global-require, import/no-dynamic-require
+        const depDocsJsonPath = require(path.join(dep, 'lib/getBodilessEnvConfig'))
+          .getBodilessEnvConfig();
+        paths.push(depDocsJsonPath[0]);
+      } catch (e) {
+        // do nothing
+      }
+    });
+    return paths;
+  } catch (e) {
+    return [];
+  }
+};
+
 const getPackagesEnvConfig = async (defaultConfig:Tree, appEnv:string): Promise<Tree> => {
-  const bodilessEnvConfigPaths:string[] = await locateFiles({
-    filePattern: new RegExp(/bodiless\.env\.config\.(js|ts)/g),
-    startingRoot: './',
-  });
+  const initPath = path.resolve();
+  const bodilessEnvConfigPaths:string[] = getPackageEnvConfig(initPath);
 
   return bodilessEnvConfigPaths.reduce(async (agregatedEnvConfig:Promise<Tree>, envConfigPath:string) => {
     if (fs.existsSync(path.resolve(envConfigPath))) {
