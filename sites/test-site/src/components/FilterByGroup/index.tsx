@@ -39,7 +39,7 @@ const suggestions = [
 
 const breakpoints = pick(allBreakpoints, 'lg');
 
-const asFilterByGroup = flowHoc(
+export const asFilterByGroup = flowHoc(
   addProps({ suggestions }),
   addProps({ resetButtonText: 'Show All Products' }),
   asFilterByGroupResponsive,
