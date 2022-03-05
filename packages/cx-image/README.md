@@ -1,1 +1,3 @@
-See [Image Docs](./doc/Image.md)
+# `@bodiless/cx-image`
+
+See [Image Docs](./doc/Image.md).

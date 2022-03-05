@@ -263,41 +263,39 @@ are available for each variation.
 To read more about the Rich Text Editor see the [Rich Text Editor component
 documentation](../../../Components/RichText).
 
-
 ### Components
 
-The following components may be available for use on your BodilessJS site. Click
-the links below to read more about working with the individual components.
+The following components may be available for use on your BodilessJS site. Click the links below to
+read more about working with the individual components.
 
 #### Layout
 
-* [Flow Container](../../../Components/FlowContainer) 
+* [Flow Container](../../../Components/FlowContainer)
 * [Rich Media Text Editor](../../../Components/RichText)
 * [Card](../../../Components/Card)
 
 #### Media
 
-* [Image](../../../Components/Image)
-* [Youtube](../../../Components/YouTube) 
+* [Image](../../../Components/Image/)
+* [YouTube](../../../Components/YouTube)
 * [Carousel](../../../Components/Carousel)
 
 #### Interactions
 
-* [Link](../../../Components/Link) 
-* [Single Accordion](../../../Components/SingleAccordion) 
-* [Main Menu](../../../Components/MainMenu)
+* [Link](../../../Components/Link)
+* [Single Accordion](../../../Components/SingleAccordion)
+* [Navigation](../../../Components/Navigation/)
 * [List Filter](../../../Components/FilterByGroup)
 
 #### Integrations
 
 * [Bazaarvoice](../../../Components/bv)
 
-
 #### SEO
- 
-* [Sitemap.xml](../../../Development/Guides/BuildingSites/ComponentsStarterKit?id=sitemapxml-amp-robotstxt-file) 
-* Robots.txt 
-* [Metatags](../../../Development/Guides/BuildingSites/ComponentsStarterKit?id=metadata-component) 
+
+* [Sitemap.xml](../../../Development/Guides/BuildingSites/ComponentsStarterKit?id=sitemapxml-amp-robotstxt-file)
+* `Robots.txt`
+* [Metatags](../../../Development/Guides/BuildingSites/ComponentsStarterKit?id=metadata-component)
 
 ### Content Library
 

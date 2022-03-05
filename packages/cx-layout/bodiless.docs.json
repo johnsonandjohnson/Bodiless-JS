@@ -1,0 +1,8 @@
+{
+  "Components": {
+    "Layout": {
+      "README.md": "./README.md",
+      "Header.md": "./doc/Header.md"
+    }
+  }
+}

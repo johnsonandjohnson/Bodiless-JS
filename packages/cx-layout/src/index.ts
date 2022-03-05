@@ -12,4 +12,5 @@
  * limitations under the License.
  */
 
-export { cxHeader, HeaderClean } from './components/Header';
+export { cxLayout, LayoutClean, asLayoutToken } from './components/Layout';
+export { cxHeader, HeaderClean, asHeaderToken } from './components/Header';

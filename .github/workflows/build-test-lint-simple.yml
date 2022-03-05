@@ -60,6 +60,7 @@ jobs:
       - name: Test
         run: npm run test --quiet --colors
 
+      # Temp using monorepo since standalone is breaking cypress tests.
       - name: Cypress tests
-        run: |
-          npm run test:ci
+        run: npm run test:monorepo
+        # run: npm run test:ci

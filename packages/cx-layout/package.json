@@ -9,7 +9,9 @@
   "typings": "lib/index.d.ts",
   "files": [
     "/lib",
-    "site.tailwind.config.js"
+    "site.tailwind.config.js",
+    "/bodiless.docs.json",
+    "/doc"
   ],
   "repository": {
     "type": "git",
@@ -30,6 +32,7 @@
     "@bodiless/components-ui": "^0.3.7",
     "@bodiless/core": "^0.3.7",
     "@bodiless/cx-elements": "^0.3.7",
+    "@bodiless/cx-editors": "^0.3.7",
     "@bodiless/cx-image": "^0.3.7",
     "@bodiless/fclasses": "^0.3.7",
     "@bodiless/gatsby-theme-bodiless": "^0.3.7",

@@ -1,70 +1,28 @@
-# CanvasX Image Component
+# CX Image Component
 
-CanvasX Image is based on [BodilessJS image](../../bodiless/Components/Image) component. It adds features and styles specific to CanvasX sites.
+The CX Image Component is based on the [BodilessJS Image Component](../../Components/Image/). While
+Bodiless Image is a generic image component with tokens that can be combined however you choose, CX
+Image builds upon it, providing a sensible default combination of its generic tokens (i.e., features
+and styles), to help meet typical site-use expectations.
 
-Provides a set of token tokens to compose image component: 
- - A base token with Site Library and GatsbyImage.
- - Image types tokens
-   - Plain Image
-   - Performance Image
-   - Performance Image with SVG
-   - Performance Image with No Base 64
+## Site Builder Details
 
-  - Image Orientation tokens
-    - Square
-    - Landscape
-  - Linkable Token
+The CX Image Component provides a set of tokens to compose an Image Component:
 
-Additionally it provides helper functions that return token which add Default content and Library to the Image.
-## Usage
+| Token                      | Description                                                  |
+| -------------------------- | ------------------------------------------------------------ |
+| `Base`                     | A token with GatsbyImage which creates the CX base Image.    |
+| `Plain`                    | A token which recomposes the base image as a Plain Image.    |
+| `Default`                  | A token which recomposes the base image as a BlurUp Image.   |
+| `WithEditorPlain`          | A token which applies a Plain image.                         |
+| `WithEditorBlurUp`         | A token which applies the BlurUp Effect.                     |
+| `WithEditorTraced`         | A token which applies the Traced Effect.                     |
+| `WithEditorNoEffect`       | A token which applies NoEffect.                              |
+| `EditableTraced`           | A token which recomposes the base image as a Traced Image.   |
+| `EditableNoEffect`         | A token which recomposes the base image as a NoEffect Image. |
+| `WithLandscapePlaceholder` | A token which applies a Landscape Placeholder.               |
+| `WithLink`                 | A token which wraps the image in a link.                     |
 
-```js
-import {
-  cxImage,
-  asImageToken,
-  WithDefaultContentImage,
-  withImageLibrary
-} from "@canvasx/image";
-import { Img } from '@bodiless/fclasses';
-import Contentful1 from '../Contentful/Image/contentful1.png';
+### Usage
 
-export const WithCareClubContent = {
-  Content: {
-    _: WithDefaultContentImage(['DefaultContent', 'careclub']),
-  },
-  Meta: {
-    _: asToken.meta.term('Type')('Contentful'),
-  },
-};
-
-// Create an Image Token with full width and rounded corners, using BlurUp Effect.
-export const asRoundedFullWidthImage = asImageToken({
-  ...cxImage.EditableImage,
-  Style: {
-    _: t(
-      'rounded-lg',
-      'w-full',
-    ),
-  },
-});
-
-export const RoundedFullWidthImage = as(asRoundedFullWidthImage)(Img);
-
-
-// Create an Image Token with Default Content.
-export const asEditableImageWithlibrary = asImageToken({
-  ...cxImage.EditableImage,
-  Content: {
-    ...WithCareClubContent.Content,
-  },
-  Meta: {
-    _: t(
-      cxImage.EditableImage._,
-      WithCareClubContent.Meta._,
-    ),
-  },
-});
-
-export const EditableImageWithlibrary = as(asEditableImageWithlibrary)(Img);
-
-```
+_To be documented._

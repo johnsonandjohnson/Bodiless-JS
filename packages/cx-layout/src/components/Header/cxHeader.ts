@@ -13,7 +13,7 @@
  */
 
 import { withNodeKey } from '@bodiless/core';
-import { cxElement } from '@bodiless/cx-elements';
+import { cxColor } from '@bodiless/cx-elements';
 import {
   A, addClasses, flowHoc, flowIf, replaceWith, Span,
   Ul, withDesign, withProps
@@ -78,7 +78,7 @@ const Base = asHeaderToken({
     ),
   },
   Theme: {
-    Wrapper: cxElement.WithPrimaryBgColor,
+    Wrapper: cxColor.BgPrimaryCard,
   },
   Schema: {
     Logo: withNodeKey({ nodeKey: 'Logo' }),

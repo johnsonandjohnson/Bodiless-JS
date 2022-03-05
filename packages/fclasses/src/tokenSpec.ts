@@ -1,3 +1,17 @@
+/**
+ * Copyright © 2022 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import mergeWith from 'lodash/mergeWith';
 import flow from 'lodash/flow';
 import { ComponentType } from 'react';
@@ -58,7 +72,7 @@ function as<D extends object = any>(
   // Ensure that all token specs have been passed through `asTokenSpec`
   args.forEach(a => {
     if (typeof a !== 'function' && typeof a !== 'string' && !a![$TokenSpec]) {
-      throw new Error('All token specifications passed to "a" must be created by a version of "asTokenSpec"');
+      throw new Error('All token specifications passed to "as" must be created by a version of "asTokenSpec"');
     }
   });
 
@@ -197,10 +211,9 @@ const tokenMergeCustomizer = (...args: any) => {
      * Designs to extend the base design.
      */
 function extendDesign<C extends DesignableComponents, D extends object = any>(
-  d: Design<C, D> = {} as any,
   ...designs: Design<C, D>[]
 ): Design<C, D> {
-  return mergeWith(d, ...designs, (a: any, b: any) => (a && b ? as(a, b) : undefined));
+  return mergeWith({}, ...designs, (a: any, b: any) => (a && b ? as(a, b) : undefined));
 }
 
 /**
@@ -218,7 +231,7 @@ const extendDesignWith = (
   ...dx: (Design|HOD<any, any>)[]
 ) => (
   d?: Design
-) => extendDesign(d, ...dx.map(
+) => extendDesign(d || {}, ...dx.map(
   dx$ => (typeof dx$ === 'function' ? dx$() : dx$)
 ));
 
@@ -266,7 +279,10 @@ const asTokenSpec = <C extends DesignableComponents, D extends object>(
   d?: D,
 ) => (...specs: TokenSpecBase<C, D>[]): TokenSpec<C, D> => {
     const [spec0, ...restSpecs] = specs;
-    const mergedSpec: TokenSpecBase<C, D> = mergeWith(spec0, ...restSpecs, tokenMergeCustomizer);
+    const mergedSpec = { ...spec0 };
+    mergeWith(
+      mergedSpec, ...restSpecs, tokenMergeCustomizer
+    );
     const orderedSpec = d
       // Ensure order of keys in resulting token matches order of domains.
       ? pick(mergedSpec, ...Object.getOwnPropertyNames(d), 'Meta', 'Compose', 'Flow')

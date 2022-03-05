@@ -1,10 +1,23 @@
+/**
+ * Copyright © 2022 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import type {
   DesignableComponents,
   TokenSpec as TokenSpecBase,
   TokenMeta,
-  Design,
-  TokenCollection,
   Token,
+  TokenSpec,
 } from '@bodiless/fclasses';
 import {
   extendMeta,
@@ -67,23 +80,39 @@ const asMetaToken = (...m: TokenMeta[]) => asElementToken({
   Meta: extendMeta(...m),
 });
 
-const asTokenCollection = (
-  d: Design
-): TokenCollection<{}, DefaultDomains> => Object.entries(d).reduce(
-  (tokens, [name, value]) => ({
-    ...tokens,
-    [name]: asElementToken({
-      Core: {
-        _: value as Token<{}, DefaultDomains>,
-      }
+// @todo should these be public types exported from fclasses?
+type TC<K extends string> = Record<K, TokenSpec<{}, Pick<DefaultDomains, 'Core'>>>;
+type TD<K extends string> = Record<K, Token<{}, DefaultDomains>>;
+
+/**
+ * Creates a group of element tokens with shared meta.
+ *
+ * @param m
+ * One or more token metatdata objects to be merged and attached to all tokens in the group.
+ *
+ * @return
+ * A function which takes a design and returns a token collection,
+ * whose keys are the
+ *
+ */
+const asTokenGroup = (...m: TokenMeta[]) => <K extends string>(
+  d: TD<K>
+): TC<K> => Object.entries(d).reduce(
+    (tokens, [name, value]) => ({
+      ...tokens,
+      [name]: asElementToken({
+        Meta: extendMeta(...m),
+        Core: {
+          _: value as Token<{}, DefaultDomains>,
+        }
+      }),
     }),
-  }),
-  {},
-);
+    {},
+  ) as TC<K>;
 
 export {
   asCxTokenSpec, asMetaToken, asElementToken, asFluidToken,
-  asTokenCollection,
+  asTokenGroup,
 };
 
 export type { CxTokenSpec };
