@@ -15,40 +15,8 @@
 /* eslint-disable max-len, global-require, import/no-dynamic-require */
 import path from 'path';
 import fs from 'fs';
-
+import getPackageEnvConfig from 'src/helpers/getPackageEnvConfig';
 import { Tree } from './type';
-
-export const getPackageEnvConfig = (rootPath: string): string[] => {
-  try {
-    const paths: string[] = [];
-    const pkgJson = require(path.join(rootPath, '/package.json'));
-    const deps = Object.keys({
-      ...pkgJson.dependencies,
-      ...pkgJson.devDependencies,
-    });
-
-    try {
-      const docsJsonPath = path.join(rootPath, 'bodiless.env.config.js');
-      require(docsJsonPath);
-      paths.push(docsJsonPath);
-    } catch (e) {
-      // do nothing
-    }
-
-    deps.forEach(dep => {
-      try {
-        const depDocsJsonPath = require(path.join(dep, 'lib/getBodilessEnvConfig'))
-          .getBodilessEnvConfig();
-        paths.push(depDocsJsonPath[0]);
-      } catch (e) {
-        // do nothing
-      }
-    });
-    return paths;
-  } catch (e) {
-    return [];
-  }
-};
 
 const getPackagesEnvConfig = async (defaultConfig:Tree, appEnv:string): Promise<Tree> => {
   const initPath = path.resolve();

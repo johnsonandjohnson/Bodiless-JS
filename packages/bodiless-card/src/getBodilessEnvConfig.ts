@@ -1,6 +1,6 @@
 import path from 'path';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { getPackageEnvConfig } from '@bodiless/cli/lib/commands/generate-env-vars/getPackagesEnvConfig';
+import { getPackageEnvConfig } from '@bodiless/cli/lib/helpers/getPackageEnvConfig';
 
 const packageRootDir = path.resolve(__dirname, '..');
 

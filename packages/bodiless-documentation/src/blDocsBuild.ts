@@ -13,10 +13,11 @@
  * limitations under the License.
  */
 
-/* eslint-disable no-console, max-len, global-require, import/no-dynamic-require */
+/* eslint-disable no-console, global-require, import/no-dynamic-require */
 import path from 'path';
 import flow from 'lodash/flow';
 import fs from 'fs-extra';
+import { getPackageDocConfig } from '@bodiless/cli/src/helpers/getPackageDocConfig';
 import { withTreeFromFile, getSimplePaths, validatePaths } from './tree';
 import {
   writeTree, writeResources, copyFile, symlinkFile,
@@ -27,38 +28,6 @@ import readSettings from './readSettings';
 import buildApiDoc, { updateNavigation as apiDocUpdateNavigation } from './blApiDocsBuild';
 
 require('dotenv').config({ path: '.env.site' });
-
-export const getPackageDocConfig = (rootPath: string, nameSpace: string = 'bodiless'): string[] => {
-  try {
-    const paths: string[] = [];
-    const pkgJson = require(path.join(rootPath, '/package.json'));
-    const deps = Object.keys({
-      ...pkgJson.dependencies,
-      ...pkgJson.devDependencies,
-    });
-
-    try {
-      const docsJsonPath = path.join(rootPath, `${nameSpace}.docs.json`);
-      require(docsJsonPath);
-      paths.push(docsJsonPath);
-    } catch (e) {
-      // do nothing
-    }
-
-    deps.forEach(dep => {
-      try {
-        const depDocsJsonPath = require(path.join(dep, 'lib/getBodilessDocConfig'))
-          .getBodilessDocs(nameSpace);
-        paths.push(depDocsJsonPath[0]);
-      } catch (e) {
-        // do nothing
-      }
-    });
-    return paths;
-  } catch (e) {
-    return [];
-  }
-};
 
 const buildSubTree = async (toc: any, namespace: string) => {
   // We start by using withTreeFromFile to build up an array of TreeHO and
