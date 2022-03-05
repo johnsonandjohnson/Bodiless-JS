@@ -1,10 +1,10 @@
 import path from 'path';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { getPackageDocsJson } from './blDocsBuild';
+import { getPackageDocConfig } from './blDocsBuild';
 
 const packageRootDir = path.resolve(__dirname, '..');
 
-export const getBodilessDocs = (namespace: string) => getPackageDocsJson(
+export const getBodilessDocs = (namespace: string) => getPackageDocConfig(
   packageRootDir,
   namespace
 );

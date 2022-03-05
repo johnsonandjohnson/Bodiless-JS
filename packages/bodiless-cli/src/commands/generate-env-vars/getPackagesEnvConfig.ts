@@ -21,7 +21,6 @@ import { Tree } from './type';
 export const getPackageEnvConfig = (rootPath: string): string[] => {
   try {
     const paths: string[] = [];
-    // eslint-disable-next-line global-require, import/no-dynamic-require
     const pkgJson = require(path.join(rootPath, '/package.json'));
     const deps = Object.keys({
       ...pkgJson.dependencies,
@@ -30,7 +29,6 @@ export const getPackageEnvConfig = (rootPath: string): string[] => {
 
     try {
       const docsJsonPath = path.join(rootPath, 'bodiless.env.config.js');
-      // eslint-disable-next-line global-require, import/no-dynamic-require
       require(docsJsonPath);
       paths.push(docsJsonPath);
     } catch (e) {
@@ -39,7 +37,6 @@ export const getPackageEnvConfig = (rootPath: string): string[] => {
 
     deps.forEach(dep => {
       try {
-        // eslint-disable-next-line global-require, import/no-dynamic-require
         const depDocsJsonPath = require(path.join(dep, 'lib/getBodilessEnvConfig'))
           .getBodilessEnvConfig();
         paths.push(depDocsJsonPath[0]);

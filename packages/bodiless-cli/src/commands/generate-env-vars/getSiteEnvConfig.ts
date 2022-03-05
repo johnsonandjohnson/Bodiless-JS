@@ -30,7 +30,6 @@ const getSiteEnvConfig = async (appEnv:string = 'production'): Promise<Tree> => 
 
   if (existsSync(siteEnvConfig)) {
     const siteConfig = await require(siteEnvConfig).configure(siteEnvFile, appEnv);
-    console.log('siteConfig', siteConfig);
     return {
       ...siteEnvFile,
       ...siteConfig,

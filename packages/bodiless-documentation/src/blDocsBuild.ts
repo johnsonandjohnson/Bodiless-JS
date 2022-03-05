@@ -13,12 +13,10 @@
  * limitations under the License.
  */
 
-/* eslint-disable no-console */
+/* eslint-disable no-console, max-len, global-require, import/no-dynamic-require */
 import path from 'path';
 import flow from 'lodash/flow';
 import fs from 'fs-extra';
-// import cleanSymlinks from './cleanSymlinks';
-// import locateFiles from './locateFiles';
 import { withTreeFromFile, getSimplePaths, validatePaths } from './tree';
 import {
   writeTree, writeResources, copyFile, symlinkFile,
@@ -30,10 +28,9 @@ import buildApiDoc, { updateNavigation as apiDocUpdateNavigation } from './blApi
 
 require('dotenv').config({ path: '.env.site' });
 
-export const getPackageDocsJson = (rootPath: string, nameSpace: string = 'bodiless'): string[] => {
+export const getPackageDocConfig = (rootPath: string, nameSpace: string = 'bodiless'): string[] => {
   try {
     const paths: string[] = [];
-    // eslint-disable-next-line global-require, import/no-dynamic-require
     const pkgJson = require(path.join(rootPath, '/package.json'));
     const deps = Object.keys({
       ...pkgJson.dependencies,
@@ -42,7 +39,6 @@ export const getPackageDocsJson = (rootPath: string, nameSpace: string = 'bodile
 
     try {
       const docsJsonPath = path.join(rootPath, `${nameSpace}.docs.json`);
-      // eslint-disable-next-line global-require, import/no-dynamic-require
       require(docsJsonPath);
       paths.push(docsJsonPath);
     } catch (e) {
@@ -51,8 +47,7 @@ export const getPackageDocsJson = (rootPath: string, nameSpace: string = 'bodile
 
     deps.forEach(dep => {
       try {
-        // eslint-disable-next-line global-require, import/no-dynamic-require
-        const depDocsJsonPath = require(path.join(dep, 'lib/getBodilessDocs'))
+        const depDocsJsonPath = require(path.join(dep, 'lib/getBodilessDocConfig'))
           .getBodilessDocs(nameSpace);
         paths.push(depDocsJsonPath[0]);
       } catch (e) {
@@ -66,20 +61,11 @@ export const getPackageDocsJson = (rootPath: string, nameSpace: string = 'bodile
 };
 
 const buildSubTree = async (toc: any, namespace: string) => {
-  // We start by using locateFiles and withTreeFromFile to build up an array of TreeHO and
+  // We start by using withTreeFromFile to build up an array of TreeHO and
   // at the same time we clean up the symlinks
 
   const initPath = path.resolve();
-  const docsJsonPaths = getPackageDocsJson(initPath, namespace);
-
-  // console.log('docsJsonPaths', docsJsonPaths);
-
-  // const updates = await locateFiles({
-  //   filePattern: new RegExp(`${namespace}.docs.json$`),
-  //   // filePattern: /docs.json$/,
-  //   startingRoot: './',
-  //   action: withTreeFromFile,
-  // });
+  const docsJsonPaths = getPackageDocConfig(initPath, namespace);
 
   const updates = await Promise.all(
     docsJsonPaths.map(path => withTreeFromFile(path))
