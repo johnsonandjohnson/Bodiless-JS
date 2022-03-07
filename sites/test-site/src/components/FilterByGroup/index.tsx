@@ -41,7 +41,6 @@ const breakpoints = pick(allBreakpoints, 'lg');
 
 export const asFilterByGroup = flowHoc(
   addProps({ suggestions }),
-  addProps({ resetButtonText: 'Show All Products' }),
   asFilterByGroupResponsive,
   asFilterByGroupDefaultStyle,
   asTestableFilterByGroup,
@@ -68,6 +67,7 @@ const withSiteWideFilter = withDesign({
 });
 
 export const FilterByGroupSingleSiteWide = flow(
+  addProps({ resetButtonText: 'Show All Products' }),
   withSingleAllowedTag,
   withSiteWideFilter,
   asFilterByGroup,
