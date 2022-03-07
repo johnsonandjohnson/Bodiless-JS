@@ -36,6 +36,7 @@
     "@bodiless/cx-layout": "^0.3.7",
     "@bodiless/fclasses": "^0.3.7",
     "@bodiless/gatsby-theme-bodiless": "^0.3.7",
+    "@bodiless/cli": "^0.3.7",
     "lodash": "^4.17.19"
   }
 }

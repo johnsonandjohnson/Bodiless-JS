@@ -32,6 +32,7 @@
   "dependencies": {
     "@bodiless/core": "^0.3.7",
     "@bodiless/fclasses": "^0.3.7",
+    "@bodiless/cli": "^0.3.7",
     "axios": "^0.21.0",
     "cheerio": "1.0.0-rc.3",
     "dotenv": "^8.2.0",

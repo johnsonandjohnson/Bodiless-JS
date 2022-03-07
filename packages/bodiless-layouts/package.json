@@ -38,6 +38,7 @@
   "dependencies": {
     "@bodiless/core": "^0.3.7",
     "@bodiless/fclasses": "^0.3.7",
+    "@bodiless/cli": "^0.3.7",
     "axios": "^0.21.0",
     "html2canvas": "^1.0.0-rc.3",
     "informed": "^3.34.0",

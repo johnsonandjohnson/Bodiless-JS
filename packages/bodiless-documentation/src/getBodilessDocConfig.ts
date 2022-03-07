@@ -1,6 +1,5 @@
 import path from 'path';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { getPackageDocConfig } from './blDocsBuild';
+import { getPackageDocConfig } from '@bodiless/cli/lib/helpers/getPackageDocConfig';
 
 const packageRootDir = path.resolve(__dirname, '..');
 

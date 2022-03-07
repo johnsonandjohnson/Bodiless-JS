@@ -29,6 +29,7 @@
   "dependencies": {
     "@bodiless/components": "^0.3.7",
     "@bodiless/core": "^0.3.7",
+    "@bodiless/cli": "^0.3.7",
     "common-tags": "^1.8.0",
     "lodash": "^4.17.19"
   },

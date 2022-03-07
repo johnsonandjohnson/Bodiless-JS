@@ -36,6 +36,7 @@
     "@bodiless/layouts": "^0.3.7",
     "@bodiless/layouts-ui": "^0.3.7",
     "@bodiless/cx-elements": "^0.3.7",
+    "@bodiless/cli": "^0.3.7",
     "lodash": "^4.17.19"
   }
 }

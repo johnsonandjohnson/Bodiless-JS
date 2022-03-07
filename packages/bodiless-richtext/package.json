@@ -32,6 +32,7 @@
   "dependencies": {
     "@bodiless/core": "^0.3.7",
     "@bodiless/fclasses": "^0.3.7",
+    "@bodiless/cli": "^0.3.7",
     "@emotion/core": "^10.0.14",
     "@emotion/css": "^10.0.14",
     "@emotion/styled": "^10.0.14",

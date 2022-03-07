@@ -37,6 +37,7 @@
     "@bodiless/richtext": "^0.3.7",
     "@bodiless/richtext-ui": "^0.3.7",
     "@bodiless/tokens": "^0.3.7",
+    "@bodiless/cli": "^0.3.7",
     "lodash": "^4.17.19"
   }
 }

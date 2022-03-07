@@ -32,6 +32,7 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
+    "@bodiless/cli": "^0.3.7",
     "lodash": "^4.17.19",
     "uuid": "^3.3.2",
     "babel-plugin-preval": "5.0.0"

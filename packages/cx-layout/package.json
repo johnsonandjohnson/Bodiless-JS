@@ -36,6 +36,7 @@
     "@bodiless/cx-image": "^0.3.7",
     "@bodiless/fclasses": "^0.3.7",
     "@bodiless/gatsby-theme-bodiless": "^0.3.7",
+    "@bodiless/cli": "^0.3.7",
     "lodash": "^4.17.19",
     "mobx": "^6.0.0",
     "mobx-react": "^7.2.1",

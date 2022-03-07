@@ -35,6 +35,7 @@
     "@bodiless/fclasses": "^0.3.7",
     "@bodiless/layouts": "^0.3.7",
     "@bodiless/ui": "^0.3.7",
+    "@bodiless/cli": "^0.3.7",
     "axios": "^0.21.0",
     "common-tags": "^1.8.0",
     "copyfiles": "^2.1.1",

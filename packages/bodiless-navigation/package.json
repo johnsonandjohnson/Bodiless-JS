@@ -36,6 +36,7 @@
     "@bodiless/core": "^0.3.7",
     "@bodiless/fclasses": "^0.3.7",
     "@bodiless/organisms": "^0.3.7",
+    "@bodiless/cli": "^0.3.7",
     "enzyme": "^3.9.0",
     "lodash": "^4.17.19",
     "uuid": "^3.3.2"
