@@ -104,16 +104,17 @@ describe('PDP (Product Details Page) smoke tests', function () {
     cy.xpath(imageIconXpath)
       .click();
     const imagePath = `${imagesFolderPath}/${imageName}`;
-    cy.fixture(imagePath).then(fileContent => {
-      cy.get('input[type=file]').attachFile({ fileContent, fileName: imageName, mimeType: "image/jpeg" });
-    })
+    cy.get('input[type="file"]').attachFile(
+      { filePath: imagePath, mimeType: 'image/jpeg' },
+      { subjectType: 'drag-n-drop' },
+    );
     cy.wait(3000);
     cy.xpath(checkmarkIconImageFormXpath)
       .click();
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'src')
       .and('match', imagePathRegex);
-    // cy.isImageVisible(imagePlaceholderXpath);
+    cy.isImageVisible(imagePlaceholderXpath);
   })
 
 
@@ -135,7 +136,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'src')
       .and('match', imagePathRegex);
-    // cy.isImageVisible(imagePlaceholderXpath);
+    cy.isImageVisible(imagePlaceholderXpath);
   })
 
 
@@ -148,7 +149,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'src')
       .and('match', imagePathRegex);
-    // cy.isImageVisible(imagePlaceholderXpath);
+    cy.isImageVisible(imagePlaceholderXpath);
     cy.xpath(flexboxXpath)
       .should('be.visible');
   })
