@@ -118,7 +118,7 @@ describe('Card testing', function () {
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'src')
       .and('match', imageOrigPathRegex);
-    // cy.isImageVisible(imagePlaceholderXpath);
+    cy.isImageVisible(imagePlaceholderXpath);
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'alt', imageAltText);
     cy.xpath(imageLinkXpath)
@@ -141,7 +141,7 @@ describe('Card testing', function () {
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'src')
       .and('match', imageOrigPathRegex);
-    // cy.isImageVisible(imagePlaceholderXpath);
+    cy.isImageVisible(imagePlaceholderXpath);
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'alt', imageAltText);
     cy.xpath(imageLinkXpath)
@@ -212,7 +212,7 @@ describe('Card testing', function () {
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'src')
       .and('match', imageUpdPathRegex);
-    // cy.isImageVisible(imagePlaceholderXpath);
+    cy.isImageVisible(imagePlaceholderXpath);
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'alt', imageAltText + editedPostfix);
     cy.xpath(ctaButtonXpath)
@@ -235,7 +235,7 @@ describe('Card testing', function () {
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'src')
       .and('match', imageUpdPathRegex);
-    // cy.isImageVisible(imagePlaceholderXpath);
+    cy.isImageVisible(imagePlaceholderXpath);
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'alt', imageAltText + editedPostfix);
     cy.xpath(imageLinkXpath)

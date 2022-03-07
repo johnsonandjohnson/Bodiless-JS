@@ -113,7 +113,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'src')
       .and('match', imagePathRegex);
-    // cy.isImageVisible(imagePlaceholderXpath);
+    cy.isImageVisible(imagePlaceholderXpath);
   })
 
 
@@ -135,7 +135,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'src')
       .and('match', imagePathRegex);
-    // cy.isImageVisible(imagePlaceholderXpath);
+    cy.isImageVisible(imagePlaceholderXpath);
   })
 
 
@@ -148,7 +148,7 @@ describe('PDP (Product Details Page) smoke tests', function () {
     cy.xpath(imagePlaceholderXpath)
       .should('have.attr', 'src')
       .and('match', imagePathRegex);
-    // cy.isImageVisible(imagePlaceholderXpath);
+    cy.isImageVisible(imagePlaceholderXpath);
     cy.xpath(flexboxXpath)
       .should('be.visible');
   })
