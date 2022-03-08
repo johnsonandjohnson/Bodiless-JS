@@ -11,6 +11,7 @@
     "test": "__tests__"
   },
   "dependencies": {
+    "@bodiless/accessibility": "^0.3.7",
     "@babel/core": "^7.9.0",
     "@bodiless/accordion": "^0.3.7",
     "@bodiless/backend": "^0.3.7",
