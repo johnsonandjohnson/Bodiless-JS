@@ -314,7 +314,7 @@ export default (props: any) => (
     <Layout>
       <H1>Chameleon</H1>
       <p>
-        The sites below show different uses of the Bodiess &quot;Chameleon&quot;
+        The examples below show different uses of the Bodiess &quot;Chameleon&quot;
         component.
         Note: the layout of this whole page is also a chameleon! You can select
         different layouts by clicking the &quot;Page&quot; button on the toolbar

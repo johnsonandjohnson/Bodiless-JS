@@ -44,7 +44,7 @@ const groupClasses = 'bl-px-3';
 // eslint-disable-next-line max-len
 // const groupClasses = 'bl-border-t first:bl-border-t-0 bl-border-white bl-mt-grid-2 first:bl-mt-grid-0';
 
-// For accessibility attributes, see https://www.w3.org/TR/wai-aria-practices/sites/toolbar/toolbar.html
+// For accessibility attributes, see https://www.w3.org/TR/wai-aria-practices/examples/toolbar/toolbar.html
 const Toolbar = flow(
   addClasses(toolbarClasses),
   addProps({ role: 'toolbar', 'aria-label': 'Local Context Menu' }),
