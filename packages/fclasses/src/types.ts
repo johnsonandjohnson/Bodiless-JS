@@ -314,7 +314,7 @@ type FinalDesign<
    * component. The keys correspond to the design elements
    * - includes a special key which contains tokens to be applied to the
    *   component as a whole.
-   * - Allows each value to be speciried as a CanvasX extened token definition.
+   * - Allows each value to be specified as a CanvasX extended token definition.
    */
 export type Design<
   C extends DesignableComponents = DesignableComponents,

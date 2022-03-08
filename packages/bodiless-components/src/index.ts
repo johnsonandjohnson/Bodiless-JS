@@ -54,10 +54,6 @@ import PageDimensionsProvider, {
   withPageDimensionsContext,
   BreakpointsType,
 } from './PageDimensionsProvider';
-import {
-  ifViewportIs,
-  ifViewportIsNot,
-} from './withResponsiveToggle';
 import withResponsiveVariants from './withResponsiveVariants';
 import withBodilessLinkToggle from './withBodilessLinkToggle';
 
@@ -107,8 +103,6 @@ export {
   usePageDimensionsContext,
   withPageDimensionsContext,
   BreakpointsType,
-  ifViewportIs,
-  ifViewportIsNot,
   withResponsiveVariants,
   withMetaForm,
   withMetaSnippet,

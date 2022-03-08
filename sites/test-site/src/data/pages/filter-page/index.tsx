@@ -14,13 +14,16 @@
 
 import React from 'react';
 import { graphql } from 'gatsby';
-import { withSingleAllowedTag } from '@bodiless/filtering';
+import { withSingleAllowedTag, FilterByGroupClean } from '@bodiless/filtering';
+import { flowHoc } from '@bodiless/fclasses';
 import Page from '../../../components/Page';
-
 import Layout from '../../../components/Layout';
-import FilterByGroup, { ContextLogger } from '../../../components/FilterByGroup';
+import FilterByGroup, { ContextLogger, asFilterByGroup } from '../../../components/FilterByGroup';
 
-const FilterByGroupSingle = withSingleAllowedTag(FilterByGroup);
+const FilterByGroupSingle = flowHoc(
+  withSingleAllowedTag,
+  asFilterByGroup,
+)(FilterByGroupClean);
 
 const Switcher = () => {
   const [multiple, setMultiple] = React.useState(false);
