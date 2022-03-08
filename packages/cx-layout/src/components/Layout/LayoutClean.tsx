@@ -31,7 +31,7 @@ const layoutComponents: LayoutComponents = {
   SkipToMainContent: A,
   Helmet: HelmetClean,
   SiteHeader: HeaderClean,
-  // SiteFooter: Footer,
+  // SiteFooter: FooterClean,
   SiteFooter: Fragment,
   Container: Div,
   PageTopper: Fragment,

@@ -11,10 +11,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { as } from '@bodiless/fclasses';
+import {
+  addProps,
+  as,
+} from '@bodiless/fclasses';
 import { asLayoutToken } from '../LayoutClean';
 import { cxHeader } from '../../Header';
 import { cxHelmet } from '../../Helmet';
+import { MAIN_CONTENT_ID } from './constants';
+import { WithBordersLabels } from './cxLayoutTest';
 
 /**
   * Token that defines a basic layout.
@@ -22,12 +27,21 @@ import { cxHelmet } from '../../Helmet';
 const Base = asLayoutToken({
   Components: {
     Helmet: as(cxHelmet.Default),
-    SiteHeader: as(cxHeader.Default),
   },
   Theme: {
     Container: 'container mx-auto',
   },
   Schema: {
+  },
+  Behavior: {
+    Container: addProps({ id: MAIN_CONTENT_ID }),
+    SkipToMainContent: as(
+      addProps({
+        href: `#${MAIN_CONTENT_ID}`,
+        children: 'Skip To Main Content',
+      }),
+      'sr-only focus:not-sr-only',
+    ),
   },
   Layout: {
   },
@@ -35,11 +49,31 @@ const Base = asLayoutToken({
   }
 });
 
+const Header = asLayoutToken({
+  Components: {
+    SiteHeader: as(cxHeader.Default),
+  },
+});
+
+const Footer = asLayoutToken({
+  Components: {
+    // SiteFooter: as(cxFooter.Default),
+  },
+});
+
 const Default = asLayoutToken({
   ...Base,
+  Components: {
+    ...Base.Components,
+    ...Header.Components,
+    ...Footer.Components,
+  },
 });
 
 export default {
   Base,
   Default,
+  Header,
+  Footer,
+  WithBordersLabels,
 };
