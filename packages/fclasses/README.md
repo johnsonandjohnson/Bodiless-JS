@@ -686,7 +686,7 @@ in edit mode.
 One of the most powerful features of the Design API is the ability to create
 multiple variants of a component by composing different tokens onto it. These
 variants can then be fed to component selectors like the
-[Flow Container](../../Components/FlowContainer) or
+[Flow Container](../../Components/FlowContainer/) or
 [Chameleon](../../Components/Chameleon)) to provide a content editor with a
 range of options.
 

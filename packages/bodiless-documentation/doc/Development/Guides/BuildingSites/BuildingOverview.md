@@ -210,9 +210,10 @@ reusable or wait until template/page is built that needs that component.
 
 We recommend reading some of the following guides:
 
-* [Refining the editor components](../../../Components/RichText?id=richtext-component) to meet the site's requirements.
+* [Refining the editor components](../../../Components/Editors/RichText#richtext-component) to meet
+  the site's requirements.
 * [Building Site Components Guide](/TBD)
-* [FlowContainer Guide](../../../Components/FlowContainer.md)
+* [FlowContainer Guide](../../../Components/FlowContainer/)
 
 In general, we recommend as best practice to create components in their own
 folders unless they are super small. The recommendation is a folder name as the
@@ -240,7 +241,7 @@ which is expected, this is beneficial to group these pages and create a template
 for each group.  
 
 A template will often consist of flexible area (use
-[FlowContainer](../../../Components/FlowContainer.md)) and defined
+[FlowContainer](../../../Components/FlowContainer/)) and defined
 components/behavior.
 
 Please read using [templates](./Templates/README.md) for deeper dive.

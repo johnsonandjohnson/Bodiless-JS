@@ -25,10 +25,10 @@ The Product Detail Page as designed has some of the following unique characteris
 
 2. The additional components it uses should also be imported, copied and styled as needed or removed.
     * [Components/Products](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/test-site/src/components/Product/index.tsx)  which contains some simple HOC's and styling for this page.
-    * [Accordion](Components/Organisms/SingleAccordion)
-    * [Flow Container](Components/FlowContainer)
-    * [Rich Text Editor](Components/RichText)
-    * [BazaarVoice](Components/Bazaarvoice)
+    * [Accordion](/Components/SingleAccordion)
+    * [Flow Container](/Components/FlowContainer/)
+    * [Rich Text Editor](/Components/Editors/RichText)
+    * [BazaarVoice](/Components/Bv)
 
 3. Specify the templates to use the template via `index.json` file in `src/data/pages`.
   * Per Product Page:

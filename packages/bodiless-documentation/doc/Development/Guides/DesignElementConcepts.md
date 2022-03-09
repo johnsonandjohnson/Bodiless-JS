@@ -39,7 +39,7 @@ consistent.
 ### Move typography tokens.
 
 If it does not exist already, create a `/src/components/Elements` directory
-at the root of your project.  In this, create a `tokens.ts` file, and ddd
+at the root of your project.  In this, create a `tokens.ts` file, and add
 the following lines there:
 
 ```ts
@@ -122,7 +122,7 @@ token `withLinkEditor`. This is an example of how Bodiless extends the notion of
 design tokens beyond the purely visual sphere. *Any bit of reusable styling or
 behavior which can be applied to a component is considered a "Token" in
 Bodiless* Here, `withLinkEditor` is just a pass-through to
-[`asBodilessLink`](../../../Components/Link) -- but we could customize it here
+[`asBodilessLink`](/Components/Link/) -- but we could customize it here
 (eg to provide a different href normalizer). Also, defining it at site level
 allows us to attach metadata to it.
 

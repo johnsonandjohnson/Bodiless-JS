@@ -103,8 +103,8 @@ and forms, ultimately each component is reponsible for defining a form (or
 other interface) which a user can use to modify its data.
 
 #### Examples
-- The core [Link](../../../Components/Link) component defines
-  its own schema and form elements.
+
+- The core [Link](/Components/Link/) component defines its own schema and form elements.
 
 ## 7. One workflow to rule them all
 One workflow for code, configuration and content. All component data are stored

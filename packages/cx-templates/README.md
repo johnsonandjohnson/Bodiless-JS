@@ -1,7 +1,7 @@
-# `@canvasx/templates`
+# `@bodiless/cx-templates`
 
-Designable templates matching CANVAS parity.
+Designable templates.
 
 ## Templates List
 
-- [Generic](/Templates/Generic.md) - CANVASX Generic template.
+- [CX Generic](./doc/Generic.md) - CX Generic template

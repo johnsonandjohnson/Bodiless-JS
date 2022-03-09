@@ -165,8 +165,8 @@ site requirements. The Site Builder will find three pre-defined rich text editor
 Editors can be extended or customized by using the Bodiless Design API to apply token HOCs which
 add, remove, replace, or style the components which render different text formatting.
 
-We recommend [refining the editor components](/Components/RichText?id=richtext-component) needed to
-meet your site's requirements.
+We recommend [refining the editor components](/Components/Editors/RichText#richtext-component)
+needed to meet your site's requirements.
 
 ## Images
 
@@ -198,7 +198,7 @@ FlowContainer for a sidebar could have reduced set of components to select from.
 A FlowContainer can also be configured to use the Content Library, allowing
 editors to save components for reuse throughout the site.
 
-For more information, please read [FlowContainer](/Components/FlowContainer).
+For more information, please read [FlowContainer](/Components/FlowContainer/).
 
 ## Sitemap.xml & Robots.txt file
 
