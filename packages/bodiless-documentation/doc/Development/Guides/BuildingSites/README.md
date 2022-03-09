@@ -16,26 +16,24 @@ components — instead of utilizing those offered by CanvasX — will work.
       - Provide overview of monorepo structure.
       - [Bodiless Starter Components](./ComponentsStarterKit)
 
-01. Define Typography for the site:  
+01. Define Typography for the site:
+
     This step will define and implement basic elements of the design system (typography, spacing,
     colors).
-    01. Before starting, it is best to have a clear understanding of [Using Tailwind with
+
+    01. Before starting, it is best to have a clear understanding of:
+        - [Best Practices for Using Tailwind with
         Bodiless](./TypographySetup/TailwindGuide).
-    01. [Defining Typography](./TypographySetup/Typography)
-    01. [Using Custom Fonts](./TypographySetup/Fonts)
+        - [Best Practices Using Custom Fonts](./TypographySetup/Fonts)
+    01. [Getting Started Defining Typography](./TypographySetup/Typography)
 
 01. Text Editors:
-    - Implement the basic text editors for the site, which includes a Rich Text editor and Plain Text
-      editor.
-      - For an overview of implementing the editors, see [CanvasX
+
+    This step will define and implement the basic text editors for the site, which includes a Rich
+    Text editor and Plain Text editor.
+
+    01. For an step-by-step overview of implementing the editors, see [CanvasX
         Editors](/Components/Editors/CX_Editors/).
-      - `RichText`: Use tokens from `cx-Elements` to define available text styling options.
-        - See: [CX Rich Text Editor Component : Site Builder
-          Details](/Components/Editors/CX_Editors/CX_RTE_Editor#site-builder-details)
-      - `EditorPlain`: If your brand/site's font(s) require a superscript ® (registered trademark)
-        symbol, implement a version of the plain text editor which applies this CX token.
-        - See: [CX Plain Text Editor Component : Site Builder
-          Details](/Components/Editors/CX_Editors/CX_PlainEditor#site-builder-details)
 
 01. FlowContainer/Layout Tool:
     - Implement the basic layout editors for the site.
