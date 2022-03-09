@@ -19,16 +19,15 @@ import {
   addProps,
   replaceWith,
   addPropsIf,
-  Span,
   withoutProps,
 } from '@bodiless/fclasses';
-import { ifViewportIsNot, ifViewportIs } from '@bodiless/components';
 import {
   asAccordionWrapper,
   asAccordionBody,
   asAccordionTitle,
   useAccordionContext,
 } from '@bodiless/accordion';
+import { BreakpointsType, withResponsiveVariants } from '@bodiless/components';
 import {
   withAnyTag, withoutAnyTag,
 } from './Filter.token';
@@ -84,24 +83,6 @@ const asAccessibleFilterByGroup = flowHoc(
   }),
 );
 
-const asResponsiveFilterByGroup = flowHoc(
-  ifViewportIsNot(['lg', 'xl', '2xl'])(
-    withDesign({
-      FilterWrapper: asAccordionWrapper,
-      FilterTitle: asResponsiveAccordionTitle,
-      FilterBody: asExpandedOnDesktopBody,
-      ResetButton: asExpandedOnDesktopResetButtonBody,
-      RefineButton: addPropsIf(() => true)(useRefineButtonProps),
-    }),
-  ),
-  ifViewportIs(['lg', 'xl', '2xl'])(
-    withDesign({
-      FilterBody: replaceWith(Span),
-      RefineButton: replaceWith(() => null),
-    }),
-  ),
-);
-
 export const withMultipleAllowedTags = flowHoc(
   addProps({
     multipleAllowedTags: true,
@@ -124,8 +105,30 @@ export const withSingleAllowedTag = flowHoc(
   }),
 );
 
+const asDesktopFilterByGroup = withDesign({
+  RefineButton: replaceWith(() => null),
+});
+
+const asMobileFilterByGroup = withDesign({
+  FilterWrapper: asAccordionWrapper,
+  FilterTitle: asResponsiveAccordionTitle,
+  FilterBody: asExpandedOnDesktopBody,
+  ResetButton: asExpandedOnDesktopResetButtonBody,
+  RefineButton: addPropsIf(() => true)(useRefineButtonProps),
+});
+
+const asResponsiveFilterByGroup = (breakpoints: BreakpointsType) => flowHoc(
+  withResponsiveVariants({ breakpoints }),
+  withDesign({
+    _default: asMobileFilterByGroup,
+    lg: asDesktopFilterByGroup,
+  }),
+);
+
 export {
   asExpandedOnDesktopBody,
   asResponsiveFilterByGroup,
+  asMobileFilterByGroup,
+  asDesktopFilterByGroup,
   asAccessibleFilterByGroup,
 };
