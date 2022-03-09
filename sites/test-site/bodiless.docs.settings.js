@@ -12,36 +12,9 @@
  * limitations under the License.
  */
 
-<<<<<<< HEAD
-<<<<<<< HEAD:sites/test-site/bodiless.docs.settings.js
-const { defaultToc } = require('@bodiless/documentation');
-// const localToc = require('./bodiless.docs.toc.json');
-
-const settings = () => ({
-  toc: {
-    ...defaultToc(),
-    // bodiless: localToc,
-  }
-});
-module.exports.default = settings;
-=======
-import { asElementToken } from '@bodiless/cx-elements';
-import { cxPage } from '@bodiless/cx-templates';
-
-const Default = asElementToken({
-  ...cxPage.Default,
-});
-
-export default {
-  ...cxPage,
-  Default,
-};
->>>>>>> 242d1fe93876097a139ac07df63a37de612ccdbe:packages/__cxstarter__/src/components/Page/tokens/__cxstarter__Page.ts
-=======
 const { defaultToc } = require('@bodiless/documentation');
 
 const settings = () => ({
   toc: defaultToc(),
 });
 module.exports.default = settings;
->>>>>>> 242d1fe93876097a139ac07df63a37de612ccdbe
