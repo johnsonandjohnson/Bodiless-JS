@@ -6,7 +6,7 @@ The site typography consists of updating fonts, colors, font sizes, and basic to
 
 The CX Starter utilizes the [DM Sans](https://fonts.google.com/specimen/DM+Sans) font from the
 Google API. If your designs require a different font, please refer to the [fonts documentation
-guide](../../Development/Guides/BuildingSites/TypographySetup/Fonts).
+guide](../../Development/Guides/BuildingSites/Typography/Fonts).
 
 ## Step 2: Font Size & Line Heights
 
@@ -111,4 +111,4 @@ The Site Builder can define their own custom tokens at package level.
 ## Step 5: Apply Typography at Site Level
 
 Follow the instructions at [Applying Classes to Your Entire
-Site](../../Development/Guides/BuildingSites/TypographySetup/Typography#applying-classes-to-your-entire-site).
+Site](../../Development/Guides/BuildingSites/Typography/Typography#applying-classes-to-your-entire-site).

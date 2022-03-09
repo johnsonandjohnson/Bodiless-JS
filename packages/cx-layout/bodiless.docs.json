@@ -1,8 +1,14 @@
 {
   "Components": {
-    "Layout": {
+    "CX_Layout": {
       "README.md": "./README.md",
-      "Header.md": "./doc/Header.md"
+      "Header.md": "./doc/Header.md",
+      "Footer.md": "./doc/Footer.md",
+      "Helmet.md": "./doc/Helmet.md",
+      "Logo.md": "./doc/Logo.md",
+      "MenuToggler.md": "./doc/MenuToggler.md",
+      "SearchToggler.md": "./doc/Search.md",
+      "Responsiveness.md": "./doc/Responsiveness.md"
     }
   }
 }

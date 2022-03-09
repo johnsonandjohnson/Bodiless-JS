@@ -2,7 +2,7 @@
 
 The [Product Detail Page](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/test-site/src/templates/product_detail.jsx) template is a very opinionated version of a product page.  It can easily be changed or re-designed to meet the site requirements.
 
-![PDP screenshot](../assets/pdp.jpg "PDP screenshot")  
+![PDP screenshot](./assets/pdp.jpg "PDP screenshot")  
 
 ## Overview
 

@@ -23,39 +23,43 @@ components — instead of utilizing those offered by CanvasX — will work.
 
     01. Before starting, it is best to have a clear understanding of:
         - [Best Practices for Using Tailwind with
-        Bodiless](./TypographySetup/TailwindGuide).
-        - [Best Practices Using Custom Fonts](./TypographySetup/Fonts)
-    01. [Getting Started Defining Typography](./TypographySetup/Typography)
+        Bodiless](./Typography/TailwindGuide).
+        - [Best Practices Using Custom Fonts](./Typography/Fonts)
+    01. [Getting Started Defining Typography](./Typography/Typography)
 
 01. Text Editors:
 
     This step will define and implement the basic text editors for the site, which includes a Rich
-    Text editor and Plain Text editor.
+    Text editor and Plain Text editor.  If you have customized your Typography in the previous step, you can provide this custom typography to site's rich text editor.
 
-    01. For an step-by-step overview of implementing the editors, see [CanvasX
+    01. For an step-by-step overview of using, extending or overriding the editors, see [CanvasX
         Editors](/Components/Editors/CX_Editors/).
+
+01. Image Presets:
+
+    - This step is option, as the [CanvasX Image](/Components/Images/CX_Images/) presets should provide most function.  If there is specific image requirements for your site, you may want to extend these tokens.
+
+01. Basic Layout / Page:
+
+    This step will define and implement the general layout of the site.  This will include the following:
+    - Layout which is site's basic page structure.
+    - Breakpoints for responsiveness
+    - Header
+    - Footer
+    - Helmet
+    - Togglers
+
+    For more in-depth guide on working with the layout, please visit [CanvasX Layout](/Components/CX_Layout/).
+
+@jones maybe move to to cx-layout...
+
+?> ***TIP** While building out Layout, its recommended to leave the existing canvasx component or if new, stub out component and render a text placeholder, you can return to particular component later in site build.  Focus on general structure of header, footer, etc. here and leave details to later step in the process.
 
 01. FlowContainer/Layout Tool:
     - Implement the basic layout editors for the site.
       - `FlowContainer`: Apply standard spacing tokens to create one or more Flow Containers for
         different use cases. Include your Rich Text editor.
     - All the rest of the components will be added to the Flow Container as needed.
-
-01. Image Presets:
-    - Implement the basic image editors/presets for your site. In most cases, you can simply reuse
-      one or more of the default tokens available in CanvasX.
-
-01. Basic Layout / Page:
-    - Implement the site's basic page structure.
-    - Set up [responsiveness](./Responsiveness) (width of site/breakpoints, etc.).
-    - We recommend leaving most of the design elements as their CanvasX defaults for now.
-    - Utilize placeholders, keep styling limited to how the 'blocks' render in the component, and
-      ignore what renders.
-    - The end goal of the build will to be to replace brand-requirement working versions of:
-      - Logo
-      - Header and components in the Header
-      - Footer and components in the Footer
-      - Layout and components in the Layout
 
 01. Generic Page:
     - Implement the site's generic page template.
@@ -130,6 +134,8 @@ components — instead of utilizing those offered by CanvasX — will work.
 
 01. Supporting Components:
     - Meta
+      - [Meta data](./Meta/MetaData.md)
+      - [Fav Icon](./Meta/FavIcon.md)
     - GTM
     - HREF
     - GDPR

@@ -2,7 +2,7 @@
 
 The [Product Listing Page](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/test-site/src/templates/product_listing.jsx) template is a very opinionated version of a product listing page.  It can easily be changed or re-designed to meet the site requirements.
 
-![PLP screenshot](../assets/plp.jpg "PLP screenshot")
+![PLP screenshot](./assets/plp.jpg "PLP screenshot")
 
 ## Overview
 
