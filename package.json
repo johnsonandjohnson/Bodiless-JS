@@ -39,7 +39,7 @@
     "lerna:publish": "lerna publish from-git --yes --dist-tag latest",
     "lerna:canary": "lerna publish --canary --include-merged-tags --preid ks-canary --dist-tag ks-canary --force-publish",
     "serve": "lerna run serve --scope @bodiless/test-site --stream",
-    "setup": "npm run bootstrap && npm run build:packages",
+    "setup": "npm run bootstrap && npm run build:packages && npm run build:only @bodiless/__cxstarter__",
     "sites:pack": "lerna exec --no-private --stream -- npm pack",
     "sites:clone-local": "node ./scripts/sites-clone",
     "sites:install": "node ./scripts/sites-install",
