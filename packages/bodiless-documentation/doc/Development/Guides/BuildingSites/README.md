@@ -1,7 +1,7 @@
 # Building a Site
 
-This section describes the building of a site with BodilessJS, and using the CanvasX design system
-and CanvasX. While this is explicit for using the two together, building out custom tokens and
+This section describes how to build a site using BodilessJS, CanvasX and the CanvasX design system.
+While this guide specifically uses CanvasX and its design system, building out custom tokens and
 components — instead of utilizing those offered by CanvasX — will work.
 
 ## Overview
@@ -9,15 +9,14 @@ components — instead of utilizing those offered by CanvasX — will work.
 !> **PLEASE NOTE:** This page is still in-progress; **Steps #1 and #4–18** are _incomplete_ and
 **COMING SOON**.
 
-01. Create site:
+01. Creating a site:
     - Overview of [Building a Site using Bodiless](./BuildingOverview):
-      - Create and initialize a new site repository as described in the documentation for [Getting
-        Started](/About/GettingStarted).
+      - Create and initialize a new site repository as described in the [Getting
+        Started](/About/GettingStarted) section.
       - Provide overview of monorepo structure.
       - [Bodiless Starter Components](./ComponentsStarterKit)
 
-01. Define Typography for the site:
-
+01. Defining Typography for the site:  
     This step will define and implement basic elements of the design system (typography, spacing,
     colors).
 

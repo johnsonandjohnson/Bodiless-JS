@@ -63,13 +63,13 @@ boost. This may be within the service and/or an optional parameter, if available
 
 ### Hosted Directly
 
-This is best way, as fonts are usually small and packaged within the web bundle of the site, and is
-the best performance option.
+This is the recommended way, as font files are usually small and they'll be included in the website
+bundle, which is possibly the most performant option.
 
 01. In your brand package (suggested: `BRAND-elements` package), create a folder `assets/font`, and
     place the fonts.
-01. In the `package.json`, make sure your `files` section exports the assets so they are bundled
-    with the package (e.g., `"files": ["/assets"]`).
+01. In your package's `package.json` file, make sure your `files` section exports the assets so 
+they are bundled with the package (e.g., `"files": ["/assets"]`).
 01. In your package's `site.tailwind.config.js` file, add the plugin `font-face` via `addBase` to
     import the fonts.
 01. Extend `fontFamily` in the Tailwind `theme` section to include the font.
@@ -119,7 +119,7 @@ for instructions.
 
 ### Applying a Font to a Specific Token
 
-- The fonts can be added at elemental level by adding classes to the specific token.
+- Fonts can be added at an element level by adding classes to the specific token.
   ```js
   const asHeader1 = asElementToken('text-3xl font-linkicons');
   ```
