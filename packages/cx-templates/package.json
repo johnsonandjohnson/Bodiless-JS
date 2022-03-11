@@ -16,6 +16,9 @@
     "type": "git",
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "npm run build:lib && npm run build:api-doc",
     "build:api-doc": "typedoc --out doc/api ./src",

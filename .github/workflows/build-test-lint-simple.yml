@@ -42,14 +42,18 @@ jobs:
           git config --get user.name
           git config --get user.email
 
-      - name: Install dependencies
-        run: npm ci
+        #- name: Install dependencies
+        #  run: npm ci
 
-      - name: Check dependency sync
-        run: npm run sync:check
-      
-      - name: Build packages
-        run: npm run build:packages
+        # npm workspace approach
+        #- name: Check dependency sync
+        #  run: npm run sync:check
+        #
+        #- name: Build packages
+        #  run: npm run build:packages
+
+      - name: Build
+        run: npm run setup
 
       - name: Lint
         run: npm run lint

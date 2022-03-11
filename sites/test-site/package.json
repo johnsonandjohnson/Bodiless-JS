@@ -1,5 +1,5 @@
 {
-  "name": "@bodiless/test-site",
+  "name": "@sites/test-site",
   "version": "0.3.7",
   "description": "This is a working site for the bodiless project",
   "author": "e2thex <esummerfield@phase2technology.com>",
@@ -95,6 +95,7 @@
     "start": "run-p -r dev-frontend dev-backend"
   },
   "devDependencies": {
+    "@types/react-helmet": "^6.1.0",
     "@babel/plugin-proposal-decorators": "^7.4.0",
     "copyfiles": "^2.1.1",
     "cross-env": "^5.2.0",
