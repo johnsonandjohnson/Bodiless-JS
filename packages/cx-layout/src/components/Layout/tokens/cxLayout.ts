@@ -29,7 +29,11 @@ const Base = asLayoutToken({
     Helmet: as(cxHelmet.Default),
   },
   Theme: {
-    Container: 'container mx-auto',
+    // Tailwind's container is specifially not used due to its feature it set's max-width
+    // to min-width of breakpoint.  So instead rely on ContainerWrapper to margin percent
+    // to contain content.
+    ContainerWrapper: 'mx-site-percent md:mx-md-site-percent lg:mx-lg-site-percent mx-auto',
+    Container: 'mx-auto',
   },
   Schema: {
   },
