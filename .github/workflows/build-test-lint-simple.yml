@@ -42,8 +42,8 @@ jobs:
           git config --get user.name
           git config --get user.email
 
-      - name: Install dependencies
-        run: npm ci
+        #- name: Install dependencies
+        #  run: npm ci
 
         # npm workspace approach
         #- name: Check dependency sync
