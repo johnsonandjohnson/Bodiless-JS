@@ -15,6 +15,7 @@
 import { Fragment } from 'react';
 import { graphql } from 'gatsby';
 import { as } from '@bodiless/fclasses';
+// eslint-disable-next-line import/no-unresolved
 import { __cxstarter__Page } from '@bodiless/__cxstarter__';
 
 const DefaultPage = as(__cxstarter__Page.Default)(Fragment);

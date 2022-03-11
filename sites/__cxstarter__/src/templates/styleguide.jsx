@@ -15,6 +15,7 @@
 import { graphql } from 'gatsby';
 import { StyleGuideTemplateClean } from '@bodiless/cx-templates';
 import { as } from '@bodiless/fclasses';
+// eslint-disable-next-line import/no-unresolved
 import { __cxstarter__StyleGuidePage } from '@bodiless/__cxstarter__';
 
 const StyleGuidePage = as(__cxstarter__StyleGuidePage.Default)(StyleGuideTemplateClean);
