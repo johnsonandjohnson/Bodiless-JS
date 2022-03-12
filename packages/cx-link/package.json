@@ -18,6 +18,9 @@
     "type": "git",
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",

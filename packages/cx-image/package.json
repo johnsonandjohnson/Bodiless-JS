@@ -17,6 +17,9 @@
     "type": "git",
     "url": "https://sourcecode.jnj.com/scm/asx-nbfp/canvasx.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
