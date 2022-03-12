@@ -8,7 +8,7 @@
     "/src"
   ],
   "bin": {
-    "bodiless-dev-backend": "./bin/bodiless-dev-backend"
+    "bodiless-backend": "./bin/bodiless-backend"
   },
   "dependencies": {
     "@bodiless/cli": "^0.3.7",

@@ -86,7 +86,7 @@
     "build:tailwind-configs": "cross-env BODILESS_NPM_ROOT='../..' generate-tailwind-configs",
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "rimraf ./public/* ./.cache",
-    "dev-backend": "bodiless-dev-backend",
+    "dev-backend": "bodiless-backend",
     "dev-frontend": "gatsby develop -p 8005",
     "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
     "prestart": "run-s build:env-vars build:doc",
