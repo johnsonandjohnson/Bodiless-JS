@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/cx-link",
   "sideEffects": false,
-  "version": "0.3.7",
+  "version": "1.0.0-beta.1",
   "description": "",
   "author": "Konstantin Mishur <kmishur@its.jnj.com>",
   "license": "Apache-2.0",
@@ -32,13 +32,13 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@bodiless/components": "^0.3.7",
-    "@bodiless/components-ui": "^0.3.7",
-    "@bodiless/core": "^0.3.7",
-    "@bodiless/fclasses": "^0.3.7",
-    "@bodiless/richtext": "^0.3.7",
-    "@bodiless/richtext-ui": "^0.3.7",
-    "@bodiless/cx-elements": "^0.3.7",
+    "@bodiless/components": "^1.0.0-beta.1",
+    "@bodiless/components-ui": "^1.0.0-beta.1",
+    "@bodiless/core": "^1.0.0-beta.1",
+    "@bodiless/cx-elements": "^1.0.0-beta.1",
+    "@bodiless/fclasses": "^1.0.0-beta.1",
+    "@bodiless/richtext": "^1.0.0-beta.1",
+    "@bodiless/richtext-ui": "^1.0.0-beta.1",
     "lodash": "^4.17.19",
     "tailwindcss": "^2.0.2"
   }
