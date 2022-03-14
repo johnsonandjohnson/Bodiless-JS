@@ -15,7 +15,7 @@
 /* eslint-disable max-len, global-require, import/no-dynamic-require */
 import path from 'path';
 import fs from 'fs';
-import { getPackageEnvConfig } from '../../helpers/getPackageEnvConfig';
+import { getPackageEnvConfig } from '../getPackageEnvConfig';
 import { Tree } from './type';
 
 const getPackagesEnvConfig = async (defaultConfig:Tree, appEnv:string): Promise<Tree> => {
