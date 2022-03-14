@@ -79,7 +79,7 @@
   "scripts": {
     "build": "npm-run-all build:env-vars build:lib build:scripts build:doc build:search",
     "build:doc": "bl-docs-build",
-    "build:env-vars": "generate-env-vars",
+    "build:env-vars": "bodiless generate-env-vars",
     "build:lib": "bl-clear-logs && gatsby build && bl-validate-logs",
     "build:scripts": "tsc -p ./tsconfig.json",
     "build:search": "npm run search-index",

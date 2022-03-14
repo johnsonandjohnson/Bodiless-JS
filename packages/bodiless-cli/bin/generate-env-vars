@@ -1,5 +1,0 @@
-#!/usr/bin/env node
-const requireEsm = require('esm')(module);
-
-const generateEnvVars = requireEsm('../lib/commands/generate-env-vars');
-generateEnvVars.default();
