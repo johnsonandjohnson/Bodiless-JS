@@ -126,7 +126,8 @@ with responsive size.
 
 ### Breakpoints
 
-For more information, see [responsive breakpoints](../Responsiveness#Breakpoints).
+For more information, see [responsive
+breakpoints](/CX_DesignSystem/Components/CX_Layout/Responsiveness#Breakpoints).
 
 ### Using Responsive Classes
 

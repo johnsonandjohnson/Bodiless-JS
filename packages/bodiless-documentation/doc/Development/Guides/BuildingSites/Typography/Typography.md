@@ -15,7 +15,7 @@ If you plan on leveraging other CanvasX components, we recommend leveraging all 
 `cx-elements`.
 
 For more details on usage and getting started using this package, please follow the [CanvasX
-Elements Typography Guide](../../../../Components/CX_Elements/CX_SiteTypography).
+Elements Typography Guide](/CX_DesignSystem/Components/CX_Elements/CX_SiteTypography).
 
 ## Developing Your Typography without Leveraging CanvasX Elements
 
