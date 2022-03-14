@@ -45,10 +45,6 @@ exports.onCreateBabelConfig = args => {
     options: { legacy: true },
   });
   setBabelPlugin({
-    name: '@babel/plugin-proposal-class-properties',
-    options: { loose: false },
-  });
-  setBabelPlugin({
     name: 'babel-plugin-preval',
   });
 };

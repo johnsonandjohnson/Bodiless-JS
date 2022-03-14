@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.9.0",
+    "@bodiless/backend": "^0.3.7",
     "@bodiless/__cxstarter__": "^0.3.7",
     "@bodiless/components": "^0.3.7",
     "@bodiless/core": "^0.3.7",
