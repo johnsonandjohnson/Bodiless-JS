@@ -57,7 +57,7 @@
     "build:env-vars": "generate-env-vars",
     "build:lib": "bl-clear-logs && gatsby build && bl-validate-logs",
     "build:search": "npm run search-index",
-    "build:tailwind-configs": "cross-env BODILESS_NPM_ROOT='../..' generate-tailwind-configs",
+    "build:tailwind-configs": "cross-env BODILESS_NPM_ROOT='.' generate-tailwind-configs",
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "rimraf ./public/* ./.cache",
     "dev-backend": "node ./node_modules/@bodiless/backend/src/server.js",
