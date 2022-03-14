@@ -10,7 +10,7 @@ guide](../../Development/Guides/BuildingSites/TypographySetup/Fonts).
 
 ## Step 2: Font Size & Line Heights
 
-The CanvasX Design has defined the following [font
+The CanvasX Design System has defined the following [font
 sizes](https://xd.adobe.com/view/fd6e4dde-2ecf-480a-aaaf-f5043cb04bf0-a83d/screen/d0c37949-f384-4a14-ad34-011d39ef62ba/specs/),
 and they have been converted into the REM point system using base 16.
 
@@ -54,7 +54,7 @@ module.exports = {
 
 ## Step 3: Define Colors for Site
 
-The CanvasX Design has defined the following
+The CanvasX Design System defines the following
 [colors](https://xd.adobe.com/view/fd6e4dde-2ecf-480a-aaaf-f5043cb04bf0-a83d/screen/96d7b2f3-6afb-45fb-b808-075a24af2434/specs/).
 
 ### Option 1: Shadow `cxColor` (*Preferred Solution)
@@ -91,9 +91,9 @@ module.exports = {
 
 ## Step 4: Override Other CX Tokens
 
-The CanvasX Design is as specified Header, body, eyebrow, link, and some specific text decoration
-tokens, per designs linked above. They can be shadowed, which is the recommendation with tokens
-changed, added, or redefined at package/site level.
+The CanvasX Design System provides header, body, eyebrow, link, and other specific text decoration
+tokens, which have their designs linked above. These tokens can be shadowed, which is the 
+recommended way of changing, adding, or redefining tokens at a package/site level.
 
 ### Option 1: Shadowing (*Preferred Solution)
 

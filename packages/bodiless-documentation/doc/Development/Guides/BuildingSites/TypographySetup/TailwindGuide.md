@@ -32,11 +32,11 @@ Bodiless sites have a mechanism to discover all packages' and sites' Tailwind co
 To utilize this, you must follow the naming convention described in the [next
 section](#tailwind-configuration-for-a-package).
 
-Tailwind provides a feature that if a class is not found in the code base, the CSS will be purged
-and thus reduce the CSS bundle.
+Tailwind provides a feature that purges CSS classes that are not found in the code base, thus
+reducing the final CSS bundle size.
 
-!> **IMPORTANT:** If the classes are duplicated in the site and the package, **the site's CSS will
-always win**.
+!> **IMPORTANT:** If class names are duplicated in the site and the package, **the site's CSS will
+always have precedence**.
 
 ### Tailwind Configuration for a Package
 

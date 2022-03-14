@@ -1,6 +1,6 @@
 # Building a Site
 
-This section describes how to build a site using BodilessJS, CanvasX and the CanvasX design system.
+This section describes how to build a site using BodilessJS, CanvasX and the CanvasX Design System.
 While this guide specifically uses CanvasX and its design system, building out custom tokens and
 components — instead of utilizing those offered by CanvasX — will work.
 
