@@ -27,6 +27,7 @@ export const defaultUI: FinalUI = {
   AccordionItemWrapper: 'a',
   AccordionCheckboxLabel: 'label',
   AccordionCheckBox: 'input',
+  AccordionCheckboxLabelText: 'span',
   SearchBarWrapper: 'div',
   SearchBar: 'input',
   AccordionLabel: 'label',

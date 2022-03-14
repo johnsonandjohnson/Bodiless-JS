@@ -46,8 +46,8 @@ const CheckBox = ({
 // eslint-disable-next-line import/prefer-default-export
 export const ui: ComponentSelectorUI = {
   MasterWrapper: addClasses('bl-flex bl-form-wrapper')(Div),
-  FlexSection: addClasses('bl-pt-grid-2')(Div),
-  FlexSectionFull: addClasses('bl-pt-grid-2 bl-w-full')(Div),
+  FlexSection: addClasses('bl-pt-grid-2 w-1/4 overflow-y-auto')(Div),
+  FlexSectionFull: addClasses('bl-pt-grid-2 w-3/4')(Div),
   FlowContainerEmpty: addClasses(
     'bl-border-2 bl-border-dashed bl-text-gray-600',
   )(Div),
@@ -79,7 +79,7 @@ export const ui: ComponentSelectorUI = {
   )(Span),
 
   ComponentSelectorWrapper: addClasses(
-    'bl-text-white bl-mr-grid-3  bl-whitespace-nowrap',
+    'bl-text-white bl-mr-grid-3 bl-whitespace-nowrap',
   )(Div),
 
   SubmitButton: addClasses(
@@ -99,12 +99,16 @@ export const ui: ComponentSelectorUI = {
   )(Anchor),
 
   AccordionCheckboxLabel: addClasses(
-    'bl-ml-grid-2 bl-font-semibold',
+    'bl-ml-grid-2 bl-font-semibold flex',
   )(Label),
 
   AccordionCheckBox: addClasses(
     'bl-ml-grid-1 bl-mr-grid-1',
   )(CheckBox),
+
+  AccordionCheckboxLabelText: addClasses(
+    'whitespace-normal',
+  )(Span),
 
   SearchBarWrapper: addClasses(
     'bl-bg-white bl-content-center bl-h-grid-9 bl-font-sans bl-px-grid-2 bl-py-grid-1 bl-text-black',
