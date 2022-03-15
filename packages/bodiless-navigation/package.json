@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/navigation",
-  "version": "0.3.7",
+  "version": "1.0.0-beta.1",
   "description": "BodilessJs Navigation Components",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
@@ -29,13 +29,13 @@
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
-    "@bodiless/accordion": "^0.3.7",
-    "@bodiless/card": "^0.3.7",
-    "@bodiless/components": "^0.3.7",
-    "@bodiless/components-ui": "^0.3.7",
-    "@bodiless/core": "^0.3.7",
-    "@bodiless/fclasses": "^0.3.7",
-    "@bodiless/organisms": "^0.3.7",
+    "@bodiless/accordion": "^1.0.0-beta.1",
+    "@bodiless/card": "^1.0.0-beta.1",
+    "@bodiless/components": "^1.0.0-beta.1",
+    "@bodiless/components-ui": "^1.0.0-beta.1",
+    "@bodiless/core": "^1.0.0-beta.1",
+    "@bodiless/fclasses": "^1.0.0-beta.1",
+    "@bodiless/organisms": "^1.0.0-beta.1",
     "enzyme": "^3.9.0",
     "lodash": "^4.17.19",
     "uuid": "^3.3.2"

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.7...v1.0.0-beta.1) (2022-03-14)
+
+
+### Bug Fixes
+
+* **publish:** update package config for publishing ([#1446](https://github.com/johnsonandjohnson/bodiless-js/issues/1446)) ([18e9615](https://github.com/johnsonandjohnson/bodiless-js/commit/18e9615349972598362b5468d1c8bf13750ec0c8))
+* **test-site,__starter__:** Set correct npm root for lerna bootstrap. ([#1454](https://github.com/johnsonandjohnson/bodiless-js/issues/1454)) ([5037a5b](https://github.com/johnsonandjohnson/bodiless-js/commit/5037a5b07af69120657cd28d3efb0c8c344f8248))
+
+
+
+
+
 ## [0.3.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.6...v0.3.7) (2022-02-16)
 
 

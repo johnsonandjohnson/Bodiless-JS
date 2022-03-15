@@ -33,6 +33,8 @@ const Examples = () => (
     <Subtitle>Existing Pages</Subtitle>
     <Para>
       <ul>
+        <li><a href="./layout">Layout</a></li>
+        <li><a href="./header">Header</a></li>
         <li><a href="./editors">Editors</a></li>
         <li><a href="./editors-monofont">Editors with MonoFont</a></li>
         <li><a href="./typography">Typography</a></li>

@@ -115,6 +115,8 @@ export type FinalUI = {
   AccordionCheckboxLabel: ComponentType<HTMLProps<HTMLLabelElement>> | string;
   // A input that will be displayed by the Accordion Label
   AccordionCheckBox: ComponentType<HTMLProps<HTMLInputElement>> | string;
+  // A span wrapping the checkbox text
+  AccordionCheckboxLabelText: ComponentType<HTMLProps<HTMLSpanElement>> | string;
   // A div that will wrap the search bar
   SearchBarWrapper: ComponentType<HTMLProps<HTMLDivElement>> | string;
   // A styled text input
