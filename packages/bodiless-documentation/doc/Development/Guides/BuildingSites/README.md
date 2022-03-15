@@ -9,12 +9,16 @@ components — instead of utilizing those offered by CanvasX — will work.
 !> **PLEASE NOTE:** This page is still in-progress; **Steps #1 and #4–18** are _incomplete_ and
 **COMING SOON**.
 
+<!-- TODO: When page is complete, convert numbered steps into headers.
+           Not worth doing while page is in flux. -->
+
 01. Create site:
+    <!-- TODO: Update link; page archived. -->
     - Overview of [Building a Site using Bodiless](./BuildingOverview):
       - Create and initialize a new site repository as described in the documentation for [Getting
         Started](/About/GettingStarted).
       - Provide overview of monorepo structure.
-      - [Bodiless Starter Components](./ComponentsStarterKit)
+      - Bodiless Starter Components
 
 01. Define Typography for the site:
 
@@ -22,38 +26,39 @@ components — instead of utilizing those offered by CanvasX — will work.
     colors).
 
     01. Before starting, it is best to have a clear understanding of:
-        - [Best Practices for Using Tailwind with
-        Bodiless](./Typography/TailwindGuide).
+        - [Best Practices for Using Tailwind with Bodiless](./Typography/TailwindGuide)
         - [Best Practices Using Custom Fonts](./Typography/Fonts)
     01. [Getting Started Defining Typography](./Typography/Typography)
 
 01. Text Editors:
 
-    This step will define and implement the basic text editors for the site, which includes a Rich
-    Text editor and Plain Text editor.  If you have customized your Typography in the previous step, you can provide this custom typography to site's rich text editor.
+    This step will define and implement the basic text editors for your site, which includes a Rich
+    Text editor and Plain Text editor. If you have customized your Typography in the previous step,
+    you can provide this custom typography to your site's Rich Text editor.
 
     01. For an step-by-step overview of using, extending or overriding the editors, see [CanvasX
-        Editors](/Components/Editors/CX_Editors/).
+        Editors](/CX_DesignSystem/Components/CX_Editors/).
 
 01. Image Presets:
 
-    - This step is option, as the [CanvasX Image](/Components/Images/CX_Images/) presets should provide most function.  If there is specific image requirements for your site, you may want to extend these tokens.
+    - This step is optional, as the [CanvasX Image](/CX_DesignSystem/Components/CX_Image/) presets
+      should provide most required functionality. If there are specific image requirements for your
+      site, you may want to extend these tokens.
 
 01. Basic Layout / Page:
 
-    This step will define and implement the general layout of the site.  This will include the following:
-    - Layout which is site's basic page structure.
+    This step will define and implement the general layout of the site. This will include the
+    following:
+
+    - Layout which is site's basic page structure
     - Breakpoints for responsiveness
     - Header
     - Footer
     - Helmet
     - Togglers
 
-    For more in-depth guide on working with the layout, please visit [CanvasX Layout](/Components/CX_Layout/).
-
-@jones maybe move to to cx-layout...
-
-?> ***TIP** While building out Layout, its recommended to leave the existing canvasx component or if new, stub out component and render a text placeholder, you can return to particular component later in site build.  Focus on general structure of header, footer, etc. here and leave details to later step in the process.
+    For a more in-depth guide on working with the layout, please visit [CanvasX
+    Layout](/CX_DesignSystem/Components/CX_Layout/).
 
 01. FlowContainer/Layout Tool:
     - Implement the basic layout editors for the site.
@@ -81,6 +86,7 @@ components — instead of utilizing those offered by CanvasX — will work.
       - [Link](/Components/Link/)
       - [YouTube](/Components/YouTube)
       - Buttons
+    <!-- TODO: Update link; page archived. -->
     - If you're exploring an existing site for ideas, or performing a rebuild, review how to
       [identify components and variations](./IdentifyingComponentsGuide) for some useful tips.
 

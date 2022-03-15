@@ -294,9 +294,9 @@ read more about working with the individual components.
 
 #### SEO
 
-* [`Sitemap.xml`](/Development/Guides/BuildingSites/ComponentsStarterKit?id=sitemapxml-amp-robotstxt-file)
+* `Sitemap.xml`
 * `Robots.txt`
-* [Metatags](/Development/Guides/BuildingSites/ComponentsStarterKit?id=metadata-component)
+* [Metatags](/Development/Guides/BuildingSites/Meta/Metadata)
 
 ### Content Library
 

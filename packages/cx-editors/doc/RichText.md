@@ -3,8 +3,8 @@
 The CanvasX Rich Text Editor Component is based on the [BodilessJS Rich Text Editor
 Component](/Components/Editors/RichText). While Bodiless Rich Text is a generic rich text editor
 (RTE) component with tokens that can be combined however you choose, CX Rich Text builds upon it,
-providing a sensible default combination of its generic [CanvasX tokens](../../CX_Elements/), to
-help meet typical site-use expectations.
+providing a sensible default combination of its generic [CanvasX tokens](../CX_Elements/), to help
+meet typical site-use expectations.
 
 By default, the only option available for the CX Rich Text Editor is the _Full_ Rich Text Editor.
 
@@ -36,14 +36,14 @@ defined in the Schema Domain.
 
 #### Via Shadowing (*Preferred Method)
 
-Provide the Shadowing function as defined in [Shadow](../../CX_Elements/CX_Shadow).
+Provide the Shadowing function as defined in [Shadow](../CX_Elements/CX_Shadow).
 
 File to shadow:
 [`cxRichText`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-editors/src/components/RichText/tokens/cxRichText.ts)
 
 #### Via Overriding Specific Existing Styles Using CanvasX Rich Text Editor
 
-See [CanvasX Site Typography](../../CX_Elements/CX_SiteTypography).
+See [CanvasX Site Typography](../CX_Elements/CX_SiteTypography).
 
 ### Extending Default CanvasX Rich Text Editor
 
