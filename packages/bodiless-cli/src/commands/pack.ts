@@ -16,7 +16,7 @@ import { Command, flags as commandFlags } from '@oclif/command';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 import pick from 'lodash/pick';
-// import isEmpty from 'lodash/isEmpty';
+import isEmpty from 'lodash/isEmpty';
 import intersection from 'lodash/intersection';
 import Spawner from '../helpers/Spawner';
 
@@ -34,7 +34,7 @@ type PackageMap = {
 /**
  * Packs dependencies for bundling.
  */
-export async function packDeps(map: PackageMap, spawner: Spawner) {
+async function packDeps(map: PackageMap, spawner: Spawner) {
   const packages = Object.keys(map);
   for (let i = 0; i < packages.length; i += 1) {
     // We don't paralellize this so that the output is not interleaved.
@@ -46,7 +46,7 @@ export async function packDeps(map: PackageMap, spawner: Spawner) {
 /**
  * Installs bunled dependencies.
  */
-export async function installDeps(map: PackageMap, spawner: Spawner) {
+async function installDeps(map: PackageMap, spawner: Spawner) {
   const args = [
     'npm',
     'install',
@@ -58,9 +58,7 @@ export async function installDeps(map: PackageMap, spawner: Spawner) {
 /**
  * Filters a dependency map to remove any not required by the site.
  */
-export const getDepsToReplace = (
-  map: PackageMap, explicitPackages?: string[], force: boolean = false
-) => {
+const getDepsToReplace = (map: PackageMap, explicitPackages?: string[], force: boolean = false) => {
   let keys = Object.keys(map);
   if (explicitPackages) {
     keys = intersection(keys, explicitPackages);
@@ -143,35 +141,35 @@ export default class Pack extends Command {
 
   async run() {
     try {
+      const { flags } = this.parse(Pack);
+      const repo = path.resolve(flags.repo);
+      const site = path.resolve(flags.site);
+      const destIsSrc = repo === site;
+      if (destIsSrc) {
+        this.warn('Monorepo and site paths are the same. Assuming --force and --skip-install.');
+      }
+      process.chdir(site);
+      const packageMap = this.getPackageMap(path.join(repo, 'packages'));
+      // Cast is necessary bc typings do not prpperly handle multiple flags with parse functions.
+      // Type of flags.package is string and should be string[].
+      const { package: explicitPackages } = flags as any as { package: string[] };
+      const deps = getDepsToReplace(packageMap, explicitPackages, flags.force || destIsSrc);
+      if (isEmpty(deps)) {
+        this.error('No matching dependencies to pack. Use --force (-f) to pack anyway.');
+      }
+      if (flags['dry-run']) {
+        const list = Object.keys(deps).join(', ');
+        this.log(`Dry run. Packages which would be packed/installed: ${list}`);
+        this.exit(0);
+      }
+      const spawner = new Spawner(repo);
+      await packDeps(deps, spawner);
+      if (!flags['skip-install'] && !destIsSrc) {
+        await installDeps(deps, spawner);
+      }
       this.log('Done');
     } catch (e) {
-      // const { flags } = this.parse(Pack);
-      // const repo = path.resolve(flags.repo);
-      // const site = path.resolve(flags.site);
-      // const destIsSrc = repo === site;
-      // if (destIsSrc) {
-      //   this.warn('Monorepo and site paths are the same. Assuming --force and --skip-install.');
-      // }
-      // process.chdir(site);
-      // const packageMap = this.getPackageMap(path.join(repo, 'packages'));
-      // // Cast is necessary bc typings do not prpperly handle multiple flags with parse functions.
-      // // Type of flags.package is string and should be string[].
-      // const { package: explicitPackages } = flags as any as { package: string[] };
-      // const deps = getDepsToReplace(packageMap, explicitPackages, flags.force || destIsSrc);
-      // if (isEmpty(deps)) {
-      //   this.error('No matching dependencies to pack. Use --force (-f) to pack anyway.');
-      // }
-      // if (flags['dry-run']) {
-      //   const list = Object.keys(deps).join(', ');
-      //   this.log(`Dry run. Packages which would be packed/installed: ${list}`);
-      //   this.exit(0);
-      // }
-      // const spawner = new Spawner(repo);
-      // await packDeps(deps, spawner);
-      // if (!flags['skip-install'] && !destIsSrc) {
-      //   await installDeps(deps, spawner);
-      // }
-      // this.error(e as Error);
+      this.error(e as Error);
     }
   }
 }

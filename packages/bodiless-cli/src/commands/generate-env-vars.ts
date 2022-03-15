@@ -22,6 +22,12 @@ import init from '../helpers/generate-env-vars';
  * Defines the 'generate-env-vars' command.
  */
 export default class GenerateEnvVars extends Command {
+  static description = 'Generate .env files for current site';
+
+  static examples = [
+    '$ bodiless generate-env-vars'
+  ];
+
   async run() {
     try {
       init();

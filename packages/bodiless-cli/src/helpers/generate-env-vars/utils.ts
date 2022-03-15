@@ -13,11 +13,14 @@
  */
 
 /* eslint-disable no-console, no-return-assign, max-len */
-import findUp from 'find-up';
-import fs, { writeFile } from 'fs';
 import { promisify } from 'util';
-import git from 'isomorphic-git';
 import { Tree } from './type';
+
+const git = require('isomorphic-git');
+const findUp = require('find-up');
+const fs = require('fs');
+
+const { writeFile } = fs;
 
 const writeFilePromise = promisify(writeFile);
 
