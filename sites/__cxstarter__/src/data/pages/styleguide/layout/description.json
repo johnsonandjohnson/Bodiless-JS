@@ -1,0 +1,50 @@
+[
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "Demonstrates the layout of the page.   "
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "Label colors designate the responsive indicator."
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "Orange = XL Desktop"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "Blue = Desktop"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "Green = Tablet"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "Red = Mobile"
+      }
+    ]
+  }
+]
