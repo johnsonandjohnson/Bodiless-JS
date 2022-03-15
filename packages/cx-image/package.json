@@ -1,5 +1,5 @@
 {
-  "name": "@bodiless/cx-image",
+  "name": "@asemirsk/cx-image",
   "sideEffects": false,
   "version": "1.0.0-beta.1",
   "description": "Clean, designable Image components for CanvasX based projects",
@@ -31,14 +31,14 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@bodiless/components": "^1.0.0-beta.1",
-    "@bodiless/components-ui": "^1.0.0-beta.1",
-    "@bodiless/core": "^1.0.0-beta.1",
-    "@bodiless/cx-elements": "^1.0.0-beta.1",
-    "@bodiless/fclasses": "^1.0.0-beta.1",
-    "@bodiless/gatsby-theme-bodiless": "^1.0.0-beta.1",
-    "@bodiless/layouts": "^1.0.0-beta.1",
-    "@bodiless/layouts-ui": "^1.0.0-beta.1",
+    "@asemirsk/components": "^1.0.0-beta.1",
+    "@asemirsk/components-ui": "^1.0.0-beta.1",
+    "@asemirsk/core": "^1.0.0-beta.1",
+    "@asemirsk/cx-elements": "^1.0.0-beta.1",
+    "@asemirsk/fclasses": "^1.0.0-beta.1",
+    "@asemirsk/gatsby-theme-bodiless": "^1.0.0-beta.1",
+    "@asemirsk/layouts": "^1.0.0-beta.1",
+    "@asemirsk/layouts-ui": "^1.0.0-beta.1",
     "lodash": "^4.17.19"
   }
 }

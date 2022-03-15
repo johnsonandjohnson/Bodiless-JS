@@ -1,5 +1,5 @@
 {
-  "name": "@bodiless/oidc",
+  "name": "@asemirsk/oidc",
   "version": "1.0.0-beta.1",
   "description": "Library to provide OpenID Connect (OIDC) and OAuth2 protocol support for client-side",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",

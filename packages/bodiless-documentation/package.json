@@ -1,5 +1,5 @@
 {
-  "name": "@bodiless/documentation",
+  "name": "@asemirsk/documentation",
   "version": "1.0.0-beta.1",
   "description": "A tool to aggregate markdown files for rendering by docsify",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
