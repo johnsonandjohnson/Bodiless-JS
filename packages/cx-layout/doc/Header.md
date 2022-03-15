@@ -1,4 +1,4 @@
-# CX Header Component
+# CanvasX Header Component
 
 The CX Header Component provides a header with the following elements:
 
@@ -28,7 +28,8 @@ is, or you can recompose it to meet your site's requirements.
 
 ### Usage
 
-Following code example created a Header using the CanvasX default tokens, applies the correct node keys.  Remember to apply the necessary imports to the file.
+Using the following code example as a guide, you can create a Header using the CanvasX default
+tokens, and applying the correct node keys. Remember to apply the necessary imports to the file.
 
 ```tsx
 const Header = as(
@@ -52,21 +53,22 @@ const Layout: FC = ({ children }) => (
 export default Layout;
 ```
 
-#### Customing Via Shadowing (*Preferred Method)
+#### Customizing Via Shadowing (*Preferred Method)
 
 Provide the Shadowing function as defined in [Shadow](../CX_Elements/CX_Shadow).
 
 File to shadow:
 [`cxHeader.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-layout/src/components/Header/tokens/cxHeader.ts)
 
-#### Customing Via Extending
+#### Customizing Via Extending
 
-The site builder can create a new token that and override's with asHeaderToken() and then extend/override the specific domains.
+The Site Builder can create a new token that utilizes `asHeaderToken()`, and then can
+extend/override the specific domains within that token.
 
 ```js
 const BrandXHeader = asHeaderToken({
   // Will spread all existing header functionality across all domains.
-    ...cxHeader.Base, 
+  ...cxHeader.Base,
   Components: {
     // Will spread all header components as is.
     ...cxHeader.Base.Components,
@@ -74,13 +76,14 @@ const BrandXHeader = asHeaderToken({
     DesktopSearch: brandXSearch.Default,
   },
   Spacing: {
-    // Since there is no spread will override the cxHeader Spacing domain and use what is defined below.
+    // Since there is no spread, will override the cxHeader Spacing domain
+    // and use what is defined below.
     Container: 'mx-auto py-2',
   }
 });
 ```
 
-This token then is applied to the Header slot within Layout.
+This token is then applied to the Header slot within Layout.
 
 ## Architectural Details
 
