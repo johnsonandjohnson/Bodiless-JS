@@ -13,13 +13,13 @@
  */
 
 /* eslint-disable max-len, global-require, import/no-dynamic-require */
-import path from 'path';
-import fs from 'fs';
+import * as path from 'path';
+import * as fs from 'fs';
 import { getPackageEnvConfig } from '../getPackageEnvConfig';
 import { Tree } from './type';
 
 const getPackagesEnvConfig = async (defaultConfig:Tree, appEnv:string): Promise<Tree> => {
-  const initPath = path.resolve();
+  const initPath = process.cwd();
   const bodilessEnvConfigPaths:string[] = getPackageEnvConfig(initPath);
 
   return bodilessEnvConfigPaths.reduce(async (agregatedEnvConfig:Promise<Tree>, envConfigPath:string) => {

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import path from 'path';
+import * as path from 'path';
 /* eslint-disable global-require, import/no-dynamic-require */
 
 export const getPackageEnvConfig = (rootPath: string): string[] => {
