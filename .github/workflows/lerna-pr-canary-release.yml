@@ -4,6 +4,7 @@ env:
   FORCE_COLOR: 1
   PR_NUMBER: ${{ github.event.number }}
   BUILD_NUMBER: ${{ github.run_number }}
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 on:
   pull_request:
     types: [opened, synchronize]
