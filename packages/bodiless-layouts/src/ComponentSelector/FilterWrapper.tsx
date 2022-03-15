@@ -59,7 +59,9 @@ function Checkbox({
           id={type}
           name={type}
         />
-        {Capitalize(type)}
+        <finalUI.AccordionCheckboxLabelText>
+          {Capitalize(type)}
+        </finalUI.AccordionCheckboxLabelText>
       </finalUI.AccordionCheckboxLabel>
     </finalUI.AccordionCheckboxWrapper>
   );

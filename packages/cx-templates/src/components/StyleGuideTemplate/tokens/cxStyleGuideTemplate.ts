@@ -39,4 +39,30 @@ const Default = asStyleGuideTemplateToken({
   },
 });
 
-export default { Default };
+const BordersLabels = asStyleGuideTemplateToken({
+  ...Default,
+  Theme: {
+    Wrapper: cxLayout.WithBordersLabels,
+  },
+});
+
+const HeaderOnly = asStyleGuideTemplateToken({
+  ...Default,
+  Theme: {
+    Wrapper: cxLayout.Header,
+  },
+});
+
+const FooterOnly = asStyleGuideTemplateToken({
+  ...Default,
+  Theme: {
+    Wrapper: cxLayout.Footer,
+  },
+});
+
+export default {
+  Default,
+  BordersLabels,
+  HeaderOnly,
+  FooterOnly
+};

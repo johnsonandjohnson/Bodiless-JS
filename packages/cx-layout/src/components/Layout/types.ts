@@ -21,6 +21,7 @@ export type LayoutComponents = {
   Helmet: ComponentOrTag<any>,
   SiteHeader: ComponentOrTag<any>,
   Container: ComponentOrTag<any>,
+  ContainerWrapper: ComponentOrTag<any>,
   PageTopper: ComponentOrTag<any>,
   PageCloser: ComponentOrTag<any>,
   SiteFooter: ComponentOrTag<any>,

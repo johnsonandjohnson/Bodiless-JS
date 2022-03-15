@@ -22,6 +22,8 @@ const {
   Editors,
   EditorsMonoFont,
   Typography,
+  Layout,
+  Header,
   _default
 } = __cxstarter__StyleGuideTemplate;
 
@@ -32,6 +34,8 @@ const Default = asFluidToken({
     Editors,
     EditorsMonoFont,
     Typography,
+    Layout,
+    Header,
   },
 });
 
