@@ -62,8 +62,8 @@ File to shadow:
 
 #### Customizing Via Extending
 
-The Site Builder can create a new token that and overrides with `asHeaderToken()`, and then
-extends/overrides the specific domains.
+The Site Builder can create a new token that utilizes `asHeaderToken()`, and then can
+extend/override the specific domains within that token.
 
 ```js
 const BrandXHeader = asHeaderToken({

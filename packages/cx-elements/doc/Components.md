@@ -1,5 +1,3 @@
 # CanvasX Components
 
-<!--TODO: Provide overview of CanvasX Components. -->
-
-_TBD_
+A collection of components that implement the CanvasX Design System.
