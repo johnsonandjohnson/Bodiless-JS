@@ -1,5 +1,5 @@
 {
-  "name": "@bodiless/core",
+  "name": "@asemirsk/core",
   "version": "1.0.0-beta.1",
   "description": "Edit context for BodilessJS site editor",
   "author": "Chris Oden <coden@its.jnj.com>",
@@ -27,7 +27,7 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/fclasses": "^1.0.0-beta.1",
+    "@asemirsk/fclasses": "^1.0.0-beta.1",
     "@types/react-tag-autocomplete": "^6.0.0",
     "axios": "^0.21.0",
     "enzyme": "^3.9.0",

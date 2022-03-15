@@ -1,5 +1,5 @@
 {
-  "name": "@bodiless/layouts",
+  "name": "@asemirsk/layouts",
   "version": "1.0.0-beta.1",
   "description": "Layout managers for BodilessJS.",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
@@ -36,8 +36,8 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@bodiless/core": "^1.0.0-beta.1",
-    "@bodiless/fclasses": "^1.0.0-beta.1",
+    "@asemirsk/core": "^1.0.0-beta.1",
+    "@asemirsk/fclasses": "^1.0.0-beta.1",
     "axios": "^0.21.0",
     "html2canvas": "^1.0.0-rc.3",
     "informed": "^3.34.0",

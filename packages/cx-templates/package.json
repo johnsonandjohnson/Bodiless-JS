@@ -1,5 +1,5 @@
 {
-  "name": "@bodiless/cx-templates",
+  "name": "@asemirsk/cx-templates",
   "sideEffects": false,
   "version": "1.0.0-beta.1",
   "description": "Provides designable templates for the CanvasX Design System",
@@ -32,13 +32,13 @@
     "react-helmet": "^6.1.0"
   },
   "dependencies": {
-    "@bodiless/components": "^1.0.0-beta.1",
-    "@bodiless/core": "^1.0.0-beta.1",
-    "@bodiless/cx-editors": "^1.0.0-beta.1",
-    "@bodiless/cx-elements": "^1.0.0-beta.1",
-    "@bodiless/cx-layout": "^1.0.0-beta.1",
-    "@bodiless/fclasses": "^1.0.0-beta.1",
-    "@bodiless/gatsby-theme-bodiless": "^1.0.0-beta.1",
+    "@asemirsk/components": "^1.0.0-beta.1",
+    "@asemirsk/core": "^1.0.0-beta.1",
+    "@asemirsk/cx-editors": "^1.0.0-beta.1",
+    "@asemirsk/cx-elements": "^1.0.0-beta.1",
+    "@asemirsk/cx-layout": "^1.0.0-beta.1",
+    "@asemirsk/fclasses": "^1.0.0-beta.1",
+    "@asemirsk/gatsby-theme-bodiless": "^1.0.0-beta.1",
     "lodash": "^4.17.19"
   }
 }

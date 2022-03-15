@@ -1,5 +1,5 @@
 {
-  "name": "@bodiless/cx-link",
+  "name": "@asemirsk/cx-link",
   "sideEffects": false,
   "version": "1.0.0-beta.1",
   "description": "",
@@ -32,13 +32,13 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@bodiless/components": "^1.0.0-beta.1",
-    "@bodiless/components-ui": "^1.0.0-beta.1",
-    "@bodiless/core": "^1.0.0-beta.1",
-    "@bodiless/cx-elements": "^1.0.0-beta.1",
-    "@bodiless/fclasses": "^1.0.0-beta.1",
-    "@bodiless/richtext": "^1.0.0-beta.1",
-    "@bodiless/richtext-ui": "^1.0.0-beta.1",
+    "@asemirsk/components": "^1.0.0-beta.1",
+    "@asemirsk/components-ui": "^1.0.0-beta.1",
+    "@asemirsk/core": "^1.0.0-beta.1",
+    "@asemirsk/cx-elements": "^1.0.0-beta.1",
+    "@asemirsk/fclasses": "^1.0.0-beta.1",
+    "@asemirsk/richtext": "^1.0.0-beta.1",
+    "@asemirsk/richtext-ui": "^1.0.0-beta.1",
     "lodash": "^4.17.19",
     "tailwindcss": "^2.0.2"
   }

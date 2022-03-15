@@ -1,5 +1,5 @@
 {
-  "name": "@bodiless/core-ui",
+  "name": "@asemirsk/core-ui",
   "version": "1.0.0-beta.1",
   "description": "Default UI for BodilessJS Core",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
@@ -26,9 +26,9 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/core": "^1.0.0-beta.1",
-    "@bodiless/fclasses": "^1.0.0-beta.1",
-    "@bodiless/ui": "^1.0.0-beta.1",
+    "@asemirsk/core": "^1.0.0-beta.1",
+    "@asemirsk/fclasses": "^1.0.0-beta.1",
+    "@asemirsk/ui": "^1.0.0-beta.1",
     "informed": "^3.34.0",
     "lodash": "^4.17.19",
     "rc-tooltip": "^5.1.1"
