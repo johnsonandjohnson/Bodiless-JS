@@ -73,7 +73,8 @@ one occurrence than to search through files and replace the specific class.
 If you want to apply the classes to your entire site, we recommend the following practice:
 
 01. Within `asHelmetToken()`, and in the _Theme_ Domain, provide the site's font class.
-    <!-- TODO: TBD link to Helmet doc -->
+    - For more information, see: [CanvasX Helmet
+      Component](/CX_DesignSystem/Components/CX_Layout/Helmet).
 
 01. In `/cx-layout/src/components/Helmet/Helmet.token.ts`, within `asHelmetToken()`, and in the
     _Theme_ Domain, provide the site's font class.
