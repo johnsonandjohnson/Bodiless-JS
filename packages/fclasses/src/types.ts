@@ -217,10 +217,6 @@ export type FluidDesign = Design<DesignableComponents>;
 export type Designable<C extends DesignableComponents = DesignableComponents>
   = HOCBase<{}, DesignableProps<C>, DesignableComponentsProps<C>>;
 
-export type Domains<C extends DesignableComponents, D extends object> = {
-  [k in keyof D]?: Design<C>
-};
-
 export type ReservedDomains<
   C extends DesignableComponents,
   D extends object,
@@ -229,7 +225,7 @@ export type ReservedDomains<
      * A list of other tokens which should be applied.
      */
   Compose?: {
-    [key: string]: Token<C, D>,
+    [key: string]: ComposedToken<C, D>,
   },
   /**
      * If specified, the entire token will be wrapped in a flow toggle using
@@ -246,47 +242,18 @@ export type ReservedDomains<
 };
 
 /**
-   * Type of a token specification, a token expressed in the
-   * HOC Object Notation.
-   *
-   * This is a nested object with two levels of keys:
-   * - The inner keys are to the design keys of the target component, and their
-   *   values extended CanvasX token definitions which should be applied to
-   *   each key. In addition to the design keys of the component, the special `_`
-   *   key is supported to denote a token which should be applied to the component
-   *   as a whole.
-   * - The top-level keys are "domains" -- areas of styling or behavior which can
-   *   be individually reused, extended or overridden by downstream consumers.
-   *
-   * @param C
-   * The type of the design elements for the target componetn.
-   *
-   * @param D
-   * An object type describing the domain keys available in this token.
-   */
-export type TokenSpecBase<
-  C extends DesignableComponents,
-  D extends object,
-> = Domains<C, D> & ReservedDomains<C, D>;
-
-export type TokenSpec<
-  C extends DesignableComponents,
-  D extends object,
-> = TokenSpecBase<C, D> & {
-  [$TokenSpec]: true,
-};
-
-/**
  * Type of an argument to `as` and/or the value of a key in an Extended Design.
  * May be:
  * - A token specified in token object notation
  * - A token specified as an HOC
  * - A token specified as a string of classes.
  */
-export type Token<
+export type Token = TokenSpec<any, {}, any> | HOCBase | string | undefined;
+
+export type ComposedToken<
   C extends DesignableComponents,
   D extends object,
-> = TokenSpec<C, D> | HOCBase | string | undefined;
+> = TokenSpec<C, D, keyof D> | HOCBase | string | undefined;
 
 /**
    * Type of a collection of tokens which apply to a specific designable component.
@@ -299,14 +266,14 @@ export type TokenCollection<
   C extends DesignableComponents,
   D extends object = object,
 > = {
-  [name: string]: TokenSpec<C, D>,
+  [name: string]: TokenSpec<C, D, keyof D>,
 };
 
-type FinalDesign<
+export type FinalDesign<
   C extends DesignableComponents = DesignableComponents,
   D extends object = any,
 > = {
-  [k in keyof Partial<C & { _?: Token<C, D> }>]: Token<any, D>
+  [k in keyof Partial<C & { _?: Token }>]: Token
 };
 
 /**
@@ -327,3 +294,72 @@ export type Design<
  * Type of a condition suitable for use with `flowIf`, `addPropsIf`, `addClassesIf`
  */
 export type Condition<P = any> = (props: P) => boolean;
+
+type Domains<
+  C extends DesignableComponents,
+  D extends object
+> = {
+  [k in keyof D]?: FinalDesign<C>
+};
+
+type FinalDomains<
+  C extends DesignableComponents,
+  D extends object
+> = Domains<C, D> & ReservedDomains<C, D>;
+
+type TokenSpecIn<
+  C extends DesignableComponents,
+  D extends object,
+  K extends keyof (FinalDomains<C, D>) = keyof (FinalDomains<C, D>)
+> = Pick<FinalDomains<C, D>, K>;
+
+/**
+   * Type of a token specification, a token expressed in the
+   * HOC Object Notation.
+   *
+   * This is a nested object with two levels of keys:
+   * - The inner keys are to the design keys of the target component, and their
+   *   values extended CanvasX token definitions which should be applied to
+   *   each key. In addition to the design keys of the component, the special `_`
+   *   key is supported to denote a token which should be applied to the component
+   *   as a whole.
+   * - The top-level keys are "domains" -- areas of styling or behavior which can
+   *   be individually reused, extended or overridden by downstream consumers.
+   *
+   * @param C
+   * The type of the design elements for the target componetn.
+   *
+   * @param D
+   * An object type describing the domain keys available in this token.
+   */
+export type TokenSpec<
+  C extends DesignableComponents,
+  D extends object,
+  K extends keyof (FinalDomains<C, D>) = keyof (FinalDomains<C, D>)
+> = TokenSpecIn<C, D, K> & {
+  [$TokenSpec]: true,
+};
+
+export type AsTokenSpec<C extends DesignableComponents, D extends object> = <
+  K0 extends keyof FinalDomains<C, D>,
+  K1 extends keyof FinalDomains<C, D> = never,
+  K2 extends keyof FinalDomains<C, D> = never,
+  K3 extends keyof FinalDomains<C, D> = never,
+  K4 extends keyof FinalDomains<C, D> = never,
+  K5 extends keyof FinalDomains<C, D> = never,
+  K6 extends keyof FinalDomains<C, D> = never,
+  K7 extends keyof FinalDomains<C, D> = never,
+  K8 extends keyof FinalDomains<C, D> = never,
+  K9 extends keyof FinalDomains<C, D> = never
+>(
+  s0: TokenSpecIn<C, D, K0>,
+  s1?: TokenSpecIn<C, D, K1>,
+  s2?: TokenSpecIn<C, D, K2>,
+  s3?: TokenSpecIn<C, D, K3>,
+  s4?: TokenSpecIn<C, D, K4>,
+  s5?: TokenSpecIn<C, D, K5>,
+  s6?: TokenSpecIn<C, D, K6>,
+  s7?: TokenSpecIn<C, D, K7>,
+  s8?: TokenSpecIn<C, D, K8>,
+  s9?: TokenSpecIn<C, D, K9>,
+) => TokenSpec<C, D, K0 | K1 | K2 | K3 | K4 | K5 | K6 | K7 | K8 | K9>;

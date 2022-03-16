@@ -14,7 +14,6 @@
 
 import type {
   DesignableComponents,
-  TokenSpec as TokenSpecBase,
   TokenMeta,
   Token,
   TokenSpec,
@@ -23,8 +22,6 @@ import {
   extendMeta,
   asTokenSpec,
 } from '@bodiless/fclasses';
-
-type CxTokenSpec<C extends DesignableComponents> = TokenSpecBase<C, DefaultDomains>;
 
 const defaultDomains = {
   Core: {},
@@ -82,7 +79,7 @@ const asMetaToken = (...m: TokenMeta[]) => asElementToken({
 
 // @todo should these be public types exported from fclasses?
 type TC<K extends string> = Record<K, TokenSpec<{}, Pick<DefaultDomains, 'Core'>>>;
-type TD<K extends string> = Record<K, Token<{}, DefaultDomains>>;
+type TD<K extends string> = Record<K, Token>;
 
 /**
  * Creates a group of element tokens with shared meta.
@@ -103,7 +100,7 @@ const asTokenGroup = (...m: TokenMeta[]) => <K extends string>(
       [name]: asElementToken({
         Meta: extendMeta(...m),
         Core: {
-          _: value as Token<{}, DefaultDomains>,
+          _: value as Token,
         }
       }),
     }),
@@ -114,5 +111,3 @@ export {
   asCxTokenSpec, asMetaToken, asElementToken, asFluidToken,
   asTokenGroup,
 };
-
-export type { CxTokenSpec };
