@@ -11,7 +11,16 @@ and styles), to help meet typical site-use expectations.
 - Includes accessibility description; and
 - Uses Bodiless `EditableLink` under the hood.
 
-## Usage
+## Content Editor Details
+
+As the Editor experience will be unchanged, you can refer to [Link Component : Content Editor
+Details](/Components/Link/#content-editor-details) for instructions on use.
+
+?> **Note:** For accessibility reasons, if you're adding a Link to an external URL or a downloadable
+file, it's recommended that you provide an `aria-label`.
+
+## Site Builder Details
+### Usage
 
 ```jsx
 import flow from 'lodash/flow';
