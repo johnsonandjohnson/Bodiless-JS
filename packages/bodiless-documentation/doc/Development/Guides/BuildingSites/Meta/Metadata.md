@@ -1,7 +1,7 @@
 # Metadata Component
 
 Bodiless provides a set of HOC's which work with React Helmet
-(`[react-helmet](https://github.com/nfl/react-helmet#readme)`) to place editable meta-tags in the
+([`react-helmet`](https://github.com/nfl/react-helmet#readme)) to place editable meta-tags in the
 document `head`. A Site Builder can find examples of adding editable or non-editable (static)
 metadata into the head section from `src/components/Layout/meta.tsx`.
 
