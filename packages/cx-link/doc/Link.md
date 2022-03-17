@@ -6,11 +6,21 @@ Link builds upon it, providing a sensible default combination of its generic tok
 and styles), to help meet typical site-use expectations.
 
 - Provides an Editable Link component;
-- Detects if the link is to a downloadable file, and adds an appropriate icon automatically;
+- Detects if the link points to an external URL or a downloadable file, and adds an appropriate icon
+  automatically;
 - Includes accessibility description; and
 - Uses Bodiless `EditableLink` under the hood.
 
-## Usage
+## Content Editor Details
+
+As the Editor experience will be unchanged, you can refer to [Link Component : Content Editor
+Details](/Components/Link/#content-editor-details) for instructions on use.
+
+?> **Note:** For accessibility reasons, if you're adding a Link to an external URL or a downloadable
+file, it's recommended that you provide an `aria-label`.
+
+## Site Builder Details
+### Usage
 
 ```jsx
 import flow from 'lodash/flow';
