@@ -82,6 +82,30 @@ design requirements, and provide additional Rich Text functionality (typically, 
     - `BrandRichText` starts with the existing `cxRichText` functionality, and, in both
       Core/Components, it spreads existing functionality across these two domains and the new tokens
       are added.
+    - For an example of a simple token that adds functionality to Slate, expand the disclosure
+      below:
+
+      <details>
+        <summary>Click here for example...</summary>
+
+        ```js
+        const withQuoteBlockMeta = t(
+          asBlock,
+          withButton('format_quote'),
+        );
+
+        //...
+
+        const EditorWithBlockQuote = asTokenSpec()({
+          ...cxDefault,
+          Core: {
+            ...cxDefault.Core,
+            BlockQuote: t(replaceWith(BlockQuote), asBlockQuote, withQuoteBlockMeta),
+          }
+        });
+        ```
+
+      </details>
 
 01. Create a `src/components/Editors/index.tsx`  where you can export all tokens and schemas from
     Editors.
