@@ -21,26 +21,35 @@ they've been composed into components.
 ### Usage of CX Element Tokens As Is
 
 The Site Builder has the ability to use any of the token CanvasX elements which are in the
-`cxElement` collection.
+`cx-elements` collection.
 
 #### Usage
 
-Import `cxElements` from `@bodiless/cx-elements`, or from a specific Element token.
+Import the required Element tokens from `@bodiless/cx-elements`.
 
 If a singular token is being used, and is directly from a specific Element token:
 
 ```js
-Header1: cxColor.TextPrimaryBodyCopy,
+import { cxColor } from '@bodiless/cx-elements';
+
+const Foo = {
+  Header1: cxColor.TextPrimaryBodyCopy,
+  //...
+};
 ```
 
-Or use from `cxElement` collection; it can be within `as()` or `flowHOC()` if combining multiple
-tokens:
+If combining multiple tokens, you can put them within `as()` or `flowHOC()`:
 
 ```js
-BoldBody: as(
-  cxElement.Bold,
-  cxColor.TextPrimaryBodyCopy,
-),
+import { cxColor, cxTextDecoration } from '@bodiless/cx-elements';
+
+const Foo = {
+  BoldBody: as(
+    cxTextDecoration.Bold,
+    cxColor.TextPrimaryBodyCopy,
+  ),
+  //...
+};
 ```
 
 ### Using CX Element Tokens, but Customizing for Site-Specific Typography

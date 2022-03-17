@@ -6,7 +6,8 @@ Link builds upon it, providing a sensible default combination of its generic tok
 and styles), to help meet typical site-use expectations.
 
 - Provides an Editable Link component;
-- Detects if the link is to a downloadable file, and adds an appropriate icon automatically;
+- Detects if the link points to an external URL or a downloadable file, and adds an appropriate icon
+  automatically;
 - Includes accessibility description; and
 - Uses Bodiless `EditableLink` under the hood.
 

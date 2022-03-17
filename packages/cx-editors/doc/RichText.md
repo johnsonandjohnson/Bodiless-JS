@@ -21,12 +21,17 @@ Content Editor Details](../RichText#content-editor-details).
 What's shown in the following example can be applied to any Slot.
 
 ```js
+import { cxRichText, RichTextClean } from '@bodiless/cx-editors';
+import { asCxTokenSpec } from '@bodiless/cx-elements';
+
+const WithRichTextEditor = asCxTokenSpec({
   Editors: {
     Content: as(cxRichText.Default)(RichTextClean);
   },
   Schema: {
     Content: withNode('content'),
   }
+});
 ```
 
 We recommend that the Editor Component and tokens be defined in the Editors Domain, and the node be
