@@ -1,5 +1,6 @@
+/* eslint-disable import/no-dynamic-require, global-require */
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,13 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
-/**
- * contains package level tailwind configuration
- * the package does not perform tailwind compilation
- * site is responsible for merging these settings into site level settings
- */
-module.exports = {
+const pkgJson = require('../package.json');
+
+const resolver = (pkgName: string) => require(pkgName);
+
+const twConfig = {
   purge: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
@@ -27,3 +28,9 @@ module.exports = {
   variants: {},
   plugins: [],
 };
+
+export const getTwConfig = () => getPackageTailwindConfig({
+  pkgJson,
+  twConfig,
+  resolver,
+});

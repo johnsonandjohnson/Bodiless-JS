@@ -1,3 +1,4 @@
+/* eslint-disable import/no-dynamic-require, global-require */
 /**
  * Copyright © 2021 Johnson & Johnson
  *
@@ -11,13 +12,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import path from 'path';
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
-const getTailwindConfig = () => getPackageTailwindConfig(
-  path.resolve(__dirname, '..')
-);
+const pkgJson = require('../package.json');
 
-export {
-  getTailwindConfig
+const resolver = (pkgName: string) => require(pkgName);
+
+const twConfig = {
+  purge: [
+    './lib/**/!(*.d).{ts,js,jsx,tsx}',
+  ],
+  theme: {
+    aspectRatio: { // defaults to {}
+      none: 0,
+      square: [1, 1],
+      '16/9': [16, 9],
+      '4/3': [4, 3],
+      '21/9': [21, 9],
+    },
+  },
+  variants: {},
+  plugins: [
+    // eslint-disable-next-line
+    require('tailwindcss-aspect-ratio'),
+  ],
 };
+
+export const getTwConfig = () => getPackageTailwindConfig({
+  pkgJson,
+  twConfig,
+  resolver,
+});

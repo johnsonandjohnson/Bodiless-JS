@@ -46,7 +46,7 @@ const twConfig = {
   ],
 };
 
-export const getTailwindConfig = () => getPackageTailwindConfig({
+export const getTwConfig = () => getPackageTailwindConfig({
   pkgJson,
   twConfig,
   resolver,

@@ -686,14 +686,14 @@ const twConfig = {
   ],
 };
 
-const getTailwindConfig = () => getPackageTailwindConfig({
+const getTwConfig = () => getPackageTailwindConfig({
   pkgJson,
   twConfig,
   resolver,
+  options: {
+    prefer: ['@bodiless/test-site']
+  }
 });
 
-// console.log('getTailwindConfig()', getTailwindConfig());
-
-const mergedConfigs = mergeConfigs({}, getTailwindConfig());
-console.log('mergedConfigs', mergedConfigs);
-// module.exports = mergedConfigs;
+const mergedConfigs = mergeConfigs({}, getTwConfig());
+module.exports = mergedConfigs;

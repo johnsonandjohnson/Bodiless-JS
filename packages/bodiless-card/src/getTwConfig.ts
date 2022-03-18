@@ -1,3 +1,4 @@
+/* eslint-disable import/no-dynamic-require, global-require */
 /**
  * Copyright © 2021 Johnson & Johnson
  *
@@ -11,13 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
-/**
- * contains package level tailwind configuration
- * the package does not perform tailwind compilation
- * site is responsible for merging these settings into site level settings
- */
-module.exports = {
+const pkgJson = require('../package.json');
+
+const resolver = (pkgName: string) => require(pkgName);
+
+const twConfig = {
   purge: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
@@ -44,3 +45,9 @@ module.exports = {
     require('tailwindcss-aspect-ratio'),
   ],
 };
+
+export const getTwConfig = () => getPackageTailwindConfig({
+  pkgJson,
+  twConfig,
+  resolver,
+});
