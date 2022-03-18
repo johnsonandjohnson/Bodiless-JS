@@ -23,12 +23,10 @@ const getTwConfig = () => getPackageTailwindConfig({
   pkgJson,
   twConfig,
   resolver,
-  // options: {
-  //   prefer: ['@bodiless/__cxstarter__']
-  // }
+  options: {
+    prefer: ['@sites/__cxstarter__', '@bodiless/__cxstarter__']
+  }
 });
-
-console.log('getTwConfig()', getTwConfig());
 
 const mergedConfigs = mergeConfigs({}, getTwConfig());
 module.exports = mergedConfigs;
