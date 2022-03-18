@@ -1,3 +1,4 @@
+/* eslint-disable import/no-dynamic-require, global-require */
 /**
  * Copyright © 2020 Johnson & Johnson
  *
@@ -12,7 +13,7 @@
  * limitations under the License.
  */
 import path from 'path';
-import type { Package } from './mergeConfigs';
+import type { Package, TailwindConfig } from './mergeConfigs';
 
 const { join } = path;
 
@@ -36,8 +37,18 @@ type ApplyExtraOptions = (
 ) => Config[];
 
 type GetPackageTailwindConfig = (
-  rootPath: string,
-  options?: ExtraOptions
+  props: {
+    pkgJson: {
+      name: string,
+      dependencies: object,
+      devDependencies: object,
+    },
+    twConfig: TailwindConfig,
+    resolver: (pkg: string) => {
+      getTailwindConfig: () => Config[]
+    },
+    options?: ExtraOptions
+  }
 ) => Config[] | {};
 
 const sortByPrecedence: SortByPrecedence = (
@@ -74,26 +85,23 @@ const applyExtraOptions: ApplyExtraOptions = (configs, options) => {
   return configs$;
 };
 
-export const getPackageTailwindConfig: GetPackageTailwindConfig = (rootPath, options) => {
+export const getPackageTailwindConfig: GetPackageTailwindConfig = ({
+  pkgJson, twConfig, resolver, options
+}) => {
   try {
-    // eslint-disable-next-line global-require, import/no-dynamic-require
-    const pkgJson = require(join(rootPath, '/package.json'));
-    const pkgName = pkgJson.name;
     const deps = Object.keys({
       ...pkgJson.dependencies,
       ...pkgJson.devDependencies,
     });
     const startingConfig: Config[] = [{
-      name: pkgName,
-      root: rootPath,
-      // eslint-disable-next-line global-require, import/no-dynamic-require
-      tailwindConfig: require(join(rootPath, 'site.tailwind.config')),
+      name: pkgJson.name,
+      root: pkgJson.name, // temp, @todo find a way to put actual resolved path
+      tailwindConfig: twConfig,
     }];
     const configs = deps.reduce(
       (config, next) => {
         try {
-          // eslint-disable-next-line global-require, import/no-dynamic-require
-          const nextConfig = require(join(next, 'lib/getTailwindConfig')).getTailwindConfig();
+          const nextConfig = resolver(join(next, 'lib/getBodilessTailwindConfig')).getTailwindConfig();
           const addedPaths = config.map(item => item.root);
           const dedupedConfigs = nextConfig
             .filter((item: Config) => addedPaths.includes(item.root) === false);
