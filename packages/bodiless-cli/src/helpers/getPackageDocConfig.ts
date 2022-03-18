@@ -34,8 +34,8 @@ export const getPackageDocConfig = (rootPath: string, nameSpace: string = 'bodil
 
     deps.forEach(dep => {
       try {
-        const depDocsJsonPath = require(path.join(dep, 'lib/getBodilessDocConfig'))
-          .getBodilessDocs(nameSpace);
+        const depDocsJsonPath = require(path.join(dep, 'lib/getDocs'))
+          .getDocs(nameSpace);
         paths.push(depDocsJsonPath[0]);
       } catch (e) {
         // do nothing

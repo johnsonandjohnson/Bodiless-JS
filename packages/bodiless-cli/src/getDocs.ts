@@ -13,7 +13,7 @@
  */
 
 import path from 'path';
-import { getPackageDocConfig } from '@bodiless/cli';
+import { getPackageDocConfig } from './helpers/getPackageDocConfig';
 
 const packageRootDir = path.resolve(__dirname, '..');
 

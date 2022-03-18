@@ -13,11 +13,11 @@
  */
 
 import path from 'path';
-import { getPackageDocConfig } from './helpers/getPackageDocConfig';
+import { getPackageDocConfig } from '@bodiless/cli';
 
 const packageRootDir = path.resolve(__dirname, '..');
 
-export const getBodilessDocs = (namespace: string) => getPackageDocConfig(
+export const getDocs = (namespace: string) => getPackageDocConfig(
   packageRootDir,
   namespace
 );
