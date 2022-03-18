@@ -686,6 +686,11 @@ const twConfig = {
   ],
 };
 
+const card = requireEsm('@bodiless/card').twConfig;
+console.log('card', card);
+const accordion = requireEsm('@bodiless/accordion').twConfig;
+console.log('accordion', accordion);
+
 const getTwConfig = () => getPackageTailwindConfig({
   pkgJson,
   twConfig,
