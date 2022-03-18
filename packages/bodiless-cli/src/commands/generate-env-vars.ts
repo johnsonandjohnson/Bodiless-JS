@@ -14,7 +14,6 @@
 
 import {
   Command,
-  // flags as commandFlags
 } from '@oclif/command';
 import init from '../helpers/generate-env-vars';
 
