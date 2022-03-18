@@ -13,4 +13,6 @@
  */
 
 // eslint-disable-next-line import/prefer-default-export
+export * from './helpers/getPackageDocConfig';
+
 export { run } from '@oclif/command';

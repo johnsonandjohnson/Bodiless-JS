@@ -17,7 +17,7 @@
 import path from 'path';
 import flow from 'lodash/flow';
 import fs from 'fs-extra';
-import { getPackageDocConfig } from '@bodiless/cli/lib/helpers/getPackageDocConfig';
+import { getPackageDocConfig } from '@bodiless/cli';
 import { withTreeFromFile, getSimplePaths, validatePaths } from './tree';
 import {
   writeTree, writeResources, copyFile, symlinkFile,
