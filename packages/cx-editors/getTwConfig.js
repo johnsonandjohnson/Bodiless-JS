@@ -14,31 +14,17 @@
  */
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
-const pkgJson = require('../package.json');
+const pkgJson = require('./package.json');
 
-const resolver = (pkgName: string) => require(pkgName);
+const resolver = (pkgName) => require(pkgName);
 
 const twConfig = {
   purge: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
-  theme: {
-    aspectRatio: { // defaults to {}
-      none: 0,
-      square: [1, 1],
-      '16/9': [16, 9],
-      '4/3': [4, 3],
-      '21/9': [21, 9],
-    },
-  },
-  variants: {},
-  plugins: [
-    // eslint-disable-next-line
-    require('tailwindcss-aspect-ratio'),
-  ],
 };
 
-export const getTwConfig = () => getPackageTailwindConfig({
+export default getPackageTailwindConfig({
   pkgJson,
   twConfig,
   resolver,

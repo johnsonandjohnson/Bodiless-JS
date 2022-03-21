@@ -14,42 +14,47 @@
  */
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
-const pkgJson = require('../package.json');
+const pkgJson = require('./package.json');
 
-const resolver = (pkgName: string) => require(pkgName);
+const resolver = (pkgName) => require(pkgName);
 
 const twConfig = {
   purge: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {
-    screens: {
-      md: '768px',
-      lg: '1025px',
-      xl: '1921px',
-    },
-    // Colors are used in styleguide.
-    colors: {
-      red: '#FF0000',
-      green: '#00FF00',
-      blue: '#0000FF',
-      orange: '#FFA500',
-    },
-    maxWidth: {
-      48: '12rem',
-      56: '14rem',
-    },
     extend: {
-      margin: {
-        'site-percent': '5%',
-        'md-site-percent': '8%',
-        'lg-site-percent': '8%',
+      minWidth: {
+        full: '100%',
       },
+      zIndex: {
+        full: '999',
+      },
+      keyframes: {
+        'slide-in': {
+          '100%': { transform: 'translateX(0%)' },
+        },
+        'slide-out': {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+      },
+      animation: {
+        'slide-in': 'slide-in .5s forwards',
+        'slide-out': 'slide-out .5s forwards',
+      },
+    },
+  },
+  variants: {
+    extend: {
+      overflow: ['responsive', 'hover', 'focus', 'group-hover'],
+      position: ['responsive', 'hover', 'focus', 'group-hover'],
+      display: ['responsive', 'hover', 'focus', 'group-hover'],
     },
   },
 };
 
-export const getTwConfig = () => getPackageTailwindConfig({
+export default getPackageTailwindConfig({
   pkgJson,
   twConfig,
   resolver,

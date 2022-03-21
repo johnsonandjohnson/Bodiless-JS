@@ -15,9 +15,9 @@
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
 const tailwindcssDir = require('tailwindcss-dir')();
-const pkgJson = require('../package.json');
+const pkgJson = require('./package.json');
 
-const resolver = (pkgName: string) => require(pkgName);
+const resolver = (pkgName) => require(pkgName);
 
 const twConfig = {
   purge: [
@@ -76,7 +76,7 @@ const twConfig = {
   ],
 };
 
-export const getTwConfig = () => getPackageTailwindConfig({
+export default getPackageTailwindConfig({
   pkgJson,
   twConfig,
   resolver,

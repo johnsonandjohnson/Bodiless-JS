@@ -14,9 +14,9 @@
  */
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
-const pkgJson = require('../package.json');
+const pkgJson = require('./package.json');
 
-const resolver = (pkgName: string) => require(pkgName);
+const resolver = (pkgName) => require(pkgName);
 
 const twConfig = {
   purge: [
@@ -29,7 +29,7 @@ const twConfig = {
   plugins: [],
 };
 
-export const getTwConfig = () => getPackageTailwindConfig({
+export default getPackageTailwindConfig({
   pkgJson,
   twConfig,
   resolver,
