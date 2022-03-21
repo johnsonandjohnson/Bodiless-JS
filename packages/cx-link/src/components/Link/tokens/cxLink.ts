@@ -16,7 +16,7 @@ import {
   addProps, Span, addPropsIf, flowIf, as, on, addClassesIf
 } from '@bodiless/fclasses';
 import { withSidecarNodes, withNodeKey } from '@bodiless/core';
-import { cxElement } from '@bodiless/cx-elements';
+import { cxTypography } from '@bodiless/cx-elements';
 import { asLinkToken } from '../LinkClean';
 import { useExternalLinkToggle, asEditableLink, useIsDownloadLink } from '../util';
 
@@ -62,7 +62,7 @@ const Default = asLinkToken({
      */
   Theme: {
     _: as(WithDownloadStyles, WithExternalStyles),
-    Wrapper: as(cxElement.Link),
+    Wrapper: as(cxTypography.Link),
   },
   /**
      * Makes the link editable. Nodekey must be provided separately.

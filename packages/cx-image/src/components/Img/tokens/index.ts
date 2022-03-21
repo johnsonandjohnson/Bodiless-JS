@@ -12,4 +12,6 @@
  * limitations under the License.
  */
 
-export * from './cxImage';
+import tokens from './cxImage';
+
+export default tokens;

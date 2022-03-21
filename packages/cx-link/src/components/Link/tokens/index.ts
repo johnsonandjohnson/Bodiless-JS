@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import cxLink from './cxLink';
-import cxLinkStatic from './cxLink.bl-static';
+import tokens from './cxLink';
 
-export { cxLink, cxLinkStatic };
+export default tokens;

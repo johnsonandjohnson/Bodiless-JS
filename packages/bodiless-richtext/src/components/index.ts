@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import TextSelectorButton from './TextSelectorButton';
+import TextSelectorButton from './TextSelectorButton.bl-edit';
 
 export { TextSelectorButton, TextSelectorButton as default };

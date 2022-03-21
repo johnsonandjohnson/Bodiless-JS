@@ -37,6 +37,7 @@
     "@bodiless/cx-elements": "^1.0.0-beta.1",
     "@bodiless/fclasses": "^1.0.0-beta.1",
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-beta.1",
+    "@bodiless/hydration": "^1.0.0-beta.1",
     "@bodiless/layouts": "^1.0.0-beta.1",
     "@bodiless/layouts-ui": "^1.0.0-beta.1",
     "lodash": "^4.17.19"

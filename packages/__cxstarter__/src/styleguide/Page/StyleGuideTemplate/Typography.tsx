@@ -25,51 +25,51 @@ import {
   replaceWith,
 } from '@bodiless/fclasses';
 import { withEditorPlain } from '@bodiless/cx-editors';
-import { cxElement } from '@bodiless/cx-elements';
+import { cxTypography } from '@bodiless/cx-elements';
 import { LinkClean, cxLink } from '@bodiless/cx-link';
 import { withNodeKey } from '@bodiless/core';
 import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/cx-templates';
 
 const H1Title = flowHoc(
   withEditorPlain('title', 'Page Title'),
-  as(cxElement.H1, 'py-5'),
+  as(cxTypography.H1, 'py-5'),
 )(H1);
 const CxH1 = flowHoc(
   withEditorPlain('H1', 'Header 1'),
-  as(cxElement.H1),
+  as(cxTypography.H1),
 )(H1);
 const CxH2 = flowHoc(
   withEditorPlain('H2', 'Header 2'),
-  as(cxElement.H2),
+  as(cxTypography.H2),
 )(H2);
 const CxH3 = flowHoc(
   withEditorPlain('H3', 'Header 3'),
-  as(cxElement.H3),
+  as(cxTypography.H3),
 )(H3);
 const CxH4 = flowHoc(
   withEditorPlain('H4', 'Header 4'),
-  as(cxElement.H4),
+  as(cxTypography.H4),
 )(H4);
 const CxH5 = flowHoc(
   withEditorPlain('H5', 'Header 5'),
-  as(cxElement.H5),
+  as(cxTypography.H5),
 )(H5);
 const CxBody = flowHoc(
   withEditorPlain('Body', 'Body Copy'),
-  as(cxElement.Body),
+  as(cxTypography.Body),
 )(P);
 const CxEyebrow = flowHoc(
   withEditorPlain('Eyebrow', 'Eyebrow'),
-  as(cxElement.Eyebrow),
+  as(cxTypography.Eyebrow),
 )(P);
 const CxRest = flowHoc(
   withEditorPlain('Rest', 'Rest: i.e. Breadcrumbs / Review Numbers'),
-  as(cxElement.Rest),
+  as(cxTypography.Rest),
 )(P);
 const CxDemoLink = flowHoc(
   withEditorPlain('Link1', 'Link'),
   as(
-    cxElement.Link,
+    cxTypography.Link,
     cxLink.Default,
     cxLink.Sidecar,
   ),

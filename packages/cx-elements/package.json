@@ -26,13 +26,13 @@
     "build:lib": "tsc -p ./tsconfig.json",
     "build:watch": "npm run build:lib -- --watch",
     "copy": "copyfiles -u 1 \"./src/*.css\" \"./lib/\"",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
-    "lint": "tslint ./src/**/*.ts?x"
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
     "@bodiless/components": "^1.0.0-beta.1",
     "@bodiless/core": "^1.0.0-beta.1",
     "@bodiless/fclasses": "^1.0.0-beta.1",
+    "@bodiless/hydration": "^1.0.0-beta.1",
     "@types/webpack": "^5.0.0",
     "lodash": "^4.17.19",
     "mobx": "^6.0.0",
@@ -40,8 +40,7 @@
     "react-contenteditable": "^3.2.6",
     "react-dropzone": "^10.1.5",
     "react-id-generator": "^3.0.1",
-    "uuid": "^3.3.2",
-    "webpack": "^5.69.1"
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@types/uuid": "^3.4.4",

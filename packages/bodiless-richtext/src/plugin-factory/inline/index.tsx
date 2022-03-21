@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import createInlineButton from './createInlineButton';
+import createInlineButton from './createInlineButton.bl-edit';
 import {
   removeInline,
   insertInline,
@@ -20,7 +20,7 @@ import {
   toggleInline,
   createToggleInline,
   updateInline,
-} from './inlineUtils';
+} from './inlineUtils.bl-edit';
 
 export {
   createInlineButton,

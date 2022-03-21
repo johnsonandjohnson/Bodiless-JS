@@ -12,12 +12,12 @@
  * limitations under the License.
  */
 
-import { hasMark, createToggleMark, toggleMark } from './markUtils';
+import { hasMark, createToggleMark, toggleMark } from './markUtils.bl-edit';
 
 //
 // External
 //
-import createMarkButton from './createMarkButton';
+import createMarkButton from './createMarkButton.bl-edit';
 
 export {
   createMarkButton,

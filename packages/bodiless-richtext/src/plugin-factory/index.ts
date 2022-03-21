@@ -15,5 +15,5 @@
 export * from './inline';
 export * from './mark';
 export * from './block';
-export * from './render';
-export { default as createPluginButton, withToggle } from './createPluginButton';
+export * from './render/index.bl-edit';
+export { default as createPluginButton, withToggle } from './createPluginButton.bl-edit';

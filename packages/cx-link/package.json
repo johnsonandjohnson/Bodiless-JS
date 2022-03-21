@@ -22,10 +22,10 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
-    "build:watch": "npm run build -- --watch",
+    "build": "npm run build:lib && npm run build:api-doc",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
     "build:api-doc": "typedoc --out doc/api ./src",
-    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
   },
   "peerDependencies": {
@@ -37,6 +37,7 @@
     "@bodiless/core": "^1.0.0-beta.1",
     "@bodiless/cx-elements": "^1.0.0-beta.1",
     "@bodiless/fclasses": "^1.0.0-beta.1",
+    "@bodiless/hydration": "^1.0.0-beta.1",
     "@bodiless/richtext": "^1.0.0-beta.1",
     "@bodiless/richtext-ui": "^1.0.0-beta.1",
     "lodash": "^4.17.19",
