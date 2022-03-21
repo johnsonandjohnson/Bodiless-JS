@@ -22,32 +22,26 @@ instead of utilizing those offered by CanvasX — will work.
 01. Defining Typography for the site:  
     This step will define and implement basic elements of the design system (typography, spacing,
     colors).
-
     01. Before starting, it is best to have a clear understanding of:
         - [Best Practices for Using Tailwind with Bodiless](./Typography/TailwindGuide)
         - [Best Practices Using Custom Fonts](./Typography/Fonts)
     01. [Getting Started Defining Typography](./Typography/Typography)
 
-01. Text Editors:
-
+01. Text Editors:  
     This step will define and implement the basic text editors for your site, which includes a Rich
     Text editor and Plain Text editor. If you have customized your Typography in the previous step,
     you can provide this custom typography to your site's Rich Text editor.
-
     01. For an step-by-step overview of using, extending or overriding the editors, see [CanvasX
         Editors](/CX_DesignSystem/Components/CX_Editors/).
 
 01. Image Presets:
-
     - This step is optional, as the [CanvasX Image](/CX_DesignSystem/Components/CX_Image/) presets
       should provide most required functionality. If there are specific image requirements for your
       site, you may want to extend these tokens.
 
-01. Basic Layout / Page:
-
+01. Basic Layout / Page:  
     This step will define and implement the general layout of the site. This will include the
     following:
-
     - Layout which is site's basic page structure
     - Breakpoints for responsiveness
     - Header
@@ -138,8 +132,8 @@ instead of utilizing those offered by CanvasX — will work.
 
 01. Supporting Components:
     - Meta
-      - [Meta data](./Meta/MetaData.md)
-      - [Fav Icon](./Meta/FavIcon.md)
+      - [Metadata](./Meta/Metadata)
+      - [Favicon](./Meta/Favicon)
     - GTM
     - HREF
     - GDPR
