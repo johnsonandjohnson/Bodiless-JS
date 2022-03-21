@@ -21,7 +21,6 @@ export const getPackageEnvConfig = (rootPath: string): string[] => {
     const pkgJson = require(path.join(rootPath, '/package.json'));
     const deps = Object.keys({
       ...pkgJson.dependencies,
-      ...pkgJson.devDependencies,
     });
 
     try {

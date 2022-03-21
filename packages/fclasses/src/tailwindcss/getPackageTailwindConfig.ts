@@ -91,7 +91,6 @@ export const getPackageTailwindConfig: GetPackageTailwindConfig = ({
   try {
     const deps = Object.keys({
       ...pkgJson.dependencies,
-      ...pkgJson.devDependencies,
     });
     const startingConfig: Config[] = [{
       name: pkgJson.name,
