@@ -12,7 +12,7 @@ By default, the only option available for the CX Rich Text Editor is the _Full_ 
 
 Other than potentially seeing different buttons available, there is no change to the Editor
 experience by the CX Editor package, and, thus, you can refer to the [Bodiless Rich Text Editor :
-Content Editor Details](../RichText#content-editor-details).
+Content Editor Details](/Components/Editors/RichText#content-editor-details).
 
 ## Site Builder Details
 
@@ -41,14 +41,14 @@ defined in the Schema Domain.
 
 #### Via Shadowing (*Preferred Method)
 
-Provide the Shadowing function as defined in [Shadow](../../CX_Elements/CX_Shadow).
+Provide the Shadowing function as defined in [Shadow](../CX_Elements/CX_Shadow).
 
 File to shadow:
 [`cxRichText`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-editors/src/components/RichText/tokens/cxRichText.ts)
 
 #### Via Overriding Specific Existing Styles Using CanvasX Rich Text Editor
 
-See [CanvasX Site Typography](../../CX_Elements/CX_SiteTypography).
+See [CanvasX Site Typography](../CX_Elements/CX_SiteTypography).
 
 ### Extending Default CanvasX Rich Text Editor
 
@@ -117,4 +117,4 @@ design requirements, and provide additional Rich Text functionality (typically, 
 ## Architectural Details
 
 None needed. For architectural information, see [Bodiless Rich Text : Architectural
-Details](../RichText#architectural-details).
+Details](/Components/Editors/RichText#architectural-details).

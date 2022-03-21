@@ -23,7 +23,6 @@ file, it's recommended that you provide an `aria-label`.
 
 ### Usage
 
->>>>>>> main
 ```jsx
 import flow from 'lodash/flow';
 import {
