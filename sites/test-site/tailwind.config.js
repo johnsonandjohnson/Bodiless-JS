@@ -705,5 +705,7 @@ const getTwConfig = () => getPackageTailwindConfig({
   }
 });
 
+console.log('getTwConfig()', getTwConfig());
+
 const mergedConfigs = mergeConfigs({}, getTwConfig());
 module.exports = mergedConfigs;

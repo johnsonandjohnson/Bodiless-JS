@@ -45,7 +45,7 @@ type GetPackageTailwindConfig = (
     },
     twConfig: TailwindConfig,
     resolver: (pkg: string) => {
-      getTwConfig: () => Config[]
+      default: Config[],
     },
     options?: ExtraOptions
   }
@@ -100,7 +100,7 @@ export const getPackageTailwindConfig: GetPackageTailwindConfig = ({
     const configs = deps.reduce(
       (config, next) => {
         try {
-          const nextConfig = resolver(join(next, 'lib/getTwConfig')).getTwConfig();
+          const nextConfig = resolver(join(next, 'getTwConfig')).default;
           const addedPaths = config.map(item => item.root);
           const dedupedConfigs = nextConfig
             .filter((item: Config) => addedPaths.includes(item.root) === false);

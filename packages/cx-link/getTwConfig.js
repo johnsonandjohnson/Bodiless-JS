@@ -15,9 +15,9 @@
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
 const plugin = require('tailwindcss/plugin');
-const pkgJson = require('../package.json');
+const pkgJson = require('./package.json');
 
-const resolver = (pkgName: string) => require(pkgName);
+const resolver = (pkgName) => require(pkgName);
 
 const twConfig = {
   purge: [
@@ -31,7 +31,7 @@ const twConfig = {
     },
   },
   plugins: [
-    plugin(({ addBase }: any) => {
+    plugin(({ addBase }) => {
       addBase({
         '@font-face': {
           fontFamily: 'linkicons',
@@ -41,7 +41,7 @@ const twConfig = {
         },
       });
     }),
-    plugin(({ addUtilities }: any) => {
+    plugin(({ addUtilities }) => {
       addUtilities(
         {
           '.cx-download-link::after': {
@@ -70,7 +70,7 @@ const twConfig = {
   ],
 };
 
-export const getTwConfig = () => getPackageTailwindConfig({
+export default getPackageTailwindConfig({
   pkgJson,
   twConfig,
   resolver,
