@@ -700,9 +700,7 @@ const getTwConfig = () => getPackageTailwindConfig({
   pkgJson,
   twConfig,
   resolver,
-  options: {
-    prefer: ['@bodiless/test-site']
-  }
+  prefer: ['@bodiless/test-site'],
 });
 
 const mergedConfigs = mergeConfigs({}, getTwConfig());

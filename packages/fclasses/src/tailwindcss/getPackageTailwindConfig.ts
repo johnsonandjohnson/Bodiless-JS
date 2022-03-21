@@ -36,19 +36,20 @@ type ApplyExtraOptions = (
   options?: ExtraOptions,
 ) => Config[];
 
+export type GetTwConfigProps = {
+  pkgJson: {
+    name: string,
+    dependencies: object,
+    devDependencies: object,
+  },
+  twConfig: TailwindConfig,
+  resolver: (pkg: string) => {
+    default: Config[],
+  },
+} & ExtraOptions;
+
 type GetPackageTailwindConfig = (
-  props: {
-    pkgJson: {
-      name: string,
-      dependencies: object,
-      devDependencies: object,
-    },
-    twConfig: TailwindConfig,
-    resolver: (pkg: string) => {
-      default: Config[],
-    },
-    options?: ExtraOptions
-  }
+  props: GetTwConfigProps
 ) => Config[] | {};
 
 const sortByPrecedence: SortByPrecedence = (
@@ -85,9 +86,10 @@ const applyExtraOptions: ApplyExtraOptions = (configs, options) => {
   return configs$;
 };
 
-export const getPackageTailwindConfig: GetPackageTailwindConfig = ({
-  pkgJson, twConfig, resolver, options
-}) => {
+export const getPackageTailwindConfig: GetPackageTailwindConfig = props => {
+  const {
+    pkgJson, twConfig, resolver, ...extraOptions
+  } = props;
   try {
     const deps = Object.keys({
       ...pkgJson.dependencies,
@@ -111,7 +113,7 @@ export const getPackageTailwindConfig: GetPackageTailwindConfig = ({
       },
       startingConfig
     );
-    return applyExtraOptions(configs, options);
+    return applyExtraOptions(configs, extraOptions);
   } catch (e) {
     return {};
   }
