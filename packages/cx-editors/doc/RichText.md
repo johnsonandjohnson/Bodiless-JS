@@ -59,8 +59,11 @@ design requirements, and provide additional Rich Text functionality (typically, 
     specific tokens for each. (`import` and `export` as needed.)
 
     ```js
+    import { asBlock, withButton, } from '@bodiless/richtext';
+    import { asCxTokenSpec } from '@bodiless/cx-elements';
+
     const withQuoteBlockMeta = flowHoc(
-      startWith(Span),
+      asBlock,
       withButton('format_quote'),
     );
 
@@ -89,7 +92,10 @@ design requirements, and provide additional Rich Text functionality (typically, 
         <summary>Click here for example...</summary>
 
         ```js
-        const withQuoteBlockMeta = t(
+        import { asBlock, withButton, } from '@bodiless/richtext';
+        import { asTokenSpec, Blockquote, replaceWith, flowHoc } from '@bodiless/fclasses';
+
+        const withQuoteBlockMeta = flowHoc(
           asBlock,
           withButton('format_quote'),
         );
@@ -100,7 +106,10 @@ design requirements, and provide additional Rich Text functionality (typically, 
           ...cxDefault,
           Core: {
             ...cxDefault.Core,
-            BlockQuote: t(replaceWith(BlockQuote), asBlockQuote, withQuoteBlockMeta),
+            // `asBlockQuote` is an example token you would import from your site's
+            // `/src/components/Elements.token.ts` file.
+            // E.g., `const asBlockQuote = addClasses('block mx-4');`
+            BlockQuote: flowHoc(replaceWith(Blockquote), asBlockQuote, withQuoteBlockMeta),
           }
         });
         ```
