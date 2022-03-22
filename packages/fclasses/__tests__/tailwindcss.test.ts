@@ -34,18 +34,12 @@ describe('tailwindcss', () => {
           ],
         },
       };
-      const site = {
-        purge: [
-          'site',
-        ],
-      };
       const expected = {
         purge: [
           './src/**/!(*.d).{ts,js,jsx,tsx}',
           'packageA',
           'packageB1',
-          'packageB2',
-          'site',
+          'packageB2'
         ],
       };
       expect(mergeConfigs([packageA, packageB])).toMatchObject(expected);
@@ -68,17 +62,11 @@ describe('tailwindcss', () => {
           ],
         },
       };
-      const site = {
-        plugins: [
-          'site',
-        ],
-      };
       const expected = {
         plugins: [
           'pluginA',
           'pluginB1',
           'pluginB2',
-          'site',
         ],
       };
       expect(mergeConfigs([packageA, packageB])).toMatchObject(expected);
@@ -100,16 +88,10 @@ describe('tailwindcss', () => {
           },
         },
       };
-      const site = {
-        theme: {
-          site: 3,
-        },
-      };
       const expected = {
         theme: {
           foo: 1,
           bar: 2,
-          site: 3,
         },
       };
       expect(mergeConfigs([packageA, packageB])).toMatchObject(expected);
