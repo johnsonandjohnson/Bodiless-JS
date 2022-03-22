@@ -30,5 +30,5 @@ const { buildTailwindConfig } = requireEsm(
 module.exports = buildTailwindConfig({
   pkgJson: require('./package.json'),
   resolver: pkg => requireEsm(pkg),
-  prefer: ['@sites/__cxstarter__', '@bodiless/__cxstarter__'],
+  prefer: ['@bodiless/__cxstarter__'],
 });
