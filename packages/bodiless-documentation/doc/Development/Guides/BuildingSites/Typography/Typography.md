@@ -49,8 +49,8 @@ you are reusing a class repeatedly, then make a token for it. In the future, it'
 one occurrence than to search through files and replace the specific class.
 
 01. We recommend starting with an Elements folder in your package, and start defining tokens during
-    creation. Keeping the files small and specific to function/definition will be easier to
-    maintain, and easier for others to understand.
+    creation. Keeping files small and specific to function/definition will be easier to maintain,
+    and easier for others to understand.
 
 01. Tokens can be defined individually, or within a group if they share
     [metadata](/Development/Architecture/FClasses?id=metadata-and-filters).
