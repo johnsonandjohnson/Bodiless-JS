@@ -42,7 +42,7 @@ instead of utilizing those offered by CanvasX — will work.
 01. Basic Layout / Page:  
     This step will define and implement the general layout of the site. This will include the
     following:
-    - Layout which is site's basic page structure
+    - Basic structure for the site's Layout
     - Breakpoints for responsiveness
     - Header
     - Footer

@@ -1,4 +1,4 @@
-# CX Templates Overview
+# CanvasX Templates Overview
 
 The Site Builder can create templates that the site pages use to render the data in a similar
 layout/pattern. Using templates makes the site building and editing process more efficient.
@@ -46,6 +46,8 @@ The page at URL path "/products", would use the Product Listing Page templates, 
 would use the Product Detail Page template. This would require two templates created in the
 `src/templates` directory with the names `product_listing.jsx` and `product_detail.jsx`. We will
 provide these examples in the next sections of this guide.
+
+?> When using TypeScript, the `.tsx` file extension is also supported.
 
 ## Brief Overview of Templates in the Test Site
 
@@ -119,9 +121,8 @@ in use.
 
 ## Governance vs Flexibility of Templates
 
-As a Site Builder creating templates, it is suggested to create templates with items defined needing
-to have general uniformity, and applying Flow Containers within areas to allow flexibility to the
-Content Editor.
+As a Site Builder, you can create templates with defined items to allow general uniformity, and with
+Flow Containers within areas to allow flexibility to the Content Editor.
 
 The default template example above offers no governance and is a very flexible page for the Site
 Builder.
@@ -140,11 +141,11 @@ components or Rich Text Editor components. This allows all articles to have colu
 enforce uniformity, but what is placed into those areas is more flexible and controlled by the
 editor. In the sidebar, though, you're limited to components that fit nicely into ⅓-width space.
 This offers flexibility, but keeps the articles using this template in the layout of two columns
-without being two restrictive.
+without being too restrictive.
 
-The Site Builder as they design the templates can choose the following:
+As they design templates, Site Builders can choose the following:
 
-* Layout of the template.
-* Components pre-placed on the template.
-* Where Flow Containers reside, allowing a flexible area of the template.
+* The Layout of the template.
+* To add pre-placed components on the template.
+* Where to place Flow Containers, allowing flexible areas in the template.
 * Different variations of Flow Containers that control what components could be added to an area.

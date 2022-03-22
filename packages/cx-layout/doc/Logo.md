@@ -1,12 +1,11 @@
 # CanvasX Logo Component
 
-The Logo Component is simple component with a wrapper around a linked image component with the
-following features:
+The Logo is a simple component with a wrapper around a linked image with the following features:
 
-* Image is a Gatsby image.
-* Image is loading with 'eager' to force this image to load immediately.
-* Link is saved as a sidecar link.
-* Default data is saving with site's node collection, so it's reused on every page.
+* The Logo is a Gatsby Image.
+* The image loads with 'eager' to force it to load immediately.
+* Its link is saved as a sidecar link.
+* Default data is saved within the `site` node collection, so it's reused on every page.
 
 ## Content Editor Details
 

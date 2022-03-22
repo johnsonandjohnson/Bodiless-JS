@@ -26,7 +26,7 @@ to the header.
 
 ### Customizing
 
-A custom token helmet that is applied to all pages can be defined at the site/package level, and
+A custom Helmet token that is applied to all pages can be defined at the site/package level, and
 then applied to the Layout's specific helmet slot.
 
 Within your site/package level components, the following component extends `cxHelmet` with all its
@@ -54,7 +54,7 @@ const Default = asLayoutToken({
 });
 ```
 
-Alternatively, you can use custom token helmets within templates, and then that data is only applied
+Alternatively, you can use custom Helmet tokens within templates, and then that data is only applied
 to the head of the pages created from that template.
 
 ## Architectural Details

@@ -1,12 +1,10 @@
 # Metadata Component
 
-Bodiless provides a set of HOC's which work with React Helmet
-([`react-helmet`](https://github.com/nfl/react-helmet#readme)) to place editable meta-tags in the
-document `head`. A Site Builder can find examples of adding editable or non-editable (static)
-metadata into the head section from `src/components/Layout/meta.tsx`.
-
-For full code, please [review
-code](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/sites/test-site/src/components/Layout/meta.tsx).
+Bodiless provides a set of HOCs which work with [React
+Helmet](https://github.com/nfl/react-helmet#readme) to place editable meta-tags in the document
+`head`. Site Builders can find a few examples on how to place editable and static metadata into a
+site's head section at
+[`src/components/Layout/meta.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/sites/test-site/src/components/Layout/meta.tsx).
 
 See below for instructions on how to add metadata to a page's head and make it editable for Content
 Editors.
@@ -27,18 +25,21 @@ Content Editor to manipulate metadata per page.
     01. `useMenuOptions`: Defines SEO form menu button appearance.
 
         ```js
-        {
-          name: 'seo',                     // Menu item name
-          isHidden: () => !context.isEdit, // Hidden the button in preview mode
-          icon: 'category',                // Button icon
-          label: 'SEO',                    // Button label
-        },
+        const useMenuOptions = () => [
+          {
+            name: 'seo',                     // Menu item name
+            isHidden: () => !context.isEdit, // Hide the button in preview mode
+            icon: 'category',                // Button icon
+            label: 'SEO',                    // Button label
+            group: 'page-group',             // Name of a group to which this option belongs
+          },
+        ];
         ```
 
     01. `seoFormHeader`: [Optional] Defines SEO form title and description for users.
 
         ```js
-        {
+        const seoFormHeader = {
           title: 'SEO Data form',
           description: `Enter the page level data used for SEO ...`
         };
@@ -62,6 +63,9 @@ For example, to add an editable meta description field:
     For example:
 
     ```js
+    import { withMeta } from '@bodiless/components';
+    import { useMenuOptionUI } from '@bodiless/core';
+
     const withMetaPageDescription = withMeta({
       name: 'description',
       useFormElement: () => useMenuOptionUI().ComponentFormTextArea,
@@ -70,7 +74,7 @@ For example, to add an editable meta description field:
     });
     ```
 
-    `useFormElement` provides a function that returns a UI input component (e.g.,
+    `useFormElement` accepts a function that returns a UI input component (e.g.,
     `ComponentFormText`, `ComponentFormTextArea`, etc.).
 
 01. To apply this field to the meta form previously created, you can use `flowRight`:

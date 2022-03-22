@@ -35,9 +35,9 @@ The Product Detail Page has the following components:
       (which contains an HOC that renders a Product Filter on the left and a taggable Product Flow
       Container on the right)
 
-01. Specify the templates to use the template via `index.json` file.
-    * Create a folder in `src/data/pages`, such as `src/data/pages/products`, and specify the
-      `index.json` to use this template.  
+01. Configure pages to use the template via `index.json` file in `src/data/pages`.
+    * Create a folder in `src/data/pages`, such as `src/data/pages/products`, and create an
+      `index.json` file using the desired template.  
       E.g.,
 
       ```json
