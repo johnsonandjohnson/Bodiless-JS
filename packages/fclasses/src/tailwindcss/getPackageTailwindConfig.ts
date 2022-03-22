@@ -48,9 +48,9 @@ export type GetTwConfigProps = {
   },
 } & ExtraOptions;
 
-type GetPackageTailwindConfig = (
+export type GetPackageTailwindConfig = (
   props: GetTwConfigProps
-) => Config[] | {};
+) => Config[] | [];
 
 const sortByPrecedence: SortByPrecedence = (
   sourceArray,
@@ -88,7 +88,7 @@ const applyExtraOptions: ApplyExtraOptions = (configs, options) => {
 
 export const getPackageTailwindConfig: GetPackageTailwindConfig = props => {
   const {
-    pkgJson, twConfig, resolver, ...extraOptions
+    pkgJson, twConfig = {}, resolver, ...extraOptions
   } = props;
   try {
     const deps = Object.keys({
@@ -115,6 +115,6 @@ export const getPackageTailwindConfig: GetPackageTailwindConfig = props => {
     );
     return applyExtraOptions(configs, extraOptions);
   } catch (e) {
-    return {};
+    return [];
   }
 };

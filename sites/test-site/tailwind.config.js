@@ -14,7 +14,7 @@
 const requireEsm = require('esm')(module);
 const tailwindcssDir = require('tailwindcss-dir')();
 
-const { getPackageTailwindConfig, mergeConfigs } = requireEsm(
+const { buildTailwindConfig } = requireEsm(
   '@bodiless/fclasses'
 );
 
@@ -696,12 +696,9 @@ const twConfig = {
 //   exclude: ['@bodiless/organisms', '@bodiless/accordion'],
 // });
 
-const getTwConfig = () => getPackageTailwindConfig({
+module.exports = buildTailwindConfig({
   pkgJson,
   twConfig,
   resolver,
   prefer: ['@bodiless/test-site'],
 });
-
-const mergedConfigs = mergeConfigs({}, getTwConfig());
-module.exports = mergedConfigs;

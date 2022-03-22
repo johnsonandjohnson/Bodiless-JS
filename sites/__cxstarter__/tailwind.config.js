@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 /**
  * Copyright © 2022 Johnson & Johnson
  *
@@ -13,24 +14,9 @@
  */
 const requireEsm = require('esm')(module);
 
-const { getPackageTailwindConfig, mergeConfigs } = requireEsm(
+const { buildTailwindConfig } = requireEsm(
   '@bodiless/fclasses'
 );
-
-const resolver = (pkgName) => requireEsm(pkgName);
-
-const pkgJson = require('./package.json');
-
-const twConfig = {
-  purge: [
-    './src/**/!(*.d).{ts,js,jsx,tsx}',
-  ],
-  theme: {
-    extend: {},
-  },
-  variants: {},
-  plugins: [],
-};
 
 // Get configs sorted by precedence and/or exclude some packages:
 // const getTwConfig = () => getPackageTailwindConfig({
@@ -41,12 +27,8 @@ const twConfig = {
 //   exclude: ['@bodiless/organisms', '@bodiless/accordion'],
 // });
 
-const getTwConfig = () => getPackageTailwindConfig({
-  pkgJson,
-  twConfig,
-  resolver,
+module.exports = buildTailwindConfig({
+  pkgJson: require('./package.json'),
+  resolver: pkg => requireEsm(pkg),
   prefer: ['@sites/__cxstarter__', '@bodiless/__cxstarter__'],
 });
-
-const mergedConfigs = mergeConfigs({}, getTwConfig());
-module.exports = mergedConfigs;

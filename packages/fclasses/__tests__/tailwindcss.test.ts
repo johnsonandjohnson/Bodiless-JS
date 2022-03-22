@@ -48,7 +48,7 @@ describe('tailwindcss', () => {
           'site',
         ],
       };
-      expect(mergeConfigs(site, [packageA, packageB])).toMatchObject(expected);
+      expect(mergeConfigs([packageA, packageB])).toMatchObject(expected);
     });
     it('merges plugins settings', () => {
       const packageA = {
@@ -81,7 +81,7 @@ describe('tailwindcss', () => {
           'site',
         ],
       };
-      expect(mergeConfigs(site, [packageA, packageB])).toMatchObject(expected);
+      expect(mergeConfigs([packageA, packageB])).toMatchObject(expected);
     });
     it('merges theme settings', () => {
       const packageA = {
@@ -112,7 +112,7 @@ describe('tailwindcss', () => {
           site: 3,
         },
       };
-      expect(mergeConfigs(site, [packageA, packageB])).toMatchObject(expected);
+      expect(mergeConfigs([packageA, packageB])).toMatchObject(expected);
     });
   });
 });

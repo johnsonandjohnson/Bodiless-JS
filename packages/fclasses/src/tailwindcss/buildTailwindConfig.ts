@@ -1,5 +1,6 @@
+/* eslint-disable import/no-dynamic-require, global-require */
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2022 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,8 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { mergeConfigs } from './mergeConfigs';
+import { getPackageTailwindConfig } from './getPackageTailwindConfig';
 
-export * from './getPackageRoot';
-export * from './mergeConfigs';
-export * from './getPackageTailwindConfig';
-export * from './buildTailwindConfig';
+import type { GetTwConfigProps } from './getPackageTailwindConfig';
+
+export const buildTailwindConfig = (
+  props: GetTwConfigProps
+) => mergeConfigs(getPackageTailwindConfig(props));

@@ -42,29 +42,25 @@ const getTailwindConfigs = (packages: Package[]) => packages
   .filter(Boolean);
 
 const mergeConfigs = (
-  siteConfig: TailwindConfig,
   packages: Package[],
 ) => {
   const packageConfigs = getTailwindConfigs(packages);
   return {
-    ...siteConfig,
     // purge setting
     purge: [
       './src/**/!(*.d).{ts,js,jsx,tsx}',
       ...flatten(merge(packageConfigs).map((config: TailwindConfig) => config.purge)),
-      ...(siteConfig.purge ? siteConfig.purge : []),
     ],
     // theme setting
     // dummy first argument because of https://github.com/microsoft/TypeScript/issues/28010#issuecomment-713484584
-    theme: merge({}, ...packageConfigs, siteConfig).theme,
+    theme: merge({}, ...packageConfigs).theme,
     // variants setting
-    variants: merge({}, ...packageConfigs, siteConfig).variants,
+    variants: merge({}, ...packageConfigs).variants,
     // plugins setting
     plugins: [
       ...flatten(
         merge(packageConfigs).map((config: TailwindConfig) => config.plugins),
       ).filter(Boolean),
-      ...(siteConfig.plugins ? siteConfig.plugins : []),
     ],
   };
 };
