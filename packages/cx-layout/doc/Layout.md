@@ -1,14 +1,14 @@
 # CanvasX Layout Component
 
-The Layout Component creates the basic structure that provides a `Outercontainer` wrapper around
+The Layout Component creates the basic structure that provides an `OuterContainer` wrapper around
 the following elements:
 
 - `SkipToMainContent`: Skip to main content accessibility link
 - `Helmet`: Document head component contains meta components like SEO, GTM, Social Share, etc.
 - `SiteHeader`
-- `Container` wrapper
+- `Container`
   - `PageTopper`
-  - The actual page content — {children}
+  - `{children}`: The actual page content
   - `PageCloser`
 - `SiteFooter`
 
@@ -54,9 +54,9 @@ File to shadow:
 
 ### Skip To Main Content Customization
 
-- If you wish to override the language of the link, set the children text via `AppProps()`.
+- If you wish to override the language of the link, set the children text via `addProps()`.
 - If you wish to change where the Skip to Main Content link is, set a new anchor on the appropriate
-  slot, and change the href via `AppProps()`.
+  slot, and change the href via `addProps()`.
 
 ## Architectural Details
 
