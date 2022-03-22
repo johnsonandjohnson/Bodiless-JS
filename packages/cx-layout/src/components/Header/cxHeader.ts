@@ -12,35 +12,26 @@
  * limitations under the License.
  */
 
-import { withNodeKey } from '@bodiless/core';
+import {
+  withNode,
+  withNodeKey,
+} from '@bodiless/core';
 import { cxColor } from '@bodiless/cx-elements';
 import {
-  A, addClasses, flowHoc, flowIf, replaceWith, Span,
-  Ul, withDesign, withProps
-} from '@bodiless/fclasses';
+  cxMenu,
+  cxMenuToggler,
+  // cxUtilityMenu,
+} from '@bodiless/cx-navigation';
 import {
-  asBodilessLink, asBodilessList, asEditable, useListContext
-} from '@bodiless/components';
+  Span,
+  flowHoc,
+  replaceWith,
+  withDesign,
+  withProps,
+} from '@bodiless/fclasses';
 import { asHeaderToken } from './HeaderClean';
 import { cxLogo } from '../Logo';
-import { cxMenuToggler } from '../MenuToggler';
 import { cxDesktopSearch, cxSearchToggler } from '../Search';
-
-// @todo replace UtilityMenu placeholder tokens
-const UtilityMenuContainerPlaceholder = addClasses('flex')(Ul);
-const UtilityMenuItemPlaceholder = flowHoc(
-  asBodilessLink(),
-  addClasses('px-4 border-l-2 border-gray-400'),
-  // I'm sure there's a better way to get the first
-  // list item, but this is just a placeholder, so...
-  // Also, whoever's gonna implement this later: it's
-  // probably better to use Tailwind's `first:`, but
-  // you'll need to activate it in the config first.
-  flowIf(() => {
-    const { currentItem, items } = useListContext();
-    return Boolean(items && currentItem === items[0]);
-  })(addClasses('px-0')),
-)(A);
 
 /**
  * Token that defines a basic header.
@@ -50,24 +41,9 @@ const Base = asHeaderToken({
     MenuToggler: cxMenuToggler.Default,
     SearchToggler: cxSearchToggler.Default,
     Logo: cxLogo.Default,
+    Menu: cxMenu.TopNav,
     DesktopSearch: cxDesktopSearch.Default,
-    // @todo replace UtilityMenu placeholder
-    UtilityMenu: replaceWith(flowHoc(
-      asBodilessList(),
-      withDesign({
-        Title: flowHoc(
-          replaceWith(UtilityMenuItemPlaceholder),
-          asEditable('text', 'Menu Item')
-        )
-      })
-    )(UtilityMenuContainerPlaceholder)),
-    // @todo replace Menu placeholder
-    Menu: flowHoc(
-      replaceWith(Span),
-      withProps({
-        children: 'Main menu',
-      })
-    ),
+    UtilityMenu: cxMenu.Utility,
     // @todo replace LanguageButton placeholder
     LanguageButton: flowHoc(
       replaceWith(Span),
@@ -82,7 +58,9 @@ const Base = asHeaderToken({
   },
   Schema: {
     Logo: withNodeKey({ nodeKey: 'Logo' }),
+    Menu: withNodeKey({ nodeKey: 'MainMenu', nodeCollection: 'site' }),
     UtilityMenu: withNodeKey({ nodeKey: 'UtilityMenu', nodeCollection: 'site' }),
+    _: withNode,
   },
   Layout: {
     Container: 'flex justify-between items-center',

@@ -15,8 +15,12 @@
 import React, { FC } from 'react';
 import { Div, Fragment, designable } from '@bodiless/fclasses';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
+import {
+  MenuClean,
+  MenuTogglerClean,
+  // UtilityMenuClean,
+} from '@bodiless/cx-navigation';
 import { LogoClean } from '../Logo';
-import { MenuTogglerClean } from '../MenuToggler';
 import { SearchTogglerClean, DesktopSearchClean } from '../Search';
 import { HeaderComponents, HeaderProps } from './types';
 
@@ -24,27 +28,36 @@ const headerComponents: HeaderComponents = {
   Wrapper: Div,
   Container: Div,
   MenuContainer: Div,
+  MenuTogglerWrapper: Fragment,
   MenuToggler: MenuTogglerClean,
-  Menu: Fragment,
+  MenuWrapper: Fragment,
+  Menu: MenuClean,
   Logo: LogoClean,
   ActionMenuContainer: Div,
-  UtilityMenu: Fragment,
+  UtilityMenuWrapper: Fragment,
+  UtilityMenu: MenuClean,
   DesktopSearch: DesktopSearchClean,
   SearchToggler: SearchTogglerClean,
   LanguageButton: Fragment,
 };
 
-const HeaderCleanBase: FC<HeaderProps> = ({ components: C }) => (
-  <C.Wrapper>
+const HeaderCleanBase: FC<HeaderProps> = ({ components: C, ...rest }) => (
+  <C.Wrapper {...rest}>
     <C.Container>
-      <C.MenuToggler />
+      <C.MenuTogglerWrapper>
+        <C.MenuToggler />
+      </C.MenuTogglerWrapper>
       <C.Logo />
       <C.SearchToggler />
       <C.MenuContainer>
-        <C.Menu />
+        <C.MenuWrapper>
+          <C.Menu />
+        </C.MenuWrapper>
         <C.ActionMenuContainer>
           <C.DesktopSearch />
-          <C.UtilityMenu />
+          <C.UtilityMenuWrapper>
+            <C.UtilityMenu />
+          </C.UtilityMenuWrapper>
           <C.LanguageButton />
         </C.ActionMenuContainer>
       </C.MenuContainer>

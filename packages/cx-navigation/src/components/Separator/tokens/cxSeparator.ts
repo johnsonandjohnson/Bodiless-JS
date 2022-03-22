@@ -40,6 +40,19 @@ const FooterMenu = asElementToken({
   },
 });
 
+const UtilityMenu = asElementToken({
+  Meta: {
+    title: 'UtilityMenuSeparator',
+    categories: {
+      Type: ['Element'],
+    },
+  },
+  Theme: {
+    _: 'px-4 border-l-2 border-gray-400',
+  },
+});
+
 export default {
   FooterMenu,
+  UtilityMenu,
 };

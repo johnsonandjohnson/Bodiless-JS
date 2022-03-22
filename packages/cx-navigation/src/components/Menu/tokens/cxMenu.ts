@@ -1,5 +1,7 @@
 import {
-  as, addProps, on,
+  addProps,
+  as,
+  on,
 } from '@bodiless/fclasses';
 import {
   withMenuDesign,
@@ -20,6 +22,7 @@ const Base = asMenuToken({
   // Analytics: {
   //   _: withMenuTitleAnalytics,
   // }
+  // @TODO: Why A11y domain is not working properly?
   A11y: {
     Nav: addProps({ role: 'navigation' }),
     Wrapper: addProps({ role: 'menubar' }),
@@ -30,10 +33,15 @@ const Base = asMenuToken({
   },
 });
 
+const Default = asMenuToken({
+  ...Base,
+});
+
 /**
  * Token which produces the CanvasX Footer Menu.
  */
-const Footer = asMenuToken(Base, {
+const Footer = asMenuToken({
+  ...Base,
   Core: {
     _: withListSubMenu(),
   },
@@ -42,6 +50,7 @@ const Footer = asMenuToken(Base, {
     Wrapper: addProps({ 'aria-label': 'Navigation Menu' }),
   },
   Components: {
+    ...Base.Components,
     _: withMenuDesign('List')(as(cxSubMenu.Footer)),
   },
   Layout: {
@@ -65,7 +74,46 @@ const Footer = asMenuToken(Base, {
   },
 });
 
+/**
+ * Token which produces the CanvasX Top Navigation Menu.
+ */
+const TopNav = asMenuToken({
+  ...Base,
+  Core: {
+    _: withListSubMenu(),
+  },
+  Components: {
+    ...Base.Components,
+    _: withMenuDesign('List')(as(cxSubMenu.TopNavList)),
+  },
+  // @TODO: Improve theme, layout, and spacing.
+  Theme: {
+    Wrapper: 'flex',
+    Title: 'px-6',
+  },
+});
+
+/**
+ * Token which produces the CanvasX Utility Menu.
+ */
+const Utility = asMenuToken({
+  ...Base,
+  A11y: {
+    Nav: addProps({ role: 'tablist' }),
+  },
+  A11yContent: {
+    Nav: addProps({ 'aria-label': 'Utility Menu' }),
+  },
+  Theme: {
+    Wrapper: 'flex',
+    Title: as(cxSeparator.UtilityMenu),
+  },
+});
+
 export default {
   Base,
+  Default,
   Footer,
+  TopNav,
+  Utility,
 };

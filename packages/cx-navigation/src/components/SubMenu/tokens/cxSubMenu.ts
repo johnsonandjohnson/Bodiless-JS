@@ -1,5 +1,18 @@
-import { addProps, as, on } from '@bodiless/fclasses';
+import {
+  // addClassesIf,
+  addProps,
+  as,
+  flowHoc,
+  // not,
+  on,
+  removeClassesIf,
+} from '@bodiless/fclasses';
 import { cxColor, cxTextDecoration } from '@bodiless/cx-elements';
+import {
+  // isMenuContextActive,
+  // useIsMenuOpen,
+  useIsSubmenuExpanded,
+} from '@bodiless/navigation';
 import { asSubMenuToken } from '../SubMenuClean';
 import { cxMenuTitle, MenuTitleClean } from '../../MenuTitle';
 import { withAnalyticsAttr } from '../../../util';
@@ -33,7 +46,32 @@ const Footer = asSubMenuToken(Base, {
   },
 });
 
+// @TODO: Keep it opened as user is editing it.
+const TopNavList = asSubMenuToken({
+  ...Base,
+  // @TODO: Improve theme, layout, and spacing.
+  Layout: {
+    Wrapper: flowHoc(
+      as('absolute w-40 left-0 top-full hidden group-hover:flex flex-col'),
+      removeClassesIf(useIsSubmenuExpanded)('hidden'),
+    ),
+    Item: 'relative flex',
+    _: flowHoc(
+      as('relative group'),
+      // addClassesIf(not(useIsMenuOpen))('hover:static'),
+      // removeClassesIf(isMenuContextActive)('relative'),
+    ),
+  },
+  Spacing: {
+    Item: 'px-6 py-2',
+  },
+  Theme: {
+    Wrapper: as(cxColor.BgPrimaryCard),
+  },
+});
+
 export default {
   Base,
   Footer,
+  TopNavList,
 };

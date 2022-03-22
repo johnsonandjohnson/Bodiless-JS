@@ -23,20 +23,17 @@ const menuTogglerComponents: MenuTogglerComponents = {
   Icon: Span,
 };
 
-const MenuTogglerBase: FC<MenuTogglerProps> = ({ components: C }) => (
-  <C.Wrapper>
+const MenuTogglerBase: FC<MenuTogglerProps> = ({ components: C, ...rest }) => (
+  <C.Wrapper {...rest}>
     <C.Icon />
   </C.Wrapper>
 );
 
 /**
- * Create a menu toggler token.
+ * Creates a menu toggler token.
  */
-const asMenuTogglerToken = asCxTokenSpec<MenuTogglerComponents>();
+export const asMenuTogglerToken = asCxTokenSpec<MenuTogglerComponents>();
 
 const MenuTogglerClean = designable(menuTogglerComponents, 'MenuToggler')(MenuTogglerBase);
 
-export {
-  MenuTogglerClean,
-  asMenuTogglerToken
-};
+export default MenuTogglerClean;

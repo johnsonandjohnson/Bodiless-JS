@@ -11,6 +11,8 @@ module.exports = {
   variants: {
     borderWidth: ['first', 'last', 'responsive'],
     margin: ['first', 'last', 'responsive'],
+    overflow: ['focus', 'hover', 'responsive'],
+    position: ['focus', 'hover', 'responsive'],
     padding: ['first', 'last', 'responsive'],
   },
 };

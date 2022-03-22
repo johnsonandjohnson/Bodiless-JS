@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-export * from './MenuTogglerClean';
-export * from './cxMenuToggler';
-export * from './types';
+export { default as MenuTogglerClean, asMenuTogglerToken } from './MenuTogglerClean';
+export { default as cxMenuToggler } from './tokens';
+export type { MenuTogglerComponents, MenuTogglerProps } from './types';

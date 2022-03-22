@@ -12,7 +12,27 @@
  * limitations under the License.
  */
 
-export { MenuClean, asMenuToken, cxMenu } from './components/Menu';
-export { MenuTitleClean, asMenuTitleToken, cxMenuTitle } from './components/MenuTitle';
-export { MenuTogglerClean, asMenuTogglerToken, cxMenuToggler } from './components/MenuToggler';
-export { asSubMenuToken, cxSubMenu } from './components/SubMenu';
+import { replaceWith } from '@bodiless/fclasses';
+import BurgerIcon from '../assets/BurgerIcon';
+import { asMenuTogglerToken } from '../MenuTogglerClean';
+
+/**
+ * Token that defines a basic header.
+ */
+const Base = asMenuTogglerToken({
+  Components: {
+    Icon: replaceWith(BurgerIcon)
+  },
+  Layout: {
+    Wrapper: 'lg:hidden m-4'
+  }
+});
+
+const Default = asMenuTogglerToken({
+  ...Base,
+});
+
+export default {
+  Base,
+  Default,
+};
