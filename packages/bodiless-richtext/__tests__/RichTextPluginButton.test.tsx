@@ -26,7 +26,7 @@ import {
   asBlock,
   asInline,
   withButton,
-} from '../src/RichTextItemSetters';
+} from '../src/RichTextItemSetters.bl-edit';
 
 const setupPageEditContext = (isEdit: boolean): PageEditContext => {
   const pageEditContext = new PageEditContext();
@@ -49,7 +49,7 @@ const applyTestHoc: HOC = Component => props => <Component {...props as any} />;
 const createBlockButtonMock = () => {
   const createBlockButtonMockFn = jest.fn()
     .mockReturnValue(() => <></>);
-  jest.doMock('../src/plugin-factory/block/createBlockButton', () => ({
+  jest.doMock('../src/plugin-factory/block/createBlockButton.bl-edit', () => ({
     __esModule: true,
     default: createBlockButtonMockFn,
   }));
@@ -59,7 +59,7 @@ const createBlockButtonMock = () => {
 const createInlineButtonMock = () => {
   const createInlineButtonMockFn = jest.fn()
     .mockReturnValue(() => <></>);
-  jest.doMock('../src/plugin-factory/inline/createInlineButton', () => ({
+  jest.doMock('../src/plugin-factory/inline/createInlineButton.bl-edit', () => ({
     __esModule: true,
     default: createInlineButtonMockFn,
   }));
@@ -69,7 +69,7 @@ const createInlineButtonMock = () => {
 const createMarkButtonMock = () => {
   const createMarkButtonFn = jest.fn()
     .mockReturnValue(() => <></>);
-  jest.doMock('../src/plugin-factory/mark/createMarkButton', () => ({
+  jest.doMock('../src/plugin-factory/mark/createMarkButton.bl-edit', () => ({
     __esModule: true,
     default: createMarkButtonFn,
   }));

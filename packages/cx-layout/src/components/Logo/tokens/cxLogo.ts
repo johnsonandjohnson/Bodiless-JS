@@ -13,9 +13,6 @@
  */
 
 import {
-  as, startWith,
-} from '@bodiless/fclasses';
-import {
   cxImage
 } from '@bodiless/cx-image';
 import {
@@ -24,19 +21,18 @@ import {
   withSidecarNodes,
 } from '@bodiless/core';
 import { asBodilessLink } from '@bodiless/components-ui';
-import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import { asLogoToken } from '../LogoClean';
 
-const Base = asLogoToken({
+const Default = asLogoToken({
   Spacing: {
     Wrapper: 'w-full max-w-48 lg:max-w-56',
     Image: 'max-h-full',
   },
   Components: {
-    Image: as(
-      cxImage.Default,
-      cxImage.WithEager,
-    ),
+    Image: cxImage.Default,
+  },
+  Behavior: {
+    Image: cxImage.WithEager,
   },
   Schema: {
     Image: withNodeKey({ nodeKey: 'SiteLogo', nodeCollection: 'site' }),
@@ -49,21 +45,6 @@ const Base = asLogoToken({
   },
 });
 
-const WithGatsbyLink = asLogoToken({
-  Components: {
-    Link: startWith(GatsbyLink)
-  }
-});
-
-const Default = asLogoToken({
-  ...Base,
-  Compose: {
-    WithGatsbyLink,
-  }
-});
-
 export default {
-  Base,
   Default,
-  WithGatsbyLink,
 };

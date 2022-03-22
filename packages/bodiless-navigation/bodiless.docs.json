@@ -1,3 +1,11 @@
 {
-  "_dir": "./doc"
+  "Components": {
+    "Navigation": {
+      "README.md": "./doc/README.md",
+      "Breadcrumbs.md": "./doc/Breadcrumbs.md",
+      "BurgerMenu.md": "./doc/BurgerMenu.md",
+      "Menu.md": "./doc/Menu.md",
+      "Upgrade.md": "./doc/Upgrade.md"
+    }
+  }
 }

@@ -23,7 +23,7 @@ site).
 To add a Social Wall Component to your page:
 
 01. While in [Edit Mode](/ContentEditorUserGuide/#edit-mode), select a [Flow
-    Container](/Components/FlowContainer), and, within its context menu, under "Component," click
+    Container](/Components/FlowContainer/), and, within its context menu, under "Component," click
     **Add** (or **Swap**, if you're replacing a component).
 01. In the "Insert Component" modal, under "Type," check the "Curator" checkbox, and select the
     **Curator** Component.

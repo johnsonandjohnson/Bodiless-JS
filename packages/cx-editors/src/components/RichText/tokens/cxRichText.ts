@@ -41,7 +41,9 @@ import {
   DefaultNormalHref,
 } from '@bodiless/components';
 import { ifComponentSelector } from '@bodiless/layouts';
-import { asCxTokenSpec, cxElement } from '@bodiless/cx-elements';
+import {
+  asCxTokenSpec, cxTextDecorationStatic, cxTypographyStatic,
+} from '@bodiless/cx-elements';
 import { LinkClean, cxLink } from '@bodiless/cx-link';
 
 const withLinkDeserializer = withHtmlDeserializer(
@@ -61,7 +63,6 @@ const AsFlowContainerItem = asCxTokenSpec()({
   Meta: flowHoc.meta.term('Type')('Text Editor'),
 });
 
-// QUESTION -- I had to bring in the definitions to get right order as () didn't work.
 const Default = asCxTokenSpec()({
   Core: {
     paragraph: as(replaceWith(P), asBlock as HOC),
@@ -85,15 +86,15 @@ const Default = asCxTokenSpec()({
     _: addProps({ placeholder: 'Placeholder' }),
   },
   Components: {
-    paragraph: cxElement.Body,
-    Bold: cxElement.Bold,
-    Underline: cxElement.Underline,
-    SuperScript: cxElement.Superscript,
-    H1: cxElement.H1,
-    H2: cxElement.H2,
-    H3: cxElement.H3,
-    H4: cxElement.H4,
-    H5: cxElement.H5,
+    paragraph: cxTypographyStatic.Body,
+    Bold: cxTextDecorationStatic.Bold,
+    Underline: cxTextDecorationStatic.Underline,
+    SuperScript: cxTextDecorationStatic.Superscript,
+    H1: cxTypographyStatic.H1,
+    H2: cxTypographyStatic.H2,
+    H3: cxTypographyStatic.H3,
+    H4: cxTypographyStatic.H4,
+    H5: cxTypographyStatic.H5,
     Link: cxLink.Default,
   },
   Behavior: {

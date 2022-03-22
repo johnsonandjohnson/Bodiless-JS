@@ -11,7 +11,7 @@ or not.
 To add an Image Component to your page:
 
 01. While in [Edit Mode](/ContentEditorUserGuide/#edit-mode), select a [Flow
-    Container](../../../Components/FlowContainer), and, within its context menu, under "Component,"
+    Container](../../../Components/FlowContainer/), and, within its context menu, under "Component,"
     click **Add** (or **Swap**, if you're replacing a component).
 01. In the "Insert Component" modal, under "Type," check the "Image" checkbox, and select the type
     of image you would like to add.
@@ -49,7 +49,7 @@ To select an image for and configure an Image Component:
         image is hovered over.
 01. Click the checkmark in the bottom-right of the form to apply your configuration.
 01. If this is a _Linkable_ Image Component, within its context menu, under "Image," click **Edit**
-    to [add a link](../../../Components/Link#add-a-link-to-a-component).
+    to [add a link](../../../Components/Link/#add-a-link-to-a-component).
 01. You can resize the image by clicking and dragging on the the right-hand side of its Flow
     Container.
 

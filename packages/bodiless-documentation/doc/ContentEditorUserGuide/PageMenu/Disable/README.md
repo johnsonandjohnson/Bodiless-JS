@@ -75,8 +75,9 @@ and will display "Link Disabled" on hover.
 ## Disable Non-Menu Links
 
 Select the "Non-menu links" checkbox to disable all links leading to the current page that appear in
-components utilizing the BodilessJS [Link Component](/Components/Link) (e.g., links created using
-the [Rich Text Editor Component](/Components/RichText) or [Card Component](/Components/Card)).
+components utilizing the BodilessJS [Link Component](/Components/Link/) (e.g., links created using
+the [Rich Text Editor Component](/Components/Editors/RichText) or [Card
+Component](/Components/Card)).
 
 When disabled, any links targeting the current page — that aren't in menus — will not be rendered in
 Preview (Static) or Review Mode (i.e., for each of the affected links, the anchor element will not

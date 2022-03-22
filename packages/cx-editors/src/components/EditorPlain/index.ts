@@ -12,7 +12,4 @@
  * limitations under the License.
  */
 
-import { Editable } from '@bodiless/components';
-
-export { cxEditorPlain, cxEditorPlainStatic } from './tokens';
-export { Editable as EditorPlainClean };
+export * from './index.bl-edit';

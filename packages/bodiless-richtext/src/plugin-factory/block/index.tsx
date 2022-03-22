@@ -12,13 +12,13 @@
  * limitations under the License.
  */
 
-import createBlockButton from './createBlockButton';
+import createBlockButton from './createBlockButton.bl-edit';
 import {
   hasBlock,
   insertBlock,
   toggleBlock,
   createToggleBlock,
-} from './blockUtils';
+} from './blockUtils.bl-edit';
 
 export {
   createBlockButton,

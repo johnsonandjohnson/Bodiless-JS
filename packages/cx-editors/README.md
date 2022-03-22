@@ -1,1 +1,3 @@
-See [RichText Docs](./doc/RichText.md)
+# `@bodiless/cx-editors`
+
+See [CX Editors Docs](./doc/CX_Editors.md).

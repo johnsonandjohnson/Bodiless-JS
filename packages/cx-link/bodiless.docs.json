@@ -1,7 +1,7 @@
 {
   "Components": {
     "Link": {
-      "README.md": "./doc/Link.md"
+      "CX_Link.md": "./doc/Link.md"
     }
   }
 }

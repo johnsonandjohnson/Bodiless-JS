@@ -21,6 +21,7 @@ import type {
 } from 'slate-react/dist/components/editable';
 import type { DesignableComponents, DesignableProps } from '@bodiless/fclasses';
 import { WithNodeProps } from '@bodiless/core';
+import { WithoutHydrationProps } from '@bodiless/hydration';
 import type { UI } from './RichTextContext';
 import type { Deserializer } from './serializers';
 
@@ -96,7 +97,8 @@ export type RichTextBaseProps = {
 } & Omit<EditableProps, 'value' | 'onChange'>;
 
 export type RichTextProps =
-  Omit<Partial<RichTextBaseProps>, 'components'> & DesignableProps & WithNodeProps;
+  Omit<Partial<RichTextBaseProps>, 'components'>
+  & DesignableProps & WithNodeProps & WithoutHydrationProps;
 
 export type Plugin = {
   type: string,

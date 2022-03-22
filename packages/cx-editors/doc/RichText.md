@@ -1,94 +1,120 @@
 # CanvasX Rich Text Editor Component
 
-The CanvasX Rich Text Editor extend the [Bodiless Rich Text](../../bodiless/Components/RichText) and provides default
-editors to be used on site.  By default there are three options for the Rich Text Editor: Simple, Basic, and
-Full.
+The CanvasX Rich Text Editor Component is based on the [BodilessJS Rich Text Editor
+Component](/Components/Editors/RichText). While Bodiless Rich Text is a generic rich text editor
+(RTE) component with tokens that can be combined however you choose, CX Rich Text builds upon it,
+providing a sensible default combination of its generic [CanvasX tokens](../../CX_Elements/), to
+help meet typical site-use expectations.
+
+By default, the only option available for the CX Rich Text Editor is the _Full_ Rich Text Editor.
 
 ## Content Editor Details
 
-There is no change to editor experience by CanvasX Editor package and thus can refer to [Bodiless Rich Text: Content Editor](../../bodiless/Components/RichText?id=content-editor-details)
+Other than potentially seeing different buttons available, there is no change to the Editor
+experience by the CX Editor package, and, thus, you can refer to the [Bodiless Rich Text Editor :
+Content Editor Details](../RichText#content-editor-details).
 
 ## Site Builder Details
 
-At site or global regional/brand library, they can compose the tokens with your site specific tokens and editors.
+### Usage of the CX Rich Text Editor
 
-1. Create a `src/components/Editors/Editor.token.ts`  where you can assign your site/brand specific tokens to each.  (Import & Export as needed)
+What's shown in the following example can be applied to any Slot.
 
-    ```
-    const withQuoteBlockMeta = flow(
-      asBlock,
+```js
+import { cxRichText, RichTextClean } from '@bodiless/cx-editors';
+import { asCxTokenSpec } from '@bodiless/cx-elements';
+
+const WithRichTextEditor = asCxTokenSpec({
+  Editors: {
+    Content: as(cxRichText.Default)(RichTextClean);
+  },
+  Schema: {
+    Content: withNode('content'),
+  }
+});
+```
+
+We recommend that the Editor Component and tokens be defined in the Editors Domain, and the node be
+defined in the Schema Domain.
+
+### Overriding Rich Text Editor
+
+#### Via Shadowing (*Preferred Method)
+
+Provide the Shadowing function as defined in [Shadow](../../CX_Elements/CX_Shadow).
+
+File to shadow:
+[`cxRichText`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-editors/src/components/RichText/tokens/cxRichText.ts)
+
+#### Via Overriding Specific Existing Styles Using CanvasX Rich Text Editor
+
+See [CanvasX Site Typography](../../CX_Elements/CX_SiteTypography).
+
+### Extending Default CanvasX Rich Text Editor
+
+At site or global regional/brand library level, a site can compose a set of new tokens to meet the
+design requirements, and provide additional Rich Text functionality (typically, via buttons).
+
+01. Create a `src/components/Editors/RichText.tokens.ts` where you can create/use your site/brand
+    specific tokens for each. (`import` and `export` as needed.)
+
+    ```js
+    const withQuoteBlockMeta = flowHoc(
+      startWith(Span),
       withButton('format_quote'),
     );
 
-    const withSimpleDesign = withDesign({
-      SuperScript: asSuperScript,
+    const BrandRichText = asCxTokenSpec()({
+      ...cxRichText.Default,
+      Core: {
+        ...cxRichText.Default.Core,
+        Quote: withQuoteBlockMeta,
+      },
+      Components: {
+        ...cxRichText.Default.Components,
+        Quote: 'italic',
+      },
     });
-
-    const withBasicDesign = withDesign({
-      Bold: asBold,
-      Italic: asItalic,
-      Underline: asUnderline,
-      Link: asLink,
-      SuperScript: asSuperScript,
-      AlignLeft: asAlignLeft,
-      AlignRight: asAlignRight,
-      AlignJustify: asAlignJustify,
-      AlignCenter: asAlignCenter,
-    });
-
-    const withFullFeaturedDesign = withDesign({
-      Bold: asBold,
-      Italic: asItalic,
-      Underline: asUnderline,
-      StrikeThrough: flow(replaceWith(Strike), asStrikeThrough, withStrikeThroughMeta),
-      Link: asLink,
-      SuperScript: asSuperScript,
-      AlignLeft: asAlignLeft,
-      AlignRight: asAlignRight,
-      AlignJustify: asAlignJustify,
-      AlignCenter: asAlignCenter,
-      H1: asHeader1,
-      H2: asHeader2,
-      H3: asHeader3,
-      BlockQuote: flow(replaceWith(Blockquote), asBlockQuote, withQuoteBlockMeta),
-    });
-
-    export {
-      withSimpleDesign,
-      withBasicDesign,
-      withFullFeaturedDesign,
-    };
-    ```
-1. Create a `src/components/Editors/Editor.ts`  where you can compose your site/brand specific tokens to each editor:  (Import & Export as needed)
-
-    ```
-    const EditorSimple = flow(
-      withSimpleDesign,
-    )(EditorBasicClean);
-
-    const EditorBasic = flow(
-      withBasicDesign,
-    )(CanvasxEditorBasic);
-
-    const EditorFull = flow(
-      withFullFeaturedDesign,
-    )(EditorFull);
-
-    const withEditorSimple = withEditor(EditorSimple);
-    const withEditorBasic = withEditor(EditorBasic);
-    const withEditorFull = withEditor(EditorFull);
-    ```
-1. Create a `src/components/Editors/index.tsx`  where you can export all tokens and schemas from Editors.
-
-    ```
-    export * from './Editors';
-    export * from './Editors.token';
     ```
 
-### API
+    - `withQuoteBlockMeta` creates a token that will be a designable Span and adds a new quote
+      button to the editor.
+    - `BrandRichText` starts with the existing `cxRichText` functionality, and, in both
+      Core/Components, it spreads existing functionality across these two domains and the new tokens
+      are added.
+    - For an example of a simple token that adds functionality to Slate, expand the disclosure
+      below:
 
-Please see [Rich Text API](../../Development/API/@canvasx/editors/globals)
+      <details>
+        <summary>Click here for example...</summary>
+
+        ```js
+        const withQuoteBlockMeta = t(
+          asBlock,
+          withButton('format_quote'),
+        );
+
+        //...
+
+        const EditorWithBlockQuote = asTokenSpec()({
+          ...cxDefault,
+          Core: {
+            ...cxDefault.Core,
+            BlockQuote: t(replaceWith(BlockQuote), asBlockQuote, withQuoteBlockMeta),
+          }
+        });
+        ```
+
+      </details>
+
+01. Create a `src/components/Editors/index.tsx`  where you can export all tokens and schemas from
+    Editors.
+
+    ```js
+    export BrandRichText from './RichText.tokens';
+    ```
 
 ## Architectural Details
 
-None needed. For more information see [Bodiless Rich Text: Architectural](../../bodiless/Components/RichText?id=architectural-details)
+None needed. For architectural information, see [Bodiless Rich Text : Architectural
+Details](../RichText#architectural-details).

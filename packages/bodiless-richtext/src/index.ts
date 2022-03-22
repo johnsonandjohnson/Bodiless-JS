@@ -15,14 +15,14 @@
 export {
   default as RichText,
 } from './RichText';
-export { asPreview } from './RichTextPreview';
-export { default as asFloat } from './Float';
-export * from './RichTextItemGetters';
-export * from './RichTextItemSetters';
+export { asPreview } from './RichTextPreview.bl-edit';
+export { default as asFloat } from './Float.bl-edit';
+export * from './RichTextItemGetters.bl-edit';
+export * from './RichTextItemSetters.bl-edit';
 export * from './Type';
 export * from './plugin-factory';
 export * from './components';
 export * from './core';
-export * from './meta';
-export * from './RichTextPlain';
+export * from './meta/index.bl-edit';
+export * from './RichTextPlain.bl-edit';
 export * from './serializers';

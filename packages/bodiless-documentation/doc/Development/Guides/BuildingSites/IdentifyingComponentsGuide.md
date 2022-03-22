@@ -15,7 +15,7 @@ Let's use
 [Examples/Test Site homepage](https://johnsonandjohnson.github.io/Bodiless-JS/#/About/GettingStarted?id=launch-the-test-site)
 as an example. It consists of:
 
-* Header and within the header is a 
+* Header and within the header is a
   * Logo (Clickable Image)
   * Menu
 * Header Landscape Image

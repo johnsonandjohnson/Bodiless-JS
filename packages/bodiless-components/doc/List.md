@@ -25,7 +25,7 @@ To add a list to your site:
 3. With the List Component's Context Menu you can edit your list.
 ![](./assets/ListContext.jpg)
     * **Link**: The Link button allows you add Links to List Items. See [Link
-    Component](../../../Components/Link) for more information.
+    Component](../../../Components/Link/) for more information.
     * **List Item**:
       * **Add** button allows you to add more items to your list.
       * **Sub** button allows you to add sublist items. You can add up to 2

@@ -16,6 +16,7 @@ import React from 'react';
 import { RichText } from '@bodiless/richtext-ui';
 import { stylable } from '@bodiless/fclasses';
 import { useNode, NodeProvider } from '@bodiless/core';
+import { withoutHydration } from '@bodiless/hydration';
 
 /**
  * @private
@@ -54,4 +55,4 @@ const RichTextCleanBase = (props: any) => {
 /**
  * A clean rich text editor with no styling applied to
  */
-export const RichTextClean = stylable(RichTextCleanBase);
+export const RichTextClean = withoutHydration()(stylable(RichTextCleanBase));

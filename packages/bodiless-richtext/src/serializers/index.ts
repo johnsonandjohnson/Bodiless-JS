@@ -12,5 +12,5 @@
  * limitations under the License.
  */
 
-export * from './htmlSerializer';
-export * from './defaultDeserializers';
+export * from './htmlSerializer.bl-edit';
+export * from './defaultDeserializers.bl-edit';

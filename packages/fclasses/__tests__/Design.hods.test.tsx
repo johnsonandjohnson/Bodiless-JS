@@ -25,7 +25,7 @@ const testHOC = (text: string): HOC => ((Component: TestComponent) => {
   ReturnComponent.testText = (Component.testText || '') + text;
   return ReturnComponent;
 }) as HOC;
-const getTestText = (token: Token<any, any>) => {
+const getTestText = (token: Token) => {
   if (typeof token === 'undefined') return '';
   const Item1 = as(token)(Fragment) as TestComponent;
   return Item1.testText;

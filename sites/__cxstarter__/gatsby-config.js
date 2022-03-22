@@ -39,6 +39,28 @@ const plugins = [
           quality: 90,
         },
       },
+      // Static replacement options, see docs for more info.
+      static: {
+        // Pass false to disable static replacement. Defaults to true.
+        enabled: true,
+        // Static replacement works by searching for files ending in ".bl-edit" and replacing them
+        // with a file with the same name, but ending in ".static" instead. However, all files are
+        // skipped by default for compatibility reasons.
+        //
+        // You can pass a boolean to include or exclude all files easily. True means include all
+        // ".bl-edit" files, enabling static replacement on all packages. False disables static
+        // replacement, which is the same as passing `enabled: false` in the options object.
+        //
+        // You can also pass a RegExp which will be matched against the **absolute** path of every
+        // .bl-edit file being imported. If it matches and a sibling .static file is found, the file
+        // will be replaced. For instance, if you want to include all `cx-editors` and `cx-link`
+        // files, you may pass `/cx-editors|cx-link/` to this option.
+        //
+        // Defaults to false.
+        include: true,
+        // Pass false to disable logging all resolving operations. Defaults to true.
+        logging: true,
+      }
     },
   },
   // {
@@ -65,6 +87,16 @@ const plugins = [
     resolve: '@bodiless/__cxstarter__',
   }
 ];
+
+if (process.env.BODILESS_BUILD_STATS === '1') {
+  plugins.push({
+    resolve: 'gatsby-plugin-webpack-bundle-analyser-v2',
+    options: {
+      analyzerMode: 'static',
+      generateStatsFile: true,
+    }
+  });
+}
 
 const robotsTxtPolicy = [
   {

@@ -16,12 +16,12 @@ import mergeWith from 'lodash/mergeWith';
 import flow from 'lodash/flow';
 import { ComponentType } from 'react';
 import identity from 'lodash/identity';
-import { pick } from 'lodash';
+import pick from 'lodash/pick';
 import { startWith } from './replaceable';
 import type {
   TokenDef, // FlowHoc,
-  DesignableComponents, HocDesign, TokenSpec,
-  ReservedDomains, Design, Token, HOCBase, HOD, TokenSpecBase,
+  DesignableComponents, HocDesign,
+  ReservedDomains, Design, Token, HOCBase, HOD, AsTokenSpec, FinalDesign, TokenSpec,
 } from './types';
 import { $TokenSpec } from './types';
 import { flowHoc, extendMeta } from './flowHoc';
@@ -39,8 +39,8 @@ import { withHocDesign } from './withHocDesign';
      * @param domain
      */
 function getHocForDomain<C extends DesignableComponents, D extends object = any>(
-  domainName: keyof TokenSpec<C, D>,
-  domain?: Design<C> | ReservedDomains<C, D>[keyof ReservedDomains<C, D>]
+  domainName: string,
+  domain?: FinalDesign<C> | ReservedDomains<C, any>['Meta'] | ReservedDomains<C, any>['Flow'] | ReservedDomains<C, any>['Compose']
 ): TokenDef | undefined {
   if (!domain) return undefined;
   if (domainName === 'Flow') return undefined;
@@ -63,8 +63,8 @@ function getHocForDomain<C extends DesignableComponents, D extends object = any>
      * @returns
      * An HOC which can be applied to a component.
      */
-function as<D extends object = any>(
-  ...args$: Token<any, D>[]
+function as(
+  ...args$: Token[]
 
 ): HOCBase<any, any, any> {
   const args = args$.filter(Boolean);
@@ -90,8 +90,8 @@ function as<D extends object = any>(
     const keys = Object.getOwnPropertyNames(arg);
     specTokens.push(...keys
       .map(domainName => getHocForDomain(
-        domainName as keyof TokenSpec<any, D>,
-        arg[domainName as keyof TokenSpec<any, D>]
+        domainName,
+        arg[domainName as keyof Omit<typeof arg, typeof $TokenSpec>],
       )));
 
     if (arg.Flow) {
@@ -256,7 +256,7 @@ const extendDesignWith = (
 const on = (
   CleanComponent: ComponentType<any>
 ) => <C extends DesignableComponents, D extends object = any>(
-  ...specs: Token<C, D>[]
+  ...specs: Token[]
 ) => as(
     startWith(CleanComponent),
     ...specs
@@ -275,9 +275,10 @@ const on = (
  *
  * @see https://stackoverflow.com/questions/54598322/how-to-make-typescript-infer-the-keys-of-an-object-but-define-type-of-its-value
  */
-const asTokenSpec = <C extends DesignableComponents, D extends object>(
-  d?: D,
-) => (...specs: TokenSpecBase<C, D>[]): TokenSpec<C, D> => {
+const asTokenSpec = <
+  C extends DesignableComponents,
+  D extends object,
+>(d?: D): AsTokenSpec<C, D> => (...specs) => {
     const [spec0, ...restSpecs] = specs;
     const mergedSpec = { ...spec0 };
     mergeWith(
@@ -290,7 +291,7 @@ const asTokenSpec = <C extends DesignableComponents, D extends object>(
     // Add an identifying key to ensure that tokens passed through `as`
     // have been defined with `asTokenSpec`, thus guaranteeing proper order
     // of domain keys.
-    return { ...orderedSpec, [$TokenSpec]: true };
+    return { ...orderedSpec, [$TokenSpec]: true } as any;
   };
 
 export {
@@ -308,6 +309,6 @@ export {
  * @param a
  * The Token to test.
  */
-export const isTokenSpec = (a: Token<any, any>): a is TokenSpec<any, any> => (
+export const isTokenSpec = (a: Token): a is TokenSpec<any, any, any> => (
   typeof a !== 'function' && typeof a !== 'string'
 );

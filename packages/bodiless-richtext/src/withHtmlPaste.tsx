@@ -13,7 +13,7 @@
  */
 
 import { Editor, Transforms } from 'slate';
-import { getDeserializers } from './RichTextItemGetters';
+import { getDeserializers } from './RichTextItemGetters.bl-edit';
 import type { RichTextComponents } from './Type';
 import { deserializeHtml } from './serializers';
 

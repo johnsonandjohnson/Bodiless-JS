@@ -16,7 +16,7 @@ import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { shallow, mount } from 'enzyme';
 import { PageEditContext } from '@bodiless/core';
-import HoverMenu, { HoverMenuProps } from '../src/core/HoverMenu';
+import HoverMenu, { HoverMenuProps } from '../src/core/HoverMenu.bl-edit';
 
 jest.mock('slate-react', () => ({
   useSlate: () => ({

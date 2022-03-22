@@ -22,6 +22,7 @@ const pathUtil = require('path');
 const fs = require('fs');
 const { getDisabledPages } = require('@bodiless/components/node-api');
 const { createFilePath } = require('gatsby-source-filesystem');
+const { addStaticReplacementPlugin } = require('@bodiless/webpack');
 const { onCreateNode, createSlug, createGitInfo } = require('./create-node');
 const createRedirectAlias = require('./create-redirect-alias');
 const Logger = require('./Logger');
@@ -246,9 +247,9 @@ exports.createPages = async ({ actions, graphql, getNode }) => {
 };
 
 // customize webpack config in order to exclude certain assets from static build
-exports.onCreateWebpackConfig = (
-  { stage, actions, plugins },
-) => {
+exports.onCreateWebpackConfig = ({
+  stage, actions, plugins
+}, pluginOptions) => {
   if (stage === 'build-javascript') {
     actions.setWebpackConfig({
       resolve: {
@@ -257,6 +258,11 @@ exports.onCreateWebpackConfig = (
         },
       },
     });
+
+    // Add support for static builds where files ending in '.bl-edit'
+    // are replaced for a static counterpart file ending in '.static'.
+    // See @bodiless/webpack docs for more info.
+    actions.setWebpackConfig(addStaticReplacementPlugin({}, pluginOptions?.static));
   }
   if (stage === 'build-javascript' || stage === 'develop') {
     actions.setWebpackConfig({
