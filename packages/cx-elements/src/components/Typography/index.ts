@@ -13,4 +13,4 @@
  */
 
 export { default as cxTypography } from './tokens';
-export { default as cxTypographyStatic } from './tokens';
+export { default as cxTypographyBase } from './tokens/cxTypography';

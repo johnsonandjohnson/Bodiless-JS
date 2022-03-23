@@ -21,10 +21,10 @@ import {
 import {
   asBodilessLink, asBodilessList, asEditable, useListContext
 } from '@bodiless/components';
-import { asHeaderToken } from './HeaderClean';
-import { cxLogo } from '../Logo';
-import { cxMenuToggler } from '../MenuToggler';
-import { cxDesktopSearch, cxSearchToggler } from '../Search';
+import { asHeaderToken } from '../HeaderClean';
+import { cxLogo } from '../../Logo';
+import { cxMenuToggler } from '../../MenuToggler';
+import { cxDesktopSearch, cxSearchToggler } from '../../Search';
 
 // @todo replace UtilityMenu placeholder tokens
 const UtilityMenuContainerPlaceholder = addClasses('flex')(Ul);
@@ -101,7 +101,9 @@ const Default = asHeaderToken({
   ...Base,
 });
 
-export const cxHeader = {
+const cxHeader = {
   Base,
   Default,
 };
+
+export default cxHeader;

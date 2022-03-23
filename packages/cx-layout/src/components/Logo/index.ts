@@ -12,5 +12,6 @@
  * limitations under the License.
  */
 
-export * from './LogoClean';
-export { cxLogo, cxLogoStatic } from './tokens';
+export { default as LogoClean, asLogoToken } from './LogoClean';
+export { default as cxLogo } from './tokens';
+export { default as cxLogoBase } from './tokens/cxLogo';

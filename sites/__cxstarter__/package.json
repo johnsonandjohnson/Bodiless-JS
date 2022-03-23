@@ -25,6 +25,7 @@
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-beta.1",
     "@bodiless/search": "^1.0.0-beta.1",
     "@bodiless/ui": "^1.0.0-beta.1",
+    "@bodiless/webpack": "^1.0.0-beta.1",
     "autoprefixer": "^10.0.0",
     "docsify-cli": "^4.3.0",
     "dotenv": "^8.2.0",

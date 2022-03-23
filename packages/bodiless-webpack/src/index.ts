@@ -12,5 +12,5 @@
  * limitations under the License.
  */
 
-export { createTokenShadowPlugin } from './createTokenShadowPlugin';
-export { addStaticReplacementPlugin } from './addStaticReplacementPlugin';
+export { addTokenShadowPlugin, createTokenShadowPlugin } from './tokenShadowPlugin';
+export { addStaticReplacementPlugin, createStaticReplacementPlugin } from './staticReplacementPlugin';

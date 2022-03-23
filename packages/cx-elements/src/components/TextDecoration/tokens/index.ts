@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import tokens from './cxTextDecoration';
+import cxTextDecoration from './cxTextDecoration';
 
-export default tokens;
+export default cxTextDecoration;
