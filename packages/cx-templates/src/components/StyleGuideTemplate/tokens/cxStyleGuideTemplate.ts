@@ -17,7 +17,7 @@ import {
   EditorPlainClean, cxEditorPlain, RichTextClean, cxRichText
 } from '@bodiless/cx-editors';
 import { withNodeKey } from '@bodiless/core';
-import { on } from '@bodiless/fclasses';
+import { on, replaceWith, Fragment } from '@bodiless/fclasses';
 import { cxLayout, LayoutClean } from '@bodiless/cx-layout';
 import { asStyleGuideTemplateToken } from '../StyleGuideTemplateClean';
 
@@ -39,30 +39,15 @@ const Default = asStyleGuideTemplateToken({
   },
 });
 
-const BordersLabels = asStyleGuideTemplateToken({
+const NoLayout = asStyleGuideTemplateToken({
   ...Default,
-  Theme: {
-    Wrapper: cxLayout.WithBordersLabels,
-  },
-});
-
-const HeaderOnly = asStyleGuideTemplateToken({
-  ...Default,
-  Theme: {
-    Wrapper: cxLayout.Header,
-  },
-});
-
-const FooterOnly = asStyleGuideTemplateToken({
-  ...Default,
-  Theme: {
-    Wrapper: cxLayout.Footer,
+  Components: {
+    ...Default.Components,
+    Wrapper: replaceWith(Fragment),
   },
 });
 
 export default {
   Default,
-  BordersLabels,
-  HeaderOnly,
-  FooterOnly
+  NoLayout,
 };

@@ -75,7 +75,9 @@ const helmetComponents: HelmetComponents = {
  * A designable component which can be used to add different elements to the
  * head section, html or body tags.
  */
-export const HelmetClean = designable(helmetComponents, 'Helmet')(HelmetBase);
+const HelmetClean = designable(helmetComponents, 'Helmet')(HelmetBase);
+
+export default HelmetClean;
 
 /**
  * Use this to define a token applicable to the CanvasX `HelmetClean` component.

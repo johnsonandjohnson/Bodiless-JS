@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import tokens from './cxLink';
+import cxLink from './cxLink';
 
-export default tokens;
+export default cxLink;

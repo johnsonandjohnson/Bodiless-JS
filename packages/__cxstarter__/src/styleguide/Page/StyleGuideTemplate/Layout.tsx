@@ -14,11 +14,13 @@
 
 import React from 'react';
 import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/cx-templates';
-import { flowHoc, replaceWith } from '@bodiless/fclasses';
+import { flowHoc, on, replaceWith } from '@bodiless/fclasses';
+import { cxLayout, LayoutClean } from '@bodiless/cx-layout';
 
-export const Layout = asStyleGuideTemplateToken(cxStyleGuideTemplate.BordersLabels, {
+export const Layout = asStyleGuideTemplateToken(cxStyleGuideTemplate.NoLayout, {
   Meta: flowHoc.meta.term('Token')('Layout'),
   Content: {
     Title: replaceWith(() => <>Layout</>),
+    Examples: on(LayoutClean)(cxLayout.WithBordersLabels),
   },
 });

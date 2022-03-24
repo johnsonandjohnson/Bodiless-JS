@@ -42,7 +42,7 @@ import {
 } from '@bodiless/components';
 import { ifComponentSelector } from '@bodiless/layouts';
 import {
-  asCxTokenSpec, cxTextDecorationStatic, cxTypographyStatic,
+  asCxTokenSpec, cxTextDecoration, cxTypography,
 } from '@bodiless/cx-elements';
 import { LinkClean, cxLink } from '@bodiless/cx-link';
 
@@ -86,15 +86,15 @@ const Default = asCxTokenSpec()({
     _: addProps({ placeholder: 'Placeholder' }),
   },
   Components: {
-    paragraph: cxTypographyStatic.Body,
-    Bold: cxTextDecorationStatic.Bold,
-    Underline: cxTextDecorationStatic.Underline,
-    SuperScript: cxTextDecorationStatic.Superscript,
-    H1: cxTypographyStatic.H1,
-    H2: cxTypographyStatic.H2,
-    H3: cxTypographyStatic.H3,
-    H4: cxTypographyStatic.H4,
-    H5: cxTypographyStatic.H5,
+    paragraph: cxTypography.Body,
+    Bold: cxTextDecoration.Bold,
+    Underline: cxTextDecoration.Underline,
+    SuperScript: cxTextDecoration.Superscript,
+    H1: cxTypography.H1,
+    H2: cxTypography.H2,
+    H3: cxTypography.H3,
+    H4: cxTypography.H4,
+    H5: cxTypography.H5,
     Link: cxLink.Default,
   },
   Behavior: {

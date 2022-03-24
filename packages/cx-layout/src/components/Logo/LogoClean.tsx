@@ -62,4 +62,5 @@ const asLogoToken = asCxTokenSpec<LogoComponents>();
  */
 const LogoClean = designable(logoComponents, 'Logo')(LogoBase);
 
-export { LogoClean, asLogoToken };
+export default LogoClean;
+export { asLogoToken };

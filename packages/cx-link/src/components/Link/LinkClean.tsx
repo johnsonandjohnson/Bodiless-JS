@@ -13,6 +13,7 @@
  */
 
 import React, { FC } from 'react';
+import { withoutHydrationInline } from '@bodiless/hydration';
 import {
   A, Span, Fragment, designable,
 } from '@bodiless/fclasses';
@@ -37,5 +38,7 @@ const LinkBase: FC<LinkBaseProps> = ({ components: C, children, ...rest }) => (
 const asLinkToken = asCxTokenSpec<LinkComponents>();
 
 const LinkClean = designable(linkComponents, 'Link')(LinkBase);
+const LinkStatic = withoutHydrationInline()(LinkClean);
 
-export { LinkClean, asLinkToken };
+export default LinkClean;
+export { asLinkToken, LinkStatic };

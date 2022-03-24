@@ -13,3 +13,4 @@
  */
 
 export * from './index.temp';
+export { default as cxImageBase } from './tokens/cxImage';

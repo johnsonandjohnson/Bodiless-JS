@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import tokens from './cxColor';
+import cxColor from './cxColor';
 
-export default tokens;
+export default cxColor;

@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import tokens from './cxFontSize';
+import cxFontSize from './cxFontSize';
 
-export default tokens;
+export default cxFontSize;
