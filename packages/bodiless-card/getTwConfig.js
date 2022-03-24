@@ -14,8 +14,6 @@
  */
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
-const pkgJson = require('./package.json');
-
 const resolver = (pkgName) => require(pkgName);
 
 const twConfig = {
@@ -47,7 +45,7 @@ const twConfig = {
 };
 
 export default getPackageTailwindConfig({
-  pkgJson,
+  pkgPath: __dirname,
   twConfig,
   resolver,
 });

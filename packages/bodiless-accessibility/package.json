@@ -22,7 +22,6 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json",
     "audit": "node ./index.js $*"
   },
   "dependencies": {

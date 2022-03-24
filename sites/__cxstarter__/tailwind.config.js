@@ -28,7 +28,7 @@ const { buildTailwindConfig } = requireEsm(
 // });
 
 module.exports = buildTailwindConfig({
-  pkgJson: require('./package.json'),
+  pkgPath: __dirname,
   resolver: pkg => requireEsm(pkg),
   prefer: ['@bodiless/__cxstarter__'],
 });

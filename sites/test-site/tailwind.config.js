@@ -18,10 +18,6 @@ const { buildTailwindConfig } = requireEsm(
   '@bodiless/fclasses'
 );
 
-const resolver = (pkgName) => requireEsm(pkgName);
-
-const pkgJson = require('./package.json');
-
 const twConfig = {
   purge: [
     './src/**/!(*.d).{ts,js,jsx,tsx}',
@@ -697,8 +693,8 @@ const twConfig = {
 // });
 
 module.exports = buildTailwindConfig({
-  pkgJson,
+  pkgPath: __dirname,
   twConfig,
-  resolver,
+  resolver: (pkgName) => requireEsm(pkgName),
   prefer: ['@bodiless/test-site'],
 });

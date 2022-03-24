@@ -37,15 +37,9 @@ type ApplyExtraOptions = (
 ) => Config[];
 
 export type GetTwConfigProps = {
-  pkgJson: {
-    name: string,
-    dependencies: object,
-    devDependencies: object,
-  },
+  pkgPath: string,
   twConfig: TailwindConfig,
-  resolver: (pkg: string) => {
-    default: Config[],
-  },
+  resolver: (pkg: string) => any,
 } & ExtraOptions;
 
 export type GetPackageTailwindConfig = (
@@ -88,15 +82,16 @@ const applyExtraOptions: ApplyExtraOptions = (configs, options) => {
 
 export const getPackageTailwindConfig: GetPackageTailwindConfig = props => {
   const {
-    pkgJson, twConfig = {}, resolver, ...extraOptions
+    pkgPath, twConfig = {}, resolver, ...extraOptions
   } = props;
   try {
+    const pkgJson = resolver(join(pkgPath, 'package.json'));
     const deps = Object.keys({
       ...pkgJson.dependencies,
     });
     const startingConfig: Config[] = [{
       name: pkgJson.name,
-      root: pkgJson.name, // temp, @todo find a way to put actual resolved path
+      root: pkgPath,
       tailwindConfig: twConfig,
     }];
     const configs = deps.reduce(

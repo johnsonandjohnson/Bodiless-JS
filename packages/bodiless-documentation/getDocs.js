@@ -12,32 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { getPackageTailwindConfig } from '@bodiless/fclasses';
+import { getPackageDocs } from '@bodiless/cli';
 
-const resolver = (pkgName) => require(pkgName);
-
-const twConfig = {
-  purge: [
-    './lib/**/!(*.d).{ts,js,jsx,tsx}',
-  ],
-  theme: {
-    aspectRatio: { // defaults to {}
-      none: 0,
-      square: [1, 1],
-      '16/9': [16, 9],
-      '4/3': [4, 3],
-      '21/9': [21, 9],
-    },
-  },
-  variants: {},
-  plugins: [
-    // eslint-disable-next-line
-    require('tailwindcss-aspect-ratio'),
-  ],
-};
-
-export default getPackageTailwindConfig({
+export const getDocs = (nameSpace) => getPackageDocs({
   pkgPath: __dirname,
-  twConfig,
-  resolver,
+  resolver: p => require(p),
+  nameSpace
 });

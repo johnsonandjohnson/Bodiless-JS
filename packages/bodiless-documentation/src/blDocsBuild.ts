@@ -17,7 +17,6 @@
 import path from 'path';
 import flow from 'lodash/flow';
 import fs from 'fs-extra';
-import { getPackageDocConfig } from '@bodiless/cli';
 import { withTreeFromFile, getSimplePaths, validatePaths } from './tree';
 import {
   writeTree, writeResources, copyFile, symlinkFile,
@@ -33,11 +32,10 @@ const buildSubTree = async (toc: any, namespace: string) => {
   // We start by using withTreeFromFile to build up an array of TreeHO and
   // at the same time we clean up the symlinks
 
-  const initPath = path.resolve();
-  const docsJsonPaths = getPackageDocConfig(initPath, namespace);
+  const docsJsonPaths = require(path.join(path.resolve(), 'getDocs')).getDocs(namespace);
 
   const updates = await Promise.all(
-    docsJsonPaths.map(path => withTreeFromFile(path))
+    docsJsonPaths.map((path: string) => withTreeFromFile(path))
   );
 
   const paths = flow(updates)(toc) as Tree;
