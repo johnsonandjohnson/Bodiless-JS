@@ -1,0 +1,36 @@
+name: Create Daily QA Environment
+env:
+  QA_BRANCH_NAME: changeset/daily-qa-branch
+  DEFAULT_BRANCH: main
+  PSH_PROJECT_ID: jvaff4bu65vgm
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * *'
+jobs:
+  process_branch:
+    name: Create daily QA branch and activate psh env
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Delete branch
+        continue-on-error: true
+        run: |
+          git push --delete origin $QA_BRANCH_NAME
+      - name: Create branch
+      #Add sleep here ~5 min for psh env to be deleted
+        run: |
+          git checkout -b $QA_BRANCH_NAME $DEFAULT_BRANCH
+          git push --set-upstream origin $QA_BRANCH_NAME
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+      - name: Initialize Platform.sh
+        run: |
+          curl --silent --show-error --fail https://platform.sh/cli/installer > script.php && php script.php
+          platform project:set-remote $PSH_PROJECT_ID
+      - name: Deploy Environment
+        run: |
+          platform env:activate -e $QA_BRANCH_NAME
