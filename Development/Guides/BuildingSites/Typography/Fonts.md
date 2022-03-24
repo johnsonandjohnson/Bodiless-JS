@@ -68,8 +68,8 @@ bundle, which is possibly the most performant option.
 
 01. In your brand package (suggested: `BRAND-elements` package), create a folder `assets/font`, and
     place the fonts.
-01. In your package's `package.json` file, make sure your `files` section exports the assets so 
-they are bundled with the package (e.g., `"files": ["/assets"]`).
+01. In your package's `package.json` file, make sure your `files` section exports the assets so they
+    are bundled with the package (e.g., `"files": ["/assets"]`).
 01. In your package's `site.tailwind.config.js` file, add the plugin `font-face` via `addBase` to
     import the fonts.
 01. Extend `fontFamily` in the Tailwind `theme` section to include the font.

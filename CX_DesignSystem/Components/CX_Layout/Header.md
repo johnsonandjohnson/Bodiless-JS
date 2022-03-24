@@ -1,4 +1,4 @@
-# CX Header Component
+# CanvasX Header Component
 
 The CX Header Component provides a header with the following elements:
 
@@ -28,12 +28,10 @@ is, or you can recompose it to meet your site's requirements.
 
 ### Usage
 
+Using the following code example as a guide, you can create a Header using the CanvasX default
+tokens, and applying the correct node keys. Remember to apply the necessary imports to the file.
+
 ```tsx
-import React, { FC } from 'react';
-import { cxHeader, HeaderClean } from '@bodiless/cx-layout';
-import { as } from '@bodiless/fclasses';
-import { withNode, withNodeKey } from '@bodiless/core';
-import { SiteWrapper, ContentWrapper } from './wrapperComponents';
 const Header = as(
   // You can compose or create a new header token
   // from scratch, but we'll use the default one here.
@@ -41,8 +39,9 @@ const Header = as(
   // Apply a node to the header so inner nodes
   // are organized into its namespace.
   withNode,
-  withNodeKey('header'),
+  withNodeKey({ 'header', nodeCollection: 'site' }),
 )(HeaderClean);
+
 const Layout: FC = ({ children }) => (
   <SiteWrapper>
     <Header />
@@ -53,6 +52,38 @@ const Layout: FC = ({ children }) => (
 );
 export default Layout;
 ```
+
+#### Customizing Via Shadowing (*Preferred Method)
+
+Provide the Shadowing function as defined in [Shadow](../CX_Elements/CX_Shadow).
+
+File to shadow:
+[`cxHeader.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-layout/src/components/Header/cxHeader.ts)
+
+#### Customizing Via Extending
+
+The Site Builder can create a new token that utilizes `asHeaderToken()`, and then can
+extend/override the specific domains within that token.
+
+```js
+const BrandXHeader = asHeaderToken({
+  // Will spread all existing header functionality across all domains.
+  ...cxHeader.Base,
+  Components: {
+    // Will spread all header components as is.
+    ...cxHeader.Base.Components,
+    // Will replace the DesktopSearch slot with the custom component
+    DesktopSearch: brandXSearch.Default,
+  },
+  Spacing: {
+    // Since there is no spread, will override the cxHeader Spacing domain
+    // and use what is defined below.
+    Container: 'mx-auto py-2',
+  }
+});
+```
+
+This token is then applied to the Header slot within Layout.
 
 ## Architectural Details
 
