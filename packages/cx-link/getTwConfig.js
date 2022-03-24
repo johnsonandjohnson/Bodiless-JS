@@ -14,7 +14,9 @@
  */
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
-const plugin = require('tailwindcss/plugin');const resolver = (pkgName) => require(pkgName);
+const plugin = require('tailwindcss/plugin');
+
+const resolver = (pkgName) => require(pkgName);
 
 const twConfig = {
   purge: [
