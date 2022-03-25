@@ -39,7 +39,7 @@ type ApplyExtraOptions = (
 export type GetTwConfigProps = {
   pkgPath: string,
   twConfig: TailwindConfig,
-  resolver: (pkg: string) => any,
+  resolver: (pkg: string) => string,
 } & ExtraOptions;
 
 export type GetPackageTailwindConfig = (
@@ -82,14 +82,13 @@ const applyExtraOptions: ApplyExtraOptions = (configs, options) => {
 
 export const getPackageTailwindConfig: GetPackageTailwindConfig = props => {
   const {
-    pkgPath, twConfig = {}, resolver, ...extraOptions
+    twConfig, resolver, ...extraOptions
   } = props;
   try {
-    const pkgJson = resolver(join(pkgPath, 'package.json'));
-    const deps = Object.keys({
-      ...pkgJson.dependencies,
-    });
-    const startingConfig: Config[] = [{
+    const pkgPath = join(resolver('./package.json'), '..');
+    const pkgJson = require(join(pkgPath, 'package.json'));
+    const deps = Object.keys(pkgJson.dependencies);
+    const startingConfig: Config[] = twConfig === undefined ? [] : [{
       name: pkgJson.name,
       root: pkgPath,
       tailwindConfig: twConfig,
@@ -97,7 +96,7 @@ export const getPackageTailwindConfig: GetPackageTailwindConfig = props => {
     const configs = deps.reduce(
       (config, next) => {
         try {
-          const nextConfig = resolver(join(next, 'getTwConfig')).default;
+          const nextConfig = require(resolver(join(next, 'getTwConfig'))).default;
           const addedPaths = config.map(item => item.root);
           const dedupedConfigs = nextConfig
             .filter((item: Config) => addedPaths.includes(item.root) === false);

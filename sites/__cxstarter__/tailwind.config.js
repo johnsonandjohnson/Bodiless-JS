@@ -27,8 +27,12 @@ const { buildTailwindConfig } = requireEsm(
 //   exclude: ['@bodiless/organisms', '@bodiless/accordion'],
 // });
 
+console.log(buildTailwindConfig({
+  resolver: pkg => requireEsm.resolve(pkg),
+  prefer: ['@bodiless/__cxstarter__'],
+}));
+
 module.exports = buildTailwindConfig({
-  pkgPath: __dirname,
-  resolver: pkg => requireEsm(pkg),
+  resolver: pkg => requireEsm.resolve(pkg),
   prefer: ['@bodiless/__cxstarter__'],
 });

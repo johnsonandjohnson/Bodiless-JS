@@ -14,7 +14,7 @@
  */
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
-const resolver = (pkgName) => require(pkgName);
+const resolver = (pkgName) => require.resolve(pkgName);
 
 const twConfig = {
   purge: [
@@ -37,7 +37,6 @@ const twConfig = {
 };
 
 export default getPackageTailwindConfig({
-  pkgPath: __dirname,
   twConfig,
   resolver,
 });

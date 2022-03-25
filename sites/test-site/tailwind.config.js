@@ -693,8 +693,7 @@ const twConfig = {
 // });
 
 module.exports = buildTailwindConfig({
-  pkgPath: __dirname,
   twConfig,
-  resolver: (pkgName) => requireEsm(pkgName),
+  resolver: (pkgName) => requireEsm.resolve(pkgName),
   prefer: ['@bodiless/test-site'],
 });
