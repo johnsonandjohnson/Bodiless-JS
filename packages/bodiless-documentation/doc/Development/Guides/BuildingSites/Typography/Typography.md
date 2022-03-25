@@ -15,7 +15,7 @@ If you plan on leveraging other CanvasX components, we recommend leveraging all 
 `cx-elements`.
 
 For more details on usage and getting started using this package, please follow the [CanvasX
-Elements Typography Guide](../../../../Components/CX_Elements/CX_SiteTypography).
+Elements Typography Guide](/CX_DesignSystem/Components/CX_Elements/CX_SiteTypography).
 
 ## Developing Your Typography without Leveraging CanvasX Elements
 
@@ -49,8 +49,8 @@ you are reusing a class repeatedly, then make a token for it. In the future, it'
 one occurrence than to search through files and replace the specific class.
 
 01. We recommend starting with an Elements folder in your package, and start defining tokens during
-    creation. Keeping files small and specific to function/definition will be easier to
-    maintain, and easier for others to understand.
+    creation. Keeping files small and specific to function/definition will be easier to maintain,
+    and easier for others to understand.
 
 01. Tokens can be defined individually, or within a group if they share
     [metadata](/Development/Architecture/FClasses?id=metadata-and-filters).
@@ -73,7 +73,8 @@ one occurrence than to search through files and replace the specific class.
 If you want to apply the classes to your entire site, we recommend the following practice:
 
 01. Within `asHelmetToken()`, and in the _Theme_ Domain, provide the site's font class.
-    <!-- TODO: TBD link to Helmet doc -->
+    - For more information, see: [CanvasX Helmet
+      Component](/CX_DesignSystem/Components/CX_Layout/Helmet).
 
 01. In `/cx-layout/src/components/Helmet/Helmet.token.ts`, within `asHelmetToken()`, and in the
     _Theme_ Domain, provide the site's font class.

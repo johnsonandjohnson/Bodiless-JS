@@ -1,0 +1,3 @@
+# CanvasX Search Component
+
+TBD

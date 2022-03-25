@@ -16,10 +16,12 @@ and styles), to help meet typical site-use expectations.
 As the Editor experience will be unchanged, you can refer to [Link Component : Content Editor
 Details](/Components/Link/#content-editor-details) for instructions on use.
 
-?> **Note:** For accessibility reasons, if you're adding a Link to an external URL or a downloadable
-file, it's recommended that you provide an `aria-label`.
+?> **Note:** When using icon fonts, some screen readers try to read pseudo-element icons out loud.
+For this reason, if you're adding a Link to an external URL or a downloadable file, it's recommended
+that you provide an `aria-label`, making the accessibility tree consistent between screen readers.
 
 ## Site Builder Details
+
 ### Usage
 
 ```jsx

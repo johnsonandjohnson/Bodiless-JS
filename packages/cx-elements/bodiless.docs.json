@@ -1,12 +1,16 @@
 {
-  "Components": {
-    "CX_Elements": {
-      "README.md": "./doc/CX_Elements.md",
-      "CX_SiteTypography.md": "./doc/CX_SiteTypography.md",
-      "CX_Shadow.md": "./doc/CX_Shadow.md"
-    },
-    "assets": {
-      "PXtoREMTemplate.xlsx": "./doc/assets/PXtoREMTemplate.xlsx"
+  "CX_DesignSystem": {
+    "README.md": "./README.md",
+    "Components": {
+      "README.md": "./doc/Components.md",
+      "CX_Elements": {
+        "README.md": "./doc/CX_Elements.md",
+        "CX_SiteTypography.md": "./doc/CX_SiteTypography.md",
+        "CX_Shadow.md": "./doc/CX_Shadow.md"
+      },
+      "assets": {
+        "PXtoREMTemplate.xlsx": "./doc/assets/PXtoREMTemplate.xlsx"
+      }
     }
   }
 }

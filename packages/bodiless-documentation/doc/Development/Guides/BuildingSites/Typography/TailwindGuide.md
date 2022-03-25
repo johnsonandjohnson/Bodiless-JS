@@ -5,8 +5,8 @@ As discussed in other sections, BodilessJS is pre-configured to use
 strictly required, we highly recommend it to get the most out of the Bodiless Design System. If you
 are unfamiliar with Tailwind, you can learn more from:
 
-- [Tailwind on Github](https://github.com/tailwindcss/tailwindcss)
-- [Tailwind Docs](https://tailwindcss.com/docs/what-is-tailwind)
+- [Tailwind on GitHub](https://github.com/tailwindcss/tailwindcss)
+- [Utility-First Fundamentals | Tailwind Docs](https://tailwindcss.com/docs/utility-first)
 
 Most of your site's styling can be defined with Tailwind, and, for the most part, BodilessJS will
 defer to Tailwind documentation. The following documentation is either specific to Bodiless
@@ -93,7 +93,7 @@ Space](https://devdojo.com/tnylea/tailwindcss-space-classes) | Tony Lea, DevDojo
 ## Pseudo-Elements
 
 Pseudo-elements are somewhat of a challenge within Tailwind and Bodiless, so please read
-[PseudoElements](./PseudoElements) for some recommended patterns for creating pseudo-elements.
+[Pseudo-Elements](./Pseudo-Elements) for some recommended patterns for creating pseudo-elements.
 
 ## Using Tailwind Classes vs Custom Defined Classes
 
@@ -126,7 +126,8 @@ with responsive size.
 
 ### Breakpoints
 
-For more information, see [responsive breakpoints](../Responsiveness#Breakpoints).
+For more information, see [responsive
+breakpoints](/CX_DesignSystem/Components/CX_Layout/Responsiveness#Breakpoints).
 
 ### Using Responsive Classes
 

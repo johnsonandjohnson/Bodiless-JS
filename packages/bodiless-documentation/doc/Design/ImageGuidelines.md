@@ -168,11 +168,12 @@ icons (envelope), etc. These icons typically use 1:1 size ratio. No recommended 
 
 #### Favicon
 
-[Favicon](../../../Development/Guides/BuildingSites/ComponentsStarterKit?id=favicon) is an icon that is used in browser tabs, bookmarks, and on mobile devices as an app icon when the user saves the site to the homescreen.
+[Favicon](../Development/Guides/BuildingSites/Meta/Favicon) is an icon that is used in browser tabs,
+bookmarks, and on mobile devices as an app icon when the user saves the site to the homescreen.
 
-|   Extension |   Recommended width (px) | Maximum width (px)   |   Recommended size (KB) | Maximum size (KB)   |
+| Extension | Recommended width (px) | Maximum width (px) | Recommended size (KB) | Maximum size (KB) |
 |--|--|--|--|--|
-|.jpg .png .webp <br> .tiff .gif .svg |	512 px* <br>_see note below_ | 512 px	|50 KB |	50 KB |
+|.jpg .png .webp .tiff .gif .svg | 512 px* <br> _see note below_ | 512 px | 50 KB | 50 KB |
 
-?> Note: BodilessJS offers ability to upload one large favicon and generate all favicons sizes. 
-BodilessJS will take the largest size (512px) and auto generate the smaller size (32px).
+?> **Note:** BodilessJS offers the ability to upload one large favicon and generate all favicons
+sizes. BodilessJS will take the largest size (512px) and auto-generate the smaller size (32px).

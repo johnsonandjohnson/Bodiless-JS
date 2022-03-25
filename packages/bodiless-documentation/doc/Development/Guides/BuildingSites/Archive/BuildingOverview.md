@@ -56,15 +56,6 @@ set items such as site width and breakpoints.
 
 ### Setup Tokens
 
-#### Tailwind Configuration
-
-Within `Elements.token.ts` the site builder will find Element tokens that
-utilize `addClasses()` to add class names, usually these are utility-first
-Tailwind classes but regular css classes can be added as well. The starter kit
-offers default Tailwind classes but site builder may have to provide additional
-definitions, such as custom colors. For more information on doing this, read
-[Tailwind with Bodiless](./TailwindGuide.md)
-
 ##### Element Tokens
 
 The following is set of example element tokens we provide in the starter site.
@@ -122,48 +113,11 @@ tokens file, or a component folder. A suggested practice is the following:
     components that help layout pages (sections, indents, etc).
 * Token styling of components should be stored with the individual components.
 
-### Fonts
-
-Websites often use custom fonts and Bodiless is very flexible in how these can
-be added.  For more details please read using [Fonts](./Fonts).
-
 ## 3. Components & Component Tokens
 
 A Bodiless site is built out of many components. The starter kit comes with some
 ready-made and re-usable components and can be found in `/src/components`
 
-### Components that come in the Starter Kit
-
-The following components are part of the Starter Kit and site builder can start
-modifying to meet the site's requirements. The starter kit has elements that
-every site will probably use in some form.
-
-* [Header](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/starter/src/components/Layout/header.tsx):
-  The reusable header section for all pages, usually containing the site logo,
-  title, main nav, etc.
-* [Footer](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/starter/src/components/Layout/footer.tsx):
-  The reusable footer section for all pages, usually containing copyright,
-  footer menus, etc.
-* [Layout](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/starter/src/components/Layout/index.tsx):
-  The main page that combines header, content, & footer of the page. This may
-  also contain meta data inserted into head of pages.
-* [Logo](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/examples/starter/src/components/Layout/logo.tsx):
-  Logo used with the desktop header and mobile burger menu.
-* [Rich Text Editors](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/examples/starter/src/components/Editors):
-  * Simple : Superscript Only
-  * Basic : Superscript, Bold, Italic, Underline, Link, Align Text
-  * Full Featured : adds in more functionality to Basic such as Strikethru, headers, quotes.
-  * These can be easily customized or extended to support editor requirements for the site.
-* [Cards](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/examples/starter/src/components/Card):
-  Cards are blocks of content that can include Image, Title, Body, Call to
-  Action Link.
-* [Images](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/examples/starter/src/components/Image):
-  Reusable Landscape and Square Images. 
-* [Menu & Mobile Burger menu](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/examples/starter/src/components/Menu):
-  Global Menu system.
-
-For a more in-depth guide about these see
-[Explanation of Components that come in the Starter Kit](./ComponentsStarterKit).
 
 ### Identify & Define Tokens used in a site and their variations
 

@@ -1,6 +1,6 @@
 {
-  "Components": {
-    "Editors": {
+  "CX_DesignSystem": {
+    "Components": {
       "CX_Editors": {
           "README.md": "./doc/CX_Editors.md",
           "CX_RTE_Editor.md": "./doc/RichText.md",

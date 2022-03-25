@@ -55,7 +55,7 @@ const Foo = {
 ### Using CX Element Tokens, but Customizing for Site-Specific Typography
 
 The Site Builder may need to override a specific token, or a specific set of tokens, and the
-following is a how-to guide to apply the [best methodology](./SiteTypography) for doing so.
+following is a how-to guide to apply the [best methodology](./CX_SiteTypography) for doing so.
 
 ### Helper Utilities
 
