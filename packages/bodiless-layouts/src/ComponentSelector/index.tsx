@@ -168,6 +168,7 @@ const TextFormatList: React.FC<ItemListProps> = props => {
     <button
       type="submit"
       onClick={() => onSelect([Component.displayName])}
+      // eslint-disable-next-line react/no-array-index-key
       key={index.toString()}
     >
       <Component>{Component.description || Component.name}</Component>
@@ -176,6 +177,7 @@ const TextFormatList: React.FC<ItemListProps> = props => {
   return <>{elems}</>;
 };
 TextFormatList.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   components: PropTypes.arrayOf(PropTypes.any).isRequired,
   onSelect: PropTypes.func.isRequired,
 };

@@ -73,7 +73,6 @@
     "fast-glob": "^3.2.5",
     "find-up": "^4.1.0",
     "fs-extra": "^8.1.0",
-    "gatsby": "^4.10.3",
     "gatsby-image": "^3.11.0",
     "gatsby-plugin-emotion": "^7.10.0",
     "gatsby-plugin-google-fonts": "^1.0.1",
@@ -86,7 +85,7 @@
     "gatsby-plugin-robots-txt": "^1.7.0",
     "gatsby-plugin-sharp": "^4.10.2",
     "gatsby-plugin-typescript": "^4.10.1",
-    "gatsby-source-filesystem": "^4.10.1",
+    "gatsby-source-filesystem": "4.7.0",
     "gatsby-transformer-sharp": "^4.10.0",
     "git-branch": "^2.0.1",
     "glob": "^7.1.6",
@@ -108,7 +107,7 @@
     "tailwindcss": "^2.0.2"
   },
   "peerDependencies": {
-    "gatsby": "~3.13.0",
+    "gatsby": "^4.10.3",
     "mobx": "^6.0.0",
     "mobx-react": "^7.2.1",
     "react": "^17.0.2",
