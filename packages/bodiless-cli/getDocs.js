@@ -15,7 +15,6 @@
 import { getPackageDocs } from './lib/helpers/getPackageDocs';
 
 export const getDocs = (nameSpace) => getPackageDocs({
-  pkgPath: __dirname,
-  resolver: p => require(p),
+  resolver: p => require.resolve(p),
   nameSpace
 });

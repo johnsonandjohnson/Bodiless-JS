@@ -1,3 +1,4 @@
+/* eslint-disable global-require, import/no-dynamic-require */
 /**
  * Copyright © 2022 Johnson & Johnson
  *
@@ -11,9 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import path from 'path';
-/* eslint-disable global-require, import/no-dynamic-require */
+
+const { join } = path;
 
 export type GetPackageDocsProps = {
   pkgPath: string,
@@ -24,18 +25,18 @@ export type GetPackageDocsProps = {
 export type GetPackageDocs = (props: GetPackageDocsProps) => string[];
 
 export const getPackageDocs: GetPackageDocs = ({
-  pkgPath,
-  resolver = require,
+  resolver,
   nameSpace = 'bodiless',
 }) => {
   try {
-    const pkgJson = resolver(path.join(pkgPath, 'package.json'));
+    const pkgPath = join(resolver('./package.json'), '..');
+    const pkgJson = require(join(pkgPath, 'package.json'));
     const paths: string[] = [];
     const deps = Object.keys(pkgJson.dependencies);
 
     try {
-      const docsJsonPath = path.join(pkgPath, `${nameSpace}.docs.json`);
-      resolver(docsJsonPath);
+      const docsJsonPath = join(pkgPath, `${nameSpace}.docs.json`);
+      require(docsJsonPath);
       paths.push(docsJsonPath);
     } catch (e) {
       // do nothing
@@ -43,7 +44,7 @@ export const getPackageDocs: GetPackageDocs = ({
 
     deps.forEach(dep => {
       try {
-        const depDocsJsonPath = resolver(path.join(dep, 'getDocs'))
+        const depDocsJsonPath = require(resolver(join(dep, 'getDocs')))
           .getDocs(nameSpace);
         paths.push(depDocsJsonPath[0]);
       } catch (e) {
