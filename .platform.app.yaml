@@ -100,3 +100,4 @@ variables:
     env:
         APP_VOLUME: '/app/volume'
         CHOKIDAR_USEPOLLING: true
+        APP_SITE_NAME: test-site
