@@ -28,6 +28,7 @@ hooks:
     # Build hooks can modify the application files on disk but not access any services like databases.
     build: |
         set -e
+        export NODE_OPTIONS="--max-old-space-size=2048"
         npm run bootstrap
         npm run build:packages
         npm run build -- --scope @sites/test-site
