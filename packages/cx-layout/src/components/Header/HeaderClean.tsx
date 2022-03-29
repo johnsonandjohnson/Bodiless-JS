@@ -13,14 +13,15 @@
  */
 
 import React, { FC } from 'react';
-import { Div, Fragment, designable } from '@bodiless/fclasses';
+import {
+  Div, Fragment, A, designable
+} from '@bodiless/fclasses';
 import { withoutHydration } from '@bodiless/hydration';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
 import { LinkClean } from '@bodiless/cx-link';
 import {
   BurgerMenuClean,
   MenuClean,
-  MenuTogglerClean,
 } from '@bodiless/cx-navigation';
 import { LogoClean } from '../Logo';
 import { SearchTogglerClean, DesktopSearchClean } from '../Search';
@@ -30,8 +31,8 @@ const headerComponents: HeaderComponents = {
   Wrapper: Div,
   Container: Div,
   MenuContainer: Div,
-  MenuTogglerWrapper: Fragment,
-  MenuToggler: MenuTogglerClean,
+  MenuTogglerWrapper: Div,
+  MenuToggler: A,
   MenuWrapper: Fragment,
   Menu: MenuClean,
   BurgerMenuWrapper: Fragment,

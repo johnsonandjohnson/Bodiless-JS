@@ -14,17 +14,18 @@
 
 import React, { FC } from 'react';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
-import { Div, Fragment, designable } from '@bodiless/fclasses';
+import {
+  Div, Fragment, A, designable,
+} from '@bodiless/fclasses';
 import { LinkClean } from '@bodiless/cx-link';
 import { MenuClean } from '../Menu';
-import { MenuTogglerClean } from '../MenuToggler';
 import type { BurgerMenuComponents, BurgerMenuProps } from './types';
 
 const burgerMenuComponents: BurgerMenuComponents = {
   Wrapper: Div,
   Container: Div,
-  MenuTogglerWrapper: Fragment,
-  MenuToggler: MenuTogglerClean,
+  MenuTogglerWrapper: Div,
+  MenuToggler: A,
   MenuWrapper: Div,
   Menu: MenuClean,
   FooterWrapper: Div,

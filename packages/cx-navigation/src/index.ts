@@ -13,13 +13,12 @@
  */
 
 // Re-export provider so that menu toggler can show/hide burger menu.
-export { withBurgerMenuProvider } from '@bodiless/navigation';
+export { withBurgerMenuProvider, asBurgerMenuToggler } from '@bodiless/navigation';
 
 // CxNavigation components and tokens.
 export { BurgerMenuClean, asBurgerMenuToken, cxBurgerMenu } from './components/BurgerMenu';
 export { MenuClean, asMenuToken, cxMenu } from './components/Menu';
 export { MenuTitleClean, asMenuTitleToken, cxMenuTitle } from './components/MenuTitle';
-export { MenuTogglerClean, asMenuTogglerToken, cxMenuToggler } from './components/MenuToggler';
 export { asSubMenuToken, cxSubMenu } from './components/SubMenu';
 
 // CxNavigation types.

@@ -13,6 +13,7 @@
  */
 
 import {
+  withChild,
   withNode,
   withNodeKey,
 } from '@bodiless/core';
@@ -20,7 +21,7 @@ import { cxSpacing } from '@bodiless/cx-elements';
 import {
   cxBurgerMenu,
   cxMenu,
-  cxMenuToggler,
+  asBurgerMenuToggler,
 } from '@bodiless/cx-navigation';
 import {
   Span,
@@ -34,6 +35,7 @@ import { cxLink } from '@bodiless/cx-link';
 import { cxLogo } from '../../Logo';
 import { cxDesktopSearch, cxSearchToggler } from '../../Search';
 import { asHeaderToken } from '../HeaderClean';
+import BurgerIcon from '../assets/BurgerIcon';
 
 // @TODO: Get rid of this after language button is implemented.
 const WithLanguageButton = flowHoc(
@@ -50,8 +52,10 @@ const WithLanguageButton = flowHoc(
  * Token that defines a basic header.
  */
 const Base = asHeaderToken({
+  Core: {
+    MenuToggler: asBurgerMenuToggler,
+  },
   Components: {
-    MenuToggler: cxMenuToggler.Default,
     SearchToggler: cxSearchToggler.Default,
     Logo: cxLogo.Default,
     Menu: cxMenu.TopNav,
@@ -74,10 +78,15 @@ const Base = asHeaderToken({
     Container: 'flex justify-between items-center',
     MenuContainer: 'hidden lg:flex justify-between items-center flex-grow',
     ActionMenuContainer: 'flex items-center',
+    MenuToggler: 'flex justify-center items-center',
+    MenuTogglerWrapper: 'flex lg:hidden',
   },
   Spacing: {
     Container: 'mx-auto mb-10 py-3 lg:py-0',
     ActionMenuContainer: 'pl-5',
+    // @todo perhaps this should be an element spcing token ike "LargeIconSize".
+    MenuToggler: 'w-6 h-6',
+    MenuTogglerWrapper: 'my-4',
   },
   Theme: {
     Wrapper: as(
@@ -88,6 +97,9 @@ const Base = asHeaderToken({
   Schema: {
     Logo: withNodeKey({ nodeKey: 'Logo' }),
     _: withNode,
+  },
+  Content: {
+    MenuToggler: withChild(BurgerIcon),
   },
 });
 

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { asStatic } from '@bodiless/core';
+import { asStatic, withChild } from '@bodiless/core';
 import { cxColor } from '@bodiless/cx-elements';
 import { cxLink } from '@bodiless/cx-link';
 import {
@@ -20,9 +20,9 @@ import {
   as,
   flowHoc,
 } from '@bodiless/fclasses';
-import { useIsBurgerMenuHidden } from '@bodiless/navigation';
+import { useIsBurgerMenuHidden, asBurgerMenuToggler } from '@bodiless/navigation';
 import { cxMenu } from '../../Menu';
-import { cxMenuToggler } from '../../MenuToggler';
+import CloseIcon from '../assets/CloseIcon';
 import { asBurgerMenuToken } from '../BurgerMenuClean';
 
 /**
@@ -44,9 +44,9 @@ const WithBurgerMenuPush = asBurgerMenuToken({
 const Base = asBurgerMenuToken({
   Core: {
     _: asStatic,
+    MenuToggler: asBurgerMenuToggler,
   },
   Components: {
-    MenuToggler: cxMenuToggler.Close,
     Menu: cxMenu.Burger,
     UtilityMenu: cxMenu.Utility,
     WhereToBuy: cxLink.WhereToBuy,
@@ -57,11 +57,16 @@ const Base = asBurgerMenuToken({
     FooterWrapper: 'w-full fixed left-0 bottom-0 flex flex-col items-center md:w-7/12',
     ActionFooterContainer: 'w-full flex justify-center items-center',
     Overlay: 'w-full h-full fixed left-0 top-0',
+    MenuToggler: 'flex justify-center items-center',
+    MenuTogglerWrapper: 'flex justify-end',
   },
   Spacing: {
     MenuWrapper: 'px-9',
     FooterWrapper: 'px-9 py-6',
     ActionFooterContainer: 'mt-5',
+    // @TODO perhaps this should be an element spcing token ike "LargeIconSize".
+    MenuToggler: 'w-6 h-6',
+    MenuTogglerWrapper: 'flex justify-end mx-4 my-6',
   },
   Theme: {
     Wrapper: as(
@@ -78,9 +83,10 @@ const Base = asBurgerMenuToken({
   },
   Behavior: {
     // Needs to hide it when menu is closed, otherwise it will not allow page interaction.
-    Overlay: flowHoc(
-      addClassesIf(useIsBurgerMenuHidden)('hidden'),
-    ),
+    Overlay: addClassesIf(useIsBurgerMenuHidden)('hidden'),
+  },
+  Content: {
+    MenuToggler: withChild(CloseIcon),
   },
 });
 
