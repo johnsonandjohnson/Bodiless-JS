@@ -19,12 +19,14 @@ export type LayoutComponents = {
   OuterContainer: ComponentOrTag<any>,
   SkipToMainContent: ComponentOrTag<any>,
   Helmet: ComponentOrTag<any>,
-  SiteHeader: ComponentOrTag<any>,
+  Header: ComponentOrTag<any>,
+  HeaderWrapper: ComponentOrTag<any>,
+  Footer: ComponentOrTag<any>,
+  FooterWrapper: ComponentOrTag<any>,
   Container: ComponentOrTag<any>,
   ContainerWrapper: ComponentOrTag<any>,
   PageTopper: ComponentOrTag<any>,
   PageCloser: ComponentOrTag<any>,
-  SiteFooter: ComponentOrTag<any>,
 };
 
 export type LayoutProps = DesignableComponentsProps<LayoutComponents> & HTMLProps<HTMLElement>;

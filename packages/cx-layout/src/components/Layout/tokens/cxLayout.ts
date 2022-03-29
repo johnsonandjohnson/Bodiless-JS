@@ -11,12 +11,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import { cxColor, cxSpacing } from '@bodiless/cx-elements';
 import {
   addProps,
   as,
+  on,
 } from '@bodiless/fclasses';
 import { asLayoutToken } from '../LayoutClean';
-import { cxHeader } from '../../Header';
+import { cxFooter, FooterClean } from '../../Footer';
+import { cxHeader, HeaderClean } from '../../Header';
 import { cxHelmet } from '../../Helmet';
 import { MAIN_CONTENT_ID } from './constants';
 import { WithBordersLabels } from './cxLayoutTest';
@@ -26,14 +30,9 @@ import { WithBordersLabels } from './cxLayoutTest';
   */
 const Base = asLayoutToken({
   Components: {
-    Helmet: as(cxHelmet.Default),
+    Helmet: cxHelmet.Default,
   },
   Theme: {
-    // Tailwind's container is specifially not used due to its feature it set's max-width
-    // to min-width of breakpoint.  So instead rely on ContainerWrapper to margin percent
-    // to contain content.
-    ContainerWrapper: 'mx-site-percent md:mx-md-site-percent lg:mx-lg-site-percent mx-auto',
-    Container: 'mx-auto',
   },
   Schema: {
   },
@@ -53,15 +52,35 @@ const Base = asLayoutToken({
   }
 });
 
+/*
+ * Tailwind's container is specifially not used due to its feature it set's max-width
+ * to min-width of breakpoint.  So instead rely on ContainerWrapper to margin percent
+ * to contain content until we get to xl and then constrain by max-width.
+ */
+const ConstrainSite = asLayoutToken({
+  Spacing: {
+    // TODO The tokens on this ContainerWrapper will move to be controlled by
+    // content within Templates.
+    ContainerWrapper: as(
+      cxSpacing.WithSiteMargin,
+      cxSpacing.WithSiteXLConstraint,
+    ),
+    HeaderWrapper: cxSpacing.WithSiteXLConstraint,
+  },
+});
+
 const Header = asLayoutToken({
   Components: {
-    SiteHeader: as(cxHeader.Default),
+    Header: on(HeaderClean)(cxHeader.Default),
   },
 });
 
 const Footer = asLayoutToken({
   Components: {
-    // SiteFooter: as(cxFooter.Default),
+    Footer: on(FooterClean)(cxFooter.Default),
+  },
+  Theme: {
+    FooterWrapper: cxColor.BgSecondaryFooter,
   },
 });
 
@@ -72,12 +91,36 @@ const Default = asLayoutToken({
     ...Header.Components,
     ...Footer.Components,
   },
+  Spacing: {
+    ...ConstrainSite.Spacing,
+  },
+  Theme: {
+    ...Footer.Theme,
+  },
+});
+
+const HeaderOnly = asLayoutToken({
+  ...Default,
+  Components: {
+    ...Base.Components,
+    ...Header.Components,
+  },
+});
+
+const FooterOnly = asLayoutToken({
+  ...Default,
+  Components: {
+    ...Base.Components,
+    ...Footer.Components,
+  },
 });
 
 export default {
   Base,
   Default,
   Header,
+  HeaderOnly,
   Footer,
+  FooterOnly,
   WithBordersLabels,
 };
