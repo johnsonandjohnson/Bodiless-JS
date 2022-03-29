@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import tokens from './cxSubMenu';
+import cxSubMenu from './cxSubMenu';
 
-export default tokens;
+export default cxSubMenu;

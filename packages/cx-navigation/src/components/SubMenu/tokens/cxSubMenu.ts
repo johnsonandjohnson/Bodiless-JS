@@ -18,19 +18,14 @@ import {
   cxTextDecoration,
 } from '@bodiless/cx-elements';
 import {
-  // addClassesIf,
   addProps,
   as,
-  flowHoc,
-  // not,
   on,
   removeClassesIf,
+  replaceWith,
+  withDesign,
 } from '@bodiless/fclasses';
-import {
-  // isMenuContextActive,
-  // useIsMenuOpen,
-  useIsSubmenuExpanded,
-} from '@bodiless/navigation';
+import { useIsSubmenuExpanded } from '@bodiless/navigation';
 import { withAnalyticsAttr } from '../../../util';
 import { cxMenuTitle, MenuTitleClean } from '../../MenuTitle';
 import { asSubMenuToken } from '../SubMenuClean';
@@ -64,21 +59,15 @@ const Footer = asSubMenuToken(Base, {
   },
 });
 
-// @TODO: Keep it opened as user is editing it.
 const TopNav = asSubMenuToken({
   ...Base,
-  // @TODO: Improve theme, layout, and spacing.
   Layout: {
-    Wrapper: flowHoc(
-      as('absolute w-max min-w-full -left-7 top-full hidden group-hover:flex flex-col'),
+    Wrapper: as(
       removeClassesIf(useIsSubmenuExpanded)('hidden'),
+      'absolute w-max min-w-full -left-7 top-full hidden group-hover:flex flex-col',
     ),
     Title: 'flex',
-    _: flowHoc(
-      as('relative group'),
-      // addClassesIf(not(useIsMenuOpen))('hover:static'),
-      // removeClassesIf(isMenuContextActive)('relative'),
-    ),
+    _: 'relative group',
   },
   Spacing: {
     Wrapper: 'py-3',
@@ -96,14 +85,16 @@ const TopNav = asSubMenuToken({
   },
 });
 
-// @TODO: Toggle burger submenu on click.
 const Burger = asSubMenuToken({
   ...Base,
-  Layout: {
-    Wrapper: flowHoc(
-      // as('hidden'),
-      // removeClassesIf(useIsSubmenuExpanded)('hidden'),
-    ),
+  Components: {
+    ...Base.Components,
+    // Removes accordions icons.
+    OuterWrapper: withDesign({
+      Title: withDesign({
+        Icon: replaceWith(() => null),
+      }),
+    }),
   },
   Spacing: {
     Item: 'mt-10',

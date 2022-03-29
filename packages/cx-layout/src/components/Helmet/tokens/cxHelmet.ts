@@ -33,4 +33,16 @@ const Default = asHelmetToken({
   }
 });
 
-export default { Default };
+/**
+ * WithFixedBody token applies fixed position on body to prevent scrolling.
+ */
+const WithFixedBody = asHelmetToken({
+  Layout: {
+    BodyHelmet: 'fixed',
+  }
+});
+
+export default {
+  Default,
+  WithFixedBody,
+};

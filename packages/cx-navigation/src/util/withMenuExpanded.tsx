@@ -12,7 +12,19 @@
  * limitations under the License.
  */
 
-export { default as MenuClean, asMenuToken } from './MenuClean';
-export { default as cxMenu } from './tokens';
-export { default as cxMenuBase } from './tokens/cxMenu';
-export type { MenuComponents } from './types';
+import React from 'react';
+import { HOC, withDesign } from '@bodiless/fclasses';
+
+/**
+ * withExpandedAttr adds expanded prop to a component.
+ */
+const withExpandedAttr: HOC = Component => props => (
+  <Component expanded="true" {...props} />
+);
+
+const withMenuItemExpanded = withDesign({
+  Item: withExpandedAttr,
+});
+
+export default withMenuItemExpanded;
+export { withExpandedAttr };

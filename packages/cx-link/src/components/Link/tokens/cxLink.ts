@@ -13,7 +13,16 @@
  */
 
 import {
-  addProps, Span, addPropsIf, flowIf, as, on, addClassesIf, withProps, startWith
+  Span,
+  addClassesIf,
+  addProps,
+  addPropsIf,
+  as,
+  flowIf,
+  on,
+  replaceWith,
+  startWith,
+  withProps,
 } from '@bodiless/fclasses';
 import { withSidecarNodes, withNodeKey } from '@bodiless/core';
 import { cxColor, cxTextDecoration, cxTypography } from '@bodiless/cx-elements';
@@ -90,7 +99,7 @@ const WhereToBuy = asLinkToken({
     Icon: startWith(CartIcon),
   },
   Layout: {
-    Wrapper: 'w-full lg:w-auto flex justify-center items-center max-w-64 h-12 lg:w-48',
+    Wrapper: 'w-full flex justify-center items-center max-w-64 h-12 lg:w-48',
   },
   Spacing: {
     Wrapper: 'mx-auto p-3',
@@ -110,12 +119,22 @@ const WhereToBuy = asLinkToken({
     Body: 'leading',
   },
   Content: {
+    _: withProps({
+      children: 'Where to Buy',
+    }),
     Wrapper: withProps({
       href: '/where-to-buy',
     }),
-    Body: withProps({
-      children: 'Where to Buy',
-    }),
+  },
+});
+
+/**
+ * Token that provides the Where To Buy button without an icon.
+ */
+const WhereToBuyWithoutIcon = asLinkToken({
+  ...WhereToBuy,
+  Components: {
+    Icon: replaceWith(() => null),
   },
 });
 
@@ -125,4 +144,5 @@ export default {
   WithDownloadStyles,
   Sidecar,
   WhereToBuy,
+  WhereToBuyWithoutIcon,
 };

@@ -13,6 +13,7 @@
  */
 
 export { default as cxMenuTitle } from './tokens';
+export { default as cxMenuTitleBase } from './tokens/cxMenuTitle';
 export {
   default as MenuTitleClean,
   asMenuTitleToken

@@ -13,10 +13,12 @@
  */
 
 import { cxColor, cxSpacing } from '@bodiless/cx-elements';
-import { withBurgerMenuProvider } from '@bodiless/cx-navigation';
+import { useIsBurgerMenuHidden, withBurgerMenuProvider } from '@bodiless/cx-navigation';
 import {
   addProps,
   as,
+  flowIf,
+  not,
   on,
 } from '@bodiless/fclasses';
 import { asLayoutToken } from '../LayoutClean';
@@ -51,6 +53,7 @@ const Base = asLayoutToken({
     ),
   },
   Layout: {
+    Helmet: flowIf(not(useIsBurgerMenuHidden))(as(cxHelmet.WithFixedBody)),
   },
   Spacing: {
   }

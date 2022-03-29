@@ -12,11 +12,16 @@
  * limitations under the License.
  */
 
+import useHasSubMenu from './useHasSubMenu';
 import useIsFirstMenuItem from './useIsFirstMenuItem';
 import withMenuTitleAnalytics, { withAnalyticsAttr } from './withMenuAnalytics';
+import withMenuItemExpanded, { withExpandedAttr } from './withMenuExpanded';
 
 export {
+  useHasSubMenu,
   useIsFirstMenuItem,
   withMenuTitleAnalytics,
   withAnalyticsAttr,
+  withMenuItemExpanded,
+  withExpandedAttr,
 };

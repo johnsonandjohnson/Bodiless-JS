@@ -15,19 +15,25 @@
 import { useNode } from '@bodiless/core';
 
 /**
- * A hook that returns `true` if the menu item is first, `false` otherwise.
+ * A hook that returns `true` if a menu has submenu, `false` otherwise.
  */
-const useHasSubMenu = () => {
+const useHasSubMenu = (subMenuType: string, subMenuNodeKey: string) => {
+  // Gets menu node.
   const { node } = useNode();
-  const { path: nodePath } = node;
-  console.log(nodePath);
-  // const parentPath = nodePath.slice(0, -1);
-  // const itemId = nodePath.slice(-1)[0];
-  // const parentNode = node.peer<{ items: string[] }>(parentPath);
-  // if (Object.keys(parentNode.data).length < 1) {
-  //   return false;
-  // }
-  // const { items } = parentNode.data;
+  const { path } = node;
+
+  // Creates submenu path and retrieves its related node.
+  const subMenuPath: string[] = path.concat([subMenuNodeKey]);
+  const subMenuNode = node.peer<{ component: string }>(subMenuPath);
+
+  // Gets submenu component type from data.
+  const { data } = subMenuNode;
+  const { component } = data;
+
+  if (component === subMenuType) {
+    return true;
+  }
+
   return false;
 };
 

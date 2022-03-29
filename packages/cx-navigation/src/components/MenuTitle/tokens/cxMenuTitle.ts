@@ -13,7 +13,12 @@
  */
 
 import { withNodeKey, withSidecarNodes } from '@bodiless/core';
-import { Div, as, startWith } from '@bodiless/fclasses';
+import {
+  Div,
+  as,
+  replaceWith,
+  startWith,
+} from '@bodiless/fclasses';
 import { withBodilessLinkToggle, withPlaceholder } from '@bodiless/components';
 import { asBodilessLink } from '@bodiless/components-ui';
 import { cxEditorPlain } from '@bodiless/cx-editors';
@@ -46,4 +51,18 @@ const Default = asMenuTitleToken({
   },
 });
 
-export default { Default };
+/**
+ * WithTitleLinkDisabled replaces default menu title link with empty div.
+ */
+const WithTitleLinkDisabled = asMenuTitleToken({
+  ...Default,
+  Schema: {
+    ...Default.Schema,
+    Link: replaceWith(Div),
+  },
+});
+
+export default {
+  Default,
+  WithTitleLinkDisabled,
+};

@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import tokens from './cxBurgerMenu';
+import cxBurgerMenu from './cxBurgerMenu';
 
-export default tokens;
+export default cxBurgerMenu;

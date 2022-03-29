@@ -14,4 +14,5 @@
 
 export { asSubMenuToken, asSubMenuWrapperToken } from './SubMenuClean';
 export { default as cxSubMenu } from './tokens';
+export { default as cxSubMenuBase } from './tokens/cxSubMenu';
 export type { SubMenuComponents, SubMenuWrapperComponents } from './types';

@@ -13,3 +13,4 @@
  */
 
 export { default as cxSeparator } from './tokens';
+export { default as cxSeparatorBase } from './tokens/cxSeparator';

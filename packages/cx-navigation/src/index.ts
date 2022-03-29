@@ -12,8 +12,12 @@
  * limitations under the License.
  */
 
-// Re-export provider so that menu toggler can show/hide burger menu.
-export { withBurgerMenuProvider, asBurgerMenuToggler } from '@bodiless/navigation';
+// Re-export navigation necessary modules to make burger menu work.
+export {
+  asBurgerMenuToggler,
+  useIsBurgerMenuHidden,
+  withBurgerMenuProvider,
+} from '@bodiless/navigation';
 
 // CxNavigation components and tokens.
 export { BurgerMenuClean, asBurgerMenuToken, cxBurgerMenu } from './components/BurgerMenu';

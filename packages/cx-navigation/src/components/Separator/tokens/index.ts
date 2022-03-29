@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import tokens from './cxSeparator';
+import cxSeparator from './cxSeparator';
 
-export default tokens;
+export default cxSeparator;
