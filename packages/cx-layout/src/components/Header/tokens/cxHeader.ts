@@ -82,10 +82,10 @@ const Base = asHeaderToken({
   },
   Schema: {
     Logo: withNodeKey({ nodeKey: 'Logo' }),
-    UtilityMenu: withNodeKey({ nodeKey: 'UtilityMenu' }),
+    UtilityMenu: withNodeKey({ nodeKey: 'UtilityMenu', nodeCollection: 'site' }),
   },
   Layout: {
-    Container: 'container flex justify-between items-center',
+    Container: 'flex justify-between items-center',
     MenuContainer: 'hidden lg:flex justify-between items-center flex-grow',
     ActionMenuContainer: 'flex items-center',
   },

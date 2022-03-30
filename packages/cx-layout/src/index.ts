@@ -14,3 +14,4 @@
 
 export { cxLayout, LayoutClean, asLayoutToken } from './components/Layout';
 export { cxHeader, HeaderClean, asHeaderToken } from './components/Header';
+export { cxFooter, FooterClean, asFooterToken } from './components/Footer';
