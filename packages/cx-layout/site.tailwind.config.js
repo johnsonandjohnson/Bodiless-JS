@@ -26,6 +26,9 @@ module.exports = {
     extend: {
       margin: {
         'negative-half-screen': '-50vw',
+        'site-percent': '5%',
+        'md-site-percent': '8%',
+        'lg-site-percent': '8%',
       },
     },
   },
