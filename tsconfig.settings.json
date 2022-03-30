@@ -56,6 +56,8 @@
       "@bodiless/cx-layout/*": ["cx-layout/src/*"],
       "@bodiless/cx-link": ["cx-link/src/"],
       "@bodiless/cx-link/*": ["cx-link/src/*"],
+      "@bodiless/cx-navigation": ["cx-navigation/src/"],
+      "@bodiless/cx-navigation/*": ["cx-navigation/src/*"],
       "@bodiless/cx-templates": ["cx-templates/src/"],
       "@bodiless/cx-templates/*": ["cx-templates/src/*"],      
       "@bodiless/filtering": ["bodiless-filtering/src"],

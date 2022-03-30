@@ -72,6 +72,7 @@ function as(
   // Ensure that all token specs have been passed through `asTokenSpec`
   args.forEach(a => {
     if (typeof a !== 'function' && typeof a !== 'string' && !a![$TokenSpec]) {
+      // @todo add some debugging info here - token domains names, token meta if any, etc.
       throw new Error('All token specifications passed to "as" must be created by a version of "asTokenSpec"');
     }
   });

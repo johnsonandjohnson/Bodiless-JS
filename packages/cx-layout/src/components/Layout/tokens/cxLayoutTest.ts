@@ -24,22 +24,22 @@ const asBorderResponsiveIndicator = 'border text-red md:text-green lg:text-blue 
 /* Used in StyleGuide for Testing Purposes */
 const WithBordersLabels = asLayoutToken({
   Components: {
-    SiteHeader: replaceWith(Div),
-    SiteFooter: replaceWith(Div),
+    Header: replaceWith(Div),
+    Footer: replaceWith(Div),
     PageTopper: replaceWith(Div),
     PageCloser: replaceWith(Div),
   },
   Theme: {
     OuterContainer: 'border',
-    SiteHeader: asBorderResponsiveIndicator,
-    SiteFooter: asBorderResponsiveIndicator,
+    Header: asBorderResponsiveIndicator,
+    Footer: asBorderResponsiveIndicator,
     Container: asBorderResponsiveIndicator,
     PageTopper: asBorderResponsiveIndicator,
     PageCloser: asBorderResponsiveIndicator,
   },
   Behavior: {
-    SiteHeader: as(addProps({ children: 'Site Header', }),),
-    SiteFooter: as(addProps({ children: 'Site Footer', }),),
+    Header: as(addProps({ children: 'Site Header', }),),
+    Footer: as(addProps({ children: 'Site Footer', }),),
     PageTopper: as(addProps({ children: 'Page Topper', }),),
     PageCloser: as(addProps({ children: 'Page Closer', }),),
   },
