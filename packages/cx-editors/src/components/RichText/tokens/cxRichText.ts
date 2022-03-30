@@ -31,7 +31,6 @@ import {
   withHtmlDeserializer,
   asPreview,
   withBoldMeta,
-  withUnderlineMeta,
   withSuperScriptMeta,
   withHeader1Meta,
   withHeader2Meta,
