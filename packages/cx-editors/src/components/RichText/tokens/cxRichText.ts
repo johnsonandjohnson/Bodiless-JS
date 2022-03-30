@@ -73,7 +73,6 @@ const Default = asCxTokenSpec()({
   Core: {
     paragraph: as(replaceWith(P), asBlock as HOC),
     Bold: withBoldMeta,
-    Underline: withUnderlineMeta,
     Link: replaceWith(LinkClean),
     SuperScript: withSuperScriptMeta,
     H1: withHeader1Meta,
@@ -94,7 +93,6 @@ const Default = asCxTokenSpec()({
   Theme: {
     paragraph: cxTypography.Body,
     Bold: cxTextDecoration.Bold,
-    Underline: cxTextDecoration.Underline,
     SuperScript: cxTextDecoration.Superscript,
     H1: cxTypography.H1,
     H2: cxTypography.H2,
@@ -113,8 +111,15 @@ const Default = asCxTokenSpec()({
 
 const Basic = asCxTokenSpec()({
   ...Default,
-  Core: pick(Default.Core, 'paragraph', 'Bold', 'Underline', 'Link', 'SuperScript'),
-  Theme: pick(Default.Theme, 'paragraph', 'Bold', 'Underline', 'Link', 'SuperScript'),
+  Core: pick(Default.Core, 'paragraph', 'Bold', 'Link', 'SuperScript'),
+  Theme: pick(Default.Theme, 'paragraph', 'Bold', 'Link', 'SuperScript'),
+});
+
+const BasicNoLink = asCxTokenSpec()({
+  ...Basic,
+  Core: pick(Basic.Core, 'paragraph', 'Bold', 'SuperScript'),
+  Theme: pick(Basic.Theme, 'paragraph', 'Bold', 'SuperScript'),
+  Behavior: {},
 });
 
 const Copyright = asCxTokenSpec()({
@@ -144,6 +149,7 @@ const Copyright = asCxTokenSpec()({
 export default {
   Default,
   Basic,
+  BasicNoLink,
   AsFlowContainerItem,
   Copyright,
 };
