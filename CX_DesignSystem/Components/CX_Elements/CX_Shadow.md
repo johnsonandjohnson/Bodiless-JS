@@ -1,3 +1,0 @@
-# Shadowing CanvasX Tokens
-
-TBD
