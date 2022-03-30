@@ -94,7 +94,6 @@
     "isomorphic-git": "^1.10.1",
     "lodash": "^4.17.19",
     "md5-file": "^5.0.0",
-    "null-loader": "^3.0.0",
     "path-browserify": "^1.0.1",
     "postcss": "^8.2.4",
     "process": "^0.11.10",
