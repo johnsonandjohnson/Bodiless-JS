@@ -57,8 +57,7 @@ export default Layout;
 
 Provide the Shadowing function as defined in [Shadow](../CX_Elements/CX_Shadow).
 
-File to shadow:
-[`cxHeader.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-layout/src/components/Header/cxHeader.ts)
+File to shadow: `./lib/shadow/cx-layout/{MyHeader}.js`
 
 #### Customizing Via Extending
 
