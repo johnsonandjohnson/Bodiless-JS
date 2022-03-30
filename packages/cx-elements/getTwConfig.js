@@ -49,6 +49,7 @@ const twConfig = {
         divider: '#D8D8D8',
         'body-copy': '#63666A',
         'header-copy': '#212121',
+        'footer-copy': '#FFFFFF',
       },
       'cx-secondary': {
         eyebrow: '#CC0099',
@@ -62,7 +63,13 @@ const twConfig = {
       margin: {
         4.5: '1.125rem',
         5.75: '1.438rem',
-      }
+        'site-percent': '5%',
+        'md-site-percent': '8%',
+      },
+      padding: {
+        'site-percent': '5%',
+        'md-site-percent': '8%',
+      },
     },
   },
   variants: {

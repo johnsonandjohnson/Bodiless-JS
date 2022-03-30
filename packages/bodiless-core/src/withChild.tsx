@@ -21,6 +21,7 @@ import omit from 'lodash/omit';
 
 type InsertChildOptions = {
   designKey: string,
+  componentName: string,
   mode?: 'append' | 'prepend',
 };
 
@@ -38,7 +39,7 @@ const insertChild = (Child: CT, options: InsertChildOptions): HOC => (
   Component = Fragment,
 ) => {
   type Components = { [Child: string]: CT };
-  const { designKey, mode } = options;
+  const { designKey, componentName, mode } = options;
   const startComponents: Components = { [designKey]: Child };
   const WithChild: FC<any> = (props: PropsWithChildren<DesignableComponentsProps<Components>>) => {
     const { components, ...rest } = props;
@@ -68,7 +69,7 @@ const insertChild = (Child: CT, options: InsertChildOptions): HOC => (
     }
   };
   const applyDesign = extendDesignable(design => omit(design, [designKey]));
-  return applyDesign(startComponents, designKey)(WithChild) as ComponentType<any>;
+  return applyDesign(startComponents, componentName)(WithChild) as ComponentType<any>;
 };
 
 /**
@@ -77,6 +78,7 @@ const insertChild = (Child: CT, options: InsertChildOptions): HOC => (
  *
  * @param Child - Component to add as a child
  * @param designKey - Design key to reach the Child component using Design API.
+ * @param componentName - Optional component namespace for design key data attribute.
  *
  * @return An HOC which will add the Child to the given Parent.
  *
@@ -97,8 +99,10 @@ const insertChild = (Child: CT, options: InsertChildOptions): HOC => (
  * ```
  */
 const withChild = <P extends object>(
-  Child: CT, designKey = 'Child',
-): HOC<P> => insertChild(Child, { designKey });
+  Child: CT,
+  designKey: string = 'Child',
+  componentName: string = 'Component',
+): HOC<P> => insertChild(Child, { designKey, componentName });
 
 /**
  * Utility function to append a Child to the given component
@@ -106,12 +110,15 @@ const withChild = <P extends object>(
  *
  * @param Child - Component to add as a child
  * @param designKey - Design key to reach the Child component using Design API.
+ * @param componentName - Optional component namespace for design key data attribute.
  *
  * @return An HOC which will append the Child to the given Component.
  */
 const withAppendChild = <P extends object>(
-  Child: CT, designKey: string,
-): HOC<P> => insertChild(Child, { designKey, mode: 'append' });
+  Child: CT,
+  designKey: string,
+  componentName: string = 'Component',
+): HOC<P> => insertChild(Child, { designKey, componentName, mode: 'append' });
 
 /**
  * Utility function to prepend a Child to the given component
@@ -119,12 +126,15 @@ const withAppendChild = <P extends object>(
  *
  * @param Child - Component to add as a child
  * @param designKey - Design key to reach the Child component using Design API.
+ * @param componentName - Optional component namespace for design key data attribute.
  *
  * @return An HOC which will prepend the Child to the given Component.
  */
 const withPrependChild = <P extends object>(
-  Child: CT, designKey: string,
-): HOC<P> => insertChild(Child, { designKey, mode: 'prepend' });
+  Child: CT,
+  designKey: string,
+  componentName: string = 'Component',
+): HOC<P> => insertChild(Child, { designKey, componentName, mode: 'prepend' });
 
 export default withChild;
 export {

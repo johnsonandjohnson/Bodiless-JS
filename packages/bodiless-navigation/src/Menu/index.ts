@@ -23,7 +23,10 @@ import asTopNav, {
 import { useIsMenuOpen, useMenuContext } from './withMenuContext';
 import { useSubmenuContext } from './withMenuItemContext';
 import { withListSubMenu, withCardsSubMenu, withColumnSubMenu } from './withSubMenu';
-import { withMenuTitleEditors, withDefaultMenuTitleEditors, asMenuTitle } from './MenuTitles';
+import MenuTitle, {
+  withMenuTitleEditors, withDefaultMenuTitleEditors, asMenuTitle,
+} from './MenuTitles';
+import type { MenuTitleComponents } from './MenuTitles';
 
 export {
   asBodilessMenu,
@@ -42,6 +45,8 @@ export {
   isMenuContextNotActive,
   withMenuTitleEditors,
   withDefaultMenuTitleEditors,
+  MenuTitle,
+  MenuTitleComponents,
 };
 
 export * from './asAccessibleMenu';
