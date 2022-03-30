@@ -82,17 +82,16 @@ const Base = asHeaderToken({
     MenuTogglerWrapper: 'flex lg:hidden',
   },
   Spacing: {
-    Container: 'mx-auto mb-10 py-3 lg:py-0',
+    Wrapper: 'mb-10',
+    Container: as(
+      cxSpacing.WithSiteMargin,
+      cxSpacing.WithSiteXLConstraint,
+      'py-3 lg:py-0',
+    ),
     ActionMenuContainer: 'pl-5',
     // @todo perhaps this should be an element spcing token ike "LargeIconSize".
     MenuToggler: 'w-6 h-6',
     MenuTogglerWrapper: 'my-4',
-  },
-  Theme: {
-    Wrapper: as(
-      cxSpacing.WithSiteMargin,
-      cxSpacing.WithSiteXLConstraint,
-    ),
   },
   Schema: {
     Logo: withNodeKey({ nodeKey: 'Logo' }),
