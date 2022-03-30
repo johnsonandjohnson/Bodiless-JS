@@ -23,8 +23,7 @@ extend/shadow the existing component.
 
 Provide the Shadowing function as defined in [Shadow](../CX_Elements/CX_Shadow).
 
-File to shadow:
-[`cxLogo.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-layout/src/components/Logo/tokens/cxLogo.ts)
+File to shadow: `./lib/shadow/cx-layout/{MyLogo}.js`
 
 ## Architectural Details
 
