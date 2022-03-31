@@ -12,4 +12,5 @@
  * limitations under the License.
  */
 
-export * from './tokens';
+export * from './index.temp';
+export { default as cxImageBase } from './tokens/cxImage';

@@ -23,7 +23,7 @@ import flow from 'lodash/flow';
 import {
   asMark,
   withButton,
-} from '../src/RichTextItemSetters';
+} from '../src/RichTextItemSetters.bl-edit';
 
 const setupPageEditContext = (isEdit: boolean): PageEditContext => {
   const pageEditContext = new PageEditContext();
@@ -44,7 +44,7 @@ const createRichtext = () => {
 const createPluginButtonMock = () => {
   const createPluginButtonMockFn = jest.fn()
     .mockReturnValue(() => <></>);
-  jest.doMock('../src/plugin-factory/createPluginButton', () => ({
+  jest.doMock('../src/plugin-factory/createPluginButton.bl-edit', () => ({
     __esModule: true,
     default: createPluginButtonMockFn,
   }));

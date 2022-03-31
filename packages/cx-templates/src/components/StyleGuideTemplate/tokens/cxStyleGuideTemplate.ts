@@ -12,18 +12,18 @@
  * limitations under the License.
  */
 
-import { cxElement } from '@bodiless/cx-elements';
+import { cxTypography } from '@bodiless/cx-elements';
 import {
   EditorPlainClean, cxEditorPlain, RichTextClean, cxRichText
 } from '@bodiless/cx-editors';
 import { withNodeKey } from '@bodiless/core';
-import { on } from '@bodiless/fclasses';
+import { on, replaceWith, Fragment } from '@bodiless/fclasses';
 import { cxLayout, LayoutClean } from '@bodiless/cx-layout';
 import { asStyleGuideTemplateToken } from '../StyleGuideTemplateClean';
 
 const Default = asStyleGuideTemplateToken({
   Theme: {
-    TitleWrapper: cxElement.H1,
+    TitleWrapper: cxTypography.H1,
   },
   Components: {
     Wrapper: on(LayoutClean)(cxLayout.Default),
@@ -39,4 +39,31 @@ const Default = asStyleGuideTemplateToken({
   },
 });
 
-export default { Default };
+const NoLayout = asStyleGuideTemplateToken({
+  ...Default,
+  Components: {
+    ...Default.Components,
+    Wrapper: replaceWith(Fragment),
+  },
+});
+
+const HeaderOnly = asStyleGuideTemplateToken({
+  ...Default,
+  Components: {
+    Wrapper: on(LayoutClean)(cxLayout.HeaderOnly),
+  },
+});
+
+const FooterOnly = asStyleGuideTemplateToken({
+  ...Default,
+  Components: {
+    Wrapper: on(LayoutClean)(cxLayout.FooterOnly),
+  },
+});
+
+export default {
+  Default,
+  NoLayout,
+  HeaderOnly,
+  FooterOnly,
+};

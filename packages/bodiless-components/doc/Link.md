@@ -10,7 +10,7 @@ components — such as cards, menus, and images, to name a few.
 When you are able to add a link to a component, you will see an **Edit** button — depicted with a
 link icon — within its context menu; click on this button to open the _Link_ form.
 
-![Link form](./assets/LinkForm.jpg ':size=50%')
+![Link form](../assets/LinkForm.jpg ':size=50%')
 
 Using the _Link_ form, you can provide an existing URL to link to, or upload a file to link to.
 
@@ -30,7 +30,7 @@ Using the _Link_ form, you can provide an existing URL to link to, or upload a f
   select the file.
   - If successful, you will see a confirmation message and the _URL_ field will be auto-filled
     with the relative path to the uploaded file.  
-    ![File Upload Done](./assets/FileUploadDone.jpg ':size=50%')
+    ![File Upload Done](../assets/FileUploadDone.jpg ':size=50%')
 
 ### Add a Link to a Component
 
@@ -39,7 +39,7 @@ To set links used within components:
 01. In [Edit Mode](/ContentEditorUserGuide/#edit-mode), select a component that utilizes the link
     component (e.g., a linkable image).
 01. In the component's context menu, click **Edit** (depicted with a link icon).  
-    ![Linkable Image context menu with Link icon and "Edit" label](./assets/EditLinkIconInImageContextMenu.jpg ':size=50%')
+    ![Linkable Image context menu with Link icon and "Edit" label](../assets/EditLinkIconInImageContextMenu.jpg ':size=50%')
 01. Using the [_Link_ form](#the-link-form), provide an existing URL to link to, or upload a file to
     link to.
     - If desired, provide an aria label.
@@ -47,15 +47,16 @@ To set links used within components:
 
 ### Add a Link in the Rich Text Editor
 
-To add a link to text in the [Rich Text Editor](./RichText) (e.g., in the body copy of a Card):
+To add a link to text in the [Rich Text Editor](../Editors/RichText) (e.g., in the body copy of a
+Card):
 
 01. Highlight the text you want to add a link to.  
-    ![Highlighted text with Rich Text menu](./assets/HighlightLinkText.jpg)
+    ![Highlighted text with Rich Text menu](../assets/HighlightLinkText.jpg)
 01. In the Rich Text Editor toolbar, click the Link button to format your selected text as a link.  
-    ![Highlighted text with Link button selected in Rich Text menu](./assets/ClickLinkButton.jpg)
+    ![Highlighted text with Link button selected in Rich Text menu](../assets/ClickLinkButton.jpg)
 01. Click your now link-formatted text, and, within its context menu, under "Link," click **Edit**
     (depicted with a link icon).  
-    ![Rich Text context menu with Link icon and "Edit" label](./assets/RichTextLinkEditButtonInContextMenu.jpg ':size=25%')
+    ![Rich Text context menu with Link icon and "Edit" label](../assets/RichTextLinkEditButtonInContextMenu.jpg ':size=25%')
 01. Using the [_Link_ form](#the-link-form), provide an existing URL to link to, or upload a file to
     link to.
     - If desired, provide an aria label.

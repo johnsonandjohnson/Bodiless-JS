@@ -1,0 +1,34 @@
+{
+  "name": "@bodiless/hydration",
+  "version": "1.0.0-beta.1",
+  "description": "Tools to manage how React hydrates your components",
+  "author": "Lucas Varela <lvarelab@its.jnj.com>",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "sideEffects": false,
+  "typings": "lib/index.d.ts",
+  "files": [
+    "/lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "run-p build:lib build:api-doc",
+    "build:api-doc": "typedoc --out doc/api src",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
+  },
+  "dependencies": {
+    "@bodiless/fclasses": "^1.0.0-beta.1",
+    "@bodiless/core": "^1.0.0-beta.1"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2"
+  }
+}

@@ -22,10 +22,10 @@ import {
   as, flowHoc, replaceWith,
   H3, Section, Pre, Div,
 } from '@bodiless/fclasses';
-import { cxColor, cxElement } from '@bodiless/cx-elements';
+import { cxColor, cxTypography } from '@bodiless/cx-elements';
 
 const C = {
-  H3: as(cxElement.H3)(H3),
+  H3: as(cxTypography.H3)(H3),
   Example: as('pt-12')(Section),
   Demo: as('p-2 border border-1')(Div),
   Code: as(

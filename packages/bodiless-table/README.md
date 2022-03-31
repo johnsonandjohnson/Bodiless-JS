@@ -20,7 +20,7 @@ By default, two variations of the Table Component are available to choose from:
 To add a Table Component to your page:
 
 01. While in [Edit Mode](/ContentEditorUserGuide/#edit-mode), select a [Flow
-    Container](/Components/FlowContainer), and, within its context menu, under "Component," click
+    Container](/Components/FlowContainer/), and, within its context menu, under "Component," click
     **Add** (or **Swap**, if you're replacing a component).
 01. In the "Insert Component" modal, under "Type," check the "Table" checkbox, and select the table
     variation you would like to add.
@@ -35,7 +35,7 @@ To _edit_ the text within a Table Component, select the table cell you'd like to
 desired text.
 
 To _format_ the text within a Table Component, highlight the text you'd like to format, and use the
-[Rich Text Editor](/Components/RichText) formatting toolbar that pops up.
+[Rich Text Editor](./Editors/RichText) formatting toolbar that pops up.
 
 ![Rich Text Editor Formatting Toolbar](./assets/RTEFormattingToolbar.jpg)
 
@@ -43,7 +43,7 @@ To _format_ the text within a Table Component, highlight the text you'd like to 
    therefore, _format_ — text within a single cell at a time.
 
 ?> **Note:** For more information on the _Rich Text Editor_, please see: [Rich Text Editor
-   Component](./RichText).
+   Component](./Editors/RichText).
 
 ### Add Columns and Rows
 

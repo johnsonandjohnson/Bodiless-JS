@@ -1,10 +1,13 @@
 {
   "Components": {
-    "RichText.md": "./doc/RichTextEditor.md",
-    "assets": {
-      "SimpleRichTextNew.jpg": "./doc/assets/SimpleRichTextNew.jpg",
-      "BasicRichTextNew.jpg": "./doc/assets/BasicRichTextNew.jpg",
-      "FullRichTextNew.jpg": "./doc/assets/FullRichTextNew.jpg"
+    "Editors": {
+      "README.md": "./doc/Editors.md",
+      "RichText.md": "./doc/RichTextEditor.md",
+      "assets": {
+        "SimpleRichTextNew.jpg": "./doc/assets/SimpleRichTextNew.jpg",
+        "BasicRichTextNew.jpg": "./doc/assets/BasicRichTextNew.jpg",
+        "FullRichTextNew.jpg": "./doc/assets/FullRichTextNew.jpg"
+      }
     }
   }
 }

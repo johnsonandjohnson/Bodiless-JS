@@ -214,7 +214,8 @@ can easily populate your site with content. These contentful components will
 render the default content but you can easily override and edit the content to
 suit your needs.
 
-For information on layouts and working with the Flow Container see the [Flow Container documentation.](../../../Components/FlowContainer)
+For information on layouts and working with the Flow Container, see the [Flow Container
+documentation](../../../Components/FlowContainer/).
 
 ## Working with Content
 
@@ -261,7 +262,7 @@ options are available, where they are available to the editor, and which options
 are available for each variation.
 
 To read more about the Rich Text Editor see the [Rich Text Editor component
-documentation](../../../Components/RichText).
+documentation](../../../Components/Editors/RichText).
 
 ### Components
 
@@ -270,44 +271,44 @@ read more about working with the individual components.
 
 #### Layout
 
-* [Flow Container](../../../Components/FlowContainer)
-* [Rich Media Text Editor](../../../Components/RichText)
-* [Card](../../../Components/Card)
+* [Flow Container](/Components/FlowContainer/)
+* [Rich Text Editor](/Components/Editors/RichText)
+* [Card](/Components/Card)
 
 #### Media
 
-* [Image](../../../Components/Image/)
-* [YouTube](../../../Components/YouTube)
-* [Carousel](../../../Components/Carousel)
+* [Image](/Components/Image/)
+* [YouTube](/Components/YouTube)
+* [Carousel](/Components/Carousel)
 
 #### Interactions
 
-* [Link](../../../Components/Link)
-* [Single Accordion](../../../Components/SingleAccordion)
-* [Navigation](../../../Components/Navigation/)
-* [List Filter](../../../Components/FilterByGroup)
+* [Link](/Components/Link/)
+* [Single Accordion](/Components/SingleAccordion)
+* [Navigation](/Components/Navigation/)
+* [List Filter](/Components/FilterByGroup)
 
 #### Integrations
 
-* [Bazaarvoice](../../../Components/bv)
+* [Bazaarvoice](/Components/bv)
 
 #### SEO
 
-* [Sitemap.xml](../../../Development/Guides/BuildingSites/ComponentsStarterKit?id=sitemapxml-amp-robotstxt-file)
+* `Sitemap.xml`
 * `Robots.txt`
-* [Metatags](../../../Development/Guides/BuildingSites/ComponentsStarterKit?id=metadata-component)
+* [Metatags](/Development/Guides/BuildingSites/Meta/Metadata)
 
 ### Content Library
 
 Using the _Content Library_, you can save components that you've created, along with their embedded
 content, allowing you to reuse them elsewhere on your site. The Content Library can be configured
-for use in [Flow Containers](/Components/FlowContainer); once enabled, you will be able to:
+for use in [Flow Containers](/Components/FlowContainer/); once enabled, you will be able to:
 
 * Save components in your Flow Container to the Content Library.
-  * See: [Add a new component](/Components/FlowContainer#add-a-new-component)
+  * See: [Add a new component](/Components/FlowContainer/#add-a-new-component)
 * Add components saved in the Content Library to your Flow Container.
   * See: [Saving a component in the Content
-    Library](/Components/FlowContainer#saving-a-component-in-the-content-library)
+    Library](/Components/FlowContainer/#saving-a-component-in-the-content-library)
 * Unlink components from Content Library Items.
   * See: [Unlinking a component from the Content
-    Library](/Components/FlowContainer#unlinking-a-component-from-the-content-library)
+    Library](/Components/FlowContainer/#unlinking-a-component-from-the-content-library)

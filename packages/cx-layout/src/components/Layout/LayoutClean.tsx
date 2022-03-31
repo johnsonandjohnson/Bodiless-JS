@@ -21,8 +21,6 @@ import {
   A,
 } from '@bodiless/fclasses';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
-// import Footer from '../Footer/Footer';
-import { HeaderClean } from '../Header';
 import { HelmetClean } from '../Helmet';
 import { LayoutComponents, LayoutProps } from './types';
 
@@ -30,10 +28,12 @@ const layoutComponents: LayoutComponents = {
   OuterContainer: Div,
   SkipToMainContent: A,
   Helmet: HelmetClean,
-  SiteHeader: HeaderClean,
-  // SiteFooter: Footer,
-  SiteFooter: Fragment,
+  Header: Div,
+  HeaderWrapper: Div,
+  Footer: Div,
+  FooterWrapper: Div,
   Container: Div,
+  ContainerWrapper: Div,
   PageTopper: Fragment,
   PageCloser: Fragment,
 };
@@ -48,12 +48,15 @@ const layoutComponents: LayoutComponents = {
 export const LayoutCleanBase: FC<LayoutProps> = (layoutProps: LayoutProps) => {
   const {
     Container,
+    ContainerWrapper,
     Helmet,
     OuterContainer,
     PageCloser,
     PageTopper,
-    SiteFooter,
-    SiteHeader,
+    Header,
+    HeaderWrapper,
+    Footer,
+    FooterWrapper,
     SkipToMainContent,
   } = layoutProps.components;
 
@@ -61,13 +64,19 @@ export const LayoutCleanBase: FC<LayoutProps> = (layoutProps: LayoutProps) => {
     <OuterContainer>
       <SkipToMainContent />
       <Helmet />
-      <SiteHeader />
-      <Container>
-        <PageTopper />
-        {layoutProps.children}
-        <PageCloser />
-      </Container>
-      <SiteFooter />
+      <HeaderWrapper>
+        <Header />
+      </HeaderWrapper>
+      <ContainerWrapper>
+        <Container>
+          <PageTopper />
+          {layoutProps.children}
+          <PageCloser />
+        </Container>
+      </ContainerWrapper>
+      <FooterWrapper>
+        <Footer />
+      </FooterWrapper>
     </OuterContainer>
   );
 };

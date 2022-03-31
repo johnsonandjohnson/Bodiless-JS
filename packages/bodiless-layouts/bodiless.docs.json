@@ -1,12 +1,14 @@
 {
   "Components": {
-    "FlowContainer.md": "./doc/FlowContainer.md",
-    "assets": {
-      "ComponentLibraryNew.jpg": "./doc/assets/ComponentLibraryNew.jpg",
-      "ContentLibraryItemAndContextMenu.jpg": "./doc/assets/ContentLibraryItemAndContextMenu.jpg",
-      "ContextMenuWithLibrary.jpg": "./doc/assets/ContextMenuWithLibrary.jpg",
-      "ContextMenuWithLibraryUnlink.jpg": "./doc/assets/ContextMenuWithLibraryUnlink.jpg",
-      "EmptyFlowcontainer.jpg": "./doc/assets/EmptyFlowcontainer.jpg"
+    "FlowContainer": {
+      "README.md": "./doc/FlowContainer.md",
+      "assets": {
+        "ComponentLibraryNew.jpg": "./doc/assets/ComponentLibraryNew.jpg",
+        "ContentLibraryItemAndContextMenu.jpg": "./doc/assets/ContentLibraryItemAndContextMenu.jpg",
+        "ContextMenuWithLibrary.jpg": "./doc/assets/ContextMenuWithLibrary.jpg",
+        "ContextMenuWithLibraryUnlink.jpg": "./doc/assets/ContextMenuWithLibraryUnlink.jpg",
+        "EmptyFlowcontainer.jpg": "./doc/assets/EmptyFlowcontainer.jpg"
+      }
     }
   }
 }

@@ -12,14 +12,14 @@
  * limitations under the License.
  */
 
-import { cxElement } from '@bodiless/cx-elements';
+import { cxTypography } from '@bodiless/cx-elements';
 import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/cx-templates';
 import {
   flowHoc, H2, replaceWith, as, P
 } from '@bodiless/fclasses';
 import React from 'react';
 
-const Subtitle = as(cxElement.H2, 'pt-8')(H2);
+const Subtitle = as(cxTypography.H2, 'pt-8')(H2);
 const Para = as('pt-4')(P);
 
 const Examples = () => (
@@ -33,6 +33,9 @@ const Examples = () => (
     <Subtitle>Existing Pages</Subtitle>
     <Para>
       <ul>
+        <li><a href="./layout">Layout</a></li>
+        <li><a href="./header">Header</a></li>
+        <li><a href="./footer">Footer</a></li>
         <li><a href="./editors">Editors</a></li>
         <li><a href="./editors-monofont">Editors with MonoFont</a></li>
         <li><a href="./typography">Typography</a></li>

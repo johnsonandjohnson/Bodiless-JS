@@ -12,9 +12,11 @@
  * limitations under the License.
  */
 
+export * from './index.bl-edit';
+
+export { default as cxLink } from './tokens';
 export {
   useExternalLinkToggle, useIsDownloadLink, asEditableLink, anchorTo,
 } from './util';
-export { cxLink, cxLinkStatic } from './tokens';
-export { LinkClean, asLinkToken } from './LinkClean';
+export { default as LinkClean, asLinkToken } from './LinkClean';
 export type { LinkComponents, LinkBaseProps } from './types';

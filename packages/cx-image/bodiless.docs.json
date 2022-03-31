@@ -1,7 +1,10 @@
 {
-  "Components": {
-    "Image": {
-      "CX_Image.md": "./doc/Image.md"
+  "CX_DesignSystem": {
+    "Components": {
+      "CX_Image": {
+        "README.md": "./doc/Image.md",
+        "ImageConfigurations.md": "./doc/ImageConfigurations.md"
+      }
     }
   }
 }

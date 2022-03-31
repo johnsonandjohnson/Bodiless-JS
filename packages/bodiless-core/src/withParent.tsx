@@ -22,6 +22,7 @@ import { HOC, DesignableComponentsProps, extendDesignable } from '@bodiless/fcla
  *
  * @param Parent - Component to add as a Parent
  * @param designKey - A Design key to reach the Parent. 'Parent' by default.
+ * @param componentName - Optional component namespace for design key data attribute.
  *
  * @return An HOC which will wrap the given Child component with provided Parent.
  *
@@ -39,7 +40,11 @@ import { HOC, DesignableComponentsProps, extendDesignable } from '@bodiless/fcla
  * )(Child);
  * ```
  */
-const withParent = (Parent: ComponentType, designKey: string = 'Parent'): HOC => (
+const withParent = (
+  Parent: ComponentType,
+  designKey: string = 'Parent',
+  componentName: string = 'Component',
+): HOC => (
   Component,
 ) => {
   type Components = { [Parent: string]: ComponentType };
@@ -55,7 +60,7 @@ const withParent = (Parent: ComponentType, designKey: string = 'Parent'): HOC =>
     );
   };
   const applyDesign = extendDesignable(design => omit(design, [designKey]));
-  return applyDesign(startComponents, designKey)(WithParent) as ComponentType<any>;
+  return applyDesign(startComponents, componentName)(WithParent) as ComponentType<any>;
 };
 
 export default withParent;

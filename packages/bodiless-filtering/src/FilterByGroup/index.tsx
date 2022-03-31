@@ -28,7 +28,6 @@ import type {
   FilterTagType,
   FilteredItemType,
 } from './types';
-import { asResponsiveFilter } from './Filter';
 import withFilterByTags from './withFilterByTags';
 import withFilterSelection from './withFilterSelection';
 
@@ -42,7 +41,6 @@ export {
   withTagProps,
   useRegisterItem,
   Tag,
-  asResponsiveFilter,
   withFilterByTags,
   withFilterSelection,
 };

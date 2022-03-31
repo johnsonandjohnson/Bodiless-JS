@@ -24,7 +24,7 @@ import {
   withDesign, startWith, DesignableComponentsProps,
 } from '@bodiless/fclasses';
 
-type MenuTitleComponents = {
+export type MenuTitleComponents = {
   Link: ComponentType<any>,
   Title: ComponentType<any>,
 };

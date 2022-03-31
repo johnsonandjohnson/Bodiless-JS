@@ -12,4 +12,6 @@
  * limitations under the License.
  */
 
-export * from './cxImage';
+import cxImage from './cxImage';
+
+export default cxImage;

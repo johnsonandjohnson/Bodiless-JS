@@ -69,9 +69,9 @@ import {
   getGlobalButtons,
   getSelectorButtons,
   getInlineButtons,
-} from './RichTextItemGetters';
+} from './RichTextItemGetters.bl-edit';
 import useKeyBoardShortcuts from './useKeyBoardShortcuts';
-import TextSelectorButton from './components/TextSelectorButton';
+import TextSelectorButton from './components/TextSelectorButton.bl-edit';
 import { uiContext, getUI, UI } from './RichTextContext';
 import {
   withBoldMeta,
@@ -86,9 +86,9 @@ import {
   withHeader1Meta,
   withHeader2Meta,
   withHeader3Meta,
-} from './meta';
+} from './meta/index.bl-edit';
 import withDefaults from './withDefaults';
-import { withPreview } from './RichTextPreview';
+import { withPreview } from './RichTextPreview.bl-edit';
 import withDataMigrator from './withDataMigrator';
 import withHtmlPaste from './withHtmlPaste';
 import type {

@@ -1,1 +1,4 @@
-doc/Components/Navigation/README.md
+# `@bodiless/navigation`
+
+See [Navigation Docs](./doc/README.md).
+

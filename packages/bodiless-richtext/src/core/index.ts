@@ -12,11 +12,11 @@
  * limitations under the License.
  */
 
-export { default as Content } from './Content';
-export { default as SlateEditor, withSlateEditor } from './SlateEditor';
-export { default as HoverMenu } from './HoverMenu';
-export type { HoverMenuProps, UI } from './HoverMenu';
+export { default as Content } from './Content.bl-edit';
+export { default as SlateEditor, withSlateEditor } from './SlateEditor.bl-edit';
+export { default as HoverMenu } from './HoverMenu.bl-edit';
+export type { HoverMenuProps, UI } from './HoverMenu.bl-edit';
 export {
   default as SlateEditorContext,
   useSlateContext,
-} from './SlateEditorContext';
+} from './SlateEditorContext.bl-edit';

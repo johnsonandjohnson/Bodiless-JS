@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import pick from 'lodash/pick';
 import {
   replaceWith,
   P,
@@ -22,6 +23,7 @@ import {
   H4,
   H5,
   startWith,
+  removeClasses,
 } from '@bodiless/fclasses';
 import {
   asBlock,
@@ -41,7 +43,13 @@ import {
   DefaultNormalHref,
 } from '@bodiless/components';
 import { ifComponentSelector } from '@bodiless/layouts';
-import { asCxTokenSpec, cxElement } from '@bodiless/cx-elements';
+import {
+  asCxTokenSpec,
+  cxColor,
+  cxFontSize,
+  cxTextDecoration,
+  cxTypography,
+} from '@bodiless/cx-elements';
 import { LinkClean, cxLink } from '@bodiless/cx-link';
 
 const withLinkDeserializer = withHtmlDeserializer(
@@ -61,7 +69,6 @@ const AsFlowContainerItem = asCxTokenSpec()({
   Meta: flowHoc.meta.term('Type')('Text Editor'),
 });
 
-// QUESTION -- I had to bring in the definitions to get right order as () didn't work.
 const Default = asCxTokenSpec()({
   Core: {
     paragraph: as(replaceWith(P), asBlock as HOC),
@@ -84,16 +91,16 @@ const Default = asCxTokenSpec()({
   Content: {
     _: addProps({ placeholder: 'Placeholder' }),
   },
-  Components: {
-    paragraph: cxElement.Body,
-    Bold: cxElement.Bold,
-    Underline: cxElement.Underline,
-    SuperScript: cxElement.Superscript,
-    H1: cxElement.H1,
-    H2: cxElement.H2,
-    H3: cxElement.H3,
-    H4: cxElement.H4,
-    H5: cxElement.H5,
+  Theme: {
+    paragraph: cxTypography.Body,
+    Bold: cxTextDecoration.Bold,
+    Underline: cxTextDecoration.Underline,
+    SuperScript: cxTextDecoration.Superscript,
+    H1: cxTypography.H1,
+    H2: cxTypography.H2,
+    H3: cxTypography.H3,
+    H4: cxTypography.H4,
+    H5: cxTypography.H5,
     Link: cxLink.Default,
   },
   Behavior: {
@@ -104,4 +111,39 @@ const Default = asCxTokenSpec()({
   },
 });
 
-export default { Default, AsFlowContainerItem };
+const Basic = asCxTokenSpec()({
+  ...Default,
+  Core: pick(Default.Core, 'paragraph', 'Bold', 'Underline', 'Link', 'SuperScript'),
+  Theme: pick(Default.Theme, 'paragraph', 'Bold', 'Underline', 'Link', 'SuperScript'),
+});
+
+const Copyright = asCxTokenSpec()({
+  ...Basic,
+  Theme: {
+    ...Basic.Theme,
+    paragraph: as(
+      cxColor.TextPrimaryFooterCopy,
+      cxFontSize.XS,
+      cxTextDecoration.Normal,
+    ),
+    Link: as(
+      cxLink.Default,
+      cxColor.TextPrimaryFooterCopy,
+      cxColor.TextPrimaryInteractive,
+      cxFontSize.XS,
+      cxTextDecoration.Bold,
+      cxTextDecoration.Underline,
+      removeClasses('text-m-base lg:text-base'),
+    ),
+  },
+  Content: {
+    _: addProps({ placeholder: 'Insert Copyright' }),
+  },
+});
+
+export default {
+  Default,
+  Basic,
+  AsFlowContainerItem,
+  Copyright,
+};

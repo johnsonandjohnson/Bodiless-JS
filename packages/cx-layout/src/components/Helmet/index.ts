@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
-export { cxHelmet } from './Helmet.token';
-export { HelmetClean, asHelmetToken } from './HelmetClean';
+export { default as cxHelmetBase } from './tokens/cxHelmet';
+export { default as cxHelmet } from './tokens';
+export { default as HelmetClean, asHelmetToken } from './HelmetClean';
 export { HelmetComponents, HelmetProps } from './types';
