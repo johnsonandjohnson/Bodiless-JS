@@ -18,12 +18,14 @@ import {
 } from 'enzyme';
 import {
   DefaultContentNode, NodeProvider, useNode, withNodeKey, withNode,
-  PageEditContext, PageContextProvider,
+  PageEditContext, PageContextProvider, ifToggledOff,
 } from '@bodiless/core';
 import flowRight from 'lodash/flowRight';
 import flow from 'lodash/flow';
 import identity from 'lodash/identity';
-import { withDesign, withoutProps, HOC } from '@bodiless/fclasses';
+import {
+  withDesign, withoutProps, HOC, flowHoc, startWith
+} from '@bodiless/fclasses';
 
 import {
   asBodilessChameleon, withChameleonComponentFormControls,
@@ -182,8 +184,7 @@ describe('asBodilessChameleon', () => {
         ));
         const Form = getForm(wrapper);
         const form = mount(<Form />);
-        // First component is selected by default
-        expect(form.find('input[value="A"]').prop('checked')).toBeTruthy();
+        expect(form.find('input[value="A"]').prop('checked')).toBeFalsy();
         expect(form.find('input[value="B"]').prop('checked')).toBeFalsy();
         expect(form.find('label#bl-component-form-chameleon-radio-A').text()).toBe('A');
         expect(form.find('label#bl-component-form-chameleon-radio-B').text()).toBe('B');
@@ -221,6 +222,17 @@ describe('asBodilessChameleon', () => {
     wrapper = mount(<Test data={{}} />);
     expect(wrapper.find('span#test').prop('data-test-a')).toBeUndefined();
     expect(wrapper.find('span#test').prop('data-test-default')).toBe(true);
+  });
+
+  it('Supports startWith', () => {
+    const Test = flowHoc(
+      asBodilessChameleon('foo'),
+      withDesign({
+        _default: startWith(() => <div id="test" className="foo" />),
+      }),
+    )(() => <div id="test" className="bar" />);
+    const wrapper = mount(<Test />);
+    expect(wrapper.find('div#test').prop('className')).toBe('foo');
   });
 
   it('Preserves the node path of the wrapped component', () => {

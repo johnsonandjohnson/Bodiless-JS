@@ -3,6 +3,103 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.6...v0.3.7) (2022-02-16)
+
+
+### Bug Fixes
+
+* **components:** Ensure chameleon base component is replaceable. ([#1363](https://github.com/johnsonandjohnson/bodiless-js/issues/1363)) ([c6aad8d](https://github.com/johnsonandjohnson/bodiless-js/commit/c6aad8d9343fe3e383ff4781ec1fe2b50aaff15c)), closes [#1362](https://github.com/johnsonandjohnson/bodiless-js/issues/1362)
+* **lint:** fixing ESlint detecting common syntax issue ([#1343](https://github.com/johnsonandjohnson/bodiless-js/issues/1343)) ([92f0099](https://github.com/johnsonandjohnson/bodiless-js/commit/92f00996f35dcd4e6b58d2d6344d596b02307237))
+
+
+### Features
+
+* **Layout, Content library:** content Library item created on a deleted page uses src of this … ([#1358](https://github.com/johnsonandjohnson/bodiless-js/issues/1358)) ([86d132d](https://github.com/johnsonandjohnson/bodiless-js/commit/86d132dc3a322dc3dd07036192a5a27a503ef61a))
+
+
+### Performance Improvements
+
+* **components,layouts:** Improve performance of heavy component selectors ([#1308](https://github.com/johnsonandjohnson/bodiless-js/issues/1308)) ([050fa7b](https://github.com/johnsonandjohnson/bodiless-js/commit/050fa7b641ded750abb284bbb329da0ebed71ee5)), closes [#1236](https://github.com/johnsonandjohnson/bodiless-js/issues/1236)
+
+
+
+
+
+## [0.3.6](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.5...v0.3.6) (2022-01-24)
+
+
+### Bug Fixes
+
+* **bodiless-gtm:** Add bodiless/gtm and make withDataLayerScript more flexible ([#1340](https://github.com/johnsonandjohnson/bodiless-js/issues/1340)) ([77abac2](https://github.com/johnsonandjohnson/bodiless-js/commit/77abac25cd2cf6054bdcd59645665fc65ce92903))
+
+
+### Features
+
+* **aria-label:** Add Aria Label Type ([f9309ef](https://github.com/johnsonandjohnson/bodiless-js/commit/f9309ef1d682d8f22cbb94e6f3dd363b84e577ad))
+* **aria-label:** Add Skelenton Helpers To Convert Id Into Props ([3d31de1](https://github.com/johnsonandjohnson/bodiless-js/commit/3d31de1e0d0f4109cc4fc6855c1c15dd459d8a24))
+* **aria-label:** Adjust Aria Label Id ([4169f57](https://github.com/johnsonandjohnson/bodiless-js/commit/4169f57b4cbfbe5a05dcba1a29a978105deefc73))
+* **aria-label:** Edit Aria Label Field And Add It To Submit Handler ([a4c0e2e](https://github.com/johnsonandjohnson/bodiless-js/commit/a4c0e2ebf43bd49ea6d8b44d4165a4e39df7960b))
+* **aria-label:** Fixing aria-label field logic ([171af80](https://github.com/johnsonandjohnson/bodiless-js/commit/171af805fea685f85e72ee1cf77e6a4825424bf2))
+* **aria-label:** Implement hook to add aria-label props ([da7a154](https://github.com/johnsonandjohnson/bodiless-js/commit/da7a154884ddbd1abe545583deb52e11957ba94b))
+* **aria-label:** Implementing aria-label overwrite ([82f9e8f](https://github.com/johnsonandjohnson/bodiless-js/commit/82f9e8f97ef7e176febb7fa8a0e04cc004ef8221))
+* **redirect:** Ability edit redirects ([#1330](https://github.com/johnsonandjohnson/bodiless-js/issues/1330)) ([aad069b](https://github.com/johnsonandjohnson/bodiless-js/commit/aad069bcc82f065c681d78cde59249d56350d938))
+
+
+
+
+
+## [0.3.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.4...v0.3.5) (2021-12-29)
+
+
+### Bug Fixes
+
+* **GTM:** nested GTM DataLayer ([#1288](https://github.com/johnsonandjohnson/bodiless-js/issues/1288)) ([683e5a8](https://github.com/johnsonandjohnson/bodiless-js/commit/683e5a8ec130ee63abe6b4c5af7df6fe0be10b31))
+
+
+### Features
+
+* **component:** Redirect via clientside ([#1272](https://github.com/johnsonandjohnson/bodiless-js/issues/1272)) ([0aa63e4](https://github.com/johnsonandjohnson/bodiless-js/commit/0aa63e4c292dda4ec60252c36885b237feb13cf5))
+
+
+
+
+
+## [0.3.4](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.3...v0.3.4) (2021-12-16)
+
+**Note:** Version bump only for package @bodiless/components
+
+
+
+
+
+## [0.3.3](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.2...v0.3.3) (2021-12-15)
+
+
+### Bug Fixes
+
+* **adminui:** Fix admin ui issue ([#1307](https://github.com/johnsonandjohnson/bodiless-js/issues/1307)) ([df9df32](https://github.com/johnsonandjohnson/bodiless-js/commit/df9df323b7561c255db4899828a9173e8ca5b35a))
+* **bodiless-components:** Allow digits in anchor id ([#1291](https://github.com/johnsonandjohnson/bodiless-js/issues/1291)) ([12d7a67](https://github.com/johnsonandjohnson/bodiless-js/commit/12d7a674898f07a5c3fa0f673d07b7b7af7001da))
+
+
+
+
+
+## [0.3.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v0.3.2) (2021-12-13)
+
+
+### Bug Fixes
+
+* **informed:** Unlock "informed" package version, fix related issues ([#1212](https://github.com/johnsonandjohnson/bodiless-js/issues/1212)) ([7742a3f](https://github.com/johnsonandjohnson/bodiless-js/commit/7742a3ff614b0c58a35b5c028852e74645266591))
+
+
+### Features
+
+* Add tree shaking support to all browser packages ([#1251](https://github.com/johnsonandjohnson/bodiless-js/issues/1251)) ([0c73113](https://github.com/johnsonandjohnson/bodiless-js/commit/0c73113c7c2d0c9dcc2dd8be922048173b1e9138)), closes [#1254](https://github.com/johnsonandjohnson/bodiless-js/issues/1254) [#1244](https://github.com/johnsonandjohnson/bodiless-js/issues/1244) [#1245](https://github.com/johnsonandjohnson/bodiless-js/issues/1245) [#1261](https://github.com/johnsonandjohnson/bodiless-js/issues/1261) [#1283](https://github.com/johnsonandjohnson/bodiless-js/issues/1283)
+
+
+
+
+
 ## [0.3.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.0...v0.3.1) (2021-11-15)
 
 

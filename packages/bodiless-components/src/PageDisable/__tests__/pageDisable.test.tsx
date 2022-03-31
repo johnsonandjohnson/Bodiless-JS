@@ -15,7 +15,7 @@
 import React from 'react';
 import { render, mount } from 'enzyme';
 import { PageEditContext } from '@bodiless/core';
-import { asToken, A, HOC } from '@bodiless/fclasses';
+import { flowHoc, A, HOC } from '@bodiless/fclasses';
 import { asBodilessLink } from '../../Link';
 import { withMockNode } from '../../../__tests__/helpers/MockContentNode';
 import { PageDisabledDataItems } from '../types';
@@ -47,7 +47,7 @@ const mockDisabledPages: PageDisabledDataItems = {
   },
 };
 
-const withPageLink = (pagePath: string) => asToken(
+const withPageLink = (pagePath: string) => flowHoc(
   asBodilessLink(),
   withMockNode({ href: pagePath, disabled: mockDisabledPages }, ['Page']) as HOC,
 )(A);
@@ -78,6 +78,7 @@ describe('Disabled page', () => {
     });
     it('Highlights disabled links in edit mode', () => {
       let mockIsEdit: jest.SpyInstance;
+      // eslint-disable-next-line prefer-const
       mockIsEdit = jest.spyOn(PageEditContext.prototype, 'isEdit', 'get').mockReturnValue(true);
       const wrapper1 = mount(<PageLink1 />);
       expect(wrapper1.render().hasClass('bl-link-disabled')).toBeTruthy();

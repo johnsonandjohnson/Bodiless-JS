@@ -14,7 +14,7 @@
 import React, { ComponentType, Fragment } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
-import { designable, Design } from '../src/Design';
+import { designable, Design } from '../src';
 
 describe('designable', () => {
   describe('when props are changed', () => {

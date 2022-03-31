@@ -14,7 +14,7 @@
 
 import { WithNodeKeyProps, withNodeKey } from '@bodiless/core';
 import {
-  Token, addProps, withDesign, asToken,
+  HOC, addProps, withDesign, flowHoc,
 } from '@bodiless/fclasses';
 
 import { withBreadcrumbStartingTrail, withBreadcrumbFinalTrail } from './Breadcrumbs';
@@ -51,15 +51,15 @@ const withDefaultStartingTrailData = withDesign({
  * Optional nodeKeys of type `WithNodeKeyProps` that will be applied to the StartingTrail.
  *
  * @return
- * Token that adds starting trail with provided Title Editors and nodeKeys.
+ * HOC that adds starting trail with provided Title Editors and nodeKeys.
  */
 export const withEditableStartingTrail = (
-  withTitleEditors: Token = withDefaultMenuTitleEditors,
+  withTitleEditors: HOC = withDefaultMenuTitleEditors,
   nodeKeys?: WithNodeKeyProps,
-) => asToken(
+) => flowHoc(
   withBreadcrumbStartingTrail,
   withDesign({
-    StartingTrail: asToken(
+    StartingTrail: flowHoc(
       asMenuTitle,
       withTitleEditors,
       withNodeKey(withDefaultStartingTrailNodeKey(nodeKeys)),
@@ -79,15 +79,15 @@ export const withEditableStartingTrail = (
  * Optional nodeKeys of type `WithNodeKeyProps` that will be applied to the FinalTrail.
  *
  * @return
- * Token that adds final trail with provided Title Editors and nodeKeys.
+ * HOC that adds final trail with provided Title Editors and nodeKeys.
  */
 export const withEditableFinalTrail = (
-  withTitleEditors: Token = withDefaultMenuTitleEditors,
+  withTitleEditors: HOC = withDefaultMenuTitleEditors,
   nodeKeys?: WithNodeKeyProps,
-) => asToken(
+) => flowHoc(
   withBreadcrumbFinalTrail,
   withDesign({
-    FinalTrail: asToken(
+    FinalTrail: flowHoc(
       asMenuTitle,
       withTitleEditors,
       withNodeKey(withDefaultFinalTrailNodeKey(nodeKeys)),

@@ -13,7 +13,7 @@
  */
 
 import { HTMLProps } from 'react';
-import { stylable } from './FClasses';
+import { stylable } from './addClasses';
 
 export const A = stylable<HTMLProps<HTMLAnchorElement>>('a');
 export const Abbr = stylable<HTMLProps<HTMLElement>>('abbr');

@@ -13,12 +13,12 @@
  */
 
 import React, {
-  createContext, useContext, useLayoutEffect, FC,
+  createContext, useContext, FC, useLayoutEffect,
 } from 'react';
-import { useNode } from '@bodiless/core';
+import { useNode, useEditContext } from '@bodiless/core';
 import type { LinkData } from '@bodiless/components';
-import { observer } from 'mobx-react-lite';
-import { HOC, Token } from '@bodiless/fclasses';
+import { observer } from 'mobx-react';
+import type { HOC } from '@bodiless/fclasses';
 import { BreadcrumbItem } from './BreadcrumbStore';
 import type { BreadcrumbItemType } from './BreadcrumbStore';
 import { useBreadcrumbStore, asHiddenBreadcrumbSource } from './BreadcrumbStoreProvider';
@@ -69,6 +69,7 @@ const asBreadcrumb = ({
   titleNodeKey,
 }: BreadcrumbSettings): HOC => Component => {
   const AsBreadcrumb = observer((props: any) => {
+    const { isEdit } = useEditContext();
     const current = useBreadcrumbContext();
     const store = useBreadcrumbStore();
     if (store === undefined) return <Component {...props} />;
@@ -93,21 +94,29 @@ const asBreadcrumb = ({
       parent: current,
       store,
     });
-    // During SSR we need to populate the store on render, bc effects are not executed.
-    if (isSSR()) {
+
+    if (!isEdit) {
+      // To avoid flicker, we need to populate the store on render
+      // otherwise the breadcrumbs render with no items before
+      // a layout effect is executed.
       store.setItem(item);
-    } else {
-      // Normally, conditional hooks violate the "rules of hooks", but here
-      // the condition evaluates the same in a given render environment, and
-      // we can't/shouldn't call useLayoutEffect during SSR.
-      useLayoutEffect(() => {
-        store.setItem(item);
-      }, [titleNode.data, linkNode.data]);
-      // deleting item from store on unmount
-      useLayoutEffect(() => () => {
-        store.deleteItem(id);
-      }, []);
     }
+
+    useLayoutEffect(() => {
+      if (!isSSR()) {
+        store.setItem(item);
+      }
+    }, [titleNode.data, linkNode.data]);
+
+    // Deleting item from store on unmount.
+    useLayoutEffect(() => () => {
+      // Only necessary in edit mode since items are not added or removed
+      // under any other circumstances.
+      if (isEdit) {
+        store.deleteItem(id);
+      }
+    }, []);
+
     return (
       <BreadcrumbContextProvider value={item}>
         <Component {...props} />
@@ -134,7 +143,7 @@ const asBreadcrumb = ({
  * @see asHiddenBreadcrumbSource
  * @see asBreadcrumb
  */
-const asBreadcrumbSource: Token = Component => {
+const asBreadcrumbSource: HOC = Component => {
   const SSRSource = asHiddenBreadcrumbSource(Component);
 
   const AsBreadcrumbSource: FC<any> = props => (

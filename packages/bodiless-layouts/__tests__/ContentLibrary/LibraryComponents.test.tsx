@@ -24,7 +24,7 @@ import {
 } from '@bodiless/core';
 
 import {
-  asToken,
+  flowHoc,
   withDesign,
   startWith,
 } from '@bodiless/fclasses';
@@ -34,10 +34,8 @@ import {
   withDesc,
   withFacet,
 } from '../../src/meta';
-import {
-  withLibraryComponents,
-  CONTENT_LIBRARY_TYPE_PREFIX,
-} from '../../src/ContentLibrary/withLibraryComponents';
+import { withLibraryComponents } from '../../src/ContentLibrary/withLibraryComponents';
+import { CONTENT_LIBRARY_TYPE_PREFIX } from '../../src/ContentLibrary/withLibraryContext';
 import EditFlowContainer, { EditFlowContainerComponents } from '../../src/FlowContainer/EditFlowContainer';
 
 // Mock method (from appendTailwindWidthClass.ts) which are not implemented in JSDOM. See
@@ -64,15 +62,15 @@ const Foo1: FC<any> = () => {
 };
 Foo1.displayName = 'Foo1';
 const variants1 = {
-  foo1: asToken(
+  foo1: flowHoc(
     startWith(Foo1),
   ),
-  foo2: asToken(
+  foo2: flowHoc(
     startWith(() => <></>),
   ),
 };
 const variants2 = {
-  foo3: asToken(
+  foo3: flowHoc(
     startWith(() => (<span>V3</span>)),
     withType('Type v3')(),
     withTitle('Title v3'),
@@ -116,22 +114,22 @@ describe('withLibraryComponents', () => {
   });
 
   it('adds empty design if no content library data exists.', () => {
-    const ComponentWithLibrary = withLibraryComponents()(EditFlowContainer);
+    const ComponentWithLibrary = withLibraryComponents(undefined, '_default')(EditFlowContainer);
     const wrapper = shallow(<ComponentWithLibrary />);
     expect(wrapper.props()).toEqual(expect.objectContaining({ design: {} }));
   });
 
   it('keeps design added from other FC design variants.', () => {
     const design$a = {
-      foo1: asToken(),
-      foo2: asToken(),
+      foo1: flowHoc(),
+      foo2: flowHoc(),
     };
     const design$b = {
-      foo3: asToken(),
+      foo3: flowHoc(),
     };
-    const ComponentWithLibrary = asToken(
+    const ComponentWithLibrary = flowHoc(
       withDesign(design$a),
-      withLibraryComponents(),
+      withLibraryComponents(undefined, '_default'),
       withDesign(design$b),
     )(EditFlowContainer);
     const wrapper = mount(<ComponentWithLibrary />);
@@ -147,9 +145,9 @@ describe('withLibraryComponents', () => {
       ComponentWrapper: CT<any>,
     };
 
-    const FlowContainerWithLibrary = asToken(
+    const FlowContainerWithLibrary = flowHoc(
       withNode,
-      withLibraryComponents(['root', 'my_lib']),
+      withLibraryComponents(['root', 'my_lib'], '_default'),
       withDesign(variants1),
       withDesign(variants2),
       withDefaultContent(mockFlowContainerContent),

@@ -13,22 +13,21 @@
  */
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { ComponentType, HTMLProps } from 'react';
 import type { WithNodeProps } from '@bodiless/core';
-import type { DesignableComponentsProps } from '@bodiless/fclasses';
+import type { DesignableComponentsProps, ComponentOrTag } from '@bodiless/fclasses';
 import type { BreadcrumbItemType as BreadcrumbStoreItemType } from './BreadcrumbStore';
 
 type BreadcrumbsComponents = {
-  StartingTrail: ComponentType<any>,
-  Separator: ComponentType<HTMLProps<HTMLSpanElement>>,
-  NavWrapper: ComponentType<HTMLProps<HTMLDivElement>>,
-  Wrapper: ComponentType<HTMLProps<HTMLUListElement>>,
-  Item: ComponentType<HTMLProps<HTMLLIElement> & {
+  StartingTrail: ComponentOrTag<any>,
+  Separator: ComponentOrTag<any>,
+  NavWrapper: ComponentOrTag<any>,
+  Wrapper: ComponentOrTag<any>,
+  Item: ComponentOrTag<{
     position: number;
     isCurrentPage: boolean;
   }>,
-  Title: ComponentType<any>,
-  FinalTrail: ComponentType<any>,
+  Title: ComponentOrTag<any>,
+  FinalTrail: ComponentOrTag<any>,
 };
 
 type CleanBreadcrumbItemType = {

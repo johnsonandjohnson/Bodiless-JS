@@ -65,11 +65,11 @@ tools which allow browsing the design system (eg StorybooK), and eases
 the process of extending or customizing composed tokens without fully
 recomposing them.
 
-In general, you can use `asToken` to compose tokens the same way you
+In general, you can use `flowHoc` to compose tokens the same way you
 would use Lodash flow, eg:
 
 ```js
-const withComposedToken = asToken(
+const withComposedToken = flowHoc(
   withToken1,
   withToken2,
 );
@@ -116,30 +116,30 @@ and adds a new one.
 Given
 
 ```js
-const asBold = asToken(
+const asBold = flowHoc(
   addClasses('font-bold'),
   { categories: { Style: ['Bold'] } },
 );
 
-const asTextBlue = asToken(
+const asTextBlue = flowHoc(
   addClasses('text-blue-500'),
   { categories: { TextColor: ['Blue'] } },
 );
 
-const asTextRed = asToken(
+const asTextRed = flowHoc(
   addClasses('text-red-500'),
   { categories: { TextColor: ['Red'] } },
 );
 // Same as:
-// const asTextRed = asToken(addClasses('text-red-500'));
+// const asTextRed = flowHoc(addClasses('text-red-500'));
 // asTextRed.meta = { categories: { TextColor: ['Red'] } };
 
-const asBgYellow = asToken(
+const asBgYellow = flowHoc(
   addClasses('bg-yellow-500'),
   { categories: { BgColor: ['Yellow'] } },
 )
 
-const asHeader1 = asToken(
+const asHeader1 = flowHoc(
   asTextBlue,
   asBold,
   asBgYellow,
@@ -174,7 +174,7 @@ asHeader1.meta === {
 And given
 
 ```js
-const asRedHeader1 = asToken(
+const asRedHeader1 = flowHoc(
   asHeader1,
   asHeader1.meta, // We are creating a variant of asHeader1, so propagate its meta.
   // The following creates a "filter" token. Note this must be applied after asHeader1
@@ -210,7 +210,7 @@ RedHeader1.categories === {
 >
 > As you can see from the examples above, the order in
 > which you compose tokens can be significant, especially when applying filters.
-> `asToken` composes tokens in left-to-right order (Lodash `flow` as opposed to
+> `flowHoc` composes tokens in left-to-right order (Lodash `flow` as opposed to
 > `flowRight`).
 
 ## Styling Elements with FClasses
@@ -561,7 +561,7 @@ const Div = stylable<HTMLProps<HTMLDivElement>>('div');
 const isActive = (props: any) => hasProp('isActive')(props);
 const isFirst = (props: any) => hasProp('isFirst')(props);
 
-const ContextMenuButton = asToken(
+const ContextMenuButton = flowHoc(
   withoutProps<VariantProps>(['isActive', 'isFirst'),
   addClasses('cursor-pointer pl-2 text-gray'),
   addClassesIf(isActive)('text-white'),
@@ -615,7 +615,7 @@ You can use the similar `addPropsIf` hoc to add props as well as styles to a
 component conditioonally:
 
 ```js
-const StyledToggle = asToken(
+const StyledToggle = flowHoc(
   addClassesIf(useIsToggled)('bg-green-200'),
   addPropsIf(useIsToggled)({ children: 'On' }),
   addPropsIf(() => !useIsToggled())({ children: 'Off' }),
@@ -626,10 +626,10 @@ const StyledToggle = asToken(
 
 A more general version of the above pattern is provided by th `flowIf` utility.
 This takes a condition hoo (like `addClassesIf`) and returns a version of
-`asToken` which applies only if the condition evaluates to true. The above
+`flowHoc` which applies only if the condition evaluates to true. The above
 example could be rewritten using a flow toggle as:
 ```js
-const StyledToggle = asToken(
+const StyledToggle = flowHoc(
   flowIf(useIsToggled)(
     addClasses('bg-green-200'),
     addProps({ children: 'On' }),
@@ -704,7 +704,7 @@ with an example:
 ```js
 import { varyDesigns } from '@bodiless/fclasses';
 const base = {
-  Box: asToken(startWith(Div), asBox),
+  Box: flowHoc(startWith(Div), asBox),
 };
 
 const borders = {
@@ -730,12 +730,12 @@ Finally, we combine them to produce our set of variations, which in this case
 will be:
 ```js
 {
-  BoxRoundedOrange: asToken(startWith(Box), asBox, asRounded, asOrange),
-  BoxRoundedBlue: asToken(startWith(Box), asBox, asRounded, asBlue),
-  BoxRoundedRed: asToken(startWith(Box), asBox, asRounded, asRed),
-  BoxSquareOrange: asToken(startWith(Box), asBox, asRounded, asOrange),
-  BoxSquareBlue: asToken(startWith(Box), asBox, asRounded, asBlue),
-  BoxSquareRed: asToken(startWith(Box), asBox, asRounded, asRed),
+  BoxRoundedOrange: flowHoc(startWith(Box), asBox, asRounded, asOrange),
+  BoxRoundedBlue: flowHoc(startWith(Box), asBox, asRounded, asBlue),
+  BoxRoundedRed: flowHoc(startWith(Box), asBox, asRounded, asRed),
+  BoxSquareOrange: flowHoc(startWith(Box), asBox, asRounded, asOrange),
+  BoxSquareBlue: flowHoc(startWith(Box), asBox, asRounded, asBlue),
+  BoxSquareRed: flowHoc(startWith(Box), asBox, asRounded, asRed),
 }
 ```
 
@@ -769,10 +769,10 @@ const colors = {
 This will produce
 ```js
 {
-  OrangeBlue: asToken(asOrange, withBlueBorder),
-  OrangeTeal: asToken(asOrange, withTealBorder),
-  BlueTeal: asToken(asBlue, withTealBorder),
-  TealBlue: asToken(asTeal, withBlueBorder),
+  OrangeBlue: flowHoc(asOrange, withBlueBorder),
+  OrangeTeal: flowHoc(asOrange, withTealBorder),
+  BlueTeal: flowHoc(asBlue, withTealBorder),
+  TealBlue: flowHoc(asTeal, withBlueBorder),
 }
 ```
 which can then be composed with our border styles to produce the final
@@ -787,14 +787,14 @@ const variations = varyDesigns<any>(
 which produces
 ```js
 {
-  BoxRoundedOrangeBlue: asToken(startWith(Box), asBox, asRounded, asOrange, withBlueBackground),
-  BoxRoundedOrangeTeal: asToken(startWith(Box), asBox, asRounded, asOrange, withTealBackground),
-  BoxRoundedBlueTeal: asToken(startWith(Box), asBox, asRounded, asBlue, withTealBackground),
-  BoxRoundedTealBlue: asToken(startWith(Box), asBox, asRounded, asTeal, withBlueBackground),
-  BoxSquareOrangeBlue: asToken(startWith(Box), asBox, asSquare, asOrange, withBlueBackground),
-  BoxSquareOrangeTeal: asToken(startWith(Box), asBox, asSquare , asOrange, withTealBackground),
-  BoxSquareBlueTeal: asToken(startWith(Box), asBox,  asSquare, asBlue, withTealBackground),
-  BoxSquareTealBlue: asToken(startWith(Box), asBox, asSquare, asTeal, withBlueBackground),
+  BoxRoundedOrangeBlue: flowHoc(startWith(Box), asBox, asRounded, asOrange, withBlueBackground),
+  BoxRoundedOrangeTeal: flowHoc(startWith(Box), asBox, asRounded, asOrange, withTealBackground),
+  BoxRoundedBlueTeal: flowHoc(startWith(Box), asBox, asRounded, asBlue, withTealBackground),
+  BoxRoundedTealBlue: flowHoc(startWith(Box), asBox, asRounded, asTeal, withBlueBackground),
+  BoxSquareOrangeBlue: flowHoc(startWith(Box), asBox, asSquare, asOrange, withBlueBackground),
+  BoxSquareOrangeTeal: flowHoc(startWith(Box), asBox, asSquare , asOrange, withTealBackground),
+  BoxSquareBlueTeal: flowHoc(startWith(Box), asBox,  asSquare, asBlue, withTealBackground),
+  BoxSquareTealBlue: flowHoc(startWith(Box), asBox, asSquare, asTeal, withBlueBackground),
 }
 ```
 Note in all the above examples, the design keys produced by `varyDesign` are
@@ -805,11 +805,11 @@ Note also that all the tokens composed above could *themselves* be designs which
 apply to on the base component which is being varied. For example, if
 instead of
 ```js
-const base = asToken(startWith(Div), asBox);
+const base = flowHoc(startWith(Div), asBox);
 ```
 we had
 ```js
-const base = asToken(startWith(SomeDesignableComponentWithAWrapper), ...);
+const base = flowHoc(startWith(SomeDesignableComponentWithAWrapper), ...);
 ```
 Then our individual style tokens might look like this:
 ```js

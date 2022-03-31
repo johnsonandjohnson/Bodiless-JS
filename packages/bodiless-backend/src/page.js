@@ -15,17 +15,19 @@
 const fs = require('fs');
 const fse = require('fs-extra');
 const path = require('path');
+const os = require('os');
+const replace = require('replace-in-file');
 const Logger = require('./logger');
 
 const logger = new Logger('BACKEND');
 
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
+const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
+const IMG_ASSETS_PATH = `/images${path.sep}pages`;
 
-const getDirectories = (dir) => (
-  fs.readdirSync(dir).filter((file) => fs.statSync(
-    `${dir}/${file}`,
-  ).isDirectory())
-);
+const getDirectories = (dir) => fs
+  .readdirSync(dir)
+  .filter((file) => fs.statSync(`${dir}/${file}`).isDirectory());
 // once we on node > 10.12.0
 // we can leverage fs.mkdir since it supports { recursive: true }
 function ensureDirectoryExistence(filePath) {
@@ -57,8 +59,10 @@ class Page {
   }
 
   get exists() {
-    const files = this.supportedExtensions.map(extension => path.join(this.getBasePath(), `${this.path}.${extension}`));
-    return files.some(file => fs.existsSync(file));
+    const files = this.supportedExtensions.map((extension) => path.join(
+      this.getBasePath(), `${this.path}.${extension}`
+    ));
+    return files.some((file) => fs.existsSync(file));
   }
 
   get file() {
@@ -70,7 +74,7 @@ class Page {
   }
 
   read() {
-    const readPromise = new Promise(resolve => {
+    const readPromise = new Promise((resolve) => {
       fs.readFile(this.file, (err, data) => {
         if (err) logger.log(err);
         resolve(data || {});
@@ -82,7 +86,7 @@ class Page {
   write(data) {
     const readPromise = new Promise((resolve, reject) => {
       ensureDirectoryExistence(this.file);
-      fs.writeFile(this.file, JSON.stringify(data, null, 2), err => {
+      fs.writeFile(this.file, JSON.stringify(data, null, 2), (err) => {
         if (err) {
           reject(err);
         }
@@ -95,7 +99,7 @@ class Page {
   delete() {
     const readPromise = new Promise((resolve, reject) => {
       ensureDirectoryExistence(this.file);
-      fs.unlink(this.file, err => {
+      fs.unlink(this.file, (err) => {
         if (err) {
           reject(err);
         }
@@ -113,16 +117,15 @@ class Page {
             return resove([]);
           }
 
-          const filteredObjects = files
-            .filter(item => {
-              if (objType === 'file') {
-                return item.isFile();
-              }
-              if (objType === 'directory') {
-                return item.isDirectory();
-              }
-              return true;
-            });
+          const filteredObjects = files.filter((item) => {
+            if (objType === 'file') {
+              return item.isFile();
+            }
+            if (objType === 'directory') {
+              return item.isDirectory();
+            }
+            return true;
+          });
 
           if (!filteredObjects.length) {
             return resove([]);
@@ -145,49 +148,51 @@ class Page {
 
   static rmDirectories(destinationPath, dirPaths) {
     const dels = [];
-    dirPaths.forEach(dir => {
-      dels.push(new Promise((resove) => {
-        fse.remove(`${destinationPath}/${dir.name}`, err => {
-          if (err) return console.error(err);
-          return resove();
-        });
-      }));
+    dirPaths.forEach((dir) => {
+      dels.push(
+        new Promise((resove) => {
+          fse.remove(`${destinationPath}/${dir.name}`, (err) => {
+            if (err) return console.error(err);
+            return resove();
+          });
+        }),
+      );
     });
     return Promise.resolve(Promise.all(dels));
   }
 
   static jsFilesPathResolve(originPath, destinationPath, files) {
     const actions = [];
-    const reg = /from ('|")(\..*)('|")/g;
+    const reg = /from ('|")(\.\..*)('|")/g;
 
-    const readF = (file) => new Promise((resove, reject) => {
+    const readF = (file) => new Promise((resolve, reject) => {
       const filePath = `${destinationPath}/${file.name}`;
       fs.readFile(filePath, 'utf8', (err, content) => {
         if (err) return reject();
         const matchs = content.match(reg);
         if (!matchs.length) return reject();
         let newContent = content;
-        matchs.forEach(item => {
+        matchs.forEach((item) => {
           const delimiter = item[item.search(/'|"/)];
           const oldPath = item.split(' ')[1].replace(/'|"/g, '');
           const from = path.dirname(filePath);
           const to = path.normalize(`${originPath}/${oldPath}`);
-          const newPath = path.relative(from, to);
+          const newPath = path.relative(from, to).replace(/\\/g, '/');
 
           newContent = newContent.replace(
             `${delimiter}${oldPath}${delimiter}`,
             `${delimiter}${newPath}${delimiter}`,
           );
         });
-        fs.writeFile(filePath, newContent, writeErr => {
+        fs.writeFile(filePath, newContent, (writeErr) => {
           if (writeErr) return reject();
-          return resove();
+          return resolve();
         });
         return true;
       });
     });
 
-    files.forEach(file => {
+    files.forEach((file) => {
       actions.push(readF(file));
     });
 
@@ -196,37 +201,35 @@ class Page {
 
   async copyDirectory(origin, destination) {
     const bp = this.basePath;
-    const originPath = (`${bp}${origin}`).replace(/\/$/, '');
-    const destinationPath = (`${bp}${destination}`).replace(/\/$/, '');
+    const originPath = `${bp}${origin}`.replace(/\/$/, '');
+    const destinationPath = `${bp}${destination}`.replace(/\/$/, '');
 
     const isDestinationPathExists = await Page.dirHasFiles(destinationPath);
     if (isDestinationPathExists.length) {
-      return Promise.reject(
-        new Error(`page ${destination} already exists`),
-      );
+      return Promise.reject(new Error(`page ${destination} already exists`));
     }
 
     const isOriginPathExists = await Page.dirHasFiles(originPath);
     if (!isOriginPathExists.length) {
-      return Promise.reject(
-        new Error(`page ${origin} is not exists`),
-      );
+      return Promise.reject(new Error(`page ${origin} is not exists`));
     }
 
     // Make sure the destination tree exist
     fs.mkdirSync(destinationPath, { recursive: true });
 
     // Clone page
-    await Promise.all(isOriginPathExists.map(file => {
-      const from = `${originPath}/${file.name}`;
-      const to = `${destinationPath}/${file.name}`;
-      return new Promise((resove, reject) => {
-        fse.copy(from, to, err => {
-          if (err) return reject(err);
-          return resove();
+    await Promise.all(
+      isOriginPathExists.map((file) => {
+        const from = `${originPath}/${file.name}`;
+        const to = `${destinationPath}/${file.name}`;
+        return new Promise((resove, reject) => {
+          fse.copy(from, to, (err) => {
+            if (err) return reject(err);
+            return resove();
+          });
         });
-      });
-    }));
+      }),
+    );
 
     // If the sub directories have been copied, delete them
     const resultHasDir = await Page.dirHasDirectories(destinationPath);
@@ -235,18 +238,148 @@ class Page {
     }
 
     // Update require paths for js files
-    const jsFiles = isOriginPathExists
-      .filter(file => {
-        const exts = ['.tsx', '.jsx', '.js', '.ts'];
-        const fileExtname = path.extname(file.name);
+    const jsFiles = isOriginPathExists.filter((file) => {
+      const exts = ['.tsx', '.jsx', '.js', '.ts'];
+      const fileExtname = path.extname(file.name);
 
-        return exts.indexOf(fileExtname) > -1;
-      });
+      return exts.indexOf(fileExtname) > -1;
+    });
     if (jsFiles.length) {
       await Page.jsFilesPathResolve(originPath, destinationPath, jsFiles);
     }
 
+    // Clone Image assets
+    Page.clonePageImgAssets(origin, destination, this.basePath);
+
     return 'success';
+  }
+
+  static clonePageImgAssets(origin, destination, basePath) {
+    Page.clonePageAssets(origin, destination, basePath, IMG_ASSETS_PATH);
+  }
+
+  static async clonePageAssets(origin, destination, basePath, target) {
+    const originPath = origin.replace(/\/$/, '');
+    const originPathCrossPlatform = os.platform() === 'win32'
+      ? originPath.replace('/', '\\\\')
+      : originPath;
+    const destinationPath = destination.replace(/\/$/, '');
+    const destinationPathCrossPlatform = os.platform() === 'win32'
+      ? destinationPath.replace('/', '\\')
+      : destinationPath;
+
+    const originStaticPath = path.join(backendStaticPath, target, originPath);
+    const destinationStaticPath = path.join(
+      backendStaticPath,
+      target,
+      destinationPath,
+    );
+
+    const originPagePath = path.join(basePath, originPath);
+    const destinationPagePath = path.join(basePath, destinationPath);
+
+    try {
+      // Check if any directory exist at origin file path and it has any files.
+      if (fs.existsSync(originStaticPath)) {
+        // Scan origin directory (page being cloned) to get list of existing directories name
+        const subDirsAtOrigin = await Page.dirHasDirectories(
+          originPagePath,
+        ).then((dirent) => dirent.map((dirent) => dirent.name));
+
+        // Get list dirs & files at origin static location
+        const subDirsAtStaticOrigin = await Page.dirHasSubObjects(
+          originStaticPath,
+        ).then((dirent) => dirent.map((dirent) => dirent.name));
+
+        // Prepare the list which needs to be copied
+        const assetsToBeCopied = subDirsAtStaticOrigin.filter(
+          (asset) => !subDirsAtOrigin.includes(asset),
+        );
+
+        if (assetsToBeCopied.length) {
+          // Clone Assets
+          await Promise.all(
+            assetsToBeCopied.map((item) => {
+              const fromPath = path.join(originStaticPath, item);
+              const toPath = path.join(destinationStaticPath, item);
+              return new Promise((resolve, reject) => {
+                fse.copy(fromPath, toPath, (err) => {
+                  if (err) return reject(err);
+                  return resolve();
+                });
+              });
+            }),
+          );
+
+          // Update cloned page files with newly copied assets destination path
+          const clonedPageFilesAtDestination = await Page.dirHasFiles(
+            destinationPagePath,
+          ).then((results) => results.map((dirent) => dirent.name));
+
+          if (clonedPageFilesAtDestination.length) {
+            await Promise.all(
+              clonedPageFilesAtDestination.map(async (item) => {
+                const fileToBeUpdated = path.join(destinationPagePath, item);
+                // Make sure to not replace '/images/pages' part of the path
+                // .e.g if the source page path is '/images';
+                const imgAssetsPathRegExp = IMG_ASSETS_PATH.replace('\\', '\\\\\\\\');
+                const originPathRegExp = new RegExp(
+                  `(${imgAssetsPathRegExp}.*)${originPathCrossPlatform}`, 'g'
+                );
+                const options = {
+                  files: fileToBeUpdated,
+                  from: originPathRegExp,
+                  to: match => match.replace(originPathRegExp, `$1${destinationPathCrossPlatform}`),
+                };
+                return Page.updateFileContent(options);
+              }),
+            );
+          }
+        }
+      }
+    } catch (err) {
+      if (err) logger.log(err);
+    }
+    return 'success';
+  }
+
+  static updateFileContent(options) {
+    return new Promise((resolve) => {
+      try {
+        replace(options, (error, results) => {
+          if (error) {
+            return resolve([]);
+          }
+          return resolve(results);
+        });
+      } catch (error) {
+        resolve([]);
+      }
+    });
+  }
+
+  directoryExists(newDirectory) {
+    const readPromise = new Promise((resolve) => {
+      fs.access(newDirectory, err => {
+        if (!err) {
+          resolve('The page cannot be moved. Directory exists');
+        }
+        resolve(this);
+      });
+    });
+    return readPromise;
+  }
+
+  removeFile(origin) {
+    const readPromise = new Promise((resolve, reject) => {
+      fs.unlink(origin, err => {
+        if (err) {
+          reject(err);
+        }
+        resolve(this);
+      });
+    });
+    return readPromise;
   }
 
   deleteDirectory() {
@@ -256,13 +389,15 @@ class Page {
        *         So make sure the directory to delete is inside a region of pages,
        *         and it is not the whole pages directory.
        */
-      const [, pageRelativeDir] = this.directory.split('/data/pages/');
+      const { sep, normalize } = path;
+      const dirPath = normalize(this.directory);
+      const [, pageRelativeDir] = dirPath.split(`${sep}data${sep}pages${sep}`);
       if (!pageRelativeDir) {
         resolve('The page cannot be deleted.');
         return;
       }
 
-      fs.rmdir(this.directory, { recursive: true }, err => {
+      fs.rmdir(this.directory, { recursive: true }, (err) => {
         if (err) {
           reject(err);
         }
@@ -276,12 +411,26 @@ class Page {
     const readPromise = new Promise((resolve) => {
       const subdirs = getDirectories(this.directory);
       if (subdirs.length !== 0) {
-        resolve('The page cannot be deleted it has child pages. To delete this page, first delete or move all child pages, and retry.');
+        resolve(
+          'The page cannot be deleted it has child pages. To delete this page, first delete or move all child pages, and retry.',
+        );
       } else {
         resolve('Success');
       }
     });
     return readPromise;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  removePageAssets(path) {
+    return new Promise((resolve, reject) => {
+      fse.remove(path, err => {
+        if (err) {
+          reject(err);
+        }
+        resolve();
+      });
+    });
   }
 }
 

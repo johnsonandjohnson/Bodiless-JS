@@ -14,7 +14,7 @@
 
 import React, { FC, useEffect } from 'react';
 import { v4 } from 'uuid';
-import { Token, HOC } from '@bodiless/fclasses';
+import { HOC } from '@bodiless/fclasses';
 import { useContextActivator, useEditContext } from './hooks';
 
 type ActivateOnEffectState = {
@@ -40,7 +40,7 @@ export const ActivateOnEffectProvider:React.FunctionComponent = ({ children }) =
  * WithActivateContext is a HOC that wraps the Component in a ActivateContextProvider
  * @param Component The component to wrap
  */
-export const withActivateOnEffect: Token = Component => {
+export const withActivateOnEffect: HOC = Component => {
   const WithActivateOnEffect: FC<any> = props => (
     <ActivateOnEffectProvider>
       <Component {...props} />

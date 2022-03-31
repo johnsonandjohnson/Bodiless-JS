@@ -12,18 +12,19 @@
  * limitations under the License.
  */
 
-import { asToken } from './Tokens';
-import type { Token, TokenMeta } from './types';
-import { Design, withDesign, DesignableComponents } from './Design';
+import type {
+  HOC, TokenMeta, Design, DesignableComponents
+} from './types';
+import { withDesign, as, asTokenSpec } from './tokenSpec';
 
 type DesignPath = string[];
 
 const withDesignAtSingle = <C extends DesignableComponents = DesignableComponents>(
   path: DesignPath,
-  designOrToken: Design<C>|Token,
-): Token => {
-  const token: Token = typeof designOrToken === 'function'
-    ? designOrToken : withDesign(designOrToken as Design<C>);
+  designOrToken: Design<C>|HOC,
+): HOC => {
+  const token: HOC = typeof designOrToken === 'function'
+    ? designOrToken : withDesign(designOrToken as Design);
   const [next, ...rest] = path;
   if (rest.length > 0) {
     return withDesign({
@@ -56,7 +57,7 @@ const withDesignAtSingle = <C extends DesignableComponents = DesignableComponent
  * ```
  * is the same as:
  * ```js
- * asToken(
+ * flowHoc(
  *   withDesign({
  *     A: myToken,
  *   }),
@@ -75,7 +76,7 @@ const withDesignAtSingle = <C extends DesignableComponents = DesignableComponent
  * is the same as
  * ```
  * withDesignAt(['A'])(
- *   asToken(withDesign(myDesign), myTokenMeta)
+ *   flowHoc(withDesign(myDesign), myTokenMeta)
  * )
  * ```
  * Here, `myDesign` is a design object, not a function, eg:
@@ -86,15 +87,13 @@ const withDesignAtSingle = <C extends DesignableComponents = DesignableComponent
  * }
  * ```
  */
-const withDesignAt = <C extends DesignableComponents = DesignableComponents>(
+export const withDesignAt = <C extends DesignableComponents = DesignableComponents>(
   ...paths: DesignPath[]
 ) => (
-    designOrToken: Design<C>|Token,
+    designOrToken: Design<C>|HOC,
     ...meta: TokenMeta[]
-  ) => asToken(
-    {}, // necessary bc of typescript bug, see https://github.com/microsoft/TypeScript/issues/28010
-    ...meta,
+  ) => as(
+    undefined, // necessary bc of typescript bug, see https://github.com/microsoft/TypeScript/issues/28010
+    ...meta.map(m => asTokenSpec()({ Meta: m })),
     ...(paths || [[]]).map(p => withDesignAtSingle(p, designOrToken)),
   );
-
-export default withDesignAt;

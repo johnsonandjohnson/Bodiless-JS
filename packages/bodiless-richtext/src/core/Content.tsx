@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType } from 'react';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import {
   ifReadOnly,
   ifEditable,
@@ -26,7 +26,9 @@ import {
   Editable,
   DefaultElement,
   DefaultLeaf,
+  DefaultPlaceholder,
   useSlate,
+  RenderPlaceholderProps,
 } from 'slate-react';
 import flow from 'lodash/flow';
 import { useSlateContext } from './SlateEditorContext';
@@ -74,6 +76,23 @@ const renderElement = (props: RenderElementProps) => {
   return renderElement$(props);
 };
 
+const renderPlaceholder = ({
+  attributes,
+  children,
+}: RenderPlaceholderProps) => (
+  <DefaultPlaceholder
+    attributes={{
+      ...attributes,
+      style: {
+        ...attributes.style,
+        whiteSpace: 'nowrap',
+      },
+    }}
+  >
+    {children}
+  </DefaultPlaceholder>
+);
+
 const useIsEmptyEditor = () => {
   const editor = useSlate();
   return Editor.isEmpty(editor, editor.children[0] as Element);
@@ -109,6 +128,7 @@ const Content = flow(
   addProps({
     renderLeaf,
     renderElement,
+    renderPlaceholder,
   }),
   observer,
 )(Editable);

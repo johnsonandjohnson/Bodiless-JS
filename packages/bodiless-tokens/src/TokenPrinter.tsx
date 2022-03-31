@@ -30,7 +30,7 @@ const TokenPrinter: FC<TokenPrinterProps> = props => {
     depth = 0,
   } = props;
   const keyText = designKey ? `${designKey}: ` : '';
-  const header = `${indent(depth)}${keyText}asToken(\n`;
+  const header = `${indent(depth)}${keyText}flowHoc(\n`;
   const footer = `${indent(depth)})${depth ? ',' : ';'}\n`;
   const rows = tokens.map(s => `${indent(depth + 1)}${s},\n`);
   const designRows = Object.keys(components).map(key => {

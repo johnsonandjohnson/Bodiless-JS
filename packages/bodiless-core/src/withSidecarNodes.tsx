@@ -13,7 +13,7 @@
  */
 
 import React, { createContext, useContext } from 'react';
-import type { HOC, Token } from '@bodiless/fclasses';
+import type { HOC } from '@bodiless/fclasses';
 import flowRight from 'lodash/flowRight';
 import { NodeContext } from './NodeProvider';
 import type { NodeMap } from './NodeProvider';
@@ -28,7 +28,7 @@ const SidecarNodeContext = createContext<NodeMap<any>[]>([]);
  *
  * @param Component Any component which uses the Bodiless ContentNode system.
  */
-const startSidecarNodes: Token = Component => {
+const startSidecarNodes: HOC = Component => {
   const StartSidecarNodes = (props: any) => {
     const oldValue = useContext(SidecarNodeContext);
     const newValue = [...oldValue, useContext(NodeContext)];
@@ -50,7 +50,7 @@ const startSidecarNodes: Token = Component => {
  *
  * @param Component Any component which uses the Bodiless ContentNode system.
  */
-const endSidecarNodes: Token = Component => {
+const endSidecarNodes: HOC = Component => {
   const EndSidecarNodes = (props: any) => {
     const oldValue = useContext(SidecarNodeContext);
     if (oldValue.length === 0) return <Component {...props} />;
@@ -84,7 +84,7 @@ const endSidecarNodes: Token = Component => {
  *   ...
  * )
  * ```
- * This is useful, for example, if you want to apply an enhancment HOC which uses its own
+ * This is useful, for example, if you want to apply an enhancement HOC which uses its own
  * content node(s) without affecting the node paths of other children of the wrapped component.
  *
  * @param hocs A list of HOC's to be applied using the parallel node hierarchy.  These will
@@ -96,7 +96,7 @@ const withSidecarNodes = (...hocs: HOC[]) => flowRight(
   startSidecarNodes,
   ...hocs,
   endSidecarNodes,
-) as Token;
+) as HOC;
 
 export default withSidecarNodes;
 export { startSidecarNodes, endSidecarNodes };

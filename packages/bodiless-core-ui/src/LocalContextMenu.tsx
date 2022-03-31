@@ -31,6 +31,7 @@ import {
   ComponentFormFieldWrapper, ComponentFormFieldTitle, ComponentFormCheckBox, ComponentFormRadio,
   ComponentFormRadioGroup, ComponentFormSelect, ComponentFormOption, ContextSubMenu,
   ToolbarButtonLabel,
+  ComponentFormSpinner,
 } from '@bodiless/ui';
 import ReactTagsField from './ReactTags';
 
@@ -119,6 +120,7 @@ const ui: ContextMenuUI = {
   Tooltip: LocalTooltip,
   ReactTags: ReactTagsField,
   ContextMenuGroup,
+  Spinner: ComponentFormSpinner,
 };
 
 const LocalContextMenu: FC<ContextMenuProps> = props => (

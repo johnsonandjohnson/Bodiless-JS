@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import flowRight from 'lodash/flowRight';
+import { flowHoc, HOC } from '@bodiless/fclasses';
 import {
   withContextActivator,
   withLocalContextMenu,
@@ -56,13 +56,13 @@ const useMenuOptions = (menuOptionWithNodeKey?: MenuOptionWithNodeKey) => () => 
   return menuOptions;
 };
 
-const withResetButton = (menuOptionWithNodeKey?: MenuOptionWithNodeKey) => flowRight(
+const withResetButton = (menuOptionWithNodeKey?: MenuOptionWithNodeKey): HOC => flowHoc(
+  withLocalContextMenu,
+  withContextActivator('onClick'),
   withMenuOptions({
     useMenuOptions: useMenuOptions(menuOptionWithNodeKey),
     name: 'Default Content',
   }),
-  withContextActivator('onClick'),
-  withLocalContextMenu,
 );
 
 export default withResetButton;

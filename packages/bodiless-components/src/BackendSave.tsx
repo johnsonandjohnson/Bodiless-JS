@@ -30,7 +30,7 @@ export default class BackendSave {
   private prefix: string;
 
   // @ts-ignore it is not initialized in constructor on purpose
-  // the plan is to initiliaze it during saveFile
+  // the plan is to initialize it during saveFile
   private cancelTokenSource: CancelTokenSource;
 
   constructor(baseUrl?: string, prefix?: string) {

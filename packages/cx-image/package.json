@@ -1,0 +1,41 @@
+{
+  "name": "@bodiless/cx-image",
+  "sideEffects": false,
+  "version": "0.3.7",
+  "description": "Clean, designable Image components for CanvasX based projects",
+  "author": "Marco Pagliarulo <mpaglia1@its.jnj.com>",
+  "license": "UNLICENSED",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "/lib",
+    "/bodiless.docs.json",
+    "/assets",
+    "/doc"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://sourcecode.jnj.com/scm/asx-nbfp/canvasx.git"
+  },
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build:watch": "npm run build -- --watch",
+    "build:api-doc": "typedoc --out doc/api ./src",
+    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2"
+  },
+  "dependencies": {
+    "@bodiless/components": "^0.3.7",
+    "@bodiless/components-ui": "^0.3.7",
+    "@bodiless/core": "^0.3.7",
+    "@bodiless/fclasses": "^0.3.7",
+    "@bodiless/gatsby-theme-bodiless": "^0.3.7",
+    "@bodiless/layouts": "^0.3.7",
+    "@bodiless/layouts-ui": "^0.3.7",
+    "@bodiless/cx-elements": "^0.3.7",
+    "lodash": "^4.17.19"
+  }
+}

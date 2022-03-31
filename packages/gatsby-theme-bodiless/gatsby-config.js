@@ -70,7 +70,7 @@ const plugins = [
 /**
  * Google Fonts plugin.
  */
-if (process.env.GOOGLE_FONTS_ENABLED !== '0') {
+if (process.env.NODE_ENV === 'development' || process.env.GOOGLE_FONTS_ENABLED === '1') {
   plugins.push({
     resolve: 'gatsby-plugin-google-fonts',
     options: {
@@ -86,7 +86,7 @@ if (process.env.ROBOTSTXT_ENABLED !== '0') {
   const disablePageList = getDisabledPages();
   const disabledPages = Object.keys(disablePageList).filter(
     item => disablePageList[item].pageDisabled === true || disablePageList[item].indexingDisabled,
-  );
+  ) || [];
   const policyEnv = process.env.ROBOTSTXT_POLICY;
   const defaultPolicy = [
     {
@@ -98,7 +98,7 @@ if (process.env.ROBOTSTXT_ENABLED !== '0') {
   if (!policy[0].disallow) {
     policy[0].disallow = disabledPages;
   } else {
-    const disallow = policy[0].disallow;
+    const { disallow } = policy[0];
     if (typeof disallow === 'string') {
       policy[0].disallow = [disallow, ...disabledPages];
     } else {
@@ -111,7 +111,7 @@ if (process.env.ROBOTSTXT_ENABLED !== '0') {
     options: {
       host: process.env.ROBOTSTXT_HOST,
       sitemap: process.env.ROBOTSTXT_SITEMAP,
-      policy: policy,
+      policy,
     },
   });
 }
@@ -162,6 +162,8 @@ if (process.env.BODILESS_DEFAULT_CONTENT_AUTO_DISCOVERY === '1') {
     ),
   );
 }
+
+plugins.push('gatsby-plugin-meta-redirect');
 
 module.exports = {
   siteMetadata: {

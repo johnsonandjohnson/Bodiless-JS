@@ -17,9 +17,9 @@ import React, { ComponentType } from 'react';
 import { withNode } from '@bodiless/core';
 import type { WithNodeProps } from '@bodiless/core';
 import {
-  asComponent, designable, addProps, Fragment, withDesign, replaceWith, withoutProps,
+  designable, addProps, Fragment, withDesign, replaceWith, withoutProps, ComponentOrTag,
 } from '@bodiless/fclasses';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import flowRight from 'lodash/flowRight';
 import { asStylableBreadcrumbs } from './Breadcrumb.token';
 
@@ -31,7 +31,6 @@ import type {
   BreadcrumbsComponents,
   CleanBreadcrumbsProps,
   CleanBreadcrumbItemType,
-  BreadcrumbsProps,
 } from './types';
 
 const ItemNodeProvider = withNode(Fragment) as ComponentType<WithNodeProps>;
@@ -111,13 +110,10 @@ const BreadcrumbsClean$ = (props: CleanBreadcrumbsProps) => {
 
 const BreadcrumbStartComponents: BreadcrumbsComponents = {
   StartingTrail: MenuTitle,
-  Separator: asComponent('span'),
-  NavWrapper: asComponent('nav'),
-  Wrapper: asComponent('ol'),
-  Item: flowRight(
-    withoutProps(['position', 'isCurrentPage']),
-    asComponent,
-  )('li'),
+  Separator: 'span',
+  NavWrapper: 'nav',
+  Wrapper: 'ol',
+  Item: withoutProps('position', 'isCurrentPage')('li') as ComponentOrTag<any>,
   Title: withoutProps(['isCurrentPage'])(MenuTitle),
   FinalTrail: MenuTitle,
 };
@@ -132,7 +128,7 @@ const BreadcrumbsClean = designable(BreadcrumbStartComponents, 'Breadcrumbs')(Br
  * HOC that enables rendering of starting trail for a breadcrumb based component.
  * @param Component a breadcrumb based component
  */
-const withStartingTrail = addProps<Pick<BreadcrumbsProps, 'hasStartingTrail'>>({
+const withStartingTrail = addProps({
   hasStartingTrail: true,
 });
 
@@ -140,7 +136,7 @@ const withStartingTrail = addProps<Pick<BreadcrumbsProps, 'hasStartingTrail'>>({
  * HOC that disables rendering of starting trail for a breadcrumb based component.
  * @param Component a breadcrumb based component
  */
-const withoutStartingTrail = addProps<Pick<BreadcrumbsProps, 'hasStartingTrail'>>({
+const withoutStartingTrail = addProps({
   hasStartingTrail: false,
 });
 
@@ -148,7 +144,7 @@ const withoutStartingTrail = addProps<Pick<BreadcrumbsProps, 'hasStartingTrail'>
  * HOC that enables rendering of final trail for a breadcrumb based component.
  * @param Component a breadcrumb based component
  */
-const withFinalTrail = addProps<Pick<BreadcrumbsProps, 'hasFinalTrail'>>({
+const withFinalTrail = addProps({
   hasFinalTrail: true,
 });
 
@@ -156,7 +152,7 @@ const withFinalTrail = addProps<Pick<BreadcrumbsProps, 'hasFinalTrail'>>({
  * HOC that disables rendering of final trail for a breadcrumb based component.
  * @param Component a breadcrumb based component
  */
-const withoutFinalTrail = addProps<Pick<BreadcrumbsProps, 'hasFinalTrail'>>({
+const withoutFinalTrail = addProps({
   hasFinalTrail: false,
 });
 

@@ -23,7 +23,7 @@ import {
   addProps,
   addClasses,
   withDesign,
-  asToken,
+  flowHoc,
   Nav,
   Span,
   DesignableComponentsProps,
@@ -164,15 +164,15 @@ const SubmenuIndicatorComponents: SubmenuIndicatorComponents = {
  * @see SubmenuIndicatorComponents for a list of design components.
  */
 const SubmenuIndicatorClean = designable(SubmenuIndicatorComponents, 'SubmenuIndicator')(SubmenuIndicatorBase);
-const SubmenuIndicator = asToken(
+const SubmenuIndicator = flowHoc(
   withSubmenuToggle,
   withDesign({
-    Button: asToken(
+    Button: flowHoc(
       asAccessibleMenuTitle(true),
       asAccessibleSubMenuTitle,
       addClasses('flex items-center'),
     ),
-    Title: asToken(
+    Title: flowHoc(
       addClasses('material-icons'),
       addProps({ children: 'expand_more' }),
     ),
@@ -180,7 +180,7 @@ const SubmenuIndicator = asToken(
 )(SubmenuIndicatorClean);
 
 /**
- * Token that adds SubmenuIndicator to the Menu Item if
+ * HOC that adds SubmenuIndicator to the Menu Item if
  * it has a submenu and it's title is a link.
  */
 const withSubmenuIndicator = flowIf(useHasLink)(
@@ -191,10 +191,10 @@ const withSubmenuIndicator = flowIf(useHasLink)(
  * HOC that wrappes the component in a navigation region implemented with
  * a nav element that has an aria-label that matches the label on the menubar.
  */
-const withMenuNav = asToken(
+const withMenuNav = flowHoc(
   withParent(Nav, 'Nav'),
   withDesign({
-    Nav: asToken(
+    Nav: flowHoc(
       addClasses('w-full'),
       addProps({ 'aria-label': 'Main Site Navigation Menu', role: 'navigation' }),
     ),
@@ -202,11 +202,11 @@ const withMenuNav = asToken(
 );
 
 /**
- * Token that adds an accessibility attributes to the menu
+ * HOC that adds an accessibility attributes to the menu
  */
 const withAccessibleMenuAttr = withDesign({
   Wrapper: addProps({ role: 'menubar', 'aria-label': 'Navigation Menu' }),
-  Title: asToken(
+  Title: flowHoc(
     asAccessibleMenuTitle(),
     flowIf(() => useHasSubmenu() && !useHasLink())(
       asAccessibleSubMenuTitle,
@@ -222,7 +222,7 @@ const withAccessibleMenuAttr = withDesign({
 });
 
 /**
- * Token that wraps menu in the Nav tag and adds an ability
+ * HOC that wraps menu in the Nav tag and adds an ability
  * to toggle submenus with a keyboard.
  */
 const withAccessibleMenuInteractions = withDesign({
@@ -233,10 +233,10 @@ const withAccessibleMenuInteractions = withDesign({
 });
 
 /**
- * Token that makes menu accessible.
+ * HOC that makes menu accessible.
  * Wraps menu in Nav tag and adds keyboard interactions.
  */
-const asAccessibleMenu = asToken(
+const asAccessibleMenu = flowHoc(
   withAccessibleMenuAttr,
   withAccessibleMenuInteractions,
 );
@@ -253,7 +253,7 @@ const withSubmenuWrapperAttrs = <P extends Object>(
   );
 
 /**
- * Token that adds an accessibility attributes to the Sub Menu.
+ * HOC that adds an accessibility attributes to the Sub Menu.
  */
 const withAccessibleSubMenuAttr = withDesign({
   Wrapper: withSubmenuWrapperAttrs,
@@ -262,11 +262,11 @@ const withAccessibleSubMenuAttr = withDesign({
 });
 
 /**
- * Token that makes Sub Menu accessible.
+ * HOC that makes Sub Menu accessible.
  * It adds Sub Menu indicator to the main menu items that have submenus
  * and accessibility attributes to the submenu items.
  */
-const asAccessibleSubMenu = asToken(
+const asAccessibleSubMenu = flowHoc(
   withAccessibleSubmenuItem,
   withSubmenuIndicator,
   withAccessibleSubMenuAttr,

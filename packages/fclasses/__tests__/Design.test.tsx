@@ -28,8 +28,9 @@ import {
   withFinalDesign,
   startWith,
   replaceWith,
-} from '../src/Design';
-import { withShowDesignKeys, asToken, HOC } from '../src';
+  as,
+  withShowDesignKeys, flowHoc, HOC
+} from '../src';
 
 type SpanType = ComponentType<any>;
 type MyDesignableComponents = {
@@ -55,13 +56,13 @@ const DesignPrinter: FC<DesignableProps<MyDesignableComponents>> = ({ design }) 
   const components = { ...myStartComponents };
   if (design) {
     if (design.foo) {
-      components.foo = design.foo(components.foo);
+      components.foo = as(design.foo)(components.foo);
     }
     if (design.bar) {
-      components.bar = design.bar(components.bar);
+      components.bar = as(design.bar)(components.bar);
     }
     if (design.baz) {
-      components.baz = design.baz(components.baz);
+      components.baz = as(design.baz)(components.baz);
     }
   }
   const Foo = components.foo;
@@ -316,7 +317,7 @@ describe('replaceWith', () => {
   });
 
   it('Propagates metadata without altering the replacement.', () => {
-    const Start$ = asToken({ title: 'Foo' })(Start);
+    const Start$ = flowHoc({ title: 'Foo' })(Start);
     expect(Start$.title).toBe('Foo');
     const Test = replaceWith(Replacement)(Start$);
     expect(Test.title).toBe('Foo');

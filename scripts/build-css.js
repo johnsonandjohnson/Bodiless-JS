@@ -81,13 +81,13 @@ const buildTailwind = async (cmd, fileOutputPath) => {
     loadingSpinner.succeed('Site Tailwind Theme Is Disabled. No Site Tailwind Theme classes left!');
   }
 
-  await updateGatsbyBrowserFile('./examples/test-site/gatsby-browser.js', fileOutputPath);
+  await updateGatsbyBrowserFile('./sites/test-site/gatsby-browser.js', fileOutputPath);
 };
 
 const buildCss = async () => {
-  const tailwindIndexPath = './examples/test-site/src/components/index.tailwind.css';
-  const siteTailwindOutputPath = './examples/test-site/src/components/index.css';
-  const siteTailwindConfigPath = './examples/test-site/tailwind.config.js';
+  const tailwindIndexPath = './sites/test-site/src/components/index.tailwind.css';
+  const siteTailwindOutputPath = './sites/test-site/src/components/index.css';
+  const siteTailwindConfigPath = './sites/test-site/tailwind.config.js';
 
   const siteTailwindBuildCmd = `tailwind build ${tailwindIndexPath} -c ${siteTailwindConfigPath} -o ${siteTailwindOutputPath}`;
 

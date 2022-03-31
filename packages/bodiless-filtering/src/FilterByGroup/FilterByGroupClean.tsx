@@ -14,12 +14,12 @@
 
 import React, { FC } from 'react';
 import {
-  designable, Div, Button, withoutProps, H3, DesignableComponentsProps, asToken,
+  designable, Div, Button, withoutProps, H3, DesignableComponentsProps, flowHoc,
 } from '@bodiless/fclasses';
 import FilterClean from './Filter';
 import { useFilterByGroupContext, withFilterByGroupContext } from './FilterByGroupContext';
 import { FilterByGroupComponents, FilterByGroupProps } from './types';
-import { asResponsiveFilterByGroup } from './token';
+import { asResponsiveFilterByGroup, asAccessibleFilterByGroup } from './token';
 
 const FilterByGroupComponentsStart:FilterByGroupComponents = {
   Wrapper: Div,
@@ -81,10 +81,11 @@ const FilterByGroupBase: FC<FilterByGroupBaseProps> = ({
   );
 };
 
-const FilterByGroupClean = asToken(
+const FilterByGroupClean = flowHoc(
   withoutProps(['suggestions']),
   designable(FilterByGroupComponentsStart, 'FilterByGroup'),
   asResponsiveFilterByGroup,
+  asAccessibleFilterByGroup,
   withFilterByGroupContext,
 )(FilterByGroupBase);
 

@@ -3,9 +3,9 @@
   "include": [
     "./scripts/*",
     "./packages/*/src/**/*",
-    "./examples/*/src/**/*",
-   "./examples/*/scripts/*",
-   "./examples/*/*"
+    "./sites/*/src/**/*",
+   "./sites/*/scripts/*",
+   "./sites/*/*"
   ],
 }
 

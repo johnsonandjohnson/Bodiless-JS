@@ -14,9 +14,9 @@
 
 import React, { Fragment, FC } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { useEditContext, TMenuOption } from '@bodiless/core';
-import { DesignableComponents } from '@bodiless/fclasses';
+import { DesignableComponents, Design, ComponentWithMeta } from '@bodiless/fclasses';
 import { EditFlowContainerProps } from '../../src/FlowContainer/types';
 import componentSelectorForm from '../../src/ComponentSelector/componentSelectorForm';
 import { useItemHandlers, useFlowContainerDataHandlers } from '../../src/FlowContainer/model';
@@ -46,9 +46,19 @@ jest.mock('@bodiless/core', () => ({
   useGetter: jest.fn((options: any) => () => options),
 }));
 
-const Foo: FC = Fragment;
-const Bar: FC = Fragment;
-const components: DesignableComponents = { Foo, Bar };
+const Foo: ComponentWithMeta = () => <>Foo</>;
+Foo.title = 'foo';
+const Bar: ComponentWithMeta = () => <>Foo</>;
+Bar.title = 'bar';
+const testComponents: DesignableComponents = { Foo, Bar };
+const testDesign: Design = Object.keys(testComponents).reduce(
+  (acc, next) => ({
+    ...acc,
+    [next]: () => testComponents[next],
+  }),
+  {},
+);
+
 const foo = {
   uuid: 'foo',
   type: 'Foo',
@@ -80,7 +90,11 @@ describe('useGetMenuOptions', () => {
     // @ts-ignore
     button.handler();
     expect(componentSelectorForm).toHaveBeenCalledTimes(1);
-    expect((componentSelectorForm as jest.Mock).mock.calls[0][0].components).toEqual(components);
+    const { Foo, Bar } = (componentSelectorForm as jest.Mock).mock.calls[0][0].components;
+    expect(Foo.title).toEqual('foo');
+    const foowrapper = mount(<Foo />);
+    console.log(foowrapper.debug());
+    expect(Bar.title).toEqual('bar');
     const action = (componentSelectorForm as jest.Mock).mock.calls[0][0].onSelect;
     action([selection]);
   }
@@ -101,7 +115,7 @@ describe('useGetMenuOptions', () => {
   describe('item getMenuOptions', () => {
     function LogMenuOptions({ maxComponents }: { maxComponents?: number }) {
       const props: EditFlowContainerProps = {
-        components,
+        design: testDesign,
       };
       if (maxComponents) {
         props.maxComponents = maxComponents;
@@ -191,7 +205,7 @@ describe('useGetMenuOptions', () => {
   describe('flow container getMenuOptions', () => {
     function LogMenuOptions() {
       const props: EditFlowContainerProps = {
-        components,
+        design: testDesign,
       };
       logMenuOptions(useMenuOptions(props));
       return null;

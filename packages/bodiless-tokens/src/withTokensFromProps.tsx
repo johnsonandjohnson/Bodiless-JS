@@ -15,11 +15,11 @@
 import React, { ComponentType } from 'react';
 
 import {
-  ComponentOrTag, Token, asToken, Enhancer,
+  ComponentOrTag, HOC, flowHoc, Enhancer,
 } from '@bodiless/fclasses';
 
-export type Tokens = { [key: string]: Token };
-export type TokensProps = { tokens: Token[] };
+export type Tokens = { [key: string]: HOC };
+export type TokensProps = { tokens: HOC[] };
 
 /**
  * HOC which adds a "tokens" prop to any component. This prop accepts an array of
@@ -41,7 +41,7 @@ const withTokensFromProps:Enhancer<TokensProps> = Component => {
     constructor(props: TokensProps) {
       super(props);
       const { tokens } = props;
-      this.Component = asToken(
+      this.Component = flowHoc(
         {}, // necessary bc of ts bug, see https://github.com/microsoft/TypeScript/issues/28010
         ...tokens,
       )(Component);

@@ -16,7 +16,7 @@ import {
   flowIf,
   withDesign,
   HOC,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import flatten from 'lodash/flatten';
 import React from 'react';
@@ -84,8 +84,8 @@ const withContent = (props:WithContentProps) => {
     withRows(...body.map((t, i) => i.toString())),
     withHeadRows(...head.map((t, i) => i.toString())),
   ];
-  return asToken(...tableHocs, withDesign({
-    Cell: asToken(...flatten([...headHocs, ...bodyHocs])),
+  return flowHoc(...tableHocs, withDesign({
+    Cell: flowHoc(...flatten([...headHocs, ...bodyHocs])),
   }));
 };
 

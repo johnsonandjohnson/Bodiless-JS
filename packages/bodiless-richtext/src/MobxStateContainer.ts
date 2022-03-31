@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { observable, action } from 'mobx';
+import { observable, action, makeObservable } from 'mobx';
 
 type NewState = {
   [index:string]: any,
@@ -23,6 +23,7 @@ class MobxStateContainer {
   constructor() {
     this.setState = this.setState.bind(this);
     this.get = this.get.bind(this);
+    makeObservable(this);
   }
 
   get(key: string) {

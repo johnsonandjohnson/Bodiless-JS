@@ -47,26 +47,21 @@ As a visual indicator, while in Edit Mode, the **Edit** icon will be highlighted
 In your site's Edit Interface — in both Review Mode and Edit Mode — you will see the Toolbar. By
 default, the Edit Interface begins in Review Mode.
 
-<!-- Hardcoding a table to place list alongside Toolbar image. -->
-<table>
-  <tr><!-- Empty row to trigger alternate cell background color for next row. --></tr>
-  <tr>
-    <td>
-      <img src="/___docs/ContentEditorUserGuide/assets/Toolbar.jpg" alt="The BodilessJS Toolbar" width="50">
-    </td>
-    <td>
-      Out of the box, the Toolbar has the following items:
-      <ul>
-        <li><a href="#/ContentEditorUserGuide/?id=switcher">Switcher</a> (the "compare arrows" icon)</li>
-        <li><a href="#/ContentEditorUserGuide/?id=alerts">Alerts</a></li>
-        <li><a href="#/ContentEditorUserGuide/?id=docs">Docs</a></li>
-        <li><a href="#/ContentEditorUserGuide/?id=edit">Edit</a></li>
-        <li><a href="#/ContentEditorUserGuide/?id=page">Page</a></li>
-        <li><a href="#/ContentEditorUserGuide/?id=file">File</a></li>
-      </ul>
-    </td>
-  </tr>
-</table>
+Out of the box, the Toolbar has the following items:
+
+* [Switcher](#switcher) (the "compare arrows" icon)
+* [Alerts](#alerts)
+* [Docs](#docs)
+* [Edit](#edit)
+* [Page](#page)
+* [File](#file)
+* [Tools](#tools)<sup>*</sup>
+
+<sup>*</sup> _Available in Edit Mode only._
+
+| Review Mode | Edit Mode |
+|:-----------:|:---------:|
+| ![The BodilessJS Toolbar in Review Mode](./assets/ToolbarReviewMode.jpg ':size=50') | ![The BodilessJS Toolbar in Edit Mode](./assets/ToolbarEditMode.jpg ':size=50') |
 
 #### Switcher
 
@@ -133,6 +128,18 @@ Click the **File** button to open the _File_ menu and interact with your site's 
 ![File menu](./assets/FileMenu.jpg ':size=50%')
 
 For more information, please see: [File Menu](./FileMenu/).
+
+#### Tools
+
+![Tools icon](./assets/ToolsIcon.jpg ':size=60')
+
+Click the **Tools** button to open the _Tools_ menu and access various utilities to help you
+edit/manage the content of and build your site.
+
+![Tools menu](./assets/ToolsMenu.jpg ':size=50%')
+
+For more information on the _Tools_ menu and the utilities it provides, please see: [Tools
+Menu](./ToolsMenu/).
 
 ### Page Layout
 
@@ -256,41 +263,39 @@ are available for each variation.
 To read more about the Rich Text Editor see the [Rich Text Editor component
 documentation](../../../Components/RichText).
 
-
 ### Components
 
-The following components may be available for use on your BodilessJS site. Click
-the links below to read more about working with the individual components.
+The following components may be available for use on your BodilessJS site. Click the links below to
+read more about working with the individual components.
 
 #### Layout
 
-* [Flow Container](../../../Components/FlowContainer) 
+* [Flow Container](../../../Components/FlowContainer)
 * [Rich Media Text Editor](../../../Components/RichText)
 * [Card](../../../Components/Card)
 
 #### Media
 
-* [Image](../../../Components/Image)
-* [Youtube](../../../Components/YouTube) 
+* [Image](../../../Components/Image/)
+* [YouTube](../../../Components/YouTube)
 * [Carousel](../../../Components/Carousel)
 
 #### Interactions
 
-* [Link](../../../Components/Link) 
-* [Single Accordion](../../../Components/SingleAccordion) 
-* [Main Menu](../../../Components/MainMenu)
+* [Link](../../../Components/Link)
+* [Single Accordion](../../../Components/SingleAccordion)
+* [Navigation](../../../Components/Navigation/)
 * [List Filter](../../../Components/FilterByGroup)
 
 #### Integrations
 
 * [Bazaarvoice](../../../Components/bv)
 
-
 #### SEO
- 
-* [Sitemap.xml](../../../Development/Guides/BuildingSites/ComponentsStarterKit?id=sitemapxml-amp-robotstxt-file) 
-* Robots.txt 
-* [Metatags](../../../Development/Guides/BuildingSites/ComponentsStarterKit?id=metadata-component) 
+
+* [Sitemap.xml](../../../Development/Guides/BuildingSites/ComponentsStarterKit?id=sitemapxml-amp-robotstxt-file)
+* `Robots.txt`
+* [Metatags](../../../Development/Guides/BuildingSites/ComponentsStarterKit?id=metadata-component)
 
 ### Content Library
 
@@ -303,3 +308,6 @@ for use in [Flow Containers](/Components/FlowContainer); once enabled, you will 
 * Add components saved in the Content Library to your Flow Container.
   * See: [Saving a component in the Content
     Library](/Components/FlowContainer#saving-a-component-in-the-content-library)
+* Unlink components from Content Library Items.
+  * See: [Unlinking a component from the Content
+    Library](/Components/FlowContainer#unlinking-a-component-from-the-content-library)

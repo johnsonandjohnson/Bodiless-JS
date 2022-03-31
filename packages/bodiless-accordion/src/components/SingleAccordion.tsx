@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType, useState } from 'react';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import {
   withDesign,
   designable,
@@ -21,7 +21,7 @@ import {
   H2,
   StylableProps,
   addProps,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import {
   asEditable,
@@ -96,14 +96,14 @@ const SingleAccordionBase = observer(({
   );
 });
 
-const asSingleAccordion = asToken(
+const asSingleAccordion = flowHoc(
   withDesign({
     Title: asEditable('title', 'SingleAccordion Title Text'),
     Body: asEditable('body', 'SingleAccordion Body Text'),
   }),
 );
 
-const asTestableSingleAccordion = asToken(
+const asTestableSingleAccordion = flowHoc(
   withDesign({
     Wrapper: addProps({ 'data-accordion-element': 'accordion' }),
     TitleWrapper: addProps({ 'data-accordion-element': 'accordion-title-wrapper' }),
@@ -115,12 +115,12 @@ const asTestableSingleAccordion = asToken(
 
 const SingleAccordionClean = designable(singleAccordionComponentStart, 'Accordion')(SingleAccordionBase);
 
-const SingleAccordion = asToken(
+const SingleAccordion = flowHoc(
   asSingleAccordion,
   withNode,
 )(SingleAccordionClean);
 
-const TestableSingleAccordion = asToken(
+const TestableSingleAccordion = flowHoc(
   asTestableSingleAccordion,
   withNode,
 )(SingleAccordionClean);

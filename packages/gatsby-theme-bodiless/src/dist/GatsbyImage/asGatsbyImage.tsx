@@ -13,7 +13,6 @@
  */
 
 import React, { ComponentType as CT, HTMLProps } from 'react';
-import flow from 'lodash/flow';
 import omit from 'lodash/omit';
 import {
   GatsbyImage as GatsbyPluginImage,
@@ -32,6 +31,8 @@ import {
   withDesign,
   withoutProps,
   designable,
+  HOC,
+  flowHoc,
 } from '@bodiless/fclasses';
 import type { ImageData } from '@bodiless/components';
 import type {
@@ -227,8 +228,9 @@ const asDesignableGatsbyImage = (ImageComponent: CT<any>) => {
 
 const withActivatorWrapperDefaultStyles = addClasses('bl-w-full');
 
-const asGatsbyImage = flow(
-  asDesignableGatsbyImage,
+const asGatsbyImage = flowHoc(
+  // @todo this cast should not be necessary.
+  asDesignableGatsbyImage as HOC,
   withDesign({
     GatsbyImage: ifEditable(
       withActivatorWrapper(

@@ -1,0 +1,8 @@
+{
+  "Components": {
+    "Templates": {
+      "README.md": "./doc/README.md",
+      "Generic.md": "./doc/Generic.md"
+    }
+  }
+}

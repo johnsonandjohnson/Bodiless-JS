@@ -14,10 +14,10 @@
 
 import React from 'react';
 import pick from 'lodash/pick';
-import { Token } from '@bodiless/fclasses';
+import { HOC } from '@bodiless/fclasses';
 
 // eslint-disable-next-line max-len
-const withPropsFromPlaceholder = (keys: string[]) => (placeholder: any): Token => Component => {
+const withPropsFromPlaceholder = (keys: string[]) => (placeholder: any): HOC => Component => {
   const WithPropsFromPlaceholder = (props: any) => {
     const placeholderProps = {
       ...pick(props, keys),

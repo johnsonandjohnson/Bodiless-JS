@@ -13,7 +13,7 @@
  */
 
 import React, { FC, ComponentType } from 'react';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import flow from 'lodash/flow';
 import {
   withNode,

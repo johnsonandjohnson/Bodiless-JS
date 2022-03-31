@@ -91,7 +91,7 @@ describe('Filter item interactions', () => {
   it('React Tags should have all props', () => {
     menuButton.simulate('click');
     const reactTags = wrapper.find('ReactTags');
-    expect(reactTags.prop('placeholder')).toBe('Add or create');
+    expect(reactTags.prop('placeholderText')).toBe('Add or create');
     expect(reactTags.prop('noSuggestionsText')).toBe('No suggestions found');
     expect(reactTags.prop('allowNew')).toBe(true);
   });

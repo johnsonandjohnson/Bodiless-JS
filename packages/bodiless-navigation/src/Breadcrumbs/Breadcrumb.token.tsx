@@ -17,7 +17,7 @@ import negate from 'lodash/negate';
 import {
   stylable,
   withDesign,
-  asToken,
+  flowHoc,
   addProps,
 } from '@bodiless/fclasses';
 import type { TokenDef } from '@bodiless/fclasses';
@@ -42,19 +42,19 @@ export const asStylableBreadcrumbs = withDesign({
 /**
  * Applies supplied tokenDefs to all breadcrumb items.
  *
- * @returns Token - a token that applies provided tokenDefs to all breadcrumb items.
+ * @returns HOC - a token that applies provided tokenDefs to all breadcrumb items.
  */
 export const withBreadcrumbItemToken = (...tokenDefs: TokenDef[]) => withDesign({
   // dummy arg is needed bc of ts bug, see https://github.com/microsoft/TypeScript/issues/28010
-  StartingTrail: asToken({}, ...tokenDefs),
-  FinalTrail: asToken({}, ...tokenDefs),
-  Title: asToken({}, ...tokenDefs),
+  StartingTrail: flowHoc({}, ...tokenDefs),
+  FinalTrail: flowHoc({}, ...tokenDefs),
+  Title: flowHoc({}, ...tokenDefs),
 });
 
 /**
  * Hoc to make breadcrumbs accessible
  */
-export const asAccessibleBreadcrumbs = asToken(
+export const asAccessibleBreadcrumbs = flowHoc(
   withDesign({
     NavWrapper: addProps({
       'aria-label': 'Breadcrumb',

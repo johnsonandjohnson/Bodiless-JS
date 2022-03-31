@@ -1,10 +1,12 @@
 {
   "Components": {
-    "FlowContainer.md": "./README.md",
+    "FlowContainer.md": "./doc/FlowContainer.md",
     "assets": {
-      "ComponentLibraryNew.jpg": "./assets/ComponentLibraryNew.jpg",
-      "ContextMenuWithLibrary.jpg": "./assets/ContextMenuWithLibrary.jpg",
-      "EmptyFlowcontainer.jpg": "./assets/EmptyFlowcontainer.jpg"
+      "ComponentLibraryNew.jpg": "./doc/assets/ComponentLibraryNew.jpg",
+      "ContentLibraryItemAndContextMenu.jpg": "./doc/assets/ContentLibraryItemAndContextMenu.jpg",
+      "ContextMenuWithLibrary.jpg": "./doc/assets/ContextMenuWithLibrary.jpg",
+      "ContextMenuWithLibraryUnlink.jpg": "./doc/assets/ContextMenuWithLibraryUnlink.jpg",
+      "EmptyFlowcontainer.jpg": "./doc/assets/EmptyFlowcontainer.jpg"
     }
   }
 }

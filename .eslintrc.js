@@ -14,6 +14,7 @@
 
 module.exports = {
   "extends": [
+    "airbnb",
     "airbnb-typescript",
     "plugin:jest/recommended",
     "plugin:import/typescript"
@@ -65,5 +66,6 @@ module.exports = {
     "browser": true,
     "node": true
   },
+  "ignorePatterns": [".eslintrc.js"],
 };
 

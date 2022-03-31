@@ -20,7 +20,7 @@ import React, {
 import {
   shallow, mount, ReactWrapper,
 } from 'enzyme';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import PageContextProvider, { withMenuOptions, useRegisterMenuOptions } from '../src/PageContextProvider';
 import { useEditContext, useGetter } from '../src/hooks';
 import { defaultStore } from '../src/PageEditContext/Store';

@@ -1,4 +1,24 @@
+/**
+ * Copyright © 2022 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import { ComponentType, HTMLProps } from 'react';
+
+/**
+ * Symbol used to identify a tokenspec object.
+ */
+export const $TokenSpec = Symbol('TokenSpec');
+
 /**
  * Metadata which can be attached to a token.
  *
@@ -53,7 +73,7 @@ type PP<P, A, R> = Omit<P & A, keyof R> & Partial<R>;
  *   The type of the resulting component's props will be the the base components props with
  *   these removed.
  */
-export type HOC<B = {}, A = {}, R = {}> =
+export type HOCBase<B = {}, A = {}, R = {}> =
   <P extends B>(C: ComponentOrTag<P>) => ComponentWithMeta<PP<P, A, R>>;
 
 /**
@@ -67,7 +87,7 @@ export type TokenProps = {
   /**
    * The tokens and/or filters which compose this token.
    */
-  members?: Token[];
+  members?: HOC[];
   /**
    * The metadata attached to this token. This metadata will be merged recursively with
    * any metadata provided by any other tokens which this token composes, and attached to any
@@ -79,9 +99,9 @@ export type TokenProps = {
 /**
  * Type of a "Token", which is an HOC with optional metadata and filtering.
  *
- * Tokens may be composed of other tokens using the `asToken` utility.
+ * Tokens may be composed of other tokens using the `flowHoc` utility.
  */
-export type Token<B = {}, A = {}, R = {}> = HOC<B, A, R> & TokenProps;
+export type HOC<B = {}, A = {}, R = {}> = HOCBase<B, A, R> & TokenProps;
 
 /**
  * An "Enhancer" is a token which produces a component which accepts additional props.
@@ -94,7 +114,7 @@ export type Token<B = {}, A = {}, R = {}> = HOC<B, A, R> & TokenProps;
  * Optional constraint to put on the props signature of the base component. If specified,
  * the token will only apply to a base component which has this signature.
 */
-export type Enhancer<A, B = {}> = Token<B, A>;
+export type Enhancer<A, B = {}> = HOC<B, A>;
 
 /**
  * In "Injector" is a token which provides values for the existing props of a component.
@@ -108,20 +128,20 @@ export type Enhancer<A, B = {}> = Token<B, A>;
  * Optional constraint to put on the props signature of the base component. If specified,
  * the token will only apply to a base component which has this signature.
  */
-export type Injector<R, B = {}> = Token<B & R, {}, R>;
+export type Injector<R, B = {}> = HOC<B & Partial<R>, {}, R>;
 
 /**
  * Type of the filter function which should be passed to `withTokenFilter`
  *
  * @see withTokenFilter
  */
-export type TokenFilterTest = (token: Token) => boolean;
+export type TokenFilterTest = (token: HOC) => boolean;
 
 /**
- * Type of the parameters to asToken.  Overloaded to accept metadata
+ * Type of the parameters to flowHoc  Overloaded to accept metadata
  * objects (or undefined) in addition to tokens.
  */
-export type TokenDef<B = {}, A = {}, R = {}> = Token<B, A, R> | TokenMeta | undefined;
+export type TokenDef<B = {}, A = {}, R = {}> = HOC<B, A, R> | TokenMeta | undefined;
 
 /**
  * Type of a token composition function.
@@ -133,7 +153,7 @@ export type TokenDef<B = {}, A = {}, R = {}> = Token<B, A, R> | TokenMeta | unde
  *
  * > Type inference will only be correct for up to 10 composed tokens.
  */
-export type AsToken<A = {}> =
+export type FlowHoc<A = {}> =
   <B1, A1, R1, A2, R2, A3, R3, A4, R4, A5, R5, A6, R6, A7, R7, A8, R8, A9, R9>(
     t1?: TokenDef<B1, A1, R1>,
     // @todo Ensure that the output of each token matches the constraint of the next, eg
@@ -150,4 +170,160 @@ export type AsToken<A = {}> =
     t9?: TokenDef<{}, A9, R9>,
     ...t: TokenDef<any, any, any>[]
     // eslint-disable-next-line max-len
-  ) => Token<B1, A & A1 & A2 & A3 & A4 & A5 & A6 & A7 & A8 & A9, R1 & R2 & R3 & R4 & R5 & R6 & R7 & R8 & R9>;
+  ) => HOC<B1, A & A1 & A2 & A3 & A4 & A5 & A6 & A7 & A8 & A9, R1 & R2 & R3 & R4 & R5 & R6 & R7 & R8 & R9>;
+
+/**
+ * This is the type to use for the components prop of a component with a fluid design.
+ */
+export type DesignableComponents = {
+  [key: string]: ComponentOrTag<any>,
+};
+
+/**
+ * This is the type of a design which can be applied to a component which accepts
+ * a components prop of type "C".
+ */
+export type HocDesign<C extends DesignableComponents = DesignableComponents> = {
+  [Key in keyof C]?: HOC
+} & { _final?: HocDesign<Omit<C, '_final'>> };
+
+/**
+ * This is the type of the props for a designable whose underlying component
+ * accepts a components prop of type "C".
+ */
+export type DesignableProps<C extends DesignableComponents = DesignableComponents> = {
+  design?: Design<C>;
+};
+
+export type DesignableComponentsProps<C extends DesignableComponents = DesignableComponents> = {
+  components: C,
+};
+
+/**
+ * This is the type of a  Higher order design which can be applied to a component which accepts
+ * a components prop of type "C".
+ */
+export type HOD<
+  C extends DesignableComponents,
+  D extends object = any
+> = (design?:Design<C, D>) => Design<C, D>;
+
+/**
+ * This is a GOD that accepts any DesignableComponents
+ */
+export type FluidHOD = HOD<DesignableComponents>;
+export type FluidDesign = Design<DesignableComponents>;
+
+export type Designable<C extends DesignableComponents = DesignableComponents>
+  = HOCBase<{}, DesignableProps<C>, DesignableComponentsProps<C>>;
+
+export type Domains<C extends DesignableComponents, D extends object> = {
+  [k in keyof D]?: Design<C>
+};
+
+export type ReservedDomains<
+  C extends DesignableComponents,
+  D extends object,
+> = {
+  /**
+     * A list of other tokens which should be applied.
+     */
+  Compose?: {
+    [key: string]: Token<C, D>,
+  },
+  /**
+     * If specified, the entire token will be wrapped in a flow toggle using
+     * this condition hook. Note, the condition is applied to the whole token,
+     * so it will not have access to any contexts or content nodes provided by
+     * the token itself.
+     */
+  Flow?: FlowHoc,
+  /**
+     * Metadata which should be attached to this token (and to any component to
+     * to which the token is applied).
+     */
+  Meta?: TokenMeta,
+};
+
+/**
+   * Type of a token specification, a token expressed in the
+   * HOC Object Notation.
+   *
+   * This is a nested object with two levels of keys:
+   * - The inner keys are to the design keys of the target component, and their
+   *   values extended CanvasX token definitions which should be applied to
+   *   each key. In addition to the design keys of the component, the special `_`
+   *   key is supported to denote a token which should be applied to the component
+   *   as a whole.
+   * - The top-level keys are "domains" -- areas of styling or behavior which can
+   *   be individually reused, extended or overridden by downstream consumers.
+   *
+   * @param C
+   * The type of the design elements for the target componetn.
+   *
+   * @param D
+   * An object type describing the domain keys available in this token.
+   */
+export type TokenSpecBase<
+  C extends DesignableComponents,
+  D extends object,
+> = Domains<C, D> & ReservedDomains<C, D>;
+
+export type TokenSpec<
+  C extends DesignableComponents,
+  D extends object,
+> = TokenSpecBase<C, D> & {
+  [$TokenSpec]: true,
+};
+
+/**
+ * Type of an argument to `as` and/or the value of a key in an Extended Design.
+ * May be:
+ * - A token specified in token object notation
+ * - A token specified as an HOC
+ * - A token specified as a string of classes.
+ */
+export type Token<
+  C extends DesignableComponents,
+  D extends object,
+> = TokenSpec<C, D> | HOCBase | string | undefined;
+
+/**
+   * Type of a collection of tokens which apply to a specific designable component.
+   *
+   * @param C
+   * The designable components which are exposed by the component to which these
+   * tokens apply.
+   */
+export type TokenCollection<
+  C extends DesignableComponents,
+  D extends object = object,
+> = {
+  [name: string]: TokenSpec<C, D>,
+};
+
+type FinalDesign<
+  C extends DesignableComponents = DesignableComponents,
+  D extends object = any,
+> = {
+  [k in keyof Partial<C & { _?: Token<C, D> }>]: Token<any, D>
+};
+
+/**
+   * A Design is a keyed set of tokens which can apply to a designable
+   * component. The keys correspond to the design elements
+   * - includes a special key which contains tokens to be applied to the
+   *   component as a whole.
+   * - Allows each value to be speciried as a CanvasX extened token definition.
+   */
+export type Design<
+  C extends DesignableComponents = DesignableComponents,
+  D extends object = any,
+> = FinalDesign<C, D> & {
+  _final?: FinalDesign<C, D>
+};
+
+/**
+ * Type of a condition suitable for use with `flowIf`, `addPropsIf`, `addClassesIf`
+ */
+export type Condition<P = any> = (props: P) => boolean;

@@ -21,8 +21,8 @@ import {
   Ul,
   Li,
   addPropsIf,
-  asToken,
-  Token,
+  flowHoc,
+  HOC,
 } from '@bodiless/fclasses';
 import { ifEditable, withChild } from '@bodiless/core';
 import type { WithNodeKeyProps } from '@bodiless/core';
@@ -72,9 +72,9 @@ const withInfinitiveLoop = withDesign({
   }),
 });
 
-const withCarouselDots = (nodeKeys?: WithNodeKeyProps) => asToken(
+const withCarouselDots = (nodeKeys?: WithNodeKeyProps) => flowHoc(
   withDesign({
-    Dots: asToken(
+    Dots: flowHoc(
       replaceWith(Ul),
       asBodilessList(nodeKeys, undefined, () => ({ groupLabel: 'Slide' })),
       withDesign({
@@ -93,7 +93,7 @@ const withNavigationButtons = withDesign({
   ButtonNext: replaceWith(stylable(ButtonNext)),
 });
 
-const withAutoPlayButton = asToken(
+const withAutoPlayButton = flowHoc(
   withDesign({
     ButtonPlay: replaceWith(stylable(ButtonPlay)),
   }),
@@ -106,7 +106,7 @@ const withAutoPlayInterval = (interval: number = 3000) => withDesign({
   }),
 });
 
-const withCarouselItemTabIndex: Token = Component => {
+const withCarouselItemTabIndex: HOC = Component => {
   const WithCarouselItemTabIndex: FC<any> = props => {
     const isItemActive = useIsCarouselItemActive();
     const tabIndex = isItemActive ? 0 : -1;
@@ -115,13 +115,13 @@ const withCarouselItemTabIndex: Token = Component => {
   return WithCarouselItemTabIndex;
 };
 
-const asAccessibleCarouselButton = asToken(
+const asAccessibleCarouselButton = flowHoc(
   addProps({
     role: 'button',
   }),
 );
 
-const withAriaSelectedCarouselItem = asToken(
+const withAriaSelectedCarouselItem = flowHoc(
   addPropsIf(useIsCarouselItemActive)({
     'aria-selected': true,
     'aria-hidden': false,
@@ -133,12 +133,12 @@ const withAriaSelectedCarouselItem = asToken(
 );
 
 const asAccessibleCarousel = withDesign({
-  Slider: asToken(
+  Slider: flowHoc(
     addProps({
       tabIndex: 'auto',
     }),
     withDesign({
-      Item: asToken(
+      Item: flowHoc(
         withCarouselItemTabIndex,
         withAriaSelectedCarouselItem,
       ),
@@ -147,7 +147,7 @@ const asAccessibleCarousel = withDesign({
   ButtonBack: asAccessibleCarouselButton,
   ButtonNext: asAccessibleCarouselButton,
   Dots: withDesign({
-    Item: asToken(
+    Item: flowHoc(
       withAriaSelectedCarouselItem,
       addProps({
         'aria-hidden': false,

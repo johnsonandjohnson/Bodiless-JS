@@ -67,7 +67,7 @@ describe('Filter By Group', () => {
 
     expect(wrapper.find(Filter).length).toBe(1);
     expect(wrapper.find('div[data-filter-by-group="content-wrapper"]').length).toBe(1);
-    expect(wrapper.find('button[aria-label="Reset Button"]').length).toBe(1);
+    expect(wrapper.find('button[data-filter-by-group="reset-button"]').length).toBe(1);
   });
 
   it('should add default suggestions to the context', () => {
@@ -127,7 +127,7 @@ describe('Filter By Group', () => {
     wrapper.find('#select-tag-button').simulate('click');
     expect(wrapper.find('#selected-tag').text()).toBe(tagToSelect.name);
 
-    wrapper.find('button[aria-label="Reset Button"]').simulate('click');
+    wrapper.find('button[data-filter-by-group="reset-button"]').simulate('click');
     expect(wrapper.find('#selected-tag').text()).toBe('');
   });
 });

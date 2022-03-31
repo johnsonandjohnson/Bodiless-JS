@@ -15,8 +15,8 @@
 import {
   withDesignAt,
   TokenDef,
-  asToken,
-  Token,
+  flowHoc,
+  HOC,
 } from '@bodiless/fclasses';
 
 const withSecondLevelDesign = (keys: string[]) => keys.reduce((result, item) => {
@@ -63,7 +63,7 @@ const depthDesignPathOptions = [() => [], withSecondLevelDesign, withThirdLevelD
 const withMenuDesign = (
   keys: string|string[] = ['Main', 'List', 'Columns', 'Cards'],
   depths: number|number[] = [0, 1, 2],
-) => (...tokenDefs: TokenDef[]):Token => {
+) => (...tokenDefs: TokenDef[]): HOC => {
   const keys$ = Array.isArray(keys) ? keys : [keys];
   const depths$ = Array.isArray(depths) ? depths : [depths];
 
@@ -79,14 +79,14 @@ const withMenuDesign = (
   // Make sure depths take precidence.
   // For example withMenuDesign(Main, 1) will not do anything.
   if (keys$.includes('Main') && depths$.includes(0)) {
-    return asToken(
+    return flowHoc(
       {},
       ...tokenDefs,
-      withDesignAt(...submenuDesignPaths)(asToken({}, ...tokenDefs)),
+      withDesignAt(...submenuDesignPaths)(flowHoc({}, ...tokenDefs)),
     );
   }
 
-  return withDesignAt(...submenuDesignPaths)(asToken({}, ...tokenDefs));
+  return withDesignAt(...submenuDesignPaths)(flowHoc({}, ...tokenDefs));
 };
 
 export default withMenuDesign;

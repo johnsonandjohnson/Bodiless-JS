@@ -21,9 +21,8 @@
 
 import React, { FC } from 'react';
 import {
-  Token, ComponentOrTag, asToken, Enhancer, Injector, flowIf,
+  HOC, ComponentOrTag, flowHoc, Enhancer, Injector, flowIf,
 } from '../src';
-import { FormBodyProps } from '../../bodiless-tokens/node_modules/@bodiless/core/lib';
 
 type BaseProps = {
   foo: string,
@@ -39,7 +38,7 @@ const Base2: FC<Base2Props> = () => null;
 const Base3: FC<BaseProps & Base2Props> = () => null;
 
 describe('Token', () => {
-  const withChild = (Child: ComponentOrTag<any>): Token => C => {
+  const withChild = (Child: ComponentOrTag<any>): HOC => C => {
     // Always define the enhanced component explicitly and give it a name
     // Webpack will ensure that
     const WithChild: FC<any> = props => <C {...props}><Child /></C>;
@@ -58,7 +57,7 @@ describe('Token', () => {
   });
 
   test('Constraining the signature of the component to which a token can be applied', () => {
-    const withLowercaseFoo: Token<BaseProps> = C => {
+    const withLowercaseFoo: HOC<BaseProps> = C => {
       const WithLowercaseFoo: FC<any> = (props: BaseProps) => {
         const { foo } = props;
         return <C {...props as any} foo={foo.toLowerCase()} />;
@@ -98,8 +97,8 @@ describe('Enhancers', () => {
     const C1T3 = <C1 foo="foo" bar="bar" />;
   });
 
-  test('asToken propagates the type of an enhancer', () => {
-    const C4 = asToken(withToggle)(Base);
+  test('flowHoc propagates the type of an enhancer', () => {
+    const C4 = flowHoc(withToggle)(Base);
     const C4T1 = <C4 toggle foo="foo" bar="bar" />;
     // @ts-expect-error prop baz does not exist
     const C4T2 = <C4 toggle foo="foo" bar="bar" baz="baz" />;
@@ -153,7 +152,7 @@ describe('Injectors', () => {
   test('An injector accepts additional prop constraints', () => {
     const injector:Injector<FooProps, Base2Props> = () => () => null;
     const R1 = injector(Base3);
-    // Token applies to Base2 even though Base2 doesn't have "foo".  Why?
+    // HOC applies to Base2 even though Base2 doesn't have "foo".  Why?
     const R2 = injector(Base2);
     // @ts-expect-error Does not apply to component which does not accept Base2Props
     const R3 = injector(Base);
@@ -161,13 +160,13 @@ describe('Injectors', () => {
 });
 
 describe('Composed token type inference', () => {
-  const generic: Token = () => () => null;
+  const generic: HOC = () => () => null;
   const enhancer: Enhancer<Base2Props> = () => () => null;
   const injector: Injector<Pick<BaseProps, 'foo'>> = () => () => null;
-  const constrainer: Token<BaseProps> = () => () => null;
+  const constrainer: HOC<BaseProps> = () => () => null;
 
-  test('asToken correctly infers types when composing all token types', () => {
-    const composed = asToken(
+  test('flowHoc correctly infers types when composing all token types', () => {
+    const composed = flowHoc(
       constrainer,
       enhancer,
       injector,
@@ -182,7 +181,7 @@ describe('Composed token type inference', () => {
     const T3 = <R foo="foo" bar="bar" />;
     // @ts-expect-error Non-injected base prop is still required
     const T4 = <R foo="foo" baz="bar" />;
-    // @ts-expect-error Token is constrained by constraint of first token
+    // @ts-expect-error HOC is constrained by constraint of first token
     const R2 = composed(Base2);
   });
 

@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/cli",
-  "version": "0.3.1",
+  "version": "0.3.7",
   "description": "A cli tool for Bodiless-JS",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
@@ -27,7 +27,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json ",
+    "build": "tsc --version && tsc -p ./tsconfig.json ",
     "build:watch": "npm run build -- --watch",
     "postpack": "rimraf oclif.manifest.json",
     "prepack": "rimraf lib && npm run build && oclif-dev manifest && oclif-dev readme",
@@ -46,8 +46,7 @@
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
-    "@types/node": "^16",
-    "nodemon": "^1.19.1"
+    "@types/node": "^16"
   },
   "oclif": {
     "commands": "./lib/commands",

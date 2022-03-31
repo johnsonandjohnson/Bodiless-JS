@@ -20,7 +20,7 @@ import { Design, withDesign } from '@bodiless/fclasses';
 import TokenPanelClean, { TokenPanelComponents } from './TokenPanel';
 
 export type TokenPanelButtonDefinition = {
-  panelDesign?: Design<TokenPanelComponents>,
+  panelDesign?: Design<TokenPanelComponents, any>,
   root?: boolean,
 };
 

@@ -13,7 +13,7 @@
  */
 
 import {
-  addClasses, addClassesIf, asToken, withDesign,
+  addClasses, addClassesIf, flowHoc, withDesign,
 } from '@bodiless/fclasses';
 
 import { useIsBurgerMenuVisible, useIsBurgerTransitionCompleted } from './BurgerMenuContext';
@@ -23,7 +23,7 @@ import {
 } from '../token';
 
 const withSlideInOutAnimation = withDesign({
-  Wrapper: asToken(
+  Wrapper: flowHoc(
     addClasses('transform -translate-x-full'),
     // Since Burger Menu is Hidden by default,
     // we can not use useIsBurgerMenuHidden to add 'animate-slide-out'
@@ -36,7 +36,7 @@ const withSlideInOutAnimation = withDesign({
 });
 
 const asFullScreen = withDesign({
-  Wrapper: asToken(
+  Wrapper: flowHoc(
     withFullWidthStyles,
     withFullHeightStyles,
     withNoInsetStyles,
@@ -51,33 +51,33 @@ const withDefaultBackground = withDesign({
 });
 
 /**
- * A Token that adds styles to the Button component of Burger Menu Toggler.
+ * A HOC that adds styles to the Button component of Burger Menu Toggler.
  * Adds a material-icon class and pointer styles.
  *
- * @return Token that adds styles to the Button component.
+ * @return HOC that adds styles to the Button component.
  */
 const withBurgerMenuTogglerStyles = withDesign({
-  Button: asToken(
+  Button: flowHoc(
     withMaterialIconsFont,
     withPointerCursorStyles,
   ),
 });
 
 /**
- * A Token that disables pointer events on the accordion Label element.
+ * A HOC that disables pointer events on the accordion Label element.
  *
- * @return Token that disables pointer events on the accordion Label element.
+ * @return HOC that disables pointer events on the accordion Label element.
  */
 const withDisabledTitleLink = withDesign({
   Label: asDisabled,
 });
 
 /**
- * A Token that adds styles and transitions needed for a slide-in animation for the Burger menu.
+ * A HOC that adds styles and transitions needed for a slide-in animation for the Burger menu.
  *
- * @return Token that applies required styles for slide-in animation.
+ * @return HOC that applies required styles for slide-in animation.
  */
-const asSlideLeft = asToken(
+const asSlideLeft = flowHoc(
   withSlideInOutAnimation,
   asFullScreen,
   withDefaultBackground,

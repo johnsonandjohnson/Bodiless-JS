@@ -24,7 +24,7 @@ const uniq = require('lodash/uniq');
 const Page = require('./page');
 const GitCmd = require('./GitCmd');
 const { getChanges, getConflicts, mergeMain } = require('./git');
-const { copyAllFiles } = require('./fileHelper');
+const { copyAllFiles, copyFile, moveFile } = require('./fileHelper');
 const Logger = require('./logger');
 
 const backendPrefix = process.env.GATSBY_BACKEND_PREFIX || '/___backend';
@@ -285,6 +285,11 @@ class Backend {
     this.setRoute(`${backendPrefix}/clone`, Backend.clonePage);
     this.setRoute(`${backendPrefix}/remove/*`, Backend.removePage);
     this.setRoute(`${backendPrefix}/directory/child/*`, Backend.directoryChild);
+    this.setRoute(`${backendPrefix}/directory/exists/*`, Backend.directoryExists);
+    this.setRoute(`${backendPrefix}/file/remove/*`, Backend.removeFile);
+    this.setRoute(`${backendPrefix}/assets/remove/*`, Backend.removeAssets);
+    this.setRoute(`${backendPrefix}/assets/copy`, Backend.copyAssets);
+    this.setRoute(`${backendPrefix}/assets/move`, Backend.moveAssets);
   }
 
   setRoute(route, action) {
@@ -630,6 +635,28 @@ class Backend {
       });
   }
 
+  static removeFile(route) {
+    route
+      .delete((req, res) => {
+        const pagePath = req.params[0];
+        const page = Backend.getPage(pagePath);
+        page.setBasePath(backendPagePath);
+        const origin = `./src/data/pages/${pagePath}index.json`;
+        logger.log(`Start deleting file: ${origin}`);
+
+        page
+          .removeFile(origin)
+          .then(error => {
+            if (error) {
+              logger.log(error);
+              res.send(error);
+            } else {
+              res.send({});
+            }
+          });
+      });
+  }
+
   static directoryChild(route) {
     route
       .delete((req, res) => {
@@ -642,6 +669,29 @@ class Backend {
 
         page
           .hasChildDirectory()
+          .then(error => {
+            if (error) {
+              logger.log(error);
+              res.send(error);
+            } else {
+              res.send({});
+            }
+          });
+      });
+  }
+
+  static directoryExists(route) {
+    route
+      .delete((req, res) => {
+        const pagePath = req.params[0];
+        const page = Backend.getPage(pagePath);
+
+        page.setBasePath(backendPagePath);
+
+        logger.log(`Start verifying new page exists: ${page.directory}`);
+
+        page
+          .directoryExists(page.directory)
           .then(error => {
             if (error) {
               logger.log(error);
@@ -689,6 +739,7 @@ class Backend {
       const { body: { origin, destination } } = req;
       const page = Backend.getPage(destination);
       page.setBasePath(backendPagePath);
+
       logger.log(`Start cloning page for:${destination}`);
 
       page
@@ -705,6 +756,73 @@ class Backend {
           logger.log(reason);
           res.status(500).send(`${reason}`);
         });
+    });
+  }
+
+  static removeAssets(route) {
+    route.delete(async (req, res) => {
+      const origin = req.params[0];
+      const page = Backend.getPage(origin);
+
+      logger.log(`Start removing assets for:${origin}`);
+
+      const originPath = origin.replace(/\/$/, '');
+      const originStaticPath = path.join(backendStaticPath, '/images/pages', originPath);
+
+      page
+        .removePageAssets(originStaticPath)
+        .then(error => {
+          if (error) {
+            logger.log(error);
+            res.send(error);
+          } else {
+            res.send({});
+          }
+        });
+    });
+  }
+
+  static copyAssets(route) {
+    route.post((req, res) => {
+      const {
+        body: {
+          path_from: pathFrom, path_to: pathTo,
+        }
+      } = req;
+      const assetStaticPathFrom = path.join(backendStaticPath, pathFrom);
+      const assetStaticPathTo = path.join(backendStaticPath, pathTo);
+      logger.log(`Copy assets from: ${assetStaticPathFrom} to ${assetStaticPathTo}, cwd: ${process.cwd()}`);
+      try {
+        copyFile(assetStaticPathFrom, assetStaticPathTo);
+        setTimeout(() => {
+          res.send({status: 'success'});
+        }, 500);
+      } catch (error) {
+        logger.log(error);
+        res.status(500).send(error);
+      }
+    });
+  }
+
+  static moveAssets(route) {
+    route.post((req, res) => {
+      const {
+        body: {
+          path_from: pathFrom, path_to: pathTo,
+        }
+      } = req;
+      const assetStaticPathFrom = path.join(backendStaticPath, pathFrom);
+      const assetStaticPathTo = path.join(backendStaticPath, pathTo);
+      logger.log(`Move asset from: ${assetStaticPathFrom} to ${assetStaticPathTo}, cwd: ${process.cwd()}`);
+      try {
+        moveFile(assetStaticPathFrom, assetStaticPathTo);
+        setTimeout(() => {
+          res.send({status: 'success'});
+        }, 500);
+      } catch (error) {
+        logger.log(error);
+        res.status(500).send(error);
+      }
     });
   }
 

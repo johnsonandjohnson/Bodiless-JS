@@ -1,0 +1,42 @@
+{
+  "name": "@bodiless/cx-flowcontainer",
+  "version": "0.3.7",
+  "description": "Flowcontainer tokens for the bodiless cx design system",
+  "author": "Chris Odem <coden@its.jnj.com>",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "sideEffects": false,
+  "typings": "lib/index.d.ts",
+  "files": [
+    "/lib",
+    "/bodiless.docs.json",
+    "/doc"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "scripts": {
+    "build": "run-p build:lib build:api-doc",
+    "build:api-doc": "typedoc --out doc/api src",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
+  },
+  "peerDependencies": {
+    "react": "^17.0.2"
+  },
+  "dependencies": {
+    "@bodiless/components": "^0.3.7",
+    "@bodiless/components-ui": "^0.3.7",
+    "@bodiless/cx-elements": "^0.3.7",
+    "@bodiless/core": "^0.3.7",
+    "@bodiless/fclasses": "^0.3.7",
+    "@bodiless/layouts": "^0.3.7",
+    "@bodiless/layouts-ui": "^0.3.7",
+    "@bodiless/richtext": "^0.3.7",
+    "@bodiless/richtext-ui": "^0.3.7",
+    "@bodiless/tokens": "^0.3.7",
+    "lodash": "^4.17.19"
+  }
+}

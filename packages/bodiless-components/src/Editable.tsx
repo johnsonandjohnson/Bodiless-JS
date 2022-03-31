@@ -16,7 +16,7 @@ import React, {
   ClipboardEvent, useState, useRef, useCallback, FC,
 } from 'react';
 import ContentEditable from 'react-contenteditable';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import pickBy from 'lodash/pickBy';
 import identity from 'lodash/identity';
 import {
@@ -28,7 +28,7 @@ import {
   withNodeKey,
 } from '@bodiless/core';
 import './Editable.css';
-import { HOC, asToken } from '@bodiless/fclasses';
+import { HOC, flowHoc } from '@bodiless/fclasses';
 
 type EditableOverrides = {
   sanitizer?: (text: string) => string,
@@ -42,8 +42,21 @@ type EditableProps = {
   useOverrides?: UseEditableOverrides,
 } & Partial<WithNodeProps>;
 
-type EditableData = {
+export type EditableData = {
   text: string;
+};
+
+/**
+ * Type guard identifying an object as containing data which conforms
+ * to the EditableData interface.
+ *
+ * @param d
+ * True if the parameter is valid EditableData, false otherwise.
+ */
+export const isEditableData = (d: any): d is EditableData => {
+  if (typeof d !== 'object') return false;
+  if (d.text && typeof d.text !== 'string') return false;
+  return true;
 };
 
 const Text = observer((props: EditableProps) => {
@@ -128,7 +141,7 @@ const asEditable = (
 ): HOC<{}, EditableProps> => Component => {
   // @TODO: Use withChild.
   const useOverrides = useOverrides$ || (() => ({}));
-  const EditableChild = asToken(
+  const EditableChild = flowHoc(
     withPlaceholder(placeholder),
     withNodeKey(nodeKeys),
   )(Editable);

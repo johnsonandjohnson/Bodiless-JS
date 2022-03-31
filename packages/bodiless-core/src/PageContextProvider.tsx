@@ -126,7 +126,7 @@ type MenuOptionsDefinition$<P> = MenuOptionsDefinition<P>|((props:P) => MenuOpti
 /**
  * @private
  * Sets the default scope (global or local) for all menu options is the provided array.
- * For any option in the array, the default scope is superceded by any explicit scope
+ * For any option in the array, the default scope is superseded by any explicit scope
  * specified by the `global` or `local` attribute.
  *
  * @param options
@@ -134,7 +134,7 @@ type MenuOptionsDefinition$<P> = MenuOptionsDefinition<P>|((props:P) => MenuOpti
  * @param global
  * Whether to set global or local scope.
  *
- * @returs
+ * @returns
  * Array of menu options with default scope set.
  */
 const setDefaultOptionScope = (options: TMenuOption[], global: boolean) => options.map(o => ({

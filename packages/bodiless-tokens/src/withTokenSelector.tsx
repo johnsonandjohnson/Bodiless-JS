@@ -21,7 +21,7 @@ import {
   EditButtonOptions,
   UseBodilessOverrides,
 } from '@bodiless/core';
-import type { Token, ComponentOrTag } from '@bodiless/fclasses';
+import type { HOC, ComponentOrTag } from '@bodiless/fclasses';
 import flowRight from 'lodash/flowRight';
 import pick from 'lodash/pick';
 import { v4 } from 'uuid';
@@ -29,7 +29,7 @@ import type { TokensProps } from './withTokensFromProps';
 import TokenMap from './TokenMap';
 
 export type Tokens = {
-  [key: string]: Token,
+  [key: string]: HOC,
 };
 
 export type TokenSelectorProps = {
@@ -121,7 +121,7 @@ export const withTokensFromData = <P extends TokensProps>(Component: ComponentOr
   return WithTokensFromData;
 };
 
-export const withTokenNamesFromData: Token = Component => {
+export const withTokenNamesFromData: HOC = Component => {
   const WithTokenNamesFromData: FC<any> = (props: EditButtonProps<TokenSelectorData>) => {
     const { componentData, ...rest } = props;
     const { tokens } = componentData;

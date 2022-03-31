@@ -33,4 +33,10 @@ import './commands'
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
-require('cypress-xpath')
+require('cypress-xpath');
+const childProcess = require('child_process');
+
+afterEach(() => {
+  console.log('after each');
+  cy.wait(5000);
+});

@@ -20,11 +20,10 @@
  */
 const pathUtil = require('path');
 const fs = require('fs');
-
 const { getDisabledPages } = require('@bodiless/components/node-api');
 const { createFilePath } = require('gatsby-source-filesystem');
-const { onCreateNode, createSlug } = require('./create-node');
-
+const { onCreateNode, createSlug, createGitInfo } = require('./create-node');
+const createRedirectAlias = require('./create-redirect-alias');
 const Logger = require('./Logger');
 
 const logger = new Logger('gatsby');
@@ -47,7 +46,10 @@ exports.onCreateBabelConfig = args => {
   });
   setBabelPlugin({
     name: '@babel/plugin-proposal-class-properties',
-    options: { loose: true },
+    options: { loose: false },
+  });
+  setBabelPlugin({
+    name: 'babel-plugin-preval',
   });
 };
 
@@ -57,7 +59,7 @@ exports.onCreateBabelConfig = args => {
  */
 const findComponentPath = (...pathSegments) => {
   let componentPath;
-  // Allowed component extentions are jsx, tsx and json.
+  // Allowed component extensions are jsx, tsx and json.
   ['index.jsx', 'index.tsx', 'index.json'].some(item => {
     const path = pathUtil.resolve(...pathSegments, item);
     if (fs.existsSync(path)) {
@@ -142,6 +144,9 @@ const createPagesFromFS = async ({ actions, graphql, getNode }) => {
     logger.log(result.errors);
     return;
   }
+
+  const gitInfo = await createGitInfo();
+
   result.data.allDirectory.edges.forEach(({ node }) => {
     const templateBasePath = ['.', 'src', 'templates'];
     const dataBasePath = ['.', 'src', 'data'];
@@ -175,6 +180,7 @@ const createPagesFromFS = async ({ actions, graphql, getNode }) => {
       }
 
       pageData.context.subPageTemplate = findSubPageTemplateTemplate(indexPath, basePath);
+      pageData.context.gitInfo = gitInfo;
 
       logger.log('Creating page ', slug, pageData.path, pageData.component);
 
@@ -183,7 +189,6 @@ const createPagesFromFS = async ({ actions, graphql, getNode }) => {
       if (process.env.NODE_ENV === 'production' && disabledPages.indexOf(pageData.path) > -1) {
         deletePage(pageData);
       }
-
     } catch (exception) {
       logger.warn(`Error trying to create ${pageData.path}`, exception);
     }
@@ -237,6 +242,7 @@ const createPreviewPagesForTemplates = async ({ actions, graphql, getNode }) => 
 };
 
 exports.createPages = async ({ actions, graphql, getNode }) => {
+  await createRedirectAlias({ actions }, logger);
   await createPagesFromFS({ actions, graphql, getNode });
   if (process.env.NODE_ENV === 'development') {
     await createPreviewPagesForTemplates({ actions, graphql, getNode });

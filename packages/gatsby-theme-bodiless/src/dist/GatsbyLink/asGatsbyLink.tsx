@@ -21,10 +21,10 @@ import {
   withDesign,
   A,
   addProps,
-  Token,
+  HOC,
   ComponentOrTag,
   DesignableProps,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import { ifReadOnly } from '@bodiless/core';
 import type { BodilessLinkProps } from '@bodiless/components';
@@ -44,7 +44,7 @@ const isLocalLink = (path: string) => path
 
 const isFile = (path: string) => /\.[0-9a-z]+$/i.test(path);
 
-const asGatsbyLink$:Token<BodilessLinkProps, DesignableProps<Components>> = Component => {
+const asGatsbyLink$: HOC<BodilessLinkProps, DesignableProps<Components>> = Component => {
   const startComponents: Components = {
     GatsbyLink: BaseGatsbyLink,
     Link: Component as ComponentOrTag<BodilessLinkProps>,
@@ -61,7 +61,7 @@ const asGatsbyLink$:Token<BodilessLinkProps, DesignableProps<Components>> = Comp
   return designable(startComponents, 'GatsbyLink')(AsGatsbyLink) as ComponentType<any>;
 };
 
-const asGatsbyLink = asToken(
+const asGatsbyLink = flowHoc(
   ifReadOnly(
     withDesign({
       GatsbyLink: stylable,

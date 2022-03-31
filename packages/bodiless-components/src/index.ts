@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,17 +13,17 @@
  */
 
 import Editable, { withPlaceholder, asEditable } from './Editable';
-import type { UseEditableOverrides } from './Editable';
+import type { UseEditableOverrides, EditableData } from './Editable';
 import NodeViewer from './NodeViewer';
 import withLinkToggle from './LinkToggle';
 import asBodilessAnchor from './Anchor/asBodilessAnchor';
 import {
-  withMeta, withMetaStatic, withMetaHtml, withTitle,
+  withMeta, withMetaStatic, withMetaHtml, withTitle, withHeadElement, Options as HeadBaseOptions,
+  withMetaSiteInfo,
 } from './Meta/Meta';
 import withMetaForm, { withMetaSnippet } from './Meta/withMetaForm';
 import type { FieldType as MetaFormFieldType } from './Meta/withMetaForm';
 import asBodilessHelmet from './Helmet/Helmet';
-import withDataLayerItem, { withDefaultDataLayer, withDataLayerScript } from './GTM/gtm';
 import { withToggle, withToggleTo, withToggleButton } from './Toggle';
 import withEditPlaceholder from './Placeholder';
 import asBodilessIframe, {
@@ -78,8 +78,10 @@ export {
   asEditable,
   withMeta,
   withTitle,
+  withHeadElement,
   withMetaStatic,
   withMetaHtml,
+  withMetaSiteInfo,
   asBodilessHelmet,
   withEditPlaceholder,
   asBaseBodilessIframe,
@@ -110,9 +112,6 @@ export {
   withResponsiveVariants,
   withMetaForm,
   withMetaSnippet,
-  withDataLayerItem,
-  withDefaultDataLayer,
-  withDataLayerScript,
   asBodilessAnchor,
 };
 
@@ -122,14 +121,17 @@ export * from './List';
 export * from './Link';
 export * from './FileUpload';
 export * from './PageDisable';
+export * from './Tools';
 
 export type {
   MetaFormFieldType,
   YouTubePlayerSettings,
   IframeData,
   IframeProps,
+  HeadBaseOptions,
 };
 
 export type {
   UseEditableOverrides,
+  EditableData,
 };

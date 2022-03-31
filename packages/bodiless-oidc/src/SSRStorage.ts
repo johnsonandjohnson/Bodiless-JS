@@ -13,42 +13,42 @@
  */
 
 export class SSRStorage implements Storage {
-  private _valuesMap: Map<any, any>;
+  private valuesMap: Map<any, any>;
 
   public constructor() {
-    this._valuesMap = new Map();
+    this.valuesMap = new Map();
   }
 
   public getItem(key: any) {
     const stringKey = String(key);
-    if (this._valuesMap.has(key)) {
-      return String(this._valuesMap.get(stringKey));
+    if (this.valuesMap.has(key)) {
+      return String(this.valuesMap.get(stringKey));
     }
     return null;
   }
 
   public setItem(key: any, val: any) {
-    this._valuesMap.set(String(key), String(val));
+    this.valuesMap.set(String(key), String(val));
   }
 
   public removeItem(key: any) {
-    this._valuesMap.delete(key);
+    this.valuesMap.delete(key);
   }
 
   public clear() {
-    this._valuesMap.clear();
+    this.valuesMap.clear();
   }
 
   public key(i: number) {
     if (arguments.length === 0) {
       throw new TypeError("Failed to execute 'key' on 'Storage': 1 argument required, but only 0 present."); // this is a TypeError implemented on Chrome, Firefox throws Not enough arguments to Storage.key.
     }
-    var arr = Array.from(this._valuesMap.keys());
+    const arr = Array.from(this.valuesMap.keys());
     return arr[i];
   }
 
   get length() {
-    return this._valuesMap.size;
+    return this.valuesMap.size;
   }
 }
 

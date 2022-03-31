@@ -19,7 +19,7 @@ import {
   useMenuOptionUI, useRegisterSnippet, withCompoundForm, withEditFormSnippet,
 } from '@bodiless/core';
 import type { FormSnippet, TMenuOption } from '@bodiless/core';
-import { Div, Token } from '@bodiless/fclasses';
+import { Div, HOC } from '@bodiless/fclasses';
 
 export enum FieldType {
   Text = 'text',
@@ -68,7 +68,7 @@ export const withMetaSnippet = (
   },
 });
 
-const withMetaFormHeader = (headerProps: HeaderProps | undefined): Token => Component => {
+const withMetaFormHeader = (headerProps: HeaderProps | undefined): HOC => Component => {
   const metaHeaderSnippet: FormSnippet<any> = {
     id: v1(),
     render: () => {

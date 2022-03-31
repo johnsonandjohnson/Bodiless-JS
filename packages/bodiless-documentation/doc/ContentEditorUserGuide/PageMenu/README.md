@@ -12,12 +12,12 @@ the current page, as well as add a new page. To access all of these features, yo
 ![Page menu in Review Mode](./assets/PageMenuReviewMode.jpg ':size=50%')
 
 **Edit Mode**  
-![Page menu in Edit Mode](./assets/PageMenuEditMode.jpg ':size=50%')
+![Page menu in Edit Mode](./assets/PageMenuEditMode.jpg ':size=67%')
 
 In the _Page_ menu, you will find the following items:
 
 * [New](./New/)
-* Move<sup>*</sup>
+* [Move](./Move/)<sup>*</sup>
 * [Disable](./Disable/)<sup>*</sup>
 * [Clone](./Clone/)<sup>*</sup>
 * [Delete](./Delete/)<sup>*</sup>

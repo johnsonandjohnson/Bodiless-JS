@@ -1,0 +1,88 @@
+/**
+ * Copyright © 2021 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import {
+  withNode,
+} from '@bodiless/core';
+import { flowHoc } from '@bodiless/fclasses';
+import {
+  CarouselClean,
+  asEditableCarousel,
+  withCarouselDots,
+  withNavigationButtons,
+  withAutoPlayInterval,
+  withAutoPlayButton,
+} from '@bodiless/carousel';
+import {
+  withImageSlide,
+  withChameleonSlide,
+  withNavButtonsStyles,
+  withDotStyles,
+  withThumbnailStyles,
+  withThumbbailDots,
+  withAutoPlay,
+  withAutoPlayButtonStyles,
+  asAccessibleCarousel,
+} from './token';
+
+export const CAROUSEL_NODE_KEY = 'slides';
+export const CAROUSEL_THUMB_NODE_KEY = 'slides-thumbs';
+
+const Carousel = flowHoc(
+  asEditableCarousel(CAROUSEL_NODE_KEY),
+  withImageSlide,
+  withNode,
+)(CarouselClean);
+
+/* Thumbnail & Image that will share the same image */
+const ThumbnailCarousel = flowHoc(
+  asEditableCarousel(CAROUSEL_NODE_KEY),
+  withCarouselDots(CAROUSEL_NODE_KEY),
+  withThumbbailDots,
+  withThumbnailStyles,
+  asAccessibleCarousel,
+  withImageSlide,
+)(CarouselClean);
+
+/* Unique images for the Carousel & Thumbnails per slide */
+const ThumbnailCarouselDifferentImages = flowHoc(
+  asEditableCarousel(CAROUSEL_NODE_KEY),
+  withCarouselDots(CAROUSEL_THUMB_NODE_KEY),
+  withThumbbailDots,
+  withThumbnailStyles,
+  asAccessibleCarousel,
+  withChameleonSlide,
+)(CarouselClean);
+
+const ChameleonCarousel = flowHoc(
+  asEditableCarousel(CAROUSEL_NODE_KEY),
+  withCarouselDots(CAROUSEL_NODE_KEY),
+  withDotStyles,
+  withNavigationButtons,
+  withNavButtonsStyles,
+  withAutoPlay,
+  withAutoPlayInterval(),
+  withAutoPlayButton,
+  withAutoPlayButtonStyles,
+  asAccessibleCarousel,
+  withChameleonSlide,
+)(CarouselClean);
+
+export * from './token';
+export {
+  Carousel,
+  ChameleonCarousel,
+  ThumbnailCarousel,
+  ThumbnailCarouselDifferentImages,
+};

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ConsumerProps, FC } from 'react';
+import React, { ConsumerProps, FC, ReactElement } from 'react';
 import { Observer } from 'mobx-react';
 import {
   DefinesLocalEditContext,
@@ -115,7 +115,7 @@ class PageEditContext implements PageEditContextInterface {
   static Consumer: FC<ConsumerProps<PageEditContextInterface>> = ({ children }) => (
     // eslint-disable-next-line react/jsx-pascal-case
     <PageEditContext.context.Consumer>
-      {value => <Observer>{() => children(value)}</Observer>}
+      {value => <Observer>{() => children(value) as ReactElement}</Observer>}
     </PageEditContext.context.Consumer>
   );
 

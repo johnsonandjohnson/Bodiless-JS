@@ -19,7 +19,7 @@ const { spawn } = require('child_process');
 
 const packagesDir = '../../packages';
 const site = process.argv[2] || 'test-site';
-process.chdir(`./sites/${site}`);
+process.chdir(`./sites-test/${site}`);
 console.log('Installing local packages to ', process.cwd());
 
 // Get list of all package tarballs, keyed by package-name

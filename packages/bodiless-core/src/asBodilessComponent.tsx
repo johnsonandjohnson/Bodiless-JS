@@ -17,7 +17,7 @@ import pick from 'lodash/pick';
 import omit from 'lodash/omit';
 import identity from 'lodash/identity';
 import flowRight from 'lodash/flowRight';
-import type { Enhancer, Token, ComponentOrTag } from '@bodiless/fclasses';
+import type { Enhancer, HOC, ComponentOrTag } from '@bodiless/fclasses';
 import { withoutProps } from '@bodiless/fclasses';
 import withNode, { withNodeKey } from './withNode';
 import {
@@ -65,7 +65,7 @@ type AsBodiless<P, D, E = {}> = (
  * @param Wrapper The component to wrap with
  * @private
  */
-export const withActivatorWrapper = (event: string, Wrapper: ComponentOrTag<any>): Token => (
+export const withActivatorWrapper = (event: string, Wrapper: ComponentOrTag<any>): HOC => (
   Component => props => {
     const wrapperPropNames = Object.getOwnPropertyNames(useContextActivator(event));
     const eventProps = pick(props, wrapperPropNames);

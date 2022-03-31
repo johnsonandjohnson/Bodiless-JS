@@ -12,14 +12,14 @@
  * limitations under the License.
  */
 
-import type { HTMLProps, ComponentType } from 'react';
-import type { DesignableComponentsProps, DesignableProps } from '@bodiless/fclasses';
+import type { HTMLProps } from 'react';
+import type { DesignableComponentsProps, DesignableProps, ComponentOrTag } from '@bodiless/fclasses';
 import type { WithNodeProps, EditButtonOptions } from '@bodiless/core';
 
 export type ListComponents = {
-  Wrapper: ComponentType<any>,
-  Item: ComponentType<any>,
-  Title: ComponentType<any>,
+  Wrapper: ComponentOrTag<any>,
+  Item: ComponentOrTag<any>,
+  Title: ComponentOrTag<any>,
 };
 
 export type ListContextValue = {

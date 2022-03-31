@@ -15,12 +15,12 @@
 import React, { Fragment } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
-import { asToken, withTokenFilter } from '../src';
-import type { Token } from '../src';
+import { flowHoc, withTokenFilter } from '../src';
+import type { HOC } from '../src';
 
-const { meta } = asToken;
+const { meta } = flowHoc;
 
-const addProp = (name?: string, value?: string): Token => Comp => (props: any) => {
+const addProp = (name?: string, value?: string): HOC => Comp => (props: any) => {
   if (!name) return <Comp {...props} />;
   const propsToAdd = {
     [name]: value || name,
@@ -28,7 +28,7 @@ const addProp = (name?: string, value?: string): Token => Comp => (props: any) =
   return <Comp {...propsToAdd} {...props} />;
 };
 
-describe('asToken', () => {
+describe('flowHoc', () => {
   describe('meta', () => {
     it('meta.term creates an object of the right shape', () => {
       const t = meta.term('foo')('bar');
@@ -71,7 +71,7 @@ describe('asToken', () => {
   describe('HOC order', () => {
     const Base = () => <></>;
     it('Applies hocs left to right', () => {
-      const asTest = asToken(
+      const asTest = flowHoc(
         addProp('foo'),
         addProp('foo', 'bar'),
       );
@@ -81,10 +81,10 @@ describe('asToken', () => {
     });
 
     it('Applies hocs left to right including nested tokens', () => {
-      const asFoo = asToken(
+      const asFoo = flowHoc(
         addProp('foo'),
       );
-      const asTest = asToken(
+      const asTest = flowHoc(
         asFoo,
         addProp('foo', 'bar'),
       );
@@ -94,7 +94,7 @@ describe('asToken', () => {
     });
 
     it('Ignores undefined tokens', () => {
-      const withPossiblyUndefinedToken = (token?: Token) => asToken(
+      const withPossiblyUndefinedToken = (token?: HOC) => flowHoc(
         token,
         addProp('bar'),
       );
@@ -112,7 +112,7 @@ describe('asToken', () => {
     it('Propagates original metadata', () => {
       const Base = () => <></>;
       Base.title = 'BaseTitle';
-      const asPropagate = asToken(addProp('prop'));
+      const asPropagate = flowHoc(addProp('prop'));
       const Wrong = addProp()(Base);
       expect(Wrong.title).toBeUndefined();
       const Right = asPropagate(Base);
@@ -120,7 +120,7 @@ describe('asToken', () => {
     });
 
     it('Propagates added metadata', () => {
-      const withNewMeta = asToken(
+      const withNewMeta = flowHoc(
         meta.term('Type')('New'),
         addProp(),
       );
@@ -131,7 +131,7 @@ describe('asToken', () => {
     it('Merges categories', () => {
       const Base = () => <></>;
       Base.categories = { Type: ['Base'] };
-      const asTest = asToken(
+      const asTest = flowHoc(
         meta.term('Type')('Foo'),
       );
       const Test = asTest(Base);
@@ -141,7 +141,7 @@ describe('asToken', () => {
     it('Overwrites titles', () => {
       const Base = () => <></>;
       Base.title = 'BaseTitle';
-      const asTest = asToken(
+      const asTest = flowHoc(
         { title: 'Foo' },
       );
       const Test = asTest(Base);
@@ -149,10 +149,10 @@ describe('asToken', () => {
     });
 
     it('Adds metadata from nested tokens', () => {
-      const asFoo = asToken(meta.term('Type')('Foo'));
-      const asBar = asToken(meta.term('Type')('Bar'));
-      const asBaz = asToken(asBar, meta.term('Type')('Baz'));
-      const asTest = asToken(
+      const asFoo = flowHoc(meta.term('Type')('Foo'));
+      const asBar = flowHoc(meta.term('Type')('Bar'));
+      const asBaz = flowHoc(asBar, meta.term('Type')('Baz'));
+      const asTest = flowHoc(
         asFoo,
         asBaz,
         { title: 'Test' },
@@ -166,20 +166,20 @@ describe('asToken', () => {
     });
 
     it('Adds an empty meta when composed items do not have metadata', () => {
-      const asTestToken = asToken(addProp('prop'));
+      const asTestToken = flowHoc(addProp('prop'));
       expect(asTestToken.meta).toStrictEqual({});
     });
   });
 
   describe('Filtering', () => {
     const Base = () => <></>;
-    const asFoo = asToken(
+    const asFoo = flowHoc(
       meta.term('Type')('Filtered'),
       meta.term('Name')('Foo'),
       addProp('foo'),
     );
 
-    const asBar = asToken(
+    const asBar = flowHoc(
       meta.term('Type')('Unfiltered'),
       meta.term('Name')('Bar'),
       addProp('bar'),
@@ -188,8 +188,8 @@ describe('asToken', () => {
     const withoutFiltered = withTokenFilter(t => !t.meta?.categories?.Type?.includes('Filtered'));
 
     it('Filters flat tokens', () => {
-      const asTest = asToken(asFoo, asBar);
-      const asFiltered = asToken(asTest, withoutFiltered);
+      const asTest = flowHoc(asFoo, asBar);
+      const asFiltered = flowHoc(asTest, withoutFiltered);
       const Test = asTest(Base);
       const Filtered = asFiltered(Base);
       expect(Test.categories).toEqual({
@@ -212,13 +212,13 @@ describe('asToken', () => {
     });
 
     it('Filters nested tokens', () => {
-      const withNestedFoo = asToken(
+      const withNestedFoo = flowHoc(
         asFoo,
         meta.term('Name')('NestedFoo'),
         addProp('nestedFoo'),
       );
-      const asTest = asToken(withNestedFoo, asBar);
-      const asFiltered = asToken(asTest, withoutFiltered);
+      const asTest = flowHoc(withNestedFoo, asBar);
+      const asFiltered = flowHoc(asTest, withoutFiltered);
       const Test = asTest(Base);
       const Filtered = asFiltered(Base);
       expect(Test.categories).toEqual({
@@ -243,8 +243,8 @@ describe('asToken', () => {
     });
 
     it('Propagates a filter', () => {
-      const asBarNotFoo = asToken(withoutFiltered, asBar);
-      const asTest = asToken(asFoo, asBarNotFoo);
+      const asBarNotFoo = flowHoc(withoutFiltered, asBar);
+      const asTest = flowHoc(asFoo, asBarNotFoo);
       const Test = asTest(Base);
       expect(Test.categories).toEqual({
         Type: ['Unfiltered'],
@@ -260,7 +260,7 @@ describe('asToken', () => {
   describe('When undefined argument passed', () => {
     it('accepts it and ignores it', () => {
       const Base = () => <></>;
-      const asTestToken = asToken(
+      const asTestToken = flowHoc(
         addProp('prop'),
         undefined,
       );

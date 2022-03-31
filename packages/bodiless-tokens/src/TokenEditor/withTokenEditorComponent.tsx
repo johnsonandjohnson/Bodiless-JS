@@ -15,7 +15,7 @@
 import { createHash } from 'crypto';
 import {
   addClasses, withDesign, HOC,
-  addProps, asToken, startWith, Design,
+  addProps, flowHoc, startWith, Design,
 } from '@bodiless/fclasses';
 import {
   withDefaultContent, useNode, withContextActivator, withActivatorWrapper,
@@ -58,7 +58,7 @@ const withTokenEditorComponent = (
 ): HOC => {
   const { Component, tokens, name = 'Demo' } = def;
   const design = {
-    [name]: asToken(
+    [name]: flowHoc(
       startWith(Component),
       withActivatorWrapper('onClick', 'div'),
       withContextActivator('onClick'),
@@ -68,7 +68,7 @@ const withTokenEditorComponent = (
       withTokenPanelButton({ panelDesign }),
     ),
   };
-  return asToken(
+  return flowHoc(
     withDesign({
       Container: withDesign(design),
     }),
@@ -121,7 +121,7 @@ const withTokenEditorFlowContainerItem = (
 ) => {
   const { name = 'Demo' } = def;
   return withDesign({
-    [name]: asToken(
+    [name]: flowHoc(
       startWith(TokenEditor),
       withTokenEditorComponent(def, panelDesign),
       ifComponentSelector(
@@ -135,7 +135,7 @@ const withTokenEditorFlowContainerItem = (
         categories: {
           Type: ['Token Browser'],
         },
-        title: `"${name}" Token Browser`,
+        title: `"${name}" HOC Browser`,
       },
     ),
   });

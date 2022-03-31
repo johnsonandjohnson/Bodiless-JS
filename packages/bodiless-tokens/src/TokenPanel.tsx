@@ -17,7 +17,7 @@ import {
   useEditContext,
 } from '@bodiless/core';
 import flow from 'lodash/flow';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import {
   DesignableComponentsProps, designable, StylableProps, Div,
 } from '@bodiless/fclasses';

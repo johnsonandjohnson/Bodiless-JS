@@ -3,6 +3,118 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.6...v0.3.7) (2022-02-16)
+
+
+### Bug Fixes
+
+* **components:** Ensure chameleon base component is replaceable. ([#1363](https://github.com/johnsonandjohnson/bodiless-js/issues/1363)) ([c6aad8d](https://github.com/johnsonandjohnson/bodiless-js/commit/c6aad8d9343fe3e383ff4781ec1fe2b50aaff15c)), closes [#1362](https://github.com/johnsonandjohnson/bodiless-js/issues/1362)
+* **lint:** fixing ESlint detecting common syntax issue ([#1343](https://github.com/johnsonandjohnson/bodiless-js/issues/1343)) ([92f0099](https://github.com/johnsonandjohnson/bodiless-js/commit/92f00996f35dcd4e6b58d2d6344d596b02307237))
+* **page move:** Move assets on moved pages. ([#1326](https://github.com/johnsonandjohnson/bodiless-js/issues/1326)) ([51ca192](https://github.com/johnsonandjohnson/bodiless-js/commit/51ca192f35b369f4664667ea356759e5d7752690))
+
+
+### Features
+
+* **bodiless-filtering, listing:** Listing Page - Flow Container - Default Filter ([#1273](https://github.com/johnsonandjohnson/bodiless-js/issues/1273)) ([4e27dc2](https://github.com/johnsonandjohnson/bodiless-js/commit/4e27dc220571168b0acc83a6d0c5dd0a86650b56))
+* **Layout, Content library:** content Library item created on a deleted page uses src of this … ([#1358](https://github.com/johnsonandjohnson/bodiless-js/issues/1358)) ([86d132d](https://github.com/johnsonandjohnson/bodiless-js/commit/86d132dc3a322dc3dd07036192a5a27a503ef61a))
+
+
+### Performance Improvements
+
+* **components,layouts:** Improve performance of heavy component selectors ([#1308](https://github.com/johnsonandjohnson/bodiless-js/issues/1308)) ([050fa7b](https://github.com/johnsonandjohnson/bodiless-js/commit/050fa7b641ded750abb284bbb329da0ebed71ee5)), closes [#1236](https://github.com/johnsonandjohnson/bodiless-js/issues/1236)
+
+
+
+
+
+## [0.3.6](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.5...v0.3.6) (2022-01-24)
+
+
+### Bug Fixes
+
+* **bodiless-gtm:** Add bodiless/gtm and make withDataLayerScript more flexible ([#1340](https://github.com/johnsonandjohnson/bodiless-js/issues/1340)) ([77abac2](https://github.com/johnsonandjohnson/bodiless-js/commit/77abac25cd2cf6054bdcd59645665fc65ce92903))
+* **gatsby-plugin-ssi:** Fixing Unsafe builtin usage fs.readFileSyn error in Gatsby v3 ([#1342](https://github.com/johnsonandjohnson/bodiless-js/issues/1342)) ([6a058b1](https://github.com/johnsonandjohnson/bodiless-js/commit/6a058b1ef2d45a2bb222bac6973d03440b3d589b))
+* **gatsby-theme-bodiless:** Fix changes on bodiless packages not triggering rebuilds ([#1328](https://github.com/johnsonandjohnson/bodiless-js/issues/1328)) ([d80f7dc](https://github.com/johnsonandjohnson/bodiless-js/commit/d80f7dc1ffb0d5c27f0e6c0aa602056f4e12da76))
+
+
+### Features
+
+* **aria-label:** Add Aria Label Type ([f9309ef](https://github.com/johnsonandjohnson/bodiless-js/commit/f9309ef1d682d8f22cbb94e6f3dd363b84e577ad))
+* **aria-label:** Add Package Lock File ([706d09b](https://github.com/johnsonandjohnson/bodiless-js/commit/706d09b76d13cd9dd6d3b8a23c5e5cfab0f72c00))
+* **aria-label:** Add Skelenton Helpers To Convert Id Into Props ([3d31de1](https://github.com/johnsonandjohnson/bodiless-js/commit/3d31de1e0d0f4109cc4fc6855c1c15dd459d8a24))
+* **aria-label:** Adjust Aria Label Id ([4169f57](https://github.com/johnsonandjohnson/bodiless-js/commit/4169f57b4cbfbe5a05dcba1a29a978105deefc73))
+* **aria-label:** Edit Aria Label Field And Add It To Submit Handler ([a4c0e2e](https://github.com/johnsonandjohnson/bodiless-js/commit/a4c0e2ebf43bd49ea6d8b44d4165a4e39df7960b))
+* **aria-label:** Fixing aria-label field logic ([171af80](https://github.com/johnsonandjohnson/bodiless-js/commit/171af805fea685f85e72ee1cf77e6a4825424bf2))
+* **aria-label:** Implement hook to add aria-label props ([da7a154](https://github.com/johnsonandjohnson/bodiless-js/commit/da7a154884ddbd1abe545583deb52e11957ba94b))
+* **aria-label:** Implementing aria-label overwrite ([82f9e8f](https://github.com/johnsonandjohnson/bodiless-js/commit/82f9e8f97ef7e176febb7fa8a0e04cc004ef8221))
+* **icon:** Remove material icons font from production build ([#1322](https://github.com/johnsonandjohnson/bodiless-js/issues/1322)) ([d980889](https://github.com/johnsonandjohnson/bodiless-js/commit/d9808898b5ae3d95746816ada62daa91963cbeab))
+* **redirect:** Ability edit redirects ([#1330](https://github.com/johnsonandjohnson/bodiless-js/issues/1330)) ([aad069b](https://github.com/johnsonandjohnson/bodiless-js/commit/aad069bcc82f065c681d78cde59249d56350d938))
+* **search:** Search enhancements ([#1319](https://github.com/johnsonandjohnson/bodiless-js/issues/1319)) ([97b0744](https://github.com/johnsonandjohnson/bodiless-js/commit/97b0744cdd936b20d5c75b2e8285777874697c83))
+
+
+
+
+
+## [0.3.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.4...v0.3.5) (2021-12-29)
+
+
+### Bug Fixes
+
+* **bodiless-oidc:** Lock oidc-client-ts dependency to v2.0.0-rc.2 ([#1318](https://github.com/johnsonandjohnson/bodiless-js/issues/1318)) ([91fb1d1](https://github.com/johnsonandjohnson/bodiless-js/commit/91fb1d16fe901a93d2fbdf4284a0f2114d0924dc))
+* **GTM:** nested GTM DataLayer ([#1288](https://github.com/johnsonandjohnson/bodiless-js/issues/1288)) ([683e5a8](https://github.com/johnsonandjohnson/bodiless-js/commit/683e5a8ec130ee63abe6b4c5af7df6fe0be10b31))
+
+
+### Features
+
+* **component:** Redirect via clientside ([#1272](https://github.com/johnsonandjohnson/bodiless-js/issues/1272)) ([0aa63e4](https://github.com/johnsonandjohnson/bodiless-js/commit/0aa63e4c292dda4ec60252c36885b237feb13cf5))
+* **filtering:** Enable optional hiding of filterable item when no ta… ([#1231](https://github.com/johnsonandjohnson/bodiless-js/issues/1231)) ([c037111](https://github.com/johnsonandjohnson/bodiless-js/commit/c037111800eddf96565494a0abb2adfa3e0c0952))
+
+
+
+
+
+## [0.3.4](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.3...v0.3.4) (2021-12-16)
+
+
+### Bug Fixes
+
+* **unlink:** Fix warning when unlinking library ([#1306](https://github.com/johnsonandjohnson/bodiless-js/issues/1306)) ([24ffecd](https://github.com/johnsonandjohnson/bodiless-js/commit/24ffecd2e2b91d79b2e90c06a499e6f9f17b5c7f))
+
+
+
+
+
+## [0.3.3](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.2...v0.3.3) (2021-12-15)
+
+
+### Bug Fixes
+
+* **adminui:** Fix admin ui issue ([#1307](https://github.com/johnsonandjohnson/bodiless-js/issues/1307)) ([df9df32](https://github.com/johnsonandjohnson/bodiless-js/commit/df9df323b7561c255db4899828a9173e8ca5b35a))
+* **bodiless-components:** Allow digits in anchor id ([#1291](https://github.com/johnsonandjohnson/bodiless-js/issues/1291)) ([12d7a67](https://github.com/johnsonandjohnson/bodiless-js/commit/12d7a674898f07a5c3fa0f673d07b7b7af7001da))
+
+
+
+
+
+## [0.3.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v0.3.2) (2021-12-13)
+
+
+### Bug Fixes
+
+* **informed:** Unlock "informed" package version, fix related issues ([#1212](https://github.com/johnsonandjohnson/bodiless-js/issues/1212)) ([7742a3f](https://github.com/johnsonandjohnson/bodiless-js/commit/7742a3ff614b0c58a35b5c028852e74645266591))
+
+
+### Features
+
+* Add tree shaking support to all browser packages ([#1251](https://github.com/johnsonandjohnson/bodiless-js/issues/1251)) ([0c73113](https://github.com/johnsonandjohnson/bodiless-js/commit/0c73113c7c2d0c9dcc2dd8be922048173b1e9138)), closes [#1254](https://github.com/johnsonandjohnson/bodiless-js/issues/1254) [#1244](https://github.com/johnsonandjohnson/bodiless-js/issues/1244) [#1245](https://github.com/johnsonandjohnson/bodiless-js/issues/1245) [#1261](https://github.com/johnsonandjohnson/bodiless-js/issues/1261) [#1283](https://github.com/johnsonandjohnson/bodiless-js/issues/1283)
+* **gatsby-theme-bodiless:** Implements move page functionality ([#1054](https://github.com/johnsonandjohnson/bodiless-js/issues/1054)) ([#1252](https://github.com/johnsonandjohnson/bodiless-js/issues/1252)) ([1d2b9a0](https://github.com/johnsonandjohnson/bodiless-js/commit/1d2b9a092751f5de01153a7fb398cffbe9f8a63f))
+* **layouts, layouts-ui:** UX Identification of Library Components ([#1227](https://github.com/johnsonandjohnson/bodiless-js/issues/1227)) ([d44ef46](https://github.com/johnsonandjohnson/bodiless-js/commit/d44ef46706060fde4486441b5a715d5978113fb4)), closes [#1083](https://github.com/johnsonandjohnson/bodiless-js/issues/1083)
+* **library:** Unlink Library Item ([#1247](https://github.com/johnsonandjohnson/bodiless-js/issues/1247)) ([d3cb88c](https://github.com/johnsonandjohnson/bodiless-js/commit/d3cb88cfd0bbe240d6a75ee69922f4f7913f3382))
+
+
+
+
+
 ## [0.3.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.0...v0.3.1) (2021-11-15)
 
 

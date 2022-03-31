@@ -18,7 +18,7 @@ import {
   withNodeKey,
 } from '@bodiless/core';
 import type { ContentNode } from '@bodiless/core';
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import { withContentLibrary, ComponentSelector } from '@bodiless/layouts';
 import path from 'path';
 import type { AsBodilessImage } from './Image';
@@ -47,7 +47,7 @@ const withImageLibrary = (
   };
 
   const asImageHoc = asEditableImage(undefined, placeholder, useOverrides);
-  return asToken(
+  return flowHoc(
     asImageHoc.meta,
     asImageHoc,
     withContentLibrary({

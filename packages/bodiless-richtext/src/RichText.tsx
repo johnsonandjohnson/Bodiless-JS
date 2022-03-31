@@ -24,11 +24,10 @@ import pick from 'lodash/pick';
 import flow from 'lodash/flow';
 import isEmpty from 'lodash/isEmpty';
 import { createEditor, Editor } from 'slate';
-import type { Element } from 'slate';
 import {
-  Slate, withReact, useSlate, ReactEditor,
+  Slate, withReact, useSlate
 } from 'slate-react';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import {
   useEditContext,
   useContextActivator,
@@ -54,7 +53,7 @@ import {
   DesignableComponents,
   withDisplayName,
   Fragment,
-  Token,
+  HOC,
 } from '@bodiless/fclasses';
 import { withHistory } from 'slate-history';
 import {
@@ -125,7 +124,7 @@ const withSlateSchema = <P extends object>(Component: ComponentType<P>) => (
   }
 );
 // create item to activate the context not sure whats up with all the old vs new
-const withSlateActivator: Token = Component => props => {
+const withSlateActivator: HOC = Component => props => {
   const previousSlateContext = useSlateContext();
   const previousEditorProps = previousSlateContext!.editorProps;
 
@@ -212,7 +211,7 @@ const withEditorSettings = (components: RichTextComponents) => (editor: Editor) 
     .map(Component => Component.id);
   // eslint-disable-next-line no-param-reassign
   editor.isInline = (
-    element: Element,
+    element,
   ) => (inlineTypes.includes(element.type as string) ? true : isInline(element));
   return editor;
 };
@@ -241,17 +240,22 @@ const BasicRichText = React.memo((props: RichTextBaseProps) => {
   const finalUI = getUI(ui);
   const selectorButtons = getSelectorButtons(finalComponents).map(C => <C key={useUUID()} />);
 
-  const editor = useRef<ReactEditor>(
+  const editor = useRef<Editor>(
     flow(
       withReact,
       withHistory,
       withEditorSettings(finalComponents),
       withHtmlPaste(finalComponents),
-    )(createEditor()) as ReactEditor,
+    )(createEditor()) as Editor,
   );
 
   const initialValue$ = useInitialValue(initialValue);
   const value$ = value !== undefined && !isEmpty(value) ? value : initialValue$;
+
+  // Manually setting the children prop is required after slate@0.67. The value
+  // prop is now only used as the editor's initial value.
+  // See: https://github.com/ianstormtaylor/slate/pull/4540#issuecomment-951380551
+  editor.current.children = value$;
 
   return (
     <Slate editor={editor.current} value={value$} onChange={onChange}>
@@ -332,7 +336,7 @@ const apply = (design: Design<DesignableComponents>) => {
       {},
     );
   const finalDesign = pick(lastDesign, Object.getOwnPropertyNames(design));
-  return applyDesign(start)(extendDesign(finalDesign)(design));
+  return applyDesign(start)(extendDesign(design, finalDesign));
 };
 
 const RichText = flow(

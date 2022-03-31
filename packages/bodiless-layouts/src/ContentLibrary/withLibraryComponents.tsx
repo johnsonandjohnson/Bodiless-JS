@@ -1,5 +1,19 @@
+/**
+ * Copyright © 2022 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import React, { FC } from 'react';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import {
   useContextMenuForm,
   createMenuOptionGroup,
@@ -12,11 +26,19 @@ import {
 } from '@bodiless/core';
 import type { OptionGroupDefinition } from '@bodiless/core';
 import {
-  withDesign, HOC, asToken, flowIf,
+  withDesign, HOC, flowHoc, flowIf,
 } from '@bodiless/fclasses';
 import type { Design } from '@bodiless/fclasses';
 import { withFacet, withTitle, withDesc } from '../meta';
-import { childKeys } from './withContentLibrary';
+import { childKeys, updateLibData } from '../utils/NodeTools';
+import {
+  withLibraryItemContext,
+  CONTENT_LIBRARY_TYPE_PREFIX,
+  isLibraryItem,
+  useIsLibraryItem,
+  useLibraryItemContext,
+} from './withLibraryContext';
+import { withLibraryItemIndicator } from './ContentLibraryIndicator';
 import type { FlowContainerItem } from '../FlowContainer/types';
 import type { FlowContainerDataHandlers } from '../FlowContainer/model';
 
@@ -40,21 +62,7 @@ type LibraryMetaValues = {
 };
 
 export const DEFAULT_CONTENT_LIBRARY_PATH = ['Site', 'default-library'];
-export const CONTENT_LIBRARY_TYPE_PREFIX = 'ContentLibrary';
-
-const moveNode = (
-  source: ContentNode<any>,
-  dest: ContentNode<any>,
-  copyChildren: boolean,
-) => {
-  dest.setData(source.data);
-  if (copyChildren) {
-    childKeys(source).forEach(key => moveNode(source.child(key), dest.child(key), true));
-  }
-  source.delete();
-};
-const isLibraryItem = (item: FlowContainerItem) => (
-  item && item.type.startsWith(CONTENT_LIBRARY_TYPE_PREFIX));
+export const DEFAULT_CONTENT_LIBRARY_COLLECTION = 'site';
 
 /**
  * add meta data to FC item content node.
@@ -93,6 +101,8 @@ const withLibraryMenuOptions = (
     sourceNode: ContentNode<any>,
     handlers: FlowContainerDataHandlers,
   ) => {
+    const { setIsLibraryItem } = useLibraryItemContext();
+
     const renderForm = () => {
       const {
         ComponentFormLabel,
@@ -129,8 +139,19 @@ const withLibraryMenuOptions = (
       const destPath$ = Array.isArray(libPath) ? libPath : [libPath];
 
       if (isLibraryItem(item)) {
+        /* Copy the library item to current node */
+        const uuid = item.type.split(':')[2];
+        const sourceNodeDataPath = [
+          ...destPath$,
+          uuid,
+          'data',
+        ];
+        const sourceNodeData = sourceNode.peer(sourceNodeDataPath.join('$'));
+
+        updateLibData(sourceNodeData, sourceNode, true);
         const newItemType = item.type.split(':')[1];
         updateFlowContainerItem({ ...item, type: newItemType });
+        setIsLibraryItem(false);
       } else {
         /**
          * Move the original flow container node to content library node,
@@ -148,8 +169,7 @@ const withLibraryMenuOptions = (
         ];
         const destNode = sourceNode.peer(destNodePath.join('$'));
         const destNodeData = sourceNode.peer(destNodeDataPath.join('$'));
-        moveNode(sourceNode, destNodeData, true);
-
+        updateLibData(sourceNode, destNodeData, false);
         const newItemType = `${CONTENT_LIBRARY_TYPE_PREFIX}:${item.type}:${item.uuid}`;
         updateFlowContainerItem({ ...item, type: newItemType });
 
@@ -174,8 +194,7 @@ const withLibraryMenuOptions = (
       global: false,
       formTitle: 'Content Library',
       formDescription: isLibraryItem(item) ? `This action will remove the instance of the
-      component from the library and it will be independent. If this was the last instance,
-      the library item will be deleted.` : `This action will create a library item. 
+      component from the library and it will be independent.` : `This action will create a library item. 
       Edit of any instance of the library item will update all instances.`,
       isHidden: false,
     };
@@ -215,6 +234,11 @@ const withLibraryMenuOptions = (
   return WithLibraryMenuOptions;
 };
 
+type libProps = {
+  libPath: LibraryNodePath,
+  libCollection: string,
+};
+
 /**
  * HOC adds content library to wrapped component as design, so the created
  * library item is available as filter in component selector, which also makes
@@ -224,14 +248,17 @@ const withLibraryMenuOptions = (
  * @param Component - flow container component
  * @returns HOC of flow container.
  */
-const withDesignFromLibrary = (libPath: LibraryNodePath): HOC => Component => {
+const withDesignFromLibrary = ({
+  libPath,
+  libCollection
+}: libProps): HOC => Component => {
   const WithDesignFromLibrary: FC<any> = observer((props: any) => {
     const {
       design,
       ...rest
     } = props;
 
-    const { node } = useNode();
+    const { node } = useNode(libCollection);
     const libraryNode = node.peer(libPath);
     const LibraryNodeKeys = childKeys(libraryNode);
     const withType = withFacet('Type');
@@ -255,7 +282,7 @@ const withDesignFromLibrary = (libPath: LibraryNodePath): HOC => Component => {
 
         return ({
           ...libDesign,
-          [libraryItemDesignKey]: asToken(
+          [libraryItemDesignKey]: flowHoc(
             design[componentKey],
             withType('Content Library')(),
             withTitle(title),
@@ -294,13 +321,16 @@ const withDesignFromLibrary = (libPath: LibraryNodePath): HOC => Component => {
  */
 const withLibraryComponents = (
   path: LibraryNodePath = DEFAULT_CONTENT_LIBRARY_PATH,
-) => asToken(
+  collection: string = DEFAULT_CONTENT_LIBRARY_COLLECTION
+) => flowHoc(
   withDesign({
     ComponentWrapper: flowIf(() => useEditContext().isEdit)(
+      flowIf(useIsLibraryItem)(withLibraryItemIndicator),
       withLibraryMenuOptions(path),
+      withLibraryItemContext,
     ),
   }),
-  withDesignFromLibrary(path),
+  withDesignFromLibrary({libPath: path, libCollection: collection}),
 );
 
 export { withLibraryComponents };

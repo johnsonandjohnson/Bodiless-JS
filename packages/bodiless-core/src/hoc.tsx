@@ -13,7 +13,7 @@
  */
 import ResizeObserver from 'resize-observer-polyfill';
 
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import React, {
   ComponentType as CT, EventHandler, FC,
   useEffect,
@@ -22,7 +22,7 @@ import React, {
 } from 'react';
 import flowRight from 'lodash/flowRight';
 import pick from 'lodash/pick';
-import { HOC, Injector, Token } from '@bodiless/fclasses';
+import { HOC, Injector } from '@bodiless/fclasses';
 import { useContextActivator, useExtendHandler, useClickOutside } from './hooks';
 import { useNodeDataHandlers, NodeDataHandlers } from './NodeProvider';
 import withNode from './withNode';
@@ -43,7 +43,7 @@ import LocalContextMenu from './components/LocalContextMenu';
 export const withExtendHandler = <P extends object>(
   event: string,
   useExtender: (props: P) => EventHandler<any>,
-): Token => Component => {
+): HOC => Component => {
     const WithExtendHandler: FC<any> = props => (
       <Component
         {...props}

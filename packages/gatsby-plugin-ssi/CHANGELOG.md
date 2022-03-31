@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.6...v0.3.7) (2022-02-16)
+
+**Note:** Version bump only for package @bodiless/gatsby-plugin-ssi
+
+
+
+
+
+## [0.3.6](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.5...v0.3.6) (2022-01-24)
+
+
+### Bug Fixes
+
+* **gatsby-plugin-ssi:** Fixing Unsafe builtin usage fs.readFileSyn error in Gatsby v3 ([#1342](https://github.com/johnsonandjohnson/bodiless-js/issues/1342)) ([6a058b1](https://github.com/johnsonandjohnson/bodiless-js/commit/6a058b1ef2d45a2bb222bac6973d03440b3d589b))
+
+
+
+
+
+## [0.3.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.4...v0.3.5) (2021-12-29)
+
+**Note:** Version bump only for package @bodiless/gatsby-plugin-ssi
+
+
+
+
+
+## [0.3.4](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.3...v0.3.4) (2021-12-16)
+
+**Note:** Version bump only for package @bodiless/gatsby-plugin-ssi
+
+
+
+
+
+## [0.3.3](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.2...v0.3.3) (2021-12-15)
+
+**Note:** Version bump only for package @bodiless/gatsby-plugin-ssi
+
+
+
+
+
+## [0.3.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v0.3.2) (2021-12-13)
+
+**Note:** Version bump only for package @bodiless/gatsby-plugin-ssi
+
+
+
+
+
 ## [0.3.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.0...v0.3.1) (2021-11-15)
 
 **Note:** Version bump only for package @bodiless/gatsby-plugin-ssi

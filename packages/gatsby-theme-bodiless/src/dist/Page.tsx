@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC, ComponentType, Fragment } from 'react';
+import React, { FC, ComponentType } from 'react';
 import {
   StaticPage,
   ContextWrapperProps,
@@ -20,19 +20,27 @@ import {
   withNotificationButton,
   withSwitcherButton,
   OnNodeErrorNotification,
+  useGitButtons,
+  GitContextProvider,
+  GitContextProviderProps,
 } from '@bodiless/core';
-import { withShowDesignKeys } from '@bodiless/fclasses';
-import { observer } from 'mobx-react-lite';
+import {
+  Fragment,
+  withShowDesignKeys,
+} from '@bodiless/fclasses';
+import { observer } from 'mobx-react';
 import { ContextWrapper, PageEditor } from '@bodiless/core-ui';
 import { withPageDisableButton } from '@bodiless/components';
-import GatsbyNodeProvider, {
-  Props as NodeProviderProps,
-} from './GatsbyNodeProvider';
-import GatsbyPageProvider, { PageProviderProps } from './GatsbyPageProvider';
-import withNewPageButton from './withNewPageButton';
-import withClonePageButton from './withClonePageButton';
-import withDeletePageButton from './withDeletePageButton';
-import useGitButtons from './useGitButtons';
+import {
+  PageDataProvider,
+  PageDataContextProviderProps,
+  withClonePageButton,
+  withDeletePageButton,
+  withMovePageButton,
+  withNewPageButton,
+  withRedirectAliasButton,
+} from '@bodiless/page';
+import GatsbyNodeProvider from './GatsbyNodeProvider';
 
 type FinalUI = {
   ContextWrapper: ComponentType<ContextWrapperProps>;
@@ -40,9 +48,11 @@ type FinalUI = {
 };
 type UI = Partial<FinalUI>;
 
-export type PageProps = NodeProviderProps & PageProviderProps & {
+type PageProviderProps = PageDataContextProviderProps & GitContextProviderProps;
+
+export type PageProps = {
   ui?: UI,
-};
+} & React.ComponentProps<typeof GatsbyNodeProvider> & PageProviderProps;
 
 const defaultUI: FinalUI = {
   ContextWrapper,
@@ -57,6 +67,8 @@ const NewPageButton = withNewPageButton(Fragment);
 const DeletePageButton = withDeletePageButton(Fragment);
 const DisablePageButton = withPageDisableButton(Fragment);
 const ClonePageButton = withClonePageButton(Fragment);
+const MovePageButton = withMovePageButton(Fragment);
+const RedirectAliasButton = withRedirectAliasButton(Fragment);
 
 const GitButtons: FC = () => {
   useGitButtons();
@@ -69,27 +81,43 @@ const ShowDesignKeys = (
 
 const Page: FC<PageProps> = observer(({ children, ui, ...rest }) => {
   const { PageEditor: Editor, ContextWrapper: Wrapper } = getUI(ui);
+  const { pageContext } = rest;
+  const {
+    // @ts-ignore non-existing gitInfo, subPageTemplate, and template, types in pageContext.
+    gitInfo, slug, subPageTemplate, template,
+  } = pageContext;
+
+  const pageData = {
+    pagePath: slug,
+    subPageTemplate,
+    template,
+  };
+
   if (process.env.NODE_ENV === 'development') {
     return (
       <GatsbyNodeProvider {...rest}>
         <ShowDesignKeys>
-          <GatsbyPageProvider pageContext={rest.pageContext}>
-            <NotificationProvider>
-              <SwitcherButton />
-              <NotificationButton />
-              <Editor>
-                <OnNodeErrorNotification />
-                <NewPageButton />
-                <DisablePageButton />
-                <ClonePageButton />
-                <GitButtons />
-                <Wrapper clickable>
-                  {children}
-                </Wrapper>
-                <DeletePageButton />
-              </Editor>
-            </NotificationProvider>
-          </GatsbyPageProvider>
+          <PageDataProvider pageData={pageData}>
+            <GitContextProvider gitInfo={gitInfo}>
+              <NotificationProvider>
+                <SwitcherButton />
+                <NotificationButton />
+                <Editor>
+                  <OnNodeErrorNotification />
+                  <NewPageButton />
+                  <MovePageButton />
+                  <DisablePageButton />
+                  <ClonePageButton />
+                  <GitButtons />
+                  <Wrapper clickable>
+                    {children}
+                  </Wrapper>
+                  <DeletePageButton />
+                  <RedirectAliasButton />
+                </Editor>
+              </NotificationProvider>
+            </GitContextProvider>
+          </PageDataProvider>
         </ShowDesignKeys>
       </GatsbyNodeProvider>
     );
@@ -97,7 +125,9 @@ const Page: FC<PageProps> = observer(({ children, ui, ...rest }) => {
   return (
     <GatsbyNodeProvider {...rest}>
       <ShowDesignKeys>
-        <StaticPage>{children}</StaticPage>
+        <GitContextProvider gitInfo={gitInfo}>
+          <StaticPage>{children}</StaticPage>
+        </GitContextProvider>
       </ShowDesignKeys>
     </GatsbyNodeProvider>
   );

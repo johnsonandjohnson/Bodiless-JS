@@ -21,8 +21,8 @@ import React, {
 import flow from 'lodash/flow';
 import identity from 'lodash/identity';
 import {
-  replaceWith, withDesign, asComponent, DesignableComponentsProps, designable, HOC,
-  withoutProps, stylable, Design, asToken, Enhancer, Token, Fragment,
+  replaceWith, withDesign, DesignableComponentsProps, designable,
+  withoutProps, stylable, Design, flowHoc, Enhancer, HOC, Fragment, as, ComponentOrTag,
 } from '@bodiless/fclasses';
 
 import { useGetLinkHref } from '../Link';
@@ -54,14 +54,14 @@ const asTitledItem: Enhancer<TitledItemProps> = Item => {
 };
 
 type SubListWrapperComponents = {
-  WrapperItem: ComponentType<any>,
-  List: ComponentType<any>,
-  Title: ComponentType<any>
+  WrapperItem: ComponentOrTag<any>,
+  List: ComponentOrTag<any>,
+  Title: ComponentOrTag<any>
 };
 
 const sublistWrapperComponents: SubListWrapperComponents = {
-  WrapperItem: asComponent('li'),
-  List: asComponent('ul'),
+  WrapperItem: 'li',
+  List: 'ul',
   Title: withOnlyProps('key', 'children')(Fragment),
 };
 
@@ -88,7 +88,7 @@ const SubListWrapper = designable(sublistWrapperComponents, 'SubList')(SubListWr
  * Don't render the list item if the target page
  * is disabled by a user.
  */
-const asDisabledListItem: Token = Component => props => {
+const asDisabledListItem: HOC = Component => props => {
   const { node } = useNode();
   const { isEdit } = useEditContext();
   // Let's consider the lists stored at site level as menu lists.
@@ -121,8 +121,8 @@ const asBodilessList = (
   replaceWith(BodilessList),
   withListButtons(useOverrides),
   withDesign({
-    Wrapper: replaceWith(asComponent(Component)),
-    Item: asToken(
+    Wrapper: replaceWith(Component),
+    Item: flowHoc(
       asDisabledListItem,
       withoutProps(['addItem', 'deleteItem', 'canDelete', 'unwrap']),
     ),
@@ -132,7 +132,7 @@ const asBodilessList = (
 )(Component);
 
 // This ensures that the original item is used as the sublist wrapper item.
-const asSubListWrapper:HOC = Component => withDesign<SubListWrapperComponents>({
+const asSubListWrapper: HOC = Component => withDesign<SubListWrapperComponents>({
   WrapperItem: replaceWith(Component),
 })(SubListWrapper as ComponentType<any>);
 
@@ -148,9 +148,9 @@ const passWrapperDesignToSubList = (SubList: ComponentType<SubListProps>) => {
 
     const newDesign = {
       ...restDesign,
-      Wrapper: asToken(
-        OuterWrapper || identity,
-        withDesign({
+      Wrapper: flowHoc(
+        as(OuterWrapper || identity),
+        withDesign<any>({
           List: Wrapper || identity,
         }),
       ),
@@ -182,7 +182,7 @@ const asSubList = (useOverrides?: UseListOverrides) => flow(
 const withSimpleSubListDesign = (depth: number) => (withDesign$: HOC): HOC => (
   depth === 0 ? identity
     : withDesign({
-      Item: asToken(
+      Item: flowHoc(
         withDesign$,
         withSimpleSubListDesign(depth - 1)(withDesign$),
       ),
@@ -197,7 +197,7 @@ const asStylableList = withDesign({
 });
 
 // @TODO: Should this be a part of asSubListWrapper?
-const asStylableSubList = flow(
+const asStylableSubList = flowHoc(
   stylable,
   withDesign({
     OuterWrapper: stylable,

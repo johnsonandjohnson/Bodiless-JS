@@ -1,0 +1,46 @@
+{
+  "name": "@bodiless/page",
+  "version": "0.3.7",
+  "description": "BodilessJS page operations",
+  "author": "Guilherme Zeni <gzeni@its.jnj.com>",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "sideEffects": false,
+  "typings": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "/doc",
+    "/lib",
+    "/bodiless.docs.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build:watch": "npm run build -- --watch",
+    "build:api-doc": "typedoc --out doc/api src",
+    "lint": "tslint ./src/**/*.ts?x",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
+  },
+  "dependencies": {
+    "@bodiless/components": "^0.3.7",
+    "@bodiless/core": "^0.3.7",
+    "@bodiless/fclasses": "^0.3.7",
+    "@bodiless/ui": "^0.3.7",
+    "axios": "^0.21.0",
+    "informed": "^3.34.0",
+    "lodash": "^4.17.19",
+    "sleep-promise": "^8.0.1"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2"
+  }
+}

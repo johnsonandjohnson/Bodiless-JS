@@ -1,0 +1,7 @@
+{
+  "Components": {
+    "Editors": {
+      "README.md": "./doc/RichText.md"
+    }
+  }
+}

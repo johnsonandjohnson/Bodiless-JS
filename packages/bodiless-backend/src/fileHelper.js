@@ -13,6 +13,7 @@
  */
 
 const fs = require('fs');
+const fse = require('fs-extra');
 const path = require('path');
 const crypto = require('crypto');
 
@@ -60,6 +61,40 @@ const copyAllFiles = (files, baseResourcePath, nodePath) => {
   }));
 };
 
+/**
+ * Copy file from pathFrom to pathTo, create directories if not exist.
+ *
+ * Notes:
+ * - this is different from copyFilePromise function, which does not copy folders.
+ * - also copyFilePromise removes source file after copy complete.
+ *
+ * @param pathFrom string - source file path
+ * @param pathTo string - destination file path
+ */
+const copyFile = (pathFrom, pathTo) => {
+  try {
+    fse.copySync(pathFrom, pathTo);
+  } catch (err) {
+    throw new Error(`Failed to copy file from ${pathFrom} to ${pathTo}: ${err.message}`);
+  }
+};
+
+/**
+ * Move file from location pathFrom to pathTo, create directories if not exist.
+ *
+ * @param pathFrom string - source file path
+ * @param pathTo string - destination file path
+ */
+const moveFile = (pathFrom, pathTo) => {
+  try {
+    fse.moveSync(pathFrom, pathTo, { overwrite: true });
+  } catch (err) {
+    throw new Error(`Failed to move file from ${pathFrom} to ${pathTo}: ${err.message}`);
+  }
+};
+
 module.exports = {
   copyAllFiles,
+  moveFile,
+  copyFile,
 };

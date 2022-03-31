@@ -28,7 +28,7 @@ import {
   withoutProps,
   HOC,
   flowIf,
-  asToken,
+  flowHoc,
   withFinalDesign,
 } from '@bodiless/fclasses';
 import { v1 } from 'uuid';
@@ -289,7 +289,7 @@ const useMenuOptionsTableOverview = () => {
   ] as TMenuOption[];
 };
 type NodeKey = string|Partial<WithNodeProps>;
-const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => asToken(
+const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => flowHoc(
   withData,
   withoutProps(['setComponentData']),
   withTableManager,
@@ -303,14 +303,14 @@ const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => asTo
   withNodeKey(nodeKey),
   withFinalDesign({
     Wrapper: withMenuOptions({ useMenuOptions: useMenuOptionsTableOverview, name: 'Table' }),
-    TBody: asToken(withNode, withNodeKey(Section.body)),
-    THead: asToken(withNode, withNodeKey(Section.head)),
-    TFoot: asToken(withNode, withNodeKey(Section.foot)),
-    Row: asToken(
+    TBody: flowHoc(withNode, withNodeKey(Section.body)),
+    THead: flowHoc(withNode, withNodeKey(Section.head)),
+    TFoot: flowHoc(withNode, withNodeKey(Section.foot)),
+    Row: flowHoc(
       withNode,
       withNodeKey(() => useTableRowContext().name),
     ),
-    Cell: asToken(
+    Cell: flowHoc(
       withLocalContextMenu,
       withContextActivator('onClick'),
       withMenuOptions({ useMenuOptions: useMenuOptionsColumns, name: 'TableColumn' }),

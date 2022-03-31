@@ -23,7 +23,7 @@ import {
   addClassesIf,
   removeClassesIf,
   stylable,
-} from '../src/FClasses';
+} from '../src/addClasses';
 
 const Span = stylable<HTMLProps<HTMLSpanElement>>('span');
 const normalize = (className?: string) => (className ? className.split(' ').sort().join(' ') : undefined);

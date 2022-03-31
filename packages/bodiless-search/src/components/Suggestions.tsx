@@ -82,8 +82,9 @@ const withSuggestionLink:HOC<{}, SuggestionLinkProps> = Component => {
         href={searchPath}
         onClick={(event: React.MouseEvent) => {
           event.preventDefault();
-          if (props.additionalHandler) {
-            props.additionalHandler({ text, searchTerm });
+          const { additionalHandler } = props;
+          if (additionalHandler) {
+            additionalHandler({ text, searchTerm });
           }
           if (
             getSearchPagePath() !== window.location.pathname.replace(/^\//, '').replace(/\/$/, '')
@@ -127,6 +128,7 @@ const startComponents: SuggestionListComponents = {
 type SuggestionListProps = {
   suggestions: Suggestion[];
   displayCount?: number;
+  ariaId: string;
 } & DesignableComponentsProps<SuggestionListComponents>;
 
 const DEFAULT_DISPLAY_COUNT = 5;
@@ -136,6 +138,7 @@ const CleanSuggestions = (props: SuggestionListProps) => {
     components,
     suggestions,
     displayCount = DEFAULT_DISPLAY_COUNT,
+    ariaId,
     ...rest
   } = props;
   const {
@@ -144,12 +147,12 @@ const CleanSuggestions = (props: SuggestionListProps) => {
     Item,
   } = components;
   return (
-    <Wrapper>
+    <Wrapper id={ariaId} role="listbox">
       {
         suggestions
           .slice(0, displayCount)
           .map((item, index) => (
-            <ItemWrapper key={item.text}>
+            <ItemWrapper key={item.text} role="option">
               <Item
                 text={item.text}
                 count={item.count}

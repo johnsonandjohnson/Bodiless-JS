@@ -17,6 +17,8 @@ import { exec } from 'child_process';
 import path from 'path';
 import locateFiles from '../generate-env-vars/locateFiles';
 
+const NPM_ROOT = path.resolve(process.env.BODILESS_NPM_ROOT || '.');
+
 /**
  * reads package.json and returns content of key of the package
  * returns undefined if package.json does not exist or if there is a file parsing error
@@ -48,7 +50,7 @@ const getPackageNameFromPackageJson = (
  * Finds all tailwindcss configuration files.
  */
 const findTailwindConfigPaths = async () => locateFiles({
-  startingRoot: './',
+  startingRoot: NPM_ROOT,
   filePattern: new RegExp('^site.tailwind.config.js$'),
 });
 
@@ -71,13 +73,16 @@ const getBodilessTailwindConfig = async (siteName: string, siteDeps: string[]) =
 
   const pkgs: string[] = [];
   const pkgFilters: Promise<boolean>[] = [];
-
   // 2. make sure the packages have been used in the site package,
   //    even the packages are not listing in site directly.
   pkgsHaveTailwindConfig.forEach(item => {
     pkgFilters.push(new Promise((resolve) => {
-      exec(`npm ls --json ${item.packageName}`, (err, stdout) => {
+      exec(`npm ls --json ${item.packageName}`, { cwd: NPM_ROOT }, (err, stdout) => {
         if (stdout.indexOf(item.packageName) === -1) {
+          return resolve(false);
+        }
+        // If the site is not listed, then this is not a dep of the site
+        if (stdout.indexOf(siteName) === -1) {
           return resolve(false);
         }
 

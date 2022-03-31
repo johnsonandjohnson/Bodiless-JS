@@ -1,10 +1,11 @@
 {
   "name": "@bodiless/accessibility",
-  "version": "0.3.1",
+  "version": "0.3.7",
   "description": "Accessibility tools for bodiless",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
   "main": "./index.js",
+  "sideEffects": false,
   "bin": {
     "pa11y-audit": "bin/accessibility"
   },
@@ -28,7 +29,7 @@
     "chalk": "^2.4.2",
     "esm": "^3.2.25",
     "ora": "^4.0.2",
-    "pa11y": "^5.2.0",
+    "pa11y": "^6.1.0",
     "pa11y-reporter-cli": "^1.0.1",
     "sitemap-urls": "^3.0.0"
   }

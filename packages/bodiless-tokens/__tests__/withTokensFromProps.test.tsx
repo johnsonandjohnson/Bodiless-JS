@@ -18,7 +18,7 @@ import { mount } from 'enzyme';
 import type { HTMLProps } from 'react';
 import { v4 } from 'uuid';
 import {
-  ComponentOrTag, Token, asToken, Tag,
+  ComponentOrTag, HOC, flowHoc, Tag,
 } from '@bodiless/fclasses';
 import { withTokensFromProps } from '../src';
 
@@ -28,13 +28,13 @@ const withRandomKey = <P extends object>(Component: ComponentOrTag<P>) => {
 };
 
 describe('withTokensFromProps', () => {
-  const createTestToken = (attr: string): Token => (
+  const createTestToken = (attr: string): HOC => (
     <P extends object>(C: ComponentOrTag<P>) => {
       const attrProp = { [attr]: true };
       const WithTestToken = (props: P) => <C {...props} {...attrProp} />;
       return WithTestToken;
     }
-  ) as Token;
+  ) as HOC;
 
   it('Applies tokens provided as props', () => {
     const token1 = createTestToken('data-token1');
@@ -60,7 +60,7 @@ describe('withTokensFromProps', () => {
   it('updates tokens when wrapped in withRandomKey', () => {
     const token1 = createTestToken('data-token1');
     const token2 = createTestToken('data-token2');
-    const Test = asToken(
+    const Test = flowHoc(
       withTokensFromProps,
       withRandomKey,
     )('span' as Tag);

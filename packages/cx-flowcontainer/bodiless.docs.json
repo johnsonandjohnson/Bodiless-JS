@@ -1,0 +1,7 @@
+{
+  "Components": {
+    "FlowContainer": {
+      "README.md": "./doc/FlowContainer.md"
+    }
+  }
+}

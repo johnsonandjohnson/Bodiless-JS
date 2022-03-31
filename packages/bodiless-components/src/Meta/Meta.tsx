@@ -18,7 +18,7 @@ import { FieldProps } from 'informed';
 import { withoutProps } from '@bodiless/fclasses';
 import {
   useNode, withNodeKey, withNode, withSidecarNodes, withNodeDataHandlers,
-  withData, ifEditable, asReadOnly,
+  withData, ifEditable, asReadOnly, useGitContext,
 } from '@bodiless/core';
 import type { WithNodeKeyProps } from '@bodiless/core';
 import flowRight from 'lodash/flowRight';
@@ -106,6 +106,17 @@ const withMetaHtml = (
   );
 };
 
+const withMetaSiteInfo = (HelmetComponent: CT) => (props: any) => {
+  const { children, ...rest } = props;
+  const siteInfo = btoa(JSON.stringify(useGitContext()));
+  return (
+    <HelmetComponent {...rest}>
+      {children}
+      <meta name="siteinfo" content={siteInfo} />
+    </HelmetComponent>
+  );
+};
+
 export {
-  withMeta, withMetaHtml, withMetaStatic, withTitle,
+  withMeta, withMetaHtml, withMetaStatic, withTitle, withMetaSiteInfo,
 };

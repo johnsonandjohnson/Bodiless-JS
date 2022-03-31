@@ -12,79 +12,12 @@
  * limitations under the License.
  */
 
-import React, { Component } from 'react';
-import pick from 'lodash/pick';
-import path from 'path';
-import { DefaultContentNode, NodeProvider } from '@bodiless/core';
-import GatsbyMobxStore, { DataSource } from './GatsbyMobxStore';
+import { BodilessBackendClient, BodilessStoreProvider } from '@bodiless/core';
+import GatsbyMobxStore from './GatsbyMobxStore';
 
-type State = {
-  store: GatsbyMobxStore,
-};
-
-export type Props = {
-  data: any,
-  pageContext: {
-    slug: string
-  }
-};
-
-class GatsbyNodeProvider extends Component<Props, State> implements DataSource {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      store: new GatsbyMobxStore(this),
-    };
-  }
-
-  // eslint-disable-next-line react/state-in-constructor
-  readonly state: State;
-
-  // React hook inserts props into mobx store.
-  static getDerivedStateFromProps(props: Props, state: State) {
-    const { data } = props;
-    const { store } = state;
-    store.updateData(data);
-    return null;
-  }
-
-  // Prevent unnecessary renders when the Gatsby JSON Store updates.
-  // Mobx will take care of updating components whose data have changed.
-  shouldComponentUpdate() {
-    return false;
-  }
-
-  get slug() {
-    const { pageContext: { slug } } = this.props;
-    return slug;
-  }
-
-  // Create ContentNode instance for consumption by React components.
-  getRootNode(collection = 'Page') {
-    const { store } = this.state;
-    const actions = pick(store, ['setNode', 'deleteNode']);
-    const getters = {
-      ...pick(store, ['getNode', 'getKeys', 'hasError']),
-      getPagePath: () => this.slug,
-      // eslint-disable-next-line no-confusing-arrow
-      getBaseResourcePath: () => collection === 'Page'
-        ? path.join('pages', this.slug)
-        : 'site/',
-    };
-
-    const node = new DefaultContentNode(actions, getters, collection);
-    return node;
-  }
-
-  render() {
-    const { children } = this.props;
-    return (
-      <NodeProvider node={this.getRootNode('Site')} collection="site">
-        <NodeProvider node={this.getRootNode('Page')} collection="_default">
-          {children}
-        </NodeProvider>
-      </NodeProvider>
-    );
+class GatsbyNodeProvider extends BodilessStoreProvider {
+  protected createStore() {
+    return new GatsbyMobxStore({ slug: this.slug, client: new BodilessBackendClient() });
   }
 }
 

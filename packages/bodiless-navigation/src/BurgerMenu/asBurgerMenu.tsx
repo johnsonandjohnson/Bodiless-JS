@@ -12,11 +12,12 @@
  * limitations under the License.
  */
 
+import { ComponentType } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import { useNode, withDefaultContent } from '@bodiless/core';
 import { asAccordionWrapper, asAccordionTitle, asAccordionBody } from '@bodiless/accordion';
 import {
-  Fragment, withDesign, replaceWith, asToken, addProps, Token, flowIf, startWith,
+  Fragment, withDesign, replaceWith, flowHoc, addProps, HOC, flowIf, startWith,
 } from '@bodiless/fclasses';
 import { LinkData } from '@bodiless/components';
 import BurgerMenuClean from './BurgerMenuClean';
@@ -24,7 +25,6 @@ import BurgerMenuClean from './BurgerMenuClean';
 import { withDisabledTitleLink } from './BurgerMenu.token';
 import withMenuDesign from '../Menu/withMenuDesign';
 import MenuTitle, { DEFAULT_NODE_KEYS } from '../Menu/MenuTitles';
-import { ComponentType } from 'react';
 
 /**
  * HOC that adds an overview link to a burger menu sublist.  The overview link
@@ -40,7 +40,7 @@ import { ComponentType } from 'react';
  * that editor.
  *
  * @return
- * Token that adds an OverviewLink to the menu list.
+ * HOC that adds an OverviewLink to the menu list.
  */
 const withOverviewLink = (
   overviewText: any = 'Overview',
@@ -77,13 +77,13 @@ const withOverviewLink = (
   );
 };
 
-const withBurgerMenuSchema = asToken(
+const withBurgerMenuSchema = flowHoc(
   asAccordionWrapper,
   withOverviewLink(),
   withDesign({
     Wrapper: asAccordionBody,
     OuterWrapper: withDesign({
-      Title: asToken(asAccordionTitle, withDisabledTitleLink),
+      Title: flowHoc(asAccordionTitle, withDisabledTitleLink),
     }),
   }),
 );
@@ -95,13 +95,12 @@ const withBurgerMenuSchema = asToken(
  *
  * @return Original component wrapped in the burger menu chrome with 'Menu' design key.
  */
-const withBurgerMenuWrapper: Token = Component => asToken(
+const withBurgerMenuWrapper: HOC = Component => flowHoc(
   replaceWith(BurgerMenuClean),
   withDesign({
     Menu: replaceWith(Component),
   }),
 )(Fragment) as ComponentType<any>;
-
 
 /**
  * Helper which allows specifying which submenu types are configured
@@ -109,9 +108,9 @@ const withBurgerMenuWrapper: Token = Component => asToken(
  *
  * @param keys List of the submenu key(s) to which the default styles will be applied to.
  *
- * @return Token that applies default burger menu styles based on provided keys.
+ * @return HOC that applies default burger menu styles based on provided keys.
  */
-const asBurgerMenu = (...keys: string[]) => asToken(
+const asBurgerMenu = (...keys: string[]) => flowHoc(
   // We need to replace Card with the MenuTitle in burger menu.
   keys.includes('Cards')
     ? withMenuDesign('Cards')(withDesign({ Title: startWith(MenuTitle) }))

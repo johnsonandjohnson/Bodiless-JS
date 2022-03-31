@@ -14,8 +14,8 @@
 
 import React, { FC, ComponentType } from 'react';
 import {
-  Div, H2, designable, H3, asToken,
-  withDesign, addProps, flowIf, replaceWith, Token,
+  Div, H2, designable, H3, flowHoc,
+  withDesign, addProps, flowIf, replaceWith, HOC,
 } from '@bodiless/fclasses';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import {
@@ -67,7 +67,7 @@ const TokenEditorClean = designable<TokenEditorComponents>(
  */
 const withFlowContainerFirstItemNode = (
   nodeKey: string,
-):Token<{}, Partial<WithNodeProps>> => Component => {
+): HOC<{}, Partial<WithNodeProps>> => Component => {
   const ComponentWithNode = withNode(Component);
   const WithFlowContainerFirstItemNode = (props: any) => {
     const { node } = useNode<any>();
@@ -88,13 +88,13 @@ const withFlowContainerFirstItemNode = (
  *
  * Connects a token editor to token data.
  */
-const withTokenEditorData = (nodeKey?: WithNodeKeyProps) => asToken(
+const withTokenEditorData = (nodeKey?: WithNodeKeyProps) => flowHoc(
   withDesign({
-    Container: asToken(
+    Container: flowHoc(
       addProps({ maxComponents: 1, minComponents: 1 }),
       withNodeKey(DEMO_NODE_KEY),
     ),
-    Printer: asToken(
+    Printer: flowHoc(
       flowIf<TokenPrinterProps>(({ tokens = [] }) => tokens.length === 0)(
         replaceWith(() => <>No tokens selected.</>),
       ),
@@ -108,7 +108,7 @@ const withTokenEditorData = (nodeKey?: WithNodeKeyProps) => asToken(
 );
 
 /**
- * A Token editor is a tool for displaying and selecting among thetokens
+ * A HOC editor is a tool for displaying and selecting among thetokens
  * which are available for a component. Selected tokens are saved as data.
  */
 const TokenEditor = withTokenEditorData()(TokenEditorClean);

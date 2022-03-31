@@ -1,0 +1,7 @@
+{
+  "Components": {
+    "Image": {
+      "CX_Image.md": "./doc/Image.md"
+    }
+  }
+}

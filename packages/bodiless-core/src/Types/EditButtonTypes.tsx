@@ -52,6 +52,7 @@ export type EditButtonOptions<P = any, D = any> = Omit<OptionGroupDefinition, 'h
    * Callback to render the body of the edit form.
    */
   renderForm: FormBodyRenderer<P, D>,
+  hasSubmit?: boolean,
 } & EditDataHandler<D> & Partial<MenuOptionsDefinition<P>>;
 
 export type BodilessOverrides<P = any, D = any, E = {}> =

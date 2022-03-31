@@ -15,7 +15,7 @@
 import React, { ComponentType } from 'react';
 import flowRight from 'lodash/flowRight';
 import { mount } from 'enzyme';
-import type { HOC, Token } from '@bodiless/fclasses';
+import type { HOC } from '@bodiless/fclasses';
 import withNode, { withNodeKey } from '../src/withNode';
 import { useNode } from '../src/NodeProvider';
 import withSidecarNodes, { endSidecarNodes } from '../src/withSidecarNodes';
@@ -61,13 +61,13 @@ describe('Sidecar Node Use Cases', () => {
     const useDataToggle = () => mockNodeData(useNode<any>().node.path.join('$'));
     const withToggleTo = (ToComponent: ComponentType<any>) => (
       nodeKey?: string,
-    ): Token => flowRight(
+    ): HOC => flowRight(
       withNodeKey(nodeKey),
       withNode,
       ifToggledOn(useDataToggle)(
         () => ToComponent,
       ),
-    ) as Token;
+    ) as HOC;
     const Span = spanWithId('test');
     it('has the correct baseline', () => {
       const Test = withFoo('foo')(Span);

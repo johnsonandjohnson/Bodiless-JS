@@ -19,7 +19,7 @@ const asyncExists = path => new Promise(resolve => fs.exists(path, exists => res
 
 const copyDefaults = async package => {
   // Gatsby does not respect .env, just .env.development or .env.production.
-  const envPath = package === 'examples/test-site' ? `${package}/.env.development` : `${package}/.env`;
+  const envPath = package === 'sites/test-site' ? `${package}/.env.development` : `${package}/.env`;
   // Using the "global" defaults found in the project root.
   const defaults = '.env.local';
 
@@ -36,5 +36,5 @@ const copyDefaults = async package => {
   }
 };
 
-const packages = ['packages/bodiless-backend', 'examples/test-site'];
+const packages = ['packages/bodiless-backend', 'sites/test-site'];
 packages.forEach(package => copyDefaults(package));

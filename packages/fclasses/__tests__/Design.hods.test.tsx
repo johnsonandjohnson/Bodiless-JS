@@ -1,6 +1,8 @@
 import React, { ComponentType, Fragment } from 'react';
-import { varyDesign, extendDesign, FluidDesign } from '../src/Design';
-import { HOC } from '../src';
+import {
+  varyDesign, extendDesignWith, FluidDesign, HOC,
+  as, Token, HOD,
+} from '../src';
 
 /**
  * Copyright © 2019 Johnson & Johnson
@@ -23,9 +25,9 @@ const testHOC = (text: string): HOC => ((Component: TestComponent) => {
   ReturnComponent.testText = (Component.testText || '') + text;
   return ReturnComponent;
 }) as HOC;
-const getTestText = (hoc: HOC | undefined) => {
-  if (typeof hoc === 'undefined') return '';
-  const Item1 = hoc(Fragment) as TestComponent;
+const getTestText = (token: Token<any, any>) => {
+  if (typeof token === 'undefined') return '';
+  const Item1 = as(token)(Fragment) as TestComponent;
   return Item1.testText;
 };
 describe('varyDesign', () => {
@@ -88,7 +90,7 @@ describe('extendDesign', () => {
       Addition: testHOC('addition'),
       Addition2: testHOC('addition2'),
     };
-    const finalDesign = extendDesign(additionDesign)(baseDesign);
+    const finalDesign = extendDesignWith(additionDesign)(baseDesign);
     expect(Object.getOwnPropertyNames(finalDesign)[0]).toBe('Item1');
     expect(Object.getOwnPropertyNames(finalDesign)[1]).toBe('Item2');
     expect(Object.getOwnPropertyNames(finalDesign)[2]).toBe('Addition');
@@ -108,7 +110,7 @@ describe('extendDesign', () => {
       Item1: testHOC('addto'),
       Addition2: testHOC('addition2'),
     };
-    const finalDesign = extendDesign(additionDesign)(baseDesign);
+    const finalDesign = extendDesignWith(additionDesign)(baseDesign);
     expect(Object.getOwnPropertyNames(finalDesign)[0]).toBe('Item1');
     expect(Object.getOwnPropertyNames(finalDesign)[1]).toBe('Item2');
     expect(Object.getOwnPropertyNames(finalDesign)[2]).toBe('Addition');
@@ -123,7 +125,7 @@ describe('extendDesign', () => {
       Addition: testHOC('addition'),
       Addition2: testHOC('addition2'),
     };
-    const additionHOD = extendDesign(additionDesign);
+    const additionHOD = extendDesignWith(additionDesign);
     const finalDesign = additionHOD();
     expect(Object.getOwnPropertyNames(finalDesign)[0]).toBe('Addition');
     expect(Object.getOwnPropertyNames(finalDesign)[1]).toBe('Addition2');
@@ -141,7 +143,7 @@ describe('extendDesign', () => {
       Addition3: testHOC('addition3'),
       Addition4: testHOC('addition4'),
     };
-    const additionHOD = extendDesign(additionDesign1, additionDesign2);
+    const additionHOD = extendDesignWith(additionDesign1, additionDesign2);
     const finalDesign = additionHOD(baseDesign);
     expect(Object.getOwnPropertyNames(finalDesign)[0]).toBe('Item1');
     expect(Object.getOwnPropertyNames(finalDesign)[1]).toBe('Addition');
@@ -171,8 +173,8 @@ describe('extendDesign', () => {
         Addition3: testHOC('addition3'),
         Addition4: testHOC('addition4'),
       };
-      const matrixedHOD = varyDesign(additionDesign1, additionDesign2);
-      const additionHOD = extendDesign(matrixedHOD);
+      const matrixedHOD: HOD<any> = varyDesign(additionDesign1, additionDesign2);
+      const additionHOD: HOD<any> = extendDesignWith(matrixedHOD);
       const finalDesign = additionHOD(baseDesign);
       expect(Object.getOwnPropertyNames(finalDesign)).toStrictEqual([
         'Item1',

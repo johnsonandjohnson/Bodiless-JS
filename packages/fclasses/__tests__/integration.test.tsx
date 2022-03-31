@@ -18,21 +18,15 @@ import flowRight from 'lodash/flowRight';
 import flow from 'lodash/flow';
 import React, { HTMLProps, FC, ComponentType } from 'react';
 
-import { HOC, asToken } from '../src';
-
 import {
-  addClasses, removeClasses, stylable,
-} from '../src/FClasses';
-import {
-  flowIf, hasProp, withoutProps,
-} from '../src/hoc-util';
-
-import {
+  HOC, flowHoc,
   applyDesign,
   withDesign,
   replaceWith,
   DesignableProps,
-} from '../src/Design';
+  addClasses, removeClasses, stylable,
+  flowIf, hasProp, withoutProps,
+} from '../src';
 
 type CardComponents = {
   Wrapper: ComponentType<any>,
@@ -181,12 +175,12 @@ const ContextMenuButton = flow(
   withoutProps<VariantProps>(['isActive', 'isFirst', 'isEnabled']),
   addClasses('cursor-pointer pl-2 text-gray') as HOC,
   flowIf(hasProp('isActive'))(
-    asToken(addClasses('text-white'), removeClasses('text-gray')),
+    flowHoc(addClasses('text-white'), removeClasses('text-gray')),
   ),
   flowIf(hasProp('isFirst'))(
     removeClasses('pl-2'),
   ),
-)(Div);
+)(Div) as ComponentType<any>;
 
 describe('flowIf', () => {
   it('Adds and removes classes based on conditional props', () => {

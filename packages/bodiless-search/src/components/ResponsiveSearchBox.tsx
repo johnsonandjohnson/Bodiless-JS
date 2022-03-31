@@ -13,7 +13,7 @@
  */
 
 import React, {
-  FC, ComponentType, useState, HTMLProps,
+  FC, ComponentType, useState, HTMLProps, createContext, useContext,
 } from 'react';
 import {
   I,
@@ -24,7 +24,7 @@ import {
   withDesign,
   DesignableComponentsProps,
   StylableProps,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 
 import {
@@ -34,13 +34,13 @@ import {
   SearchComponents,
 } from './Search';
 
-type ResponsiveSearchComponents = {
+export type ResponsiveSearchComponents = {
   Wrapper: ComponentType<StylableProps>,
   ToggleButton: ComponentType<HTMLProps<HTMLButtonElement>>,
   ToggleIcon: ComponentType<HTMLProps<HTMLElement>>
 } & SearchComponents;
 
-type ResponsiveSearchProps = DesignableComponentsProps<ResponsiveSearchComponents> &
+export type ResponsiveSearchProps = DesignableComponentsProps<ResponsiveSearchComponents> &
 SearchProps;
 
 const withResponsiveDesign = withDesign({
@@ -55,6 +55,17 @@ const responsiveSearchComponents: ResponsiveSearchComponents = {
   ToggleIcon: addClasses('material-icons cursor-pointer align-middle')(I),
 };
 
+type ToggleButtonContext = {
+  isExpanded: boolean,
+  setExpanded: Function,
+};
+const searchToggleButtonContext = createContext<ToggleButtonContext>({
+  isExpanded: false,
+  setExpanded: () => false,
+});
+export const useSearchToggleButtonContext = () => useContext(searchToggleButtonContext);
+export const isSearchToggleButtonExpanded = () => useSearchToggleButtonContext().isExpanded;
+
 const ResponsiveSearchBoxBase: FC<ResponsiveSearchProps> = (props) => {
   const [isExpanded, setExpanded] = useState<boolean>(false);
 
@@ -63,22 +74,22 @@ const ResponsiveSearchBoxBase: FC<ResponsiveSearchProps> = (props) => {
 
   return (
     <Wrapper>
-      <ToggleButton onClick={() => setExpanded(!isExpanded)}>
-        <ToggleIcon>{ isExpanded ? 'close' : 'search' }</ToggleIcon>
-      </ToggleButton>
+      <searchToggleButtonContext.Provider value={{ isExpanded, setExpanded }}>
+        <ToggleButton onClick={() => setExpanded(!isExpanded)}>
+          <ToggleIcon>{ isExpanded ? 'close' : 'search' }</ToggleIcon>
+        </ToggleButton>
 
-      <SearchBox
-        {...props}
-        style={{ display: isExpanded ? 'flex' : 'none' }}
-        onSubmit={() => setExpanded(false)}
-      />
+        <SearchBox
+          {...props}
+          style={{ display: isExpanded ? 'flex' : 'none' }}
+          onSubmit={() => setExpanded(false)}
+        />
+      </searchToggleButtonContext.Provider>
     </Wrapper>
   );
 };
 
-const ResponsiveSearchBox = asToken(
+export const ResponsiveSearchBox = flowHoc(
   designable(responsiveSearchComponents, 'ResponsiveSearchBox'),
   withResponsiveDesign,
 )(ResponsiveSearchBoxBase) as ComponentType<SearchProps>;
-
-export default ResponsiveSearchBox;

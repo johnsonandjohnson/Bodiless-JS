@@ -15,7 +15,7 @@
 import React, { ComponentType } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
-import { replaceable, startWith } from '../src/Design';
+import { replaceable, startWith } from '../src/replaceable';
 
 describe('replaceable', () => {
   it('should replace a component if wraped with startWith', () => {

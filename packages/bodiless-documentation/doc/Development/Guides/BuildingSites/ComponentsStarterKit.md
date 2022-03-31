@@ -148,37 +148,32 @@ asEditable({ nodeKey: 'copyright', nodeCollection: 'site' }, 'Insert Copyright',
 
 ## Menu & Burger Menu
 
-The Bodiless starter comes with menu that is placed in the header. It is menu
-that the data is shared site-wide so that all pages use the same menu data. In
-addition the burger menu (mobile) menu generates its menu off this desktop
-menu's data. For more details, please see
-[Menu](/Components/MainMenu) &
-[Burger Menu](/Components/BurgerMenu)
+The Bodiless starter comes with a menu that is placed in the header. It is a menu with which the
+data is shared site-wide, so that all pages use the same menu data. In addition, the burger menu
+(mobile) generates its menu off this desktop menu's data. For more details, please see:
+[Menu](/Components/Navigation/Menu) and [Burger Menu](/Components/Navigation/BurgerMenu).
 
 ## Editors
 
-The Bodiless starter comes with pre-defined editors that can be changed and/or
-extended to meet the site requirements. The site builder will find three rich text editors
-defined that are Simple, Basic & Full Featured.
+The Bodiless starter comes with pre-defined editors that can be changed and/or extended to meet the
+site requirements. The Site Builder will find three pre-defined rich text editors:
 
-* Simple : Superscript Only
-* Basic : Superscript, Bold, Italic, Underline, Link, Align Text
-* Full Featured : adds in more functionality to Basic such as Strikethru, headers, quotes.
+* **Simple:** Superscript only.
+* **Basic:** Superscript, Bold, Italic, Underline, Link, and Align Text.
+* **Full:** Adds more functionality to Basic, such as Strikethru, Headers, and Quotes.
 
-Editors can be extended or customized by using the Bodiless Design API to apply
-token HOC's which add, remove, replace or style the components which render
-different text formatting.
+Editors can be extended or customized by using the Bodiless Design API to apply token HOCs which
+add, remove, replace, or style the components which render different text formatting.
 
-We recommend
-[refining the editor components](/Components/RichText?id=richtext-component)
-needed to meet the site's requirements.
+We recommend [refining the editor components](/Components/RichText?id=richtext-component) needed to
+meet your site's requirements.
 
 ## Images
 
-The starterkit contain simple editable images that render either linkable or
-nonlinkable images and a few variations of image placeholders.
+The starter kit contains simple editable images that render either linkable or non-linkable images,
+and a few variations of image placeholders.
 
-For more information please read [Images](/Components/Image).
+For more information, please read: [Image](/Components/Image/).
 
 ## Cards
 

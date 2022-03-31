@@ -14,9 +14,11 @@
 
 import React, { FC } from 'react';
 import CleanReresizable, { ResizableProps } from 're-resizable';
+import { useLibraryItemContext } from '@bodiless/layouts';
 
 const Reresizable: FC<ResizableProps & { isEnabled?: boolean }> = ({ isEnabled, ...rest }) => {
-  const borderClass = 'bl-border-2 bl-border-dashed hover:bl-border-primary';
+  const { isLibraryItem } = useLibraryItemContext();
+  const borderClass = `bl-border-2 bl-border-dashed hover:bl-border-${isLibraryItem ? 'yellow-500' : 'primary'}`;
   const activeClass = isEnabled ? 'bl-active bl-border-primary' : 'bl-border-transparent';
   const { className } = rest;
 

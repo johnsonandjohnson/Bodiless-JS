@@ -28,7 +28,7 @@ import {
 } from 'informed';
 import {
   Li, Ul, stylable, addClasses, StylableProps, withoutProps, flowIf, hasProp, addProps,
-  removeClasses, addClassesIf, removeClassesIf, asToken,
+  removeClasses, addClassesIf, removeClassesIf, flowHoc,
 } from '@bodiless/fclasses';
 import { ButtonVariantProps, withChild } from '@bodiless/core';
 
@@ -95,7 +95,7 @@ export const ComponentFormText = addClasses(
 )(Text);
 
 export const ComponentFormTextArea = addClasses(
-  'bl-resize bl-text-gray-900 bl-bg-gray-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-min-h-grid-16 bl-block bl-my-grid-2 bl-p-grid-1',
+  'bl-text-gray-900 bl-bg-gray-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-min-h-grid-16 bl-block bl-my-grid-2 bl-p-grid-1 bl-resize-none overflow-auto whitespace-pre',
 )(TextArea);
 
 export const ComponentFormRadioGroup = addClasses(
@@ -154,7 +154,7 @@ export const ToolbarButton = flow(
   withoutProps<ButtonVariantProps>(['isActive', 'isFirst', 'isDisabled']),
   addClasses('bl-cursor-pointer bl-mb-3 bl-flex bl-flex-col bl-items-center'),
   flowIf(hasProp('isDisabled'))(
-    asToken(
+    flowHoc(
       addClasses('bl-text-gray-600'),
       removeClasses('bl-text-gray-200'),
     ),
@@ -211,3 +211,10 @@ export const ComponentFormLink = flow(
   addClassesIf(isDisabled)('bl-text-gray-600'),
   removeClassesIf(isDisabled)('bl-cursor-pointer bl-text-gray-100 '),
 )(Anchor);
+
+export const ComponentFormDefaultPanelWidth = addClasses('bl-w-xl-grid-2');
+export const ComponentFormDefaultPanelHeight = addClasses('bl-h-xl-grid-1');
+export const ComponentFormDefaultPanelSize = flowHoc(
+  ComponentFormDefaultPanelWidth,
+  ComponentFormDefaultPanelHeight,
+);

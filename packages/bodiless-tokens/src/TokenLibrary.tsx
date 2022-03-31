@@ -19,9 +19,9 @@ import {
   useNode, useMenuOptionUI, EditButtonOptions, withEditButton,
   withNode, withSidecarNodes, withNodeKey, withNodeDataHandlers,
 } from '@bodiless/core';
-import { addClasses, asToken } from '@bodiless/fclasses';
+import { addClasses, flowHoc } from '@bodiless/fclasses';
 import { Option } from 'informed';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import flow from 'lodash/flow';
 import { Tokens } from './TokenMap';
 
@@ -38,9 +38,9 @@ export const useTokenLibrary = (target: string, groupName = 'Group'): Tokens => 
   const data = useContext(TokenLibraryContext).filter(t => t.target === target);
   const tokens: Tokens = data.reduce((acc, next) => ({
     ...acc,
-    [next.name]: asToken(
+    [next.name]: flowHoc(
       addClasses(next.className),
-      next.category ? asToken.meta.term(groupName)(next.category) : undefined,
+      next.category ? flowHoc.meta.term(groupName)(next.category) : undefined,
     ),
   }), {});
   return tokens;

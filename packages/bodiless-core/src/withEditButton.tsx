@@ -71,12 +71,15 @@ const withEditButton = <P extends object, D extends object>(
     ),
   );
   const useMenuDefinition = (props: P) => {
-    const { root, peer, name } = typeof options === 'function' ? options(props) : options;
+    const {
+      root, peer, name, hasSubmit
+    } = typeof options === 'function' ? options(props) : options;
     return {
       root,
       peer,
       useMenuOptions,
       name: `Edit ${name}`,
+      hasSubmit,
     };
   };
   return flowRight(

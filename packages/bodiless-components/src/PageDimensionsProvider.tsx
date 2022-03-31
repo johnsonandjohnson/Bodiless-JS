@@ -20,7 +20,7 @@ import React, {
   useContext,
 } from 'react';
 import throttle from 'lodash/throttle';
-import { Token } from '@bodiless/fclasses';
+import { HOC } from '@bodiless/fclasses';
 
 type PageDimensions = {
   width: number,
@@ -42,7 +42,7 @@ const PageDimensionsContext = createContext<PageDimensions>({
   size: 'sm',
 });
 
-const mapBreakpointsSize = (breakpoints: BreakpointsType = {}, width: number) => (
+const mapBreakpointsSize = (breakpoints: BreakpointsType = {}, width: number = 0) => (
   Object.keys(breakpoints).slice().reverse().find(item => width >= breakpoints[item]) || '_default'
 );
 
@@ -94,7 +94,7 @@ const PageDimensionsProvider: FC<PageDimensionsProviderProps> = ({ children, bre
  */
 const withPageDimensionsContext = (
   { breakpoints }: PageDimensionsProviderProps,
-): Token => Component => {
+): HOC => Component => {
   const WithPageDimensionsContext: FC<any> = props => (
     <PageDimensionsProvider breakpoints={breakpoints}>
       <Component {...props} />

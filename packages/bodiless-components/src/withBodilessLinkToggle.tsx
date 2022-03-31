@@ -20,7 +20,7 @@ import type { UseBodilessOverrides, EditButtonProps } from '@bodiless/core';
 import flowRight from 'lodash/flowRight';
 import identity from 'lodash/identity';
 import {
-  replaceWith, withDesign, withoutProps, asToken,
+  replaceWith, withDesign, withoutProps, flowHoc,
 } from '@bodiless/fclasses';
 import type { HOC } from '@bodiless/fclasses';
 import type { AsBodilessLink } from './Link';
@@ -45,7 +45,7 @@ const extendOverrides = <P extends object, D extends object>(
  * @private
  * Default hoc used to replace link when toggled off.
  */
-const defaultAsOff: HOC = asToken(
+const defaultAsOff: HOC = flowHoc(
   ifEditable(replaceWith(SafeSpan)),
   ifReadOnly(replaceWith(SafeFragment)),
 );

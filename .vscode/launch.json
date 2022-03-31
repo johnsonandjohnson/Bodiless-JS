@@ -21,7 +21,7 @@
             "type": "node",
             "request": "launch",
             "program": "${workspaceRoot}/packages/bodiless-migration-tool/bin/run",
-            "cwd": "${workspaceFolder}/examples/starter",
+            "cwd": "${workspaceFolder}/sites/starter",
         },
         {
             "name": "Bodiless CLI Pack",
@@ -55,7 +55,7 @@
             "request": "launch",
             "protocol": "inspector",
             "program": "${workspaceRoot}/node_modules/gatsby/dist/bin/gatsby",
-            "cwd": "${workspaceFolder}/examples/test-site",
+            "cwd": "${workspaceFolder}/sites/test-site",
             "args": [
                 "build"
             ],
@@ -73,7 +73,7 @@
             "request": "launch",
             "protocol": "inspector",
             "program": "${workspaceRoot}/node_modules/gatsby/dist/bin/gatsby",
-            "cwd": "${workspaceFolder}/examples/test-site",
+            "cwd": "${workspaceFolder}/sites/test-site",
             "args": [
                 "develop"
             ],
@@ -120,7 +120,7 @@
             "name": "Launch Chrome",
             "type": "chrome",
             "request": "launch",
-            "webRoot": "${workspaceRoot}/examples/test-site/src",
+            "webRoot": "${workspaceRoot}/sites/test-site/src",
             "timeout": 100000,
             "smartStep": true,
             "sourceMaps": true,
@@ -131,8 +131,8 @@
             "name": "Build Docs",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceRoot}/examples/test-site/node_modules/.bin/bl-docs-build",
-            "cwd": "${workspaceFolder}/examples/test-site",
+            "program": "${workspaceRoot}/sites/test-site/node_modules/.bin/bl-docs-build",
+            "cwd": "${workspaceFolder}/sites/test-site",
         },
     ],
 }

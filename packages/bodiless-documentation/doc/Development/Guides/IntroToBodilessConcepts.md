@@ -154,11 +154,11 @@ The simplest of these is`asEditable` - a simple, unformatted text field.
 Add the following import to the top of your index.tsx:
 ```ts
 import { asEditable } from '@bodiless/components';
-import { addClasses, H1, asToken } from '@bodiless/fclasses';
+import { addClasses, H1, flowHoc } from '@bodiless/fclasses';
 ```
 And then update your `PrimaryHeader` definition to make it editable:
 ```ts
-const PrimaryHeader = asToken(
+const PrimaryHeader = flowHoc(
   asEditable('title', 'Title'),
   withPrimaryHeaderStyles,
 )(H1);
@@ -205,7 +205,7 @@ courtesy of `gatsby-source-filesystem` and hot reload. Or, open the same url in
 a different browser window and start editing - the changes will propagate to the
 other window in near-realtime. Cool!
 
-Note the use of `asToken` in the above code. This is a custom composition
+Note the use of `flowHoc` in the above code. This is a custom composition
 utility provided by BodilessJS. We will go into it in more detail in subsequent
 tutorials; for now, just treat it as an equivalent to Lodash
 [flow](https://lodash.com/docs/4.17.15#flow).
@@ -219,7 +219,7 @@ image link to our page.
 Change the imports from `@bodiless/components` and `@bodiless/fclasses`;
 
 ```ts
-import { H1, Img, A, addClasses, asToken } from '@bodiless/fclasses';
+import { H1, Img, A, addClasses, flowHoc } from '@bodiless/fclasses';
 import { asEditable, asBodilessLink } from '@bodiless/components';
 import { asBodilessImage } from '@bodiless/components-ui';
 ```
@@ -343,7 +343,7 @@ import {
   Strong,
   addClasses,
   withDesign,
-  asToken,
+  flowHoc,
   Token,
   replaceWith,
   Em,
@@ -352,18 +352,18 @@ import {
 import { asBodilessLink, withPlaceholder } from '@bodiless/components';
 import { withChild, withNodeKey } from '@bodiless/core';
 
-const asBold = asToken(
+const asBold = flowHoc(
   replaceWith(Strong),
   addClasses('font-bold'),
 );
 
-const asItalic = asToken(
+const asItalic = flowHoc(
   replaceWith(Em),
 );
 
 const asUnderline = addClasses('underline');
 
-const asLink = asToken(
+const asLink = flowHoc(
   replaceWith(A),
   asBodilessLink(),
   addClasses('text-blue-700 underline')
@@ -376,11 +376,11 @@ const simpleDesign = {
   Link: asLink,
 };
 
-const withSimpleEditor = (nodeKey?: string, placeholder?: string) => asToken(
+const withSimpleEditor = (nodeKey?: string, placeholder?: string) => flowHoc(
   addClasses('overflow-hidden'),
   withChild(RichText, 'Editor'),
   withDesign({
-    Editor: asToken(
+    Editor: flowHoc(
       withDesign(simpleDesign),
       withPlaceholder(placeholder),
       withNodeKey(nodeKey),
@@ -394,7 +394,7 @@ export default withSimpleEditor;
 Now, in your `index.tsx` in the `gallery` directory:
 - import `Div` from `@bodiless/fclasses` by adding it into the import.
   ```ts
-  import { H1, Img, A, addClasses, asToken, Section, Div } from '@bodiless/fclasses';
+  import { H1, Img, A, addClasses, flowHoc, Section, Div } from '@bodiless/fclasses';
   ```
 - import your `withSimpleEditor` HOC into your `index.tsx`:
   ```ts
@@ -422,18 +422,18 @@ render different text formatting options. Normally, these would be defined by
 the styleguide of a site. Here we used very simple ones:
 
 ```ts
-const asBold = asToken(
+const asBold = flowHoc(
   replaceWith(Strong),
   addClasses('font-bold'),
 );
 
-const asItalic = asToken(
+const asItalic = flowHoc(
   replaceWith(Em),
 );
 
 const asUnderline = addClasses('underline');
 
-const asLink = asToken(
+const asLink = flowHoc(
   replaceWith(A),
   asBodilessLink(),
   addClasses('text-blue-700 underline')
@@ -458,11 +458,11 @@ to the component to which it was applied (just as `asEditable()` added an editor
 for unformatted text):
 
 ```ts
-const withSimpleEditor = (nodeKey?: string, placeholder?: string) => asToken(
+const withSimpleEditor = (nodeKey?: string, placeholder?: string) => flowHoc(
   addClasses('overflow-hidden'),
   withChild(RichText, 'Editor'),
   withDesign({
-    Editor: asToken(
+    Editor: flowHoc(
       withDesign(simpleDesign),
       withPlaceholder(placeholder),
       withNodeKey(nodeKey),
@@ -488,12 +488,12 @@ import React, { FC, HTMLProps } from 'react';
 import { asBodilessImage } from '@bodiless/components-ui';
 import { withNode } from '@bodiless/core';
 import {
-  Img, Section, Div, addClasses, stylable, asToken,
+  Img, Section, Div, addClasses, stylable, flowHoc,
 } from '@bodiless/fclasses';
 import withSimpleEditor from './withSimpleEditor';
 
 const Wrapper = Section;
-const Image = asToken(addClasses('w-full'), asBodilessImage('image'))(Img);
+const Image = flowHoc(addClasses('w-full'), asBodilessImage('image'))(Img);
 const Body = withSimpleEditor('caption', 'Caption')(Div);
 
 const CaptionedImageBase: FC<HTMLProps<HTMLElement>> = props => (
@@ -503,7 +503,7 @@ const CaptionedImageBase: FC<HTMLProps<HTMLElement>> = props => (
   </Wrapper>
 );
 
-const CaptionedImage = asToken(
+const CaptionedImage = flowHoc(
   stylable,
   withNode,
 )(CaptionedImageBase);
@@ -524,7 +524,7 @@ Next create a `Gallery.tsx` file as follows:
 ```ts
 import React, { FC, HTMLProps } from 'react';
 import {
-  H2, Section, Div, addClasses, stylable, asToken,
+  H2, Section, Div, addClasses, stylable, flowHoc,
 } from '@bodiless/fclasses';
 import { withNode } from '@bodiless/core';
 import CaptionedImage from './CaptionedImage';
@@ -544,7 +544,7 @@ const GalleryBase: FC<HTMLProps<HTMLDivElement>> = ({ children, ...rest }) => (
   </Wrapper>
 );
 
-const Gallery = asToken(
+const Gallery = flowHoc(
   stylable,
   withNode,
 )(GalleryBase);
@@ -626,31 +626,31 @@ for placement in our gallery:
 
 ``` js
 const design = {
-    BlueImageTile: asToken(
+    BlueImageTile: flowHoc(
       replaceWith(CaptionedImage),
       asGalleryTile,
       withBlueBorder,
       { title: 'Blue Image Tile' },
-      asToken.meta.term('Color')('Blue'),
+      flowHoc.meta.term('Color')('Blue'),
     ),
-    TealImageTile: asToken(
+    TealImageTile: flowHoc(
       replaceWith(CaptionedImage),
       asGalleryTile,
       withTealBorder,
       { title: 'Teal Image Tile' },
-      asToken.meta.term('Color')('Teal'),
+      flowHoc.meta.term('Color')('Teal'),
     ),
-    OrangeImageTile: asToken(
+    OrangeImageTile: flowHoc(
       replaceWith(CaptionedImage),
       asGalleryTile,
       withOrangeBorder,
       { title: 'Orange Image Tile' },
-      asToken.meta.term('Color')('Orange'),
+      flowHoc.meta.term('Color')('Orange'),
     ),
   };
 ```
 
-The `asToken` utility is used to compose tokens onto the`CaptionedImage`
+The `flowHoc` utility is used to compose tokens onto the`CaptionedImage`
 component. In addition to the styling, *metadata* is attached to our components
 (via the `{ title: '...' }` objects). This will control how an editor can view
 and search for the components.
@@ -695,7 +695,7 @@ Be sure to update the imports in `Gallery.tsx`.  They should now be:
 ```ts
 import React, { FC, HTMLProps } from 'react';
 import {
-  H2, Section, Div, addClasses, stylable, asToken, replaceWith, withDesign, addProps,
+  H2, Section, Div, addClasses, stylable, flowHoc, replaceWith, withDesign, addProps,
 } from '@bodiless/fclasses';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import { withNode } from '@bodiless/core';

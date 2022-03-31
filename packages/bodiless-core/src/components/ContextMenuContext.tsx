@@ -70,6 +70,7 @@ const defaultUI: Required<ContextMenuUI> = {
   ComponentFormOption: Option,
   ComponentFormSelect: Select,
   ComponentFormFieldWrapper: 'div',
+  Spinner: () => <div className="bodiless-spinner">Loading...</div>,
 };
 
 const getUI = (ui: ContextMenuUI = {}) => ({

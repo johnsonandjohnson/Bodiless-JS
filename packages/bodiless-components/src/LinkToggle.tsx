@@ -17,7 +17,7 @@ import {
   ifEditable, withNode, ifReadOnly, withOnlyProps,
 } from '@bodiless/core';
 import {
-  replaceWith, asComponent, addProps, stylable,
+  replaceWith, addProps, stylable,
 } from '@bodiless/fclasses';
 import { Fragment } from 'react';
 import asBodilessLink from './Link/asBodilessLink';
@@ -27,7 +27,7 @@ const EmptyToggle = flowRight(
   ifEditable(
     withWrapOnSubmit,
     asBodilessLink(),
-    replaceWith(asComponent<JSX.IntrinsicElements['span']>('span')),
+    replaceWith('span'),
   ),
   ifReadOnly(
     withNode,

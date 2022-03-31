@@ -77,9 +77,8 @@ export type RegisterItemContextType = {
 
 export type FBGContextOptions = {
   suggestions?: TagType[],
-  multipleAllowedTags?: boolean,
   items?: FilteredItemType[],
-};
+} & Pick<Partial<FBGContextType>, 'multipleAllowedTags'>;
 
 export type SuggestionsRefType = {
   id: string,
@@ -121,9 +120,17 @@ export type FBGContextType = {
    */
   unSelectTag: (tag: FilterTagType, callback?: Function) => void,
   /**
-   * Tests whetherthe specified tag is currently selected.
+   * Tests whether the specified tag is currently selected.
    */
   isTagSelected: (tag: FilterTagType) => boolean,
+  /**
+   * Set selected tags with given filter tag array.
+   */
+  updateSelectedTags: (tags: FilterTagType[]) => void,
+  /**
+   * Return true if filter selection parameters presented in url.
+   */
+  hasTagFromQueryParams: () => Boolean,
   /**
    * Removes all selected tags.  All filters will be cleared.
    */
@@ -156,4 +163,8 @@ export type WithFilterByTagsProps = {
    * Callback to append data to the item when it registers itself.
    */
   getFilteredItemData?: (node: ContentNode<any>) => any,
+  /**
+   * Determines whether an item should display itself when no tags are selected.
+   */
+  showWhenNoTagSelected?: boolean,
 };

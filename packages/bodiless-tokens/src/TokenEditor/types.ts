@@ -13,10 +13,10 @@
  */
 
 import { ComponentType } from 'react';
-import { Token, DesignableComponentsProps } from '@bodiless/fclasses';
+import { HOC, DesignableComponentsProps } from '@bodiless/fclasses';
 
 /**
- * Defines a component which can be added to a Token Editor
+ * Defines a component which can be added to a HOC Editor
  */
 export type TokenEditorComponentDef = {
   /**
@@ -33,7 +33,7 @@ export type TokenEditorComponentDef = {
    * The keys are token names (used to generate checkboxes and to produce code
    * snippets).  The values are the tokens themselvs.
    */
-  tokens: { [key: string]: Token; };
+  tokens: { [key: string]: HOC };
 };
 
 export type TokenEditorComponents = {

@@ -12,10 +12,48 @@
  * limitations under the License.
  */
 
-import React, { useContext } from 'react';
+import React, { useContext, FC } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { shallow, mount, ComponentType } from 'enzyme';
-import { addPropsIf } from '../src';
+import { addPropsIf, addProps } from '../src';
+
+describe('addProps', () => {
+    type Props = {
+      foo: string,
+      bar: string,
+    };
+    const Component: FC<Props> = props => <div id="test-div" {...props} />;
+    type PropsToAdd = {
+      bar: string,
+    };
+
+    it('Accepts a function returning new props', () => {
+      const addPropsFunc = (p: Props): PropsToAdd => ({
+        bar: `${p.foo || ''}-bar`
+      });
+      const Test = addProps(addPropsFunc)(Component);
+      const wrapper = mount(<Test foo="foo" />);
+      expect(wrapper.find('div#test-div').prop('foo')).toBe('foo');
+      expect(wrapper.find('div#test-div').prop('bar')).toBe('foo-bar');
+    });
+
+    // eslint-disable-next-line jest/expect-expect
+    it('Makes added props optional', () => {
+      // @ts-expect-error
+      <Component />;
+      const Test = addProps({ foo: 'foo', bar: 'bar' })(Component);
+        <Test />;
+    });
+
+    // eslint-disable-next-line jest/expect-expect
+    it('Does not allow a function which expects props not defined for base component', () => {
+      const goodFunc = ({ bar }: { bar: string }) => ({ bar });
+      const badFunc = ({ baz }: { baz: string }) => ({ baz });
+      addProps(goodFunc)(Component);
+      // @ts-expect-error
+      addProps(badFunc)(Component);
+    });
+});
 
 describe('addPropsIf', () => {
   const Component = () => <></>;

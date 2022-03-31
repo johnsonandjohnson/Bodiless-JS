@@ -45,7 +45,7 @@ the following lines there:
 ```ts
 import {
   addClasses,
-  asToken,
+  flowHoc,
 } from '@bodiless/fclasses';
 import type {
   TokenDef
@@ -57,7 +57,7 @@ import {
   asBodilessLink,
 } from '@bodiless/components';
 
-export const asElementToken = (...attributes: string[]) => (...defs: TokenDef<any>[]) => asToken(
+export const asElementToken = (...attributes: string[]) => (...defs: TokenDef<any>[]) => flowHoc(
   ...defs,
   {
     categories: {
@@ -88,11 +88,11 @@ those we have just created:
 > they are implemented in Bodiless, please read the [introduction to
 > the Bodiless Design System](../../../Design/DesignSystem).
 
-The first thing to note in the code above is the use of `asToken`. This is a
+The first thing to note in the code above is the use of `flowHoc`. This is a
 composition utility provided by the Bodiless
 [FClasses](../../Architecture/FClasses) package. It is similar to the `flow`
 utility from Lodash: it accepts a list of higher order components and returns a
-new higher order component which composes them. However, `asToken` adds some
+new higher order component which composes them. However, `flowHoc` adds some
 additional functionality. In this example, we use it to specify
 *metadata* which should attached to the resulting token.
 
@@ -103,7 +103,7 @@ This metadata is useful for several reasons:
 - It allows *fitering* of tokens (we'll get to this in a later tutorial).
 
 To attach metadata to a token, you simply provide an object as one of the
-arguments to `asToken`.  This should have a `categories` key, which is itself
+arguments to `flowHoc`.  This should have a `categories` key, which is itself
 consists of any number of facets, each of which is an array of terms.
 
 It's up to you how you want to classify your tokens -- Bodiless
@@ -152,7 +152,7 @@ Now let's move another "behavioral" token to the site level.
     Bold: asBold,
     Italic: asItalic,
     Underline: asUnderline,
-    Link: asToken(withLinkStyles, withLinkEditor()),
+    Link: flowHoc(withLinkStyles, withLinkEditor()),
   };
   ```
 
@@ -226,7 +226,7 @@ fixed on each page.
       asEditable('title', 'Page Title'),
     );
 
-    export const asPrimaryHeader = asToken(
+    export const asPrimaryHeader = flowHoc(
       withPrimaryHeaderEditor,
       withPrimaryHeaderStyles,
     );
@@ -419,7 +419,7 @@ to make it more flexible and reusable.
     
 1. Next, let's pass in some HOC's via `withDesign` to make our component editable.
    ```ts
-   export const asCaptionedImageToken = (...attributes: string[]) => (...defs: TokenDef<any>[]) => asToken(
+   export const asCaptionedImageToken = (...attributes: string[]) => (...defs: TokenDef<any>[]) => flowHoc(
      ...defs,
      {
        categories: {
@@ -487,7 +487,7 @@ to make it more flexible and reusable.
 1. Finally, lets combine these together and export. 
 
     ```ts
-    const asCaptionedImage = asToken(
+    const asCaptionedImage = flowHoc(
       withCaptionedImageEditors,
       withCaptionedImageStyles,
     );
@@ -528,7 +528,7 @@ to make it more flexible and reusable.
     import { asBodilessImage } from '@bodiless/components-ui';
     import { withNode } from '@bodiless/core';
     import {
-      Img, Section, Div, addClasses, designable, asToken, withDesign, HOC
+      Img, Section, Div, addClasses, designable, flowHoc, withDesign, HOC
     } from '@bodiless/fclasses';
     import type {
       StylableProps, DesignableComponentsProps, TokenDef
@@ -549,9 +549,9 @@ our design calls for a page header block with image and a header text.
    import { CaptionedImage } from '../Gallery/CaptionedImage';
    import { withPrimaryHeaderStyles } from '../Element';
 
-   export const asPageHeader = asToken(
+   export const asPageHeader = flowHoc(
      withDesign({
-       Body: asToken(
+       Body: flowHoc(
          startWith(H1),
          withPrimaryHeaderStyles,
        ),
@@ -599,7 +599,7 @@ our design calls for a page header block with image and a header text.
 
     1. Replace.
        ```ts
-       const PageHeader = asToken(
+       const PageHeader = flowHoc(
          withDesign({
            Body: replaceWith(PrimaryHeader),
          }),
@@ -621,7 +621,7 @@ our design calls for a page header block with image and a header text.
        const withBlueBody = withDesign({
          Body: addClasses('text-blue'),
        });
-       const BluePageHeader = asToken(
+       const BluePageHeader = flowHoc(
          withBlueBody,
          asPageHeader,
        )(CaptionedImage);
@@ -633,17 +633,17 @@ our design calls for a page header block with image and a header text.
        *recomposes* the original and is designed to apply to the clean version.
 
        ```ts
-       const asPageHeader = asToken({
+       const asPageHeader = flowHoc({
          withDesign({
            Body: asPrimaryHeader,
-           Image: asToken(
+           Image: flowHoc(
              withCaptionedImageImageEditor,
              withCaptionedImageImageStyles,
            ),
          }),
        });
        ...
-       const BluePageHeader = asToken(
+       const BluePageHeader = flowHoc(
          withBlueBody,
          asPageHeader,
        )(CaptionedImage);
@@ -662,17 +662,17 @@ our design calls for a page header block with image and a header text.
        import { withTokenFilter } from '@bodiless/fclasses';
 
        const asPageHeader = withDesign({
-         Body: asToken(
+         Body: flowHoc(
            withTokenFilter((t: Token) => !t.categories.Attribute.includes('Editor')),
            asPrimaryHeader,
          ),
        });
        ...
-       const PageHeader = asToken(
+       const PageHeader = flowHoc(
          asPageHeader,
        )(CaptionedImage);
   
-       const CustomPageHeader = asToken(
+       const CustomPageHeader = flowHoc(
          withBlueBody,
          asPageHeader,
        )(CaptionedImage);
@@ -724,10 +724,10 @@ this can easily be achieved.
     import {
       withDesign,
       addClasses,
-      asToken,
+      flowHoc,
     } from '@bodiless/fclasses';
   
-    export const withGalleryDesign = (...attributes: string[]) => (design: Design<GalleryComponents>) => asToken(
+    export const withGalleryDesign = (...attributes: string[]) => (design: Design<GalleryComponents>) => flowHoc(
       withDesign(design),
       categories: {
         Component: ['Gallery'],

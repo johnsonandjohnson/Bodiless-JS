@@ -50,6 +50,7 @@ const mergeConfigs = (
     ...siteConfig,
     // purge setting
     purge: [
+      './src/**/!(*.d).{ts,js,jsx,tsx}',
       ...flatten(merge(packageConfigs).map((config: TailwindConfig) => config.purge)),
       ...(siteConfig.purge ? siteConfig.purge : []),
     ],

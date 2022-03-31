@@ -16,7 +16,7 @@ import React, {
   createContext, useRef, useContext, MutableRefObject, FC,
 } from 'react';
 import { useFormState, useFormApi, Scope } from 'informed';
-import { Token } from '@bodiless/fclasses';
+import { HOC } from '@bodiless/fclasses';
 import { ContextMenuForm, FormBodyProps, FormBodyRenderer } from './contextMenuForm';
 import type { ContextMenuFormProps } from './Types/ContextMenuTypes';
 import type { MenuOptionsDefinition } from './Types/PageContextProviderTypes';
@@ -51,6 +51,7 @@ type SnippetRegister<D> = (snippet: Snippet<D>) => void;
 
 type FormProps<D> = ContextMenuFormProps & {
   snippets: Snippet<D>[],
+  hasSubmit?: boolean,
 };
 
 /**
@@ -132,7 +133,13 @@ const createMenuOptionDefinition = <P extends object>(def$: MenuOptionsDefinitio
     const baseOptions = useMenuOptionsBase(props) || [];
     const [compoundFormOption, ...otherOptions] = baseOptions;
     const snippets = useContext(SnippetContext);
-    const render = (p: ContextMenuFormProps) => <Form {...p} snippets={snippets!.current} />;
+    const render = (p: ContextMenuFormProps) => (
+      <Form
+        {...p}
+        snippets={snippets!.current}
+        hasSubmit={def?.hasSubmit}
+      />
+    );
     return [
       {
         ...compoundFormOption,
@@ -157,7 +164,7 @@ const createMenuOptionDefinition = <P extends object>(def$: MenuOptionsDefinitio
  */
 const withCompoundForm = <P extends object>(
   def$: MenuOptionsDefinition$<P>,
-): Token => Component => {
+): HOC => Component => {
     const useMenuOptionDefinition = createMenuOptionDefinition(def$);
     const ComponentWithButton = withMenuOptions(useMenuOptionDefinition)(Component);
 

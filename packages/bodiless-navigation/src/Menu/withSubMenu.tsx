@@ -14,7 +14,7 @@
 
 import flow from 'lodash/flow';
 import {
-  Token, HOC, Design, withDesign, asToken, withFinalDesign, flowIf,
+  HOC, Design, withDesign, flowHoc, withFinalDesign, flowIf,
 } from '@bodiless/fclasses';
 import {
   asStylableSubList, asSubList, withDeleteNodeOnUnwrap,
@@ -34,7 +34,7 @@ import {
  * @param useOverrides optional hook returning overrides for the submenu button.
  */
 const asMenuSubList = (
-  withTitleDesign: HOC | Token,
+  withTitleDesign: HOC | HOC,
   useOverrides: UseListOverrides = () => ({}),
 ) => flow(
   asSubList((props) => ({ groupLabel: 'Sub-Menu Item', ...useOverrides(props) })),
@@ -62,9 +62,9 @@ const withSubMenuDesign = (design: Design<any>) => withDesign({
  * @param withTitleDesign optional token which will be applied to the sublist title.
  *
  */
-const withListSubMenu = (withTitleDesign?: HOC | Token) => withSubMenuDesign({
+const withListSubMenu = (withTitleDesign?: HOC | HOC) => withSubMenuDesign({
   List: asMenuSubList(
-    asToken(asMenuTitle, withTitleDesign),
+    flowHoc(asMenuTitle, withTitleDesign),
   ),
 });
 
@@ -74,9 +74,9 @@ const withListSubMenu = (withTitleDesign?: HOC | Token) => withSubMenuDesign({
  * @param withTitleDesign optional token which will be applied to the sublist title.
  *
  */
-const withCardsSubMenu = (withTitleDesign?: HOC | Token) => withSubMenuDesign({
+const withCardsSubMenu = (withTitleDesign?: HOC | HOC) => withSubMenuDesign({
   Cards: asMenuSubList(
-    asToken(asMenuCard, withTitleDesign),
+    flowHoc(asMenuCard, withTitleDesign),
   ),
 });
 
@@ -86,14 +86,14 @@ const withCardsSubMenu = (withTitleDesign?: HOC | Token) => withSubMenuDesign({
  * @param withTitleDesign optional token which will be applied to the sublist title.
  *
  */
-const withColumnSubMenu = (withTitleDesign?: HOC | Token) => withSubMenuDesign({
-  Columns: asToken(
+const withColumnSubMenu = (withTitleDesign?: HOC | HOC) => withSubMenuDesign({
+  Columns: flowHoc(
     asMenuSubList(
-      asToken(asMenuTitle, withTitleDesign),
+      flowHoc(asMenuTitle, withTitleDesign),
     ),
     withSubLists(1)(
       asMenuSubList(
-        asToken(asMenuTitle, withTitleDesign),
+        flowHoc(asMenuTitle, withTitleDesign),
         () => ({ groupLabel: 'Column Sub-Menu Item' }),
       ),
     ),

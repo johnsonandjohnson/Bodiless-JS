@@ -19,7 +19,7 @@ import React, {
   useState,
 } from 'react';
 import { PageContextProvider, useEditContext, useUUID } from '@bodiless/core';
-import { Token } from '@bodiless/fclasses';
+import { HOC } from '@bodiless/fclasses';
 
 type MenuContextType = {
   activeSubmenu?: string,
@@ -52,7 +52,7 @@ const MenuContextProvider: FC = ({ children }) => {
  * It stores `activeSubmenu` along with `setActiveSubmenu` setter.
  * Note that `activeSubmenu` is a string and corresponds to the top menu item node id.
  */
-const withMenuContext: Token = Component => props => (
+const withMenuContext: HOC = Component => props => (
   <MenuContextProvider>
     <Component {...props} />
   </MenuContextProvider>
@@ -62,7 +62,7 @@ const withMenuContext: Token = Component => props => (
  * HOC that wrapps component in PageContextProvider with type="menu" and unique id.
  * Used by useIsMenuOpen() to determine if menu context is active.
  */
-const withMenuEditContext: Token = Component => props => (
+const withMenuEditContext: HOC = Component => props => (
   <PageContextProvider type="menu" name={`menu-${useUUID()}`} id={`menu-${useUUID()}`}>
     <Component {...props} />
   </PageContextProvider>

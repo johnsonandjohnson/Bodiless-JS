@@ -12,11 +12,9 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
-import { withoutProps, asToken, HOC } from '@bodiless/fclasses';
-import { applyChameleonDesign, useChameleonContext } from './withChameleonContext';
-import { ChameleonProps } from './types';
-import { ComponentType } from 'enzyme';
+import React, { FC, ComponentType } from 'react';
+import { withoutProps, flowHoc, HOC } from '@bodiless/fclasses';
+import { useChameleonContext } from './withChameleonContext';
 
 /**
  * Applies the appropriate design to the wrapped component depending on the
@@ -33,7 +31,7 @@ import { ComponentType } from 'enzyme';
  *     Disabled: flow(replaceWith('span'), withoutProps('href'), withTitle('Disabled'))
  *   }),
  *   withChameleonContext('link-chameleon'),
- *   withChameleonComponenFormConrols,
+ *   withChameleonComponentFormControls,
  *   asBodilessLink('link')
  *   applyChameleon,
  * )('a');
@@ -45,15 +43,14 @@ import { ComponentType } from 'enzyme';
  * @return The wrapped component enhanced by the appropriate HOC's from the design.
  */
 const applyChameleon: HOC = Component => {
-  const Chameleon: FC<Pick<ChameleonProps, 'components'>> = props => {
-    const { activeComponent } = useChameleonContext();
-    const { components, ...rest } = props;
-    const ActiveComponent = components[activeComponent];
-    return <ActiveComponent {...rest} />;
+  const Chameleon: FC<any> = props => {
+    const { apply, activeComponent } = useChameleonContext();
+    // Memoize the component so we don't recreate it on every render.
+    const ActiveComponent = React.useMemo(() => apply(Component), [activeComponent]);
+    return <ActiveComponent {...props} />;
   };
-  return asToken(
+  return flowHoc(
     withoutProps('design'),
-    applyChameleonDesign(Component),
   )(Chameleon) as ComponentType<any>;
 };
 

@@ -18,10 +18,10 @@ jobs:
           fetch-depth: 0
       # install a specific version of Node using
       # https://github.com/actions/setup-node
-      - name: Use Node.js v16.9
+      - name: Use Node.js v16.13
         uses: actions/setup-node@v1
         with:
-          node-version: 16.9
+          node-version: 16.13
       # just so we learn about available environment variables GitHub provides
       - name: Print CI env variables
         run: |
@@ -45,8 +45,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
-        run: npm run setup
+      - name: Check dependency sync
+        run: npm run sync:check
+      
+      - name: Build packages
+        run: npm run build:packages
 
       - name: Lint
         run: npm run lint
@@ -57,6 +60,7 @@ jobs:
       - name: Test
         run: npm run test --quiet --colors
 
+      # Temp using monorepo since standalone is breaking cypress tests.
       - name: Cypress tests
-        run: |
-          npm run test:ci
+        run: npm run test:monorepo
+        # run: npm run test:ci

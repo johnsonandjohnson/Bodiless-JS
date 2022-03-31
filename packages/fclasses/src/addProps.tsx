@@ -11,28 +11,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { ComponentType } from 'react';
-import type { Token, Injector } from './types';
-import { Condition } from './hoc-util';
+
+import React, { ComponentType, FC, Fragment as BaseFragment } from 'react';
+import pick from 'lodash/pick';
+import omit from 'lodash/omit';
+import type { HOC, Condition, Injector } from './types';
 
 type NotAFunction = { [key: string]: any, bind?: never, call?: never };
-
-/**
- * Creates an HOC that injects the specified props to the base component.
- *
- * Any props passed to the resulting component will take precedence
- * over those specified here.
- *
- * @param propsToAdd
- * Object containing props and values which will be passed to the base component.
- *
- * @return
- * A component which renders the base component with the added props.
- */
-const addProps = <P extends object>(propsToAdd: P): Injector<Partial<P>> => Component => {
-  const AddProps = (props: any) => <Component {...propsToAdd} {...props} />;
-  return AddProps;
-};
 
 /**
  * HOC that adds props conditionally based on value returned by hook.
@@ -45,12 +30,12 @@ const addProps = <P extends object>(propsToAdd: P): Injector<Partial<P>> => Comp
  *
  * @see addProps
  */
-export const addPropsIf = <A extends object>(
-  conditionHook: Condition<A>,
+export const addPropsIf = <B extends object>(
+  conditionHook: Condition<B>,
 ) => <I extends NotAFunction>(
-    propsToAdd: I | ((props: A) => I),
-  ): Token<I, A, I> => Component => {
-      const AddPropsIf: ComponentType<any> = (props: A) => {
+    propsToAdd: I | ((props: B) => I),
+  ): Injector<I, B> => Component => {
+      const AddPropsIf: ComponentType<any> = (props: B) => {
         if (!conditionHook(props)) return <Component {...props as any} />;
         const propsToAdd$ = typeof propsToAdd === 'function' ? propsToAdd(props) : propsToAdd;
         const finalProps: any = { ...propsToAdd$, ...props };
@@ -59,4 +44,92 @@ export const addPropsIf = <A extends object>(
       return AddPropsIf;
     };
 
-export default addProps;
+/**
+ * Creates an HOC that injects the specified props to the base component.
+ *
+ * Any props passed to the resulting component will take precedence
+ * over those specified here.
+ *
+ * @param propsToAdd
+ * Object containing props and values which will be passed to the base component,
+ * or a function which recevies the original props and returns such an object.
+ *
+ * @return
+ * A component which renders the base component with the added props.
+ *
+ * @example
+ * ```
+ * const DivWithId = addProps({ id: 'Foo' })('div');
+ * ```
+ */
+export const addProps = <B extends object, I extends NotAFunction>(
+  propsToAdd: I | ((props: B) => I)
+) => addPropsIf<B>(() => true)<I>(propsToAdd);
+
+/*
+ * Creates an HOC which strips all but the specified props.
+ *
+ * @param keys A list of the prop-names to keep.
+ *
+ * @return An HOC which will strip all but the specified props.
+ */
+export const withOnlyProps = <Q extends object>(...keys: string[]) => (
+  <P extends object>(Component: ComponentType<P> | string) => {
+    const WithOnlyProps: FC<P & Q> = props => <Component {...pick(props, keys) as P} />;
+    return WithOnlyProps;
+  }
+);
+
+/**
+ * Alias for `removeProps`
+ *
+ * @see removeProps
+ */
+export const withoutProps = <A extends object>(
+  keys: (keyof A)|(keyof A)[], ...restKeys: (keyof A)[]
+):HOC<{}, Partial<A>> => Component => {
+    const keys$ = typeof keys === 'string' ? [keys, ...restKeys] : keys;
+    const WithoutProps = (props: any) => <Component {...omit(props, keys$) as any} />;
+    return WithoutProps;
+  };
+
+/**
+ * Removes the specified props before rendering the wrapped component.
+ *
+ * @param
+ * ...keys The names of the props to remove.
+ *
+ * @return
+ * An HOC which accepts a component and returns another which accepts the
+ * specified props and removes them before rendering.
+ *
+ * Note this expects a type parameter specifying the props which will be
+ * removed. For example
+ * ```
+ * type Foo = {
+ *   A: string,
+ * };
+ * type Bar = {
+ *   B: string,
+ *   C: String,
+ * };
+ * const F:FC<Foo> = () => <></>;
+ * const G = withoutProps('B', 'C')(F);
+ *   // ComponentWithMeta<Pick<Foo, "A"> & Partial<{ B: any } & { C: any }>>
+ * const H = withoutProps<Bar>('B', 'C')(F); // ComponentWithMeta<Pick<Foo, "A"> & Bar>
+ * const I = withoutProps<Bar>('B', 'D')(F); // expected type error: D not in keyof Bar)
+ * const J = withoutProps<Bar>('X')(F); // expected type error (X not in keyof Bar)
+ * ```
+ */
+export const removeProps = withoutProps;
+
+/**
+ * Alias for addProps
+ *
+ * @see addProps
+ */
+export const withProps = addProps;
+
+export const withPropsIf = addPropsIf;
+
+export const Fragment = withOnlyProps('key', 'children')(BaseFragment);

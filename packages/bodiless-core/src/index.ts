@@ -13,6 +13,7 @@
  */
 
 import { ComponentType } from 'react';
+import { configure } from 'mobx';
 import PageContextProvider, { withMenuOptions, useRegisterMenuOptions } from './PageContextProvider';
 import PageEditContext from './PageEditContext';
 import asStatic from './asStatic';
@@ -83,8 +84,16 @@ import {
   saveToSessionStorage,
 } from './SessionStorage';
 
+configure({
+  enforceActions: 'never',
+});
+
 export * from './components';
 export * from './Contentful';
+export * from './Store';
+export * from './BackendClient';
+export * from './Git';
+
 export {
   asBodilessComponent,
   withBodilessData,

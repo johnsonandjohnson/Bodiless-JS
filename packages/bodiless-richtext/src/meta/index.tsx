@@ -53,4 +53,6 @@ export const withAlignJustifyMeta = flow(asBlock, withButton('format_align_justi
 export const withHeader1Meta = flow(withHeader1Deserializer, asBlock, withKey('mod+1'), withButton('looks_one'));
 export const withHeader2Meta = flow(withHeader2Deserializer, asBlock, withKey('mod+2'), withButton('looks_two'));
 export const withHeader3Meta = flow(withHeader3Deserializer, asBlock, withKey('mod+3'), withButton('looks_3'));
+export const withHeader4Meta = flow(withHeader3Deserializer, asBlock, withKey('mod+4'), withButton('looks_4'));
+export const withHeader5Meta = flow(withHeader3Deserializer, asBlock, withKey('mod+5'), withButton('looks_5'));
 export const withImageMeta = flow(asVoid, asMark, withId('image'), withButton('image'));

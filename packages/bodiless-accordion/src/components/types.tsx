@@ -41,6 +41,8 @@ export type AccordionTitleComponents = {
   Wrapper: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
   Label: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
   Icon: ComponentType<StylableProps & HTMLProps<HTMLSpanElement>>,
+  OpenIcon: ComponentType<any>,
+  CloseIcon: ComponentType<any>,
 };
 
 export type AccordionBodyComponents = {

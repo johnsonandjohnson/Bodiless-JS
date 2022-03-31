@@ -4,6 +4,7 @@
   // By default this extension will only trigger for .js files, but not for .ts and .tsx.
   // Use eslint.validate to allow extension to process .ts and .tsx files.
   "typescript.tsdk": "./node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
   "eslint.alwaysShowStatus": true,
   "eslint.provideLintTask": false,
   "eslint.packageManager": "npm",
@@ -32,14 +33,5 @@
   ],
   "editor.rulers": [
     100
-  ],
-  "spellright.language": [
-    "en"
-  ],
-  "spellright.documentTypes": [
-    "markdown",
-    "md",
-    "latex",
-    "plaintext"
   ],
 }

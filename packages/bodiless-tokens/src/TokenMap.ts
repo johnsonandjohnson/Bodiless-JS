@@ -12,19 +12,19 @@
  * limitations under the License.
  */
 
-import { Token, asToken } from '@bodiless/fclasses';
+import { HOC, flowHoc } from '@bodiless/fclasses';
 
 export type Tokens = {
-  [key: string]: Token,
+  [key: string]: HOC,
 };
 
 class TokenMap<P> {
-  protected map = new Map<string, Token>();
+  protected map = new Map<string, HOC>();
 
-  protected groupsFor: (token?: Token) => string[];
+  protected groupsFor: (token?: HOC) => string[];
 
-  constructor(groupsFor?: (token?: Token) => string[]) {
-    this.groupsFor = groupsFor || ((token?: Token) => token?.meta?.categories?.Category || []);
+  constructor(groupsFor?: (token?: HOC) => string[]) {
+    this.groupsFor = groupsFor || ((token?: HOC) => token?.meta?.categories?.Category || []);
   }
 
   get names() {
@@ -51,7 +51,7 @@ class TokenMap<P> {
     }, [] as string[]);
   }
 
-  set(name: string, token: Token) {
+  set(name: string, token: HOC) {
     this.map.set(name, token);
   }
 
@@ -70,8 +70,8 @@ class TokenMap<P> {
       const hoc = this.map.get(name);
       if (!hoc) return [...hocs];
       return [...hocs, hoc];
-    }, [] as Token[]);
-    return asToken(
+    }, [] as HOC[]);
+    return flowHoc(
       {}, // see https://github.com/microsoft/TypeScript/issues/28010
       ...tokenHOCs,
     );

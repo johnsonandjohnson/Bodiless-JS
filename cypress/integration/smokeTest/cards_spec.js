@@ -86,9 +86,10 @@ describe('Card testing', function () {
     cy.xpath(imageIconXpath)
       .click();
     const imagePath = `${imagesFolderPath}/${imageNameOriginal}`;
-    cy.fixture(imagePath).then(fileContent => {
-      cy.get('input[type=file]').upload({ fileContent, fileName: imageNameOriginal, mimeType: "image/jpeg" });
-    })
+    cy.get('input[type="file"]').attachFile(
+      { filePath: imagePath, mimeType: 'image/jpeg'},
+      { subjectType: 'drag-n-drop' },
+    );
     cy.wait(3000);
     cy.xpath(checkmarkIconImageFormXpath)
       .click();
@@ -97,7 +98,7 @@ describe('Card testing', function () {
 
   it('cards: 6 - filling an image alt text', () => {
     cy.xpath(imagePlaceholderXpath)
-      .click();
+      .click({ force: true });
     cy.xpath(imageIconXpath)
       .click();
     cy.xpath(altFieldXpath).clear().type(imageAltText);
@@ -185,15 +186,16 @@ describe('Card testing', function () {
 
   it('cards: 13 - uploading a new image and editing an image alt text', () => {
     cy.xpath(imagePlaceholderXpath)
-      .click();
+      .click({ force: true });
     cy.xpath(imageIconXpath)
       .click();
     cy.xpath(altFieldXpath)
       .type(editedPostfix);
     const imagePath = `${imagesFolderPath}/${imageNameUpdated}`;
-    cy.fixture(imagePath).then(fileContent => {
-      cy.get('input[type=file]').upload({ fileContent, fileName: imageNameUpdated, mimeType: "image/jpeg" });
-    })
+    cy.get('input[type=file]').attachFile(
+      { filePath: imagePath, mimeType: 'image/jpeg' },
+      { subjectType: 'drag-n-drop' },
+    );
     cy.wait(3000);
     cy.xpath(checkmarkIconImageFormXpath)
       .click();
