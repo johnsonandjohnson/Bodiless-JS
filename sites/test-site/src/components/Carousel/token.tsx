@@ -219,6 +219,12 @@ const asAccessibleCarousel = flowHoc(
   }),
 );
 
+const withFourSlides = flowHoc(
+  withDesign({
+    Wrapper: addProps({ visibleSlides: 4.2 }),
+  }),
+);
+
 export {
   withImageSlide,
   withAutoPlay,
@@ -229,4 +235,5 @@ export {
   withAutoPlayButtonStyles,
   withChameleonSlide,
   asAccessibleCarousel,
+  withFourSlides,
 };

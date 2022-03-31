@@ -34,6 +34,7 @@ import {
   withAutoPlay,
   withAutoPlayButtonStyles,
   asAccessibleCarousel,
+  withFourSlides,
 } from './token';
 
 export const CAROUSEL_NODE_KEY = 'slides';
@@ -79,10 +80,19 @@ const ChameleonCarousel = flowHoc(
   withChameleonSlide,
 )(CarouselClean);
 
+const VitalCarousel = flowHoc(
+  asEditableCarousel(CAROUSEL_NODE_KEY),
+  withCarouselDots(CAROUSEL_NODE_KEY),
+  asAccessibleCarousel,
+  withImageSlide,
+  withFourSlides,
+)(CarouselClean);
+
 export * from './token';
 export {
   Carousel,
   ChameleonCarousel,
   ThumbnailCarousel,
   ThumbnailCarouselDifferentImages,
+  VitalCarousel,
 };

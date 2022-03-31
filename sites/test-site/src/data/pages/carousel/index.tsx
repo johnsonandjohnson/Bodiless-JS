@@ -37,6 +37,7 @@ import {
   withAutoPlayButtonStyles,
   withAutoPlay,
   asAccessibleCarousel,
+  VitalCarousel,
 } from '../../../components/Carousel';
 import { asLtrPage } from '../../../components/Page';
 
@@ -82,7 +83,7 @@ const NavAndAutoplayCarousel = flowHoc(
   asAccessibleCarousel,
 )(Carousel);
 
-const DotsAndAutoplayCarousel = flowHoc(
+const DotsAndAutoplayCarousel = asToken(
   withCarouselDots(CAROUSEL_NODE_KEY),
   withDotStyles,
   withAutoPlay,
@@ -152,13 +153,17 @@ const CarouselExamples = () => (
     <ChameleonCarousel nodeKey="chameleon" />
     <SubTitle>Thumbnail Carousel -- Shared Image for both Slider and Thumbnail</SubTitle>
     <div className="w-full md:w-1/2">
-    <ThumbnailCarousel nodeKey="thumbnail" />
+      <ThumbnailCarousel nodeKey="thumbnail" />
     </div>
     <SubTitle>Thumbnail Carousel -- Two sets of slide with Different Image for Thumbnail</SubTitle>
     <p>Limitation: For each Main Slide added, add corresponding Thumbnail Image.</p>
     <div className="w-full md:w-1/2">
-    <ThumbnailCarouselDifferentImages nodeKey="thumbnaildifferent" />
+      <ThumbnailCarouselDifferentImages nodeKey="thumbnaildifferent" />
     </div>
+    <SubTitle>
+      Vital Carousel
+    </SubTitle>
+    <VitalCarousel nodeKey="vital" />
   </>
 );
 
@@ -171,12 +176,12 @@ const CarouselPage: FC<any> = props => (
 );
 
 export const query = graphql`
-  query($slug: String!) {
-    ...PageQuery
-    ...SiteQuery
-    ...DefaultContentQuery
-  }
-`;
+   query($slug: String!) {
+     ...PageQuery
+     ...SiteQuery
+     ...DefaultContentQuery
+   }
+ `;
 
 export default CarouselPage;
 export { CarouselExamples };
