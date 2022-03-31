@@ -17,6 +17,8 @@ const EnzymeAdapter = require('@wojtekmaj/enzyme-adapter-react-17');
 
 enzyme.configure({ adapter: new EnzymeAdapter() });
 
-global.window.getSelection = () => ({
-  removeAllRanges: () => {},
-});
+if (global.window && global.window.getSelection) {
+  global.window.getSelection = () => ({
+    removeAllRanges: () => {},
+  });
+}
