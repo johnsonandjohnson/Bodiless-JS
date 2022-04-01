@@ -30,7 +30,7 @@ hooks:
         set -e
         npm run bootstrap
         npm run build:packages
-        npm run build -- --scope @sites/test-site
+        npm run build -- --scope @sites/$APP_SITE_NAME
         #robots.txt preparation
         export PSH_URL_REPLACER_SRC_FILE=$PLATFORM_DOCUMENT_ROOT/robots.txt
         export PSH_URL_REPLACER_TMP_FILE=$PLATFORM_DOCUMENT_ROOT/../static/robots_pshtmp.txt
@@ -42,7 +42,7 @@ hooks:
         export PSH_URL_REPLACER_TARGET_FILE=$APP_VOLUME/sitemap.xml
         node $PLATFORM_APP_DIR/packages/bodiless-psh/lib/psh-url-replacer.js build
         # ssi preparation
-        export SSI_CONF_PATH=sites/test-site/ssi/ssi_conf.json
+        export SSI_CONF_PATH=sites/$APP_SITE_NAME/ssi/ssi_conf.json
         export DOCUMENT_ROOT=$PLATFORM_DOCUMENT_ROOT
         export VOLUME_DIR=$APP_VOLUME
         node $PLATFORM_APP_DIR/packages/bodiless-psh/lib/generate-ssi-files.js build    
@@ -65,9 +65,9 @@ hooks:
         export PSH_URL_REPLACER_PROD_ENV=$APP_PROD_ENV
         node $PLATFORM_APP_DIR/packages/bodiless-psh/lib/psh-url-replacer.js deploy
         # ssi files generation
-        export SSI_CONF_PATH=sites/test-site/ssi/ssi_conf.json
+        export SSI_CONF_PATH=sites/$APP_SITE_NAME/ssi/ssi_conf.json
         export VOLUME_DIR=$APP_VOLUME
-        node $PLATFORM_APP_DIR/packages/bodiless-psh/lib/generate-ssi-files.js deploy       
+        node $PLATFORM_APP_DIR/packages/bodiless-psh/lib/generate-ssi-files.js deploy
 
 # The size of the persistent disk of the application (in MB).
 disk: 320
