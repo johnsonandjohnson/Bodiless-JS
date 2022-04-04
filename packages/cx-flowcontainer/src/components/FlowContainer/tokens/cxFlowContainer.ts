@@ -67,6 +67,15 @@ const WithFullWidthConstraint = asFluidToken({
 });
 
 /**
+ * Token which constrains to a single component.
+ */
+const WithSingleConstraint = asFluidToken({
+  Core: {
+    _: addProps({ maxComponents: 1, minComponents: 1 }),
+  },
+});
+
+/**
    * Token which constrains a flow container so that items are 1/3 width on tablet.
    */
 const WithTabletOneThirdConstraint = asFluidToken({
@@ -155,4 +164,5 @@ export default {
   AsFlowContainerItem,
   WithFullWidthConstraint,
   WithTabletOneThirdConstraint,
+  WithSingleConstraint,
 };

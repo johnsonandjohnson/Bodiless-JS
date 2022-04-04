@@ -42,7 +42,7 @@ const Default = asGenericTemplateToken({
     BottomContent: withNodeKey(GenericTemplateNodeKeys.BottomContent),
   },
   Spacing: {
-    TopWrapper: cxSpacing.WithSiteXLConstraint,
+    TopContent: cxSpacing.WithSiteXLConstraint,
     BreadcrumbWrapper: as(
       cxSpacing.WithSiteMargin,
       cxSpacing.WithSiteXLConstraint,

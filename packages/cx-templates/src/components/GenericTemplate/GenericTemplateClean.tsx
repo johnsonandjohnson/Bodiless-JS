@@ -38,12 +38,12 @@ const GenericTemplateBase = (props: BaseGenericTemplateProps) => {
   const { components: C, ...rest } = props;
   return (
     <C.PageWrapper {...rest}>
-      <C.TopWrapper>
-        <C.TopContent />
-      </C.TopWrapper>
       <C.BreadcrumbWrapper>
         <C.Breadcrumb />
       </C.BreadcrumbWrapper>
+      <C.TopWrapper>
+        <C.TopContent />
+      </C.TopWrapper>
       <C.ContentWrapper>
         <C.Content />
       </C.ContentWrapper>

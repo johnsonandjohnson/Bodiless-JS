@@ -28,7 +28,12 @@
     "@bodiless/fclasses": "^1.0.0-beta.1",
     "@bodiless/core": "^1.0.0-beta.1"
   },
+  "devDependencies": {
+    "cheerio": "1.0.0-rc.3",
+    "enzyme": "^3.9.0"
+  },
   "peerDependencies": {
-    "react": "^17.0.2"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }

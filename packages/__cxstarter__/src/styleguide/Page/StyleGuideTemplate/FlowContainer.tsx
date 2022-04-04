@@ -34,6 +34,12 @@ const FullFlowContainer = as(
   withNodeKey('fullwidthcontainer'),
 )(FlowContainerClean);
 
+const SingleContainer = as(
+  cxFlowContainer.Default,
+  cxFlowContainer.WithSingleConstraint,
+  withNodeKey('singlecontainer'),
+)(FlowContainerClean);
+
 const OneThirdContainer = as(
   cxFlowContainer.Default,
   cxFlowContainer.WithTabletOneThirdConstraint,
@@ -48,6 +54,8 @@ const ContentRegionContainer = as(
 const Examples = (props: any) => (
   <>
     <DefaultFlowContainer />
+    <hr />
+    <SingleContainer />
     <hr />
     <FullFlowContainer />
     <hr />
