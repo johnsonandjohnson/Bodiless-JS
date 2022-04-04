@@ -9,6 +9,8 @@
       },
       "assets": {
         "default.jpg": "./doc/assets/default.jpg",
+        "PageChooseTemplate.jpg": "./doc/assets/PageChooseTemplate.jpg",
+        "PageTemplateIcon.jpg": "./doc/assets/PageTemplateIcon.jpg",
         "pdp.jpg": "./doc/assets/pdp.jpg",
         "plp.jpg": "./doc/assets/plp.jpg"
       }
