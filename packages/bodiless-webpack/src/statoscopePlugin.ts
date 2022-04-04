@@ -22,7 +22,7 @@ export const createStatoscopePlugin = ({
 
   return new StatoscopeWebpackPlugin({
     saveReportTo: `${sitePath}/public/stats-[name]-[hash].html`,
-    saveStatsTo: `${sitePath}./public/stats-[name]-[hash].json`,
+    saveStatsTo: `${sitePath}/public/stats-[name]-[hash].json`,
     normalizeStats: true,
     additionalStats,
     statsOptions: {
