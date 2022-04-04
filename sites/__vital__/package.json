@@ -24,6 +24,7 @@
     "@bodiless/ui": "^1.0.0-beta.7",
     "@bodiless/vital-editors": "^1.0.0-beta.7",
     "@bodiless/vital-elements": "^1.0.0-beta.7",
+    "@bodiless/vital-flowcontainer": "^1.0.0-beta.7",
     "@bodiless/vital-link": "^1.0.0-beta.7",
     "@bodiless/vital-templates": "^1.0.0-beta.7",
     "@bodiless/webpack": "^1.0.0-beta.7",
