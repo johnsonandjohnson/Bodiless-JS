@@ -52,7 +52,6 @@ const withoutHydrationServerSide: WithoutHydrationFunction = (
 
 const withoutHydrationClientSide: WithoutHydrationFunction = ({
   onUpdate = null,
-  disableFallback = false,
   WrapperElement = DEFAULT_WRAPPER,
 } = {}) => <P,>(WrappedComponent: ComponentOrTag<P>) => {
   const WithoutHydration: FC<P & WithoutHydrationProps> = (props) => {
@@ -70,9 +69,7 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
         'data-no-hydrate'
       );
 
-      setShouldHydrate(
-        (!wasRenderedServerSide && !disableFallback) || forceHydration
-      );
+      setShouldHydrate(!wasRenderedServerSide || forceHydration);
     });
 
     useLayoutEffect(() => {
@@ -130,10 +127,6 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
  * options object to receive all props passed to the component, and its HTMLElement after it
  * renders. Using the component HTMLElement, you can update it however you want, but be aware that
  * this element will be out of React's scope, so hooks won't work inside the `onUpdate` function.
- *
- * You can also pass `disableFallback` as `true` in the options object to make this component
- * not render on the server side. While it will also not hydrate on the client side, you can use
- * `onUpdate` to access its props and modify its element afterwards.
  *
  * The given component will be wrapped in an HTML element that tells React whether to hydrate it
  * or not. By default, the given component will be wrapped in a `div`. You can change the wrapper

@@ -16,7 +16,6 @@ import { HOC } from '@bodiless/fclasses';
 
 type WithoutHydrationOptions = {
   onUpdate?: (props: Record<string, any>, element: HTMLElement | null) => void
-  disableFallback?: boolean,
   WrapperElement?: 'div'|'span',
 };
 

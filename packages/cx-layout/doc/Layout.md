@@ -49,8 +49,7 @@ becomes visible when the user visits the site and starts interacting with their 
 
 Provide the Shadowing function as defined in [Shadow](../CX_Elements/CX_Shadow).
 
-File to shadow:
-[`cxLayout.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-layout/src/components/Layout/tokens/cxLayout.ts)
+File to shadow: `./lib/shadow/cx-layout/{MyLayout}.js`
 
 ### Skip To Main Content Customization
 
