@@ -1,5 +1,5 @@
 /**
- * Copyright © 2022 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,21 +12,5 @@
  * limitations under the License.
  */
 
-import { Editors, EditorsMonoFont } from './Editors';
-import { Typography } from './Typography';
-import { Layout } from './Layout';
-import { Header } from './Header';
-import { Footer } from './Footer';
-import { Card } from './Card';
-import { _default } from './_default';
-
-export const __cxstarter__StyleGuideTemplate = {
-  _default,
-  Editors,
-  EditorsMonoFont,
-  Typography,
-  Layout,
-  Header,
-  Footer,
-  Card,
-};
+export * from './components/Card/Card';
+export * as vitalCard from './components/Card/tokens/Card.token';

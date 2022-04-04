@@ -60,6 +60,8 @@
       "@bodiless/cx-navigation/*": ["cx-navigation/src/*"],
       "@bodiless/cx-templates": ["cx-templates/src/"],
       "@bodiless/cx-templates/*": ["cx-templates/src/*"],      
+      "@bodiless/vital-card": ["vital-card/src/"],
+      "@bodiless/vital-card/*": ["vital-card/src/*"],
       "@bodiless/filtering": ["bodiless-filtering/src"],
       "@bodiless/filtering/*": ["bodiless-filtering/src/*"],
       "@bodiless/hydration": ["bodiless-hydration/src"],

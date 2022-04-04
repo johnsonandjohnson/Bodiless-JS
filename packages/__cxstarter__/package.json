@@ -42,6 +42,7 @@
     "@bodiless/fclasses": "^1.0.0-beta.1",
     "@bodiless/richtext": "^1.0.0-beta.1",
     "@bodiless/richtext-ui": "^1.0.0-beta.1",
+    "@bodiless/vital-card": "^1.0.0-beta.1",
     "lodash": "^4.17.19",
     "tailwindcss": "^2.0.2"
   }

@@ -12,21 +12,19 @@
  * limitations under the License.
  */
 
-import { Editors, EditorsMonoFont } from './Editors';
-import { Typography } from './Typography';
-import { Layout } from './Layout';
-import { Header } from './Header';
-import { Footer } from './Footer';
-import { Card } from './Card';
-import { _default } from './_default';
-
-export const __cxstarter__StyleGuideTemplate = {
-  _default,
-  Editors,
-  EditorsMonoFont,
-  Typography,
-  Layout,
-  Header,
-  Footer,
-  Card,
+module.exports = {
+  purge: [
+    './lib/**/!(*.d).{ts,js,jsx,tsx}',
+  ],
+  theme: {
+    extend: {
+    },
+  },
+  variants: {
+    flexDirection: ['responsive'],
+  },
+  corePlugins: {
+  },
+  plugins: [
+  ],
 };
