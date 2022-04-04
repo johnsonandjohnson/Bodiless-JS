@@ -38,7 +38,7 @@ const Foo = {
 };
 ```
 
-If combining multiple tokens, you can put them within `as()` or `flowHOC()`:
+If combining multiple tokens, you can put them within `as()` or `flowHoc()`:
 
 ```js
 import { cxColor, cxTextDecoration } from '@bodiless/cx-elements';
