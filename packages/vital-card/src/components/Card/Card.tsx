@@ -32,11 +32,16 @@ export type CardComponents = {
   ImageWrapper: ComponentType<StylableProps>,
   ImageLink: ComponentType<StylableProps>,
   Image: ComponentType<StylableProps>,
+  EyebrowWrapper: ComponentType<StylableProps>,
   Eyebrow: ComponentType<StylableProps>,
   ContentWrapper: ComponentType<StylableProps>,
+  TitleWrapper: ComponentType<StylableProps>,
   Title: ComponentType<StylableProps>,
+  DescriptionWrapper: ComponentType<StylableProps>,
   Description: ComponentType<StylableProps>,
+  RatingWrapper: ComponentType<StylableProps>,
   Rating: ComponentType<StylableProps>,
+  CTAWrapper: ComponentType<StylableProps>,
   CTA: ComponentType<StylableProps>,
 };
 const cardComponentStart: CardComponents = {
@@ -44,12 +49,17 @@ const cardComponentStart: CardComponents = {
   ImageWrapper: Fragment,
   ImageLink: Fragment,
   Image: Img,
+  EyebrowWrapper: Fragment,
   Eyebrow: Fragment,
   ContentWrapper: Fragment,
+  TitleWrapper: Fragment,
   Title: Fragment,
   Description: Fragment,
+  DescriptionWrapper: Fragment,
   Rating: Fragment,
+  RatingWrapper: Fragment,
   CTA: A,
+  CTAWrapper: A,
 };
 
 export type CardProps = DesignableProps<CardComponents> & HTMLProps<HTMLElement>;
@@ -62,9 +72,13 @@ const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
     Image,
     ImageLink,
     ContentWrapper,
+    TitleWrapper,
     Title,
+    DescriptionWrapper,
     Description,
+    RatingWrapper,
     Rating,
+    CTAWrapper,
     CTA,
   } = components;
 
@@ -76,10 +90,18 @@ const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
         </ImageLink>
       </ImageWrapper>
       <ContentWrapper>
-        <Title />
-        <Description />
-        <Rating />
-        <CTA />
+        <TitleWrapper>
+          <Title />
+        </TitleWrapper>
+        <DescriptionWrapper>
+          <Description />
+        </DescriptionWrapper>
+        <RatingWrapper>
+          <Rating />
+        </RatingWrapper>
+        <CTAWrapper>
+          <CTA />
+        </CTAWrapper>
       </ContentWrapper>
     </Wrapper>
   );

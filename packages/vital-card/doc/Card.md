@@ -1,9 +1,24 @@
-## Vital Card
+# Vital Card Component
 
-Use the card component to display information for a single object through an
+Vital card component displays information for a single object through an
 image,text or other media content allowing relevant quick actions to be
 triggered.
 
+The Vital Card package provides following Card variants for quick and easier site
+build:
+
+- Basic Card
+- Hero Card
+- [TBD]
+
+## Content Editor Details
+
+
+## Site Builder Details
+
+
+
+## Architectural Details
 
 
 
