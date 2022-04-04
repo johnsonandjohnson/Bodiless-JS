@@ -8,7 +8,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
 const fs = require('fs');
 const glob = require('glob');
-const { addTokenShadowPlugin } = require('@bodiless/webpack');
+const { addTokenShadowPlugin, addStatoscopePlugin } = require('@bodiless/webpack');
 const shadow = require('@bodiless/__cxstarter__/shadow');
 
 // Fix sourcemap issue
@@ -17,6 +17,18 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
   actions.setWebpackConfig(
     addTokenShadowPlugin({}, { resolvers: [shadow] })
   );
+  if (stage === 'build-javascript') {
+    const options = {
+      enabled: process.env.BODILESS_BUILD_STATS === '1',
+      sitePath: path.resolve('./'),
+      name: '__cxstarter__',
+      open: process.env.BODILESS_OPEN_STATS === '1' ? 'file' : false
+    };
+
+    actions.setWebpackConfig(
+      addStatoscopePlugin({}, options)
+    );
+  }
   if (stage === 'develop') {
     // When running test-site with local packages (via npm pack) we seem to get
     // multiple react instances, which causes this invalid hook call warning
