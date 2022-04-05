@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { createHash } from 'crypto';
+import MD5 from 'crypto-js/md5';
 import {
   addClasses, withDesign, HOC,
   addProps, flowHoc, startWith, Design,
@@ -36,7 +36,7 @@ import { TokenEditorComponentDef } from './types';
  */
 const useNodeKeyHash = () => {
   const { node } = useNode();
-  return createHash('md5').update(node.path.join('$')).digest('hex');
+  return MD5(node.path.join('$')).toString();
 };
 
 /**
