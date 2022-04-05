@@ -12,33 +12,6 @@
  * limitations under the License.
  */
 
-import {
-  replaceWith,
-  Fragment,
-  on,
-} from '@bodiless/fclasses';
-import { LayoutClean, cxLayout } from '@bodiless/cx-layout';
-import { asGenericTemplateToken } from '../GenericClean';
+import cxFlowContainer from './cxFlowContainer';
 
-const Default = asGenericTemplateToken({
-  Components: {
-    PageWrapper: on(LayoutClean)(cxLayout.Default),
-  },
-  Schema: {
-  },
-  SEO: {
-  },
-  Theme: {
-  },
-});
-
-const WithoutBreadcrumbs = asGenericTemplateToken({
-  Components: {
-    Breadcrumb: replaceWith(Fragment),
-  },
-});
-
-export const cxGenericTemplate = {
-  Default,
-  WithoutBreadcrumbs,
-};
+export default cxFlowContainer;

@@ -12,12 +12,15 @@
  * limitations under the License.
  */
 
-import { as } from '@bodiless/fclasses';
+import { as, Token, withShowDesignKeys } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
 import { asElementToken } from '@bodiless/cx-elements';
 import { asBodilessPage } from '../asBodilessPage';
 // import { cxGenericTemplate, GenericTemplateClean } from '../../Generic';
 // import { cxStyleGuideTemplate, StyleGuideTemplateClean } from '../../StyleGuideTemplate';
+
+// @todo token to GTM package when created
+const withGTMDesignKeys = withShowDesignKeys(true, 'layer-region');
 
 const Default = asElementToken({
   Core: {
@@ -43,10 +46,9 @@ const Default = asElementToken({
   // Layout: {
   //   _: withPageDimensionsContext({ breakpoints }),
   // },
-  // @todo add GTM
-  // Analytics: {
-  //   _: withGTMDesignKeys,
-  // },
+  Compose: {
+    _: as(withGTMDesignKeys as Token),
+  },
   Components: {
     // _default: on(GenericTemplateClean)(cxGenericTemplate.Default),
     // StyleGuide: on(StyleGuideTemplateClean)(cxStyleGuideTemplate.Default),

@@ -12,10 +12,18 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 
-export default () => (
-  <>
-    Placeholder home page
-  </>
-);
+export type GenericTemplateComponents = {
+  PageWrapper: ComponentOrTag<any>,
+  BreadcrumbWrapper: ComponentOrTag<any>,
+  Breadcrumb: ComponentOrTag<any>,
+  TopWrapper: ComponentOrTag<any>,
+  TopContent: ComponentOrTag<any>,
+  ContentWrapper: ComponentOrTag<any>,
+  Content: ComponentOrTag<any>,
+  BottomWrapper: ComponentOrTag<any>,
+  BottomContent: ComponentOrTag<any>,
+};
+
+export type BaseGenericTemplateProps = DesignableComponentsProps<GenericTemplateComponents>;
