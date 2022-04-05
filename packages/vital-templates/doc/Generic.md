@@ -21,8 +21,10 @@ available that are provided in the sections.
 This generic template is set up in the Vital Design System to be the default template provided to
 users.
 
-What template are provided with tokens can updating the Page component such as this which will set
-the `_default` page to use the `GenericTemplateClean` component and apply the default tokens to it.
+What template is provided to the user is set by tokens with the Page Component. For example, within
+the Page Component, we set the `_default` page to use the `GenericTemplateClean` component, and
+apply the default Generic Template tokens to it. This will give the Content Editor the Generic
+Template as the default template, and any new pages will default to Generic Template.
 
 ```js
 const Default = asFluidToken({

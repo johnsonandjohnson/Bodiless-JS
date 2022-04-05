@@ -1,6 +1,6 @@
 # Vital Flow Container Tokens
 
-The Vital Flow Container is just a passthrough, and uses the [Bodiless Flow
+The Vital Flow Container is a passthrough, and uses the [Bodiless Flow
 Container](/Components/FlowContainer/). The Vital Flow Container package does, however, provide some
 useful tokens that can be used for quick constraints on Flow Container. It also provides a token
 that provides the ability to do a `ContentRegion`, aka a nested Flow Container.
