@@ -15,6 +15,7 @@
     "@bodiless/cli": "^1.0.0-rc.29",
     "body-parser": "^1.18.3",
     "copyfiles": "^2.1.1",
+    "crypto-js": "^4.1.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "formidable": "^1.2.1",
@@ -32,6 +33,7 @@
   "author": "Dewen Li <dli94@its.jnj.com>",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@types/crypto-js": "4.1.1",
     "@types/supertest": "^2.0.8",
     "morgan": "^1.9.1",
     "morgan-body": "^2.4.8",

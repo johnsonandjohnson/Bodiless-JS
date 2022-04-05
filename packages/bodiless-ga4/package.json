@@ -36,10 +36,12 @@
     "@bodiless/layouts": "^1.0.0-rc.29",
     "@bodiless/search": "^1.0.0-rc.29",
     "common-tags": "^1.8.0",
+    "crypto-js": "^4.1.1",
     "lodash": "^4.17.19"
   },
   "devDependencies": {
-    "enzyme": "^3.9.0"
+    "enzyme": "^3.9.0",
+    "@types/crypto-js": "4.1.1"
   },
   "peerDependencies": {
     "react": "^17.0.2",

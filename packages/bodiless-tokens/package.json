@@ -37,10 +37,14 @@
     "@bodiless/fclasses": "^1.0.0-rc.29",
     "@bodiless/layouts": "^1.0.0-rc.29",
     "@bodiless/layouts-ui": "^1.0.0-rc.29",
+    "crypto-js": "^4.1.1",
     "informed": "^3.34.0",
     "lodash": "^4.17.19",
     "md5-hex": "^4.0.0",
     "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/crypto-js": "4.1.1"
   },
   "peerDependencies": {
     "mobx-react": "^7.2.1",

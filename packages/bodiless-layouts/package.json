@@ -42,6 +42,7 @@
     "@bodiless/core": "^1.0.0-rc.29",
     "@bodiless/fclasses": "^1.0.0-rc.29",
     "axios": "^0.21.0",
+    "crypto-js": "^4.1.1",
     "html2canvas": "^1.0.0-rc.3",
     "informed": "^3.34.0",
     "lodash": "^4.17.19",
@@ -53,6 +54,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
+    "@types/crypto-js": "4.1.1",
     "@types/rc-tooltip": "^3.7.1",
     "enzyme": "^3.9.0"
   }
