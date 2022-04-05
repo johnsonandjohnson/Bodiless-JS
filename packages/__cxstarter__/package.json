@@ -36,6 +36,8 @@
     "@bodiless/core": "^1.0.0-beta.1",
     "@bodiless/cx-editors": "^1.0.0-beta.1",
     "@bodiless/cx-elements": "^1.0.0-beta.1",
+    "@bodiless/cx-image": "^1.0.0-beta.1",
+    "@bodiless/cx-flowcontainer": "^1.0.0-beta.1",
     "@bodiless/cx-layout": "^1.0.0-beta.1",
     "@bodiless/cx-link": "^1.0.0-beta.1",
     "@bodiless/cx-templates": "^1.0.0-beta.1",

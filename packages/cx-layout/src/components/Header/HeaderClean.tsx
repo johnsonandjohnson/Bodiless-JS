@@ -14,7 +14,11 @@
 
 import React, { FC } from 'react';
 import {
-  Div, Fragment, A, designable
+  A,
+  Div,
+  Fragment,
+  Header,
+  designable,
 } from '@bodiless/fclasses';
 import { withoutHydration } from '@bodiless/hydration';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
@@ -28,7 +32,7 @@ import { SearchTogglerClean, DesktopSearchClean } from '../Search';
 import type { HeaderComponents, HeaderProps } from './types';
 
 const headerComponents: HeaderComponents = {
-  Wrapper: Div,
+  Wrapper: Header,
   Container: Div,
   MenuContainer: Div,
   MenuTogglerWrapper: Div,

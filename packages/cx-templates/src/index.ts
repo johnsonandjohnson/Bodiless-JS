@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-export * from './components/Generic';
+export * from './components/GenericTemplate';
 export * from './components/StyleGuideTemplate';
 export * from './components/Page';

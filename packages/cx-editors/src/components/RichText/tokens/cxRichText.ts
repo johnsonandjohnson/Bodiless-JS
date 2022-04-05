@@ -89,7 +89,7 @@ const Default = asCxTokenSpec()({
     ),
   },
   Content: {
-    _: addProps({ placeholder: 'Placeholder' }),
+    _: addProps({ placeholder: 'Text Area' }),
   },
   Theme: {
     paragraph: cxTypography.Body,
