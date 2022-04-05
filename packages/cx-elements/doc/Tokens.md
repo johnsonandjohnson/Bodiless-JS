@@ -118,33 +118,54 @@ configuration should be applied.
 <!-- TODO: Update link after `cx-elements` is renamed. -->
 Let's take color as an example. The [Vital Tailwind
 configuration](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-elements/site.tailwind.config.js
-':target=_blank') defines a base color palette (here we show only the blues):
+':target=_blank') defines a base color palette:
 
-<!-- TODO: Update `cx` prefix. -->
 ```js
 module.exports = {
   // ...
   theme: {
-    extend: {
-      colors: {
-        blue: {
-          'cx-light': '#0074D9',
-          'cx': '#005EB0',
-          'cx-dark': '#004887',
-          'cx-darker': '#7697B5',
-          // ...
-}}}}};
+    colors: {
+      'vital-primary': {
+        brand: '#CA081B',
+        'card-bg': '#ffffff',
+        'page-bg': '#F4F4F4',
+        interactive: '#000099',
+        'interactive-active': '#000341',
+        divider: '#D8D8D8',
+        'body-copy': '#63666A',
+        'header-copy': '#212121',
+        'footer-copy': '#FFFFFF',
+      },
+      'vital-secondary': {
+        eyebrow: '#CC0099',
+        'footer-bg': '#2B2B33',
+      },
+    },
+    // ...
+  },
+  // ...
+};
 ```
 
-<!-- TODO: Update `cx` and "CanvasX" references. -->
-These represent all allowed shades of blue defined by the design system (here `cx` stands for brand
-name - CanvasX; for _Imodium_ it would be `text-blue-imodium` and so on).
+At the next level, a color _token_ defines how and where these colors should be used. Color tokens
+can be defined in a color group, such as:
 
-At the next level, a color _token_ defines how and where these colors should be used.  
-For example:
+```js
+export default asTokenGroup(meta)({
+  BgPrimaryBrand: 'bg-vital-primary-brand',
+  TextPrimaryBrand: 'text-vital-primary-brand',
+  BgPrimaryCard: 'bg-vital-primary-card-bg',
+  // ...
+});
+```
+
+`asTokenGroup()` takes a group of `asElementToken()` assignments, and assigns them all the same
+data.
+
+`asElementToken()` can be used to define a single token. For example:
 
 ```ts
-export const PrimaryTextInteractiveColor = asSimpleToken('Theme')(
+export const PrimaryTextInteractiveColor = asElementToken('Theme')(
   'text-blue-cx hover:text-blue-cx-light',
 );
 ```
@@ -158,7 +179,7 @@ themselves could be reused in other contexts; the token is _only_ for primary, i
 <!-- Inlining HTML to add multi-line info block with code block. -->
 <div class="warn">
   <strong>Note:</strong> In Vital, tokens are usually expressed using a special format known as
-  the <em>Token Object Notation</em>. The <code>asSimpleToken</code> utility used above produces
+  the <em>Token Object Notation</em>. The <code>asElementToken</code> utility used above produces
   a token in this format:
 
   ```ts
@@ -189,10 +210,10 @@ themselves could be reused in other contexts; the token is _only_ for primary, i
 
 </div>
 
-Element-level tokens can be composed out of other element level tokens, for example:
+Element-level tokens can be composed out of other element-level tokens, for example:
 
 ```ts
-export const TextLink = asSimpleToken('Theme')(
+export const TextLink = asElementToken('Theme')(
   withPrimaryTextInteractiveColor,
   'underline',
 );
@@ -470,7 +491,7 @@ includes the `HeaderClean` and `FooterClean` components as design keys:
   const layoutComponents: LayoutComponents = {
     Header: Header,
     Footer: Footer,
-    ...
+    // ...
   };
   ...
   <OuterContainer>
