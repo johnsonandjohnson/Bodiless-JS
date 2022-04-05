@@ -13,8 +13,15 @@ build:
 
 ## Content Editor Details
 
+- Title: Plain Text Editor
+- Description: BasicNoLink RTE
+- Image: Gatsby Image
+- CTA: Button, A
+
 
 ## Site Builder Details
+
+### Usage
 
 
 

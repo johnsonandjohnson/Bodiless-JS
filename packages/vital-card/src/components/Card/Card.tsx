@@ -28,7 +28,7 @@ import { withNode } from '@bodiless/core';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
 
 export type CardComponents = {
-  Wrapper: ComponentType<StylableProps>,
+  CardWrapper: ComponentType<StylableProps>,
   ImageWrapper: ComponentType<StylableProps>,
   ImageLink: ComponentType<StylableProps>,
   Image: ComponentType<StylableProps>,
@@ -45,7 +45,7 @@ export type CardComponents = {
   CTA: ComponentType<StylableProps>,
 };
 const cardComponentStart: CardComponents = {
-  Wrapper: Div,
+  CardWrapper: Div,
   ImageWrapper: Fragment,
   ImageLink: Fragment,
   Image: Img,
@@ -67,7 +67,7 @@ type CardBaseProps = DesignableComponentsProps<CardComponents> & HTMLProps<HTMLE
 
 const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
   const {
-    Wrapper,
+    CardWrapper,
     ImageWrapper,
     Image,
     ImageLink,
@@ -83,7 +83,7 @@ const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
   } = components;
 
   return (
-    <Wrapper {...rest}>
+    <CardWrapper {...rest}>
       <ImageWrapper>
         <ImageLink>
           <Image />
@@ -103,7 +103,7 @@ const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
           <CTA />
         </CTAWrapper>
       </ContentWrapper>
-    </Wrapper>
+    </CardWrapper>
   );
 };
 
@@ -113,4 +113,5 @@ const CardClean = flow(
 )(CardBase);
 
 const asCardToken = asCxTokenSpec<CardComponents>();
+
 export { CardClean, asCardToken };

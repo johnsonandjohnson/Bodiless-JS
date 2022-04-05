@@ -25,6 +25,7 @@ const {
   Layout,
   Header,
   Footer,
+  Card,
   _default
 } = __cxstarter__StyleGuideTemplate;
 
@@ -38,6 +39,7 @@ const Default = asFluidToken({
     Layout,
     Header,
     Footer,
+    Card,
   },
 });
 

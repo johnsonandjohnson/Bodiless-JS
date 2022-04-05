@@ -12,6 +12,17 @@
  * limitations under the License.
  */
 
-import { CardClean } from '@bodiless/vital-card';
+import React from 'react';
+import {
+  flowHoc, replaceWith, on,
+} from '@bodiless/fclasses';
+import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/cx-templates';
+import { CardClean, vitalCard } from '@bodiless/vital-card';
 
-export const Card = CardClean;
+export const Card = asStyleGuideTemplateToken(cxStyleGuideTemplate.NoLayout, {
+  Meta: flowHoc.meta.term('Token')('Card'),
+  Content: {
+    Title: replaceWith(() => <>Card</>),
+    Examples: on(CardClean)(vitalCard.Default),
+  },
+});

@@ -19,6 +19,16 @@ import {
   remove,
   flowHoc,
 } from '@bodiless/fclasses';
+import { asCardToken } from '../Card';
+
+/**
+ * Basic Card Design.
+ */
+const Default = asCardToken({
+  Schema: {
+    _: 'border border-red',
+  },
+});
 
 /**
  * asCardVertical removes unnecessary wrappers from the card
@@ -93,6 +103,7 @@ const asCardOverlayCta = withDesign({
 });
 
 export {
+  Default,
   asCardVertical,
   asCardHorizontal,
   asCardNoTitle,
