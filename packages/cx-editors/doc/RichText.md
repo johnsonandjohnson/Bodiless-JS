@@ -19,6 +19,7 @@ Content Editor Details](/Components/Editors/RichText#content-editor-details).
 ### Usage of the CX Rich Text Editor
 
 What's shown in the following example can be applied to any Slot.
+There are other available Editor Tokens, see next section.
 
 ```js
 import { cxRichText, RichTextClean } from '@bodiless/cx-editors';
@@ -36,6 +37,17 @@ const WithRichTextEditor = asCxTokenSpec({
 
 We recommend that the Editor Component and tokens be defined in the Editors Domain, and the node be
 defined in the Schema Domain.
+
+### Available Rich Text Editors
+
+There are some Editor Tokens available on cxRichText.
+
+- Default
+  - Available tools: Bold, Link, Superscript, and H1 to H5.
+- Basic
+  - Available tools: Bold, Link, and Superscript.
+- BasicNoLink
+  - Available tools: Bold and Superscript.
 
 ### Overriding Rich Text Editor
 
