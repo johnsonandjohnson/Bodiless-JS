@@ -22,16 +22,18 @@ import {
 } from '@bodiless/fclasses';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
 import { HelmetClean } from '../Helmet';
+import { HeaderClean } from '../Header';
+import { FooterClean } from '../Footer';
 import { LayoutComponents, LayoutProps } from './types';
 
 const layoutComponents: LayoutComponents = {
   OuterContainer: Div,
   SkipToMainContent: A,
   Helmet: HelmetClean,
-  Header: Div,
-  HeaderWrapper: Div,
-  Footer: Div,
-  FooterWrapper: Div,
+  HeaderWrapper: Fragment,
+  Header: HeaderClean,
+  FooterWrapper: Fragment,
+  Footer: FooterClean,
   Container: Div,
   ContainerWrapper: Div,
   PageTopper: Fragment,

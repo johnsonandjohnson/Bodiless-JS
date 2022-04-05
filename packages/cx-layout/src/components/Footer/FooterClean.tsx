@@ -13,7 +13,7 @@
  */
 
 import React, { FC } from 'react';
-import { Div, designable } from '@bodiless/fclasses';
+import { Div, designable, Footer } from '@bodiless/fclasses';
 import { RichTextClean } from '@bodiless/cx-editors';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
 import { MenuClean } from '@bodiless/cx-navigation';
@@ -22,7 +22,7 @@ import { SocialLinksClean } from './SocialLinks';
 import type { FooterComponents, FooterProps } from './types';
 
 const footerComponents: FooterComponents = {
-  Wrapper: Div,
+  Wrapper: Footer,
   Container: Div,
   Column: Div,
   Row: Div,

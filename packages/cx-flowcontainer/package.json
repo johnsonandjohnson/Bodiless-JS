@@ -10,14 +10,12 @@
   "files": [
     "/lib",
     "/bodiless.docs.json",
+    "/site.tailwind.config.js",
     "/doc"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "scripts": {
     "build": "run-p build:lib build:api-doc",
@@ -33,8 +31,11 @@
     "@bodiless/components": "^1.0.0-beta.1",
     "@bodiless/components-ui": "^1.0.0-beta.1",
     "@bodiless/core": "^1.0.0-beta.1",
+    "@bodiless/cx-editors": "^1.0.0-beta.1",
     "@bodiless/cx-elements": "^1.0.0-beta.1",
+    "@bodiless/cx-image": "^1.0.0-beta.1",
     "@bodiless/fclasses": "^1.0.0-beta.1",
+    "@bodiless/hydration": "^1.0.0-beta.1",
     "@bodiless/layouts": "^1.0.0-beta.1",
     "@bodiless/layouts-ui": "^1.0.0-beta.1",
     "@bodiless/richtext": "^1.0.0-beta.1",

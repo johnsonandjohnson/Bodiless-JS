@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-export { GenericTemplateClean, asGenericTemplateToken } from './GenericClean';
-export { cxGenericTemplate } from './tokens/token';
-export type { GenericTemplateComponents, BaseGenericTemplateProps } from './types';
+import cxGenericTemplate from './cxGenericTemplate';
+
+export default cxGenericTemplate;

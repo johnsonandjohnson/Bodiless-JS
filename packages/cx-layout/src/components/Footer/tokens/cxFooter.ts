@@ -14,7 +14,7 @@
 
 import { withNode, withNodeKey } from '@bodiless/core';
 import { cxRichText } from '@bodiless/cx-editors';
-import { cxSpacing } from '@bodiless/cx-elements';
+import { cxColor, cxSpacing } from '@bodiless/cx-elements';
 import { cxMenu } from '@bodiless/cx-navigation';
 import { as } from '@bodiless/fclasses';
 import { cxRewards } from '../Rewards';
@@ -61,6 +61,7 @@ const Base = asFooterToken({
   Theme: {
     RewardsWrapper: 'bg-cx-primary-card-bg md:bg-cx-secondary-footer-bg',
     Copyright: 'border-white-400 border-t border-b md:border-0',
+    Wrapper: cxColor.BgSecondaryFooter,
   },
   Editors: {
     Copyright: cxRichText.Copyright,
