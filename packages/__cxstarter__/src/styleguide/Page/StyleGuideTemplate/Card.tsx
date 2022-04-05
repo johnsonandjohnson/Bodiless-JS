@@ -19,7 +19,7 @@ import {
 import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/cx-templates';
 import { CardClean, vitalCard } from '@bodiless/vital-card';
 
-export const Card = asStyleGuideTemplateToken(cxStyleGuideTemplate.NoLayout, {
+export const Card = asStyleGuideTemplateToken(cxStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Card'),
   Content: {
     Title: replaceWith(() => <>Card</>),
