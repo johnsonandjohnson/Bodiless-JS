@@ -16,12 +16,17 @@ export const createStatoscopePlugin = ({
 }: StatoscopePluginOptions) => {
   if (!enabled) return () => null;
 
-  if (fs.existsSync(`${sitePath}./stats-[name]-baseline.json`)) {
-    additionalStats.push(`${sitePath}./stats-[name]-baseline.json`);
+  // Check if baseline json exists.
+  if (fs.existsSync(`${sitePath}/stats-${name}-baseline.json`)) {
+    additionalStats.push(`${sitePath}/stats-${name}-baseline.json`);
   }
 
+  // Auto discover previous stats.
+  const previousStats = fs.readdirSync(`${sitePath}/public/`).filter(fn => fn.startsWith(`stats-${name}-`) && fn.endsWith('.json'));
+  additionalStats.push(...previousStats.map(fn => `${sitePath}/public/${fn}`));
+
   return new StatoscopeWebpackPlugin({
-    saveReportTo: `${sitePath}/public/stats-[name]-[hash].html`,
+    saveReportTo: `${sitePath}/public/stats-[name].html`,
     saveStatsTo: `${sitePath}/public/stats-[name]-[hash].json`,
     normalizeStats: true,
     additionalStats,

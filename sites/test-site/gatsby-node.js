@@ -13,18 +13,6 @@ const { addStatoscopePlugin } = require('@bodiless/webpack');
 // Fix sourcemap issue
 // See: https://github.com/gatsbyjs/gatsby/issues/6278#issuecomment-402540404
 exports.onCreateWebpackConfig = ({ stage, actions }) => {
-  if (stage === 'build-javascript') {
-    const options = {
-      enabled: process.env.BODILESS_BUILD_STATS === '1',
-      sitePath: path.resolve('./'),
-      name: 'test-site',
-      open: process.env.BODILESS_OPEN_STATS === '1' ? 'file' : false
-    };
-
-    actions.setWebpackConfig(
-      addStatoscopePlugin({}, options)
-    );
-  }
   if (stage === 'develop') {
     // When running test-site with local packages (via npm pack) we seem to get
     // multiple react instances, which causes this invalid hook call warning
@@ -55,5 +43,18 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
         ),
       }
     });
+  }
+  // Always on bottom to keep the plugin as last,
+  if (stage === 'build-javascript') {
+    const options = {
+      enabled: process.env.BODILESS_BUILD_STATS === '1',
+      sitePath: path.resolve('./'),
+      name: 'test-site',
+      open: process.env.BODILESS_OPEN_STATS === '1' ? 'file' : false
+    };
+
+    actions.setWebpackConfig(
+      addStatoscopePlugin({}, options)
+    );
   }
 };
