@@ -17,7 +17,7 @@ import {
   withNode,
   withNodeKey,
 } from '@bodiless/core';
-import { cxSpacing } from '@bodiless/cx-elements';
+import { cxColor, cxSpacing } from '@bodiless/cx-elements';
 import {
   cxBurgerMenu,
   cxMenu,
@@ -92,6 +92,9 @@ const Base = asHeaderToken({
     // @todo perhaps this should be an element spcing token ike "LargeIconSize".
     MenuToggler: 'w-6 h-6',
     MenuTogglerWrapper: 'my-4',
+  },
+  Theme: {
+    Wrapper: cxColor.BgPrimaryPage,
   },
   Schema: {
     Logo: withNodeKey({ nodeKey: 'Logo' }),
