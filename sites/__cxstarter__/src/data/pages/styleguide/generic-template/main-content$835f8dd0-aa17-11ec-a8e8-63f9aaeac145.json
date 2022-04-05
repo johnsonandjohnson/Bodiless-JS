@@ -1,0 +1,39 @@
+{
+  "items": [
+    {
+      "uuid": "c7bdfed0-aa17-11ec-a8e8-63f9aaeac145",
+      "wrapperProps": {
+        "className": "w-full lg:w-full"
+      },
+      "type": "RichText"
+    },
+    {
+      "uuid": "e7e8dbd0-aa17-11ec-a8e8-63f9aaeac145",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/4"
+      },
+      "type": "ImageSquare"
+    },
+    {
+      "uuid": "ed099280-aa17-11ec-a8e8-63f9aaeac145",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/4"
+      },
+      "type": "ImageSquare"
+    },
+    {
+      "uuid": "eddc99f0-aa17-11ec-a8e8-63f9aaeac145",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/4"
+      },
+      "type": "ImageSquare"
+    },
+    {
+      "uuid": "eec0df70-aa17-11ec-a8e8-63f9aaeac145",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/4"
+      },
+      "type": "ImageSquare"
+    }
+  ]
+}

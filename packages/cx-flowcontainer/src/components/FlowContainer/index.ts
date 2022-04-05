@@ -12,17 +12,11 @@
  * limitations under the License.
  */
 
-import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
-
-export type GenericTemplateComponents = {
-  PageWrapper: ComponentOrTag<any>,
-  Breadcrumb: ComponentOrTag<any>,
-  MainWrapper: ComponentOrTag<any>,
-  TitleRow: ComponentOrTag<any>,
-  ContentWrapper: ComponentOrTag<any>,
-  Content: ComponentOrTag<any>,
-  BottomWrapper: ComponentOrTag<any>,
-  BottomContent: ComponentOrTag<any>,
-};
-
-export type BaseGenericTemplateProps = DesignableComponentsProps<GenericTemplateComponents>;
+// Normal flow container and tokens are the same in both edit/static
+export { default as FlowContainerClean } from './FlowContainerClean';
+export { default as cxFlowContainer } from './tokens';
+// Base token collection is the same in both edit and static.
+// Exported directly from its location so it cannot be shadowed.
+export { default as cxFlowContainerBase } from './tokens/cxFlowContainer';
+// Static flow container has edit/static alternatives.
+export * from './index.bl-edit';

@@ -24,6 +24,8 @@ const {
   Typography,
   Layout,
   Header,
+  FlowContainer,
+  Images,
   Footer,
   Card,
   _default
@@ -38,6 +40,8 @@ const Default = asFluidToken({
     Typography,
     Layout,
     Header,
+    FlowContainer,
+    Images,
     Footer,
     Card,
   },
