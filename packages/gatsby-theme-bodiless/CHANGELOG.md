@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2022-04-05)
+
+
+### Bug Fixes
+
+* **gatsby-theme-bodiless:** Properly prefix paths for bodiless gatsby… ([#1502](https://github.com/johnsonandjohnson/bodiless-js/issues/1502)) ([806b41d](https://github.com/johnsonandjohnson/bodiless-js/commit/806b41d15da01c3b650410a1be0d6cf373e2dd8d)), closes [#1501](https://github.com/johnsonandjohnson/bodiless-js/issues/1501)
+* **gatsby-theme-bodiless:** remove null-loader package dep. ([#1493](https://github.com/johnsonandjohnson/bodiless-js/issues/1493)) ([18c3273](https://github.com/johnsonandjohnson/bodiless-js/commit/18c327348bdeb83ce0dca6aa74105b9dbf3f14f1))
+
+
+### Features
+
+* Add static replacement mechanism ([#1440](https://github.com/johnsonandjohnson/bodiless-js/issues/1440)) ([22384f1](https://github.com/johnsonandjohnson/bodiless-js/commit/22384f184e73366bc00ec619e7b08fa3e5dfc29d))
+
+
+
+
+
 # [1.0.0-beta.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.7...v1.0.0-beta.1) (2022-03-14)
 
 
