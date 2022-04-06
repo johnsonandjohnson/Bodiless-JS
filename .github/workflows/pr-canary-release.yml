@@ -5,7 +5,7 @@ env:
   PR_NUMBER: ${{ github.event.number }}
   BUILD_NUMBER: ${{ github.run_number }}
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, synchronize]
 jobs:
   pr-canary-release:
@@ -22,4 +22,4 @@ jobs:
       - name: Publish Canary Release
         run: |
           echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
-          npx lerna publish --canary --exact --preid=alpha.$PR_NUMBER.$BUILD_NUMBER --dist-tag=alpha.$PR_NUMBER --include-merged-tags --yes
+          npx lerna publish --canary --exact --preid=canary-$PR_NUMBER-$BUILD_NUMBER --dist-tag=canary-$PR_NUMBER --include-merged-tags --yes
