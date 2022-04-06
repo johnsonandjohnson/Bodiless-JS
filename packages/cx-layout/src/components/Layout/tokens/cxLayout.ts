@@ -47,7 +47,9 @@ const Base = asLayoutToken({
     ),
   },
   Layout: {
-    Helmet: flowIf(not(useIsBurgerMenuHidden))(as(cxHelmet.WithFixedBody)),
+    Helmet: flowIf(
+      not(useIsBurgerMenuHidden),
+    )(as(cxHelmet.WithFixedBody, cxHelmet.WithDesktopStatickBody)),
   },
 });
 

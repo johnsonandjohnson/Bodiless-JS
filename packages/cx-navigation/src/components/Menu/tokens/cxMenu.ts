@@ -21,9 +21,9 @@ import {
 } from '@bodiless/fclasses';
 import {
   asBurgerMenu,
-  useIsActiveTrail,
   withMenuDesign,
   withListSubMenu,
+  asTopNav,
 } from '@bodiless/navigation';
 import { withNodeKey } from '@bodiless/core';
 import { cxColor, cxFontSize, cxTextDecoration } from '@bodiless/cx-elements';
@@ -37,21 +37,6 @@ import { asMenuToken } from '../MenuClean';
 import { cxMenuTitle, MenuTitleClean } from '../../MenuTitle';
 import { cxSubMenu } from '../../SubMenu';
 import { cxSeparator } from '../../Separator';
-
-/**
- * @private
- *
- * asTitleLinkDisabledWithSubmenus applies default menu title with link, but
- * it removes the link if the menu has a submenu.
- */
-const asTitleLinkDisabledWithSubmenus = as(
-  // Default.
-  on(MenuTitleClean)(cxMenuTitle.Default),
-  // Replaces title with disabled link is useHasSubMenu is true.
-  flowIf(() => useHasSubMenu('List', 'cham-sublist'))(
-    on(MenuTitleClean)(cxMenuTitle.WithTitleLinkDisabled),
-  ),
-);
 
 /**
  * Token which produces the Base CanvasX Menu. Can be customized and
@@ -71,11 +56,6 @@ const Base = asMenuToken({
   },
   Components: {
     Title: on(MenuTitleClean)(cxMenuTitle.Default),
-  },
-  Behavior: {
-    Title: flowIf(useIsActiveTrail)(
-      // @TODO: Add active trail styles.
-    ),
   },
 });
 
@@ -153,17 +133,20 @@ const Footer = asMenuToken({
  */
 const TopNav = asMenuToken({
   ...Default,
+  Core: {
+    _: flowHoc(withListSubMenu(), asTopNav('List')),
+  },
   Components: {
+    ...Default.Components,
     _: withMenuDesign('List')(as(cxSubMenu.TopNav)),
-    Title: asTitleLinkDisabledWithSubmenus,
   },
   Layout: {
     Wrapper: 'flex',
     Item: 'flex items-center',
   },
   Spacing: {
-    Item: 'py-6',
-    Title: 'px-3',
+    Item: 'mx-3',
+    Title: 'py-6',
   },
   Theme: {
     Title: as(
@@ -171,7 +154,13 @@ const TopNav = asMenuToken({
       cxTextDecoration.Bold,
       cxTextDecoration.Uppercase,
       // @TODO: Add to tokens?
-      'text-base whitespace-nowrap',
+      'text-base whitespace-nowrap cursor-pointer group-hover:text-cx-primary-interactive',
+    ),
+  },
+  Behavior: {
+    Title: flowIf(useHasSubMenu)(
+      as(cxMenuTitle.WithLinkDisabled),
+      as('shadow-cx-primary-interactive group-hover:shadow-inner-bottom-md'),
     ),
   },
   Schema: {
@@ -191,8 +180,8 @@ const Burger = asMenuToken({
     _: flowHoc(withListSubMenu(), asBurgerMenu('List')),
   },
   Components: {
+    ...Default.Components,
     _: withMenuDesign('List')(as(cxSubMenu.Burger)),
-    Title: asTitleLinkDisabledWithSubmenus,
   },
   Layout: {
     Wrapper: 'flex flex-col',
@@ -210,6 +199,7 @@ const Burger = asMenuToken({
   },
   Behavior: {
     Item: flowIf(useIsFirstMenuItem)(withExpandedAttr),
+    Title: flowIf(useHasSubMenu)(as(cxMenuTitle.WithLinkDisabled)),
   },
   Schema: {
     ...TopNav.Schema,

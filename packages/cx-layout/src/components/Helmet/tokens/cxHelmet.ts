@@ -34,15 +34,25 @@ const Default = asHelmetToken({
 });
 
 /**
+ * WithDesktopStatickBody token applies static position on body.
+ */
+const WithDesktopStatickBody = asHelmetToken({
+  Layout: {
+    BodyHelmet: 'lg:static',
+  },
+});
+
+/**
  * WithFixedBody token applies fixed position on body to prevent scrolling.
  */
 const WithFixedBody = asHelmetToken({
   Layout: {
     BodyHelmet: 'fixed',
-  }
+  },
 });
 
 export default {
   Default,
+  WithDesktopStatickBody,
   WithFixedBody,
 };

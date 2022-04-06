@@ -16,10 +16,16 @@ module.exports = {
     maxWidth: {
       48: '12rem',
       56: '14rem',
-    }
+    },
+    extend: {
+      boxShadow: {
+        'inner-bottom-md': '0 -5px 0 0 inset',
+      },
+    },
   },
   variants: {
     borderWidth: ['first', 'last', 'responsive'],
+    boxShadow: ['group-hover', 'hover', 'responsive'],
     margin: ['first', 'last', 'responsive'],
     overflow: ['focus', 'hover', 'responsive'],
     position: ['focus', 'hover', 'responsive'],

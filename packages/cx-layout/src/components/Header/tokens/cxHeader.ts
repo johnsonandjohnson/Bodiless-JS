@@ -82,7 +82,6 @@ const Base = asHeaderToken({
     MenuTogglerWrapper: 'flex lg:hidden',
   },
   Spacing: {
-    Wrapper: 'mb-10',
     Container: as(
       cxSpacing.WithSiteMargin,
       cxSpacing.WithSiteXLConstraint,

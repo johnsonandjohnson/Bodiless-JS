@@ -16,6 +16,7 @@ import useHasSubMenu from './useHasSubMenu';
 import useIsFirstMenuItem from './useIsFirstMenuItem';
 import withMenuTitleAnalytics, { withAnalyticsAttr } from './withMenuAnalytics';
 import withMenuItemExpanded, { withExpandedAttr } from './withMenuExpanded';
+import withMenuTitleNoLink from './withMenuTitleNoLink';
 
 export {
   useHasSubMenu,
@@ -24,4 +25,5 @@ export {
   withAnalyticsAttr,
   withMenuItemExpanded,
   withExpandedAttr,
+  withMenuTitleNoLink,
 };

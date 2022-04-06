@@ -12,29 +12,26 @@
  * limitations under the License.
  */
 
+import React from 'react';
 import { useNode } from '@bodiless/core';
+import { HOC } from '@bodiless/fclasses';
 
 /**
- * A hook that returns `true` if a menu has submenu, `false` otherwise.
+ * withMenuTitleNoLink removes link from given title.
  */
-const useHasSubMenu = () => {
-  // Gets menu node.
+const withMenuTitleNoLink: HOC = Component => props => {
+  // Gets component node.
   const { node } = useNode();
   const { path } = node;
 
-  // Creates submenu path and retrieves its related node.
-  const subMenuPath: string[] = path.concat(['cham-sublist']);
-  const subMenuNode = node.peer<{ component: string }>(subMenuPath);
+  // Gets component link node.
+  const linkPath = path.concat(['link']);
+  const linkNode = node.peer(linkPath);
 
-  // Gets submenu component type from data.
-  const { data } = subMenuNode;
-  const { component } = data;
+  // Gets rids of the component link.
+  linkNode.delete();
 
-  if (component === 'List') {
-    return true;
-  }
-
-  return false;
+  return (<Component {...props} />);
 };
 
-export default useHasSubMenu;
+export default withMenuTitleNoLink;

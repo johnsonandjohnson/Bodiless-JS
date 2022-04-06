@@ -24,6 +24,7 @@ import { asBodilessLink } from '@bodiless/components-ui';
 import { cxEditorPlain } from '@bodiless/cx-editors';
 import { cxLink } from '@bodiless/cx-link';
 import { asMenuTitleToken } from '../MenuTitleClean';
+import { withMenuTitleNoLink } from '../../../util';
 
 /**
  * @private
@@ -52,17 +53,20 @@ const Default = asMenuTitleToken({
 });
 
 /**
- * WithTitleLinkDisabled replaces default menu title link with empty div.
+ * WithLinkDisabled makes default menu title link as empty.
  */
-const WithTitleLinkDisabled = asMenuTitleToken({
+const WithLinkDisabled = asMenuTitleToken({
   ...Default,
   Schema: {
     ...Default.Schema,
     Link: replaceWith(Div),
+    // Needs to delete link from title to avoid
+    // additional Overview link applied by withOverviewLink.
+    Title: withMenuTitleNoLink,
   },
 });
 
 export default {
   Default,
-  WithTitleLinkDisabled,
+  WithLinkDisabled,
 };

@@ -61,13 +61,18 @@ const Footer = asSubMenuToken(Base, {
 
 const TopNav = asSubMenuToken({
   ...Base,
+  Components: {
+    ...Base.Components,
+    // Disables indicator icon per requirements.
+    // @TODO: This can be removed to improve accessibility.
+    SubmenuIndicator: replaceWith(() => null),
+  },
   Layout: {
     Wrapper: as(
-      removeClassesIf(useIsSubmenuExpanded)('hidden'),
       'absolute w-max min-w-full -left-7 top-full hidden group-hover:flex flex-col',
+      removeClassesIf(useIsSubmenuExpanded)('hidden'),
     ),
     Title: 'flex',
-    _: 'relative group',
   },
   Spacing: {
     Wrapper: 'py-3',
@@ -82,6 +87,7 @@ const TopNav = asSubMenuToken({
       // @TODO: Add to tokens?
       'text-m-base',
     ),
+    _: 'z-20',
   },
 });
 

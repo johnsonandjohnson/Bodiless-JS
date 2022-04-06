@@ -43,7 +43,7 @@ const Base = asBurgerMenuToken({
     MenuWrapper: 'flex-grow overflow-auto',
     FooterWrapper: 'w-full flex flex-col items-center',
     ActionFooterContainer: 'w-full flex justify-center items-center',
-    Overlay: 'w-full h-full fixed left-0 top-0',
+    Overlay: 'w-full h-full fixed left-0 top-0 lg:hidden',
     MenuToggler: 'flex justify-center items-center',
     MenuTogglerWrapper: 'flex justify-end',
   },
@@ -58,7 +58,7 @@ const Base = asBurgerMenuToken({
   Theme: {
     Wrapper: as(
       cxColor.BgPrimaryCard,
-      'z-10',
+      'z-20',
     ),
     FooterWrapper: as(
       // @TODO: Is this bg color name correct for this wrapper?
@@ -66,7 +66,7 @@ const Base = asBurgerMenuToken({
       // @TODO: Create tokens for borders?
       'border-t-2 border-cx-primary-page-bg',
     ),
-    Overlay: 'z-5 bg-gray-112-10 backdrop-filter backdrop-blur-m-md backdrop-brightness-80',
+    Overlay: 'z-10 bg-gray-112-10 backdrop-filter backdrop-blur-m-md backdrop-brightness-80',
   },
   Behavior: {
     // Opens/closes burger menu.

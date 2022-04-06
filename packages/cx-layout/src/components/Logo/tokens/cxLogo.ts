@@ -25,7 +25,7 @@ import { asLogoToken } from '../LogoClean';
 
 const Default = asLogoToken({
   Layout: {
-    Wrapper: 'w-full max-w-20 md:max-w-28',
+    Wrapper: 'w-full max-w-20 md:max-w-28 lg:min-w-28',
     Image: 'max-h-full',
   },
   Spacing: {
