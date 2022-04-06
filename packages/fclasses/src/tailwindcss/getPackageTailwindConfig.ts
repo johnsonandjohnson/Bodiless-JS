@@ -96,7 +96,12 @@ export const getPackageTailwindConfig: GetPackageTailwindConfig = props => {
     const configs = deps.reduce(
       (config, next) => {
         try {
-          const nextConfig = require(resolver(join(next, 'getTwConfig'))).default;
+          const nextExport = require(resolver(join(next, 'tailwind.config'))).default;
+          const nextConfig = Array.isArray(nextExport) ? nextExport : [{
+            name: next,
+            root: join(resolver(join(next, 'package.json')), '..'),
+            tailwindConfig: nextExport,
+          }];
           const addedPaths = config.map(item => item.root);
           const dedupedConfigs = nextConfig
             .filter((item: Config) => addedPaths.includes(item.root) === false);
