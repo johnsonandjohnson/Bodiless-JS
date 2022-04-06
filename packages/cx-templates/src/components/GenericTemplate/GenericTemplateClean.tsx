@@ -16,37 +16,40 @@ import React from 'react';
 import {
   designable,
   Div,
-  Fragment,
 } from '@bodiless/fclasses';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
 import { LayoutClean } from '@bodiless/cx-layout';
+import { FlowContainerClean } from '@bodiless/cx-flowcontainer';
 import { GenericTemplateComponents, BaseGenericTemplateProps } from './types';
 
 const genericTemplateComponents: GenericTemplateComponents = {
   PageWrapper: LayoutClean,
-  Breadcrumb: Fragment,
-  TitleRow: Fragment,
-  MainWrapper: Div,
+  BreadcrumbWrapper: Div,
+  Breadcrumb: Div,
+  TopWrapper: Div,
+  TopContent: FlowContainerClean,
   ContentWrapper: Div,
-  Content: Fragment,
+  Content: FlowContainerClean,
   BottomWrapper: Div,
-  BottomContent: Fragment,
+  BottomContent: FlowContainerClean,
 };
 
 const GenericTemplateBase = (props: BaseGenericTemplateProps) => {
-  const { components: C } = props;
+  const { components: C, ...rest } = props;
   return (
-    <C.PageWrapper>
-      <C.Breadcrumb />
-      <C.MainWrapper>
-        <C.TitleRow />
-        <C.ContentWrapper>
-          <C.Content />
-        </C.ContentWrapper>
-        <C.BottomWrapper>
-          <C.BottomContent />
-        </C.BottomWrapper>
-      </C.MainWrapper>
+    <C.PageWrapper {...rest}>
+      <C.BreadcrumbWrapper>
+        <C.Breadcrumb />
+      </C.BreadcrumbWrapper>
+      <C.TopWrapper>
+        <C.TopContent />
+      </C.TopWrapper>
+      <C.ContentWrapper>
+        <C.Content />
+      </C.ContentWrapper>
+      <C.BottomWrapper>
+        <C.BottomContent />
+      </C.BottomWrapper>
     </C.PageWrapper>
   );
 };
@@ -55,7 +58,6 @@ const GenericTemplateClean = designable(genericTemplateComponents, 'Generic Temp
 
 const asGenericTemplateToken = asCxTokenSpec<GenericTemplateComponents>();
 
-export {
-  GenericTemplateClean,
-  asGenericTemplateToken,
-};
+export { asGenericTemplateToken };
+
+export default GenericTemplateClean;

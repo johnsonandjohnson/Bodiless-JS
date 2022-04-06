@@ -148,6 +148,7 @@ const WithLandscapePlaceholder = asElementToken({
   Content: {
     _: withImagePlaceholder({ src: landscapeImage }),
   },
+  Meta: extendMeta(flowHoc.meta.term('Placeholder')('Landscape')),
 });
 
 const LinkBase = asBodilessLink('link')(A);

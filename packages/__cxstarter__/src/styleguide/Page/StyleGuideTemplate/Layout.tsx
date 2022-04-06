@@ -21,6 +21,6 @@ export const Layout = asStyleGuideTemplateToken(cxStyleGuideTemplate.NoLayout, {
   Meta: flowHoc.meta.term('Token')('Layout'),
   Content: {
     Title: replaceWith(() => <>Layout</>),
-    Examples: on(LayoutClean)(cxLayout.WithBordersLabels),
+    Examples: on(LayoutClean)(cxLayout.StyleGuide),
   },
 });
