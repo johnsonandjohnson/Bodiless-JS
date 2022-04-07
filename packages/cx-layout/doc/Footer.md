@@ -73,7 +73,7 @@ const BrandXFooter = asFooterToken({
     Rewards: brandXRewards.Default,
   },
   Spacing: {
-    // Since there is no spread, will override the cxFooter Spacing domain
+    // Since there is no spread, will override the vitalFooter Spacing domain
     // and use what is defined below.
     Container: 'mx-auto py-2',
   }
