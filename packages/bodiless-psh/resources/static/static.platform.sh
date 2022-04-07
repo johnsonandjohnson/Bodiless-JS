@@ -32,6 +32,7 @@ default_prepare_build () {
 }
 
 default_build () {
+  echo "Site is ${APP_SITE_NAME}"
   npm run build
 }
 

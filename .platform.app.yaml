@@ -67,7 +67,7 @@ hooks:
         # ssi files generation
         export SSI_CONF_PATH=sites/__cxstarter__/ssi/ssi_conf.json
         export VOLUME_DIR=$APP_VOLUME
-        node $PLATFORM_APP_DIR/packages/bodiless-psh/lib/generate-ssi-files.js deploy       
+        node $PLATFORM_APP_DIR/packages/bodiless-psh/lib/generate-ssi-files.js deploy
 
 # The size of the persistent disk of the application (in MB).
 disk: 320
@@ -100,3 +100,4 @@ variables:
     env:
         APP_VOLUME: '/app/volume'
         CHOKIDAR_USEPOLLING: true
+        APP_SITE_NAME: __cxstarter__
