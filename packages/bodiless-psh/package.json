@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/psh",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "Provides cli tool for initializing a bodiless project on platform.sh",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
