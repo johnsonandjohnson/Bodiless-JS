@@ -2,8 +2,8 @@
 
 The Vital Navigation (`@bodiless/vital-navigation`) package is composed of the following components:
 
-- [BurgerMenu](./BurgerMenu)
+- [Burger Menu](./BurgerMenu)
 - [Menu](./Menu)
-- [MenuTitle](./MenuTitle)
+- [Menu Title](./MenuTitle)
 - [Separator](./Separator)
-- [SubMenu](./SubMenu)
+- [Sub-Menu](./Sub-Menu)

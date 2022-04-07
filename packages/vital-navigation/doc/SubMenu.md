@@ -1,8 +1,8 @@
-# Vital SubMenu Component
+# Vital Sub-Menu Component
 
 ![Menu with Sub-Menu](../assets/MenuWithSubMenu.jpg ':size=50%')
 
-The Vital SubMenu Component provides a generic submenu that can be appended to menu components.
+The Vital Sub-Menu Component provides a generic submenu that can be appended to menu components.
 Similar to [Vital Menu](./Menu), this component provides a Wrapper, rendered as `<ul>`, and applies
 Vital `MenuTitle` to the Title inside every Item list (`<li>`) element.
 
@@ -75,10 +75,10 @@ To add a Link to a Sub-Menu Item:
 
 ## Site Builder Details
 
-From a Site Builder perspective, Vital SubMenu is comprised of a token collection (`vitalSubMenu`)
-that can be appended directly to menus, without providing a submenu clean component. You can use the
-base Vital SubMenu token (`vitalSubMenu.Base`) as it is, or you can recompose it to meet your site's
-requirements.
+From a Site Builder perspective, Vital Sub-Menu is comprised of a token collection (`vitalSubMenu`)
+that can be appended directly to menus, without providing a Sub-Menu clean component. You can use
+the base Vital Sub-Menu token (`vitalSubMenu.Base`) as it is, or you can recompose it to meet your
+site's requirements.
 
 Some recomposed tokens are already provided for Vital, such as:
 
@@ -99,5 +99,5 @@ const Menu = as(
 )(MenuClean);
 ```
 
-To see how the SubMenu tokens are designed in detail, please see:
+To see how the Sub-Menu tokens are designed in detail, please see:
 [`vitalSubMenu.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-navigation/src/components/SubMenu/tokens/vitalSubMenu.ts ':target=_blank').

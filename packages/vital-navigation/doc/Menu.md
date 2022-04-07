@@ -35,7 +35,7 @@ Where made available by a Site Builder, you can add Menu Items to the Menu. Once
 
 - [Add a Menu Title](./MenuTitle#addedit-menu-title);
 - [Add a Menu Link](#add-a-menu-link); and
-- [Add a Sub-Menu](./SubMenu#add-a-sub-menu).
+- [Add a Sub-Menu](./Sub-Menu#add-a-sub-menu).
 
 ![Main Menu Item context menu](../assets/MainMenuItemContextMenu.jpg ':size=50%')
 
@@ -53,7 +53,7 @@ become disabled; it will re-enable if you delete all the Sub-Menu Items.
 01. A new Menu Item will appear, and you can:
     - [Add a Menu Title](./MenuTitle#addedit-menu-title);
     - [Add a Menu Link](#add-a-menu-link); and
-    - [Add a Sub-Menu](./SubMenu#add-a-sub-menu).
+    - [Add a Sub-Menu](./Sub-Menu#add-a-sub-menu).
 
 <!-- Inlining HTML to add multi-line info block with ordered list and disclosure widget. -->
 <div class="warn">
