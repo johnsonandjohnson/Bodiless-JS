@@ -96,6 +96,8 @@
         - [CX Plain Editor](/CX_DesignSystem/Components/CX_Editors/CX_PlainEditor)
         - [CX RTE Editor](/CX_DesignSystem/Components/CX_Editors/CX_RTE_Editor)
       - [CX Elements](/CX_DesignSystem/Components/CX_Elements/)
+        - [Tokens](/CX_DesignSystem/Components/CX_Elements/Tokens/)
+          - [Token Domains](/CX_DesignSystem/Components/CX_Elements/Tokens/TokenDomains)
         - [Static Replacement](/CX_DesignSystem/Components/CX_Elements/StaticReplacement)
         - [Shadow](/CX_DesignSystem/Components/CX_Elements/Shadow)
         - [CX Site Typography](/CX_DesignSystem/Components/CX_Elements/CX_SiteTypography)
