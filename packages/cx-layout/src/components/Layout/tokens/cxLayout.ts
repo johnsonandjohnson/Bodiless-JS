@@ -23,7 +23,7 @@ import { asLayoutToken } from '../LayoutClean';
 import { cxFooter } from '../../Footer';
 import { cxHeader } from '../../Header';
 import { cxHelmet } from '../../Helmet';
-import { MAIN_CONTENT_ID } from './constants';
+import { LayoutIds } from './constants';
 import { StyleGuide } from './StyleGuide';
 
 /**
@@ -37,10 +37,10 @@ const Base = asLayoutToken({
     Helmet: cxHelmet.Default,
   },
   Behavior: {
-    Container: addProps({ id: MAIN_CONTENT_ID }),
+    Container: addProps({ id: LayoutIds.Content }),
     SkipToMainContent: as(
       addProps({
-        href: `#${MAIN_CONTENT_ID}`,
+        href: `#${LayoutIds.Content}`,
         children: 'Skip To Main Content',
       }),
       'sr-only focus:not-sr-only',
@@ -50,6 +50,9 @@ const Base = asLayoutToken({
     Helmet: flowIf(
       not(useIsBurgerMenuHidden),
     )(as(cxHelmet.WithFixedBody, cxHelmet.WithDesktopStatickBody)),
+  },
+  Content: {
+    Header: addProps({ id: LayoutIds.HeaderContent }),
   },
 });
 
