@@ -69,7 +69,7 @@ const TopNav = asSubMenuToken({
   },
   Layout: {
     Wrapper: as(
-      'absolute w-max min-w-full -left-7 top-full hidden group-hover:flex flex-col',
+      'absolute w-auto min-w-max -left-10 -right-16 top-full hidden group-hover:flex flex-col',
       removeClassesIf(useIsSubmenuExpanded)('hidden'),
     ),
     Title: 'flex',

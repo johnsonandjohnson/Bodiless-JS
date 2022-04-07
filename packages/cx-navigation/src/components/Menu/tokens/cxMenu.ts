@@ -154,13 +154,16 @@ const TopNav = asMenuToken({
       cxTextDecoration.Bold,
       cxTextDecoration.Uppercase,
       // @TODO: Add to tokens?
-      'text-base whitespace-nowrap cursor-pointer group-hover:text-cx-primary-interactive',
+      'text-base whitespace-nowrap cursor-pointer',
+      'group-hover:text-cx-primary-interactive hover:text-cx-primary-interactive',
     ),
   },
   Behavior: {
     Title: flowIf(useHasSubMenu)(
-      as(cxMenuTitle.WithLinkDisabled),
-      as('shadow-cx-primary-interactive group-hover:shadow-inner-bottom-md'),
+      as(
+        cxMenuTitle.WithLinkDisabled,
+        'shadow-cx-primary-interactive group-hover:shadow-inner-bottom-md',
+      ),
     ),
   },
   Schema: {
