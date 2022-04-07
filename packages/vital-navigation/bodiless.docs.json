@@ -8,6 +8,11 @@
         "CX_MenuTitle.md": "./doc/MenuTitle.md",
         "CX_Separator.md": "./doc/Separator.md",
         "CX_SubMenu.md": "./doc/SubMenu.md"
+      },
+      "assets": {
+        "MainMenuItemContextMenu.jpg": "./doc/assets/MainMenuItemContextMenu.jpg",
+        "MenuWithSubMenu.jpg": "./doc/assets/MenuWithSubMenu.jpg",
+        "SubMenuItemContextMenu.jpg": "./doc/assets/SubMenuItemContextMenu.jpg"
       }
     }
   }
