@@ -68,7 +68,7 @@ const BrandXFooter = asFooterToken({
   ...vitalFooter.Base,
   Components: {
     // Will spread all footer components as is.
-    ...cxFooter.Base.Components,
+    ...vitalFooter.Base.Components,
     // Will replace the Rewards slot with the custom component
     Rewards: brandXRewards.Default,
   },
