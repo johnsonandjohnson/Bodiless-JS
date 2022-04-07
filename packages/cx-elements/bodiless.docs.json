@@ -8,7 +8,11 @@
         "ComponentTemplate.md": "./doc/ComponentTemplate.md",
         "CX_SiteTypography.md": "./doc/CX_SiteTypography.md",
         "Shadow.md": "./doc/Shadow.md",
-        "StaticReplacement.md": "./doc/StaticReplacement.md"
+        "StaticReplacement.md": "./doc/StaticReplacement.md",
+        "Tokens": {
+          "README.md": "./doc/Tokens.md",
+          "TokenDomains.md": "./doc/TokenDomains.md"
+        }
       },
       "assets": {
         "PXtoREMTemplate.xlsx": "./doc/assets/PXtoREMTemplate.xlsx"
