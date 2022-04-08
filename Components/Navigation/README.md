@@ -1,3 +1,5 @@
-# CX Layout Components
+# Navigation Overview
 
-The CX Navigation (`@bodiless/cx-navigation`) package is composed of the following components:
+The BodilessJS Navigation section includes information on navigational components such as [Menu
+Component](./Menu), [Burger Menu Component](./BurgerMenu), and [Breadcrumb
+Component](./Breadcrumbs).

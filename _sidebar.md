@@ -45,7 +45,10 @@
     - [Table](/Components/Table)
     - [You Tube](/Components/YouTube)
   - [Tools](/Tools/)
-    - [Bodiless CLI](/Tools/BodilessCLI)
+    - Accessibility
+      - [Pa11y](/Tools/Accessibility/Pa11y)
+    - CLI
+      - [Bodiless CLI](/Tools/CLI/BodilessCLI)
   - [Development](/Development/)
     - [Guides](/Development/Guides/)
       - [Intro To Bodiless Concepts](/Development/Guides/IntroToBodilessConcepts)
@@ -75,7 +78,6 @@
       - [Backend](/Development/Architecture/Backend)
       - [Environment Variables](/Development/Architecture/EnvironmentVariables)
       - [Admin UI](/Development/Architecture/AdminUI)
-      - [Page](/Development/Architecture/Page)
     - [Release](/Development/Release/)
       - [Quality](/Development/Release/Quality)
       - [Update Packages](/Development/Release/UpdatePackages)
@@ -112,5 +114,3 @@
         - [Header](/CX_DesignSystem/Components/CX_Layout/Header)
         - [Footer](/CX_DesignSystem/Components/CX_Layout/Footer)
       - [CX Link](/CX_DesignSystem/Components/CX_Link)
-      - [CX Image](/CX_DesignSystem/Components/CX_Image/)
-        - [Image Configurations](/CX_DesignSystem/Components/CX_Image/ImageConfigurations)
