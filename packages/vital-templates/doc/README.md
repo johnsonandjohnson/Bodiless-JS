@@ -85,23 +85,23 @@ pages' contents in its specific requirements.
 
 The list of available templates in the _Choose a template for this page_ form is configurable via
 the
-[`cxPage`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/cx-templates/src/components/Page
+[`vitalPage`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-templates/src/components/Page
 ':target=_blank') Component.
 
 01. First, create a Page token defining what templates and their tokens should apply to a page
     option, and export as necessary.
     ```js
     const Default = asFluidToken({
-      ...cxPage.Default,
+      ...vitalPage.Default,
       Components: {
-        _default: on(GenericTemplateClean)(cxGenericTemplate.Default),
-        PDP: on(PDPClean)(cxPDP.Default),
-        PLP: on(PLPClean)(cxPLP.Default),
+        _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
+        PDP: on(PDPClean)(vitalPDP.Default),
+        PLP: on(PLPClean)(vitalPLP.Default),
       },
     });
 
     export default {
-      ...cxPage,
+      ...vitalPage,
       Default,
     };
     ```
@@ -110,7 +110,7 @@ the
     Gatsby `_default` content with the page template component and editor functionality, to allow
     the Content Editor to switch between template components.
     ```js
-    const DefaultPage = as(__cxstarter__Page.Default)(Fragment);
+    const DefaultPage = as(__vital__Page.Default)(Fragment);
 
     export default DefaultPage;
     ```

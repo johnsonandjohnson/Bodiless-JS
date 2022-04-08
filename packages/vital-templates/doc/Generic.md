@@ -22,7 +22,7 @@ The Generic Template is set up in the Vital Design System to be the default temp
 users.
 
 For how to use this Generic Template component, please see: [Vital Templates : Site Builder
-Details](../CX_Templates/#site-builder-details).
+Details](../VitalTemplates/#site-builder-details).
 
 What template is provided to the user is set by tokens with the Page Component. For example, within
 the Page Component, we set the `_default` page to use the `GenericTemplateClean` component, and
@@ -31,9 +31,9 @@ Template as the default template, and any new pages will default to Generic Temp
 
 ```js
 const Default = asFluidToken({
-  ...cxPage.Default,
+  ...vitalPage.Default,
   Components: {
-    _default: on(GenericTemplateClean)(cxGenericTemplate.Default),
+    _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
   },
 });
 ```
@@ -42,13 +42,13 @@ const Default = asFluidToken({
 
 #### Via Shadowing (*Preferred Method)
 
-Provide the Shadowing function as defined in [Shadow](../CX_Elements/Shadow).
+Provide the Shadowing function as defined in [Shadow](../VitalElements/Shadow).
 
 File to shadow:
-[`cxGenericTemplate.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-templates/src/components/GenericTemplate/tokens/cxGenericTemplate.ts ':target=_blank')
+[`vitalGenericTemplate.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-templates/src/components/GenericTemplate/tokens/vitalGenericTemplate.ts ':target=_blank')
 
-## Architecture Details
+## Architectural Details
 
 Generic Templates provides top, breadcrumb, content, and bottom slots with wrappers. To see how these
 elements are structured, please see:
-[`GenericTemplateClean.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-templates/src/components/GenericTemplate/GenericTemplateClean.tsx ':target=_blank').
+[`GenericTemplateClean.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-templates/src/components/GenericTemplate/GenericTemplateClean.tsx ':target=_blank').

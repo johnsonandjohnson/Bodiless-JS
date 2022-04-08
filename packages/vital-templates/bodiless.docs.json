@@ -1,7 +1,7 @@
 {
   "CX_DesignSystem": {
     "Components": {
-      "CX_Templates": {
+      "VitalTemplates": {
         "README.md": "./doc/README.md",
         "Generic.md": "./doc/Generic.md",
         "ProductDetailPage.md": "./doc/ProductDetailPage.md",
