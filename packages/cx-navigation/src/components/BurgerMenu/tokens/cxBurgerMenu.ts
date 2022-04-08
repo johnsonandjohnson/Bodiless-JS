@@ -39,21 +39,21 @@ const Base = asBurgerMenuToken({
   },
   Layout: {
     Wrapper: 'w-full h-full fixed left-0 top-0 bottom-0 md:w-7/12 lg:hidden',
-    Container: 'flex flex-col h-screen max-h-screen',
-    MenuWrapper: 'flex-grow overflow-y-auto h-full',
-    FooterWrapper: 'w-full flex flex-col items-center sticky bottom-0',
+    Container: 'flex flex-col h-full max-h-screen',
+    MenuTogglerWrapper: 'flex justify-end',
+    MenuToggler: 'flex justify-center items-center',
+    MenuWrapper: 'flex-grow overflow-y-auto',
+    FooterWrapper: 'w-full flex flex-col items-center',
     ActionFooterContainer: 'w-full flex justify-center items-center',
     Overlay: 'w-full h-full fixed left-0 top-0 lg:hidden',
-    MenuToggler: 'flex justify-center items-center',
-    MenuTogglerWrapper: 'flex justify-end',
   },
   Spacing: {
+    // @TODO: perhaps this should be an element spacing token like "LargeIconSize".
+    MenuTogglerWrapper: 'mx-4 my-6',
+    MenuToggler: 'w-6 h-6',
     MenuWrapper: 'px-9',
     FooterWrapper: 'px-9 py-6',
     ActionFooterContainer: 'mt-5',
-    // @TODO: perhaps this should be an element spacing token like "LargeIconSize".
-    MenuToggler: 'w-6 h-6',
-    MenuTogglerWrapper: 'mx-4 my-6',
   },
   Theme: {
     Wrapper: as(

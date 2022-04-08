@@ -21,6 +21,7 @@ import {
   addProps,
   as,
   on,
+  removeClasses,
   removeClassesIf,
   replaceWith,
   withDesign,
@@ -70,6 +71,7 @@ const TopNav = asSubMenuToken({
   Layout: {
     Wrapper: as(
       'absolute w-auto min-w-max -left-10 -right-16 top-full hidden group-hover:flex flex-col',
+      removeClasses('min-w-full'),
       removeClassesIf(useIsSubmenuExpanded)('hidden'),
     ),
     Title: 'flex',
