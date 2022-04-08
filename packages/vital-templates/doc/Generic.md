@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Generic Template is a barebones template that provides four sections to a page:
+The Generic Template is a barebones template component that provides four sections to a page:
 
 - **Top:** A full-width viewport section limited to a select group of components that work well for
   full-width, and its intention, from a design perspective, is that it will be the _hero_.
@@ -18,8 +18,11 @@ available that are provided in the sections.
 
 ## Site Builder Details
 
-This generic template is set up in the Vital Design System to be the default template provided to
+The Generic Template is set up in the Vital Design System to be the default template provided to
 users.
+
+For how to use this Generic Template component, please see: [Vital Templates : Site Builder
+Details](../CX_Templates/#site-builder-details).
 
 What template is provided to the user is set by tokens with the Page Component. For example, within
 the Page Component, we set the `_default` page to use the `GenericTemplateClean` component, and

@@ -72,6 +72,15 @@ To switch the template that a page is using:
 
 ## Site Builder Details
 
+As a Site Builder, you can use a Gatsby template within your site and place the created template
+components directly within the template.
+
+The Vital Design System offers an alternative method to using Gatsby templates that allows Content
+Editors a choice to quickly switch a page between templates. A generic Page component is placed in
+the site's Gatsby `_default` template file, and this component offers individual template/layout
+components to choose from. Each of these template/layout components is a component that renders the
+pages' contents in its specific requirements.
+
 ### Configure Available Templates
 
 The list of available templates in the _Choose a template for this page_ form is configurable via
@@ -96,8 +105,10 @@ the
       Default,
     };
     ```
-01. Within the `_default.jsx` file in the `sites/SITE-NAME/src/templates` directory, it will call
-    using this token.
+01. Within the `_default.jsx` file in the `sites/SITE-NAME/src/templates` directory, the `_default`
+    template will then call the page component created from the previous step. This will replace the
+    Gatsby `_default` content with the page template component and editor functionality, to allow
+    the Content Editor to switch between template components.
     ```js
     const DefaultPage = as(__cxstarter__Page.Default)(Fragment);
 
