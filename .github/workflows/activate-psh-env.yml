@@ -1,0 +1,25 @@
+name: Activate Platform.sh environment
+env:
+  PSH_PROJECT_ID: ${{ secrets.PSH_PROJECT_ID }}
+  PLATFORMSH_CLI_TOKEN: ${{ secrets.PLATFORMSH_CLI_TOKEN }}
+on:
+  create
+jobs:
+  activate-environment:
+    if: ${{ startsWith(github.ref_name, 'changeset/') && github.ref_name != 'changeset/daily-qa-branch' }}
+    name: Activate Platform.sh environment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+      - name: Initialize Platform.sh
+        run: |
+          curl -sS https://platform.sh/cli/installer | php
+      - name: Deploy Environment
+        run: |
+          sleep 10
+          ~/.platformsh/bin/platform env:activate -p $PSH_PROJECT_ID -e ${{ github.ref_name }}
