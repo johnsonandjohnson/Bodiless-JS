@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "uuid": "fa54bd70-aa17-11ec-a8e8-63f9aaeac145",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "RichText"
+    },
+    {
+      "uuid": "1460ada0-aa18-11ec-a8e8-63f9aaeac145",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/3"
+      },
+      "type": "ImageLandscape"
+    },
+    {
+      "uuid": "1a5f1a20-aa18-11ec-a8e8-63f9aaeac145",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/3"
+      },
+      "type": "ImageLandscape"
+    },
+    {
+      "uuid": "28472150-aa18-11ec-a8e8-63f9aaeac145",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/3"
+      },
+      "type": "ImageLandscape"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [1.0.0-beta.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2022-04-05)
+
+
+### Features
+
+* Add static replacement mechanism ([#1440](https://github.com/johnsonandjohnson/bodiless-js/issues/1440)) ([22384f1](https://github.com/johnsonandjohnson/bodiless-js/commit/22384f184e73366bc00ec619e7b08fa3e5dfc29d))

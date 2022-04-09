@@ -12,11 +12,44 @@
  * limitations under the License.
  */
 
-import { asElementToken } from '@bodiless/cx-elements';
-import { cxPage } from '@bodiless/cx-templates';
+import React from 'react';
+import negate from 'lodash/negate';
+import {
+  as,
+  flowIf,
+  on,
+  replaceWith
+} from '@bodiless/fclasses';
+import { asFluidToken } from '@bodiless/cx-elements';
+import {
+  cxPage,
+  GenericTemplateClean,
+  cxGenericTemplate,
+  asGenericTemplateToken
+} from '@bodiless/cx-templates';
+import { useNode } from '@bodiless/core';
 
-const Default = asElementToken({
+// @todo remove NoBreadcrumbsGeneric when breadcrumbs is implemented and
+// content editor can choose to use breadcrumb
+const NoBreadcrumbsGeneric = asGenericTemplateToken({
+  ...cxGenericTemplate.Default,
+  Components: {
+    ...cxGenericTemplate.Default.Components,
+    BreadcrumbWrapper: replaceWith(React.Fragment),
+    Breadcrumb: replaceWith(React.Fragment),
+  },
+});
+
+const isHomePage = () => useNode().node.pagePath === '/';
+
+const Default = asFluidToken({
   ...cxPage.Default,
+  Components: {
+    _default: on(GenericTemplateClean)(
+      flowIf(isHomePage)(as(NoBreadcrumbsGeneric)),
+      flowIf(negate(isHomePage))(as(cxGenericTemplate.Default)),
+    ),
+  },
 });
 
 export default {
