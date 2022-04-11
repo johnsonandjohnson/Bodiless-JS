@@ -29,7 +29,6 @@ fi
 CMD_GIT=/usr/bin/git
 TMP_DIR=${APP_VOLUME}/../tmp
 ROOT_DIR=${APP_VOLUME}/root
-GIT_REMOTE_URL=https://${APP_GIT_USER}:${APP_GIT_PW}@${APP_GIT_REMOTE_URL##https://}
 NPM_CACHE_DIR=${APP_VOLUME}/.npm
 
 invoke () {
@@ -138,13 +137,13 @@ full_deploy () {
   echo "Full deploy, branch is ${PLATFORM_BRANCH}"
   rm -rf ${ROOT_DIR}
   if [[ ${PLATFORM_BRANCH} =~ ^pr- ]]; then
-    ${CMD_GIT} clone ${GIT_REMOTE_URL} ${ROOT_DIR}
+    ${CMD_GIT} -c credential.helper="!f() { echo username=${APP_GIT_USER}; echo password=${APP_GIT_PW}; }; f" clone ${APP_GIT_REMOTE_URL} ${ROOT_DIR}
     cd ${ROOT_DIR}
     ID=$(echo $PLATFORM_BRANCH | sed s/pr-//g)
     git fetch origin pull/${ID}/head:${PLATFORM_BRANCH}
     git checkout ${PLATFORM_BRANCH}
   else
-    ${CMD_GIT} clone -b ${PLATFORM_BRANCH} ${GIT_REMOTE_URL} ${ROOT_DIR}
+    ${CMD_GIT} -c credential.helper="!f() { echo username=${APP_GIT_USER}; echo password=${APP_GIT_PW}; }; f" clone -b ${PLATFORM_BRANCH} ${APP_GIT_REMOTE_URL} ${ROOT_DIR}
     cd ${ROOT_DIR}
   fi
   ${CMD_GIT} config user.email "${APP_GIT_USER_EMAIL}"
@@ -164,7 +163,7 @@ init_npmrc () {
 
 check_branch () {
   if [[ ${PLATFORM_BRANCH} =~ ^pr- ]]; then
-    if [[ ${GIT_REMOTE_URL} =~ github\.com ]]; then
+    if [[ ${APP_GIT_REMOTE_URL} =~ github\.com ]]; then
       return 0
     else
       echo "Edit environments for PR branches are only enabled on GitHub"
