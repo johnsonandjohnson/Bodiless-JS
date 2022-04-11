@@ -16,6 +16,7 @@
     "/lib",
     "/doc",
     "/bodiless.docs.json",
+    "/getDocs.js",
     "src/tailwindcss/resolveConfig.ts"
   ],
   "publishConfig": {

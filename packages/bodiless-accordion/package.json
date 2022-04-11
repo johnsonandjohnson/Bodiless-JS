@@ -9,7 +9,7 @@
   "typings": "lib/index.d.ts",
   "files": [
     "/lib",
-    "site.tailwind.config.js"
+    "tailwind.config.js"
   ],
   "repository": {
     "type": "git",

@@ -13,6 +13,7 @@
     "/lib",
     "/doc",
     "/bodiless.docs.json",
+    "/getDocs.js",
     "/bodiless.tailwind.config.js",
     "/index.tailwind.css"
   ],

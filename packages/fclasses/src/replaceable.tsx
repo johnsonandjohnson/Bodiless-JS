@@ -18,7 +18,9 @@ import React, {
   useContext,
   useState,
   useEffect,
+  Fragment,
 } from 'react';
+import pick from 'lodash/pick';
 import { HOCBase, ComponentOrTag, HOC } from './types';
 import { flowHoc } from './flowHoc';
 
@@ -103,7 +105,10 @@ export const startWith = (ReplacementComponent: ComponentType<any>): HOCBase => 
 
 export const replaceWith = <P extends object>(Replacement: ComponentOrTag<P>) => flowHoc(
   (() => {
-    const ReplaceWith = (props: P) => <Replacement {...props} />;
+    const ReplaceWith = (props: P) => {
+      const $props = Replacement === Fragment ? pick(props, 'key', 'children') : props;
+      return <Replacement {...$props as P} />;
+    };
     return ReplaceWith;
   }) as HOC
 );

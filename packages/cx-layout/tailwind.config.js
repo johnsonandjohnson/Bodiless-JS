@@ -45,9 +45,6 @@ const twConfig = {
     extend: {
       margin: {
         'negative-half-screen': '-50vw',
-        'site-percent': '5%',
-        'md-site-percent': '8%',
-        'lg-site-percent': '8%',
       },
     },
   },
@@ -59,7 +56,7 @@ const twConfig = {
   },
 };
 
-export default getPackageTailwindConfig({
+module.exports = getPackageTailwindConfig({
   twConfig,
   resolver,
 });

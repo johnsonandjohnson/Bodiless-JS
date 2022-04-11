@@ -5,6 +5,7 @@
   "main": "",
   "files": [
     "/bodiless.docs.json",
+    "/getDocs.js",
     "/src"
   ],
   "bin": {

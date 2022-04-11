@@ -12,6 +12,7 @@
   "files": [
     "/lib",
     "/bodiless.docs.json",
+    "/getDocs.js",
     "/doc",
     "node-api"
   ],
