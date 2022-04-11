@@ -81,7 +81,10 @@ const TopNav = asSubMenuToken({
     Title: 'px-10 py-3',
   },
   Theme: {
-    Wrapper: as(cxColor.BgPrimaryCard),
+    Wrapper: as(
+      cxColor.BgPrimaryCard,
+      'z-20',
+    ),
     Title: as(
       cxColor.TextPrimaryHeaderCopy,
       cxTextDecoration.Normal,
@@ -89,7 +92,6 @@ const TopNav = asSubMenuToken({
       // @TODO: Add to tokens?
       'text-m-base',
     ),
-    _: 'z-20',
   },
 });
 

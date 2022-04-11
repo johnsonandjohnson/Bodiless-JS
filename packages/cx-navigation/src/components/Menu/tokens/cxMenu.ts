@@ -149,22 +149,21 @@ const TopNav = asMenuToken({
     Title: 'py-6',
   },
   Theme: {
+    Item: 'relative group',
     Title: as(
       cxColor.TextPrimaryHeaderCopy,
       cxTextDecoration.Bold,
       cxTextDecoration.Uppercase,
       // @TODO: Add to tokens?
       'text-base whitespace-nowrap cursor-pointer',
+      // Hover effect on the menu item.
       'group-hover:text-cx-primary-interactive hover:text-cx-primary-interactive',
+      // Underline below the menu item.
+      'shadow-cx-primary-interactive group-hover:shadow-inner-bottom-md',
     ),
   },
   Behavior: {
-    Title: flowIf(useHasSubMenu)(
-      as(
-        cxMenuTitle.WithLinkDisabled,
-        'shadow-cx-primary-interactive group-hover:shadow-inner-bottom-md',
-      ),
-    ),
+    Title: flowIf(useHasSubMenu)(as(cxMenuTitle.WithLinkDisabled)),
   },
   Schema: {
     _: withNodeKey({ nodeKey: 'main-menu', nodeCollection: 'site' }),
