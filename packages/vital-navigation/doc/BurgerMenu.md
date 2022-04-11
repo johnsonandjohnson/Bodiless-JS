@@ -22,15 +22,16 @@ The Main Menu content is the same as the Top Navigation Menu on Desktop. We also
 different order for the Burger Menu.
 
 The Overlay is an empty `<div>`, defined as a sibling for the `BurgerMenu` wrapper, and it is
-necessary to provide a background layer for the `BurgerMenu` as it is opened. That layer is blurred
-and requires some Tailwind customizations with filter backdrop to achieve the desired design. By
-default, it is not possible to see the Overlay on Mobile since the `BurgerMenu` is full-width, but
-it is visible on Tablet as it takes place only on part of the screen.
+necessary to provide a background layer for the `BurgerMenu` as it is opened. On Tablet, the Burger
+Menu only covers a partial portion of the site, and the site itself is blurred to prevent user
+interaction with it. The blur effect is done using [Backdrop
+Blur](https://tailwindcss.com/docs/backdrop-blur ':target=_blank'), and is customized to your design
+requirements. On Mobile, the Burger Menu uses the full width of the viewport.
 
 ## Content Editor Details
 
 There is no way to edit `BurgerMenu` components (we are adding `asStatic` to the whole component to
-make sure it is not editable). The components are editable on Desktop though.
+make sure it is not editable). The components are editable on the Desktop menu, however.
 
 ## Site Builder Details
 

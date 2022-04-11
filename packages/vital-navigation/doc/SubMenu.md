@@ -8,12 +8,6 @@ Vital `MenuTitle` to the Title inside every Item list (`<li>`) element.
 
 ## Content Editor Details
 
-?> **Note:** No (parent) Menu Item with children can be a Link; i.e., if you add a Sub-Menu to a
-Menu Item, the Menu Item cannot then be a Link.
-<br><br>
-If you add a Sub-Menu to a Menu Item after having already added a Menu Link, the Menu Link will
-become disabled; it will re-enable if you delete all the Sub-Menu Items.
-
 ### Add a Sub-Menu
 
 01. While in [Edit Mode](/ContentEditorUserGuide/#edit-mode), select the Menu Item you'd like to add

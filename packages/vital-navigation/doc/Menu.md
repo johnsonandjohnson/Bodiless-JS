@@ -25,9 +25,9 @@ In the end, the menu is rendered with the following structure:
 </Nav>
 ```
 
-The Wrapper is simply an `<ul>` element. By using `asBodilessMenu()`, the default `MenuClean`
-provides an editable Item list, rendered as `<li>`. The Title inside is just an editable link in the
-clean component, but the base/default tokens provided will replace it with Vital MenuTitle.
+The Wrapper is an `<ul>` element. By using `asBodilessMenu()`, the default `MenuClean` provides an
+editable Item list, rendered as `<li>`. The Title inside is just an editable link in the clean
+component, but the base/default tokens provided will replace it with Vital MenuTitle.
 
 ## Content Editor Details
 
@@ -38,12 +38,6 @@ Where made available by a Site Builder, you can add Menu Items to the Menu. Once
 - [Add a Sub-Menu](./Sub-Menu#add-a-sub-menu).
 
 ![Main Menu Item context menu](../assets/MainMenuItemContextMenu.jpg ':size=50%')
-
-?> **Note:** No (parent) Menu Item with children can be a Link; i.e., if you add a Sub-Menu to a
-Menu Item, the Menu Item cannot then be a Link.
-<br><br>
-If you add a Sub-Menu to a Menu Item after having already added a Menu Link, the Menu Link will
-become disabled; it will re-enable if you delete all the Sub-Menu Items.
 
 ### Add a Main Menu Item
 
