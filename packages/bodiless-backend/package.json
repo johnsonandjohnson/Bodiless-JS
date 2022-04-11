@@ -7,7 +7,11 @@
     "/bodiless.docs.json",
     "/src"
   ],
+  "bin": {
+    "bodiless-backend": "./bin/bodiless-backend"
+  },
   "dependencies": {
+    "@bodiless/cli": "^1.0.0-beta.2",
     "body-parser": "^1.18.3",
     "copyfiles": "^2.1.1",
     "dotenv": "^8.2.0",

@@ -15,7 +15,8 @@
   "files": [
     "/lib",
     "/doc",
-    "/bodiless.docs.json"
+    "/bodiless.docs.json",
+    "src/tailwindcss/resolveConfig.ts"
   ],
   "publishConfig": {
     "access": "public"
@@ -31,8 +32,10 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
+    "@bodiless/cli": "^1.0.0-beta.2",
     "lodash": "^4.17.19",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "babel-plugin-preval": "5.0.0"
   },
   "peerDependencies": {
     "react": "^17.0.2"

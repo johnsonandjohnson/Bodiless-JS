@@ -33,6 +33,7 @@
     "@bodiless/core": "^1.0.0-beta.2",
     "@bodiless/fclasses": "^1.0.0-beta.2",
     "@bodiless/hydration": "^1.0.0-beta.2",
+    "@bodiless/cli": "^1.0.0-beta.2",
     "@emotion/core": "^10.0.14",
     "@emotion/css": "^10.0.14",
     "@emotion/styled": "^10.0.14",

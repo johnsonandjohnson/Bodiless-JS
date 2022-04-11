@@ -13,11 +13,10 @@
  * limitations under the License.
  */
 
-/* eslint-disable no-console */
+/* eslint-disable no-console, global-require, import/no-dynamic-require */
+import path from 'path';
 import flow from 'lodash/flow';
 import fs from 'fs-extra';
-// import cleanSymlinks from './cleanSymlinks';
-import locateFiles from './locateFiles';
 import { withTreeFromFile, getSimplePaths, validatePaths } from './tree';
 import {
   writeTree, writeResources, copyFile, symlinkFile,
@@ -27,15 +26,18 @@ import { Tree } from './type';
 import readSettings from './readSettings';
 import buildApiDoc, { updateNavigation as apiDocUpdateNavigation } from './blApiDocsBuild';
 
+require('dotenv').config({ path: '.env.site' });
+
 const buildSubTree = async (toc: any, namespace: string) => {
-  // We start by using locateFiles and withTreeFromFile to build up an array of TreeHO and
+  // We start by using withTreeFromFile to build up an array of TreeHO and
   // at the same time we clean up the symlinks
-  const updates = await locateFiles({
-    filePattern: new RegExp(`${namespace}.docs.json$`),
-    // filePattern: /docs.json$/,
-    startingRoot: './',
-    action: withTreeFromFile,
-  });
+
+  const docsJsonPaths = require(path.join(path.resolve(), 'getDocs')).getDocs(namespace);
+
+  const updates = await Promise.all(
+    docsJsonPaths.map((path: string) => withTreeFromFile(path))
+  );
+
   const paths = flow(updates)(toc) as Tree;
   return paths;
 };

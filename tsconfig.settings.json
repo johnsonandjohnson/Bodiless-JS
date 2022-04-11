@@ -23,8 +23,6 @@
     "useDefineForClassFields": true,
     "baseUrl": "packages",
     "paths": {
-      "@bodiless/accessibility": ["bodiless-accessibility/src"],
-      "@bodiless/accessibility/*": ["bodiless-accessibility/src/*"],
       "@bodiless/accordion": ["bodiless-accordion/src"],
       "@bodiless/accordion/*": ["bodiless-accordion/src/*"],
       "@bodiless/bv": ["bodiless-bv/src"],

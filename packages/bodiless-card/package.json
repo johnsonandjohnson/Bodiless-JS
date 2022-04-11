@@ -29,6 +29,7 @@
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
+    "@bodiless/cli": "^1.0.0-beta.2",
     "@bodiless/core": "^1.0.0-beta.2",
     "@bodiless/fclasses": "^1.0.0-beta.2",
     "lodash": "^4.17.19",

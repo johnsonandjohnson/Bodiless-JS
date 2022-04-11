@@ -11,6 +11,7 @@
     "test": "__tests__"
   },
   "dependencies": {
+    "@bodiless/accessibility": "^1.0.0-beta.2",
     "@babel/core": "^7.9.0",
     "@bodiless/accordion": "^1.0.0-beta.2",
     "@bodiless/backend": "^1.0.0-beta.2",
@@ -66,7 +67,8 @@
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
     "react-markdown": "^8.0.0",
-    "react-mde": "^11.0.0"
+    "react-mde": "^11.0.0",
+    "esm": "^3.2.25"
   },
   "files": [
     "lib"
@@ -76,20 +78,19 @@
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "scripts": {
-    "build": "npm-run-all build:env-vars build:tailwind-configs build:lib build:scripts build:doc build:search",
+    "build": "npm-run-all build:env-vars build:lib build:scripts build:doc build:search",
     "build:doc": "bl-docs-build",
-    "build:env-vars": "generate-env-vars",
+    "build:env-vars": "bodiless generate-env-vars",
     "build:lib": "bl-clear-logs && gatsby build && bl-validate-logs",
     "build:scripts": "tsc -p ./tsconfig.json",
     "build:search": "npm run search-index",
     "build:stats": "BODILESS_BUILD_STATS=1 npm run build",
-    "build:tailwind-configs": "cross-env BODILESS_NPM_ROOT='.' generate-tailwind-configs",
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "rimraf ./public/* ./.cache",
-    "dev-backend": "node ./node_modules/@bodiless/backend/src/server.js",
+    "dev-backend": "bodiless-backend",
     "dev-frontend": "gatsby develop -p 8005",
     "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
-    "prestart": "run-s build:env-vars build:tailwind-configs build:doc",
+    "prestart": "run-s build:env-vars build:doc",
     "docs:serve": "docsify serve ./doc",
     "docs": "run-s build:doc docs:serve",
     "search-index": "create-search-index",

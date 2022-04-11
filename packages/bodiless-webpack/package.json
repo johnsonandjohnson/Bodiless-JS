@@ -30,6 +30,7 @@
     "prepack": "npm run clean && npm run build"
   },
   "dependencies": {
+    "@bodiless/cli": "^1.0.0-beta.2",
     "lodash": "^4.17.19",
     "webpack": "^5.69.1"
   },

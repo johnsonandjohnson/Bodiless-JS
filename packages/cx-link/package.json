@@ -40,6 +40,7 @@
     "@bodiless/hydration": "^1.0.0-beta.2",
     "@bodiless/richtext": "^1.0.0-beta.2",
     "@bodiless/richtext-ui": "^1.0.0-beta.2",
+    "@bodiless/cli": "^1.0.0-beta.2",
     "lodash": "^4.17.19",
     "tailwindcss": "^2.0.2"
   }
