@@ -26,6 +26,7 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
+    "@bodiless/cli": "^1.0.0-beta.2",
     "@bodiless/components": "^1.0.0-beta.2",
     "@bodiless/core": "^1.0.0-beta.2",
     "@bodiless/fclasses": "^1.0.0-beta.2",

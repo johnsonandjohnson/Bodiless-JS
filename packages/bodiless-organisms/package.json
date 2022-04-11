@@ -37,6 +37,7 @@
     "@bodiless/fclasses": "^1.0.0-beta.2",
     "@bodiless/richtext": "^1.0.0-beta.2",
     "@bodiless/richtext-ui": "^1.0.0-beta.2",
+    "@bodiless/cli": "^1.0.0-beta.2",
     "@types/react-burger-menu": "^2.6.0",
     "@types/react-tag-autocomplete": "^6.0.0",
     "lodash": "^4.17.19",

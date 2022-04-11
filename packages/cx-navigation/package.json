@@ -36,6 +36,7 @@
     "@bodiless/cx-link": "^1.0.0-beta.2",
     "@bodiless/fclasses": "^1.0.0-beta.2",
     "@bodiless/navigation": "^1.0.0-beta.2",
+    "@bodiless/cli": "^1.0.0-beta.2",
     "lodash": "^4.17.19"
   },
   "peerDependencies": {

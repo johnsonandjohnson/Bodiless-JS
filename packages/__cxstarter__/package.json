@@ -31,6 +31,7 @@
     "react": "^17.0.2"
   },
   "dependencies": {
+    "@bodiless/cli": "^1.0.0-beta.2",
     "@bodiless/components": "^1.0.0-beta.2",
     "@bodiless/components-ui": "^1.0.0-beta.2",
     "@bodiless/core": "^1.0.0-beta.2",

@@ -42,6 +42,7 @@
     "@bodiless/cx-layout": "^1.0.0-beta.2",
     "@bodiless/fclasses": "^1.0.0-beta.2",
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-beta.2",
+    "@bodiless/cli": "^1.0.0-beta.2",
     "lodash": "^4.17.19"
   }
 }

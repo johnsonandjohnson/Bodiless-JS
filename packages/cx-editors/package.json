@@ -43,6 +43,7 @@
     "@bodiless/richtext": "^1.0.0-beta.2",
     "@bodiless/richtext-ui": "^1.0.0-beta.2",
     "@bodiless/tokens": "^1.0.0-beta.2",
+    "@bodiless/cli": "^1.0.0-beta.2",
     "lodash": "^4.17.19"
   }
 }

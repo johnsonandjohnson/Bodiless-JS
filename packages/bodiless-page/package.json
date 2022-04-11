@@ -35,6 +35,7 @@
     "@bodiless/core": "^1.0.0-beta.2",
     "@bodiless/fclasses": "^1.0.0-beta.2",
     "@bodiless/ui": "^1.0.0-beta.2",
+    "@bodiless/cli": "^1.0.0-beta.2",
     "axios": "^0.21.0",
     "informed": "^3.34.0",
     "lodash": "^4.17.19",

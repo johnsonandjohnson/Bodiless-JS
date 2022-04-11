@@ -18,7 +18,7 @@ import {
 } from '@bodiless/layouts';
 // @ts-ignore Could not find a declaration file
 import resolvedConfigs from
-  '@bodiless/gatsby-theme-bodiless/src/dist/tailwindcss/resolveConfig';
+  '@bodiless/fclasses/src/tailwindcss/resolveConfig';
 // @ts-ignore Could not find a declaration file
 
 const asFlowContainerWithMargins = withDesign({
