@@ -51,6 +51,10 @@ const Base = asLayoutToken({
       not(useIsBurgerMenuHidden),
     )(as(cxHelmet.WithFixedBody, cxHelmet.WithDesktopStatickBody)),
   },
+  Theme: {
+    OuterContainer: 'flex flex-col h-screen',
+    ContainerWrapper: 'flex-grow',
+  },
   Content: {
     Header: addProps({ id: LayoutIds.HeaderContent }),
   },
