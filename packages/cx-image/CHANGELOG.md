@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.3](https://sourcecode.jnj.com/scm/asx-nbfp/canvasx/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2022-04-11)
+
+
+### Bug Fixes
+
+* Correct exports of package tailwind configs and starter activation. ([#1538](https://sourcecode.jnj.com/scm/asx-nbfp/canvasx/issues/1538)) ([51f5a54](https://sourcecode.jnj.com/scm/asx-nbfp/canvasx/commits/51f5a547517880cce55622f81c1aef906ca661f7))
+
+
+
+
+
 # [1.0.0-beta.2](https://sourcecode.jnj.com/scm/asx-nbfp/canvasx/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2022-04-05)
 
 
