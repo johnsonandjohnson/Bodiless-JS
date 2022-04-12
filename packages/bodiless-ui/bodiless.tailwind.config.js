@@ -57,22 +57,14 @@ const remGrid = {
 const tailwindcssDir = require('tailwindcss-dir');
 
 module.exports = {
-  future: {
-    purgeLayersByDefault: false,
-  },
-  // idea from: https://github.com/tailwindlabs/tailwindcss/discussions/6347#discussioncomment-2185719
-  ...(process.env.NODE_ENV === 'development') && {
-    safelist: [
-      {
-        // Covers all bl-classes
-        pattern: /^bl-/,
-      },
-      {
-        // Covers all variants
-        pattern: /:bl-/,
-      },
-    ],
-  },
+  safelist: [
+    {
+      pattern: /^bl-/, // Covers all bl-classes
+    },
+    {
+      pattern: /:bl-/, // Covers all variants
+    },
+  ],
   prefix: 'bl-',
   theme: {
     extend: {
