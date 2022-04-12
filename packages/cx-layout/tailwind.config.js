@@ -36,18 +36,23 @@ const twConfig = {
     maxWidth: {
       48: '12rem',
       56: '14rem',
+      screen: '100vw',
     },
     extend: {
       margin: {
-        'site-percent': '5%',
-        'md-site-percent': '8%',
-        'lg-site-percent': '8%',
+        'negative-half-screen': '-50vw',
       },
     },
   },
+  variants: {
+    backgroundColor: ['first', 'last', 'responsive'],
+    margin: ['first', 'last', 'responsive'],
+    padding: ['first', 'last', 'responsive'],
+    width: ['first', 'last', 'responsive'],
+  },
 };
 
-export default getPackageTailwindConfig({
+module.exports = getPackageTailwindConfig({
   twConfig,
   resolver,
 });

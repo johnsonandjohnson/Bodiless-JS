@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/ui",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "description": "Common default UI elements for BodilessJS",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
@@ -13,6 +13,7 @@
     "/lib",
     "/doc",
     "/bodiless.docs.json",
+    "/getDocs.js",
     "/bodiless.tailwind.config.js",
     "/index.tailwind.css"
   ],
@@ -33,9 +34,9 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/core": "^1.0.0-beta.2",
-    "@bodiless/fclasses": "^1.0.0-beta.2",
-    "@bodiless/cli": "^1.0.0-beta.2",
+    "@bodiless/cli": "^1.0.0-beta.3",
+    "@bodiless/core": "^1.0.0-beta.3",
+    "@bodiless/fclasses": "^1.0.0-beta.3",
     "autoprefixer": "^10.0.0",
     "informed": "^3.34.0",
     "lodash": "^4.17.19",

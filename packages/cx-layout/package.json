@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/cx-layout",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "description": "Layout components for the bodiless cx design system",
   "author": "Chris Odem <coden@its.jnj.com>",
   "license": "Apache-2.0",
@@ -9,8 +9,9 @@
   "typings": "lib/index.d.ts",
   "files": [
     "/lib",
-    "site.tailwind.config.js",
+    "tailwind.config.js",
     "/bodiless.docs.json",
+    "/getDocs.js",
     "/doc"
   ],
   "repository": {
@@ -28,17 +29,17 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/components": "^1.0.0-beta.2",
-    "@bodiless/components-ui": "^1.0.0-beta.2",
-    "@bodiless/core": "^1.0.0-beta.2",
-    "@bodiless/cx-editors": "^1.0.0-beta.2",
-    "@bodiless/cx-elements": "^1.0.0-beta.2",
-    "@bodiless/cx-image": "^1.0.0-beta.2",
-    "@bodiless/cx-navigation": "^1.0.0-beta.2",
-    "@bodiless/fclasses": "^1.0.0-beta.2",
-    "@bodiless/gatsby-theme-bodiless": "^1.0.0-beta.2",
-    "@bodiless/hydration": "^1.0.0-beta.2",
-    "@bodiless/cli": "^1.0.0-beta.2",
+    "@bodiless/cli": "^1.0.0-beta.3",
+    "@bodiless/components": "^1.0.0-beta.3",
+    "@bodiless/components-ui": "^1.0.0-beta.3",
+    "@bodiless/core": "^1.0.0-beta.3",
+    "@bodiless/cx-editors": "^1.0.0-beta.3",
+    "@bodiless/cx-elements": "^1.0.0-beta.3",
+    "@bodiless/cx-image": "^1.0.0-beta.3",
+    "@bodiless/cx-navigation": "^1.0.0-beta.3",
+    "@bodiless/fclasses": "^1.0.0-beta.3",
+    "@bodiless/gatsby-theme-bodiless": "^1.0.0-beta.3",
+    "@bodiless/hydration": "^1.0.0-beta.3",
     "lodash": "^4.17.19",
     "mobx": "^6.0.0",
     "mobx-react": "^7.2.1",

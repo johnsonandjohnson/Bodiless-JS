@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/accordion",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "description": "Basic accordion component.",
   "author": "Guilherme Zeni <gzeni@its.jnj.com>",
   "license": "Apache-2.0",
@@ -9,7 +9,7 @@
   "typings": "lib/index.d.ts",
   "files": [
     "/lib",
-    "site.tailwind.config.js"
+    "tailwind.config.js"
   ],
   "repository": {
     "type": "git",
@@ -26,10 +26,10 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.2",
-    "@bodiless/components": "^1.0.0-beta.2",
-    "@bodiless/core": "^1.0.0-beta.2",
-    "@bodiless/fclasses": "^1.0.0-beta.2",
+    "@bodiless/cli": "^1.0.0-beta.3",
+    "@bodiless/components": "^1.0.0-beta.3",
+    "@bodiless/core": "^1.0.0-beta.3",
+    "@bodiless/fclasses": "^1.0.0-beta.3",
     "lodash": "^4.17.19",
     "react-contenteditable": "^3.2.6",
     "react-dropzone": "^10.1.5",
