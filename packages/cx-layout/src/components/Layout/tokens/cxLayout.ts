@@ -40,6 +40,10 @@ const Base = asLayoutToken({
       'sr-only focus:not-sr-only',
     ),
   },
+  Theme: {
+    OuterContainer: 'flex flex-col h-screen',
+    ContainerWrapper: 'flex-grow',
+  },
 });
 
 const Default = asLayoutToken({
