@@ -1,17 +1,18 @@
 {
   "name": "@bodiless/backend",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "description": "",
   "main": "",
   "files": [
     "/bodiless.docs.json",
+    "/getDocs.js",
     "/src"
   ],
   "bin": {
     "bodiless-backend": "./bin/bodiless-backend"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.2",
+    "@bodiless/cli": "^1.0.0-beta.3",
     "body-parser": "^1.18.3",
     "copyfiles": "^2.1.1",
     "dotenv": "^8.2.0",

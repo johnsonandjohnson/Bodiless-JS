@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/layouts",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "description": "Layout managers for BodilessJS.",
   "author": "Erik Summerfield <esummer3@its.jnj.com>",
   "homepage": "",
@@ -16,7 +16,8 @@
     "/lib",
     "/doc",
     "/bodiless.docs.json",
-    "site.tailwind.config.js"
+    "/getDocs.js",
+    "tailwind.config.js"
   ],
   "repository": {
     "type": "git",
@@ -36,9 +37,9 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.2",
-    "@bodiless/core": "^1.0.0-beta.2",
-    "@bodiless/fclasses": "^1.0.0-beta.2",
+    "@bodiless/cli": "^1.0.0-beta.3",
+    "@bodiless/core": "^1.0.0-beta.3",
+    "@bodiless/fclasses": "^1.0.0-beta.3",
     "axios": "^0.21.0",
     "html2canvas": "^1.0.0-rc.3",
     "informed": "^3.34.0",

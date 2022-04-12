@@ -117,7 +117,7 @@ configuration should be applied.
 
 <!-- TODO: Update link after `cx-elements` is renamed. -->
 Let's take color as an example. The [Vital Tailwind
-configuration](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-elements/site.tailwind.config.js
+configuration](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-elements/tailwind.config.js
 ':target=_blank') defines a base color palette:
 
 ```js

@@ -24,9 +24,9 @@ Provide the Shadowing function as defined in [Shadow](./CX_Shadow).
 File to shadow:
 [`cxFontSize`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-elements/src/components/Element/FontSize/tokens/cxFontSize.ts)
 
-### Option 2: Override in `site.tailwind.config.js` File
+### Option 2: Override in `tailwind.config.js` File
 
-Within your package/site's `site.tailwind.config.js`, you can replace the Tailwind elements with
+Within your package/site's `tailwind.config.js`, you can replace the Tailwind elements with
 your own font sizes, line height, and (optionally) spacing.
 
 ```js
@@ -64,7 +64,7 @@ Provide the Shadowing function as defined in [Shadow](./CX_Shadow).
 File to shadow:
 [`cxColor`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-elements/src/components/Element/Color/tokens/cxColor.ts)
 
-### Option 2: Override in `site.tailwind.config.js` File
+### Option 2: Override in `tailwind.config.js` File
 
 ```js
 module.exports = {

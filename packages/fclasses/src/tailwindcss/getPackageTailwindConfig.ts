@@ -96,7 +96,7 @@ export const getPackageTailwindConfig: GetPackageTailwindConfig = props => {
     const configs = deps.reduce(
       (config, next) => {
         try {
-          const nextExport = require(resolver(join(next, 'tailwind.config'))).default;
+          const nextExport = require(resolver(join(next, 'tailwind.config')));
           const nextConfig = Array.isArray(nextExport) ? nextExport : [{
             name: next,
             root: join(resolver(join(next, 'package.json')), '..'),
