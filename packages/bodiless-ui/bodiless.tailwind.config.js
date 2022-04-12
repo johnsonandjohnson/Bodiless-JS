@@ -60,20 +60,19 @@ module.exports = {
   future: {
     purgeLayersByDefault: false,
   },
-  content: [
-    './lib/**/!(*.d).{ts,js,jsx,tsx}',
-    // All the following packages, bl-* classes were found so
-    // whitelist. Best way or look for alternative.
-    '../bodiless-components/src/**/!(*.d).{ts,js,jsx,tsx}',
-    '../bodiless-components-ui/src/**/!(*.d).{ts,js,jsx,tsx}',
-    '../bodiless-carousel/src/**/!(*.d).{ts,js,jsx,tsx}',
-    '../bodiless-core/src/**/!(*.d).{ts,js,jsx,tsx}',
-    '../bodiless-core-ui/src/**/!(*.d).{ts,js,jsx,tsx}',
-    '../bodiless-layouts/src/**/!(*.d).{ts,js,jsx,tsx}',
-    '../bodiless-layouts-ui/src/**/!(*.d).{ts,js,jsx,tsx}',
-    '../bodiless-richtext/src/**/!(*.d).{ts,js,jsx,tsx}',
-    '../bodiless-richtext-ui/src/**/!(*.d).{ts,js,jsx,tsx}',
-  ],
+  // idea from: https://github.com/tailwindlabs/tailwindcss/discussions/6347#discussioncomment-2185719
+  ...(process.env.NODE_ENV === 'development') && {
+    safelist: [
+      {
+        // Covers all bl-classes
+        pattern: /^bl-/,
+      },
+      {
+        // Covers all variants
+        pattern: /:bl-/,
+      },
+    ],
+  },
   prefix: 'bl-',
   theme: {
     extend: {
