@@ -19,7 +19,7 @@ import { asSearchTogglerToken } from './SearchTogglerClean';
  */
 const Base = asSearchTogglerToken({
   Layout: {
-    Wrapper: 'lg:hidden',
+    Wrapper: 'xl:hidden',
   },
   Spacing: {
     Wrapper: 'my-4',

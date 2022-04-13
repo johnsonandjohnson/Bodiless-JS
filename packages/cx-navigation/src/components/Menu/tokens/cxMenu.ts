@@ -115,6 +115,7 @@ const Footer = asMenuToken({
   },
   Spacing: {
     Title: 'lg:mb-4',
+    Wrapper: 'md:space-x-10 lg:space-x-12',
   },
   Theme: {
     // @TODO: This 'as' is needed only because of a bug and should be removed when it is fixed.
