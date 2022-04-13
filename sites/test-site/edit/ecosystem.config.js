@@ -5,13 +5,13 @@ module.exports = {
   apps: [
     {
       name: 'frontend',
-      cwd: `${appVolume()}/root/sites/__cxstarter__`,
+      cwd: `${appVolume()}/root/sites/test-site`,
       script: `${appVolume()}/root/node_modules/.bin/gatsby`,
       args: `develop --port ${gatsbyPort()}`,
     },
     {
       name: 'backend',
-      cwd: `${appVolume()}/root/sites/__cxstarter__`,
+      cwd: `${appVolume()}/root/sites/test-site`,
       script: `${appVolume()}/root/packages/bodiless-backend/src/server.js`,
     },
   ],
