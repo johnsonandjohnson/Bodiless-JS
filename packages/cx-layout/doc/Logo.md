@@ -1,4 +1,4 @@
-# CanvasX Logo Component
+# VitalDS Logo Component
 
 The Logo is a simple component with a wrapper around a linked image with the following features:
 

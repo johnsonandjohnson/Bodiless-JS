@@ -1,3 +1,3 @@
-# CanvasX Search Component
+# VitalDS Search Component
 
 TBD

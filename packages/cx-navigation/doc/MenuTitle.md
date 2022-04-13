@@ -1,10 +1,10 @@
-# CX MenuTitle Component
+# Vital MenuTitle Component
 
-The CX MenuTitle Component extends Bodiless MenuTitle to apply CX Editors and Link.
+The Vital MenuTitle Component extends Bodiless MenuTitle to apply Vital Editors and Link.
 
 ## Site Builder Details
 
-From a Site Builder perspective, CX MenuTitle is comprised of a token collection (`cxMenuTitle`) and a MenuTitle component (`MenuTitleClean`). You can use the default CX MenuTitle token (`cxMenuTitle.Default`) as is, or you can recompose it to meet your site's requirements.
+From a Site Builder perspective, Vital MenuTitle is comprised of a token collection (`cxMenuTitle`) and a MenuTitle component (`MenuTitleClean`). You can use the default Vital MenuTitle token (`cxMenuTitle.Default`) as is, or you can recompose it to meet your site's requirements.
 
 ### Usage
 

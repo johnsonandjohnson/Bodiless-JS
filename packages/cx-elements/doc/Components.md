@@ -1,3 +1,3 @@
-# CanvasX Components
+# VitalDS Components
 
-A collection of components that implement the CanvasX Design System.
+A collection of components that implement the VitalDS Design System.

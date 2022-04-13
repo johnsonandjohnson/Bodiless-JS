@@ -1,7 +1,7 @@
-# CanvasX Elements
+# VitalDS Elements
 
-CanvasX Elements is composed of [element tokens](/Design/DesignSystem#element-tokens) to implement
-an opinionated CanvasX design system.
+VitalDS Elements is composed of [element tokens](/Design/DesignSystem#element-tokens) to implement
+an opinionated VitalDS design system.
 
 It consists of the following types of component element tokens, and they are all in associated
 tokens folders:
@@ -13,14 +13,14 @@ tokens folders:
 
 ## Content Editor Details
 
-There is no interaction by the Content Editor with the CanvasX element tokens, only with tokens once
+There is no interaction by the Content Editor with the VitalDS element tokens, only with tokens once
 they've been composed into components.
 
 ## Site Builder Details
 
-### Usage of CX Element Tokens As Is
+### Usage of Vital Element Tokens As Is
 
-The Site Builder has the ability to use any of the token CanvasX elements which are in the
+The Site Builder has the ability to use any of the token VitalDS elements which are in the
 `cx-elements` collection.
 
 #### Usage
@@ -52,7 +52,7 @@ const Foo = {
 };
 ```
 
-### Using CX Element Tokens, but Customizing for Site-Specific Typography
+### Using Vital Element Tokens, but Customizing for Site-Specific Typography
 
 The Site Builder may need to override a specific token, or a specific set of tokens, and the
 following is a how-to guide to apply the [best methodology](./CX_SiteTypography) for doing so.
@@ -131,9 +131,9 @@ The package also includes some helper tokens that are very useful in token compo
 
     * The above example will apply the same meta to all element tokens.
 
-### Shadowing CX Element Tokens
+### Shadowing Vital Element Tokens
 
-For more information on shadowing CX Element tokens, read [CX Shadow](./CX_Shadow.md).
+For more information on shadowing Vital Element tokens, read [Vital Shadow](./CX_Shadow.md).
 
 ## Architectural Details
 

@@ -1,22 +1,22 @@
-# CanvasX Rich Text Editor Component
+# VitalDS Rich Text Editor Component
 
-The CanvasX Rich Text Editor Component is based on the [BodilessJS Rich Text Editor
+The VitalDS Rich Text Editor Component is based on the [BodilessJS Rich Text Editor
 Component](/Components/Editors/RichText). While Bodiless Rich Text is a generic rich text editor
-(RTE) component with tokens that can be combined however you choose, CX Rich Text builds upon it,
-providing a sensible default combination of its generic [CanvasX tokens](../CX_Elements/), to help
+(RTE) component with tokens that can be combined however you choose, Vital Rich Text builds upon it,
+providing a sensible default combination of its generic [VitalDS tokens](../CX_Elements/), to help
 meet typical site-use expectations.
 
-By default, the only option available for the CX Rich Text Editor is the _Full_ Rich Text Editor.
+By default, the only option available for the Vital Rich Text Editor is the _Full_ Rich Text Editor.
 
 ## Content Editor Details
 
 Other than potentially seeing different buttons available, there is no change to the Editor
-experience by the CX Editor package, and, thus, you can refer to the [Bodiless Rich Text Editor :
+experience by the Vital Editor package, and, thus, you can refer to the [Bodiless Rich Text Editor :
 Content Editor Details](/Components/Editors/RichText#content-editor-details).
 
 ## Site Builder Details
 
-### Usage of the CX Rich Text Editor
+### Usage of the Vital Rich Text Editor
 
 What's shown in the following example can be applied to any Slot.
 
@@ -46,11 +46,11 @@ Provide the Shadowing function as defined in [Shadow](../CX_Elements/CX_Shadow).
 File to shadow:
 [`cxRichText`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-editors/src/components/RichText/tokens/cxRichText.ts)
 
-#### Via Overriding Specific Existing Styles Using CanvasX Rich Text Editor
+#### Via Overriding Specific Existing Styles Using VitalDS Rich Text Editor
 
-See [CanvasX Site Typography](../CX_Elements/CX_SiteTypography).
+See [VitalDS Site Typography](../CX_Elements/CX_SiteTypography).
 
-### Extending Default CanvasX Rich Text Editor
+### Extending Default VitalDS Rich Text Editor
 
 At site or global regional/brand library level, a site can compose a set of new tokens to meet the
 design requirements, and provide additional Rich Text functionality (typically, via buttons).

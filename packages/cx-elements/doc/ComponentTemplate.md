@@ -1,11 +1,11 @@
-# CanvasX Component Template
+# VitalDS Component Template
 
-Every component/package in the CanvasX Design System (or one which extends it) should follow these
+Every component/package in the VitalDS Design System (or one which extends it) should follow these
 conventions.
 
 ## File Structure
 
-Packages defining CanvasX components and/or tokens should use the following file structure. Some
+Packages defining VitalDS components and/or tokens should use the following file structure. Some
 files are optional; see below for full details.
 
 ```
@@ -29,7 +29,7 @@ bodiless.docs.json
 This structure is intended to facilitate two build-time webpack optimizations:
 
 - [Static Replacement](./StaticReplacement): Removes unnecessary code from the production bundle.
-- [Token Shadowing](./Shadow): Allows a downstream package to define an override of any CanvasX
+- [Token Shadowing](./Shadow): Allows a downstream package to define an override of any VitalDS
   token collection.
 
 The files and directories are described in more detail below:
@@ -190,7 +190,7 @@ export { default as cxFoo } from './tokens';
 
 This should include, at a minimum, the following keys:
 
-- `name`: Should be namespaced to `@bodiless` for CanvasX packages.
+- `name`: Should be namespaced to `@bodiless` for VitalDS packages.
 - `version`: This field is managed by Lerna. Currently, all Bodiless packages.
 - `license`: Set to `Apache 2.0` for all Bodiless packages. maintain a common version line.
 - `description`

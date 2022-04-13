@@ -1,6 +1,6 @@
-# CX Menu Component
+# Vital Menu Component
 
-The CX Menu Component provides a generic menu that can used for navigation elements. It extends bodiless menu by wrapping it inside a `<nav>` element to create a clean component:
+The Vital Menu Component provides a generic menu that can used for navigation elements. It extends bodiless menu by wrapping it inside a `<nav>` element to create a clean component:
 
 ```tsx
 const MenuClean = flowHoc(
@@ -22,13 +22,13 @@ In the end, the menu is rendered in the following structure:
 </Nav>
 ```
 
-The Wrapper is just an `<ul>` element. By using `asBodilessMenu()`, the default MenuClean provides an editable Item list, rendered as `<li>`. The Title inside is just an editable link in the clean component but the base/default tokens provided will replace it with CX MenuTitle.
+The Wrapper is just an `<ul>` element. By using `asBodilessMenu()`, the default MenuClean provides an editable Item list, rendered as `<li>`. The Title inside is just an editable link in the clean component but the base/default tokens provided will replace it with Vital MenuTitle.
 
 ## Site Builder Details
 
-From a Site Builder perspective, CX Menu is comprised of a token collection (`cxMenu`) and a Menu component (`MenuClean`). You can use the base CX Menu token (`cxMenu.Base`) to provide a menu structure, or use default CX Menu token (`cxMenu.Default`) to provide a menu with submenus structure, or you can even recompose it to meet your site's requirements.
+From a Site Builder perspective, Vital Menu is comprised of a token collection (`cxMenu`) and a Menu component (`MenuClean`). You can use the base Vital Menu token (`cxMenu.Base`) to provide a menu structure, or use default Vital Menu token (`cxMenu.Default`) to provide a menu with submenus structure, or you can even recompose it to meet your site's requirements.
 
-Some recomposed tokens are already provided for CX, like:
+Some recomposed tokens are already provided for Vital, like:
 
 - Utility (cxMenu.Utility)
 - Footer (cxMenu.Footer)
@@ -58,7 +58,7 @@ export default Header;
 
 ## Architectural Details
 
-About the tokens provided by CX Menu, here are some differences:
+About the tokens provided by Vital Menu, here are some differences:
 
 - Base provides basic menu, with no submenu lists
 - Default extends Base menu and provides submenu lists

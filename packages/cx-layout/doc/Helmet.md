@@ -1,4 +1,4 @@
-# CanvasX Helmet Component
+# VitalDS Helmet Component
 
 The Helmet Component collects all the data that will be rendered in the Head. We have designated
 five individual slots for different types of data.
@@ -59,5 +59,5 @@ to the head of the pages created from that template.
 
 ## Architectural Details
 
-CX Helmet is a wrapper around a group of slots for specific purposes:
+Vital Helmet is a wrapper around a group of slots for specific purposes:
 [`HelmetClean.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-layout/src/components/Helmet/HelmetClean.tsx).

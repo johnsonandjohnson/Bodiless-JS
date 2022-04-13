@@ -3,7 +3,7 @@
 The typography starts with defining the font, font size, and line-heights within your
 package/site's `tailwind.config.js`.
 
-## Getting Started with CanvasX Elements: Prebuilt Typography
+## Getting Started with VitalDS Elements: Prebuilt Typography
 
 The `cx-elements` package provides opinionated typography that can be used as is, or, if needed,
 parts can be overridden by your site.
@@ -11,13 +11,13 @@ parts can be overridden by your site.
 For more information on specific details of typography, it is best to review
 [`cx-elements`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/cx-elements).
 
-If you plan on leveraging other CanvasX components, we recommend leveraging all or parts of
+If you plan on leveraging other VitalDS components, we recommend leveraging all or parts of
 `cx-elements`.
 
-For more details on usage and getting started using this package, please follow the [CanvasX
+For more details on usage and getting started using this package, please follow the [VitalDS
 Elements Typography Guide](/CX_DesignSystem/Components/CX_Elements/CX_SiteTypography).
 
-## Developing Your Typography without Leveraging CanvasX Elements
+## Developing Your Typography without Leveraging VitalDS Elements
 
 The following section defines a high-level overview of defining your typography. For best practices,
 we recommend following patterns seen in the `cx-elements` package.
@@ -73,7 +73,7 @@ one occurrence than to search through files and replace the specific class.
 If you want to apply the classes to your entire site, we recommend the following practice:
 
 01. Within `asHelmetToken()`, and in the _Theme_ Domain, provide the site's font class.
-    - For more information, see: [CanvasX Helmet
+    - For more information, see: [VitalDS Helmet
       Component](/CX_DesignSystem/Components/CX_Layout/Helmet).
 
 01. In `/cx-layout/src/components/Helmet/Helmet.token.ts`, within `asHelmetToken()`, and in the

@@ -1,6 +1,6 @@
-# CX Separator Component
+# Vital Separator Component
 
-The CX Separator Component provides a collection of tokens to add a separator between menu elements. This can be recomposed to meet your site's requirements.
+The Vital Separator Component provides a collection of tokens to add a separator between menu elements. This can be recomposed to meet your site's requirements.
 
 ### Usage
 

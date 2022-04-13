@@ -1,7 +1,7 @@
-# Shadowing CanvasX Tokens
+# Shadowing VitalDS Tokens
 
-Bodiless provides a mechanism to override the tokens provided by a CanvasX package, changing their
-effect wherever they are used in the CanvasX Design System. The method, known as "Token Shadowing,"
+Bodiless provides a mechanism to override the tokens provided by a VitalDS package, changing their
+effect wherever they are used in the VitalDS Design System. The method, known as "Token Shadowing,"
 is similar to [Gatsby Component
 Shadowing](https://www.gatsbyjs.com/blog/2019-04-29-component-shadowing/ ':target=_blank'), but more
 restrictive. In particular, only token collections are shadowable using this technique, and the

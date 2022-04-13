@@ -1,6 +1,6 @@
-# CanvasX FlowContainer Tokens
+# VitalDS FlowContainer Tokens
 
-The CanvasX flowcontainer provides some useful tokens that can be used to quick constrainments on flowcontainer.  It also provides token that provides ability to do a ContentRegion aka. nested flowcontainer.
+The VitalDS flowcontainer provides some useful tokens that can be used to quick constrainments on flowcontainer.  It also provides token that provides ability to do a ContentRegion aka. nested flowcontainer.
 
 ## Content Editor Details
 

@@ -1,6 +1,6 @@
-# CanvasX Plain Text Editor Component
+# VitalDS Plain Text Editor Component
 
-The CanvasX Plain Text Editor consists of defining the placeholder, and setting it up to allow
+The VitalDS Plain Text Editor consists of defining the placeholder, and setting it up to allow
 auto-superscripting, if necessary.
 
 ## Content Editor Details

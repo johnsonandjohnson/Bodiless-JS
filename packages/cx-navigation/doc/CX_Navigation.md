@@ -1,8 +1,8 @@
 @bodiless/cx-navigation / [Exports](modules.md)
 
-# CX Navigation Components
+# Vital Navigation Components
 
-The CX Navigation (`@bodiless/cx-navigation`) package is composed of the following components:
+The Vital Navigation (`@bodiless/cx-navigation`) package is composed of the following components:
 
 - [BurgerMenu](./BurgerMenu)
 - [Menu](./Menu)

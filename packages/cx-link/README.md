@@ -1,3 +1,3 @@
 # `@bodiless/cx-link`
 
-See [CX Link Docs](./doc/Link.md).
+See [Vital Link Docs](./doc/Link.md).

@@ -1,6 +1,6 @@
-# CanvasX Header Component
+# VitalDS Header Component
 
-The CX Header Component provides a header with the following elements:
+The Vital Header Component provides a header with the following elements:
 
 - Logo
 - Menu
@@ -22,13 +22,13 @@ By default, the editable components include:
 
 ## Site Builder Details
 
-From a Site Builder perspective, CX Header is comprised of a token collection (`cxHeader`) and a
-Header component (`HeaderClean`). You can use the default CX Header token (`cxHeader.Default`) as
+From a Site Builder perspective, Vital Header is comprised of a token collection (`cxHeader`) and a
+Header component (`HeaderClean`). You can use the default Vital Header token (`cxHeader.Default`) as
 is, or you can recompose it to meet your site's requirements.
 
 ### Usage
 
-Using the following code example as a guide, you can create a Header using the CanvasX default
+Using the following code example as a guide, you can create a Header using the VitalDS default
 tokens, and applying the correct node keys. Remember to apply the necessary imports to the file.
 
 ```tsx
@@ -86,6 +86,6 @@ This token is then applied to the Header slot within Layout.
 
 ## Architectural Details
 
-CX Header provides a `<header>` element wrapper around its internal elements. To see how these
+Vital Header provides a `<header>` element wrapper around its internal elements. To see how these
 elements are structured within the wrapper, please see:
 [`HeaderClean.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-layout/src/components/Header/HeaderClean.tsx)

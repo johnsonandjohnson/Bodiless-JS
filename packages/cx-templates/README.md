@@ -4,4 +4,4 @@ Designable templates.
 
 ## Templates List
 
-- [CX Generic](./doc/Generic.md) - CX Generic template
+- [Vital Generic](./doc/Generic.md) - Vital Generic template
