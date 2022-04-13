@@ -16,13 +16,13 @@ import React from 'react';
 import { withNodeKey } from '@bodiless/core';
 import {
   EditorPlainClean, cxEditorPlain, RichTextClean, cxRichText
-} from '@bodiless/cx-editors';
-import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/cx-templates';
+} from '@bodiless/vital-editors';
+import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/vital-templates';
 import {
   as, flowHoc, replaceWith,
   H3, Section, Pre, Div,
 } from '@bodiless/fclasses';
-import { cxColor, cxTypography } from '@bodiless/cx-elements';
+import { cxColor, cxTypography } from '@bodiless/vital-elements';
 
 const C = {
   H3: as(cxTypography.H3)(H3),

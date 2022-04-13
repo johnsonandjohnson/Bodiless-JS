@@ -1,7 +1,7 @@
 import React from 'react';
-import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/cx-templates';
+import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/vital-templates';
 import { flowHoc, on, replaceWith } from '@bodiless/fclasses';
-import { FooterClean, cxFooter } from '@bodiless/cx-layout';
+import { FooterClean, cxFooter } from '@bodiless/vital-layout';
 
 // Apply similar method as done in the cxLayout token.
 const StickFooterLayout = asStyleGuideTemplateToken({

@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import { cxTypography } from '@bodiless/cx-elements';
-import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/cx-templates';
+import { cxTypography } from '@bodiless/vital-elements';
+import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/vital-templates';
 import {
   flowHoc, H2, replaceWith, as, P
 } from '@bodiless/fclasses';

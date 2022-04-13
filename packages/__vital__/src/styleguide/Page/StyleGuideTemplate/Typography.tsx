@@ -24,11 +24,11 @@ import {
   as,
   replaceWith,
 } from '@bodiless/fclasses';
-import { withEditorPlain } from '@bodiless/cx-editors';
-import { cxTypography } from '@bodiless/cx-elements';
-import { LinkClean, cxLink } from '@bodiless/cx-link';
+import { withEditorPlain } from '@bodiless/vital-editors';
+import { cxTypography } from '@bodiless/vital-elements';
+import { LinkClean, cxLink } from '@bodiless/vital-link';
 import { withNodeKey } from '@bodiless/core';
-import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/cx-templates';
+import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/vital-templates';
 
 const H1Title = flowHoc(
   withEditorPlain('title', 'Page Title'),

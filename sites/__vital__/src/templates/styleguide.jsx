@@ -13,7 +13,7 @@
  */
 
 import { graphql } from 'gatsby';
-import { StyleGuideTemplateClean } from '@bodiless/cx-templates';
+import { StyleGuideTemplateClean } from '@bodiless/vital-templates';
 import { as } from '@bodiless/fclasses';
 import { __vital__StyleGuidePage } from '--vital--';
 

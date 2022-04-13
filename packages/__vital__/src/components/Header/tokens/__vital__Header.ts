@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { cxHeader, asHeaderToken } from '@bodiless/cx-layout';
+import { cxHeader, asHeaderToken } from '@bodiless/vital-layout';
 
 const Default = asHeaderToken({
   ...cxHeader.Default,

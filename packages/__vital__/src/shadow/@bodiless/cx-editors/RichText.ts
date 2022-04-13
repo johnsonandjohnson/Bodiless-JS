@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import { asFluidToken } from '@bodiless/cx-elements';
-import { cxRichTextBase } from '@bodiless/cx-editors';
+import { asFluidToken } from '@bodiless/vital-elements';
+import { cxRichTextBase } from '@bodiless/vital-editors';
 import { addProps } from '@bodiless/fclasses';
 
 const Default = asFluidToken({

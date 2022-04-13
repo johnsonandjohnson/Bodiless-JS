@@ -19,9 +19,9 @@ import {
   as,
   replaceWith,
 } from '@bodiless/fclasses';
-import { cxFlowContainer, FlowContainerClean } from '@bodiless/cx-flowcontainer';
+import { cxFlowContainer, FlowContainerClean } from '@bodiless/vital-flowcontainer';
 
-import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/cx-templates';
+import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/vital-templates';
 
 const DefaultFlowContainer = as(
   cxFlowContainer.Default,

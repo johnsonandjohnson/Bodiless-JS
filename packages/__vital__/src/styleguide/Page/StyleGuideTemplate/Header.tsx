@@ -13,9 +13,9 @@
  */
 
 import React from 'react';
-import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/cx-templates';
+import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/vital-templates';
 import { flowHoc, on, replaceWith } from '@bodiless/fclasses';
-import { cxHeader, HeaderClean } from '@bodiless/cx-layout';
+import { cxHeader, HeaderClean } from '@bodiless/vital-layout';
 
 export const Header = asStyleGuideTemplateToken(cxStyleGuideTemplate.NoLayout, {
   Meta: flowHoc.meta.term('Token')('Header'),

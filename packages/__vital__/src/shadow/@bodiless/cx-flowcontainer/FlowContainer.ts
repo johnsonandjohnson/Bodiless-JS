@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import { asFluidToken } from '@bodiless/cx-elements';
-import { cxFlowContainerBase } from '@bodiless/cx-flowcontainer';
+import { asFluidToken } from '@bodiless/vital-elements';
+import { cxFlowContainerBase } from '@bodiless/vital-flowcontainer';
 import { addProps } from '@bodiless/fclasses';
 
 const Default = asFluidToken({

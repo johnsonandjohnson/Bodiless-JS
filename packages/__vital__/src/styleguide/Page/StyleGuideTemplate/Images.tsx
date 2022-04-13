@@ -20,8 +20,8 @@ import {
   replaceWith,
   Img,
 } from '@bodiless/fclasses';
-import { cxImage } from '@bodiless/cx-image';
-import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/cx-templates';
+import { cxImage } from '@bodiless/vital-image';
+import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/vital-templates';
 
 const DefaultImage = as(
   cxImage.Default,

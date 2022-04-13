@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { cxFooter, asFooterToken } from '@bodiless/cx-layout';
+import { cxFooter, asFooterToken } from '@bodiless/vital-layout';
 
 const Default = asFooterToken({
   ...cxFooter.Default,

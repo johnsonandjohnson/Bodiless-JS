@@ -20,13 +20,13 @@ import {
   on,
   replaceWith
 } from '@bodiless/fclasses';
-import { asFluidToken } from '@bodiless/cx-elements';
+import { asFluidToken } from '@bodiless/vital-elements';
 import {
   cxPage,
   GenericTemplateClean,
   cxGenericTemplate,
   asGenericTemplateToken
-} from '@bodiless/cx-templates';
+} from '@bodiless/vital-templates';
 import { useNode } from '@bodiless/core';
 
 // @todo remove NoBreadcrumbsGeneric when breadcrumbs is implemented and

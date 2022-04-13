@@ -9,7 +9,7 @@ The `cx-elements` package provides opinionated typography that can be used as is
 parts can be overridden by your site.
 
 For more information on specific details of typography, it is best to review
-[`cx-elements`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/cx-elements).
+[`cx-elements`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-elements).
 
 If you plan on leveraging other VitalDS components, we recommend leveraging all or parts of
 `cx-elements`.
@@ -76,7 +76,7 @@ If you want to apply the classes to your entire site, we recommend the following
     - For more information, see: [VitalDS Helmet
       Component](/CX_DesignSystem/Components/CX_Layout/Helmet).
 
-01. In `/cx-layout/src/components/Helmet/Helmet.token.ts`, within `asHelmetToken()`, and in the
+01. In `/vital-layout/src/components/Helmet/Helmet.token.ts`, within `asHelmetToken()`, and in the
     _Theme_ Domain, provide the site's font class.
 
     ```js

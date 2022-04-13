@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { asElementToken, cxTypographyBase } from '@bodiless/cx-elements';
+import { asElementToken, cxTypographyBase } from '@bodiless/vital-elements';
 import { addProps } from '@bodiless/fclasses';
 
 export default {

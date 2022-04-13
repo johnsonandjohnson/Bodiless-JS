@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { cxLayout, asLayoutToken } from '@bodiless/cx-layout';
+import { cxLayout, asLayoutToken } from '@bodiless/vital-layout';
 import { __vital__Footer } from '../../Footer';
 import { __vital__Header } from '../../Header';
 
