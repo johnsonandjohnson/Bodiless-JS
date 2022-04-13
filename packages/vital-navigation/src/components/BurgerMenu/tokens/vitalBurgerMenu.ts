@@ -38,14 +38,14 @@ const Base = asBurgerMenuToken({
     WhereToBuy: vitalLink.WhereToBuyWithoutIcon,
   },
   Layout: {
-    Wrapper: 'w-full h-full fixed left-0 top-0 bottom-0 md:w-7/12 lg:hidden',
+    Wrapper: 'w-full h-full fixed left-0 top-0 bottom-0 md:w-7/12 xl:hidden',
     Container: 'flex flex-col h-full max-h-screen',
     MenuTogglerWrapper: 'flex justify-end',
     MenuToggler: 'flex justify-center items-center',
     MenuWrapper: 'flex-grow overflow-y-auto',
     FooterWrapper: 'w-full flex flex-col items-center',
     ActionFooterContainer: 'w-full flex justify-center items-center',
-    Overlay: 'w-full h-full fixed left-0 top-0 lg:hidden',
+    Overlay: 'w-full h-full fixed left-0 top-0 xl:hidden',
   },
   Spacing: {
     // @TODO: perhaps this should be an element spacing token like "LargeIconSize".

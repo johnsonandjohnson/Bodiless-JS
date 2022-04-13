@@ -25,7 +25,7 @@ const Base = asSocialLinksToken({
   // @TODO: After Social Links implementations, readjust layout.
   Layout: {
     Wrapper: 'w-full flex',
-    InnerWrapper: 'w-full inline-flex justify-between mx-4 md:mx-0 lg:w-20 lg:mx-10 lg:mr-16',
+    InnerWrapper: 'w-full inline-flex justify-between mx-4 md:mx-0 xl:w-20 xl:mx-10 xl:mr-16',
   }
 });
 
