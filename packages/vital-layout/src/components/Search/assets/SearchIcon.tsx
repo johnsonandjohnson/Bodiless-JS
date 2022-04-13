@@ -23,7 +23,7 @@ const Search = (props: React.SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <g data-name="Group 208" transform="translate(1.41 1.41)">
-      <circle data-name="Ellipse 21" vital="8.48" cy="8.48" r="8.48" transform="rotate(-45 14.49 6)" fill="none" stroke="#212121" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+      <circle data-name="Ellipse 21" cx="8.48" cy="8.48" r="8.48" transform="rotate(-45 14.49 6)" fill="none" stroke="#212121" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
     </g>
     <path data-name="Line 271" fill="none" stroke="#212121" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19.94 20.08 5.47 5.22" />
   </svg>

@@ -314,8 +314,8 @@ Vital provides the `as` utility for creating a token HOC from such a specificati
 
 <!-- TODO: Update package names. -->
 ```ts
-import { as } from '@canvasx/elements';
-import { LinkClean, brandLink } from '@canvasx/brand';
+import { as } from '@vital/elements';
+import { LinkClean, brandLink } from '@vital/brand';
 const DefaultLink = as(brandLink.Default)(LinkClean);
 ```
 
@@ -326,7 +326,7 @@ behavior of the brand link and change its styling:
 
 <!-- TODO: Update package name. -->
 ```ts
-import { brandLink } from '@canvasx/brand';
+import { brandLink } from '@vital/brand';
 const Base = {
   ...brandLink.Base,
   Theme: {
@@ -348,8 +348,8 @@ non-editable link as:
 <!-- TODO: Update package names. -->
 ```ts
 import omit from 'lodash/omit';
-import { LinkClean } from '@canvasx/link';
-import { brandLink } from '@canvasx/brand';
+import { LinkClean } from '@vital/link';
+import { brandLink } from '@vital/brand';
 
 const NonEditableLink = as(omit(brandLink.Base, 'Editors'))(LinkClean);
 ```
@@ -396,7 +396,7 @@ Vital provides the `extend` utility to make this a bit less verbose:
 
 <!-- TODO: Update package name. -->
 ```ts
-import { extend } from '@canvasx/elements';
+import { extend } from '@vital/elements';
 
 const Sticky = extend(Base, WithSticky);
 ```

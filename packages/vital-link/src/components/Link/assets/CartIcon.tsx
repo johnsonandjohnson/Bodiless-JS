@@ -25,8 +25,8 @@ const Cart = (props: React.SVGProps<SVGSVGElement>) => (
   >
     <g id="CART_ICON" data-name="CART ICON" transform="translate(1 1)">
       <path id="Path_5710" data-name="Path 5710" d="M-2020.75,2766.846h4.712l3.426,15.993h14.314l2.818-11h-19.487" transform="translate(2020.75 -2766.846)" fill="none" stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-      <circle id="Ellipse_1822" data-name="Ellipse 1822" vital="2.404" cy="2.404" r="2.404" transform="translate(8.019 19.192)" fill="#fff" />
-      <circle id="Ellipse_1823" data-name="Ellipse 1823" vital="2.404" cy="2.404" r="2.404" transform="translate(17.657 19.192)" fill="#fff" />
+      <circle id="Ellipse_1822" data-name="Ellipse 1822" cx="2.404" cy="2.404" r="2.404" transform="translate(8.019 19.192)" fill="#fff" />
+      <circle id="Ellipse_1823" data-name="Ellipse 1823" cx="2.404" cy="2.404" r="2.404" transform="translate(17.657 19.192)" fill="#fff" />
     </g>
   </svg>
 );

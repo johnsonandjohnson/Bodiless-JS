@@ -37,7 +37,7 @@ const createTagHelmet = <P extends object>(Tag: ComponentOrTag<P>) => {
 
 /**
  * @private
- * Base component for modifying the header of a canvasx site.
+ * Base component for modifying the header of a VitalDS site.
  */
 const HelmetBase: FC<HelmetProps> = ({ components }) => {
   const {

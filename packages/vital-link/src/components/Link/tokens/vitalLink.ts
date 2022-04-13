@@ -64,11 +64,11 @@ const WithDownloadStyles = asLinkToken({
 });
 
 /**
-   * Token which produces a default canvasx editable link.
+   * Token which produces a default VitalDS editable link.
    */
 const Default = asLinkToken({
   /**
-     * Canvasx typography and colors.
+     * VitalDS typography and colors.
      */
   Theme: {
     _: as(WithDownloadStyles, WithExternalStyles),
