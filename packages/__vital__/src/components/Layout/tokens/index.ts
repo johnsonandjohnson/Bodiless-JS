@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import __cxstarter__Layout from './__cxstarter__Layout';
+import __vital__Layout from './__vital__Layout';
 
-export { __cxstarter__Layout };
+export { __vital__Layout };

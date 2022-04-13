@@ -12,5 +12,5 @@
  * limitations under the License.
  */
 
-export { __cxstarter__StyleGuidePage } from './Page';
-// export { __cxstarter__StyleGuideTemplate } from './StyleGuideTemplate';
+export { __vital__StyleGuidePage } from './Page';
+// export { __vital__StyleGuideTemplate } from './StyleGuideTemplate';

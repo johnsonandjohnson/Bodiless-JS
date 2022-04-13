@@ -53,7 +53,7 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
     const options = {
       enabled: process.env.BODILESS_BUILD_STATS === '1',
       sitePath: path.resolve('./'),
-      name: '__cxstarter__',
+      name: '__vital__',
       open: process.env.BODILESS_OPEN_STATS === '1' ? 'file' : false,
     };
 

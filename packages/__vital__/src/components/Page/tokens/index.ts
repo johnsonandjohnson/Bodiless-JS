@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import __cxstarter__Page from './__cxstarter__Page';
-import __cxstarter__PageStatic from './__cxstarter__Page.bl-static';
+import __vital__Page from './__vital__Page';
+import __vital__PageStatic from './__vital__Page.bl-static';
 
-export { __cxstarter__Page, __cxstarter__PageStatic };
+export { __vital__Page, __vital__PageStatic };

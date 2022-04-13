@@ -20,7 +20,7 @@ const Default = asFluidToken({
   ...cxFlowContainerBase.Default,
   Spacing: {
     ...cxFlowContainerBase.Default.Spacing,
-    _: addProps({ 'data-shadowed-by': '__cxstarter__FlowContainer' }),
+    _: addProps({ 'data-shadowed-by': '__vital__FlowContainer' }),
   }
 });
 

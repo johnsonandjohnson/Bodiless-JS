@@ -16,7 +16,7 @@ import { asFluidToken } from '@bodiless/cx-elements';
 import {
   cxPage,
 } from '@bodiless/cx-templates';
-import { __cxstarter__StyleGuideTemplate } from './StyleGuideTemplate';
+import { __vital__StyleGuideTemplate } from './StyleGuideTemplate';
 
 const {
   Editors,
@@ -28,7 +28,7 @@ const {
   Images,
   Footer,
   _default
-} = __cxstarter__StyleGuideTemplate;
+} = __vital__StyleGuideTemplate;
 
 const Default = asFluidToken({
   ...cxPage.Default,
@@ -45,4 +45,4 @@ const Default = asFluidToken({
   },
 });
 
-export const __cxstarter__StyleGuidePage = { Default };
+export const __vital__StyleGuidePage = { Default };

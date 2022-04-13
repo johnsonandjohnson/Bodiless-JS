@@ -12,4 +12,4 @@
  * limitations under the License.
  */
 
-export { __cxstarter__Layout } from './tokens';
+export { __vital__Layout } from './tokens';

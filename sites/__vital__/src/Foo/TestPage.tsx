@@ -13,9 +13,9 @@
  */
 
 import { Fragment } from 'react';
-import { __cxstarter__StyleGuidePage } from '--vital--';
+import { __vital__StyleGuidePage } from '--vital--';
 import { as } from '@bodiless/fclasses';
 
-const StyleGuidePage = as(__cxstarter__StyleGuidePage.Default)(Fragment);
+const StyleGuidePage = as(__vital__StyleGuidePage.Default)(Fragment);
 
 export default StyleGuidePage;

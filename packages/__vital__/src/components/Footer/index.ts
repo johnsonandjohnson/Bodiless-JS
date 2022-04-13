@@ -12,4 +12,4 @@
  * limitations under the License.
  */
 
-export { __cxstarter__Footer } from './tokens';
+export { __vital__Footer } from './tokens';

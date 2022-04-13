@@ -12,4 +12,4 @@
  * limitations under the License.
  */
 
-export { __cxstarter__Header } from './tokens';
+export { __vital__Header } from './tokens';

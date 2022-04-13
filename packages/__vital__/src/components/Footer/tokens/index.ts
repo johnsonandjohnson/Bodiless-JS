@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import __cxstarter__Footer from './__cxstarter__Footer';
+import __vital__Footer from './__vital__Footer';
 
-export { __cxstarter__Footer };
+export { __vital__Footer };

@@ -12,6 +12,23 @@
  * limitations under the License.
  */
 
-import __cxstarter__Page from './__cxstarter__Page';
+import { cxLayout, asLayoutToken } from '@bodiless/cx-layout';
+import { __vital__Footer } from '../../Footer';
+import { __vital__Header } from '../../Header';
 
-export default __cxstarter__Page;
+const Default = asLayoutToken({
+  ...cxLayout.Default,
+  Components: {
+    ...cxLayout.Default.Components,
+    Header: __vital__Header.Default,
+    Footer: __vital__Footer.Default,
+  },
+  Compose: {
+    ...cxLayout.Default.Compose,
+  },
+});
+
+export default {
+  ...cxLayout,
+  Default,
+};
