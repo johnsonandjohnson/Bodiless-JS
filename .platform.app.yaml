@@ -87,14 +87,14 @@ web:
     locations:
         '/':
             # The public directory of the application relative to its root.
-            root: sites/$APP_SITE_NAME/public
+            root: sites/__cxstarter__/public
             index: ['index.html']
             scripts: false
             allow: true
             passthru: false
             expires: 6h
         '/___docs':
-            root: sites/$APP_SITE_NAME/doc
+            root: sites/__cxstarter__/doc
             index: ['index.html']
             scripts: false
             allow: true
