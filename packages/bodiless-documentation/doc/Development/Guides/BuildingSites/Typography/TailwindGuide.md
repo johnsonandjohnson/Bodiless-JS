@@ -127,7 +127,7 @@ with responsive size.
 ### Breakpoints
 
 For more information, see [responsive
-breakpoints](/Vital_DesignSystem/Components/Vital_Layout/Responsiveness#Breakpoints).
+breakpoints](/CX_DesignSystem/Components/CX_Layout/Responsiveness#Breakpoints).
 
 ### Using Responsive Classes
 

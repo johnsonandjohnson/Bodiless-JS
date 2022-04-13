@@ -39,7 +39,7 @@ const useExternalLinkToggle = (props: any) => {
 };
 
 const useIsDownloadLink = (...types: string[]) => ({ href }: any) => {
-  const types$ = types.length > 0 ? types : ['doc', 'dovital', 'pdf'];
+  const types$ = types.length > 0 ? types : ['doc', 'docx', 'pdf'];
   const regexp = new RegExp(`\\.(${types$.join('|')})$`);
   return regexp.test(href || '');
 };

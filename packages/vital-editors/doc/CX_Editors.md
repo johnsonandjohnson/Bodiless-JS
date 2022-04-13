@@ -1,4 +1,4 @@
-# VitalDS Editors
+# CanvasX Editors
 
-Consists of a pre-defined [VitalDS Plain Editor](./Vital_PlainEditor) & [VitalDS Rich Text
-Editor](./Vital_RTE_Editor) using [Vital Element typography](../Vital_Elements/).
+Consists of a pre-defined [CanvasX Plain Editor](./CX_PlainEditor) & [CanvasX Rich Text
+Editor](./CX_RTE_Editor) using [CX Element typography](../CX_Elements/).

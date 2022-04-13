@@ -1,6 +1,6 @@
-# VitalDS Plain Text Editor Component
+# CanvasX Plain Text Editor Component
 
-The VitalDS Plain Text Editor consists of defining the placeholder, and setting it up to allow
+The CanvasX Plain Text Editor consists of defining the placeholder, and setting it up to allow
 auto-superscripting, if necessary.
 
 ## Content Editor Details
@@ -26,7 +26,7 @@ What's shown in the following example can be applied to any Slot.
 
 ```js
   Editors: {
-    Content: as(vitalEditorPlain.Default)(EditorPlainClean)
+    Content: as(cxEditorPlain.Default)(EditorPlainClean)
   },
   Schema: {
     Content: withNode('content'),
@@ -57,7 +57,7 @@ const WithCustomAutoSuperscript = asElementToken({
 });
 
 const EditorWithCustomAutoSuperscript = as(
-  vitalEditorPlain.Default,
+  cxEditorPlain.Default,
   WithCustomAutoSuperscript,
   withNodeKey('plain-with-super'),
 )(EditorPlainClean);

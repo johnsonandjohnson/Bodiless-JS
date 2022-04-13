@@ -1,6 +1,6 @@
-# Vital BurgerMenu Component
+# CX BurgerMenu Component
 
-The Vital BurgerMenu Component provides a triggerable navigation menu for Mobile and Tablet devices only, composed by the following elements:
+The CX BurgerMenu Component provides a triggerable navigation menu for Mobile and Tablet devices only, composed by the following elements:
 
 - MenuToggler
 - Menu (Main)
@@ -9,7 +9,7 @@ The Vital BurgerMenu Component provides a triggerable navigation menu for Mobile
 - LanguageButton
 - Overlay
 
-The MenuToggler inside the BurgerMenu component is just an icon link to close the burger menu and it is closed by default. For opening it, another icon link has to be added to another component slot, like in the Header from `bodiless/vital-layout` package. Both links components are transformed into a toggler by reusing `asBurgerMenuToggler` HOC to update the React state through `withBurgerMenuProvider`, which needs to be added around the BurgerMenu component, like in a page layout.
+The MenuToggler inside the BurgerMenu component is just an icon link to close the burger menu and it is closed by default. For opening it, another icon link has to be added to another component slot, like in the Header from `bodiless/cx-layout` package. Both links components are transformed into a toggler by reusing `asBurgerMenuToggler` HOC to update the React state through `withBurgerMenuProvider`, which needs to be added around the BurgerMenu component, like in a page layout.
 
 The Main Menu content is the same as the Top Navigation Menu on Desktop. We also apply the same WhereToBuy, UtilityMenu, and LanguageButton, compoments from Desktop Top Nav, but following a different order for the BurgerMenu.
 
@@ -21,7 +21,7 @@ There is no way to edit BurgerMenu components (we are adding `asStatic` to the w
 
 ## Site Builder Details
 
-From a Site Builder perspective, Vital BurgerMenu is comprised of a token collection (`vitalBurgerMenu`) and a BurgerMenu component (`BurgerMenuClean`). You can use the default Vital Header token (`vitalBurgerMenu.Default`) as is, or you can recompose it to meet your site's requirements.
+From a Site Builder perspective, CX BurgerMenu is comprised of a token collection (`cxBurgerMenu`) and a BurgerMenu component (`BurgerMenuClean`). You can use the default CX Header token (`cxBurgerMenu.Default`) as is, or you can recompose it to meet your site's requirements.
 
 ### Usage
 
@@ -30,7 +30,7 @@ Using the following code example as a guide, you can insert BurgerMenu into a co
 ```tsx
 const Header = as(
   // You can compose or create a new customized burger menu token.
-  vitalBurgerMenu.Default,
+  cxBurgerMenu.Default,
 )(HeaderClean);
 
 const Header: FC = () => (
@@ -47,7 +47,7 @@ export default Header;
 
 ## Architectural Details
 
-Vital BurgerMenu provides a `<div>` element wrapper around its internal elements, except for the Overlay, which is sibling. For almost all internal elements, wrappers are also provided so developers can customize it to meet design's specific requirements:
+CX BurgerMenu provides a `<div>` element wrapper around its internal elements, except for the Overlay, which is sibling. For almost all internal elements, wrappers are also provided so developers can customize it to meet design's specific requirements:
 
 - MenuTogglerWrapper and MenuWrapper are `<div>` elements by default
 - WhereToBuyWrapper and UtilityMenuWrapper are React Fragments that can be replaced by divs if needed

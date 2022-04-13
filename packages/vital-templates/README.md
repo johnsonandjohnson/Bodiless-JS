@@ -1,7 +1,7 @@
-# `@bodiless/vital-templates`
+# `@bodiless/cx-templates`
 
 Designable templates.
 
 ## Templates List
 
-- [Vital Generic](./doc/Generic.md) - Vital Generic template
+- [CX Generic](./doc/Generic.md) - CX Generic template

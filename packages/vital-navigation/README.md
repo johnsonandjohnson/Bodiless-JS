@@ -1,3 +1,3 @@
-# `@bodiless/vital-navigation`
+# `@bodiless/cx-navigation`
 
-See [Vital Navigation Docs](./doc/Vital_Navigation.md).
+See [CX Navigation Docs](./doc/CX_Navigation.md).

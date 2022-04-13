@@ -1,11 +1,11 @@
-# VitalDS Component Template
+# CanvasX Component Template
 
-Every component/package in the VitalDS Design System (or one which extends it) should follow these
+Every component/package in the CanvasX Design System (or one which extends it) should follow these
 conventions.
 
 ## File Structure
 
-Packages defining VitalDS components and/or tokens should use the following file structure. Some
+Packages defining CanvasX components and/or tokens should use the following file structure. Some
 files are optional; see below for full details.
 
 ```
@@ -29,7 +29,7 @@ bodiless.docs.json
 This structure is intended to facilitate two build-time webpack optimizations:
 
 - [Static Replacement](./StaticReplacement): Removes unnecessary code from the production bundle.
-- [Token Shadowing](./Shadow): Allows a downstream package to define an override of any VitalDS
+- [Token Shadowing](./Shadow): Allows a downstream package to define an override of any CanvasX
   token collection.
 
 The files and directories are described in more detail below:
@@ -49,7 +49,7 @@ import React from 'react';
 import type { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 import { Div, Fragment, designable } from '@bodiless/fclasses';
 import type { FC } from 'react';
-import { asVitalTokenSpec } from '@bodiless/vital-elements';
+import { asCxTokenSpec } from '@bodiless/cx-elements';
 
 export type FooComponents = {
   Wrapper: ComponentOrTag<any>,
@@ -68,7 +68,7 @@ const fooComponents: FooComponents = {
 };
 
 export default designable(fooComponents, 'Foo')(FooBase);
-export const asFooToken = asVitalTokenSpec<FooComponents>();
+export const asFooToken = asCxTokenSpec<FooComponents>();
 ```
 
 ?> **Note:** In some cases, there will be no clean component; for example, if a package is merely
@@ -78,7 +78,7 @@ providing tokens for a component defined elsewhere.  In such cases, this file ma
 
 Provides the component's token collection as a default export. For example:
 
-**File `vitalFoo.ts`:**
+**File `cxFoo.ts`:**
 
 ```js
 const Default = asFooToken({ ... });
@@ -105,7 +105,7 @@ export default { ...otherFooBase, Default };
 Simply re-exports the token collection defined in `{brandComponent}.ts`:
 
 ```js
-import tokens from './vitalFoo';
+import tokens from './cxFoo';
 
 export default tokens;
 ```
@@ -169,8 +169,8 @@ the "Base" version of the token collection directly from its location.
 ```js
 export { asFooToken, FooComponents } from './FooClean';
 // This export will not be shadowable, because it is exported
-// directly from `vitalFoo`.
-export { default as mybrandFooBase } from './tokens/vitalFoo';
+// directly from `cxFoo`.
+export { default as mybrandFooBase } from './tokens/cxFoo';
 // ... any other exports or utilities.
 
 // These exports will be excluded from the static bundle.
@@ -180,8 +180,8 @@ export * from './index.bl-edit';
 If your token collection is not _always_ static, also export the non-static version here:
 
 ```js
-export { default as vitalFooClean } from './FooClean';
-export { default as vitalFoo } from './tokens';
+export { default as cxFooClean } from './FooClean';
+export { default as cxFoo } from './tokens';
 ```
 
 ### Top Level Files
@@ -190,7 +190,7 @@ export { default as vitalFoo } from './tokens';
 
 This should include, at a minimum, the following keys:
 
-- `name`: Should be namespaced to `@bodiless` for VitalDS packages.
+- `name`: Should be namespaced to `@bodiless` for CanvasX packages.
 - `version`: This field is managed by Lerna. Currently, all Bodiless packages.
 - `license`: Set to `Apache 2.0` for all Bodiless packages. maintain a common version line.
 - `description`

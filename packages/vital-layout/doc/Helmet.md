@@ -1,4 +1,4 @@
-# VitalDS Helmet Component
+# CanvasX Helmet Component
 
 The Helmet Component collects all the data that will be rendered in the Head. We have designated
 five individual slots for different types of data.
@@ -29,11 +29,11 @@ to the header.
 A custom Helmet token that is applied to all pages can be defined at the site/package level, and
 then applied to the Layout's specific helmet slot.
 
-Within your site/package level components, the following component extends `vitalHelmet` with all its
+Within your site/package level components, the following component extends `cxHelmet` with all its
 defaults, and then adds the additional classes to the `HTMLHelmet`:
 
 ```js
-const Default = extend(vitalHelmet.Default, asHelmetToken({
+const Default = extend(cxHelmet.Default, asHelmetToken({
   Core: {
     HTMLHelmet: 'text-gray-600',
   },
@@ -46,9 +46,9 @@ export const brandXHelmet = { Default };
 
 ```js
 const Default = asLayoutToken({
-  ...vitalLayout.Default,
+  ...cxLayout.Default,
   Components: {
-    ...vitalLayout.Default.Components,
+    ...cxLayout.Default.Components,
     Helmet: brandXHelmet.Default,
   },
 });
@@ -59,5 +59,5 @@ to the head of the pages created from that template.
 
 ## Architectural Details
 
-Vital Helmet is a wrapper around a group of slots for specific purposes:
-[`HelmetClean.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Helmet/HelmetClean.tsx).
+CX Helmet is a wrapper around a group of slots for specific purposes:
+[`HelmetClean.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-layout/src/components/Helmet/HelmetClean.tsx).

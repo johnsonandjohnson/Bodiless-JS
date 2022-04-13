@@ -1,16 +1,16 @@
-# Vital SubMenu Component
+# CX SubMenu Component
 
-The Vital SubMenu Component provides a generic submenu that can used appended to menu components. Similar to Vital Menu, this component provides a Wrapper, rendered as `<ul>`, and applies Vital MenuTitle to the Title inside every Item list (`<li>` element).
+The CX SubMenu Component provides a generic submenu that can used appended to menu components. Similar to CX Menu, this component provides a Wrapper, rendered as `<ul>`, and applies CX MenuTitle to the Title inside every Item list (`<li>` element).
 
 ## Site Builder Details
 
-From a Site Builder perspective, Vital SubMenu is comprised of a token collection (`vitalSubMenu`) that can appended directly to menus, without providing submenu clean component. You can use the base Vital SubMenu token (`vitalSubMenu.Base`) as it is, or you can recompose it to meet your site's requirements.
+From a Site Builder perspective, CX SubMenu is comprised of a token collection (`cxSubMenu`) that can appended directly to menus, without providing submenu clean component. You can use the base CX SubMenu token (`cxSubMenu.Base`) as it is, or you can recompose it to meet your site's requirements.
 
-Some recomposed tokens are already provided for Vital, like:
+Some recomposed tokens are already provided for CX, like:
 
-- Footer (vitalSubMenu.Footer)
-- TopNav (vitalSubMenu.TopNav)
-- Burger (vitalSubMenu.Burger)
+- Footer (cxSubMenu.Footer)
+- TopNav (cxSubMenu.TopNav)
+- Burger (cxSubMenu.Burger)
 
 ### Usage
 
@@ -20,9 +20,9 @@ Using the following code example as a guide, you can apply your token along with
 const Menu = as(
   // You can compose or create a new customized submenu token.
   withListSubMenu(),
-  withMenuDesign('List')(as(vitalSubMenu.Base)),
+  withMenuDesign('List')(as(cxSubMenu.Base)),
 )(MenuClean);
 ```
 
 To see how the SubMenu tokens are designed in details, please see:
-[`vitalSubMenu.ts`](../src/components/SubMenu/tokens/vitalSubMenu.ts)
+[`cxSubMenu.ts`](../src/components/SubMenu/tokens/cxSubMenu.ts)

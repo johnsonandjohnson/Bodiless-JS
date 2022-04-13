@@ -135,7 +135,7 @@ const Example = asLinkToken({
       id: 'special-link-id',
     }),
     // Apply a token to the Body key.
-    Body: vitalElements.WithLinkStyles,
+    Body: cxElements.WithLinkStyles,
     // Add a class to the icon
     ExternalIcon: 'text-xl',
   },

@@ -1,3 +1,3 @@
-# `@bodiless/vital-editors`
+# `@bodiless/cx-editors`
 
-See [Vital Editors Docs](./doc/Vital_Editors.md).
+See [CX Editors Docs](./doc/CX_Editors.md).

@@ -1,11 +1,11 @@
-# Vital Layout Components
+# CX Layout Components
 
-The Vital Layout (`@bodiless/vital-layout`) package is composed of the following components:
+The CX Layout (`@bodiless/cx-layout`) package is composed of the following components:
 
-- [Vital Layout](./Layout)
-- [Vital Helmet](./Helmet)
-- [Vital Header](./Header)
-- [Vital Footer](./Footer)
-- [Vital Logo](./Logo)
-- [Vital Menu Toggler](./MenuToggler)
-- [Vital Search Toggler](./SearchToggler)
+- [CX Layout](./Layout)
+- [CX Helmet](./Helmet)
+- [CX Header](./Header)
+- [CX Footer](./Footer)
+- [CX Logo](./Logo)
+- [CX Menu Toggler](./MenuToggler)
+- [CX Search Toggler](./SearchToggler)

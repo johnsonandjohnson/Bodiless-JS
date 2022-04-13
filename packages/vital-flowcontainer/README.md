@@ -1,3 +1,3 @@
-# `@bodiless/vital-flowcontainer`
+# `@bodiless/cx-flowcontainer`
 
-See [Vital FlowContainer Docs](./doc/FlowContainer.md).
+See [CX FlowContainer Docs](./doc/FlowContainer.md).

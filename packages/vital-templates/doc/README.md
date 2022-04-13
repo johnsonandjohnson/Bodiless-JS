@@ -1,4 +1,4 @@
-# VitalDS Templates Overview
+# CanvasX Templates Overview
 
 The Site Builder can create templates that the site pages use to render the data in a similar
 layout/pattern. Using templates makes the site building and editing process more efficient.

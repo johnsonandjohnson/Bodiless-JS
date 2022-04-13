@@ -1,3 +1,3 @@
-# Vital Generic Template
+# CX Generic Template
 
 TBD

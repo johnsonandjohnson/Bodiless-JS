@@ -64,7 +64,7 @@ const DEFAULT_ALLOWED_FILE_TYPES = [
   'application/pdf',
   // doc
   'application/msword',
-  // dovital
+  // docx
   'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
 ];
 
