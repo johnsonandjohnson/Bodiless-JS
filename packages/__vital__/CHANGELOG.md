@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.5...v1.0.0-beta.7) (2022-04-13)
+
+
+### Bug Fixes
+
+* **--vital--:** Correct shadowed package paths. ([222e6b4](https://github.com/johnsonandjohnson/bodiless-js/commit/222e6b4ca160532b258aa1d3ba7e4911fc91738c))
+
+
+
+
+
 # [1.0.0-beta.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2022-04-13)
 
 **Note:** Version bump only for package @bodiless/__cxstarter__
