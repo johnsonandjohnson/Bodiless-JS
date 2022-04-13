@@ -9,7 +9,7 @@
   "typings": "lib/index.d.ts",
   "files": [
     "/lib",
-    "/bodiless.docs.json",
+    "/",
     "/getDocs.js",
     "/tailwind.config.js",
     "/doc"
