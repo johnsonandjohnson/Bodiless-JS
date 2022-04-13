@@ -2,7 +2,7 @@
   "name": "@bodiless/cx-templates",
   "sideEffects": false,
   "version": "1.0.0-beta.4",
-  "description": "Provides designable templates for the CanvasX Design System",
+  "description": "Provides designable templates for the VitalDS Design System",
   "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
   "license": "Apache-2.0",
   "main": "lib/index.js",

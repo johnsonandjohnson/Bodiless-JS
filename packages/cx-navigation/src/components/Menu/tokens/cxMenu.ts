@@ -39,7 +39,7 @@ import { cxSubMenu } from '../../SubMenu';
 import { cxSeparator } from '../../Separator';
 
 /**
- * Token which produces the Base CanvasX Menu. Can be customized and
+ * Token which produces the Base VitalDS Menu. Can be customized and
  * extended to produce TopNav, Burger, Footer, etc...
  *
  * This basic menu does not contain submenus.
@@ -60,7 +60,7 @@ const Base = asMenuToken({
 });
 
 /**
- * Token which produces a Default CanvasX Menu, with submenus list.
+ * Token which produces a Default VitalDS Menu, with submenus list.
  */
 const Default = asMenuToken({
   ...Base,
@@ -70,7 +70,7 @@ const Default = asMenuToken({
 });
 
 /**
- * Token which produces the CanvasX Utility Menu.
+ * Token which produces the VitalDS Utility Menu.
  */
 const Utility = asMenuToken({
   ...Base,
@@ -96,7 +96,7 @@ const Utility = asMenuToken({
 });
 
 /**
- * Token which produces the CanvasX Footer Menu.
+ * Token which produces the VitalDS Footer Menu.
  */
 const Footer = asMenuToken({
   ...Default,
@@ -129,7 +129,7 @@ const Footer = asMenuToken({
 });
 
 /**
- * Token which produces the CanvasX Top Navigation Menu.
+ * Token which produces the VitalDS Top Navigation Menu.
  */
 const TopNav = asMenuToken({
   ...Default,
@@ -171,7 +171,7 @@ const TopNav = asMenuToken({
 });
 
 /**
- * Token which produces the CanvasX Burger Menu.
+ * Token which produces the VitalDS Burger Menu.
  *
  * Reuses top navigation schema to retrieve desktop menu data.
  */

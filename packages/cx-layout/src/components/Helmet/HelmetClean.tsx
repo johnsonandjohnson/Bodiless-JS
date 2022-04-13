@@ -80,7 +80,7 @@ const HelmetClean = designable(helmetComponents, 'Helmet')(HelmetBase);
 export default HelmetClean;
 
 /**
- * Use this to define a token applicable to the CanvasX `HelmetClean` component.
+ * Use this to define a token applicable to the VitalDS `HelmetClean` component.
  *
  * @see HelmetClean
  */

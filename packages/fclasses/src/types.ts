@@ -281,7 +281,7 @@ export type FinalDesign<
    * component. The keys correspond to the design elements
    * - includes a special key which contains tokens to be applied to the
    *   component as a whole.
-   * - Allows each value to be specified as a CanvasX extended token definition.
+   * - Allows each value to be specified as a VitalDS extended token definition.
    */
 export type Design<
   C extends DesignableComponents = DesignableComponents,
@@ -313,7 +313,7 @@ export type FinalDomains<
    *
    * This is a nested object with two levels of keys:
    * - The inner keys are to the design keys of the target component, and their
-   *   values extended CanvasX token definitions which should be applied to
+   *   values extended VitalDS token definitions which should be applied to
    *   each key. In addition to the design keys of the component, the special `_`
    *   key is supported to denote a token which should be applied to the component
    *   as a whole.

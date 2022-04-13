@@ -54,7 +54,7 @@ const objectFitCoverProps = {
 };
 
 /**
- * Token which creates the CanvasX base Image.
+ * Token which creates the VitalDS base Image.
  */
 const Base = asElementToken({
   Core: {

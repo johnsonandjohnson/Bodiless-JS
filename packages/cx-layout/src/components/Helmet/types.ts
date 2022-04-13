@@ -15,7 +15,7 @@
 import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 
 /**
- * Type of the design element in the CanvasX `Helmet` component.
+ * Type of the design element in the VitalDS `Helmet` component.
  */
 export type HelmetComponents = {
   /**

@@ -29,7 +29,7 @@ const blacklistCategories = ['Group'];
 const mandatoryCateogries = ['Type'];
 
 /**
- * Token which creates the CanvasX Default Base for a Flow Container
+ * Token which creates the VitalDS Default Base for a Flow Container
  */
 const Base = asFluidToken({
   Core: {

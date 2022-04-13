@@ -25,7 +25,7 @@ import CloseIcon from '../assets/CloseIcon';
 import { asBurgerMenuToken } from '../BurgerMenuClean';
 
 /**
- * Token that produces the Base CanvasX Burger Menu.
+ * Token that produces the Base VitalDS Burger Menu.
  */
 const Base = asBurgerMenuToken({
   Core: {

@@ -67,7 +67,7 @@ const withEditor = (Editor:CT<any>): WithEditor => (
 // ********** EditorPlain
 
 /**
- * Bodiless HOC factory creates an HOC which adds a CanvasX Plain Text
+ * Bodiless HOC factory creates an HOC which adds a VitalDS Plain Text
  * editor as a designable child of the target component.
  *
  * @see withEditor
@@ -93,7 +93,7 @@ const withEditorPlainClean = withEditor(EditorPlainClean);
 const withEditorRichClean = withEditor(RichTextClean);
 
 /**
- * Bodiless HOC factory creates an HOC which adds a CanvasX Full Rich Text
+ * Bodiless HOC factory creates an HOC which adds a VitalDS Full Rich Text
  * editor as a designable child of the target component.
  *
  * @see withEditor
