@@ -28,6 +28,7 @@ hooks:
     # Build hooks can modify the application files on disk but not access any services like databases.
     build: |
         echo '/.platform.app.yaml build()'
+        echo 'Site name: $APP_SITE_NAME'
         # set -e
         # npm run bootstrap
         # npm run build:packages
@@ -49,6 +50,7 @@ hooks:
         # node $PLATFORM_APP_DIR/packages/bodiless-psh/lib/generate-ssi-files.js build    
     deploy: |
         echo '/.platform.app.yaml deploy()'
+        echo 'Site name: $APP_SITE_NAME'
         #processing site url
         # APP_SITE_URL=$(echo $APP_SITE_URL | sed -e "s/\${PLATFORM_ENVIRONMENT}/$PLATFORM_ENVIRONMENT/g")
         # APP_SITE_URL=$(echo $APP_SITE_URL | sed -e "s/\${PLATFORM_PROJECT}/$PLATFORM_PROJECT/g")
