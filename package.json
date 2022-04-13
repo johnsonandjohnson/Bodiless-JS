@@ -7,8 +7,8 @@
   ],
   "license": "Apache-2.0",
   "scripts": {
-    "bootstrap": "echo /package.json bootstrap",
-    "build": "echo /package.json build",
+    "bootstrap": "npm run clean:symlinks && npx lerna bootstrap --hoist --strict",
+    "build": "cross-env NODE_ENV=production lerna run build --stream --ignore @bodiless/gatsby-starter-bodiless",
     "build:only": "cross-env NODE_ENV=production lerna run build --stream --scope",
     "build:packages": "cross-env NODE_ENV=production lerna run build --stream --ignore @sites/*",
     "build:watch": "cross-env NODE_ENV=development lerna run build:watch --parallel",
