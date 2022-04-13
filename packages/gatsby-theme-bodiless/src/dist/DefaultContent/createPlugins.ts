@@ -13,9 +13,9 @@
  */
 
 import path from 'path';
-import MD5 from 'crypto-js/md5';
+import crypto from 'crypto';
 
-const hash = (name: string) => MD5(name).toString();
+const hash = (name: string) => crypto.createHash('md5').update(name).digest('hex');
 
 const createPlugins = (...paths: string[]) => paths.map(path$ => ({
   resolve: 'gatsby-source-filesystem',

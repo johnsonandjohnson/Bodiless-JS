@@ -13,7 +13,7 @@
  */
 
 import React, { FC } from 'react';
-import MD5 from 'crypto-js/md5';
+import { createHash } from 'crypto';
 import { arrayMove, SortEnd } from 'react-sortable-hoc';
 import { observer } from 'mobx-react';
 import flowRight from 'lodash/flowRight';
@@ -59,7 +59,7 @@ const withKeyFromDesign = (Component: ComponentOrTag<any>) => {
       return <Component {...props} />;
     }
     const json = JSON.stringify(Object.keys(design).sort());
-    const key = MD5(json).toString();
+    const key = createHash('md5').update(json).digest('hex');
     return <Component {...props} key={key} />;
   };
   return WithKeyFromDesign;

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import MD5 from 'crypto-js/md5';
+import { createHash } from 'crypto';
 
 export type FlowContainerItem = {
   uuid: string,
@@ -30,8 +30,9 @@ export type CreateFlowContainerItem = (args: CreateFlowContainerItemArgs) => Flo
 export const generateUuid = (
   content: string,
   index: number,
-) => MD5(JSON.stringify({ content, index }))
-  .toString();
+) => createHash('md5')
+  .update(JSON.stringify({ content, index }))
+  .digest('hex');
 
 export const createFlowContainerItem: CreateFlowContainerItem = ({
   type,

@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/psh",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0-beta.5",
   "description": "Provides cli tool for initializing a bodiless project on platform.sh",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
@@ -19,7 +19,8 @@
   "files": [
     "/lib",
     "/resources",
-    "/bodiless.docs.json"
+    "/bodiless.docs.json",
+    "/getDocs.js"
   ],
   "repository": {
     "type": "git",
@@ -29,7 +30,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.4",
+    "@bodiless/cli": "^1.0.0-beta.5",
     "copyfiles": "^2.1.1",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.19",

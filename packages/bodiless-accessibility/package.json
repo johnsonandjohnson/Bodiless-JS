@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/accessibility",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0-beta.5",
   "description": "Accessibility tools for bodiless",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
@@ -12,7 +12,8 @@
   "files": [
     "bin/",
     "src/",
-    "/bodiless.docs.json"
+    "/bodiless.docs.json",
+    "/getDocs.js"
   ],
   "repository": {
     "type": "git",
@@ -25,7 +26,7 @@
     "audit": "node ./index.js $*"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.4",
+    "@bodiless/cli": "^1.0.0-beta.5",
     "arg": "^4.1.1",
     "chalk": "^2.4.2",
     "esm": "^3.2.25",
