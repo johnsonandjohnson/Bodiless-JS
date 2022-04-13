@@ -87,6 +87,14 @@ To add a Link to a Menu Item:
 01. Follow the instructions to [add a Link to a
     component](/Components/Link/#add-a-link-to-a-component).
 
+?> **Note:** By default, no (parent) Vital Menu Item with children can be a Link; i.e., if you add a
+Sub-Menu to a Menu Item, the Menu Item cannot then be a Link. If you add a Sub-Menu to a Menu Item
+after having already added a Menu Link, the Menu Link will become disabled; it will re-enable if you
+delete all the Sub-Menu Items.
+<br><br>
+If you need this behavior changed, contact a Site Builder about [allowing parent Menu Item
+Links](./Sub-Menu#allow-parent-menu-item-links).
+
 ## Site Builder Details
 
 From a Site Builder perspective, Vital Menu is comprised of a token collection (`vitalMenu`) and a

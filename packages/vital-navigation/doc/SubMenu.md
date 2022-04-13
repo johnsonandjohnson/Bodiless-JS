@@ -95,3 +95,49 @@ const Menu = as(
 
 To see how the Sub-Menu tokens are designed in detail, please see:
 [`vitalSubMenu.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-navigation/src/components/SubMenu/tokens/vitalSubMenu.ts ':target=_blank').
+
+### Add Sub-Menu Indicators
+
+To improve the accessibility of your menu, you may want to activate Sub-Menu Indicators.
+
+Out of the box, Vital Menu Items with Sub-Menus will appear the same as those without. If activated,
+Sub-Menu Indicators will provide your users with a visual indicator — which can be styled — marking
+Menu Items that contain a Sub-Menu. Additionally, Sub-Menu Indicators help accessibility by having
+interactivity with screen readers: they can be clicked on to open the Sub-Menu, as opposed to
+opening the Sub-Menu via hovering. This also means that users can _tab_ through the Menu, and open
+and close Sub-Menus, with their keyboard.
+
+To activate Sub-Menu Indicators:
+
+01. Open
+    [`vital-navigation/src/components/SubMenu/tokens/vitalSubMenu.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-navigation/src/components/SubMenu/tokens/vitalSubMenu.ts
+    ':target=_blank'), and comment out (or remove) the following line:
+    ```ts
+    SubmenuIndicator: replaceWith(() => null),
+    ```
+01. Create style tokens as needed by your site's design requirements.
+    - The Sub-Menu indicator is added via `asListSubMenu` by `asAccessibleSubMenu`.
+      - See:
+        [`bodiless-navigation/src/Menu/Menu.token.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/bodiless-navigation/src/Menu/Menu.token.tsx
+        ':target=blank')
+
+?> **Note:** These Sub-Menu Indicators, when activated as described, are only for the top navigation
+menu; they will not be present in other menus.
+
+### Allow Parent Menu Item Links
+
+By default, no (parent) Vital Menu Item with children can be a Link; i.e., if you add a Sub-Menu to
+a Menu Item, the Menu Item cannot then be a Link. If you add a Sub-Menu to a Menu Item after having
+already added a Menu Link, the Menu Link will become disabled; it will re-enable if you delete all
+the Sub-Menu Items.
+
+To change this behavior, and permit Content Editors to add Menu Links to Menu Items with Sub-Menus,
+open
+[`vital-navigation/src/components/Menu/tokens/vitalMenu.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-navigation/src/components/Menu/tokens/vitalMenu.ts
+':target=blank'), and comment out (or remove) the following line:
+
+```ts
+Title: flowIf(useHasSubMenu)(as(cxMenuTitle.WithLinkDisabled)),
+```
+
+You should find this line in the `Burger` token, under its `Behavior` property.
