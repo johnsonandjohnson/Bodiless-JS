@@ -5,22 +5,22 @@ package/site's `tailwind.config.js`.
 
 ## Getting Started with VitalDS Elements: Prebuilt Typography
 
-The `cx-elements` package provides opinionated typography that can be used as is, or, if needed,
+The `vital-elements` package provides opinionated typography that can be used as is, or, if needed,
 parts can be overridden by your site.
 
 For more information on specific details of typography, it is best to review
-[`cx-elements`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-elements).
+[`vital-elements`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-elements).
 
 If you plan on leveraging other VitalDS components, we recommend leveraging all or parts of
-`cx-elements`.
+`vital-elements`.
 
 For more details on usage and getting started using this package, please follow the [VitalDS
-Elements Typography Guide](/CX_DesignSystem/Components/CX_Elements/CX_SiteTypography).
+Elements Typography Guide](/Vital_DesignSystem/Components/Vital_Elements/Vital_SiteTypography).
 
 ## Developing Your Typography without Leveraging VitalDS Elements
 
 The following section defines a high-level overview of defining your typography. For best practices,
-we recommend following patterns seen in the `cx-elements` package.
+we recommend following patterns seen in the `vital-elements` package.
 
 ### Font Sizes & Line Heights
 
@@ -74,7 +74,7 @@ If you want to apply the classes to your entire site, we recommend the following
 
 01. Within `asHelmetToken()`, and in the _Theme_ Domain, provide the site's font class.
     - For more information, see: [VitalDS Helmet
-      Component](/CX_DesignSystem/Components/CX_Layout/Helmet).
+      Component](/Vital_DesignSystem/Components/Vital_Layout/Helmet).
 
 01. In `/vital-layout/src/components/Helmet/Helmet.token.ts`, within `asHelmetToken()`, and in the
     _Theme_ Domain, provide the site's font class.
@@ -86,7 +86,7 @@ If you want to apply the classes to your entire site, we recommend the following
       }
     });
 
-    export const cxHelmet = { Default };
+    export const vitalHelmet = { Default };
     ```
 
 01. Ensure this Helmet token is applied within your Layout tokens.
@@ -94,7 +94,7 @@ If you want to apply the classes to your entire site, we recommend the following
     ```js
     const Base = asLayoutToken({
       Components: {
-        Helmet: as(cxHelmet.Default),
+        Helmet: as(vitalHelmet.Default),
       },
     });
     ```

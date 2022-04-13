@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxStyleGuideTemplate from './cxStyleGuideTemplate';
+import vitalStyleGuideTemplate from './vitalStyleGuideTemplate';
 
-export { cxStyleGuideTemplate };
+export { vitalStyleGuideTemplate };

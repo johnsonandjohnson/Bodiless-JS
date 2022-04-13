@@ -7,9 +7,9 @@ The Vital Separator Component provides a collection of tokens to add a separator
 ```tsx
 const FooterMenu = as(
   // You can compose or create a new customized separator tokens.
-  as(cxSeparator.FooterMenu),
+  as(vitalSeparator.FooterMenu),
 )(MenuClean);
 ```
 
 To see how the Separator tokens are designed in details, please see:
-[`cxSeparator.ts`](../src/components/Separator/tokens/cxSeparator.ts)
+[`vitalSeparator.ts`](../src/components/Separator/tokens/vitalSeparator.ts)

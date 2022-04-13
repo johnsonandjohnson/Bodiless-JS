@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxLogo from './cxLogo';
+import vitalLogo from './vitalLogo';
 
-export default cxLogo;
+export default vitalLogo;

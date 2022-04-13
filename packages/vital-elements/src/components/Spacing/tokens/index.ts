@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import tokens from './cxSpacing';
+import tokens from './vitalSpacing';
 
 export default tokens;

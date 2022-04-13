@@ -197,11 +197,11 @@ const extendDesignWith = (
  *
  * @example
  * ```
- * on(FooClean)(cxFoo.Default, 'bar');
+ * on(FooClean)(vitalFoo.Default, 'bar');
  * ```
  * is equivalent to
  * ```
- * as(startWith(FooClean), cxFoo.Default, 'bar');
+ * as(startWith(FooClean), vitalFoo.Default, 'bar');
  * ```
  */
 const on = (

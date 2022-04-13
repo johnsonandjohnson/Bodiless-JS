@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxSeparator from './cxSeparator';
+import vitalSeparator from './vitalSeparator';
 
-export default cxSeparator;
+export default vitalSeparator;

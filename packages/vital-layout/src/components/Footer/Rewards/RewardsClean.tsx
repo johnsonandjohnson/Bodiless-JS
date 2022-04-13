@@ -13,7 +13,7 @@
  */
 
 import React, { FC } from 'react';
-import { asCxTokenSpec } from '@bodiless/vital-elements';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import {
   Button,
   Div,
@@ -51,7 +51,7 @@ const RewardsCleanBase: FC<RewardsProps> = ({ components: C, ...rest }) => (
 
 const RewardsClean = designable(rewardsComponents, 'Rewards')(RewardsCleanBase);
 
-const asRewardsToken = asCxTokenSpec<RewardsComponents>();
+const asRewardsToken = asVitalTokenSpec<RewardsComponents>();
 
 export {
   RewardsClean,

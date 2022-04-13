@@ -47,20 +47,20 @@ type DefaultDomains = typeof defaultDomains;
  * Use the type of the component's designable components as a type parameter
  * to enable type checking and autocomplete for the domain keys.
  */
-const asCxTokenSpec = <
+const asVitalTokenSpec = <
   C extends DesignableComponents
 >() => asTokenSpec<C, DefaultDomains>(defaultDomains);
 
 /**
  * Creates an element level token (one in which only the _ design key is allowed);
  */
-const asElementToken = asCxTokenSpec<{}>();
+const asElementToken = asVitalTokenSpec<{}>();
 
 /**
  * Creates a token for a component with a fluid design (one in which any
  * design key is allowed).
  */
-const asFluidToken = asCxTokenSpec<any>();
+const asFluidToken = asVitalTokenSpec<any>();
 
 /**
  * Creates a token which applies the given metadata.
@@ -108,6 +108,6 @@ const asTokenGroup = (...m: TokenMeta[]) => <K extends string>(
   ) as TC<K>;
 
 export {
-  asCxTokenSpec, asMetaToken, asElementToken, asFluidToken,
+  asVitalTokenSpec, asMetaToken, asElementToken, asFluidToken,
   asTokenGroup,
 };

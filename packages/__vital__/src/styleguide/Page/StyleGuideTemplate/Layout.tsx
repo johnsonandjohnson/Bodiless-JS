@@ -13,14 +13,14 @@
  */
 
 import React from 'react';
-import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/vital-templates';
+import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { flowHoc, on, replaceWith } from '@bodiless/fclasses';
-import { cxLayout, LayoutClean } from '@bodiless/vital-layout';
+import { vitalLayout, LayoutClean } from '@bodiless/vital-layout';
 
-export const Layout = asStyleGuideTemplateToken(cxStyleGuideTemplate.NoLayout, {
+export const Layout = asStyleGuideTemplateToken(vitalStyleGuideTemplate.NoLayout, {
   Meta: flowHoc.meta.term('Token')('Layout'),
   Content: {
     Title: replaceWith(() => <>Layout</>),
-    Examples: on(LayoutClean)(cxLayout.StyleGuide),
+    Examples: on(LayoutClean)(vitalLayout.StyleGuide),
   },
 });

@@ -17,12 +17,12 @@ and they have been converted into the REM point system using base 16.
 To facilitate converting a custom font size into REM units, please refer to this [XLS
 Template](./assets/PXtoREMTemplate.xlsx).
 
-### Option 1: Shadow `cxFontSize` (*Preferred Solution)
+### Option 1: Shadow `vitalFontSize` (*Preferred Solution)
 
-Provide the Shadowing function as defined in [Shadow](./CX_Shadow).
+Provide the Shadowing function as defined in [Shadow](./Vital_Shadow).
 
 File to shadow:
-[`cxFontSize`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Element/FontSize/tokens/cxFontSize.ts)
+[`vitalFontSize`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Element/FontSize/tokens/vitalFontSize.ts)
 
 ### Option 2: Override in `tailwind.config.js` File
 
@@ -57,12 +57,12 @@ module.exports = {
 The VitalDS Design System defines the following
 [colors](https://xd.adobe.com/view/fd6e4dde-2ecf-480a-aaaf-f5043cb04bf0-a83d/screen/96d7b2f3-6afb-45fb-b808-075a24af2434/specs/).
 
-### Option 1: Shadow `cxColor` (*Preferred Solution)
+### Option 1: Shadow `vitalColor` (*Preferred Solution)
 
-Provide the Shadowing function as defined in [Shadow](./CX_Shadow).
+Provide the Shadowing function as defined in [Shadow](./Vital_Shadow).
 
 File to shadow:
-[`cxColor`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Element/Color/tokens/cxColor.ts)
+[`vitalColor`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Element/Color/tokens/vitalColor.ts)
 
 ### Option 2: Override in `tailwind.config.js` File
 
@@ -70,7 +70,7 @@ File to shadow:
 module.exports = {
   theme: {
     colors: {
-      'cx-primary': {
+      'vital-primary': {
         brand: '#CA081B',
         'card-bg': '#ffffff',
         'page-bg': '#F4F4F4',
@@ -80,7 +80,7 @@ module.exports = {
         'body-copy': '#63666A',
         'header-copy': '#212121',
       },
-      'cx-secondary': {
+      'vital-secondary': {
         eyebrow: '#CC0099',
         'footer-bg': '#2B2B33',
       },
@@ -97,12 +97,12 @@ recommended way of changing, adding, or redefining tokens at a package/site leve
 
 ### Option 1: Shadowing (*Preferred Solution)
 
-Provide the Shadowing function as defined in [Shadow](./CX_Shadow).
+Provide the Shadowing function as defined in [Shadow](./Vital_Shadow).
 
 Files to shadow:
 
-- [`cxTypography`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Element/Typography/tokens/cxTypography.ts)
-- [`cXTextDecoration`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Element/TextDecoration/tokens/cxTextDecoration.ts)
+- [`vitalTypography`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Element/Typography/tokens/vitalTypography.ts)
+- [`vitalTextDecoration`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Element/TextDecoration/tokens/vitalTextDecoration.ts)
 
 ### Option 2: Define Custom Tokens at Package Level
 

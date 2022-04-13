@@ -12,5 +12,5 @@
  * limitations under the License.
  */
 
-export { cxRichText, RichTextClean } from './index.bl-edit';
-export { default as cxRichTextBase } from './tokens/cxRichText';
+export { vitalRichText, RichTextClean } from './index.bl-edit';
+export { default as vitalRichTextBase } from './tokens/vitalRichText';

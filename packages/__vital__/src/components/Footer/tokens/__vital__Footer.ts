@@ -12,16 +12,16 @@
  * limitations under the License.
  */
 
-import { cxFooter, asFooterToken } from '@bodiless/vital-layout';
+import { vitalFooter, asFooterToken } from '@bodiless/vital-layout';
 
 const Default = asFooterToken({
-  ...cxFooter.Default,
+  ...vitalFooter.Default,
   Components: {
-    ...cxFooter.Default.Components,
+    ...vitalFooter.Default.Components,
   },
 });
 
 export default {
-  ...cxFooter,
+  ...vitalFooter,
   Default,
 };

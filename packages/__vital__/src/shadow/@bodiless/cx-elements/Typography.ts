@@ -12,12 +12,12 @@
  * limitations under the License.
  */
 
-import { asElementToken, cxTypographyBase } from '@bodiless/vital-elements';
+import { asElementToken, vitalTypographyBase } from '@bodiless/vital-elements';
 import { addProps } from '@bodiless/fclasses';
 
 export default {
-  ...cxTypographyBase,
-  H1: asElementToken(cxTypographyBase.H1, {
+  ...vitalTypographyBase,
+  H1: asElementToken(vitalTypographyBase.H1, {
     Theme: {
       _: addProps({ 'data-shadowed-by': '__vital__:Typography' }),
     },

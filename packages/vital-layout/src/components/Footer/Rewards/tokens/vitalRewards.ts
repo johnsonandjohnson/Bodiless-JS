@@ -42,34 +42,34 @@ const Base = asRewardsToken({
   // @TODO: Rewards colors needs to be organized/setup and updated.
   Theme: {
     Brand: as(
-      'text-cx-primary-header-copy text-xl font-medium',
-      'md:text-cx-primary-footer-copy md:text-m-2xl',
+      'text-vital-primary-header-copy text-xl font-medium',
+      'md:text-vital-primary-footer-copy md:text-m-2xl',
     ),
     Title: as(
-      'text-cx-primary-header-copy text-m-xl font-bold',
-      'md:text-cx-primary-footer-copy md:text-base',
+      'text-vital-primary-header-copy text-m-xl font-bold',
+      'md:text-vital-primary-footer-copy md:text-base',
       'lg:text-sm',
     ),
     Body: as(
-      'text-cx-primary-header-copy text-sm',
-      'md:text-cx-primary-footer-copy md:text-base',
+      'text-vital-primary-header-copy text-sm',
+      'md:text-vital-primary-footer-copy md:text-base',
       'lg:text-xs',
     ),
     FormTextFirstName: as(
-      'bg-cx-primary-page-bg text-cx-primary-header-copy text-sm font-bold rounded',
-      'md:border md:border-cx-secondary-footer-text md:bg-cx-secondary-footer-bg md:text-cx-primary-footer-copy md:rounded-none',
+      'bg-vital-primary-page-bg text-vital-primary-header-copy text-sm font-bold rounded',
+      'md:border md:border-vital-secondary-footer-text md:bg-vital-secondary-footer-bg md:text-vital-primary-footer-copy md:rounded-none',
       'lg:text-sm',
     ),
     FormTextEmail: as(
-      'bg-cx-primary-page-bg text-cx-primary-header-copy text-sm font-bold rounded',
-      'md:border md:border-cx-secondary-footer-text md:bg-cx-secondary-footer-bg md:text-cx-primary-footer-copy md:rounded-none',
+      'bg-vital-primary-page-bg text-vital-primary-header-copy text-sm font-bold rounded',
+      'md:border md:border-vital-secondary-footer-text md:bg-vital-secondary-footer-bg md:text-vital-primary-footer-copy md:rounded-none',
       'lg:text-sm',
     ),
     FormButton: as(
-      'bg-cx-primary-header-copy text-cx-primary-footer-copy text-sm font-bold rounded',
-      'md:bg-cx-primary-card-bg md:text-cx-secondary-footer-bg md:rounded-none',
+      'bg-vital-primary-header-copy text-vital-primary-footer-copy text-sm font-bold rounded',
+      'md:bg-vital-primary-card-bg md:text-vital-secondary-footer-bg md:rounded-none',
     ),
-    Footnote: 'text-xs md:text-cx-primary-footer-copy',
+    Footnote: 'text-xs md:text-vital-primary-footer-copy',
   },
   // @TODO: Placeholders must be replaced with editable fields.
   Content: {

@@ -15,6 +15,6 @@
 // In "static" mode (in the browser in production) we do not need any of the static
 // token code bc it won't be hydrated.
 export {
-  staticTokenCollection as cxLinkStatic,
+  staticTokenCollection as vitalLinkStatic,
   StaticInline as LinkStatic,
 } from '@bodiless/hydration';

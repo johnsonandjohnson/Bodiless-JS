@@ -19,13 +19,13 @@ export {
   withBurgerMenuProvider,
 } from '@bodiless/navigation';
 
-// CxNavigation components and tokens.
-export { BurgerMenuClean, asBurgerMenuToken, cxBurgerMenu } from './components/BurgerMenu';
-export { MenuClean, asMenuToken, cxMenu } from './components/Menu';
-export { MenuTitleClean, asMenuTitleToken, cxMenuTitle } from './components/MenuTitle';
-export { asSubMenuToken, cxSubMenu } from './components/SubMenu';
+// VitalNavigation components and tokens.
+export { BurgerMenuClean, asBurgerMenuToken, vitalBurgerMenu } from './components/BurgerMenu';
+export { MenuClean, asMenuToken, vitalMenu } from './components/Menu';
+export { MenuTitleClean, asMenuTitleToken, vitalMenuTitle } from './components/MenuTitle';
+export { asSubMenuToken, vitalSubMenu } from './components/SubMenu';
 
-// CxNavigation types.
+// VitalNavigation types.
 export type { BurgerMenuComponents, BurgerMenuProps } from './components/BurgerMenu';
 export type { MenuComponents } from './components/Menu';
 export type { SubMenuComponents, SubMenuWrapperComponents } from './components/SubMenu';

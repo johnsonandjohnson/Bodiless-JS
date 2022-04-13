@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { cxColor, cxTextDecoration } from '@bodiless/vital-elements';
+import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
 import { as } from '@bodiless/fclasses';
 import { asHelmetToken } from '../HelmetClean';
 
@@ -27,8 +27,8 @@ const Default = asHelmetToken({
   Theme: {
     HTMLHelmet: as(
       'font-DMSans',
-      cxColor.TextPrimaryBodyCopy,
-      cxTextDecoration.Normal,
+      vitalColor.TextPrimaryBodyCopy,
+      vitalTextDecoration.Normal,
     ),
   }
 });

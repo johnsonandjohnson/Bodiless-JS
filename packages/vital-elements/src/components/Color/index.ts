@@ -12,5 +12,5 @@
  * limitations under the License.
  */
 
-export { default as cxColor } from './tokens';
-export { default as cxColorBase } from './tokens/cxColor';
+export { default as vitalColor } from './tokens';
+export { default as vitalColorBase } from './tokens/vitalColor';

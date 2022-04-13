@@ -4,16 +4,16 @@ The Vital MenuTitle Component extends Bodiless MenuTitle to apply Vital Editors 
 
 ## Site Builder Details
 
-From a Site Builder perspective, Vital MenuTitle is comprised of a token collection (`cxMenuTitle`) and a MenuTitle component (`MenuTitleClean`). You can use the default Vital MenuTitle token (`cxMenuTitle.Default`) as is, or you can recompose it to meet your site's requirements.
+From a Site Builder perspective, Vital MenuTitle is comprised of a token collection (`vitalMenuTitle`) and a MenuTitle component (`MenuTitleClean`). You can use the default Vital MenuTitle token (`vitalMenuTitle.Default`) as is, or you can recompose it to meet your site's requirements.
 
 ### Usage
 
 ```tsx
 const Menu = as(
   // You can compose or create a new customized menu token.
-  on(MenuTitleClean)(cxMenuTitle.Default)
+  on(MenuTitleClean)(vitalMenuTitle.Default)
 )(MenuClean);
 ```
 
 To see how the MenuTitle tokens are designed in details, please see:
-[`cxMenuTitle.ts`](../src/components/MenuTitle/tokens/cxMenuTitle.ts)
+[`vitalMenuTitle.ts`](../src/components/MenuTitle/tokens/vitalMenuTitle.ts)

@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxGenericTemplate from './cxGenericTemplate';
+import vitalGenericTemplate from './vitalGenericTemplate';
 
-export default cxGenericTemplate;
+export default vitalGenericTemplate;

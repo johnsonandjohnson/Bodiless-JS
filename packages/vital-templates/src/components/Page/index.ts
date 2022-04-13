@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-export { default as cxPage } from './tokens';
-export { default as cxPageBase } from './tokens/cxPage';
+export { default as vitalPage } from './tokens';
+export { default as vitalPageBase } from './tokens/vitalPage';
 
 export type { PageProps } from './asBodilessPage';
 export { asBodilessPage } from './asBodilessPage';

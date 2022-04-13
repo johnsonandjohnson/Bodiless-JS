@@ -13,4 +13,4 @@
  */
 
 export { default as FlowContainerStatic } from './FlowContainerClean';
-export { default as cxFlowContainerStatic } from './tokens';
+export { default as vitalFlowContainerStatic } from './tokens';

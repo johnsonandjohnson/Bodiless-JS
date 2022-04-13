@@ -25,53 +25,53 @@ import {
   replaceWith,
 } from '@bodiless/fclasses';
 import { withEditorPlain } from '@bodiless/vital-editors';
-import { cxTypography } from '@bodiless/vital-elements';
-import { LinkClean, cxLink } from '@bodiless/vital-link';
+import { vitalTypography } from '@bodiless/vital-elements';
+import { LinkClean, vitalLink } from '@bodiless/vital-link';
 import { withNodeKey } from '@bodiless/core';
-import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/vital-templates';
+import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 
 const H1Title = flowHoc(
   withEditorPlain('title', 'Page Title'),
-  as(cxTypography.H1, 'py-5'),
+  as(vitalTypography.H1, 'py-5'),
 )(H1);
-const CxH1 = flowHoc(
+const VitalH1 = flowHoc(
   withEditorPlain('H1', 'Header 1'),
-  as(cxTypography.H1),
+  as(vitalTypography.H1),
 )(H1);
-const CxH2 = flowHoc(
+const VitalH2 = flowHoc(
   withEditorPlain('H2', 'Header 2'),
-  as(cxTypography.H2),
+  as(vitalTypography.H2),
 )(H2);
-const CxH3 = flowHoc(
+const VitalH3 = flowHoc(
   withEditorPlain('H3', 'Header 3'),
-  as(cxTypography.H3),
+  as(vitalTypography.H3),
 )(H3);
-const CxH4 = flowHoc(
+const VitalH4 = flowHoc(
   withEditorPlain('H4', 'Header 4'),
-  as(cxTypography.H4),
+  as(vitalTypography.H4),
 )(H4);
-const CxH5 = flowHoc(
+const VitalH5 = flowHoc(
   withEditorPlain('H5', 'Header 5'),
-  as(cxTypography.H5),
+  as(vitalTypography.H5),
 )(H5);
-const CxBody = flowHoc(
+const VitalBody = flowHoc(
   withEditorPlain('Body', 'Body Copy'),
-  as(cxTypography.Body),
+  as(vitalTypography.Body),
 )(P);
-const CxEyebrow = flowHoc(
+const VitalEyebrow = flowHoc(
   withEditorPlain('Eyebrow', 'Eyebrow'),
-  as(cxTypography.Eyebrow),
+  as(vitalTypography.Eyebrow),
 )(P);
-const CxRest = flowHoc(
+const VitalRest = flowHoc(
   withEditorPlain('Rest', 'Rest: i.e. Breadcrumbs / Review Numbers'),
-  as(cxTypography.Rest),
+  as(vitalTypography.Rest),
 )(P);
-const CxDemoLink = flowHoc(
+const VitalDemoLink = flowHoc(
   withEditorPlain('Link1', 'Link'),
   as(
-    cxTypography.Link,
-    cxLink.Default,
-    cxLink.Sidecar,
+    vitalTypography.Link,
+    vitalLink.Default,
+    vitalLink.Sidecar,
   ),
   withNodeKey('demo-link'),
 )(LinkClean);
@@ -79,19 +79,19 @@ const CxDemoLink = flowHoc(
 const Examples = (props: any) => (
   <>
     <H1Title />
-    <CxH1 />
-    <CxH2 />
-    <CxH3 />
-    <CxH4 />
-    <CxH5 />
-    <CxBody />
-    <CxEyebrow />
-    <CxDemoLink />
-    <CxRest />
+    <VitalH1 />
+    <VitalH2 />
+    <VitalH3 />
+    <VitalH4 />
+    <VitalH5 />
+    <VitalBody />
+    <VitalEyebrow />
+    <VitalDemoLink />
+    <VitalRest />
   </>
 );
 
-export const Typography = asStyleGuideTemplateToken(cxStyleGuideTemplate.Default, {
+export const Typography = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Typography'),
   Content: {
     Title: replaceWith(() => <>Typography</>),

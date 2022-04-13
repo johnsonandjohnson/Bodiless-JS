@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxRichText from './cxRichText';
+import vitalRichText from './vitalRichText';
 
-export default cxRichText;
+export default vitalRichText;

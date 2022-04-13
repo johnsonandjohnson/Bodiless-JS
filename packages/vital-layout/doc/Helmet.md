@@ -29,11 +29,11 @@ to the header.
 A custom Helmet token that is applied to all pages can be defined at the site/package level, and
 then applied to the Layout's specific helmet slot.
 
-Within your site/package level components, the following component extends `cxHelmet` with all its
+Within your site/package level components, the following component extends `vitalHelmet` with all its
 defaults, and then adds the additional classes to the `HTMLHelmet`:
 
 ```js
-const Default = extend(cxHelmet.Default, asHelmetToken({
+const Default = extend(vitalHelmet.Default, asHelmetToken({
   Core: {
     HTMLHelmet: 'text-gray-600',
   },
@@ -46,9 +46,9 @@ export const brandXHelmet = { Default };
 
 ```js
 const Default = asLayoutToken({
-  ...cxLayout.Default,
+  ...vitalLayout.Default,
   Components: {
-    ...cxLayout.Default.Components,
+    ...vitalLayout.Default.Components,
     Helmet: brandXHelmet.Default,
   },
 });

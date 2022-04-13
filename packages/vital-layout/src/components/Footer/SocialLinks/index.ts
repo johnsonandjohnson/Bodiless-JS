@@ -16,5 +16,5 @@
 // a more appropriate place.
 // Also requires component structure reorganization for new static pattern.
 export { SocialLinksClean, asSocialLinksToken } from './SocialLinksClean';
-export { default as cxSocialLinks } from './tokens';
+export { default as vitalSocialLinks } from './tokens';
 export type { SocialLinksComponents, SocialLinksProps } from './types';

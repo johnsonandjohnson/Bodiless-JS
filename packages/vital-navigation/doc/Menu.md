@@ -26,14 +26,14 @@ The Wrapper is just an `<ul>` element. By using `asBodilessMenu()`, the default 
 
 ## Site Builder Details
 
-From a Site Builder perspective, Vital Menu is comprised of a token collection (`cxMenu`) and a Menu component (`MenuClean`). You can use the base Vital Menu token (`cxMenu.Base`) to provide a menu structure, or use default Vital Menu token (`cxMenu.Default`) to provide a menu with submenus structure, or you can even recompose it to meet your site's requirements.
+From a Site Builder perspective, Vital Menu is comprised of a token collection (`vitalMenu`) and a Menu component (`MenuClean`). You can use the base Vital Menu token (`vitalMenu.Base`) to provide a menu structure, or use default Vital Menu token (`vitalMenu.Default`) to provide a menu with submenus structure, or you can even recompose it to meet your site's requirements.
 
 Some recomposed tokens are already provided for Vital, like:
 
-- Utility (cxMenu.Utility)
-- Footer (cxMenu.Footer)
-- TopNav (cxMenu.TopNav)
-- Burger (cxMenu.Burger)
+- Utility (vitalMenu.Utility)
+- Footer (vitalMenu.Footer)
+- TopNav (vitalMenu.TopNav)
+- Burger (vitalMenu.Burger)
 
 ### Usage
 
@@ -42,7 +42,7 @@ Using the following code example as a guide, you can add MenuClean into a compon
 ```tsx
 const Header = as(
   // You can compose or create a new customized menu token.
-  cxMenu.TopNav,
+  vitalMenu.TopNav,
 )(HeaderClean);
 
 const Header: FC = () => (
@@ -63,9 +63,9 @@ About the tokens provided by Vital Menu, here are some differences:
 - Base provides basic menu, with no submenu lists
 - Default extends Base menu and provides submenu lists
 - Utility extends Base menu, applies its own design and accessibility properties, and saves content in different node key (`utility-menu`)
-- Footer extends Default menu, replaces default submenu with cxSubMenu.Footer, and applies its own design and accessibility properties
-- TopNav extends Default menu, replaces default submenu with cxSubMenu.TopNav, applies its own design, and saves content in different node key (`main-menu`)
-- Burger extends Default menu, replaces default submenu with cxSubMenu.Burger, turns the submenus into accordions, applies its own design, and reuses TopNav schema to retrieve TopNav content in the BurgerMenu navigation
+- Footer extends Default menu, replaces default submenu with vitalSubMenu.Footer, and applies its own design and accessibility properties
+- TopNav extends Default menu, replaces default submenu with vitalSubMenu.TopNav, applies its own design, and saves content in different node key (`main-menu`)
+- Burger extends Default menu, replaces default submenu with vitalSubMenu.Burger, turns the submenus into accordions, applies its own design, and reuses TopNav schema to retrieve TopNav content in the BurgerMenu navigation
 
 To see how these tokens are designed in details, please see:
-[`cxMenu.ts`](../src/components/Menu/tokens/cxMenu.ts)
+[`vitalMenu.ts`](../src/components/Menu/tokens/vitalMenu.ts)

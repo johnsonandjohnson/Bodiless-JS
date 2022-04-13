@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import tokens from './cxFooter';
+import tokens from './vitalFooter';
 
 export default tokens;

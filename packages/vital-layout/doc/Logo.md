@@ -21,7 +21,7 @@ extend/shadow the existing component.
 
 ### Customizing Via Shadowing (*Preferred Method)
 
-Provide the Shadowing function as defined in [Shadow](../CX_Elements/CX_Shadow).
+Provide the Shadowing function as defined in [Shadow](../Vital_Elements/Vital_Shadow).
 
 File to shadow: `./lib/shadow/vital-layout/{MyLogo}.js`
 

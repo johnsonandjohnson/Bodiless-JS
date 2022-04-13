@@ -13,5 +13,5 @@
  */
 
 export { LayoutClean, asLayoutToken } from './LayoutClean';
-export { cxLayout } from './tokens';
+export { vitalLayout } from './tokens';
 export type { LayoutComponents, LayoutProps } from './types';

@@ -12,30 +12,25 @@
  * limitations under the License.
  */
 
-import { addProps } from '@bodiless/fclasses';
-import { asDesktopSearchToken } from './DesktopSearchClean';
+import { asSearchTogglerToken } from './SearchTogglerClean';
 
 /**
  * Token that defines a basic header.
  */
-const Base = asDesktopSearchToken({
+const Base = asSearchTogglerToken({
   Layout: {
-    Wrapper: 'flex items-center',
+    Wrapper: 'lg:hidden',
   },
   Spacing: {
-    Wrapper: 'px-4 lg:pl-0 lg:pr-5',
-    Icon: 'm-3'
+    Wrapper: 'my-4',
   },
-  Content: {
-    Label: addProps({ children: 'Search' })
-  }
 });
 
-const Default = asDesktopSearchToken({
+const Default = asSearchTogglerToken({
   ...Base,
 });
 
-export const cxDesktopSearch = {
+export const vitalSearchToggler = {
   Base,
   Default,
 };

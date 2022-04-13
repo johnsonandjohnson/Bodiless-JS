@@ -49,7 +49,7 @@ import React from 'react';
 import type { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 import { Div, Fragment, designable } from '@bodiless/fclasses';
 import type { FC } from 'react';
-import { asCxTokenSpec } from '@bodiless/vital-elements';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 
 export type FooComponents = {
   Wrapper: ComponentOrTag<any>,
@@ -68,7 +68,7 @@ const fooComponents: FooComponents = {
 };
 
 export default designable(fooComponents, 'Foo')(FooBase);
-export const asFooToken = asCxTokenSpec<FooComponents>();
+export const asFooToken = asVitalTokenSpec<FooComponents>();
 ```
 
 ?> **Note:** In some cases, there will be no clean component; for example, if a package is merely
@@ -78,7 +78,7 @@ providing tokens for a component defined elsewhere.  In such cases, this file ma
 
 Provides the component's token collection as a default export. For example:
 
-**File `cxFoo.ts`:**
+**File `vitalFoo.ts`:**
 
 ```js
 const Default = asFooToken({ ... });
@@ -105,7 +105,7 @@ export default { ...otherFooBase, Default };
 Simply re-exports the token collection defined in `{brandComponent}.ts`:
 
 ```js
-import tokens from './cxFoo';
+import tokens from './vitalFoo';
 
 export default tokens;
 ```
@@ -169,8 +169,8 @@ the "Base" version of the token collection directly from its location.
 ```js
 export { asFooToken, FooComponents } from './FooClean';
 // This export will not be shadowable, because it is exported
-// directly from `cxFoo`.
-export { default as mybrandFooBase } from './tokens/cxFoo';
+// directly from `vitalFoo`.
+export { default as mybrandFooBase } from './tokens/vitalFoo';
 // ... any other exports or utilities.
 
 // These exports will be excluded from the static bundle.
@@ -180,8 +180,8 @@ export * from './index.bl-edit';
 If your token collection is not _always_ static, also export the non-static version here:
 
 ```js
-export { default as cxFooClean } from './FooClean';
-export { default as cxFoo } from './tokens';
+export { default as vitalFooClean } from './FooClean';
+export { default as vitalFoo } from './tokens';
 ```
 
 ### Top Level Files

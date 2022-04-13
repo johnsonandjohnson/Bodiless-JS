@@ -22,8 +22,8 @@ By default, the editable components include:
 
 ## Site Builder Details
 
-From a Site Builder perspective, Vital Header is comprised of a token collection (`cxHeader`) and a
-Header component (`HeaderClean`). You can use the default Vital Header token (`cxHeader.Default`) as
+From a Site Builder perspective, Vital Header is comprised of a token collection (`vitalHeader`) and a
+Header component (`HeaderClean`). You can use the default Vital Header token (`vitalHeader.Default`) as
 is, or you can recompose it to meet your site's requirements.
 
 ### Usage
@@ -35,7 +35,7 @@ tokens, and applying the correct node keys. Remember to apply the necessary impo
 const Header = as(
   // You can compose or create a new header token
   // from scratch, but we'll use the default one here.
-  cxHeader.Default,
+  vitalHeader.Default,
   // Apply a node to the header so inner nodes
   // are organized into its namespace.
   withNode,
@@ -55,7 +55,7 @@ export default Layout;
 
 #### Customizing Via Shadowing (*Preferred Method)
 
-Provide the Shadowing function as defined in [Shadow](../CX_Elements/CX_Shadow).
+Provide the Shadowing function as defined in [Shadow](../Vital_Elements/Vital_Shadow).
 
 File to shadow: `./lib/shadow/vital-layout/{MyHeader}.js`
 
@@ -67,15 +67,15 @@ extend/override the specific domains within that token.
 ```js
 const BrandXHeader = asHeaderToken({
   // Will spread all existing header functionality across all domains.
-  ...cxHeader.Base,
+  ...vitalHeader.Base,
   Components: {
     // Will spread all header components as is.
-    ...cxHeader.Base.Components,
+    ...vitalHeader.Base.Components,
     // Will replace the DesktopSearch slot with the custom component
     DesktopSearch: brandXSearch.Default,
   },
   Spacing: {
-    // Since there is no spread, will override the cxHeader Spacing domain
+    // Since there is no spread, will override the vitalHeader Spacing domain
     // and use what is defined below.
     Container: 'mx-auto py-2',
   }

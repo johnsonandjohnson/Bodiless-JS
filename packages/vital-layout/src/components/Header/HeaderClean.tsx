@@ -21,7 +21,7 @@ import {
   designable,
 } from '@bodiless/fclasses';
 import { withoutHydration } from '@bodiless/hydration';
-import { asCxTokenSpec } from '@bodiless/vital-elements';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { LinkClean } from '@bodiless/vital-link';
 import {
   BurgerMenuClean,
@@ -88,7 +88,7 @@ const HeaderCleanBase: FC<HeaderProps> = ({ components: C, ...rest }) => (
 const HeaderClean = designable(headerComponents, 'Header')(HeaderCleanBase);
 const HeaderStatic = withoutHydration()(HeaderClean);
 
-const asHeaderToken = asCxTokenSpec<HeaderComponents>();
+const asHeaderToken = asVitalTokenSpec<HeaderComponents>();
 
 export default HeaderClean;
 

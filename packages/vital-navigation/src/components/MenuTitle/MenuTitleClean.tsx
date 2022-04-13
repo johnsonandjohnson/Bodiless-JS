@@ -13,7 +13,7 @@
  */
 
 import { EditorPlainClean } from '@bodiless/vital-editors';
-import { asCxTokenSpec } from '@bodiless/vital-elements';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { LinkClean } from '@bodiless/vital-link';
 import { replaceable, replaceWith, withDesign } from '@bodiless/fclasses';
 import { MenuTitle } from '@bodiless/navigation';
@@ -24,6 +24,6 @@ const MenuTitleClean = withDesign({
   Title: replaceWith(replaceable(EditorPlainClean)),
 })(MenuTitle);
 
-export const asMenuTitleToken = asCxTokenSpec<MenuTitleComponents>();
+export const asMenuTitleToken = asVitalTokenSpec<MenuTitleComponents>();
 
 export default MenuTitleClean;

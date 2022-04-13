@@ -1,7 +1,7 @@
 {
-  "CX_DesignSystem": {
+  "Vital_DesignSystem": {
     "Components": {
-      "CX_Layout": {
+      "Vital_Layout": {
         "README.md": "./README.md",
         "Footer.md": "./doc/Footer.md",
         "Header.md": "./doc/Header.md",

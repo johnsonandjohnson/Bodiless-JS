@@ -26,7 +26,7 @@ import {
   asTopNav,
 } from '@bodiless/navigation';
 import { withNodeKey } from '@bodiless/core';
-import { cxColor, cxFontSize, cxTextDecoration } from '@bodiless/vital-elements';
+import { vitalColor, vitalFontSize, vitalTextDecoration } from '@bodiless/vital-elements';
 import {
   useHasSubMenu,
   useIsFirstMenuItem,
@@ -34,9 +34,9 @@ import {
   withMenuTitleAnalytics,
 } from '../../../util';
 import { asMenuToken } from '../MenuClean';
-import { cxMenuTitle, MenuTitleClean } from '../../MenuTitle';
-import { cxSubMenu } from '../../SubMenu';
-import { cxSeparator } from '../../Separator';
+import { vitalMenuTitle, MenuTitleClean } from '../../MenuTitle';
+import { vitalSubMenu } from '../../SubMenu';
+import { vitalSeparator } from '../../Separator';
 
 /**
  * Token which produces the Base VitalDS Menu. Can be customized and
@@ -55,7 +55,7 @@ const Base = asMenuToken({
     Title: addProps({ role: 'menuitem' }),
   },
   Components: {
-    Title: on(MenuTitleClean)(cxMenuTitle.Default),
+    Title: on(MenuTitleClean)(vitalMenuTitle.Default),
   },
 });
 
@@ -85,7 +85,7 @@ const Utility = asMenuToken({
   },
   Theme: {
     Title: as(
-      cxSeparator.UtilityMenu,
+      vitalSeparator.UtilityMenu,
       // @TODO: Create token? It should be same size for both mobile and desktop...
       'text-m-base whitespace-nowrap',
     ),
@@ -106,7 +106,7 @@ const Footer = asMenuToken({
   },
   Components: {
     ...Default.Components,
-    _: withMenuDesign('List')(as(cxSubMenu.Footer)),
+    _: withMenuDesign('List')(as(vitalSubMenu.Footer)),
   },
   Layout: {
     Nav: 'w-full lg:h-full',
@@ -119,11 +119,11 @@ const Footer = asMenuToken({
   Theme: {
     // @TODO: This 'as' is needed only because of a bug and should be removed when it is fixed.
     // See https://github.com/johnsonandjohnson/Bodiless-JS/issues/1455
-    Item: as(cxSeparator.FooterMenu),
+    Item: as(vitalSeparator.FooterMenu),
     Title: as(
-      cxColor.TextPrimaryFooterCopy,
-      cxTextDecoration.Bold,
-      cxFontSize.XL,
+      vitalColor.TextPrimaryFooterCopy,
+      vitalTextDecoration.Bold,
+      vitalFontSize.XL,
     ),
   },
 });
@@ -138,7 +138,7 @@ const TopNav = asMenuToken({
   },
   Components: {
     ...Default.Components,
-    _: withMenuDesign('List')(as(cxSubMenu.TopNav)),
+    _: withMenuDesign('List')(as(vitalSubMenu.TopNav)),
   },
   Layout: {
     Wrapper: 'flex',
@@ -151,19 +151,19 @@ const TopNav = asMenuToken({
   Theme: {
     Item: 'relative group',
     Title: as(
-      cxColor.TextPrimaryHeaderCopy,
-      cxTextDecoration.Bold,
-      cxTextDecoration.Uppercase,
+      vitalColor.TextPrimaryHeaderCopy,
+      vitalTextDecoration.Bold,
+      vitalTextDecoration.Uppercase,
       // @TODO: Add to tokens?
       'text-base whitespace-nowrap cursor-pointer',
       // Hover effect on the menu item.
-      'group-hover:text-cx-primary-interactive hover:text-cx-primary-interactive',
+      'group-hover:text-vital-primary-interactive hover:text-vital-primary-interactive',
       // Underline below the menu item.
-      'shadow-cx-primary-interactive group-hover:shadow-inner-bottom-md',
+      'shadow-vital-primary-interactive group-hover:shadow-inner-bottom-md',
     ),
   },
   Behavior: {
-    Title: flowIf(useHasSubMenu)(as(cxMenuTitle.WithLinkDisabled)),
+    Title: flowIf(useHasSubMenu)(as(vitalMenuTitle.WithLinkDisabled)),
   },
   Schema: {
     _: withNodeKey({ nodeKey: 'main-menu', nodeCollection: 'site' }),
@@ -183,7 +183,7 @@ const Burger = asMenuToken({
   },
   Components: {
     ...Default.Components,
-    _: withMenuDesign('List')(as(cxSubMenu.Burger)),
+    _: withMenuDesign('List')(as(vitalSubMenu.Burger)),
   },
   Layout: {
     Wrapper: 'flex flex-col',
@@ -193,15 +193,15 @@ const Burger = asMenuToken({
   },
   Theme: {
     Title: as(
-      cxColor.TextPrimaryHeaderCopy,
-      cxFontSize.L,
-      cxTextDecoration.Bold,
-      cxTextDecoration.Uppercase,
+      vitalColor.TextPrimaryHeaderCopy,
+      vitalFontSize.L,
+      vitalTextDecoration.Bold,
+      vitalTextDecoration.Uppercase,
     ),
   },
   Behavior: {
     Item: flowIf(useIsFirstMenuItem)(withExpandedAttr),
-    Title: flowIf(useHasSubMenu)(as(cxMenuTitle.WithLinkDisabled)),
+    Title: flowIf(useHasSubMenu)(as(vitalMenuTitle.WithLinkDisabled)),
   },
   Schema: {
     ...TopNav.Schema,

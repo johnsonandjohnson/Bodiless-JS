@@ -12,4 +12,4 @@
  * limitations under the License.
  */
 
-export { staticTokenCollection as cxImage } from '@bodiless/hydration';
+export { staticTokenCollection as vitalImage } from '@bodiless/hydration';

@@ -20,17 +20,17 @@ import {
   replaceWith,
   Img,
 } from '@bodiless/fclasses';
-import { cxImage } from '@bodiless/vital-image';
-import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/vital-templates';
+import { vitalImage } from '@bodiless/vital-image';
+import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 
 const DefaultImage = as(
-  cxImage.Default,
+  vitalImage.Default,
   withNodeKey('defaultimage'),
 )(Img);
 
 const DefaultLandscapeImage = as(
-  cxImage.Default,
-  cxImage.WithLandscapePlaceholder,
+  vitalImage.Default,
+  vitalImage.WithLandscapePlaceholder,
   withNodeKey('defaultlandscapeimage'),
 )(Img);
 
@@ -46,7 +46,7 @@ const Examples = (props: any) => (
   </>
 );
 
-export const Images = asStyleGuideTemplateToken(cxStyleGuideTemplate.Default, {
+export const Images = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Images'),
   Content: {
     Title: replaceWith(() => <>Images</>),

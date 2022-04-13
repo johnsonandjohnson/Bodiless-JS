@@ -13,27 +13,27 @@
  */
 
 import omit from 'lodash/omit';
-import { cxSpacing, cxTypography } from '@bodiless/vital-elements';
+import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
 import {
-  EditorPlainClean, cxEditorPlain, RichTextClean, cxRichText
+  EditorPlainClean, vitalEditorPlain, RichTextClean, vitalRichText
 } from '@bodiless/vital-editors';
 import { withNodeKey } from '@bodiless/core';
 import {
   on, replaceWith, Fragment, as
 } from '@bodiless/fclasses';
-import { cxLayout, LayoutClean } from '@bodiless/vital-layout';
+import { vitalLayout, LayoutClean } from '@bodiless/vital-layout';
 import { asStyleGuideTemplateToken } from '../StyleGuideTemplateClean';
 
 const Base = asStyleGuideTemplateToken({
   Components: {
-    Wrapper: on(LayoutClean)(cxLayout.Default),
+    Wrapper: on(LayoutClean)(vitalLayout.Default),
   },
   Theme: {
-    TitleWrapper: cxTypography.H1,
+    TitleWrapper: vitalTypography.H1,
   },
   Editors: {
-    Title: on(EditorPlainClean)(cxEditorPlain.Default),
-    Description: on(RichTextClean)(cxRichText.Default),
+    Title: on(EditorPlainClean)(vitalEditorPlain.Default),
+    Description: on(RichTextClean)(vitalRichText.Default),
   },
   Schema: {
     Title: withNodeKey('title'),
@@ -47,8 +47,8 @@ const Default = asStyleGuideTemplateToken({
   Theme: {
     ...Base.Theme,
     Container: as(
-      cxSpacing.WithSiteMargin,
-      cxSpacing.WithSiteXLConstraint
+      vitalSpacing.WithSiteMargin,
+      vitalSpacing.WithSiteXLConstraint
     ),
   },
 });

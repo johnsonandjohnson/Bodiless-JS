@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxImage from './cxImage';
+import vitalImage from './vitalImage';
 
-export default cxImage;
+export default vitalImage;

@@ -14,5 +14,5 @@
 
 export {
   StaticBlock as HeaderStatic,
-  staticTokenCollection as cxHeaderStatic,
+  staticTokenCollection as vitalHeaderStatic,
 } from '@bodiless/hydration';

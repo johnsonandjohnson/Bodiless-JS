@@ -15,7 +15,7 @@
 import React, { FC } from 'react';
 import { Div, designable, Footer } from '@bodiless/fclasses';
 import { RichTextClean } from '@bodiless/vital-editors';
-import { asCxTokenSpec } from '@bodiless/vital-elements';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { MenuClean } from '@bodiless/vital-navigation';
 import { RewardsClean } from './Rewards';
 import { SocialLinksClean } from './SocialLinks';
@@ -68,6 +68,6 @@ const FooterCleanBase: FC<FooterProps> = ({ components: C, ...rest }) => (
  */
 const FooterClean = designable(footerComponents, 'Footer')(FooterCleanBase);
 
-export const asFooterToken = asCxTokenSpec<FooterComponents>();
+export const asFooterToken = asVitalTokenSpec<FooterComponents>();
 
 export default FooterClean;

@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxHelmet from './cxHelmet';
+import vitalHelmet from './vitalHelmet';
 
-export default cxHelmet;
+export default vitalHelmet;

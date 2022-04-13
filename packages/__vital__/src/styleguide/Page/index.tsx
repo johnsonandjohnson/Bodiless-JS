@@ -14,7 +14,7 @@
 
 import { asFluidToken } from '@bodiless/vital-elements';
 import {
-  cxPage,
+  vitalPage,
 } from '@bodiless/vital-templates';
 import { __vital__StyleGuideTemplate } from './StyleGuideTemplate';
 
@@ -31,7 +31,7 @@ const {
 } = __vital__StyleGuideTemplate;
 
 const Default = asFluidToken({
-  ...cxPage.Default,
+  ...vitalPage.Default,
   Components: {
     _default,
     Editors,

@@ -49,7 +49,7 @@ const UtilityMenu = asElementToken({
   },
   Theme: {
     // @TODO: Create divider tokens.
-    _: 'pr-5 border-cx-primary-divider lg:px-5 lg:py-2 lg:border-l-2',
+    _: 'pr-5 border-vital-primary-divider lg:px-5 lg:py-2 lg:border-l-2',
   },
 });
 

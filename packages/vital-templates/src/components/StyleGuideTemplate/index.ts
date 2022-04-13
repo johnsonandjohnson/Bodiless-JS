@@ -13,4 +13,4 @@
  */
 
 export { StyleGuideTemplateClean, asStyleGuideTemplateToken } from './StyleGuideTemplateClean';
-export { cxStyleGuideTemplate } from './tokens';
+export { vitalStyleGuideTemplate } from './tokens';

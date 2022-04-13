@@ -12,5 +12,5 @@
  * limitations under the License.
  */
 
-export { default as cxTextDecoration } from './tokens';
-export { default as cxTextDecorationBase } from './tokens/cxTextDecoration';
+export { default as vitalTextDecoration } from './tokens';
+export { default as vitalTextDecorationBase } from './tokens/vitalTextDecoration';

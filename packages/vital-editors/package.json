@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/vital-editors",
   "version": "1.0.0-beta.4",
-  "description": "Editor components for the bodiless cx design system",
+  "description": "Editor components for the bodiless vital design system",
   "author": "Chris Odem <coden@its.jnj.com>",
   "license": "Apache-2.0",
   "main": "lib/index.js",

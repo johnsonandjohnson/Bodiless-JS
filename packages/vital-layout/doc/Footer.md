@@ -53,7 +53,7 @@ export default Layout;
 
 #### Customizing Via Shadowing (*Preferred Method)
 
-Provide the Shadowing function as defined in [Shadow](../CX_Elements/Shadow).
+Provide the Shadowing function as defined in [Shadow](../Vital_Elements/Shadow).
 
 File to shadow: `./lib/shadow/vital-layout/{MyFooter}.js`
 

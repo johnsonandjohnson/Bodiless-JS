@@ -18,7 +18,7 @@ import type { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclass
 import {
   Div, Fragment, H1, Section, designable,
 } from '@bodiless/fclasses';
-import { asCxTokenSpec } from '@bodiless/vital-elements';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 
 type StyleGuideTemplateComponents = {
   Wrapper: ComponentOrTag<any>,
@@ -61,6 +61,6 @@ const StyleGuideTemplateBase: FC<DesignableComponentsProps<StyleGuideTemplateCom
 );
 
 const StyleGuideTemplateClean = designable(styleGuideTemplateComponents, 'StyleGuide')(StyleGuideTemplateBase);
-const asStyleGuideTemplateToken = asCxTokenSpec<StyleGuideTemplateComponents>();
+const asStyleGuideTemplateToken = asVitalTokenSpec<StyleGuideTemplateComponents>();
 
 export { StyleGuideTemplateClean, asStyleGuideTemplateToken };

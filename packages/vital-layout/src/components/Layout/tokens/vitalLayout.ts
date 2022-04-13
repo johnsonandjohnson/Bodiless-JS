@@ -20,9 +20,9 @@ import {
   not,
 } from '@bodiless/fclasses';
 import { asLayoutToken } from '../LayoutClean';
-import { cxFooter } from '../../Footer';
-import { cxHeader } from '../../Header';
-import { cxHelmet } from '../../Helmet';
+import { vitalFooter } from '../../Footer';
+import { vitalHeader } from '../../Header';
+import { vitalHelmet } from '../../Helmet';
 import { LayoutIds } from './constants';
 import { StyleGuide } from './StyleGuide';
 
@@ -34,7 +34,7 @@ const Base = asLayoutToken({
     _: withBurgerMenuProvider,
   },
   Components: {
-    Helmet: cxHelmet.Default,
+    Helmet: vitalHelmet.Default,
   },
   Behavior: {
     Container: addProps({ id: LayoutIds.Content }),
@@ -49,7 +49,7 @@ const Base = asLayoutToken({
   Layout: {
     Helmet: flowIf(
       not(useIsBurgerMenuHidden),
-    )(as(cxHelmet.WithFixedBody, cxHelmet.WithDesktopStatickBody)),
+    )(as(vitalHelmet.WithFixedBody, vitalHelmet.WithDesktopStatickBody)),
   },
   Theme: {
     OuterContainer: 'flex flex-col h-screen',
@@ -64,8 +64,8 @@ const Default = asLayoutToken({
   ...Base,
   Components: {
     ...Base.Components,
-    Header: cxHeader.Default,
-    Footer: cxFooter.Default,
+    Header: vitalHeader.Default,
+    Footer: vitalFooter.Default,
   },
 });
 

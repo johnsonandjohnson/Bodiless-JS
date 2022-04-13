@@ -13,14 +13,14 @@
  */
 
 export {
-  cxSearchToggler,
+  vitalSearchToggler,
   asSearchTogglerToken,
   SearchTogglerClean,
   SearchTogglerComponents,
   SearchTogglerProps,
 } from './SearchToggler';
 export {
-  cxDesktopSearch,
+  vitalDesktopSearch,
   asDesktopSearchToken,
   DesktopSearchClean,
   DesktopSearchComponents,

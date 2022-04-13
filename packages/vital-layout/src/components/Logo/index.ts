@@ -13,5 +13,5 @@
  */
 
 export { default as LogoClean, asLogoToken } from './LogoClean';
-export { default as cxLogo } from './tokens';
-export { default as cxLogoBase } from './tokens/cxLogo';
+export { default as vitalLogo } from './tokens';
+export { default as vitalLogoBase } from './tokens/vitalLogo';

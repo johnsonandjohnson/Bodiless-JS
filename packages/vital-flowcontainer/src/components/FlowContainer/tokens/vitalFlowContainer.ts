@@ -19,9 +19,9 @@ import {
 import {
   withMandatoryCategories, withAllTitlesFromTerms, ifComponentSelector,
 } from '@bodiless/layouts';
-import { asFluidToken, cxSpacing } from '@bodiless/vital-elements';
-import { cxImageFlowContainer } from '@bodiless/vital-image';
-import { cxEditorsFlowContainer } from '@bodiless/vital-editors';
+import { asFluidToken, vitalSpacing } from '@bodiless/vital-elements';
+import { vitalImageFlowContainer } from '@bodiless/vital-image';
+import { vitalEditorsFlowContainer } from '@bodiless/vital-editors';
 
 import FlowContainerClean, { FlowContainerPreview } from '../FlowContainerClean';
 
@@ -102,8 +102,8 @@ const AsFlowContainerItem = asFluidToken({
 });
 
 const WithBaseVariations = asFluidToken(
-  cxImageFlowContainer.WithImageVariations,
-  cxEditorsFlowContainer.WithEditorVariations,
+  vitalImageFlowContainer.WithImageVariations,
+  vitalEditorsFlowContainer.WithEditorVariations,
 );
 
 /**
@@ -118,8 +118,8 @@ const ContentRegion = asFluidToken(
       AsFlowContainerItem,
     },
     Spacing: {
-      Wrapper: cxSpacing.GutterOffset,
-      ComponentWrapper: cxSpacing.Gutter,
+      Wrapper: vitalSpacing.GutterOffset,
+      ComponentWrapper: vitalSpacing.Gutter,
     },
   },
 );
@@ -137,8 +137,8 @@ const Default = asFluidToken(
   {
     ...Base,
     Spacing: {
-      Wrapper: cxSpacing.GutterOffset,
-      ComponentWrapper: cxSpacing.Gutter,
+      Wrapper: vitalSpacing.GutterOffset,
+      ComponentWrapper: vitalSpacing.Gutter,
     },
   },
   WithBaseVariations,

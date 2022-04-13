@@ -21,8 +21,8 @@ import {
 } from '@bodiless/fclasses';
 import { withBodilessLinkToggle, withPlaceholder } from '@bodiless/components';
 import { asBodilessLink } from '@bodiless/components-ui';
-import { cxEditorPlain } from '@bodiless/vital-editors';
-import { cxLink } from '@bodiless/vital-link';
+import { vitalEditorPlain } from '@bodiless/vital-editors';
+import { vitalLink } from '@bodiless/vital-link';
 import { asMenuTitleToken } from '../MenuTitleClean';
 import { withMenuTitleNoLink } from '../../../util';
 
@@ -38,10 +38,10 @@ const asMenuLink = (asEditableLink: typeof asBodilessLink) => withSidecarNodes(
  */
 const Default = asMenuTitleToken({
   Theme: {
-    Link: as(cxLink.WithDownloadStyles, cxLink.WithExternalStyles),
+    Link: as(vitalLink.WithDownloadStyles, vitalLink.WithExternalStyles),
   },
   Editors: {
-    Title: cxEditorPlain.Default,
+    Title: vitalEditorPlain.Default,
   },
   Schema: {
     Link: asMenuLink(withBodilessLinkToggle(asBodilessLink, startWith(Div), true)),

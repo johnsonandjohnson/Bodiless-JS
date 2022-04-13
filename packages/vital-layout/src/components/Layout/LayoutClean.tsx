@@ -20,7 +20,7 @@ import {
   Fragment,
   A,
 } from '@bodiless/fclasses';
-import { asCxTokenSpec } from '@bodiless/vital-elements';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { HelmetClean } from '../Helmet';
 import { HeaderClean } from '../Header';
 import { FooterClean } from '../Footer';
@@ -85,6 +85,6 @@ export const LayoutCleanBase: FC<LayoutProps> = (layoutProps: LayoutProps) => {
 
 export const LayoutClean = designable(layoutComponents, 'Layout')(LayoutCleanBase);
 
-const asLayoutToken = asCxTokenSpec<LayoutComponents>();
+const asLayoutToken = asVitalTokenSpec<LayoutComponents>();
 
 export { asLayoutToken };

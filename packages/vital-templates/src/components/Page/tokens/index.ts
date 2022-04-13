@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxPage from './cxPage';
+import vitalPage from './vitalPage';
 
-export default cxPage;
+export default vitalPage;

@@ -17,7 +17,7 @@ import {
   designable,
   Div,
 } from '@bodiless/fclasses';
-import { asCxTokenSpec } from '@bodiless/vital-elements';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { LayoutClean } from '@bodiless/vital-layout';
 import { FlowContainerClean } from '@bodiless/vital-flowcontainer';
 import { GenericTemplateComponents, BaseGenericTemplateProps } from './types';
@@ -56,7 +56,7 @@ const GenericTemplateBase = (props: BaseGenericTemplateProps) => {
 
 const GenericTemplateClean = designable(genericTemplateComponents, 'Generic Template')(GenericTemplateBase);
 
-const asGenericTemplateToken = asCxTokenSpec<GenericTemplateComponents>();
+const asGenericTemplateToken = asVitalTokenSpec<GenericTemplateComponents>();
 
 export { asGenericTemplateToken };
 

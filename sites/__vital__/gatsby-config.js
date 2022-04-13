@@ -53,8 +53,8 @@ const plugins = [
         //
         // You can also pass a RegExp which will be matched against the **absolute** path of every
         // .bl-edit file being imported. If it matches and a sibling .static file is found, the file
-        // will be replaced. For instance, if you want to include all `cx-editors` and `cx-link`
-        // files, you may pass `/vital-editors|cx-link/` to this option.
+        // will be replaced. For instance, if you want to include all `vital-editors` and
+        // `vital-link` files, you may pass `/vital-editors|vital-link/` to this option.
         //
         // Defaults to false.
         include: true,

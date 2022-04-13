@@ -14,12 +14,12 @@
 
 import { asFluidToken } from '@bodiless/vital-elements';
 import { on } from '@bodiless/fclasses';
-import { cxRichText, RichTextClean } from '../RichText';
+import { vitalRichText, RichTextClean } from '../RichText';
 
 const WithEditorVariations = asFluidToken({
   Components: {
-    RichText: on(RichTextClean)(cxRichText.Default),
+    RichText: on(RichTextClean)(vitalRichText.Default),
   },
 });
 
-export const cxEditorsFlowContainer = { WithEditorVariations };
+export const vitalEditorsFlowContainer = { WithEditorVariations };

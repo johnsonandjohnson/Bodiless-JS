@@ -1,13 +1,13 @@
 {
-  "CX_DesignSystem": {
+  "Vital_DesignSystem": {
     "Components": {
-      "CX_Navigation": {
-        "README.md": "./doc/CX_Navigation.md",
-        "CX_BurgerMenu.md": "./doc/BurgerMenu.md",
-        "CX_Menu.md": "./doc/Menu.md",
-        "CX_MenuTitle.md": "./doc/MenuTitle.md",
-        "CX_Separator.md": "./doc/Separator.md",
-        "CX_SubMenu.md": "./doc/SubMenu.md"
+      "Vital_Navigation": {
+        "README.md": "./doc/Vital_Navigation.md",
+        "Vital_BurgerMenu.md": "./doc/BurgerMenu.md",
+        "Vital_Menu.md": "./doc/Menu.md",
+        "Vital_MenuTitle.md": "./doc/MenuTitle.md",
+        "Vital_Separator.md": "./doc/Separator.md",
+        "Vital_SubMenu.md": "./doc/SubMenu.md"
       }
     }
   }

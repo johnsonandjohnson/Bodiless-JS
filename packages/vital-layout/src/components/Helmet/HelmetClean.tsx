@@ -18,7 +18,7 @@ import {
   stylable,
   ComponentOrTag,
 } from '@bodiless/fclasses';
-import { asCxTokenSpec } from '@bodiless/vital-elements';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { HelmetComponents, HelmetProps } from './types';
 
 /**
@@ -84,4 +84,4 @@ export default HelmetClean;
  *
  * @see HelmetClean
  */
-export const asHelmetToken = asCxTokenSpec<HelmetComponents>();
+export const asHelmetToken = asVitalTokenSpec<HelmetComponents>();

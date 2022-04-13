@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxHeader from './cxHeader';
+import vitalHeader from './vitalHeader';
 
-export default cxHeader;
+export default vitalHeader;

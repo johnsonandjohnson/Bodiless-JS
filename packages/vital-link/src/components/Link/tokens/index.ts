@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxLink from './cxLink';
+import vitalLink from './vitalLink';
 
-export default cxLink;
+export default vitalLink;

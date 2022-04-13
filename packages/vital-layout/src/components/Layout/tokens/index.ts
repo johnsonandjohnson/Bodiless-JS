@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import cxLayout from './cxLayout';
+import vitalLayout from './vitalLayout';
 
 export { LayoutIds } from './constants';
 
-export { cxLayout };
+export { vitalLayout };

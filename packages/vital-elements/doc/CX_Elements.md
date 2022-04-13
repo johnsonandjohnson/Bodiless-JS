@@ -21,7 +21,7 @@ they've been composed into components.
 ### Usage of Vital Element Tokens As Is
 
 The Site Builder has the ability to use any of the token VitalDS elements which are in the
-`cx-elements` collection.
+`vital-elements` collection.
 
 #### Usage
 
@@ -30,10 +30,10 @@ Import the required Element tokens from `@bodiless/vital-elements`.
 If a singular token is being used, and is directly from a specific Element token:
 
 ```js
-import { cxColor } from '@bodiless/vital-elements';
+import { vitalColor } from '@bodiless/vital-elements';
 
 const Foo = {
-  Header1: cxColor.TextPrimaryBodyCopy,
+  Header1: vitalColor.TextPrimaryBodyCopy,
   //...
 };
 ```
@@ -41,12 +41,12 @@ const Foo = {
 If combining multiple tokens, you can put them within `as()` or `flowHoc()`:
 
 ```js
-import { cxColor, cxTextDecoration } from '@bodiless/vital-elements';
+import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
 
 const Foo = {
   BoldBody: as(
-    cxTextDecoration.Bold,
-    cxColor.TextPrimaryBodyCopy,
+    vitalTextDecoration.Bold,
+    vitalColor.TextPrimaryBodyCopy,
   ),
   //...
 };
@@ -55,19 +55,19 @@ const Foo = {
 ### Using Vital Element Tokens, but Customizing for Site-Specific Typography
 
 The Site Builder may need to override a specific token, or a specific set of tokens, and the
-following is a how-to guide to apply the [best methodology](./CX_SiteTypography) for doing so.
+following is a how-to guide to apply the [best methodology](./Vital_SiteTypography) for doing so.
 
 ### Helper Utilities
 
 The package also includes some helper tokens that are very useful in token composition:
 
-* `asCxTokenSpec` : Creates a token definition utility for a clean component, and will allow tokens
+* `asVitalTokenSpec` : Creates a token definition utility for a clean component, and will allow tokens
   to be assigned to any of the slots within your clean component.
 
   * Usage:
 
     ```jsx
-    const asLayoutToken = asCxTokenSpec<LayoutComponents>();
+    const asLayoutToken = asVitalTokenSpec<LayoutComponents>();
     ```
 
 * `asMetaToken` : Creates a token which applies the given metadata.
@@ -87,13 +87,13 @@ The package also includes some helper tokens that are very useful in token compo
     ```jsx
     const Link = asElementToken({
       Core: {
-        _: cxFontSize.Base,
+        _: vitalFontSize.Base,
       },
       Theme: {
         _: as(
-          cxTextDecoration.Bold,
-          cxTextDecoration.Underline,
-          cxColor.TextPrimaryInteractive,
+          vitalTextDecoration.Bold,
+          vitalTextDecoration.Underline,
+          vitalColor.TextPrimaryInteractive,
         ),
       },
       Meta: meta,
@@ -133,11 +133,11 @@ The package also includes some helper tokens that are very useful in token compo
 
 ### Shadowing Vital Element Tokens
 
-For more information on shadowing Vital Element tokens, read [Vital Shadow](./CX_Shadow.md).
+For more information on shadowing Vital Element tokens, read [Vital Shadow](./Vital_Shadow.md).
 
 ## Architectural Details
 
-When adding new Element tokens to the `cx-elements` package:
+When adding new Element tokens to the `vital-elements` package:
 
 * Add to existing Element if it fits the associated component token, or create a new component token
   with applicable name.

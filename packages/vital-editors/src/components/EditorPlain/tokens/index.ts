@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxEditorPlain from './cxEditorPlain';
+import vitalEditorPlain from './vitalEditorPlain';
 
-export default cxEditorPlain;
+export default vitalEditorPlain;

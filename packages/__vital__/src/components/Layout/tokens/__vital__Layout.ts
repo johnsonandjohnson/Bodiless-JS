@@ -12,23 +12,23 @@
  * limitations under the License.
  */
 
-import { cxLayout, asLayoutToken } from '@bodiless/vital-layout';
+import { vitalLayout, asLayoutToken } from '@bodiless/vital-layout';
 import { __vital__Footer } from '../../Footer';
 import { __vital__Header } from '../../Header';
 
 const Default = asLayoutToken({
-  ...cxLayout.Default,
+  ...vitalLayout.Default,
   Components: {
-    ...cxLayout.Default.Components,
+    ...vitalLayout.Default.Components,
     Header: __vital__Header.Default,
     Footer: __vital__Footer.Default,
   },
   Compose: {
-    ...cxLayout.Default.Compose,
+    ...vitalLayout.Default.Compose,
   },
 });
 
 export default {
-  ...cxLayout,
+  ...vitalLayout,
   Default,
 };

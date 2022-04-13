@@ -12,14 +12,14 @@
  * limitations under the License.
  */
 
-import { cxTypography } from '@bodiless/vital-elements';
-import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/vital-templates';
+import { vitalTypography } from '@bodiless/vital-elements';
+import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import {
   flowHoc, H2, replaceWith, as, P
 } from '@bodiless/fclasses';
 import React from 'react';
 
-const Subtitle = as(cxTypography.H2, 'pt-8')(H2);
+const Subtitle = as(vitalTypography.H2, 'pt-8')(H2);
 const Para = as('pt-4')(P);
 
 const Examples = () => (
@@ -57,7 +57,7 @@ const Examples = () => (
   </>
 );
 
-export const _default = asStyleGuideTemplateToken(cxStyleGuideTemplate.Default, {
+export const _default = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Editors'),
   Content: {
     Title: replaceWith(() => <>Style Guide</>),

@@ -13,9 +13,9 @@
  */
 
 import {
-  cxColor,
-  cxFontSize,
-  cxTextDecoration,
+  vitalColor,
+  vitalFontSize,
+  vitalTextDecoration,
 } from '@bodiless/vital-elements';
 import {
   addProps,
@@ -28,7 +28,7 @@ import {
 } from '@bodiless/fclasses';
 import { useIsSubmenuExpanded } from '@bodiless/navigation';
 import { withAnalyticsAttr } from '../../../util';
-import { cxMenuTitle, MenuTitleClean } from '../../MenuTitle';
+import { vitalMenuTitle, MenuTitleClean } from '../../MenuTitle';
 import { asSubMenuToken } from '../SubMenuClean';
 
 const Base = asSubMenuToken({
@@ -40,16 +40,16 @@ const Base = asSubMenuToken({
     Title: withAnalyticsAttr,
   },
   Components: {
-    Title: on(MenuTitleClean)(cxMenuTitle.Default),
+    Title: on(MenuTitleClean)(vitalMenuTitle.Default),
   },
 });
 
 const Footer = asSubMenuToken(Base, {
   Theme: {
     Title: as(
-      cxTextDecoration.Uppercase,
-      cxColor.TextPrimaryFooterCopy,
-      cxFontSize.Base,
+      vitalTextDecoration.Uppercase,
+      vitalColor.TextPrimaryFooterCopy,
+      vitalFontSize.Base,
     ),
     Item: 'leading-none',
   },
@@ -82,13 +82,13 @@ const TopNav = asSubMenuToken({
   },
   Theme: {
     Wrapper: as(
-      cxColor.BgPrimaryCard,
+      vitalColor.BgPrimaryCard,
       'z-20',
     ),
     Title: as(
-      cxColor.TextPrimaryHeaderCopy,
-      cxTextDecoration.Normal,
-      cxTextDecoration.Uppercase,
+      vitalColor.TextPrimaryHeaderCopy,
+      vitalTextDecoration.Normal,
+      vitalTextDecoration.Uppercase,
       // @TODO: Add to tokens?
       'text-m-base',
     ),
@@ -111,9 +111,9 @@ const Burger = asSubMenuToken({
   },
   Theme: {
     Title: as(
-      cxColor.TextPrimaryHeaderCopy,
-      cxFontSize.Base,
-      cxTextDecoration.Uppercase,
+      vitalColor.TextPrimaryHeaderCopy,
+      vitalFontSize.Base,
+      vitalTextDecoration.Uppercase,
     ),
   },
 });

@@ -13,4 +13,4 @@
  */
 
 export * from './index.bl-edit';
-export { default as cxEditorPlainBase } from './tokens/cxEditorPlain';
+export { default as vitalEditorPlainBase } from './tokens/vitalEditorPlain';

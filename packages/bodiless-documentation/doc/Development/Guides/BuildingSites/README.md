@@ -35,7 +35,7 @@ instead of utilizing those offered by VitalDS — will work.
         Editors](/Vital_DesignSystem/Components/Vital_Editors/).
 
 01. Image Presets:
-    - This step is optional, as the [VitalDS Image](/CX_DesignSystem/Components/CX_Image/) presets
+    - This step is optional, as the [VitalDS Image](/Vital_DesignSystem/Components/Vital_Image/) presets
       should provide most required functionality. If there are specific image requirements for your
       site, you may want to extend these tokens.
 

@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxTextDecoration from './cxTextDecoration';
+import vitalTextDecoration from './vitalTextDecoration';
 
-export default cxTextDecoration;
+export default vitalTextDecoration;

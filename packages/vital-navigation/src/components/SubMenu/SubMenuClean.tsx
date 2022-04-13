@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import { asCxTokenSpec } from '@bodiless/vital-elements';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import type { SubMenuComponents, SubMenuWrapperComponents } from './types';
 
-export const asSubMenuToken = asCxTokenSpec<SubMenuComponents>();
-export const asSubMenuWrapperToken = asCxTokenSpec<SubMenuWrapperComponents>();
+export const asSubMenuToken = asVitalTokenSpec<SubMenuComponents>();
+export const asSubMenuWrapperToken = asVitalTokenSpec<SubMenuWrapperComponents>();

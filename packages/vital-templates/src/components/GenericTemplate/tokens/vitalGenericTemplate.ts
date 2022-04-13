@@ -18,23 +18,23 @@ import {
   Img,
   addProps,
 } from '@bodiless/fclasses';
-import { cxImage } from '@bodiless/vital-image';
-import { LayoutClean, cxLayout } from '@bodiless/vital-layout';
-import { cxFlowContainer } from '@bodiless/vital-flowcontainer';
+import { vitalImage } from '@bodiless/vital-image';
+import { LayoutClean, vitalLayout } from '@bodiless/vital-layout';
+import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { withNodeKey } from '@bodiless/core';
-import { cxSpacing, cxTypography } from '@bodiless/vital-elements';
+import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
 import { GenericTemplateNodeKeys } from '../constants';
 
 const Default = asGenericTemplateToken({
   Components: {
-    PageWrapper: on(LayoutClean)(cxLayout.Default),
+    PageWrapper: on(LayoutClean)(vitalLayout.Default),
     // @todo breadcrumb placeholder
     Breadcrumb: addProps({ children: 'Breadcrumb Placeholder', }),
     // @todo in Hero ticket is change this to chameleon.
-    TopContent: on(Img)(cxImage.Default, cxImage.WithLandscapePlaceholder),
-    Content: as(cxFlowContainer.Default),
-    BottomContent: as(cxFlowContainer.Default),
+    TopContent: on(Img)(vitalImage.Default, vitalImage.WithLandscapePlaceholder),
+    Content: as(vitalFlowContainer.Default),
+    BottomContent: as(vitalFlowContainer.Default),
   },
   Schema: {
     TopContent: withNodeKey(GenericTemplateNodeKeys.TopContent),
@@ -42,21 +42,21 @@ const Default = asGenericTemplateToken({
     BottomContent: withNodeKey(GenericTemplateNodeKeys.BottomContent),
   },
   Spacing: {
-    TopContent: cxSpacing.WithSiteXLConstraint,
+    TopContent: vitalSpacing.WithSiteXLConstraint,
     BreadcrumbWrapper: as(
-      cxSpacing.WithSiteMargin,
-      cxSpacing.WithSiteXLConstraint,
+      vitalSpacing.WithSiteMargin,
+      vitalSpacing.WithSiteXLConstraint,
       'my-2.5',
     ),
     // @todo move styling of breadcrumb to breadcrumb component when it exists.
-    Breadcrumb: cxTypography.Rest,
+    Breadcrumb: vitalTypography.Rest,
     ContentWrapper: as(
-      cxSpacing.WithSiteMargin,
-      cxSpacing.WithSiteXLConstraint
+      vitalSpacing.WithSiteMargin,
+      vitalSpacing.WithSiteXLConstraint
     ),
     BottomWrapper: as(
-      cxSpacing.WithSiteMargin,
-      cxSpacing.WithSiteXLConstraint
+      vitalSpacing.WithSiteMargin,
+      vitalSpacing.WithSiteXLConstraint
     ),
   },
 });

@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-export { cxLayout, LayoutClean, asLayoutToken } from './components/Layout';
-export { cxHeader, HeaderClean, asHeaderToken } from './components/Header';
-export { cxFooter, FooterClean, asFooterToken } from './components/Footer';
+export { vitalLayout, LayoutClean, asLayoutToken } from './components/Layout';
+export { vitalHeader, HeaderClean, asHeaderToken } from './components/Header';
+export { vitalFooter, FooterClean, asFooterToken } from './components/Footer';

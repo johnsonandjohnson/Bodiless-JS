@@ -40,7 +40,7 @@ const twConfig = {
       'm-3xl': ['2.25rem', '2.5rem'],
     },
     colors: {
-      'cx-primary': {
+      'vital-primary': {
         brand: '#CA081B',
         'card-bg': '#ffffff',
         'page-bg': '#F4F4F4',
@@ -51,7 +51,7 @@ const twConfig = {
         'header-copy': '#212121',
         'footer-copy': '#FFFFFF',
       },
-      'cx-secondary': {
+      'vital-secondary': {
         eyebrow: '#CC0099',
         'footer-bg': '#2B2B33',
       },

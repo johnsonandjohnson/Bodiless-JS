@@ -13,7 +13,7 @@
  */
 
 import { withParent } from '@bodiless/core';
-import { asCxTokenSpec } from '@bodiless/vital-elements';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { Nav, Ul, flowHoc } from '@bodiless/fclasses';
 import { asBodilessMenu } from '@bodiless/navigation';
 import type { MenuComponents } from './types';
@@ -26,6 +26,6 @@ const MenuClean = flowHoc(
   withParent(Nav, 'Nav', 'Menu'),
 )(Ul);
 
-export const asMenuToken = asCxTokenSpec<MenuComponents>();
+export const asMenuToken = asVitalTokenSpec<MenuComponents>();
 
 export default MenuClean;

@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import tokens from './cxRewards';
+import tokens from './vitalRewards';
 
 export default tokens;

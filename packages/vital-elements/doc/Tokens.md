@@ -115,7 +115,7 @@ class — they serve a different function from the classes they compose. As desc
 documentation, element tokens represent _decisions_ about how the _options_ defined by your Tailwind
 configuration should be applied.
 
-<!-- TODO: Update link after `cx-elements` is renamed. -->
+<!-- TODO: Update link after `vital-elements` is renamed. -->
 Let's take color as an example. The [Vital Tailwind
 configuration](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/tailwind.config.js
 ':target=_blank') defines a base color palette:
@@ -166,7 +166,7 @@ data.
 
 ```ts
 export const PrimaryTextInteractiveColor = asElementToken('Theme')(
-  'text-blue-cx hover:text-blue-cx-light',
+  'text-blue-vital hover:text-blue-vital-light',
 );
 ```
 
@@ -185,7 +185,7 @@ themselves could be reused in other contexts; the token is _only_ for primary, i
   ```ts
   {
     Theme: {
-      _: 'text-blue-cx hover:text-blue-cx-light',
+      _: 'text-blue-vital hover:text-blue-vital-light',
     },
   };
   ```
@@ -201,7 +201,7 @@ themselves could be reused in other contexts; the token is _only_ for primary, i
 
   ```ts
   const asPrimaryTextInteractiveColor = addClasses(
-    'text-blue-cx hover:text-blue-cx-light'
+    'text-blue-vital hover:text-blue-vital-light'
   );
   ```
 

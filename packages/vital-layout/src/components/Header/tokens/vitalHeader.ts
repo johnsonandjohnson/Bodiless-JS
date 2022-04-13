@@ -17,10 +17,10 @@ import {
   withNode,
   withNodeKey,
 } from '@bodiless/core';
-import { cxColor, cxSpacing } from '@bodiless/vital-elements';
+import { vitalColor, vitalSpacing } from '@bodiless/vital-elements';
 import {
-  cxBurgerMenu,
-  cxMenu,
+  vitalBurgerMenu,
+  vitalMenu,
   asBurgerMenuToggler,
 } from '@bodiless/vital-navigation';
 import {
@@ -31,9 +31,9 @@ import {
   withDesign,
   withProps,
 } from '@bodiless/fclasses';
-import { cxLink } from '@bodiless/vital-link';
-import { cxLogo } from '../../Logo';
-import { cxDesktopSearch, cxSearchToggler } from '../../Search';
+import { vitalLink } from '@bodiless/vital-link';
+import { vitalLogo } from '../../Logo';
+import { vitalDesktopSearch, vitalSearchToggler } from '../../Search';
 import { asHeaderToken } from '../HeaderClean';
 import BurgerIcon from '../assets/BurgerIcon';
 
@@ -44,7 +44,7 @@ const WithLanguageButton = flowHoc(
     children: 'Español',
     // @TODO: Create divider tokens.
     // @TODO: Use existing tokens.
-    className: 'text-m-base border-l-2 border-cx-primary-divider pl-5 lg:mr-5 lg:px-5 lg:py-2 lg:border-r-2',
+    className: 'text-m-base border-l-2 border-vital-primary-divider pl-5 lg:mr-5 lg:px-5 lg:py-2 lg:border-r-2',
   }),
 );
 
@@ -56,11 +56,11 @@ const Base = asHeaderToken({
     MenuToggler: asBurgerMenuToggler,
   },
   Components: {
-    SearchToggler: cxSearchToggler.Default,
-    Logo: cxLogo.Default,
-    Menu: cxMenu.TopNav,
+    SearchToggler: vitalSearchToggler.Default,
+    Logo: vitalLogo.Default,
+    Menu: vitalMenu.TopNav,
     BurgerMenu: flowHoc(
-      as(cxBurgerMenu.Default),
+      as(vitalBurgerMenu.Default),
       // @TODO: Is there a better way to inject WhereToBuy and (future) LanguageButton
       // components into the menu? Maybe, move the components to another package...
       withDesign({
@@ -68,11 +68,11 @@ const Base = asHeaderToken({
         LanguageButton: WithLanguageButton,
       }),
     ),
-    DesktopSearch: cxDesktopSearch.Default,
-    UtilityMenu: cxMenu.Utility,
+    DesktopSearch: vitalDesktopSearch.Default,
+    UtilityMenu: vitalMenu.Utility,
     // @TODO: Replace LanguageButton placeholder.
     LanguageButton: WithLanguageButton,
-    WhereToBuy: cxLink.WhereToBuy,
+    WhereToBuy: vitalLink.WhereToBuy,
   },
   Layout: {
     Container: 'flex justify-between items-center',
@@ -83,8 +83,8 @@ const Base = asHeaderToken({
   },
   Spacing: {
     Container: as(
-      cxSpacing.WithSiteMargin,
-      cxSpacing.WithSiteXLConstraint,
+      vitalSpacing.WithSiteMargin,
+      vitalSpacing.WithSiteXLConstraint,
       'py-3 lg:py-0',
     ),
     ActionMenuContainer: 'pl-5',
@@ -93,7 +93,7 @@ const Base = asHeaderToken({
     MenuTogglerWrapper: 'my-4',
   },
   Theme: {
-    Wrapper: cxColor.BgPrimaryPage,
+    Wrapper: vitalColor.BgPrimaryPage,
   },
   Schema: {
     Logo: withNodeKey({ nodeKey: 'Logo' }),
@@ -108,9 +108,9 @@ const Default = asHeaderToken({
   ...Base,
 });
 
-const cxHeader = {
+const vitalHeader = {
   Base,
   Default,
 };
 
-export default cxHeader;
+export default vitalHeader;

@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxBurgerMenu from './cxBurgerMenu';
+import vitalBurgerMenu from './vitalBurgerMenu';
 
-export default cxBurgerMenu;
+export default vitalBurgerMenu;

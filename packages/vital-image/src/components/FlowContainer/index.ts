@@ -16,13 +16,13 @@ import { asFluidToken, asMetaToken } from '@bodiless/vital-elements';
 import {
   Img, on, varyDesigns, withDesign, as, flowHoc
 } from '@bodiless/fclasses';
-import { cxImage } from '../Img';
+import { vitalImage } from '../Img';
 
 // For the base variation, we apply the default token to the design key of
 // the designable element. This can be overridden from the design context.
 const baseVariation = {
   Image: on(Img)(withDesign({
-    Image: cxImage.Default,
+    Image: vitalImage.Default,
   })),
 };
 
@@ -31,12 +31,12 @@ const baseVariation = {
 // the base image globally, while still preserving variations in the flow container.
 const placeholderVariations = {
   Square: as(
-    cxImage.Default,
+    vitalImage.Default,
     asMetaToken(flowHoc.meta.term('Placeholder')('Square')),
   ),
   Landscape: as(
-    cxImage.Default,
-    cxImage.WithLandscapePlaceholder,
+    vitalImage.Default,
+    vitalImage.WithLandscapePlaceholder,
   ),
 };
 
@@ -50,4 +50,4 @@ const WithImageVariations = asFluidToken({
   ),
 });
 
-export const cxImageFlowContainer = { WithImageVariations };
+export const vitalImageFlowContainer = { WithImageVariations };

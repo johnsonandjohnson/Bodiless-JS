@@ -12,5 +12,5 @@
  * limitations under the License.
  */
 
-export { default as cxFontSize } from './tokens';
-export { default as cxFontSizeBase } from './tokens/cxFontSize';
+export { default as vitalFontSize } from './tokens';
+export { default as vitalFontSizeBase } from './tokens/vitalFontSize';

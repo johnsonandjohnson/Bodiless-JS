@@ -13,18 +13,18 @@
  */
 
 import { asFluidToken } from '@bodiless/vital-elements';
-import { cxFlowContainerBase } from '@bodiless/vital-flowcontainer';
+import { vitalFlowContainerBase } from '@bodiless/vital-flowcontainer';
 import { addProps } from '@bodiless/fclasses';
 
 const Default = asFluidToken({
-  ...cxFlowContainerBase.Default,
+  ...vitalFlowContainerBase.Default,
   Spacing: {
-    ...cxFlowContainerBase.Default.Spacing,
+    ...vitalFlowContainerBase.Default.Spacing,
     _: addProps({ 'data-shadowed-by': '__vital__FlowContainer' }),
   }
 });
 
 export default {
-  ...cxFlowContainerBase,
+  ...vitalFlowContainerBase,
   Default,
 };

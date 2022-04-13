@@ -15,7 +15,7 @@
 import React, { FC } from 'react';
 
 import { Div, designable } from '@bodiless/fclasses';
-import { asCxTokenSpec } from '@bodiless/vital-elements';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { SearchTogglerComponents, SearchTogglerProps } from './types';
 import SearchIcon from '../assets/SearchIcon';
 
@@ -33,7 +33,7 @@ const SearchTogglerBase: FC<SearchTogglerProps> = ({ components: C }) => (
 /**
  * Create a search toggler token.
  */
-const asSearchTogglerToken = asCxTokenSpec<SearchTogglerComponents>();
+const asSearchTogglerToken = asVitalTokenSpec<SearchTogglerComponents>();
 
 const SearchTogglerClean = designable(searchTogglerComponents, 'SearchToggler')(SearchTogglerBase);
 

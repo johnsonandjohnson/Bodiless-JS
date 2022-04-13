@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxColor from './cxColor';
+import vitalColor from './vitalColor';
 
-export default cxColor;
+export default vitalColor;

@@ -15,40 +15,40 @@
 import React from 'react';
 import { withNodeKey } from '@bodiless/core';
 import {
-  EditorPlainClean, cxEditorPlain, RichTextClean, cxRichText
+  EditorPlainClean, vitalEditorPlain, RichTextClean, vitalRichText
 } from '@bodiless/vital-editors';
-import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/vital-templates';
+import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import {
   as, flowHoc, replaceWith,
   H3, Section, Pre, Div,
 } from '@bodiless/fclasses';
-import { cxColor, cxTypography } from '@bodiless/vital-elements';
+import { vitalColor, vitalTypography } from '@bodiless/vital-elements';
 
 const C = {
-  H3: as(cxTypography.H3)(H3),
+  H3: as(vitalTypography.H3)(H3),
   Example: as('pt-12')(Section),
   Demo: as('p-2 border border-1')(Div),
   Code: as(
     'p-2 mt-2',
-    cxColor.BgPrimaryDivider,
-    cxColor.TextPrimaryHeaderCopy,
+    vitalColor.BgPrimaryDivider,
+    vitalColor.TextPrimaryHeaderCopy,
   )(Pre),
 };
 
 // @todo auto-generate examples from token collection entries
 const Default = as(
-  cxEditorPlain.Default,
+  vitalEditorPlain.Default,
   withNodeKey('plain-default'),
 )(EditorPlainClean);
 
 const WithAutoSuperscript = as(
-  cxEditorPlain.Default,
-  cxEditorPlain.WithAutoSuperscript,
+  vitalEditorPlain.Default,
+  vitalEditorPlain.WithAutoSuperscript,
   withNodeKey('plain-with-super'),
 )(EditorPlainClean);
 
 const RichText = as(
-  cxRichText.Default,
+  vitalRichText.Default,
   withNodeKey('rich-text-default'),
 )(RichTextClean);
 
@@ -60,7 +60,7 @@ const Examples = () => (
         <Default />
       </C.Demo>
       <C.Code>
-        as(cxEditorPlain.Default)(EditorPlainClean);
+        as(vitalEditorPlain.Default)(EditorPlainClean);
       </C.Code>
     </C.Example>
     <C.Example>
@@ -69,7 +69,7 @@ const Examples = () => (
         <WithAutoSuperscript />
       </C.Demo>
       <C.Code>
-        as(cxEditorPlain.WithAutoSuperscript)(EditorPlainClean);
+        as(vitalEditorPlain.WithAutoSuperscript)(EditorPlainClean);
       </C.Code>
     </C.Example>
     <C.Example>
@@ -78,13 +78,13 @@ const Examples = () => (
         <RichText />
       </C.Demo>
       <C.Code>
-        as(cxRichText.Default)(RichTextClean);
+        as(vitalRichText.Default)(RichTextClean);
       </C.Code>
     </C.Example>
   </>
 );
 
-export const Editors = asStyleGuideTemplateToken(cxStyleGuideTemplate.Default, {
+export const Editors = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Editors'),
   Content: {
     Title: replaceWith(() => <>Text Editors</>),
@@ -104,7 +104,7 @@ const ExamplesMonoFont = () => (
   </>
 );
 
-export const EditorsMonoFont = asStyleGuideTemplateToken(cxStyleGuideTemplate.Default, {
+export const EditorsMonoFont = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Editors'),
   Content: {
     Title: replaceWith(() => <>Text Editors</>),

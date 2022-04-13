@@ -12,5 +12,5 @@
  * limitations under the License.
  */
 
-export { default as cxSeparator } from './tokens';
-export { default as cxSeparatorBase } from './tokens/cxSeparator';
+export { default as vitalSeparator } from './tokens';
+export { default as vitalSeparatorBase } from './tokens/vitalSeparator';

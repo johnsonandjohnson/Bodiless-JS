@@ -23,7 +23,7 @@ import {
   ComponentOrTag,
 } from '@bodiless/fclasses';
 import {
-  asCxTokenSpec,
+  asVitalTokenSpec,
 } from '@bodiless/vital-elements';
 
 export type LogoComponents = {
@@ -55,7 +55,7 @@ const LogoBase: FC<LogoProps> = ({ components: C }) => (
 /**
  * Crete a logo token.
  */
-const asLogoToken = asCxTokenSpec<LogoComponents>();
+const asLogoToken = asVitalTokenSpec<LogoComponents>();
 
 /**
  * Clean component to be used for the site logo

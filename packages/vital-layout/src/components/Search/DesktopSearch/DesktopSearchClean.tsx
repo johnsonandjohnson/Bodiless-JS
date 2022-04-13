@@ -15,7 +15,7 @@
 import React, { FC } from 'react';
 
 import { Div, designable, Span } from '@bodiless/fclasses';
-import { asCxTokenSpec } from '@bodiless/vital-elements';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { DesktopSearchComponents, DesktopSearchProps } from './types';
 import SearchIcon from '../assets/SearchIcon';
 
@@ -35,7 +35,7 @@ const DesktopSearchBase: FC<DesktopSearchProps> = ({ components: C }) => (
 /**
  * Create a desktop search token.
  */
-const asDesktopSearchToken = asCxTokenSpec<DesktopSearchComponents>();
+const asDesktopSearchToken = asVitalTokenSpec<DesktopSearchComponents>();
 
 const DesktopSearchClean = designable(desktopSearchComponents, 'DesktopSearch')(DesktopSearchBase);
 

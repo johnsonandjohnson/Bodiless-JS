@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxFontSize from './cxFontSize';
+import vitalFontSize from './vitalFontSize';
 
-export default cxFontSize;
+export default vitalFontSize;

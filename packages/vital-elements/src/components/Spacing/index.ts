@@ -12,5 +12,5 @@
  * limitations under the License.
  */
 
-export { default as cxSpacing } from './tokens';
-export { default as cxSpacingBase } from './tokens/cxSpacing';
+export { default as vitalSpacing } from './tokens';
+export { default as vitalSpacingBase } from './tokens/vitalSpacing';

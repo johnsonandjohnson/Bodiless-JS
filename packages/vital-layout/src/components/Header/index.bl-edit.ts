@@ -12,5 +12,5 @@
  * limitations under the License.
  */
 
-export { default as cxHeaderStatic } from './tokens';
+export { default as vitalHeaderStatic } from './tokens';
 export { HeaderStatic } from './HeaderClean';

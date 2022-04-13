@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxMenuTitle from './cxMenuTitle';
+import vitalMenuTitle from './vitalMenuTitle';
 
-export default cxMenuTitle;
+export default vitalMenuTitle;

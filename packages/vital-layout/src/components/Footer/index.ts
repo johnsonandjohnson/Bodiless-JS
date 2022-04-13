@@ -13,5 +13,5 @@
  */
 
 export { default as FooterClean, asFooterToken } from './FooterClean';
-export { default as cxFooter } from './tokens';
+export { default as vitalFooter } from './tokens';
 export type { FooterComponents, FooterProps } from './types';

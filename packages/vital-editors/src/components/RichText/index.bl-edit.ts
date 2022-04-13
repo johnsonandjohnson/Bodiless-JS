@@ -12,5 +12,5 @@
  * limitations under the License.
  */
 
-export { default as cxRichText } from './tokens';
+export { default as vitalRichText } from './tokens';
 export { RichTextClean } from './RichTextClean';

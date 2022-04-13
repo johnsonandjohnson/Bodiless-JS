@@ -21,8 +21,8 @@ import {
   addPropsIf,
   HOC,
 } from '@bodiless/fclasses';
-import { cxEditorPlain, EditorPlainClean } from '../components/EditorPlain';
-import { RichTextClean, cxRichText } from '../components/RichText';
+import { vitalEditorPlain, EditorPlainClean } from '../components/EditorPlain';
+import { RichTextClean, vitalRichText } from '../components/RichText';
 
 export type WithEditor = (
   nodeKey?: WithNodeKeyProps,
@@ -72,7 +72,7 @@ const withEditor = (Editor:CT<any>): WithEditor => (
  *
  * @see withEditor
  */
-const withEditorPlain = withEditor(as(cxEditorPlain.Default)(EditorPlainClean));
+const withEditorPlain = withEditor(as(vitalEditorPlain.Default)(EditorPlainClean));
 
 /**
  * Bodiless HOC factory creates an HOC which adds a Clean Plain Text
@@ -98,7 +98,7 @@ const withEditorRichClean = withEditor(RichTextClean);
  *
  * @see withEditor
  */
-const withEditorFull = withEditor(as(cxRichText.Default)(RichTextClean));
+const withEditorFull = withEditor(as(vitalRichText.Default)(RichTextClean));
 
 export {
   withEditor,

@@ -44,13 +44,13 @@ import {
 } from '@bodiless/components';
 import { ifComponentSelector } from '@bodiless/layouts';
 import {
-  asCxTokenSpec,
-  cxColor,
-  cxFontSize,
-  cxTextDecoration,
-  cxTypography,
+  asVitalTokenSpec,
+  vitalColor,
+  vitalFontSize,
+  vitalTextDecoration,
+  vitalTypography,
 } from '@bodiless/vital-elements';
-import { LinkClean, cxLink } from '@bodiless/vital-link';
+import { LinkClean, vitalLink } from '@bodiless/vital-link';
 
 const withLinkDeserializer = withHtmlDeserializer(
   createLinkDeserializer({
@@ -60,7 +60,7 @@ const withLinkDeserializer = withHtmlDeserializer(
   }),
 ) as HOC;
 
-const AsFlowContainerItem = asCxTokenSpec()({
+const AsFlowContainerItem = asVitalTokenSpec()({
   Core: {
     _: as(
       ifComponentSelector(asPreview),
@@ -69,7 +69,7 @@ const AsFlowContainerItem = asCxTokenSpec()({
   Meta: flowHoc.meta.term('Type')('Text Editor'),
 });
 
-const Default = asCxTokenSpec()({
+const Default = asVitalTokenSpec()({
   Core: {
     paragraph: as(replaceWith(P), asBlock as HOC),
     Bold: withBoldMeta,
@@ -92,16 +92,16 @@ const Default = asCxTokenSpec()({
     _: addProps({ placeholder: 'Text Area' }),
   },
   Theme: {
-    paragraph: cxTypography.Body,
-    Bold: cxTextDecoration.Bold,
-    Underline: cxTextDecoration.Underline,
-    SuperScript: cxTextDecoration.Superscript,
-    H1: cxTypography.H1,
-    H2: cxTypography.H2,
-    H3: cxTypography.H3,
-    H4: cxTypography.H4,
-    H5: cxTypography.H5,
-    Link: cxLink.Default,
+    paragraph: vitalTypography.Body,
+    Bold: vitalTextDecoration.Bold,
+    Underline: vitalTextDecoration.Underline,
+    SuperScript: vitalTextDecoration.Superscript,
+    H1: vitalTypography.H1,
+    H2: vitalTypography.H2,
+    H3: vitalTypography.H3,
+    H4: vitalTypography.H4,
+    H5: vitalTypography.H5,
+    Link: vitalLink.Default,
   },
   Behavior: {
     Link: withLinkDeserializer,
@@ -111,28 +111,28 @@ const Default = asCxTokenSpec()({
   },
 });
 
-const Basic = asCxTokenSpec()({
+const Basic = asVitalTokenSpec()({
   ...Default,
   Core: pick(Default.Core, 'paragraph', 'Bold', 'Underline', 'Link', 'SuperScript'),
   Theme: pick(Default.Theme, 'paragraph', 'Bold', 'Underline', 'Link', 'SuperScript'),
 });
 
-const Copyright = asCxTokenSpec()({
+const Copyright = asVitalTokenSpec()({
   ...Basic,
   Theme: {
     ...Basic.Theme,
     paragraph: as(
-      cxColor.TextPrimaryFooterCopy,
-      cxFontSize.XS,
-      cxTextDecoration.Normal,
+      vitalColor.TextPrimaryFooterCopy,
+      vitalFontSize.XS,
+      vitalTextDecoration.Normal,
     ),
     Link: as(
-      cxLink.Default,
-      cxColor.TextPrimaryFooterCopy,
-      cxColor.TextPrimaryInteractive,
-      cxFontSize.XS,
-      cxTextDecoration.Bold,
-      cxTextDecoration.Underline,
+      vitalLink.Default,
+      vitalColor.TextPrimaryFooterCopy,
+      vitalColor.TextPrimaryInteractive,
+      vitalFontSize.XS,
+      vitalTextDecoration.Bold,
+      vitalTextDecoration.Underline,
       removeClasses('text-m-base lg:text-base'),
     ),
   },

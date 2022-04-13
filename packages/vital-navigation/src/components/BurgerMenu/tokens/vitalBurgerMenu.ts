@@ -13,14 +13,14 @@
  */
 
 import { asStatic, withChild } from '@bodiless/core';
-import { cxColor } from '@bodiless/vital-elements';
-import { cxLink } from '@bodiless/vital-link';
+import { vitalColor } from '@bodiless/vital-elements';
+import { vitalLink } from '@bodiless/vital-link';
 import {
   addClassesIf,
   as,
 } from '@bodiless/fclasses';
 import { useIsBurgerMenuHidden, asBurgerMenuToggler } from '@bodiless/navigation';
-import { cxMenu } from '../../Menu';
+import { vitalMenu } from '../../Menu';
 import CloseIcon from '../assets/CloseIcon';
 import { asBurgerMenuToken } from '../BurgerMenuClean';
 
@@ -33,9 +33,9 @@ const Base = asBurgerMenuToken({
     MenuToggler: asBurgerMenuToggler,
   },
   Components: {
-    Menu: cxMenu.Burger,
-    UtilityMenu: cxMenu.Utility,
-    WhereToBuy: cxLink.WhereToBuyWithoutIcon,
+    Menu: vitalMenu.Burger,
+    UtilityMenu: vitalMenu.Utility,
+    WhereToBuy: vitalLink.WhereToBuyWithoutIcon,
   },
   Layout: {
     Wrapper: 'w-full h-full fixed left-0 top-0 bottom-0 md:w-7/12 lg:hidden',
@@ -57,14 +57,14 @@ const Base = asBurgerMenuToken({
   },
   Theme: {
     Wrapper: as(
-      cxColor.BgPrimaryCard,
+      vitalColor.BgPrimaryCard,
       'z-20',
     ),
     FooterWrapper: as(
       // @TODO: Is this bg color name correct for this wrapper?
-      cxColor.BgPrimaryCard,
+      vitalColor.BgPrimaryCard,
       // @TODO: Create tokens for borders?
-      'border-t-2 border-cx-primary-page-bg',
+      'border-t-2 border-vital-primary-page-bg',
     ),
     Overlay: 'z-10 bg-gray-112-10 backdrop-filter backdrop-blur-m-md backdrop-brightness-80',
   },

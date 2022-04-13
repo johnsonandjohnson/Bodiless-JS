@@ -3,7 +3,7 @@
 The VitalDS Rich Text Editor Component is based on the [BodilessJS Rich Text Editor
 Component](/Components/Editors/RichText). While Bodiless Rich Text is a generic rich text editor
 (RTE) component with tokens that can be combined however you choose, Vital Rich Text builds upon it,
-providing a sensible default combination of its generic [VitalDS tokens](../CX_Elements/), to help
+providing a sensible default combination of its generic [VitalDS tokens](../Vital_Elements/), to help
 meet typical site-use expectations.
 
 By default, the only option available for the Vital Rich Text Editor is the _Full_ Rich Text Editor.
@@ -21,12 +21,12 @@ Content Editor Details](/Components/Editors/RichText#content-editor-details).
 What's shown in the following example can be applied to any Slot.
 
 ```js
-import { cxRichText, RichTextClean } from '@bodiless/vital-editors';
-import { asCxTokenSpec } from '@bodiless/vital-elements';
+import { vitalRichText, RichTextClean } from '@bodiless/vital-editors';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 
-const WithRichTextEditor = asCxTokenSpec({
+const WithRichTextEditor = asVitalTokenSpec({
   Editors: {
-    Content: as(cxRichText.Default)(RichTextClean);
+    Content: as(vitalRichText.Default)(RichTextClean);
   },
   Schema: {
     Content: withNode('content'),
@@ -41,14 +41,14 @@ defined in the Schema Domain.
 
 #### Via Shadowing (*Preferred Method)
 
-Provide the Shadowing function as defined in [Shadow](../CX_Elements/CX_Shadow).
+Provide the Shadowing function as defined in [Shadow](../Vital_Elements/Vital_Shadow).
 
 File to shadow:
-[`cxRichText`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-editors/src/components/RichText/tokens/cxRichText.ts)
+[`vitalRichText`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-editors/src/components/RichText/tokens/vitalRichText.ts)
 
 #### Via Overriding Specific Existing Styles Using VitalDS Rich Text Editor
 
-See [VitalDS Site Typography](../CX_Elements/CX_SiteTypography).
+See [VitalDS Site Typography](../Vital_Elements/Vital_SiteTypography).
 
 ### Extending Default VitalDS Rich Text Editor
 
@@ -60,21 +60,21 @@ design requirements, and provide additional Rich Text functionality (typically, 
 
     ```js
     import { asBlock, withButton, } from '@bodiless/richtext';
-    import { asCxTokenSpec } from '@bodiless/vital-elements';
+    import { asVitalTokenSpec } from '@bodiless/vital-elements';
 
     const withQuoteBlockMeta = flowHoc(
       asBlock,
       withButton('format_quote'),
     );
 
-    const BrandRichText = asCxTokenSpec()({
-      ...cxRichText.Default,
+    const BrandRichText = asVitalTokenSpec()({
+      ...vitalRichText.Default,
       Core: {
-        ...cxRichText.Default.Core,
+        ...vitalRichText.Default.Core,
         Quote: withQuoteBlockMeta,
       },
       Components: {
-        ...cxRichText.Default.Components,
+        ...vitalRichText.Default.Components,
         Quote: 'italic',
       },
     });
@@ -82,7 +82,7 @@ design requirements, and provide additional Rich Text functionality (typically, 
 
     - `withQuoteBlockMeta` creates a token that will be a designable Span and adds a new quote
       button to the editor.
-    - `BrandRichText` starts with the existing `cxRichText` functionality, and, in both
+    - `BrandRichText` starts with the existing `vitalRichText` functionality, and, in both
       Core/Components, it spreads existing functionality across these two domains and the new tokens
       are added.
     - For an example of a simple token that adds functionality to Slate, expand the disclosure
@@ -103,9 +103,9 @@ design requirements, and provide additional Rich Text functionality (typically, 
         //...
 
         const EditorWithBlockQuote = asTokenSpec()({
-          ...cxDefault,
+          ...vitalDefault,
           Core: {
-            ...cxDefault.Core,
+            ...vitalDefault.Core,
             // `asBlockQuote` is an example token you would import from your site's
             // `/src/components/Elements.token.ts` file.
             // E.g., `const asBlockQuote = addClasses('block mx-4');`

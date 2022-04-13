@@ -16,8 +16,8 @@ import { as, Token, withShowDesignKeys } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
 import { asElementToken } from '@bodiless/vital-elements';
 import { asBodilessPage } from '../asBodilessPage';
-// import { cxGenericTemplate, GenericTemplateClean } from '../../Generic';
-// import { cxStyleGuideTemplate, StyleGuideTemplateClean } from '../../StyleGuideTemplate';
+// import { vitalGenericTemplate, GenericTemplateClean } from '../../Generic';
+// import { vitalStyleGuideTemplate, StyleGuideTemplateClean } from '../../StyleGuideTemplate';
 
 // @todo token to GTM package when created
 const withGTMDesignKeys = withShowDesignKeys(true, 'layer-region');
@@ -50,8 +50,8 @@ const Default = asElementToken({
     _: as(withGTMDesignKeys as Token),
   },
   Components: {
-    // _default: on(GenericTemplateClean)(cxGenericTemplate.Default),
-    // StyleGuide: on(StyleGuideTemplateClean)(cxStyleGuideTemplate.Default),
+    // _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
+    // StyleGuide: on(StyleGuideTemplateClean)(vitalStyleGuideTemplate.Default),
   },
 });
 

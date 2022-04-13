@@ -4,13 +4,13 @@ The Vital SubMenu Component provides a generic submenu that can used appended to
 
 ## Site Builder Details
 
-From a Site Builder perspective, Vital SubMenu is comprised of a token collection (`cxSubMenu`) that can appended directly to menus, without providing submenu clean component. You can use the base Vital SubMenu token (`cxSubMenu.Base`) as it is, or you can recompose it to meet your site's requirements.
+From a Site Builder perspective, Vital SubMenu is comprised of a token collection (`vitalSubMenu`) that can appended directly to menus, without providing submenu clean component. You can use the base Vital SubMenu token (`vitalSubMenu.Base`) as it is, or you can recompose it to meet your site's requirements.
 
 Some recomposed tokens are already provided for Vital, like:
 
-- Footer (cxSubMenu.Footer)
-- TopNav (cxSubMenu.TopNav)
-- Burger (cxSubMenu.Burger)
+- Footer (vitalSubMenu.Footer)
+- TopNav (vitalSubMenu.TopNav)
+- Burger (vitalSubMenu.Burger)
 
 ### Usage
 
@@ -20,9 +20,9 @@ Using the following code example as a guide, you can apply your token along with
 const Menu = as(
   // You can compose or create a new customized submenu token.
   withListSubMenu(),
-  withMenuDesign('List')(as(cxSubMenu.Base)),
+  withMenuDesign('List')(as(vitalSubMenu.Base)),
 )(MenuClean);
 ```
 
 To see how the SubMenu tokens are designed in details, please see:
-[`cxSubMenu.ts`](../src/components/SubMenu/tokens/cxSubMenu.ts)
+[`vitalSubMenu.ts`](../src/components/SubMenu/tokens/vitalSubMenu.ts)

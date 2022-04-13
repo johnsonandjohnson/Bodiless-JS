@@ -21,7 +21,7 @@ There is no way to edit BurgerMenu components (we are adding `asStatic` to the w
 
 ## Site Builder Details
 
-From a Site Builder perspective, Vital BurgerMenu is comprised of a token collection (`cxBurgerMenu`) and a BurgerMenu component (`BurgerMenuClean`). You can use the default Vital Header token (`cxBurgerMenu.Default`) as is, or you can recompose it to meet your site's requirements.
+From a Site Builder perspective, Vital BurgerMenu is comprised of a token collection (`vitalBurgerMenu`) and a BurgerMenu component (`BurgerMenuClean`). You can use the default Vital Header token (`vitalBurgerMenu.Default`) as is, or you can recompose it to meet your site's requirements.
 
 ### Usage
 
@@ -30,7 +30,7 @@ Using the following code example as a guide, you can insert BurgerMenu into a co
 ```tsx
 const Header = as(
   // You can compose or create a new customized burger menu token.
-  cxBurgerMenu.Default,
+  vitalBurgerMenu.Default,
 )(HeaderClean);
 
 const Header: FC = () => (

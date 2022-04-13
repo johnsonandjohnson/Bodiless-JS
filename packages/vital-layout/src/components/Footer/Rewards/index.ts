@@ -16,5 +16,5 @@
 // a more appropriate place.
 // Also requires component structure reorganization for new static pattern.
 export { RewardsClean, asRewardsToken } from './RewardsClean';
-export { default as cxRewards } from './tokens';
+export { default as vitalRewards } from './tokens';
 export type { RewardsComponents, RewardsProps } from './types';

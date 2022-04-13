@@ -25,7 +25,7 @@ import {
   withProps,
 } from '@bodiless/fclasses';
 import { withSidecarNodes, withNodeKey } from '@bodiless/core';
-import { cxColor, cxTextDecoration, cxTypography } from '@bodiless/vital-elements';
+import { vitalColor, vitalTextDecoration, vitalTypography } from '@bodiless/vital-elements';
 import { asLinkToken } from '../LinkClean';
 import { useExternalLinkToggle, asEditableLink, useIsDownloadLink } from '../util';
 import { CartIcon } from '../assets/CartIcon';
@@ -50,14 +50,14 @@ const WithExternalStyles = asLinkToken({
     }),
   },
   Theme: {
-    Wrapper: 'cx-external-link',
+    Wrapper: 'vital-external-link',
   },
 });
 
 const WithDownloadStyles = asLinkToken({
   Core: {
     Wrapper: as(
-      addClassesIf(useIsDownloadLink())('cx-download-link'),
+      addClassesIf(useIsDownloadLink())('vital-download-link'),
       addPropsIf(useIsDownloadLink())({ target: '_blank', rel: 'noopener noreferrer' }),
     ),
   },
@@ -72,7 +72,7 @@ const Default = asLinkToken({
      */
   Theme: {
     _: as(WithDownloadStyles, WithExternalStyles),
-    Wrapper: as(cxTypography.Link),
+    Wrapper: as(vitalTypography.Link),
   },
   /**
      * Makes the link editable. Nodekey must be provided separately.
@@ -107,10 +107,10 @@ const WhereToBuy = asLinkToken({
   },
   Theme: {
     Wrapper: as(
-      cxColor.BgPrimaryInteractive,
-      cxColor.TextPrimaryFooterCopy,
-      cxTextDecoration.Bold,
-      cxTextDecoration.Uppercase,
+      vitalColor.BgPrimaryInteractive,
+      vitalColor.TextPrimaryFooterCopy,
+      vitalTextDecoration.Bold,
+      vitalTextDecoration.Uppercase,
       // @TODO: Create token? It should be same size for both mobile and desktop...
       'text-m-base',
       'rounded',

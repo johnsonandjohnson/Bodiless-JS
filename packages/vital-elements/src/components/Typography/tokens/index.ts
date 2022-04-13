@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxTypography from './cxTypography';
+import vitalTypography from './vitalTypography';
 
-export default cxTypography;
+export default vitalTypography;

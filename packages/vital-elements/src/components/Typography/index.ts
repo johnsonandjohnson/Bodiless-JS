@@ -12,5 +12,5 @@
  * limitations under the License.
  */
 
-export { default as cxTypography } from './tokens';
-export { default as cxTypographyBase } from './tokens/cxTypography';
+export { default as vitalTypography } from './tokens';
+export { default as vitalTypographyBase } from './tokens/vitalTypography';

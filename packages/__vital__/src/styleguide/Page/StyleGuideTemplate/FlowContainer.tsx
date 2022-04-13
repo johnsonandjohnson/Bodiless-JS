@@ -19,35 +19,35 @@ import {
   as,
   replaceWith,
 } from '@bodiless/fclasses';
-import { cxFlowContainer, FlowContainerClean } from '@bodiless/vital-flowcontainer';
+import { vitalFlowContainer, FlowContainerClean } from '@bodiless/vital-flowcontainer';
 
-import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/vital-templates';
+import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 
 const DefaultFlowContainer = as(
-  cxFlowContainer.Default,
+  vitalFlowContainer.Default,
   withNodeKey('defaultcontainer'),
 )(FlowContainerClean);
 
 const FullFlowContainer = as(
-  cxFlowContainer.Default,
-  cxFlowContainer.WithFullWidthConstraint,
+  vitalFlowContainer.Default,
+  vitalFlowContainer.WithFullWidthConstraint,
   withNodeKey('fullwidthcontainer'),
 )(FlowContainerClean);
 
 const SingleContainer = as(
-  cxFlowContainer.Default,
-  cxFlowContainer.WithSingleConstraint,
+  vitalFlowContainer.Default,
+  vitalFlowContainer.WithSingleConstraint,
   withNodeKey('singlecontainer'),
 )(FlowContainerClean);
 
 const OneThirdContainer = as(
-  cxFlowContainer.Default,
-  cxFlowContainer.WithTabletOneThirdConstraint,
+  vitalFlowContainer.Default,
+  vitalFlowContainer.WithTabletOneThirdConstraint,
   withNodeKey('onethirdcontainer'),
 )(FlowContainerClean);
 
 const ContentRegionContainer = as(
-  cxFlowContainer.ContentRegion,
+  vitalFlowContainer.ContentRegion,
   withNodeKey('contentregioncontainer'),
 )(FlowContainerClean);
 
@@ -67,7 +67,7 @@ const Examples = (props: any) => (
   </>
 );
 
-export const FlowContainer = asStyleGuideTemplateToken(cxStyleGuideTemplate.Default, {
+export const FlowContainer = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('FlowContainer'),
   Content: {
     Title: replaceWith(() => <>FlowContainer</>),

@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import tokens from './cxSocialLinks';
+import tokens from './vitalSocialLinks';
 
 export default tokens;

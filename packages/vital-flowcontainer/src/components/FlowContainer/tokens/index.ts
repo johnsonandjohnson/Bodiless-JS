@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxFlowContainer from './cxFlowContainer';
+import vitalFlowContainer from './vitalFlowContainer';
 
-export default cxFlowContainer;
+export default vitalFlowContainer;

@@ -47,7 +47,7 @@ becomes visible when the user visits the site and starts interacting with their 
 
 ### Customizing Via Shadowing (*Preferred Method)
 
-Provide the Shadowing function as defined in [Shadow](../CX_Elements/CX_Shadow).
+Provide the Shadowing function as defined in [Shadow](../Vital_Elements/Vital_Shadow).
 
 File to shadow: `./lib/shadow/vital-layout/{MyLayout}.js`
 

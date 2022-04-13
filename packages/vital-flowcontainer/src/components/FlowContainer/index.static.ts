@@ -14,7 +14,7 @@
 
 import {
   StaticBlock as FlowContainerStatic,
-  staticTokenCollection as cxFlowContainerStatic,
+  staticTokenCollection as vitalFlowContainerStatic,
 } from '@bodiless/hydration';
 
-export { cxFlowContainerStatic, FlowContainerStatic };
+export { vitalFlowContainerStatic, FlowContainerStatic };

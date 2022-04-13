@@ -12,16 +12,16 @@
  * limitations under the License.
  */
 
-import { cxHeader, asHeaderToken } from '@bodiless/vital-layout';
+import { vitalHeader, asHeaderToken } from '@bodiless/vital-layout';
 
 const Default = asHeaderToken({
-  ...cxHeader.Default,
+  ...vitalHeader.Default,
   Components: {
-    ...cxHeader.Default.Components,
+    ...vitalHeader.Default.Components,
   },
 });
 
 export default {
-  ...cxHeader,
+  ...vitalHeader,
   Default,
 };

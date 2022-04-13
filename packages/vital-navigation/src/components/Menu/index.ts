@@ -13,6 +13,6 @@
  */
 
 export { default as MenuClean, asMenuToken } from './MenuClean';
-export { default as cxMenu } from './tokens';
-export { default as cxMenuBase } from './tokens/cxMenu';
+export { default as vitalMenu } from './tokens';
+export { default as vitalMenuBase } from './tokens/vitalMenu';
 export type { MenuComponents } from './types';

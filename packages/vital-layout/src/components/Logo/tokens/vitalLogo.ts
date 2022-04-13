@@ -13,7 +13,7 @@
  */
 
 import {
-  cxImage
+  vitalImage
 } from '@bodiless/vital-image';
 import {
   withNode,
@@ -32,14 +32,14 @@ const Default = asLogoToken({
     Wrapper: 'mx-4 lg:ml-0 lg:mr-8',
   },
   Components: {
-    Image: cxImage.Default,
+    Image: vitalImage.Default,
   },
   Behavior: {
-    Image: cxImage.WithEager,
+    Image: vitalImage.WithEager,
   },
   Schema: {
     Image: withNodeKey({ nodeKey: 'SiteLogo', nodeCollection: 'site' }),
-    // @todo should this be a cx-link?
+    // @todo should this be a vital-link?
     // @todo can we separate sidecar nodekeys from editors?
     Link: withSidecarNodes(
       asBodilessLink({ nodeKey: 'SiteLink', nodeCollection: 'site' }, { href: '/' }),

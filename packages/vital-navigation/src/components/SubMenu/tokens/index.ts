@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxSubMenu from './cxSubMenu';
+import vitalSubMenu from './vitalSubMenu';
 
-export default cxSubMenu;
+export default vitalSubMenu;

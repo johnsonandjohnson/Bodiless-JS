@@ -13,5 +13,5 @@
  */
 
 export { DesktopSearchClean, asDesktopSearchToken } from './DesktopSearchClean';
-export { cxDesktopSearch } from './cxDesktopSearch';
+export { vitalDesktopSearch } from './vitalDesktopSearch';
 export { DesktopSearchComponents, DesktopSearchProps } from './types';

@@ -22,9 +22,9 @@ import {
 } from '@bodiless/fclasses';
 import { asFluidToken } from '@bodiless/vital-elements';
 import {
-  cxPage,
+  vitalPage,
   GenericTemplateClean,
-  cxGenericTemplate,
+  vitalGenericTemplate,
   asGenericTemplateToken
 } from '@bodiless/vital-templates';
 import { useNode } from '@bodiless/core';
@@ -32,9 +32,9 @@ import { useNode } from '@bodiless/core';
 // @todo remove NoBreadcrumbsGeneric when breadcrumbs is implemented and
 // content editor can choose to use breadcrumb
 const NoBreadcrumbsGeneric = asGenericTemplateToken({
-  ...cxGenericTemplate.Default,
+  ...vitalGenericTemplate.Default,
   Components: {
-    ...cxGenericTemplate.Default.Components,
+    ...vitalGenericTemplate.Default.Components,
     BreadcrumbWrapper: replaceWith(React.Fragment),
     Breadcrumb: replaceWith(React.Fragment),
   },
@@ -43,16 +43,16 @@ const NoBreadcrumbsGeneric = asGenericTemplateToken({
 const isHomePage = () => useNode().node.pagePath === '/';
 
 const Default = asFluidToken({
-  ...cxPage.Default,
+  ...vitalPage.Default,
   Components: {
     _default: on(GenericTemplateClean)(
       flowIf(isHomePage)(as(NoBreadcrumbsGeneric)),
-      flowIf(negate(isHomePage))(as(cxGenericTemplate.Default)),
+      flowIf(negate(isHomePage))(as(vitalGenericTemplate.Default)),
     ),
   },
 });
 
 export default {
-  ...cxPage,
+  ...vitalPage,
   Default,
 };

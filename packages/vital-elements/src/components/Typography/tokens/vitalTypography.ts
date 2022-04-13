@@ -14,9 +14,9 @@
 
 import { as } from '@bodiless/fclasses';
 import { asElementToken } from '../../../util';
-import { cxColor } from '../../Color';
-import { cxFontSize } from '../../FontSize';
-import { cxTextDecoration } from '../../TextDecoration';
+import { vitalColor } from '../../Color';
+import { vitalFontSize } from '../../FontSize';
+import { vitalTextDecoration } from '../../TextDecoration';
 
 const meta = {
   categories: {
@@ -27,13 +27,13 @@ const meta = {
 
 const Link = asElementToken({
   Core: {
-    _: cxFontSize.Base,
+    _: vitalFontSize.Base,
   },
   Theme: {
     _: as(
-      cxTextDecoration.Bold,
-      cxTextDecoration.Underline,
-      cxColor.TextPrimaryInteractive,
+      vitalTextDecoration.Bold,
+      vitalTextDecoration.Underline,
+      vitalColor.TextPrimaryInteractive,
     ),
   },
   Meta: meta,
@@ -41,12 +41,12 @@ const Link = asElementToken({
 
 const H1 = asElementToken({
   Core: {
-    _: cxFontSize.XXXL,
+    _: vitalFontSize.XXXL,
   },
   Theme: {
     _: as(
-      cxTextDecoration.Bold,
-      cxColor.TextPrimaryHeaderCopy,
+      vitalTextDecoration.Bold,
+      vitalColor.TextPrimaryHeaderCopy,
     ),
   },
   Spacing: {
@@ -57,12 +57,12 @@ const H1 = asElementToken({
 
 const H2 = asElementToken({
   Core: {
-    _: cxFontSize.XXL,
+    _: vitalFontSize.XXL,
   },
   Theme: {
     _: as(
-      cxTextDecoration.Bold,
-      cxColor.TextPrimaryHeaderCopy,
+      vitalTextDecoration.Bold,
+      vitalColor.TextPrimaryHeaderCopy,
     ),
   },
   Spacing: {
@@ -73,12 +73,12 @@ const H2 = asElementToken({
 
 const H3 = asElementToken({
   Core: {
-    _: cxFontSize.XL,
+    _: vitalFontSize.XL,
   },
   Theme: {
     _: as(
-      cxTextDecoration.Medium,
-      cxColor.TextPrimaryHeaderCopy,
+      vitalTextDecoration.Medium,
+      vitalColor.TextPrimaryHeaderCopy,
     ),
   },
   Spacing: {
@@ -89,12 +89,12 @@ const H3 = asElementToken({
 
 const H4 = asElementToken({
   Core: {
-    _: cxFontSize.XL,
+    _: vitalFontSize.XL,
   },
   Theme: {
     _: as(
-      cxTextDecoration.Normal,
-      cxColor.TextPrimaryHeaderCopy,
+      vitalTextDecoration.Normal,
+      vitalColor.TextPrimaryHeaderCopy,
     ),
   },
   Spacing: {
@@ -104,12 +104,12 @@ const H4 = asElementToken({
 
 const H5 = asElementToken({
   Core: {
-    _: cxFontSize.Base,
+    _: vitalFontSize.Base,
   },
   Theme: {
     _: as(
-      cxTextDecoration.Medium,
-      cxColor.TextPrimaryHeaderCopy,
+      vitalTextDecoration.Medium,
+      vitalColor.TextPrimaryHeaderCopy,
     ),
   },
   Spacing: {
@@ -120,12 +120,12 @@ const H5 = asElementToken({
 
 const Body = asElementToken({
   Core: {
-    _: cxFontSize.Base,
+    _: vitalFontSize.Base,
   },
   Theme: {
     _: as(
-      cxTextDecoration.Normal,
-      cxColor.TextPrimaryBodyCopy,
+      vitalTextDecoration.Normal,
+      vitalColor.TextPrimaryBodyCopy,
     ),
   },
   Spacing: {
@@ -136,13 +136,13 @@ const Body = asElementToken({
 
 const Eyebrow = asElementToken({
   Core: {
-    _: cxFontSize.XS,
+    _: vitalFontSize.XS,
   },
   Theme: {
     _: as(
-      cxTextDecoration.Uppercase,
-      cxTextDecoration.ExtraBold,
-      cxColor.TextSecondaryEyebrow,
+      vitalTextDecoration.Uppercase,
+      vitalTextDecoration.ExtraBold,
+      vitalColor.TextSecondaryEyebrow,
     ),
   },
   Spacing: {
@@ -154,12 +154,12 @@ const Eyebrow = asElementToken({
 // They have called it crumbs & reviews now.
 const Rest = asElementToken({
   Core: {
-    _: cxFontSize.XS,
+    _: vitalFontSize.XS,
   },
   Theme: {
     _: as(
-      cxTextDecoration.Normal,
-      cxColor.TextPrimaryBodyCopy,
+      vitalTextDecoration.Normal,
+      vitalColor.TextPrimaryBodyCopy,
     ),
   },
   Meta: meta,

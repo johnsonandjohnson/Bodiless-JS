@@ -43,7 +43,7 @@ const twConfig = {
     plugin(({ addUtilities }) => {
       addUtilities(
         {
-          '.cx-download-link::after': {
+          '.vital-download-link::after': {
             content: '"\\e800"',
             'font-family': '"linkicons"',
             'text-decoration': 'none',
@@ -52,7 +52,7 @@ const twConfig = {
             'margin-left': '.25rem',
             display: 'inline-block',
           },
-          '.cx-external-link::after': {
+          '.vital-external-link::after': {
             content: '"\\e801"',
             'font-family': '"linkicons"',
             'font-style': 'normal',

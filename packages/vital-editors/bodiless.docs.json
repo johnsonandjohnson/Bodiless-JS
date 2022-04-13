@@ -1,10 +1,10 @@
 {
-  "CX_DesignSystem": {
+  "Vital_DesignSystem": {
     "Components": {
-      "CX_Editors": {
-          "README.md": "./doc/CX_Editors.md",
-          "CX_RTE_Editor.md": "./doc/RichText.md",
-          "CX_PlainEditor.md": "./doc/PlainEditor.md"
+      "Vital_Editors": {
+          "README.md": "./doc/Vital_Editors.md",
+          "Vital_RTE_Editor.md": "./doc/RichText.md",
+          "Vital_PlainEditor.md": "./doc/PlainEditor.md"
       }
     }
   }

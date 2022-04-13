@@ -13,25 +13,25 @@
  */
 
 import { asFluidToken } from '@bodiless/vital-elements';
-import { cxRichTextBase } from '@bodiless/vital-editors';
+import { vitalRichTextBase } from '@bodiless/vital-editors';
 import { addProps } from '@bodiless/fclasses';
 
 const Default = asFluidToken({
-  ...cxRichTextBase.Default,
+  ...vitalRichTextBase.Default,
   Compose: {
-    ...(cxRichTextBase.Default.Compose || {}),
-    WithShadowedBy: addProps({ 'data-shadowed-by': '__cxstarter_:RichText' }),
+    ...(vitalRichTextBase.Default.Compose || {}),
+    WithShadowedBy: addProps({ 'data-shadowed-by': '__vitalstarter_:RichText' }),
   },
   // Demonstrates how to remove a component from the default editor.
   // Core: {
-  //   ...omit(cxRichTextBase.Default.Core, 'H1'),
+  //   ...omit(vitalRichTextBase.Default.Core, 'H1'),
   // },
   // Components: {
-  //   ...omit(cxRichTextBase.Default.Components, 'H1'),
+  //   ...omit(vitalRichTextBase.Default.Components, 'H1'),
   // },
 });
 
 export default {
-  ...cxRichTextBase,
+  ...vitalRichTextBase,
   Default,
 };

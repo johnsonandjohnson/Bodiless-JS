@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { cxSpacing } from '@bodiless/vital-elements';
+import { vitalSpacing } from '@bodiless/vital-elements';
 import {
   addProps,
   as,
@@ -35,8 +35,8 @@ const StyleGuide = asLayoutToken({
     Header: asBorderResponsiveIndicator,
     Footer: asBorderResponsiveIndicator,
     Container: as(
-      cxSpacing.WithSiteMargin,
-      cxSpacing.WithSiteXLConstraint,
+      vitalSpacing.WithSiteMargin,
+      vitalSpacing.WithSiteXLConstraint,
       asBorderResponsiveIndicator,
     ),
     PageTopper: asBorderResponsiveIndicator,

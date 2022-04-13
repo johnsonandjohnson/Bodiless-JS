@@ -13,19 +13,19 @@
  */
 
 import { withNode, withNodeKey } from '@bodiless/core';
-import { cxRichText } from '@bodiless/vital-editors';
-import { cxColor, cxSpacing } from '@bodiless/vital-elements';
-import { cxMenu } from '@bodiless/vital-navigation';
+import { vitalRichText } from '@bodiless/vital-editors';
+import { vitalColor, vitalSpacing } from '@bodiless/vital-elements';
+import { vitalMenu } from '@bodiless/vital-navigation';
 import { as } from '@bodiless/fclasses';
-import { cxRewards } from '../Rewards';
-import { cxSocialLinks } from '../SocialLinks';
+import { vitalRewards } from '../Rewards';
+import { vitalSocialLinks } from '../SocialLinks';
 import { asFooterToken } from '../FooterClean';
 
 const Base = asFooterToken({
   Components: {
-    Rewards: cxRewards.Default,
-    FooterMenu: cxMenu.Footer,
-    SocialLinks: cxSocialLinks.Default,
+    Rewards: vitalRewards.Default,
+    FooterMenu: vitalMenu.Footer,
+    SocialLinks: vitalSocialLinks.Default,
   },
   Layout: {
     Wrapper: 'w-full',
@@ -47,8 +47,8 @@ const Base = asFooterToken({
   Spacing: {
     Wrapper: 'mt-10',
     Container: as(
-      cxSpacing.WithSiteMargin,
-      cxSpacing.WithSiteXLConstraint,
+      vitalSpacing.WithSiteMargin,
+      vitalSpacing.WithSiteXLConstraint,
       'lg:pt-16 lg:pb-10',
     ),
     Column: 'md:py-9 lg:py-0 lg:pl-28 lg:first:pl-0 lg:first:pr-20',
@@ -59,12 +59,12 @@ const Base = asFooterToken({
     SocialLinksWrapper: 'py-5 md:p-0',
   },
   Theme: {
-    RewardsWrapper: 'bg-cx-primary-card-bg md:bg-cx-secondary-footer-bg',
+    RewardsWrapper: 'bg-vital-primary-card-bg md:bg-vital-secondary-footer-bg',
     Copyright: 'border-white-400 border-t border-b md:border-0',
-    Wrapper: cxColor.BgSecondaryFooter,
+    Wrapper: vitalColor.BgSecondaryFooter,
   },
   Editors: {
-    Copyright: cxRichText.Copyright,
+    Copyright: vitalRichText.Copyright,
   },
   Schema: {
     FooterMenu: withNodeKey({ nodeKey: 'footer', nodeCollection: 'site' }),

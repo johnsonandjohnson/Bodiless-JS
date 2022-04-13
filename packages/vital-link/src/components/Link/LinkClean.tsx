@@ -17,7 +17,7 @@ import { withoutHydrationInline } from '@bodiless/hydration';
 import {
   A, Span, Fragment, designable,
 } from '@bodiless/fclasses';
-import { asCxTokenSpec } from '@bodiless/vital-elements';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { LinkComponents, LinkBaseProps } from './types';
 
 const linkComponents: LinkComponents = {
@@ -37,7 +37,7 @@ const LinkBase: FC<LinkBaseProps> = ({ components: C, children, ...rest }) => (
   </C.Wrapper>
 );
 
-const asLinkToken = asCxTokenSpec<LinkComponents>();
+const asLinkToken = asVitalTokenSpec<LinkComponents>();
 
 const LinkClean = designable(linkComponents, 'Link')(LinkBase);
 const LinkStatic = withoutHydrationInline()(LinkClean);

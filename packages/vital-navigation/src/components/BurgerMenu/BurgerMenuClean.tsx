@@ -13,7 +13,7 @@
  */
 
 import React, { FC } from 'react';
-import { asCxTokenSpec } from '@bodiless/vital-elements';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import {
   Div, Fragment, A, designable,
 } from '@bodiless/fclasses';
@@ -71,6 +71,6 @@ const BurgerMenuCleanBase: FC<BurgerMenuProps> = ({ components: C, ...rest }) =>
  */
 const BurgerMenuClean = designable(burgerMenuComponents, 'BurgerMenu')(BurgerMenuCleanBase);
 
-export const asBurgerMenuToken = asCxTokenSpec<BurgerMenuComponents>();
+export const asBurgerMenuToken = asVitalTokenSpec<BurgerMenuComponents>();
 
 export default BurgerMenuClean;

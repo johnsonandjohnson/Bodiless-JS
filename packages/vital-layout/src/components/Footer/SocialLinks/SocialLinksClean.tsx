@@ -13,7 +13,7 @@
  */
 
 import React, { FC } from 'react';
-import { asCxTokenSpec } from '@bodiless/vital-elements';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { designable, Div } from '@bodiless/fclasses';
 import { FacebookIcon } from './assets/FacebookIcon';
 import { InstagramIcon } from './assets/InstagramIcon';
@@ -41,7 +41,7 @@ const SocialLinksCleanBase: FC<SocialLinksProps> = ({ components: C, ...rest }) 
 
 const SocialLinksClean = designable(socialLinksComponents, 'SocialLinks')(SocialLinksCleanBase);
 
-const asSocialLinksToken = asCxTokenSpec<SocialLinksComponents>();
+const asSocialLinksToken = asVitalTokenSpec<SocialLinksComponents>();
 
 export {
   SocialLinksClean,

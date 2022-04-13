@@ -53,7 +53,7 @@ const CustomAllowedTypesLink = flow(
         'application/pdf',
         // doc
         'application/msword',
-        // docx
+        // dovital
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         // xls
         'application/vnd.ms-excel',
@@ -65,7 +65,7 @@ const CustomAllowedTypesLink = flow(
   asLink,
 )(A);
 
-const CUSTOM_FILE_REJECTED_MESSAGE = 'File type is not accepted, the acceptable file types are Word (doc/docx) and PDFs';
+const CUSTOM_FILE_REJECTED_MESSAGE = 'File type is not accepted, the acceptable file types are Word (doc/dovital) and PDFs';
 const UPLOAD_STATUS_MAX_FILENAME_LENGTH = 30;
 
 const CustomUploadStatus = ({ status, selectedFile }: UploadStatusProps) => {
@@ -126,7 +126,7 @@ export default (props: any) => (
       <Section>
         <Paragraph>
           Below is an example in which allowed file types are customized.
-          Allowed file types are `pdf, doc, docx, xls, xlsx`.
+          Allowed file types are `pdf, doc, dovital, xls, xlsx`.
         </Paragraph>
         <CustomAllowedTypesLink>Custom allowed file types link</CustomAllowedTypesLink>
       </Section>
