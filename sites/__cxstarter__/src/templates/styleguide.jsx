@@ -15,7 +15,7 @@
 import { graphql } from 'gatsby';
 import { StyleGuideTemplateClean } from '@bodiless/cx-templates';
 import { as } from '@bodiless/fclasses';
-import { __cxstarter__StyleGuidePage } from '@bodiless/__cxstarter__';
+import { __cxstarter__StyleGuidePage } from '--vital--';
 
 const StyleGuidePage = as(__cxstarter__StyleGuidePage.Default)(StyleGuideTemplateClean);
 

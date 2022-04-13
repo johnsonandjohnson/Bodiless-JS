@@ -84,7 +84,7 @@ const plugins = [
   //   ...getSiteDefaultContentConfig(),
   // ),
   {
-    resolve: '@bodiless/__cxstarter__',
+    resolve: '--vital--',
   }
 ];
 

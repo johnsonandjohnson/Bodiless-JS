@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@babel/core": "^7.9.0",
-    "@bodiless/__cxstarter__": "^1.0.0-beta.4",
+    "--vital--": "^1.0.0-beta.4",
     "@bodiless/backend": "^1.0.0-beta.4",
     "@bodiless/cli": "^1.0.0-beta.4",
     "@bodiless/components": "^1.0.0-beta.4",

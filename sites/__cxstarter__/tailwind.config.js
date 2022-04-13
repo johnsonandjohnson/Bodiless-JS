@@ -29,5 +29,5 @@ const { buildTailwindConfig } = requireEsm(
 
 module.exports = buildTailwindConfig({
   resolver: pkg => requireEsm.resolve(pkg),
-  prefer: ['@bodiless/__cxstarter__'],
+  prefer: ['--vital--'],
 });

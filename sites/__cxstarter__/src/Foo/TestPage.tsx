@@ -13,8 +13,8 @@
  */
 
 import { Fragment } from 'react';
+import { __cxstarter__StyleGuidePage } from '--vital--';
 import { as } from '@bodiless/fclasses';
-import { __cxstarter__StyleGuidePage } from '@bodiless/__cxstarter__';
 
 const StyleGuidePage = as(__cxstarter__StyleGuidePage.Default)(Fragment);
 
