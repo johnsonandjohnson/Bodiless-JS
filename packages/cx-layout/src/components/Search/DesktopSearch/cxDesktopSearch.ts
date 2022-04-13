@@ -23,7 +23,7 @@ const Base = asDesktopSearchToken({
     Wrapper: 'flex items-center',
   },
   Spacing: {
-    Wrapper: 'px-4',
+    Wrapper: 'px-4 lg:pl-0 lg:pr-5',
     Icon: 'm-3'
   },
   Content: {

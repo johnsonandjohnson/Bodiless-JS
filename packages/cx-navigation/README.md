@@ -1,3 +1,3 @@
-# CX Layout Components
+# `@bodiless/cx-navigation`
 
-The CX Navigation (`@bodiless/cx-navigation`) package is composed of the following components:
+See [CX Navigation Docs](./doc/CX_Navigation.md).

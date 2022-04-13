@@ -12,6 +12,14 @@
  * limitations under the License.
  */
 
-export * from './MenuTogglerClean';
-export * from './cxMenuToggler';
-export * from './types';
+import type { ListComponents } from '@bodiless/components';
+import { ComponentOrTag } from '@bodiless/fclasses';
+
+export type SubMenuComponents = {
+  OuterWrapper: ComponentOrTag<any>,
+  SubmenuIndicator: ComponentOrTag<any>,
+} & ListComponents;
+
+export type SubMenuWrapperComponents = {
+  SubmenuWrapper: ComponentOrTag<any>,
+};

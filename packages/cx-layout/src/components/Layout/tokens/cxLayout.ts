@@ -12,33 +12,51 @@
  * limitations under the License.
  */
 
+import { useIsBurgerMenuHidden, withBurgerMenuProvider } from '@bodiless/cx-navigation';
 import {
   addProps,
   as,
+  flowIf,
+  not,
 } from '@bodiless/fclasses';
 import { asLayoutToken } from '../LayoutClean';
 import { cxFooter } from '../../Footer';
 import { cxHeader } from '../../Header';
 import { cxHelmet } from '../../Helmet';
-import { MAIN_CONTENT_ID } from './constants';
+import { LayoutIds } from './constants';
 import { StyleGuide } from './StyleGuide';
 
 /**
   * Token that defines a basic layout.
   */
 const Base = asLayoutToken({
+  Core: {
+    _: withBurgerMenuProvider,
+  },
   Components: {
     Helmet: cxHelmet.Default,
   },
   Behavior: {
-    Container: addProps({ id: MAIN_CONTENT_ID }),
+    Container: addProps({ id: LayoutIds.Content }),
     SkipToMainContent: as(
       addProps({
-        href: `#${MAIN_CONTENT_ID}`,
+        href: `#${LayoutIds.Content}`,
         children: 'Skip To Main Content',
       }),
       'sr-only focus:not-sr-only',
     ),
+  },
+  Layout: {
+    Helmet: flowIf(
+      not(useIsBurgerMenuHidden),
+    )(as(cxHelmet.WithFixedBody, cxHelmet.WithDesktopStatickBody)),
+  },
+  Theme: {
+    OuterContainer: 'flex flex-col h-screen',
+    ContainerWrapper: 'flex-grow',
+  },
+  Content: {
+    Header: addProps({ id: LayoutIds.HeaderContent }),
   },
 });
 

@@ -14,50 +14,77 @@
 
 import React, { FC } from 'react';
 import {
+  A,
   Div,
   Fragment,
+  Header,
   designable,
-  Header
 } from '@bodiless/fclasses';
 import { withoutHydration } from '@bodiless/hydration';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
+import { LinkClean } from '@bodiless/cx-link';
+import {
+  BurgerMenuClean,
+  MenuClean,
+} from '@bodiless/cx-navigation';
 import { LogoClean } from '../Logo';
-import { MenuTogglerClean } from '../MenuToggler';
 import { SearchTogglerClean, DesktopSearchClean } from '../Search';
-import { HeaderComponents, HeaderProps } from './types';
+import type { HeaderComponents, HeaderProps } from './types';
 
 const headerComponents: HeaderComponents = {
   Wrapper: Header,
   Container: Div,
   MenuContainer: Div,
-  MenuToggler: MenuTogglerClean,
-  Menu: Fragment,
+  MenuTogglerWrapper: Div,
+  MenuToggler: A,
+  MenuWrapper: Fragment,
+  Menu: MenuClean,
+  BurgerMenuWrapper: Fragment,
+  BurgerMenu: BurgerMenuClean,
   Logo: LogoClean,
   ActionMenuContainer: Div,
-  UtilityMenu: Fragment,
+  UtilityMenuWrapper: Fragment,
+  UtilityMenu: MenuClean,
   DesktopSearch: DesktopSearchClean,
   SearchToggler: SearchTogglerClean,
   LanguageButton: Fragment,
+  WhereToBuyWrapper: Fragment,
+  WhereToBuy: LinkClean,
 };
 
-const HeaderCleanBase: FC<HeaderProps> = ({ components: C }) => (
-  <C.Wrapper>
+const HeaderCleanBase: FC<HeaderProps> = ({ components: C, ...rest }) => (
+  <C.Wrapper {...rest}>
     <C.Container>
-      <C.MenuToggler />
+      <C.MenuTogglerWrapper>
+        <C.MenuToggler />
+      </C.MenuTogglerWrapper>
       <C.Logo />
       <C.SearchToggler />
       <C.MenuContainer>
-        <C.Menu />
+        <C.MenuWrapper>
+          <C.Menu />
+        </C.MenuWrapper>
         <C.ActionMenuContainer>
           <C.DesktopSearch />
-          <C.UtilityMenu />
+          <C.UtilityMenuWrapper>
+            <C.UtilityMenu />
+          </C.UtilityMenuWrapper>
           <C.LanguageButton />
+          <C.WhereToBuyWrapper>
+            <C.WhereToBuy />
+          </C.WhereToBuyWrapper>
         </C.ActionMenuContainer>
       </C.MenuContainer>
+      <C.BurgerMenuWrapper>
+        <C.BurgerMenu />
+      </C.BurgerMenuWrapper>
     </C.Container>
   </C.Wrapper>
 );
 
+/**
+ * A clean header to be used in pages layouts.
+ */
 const HeaderClean = designable(headerComponents, 'Header')(HeaderCleanBase);
 const HeaderStatic = withoutHydration()(HeaderClean);
 
