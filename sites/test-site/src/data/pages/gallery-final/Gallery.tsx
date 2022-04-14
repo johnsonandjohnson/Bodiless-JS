@@ -31,7 +31,7 @@ import CaptionedImage from './CaptionedImage';
 const asGalleryTile = addClasses('mx-2 border-8');
 
 const withBlueBorder = addClasses('border-blue-400');
-const withGreenBorder = addClasses('border-green-400');
+const withGreenBorder = addClasses('border-emerald-400');
 const withRedBorder = addClasses('border-red-400');
 
 const galleryDesign = varyDesign(

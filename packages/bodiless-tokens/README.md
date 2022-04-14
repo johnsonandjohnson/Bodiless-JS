@@ -133,7 +133,7 @@ const asTextRed = flowHoc(
 // asTextRed.meta = { categories: { TextColor: ['Red'] } };
 
 const asBgYellow = flowHoc(
-  addClasses('bg-yellow-500'),
+  addClasses('bg-amber-500'),
   { categories: { BgColor: ['Yellow'] } },
 )
 
@@ -151,7 +151,7 @@ Then
 
 ```js
 
-<Header1 /> === <h1 className="text-blue bg-yellow-500 font-bold" />
+<Header1 /> === <h1 className="text-blue bg-amber-500 font-bold" />
 
 // The component itself includes aggregated metadata from all composed tokens...
 Header1.categories === {
@@ -187,7 +187,7 @@ const RedHeader1 = asRedHeader1(H1);
 then
 
 ```jsx
-<RedHeader1 /> === <h1 className="font-bold text-red-500 bg-yellow-500" />
+<RedHeader1 /> === <h1 className="font-bold text-red-500 bg-amber-500" />
 
 // Our new token has the metadata of `asHeader1` only because we propagated it explicitly.
 asRedHeader1.meta === {
@@ -580,7 +580,7 @@ const Button = props => {
 };
 
 const StyledButton = flow(
-  addClassesIf(isToggled)('bg-green-200'),
+  addClassesIf(isToggled)('bg-emerald-200'),
 )(Button);
 
 ```

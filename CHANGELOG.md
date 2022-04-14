@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.5...v1.0.0-beta.7) (2022-04-13)
+
+
+### Bug Fixes
+
+* **--vital--:** Correct shadowed package paths. ([222e6b4](https://github.com/johnsonandjohnson/bodiless-js/commit/222e6b4ca160532b258aa1d3ba7e4911fc91738c))
+* **gatsby-theme-bodiless:** Revert crypto-js ([4cb1c8a](https://github.com/johnsonandjohnson/bodiless-js/commit/4cb1c8ab61186e138bed7d3ce47436d4530f90a2))
+* **vital-flowcontainer:** update publishConfig ([cdf2407](https://github.com/johnsonandjohnson/bodiless-js/commit/cdf2407177e2fc26ccfaee44f30bd73aff0556e7))
+
+
+
+
+
 # [1.0.0-beta.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2022-04-13)
 
 

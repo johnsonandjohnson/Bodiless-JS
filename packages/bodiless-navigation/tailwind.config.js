@@ -14,10 +14,15 @@
  */
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
+/**
+ * contains package level tailwind configuration
+ * the package does not perform tailwind compilation
+ * site is responsible for merging these settings into site level settings
+ */
 const resolver = (pkgName) => require.resolve(pkgName);
 
 const twConfig = {
-  purge: [
+  content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {
@@ -41,13 +46,6 @@ const twConfig = {
         'slide-in': 'slide-in .5s forwards',
         'slide-out': 'slide-out .5s forwards',
       },
-    },
-  },
-  variants: {
-    extend: {
-      overflow: ['responsive', 'hover', 'focus', 'group-hover'],
-      position: ['responsive', 'hover', 'focus', 'group-hover'],
-      display: ['responsive', 'hover', 'focus', 'group-hover'],
     },
   },
 };

@@ -16,11 +16,11 @@ import { mergeConfigs } from '../src/tailwindcss';
 
 describe('tailwindcss', () => {
   describe('mergeConfigs', () => {
-    it('merges purge settings', () => {
+    it('merges content settings', () => {
       const packageA = {
         root: '',
         tailwindConfig: {
-          purge: [
+          content: [
             'packageA',
           ],
         },
@@ -28,14 +28,19 @@ describe('tailwindcss', () => {
       const packageB = {
         root: '',
         tailwindConfig: {
-          purge: [
+          content: [
             'packageB1',
             'packageB2',
           ],
         },
       };
+      const site = {
+        content: [
+          'site',
+        ],
+      };
       const expected = {
-        purge: [
+        content: [
           './src/**/!(*.d).{ts,js,jsx,tsx}',
           'packageA',
           'packageB1',

@@ -53,7 +53,7 @@ const Button: FC = props => {
 };
 
 const StyledButton = flowHoc(
-  addClassesIf(isToggled)('bg-green-200'),
+  addClassesIf(isToggled)('bg-emerald-200'),
   addClasses('border p-2 my-2'),
 )(Button);
 

@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/components",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.7",
   "description": "Reusable compoments",
   "author": "Heidi Vanyo <hvanyo@its.jnj.com>",
   "license": "Apache-2.0",
@@ -32,11 +32,11 @@
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.5",
-    "@bodiless/core": "^1.0.0-beta.5",
-    "@bodiless/fclasses": "^1.0.0-beta.5",
-    "@bodiless/layouts": "^1.0.0-beta.5",
-    "@bodiless/ui": "^1.0.0-beta.5",
+    "@bodiless/cli": "^1.0.0-beta.7",
+    "@bodiless/core": "^1.0.0-beta.7",
+    "@bodiless/fclasses": "^1.0.0-beta.7",
+    "@bodiless/layouts": "^1.0.0-beta.7",
+    "@bodiless/ui": "^1.0.0-beta.7",
     "axios": "^0.21.0",
     "common-tags": "^1.8.0",
     "copyfiles": "^2.1.1",

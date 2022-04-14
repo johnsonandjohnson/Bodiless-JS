@@ -28,6 +28,7 @@ hooks:
     # Build hooks can modify the application files on disk but not access any services like databases.
     build: |
         set -e
+        export NODE_OPTIONS="--max-old-space-size=2048"
         npm run bootstrap
         npm run build:packages
         npm run build -- --scope @sites/test-site
@@ -70,7 +71,7 @@ hooks:
         node $PLATFORM_APP_DIR/packages/bodiless-psh/lib/generate-ssi-files.js deploy       
 
 # The size of the persistent disk of the application (in MB).
-disk: 320
+disk: 1024
 
 mounts:
     'volume':

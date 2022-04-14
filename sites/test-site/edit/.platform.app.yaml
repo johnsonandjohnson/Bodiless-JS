@@ -21,7 +21,7 @@ name: 'edit'
 type: 'nodejs:16'
 
 # The size of the persistent disk of the application (in MB).
-disk: 8192
+disk: 12288
 
 resources:
   base_memory: 1024

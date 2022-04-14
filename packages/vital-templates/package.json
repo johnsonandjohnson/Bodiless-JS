@@ -1,0 +1,49 @@
+{
+  "name": "@bodiless/vital-templates",
+  "sideEffects": false,
+  "version": "1.0.0-beta.7",
+  "description": "Provides designable templates for the VitalDS Design System",
+  "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "/lib",
+    "/bodiless.docs.json",
+    "/getDocs.js",
+    "/tailwind.config.js",
+    "/doc"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "npm run build:lib && npm run build:api-doc",
+    "build:api-doc": "typedoc --out doc/api ./src",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
+  },
+  "peerDependencies": {
+    "@types/react-helmet": "^6.1.0",
+    "react": "^17.0.2",
+    "react-helmet": "^6.1.0"
+  },
+  "dependencies": {
+    "@bodiless/cli": "^1.0.0-beta.7",
+    "@bodiless/components": "^1.0.0-beta.7",
+    "@bodiless/core": "^1.0.0-beta.7",
+    "@bodiless/fclasses": "^1.0.0-beta.7",
+    "@bodiless/gatsby-theme-bodiless": "^1.0.0-beta.7",
+    "@bodiless/vital-editors": "^1.0.0-beta.7",
+    "@bodiless/vital-elements": "^1.0.0-beta.7",
+    "@bodiless/vital-flowcontainer": "^1.0.0-beta.7",
+    "@bodiless/vital-image": "^1.0.0-beta.7",
+    "@bodiless/vital-layout": "^1.0.0-beta.7",
+    "lodash": "^4.17.19"
+  }
+}

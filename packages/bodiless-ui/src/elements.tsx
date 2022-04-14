@@ -191,7 +191,7 @@ export const ContextSubMenu = flow(
 )(Div);
 
 export const Warning = flow(
-  addClasses('bl-w-grid-7 bl-text-yellow-500'),
+  addClasses('bl-w-grid-7 bl-text-amber-500'),
 )((props: JSX.IntrinsicAttributes) => (
   <Icon {...props}>report_problem_outlined</Icon>
 ));

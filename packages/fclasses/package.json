@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/fclasses",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.7",
   "description": "Allows for the injection of functional class into components.",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
@@ -33,7 +33,7 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.5",
+    "@bodiless/cli": "^1.0.0-beta.7",
     "babel-plugin-preval": "5.0.0",
     "lodash": "^4.17.19",
     "uuid": "^3.3.2"

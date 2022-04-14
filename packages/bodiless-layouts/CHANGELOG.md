@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.5...v1.0.0-beta.7) (2022-04-13)
+
+
+### Bug Fixes
+
+* **gatsby-theme-bodiless:** Revert crypto-js ([4cb1c8a](https://github.com/johnsonandjohnson/bodiless-js/commit/4cb1c8ab61186e138bed7d3ce47436d4530f90a2))
+
+
+
+
+
 # [1.0.0-beta.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2022-04-13)
 
 **Note:** Version bump only for package @bodiless/layouts
