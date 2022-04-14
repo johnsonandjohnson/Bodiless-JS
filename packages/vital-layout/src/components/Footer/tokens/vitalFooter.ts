@@ -36,7 +36,7 @@ const Base = asFooterToken({
       // because we have to flow specific white background inside a container
       // with margin.
       'max-w-screen w-screen relative inset-x-1/2 mx-negative-half-screen px-site-percent py-9',
-      // Reset RewardsWrapper to follow container from xl device and on.
+      // Reset RewardsWrapper to follow container from 2xl device and on.
       '2xl:w-full 2xl:static 2xl:inset-x-0 2xl:mx-0 2xl:p-0',
     ),
     Row: 'w-full xl:flex xl:space-between',

@@ -20,7 +20,14 @@ import {
 } from '@bodiless/fclasses';
 import { asRewardsToken } from '../RewardsClean';
 
-const FormElement = as(
+/*
+ * @TODO
+ * all the styling/tokens for vitalRewards is a placeholder for looks only
+ * and could be cleaned up and follow correct patterns when this component
+ * is actually built.
+ */
+
+const RewardsFormElement = as(
   'bg-vital-primary-page-bg text-vital-primary-header-copy',
   '2xl:border 2xl:border-vital-secondary-footer-text 2xl:bg-vital-secondary-footer-bg 2xl:text-vital-primary-footer-copy',
 );
@@ -59,8 +66,8 @@ const Base = asRewardsToken({
       'text-sm md:text-base lg:text-xs',
       RewardColorCopy,
     ),
-    FormTextFirstName: FormElement,
-    FormTextEmail: FormElement,
+    FormTextFirstName: RewardsFormElement,
+    FormTextEmail: RewardsFormElement,
     FormButton: as(
       'bg-vital-primary-header-copy 2xl:bg-vital-primary-card-bg ',
       'text-vital-primary-footer-copy 2xl:text-vital-secondary-footer-bg',
