@@ -47,7 +47,7 @@ Gatsby-theme-bodiless
 * Color palette changes -- 
 ** replaced -green- with -emerald-
 ** replaced -yellow- with -amber-
-** repleaced -violet- with -violet-
+** repleaced -purple- with -violet-
 ** left -gray- as -gray....
 * Class name changes -- 
 ** overflow-clip with text-clip
