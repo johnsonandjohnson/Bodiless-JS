@@ -21,10 +21,10 @@ import {
 import { asRewardsToken } from '../RewardsClean';
 
 const FormElement = as(
-  'bg-cx-primary-page-bg text-cx-primary-header-copy',
-  '2xl:border 2xl:border-cx-secondary-footer-text 2xl:bg-cx-secondary-footer-bg 2xl:text-cx-primary-footer-copy',
+  'bg-vital-primary-page-bg text-vital-primary-header-copy',
+  '2xl:border 2xl:border-vital-secondary-footer-text 2xl:bg-vital-secondary-footer-bg 2xl:text-vital-primary-footer-copy',
 );
-const RewardColorCopy = 'text-cx-primary-header-copy 2xl:text-cx-primary-footer-copy';
+const RewardColorCopy = 'text-vital-primary-header-copy 2xl:text-vital-primary-footer-copy';
 
 const Base = asRewardsToken({
   Components: {
@@ -62,11 +62,11 @@ const Base = asRewardsToken({
     FormTextFirstName: FormElement,
     FormTextEmail: FormElement,
     FormButton: as(
-      'bg-cx-primary-header-copy 2xl:bg-cx-primary-card-bg ',
-      'text-cx-primary-footer-copy 2xl:text-cx-secondary-footer-bg',
+      'bg-vital-primary-header-copy 2xl:bg-vital-primary-card-bg ',
+      'text-vital-primary-footer-copy 2xl:text-vital-secondary-footer-bg',
       'text-sm font-bold rounded lg:rounded-none',
     ),
-    Footnote: 'text-xs 2xl:text-cx-primary-footer-copy',
+    Footnote: 'text-xs 2xl:text-vital-primary-footer-copy',
   },
   // @TODO: Placeholders must be replaced with editable fields.
   Content: {

@@ -63,7 +63,7 @@ const Base = asFooterToken({
     SocialLinksWrapper: 'py-5 md:p-0',
   },
   Theme: {
-    RewardsWrapper: 'bg-cx-primary-card-bg 2xl:bg-cx-secondary-footer-bg',
+    RewardsWrapper: 'bg-vital-primary-card-bg 2xl:bg-vital-secondary-footer-bg',
     Copyright: 'border-white-400 border-t border-b md:border-0',
     Wrapper: vitalColor.BgSecondaryFooter,
   },
