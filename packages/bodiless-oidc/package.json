@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/oidc",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.5",
   "description": "Library to provide OpenID Connect (OIDC) and OAuth2 protocol support for client-side",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
@@ -8,7 +8,8 @@
   "typings": "lib/index.d.ts",
   "files": [
     "/lib",
-    "/bodiless.docs.json"
+    "/bodiless.docs.json",
+    "/getDocs.js"
   ],
   "repository": {
     "type": "git",
@@ -25,7 +26,7 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.3",
+    "@bodiless/cli": "^1.0.0-beta.5",
     "axios": "^0.21.0",
     "enzyme": "^3.9.0",
     "oidc-client-ts": "2.0.0-rc.2"

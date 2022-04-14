@@ -34,9 +34,13 @@ const twConfig = {
       orange: '#FFA500',
     },
     maxWidth: {
-      48: '12rem',
-      56: '14rem',
+      20: '5rem',
+      28: '7rem',
+      64: '16rem',
       screen: '100vw',
+    },
+    minWidth: {
+      28: '7rem',
     },
     extend: {
       margin: {

@@ -1,8 +1,35 @@
-import { addProps, as, on } from '@bodiless/fclasses';
-import { cxColor, cxFontSize, cxTextDecoration } from '@bodiless/cx-elements';
-import { asSubMenuToken } from '../SubMenuClean';
-import { cxMenuTitle, MenuTitleClean } from '../../MenuTitle';
+/**
+ * Copyright © 2022 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import {
+  cxColor,
+  cxFontSize,
+  cxTextDecoration,
+} from '@bodiless/cx-elements';
+import {
+  addProps,
+  as,
+  on,
+  removeClasses,
+  removeClassesIf,
+  replaceWith,
+  withDesign,
+} from '@bodiless/fclasses';
+import { useIsSubmenuExpanded } from '@bodiless/navigation';
 import { withAnalyticsAttr } from '../../../util';
+import { cxMenuTitle, MenuTitleClean } from '../../MenuTitle';
+import { asSubMenuToken } from '../SubMenuClean';
 
 const Base = asSubMenuToken({
   A11y: {
@@ -33,7 +60,67 @@ const Footer = asSubMenuToken(Base, {
   },
 });
 
+const TopNav = asSubMenuToken({
+  ...Base,
+  Components: {
+    ...Base.Components,
+    // Disables indicator icon per requirements.
+    // @TODO: This can be removed to improve accessibility.
+    SubmenuIndicator: replaceWith(() => null),
+  },
+  Layout: {
+    Wrapper: as(
+      'absolute w-auto min-w-max -left-10 -right-16 top-full hidden group-hover:flex flex-col',
+      removeClasses('min-w-full'),
+      removeClassesIf(useIsSubmenuExpanded)('hidden'),
+    ),
+    Title: 'flex',
+  },
+  Spacing: {
+    Wrapper: 'py-3',
+    Title: 'px-10 py-3',
+  },
+  Theme: {
+    Wrapper: as(
+      cxColor.BgPrimaryCard,
+      'z-20',
+    ),
+    Title: as(
+      cxColor.TextPrimaryHeaderCopy,
+      cxTextDecoration.Normal,
+      cxTextDecoration.Uppercase,
+      // @TODO: Add to tokens?
+      'text-m-base',
+    ),
+  },
+});
+
+const Burger = asSubMenuToken({
+  ...Base,
+  Components: {
+    ...Base.Components,
+    // Removes accordions icons.
+    OuterWrapper: withDesign({
+      Title: withDesign({
+        Icon: replaceWith(() => null),
+      }),
+    }),
+  },
+  Spacing: {
+    Item: 'mt-10',
+  },
+  Theme: {
+    Title: as(
+      cxColor.TextPrimaryHeaderCopy,
+      cxFontSize.Base,
+      cxTextDecoration.Uppercase,
+    ),
+  },
+});
+
 export default {
   Base,
+  Burger,
   Footer,
+  TopNav,
 };

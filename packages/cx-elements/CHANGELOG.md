@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2022-04-13)
+
+**Note:** Version bump only for package @bodiless/cx-elements
+
+
+
+
+
+# [1.0.0-beta.4](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2022-04-12)
+
+
+### Features
+
+* **cx-navigation:** Add Cx Navigation [#12](https://github.com/johnsonandjohnson/bodiless-js/issues/12) ([#1495](https://github.com/johnsonandjohnson/bodiless-js/issues/1495)) ([c191dac](https://github.com/johnsonandjohnson/bodiless-js/commit/c191dacfcd161d188dac65db7e18a753b9de24b5)), closes [#7](https://github.com/johnsonandjohnson/bodiless-js/issues/7) [#8](https://github.com/johnsonandjohnson/bodiless-js/issues/8) [#10](https://github.com/johnsonandjohnson/bodiless-js/issues/10) [#13](https://github.com/johnsonandjohnson/bodiless-js/issues/13) [#16](https://github.com/johnsonandjohnson/bodiless-js/issues/16) [#19](https://github.com/johnsonandjohnson/bodiless-js/issues/19) [#20](https://github.com/johnsonandjohnson/bodiless-js/issues/20) [#21](https://github.com/johnsonandjohnson/bodiless-js/issues/21) [#22](https://github.com/johnsonandjohnson/bodiless-js/issues/22) [#24](https://github.com/johnsonandjohnson/bodiless-js/issues/24)
+
+
+
+
+
 # [1.0.0-beta.3](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2022-04-11)
 
 

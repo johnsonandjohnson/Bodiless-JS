@@ -12,13 +12,18 @@
  * limitations under the License.
  */
 
-import { HTMLProps } from 'react';
-import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
+import useHasSubMenu from './useHasSubMenu';
+import useIsFirstMenuItem from './useIsFirstMenuItem';
+import withMenuTitleAnalytics, { withAnalyticsAttr } from './withMenuAnalytics';
+import withMenuItemExpanded, { withExpandedAttr } from './withMenuExpanded';
+import withMenuTitleNoLink from './withMenuTitleNoLink';
 
-export type MenuTogglerComponents = {
-  Wrapper: ComponentOrTag<any>,
-  Icon: ComponentOrTag<any>,
+export {
+  useHasSubMenu,
+  useIsFirstMenuItem,
+  withMenuTitleAnalytics,
+  withAnalyticsAttr,
+  withMenuItemExpanded,
+  withExpandedAttr,
+  withMenuTitleNoLink,
 };
-
-export type MenuTogglerProps =
-  DesignableComponentsProps<MenuTogglerComponents> & HTMLProps<HTMLElement>;
