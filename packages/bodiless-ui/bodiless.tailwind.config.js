@@ -169,12 +169,23 @@ module.exports = {
 
       const components = {
         '.material-icons': {
+          'font-family': 'Material Icons',
+          'font-weight': 'normal',
+          'font-style': 'normal',
           color: '#ddd',
           padding: '2px',
           'font-size': '30px',
           'vertical-align': 'text-bottom',
           'border-radius': '5px',
-
+          'line-height': 1,
+          'letter-spacing': 'normal',
+          'text-transform': 'none',
+          'display': 'inline-block',
+          'white-space': 'nowrap',
+          'word-wrap': 'normal',
+          direction: 'ltr',
+          '-webkit-font-feature-settings': 'liga',
+          '-webkit-font-smoothing': 'antialiased',
           '.active &': {
             color: '#fff',
             'background-color': '#0070c8',

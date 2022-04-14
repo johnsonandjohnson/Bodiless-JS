@@ -52,7 +52,7 @@ const responsiveSearchComponents: ResponsiveSearchComponents = {
   ...searchComponents,
   Wrapper: Div,
   ToggleButton: Button,
-  ToggleIcon: addClasses('material-icons cursor-pointer align-middle')(I),
+  ToggleIcon: addClasses('bl-material-icons cursor-pointer align-middle')(I),
 };
 
 type ToggleButtonContext = {

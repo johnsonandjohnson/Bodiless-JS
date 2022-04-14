@@ -64,7 +64,7 @@ const Span = stylable<HTMLProps<HTMLSpanElement>>('span');
 
 const ui: UI = {
   Wrapper: addClasses('bg-black text-white')(Div);
-  Icon: addClasses('block material-icon text-xl')(Span);
+  Icon: addClasses('block bl-material-icon text-xl')(Span);
 };
 
 export const MessageBox: FC<Props> = props = <CleanMessageBox {...props} ui={ui} />;

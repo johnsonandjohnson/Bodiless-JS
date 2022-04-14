@@ -29,7 +29,7 @@ const NodeSelectorButton$ = (props: ButtonProps) => {
   const { Button } = getUI(useUI());
   return (
     <Button {...props}>
-      <i className="material-icons bl-material-icons">more_horiz</i>
+      <i className="bl-material-icons">more_horiz</i>
     </Button>
   );
 };

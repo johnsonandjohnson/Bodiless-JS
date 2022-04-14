@@ -52,7 +52,7 @@ const withDefaultBackground = withDesign({
 
 /**
  * A HOC that adds styles to the Button component of Burger Menu Toggler.
- * Adds a material-icon class and pointer styles.
+ * Adds a bl-material-icon class and pointer styles.
  *
  * @return HOC that adds styles to the Button component.
  */
