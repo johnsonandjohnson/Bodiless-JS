@@ -231,14 +231,14 @@ default_deploy () {
 # Default implementation of finalize psh deploy hook.
 default_finalize_deploy () {
   echo 'bodiless-psh default_finalize_deploy()'
-  # npm ci
-  # npm run prestart
+  npm ci
+  npm run prestart
 }
 
 # Final step after p.sh deploy hook.
 _teardown_deploy () {
   echo 'bodiless-psh _teardown_deploy()'
-  # pm2 restart backend && pm2 restart frontend || pm2 start ${PLATFORM_APP_DIR}/ecosystem.config.js
+  pm2 restart backend && pm2 restart frontend || pm2 start ${PLATFORM_APP_DIR}/ecosystem.config.js
 }
 
 # _setup/_teardown are not hooks; they implement internal logic we never want overridden.

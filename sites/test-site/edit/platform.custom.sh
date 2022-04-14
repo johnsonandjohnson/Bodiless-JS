@@ -14,7 +14,7 @@
  ##
 finalize_deploy () {
   echo 'test-site finalize_deploy()'
-  # npm run bootstrap -- --ci
-  # npm run build:packages -- --concurrency 1
-  # npm run build:env-vars
+  npm run bootstrap -- --ci
+  npm run build:packages -- --concurrency 1
+  npm run build:env-vars
 }
