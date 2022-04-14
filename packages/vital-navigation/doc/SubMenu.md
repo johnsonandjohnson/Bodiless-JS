@@ -134,10 +134,11 @@ the Sub-Menu Items.
 To change this behavior, and permit Content Editors to add Menu Links to Menu Items with Sub-Menus,
 open
 [`vital-navigation/src/components/Menu/tokens/vitalMenu.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-navigation/src/components/Menu/tokens/vitalMenu.ts
-':target=blank'), and comment out (or remove) the following line:
+':target=blank'), and find the following line:
 
 ```ts
 Title: flowIf(useHasSubMenu)(as(cxMenuTitle.WithLinkDisabled)),
 ```
 
-You should find this line in the `Burger` token, under its `Behavior` property.
+You should find this line in the `TopNav` and `Burger` tokens, under their `Behavior` property —
+comment out (or remove) the line from both tokens.
