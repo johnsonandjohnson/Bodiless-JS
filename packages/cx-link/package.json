@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/cx-link",
   "sideEffects": false,
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0-beta.5",
   "description": "",
   "author": "Konstantin Mishur <kmishur@its.jnj.com>",
   "license": "Apache-2.0",
@@ -33,15 +33,15 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.4",
-    "@bodiless/components": "^1.0.0-beta.4",
-    "@bodiless/components-ui": "^1.0.0-beta.4",
-    "@bodiless/core": "^1.0.0-beta.4",
-    "@bodiless/cx-elements": "^1.0.0-beta.4",
-    "@bodiless/fclasses": "^1.0.0-beta.4",
-    "@bodiless/hydration": "^1.0.0-beta.4",
-    "@bodiless/richtext": "^1.0.0-beta.4",
-    "@bodiless/richtext-ui": "^1.0.0-beta.4",
+    "@bodiless/cli": "^1.0.0-beta.5",
+    "@bodiless/components": "^1.0.0-beta.5",
+    "@bodiless/components-ui": "^1.0.0-beta.5",
+    "@bodiless/core": "^1.0.0-beta.5",
+    "@bodiless/cx-elements": "^1.0.0-beta.5",
+    "@bodiless/fclasses": "^1.0.0-beta.5",
+    "@bodiless/hydration": "^1.0.0-beta.5",
+    "@bodiless/richtext": "^1.0.0-beta.5",
+    "@bodiless/richtext-ui": "^1.0.0-beta.5",
     "lodash": "^4.17.19",
     "tailwindcss": "^2.0.2"
   }
