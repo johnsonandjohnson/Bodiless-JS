@@ -16,7 +16,7 @@
 import React, { ComponentType, FC } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount, shallow } from 'enzyme';
-import { identity, flow } from 'lodash';
+import { identity, flow, omit } from 'lodash';
 import {
   DesignableComponentsProps, Span, designable, Div, addClasses, removeClasses,
   withDesign, HOC, flowHoc, flowIf, withoutProps,
@@ -87,6 +87,55 @@ describe('extendMeta', () => {
 });
 
 describe('asTokenSpec', () => {
+  it('Does not alter tokens when extending them', () => {
+    const Inner1 = asTestTokenSpec({
+      Core: {
+        _: 'foo'
+      },
+    });
+    const Inner1Snap = JSON.stringify(Inner1);
+    const Inner2 = asTestTokenSpec({
+      Core: {
+        _: 'foo'
+      },
+    });
+    const Inner2Snap = JSON.stringify(Inner2);
+    const Outer1 = asTestTokenSpec({
+      Core: {
+        _: Inner1,
+      }
+    });
+    const Outer1Snap = JSON.stringify(Outer1);
+    const Outer2 = asTestTokenSpec({
+      Core: {
+        _: Inner2,
+      }
+    });
+    const Outer2Snap = JSON.stringify(Outer2);
+    const final = asTestTokenSpec(Outer1, Outer2);
+    console.log(Outer1, Outer2, final);
+    expect(JSON.stringify(Outer1)).toEqual(Outer1Snap);
+    expect(JSON.stringify(Outer2)).toEqual(Outer2Snap);
+    expect(JSON.stringify(Inner1)).toEqual(Inner1Snap);
+    expect(JSON.stringify(Inner2)).toEqual(Inner2Snap);
+  });
+  it('Provides missing domains', () => {
+    const test = asTestTokenSpec({
+      Behavior: {
+        A: 'foo',
+      }
+    });
+    expect(Object.keys(test)).toEqual([
+      ...Object.keys(defaultDomains),
+      'Compose', 'Flow', 'Meta',
+    ]);
+    Object.keys(omit(test, 'Flow', 'Behavior')).forEach(
+      k => expect(test[k as keyof typeof test]).toEqual({})
+    );
+    expect(test.Flow).toBeUndefined();
+    expect(test.Behavior).toEqual({ A: 'foo' });
+  });
+
   it('Properly merges nested tokens', () => {
     const nested = asTestTokenSpec({
       Layout: {

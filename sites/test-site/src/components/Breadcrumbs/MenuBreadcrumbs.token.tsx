@@ -111,7 +111,7 @@ const withSlashSeparator = withDesign({
 
 const withAccessibleSeparator = withDesign({
   Separator: flowHoc(
-    addClasses('border-black border-r-2 h-4 mx-1.5 rotate-12 self-center transform'),
+    addClasses('border-black border-r-2 h-4 rotate-12 self-center transform'),
     withSeparator(''),
   ),
 });

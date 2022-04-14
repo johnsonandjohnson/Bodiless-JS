@@ -30,6 +30,7 @@ hooks:
         echo '/.platform.app.yaml build()'
         echo Site name: $APP_SITE_NAME
         set -e
+        export NODE_OPTIONS="--max-old-space-size=2048"
         npm run bootstrap
         npm run build:packages
         npm run build -- --scope @sites/$APP_SITE_NAME
@@ -74,7 +75,7 @@ hooks:
         node $PLATFORM_APP_DIR/packages/bodiless-psh/lib/generate-ssi-files.js deploy
 
 # The size of the persistent disk of the application (in MB).
-disk: 320
+disk: 1024
 
 mounts:
     'volume':

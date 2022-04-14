@@ -97,6 +97,7 @@ const EditListView = ({
 EditListView.displayName = 'EditListView';
 
 EditListView.defaultProps = {
+  // eslint-disable-next-line react/default-props-match-prop-types
   onSortEnd: () => {},
 };
 

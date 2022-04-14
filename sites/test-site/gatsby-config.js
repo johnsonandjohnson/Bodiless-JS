@@ -63,16 +63,6 @@ const plugins = [
   ),
 ];
 
-if (process.env.BODILESS_BUILD_STATS === '1') {
-  plugins.push({
-    resolve: 'gatsby-plugin-webpack-bundle-analyser-v2',
-    options: {
-      analyzerMode: 'static',
-      generateStatsFile: true,
-    }
-  });
-}
-
 const robotsTxtPolicy = [
   {
     userAgent: '*',

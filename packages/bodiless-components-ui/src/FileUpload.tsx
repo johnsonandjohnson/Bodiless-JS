@@ -108,7 +108,7 @@ const UploadStatus = ({ status, selectedFile }: UploadStatusProps) => {
       statusText = '';
   }
   return (
-    <div className="bl-overflow-clip bl-overflow-hidden">{statusText}</div>
+    <div className="bl-text-clip bl-overflow-hidden">{statusText}</div>
   );
 };
 

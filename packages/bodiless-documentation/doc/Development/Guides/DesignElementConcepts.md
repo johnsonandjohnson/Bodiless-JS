@@ -757,7 +757,7 @@ this can easily be achieved.
     });
 
     export const withGreenBorder = withGalleryDesign('Color', 'Border Color')({
-      Wrapper: addClasses('border-green-400'),
+      Wrapper: addClasses('border-emerald-400'),
     });
 
     ```

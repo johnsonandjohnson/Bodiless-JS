@@ -38,7 +38,7 @@ const withSuggestionItemStyles = withDesign({
     addClassesIf(({ position }: any) => isOdd(position))('bg-teal-200'),
   ),
 });
-const withSearchInputOutline = addClasses('outline-none focus:outline-black');
+const withSearchInputOutline = addClasses('outline-none focus:outline-black focus:outline-2 focus:outline-dotted focus:outline-offset-2');
 
 const withSuggestionsDefaultDesign = withDesign({
   Wrapper: flowHoc(
