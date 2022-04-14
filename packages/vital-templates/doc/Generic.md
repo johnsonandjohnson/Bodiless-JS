@@ -42,7 +42,7 @@ const Default = asFluidToken({
 
 #### Via Shadowing (*Preferred Method)
 
-Provide the Shadowing function as defined in [Shadow](../VitalElements/Shadow).
+Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
 
 File to shadow:
 [`vitalGenericTemplate.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-templates/src/components/GenericTemplate/tokens/vitalGenericTemplate.ts ':target=_blank')

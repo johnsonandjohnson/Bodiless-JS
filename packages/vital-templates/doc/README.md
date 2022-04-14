@@ -13,7 +13,10 @@ Using templates provides the following benefits:
 * It allows Site Builder to make future changes to all pages built off these templates, without
   editing each individual page.
 
-## Brief Overview of Templates in the Test Site
+## Brief Overview of Templates in the Vital Design System
+
+!> **IMPORTANT:** Please note that the _Product Detail Page_ and the _Product Listing Page_
+templates are not yet available for use.
 
 * [Generic Template](./Generic): A basic page with three slots for content and one for breadcrumbs.
 * [Product Detail Page](./ProductDetailPage): A page oriented to showcase a product and details
@@ -81,7 +84,10 @@ the site's Gatsby `_default` template file, and this component offers individual
 components to choose from. Each of these template/layout components is a component that renders the
 pages' contents in its specific requirements.
 
-### Configure Available Templates
+You can override templates via shadowing or extending; see below for instructions on [customizing
+templates without shadowing](#customize-without-shadowing).
+
+### Customize Without Shadowing
 
 The list of available templates in the _Choose a template for this page_ form is configurable via
 the
