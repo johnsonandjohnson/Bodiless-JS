@@ -1,4 +1,6 @@
-# `@bodiless/cx-image`
+# `@bodiless/vital-image`
 
-See [Image Docs](./doc/Image.md).
-See [Image Configuration Docs](./doc/ImageConfigurations.md).
+For documentation on the Vital Image package, please see:
+
+- [Vital Image | BodilessJS Docs](https://johnsonandjohnson.github.io/Bodiless-JS/#/VitalDesignSystem/Components/VitalImage/)
+- [`doc/` Directory](./doc)
