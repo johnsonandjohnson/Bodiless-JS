@@ -120,8 +120,3 @@ the
 
     export default DefaultPage;
     ```
-
-<!-- TODO:
-@jones -- i think there is one more step to get the choice of Templates in the Template UI list seen
-by content editor -- need to find that step. :)
--->
