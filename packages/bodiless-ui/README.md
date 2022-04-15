@@ -63,7 +63,7 @@ const Div = stylable<HTMLProps<HTMLDivElement>>('div');
 const Span = stylable<HTMLProps<HTMLSpanElement>>('span');
 
 const ui: UI = {
-  Wrapper: addClasses('bg-black text-white')(Div);
+  Wrapper: addClasses('bl-bg-black text-white')(Div);
   Icon: addClasses('block material-icon text-xl')(Span);
 };
 

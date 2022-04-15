@@ -83,7 +83,7 @@ export const ComponentFormListItem = addClasses(
 )(Li);
 
 export const ComponentFormList = addClasses(
-  'list-none bl-max-h-xl-grid-1 bl-overflow-y-scroll',
+  'bl-list-none bl-max-h-xl-grid-1 bl-overflow-y-scroll',
 )(Ul);
 
 export const ComponentFormLabel = addClasses(
@@ -95,7 +95,7 @@ export const ComponentFormText = addClasses(
 )(Text);
 
 export const ComponentFormTextArea = addClasses(
-  'bl-text-gray-900 bl-bg-gray-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-min-h-grid-16 bl-block bl-my-grid-2 bl-p-grid-1 bl-resize-none overflow-auto whitespace-pre',
+  'bl-text-gray-900 bl-bg-gray-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-min-h-grid-16 bl-block bl-my-grid-2 bl-p-grid-1 bl-resize-none bl-overflow-auto bl-whitespace-pre',
 )(TextArea);
 
 export const ComponentFormRadioGroup = addClasses(
@@ -103,11 +103,11 @@ export const ComponentFormRadioGroup = addClasses(
 )(RadioGroup);
 
 export const ComponentFormRadio = addClasses(
-  'bl-mr-grid-2 bl-mb-grid-2 align-baseline',
+  'bl-mr-grid-2 bl-mb-grid-2 bl-align-baseline',
 )(Radio);
 
 export const ComponentFormCheckBox = addClasses(
-  'bl-mr-grid-2 bl-mb-grid-2 align-baseline',
+  'bl-mr-grid-2 bl-mb-grid-2 bl-align-baseline',
 )(CheckBox);
 
 export const ComponentFormSelect = addClasses(

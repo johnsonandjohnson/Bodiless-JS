@@ -83,7 +83,7 @@ export const ui: ComponentSelectorUI = {
   )(Div),
 
   SubmitButton: addClasses(
-    'bl-right-grid-0 bl-absolute tbl-ext-m bl-mr-grid-2',
+    'bl-right-grid-0 bl-absolute bl-tbl-ext-m bl-mr-grid-2',
   )(SubmitButtonBase),
 
   AccordionWrapper: addClasses(
@@ -99,7 +99,7 @@ export const ui: ComponentSelectorUI = {
   )(Anchor),
 
   AccordionCheckboxLabel: addClasses(
-    'bl-ml-grid-2 bl-font-semibold flex',
+    'bl-ml-grid-2 bl-font-semibold bl-flex',
   )(Label),
 
   AccordionCheckBox: addClasses(
@@ -107,7 +107,7 @@ export const ui: ComponentSelectorUI = {
   )(CheckBox),
 
   AccordionCheckboxLabelText: addClasses(
-    'whitespace-normal',
+    'bl-whitespace-normal',
   )(Span),
 
   SearchBarWrapper: addClasses(
