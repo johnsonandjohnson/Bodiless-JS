@@ -53,9 +53,9 @@ export default Layout;
 
 #### Customizing Via Shadowing (*Preferred Method)
 
-Provide the Shadowing function as defined in [Shadow](../CX_Elements/Shadow).
+Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
 
-File to shadow: `./lib/shadow/cx-layout/{MyFooter}.js`
+File to shadow: `./lib/shadow/vital-layout/{MyFooter}.js`
 
 #### Customizing Via Extending
 
@@ -86,4 +86,4 @@ This token is then applied to the Footer slot within Layout.
 
 Vital Footer provides a `<footer>` element wrapper around its internal elements. To see how these
 elements are structured within the wrapper, please see:
-[`FooterClean.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-layout/src/components/Footer/FooterClean.tsx ':target=_blank')
+[`FooterClean.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Footer/FooterClean.tsx ':target=_blank')
