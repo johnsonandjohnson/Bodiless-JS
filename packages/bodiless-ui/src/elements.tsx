@@ -147,7 +147,7 @@ export const SubmitButton: FC<HTMLProps<HTMLButtonElement> & StylableProps> = pr
 
 export const ToolbarIcon = flow(
   removeClasses('bl-p-grid-1'),
-  addClasses('bl-w-grid-8 bl-h-grid-8 md-36'),
+  addClasses('bl-w-grid-8 bl-h-grid-8 bl-large-icon'),
 )(Icon);
 
 export const ToolbarButton = flow(
