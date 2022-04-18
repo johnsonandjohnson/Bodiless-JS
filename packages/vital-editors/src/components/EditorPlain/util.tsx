@@ -50,7 +50,7 @@ export const withAutoSuperscript = (chars: string = '®™', classname: string =
       sanitizer,
       ...restOverridesProps,
     });
-    return <Component {...rest} useOverrides={finalUseOverrides} className="heidi" />;
+    return <Component {...rest} useOverrides={finalUseOverrides} />;
   };
   return WithAutoSuperscript;
 };

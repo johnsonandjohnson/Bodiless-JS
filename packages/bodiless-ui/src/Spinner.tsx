@@ -32,7 +32,7 @@ export const Spinner: FC<SpipperProps> = (props: any) => {
     barStyle.WebkitTransform = barStyle.transform;
     bars.push(
       // eslint-disable-next-line react/destructuring-assignment
-      <div style={barStyle} className={`${props.color || ''} bodiless-spinner_bar`} key={i} />,
+      <div style={barStyle} className={`${props.color || ''} bodiless-spinner_bar`} key={i} />, // Need to prefix color with bl-?
     );
   }
   return (
