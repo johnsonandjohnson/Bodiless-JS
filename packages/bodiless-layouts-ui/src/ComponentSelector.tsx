@@ -123,11 +123,11 @@ export const ui: ComponentSelectorUI = {
   )(Label),
 
   AccordionIconContract: () => (
-    <span className="material-icons bl-mr-2">expand_less</span>
+    <span className="bl-material-icons bl-mr-2">expand_less</span>
   ),
 
   AccordionIconExpand: () => (
-    <span className="material-icons bl-mr-2">expand_more</span>
+    <span className="bl-material-icons bl-mr-2">expand_more</span>
   ),
 
   ComponentDescriptionWrapper: addClasses(
@@ -139,7 +139,7 @@ export const ui: ComponentSelectorUI = {
   )(Div),
 
   ComponentDescriptionIcon: addClasses(
-    'bl-absolute bl-top-grid-0 bl-right-grid-0 material-icons bl-z-20 bl-text-gray-800 bl-m-grid-1',
+    'bl-absolute bl-top-grid-0 bl-right-grid-0 bl-material-icons bl-z-20 bl-text-gray-800 bl-m-grid-1',
   )(Div),
 
   ComponentSelectButton: addClasses(
@@ -147,9 +147,9 @@ export const ui: ComponentSelectorUI = {
   )(Button),
 
   ScalingHeader: addClasses('bl-w-full bl-cursor-pointer bl-justify-end bl-text-gray-900 bl-p-grid-2 bl-flex')(Div),
-  ScalingButtonFull: (props) => <span className="material-icons"><span {...props}>view_stream</span></span>,
-  ScalingButtonHalf: (props) => <span className="material-icons"><span {...props}>view_module</span></span>,
-  ScalingButtonQuarter: (props) => <span className="material-icons"><span {...props}>view_comfy</span></span>,
+  ScalingButtonFull: (props) => <span className="bl-material-icons"><span {...props}>view_stream</span></span>,
+  ScalingButtonHalf: (props) => <span className="bl-material-icons"><span {...props}>view_module</span></span>,
+  ScalingButtonQuarter: (props) => <span className="bl-material-icons"><span {...props}>view_comfy</span></span>,
 };
 
 const ComponentSelector: FC<ComponentSelectorProps> = props => (

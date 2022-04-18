@@ -82,7 +82,7 @@ const SingleAccordionBase = observer(({
           tabIndex={0}
           role="button"
           onClick={toggleAccordionState}
-          className="material-icons cursor-pointer select-none"
+          className="cursor-pointer select-none"
           data-accordion-element="accordion-icon"
           data-accordion-icon={accordionState === COLLAPSED ? 'expand' : 'collapse'}
         >

@@ -54,7 +54,7 @@ export const Option = stylable<ChildFieldProps<any, any>>(BaseOption);
 export const Anchor = stylable<HTMLProps<HTMLAnchorElement>>('a');
 
 export const Icon = flow(
-  addClasses('bl-p-grid-1 material-icons'),
+  addClasses('bl-p-grid-1 bl-material-icons'),
   withoutProps<ButtonVariantProps>(['isActive']),
   flowIf(hasProp('isActive'))(
     addClasses('bl-bg-primary bl-rounded'),

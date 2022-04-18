@@ -58,7 +58,7 @@ export const LibraryItemIndicatorClean = designable(LibraryItemIndicatorComponen
 const asDefaultLibraryItemIndicator = withDesign({
   Wrapper: addClasses('bl-hidden group-hover:bl-flex bl-text-white bl-bg-gray-900 bl-absolute bl-px-2 bl-py-1 md:bl-mt-5 md:bl-ml-5 bl-z-10'),
   Icon: flowHoc(
-    addClasses('material-icons bl-mr-2'),
+    addClasses('bl-material-icons bl-mr-2'),
     addProps({ children: 'account_balance' }),
   ),
   Label: addProps({ children: 'Library Item' }),
