@@ -170,7 +170,6 @@ module.exports = {
           'font-family': 'Material Icons',
           'font-weight': 'normal',
           'font-style': 'normal',
-          color: '#ddd',
           padding: '2px',
           'font-size': '30px',
           'vertical-align': 'text-bottom',
