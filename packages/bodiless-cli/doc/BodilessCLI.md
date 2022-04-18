@@ -1,12 +1,16 @@
-# Bodiless-JS CLI
+# BodilessJS CLI
 
 ## Usage
-```sh-session
-$ npm install -g @bodiless/cli
+
+```shell-session
+$ npx @bodiless/cli
+
 $ bodiless COMMAND
 running command...
+
 $ bodiless (-v|--version|version)
 @bodiless/cli/0.0.52 darwin-x64 node-v16.9.1
+
 $ bodiless --help [COMMAND]
 USAGE
   $ bodiless COMMAND
@@ -14,12 +18,13 @@ USAGE
 ```
 
 ## Commands
+
 * [`bodiless help [COMMAND]`](#bodiless-help-command)
 * [`bodiless pack`](#bodiless-pack)
 
-## `bodiless help [COMMAND]`
+### `bodiless help [COMMAND]`
 
-display help for bodiless
+Display help for BodilessJS CLI.
 
 ```
 USAGE
@@ -32,9 +37,9 @@ OPTIONS
   --all  see all commands in CLI
 ```
 
-_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.3/src/commands/help.ts)_
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.3/src/commands/help.ts ':target=_blank')_
 
-## `bodiless pack`
+### `bodiless pack`
 
 Pack and install dependencies from a local monorepo.
 
@@ -64,4 +69,4 @@ EXAMPLES
   $ bodiless pack -s /path/to/site
 ```
 
-_See code: [lib/commands/pack.js](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/bodiless-cli/src)_
+_See code: [lib/commands/pack.js](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/bodiless-cli/src/commands/pack.ts ':target=_blank')_
