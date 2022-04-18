@@ -46,8 +46,8 @@ const CheckBox = ({
 // eslint-disable-next-line import/prefer-default-export
 export const ui: ComponentSelectorUI = {
   MasterWrapper: addClasses('bl-flex bl-form-wrapper')(Div),
-  FlexSection: addClasses('bl-pt-grid-2 w-1/4 overflow-y-auto')(Div),
-  FlexSectionFull: addClasses('bl-pt-grid-2 w-3/4')(Div),
+  FlexSection: addClasses('bl-pt-grid-2 bl-w-1/4 bl-overflow-y-auto')(Div),
+  FlexSectionFull: addClasses('bl-pt-grid-2 bl-w-3/4')(Div),
   FlowContainerEmpty: addClasses(
     'bl-border-2 bl-border-dashed bl-text-gray-600',
   )(Div),

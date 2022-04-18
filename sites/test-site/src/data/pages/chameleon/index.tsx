@@ -53,7 +53,7 @@ const BaseComponent = addClasses('border-8 py-5 text-center')(Div);
 const basicChameleonDesign = {
   Red: addClasses('border-red-500 text-red-500'),
   Blue: addClasses('border-blue-500 text-blue-500'),
-  Green: addClasses('border-emerald-500 text-emerald-500'),
+  Green: addClasses('border-green-500 text-green-500'),
 };
 
 const BasicChameleon = flowHoc(
@@ -91,7 +91,7 @@ const YellowStart = flowHoc(
       </>
     ) as ReactNode,
   }),
-  addClasses('border-amber-500 text-amber-500'),
+  addClasses('border-yellow-500 text-yellow-500'),
 )(BaseComponent);
 
 const DynamicStartChameleon = flowHoc(

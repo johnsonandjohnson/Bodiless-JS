@@ -47,7 +47,8 @@ const mergeConfigs = (
   return {
     // content setting
     content: [
-      './src/**/!(*.d).{ts,js,jsx,tsx}',
+      // @todo: workaround for https://github.com/johnsonandjohnson/Bodiless-JS/issues/1584
+      // './src/**/!(*.d).{ts,js,jsx,tsx}',
       ...flatten(merge(packageConfigs).map((config: TailwindConfig) => config.content)),
     ],
     // theme setting

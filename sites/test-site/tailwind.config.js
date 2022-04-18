@@ -13,15 +13,22 @@
  */
 const requireEsm = require('esm')(module);
 const tailwindcssDir = require('tailwindcss-dir')();
+const glob = require('glob');
+
+const content = glob.sync(
+  './src/**/!(*.d).{ts,js,jsx,tsx}'
+);
 
 const { buildTailwindConfig } = requireEsm(
   '@bodiless/fclasses'
 );
 
 const twConfig = {
-  content: [
-    './src/**/!(*.d).{ts,js,jsx,tsx}',
-  ],
+  // @todo: workaround for https://github.com/johnsonandjohnson/Bodiless-JS/issues/1584
+  // content: [
+  //   './src/**/!(*.d).{ts,js,jsx,tsx}',
+  // ],
+  content,
   /*
   New for V1 - the legacy 'options' is now top-level
   */
