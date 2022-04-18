@@ -14,6 +14,6 @@
 
 import { Div, addClasses } from '@bodiless/fclasses';
 
-const PreviewWrapper = addClasses('bl-block bg-black')(Div);
+const PreviewWrapper = addClasses('bl-block bl-bg-black')(Div);
 
 export default PreviewWrapper;

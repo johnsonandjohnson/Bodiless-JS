@@ -60,9 +60,7 @@ module.exports = {
   safelist: [
     {
       pattern: /^bl-/, // Covers all bl-classes
-    },
-    {
-      pattern: /:bl-/, // Covers all variants
+      variants: ['first', 'last', 'ltr', 'rtl', 'hover', 'group-hover', 'sm', 'md', 'lg'],
     },
   ],
   prefix: 'bl-',
