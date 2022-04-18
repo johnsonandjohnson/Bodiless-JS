@@ -13,6 +13,7 @@
     "bin/",
     "src/",
     "/bodiless.docs.json",
+    "doc/",
     "/getDocs.js"
   ],
   "repository": {
