@@ -6,15 +6,12 @@ hooks:
   build: bash ./static.platform.sh build
   deploy: bash ./static.platform.sh deploy
   post_deploy: bash ./static.platform.sh post_deploy
-disk: 320
+disk: 1024
 mounts:
   volume:
     source: local
     source_path: volume
 web:
-  # This is to start the node server to intercept all undefined route requests
-  commands:
-    start: node sites/canvasx-demo/404.js
   locations:
     /:
       root: public
@@ -36,7 +33,7 @@ web:
           expires: 4w
     # This is to invalidate route 404 so we can return a 404 status on it
     /404:
-      root: sites/canvasx-demo/public
+      root: public
       index:
         - index.html
       allow: false
@@ -46,4 +43,4 @@ web:
 variables:
   env:
     APP_VOLUME: /app/volume
-    APP_SITE_NAME: canvasx-demo
+    APP_SITE_NAME: test-site

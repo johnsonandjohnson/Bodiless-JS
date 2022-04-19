@@ -5,6 +5,7 @@ prepare_build () {
 
 build() {
   echo "Site is ${APP_SITE_NAME}"
+  echo "Site directory is ${APP_SITE_DIR_NAME}"
   cd "sites/${APP_SITE_DIR_NAME}"
   npm run build
   # Move the site we built to the root. This allows selecting which site to
