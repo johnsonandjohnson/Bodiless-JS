@@ -1,6 +1,6 @@
 #!/bin/bash
 ###
- # Copyright © 2020 Johnson & Johnson
+ # Copyright © 2022 Johnson & Johnson
  #
  # Licensed under the Apache License, Version 2.0 (the "License");
  # you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  # limitations under the License.
  ##
 finalize_deploy () {
-  npm install --prefix=./scripts && npm run deps:clone
   npm run bootstrap -- --ci
   npm run build:packages -- --concurrency 1
   npm run build:env-vars

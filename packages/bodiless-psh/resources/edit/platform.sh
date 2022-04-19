@@ -199,7 +199,6 @@ default_start () {
 
 # Always run before the psh deploy hook.
 _setup_deploy () {
-  echo 'bodiless-psh _setup_deploy()'
   # Exit if on a PR branch and not on GitHub
   if ! check_branch; then
     echo 'Invalid branch; skipping edit environment deploy'
@@ -222,7 +221,6 @@ _setup_deploy () {
 
 # Default implementation of psh deploy hook (fresh clone and prepare npm)
 default_deploy () {
-  echo 'bodiless-psh default_deploy()'
   full_deploy
   mkdir -p ${NPM_CACHE_DIR}
   cd ${ROOT_DIR}
@@ -230,14 +228,12 @@ default_deploy () {
 
 # Default implementation of finalize psh deploy hook.
 default_finalize_deploy () {
-  echo 'bodiless-psh default_finalize_deploy()'
   npm ci
   npm run prestart
 }
 
 # Final step after p.sh deploy hook.
 _teardown_deploy () {
-  echo 'bodiless-psh _teardown_deploy()'
   pm2 restart backend && pm2 restart frontend || pm2 start ${PLATFORM_APP_DIR}/ecosystem.config.js
 }
 

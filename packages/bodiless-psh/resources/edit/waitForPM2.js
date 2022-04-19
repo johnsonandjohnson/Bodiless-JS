@@ -15,7 +15,7 @@
 /* eslint-disable no-console */
 const net = require('net');
 
-let timeout = 30;
+let timeout = 10;
 
 /**
  * Wait for the pm2 socket to be available.
