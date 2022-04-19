@@ -1,6 +1,6 @@
 name: edit
 type: 'nodejs:16'
-disk: 4096
+disk: 12288
 resources:
   base_memory: 1024
   memory_ratio: 1024
