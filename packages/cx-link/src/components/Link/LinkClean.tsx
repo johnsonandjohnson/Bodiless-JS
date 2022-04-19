@@ -22,6 +22,7 @@ import { LinkComponents, LinkBaseProps } from './types';
 
 const linkComponents: LinkComponents = {
   Wrapper: A,
+  Icon: Fragment,
   Body: Span,
   ExternalSRText: Fragment,
 };
@@ -29,6 +30,7 @@ const linkComponents: LinkComponents = {
 const LinkBase: FC<LinkBaseProps> = ({ components: C, children, ...rest }) => (
   <C.Wrapper {...rest}>
     <C.ExternalSRText />
+    <C.Icon />
     <C.Body>
       {children}
     </C.Body>

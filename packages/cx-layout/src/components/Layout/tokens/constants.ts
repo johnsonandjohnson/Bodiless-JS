@@ -12,4 +12,7 @@
  * limitations under the License.
  */
 
-export const MAIN_CONTENT_ID = 'main-content';
+export enum LayoutIds {
+  HeaderContent = 'header-content',
+  Content = 'main-content',
+}

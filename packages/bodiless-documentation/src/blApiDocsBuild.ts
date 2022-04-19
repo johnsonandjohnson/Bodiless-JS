@@ -12,13 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import pathUtil from 'path';
 import fs from 'fs';
 import { ensureDirSync } from 'fs-extra';
 import locateFiles from './locateFiles';
 import type { Copier } from './write';
 import { Tree } from './type';
+
+require('dotenv').config({ path: '.env.site' });
 
 // determine if api doc generation is enabled
 // when enabled, api doc files are copied to doc server and a link is added to navigation bar.

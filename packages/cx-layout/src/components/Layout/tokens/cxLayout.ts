@@ -12,75 +12,51 @@
  * limitations under the License.
  */
 
-import { cxColor, cxSpacing } from '@bodiless/cx-elements';
+import { useIsBurgerMenuHidden, withBurgerMenuProvider } from '@bodiless/cx-navigation';
 import {
   addProps,
   as,
-  on,
+  flowIf,
+  not,
 } from '@bodiless/fclasses';
 import { asLayoutToken } from '../LayoutClean';
-import { cxFooter, FooterClean } from '../../Footer';
-import { cxHeader, HeaderClean } from '../../Header';
+import { cxFooter } from '../../Footer';
+import { cxHeader } from '../../Header';
 import { cxHelmet } from '../../Helmet';
-import { MAIN_CONTENT_ID } from './constants';
-import { WithBordersLabels } from './cxLayoutTest';
+import { LayoutIds } from './constants';
+import { StyleGuide } from './StyleGuide';
 
 /**
   * Token that defines a basic layout.
   */
 const Base = asLayoutToken({
+  Core: {
+    _: withBurgerMenuProvider,
+  },
   Components: {
     Helmet: cxHelmet.Default,
   },
-  Theme: {
-  },
-  Schema: {
-  },
   Behavior: {
-    Container: addProps({ id: MAIN_CONTENT_ID }),
+    Container: addProps({ id: LayoutIds.Content }),
     SkipToMainContent: as(
       addProps({
-        href: `#${MAIN_CONTENT_ID}`,
+        href: `#${LayoutIds.Content}`,
         children: 'Skip To Main Content',
       }),
       'sr-only focus:not-sr-only',
     ),
   },
   Layout: {
-  },
-  Spacing: {
-  }
-});
-
-/*
- * Tailwind's container is specifially not used due to its feature it set's max-width
- * to min-width of breakpoint.  So instead rely on ContainerWrapper to margin percent
- * to contain content until we get to xl and then constrain by max-width.
- */
-const ConstrainSite = asLayoutToken({
-  Spacing: {
-    // TODO The tokens on this ContainerWrapper will move to be controlled by
-    // content within Templates.
-    ContainerWrapper: as(
-      cxSpacing.WithSiteMargin,
-      cxSpacing.WithSiteXLConstraint,
-    ),
-    HeaderWrapper: cxSpacing.WithSiteXLConstraint,
-  },
-});
-
-const Header = asLayoutToken({
-  Components: {
-    Header: on(HeaderClean)(cxHeader.Default),
-  },
-});
-
-const Footer = asLayoutToken({
-  Components: {
-    Footer: on(FooterClean)(cxFooter.Default),
+    Helmet: flowIf(
+      not(useIsBurgerMenuHidden),
+    )(as(cxHelmet.WithFixedBody, cxHelmet.WithDesktopStatickBody)),
   },
   Theme: {
-    FooterWrapper: cxColor.BgSecondaryFooter,
+    OuterContainer: 'flex flex-col h-screen',
+    ContainerWrapper: 'flex-grow',
+  },
+  Content: {
+    Header: addProps({ id: LayoutIds.HeaderContent }),
   },
 });
 
@@ -88,39 +64,13 @@ const Default = asLayoutToken({
   ...Base,
   Components: {
     ...Base.Components,
-    ...Header.Components,
-    ...Footer.Components,
-  },
-  Spacing: {
-    ...ConstrainSite.Spacing,
-  },
-  Theme: {
-    ...Footer.Theme,
-  },
-});
-
-const HeaderOnly = asLayoutToken({
-  ...Default,
-  Components: {
-    ...Base.Components,
-    ...Header.Components,
-  },
-});
-
-const FooterOnly = asLayoutToken({
-  ...Default,
-  Components: {
-    ...Base.Components,
-    ...Footer.Components,
+    Header: cxHeader.Default,
+    Footer: cxFooter.Default,
   },
 });
 
 export default {
   Base,
   Default,
-  Header,
-  HeaderOnly,
-  Footer,
-  FooterOnly,
-  WithBordersLabels,
+  StyleGuide,
 };

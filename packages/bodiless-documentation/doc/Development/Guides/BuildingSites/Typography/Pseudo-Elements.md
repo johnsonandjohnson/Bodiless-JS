@@ -20,7 +20,7 @@ font](./Fonts#via-hosted), content, and additional styling.
 
 To use, apply `cx-external-link` to any token.
 
-_(Code excerpt from `site.tailwind.config.js` file's `module.exports = {}` section.)_
+_(Code excerpt from `tailwind.config.js` file's `module.exports = {}` section.)_
 
 ```js
 plugin(({ addUtilities }) => {
@@ -78,7 +78,7 @@ const listItemBefore = {
 };
 ```
 
-_(Code excerpt from `site.tailwind.config.js` file's `module.exports = {}` section.)_
+_(Code excerpt from `tailwind.config.js` file's `module.exports = {}` section.)_
 
 ```js
 plugin(({ addUtilities }) => {

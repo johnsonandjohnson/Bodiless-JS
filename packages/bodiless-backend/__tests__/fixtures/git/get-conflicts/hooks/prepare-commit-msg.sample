@@ -9,7 +9,7 @@
 #
 # To enable this hook, rename this file to "prepare-commit-msg".
 
-# This hook includes three examples. The first one removes the
+# This hook includes three sites. The first one removes the
 # "# Please enter the commit message..." help message.
 #
 # The second includes the output of "git diff --name-status -r"
