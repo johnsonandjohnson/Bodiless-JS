@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2022 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,8 +12,6 @@
  * limitations under the License.
  */
 
-import { Div, addClasses } from '@bodiless/fclasses';
+import vitalMetaHelmet from './vitalMetaHelmet';
 
-const PreviewWrapper = addClasses('bl-block bl-bg-gray-900')(Div);
-
-export default PreviewWrapper;
+export default vitalMetaHelmet;

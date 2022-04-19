@@ -82,6 +82,8 @@
       "@bodiless/vital-layout/*": ["vital-layout/src/*"],
       "@bodiless/vital-link": ["vital-link/src/"],
       "@bodiless/vital-link/*": ["vital-link/src/*"],
+      "@bodiless/vital-meta": ["vital-meta/src/"],
+      "@bodiless/vital-meta/*": ["vital-meta/src/*"],
       "@bodiless/vital-navigation": ["vital-navigation/src/"],
       "@bodiless/vital-navigation/*": ["vital-navigation/src/*"],
       "@bodiless/vital-templates": ["vital-templates/src/"],
