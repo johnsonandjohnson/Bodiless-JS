@@ -1,4 +1,5 @@
 prepare_build () {
+  export NODE_OPTIONS="--max-old-space-size=2048"
   init_npmrc
   npm run setup
 }
