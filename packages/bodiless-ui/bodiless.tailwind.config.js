@@ -92,6 +92,7 @@ module.exports = {
         initial: 'initial',
         inherit: 'inherit',
         black: '#22292f',
+        tooltip: '#373737',
         white: '#ffffff',
         'gray-100': '#f7fafc',
         'gray-200': '#edf2f7',

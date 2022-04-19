@@ -118,7 +118,7 @@ export const ComponentFormSelect = addClasses(
 export const ComponentFormOption = Option;
 
 export const ComponentFormButton = addClasses(
-  'bl-text-gray-200 bl-cursor-pointer hover:bl-text-green',
+  'bl-text-gray-200 bl-cursor-pointer',
 )(Button);
 
 export const ComponentFormUnwrapButton = addClasses(
@@ -127,14 +127,13 @@ export const ComponentFormUnwrapButton = addClasses(
 
 export const ComponentFormCloseButton = flow(
   addClasses('hover:bl-text-red bl-float-right'),
-  removeClasses('hover:bl-text-green'),
-  withChild(() => <Icon>cancel</Icon>),
+  withChild(() => <Icon className="bl-small-icon">highlight_off</Icon>),
 )(ComponentFormButton);
 
 export const ComponentFormSubmitButton = (props: HTMLProps<HTMLButtonElement>) => (
   <div className="bl-flow-root">
     <ComponentFormButton className="bl-float-right" {...props}>
-      <Icon>done</Icon>
+      <Icon className="hover:bl-bg-white hover:bl-text-tooltip">check_circle</Icon>
     </ComponentFormButton>
   </div>
 );
