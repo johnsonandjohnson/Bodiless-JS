@@ -23,8 +23,8 @@ import {
   withDesign,
   addProps,
   flowHoc,
+  A,
 } from '@bodiless/fclasses';
-import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import { asEditableImagePlain as asEditableImage } from '../Image';
 import { asEditableLink } from '../Elements.token';
 
@@ -39,7 +39,7 @@ export type Props = DesignableComponentsProps<LogoComponents> & HTMLProps<HTMLEl
 const logoComponents:LogoComponents = {
   SiteReturn: Div,
   SiteLogo: Img,
-  SiteLink: GatsbyLink,
+  SiteLink: A,
 };
 const LogoClean: FC<Props> = ({ components }) => {
   const {
