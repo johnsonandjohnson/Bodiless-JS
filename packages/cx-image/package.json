@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/cx-image",
   "sideEffects": false,
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.5",
   "description": "Clean, designable Image components for CanvasX based projects",
   "author": "Marco Pagliarulo <mpaglia1@its.jnj.com>",
   "license": "UNLICENSED",
@@ -10,6 +10,7 @@
   "files": [
     "/lib",
     "/bodiless.docs.json",
+    "/getDocs.js",
     "/assets",
     "/doc"
   ],
@@ -31,15 +32,16 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@bodiless/components": "^1.0.0-beta.1",
-    "@bodiless/components-ui": "^1.0.0-beta.1",
-    "@bodiless/core": "^1.0.0-beta.1",
-    "@bodiless/cx-elements": "^1.0.0-beta.1",
-    "@bodiless/fclasses": "^1.0.0-beta.1",
-    "@bodiless/gatsby-theme-bodiless": "^1.0.0-beta.1",
-    "@bodiless/hydration": "^1.0.0-beta.1",
-    "@bodiless/layouts": "^1.0.0-beta.1",
-    "@bodiless/layouts-ui": "^1.0.0-beta.1",
+    "@bodiless/cli": "^1.0.0-beta.5",
+    "@bodiless/components": "^1.0.0-beta.5",
+    "@bodiless/components-ui": "^1.0.0-beta.5",
+    "@bodiless/core": "^1.0.0-beta.5",
+    "@bodiless/cx-elements": "^1.0.0-beta.5",
+    "@bodiless/fclasses": "^1.0.0-beta.5",
+    "@bodiless/gatsby-theme-bodiless": "^1.0.0-beta.5",
+    "@bodiless/hydration": "^1.0.0-beta.5",
+    "@bodiless/layouts": "^1.0.0-beta.5",
+    "@bodiless/layouts-ui": "^1.0.0-beta.5",
     "lodash": "^4.17.19"
   }
 }

@@ -16,19 +16,19 @@ documentation or suggested best practices.
 ## Tailwind Configuration File
 
 For configuration, Tailwind uses a `tailwind.config.js` file, but, in Bodiless, we use a
-`site.tailwind.config.js` file at the package and site level.
+`tailwind.config.js` file at the package and site level.
 
-Your site's Tailwind configuration file, `site.tailwind.config.js`, can be found in the root
+Your site's Tailwind configuration file, `tailwind.config.js`, can be found in the root
 directory of the site or within a package.
 
-Adding custom styling can be done by editing `site.tailwind.config.js`, following [Tailwind's
+Adding custom styling can be done by editing `tailwind.config.js`, following [Tailwind's
 documentation](https://tailwindcss.com/docs/configuration).
 
 If your site doesn't have a Tailwind configuration file in its root directory, then your site will
 use all of Tailwind's default settings as well as packages that include Tailwind.
 
 Bodiless sites have a mechanism to discover all packages' and sites' Tailwind config files
-(`site.tailwind.config.js`), and combine them into a single Tailwind file during the build process.
+(`tailwind.config.js`), and combine them into a single Tailwind file during the build process.
 To utilize this, you must follow the naming convention described in the [next
 section](#tailwind-configuration-for-a-package).
 
@@ -40,7 +40,7 @@ always have precedence**.
 
 ### Tailwind Configuration for a Package
 
-01. Add a `site.tailwind.config.js` file to the root of the package.
+01. Add a `tailwind.config.js` file to the root of the package.
     ```js
     const plugin = require('tailwindcss/plugin');
 
@@ -52,7 +52,7 @@ always have precedence**.
       plugins: [],
     };
     ```
-01. Within `files` of the `package.json`, add `/site.tailwind.config.js` to make sure it's exported
+01. Within `files` of the `package.json`, add `/tailwind.config.js` to make sure it's exported
     with the package.
 
 ## Determine Whether to Use Extend vs Replace

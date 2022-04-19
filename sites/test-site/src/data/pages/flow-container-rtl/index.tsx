@@ -25,7 +25,7 @@ import {
 } from '@bodiless/fclasses';
 import { getSnapFrom, withTailwindClasses } from '@bodiless/layouts';
 import resolvedConfigs from
-  '@bodiless/gatsby-theme-bodiless/src/dist/tailwindcss/resolveConfig';
+  '@bodiless/fclasses/src/tailwindcss/resolveConfig';
 // @ts-ignore Could not find a declaration file...
 import Layout from '../../../components/Layout';
 import {

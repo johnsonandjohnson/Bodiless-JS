@@ -24,9 +24,12 @@ import { asBodilessLink } from '@bodiless/components-ui';
 import { asLogoToken } from '../LogoClean';
 
 const Default = asLogoToken({
-  Spacing: {
-    Wrapper: 'w-full max-w-48 lg:max-w-56',
+  Layout: {
+    Wrapper: 'w-full max-w-20 md:max-w-28 lg:min-w-28',
     Image: 'max-h-full',
+  },
+  Spacing: {
+    Wrapper: 'mx-4 lg:ml-0 lg:mr-8',
   },
   Components: {
     Image: cxImage.Default,

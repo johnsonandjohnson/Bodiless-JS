@@ -18,7 +18,7 @@ import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { withPageDimensionsContext, BreakpointsType } from '@bodiless/components';
 import Helmet from 'react-helmet';
 import resolvedConfigs from
-  '@bodiless/gatsby-theme-bodiless/src/dist/tailwindcss/resolveConfig';
+  '@bodiless/fclasses/src/tailwindcss/resolveConfig';
 
 const getTailwindBreakpoints = (): BreakpointsType => {
   const { theme: { screens } } = resolvedConfigs;

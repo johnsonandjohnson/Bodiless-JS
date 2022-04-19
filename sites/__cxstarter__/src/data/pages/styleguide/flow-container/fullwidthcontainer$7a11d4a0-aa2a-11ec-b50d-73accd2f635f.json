@@ -1,0 +1,18 @@
+[
+  {
+    "type": "H3",
+    "children": [
+      {
+        "text": "Full Width Constrained Flow Container"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "Flow Container that restricts all components to be full width and not resizable."
+      }
+    ]
+  }
+]

@@ -50,7 +50,7 @@ const H1 = asElementToken({
     ),
   },
   Spacing: {
-    _: 'mb-5 lg:mb-6',
+    _: 'mt-10 mb-5 lg:mb-6',
   },
   Meta: meta,
 });

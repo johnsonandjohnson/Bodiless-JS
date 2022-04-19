@@ -87,6 +87,30 @@ describe('extendMeta', () => {
 });
 
 describe('asTokenSpec', () => {
+  it('Properly merges nested tokens', () => {
+    const nested = asTestTokenSpec({
+      Layout: {
+        _: 'bar',
+      },
+    });
+    const a = {
+      Core: {
+        A: 'foo',
+      },
+    };
+    const b = {
+      Layout: {
+        A: nested,
+        B: nested,
+      },
+    };
+    const token = asTestTokenSpec(a, b);
+    const Test = as(token)(TestClean);
+    const wrapper = mount(<Test />);
+    expect(wrapper.find('span#test-a').prop('className')).toBe('bar foo');
+    expect(wrapper.find('span#test-b').prop('className')).toBe('bar');
+  });
+
   it('Adds the $TokenSpec property', () => {
     const t = asTestTokenSpec({ Core: { _: 'foo' } });
     expect(t[$TokenSpec]).toBeTruthy();

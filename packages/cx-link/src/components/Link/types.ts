@@ -16,6 +16,7 @@ import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 
 export type LinkComponents = {
   Wrapper: ComponentOrTag<any>,
+  Icon: ComponentOrTag<any>,
   Body: ComponentOrTag<any>,
   ExternalSRText: ComponentOrTag<any>,
 };

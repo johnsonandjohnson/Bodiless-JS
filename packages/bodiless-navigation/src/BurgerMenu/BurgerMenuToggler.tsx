@@ -15,7 +15,7 @@
 import React, { FC, ComponentType, KeyboardEvent } from 'react';
 import flow from 'lodash/flow';
 import {
-  Fragment, A, DesignableComponentsProps, designable,
+  Fragment, A, DesignableComponentsProps, designable, HOC,
 } from '@bodiless/fclasses';
 
 import { useBurgerMenuContext } from './BurgerMenuContext';
@@ -36,17 +36,11 @@ const TogglerComponents: TogglerComponents = {
 
 const TogglerBase: FC<TogglerProps> = ({ components, ...rest }) => {
   const { Wrapper, Button } = components;
-  const { isVisible, toggle } = useBurgerMenuContext();
+  const { isVisible } = useBurgerMenuContext();
 
   return (
     <Wrapper>
-      <Button
-        {...rest}
-        tabIndex="0"
-        role="button"
-        onKeyPress={(event: KeyboardEvent) => BurgerMenuKeyPressHandler(event, isVisible, toggle)}
-        aria-expanded={!!isVisible}
-      >
+      <Button {...rest}>
         {isVisible ? 'close' : 'menu' }
       </Button>
     </Wrapper>
@@ -58,27 +52,39 @@ const TogglerBase: FC<TogglerProps> = ({ components, ...rest }) => {
  * It extends Component's default onClick handler if exists. Note that
  * the Component has to be inside a BurgerMenuContext.
  *
+ * Also adds default props related to accessibility.
+ *
  * @return Original component with extended onClick handler that toggles Burger Menu visibility.
  */
-const asBurgerMenuToggler = <P extends object>(Component: ComponentType<P>) => (
-  props: P & { onClick?: () => any },
-) => {
-  const {
-    isVisible, toggle, isTransitionComplete, setIsTransitionComplete,
-  } = useBurgerMenuContext();
-  const { onClick } = props;
+export const asBurgerMenuToggler: HOC = Component => {
+  const AsBurgerMenuToggler: FC<any> = props => {
+    const {
+      isVisible, toggle, isTransitionComplete, setIsTransitionComplete,
+    } = useBurgerMenuContext();
+    const { onClick, ...rest } = props;
 
-  const extendOnClick = () => {
-    if (onClick && typeof onClick === 'function') onClick();
-    toggle(!isVisible);
+    const extendOnClick = () => {
+      if (onClick && typeof onClick === 'function') onClick();
+      toggle(!isVisible);
 
-    // Wait for the animations to complete then toggle isTransitionComplete.
-    // This prevents unnecessary animation plays on initial render
-    // as well as when resizing browser viewport to tablet/mobile manually.
-    setTimeout(() => setIsTransitionComplete(!isTransitionComplete), 500);
+      // Wait for the animations to complete then toggle isTransitionComplete.
+      // This prevents unnecessary animation plays on initial render
+      // as well as when resizing browser viewport to tablet/mobile manually.
+      setTimeout(() => setIsTransitionComplete(!isTransitionComplete), 500);
+    };
+
+    return (
+      <Component
+        onClick={extendOnClick}
+        tabIndex="0"
+        role="button"
+        onKeyPress={(event: KeyboardEvent) => BurgerMenuKeyPressHandler(event, isVisible, toggle)}
+        aria-expanded={!!isVisible}
+        {...rest}
+      />
+    );
   };
-
-  return <Component {...props} onClick={extendOnClick} />;
+  return AsBurgerMenuToggler;
 };
 
 /**
@@ -88,6 +94,7 @@ const asBurgerMenuToggler = <P extends object>(Component: ComponentType<P>) => (
  * For this button to work both burger menu and toggler button should be inside BurgerMenuContext.
  *
  * @return Burger Menu default toggler component.
+ * @deprecated
  */
 const BurgerMenuTogglerClean = flow(
   designable(TogglerComponents, 'BurgerMenuToggler'),
@@ -102,6 +109,8 @@ const BurgerMenuTogglerClean = flow(
  * For this button to work both burger menu and toggler button should be inside BurgerMenuContext.
  *
  * @return Burger Menu default toggler component.
+ *
+ * @deprecated
  */
 const BurgerMenuDefaultToggler = withBurgerMenuTogglerStyles(BurgerMenuTogglerClean);
 

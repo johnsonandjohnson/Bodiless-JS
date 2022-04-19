@@ -15,6 +15,7 @@
 export {};
 
 const fs = require('fs');
+// eslint-disable-next-line import/extensions
 const { createPages } = require('../gatsby-node');
 
 jest.mock('fs');
