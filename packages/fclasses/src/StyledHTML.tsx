@@ -73,6 +73,7 @@ export const Keygen = stylable<HTMLProps<HTMLElement>>('keygen');
 export const Label = stylable<HTMLProps<HTMLLabelElement>>('label');
 export const Legend = stylable<HTMLProps<HTMLLegendElement>>('legend');
 export const Li = stylable<HTMLProps<HTMLLIElement>>('li');
+export const Main = stylable<HTMLProps<HTMLElement>>('main');
 export const Map = stylable<HTMLProps<HTMLMapElement>>('map');
 export const Mark = stylable<HTMLProps<HTMLElement>>('mark');
 export const Menu = stylable<HTMLProps<HTMLMenuElement>>('menu');

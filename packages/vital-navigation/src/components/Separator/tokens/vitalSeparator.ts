@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { asElementToken } from '@bodiless/vital-elements';
+import { asElementToken, vitalColor } from '@bodiless/vital-elements';
 import { as } from '@bodiless/fclasses';
 
 /**
@@ -27,7 +27,8 @@ const FooterMenu = asElementToken({
   },
   Theme: {
     _: as(
-      'border-white-400 border-b last:border-0',
+      vitalColor.BorderSecondarySeparator,
+      'border-b last:border-0',
       'md:border-b-0 md:border-r md:last:border-0',
     ),
   },

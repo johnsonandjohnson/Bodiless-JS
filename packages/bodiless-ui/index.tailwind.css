@@ -116,8 +116,8 @@
   cursor: auto;
 }
 
-.material-icons.md-36 { font-size: 36px; }
-
+.bl-large-icon { font-size: 36px; }
+.bl-small-icon { font-size: 24px; }
 
 /**
  * Bodiless Resizable Styles

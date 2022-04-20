@@ -67,8 +67,20 @@ const fooComponents: FooComponents = {
   Body: Fragment,
 };
 
-export default designable(fooComponents, 'Foo')(FooBase);
+const FooClean = designable(fooComponents, 'Foo')(FooBase);
+export default FooClean;
 export const asFooToken = asCxTokenSpec<FooComponents>();
+```
+
+If your component is *always* static, wrap it in `withoutHydration()` (or
+`withoutHydrationInline()` for components which produce inline elements):
+```
+export default withoutHydration()(FooClean);
+```
+
+If your component is *sometimes* static, export a similarly wrapped static version:
+```
+export const FooStatic = withoutHydration()(FooClean);
 ```
 
 ?> **Note:** In some cases, there will be no clean component; for example, if a package is merely
@@ -125,12 +137,10 @@ export { default as FooClean } from './FooClean';
 export { default as mybrandFoo } from './tokens';
 ```
 
-If your token collection is _sometimes_ static, export it from this file as an alternate version
-with the `Static` suffix:
+If your token collection is _sometimes_ static, export the static version:
 
 ```js
-export { default as FooStatic } from './FooClean';
-// Note this export will be shadowable.
+export { FooStatic } from './FooClean';
 export { default as mybrandFooStatic } from './tokens';
 ```
 

@@ -129,9 +129,9 @@ const FormMessages = ({ messageCode, messageData, ui } : MessageProps & PropsWit
             the check. Or, you can dismiss this dialogue and contact your development team for
             assistance.
           </ComponentFormWarning>
-          <div className="py-1 px-20">
+          <div className="bl-py-1 bl-px-20">
             Conflict pages:
-            {messageData.pages.length > 0 && <ul className="list-disc px-3">{pages}</ul> }
+            {messageData.pages.length > 0 && <ul className="bl-list-disc bl-px-3">{pages}</ul> }
             {messageData.site.length > 0 && <p>A change that affects multiple pages</p> }
           </div>
         </>

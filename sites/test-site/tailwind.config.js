@@ -674,6 +674,12 @@ const twConfig = {
 //   exclude: ['@bodiless/organisms', '@bodiless/accordion'],
 // });
 
+console.log(buildTailwindConfig({
+  twConfig,
+  resolver: (pkgName) => requireEsm.resolve(pkgName),
+  prefer: ['@sites/--minimal--'],
+}));
+
 module.exports = buildTailwindConfig({
   twConfig,
   resolver: (pkgName) => requireEsm.resolve(pkgName),

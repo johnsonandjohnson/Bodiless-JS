@@ -128,7 +128,7 @@ const withTokenEditorFlowContainerItem = (
         withDesign({
           // Counteract the white text of the context menu form.
           // @todo move this to bodiless layouts ui
-          Wrapper: addClasses('text-black'),
+          Wrapper: addClasses('bl-text-black'),
         }),
       ),
       {

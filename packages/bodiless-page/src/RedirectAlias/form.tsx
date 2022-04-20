@@ -128,7 +128,7 @@ const FormBodyBase = () => {
     ComponentFormCheckBox,
   } = useMenuOptionUI();
   const ComponentFormIsValid = flowHoc(
-    addClasses('hidden')
+    addClasses('bl-hidden')
   )(ComponentFormCheckBox);
   const ComponentFormTextAreaSize = flowHoc(
     removeClasses('bl-w-full bl-min-w-xl-grid-1 bl-min-h-grid-16'),
