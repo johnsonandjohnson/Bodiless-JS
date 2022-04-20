@@ -10,7 +10,7 @@ Using templates provides the following benefits:
 * A quick way to create similar style or layout of pages.
 * It allows control or governance over what the Content Editor can add, edit, and remove from the
   page.
-* It allows Site Builder to make future changes to all pages built off these templates, without
+* It allows the Site Builder to make future changes to all pages built off these templates, without
   editing each individual page.
 
 ## Brief Overview of Templates in the Vital Design System
@@ -28,6 +28,8 @@ templates are not yet available for use.
 
 As a Site Builder, you can create templates with defined items to allow general uniformity, and with
 Flow Containers within areas to allow flexibility to the Content Editor.
+
+![Default Template](../assets/default.jpg)
 
 The default template example above offers no governance and is a very flexible page for the Site
 Builder.
