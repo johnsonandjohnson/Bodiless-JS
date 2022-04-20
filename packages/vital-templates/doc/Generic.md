@@ -53,14 +53,29 @@ Example:
 ```js
 // Import the base collection.
 import { vitalGenericTemplateBase } from '@bodiless/vital-templates';
+import omit from 'lodash/omit';
 
-// Override one or more of the tokens in the base collection.
-const SomeToken = asGenericTemplateToken(vitalGenericTemplateBase.SomeToken, { ... });
+// Example 1
+//   Make bottom content full-width.
+const Default = asGenericTemplateToken({
+  ...vitalGenericTemplateBase.Default,
+  Spacing: omit(vitalGenericTemplateBase.Default.Spacing, 'BottomContent'),
+});
+
+// Example 2
+//   Make main content into a Rich Text Editor instead of a Flow Container.
+const Default = asGenericTemplateToken({
+  ...vitalGenericTemplateBase.Default,
+  Components: {
+    ...vitalGenericTemplateBase.Default.Components,
+  },
+  Content: on(RichTextClean)(vitalRichText.Default),
+});
 
 // Default export is the overridden token collection.
 export default {
   ...vitalGenericTemplateBase,
-  SomeToken,
+  Default,
 };
 ```
 
