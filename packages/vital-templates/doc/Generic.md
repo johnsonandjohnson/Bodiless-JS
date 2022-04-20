@@ -44,8 +44,25 @@ const Default = asFluidToken({
 
 Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
 
-File to shadow:
-[`vitalGenericTemplate.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-templates/src/components/GenericTemplate/tokens/vitalGenericTemplate.ts ':target=_blank')
+File to shadow: `./lib/shadow/vital-templates/{MyGenericTemplate}.js`
+
+Example:
+
+**File: `./lib/shadow/vital-templates/{MyGenericTemplate}.js`**
+
+```js
+// Import the base collection.
+import { vitalGenericTemplateBase } from '@bodiless/vital-templates';
+
+// Override one or more of the tokens in the base collection.
+const SomeToken = asGenericTemplateToken(vitalGenericTemplateBase.SomeToken, { ... });
+
+// Default export is the overridden token collection.
+export default {
+  ...vitalGenericTemplateBase,
+  SomeToken,
+};
+```
 
 ## Architectural Details
 
