@@ -15,14 +15,7 @@ Using templates provides the following benefits:
 
 ## Brief Overview of Templates in the Vital Design System
 
-!> **IMPORTANT:** Please note that the _Product Detail Page_ and the _Product Listing Page_
-templates are not yet available for use.
-
 * [Generic Template](./Generic): A basic page with three slots for content and one for breadcrumbs.
-* [Product Detail Page](./ProductDetailPage): A page oriented to showcase a product and details
-  about the specific product.
-* [Product Listing Page](./ProductListingPage): A landing page allowing the user to interact with
-  and filter available products.
 
 ## Governance vs Flexibility of Templates
 
@@ -33,13 +26,6 @@ Flow Containers within areas to allow flexibility to the Content Editor.
 
 The default template example above offers no governance and is a very flexible page for the Site
 Builder.
-
-By contrast, the Product Detail Page above has strict enforcement and doesn't allow the Content
-Editor much variation at all. It defines the product image placement, title, and product detail
-headers — only allowing the Content Editor to modify the content. They have some flexibility at the
-bottom, where they can add different card components in the Flow Container area, but it's still
-restrictive. This allows quick product additions by Content Editor, as they only have to enter in
-the specific production information.
 
 Let's use an example of an article to create a template with some governance, but still a lot of
 flexibility. A template could be created that has two columns (two-thirds and one-third), where the
