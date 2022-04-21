@@ -1,0 +1,14 @@
+[
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "Footnote "
+      },
+      {
+        "text": "123",
+        "SuperScript": true
+      }
+    ]
+  }
+]

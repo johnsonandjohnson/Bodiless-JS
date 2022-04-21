@@ -65,7 +65,14 @@ const Input = withForwardedRef()('input');
 const UploadArea = () => (
   <div className="bl-font-bold bl-text-base bl-text-center">
     {`${FileUploadStrings.DragOrClickToUpload}`}
-    <span className="material-icons bl-w-full">cloud_upload</span>
+    <span className="bl-material-icons bl-w-full">cloud_upload</span>
+  </div>
+);
+
+const UploadDisabled = () => (
+  <div className="bl-font-bold bl-text-base bl-text-center">
+    {`${FileUploadStrings.UploadDisabled}`}
+    <span className="material-icons bl-w-full">cloud_off</span>
   </div>
 );
 const DragRejected = () => (
@@ -122,6 +129,7 @@ const fileUploadUI = {
   UploadTimeout,
   UploadFinished,
   UploadStatus,
+  UploadDisabled,
 };
 
 type UI = { [key: string]: object };

@@ -46,7 +46,7 @@ const PluginButton: ComponentType<Props> = props => {
 
   return (
     <StyledComponent {...rest}>
-      {children || <span className="material-icons bl-material-icons">{icon}</span>}
+      {children || <span className="bl-material-icons bl-text-gray-200">{icon}</span>}
     </StyledComponent>
   );
 };

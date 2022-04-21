@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.9](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.5...v1.0.0-beta.9) (2022-04-21)
+
+
+### Bug Fixes
+
+* **bodiless-page:** `Internal Server Error` message shows when there is an attempt to create already existing page ([#1607](https://github.com/johnsonandjohnson/bodiless-js/issues/1607)) ([bfe09ec](https://github.com/johnsonandjohnson/bodiless-js/commit/bfe09ec78f55cd0d8677cadb223c1f10c97f667e))
+* **bodiless-page:** `Internal Server Error` message shows when there is an attempt to create already existing page ([#1612](https://github.com/johnsonandjohnson/bodiless-js/issues/1612)) ([cc29b38](https://github.com/johnsonandjohnson/bodiless-js/commit/cc29b38fe57d26bc0463621925ff19b01723dc8d))
+* **bodiless-ui:** try find all missing bl- prefixes in editor  ([#1589](https://github.com/johnsonandjohnson/bodiless-js/issues/1589)) ([942cfd6](https://github.com/johnsonandjohnson/bodiless-js/commit/942cfd6dc522341a757f70b84cf6879f5690332b))
+
+
+### Features
+
+* Fully disable save by env var. ([#1600](https://github.com/johnsonandjohnson/bodiless-js/issues/1600)) ([b19cd73](https://github.com/johnsonandjohnson/bodiless-js/commit/b19cd73422bcbb5e82125c4936b7aeb0c7c9cc7e)), closes [#1479](https://github.com/johnsonandjohnson/bodiless-js/issues/1479) [#1522](https://github.com/johnsonandjohnson/bodiless-js/issues/1522) [#1479](https://github.com/johnsonandjohnson/bodiless-js/issues/1479)
+
+
+
+
+
 # [1.0.0-beta.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.5...v1.0.0-beta.7) (2022-04-13)
 
 **Note:** Version bump only for package @bodiless/page

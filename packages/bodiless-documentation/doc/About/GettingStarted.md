@@ -4,30 +4,29 @@
 
 Ensure you have the following installed locally:
 - NodeJS: https://nodejs.org/en/download/
-  - We are currently using the LTS version 16.9.
-  - We use `npm` (v7) as a package manager. If you prefer `yarn` feel free to try it. YMMV.
+  - We are currently using the LTS version 16.9+
+  - We use `npm` (v7+) as a package manager. If you prefer `yarn` feel free to
+    try it. YMMV.
 
 ## Creating a New Site
 
-BodilessJS provides a Gatsby starter you can use as the basis of a new site. Currently, you must
-install it from this repository as follows:
+BodilessJS provides a CLI tool for creating a new site from a template.
 
 ```bash
-git clone https://github.com/johnsonandjohnson/bodiless-js.git
-cd bodiless-js
-npm ci
-npm run new /path/to/new/site
+npx @bodiless/cli new
 ```
 
-This will create a new git repository at the specified location (which defaults
-to `~/gatsby-starter-bodiless`), copy the starter, and install all dependencies.
+This will walk you through the process of creating a new bodiless site locally.  It will prompt you for the name of the new site, the path
+to the directory in which you want to create it, and the starter
+template you wish to use.  The following templates are available:
 
-> Note: You should avoid creating a new site in the monorepo, except in the /sites
-directory if you intend to check it against local packages.
+- `__minimal__`; The bare bones needed to start creating a Bodiless site.
+- `__vital__`: A more full-featured starter based on the vital design system.
+  This is a highly extensible and custokmizable set of components enabling very rapid creation of marketing websites. 
 
 You can then launch the editor:
 
-```
+```sh
 cd /path/to/new/site
 npm start
 ```
@@ -45,7 +44,6 @@ npm run serve
 
 Visit http://localhost:9000/ in your browser to view the site.
 
-> Note: Official Gatsby Stater (installable via `gatsby new`) is coming soon!
 
 ## Exploring and Developing *BodilessJS*
 
@@ -66,7 +64,7 @@ npm run setup
 ### Launch the Test Site
 
 ```
-cd examples/test-site
+cd sites/test-site
 npm run start
 ```
 This will build all packages in watch mode and then start `gatsby develop` on the test site.  You
@@ -104,3 +102,39 @@ Visit http://localhost:9000/ in your browser to view the site.
 - [Understand our Platform Architecture](../Development/Architecture/Data).
 
 
+## Troubleshooting Setup
+
+### Error occurred: fatal: 'origin' does not appear to be a git repository
+
+You may see this error in the console after starting the new site. This is because you
+have not configured an 'origin' git remote.  To fix it, add one:
+```
+git remote add origin {url-of-your-remote}
+```
+Note that you don't have to do this -- the application will still function locally
+even though these errors are printed to the console.
+
+### Failures trying to use globally installed `libvips`
+
+Depending on your system configuration, the installer may try to build libvips from
+source, which will usually fail.  Example error:
+```
+erna ERR! npm install --legacy-peer-deps exited 1 in 'canvasx-monorepo'
+lerna ERR! npm install --legacy-peer-deps stderr:
+npm ERR! code 1
+npm ERR! path .../node_modules/sharp
+npm ERR! command failed
+npm ERR! command sh -c (node install/libvips && node install/dll-copy && prebuild-install) || (node install/can-compile && node-gyp rebuild && node install/dll-copy)
+npm ERR! sharp: Detected globally-installed libvips v8.12.1
+npm ERR! sharp: Building from source via node-gyp
+npm ERR!   CC(target) Release/obj.target/nothing/../node-addon-api/nothing.o
+npm ERR!   LIBTOOL-STATIC Release/nothing.a
+npm ERR! gyp info it worked if it ends with ok
+...
+npm ERR! gyp ERR! build error 
+npm ERR! gyp ERR! stack Error: `make` failed with exit code: 2
+```
+Try removing the globally installed libvips and running again, or try 
+```
+.SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm run setup
+```

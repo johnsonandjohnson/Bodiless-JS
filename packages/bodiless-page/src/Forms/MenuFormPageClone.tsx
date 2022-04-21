@@ -48,10 +48,11 @@ const clonePage = async ({ origin, destination, client } : any) => {
     }
     return Promise.resolve(destination);
   }
-  if (result.message) {
-    return Promise.reject(new Error(result.message));
-  }
-  return Promise.reject(new Error('An internal error occurred. Please try again later.'));
+  // @todo: in case of response `false`, use following msg to cover cases.
+  // refactoring once @bodiless/backend via Gatsby proxy HTTPError issue fixed.
+  const errorMessage = `Something happened. Please verify page does not already
+    exist, and try again. If problem persists, contact a developer.`;
+  return Promise.reject(new Error(errorMessage));
 };
 
 const menuFormPageClone = (client: PageClient) => contextMenuForm({

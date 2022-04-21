@@ -1,0 +1,31 @@
+name: edit
+type: 'nodejs:16'
+disk: 12288
+resources:
+  base_memory: 1024
+  memory_ratio: 1024
+dependencies:
+  nodejs:
+    pm2: ^5.1.2
+mounts:
+  volume:
+    source: local
+    source_path: volume
+web:
+  commands:
+    start: |
+      bash ./platform.sh start
+build:
+  flavor: none
+hooks:
+  build: |
+    bash ./platform.sh build
+  deploy: |
+    bash ./platform.sh deploy
+  post_deploy: |
+    bash ./platform.sh post-deploy
+variables:
+  env:
+    APP_VOLUME: /app/volume
+    CHOKIDAR_USEPOLLING: true
+    APP_SITE_NAME: test-site

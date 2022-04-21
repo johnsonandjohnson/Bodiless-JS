@@ -60,7 +60,10 @@ const Base = asFooterToken({
   },
   Theme: {
     RewardsWrapper: 'bg-vital-primary-card-bg md:bg-vital-secondary-footer-bg',
-    Copyright: 'border-white-400 border-t border-b md:border-0',
+    Copyright: as(
+      vitalColor.BorderSecondarySeparator,
+      'border-t border-b md:border-0',
+    ),
     Wrapper: vitalColor.BgSecondaryFooter,
   },
   Editors: {

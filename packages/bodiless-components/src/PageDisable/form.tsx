@@ -110,7 +110,7 @@ const FormBodyBase = () => {
             />
             Page
           </ComponentFormLabel>
-          <ComponentFormFieldWrapper className="pl-5">
+          <ComponentFormFieldWrapper className="bl-pl-5">
             <ComponentFormLabel>
               <ComponentFormCheckBox keepState field="menuLinksDisabled" onChange={toggleOffPageCheckbox} />
               Menu links
@@ -205,6 +205,11 @@ const Form = (props: ContextMenuFormProps) => (
 const useMenuOptions = (): TMenuOption[] => {
   const { node } = useNode();
   const context = useEditContext();
+  const saveEnabled = (process.env.BODILESS_BACKEND_SAVE_ENABLED || '1') === '1';
+  const isDisabled = useCallback(
+    () => !context.isEdit || !saveEnabled,
+    []
+  );
   const render = (props: ContextMenuFormProps) => <Form {...props} />;
   const menuOptions$: TMenuOption[] = [
     {
@@ -213,8 +218,8 @@ const useMenuOptions = (): TMenuOption[] => {
       label: 'Disable',
       group: 'page-group',
       isActive: useIsAnyPageOptionDisabled(node),
-      isHidden: useCallback(() => !context.isEdit, []),
-      handler: () => render,
+      isDisabled,
+      handler: () => (isDisabled() ? null : render),
     },
   ];
   return menuOptions$;

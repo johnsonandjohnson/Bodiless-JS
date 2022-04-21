@@ -12,17 +12,16 @@
  * limitations under the License.
  */
 import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
+import { vitalMetaHelmet } from '@bodiless/vital-meta';
 import { as } from '@bodiless/fclasses';
 import { asHelmetToken } from '../HelmetClean';
 
 const Default = asHelmetToken({
   Components: {
-    /*
-    SeoHelmet: TBD,
-    SocialShareHelmet: TBD,
-    LanguageHelmet: TBD,
-    GtmHelmet: TBD,
-    */
+    SeoHelmet: vitalMetaHelmet.SEO,
+    SocialShareHelmet: vitalMetaHelmet.Share,
+    // LanguageHelmet: TBD,
+    // GtmHelmet: TBD,
   },
   Theme: {
     HTMLHelmet: as(
