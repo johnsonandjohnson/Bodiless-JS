@@ -54,6 +54,8 @@ check_vars () {
     -o -z "${APP_GIT_PW}" \
     -o -z "${PLATFORM_APP_DIR}" \
     -o -z "${PLATFORM_BRANCH}" \
+    -o -z "${APP_SITE_NAME}" \
+    -o -z "${APP_SITE_DIR_NAME}" \
   ]; then
     echo Missing required environment variables.
     exit 1
