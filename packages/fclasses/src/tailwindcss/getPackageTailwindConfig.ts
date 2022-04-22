@@ -86,8 +86,11 @@ export const getPackageTailwindConfig: GetPackageTailwindConfig = props => {
   } = props;
   try {
     const pkgPath = join(resolver('./package.json'), '..');
+    console.log(pkgPath);
     const pkgJson = require(join(pkgPath, 'package.json'));
+    console.log(pkgJson.dependencies);
     const deps = Object.keys(pkgJson.dependencies);
+    console.log('deps', deps);
     const startingConfig: Config[] = twConfig === undefined ? [] : [{
       name: pkgJson.name,
       root: pkgPath,

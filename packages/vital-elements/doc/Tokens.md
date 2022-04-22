@@ -330,7 +330,7 @@ import { brandLink } from '@canvasx/brand';
 const Base = {
   ...brandLink.Base,
   Theme: {
-    Wrapper: addClasses('text-purple'),
+    Wrapper: addClasses('text-violet'),
   },
 };
 export const siteLink = {

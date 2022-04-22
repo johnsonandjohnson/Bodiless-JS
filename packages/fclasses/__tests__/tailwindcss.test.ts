@@ -41,7 +41,8 @@ describe('tailwindcss', () => {
       };
       const expected = {
         content: [
-          './src/**/!(*.d).{ts,js,jsx,tsx}',
+          // @todo: see github issue #1584: Demo site content changes causing HMR bundle rebuild
+          // './src/**/!(*.d).{ts,js,jsx,tsx}',
           'packageA',
           'packageB1',
           'packageB2'

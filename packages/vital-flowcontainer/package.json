@@ -46,6 +46,7 @@
     "@bodiless/vital-editors": "^1.0.0-beta.7",
     "@bodiless/vital-elements": "^1.0.0-beta.7",
     "@bodiless/vital-image": "^1.0.0-beta.7",
+    "@bodiless/vital-list": "^1.0.0-beta.7",
     "lodash": "^4.17.19"
   }
 }

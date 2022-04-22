@@ -44,7 +44,7 @@ const withoutHydrationServerSide: WithoutHydrationFunction = (
 ) => WrappedComponent => props => {
   const id = useWrapperId(props);
   return (
-    <WrapperElement data-no-hydrate id={id}>
+    <WrapperElement data-no-hydrate id={id} style={{ display: 'contents' }}>
       <WrappedComponent {...props} />
     </WrapperElement>
   );
@@ -98,6 +98,7 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: markup }}
           suppressHydrationWarning
+          style={{ display: 'contents' }}
         />
       );
     }

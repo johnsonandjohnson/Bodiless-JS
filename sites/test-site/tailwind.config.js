@@ -13,15 +13,22 @@
  */
 const requireEsm = require('esm')(module);
 const tailwindcssDir = require('tailwindcss-dir')();
+const glob = require('glob');
+
+const content = glob.sync(
+  './src/**/!(*.d).{ts,js,jsx,tsx}'
+);
 
 const { buildTailwindConfig } = requireEsm(
   '@bodiless/fclasses'
 );
 
 const twConfig = {
-  content: [
-    './src/**/!(*.d).{ts,js,jsx,tsx}',
-  ],
+  // @todo: workaround for https://github.com/johnsonandjohnson/Bodiless-JS/issues/1584
+  // content: [
+  //   './src/**/!(*.d).{ts,js,jsx,tsx}',
+  // ],
+  content,
   /*
   New for V1 - the legacy 'options' is now top-level
   */
@@ -666,6 +673,12 @@ const twConfig = {
 //   prefer: ['@bodiless/test-site', '@bodiless/some-package-name'],
 //   exclude: ['@bodiless/organisms', '@bodiless/accordion'],
 // });
+
+console.log(buildTailwindConfig({
+  twConfig,
+  resolver: (pkgName) => requireEsm.resolve(pkgName),
+  prefer: ['@sites/--minimal--'],
+}));
 
 module.exports = buildTailwindConfig({
   twConfig,

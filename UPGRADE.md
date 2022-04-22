@@ -46,8 +46,8 @@ Gatsby-theme-bodiless
 * Automatic transforms and filters -- left usage as they said it was harmless..
 * Color palette changes -- 
 ** replaced -green- with -emerald-
-** replaced -yellow- with -amber-
-** repleaced -violet- with -violet-
+** replaced -yellow- with -amber-   -- no usage -- site & bodiless define their own yellow color
+** repleaced -purple- with -violet-
 ** left -gray- as -gray....
 * Class name changes -- 
 ** overflow-clip with text-clip

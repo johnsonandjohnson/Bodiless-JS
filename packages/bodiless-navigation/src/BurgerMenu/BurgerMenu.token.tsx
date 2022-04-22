@@ -19,7 +19,7 @@ import {
 import { useIsBurgerMenuVisible, useIsBurgerTransitionCompleted } from './BurgerMenuContext';
 import {
   withLightGrayBg, withNoInsetStyles, withFullWidthStyles, withFullHeightStyles,
-  asFixed, withFullZIndex, withMaterialIconsFont, withPointerCursorStyles, asDisabled,
+  asFixed, withFullZIndex, withPointerCursorStyles, asDisabled,
 } from '../token';
 
 const withSlideInOutAnimation = withDesign({
@@ -52,13 +52,12 @@ const withDefaultBackground = withDesign({
 
 /**
  * A HOC that adds styles to the Button component of Burger Menu Toggler.
- * Adds a material-icon class and pointer styles.
+ * Adds pointer styles.
  *
  * @return HOC that adds styles to the Button component.
  */
 const withBurgerMenuTogglerStyles = withDesign({
   Button: flowHoc(
-    withMaterialIconsFont,
     withPointerCursorStyles,
   ),
 });

@@ -1,0 +1,17 @@
+[
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "This list is "
+      },
+      {
+        "text": "default",
+        "Bold": true
+      },
+      {
+        "text": " list"
+      }
+    ]
+  }
+]

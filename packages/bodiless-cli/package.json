@@ -28,8 +28,10 @@
     "access": "public"
   },
   "scripts": {
+    "bl": "./bin/bodiless",
     "build": "tsc --version && tsc -p ./tsconfig.json ",
     "build:watch": "npm run build -- --watch",
+    "new": "./bin/bodiless new",
     "postpack": "rimraf oclif.manifest.json",
     "prepack": "rimraf lib && npm run build && oclif-dev manifest && oclif-dev readme",
     "test": "echo \"Error: run tests from root\" && exit 1"
@@ -38,20 +40,31 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
-    "@types/fs-extra": "^8.0.0",
-    "@types/lodash": "^4.14.158",
-    "@types/lodash.flow": "^3.5.6",
+    "@root/walk": "1.1.0",
     "dotenv": "^8.2.0",
+    "find-git-root": "1.0.4",
     "find-up": "^4.1.0",
     "fs-extra": "^8.1.0",
     "globby": "^10",
+    "inquirer": "^8.2.1",
     "isomorphic-git": "^1.10.1",
     "lodash": "^4.17.19",
+    "ora": "^4.0.2",
+    "replace-in-file": "^6.2.0",
+    "semver": "^7.3.5",
+    "tar": "^6.1.11",
+    "uuid": "^3.3.2",
     "walkdir": "^0.4.1"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
-    "@types/node": "^16"
+    "@types/fs-extra": "^8.0.0",
+    "@types/inquirer": "^6.5.0",
+    "@types/lodash": "^4.14.158",
+    "@types/lodash.flow": "^3.5.6",
+    "@types/node": "^16",
+    "@types/semver": "5.5.0",
+    "@types/tar": "^6.1.1"
   },
   "oclif": {
     "commands": "./lib/commands",

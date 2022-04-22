@@ -67,7 +67,7 @@ const asAccordionDefaultExpanded = flowHoc(
  * as well as accessibility label support
  */
 const asAccordionIcon = flowHoc(
-  addClasses('material-icons cursor-pointer right-0'),
+  addClasses('cursor-pointer right-0'),
   addProps({ 'data-accordion-element': 'accordion-icon' }),
   addPropsIf(isAccordionContracted)({ 'aria-label': 'Expand Accordion' }),
   addPropsIf(isAccordionExpanded)({ 'aria-label': 'Collapse Accordion' }),
