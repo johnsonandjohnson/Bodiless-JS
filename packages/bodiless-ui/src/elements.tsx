@@ -54,7 +54,7 @@ export const Option = stylable<ChildFieldProps<any, any>>(BaseOption);
 export const Anchor = stylable<HTMLProps<HTMLAnchorElement>>('a');
 
 export const Icon = flow(
-  addClasses('bl-p-grid-1 material-icons'),
+  addClasses('bl-p-grid-1 bl-material-icons'),
   withoutProps<ButtonVariantProps>(['isActive']),
   flowIf(hasProp('isActive'))(
     addClasses('bl-bg-primary bl-rounded'),
@@ -83,7 +83,7 @@ export const ComponentFormListItem = addClasses(
 )(Li);
 
 export const ComponentFormList = addClasses(
-  'list-none bl-max-h-xl-grid-1 bl-overflow-y-scroll',
+  'bl-list-none bl-max-h-xl-grid-1 bl-overflow-y-scroll',
 )(Ul);
 
 export const ComponentFormLabel = addClasses(
@@ -95,7 +95,7 @@ export const ComponentFormText = addClasses(
 )(Text);
 
 export const ComponentFormTextArea = addClasses(
-  'bl-text-gray-900 bl-bg-gray-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-min-h-grid-16 bl-block bl-my-grid-2 bl-p-grid-1 bl-resize-none overflow-auto whitespace-pre',
+  'bl-text-gray-900 bl-bg-gray-100 bl-text-xs bl-w-full bl-min-w-xl-grid-1 bl-min-h-grid-16 bl-block bl-my-grid-2 bl-p-grid-1 bl-resize-none bl-overflow-auto bl-whitespace-pre',
 )(TextArea);
 
 export const ComponentFormRadioGroup = addClasses(
@@ -103,11 +103,11 @@ export const ComponentFormRadioGroup = addClasses(
 )(RadioGroup);
 
 export const ComponentFormRadio = addClasses(
-  'bl-mr-grid-2 bl-mb-grid-2 align-baseline',
+  'bl-mr-grid-2 bl-mb-grid-2 bl-align-baseline',
 )(Radio);
 
 export const ComponentFormCheckBox = addClasses(
-  'bl-mr-grid-2 bl-mb-grid-2 align-baseline',
+  'bl-mr-grid-2 bl-mb-grid-2 bl-align-baseline',
 )(CheckBox);
 
 export const ComponentFormSelect = addClasses(
@@ -147,7 +147,7 @@ export const SubmitButton: FC<HTMLProps<HTMLButtonElement> & StylableProps> = pr
 
 export const ToolbarIcon = flow(
   removeClasses('bl-p-grid-1'),
-  addClasses('bl-w-grid-8 bl-h-grid-8 md-36'),
+  addClasses('bl-w-grid-8 bl-h-grid-8 bl-large-icon'),
 )(Icon);
 
 export const ToolbarButton = flow(
@@ -191,7 +191,7 @@ export const ContextSubMenu = flow(
 )(Div);
 
 export const Warning = flow(
-  addClasses('bl-w-grid-7 bl-text-yellow-500'),
+  addClasses('bl-w-grid-7 bl-text-amber-500'),
 )((props: JSX.IntrinsicAttributes) => (
   <Icon {...props}>report_problem_outlined</Icon>
 ));

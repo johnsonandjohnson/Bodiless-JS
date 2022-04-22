@@ -17,10 +17,9 @@ import flatten from 'lodash/flatten';
 import path from 'path';
 
 type TailwindConfig = {
-  purge?: string[],
+  content?: string[],
   theme?: object,
   plugins?: string[],
-  variants?: object,
 };
 
 type Package = {
@@ -32,9 +31,9 @@ const getTailwindConfigs = (packages: Package[]) => packages
   .map(({ root, tailwindConfig }) => ({
     ...tailwindConfig,
     ...(
-      tailwindConfig.purge !== undefined && Array.isArray(tailwindConfig.purge)
+      tailwindConfig.content !== undefined && Array.isArray(tailwindConfig.content)
         ? {
-          purge: tailwindConfig.purge.map((rule: string) => path.join(root, rule)),
+          content: tailwindConfig.content.map((rule: string) => path.join(root, rule)),
         }
         : {}
     ),
@@ -46,16 +45,15 @@ const mergeConfigs = (
 ) => {
   const packageConfigs = getTailwindConfigs(packages);
   return {
-    // purge setting
-    purge: [
-      './src/**/!(*.d).{ts,js,jsx,tsx}',
-      ...flatten(merge(packageConfigs).map((config: TailwindConfig) => config.purge)),
+    // content setting
+    content: [
+      // @todo: workaround for https://github.com/johnsonandjohnson/Bodiless-JS/issues/1584
+      // './src/**/!(*.d).{ts,js,jsx,tsx}',
+      ...flatten(merge(packageConfigs).map((config: TailwindConfig) => config.content)),
     ],
     // theme setting
     // dummy first argument because of https://github.com/microsoft/TypeScript/issues/28010#issuecomment-713484584
     theme: merge({}, ...packageConfigs).theme,
-    // variants setting
-    variants: merge({}, ...packageConfigs).variants,
     // plugins setting
     plugins: [
       ...flatten(

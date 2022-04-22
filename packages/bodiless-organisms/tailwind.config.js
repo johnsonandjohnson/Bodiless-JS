@@ -14,10 +14,15 @@
  */
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
+/**
+ * contains package level tailwind configuration
+ * the package does not perform tailwind compilation
+ * site is responsible for merging these settings into site level settings
+ */
 const resolver = (pkgName) => require.resolve(pkgName);
 
 const twConfig = {
-  purge: [
+  content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {
@@ -29,7 +34,6 @@ const twConfig = {
       '21/9': [21, 9],
     },
   },
-  variants: {},
   plugins: [
     // eslint-disable-next-line
     require('tailwindcss-aspect-ratio'),

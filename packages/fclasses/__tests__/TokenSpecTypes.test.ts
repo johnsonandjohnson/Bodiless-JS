@@ -36,7 +36,7 @@ import {
 //   C extends DesignableComponents,
 //   D extends Domains<C>,
 // >() => <S extends Partial<D & ReservedDomains<C, D>>>(
-//     // s: Pick<TokenSpecIn<C, D>, K>
+//     // s: Pick<FinalDomains<C, D>, K>
 //     // s: { [k in K]: Design<C> }
 //     s: S,
 //   ): S & { [$TokenSpec]: true } => s as any;
@@ -94,10 +94,9 @@ describe('Fixed type tokens', () => {
   // Creates a token with known properties
   t.Meta;
   t.Theme;
+  t.Layout;
   // @ts-expect-error Globally undefined domain
   t.Foo;
-  // @ts-expect-error Domain which does not exist on this specific token.
-  t.Layout;
 
   // Allows all valid domains
   asTestToken({
@@ -248,10 +247,9 @@ describe('fluid tokens', () => {
   // Creates a token with known properties
   t.Meta;
   t.Theme;
+  t.Layout;
   // @ts-expect-error Globally undefined domain
   t.Foo;
-  // @ts-expect-error Domain which does not exist on this specific token.
-  t.Layout;
 
   // Allows all valid domains
   asTestToken({
@@ -310,9 +308,10 @@ describe('fluid tokens', () => {
     },
   });
 
-  // Allows tokens in Compose to have any design keys.
+  // Does not allow partial domains in compose
   asTestToken({
     Compose: {
+      // @ts-expect-error
       Composed: {
         [$TokenSpec]: true,
         Theme: {

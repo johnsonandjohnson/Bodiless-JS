@@ -1,0 +1,94 @@
+{
+  "id": "card",
+  "title": "Card",
+  "description": "",
+  "statuses": {},
+  "templates": [
+    {
+      "id": "bodiless",
+      "title": "bodiless",
+      "path": "@bodiless/card",
+      "alias": "cardSpec",
+      "templateLanguageId": "bodiless",
+      "spec": {
+        "isInferred": true
+      },
+      "demosById": {
+        "main": {
+          "id": "main",
+          "title": "Main",
+          "type": "data",
+          "data": {
+            "props": {
+              "Variants": {
+                "Default": true,
+                "MainMenu": false
+              },
+              "Structure": {},
+              "Orientation": {},
+              "Color": {},
+              "Spacing": {
+                "WithPaddings": false
+              }
+            },
+            "slots": {},
+            "extras": {
+              "title": {
+                "text": "This is a whole title"
+              },
+              "body": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Hello World!"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      "demos": ["main"],
+      "slices": []
+    }
+  ],
+  "tabs": [
+    {
+      "type": "subPage",
+      "id": "overview"
+    },
+    {
+      "type": "template",
+      "id": "bodiless"
+    }
+  ],
+  "subPages": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "slices": [
+        {
+          "id": "ks-content-block-XVCtCyiVca",
+          "blockId": "pattern-template-slice",
+          "data": {
+            "templateId": "bodiless",
+            "hideControls": false,
+            "playgroundUi": {
+              "showSchemaForm": false,
+              "showCodeSnippet": false,
+              "demoSize": "landscape"
+            },
+            "showCodeSnippet": false,
+            "showSchemaForm": false,
+            "demoSize": "landscape",
+            "patternId": "card",
+            "demoId": "main"
+          }
+        }
+      ]
+    }
+  ],
+  "demoSize": "landscape"
+}

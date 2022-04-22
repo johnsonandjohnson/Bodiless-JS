@@ -135,7 +135,7 @@ const asTextRed = flowHoc(
 // asTextRed.meta = { categories: { TextColor: ['Red'] } };
 
 const asBgYellow = flowHoc(
-  addClasses('bg-yellow-500'),
+  addClasses('bg-amber-500'),
   { categories: { BgColor: ['Yellow'] } },
 )
 
@@ -153,7 +153,7 @@ Then
 
 ```js
 
-<Header1 /> === <h1 className="text-blue bg-yellow-500 font-bold" />
+<Header1 /> === <h1 className="text-blue bg-amber-500 font-bold" />
 
 // The component itself includes aggregated metadata from all composed tokens...
 Header1.categories === {
@@ -189,7 +189,7 @@ const RedHeader1 = asRedHeader1(H1);
 then
 
 ```jsx
-<RedHeader1 /> === <h1 className="font-bold text-red-500 bg-yellow-500" />
+<RedHeader1 /> === <h1 className="font-bold text-red-500 bg-amber-500" />
 
 // Our new token has the metadata of `asHeader1` only because we propagated it explicitly.
 asRedHeader1.meta === {
@@ -604,7 +604,7 @@ const ToggleContextProvider: FC = ({ children }) => {
 
 const Toggle = ({ children, ...rest }) => <Button {...rest} onClick={useToggle()}>{children || 'Click Me'}</Button>;
 
-const StyledToggle = addClassesIf(useIsToggled)('bg-green-200')(Toggle);
+const StyledToggle = addClassesIf(useIsToggled)('bg-emerald-200')(Toggle);
 ```
 Here we pass a custom hook (`useIsToggled`) to `addClassesIf`. This hook consumes
 the toggle state from the context, and applies the classes only if toggled on.
@@ -616,7 +616,7 @@ component conditioonally:
 
 ```js
 const StyledToggle = flowHoc(
-  addClassesIf(useIsToggled)('bg-green-200'),
+  addClassesIf(useIsToggled)('bg-emerald-200'),
   addPropsIf(useIsToggled)({ children: 'On' }),
   addPropsIf(() => !useIsToggled())({ children: 'Off' }),
 );
@@ -631,7 +631,7 @@ example could be rewritten using a flow toggle as:
 ```js
 const StyledToggle = flowHoc(
   flowIf(useIsToggled)(
-    addClasses('bg-green-200'),
+    addClasses('bg-emerald-200'),
     addProps({ children: 'On' }),
   ),
   flowIf(() => !useIsToggled)(
@@ -665,11 +665,11 @@ const Toggle = ({ children, ...rest }) => {
 ```
 Now compare
 ```js
-const StyledToggle = flowIf(useIsToggled)(addClasses('bg-green-200'))(Toggle);
+const StyledToggle = flowIf(useIsToggled)(addClasses('bg-emerald-200'))(Toggle);
 ```
 with
 ```js
-const StyledToggle = addClassesIf(useIsToggled)('bg-green-200')(Toggle);
+const StyledToggle = addClassesIf(useIsToggled)('bg-emerald-200')(Toggle);
 ```
 The first will lose the counter state every time the button is clicked, while
 the second will properly retain it.

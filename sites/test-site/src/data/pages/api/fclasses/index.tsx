@@ -53,6 +53,8 @@ const Button: FC = props => {
 };
 
 const StyledButton = flowHoc(
+  // Not converting to tailwind 3.0 bg-emerald-200 as test site
+  // overides all colors in tailwind theme.
   addClassesIf(isToggled)('bg-green-200'),
   addClasses('border p-2 my-2'),
 )(Button);

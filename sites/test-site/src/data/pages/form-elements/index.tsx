@@ -128,7 +128,7 @@ export default (props: any) => (
   <ExampleFormButtonProvider>
     <Page {...props}>
       <Layout>
-        <h1 className="bl-p-8">
+        <h1 className="p-8">
           Click the &apos;Test&lsquo; button in the toolbar in order to see the example form.
         </h1>
       </Layout>

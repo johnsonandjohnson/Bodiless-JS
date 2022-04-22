@@ -15,7 +15,7 @@
 import React, { HTMLProps, FC } from 'react';
 
 const DragHandle: FC<HTMLProps<HTMLSpanElement>> = () => (
-  <span className="bl-absolute bl--top-grid-4 bl-text-2xl material-icons bl-cursor-move bl-text-primary">
+  <span className="bl-absolute bl--top-grid-4 bl-text-2xl bl-material-icons bl-cursor-move bl-text-primary">
     drag_handle
   </span>
 );

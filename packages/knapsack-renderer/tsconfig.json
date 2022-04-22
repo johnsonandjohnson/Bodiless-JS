@@ -1,0 +1,9 @@
+{
+  "extends": "@knapsack/typescript-config-starter/tsconfig.build.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "noImplicitAny": true,
+    "outDir": "./dist"
+  },
+  "include": ["./src"]
+}

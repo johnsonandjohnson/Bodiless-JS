@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/gatsby-plugin-ssi",
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.7",
   "description": "Gatsby plugin to add SSI elements onto a site.",
   "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
   "license": "Apache-2.0",
@@ -23,7 +23,7 @@
     "replace-in-file": "^6.2.0"
   },
   "peerDependencies": {
-    "gatsby": "~3.13.0",
+    "gatsby": "^4.11.2",
     "react": "^17.0.2"
   }
 }

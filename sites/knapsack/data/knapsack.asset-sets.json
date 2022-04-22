@@ -1,0 +1,28 @@
+{
+  "$schema": "https://unpkg.com/@knapsack/types@3.24.12/json-schemas/schemaKnapsackAssetSetsConfig.json",
+  "globalAssetSetIds": ["editable", "non-editable"],
+  "allAssetSets": {
+    "editable": {
+      "id": "editable",
+      "title": "Editable",
+      "inlineCss": "",
+      "inlineJs": "document.body.setAttribute('ks-renderer-bodiless-is-editable', 'yes')",
+      "assets": [
+        {
+          "src": "../css/google-fonts.css"
+        }
+      ]
+    },
+    "non-editable": {
+      "id": "non-editable",
+      "title": "Non-Editable",
+      "inlineCss": "",
+      "inlineJs": "document.body.setAttribute('ks-renderer-bodiless-is-editable', 'no')",
+      "assets": [
+        {
+          "src": "../css/google-fonts.css"
+        }
+      ]
+    }
+  }
+}

@@ -110,7 +110,7 @@ const FormBodyBase = () => {
             />
             Page
           </ComponentFormLabel>
-          <ComponentFormFieldWrapper className="pl-5">
+          <ComponentFormFieldWrapper className="bl-pl-5">
             <ComponentFormLabel>
               <ComponentFormCheckBox keepState field="menuLinksDisabled" onChange={toggleOffPageCheckbox} />
               Menu links
