@@ -126,7 +126,7 @@ export const ComponentFormUnwrapButton = addClasses(
 )(Button);
 
 export const ComponentFormCloseButton = flow(
-  addClasses('hover:bl-text-red bl-float-right'),
+  addClasses('hover:bl-text-gray-500 bl-float-right'),
   withChild(() => <Icon className="bl-small-icon">highlight_off</Icon>),
 )(ComponentFormButton);
 
