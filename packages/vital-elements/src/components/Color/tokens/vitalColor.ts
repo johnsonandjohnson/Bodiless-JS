@@ -36,4 +36,5 @@ export default asTokenGroup(meta)({
   BgSecondaryFooter: 'bg-vital-secondary-footer-bg',
   TextPrimaryFooterCopy: 'text-vital-primary-footer-copy',
   TextSecondaryEyebrow: 'text-vital-secondary-eyebrow',
+  BorderSecondarySeparator: 'border-vital-secondary-separator',
 });

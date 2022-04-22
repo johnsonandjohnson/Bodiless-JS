@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.9](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.5...v1.0.0-beta.9) (2022-04-21)
+
+
+### Bug Fixes
+
+* **tailwindcss, fclasses:** Demo site content changes causing HMR bundle rebuild on edit env ([4b6fa0e](https://github.com/johnsonandjohnson/bodiless-js/commit/4b6fa0eda18d36b49d3a4c567ce52cb138457ef0))
+* **test-site, GatsbyLink:** There is a runtime error when clicking Logo after opening Email on /social-share/ ([#1602](https://github.com/johnsonandjohnson/bodiless-js/issues/1602)) ([d12134a](https://github.com/johnsonandjohnson/bodiless-js/commit/d12134acbfdf6dbccad695c0e6d71a9bac804552))
+* **test-site:** restore focus on search input. ([7be2f1c](https://github.com/johnsonandjohnson/bodiless-js/commit/7be2f1c61f19181e9d13414f0dfc1e12d29ac9ee))
+* **test-site:** use test site colors ([#1576](https://github.com/johnsonandjohnson/bodiless-js/issues/1576)) ([c7f7f48](https://github.com/johnsonandjohnson/bodiless-js/commit/c7f7f4869a17e57a186e0d7053cbf64781c0916a))
+
+
+### Features
+
+* **cli:** Bodiless new ([#1568](https://github.com/johnsonandjohnson/bodiless-js/issues/1568)) ([3bc0e2c](https://github.com/johnsonandjohnson/bodiless-js/commit/3bc0e2c8e06fe78751c0712d7e1d3cfb8d1fb04d)), closes [#1520](https://github.com/johnsonandjohnson/bodiless-js/issues/1520)
+* Fully disable save by env var. ([#1600](https://github.com/johnsonandjohnson/bodiless-js/issues/1600)) ([b19cd73](https://github.com/johnsonandjohnson/bodiless-js/commit/b19cd73422bcbb5e82125c4936b7aeb0c7c9cc7e)), closes [#1479](https://github.com/johnsonandjohnson/bodiless-js/issues/1479) [#1522](https://github.com/johnsonandjohnson/bodiless-js/issues/1522) [#1479](https://github.com/johnsonandjohnson/bodiless-js/issues/1479)
+
+
+
+
+
 # [1.0.0-beta.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.5...v1.0.0-beta.7) (2022-04-13)
 
 **Note:** Version bump only for package @sites/test-site

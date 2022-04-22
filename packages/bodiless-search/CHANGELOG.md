@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.9](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.5...v1.0.0-beta.9) (2022-04-21)
+
+
+### Bug Fixes
+
+* **material-icons:** remove dependency on google fonts material fonts css & clean up of components. ([#1580](https://github.com/johnsonandjohnson/bodiless-js/issues/1580)) ([013d547](https://github.com/johnsonandjohnson/bodiless-js/commit/013d547316b122904a3561406fa5c88fd2385679))
+
+
+
+
+
 # [1.0.0-beta.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.5...v1.0.0-beta.7) (2022-04-13)
 
 **Note:** Version bump only for package @bodiless/search

@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.9](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.5...v1.0.0-beta.9) (2022-04-21)
+
+
+### Bug Fixes
+
+* **bodiless-ui:** fix close/submit icon, Warning, RTE icons ([#1604](https://github.com/johnsonandjohnson/bodiless-js/issues/1604)) ([5f4ca2c](https://github.com/johnsonandjohnson/bodiless-js/commit/5f4ca2c8a112a08a9ec441bf4ae151af32c50569))
+* **tailwindcss, fclasses:** Demo site content changes causing HMR bundle rebuild on edit env ([4b6fa0e](https://github.com/johnsonandjohnson/bodiless-js/commit/4b6fa0eda18d36b49d3a4c567ce52cb138457ef0))
+* **Tailwind:** unit test tailwind ([#1606](https://github.com/johnsonandjohnson/bodiless-js/issues/1606)) ([9074f39](https://github.com/johnsonandjohnson/bodiless-js/commit/9074f3916997e89b697e4a202b8659c2ffc0b5de))
+
+
+### Features
+
+* **cli:** Bodiless new ([#1568](https://github.com/johnsonandjohnson/bodiless-js/issues/1568)) ([3bc0e2c](https://github.com/johnsonandjohnson/bodiless-js/commit/3bc0e2c8e06fe78751c0712d7e1d3cfb8d1fb04d)), closes [#1520](https://github.com/johnsonandjohnson/bodiless-js/issues/1520)
+
+
+
+
+
 # [1.0.0-beta.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.5...v1.0.0-beta.7) (2022-04-13)
 
 **Note:** Version bump only for package @bodiless/fclasses
