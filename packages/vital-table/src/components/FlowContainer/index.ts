@@ -13,13 +13,13 @@
  */
 
 import { asFluidToken } from '@bodiless/vital-elements';
-import { on, varyDesigns, flowHoc, } from '@bodiless/fclasses';
+import { on, varyDesigns, flowHoc } from '@bodiless/fclasses';
 import {
   asTableToken, TableClean, vitalTable,
 } from '../Table';
 
 const BaseVariation = {
-  Table: on(TableClean)(vitalTable.Default),
+  Table: on(TableClean)(vitalTable.Default, vitalTable.WithFlowContainerPreview),
 };
 
 const TableVariations = {
@@ -32,7 +32,7 @@ const TableVariations = {
 
 const BorderDecorationVariations = {
   Borders: vitalTable.WithBorders,
-  BottomBorders: vitalTable.WithBorders,
+  BottomBorders: vitalTable.WithBottomBorders,
   None: asTableToken({
     Meta: flowHoc.meta.term('BorderDecoration')('None'),
   }),

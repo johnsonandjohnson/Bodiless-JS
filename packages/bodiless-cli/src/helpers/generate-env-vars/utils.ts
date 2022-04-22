@@ -16,8 +16,6 @@
 import { promisify } from 'util';
 import { Tree } from './type';
 
-const git = require('isomorphic-git');
-const findUp = require('find-up');
 const fs = require('fs');
 
 const { writeFile } = fs;
@@ -38,27 +36,4 @@ export const jsonToEnv = async (envConfig:Tree, appEnv:string):Promise<void> => 
   Object.keys(envConfig).forEach((key:string) => envFileContent += `${key}='${envConfig[key]}'\n`);
 
   await writeToFile(`.env.${appEnv}`, envFileContent);
-};
-
-export const findGitFolder = async (): Promise<string> => await findUp('.git', { type: 'directory' }) || '';
-
-export const getGitRepository = async (gitDir: string) => await git.currentBranch({ fs, gitdir: gitDir }) ?? undefined;
-
-export const getCurrentGitBranch = async (): Promise<string> => {
-  let gitBranchName = process.env.PLATFORM_BRANCH || '';
-
-  try {
-    const gitDir = await findGitFolder();
-    const currentBranch = await getGitRepository(gitDir);
-
-    if (currentBranch) {
-      gitBranchName = currentBranch;
-    } else {
-      console.warn('You are in "detached HEAD" state...');
-    }
-  } catch (e) {
-    console.warn(e);
-  }
-
-  return gitBranchName;
 };

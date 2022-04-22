@@ -13,6 +13,6 @@
  */
 
 export {
-  staticTokenCollection as vitalTitalInfographic,
+  staticTokenCollection as vitalTitleInfographic,
   StaticBlock as TitleInfographicClean,
 } from '@bodiless/hydration';

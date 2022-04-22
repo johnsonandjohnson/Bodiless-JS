@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.9](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.5...v1.0.0-beta.9) (2022-04-21)
+
+
+### Bug Fixes
+
+* **vital-site:** fix separator color ([#1609](https://github.com/johnsonandjohnson/bodiless-js/issues/1609)) ([7e62d6d](https://github.com/johnsonandjohnson/bodiless-js/commit/7e62d6d6322eac04a4e37ac33fd86b9088699bd1))
+
+
+### Features
+
+* **vital-meta:** Create new vital-meta package. ([#1555](https://github.com/johnsonandjohnson/bodiless-js/issues/1555)) ([f665120](https://github.com/johnsonandjohnson/bodiless-js/commit/f6651201a61c09d02b2974603f486cafedeab252))
+
+
+
+
+
 # [1.0.0-beta.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.5...v1.0.0-beta.7) (2022-04-13)
 
 **Note:** Version bump only for package @bodiless/vital-layout

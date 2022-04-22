@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import React from 'react';
 import { withoutHydration } from '@bodiless/hydration';
 import {
   CleanTable,
@@ -24,5 +25,7 @@ const TableClean = CleanTable;
 const TableStatic = withoutHydration()(CleanTable);
 const asTableToken = asVitalTokenSpec<TableComponents>();
 
+const TableCellPreview = () => <span className="bl-text-gray-800">Cell</span>;
+
 export default TableClean;
-export { asTableToken, TableStatic };
+export { asTableToken, TableStatic, TableCellPreview };

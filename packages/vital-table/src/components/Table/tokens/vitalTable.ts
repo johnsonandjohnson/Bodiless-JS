@@ -18,21 +18,23 @@ import {
   flowHoc,
   on,
   as,
+  replaceWith,
+  addProps,
 } from '@bodiless/fclasses';
 import {
   asBodilessTable, useIsFirstColumn, useIsInBody, useIsOddRow,
 } from '@bodiless/table';
 import { vitalRichText, RichTextClean } from '@bodiless/vital-editors';
 import { vitalColor } from '@bodiless/vital-elements';
-import { asTableToken } from '../TableClean';
+import { ifComponentSelector } from '@bodiless/layouts';
+import { asTableToken, TableCellPreview } from '../TableClean';
 
-// Redo Preview
-/*
-const withPreview = flowIf(hasProp('preview'))(
-  withoutProps(['preview']),
-  replaceWith(Img),
-);
-*/
+const WithFlowContainerPreview = asTableToken({
+  Flow: ifComponentSelector,
+  Core: {
+    CellContent: replaceWith(TableCellPreview),
+  },
+});
 
 /**
  * Token which produces a base VitalDS editable table with editable RTE cells
@@ -43,13 +45,8 @@ const Base = asTableToken({
     _: asBodilessTable(),
   },
   Editors: {
-    CellContent: on(RichTextClean)(vitalRichText.Default),
+    CellContent: on(RichTextClean)(vitalRichText.Default, addProps({ placeholder: 'Cell' })),
   },
-  /*
-  Compose: {
-    _: withPreview,
-  },
-  */
 });
 
 /**
@@ -149,4 +146,5 @@ export default {
   WithLightHeaderFooter,
   WithFirtColumnHeader,
   WithScrolling,
+  WithFlowContainerPreview,
 };
