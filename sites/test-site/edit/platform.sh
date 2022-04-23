@@ -20,7 +20,7 @@ fi
 
 # Expects the following env variables:
 # APP_VOLUME - the absolute path of the writable volume
-# APP_GIT_REMOTE_URL - the path to the bitbucket git repository
+# APP_GIT_REMOTE_URL - the path to the git repository
 # APP_GIT_USER - the user for git operations
 # APP_GIT_PW - the password for git operations
 # PLATFORM_APP_DIR - the absolute path to the application directory. provided by platform.sh
@@ -30,6 +30,7 @@ CMD_GIT=/usr/bin/git
 TMP_DIR=${APP_VOLUME}/../tmp
 ROOT_DIR=${APP_VOLUME}/root
 NPM_CACHE_DIR=${APP_VOLUME}/.npm
+GIT_STORE_CREDENTIAL=${APP_VOLUME}/.credential
 
 invoke () {
   if [[ $(type $1 2>&1) =~ "function" ]]; then
