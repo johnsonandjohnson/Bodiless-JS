@@ -146,6 +146,7 @@ full_deploy () {
     ${CMD_GIT} -c credential.helper="!f() { echo username=${APP_GIT_USER}; echo password=${APP_GIT_PW}; }; f" clone -b ${PLATFORM_BRANCH} ${APP_GIT_REMOTE_URL} ${ROOT_DIR}
     cd ${ROOT_DIR}
   fi
+  git_store_credential
   ${CMD_GIT} config user.email "${APP_GIT_USER_EMAIL}"
   ${CMD_GIT} config user.name "${APP_GIT_USER}"
 }
@@ -158,6 +159,21 @@ init_npmrc () {
     bash -c 'echo NPM Auth token is ${APP_NPM_AUTH:0:50}...'
     echo "$APP_NPM_NAMESPACE:registry=https:${APP_NPM_REGISTRY}" >> .npmrc
     echo "${APP_NPM_REGISTRY}:_authToken=${APP_NPM_AUTH}" >> .npmrc
+  fi
+}
+
+git_store_credential () {
+  # process credential store only for http based url
+  if  [[ ${APP_GIT_REMOTE_URL} =~ ^http ]] ;
+  then
+    # get host name
+    HOST=$(echo ${APP_GIT_REMOTE_URL} | awk -F/ '{print $3}')
+    # remove user info, if any
+    HOST="${HOST#*:*@}"
+    echo 'https://'${APP_GIT_USER}':'${APP_GIT_PW}'@'${HOST} > ${GIT_STORE_CREDENTIAL}
+    # set owner permission only
+    chmod 600 ${GIT_STORE_CREDENTIAL}
+    git config --local credential.helper 'store --file='${GIT_STORE_CREDENTIAL}
   fi
 }
 
