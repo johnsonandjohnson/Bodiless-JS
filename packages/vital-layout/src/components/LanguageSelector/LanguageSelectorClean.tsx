@@ -52,7 +52,9 @@ const LanguageSelectorBase: FC<LanguageSelectorProps> = ({ components: C }) => (
 
 const asLanguageSelectorToken = asVitalTokenSpec<LanguageSelectorComponents>();
 
-const LanguageSelectorClean = designable(languageSelectorComponents, 'LanguageSelector')(LanguageSelectorBase);
+const LanguageSelectorClean = designable(
+  languageSelectorComponents, 'LanguageSelector'
+)(LanguageSelectorBase);
 
 export {
   LanguageSelectorClean,
