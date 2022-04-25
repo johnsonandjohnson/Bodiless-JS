@@ -31,6 +31,7 @@ import {
   withDesign,
   withProps,
 } from '@bodiless/fclasses';
+import { withLanguages } from '@bodiless/i18n';
 import { vitalLink } from '@bodiless/vital-link';
 import { vitalLogo } from '../../Logo';
 import { vitalDesktopSearch, vitalSearchToggler } from '../../Search';
@@ -40,6 +41,15 @@ import BurgerIcon from '../assets/BurgerIcon';
 // @TODO: Get rid of this after language button is implemented.
 const WithLanguageButton = flowHoc(
   replaceWith(Span),
+  withLanguages([
+    {
+      name: 'en',
+      isDefault: true,
+    },
+    {
+      name: 'es',
+    },
+  ]),
   withProps({
     children: 'Español',
     // @TODO: Create divider tokens.

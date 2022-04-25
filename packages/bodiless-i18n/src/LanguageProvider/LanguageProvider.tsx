@@ -93,9 +93,12 @@ const getLanguagesWithDefaultValues = (languages: Languages = []): Languages => 
 };
 
 export const withLanguageProvider: HOC = Component => (props: any) => {
+  console.log('withLanguageProvider');
   const { languages: languagesFromProps }: PropsWithLanguages = props;
   const languagesWithDefaultValues = getLanguagesWithDefaultValues(languagesFromProps);
   const [languages, setLanguages] = useState<Languages>(languagesWithDefaultValues);
+
+  console.log('languages', languages);
 
   const getCurrentLanguage = () => getCurrentLanguage$(languages);
   const setCurrentLanguage = (langName: string) => {
