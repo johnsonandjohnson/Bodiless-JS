@@ -12,21 +12,24 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { addProps } from '@bodiless/fclasses';
+import { addPropsIf } from '@bodiless/fclasses';
 import { withLanguages, useLanguageContext } from '@bodiless/i18n';
 import { asLanguageSelectorToken } from '../LanguageSelectorClean';
 
-const LanguageLink = () => {
-  const lang = useLanguageContext().getCurrentLanguage().name;
-  return <span>{lang}</span>;
+const useLanguageLinkProps = () => {
+  const currentLanguage = useLanguageContext().getCurrentLanguage();
+  const secondLanguage = useLanguageContext().languages.filter(
+    lang => lang.name !== currentLanguage.name
+  )[0];
+  return {
+    children: secondLanguage.name,
+    href: secondLanguage.hrefLang,
+  };
 };
 
 const Default = asLanguageSelectorToken({
   Content: {
-    Link: addProps({
-      children: <LanguageLink />
-    })
+    Link: addPropsIf(() => true)(useLanguageLinkProps),
   },
   Theme: {
     Wrapper: 'text-m-base border-l-2 border-vital-primary-divider lg:border-r-2'
@@ -38,10 +41,12 @@ const Default = asLanguageSelectorToken({
     _: withLanguages([
       {
         name: 'en',
+        hrefLang: 'en',
         isDefault: true,
       },
       {
-        name: 'es',
+        name: 'Español',
+        hrefLang: 'es',
       },
     ]),
   },
