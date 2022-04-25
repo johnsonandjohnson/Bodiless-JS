@@ -45,7 +45,7 @@ always have precedence**.
     import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
     const twConfig = {
-      purge: [
+      content: [
         './lib/**/!(*.d).{ts,js,jsx,tsx}',
       ],
       theme: {},
