@@ -12,38 +12,16 @@
  * limitations under the License.
  */
 
-import { withNodeKey } from '@bodiless/core';
 import { vitalTypography } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import {
-  flowHoc, H2, replaceWith, as, P,
+  flowHoc, H2, replaceWith, as, P, Ul,
 } from '@bodiless/fclasses';
 import React from 'react';
-import { ListClean, vitalList } from '@bodiless/vital-list';
 
 const Subtitle = as(vitalTypography.H2, 'pt-8')(H2);
 const Para = as('pt-4')(P);
-
-const GlobalElementsList = as(
-  vitalList.Base,
-  vitalList.WithLinkedTitle,
-  vitalList.WithBullets,
-  withNodeKey('globalelementslist'),
-)(ListClean);
-
-const ComponentsList = as(
-  vitalList.Base,
-  vitalList.WithLinkedTitle,
-  vitalList.WithBullets,
-  withNodeKey('componentslist'),
-)(ListClean);
-
-const TemplatesList = as(
-  vitalList.Base,
-  vitalList.WithLinkedTitle,
-  vitalList.WithBullets,
-  withNodeKey('templateslist'),
-)(ListClean);
+const List = as('pt-4')(Ul);
 
 const Examples = () => (
   <>
@@ -54,11 +32,24 @@ const Examples = () => (
       menu on the new page.
     </Para>
     <Subtitle>Global Elements</Subtitle>
-    <GlobalElementsList />
+    <List>
+      <li><a href="./layout">Layout</a></li>
+      <li><a href="./header">Header</a></li>
+      <li><a href="./footer">Footer</a></li>
+      <li><a href="./editors">Editors</a></li>
+      <li><a href="./editors-monofont">Editors with MonoFont</a></li>
+      <li><a href="./typography">Typography</a></li>
+    </List>
     <Subtitle>Components</Subtitle>
-    <ComponentsList />
+    <List>
+      <li><a href="./flow-container">Flow Container</a></li>
+      <li><a href="./images">Images</a></li>
+      <li><a href="./list">List</a></li>
+    </List>
     <Subtitle>Templates</Subtitle>
-    <TemplatesList />
+    <List>
+      <li><a href="./generic-template">Generic Template</a></li>
+    </List>
   </>
 );
 
