@@ -30,6 +30,7 @@ import {
 import { LogoClean } from '../Logo';
 import { SearchTogglerClean, DesktopSearchClean } from '../Search';
 import type { HeaderComponents, HeaderProps } from './types';
+import { LanguageSelectorClean } from '../LanguageSelector';
 
 const headerComponents: HeaderComponents = {
   Wrapper: Header,
@@ -47,7 +48,7 @@ const headerComponents: HeaderComponents = {
   UtilityMenu: MenuClean,
   DesktopSearch: DesktopSearchClean,
   SearchToggler: SearchTogglerClean,
-  LanguageButton: Fragment,
+  LanguageButton: LanguageSelectorClean,
   WhereToBuyWrapper: Fragment,
   WhereToBuy: LinkClean,
 };
