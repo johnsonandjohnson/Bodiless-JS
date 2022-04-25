@@ -12,18 +12,24 @@
  * limitations under the License.
  */
 
+import { useNode } from '@bodiless/core';
 import { addPropsIf } from '@bodiless/fclasses';
 import { withLanguages, useLanguageContext } from '@bodiless/i18n';
 import { asLanguageSelectorToken } from '../LanguageSelectorClean';
 
 const useLanguageLinkProps = () => {
+  const { node: { pagePath } } = useNode();
   const currentLanguage = useLanguageContext().getCurrentLanguage();
   const secondLanguage = useLanguageContext().languages.filter(
     lang => lang.name !== currentLanguage.name
   )[0];
+  const regex = new RegExp(`^/${currentLanguage.name}/`);
+  const pagePathWithoutPrefix = pagePath.replace(regex, '/');
   return {
-    children: secondLanguage.name,
-    href: secondLanguage.hrefLang,
+    children: secondLanguage.label,
+    href: secondLanguage.isDefault
+      ? pagePathWithoutPrefix
+      : `${secondLanguage.name}${pagePathWithoutPrefix}`,
   };
 };
 
@@ -41,12 +47,12 @@ const Default = asLanguageSelectorToken({
     _: withLanguages([
       {
         name: 'en',
-        hrefLang: 'en',
+        label: 'English',
         isDefault: true,
       },
       {
-        name: 'Español',
-        hrefLang: 'es',
+        name: 'es',
+        label: 'Español',
       },
     ]),
   },

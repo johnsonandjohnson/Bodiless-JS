@@ -7,6 +7,7 @@ export type Directions = 'ltr' | 'rtl';
 
 export type Language = {
   name: string,
+  label?: string,
   hrefLang?: string,
   direction?: string & Directions,
   isCurrent?: boolean,
