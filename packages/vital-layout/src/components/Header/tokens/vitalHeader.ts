@@ -35,28 +35,6 @@ import { asHeaderToken } from '../HeaderClean';
 import BurgerIcon from '../assets/BurgerIcon';
 import { vitalLanguageSelector } from '../../LanguageSelector';
 
-// @TODO: Get rid of this after language button is implemented.
-// const WithLanguageButton = flowHoc(
-//   replaceWith(Span),
-//   withLanguages([
-//     {
-//       name: 'en',
-//       isDefault: true,
-//     },
-//     {
-//       name: 'es',
-//     },
-//   ]),
-//   withProps({
-//     children: LanguageSelector,
-//     // children: 'Español',
-//     // @TODO: Create divider tokens.
-//     // @TODO: Use existing tokens.
-//     className: 'text-m-base border-l-2 border-vital-primary-divider
-// pl-5 lg:mr-5 lg:px-5 lg:py-2 lg:border-r-2',
-//   }),
-// );
-
 /**
  * Token that defines a basic header.
  */
