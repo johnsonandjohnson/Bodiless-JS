@@ -22,11 +22,17 @@ const BaseVariation = {
   Table: on(TableClean)(vitalTable.Default, vitalTable.WithFlowContainerPreview),
 };
 
+const HeaderDecorationVariations = {
+  LightHeaderFooter: vitalTable.WithLightHeaderFooter,
+  FirstColumnHeader: vitalTable.WithFirtColumnHeader,
+  None: asTableToken({
+    Meta: flowHoc.meta.term('Header')('No Header Color'),
+  }),
+};
+
 const TableVariations = {
   Stripes: vitalTable.WithRowStripes,
   Hoverable: vitalTable.WithHoverable,
-  LightHeaderFooter: vitalTable.WithLightHeaderFooter,
-  FirstColumnHeader: vitalTable.WithFirtColumnHeader,
   ScrollingTable: vitalTable.WithScrolling,
 };
 
@@ -34,7 +40,7 @@ const BorderDecorationVariations = {
   Borders: vitalTable.WithBorders,
   BottomBorders: vitalTable.WithBottomBorders,
   None: asTableToken({
-    Meta: flowHoc.meta.term('BorderDecoration')('None'),
+    Meta: flowHoc.meta.term('Border')('No Border'),
   }),
 };
 
@@ -47,6 +53,7 @@ const WithTableVariations = asFluidToken({
       BaseVariation,
       TableVariations,
       BorderDecorationVariations,
+      HeaderDecorationVariations,
     ),
   }
 });

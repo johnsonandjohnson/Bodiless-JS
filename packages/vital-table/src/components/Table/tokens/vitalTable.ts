@@ -69,7 +69,7 @@ const Default = asTableToken({
  * Token which adds header design to first column
  */
 const WithFirtColumnHeader = asTableToken({
-  Meta: flowHoc.meta.term('Decoration')('First Column as Header'),
+  Meta: flowHoc.meta.term('Header')('First Column as Header'),
   Theme: {
     Cell: flowIf(useIsFirstColumn)(as(vitalColor.BgSecondaryTable)),
   }
@@ -79,9 +79,9 @@ const WithFirtColumnHeader = asTableToken({
  * Token which add alternating striped rows
  */
 const WithRowStripes = asTableToken({
-  Meta: flowHoc.meta.term('Decoration')('Striped Rows'),
+  Meta: flowHoc.meta.term('Decoration')('Stripes'),
   Theme: {
-    Row: flowIf(and(useIsInBody, useIsOddRow))(as(vitalColor.BgSecondaryTable)),
+    Row: flowIf(and(useIsInBody, useIsOddRow))(as(vitalColor.BgSecondaryTableRowColumn)),
   }
 });
 
@@ -99,7 +99,7 @@ const WithHoverable = asTableToken({
  * Token which add borders to all cells
  */
 const WithBorders = asTableToken({
-  Meta: flowHoc.meta.term('Decoration')('Bordered Cells'),
+  Meta: flowHoc.meta.term('Border')('Bordered Cells'),
   Theme: {
     Row: 'border',
   }
@@ -109,7 +109,7 @@ const WithBorders = asTableToken({
  * Token which add borders to bottom of the rows
  */
 const WithBottomBorders = asTableToken({
-  Meta: flowHoc.meta.term('Decoration')('Bottom Bordered Rows'),
+  Meta: flowHoc.meta.term('Border')('Bottom Bordered'),
   Theme: {
     THead: 'border-b',
     Row: 'border-b',
@@ -120,7 +120,7 @@ const WithBottomBorders = asTableToken({
  * Token which add header background to table.
  */
 const WithLightHeaderFooter = asTableToken({
-  Meta: flowHoc.meta.term('Decoration')('Light Header'),
+  Meta: flowHoc.meta.term('Header')('Light Header'),
   Theme: {
     THead: vitalColor.BgSecondaryTable,
     TFoot: vitalColor.BgSecondaryTable,
@@ -131,7 +131,7 @@ const WithLightHeaderFooter = asTableToken({
  * Token which add scrollbar if becomes to wide for viewport.
  */
 const WithScrolling = asTableToken({
-  Meta: flowHoc.meta.term('Decoration')('Scrolling Table'),
+  Meta: flowHoc.meta.term('Decoration')('Scrolling'),
   Theme: {
     Wrapper: 'overflow-x-auto',
   }
