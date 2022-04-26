@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="janrain/scripts/janrain-init.js"></script>
+    <script src="janrain/scripts/janrain-utils.js"></script>
+  </head>
+  <body>
+    <!--
+    ============================================================================
+        A NOTE ON NAVIGATION:
+        These links are not needed for integration into your site. These links
+        are only used for navigating the reference implementation that exists on
+        our servers for testing/demo/sample purposes. It is not required for
+        your implementation.
+
+        Here you can see an example of using janrain.capture.ui.renderScreen in
+        conjunction with HTML elements to simplify user navigation.
+    ============================================================================
+    -->
+    <a
+      href="#"
+      id="captureSignInLink"
+      onclick="janrain.capture.ui.renderScreen('signIn')"
+      >Sign In</a
+    >
+    <a
+      href="#"
+      id="captureSignOutLink"
+      style="display:none"
+      onclick="janrain.capture.ui.endCaptureSession()"
+      >Try again</a
+    >
+
+    <!--
+    ============================================================================
+        SIGNIN SCREENS:
+        The following screens are part of the sign in user workflow. For a
+        complete out-of-the-box sign in experience, these screens must be
+        included on the page where you are implementing sign in and registration.
+    ============================================================================
+    -->
+
+    <!-- signIn:
+    This is the starting point for sign in and registration. This screen is
+    rendered by default. In order to change this behavior, the Flow must be
+    edited.
+    -->
+    <div style="display:none;" id="signIn">
+      <div class="capture_header">
+        <h1>Sign Up / Sign In</h1>
+      </div>
+      <div class="capture_signin">
+        <h2>With your existing account from...</h2>
+        {* loginWidget *} <br />
+      </div>
+    </div>
+
+    <!-- returnSocial:
+    This is the screen the user sees in place of the signIn screen if they've
+    already signed in with a social account on this site. Rendering of this
+    screen is defined in the Flow only when the 'janrainLastAuthMethod' cookie
+    is set to'socialSignin'.
+    -->
+    <div style="display:none;" id="returnSocial">
+      <div class="capture_header">
+        <h1>Sign In</h1>
+      </div>
+      <div class="capture_signin">
+        <h2>Welcome back, {* welcomeName *}!</h2>
+        {* loginWidget *}
+        <div class="capture_centerText switchLink">
+          <a href="#" data-cancelcapturereturnexperience="true">Use another account</a>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div id="flow-version"></div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "Components": {
+    "AboutGTMandGA4.md": "./doc/AboutGTM.md",
+    "AddingTracking.md": "./doc/AddingTracking.md",
+    "CustomActivation.md": "./doc/CustomActivation.md",
+    "GTMActivation.md": "./doc/GTMActivation.md",
+    "GTM.md": "./doc/GTM.md"
+  }
+}

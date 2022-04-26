@@ -18,3 +18,6 @@ export {
   withDefaultDataLayer,
   withDataLayerScript,
 };
+
+export * from './GA4-events';
+export * from './util';
