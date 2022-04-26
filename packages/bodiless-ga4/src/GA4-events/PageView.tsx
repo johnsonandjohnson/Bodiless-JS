@@ -25,27 +25,27 @@ export const defaultDataLayer = {
   },
 };
 
-const withSiteMetaData: Function =
-  (nodeKey: string) => (HelmetComponent: ComponentType) => (props: any) => {
-    const { dataLayerData } = props;
-    const { node } = useNode();
-    const peerNode = node.peer<any>(['Site', 'meta', nodeKey]);
-    const { content } = peerNode.data;
-    if (content) {
-      dataLayerData.pageView.page_data[nodeKey] = content;
-    }
-    return <HelmetComponent {...dataLayerData} {...props} />;
-  };
+// eslint-disable-next-line max-len
+const withSiteMetaData: Function = (nodeKey: string) => (HelmetComponent: ComponentType) => (props: any) => {
+  const { dataLayerData } = props;
+  const { node } = useNode();
+  const peerNode = node.peer<any>(['Site', 'meta', nodeKey]);
+  const { content } = peerNode.data;
+  if (content) {
+    dataLayerData.pageView.page_data[nodeKey] = content;
+  }
+  return <HelmetComponent {...dataLayerData} {...props} />;
+};
 
-const withGenericLanguageData: Function =
-  () => (HelmetComponent: ComponentType) => (props: any) => {
-    // TODO use Language Contexto Switch
-    // const lang = useLanguageContext().getCurrentLanguage().name;
-    const lang = 'en';
-    const { dataLayerData } = props;
-    dataLayerData.pageView.page_data.language = lang;
-    return <HelmetComponent {...dataLayerData} {...props} />;
-  };
+// eslint-disable-next-line max-len
+const withGenericLanguageData: Function = () => (HelmetComponent: ComponentType) => (props: any) => {
+  // TODO use Language Contexto Switch
+  // const lang = useLanguageContext().getCurrentLanguage().name;
+  const lang = 'en';
+  const { dataLayerData } = props;
+  dataLayerData.pageView.page_data.language = lang;
+  return <HelmetComponent {...dataLayerData} {...props} />;
+};
 
 // Add a page type editable field which value will be injected in the default
 // dataLayer defined above at a given path.
@@ -55,27 +55,26 @@ const withDataLayerPageType = withDataLayerItem({
   path: 'pageView.page_data.page_type',
 });
 
-const withDataLayerPageTitle: Function =
-  () => (HelmetComponent: ComponentType) => (props: any) => {
-    const { node } = useNode();
-    const pageTitleNode = node.peer<any>(['Page', 'meta', 'page-title']);
-    const { content }: { content: string } = pageTitleNode.data;
-    const { dataLayerData } = props;
-    dataLayerData.pageView.page_data.page_title = content;
-    return <HelmetComponent {...dataLayerData} {...props} />;
-  };
+const withDataLayerPageTitle: Function = () => (HelmetComponent: ComponentType) => (props: any) => {
+  const { node } = useNode();
+  const pageTitleNode = node.peer<any>(['Page', 'meta', 'page-title']);
+  const { content }: { content: string } = pageTitleNode.data;
+  const { dataLayerData } = props;
+  dataLayerData.pageView.page_data.page_title = content;
+  return <HelmetComponent {...dataLayerData} {...props} />;
+};
 
-const withDataLayerPageLocRef: Function =
-  () => (HelmetComponent: ComponentType) => (props: any) => {
-    const { dataLayerData } = props;
-    if (typeof window === 'undefined' || typeof document === 'undefined') {
-      return null;
-    }
+// eslint-disable-next-line max-len
+const withDataLayerPageLocRef: Function = () => (HelmetComponent: ComponentType) => (props: any) => {
+  const { dataLayerData } = props;
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
+    return null;
+  }
 
-    dataLayerData.pageView.page_data.page_location = window.location.href;
-    dataLayerData.pageView.page_data.page_referrer = document.referrer;
-    return <HelmetComponent {...dataLayerData} {...props} />;
-  };
+  dataLayerData.pageView.page_data.page_location = window.location.href;
+  dataLayerData.pageView.page_data.page_referrer = document.referrer;
+  return <HelmetComponent {...dataLayerData} {...props} />;
+};
 
 export const DefaultPageGTMDataLayerHelmet = withGlobalGTMForm(
   withDefaultDataLayer(defaultDataLayer),

@@ -8,8 +8,7 @@ import { ItemsDataType, pushPLPAnalytics } from '../util/pushPLPAnalytics';
 
 const crypto = require('crypto');
 
-const generateHash = (str: string) =>
-  crypto.createHash('md5').update(str).digest('hex');
+const generateHash = (str: string) => crypto.createHash('md5').update(str).digest('hex');
 
 const FILTER_BY_GROUP = 'filter_by_group';
 
@@ -48,20 +47,18 @@ export const getPageTitle = (): string => {
  * @private
  * Converts list of selected tags into the "facets" string required by datalayer.
  */
-export const getFacetsData = (selectedTags: any[] = []): string =>
-  selectedTags.map((tag) => `${tag.categoryName}:${tag.name}`).join('~');
+export const getFacetsData = (selectedTags: any[] = []): string => selectedTags.map((tag) => `${tag.categoryName}:${tag.name}`).join('~');
 
 /**
  * @private
  * Converts list of filtered items to the items array required by datalayer.
  */
-const getItemsData = (items: FilteredItemType[]): ItemsDataType[] =>
-  items
-    .filter((item) => item.isDisplayed)
-    .map((item) => ({
-      item_id: item.id,
-      ...item.data,
-    }));
+const getItemsData = (items: FilteredItemType[]): ItemsDataType[] => items
+  .filter((item) => item.isDisplayed)
+  .map((item) => ({
+    item_id: item.id,
+    ...item.data,
+  }));
 
 /**
  * @private
@@ -73,12 +70,11 @@ const getFilteredItemData = (tagsNode: ContentNode<any>) => {
   const brandName = getBrandName();
   const uuidHash = generateHash(`${brandName}${pageTitle}Page$product_listing`);
   const titleNode = node.child<any>('title');
-  const titleArray =
-    Array.isArray(titleNode.data) &&
-    titleNode.data[0] &&
-    titleNode.data[0].children
-      ? titleNode.data[0].children
-      : [];
+  const titleArray = Array.isArray(titleNode.data)
+    && titleNode.data[0]
+    && titleNode.data[0].children
+    ? titleNode.data[0].children
+    : [];
   // eslint-disable-next-line no-nested-ternary
   const productTitle = Array.isArray(titleNode.data)
     ? titleArray && titleArray.length > 0
@@ -150,10 +146,9 @@ export const withSelectItemGTMEvent: Token = (Component) => {
         `${brandName}${pageTitle}Page$product_listing`,
       );
       const elem = event.currentTarget;
-      const currentIndex =
-        elem.parentNode !== null
-          ? Array.from(elem.parentNode.children).indexOf(elem)
-          : 0;
+      const currentIndex = elem.parentNode !== null
+        ? Array.from(elem.parentNode.children).indexOf(elem)
+        : 0;
       pushPLPAnalytics({
         event: GTM_EVENTS.selectItem,
         ecommerce: {
@@ -183,8 +178,7 @@ export const withSelectItemGTMEvent: Token = (Component) => {
 export const withViewItemsGTMEvent: Token = (Component) => {
   const WithViewItemsGTMEvent: FC<any> = (props: FlowContainerWrapperProps) => {
     const { itemCount } = props;
-    const { getFilteredItems, filtersInitialized, getSelectedTags } =
-      useFilterByGroupContext();
+    const { getFilteredItems, filtersInitialized, getSelectedTags } = useFilterByGroupContext();
     const filteredItems = getFilteredItems();
     const selectedTags = getSelectedTags();
     useEffect(() => {

@@ -23,14 +23,14 @@ const verifyJanrainAppSettings = options => {
   if ('JANRAIN_CLIENT_SECRET' in process.env) {
     // Then check other settings.
     return (
-      options.JanrainAppSettings &&
-      options.JanrainAppSettings.settings.tokenUrl &&
-      options.JanrainAppSettings.settings.capture.clientId &&
-      options.JanrainAppSettings.settings.capture.appId &&
-      options.JanrainAppSettings.settings.capture.appDomain &&
-      options.JanrainAppSettings.settings.capture.captureServer &&
-      options.JanrainAppSettings.httpLoadUrl &&
-      options.JanrainAppSettings.httpsLoadUrl
+      options.JanrainAppSettings
+      && options.JanrainAppSettings.settings.tokenUrl
+      && options.JanrainAppSettings.settings.capture.clientId
+      && options.JanrainAppSettings.settings.capture.appId
+      && options.JanrainAppSettings.settings.capture.appDomain
+      && options.JanrainAppSettings.settings.capture.captureServer
+      && options.JanrainAppSettings.httpLoadUrl
+      && options.JanrainAppSettings.httpsLoadUrl
     );
   }
   return false;
@@ -61,7 +61,7 @@ exports.onCreateDevServer = ({ app }, options) => {
         FileStoreSessionOptions,
       );
     }
-     // Warn against using the default session secret.
+    // Warn against using the default session secret.
     if (fileStoreSessionOptions.secret === 'SUPERSECRETSTRING') {
       console.warn(
         'Using default session secret is strongly discouraged. Please use a secure session secret',
