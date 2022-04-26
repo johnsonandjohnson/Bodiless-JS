@@ -322,14 +322,20 @@ class Page {
                 const fileToBeUpdated = path.join(destinationPagePath, item);
                 // Make sure to not replace '/images/pages' part of the path
                 // .e.g if the source page path is '/images';
-                const imgAssetsPathRegExp = IMG_ASSETS_PATH.replace('\\', '\\\\\\\\');
-                const originPathRegExp = new RegExp(
-                  `(${imgAssetsPathRegExp}.*)${originPathCrossPlatform}`, 'g'
-                );
+                const imgAssetsPath = IMG_ASSETS_PATH.replace('\\', '\\\\\\\\');
+                // If homepage, originPathCrossPlatform will be empty, so this
+                // template string handles both cases:
+                // - '/images/pages' for homepage (/)
+                // - '/images/pages/example for others (/example)
+                const fromPath = `${imgAssetsPath}${originPathCrossPlatform}`;
+                // New path based on base path:
+                // - '/images/pages/example2'
+                const toPath = `${imgAssetsPath}${destinationPathCrossPlatform}`;
+
                 const options = {
                   files: fileToBeUpdated,
-                  from: originPathRegExp,
-                  to: match => match.replace(originPathRegExp, `$1${destinationPathCrossPlatform}`),
+                  from: fromPath,
+                  to: match => match.replace(fromPath, toPath),
                 };
                 return Page.updateFileContent(options);
               }),
