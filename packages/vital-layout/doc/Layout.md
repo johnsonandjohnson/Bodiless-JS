@@ -1,4 +1,4 @@
-# CanvasX Layout Component
+# Vital Layout Component
 
 The Layout Component creates the basic structure that provides an `OuterContainer` wrapper around
 the following elements:
@@ -12,9 +12,9 @@ the following elements:
   - `PageCloser`
 - `SiteFooter`
 
-## CanvasX Design System at Layout Level
+## Vital Design System at the Layout Level
 
-The CanvasX Design System does the following:
+The Vital Design System does the following:
 
 - The site global elements (header/footer) are full-width and expand to meet the viewport width.
 - The container width isn't controlled in layout and delegated to Templates to define the page
@@ -34,7 +34,7 @@ There is no interaction by the Content Editor with the actual Layout Component.
 At the site or global regional/brand library level, you can use the Layout Component as is, or
 extend/shadow the existing component.
 
-?> **Tip:** While building out Layout, it's recommended to leave the existing CanvasX component —
+?> **Tip:** While building out Layout, it's recommended to leave the existing Vital component —
 or, if new, stub out the component and render a text placeholder — you can return to the particular
 component later in the site build. In the beginning of your site build, focus on the general
 structure of header, footer, etc. here, and leave the details for a later step in the process.
@@ -47,9 +47,9 @@ becomes visible when the user visits the site and starts interacting with their 
 
 ### Customizing Via Shadowing (*Preferred Method)
 
-Provide the Shadowing function as defined in [Shadow](../CX_Elements/CX_Shadow).
+Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
 
-File to shadow: `./lib/shadow/cx-layout/{MyLayout}.js`
+File to shadow: `./lib/shadow/vital-layout/{MyLayout}.js`
 
 ### Skip To Main Content Customization
 
@@ -59,6 +59,6 @@ File to shadow: `./lib/shadow/cx-layout/{MyLayout}.js`
 
 ## Architectural Details
 
-CX Layout provides a Layout structure around the core components of the page. To see how these
+Vital Layout provides a Layout structure around the core components of the page. To see how these
 elements are structured within the wrapper, please see:
-[`LayoutClean.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-layout/src/components/Layout/LayoutClean.tsx).
+[`LayoutClean.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Layout/LayoutClean.tsx).

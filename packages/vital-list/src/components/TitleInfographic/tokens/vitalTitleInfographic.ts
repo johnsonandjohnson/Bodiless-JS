@@ -33,7 +33,10 @@ const Default = asTitleInfographicToken({
   Layout: {
     Wrapper: 'flex flex-row',
     TitleWrapper: 'flex flex-col justify-center',
-    ImageWrapper: 'max-w-24 pr-4 rtl:pl-4 rtl:pr-0 box-content',
+    ImageWrapper: 'min-w-24 max-w-24 box-content',
+  },
+  Spacing: {
+    ImageWrapper: 'pr-4 rtl:pl-4 rtl:pr-0',
   },
 });
 

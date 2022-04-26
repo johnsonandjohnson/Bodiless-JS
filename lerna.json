@@ -6,9 +6,11 @@
   "lerna": "2.0.0",
   "command": {
     "publish": {
-      "allowBranch": "release",
       "message": "chore(release): publish %s"
+    },
+    "version": {
+      "allowBranch": "release"
     }
   },
-  "version": "1.0.0-beta.9"
+  "version": "1.0.0-beta.10"
 }

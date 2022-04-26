@@ -29,37 +29,41 @@ const Base = asFooterToken({
   },
   Layout: {
     Wrapper: 'w-full',
-    Container: 'lg:flex',
-    Column: 'w-full lg:first:w-1/4 lg:w-3/4',
+    Container: '2xl:flex',
+    Column: 'w-full 2xl:first:w-1/4 2xl:w-3/4',
     RewardsWrapper: as(
       // This makes RewardsWrapper full screen on mobile. This is necessary
       // because we have to flow specific white background inside a container
       // with margin.
       'max-w-screen w-screen relative inset-x-1/2 mx-negative-half-screen px-site-percent py-9',
-      // Reset RewardsWrapper to follow container from tablet on.
-      'md:w-full md:static md:inset-x-0 md:mx-0 md:p-0',
+      // Reset RewardsWrapper to follow container from 2xl device and on.
+      '2xl:w-full 2xl:static 2xl:inset-x-0 2xl:mx-0 2xl:p-0',
     ),
-    Row: 'w-full lg:flex lg:space-between',
+    Row: 'w-full xl:flex xl:space-between',
     FooterMenuWrapper: 'w-full',
-    CopyrightWrapper: 'w-full lg:w-3/4',
-    SocialLinksWrapper: 'w-full lg:w-1/4',
+    CopyrightWrapper: 'w-full 2xl:w-3/4',
+    SocialLinksWrapper: 'w-full 2xl:w-1/4',
   },
   Spacing: {
-    Wrapper: 'mt-10',
+    Wrapper: 'mt-10', // Vertical
     Container: as(
       vitalSpacing.WithSiteMargin,
       vitalSpacing.WithSiteXLConstraint,
-      'lg:pt-16 lg:pb-10',
+      '2xl:pt-16 2xl:pb-10', // Vertical
     ),
-    Column: 'md:py-9 lg:py-0 lg:pl-28 lg:first:pl-0 lg:first:pr-20',
-    Row: 'md:mb-8 md:last:mb-0 lg:mb-9',
-    RewardsWrapper: 'md:mb-0',
-    FooterMenuWrapper: 'py-9 md:p-0',
-    Copyright: 'py-6 md:mb-4 md:py-6 lg:py-0 lg:mb-0',
+    Column: as(
+      'md:last:py-9 2xl:py-9 2xl:first:pr-20',
+    ),
+    Row: 'md:mb-8 md:last:mb-0 2xl:mb-9', // Vertical
+    RewardsWrapper: as(
+      'md:mb-0', // Vertical
+    ),
+    FooterMenuWrapper: 'py-9 md:p-0', // Vertical
+    Copyright: 'py-6 md:mb-4 md:py-6 2xl:py-0 2xl:mb-0', // Vertical
     SocialLinksWrapper: 'py-5 md:p-0',
   },
   Theme: {
-    RewardsWrapper: 'bg-vital-primary-card-bg md:bg-vital-secondary-footer-bg',
+    RewardsWrapper: 'bg-vital-primary-card-bg 2xl:bg-vital-secondary-footer-bg',
     Copyright: as(
       vitalColor.BorderSecondarySeparator,
       'border-t border-b md:border-0',

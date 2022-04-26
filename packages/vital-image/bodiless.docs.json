@@ -1,7 +1,7 @@
 {
-  "CX_DesignSystem": {
+  "VitalDesignSystem": {
     "Components": {
-      "CX_Image": {
+      "VitalImage": {
         "README.md": "./doc/Image.md",
         "ImageConfigurations.md": "./doc/ImageConfigurations.md"
       }
