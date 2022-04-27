@@ -14,7 +14,7 @@
 import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
 import { vitalMetaHelmet } from '@bodiless/vital-meta';
 import { as, replaceWith } from '@bodiless/fclasses';
-import { DefaultPageGTMDataLayerHelmet } from '@bodiless/ga4';
+import { DefaultPageGA4DataLayerHelmet } from '@bodiless/ga4';
 import { asHelmetToken } from '../HelmetClean';
 
 const Default = asHelmetToken({
@@ -22,7 +22,7 @@ const Default = asHelmetToken({
     SeoHelmet: vitalMetaHelmet.SEO,
     SocialShareHelmet: vitalMetaHelmet.Share,
     // LanguageHelmet: TBD,
-    GtmHelmet: replaceWith(DefaultPageGTMDataLayerHelmet),
+    GA4Helmet: replaceWith(DefaultPageGA4DataLayerHelmet),
   },
   Theme: {
     HTMLHelmet: as(

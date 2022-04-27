@@ -12,7 +12,18 @@
  * limitations under the License.
  */
 
-export * from './components/GenericTemplate';
-export * from './components/PDPTemplate';
-export * from './components/StyleGuideTemplate';
-export * from './components/Page';
+import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
+
+export type PDPTemplateComponents = {
+  PageWrapper: ComponentOrTag<any>,
+  BreadcrumbWrapper: ComponentOrTag<any>,
+  Breadcrumb: ComponentOrTag<any>,
+  TopWrapper: ComponentOrTag<any>,
+  TopContent: ComponentOrTag<any>,
+  ContentWrapper: ComponentOrTag<any>,
+  Content: ComponentOrTag<any>,
+  BottomWrapper: ComponentOrTag<any>,
+  BottomContent: ComponentOrTag<any>,
+};
+
+export type BasePDPTemplateProps = DesignableComponentsProps<PDPTemplateComponents>;

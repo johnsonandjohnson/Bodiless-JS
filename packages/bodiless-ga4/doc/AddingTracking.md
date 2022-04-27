@@ -81,7 +81,7 @@ We provide some functions to facilitate:
 
   ```
 
-  export const GTMDataLayerProductHelmet = withGlobalGTMForm(
+  export const GA4DataLayerProductHelmet = withGlobalGA4Form(
     withDefaultDataLayer(productDefaultDataLayer),
     withDataLayerProductID('product-id'),
     withDataLayerSku('product-sku'),
@@ -101,7 +101,7 @@ We provide some functions to facilitate:
   ...cxGenericTemplate.Default,
   Components: {
     ...cxGenericTemplate.Default.Components,
-    GtmHelmet: replaceWith(GTMDataLayerProductHelmet),
+    GA4Helmet: replaceWith(GA4DataLayerProductHelmet),
   },
 
   ```

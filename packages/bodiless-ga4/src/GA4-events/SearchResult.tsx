@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import { HOC } from '@bodiless/fclasses';
 import { useSearchResultContext } from '@bodiless/search';
 import withDataLayerItem, { withDefaultDataLayer } from '../gtm';
-import { withGlobalGTM } from '../util';
+import { withGlobalGA4 } from '../util';
 
 const searchResultDefaultDataLayer = {
   dataLayerName: 'dataLayer',
@@ -49,7 +49,7 @@ const withDataLayerSearchResultTerm = withDataLayerItem({
   path: 'searchResultObject.event_data.search_term',
 });
 
-export const GTMDataLayerSearchResultHelmet = withGlobalGTM(
+export const GA4DataLayerSearchResultHelmet = withGlobalGA4(
   withDefaultDataLayer(searchResultDefaultDataLayer),
   withDataLayerSearchResultCount('search-result-count'),
   withDataLayerSearchResultTerm('search-result-term'),

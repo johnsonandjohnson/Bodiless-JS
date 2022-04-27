@@ -12,7 +12,7 @@ const generateHash = (str: string) => crypto.createHash('md5').update(str).diges
 
 const FILTER_BY_GROUP = 'filter_by_group';
 
-const GTM_EVENTS = {
+const GA4_EVENTS = {
   viewItemList: 'view_item_list',
   selectItem: 'select_item',
 };
@@ -104,16 +104,16 @@ const getFilteredItemData = (tagsNode: ContentNode<any>) => {
  *   ...,
  *   Analytics: {
  *     ...,
- *     ComponentWrapper: t(withSelectItemGTMEvent, withRegisterGTMProductData),
+ *     ComponentWrapper: t(withSelectItemGA4Event, withRegisterGA4ProductData),
  *   },
  *   ...
  * });
  * ```
  */
-export const withRegisterGTMProductData = addProps({ getFilteredItemData });
+export const withRegisterGA4ProductData = addProps({ getFilteredItemData });
 
 /**
- * Fires a GTM event when a product from the product list is selected.
+ * Fires a GA4 event when a product from the product list is selected.
  *
  * @param Component
  * The component to which this behavior should be attached.
@@ -127,14 +127,14 @@ export const withRegisterGTMProductData = addProps({ getFilteredItemData });
  *   ...,
  *   Analytics: {
  *     ...,
- *     ComponentWrapper: t(withSelectItemGTMEvent, withRegisterGTMProductData),
+ *     ComponentWrapper: t(withSelectItemGA4Event, withRegisterGA4ProductData),
  *   },
  *   ...
  * });
  * ```
  */
-export const withSelectItemGTMEvent: Token = (Component) => {
-  const WithSelectItemGTMEvent: FC<any> = (props) => {
+export const withSelectItemGA4Event: Token = (Component) => {
+  const WithSelectItemGA4Event: FC<any> = (props) => {
     const { getSelectedTags, getFilteredItems } = useFilterByGroupContext();
     const selectedTags = getSelectedTags();
     const filteredItems = getFilteredItems();
@@ -150,7 +150,7 @@ export const withSelectItemGTMEvent: Token = (Component) => {
         ? Array.from(elem.parentNode.children).indexOf(elem)
         : 0;
       pushPLPAnalytics({
-        event: GTM_EVENTS.selectItem,
+        event: GA4_EVENTS.selectItem,
         ecommerce: {
           facets: getFacetsData(selectedTags),
           items: getItemsData(filteredItems),
@@ -163,11 +163,11 @@ export const withSelectItemGTMEvent: Token = (Component) => {
     };
     return <Component {...props} onClick={onClick} />;
   };
-  return WithSelectItemGTMEvent;
+  return WithSelectItemGA4Event;
 };
 
 /**
- * Fires a GTM event when the product list is loaded or filtered.
+ * Fires a GA4 event when the product list is loaded or filtered.
  *
  * @param Component
  * The component to which this behavior should be attached.
@@ -175,8 +175,8 @@ export const withSelectItemGTMEvent: Token = (Component) => {
  * @returns
  * A version of the component with the behavior attached.
  */
-export const withViewItemsGTMEvent: Token = (Component) => {
-  const WithViewItemsGTMEvent: FC<any> = (props: FlowContainerWrapperProps) => {
+export const withViewItemsGA4Event: Token = (Component) => {
+  const WithViewItemsGA4Event: FC<any> = (props: FlowContainerWrapperProps) => {
     const { itemCount } = props;
     const { getFilteredItems, filtersInitialized, getSelectedTags } = useFilterByGroupContext();
     const filteredItems = getFilteredItems();
@@ -191,7 +191,7 @@ export const withViewItemsGTMEvent: Token = (Component) => {
         `${brandName}${pageTitle}Page$product_listing`,
       );
       pushPLPAnalytics({
-        event: GTM_EVENTS.viewItemList,
+        event: GA4_EVENTS.viewItemList,
         ecommerce: {
           facets: getFacetsData(selectedTags),
           items: getItemsData(filteredItems),
@@ -205,5 +205,5 @@ export const withViewItemsGTMEvent: Token = (Component) => {
     }, [filteredItems, filtersInitialized]);
     return <Component {...(props as any)} />;
   };
-  return WithViewItemsGTMEvent;
+  return WithViewItemsGA4Event;
 };

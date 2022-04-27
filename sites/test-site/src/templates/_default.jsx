@@ -17,18 +17,18 @@ import Helmet from 'react-helmet';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { withMetaSiteInfo } from '@bodiless/components';
+import { withDataLayerPageType, withGlobalGA4Form } from '@bodiless/ga4';
 import Layout from '../components/Layout';
 import { FlowContainerDefault } from '../components/FlowContainer';
-import { withGlobalGTMForm, withDataLayerPageType } from '../components/GTM';
 
 /**
  * A helmet Component containing datalayer script. In edit mode, it shows a form
  * to edit the values page type.
  *
- * The use of withGlobalGTMForm allows us to retain the global datalayer script
+ * The use of withGlobalGA4Form allows us to retain the global datalayer script
  * and only add page information to it.
  */
-const GTMDataLayerPageHelmet = withGlobalGTMForm(
+const GA4DataLayerPageHelmet = withGlobalGA4Form(
   withDataLayerPageType('page-type'),
 )(Helmet);
 
@@ -36,7 +36,7 @@ const SiteInfoHelmet = withMetaSiteInfo(Helmet);
 
 const main = props => (
   <Page {...props}>
-    <GTMDataLayerPageHelmet />
+    <GA4DataLayerPageHelmet />
     <SiteInfoHelmet />
     <Layout>
       <FlowContainerDefault nodeKey="page" />

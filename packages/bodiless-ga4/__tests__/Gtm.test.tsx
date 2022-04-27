@@ -105,7 +105,7 @@ describe('DataLayer process', () => {
       wrapper.unmount();
     });
 
-    it('adds GTM form snippet when UI is editable', () => {
+    it('adds GA4 form snippet when UI is editable', () => {
       const data = dataSet[0];
       const withDataLayerItemPageType = withDataLayerItem({
         name: data.name,
@@ -130,7 +130,7 @@ describe('DataLayer process', () => {
       wrapper.unmount();
     });
 
-    it('does NOT add GTM form snippet when UI is not editable', () => {
+    it('does NOT add GA4 form snippet when UI is not editable', () => {
       const data = dataSet[0];
       const withDataLayerItemPageType = withDataLayerItem({
         name: data.name,

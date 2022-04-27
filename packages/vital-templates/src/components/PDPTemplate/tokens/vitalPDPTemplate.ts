@@ -12,7 +12,25 @@
  * limitations under the License.
  */
 
-export * from './components/GenericTemplate';
-export * from './components/PDPTemplate';
-export * from './components/StyleGuideTemplate';
-export * from './components/Page';
+/*
+import {
+  replaceWith,
+} from '@bodiless/fclasses';
+import { GA4DataLayerProductHelmet } from '@bodiless/ga4';
+*/
+import { asPDPTemplateToken } from '../PDPTemplateClean';
+import { vitalGenericTemplate } from '../../GenericTemplate';
+
+const Default = asPDPTemplateToken({
+  ...vitalGenericTemplate.Default,
+  Components: {
+    ...vitalGenericTemplate.Default.Components,
+    // GA4Helmet: replaceWith(GA4DataLayerProductHelmet),
+  },
+  Schema: {},
+  Spacing: {},
+});
+
+export default {
+  Default,
+};

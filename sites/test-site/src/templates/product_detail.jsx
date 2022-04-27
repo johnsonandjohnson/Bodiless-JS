@@ -28,6 +28,7 @@ import {
   AccordionClean,
   asTestableAccordion,
 } from '@bodiless/accordion';
+import GA4DataLayerProductHelmet from '@bodiless/ga4';
 import Layout from '../components/Layout';
 import {
   ProductTitle,
@@ -40,7 +41,6 @@ import {
 import { FlowContainerDefault } from '../components/FlowContainer';
 import { withEditorBasic } from '../components/Editors';
 import { asSingleAccordionDefaultStyle } from '../components/SingleAccordion/token';
-import GTMDataLayerProductHelmet from '../components/GTM/productViewed';
 import SocialShare from '../components/SocialShare';
 
 // Do not allow editors to set accordion titles.
@@ -99,7 +99,7 @@ const ProductFlowContainer = asTestableFlowContainer(FlowContainerDefault);
 const main = props => (
   <Page {...props}>
     <Layout>
-      <GTMDataLayerProductHelmet />
+      <GA4DataLayerProductHelmet />
       <SectionMargin>
         <div className="flex flex-wrap md:items-end md:flex-row-reverse">
           <SocialShare />

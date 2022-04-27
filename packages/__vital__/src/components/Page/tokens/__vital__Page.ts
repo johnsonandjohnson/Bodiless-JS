@@ -25,7 +25,9 @@ import {
   vitalPage,
   GenericTemplateClean,
   vitalGenericTemplate,
-  asGenericTemplateToken
+  asGenericTemplateToken,
+  PDPTemplateClean,
+  vitalPDPTemplate,
 } from '@bodiless/vital-templates';
 import { useNode } from '@bodiless/core';
 
@@ -49,6 +51,7 @@ const Default = asFluidToken({
       flowIf(isHomePage)(as(NoBreadcrumbsGeneric)),
       flowIf(negate(isHomePage))(as(vitalGenericTemplate.Default)),
     ),
+    PDP: on(PDPTemplateClean)(vitalPDPTemplate.Default),
   },
 });
 

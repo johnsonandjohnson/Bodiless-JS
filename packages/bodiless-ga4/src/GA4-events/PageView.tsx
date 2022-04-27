@@ -4,7 +4,7 @@ import { withShowDesignKeys } from '@bodiless/fclasses';
 import Helmet from 'react-helmet';
 import withDataLayerItem, { withDefaultDataLayer } from '../gtm';
 // import { useLanguageContext } from '@canvasx/i18n';
-import { withGlobalGTMForm } from '../util';
+import { withGlobalGA4Form } from '../util';
 
 // Define the global dataLayer default data.
 export const defaultDataLayer = {
@@ -76,7 +76,7 @@ const withDataLayerPageLocRef: Function = () => (HelmetComponent: ComponentType)
   return <HelmetComponent {...dataLayerData} {...props} />;
 };
 
-export const DefaultPageGTMDataLayerHelmet = withGlobalGTMForm(
+export const DefaultPageGA4DataLayerHelmet = withGlobalGA4Form(
   withDefaultDataLayer(defaultDataLayer),
   withDataLayerPageType('page-type', 'information'),
   withSiteMetaData('brand'),
@@ -87,4 +87,4 @@ export const DefaultPageGTMDataLayerHelmet = withGlobalGTMForm(
   withDataLayerPageLocRef(),
 )(Helmet);
 
-export const withGTMDesignKeys = withShowDesignKeys(true, 'layer-region');
+export const withGA4DesignKeys = withShowDesignKeys(true, 'layer-region');

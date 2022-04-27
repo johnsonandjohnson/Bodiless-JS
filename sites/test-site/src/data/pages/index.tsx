@@ -20,10 +20,10 @@ import {
   withDesign, replaceWith, addClasses, stylable, flowHoc,
 } from '@bodiless/fclasses';
 import Helmet from 'react-helmet';
+import { withDataLayerPageType, withGlobalGA4Form } from '@bodiless/ga4';
 import Layout from '../../components/Layout';
 import { asEditableImage } from '../../components/Image';
 import { FlowContainerDefault } from '../../components/FlowContainer';
-import { withDataLayerPageType, withGlobalGTMForm } from '../../components/GTM';
 
 const HOME_PAGE_PATH = 'homepage';
 
@@ -31,10 +31,10 @@ const HOME_PAGE_PATH = 'homepage';
  * A helmet Component containing datalayer script. In edit mode, it shows a form
  * to edit the values page type.
  *
- * The use of withGlobalGTMForm allows us to retain the global datalayer script
+ * The use of withGlobalGA4Form allows us to retain the global datalayer script
  * and only add page information to it.
  */
-const GTMDataLayerHomePageHelmet = withGlobalGTMForm(
+const GTMDataLayerHomePageHelmet = withGlobalGA4Form(
   withDataLayerPageType('page-type'),
 )(Helmet);
 

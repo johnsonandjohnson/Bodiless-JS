@@ -15,7 +15,7 @@
 import { as, Token } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
 import { asElementToken } from '@bodiless/vital-elements';
-import { withGTMDesignKeys } from '@bodiless/ga4';
+import { withGA4DesignKeys } from '@bodiless/ga4';
 import { asBodilessPage } from '../asBodilessPage';
 
 const Default = asElementToken({
@@ -43,7 +43,7 @@ const Default = asElementToken({
   //   _: withPageDimensionsContext({ breakpoints }),
   // },
   Compose: {
-    _: as(withGTMDesignKeys as Token),
+    _: as(withGA4DesignKeys as Token),
   },
   Components: {
     // _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),

@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 
-export * from './components/GenericTemplate';
-export * from './components/PDPTemplate';
-export * from './components/StyleGuideTemplate';
-export * from './components/Page';
+export enum PDPTemplateNodeKeys {
+  TopContent = 'top-content',
+  Content = 'main-content',
+  BottomContent = 'bottom-content',
+}

@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-export * from './components/GenericTemplate';
-export * from './components/PDPTemplate';
-export * from './components/StyleGuideTemplate';
-export * from './components/Page';
+import vitalPDPTemplate from './vitalPDPTemplate';
+
+export default vitalPDPTemplate;
