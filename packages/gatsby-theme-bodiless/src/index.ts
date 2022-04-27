@@ -13,7 +13,7 @@
  */
 
 import GatsbyMobxStore from './dist/GatsbyMobxStore';
-import GatsbyNodeProvider from './dist/GatsbyNodeProvider.bl-edit';
+import GatsbyNodeProvider from './dist/GatsbyNodeProvider';
 import Page from './dist/Page.bl-edit';
 
 export {

@@ -20,7 +20,7 @@ import {
 import {
   PageDataContextProviderProps,
 } from '@bodiless/page';
-import GatsbyNodeProvider from './GatsbyNodeProvider.bl-edit';
+import GatsbyNodeProvider from './GatsbyNodeProvider';
 
 export type FinalUI = {
   ContextWrapper: ComponentType<ContextWrapperProps>;

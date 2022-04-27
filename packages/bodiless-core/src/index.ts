@@ -74,7 +74,6 @@ import withNotificationButton from './withNotificationButton';
 import withChild, { withAppendChild, withPrependChild } from './withChild';
 import withParent from './withParent';
 import asBodilessComponent, { withActivatorWrapper } from './asBodilessComponent/asBodilessComponent.bl-edit';
-import asBodilessReadOnlyComponent from './asBodilessComponent/asBodilessReadOnlyComponent';
 import { withBodilessData } from './asBodilessComponent/withBodilessData';
 import type { BodilessOptions, AsBodiless } from './Types/AsBodilessTypes';
 import { useMenuOptionUI } from './components/ContextMenuContext';
