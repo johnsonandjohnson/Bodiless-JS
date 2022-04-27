@@ -85,6 +85,13 @@ const plugins = [
   // ),
   {
     resolve: '--vital--',
+  },
+  {
+    resolve: 'gatsby-plugin-google-tagmanager',
+    options: {
+      id: process.env.GOOGLE_TAGMANAGER_ID || 'GTM-N3M9LLD',
+      dataLayerName: 'globalDataLayer',
+    },
   }
 ];
 

@@ -28,7 +28,7 @@ import {
   withDataLayerItem,
   withDataLayerScript,
   withDefaultDataLayer
-} from '@bodiless/gtm';
+} from '@bodiless/ga4';
 import { ComponentType } from 'react';
 
 // Define the global dataLayer default data.

@@ -12,15 +12,11 @@
  * limitations under the License.
  */
 
-import { as, Token, withShowDesignKeys } from '@bodiless/fclasses';
+import { as, Token } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
 import { asElementToken } from '@bodiless/vital-elements';
+import { withGTMDesignKeys } from '@bodiless/ga4';
 import { asBodilessPage } from '../asBodilessPage';
-// import { vitalGenericTemplate, GenericTemplateClean } from '../../Generic';
-// import { vitalStyleGuideTemplate, StyleGuideTemplateClean } from '../../StyleGuideTemplate';
-
-// @todo token to GTM package when created
-const withGTMDesignKeys = withShowDesignKeys(true, 'layer-region');
 
 const Default = asElementToken({
   Core: {

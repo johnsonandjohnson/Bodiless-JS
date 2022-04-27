@@ -1,13 +1,11 @@
-<h1 align="center">
-   Janrain/Akamai authentication for gatsby sites .
-</h1>
+# Janrain/Akamai authentication for gatsby sites
 
-## 🚀 Introduction:
+## Introduction
 
 This package provide an authentication middleware for gatsby development environment.
 The middleware uses Janrain/Akamai to authenticate users and uses session-file-store to manage sessions.
 
-## 🚀 Installation
+## Installation
 
 1.  ** Configure appropriate environment variables.**
 
@@ -147,7 +145,7 @@ gatsby-plugin-akamai-auth
 
 10. **`README.md`**: A text file containing useful reference information about your project.
 
-## 🧐 Roadmap & Todos:
+## Roadmap & Todos:
 1. Allow users to configure path to janrain/akamai files such as janrain-init.js and janrain.css.
 2.  **`/src/auth.tsx`**: contain the middleware authentication logic.
 3.  **`/src/janrain`**: Contain Janrain static widget and scripts.

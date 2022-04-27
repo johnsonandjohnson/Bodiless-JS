@@ -35,6 +35,7 @@
     "@bodiless/core": "^1.0.0-beta.10",
     "@bodiless/fclasses": "^1.0.0-beta.10",
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-beta.10",
+    "@bodiless/ga4": "^1.0.0-beta.10",
     "@bodiless/hydration": "^1.0.0-beta.10",
     "@bodiless/vital-editors": "^1.0.0-beta.10",
     "@bodiless/vital-elements": "^1.0.0-beta.10",
