@@ -28,7 +28,6 @@ import {
   AccordionClean,
   asTestableAccordion,
 } from '@bodiless/accordion';
-import GA4DataLayerProductHelmet from '@bodiless/ga4';
 import Layout from '../components/Layout';
 import {
   ProductTitle,
@@ -99,7 +98,6 @@ const ProductFlowContainer = asTestableFlowContainer(FlowContainerDefault);
 const main = props => (
   <Page {...props}>
     <Layout>
-      <GA4DataLayerProductHelmet />
       <SectionMargin>
         <div className="flex flex-wrap md:items-end md:flex-row-reverse">
           <SocialShare />
