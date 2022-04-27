@@ -13,6 +13,7 @@ const useMenuOptions = () => [
     name: 'gtm',
     icon: 'local_offer',
     label: 'GA4',
+    group: 'page-group',
   },
 ];
 

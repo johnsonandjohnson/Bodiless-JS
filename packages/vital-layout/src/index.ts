@@ -15,3 +15,5 @@
 export { vitalLayout, LayoutClean, asLayoutToken } from './components/Layout';
 export { vitalHeader, HeaderClean, asHeaderToken } from './components/Header';
 export { vitalFooter, FooterClean, asFooterToken } from './components/Footer';
+export { vitalHelmet, HelmetClean, asHelmetToken } from './components/Helmet';
+export { vitalLogo, LogoClean, asLogoToken } from './components/Logo';
