@@ -6,7 +6,11 @@ env:
   BUILD_NUMBER: ${{ github.run_number }}
 on:
   pull_request_target:
-    types: [opened, synchronize]
+    types:
+      - opened
+      - synchronize
+    branches:
+      - main
 jobs:
   pr-canary-release:
     runs-on: ubuntu-latest
