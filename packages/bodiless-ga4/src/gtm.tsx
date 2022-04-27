@@ -101,8 +101,6 @@ const withDefaultDataLayer : Function = (dataLayer: DataLayer) => (
   return <HelmetComponent {...dataLayer} {...rest} />;
 };
 
-const tagManagerEnabled = (process.env.GOOGLE_TAGMANAGER_ENABLED || '1') === '1';
-
 /**
  * HOC that renders the dataLayer script.
  *
@@ -118,9 +116,6 @@ const withDataLayerScript = (
 ) => (
   props: Props,
 ) => {
-  if (!tagManagerEnabled) {
-    return HelmetComponent;
-  }
   const {
     dataLayerData, dataLayerName, children, ...rest
   } = props;
