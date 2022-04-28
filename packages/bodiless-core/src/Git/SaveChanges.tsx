@@ -143,7 +143,7 @@ const SaveChanges = (props: Props) => {
       // @todo: in case of error response, use following msg to cover cases.
       // refactoring once @bodiless/backend via Gatsby proxy HTTPError issue fixed.
       const errorMessage = `Something happened. Please verify current environment
-        allow saving content, also there are changes for this commit.`;
+        allows saving content, as well as confirm you have made changes.`;
       return (
         <>
           <ComponentFormTitle>{formTitle}</ComponentFormTitle>
