@@ -44,7 +44,7 @@ type Options = BaseOptions & {
  *
  * Return {string} - Datalayer script.
  */
- const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
+const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
   let result = `window.${dataLayerName} = window.${dataLayerName} || [];`;
   if (dataLayer !== undefined) {
     const dataObject = dataLayer[Object.keys(dataLayer)[0]];
