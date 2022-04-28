@@ -1,5 +1,5 @@
 {
-  "name": "@canvasx/gatsby-plugin-akamai-auth",
+  "name": "@bodiless/gatsby-plugin-akamai-auth",
   "version": "0.3.7",
   "description": "A Gatsby plugin to enable authentication using Akamai Identity Cloud/Janarain.",
   "author": "Ali Al Mustafa <aalmusta@its.jnj.com>",
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://sourcecode.jnj.com/scm/asx-nbfp/canvasx.git"
+    "url": "https://github.com/johnsonandjohnson/Bodiless-JS.git"
   },
   "scripts": {
     "build": "tsc -p ./tsconfig.json && npm run copy:janrain:css && npm run copy:janrain:html && npm run theme:init",
