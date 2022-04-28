@@ -19,28 +19,17 @@ import { on } from '@bodiless/fclasses';
 import { as, replaceWith, flowHoc } from '@bodiless/fclasses';
 import { DefaultPageGA4DataLayerHelmet, GA4DataLayerProductItemHelmet } from '@bodiless/ga4';
 */
+import { replaceWith } from '@bodiless/fclasses';
+import { GA4DataLayerProductItemHelmet } from '@bodiless/ga4';
 import { asPDPTemplateToken } from '../PDPTemplateClean';
 import { vitalGenericTemplate } from '../../GenericTemplate';
-
-/*
-const asPDPHelmet = asHelmetToken({
-  ...vitalHelmet.Default,
-  Components: {
-    ...vitalHelmet.Default.Components,
-    GA4Helmet: replaceWith(GA4DataLayerProductItemHelmet), // append??
-  },
-});
-
-const PDPHelmet = on(asPDPHelmet)(HelmetClean);
-*/
 
 const Default = asPDPTemplateToken({
   ...vitalGenericTemplate.Default,
   Components: {
     ...vitalGenericTemplate.Default.Components,
+    GA4Helmet: replaceWith(GA4DataLayerProductItemHelmet),
   },
-  Schema: {},
-  Spacing: {},
 });
 
 export default {

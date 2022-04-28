@@ -16,6 +16,7 @@ import React from 'react';
 import {
   designable,
   Div,
+  Fragment,
 } from '@bodiless/fclasses';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { LayoutClean } from '@bodiless/vital-layout';
@@ -24,6 +25,7 @@ import { PDPTemplateComponents, BasePDPTemplateProps } from './types';
 
 const pdpTemplateComponents: PDPTemplateComponents = {
   PageWrapper: LayoutClean,
+  GA4Helmet: Fragment,
   BreadcrumbWrapper: Div,
   Breadcrumb: Div,
   TopWrapper: Div,
@@ -38,6 +40,7 @@ const PDPTemplateBase = (props: BasePDPTemplateProps) => {
   const { components: C, ...rest } = props;
   return (
     <C.PageWrapper {...rest}>
+      <C.GA4Helmet />
       <C.BreadcrumbWrapper>
         <C.Breadcrumb />
       </C.BreadcrumbWrapper>

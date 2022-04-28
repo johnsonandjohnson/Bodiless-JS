@@ -16,6 +16,7 @@ import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 
 export type PDPTemplateComponents = {
   PageWrapper: ComponentOrTag<any>,
+  GA4Helmet: ComponentOrTag<any>,
   BreadcrumbWrapper: ComponentOrTag<any>,
   Breadcrumb: ComponentOrTag<any>,
   TopWrapper: ComponentOrTag<any>,
