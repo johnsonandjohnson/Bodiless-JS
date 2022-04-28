@@ -40,5 +40,5 @@ export const pushPLPAnalytics = (props: AnalyticsTypes) => {
   if (searchType) Object.assign(data.ecommerce, { search_type: searchType });
   if (slot) Object.assign(data.ecommerce, { slot });
 
-  pushDataAnalytics(data);
+  pushDataAnalytics(data, 'ecommerce');
 };

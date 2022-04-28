@@ -44,10 +44,11 @@ type Options = BaseOptions & {
  *
  * Return {string} - Datalayer script.
  */
-const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
+ const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
   let result = `window.${dataLayerName} = window.${dataLayerName} || [];`;
   if (dataLayer !== undefined) {
-    result += `window.${dataLayerName}.push({ event_data: null });`;
+    const dataObject = dataLayer[Object.keys(dataLayer)[0]];
+    result += `window.${dataLayerName}.push({ ${dataObject.event}: null });`;
     Object.values(dataLayer).forEach((entry: any) => {
       result += `window.${dataLayerName}.push(${JSON.stringify(entry)});`;
     });

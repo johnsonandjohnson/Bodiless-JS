@@ -32,7 +32,6 @@ Site builders may add events and other information to that data layer by pushing
 We provide some functions to facilitate:
 
 * pushDataAnalytics to push your data directly to the dataLayer.  ** Recommended to use and only push to dataLayer.
-* pushDigitalDataAnalytics to push your data directly DigitalData object.
 
   ```
   type SearchAnalyticsTypes = {

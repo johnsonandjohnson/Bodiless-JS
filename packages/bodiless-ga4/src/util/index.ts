@@ -62,5 +62,4 @@ export const withGlobalGA4Form = (...hocs: HOC[]) => flowRight(
   withGlobalGA4(...hocs),
 );
 
-export * from './pushDigitalDataAnalytics';
 export * from './pushSearchAnalytics';
