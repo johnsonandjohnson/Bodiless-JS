@@ -88,21 +88,29 @@ ADD:
   price
   quantity
 
-const arrayOfProductItems = [
+const productItems = [
   { name: 'id', label: 'Product/Item ID', path: 'productObject.ecommerce.items.0.item_id' },
   { name: 'upc', label: 'Product/Item SKU', path: 'productObject.ecommerce.items.0.upc' },
 ];
 
-const withMultipleProductItems = arrayOfProductItems.map(item => withDataLayerItem({ ...item }));
+const withMultipleProductItems = productItems.map(item => withDataLayerItem({ ...item }));
 
 or
 
-const withMultipleProductItems = arrayOfProductItems.forEach((item) => {
+const withMultipleProductItems = productItems.forEach((item) => {
   withDataLayerItem({ ...item });
 });
 
+or
+
+// @ts-ignore
+const dataLayerItems = [];
+
+productItems.map((item) => dataLayerItems.push(withDataLayerItem(item)));
+
 export const GA4DataLayerProductItemHelmet = withGlobalGA4Form(
   withDefaultDataLayer(productDefaultDataLayer),
-  withMultipleProductItems as HOC,
- )(Helmet);
+  // @ts-ignore
+  ...dataLayerItems,
+)(Helmet);
 */
