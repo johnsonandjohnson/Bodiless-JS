@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.10](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-04-26)
+
+
+### Bug Fixes
+
+* **vital-header, vital-footer:** convert to default breakpoints and adjust header/footer  ([#1575](https://github.com/johnsonandjohnson/bodiless-js/issues/1575)) ([537cbab](https://github.com/johnsonandjohnson/bodiless-js/commit/537cbab75e960b805ac0b4ea7826d96dae0f5dbd))
+* **vital-list:** fix images on list page, bug in image size, updated /styleguide page to content ([#1633](https://github.com/johnsonandjohnson/bodiless-js/issues/1633)) ([cbac699](https://github.com/johnsonandjohnson/bodiless-js/commit/cbac699c4bfa44c4815fda9ea85f5c2ec6b65401))
+
+
+
+
+
 # [1.0.0-beta.9](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.5...v1.0.0-beta.9) (2022-04-21)
 
 

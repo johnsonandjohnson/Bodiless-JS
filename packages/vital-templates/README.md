@@ -1,4 +1,4 @@
-# `@vital-templates`
+# `@bodiless/vital-templates`
 
 Designable templates.
 

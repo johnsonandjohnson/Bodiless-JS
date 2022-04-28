@@ -1,4 +1,4 @@
-# CanvasX Logo Component
+# Vital Logo Component
 
 The Logo is a simple component with a wrapper around a linked image with the following features:
 
@@ -21,11 +21,11 @@ extend/shadow the existing component.
 
 ### Customizing Via Shadowing (*Preferred Method)
 
-Provide the Shadowing function as defined in [Shadow](../CX_Elements/CX_Shadow).
+Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
 
-File to shadow: `./lib/shadow/cx-layout/{MyLogo}.js`
+File to shadow: `./lib/shadow/vital-layout/{MyLogo}.js`
 
 ## Architectural Details
 
 To see how these elements are structured within the wrapper, please see:
-[`LogoClean.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-layout/src/components/Logo/LogoClean.tsx).
+[`LogoClean.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Logo/LogoClean.tsx).

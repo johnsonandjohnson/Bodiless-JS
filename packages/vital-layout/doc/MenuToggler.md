@@ -1,3 +1,3 @@
-# CanvasX Menu Toggler Component
+# Vital Menu Toggler Component
 
 TBD

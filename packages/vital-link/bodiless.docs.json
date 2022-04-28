@@ -1,7 +1,7 @@
 {
-  "CX_DesignSystem": {
+  "VitalDesignSystem": {
     "Components": {
-      "CX_Link.md": "./doc/Link.md"
+      "VitalLink.md": "./doc/Link.md"
     }
   }
 }

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.10](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-04-26)
+
+**Note:** Version bump only for package @bodiless/hydration
+
+
+
+
+
 # [1.0.0-beta.9](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.5...v1.0.0-beta.9) (2022-04-21)
 
 

@@ -99,11 +99,11 @@ const WhereToBuy = asLinkToken({
     Icon: startWith(CartIcon),
   },
   Layout: {
-    Wrapper: 'w-full flex justify-center items-center max-w-64 h-12 lg:w-48',
+    Wrapper: 'w-full flex justify-center items-center max-w-64 h-12 lg:w-full',
   },
   Spacing: {
     Wrapper: 'mx-auto p-3',
-    Icon: 'mr-3',
+    Icon: 'mr-3 xl:mr-0 2xl:mr-3',
   },
   Theme: {
     Wrapper: as(
@@ -116,7 +116,7 @@ const WhereToBuy = asLinkToken({
       'rounded',
     ),
     Icon: 'w-6 h-6',
-    Body: 'leading',
+    Body: 'leading xl:hidden 2xl:block',
   },
   Content: {
     _: withProps({
