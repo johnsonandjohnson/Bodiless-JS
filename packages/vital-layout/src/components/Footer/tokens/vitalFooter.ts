@@ -41,8 +41,8 @@ const Base = asFooterToken({
     ),
     Row: 'w-full xl:flex xl:space-between',
     FooterMenuWrapper: 'w-full',
-    CopyrightWrapper: 'w-full 2xl:w-3/4',
-    SocialLinksWrapper: 'w-full 2xl:w-1/4',
+    CopyrightWrapper: 'w-full lg:w-3/4',
+    SocialLinksWrapper: 'w-full lg:w-1/4',
   },
   Spacing: {
     Wrapper: 'mt-10', // Vertical
