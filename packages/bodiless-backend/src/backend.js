@@ -83,7 +83,7 @@ class Git {
 }
 
 /*
-This Class lets us buildout and execute a GitCommit
+This Class lets us build and execute a GitCommit
 */
 class GitCommit {
   constructor() {
@@ -182,7 +182,7 @@ class GitCommit {
 
     await this.pull();
 
-    // Sstage user files specified by front-end (src/data, /static, etc.).
+    // Stage user files specified by front-end (src/data, /static, etc.).
     await GitCmd.cmd()
       .add('add')
       .addFiles(...this.files)
@@ -218,7 +218,7 @@ class GitCommit {
     const res = await commitCmd.exec();
 
     try {
-      // Push changes after succesful rebase.
+      // Push changes after successful rebase.
       await GitCmd.cmd()
         .add('push', remote)
         .exec();
@@ -465,7 +465,7 @@ class Backend {
 
   static setChangeAmend(route) {
     route.post((req, res) => {
-      logger.log('Start ammend');
+      logger.log('Start amend');
       logger.log(req.body.paths);
       Git.commit()
         .addPaths(...req.body.paths)
