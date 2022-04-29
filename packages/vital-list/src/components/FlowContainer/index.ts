@@ -32,7 +32,7 @@ const DecorationVariations = {
   Bulleted: vitalList.WithBullets,
   Numbered: vitalList.WithNumbers,
   Plain: asListToken({
-    Meta: flowHoc.meta.term('Decoration')('None'),
+    Meta: flowHoc.meta.term('Decoration')('Undecorated'),
   }),
 };
 

@@ -1,0 +1,18 @@
+[
+  {
+    "type": "H1",
+    "children": [
+      {
+        "text": "Table in Flow container"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "This page demonstrates Tables varied overed the different variations."
+      }
+    ]
+  }
+]

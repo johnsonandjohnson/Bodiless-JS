@@ -22,11 +22,13 @@ enum Section {
 }
 export type TableComponents = {
   Wrapper: ComponentType<StylableProps>,
+  Table: ComponentType<StylableProps>,
   TBody: ComponentType<StylableProps>,
   THead: ComponentType<StylableProps>,
   TFoot: ComponentType<StylableProps>,
   Row: ComponentType<StylableProps>,
   Cell: ComponentType<StylableProps>,
+  CellContent: ComponentType<StylableProps>,
 };
 
 type TableBaseProps = {
@@ -39,9 +41,10 @@ type TableProps = TableBaseProps
 & DesignableComponentsProps<TableComponents> & HTMLProps<HTMLElement>;
 
 type TableSectionProps = {
-  Wrapper: ComponentType<StylableProps>,
+  Table: ComponentType<StylableProps>,
   Row: ComponentType<StylableProps>,
   Cell: ComponentType<StylableProps>,
+  CellContent: ComponentType<StylableProps>,
   section: Section,
   columns: string[],
   rows: string[],

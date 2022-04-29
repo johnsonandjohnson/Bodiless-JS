@@ -140,13 +140,13 @@ full_deploy () {
   echo "Full deploy, branch is ${PLATFORM_BRANCH}"
   rm -rf ${ROOT_DIR}
   if [[ ${PLATFORM_BRANCH} =~ ^pr- ]]; then
-    ${CMD_GIT} -c credential.helper="!f() { echo username=${APP_GIT_USER}; echo password=${APP_GIT_PW}; }; f" clone ${APP_GIT_REMOTE_URL} ${ROOT_DIR}
+    ${CMD_GIT} -c credential.helper="!f() { sleep 5; echo username=${APP_GIT_USER}; echo password=${APP_GIT_PW}; }; f" clone ${APP_GIT_REMOTE_URL} ${ROOT_DIR}
     cd ${ROOT_DIR}
     ID=$(echo $PLATFORM_BRANCH | sed s/pr-//g)
     git fetch origin pull/${ID}/head:${PLATFORM_BRANCH}
     git checkout ${PLATFORM_BRANCH}
   else
-    ${CMD_GIT} -c credential.helper="!f() { echo username=${APP_GIT_USER}; echo password=${APP_GIT_PW}; }; f" clone -b ${PLATFORM_BRANCH} ${APP_GIT_REMOTE_URL} ${ROOT_DIR}
+    ${CMD_GIT} -c credential.helper="!f() { sleep 5; echo username=${APP_GIT_USER}; echo password=${APP_GIT_PW}; }; f" clone -b ${PLATFORM_BRANCH} ${APP_GIT_REMOTE_URL} ${ROOT_DIR}
     cd ${ROOT_DIR}
   fi
   git_store_credential
@@ -173,7 +173,7 @@ git_store_credential () {
     GIT_HOST=$(echo ${APP_GIT_REMOTE_URL} | awk -F/ '{print $3}')
     # remove user info, if any
     GIT_HOST="${GIT_HOST#*:*@}"
-    echo 'https://'${APP_GIT_USER}':'${APP_GIT_PW}'@'${GIT_HOST} > ${GIT_STORE_CREDENTIAL}
+    echo 'https://'${APP_GIT_USER}':'$(echo -n ${APP_GIT_PW}|jq -sRr @uri)'@'${GIT_HOST} > ${GIT_STORE_CREDENTIAL}
     # set owner permission only
     chmod 600 ${GIT_STORE_CREDENTIAL}
     git config --local credential.helper 'store --file='${GIT_STORE_CREDENTIAL}
