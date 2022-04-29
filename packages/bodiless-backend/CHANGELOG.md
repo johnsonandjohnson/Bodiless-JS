@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.11](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-04-28)
+
+
+### Bug Fixes
+
+* **bodiless-page:** 500 error message update ([#1665](https://github.com/johnsonandjohnson/Bodiless-JS/issues/1665)) ([9ab9161](https://github.com/johnsonandjohnson/Bodiless-JS/commit/9ab91615be2e81c9b4b3989c4f63a128d4076608))
+
+
+
+
+
 # [1.0.0-beta.10](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-04-26)
 
 **Note:** Version bump only for package @bodiless/backend

@@ -45,7 +45,7 @@ const FlowContainerEmpty$ = (ui: UI) => {
   // mobx has issues with destructured values
   // eslint-disable-next-line react/destructuring-assignment
   const activeClassName = context.isActive ? 'bl-border-orange-400' : 'hover:bl-border-orange-400';
-  const classNames = `bl-border-2 bl-border-dashed bl-flex bl-w-full bl-justify-center 
+  const classNames = `bl-border-2 bl-border-dashed bl-border-gray-200 bl-flex bl-w-full bl-justify-center 
     bl-flex-wrap bl-py-grid-3 ${activeClassName}`;
   return (
     <FlowContainerEmptyWrapper className={classNames}>
