@@ -76,10 +76,10 @@ const Base = asHeaderToken({
   },
   Layout: {
     Container: 'flex justify-between items-center',
-    MenuContainer: 'hidden lg:flex justify-between items-center flex-grow',
+    MenuContainer: 'hidden xl:flex justify-between items-center flex-grow',
     ActionMenuContainer: 'flex items-center',
     MenuToggler: 'flex justify-center items-center',
-    MenuTogglerWrapper: 'flex lg:hidden',
+    MenuTogglerWrapper: 'flex xl:hidden',
   },
   Spacing: {
     Container: as(

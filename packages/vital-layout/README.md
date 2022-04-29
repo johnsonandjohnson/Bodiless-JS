@@ -1,11 +1,6 @@
-# CX Layout Components
+# `@bodiless/vital-layout`
 
-The CX Layout (`@bodiless/cx-layout`) package is composed of the following components:
+For documentation on the Vital Layout package, please see:
 
-- [CX Layout](./Layout)
-- [CX Helmet](./Helmet)
-- [CX Header](./Header)
-- [CX Footer](./Footer)
-- [CX Logo](./Logo)
-- [CX Menu Toggler](./MenuToggler)
-- [CX Search Toggler](./SearchToggler)
+- [Vital Layout | BodilessJS Docs](https://johnsonandjohnson.github.io/Bodiless-JS/#/VitalDesignSystem/Components/VitalLayout/)
+- [`doc/` Directory](./doc)

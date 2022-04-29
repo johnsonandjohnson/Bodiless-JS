@@ -1,7 +1,7 @@
-# CanvasX Elements
+# Vital Elements
 
-CanvasX Elements is composed of [element tokens](/Design/DesignSystem#element-tokens) to implement
-an opinionated CanvasX design system.
+Vital Elements is composed of [element tokens](/Design/DesignSystem#element-tokens) to implement
+an opinionated Vital Design System.
 
 It consists of the following types of component element tokens, and they are all in associated
 tokens folders:
@@ -13,27 +13,27 @@ tokens folders:
 
 ## Content Editor Details
 
-There is no interaction by the Content Editor with the CanvasX element tokens, only with tokens once
+There is no interaction by the Content Editor with the Vital element tokens, only with tokens once
 they've been composed into components.
 
 ## Site Builder Details
 
-### Usage of CX Element Tokens As Is
+### Usage of Vital Element Tokens As Is
 
-The Site Builder has the ability to use any of the token CanvasX elements which are in the
-`cx-elements` collection.
+The Site Builder has the ability to use any of the token Vital elements which are in the
+`vital-elements` collection.
 
 #### Usage
 
-Import the required Element tokens from `@bodiless/cx-elements`.
+Import the required Element tokens from `@bodiless/vital-elements`.
 
 If a singular token is being used, and is directly from a specific Element token:
 
 ```js
-import { cxColor } from '@bodiless/cx-elements';
+import { vitalColor } from '@bodiless/vital-elements';
 
 const Foo = {
-  Header1: cxColor.TextPrimaryBodyCopy,
+  Header1: vitalColor.TextPrimaryBodyCopy,
   //...
 };
 ```
@@ -41,33 +41,33 @@ const Foo = {
 If combining multiple tokens, you can put them within `as()` or `flowHoc()`:
 
 ```js
-import { cxColor, cxTextDecoration } from '@bodiless/cx-elements';
+import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
 
 const Foo = {
   BoldBody: as(
-    cxTextDecoration.Bold,
-    cxColor.TextPrimaryBodyCopy,
+    vitalTextDecoration.Bold,
+    vitalColor.TextPrimaryBodyCopy,
   ),
   //...
 };
 ```
 
-### Using CX Element Tokens, but Customizing for Site-Specific Typography
+### Using Vital Element Tokens, but Customizing for Site-Specific Typography
 
 The Site Builder may need to override a specific token, or a specific set of tokens, and the
-following is a how-to guide to apply the [best methodology](./CX_SiteTypography) for doing so.
+following is a how-to guide to apply the [best methodology](./SiteTypography) for doing so.
 
 ### Helper Utilities
 
 The package also includes some helper tokens that are very useful in token composition:
 
-* `asCxTokenSpec` : Creates a token definition utility for a clean component, and will allow tokens
+* `asVitalTokenSpec` : Creates a token definition utility for a clean component, and will allow tokens
   to be assigned to any of the slots within your clean component.
 
   * Usage:
 
     ```jsx
-    const asLayoutToken = asCxTokenSpec<LayoutComponents>();
+    const asLayoutToken = asVitalTokenSpec<LayoutComponents>();
     ```
 
 * `asMetaToken` : Creates a token which applies the given metadata.
@@ -87,13 +87,13 @@ The package also includes some helper tokens that are very useful in token compo
     ```jsx
     const Link = asElementToken({
       Core: {
-        _: cxFontSize.Base,
+        _: vitalFontSize.Base,
       },
       Theme: {
         _: as(
-          cxTextDecoration.Bold,
-          cxTextDecoration.Underline,
-          cxColor.TextPrimaryInteractive,
+          vitalTextDecoration.Bold,
+          vitalTextDecoration.Underline,
+          vitalColor.TextPrimaryInteractive,
         ),
       },
       Meta: meta,
@@ -131,13 +131,13 @@ The package also includes some helper tokens that are very useful in token compo
 
     * The above example will apply the same meta to all element tokens.
 
-### Shadowing CX Element Tokens
+### Shadowing Vital Element Tokens
 
-For more information on shadowing CX Element tokens, read [CX Shadow](./CX_Shadow.md).
+For more information on shadowing Vital Element tokens, read [Shadow](./Shadow.md).
 
 ## Architectural Details
 
-When adding new Element tokens to the `cx-elements` package:
+When adding new Element tokens to the `vital-elements` package:
 
 * Add to existing Element if it fits the associated component token, or create a new component token
   with applicable name.

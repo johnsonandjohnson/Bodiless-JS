@@ -1,12 +1,12 @@
 # Using Tailwind System with Bodiless
 
 As discussed in other sections, BodilessJS is pre-configured to use
-[TailwindCSS](https://tailwindcss.com), which is utility-first CSS framework. While this is not
-strictly required, we highly recommend it to get the most out of the Bodiless Design System. If you
-are unfamiliar with Tailwind, you can learn more from:
+[TailwindCSS](https://tailwindcss.com ':target=_blank'), which is utility-first CSS framework. While
+this is not strictly required, we highly recommend it to get the most out of the Bodiless Design
+System. If you are unfamiliar with Tailwind, you can learn more from:
 
-- [Tailwind on GitHub](https://github.com/tailwindcss/tailwindcss)
-- [Utility-First Fundamentals | Tailwind Docs](https://tailwindcss.com/docs/utility-first)
+- [Tailwind on GitHub](https://github.com/tailwindcss/tailwindcss ':target=_blank')
+- [Utility-First Fundamentals | Tailwind Docs](https://tailwindcss.com/docs/utility-first ':target=_blank')
 
 Most of your site's styling can be defined with Tailwind, and, for the most part, BodilessJS will
 defer to Tailwind documentation. The following documentation is either specific to Bodiless
@@ -15,21 +15,21 @@ documentation or suggested best practices.
 
 ## Tailwind Configuration File
 
-For configuration, Tailwind uses a `tailwind.config.js` file, but, in Bodiless, we use a
-`tailwind.config.js` file at the package and site level.
+For configuration, Tailwind uses a `tailwind.config.js` file; in Bodiless, we have these
+configuration files at the package and site level.
 
-Your site's Tailwind configuration file, `tailwind.config.js`, can be found in the root
-directory of the site or within a package.
+Your site's Tailwind configuration file can be found in the root directory of the site or within a
+package.
 
-Adding custom styling can be done by editing `tailwind.config.js`, following [Tailwind's
-documentation](https://tailwindcss.com/docs/configuration).
+Adding custom styling can be done by editing a `tailwind.config.js` file, following [Tailwind's
+documentation](https://tailwindcss.com/docs/configuration ':target=_blank').
 
 If your site doesn't have a Tailwind configuration file in its root directory, then your site will
 use all of Tailwind's default settings as well as packages that include Tailwind.
 
 Bodiless sites have a mechanism to discover all packages' and sites' Tailwind config files
-(`tailwind.config.js`), and combine them into a single Tailwind file during the build process.
-To utilize this, you must follow the naming convention described in the [next
+(`tailwind.config.js`), and combine them into a single Tailwind file during the build process. To
+utilize this, you must follow the naming convention described in the [next
 section](#tailwind-configuration-for-a-package).
 
 Tailwind provides a feature that purges CSS classes that are not found in the code base, thus
@@ -42,27 +42,32 @@ always have precedence**.
 
 01. Add a `tailwind.config.js` file to the root of the package.
     ```js
-    const plugin = require('tailwindcss/plugin');
+    import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
-    module.exports = {
+    const twConfig = {
       content: [
         './lib/**/!(*.d).{ts,js,jsx,tsx}',
       ],
       theme: {},
       plugins: [],
     };
+
+    export default getPackageTailwindConfig({
+      twConfig,
+      resolver: (pkgName) => require.resolve(pkgName),
+    });
     ```
-01. Within `files` of the `package.json`, add `/tailwind.config.js` to make sure it's exported
-    with the package.
+01. Within `files` of the `package.json`, add `/tailwind.config.js` to make sure it's exported with
+    the package.
 
 ## Determine Whether to Use Extend vs Replace
 
 Tailwind allows replacing or extending the settings; for the majority of cases, you want to
-[extend](https://tailwindcss.com/docs/theme/#extending-the-default-theme). In cases like adding a
-new margin or padding custom definition, you want to add this definition to an existing set, and
-extend will do this. If there are cases where you would want to restrict and totally redefine the
-settings, you would not use extend. The one suggested case would be colors to restrict the color
-set, so generic Tailwind colors are not available and accidentally used.
+[extend](https://tailwindcss.com/docs/theme/#extending-the-default-theme ':target=_blank'). In cases
+like adding a new margin or padding custom definition, you want to add this definition to an
+existing set, and extend will do this. If there are cases where you would want to restrict and
+totally redefine the settings, you would not use extend. The one suggested case would be colors to
+restrict the color set, so generic Tailwind colors are not available and accidentally used.
 
 ```js
 theme: {
@@ -81,14 +86,14 @@ theme: {
 
 ## Spacing
 
-Use the [Space Between](https://tailwindcss.com/docs/space) Tailwind feature — rather than
-independent 'padding' and 'margin' — when defining spacing options, so that you have consistent
-units and measures. This is a great feature of Tailwind for layout, and allows you to add consistent
-[spacing](https://tailwindcss.com/docs/customizing-spacing) between all children of an element,
-rather than setting padding or margin on each child.
+Use the [Space Between](https://tailwindcss.com/docs/space ':target=_blank') Tailwind feature —
+rather than independent 'padding' and 'margin' — when defining spacing options, so that you have
+consistent units and measures. This is a great feature of Tailwind for layout, and allows you to add
+consistent [spacing](https://tailwindcss.com/docs/customizing-spacing ':target=_blank') between all
+children of an element, rather than setting padding or margin on each child.
 
-Third-party resource: [TailwindCSS, Give Me Some
-Space](https://devdojo.com/tnylea/tailwindcss-space-classes) | Tony Lea, DevDojo
+Third-party resource: [TailwindCSS, Give Me Some Space | Tony Lea,
+DevDojo](https://devdojo.com/tnylea/tailwindcss-space-classes ':target=_blank')
 
 ## Pseudo-Elements
 
@@ -133,8 +138,8 @@ breakpoints](/CX_DesignSystem/Components/CX_Layout/Responsiveness#Breakpoints).
 
 Every utility class in Tailwind can be applied conditionally at different breakpoints. For more
 information, read about [Tailwind's mobile first responsive
-design](https://tailwindcss.com/docs/responsive-design#mobile-first), which contains excellent
-documentation about responsive classes and how to use them.
+design](https://tailwindcss.com/docs/responsive-design#mobile-first ':target=_blank'), which
+contains excellent documentation about responsive classes and how to use them.
 
 ## Using Custom CSS
 
@@ -164,4 +169,4 @@ updates/changes are being made.
 Common cases for using custom CSS:
 
 - Complex CSS that generates a specific styling
-- Classes that are not available in Tailwind.
+- Classes that are not available in Tailwind

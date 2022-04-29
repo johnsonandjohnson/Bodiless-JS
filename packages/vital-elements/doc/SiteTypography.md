@@ -1,28 +1,28 @@
-# CanvasX Site Typography Setup/Override
+# Vital Site Typography Setup/Override
 
 The site typography consists of updating fonts, colors, font sizes, and basic tokens (e.g., `h1`).
 
 ## Step 1: Setup Fonts
 
-The CX Starter utilizes the [DM Sans](https://fonts.google.com/specimen/DM+Sans) font from the
+The Vital Site utilizes the [DM Sans](https://fonts.google.com/specimen/DM+Sans) font from the
 Google API. If your designs require a different font, please refer to the [fonts documentation
 guide](/Development/Guides/BuildingSites/Typography/Fonts).
 
 ## Step 2: Font Size & Line Heights
 
-The CanvasX Design System has defined the following [font
+The Vital Design System has defined the following [font
 sizes](https://xd.adobe.com/view/fd6e4dde-2ecf-480a-aaaf-f5043cb04bf0-a83d/screen/d0c37949-f384-4a14-ad34-011d39ef62ba/specs/),
 and they have been converted into the REM point system using base 16.
 
 To facilitate converting a custom font size into REM units, please refer to this [XLS
 Template](./assets/PXtoREMTemplate.xlsx).
 
-### Option 1: Shadow `cxFontSize` (*Preferred Solution)
+### Option 1: Shadow `vitalFontSize` (*Preferred Solution)
 
-Provide the Shadowing function as defined in [Shadow](./CX_Shadow).
+Define a Shadowing token collection as defined in [Shadow](./Shadow).
 
 File to shadow:
-[`cxFontSize`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-elements/src/components/Element/FontSize/tokens/cxFontSize.ts)
+[`vitalFontSize`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Element/FontSize/tokens/vitalFontSize.ts)
 
 ### Option 2: Override in `tailwind.config.js` File
 
@@ -54,15 +54,15 @@ module.exports = {
 
 ## Step 3: Define Colors for Site
 
-The CanvasX Design System defines the following
+The Vital Design System defines the following
 [colors](https://xd.adobe.com/view/fd6e4dde-2ecf-480a-aaaf-f5043cb04bf0-a83d/screen/96d7b2f3-6afb-45fb-b808-075a24af2434/specs/).
 
-### Option 1: Shadow `cxColor` (*Preferred Solution)
+### Option 1: Shadow `vitalColor` (*Preferred Solution)
 
-Provide the Shadowing function as defined in [Shadow](./CX_Shadow).
+Define a Shadowing token collection as defined in [Shadow](./Shadow).
 
 File to shadow:
-[`cxColor`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-elements/src/components/Element/Color/tokens/cxColor.ts)
+[`vitalColor`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Element/Color/tokens/vitalColor.ts)
 
 ### Option 2: Override in `tailwind.config.js` File
 
@@ -70,7 +70,7 @@ File to shadow:
 module.exports = {
   theme: {
     colors: {
-      'cx-primary': {
+      'vital-primary': {
         brand: '#CA081B',
         'card-bg': '#ffffff',
         'page-bg': '#F4F4F4',
@@ -80,7 +80,7 @@ module.exports = {
         'body-copy': '#63666A',
         'header-copy': '#212121',
       },
-      'cx-secondary': {
+      'vital-secondary': {
         eyebrow: '#CC0099',
         'footer-bg': '#2B2B33',
       },
@@ -89,20 +89,20 @@ module.exports = {
 };
 ```
 
-## Step 4: Override Other CX Tokens
+## Step 4: Override Other Vital Tokens
 
-The CanvasX Design System provides header, body, eyebrow, link, and other specific text decoration
+The Vital Design System provides header, body, eyebrow, link, and other specific text decoration
 tokens, which have their designs linked above. These tokens can be shadowed, which is the
 recommended way of changing, adding, or redefining tokens at a package/site level.
 
 ### Option 1: Shadowing (*Preferred Solution)
 
-Provide the Shadowing function as defined in [Shadow](./CX_Shadow).
+Define a Shadowing token collection as defined in [Shadow](./Shadow).
 
 Files to shadow:
 
-- [`cxTypography`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-elements/src/components/Element/Typography/tokens/cxTypography.ts)
-- [`cXTextDecoration`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-elements/src/components/Element/TextDecoration/tokens/cxTextDecoration.ts)
+- [`vitalTypography`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Element/Typography/tokens/vitalTypography.ts)
+- [`vitalTextDecoration`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Element/TextDecoration/tokens/vitalTextDecoration.ts)
 
 ### Option 2: Define Custom Tokens at Package Level
 

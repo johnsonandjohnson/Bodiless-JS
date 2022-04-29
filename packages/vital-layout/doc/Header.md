@@ -1,6 +1,6 @@
-# CanvasX Header Component
+# Vital Header Component
 
-The CX Header Component provides a header with the following elements:
+The Vital Header Component provides a header with the following elements:
 
 - Logo
 - Menu
@@ -22,20 +22,20 @@ By default, the editable components include:
 
 ## Site Builder Details
 
-From a Site Builder perspective, CX Header is comprised of a token collection (`cxHeader`) and a
-Header component (`HeaderClean`). You can use the default CX Header token (`cxHeader.Default`) as
-is, or you can recompose it to meet your site's requirements.
+From a Site Builder perspective, Vital Header is comprised of a token collection (`vitalHeader`) and
+a Header component (`HeaderClean`). You can use the default Vital Header token
+(`vitalHeader.Default`) as is, or you can recompose it to meet your site's requirements.
 
 ### Usage
 
-Using the following code example as a guide, you can create a Header using the CanvasX default
-tokens, and applying the correct node keys. Remember to apply the necessary imports to the file.
+Using the following code example as a guide, you can create a Header using the Vital default tokens,
+and applying the correct node keys. Remember to apply the necessary imports to the file.
 
 ```tsx
 const Header = as(
   // You can compose or create a new header token
   // from scratch, but we'll use the default one here.
-  cxHeader.Default,
+  vitalHeader.Default,
   // Apply a node to the header so inner nodes
   // are organized into its namespace.
   withNode,
@@ -55,9 +55,9 @@ export default Layout;
 
 #### Customizing Via Shadowing (*Preferred Method)
 
-Provide the Shadowing function as defined in [Shadow](../CX_Elements/CX_Shadow).
+Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
 
-File to shadow: `./lib/shadow/cx-layout/{MyHeader}.js`
+File to shadow: `./lib/shadow/vital-layout/{MyHeader}.js`
 
 #### Customizing Via Extending
 
@@ -67,15 +67,15 @@ extend/override the specific domains within that token.
 ```js
 const BrandXHeader = asHeaderToken({
   // Will spread all existing header functionality across all domains.
-  ...cxHeader.Base,
+  ...vitalHeader.Base,
   Components: {
     // Will spread all header components as is.
-    ...cxHeader.Base.Components,
+    ...vitalHeader.Base.Components,
     // Will replace the DesktopSearch slot with the custom component
     DesktopSearch: brandXSearch.Default,
   },
   Spacing: {
-    // Since there is no spread, will override the cxHeader Spacing domain
+    // Since there is no spread, will override the vitalHeader Spacing domain
     // and use what is defined below.
     Container: 'mx-auto py-2',
   }
@@ -86,6 +86,6 @@ This token is then applied to the Header slot within Layout.
 
 ## Architectural Details
 
-CX Header provides a `<header>` element wrapper around its internal elements. To see how these
+Vital Header provides a `<header>` element wrapper around its internal elements. To see how these
 elements are structured within the wrapper, please see:
-[`HeaderClean.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-layout/src/components/Header/HeaderClean.tsx)
+[`HeaderClean.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Header/HeaderClean.tsx)

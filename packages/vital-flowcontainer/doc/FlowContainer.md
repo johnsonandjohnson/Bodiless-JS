@@ -20,8 +20,8 @@ const Default = asFluidToken(
   {
     ...Base,
     Spacing: {
-      Wrapper: cxSpacing.GutterOffset,
-      ComponentWrapper: cxSpacing.Gutter,
+      Wrapper: vitalSpacing.GutterOffset,
+      ComponentWrapper: vitalSpacing.Gutter,
     },
   },
   WithContentRegionVariations,
