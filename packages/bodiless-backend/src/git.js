@@ -328,9 +328,17 @@ const mergeMain = async () => {
   const remote = getGitCmdOutputString(await GitCmd.cmd().add('remote', 'get-url', 'origin').exec());
   const rootCmd = GitCmd.cmd().add('rev-parse', '--show-toplevel');
   const rootDir = getGitCmdOutputString(await rootCmd.exec());
-
+  // Get root repo credential.helper.
+  const credentialHelperCmd = GitCmd.cmd().add('config', '--get', 'credential.helper');
+  const credentialHelper = getGitCmdOutputString(await credentialHelperCmd.exec());
+  logger.log(`credentialHelper: ${credentialHelper}`);
   await clone(rootDir, { directory: tmpDir, branch: upstreamBranch.replace('origin/', '') });
   process.chdir(tmpDir);
+
+  if (credentialHelper) {
+    const credentialHelperSetCmd = GitCmd.cmd().add('config', '--local', 'credential.helper', credentialHelper);
+    await credentialHelperSetCmd.exec();
+  }
 
   try {
     await GitCmd.cmd()
