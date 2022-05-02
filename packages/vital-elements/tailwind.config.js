@@ -54,6 +54,8 @@ const twConfig = {
       'vital-secondary': {
         eyebrow: '#CC0099',
         'footer-bg': '#2B2B33',
+        table: '#E5E7EB',
+        'table-interactive': '#f3f4f6',
         separator: '#666666',
       },
     },

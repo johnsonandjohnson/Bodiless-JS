@@ -1,0 +1,52 @@
+{
+  "name": "@bodiless/vital-table",
+  "sideEffects": false,
+  "version": "1.0.0-beta.9",
+  "description": "",
+  "author": "Heidi Vanyo <hvanyo@its.jnj.com>",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "/lib",
+    "/bodiless.docs.json",
+    "/getDocs.js",
+    "/tailwind.config.js",
+    "/doc",
+    "/assets"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "run-p build:lib build:api-doc",
+    "build:api-doc": "typedoc --out doc/api src",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
+  },
+  "peerDependencies": {
+    "react": "^17.0.2"
+  },
+  "dependencies": {
+    "@bodiless/cli": "^1.0.0-beta.9",
+    "@bodiless/components": "^1.0.0-beta.9",
+    "@bodiless/components-ui": "^1.0.0-beta.9",
+    "@bodiless/core": "^1.0.0-beta.9",
+    "@bodiless/fclasses": "^1.0.0-beta.9",
+    "@bodiless/hydration": "^1.0.0-beta.9",
+    "@bodiless/layouts": "^1.0.0-beta.9",
+    "@bodiless/richtext": "^1.0.0-beta.9",
+    "@bodiless/richtext-ui": "^1.0.0-beta.9",
+    "@bodiless/table": "^1.0.0-beta.9",
+    "@bodiless/vital-editors": "^1.0.0-beta.9",
+    "@bodiless/vital-elements": "^1.0.0-beta.9",
+    "lodash": "^4.17.19",
+    "tailwindcss": "^3.0.23",
+    "tailwindcss-dir": "^4.0.0"
+  }
+}
