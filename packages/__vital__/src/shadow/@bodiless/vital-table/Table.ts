@@ -12,28 +12,29 @@
  * limitations under the License.
  */
 
-import { vitalTable } from '@bodiless/vital-table';
+import { vitalTableBase } from '@bodiless/vital-table';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { addProps } from '@bodiless/fclasses';
 
 const Default = asFluidToken({
-  ...vitalTable.Default,
+  ...vitalTableBase.Default,
   Components: {
-    ...vitalTable.Default.Components,
+    ...vitalTableBase.Default.Components,
     Wrapper: addProps({ 'data-shadowed-by': '__vitalstarter_:Table' }),
   },
   /* The following is example that overrides full width and uses
    * fixed widths for columns. The width of the first row will set the
    * column widths for the whole table.  Data of cells will be centered.
-   */
-  /* TODO comment out when this works */
+   *
   Theme: {
     Table: 'table-fixed',
     Cell: 'text-center',
   },
+  */
+
 });
 
 export default {
-  ...vitalTable,
+  ...vitalTableBase,
   Default,
 };

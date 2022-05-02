@@ -34,13 +34,17 @@ The vitalTable.Default component provides the base table styling and WithLightHe
 Define a Shadowing token collection as defined in [Shadow](../vital-table/Shadow).
 
 File to shadow:
-[`vitalTable`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-table/src/components/vital-table/tokens/vitalTable.ts)
+[`Table`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-table/src/components/vital-table/tokens/vitalTable.ts)
 
 ```js
+import { vitalTableBase } from '@bodiless/vital-table';
+import { asFluidToken } from '@bodiless/vital-elements';
+import { addProps } from '@bodiless/fclasses';
+
 const Default = asFluidToken({
-  // ...vitalTable.Default,
+  ...vitalTableBase.Default,
   Components: {
-    // ...vitalTable.Default.Components,
+    ...vitalTableBase.Default.Components,
     Wrapper: addProps({ 'data-shadowed-by': '__vitalstarter_:Table' }),
   },
   /* The following is example that overrides full width and uses
@@ -51,10 +55,11 @@ const Default = asFluidToken({
     Table: 'table-fixed',
     Cell: 'text-center',
   },
+
 });
 
 export default {
-  ...vitalTable,
+  ...vitalTableBase,
   Default,
 };
 ```
