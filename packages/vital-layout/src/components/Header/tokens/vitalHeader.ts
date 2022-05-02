@@ -44,7 +44,7 @@ const WithLanguageButton = flowHoc(
     children: 'Español',
     // @TODO: Create divider tokens.
     // @TODO: Use existing tokens.
-    className: 'text-m-base border-l-2 border-vital-primary-divider pl-5 lg:mr-5 lg:px-5 lg:py-2 lg:border-r-2',
+    className: 'text-m-base pl-5 lg:mr-5 lg:px-5 lg:py-2',
   }),
 );
 
@@ -94,6 +94,7 @@ const Base = asHeaderToken({
   },
   Theme: {
     Wrapper: vitalColor.BgPrimaryPage,
+    LanguageButton: 'lg:border-vital-primary-divider lg:border-r-2',
   },
   Schema: {
     Logo: withNodeKey({ nodeKey: 'Logo' }),
