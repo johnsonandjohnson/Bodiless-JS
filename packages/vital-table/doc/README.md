@@ -1,8 +1,8 @@
 # Vital Table Component
 
 The Vital Table Component is based on the [BodilessJS Table Component](/Components/Table). The Vital
-Rich Table provides a design system for the table with a set, to help meet typical site-use design.
-It also provides a set of variations to the Flow Container that is available to the Content Editor.
+Table applies a Vital Design System to the table, to help meet typical site-use design, as well as
+offer different design variations.
 
 ## Content Editor Details
 
