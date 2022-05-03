@@ -1,7 +1,7 @@
 {
   "VitalDesignSystem": {
     "Components": {
-      "VitalTable.md": "./doc/Table.md"
+      "VitalTable.md": "./doc/README.md"
     }
   }
 }
