@@ -25,6 +25,9 @@ const twConfig = {
       maxWidth: {
         24: '6rem',
       },
+      minWidth: {
+        24: '6rem',
+      },
     },
   },
 };

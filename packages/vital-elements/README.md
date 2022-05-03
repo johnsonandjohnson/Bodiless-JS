@@ -1,6 +1,6 @@
-# CanvasX Design System
+# `@bodiless/vital-elements`
 
-The CanvasX Design System is an opinionated design that aggregates suggested best practices for UX
-and performance to create optimal branded sites.
+For documentation on the Vital Elements package, please see:
 
-CanvasX Elements (`@bodiless/cx-elements`) is the core package of the CanvasX Design System.
+- [Vital Elements | BodilessJS Docs](https://johnsonandjohnson.github.io/Bodiless-JS/#/VitalDesignSystem/Components/VitalElements/)
+- [`doc/` Directory](./doc)

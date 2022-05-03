@@ -34,7 +34,7 @@ extension mechanism in Vital can be found [_TBD_]().
 Base React components in Vital are usually bare templates which do little or nothing in themselves
 until one or more _tokens_ (see below) are applied to them. To make this clear, exported components
 are generally suffixed with "...Clean" (e.g.,
-[`HeaderClean`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-layout/src/components/Header/HeaderClean.tsx
+[`HeaderClean`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Header/HeaderClean.tsx
 ':target=_blank')).
 
 A clean component in Vital is always "designable" via the [Bodiless Design
@@ -115,9 +115,8 @@ class — they serve a different function from the classes they compose. As desc
 documentation, element tokens represent _decisions_ about how the _options_ defined by your Tailwind
 configuration should be applied.
 
-<!-- TODO: Update link after `cx-elements` is renamed. -->
 Let's take color as an example. The [Vital Tailwind
-configuration](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-elements/tailwind.config.js
+configuration](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/tailwind.config.js
 ':target=_blank') defines a base color palette:
 
 ```js
@@ -166,7 +165,7 @@ data.
 
 ```ts
 export const PrimaryTextInteractiveColor = asElementToken('Theme')(
-  'text-blue-cx hover:text-blue-cx-light',
+  'text-blue-vital hover:text-blue-vital-light',
 );
 ```
 
@@ -185,7 +184,7 @@ themselves could be reused in other contexts; the token is _only_ for primary, i
   ```ts
   {
     Theme: {
-      _: 'text-blue-cx hover:text-blue-cx-light',
+      _: 'text-blue-vital hover:text-blue-vital-light',
     },
   };
   ```
@@ -201,7 +200,7 @@ themselves could be reused in other contexts; the token is _only_ for primary, i
 
   ```ts
   const asPrimaryTextInteractiveColor = addClasses(
-    'text-blue-cx hover:text-blue-cx-light'
+    'text-blue-vital hover:text-blue-vital-light'
   );
   ```
 
@@ -312,10 +311,9 @@ design element within the component.
 
 Vital provides the `as` utility for creating a token HOC from such a specification:
 
-<!-- TODO: Update package names. -->
 ```ts
-import { as } from '@canvasx/elements';
-import { LinkClean, brandLink } from '@canvasx/brand';
+import { as } from '@bodiless/vital-elements';
+import { LinkClean, brandLink } from '@bodiless/brand';
 const DefaultLink = as(brandLink.Default)(LinkClean);
 ```
 
@@ -324,9 +322,8 @@ to customize part of the token's behavior while retaining the rest. For example,
 our site's design system calls for links to be purple and not underlined. We could retain the edit
 behavior of the brand link and change its styling:
 
-<!-- TODO: Update package name. -->
 ```ts
-import { brandLink } from '@canvasx/brand';
+import { brandLink } from '@bodiless/brand';
 const Base = {
   ...brandLink.Base,
   Theme: {
@@ -345,11 +342,10 @@ As another example, imagine we wanted to reuse the styling of the original link,
 where we did not want the link to be editable by a Content Editor. We could easily define our
 non-editable link as:
 
-<!-- TODO: Update package names. -->
 ```ts
 import omit from 'lodash/omit';
-import { LinkClean } from '@canvasx/link';
-import { brandLink } from '@canvasx/brand';
+import { LinkClean } from '@bodiless/vital-link';
+import { brandLink } from '@bodiless/brand';
 
 const NonEditableLink = as(omit(brandLink.Base, 'Editors'))(LinkClean);
 ```
@@ -394,9 +390,8 @@ const Sticky = asHeaderToken({
 
 Vital provides the `extend` utility to make this a bit less verbose:
 
-<!-- TODO: Update package name. -->
 ```ts
-import { extend } from '@canvasx/elements';
+import { extend } from '@bodiless/vital-elements';
 
 const Sticky = extend(Base, WithSticky);
 ```
@@ -484,7 +479,7 @@ exact science. As a rule of thumb:
 
 A Vital component will often have other clean components as design elements. For example, the [Vital
 Layout
-Component](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/cx-layout/src/components/Layout/LayoutClean.tsx)
+Component](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Layout/LayoutClean.tsx)
 includes the `HeaderClean` and `FooterClean` components as design keys:
 
 ```tsx

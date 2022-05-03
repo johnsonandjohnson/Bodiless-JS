@@ -302,7 +302,7 @@ const asBodilessTable = (nodeKey?: NodeKey, defaultData?:TableBaseProps) => flow
   withNode,
   withNodeKey(nodeKey),
   withFinalDesign({
-    Wrapper: withMenuOptions({ useMenuOptions: useMenuOptionsTableOverview, name: 'Table' }),
+    Table: withMenuOptions({ useMenuOptions: useMenuOptionsTableOverview, name: 'Table' }),
     TBody: flowHoc(withNode, withNodeKey(Section.body)),
     THead: flowHoc(withNode, withNodeKey(Section.head)),
     TFoot: flowHoc(withNode, withNodeKey(Section.foot)),

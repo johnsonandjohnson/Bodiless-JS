@@ -20,16 +20,29 @@ import {
 } from '@bodiless/fclasses';
 import { asRewardsToken } from '../RewardsClean';
 
+/*
+ * @TODO
+ * all the styling/tokens for vitalRewards is a placeholder for looks only
+ * and could be cleaned up and follow correct patterns when this component
+ * is actually built.
+ */
+
+const RewardsFormElement = as(
+  'bg-vital-primary-page-bg text-vital-primary-header-copy',
+  '2xl:border 2xl:border-vital-secondary-footer-text 2xl:bg-vital-secondary-footer-bg 2xl:text-vital-primary-footer-copy',
+);
+const RewardColorCopy = 'text-vital-primary-header-copy 2xl:text-vital-primary-footer-copy';
+
 const Base = asRewardsToken({
   Components: {
     Wrapper: startWith(Div),
   },
   Layout: {
-    Wrapper: 'w-full',
+    Wrapper: 'w-full max-w-3xl mx-auto',
     FormWrapper: 'md:flex md:justify-between lg:block',
     FormTextFirstName: 'w-full lg:w-44 lg:block',
     FormTextEmail: 'w-full lg:w-44 lg:block',
-    FormButton: 'w-full lg:w-48 lg:block',
+    FormButton: 'w-full lg:w-full lg:block',
   },
   Spacing: {
     Brand: 'mb-8 md:mb-4 lg:mb-2',
@@ -42,34 +55,25 @@ const Base = asRewardsToken({
   // @TODO: Rewards colors needs to be organized/setup and updated.
   Theme: {
     Brand: as(
-      'text-vital-primary-header-copy text-xl font-medium',
-      'md:text-vital-primary-footer-copy md:text-m-2xl',
+      'text-xl lg:text-m-2xl font-medium',
+      RewardColorCopy,
     ),
     Title: as(
-      'text-vital-primary-header-copy text-m-xl font-bold',
-      'md:text-vital-primary-footer-copy md:text-base',
-      'lg:text-sm',
+      'text-m-xl md:text-base lg:text-sm font-bold',
+      RewardColorCopy,
     ),
     Body: as(
-      'text-vital-primary-header-copy text-sm',
-      'md:text-vital-primary-footer-copy md:text-base',
-      'lg:text-xs',
+      'text-sm md:text-base lg:text-xs',
+      RewardColorCopy,
     ),
-    FormTextFirstName: as(
-      'bg-vital-primary-page-bg text-vital-primary-header-copy text-sm font-bold rounded',
-      'md:border md:border-vital-secondary-footer-text md:bg-vital-secondary-footer-bg md:text-vital-primary-footer-copy md:rounded-none',
-      'lg:text-sm',
-    ),
-    FormTextEmail: as(
-      'bg-vital-primary-page-bg text-vital-primary-header-copy text-sm font-bold rounded',
-      'md:border md:border-vital-secondary-footer-text md:bg-vital-secondary-footer-bg md:text-vital-primary-footer-copy md:rounded-none',
-      'lg:text-sm',
-    ),
+    FormTextFirstName: RewardsFormElement,
+    FormTextEmail: RewardsFormElement,
     FormButton: as(
-      'bg-vital-primary-header-copy text-vital-primary-footer-copy text-sm font-bold rounded',
-      'md:bg-vital-primary-card-bg md:text-vital-secondary-footer-bg md:rounded-none',
+      'bg-vital-primary-header-copy 2xl:bg-vital-primary-card-bg ',
+      'text-vital-primary-footer-copy 2xl:text-vital-secondary-footer-bg',
+      'text-sm font-bold rounded lg:rounded-none',
     ),
-    Footnote: 'text-xs md:text-vital-primary-footer-copy',
+    Footnote: 'text-xs 2xl:text-vital-primary-footer-copy',
   },
   // @TODO: Placeholders must be replaced with editable fields.
   Content: {
@@ -80,7 +84,7 @@ const Base = asRewardsToken({
       children: 'Email Signup & Rewards',
     }),
     Body: withProps({
-      children: 'Want to receive tips, personalized content and exclusive offers from Johnson & Johnson? Sign up for the Care Club Rewards program today! TERMS & CONDITIONS',
+      children: 'Want to receive tips, personalized content and exclusive offers? Sign up for the Rewards program today! TERMS & CONDITIONS',
     }),
     FormTextFirstName: withProps({
       placeholder: 'First name',

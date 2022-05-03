@@ -1,8 +1,8 @@
-# Shadowing CanvasX Tokens
+# Shadowing Vital Tokens
 
-Bodiless provides a mechanism to override the tokens provided by a CanvasX package, changing their
-effect wherever they are used in the CanvasX Design System. The method, known as "Token Shadowing,"
-is similar to [Gatsby Component
+Bodiless provides a mechanism to override the tokens provided by a Vital package, changing their
+effect wherever they are used in the Vital Design System. The method, known as "Token Shadowing," is
+similar to [Gatsby Component
 Shadowing](https://www.gatsbyjs.com/blog/2019-04-29-component-shadowing/ ':target=_blank'), but more
 restrictive. In particular, only token collections are shadowable using this technique, and the
 package to be shadowed must be structured specifically to enable this feature.
@@ -18,7 +18,7 @@ consumers to extend it. You may do this by exporting the tokens from their origi
 
 Example:
 
-**File `./lib/components/Foo/tokens/cxFoo.ts`:**
+**File `./lib/components/Foo/tokens/vitalFoo.ts`:**
 
 ```js
 const Default = asFooToken({ ... });
@@ -29,7 +29,7 @@ export default { Default }; // Must be a default export.
 **File `./lib/components/Foo/tokens/index.ts`:**
 
 ```js
-import tokens from './cxFoo';
+import tokens from './vitalFoo';
 export default tokens;
 ```
 
@@ -37,9 +37,9 @@ export default tokens;
 
 ```js
 // This version will be shadowable, b/c it is exported from './tokens'.
-export { default as cxFoo } from './tokens';
+export { default as vitalFoo } from './tokens';
 // This version will not be shadowable, b/c it is exported from a different path.
-export { default as cxFooBase } from './tokens/cxFoo';
+export { default as vitalFooBase } from './tokens/vitalFoo';
 ```
 
 **File `./lib/components/index.ts`:**
@@ -60,15 +60,15 @@ To export a shadowed version of a token collection:
 
     ```js
     // Import the base collection.
-    import { cxFooBase} from 'base-package';
-    // *** NOT: import { cxFoo } from 'base-package';
+    import { vitalFooBase} from 'base-package';
+    // *** NOT: import { vitalFoo } from 'base-package';
 
     // Override one or more of the tokens in the base collection.
-    const SomeToken = asFooToken(cxFooBase.SomeToken, { ... });
+    const SomeToken = asFooToken(vitalFooBase.SomeToken, { ... });
 
     // Default export is the overridden token collection.
     export default {
-      ...cxFooBase,
+      ...vitalFooBase,
       SomeToken,
     };
     ```

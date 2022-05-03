@@ -1,7 +1,7 @@
 {
-  "CX_DesignSystem": {
+  "VitalDesignSystem": {
     "Components": {
-      "CX_FlowContainer.md": "./doc/FlowContainer.md"
+      "VitalFlowContainer.md": "./doc/FlowContainer.md"
     }
   }
 }

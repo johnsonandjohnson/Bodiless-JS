@@ -1,3 +1,6 @@
-# `@bodiless/cx-flowcontainer`
+# `@bodiless/vital-flowcontainer`
 
-See [CX FlowContainer Docs](./doc/FlowContainer.md).
+For documentation on the Vital Flow Container package, please see:
+
+- [Vital Flow Container | BodilessJS Docs](https://johnsonandjohnson.github.io/Bodiless-JS/#/VitalDesignSystem/Components/VitalFlowContainer/)
+- [`doc/` Directory](./doc)

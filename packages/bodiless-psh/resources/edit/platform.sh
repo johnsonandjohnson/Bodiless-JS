@@ -20,7 +20,7 @@ fi
 
 # Expects the following env variables:
 # APP_VOLUME - the absolute path of the writable volume
-# APP_GIT_REMOTE_URL - the path to the bitbucket git repository
+# APP_GIT_REMOTE_URL - the path to the git repository
 # APP_GIT_USER - the user for git operations
 # APP_GIT_PW - the password for git operations
 # PLATFORM_APP_DIR - the absolute path to the application directory. provided by platform.sh
@@ -30,6 +30,7 @@ CMD_GIT=/usr/bin/git
 TMP_DIR=${APP_VOLUME}/../tmp
 ROOT_DIR=${APP_VOLUME}/root
 NPM_CACHE_DIR=${APP_VOLUME}/.npm
+GIT_STORE_CREDENTIAL=${APP_VOLUME}/.credential
 
 invoke () {
   if [[ $(type $1 2>&1) =~ "function" ]]; then
@@ -137,15 +138,16 @@ full_deploy () {
   echo "Full deploy, branch is ${PLATFORM_BRANCH}"
   rm -rf ${ROOT_DIR}
   if [[ ${PLATFORM_BRANCH} =~ ^pr- ]]; then
-    ${CMD_GIT} -c credential.helper="!f() { echo username=${APP_GIT_USER}; echo password=${APP_GIT_PW}; }; f" clone ${APP_GIT_REMOTE_URL} ${ROOT_DIR}
+    ${CMD_GIT} -c credential.helper="!f() { sleep 5; echo username=${APP_GIT_USER}; echo password=${APP_GIT_PW}; }; f" clone ${APP_GIT_REMOTE_URL} ${ROOT_DIR}
     cd ${ROOT_DIR}
     ID=$(echo $PLATFORM_BRANCH | sed s/pr-//g)
     git fetch origin pull/${ID}/head:${PLATFORM_BRANCH}
     git checkout ${PLATFORM_BRANCH}
   else
-    ${CMD_GIT} -c credential.helper="!f() { echo username=${APP_GIT_USER}; echo password=${APP_GIT_PW}; }; f" clone -b ${PLATFORM_BRANCH} ${APP_GIT_REMOTE_URL} ${ROOT_DIR}
+    ${CMD_GIT} -c credential.helper="!f() { sleep 5; echo username=${APP_GIT_USER}; echo password=${APP_GIT_PW}; }; f" clone -b ${PLATFORM_BRANCH} ${APP_GIT_REMOTE_URL} ${ROOT_DIR}
     cd ${ROOT_DIR}
   fi
+  git_store_credential
   ${CMD_GIT} config user.email "${APP_GIT_USER_EMAIL}"
   ${CMD_GIT} config user.name "${APP_GIT_USER}"
 }
@@ -158,6 +160,21 @@ init_npmrc () {
     bash -c 'echo NPM Auth token is ${APP_NPM_AUTH:0:50}...'
     echo "$APP_NPM_NAMESPACE:registry=https:${APP_NPM_REGISTRY}" >> .npmrc
     echo "${APP_NPM_REGISTRY}:_authToken=${APP_NPM_AUTH}" >> .npmrc
+  fi
+}
+
+git_store_credential () {
+  # process credential store only for http based url
+  if  [[ ${APP_GIT_REMOTE_URL} =~ ^http ]] ;
+  then
+    # get host name
+    GIT_HOST=$(echo ${APP_GIT_REMOTE_URL} | awk -F/ '{print $3}')
+    # remove user info, if any
+    GIT_HOST="${GIT_HOST#*:*@}"
+    echo 'https://'${APP_GIT_USER}':'$(echo -n ${APP_GIT_PW}|jq -sRr @uri)'@'${GIT_HOST} > ${GIT_STORE_CREDENTIAL}
+    # set owner permission only
+    chmod 600 ${GIT_STORE_CREDENTIAL}
+    git config --local credential.helper 'store --file='${GIT_STORE_CREDENTIAL}
   fi
 }
 

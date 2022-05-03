@@ -1,12 +1,12 @@
 {
-  "CX_DesignSystem": {
-    "README.md": "./README.md",
+  "VitalDesignSystem": {
+    "README.md": "./doc/VitalDesignSystem.md",
     "Components": {
       "README.md": "./doc/Components.md",
-      "CX_Elements": {
-        "README.md": "./doc/CX_Elements.md",
+      "VitalElements": {
+        "README.md": "./doc/VitalElements.md",
         "ComponentTemplate.md": "./doc/ComponentTemplate.md",
-        "CX_SiteTypography.md": "./doc/CX_SiteTypography.md",
+        "SiteTypography.md": "./doc/SiteTypography.md",
         "Shadow.md": "./doc/Shadow.md",
         "StaticReplacement.md": "./doc/StaticReplacement.md",
         "Tokens": {

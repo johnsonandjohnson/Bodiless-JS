@@ -21,11 +21,6 @@ const twConfig = {
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {
-    screens: {
-      md: '768px',
-      lg: '1025px',
-      xl: '1921px',
-    },
     // Colors are used in styleguide.
     colors: {
       red: '#FF0000',
@@ -33,18 +28,18 @@ const twConfig = {
       blue: '#0000FF',
       orange: '#FFA500',
     },
-    maxWidth: {
-      20: '5rem',
-      28: '7rem',
-      64: '16rem',
-      screen: '100vw',
-    },
-    minWidth: {
-      28: '7rem',
-    },
     extend: {
       margin: {
         'negative-half-screen': '-50vw',
+      },
+      maxWidth: {
+        20: '5rem',
+        28: '7rem',
+        64: '16rem',
+        screen: '100vw',
+      },
+      minWidth: {
+        28: '7rem',
       },
     },
   },

@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { addProps } from '@bodiless/fclasses';
 import { asDesktopSearchToken } from './DesktopSearchClean';
 
 /**
@@ -26,9 +25,6 @@ const Base = asDesktopSearchToken({
     Wrapper: 'px-4 lg:pl-0 lg:pr-5',
     Icon: 'm-3'
   },
-  Content: {
-    Label: addProps({ children: 'Search' })
-  }
 });
 
 const Default = asDesktopSearchToken({

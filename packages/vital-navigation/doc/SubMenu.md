@@ -137,7 +137,7 @@ open
 ':target=blank'), and find the following line:
 
 ```ts
-Title: flowIf(useHasSubMenu)(as(cxMenuTitle.WithLinkDisabled)),
+Title: flowIf(useHasSubMenu)(as(vitalMenuTitle.WithLinkDisabled)),
 ```
 
 You should find this line in the `TopNav` and `Burger` tokens, under their `Behavior` property —

@@ -23,6 +23,7 @@ import { asFluidToken, vitalSpacing } from '@bodiless/vital-elements';
 import { vitalImageFlowContainer } from '@bodiless/vital-image';
 import { vitalEditorsFlowContainer } from '@bodiless/vital-editors';
 import { vitalListFlowContainer } from '@bodiless/vital-list';
+import { vitalTableFlowContainer } from '@bodiless/vital-table';
 
 import FlowContainerClean, { FlowContainerPreview } from '../FlowContainerClean';
 
@@ -106,6 +107,7 @@ const WithBaseVariations = asFluidToken(
   vitalImageFlowContainer.WithImageVariations,
   vitalEditorsFlowContainer.WithEditorVariations,
   vitalListFlowContainer.WithListVariations,
+  vitalTableFlowContainer.WithTableVariations,
 );
 
 /**

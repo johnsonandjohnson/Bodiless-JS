@@ -49,7 +49,7 @@ export const ui: ComponentSelectorUI = {
   FlexSection: addClasses('bl-pt-grid-2 bl-w-1/4 bl-overflow-y-auto')(Div),
   FlexSectionFull: addClasses('bl-pt-grid-2 bl-w-3/4')(Div),
   FlowContainerEmpty: addClasses(
-    'bl-border-2 bl-border-dashed bl-text-gray-600',
+    'bl-border-2 bl-border-dashed bl-border-gray-200 bl-text-gray-600',
   )(Div),
   ItemBoxWrapper: addClasses('bl-p-grid-2')(Div),
   ItemBox: addClasses(
