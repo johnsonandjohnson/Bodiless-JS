@@ -50,15 +50,9 @@ const Base = asHeaderToken({
       as(vitalBurgerMenu.Default),
       // @TODO: Is there a better way to inject WhereToBuy and (future) LanguageButton
       // components into the menu? Maybe, move the components to another package...
-      withDesign({
-        // @TODO: Replace LanguageButton placeholder.
-        LanguageButton: vitalLanguageSelector.Default,
-      }),
     ),
     DesktopSearch: vitalDesktopSearch.Default,
     UtilityMenu: vitalMenu.Utility,
-    // @TODO: Replace LanguageButton placeholder.
-    LanguageButton: vitalLanguageSelector.Default,
     WhereToBuy: vitalLink.WhereToBuy,
   },
   Layout: {
@@ -78,9 +72,11 @@ const Base = asHeaderToken({
     // @todo perhaps this should be an element spcing token ike "LargeIconSize".
     MenuToggler: 'w-6 h-6',
     MenuTogglerWrapper: 'my-4',
+    LanguageButtonWrapper: 'pl-5 lg:mr-5 lg:px-5 lg:py-2',
   },
   Theme: {
     Wrapper: vitalColor.BgPrimaryPage,
+    LanguageButtonWrapper: 'text-m-base border-l-2 border-vital-primary-divider lg:border-r-2',
   },
   Schema: {
     Logo: withNodeKey({ nodeKey: 'Logo' }),

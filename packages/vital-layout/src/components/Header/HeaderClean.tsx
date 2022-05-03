@@ -30,7 +30,6 @@ import {
 import { LogoClean } from '../Logo';
 import { SearchTogglerClean, DesktopSearchClean } from '../Search';
 import type { HeaderComponents, HeaderProps } from './types';
-import { LanguageSelectorClean } from '../LanguageSelector';
 
 const headerComponents: HeaderComponents = {
   Wrapper: Header,
@@ -48,7 +47,7 @@ const headerComponents: HeaderComponents = {
   UtilityMenu: MenuClean,
   DesktopSearch: DesktopSearchClean,
   SearchToggler: SearchTogglerClean,
-  LanguageButton: LanguageSelectorClean,
+  LanguageButtonWrapper: Fragment,
   WhereToBuyWrapper: Fragment,
   WhereToBuy: LinkClean,
 };
@@ -70,7 +69,7 @@ const HeaderCleanBase: FC<HeaderProps> = ({ components: C, ...rest }) => (
           <C.UtilityMenuWrapper>
             <C.UtilityMenu />
           </C.UtilityMenuWrapper>
-          <C.LanguageButton />
+          <C.LanguageButtonWrapper />
           <C.WhereToBuyWrapper>
             <C.WhereToBuy />
           </C.WhereToBuyWrapper>

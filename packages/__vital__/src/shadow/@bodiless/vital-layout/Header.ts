@@ -12,8 +12,19 @@
  * limitations under the License.
  */
 
-export { vitalLayout, LayoutClean, asLayoutToken } from './components/Layout';
-export {
-  vitalHeader, vitalHeaderBase, HeaderClean, asHeaderToken
-} from './components/Header';
-export { vitalFooter, FooterClean, asFooterToken } from './components/Footer';
+import { asFluidToken } from '@bodiless/vital-elements';
+import { vitalHeaderBase } from '@bodiless/vital-layout';
+// import { addProps } from '@bodiless/fclasses';
+
+const Default = asFluidToken({
+  ...vitalHeaderBase.Default,
+  Spacing: {
+    ...vitalHeaderBase.Default.Spacing,
+    // _: addProps({ 'data-shadowed-by': '__vital__Header' }),
+  }
+});
+
+export default {
+  ...vitalHeaderBase,
+  Default,
+};

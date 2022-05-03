@@ -13,7 +13,7 @@
  */
 
 import { useNode } from '@bodiless/core';
-import { addPropsIf } from '@bodiless/fclasses';
+import { addProps } from '@bodiless/fclasses';
 import { withLanguages, useLanguageContext } from '@bodiless/i18n';
 
 import type { Language } from '@bodiless/i18n';
@@ -38,7 +38,7 @@ const useLanguageLinkProps = () => {
 
 const Default = asLanguageSelectorToken({
   Content: {
-    Link: addPropsIf(() => true)(useLanguageLinkProps),
+    Link: addProps(useLanguageLinkProps),
   },
   Theme: {
     Wrapper: 'text-m-base border-l-2 border-vital-primary-divider lg:border-r-2'
