@@ -53,6 +53,7 @@ type PageMenuOptions = {
 };
 
 type PageClient = {
+  clonePage: (origin: string, destination: string) => AxiosPromise<any>;
   deletePage: (path: string) => AxiosPromise<any>;
   movePage: (origin: string, destination: string) => AxiosPromise<any>;
   savePage: (path: string, template?: string) => AxiosPromise<any>;
