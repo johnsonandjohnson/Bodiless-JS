@@ -28,13 +28,32 @@ import {
   asGenericTemplateToken
 } from '@bodiless/vital-templates';
 import { useNode } from '@bodiless/core';
+import { withLanguages } from '@bodiless/i18n';
+
+const DefaultTemplate = asGenericTemplateToken({
+  ...vitalGenericTemplate.Default,
+  Core: {
+    ...vitalGenericTemplate.Default.Core,
+    PageWrapper: withLanguages([
+      {
+        name: 'en',
+        label: 'English',
+        isDefault: true,
+      },
+      {
+        name: 'es',
+        label: 'Español',
+      },
+    ]),
+  },
+});
 
 // @todo remove NoBreadcrumbsGeneric when breadcrumbs is implemented and
 // content editor can choose to use breadcrumb
 const NoBreadcrumbsGeneric = asGenericTemplateToken({
-  ...vitalGenericTemplate.Default,
+  ...DefaultTemplate,
   Components: {
-    ...vitalGenericTemplate.Default.Components,
+    ...DefaultTemplate.Components,
     BreadcrumbWrapper: replaceWith(React.Fragment),
     Breadcrumb: replaceWith(React.Fragment),
   },
@@ -47,7 +66,7 @@ const Default = asFluidToken({
   Components: {
     _default: on(GenericTemplateClean)(
       flowIf(isHomePage)(as(NoBreadcrumbsGeneric)),
-      flowIf(negate(isHomePage))(as(vitalGenericTemplate.Default)),
+      flowIf(negate(isHomePage))(as(DefaultTemplate)),
     ),
   },
 });

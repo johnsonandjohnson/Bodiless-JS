@@ -15,7 +15,7 @@ import { useNode } from '@bodiless/core';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { vitalHeaderBase } from '@bodiless/vital-layout';
 import { LinkClean, vitalLink, asLinkToken } from '@bodiless/vital-link';
-import { withLanguages, useLanguageContext } from '@bodiless/i18n';
+import { useLanguageContext } from '@bodiless/i18n';
 import {
   addProps, flowHoc, on,
 } from '@bodiless/fclasses';
@@ -31,7 +31,7 @@ const useLanguageLinkProps = () => {
   const regex = new RegExp(`^/${currentLanguage.name}/`);
   const pagePathWithoutPrefix = pagePath.replace(regex, '/');
   return {
-    children: secondLanguage.label,
+    children: secondLanguage.label || 'undefined',
     href: secondLanguage.isDefault
       ? pagePathWithoutPrefix
       : `${secondLanguage.name}${pagePathWithoutPrefix}`,
@@ -42,20 +42,6 @@ const asLanguageSelectorLink = on(LinkClean)(asLinkToken({
   ...vitalLink.Default,
   // Make the link not editable.
   Schema: {},
-  Core: {
-    // @TODO: move to page level.
-    _: withLanguages([
-      {
-        name: 'en',
-        label: 'English',
-        isDefault: true,
-      },
-      {
-        name: 'es',
-        label: 'Español',
-      },
-    ]),
-  },
 }));
 
 const asLanguageSelectorWithContent = flowHoc(
