@@ -26,14 +26,12 @@ import {
 import {
   as,
   flowHoc,
-  withDesign,
 } from '@bodiless/fclasses';
 import { vitalLink } from '@bodiless/vital-link';
 import { vitalLogo } from '../../Logo';
 import { vitalDesktopSearch, vitalSearchToggler } from '../../Search';
 import { asHeaderToken } from '../HeaderClean';
 import BurgerIcon from '../assets/BurgerIcon';
-import { vitalLanguageSelector } from '../../LanguageSelector';
 
 /**
  * Token that defines a basic header.

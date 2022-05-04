@@ -11,17 +11,66 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+import { useNode } from '@bodiless/core';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { vitalHeaderBase } from '@bodiless/vital-layout';
-// import { addProps } from '@bodiless/fclasses';
+import { LinkClean, vitalLink, asLinkToken } from '@bodiless/vital-link';
+import { withLanguages, useLanguageContext } from '@bodiless/i18n';
+import {
+  addProps, on,
+} from '@bodiless/fclasses';
+
+import type { Language } from '@bodiless/i18n';
+
+const useLanguageLinkProps = () => {
+  const { node: { pagePath } } = useNode();
+  const currentLanguage = useLanguageContext().getCurrentLanguage();
+  console.log('languageContext', useLanguageContext());
+  const secondLanguage = useLanguageContext().languages.filter(
+    (lang: Language) => lang.name !== currentLanguage.name
+  )[0];
+  const regex = new RegExp(`^/${currentLanguage.name}/`);
+  const pagePathWithoutPrefix = pagePath.replace(regex, '/');
+  return {
+    children: secondLanguage.label,
+    href: secondLanguage.isDefault
+      ? pagePathWithoutPrefix
+      : `${secondLanguage.name}${pagePathWithoutPrefix}`,
+  };
+};
+
+const LanguageButton = on(LinkClean)(asLinkToken({
+  ...vitalLink.Default,
+  Schema: {},
+  Core: {
+    // @TODO: move to page level.
+    _: withLanguages([
+      {
+        name: 'en',
+        label: 'English',
+        isDefault: true,
+      },
+      {
+        name: 'es',
+        label: 'Español',
+      },
+    ]),
+  },
+  Content: {
+    Wrapper: addProps(useLanguageLinkProps),
+  }
+}));
 
 const Default = asFluidToken({
   ...vitalHeaderBase.Default,
-  Spacing: {
-    ...vitalHeaderBase.Default.Spacing,
-    // _: addProps({ 'data-shadowed-by': '__vital__Header' }),
-  }
+  Core: {
+    ...vitalHeaderBase.Default.Core,
+    _: addProps({ 'data-shadowed-by': '__vital__Header' }),
+  },
+  Components: {
+    ...vitalHeaderBase.Default.Components,
+    LanguageButtonWrapper: LanguageButton,
+  },
 });
 
 export default {
