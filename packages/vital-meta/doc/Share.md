@@ -6,6 +6,10 @@ Vital Meta provides some default meta tags regarding sharing your site's pages w
 These tags comply with the [Open Graph protocol](https://ogp.me/ ':target=_blank'), enabling your
 web pages to be represented as graph objects.
 
+If you desire additional Open Graph meta tags, please follow the instructions to [add metadata
+fields to the SEO form](/Components/Meta#add-metadata-fields-to-seo-form) in the editor interface,
+and add them to the Share form in the same manner.
+
 For every page, you can set the following meta tags:
 
 - [Title](#title)
@@ -34,7 +38,7 @@ follows:
 </head>
 ```
 
-In addition to the meta tag descriptions below, please see the following resources for additional
+In addition to the meta tag descriptions below, please see the following resources for more
 information:
 
 - [The Open Graph protocol](https://ogp.me/)
@@ -124,4 +128,13 @@ Share Management_ form.
 As Vital Meta is based on [Bodiless Meta](/Components/Meta), the techniques used for adding more
 fields to the Bodiless SEO form can also be applied here.
 
-**See:** [Bodiless Meta Component : Add Metadata Fields to Editor Interface](/Components/Meta#add-metadata-fields-to-editor-interface)
+**See:** [Bodiless Meta Component : Add Metadata Fields to SEO Form](/Components/Meta#add-metadata-fields-to-seo-form)
+
+This customization ought to be performed [via
+shadowing](#customizing-via-shadowing-preferred-method), as described below.
+
+### Customizing Via Shadowing (*Preferred Method)
+
+Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
+
+File to shadow: `./lib/shadow/vital-meta/{MyShareHelmet}.js`

@@ -96,7 +96,7 @@ Content Editors to manipulate metadata per page.
     const SeoHelmet = withMetaForm(useMenuOptions, seoFormHeader)(Helmet);
     ```
 
-### Add Metadata Fields to Editor Interface
+### Add Metadata Fields to SEO Form
 
 After [adding an SEO form to the editor interface](#add-seo-form-to-editor-interface), define the
 form fields so Content Editors can update the content of the metadata displayed in the head section
