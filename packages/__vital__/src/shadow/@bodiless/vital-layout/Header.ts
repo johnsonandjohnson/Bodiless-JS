@@ -17,7 +17,7 @@ import { vitalHeaderBase } from '@bodiless/vital-layout';
 import { LinkClean, vitalLink, asLinkToken } from '@bodiless/vital-link';
 import { withLanguages, useLanguageContext } from '@bodiless/i18n';
 import {
-  addProps, on,
+  addProps, flowHoc, on,
 } from '@bodiless/fclasses';
 
 import type { Language } from '@bodiless/i18n';
@@ -39,8 +39,9 @@ const useLanguageLinkProps = () => {
   };
 };
 
-const LanguageButton = on(LinkClean)(asLinkToken({
+const asLanguageButton = on(LinkClean)(asLinkToken({
   ...vitalLink.Default,
+  // Make the link not editable.
   Schema: {},
   Core: {
     // @TODO: move to page level.
@@ -56,10 +57,12 @@ const LanguageButton = on(LinkClean)(asLinkToken({
       },
     ]),
   },
-  Content: {
-    Wrapper: addProps(useLanguageLinkProps),
-  }
 }));
+
+const asLanguageButtonWithContent = flowHoc(
+  addProps(useLanguageLinkProps),
+  asLanguageButton,
+);
 
 const Default = asFluidToken({
   ...vitalHeaderBase.Default,
@@ -69,7 +72,7 @@ const Default = asFluidToken({
   },
   Components: {
     ...vitalHeaderBase.Default.Components,
-    LanguageButtonWrapper: LanguageButton,
+    LanguageButtonWrapper: asLanguageButtonWithContent,
   },
 });
 
