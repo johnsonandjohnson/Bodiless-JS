@@ -25,7 +25,6 @@ import type { Language } from '@bodiless/i18n';
 const useLanguageLinkProps = () => {
   const { node: { pagePath } } = useNode();
   const currentLanguage = useLanguageContext().getCurrentLanguage();
-  console.log('languageContext', useLanguageContext());
   const secondLanguage = useLanguageContext().languages.filter(
     (lang: Language) => lang.name !== currentLanguage.name
   )[0];
@@ -39,7 +38,7 @@ const useLanguageLinkProps = () => {
   };
 };
 
-const asLanguageSelector = on(LinkClean)(asLinkToken({
+const asLanguageSelectorLink = on(LinkClean)(asLinkToken({
   ...vitalLink.Default,
   // Make the link not editable.
   Schema: {},
@@ -61,7 +60,7 @@ const asLanguageSelector = on(LinkClean)(asLinkToken({
 
 const asLanguageSelectorWithContent = flowHoc(
   addProps(useLanguageLinkProps),
-  asLanguageSelector,
+  asLanguageSelectorLink,
 );
 
 const Default = asFluidToken({

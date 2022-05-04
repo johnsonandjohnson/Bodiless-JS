@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNode } from '@bodiless/core';
-import { addProps, HOC, flowHoc } from '@bodiless/fclasses';
+import {
+  addProps, HOC, flowHoc, removeProps
+} from '@bodiless/fclasses';
 import { withLanguageProvider, setCurrentLanguage$ } from './LanguageProvider';
 import type { PropsWithLanguages, Languages } from './LanguageProvider';
 
@@ -34,6 +36,7 @@ export const withCurrentLanguageFromPath: HOC = Component => (props: any) => {
 };
 
 export const withLanguages = (languages: Languages) => flowHoc(
+  removeProps('languages'),
   withLanguageProvider,
   withCurrentLanguageFromPath,
   addProps({
