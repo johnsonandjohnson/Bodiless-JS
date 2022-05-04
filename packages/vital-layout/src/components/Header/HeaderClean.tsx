@@ -47,7 +47,7 @@ const headerComponents: HeaderComponents = {
   UtilityMenu: MenuClean,
   DesktopSearch: DesktopSearchClean,
   SearchToggler: SearchTogglerClean,
-  LanguageButtonWrapper: Fragment,
+  LanguageSelectorWrapper: Fragment,
   WhereToBuyWrapper: Fragment,
   WhereToBuy: LinkClean,
 };
@@ -69,7 +69,7 @@ const HeaderCleanBase: FC<HeaderProps> = ({ components: C, ...rest }) => (
           <C.UtilityMenuWrapper>
             <C.UtilityMenu />
           </C.UtilityMenuWrapper>
-          <C.LanguageButtonWrapper />
+          <C.LanguageSelectorWrapper />
           <C.WhereToBuyWrapper>
             <C.WhereToBuy />
           </C.WhereToBuyWrapper>

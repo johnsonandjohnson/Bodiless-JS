@@ -70,11 +70,11 @@ const Base = asHeaderToken({
     // @todo perhaps this should be an element spcing token ike "LargeIconSize".
     MenuToggler: 'w-6 h-6',
     MenuTogglerWrapper: 'my-4',
-    LanguageButtonWrapper: 'pl-5 lg:mr-5 lg:px-5 lg:py-2',
+    LanguageSelectorWrapper: 'pl-5 lg:mr-5 lg:px-5 lg:py-2',
   },
   Theme: {
     Wrapper: vitalColor.BgPrimaryPage,
-    LanguageButtonWrapper: 'text-m-base border-l-2 border-vital-primary-divider lg:border-r-2',
+    LanguageSelectorWrapper: 'text-m-base border-l-2 border-vital-primary-divider lg:border-r-2',
   },
   Schema: {
     Logo: withNodeKey({ nodeKey: 'Logo' }),

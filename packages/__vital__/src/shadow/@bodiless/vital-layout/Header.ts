@@ -39,7 +39,7 @@ const useLanguageLinkProps = () => {
   };
 };
 
-const asLanguageButton = on(LinkClean)(asLinkToken({
+const asLanguageSelector = on(LinkClean)(asLinkToken({
   ...vitalLink.Default,
   // Make the link not editable.
   Schema: {},
@@ -59,9 +59,9 @@ const asLanguageButton = on(LinkClean)(asLinkToken({
   },
 }));
 
-const asLanguageButtonWithContent = flowHoc(
+const asLanguageSelectorWithContent = flowHoc(
   addProps(useLanguageLinkProps),
-  asLanguageButton,
+  asLanguageSelector,
 );
 
 const Default = asFluidToken({
@@ -72,7 +72,7 @@ const Default = asFluidToken({
   },
   Components: {
     ...vitalHeaderBase.Default.Components,
-    LanguageButtonWrapper: asLanguageButtonWithContent,
+    LanguageSelectorWrapper: asLanguageSelectorWithContent,
   },
 });
 
