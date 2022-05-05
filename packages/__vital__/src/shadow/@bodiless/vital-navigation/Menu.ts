@@ -33,7 +33,23 @@ const TopNav = asFluidToken({
   },
 });
 
+const Utility = asFluidToken({
+  ...vitalMenuBase.Utility,
+  Core: {
+    ...vitalMenuBase.Utility.Core,
+    _: addProps({ 'data-shadowed-by': '__vital__Menu' }),
+  },
+  Schema: {
+    ...vitalMenuBase.Utility.Schema,
+    _: as(
+      withLanguageNode,
+      vitalMenuBase.Utility.Schema._,
+    )
+  },
+});
+
 export default {
   ...vitalMenuBase,
   TopNav,
+  Utility,
 };
