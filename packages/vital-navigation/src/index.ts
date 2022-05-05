@@ -21,7 +21,9 @@ export {
 
 // VitalNavigation components and tokens.
 export { BurgerMenuClean, asBurgerMenuToken, vitalBurgerMenu } from './components/BurgerMenu';
-export { MenuClean, asMenuToken, vitalMenu } from './components/Menu';
+export {
+  MenuClean, asMenuToken, vitalMenu, vitalMenuBase
+} from './components/Menu';
 export { MenuTitleClean, asMenuTitleToken, vitalMenuTitle } from './components/MenuTitle';
 export { asSubMenuToken, vitalSubMenu } from './components/SubMenu';
 
