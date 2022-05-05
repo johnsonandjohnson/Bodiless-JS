@@ -39,17 +39,17 @@ const Base = asRewardsToken({
   },
   Layout: {
     Wrapper: 'w-full max-w-3xl mx-auto',
-    FormWrapper: 'md:flex md:justify-between lg:block',
-    FormTextFirstName: 'w-full lg:w-44 lg:block',
-    FormTextEmail: 'w-full lg:w-44 lg:block',
-    FormButton: 'w-full lg:w-full lg:block',
+    FormWrapper: 'md:flex md:justify-between 2xl:block',
+    FormTextFirstName: 'w-full 2xl:w-44 2xl:block',
+    FormTextEmail: 'w-full 2xl:w-44 2xl:block',
+    FormButton: 'w-full xl:block 2xl:w-full ',
   },
   Spacing: {
     Brand: 'mb-8 md:mb-4 lg:mb-2',
     Title: 'mb-2',
     FormWrapper: 'py-6 md:py-4',
-    FormTextFirstName: 'mb-6 p-3 md:mb-0 md:p-3 md:py-2 lg:mb-5 lg:py-1',
-    FormTextEmail: 'mb-6 p-3 md:mx-6 md:mb-0 md:p-3 md:py-2 lg:mx-0 lg:mb-5 lg:py-1',
+    FormTextFirstName: 'mb-6 p-3 md:mb-0 md:p-3 xl:py-2 2xl:mb-5 2xl:mt-1',
+    FormTextEmail: 'mb-6 p-3 md:mx-6 md:mb-0 md:p-3 xl:py-2 2xl:mx-0 2xl:mb-5 2xl:mt-1',
     FormButton: 'p-3 md:p-2',
   },
   // @TODO: Rewards colors needs to be organized/setup and updated.

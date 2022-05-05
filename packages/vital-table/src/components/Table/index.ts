@@ -12,12 +12,15 @@
  * limitations under the License.
  */
 import vitalTable from './tokens';
-import vitalTableBase from './tokens/vitalTable';
+
 import TableClean, { asTableToken } from './TableClean';
 
 export {
+  default as vitalTableBase
+} from './tokens/vitalTable';
+
+export {
   vitalTable,
-  vitalTableBase,
   TableClean,
   asTableToken,
 };
