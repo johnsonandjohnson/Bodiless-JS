@@ -14,14 +14,26 @@
 import { asFluidToken } from '@bodiless/vital-elements';
 import { vitalFooterBase } from '@bodiless/vital-layout';
 import {
-  addProps,
+  addProps, as
 } from '@bodiless/fclasses';
+import { withLanguageNode } from '@bodiless/i18n';
 
 const Default = asFluidToken({
   ...vitalFooterBase.Default,
   Core: {
     ...vitalFooterBase.Default.Core,
     _: addProps({ 'data-shadowed-by': '__vital__Footer' }),
+  },
+  Schema: {
+    ...vitalFooterBase.Default.Schema,
+    FooterMenu: as(
+      withLanguageNode,
+      vitalFooterBase.Default.Schema.FooterMenu
+    ),
+    Copyright: as(
+      withLanguageNode,
+      vitalFooterBase.Default.Schema.Copyright,
+    ),
   },
 });
 
