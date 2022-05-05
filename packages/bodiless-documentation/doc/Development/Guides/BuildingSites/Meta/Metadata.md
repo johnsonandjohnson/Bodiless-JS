@@ -23,6 +23,8 @@ In your site's `.env.site` file, configure the following:
     Use](https://www.gatsbyjs.com/plugins/gatsby-plugin-sitemap/#how-to-use ':target=_blank')
     section of the `gatsby-plugin-sitemap` documentation, the path listed above is where the
     generated sitemap will be located.
+    - While a _sitemap_ file lists URLs of _pages_, a _sitemap index_ file lists URLs of _sitemaps_,
+      allowing you to manage multiple sitemap files.
 
 01. Anything you want to exclude from your sitemap can be configured in your site's
     `gatsby-config.js` file:

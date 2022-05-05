@@ -9,10 +9,10 @@ are as effective as possible.
 
 ## Content Editor Details
 
-As a Content Editor, to configure SEO metadata for your site and its pages, a Site Builder will have
-had to have [added an SEO form to the Editor Interface](#add-seo-form-to-editor-interface). Assuming
-a Site Builder has followed the provided instructions, the steps to manage metadata on a page
-should resemble the following:
+As a Content Editor, to configure SEO metadata for your site and its pages, a Site Builder will had
+to have [added an SEO form to the Editor Interface](#add-seo-form-to-editor-interface). Assuming a
+Site Builder has followed the provided instructions, the steps to manage metadata on a page should
+resemble the following:
 
 01. While in [Edit Mode](/ContentEditorUserGuide/#edit-mode), (from the
     [Toolbar](/ContentEditorUserGuide/#toolbar)) click **Page > SEO** to open the _SEO Data
