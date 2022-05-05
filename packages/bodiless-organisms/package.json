@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/organisms",
-  "version": "1.0.0-beta.12",
+  "version": "1.0.0-beta.13",
   "description": "Basic components to build out sites.",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
@@ -30,11 +30,11 @@
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
-    "@bodiless/accordion": "^1.0.0-beta.12",
-    "@bodiless/bv": "^1.0.0-beta.12",
+    "@bodiless/accordion": "^1.0.0-beta.13",
+    "@bodiless/bv": "^1.0.0-beta.13",
     "@bodiless/cli": "^1.0.0-beta.12",
-    "@bodiless/components": "^1.0.0-beta.12",
-    "@bodiless/components-ui": "^1.0.0-beta.12",
+    "@bodiless/components": "^1.0.0-beta.13",
+    "@bodiless/components-ui": "^1.0.0-beta.13",
     "@bodiless/core": "^1.0.0-beta.12",
     "@bodiless/fclasses": "^1.0.0-beta.12",
     "@bodiless/richtext": "^1.0.0-beta.12",

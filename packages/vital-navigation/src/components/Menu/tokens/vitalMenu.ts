@@ -195,7 +195,7 @@ const Burger = asMenuToken({
   Theme: {
     Title: as(
       vitalColor.TextPrimaryHeaderCopy,
-      vitalFontSize.L,
+      vitalFontSize.BurgerMenu,
       vitalTextDecoration.Bold,
       vitalTextDecoration.Uppercase,
     ),
