@@ -33,20 +33,6 @@ import { vitalDesktopSearch, vitalSearchToggler } from '../../Search';
 import { asHeaderToken } from '../HeaderClean';
 import BurgerIcon from '../assets/BurgerIcon';
 
-<<<<<<< HEAD
-=======
-// @TODO: Get rid of this after language button is implemented.
-const WithLanguageButton = flowHoc(
-  replaceWith(Span),
-  withProps({
-    children: 'Español',
-    // @TODO: Create divider tokens.
-    // @TODO: Use existing tokens.
-    className: 'text-m-base pl-5 lg:mr-5 lg:px-5 lg:py-2',
-  }),
-);
-
->>>>>>> 8026a2e54ccfa64815415978802df1065429ccdc
 /**
  * Token that defines a basic header.
  */
