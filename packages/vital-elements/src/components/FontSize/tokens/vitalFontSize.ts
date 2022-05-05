@@ -12,7 +12,8 @@
  * limitations under the License.
  */
 
-import { asTokenGroup } from '../../../util';
+import { addProps } from '@bodiless/fclasses';
+import { asElementToken, asTokenGroup } from '../../../util';
 
 const meta = {
   categories: {
@@ -21,12 +22,27 @@ const meta = {
   },
 };
 
-export default asTokenGroup(meta)({
+const vitalFontSize = asTokenGroup(meta)({
   Base: 'text-m-base lg:text-base',
   XXXL: 'text-m-3xl lg:text-3xl',
   XXL: 'text-m-2xl lg:text-2xl',
   XL: 'text-m-xl lg:text-xl',
   L: 'text-m-lg lg:text-lg',
   XS: 'text-m-xs lg:text-xs',
+  WithDemoContent: undefined,
   BurgerMenu: 'text-m-lg xl:text-lg',
 });
+
+vitalFontSize.WithDemoContent = asElementToken({
+  Meta: {
+    categories: {
+      Type: ['Element'],
+      Group: ['Demo'],
+    },
+  },
+  Content: {
+    _: addProps({ children: 'Lorem ipsum dolor sit amet.' }),
+  }
+});
+
+export default vitalFontSize;

@@ -15,3 +15,4 @@
 export * from './BodilessMobxStore';
 export * from './BodilessStoreProvider';
 export * from './types';
+export { getResourcePathFromStoreKey, getStoreKeyFromResourcePath } from './util';

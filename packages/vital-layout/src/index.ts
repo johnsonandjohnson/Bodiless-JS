@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-export { vitalLayout, LayoutClean, asLayoutToken } from './components/Layout';
-export { vitalHeader, HeaderClean, asHeaderToken } from './components/Header';
-export { vitalFooter, FooterClean, asFooterToken } from './components/Footer';
+export * from './components/Layout';
+export * from './components/Header';
+export * from './components/Footer';

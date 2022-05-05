@@ -18,7 +18,7 @@ import {
 import { StoreItem } from './StoreItem';
 import type { BodilessStoreBackend, BodilessStoreConfig, BodilessStore } from './types';
 import { ItemStateEvent } from './types';
-import addPageLeaver from './addPageLeaver';
+import { addPageLeaver } from './util';
 
 export type DataSource = {
   slug: string,

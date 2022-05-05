@@ -29,7 +29,8 @@ export type Props = {
   data: any,
   pageContext: {
     slug: string
-  }
+  },
+  store?: BodilessStore<any>,
 };
 
 class DefaultStore
@@ -44,8 +45,9 @@ class DefaultStore
 export class BodilessStoreProvider extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
+    const { store } = props;
     this.state = {
-      store: this.createStore(),
+      store: store || this.createStore(),
     };
   }
 

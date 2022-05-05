@@ -5,6 +5,7 @@ yarn-error.log
 
 # Build directory
 /public
+/storybook-static
 
 # Temporary files
 .DS_Store

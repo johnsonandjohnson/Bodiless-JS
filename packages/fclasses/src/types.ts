@@ -248,7 +248,7 @@ export type ReservedDomains<
  * - A token specified as an HOC
  * - A token specified as a string of classes.
  */
-export type Token = TokenSpec<any, {}> | HOCBase | string | undefined;
+export type Token = TokenSpec<any, {}> | HOC | string | undefined;
 
 export type ComposedToken<
   C extends DesignableComponents,

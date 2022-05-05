@@ -11,6 +11,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { Span } from '@bodiless/fclasses';
+import type { TokenDemoSpec } from '@bodiless/tokens';
+import vitalTypography from './tokens';
+import vitalTypographyBase from './tokens/vitalTypography';
 
-export { default as vitalTypography } from './tokens';
-export { default as vitalTypographyBase } from './tokens/vitalTypography';
+const vitalTypographySpec: TokenDemoSpec = {
+  title: 'Elements/Typography',
+  component: Span,
+  tokens: vitalTypography,
+  defaultTokens: ['WithDemoContent'],
+  componentExportName: 'Span',
+  tokensExportName: 'vitalTypography',
+};
+
+export { vitalTypography, vitalTypographyBase, vitalTypographySpec };

@@ -10,3 +10,4 @@ packages/bodiless-migration-tool/tests/testserver
 **/.cache
 **/static
 **/node_modules
+sites/*/storybook-static

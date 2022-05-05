@@ -12,13 +12,13 @@
  * limitations under the License.
  */
 
-import { as } from '@bodiless/fclasses';
+import { addProps, as, flowHoc } from '@bodiless/fclasses';
 import { asElementToken } from '../../../util';
 import { vitalColor } from '../../Color';
 import { vitalFontSize } from '../../FontSize';
 import { vitalTextDecoration } from '../../TextDecoration';
 
-const meta = {
+const Meta = {
   categories: {
     Type: ['Element'],
     Group: ['Typography'],
@@ -36,7 +36,7 @@ const Link = asElementToken({
       vitalColor.TextPrimaryInteractive,
     ),
   },
-  Meta: meta,
+  Meta,
 });
 
 const H1 = asElementToken({
@@ -52,7 +52,7 @@ const H1 = asElementToken({
   Spacing: {
     _: 'mt-10 mb-5 lg:mb-6',
   },
-  Meta: meta,
+  Meta,
 });
 
 const H2 = asElementToken({
@@ -68,7 +68,7 @@ const H2 = asElementToken({
   Spacing: {
     _: 'mb-5',
   },
-  Meta: meta,
+  Meta,
 });
 
 const H3 = asElementToken({
@@ -84,7 +84,7 @@ const H3 = asElementToken({
   Spacing: {
     _: 'mb-5',
   },
-  Meta: meta,
+  Meta,
 });
 
 const H4 = asElementToken({
@@ -100,6 +100,7 @@ const H4 = asElementToken({
   Spacing: {
     _: 'mb-5.75 lg:mb-9',
   },
+  Meta,
 });
 
 const H5 = asElementToken({
@@ -115,7 +116,7 @@ const H5 = asElementToken({
   Spacing: {
     _: 'mb-5 lg:mb-4.5',
   },
-  Meta: meta,
+  Meta,
 });
 
 const Body = asElementToken({
@@ -131,7 +132,7 @@ const Body = asElementToken({
   Spacing: {
     _: 'mb-6',
   },
-  Meta: meta,
+  Meta,
 });
 
 const Eyebrow = asElementToken({
@@ -148,6 +149,7 @@ const Eyebrow = asElementToken({
   Spacing: {
     _: 'mb-3',
   },
+  Meta,
 });
 
 // This probably will need a better name as Design team defines the uses of this token.
@@ -162,7 +164,14 @@ const Rest = asElementToken({
       vitalColor.TextPrimaryBodyCopy,
     ),
   },
-  Meta: meta,
+  Meta,
+});
+
+const WithDemoContent = asElementToken({
+  Meta: flowHoc.meta.term('Group')('Demo'),
+  Core: {
+    _: addProps({ children: 'Lorem ipsum dolor sit amet' }),
+  },
 });
 
 export default {
@@ -175,4 +184,5 @@ export default {
   Body,
   Eyebrow,
   Rest,
+  WithDemoContent,
 };

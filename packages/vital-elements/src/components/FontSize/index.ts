@@ -12,5 +12,19 @@
  * limitations under the License.
  */
 
-export { default as vitalFontSize } from './tokens';
-export { default as vitalFontSizeBase } from './tokens/vitalFontSize';
+import { Span } from '@bodiless/fclasses';
+import { TokenDemoSpec } from '@bodiless/tokens';
+
+import vitalFontSize from './tokens';
+import vitalFontSizeBase from './tokens/vitalFontSize';
+
+const vitalFontSizeSpec: TokenDemoSpec = {
+  title: 'Elements/Font Size',
+  component: Span,
+  tokens: vitalFontSize,
+  defaultTokens: ['WithDemoContent'],
+  componentExportName: 'Span',
+  tokensExportName: 'vitalFontSize',
+};
+
+export { vitalFontSize, vitalFontSizeBase, vitalFontSizeSpec };

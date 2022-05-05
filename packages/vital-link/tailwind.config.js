@@ -18,6 +18,8 @@ const plugin = require('tailwindcss/plugin');
 
 const resolver = (pkgName) => require.resolve(pkgName);
 
+const fontPath = require.resolve('@bodiless/vital-link/assets/font/linkicons.woff2');
+
 const twConfig = {
   content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
@@ -36,7 +38,7 @@ const twConfig = {
           fontFamily: 'linkicons',
           fontWeight: 400,
           fontStyle: 'normal',
-          src: 'url(\'@bodiless/vital-link/assets/font/linkicons.woff2\')',
+          src: `url('${fontPath}')`,
         },
       });
     }),

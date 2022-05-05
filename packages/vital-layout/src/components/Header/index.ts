@@ -12,7 +12,21 @@
  * limitations under the License.
  */
 
-export { default as HeaderClean, asHeaderToken } from './HeaderClean';
-export { default as vitalHeaderBase } from './tokens/vitalHeader';
-export { default as vitalHeader } from './tokens';
+import type { TokenDemoSpec } from '@bodiless/tokens';
+import HeaderClean, { asHeaderToken } from './HeaderClean';
+import vitalHeader from './tokens';
+import vitalHeaderBase from './tokens/vitalHeader';
+
+const vitalHeaderSpec: TokenDemoSpec = {
+  title: 'Global Components/Header',
+  component: HeaderClean,
+  tokens: vitalHeader,
+  defaultTokens: ['Default'],
+  componentExportName: 'HeaderClean',
+  tokensExportName: 'vitalHeader',
+};
+
+export {
+  HeaderClean, asHeaderToken, vitalHeader, vitalHeaderBase, vitalHeaderSpec,
+};
 export type { HeaderComponents, HeaderProps } from './types';
