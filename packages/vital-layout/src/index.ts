@@ -16,4 +16,6 @@ export { vitalLayout, LayoutClean, asLayoutToken } from './components/Layout';
 export {
   vitalHeader, vitalHeaderBase, HeaderClean, asHeaderToken
 } from './components/Header';
-export { vitalFooter, FooterClean, asFooterToken } from './components/Footer';
+export {
+  vitalFooter, vitalFooterBase, FooterClean, asFooterToken
+} from './components/Footer';

@@ -11,8 +11,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { asFluidToken } from '@bodiless/vital-elements';
+import { vitalFooterBase } from '@bodiless/vital-layout';
+import {
+  addProps,
+} from '@bodiless/fclasses';
 
-export { default as FooterClean, asFooterToken } from './FooterClean';
-export { default as vitalFooter } from './tokens';
-export { default as vitalFooterBase } from './tokens/vitalFooter';
-export type { FooterComponents, FooterProps } from './types';
+const Default = asFluidToken({
+  ...vitalFooterBase.Default,
+  Core: {
+    ...vitalFooterBase.Default.Core,
+    _: addProps({ 'data-shadowed-by': '__vital__Footer' }),
+  },
+});
+
+export default {
+  ...vitalFooterBase,
+  Default,
+};
