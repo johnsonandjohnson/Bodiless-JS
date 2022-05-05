@@ -13,6 +13,10 @@ type NodeProps = {
   nodeCollection?: string,
 };
 
+/**
+ * withLanguageNode is a hoc that allows the wrapped component to handle its data
+ * in multilingual maner.
+ */
 export const withLanguageNode: HOC = Component => props => {
   const { nodeKey, nodeCollection }: NodeProps = props as any;
   if (!nodeKey || nodeCollection !== 'site') return <Component {...props} />;

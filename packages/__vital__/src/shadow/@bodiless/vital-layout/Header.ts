@@ -14,9 +14,7 @@
 import { asFluidToken } from '@bodiless/vital-elements';
 import { vitalHeaderBase } from '@bodiless/vital-layout';
 import { asLanguageSelector } from '@bodiless/i18n';
-import {
-  addProps, on,
-} from '@bodiless/fclasses';
+import { addProps } from '@bodiless/fclasses';
 
 const Default = asFluidToken({
   ...vitalHeaderBase.Default,

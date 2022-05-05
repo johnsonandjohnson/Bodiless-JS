@@ -1,6 +1,9 @@
 import React, { ComponentType as CT } from 'react';
 import { useLanguageContext } from '../LanguageProvider';
 
+/**
+ * withMetaLangDirHTML hoc adds lang and dir attributes to html tag.
+ */
 export const withMetaLangDirHTML = (HelmetComponent: CT) => (props: any) => {
   const { children, ...rest } = props;
   const { getCurrentLanguage } = useLanguageContext();
