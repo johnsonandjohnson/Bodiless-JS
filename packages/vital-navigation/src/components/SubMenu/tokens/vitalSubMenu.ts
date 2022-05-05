@@ -54,7 +54,7 @@ const Footer = asSubMenuToken(Base, {
     Item: 'leading-none',
   },
   Spacing: {
-    Wrapper: 'lg:mb-16',
+    Wrapper: 'lg:mb-16 md:mr-5 lg:mr-6',
     Item: 'mt-6 first:mt-3 lg:mt-3 lg:first:mt-6',
     Title: 'my-3 lg:my-1.5',
   },

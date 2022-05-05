@@ -28,4 +28,5 @@ export default asTokenGroup(meta)({
   XL: 'text-m-xl lg:text-xl',
   L: 'text-m-lg lg:text-lg',
   XS: 'text-m-xs lg:text-xs',
+  BurgerMenu: 'text-m-lg xl:text-lg',
 });

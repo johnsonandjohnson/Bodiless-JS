@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/carousel",
-  "version": "1.0.0-beta.12",
+  "version": "1.0.0-beta.13",
   "description": "Provides responsive and aria compliant carousel.",
   "author": "Andrei Beliayeu <abeliaye@its.jnj.com>",
   "homepage": "",
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@bodiless/cli": "^1.0.0-beta.12",
-    "@bodiless/components": "^1.0.0-beta.12",
+    "@bodiless/components": "^1.0.0-beta.13",
     "@bodiless/core": "^1.0.0-beta.12",
     "@bodiless/fclasses": "^1.0.0-beta.12",
     "lodash": "^4.17.19",

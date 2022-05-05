@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/gtm",
-  "version": "1.0.0-beta.12",
+  "version": "1.0.0-beta.13",
   "description": "Provides integration to support DataLayer in GTM",
   "author": "Heidi Vanyo <hvanyo@its.jnj.com>",
   "license": "Apache-2.0",
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@bodiless/cli": "^1.0.0-beta.12",
-    "@bodiless/components": "^1.0.0-beta.12",
+    "@bodiless/components": "^1.0.0-beta.13",
     "@bodiless/core": "^1.0.0-beta.12",
     "common-tags": "^1.8.0",
     "lodash": "^4.17.19"
