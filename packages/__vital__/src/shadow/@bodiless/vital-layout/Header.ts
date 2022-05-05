@@ -11,43 +11,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { useNode } from '@bodiless/core';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { vitalHeaderBase } from '@bodiless/vital-layout';
-import { LinkClean, vitalLink, asLinkToken } from '@bodiless/vital-link';
-import { useLanguageContext } from '@bodiless/i18n';
+import { asLanguageSelector } from '@bodiless/i18n';
 import {
-  addProps, flowHoc, on,
+  addProps, on,
 } from '@bodiless/fclasses';
-
-import type { Language } from '@bodiless/i18n';
-
-const useLanguageLinkProps = () => {
-  const { node: { pagePath } } = useNode();
-  const currentLanguage = useLanguageContext().getCurrentLanguage();
-  const secondLanguage = useLanguageContext().languages.filter(
-    (lang: Language) => lang.name !== currentLanguage.name
-  )[0];
-  const regex = new RegExp(`^/${currentLanguage.name}/`);
-  const pagePathWithoutPrefix = pagePath.replace(regex, '/');
-  return {
-    children: secondLanguage.label || 'undefined',
-    href: secondLanguage.isDefault
-      ? pagePathWithoutPrefix
-      : `${secondLanguage.name}${pagePathWithoutPrefix}`,
-  };
-};
-
-const asLanguageSelectorLink = on(LinkClean)(asLinkToken({
-  ...vitalLink.Default,
-  // Make the link not editable.
-  Schema: {},
-}));
-
-const asLanguageSelectorWithContent = flowHoc(
-  addProps(useLanguageLinkProps),
-  asLanguageSelectorLink,
-);
 
 const Default = asFluidToken({
   ...vitalHeaderBase.Default,
@@ -57,7 +26,7 @@ const Default = asFluidToken({
   },
   Components: {
     ...vitalHeaderBase.Default.Components,
-    LanguageSelectorWrapper: asLanguageSelectorWithContent,
+    LanguageSelectorWrapper: asLanguageSelector,
   },
 });
 
