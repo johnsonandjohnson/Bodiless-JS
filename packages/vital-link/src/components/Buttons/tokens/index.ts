@@ -12,5 +12,6 @@
  * limitations under the License.
  */
 
-export * from './components/Link';
-export * from './components/Buttons';
+import vitalButtons from './vitalButtons';
+
+export default vitalButtons;

@@ -12,5 +12,9 @@
  * limitations under the License.
  */
 
-export * from './components/Link';
-export * from './components/Buttons';
+// In "static" mode (in the browser in production) we do not need any of the static
+// token code bc it won't be hydrated.
+export {
+  staticTokenCollection as vitalButtonStatic,
+  StaticInline as ButtonStatic,
+} from '@bodiless/hydration';

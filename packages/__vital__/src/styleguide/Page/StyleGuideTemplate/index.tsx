@@ -21,6 +21,7 @@ import { Images } from './Images';
 import { Footer } from './Footer';
 import { Table } from './Table';
 import { List } from './List';
+import { Link } from './Link';
 import { _default } from './_default';
 
 export const __vital__StyleGuideTemplate = {
@@ -35,4 +36,5 @@ export const __vital__StyleGuideTemplate = {
   Footer,
   Table,
   List,
+  Link,
 };

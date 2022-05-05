@@ -12,5 +12,6 @@
  * limitations under the License.
  */
 
-export * from './components/Link';
-export * from './components/Buttons';
+// In non "static" mode (in dev mode and during HTML render), we need the static version
+// of the token to be the same as the normal version.
+export { default as vitalButtonStatic } from './tokens';
