@@ -9,7 +9,7 @@ and styles), to help meet typical site-use expectations.
 
 Vital List provides four categories of Lists:
 
-- [Inforgraphic](#infographic)
+- [Infographic](#infographic)
 - [Links](#links)
 - [Rich Text](#rich-text)
 - [Plain Text](#plain-text)
@@ -20,8 +20,8 @@ Excluding Infographic Lists, each category offers the following variations:
 - **Numbers:** A numbered list, as you'd associate with a typical ordered list element (`<ol>`).
 - **Undecorated:** A simple list without any item markers.
 
-?> **Note:** Out of the box, Vital Lists are _single-level-only_ — i.e., they do not support nested
-items.
+?> **Note:** Out of the box, Vital Lists are _single-level-only_ — i.e., they can't have nested
+items. However, they do support multi-level (nested) lists if they're enabled by a Site Builder.
 
 ### Infographic
 
@@ -77,11 +77,11 @@ To add a Vital List Component to your page:
 01. In the "Insert Component" modal, under "Type," check the "List" checkbox, and select the type
     of list you would like to add.
     - Vital List provides the following list options by default:
-      - [Inforgraphic](#infographic)
+      - [Infographic](#infographic)
       - [Links](#links)
       - [Rich Text](#rich-text)
       - [Plain Text](#plain-text)
-    - **Note:** Your site may provide a different array of options for the List Component.
+    - **Note:** Your site may provide a different array of options for the List component.
     - Hover over the "i" icon for information about a particular list variation.  
     ![Add a Vital List Component](./assets/AddVitalListComponent.jpg)
 01. [Edit your list](#edit-a-list) as desired.
@@ -91,11 +91,11 @@ To add a Vital List Component to your page:
 After [adding a Vital List](#add-a-list), you can add list items to it:
 
 01. While in [Edit Mode](/ContentEditorUserGuide/#edit-mode), select the placeholder (or existing)
-    text of the desired list item, and being typing to make your edits.
+    text of the desired list item, and begin typing to make your edits.
     - You can select your text and format it via the [Rich Text Editor](/Components/Editors/RichText) toolbar.
 01. Depending on the kind of Vital List you're editing, there will be additional things you can
     configure:
-    - **[Inforgraphic](#infographic):**
+    - **[Infographic](#infographic):**
       - The Image can be [selected and configured](/Components/Image/#select-and-configure-an-image)
         like other Image components.
       - You can select your text and format it via the [Rich Text
@@ -108,4 +108,11 @@ After [adding a Vital List](#add-a-list), you can add list items to it:
 
 ## Site Builder Details
 
-_TBD_
+At the site or global regional/brand library level, you can use the Vital List component as is, or
+extend/shadow the existing component.
+
+### Customizing Via Shadowing (*Preferred Method)
+
+Define a Shadowing token collection as defined in [Shadow](./VitalElements/Shadow).
+
+File to shadow: `./lib/shadow/vital-list/{MyList}.js`
