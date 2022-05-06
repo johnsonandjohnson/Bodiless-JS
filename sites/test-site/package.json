@@ -49,6 +49,7 @@
     "@bodiless/vital-image": "^1.0.0-beta.14",
     "@bodiless/vital-layout": "^1.0.0-beta.14",
     "@bodiless/vital-link": "^1.0.0-beta.14",
+    "@bodiless/vital-list": "^1.0.0-beta.14",
     "@bodiless/vital-meta": "^1.0.0-beta.14",
     "@bodiless/vital-navigation": "^1.0.0-beta.14",
     "@bodiless/vital-table": "^1.0.0-beta.14",
