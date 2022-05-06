@@ -24,9 +24,11 @@ const Default = asFooterToken(vitalFooterBase.Default, {
   Schema: {
     FooterMenu: as(
       withLanguageNode,
+      vitalFooterBase.Default.Schema.FooterMenu
     ),
     Copyright: as(
       withLanguageNode,
+      vitalFooterBase.Default.Schema.Copyright,
     ),
   },
 });

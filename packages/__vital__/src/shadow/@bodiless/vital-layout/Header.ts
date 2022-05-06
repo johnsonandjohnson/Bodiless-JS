@@ -11,19 +11,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { asFluidToken } from '@bodiless/vital-elements';
-import { vitalHeaderBase } from '@bodiless/vital-layout';
+import { vitalHeaderBase, asHeaderToken } from '@bodiless/vital-layout';
 import { asLanguageSelector } from '@bodiless/i18n';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asFluidToken({
-  ...vitalHeaderBase.Default,
+const Default = asHeaderToken(vitalHeaderBase.Default, {
   Core: {
-    ...vitalHeaderBase.Default.Core,
     _: addProps({ 'data-shadowed-by': '__vital__Header' }),
   },
   Components: {
-    ...vitalHeaderBase.Default.Components,
     LanguageSelectorWrapper: asLanguageSelector,
   },
 });
