@@ -30,7 +30,7 @@ hooks:
   post_deploy: bash ./static.platform.sh post_deploy
 
 # The size of the persistent disk of the application (in MB).
-disk: 1024
+disk: 2048
 
 mounts:
     'volume':
