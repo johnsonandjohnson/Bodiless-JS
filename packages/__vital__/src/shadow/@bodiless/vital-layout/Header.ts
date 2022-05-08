@@ -12,15 +12,25 @@
  * limitations under the License.
  */
 import { vitalHeaderBase, asHeaderToken } from '@bodiless/vital-layout';
+import { LinkClean, vitalLink, asLinkToken } from '@bodiless/vital-link';
 import { asLanguageSelector } from '@bodiless/i18n';
-import { addProps } from '@bodiless/fclasses';
+import { addProps, on } from '@bodiless/fclasses';
+
+export const asLanguageSelectorLink = on(LinkClean)(
+  asLinkToken({
+    ...vitalLink.Default,
+    // Make the link not editable.
+    Schema: {},
+  }),
+  asLanguageSelector
+);
 
 const Default = asHeaderToken(vitalHeaderBase.Default, {
   Core: {
     _: addProps({ 'data-shadowed-by': '__vital__Header' }),
   },
   Components: {
-    LanguageSelectorWrapper: asLanguageSelector,
+    LanguageSelectorWrapper: asLanguageSelectorLink,
   },
 });
 

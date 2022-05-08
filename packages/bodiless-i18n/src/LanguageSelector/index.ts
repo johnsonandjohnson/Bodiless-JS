@@ -12,10 +12,7 @@
  * limitations under the License.
  */
 import { useNode } from '@bodiless/core';
-import { LinkClean, vitalLink, asLinkToken } from '@bodiless/vital-link';
-import {
-  addProps, on,
-} from '@bodiless/fclasses';
+import { addProps } from '@bodiless/fclasses';
 import { useLanguageContext } from '../LanguageProvider';
 
 import type { Language } from '../LanguageProvider';
@@ -44,14 +41,7 @@ export const useLanguageSelectorProps = () => {
 };
 
 /**
- * asLanguageSelector is a hoc which creates language toggler
- * based on LinkClean component.
+ * asLanguageSelector is a hoc which, when applied to a link,
+ * turns it into a language toggler.
  */
-export const asLanguageSelector = on(LinkClean)(
-  asLinkToken({
-    ...vitalLink.Default,
-    // Make the link not editable.
-    Schema: {},
-  }),
-  addProps(useLanguageSelectorProps),
-);
+export const asLanguageSelector = addProps(useLanguageSelectorProps);
