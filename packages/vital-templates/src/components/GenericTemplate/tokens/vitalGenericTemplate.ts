@@ -19,14 +19,25 @@ import {
   addProps,
   replaceWith,
   Fragment,
+  flowIf,
 } from '@bodiless/fclasses';
 import { vitalImage } from '@bodiless/vital-image';
 import { LayoutClean, vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey, useNode } from '@bodiless/core';
 import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
 import { GenericTemplateNodeKeys } from '../constants';
+
+const isHomePage = () => useNode().node.pagePath === '/';
+
+const WithNoBreadcrumbsOnHomePage = asGenericTemplateToken({
+  Flow: flowIf(isHomePage),
+  Components: {
+    BreadcrumbWrapper: replaceWith(Fragment),
+    Breadcrumb: replaceWith(Fragment),
+  },
+});
 
 const Base = asGenericTemplateToken({
   Components: {
@@ -61,21 +72,16 @@ const Base = asGenericTemplateToken({
       vitalSpacing.WithSiteXLConstraint
     ),
   },
+  Compose: {
+    WithNoBreadcrumbsOnHomePage,
+  }
 });
 
 const Default = asGenericTemplateToken({
   ...Base,
 });
 
-const NoBreadcrumbs = asGenericTemplateToken(Default, {
-  Components: {
-    BreadcrumbWrapper: replaceWith(Fragment),
-    Breadcrumb: replaceWith(Fragment),
-  },
-});
-
 export default {
   Base,
   Default,
-  NoBreadcrumbs,
 };

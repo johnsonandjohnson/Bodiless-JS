@@ -11,11 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import negate from 'lodash/negate';
 import {
-  as,
-  flowIf,
   on,
 } from '@bodiless/fclasses';
 import { asFluidToken } from '@bodiless/vital-elements';
@@ -24,17 +20,11 @@ import {
   GenericTemplateClean,
   vitalGenericTemplate,
 } from '@bodiless/vital-templates';
-import { useNode } from '@bodiless/core';
-
-const isHomePage = () => useNode().node.pagePath === '/';
 
 const Default = asFluidToken({
   ...vitalPage.Default,
   Components: {
-    _default: on(GenericTemplateClean)(
-      flowIf(isHomePage)(as(vitalGenericTemplate.NoBreadcrumbs)),
-      flowIf(negate(isHomePage))(as(vitalGenericTemplate.Default)),
-    ),
+    _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
   },
 });
 

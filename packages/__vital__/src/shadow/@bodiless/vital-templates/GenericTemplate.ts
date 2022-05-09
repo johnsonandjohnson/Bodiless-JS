@@ -33,12 +33,7 @@ const Default = asGenericTemplateToken(vitalGenericTemplateBase.Base, {
   },
 });
 
-const NoBreadcrumbs = asGenericTemplateToken(Default, {
-  ...vitalGenericTemplateBase.NoBreadcrumbs
-});
-
 export default {
   ...vitalGenericTemplateBase,
   Default,
-  NoBreadcrumbs,
 };
