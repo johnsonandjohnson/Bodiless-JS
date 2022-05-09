@@ -11,21 +11,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { asFluidToken } from '@bodiless/vital-elements';
-import { vitalMenuBase } from '@bodiless/vital-navigation';
+import { vitalMenuBase, asMenuToken } from '@bodiless/vital-navigation';
 import {
   addProps, as
 } from '@bodiless/fclasses';
 import { withLanguageNode } from '@bodiless/i18n';
 
-const TopNav = asFluidToken({
-  ...vitalMenuBase.TopNav,
+const TopNav = asMenuToken(vitalMenuBase.TopNav, {
   Core: {
-    ...vitalMenuBase.TopNav.Core,
     _: addProps({ 'data-shadowed-by': '__vital__Menu' }),
   },
   Schema: {
-    ...vitalMenuBase.TopNav.Schema,
     _: as(
       withLanguageNode,
       vitalMenuBase.TopNav.Schema._,
@@ -33,14 +29,11 @@ const TopNav = asFluidToken({
   },
 });
 
-const Utility = asFluidToken({
-  ...vitalMenuBase.Utility,
+const Utility = asMenuToken(vitalMenuBase.Utility, {
   Core: {
-    ...vitalMenuBase.Utility.Core,
     _: addProps({ 'data-shadowed-by': '__vital__Menu' }),
   },
   Schema: {
-    ...vitalMenuBase.Utility.Schema,
     _: as(
       withLanguageNode,
       vitalMenuBase.Utility.Schema._,

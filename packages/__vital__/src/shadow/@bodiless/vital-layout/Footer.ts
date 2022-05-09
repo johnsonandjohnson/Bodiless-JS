@@ -17,18 +17,18 @@ import {
 } from '@bodiless/fclasses';
 import { withLanguageNode } from '@bodiless/i18n';
 
-const Default = asFooterToken(vitalFooterBase.Default, {
+const Default = asFooterToken(vitalFooterBase.Base, {
   Core: {
     _: addProps({ 'data-shadowed-by': '__vital__Footer' }),
   },
   Schema: {
     FooterMenu: as(
       withLanguageNode,
-      vitalFooterBase.Default.Schema.FooterMenu
+      vitalFooterBase.Base.Schema.FooterMenu
     ),
     Copyright: as(
       withLanguageNode,
-      vitalFooterBase.Default.Schema.Copyright,
+      vitalFooterBase.Base.Schema.Copyright,
     ),
   },
 });

@@ -44,7 +44,7 @@ const WithLanguageSelector = asHeaderToken({
 });
 
 const Default = asHeaderToken(
-  vitalHeaderBase.Default,
+  vitalHeaderBase.Base,
   WithLanguageSelector,
 );
 

@@ -26,7 +26,7 @@ import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
 import { GenericTemplateNodeKeys } from '../constants';
 
-const Default = asGenericTemplateToken({
+const Base = asGenericTemplateToken({
   Components: {
     PageWrapper: on(LayoutClean)(vitalLayout.Default),
     // @todo breadcrumb placeholder
@@ -61,6 +61,11 @@ const Default = asGenericTemplateToken({
   },
 });
 
+const Default = asGenericTemplateToken({
+  ...Base,
+});
+
 export default {
+  Base,
   Default,
 };

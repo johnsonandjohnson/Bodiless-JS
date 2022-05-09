@@ -16,7 +16,7 @@ import { addProps } from '@bodiless/fclasses';
 import { withLanguages } from '@bodiless/i18n';
 import { asGenericTemplateToken, vitalGenericTemplateBase } from '@bodiless/vital-templates';
 
-const Default = asGenericTemplateToken(vitalGenericTemplateBase.Default, {
+const Default = asGenericTemplateToken(vitalGenericTemplateBase.Base, {
   Core: {
     _: addProps({ 'data-shadowed-by': '__vital__GenericTemplate' }),
     PageWrapper: withLanguages([
