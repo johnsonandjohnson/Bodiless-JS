@@ -15,6 +15,6 @@
 import { Span } from '@bodiless/ui';
 import { addClasses } from '@bodiless/fclasses';
 
-const CloseButton = addClasses('bl-block bl-text-right bl-text-white bl-cursor-pointer hover:bl-text-green-500')(Span);
+const CloseButton = addClasses('bl-block bl-text-right bl-text-white bl-cursor-pointer hover:bl-text-emerald-500')(Span);
 
 export default CloseButton;

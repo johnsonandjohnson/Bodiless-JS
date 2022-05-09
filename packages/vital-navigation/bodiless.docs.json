@@ -1,0 +1,19 @@
+{
+  "VitalDesignSystem": {
+    "Components": {
+      "VitalNavigation": {
+        "README.md": "./doc/README.md",
+        "BurgerMenu.md": "./doc/BurgerMenu.md",
+        "Menu.md": "./doc/Menu.md",
+        "MenuTitle.md": "./doc/MenuTitle.md",
+        "Separator.md": "./doc/Separator.md",
+        "Sub-Menu.md": "./doc/SubMenu.md"
+      },
+      "assets": {
+        "MainMenuItemContextMenu.jpg": "./doc/assets/MainMenuItemContextMenu.jpg",
+        "MenuWithSubMenu.jpg": "./doc/assets/MenuWithSubMenu.jpg",
+        "SubMenuItemContextMenu.jpg": "./doc/assets/SubMenuItemContextMenu.jpg"
+      }
+    }
+  }
+}

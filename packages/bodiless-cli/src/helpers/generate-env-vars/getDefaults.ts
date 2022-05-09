@@ -12,9 +12,7 @@
  * limitations under the License.
  */
 
-/* eslint-disable no-param-reassign */
 import { Tree } from './type';
-import { getCurrentGitBranch } from './utils';
 
 const defaultEnvValues: Tree = {
   BODILESS_TAILWIND_THEME_ENABLED: '1',
@@ -23,31 +21,11 @@ const defaultEnvValues: Tree = {
   BODILESS_BACKEND_COMMIT_ENABLED: '0',
   BODILESS_BACKEND_SAVE_ENABLED: '1',
   BODILESS_ALERT_ON_PAGE_LOAD_ENABLED: '0',
-  BODILESS_BACKEND_PORT: '8006',
+  BODILESS_BACKEND_PORT: '8001',
   APP_GIT_PATH: '.',
   BODILESS_DOCS_URL: '/___docs',
 };
 
-const defaultEnvConfig: Tree = {
-  production: { ...defaultEnvValues, BODILESS_BACKEND_SAVE_ENABLED: '0' },
-  changeset: { ...defaultEnvValues, BODILESS_BACKEND_COMMIT_ENABLED: '1' },
-  default: { ...defaultEnvValues },
-};
-
-const validNodeEnv = (val:string):boolean => Object.keys(defaultEnvConfig).includes(val);
-
-const isChangeset = (branchName:string):boolean => branchName.startsWith('test/') || branchName.startsWith('changeset/');
-
-const getDefaults = async (appEnv:string = 'production'): Promise<Tree> => {
-  const branch = await getCurrentGitBranch();
-
-  if (appEnv !== 'production' && isChangeset(branch)) {
-    appEnv = 'changeset';
-  }
-
-  const defaultEnv = validNodeEnv(appEnv) ? defaultEnvConfig[appEnv] : defaultEnvConfig.default;
-
-  return defaultEnv as Tree;
-};
+const getDefaults = async (_: string): Promise<Tree> => Promise.resolve(defaultEnvValues);
 
 export default getDefaults;

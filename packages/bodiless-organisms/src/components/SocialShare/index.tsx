@@ -38,7 +38,7 @@ const WrapperClean: FC = ({ children, ...props }) => <Div {...props}>{ children 
  *
  * @param buttonContent - a string or JSX element provides content of share button.
  *        for example, to display a Material Share icon, use
- *            <span className="material-icons">share</span>
+ *            <span className="bl-material-icons">share</span>
  */
 const ButtonClean: FC<any> = ({
   buttonContent: content,

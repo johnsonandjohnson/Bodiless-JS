@@ -13,15 +13,22 @@
  */
 const requireEsm = require('esm')(module);
 const tailwindcssDir = require('tailwindcss-dir')();
+const glob = require('glob');
+
+const content = glob.sync(
+  './src/**/!(*.d).{ts,js,jsx,tsx}'
+);
 
 const { buildTailwindConfig } = requireEsm(
   '@bodiless/fclasses'
 );
 
 const twConfig = {
-  purge: [
-    './src/**/!(*.d).{ts,js,jsx,tsx}',
-  ],
+  // @todo: workaround for https://github.com/johnsonandjohnson/Bodiless-JS/issues/1584
+  // content: [
+  //   './src/**/!(*.d).{ts,js,jsx,tsx}',
+  // ],
+  content,
   /*
   New for V1 - the legacy 'options' is now top-level
   */
@@ -137,7 +144,8 @@ const twConfig = {
         400: '#63b3ed',
         500: '#4299e1',
         600: '#3182ce',
-        700: '#2b6cb0',
+        /* Use of important To address tailwind bug https://github.com/tailwindlabs/tailwindcss/issues/7298 */
+        700: '#2b6cb0 !important',
         800: '#2c5282',
         900: '#2a4365',
       },
@@ -636,32 +644,6 @@ const twConfig = {
 
   },
 
-  /*
-  |-----------------------------------------------------------------------------
-  | Variants                 https://tailwindcss.com/docs/configuration#modules
-  |-----------------------------------------------------------------------------
-  |
-  | Here is where you control which modules are generated and what
-  | variants are generated for each of those modules.
-  |
-  | Currently supported variants:
-  |   - responsive
-  |   - hover
-  |   - focus
-  |   - active
-  |   - group-hover
-  |
-  | As a V1 update 'modules' has a name change to 'variants'
-  |
-  */
-
-  variants: {
-    inset: ['responsive', 'direction'],
-    textAlign: ['responsive', 'direction'],
-    opacity: ['disabled'],
-    cursor: ['disabled'],
-  },
-
   corePlugins: {},
 
   /*
@@ -691,6 +673,12 @@ const twConfig = {
 //   prefer: ['@bodiless/test-site', '@bodiless/some-package-name'],
 //   exclude: ['@bodiless/organisms', '@bodiless/accordion'],
 // });
+
+console.log(buildTailwindConfig({
+  twConfig,
+  resolver: (pkgName) => requireEsm.resolve(pkgName),
+  prefer: ['@sites/--minimal--'],
+}));
 
 module.exports = buildTailwindConfig({
   twConfig,

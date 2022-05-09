@@ -1,0 +1,16 @@
+{
+  "VitalDesignSystem": {
+    "Components": {
+      "VitalMeta": {
+        "README.md": "./doc/README.md",
+        "SEO.md": "./doc/SEO.md",
+        "Share.md": "./doc/Share.md",
+        "assets": {
+          "SeoDataManagementForm.jpg": "./doc/assets/SeoDataManagementForm.jpg",
+          "SeoDataManagementFormHomepage.jpg": "./doc/assets/SeoDataManagementFormHomepage.jpg",
+          "SocialShareManagementForm.jpg": "./doc/assets/SocialShareManagementForm.jpg"
+        }
+      }
+    }
+  }
+}

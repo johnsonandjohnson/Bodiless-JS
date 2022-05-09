@@ -45,7 +45,7 @@ const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
 
 // @todo unify response handler for all actions to the backend.
-// We need to handle reponses that come in the form of html, such as 404, and
+// We need to handle responses that come in the form of html, such as 404, and
 // other messages.
 const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
   .then(res => {
@@ -59,7 +59,7 @@ const handle = (promise: AxiosPromise<any>, callback?: () => void) => promise
       }
     }
     // eslint-disable-next-line no-undef
-    throw new Error('An unknown error has occured.');
+    throw new Error('An unknown error has occurred.');
   })
   .catch((err: AxiosError) => {
     // Use back-end crafted error message if available.
@@ -123,7 +123,7 @@ const SaveChanges = (props: Props) => {
     }
   }, [submits]);
 
-  const { status, errorMessage } = state;
+  const { status } = state;
 
   switch (status) {
     case SaveState.Pending:
@@ -139,13 +139,18 @@ const SaveChanges = (props: Props) => {
           <ComponentFormTitle>Operation complete.</ComponentFormTitle>
         </>
       );
-    case SaveState.Errored:
+    case SaveState.Errored: {
+      // @todo: in case of error response, use following msg to cover cases.
+      // refactoring once @bodiless/backend via Gatsby proxy HTTPError issue fixed.
+      const errorMessage = `Something happened. Please verify current environment
+        allows saving content, as well as confirm you have made changes.`;
       return (
         <>
           <ComponentFormTitle>{formTitle}</ComponentFormTitle>
           <ComponentFormWarning>{errorMessage}</ComponentFormWarning>
         </>
       );
+    }
     case SaveState.Init: {
       return (
         <>

@@ -3,6 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.12](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2022-05-02)
+
+**Note:** Version bump only for package @bodiless/psh
+
+
+
+
+
+# [1.0.0-beta.11](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-04-28)
+
+
+### Bug Fixes
+
+* **bodiless-psh:** git credential helper issues. ([1b536dc](https://github.com/johnsonandjohnson/bodiless-js/commit/1b536dc2fa41a6db3b1ed3b88dc7e25a5aacbe06))
+
+
+
+
+
+# [1.0.0-beta.10](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-04-26)
+
+
+### Bug Fixes
+
+* **bodiless-psh:** hide git credential on platform.sh ([531888a](https://github.com/johnsonandjohnson/bodiless-js/commit/531888ad022124a36fc5078113103ada54b06750))
+
+
+
+
+
+# [1.0.0-beta.9](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.5...v1.0.0-beta.9) (2022-04-21)
+
+**Note:** Version bump only for package @bodiless/psh
+
+
+
+
+
+# [1.0.0-beta.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.5...v1.0.0-beta.7) (2022-04-13)
+
+**Note:** Version bump only for package @bodiless/psh
+
+
+
+
+
 # [1.0.0-beta.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2022-04-13)
 
 

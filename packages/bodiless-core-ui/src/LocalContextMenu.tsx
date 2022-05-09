@@ -84,7 +84,7 @@ const ContextMenuGroup: FC<IContextMenuItemProps> = ({
       {label && (
         <GroupTitle index={index} {...onClick}>{label$}</GroupTitle>
       )}
-      <div className="flex">
+      <div className="bl-flex">
         {children}
       </div>
     </div>

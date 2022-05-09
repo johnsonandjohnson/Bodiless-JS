@@ -46,12 +46,12 @@ const Button = (props: ButtonProps) => {
 };
 
 const WrappedSpinner = () => {
-  const SpinnerWrapper = addClasses('h-20')(Div);
+  const SpinnerWrapper = addClasses('bl-h-20')(Div);
   return <SpinnerWrapper><Spinner color="bl-bg-white" /></SpinnerWrapper>;
 };
 
 const Message = addClasses([
-  'bl-text-gray-100 bl-text-center bl-text-lg bl-whitespace-pre-line clear-right',
+  'bl-text-gray-100 bl-text-center bl-text-lg bl-whitespace-pre-line bl-clear-right',
 ])(Div);
 
 const ui = {

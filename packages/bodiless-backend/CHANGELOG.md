@@ -3,6 +3,56 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.12](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2022-05-02)
+
+
+### Bug Fixes
+
+* **bodiless-backend:** copy root repo credential helper to tmp clone ([#1674](https://github.com/johnsonandjohnson/Bodiless-JS/issues/1674)) ([2caa210](https://github.com/johnsonandjohnson/Bodiless-JS/commit/2caa2103147424bcb7906d08ab7a59e6e6822a3b))
+* **bodiless-backend:** Fix image assets paths to be replaced on clone operation ([#1652](https://github.com/johnsonandjohnson/Bodiless-JS/issues/1652)) ([925cc59](https://github.com/johnsonandjohnson/Bodiless-JS/commit/925cc593f212df42b6979e4e3aebb8a5796b080c))
+
+
+
+
+
+# [1.0.0-beta.11](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-04-28)
+
+
+### Bug Fixes
+
+* **bodiless-page:** 500 error message update ([#1665](https://github.com/johnsonandjohnson/Bodiless-JS/issues/1665)) ([9ab9161](https://github.com/johnsonandjohnson/Bodiless-JS/commit/9ab91615be2e81c9b4b3989c4f63a128d4076608))
+
+
+
+
+
+# [1.0.0-beta.10](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-04-26)
+
+**Note:** Version bump only for package @bodiless/backend
+
+
+
+
+
+# [1.0.0-beta.9](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-beta.5...v1.0.0-beta.9) (2022-04-21)
+
+
+### Features
+
+* Fully disable save by env var. ([#1600](https://github.com/johnsonandjohnson/Bodiless-JS/issues/1600)) ([b19cd73](https://github.com/johnsonandjohnson/Bodiless-JS/commit/b19cd73422bcbb5e82125c4936b7aeb0c7c9cc7e)), closes [#1479](https://github.com/johnsonandjohnson/Bodiless-JS/issues/1479) [#1522](https://github.com/johnsonandjohnson/Bodiless-JS/issues/1522) [#1479](https://github.com/johnsonandjohnson/Bodiless-JS/issues/1479)
+
+
+
+
+
+# [1.0.0-beta.7](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-beta.5...v1.0.0-beta.7) (2022-04-13)
+
+**Note:** Version bump only for package @bodiless/backend
+
+
+
+
+
 # [1.0.0-beta.5](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2022-04-13)
 
 **Note:** Version bump only for package @bodiless/backend

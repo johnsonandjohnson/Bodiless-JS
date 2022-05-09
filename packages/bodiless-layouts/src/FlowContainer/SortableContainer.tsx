@@ -16,7 +16,7 @@ import React, { ComponentType, HTMLProps, PropsWithChildren } from 'react';
 import { observer } from 'mobx-react';
 import { SortableContainer, SortEndHandler } from 'react-sortable-hoc';
 import {
-  useContextActivator, useEditContext, withLocalContextMenu, withContextActivator,
+  useContextActivator, withLocalContextMenu, withContextActivator,
 } from '@bodiless/core';
 import omit from 'lodash/omit';
 import { flowHoc } from '@bodiless/fclasses';
@@ -41,12 +41,10 @@ const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });
 
 const FlowContainerEmpty$ = (ui: UI) => {
   const { FlowContainerEmptyWrapper } = getUI(ui);
-  const context = useEditContext();
   // mobx has issues with destructured values
   // eslint-disable-next-line react/destructuring-assignment
-  const activeClassName = context.isActive ? 'bl-border-orange-400' : 'hover:bl-border-orange-400';
-  const classNames = `bl-border-2 bl-border-dashed bl-flex bl-w-full bl-justify-center 
-    bl-flex-wrap bl-py-grid-3 ${activeClassName}`;
+  const classNames = `bl-border-2 bl-border-dashed bl-border-gray-200 bl-flex bl-w-full bl-justify-center 
+    bl-flex-wrap bl-py-grid-3 hover:bl-border-orange-400`;
   return (
     <FlowContainerEmptyWrapper className={classNames}>
       Empty FlowContainer
@@ -97,6 +95,7 @@ const EditListView = ({
 EditListView.displayName = 'EditListView';
 
 EditListView.defaultProps = {
+  // eslint-disable-next-line react/default-props-match-prop-types
   onSortEnd: () => {},
 };
 

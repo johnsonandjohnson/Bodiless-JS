@@ -254,7 +254,7 @@ exports.onCreateWebpackConfig = ({
     actions.setWebpackConfig({
       resolve: {
         alias: {
-          '.bodiless.index.css': false,
+          './bodiless.index.css': false,
         },
       },
     });

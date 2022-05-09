@@ -128,7 +128,7 @@ const FormBodyBase = () => {
     ComponentFormCheckBox,
   } = useMenuOptionUI();
   const ComponentFormIsValid = flowHoc(
-    addClasses('hidden')
+    addClasses('bl-hidden')
   )(ComponentFormCheckBox);
   const ComponentFormTextAreaSize = flowHoc(
     removeClasses('bl-w-full bl-min-w-xl-grid-1 bl-min-h-grid-16'),
@@ -185,6 +185,11 @@ const FormBodyBase = () => {
         />
         <ComponentFormIsValid keepState field="isValid" />
         <i>{ !formValues.isValid && INVALIDATED }</i>
+        <p>
+          If your page that you are redirecting from exists,
+          <br />
+          please disable the page and then enter the redirect rule.
+        </p>
         <ComponentFormSubmitButton
           aria-label="Submit"
           onClick={handleSubmit}

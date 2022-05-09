@@ -30,6 +30,14 @@ to cards, see: [Card Component](../../../Components/Card).
 
 ### Select and Configure an Image
 
+!> **IMPORTANT:** Ensure that uploaded/selected images are wide enough to fill the full width of the
+mobile/tablet viewports.
+<br><br>
+There may be instances where you are adding an image to a page where it's configured to fill less
+than 100% of the width of the desktop viewport (e.g., 25%, 33%, etc.); when doing this, it is
+important to remember that, in many cases, when the viewport is switched to mobile/tablet, the image
+will be rendered in a single-column layout where it now needs to fill 100% of the viewport width.
+
 To select an image for and configure an Image Component:
 
 01. While in [Edit Mode](/ContenteditorUserGuide/#edit-mode), select the desired Image Component,

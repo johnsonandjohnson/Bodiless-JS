@@ -16,11 +16,11 @@ import { mergeConfigs } from '../src/tailwindcss';
 
 describe('tailwindcss', () => {
   describe('mergeConfigs', () => {
-    it('merges purge settings', () => {
+    it('merges content settings', () => {
       const packageA = {
         root: '',
         tailwindConfig: {
-          purge: [
+          content: [
             'packageA',
           ],
         },
@@ -28,15 +28,21 @@ describe('tailwindcss', () => {
       const packageB = {
         root: '',
         tailwindConfig: {
-          purge: [
+          content: [
             'packageB1',
             'packageB2',
           ],
         },
       };
+      const site = {
+        content: [
+          'site',
+        ],
+      };
       const expected = {
-        purge: [
-          './src/**/!(*.d).{ts,js,jsx,tsx}',
+        content: [
+          // @todo: see github issue #1584: Demo site content changes causing HMR bundle rebuild
+          // './src/**/!(*.d).{ts,js,jsx,tsx}',
           'packageA',
           'packageB1',
           'packageB2'

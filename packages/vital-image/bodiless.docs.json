@@ -1,0 +1,10 @@
+{
+  "VitalDesignSystem": {
+    "Components": {
+      "VitalImage": {
+        "README.md": "./doc/Image.md",
+        "ImageConfigurations.md": "./doc/ImageConfigurations.md"
+      }
+    }
+  }
+}

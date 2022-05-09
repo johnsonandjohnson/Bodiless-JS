@@ -12,29 +12,33 @@
  * limitations under the License.
  */
 
-import { spawn, SpawnOptions } from 'child_process';
+import {
+  spawn, execSync, SpawnOptions, ExecOptions,
+} from 'child_process';
 import * as path from 'path';
 
 export default class Spawner {
-  options: SpawnOptions;
+  options: SpawnOptions|(ExecOptions & Pick<SpawnOptions, 'stdio'>);
 
-  constructor(monorepo: string) {
+  constructor(monorepo?: string) {
     this.options = {
       stdio: 'inherit',
       shell: true,
     };
-    // Add the monorepo npm bin directory to the path, bc some packages
-    // may use binaries in their pack command which are only available there.
-    const monorepoBinPath = path.join(monorepo, 'node_modules', '.bin');
-    // process.env may have PATH variant with different casing (e.g. Path)
-    // see https://github.com/nodejs/node/issues/34667#issuecomment-670505074
-    const pathEnvKey = Object.keys(process.env).find(x => x.toUpperCase() === 'PATH') || 'PATH';
-    const { [pathEnvKey]: PATH } = process.env;
-    const PATH$ = PATH ? PATH + path.delimiter + monorepoBinPath : monorepoBinPath;
-    this.options.env = {
-      ...process.env,
-      [pathEnvKey]: PATH$,
-    };
+    if (monorepo) {
+      // Add the monorepo npm bin directory to the path, bc some packages
+      // may use binaries in their pack command which are only available there.
+      const monorepoBinPath = path.join(monorepo, 'node_modules', '.bin');
+      // process.env may have PATH variant with different casing (e.g. Path)
+      // see https://github.com/nodejs/node/issues/34667#issuecomment-670505074
+      const pathEnvKey = Object.keys(process.env).find(x => x.toUpperCase() === 'PATH') || 'PATH';
+      const { [pathEnvKey]: PATH } = process.env;
+      const PATH$ = PATH ? PATH + path.delimiter + monorepoBinPath : monorepoBinPath;
+      this.options.env = {
+        ...process.env,
+        [pathEnvKey]: PATH$,
+      };
+    }
     this.spawn = this.spawn.bind(this);
   }
 
@@ -44,8 +48,12 @@ export default class Spawner {
   spawn(...[cmd, ...args]: string[]) {
     return new Promise<Error|number>((resolve, reject) => {
       const child = spawn(cmd, args, this.options);
-      child.on('close', code => resolve(code as number));
+      child.on('close', code => (code ? reject(new Error(`Exit code ${code} in ${cmd}`)) : resolve(code as number)));
       child.on('error', error => reject(error));
     });
+  }
+
+  execSync(...args: string[]) {
+    return execSync(args.join(' '), this.options as ExecOptions);
   }
 }
