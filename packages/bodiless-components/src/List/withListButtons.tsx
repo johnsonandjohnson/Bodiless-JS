@@ -95,6 +95,7 @@ const withListButtons = (useOverrides?: UseListOverrides) => ifEditable(
         type: 'list-item',
       }),
     ),
+    Title: withContextActivator('onFocus'),
   }),
 );
 
