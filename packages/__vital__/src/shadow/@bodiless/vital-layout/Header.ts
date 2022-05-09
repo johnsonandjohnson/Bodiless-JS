@@ -14,7 +14,7 @@
 import { vitalHeaderBase, asHeaderToken } from '@bodiless/vital-layout';
 import { LinkClean, vitalLink, asLinkToken } from '@bodiless/vital-link';
 import { asLanguageSelector } from '@bodiless/i18n';
-import { addProps, on } from '@bodiless/fclasses';
+import { addProps, on, startWith, Div } from '@bodiless/fclasses';
 
 export const asLanguageSelectorLink = on(LinkClean)(
   asLinkToken({
@@ -28,10 +28,17 @@ export const asLanguageSelectorLink = on(LinkClean)(
 const Default = asHeaderToken(vitalHeaderBase.Default, {
   Core: {
     _: addProps({ 'data-shadowed-by': '__vital__Header' }),
+    LanguageSelectorWrapper: startWith(Div),
   },
   Components: {
-    LanguageSelectorWrapper: asLanguageSelectorLink,
+    LanguageSelector: asLanguageSelectorLink,
   },
+  Theme: {
+    LanguageSelectorWrapper: 'lg:border-vital-primary-divider lg:border-r-2',
+  },
+  Spacing: {
+    LanguageSelectorWrapper: 'pl-5 lg:mr-5 lg:px-5 lg:py-2',
+  }
 });
 
 export default {
