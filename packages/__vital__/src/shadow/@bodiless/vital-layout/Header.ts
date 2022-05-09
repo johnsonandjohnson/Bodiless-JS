@@ -27,7 +27,7 @@ export const asLanguageSelectorLink = on(LinkClean)(
   asLanguageSelector
 );
 
-const Default = asHeaderToken(vitalHeaderBase.Default, {
+const WithLanguageSelector = asHeaderToken({
   Core: {
     _: addProps({ 'data-shadowed-by': '__vital__Header' }),
     LanguageSelectorWrapper: startWith(Div),
@@ -42,6 +42,11 @@ const Default = asHeaderToken(vitalHeaderBase.Default, {
     LanguageSelectorWrapper: 'pl-5 lg:mr-5 lg:px-5 lg:py-2',
   }
 });
+
+const Default = asHeaderToken(
+  vitalHeaderBase.Default,
+  WithLanguageSelector,
+);
 
 export default {
   ...vitalHeaderBase,
