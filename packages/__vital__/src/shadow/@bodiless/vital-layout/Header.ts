@@ -14,7 +14,9 @@
 import { vitalHeaderBase, asHeaderToken } from '@bodiless/vital-layout';
 import { LinkClean, vitalLink, asLinkToken } from '@bodiless/vital-link';
 import { asLanguageSelector } from '@bodiless/i18n';
-import { addProps, on, startWith, Div } from '@bodiless/fclasses';
+import {
+  addProps, on, startWith, Div,
+} from '@bodiless/fclasses';
 
 export const asLanguageSelectorLink = on(LinkClean)(
   asLinkToken({
