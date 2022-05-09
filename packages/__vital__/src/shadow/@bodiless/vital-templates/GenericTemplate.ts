@@ -30,10 +30,15 @@ const Default = asGenericTemplateToken(vitalGenericTemplateBase.Base, {
         label: 'Español',
       },
     ]),
-  }
+  },
+});
+
+const NoBreadcrumbs = asGenericTemplateToken(Default, {
+  ...vitalGenericTemplateBase.NoBreadcrumbs
 });
 
 export default {
   ...vitalGenericTemplateBase,
   Default,
+  NoBreadcrumbs,
 };

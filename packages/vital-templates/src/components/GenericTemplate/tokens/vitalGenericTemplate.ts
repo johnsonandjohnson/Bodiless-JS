@@ -17,6 +17,8 @@ import {
   as,
   Img,
   addProps,
+  replaceWith,
+  Fragment,
 } from '@bodiless/fclasses';
 import { vitalImage } from '@bodiless/vital-image';
 import { LayoutClean, vitalLayout } from '@bodiless/vital-layout';
@@ -65,7 +67,15 @@ const Default = asGenericTemplateToken({
   ...Base,
 });
 
+const NoBreadcrumbs = asGenericTemplateToken(Default, {
+  Components: {
+    BreadcrumbWrapper: replaceWith(Fragment),
+    Breadcrumb: replaceWith(Fragment),
+  },
+});
+
 export default {
   Base,
   Default,
+  NoBreadcrumbs,
 };
