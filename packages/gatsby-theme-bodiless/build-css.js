@@ -41,7 +41,7 @@ if (!tailwindThemeEnabled) {
           // eslint-disable-next-line global-require
           require('tailwindcss')(tailWindConfigFile),
           // eslint-disable-next-line global-require
-          require('autoprefixer')(),
+          // require('autoprefixer')(),
         ],
       },
     });
