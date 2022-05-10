@@ -31,7 +31,11 @@ const Default = asLinkToken({
     Wrapper: 'inline-block',
   },
   Theme: {
-    Wrapper: 'rounded shadow-md transition duration-150 ease-in-out',
+    Wrapper: as(
+      'rounded shadow-md transition duration-150 ease-in-out',
+      'focus:outline-none focus:ring-0',
+    ),
+    Body: 'leading-tight uppercase',
   },
   Spacing: {
     Wrapper: 'px-6 py-2.5',
@@ -47,36 +51,42 @@ const Default = asLinkToken({
   },
 });
 
-// Typography: font-medium text-xs leading-tight uppercase
-
-// Hover: hover:bg-blue-700 hover:shadow-lg
-// Focus: focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
-// Active: active:bg-blue-800 active:shadow-lg
-
 const Primary = asLinkToken({
   ...Default,
   Theme: {
     ...Default.Theme,
     Wrapper: as(
       vitalColor.BgPrimaryInteractive,
-      'hover:shadow-lg',
+      'hover:shadow-lg focus:shadow-lg active:shadow-lg',
     ),
-    // Content: vitalColor.TextWhite,
+    Body: vitalColor.TextWhite,
   },
 });
-
-// Typography text-gray-800 font-medium text-xs leading-tight uppercase
-
-// THeme: border-2 border-gray-800
-// Theme rounded transition duration-150 ease-in-out
-// Hover: hover:bg-black hover:bg-opacity-5
-// Focus: focus:outline-none focus:ring-0
 
 const Secondary = asLinkToken({
   ...Default,
   Theme: {
     ...Default.Theme,
-    Wrapper: 'btn-primary',
+    Wrapper: as(
+      'border-2',
+      vitalColor.BgPrimaryInteractiveBorder,
+    ),
+  },
+});
+
+const Selected = asLinkToken({
+  ...Default,
+  Theme: {
+    ...Default.Theme,
+    Wrapper: '',
+  },
+});
+
+const Disabled = asLinkToken({
+  ...Default,
+  Theme: {
+    ...Default.Theme,
+    Wrapper: 'opacity-50',
   },
 });
 
@@ -128,6 +138,8 @@ export default {
   Default,
   Primary,
   Secondary,
+  Selected,
+  Disabled,
   WhereToBuy,
   WhereToBuyWithoutIcon,
 };

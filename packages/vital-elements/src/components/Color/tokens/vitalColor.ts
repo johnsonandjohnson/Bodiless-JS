@@ -27,6 +27,7 @@ export default asTokenGroup(meta)({
   BgPrimaryCard: 'bg-vital-primary-card-bg',
   BgPrimaryPage: 'bg-vital-primary-page-bg',
   BgPrimaryInteractive: 'bg-vital-primary-interactive',
+  BgPrimaryInteractiveBorder: 'border-vital-primary-interactive',
   TextPrimaryInteractive: 'text-vital-primary-interactive hover:opacity-70 active:text-vital-primary-interactive-active',
   WithTextPrimaryInteractiveDisabled: 'text-opacity-60',
   BgPrimaryDivider: 'bg-vital-primary-divider',
