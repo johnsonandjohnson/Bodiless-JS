@@ -27,25 +27,18 @@ export const asLanguageSelectorLink = on(LinkClean)(
   asLanguageSelector
 );
 
-const WithLanguageSelector = asHeaderToken({
-  Core: {
-    _: addProps({ 'data-shadowed-by': '__vital__Header' }),
-    LanguageSelectorWrapper: startWith(Div),
-  },
-  Components: {
-    LanguageSelector: asLanguageSelectorLink,
-  },
-  Theme: {
-    LanguageSelectorWrapper: 'lg:border-vital-primary-divider lg:border-r-2',
-  },
-  Spacing: {
-    LanguageSelectorWrapper: 'pl-5 lg:mr-5 lg:px-5 lg:py-2',
-  }
-});
-
 const Default = asHeaderToken(
   vitalHeaderBase.Base,
-  WithLanguageSelector,
+  vitalHeaderBase.WithLanguageSelector,
+  {
+    Core: {
+      _: addProps({ 'data-shadowed-by': '__vital__Header' }),
+      LanguageSelectorWrapper: startWith(Div),
+    },
+    Components: {
+      LanguageSelector: asLanguageSelectorLink,
+    },
+  }
 );
 
 export default {

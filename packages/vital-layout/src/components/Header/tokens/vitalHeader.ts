@@ -83,6 +83,15 @@ const Base = asHeaderToken({
   },
 });
 
+const WithLanguageSelector = asHeaderToken({
+  Theme: {
+    LanguageSelectorWrapper: 'lg:border-vital-primary-divider lg:border-r-2',
+  },
+  Spacing: {
+    LanguageSelectorWrapper: 'pl-5 lg:mr-5 lg:px-5 lg:py-2',
+  }
+});
+
 const Default = asHeaderToken({
   ...Base,
 });
@@ -90,6 +99,7 @@ const Default = asHeaderToken({
 const vitalHeader = {
   Base,
   Default,
+  WithLanguageSelector,
 };
 
 export default vitalHeader;
