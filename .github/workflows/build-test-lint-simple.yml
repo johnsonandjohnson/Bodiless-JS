@@ -47,11 +47,6 @@ jobs:
       - name: Run Playwright Tests
         run: |
           npm run test:ci-pw
-      - name: Post Tests Results
-        uses: EnricoMi/publish-unit-test-result-action@v1.28
-        if: always()
-        with:
-          files: playwright-report/results.xml
       - name: Upload Tests Artifact
         if: always()
         uses: actions/upload-artifact@v2
@@ -59,3 +54,14 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+  # Generate event file for Attach Unit Test Results helper workflow
+  event_file:
+    name: "Event File"
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+    - name: Upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: Event File
+        path: ${{ github.event_path }}
