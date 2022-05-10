@@ -18,6 +18,9 @@ import {
   replaceWith,
   startWith,
   withProps,
+  Button,
+  Span,
+  // addProps,
 } from '@bodiless/fclasses';
 import { vitalColor, vitalTextDecoration, } from '@bodiless/vital-elements';
 import { withPlaceholder } from '@bodiless/components';
@@ -26,19 +29,25 @@ import { asEditableLink } from '../../Link/util';
 import { asLinkToken } from '../../Link/LinkClean';
 import { CartIcon } from '../assets/CartIcon';
 
-const Default = asLinkToken({
+const Base = asLinkToken({
+  Components: {
+    Wrapper: replaceWith(Button),
+    Icon: replaceWith(Span),
+  },
   Layout: {
-    Wrapper: 'inline-block',
+    Wrapper: 'flex flex-row-reverse group',
   },
   Theme: {
     Wrapper: as(
       'rounded shadow-md transition duration-150 ease-in-out',
       'focus:outline-none focus:ring-0',
+      'leading-tight uppercase',
     ),
-    Body: 'leading-tight uppercase',
+    Icon: 'group-hover:vital-download-link',
   },
   Spacing: {
     Wrapper: 'px-6 py-2.5',
+    Icon: 'inline-block group-hover:px-1 group-hover:w-4 group-hover:h-2',
   },
   Editors: {
     Body: on(EditorPlainClean)(vitalEditorPlain.Default),
@@ -52,42 +61,62 @@ const Default = asLinkToken({
 });
 
 const Primary = asLinkToken({
-  ...Default,
+  ...Base,
   Theme: {
-    ...Default.Theme,
+    ...Base.Theme,
     Wrapper: as(
       vitalColor.BgPrimaryInteractive,
-      'hover:shadow-lg focus:shadow-lg active:shadow-lg',
+      vitalColor.TextWhite,
     ),
-    Body: vitalColor.TextWhite,
   },
 });
 
 const Secondary = asLinkToken({
-  ...Default,
+  ...Base,
   Theme: {
-    ...Default.Theme,
+    ...Base.Theme,
     Wrapper: as(
-      'border-2',
-      vitalColor.BgPrimaryInteractiveBorder,
+      vitalColor.TextPrimaryInteractive,
+      vitalColor.BorderPrimaryInteractive,
     ),
   },
 });
 
-const Selected = asLinkToken({
-  ...Default,
+const PrimarySelected = asLinkToken({
+  ...Base,
   Theme: {
-    ...Default.Theme,
-    Wrapper: '',
+    ...Base.Theme,
+    Wrapper: as(
+      vitalColor.BgButtonSelected,
+      // 'hover:shadow-lg focus:shadow-lg active:shadow-lg',
+      vitalColor.TextWhite,
+    ),
+  },
+});
+const SecondarySelected = asLinkToken({
+  ...Base,
+  Theme: {
+    ...Base.Theme,
+    Wrapper: as(
+      vitalColor.TextButtonSelected,
+      'border-2',
+      vitalColor.BorderButtonSelected,
+    ),
   },
 });
 
-const Disabled = asLinkToken({
-  ...Default,
+const WithDisabled = asLinkToken({
+  /*
+  ...Base,
+  Component: {
+    ...Base.Component,
+    Wrapper: addProps({ disabled: 'true' }),
+  },
   Theme: {
-    ...Default.Theme,
+    ...Base.Theme,
     Wrapper: 'opacity-50',
   },
+  */
 });
 
 const WhereToBuy = asLinkToken({
@@ -134,12 +163,17 @@ const WhereToBuyWithoutIcon = asLinkToken({
   },
 });
 
+const Default = asLinkToken({
+  ...Base,
+});
+
 export default {
   Default,
   Primary,
+  PrimarySelected,
   Secondary,
-  Selected,
-  Disabled,
+  SecondarySelected,
+  WithDisabled,
   WhereToBuy,
   WhereToBuyWithoutIcon,
 };

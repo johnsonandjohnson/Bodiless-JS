@@ -27,7 +27,7 @@ export default asTokenGroup(meta)({
   BgPrimaryCard: 'bg-vital-primary-card-bg',
   BgPrimaryPage: 'bg-vital-primary-page-bg',
   BgPrimaryInteractive: 'bg-vital-primary-interactive',
-  BgPrimaryInteractiveBorder: 'border-vital-primary-interactive',
+  BorderPrimaryInteractive: 'border-vital-primary-interactive',
   TextPrimaryInteractive: 'text-vital-primary-interactive hover:opacity-70 active:text-vital-primary-interactive-active',
   TextPrimaryInteractiveHover: 'hover:text-vital-primary-interactive',
   WithTextPrimaryInteractiveDisabled: 'text-opacity-60',
@@ -44,4 +44,7 @@ export default asTokenGroup(meta)({
   BorderSecondarySeparator: 'border-vital-secondary-separator',
   BgWhite: 'bg-white',
   TextWhite: 'text-white',
+  TextButtonSelected: 'text-vital-secondary-button-selected',
+  BgButtonSelected: 'bg-vital-secondary-button-selected',
+  BorderButtonSelected: 'border-vital-secondary-button-selected',
 });

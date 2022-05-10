@@ -39,7 +39,29 @@ const DefaultButton = as(
 )(LinkClean);
 const PrimaryButton = as(
   vitalButtons.Primary,
-  withNodeKey('defaultbutton'),
+  withNodeKey('primarybutton'),
+)(LinkClean);
+const SecondaryButton = as(
+  vitalButtons.Secondary,
+  withNodeKey('secondarybutton'),
+)(LinkClean);
+const PrimarySelectedButton = as(
+  vitalButtons.PrimarySelected,
+  withNodeKey('primarybutton'),
+)(LinkClean);
+const PrimaryDisabledButton = as(
+  vitalButtons.Primary,
+  vitalButtons.WithDisabled,
+  withNodeKey('primarybutton'),
+)(LinkClean);
+const SecondarySelectedButton = as(
+  vitalButtons.SecondarySelected,
+  withNodeKey('secondarybutton'),
+)(LinkClean);
+const SecondaryDisabledButton = as(
+  vitalButtons.Secondary,
+  vitalButtons.WithDisabled,
+  withNodeKey('secondarybutton'),
 )(LinkClean);
 
 /* @todo
@@ -52,9 +74,18 @@ const Examples = (props: any) => (
     <DefaultLink />
     <hr className="my-4" />
     <C.H3>Default Button</C.H3>
-    <div className="flex flex-wrap w-full p-8 space-x-2">
-      <DefaultButton />
+    <DefaultButton />
+    <C.H3>Primary Buttons</C.H3>
+    <div className="flex flex-wrap w-full p-8 space-x-4">
       <PrimaryButton />
+      <PrimarySelectedButton />
+      <PrimaryDisabledButton />
+    </div>
+    <C.H3>Secondary Buttons</C.H3>
+    <div className="flex flex-wrap w-full p-8 space-x-4">
+      <SecondaryButton />
+      <SecondarySelectedButton />
+      <SecondaryDisabledButton />
     </div>
   </>
 );
