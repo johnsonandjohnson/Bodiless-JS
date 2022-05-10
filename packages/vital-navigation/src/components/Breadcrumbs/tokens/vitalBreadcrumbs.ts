@@ -26,7 +26,7 @@ import {
   withEditableFinalTrail,
   withMenuTitleEditors,
 } from '@bodiless/navigation';
-import { vitalTypography } from '@bodiless/vital-elements';
+import { vitalColor } from '@bodiless/vital-elements';
 import { asBreadcrumbsToken } from '../BreadcrumbsClean';
 
 /**
@@ -50,23 +50,20 @@ const Base = asBreadcrumbsToken({
   },
   Layout: {
     Wrapper: 'inline-flex',
-    Separator: 'hidden lg:flex',
+    Separator: 'flex',
   },
   Spacing: {
     Separator: 'mx-1',
     Wrapper: 'my-3',
   },
   Theme: {
-    StartingTrail: vitalTypography.Link,
-    Title: vitalTypography.Link,
-    Item: '',
-    Separator: '',
+    StartingTrail: vitalColor.TextPrimaryInteractiveHover,
+    Title: vitalColor.TextPrimaryInteractiveHover,
   },
 });
 
 /**
   * Token which produces the Default Vital Breadcrumbs.
-  * @todo We should add responive variants here.
   */
 const Default = asBreadcrumbsToken({
   ...Base,
