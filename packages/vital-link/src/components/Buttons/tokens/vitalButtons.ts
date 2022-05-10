@@ -27,8 +27,14 @@ import { asLinkToken } from '../../Link/LinkClean';
 import { CartIcon } from '../assets/CartIcon';
 
 const Default = asLinkToken({
+  Layout: {
+    Wrapper: 'inline-block',
+  },
   Theme: {
-    Wrapper: 'btn',
+    Wrapper: 'rounded shadow-md transition duration-150 ease-in-out',
+  },
+  Spacing: {
+    Wrapper: 'px-6 py-2.5',
   },
   Editors: {
     Body: on(EditorPlainClean)(vitalEditorPlain.Default),
@@ -41,7 +47,32 @@ const Default = asLinkToken({
   },
 });
 
+// Typography: font-medium text-xs leading-tight uppercase
+
+// Hover: hover:bg-blue-700 hover:shadow-lg
+// Focus: focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
+// Active: active:bg-blue-800 active:shadow-lg
+
 const Primary = asLinkToken({
+  ...Default,
+  Theme: {
+    ...Default.Theme,
+    Wrapper: as(
+      vitalColor.BgPrimaryInteractive,
+      'hover:shadow-lg',
+    ),
+    // Content: vitalColor.TextWhite,
+  },
+});
+
+// Typography text-gray-800 font-medium text-xs leading-tight uppercase
+
+// THeme: border-2 border-gray-800
+// Theme rounded transition duration-150 ease-in-out
+// Hover: hover:bg-black hover:bg-opacity-5
+// Focus: focus:outline-none focus:ring-0
+
+const Secondary = asLinkToken({
   ...Default,
   Theme: {
     ...Default.Theme,
@@ -96,6 +127,7 @@ const WhereToBuyWithoutIcon = asLinkToken({
 export default {
   Default,
   Primary,
+  Secondary,
   WhereToBuy,
   WhereToBuyWithoutIcon,
 };

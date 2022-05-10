@@ -40,4 +40,6 @@ export default asTokenGroup(meta)({
   BgSecondaryTableRowColumn: 'bg-vital-secondary-table-interactive',
   BgSecondaryTableInteractive: 'hover:bg-vital-secondary-table-interactive',
   BorderSecondarySeparator: 'border-vital-secondary-separator',
+  BgWhite: 'bg-white',
+  TextWhite: 'text-white',
 });
