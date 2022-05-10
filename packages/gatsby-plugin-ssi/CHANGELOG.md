@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.15](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2022-05-10)
+
+**Note:** Version bump only for package @bodiless/gatsby-plugin-ssi
+
+
+
+
+
 # [1.0.0-beta.12](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2022-05-02)
 
 **Note:** Version bump only for package @bodiless/gatsby-plugin-ssi

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.15](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2022-05-10)
+
+
+### Features
+
+* **playwright:** add first playwright test ([#1735](https://github.com/johnsonandjohnson/bodiless-js/issues/1735)) ([0c9e0a4](https://github.com/johnsonandjohnson/bodiless-js/commit/0c9e0a44a4ee8fc6dca8edfc5a4c49a524a1d681))
+
+
+
+
+
 # [1.0.0-beta.14](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.13...v1.0.0-beta.14) (2022-05-05)
 
 **Note:** Version bump only for package bodiless-js
