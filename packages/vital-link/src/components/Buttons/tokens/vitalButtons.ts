@@ -22,8 +22,8 @@ import {
   Span,
   // addProps,
 } from '@bodiless/fclasses';
-import { vitalColor, vitalTextDecoration, } from '@bodiless/vital-elements';
 import { withPlaceholder } from '@bodiless/components';
+import { vitalColor, vitalTextDecoration, } from '@bodiless/vital-elements';
 import { vitalEditorPlain, EditorPlainClean } from '@bodiless/vital-editors';
 import { asEditableLink } from '../../Link/util';
 import { asLinkToken } from '../../Link/LinkClean';
@@ -46,7 +46,7 @@ const Base = asLinkToken({
     Icon: 'group-hover:vital-download-link',
   },
   Spacing: {
-    Wrapper: 'px-6 py-2.5',
+    Wrapper: 'px-6 py-3.5',
     Icon: 'inline-block group-hover:px-1 group-hover:w-4 group-hover:h-2',
   },
   Editors: {
