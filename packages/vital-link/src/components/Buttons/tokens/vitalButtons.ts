@@ -88,7 +88,6 @@ const PrimarySelected = asLinkToken({
     ...Base.Theme,
     Wrapper: as(
       vitalColor.BgButtonSelected,
-      // 'hover:shadow-lg focus:shadow-lg active:shadow-lg',
       vitalColor.TextWhite,
     ),
   },
@@ -107,13 +106,10 @@ const SecondarySelected = asLinkToken({
 
 const WithDisabled = asLinkToken({
   /*
-  ...Base,
   Component: {
-    ...Base.Component,
     Wrapper: addProps({ disabled: 'true' }),
   },
   Theme: {
-    ...Base.Theme,
     Wrapper: 'opacity-50',
   },
   */
