@@ -19,8 +19,6 @@ import React, { FC, useRef, useLayoutEffect } from 'react';
 import memoize from 'lodash/memoize';
 import {
   WithoutHydrationFunction,
-  WithoutHydrationWrapperFunction,
-  WithoutHydrationOptions,
 } from './types';
 
 const DEFAULT_OPTIONS: WithoutHydrationOptions = {
@@ -106,29 +104,19 @@ const fullSelector = (element: HTMLElement | null) => {
   return path;
 };
 
-const withoutHydrationClientSideEdit: WithoutHydrationFunction = (
-) => WrappedComponent => props => (
-  <WrappedComponent {...props} />
+const withoutHydrationServerSide: WithoutHydrationFunction = ({
+  WrapperElement = DEFAULT_WRAPPER,
+} = {}) => WrappedComponent => props => (
+  <WrapperElement data-no-hydrate style={isEditClientSide ? {} : { display: 'contents' }}>
+    <WrappedComponent {...props} />
+  </WrapperElement>
 );
 
-const withoutHydrationServerSide: WithoutHydrationFunction = ({
-  WrapperElement,
-  WrapperStyle
-}) => WrappedComponent => (props: any) => {
-  const { nodeKey = undefined } = props;
-  return (
-    <WrapperElement data-no-hydrate style={WrapperStyle} id={useWrapperId(nodeKey)}>
-      <WrappedComponent {...props} />
-    </WrapperElement>
-  );
-};
-
 const withoutHydrationClientSide: WithoutHydrationFunction = ({
-  onUpdate,
-  WrapperElement,
-  WrapperStyle,
-}) => <P,>(WrappedComponent: ComponentOrTag<P>) => {
-  const WithoutHydration: FC<P> = (props: any) => {
+  onUpdate = null,
+  WrapperElement = DEFAULT_WRAPPER,
+} = {}) => <P,>(WrappedComponent: ComponentOrTag<P>) => {
+  const WithoutHydration: FC<P> = (props) => {
     const BrowserVersion$ = () => {
       const rootRef = useRef<HTMLDivElement&HTMLSpanElement>(null);
       const { nodeKey = undefined } = props;
@@ -161,10 +149,8 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
 
       return (
         <WrapperElement
-          data-no-hydrate
           ref={rootRef}
-          style={WrapperStyle}
-          id={id}
+          style={{ display: 'contents' }}
           suppressHydrationWarning
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: markup }}
