@@ -75,6 +75,10 @@ const VitalDemoLink = flowHoc(
   ),
   withNodeKey('demo-link'),
 )(LinkClean);
+const Gradient = flowHoc(
+  withEditorPlain('Gradient', 'Gradient'),
+  as(vitalTypography.Gradient),
+)(P);
 
 const Examples = (props: any) => (
   <>
@@ -88,6 +92,8 @@ const Examples = (props: any) => (
     <VitalEyebrow />
     <VitalDemoLink />
     <VitalRest />
+    <br />
+    <Gradient />
   </>
 );
 
