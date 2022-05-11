@@ -14,12 +14,20 @@
 import React, { FC } from 'react';
 import { observer } from 'mobx-react';
 import { StaticPage } from '@bodiless/core';
+import { ContextWrapper } from '@bodiless/core-ui';
 import { PageDataProvider } from '@bodiless/page';
-import type { PageProps } from './types';
+import type { FinalUI, UI, PageProps } from './types';
 import GatsbyNodeProvider from './GatsbyNodeProvider';
 import ShowDesignKeys from './ShowDesignKeys';
 
+const defaultUI: Omit<FinalUI, 'PageEditor'> = {
+  ContextWrapper,
+};
+
+const getUI = (ui: UI = {}): Omit<FinalUI, 'PageEditor'> => ({ ...defaultUI, ...ui });
+
 const Page: FC<PageProps> = observer(({ children, ui, ...rest }) => {
+  const { ContextWrapper: Wrapper } = getUI(ui);
   const { pageContext } = rest;
   const {
     // @ts-ignore non-existing gitInfo, subPageTemplate, and template, types in pageContext.
@@ -35,7 +43,11 @@ const Page: FC<PageProps> = observer(({ children, ui, ...rest }) => {
     <GatsbyNodeProvider {...rest}>
       <PageDataProvider pageData={pageData}>
         <ShowDesignKeys>
-          <StaticPage>{children}</StaticPage>
+          <StaticPage>
+            <Wrapper>
+              {children}
+            </Wrapper>
+          </StaticPage>
         </ShowDesignKeys>
       </PageDataProvider>
     </GatsbyNodeProvider>
