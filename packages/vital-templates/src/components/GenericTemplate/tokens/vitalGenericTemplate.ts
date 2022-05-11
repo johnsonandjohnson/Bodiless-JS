@@ -17,6 +17,7 @@ import {
   as,
   Img,
 } from '@bodiless/fclasses';
+
 import { vitalImage } from '@bodiless/vital-image';
 import { LayoutClean, vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
@@ -29,8 +30,7 @@ import { GenericTemplateNodeKeys } from '../constants';
 const Default = asGenericTemplateToken({
   Components: {
     PageWrapper: on(LayoutClean)(vitalLayout.Default),
-    // @todo breadcrumb placeholder
-    Breadcrumb: vitalBreadcrumbs.Default,
+    Breadcrumb: as(vitalBreadcrumbs.Default),
     // @todo in Hero ticket is change this to chameleon.
     TopContent: on(Img)(vitalImage.Default, vitalImage.WithLandscapePlaceholder),
     Content: as(vitalFlowContainer.Default),
