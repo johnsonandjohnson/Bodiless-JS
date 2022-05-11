@@ -25,14 +25,15 @@ import { withPlaceholder } from '@bodiless/components';
 import { vitalColor } from '@bodiless/vital-elements';
 import { vitalEditorPlain, EditorPlainClean } from '@bodiless/vital-editors';
 import { vitalLink } from '@bodiless/vital-link';
-import { asButtonToken } from '../ButtonClean';
 import { withNodeKey } from '@bodiless/core';
+import { asButtonToken } from '../ButtonClean';
 import { WhereToBuy, WhereToBuyWithoutIcon } from './vitalWTB';
 
 const ButtonThemeStyle = as(
   'rounded transition duration-150 ease-in-out',
   'focus:outline-none focus:ring-0',
   'leading-tight uppercase',
+  'hover:opacity-80',
 );
 
 const Base = asButtonToken({
@@ -120,7 +121,7 @@ const WithDisabled = asButtonToken(Base, {
     Wrapper: addProps({ disabled: 'true' }),
   },
   Theme: {
-    Wrapper: 'opacity-50',
+    Wrapper: 'opacity-50 hover:opacity-50',
   },
 });
 
