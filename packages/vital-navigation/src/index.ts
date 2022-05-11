@@ -17,6 +17,7 @@ export {
   asBurgerMenuToggler,
   useIsBurgerMenuHidden,
   withBurgerMenuProvider,
+  withBreadcrumbStore,
 } from '@bodiless/navigation';
 
 // VitalNavigation components and tokens.
