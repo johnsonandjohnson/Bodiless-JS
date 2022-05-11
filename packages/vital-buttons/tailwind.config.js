@@ -29,7 +29,6 @@ const twConfig = {
       },
     },
   },
-  /*
   plugins: [
     plugin(({ addBase }) => {
       addBase({
@@ -37,7 +36,7 @@ const twConfig = {
           fontFamily: 'buttonicons',
           fontWeight: 400,
           fontStyle: 'normal',
-          src: 'url(\'@bodiless/vital-buttons/assets/font/buttonicons.woff2\')',
+          // src: 'url(\'@bodiless/vital-buttons/assets/font/buttonicons.woff2\')',
         },
       });
     }),
@@ -57,7 +56,6 @@ const twConfig = {
       );
     }),
   ],
-  */
 };
 
 module.exports = getPackageTailwindConfig({

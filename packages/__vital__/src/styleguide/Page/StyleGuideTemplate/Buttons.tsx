@@ -20,7 +20,7 @@ import {
   replaceWith,
   H3,
 } from '@bodiless/fclasses';
-import { vitalLink, LinkClean } from '@bodiless/vital-link';
+import { LinkClean } from '@bodiless/vital-link';
 import { vitalButtons } from '@bodiless/vital-buttons';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { vitalTypography } from '@bodiless/vital-elements';
@@ -28,11 +28,6 @@ import { vitalTypography } from '@bodiless/vital-elements';
 const C = {
   H3: as(vitalTypography.H3)(H3),
 };
-
-const DefaultLink = as(
-  vitalLink.Default,
-  withNodeKey('defaultlink'),
-)(LinkClean);
 
 const DefaultButton = as(
   vitalButtons.Default,
@@ -71,8 +66,6 @@ const SecondaryDisabledButton = as(
   */
 const Examples = (props: any) => (
   <>
-    <C.H3>Default Link</C.H3>
-    <DefaultLink />
     <hr className="my-4" />
     <C.H3>Default Button</C.H3>
     <DefaultButton />
@@ -91,10 +84,10 @@ const Examples = (props: any) => (
   </>
 );
 
-export const Link = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
-  Meta: flowHoc.meta.term('Token')('Links'),
+export const Buttons = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
+  Meta: flowHoc.meta.term('Token')('Buttons'),
   Content: {
-    Title: replaceWith(() => <>Links</>),
+    Title: replaceWith(() => <>Buttons</>),
     Examples: replaceWith(Examples),
   },
 });
