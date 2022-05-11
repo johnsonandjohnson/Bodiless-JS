@@ -19,11 +19,47 @@ const Default = asButtonToken({
   ...vitalButtonsBase.Default,
   Components: {
     ...vitalButtonsBase.Default.Components,
-    Wrapper: addProps({ 'data-shadowed-by': '__vital__:Buttons' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:DefaultButtons' }),
+  },
+});
+
+const Primary = asButtonToken({
+  ...vitalButtonsBase.Primary,
+  Components: {
+    ...vitalButtonsBase.Primary.Components,
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:PrimaryButtons' }),
+  },
+});
+
+const Secondary = asButtonToken({
+  ...vitalButtonsBase.Secondary,
+  Components: {
+    ...vitalButtonsBase.Secondary.Components,
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:SecondaryButtons' }),
+  },
+});
+
+const PrimarySelected = asButtonToken({
+  ...vitalButtonsBase.PrimarySelected,
+  Components: {
+    ...vitalButtonsBase.Primary.Components,
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:PrimarySelectedButtons' }),
+  },
+});
+
+const SecondarySelected = asButtonToken({
+  ...vitalButtonsBase.SecondarySelected,
+  Components: {
+    ...vitalButtonsBase.SecondarySelected.Components,
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:SecondarySelectedButtons' }),
   },
 });
 
 export default {
   ...vitalButtonsBase,
   Default,
+  Primary,
+  Secondary,
+  PrimarySelected,
+  SecondarySelected,
 };
