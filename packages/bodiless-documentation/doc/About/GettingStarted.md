@@ -23,11 +23,22 @@ npx @bodiless/cli new
   <code>&lt;1.0.0</code>), instead of the command documented above, please use the following:
 
   ```shell-session
-  npx @bodiless/cli@1.0.0-PRERELEASE.IDENTIFIER new -r next
+  npx @bodiless/cli@1.0.0-PRERELEASE.IDENTIFIER new -r REVISION
   ```
 
-  Where `PRERELEASE.IDENTIFIER` is the package version of `@bodiless/cli` that you are currently
-  using. E.g.:
+  Where:
+
+  - `PRERELEASE.IDENTIFIER` is the package version of `@bodiless/cli` that you wish to use (e.g.,
+    `beta.12`).
+    - Prior to the official `1.0` release of Bodiless, you _must_ use at least `1.0.0-beta.11`.
+    - You may also use `next` to use the latest pre-release version (i.e., `@bodiless/cli@next`).
+    - Using `@bodiless/cli` without a version specifier will fail.
+  - `REVISION` is the revision of the repository to check out when cloning.
+    - Use `next` to check out the latest pre-release version.
+    - Use `HEAD` to check out the latest commit on the `main` branch.
+
+  E.g., to use pre-release version `1.0.0-beta.12` of the CLI package while checking out the latest
+  pre-release version of the Bodiless repository:
 
   ```shell-session
   npx @bodiless/cli@1.0.0-beta.12 new -r next
@@ -104,12 +115,24 @@ Cloud](https://support.gatsbyjs.com/hc/en-us/articles/360058874874-What-is-Gatsb
       <code>&lt;1.0.0</code>), instead of the command documented above, please use the following:
 
       ```shell-session
-      npx @bodiless/cli@1.0.0-PRERELEASE.IDENTIFIER new -r HEAD \
+      npx @bodiless/cli@1.0.0-PRERELEASE.IDENTIFIER new -r REVISION \
         --setup "npm run setup:gatsby-cloud"
       ```
 
-      Where `PRERELEASE.IDENTIFIER` is the package version of `@bodiless/cli` that you are currently
-      using. E.g.:
+      Where:
+
+      - `PRERELEASE.IDENTIFIER` is the package version of `@bodiless/cli` that you wish to use
+        (e.g., `beta.12`).
+        - Prior to the official `1.0` release of Bodiless, you _must_ use at least `1.0.0-beta.11`.
+        - You may also use `next` to use the latest pre-release version (i.e.,
+          `@bodiless/cli@next`).
+        - Using `@bodiless/cli` without a version specifier will fail.
+      - `REVISION` is the revision of the repository to check out when cloning.
+        - Use `next` to check out the latest pre-release version.
+        - Use `HEAD` to check out the latest commit on the `main` branch.
+
+      E.g., to use pre-release version `1.0.0-beta.12` of the CLI package while checking out the
+      latest commit on `main`:
 
       ```shell-session
       npx @bodiless/cli@1.0.0-beta.12 new -r HEAD \
