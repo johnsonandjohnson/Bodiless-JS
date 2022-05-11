@@ -25,7 +25,8 @@ import {
 import { withPlaceholder } from '@bodiless/components';
 import { vitalColor, vitalTextDecoration, } from '@bodiless/vital-elements';
 import { vitalEditorPlain, EditorPlainClean } from '@bodiless/vital-editors';
-import { asLinkToken, asEditableLink } from '@bodiless/vital-link';
+import { asLinkToken, vitalLink } from '@bodiless/vital-link';
+import { withNodeKey } from '@bodiless/core';
 import { CartIcon } from '../assets/CartIcon';
 
 const Base = asLinkToken({
@@ -55,7 +56,8 @@ const Base = asLinkToken({
     Body: withPlaceholder('Link'),
   },
   Schema: {
-    _: asEditableLink(),
+    Body: withNodeKey('buttontext'),
+    Wrapper: vitalLink.Default,
   },
 });
 
