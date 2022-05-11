@@ -12,6 +12,4 @@
  * limitations under the License.
  */
 
-export * from './index.bl-edit';
-
-export { default as vitalButtons } from './tokens';
+export * from './components/Buttons';

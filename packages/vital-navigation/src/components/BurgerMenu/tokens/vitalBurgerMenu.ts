@@ -14,7 +14,7 @@
 
 import { asStatic, withChild } from '@bodiless/core';
 import { vitalColor } from '@bodiless/vital-elements';
-import { vitalButtons } from '@bodiless/vital-link';
+import { vitalButtons } from '@bodiless/vital-buttons';
 import {
   addClassesIf,
   as,

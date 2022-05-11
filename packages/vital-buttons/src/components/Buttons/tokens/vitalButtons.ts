@@ -25,8 +25,7 @@ import {
 import { withPlaceholder } from '@bodiless/components';
 import { vitalColor, vitalTextDecoration, } from '@bodiless/vital-elements';
 import { vitalEditorPlain, EditorPlainClean } from '@bodiless/vital-editors';
-import { asEditableLink } from '../../Link/util';
-import { asLinkToken } from '../../Link/LinkClean';
+import { asLinkToken, asEditableLink } from '@bodiless/vital-link';
 import { CartIcon } from '../assets/CartIcon';
 
 const Base = asLinkToken({
@@ -43,7 +42,7 @@ const Base = asLinkToken({
       'focus:outline-none focus:ring-0',
       'leading-tight uppercase',
     ),
-    Icon: 'group-hover:vital-download-link',
+    Icon: 'group-hover:vital-arrow',
   },
   Spacing: {
     Wrapper: 'px-6 py-3.5',

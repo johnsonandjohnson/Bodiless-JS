@@ -1,0 +1,7 @@
+{
+  "VitalDesignSystem": {
+    "Components": {
+      "VitalButtons.md": "./doc/Buttons.md"
+    }
+  }
+}

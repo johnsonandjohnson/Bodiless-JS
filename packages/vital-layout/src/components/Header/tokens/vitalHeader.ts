@@ -31,7 +31,7 @@ import {
   withDesign,
   withProps,
 } from '@bodiless/fclasses';
-import { vitalButtons } from '@bodiless/vital-link';
+import { vitalButtons } from '@bodiless/vital-buttons';
 import { vitalLogo } from '../../Logo';
 import { vitalDesktopSearch, vitalSearchToggler } from '../../Search';
 import { asHeaderToken } from '../HeaderClean';

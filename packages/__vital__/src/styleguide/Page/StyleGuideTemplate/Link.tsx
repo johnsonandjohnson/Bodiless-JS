@@ -20,7 +20,8 @@ import {
   replaceWith,
   H3,
 } from '@bodiless/fclasses';
-import { vitalLink, vitalButtons, LinkClean } from '@bodiless/vital-link';
+import { vitalLink, LinkClean } from '@bodiless/vital-link';
+import { vitalButtons } from '@bodiless/vital-buttons';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { vitalTypography } from '@bodiless/vital-elements';
 
