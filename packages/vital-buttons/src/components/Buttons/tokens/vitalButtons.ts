@@ -16,17 +16,15 @@ import {
   as,
   on,
   replaceWith,
-  startWith,
-  withProps,
   Span,
   addProps,
 } from '@bodiless/fclasses';
 import { withPlaceholder } from '@bodiless/components';
-import { vitalColor, vitalTextDecoration, } from '@bodiless/vital-elements';
+import { vitalColor } from '@bodiless/vital-elements';
 import { vitalEditorPlain, EditorPlainClean } from '@bodiless/vital-editors';
 import { asLinkToken, vitalLink } from '@bodiless/vital-link';
 import { withNodeKey } from '@bodiless/core';
-import { CartIcon } from '../assets/CartIcon';
+import { WhereToBuy, WhereToBuyWithoutIcon } from './vitalWTB';
 
 const ButtonThemeStyle = as(
   'rounded transition duration-150 ease-in-out',
@@ -116,50 +114,6 @@ const WithDisabled = asLinkToken(Base, {
   },
   Theme: {
     Wrapper: 'opacity-50',
-  },
-});
-
-const WhereToBuy = asLinkToken({
-  Components: {
-    Icon: startWith(CartIcon),
-  },
-  Layout: {
-    Wrapper: 'w-full flex justify-center items-center max-w-64 h-12 lg:w-full',
-  },
-  Spacing: {
-    Wrapper: 'mx-auto p-3',
-    Icon: 'mr-3 xl:mr-0 2xl:mr-3',
-  },
-  Theme: {
-    Wrapper: as(
-      vitalColor.BgPrimaryInteractive,
-      vitalColor.TextPrimaryFooterCopy,
-      vitalTextDecoration.Bold,
-      vitalTextDecoration.Uppercase,
-      // @TODO: Create token? It should be same size for both mobile and desktop...
-      'text-m-base',
-      'rounded',
-    ),
-    Icon: 'w-6 h-6',
-    Body: 'leading xl:hidden 2xl:block',
-  },
-  Content: {
-    _: withProps({
-      children: 'Where to Buy',
-    }),
-    Wrapper: withProps({
-      href: '/where-to-buy',
-    }),
-  },
-});
-
-/**
- * Token that provides the Where To Buy button without an icon.
- */
-const WhereToBuyWithoutIcon = asLinkToken({
-  ...WhereToBuy,
-  Components: {
-    Icon: replaceWith(() => null),
   },
 });
 
