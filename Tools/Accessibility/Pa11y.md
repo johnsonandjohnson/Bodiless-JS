@@ -1,20 +1,60 @@
-# `@bodiless/accessibility`
+# Pa11y
 
-Accessibility is essential for developers and organizations that want to create high-quality websites and web tools, and not exclude people from using their products and services. This package includes a set of tools to run accessibility checks on provided `sitemap.xml` file or `url` using [Pa11y](https://github.com/pa11y/pa11y). Pa11y is your automated accessibility testing pal. It runs accessibility tests on your pages via the command line or Node.js, so you can automate your testing process.
+Pa11y is a command-line interface that loads web pages and reports any accessibility issues it
+finds.
 
-### Installation
-Installation step is simple: `npm i @bodiless/accessibility`. Once `@bodiless/accessibility` installed it will add `pa11y-audit` command into bin folder.
+For more information, see:
 
-### Usage
-One can generate friendly CLI report by running `pa11y-audit --file=/path/to/sitemap.xml` or `pa11y-audit --url={url}` command. It will either extract all URLs from provided `sitemap.xml` file or scan the provided `{url}` and output all accessibility issues found on the website with the elements selectors and issue messages.
+- [Pa11y.org](https://pa11y.org/ ':target=_blank')
+- [`pa11y/pa11y` | GitHub](https://github.com/pa11y/pa11y ':target=_blank')
 
-##### Output Examples:
-All friendly CLI reports include various information regarding found issues ( if any ) such as: 
+## Installation
 
- - **Error message:** `The html element should have a lang or xml:lang attribute which describes the language of the document`
- - **Issue Code:** `WCAG2AA.Principle3.Guideline3_1.3_1_1.H57.2`
- - **Element Selector:** `html`
- - **Element:** `<html><head> <title>Example Domai...</html>`
+To install, from your command line, run:
+
+```shell-session
+npm i @bodiless/accessibility
+```
+
+With `@bodiless/accessibility` installed, the `pa11y-audit` command will be added into your bin
+folder.
+
+## Usage
+
+You can generate a friendly CLI report by running:
+
+```shell-session
+pa11y-audit --file=/path/to/sitemap.xml
+# OR
+pa11y-audit --url={url}
+```
+
+It will either extract all URLs from the provided `sitemap.xml` file, or scan the provided `{url}`,
+and output all accessibility issues found on the website with the elements selectors and issue
+messages.
+
+### Output
+
+All friendly CLI reports include various information regarding found issues (if any) such as:
+
+- **Error Message:**
+ ```
+ The html element should have a lang or xml:lang attribute which describes the language of the document
+ ```
+- **Issue Code:**
+  ```
+  WCAG2AA.Principle3.Guideline3_1.3_1_1.H57.2
+  ```
+- **Element Selector:**
+  ```
+  html
+  ```
+- **Element:**
+  ```
+  <html><head> <title>Example Domai...</html>
+  ```
+
+**Examples:**
 
 ```
  • Error: The html element should have a lang or xml:lang attribute which describes the language of the document.
@@ -22,7 +62,6 @@ All friendly CLI reports include various information regarding found issues ( if
    ├── html
    └── <html><head> <title>Example Domai...</html>
 ```
-
 
 ```
  • Error: Iframe element requires a non-empty title attribute that identifies the frame.

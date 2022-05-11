@@ -1,6 +1,7 @@
   - [About](/About/)
     - [Getting Started](/About/GettingStarted)
     - [Core Principles](/About/CorePrinciples)
+    - [Exploring And Developing](/About/ExploringAndDeveloping)
   - [Content Editor User Guide](/ContentEditorUserGuide/)
     - [Page Menu](/ContentEditorUserGuide/PageMenu/)
       - [New](/ContentEditorUserGuide/PageMenu/New/)
@@ -46,9 +47,9 @@
     - [Table](/Components/Table)
     - [You Tube](/Components/YouTube)
   - [Tools](/Tools/)
-    - Accessibility
+    - [Accessibility](/Tools/Accessibility/)
       - [Pa11y](/Tools/Accessibility/Pa11y)
-    - CLI
+    - [CLI](/Tools/CLI/)
       - [Bodiless CLI](/Tools/CLI/BodilessCLI)
   - [Development](/Development/)
     - [Guides](/Development/Guides/)
