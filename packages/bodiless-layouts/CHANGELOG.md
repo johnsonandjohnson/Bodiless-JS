@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.16](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2022-05-11)
+
+
+### Features
+
+* **vital-flowcontainer, --vital--:** Add content library functionality to vital flow container ([#1733](https://github.com/johnsonandjohnson/bodiless-js/issues/1733)) ([fbe1907](https://github.com/johnsonandjohnson/bodiless-js/commit/fbe19078e6f7e8b7810f7d87f95795ef49b168d3))
+
+
+
+
+
 # [1.0.0-beta.15](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2022-05-10)
 
 **Note:** Version bump only for package @bodiless/layouts
