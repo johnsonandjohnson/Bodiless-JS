@@ -46,7 +46,7 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run Playwright Tests
         run: |
-          npm run test:ci-pw
+          npm run test:monorepo-pw
       - name: Upload Tests Artifact
         if: always()
         uses: actions/upload-artifact@v2
