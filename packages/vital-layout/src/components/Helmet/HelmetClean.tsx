@@ -66,7 +66,7 @@ const helmetComponents: HelmetComponents = {
   GtmHelmet: Helmet,
   SeoHelmet: Helmet,
   SocialShareHelmet: Helmet,
-  LanguageHelmet: Helmet,
+  LanguageHelmet: createTagHelmet<HTMLProps<HTMLHtmlElement>>('html'),
   HTMLHelmet: createTagHelmet<HTMLProps<HTMLHtmlElement>>('html'),
   BodyHelmet: createTagHelmet<HTMLProps<HTMLBodyElement>>('body'),
 };
