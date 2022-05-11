@@ -11,6 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { withNode, withNodeKey } from '@bodiless/core';
 import { vitalFooterBase, asFooterToken } from '@bodiless/vital-layout';
 import {
   addProps, as
@@ -22,14 +23,11 @@ const Default = asFooterToken(vitalFooterBase.Base, {
     _: addProps({ 'data-shadowed-by': '__vital__Footer' }),
   },
   Schema: {
-    FooterMenu: as(
+    _: as(
       withLanguageNode,
-      vitalFooterBase.Base.Schema.FooterMenu
-    ),
-    Copyright: as(
-      withLanguageNode,
-      vitalFooterBase.Base.Schema.Copyright,
-    ),
+      withNodeKey({ nodeKey: 'Footer', nodeCollection: 'site' }),
+      withNode,
+    )
   },
 });
 
