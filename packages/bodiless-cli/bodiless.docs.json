@@ -1,7 +1,8 @@
 {
   "Tools": {
     "CLI": {
-      "BodilessCLI.md": "./README.md"
+      "README.md": "./doc/README.md",
+      "BodilessCLI.md": "./doc/BodilessCLI.md"
     }
   }
 }
