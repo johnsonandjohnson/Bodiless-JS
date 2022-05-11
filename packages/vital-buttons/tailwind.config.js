@@ -27,6 +27,11 @@ const twConfig = {
       fontFamily: {
         linkicons: ['buttonicons'],
       },
+      color: {
+        'text-current': 'currentColor',
+        'text-transparent': 'transparent',
+        'text-inherit': 'inherit',
+      }
     },
   },
   plugins: [
@@ -36,7 +41,7 @@ const twConfig = {
           fontFamily: 'buttonicons',
           fontWeight: 400,
           fontStyle: 'normal',
-          // src: 'url(\'@bodiless/vital-buttons/assets/font/buttonicons.woff2\')',
+          src: 'url(\'@bodiless/vital-buttons/assets/font/buttonicons.woff2\')',
         },
       });
     }),
@@ -49,7 +54,6 @@ const twConfig = {
             'text-decoration': 'none',
             'line-height': '1',
             'vertical-align': 'text-top',
-            'margin-left': '.25rem',
             display: 'inline-block',
           },
         }

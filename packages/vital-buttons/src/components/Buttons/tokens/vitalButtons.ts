@@ -18,9 +18,8 @@ import {
   replaceWith,
   startWith,
   withProps,
-  Button,
   Span,
-  // addProps,
+  addProps,
 } from '@bodiless/fclasses';
 import { withPlaceholder } from '@bodiless/components';
 import { vitalColor, vitalTextDecoration, } from '@bodiless/vital-elements';
@@ -29,25 +28,21 @@ import { asLinkToken, vitalLink } from '@bodiless/vital-link';
 import { withNodeKey } from '@bodiless/core';
 import { CartIcon } from '../assets/CartIcon';
 
+const ButtonThemeStyle = as(
+  'rounded transition duration-150 ease-in-out',
+  'focus:outline-none focus:ring-0',
+  'leading-tight uppercase',
+);
+
 const Base = asLinkToken({
-  Components: {
-    Wrapper: replaceWith(Button),
-    Icon: replaceWith(Span),
-  },
   Layout: {
     Wrapper: 'flex flex-row-reverse group',
   },
   Theme: {
-    Wrapper: as(
-      'rounded shadow-md transition duration-150 ease-in-out',
-      'focus:outline-none focus:ring-0',
-      'leading-tight uppercase',
-    ),
-    Icon: 'group-hover:vital-arrow',
+    Wrapper: ButtonThemeStyle,
   },
   Spacing: {
     Wrapper: 'px-6 py-3.5',
-    Icon: 'inline-block group-hover:px-1 group-hover:w-4 group-hover:h-2',
   },
   Editors: {
     Body: on(EditorPlainClean)(vitalEditorPlain.Default),
@@ -59,12 +54,27 @@ const Base = asLinkToken({
     Body: withNodeKey('buttontext'),
     Wrapper: vitalLink.Default,
   },
+  A11y: {
+    Wrapper: addProps({ role: 'button' }),
+  }
 });
 
-const Primary = asLinkToken({
-  ...Base,
+const WithArrow = asLinkToken(Base, {
+  Components: {
+    Icon: replaceWith(Span),
+  },
   Theme: {
-    ...Base.Theme,
+    Icon: 'vital-arrow hover:text-current text-transparent',
+  },
+  Spacing: {
+    Icon: 'inline-block pr-1 w-6 h-2',
+    Body: 'pl-6',
+  },
+
+});
+
+const Primary = asLinkToken(Base, {
+  Theme: {
     Wrapper: as(
       vitalColor.BgPrimaryInteractive,
       vitalColor.TextWhite,
@@ -72,48 +82,41 @@ const Primary = asLinkToken({
   },
 });
 
-const Secondary = asLinkToken({
-  ...Base,
+const Secondary = asLinkToken(Base, {
   Theme: {
-    ...Base.Theme,
     Wrapper: as(
+      'border-2',
       vitalColor.TextPrimaryInteractive,
       vitalColor.BorderPrimaryInteractive,
     ),
   },
 });
 
-const PrimarySelected = asLinkToken({
-  ...Base,
+const PrimarySelected = asLinkToken(Base, {
   Theme: {
-    ...Base.Theme,
     Wrapper: as(
       vitalColor.BgButtonSelected,
       vitalColor.TextWhite,
     ),
   },
 });
-const SecondarySelected = asLinkToken({
-  ...Base,
+const SecondarySelected = asLinkToken(Base, {
   Theme: {
-    ...Base.Theme,
     Wrapper: as(
-      vitalColor.TextButtonSelected,
       'border-2',
+      vitalColor.TextButtonSelected,
       vitalColor.BorderButtonSelected,
     ),
   },
 });
 
-const WithDisabled = asLinkToken({
-  /*
-  Component: {
+const WithDisabled = asLinkToken(Base, {
+  Behavior: {
     Wrapper: addProps({ disabled: 'true' }),
   },
   Theme: {
     Wrapper: 'opacity-50',
   },
-  */
 });
 
 const WhereToBuy = asLinkToken({
@@ -171,6 +174,7 @@ export default {
   Secondary,
   SecondarySelected,
   WithDisabled,
+  WithArrow,
   WhereToBuy,
   WhereToBuyWithoutIcon,
 };

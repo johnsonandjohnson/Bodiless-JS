@@ -60,6 +60,39 @@ const SecondaryDisabledButton = as(
   withNodeKey('secondarybutton'),
 )(LinkClean);
 
+const PrimaryButtonWithArrow = as(
+  vitalButtons.Primary,
+  vitalButtons.WithArrow,
+  withNodeKey('primarybutton'),
+)(LinkClean);
+const SecondaryButtonWithArrow = as(
+  vitalButtons.Secondary,
+  vitalButtons.WithArrow,
+  withNodeKey('secondarybutton'),
+)(LinkClean);
+const PrimarySelectedButtonWithArrow = as(
+  vitalButtons.PrimarySelected,
+  vitalButtons.WithArrow,
+  withNodeKey('primarybutton'),
+)(LinkClean);
+const PrimaryDisabledButtonWithArrow = as(
+  vitalButtons.Primary,
+  vitalButtons.WithDisabled,
+  vitalButtons.WithArrow,
+  withNodeKey('primarybutton'),
+)(LinkClean);
+const SecondarySelectedButtonWithArrow = as(
+  vitalButtons.SecondarySelected,
+  vitalButtons.WithArrow,
+  withNodeKey('secondarybutton'),
+)(LinkClean);
+const SecondaryDisabledButtonWithArrow = as(
+  vitalButtons.Secondary,
+  vitalButtons.WithDisabled,
+  vitalButtons.WithArrow,
+  withNodeKey('secondarybutton'),
+)(LinkClean);
+
 /* @todo
   * Rendered only the two types of images available in flow container as separate components.
   * To do is provide all variations we want tested individually.
@@ -68,12 +101,20 @@ const Examples = (props: any) => (
   <>
     <hr className="my-4" />
     <C.H3>Default Button</C.H3>
-    <DefaultButton />
+    <div className="flex flex-wrap w-full p-8 space-x-4">
+      <DefaultButton />
+    </div>
     <C.H3>Primary Buttons</C.H3>
     <div className="flex flex-wrap w-full p-8 space-x-4">
       <PrimaryButton />
       <PrimarySelectedButton />
       <PrimaryDisabledButton />
+    </div>
+    <C.H3>Primary Buttons With Arrows</C.H3>
+    <div className="flex flex-wrap w-full p-8 space-x-4">
+      <PrimaryButtonWithArrow />
+      <PrimarySelectedButtonWithArrow />
+      <PrimaryDisabledButtonWithArrow />
     </div>
     <C.H3>Secondary Buttons</C.H3>
     <div className="flex flex-wrap w-full p-8 space-x-4">
@@ -81,6 +122,13 @@ const Examples = (props: any) => (
       <SecondarySelectedButton />
       <SecondaryDisabledButton />
     </div>
+    <C.H3>Secondary Buttons With Arrows</C.H3>
+    <div className="flex flex-wrap w-full p-8 space-x-4">
+      <SecondaryButtonWithArrow />
+      <SecondarySelectedButtonWithArrow />
+      <SecondaryDisabledButtonWithArrow />
+    </div>
+    <p>Note all Primary buttons share same node key and Secondary buttons share same node key</p>
   </>
 );
 
