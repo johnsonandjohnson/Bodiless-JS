@@ -16,13 +16,16 @@ import {
   as,
   on,
   replaceWith,
+  startWith,
   Span,
+  Button,
   addProps,
 } from '@bodiless/fclasses';
 import { withPlaceholder } from '@bodiless/components';
 import { vitalColor } from '@bodiless/vital-elements';
 import { vitalEditorPlain, EditorPlainClean } from '@bodiless/vital-editors';
-import { asLinkToken, vitalLink } from '@bodiless/vital-link';
+import { vitalLink } from '@bodiless/vital-link';
+import { asButtonToken } from '../ButtonClean';
 import { withNodeKey } from '@bodiless/core';
 import { WhereToBuy, WhereToBuyWithoutIcon } from './vitalWTB';
 
@@ -32,7 +35,7 @@ const ButtonThemeStyle = as(
   'leading-tight uppercase',
 );
 
-const Base = asLinkToken({
+const Base = asButtonToken({
   Layout: {
     Wrapper: 'flex flex-row-reverse group',
   },
@@ -57,21 +60,20 @@ const Base = asLinkToken({
   }
 });
 
-const WithArrow = asLinkToken(Base, {
+const WithArrow = asButtonToken(Base, {
   Components: {
     Icon: replaceWith(Span),
   },
   Theme: {
-    Icon: 'vital-arrow hover:text-current text-transparent',
+    Icon: 'vital-arrow group-hover:text-current text-transparent',
   },
   Spacing: {
     Icon: 'inline-block pr-1 w-6 h-2',
-    Body: 'pl-6',
+    Wrapper: 'pl-12 pr-6 py-3.5 group',
   },
-
 });
 
-const Primary = asLinkToken(Base, {
+const Primary = asButtonToken(Base, {
   Theme: {
     Wrapper: as(
       vitalColor.BgPrimaryInteractive,
@@ -80,7 +82,7 @@ const Primary = asLinkToken(Base, {
   },
 });
 
-const Secondary = asLinkToken(Base, {
+const Secondary = asButtonToken(Base, {
   Theme: {
     Wrapper: as(
       'border-2',
@@ -90,7 +92,7 @@ const Secondary = asLinkToken(Base, {
   },
 });
 
-const PrimarySelected = asLinkToken(Base, {
+const PrimarySelected = asButtonToken(Base, {
   Theme: {
     Wrapper: as(
       vitalColor.BgButtonSelected,
@@ -98,7 +100,8 @@ const PrimarySelected = asLinkToken(Base, {
     ),
   },
 });
-const SecondarySelected = asLinkToken(Base, {
+
+const SecondarySelected = asButtonToken(Base, {
   Theme: {
     Wrapper: as(
       'border-2',
@@ -108,7 +111,11 @@ const SecondarySelected = asLinkToken(Base, {
   },
 });
 
-const WithDisabled = asLinkToken(Base, {
+const WithDisabled = asButtonToken(Base, {
+  // Replace the A with Button so disabled takes effect.
+  Components: {
+    Wrapper: startWith(Button),
+  },
   Behavior: {
     Wrapper: addProps({ disabled: 'true' }),
   },
@@ -117,7 +124,7 @@ const WithDisabled = asLinkToken(Base, {
   },
 });
 
-const Default = asLinkToken({
+const Default = asButtonToken({
   ...Base,
 });
 

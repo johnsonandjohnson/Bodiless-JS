@@ -20,8 +20,7 @@ import {
   replaceWith,
   H3,
 } from '@bodiless/fclasses';
-import { LinkClean } from '@bodiless/vital-link';
-import { vitalButtons } from '@bodiless/vital-buttons';
+import { ButtonClean, vitalButtons } from '@bodiless/vital-buttons';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { vitalTypography } from '@bodiless/vital-elements';
 
@@ -32,66 +31,66 @@ const C = {
 const DefaultButton = as(
   vitalButtons.Default,
   withNodeKey('defaultbutton'),
-)(LinkClean);
+)(ButtonClean);
 const PrimaryButton = as(
   vitalButtons.Primary,
   withNodeKey('primarybutton'),
-)(LinkClean);
+)(ButtonClean);
 const SecondaryButton = as(
   vitalButtons.Secondary,
   withNodeKey('secondarybutton'),
-)(LinkClean);
+)(ButtonClean);
 const PrimarySelectedButton = as(
   vitalButtons.PrimarySelected,
   withNodeKey('primarybutton'),
-)(LinkClean);
+)(ButtonClean);
 const PrimaryDisabledButton = as(
   vitalButtons.Primary,
   vitalButtons.WithDisabled,
   withNodeKey('primarybutton'),
-)(LinkClean);
+)(ButtonClean);
 const SecondarySelectedButton = as(
   vitalButtons.SecondarySelected,
   withNodeKey('secondarybutton'),
-)(LinkClean);
+)(ButtonClean);
 const SecondaryDisabledButton = as(
   vitalButtons.Secondary,
   vitalButtons.WithDisabled,
   withNodeKey('secondarybutton'),
-)(LinkClean);
+)(ButtonClean);
 
 const PrimaryButtonWithArrow = as(
   vitalButtons.Primary,
   vitalButtons.WithArrow,
   withNodeKey('primarybutton'),
-)(LinkClean);
+)(ButtonClean);
 const SecondaryButtonWithArrow = as(
   vitalButtons.Secondary,
   vitalButtons.WithArrow,
   withNodeKey('secondarybutton'),
-)(LinkClean);
+)(ButtonClean);
 const PrimarySelectedButtonWithArrow = as(
   vitalButtons.PrimarySelected,
   vitalButtons.WithArrow,
   withNodeKey('primarybutton'),
-)(LinkClean);
+)(ButtonClean);
 const PrimaryDisabledButtonWithArrow = as(
   vitalButtons.Primary,
   vitalButtons.WithDisabled,
   vitalButtons.WithArrow,
   withNodeKey('primarybutton'),
-)(LinkClean);
+)(ButtonClean);
 const SecondarySelectedButtonWithArrow = as(
   vitalButtons.SecondarySelected,
   vitalButtons.WithArrow,
   withNodeKey('secondarybutton'),
-)(LinkClean);
+)(ButtonClean);
 const SecondaryDisabledButtonWithArrow = as(
   vitalButtons.Secondary,
   vitalButtons.WithDisabled,
   vitalButtons.WithArrow,
   withNodeKey('secondarybutton'),
-)(LinkClean);
+)(ButtonClean);
 
 /* @todo
   * Rendered only the two types of images available in flow container as separate components.
@@ -128,7 +127,7 @@ const Examples = (props: any) => (
       <SecondarySelectedButtonWithArrow />
       <SecondaryDisabledButtonWithArrow />
     </div>
-    <p>Note all Primary buttons share same node key and Secondary buttons share same node key</p>
+    <p>Note: all Primary buttons share same node key and Secondary buttons share same node key</p>
   </>
 );
 

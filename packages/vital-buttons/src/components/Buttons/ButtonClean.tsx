@@ -11,9 +11,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { default as vitalButtons } from './tokens';
-export { default as vitalButtonsBase } from './tokens/vitalButtons';
 
-export * from './index.bl-edit';
-export { default as ButtonClean, asButtonToken } from './ButtonClean';
-export type { ButtonComponent, ButtonBaseProps} from './ButtonClean';
+import { LinkClean as ButtonClean } from '@bodiless/vital-link';
+import type { LinkComponents as ButtonComponent, LinkBaseProps as ButtonBaseProps } from '@bodiless/vital-link';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
+
+export const asButtonToken = asVitalTokenSpec<ButtonComponent>();
+
+export default ButtonClean;
+
+export type { ButtonComponent, ButtonBaseProps};

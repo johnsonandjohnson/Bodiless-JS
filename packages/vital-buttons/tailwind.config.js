@@ -27,11 +27,10 @@ const twConfig = {
       fontFamily: {
         linkicons: ['buttonicons'],
       },
-      color: {
-        'text-current': 'currentColor',
-        'text-transparent': 'transparent',
-        'text-inherit': 'inherit',
-      }
+      colors: {
+        current: 'currentColor',
+        transparent: 'transparent',
+      },
     },
   },
   plugins: [
@@ -55,6 +54,7 @@ const twConfig = {
             'line-height': '1',
             'vertical-align': 'text-top',
             display: 'inline-block',
+            'margin-left': '.25rem',
           },
         }
       );

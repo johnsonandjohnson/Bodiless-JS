@@ -19,10 +19,10 @@ import {
   withProps,
 } from '@bodiless/fclasses';
 import { vitalColor, vitalTextDecoration, } from '@bodiless/vital-elements';
-import { asLinkToken } from '@bodiless/vital-link';
+import { asButtonToken } from '../ButtonClean';
 import { CartIcon } from '../assets/CartIcon';
 
-const WhereToBuy = asLinkToken({
+const WhereToBuy = asButtonToken({
   Components: {
     Icon: startWith(CartIcon),
   },
@@ -59,7 +59,7 @@ const WhereToBuy = asLinkToken({
 /**
  * Token that provides the Where To Buy button without an icon.
  */
-const WhereToBuyWithoutIcon = asLinkToken({
+const WhereToBuyWithoutIcon = asButtonToken({
   ...WhereToBuy,
   Components: {
     Icon: replaceWith(() => null),

@@ -11,9 +11,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export { default as vitalButtons } from './tokens';
-export { default as vitalButtonsBase } from './tokens/vitalButtons';
 
-export * from './index.bl-edit';
-export { default as ButtonClean, asButtonToken } from './ButtonClean';
-export type { ButtonComponent, ButtonBaseProps} from './ButtonClean';
+import { vitalButtonsBase, asButtonToken } from '@bodiless/vital-buttons';
+import { addProps } from '@bodiless/fclasses';
+
+const Default = asButtonToken({
+  ...vitalButtonsBase.Default,
+  Components: {
+    ...vitalButtonsBase.Default.Components,
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:Buttons' }),
+  },
+});
+
+export default {
+  ...vitalButtonsBase,
+  Default,
+};
