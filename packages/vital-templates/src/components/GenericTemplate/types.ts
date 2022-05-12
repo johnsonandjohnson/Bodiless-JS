@@ -16,6 +16,7 @@ import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 
 export type GenericTemplateComponents = {
   PageWrapper: ComponentOrTag<any>,
+  TemplateWrapper: ComponentOrTag<any>,
   BreadcrumbWrapper: ComponentOrTag<any>,
   Breadcrumb: ComponentOrTag<any>,
   TopWrapper: ComponentOrTag<any>,
