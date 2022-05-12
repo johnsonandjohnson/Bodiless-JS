@@ -20,6 +20,7 @@ import {
   Span,
   Button,
   addProps,
+  flowHoc,
 } from '@bodiless/fclasses';
 import { withPlaceholder } from '@bodiless/components';
 import { vitalColor } from '@bodiless/vital-elements';
@@ -72,6 +73,7 @@ const WithArrow = asButtonToken(Base, {
     Icon: 'inline-block pr-1 w-6 h-2',
     Wrapper: 'pl-12 pr-6 py-3.5 group',
   },
+  Meta: flowHoc.meta.term('Style')('With Hover Arrow'),
 });
 
 const Primary = asButtonToken(Base, {
@@ -100,6 +102,7 @@ const PrimarySelected = asButtonToken(Base, {
       vitalColor.TextWhite,
     ),
   },
+  Meta: flowHoc.meta.term('Style')('Selected'),
 });
 
 const SecondarySelected = asButtonToken(Base, {
@@ -110,6 +113,7 @@ const SecondarySelected = asButtonToken(Base, {
       vitalColor.BorderButtonSelected,
     ),
   },
+  Meta: flowHoc.meta.term('Style')('Selected'),
 });
 
 const WithDisabled = asButtonToken(Base, {
@@ -123,6 +127,7 @@ const WithDisabled = asButtonToken(Base, {
   Theme: {
     Wrapper: 'opacity-50 hover:opacity-50',
   },
+  Meta: flowHoc.meta.term('Style')('Disabled'),
 });
 
 const Default = asButtonToken({
