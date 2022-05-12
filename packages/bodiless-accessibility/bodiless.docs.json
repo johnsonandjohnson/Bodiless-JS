@@ -1,7 +1,8 @@
 {
   "Tools": {
     "Accessibility": {
-      "Pa11y.md": "./README.md"
+      "README.md": "./doc/README.md",
+      "Pa11y.md": "./doc/Pa11y.md"
     }
   }
 }

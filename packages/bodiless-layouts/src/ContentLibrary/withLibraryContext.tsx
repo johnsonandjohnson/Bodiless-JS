@@ -87,7 +87,7 @@ export const LibraryItemProvider: FC<LibraryItemProviderProps> = ({ isLibrary, c
 };
 
 /**
- * HOC that wrapps component in LibraryItemProvider.
+ * HOC that wraps component in LibraryItemProvider.
  * When wrapped in `LibraryItemProvider`, it checks whether FlowContainerItem
  * is actually a Library Item by checking its `FlowContainerItem.type` prefix.
  * @see LibraryItemContextProps
