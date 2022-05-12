@@ -1,6 +1,6 @@
 import React, { FC, HTMLProps } from 'react';
 import {
-  H2, Section, addClasses, as, stylable, replaceWith, withDesign, withMeta,
+  H2, Section, addClasses, as, stylable, replaceWith, withMeta, withDesign,
 } from '@bodiless/fclasses';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import { withNode } from '@bodiless/core';

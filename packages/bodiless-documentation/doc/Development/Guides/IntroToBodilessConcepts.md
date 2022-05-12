@@ -632,42 +632,54 @@ can be found in our [Design System documentation](../../Design/DesignSystem).
 Now we'll use these tokens to define the components which will be available for placement in our
 gallery:
 
-01. Add `flowHoc` and `replaceWith` to your imports from `@bodiless/fclasses`:
+01. Add `replaceWith` and `withMeta` to your imports from `@bodiless/fclasses`:
     ```tsx
     import {
-      H2, Section, Div, addClasses, as, stylable, flowHoc, replaceWith,
+      H2, Section, Div, addClasses, as, stylable, replaceWith, withMeta,
     } from '@bodiless/fclasses';
     ```
 01. After your styled variations (`withBlueBorder`, etc.), add your component definitions:
     ```tsx
     const design = {
-      BlueImageTile: flowHoc(
+      BlueImageTile: as(
         replaceWith(CaptionedImage),
         asGalleryTile,
         withBlueBorder,
-        { title: 'Blue Image Tile' },
-        flowHoc.meta.term('Color')('Blue'),
+        withMeta({
+          title: 'Blue Image Tile',
+          categories: {
+            Color: ['Blue'],
+          },
+        }),
       ),
-      TealImageTile: flowHoc(
+      TealImageTile: as(
         replaceWith(CaptionedImage),
         asGalleryTile,
         withTealBorder,
-        { title: 'Teal Image Tile' },
-        flowHoc.meta.term('Color')('Teal'),
+        withMeta({
+          title: 'Teal Image Tile',
+          categories: {
+            Color: ['Teal'],
+          },
+        }),
       ),
-      OrangeImageTile: flowHoc(
+      OrangeImageTile: as(
         replaceWith(CaptionedImage),
         asGalleryTile,
         withOrangeBorder,
-        { title: 'Orange Image Tile' },
-        flowHoc.meta.term('Color')('Orange'),
+        withMeta({
+          title: 'Orange Image Tile',
+          categories: {
+            Color: ['Orange'],
+          },
+        }),
       ),
     };
     ```
 
-The `flowHoc` utility is used to compose tokens onto the`CaptionedImage` component. In addition to
-the styling, _metadata_ is attached to our components (via the `{ title: '...' }` objects). This
-will control how an Editor can view and search for the components.
+The `as` utility is used to compose tokens onto the `CaptionedImage` component. In addition to the
+styling, _metadata_ is attached to our components (via `withMeta`). This will control how an Editor
+can view and search for the components.
 
 The `design` object here is similar to the one we used above to populate the rich text editor. It is
 a keyed set of HOCs which are used to produce a set of available components. In both cases, we start
@@ -679,7 +691,7 @@ which makes our three tiles available for placement by a Content Editor:
 01. In `Gallery.tsx`, add `withDesign` and `FlowContainer` to your imports:
     ```tsx
     import {
-      H2, Section, Div, addClasses, as, stylable, flowHoc, replaceWith, withDesign,
+      H2, Section, Div, addClasses, as, stylable, replaceWith, withMeta, withDesign,
     } from '@bodiless/fclasses';
     import { FlowContainer } from '@bodiless/layouts-ui';
     ```
