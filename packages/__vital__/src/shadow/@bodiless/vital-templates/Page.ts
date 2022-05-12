@@ -13,32 +13,23 @@
  */
 
 import {
-  addProps, replaceWith, Div, flowHoc,
+  on,
 } from '@bodiless/fclasses';
-import { withLanguages } from '@bodiless/i18n';
-import { asGenericTemplateToken, vitalGenericTemplateBase } from '@bodiless/vital-templates';
+import { asFluidToken } from '@bodiless/vital-elements';
+import {
+  vitalPageBase,
+  GenericTemplateClean,
+  vitalGenericTemplate,
+} from '@bodiless/vital-templates';
 
-const Default = asGenericTemplateToken(vitalGenericTemplateBase.Base, {
-  Core: {
-    TemplateWrapper: flowHoc(
-      replaceWith(Div),
-      addProps({ 'data-shadowed-by': '__vital__GenericTemplate' }),
-    ),
-    PageWrapper: withLanguages([
-      {
-        name: 'en',
-        label: 'English',
-        isDefault: true,
-      },
-      {
-        name: 'es',
-        label: 'Español',
-      },
-    ]),
+const Default = asFluidToken({
+  ...vitalPageBase.Default,
+  Components: {
+    _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
   },
 });
 
 export default {
-  ...vitalGenericTemplateBase,
+  ...vitalPageBase,
   Default,
 };
