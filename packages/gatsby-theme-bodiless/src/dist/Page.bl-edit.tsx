@@ -35,7 +35,7 @@ import {
   withNewPageButton,
   withRedirectAliasButton,
 } from '@bodiless/page';
-import GatsbyNodeProvider from './GatsbyNodeProvider';
+import GatsbyNodeProvider from './GatsbyNodeProvider.bl-edit';
 import { FinalUI, UI, PageProps } from './types';
 import ShowDesignKeys from './ShowDesignKeys';
 
