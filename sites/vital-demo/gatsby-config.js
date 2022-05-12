@@ -32,6 +32,12 @@ const plugins = [
     },
   },
   {
+    resolve: 'gatsby-plugin-manifest',
+    options: {
+      icon: 'src/images/favicon.png',
+    },
+  },
+  {
     resolve: '@bodiless/gatsby-theme-bodiless',
     options: {
       gatsbyImage: {

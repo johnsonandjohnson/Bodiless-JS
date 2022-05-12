@@ -38,6 +38,7 @@
     "publish:major": "lerna version major --conventional-commits",
     "lerna:publish": "lerna publish from-git --yes --dist-tag latest",
     "lerna:canary": "lerna publish --canary --include-merged-tags --preid ks-canary --dist-tag ks-canary --force-publish",
+    "pw:run": "npx playwright test playwright/tests/smoke/* --project=chromium",
     "serve": "lerna run serve --scope @sites/${APP_SITE_NAME:-test-site} --stream",
     "setup": "npm run bootstrap && npm run build:packages",
     "sites:pack": "lerna exec --no-private --stream -- npm pack",
@@ -50,6 +51,7 @@
     "sync:fix": "syncpack fix-mismatches",
     "sync:check": "syncpack list-mismatches",
     "test": "jest",
+    "test:monorepo-pw": "WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-monorepo http://localhost:8005 pw:run",
     "test:ci": "WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-test http://localhost:8005 cy:run",
     "test:monorepo": "WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-monorepo http://localhost:8005 cy:run",
     "test:watch": "jest --watch"
