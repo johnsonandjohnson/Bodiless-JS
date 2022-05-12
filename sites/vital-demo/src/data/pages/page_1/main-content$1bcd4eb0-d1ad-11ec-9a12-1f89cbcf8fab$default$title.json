@@ -1,0 +1,41 @@
+[
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "reprehenderit in voluptate velit "
+      },
+      {
+        "text": "reprehenderit",
+        "SuperScript": true
+      },
+      {
+        "text": " in voluptate velit "
+      },
+      {
+        "data": {
+          "openModal": true,
+          "slatenode": {
+            "href": "https://www.johnsonsbaby.com/our-mission"
+          }
+        },
+        "type": "Link",
+        "children": [
+          {
+            "text": "reprehenderit"
+          }
+        ]
+      },
+      {
+        "text": " in voluptate velit reprehenderit in voluptate velit reprehenderit in voluptate "
+      },
+      {
+        "text": "velit",
+        "Bold": true
+      },
+      {
+        "text": " reprehenderit in voluptate velit"
+      }
+    ]
+  }
+]

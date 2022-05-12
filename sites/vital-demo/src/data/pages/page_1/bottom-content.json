@@ -1,0 +1,11 @@
+{
+  "items": [
+    {
+      "uuid": "c4837660-d1ad-11ec-bf3f-4d7c37e17939",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "ImageSquare"
+    }
+  ]
+}
