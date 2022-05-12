@@ -39,7 +39,6 @@
     "@bodiless/fclasses": "^1.0.0-beta.15",
     "@bodiless/richtext": "^1.0.0-beta.15",
     "@bodiless/richtext-ui": "^1.0.0-beta.15",
-    "@bodiless/vital-buttons": "^1.0.0-beta.15",
     "@bodiless/vital-editors": "^1.0.0-beta.15",
     "@bodiless/vital-elements": "^1.0.0-beta.15",
     "@bodiless/vital-flowcontainer": "^1.0.0-beta.15",

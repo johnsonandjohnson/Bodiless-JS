@@ -29,7 +29,6 @@ const {
   Footer,
   Table,
   List,
-  Buttons,
   _default
 } = __vital__StyleGuideTemplate;
 
@@ -46,8 +45,7 @@ const Default = asFluidToken({
     Images,
     Footer,
     Table,
-    List,
-    Buttons
+    List
   },
 });
 

@@ -21,7 +21,6 @@ import { Images } from './Images';
 import { Footer } from './Footer';
 import { Table } from './Table';
 import { List } from './List';
-import { Buttons } from './Buttons';
 import { _default } from './_default';
 
 export const __vital__StyleGuideTemplate = {
@@ -35,6 +34,5 @@ export const __vital__StyleGuideTemplate = {
   FlowContainer,
   Footer,
   Table,
-  List,
-  Buttons,
+  List
 };
