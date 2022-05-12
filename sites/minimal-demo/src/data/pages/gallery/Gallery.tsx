@@ -1,6 +1,6 @@
 import React, { FC, HTMLProps } from 'react';
 import {
-  H2, Section, addClasses, as, stylable, flowHoc, replaceWith, withDesign,
+  H2, Section, addClasses, as, stylable, replaceWith, withDesign, withMeta,
 } from '@bodiless/fclasses';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import { withNode } from '@bodiless/core';
@@ -13,26 +13,38 @@ const withTealBorder = addClasses('border-teal-400');
 const withOrangeBorder = addClasses('border-orange-400');
 
 const design = {
-  BlueImageTile: flowHoc(
+  BlueImageTile: as(
     replaceWith(CaptionedImage),
     asGalleryTile,
     withBlueBorder,
-    { title: 'Blue Image Tile' },
-    flowHoc.meta.term('Color')('Blue'),
+    withMeta({
+      title: 'Blue Image Tile',
+      categories: {
+        Color: ['Blue'],
+      },
+    }),
   ),
-  TealImageTile: flowHoc(
+  TealImageTile: as(
     replaceWith(CaptionedImage),
     asGalleryTile,
     withTealBorder,
-    { title: 'Teal Image Tile' },
-    flowHoc.meta.term('Color')('Teal'),
+    withMeta({
+      title: 'Teal Image Tile',
+      categories: {
+        Color: ['Teal'],
+      },
+    }),
   ),
-  OrangeImageTile: flowHoc(
+  OrangeImageTile: as(
     replaceWith(CaptionedImage),
     asGalleryTile,
     withOrangeBorder,
-    { title: 'Orange Image Tile' },
-    flowHoc.meta.term('Color')('Orange'),
+    withMeta({
+      title: 'Orange Image Tile',
+      categories: {
+        Color: ['Orange'],
+      },
+    }),
   ),
 };
 
