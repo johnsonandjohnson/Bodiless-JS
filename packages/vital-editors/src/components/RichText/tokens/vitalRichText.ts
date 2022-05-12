@@ -23,7 +23,6 @@ import {
   H4,
   H5,
   startWith,
-  removeClasses,
 } from '@bodiless/fclasses';
 import {
   asBlock,

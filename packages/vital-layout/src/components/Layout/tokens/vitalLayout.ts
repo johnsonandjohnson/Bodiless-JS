@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { useIsBurgerMenuHidden, withBurgerMenuProvider, withBreadcrumbStore } from '@bodiless/vital-navigation';
+import { useIsBurgerMenuHidden, withBurgerMenuProvider } from '@bodiless/vital-navigation';
 import {
   addProps,
   as,
@@ -31,7 +31,7 @@ import { StyleGuide } from './StyleGuide';
   */
 const Base = asLayoutToken({
   Core: {
-    _: as(withBurgerMenuProvider, withBreadcrumbStore),
+    _: withBurgerMenuProvider,
   },
   Components: {
     Helmet: vitalHelmet.Default,

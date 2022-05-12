@@ -16,17 +16,17 @@ import React from 'react';
 import {
   designable,
   Div,
+  Fragment,
 } from '@bodiless/fclasses';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { LayoutClean } from '@bodiless/vital-layout';
 import { FlowContainerClean } from '@bodiless/vital-flowcontainer';
-import { BreadcrumbsClean } from '@bodiless/vital-navigation';
 import { GenericTemplateComponents, BaseGenericTemplateProps } from './types';
 
 const genericTemplateComponents: GenericTemplateComponents = {
   PageWrapper: LayoutClean,
   BreadcrumbWrapper: Div,
-  Breadcrumb: BreadcrumbsClean,
+  Breadcrumb: Fragment,
   TopWrapper: Div,
   TopContent: FlowContainerClean,
   ContentWrapper: Div,
