@@ -51,6 +51,11 @@ const ContentRegionContainer = as(
   withNodeKey('contentregioncontainer'),
 )(FlowContainerClean);
 
+const ContentLibraryContainer = as(
+  vitalFlowContainer.WithContentLibrary,
+  withNodeKey('contentLibraryContainer'),
+)(FlowContainerClean);
+
 const Examples = (props: any) => (
   <>
     <DefaultFlowContainer />
@@ -64,6 +69,8 @@ const Examples = (props: any) => (
     <div className="border-2">
       <ContentRegionContainer />
     </div>
+    <hr />
+    <ContentLibraryContainer />
   </>
 );
 
