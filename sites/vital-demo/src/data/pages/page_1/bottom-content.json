@@ -6,6 +6,13 @@
         "className": "w-full"
       },
       "type": "ImageSquare"
+    },
+    {
+      "uuid": "5ac4ffb0-d1f7-11ec-ab03-83909fed3f12",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "CardTitleDescriptionHorizontal"
     }
   ]
 }

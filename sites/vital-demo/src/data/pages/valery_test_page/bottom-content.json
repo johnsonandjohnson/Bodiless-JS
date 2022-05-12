@@ -13,6 +13,27 @@
         "className": "w-full lg:w-1/2"
       },
       "type": "CardTitleDescriptionHorizontal"
+    },
+    {
+      "uuid": "79bbbdf0-d201-11ec-9451-ad2b28d5b88b",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "RichText"
+    },
+    {
+      "uuid": "37b49880-d203-11ec-9451-ad2b28d5b88b",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "ImageLandscape"
+    },
+    {
+      "uuid": "6f7ef990-d203-11ec-a20d-cbe6d2782a04",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "CardNoTitleVertical"
     }
   ]
 }

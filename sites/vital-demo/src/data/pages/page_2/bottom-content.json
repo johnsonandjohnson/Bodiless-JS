@@ -1,0 +1,11 @@
+{
+  "items": [
+    {
+      "uuid": "41630a20-d202-11ec-b582-2b46a2cba827",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "HeroCard"
+    }
+  ]
+}
