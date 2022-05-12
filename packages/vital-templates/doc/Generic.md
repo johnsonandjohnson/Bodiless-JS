@@ -38,17 +38,17 @@ const Default = asFluidToken({
 });
 ```
 
-### Override
+### Overriding Generic Template
 
 #### Via Shadowing (*Preferred Method)
 
 Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
 
-File to shadow: `./lib/shadow/vital-templates/{MyGenericTemplate}.js`
+File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-templates/GenericTemplate.ts`
 
 Example:
 
-**File: `./lib/shadow/vital-templates/{MyGenericTemplate}.js`**
+**File: `packages/{my-package}/src/shadow/@bodiless/vital-templates/GenericTemplate.ts`**
 
 ```js
 // Import the base collection.
