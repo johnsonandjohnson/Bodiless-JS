@@ -11,11 +11,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { withNode, withNodeKey } from '@bodiless/core';
 import { vitalFooterBase, asFooterToken } from '@bodiless/vital-layout';
-import {
-  addProps, as
-} from '@bodiless/fclasses';
+import { addProps } from '@bodiless/fclasses';
 import { withLanguageNode } from '@bodiless/i18n';
 
 const Default = asFooterToken(vitalFooterBase.Base, {
@@ -23,11 +20,7 @@ const Default = asFooterToken(vitalFooterBase.Base, {
     _: addProps({ 'data-shadowed-by': '__vital__Footer' }),
   },
   Schema: {
-    _: as(
-      withLanguageNode,
-      withNodeKey({ nodeKey: 'Footer', nodeCollection: 'site' }),
-      withNode,
-    )
+    _: withLanguageNode,
   },
 });
 

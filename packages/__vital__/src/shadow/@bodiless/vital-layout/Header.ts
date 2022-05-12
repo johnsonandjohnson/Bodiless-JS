@@ -11,12 +11,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { withNode, withNodeKey } from '@bodiless/core';
+
 import { vitalHeaderBase, asHeaderToken } from '@bodiless/vital-layout';
 import { LinkClean, vitalLink, asLinkToken } from '@bodiless/vital-link';
 import { asLanguageSelector, withLanguageNode } from '@bodiless/i18n';
 import {
-  addProps, on, startWith, Div, as,
+  addProps, on, startWith, Div,
 } from '@bodiless/fclasses';
 
 export const asLanguageSelectorLink = on(LinkClean)(
@@ -36,11 +36,7 @@ const Default = asHeaderToken(
       _: addProps({ 'data-shadowed-by': '__vital__Header' }),
     },
     Schema: {
-      _: as(
-        withLanguageNode,
-        withNodeKey({ nodeKey: 'Header', nodeCollection: 'site' }),
-        withNode,
-      )
+      _: withLanguageNode,
     },
     Components: {
       LanguageSelectorWrapper: startWith(Div),

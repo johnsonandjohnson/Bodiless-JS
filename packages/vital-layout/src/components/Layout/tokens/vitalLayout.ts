@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import { withNodeKey } from '@bodiless/core';
 import { useIsBurgerMenuHidden, withBurgerMenuProvider } from '@bodiless/vital-navigation';
 import {
   addProps,
@@ -58,6 +59,10 @@ const Base = asLayoutToken({
   Content: {
     Header: addProps({ id: LayoutIds.HeaderContent }),
   },
+  Schema: {
+    Header: withNodeKey({ nodeKey: 'Header', nodeCollection: 'site' }),
+    Footer: withNodeKey({ nodeKey: 'Footer', nodeCollection: 'site' }),
+  }
 });
 
 const Default = asLayoutToken({
