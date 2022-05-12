@@ -111,8 +111,10 @@ After [adding a Vital List](#add-a-list), you can add list items to it:
 At the site or global regional/brand library level, you can use the Vital List component as is, or
 extend/shadow the existing component.
 
-### Customizing Via Shadowing (*Preferred Method)
+### Customizing List
+
+#### Via Shadowing (*Preferred Method)
 
 Define a Shadowing token collection as defined in [Shadow](./VitalElements/Shadow).
 
-File to shadow: `./lib/shadow/vital-list/{MyList}.js`
+File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-list/List.ts`
