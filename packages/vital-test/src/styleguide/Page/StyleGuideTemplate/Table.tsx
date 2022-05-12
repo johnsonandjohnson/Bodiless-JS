@@ -60,7 +60,7 @@ const HeaderFooterTable = as(
 
 const FirstColumnHeaderTable = as(
   vitalTable.Default,
-  vitalTable.WithFirtColumnHeader,
+  vitalTable.WithFirstColumnHeader,
   withNodeKey('firstcolumntable'),
 )(TableClean);
 
@@ -68,6 +68,18 @@ const ScrollingTable = as(
   vitalTable.Default,
   vitalTable.WithScrolling,
   withNodeKey('scrollingtable'),
+)(TableClean);
+
+const PrimaryHeaderFooter = as(
+  vitalTable.Default,
+  vitalTable.WithPrimaryHeaderFooter,
+  withNodeKey('primaryheadertable'),
+)(TableClean);
+
+const SecondColumnHighlighted = as(
+  vitalTable.Default,
+  vitalTable.WithSecondColumnHighlighted,
+  withNodeKey('secondcolumnhighlightedtable'),
 )(TableClean);
 
 /* @todo
@@ -91,6 +103,10 @@ const Examples = (props: any) => (
      <ScrollingTable />
      <hr className="my-4" />
      <FirstColumnHeaderTable />
+     <hr className="my-4" />
+     <PrimaryHeaderFooter />
+     <hr className="my-4" />
+     <SecondColumnHighlighted />
    </>
 );
 

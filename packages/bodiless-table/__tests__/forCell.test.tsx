@@ -153,6 +153,34 @@ describe('ForCell HelperFunctions', () => {
       expect(result.current).toBeFalsy();
     });
   });
+  describe('useIsSecondColumn', () => {
+    test('returns true if Column is Secon', () => {
+      const wrapper = flow(
+        withContextValue(TableContext)({
+          rows: [],
+          columns: ['0', '1'],
+          headRows: [],
+          footRows: [],
+        }),
+        withContextValue(TableColumnContext)({ index: 1, name: '' }),
+      )(Fragment);
+      const { result } = renderHook(useIsSecondColumn, { wrapper });
+      expect(result.current).toBeTruthy();
+    });
+    test('returns false if Column is not first', () => {
+      const wrapper = flow(
+        withContextValue(TableContext)({
+          rows: [],
+          columns: ['0', '1'],
+          headRows: [],
+          footRows: [],
+        }),
+        withContextValue(TableColumnContext)({ index: 0, name: '' }),
+      )(Fragment);
+      const { result } = renderHook(useIsSecondColumn, { wrapper });
+      expect(result.current).toBeFalsy();
+    });
+  });
   describe('useIsLastColumn', () => {
     test('returns true if Column is last', () => {
       const wrapper = flow(

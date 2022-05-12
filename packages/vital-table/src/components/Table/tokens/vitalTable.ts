@@ -22,7 +22,7 @@ import {
   addProps,
 } from '@bodiless/fclasses';
 import {
-  asBodilessTable, useIsFirstColumn, useIsInBody, useIsOddRow,
+  asBodilessTable, useIsFirstColumn, useIsInBody, useIsOddRow, useIsSecondColumn,
 } from '@bodiless/table';
 import { vitalRichText, RichTextClean } from '@bodiless/vital-editors';
 import { vitalColor } from '@bodiless/vital-elements';
@@ -68,10 +68,20 @@ const Default = asTableToken({
 /**
  * Token which adds header design to first column
  */
-const WithFirtColumnHeader = asTableToken({
+const WithFirstColumnHeader = asTableToken({
   Meta: flowHoc.meta.term('Header')('First Column as Header'),
   Theme: {
     Cell: flowIf(useIsFirstColumn)(as(vitalColor.BgSecondaryTable)),
+  }
+});
+
+/**
+ * Token which adds header design to first column
+ */
+const WithSecondColumnHighlighted = asTableToken({
+  Meta: flowHoc.meta.term('Header')('Second Column highlighted'),
+  Theme: {
+    Cell: flowIf(useIsSecondColumn)(as(vitalColor.BgSecondaryTable)),
   }
 });
 
@@ -128,6 +138,17 @@ const WithLightHeaderFooter = asTableToken({
 });
 
 /**
+ * Token which add header background to table.
+ */
+const WithPrimaryHeaderFooter = asTableToken({
+  Meta: flowHoc.meta.term('Header')('Light Header'),
+  Theme: {
+    THead: vitalColor.BgPrimaryBrand,
+    TFoot: vitalColor.BgPrimaryBrand,
+  }
+});
+
+/**
  * Token which add scrollbar if becomes to wide for viewport.
  */
 const WithScrolling = asTableToken({
@@ -144,7 +165,9 @@ export default {
   WithBorders,
   WithBottomBorders,
   WithLightHeaderFooter,
-  WithFirtColumnHeader,
+  WithFirstColumnHeader,
+  WithSecondColumnHighlighted,
+  WithPrimaryHeaderFooter,
   WithScrolling,
   WithFlowContainerPreview,
 };
