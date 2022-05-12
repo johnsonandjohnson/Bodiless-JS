@@ -133,7 +133,6 @@ const Copyright = asVitalTokenSpec()({
       vitalFontSize.XS,
       vitalTextDecoration.Bold,
       vitalTextDecoration.Underline,
-      removeClasses('text-m-base lg:text-base'),
     ),
   },
   Content: {

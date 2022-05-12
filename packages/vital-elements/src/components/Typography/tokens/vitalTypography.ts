@@ -26,9 +26,6 @@ const meta = {
 };
 
 const Link = asElementToken({
-  Core: {
-    _: vitalFontSize.Base,
-  },
   Theme: {
     _: as(
       vitalTextDecoration.Bold,
