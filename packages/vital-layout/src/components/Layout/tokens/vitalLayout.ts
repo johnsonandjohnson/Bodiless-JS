@@ -60,8 +60,8 @@ const Base = asLayoutToken({
     Header: addProps({ id: LayoutIds.HeaderContent }),
   },
   Schema: {
-    Header: withNodeKey({ nodeKey: 'Header', nodeCollection: 'site' }),
-    Footer: withNodeKey({ nodeKey: 'Footer', nodeCollection: 'site' }),
+    Header: withNodeKey({ nodeKey: 'header', nodeCollection: 'site' }),
+    Footer: withNodeKey({ nodeKey: 'footer', nodeCollection: 'site' }),
   }
 });
 
