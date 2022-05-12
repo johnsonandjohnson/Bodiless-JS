@@ -38,3 +38,4 @@ jobs:
         run: |
           sleep 10
           ~/.platformsh/bin/platform env:activate -p $PSH_PROJECT_ID -e $QA_BRANCH_NAME
+#
