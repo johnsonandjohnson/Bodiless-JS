@@ -24,7 +24,8 @@ const BaseVariation = {
 
 const HeaderDecorationVariations = {
   LightHeaderFooter: vitalTable.WithLightHeaderFooter,
-  FirstColumnHeader: vitalTable.WithFirtColumnHeader,
+  PrimaryHeaderFooter: vitalTable.WithPrimaryHeaderFooter,
+  FirstColumnHeader: vitalTable.WithFirstColumnHeader,
   None: asTableToken({
     Meta: flowHoc.meta.term('Header')('No Header Color'),
   }),
@@ -34,6 +35,7 @@ const TableVariations = {
   Stripes: vitalTable.WithRowStripes,
   Hoverable: vitalTable.WithHoverable,
   ScrollingTable: vitalTable.WithScrolling,
+  WithSecondColumnHighlighted: vitalTable.WithSecondColumnHighlighted,
 };
 
 const BorderDecorationVariations = {
