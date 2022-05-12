@@ -70,7 +70,7 @@ bundle, which is possibly the most performant option.
     place the fonts.
 01. In your package's `package.json` file, make sure your `files` section exports the assets so they
     are bundled with the package (e.g., `"files": ["/assets"]`).
-01. In your package's `site.tailwind.config.js` file, add the plugin `font-face` via `addBase` to
+01. In your package's `tailwind.config.js` file, add the plugin `font-face` via `addBase` to
     import the fonts.
 01. Extend `fontFamily` in the Tailwind `theme` section to include the font.
 01. Use the new font by using the prefix and name of the font you defined (e.g., `font-linkicons`).
@@ -79,7 +79,7 @@ bundle, which is possibly the most performant option.
 const plugin = require('tailwindcss/plugin');
 
 module.exports = {
-  purge: [
+  content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {

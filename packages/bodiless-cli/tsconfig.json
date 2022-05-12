@@ -2,12 +2,14 @@
   "extends": "../../tsconfig.settings.json",
   "compilerOptions": {
     "target": "es2017",
+    "module": "CommonJS",
     "rootDir": "src",
     "outDir": "lib",
     "baseUrl": "."
   },
   "include": [
-    "src"
+    "src",
+    "getDocs.js"
   ],
   "exclude": [
     "lib",

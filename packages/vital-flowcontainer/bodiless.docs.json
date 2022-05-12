@@ -1,0 +1,7 @@
+{
+  "VitalDesignSystem": {
+    "Components": {
+      "VitalFlowContainer.md": "./doc/FlowContainer.md"
+    }
+  }
+}

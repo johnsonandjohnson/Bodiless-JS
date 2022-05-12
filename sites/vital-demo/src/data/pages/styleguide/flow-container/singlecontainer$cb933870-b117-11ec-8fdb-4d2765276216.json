@@ -1,0 +1,18 @@
+[
+  {
+    "type": "H3",
+    "children": [
+      {
+        "text": "Single Component Flow Container"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "Flow container that requires 1 component (thus can't delete single component) and no more than 1 component (thus can't add component) and can only swap."
+      }
+    ]
+  }
+]

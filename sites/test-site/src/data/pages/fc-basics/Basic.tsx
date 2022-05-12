@@ -23,7 +23,7 @@ import {
 import pick from 'lodash/pick';
 // @ts-ignore
 import resolvedConfigs from
-  '@bodiless/gatsby-theme-bodiless/src/dist/tailwindcss/resolveConfig';
+  '@bodiless/fclasses/src/tailwindcss/resolveConfig';
 
 // @ts-ignore
 import {

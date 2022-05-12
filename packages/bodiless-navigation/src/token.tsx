@@ -30,6 +30,5 @@ export const withColumnDirectionStyles = addClasses('flex-col');
 export const withLightGrayBg = addClasses('bg-gray-200');
 export const withTransformStyles = addClasses('transform');
 export const withSlideInTranslateStyles = addClasses('-translate-x-full');
-export const withMaterialIconsFont = addClasses('material-icons');
 export const withPointerCursorStyles = addClasses('cursor-pointer');
 export const asDisabled = addClasses('pointer-events-none');

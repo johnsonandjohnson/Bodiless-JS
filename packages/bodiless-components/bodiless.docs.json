@@ -1,5 +1,8 @@
 {
   "Components": {
+    "Chameleon.md": "./doc/Chameleon.md",
+    "Editable.md": "./doc/editable.md",
+    "Iframe.md": "./doc/Iframe.md",
     "Image": {
       "README.md": "./doc/Image.md"
     },
@@ -7,9 +10,7 @@
       "README.md": "./doc/Link.md"
     },
     "List.md": "./doc/List.md",
-    "Chameleon.md": "./doc/Chameleon.md",
-    "Editable.md": "./doc/editable.md",
-    "Iframe.md": "./doc/Iframe.md",
+    "Meta.md": "./doc/Meta.md",
     "assets": {
       "AddImageComponent.jpg": "./doc/assets/AddImageComponent.jpg",
       "ClickLinkButton.jpg": "./doc/assets/ClickLinkButton.jpg",
@@ -21,7 +22,8 @@
       "IframeConfig.jpg": "./doc/assets/IframeConfig.jpg",
       "ImageModal.jpg": "./doc/assets/ImageModal.jpg",
       "LinkForm.jpg": "./doc/assets/LinkForm.jpg",
-      "RichTextLinkEditButtonInContextMenu.jpg": "./doc/assets/RichTextLinkEditButtonInContextMenu.jpg"
+      "RichTextLinkEditButtonInContextMenu.jpg": "./doc/assets/RichTextLinkEditButtonInContextMenu.jpg",
+      "SeoDataManagementForm.jpg": "./doc/assets/SeoDataManagementForm.jpg"
     }
   }
 }

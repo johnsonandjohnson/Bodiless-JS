@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/fclasses",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.18",
   "description": "Allows for the injection of functional class into components.",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
@@ -15,7 +15,9 @@
   "files": [
     "/lib",
     "/doc",
-    "/bodiless.docs.json"
+    "/bodiless.docs.json",
+    "/getDocs.js",
+    "src/tailwindcss/resolveConfig.ts"
   ],
   "publishConfig": {
     "access": "public"
@@ -25,12 +27,15 @@
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "scripts": {
-    "build": "tsc --version && tsc -p ./tsconfig.json && npm run build:api-doc",
-    "build:watch": "npm run build -- --watch",
+    "build": "npm run build:lib && npm run build:api-doc",
+    "build:lib": "tsc --version && tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
     "build:api-doc": "typedoc --out doc/api src",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
+    "@bodiless/cli": "^1.0.0-beta.18",
+    "babel-plugin-preval": "5.0.0",
     "lodash": "^4.17.19",
     "uuid": "^3.3.2"
   },

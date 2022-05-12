@@ -1,3 +1,0 @@
-# CX Generic Template
-
-TBD

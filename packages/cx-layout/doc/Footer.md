@@ -1,3 +1,0 @@
-# CanvasX Footer Component
-
-TBD

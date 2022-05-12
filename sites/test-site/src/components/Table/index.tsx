@@ -44,7 +44,7 @@ const asDefaultTableStyle = flowHoc(
     THead: flowHoc(
       addClasses('bg-orange-700 text-white'),
     ),
-    Wrapper: flowHoc(
+    Table: flowHoc(
       addClasses('border border-collapse rounded border-gray-200 w-full'),
     ),
   }),

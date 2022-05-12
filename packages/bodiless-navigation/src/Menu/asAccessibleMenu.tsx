@@ -16,7 +16,7 @@ import React, {
   ComponentType, FC, useRef, useCallback, useEffect,
 } from 'react';
 import {
-  withParent, withAppendChild, useNode, useClickOutside,
+  withParent, withAppendChild, useNode, useClickOutside, withChild,
 } from '@bodiless/core';
 import { LinkData, useListContext } from '@bodiless/components';
 import {
@@ -38,6 +38,8 @@ import {
 import { useMenuContext } from './withMenuContext';
 import { useSubmenuContext } from './withMenuItemContext';
 import { DEFAULT_NODE_KEYS } from './MenuTitles';
+
+import ExpandMoreIcon from '../icons/ExpandMore';
 
 const useHasSubmenu = () => useSubmenuContext().hasSubmenu;
 const useHasLink = () => {
@@ -172,10 +174,7 @@ const SubmenuIndicator = flowHoc(
       asAccessibleSubMenuTitle,
       addClasses('flex items-center'),
     ),
-    Title: flowHoc(
-      addClasses('material-icons'),
-      addProps({ children: 'expand_more' }),
-    ),
+    Title: withChild(ExpandMoreIcon),
   }),
 )(SubmenuIndicatorClean);
 

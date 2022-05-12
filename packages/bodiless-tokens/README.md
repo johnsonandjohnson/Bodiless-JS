@@ -580,7 +580,7 @@ const Button = props => {
 };
 
 const StyledButton = flow(
-  addClassesIf(isToggled)('bg-green-200'),
+  addClassesIf(isToggled)('bg-emerald-200'),
 )(Button);
 
 ```

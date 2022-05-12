@@ -1,0 +1,11 @@
+{
+  "VitalDesignSystem": {
+    "Components": {
+      "SEO": {
+        "Metadata": {
+          "vitalMeta.md": "./doc/README.md"
+        }
+      }
+    }
+  }
+}

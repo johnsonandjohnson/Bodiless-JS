@@ -23,6 +23,7 @@ import {
   Th,
   Thead,
   Tr,
+  Div,
 } from '@bodiless/fclasses';
 import {
   Section,
@@ -45,25 +46,28 @@ const DefaultCell = (props:HTMLProps<StylableProps>) => {
   return <Cell {...props} />;
 };
 const tableComponentsStart:TableComponents = {
-  Wrapper: Table,
+  Wrapper: Div,
+  Table,
   TBody: Tbody,
   THead: Thead,
   TFoot: Tfoot,
   Row: Tr,
   Cell: DefaultCell,
+  CellContent: Div,
 };
 const TableSection = (props:TableSectionProps) => {
   const {
-    Wrapper,
+    Table,
     Row,
     Cell,
+    CellContent,
     rows,
     section,
     columns,
   } = props;
   return (
     <TableSectionContext.Provider value={section}>
-      <Wrapper>
+      <Table>
         {(rows || []).map((row, rowIndex) => (
           <TableRowContext.Provider key={String(`row-${row}`)} value={{ name: row, index: rowIndex }}>
             <Row
@@ -74,13 +78,15 @@ const TableSection = (props:TableSectionProps) => {
                   <Cell
                     // We want to refresh this component when any of this change
                     key={String(`${rowIndex}${columnIndex}${row}${column}`)}
-                  />
+                  >
+                    <CellContent />
+                  </Cell>
                 </TableColumnContext.Provider>
               ))}
             </Row>
           </TableRowContext.Provider>
         ))}
-      </Wrapper>
+      </Table>
     </TableSectionContext.Provider>
   );
 };
@@ -96,11 +102,13 @@ const TableBase:FunctionComponent<TableProps> = (props) => {
   } = props;
   const {
     Wrapper,
+    Table,
     TBody,
     THead,
     TFoot,
     Row,
     Cell,
+    CellContent,
   } = components;
   return (
     <TableContext.Provider value={{
@@ -110,37 +118,42 @@ const TableBase:FunctionComponent<TableProps> = (props) => {
       footRows,
     }}
     >
-      <Wrapper {...rest}>
-        <TableSection
-          {...{
-            Wrapper: THead,
-            Row,
-            Cell,
-            section: Section.head,
-            rows: headRows,
-            columns,
-          }}
-        />
-        <TableSection
-          {...{
-            Wrapper: TBody,
-            Row,
-            Cell,
-            section: Section.body,
-            rows,
-            columns,
-          }}
-        />
-        <TableSection
-          {...{
-            Wrapper: TFoot,
-            Row,
-            Cell,
-            section: Section.foot,
-            rows: footRows,
-            columns,
-          }}
-        />
+      <Wrapper>
+        <Table {...rest}>
+          <TableSection
+            {...{
+              Table: THead,
+              Row,
+              Cell,
+              CellContent,
+              section: Section.head,
+              rows: headRows,
+              columns,
+            }}
+          />
+          <TableSection
+            {...{
+              Table: TBody,
+              Row,
+              Cell,
+              CellContent,
+              section: Section.body,
+              rows,
+              columns,
+            }}
+          />
+          <TableSection
+            {...{
+              Table: TFoot,
+              Row,
+              Cell,
+              CellContent,
+              section: Section.foot,
+              rows: footRows,
+              columns,
+            }}
+          />
+        </Table>
       </Wrapper>
     </TableContext.Provider>
   );

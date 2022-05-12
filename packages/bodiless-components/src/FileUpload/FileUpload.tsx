@@ -37,6 +37,7 @@ export enum FileUploadStrings {
   Uploading = 'Upload is in progress',
   UploadTimeout = 'Upload failed, please try again.',
   UploadFinished = 'Done!',
+  UploadDisabled = 'File upload is disabled in this environment',
 }
 
 export type UploadStatusProps = HTMLProps<HTMLElement> & {
@@ -90,6 +91,7 @@ const defaultFileUploadUI = {
   Input: 'input',
   UploadArea: () => <div>{`${FileUploadStrings.DragOrClickToUpload}`}</div>,
   Uploading: () => <div>{`${FileUploadStrings.Uploading}`}</div>,
+  UploadDisabled: () => <div>{`${FileUploadStrings.UploadDisabled}`}</div>,
   DragRejected: () => <div>{`${FileUploadStrings.FileRejected}`}</div>,
   UploadTimeout: () => <div>{`${FileUploadStrings.UploadTimeout}`}</div>,
   UploadFinished: () => <div>{`${FileUploadStrings.UploadFinished}`}</div>,
@@ -154,7 +156,13 @@ export const FileUpload: CT<FileUploadProps> = ({ fieldApi, ui = {}, accept }: F
         setIsUploadingTimeout(false);
         setIsUploadFinished(true);
       })
-      .catch(errorLog);
+      .catch(e => {
+        errorLog(e);
+        fieldApi.setError(e.message);
+        setIsUploading(false);
+        setIsUploadingTimeout(false);
+        setIsUploadFinished(true);
+      });
   }, []);
 
   const { getRootProps, getInputProps, isDragReject } = useDropzone({
@@ -173,16 +181,28 @@ export const FileUpload: CT<FileUploadProps> = ({ fieldApi, ui = {}, accept }: F
     UploadTimeout,
     UploadFinished,
     UploadStatus,
+    UploadDisabled,
   } = {
     ...defaultFileUploadUI,
     ...ui,
   };
+  const saveEnabled = (process.env.BODILESS_BACKEND_SAVE_ENABLED || '1') === '1';
+  const rootProps = saveEnabled ? getRootProps() : {};
 
   return (
     <MasterWrapper>
-      <Wrapper {...getRootProps()}>
-        <Input {...getInputProps()} />
-        <UploadArea />
+      <Wrapper {...rootProps}>
+        {saveEnabled && (
+          <>
+            <Input {...getInputProps()} />
+            <UploadArea />
+          </>
+        )}
+        {!saveEnabled && (
+          <>
+            <UploadDisabled />
+          </>
+        )}
         {isDragReject && <DragRejected />}
         {isUploadTimeout && <UploadTimeout />}
         {isUploading && <Uploading />}

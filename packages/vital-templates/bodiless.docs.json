@@ -1,0 +1,15 @@
+{
+  "VitalDesignSystem": {
+    "Components": {
+      "VitalTemplates": {
+        "README.md": "./doc/README.md",
+        "Generic.md": "./doc/Generic.md"
+      },
+      "assets": {
+        "default.jpg": "./doc/assets/default.jpg",
+        "PageChooseTemplate.jpg": "./doc/assets/PageChooseTemplate.jpg",
+        "PageTemplateIcon.jpg": "./doc/assets/PageTemplateIcon.jpg"
+      }
+    }
+  }
+}
