@@ -59,7 +59,7 @@ export const useActivateOnEffect = () => React.useContext(activateOnEffect);
  * if it is it will run the useContextActivator hook
  * @param uuid id of the component to check
  */
-export const useActivateOnEffectActivator = (uuid: string) => {
+export const useActivateOnEffectActivator = (uuid?: string) => {
   // Cast is necessary bc useContextActivator returns a boolean for 'data-bl-activator'
   const { onClick } = useContextActivator() as any as { onClick: Function };
   const { id, setId } = useActivateOnEffect();
