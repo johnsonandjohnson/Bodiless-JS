@@ -28,9 +28,11 @@ test-report.xml
 
 /starters
 
+# Test tools
 /cypress/videos
 /cypress/screenshots
 /sites-test
+playwright-report
 
 # API doc
 **/doc/api

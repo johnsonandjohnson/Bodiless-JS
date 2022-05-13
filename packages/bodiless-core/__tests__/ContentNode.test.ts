@@ -53,7 +53,7 @@ describe('ContentNode', () => {
     expect(getters.getNode.mock.calls.length).toBe(1);
     expect(getters.getNode.mock.calls[0].length).toBe(1);
     expect(getters.getNode.mock.calls[0][0]).toEqual(keys);
-    expect(d).toBeUndefined();
+    expect(d).toEqual({});
 
     const e = {
       foo: 'bar',

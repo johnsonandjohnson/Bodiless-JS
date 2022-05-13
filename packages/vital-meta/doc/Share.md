@@ -130,11 +130,13 @@ fields to the Bodiless SEO form can also be applied here.
 
 **See:** [Bodiless Meta Component : Add Metadata Fields to SEO Form](/Components/Meta#add-metadata-fields-to-seo-form)
 
-This customization ought to be performed [via
-shadowing](#customizing-via-shadowing-preferred-method), as described below.
+This customization ought to be performed [via shadowing](#via-shadowing-preferred-method), as
+described below.
 
-### Customizing Via Shadowing (*Preferred Method)
+### Customizing Meta Component
+
+#### Via Shadowing (*Preferred Method)
 
 Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
 
-File to shadow: `./lib/shadow/vital-meta/{MyShareHelmet}.js`
+File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-meta/MetaHelmet.ts`
