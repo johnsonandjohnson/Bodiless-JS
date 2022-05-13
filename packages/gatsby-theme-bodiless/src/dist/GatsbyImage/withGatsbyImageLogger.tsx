@@ -26,7 +26,7 @@ const withGatsbyImageLogger = (preset?: GatsbyImagePresets): HOC => Component =>
   const WithGatsbyImageLogger: FC<any> = props => {
     const { node } = useNode<any>();
     const { preset: presetFromProps } = props as Props;
-    const { canonicalPreset } = node.data;
+    const { data: { canonicalPreset } = {} } = node;
     const expectedPreset = preset || canonicalPreset || undefined;
     if (expectedPreset !== presetFromProps && presetFromProps !== undefined) {
       log(`
