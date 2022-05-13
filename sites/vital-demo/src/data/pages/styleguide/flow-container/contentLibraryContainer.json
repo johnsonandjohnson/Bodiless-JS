@@ -6,6 +6,20 @@
         "className": "w-full"
       },
       "type": "RichText"
+    },
+    {
+      "uuid": "883415a0-d2ae-11ec-85a1-296abae09519",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "ListInfographic"
+    },
+    {
+      "uuid": "a36db060-d2ae-11ec-85a1-296abae09519",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "CardNoDescriptionHorizontal"
     }
   ]
 }
