@@ -36,6 +36,8 @@ const ora = require('ora');
 
 const NO_TEMPLATE = '*** NONE';
 
+const kebabToCamel = (n: string) => n.replace(/-([a-z])/g, g => g[1].toUpperCase());
+
 const abstractNewFlags: Flags<AbstractNewOptions> = {
   ...Wizard.flags,
 
@@ -112,7 +114,7 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
   setup: {
     ...commandFlags.string({
       description: 'Name of setup script',
-      default: 'setup',
+      default: 'npm run setup',
       parse: d => d.trim(),
     }),
     prompt: false,
@@ -178,7 +180,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const sitesDir = await this.getArg('sites-dir');
     const name = await this.getArg('name');
     const newName = await this.getArg('name');
-    const newTokenName = newName.replace(/-([a-z])/g, g => g[1].toUpperCase());
+    const newTokenName = kebabToCamel(newName);
     const ns = await this.getNamespace();
     const cwd = path.resolve(await this.getArg('dest'));
     const commonOptions = {
@@ -343,7 +345,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
         promises.push(recursiveRename({
           rootPath: path.join(sitesDir, name),
           search: template,
-          replace: name,
+          replace: kebabToCamel(name),
           exclude: pathName => /node_modules/.test(pathName) || /lib/.test(pathName),
         }));
       }
@@ -374,6 +376,9 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       if (!fs.existsSync(templatePackageDir)) {
         delete data.scripts['build:packages'];
         data.scripts.setup = 'npm run bootstrap';
+        data.scripts['setup:gatsby-cloud'] = 'npm run bootstrap:gatsby-cloud';
+        data.scripts.lint = 'eslint --fix  --cache --ext .js,.jsx,.ts,.tsx sites -- ';
+        data.scripts.fix = 'eslint --cache --ext .js,.jsx,.ts,.tsx sites -- ';
       }
       data.scripts.start = `lerna run start --stream --scope ${siteName}`;
       data.scripts.serve = `lerna run serve --stream --scope ${siteName}`;
@@ -432,7 +437,15 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const files = [
       path.join(dest, 'jenkins'),
       path.join(dest, 'cypress'),
-      path.join(dest, 'github'),
+      path.join(dest, 'cypress.json'),
+      path.join(dest, 'playwright'),
+      path.join(dest, 'playwright.config.ts'),
+      path.join(dest, '.github'),
+      path.join(dest, '.vscode'),
+      path.join(dest, 'sonar-project.properties.'),
+      path.join(dest, 'Dockerfile'),
+      path.join(dest, 'UPGRADE.md'),
+      path.join(dest, 'CONTRIBUTING.md'),
       // remove the starter eslintrcs.  They exist only to disable
       // rules which flag the underscores in the __starter__ template.
       path.join(dest, packagesDir, name, 'eslintrc.js'),
@@ -484,13 +497,14 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     spawner.options.cwd = dest;
     await spawner.spawn('git', 'init');
     await spawner.spawn('git', 'checkout', '-b', 'main');
+    if (!await this.getArg('no-setup')) {
+      const setup = await this.getArg('setup');
+      const command = setup ? setup.split(' ') : ['npm', 'run', 'setup'];
+      this.log(`Running ${setup}...`);
+      await spawner.spawn(...command);
+    }
     await spawner.spawn('git', 'add', '.');
-    await spawner.spawn('git', 'commit', '-m', '"Initial Commit"');
-    if (await this.getArg('no-setup')) return Promise.resolve();
-    const setup = await this.getArg('setup');
-    const command = setup === 'install' ? ['npm', 'install'] : ['npm', 'run', 'setup'];
-    this.log(`Running ${setup}...`);
-    return spawner.spawn(...command);
+    return spawner.spawn('git', 'commit', '-m', '"Initial Commit"');
   }
 
   async run() {
