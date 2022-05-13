@@ -120,7 +120,7 @@ export class DefaultContentNode<D extends object> implements ContentNode<D> {
 
   get data() {
     const { getNode } = this.getters;
-    return getNode(this.path) as D;
+    return getNode(this.path) || {} as D;
   }
 
   get pagePath() {
