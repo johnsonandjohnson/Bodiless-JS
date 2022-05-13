@@ -22,21 +22,15 @@ const BaseVariation = {
   Button: on(ButtonClean)(vitalButtons.Default),
 };
 
-const PrimaryVariations = {
+const ColorVariations = {
   Primary: vitalButtons.Primary,
-  PrimarySelected: vitalButtons.PrimarySelected,
-};
-
-const SecondaryVariations = {
   Secondary: vitalButtons.Secondary,
-  Hoverable: vitalButtons.SecondarySelected,
 };
 
 const ButtonStyles = {
-  WithDisabled: vitalButtons.WithDisabled,
   WithArrow: vitalButtons.WithArrow,
-  None: asButtonToken({
-    Meta: flowHoc.meta.term('Style')('No Style'),
+  _: asButtonToken({
+    Meta: flowHoc.meta.term('Style')('Without Hover Arrow'),
   }),
 };
 
@@ -47,8 +41,7 @@ const WithButtonVariations = asFluidToken({
   Components: {
     ...varyDesigns(
       BaseVariation,
-      PrimaryVariations,
-      SecondaryVariations,
+      ColorVariations,
       ButtonStyles,
     ),
   }

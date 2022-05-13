@@ -39,10 +39,10 @@ const ButtonThemeStyle = as(
 
 const Base = asButtonToken({
   Layout: {
-    Wrapper: 'flex flex-row-reverse group',
+    Wrapper: 'flex flex-row-reverse group justify-center',
   },
   Theme: {
-    Wrapper: ButtonThemeStyle,
+    Wrapper: as(ButtonThemeStyle, vitalLink.WithDownloadStyles, vitalLink.WithExternalStyles),
   },
   Spacing: {
     Wrapper: 'px-6 py-3.5',
@@ -59,7 +59,20 @@ const Base = asButtonToken({
   },
   A11y: {
     Wrapper: addProps({ role: 'button' }),
-  }
+  },
+  Meta: flowHoc.meta.term('Type')('Buttons'),
+});
+
+// TO DO -- don't work.
+const WithExternal = asButtonToken(Base, {
+  Theme: {
+    Wrapper: vitalLink.WithExternalStyles,
+  },
+});
+const WithDownload = asButtonToken(Base, {
+  Theme: {
+    Wrapper: vitalLink.WithDownloadStyles,
+  },
 });
 
 const WithArrow = asButtonToken(Base, {
@@ -83,6 +96,7 @@ const Primary = asButtonToken(Base, {
       vitalColor.TextWhite,
     ),
   },
+  Meta: flowHoc.meta.term('Style')('Primary'),
 });
 
 const Secondary = asButtonToken(Base, {
@@ -93,6 +107,7 @@ const Secondary = asButtonToken(Base, {
       vitalColor.BorderPrimaryInteractive,
     ),
   },
+  Meta: flowHoc.meta.term('Style')('Secondary'),
 });
 
 const PrimarySelected = asButtonToken(Base, {
@@ -102,7 +117,7 @@ const PrimarySelected = asButtonToken(Base, {
       vitalColor.TextWhite,
     ),
   },
-  Meta: flowHoc.meta.term('Style')('Selected'),
+  Meta: flowHoc.meta.term('Style')('Primary Selected'),
 });
 
 const SecondarySelected = asButtonToken(Base, {
@@ -113,11 +128,11 @@ const SecondarySelected = asButtonToken(Base, {
       vitalColor.BorderButtonSelected,
     ),
   },
-  Meta: flowHoc.meta.term('Style')('Selected'),
+  Meta: flowHoc.meta.term('Style')('Secondary Selected'),
 });
 
 const WithDisabled = asButtonToken(Base, {
-  // Replace the A with Button so disabled takes effect.
+  // Replace the A with Button so disabled prop takes effect.
   Components: {
     Wrapper: startWith(Button),
   },
@@ -142,6 +157,8 @@ export default {
   SecondarySelected,
   WithDisabled,
   WithArrow,
+  WithExternal,
+  WithDownload,
   WhereToBuy,
   WhereToBuyWithoutIcon,
 };
