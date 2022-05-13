@@ -26,6 +26,8 @@ const { addStaticReplacementPlugin } = require('@bodiless/webpack');
 const { onCreateNode, createSlug, createGitInfo } = require('./create-node');
 const createRedirectAlias = require('./create-redirect-alias');
 const Logger = require('./Logger');
+// eslint-disable-next-line import/order
+const gatsbyPluginImageOnCreateWebpackConfig= require('gatsby-plugin-image/gatsby-node').onCreateWebpackConfig;
 
 const logger = new Logger('gatsby');
 
@@ -278,5 +280,10 @@ exports.onCreateWebpackConfig = ({
         },
       },
     });
+  }
+  if (stage === 'build-html' && process.env.BODILESS_GATSBY_PLUGIN_IMAGE_OMIT) {
+    // Call onCreateWebpackConfig from gatsby-plugin-image.
+    // It sets two environment variables used then to generate the HTML.
+    gatsbyPluginImageOnCreateWebpackConfig({stage, plugins, actions});
   }
 };

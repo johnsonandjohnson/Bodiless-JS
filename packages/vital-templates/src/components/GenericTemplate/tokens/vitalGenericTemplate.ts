@@ -15,34 +15,51 @@
 import {
   on,
   as,
-  Img,
   addProps,
+  withDesign,
+  Img,
 } from '@bodiless/fclasses';
-import { vitalImage } from '@bodiless/vital-image';
+import { asBodilessChameleon } from '@bodiless/components';
 import { LayoutClean, vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
-import { withNodeKey } from '@bodiless/core';
+import { withNode, withNodeKey } from '@bodiless/core';
 import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
+import { vitalImage } from '@bodiless/vital-image';
+import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
+import { CardClean, vitalCard } from '@bodiless/vital-card';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
 import { GenericTemplateNodeKeys } from '../constants';
+
+const heroDefaultData = {
+  component: 'Image',
+};
+
+const heroUseOverrides = () => ({
+  groupLabel: 'Hero'
+});
 
 const Default = asGenericTemplateToken({
   Components: {
     PageWrapper: on(LayoutClean)(vitalLayout.Default),
     // @todo breadcrumb placeholder
     Breadcrumb: addProps({ children: 'Breadcrumb Placeholder', }),
-    // @todo in Hero ticket is change this to chameleon.
-    TopContent: on(Img)(vitalImage.Default, vitalImage.WithLandscapePlaceholder),
+    TopContent: as(
+      asBodilessChameleon('component', heroDefaultData, heroUseOverrides),
+      withDesign({
+        Image: on(Img)(vitalImage.Hero),
+        Video: on(YouTubeClean)(vitalYouTube.Hero),
+        HeroCard: on(CardClean)(vitalCard.Hero),
+      }),
+    ),
     Content: as(vitalFlowContainer.Default),
     BottomContent: as(vitalFlowContainer.Default),
   },
   Schema: {
-    TopContent: withNodeKey(GenericTemplateNodeKeys.TopContent),
+    TopContent: as(withNode, withNodeKey(GenericTemplateNodeKeys.TopContent)),
     Content: withNodeKey(GenericTemplateNodeKeys.Content),
     BottomContent: withNodeKey(GenericTemplateNodeKeys.BottomContent),
   },
   Spacing: {
-    TopContent: vitalSpacing.WithSiteXLConstraint,
     BreadcrumbWrapper: as(
       vitalSpacing.WithSiteMargin,
       vitalSpacing.WithSiteXLConstraint,

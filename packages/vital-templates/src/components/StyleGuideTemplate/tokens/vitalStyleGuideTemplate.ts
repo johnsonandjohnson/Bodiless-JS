@@ -38,7 +38,7 @@ const Base = asStyleGuideTemplateToken({
   Schema: {
     Title: withNodeKey('title'),
     Description: withNodeKey('description'),
-    Examples: withNodeKey('exmples'),
+    Examples: withNodeKey('examples'),
   },
 });
 
