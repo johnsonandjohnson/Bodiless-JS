@@ -71,14 +71,16 @@ export default designable(fooComponents, 'Foo')(FooBase);
 export const asFooToken = asVitalTokenSpec<FooComponents>();
 ```
 
-If your component is *always* static, wrap it in `withoutHydration()` (or
-`withoutHydrationInline()` for components which produce inline elements):
-```
+If your component is _always_ static, wrap it in `withoutHydration()` (or `withoutHydrationInline()`
+for components which produce inline elements):
+
+```js
 export default withoutHydration()(FooClean);
 ```
 
-If your component is *sometimes* static, export a similarly wrapped static version:
-```
+If your component is _sometimes_ static, export a similarly wrapped static version:
+
+```js
 export const FooStatic = withoutHydration()(FooClean);
 ```
 

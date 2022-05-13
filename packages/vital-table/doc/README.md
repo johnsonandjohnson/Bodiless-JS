@@ -38,8 +38,7 @@ gives a light gray header and footer.
 
 Define a Shadowing token collection as defined in [Shadow](./VitalElements/Shadow).
 
-File to shadow:
-[`Table`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-table/src/components/Table/tokens/vitalTable.ts ':target=_blank')
+File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-table/Table.ts`
 
 ```js
 import { vitalTableBase } from '@bodiless/vital-table';
