@@ -69,12 +69,15 @@ const useAddItem = () => {
   return (item: string) => {
     const items = getItems();
     const index = items.findIndex(item$ => item$ === item);
+    const newItemId = v4();
     const newItems = [
       ...items.slice(0, index + 1),
-      v4(),
+      newItemId,
       ...items.slice(index + 1),
     ];
     setItems(newItems);
+
+    return newItemId;
   };
 };
 
