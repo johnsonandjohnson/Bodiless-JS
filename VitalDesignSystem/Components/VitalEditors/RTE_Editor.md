@@ -43,8 +43,7 @@ defined in the Schema Domain.
 
 Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
 
-File to shadow:
-[`vitalRichText`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-editors/src/components/RichText/tokens/vitalRichText.ts)
+File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-editors/RichText.ts`
 
 #### Via Overriding Specific Existing Styles Using Vital Rich Text Editor
 

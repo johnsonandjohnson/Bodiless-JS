@@ -119,6 +119,7 @@
         - [Header](/VitalDesignSystem/Components/VitalLayout/Header)
         - [Footer](/VitalDesignSystem/Components/VitalLayout/Footer)
       - [Vital Link](/VitalDesignSystem/Components/VitalLink)
+      - [Vital List](/VitalDesignSystem/Components/VitalList)
       - [Vital Meta](/VitalDesignSystem/Components/VitalMeta/)
         - [Share](/VitalDesignSystem/Components/VitalMeta/Share)
         - [SEO](/VitalDesignSystem/Components/VitalMeta/SEO)
