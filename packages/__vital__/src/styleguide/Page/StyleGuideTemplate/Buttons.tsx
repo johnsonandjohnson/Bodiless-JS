@@ -49,12 +49,6 @@ const PrimaryDisabledButton = as(
   vitalButtons.WithDisabled,
   withNodeKey('primarybutton'),
 )(ButtonClean);
-const PrimaryButtonDownloadExternal = as(
-  vitalButtons.Primary,
-  vitalButtons.WithExternal,
-  vitalButtons.WithDownload,
-  withNodeKey('primarybutton'),
-)(ButtonClean);
 const SecondarySelectedButton = as(
   vitalButtons.SecondarySelected,
   withNodeKey('secondarybutton'),
@@ -62,12 +56,6 @@ const SecondarySelectedButton = as(
 const SecondaryDisabledButton = as(
   vitalButtons.Secondary,
   vitalButtons.WithDisabled,
-  withNodeKey('secondarybutton'),
-)(ButtonClean);
-const SecondaryButtonDownloadExternal = as(
-  vitalButtons.Secondary,
-  vitalButtons.WithExternal,
-  vitalButtons.WithDownload,
   withNodeKey('secondarybutton'),
 )(ButtonClean);
 
@@ -120,7 +108,6 @@ const Examples = (props: any) => (
       <PrimaryButton />
       <PrimarySelectedButton />
       <PrimaryDisabledButton />
-      <PrimaryButtonDownloadExternal />
     </div>
     <C.H3>Primary Buttons With Hover Arrows</C.H3>
     <div className="flex flex-wrap w-full p-8 space-x-4">
@@ -133,7 +120,6 @@ const Examples = (props: any) => (
       <SecondaryButton />
       <SecondarySelectedButton />
       <SecondaryDisabledButton />
-      <SecondaryButtonDownloadExternal />
     </div>
     <C.H3>Secondary Buttons With Hover Arrows</C.H3>
     <div className="flex flex-wrap w-full p-8 space-x-4">

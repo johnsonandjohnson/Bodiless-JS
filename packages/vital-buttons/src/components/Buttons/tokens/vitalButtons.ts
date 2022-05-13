@@ -25,7 +25,7 @@ import {
 import { withPlaceholder } from '@bodiless/components';
 import { vitalColor } from '@bodiless/vital-elements';
 import { vitalEditorPlain, EditorPlainClean } from '@bodiless/vital-editors';
-import { vitalLink } from '@bodiless/vital-link';
+import { asEditableLink, vitalLink } from '@bodiless/vital-link';
 import { withNodeKey } from '@bodiless/core';
 import { asButtonToken } from '../ButtonClean';
 import { WhereToBuy, WhereToBuyWithoutIcon } from './vitalWTB';
@@ -39,10 +39,11 @@ const ButtonThemeStyle = as(
 
 const Base = asButtonToken({
   Layout: {
-    Wrapper: 'flex flex-row-reverse group justify-center',
+    Wrapper: 'flex group justify-center',
   },
   Theme: {
-    Wrapper: as(ButtonThemeStyle, vitalLink.WithDownloadStyles, vitalLink.WithExternalStyles),
+    _: as(vitalLink.WithDownloadStyles, vitalLink.WithExternalStyles),
+    Wrapper: ButtonThemeStyle,
   },
   Spacing: {
     Wrapper: 'px-6 py-3.5',
@@ -54,8 +55,8 @@ const Base = asButtonToken({
     Body: withPlaceholder('Link'),
   },
   Schema: {
+    _: asEditableLink(),
     Body: withNodeKey('buttontext'),
-    Wrapper: vitalLink.Default,
   },
   A11y: {
     Wrapper: addProps({ role: 'button' }),
@@ -63,19 +64,10 @@ const Base = asButtonToken({
   Meta: flowHoc.meta.term('Type')('Buttons'),
 });
 
-// TO DO -- don't work.
-const WithExternal = asButtonToken(Base, {
-  Theme: {
-    Wrapper: vitalLink.WithExternalStyles,
+const WithArrow = asButtonToken({
+  Layout: {
+    Wrapper: 'flex-row-reverse',
   },
-});
-const WithDownload = asButtonToken(Base, {
-  Theme: {
-    Wrapper: vitalLink.WithDownloadStyles,
-  },
-});
-
-const WithArrow = asButtonToken(Base, {
   Components: {
     Icon: replaceWith(Span),
   },
@@ -131,7 +123,7 @@ const SecondarySelected = asButtonToken(Base, {
   Meta: flowHoc.meta.term('Style')('Secondary Selected'),
 });
 
-const WithDisabled = asButtonToken(Base, {
+const WithDisabled = asButtonToken({
   // Replace the A with Button so disabled prop takes effect.
   Components: {
     Wrapper: startWith(Button),
@@ -157,8 +149,6 @@ export default {
   SecondarySelected,
   WithDisabled,
   WithArrow,
-  WithExternal,
-  WithDownload,
   WhereToBuy,
   WhereToBuyWithoutIcon,
 };
