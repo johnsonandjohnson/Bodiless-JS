@@ -436,7 +436,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const file = path.join(dest, 'edit/platform.custom.sh');
     if (!fs.existsSync(file)) return Promise.resolve();
     const data = await fs.readFile(file);
-    const content = JSON.parse(data.toString());
+    const content = data.toString();
     // Remove "npm run build:packages"
     const updatedContent = content.replace(/\n.*npm run build:packages.*$/gm, '');
     return fs.writeFile(file, updatedContent);
