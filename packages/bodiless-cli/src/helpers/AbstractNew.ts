@@ -432,7 +432,16 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
   async updatePshConfig() {
     const dest = await this.getArg('dest');
     const file = path.join(dest, 'edit/platform.custom.sh');
-    if (!fs.existsSync(file)) return Promise.resolve();
+
+    const hasLocalPackages = (dir = './packages') => {
+      if (!fs.existsSync(dir)) return false;
+      if (fs.readdirSync(dir).filter(sub => !sub.includes('.')).length > 0) {
+        return true;
+      }
+      return false;
+    };
+
+    if (!fs.existsSync(file) || hasLocalPackages()) return Promise.resolve();
     const data = await fs.readFile(file);
     const content = data.toString();
     // Remove "npm run build:packages"
