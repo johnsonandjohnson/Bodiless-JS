@@ -430,8 +430,6 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
   }
 
   async updatePshConfig() {
-    const template = await this.getArg('site-template');
-    if (template === NO_TEMPLATE) return Promise.resolve();
     const dest = await this.getArg('dest');
     const file = path.join(dest, 'edit/platform.custom.sh');
     if (!fs.existsSync(file)) return Promise.resolve();
