@@ -12,23 +12,25 @@
  * limitations under the License.
  */
 
-/*
-import { withPrependChild } from '@bodiless/core';
-import { vitalHelmet, HelmetClean, asHelmetToken} from '@bodiless/vital-layout';
-import { on } from '@bodiless/fclasses';
-import { as, replaceWith, flowHoc } from '@bodiless/fclasses';
-import { DefaultPageGA4DataLayerHelmet, GA4DataLayerProductItemHelmet } from '@bodiless/ga4';
-*/
 import { replaceWith } from '@bodiless/fclasses';
 import { GA4DataLayerProductItemHelmet } from '@bodiless/ga4';
+import { vitalImage } from '@bodiless/vital-image';
 import { asPDPTemplateToken } from '../PDPTemplateClean';
 import { vitalGenericTemplate } from '../../GenericTemplate';
 
-const Default = asPDPTemplateToken({
-  ...vitalGenericTemplate.Default,
+const Default = asPDPTemplateToken(vitalGenericTemplate.Default, {
   Components: {
-    ...vitalGenericTemplate.Default.Components,
+    TopContent: replaceWith(() => null),
     GA4Helmet: replaceWith(GA4DataLayerProductItemHelmet),
+    ProductImage: vitalImage.Default,
+  },
+  Layout: {
+    ContentWrapper: 'flex',
+    ProductImageWrapper: 'w-full lg:w-1/2',
+    ProductInfoWrapper: 'w-full lg:w-1/2',
+  },
+  Spacing: {
+    ContentWrapper: 'space-x-4 mb-4',
   },
 });
 

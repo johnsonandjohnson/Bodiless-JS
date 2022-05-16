@@ -16,6 +16,7 @@ import React from 'react';
 import {
   designable,
   Div,
+  Img,
   Fragment,
 } from '@bodiless/fclasses';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
@@ -31,7 +32,11 @@ const pdpTemplateComponents: PDPTemplateComponents = {
   TopWrapper: Div,
   TopContent: FlowContainerClean,
   ContentWrapper: Div,
-  Content: FlowContainerClean,
+  ProductImageWrapper: Div,
+  ProductImage: Img,
+  ProductInfoWrapper: Div,
+  ProductInfo: FlowContainerClean,
+  ProductMoreInfo: Fragment,
   BottomWrapper: Div,
   BottomContent: FlowContainerClean,
 };
@@ -48,8 +53,13 @@ const PDPTemplateBase = (props: BasePDPTemplateProps) => {
         <C.TopContent />
       </C.TopWrapper>
       <C.ContentWrapper>
-        PRODUCT DETAIL PAGE STUB
-        <C.Content />
+        <C.ProductImageWrapper>
+          <C.ProductImage />
+          <C.ProductMoreInfo />
+        </C.ProductImageWrapper>
+        <C.ProductInfoWrapper>
+          <C.ProductInfo />
+        </C.ProductInfoWrapper>
       </C.ContentWrapper>
       <C.BottomWrapper>
         <C.BottomContent />

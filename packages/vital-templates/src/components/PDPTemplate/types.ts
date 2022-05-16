@@ -22,7 +22,11 @@ export type PDPTemplateComponents = {
   TopWrapper: ComponentOrTag<any>,
   TopContent: ComponentOrTag<any>,
   ContentWrapper: ComponentOrTag<any>,
-  Content: ComponentOrTag<any>,
+  ProductImageWrapper: ComponentOrTag<any>,
+  ProductImage: ComponentOrTag<any>,
+  ProductInfoWrapper: ComponentOrTag<any>,
+  ProductInfo: ComponentOrTag<any>,
+  ProductMoreInfo: ComponentOrTag<any>,
   BottomWrapper: ComponentOrTag<any>,
   BottomContent: ComponentOrTag<any>,
 };
