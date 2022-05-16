@@ -12,5 +12,10 @@
  * limitations under the License.
  */
 
-// @todo Rename to index.bl-edit.ts when the static image is fixed.
-export { default as vitalImage } from './tokens';
+export * from './schemas/FAQ';
+export * from './schemas/Product';
+export * from './schemas/Video';
+export { withOrganizationSchema, WithOrganizationSchema } from './schemas/Organization';
+export { withWebSchema, webSchemaPropList, WithWebSchema } from './schemas/Web';
+export * from './StructureDataProvider';
+export * from './util';

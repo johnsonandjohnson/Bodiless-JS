@@ -162,6 +162,18 @@ const Rest = asElementToken({
   Meta: meta,
 });
 
+// Variant testing autoprefixer
+const Gradient = asElementToken({
+  Core: {
+    _: vitalFontSize.L,
+  },
+  Theme: {
+    _: as('bg-clip-text text-transparent bg-gradient-to-r',
+      'from-vital-secondary-eyebrow via-vital-primary-interactive to-vital-secondary-eyebrow',),
+  },
+  Meta: meta,
+});
+
 export default {
   Link,
   H1,
@@ -172,4 +184,5 @@ export default {
   Body,
   Eyebrow,
   Rest,
+  Gradient,
 };

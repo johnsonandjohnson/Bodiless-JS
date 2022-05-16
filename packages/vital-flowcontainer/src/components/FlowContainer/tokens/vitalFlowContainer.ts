@@ -17,18 +17,23 @@ import {
   addProps, replaceWith, as, on, flowHoc,
 } from '@bodiless/fclasses';
 import {
-  withMandatoryCategories, withAllTitlesFromTerms, ifComponentSelector,
+  withMandatoryCategories,
+  withAllTitlesFromTerms,
+  ifComponentSelector,
+  withLibraryComponents,
 } from '@bodiless/layouts';
 import { asFluidToken, vitalSpacing } from '@bodiless/vital-elements';
 import { vitalImageFlowContainer } from '@bodiless/vital-image';
 import { vitalEditorsFlowContainer } from '@bodiless/vital-editors';
+import { vitalYouTubeFlowContainer } from '@bodiless/vital-youtube';
 import { vitalListFlowContainer } from '@bodiless/vital-list';
+import { vitalCardFlowContainer } from '@bodiless/vital-card';
 import { vitalTableFlowContainer } from '@bodiless/vital-table';
 
 import FlowContainerClean, { FlowContainerPreview } from '../FlowContainerClean';
 
 const blacklistCategories = ['Group'];
-const mandatoryCateogries = ['Type'];
+const mandatoryCategories = ['Type'];
 
 /**
  * Token which creates the VitalDS Default Base for a Flow Container
@@ -37,7 +42,7 @@ const Base = asFluidToken({
   Core: {
     _: as(
       withAllTitlesFromTerms({ blacklistCategories }),
-      withMandatoryCategories(mandatoryCateogries),
+      withMandatoryCategories(mandatoryCategories),
       addProps({ blacklistCategories }),
     ),
     // @todo restore tools and component id badge
@@ -106,7 +111,9 @@ const AsFlowContainerItem = asFluidToken({
 const WithBaseVariations = asFluidToken(
   vitalImageFlowContainer.WithImageVariations,
   vitalEditorsFlowContainer.WithEditorVariations,
+  vitalYouTubeFlowContainer.WithYouTubeVariations,
   vitalListFlowContainer.WithListVariations,
+  vitalCardFlowContainer.WithCardVariations,
   vitalTableFlowContainer.WithTableVariations,
 );
 
@@ -159,6 +166,18 @@ const Hero = asFluidToken(
   WithBaseVariations,
 );
 
+/**
+ * Token which adds content library functionality to flow container.
+ */
+const WithContentLibrary = asFluidToken(
+  {
+    ...Default,
+    Core: {
+      _: withLibraryComponents()
+    },
+  },
+);
+
 export default {
   Base,
   Default,
@@ -169,4 +188,5 @@ export default {
   WithFullWidthConstraint,
   WithTabletOneThirdConstraint,
   WithSingleConstraint,
+  WithContentLibrary,
 };

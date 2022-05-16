@@ -30,7 +30,6 @@ import {
   withHtmlDeserializer,
   asPreview,
   withBoldMeta,
-  withUnderlineMeta,
   withSuperScriptMeta,
   withHeader1Meta,
   withHeader2Meta,
@@ -72,7 +71,6 @@ const Default = asVitalTokenSpec()({
   Core: {
     paragraph: as(replaceWith(P), asBlock as HOC),
     Bold: withBoldMeta,
-    Underline: withUnderlineMeta,
     Link: replaceWith(LinkClean),
     SuperScript: withSuperScriptMeta,
     H1: withHeader1Meta,
@@ -93,7 +91,6 @@ const Default = asVitalTokenSpec()({
   Theme: {
     paragraph: vitalTypography.Body,
     Bold: vitalTextDecoration.Bold,
-    Underline: vitalTextDecoration.Underline,
     SuperScript: vitalTextDecoration.Superscript,
     H1: vitalTypography.H1,
     H2: vitalTypography.H2,
@@ -112,8 +109,15 @@ const Default = asVitalTokenSpec()({
 
 const Basic = asVitalTokenSpec()({
   ...Default,
-  Core: pick(Default.Core, 'paragraph', 'Bold', 'Underline', 'Link', 'SuperScript'),
-  Theme: pick(Default.Theme, 'paragraph', 'Bold', 'Underline', 'Link', 'SuperScript'),
+  Core: pick(Default.Core, 'paragraph', 'Bold', 'Link', 'SuperScript'),
+  Theme: pick(Default.Theme, 'paragraph', 'Bold', 'Link', 'SuperScript'),
+});
+
+const BasicNoLink = asVitalTokenSpec()({
+  ...Basic,
+  Core: pick(Basic.Core, 'paragraph', 'Bold', 'SuperScript'),
+  Theme: pick(Basic.Theme, 'paragraph', 'Bold', 'SuperScript'),
+  Behavior: {},
 });
 
 const Copyright = asVitalTokenSpec()({
@@ -142,6 +146,7 @@ const Copyright = asVitalTokenSpec()({
 export default {
   Default,
   Basic,
+  BasicNoLink,
   AsFlowContainerItem,
   Copyright,
 };

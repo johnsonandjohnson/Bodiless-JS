@@ -16,7 +16,7 @@ import {
 // the `ServerSideWithoutHydration.test.tsx` file in this folder.
 //
 // Result of: ReactDOMServer.renderToString(<DryComponent />);
-export const dryInteractive = '<div data-no-hydrate="true" id="root-" data-reactroot=""><section>This component has<!-- --> not<!-- --> been hydrated.</section></div>';
+export const dryInteractive = '<div data-no-hydrate="true" id="b46d9aa67b2042ae283d4153251fe4e5" data-reactroot=""><section>This component has<!-- --> not<!-- --> been hydrated.</section></div>';
 
 // Result of: ReactDOMServer.renderToString(
 //  <RemountingComponent>
