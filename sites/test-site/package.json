@@ -43,6 +43,7 @@
     "@bodiless/table": "^1.0.0-beta.18",
     "@bodiless/tokens": "^1.0.0-beta.18",
     "@bodiless/ui": "^1.0.0-beta.18",
+    "@bodiless/vital-buttons": "^1.0.0-beta.18",
     "@bodiless/vital-editors": "^1.0.0-beta.18",
     "@bodiless/vital-elements": "^1.0.0-beta.18",
     "@bodiless/vital-flowcontainer": "^1.0.0-beta.18",

@@ -5,7 +5,7 @@ Fonts were created with [Fontello](https://fontello.com/).
 The icons used are in /icons folder.
 
 To additional icons and update font.
-1. Upload the svgs
+1. Upload the SVGs.
 1. Set the prefix to icon- (under wrench)
 1. Name the webfont buttonicons
 1. Customize the Names & codes
