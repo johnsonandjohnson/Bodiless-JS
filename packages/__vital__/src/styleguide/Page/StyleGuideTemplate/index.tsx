@@ -19,8 +19,11 @@ import { Header } from './Header';
 import { FlowContainer } from './FlowContainer';
 import { Images } from './Images';
 import { Footer } from './Footer';
+import { Card } from './Card';
+import { Table } from './Table';
 import { List } from './List';
 import { _default } from './_default';
+import { Video } from './Video';
 
 export const __vital__StyleGuideTemplate = {
   _default,
@@ -32,5 +35,8 @@ export const __vital__StyleGuideTemplate = {
   Images,
   FlowContainer,
   Footer,
+  Video,
+  Card,
+  Table,
   List,
 };

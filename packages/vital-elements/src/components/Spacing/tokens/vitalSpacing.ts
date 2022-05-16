@@ -28,7 +28,7 @@ const meta = {
  * max-width (WithSiteXLConstraint).
  */
 export default asTokenGroup(meta)({
-  WithSiteMargin: 'mx-site-percent md:mx-md-site-percent xl:px-40',
+  WithSiteMargin: 'mx-site-percent md:mx-md-site-percent 2xl:px-40',
   WithSiteXLConstraint: '2xl:container 2xl:mx-auto',
   Gutter: 'p-1 md:p-2 lg:p-3',
   GutterOffset: '-mx-1 md:-mx-2 lg:-mx-3',

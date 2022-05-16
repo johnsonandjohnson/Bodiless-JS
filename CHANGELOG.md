@@ -3,6 +3,86 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.18](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.17...v1.0.0-beta.18) (2022-05-11)
+
+
+### Bug Fixes
+
+* **gatsby-theme-bodiless:** add autoprefixer ([#1685](https://github.com/johnsonandjohnson/bodiless-js/issues/1685)) ([f501c3a](https://github.com/johnsonandjohnson/bodiless-js/commit/f501c3a3b9d9a3efc54375bd4ba89e23d3931732))
+
+
+
+
+
+# [1.0.0-beta.17](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2022-05-11)
+
+**Note:** Version bump only for package bodiless-js
+
+
+
+
+
+# [1.0.0-beta.16](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2022-05-11)
+
+
+### Features
+
+* **vital-flowcontainer, --vital--:** Add content library functionality to vital flow container ([#1733](https://github.com/johnsonandjohnson/bodiless-js/issues/1733)) ([fbe1907](https://github.com/johnsonandjohnson/bodiless-js/commit/fbe19078e6f7e8b7810f7d87f95795ef49b168d3))
+
+
+
+
+
+# [1.0.0-beta.15](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2022-05-10)
+
+
+### Features
+
+* **playwright:** add first playwright test ([#1735](https://github.com/johnsonandjohnson/bodiless-js/issues/1735)) ([0c9e0a4](https://github.com/johnsonandjohnson/bodiless-js/commit/0c9e0a44a4ee8fc6dca8edfc5a4c49a524a1d681))
+
+
+
+
+
+# [1.0.0-beta.14](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.13...v1.0.0-beta.14) (2022-05-05)
+
+**Note:** Version bump only for package bodiless-js
+
+
+
+
+
+# [1.0.0-beta.13](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2022-05-05)
+
+
+### Bug Fixes
+
+* **bodiless-layouts:** only orange on hover ([#1677](https://github.com/johnsonandjohnson/bodiless-js/issues/1677)) ([90b3f13](https://github.com/johnsonandjohnson/bodiless-js/commit/90b3f13980c14c7f761921cf53e31031fe608a5f))
+* trigger setup updated ([#1650](https://github.com/johnsonandjohnson/bodiless-js/issues/1650)) ([dc7d0f2](https://github.com/johnsonandjohnson/bodiless-js/commit/dc7d0f2c49020f29296d3a29a68b66154fc7abcb))
+* **vital-elements,layout,nav:** fix breakpt issues ([#1664](https://github.com/johnsonandjohnson/bodiless-js/issues/1664)) ([8026a2e](https://github.com/johnsonandjohnson/bodiless-js/commit/8026a2e54ccfa64815415978802df1065429ccdc))
+
+
+
+
+
+# [1.0.0-beta.12](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2022-05-02)
+
+
+### Bug Fixes
+
+* **bodiless-backend:** copy root repo credential helper to tmp clone ([#1674](https://github.com/johnsonandjohnson/bodiless-js/issues/1674)) ([2caa210](https://github.com/johnsonandjohnson/bodiless-js/commit/2caa2103147424bcb7906d08ab7a59e6e6822a3b))
+* **bodiless-backend:** Fix image assets paths to be replaced on clone operation ([#1652](https://github.com/johnsonandjohnson/bodiless-js/issues/1652)) ([925cc59](https://github.com/johnsonandjohnson/bodiless-js/commit/925cc593f212df42b6979e4e3aebb8a5796b080c))
+* **vital-table:** update to beta.11 ([#1670](https://github.com/johnsonandjohnson/bodiless-js/issues/1670)) ([83e04fe](https://github.com/johnsonandjohnson/bodiless-js/commit/83e04fe8850a141a74ca824f6d728083c238238b))
+
+
+### Features
+
+* **vital-table:** add vital table ([#1598](https://github.com/johnsonandjohnson/bodiless-js/issues/1598)) ([cb145ed](https://github.com/johnsonandjohnson/bodiless-js/commit/cb145ed8b22fd0d87f9bbd3eafbefcdfa1444c65))
+
+
+
+
+
 # [1.0.0-beta.11](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-04-28)
 
 

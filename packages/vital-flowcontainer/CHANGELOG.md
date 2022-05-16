@@ -3,6 +3,68 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.18](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.17...v1.0.0-beta.18) (2022-05-11)
+
+**Note:** Version bump only for package @bodiless/vital-flowcontainer
+
+
+
+
+
+# [1.0.0-beta.17](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2022-05-11)
+
+**Note:** Version bump only for package @bodiless/vital-flowcontainer
+
+
+
+
+
+# [1.0.0-beta.16](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2022-05-11)
+
+
+### Features
+
+* **vital-flowcontainer, --vital--:** Add content library functionality to vital flow container ([#1733](https://github.com/johnsonandjohnson/bodiless-js/issues/1733)) ([fbe1907](https://github.com/johnsonandjohnson/bodiless-js/commit/fbe19078e6f7e8b7810f7d87f95795ef49b168d3))
+
+
+
+
+
+# [1.0.0-beta.15](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2022-05-10)
+
+**Note:** Version bump only for package @bodiless/vital-flowcontainer
+
+
+
+
+
+# [1.0.0-beta.14](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.13...v1.0.0-beta.14) (2022-05-05)
+
+**Note:** Version bump only for package @bodiless/vital-flowcontainer
+
+
+
+
+
+# [1.0.0-beta.13](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2022-05-05)
+
+**Note:** Version bump only for package @bodiless/vital-flowcontainer
+
+
+
+
+
+# [1.0.0-beta.12](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2022-05-02)
+
+
+### Features
+
+* **vital-table:** add vital table ([#1598](https://github.com/johnsonandjohnson/bodiless-js/issues/1598)) ([cb145ed](https://github.com/johnsonandjohnson/bodiless-js/commit/cb145ed8b22fd0d87f9bbd3eafbefcdfa1444c65))
+
+
+
+
+
 # [1.0.0-beta.11](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-04-28)
 
 **Note:** Version bump only for package @bodiless/vital-flowcontainer

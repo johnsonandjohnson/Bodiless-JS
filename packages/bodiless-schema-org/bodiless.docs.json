@@ -1,0 +1,14 @@
+{
+  "Components": {
+    "SEO": {
+      "Schema.org": {
+        "README.md": "./doc/StructureData.md",
+        "Organization.md": "./doc/Organization.md",
+        "Website.md": "./doc/Website.md",
+        "assets": {
+          "SeoDataManagementHomepage.jpg": "./doc/assets/SeoDataManagementHomepage.jpg"
+        }
+      }
+    }
+  }
+}

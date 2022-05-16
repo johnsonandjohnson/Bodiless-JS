@@ -1,6 +1,7 @@
 html.js
 **/lib
 packages/gatsby-theme-bodiless/dist
+packages/gatsby-theme-bodiless/cjs
 packages/gatsby-theme-bodiless/index.js
 packages/gatsby-theme-bodiless/index.d.ts
 packages/bodiless-migration-tool/conf

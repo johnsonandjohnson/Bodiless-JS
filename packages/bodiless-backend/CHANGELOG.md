@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.18](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-beta.17...v1.0.0-beta.18) (2022-05-11)
+
+**Note:** Version bump only for package @bodiless/backend
+
+
+
+
+
+# [1.0.0-beta.17](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2022-05-11)
+
+**Note:** Version bump only for package @bodiless/backend
+
+
+
+
+
+# [1.0.0-beta.16](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2022-05-11)
+
+**Note:** Version bump only for package @bodiless/backend
+
+
+
+
+
+# [1.0.0-beta.15](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2022-05-10)
+
+**Note:** Version bump only for package @bodiless/backend
+
+
+
+
+
+# [1.0.0-beta.12](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2022-05-02)
+
+
+### Bug Fixes
+
+* **bodiless-backend:** copy root repo credential helper to tmp clone ([#1674](https://github.com/johnsonandjohnson/Bodiless-JS/issues/1674)) ([2caa210](https://github.com/johnsonandjohnson/Bodiless-JS/commit/2caa2103147424bcb7906d08ab7a59e6e6822a3b))
+* **bodiless-backend:** Fix image assets paths to be replaced on clone operation ([#1652](https://github.com/johnsonandjohnson/Bodiless-JS/issues/1652)) ([925cc59](https://github.com/johnsonandjohnson/Bodiless-JS/commit/925cc593f212df42b6979e4e3aebb8a5796b080c))
+
+
+
+
+
 # [1.0.0-beta.11](https://github.com/johnsonandjohnson/Bodiless-JS/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-04-28)
 
 

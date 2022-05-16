@@ -3,6 +3,65 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.18](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.17...v1.0.0-beta.18) (2022-05-11)
+
+**Note:** Version bump only for package @bodiless/vital-navigation
+
+
+
+
+
+# [1.0.0-beta.17](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2022-05-11)
+
+**Note:** Version bump only for package @bodiless/vital-navigation
+
+
+
+
+
+# [1.0.0-beta.16](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2022-05-11)
+
+**Note:** Version bump only for package @bodiless/vital-navigation
+
+
+
+
+
+# [1.0.0-beta.15](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2022-05-10)
+
+**Note:** Version bump only for package @bodiless/vital-navigation
+
+
+
+
+
+# [1.0.0-beta.14](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.13...v1.0.0-beta.14) (2022-05-05)
+
+**Note:** Version bump only for package @bodiless/vital-navigation
+
+
+
+
+
+# [1.0.0-beta.13](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2022-05-05)
+
+
+### Bug Fixes
+
+* **vital-elements,layout,nav:** fix breakpt issues ([#1664](https://github.com/johnsonandjohnson/bodiless-js/issues/1664)) ([8026a2e](https://github.com/johnsonandjohnson/bodiless-js/commit/8026a2e54ccfa64815415978802df1065429ccdc))
+
+
+
+
+
+# [1.0.0-beta.12](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2022-05-02)
+
+**Note:** Version bump only for package @bodiless/vital-navigation
+
+
+
+
+
 # [1.0.0-beta.11](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-04-28)
 
 **Note:** Version bump only for package @bodiless/vital-navigation
