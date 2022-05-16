@@ -3,7 +3,7 @@ const express = require('express');
 const {
   createDefaultContentPlugins,
   getSampleDefaultContentConfig,
-} = require('@bodiless/gatsby-theme-bodiless/dist/DefaultContent');
+} = require('@bodiless/gatsby-theme-bodiless/cjs/dist/DefaultContent');
 const { getDisabledPages } = require('@bodiless/components/node-api');
 const getSSIEntities = require('@bodiless/gatsby-plugin-ssi/read-ssi-entities');
 const {

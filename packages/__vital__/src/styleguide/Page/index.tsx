@@ -27,6 +27,8 @@ const {
   FlowContainer,
   Images,
   Footer,
+  Video,
+  Card,
   Table,
   List,
   Buttons,
@@ -45,6 +47,8 @@ const Default = asFluidToken({
     FlowContainer,
     Images,
     Footer,
+    Video,
+    Card,
     Table,
     List,
     Buttons

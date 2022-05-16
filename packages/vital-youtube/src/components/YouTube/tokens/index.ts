@@ -12,5 +12,6 @@
  * limitations under the License.
  */
 
-export * from './index.temp';
-export { default as vitalImageBase } from './tokens/vitalImage';
+import vitalYouTube from './vitalYouTube';
+
+export default vitalYouTube;

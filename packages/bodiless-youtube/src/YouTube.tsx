@@ -23,24 +23,25 @@ import type { AsBodiless } from '@bodiless/core';
 import type { IframeProps, IframeData } from '@bodiless/components';
 
 /**
- * YouTube embed player parameters
+ * YouTube embed player parameters.
  *
  * @see https://developers.google.com/youtube/player_parameters#Parameters
+ * All parameters are optional.
  */
 type YouTubePlayerSettings = {
-  autoplay: boolean | 0 | 1,
-  cc_lang_pref: string,
-  cc_load_policy: boolean | 0 | 1,
-  controls: boolean | 0 | 1,
-  loop: boolean | 0 | 1,
-  enablejsapi: boolean | 0 | 1,
-  modestbranding: boolean | 0 | 1,
-  rel: boolean | 0 | 1,
-  mute: boolean | 0 | 1,
-  fs: boolean | 0 | 1,
-  origin: string,
-  version: number,
-  playlist: string,
+  autoplay?: boolean | 0 | 1,
+  cc_lang_pref?: string,
+  cc_load_policy?: boolean | 0 | 1,
+  controls?: boolean | 0 | 1,
+  loop?: boolean | 0 | 1,
+  enablejsapi?: boolean | 0 | 1,
+  modestbranding?: boolean | 0 | 1,
+  rel?: boolean | 0 | 1,
+  mute?: boolean | 0 | 1,
+  fs?: boolean | 0 | 1,
+  origin?: string,
+  version?: number,
+  playlist?: string,
 };
 
 type Props = IframeProps & {

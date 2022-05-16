@@ -25,7 +25,9 @@ import {
 import { asFluidToken, vitalSpacing } from '@bodiless/vital-elements';
 import { vitalImageFlowContainer } from '@bodiless/vital-image';
 import { vitalEditorsFlowContainer } from '@bodiless/vital-editors';
+import { vitalYouTubeFlowContainer } from '@bodiless/vital-youtube';
 import { vitalListFlowContainer } from '@bodiless/vital-list';
+import { vitalCardFlowContainer } from '@bodiless/vital-card';
 import { vitalTableFlowContainer } from '@bodiless/vital-table';
 import { vitalButtonFlowContainer } from '@bodiless/vital-buttons';
 
@@ -110,7 +112,9 @@ const AsFlowContainerItem = asFluidToken({
 const WithBaseVariations = asFluidToken(
   vitalImageFlowContainer.WithImageVariations,
   vitalEditorsFlowContainer.WithEditorVariations,
+  vitalYouTubeFlowContainer.WithYouTubeVariations,
   vitalListFlowContainer.WithListVariations,
+  vitalCardFlowContainer.WithCardVariations,
   vitalTableFlowContainer.WithTableVariations,
   vitalButtonFlowContainer.WithButtonVariations,
 );

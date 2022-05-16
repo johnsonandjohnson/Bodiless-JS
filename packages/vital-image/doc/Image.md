@@ -22,6 +22,27 @@ The Vital Image Component provides a set of tokens to compose an Image Component
 | `EditableNoEffect`         | A token which recomposes the base image as a NoEffect Image. |
 | `WithLandscapePlaceholder` | A token which applies a Landscape Placeholder.               |
 | `WithLink`                 | A token which wraps the image in a link.                     |
+| `WithFullWidthImage`       | A token which makes the image full-width.                    |
+
+### Hero Image
+
+The `vitalImage` token collection includes a `Hero` token, which renders a full-width Bodiless 
+Image with a BlurUp. Its functionality is essentially the same as combining the `Default` and
+ `WithLandscapePlaceholder` tokens. Example usage:
+
+```js
+import { vitalImage } from '@bodiless/vital-image';
+import { as, Img } from '@bodiless/fclasses';
+
+const ImageHero = as(vitalImage.Hero)(Img);
+
+const ExamplePage = () => (
+  <ExampleWrapper>
+    <ImageHero />
+    ...
+  </ExampleWrapper>
+);
+``` 
 
 ### Usage
 
