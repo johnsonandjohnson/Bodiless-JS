@@ -30,6 +30,7 @@ const productDefaultDataLayer = {
       ecommerce: null,
     },
   },
+  dataLayerType: 'ecommerce',
 };
 
 const productItems = [
@@ -38,15 +39,15 @@ const productItems = [
   { name: 'GTIN', label: 'Product/Item GTIN', path: 'productObject.ecommerce.items.0.gtin' },
   { name: 'item_name', label: 'Product/Item Name', path: 'productObject.ecommerce.items.0.item_name' },
   { name: 'category', label: 'Product/Item Category', path: 'productObject.ecommerce.items.0.item_category' },
-  { name: 'variant', label: 'Product/Item Variant Name', path: 'productObject.ecommerce.items.0.variant' },
+  { name: 'item_variant', label: 'Product/Item Variant Name', path: 'productObject.ecommerce.items.0.variant' },
   { name: 'affiliation', label: 'Product/Item Affiliation', path: 'productObject.ecommerce.items.0.affiliation' },
   { name: 'currency', label: 'Product/Item Currency', path: 'productObject.ecommerce.items.0.currency' },
   { name: 'item_out_of_stock', label: 'Product/Item Out of Stock', path: 'productObject.ecommerce.items.0.item_out_of_stock' },
   { name: 'item_subscription_type', label: 'Product/Item Subscription Type', path: 'productObject.ecommerce.items.0.item_subscription_type' },
   { name: 'location_id', label: 'Product/Item Location ID', path: 'productObject.ecommerce.items.0.location_id' },
-  { name: 'price', label: 'Product/Item Price', path: 'productObject.ecommerce.items.0.price' },
-  { name: 'quantity', label: 'Product/Item Quantity', path: 'productObject.ecommerce.items.0.quantity' },
-  { name: 'brand', label: 'Product/Item Brand', path: 'productObject.ecommerce.items.0.brand' },
+  { name: 'price', label: 'Product/Item Price', path: 'productObject.ecommerce.items.0.price' }, // Needs to be a number
+  { name: 'quantity', label: 'Product/Item Quantity', path: 'productObject.ecommerce.items.0.quantity' }, // Needs to be a number
+  { name: 'item_brand', label: 'Product/Item Brand', path: 'productObject.ecommerce.items.0.brand' },
 ];
 
 const items = Object.entries(productItems);

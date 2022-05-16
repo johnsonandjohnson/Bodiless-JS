@@ -26,6 +26,7 @@ type Data = {
 export type DataLayer = {
   dataLayerName: string;
   dataLayerData?: any;
+  dataLayerType: string;
 };
 
 type Props = BaseProps & Data & DataLayer;
@@ -41,14 +42,14 @@ type Options = BaseOptions & {
  *
  * @param {any} dataLayer - The dataLayer Object.
  * @param {string} dataLayerName - The dataLayer name.
+ * @param {string} dataLayerName - The dataLayer type.
  *
  * Return {string} - Datalayer script.
  */
-const generateDataLayer = (dataLayer: any, dataLayerName: string) => {
+const generateDataLayer = (dataLayer: any, dataLayerName: string, dataLayerType: string) => {
   let result = `window.${dataLayerName} = window.${dataLayerName} || [];`;
   if (dataLayer !== undefined) {
-    const dataObject = dataLayer[Object.keys(dataLayer)[0]];
-    result += `window.${dataLayerName}.push({ ${dataObject.event}: null });`;
+    result += `window.${dataLayerName}.push({ ${dataLayerType}: null });`;
     Object.values(dataLayer).forEach((entry: any) => {
       result += `window.${dataLayerName}.push(${JSON.stringify(entry)});`;
     });
@@ -118,7 +119,7 @@ const withDataLayerScript = (
   props: Props,
 ) => {
   const {
-    dataLayerData, dataLayerName, children, ...rest
+    dataLayerData, dataLayerName, dataLayerType, children, ...rest
   } = props;
 
   // Only render on clientside
@@ -131,7 +132,11 @@ const withDataLayerScript = (
   return (
     <HelmetComponent {...rest}>
       {children}
-      <script {...(attributes)}>{generateDataLayer(dataLayerData, dataLayerName)}</script>
+      <script {...(attributes)}>
+        {
+          generateDataLayer(dataLayerData, dataLayerName, dataLayerType)
+        }
+      </script>
     </HelmetComponent>
   );
 };
