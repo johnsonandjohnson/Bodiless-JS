@@ -32,12 +32,6 @@ const plugins = [
     },
   },
   {
-    resolve: 'gatsby-plugin-manifest',
-    options: {
-      icon: 'src/images/favicon.png',
-    },
-  },
-  {
     resolve: '@bodiless/gatsby-theme-bodiless',
     options: {
       gatsbyImage: {
@@ -67,6 +61,13 @@ const plugins = [
         // Pass false to disable logging all resolving operations. Defaults to true.
         logging: true,
       }
+    },
+  },
+  {
+    resolve: 'gatsby-plugin-manifest',
+    options: {
+      icon: 'src/images/vitalds-favicon.png',
+      legacy: false,
     },
   },
   // {
