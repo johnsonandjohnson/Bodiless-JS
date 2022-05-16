@@ -20,7 +20,7 @@ const Default = asFluidToken({
   ...vitalYouTubeBase.Default,
   Components: {
     ...vitalYouTubeBase.Default.Components,
-    Wrapper: addProps({ 'data-shadowed-by': '__vitalstarter_:YouTube' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:YouTube' }),
   },
 });
 
