@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { asReadOnly } from '@bodiless/core';
+import { asReadOnly, withNodeKey } from '@bodiless/core';
 import { withoutLinkWhenLinkDataEmpty } from '@bodiless/components';
 import {
   withDesign,
@@ -43,6 +43,7 @@ const Base = asBreadcrumbsToken({
   },
   Schema: {
     _: flowHoc(
+      withNodeKey({ nodeCollection: 'site' }),
       withMenuTitleEditors(undefined, asReadOnly),
       withEditableStartingTrail(undefined, { nodeCollection: 'site' }),
       withEditableFinalTrail(),
