@@ -4,8 +4,8 @@
     "./scripts/*",
     "./packages/*/src/**/*",
     "./sites/*/src/**/*",
-   "./sites/*/scripts/*",
-   "./sites/*/*"
+    "./sites/*/scripts/*",
+    "./sites/*/*"
   ],
 }
 

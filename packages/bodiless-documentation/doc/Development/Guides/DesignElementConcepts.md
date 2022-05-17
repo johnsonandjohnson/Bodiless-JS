@@ -253,7 +253,7 @@ fixed on each page.
    (http://localhost:8000/gallery) and it should run exactly as it did before,
    except the gallery title is not bold.
 
-1. In `src/componets/Element/token.ts` add a tailwind class to `asBold`. 
+1. In `src/components/Element/token.ts` add a tailwind class to `asBold`. 
     ```ts
     const asBold = asElementToken('Font Weight')(
       addClasses('font-bold'),

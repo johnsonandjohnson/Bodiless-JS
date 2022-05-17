@@ -44,7 +44,8 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.0.23",
-    "tailwindcss-dir": "^4.0.0"
+    "tailwindcss-dir": "^4.0.0",
+    "postcss-cli": "9.1.0"
   },
   "peerDependencies": {
     "rc-tooltip": "^5.1.1",

@@ -14,6 +14,7 @@
 
 import {
   withNode,
+  withNodeKey,
   withParent,
 } from '@bodiless/core';
 import {
@@ -30,10 +31,12 @@ import {
   A,
   extendMeta,
   as,
+  withDesign,
 } from '@bodiless/fclasses';
 import { withImagePlaceholder } from '@bodiless/components';
 import { asBodilessLink, asBodilessImage } from '@bodiless/components-ui';
 import { asElementToken } from '@bodiless/vital-elements';
+import { withoutHydration } from '@bodiless/hydration';
 
 // @ts-ignore Cannot find module
 import landscapeImage from '../../../../assets/landscape_image.png';
@@ -61,7 +64,11 @@ const Base = asElementToken({
       asGatsbyImage,
       stylable,
       withGatsbyImageLogger(),
+      withoutHydration(),
     ),
+  },
+  Schema: {
+    _: withNodeKey('image'),
   },
   Meta: flowHoc.meta.term('Type')('Image'),
 });
@@ -162,6 +169,25 @@ const WithLink = asElementToken({
 });
 
 /**
+ * Token which makes the non-GatbsyImage <img> component full-width.
+ *
+ * When adding a new image into a page, it is placed as a normal <img> tag instead of a GatsbyImage
+ * component. After refreshing the page, it is rendered as a GatsbyImage, which is full-width by
+ * default. Although not desirable, this behavior is expected.
+ *
+ * Applying this token makes this <img> tag full-width, so it renders just like a GatsbyImage. This
+ * is only required if you don't want the image to "change its size" when refreshing the page
+ * after placing it.
+ */
+const WithFullWidthImage = asElementToken({
+  Layout: {
+    _: withDesign({
+      Image: 'w-full',
+    }),
+  }
+});
+
+/**
  * Token which recompose the base image as Plain Image.
 */
 const EditablePlain = asElementToken(Base, WithEditorPlain);
@@ -187,6 +213,15 @@ const WithEager = asElementToken({
   },
 });
 
+const Hero = asElementToken({
+  ...Default,
+  Compose: {
+    WithEager,
+    WithLandscapePlaceholder,
+    WithFullWidthImage,
+  },
+});
+
 export default {
   Base,
   Plain: EditablePlain,
@@ -199,5 +234,7 @@ export default {
   EditableNoEffect,
   WithLandscapePlaceholder,
   WithLink,
+  WithFullWidthImage,
   WithEager,
+  Hero,
 };
