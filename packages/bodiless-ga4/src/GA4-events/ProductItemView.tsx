@@ -45,8 +45,6 @@ const productItems = [
   { name: 'item_out_of_stock', label: 'Product/Item Out of Stock', path: 'productObject.ecommerce.items.0.item_out_of_stock' },
   { name: 'item_subscription_type', label: 'Product/Item Subscription Type', path: 'productObject.ecommerce.items.0.item_subscription_type' },
   { name: 'location_id', label: 'Product/Item Location ID', path: 'productObject.ecommerce.items.0.location_id' },
-  { name: 'price', label: 'Product/Item Price', path: 'productObject.ecommerce.items.0.price' }, // Needs to be a number
-  { name: 'quantity', label: 'Product/Item Quantity', path: 'productObject.ecommerce.items.0.quantity' }, // Needs to be a number
   { name: 'item_brand', label: 'Product/Item Brand', path: 'productObject.ecommerce.items.0.brand' },
 ];
 
