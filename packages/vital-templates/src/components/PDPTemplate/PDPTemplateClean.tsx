@@ -34,8 +34,13 @@ const pdpTemplateComponents: PDPTemplateComponents = {
   ContentWrapper: Div,
   ProductImageWrapper: Div,
   ProductImage: Img,
-  ProductInfoWrapper: Div,
-  ProductInfo: FlowContainerClean,
+  ProductDetailWrapper: Div,
+  ProductDescriptionWrapper: Fragment,
+  ProductDescription: FlowContainerClean,
+  ProductTitleWrapper: Div,
+  ProductTitle: Div,
+  ProductEyebrowWrapper: Div,
+  ProductEyebrow: Div,
   ProductMoreInfo: Fragment,
   BottomWrapper: Div,
   BottomContent: FlowContainerClean,
@@ -57,9 +62,17 @@ const PDPTemplateBase = (props: BasePDPTemplateProps) => {
           <C.ProductImage />
           <C.ProductMoreInfo />
         </C.ProductImageWrapper>
-        <C.ProductInfoWrapper>
-          <C.ProductInfo />
-        </C.ProductInfoWrapper>
+        <C.ProductDetailWrapper>
+          <C.ProductEyebrowWrapper>
+            <C.ProductEyebrow />
+          </C.ProductEyebrowWrapper>
+          <C.ProductTitleWrapper>
+            <C.ProductTitle />
+          </C.ProductTitleWrapper>
+          <C.ProductDescriptionWrapper>
+            <C.ProductDescription />
+          </C.ProductDescriptionWrapper>
+        </C.ProductDetailWrapper>
       </C.ContentWrapper>
       <C.BottomWrapper>
         <C.BottomContent />

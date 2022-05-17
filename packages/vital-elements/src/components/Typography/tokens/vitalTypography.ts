@@ -118,6 +118,27 @@ const H5 = asElementToken({
   Meta: meta,
 });
 
+const H1NoSpacing = asElementToken({
+  ...H1,
+  Spacing: {},
+});
+const H2NoSpacing = asElementToken({
+  ...H1,
+  Spacing: {},
+});
+const H3NoSpacing = asElementToken({
+  ...H1,
+  Spacing: {},
+});
+const H4NoSpacing = asElementToken({
+  ...H1,
+  Spacing: {},
+});
+const H5NoSpacing = asElementToken({
+  ...H1,
+  Spacing: {},
+});
+
 const Body = asElementToken({
   Core: {
     _: vitalFontSize.Base,
@@ -148,6 +169,10 @@ const Eyebrow = asElementToken({
   Spacing: {
     _: 'mb-3',
   },
+});
+const EyebrowNoSpacing = asElementToken({
+  ...Eyebrow,
+  Spacing: {},
 });
 
 // This probably will need a better name as Design team defines the uses of this token.
@@ -184,8 +209,14 @@ export default {
   H3,
   H4,
   H5,
+  H1NoSpacing,
+  H2NoSpacing,
+  H3NoSpacing,
+  H4NoSpacing,
+  H5NoSpacing,
   Body,
   Eyebrow,
+  EyebrowNoSpacing,
   Rest,
   Gradient,
 };

@@ -46,6 +46,7 @@
     "@bodiless/vital-flowcontainer": "^1.0.0-beta.18",
     "@bodiless/vital-image": "^1.0.0-beta.18",
     "@bodiless/vital-layout": "^1.0.0-beta.18",
+    "@bodiless/schema-org": "^1.0.0-beta.18",
     "@bodiless/vital-youtube": "^1.0.0-beta.18",
     "lodash": "^4.17.19"
   }
