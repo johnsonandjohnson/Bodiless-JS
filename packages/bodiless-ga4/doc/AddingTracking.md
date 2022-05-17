@@ -57,14 +57,22 @@ We provide some functions to facilitate:
   1. Define the data layer object
 
   ```
-    const productDefaultDataLayer = {
-      dataLayerName: 'dataLayer',
-      dataLayerData: {
-        productObject: {
-          event: 'product_view',
-        },
+  const productDefaultDataLayer = {
+    // Name of the Data Layer
+    dataLayerName: 'dataLayer',
+    // Data object -- this example sets of event and ecommerce object to push specific data.
+    dataLayerData: {
+      productObject: {
+        event: 'view_item',
+        ecommerce: null,
       },
-    };
+    },
+    /* 
+     * Data Type is used for the clear null event that is sent just prior to push of the actual event.
+     * This should almost always be identical to the name of the wrapper. 
+     */
+    dataLayerType: 'ecommerce',
+  };
   ```
 
   // Define a product Name editable field to be added to the GTM form.
