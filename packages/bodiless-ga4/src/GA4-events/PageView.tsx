@@ -37,7 +37,7 @@ export const defaultDataLayer = {
       },
     },
   },
-  dataLayerType: 'pageView',
+  dataLayerType: 'page_data',
 };
 
 // eslint-disable-next-line max-len
