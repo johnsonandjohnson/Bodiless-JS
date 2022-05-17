@@ -1,0 +1,28 @@
+[
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "When "
+      },
+      {
+        "data": {
+          "openModal": true,
+          "slatenode": {
+            "href": "/___docs/#/Components/Image/?id=select-and-configure-an-image",
+            "aria-label": "Image configuration documentation"
+          }
+        },
+        "type": "Link",
+        "children": [
+          {
+            "text": "configuring your image"
+          }
+        ]
+      },
+      {
+        "text": ", you can add alt and title text."
+      }
+    ]
+  }
+]
