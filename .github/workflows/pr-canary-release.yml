@@ -14,7 +14,7 @@ on:
       - main
 jobs:
   pr-canary-release:
-    if: ${{ contains(github.event.pull_request.title, 'canary') }}
+    if: ${{ contains(github.event.pull_request.title, '[canary]') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
