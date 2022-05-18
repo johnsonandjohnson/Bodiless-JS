@@ -16,6 +16,7 @@ import React from 'react';
 import {
   designable,
   Div,
+  Fragment,
 } from '@bodiless/fclasses';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { LayoutClean } from '@bodiless/vital-layout';
@@ -25,7 +26,7 @@ import { GenericTemplateComponents, BaseGenericTemplateProps } from './types';
 const genericTemplateComponents: GenericTemplateComponents = {
   PageWrapper: LayoutClean,
   BreadcrumbWrapper: Div,
-  Breadcrumb: Div,
+  Breadcrumb: Fragment,
   TopWrapper: Div,
   TopContent: FlowContainerClean,
   ContentWrapper: Div,
