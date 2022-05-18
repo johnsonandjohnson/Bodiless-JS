@@ -33,25 +33,25 @@ const Examples = () => (
     </Para>
     <Subtitle>Global Elements</Subtitle>
     <List>
-      <li><a href="./layout">Layout</a></li>
-      <li><a href="./header">Header</a></li>
-      <li><a href="./footer">Footer</a></li>
-      <li><a href="./editors">Editors</a></li>
-      <li><a href="./editors-monofont">Editors with MonoFont</a></li>
-      <li><a href="./typography">Typography</a></li>
+      <li><a href="./styleguide/layout">Layout</a></li>
+      <li><a href="./styleguide/header">Header</a></li>
+      <li><a href="./styleguide/footer">Footer</a></li>
+      <li><a href="./styleguide/editors">Editors</a></li>
+      <li><a href="./styleguide/editors-monofont">Editors with MonoFont</a></li>
+      <li><a href="./styleguide/typography">Typography</a></li>
     </List>
     <Subtitle>Components</Subtitle>
     <List>
-      <li><a href="./flow-container">Flow Container</a></li>
-      <li><a href="./images">Images</a></li>
-      <li><a href="./video">Video</a></li>
-      <li><a href="./list">List</a></li>
-      <li><a href="./card">Card</a></li>
-      <li><a href="./table">Table</a></li>
+      <li><a href="./styleguide/flow-container">Flow Container</a></li>
+      <li><a href="./styleguide/images">Images</a></li>
+      <li><a href="./styleguide/video">Video</a></li>
+      <li><a href="./styleguide/list">List</a></li>
+      <li><a href="./styleguide/card">Card</a></li>
+      <li><a href="./styleguide/table">Table</a></li>
     </List>
     <Subtitle>Templates</Subtitle>
     <List>
-      <li><a href="./generic-template">Generic Template</a></li>
+      <li><a href="./styleguide/generic-template">Generic Template</a></li>
     </List>
   </>
 );
