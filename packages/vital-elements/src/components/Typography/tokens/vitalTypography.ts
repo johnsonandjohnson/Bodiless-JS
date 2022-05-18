@@ -123,19 +123,19 @@ const H1NoSpacing = asElementToken({
   Spacing: {},
 });
 const H2NoSpacing = asElementToken({
-  ...H1,
+  ...H2,
   Spacing: {},
 });
 const H3NoSpacing = asElementToken({
-  ...H1,
+  ...H3,
   Spacing: {},
 });
 const H4NoSpacing = asElementToken({
-  ...H1,
+  ...H4,
   Spacing: {},
 });
 const H5NoSpacing = asElementToken({
-  ...H1,
+  ...H5,
   Spacing: {},
 });
 
