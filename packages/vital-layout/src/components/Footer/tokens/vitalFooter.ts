@@ -14,12 +14,35 @@
 
 import { withNode, withNodeKey } from '@bodiless/core';
 import { vitalRichText } from '@bodiless/vital-editors';
-import { vitalColor, vitalSpacing } from '@bodiless/vital-elements';
+import {
+  asVitalTokenSpec, vitalColor, vitalFontSize, vitalSpacing, vitalTextDecoration
+} from '@bodiless/vital-elements';
 import { vitalMenu } from '@bodiless/vital-navigation';
-import { as } from '@bodiless/fclasses';
+import { addProps, as } from '@bodiless/fclasses';
+import { vitalLink } from '@bodiless/vital-link';
 import { vitalRewards } from '../Rewards';
 import { vitalSocialLinks } from '../SocialLinks';
 import { asFooterToken } from '../FooterClean';
+
+const Copyright = asVitalTokenSpec()({
+  ...vitalRichText.BasicNoParagraphLinkStyling,
+  Theme: {
+    ...vitalRichText.BasicNoParagraphLinkStyling.Theme,
+    paragraph: as(
+      vitalColor.TextPrimaryFooterCopy,
+      vitalFontSize.XS,
+      vitalTextDecoration.Normal,
+    ),
+    Link: as(
+      vitalLink.Base,
+      vitalTextDecoration.Bold,
+      vitalTextDecoration.Underline,
+    ),
+  },
+  Content: {
+    _: addProps({ placeholder: 'Insert Copyright' }),
+  },
+});
 
 const Base = asFooterToken({
   Components: {
@@ -71,7 +94,7 @@ const Base = asFooterToken({
     Wrapper: vitalColor.BgSecondaryFooter,
   },
   Editors: {
-    Copyright: vitalRichText.Copyright,
+    Copyright,
   },
   Schema: {
     FooterMenu: withNodeKey({ nodeKey: 'footer', nodeCollection: 'site' }),

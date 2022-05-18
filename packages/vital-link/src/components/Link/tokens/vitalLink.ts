@@ -64,16 +64,9 @@ const WithDownloadStyles = asLinkToken({
 });
 
 /**
-   * Token which produces a default VitalDS editable link.
-   */
-const Default = asLinkToken({
-  /**
-     * VitalDS typography and colors.
-     */
-  Theme: {
-    _: as(WithDownloadStyles, WithExternalStyles),
-    Wrapper: as(vitalTypography.Link),
-  },
+  * Token which produces a base editable link.
+  */
+const Base = asLinkToken({
   /**
      * Makes the link editable. Nodekey must be provided separately.
      * Editor token should be applied after all composed tokens to ensure
@@ -81,6 +74,19 @@ const Default = asLinkToken({
      */
   Schema: {
     _: asEditableLink(),
+  },
+});
+
+/**
+   * Token which produces a default VitalDS editable link.
+   */
+const Default = asLinkToken(Base, {
+  /**
+     * VitalDS typography and colors.
+     */
+  Theme: {
+    _: as(WithDownloadStyles, WithExternalStyles),
+    Wrapper: as(vitalTypography.Link),
   },
 });
 
@@ -139,6 +145,7 @@ const WhereToBuyWithoutIcon = asLinkToken({
 });
 
 export default {
+  Base,
   Default,
   WithExternalStyles,
   WithDownloadStyles,

@@ -65,6 +65,7 @@ const Default = asGenericTemplateToken({
       vitalSpacing.WithSiteXLConstraint,
       'my-2.5',
     ),
+    TopWrapper: vitalSpacing.GutterBottom,
     // @todo move styling of breadcrumb to breadcrumb component when it exists.
     Breadcrumb: vitalTypography.Rest,
     ContentWrapper: as(

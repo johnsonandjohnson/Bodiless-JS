@@ -35,7 +35,7 @@ const Base = asCardToken({
     Wrapper: asBodilessLink(),
     Title: on(EditorPlainClean)(vitalEditorPlain.Default),
     Eyebrow: on(EditorPlainClean)(vitalEditorPlain.Default),
-    Description: on(RichTextClean)(vitalRichText.BasicNoLink),
+    Description: on(RichTextClean)(vitalRichText.BasicNoLinkNoParagraphStyling),
     CTAText: on(EditorPlainClean)(vitalEditorPlain.Default),
   },
   Content: {
@@ -165,13 +165,13 @@ const Hero = asCardToken({
     ...Base.Spacing,
     ContentWrapper: 'px-10',
     ImageWrapper: 'p-0',
+    TitleWrapper: 'mb-5 lg:mb-6',
     CTALink: 'px-8 py-4',
   },
   Theme: {
-    ...Base.Theme,
     CTAWrapper: vitalColor.BgPrimaryPage,
-    TitleWrapper: vitalTypography.H1,
-    DescriptionWrapper: vitalTypography.H4,
+    TitleWrapper: vitalTypography.H1NoSpacing,
+    DescriptionWrapper: vitalTypography.H4NoSpacing,
     CTALink: as(vitalLink.WithDownloadStyles, vitalLink.WithExternalStyles),
   },
   Meta: extendMeta(

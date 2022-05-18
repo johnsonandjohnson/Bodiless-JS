@@ -23,7 +23,6 @@ import {
   H4,
   H5,
   startWith,
-  removeClasses,
 } from '@bodiless/fclasses';
 import {
   asBlock,
@@ -44,8 +43,6 @@ import {
 import { ifComponentSelector } from '@bodiless/layouts';
 import {
   asVitalTokenSpec,
-  vitalColor,
-  vitalFontSize,
   vitalTextDecoration,
   vitalTypography,
 } from '@bodiless/vital-elements';
@@ -114,6 +111,12 @@ const Basic = asVitalTokenSpec()({
   Theme: pick(Default.Theme, 'paragraph', 'Bold', 'Link', 'SuperScript'),
 });
 
+const BasicNoParagraphLinkStyling = asVitalTokenSpec()({
+  ...Default,
+  Core: pick(Default.Core, 'paragraph', 'Bold', 'Link', 'SuperScript'),
+  Theme: pick(Default.Theme, 'Bold', 'SuperScript'),
+});
+
 const BasicNoLink = asVitalTokenSpec()({
   ...Basic,
   Core: pick(Basic.Core, 'paragraph', 'Bold', 'SuperScript'),
@@ -121,34 +124,18 @@ const BasicNoLink = asVitalTokenSpec()({
   Behavior: {},
 });
 
-const Copyright = asVitalTokenSpec()({
-  ...Basic,
-  Theme: {
-    ...Basic.Theme,
-    paragraph: as(
-      vitalColor.TextPrimaryFooterCopy,
-      vitalFontSize.XS,
-      vitalTextDecoration.Normal,
-    ),
-    Link: as(
-      vitalLink.Default,
-      vitalColor.TextPrimaryFooterCopy,
-      vitalColor.TextPrimaryInteractive,
-      vitalFontSize.XS,
-      vitalTextDecoration.Bold,
-      vitalTextDecoration.Underline,
-      removeClasses('text-m-base lg:text-base'),
-    ),
-  },
-  Content: {
-    _: addProps({ placeholder: 'Insert Copyright' }),
-  },
+const BasicNoLinkNoParagraphStyling = asVitalTokenSpec()({
+  ...Default,
+  Core: pick(Basic.Core, 'paragraph', 'Bold', 'SuperScript'),
+  Theme: pick(Basic.Theme, 'Bold', 'SuperScript'),
+  Behavior: {},
 });
 
 export default {
   Default,
   Basic,
+  BasicNoParagraphLinkStyling,
   BasicNoLink,
+  BasicNoLinkNoParagraphStyling,
   AsFlowContainerItem,
-  Copyright,
 };
