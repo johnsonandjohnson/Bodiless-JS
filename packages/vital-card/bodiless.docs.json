@@ -1,8 +1,11 @@
 {
-  "CX_DesignSystem": {
+  "VitalDesignSystem": {
     "Components": {
-      "Vital_Card": {
-        "README.md": "./README.md"
+      "VitalCard": {
+        "README.md": "./doc/README.md",
+        "assets": {
+          "HeroSwapHeroCard.jpg": "./doc/assets/HeroSwapHeroCard.jpg"
+        }
       }
     }
   }
