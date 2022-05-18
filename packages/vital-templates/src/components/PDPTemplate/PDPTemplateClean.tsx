@@ -35,7 +35,7 @@ const pdpTemplateComponents: PDPTemplateComponents = {
   ProductImageWrapper: Div,
   ProductImage: Img,
   ProductDetailWrapper: Div,
-  ProductDescriptionWrapper: Fragment,
+  ProductDescriptionWrapper: Div,
   ProductDescription: FlowContainerClean,
   ProductTitleWrapper: Div,
   ProductTitle: Div,

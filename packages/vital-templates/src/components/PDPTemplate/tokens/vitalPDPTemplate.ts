@@ -28,7 +28,8 @@ const Default = asPDPTemplateToken(vitalGenericTemplate.Default, {
   Components: {
     TopContent: replaceWith(() => null),
     GA4Helmet: replaceWith(GA4DataLayerProductItemHelmet),
-    ProductImage: vitalImage.Default,
+    // Gatsby images doesn't work to be source for asSchemaSource('product-image'),
+    ProductImage: vitalImage.Plain,
     ProductDescription: as(vitalFlowContainer.Default),
     ProductTitle: on(EditorPlainClean)(vitalEditorPlain.Default),
     ProductEyebrow: on(EditorPlainClean)(vitalEditorPlain.Default),
@@ -57,10 +58,10 @@ const Default = asPDPTemplateToken(vitalGenericTemplate.Default, {
     ProductEyebrow: withNodeKey(PDPNodeKeys.Eyebrow),
   },
   SEO: {
+    ContentWrapper: WithProductSchema,
     ProductImage: asSchemaSource('product-image'),
-    ProductTitle: asSchemaSource('product-name'),
-    ProductDescription: asSchemaSource('product-description'),
-    PageWrapper: WithProductSchema,
+    ProductTitleWrapper: asSchemaSource('product-name'),
+    ProductDescriptionWrapper: asSchemaSource('product-description'),
   },
 });
 
