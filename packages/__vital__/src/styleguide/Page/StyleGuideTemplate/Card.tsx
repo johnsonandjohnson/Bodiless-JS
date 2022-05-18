@@ -65,6 +65,10 @@ const HeroCard = as(
   vitalCard.Hero,
   withNodeKey('hero-card'),
 )(CardClean);
+const HeroPrimaryButtonCard = as(
+  vitalCard.HeroWithPrimaryButton,
+  withNodeKey('hero-card-primary-button'),
+)(CardClean);
 
 const CardVariations = (props: any) => (
   <>
@@ -79,6 +83,8 @@ const CardVariations = (props: any) => (
     <Div className="mb-8">
       <Subtitle>Hero Card</Subtitle>
       <HeroCard />
+      <Subtitle>Hero Card with Button</Subtitle>
+      <HeroPrimaryButtonCard />
     </Div>
   </>
 );

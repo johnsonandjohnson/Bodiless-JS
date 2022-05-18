@@ -82,8 +82,8 @@ const Base = asFooterToken({
       'md:mb-0', // Vertical
     ),
     FooterMenuWrapper: 'py-9 md:p-0', // Vertical
-    Copyright: 'py-6 md:mb-4 md:py-6 2xl:py-0 2xl:mb-0', // Vertical
-    SocialLinksWrapper: 'py-5 md:p-0',
+    Copyright: 'py-6 2xl:py-0 md:mb-4 2xl:mb-0', // Vertical
+    SocialLinksWrapper: 'py-6 2xl:py-0', // Vertical
   },
   Theme: {
     RewardsWrapper: 'bg-vital-primary-card-bg 2xl:bg-vital-secondary-footer-bg',
