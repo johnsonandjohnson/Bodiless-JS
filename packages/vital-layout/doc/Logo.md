@@ -19,11 +19,13 @@ images](/Components/Image/#select-and-configure-an-image).
 At the site or global regional/brand library level, you can use the Logo Component as is, or
 extend/shadow the existing component.
 
-### Customizing Via Shadowing (*Preferred Method)
+### Customizing Logo
+
+#### Via Shadowing (*Preferred Method)
 
 Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
 
-File to shadow: `./lib/shadow/vital-layout/{MyLogo}.js`
+File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-layout/Logo.ts`
 
 ## Architectural Details
 

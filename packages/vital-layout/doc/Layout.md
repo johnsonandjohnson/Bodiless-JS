@@ -49,7 +49,7 @@ becomes visible when the user visits the site and starts interacting with their 
 
 Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
 
-File to shadow: `./lib/shadow/vital-layout/{MyLayout}.js`
+File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-layout/Layout.ts`
 
 ### Skip To Main Content Customization
 

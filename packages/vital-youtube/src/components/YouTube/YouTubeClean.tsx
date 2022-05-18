@@ -12,4 +12,20 @@
  * limitations under the License.
  */
 
-export { staticTokenCollection as vitalImage } from '@bodiless/hydration';
+import { withNode } from '@bodiless/core';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
+import { flowHoc, Iframe } from '@bodiless/fclasses';
+import { Embed } from '@bodiless/organisms';
+import { asBodilessYouTube } from '@bodiless/youtube';
+import { withoutHydration } from '@bodiless/hydration';
+import type { YouTubeComponents } from './types';
+
+const YouTubeClean: any = flowHoc(
+  asBodilessYouTube()(Iframe),
+  withNode,
+  withoutHydration()
+)(Embed);
+
+export const asYouTubeToken = asVitalTokenSpec<YouTubeComponents>();
+
+export default YouTubeClean;

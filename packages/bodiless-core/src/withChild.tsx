@@ -99,7 +99,7 @@ const insertChild = (Child: CT, options: InsertChildOptions): HOC => (
  * ```
  */
 const withChild = <P extends object>(
-  Child: CT,
+  Child: CT<any>,
   designKey: string = 'Child',
   componentName: string = 'Component',
 ): HOC<P> => insertChild(Child, { designKey, componentName });
@@ -115,7 +115,7 @@ const withChild = <P extends object>(
  * @return An HOC which will append the Child to the given Component.
  */
 const withAppendChild = <P extends object>(
-  Child: CT,
+  Child: CT<any>,
   designKey: string,
   componentName: string = 'Component',
 ): HOC<P> => insertChild(Child, { designKey, componentName, mode: 'append' });
@@ -131,7 +131,7 @@ const withAppendChild = <P extends object>(
  * @return An HOC which will prepend the Child to the given Component.
  */
 const withPrependChild = <P extends object>(
-  Child: CT,
+  Child: CT<any>,
   designKey: string,
   componentName: string = 'Component',
 ): HOC<P> => insertChild(Child, { designKey, componentName, mode: 'prepend' });

@@ -19,6 +19,7 @@ import {
   flowIf,
   not,
 } from '@bodiless/fclasses';
+import { WithStructuredDataProvider } from '@bodiless/schema-org';
 import { asLayoutToken } from '../LayoutClean';
 import { vitalFooter } from '../../Footer';
 import { vitalHeader } from '../../Header';
@@ -27,14 +28,17 @@ import { LayoutIds } from './constants';
 import { StyleGuide } from './StyleGuide';
 
 /**
-  * Token that defines a basic layout.
-  */
+ * Token that defines a basic layout.
+ */
 const Base = asLayoutToken({
   Core: {
     _: withBurgerMenuProvider,
   },
   Components: {
     Helmet: vitalHelmet.Default,
+  },
+  SEO: {
+    _: WithStructuredDataProvider,
   },
   Behavior: {
     Container: addProps({ id: LayoutIds.Content }),

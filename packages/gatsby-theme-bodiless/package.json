@@ -16,6 +16,7 @@
   },
   "files": [
     "/bin",
+    "cjs",
     "dist",
     "index.js",
     "index.d.ts",
@@ -40,11 +41,11 @@
     "access": "public"
   },
   "scripts": {
-    "build": "npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build": "npm run copy && tsc -p ./tsconfig.json && tsc -p ./src/tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
-    "build:api-doc": "typedoc --out doc/api src",
-    "clean": "rimraf -rf \"dist\" && rimraf index* && rimraf \"doc/api\"",
-    "copy": "copyfiles -u 1 \"./src/dist/**/*.{json,jpg,png}\" \".\""
+    "build:api-doc": "typedoc --out doc/api src --tsconfig src/tsconfig.json",
+    "clean": "rimraf -rf \"dist\" && rimraf -rf \"cjs\" && rimraf index* && rimraf \"doc/api\"",
+    "copy": "copyfiles -u 1 \"./src/dist/**/*.{json,jpg,png}\" \".\" && copyfiles -u 1 \"./src/dist/**/*.{json,jpg,png}\" \"./cjs\""
   },
   "dependencies": {
     "@bodiless/accordion": "^1.0.0-beta.18",
@@ -64,6 +65,7 @@
     "@types/walk": "^2.3.0",
     "autoprefixer": "^10.4.2",
     "axios": "^0.21.0",
+    "common-tags": "^1.8.0",
     "crypto-browserify": "^3.12.0",
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
@@ -72,6 +74,7 @@
     "fs-extra": "^8.1.0",
     "gatsby-image": "^3.11.0",
     "gatsby-plugin-emotion": "^7.10.0",
+    "gatsby-plugin-env-variables": "^2.2.0",
     "gatsby-plugin-google-fonts": "^1.0.1",
     "gatsby-plugin-image": "^2.10.1",
     "gatsby-plugin-manifest": "^4.10.2",
@@ -101,7 +104,8 @@
   },
   "devDependencies": {
     "@statoscope/webpack-plugin": "^5.20.1",
-    "tailwindcss": "^3.0.23"
+    "tailwindcss": "^3.0.23",
+    "@types/common-tags": "^1.8.0"
   },
   "peerDependencies": {
     "gatsby": "^4.11.2",
