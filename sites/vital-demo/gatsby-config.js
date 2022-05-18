@@ -63,6 +63,13 @@ const plugins = [
       }
     },
   },
+  {
+    resolve: 'gatsby-plugin-manifest',
+    options: {
+      icon: 'src/images/vitalds-favicon.png',
+      legacy: false,
+    },
+  },
   // {
   //   resolve: '@bodiless/gatsby-plugin-ssi',
   //   options: {
