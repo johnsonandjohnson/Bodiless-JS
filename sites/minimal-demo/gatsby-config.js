@@ -18,19 +18,13 @@ require('dotenv').config({
 
 const SITEURL = process.env.SITE_URL;
 
-const disablePageList = getDisabledPages();
-const disabledPages = Object.keys(disablePageList).filter(
-  item => disablePageList[item].pageDisabled === true || disablePageList[item].indexingDisabled,
-);
+// const disablePageList = getDisabledPages();
+// const disabledPages = Object.keys(disablePageList).filter(
+//   item => disablePageList[item].pageDisabled === true || disablePageList[item].indexingDisabled,
+// );
 
 // Gatsby plugins list.
 const plugins = [
-  {
-    resolve: 'gatsby-plugin-compile-es6-packages',
-    options: {
-      modules: ['@bodiless/gatsby-theme-bodiless'],
-    },
-  },
   {
     resolve: '@bodiless/gatsby-theme-bodiless',
     options: {
@@ -51,23 +45,17 @@ const plugins = [
         // ".bl-edit" files, enabling static replacement on all packages. False disables static
         // replacement, which is the same as passing `enabled: false` in the options object.
         //
-        // You can also pass a RegExp which will be matched against the **absolute** path of every
-        // .bl-edit file being imported. If it matches and a sibling .static file is found, the file
-        // will be replaced. For instance, if you want to include all `vital-editors` and
-        // `vital-link` files, you may pass `/vital-editors|vital-link/` to this option.
+        // You can also pass a RegExp which will be matched against the **absolute** path
+        // of every .bl-edit file being imported. If it matches and a sibling .static file
+        // is found, the file will be replaced. For instance, if you want to include all
+        // `vital-editors` and `vital-link` files, you may pass `/vital-editors|vital-link/`
+        // to this option.
         //
         // Defaults to false.
-        include: true,
+        // include: true,
         // Pass false to disable logging all resolving operations. Defaults to true.
-        logging: true,
+        // logging: true,
       }
-    },
-  },
-  {
-    resolve: 'gatsby-plugin-manifest',
-    options: {
-      icon: 'src/images/vitalds-favicon.png',
-      legacy: false,
     },
   },
   // {
@@ -76,39 +64,29 @@ const plugins = [
   //     ssiEntities: getSSIEntities('ssi/ssi_conf.json'),
   //   }
   // },
-  {
-    resolve: 'gatsby-plugin-canonical-urls',
-    options: {
-      siteUrl: SITEURL,
-    },
-  },
-  {
-    resolve: 'gatsby-plugin-sitemap',
-    options: { excludes: disabledPages },
-  },
+  // {
+  //   resolve: 'gatsby-plugin-canonical-urls',
+  //   options: {
+  //     siteUrl: SITEURL,
+  //   },
+  // },
+  // {
+  //   resolve: 'gatsby-plugin-sitemap',
+  //   options: { excludes: disabledPages },
+  // },
   // ...createDefaultContentPlugins(
   //   ...getSampleDefaultContentConfig(),
   //   ...getSiteDefaultContentConfig(),
   // ),
-  {
-    resolve: '--vital--',
-  },
-  {
-    resolve: 'gatsby-plugin-google-tagmanager',
-    options: {
-      id: 'GTM-N3M9LLD',
-      dataLayerName: 'globalDataLayer',
-    },
-  }
 ];
 
-const robotsTxtPolicy = [
-  {
-    userAgent: '*',
-    allow: '/',
-  },
-];
-process.env.ROBOTSTXT_POLICY = JSON.stringify(robotsTxtPolicy);
+// const robotsTxtPolicy = [
+//   {
+//     userAgent: '*',
+//     allow: '/',
+//   },
+// ];
+// process.env.ROBOTSTXT_POLICY = JSON.stringify(robotsTxtPolicy);
 
 module.exports = {
   developMiddleware: app => {
@@ -120,6 +98,5 @@ module.exports = {
   flags: {
     DEV_SSR: false,
   },
-  pathPrefix: process.env.GATSBY_PATH_PREFIX || '',
   plugins,
 };
