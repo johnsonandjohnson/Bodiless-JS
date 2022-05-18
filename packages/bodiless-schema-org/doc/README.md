@@ -1,7 +1,7 @@
-# Bodiless Schema.org
+# Schema Component
 
-Provides a Schema component to support adding SEO schema information to content, as well as
-helper functions to get and return page/content data.
+The Schema.org package provides a Schema component to support adding SEO schema information to
+content, as well as helper functions to get and return page/content data.
 
 The base package currently supports the following schemas:
 
@@ -11,9 +11,9 @@ The base package currently supports the following schemas:
 - [Video](#video-schema)
 
 ?> **Note:** Information regarding schemas for structured data can be found at
-[Schema.org](https://schema.org/).
+[Schema.org](https://schema.org/ ':target=_blank').
 
-## Usage
+## Site Builder Details
 
 As a Site Builder, you will want to set the schema source for every schema field you wish to render,
 using `asSchemaSource`. For instance, in the [Product Schema](#product-schema) section, you will see
@@ -161,7 +161,7 @@ Developers
 | -------------- | ------------------------------------------ |
 | `name`         | `video.snippet.title`                      |
 | `description`  | `video.snippet.description`                |
-| `thumbnailUrl` | `video.snippet.thumbnails.standard != null` <br/> `? video.snippet.thumbnails.standard.url` <br/> `: video.snippet.thumbnails.default.url` |
+| `thumbnailUrl` | `video.snippet.thumbnails.standard != null` <br/> `  ? video.snippet.thumbnails.standard.url` <br/> `  : video.snippet.thumbnails.default.url` |
 | `uploadDate`   | `video.snippet.publishedAt`                |
 | `duration`     | `video.contentDetails.duration`            |
 | `contentUrl`   | `https://youtube.com/watch/?v=${video.id}` |
@@ -207,9 +207,10 @@ Developers
     ```
 
 !>  **Important:** The compatible API is **Version 3 (v3)** of the YouTube Data API.  
-    **See:** [YouTube Data API Reference (v3)](https://developers.google.com/youtube/v3/docs) |
-    Google Developers
+    **See:** [YouTube Data API Reference (v3)](https://developers.google.com/youtube/v3/docs ':target=_blank')
+    | Google Developers
 
 For further information regarding the definition of the Video data type, see:
 
-- [VideoObject](https://schema.org/VideoObject) | Schema.org
+- [VideoObject](https://schema.org/VideoObject ':target=_blank') | Schema.org
+- [Get videos on Google with schema markup : VideoObject](https://developers.google.com/search/docs/advanced/structured-data/video#video-object ':target=_blank') | Google Search Central
