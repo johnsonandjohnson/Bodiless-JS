@@ -32,17 +32,22 @@ const ContentVariations = {
   NoTitle: vitalCard.WithNoTitle,
   NoDescription: vitalCard.WithNoDescription,
 };
-
+const HeroCTAVariations = {
+  Link: vitalCard.Hero,
+  PrimaryButton: vitalCard.HeroWithPrimaryButton,
+  SecondaryButton: vitalCard.HeroWithSecondaryButton,
+};
 /**
  * Token which adds Card variations to a flow container.
  */
 const WithCardVariations = asFluidToken({
   Components: {
-    HeroCard: on(CardClean)(vitalCard.Base, vitalCard.Hero),
+    HeroCard: on(CardClean)(vitalCard.Hero),
     ...varyDesigns(
       BaseVariation,
       ContentVariations,
       OrientationVariations,
+      HeroCTAVariations,
     ),
   }
 });

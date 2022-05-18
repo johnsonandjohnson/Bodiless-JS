@@ -48,8 +48,9 @@ const BaseHero = asCardToken({
   Spacing: {
     ...Base.Spacing,
     ContentWrapper: 'px-10', // different
-    ImageWrapper: 'p-0', // different
+    ImageWrapper: 'py-4 md:p-0', // different
     TitleWrapper: 'mb-5 lg:mb-6',
+    DescriptionWrapper: 'mb-5 lg:mb-6',
   },
   Theme: {
     TitleWrapper: vitalTypography.H1NoSpacing,
@@ -69,8 +70,9 @@ const Hero = asCardToken(BaseHero, {
     CTALink: replaceWith(LinkClean),
   },
   Theme: {
-    CTALink: vitalLink.Default,
+    CTALink: vitalLink.PrimaryLink,
   },
+  Meta: flowHoc.meta.term('Style')('Link'),
 });
 
 /*
@@ -83,9 +85,24 @@ const HeroWithPrimaryButton = asCardToken(BaseHero, {
   Theme: {
     CTALink: as(vitalButtons.Primary, vitalButtons.WithArrow),
   },
+  Meta: flowHoc.meta.term('Style')('Primary Button'),
+});
+
+/*
+ * Hero with vitalSecondaryButton
+ */
+const HeroWithSecondaryButton = asCardToken(BaseHero, {
+  Components: {
+    CTALink: replaceWith(ButtonClean),
+  },
+  Theme: {
+    CTALink: as(vitalButtons.Secondary, vitalButtons.WithArrow),
+  },
+  Meta: flowHoc.meta.term('Style')('Secondary Button'),
 });
 
 export {
   Hero,
   HeroWithPrimaryButton,
+  HeroWithSecondaryButton,
 };

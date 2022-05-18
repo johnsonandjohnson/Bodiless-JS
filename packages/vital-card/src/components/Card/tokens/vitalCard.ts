@@ -16,7 +16,7 @@ import { flowHoc, replaceWith } from '@bodiless/fclasses';
 import { asCardToken } from '../CardClean';
 
 import Base, { WithHorizontalOrientation, WithVerticalOrientation} from './Base';
-import { Hero, HeroWithPrimaryButton } from './Hero';
+import { Hero, HeroWithPrimaryButton, HeroWithSecondaryButton } from './Hero';
 
 /**
  * WithNoTitle removes title from the card
@@ -53,6 +53,7 @@ export default {
   Default,
   Hero,
   HeroWithPrimaryButton,
+  HeroWithSecondaryButton,
   WithNoDescription,
   WithNoTitle,
   WithHorizontalOrientation,

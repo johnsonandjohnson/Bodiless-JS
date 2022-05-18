@@ -20,9 +20,10 @@ import {
   as,
   flowIf,
   on,
+  flowHoc,
 } from '@bodiless/fclasses';
 import { withSidecarNodes, withNodeKey } from '@bodiless/core';
-import { vitalTypography } from '@bodiless/vital-elements';
+import { vitalColor, vitalTypography } from '@bodiless/vital-elements';
 import { asLinkToken } from '../LinkClean';
 import { useExternalLinkToggle, asEditableLink, useIsDownloadLink } from '../util';
 
@@ -86,6 +87,14 @@ const Default = asLinkToken(Base, {
   },
 });
 
+const PrimaryLink = asLinkToken(Default, {
+  Theme: {
+    Wrapper: 'hover:vital-arrow hover:pr-1 hover:w-6 hover:h-2',
+    Body: vitalColor.TextPrimaryInteractiveNoHover,
+  },
+  Meta: flowHoc.meta.term('Style')('With Hover Arrow'),
+});
+
 const Sidecar = asLinkToken({
   ...Default,
   Schema: {
@@ -101,5 +110,6 @@ export default {
   Default,
   WithExternalStyles,
   WithDownloadStyles,
+  PrimaryLink,
   Sidecar,
 };
