@@ -13,8 +13,10 @@ general Image component experience by the Vital Image package, and, thus, you ca
 
 ### Hero Image
 
-If your site has been configured with the Hero component, and the _Image_ variation has been
-enabled, you can switch an existing Hero component to the Image variation using the Edit Interface.
+The [Vital Generic Page Template](../VitalTemplates/Generic) uses a Hero Card in the _Top_ slot (or
+Hero). Using the Edit Interface, you will have the option to swap between a Hero
+[Card](../VitalCard/#hero-card), Image, or [Video](../VitalYouTube/#hero-video). Note: Your site may
+be configured with additional Hero variants.
 
 01. While in [Edit Mode](/ContenteditorUserGuide/#edit-mode), select the desired Hero Component,
     and, within its context menu, under "Hero," click **Swap**.  
