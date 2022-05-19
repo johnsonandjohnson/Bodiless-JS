@@ -25,7 +25,7 @@ import { List } from './List';
 import { _default } from './_default';
 import { Video } from './Video';
 
-export const __vital__StyleGuideTemplate = {
+export const VitalTestStyleGuideTemplate = {
   _default,
   Editors,
   EditorsMonoFont,

@@ -12,5 +12,6 @@
  * limitations under the License.
  */
 
-export { __vital__StyleGuidePage } from './Page';
-// export { __vital__StyleGuideTemplate } from './StyleGuideTemplate';
+import VitalTestStyleGuidePage from './Page';
+
+export { VitalTestStyleGuidePage };

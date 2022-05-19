@@ -13,10 +13,8 @@
  */
 
 import { asFluidToken } from '@bodiless/vital-elements';
-import {
-  vitalPage,
-} from '@bodiless/vital-templates';
-import { __vital__StyleGuideTemplate } from './StyleGuideTemplate';
+import { vitalPage } from '@bodiless/vital-templates';
+import { VitalTestStyleGuideTemplate } from './StyleGuideTemplate';
 
 const {
   Editors,
@@ -32,7 +30,7 @@ const {
   Table,
   List,
   _default
-} = __vital__StyleGuideTemplate;
+} = VitalTestStyleGuideTemplate;
 
 const Default = asFluidToken({
   ...vitalPage.Default,
@@ -53,4 +51,6 @@ const Default = asFluidToken({
   },
 });
 
-export const __vital__StyleGuidePage = { Default };
+export default {
+  Default,
+};
