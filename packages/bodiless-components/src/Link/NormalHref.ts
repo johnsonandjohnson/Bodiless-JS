@@ -38,7 +38,7 @@ export interface NormalHref {
    */
   parentPage: NormalHref|undefined,
   /**
-   * Determines whethertwo internal hrefs refer to the same page.
+   * Determines whether two internal hrefs refer to the same page.
    * @param that The href to compare.
    */
   isSamePage: (that:NormalHref|string) => boolean,
