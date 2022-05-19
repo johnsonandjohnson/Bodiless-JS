@@ -19,6 +19,8 @@ import React, { FC, useRef, useLayoutEffect } from 'react';
 import memoize from 'lodash/memoize';
 import {
   WithoutHydrationFunction,
+  WithoutHydrationWrapperFunction,
+  WithoutHydrationOptions,
 } from './types';
 
 const DEFAULT_OPTIONS: WithoutHydrationOptions = {
@@ -104,18 +106,25 @@ const fullSelector = (element: HTMLElement | null) => {
   return path;
 };
 
+const withoutHydrationClientSideEdit: WithoutHydrationFunction = (
+) => WrappedComponent => props => (
+  <WrappedComponent {...props} />
+);
+
 const withoutHydrationServerSide: WithoutHydrationFunction = ({
-  WrapperElement = DEFAULT_WRAPPER,
-} = {}) => WrappedComponent => props => (
-  <WrapperElement data-no-hydrate style={isEditClientSide ? {} : { display: 'contents' }}>
+  WrapperElement,
+  WrapperStyle
+}) => WrappedComponent => props => (
+  <WrapperElement data-no-hydrate style={WrapperStyle}>
     <WrappedComponent {...props} />
   </WrapperElement>
 );
 
 const withoutHydrationClientSide: WithoutHydrationFunction = ({
-  onUpdate = null,
-  WrapperElement = DEFAULT_WRAPPER,
-} = {}) => <P,>(WrappedComponent: ComponentOrTag<P>) => {
+  onUpdate,
+  WrapperElement,
+  WrapperStyle,
+}) => <P,>(WrappedComponent: ComponentOrTag<P>) => {
   const WithoutHydration: FC<P> = (props) => {
     const BrowserVersion$ = () => {
       const rootRef = useRef<HTMLDivElement&HTMLSpanElement>(null);
@@ -150,7 +159,7 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
       return (
         <WrapperElement
           ref={rootRef}
-          style={{ display: 'contents' }}
+          style={WrapperStyle}
           suppressHydrationWarning
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: markup }}

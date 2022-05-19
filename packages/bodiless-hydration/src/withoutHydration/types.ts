@@ -22,4 +22,7 @@ export type WithoutHydrationOptions = {
 };
 
 // eslint-disable-next-line max-len
-export type WithoutHydrationFunction = (options?: WithoutHydrationOptions) => HOC;
+export type WithoutHydrationFunction = (options: WithoutHydrationOptions) => HOC;
+
+// eslint-disable-next-line max-len
+export type WithoutHydrationWrapperFunction = (options?: WithoutHydrationOptions) => HOC;
