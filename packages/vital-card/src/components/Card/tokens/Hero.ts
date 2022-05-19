@@ -47,8 +47,8 @@ const BaseHero = asCardToken({
   Layout: WithHorizontalOrientation.Layout,
   Spacing: {
     ...Base.Spacing,
-    ContentWrapper: 'px-10', // different
-    ImageWrapper: 'py-4 md:p-0', // different
+    ContentWrapper: 'px-10',
+    ImageWrapper: 'py-4 md:p-0',
     TitleWrapper: 'mb-5 lg:mb-6',
     DescriptionWrapper: 'mb-5 lg:mb-6',
   },

@@ -32,7 +32,7 @@ const Base = asCardToken({
     Wrapper: asBodilessLink(),
     Title: on(EditorPlainClean)(vitalEditorPlain.Default),
     Eyebrow: on(EditorPlainClean)(vitalEditorPlain.Default),
-    Description: on(RichTextClean)(vitalRichText.BasicNoLinkNoParagraphStyling),
+    Description: on(RichTextClean)(vitalRichText.BasicNoLinkNoStyling),
     CTAText: on(EditorPlainClean)(vitalEditorPlain.Default),
   },
   Content: {

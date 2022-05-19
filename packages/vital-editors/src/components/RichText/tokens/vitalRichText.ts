@@ -111,31 +111,22 @@ const Basic = asVitalTokenSpec()({
   Theme: pick(Default.Theme, 'paragraph', 'Bold', 'Link', 'SuperScript'),
 });
 
-const BasicNoParagraphLinkStyling = asVitalTokenSpec()({
-  ...Default,
-  Core: pick(Default.Core, 'paragraph', 'Bold', 'Link', 'SuperScript'),
-  Theme: pick(Default.Theme, 'Bold', 'SuperScript'),
+const BasicNoLinkNoStyling = asVitalTokenSpec()({
+  ...Basic,
+  Core: pick(Basic.Core, 'paragraph', 'Bold', 'SuperScript'),
+  Theme: {},
+  Behavior: {},
 });
 
 const BasicNoLink = asVitalTokenSpec()({
-  ...Basic,
-  Core: pick(Basic.Core, 'paragraph', 'Bold', 'SuperScript'),
+  ...BasicNoLinkNoStyling,
   Theme: pick(Basic.Theme, 'paragraph', 'Bold', 'SuperScript'),
-  Behavior: {},
-});
-
-const BasicNoLinkNoParagraphStyling = asVitalTokenSpec()({
-  ...Default,
-  Core: pick(Basic.Core, 'paragraph', 'Bold', 'SuperScript'),
-  Theme: pick(Basic.Theme, 'Bold', 'SuperScript'),
-  Behavior: {},
 });
 
 export default {
   Default,
   Basic,
-  BasicNoParagraphLinkStyling,
+  BasicNoLinkNoStyling,
   BasicNoLink,
-  BasicNoLinkNoParagraphStyling,
   AsFlowContainerItem,
 };

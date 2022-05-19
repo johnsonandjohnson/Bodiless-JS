@@ -25,9 +25,8 @@ import { vitalSocialLinks } from '../SocialLinks';
 import { asFooterToken } from '../FooterClean';
 
 const Copyright = asVitalTokenSpec()({
-  ...vitalRichText.BasicNoParagraphLinkStyling,
+  ...vitalRichText.Basic,
   Theme: {
-    ...vitalRichText.BasicNoParagraphLinkStyling.Theme,
     paragraph: as(
       vitalColor.TextPrimaryFooterCopy,
       vitalFontSize.XS,
