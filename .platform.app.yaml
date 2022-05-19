@@ -54,3 +54,4 @@ variables:
     env:
         APP_VOLUME: '/app/volume'
         CHOKIDAR_USEPOLLING: true
+        DISABLE_TSCONFIG_PATHS_PLUGIN: '1'

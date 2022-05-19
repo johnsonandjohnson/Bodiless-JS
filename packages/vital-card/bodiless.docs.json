@@ -1,0 +1,9 @@
+{
+  "CX_DesignSystem": {
+    "Components": {
+      "Vital_Card": {
+        "README.md": "./README.md"
+      }
+    }
+  }
+}

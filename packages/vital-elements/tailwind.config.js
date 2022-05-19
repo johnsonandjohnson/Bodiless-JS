@@ -40,6 +40,7 @@ const twConfig = {
       'm-3xl': ['2.25rem', '2.5rem'],
     },
     colors: {
+      transparent: 'transparent',
       'vital-primary': {
         brand: '#CA081B',
         'card-bg': '#ffffff',

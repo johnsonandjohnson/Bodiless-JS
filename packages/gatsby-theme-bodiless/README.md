@@ -120,6 +120,10 @@ const Image = withDefaultImageContent(asEditableImage)(useDefaultImageNode)('ima
 <Image />
 ```
 
+#### Omit Gatsby Plugin Image for static Image
+When using Gatsby Image with withoutHydration from @bodiless/hydration and providing a static version, gatsby-plugin-image is not required anymore on front-end the code can be removed from the final bundle through the
+environment variable BODILESS_GATSBY_PLUGIN_IMAGE_OMIT set to 1.
+
 ### Plugins
 
 #### Robots.txt

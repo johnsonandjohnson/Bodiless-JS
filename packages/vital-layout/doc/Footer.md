@@ -51,13 +51,15 @@ const Layout: FC = ({ children }) => (
 export default Layout;
 ```
 
-#### Customizing Via Shadowing (*Preferred Method)
+### Customizing Footer
+
+#### Via Shadowing (*Preferred Method)
 
 Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
 
-File to shadow: `./lib/shadow/vital-layout/{MyFooter}.js`
+File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-layout/Footer.ts`
 
-#### Customizing Via Extending
+#### Via Extending
 
 The Site Builder can create a new token that utilizes `asFooterToken()`, and then can
 extend/override the specific domains within that token.
