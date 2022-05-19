@@ -12,13 +12,16 @@
  * limitations under the License.
  */
 
-import { asReadOnly, withNodeKey } from '@bodiless/core';
-import { withoutLinkWhenLinkDataEmpty } from '@bodiless/components';
+import { Fragment } from 'react';
+import { asReadOnly, withNodeKey, withSidecarNodes } from '@bodiless/core';
+import { asBodilessLink } from '@bodiless/components-ui';
+import { asEditable, withoutLinkWhenLinkDataEmpty } from '@bodiless/components';
 import {
   withDesign,
   addProps,
   stylable,
   flowHoc,
+  startWith,
 } from '@bodiless/fclasses';
 import {
   asBreadcrumbs,
@@ -27,7 +30,20 @@ import {
   withMenuTitleEditors,
 } from '@bodiless/navigation';
 import { vitalColor } from '@bodiless/vital-elements';
-import { asBreadcrumbsToken } from '../BreadcrumbsClean';
+import { asBreadcrumbsToken, asBreadcrumbsLink } from '../BreadcrumbsClean';
+
+const withBreadcrumbMenuTitle = withDesign({
+  Link: flowHoc(
+    asBreadcrumbsLink,
+    withSidecarNodes(
+      asBodilessLink('link'),
+    ),
+  ),
+  Title: flowHoc(
+    startWith(Fragment),
+    asEditable('text', 'Menu Item'),
+  ),
+});
 
 /**
   * Token which produces the Base Vital Breadcrumbs.
@@ -44,7 +60,7 @@ const Base = asBreadcrumbsToken({
   Schema: {
     _: flowHoc(
       withNodeKey({ nodeCollection: 'site' }),
-      withMenuTitleEditors(undefined, asReadOnly),
+      withMenuTitleEditors(withBreadcrumbMenuTitle, asReadOnly),
       withEditableStartingTrail(undefined, { nodeCollection: 'site' }),
       withEditableFinalTrail(),
     ),
