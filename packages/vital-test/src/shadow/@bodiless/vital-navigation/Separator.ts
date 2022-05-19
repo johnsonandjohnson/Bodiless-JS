@@ -13,20 +13,16 @@
  */
 
 import { vitalSeparatorBase } from '@bodiless/vital-navigation';
-import { asFluidToken } from '@bodiless/vital-elements';
+import { asElementToken } from '@bodiless/vital-elements';
 import { addProps } from '@bodiless/fclasses';
 
-const FooterMenu = asFluidToken({
-  ...vitalSeparatorBase.FooterMenu,
+const FooterMenu = asElementToken(vitalSeparatorBase.FooterMenu, {
   Behavior: {
-    ...vitalSeparatorBase.FooterMenu.Behavior,
     _: addProps({ 'data-shadowed-by': '__vital__:FooterMenuSeparator' }),
   },
 });
-const UtilityMenu = asFluidToken({
-  ...vitalSeparatorBase.UtilityMenu,
+const UtilityMenu = asElementToken(vitalSeparatorBase.UtilityMenu, {
   Behavior: {
-    ...vitalSeparatorBase.UtilityMenu.Behavior,
     _: addProps({ 'data-shadowed-by': '__vital__:UtilityMenuSeparator' }),
   },
 });

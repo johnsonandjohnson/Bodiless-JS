@@ -15,10 +15,8 @@
 import { vitalFooterBase, asFooterToken } from '@bodiless/vital-layout';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asFooterToken({
-  ...vitalFooterBase.Default,
-  Components: {
-    ...vitalFooterBase.Default.Components,
+const Default = asFooterToken(vitalFooterBase.Default, {
+  Behavior: {
     Wrapper: addProps({ 'data-shadowed-by': '__vital__:Footer' }),
   },
 });

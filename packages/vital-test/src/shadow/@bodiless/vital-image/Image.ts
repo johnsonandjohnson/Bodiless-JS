@@ -13,13 +13,11 @@
  */
 
 import { vitalImageBase } from '@bodiless/vital-image';
-import { asFluidToken } from '@bodiless/vital-elements';
+import { asElementToken } from '@bodiless/vital-elements';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asFluidToken({
-  ...vitalImageBase.Default,
+const Default = asElementToken(vitalImageBase.Default, {
   Behavior: {
-    ...vitalImageBase.Default.Behavior,
     _: addProps({ 'data-shadowed-by': '__vital__:Image' }),
   },
 });

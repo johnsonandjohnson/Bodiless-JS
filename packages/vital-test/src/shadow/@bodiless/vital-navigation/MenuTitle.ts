@@ -12,14 +12,11 @@
  * limitations under the License.
  */
 
-import { vitalMenuTitleBase } from '@bodiless/vital-navigation';
-import { asFluidToken } from '@bodiless/vital-elements';
+import { vitalMenuTitleBase, asMenuTitleToken } from '@bodiless/vital-navigation';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asFluidToken({
-  ...vitalMenuTitleBase.Default,
-  Compose: {
-    ...vitalMenuTitleBase.Default.Compose,
+const Default = asMenuTitleToken(vitalMenuTitleBase.Default, {
+  Behavior: {
     _: addProps({ 'data-shadowed-by': '__vital__:MenuTitle' }),
   },
 });

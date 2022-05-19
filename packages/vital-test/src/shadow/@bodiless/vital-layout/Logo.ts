@@ -12,14 +12,11 @@
  * limitations under the License.
  */
 
-import { vitalLogoBase } from '@bodiless/vital-layout';
-import { asFluidToken } from '@bodiless/vital-elements';
+import { vitalLogoBase, asLogoToken } from '@bodiless/vital-layout';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asFluidToken({
-  ...vitalLogoBase.Default,
-  Components: {
-    ...vitalLogoBase.Default.Components,
+const Default = asLogoToken(vitalLogoBase.Default, {
+  Behavior: {
     Wrapper: addProps({ 'data-shadowed-by': '__vital__:Logo' }),
   },
 });

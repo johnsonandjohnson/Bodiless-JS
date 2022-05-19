@@ -12,14 +12,11 @@
  * limitations under the License.
  */
 
-import { vitalLinkBase } from '@bodiless/vital-link';
-import { asFluidToken } from '@bodiless/vital-elements';
+import { vitalLinkBase, asLinkToken } from '@bodiless/vital-link';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asFluidToken({
-  ...vitalLinkBase.Default,
-  Components: {
-    ...vitalLinkBase.Default.Components,
+const Default = asLinkToken(vitalLinkBase.Default, {
+  Behavior: {
     Wrapper: addProps({ 'data-shadowed-by': '__vital__:Link' }),
   },
 

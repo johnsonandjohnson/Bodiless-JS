@@ -16,9 +16,7 @@ import { vitalHeaderBase, asHeaderToken } from '@bodiless/vital-layout';
 import { addProps } from '@bodiless/fclasses';
 
 const Default = asHeaderToken(vitalHeaderBase.Base, {
-  ...vitalHeaderBase.Default,
-  Components: {
-    ...vitalHeaderBase.Default.Components,
+  Behavior: {
     Wrapper: addProps({ 'data-shadowed-by': '__vital__:Header' }),
   },
 });

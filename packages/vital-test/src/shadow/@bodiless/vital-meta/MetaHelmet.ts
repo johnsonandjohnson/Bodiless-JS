@@ -13,7 +13,7 @@
  */
 
 import { withMeta } from '@bodiless/components';
-import { asElementToken } from '@bodiless/vital-elements';
+import { asElementToken, asSimpleMetaFieldToken } from '@bodiless/vital-elements';
 import {
   vitalMetaHelmetBase,
   WithShareDescription,
@@ -26,7 +26,6 @@ import {
   WithTwitterTitle,
   WithUTMCampaign,
   WithUTMContent,
-  asSimpleMetaFieldToken,
 } from '@bodiless/vital-meta';
 
 const WithMetaKeywords = asSimpleMetaFieldToken(withMeta({

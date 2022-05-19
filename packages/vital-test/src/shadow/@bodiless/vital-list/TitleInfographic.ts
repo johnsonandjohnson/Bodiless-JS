@@ -12,14 +12,11 @@
  * limitations under the License.
  */
 
-import { vitalTitleInfographicBase } from '@bodiless/vital-list';
-import { asFluidToken } from '@bodiless/vital-elements';
+import { vitalTitleInfographicBase, asTitleInfographicToken } from '@bodiless/vital-list';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asFluidToken({
-  ...vitalTitleInfographicBase.Default,
+const Default = asTitleInfographicToken(vitalTitleInfographicBase.Default, {
   Behavior: {
-    ...vitalTitleInfographicBase.Default.Behavior,
     Wrapper: addProps({ 'data-shadowed-by': '__vital__:TitleInfographic' }),
   },
 });

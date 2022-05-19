@@ -20,12 +20,16 @@ import { vitalEditorPlainBase, withAutoSuperscript } from '@bodiless/vital-edito
 /* Test case to get superscript working on /styleguide/editors-monofont */
 const isEditorMonoRepo = () => useNode().node.pagePath === '/styleguide/editors-monofont/';
 
-const Default = asElementToken({
-  ...vitalEditorPlainBase.Default,
-  // if specific page will turn on auto superscripting for this page.
+const WithSuperOnMonoFont = asElementToken({
   Flow: flowIf(isEditorMonoRepo),
-  Behavior: {
+  Core: {
     _: withAutoSuperscript('®™©', 'align-baseline'),
+  },
+});
+
+const Default = asElementToken(vitalEditorPlainBase.Default, {
+  Compose: {
+    WithSuperOnMonoFont,
   },
 });
 

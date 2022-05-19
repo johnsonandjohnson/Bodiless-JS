@@ -12,14 +12,11 @@
  * limitations under the License.
  */
 
-import { vitalTableBase } from '@bodiless/vital-table';
-import { asFluidToken } from '@bodiless/vital-elements';
+import { vitalTableBase, asTableToken } from '@bodiless/vital-table';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asFluidToken({
-  ...vitalTableBase.Default,
-  Components: {
-    ...vitalTableBase.Default.Components,
+const Default = asTableToken(vitalTableBase.Default, {
+  Behavior: {
     Wrapper: addProps({ 'data-shadowed-by': '__vital__:Table' }),
   },
   /* The following is an example that overrides full width and uses

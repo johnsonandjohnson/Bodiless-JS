@@ -26,26 +26,26 @@ const DEFAULT_WRAPPER = 'div';
 
 export const isStaticClientSide = !!(
   typeof window !== 'undefined'
-   && window.document
-   && window.document.createElement
-   && process.env.NODE_ENV === 'production'
+  && window.document
+  && window.document.createElement
+  && process.env.NODE_ENV === 'production'
 );
 
 export const isEditClientSide = !!(
   typeof window !== 'undefined'
-   && window.document
-   && window.document.createElement
-   && process.env.NODE_ENV === 'development'
+  && window.document
+  && window.document.createElement
+  && process.env.NODE_ENV === 'development'
 );
 
 const getDisplayName = (WrappedComponent: ComponentOrTag<any>) => (typeof WrappedComponent !== 'string' && (WrappedComponent.displayName || WrappedComponent.name)) || 'Component';
 
 /**
-  * Gets the full selector for a dom element.
-  * Used to create a unique identifier for the element which can be used as a key
-  * to stash the rendered, non-hydrated element so it can be restored after a
-  * component remounts.
-  */
+ * Gets the full selector for a dom element.
+ * Used to create a unique identifier for the element which can be used as a key
+ * to stash the rendered, non-hydrated element so it can be restored after a
+ * component remounts.
+ */
 const fullSelector = (element: HTMLElement | null) => {
   let path;
   while (element) {
@@ -139,7 +139,7 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
           data-no-hydrate
           id={id}
           ref={rootRef}
-           // eslint-disable-next-line react/no-danger
+          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: markup }}
           suppressHydrationWarning
           style={{ display: 'contents' }}
@@ -157,37 +157,37 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
 };
 
 /**
-  * Makes React skip hydration of the given component on the browser in production. The given
-  * component will still hydrate and behave normally on the Edit site (because it runs in a
-  * development environment) and on Server Side Rendering.
-  *
-  * This allows developers to create optimized "static" versions of their components, which are
-  * interactive on Edit sites, but static on browsers in production. For instance, a rich-text
-  * editor may have a static version with all interactive functions stripped out, since these are
-  * not used by end users on production sites.
-  *
-  * Components can still have interactivity if needed. For instance, an accordion component still
-  * needs to be expandable by end users. To do this, you can pass an `onUpdate` function in the
-  * options object to receive all props passed to the component, and its HTMLElement after it
-  * renders. Using the component HTMLElement, you can update it however you want, but be aware that
-  * this element will be out of React's scope, so hooks won't work inside the `onUpdate` function.
-  *
-  * The given component will be wrapped in an HTML element that tells React whether to hydrate it
-  * or not. By default, the given component will be wrapped in a `div`. You can change the wrapper
-  * element by passing the `WrapperElement` option. Possible values are 'div' and 'span'. You can
-  * also use `withoutHydrationInline` instead of this function, which defaults to a `span`.
-  *
-  * Finally, the given component will also be able to receive a new prop: `forceHydration`. If you
-  * set it to `true`, your component will hydrate on both the server and client side, regardless of
-  * the current environment.
-  *
-  * @param options
-  * An optional configuration object for the hydration wrapper.
-  *
-  * @returns
-  * A HOC which places the given component inside a no-hydration wrapper. The components inside
-  * this wrapper won't hydrate on the client side in production environments.
-  */
+ * Makes React skip hydration of the given component on the browser in production. The given
+ * component will still hydrate and behave normally on the Edit site (because it runs in a
+ * development environment) and on Server Side Rendering.
+ *
+ * This allows developers to create optimized "static" versions of their components, which are
+ * interactive on Edit sites, but static on browsers in production. For instance, a rich-text
+ * editor may have a static version with all interactive functions stripped out, since these are
+ * not used by end users on production sites.
+ *
+ * Components can still have interactivity if needed. For instance, an accordion component still
+ * needs to be expandable by end users. To do this, you can pass an `onUpdate` function in the
+ * options object to receive all props passed to the component, and its HTMLElement after it
+ * renders. Using the component HTMLElement, you can update it however you want, but be aware that
+ * this element will be out of React's scope, so hooks won't work inside the `onUpdate` function.
+ *
+ * The given component will be wrapped in an HTML element that tells React whether to hydrate it
+ * or not. By default, the given component will be wrapped in a `div`. You can change the wrapper
+ * element by passing the `WrapperElement` option. Possible values are 'div' and 'span'. You can
+ * also use `withoutHydrationInline` instead of this function, which defaults to a `span`.
+ *
+ * Finally, the given component will also be able to receive a new prop: `forceHydration`. If you
+ * set it to `true`, your component will hydrate on both the server and client side, regardless of
+ * the current environment.
+ *
+ * @param options
+ * An optional configuration object for the hydration wrapper.
+ *
+ * @returns
+ * A HOC which places the given component inside a no-hydration wrapper. The components inside
+ * this wrapper won't hydrate on the client side in production environments.
+ */
 export const withoutHydration: WithoutHydrationFunction = (options) => {
   if (isStaticClientSide) return withoutHydrationClientSide(options);
 

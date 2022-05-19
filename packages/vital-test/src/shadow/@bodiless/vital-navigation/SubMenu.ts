@@ -15,26 +15,20 @@
 import { vitalSubMenuBase, asSubMenuToken } from '@bodiless/vital-navigation';
 import { addProps } from '@bodiless/fclasses';
 
-const Footer = asSubMenuToken({
-  ...vitalSubMenuBase.Footer,
-  Compose: {
-    ...vitalSubMenuBase.Footer.Compose,
+const Footer = asSubMenuToken(vitalSubMenuBase.Footer, {
+  Behavior: {
     _: addProps({ 'data-shadowed-by-2': '__vital__:FooterSubMenu' }),
   },
 });
 
-const TopNav = asSubMenuToken({
-  ...vitalSubMenuBase.TopNav,
-  Compose: {
-    ...vitalSubMenuBase.TopNav.Compose,
+const TopNav = asSubMenuToken(vitalSubMenuBase.TopNav, {
+  Behavior: {
     _: addProps({ 'data-shadowed-by': '__vital__:TopNavSubMenu' }),
   },
 });
 
-const Burger = asSubMenuToken({
-  ...vitalSubMenuBase.Burger,
-  Compose: {
-    ...vitalSubMenuBase.Burger.Compose,
+const Burger = asSubMenuToken(vitalSubMenuBase.Burger, {
+  Behavior: {
     _: addProps({ 'data-shadowed-by': '__vital__:BurgerSubMenu' }),
   },
 });

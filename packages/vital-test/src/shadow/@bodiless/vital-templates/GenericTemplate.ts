@@ -17,13 +17,11 @@ import {
 } from '@bodiless/fclasses';
 import { asGenericTemplateToken, vitalGenericTemplateBase } from '@bodiless/vital-templates';
 
-const Default = asGenericTemplateToken({
-  ...vitalGenericTemplateBase.Default,
-  Core: {
-    ...vitalGenericTemplateBase.Default.Core,
+const Default = asGenericTemplateToken(vitalGenericTemplateBase.Default, {
+  Behavior: {
     TemplateWrapper: flowHoc(
       replaceWith(Div),
-      addProps({ 'data-shadowed-by': '__vital__GenericTemplate' }),
+      addProps({ 'data-shadowed-by': '__vital__:GenericTemplate' }),
     ),
   },
 });

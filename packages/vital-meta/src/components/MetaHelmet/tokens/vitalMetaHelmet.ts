@@ -16,7 +16,7 @@ import {
   withMeta, withTitle, withMetaStatic, asBodilessHelmet,
 } from '@bodiless/components';
 import { useMenuOptionUI } from '@bodiless/core';
-import { asElementToken } from '@bodiless/vital-elements';
+import { asElementToken, asSimpleMetaFieldToken } from '@bodiless/vital-elements';
 import {
   flowIf, HOC, Token, as, FlowHoc, flowHoc, TokenDef
 } from '@bodiless/fclasses';
@@ -24,12 +24,6 @@ import {
 import {
   withSeoMetaForm, withShareMetaForm, withMetaHtmlAttributes, useIsHomePage,
 } from '../helpers';
-
-const asSimpleMetaFieldToken = (...tokens: Token[]) => asElementToken({
-  Core: {
-    _: Array.isArray(tokens) ? as(...tokens) : tokens,
-  },
-});
 
 // SEO tokens
 
@@ -191,5 +185,4 @@ export {
   WithSeoForm,
   WithShareForm,
   WithHomePageSchemas,
-  asSimpleMetaFieldToken,
 };

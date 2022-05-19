@@ -12,8 +12,7 @@
  * limitations under the License.
  */
 
-import { vitalCardBase } from '@bodiless/vital-card';
-import { asFluidToken } from '@bodiless/vital-elements';
+import { vitalCardBase, asCardToken } from '@bodiless/vital-card';
 import {
   Div,
   addProps,
@@ -21,18 +20,14 @@ import {
   flowHoc
 } from '@bodiless/fclasses';
 
-const Default = asFluidToken({
-  ...vitalCardBase.Default,
-  Components: {
-    ...vitalCardBase.Default.Components,
+const Default = asCardToken(vitalCardBase.Default, {
+  Behavior: {
     Wrapper: addProps({ 'data-shadowed-by': '__vital__:Card' }),
   },
 });
 
-const Hero = asFluidToken({
-  ...vitalCardBase.Hero,
-  Components: {
-    ...vitalCardBase.Hero.Components,
+const Hero = asCardToken(vitalCardBase.Hero, {
+  Behavior: {
     Wrapper: flowHoc(
       startWith(Div),
       addProps({ 'data-shadowed-by': '__vital__:HeroCard' }),

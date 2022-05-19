@@ -12,14 +12,11 @@
  * limitations under the License.
  */
 
-import { vitalLayoutBase } from '@bodiless/vital-layout';
-import { asFluidToken } from '@bodiless/vital-elements';
+import { vitalLayoutBase, asLayoutToken } from '@bodiless/vital-layout';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asFluidToken({
-  ...vitalLayoutBase.Default,
-  Components: {
-    ...vitalLayoutBase.Default.Components,
+const Default = asLayoutToken(vitalLayoutBase.Default, {
+  Behavior: {
     OuterContainer: addProps({ 'data-shadowed-by': '__vital__:Layout' }),
   },
 });
