@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { HOC, flowHoc } from '@bodiless/fclasses';
+import { HOC, flowHoc, HOCWithMeta } from '@bodiless/fclasses';
 
 export type Tokens = {
   [key: string]: HOC,
@@ -24,7 +24,8 @@ class TokenMap<P> {
   protected groupsFor: (token?: HOC) => string[];
 
   constructor(groupsFor?: (token?: HOC) => string[]) {
-    this.groupsFor = groupsFor || ((token?: HOC) => token?.meta?.categories?.Category || []);
+    this.groupsFor = groupsFor
+      || ((token?: HOCWithMeta) => token?.meta?.categories?.Category || []);
   }
 
   get names() {

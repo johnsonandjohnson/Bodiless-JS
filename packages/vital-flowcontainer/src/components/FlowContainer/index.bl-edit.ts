@@ -12,5 +12,13 @@
  * limitations under the License.
  */
 
-export { default as FlowContainerStatic } from './FlowContainerClean';
-export { default as vitalFlowContainerStatic } from './tokens';
+import { FlowContainerStatic } from './FlowContainerClean';
+import vitalFlowContainer from './tokens';
+
+/**
+ * Use these flow container tokens only with `FlowContainerStatic`
+ * @category Token Collection
+ */
+const vitalFlowContainerStatic = vitalFlowContainer;
+
+export { FlowContainerStatic, vitalFlowContainerStatic };

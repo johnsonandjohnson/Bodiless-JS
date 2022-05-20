@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/oidc",
-  "version": "1.0.0-beta.18",
+  "version": "1.0.0-rc.1",
   "description": "Library to provide OpenID Connect (OIDC) and OAuth2 protocol support for client-side",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
@@ -19,14 +19,14 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
-    "build:watch": "npm run build -- --watch",
-    "build:api-doc": "typedoc --out doc/api src",
-    "lint": "tslint ./src/**/*.ts?x",
+    "build": "run-p build:lib",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api ./src",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.18",
+    "@bodiless/cli": "^1.0.0-rc.1",
     "axios": "^0.21.0",
     "enzyme": "^3.9.0",
     "oidc-client-ts": "2.0.0-rc.2"

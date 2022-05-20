@@ -86,6 +86,8 @@ const withDesignAtSingle = <C extends DesignableComponents = DesignableComponent
  *   Bar: addClasses('bar'),
  * }
  * ```
+ *
+ * @category Design API
  */
 export const withDesignAt = <C extends DesignableComponents = DesignableComponents>(
   ...paths: DesignPath[]
