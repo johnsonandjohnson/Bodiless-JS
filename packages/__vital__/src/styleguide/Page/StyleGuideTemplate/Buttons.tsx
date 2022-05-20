@@ -136,25 +136,25 @@ const Examples = (props: any) => (
       <DefaultButton />
     </div>
     <C.H3>Primary Buttons</C.H3>
-    <div className="flex flex-wrap w-full p-8 space-x-4">
+    <div className="flex flex-col lg:flex-row lg:flex-wrap w-full p-8 gap-4">
       <PrimaryButton />
       <PrimarySelectedButton />
       <PrimaryDisabledButton />
     </div>
     <C.H3>Primary Buttons With Hover Arrows</C.H3>
-    <div className="flex flex-wrap w-full p-8 space-x-4">
+    <div className="flex flex-col lg:flex-row lg:flex-wrap w-full p-8 gap-4">
       <PrimaryButtonWithArrow />
       <PrimarySelectedButtonWithArrow />
       <PrimaryDisabledButtonWithArrow />
     </div>
     <C.H3>Secondary Buttons</C.H3>
-    <div className="flex flex-wrap w-full p-8 space-x-4">
+    <div className="flex flex-col lg:flex-row lg:flex-wrap w-full p-8 gap-4">
       <SecondaryButton />
       <SecondarySelectedButton />
       <SecondaryDisabledButton />
     </div>
     <C.H3>Secondary Buttons With Hover Arrows</C.H3>
-    <div className="flex flex-wrap w-full p-8 space-x-4">
+    <div className="flex flex-col lg:flex-row lg:flex-wrap w-full p-8 gap-4">
       <SecondaryButtonWithArrow />
       <SecondarySelectedButtonWithArrow />
       <SecondaryDisabledButtonWithArrow />
