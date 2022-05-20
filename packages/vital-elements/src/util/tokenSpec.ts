@@ -106,7 +106,7 @@ const asTokenGroup = (...m: TokenMeta[]) => <K extends string>(
     {},
   ) as TC<K>;
 
-const asSimpleMetaFieldToken = (...tokens: Token[]) => asElementToken({
+const asSimpleToken = (...tokens: Token[]) => asElementToken({
   Core: {
     _: Array.isArray(tokens) ? as(...tokens) : tokens,
   },
@@ -114,5 +114,5 @@ const asSimpleMetaFieldToken = (...tokens: Token[]) => asElementToken({
 
 export {
   asVitalTokenSpec, asMetaToken, asElementToken, asFluidToken,
-  asTokenGroup, asSimpleMetaFieldToken
+  asTokenGroup, asSimpleToken
 };
