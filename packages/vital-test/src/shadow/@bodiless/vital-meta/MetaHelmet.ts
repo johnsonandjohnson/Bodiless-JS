@@ -13,7 +13,7 @@
  */
 
 import { withMeta } from '@bodiless/components';
-import { asElementToken, asSimpleMetaFieldToken } from '@bodiless/vital-elements';
+import { asElementToken, asSimpleToken } from '@bodiless/vital-elements';
 import {
   vitalMetaHelmetBase,
   WithShareDescription,
@@ -28,7 +28,7 @@ import {
   WithUTMContent,
 } from '@bodiless/vital-meta';
 
-const WithMetaKeywords = asSimpleMetaFieldToken(withMeta({
+const WithMetaKeywords = asSimpleToken(withMeta({
   name: 'keywords',
   label: 'Keywords',
   placeholder: 'No more than 10 keyword phrases',
@@ -42,7 +42,7 @@ const SEO = asElementToken({
   },
 });
 
-const WithTwitterDescription = asSimpleMetaFieldToken(withMeta({
+const WithTwitterDescription = asSimpleToken(withMeta({
   name: 'twitter:description', label: 'Twitter Description',
 })('twitter-description'));
 

@@ -27,8 +27,10 @@ const Plain = asImageToken(vitalImageBase.Plain, {
   },
 });
 
-export default {
+const vitalImage: typeof vitalImageBase = {
   ...vitalImageBase,
   Default,
   Plain,
 };
+
+export default vitalImage;

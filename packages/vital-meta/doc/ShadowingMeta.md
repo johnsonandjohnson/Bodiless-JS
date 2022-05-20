@@ -10,10 +10,10 @@ beginning or end of the form (prepend/append), or if you want to control the ord
 
 ## Define New Meta Data Fields
 
-`asSimpleMetaFieldToken` is a token that you can use to compose a new field using `withMeta`:
+`asSimpleToken` is a token that you can use to compose a new field using `withMeta`:
 
 ```js
-const WithMetaKeywords = asSimpleMetaFieldToken(withMeta({
+const WithMetaKeywords = asSimpleToken(withMeta({
   // Meta Data name that will render (i.e., <meta name="keywords" ... >).
   name: 'keywords',
   // Label on Form.
@@ -22,7 +22,7 @@ const WithMetaKeywords = asSimpleMetaFieldToken(withMeta({
   placeholder: 'No more than 10 keyword phrases',
 })('page-keywords')); // page-keywords is the node key that will be used.
 
-const WithTwitterDescription = asSimpleMetaFieldToken(withMeta({
+const WithTwitterDescription = asSimpleToken(withMeta({
   // Meta Data name that will render (i.e., <meta name="twitter:description" ... >).
   name: 'twitter:description',
   // Label on Form.

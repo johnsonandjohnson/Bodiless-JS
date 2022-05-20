@@ -16,7 +16,7 @@ import {
   withMeta, withTitle, withMetaStatic, asBodilessHelmet,
 } from '@bodiless/components';
 import { useMenuOptionUI } from '@bodiless/core';
-import { asElementToken, asSimpleMetaFieldToken } from '@bodiless/vital-elements';
+import { asElementToken, asSimpleToken } from '@bodiless/vital-elements';
 import {
   flowIf, HOC, Token, as, FlowHoc, flowHoc, TokenDef
 } from '@bodiless/fclasses';
@@ -27,30 +27,30 @@ import {
 
 // SEO tokens
 
-const WithPageTitle = asSimpleMetaFieldToken(withTitle({
+const WithPageTitle = asSimpleToken(withTitle({
   name: 'title', label: 'Title', placeholder: 'Rec 30-65 character',
 })('page-title'));
 
-const WithPageDescription = asSimpleMetaFieldToken(withMeta({
+const WithPageDescription = asSimpleToken(withMeta({
   name: 'description',
   useFormElement: () => useMenuOptionUI().ComponentFormTextArea,
   label: 'Description',
   placeholder: 'Rec < 160 char',
 })('page-description'));
 
-const WithOrganizationAreaServed = asSimpleMetaFieldToken(withMeta({
+const WithOrganizationAreaServed = asSimpleToken(withMeta({
   name: 'areaServed', label: 'Organization Area Served',
 })('organization-area-served'));
 
-const WithOrganizationContactOption = asSimpleMetaFieldToken(withMeta({
+const WithOrganizationContactOption = asSimpleToken(withMeta({
   name: 'contactOption', label: 'Organization Contact Option',
 })('organization-contact-option'));
 
-const WithOrganizationContactType = asSimpleMetaFieldToken(withMeta({
+const WithOrganizationContactType = asSimpleToken(withMeta({
   name: 'contactType', label: 'Organization Contact Type',
 })('organization-contact-type'));
 
-const WithOrganizationTelephone = asSimpleMetaFieldToken(withMeta({
+const WithOrganizationTelephone = asSimpleToken(withMeta({
   name: 'telephone', label: 'Organization Telephone',
 })('organization-telephone'));
 
@@ -64,7 +64,7 @@ const WithHomePageSchemas = asElementToken({
   Flow: flowIf(useIsHomePage),
 });
 
-const WithHtml = asSimpleMetaFieldToken(
+const WithHtml = asSimpleToken(
   withMetaHtmlAttributes('Set at /src/data/site/meta$html.json', 'Set at /src/data/site/meta$html.json', 'html', 'site'),
 );
 
@@ -91,48 +91,48 @@ const SEO = asElementToken({
   },
 });
 // Social Share OG & UTM tokens
-const WithUTMCampaign = asSimpleMetaFieldToken(withMetaStatic({
+const WithUTMCampaign = asSimpleToken(withMetaStatic({
   name: 'utm_campaign',
 })({ nodeKey: 'utm-campaign', nodeCollection: 'site' }));
 
-const WithSiteName = asSimpleMetaFieldToken(withMetaStatic({
+const WithSiteName = asSimpleToken(withMetaStatic({
   name: 'og:site_name', attribute: 'property',
 })({ nodeKey: 'og-sitename', nodeCollection: 'site' }));
 
-const WithTwitterCard = asSimpleMetaFieldToken(withMetaStatic({
+const WithTwitterCard = asSimpleToken(withMetaStatic({
   name: 'twitter:card',
 })({ nodeKey: 'twitter-card', nodeCollection: 'site' }, 'summary'));
 
-const WithShareType = asSimpleMetaFieldToken(withMeta({
+const WithShareType = asSimpleToken(withMeta({
   name: 'og:type', attribute: 'property', label: 'OG Type',
 })({ nodeKey: 'og-type' }));
 
-const WithTwitterTitle = asSimpleMetaFieldToken(withMeta({
+const WithTwitterTitle = asSimpleToken(withMeta({
   name: 'twitter:title', label: 'Twitter Title',
 })('twitter-title'));
 
-const WithUTMContent = asSimpleMetaFieldToken(withMeta({
+const WithUTMContent = asSimpleToken(withMeta({
   name: 'utm_content', label: 'UTM Content',
 })('utm-content'));
 
-const WithShareDescription = asSimpleMetaFieldToken(withMeta({
+const WithShareDescription = asSimpleToken(withMeta({
   name: 'og:description',
   useFormElement: () => useMenuOptionUI().ComponentFormTextArea,
   label: 'Description',
   attribute: 'property',
 })('og-description'));
 
-const WithShareUrl = asSimpleMetaFieldToken(withMeta({
+const WithShareUrl = asSimpleToken(withMeta({
   name: 'og:url', label: 'Url', attribute: 'property',
 })('og-url'));
 
-const WithShareImage = asSimpleMetaFieldToken(withMeta({
+const WithShareImage = asSimpleToken(withMeta({
   name: 'og:image',
   label: 'Image (provide absolute URL)',
   attribute: 'property',
 })('og-image'));
 
-const WithShareTitle = asSimpleMetaFieldToken(withMeta({
+const WithShareTitle = asSimpleToken(withMeta({
   name: 'og:title', label: 'Title', attribute: 'property',
 })('og-title'));
 
