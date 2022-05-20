@@ -1,3 +1,0 @@
-# Vital Search Component
-
-TBD
