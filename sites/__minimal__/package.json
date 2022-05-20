@@ -46,7 +46,7 @@
   },
   "scripts": {
     "build": "gatsby build",
-    "build:doc": "bl-docs-build",
+    "build:docs": "bl-docs-build",
     "build:env-vars": "bodiless generate-env-vars",
     "build:lib": "bl-clear-logs && gatsby build && bl-validate-logs",
     "build:stats": "BODILESS_BUILD_STATS=1 npm run build",
@@ -54,7 +54,7 @@
     "clean": "gatsby clean",
     "dev-backend": "bodiless-backend",
     "dev-frontend": "gatsby develop",
-    "prestart": "npm run build:doc",
+    "prestart": "npm run build:docs",
     "serve": "gatsby serve",
     "serve:docs": "docsify serve ./doc",
     "start": "run-p -r dev-frontend dev-backend"
