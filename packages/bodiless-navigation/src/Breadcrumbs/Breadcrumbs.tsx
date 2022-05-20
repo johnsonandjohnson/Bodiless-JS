@@ -14,9 +14,8 @@
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { ComponentType } from 'react';
-import { withNode, useNode } from '@bodiless/core';
+import { withNode } from '@bodiless/core';
 import type { WithNodeProps } from '@bodiless/core';
-import { LinkData } from '@bodiless/components';
 import {
   designable, addProps, Fragment, withDesign, replaceWith, withoutProps, ComponentOrTag,
   flowIf, not,
