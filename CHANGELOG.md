@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.18...v1.0.0-rc.1) (2022-05-20)
+
+
+### Bug Fixes
+
+* **@sites/test-site:** Disable tsconfig-paths-webpack-plugin with environment variable ([#1775](https://github.com/johnsonandjohnson/bodiless-js/issues/1775)) ([d849a5e](https://github.com/johnsonandjohnson/bodiless-js/commit/d849a5e892b83909873c0567308ede67ace2176b))
+* **bodiless-core:** Unhandled Runtime Error when node data is not available ([#1776](https://github.com/johnsonandjohnson/bodiless-js/issues/1776)) ([7519417](https://github.com/johnsonandjohnson/bodiless-js/commit/7519417eb3cb99d03bf7efac8013b1d3f7740f5e))
+* Fix Content Library hover indicator missing ([#1786](https://github.com/johnsonandjohnson/bodiless-js/issues/1786)) ([021be20](https://github.com/johnsonandjohnson/bodiless-js/commit/021be20132149e70d6db366ccc8c54f468ade423))
+* **release:** Make schema-org and vital-youtube packages public ([#1795](https://github.com/johnsonandjohnson/bodiless-js/issues/1795)) ([209e84c](https://github.com/johnsonandjohnson/bodiless-js/commit/209e84c36556237cde51075650e797c131fb5561))
+* **vital-demo:** fix logo & favicons ([#1788](https://github.com/johnsonandjohnson/bodiless-js/issues/1788)) ([67c3ebb](https://github.com/johnsonandjohnson/bodiless-js/commit/67c3ebbd71585052e1b9fd3160fabae140b28ebc)), closes [pr#1498](https://github.com/pr/issues/1498)
+
+
+### Features
+
+* **vital-hero, vital-image, vital-card:** Add Hero & Card component and update Image  ([#1500](https://github.com/johnsonandjohnson/bodiless-js/issues/1500)) ([95f2c3d](https://github.com/johnsonandjohnson/bodiless-js/commit/95f2c3dcf06c6f51bb6b3d252ca6f4f576899dd4)), closes [pr#1498](https://github.com/pr/issues/1498)
+
+
+
+
+
 # [1.0.0-beta.18](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.17...v1.0.0-beta.18) (2022-05-11)
 
 
