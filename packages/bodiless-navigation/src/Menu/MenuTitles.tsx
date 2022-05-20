@@ -14,9 +14,9 @@
 
 import React, { ComponentType, FC } from 'react';
 import {
-  withSidecarNodes, withNode, withNodeKey, useNode,
+  withSidecarNodes, withNode, withNodeKey,
 } from '@bodiless/core';
-import { asEditable, withBodilessLinkToggle, LinkData } from '@bodiless/components';
+import { asEditable, withBodilessLinkToggle } from '@bodiless/components';
 import { asBodilessLink } from '@bodiless/components-ui';
 import { CardClean } from '@bodiless/card';
 import {
@@ -109,13 +109,6 @@ const asMenuCard = flowHoc(
   withNodeKey('title'),
 );
 
-const useHasLink = () => {
-  const { linkNodeKey } = DEFAULT_NODE_KEYS;
-  const { node } = useNode();
-  const linkHref = node.child<LinkData>(linkNodeKey);
-  return Boolean(linkHref.data.href);
-};
-
 export default MenuTitle;
 export {
   DEFAULT_NODE_KEYS,
@@ -123,5 +116,4 @@ export {
   withDefaultMenuTitleEditors,
   asMenuCard,
   asMenuTitle,
-  useHasLink,
 };

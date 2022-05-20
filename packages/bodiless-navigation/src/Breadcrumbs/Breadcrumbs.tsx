@@ -14,11 +14,12 @@
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { ComponentType } from 'react';
-import { withNode } from '@bodiless/core';
+import { withNode, useNode } from '@bodiless/core';
+import { LinkData } from '@bodiless/components';
 import type { WithNodeProps } from '@bodiless/core';
 import {
   designable, addProps, Fragment, withDesign, replaceWith, withoutProps, ComponentOrTag,
-  flowIf, not,
+  flowIf, not, Button,
 } from '@bodiless/fclasses';
 import { observer } from 'mobx-react';
 import flowRight from 'lodash/flowRight';
@@ -26,7 +27,7 @@ import { asStylableBreadcrumbs } from './Breadcrumb.token';
 
 import withBreadcrumbItemsFromStore from './withBreadcrumbItemsFromStore';
 import withBreadcrumbsSD from './withBreadcrumbsStructuredData';
-import MenuTitle, { useHasLink } from '../Menu/MenuTitles';
+import MenuTitle from '../Menu/MenuTitles';
 
 import type {
   BreadcrumbsComponents,
@@ -35,6 +36,12 @@ import type {
 } from './types';
 
 const ItemNodeProvider = withNode(Fragment) as ComponentType<WithNodeProps>;
+const useIsLink = (linkNodeKey: string) => {
+  const { node } = useNode();
+  const linkHref = node.child<LinkData>(linkNodeKey);
+  console.log('===========', node.path, linkHref.path, linkHref.data, Boolean(linkHref.data.href), linkNodeKey);
+  return Boolean(linkHref.data.href);
+};
 
 const BreadcrumbsClean$ = (props: CleanBreadcrumbsProps) => {
   const {
@@ -68,8 +75,9 @@ const BreadcrumbsClean$ = (props: CleanBreadcrumbsProps) => {
         </React.Fragment>
       );
     }
+    // Replace Link with Fragment if no link data found.
     const Title = withDesign({
-      Link: flowIf(not(useHasLink))(replaceWith(Fragment)),
+      Link: flowIf(() => !(useIsLink('link')))(replaceWith(Fragment)),
     })(C.Title);
     return (
       <React.Fragment key={item.uuid}>
