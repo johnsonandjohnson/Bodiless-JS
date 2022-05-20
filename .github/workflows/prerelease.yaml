@@ -35,7 +35,7 @@ jobs:
       # In order to disable common version line remove the --force-publish flag in lerna command below
       - name: Prerelease
         run: |
-          npx lerna version --conventional-commits --conventional-prerelease --preid=beta --include-merged-tags --force-publish --yes
+          npx lerna version --conventional-commits --conventional-prerelease --preid=rc --include-merged-tags --force-publish --yes
       - name: Enable branch protection
         uses: octokit/request-action@v2.x
         with:
