@@ -45,6 +45,11 @@ const ImageHero = as(
   withNodeKey('imagehero'),
 )(Img);
 
+const PlainImage = as(
+  vitalImage.Plain,
+  withNodeKey('plainimage'),
+)(Img);
+
 /* @todo
  * Rendered only the two types of images available in flow container as separate components.
  * To do is provide all variations we want tested individually.
@@ -59,6 +64,8 @@ const Examples = (props: any) => (
     <hr className="my-4" />
     <C.H3>Hero</C.H3>
     <ImageHero />
+    <C.H3>Plain</C.H3>
+    <PlainImage />
   </>
 );
 

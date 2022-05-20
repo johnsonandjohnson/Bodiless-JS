@@ -42,7 +42,7 @@ import type {
 } from 'gatsby-image';
 import GatsbyImagePresets from './GatsbyImagePresets';
 
-type BodilessImageComponents = {
+export type BodilessImageComponents = {
   GatsbyImage: CT<GatsbyPluginImageProps>,
   Image: CT<any>,
 };

@@ -12,17 +12,23 @@
  * limitations under the License.
  */
 
-import { vitalImageBase } from '@bodiless/vital-image';
-import { asElementToken } from '@bodiless/vital-elements';
+import { vitalImageBase, asImageToken } from '@bodiless/vital-image';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asElementToken(vitalImageBase.Default, {
+const Default = asImageToken(vitalImageBase.Default, {
   Behavior: {
-    _: addProps({ 'data-shadowed-by': '__vital__:Image' }),
+    _: addProps({ 'data-shadowed-by': '__vital__:Image:Gatsby' }),
+  },
+});
+
+const Plain = asImageToken(vitalImageBase.Plain, {
+  Behavior: {
+    _: addProps({ 'data-shadowed-by': '__vital__:Image:Plain' }),
   },
 });
 
 export default {
   ...vitalImageBase,
   Default,
+  Plain,
 };
