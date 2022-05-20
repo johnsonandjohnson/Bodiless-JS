@@ -12,21 +12,9 @@
  * limitations under the License.
  */
 
-import React, { ComponentType } from 'react';
 import { BreadcrumbsClean } from '@bodiless/navigation';
 import type { BreadcrumbsComponents } from '@bodiless/navigation';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
-
-export const asBreadcrumbsLink = (
-  Component: ComponentType<any> | string
-) => (props: any) => {
-  const { href, children } = props;
-  return (href === '#') ? (
-    <>{children}</>
-  ) : (
-    <Component {...props} />
-  );
-};
 
 export const asBreadcrumbsToken = asVitalTokenSpec<BreadcrumbsComponents>();
 

@@ -14,10 +14,12 @@
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { ComponentType } from 'react';
-import { withNode } from '@bodiless/core';
+import { withNode, useNode } from '@bodiless/core';
 import type { WithNodeProps } from '@bodiless/core';
+import { LinkData } from '@bodiless/components';
 import {
   designable, addProps, Fragment, withDesign, replaceWith, withoutProps, ComponentOrTag,
+  flowIf, not,
 } from '@bodiless/fclasses';
 import { observer } from 'mobx-react';
 import flowRight from 'lodash/flowRight';
@@ -25,7 +27,7 @@ import { asStylableBreadcrumbs } from './Breadcrumb.token';
 
 import withBreadcrumbItemsFromStore from './withBreadcrumbItemsFromStore';
 import withBreadcrumbsSD from './withBreadcrumbsStructuredData';
-import MenuTitle from '../Menu/MenuTitles';
+import MenuTitle, { useHasLink } from '../Menu/MenuTitles';
 
 import type {
   BreadcrumbsComponents,
@@ -67,11 +69,14 @@ const BreadcrumbsClean$ = (props: CleanBreadcrumbsProps) => {
         </React.Fragment>
       );
     }
+    const Title = withDesign({
+      Link: flowIf(not(useHasLink))(replaceWith(Fragment)),
+    })(C.Title);
     return (
       <React.Fragment key={item.uuid}>
         <C.Item position={position$} isCurrentPage={isCurrentPage}>
           <ItemNodeProvider nodeKey={item.nodeKey} nodeCollection={item.nodeCollection}>
-            <C.Title isCurrentPage={isCurrentPage} />
+            <Title isCurrentPage={isCurrentPage} />
           </ItemNodeProvider>
         </C.Item>
         {!isLastItem && <C.Separator key={`separator${item.uuid}`} />}
