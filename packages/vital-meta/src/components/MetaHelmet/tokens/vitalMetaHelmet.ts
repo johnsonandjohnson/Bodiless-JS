@@ -18,7 +18,7 @@ import {
 import { useMenuOptionUI } from '@bodiless/core';
 import { asElementToken, asSimpleToken } from '@bodiless/vital-elements';
 import {
-  flowIf, HOC, Token, as, FlowHoc, flowHoc, TokenDef
+  flowIf, HOC, Token, as, FlowHoc, flowHoc, HOCDef
 } from '@bodiless/fclasses';
 
 import {
@@ -75,7 +75,7 @@ const WithSeoForm = asElementToken({
 });
 const flowWithFinally = (
   ...finalTokens: Token[]
-): FlowHoc<any> => (...tokens: TokenDef<any, any, any>[]) => flowHoc(
+): FlowHoc<any> => (...tokens: HOCDef<any, any, any>[]) => flowHoc(
   ...tokens,
   as(...finalTokens),
 );
