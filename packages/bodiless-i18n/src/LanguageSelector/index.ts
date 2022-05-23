@@ -36,7 +36,7 @@ export const useLanguageSelectorProps = () => {
     children: secondLanguage.label || 'undefined',
     href: secondLanguage.isDefault
       ? pagePathWithoutPrefix
-      : `${secondLanguage.name}${pagePathWithoutPrefix}`,
+      : `/${secondLanguage.name}${pagePathWithoutPrefix}`,
   };
 };
 
