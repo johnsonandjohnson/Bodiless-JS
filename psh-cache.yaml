@@ -1,0 +1,52 @@
+###
+ # Copyright © 2019 Johnson & Johnson
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ # http:##www.apache.org#licenses#LICENSE-2.0
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ ##
+
+build:
+  caches:
+    assets:
+      # `directory`, which defaults to the key of the cache definition,
+      # specifies in which directory the cache will be restored/saved
+      # from. The directory is relative to the root of the application.
+      #
+      # The cached data will replace the full contents of this directory
+      # if it exists in the source repository.
+      #
+      # Cache directories cannot be nested into one another. It is
+      # invalid to specify a cache at `foo` and another at `foo/bar`.
+      directory: "build/assets"
+
+      # `watch` (required) specifies that the cache will be rebuilt
+      # if any of the matched files changed.
+      #
+      # This is computed once, based on the source tree. In most cases
+      # these should be files outside of the cached directory.
+      watch:
+        - "assets/**/*.sass"
+        - "assets/**/*.svg"
+
+      # `allow_stale` (default: true) specifies that a cache matching the
+      # specific files specified in `watch` is not available,
+      # an older cache can be used instead.
+      allow_stale: false
+
+      # `share_between_apps` (default: false) specifies that the cache
+      # is shared between multiple applications of the project.
+      share_between_apps: false
+
+    node_modules:
+      # `watch` can degenerate to a single string.
+      watch: "package-lock.json"
+
+    vendor:
+      watch: "composer.*"
