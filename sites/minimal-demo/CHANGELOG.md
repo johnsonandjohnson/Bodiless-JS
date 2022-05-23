@@ -41,4 +41,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **canvasx-layouts:** Layouts & Breakpoints ([#1437](https://github.com/johnsonandjohnson/bodiless-js/issues/1437)) ([be147f1](https://github.com/johnsonandjohnson/bodiless-js/commit/be147f113d66f68f962032947806b97d69eb3aac))
+* **vital-layouts:** Layouts & Breakpoints ([#1437](https://github.com/johnsonandjohnson/bodiless-js/issues/1437)) ([be147f1](https://github.com/johnsonandjohnson/bodiless-js/commit/be147f113d66f68f962032947806b97d69eb3aac))

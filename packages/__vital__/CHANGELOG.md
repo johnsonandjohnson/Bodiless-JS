@@ -125,7 +125,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [1.0.0-beta.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2022-04-13)
 
-**Note:** Version bump only for package @bodiless/__cxstarter__
+**Note:** Version bump only for package @bodiless/__vital__
 
 
 
@@ -136,7 +136,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* **cx-footer:** make footer 'sticky' to bottom viewport on short pages ([#1513](https://github.com/johnsonandjohnson/bodiless-js/issues/1513)) ([dfa818a](https://github.com/johnsonandjohnson/bodiless-js/commit/dfa818a36223d035bf82d2462e1dc6a051aa2d5c))
+* **vital-footer:** make footer 'sticky' to bottom viewport on short pages ([#1513](https://github.com/johnsonandjohnson/bodiless-js/issues/1513)) ([dfa818a](https://github.com/johnsonandjohnson/bodiless-js/commit/dfa818a36223d035bf82d2462e1dc6a051aa2d5c))
 
 
 
@@ -160,7 +160,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * Add static replacement mechanism ([#1440](https://github.com/johnsonandjohnson/bodiless-js/issues/1440)) ([22384f1](https://github.com/johnsonandjohnson/bodiless-js/commit/22384f184e73366bc00ec619e7b08fa3e5dfc29d))
 * **bc-footer:** Add Brand.com Footer ([#1450](https://github.com/johnsonandjohnson/bodiless-js/issues/1450)) ([9025ae5](https://github.com/johnsonandjohnson/bodiless-js/commit/9025ae5351253b71b2193ccb95bcb43919583220)), closes [#7](https://github.com/johnsonandjohnson/bodiless-js/issues/7) [#8](https://github.com/johnsonandjohnson/bodiless-js/issues/8) [#10](https://github.com/johnsonandjohnson/bodiless-js/issues/10) [#13](https://github.com/johnsonandjohnson/bodiless-js/issues/13) [#16](https://github.com/johnsonandjohnson/bodiless-js/issues/16) [#17](https://github.com/johnsonandjohnson/bodiless-js/issues/17)
-* **cx-templates, cx-flowcontainer:** Add generic template  ([#1483](https://github.com/johnsonandjohnson/bodiless-js/issues/1483)) ([d1c1e46](https://github.com/johnsonandjohnson/bodiless-js/commit/d1c1e4652e2be95e3dcf2aba50acf2a6249a1aa9)), closes [#1455](https://github.com/johnsonandjohnson/bodiless-js/issues/1455)
+* **vital-templates, vital-flowcontainer:** Add generic template  ([#1483](https://github.com/johnsonandjohnson/bodiless-js/issues/1483)) ([d1c1e46](https://github.com/johnsonandjohnson/bodiless-js/commit/d1c1e4652e2be95e3dcf2aba50acf2a6249a1aa9)), closes [#1455](https://github.com/johnsonandjohnson/bodiless-js/issues/1455)
 * **webpack:** Token Shadowing ([#1465](https://github.com/johnsonandjohnson/bodiless-js/issues/1465)) ([1b88de6](https://github.com/johnsonandjohnson/bodiless-js/commit/1b88de677896da149d1d02a8a664bac930d05d53)), closes [#1466](https://github.com/johnsonandjohnson/bodiless-js/issues/1466)
 
 
@@ -177,4 +177,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **canvasx-layouts:** Layouts & Breakpoints ([#1437](https://github.com/johnsonandjohnson/bodiless-js/issues/1437)) ([be147f1](https://github.com/johnsonandjohnson/bodiless-js/commit/be147f113d66f68f962032947806b97d69eb3aac))
+* **vital-layouts:** Layouts & Breakpoints ([#1437](https://github.com/johnsonandjohnson/bodiless-js/issues/1437)) ([be147f1](https://github.com/johnsonandjohnson/bodiless-js/commit/be147f113d66f68f962032947806b97d69eb3aac))
