@@ -19,8 +19,6 @@ import {
   addProps,
   stylable,
   flowHoc,
-  replaceWith,
-  Span,
 } from '@bodiless/fclasses';
 import {
   asBreadcrumbs,
@@ -28,7 +26,7 @@ import {
   withEditableFinalTrail,
   withMenuTitleEditors,
 } from '@bodiless/navigation';
-import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
+import { vitalColor } from '@bodiless/vital-elements';
 import { asBreadcrumbsToken } from '../BreadcrumbsClean';
 
 /**
@@ -41,7 +39,6 @@ const Base = asBreadcrumbsToken({
     Separator: addProps({ children: '·' }),
     FinalTrail: withDesign({
       Link: withoutLinkWhenLinkDataEmpty,
-      Title: replaceWith(Span),
     }),
   },
   Schema: {
@@ -63,9 +60,7 @@ const Base = asBreadcrumbsToken({
   Theme: {
     StartingTrail: vitalColor.TextPrimaryInteractiveHover,
     Title: vitalColor.TextPrimaryInteractiveHover,
-    FinalTrail: withDesign({
-      Title: vitalTextDecoration.Bold,
-    }),
+    Item: 'last:font-bold',
   },
 });
 
