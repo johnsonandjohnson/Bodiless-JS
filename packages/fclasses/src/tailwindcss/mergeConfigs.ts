@@ -15,18 +15,17 @@
 import merge from 'lodash/merge';
 import flatten from 'lodash/flatten';
 import path from 'path';
+import type { TailwindConfig } from 'tailwindcss/tailwind-config';
 
-type TailwindConfig = {
-  content?: string[],
-  theme?: object,
-  plugins?: string[],
-};
-
-type Package = {
+export type Package = {
   root: string,
-  tailwindConfig: TailwindConfig,
+  tailwindConfig: Partial<TailwindConfig>,
 };
 
+/**
+ * @internal
+ * @param packages
+ */
 const getTailwindConfigs = (packages: Package[]) => packages
   .map(({ root, tailwindConfig }) => ({
     ...tailwindConfig,
@@ -65,8 +64,4 @@ const mergeConfigs = (
 
 export {
   mergeConfigs,
-};
-export type {
-  TailwindConfig,
-  Package,
 };

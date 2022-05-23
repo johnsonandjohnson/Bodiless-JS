@@ -19,7 +19,9 @@ export { default as componentSelectorForm } from './ComponentSelector/componentS
 export * from './ComponentSelector/SelectorComponents';
 export type { ComponentSelectorFormProps } from './ComponentSelector/componentSelectorForm';
 export * from './ComponentSelector/types';
-export type { FlowContainerProps, FlowContainerWrapperProps } from './FlowContainer/types';
+export type {
+  FlowContainerProps, FlowContainerWrapperProps, FlowContainerComponents,
+} from './FlowContainer/types';
 export { default as FlowContainer, withMandatoryCategories } from './FlowContainer';
 export type {
   Props as SortableResizableProps,

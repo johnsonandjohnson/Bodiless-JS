@@ -43,7 +43,9 @@ import {
 // @ts-ignore Cannotfind module
 import landscapeImage from './landscape_image.png';
 
-export const asBaseEditableImagePlain: AsBodilessImage = (nodeKey?, placeholder?, useOverrides?) => flowHoc(
+export const asBaseEditableImagePlain: AsBodilessImage = (
+  nodeKey?, placeholder?, useOverrides?
+) => flowHoc(
   flowHoc.meta.term('Component')('Image'),
   flowHoc.meta.term('Category')('Editors'),
   stylable,
