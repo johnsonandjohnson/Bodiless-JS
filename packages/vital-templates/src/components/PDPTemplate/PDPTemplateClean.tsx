@@ -20,6 +20,7 @@ import {
   Fragment,
 } from '@bodiless/fclasses';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
+import { EditorPlainClean } from '@bodiless/vital-editors';
 import { LayoutClean } from '@bodiless/vital-layout';
 import { FlowContainerClean } from '@bodiless/vital-flowcontainer';
 import { PDPTemplateComponents, BasePDPTemplateProps } from './types';
@@ -29,8 +30,8 @@ const pdpTemplateComponents: PDPTemplateComponents = {
   GA4Helmet: Fragment,
   BreadcrumbWrapper: Div,
   Breadcrumb: Div,
-  TopWrapper: Div,
-  TopContent: FlowContainerClean,
+  TopWrapper: Fragment,
+  TopContent: Fragment,
   ContentWrapper: Div,
   ProductImageWrapper: Div,
   ProductImage: Img,
@@ -38,9 +39,9 @@ const pdpTemplateComponents: PDPTemplateComponents = {
   ProductDescriptionWrapper: Div,
   ProductDescription: FlowContainerClean,
   ProductTitleWrapper: Div,
-  ProductTitle: Div,
+  ProductTitle: EditorPlainClean,
   ProductEyebrowWrapper: Div,
-  ProductEyebrow: Div,
+  ProductEyebrow: EditorPlainClean,
   ProductMoreInfo: Fragment,
   BottomWrapper: Div,
   BottomContent: FlowContainerClean,

@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/gatsby-plugin-akamai-auth",
-  "version": "0.3.7",
+  "version": "1.0.0-rc.1",
   "description": "A Gatsby plugin to enable authentication using Akamai Identity Cloud/Janarain.",
   "author": "Ali Al Mustafa <aalmusta@its.jnj.com>",
   "homepage": "",
@@ -17,11 +17,15 @@
     "type": "git",
     "url": "https://github.com/johnsonandjohnson/Bodiless-JS.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run copy:janrain:css && npm run copy:janrain:html && npm run theme:init",
-    "build:required": "npm run build",
-    "build:watch": "npm run build -- --watch",
-    "clean": "rimraf -rf \"dist\" && rimraf index*",
+    "build": "npm run copy && npm run build:lib && npm run theme:init",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "run-p tsc -p ./tsconfig.json --watch && tsc -p ./tsconfig.json --watch",
+    "clean": "rimraf -rf \"dist\" && rimraf -rf \"cjs\" && rimraf index* && rimraf \"doc/api\"",
+    "copy": "copyfiles -u 1 \"./src/dist/**/*.{json,jpg,png}\" \".\" && copyfiles -u 1 \"./src/dist/**/*.{json,jpg,png}\" \"./cjs\"  && npm run copy:janrain:css && npm run copy:janrain:html",
     "copy:janrain:css": "copyfiles -f \"./src/janrain/styles/*.css\" \"./dist/janrain/styles/\"",
     "copy:janrain:html": "copyfiles -f \"./src/janrain/index.html\" \"./dist/janrain/\"",
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src",

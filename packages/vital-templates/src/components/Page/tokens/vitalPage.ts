@@ -12,23 +12,34 @@
  * limitations under the License.
  */
 
-import { as, Token } from '@bodiless/fclasses';
+import { as, on } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
-import { asElementToken } from '@bodiless/vital-elements';
-import { withGA4DesignKeys } from '@bodiless/ga4';
+import { asFluidToken } from '@bodiless/vital-elements';
+import { WithGA4DesignKeys } from '@bodiless/ga4';
 import { asBodilessPage } from '../asBodilessPage';
+import { GenericTemplateClean, vitalGenericTemplate } from '../../GenericTemplate';
+import { PDPTemplateClean, vitalPDPTemplate } from '../../PDPTemplate';
 
-const Default = asElementToken({
+const Default = asFluidToken({
   Core: {
     _: as(
-      asBodilessChameleon('template', undefined, () => ({
-        root: true,
-        label: 'Template',
-        icon: 'grid_view',
-        group: 'page-group',
-        formTitle: 'Choose a template for this page',
-      })),
+      asBodilessChameleon(
+        'template',
+        // Sets 'Default' for new pages creation.
+        { component: 'Default' },
+        () => ({
+          root: true,
+          label: 'Template',
+          icon: 'grid_view',
+          group: 'page-group',
+          formTitle: 'Choose a template for this page',
+        }),
+      ),
     ),
+  },
+  Components: {
+    Default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
+    PDP: on(PDPTemplateClean)(vitalPDPTemplate.Default),
   },
   // @todo restore tools
   // Behavior: {
@@ -43,11 +54,7 @@ const Default = asElementToken({
   //   _: withPageDimensionsContext({ breakpoints }),
   // },
   Compose: {
-    _: as(withGA4DesignKeys as Token),
-  },
-  Components: {
-    // _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
-    // StyleGuide: on(StyleGuideTemplateClean)(vitalStyleGuideTemplate.Default),
+    WithGA4DesignKeys,
   },
 });
 

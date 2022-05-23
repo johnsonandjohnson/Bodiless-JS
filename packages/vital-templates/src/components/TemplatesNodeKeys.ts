@@ -12,7 +12,14 @@
  * limitations under the License.
  */
 
-import __vital__Page from './__vital__Page';
-import __vital__PageStatic from './__vital__Page.bl-static';
-
-export { __vital__Page, __vital__PageStatic };
+export enum TemplateNodeKeys {
+  TopContent = 'top-content',
+  Content = 'main-content',
+  BottomContent = 'bottom-content',
+  // The following node keys are for key fields on specific templates.
+  // Namely PDP but could be used in other templates.
+  Title = 'title',
+  Eyebrow = 'eyebrow',
+  Description = 'description',
+  Image = 'image',
+}

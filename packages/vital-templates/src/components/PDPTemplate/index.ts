@@ -16,4 +16,3 @@ export { default as PDPTemplateClean, asPDPTemplateToken } from './PDPTemplateCl
 export { default as vitalPDPTemplateBase } from './tokens/vitalPDPTemplate';
 export { default as vitalPDPTemplate } from './tokens';
 export type { PDPTemplateComponents } from './types';
-export { PDPTemplateNodeKeys } from './constants';

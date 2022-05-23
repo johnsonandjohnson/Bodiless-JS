@@ -12,27 +12,29 @@
  * limitations under the License.
  */
 
-import { as, on, replaceWith } from '@bodiless/fclasses';
+import { as, replaceWith } from '@bodiless/fclasses';
 import { GA4DataLayerProductItemHelmet } from '@bodiless/ga4';
 import { vitalImage } from '@bodiless/vital-image';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { withNodeKey } from '@bodiless/core';
 import { asSchemaSource, WithProductSchema } from '@bodiless/schema-org';
-import { EditorPlainClean, vitalEditorPlain } from '@bodiless/vital-editors';
+import { vitalEditorPlain } from '@bodiless/vital-editors';
 import { vitalTypography } from '@bodiless/vital-elements';
+import omit from 'lodash/omit';
 import { asPDPTemplateToken } from '../PDPTemplateClean';
 import { vitalGenericTemplate } from '../../GenericTemplate';
-import { PDPNodeKeys } from './constants';
+import { TemplateNodeKeys } from '../../TemplatesNodeKeys';
 
 const Default = asPDPTemplateToken(vitalGenericTemplate.Default, {
   Components: {
     TopContent: replaceWith(() => null),
     GA4Helmet: replaceWith(GA4DataLayerProductItemHelmet),
+    // https://github.com/johnsonandjohnson/Bodiless-JS/issues/1802
     // Gatsby images doesn't work to be source for asSchemaSource('product-image'),
     ProductImage: vitalImage.Plain,
-    ProductDescription: as(vitalFlowContainer.Default),
-    ProductTitle: on(EditorPlainClean)(vitalEditorPlain.Default),
-    ProductEyebrow: on(EditorPlainClean)(vitalEditorPlain.Default),
+    ProductDescription: vitalFlowContainer.Default,
+    ProductTitle: vitalEditorPlain.Default,
+    ProductEyebrow: vitalEditorPlain.Default,
   },
   Layout: {
     ContentWrapper: 'flex flex-wrap',
@@ -48,14 +50,14 @@ const Default = asPDPTemplateToken(vitalGenericTemplate.Default, {
     ProductDetailWrapper: 'lg:pl-2 pt-4 lg:pt-0',
   },
   Theme: {
-    ProductTitleWrapper: vitalTypography.H1NoSpacing,
-    ProductEyebrowWrapper: vitalTypography.EyebrowNoSpacing,
+    ProductTitleWrapper: omit(vitalTypography.H1, 'Spacing'),
+    ProductEyebrowWrapper: omit(vitalTypography.Eyebrow, 'Spacing'),
   },
   Schema: {
-    ProductImage: withNodeKey(PDPNodeKeys.Image),
-    ProductDescription: withNodeKey(PDPNodeKeys.Description),
-    ProductTitle: withNodeKey(PDPNodeKeys.Title),
-    ProductEyebrow: withNodeKey(PDPNodeKeys.Eyebrow),
+    ProductImage: withNodeKey(TemplateNodeKeys.Image),
+    ProductDescription: withNodeKey(TemplateNodeKeys.Description),
+    ProductTitle: withNodeKey(TemplateNodeKeys.Title),
+    ProductEyebrow: withNodeKey(TemplateNodeKeys.Eyebrow),
   },
   SEO: {
     ContentWrapper: WithProductSchema,

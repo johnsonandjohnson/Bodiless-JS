@@ -1,4 +1,4 @@
-# GTM
+# GA4
 
 Provides some utilities to support pushing DataLayer objects to head.
 

@@ -18,17 +18,20 @@ import {
   addProps,
   withDesign,
   Img,
+  flowIf,
+  Fragment,
+  replaceWith,
 } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
 import { LayoutClean, vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
-import { withNode, withNodeKey } from '@bodiless/core';
+import { useNode, withNode, withNodeKey } from '@bodiless/core';
 import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
 import { vitalImage } from '@bodiless/vital-image';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
 import { CardClean, vitalCard } from '@bodiless/vital-card';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
-import { GenericTemplateNodeKeys } from '../constants';
+import { TemplateNodeKeys } from '../../TemplatesNodeKeys';
 
 const heroDefaultData = {
   component: 'Image',
@@ -38,7 +41,17 @@ const heroUseOverrides = () => ({
   groupLabel: 'Hero'
 });
 
-const Default = asGenericTemplateToken({
+const isHomePage = () => useNode().node.pagePath === '/';
+
+const WithNoBreadcrumbsOnHomePage = asGenericTemplateToken({
+  Flow: flowIf(isHomePage),
+  Components: {
+    BreadcrumbWrapper: replaceWith(Fragment),
+    Breadcrumb: replaceWith(Fragment),
+  },
+});
+
+const Base = asGenericTemplateToken({
   Components: {
     PageWrapper: on(LayoutClean)(vitalLayout.Default),
     // @todo breadcrumb placeholder
@@ -55,9 +68,9 @@ const Default = asGenericTemplateToken({
     BottomContent: as(vitalFlowContainer.Default),
   },
   Schema: {
-    TopContent: as(withNode, withNodeKey(GenericTemplateNodeKeys.TopContent)),
-    Content: withNodeKey(GenericTemplateNodeKeys.Content),
-    BottomContent: withNodeKey(GenericTemplateNodeKeys.BottomContent),
+    TopContent: as(withNode, withNodeKey(TemplateNodeKeys.TopContent)),
+    Content: withNodeKey(TemplateNodeKeys.Content),
+    BottomContent: withNodeKey(TemplateNodeKeys.BottomContent),
   },
   Spacing: {
     BreadcrumbWrapper: as(
@@ -76,8 +89,16 @@ const Default = asGenericTemplateToken({
       vitalSpacing.WithSiteXLConstraint
     ),
   },
+  Compose: {
+    WithNoBreadcrumbsOnHomePage,
+  }
+});
+
+const Default = asGenericTemplateToken({
+  ...Base,
 });
 
 export default {
+  Base,
   Default,
 };

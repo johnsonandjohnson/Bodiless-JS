@@ -1,16 +1,11 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.settings.json",
   "compilerOptions": {
     "module": "commonjs",
     "rootDir": "src",
-    "outDir": "./dist",
+    "outDir": "./cjs",
     "baseUrl": ".",
-    "preserveSymlinks": false,
-    "declaration": false,
-    "declarationMap": false,
-    "allowJs": true,
-    "noImplicitAny": false,
-    "types": ["node"],
+    "allowJs": false
   },
   "include": [
     "src"
@@ -20,5 +15,5 @@
     "node_modules",
     "__tests__/**/*.*",
     "src/**/__tests__/**/*.*"
-  ]
+   ]
 }
