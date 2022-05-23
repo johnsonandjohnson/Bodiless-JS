@@ -43,8 +43,8 @@
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "scripts": {
-    "build": "npm-run-all build:env-vars build:lib build:doc",
-    "build:doc": "bl-docs-build",
+    "build": "npm-run-all build:env-vars build:lib build:docs",
+    "build:docs": "bl-docs-build",
     "build:env-vars": "bodiless generate-env-vars",
     "build:lib": "bl-clear-logs && gatsby build && bl-validate-logs",
     "build:stats": "BODILESS_BUILD_STATS=1 npm run build",
@@ -53,7 +53,7 @@
     "dev-backend": "bodiless-backend",
     "dev-frontend": "gatsby develop",
     "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
-    "prestart": "run-s build:env-vars build:doc",
+    "prestart": "run-s build:env-vars build:docs",
     "serve": "gatsby serve",
     "serve:docs": "docsify serve ./doc",
     "start": "run-p -r dev-frontend dev-backend"
