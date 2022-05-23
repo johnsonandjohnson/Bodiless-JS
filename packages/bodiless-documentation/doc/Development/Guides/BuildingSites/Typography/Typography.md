@@ -3,24 +3,24 @@
 The typography starts with defining the font, font size, and line-heights within your
 package/site's `tailwind.config.js`.
 
-## Getting Started with CanvasX Elements: Prebuilt Typography
+## Getting Started with Vital Elements: Prebuilt Typography
 
-The `cx-elements` package provides opinionated typography that can be used as is, or, if needed,
+The `vital-elements` package provides opinionated typography that can be used as is, or, if needed,
 parts can be overridden by your site.
 
 For more information on specific details of typography, it is best to review
-[`cx-elements`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/cx-elements).
+[`vital-elements`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-elements).
 
-If you plan on leveraging other CanvasX components, we recommend leveraging all or parts of
-`cx-elements`.
+If you plan on leveraging other Vital components, we recommend leveraging all or parts of
+`vital-elements`.
 
-For more details on usage and getting started using this package, please follow the [CanvasX
-Elements Typography Guide](/CX_DesignSystem/Components/CX_Elements/CX_SiteTypography).
+For more details on usage and getting started using this package, please follow the [Vital Elements
+Typography Guide](/VitalDesignSystem/Components/VitalElements/SiteTypography).
 
-## Developing Your Typography without Leveraging CanvasX Elements
+## Developing Your Typography without Leveraging Vital Elements
 
 The following section defines a high-level overview of defining your typography. For best practices,
-we recommend following patterns seen in the `cx-elements` package.
+we recommend following patterns seen in the `vital-elements` package.
 
 ### Font Sizes & Line Heights
 
@@ -73,10 +73,10 @@ one occurrence than to search through files and replace the specific class.
 If you want to apply the classes to your entire site, we recommend the following practice:
 
 01. Within `asHelmetToken()`, and in the _Theme_ Domain, provide the site's font class.
-    - For more information, see: [CanvasX Helmet
-      Component](/CX_DesignSystem/Components/CX_Layout/Helmet).
+    - For more information, see: [Vital Helmet
+      Component](/VitalDesignSystem/Components/VitalLayout/Helmet).
 
-01. In `/cx-layout/src/components/Helmet/Helmet.token.ts`, within `asHelmetToken()`, and in the
+01. In `/vital-layout/src/components/Helmet/Helmet.token.ts`, within `asHelmetToken()`, and in the
     _Theme_ Domain, provide the site's font class.
 
     ```js
@@ -86,7 +86,7 @@ If you want to apply the classes to your entire site, we recommend the following
       }
     });
 
-    export const cxHelmet = { Default };
+    export const vitalHelmet = { Default };
     ```
 
 01. Ensure this Helmet token is applied within your Layout tokens.
@@ -94,7 +94,7 @@ If you want to apply the classes to your entire site, we recommend the following
     ```js
     const Base = asLayoutToken({
       Components: {
-        Helmet: as(cxHelmet.Default),
+        Helmet: as(vitalHelmet.Default),
       },
     });
     ```

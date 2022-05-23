@@ -1,8 +1,8 @@
 # Building a Site
 
-This section describes how to build a site using BodilessJS and the CanvasX Design System. While
-this guide specifically uses CanvasX design system, building out custom tokens and components —
-instead of utilizing those offered by CanvasX — will work.
+This section describes how to build a site using BodilessJS and the Vital Design System. While this
+guide specifically uses Vital design system, building out custom tokens and components — instead of
+utilizing those offered by Vital — will work.
 
 ## Overview
 
@@ -31,11 +31,11 @@ instead of utilizing those offered by CanvasX — will work.
     This step will define and implement the basic text editors for your site, which includes a Rich
     Text editor and Plain Text editor. If you have customized your Typography in the previous step,
     you can provide this custom typography to your site's Rich Text editor.
-    01. For an step-by-step overview of using, extending or overriding the editors, see [CanvasX
-        Editors](/CX_DesignSystem/Components/CX_Editors/).
+    01. For an step-by-step overview of using, extending or overriding the editors, see [Vital
+        Editors](/VitalDesignSystem/Components/VitalEditors/).
 
 01. Image Presets:
-    - This step is optional, as the [CanvasX Image](/CX_DesignSystem/Components/CX_Image/) presets
+    - This step is optional, as the [Vital Image](/VitalDesignSystem/Components/VitalImage/) presets
       should provide most required functionality. If there are specific image requirements for your
       site, you may want to extend these tokens.
 
@@ -49,8 +49,8 @@ instead of utilizing those offered by CanvasX — will work.
     - Helmet
     - Togglers
 
-    For a more in-depth guide on working with the layout, please visit [CanvasX
-    Layout](/CX_DesignSystem/Components/CX_Layout/).
+    For a more in-depth guide on working with the layout, please visit [Vital
+    Layout](/VitalDesignSystem/Components/VitalLayout/).
 
 01. FlowContainer/Layout Tool:
     - Implement the basic layout editors for the site.
