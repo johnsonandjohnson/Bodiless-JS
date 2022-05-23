@@ -31,6 +31,8 @@
     "create-redirect-alias.js",
     "tailwind.base.config.js",
     "/doc",
+    "getDocs.js",
+    "bodiless.docs.json",
     "bodiless.content.json"
   ],
   "repository": {
