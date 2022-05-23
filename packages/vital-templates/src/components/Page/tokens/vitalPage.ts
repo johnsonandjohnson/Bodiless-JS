@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { as, on } from '@bodiless/fclasses';
+import { as, on, Token } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { WithGA4DesignKeys } from '@bodiless/ga4';
@@ -54,7 +54,7 @@ const Default = asFluidToken({
   //   _: withPageDimensionsContext({ breakpoints }),
   // },
   Compose: {
-    WithGA4DesignKeys,
+    WithGA4DesignKeys: as(WithGA4DesignKeys as Token),
   },
 });
 
