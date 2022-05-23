@@ -15,7 +15,7 @@
     "build:watch": "cross-env NODE_ENV=development lerna run build:watch --parallel",
     "build:env-vars": "cross-env NODE_ENV=production lerna run build:env-vars --stream",
     "build:tailwind-configs": "cross-env NODE_ENV=production lerna run build:tailwind-configs --stream",
-    "build:doc": "cross-env NODE_ENV=production lerna run build:doc --stream",
+    "build:docs": "cross-env NODE_ENV=production lerna run build:docs --stream",
     "build:api-doc": "cross-env NODE_ENV=production lerna run build:api-doc --stream",
     "check": "cross-env NODE_ENV=production lerna run check --stream",
     "clean": "lerna run clean && rimraf .eslintcache sites/*/.env.development sites/*/.env.production",

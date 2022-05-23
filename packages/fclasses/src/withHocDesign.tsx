@@ -15,11 +15,12 @@
 import React from 'react';
 import { intersection } from 'lodash';
 import type {
-  HocDesign, DesignableComponents, TokenMeta, HOCBase
+  HocDesign, DesignableComponents, TokenMeta, HOC,
 } from './types';
 import { flowHoc } from './flowHoc';
 
 /**
+ * @hidden
  * Creates an HOC which applies a specified design to the wrapped component.
  *
  * A design is a keyed set of HOC's which should be applied to constituent elements
@@ -41,7 +42,7 @@ import { flowHoc } from './flowHoc';
 export const withHocDesign = <C extends DesignableComponents = any>(
   design: HocDesign<C>,
   ...meta: TokenMeta[]
-): HOCBase => flowHoc(
+): HOC => flowHoc(
     Component => {
       const WithDesign = (props: any) => {
         const { design: designFromProps } = props;

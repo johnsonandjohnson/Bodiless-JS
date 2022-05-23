@@ -9,10 +9,12 @@ on:
     types:
       - opened
       - synchronize
+      - edited
     branches:
       - main
 jobs:
   pr-canary-release:
+    if: ${{ contains(github.event.pull_request.title, '[canary]') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

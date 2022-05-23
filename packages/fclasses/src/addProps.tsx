@@ -23,12 +23,14 @@ type NotAFunction = { [key: string]: any, bind?: never, call?: never };
  * HOC that adds props conditionally based on value returned by hook.
  *
  * @param conditionHook
- * A hook which will be invoked to determine whether the props should be added.
+ * A custom React hook which will be invoked to determine whether the props should be added.
  *
  * @returns
  * A function with the same signature as `addProps`
  *
  * @see addProps
+ *
+ * @category HOC Utility
  */
 export const addPropsIf = <B extends object>(
   conditionHook: Condition<B>,
@@ -61,17 +63,21 @@ export const addPropsIf = <B extends object>(
  * ```
  * const DivWithId = addProps({ id: 'Foo' })('div');
  * ```
+ *
+ * @category HOC Utility
  */
 export const addProps = <B extends object, I extends NotAFunction>(
   propsToAdd: I | ((props: B) => I)
 ) => addPropsIf<B>(() => true)<I>(propsToAdd);
 
-/*
+/**
  * Creates an HOC which strips all but the specified props.
  *
  * @param keys A list of the prop-names to keep.
  *
  * @return An HOC which will strip all but the specified props.
+ *
+ * @category HOC Utility
  */
 export const withOnlyProps = <Q extends object>(...keys: string[]) => (
   <P extends object>(Component: ComponentType<P> | string) => {
@@ -81,9 +87,9 @@ export const withOnlyProps = <Q extends object>(...keys: string[]) => (
 );
 
 /**
- * Alias for `removeProps`
+ * Alias for [[removeProps]]
  *
- * @see removeProps
+ * @category HOC Utility
  */
 export const withoutProps = <A extends object>(
   keys: (keyof A)|(keyof A)[], ...restKeys: (keyof A)[]
@@ -120,16 +126,50 @@ export const withoutProps = <A extends object>(
  * const I = withoutProps<Bar>('B', 'D')(F); // expected type error: D not in keyof Bar)
  * const J = withoutProps<Bar>('X')(F); // expected type error (X not in keyof Bar)
  * ```
+ *
+ * @category HOC Utility
  */
 export const removeProps = withoutProps;
 
 /**
- * Alias for addProps
+ * Alias for [[addProps]]
  *
- * @see addProps
+ * @category HOC Utility
  */
 export const withProps = addProps;
 
+/**
+ * Alias for [[addPropsIf]]
+ *
+ * @category HOC Utility
+ */
 export const withPropsIf = addPropsIf;
 
+/**
+ * A React `Fragment` which ensures that all invalid props are removed.
+ * This is useful in conjunction with [[replaceWith]], [[startWith]]
+ * or [[remove]], so that any props added by otehr HOC's will be discarded.
+ *
+ * @example
+ * ```
+ * const Foo = as(
+ *   replaceable,
+ *   addClasses('flex flex-row'),
+ * )(Div);
+ *
+ * const MyComponent = withDesign({
+ *   Wrapper: addClasses('flex flex-row'),
+ * });
+ *
+ * const CustomComponent = withDesign({
+ *   Wrapper: startWith(Fragment),
+ * });
+ * ```
+ * In this example, the `className` prop defined in the original
+ * component design will be passed to the `Fragment`.  Using this
+ * version of the `Fragment` ensures this doesn't trigger a React
+ * warning.
+ *
+ * @category HOC Utility
+ */
 export const Fragment = withOnlyProps('key', 'children')(BaseFragment);
