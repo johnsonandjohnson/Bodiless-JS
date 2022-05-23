@@ -19,7 +19,6 @@ import {
   addProps,
   stylable,
   flowHoc,
-  addClasses,
 } from '@bodiless/fclasses';
 import {
   asBreadcrumbs,
