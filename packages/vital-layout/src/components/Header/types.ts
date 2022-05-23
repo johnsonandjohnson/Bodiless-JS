@@ -20,6 +20,7 @@ export type HeaderComponents = {
   Container: ComponentOrTag<any>,
   MenuContainer: ComponentOrTag<any>,
   MenuTogglerWrapper: ComponentOrTag<any>,
+  MobileButtonsWrapper: ComponentOrTag<any>,
   MenuToggler: ComponentOrTag<any>,
   MenuWrapper: ComponentOrTag<any>,
   Menu: ComponentOrTag<any>,
