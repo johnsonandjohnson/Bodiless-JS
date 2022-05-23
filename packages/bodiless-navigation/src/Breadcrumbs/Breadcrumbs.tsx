@@ -18,8 +18,7 @@ import { withNode, useNode } from '@bodiless/core';
 import { LinkData } from '@bodiless/components';
 import type { WithNodeProps } from '@bodiless/core';
 import {
-  designable, addProps, Fragment, withDesign, replaceWith, withoutProps, ComponentOrTag,
-  flowIf, not, Button,
+  designable, addProps, Fragment, withDesign, replaceWith, withoutProps, ComponentOrTag, flowIf,
 } from '@bodiless/fclasses';
 import { observer } from 'mobx-react';
 import flowRight from 'lodash/flowRight';
@@ -39,7 +38,6 @@ const ItemNodeProvider = withNode(Fragment) as ComponentType<WithNodeProps>;
 const useIsLink = (linkNodeKey: string) => {
   const { node } = useNode();
   const linkHref = node.child<LinkData>(linkNodeKey);
-  console.log('===========', node.path, linkHref.path, linkHref.data, Boolean(linkHref.data.href), linkNodeKey);
   return Boolean(linkHref.data.href);
 };
 
