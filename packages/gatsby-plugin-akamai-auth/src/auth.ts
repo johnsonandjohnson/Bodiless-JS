@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 /**
  * Copyright © 2022 Johnson & Johnson
  *
