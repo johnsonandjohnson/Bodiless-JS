@@ -61,7 +61,7 @@ const Base = asBreadcrumbsToken({
   Theme: {
     StartingTrail: vitalColor.TextPrimaryInteractiveHover,
     Title: vitalColor.TextPrimaryInteractiveHover,
-    Item: addClasses('last:font-bold'),
+    Item: 'last:font-bold',
   },
 });
 
