@@ -44,7 +44,7 @@ const withToggle = (opts:Opts): HOC<{}, requiredProps, { icon: string }> => (
         componentName={componentName}
         onMouseDown={() => {
           const selection = document.getSelection();
-          const currentRange = selection?.getRangeAt(0);
+          const currentRange = selection?.rangeCount ? selection?.getRangeAt(0) : false;
 
           toggle({ editor });
 
