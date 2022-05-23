@@ -43,9 +43,16 @@ const withToggle = (opts:Opts): HOC<{}, requiredProps, { icon: string }> => (
       <Component
         componentName={componentName}
         onMouseDown={() => {
-          toggle({
-            editor,
-          });
+          const selection = document.getSelection();
+          const currentRange = selection?.rangeCount ? selection?.getRangeAt(0) : false;
+
+          toggle({ editor });
+
+          // If there was a selection before "toggling", restore it.
+          if (selection && currentRange) {
+            selection.removeAllRanges();
+            selection.addRange(currentRange);
+          }
         }}
         className={`${
           isActive(editor) ? 'active bl-active' : ''
