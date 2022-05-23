@@ -12,16 +12,29 @@
  * limitations under the License.
  */
 
-export { vitalLayout, LayoutClean, asLayoutToken } from './components/Layout';
-export {
-  vitalHeader, vitalHeaderBase, HeaderClean, asHeaderToken
-} from './components/Header';
-export {
-  vitalFooter, vitalFooterBase, FooterClean, asFooterToken
-} from './components/Footer';
-export {
-  vitalRewards, vitalRewardsBase, RewardsClean, asRewardsToken
-} from './components/Footer/Rewards';
-export {
-  vitalHelmet, vitalHelmetBase, HelmetClean, asHelmetToken
-} from './components/Helmet';
+import {
+  flowIf,
+  withProps,
+} from '@bodiless/fclasses';
+import { useLanguageContext } from '@bodiless/i18n';
+import {
+  asRewardsToken,
+  vitalRewardsBase
+} from '@bodiless/vital-layout';
+
+const isCurrentLanguageEs = () => useLanguageContext().getCurrentLanguage().name === 'es';
+
+const Default = asRewardsToken(vitalRewardsBase.Base, {
+  Content: {
+    Brand: flowIf(isCurrentLanguageEs)(
+      withProps({
+        children: 'Brand ES',
+      }),
+    ),
+  },
+});
+
+export default {
+  ...vitalRewardsBase,
+  Default,
+};
