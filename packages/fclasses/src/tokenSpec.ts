@@ -17,17 +17,16 @@ import flow from 'lodash/flow';
 import { ComponentType } from 'react';
 import { startWith } from './replaceable';
 import type {
-  TokenDef,
+  HOCDef,
   DesignableComponents, HocDesign,
-  ReservedDomains, Design, Token, HOCBase, HOD, AsTokenSpec, FinalDesign, TokenSpec, FinalDomains,
+  ReservedDomains, Design, Token, HOD, AsTokenSpec, FinalDesign, TokenSpec, FinalDomains,
 } from './types';
-import { $TokenSpec } from './types';
+import { $TokenSpec, HOC } from './types';
 import { flowHoc, extendMeta } from './flowHoc';
 import { addClasses } from './addClasses';
 import { withHocDesign } from './withHocDesign';
 
 /**
- * @private
  * Converts a domain into an HOC which applies the extended design defined
  * by that domain.  Properly handles special domain names ('Flow',
  * 'Compose' and 'Meta').
@@ -38,7 +37,7 @@ import { withHocDesign } from './withHocDesign';
 function getHocForDomain<C extends DesignableComponents, D extends object = any>(
   domainName: string,
   domain?: FinalDesign<C> | ReservedDomains<C, any>['Meta'] | ReservedDomains<C, any>['Flow'] | ReservedDomains<C, any>['Compose']
-): TokenDef | undefined {
+): HOCDef | undefined {
   if (!domain) return undefined;
   if (domainName === 'Flow') return undefined;
   if (domainName === 'Meta') return Array.isArray(domain) ? extendMeta(...domain) : domain;
@@ -60,11 +59,13 @@ function getHocForDomain<C extends DesignableComponents, D extends object = any>
  *
  * @returns
  * An HOC which can be applied to a component.
+ *
+ * @category Token API
  */
 function as(
   ...args$: Token[]
 
-): HOCBase<any, any, any> {
+): HOC<any, any, any> {
   const args = args$.filter(Boolean);
 
   // Ensure that all token specs have been passed through `asTokenSpec`
@@ -75,10 +76,10 @@ function as(
     }
   });
 
-  const tokens: TokenDef[] = args.map(arg => {
+  const tokens: HOCDef[] = args.map(arg => {
     if (typeof arg === 'function' || typeof arg === 'undefined') return arg;
     if (typeof arg === 'string') return addClasses(arg);
-    const specTokens: TokenDef[] = [];
+    const specTokens: HOCDef[] = [];
     // Use keys of the base token spec to ensure correct order of domains.
     // const keys = [
     //   ...Object.getOwnPropertyNames(omit(arg, 'Meta', 'Compose', 'Flow')),
@@ -109,10 +110,12 @@ function as(
  *
  * @returns
  * An hoc which applies the design.
+ *
+ * @category Design API
  */
 function withDesign<C extends DesignableComponents = any, D extends object = any>(
   design: Design<C, D>
-): HOCBase {
+): HOC {
   const hocDesign: HocDesign<C> = Object.keys(design)
     .filter(k => k !== '_')
     .reduce(
@@ -123,14 +126,13 @@ function withDesign<C extends DesignableComponents = any, D extends object = any
       {} as HocDesign<any>
     );
   return flowHoc(
-    as(design._) as HOCBase,
+    as(design._),
     withHocDesign(hocDesign)
   );
   // return withHocDesign(hocDesign);
 }
 
 /**
- * @private
  * Customizer for merging two token specifications.
  */
 const tokenMergeCustomizer = (...args: any) => {
@@ -160,6 +162,8 @@ const tokenMergeCustomizer = (...args: any) => {
  *
  * @param ...designs
  * Designs to extend the base design.
+ *
+ * @category Design API
  */
 function extendDesign<C extends DesignableComponents, D extends object = any>(
   ...designs: Design<C, D>[]
@@ -177,6 +181,8 @@ function extendDesign<C extends DesignableComponents, D extends object = any>(
  *
  * @returns
  * An HOD which will extend the base design with the supplied designs.
+ *
+ * @category Design API
  */
 const extendDesignWith = (
   ...dx: (Design | HOD<any, any>)[]
@@ -203,6 +209,8 @@ const extendDesignWith = (
  * ```
  * as(startWith(FooClean), vitalFoo.Default, 'bar');
  * ```
+ *
+ * @category Token API
  */
 const on = (
   CleanComponent: ComponentType<any>
@@ -225,6 +233,8 @@ const on = (
  * specification based on that object.
  *
  * @see https://stackoverflow.com/questions/54598322/how-to-make-typescript-infer-the-keys-of-an-object-but-define-type-of-its-value
+ *
+ * @category Token API
  */
 const asTokenSpec = <
   C extends DesignableComponents,
@@ -257,6 +267,8 @@ export {
  *
  * @param a
  * The Token to test.
+ *
+ * @category Token API
  */
 export const isTokenSpec = (a: Token): a is TokenSpec<any, any> => (
   typeof a !== 'function' && typeof a !== 'string'

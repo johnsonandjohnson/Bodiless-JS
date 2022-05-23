@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 // base-page.ts
-import { Page } from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 
 export class BasePage {
   readonly page: Page;
@@ -31,13 +31,27 @@ export class BasePage {
   readonly closeIconAddPageForm: string;
   readonly checkmarkIconAddPageForm: string;
   readonly commitHistoryPanel: string;
+  readonly addMainMenuItemButton: string;
+  readonly firstMenuItem: string;
+  readonly editMenuLinkButton: string;
+  readonly linkInput: string;
+  readonly submitButton: string;
+  readonly firstMenuTitle: string;
+  readonly secondMenuTitle: string;
+  readonly addSubMenuItem: string;
+  readonly addSubMenuListItem: string;
+  readonly docsPath: string;
+  readonly docsTitle: string;
+  readonly bodilessDocUrl: string;
 
   constructor(page: Page) {
     this.page = page;
+    this.docsPath = '/___docs/';
+    this.docsTitle = '//*[@data-id="bodilessjs"]'
     this.switcherIcon = '//*[@aria-label="switcher"]';
     this.editIcon = '//*[@aria-label="Edit"]';
     this.pathToImages = './playwright/images/';
-    this.commitHistoryPanel = '#global-tooltip-container > div > div > div > div > div.rc-tooltip-inner';
+    this.commitHistoryPanel = 'div[class="rc-tooltip-inner"]';
     this.imageOneName = 'img_615x500.jpg';
     this.imageTwoName = 'img_615x502.jpg';
     this.menuBarLeft = '//*[@aria-label="Global Context Menu Left"]';
@@ -49,6 +63,16 @@ export class BasePage {
     this.fieldAddPageForm = '//*[@aria-label="Context Submenu Form"]//input[@name="new-page-path"]';
     this.closeIconAddPageForm = '//*[@aria-label="Context Submenu Form"]//*[@aria-label="Cancel"]';
     this.checkmarkIconAddPageForm = '//*[@aria-label="Context Submenu Form"]//*[@aria-label="Submit"]';
+    this.editMenuLinkButton = 'button[aria-label="Edit Menu Link"]';
+    this.linkInput = '#link-href';
+    this.firstMenuTitle = 'Menu1';
+    this.secondMenuTitle = 'Menu2';
+    this.submitButton = 'button[aria-label="Submit"]';
+    this.addMainMenuItemButton = 'button[aria-label="Add Main Menu Item"]';
+    this.firstMenuItem = '#content-wrapper > div:nth-child(5) > nav > ul > li:nth-child(1) > a > span';
+    this.addSubMenuItem = 'button[aria-label="Sub Main Menu Item"]';
+    this.addSubMenuListItem = '#bl-component-form-chameleon-radio-List';
+    this.bodilessDocUrl = '/___docs/#/?id=bodilessjs';
   }
 
   async typeText(locator:string, text:string, request:string, confirmButton?:string) {
@@ -100,5 +124,12 @@ export class BasePage {
     if (session.isEdit === 'true') {
       await this.page.click(this.editIcon);
     }
+  }
+
+  async isImageVisible(imageXpath: string) {
+    expect(await this.page.locator(imageXpath).isVisible()).toBeTruthy();
+    const imageDimentions = await this.page.locator(imageXpath).boundingBox();
+    expect(imageDimentions!.width).toBeGreaterThan(0);
+    expect(imageDimentions!.height).toBeGreaterThan(0);
   }
 }

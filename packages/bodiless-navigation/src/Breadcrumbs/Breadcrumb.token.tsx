@@ -20,7 +20,7 @@ import {
   flowHoc,
   addProps,
 } from '@bodiless/fclasses';
-import type { TokenDef } from '@bodiless/fclasses';
+import type { HOCDef } from '@bodiless/fclasses';
 import {
   useIsBreadcrumbItemCurrentPage,
   useIsLastBreadcrumbItemRenderedAsALink,
@@ -44,7 +44,7 @@ export const asStylableBreadcrumbs = withDesign({
  *
  * @returns HOC - a token that applies provided tokenDefs to all breadcrumb items.
  */
-export const withBreadcrumbItemToken = (...tokenDefs: TokenDef[]) => withDesign({
+export const withBreadcrumbItemToken = (...tokenDefs: HOCDef[]) => withDesign({
   // dummy arg is needed bc of ts bug, see https://github.com/microsoft/TypeScript/issues/28010
   StartingTrail: flowHoc({}, ...tokenDefs),
   FinalTrail: flowHoc({}, ...tokenDefs),

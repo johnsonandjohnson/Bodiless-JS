@@ -33,8 +33,8 @@ export class AccordionPage extends BasePage {
   constructor(page: Page) {
     super(page);
     this.page = page;
-    this.title = 'AT - Title 1';
-    this.body = 'AT - Description 1';
+    this.title = 'AT-Title1';
+    this.body = 'AT-Description1';
     this.editedPostfix = ' - edited';
     this.titleFirstXpath = '//*[@id="accordion-4"]//*[@data-accordion-element="accordion-title"]//*[@data-slate-editor="true"]';
     this.bodyFirstXpath = '//*[@id="accordion-4"]//*[@data-accordion-element="accordion-body"]//*[@data-slate-editor="true"]';

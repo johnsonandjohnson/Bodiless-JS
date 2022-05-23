@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/hydration",
-  "version": "1.0.0-beta.18",
+  "version": "1.0.0-rc.1",
   "description": "Tools to manage how React hydrates your components",
   "author": "Lucas Varela <lvarelab@its.jnj.com>",
   "license": "Apache-2.0",
@@ -18,15 +18,15 @@
     "access": "public"
   },
   "scripts": {
-    "build": "run-p build:lib build:api-doc",
-    "build:api-doc": "typedoc --out doc/api src",
+    "build": "run-p build:lib",
     "build:lib": "tsc -p ./tsconfig.json",
     "build:watch": "npm run build:lib -- --watch",
+    "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api ./src",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/core": "^1.0.0-beta.18",
-    "@bodiless/fclasses": "^1.0.0-beta.18"
+    "@bodiless/core": "^1.0.0-rc.1",
+    "@bodiless/fclasses": "^1.0.0-rc.1"
   },
   "devDependencies": {
     "cheerio": "1.0.0-rc.3",

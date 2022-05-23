@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/tokens",
-  "version": "1.0.0-beta.18",
+  "version": "1.0.0-rc.1",
   "description": "Utilities for browsing and organizing tokens.",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
@@ -26,16 +26,17 @@
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "scripts": {
-    "build": "tsc --version && tsc -p ./tsconfig.json && npm run build:api-doc",
-    "build:watch": "npm run build -- --watch",
-    "build:api-doc": "typedoc --out doc/api src",
+    "build": "run-p build:lib",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api ./src",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/core": "^1.0.0-beta.18",
-    "@bodiless/fclasses": "^1.0.0-beta.18",
-    "@bodiless/layouts": "^1.0.0-beta.18",
-    "@bodiless/layouts-ui": "^1.0.0-beta.18",
+    "@bodiless/core": "^1.0.0-rc.1",
+    "@bodiless/fclasses": "^1.0.0-rc.1",
+    "@bodiless/layouts": "^1.0.0-rc.1",
+    "@bodiless/layouts-ui": "^1.0.0-rc.1",
     "informed": "^3.34.0",
     "lodash": "^4.17.19",
     "md5-hex": "^4.0.0",
