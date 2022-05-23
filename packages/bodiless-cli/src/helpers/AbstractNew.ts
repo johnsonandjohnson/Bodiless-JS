@@ -382,7 +382,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       }
       data.scripts.start = `lerna run start --stream --scope ${siteName}`;
       data.scripts.serve = `lerna run serve --stream --scope ${siteName}`;
-      data.scripts.docs = `lerna run build:doc --stream --scope ${siteName} && docsify serve ./${sitesDir}/${name}/doc`;
+      data.scripts.docs = `lerna run build:docs --stream --scope ${siteName} && docsify serve ./${sitesDir}/${name}/doc`;
     } else if (type === 'site') {
       data.name = siteName;
       // Find the old dependency on the template package (if any) and delete it.

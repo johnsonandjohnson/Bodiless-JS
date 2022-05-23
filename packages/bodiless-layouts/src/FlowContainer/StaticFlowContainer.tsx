@@ -31,7 +31,7 @@ const flowContainerComponentStart: FlowContainerComponents = {
 
 const NodeProvider = withNode(React.Fragment);
 
-const StaticFlowContainer: FC<DesignableProps> = ({ design }) => {
+const StaticFlowContainer: FC<DesignableProps & { id?: string }> = ({ design, id }) => {
   const items = useItemHandlers().getItems();
   const { components } = new SelectorComponents({
     design,
@@ -45,7 +45,7 @@ const StaticFlowContainer: FC<DesignableProps> = ({ design }) => {
   const { Wrapper, ComponentWrapper } = components;
   return (
     // When in a static mode we don't want to use `bl-*` prefixed classes.
-    <Wrapper itemCount={items.length}>
+    <Wrapper itemCount={items.length} id={id}>
       {items
         .map((flowContainerItem: FlowContainerItem) => {
           const ChildComponent = components[flowContainerItem.type];
