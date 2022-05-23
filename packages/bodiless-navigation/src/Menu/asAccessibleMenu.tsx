@@ -18,7 +18,7 @@ import React, {
 import {
   withParent, withAppendChild, useNode, useClickOutside, withChild,
 } from '@bodiless/core';
-import { useListContext } from '@bodiless/components';
+import { LinkData, useListContext } from '@bodiless/components';
 import {
   addProps,
   addClasses,
@@ -37,11 +37,18 @@ import {
 
 import { useMenuContext } from './withMenuContext';
 import { useSubmenuContext } from './withMenuItemContext';
-import { DEFAULT_NODE_KEYS, useHasLink } from './MenuTitles';
+import { DEFAULT_NODE_KEYS } from './MenuTitles';
 
 import ExpandMoreIcon from '../icons/ExpandMore';
 
 const useHasSubmenu = () => useSubmenuContext().hasSubmenu;
+const useHasLink = () => {
+  const { linkNodeKey } = DEFAULT_NODE_KEYS;
+  const { node } = useNode();
+  const linkHref = node.child<LinkData>(linkNodeKey);
+
+  return Boolean(linkHref.data.href);
+};
 
 const ClickOutside = React.forwardRef<HTMLLIElement, any>((props, ref) => {
   useClickOutside(ref as React.MutableRefObject<HTMLLIElement>, props.onClickOutside);
