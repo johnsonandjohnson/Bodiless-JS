@@ -45,6 +45,15 @@ The Vital Image Component provides a set of tokens to compose an Image Component
 | `WithLink`                 | A token which wraps the image in a link.                     |
 | `WithFullWidthImage`       | A token which makes the image full-width.                    |
 
+### Static Images
+
+To improve performance, Vital Images are static, and, therefore, rendered without unnecessary
+JavaScript. The Vital Image tokens (and all dependencies) are excluded from the static bundle.
+
+The `gatsby-plugin-image` code is excluded from the final bundle via the
+`BODILESS_GATSBY_PLUGIN_IMAGE_OMIT` environment variable. See [Omit Gatsby Plugin Image for Static
+Image](/Design/GatsbyTheme#omit-gatsby-plugin-image-for-static-image) for details.
+
 ### Hero Image
 
 The `vitalImage` token collection includes a `Hero` token, which renders a full-width Bodiless Image
