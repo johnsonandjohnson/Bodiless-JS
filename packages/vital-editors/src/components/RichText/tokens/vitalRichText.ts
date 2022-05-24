@@ -23,7 +23,6 @@ import {
   H4,
   H5,
   startWith,
-  removeClasses,
 } from '@bodiless/fclasses';
 import {
   asBlock,
@@ -137,7 +136,6 @@ const Copyright = asVitalTokenSpec()({
       vitalFontSize.XS,
       vitalTextDecoration.Bold,
       vitalTextDecoration.Underline,
-      removeClasses('text-m-base lg:text-base'),
     ),
   },
   Content: {
