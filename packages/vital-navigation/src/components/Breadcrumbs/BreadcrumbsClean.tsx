@@ -12,18 +12,10 @@
  * limitations under the License.
  */
 
-// Re-export navigation necessary modules to make burger menu work.
-export {
-  asBurgerMenuToggler,
-  useIsBurgerMenuHidden,
-  withBurgerMenuProvider,
-  withBreadcrumbStore,
-} from '@bodiless/navigation';
+import { BreadcrumbsClean } from '@bodiless/navigation';
+import type { BreadcrumbsComponents } from '@bodiless/navigation';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 
-// VitalNavigation components and tokens.
-export * from './components/Breadcrumbs';
-export * from './components/BurgerMenu';
-export * from './components/Menu';
-export * from './components/MenuTitle';
-export * from './components/SubMenu';
-export * from './components/Separator';
+export const asBreadcrumbsToken = asVitalTokenSpec<BreadcrumbsComponents>();
+
+export default BreadcrumbsClean;
