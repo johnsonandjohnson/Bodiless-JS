@@ -2,6 +2,7 @@
 * [@bodiless/gatsby-theme-bodiless](/Development/API/@bodiless/gatsby-theme-bodiless/README)
 * [@bodiless/layouts](/Development/API/@bodiless/layouts/README)
 * [@bodiless/schema-org](/Development/API/@bodiless/schema-org/README)
+* [@bodiless/vital-buttons](/Development/API/@bodiless/vital-buttons/README)
 * [@bodiless/vital-card](/Development/API/@bodiless/vital-card/README)
 * [@bodiless/vital-flowcontainer](/Development/API/@bodiless/vital-flowcontainer/README)
 * [@bodiless/vital-list](/Development/API/@bodiless/vital-list/README)
