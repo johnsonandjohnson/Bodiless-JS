@@ -160,32 +160,49 @@ The Card can be composed of different tokens (see
 - With Horizontal Orientation
 - With Vertical Orientation
 
-For example, here's a vertical Card variation you could create:
+For example, to create a vertical Card variation you could _extend_ or _override_
+`vitalCard.WithVerticalOrientation`:
 
-```js
-/**
- * Vertical Card component.
- */
-const VerticalCard = as(asCardToken({
-  ...vitalCard.Default,
-  Schema: {
-    ...vitalCard.Default.Schema,
-    Wrapper: withNodeKey('vertical-card'),
-  },
-  Spacing: {
-    ...vitalCard.WithVerticalOrientation.Spacing,
-    ImageWrapper: 'p-0',
-  },
-  Layout: {
-    ...vitalCard.WithVerticalOrientation.Layout,
-    Image: 'w-full',
-  },
-  Theme: {
-    ...Base.Theme,
-    DescriptionWrapper: vitalTypography.H4,
-  },
-}))(CardClean);
-```
+- The following _extends_ `vitalCard.WithVerticalOrientation`, and adds the provided border and
+  padding to the wrapper:
+
+  ```js
+  const WithVerticalCardBorder = asCardToken(vitalCard.WithVerticalOrientation, {
+    Theme: {
+      Wrapper: 'border border-black',
+    },
+    Spacing: {
+      Wrapper: 'px-4',
+    },
+  });
+  // Then compose the Vital Default Card with
+  // new custom vertical style and node key.
+  const VerticalCardWithBorder = as(
+    vitalCard.Default,
+    WithVerticalCardBorder,
+    withNodeKey('card-vertical-example'),
+  )(CardClean);
+  ```
+
+- The following _overrides_ `vitalCard.WithVerticalOrientation`; it uses all the same domains from
+  `WithVerticalOrientation` (except spacing), and these are replaced with larger paddings:
+
+  ```js
+  const WithVerticalOrientationMoreSpacing = asCardToken({
+    ...vitalCard.WithVerticalOrientation,
+    Spacing: {
+      ContentWrapper: 'p-8',
+      ImageWrapper: 'p-8',
+    },
+  });
+  // Then compose the Vital Default Card with
+  // new custom vertical style and node key.
+  const VerticalCardWithSpacing = as(
+    vitalCard.Default,
+    WithVerticalOrientationMoreSpacing,
+    withNodeKey('hero-card-secondary-button'),
+  )(CardClean);
+  ```
 
 ### Overriding Card
 

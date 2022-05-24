@@ -36,8 +36,9 @@ utilizing those offered by Vital — will work.
 
 01. Image Presets:
     - This step is optional, as the [Vital Image](/VitalDesignSystem/Components/VitalImage/) presets
-      should provide most required functionality. If there are specific image requirements for your
-      site, you may want to extend these tokens.
+      should provide most required functionality (e.g., [static
+      images](/VitalDesignSystem/Components/VitalImage/#static-images)). If there are specific image
+      requirements for your site, you may want to extend these tokens.
 
 01. Basic Layout / Page:  
     This step will define and implement the general layout of the site. This will include the
@@ -139,7 +140,11 @@ utilizing those offered by Vital — will work.
     - GDPR
     - SEO
       - `Sitemap.xml`
-      - `Robots.txt`
-      - Schemas
+      - [`Robots.txt`](/Design/GatsbyTheme#robotstxt)
+      - [Schemas](/Components/Schema/):
+        - [Organization](/Components/Schema/Organization)
+        - [Product](/Components/Schema/Product)
+        - [Video](/Components/Schema/Video)
+        - [WebSite](/Components/Schema/Website)
 
 01. Content entry
