@@ -35,6 +35,7 @@
     "@bodiless/core": "^1.0.0-rc.1",
     "@bodiless/fclasses": "^1.0.0-rc.1",
     "@bodiless/navigation": "^1.0.0-rc.1",
+    "@bodiless/vital-buttons": "^1.0.0-rc.1",
     "@bodiless/vital-editors": "^1.0.0-rc.1",
     "@bodiless/vital-elements": "^1.0.0-rc.1",
     "@bodiless/vital-link": "^1.0.0-rc.1",

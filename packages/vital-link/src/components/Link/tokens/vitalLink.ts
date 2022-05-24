@@ -20,15 +20,11 @@ import {
   as,
   flowIf,
   on,
-  replaceWith,
-  startWith,
-  withProps,
 } from '@bodiless/fclasses';
 import { withSidecarNodes, withNodeKey } from '@bodiless/core';
-import { vitalColor, vitalTextDecoration, vitalTypography } from '@bodiless/vital-elements';
+import { vitalTypography } from '@bodiless/vital-elements';
 import { asLinkToken } from '../LinkClean';
 import { useExternalLinkToggle, asEditableLink, useIsDownloadLink } from '../util';
-import { CartIcon } from '../assets/CartIcon';
 
 /**
    * Token which causes link to display as an external link.
@@ -94,55 +90,9 @@ const Sidecar = asLinkToken({
   },
 });
 
-const WhereToBuy = asLinkToken({
-  Components: {
-    Icon: startWith(CartIcon),
-  },
-  Layout: {
-    Wrapper: 'w-full flex justify-center items-center max-w-64 h-12 lg:w-full',
-  },
-  Spacing: {
-    Wrapper: 'mx-auto p-3',
-    Icon: 'mr-3 xl:mr-0 2xl:mr-3',
-  },
-  Theme: {
-    Wrapper: as(
-      vitalColor.BgPrimaryInteractive,
-      vitalColor.TextPrimaryFooterCopy,
-      vitalTextDecoration.Bold,
-      vitalTextDecoration.Uppercase,
-      // @TODO: Create token? It should be same size for both mobile and desktop...
-      'text-m-base',
-      'rounded',
-    ),
-    Icon: 'w-6 h-6',
-    Body: 'leading xl:hidden 2xl:block',
-  },
-  Content: {
-    _: withProps({
-      children: 'Where to Buy',
-    }),
-    Wrapper: withProps({
-      href: '/where-to-buy',
-    }),
-  },
-});
-
-/**
- * Token that provides the Where To Buy button without an icon.
- */
-const WhereToBuyWithoutIcon = asLinkToken({
-  ...WhereToBuy,
-  Components: {
-    Icon: replaceWith(() => null),
-  },
-});
-
 export default {
   Default,
   WithExternalStyles,
   WithDownloadStyles,
   Sidecar,
-  WhereToBuy,
-  WhereToBuyWithoutIcon,
 };

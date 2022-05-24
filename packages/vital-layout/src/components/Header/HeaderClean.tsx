@@ -22,7 +22,7 @@ import {
 } from '@bodiless/fclasses';
 import { withoutHydration } from '@bodiless/hydration';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import { LinkClean } from '@bodiless/vital-link';
+import { ButtonClean } from '@bodiless/vital-buttons';
 import {
   BurgerMenuClean,
   MenuClean,
@@ -49,7 +49,7 @@ const headerComponents: HeaderComponents = {
   SearchToggler: SearchTogglerClean,
   LanguageButton: Fragment,
   WhereToBuyWrapper: Fragment,
-  WhereToBuy: LinkClean,
+  WhereToBuy: ButtonClean,
 };
 
 const HeaderCleanBase: FC<HeaderProps> = ({ components: C, ...rest }) => (

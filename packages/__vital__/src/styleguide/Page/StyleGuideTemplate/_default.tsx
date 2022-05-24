@@ -42,6 +42,7 @@ const Examples = () => (
     </List>
     <Subtitle>Components</Subtitle>
     <List>
+      <li><a href="./styleguide/buttons">Buttons</a></li>
       <li><a href="./styleguide/flow-container">Flow Container</a></li>
       <li><a href="./styleguide/images">Images</a></li>
       <li><a href="./styleguide/video">Video</a></li>
