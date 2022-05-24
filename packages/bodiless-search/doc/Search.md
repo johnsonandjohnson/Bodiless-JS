@@ -77,7 +77,7 @@ Make the following changes (Steps 3a, 3b, 3c) in the `scripts` section of `packa
 #### 3c. Add `build:search` step to the build task
 
 ```json
-"build": "npm-run-all build:env-vars build:lib build:doc build:search",
+"build": "npm-run-all build:env-vars build:lib build:docs build:search",
 ```
 
 #### Usage of Building Search Index

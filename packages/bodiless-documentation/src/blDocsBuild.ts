@@ -65,6 +65,7 @@ const blDocsBuild = async () => {
 
   // Validate the paths for letter-case typos.
   try {
+    console.log('Validating paths');
     validatePaths(getSimplePaths(paths));
   } catch (error) {
     console.warn('Error validating paths', error);

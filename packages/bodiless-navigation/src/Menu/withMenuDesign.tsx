@@ -14,7 +14,7 @@
 
 import {
   withDesignAt,
-  TokenDef,
+  HOCDef,
   flowHoc,
   HOC,
 } from '@bodiless/fclasses';
@@ -63,7 +63,7 @@ const depthDesignPathOptions = [() => [], withSecondLevelDesign, withThirdLevelD
 const withMenuDesign = (
   keys: string|string[] = ['Main', 'List', 'Columns', 'Cards'],
   depths: number|number[] = [0, 1, 2],
-) => (...tokenDefs: TokenDef[]): HOC => {
+) => (...tokenDefs: HOCDef[]): HOC => {
   const keys$ = Array.isArray(keys) ? keys : [keys];
   const depths$ = Array.isArray(depths) ? depths : [depths];
 

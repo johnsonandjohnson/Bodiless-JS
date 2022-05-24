@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/components",
-  "version": "1.0.0-beta.18",
+  "version": "1.0.0-rc.1",
   "description": "Reusable compoments",
   "author": "Heidi Vanyo <hvanyo@its.jnj.com>",
   "license": "Apache-2.0",
@@ -24,19 +24,19 @@
     "access": "public"
   },
   "scripts": {
-    "build": "npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
-    "build:watch": "npm run build -- --watch",
-    "build:api-doc": "typedoc --out doc/api src",
-    "lint": "tslint ./src/**/*.ts?x",
+    "build": "run-p copy build:lib",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api ./src",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-beta.18",
-    "@bodiless/core": "^1.0.0-beta.18",
-    "@bodiless/fclasses": "^1.0.0-beta.18",
-    "@bodiless/layouts": "^1.0.0-beta.18",
-    "@bodiless/ui": "^1.0.0-beta.18",
+    "@bodiless/cli": "^1.0.0-rc.1",
+    "@bodiless/core": "^1.0.0-rc.1",
+    "@bodiless/fclasses": "^1.0.0-rc.1",
+    "@bodiless/layouts": "^1.0.0-rc.1",
+    "@bodiless/ui": "^1.0.0-rc.1",
     "axios": "^0.21.0",
     "common-tags": "^1.8.0",
     "copyfiles": "^2.1.1",

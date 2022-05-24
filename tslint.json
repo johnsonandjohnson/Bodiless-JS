@@ -2,6 +2,7 @@
     "extends": "tslint-config-airbnb",
     "rules": {
         "no-this-assignment": [true, { "allow-destructuring": true }],
+        "max-line-length": false,
         "import-name": false,
         "variable-name": [true, "allow-pascal-case"]
     }
