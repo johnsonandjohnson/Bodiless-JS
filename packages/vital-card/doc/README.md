@@ -100,6 +100,23 @@ Once you've [added a Card](#add-a-card), you can edit and configure its availabl
   - Given the presence of the CTA button, the whole Hero Card won't act as a link — just the CTA
     button will.
 
+<!-- Inlining HTML to add multi-line info block with unordered list. -->
+<div class="warn">
+  <strong>Note:</strong> Regarding Card height:
+
+  When adding/configuring Cards on your page, if your desire or expectation is for Cards in the same
+  row to be of equal height, please note the following:
+
+  - Vertical Cards in the same row will get equal height automatically.
+  - Horizontal Cards in the same row will _not_ get equal height automatically.
+    - If you want Horizontal Cards placed in a row to be of equal/similar height, you should:
+      - Upload and apply images of equal/similar size;
+      - Provide _Title_ and/or _Description_ content that is of similar length.
+  - When mixing Vertical and Horizontal Cards in the same row, there should be no expectation that
+    they will be of equal/similar height.
+
+</div>
+
 ### Hero Card
 
 ![Hero Card](./assets/HeroCard.jpg)
@@ -123,7 +140,7 @@ configured with additional Hero variants.
 import { as } from '@bodiless/fclasses'
 import { asCardToken, CardClean, vitalCard } from '@bodiless/vital-card';
 
-const MyCard = as(
+const MyDefaultCard = as(
   vitalCard.Default,
   withNodeKey('mycard'),
 )(CardClean);
@@ -142,6 +159,33 @@ The Card can be composed of different tokens (see
 - With No Title
 - With Horizontal Orientation
 - With Vertical Orientation
+
+For example, here's a vertical Card variation you could create:
+
+```js
+/**
+ * Vertical Card component.
+ */
+const VerticalCard = as(asCardToken({
+  ...vitalCard.Default,
+  Schema: {
+    ...vitalCard.Default.Schema,
+    Wrapper: withNodeKey('vertical-card'),
+  },
+  Spacing: {
+    ...vitalCard.WithVerticalOrientation.Spacing,
+    ImageWrapper: 'p-0',
+  },
+  Layout: {
+    ...vitalCard.WithVerticalOrientation.Layout,
+    Image: 'w-full',
+  },
+  Theme: {
+    ...Base.Theme,
+    DescriptionWrapper: vitalTypography.H4,
+  },
+}))(CardClean);
+```
 
 ### Overriding Card
 
