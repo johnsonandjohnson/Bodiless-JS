@@ -22,6 +22,7 @@
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.1",
     "@bodiless/search": "^1.0.0-rc.1",
     "@bodiless/ui": "^1.0.0-rc.1",
+    "@bodiless/vital-buttons": "^1.0.0-rc.1",    
     "@bodiless/vital-editors": "^1.0.0-rc.1",
     "@bodiless/vital-elements": "^1.0.0-rc.1",
     "@bodiless/vital-flowcontainer": "^1.0.0-rc.1",
