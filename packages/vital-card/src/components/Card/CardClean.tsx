@@ -124,6 +124,8 @@ const CardClean = as(
 
 const asCardToken = asVitalTokenSpec<CardComponents>();
 
+const CardDescriptionPreview = () => <span className="bl-text-gray-800">Description</span>;
+
 export default CardClean;
 export const CardStatic: ComponentType<CardProps> = withoutHydration()(CardClean);
-export { CardClean, asCardToken };
+export { CardClean, asCardToken, CardDescriptionPreview };

@@ -19,7 +19,7 @@ import {
 } from '../Card';
 
 const BaseVariation = {
-  Card: on(CardClean)(vitalCard.Base),
+  Card: on(CardClean)(vitalCard.Base, vitalCard.WithFlowContainerPreview),
 };
 const OrientationVariations = {
   Vertical: vitalCard.WithVerticalOrientation,
@@ -31,6 +31,7 @@ const ContentVariations = {
   }),
   NoTitle: vitalCard.WithNoTitle,
   NoDescription: vitalCard.WithNoDescription,
+  NoEyebrow: vitalCard.WithNoEyebrow,
 };
 const HeroCTAVariations = {
   Link: vitalCard.Hero,

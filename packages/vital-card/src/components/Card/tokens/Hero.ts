@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import omit from 'lodash/omit';
 import {
   flowHoc, replaceWith, Div, extendMeta, H1, H4, as
 } from '@bodiless/fclasses';
@@ -53,8 +54,8 @@ const BaseHero = asCardToken({
     DescriptionWrapper: 'mb-5 lg:mb-6',
   },
   Theme: {
-    TitleWrapper: vitalTypography.H1NoSpacing,
-    DescriptionWrapper: vitalTypography.H4NoSpacing,
+    TitleWrapper: omit(vitalTypography.H1, 'Spacing'),
+    DescriptionWrapper: omit(vitalTypography.H4, 'Spacing'),
   },
   Meta: extendMeta(
     flowHoc.meta.term('Description')('Hero'),

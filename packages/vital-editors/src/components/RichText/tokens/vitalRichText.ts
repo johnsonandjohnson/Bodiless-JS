@@ -111,22 +111,16 @@ const Basic = asVitalTokenSpec()({
   Theme: pick(Default.Theme, 'paragraph', 'Bold', 'Link', 'SuperScript'),
 });
 
-const BasicNoLinkNoStyling = asVitalTokenSpec()({
+const BasicNoLink = asVitalTokenSpec()({
   ...Basic,
   Core: pick(Basic.Core, 'paragraph', 'Bold', 'SuperScript'),
-  Theme: {},
-  Behavior: {},
-});
-
-const BasicNoLink = asVitalTokenSpec()({
-  ...BasicNoLinkNoStyling,
   Theme: pick(Basic.Theme, 'paragraph', 'Bold', 'SuperScript'),
+  Behavior: {},
 });
 
 export default {
   Default,
   Basic,
-  BasicNoLinkNoStyling,
   BasicNoLink,
   AsFlowContainerItem,
 };

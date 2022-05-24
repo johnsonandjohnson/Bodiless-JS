@@ -12,7 +12,9 @@
  * limitations under the License.
  */
 
+import omit from 'lodash/omit';
 import { withNodeKey } from '@bodiless/core';
+import { ifComponentSelector } from '@bodiless/layouts';
 import { flowHoc, replaceWith, on } from '@bodiless/fclasses';
 import { withPlaceholder } from '@bodiless/components';
 import { asBodilessLink } from '@bodiless/components-ui';
@@ -21,7 +23,7 @@ import { vitalTypography } from '@bodiless/vital-elements';
 import {
   EditorPlainClean, vitalEditorPlain, RichTextClean, vitalRichText,
 } from '@bodiless/vital-editors';
-import { asCardToken } from '../CardClean';
+import { asCardToken, CardDescriptionPreview } from '../CardClean';
 import { CardNodeKeys } from './constants';
 
 /**
@@ -32,7 +34,7 @@ const Base = asCardToken({
     Wrapper: asBodilessLink(),
     Title: on(EditorPlainClean)(vitalEditorPlain.Default),
     Eyebrow: on(EditorPlainClean)(vitalEditorPlain.Default),
-    Description: on(RichTextClean)(vitalRichText.BasicNoLinkNoStyling),
+    Description: on(RichTextClean)(omit(vitalRichText.BasicNoLink, 'Theme')),
     CTAText: on(EditorPlainClean)(vitalEditorPlain.Default),
   },
   Content: {
@@ -100,9 +102,17 @@ const WithHorizontalOrientation = asCardToken({
   Meta: flowHoc.meta.term('Orientation')('Horizontal'),
 });
 
+const WithFlowContainerPreview = asCardToken({
+  Flow: ifComponentSelector,
+  Core: {
+    Description: replaceWith(CardDescriptionPreview),
+  },
+});
+
 export default Base;
 
 export {
   WithVerticalOrientation,
   WithHorizontalOrientation,
+  WithFlowContainerPreview,
 };

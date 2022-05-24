@@ -15,7 +15,7 @@
 import { flowHoc, replaceWith } from '@bodiless/fclasses';
 import { asCardToken } from '../CardClean';
 
-import Base, { WithHorizontalOrientation, WithVerticalOrientation} from './Base';
+import Base, { WithFlowContainerPreview, WithHorizontalOrientation, WithVerticalOrientation} from './Base';
 import { Hero, HeroWithPrimaryButton, HeroWithSecondaryButton } from './Hero';
 
 /**
@@ -26,6 +26,16 @@ const WithNoTitle = asCardToken({
     TitleWrapper: replaceWith(() => null),
   },
   Meta: flowHoc.meta.term('Description')('No Title'),
+});
+
+/**
+ * WithNoEyebrow removes title from the card
+ */
+const WithNoEyebrow = asCardToken({
+  Components: {
+    EyebrowWrapper: replaceWith(() => null),
+  },
+  Meta: flowHoc.meta.term('Description')('No Eyebrow'),
 });
 
 /**
@@ -56,6 +66,8 @@ export default {
   HeroWithSecondaryButton,
   WithNoDescription,
   WithNoTitle,
+  WithNoEyebrow,
   WithHorizontalOrientation,
   WithVerticalOrientation,
+  WithFlowContainerPreview,
 };

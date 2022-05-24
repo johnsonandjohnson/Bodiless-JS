@@ -20,6 +20,7 @@ import {
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { vitalTypography } from '@bodiless/vital-elements';
 import { asCardToken, CardClean, vitalCard } from '@bodiless/vital-card';
+import { ButtonClean, vitalButtons } from '@bodiless/vital-buttons';
 
 const Subtitle = as(vitalTypography.H2, 'pt-4')(H2);
 
@@ -34,32 +35,17 @@ const DefaultCard = as(
 /**
  * Vertical Card component.
  */
-const VerticalCard = as(asCardToken({
-  ...vitalCard.Default,
-  Schema: {
-    ...vitalCard.Default.Schema,
-    Wrapper: withNodeKey('vertical-card'),
-  },
-  Spacing: {
-    ...vitalCard.WithVerticalOrientation.Spacing,
-  },
-  Layout: {
-    ...vitalCard.WithVerticalOrientation.Layout,
-  },
-}))(CardClean);
-const HorizontalCard = as(asCardToken({
-  ...vitalCard.Default,
-  Schema: {
-    ...vitalCard.Default.Schema,
-    Wrapper: withNodeKey('horizontal-card'),
-  },
-  Spacing: {
-    ...vitalCard.WithHorizontalOrientation.Spacing,
-  },
-  Layout: {
-    ...vitalCard.WithHorizontalOrientation.Layout,
-  },
-}))(CardClean);
+const VerticalCard = as(
+  vitalCard.Default,
+  vitalCard.WithVerticalOrientation,
+  withNodeKey('vertical-card'),
+)(CardClean);
+
+const HorizontalCard = as(
+  vitalCard.Default,
+  vitalCard.WithHorizontalOrientation,
+  withNodeKey('horizontal-card'),
+)(CardClean);
 
 const HeroCard = as(
   vitalCard.Hero,
