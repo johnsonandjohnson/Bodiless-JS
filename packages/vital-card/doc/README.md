@@ -123,7 +123,7 @@ configured with additional Hero variants.
 import { as } from '@bodiless/fclasses'
 import { asCardToken, CardClean, vitalCard } from '@bodiless/vital-card';
 
-const MyCard = as(
+const MyDefaultCard = as(
   vitalCard.Default,
   withNodeKey('mycard'),
 )(CardClean);
@@ -142,6 +142,33 @@ The Card can be composed of different tokens (see
 - With No Title
 - With Horizontal Orientation
 - With Vertical Orientation
+
+For example, here's a vertical Card variation you could create:
+
+```js
+/**
+ * Vertical Card component.
+ */
+const VerticalCard = as(asCardToken({
+  ...vitalCard.Default,
+  Schema: {
+    ...vitalCard.Default.Schema,
+    Wrapper: withNodeKey('vertical-card'),
+  },
+  Spacing: {
+    ...vitalCard.WithVerticalOrientation.Spacing,
+    ImageWrapper: 'p-0',
+  },
+  Layout: {
+    ...vitalCard.WithVerticalOrientation.Layout,
+    Image: 'w-full',
+  },
+  Theme: {
+    ...Base.Theme,
+    DescriptionWrapper: vitalTypography.H4,
+  },
+}))(CardClean);
+```
 
 ### Overriding Card
 
