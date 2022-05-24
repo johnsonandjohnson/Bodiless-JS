@@ -11,3 +11,4 @@ packages/bodiless-migration-tool/tests/testserver
 **/.cache
 **/static
 **/node_modules
+playwright
