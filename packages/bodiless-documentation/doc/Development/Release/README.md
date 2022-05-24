@@ -16,7 +16,7 @@ manually with an explicit version.
 Normally, pre-releases are produced automatically in response to certain events:
 
 - [Canary Releases](#canary-releases)
-- [Beta Releases](#beta-releases)
+- [Beta Releases](#beta-releases-pre-release)
 
 #### Canary Releases
 
@@ -35,13 +35,14 @@ For example:
 The generated release version will take the following form:
 
 - `<CURRENT_VERSION>-canary-<PR_NUMBER>-<BUILD_NUMBER>`
+  - E.g.: `1.0.0-canary-1797-264.0`
 
 The [distribution tag](https://docs.npmjs.com/adding-dist-tags-to-packages ':target=_blank')
 (dist-tag) published to npm will be of the form:
 
 - `canary-<PR_NUMBER>`
 
-#### Beta Releases
+#### Beta Releases (Pre-Release)
 
 Any commit to the main branch will produce a _beta release_. These releases are tagged in the
 repository, and will receive the `next` [distribution
@@ -115,13 +116,15 @@ the BodilessJS GitHub page:
 In some cases we may wish to override the version calculation for a release or pre-release. In such
 cases, we can employ a fully manual process as follows:
 
+01. Create a `release` branch from `main` on
+    [GitHub](https://github.com/johnsonandjohnson/Bodiless-JS/ ':target=_blank').
+    - The `release` branch should be removed automatically after a release merges to `main`.  
+      So, here, we are creating a fresh `release` branch off `main` for the new release.
 01. Create a fresh clone of the repository.
 01. Checkout the `release` branch, e.g.:
     ```shell-session
     git checkout -b release origin/release
     ```
-    - The `origin/release` branch should be removed automatically after a release merges to `main`.
-    - So, here, we are creating a fresh `release` branch off `main` for the new release.
 01. Merge in the latest commits from `main`.
     ```shell-session
     git merge main
