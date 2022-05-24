@@ -6,9 +6,6 @@ guide specifically uses the Vital Design System, building out your own custom to
 
 ## Overview
 
-!> **PLEASE NOTE:** This page is still in-progress; **Steps #1 and #4–18** are _incomplete_ and
-**COMING SOON**.
-
 <!-- TODO: When page is complete, convert numbered steps into headers.
            Not worth doing while page is in flux. -->
 
