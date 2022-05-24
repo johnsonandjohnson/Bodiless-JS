@@ -37,10 +37,10 @@ const ask = (question) => (
   })
 );
 
-const APP_SITE_DIR_NAME = fs.readdirSync('../sites')[0];
+const APP_SITE_DIR_NAME = fs.readdirSync('sites')[0];
 const APP_SITE_NAME = (
-  JSON.parse(fs.readFileSync(`../sites/${APP_SITE_DIR_NAME}/package.json`)).name)
-  .replace('@sites', '');
+  JSON.parse(fs.readFileSync(`sites/${APP_SITE_DIR_NAME}/package.json`)).name)
+  .replace('@sites/', '');
 
 const userInput = {
   // platform.sh project ID
