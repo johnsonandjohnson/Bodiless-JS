@@ -1,7 +1,12 @@
 {
-  "Components": {
-    "YouTube": {
-      "README.md": "./doc/YouTube.md"
+  "VitalDesignSystem": {
+    "Components": {
+      "VitalYouTube": {
+        "README.md": "./doc/README.md",
+        "assets": {
+          "HeroSwapVideo.jpg": "./doc/assets/HeroSwapVideo.jpg"
+        }
+      }
     }
   }
 }

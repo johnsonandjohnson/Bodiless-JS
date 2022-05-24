@@ -1,4 +1,5 @@
-/**
+/* eslint-disable import/no-dynamic-require, global-require */
+/*
  * Copyright © 2022 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,19 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { getPackageDocs } from '@bodiless/cli';
 
-// Re-export navigation necessary modules to make burger menu work.
-export {
-  asBurgerMenuToggler,
-  useIsBurgerMenuHidden,
-  withBurgerMenuProvider,
-  withBreadcrumbStore,
-} from '@bodiless/navigation';
-
-// VitalNavigation components and tokens.
-export * from './components/Breadcrumbs';
-export * from './components/BurgerMenu';
-export * from './components/Menu';
-export * from './components/MenuTitle';
-export * from './components/SubMenu';
-export * from './components/Separator';
+export const getDocs = (nameSpace) => getPackageDocs({
+  resolver: p => require.resolve(p),
+  nameSpace
+});

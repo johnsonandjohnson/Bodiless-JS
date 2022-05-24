@@ -11,6 +11,7 @@
     "/lib",
     "/bodiless.docs.json",
     "/doc",
+    "/getDocs.js",
     "tailwind.config.js"
   ],
   "repository": {
@@ -29,6 +30,7 @@
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
+    "@bodiless/cli": "^1.0.0-rc.1",
     "@bodiless/components": "^1.0.0-rc.1",
     "@bodiless/components-ui": "^1.0.0-rc.1",
     "@bodiless/core": "^1.0.0-rc.1",
