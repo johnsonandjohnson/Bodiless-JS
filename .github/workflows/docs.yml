@@ -23,7 +23,7 @@ jobs:
       - name: Setup
         run: npm run setup
       - name: Build docs
-        run: npm run build:doc
+        run: npm run build:docs
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:

@@ -12,11 +12,21 @@
  * limitations under the License.
  */
 
-// Normal flow container and tokens are the same in both edit/static
-export { default as FlowContainerClean } from './FlowContainerClean';
-export { default as vitalFlowContainer } from './tokens';
-// Base token collection is the same in both edit and static.
-// Exported directly from its location so it cannot be shadowed.
-export { default as vitalFlowContainerBase } from './tokens/vitalFlowContainer';
+import FlowContainerClean, { FlowContainerComponents } from './FlowContainerClean';
+import vitalFlowContainer from './tokens';
+import vitalFlowContainerOrig, { VitalFlowContainer } from './tokens/vitalFlowContainer';
+
+/**
+ * Use this version of the vital flow container tokens when extending or shadowing.
+ * @category Token Collection
+ * @see vitalFlowContainer
+ */
+const vitalFlowContainerBase = vitalFlowContainerOrig;
+
+export {
+  FlowContainerClean, vitalFlowContainer, vitalFlowContainerBase,
+  VitalFlowContainer, FlowContainerComponents,
+};
+
 // Static flow container has edit/static alternatives.
 export * from './index.bl-edit';
