@@ -1,8 +1,8 @@
 # YouTube Component
 
-The YouTube Component can be used to place a [YouTube video](https://www.youtube.com/) on a page via the
-BodilessJS edit interface. The YouTube Component is responsive and features 
-a 16:9 ratio by default. 
+The YouTube Component can be used to place a [YouTube video](https://www.youtube.com/
+':target=_blank') on a page via the BodilessJS Edit Interface. The YouTube Component is responsive
+and features a 16:9 aspect ratio by default.
 
 ## Content Editor Details
 
@@ -30,86 +30,83 @@ To add a YouTube Component to your site:
 
 01. Resize or reposition the YouTube Component using the Flow Container controls.
 
----
-
 ## Site Builder Details
 
-The YouTube Component can be used to place a YouTube video on a page via the 
-BodilessJS edit interface.
+The YouTube Component can be used to place a YouTube video on a page via the BodilessJS Edit
+Interface.
 
-?> Please note that the [Embed Component](../../../Components/Embed) must be activated on your site for the YouTube Component to work.
+?> **Note:** The [Embed Component](/Components/Embed) must be activated on your site for the YouTube
+Component to work.
 
+```jsx
+import { YouTube } from '@bodiless/youtube';
 
-``` js
-  import { YouTube } from '@bodiless/youtube';
+<YouTube nodeKey="youtube" />
+```
 
-  <YouTube nodeKey="youtube" />
-  ```
+You can also use the HOC version of this, which can then be applied to other components. But the
+underlining component must accept the same props as an `iframe` tag. Simply pass the node key to the
+`asBodilessYouTube` function and then use the returned HOC:
 
-You can also use the HOC version of this which can then be applied to 
-other components. But the underlining component must accept the same props
-as an `iframe` tag. Simply pass the node key to the asBodilessYouTube function
-and then use the returned HOC
+```jsx
+import { CustomYouTube } from 'my-library';
+import { asBodilessYouTube } from '@bodiless/youtube';
 
-  ``` js
-  import { CustomYouTube } from 'my-library';
-  import { asBodilessYouTube } from '@bodiless/youtube';
+const YouTube = asBodilessYouTube('customYouTube')(CustomYouTube);
 
-  const YouTube = asBodilessYouTube('customYouTube')(CustomYouTube);
+<YouTube />
+```
 
-  <YouTube />
-  ```
+You can configure YouTube player settings leveraging the `withYouTubePlayerSettings` HOC. For
+example, to configure AutoPlay for the YouTube component:
 
-You can configure YouTube player settings leveraging withYouTubePlayerSettings 
-HOC. For example, to configure AutoPlay for the YouTube component:
+```jsx
+import { YouTube } from '@bodiless/youtube';
 
-  ``` js
-  import { YouTube } from '@bodiless/youtube';
+const AutoPlayYouTube = withYouTubePlayerSettings({
+  autoplay: true,
+  mute: true,
+})(YouTube);
 
-  const AutoPlayYouTube = withYouTubePlayerSettings({
-    autoplay: true,
-    mute: true,
-  })(YouTube);
-
-  <AutoPlayYouTube nodeKey="youtube" />
-  ```
+<AutoPlayYouTube nodeKey="youtube" />
+```
 
 ### Props
 
-| name           | default   | description                                                                         |
-|----------------|-----------|-------------------------------------------------------------------------------------|
-| nodeKey        | undefined | Identifies where the component data will be stored.                                 |
-| playerSettings | undefined | YouTube embed player settings. Check YouTubePlayerSettings type from 'Youtube.tsx'. |
+| Name             | Default     | Description                                                                               |
+| ---------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| `nodeKey`        | `undefined` | Identifies where the component data will be stored.                                       |
+| `playerSettings` | `undefined` | YouTube embed player settings. Check the `YouTubePlayerSettings` type from `Youtube.tsx`. |
 
-In addition, you can pass `HTMLIFrameElement` props (id, src, width, etc.). Check `HTMLIFrameElement` type for more details.
+In addition, you can pass `HTMLIFrameElement` props (`id`, `src`, `width`, etc.). Check the
+`HTMLIFrameElement` type for more details.
 
-### `playerSettings` Parameters 
+### `playerSettings` Parameters
 
-The YouTube Component utilizes an API that allows you to change the following
-properties/parameters. You can use defaultPlayerSettings to set parameters that
-are commonly used together. For more details on each individual parameter see [YouTube Player API Reference for iframe Embeds](https://developers.google.com/youtube/iframe_api_reference). 
+The YouTube Component utilizes an API that allows you to change the properties/parameters listed
+below. You can use `defaultPlayerSettings` to set parameters that are commonly used together. For
+more details on each individual parameter, see: [YouTube Embedded Players and Player Parameters :
+Supported Parameters | Google
+Developers](https://developers.google.com/youtube/player_parameters#Parameters ':target=_blank').
 
+| Parameters       | Suggested Default |
+| ---------------- | ----------------- |
+| `autoplay`       | `0`               |
+| `cc_lang_pref`   | No default        |
+| `cc_load_policy` | `0`               |
+| `controls`       | `1`               |
+| `loop`           | `0`               |
+| `enablejsapi`    | `1`               |
+| `modestbranding` | `1`               |
+| `origin`         | Canonical URL     |
+| `rel`            | `0`               |
+| `mute`           |                   |
+| `version`        |                   |
+| `playlist`       |                   |
 
-| Parameters | Suggested Default | 
-| -------- | -------- |
-| autoplay     | 0     |
-| cc_lang_pref    | no default    |
-| cc_load_policy  | 0 |
-| controls |  1 |
-| loop |  0 |
-| enablejsapi  |  1 |
-| modestbranding |  1 |
-| origin |  canonical URL |
-| rel | 0 |
-| mute | |
-| version | |
-| playlist | |
+E.g.: Responsive YouTube with 16:9 ratio with custom language preferences:
 
-
-e.g.: Responsive YouTube with 16:9 ratio with custom language preferences:
-
-
-```
+```js
 const withCustomLangPref = flowRight(
   withYouTubePlayerSettings({
     ...defaultPlayerSettings,
@@ -128,21 +125,19 @@ const YouTubeWithCustomLangPref = withDesign({
 
 ### Usage
 
-```
+```jsx
 <YouTubeWithCustomLangPref nodeKey="withLangPref" />
 ```
-
----
 
 ## Architectural Details
 
 The YouTube Component renders the following code:
 
-```
-<iframe id="player" type="text/html" 
+```html
+<iframe id="player" type="text/html"
   src=""
   frameborder="0">
 </iframe>
 ```
 
-?> There are optional parameters on the src that are configurable.
+?> **Note:** There are optional parameters on the `src` that are configurable.

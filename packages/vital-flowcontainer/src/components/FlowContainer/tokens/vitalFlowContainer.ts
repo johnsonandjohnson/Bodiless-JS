@@ -29,6 +29,7 @@ import { vitalYouTubeFlowContainer } from '@bodiless/vital-youtube';
 import { vitalListFlowContainer } from '@bodiless/vital-list';
 import { vitalCardFlowContainer } from '@bodiless/vital-card';
 import { vitalTableFlowContainer } from '@bodiless/vital-table';
+import { vitalButtonFlowContainer } from '@bodiless/vital-buttons';
 
 import FlowContainerClean, { FlowContainerPreview } from '../FlowContainerClean';
 
@@ -118,6 +119,7 @@ const WithBaseVariations = asFluidToken(
   vitalListFlowContainer.WithListVariations,
   vitalCardFlowContainer.WithCardVariations,
   vitalTableFlowContainer.WithTableVariations,
+  vitalButtonFlowContainer.WithButtonVariations,
 );
 
 /**

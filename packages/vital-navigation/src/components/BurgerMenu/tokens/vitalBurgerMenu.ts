@@ -14,7 +14,7 @@
 
 import { asStatic, withChild } from '@bodiless/core';
 import { vitalColor } from '@bodiless/vital-elements';
-import { vitalLink } from '@bodiless/vital-link';
+import { vitalButtons } from '@bodiless/vital-buttons';
 import {
   addClassesIf,
   as,
@@ -35,7 +35,7 @@ const Base = asBurgerMenuToken({
   Components: {
     Menu: vitalMenu.Burger,
     UtilityMenu: vitalMenu.Utility,
-    WhereToBuy: vitalLink.WhereToBuyWithoutIcon,
+    WhereToBuy: vitalButtons.WhereToBuyWithoutIcon,
   },
   Layout: {
     Wrapper: 'w-full h-full fixed left-0 top-0 bottom-0 md:w-7/12 xl:hidden',

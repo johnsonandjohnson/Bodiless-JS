@@ -1,43 +1,8 @@
-# Bodiless Schema.org
-
-Provides a Schema component to support adding SEO schema information to content, as well as
-helper functions to get and return page/content data.
-
-The base package currently supports the following schemas:
-
-- BreadcrumbList
-- FAQ
-- [Product](#product-schema)
-- [Video](#video-schema)
-
-?> **Note:** Information regarding schemas for structured data can be found at
-[Schema.org](https://schema.org/).
-
-## Usage
-
-As a Site Builder, you will want to set the schema source for every schema field you wish to render,
-using `asSchemaSource`. For instance, in the [Product Schema](#product-schema) section, you will see
-the following example:
-
-```tsx
-import { asSchemaSource } from '@bodiless/schema-org';
-
-  SEO: {
-    TitleRow: withDesign({
-      PageTitle: asSchemaSource('product-name'),
-    }),
-  },
-```
-
-Here, the page title is being used as the product name, but, on your site, the product name may
-exist elsewhere, and you will have to source it from there.
-
-As another example, if you wanted to use `meta:description` as the value of your `description`
-schema field, you would have to define that as the source.
-
-### Product Schema
+# Product Schema
 
 JSON-LD following the Product schema is automatically generated for Product Pages.
+
+## Site Builder Details
 
 01. Get data in the component file by setting the schema key desired; for example, to get the
     product name:
@@ -118,7 +83,7 @@ For further information regarding the definition of the Product and Offer data t
     Offer](https://developers.google.com/search/docs/advanced/structured-data/product#offer) |
     Google Search Central
 
-#### Product Schema Keys
+### Product Schema Keys
 
 - `product-name`: The name of the product.
 - `product-image`: The image of the product.
@@ -149,67 +114,3 @@ For further information regarding the definition of the Product and Offer data t
     text.
 - `product-offer-availability`: The availability of this item (e.g., "In stock", "Out of stock",
   "Pre-order", etc.).
-
-### Video Schema
-
-The Video schema utilizes the YouTube Data API to gather the relevant data.
-
-**See:** [YouTube Data API Reference (v3)](https://developers.google.com/youtube/v3/docs) | Google
-Developers
-
-| Schema Field   | YouTube Data API Value                     |
-| -------------- | ------------------------------------------ |
-| `name`         | `video.snippet.title`                      |
-| `description`  | `video.snippet.description`                |
-| `thumbnailUrl` | `video.snippet.thumbnails.standard != null` <br/> `? video.snippet.thumbnails.standard.url` <br/> `: video.snippet.thumbnails.default.url` |
-| `uploadDate`   | `video.snippet.publishedAt`                |
-| `duration`     | `video.contentDetails.duration`            |
-| `contentUrl`   | `https://youtube.com/watch/?v=${video.id}` |
-| `embedUrl`     | `https://youtube.com/watch/?v=${video.id}` |
-| `url`          | `https://youtube.com/watch/?v=${video.id}` |
-
-01. Get data:
-
-    ```tsx
-    import { asSchemaSource } from '@bodiless/schema-org';
-
-      SEO: {
-        Item: asSchemaSource('youtube-iframe'),
-      },
-    ```
-
-01. Return data:
-
-    ```tsx
-    import { WithVideoSchema } from '@bodiless/schema-org';
-
-      SEO: {
-        Wrapper: WithVideoSchema,
-      },
-    ```
-
-01. Set provider in page component:
-
-    ```tsx
-    import { StructuredDataProvider } from '@bodiless/schema-org';
-
-        <StructuredDataProvider>
-          <Layout>
-            ...
-          </Layout>
-        </StructuredDataProvider>
-    ```
-
-01. Define API key in `.env.site`:
-
-    ```shell
-    BODILESS_GOOGLE_YOUTUBE_API_KEY=your-youtube-api-key
-    ```
-
-!>  **Important:** The compatible API is **Version 3 (v3)** of the YouTube Data API.  
-    **See:** [YouTube Data API Reference (v3)](https://developers.google.com/youtube/v3/docs) |
-    Google Developers
-
-For further information regarding the definition of the Video data type, see:
-
-- [VideoObject](https://schema.org/VideoObject) | Schema.org
