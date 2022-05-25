@@ -18,7 +18,7 @@ Vital Component is utilized:
 - All pages render a
   [`PageView`](https://github.com/searchdiscovery/client-jnj-ga4-dl-spec/blob/master/events/page_view.md
   ':target=_blank') event.
-- Product pages ( TODO ) render a `ProductView` event with data that can be set by a Content Editor.
+- Product pages  render a `view_item` event with data that can be set by a Content Editor.
 - Product Listing pages (utilizing `@vital-templates/ProductListing`) render a set of [`list`]()
   events based on user interaction with the filter.
 - Search pages (utilizing `@vital-search`) render
