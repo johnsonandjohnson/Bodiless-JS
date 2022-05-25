@@ -32,4 +32,8 @@ export default asTokenGroup(meta)({
   WithSiteXLConstraint: '2xl:container 2xl:mx-auto',
   Gutter: 'p-1 md:p-2 lg:p-3',
   GutterOffset: '-mx-1 md:-mx-2 lg:-mx-3',
+  GutterTop: 'mt-4',
+  GutterBottom: 'mb-4',
+  GuttonLeft: 'ml-4',
+  GuttonRight: 'mr-4',
 });

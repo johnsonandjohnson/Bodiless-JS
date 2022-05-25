@@ -22,13 +22,13 @@ import {
 } from '@bodiless/fclasses';
 import { withoutHydration } from '@bodiless/hydration';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import { LinkClean } from '@bodiless/vital-link';
+import { ButtonClean } from '@bodiless/vital-buttons';
 import {
   BurgerMenuClean,
   MenuClean,
 } from '@bodiless/vital-navigation';
+import { SearchTogglerClean, SearchMenuClean } from '@bodiless/vital-search';
 import { LogoClean } from '../Logo';
-import { SearchTogglerClean, DesktopSearchClean } from '../Search';
 import type { HeaderComponents, HeaderProps } from './types';
 
 const headerComponents: HeaderComponents = {
@@ -45,11 +45,12 @@ const headerComponents: HeaderComponents = {
   ActionMenuContainer: Div,
   UtilityMenuWrapper: Fragment,
   UtilityMenu: MenuClean,
-  DesktopSearch: DesktopSearchClean,
+  DesktopSearch: SearchMenuClean,
+  MobileSearch: SearchMenuClean,
   SearchToggler: SearchTogglerClean,
   LanguageButton: Fragment,
   WhereToBuyWrapper: Fragment,
-  WhereToBuy: LinkClean,
+  WhereToBuy: ButtonClean,
 };
 
 const HeaderCleanBase: FC<HeaderProps> = ({ components: C, ...rest }) => (
@@ -79,6 +80,7 @@ const HeaderCleanBase: FC<HeaderProps> = ({ components: C, ...rest }) => (
         <C.BurgerMenu />
       </C.BurgerMenuWrapper>
     </C.Container>
+    <C.MobileSearch />
   </C.Wrapper>
 );
 

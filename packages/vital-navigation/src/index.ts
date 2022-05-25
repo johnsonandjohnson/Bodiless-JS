@@ -17,15 +17,13 @@ export {
   asBurgerMenuToggler,
   useIsBurgerMenuHidden,
   withBurgerMenuProvider,
+  withBreadcrumbStore,
 } from '@bodiless/navigation';
 
 // VitalNavigation components and tokens.
-export { BurgerMenuClean, asBurgerMenuToken, vitalBurgerMenu } from './components/BurgerMenu';
-export { MenuClean, asMenuToken, vitalMenu } from './components/Menu';
-export { MenuTitleClean, asMenuTitleToken, vitalMenuTitle } from './components/MenuTitle';
-export { asSubMenuToken, vitalSubMenu } from './components/SubMenu';
-
-// VitalNavigation types.
-export type { BurgerMenuComponents, BurgerMenuProps } from './components/BurgerMenu';
-export type { MenuComponents } from './components/Menu';
-export type { SubMenuComponents, SubMenuWrapperComponents } from './components/SubMenu';
+export * from './components/Breadcrumbs';
+export * from './components/BurgerMenu';
+export * from './components/Menu';
+export * from './components/MenuTitle';
+export * from './components/SubMenu';
+export * from './components/Separator';

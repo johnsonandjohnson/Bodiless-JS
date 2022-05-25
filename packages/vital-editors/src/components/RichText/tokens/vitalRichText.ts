@@ -23,7 +23,6 @@ import {
   H4,
   H5,
   startWith,
-  removeClasses,
 } from '@bodiless/fclasses';
 import {
   asBlock,
@@ -44,8 +43,6 @@ import {
 import { ifComponentSelector } from '@bodiless/layouts';
 import {
   asVitalTokenSpec,
-  vitalColor,
-  vitalFontSize,
   vitalTextDecoration,
   vitalTypography,
 } from '@bodiless/vital-elements';
@@ -121,34 +118,9 @@ const BasicNoLink = asVitalTokenSpec()({
   Behavior: {},
 });
 
-const Copyright = asVitalTokenSpec()({
-  ...Basic,
-  Theme: {
-    ...Basic.Theme,
-    paragraph: as(
-      vitalColor.TextPrimaryFooterCopy,
-      vitalFontSize.XS,
-      vitalTextDecoration.Normal,
-    ),
-    Link: as(
-      vitalLink.Default,
-      vitalColor.TextPrimaryFooterCopy,
-      vitalColor.TextPrimaryInteractive,
-      vitalFontSize.XS,
-      vitalTextDecoration.Bold,
-      vitalTextDecoration.Underline,
-      removeClasses('text-m-base lg:text-base'),
-    ),
-  },
-  Content: {
-    _: addProps({ placeholder: 'Insert Copyright' }),
-  },
-});
-
 export default {
   Default,
   Basic,
   BasicNoLink,
   AsFlowContainerItem,
-  Copyright,
 };

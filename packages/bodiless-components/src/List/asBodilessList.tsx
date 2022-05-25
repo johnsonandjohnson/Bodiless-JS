@@ -13,7 +13,13 @@
  */
 
 import {
-  WithNodeKeyProps, withNodeKey, useNode, NodeProvider, withOnlyProps, useEditContext,
+  WithNodeKeyProps,
+  withNodeKey,
+  useNode,
+  NodeProvider,
+  withOnlyProps,
+  useEditContext,
+  withActivateOnEffect,
 } from '@bodiless/core';
 import React, {
   ComponentType, PropsWithChildren, FC,
@@ -119,6 +125,7 @@ const asBodilessList = (
   useOverrides?: UseListOverrides,
 ): Enhancer<ListProps> => Component => flow(
   replaceWith(BodilessList),
+  withActivateOnEffect,
   withListButtons(useOverrides),
   withDesign({
     Wrapper: replaceWith(Component),

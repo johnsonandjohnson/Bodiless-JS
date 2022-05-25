@@ -12,14 +12,20 @@
  * limitations under the License.
  */
 
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import {
-  withMenuOptions, withLocalContextMenu,
-  withContextActivator, ifEditable, PageEditContextInterface, TMenuOption, useEditContext,
+  withMenuOptions,
+  withLocalContextMenu,
+  withContextActivator,
+  ifEditable,
+  PageEditContextInterface,
+  TMenuOption,
+  useEditContext,
+  useActivateOnEffectActivator,
 } from '@bodiless/core';
 import { v1 } from 'uuid';
 
-import { withFinalDesign, flowHoc } from '@bodiless/fclasses';
+import { withFinalDesign, flowHoc, HOC } from '@bodiless/fclasses';
 import { UseListOverrides } from './types';
 import { useListContext } from './List';
 
@@ -81,6 +87,13 @@ const useMenuOptions = (useOverrides: UseListOverrides = () => ({})) => (props: 
   return menuOptions;
 };
 
+const withActivateContextOnCreate: HOC = Component => props => {
+  const { currentItem } = useListContext();
+  useActivateOnEffectActivator(currentItem);
+
+  return <Component {...props} />;
+};
+
 /**
  * HOC which adds list edit buttons (Add and Delete Item).
  */
@@ -95,6 +108,7 @@ const withListButtons = (useOverrides?: UseListOverrides) => ifEditable(
         type: 'list-item',
       }),
     ),
+    Title: withActivateContextOnCreate,
   }),
 );
 

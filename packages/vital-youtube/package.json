@@ -10,6 +10,7 @@
   "files": [
     "/lib",
     "/bodiless.docs.json",
+    "/getDocs.js",
     "/doc"
   ],
   "repository": {
@@ -28,6 +29,7 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
   },
   "dependencies": {
+    "@bodiless/cli": "^1.0.0-rc.1",
     "@bodiless/components": "^1.0.0-rc.1",
     "@bodiless/core": "^1.0.0-rc.1",
     "@bodiless/fclasses": "^1.0.0-rc.1",
