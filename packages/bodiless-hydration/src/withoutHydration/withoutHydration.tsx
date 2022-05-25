@@ -114,21 +114,18 @@ const withoutHydrationClientSideEdit: WithoutHydrationFunction = (
 const withoutHydrationServerSide: WithoutHydrationFunction = ({
   WrapperElement,
   WrapperStyle
-}) => WrappedComponent => (props: any) => {
-  const { nodeKey = undefined } = props;
-  return (
-    <WrapperElement data-no-hydrate style={WrapperStyle} id={useWrapperId(nodeKey)}>
-      <WrappedComponent {...props} />
-    </WrapperElement>
-  );
-};
+}) => WrappedComponent => props => (
+  <WrapperElement data-no-hydrate style={WrapperStyle}>
+    <WrappedComponent {...props} />
+  </WrapperElement>
+);
 
 const withoutHydrationClientSide: WithoutHydrationFunction = ({
   onUpdate,
   WrapperElement,
   WrapperStyle,
 }) => <P,>(WrappedComponent: ComponentOrTag<P>) => {
-  const WithoutHydration: FC<P> = (props: any) => {
+  const WithoutHydration: FC<P> = (props) => {
     const BrowserVersion$ = () => {
       const rootRef = useRef<HTMLDivElement&HTMLSpanElement>(null);
       const { nodeKey = undefined } = props;
@@ -164,7 +161,6 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
           data-no-hydrate
           ref={rootRef}
           style={WrapperStyle}
-          id={id}
           suppressHydrationWarning
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: markup }}

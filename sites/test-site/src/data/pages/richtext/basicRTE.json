@@ -1,0 +1,52 @@
+[
+  {
+    "type": "AlignJustify",
+    "children": [
+      {
+        "text": "Lorem",
+        "Bold": true
+      },
+      {
+        "text": " "
+      },
+      {
+        "text": "ipsum",
+        "Italic": true
+      },
+      {
+        "text": " "
+      },
+      {
+        "text": "dolor",
+        "Underline": true
+      },
+      {
+        "text": " "
+      },
+      {
+        "type": "Link",
+        "data": {
+          "slatenode": {
+            "href": "/richtext/"
+          }
+        },
+        "children": [
+          {
+            "text": "sit"
+          }
+        ]
+      },
+      {
+        "text": " amet, consectetur adipiscing elit. Donec consectetur, mi vel tincidunt scelerisque, enim magna malesuada quam, nec elementum leo neque at leo. Nulla euismod sollicitudin neque, a aliquam velit scelerisque eu. Sed et ex dictum, ullamcorper risus venenatis, faucibus justo.Sed at purus quis nibh ultricies auctor a nec massa.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue quam quis turpis eleifend, vitae placerat lectus finibus. Donec ullamcorper venenatis nunc, in semper est scelerisque ac.Etiam sit amet egestas libero. Cras ullamcorper pharetra mi et scelerisque. Phasellus efficitur consectetur erat, sed convallis eros porta in. Cras ac ex eu ligula pulvinar volutpat nec vitae dolor. Fusce aliquam hendrerit sodales. Cras lacinia hendrerit leo et cursus. Fusce dictum, libero ac aliquet tristique, dui augue ornare lorem, non commodo augue elit nec erat. Etiam ullamcorper elementum nisi eget ullamcorper. Etiam lobortis nibh metus, quis pharetra purus sollicitudin id."
+      }
+    ]
+  },
+  {
+    "type": "AlignJustify",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  }
+]

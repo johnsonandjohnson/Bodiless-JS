@@ -11,8 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import asBodilessReadOnlyComponent, { withActivatorWrapper } from './asBodilessReadOnlyComponent';
-
-export { withActivatorWrapper };
+import asBodilessReadOnlyComponent from './asBodilessReadOnlyComponent';
 
 export default asBodilessReadOnlyComponent;
