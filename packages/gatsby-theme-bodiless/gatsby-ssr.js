@@ -15,7 +15,7 @@
 const React = require('react');
 const commonTags = require('common-tags');
 const gatsbyPluginImageOnRenderBody= require('gatsby-plugin-image/gatsby-ssr').onRenderBody;
-const { hasLogs, flush } = require('./cjs/dist/fsLogHandler');
+const { hasLogs, flush } = require('./cjs/dist/fsLogHandler.bl-edit');
 
 const generateHtml = function generateHtml(str) {
   return {
