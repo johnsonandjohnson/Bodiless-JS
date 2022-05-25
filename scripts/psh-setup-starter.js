@@ -43,8 +43,11 @@ const preparationStepsMessage = `
   2. Generate p.sh API token at https://console.platform.sh/-/users/{user}/settings/tokens
   3. Generate Github personal access token by following the doc:
       https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+  4. Make sure there are no existing github intergrations for the project yet:
+      https://console.platform.sh/solutionsbyheidi/2mv35favfldgy/-/settings/integrations
+     Otherwise the script will fail due to a conflict.
   
-  If everything is ready press "Enter" to continue
+  If everything above is ready press "Enter" to continue
 `;
 
 const userInput = {
