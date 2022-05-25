@@ -16,9 +16,7 @@ import omit from 'lodash/omit';
 import {
   flowHoc, replaceWith, Div, extendMeta, H1, H4, as
 } from '@bodiless/fclasses';
-// import { asBodilessLink } from '@bodiless/components-ui';
 import { vitalImage } from '@bodiless/vital-image';
-// import { vitalLink } from '@bodiless/vital-link';
 import { ButtonClean, vitalButtons } from '@bodiless/vital-buttons';
 import { vitalTypography } from '@bodiless/vital-elements';
 import { LinkClean, vitalLink } from '@bodiless/vital-link';
