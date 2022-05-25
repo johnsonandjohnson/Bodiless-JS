@@ -62,4 +62,4 @@ limitations under the License.
 
 #### Defined in
 
-[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:163](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6d794747/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L163)
+[vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts:163](https://github.com/johnsonandjohnson/Bodiless-JS/blob/57878a19/packages/vital-meta/src/components/MetaHelmet/tokens/vitalMetaHelmet.ts#L163)
