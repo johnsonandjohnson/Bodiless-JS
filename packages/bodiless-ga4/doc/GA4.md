@@ -1,7 +1,19 @@
-# GA4
+# Analytics (via GTM and GA4)
 
-Provides some utilities to support pushing DataLayer objects to head.
+Analytics for a site built with BodilessJS can be provided via integration with [Google Tag Manager
+(GTM) and Google Analytics 4 (GA4)](./About_GTM_and_GA4), using our GA4 (`@bodiless/ga4`) package.
 
-* `withDataLayerItem` : an HOC that will read/store its value in nodekey and render on the GTM form.
-* `withDefaultDataLayer` :  an HOC that adds Default Datalayer to a Component.
-* `withDataLayerScript` : An HOC that renders the dataLayer script.
+For more information, please see:
+
+- [Analytics with Google Tag Manager (GTM) and Google Analytics 4 (GA4)](./About_GTM_and_GA4)
+- [GA4 Activation](./GA4Activation)
+- [Adding Tracking (Using GTM GA4 Data Attributes & Data Layer)](./AddingTracking)
+
+## Utilities
+
+The GA4 package provides some utilities to support pushing `DataLayer` objects to the head:
+
+- `withDataLayerItem`: An HOC that will read/store its value in `nodeKey` and render on the GTM
+  form.
+- `withDefaultDataLayer`: An HOC that adds the default data layer to a Component.
+- `withDataLayerScript`: An HOC that renders the data layer script.

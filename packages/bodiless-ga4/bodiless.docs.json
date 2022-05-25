@@ -1,7 +1,7 @@
 {
   "Components": {
-    "Analytics": {    
-      "AboutGTMandGA4.md": "./doc/AboutGTM.md",
+    "Analytics": {
+      "About_GTM_and_GA4.md": "./doc/AboutGTM.md",
       "AddingTracking.md": "./doc/AddingTracking.md",
       "GA4Activation.md": "./doc/GA4Activation.md",
       "GA4.md": "./doc/GA4.md"
