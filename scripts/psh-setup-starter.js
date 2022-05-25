@@ -14,13 +14,7 @@
 
 /**
  * Running this script from a standalone site (starter) monorepo will create a github integration
- * with the p.sh project.
- * Before running this script a few preparation steps should be performed:
- * 1. Create a p.sh project at https://console.platform.sh/
- * 2. Generate p.sh API token at https://console.platform.sh/-/users/{user}/settings/tokens
- * 3. Generate Github personal access token by following the doc:
- * https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
- * 4. Run the scipt and pass through the prompt questions.
+ * with the p.sh project. Also it will set up all necessary p.sh enviroment variables.
  */
 
 const fs = require('fs');
@@ -41,6 +35,17 @@ const APP_SITE_DIR_NAME = fs.readdirSync('sites')[0];
 const APP_SITE_NAME = (
   JSON.parse(fs.readFileSync(`sites/${APP_SITE_DIR_NAME}/package.json`)).name)
   .replace('@sites/', '');
+
+const preparationStepsMessage = `
+  Before running this script you should prepare your platform.sh project and github account:
+
+  1. Create a p.sh project at https://console.platform.sh/
+  2. Generate p.sh API token at https://console.platform.sh/-/users/{user}/settings/tokens
+  3. Generate Github personal access token by following the doc:
+      https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+  
+  If everything is ready press "Enter" to continue
+`;
 
 const userInput = {
   // platform.sh project ID
@@ -66,6 +71,7 @@ const userInput = {
 };
 
 const getUserInput = async () => {
+  await ask(preparationStepsMessage);
   userInput.PSH_PROJECT_ID = await ask('platform.sh project ID:\n');
   userInput.PSH_API_TOKEN = await ask('platform.sh API token:\n');
   userInput.GITHUB_PERSONAL_ACCESS_TOKEN = await ask('Github personal access token:\n');
