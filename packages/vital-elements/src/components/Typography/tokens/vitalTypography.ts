@@ -115,6 +115,61 @@ const H5 = asElementToken({
   Meta: meta,
 });
 
+const HeaderLink = as(
+  vitalColor.TextPrimaryInteractive,
+  vitalTextDecoration.Underline,
+);
+
+const H1Link = asElementToken({
+  ...H1,
+  Theme: {
+    _: as(
+      vitalTextDecoration.Bold,
+      HeaderLink,
+    ),
+  },
+});
+
+const H2Link = asElementToken({
+  ...H2,
+  Theme: {
+    _: as(
+      vitalTextDecoration.Bold,
+      HeaderLink,
+    ),
+  },
+});
+
+const H3Link = asElementToken({
+  ...H3,
+  Theme: {
+    _: as(
+      vitalTextDecoration.Medium,
+      HeaderLink,
+    ),
+  },
+});
+
+const H4Link = asElementToken({
+  ...H4,
+  Theme: {
+    _: as(
+      vitalTextDecoration.Normal,
+      HeaderLink,
+    ),
+  },
+});
+
+const H5Link = asElementToken({
+  ...H5,
+  Theme: {
+    _: as(
+      vitalTextDecoration.Medium,
+      HeaderLink,
+    ),
+  },
+});
+
 const Body = asElementToken({
   Core: {
     _: vitalFontSize.Base,
@@ -181,6 +236,11 @@ export default {
   H3,
   H4,
   H5,
+  H1Link,
+  H2Link,
+  H3Link,
+  H4Link,
+  H5Link,
   Body,
   Eyebrow,
   Rest,

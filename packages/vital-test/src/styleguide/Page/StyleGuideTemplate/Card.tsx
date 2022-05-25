@@ -19,7 +19,7 @@ import {
 } from '@bodiless/fclasses';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { vitalTypography } from '@bodiless/vital-elements';
-import { asCardToken, CardClean, vitalCard } from '@bodiless/vital-card';
+import { CardClean, vitalCard } from '@bodiless/vital-card';
 
 const Subtitle = as(vitalTypography.H2, 'pt-4')(H2);
 
@@ -34,36 +34,29 @@ const DefaultCard = as(
 /**
  * Vertical Card component.
  */
-const VerticalCard = as(asCardToken({
-  ...vitalCard.Default,
-  Schema: {
-    ...vitalCard.Default.Schema,
-    Wrapper: withNodeKey('vertical-card'),
-  },
-  Spacing: {
-    ...vitalCard.WithVerticalOrientation.Spacing,
-  },
-  Layout: {
-    ...vitalCard.WithVerticalOrientation.Layout,
-  },
-}))(CardClean);
-const HorizontalCard = as(asCardToken({
-  ...vitalCard.Default,
-  Schema: {
-    ...vitalCard.Default.Schema,
-    Wrapper: withNodeKey('horizontal-card'),
-  },
-  Spacing: {
-    ...vitalCard.WithHorizontalOrientation.Spacing,
-  },
-  Layout: {
-    ...vitalCard.WithHorizontalOrientation.Layout,
-  },
-}))(CardClean);
+const VerticalCard = as(
+  vitalCard.Default,
+  vitalCard.WithVerticalOrientation,
+  withNodeKey('vertical-card'),
+)(CardClean);
+
+const HorizontalCard = as(
+  vitalCard.Default,
+  vitalCard.WithHorizontalOrientation,
+  withNodeKey('horizontal-card'),
+)(CardClean);
 
 const HeroCard = as(
   vitalCard.Hero,
   withNodeKey('hero-card'),
+)(CardClean);
+const HeroPrimaryButtonCard = as(
+  vitalCard.HeroWithPrimaryButton,
+  withNodeKey('hero-card-primary-button'),
+)(CardClean);
+const HeroSecondaryButtonCard = as(
+  vitalCard.HeroWithSecondaryButton,
+  withNodeKey('hero-card-secondary-button'),
 )(CardClean);
 
 const CardVariations = (props: any) => (
@@ -79,6 +72,10 @@ const CardVariations = (props: any) => (
     <Div className="mb-8">
       <Subtitle>Hero Card</Subtitle>
       <HeroCard />
+      <Subtitle>Hero Card with Primary Button</Subtitle>
+      <HeroPrimaryButtonCard />
+      <Subtitle>Hero Card with Secondary Button</Subtitle>
+      <HeroSecondaryButtonCard />
     </Div>
   </>
 );

@@ -26,7 +26,7 @@ import {
   withEditableFinalTrail,
   withMenuTitleEditors,
 } from '@bodiless/navigation';
-import { vitalColor } from '@bodiless/vital-elements';
+import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
 import { asBreadcrumbsToken } from '../BreadcrumbsClean';
 
 /**
@@ -58,6 +58,7 @@ const Base = asBreadcrumbsToken({
     Wrapper: 'my-3',
   },
   Theme: {
+    Wrapper: vitalTextDecoration.Uppercase,
     StartingTrail: vitalColor.TextPrimaryInteractiveHover,
     Title: vitalColor.TextPrimaryInteractiveHover,
     Item: 'last:font-bold',

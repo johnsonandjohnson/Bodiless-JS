@@ -26,6 +26,7 @@ const Default = asFluidToken({
   ...vitalPageBase.Default,
   Components: {
     _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
+    Search: on(GenericTemplateClean)(vitalGenericTemplate.Search),
   },
 });
 

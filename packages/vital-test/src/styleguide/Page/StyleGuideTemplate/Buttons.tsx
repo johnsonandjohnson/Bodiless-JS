@@ -23,10 +23,26 @@ import {
 import { ButtonClean, vitalButtons } from '@bodiless/vital-buttons';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { vitalTypography } from '@bodiless/vital-elements';
+import { LinkClean, vitalLink } from '@bodiless/vital-link';
+import { withEditorPlain } from '@bodiless/vital-editors';
 
 const C = {
   H3: as(vitalTypography.H3)(H3),
 };
+
+const VitalDemoLink = flowHoc(
+  withEditorPlain('Link1', 'Link'),
+  as(
+    vitalTypography.Link,
+    vitalLink.Default,
+  ),
+  withNodeKey('demo-link'),
+)(LinkClean);
+const VitalPrimaryLink = flowHoc(
+  withEditorPlain('Link1', 'Link'),
+  as(vitalLink.PrimaryLink),
+  withNodeKey('demo-link-arrow'),
+)(LinkClean);
 
 const DefaultButton = as(
   vitalButtons.Default,
@@ -99,30 +115,46 @@ const SecondaryDisabledButtonWithArrow = as(
 const Examples = (props: any) => (
   <>
     <hr className="my-4" />
+    <C.H3>Default Vital Link</C.H3>
+
+    <span>
+      Vital Link:
+      {' '}
+
+    </span>
+    <VitalDemoLink />
+    <br />
+    <span>
+      Vital Primary Link with Arrow:
+      {' '}
+
+    </span>
+    <VitalPrimaryLink />
+    <hr className="my-4" />
     <C.H3>Default Button with no Style</C.H3>
     <div className="flex flex-wrap w-full p-8 space-x-4">
       <DefaultButton />
     </div>
     <C.H3>Primary Buttons</C.H3>
-    <div className="flex flex-wrap w-full p-8 space-x-4">
+    <div className="flex flex-col lg:flex-row lg:flex-wrap w-full p-8 gap-4">
       <PrimaryButton />
       <PrimarySelectedButton />
       <PrimaryDisabledButton />
     </div>
     <C.H3>Primary Buttons With Hover Arrows</C.H3>
-    <div className="flex flex-wrap w-full p-8 space-x-4">
+    <div className="flex flex-col lg:flex-row lg:flex-wrap w-full p-8 gap-4">
       <PrimaryButtonWithArrow />
       <PrimarySelectedButtonWithArrow />
       <PrimaryDisabledButtonWithArrow />
     </div>
     <C.H3>Secondary Buttons</C.H3>
-    <div className="flex flex-wrap w-full p-8 space-x-4">
+    <div className="flex flex-col lg:flex-row lg:flex-wrap w-full p-8 gap-4">
       <SecondaryButton />
       <SecondarySelectedButton />
       <SecondaryDisabledButton />
     </div>
     <C.H3>Secondary Buttons With Hover Arrows</C.H3>
-    <div className="flex flex-wrap w-full p-8 space-x-4">
+    <div className="flex flex-col lg:flex-row lg:flex-wrap w-full p-8 gap-4">
       <SecondaryButtonWithArrow />
       <SecondarySelectedButtonWithArrow />
       <SecondaryDisabledButtonWithArrow />

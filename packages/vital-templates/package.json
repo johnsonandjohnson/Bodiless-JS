@@ -45,6 +45,7 @@
     "@bodiless/vital-flowcontainer": "^1.0.0-rc.1",
     "@bodiless/vital-image": "^1.0.0-rc.1",
     "@bodiless/vital-layout": "^1.0.0-rc.1",
+    "@bodiless/vital-search": "^1.0.0-rc.1",
     "@bodiless/vital-navigation": "^1.0.0-rc.1",
     "@bodiless/vital-youtube": "^1.0.0-rc.1",
     "lodash": "^4.17.19"

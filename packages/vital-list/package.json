@@ -10,6 +10,7 @@
   "files": [
     "/lib",
     "/getDocs.js",
+    "/tailwind.config.js",
     "/bodiless.docs.json",
     "/doc"
   ],
