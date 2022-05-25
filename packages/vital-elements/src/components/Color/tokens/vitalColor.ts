@@ -43,6 +43,7 @@ export default asTokenGroup(meta)({
   BgSecondaryTableRowColumn: 'bg-vital-secondary-table-interactive',
   BgSecondaryTableInteractive: 'hover:bg-vital-secondary-table-interactive',
   BorderSecondarySeparator: 'border-vital-secondary-separator',
+  BorderSecondarySearch: 'border-vital-secondary-search',
   BgWhite: 'bg-white',
   TextWhite: 'text-white',
   TextButtonSelected: 'text-vital-secondary-button-selected',
