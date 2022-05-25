@@ -13,6 +13,8 @@
  */
 
 import { ComponentOrTag } from '@bodiless/fclasses';
+import { createHash } from 'crypto';
+import { useNode } from '@bodiless/core';
 import React, { FC, useRef, useLayoutEffect } from 'react';
 import memoize from 'lodash/memoize';
 import {
@@ -49,6 +51,18 @@ const getInnerHTML = memoize(
 );
 
 const getDisplayName = (WrappedComponent: ComponentOrTag<any>) => (typeof WrappedComponent !== 'string' && (WrappedComponent.displayName || WrappedComponent.name)) || 'Component';
+
+const useWrapperId = (nodeKey?: string | undefined) => {
+  const { node } = useNode();
+  // @todo improve the fix. For flow container items, on server side nodekey is part of node path.
+  // On client it is not. It produces two different Ids.
+  const { path } = node;
+  const pathCopy = [...path];
+  const lastPath = pathCopy.pop();
+  const endPath = lastPath !== nodeKey ? [lastPath, nodeKey] : [nodeKey];
+
+  return createHash('md5').update([...pathCopy, ...endPath].join('$')).digest('hex');
+};
 
 /**
  * Gets the full selector for a dom element.
@@ -100,20 +114,30 @@ const withoutHydrationClientSideEdit: WithoutHydrationFunction = (
 const withoutHydrationServerSide: WithoutHydrationFunction = ({
   WrapperElement,
   WrapperStyle
-}) => WrappedComponent => props => (
-  <WrapperElement data-no-hydrate style={WrapperStyle}>
-    <WrappedComponent {...props} />
-  </WrapperElement>
-);
+}) => WrappedComponent => (props: any) => {
+  const { nodeKey = undefined } = props;
+  return (
+    <WrapperElement data-no-hydrate style={WrapperStyle} id={useWrapperId(nodeKey)}>
+      <WrappedComponent {...props} />
+    </WrapperElement>
+  );
+};
 
 const withoutHydrationClientSide: WithoutHydrationFunction = ({
   onUpdate,
   WrapperElement,
   WrapperStyle,
 }) => <P,>(WrappedComponent: ComponentOrTag<P>) => {
-  const WithoutHydration: FC<P> = (props) => {
+  const WithoutHydration: FC<P> = (props: any) => {
     const BrowserVersion$ = () => {
       const rootRef = useRef<HTMLDivElement&HTMLSpanElement>(null);
+      const { nodeKey = undefined } = props;
+      const id = useWrapperId(nodeKey);
+      const staticElement = document.getElementById(id);
+
+      const markup = staticElement
+        ? getInnerHTML(staticElement as HTMLDivElement&HTMLSpanElement) : '';
+
       // When a non-hydrated component is re-mounted in the browser (eg due to a parent
       // component's dom manipulation), it renders the empty inner html.  Here, we grab
       // the server-rendered html and stash it in a hidden div so we can restore it if/when the
@@ -140,9 +164,10 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
           data-no-hydrate
           ref={rootRef}
           style={WrapperStyle}
+          id={id}
           suppressHydrationWarning
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: '' }}
+          dangerouslySetInnerHTML={{ __html: markup }}
         />
       );
     };

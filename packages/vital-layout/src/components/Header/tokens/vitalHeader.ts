@@ -31,7 +31,7 @@ import {
   withDesign,
   withProps,
 } from '@bodiless/fclasses';
-import { vitalLink } from '@bodiless/vital-link';
+import { vitalButtons } from '@bodiless/vital-buttons';
 import { vitalLogo } from '../../Logo';
 import { vitalDesktopSearch, vitalSearchToggler } from '../../Search';
 import { asHeaderToken } from '../HeaderClean';
@@ -72,7 +72,7 @@ const Base = asHeaderToken({
     UtilityMenu: vitalMenu.Utility,
     // @TODO: Replace LanguageButton placeholder.
     LanguageButton: WithLanguageButton,
-    WhereToBuy: vitalLink.WhereToBuy,
+    WhereToBuy: vitalButtons.WhereToBuy,
   },
   Layout: {
     Container: 'flex justify-between items-center',
