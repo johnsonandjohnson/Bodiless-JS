@@ -12,10 +12,4 @@
  * limitations under the License.
  */
 
-<<<<<<< HEAD:packages/vital-test/src/index.ts
 export * from './styleguide';
-=======
-import vitalSearchMenu from './vitalSearchMenu';
-
-export default vitalSearchMenu;
->>>>>>> bodilessjs/main:packages/vital-search/src/SearchMenu/tokens/index.ts

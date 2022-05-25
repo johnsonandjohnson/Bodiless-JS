@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { Fragment } from 'react';
 import {
   on,
   as,
@@ -20,7 +19,6 @@ import {
   replaceWith,
   withDesign,
   Img,
-  replaceWith,
   Fragment,
   flowIf,
 } from '@bodiless/fclasses';
