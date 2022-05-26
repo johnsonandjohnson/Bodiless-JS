@@ -19,7 +19,27 @@ export default {
   ...vitalTypographyBase,
   H1: asElementToken(vitalTypographyBase.H1, {
     Theme: {
-      _: addProps({ 'data-shadowed-by': '__vital__:Typography' }),
+      _: addProps({ 'data-shadowed-by': '__vital__:Typography:H1' }),
+    },
+  }),
+  H2: asElementToken(vitalTypographyBase.H2, {
+    Theme: {
+      _: addProps({ 'data-shadowed-by': '__vital__:Typography:H2' }),
+    },
+  }),
+  H3: asElementToken(vitalTypographyBase.H3, {
+    Theme: {
+      _: addProps({ 'data-shadowed-by': '__vital__:Typography:H3' }),
+    },
+  }),
+  H4: asElementToken(vitalTypographyBase.H4, {
+    Theme: {
+      _: addProps({ 'data-shadowed-by': '__vital__:Typography:H4' }),
+    },
+  }),
+  H5: asElementToken(vitalTypographyBase.H5, {
+    Theme: {
+      _: addProps({ 'data-shadowed-by': '__vital__:Typography:H5' }),
     },
   }),
 };
