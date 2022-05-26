@@ -4,8 +4,10 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const FileStore = require('session-file-store')(session);
+// eslint-disable-next-line
 const authMiddleware = require('./dist/auth').default;
 // Define options for session file storage:
+// eslint-disable-next-line
 const { FileStoreSessionOptions } = require('./dist/configs/config').default;
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
