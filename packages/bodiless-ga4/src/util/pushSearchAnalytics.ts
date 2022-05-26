@@ -30,5 +30,5 @@ export const pushSearchAnalytics = (props: SearchAnalyticsTypes) => {
     },
   };
 
-  pushDataAnalytics(data, 'search');
+  pushDataAnalytics(data, 'event_data');
 };

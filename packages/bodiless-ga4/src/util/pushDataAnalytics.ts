@@ -12,12 +12,13 @@
  * limitations under the License.
  */
 
-export const pushDataAnalytics = (data: any, type: string) => {
+export const pushDataAnalytics = (data: any, dataLayerType: string) => {
   if (typeof window !== 'undefined') {
     // @ts-ignore undefined datalayer object since it is created on building time.
     window.dataLayer = window.dataLayer || [];
+    const clearEvent = { [dataLayerType]: null };
     // @ts-ignore undefined datalayer object since it is created on building time.
-    dataLayer.push({ type: null });
+    dataLayer.push(clearEvent);
     // @ts-ignore undefined datalayer object since it is created on building time.
     dataLayer.push(data);
   }

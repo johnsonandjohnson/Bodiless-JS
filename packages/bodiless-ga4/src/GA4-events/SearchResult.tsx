@@ -29,6 +29,7 @@ const searchResultDefaultDataLayer = {
       },
     },
   },
+  dataLayerType: 'event_data',
 };
 
 const withSearchResultInfos = (HelmetComponent: ComponentType) => (props: any) => {
