@@ -131,6 +131,7 @@
       - [Vital List](/VitalDesignSystem/Components/VitalList)
       - [Vital Meta](/VitalDesignSystem/Components/VitalMeta/)
         - [Share](/VitalDesignSystem/Components/VitalMeta/Share)
+        - [Shadowing Meta](/VitalDesignSystem/Components/VitalMeta/ShadowingMeta)
         - [SEO](/VitalDesignSystem/Components/VitalMeta/SEO)
       - [Vital Navigation](/VitalDesignSystem/Components/VitalNavigation/)
         - [Sub-Menu](/VitalDesignSystem/Components/VitalNavigation/Sub-Menu)
