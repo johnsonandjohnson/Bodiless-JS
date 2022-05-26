@@ -43,8 +43,6 @@ import {
 import { ifComponentSelector } from '@bodiless/layouts';
 import {
   asVitalTokenSpec,
-  vitalColor,
-  vitalFontSize,
   vitalTextDecoration,
   vitalTypography,
 } from '@bodiless/vital-elements';
@@ -120,33 +118,9 @@ const BasicNoLink = asVitalTokenSpec()({
   Behavior: {},
 });
 
-const Copyright = asVitalTokenSpec()({
-  ...Basic,
-  Theme: {
-    ...Basic.Theme,
-    paragraph: as(
-      vitalColor.TextPrimaryFooterCopy,
-      vitalFontSize.XS,
-      vitalTextDecoration.Normal,
-    ),
-    Link: as(
-      vitalLink.Default,
-      vitalColor.TextPrimaryFooterCopy,
-      vitalColor.TextPrimaryInteractive,
-      vitalFontSize.XS,
-      vitalTextDecoration.Bold,
-      vitalTextDecoration.Underline,
-    ),
-  },
-  Content: {
-    _: addProps({ placeholder: 'Insert Copyright' }),
-  },
-});
-
 export default {
   Default,
   Basic,
   BasicNoLink,
   AsFlowContainerItem,
-  Copyright,
 };

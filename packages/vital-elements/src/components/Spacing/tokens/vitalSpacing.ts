@@ -14,7 +14,7 @@
 
 import { asTokenGroup } from '../../../util';
 
-const meta = {
+export const SpacingMeta = {
   categories: {
     Type: ['Element'],
     Group: ['Spacing'],
@@ -27,9 +27,13 @@ const meta = {
  * to contain content (WithSiteMargin) until we get to xl and then constrain by
  * max-width (WithSiteXLConstraint).
  */
-export default asTokenGroup(meta)({
+export default asTokenGroup(SpacingMeta)({
   WithSiteMargin: 'mx-site-percent md:mx-md-site-percent 2xl:px-40',
   WithSiteXLConstraint: '2xl:container 2xl:mx-auto',
   Gutter: 'p-1 md:p-2 lg:p-3',
   GutterOffset: '-mx-1 md:-mx-2 lg:-mx-3',
+  GutterTop: 'mt-4',
+  GutterBottom: 'mb-4',
+  GuttonLeft: 'ml-4',
+  GuttonRight: 'mr-4',
 });

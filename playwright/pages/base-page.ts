@@ -47,7 +47,7 @@ export class BasePage {
   constructor(page: Page) {
     this.page = page;
     this.docsPath = '/___docs/';
-    this.docsTitle = '//*[@data-id="bodilessjs"]'
+    this.docsTitle = '//*[@data-id="bodilessjs"]';
     this.switcherIcon = '//*[@aria-label="switcher"]';
     this.editIcon = '//*[@aria-label="Edit"]';
     this.pathToImages = './playwright/images/';
@@ -82,7 +82,7 @@ export class BasePage {
       await this.page.keyboard.press('ArrowDown');
       await this.page.type(locator, text);
       await Promise.all([
-        this.page.waitForResponse(response => response.url()
+        this.page.waitForResponse((response) => response.url()
           .includes(request) && response.status() === 200),
         this.page.click(confirmButton),
       ]);
@@ -91,7 +91,7 @@ export class BasePage {
       await this.page.waitForTimeout(300);
       await this.page.keyboard.press('ArrowDown');
       await Promise.all([
-        this.page.waitForResponse(response => response.url()
+        this.page.waitForResponse((response) => response.url()
           .includes(request) && response.status() === 200),
         this.page.type(locator, text),
       ]);

@@ -16,25 +16,19 @@ import {
   withMeta, withTitle, withMetaStatic, asBodilessHelmet,
 } from '@bodiless/components';
 import { useMenuOptionUI } from '@bodiless/core';
-import { asElementToken } from '@bodiless/vital-elements';
+import { asElementToken, asSimpleToken } from '@bodiless/vital-elements';
 import {
-  flowIf, HOC, Token, as
+  flowIf, HOC, Token, as, FlowHoc, flowHoc, HOCDef
 } from '@bodiless/fclasses';
 
 import {
   withSeoMetaForm, withShareMetaForm, withMetaHtmlAttributes, useIsHomePage,
 } from '../helpers';
 
-const asSimpleToken = (...tokens: Token[]) => asElementToken({
-  Core: {
-    _: Array.isArray(tokens) ? as(...tokens) : tokens,
-  },
-});
-
 // SEO tokens
 
 const WithPageTitle = asSimpleToken(withTitle({
-  name: 'title', label: 'Title', placeholder: 'Rec 30-65 charecterr',
+  name: 'title', label: 'Title', placeholder: 'Rec 30-65 character',
 })('page-title'));
 
 const WithPageDescription = asSimpleToken(withMeta({
@@ -79,61 +73,66 @@ const WithSeoForm = asElementToken({
     _: as(withSeoMetaForm, asBodilessHelmet('meta') as HOC),
   },
 });
+const flowWithFinally = (
+  ...finalTokens: Token[]
+): FlowHoc<any> => (...tokens: HOCDef<any, any, any>[]) => flowHoc(
+  ...tokens,
+  as(...finalTokens),
+);
 
 // All SEO tokens packaged
 const SEO = asElementToken({
+  Flow: flowWithFinally(WithSeoForm),
   Compose: {
     WithHtml,
     WithHomePageSchemas,
     WithPageDescription,
     WithPageTitle,
-    WithSeoForm,
   },
 });
-
 // Social Share OG & UTM tokens
-export const WithUTMCampaign = asSimpleToken(withMetaStatic({
+const WithUTMCampaign = asSimpleToken(withMetaStatic({
   name: 'utm_campaign',
 })({ nodeKey: 'utm-campaign', nodeCollection: 'site' }));
 
-export const WithSiteName = asSimpleToken(withMetaStatic({
+const WithSiteName = asSimpleToken(withMetaStatic({
   name: 'og:site_name', attribute: 'property',
 })({ nodeKey: 'og-sitename', nodeCollection: 'site' }));
 
-export const WithTwitterCard = asSimpleToken(withMetaStatic({
+const WithTwitterCard = asSimpleToken(withMetaStatic({
   name: 'twitter:card',
 })({ nodeKey: 'twitter-card', nodeCollection: 'site' }, 'summary'));
 
-export const WithShareType = asSimpleToken(withMeta({
+const WithShareType = asSimpleToken(withMeta({
   name: 'og:type', attribute: 'property', label: 'OG Type',
 })({ nodeKey: 'og-type' }));
 
-export const WithTwitterTitle = asSimpleToken(withMeta({
+const WithTwitterTitle = asSimpleToken(withMeta({
   name: 'twitter:title', label: 'Twitter Title',
 })('twitter-title'));
 
-export const WithUTMContent = asSimpleToken(withMeta({
-  name: 'utm_content', label: 'utm-content',
+const WithUTMContent = asSimpleToken(withMeta({
+  name: 'utm_content', label: 'UTM Content',
 })('utm-content'));
 
-export const WithShareDescription = asSimpleToken(withMeta({
+const WithShareDescription = asSimpleToken(withMeta({
   name: 'og:description',
   useFormElement: () => useMenuOptionUI().ComponentFormTextArea,
   label: 'Description',
   attribute: 'property',
 })('og-description'));
 
-export const WithShareUrl = asSimpleToken(withMeta({
+const WithShareUrl = asSimpleToken(withMeta({
   name: 'og:url', label: 'Url', attribute: 'property',
 })('og-url'));
 
-export const WithShareImage = asSimpleToken(withMeta({
+const WithShareImage = asSimpleToken(withMeta({
   name: 'og:image',
   label: 'Image (provide absolute URL)',
   attribute: 'property',
 })('og-image'));
 
-export const WithShareTitle = asSimpleToken(withMeta({
+const WithShareTitle = asSimpleToken(withMeta({
   name: 'og:title', label: 'Title', attribute: 'property',
 })('og-title'));
 
@@ -144,7 +143,8 @@ const WithShareForm = asElementToken({
 });
 
 // All Social Share OG & UTM tokens packaged
-export const Share = asElementToken({
+const Share = asElementToken({
+  Flow: flowWithFinally(WithShareForm),
   Compose: {
     WithUTMCampaign,
     WithSiteName,
@@ -156,13 +156,15 @@ export const Share = asElementToken({
     WithShareUrl,
     WithShareImage,
     WithShareTitle,
-    WithShareForm,
   },
 });
 
 export default {
   SEO,
   Share,
+};
+
+export {
   WithUTMCampaign,
   WithSiteName,
   WithTwitterCard,
@@ -180,4 +182,7 @@ export default {
   WithOrganizationContactType,
   WithOrganizationContactOption,
   WithOrganizationAreaServed,
+  WithSeoForm,
+  WithShareForm,
+  WithHomePageSchemas,
 };

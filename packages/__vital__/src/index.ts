@@ -11,8 +11,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-export * from './components/Page';
-export * from './components/Layout';
-export * from './components/Header';
-export * from './styleguide';

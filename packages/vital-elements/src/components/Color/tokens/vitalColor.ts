@@ -14,14 +14,14 @@
 
 import { asTokenGroup } from '../../../util';
 
-const meta = {
+export const ColorMeta = {
   categories: {
     Type: ['Element'],
     Group: ['Color'],
   },
 };
 
-export default asTokenGroup(meta)({
+export default asTokenGroup(ColorMeta)({
   BgPrimaryBrand: 'bg-vital-primary-brand',
   TextPrimaryBrand: 'text-vital-primary-brand',
   BgPrimaryCard: 'bg-vital-primary-card-bg',
@@ -29,6 +29,7 @@ export default asTokenGroup(meta)({
   BgPrimaryInteractive: 'bg-vital-primary-interactive',
   BorderPrimaryInteractive: 'border-vital-primary-interactive',
   TextPrimaryInteractive: 'text-vital-primary-interactive hover:opacity-70 active:text-vital-primary-interactive-active',
+  TextPrimaryInteractiveNoHover: 'text-vital-primary-interactive active:text-vital-primary-interactive-active',
   TextPrimaryInteractiveHover: 'hover:text-vital-primary-interactive',
   WithTextPrimaryInteractiveDisabled: 'text-opacity-60',
   BgPrimaryDivider: 'bg-vital-primary-divider',
@@ -42,6 +43,7 @@ export default asTokenGroup(meta)({
   BgSecondaryTableRowColumn: 'bg-vital-secondary-table-interactive',
   BgSecondaryTableInteractive: 'hover:bg-vital-secondary-table-interactive',
   BorderSecondarySeparator: 'border-vital-secondary-separator',
+  BorderSecondarySearch: 'border-vital-secondary-search',
   BgWhite: 'bg-white',
   TextWhite: 'text-white',
   TextButtonSelected: 'text-vital-secondary-button-selected',
