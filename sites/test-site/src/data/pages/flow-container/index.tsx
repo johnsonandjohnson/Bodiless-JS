@@ -185,11 +185,19 @@ const FlowContainerPage = (props: any) => (
         getDefaultWidth={() => 'w-full lg:w-3/4'}
       />
       <H2>Contentful Flow Container</H2>
-      <ContentfulFlowContainer />
+      <ContentfulFlowContainer
+        id="contentfulFlowContainer"
+      />
       <H2>Limited Flow Container</H2>
-      <FlowContainerLimited nodeKey="limited" />
+      <FlowContainerLimited
+        id="flowContainerLimited"
+        nodeKey="limited"
+      />
       <H2>Nested Flow Container with Default Items</H2>
-      <RegionContainer nodeKey="region" />
+      <RegionContainer
+        id="regionContainer"
+        nodeKey="region"
+      />
     </Layout>
   </Page>
 );
