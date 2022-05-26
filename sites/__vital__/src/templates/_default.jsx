@@ -11,13 +11,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import { Fragment } from 'react';
 import { graphql } from 'gatsby';
 import { as } from '@bodiless/fclasses';
-import { __vital__Page } from '--vital--';
+import { vitalPage } from '@bodiless/vital-templates';
 
-const DefaultPage = as(__vital__Page.Default)(Fragment);
+const DefaultPage = as(vitalPage.Default)(Fragment);
 
 export default DefaultPage;
 

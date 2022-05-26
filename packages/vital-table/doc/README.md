@@ -49,7 +49,7 @@ const Default = asFluidToken({
   ...vitalTableBase.Default,
   Components: {
     ...vitalTableBase.Default.Components,
-    Wrapper: addProps({ 'data-shadowed-by': '__vitalstarter_:Table' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:Table' }),
   },
   /* The following is an example that overrides full width and uses
    * fixed widths for columns. The width of the first row will set the

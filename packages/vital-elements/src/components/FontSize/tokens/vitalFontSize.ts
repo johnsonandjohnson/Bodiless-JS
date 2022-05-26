@@ -14,14 +14,14 @@
 
 import { asTokenGroup } from '../../../util';
 
-const meta = {
+export const FontSizeMeta = {
   categories: {
     Type: ['Element'],
     Group: ['FontSize'],
   },
 };
 
-export default asTokenGroup(meta)({
+export default asTokenGroup(FontSizeMeta)({
   Base: 'text-m-base lg:text-base',
   XXXL: 'text-m-3xl lg:text-3xl',
   XXL: 'text-m-2xl lg:text-2xl',

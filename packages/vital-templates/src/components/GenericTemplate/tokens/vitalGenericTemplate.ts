@@ -15,14 +15,19 @@
 import {
   on,
   as,
+  addProps,
+  replaceWith,
   withDesign,
   Img,
+  Fragment,
+  flowIf,
 } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
-import { LayoutClean, vitalLayout } from '@bodiless/vital-layout';
+import { vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
-import { withNode, withNodeKey } from '@bodiless/core';
+import { withNode, withNodeKey, useNode } from '@bodiless/core';
 import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
+import { SearchLayoutClean, vitalSearchLayout } from '@bodiless/vital-search';
 import { vitalBreadcrumbs } from '@bodiless/vital-navigation';
 import { vitalImage } from '@bodiless/vital-image';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
@@ -38,9 +43,19 @@ const heroUseOverrides = () => ({
   groupLabel: 'Hero'
 });
 
-const Default = asGenericTemplateToken({
+const isHomePage = () => useNode().node.pagePath === '/';
+
+const WithNoBreadcrumbsOnHomePage = asGenericTemplateToken({
+  Flow: flowIf(isHomePage),
   Components: {
-    PageWrapper: on(LayoutClean)(vitalLayout.Default),
+    BreadcrumbWrapper: replaceWith(Fragment),
+    Breadcrumb: replaceWith(Fragment),
+  },
+});
+
+const Base = asGenericTemplateToken({
+  Components: {
+    PageWrapper: vitalLayout.Default,
     Breadcrumb: as(vitalBreadcrumbs.Default),
     TopContent: as(
       asBodilessChameleon('component', heroDefaultData, heroUseOverrides),
@@ -64,6 +79,7 @@ const Default = asGenericTemplateToken({
       vitalSpacing.WithSiteXLConstraint,
       'my-2.5',
     ),
+    TopWrapper: vitalSpacing.GutterBottom,
     // @todo move styling of breadcrumb to breadcrumb component when it exists.
     Breadcrumb: vitalTypography.Rest,
     ContentWrapper: as(
@@ -75,8 +91,26 @@ const Default = asGenericTemplateToken({
       vitalSpacing.WithSiteXLConstraint
     ),
   },
+  Compose: {
+    WithNoBreadcrumbsOnHomePage,
+  }
+});
+
+const Default = asGenericTemplateToken({
+  ...Base,
+});
+
+const Search = asGenericTemplateToken(Default, {
+  Components: {
+    Breadcrumb: addProps({ children: 'Search', }),
+    TopContent: replaceWith(Fragment),
+    Content: on(SearchLayoutClean)(vitalSearchLayout.Default),
+    BottomContent: replaceWith(Fragment),
+  }
 });
 
 export default {
+  Base,
   Default,
+  Search,
 };

@@ -14,12 +14,34 @@
 
 import { withNode, withNodeKey } from '@bodiless/core';
 import { vitalRichText } from '@bodiless/vital-editors';
-import { vitalColor, vitalSpacing } from '@bodiless/vital-elements';
+import {
+  asVitalTokenSpec, vitalColor, vitalFontSize, vitalSpacing, vitalTextDecoration
+} from '@bodiless/vital-elements';
 import { vitalMenu } from '@bodiless/vital-navigation';
-import { as } from '@bodiless/fclasses';
+import { addProps, as } from '@bodiless/fclasses';
+import { vitalLink } from '@bodiless/vital-link';
 import { vitalRewards } from '../Rewards';
 import { vitalSocialLinks } from '../SocialLinks';
 import { asFooterToken } from '../FooterClean';
+
+const Copyright = asVitalTokenSpec()({
+  ...vitalRichText.Basic,
+  Theme: {
+    paragraph: as(
+      vitalColor.TextPrimaryFooterCopy,
+      vitalFontSize.XS,
+      vitalTextDecoration.Normal,
+    ),
+    Link: as(
+      vitalLink.Base,
+      vitalTextDecoration.Bold,
+      vitalTextDecoration.Underline,
+    ),
+  },
+  Content: {
+    _: addProps({ placeholder: 'Insert Copyright' }),
+  },
+});
 
 const Base = asFooterToken({
   Components: {
@@ -59,8 +81,8 @@ const Base = asFooterToken({
       'md:mb-0', // Vertical
     ),
     FooterMenuWrapper: 'py-9 md:p-0', // Vertical
-    Copyright: 'py-6 md:mb-4 md:py-6 2xl:py-0 2xl:mb-0', // Vertical
-    SocialLinksWrapper: 'py-5 md:p-0',
+    Copyright: 'py-6 2xl:py-0 md:mb-4 2xl:mb-0', // Vertical
+    SocialLinksWrapper: 'py-6 2xl:py-0', // Vertical
   },
   Theme: {
     RewardsWrapper: 'bg-vital-primary-card-bg 2xl:bg-vital-secondary-footer-bg',
@@ -71,7 +93,7 @@ const Base = asFooterToken({
     Wrapper: vitalColor.BgSecondaryFooter,
   },
   Editors: {
-    Copyright: vitalRichText.Copyright,
+    Copyright,
   },
   Schema: {
     FooterMenu: withNodeKey({ nodeKey: 'footer', nodeCollection: 'site' }),

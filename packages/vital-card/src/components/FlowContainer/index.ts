@@ -19,7 +19,7 @@ import {
 } from '../Card';
 
 const BaseVariation = {
-  Card: on(CardClean)(vitalCard.Base),
+  Card: on(CardClean)(vitalCard.Base, vitalCard.WithFlowContainerPreview),
 };
 const OrientationVariations = {
   Vertical: vitalCard.WithVerticalOrientation,
@@ -31,18 +31,24 @@ const ContentVariations = {
   }),
   NoTitle: vitalCard.WithNoTitle,
   NoDescription: vitalCard.WithNoDescription,
+  NoEyebrow: vitalCard.WithNoEyebrow,
 };
-
+const HeroCTAVariations = {
+  Link: vitalCard.Hero,
+  PrimaryButton: vitalCard.HeroWithPrimaryButton,
+  SecondaryButton: vitalCard.HeroWithSecondaryButton,
+};
 /**
  * Token which adds Card variations to a flow container.
  */
 const WithCardVariations = asFluidToken({
   Components: {
-    HeroCard: on(CardClean)(vitalCard.Base, vitalCard.Hero),
+    HeroCard: on(CardClean)(vitalCard.Hero),
     ...varyDesigns(
       BaseVariation,
       ContentVariations,
       OrientationVariations,
+      HeroCTAVariations,
     ),
   }
 });

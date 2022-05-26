@@ -33,6 +33,7 @@ export type HeaderComponents = {
   WhereToBuyWrapper: ComponentOrTag<any>,
   WhereToBuy: ComponentOrTag<any>,
   DesktopSearch: ComponentOrTag<any>,
+  MobileSearch: ComponentOrTag<any>,
   SearchToggler: ComponentOrTag<any>,
 };
 

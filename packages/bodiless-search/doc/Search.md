@@ -47,13 +47,6 @@ JSON properties across two files:
 01. [Configure `.env.site`](Configure#configure-envsite).
 01. [Configure `search.config.json`](Configure#configure-searchconfigjson).
 
-?> **Note:** For backward-compatibility, search configured _solely_ in your `.env.site` file is
-still supported. However, some newer features aren't configurable with environment variables (e.g.,
-exclude a path/page), and must be configured via the `search.config.json` file.  
-<br>
-For more information on this, see [Backward-Compatibility
-Support](Configure#backward-compatibility-support).
-
 ### 3. Support Search Indexing
 
 In this step, you will update `package.json` to build the search index. In addition, you will add a
@@ -93,10 +86,6 @@ This will create the search index under the path specified by
 [`languages[x].indexFilePath`](Configure#languages) in your
 [`search.config.json`](Configure#configure-searchconfigjson) file (where `x` is the index of a
 language in the `languages` array).
-
-?> **Note:** If you're [only using `.env.site`](Configure#backward-compatibility-support) for
-configuring search, then this will create the search index under the path specified by the
-`BODILESS_SEARCH_INDEX_PATH` environment variable.
 
 ### 4. Create Search HOCs
 
@@ -279,10 +268,6 @@ set it to the body of your content or the body of your articles. It accepts clas
 selectors; and is comma-separated. If you want to index all items in the body of your page use
 "`body *`", and all content within the body will be indexed.
 
-?> **Note:** If you're [only using `.env.site`](Configure#backward-compatibility-support) for
-configuring search, then indexing on your site is defined by the `BODILESS_SEARCH_INDEX_SELECTOR`
-environment variable.
-
 For example, if you want to index article content, you can use "`.article-content *`" to target
 article content specifically.
 
@@ -290,10 +275,6 @@ In addition, you can exclude items from search via the
 [`contentExcluders`](Configure#contentexcluders) property in your
 [`search.config.json`](Configure#configure-searchconfigjson) file. By default, we suggest adding
 `script`, `noscript`, and `style`, so they aren't indexed.
-
-?> **Note:** If you're [only using `.env.site`](Configure#backward-compatibility-support) for
-configuring search, then excluded items from search are defined by the
-`BODILESS_SEARCH_INDEX_EXCLUDE_SELECTOR` environment variable.
 
 #### Add a `no-search` Class
 

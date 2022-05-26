@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
-import vitalTextDecoration from './vitalTextDecoration';
+import vitalTextDecoration, { TextDecorationMeta } from './vitalTextDecoration';
 
 export default vitalTextDecoration;
+export { TextDecorationMeta };

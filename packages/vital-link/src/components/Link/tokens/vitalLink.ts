@@ -20,9 +20,10 @@ import {
   as,
   flowIf,
   on,
+  flowHoc,
 } from '@bodiless/fclasses';
 import { withSidecarNodes, withNodeKey } from '@bodiless/core';
-import { vitalTypography } from '@bodiless/vital-elements';
+import { vitalColor, vitalTypography } from '@bodiless/vital-elements';
 import { asLinkToken } from '../LinkClean';
 import { useExternalLinkToggle, asEditableLink, useIsDownloadLink } from '../util';
 
@@ -60,16 +61,9 @@ const WithDownloadStyles = asLinkToken({
 });
 
 /**
-   * Token which produces a default VitalDS editable link.
-   */
-const Default = asLinkToken({
-  /**
-     * VitalDS typography and colors.
-     */
-  Theme: {
-    _: as(WithDownloadStyles, WithExternalStyles),
-    Wrapper: as(vitalTypography.Link),
-  },
+  * Token which produces a base editable link.
+  */
+const Base = asLinkToken({
   /**
      * Makes the link editable. Nodekey must be provided separately.
      * Editor token should be applied after all composed tokens to ensure
@@ -78,6 +72,27 @@ const Default = asLinkToken({
   Schema: {
     _: asEditableLink(),
   },
+});
+
+/**
+   * Token which produces a default VitalDS editable link.
+   */
+const Default = asLinkToken(Base, {
+  /**
+     * VitalDS typography and colors.
+     */
+  Theme: {
+    _: as(WithDownloadStyles, WithExternalStyles),
+    Wrapper: as(vitalTypography.Link),
+  },
+});
+
+const PrimaryLink = asLinkToken(Default, {
+  Theme: {
+    Wrapper: 'hover:vital-arrow hover:pr-1 hover:w-6 hover:h-2',
+    Body: vitalColor.TextPrimaryInteractiveNoHover,
+  },
+  Meta: flowHoc.meta.term('Style')('With Hover Arrow'),
 });
 
 const Sidecar = asLinkToken({
@@ -91,8 +106,10 @@ const Sidecar = asLinkToken({
 });
 
 export default {
+  Base,
   Default,
   WithExternalStyles,
   WithDownloadStyles,
+  PrimaryLink,
   Sidecar,
 };
