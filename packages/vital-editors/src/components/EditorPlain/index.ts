@@ -14,3 +14,4 @@
 
 export * from './index.bl-edit';
 export { default as vitalEditorPlainBase } from './tokens/vitalEditorPlain';
+export * from './util';

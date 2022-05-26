@@ -1,5 +1,7 @@
 {
   "Development": {
-    "Platform.sh.md": "./README.md"
+    "WebPlatforms": {
+      "Platform.sh.md": "./README.md"
+    }
   }
 }

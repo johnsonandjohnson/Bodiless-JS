@@ -23,9 +23,9 @@ import {
   replaceWith,
 } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
-import { LayoutClean, vitalLayout } from '@bodiless/vital-layout';
+import { vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
-import { useNode, withNode, withNodeKey } from '@bodiless/core';
+import { withNode, withNodeKey, useNode } from '@bodiless/core';
 import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
 import { SearchLayoutClean, vitalSearchLayout } from '@bodiless/vital-search';
 import { vitalBreadcrumbs } from '@bodiless/vital-navigation';
@@ -58,7 +58,7 @@ const Base = asGenericTemplateToken({
     title: 'Default',
   },
   Components: {
-    PageWrapper: on(LayoutClean)(vitalLayout.Default),
+    PageWrapper: vitalLayout.Default,
     Breadcrumb: as(vitalBreadcrumbs.Default),
     TopContent: as(
       asBodilessChameleon('component', heroDefaultData, heroUseOverrides),

@@ -99,6 +99,9 @@ const plugins = [
       id: 'GTM-N3M9LLD',
       dataLayerName: 'globalDataLayer',
     },
+  },
+  {
+    resolve: '@bodiless/vital-test',
   }
 ];
 

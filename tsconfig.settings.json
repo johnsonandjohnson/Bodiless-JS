@@ -98,6 +98,8 @@
       "@bodiless/vital-table/*": ["vital-table/src/*"],        
       "@bodiless/vital-templates": ["vital-templates/src/"],
       "@bodiless/vital-templates/*": ["vital-templates/src/*"],
+      "@bodiless/vital-test": ["vital-test/src/"],
+      "@bodiless/vital-test/*": ["vital-test/src/*"],      
       "@bodiless/vital-youtube": ["vital-youtube/src"],
       "@bodiless/vital-youtube/*": ["vital-youtube/src/*"],  
       "@bodiless/vital-card": ["vital-card/src/"],

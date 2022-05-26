@@ -34,6 +34,7 @@
     "@bodiless/vital-navigation": "^1.0.0-rc.1",
     "@bodiless/vital-search": "^1.0.0-rc.1",
     "@bodiless/vital-templates": "^1.0.0-rc.1",
+    "@bodiless/vital-test": "^1.0.0-rc.1",  
     "@bodiless/vital-youtube": "^1.0.0-rc.1",
     "@bodiless/webpack": "^1.0.0-rc.1",
     "autoprefixer": "^10.4.2",
