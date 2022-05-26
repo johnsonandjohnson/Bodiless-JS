@@ -16,7 +16,9 @@ import React, { FC } from 'react';
 import union from 'lodash/union';
 import difference from 'lodash/difference';
 import capitalize from 'lodash/capitalize';
-import type { ComponentOrTag, Enhancer, Condition } from './types';
+import type {
+  ComponentOrTag, Enhancer, Condition, DesignableProps
+} from './types';
 
 /**
  * A single CSS class string or an array of them.
@@ -195,7 +197,7 @@ type ForwardRefProps = {
  * @category FClasses API
  */
 const stylable: Enhancer<StylableProps> = (Component: ComponentOrTag<any>) => {
-  const Stylable = (props: StylableProps & ForwardRefProps & Classable) => {
+  const Stylable = (props: StylableProps & ForwardRefProps & Classable & DesignableProps) => {
     const {
       fClasses,
       className,
@@ -204,6 +206,12 @@ const stylable: Enhancer<StylableProps> = (Component: ComponentOrTag<any>) => {
     } = props;
     const classes = apply(fClasses);
     const newClassName = asClassName(className ? apply(asFClasses(className), classes) : classes);
+
+    if (rest.design && !Object.keys(rest.design).length) {
+      // This prevents empty design objects from being rendered to the DOM.
+      delete rest.design;
+    }
+
     return <Component {...rest as any} className={newClassName} ref={forwardRef} />;
   };
   Stylable.displayName = 'Stylable';
