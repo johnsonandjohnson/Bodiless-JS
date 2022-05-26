@@ -1,4 +1,4 @@
-# Janrain/Akamai authentication for gatsby sites
+# Janrain/Akamai Authentication for Gatsby Sites
 
 ## Introduction
 
@@ -20,7 +20,7 @@ The middleware uses Janrain/Akamai to authenticate users and uses session-file-s
         You may also define the options as plugin configuration in your site gatsby-config.js such as:
         ```
         {
-          resolve: `@canvasx/gatsby-plugin-akamai-auth`,
+          resolve: `@bodiless/gatsby-plugin-akamai-auth`,
           options: {
             ....
             FileStoreSessionOptions: {
@@ -56,7 +56,7 @@ The middleware uses Janrain/Akamai to authenticate users and uses session-file-s
             For example:
     ``` 
           {
-          resolve: `@canvasx/gatsby-plugin-akamai-auth`,
+          resolve: `@bodiless/gatsby-plugin-akamai-auth`,
           options: {
             JanrainAppSettings: {
               settings: {
