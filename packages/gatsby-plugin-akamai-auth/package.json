@@ -11,7 +11,10 @@
     "index.js",
     "index.d.ts",
     "gatsby-browser.js",
-    "gatsby-node.js"
+    "gatsby-node.js",
+    "doc/",
+    "bodiless.docs.json",
+    "getDocs.js"
   ],
   "repository": {
     "type": "git",
@@ -32,6 +35,7 @@
     "theme:init": "echo $null >> index.js"
   },
   "dependencies": {
+    "@bodiless/cli": "^1.0.0-rc.1",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
     "copyfiles": "^2.1.1",

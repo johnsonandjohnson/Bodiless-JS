@@ -27,6 +27,7 @@
     "@bodiless/documentation": "^1.0.0-rc.1",
     "@bodiless/fclasses": "^1.0.0-rc.1",
     "@bodiless/filtering": "^1.0.0-rc.1",
+    "@bodiless/gatsby-plugin-akamai-auth": "^1.0.0-rc.1",
     "@bodiless/gatsby-plugin-ssi": "^1.0.0-rc.1",
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.1",
     "@bodiless/ga4": "^1.0.0-rc.1",
