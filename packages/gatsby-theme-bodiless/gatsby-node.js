@@ -253,14 +253,6 @@ exports.onCreateWebpackConfig = ({
   stage, actions, plugins
 }, pluginOptions) => {
   if (stage === 'build-javascript') {
-    // fsLogHandler is used to write log files in the server, so we don't need it in the browser.
-    // Its static version is just a dummy file.
-    actions.setWebpackConfig(addStaticReplacementPlugin({}, {
-      include: /fsLogHandler/
-    }));
-  }
-
-  if (stage === 'build-javascript') {
     actions.setWebpackConfig({
       resolve: {
         alias: {

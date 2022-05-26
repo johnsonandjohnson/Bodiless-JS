@@ -12,12 +12,7 @@
  * limitations under the License.
  */
 
-const emptyFunction = () => undefined;
-
-export default {
-  log: emptyFunction,
-  flush: emptyFunction,
-  hasLogs: emptyFunction,
-  validate: emptyFunction,
-  clear: emptyFunction,
+export const log = (message: string) => {
+  global.BODILESS_GATSBY_LOGS = global.BODILESS_GATSBY_LOGS || [];
+  global.BODILESS_GATSBY_LOGS.push(message);
 };
