@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-// import { GTMDataLayerSearchResultHelmet } from '@bodiless/vital-gtm';
 import { as } from '@bodiless/fclasses';
 import { vitalTypography } from '@bodiless/vital-elements';
 import {

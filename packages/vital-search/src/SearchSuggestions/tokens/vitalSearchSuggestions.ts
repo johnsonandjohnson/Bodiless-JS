@@ -14,11 +14,14 @@
 
 import { as } from '@bodiless/fclasses';
 import { vitalColor } from '@bodiless/vital-elements';
-// import { withSearchDataLayerSuggestion } from '@canvasx/gtm';
+import { addSearchDataLayerSuggestion } from '@bodiless/ga4';
 import { vitalSearchSuggestion } from '../../SearchSuggestion';
 import { asSearchSuggestionsToken } from '../SearchSuggestionsClean';
 
 const Default = asSearchSuggestionsToken({
+  Behavior: {
+    _: addSearchDataLayerSuggestion,
+  },
   Theme: {
     Wrapper: as(
       vitalColor.BgPrimaryCard,

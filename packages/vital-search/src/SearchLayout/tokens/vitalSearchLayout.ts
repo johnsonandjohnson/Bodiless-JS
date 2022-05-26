@@ -14,15 +14,14 @@
 
 import { addProps, as } from '@bodiless/fclasses';
 import { vitalTypography } from '@bodiless/vital-elements';
-// import { withSearchDataLayer } from '@bodiless/vital-gtm';
+import { addSearchDataLayer } from '@bodiless/ga4';
 import { asSearchLayoutToken } from '../SearchLayoutClean';
 import { vitalSearchResults } from '../../SearchResults';
 
 const DefaultSearchLayout = asSearchLayoutToken({
-  // @todo uncomment after implementing gtm package
-  // Behavior: {
-  //   Box: as(withSearchDataLayer),
-  // },
+  Behavior: {
+    _: addSearchDataLayer,
+  },
   Components: {
     Result: as(vitalSearchResults.Default),
   },

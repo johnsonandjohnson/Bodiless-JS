@@ -12,17 +12,16 @@
  * limitations under the License.
  */
 
-import { as } from '@bodiless/fclasses';
+import { as, startWith } from '@bodiless/fclasses';
 import { vitalTypography } from '@bodiless/vital-elements';
+import { GA4DataLayerSearchResultHelmet } from '@bodiless/ga4';
 import { vitalSearchResult } from '../../SearchResult';
-// import { GTMDataLayerSearchResultHelmet } from '@bodiless/vital-gtm';
 import { asSearchResultsToken } from '../SearchResultsClean';
 
 const Default = asSearchResultsToken({
   Components: {
     SearchResultListItem: as(vitalSearchResult.Default),
-    // @todo uncomment after implementing gtm package
-    // SearchHelmet: startWith(GTMDataLayerSearchResultHelmet),
+    SearchHelmet: startWith(GA4DataLayerSearchResultHelmet),
   },
   Theme: {
     SearchResultSummary: vitalTypography.Eyebrow,
