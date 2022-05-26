@@ -103,7 +103,7 @@
     - [API](/Development/API/)
   - [Vital Design System](/VitalDesignSystem/)
     - [Components](/VitalDesignSystem/Components/)
-      - [Vital Buttons](/VitalDesignSystem/Components/VitalButtons)
+      - [Vital Buttons](/VitalDesignSystem/Components/VitalButtons/)
       - [Vital Card](/VitalDesignSystem/Components/VitalCard/)
       - [Vital Editors](/VitalDesignSystem/Components/VitalEditors/)
         - [Plain Editor](/VitalDesignSystem/Components/VitalEditors/PlainEditor)
