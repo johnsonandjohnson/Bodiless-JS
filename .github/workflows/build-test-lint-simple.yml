@@ -2,69 +2,66 @@ name: Build, Test, Lint for Pull Requests
 env:
   CI: true
   FORCE_COLOR: 1
-
+  NODE_OPTIONS: --max_old_space_size=4096
 on:
   pull_request:
     branches:
       - main
-
 jobs:
   setup:
     name: Setup, Build, Lint and Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       # install a specific version of Node using
       # https://github.com/actions/setup-node
       - name: Use Node.js v16.13
         uses: actions/setup-node@v1
         with:
           node-version: 16.13
-      # just so we learn about available environment variables GitHub provides
-      - name: Print CI env variables
-        run: |
-          npm i -g @bahmutov/print-env@2
-          print-env BODILESS GITHUB BUILD ACTIONS || true
-
       - name: Print Git Version
         run: git --version
-
       - name: Setup git user
         run: |
           git config --global user.name "$(git --no-pager log --format=format:'%an' -n 1)"
           git config --global user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
-
       - name: Git Info
         run: |
           git log  --pretty=oneline | head -n 10
           git config --get user.name
           git config --get user.email
-
-        #- name: Install dependencies
-        #  run: npm ci
-
-        # npm workspace approach
-        #- name: Check dependency sync
-        #  run: npm run sync:check
-        #
-        #- name: Build packages
-        #  run: npm run build:packages
-
       - name: Build
         run: npm run setup
-
       - name: Lint
         run: npm run lint
-
       - name: Check
         run: npm run check
-
       - name: Test
         run: npm run test --quiet --colors
-
       # Temp using monorepo since standalone is breaking cypress tests.
       # - name: Cypress tests
         # run: npm run test:monorepo
         # run: npm run test:ci
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+      - name: Run Playwright Tests
+        run: |
+          npm run test:monorepo-pw
+      - name: Upload Tests Artifact
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+  # Generate event file for Attach Unit Test Results helper workflow
+  event_file:
+    name: "Event File"
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+    - name: Upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: Event File
+        path: ${{ github.event_path }}

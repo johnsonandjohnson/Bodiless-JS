@@ -1,0 +1,14 @@
+{
+  "Components": {
+    "Schema": {
+      "README.md": "./doc/README.md",
+      "Organization.md": "./doc/Organization.md",
+      "Product.md": "./doc/Product.md",
+      "Video.md": "./doc/Video.md",
+      "Website.md": "./doc/Website.md",
+      "assets": {
+        "SeoDataManagementHomepage.jpg": "./doc/assets/SeoDataManagementHomepage.jpg"
+      }
+    }
+  }
+}

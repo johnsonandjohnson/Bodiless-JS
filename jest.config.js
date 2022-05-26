@@ -13,7 +13,7 @@ module.exports = {
       '<rootDir>/config/__mocks__/fileMock.js',
   },
   testMatch: ['**/?(*.)+(spec|test).ts?(x)', '**/?(*.)+(spec|test).js?(x)'],
-  testPathIgnorePatterns: ['node_modules', '.cache', 'cypress',
+  testPathIgnorePatterns: ['node_modules', '.cache', 'cypress', 'playwright',
     // @todo: remove skipped tests below after jest-resolve issue resolved.
     // https://github.com/johnsonandjohnson/Bodiless-JS/issues/1533
     'create-preview-pages.test.ts',

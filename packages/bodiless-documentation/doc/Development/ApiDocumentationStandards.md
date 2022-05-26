@@ -33,9 +33,9 @@ Note that the param type is not necessary because it will be read from the TypeS
  * @param   numberA  First Number.
  * @param   numberB  Second Number.
  *
- * @return  The summ of First Number and Second Number.
+ * @return  The sum of First Number and Second Number.
  */
-function summ(numberA: number, numberB: number): number {
+function sum(numberA: number, numberB: number): number {
     return numberA + numberB;
 };
 ```
@@ -150,30 +150,31 @@ BasicList(options: ListProps): Element
 ```
 But in this case, `ListProps` **would not be linked to the actual type definition** and would not have any additional information associated with the original `Props` type. You would have to trace this type down manually.
 
+### Include a README
+Typedoc will create a landing page for the API documentation using the package README.md.
+Every package should have a README.md which properly introduces the API.
 
-### Private vs Public Methods
-By default, any methods your components have are considered to be public. The `@private` tag marks a method as private, or not meant for general use. Private methods are not shown in the generated output.
-```ts
-/**
- * @private
- */
-export const secret = 'Do not include in API docs.';
+If you want to omit the README, or change the file which is displayed, 
+you can create a customized `typedoc.js` at package root,
+and refer to it via the `npm build:api-doc` script:
+
+*typedoc.js*
+```js
+module.exports = {``
+  readme: 'API.md' // Or use 'none' to remove landing page entirely.
+}
 ```
 
-### Describing File Purpose
-There is a way to document the purpose of the file itself. A documentation comment describing a file must be placed before any code in the file and should be annotated with the `@packageDocumentation`.
-
-```ts
-/**
- * This is the doc comment for file.ts
- * @packageDocumentation
- */
- import React from 'react';
- ...
+*package.json*
+```json
+"scripts": {
+  "build:api-doc": "typedoc --options ./typedoc.js --out doc/api src",
+  ...
+}
 ```
 
 ### Categorizing API documentation
-TypeDoc's tag `@category` allows grouping reflections on a page:
+TypeDoc's tag `@category` allows grouping reflections on a page.
 
 ```ts
 /**
@@ -183,3 +184,108 @@ TypeDoc's tag `@category` allows grouping reflections on a page:
  */
 function doSomething() {};
 ```
+
+### References
+You can add a linked reference to another item by enclosing the name in
+double square brackets.
+```ts
+This refers to [[SomethingElse]]
+```
+
+### Examples
+You can use the `@example` keyword to add a code example to your doc block.
+The line immediately after the keyword will serve as the title of the example; to
+improve readability, you should mark this as bold using the double asterisk. Also,
+when providing your fenced code block, be sure to specify the language. For example:
+```ts
+/**
+ * ...documentation
+ * @example ** This is an example ***
+ * ```ts
+ * ...code goes here
+ * ```
+ */
+```
+
+### Interfaces and Type Aliases
+Interfaces and type aliases are documented the same way--with a doc block preceding
+the declaration, and individual blocks documenting each member.  For example:
+```ts
+/**
+ * The interface or type alias itself is documented here.
+ *
+ * @category It can have a category.
+ */
+export interface MyInterface {
+  /**
+   * A member is documented here.
+   */
+  myMember: (arg: string) => boolean,
+}
+```
+Interfaces will receive their own page in the documentation, with a separate section
+for each member.  Type aliases will be rendered as a table with a row for each member.
+If your member documentation is extensive, an interface is probably the best choice.
+For example, the Vital Design System uses interfaces to document token collections.
+
+
+
+### Documenting Vital Components and Token Collections
+- Use the following `@category` tags:
+  - `@category Token Collection`
+  - `@category Component`
+  - `@category Utility`
+- For every token collection you create, define an `Interface` and document its
+  members. Ensure that your actual token collection object is typed using this
+  interface (that way you will ensure that there is a doc for every new token
+  you add).
+- For every clean component you create, define an `Interface` which defines
+  its designable components.  Document the purpose of each slot:
+  ```ts
+  /**
+   * Designable components for FooClean.
+   */
+  interface FooComponents extends DesignableComponents {
+    /**
+     * The outer wrapper of the component.  Usually a `Div`.
+     * This will receive any props passed to `Foo` itself.
+     */
+    Wrapper: ComponentOrTag<any>,
+    ...
+  };
+  ```
+- Add linked references between the token collection and the clean component it
+  applies to (if any).
+  ```ts
+  /**
+   * Tokens for [[FooClean]]
+   */
+  ```
+- When re-exporting token collections or components for static replacement or shadowing,
+  you must import the original and explicitly define the `...Static` or `...Base`
+  versions with their own doc blocks.  For example:
+  ```ts
+  import myTokenCollection from './tokens';
+  import myTokenCollection$ from './tokens/myTokenCollection';
+
+  /**
+   * Use this version of myTokenCollection when extending or shadowing.
+   *
+   * @category Token Collection
+   * @see myFoo
+   */
+  const myTokenCollectionBase = myTokenCollection$;
+
+  export { myTokenCollection, myTokenCollectionBase };
+  ```
+  or
+  ```ts
+  import myTokenCollection from './tokens';
+  
+  /**
+   * Use these tokens when the component does not need to be hydrated.
+   *
+   * @category Token Collection
+   */
+  export const myTokenCollectionStatic = myTokenCollection;
+  ```

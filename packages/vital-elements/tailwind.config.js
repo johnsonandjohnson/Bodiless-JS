@@ -40,6 +40,7 @@ const twConfig = {
       'm-3xl': ['2.25rem', '2.5rem'],
     },
     colors: {
+      transparent: 'transparent',
       'vital-primary': {
         brand: '#CA081B',
         'card-bg': '#ffffff',
@@ -57,7 +58,10 @@ const twConfig = {
         table: '#E5E7EB',
         'table-interactive': '#f3f4f6',
         separator: '#666666',
+        search: '#888888',
+        'button-selected': '#000041',
       },
+      white: '#FFFFFF',
     },
     extend: {
       fontFamily: {

@@ -15,6 +15,7 @@
 import { as, Token, withShowDesignKeys } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
 import { asElementToken } from '@bodiless/vital-elements';
+import { withSearchResult, withSearchMenuProvider } from '@bodiless/vital-search';
 import { asBodilessPage } from '../asBodilessPage';
 // import { vitalGenericTemplate, GenericTemplateClean } from '../../Generic';
 // import { vitalStyleGuideTemplate, StyleGuideTemplateClean } from '../../StyleGuideTemplate';
@@ -59,7 +60,14 @@ const Default = asElementToken({
   ...Base,
 });
 
+const WithSearchContext = asElementToken({
+  Compose: {
+    _: as(withSearchMenuProvider, withSearchResult),
+  }
+});
+
 export default {
   Base,
   Default,
+  WithSearchContext,
 };

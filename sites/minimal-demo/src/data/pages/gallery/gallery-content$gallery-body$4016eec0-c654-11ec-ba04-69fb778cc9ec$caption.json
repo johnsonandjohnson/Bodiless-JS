@@ -1,0 +1,31 @@
+[
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "From the "
+      },
+      {
+        "text": "Context Menu",
+        "Italic": true
+      },
+      {
+        "text": " that opens when you select a component, click "
+      },
+      {
+        "text": "Add",
+        "Bold": true
+      },
+      {
+        "text": " to add another one of these "
+      },
+      {
+        "text": "Gallery Tiles",
+        "Italic": true
+      },
+      {
+        "text": "."
+      }
+    ]
+  }
+]
