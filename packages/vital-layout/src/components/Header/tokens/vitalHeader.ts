@@ -61,7 +61,6 @@ const Base = asHeaderToken({
     ActionMenuContainer: 'flex items-center',
     MenuToggler: 'flex justify-center items-center',
     MenuTogglerWrapper: 'flex xl:hidden',
-    MobileButtonsWrapper: 'flex xl:hidden items-center',
   },
   Spacing: {
     Container: as(
@@ -91,8 +90,7 @@ const WithLanguageSelector = asHeaderToken({
     LanguageSelectorWrapper: 'lg:border-vital-primary-divider lg:border-r-2',
   },
   Spacing: {
-    LanguageSelectorWrapper: 'lg:mr-5 lg:py-2',
-    LanguageSelector: 'px-5'
+    LanguageSelectorWrapper: 'pl-5 lg:mr-5 lg:px-5 lg:py-2',
   }
 });
 
