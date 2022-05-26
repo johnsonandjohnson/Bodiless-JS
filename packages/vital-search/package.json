@@ -37,6 +37,7 @@
   "dependencies": {
     "@bodiless/core": "^1.0.0-rc.1",
     "@bodiless/fclasses": "^1.0.0-rc.1",
+    "@bodiless/ga4": "^1.0.0-rc.1",
     "@bodiless/search": "^1.0.0-rc.1",
     "@bodiless/vital-elements": "^1.0.0-rc.1",
     "lodash": "^4.17.19"

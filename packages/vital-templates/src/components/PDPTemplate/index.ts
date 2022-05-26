@@ -12,13 +12,7 @@
  * limitations under the License.
  */
 
-<<<<<<< HEAD:packages/vital-templates/src/components/PDPTemplate/index.ts
 export { default as PDPTemplateClean, asPDPTemplateToken } from './PDPTemplateClean';
 export { default as vitalPDPTemplateBase } from './tokens/vitalPDPTemplate';
 export { default as vitalPDPTemplate } from './tokens';
 export type { PDPTemplateComponents } from './types';
-=======
-import vitalBreadcrumbs from './vitalBreadcrumbs';
-
-export default vitalBreadcrumbs;
->>>>>>> bodilessjs/main:packages/vital-navigation/src/components/Breadcrumbs/tokens/index.ts

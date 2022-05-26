@@ -12,12 +12,10 @@
  * limitations under the License.
  */
 
-import { Fragment } from 'react';
 import {
   on,
   as,
   addProps,
-  replaceWith,
   withDesign,
   Img,
   flowIf,

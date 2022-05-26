@@ -12,14 +12,8 @@
  * limitations under the License.
  */
 
-<<<<<<< HEAD:packages/bodiless-ga4/src/GA4-events/index.ts
 export * from './PageView';
 export * from './ProductItemView';
 export * from './Search';
 export * from './SearchResult';
 export * from './PLPEvents';
-=======
-import vitalButtons from './vitalButtons';
-
-export default vitalButtons;
->>>>>>> bodilessjs/main:packages/vital-buttons/src/components/Buttons/tokens/index.ts

@@ -12,12 +12,6 @@
  * limitations under the License.
  */
 
-<<<<<<< HEAD:packages/vital-templates/src/components/PDPTemplate/tokens/index.ts
-import vitalPDPTemplate from './vitalPDPTemplate';
-
-export default vitalPDPTemplate;
-=======
 import vitalSearchBox from './vitalSearchBox';
 
 export default vitalSearchBox;
->>>>>>> bodilessjs/main:packages/vital-search/src/SearchBox/tokens/index.ts
