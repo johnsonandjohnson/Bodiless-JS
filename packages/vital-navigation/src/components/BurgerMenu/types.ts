@@ -28,7 +28,7 @@ type BurgerMenuComponents = {
   ActionFooterContainer: ComponentOrTag<any>,
   UtilityMenuWrapper: ComponentOrTag<any>,
   UtilityMenu: ComponentOrTag<any>,
-  LanguageButton: ComponentOrTag<any>,
+  LanguageSelector: ComponentOrTag<any>,
   Overlay: ComponentOrTag<any>,
 };
 
