@@ -26,8 +26,7 @@ const Default = asFluidToken({
     _: as(
       asBodilessChameleon(
         'template',
-        // Sets 'Default' for new pages creation.
-        { component: 'Default' },
+        {},
         () => ({
           root: true,
           label: 'Template',
@@ -39,8 +38,9 @@ const Default = asFluidToken({
     ),
   },
   Components: {
-    Default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
+    _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
     PDP: on(PDPTemplateClean)(vitalPDPTemplate.Default),
+    Search: on(GenericTemplateClean)(vitalGenericTemplate.Search),
   },
   // @todo restore tools
   // Behavior: {

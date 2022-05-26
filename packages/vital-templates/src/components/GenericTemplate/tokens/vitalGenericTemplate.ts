@@ -54,6 +54,9 @@ const WithNoBreadcrumbsOnHomePage = asGenericTemplateToken({
 });
 
 const Base = asGenericTemplateToken({
+  Meta: {
+    title: 'Default',
+  },
   Components: {
     PageWrapper: on(LayoutClean)(vitalLayout.Default),
     Breadcrumb: as(vitalBreadcrumbs.Default),
@@ -100,9 +103,14 @@ const Default = asGenericTemplateToken({
   ...Base,
 });
 
-const Search = asGenericTemplateToken(Default, {
+const Search = asGenericTemplateToken({
+  ...Default,
+  Meta: {
+    title: 'Search',
+  },
   Components: {
-    Breadcrumb: addProps({ children: 'Search', }),
+    ...Default.Components,
+    Breadcrumb: as(Default.Components.Breadcrumb, addProps({ children: 'Search', })),
     TopContent: replaceWith(Fragment),
     Content: on(SearchLayoutClean)(vitalSearchLayout.Default),
     BottomContent: replaceWith(Fragment),
