@@ -15,3 +15,4 @@
 export { default as FooterClean, asFooterToken } from './FooterClean';
 export { default as vitalFooter } from './tokens';
 export type { FooterComponents, FooterProps } from './types';
+export { default as vitalFooterBase } from './tokens/vitalFooter';

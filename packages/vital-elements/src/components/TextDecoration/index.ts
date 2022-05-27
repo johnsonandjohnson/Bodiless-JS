@@ -14,3 +14,4 @@
 
 export { default as vitalTextDecoration } from './tokens';
 export { default as vitalTextDecorationBase } from './tokens/vitalTextDecoration';
+export { TextDecorationMeta } from './tokens';

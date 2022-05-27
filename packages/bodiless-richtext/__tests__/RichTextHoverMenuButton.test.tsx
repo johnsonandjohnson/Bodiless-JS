@@ -36,7 +36,7 @@ const createRichtext = () => {
   // @ts-ignore no types defined for jest.isolateModules
   jest.isolateModules(() => {
     // eslint-disable-next-line global-require
-    RichText = require('../src/RichText').default;
+    RichText = require('../src/RichText.bl-edit').default;
   });
   return RichText as any;
 };

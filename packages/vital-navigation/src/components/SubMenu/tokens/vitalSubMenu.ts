@@ -44,7 +44,8 @@ const Base = asSubMenuToken({
   },
 });
 
-const Footer = asSubMenuToken(Base, {
+const Footer = asSubMenuToken({
+  ...Base,
   Theme: {
     Title: as(
       vitalTextDecoration.Uppercase,
@@ -118,8 +119,10 @@ const Burger = asSubMenuToken({
   },
 });
 
+const Default = Base;
+
 export default {
-  Base,
+  Default,
   Burger,
   Footer,
   TopNav,

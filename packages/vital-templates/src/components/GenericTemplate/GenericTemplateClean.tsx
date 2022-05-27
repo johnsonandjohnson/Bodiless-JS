@@ -16,6 +16,7 @@ import React from 'react';
 import {
   designable,
   Div,
+  Fragment,
 } from '@bodiless/fclasses';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { LayoutClean } from '@bodiless/vital-layout';
@@ -25,6 +26,7 @@ import { GenericTemplateComponents, BaseGenericTemplateProps } from './types';
 
 const genericTemplateComponents: GenericTemplateComponents = {
   PageWrapper: LayoutClean,
+  TemplateWrapper: Fragment,
   BreadcrumbWrapper: Div,
   Breadcrumb: BreadcrumbsClean,
   TopWrapper: Div,
@@ -35,22 +37,27 @@ const genericTemplateComponents: GenericTemplateComponents = {
   BottomContent: FlowContainerClean,
 };
 
+/* TemplateWrapper is an extra wrapper used to target the template,
+ * as PageWrapper is replaced with LayoutClean and not targetable.
+ */
 const GenericTemplateBase = (props: BaseGenericTemplateProps) => {
   const { components: C, ...rest } = props;
   return (
     <C.PageWrapper {...rest}>
-      <C.BreadcrumbWrapper>
-        <C.Breadcrumb />
-      </C.BreadcrumbWrapper>
-      <C.TopWrapper>
-        <C.TopContent />
-      </C.TopWrapper>
-      <C.ContentWrapper>
-        <C.Content />
-      </C.ContentWrapper>
-      <C.BottomWrapper>
-        <C.BottomContent />
-      </C.BottomWrapper>
+      <C.TemplateWrapper>
+        <C.BreadcrumbWrapper>
+          <C.Breadcrumb />
+        </C.BreadcrumbWrapper>
+        <C.TopWrapper>
+          <C.TopContent />
+        </C.TopWrapper>
+        <C.ContentWrapper>
+          <C.Content />
+        </C.ContentWrapper>
+        <C.BottomWrapper>
+          <C.BottomContent />
+        </C.BottomWrapper>
+      </C.TemplateWrapper>
     </C.PageWrapper>
   );
 };

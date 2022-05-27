@@ -14,14 +14,14 @@
 
 import { asTokenGroup } from '../../../util';
 
-const meta = {
+export const TextDecorationMeta = {
   categories: {
     Type: ['Element'],
     Group: ['FontDecoration'],
   },
 };
 
-export default asTokenGroup(meta)({
+export default asTokenGroup(TextDecorationMeta)({
   Underline: 'underline',
   Bold: 'font-bold',
   ExtraBold: 'font-extrabold',

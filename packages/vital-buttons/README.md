@@ -1,6 +1,6 @@
-# `@bodiless/vital-button`
+# `@bodiless/vital-buttons`
 
-For documentation on the Vital Button package, please see:
+For documentation on the Vital Buttons package, please see:
 
-- [Vital Button | BodilessJS Docs](https://johnsonandjohnson.github.io/Bodiless-JS/#/VitalDesignSystem/Components/VitalButton/)
+- [Vital Buttons | BodilessJS Docs](https://johnsonandjohnson.github.io/Bodiless-JS/#/VitalDesignSystem/Components/VitalButtons/)
 - [`doc/` Directory](./doc)

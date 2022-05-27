@@ -26,7 +26,8 @@
   },
   "dependencies": {
     "@bodiless/core": "^1.0.0-rc.1",
-    "@bodiless/fclasses": "^1.0.0-rc.1"
+    "@bodiless/fclasses": "^1.0.0-rc.1",
+    "lodash": "^4.17.19"
   },
   "devDependencies": {
     "cheerio": "1.0.0-rc.3",
