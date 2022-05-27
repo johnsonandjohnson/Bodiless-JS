@@ -24,9 +24,8 @@ import {
   asTestableCard,
 } from '@bodiless/card';
 import {
-  withDesign, startWith, flowHoc,
+  withDesign, startWith, flowHoc, A,
 } from '@bodiless/fclasses';
-import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import {
   asEditable,
   asEditableLink,
@@ -44,7 +43,7 @@ export const withCardEditors = flowHoc(
       withSidecarNodes(
         asEditableLink('link'),
       ),
-      startWith(GatsbyLink),
+      startWith(A),
     ),
     Title: withEditorSimple('title', 'Card Title Text'),
     Link: flowHoc(
@@ -52,7 +51,7 @@ export const withCardEditors = flowHoc(
       withSidecarNodes(
         asEditableLink('link', undefined, () => ({ groupLabel: 'CTA' })),
       ),
-      startWith(GatsbyLink),
+      startWith(A),
     ),
     Body: withEditorBasic('body', 'Card Body Text'),
   }),
@@ -65,7 +64,7 @@ export const withMenuCardsEditors = flowHoc(
       withSidecarNodes(
         asEditableLink('link'),
       ),
-      startWith(GatsbyLink),
+      startWith(A),
     ),
     Title: asEditable('text', 'Card Title'),
     Link: flowHoc(
@@ -73,7 +72,7 @@ export const withMenuCardsEditors = flowHoc(
       withSidecarNodes(
         asEditableLink('link', undefined, () => ({ groupLabel: 'CTA' })),
       ),
-      startWith(GatsbyLink),
+      startWith(A),
     ),
     Body: withEditorBasic('body', 'Card Body'),
   }),

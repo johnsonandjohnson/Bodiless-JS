@@ -60,6 +60,14 @@ const plugins = [
         include: true,
         // Pass false to disable logging all resolving operations. Defaults to true.
         logging: true,
+        // You can pass a RegExp which will be matched against the **absolute** path of every
+        // .bl-edit file being imported. If it matches, the file will not be replaced.
+        // For instance, if you want to replace all static but `vital-editors` and
+        // `vital-link` files, you may pass true to the option include and
+        //  `/vital-editors|vital-link/` to this option.
+        //
+        // Defaults to false.
+        exclude: false,
       }
     },
   },

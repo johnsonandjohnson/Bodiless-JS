@@ -11,18 +11,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { Editor } from 'slate';
+import {
+  getInlineButtons,
+} from './RichTextItemGetters.bl-edit';
+import type {
+  RichTextComponents,
+} from './Type';
 
-import { HOC } from '@bodiless/fclasses';
-import type { CSSProperties } from 'react';
-
-export type WithoutHydrationOptions = {
-  onUpdate?: (props: Record<string, any>, element: HTMLElement | null) => void
-  WrapperStyle?: CSSProperties
-  WrapperElement: 'div'|'span',
+const withEditorSettings = (components: RichTextComponents) => (editor: Editor) => {
+  const { isInline } = editor;
+  const inlineTypes = getInlineButtons(components)
+    .map(Component => Component.id);
+  // eslint-disable-next-line no-param-reassign
+  editor.isInline = (
+    element,
+  ) => (inlineTypes.includes(element.type as string) ? true : isInline(element));
+  return editor;
 };
 
-// eslint-disable-next-line max-len
-export type WithoutHydrationFunction = (options: WithoutHydrationOptions) => HOC;
-
-// eslint-disable-next-line max-len
-export type WithoutHydrationWrapperFunction = (options?: Partial<WithoutHydrationOptions>) => HOC;
+export default withEditorSettings;

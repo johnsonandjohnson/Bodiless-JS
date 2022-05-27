@@ -12,47 +12,32 @@
  * limitations under the License.
  */
 
-import React, { FC, ComponentType } from 'react';
+import React, { FC } from 'react';
 import {
-  StaticPage,
-  ContextWrapperProps,
   NotificationProvider,
   withNotificationButton,
   withSwitcherButton,
   OnNodeErrorNotification,
   useGitButtons,
   GitContextProvider,
-  GitContextProviderProps,
 } from '@bodiless/core';
 import {
   Fragment,
-  withShowDesignKeys,
 } from '@bodiless/fclasses';
 import { observer } from 'mobx-react';
 import { ContextWrapper, PageEditor } from '@bodiless/core-ui';
 import { withPageDisableButton } from '@bodiless/components';
 import {
   PageDataProvider,
-  PageDataContextProviderProps,
   withClonePageButton,
   withDeletePageButton,
   withMovePageButton,
   withNewPageButton,
   withRedirectAliasButton,
 } from '@bodiless/page';
-import GatsbyNodeProvider from './GatsbyNodeProvider';
-
-type FinalUI = {
-  ContextWrapper: ComponentType<ContextWrapperProps>;
-  PageEditor: ComponentType;
-};
-type UI = Partial<FinalUI>;
-
-type PageProviderProps = PageDataContextProviderProps & GitContextProviderProps;
-
-export type PageProps = {
-  ui?: UI,
-} & React.ComponentProps<typeof GatsbyNodeProvider> & PageProviderProps;
+import GatsbyNodeProvider from './GatsbyNodeProvider.bl-edit';
+import { FinalUI, UI, PageProps } from './types';
+import ShowDesignKeys from './ShowDesignKeys';
 
 const defaultUI: FinalUI = {
   ContextWrapper,
@@ -75,10 +60,6 @@ const GitButtons: FC = () => {
   return <></>;
 };
 
-const ShowDesignKeys = (
-  process.env.NODE_ENV === 'development' || process.env.BODILESS_SHOWDESIGNKEYS === '1'
-) ? withShowDesignKeys()(Fragment) : Fragment;
-
 const Page: FC<PageProps> = observer(({ children, ui, ...rest }) => {
   const { PageEditor: Editor, ContextWrapper: Wrapper } = getUI(ui);
   const { pageContext } = rest;
@@ -93,41 +74,30 @@ const Page: FC<PageProps> = observer(({ children, ui, ...rest }) => {
     template,
   };
 
-  if (process.env.NODE_ENV === 'development') {
-    return (
-      <GatsbyNodeProvider {...rest}>
-        <ShowDesignKeys>
-          <PageDataProvider pageData={pageData}>
-            <GitContextProvider gitInfo={gitInfo}>
-              <NotificationProvider>
-                <SwitcherButton />
-                <NotificationButton />
-                <Editor>
-                  <OnNodeErrorNotification />
-                  <NewPageButton />
-                  <MovePageButton />
-                  <DisablePageButton />
-                  <ClonePageButton />
-                  <GitButtons />
-                  <Wrapper clickable>
-                    {children}
-                  </Wrapper>
-                  <DeletePageButton />
-                  <RedirectAliasButton />
-                </Editor>
-              </NotificationProvider>
-            </GitContextProvider>
-          </PageDataProvider>
-        </ShowDesignKeys>
-      </GatsbyNodeProvider>
-    );
-  }
   return (
     <GatsbyNodeProvider {...rest}>
       <ShowDesignKeys>
-        <GitContextProvider gitInfo={gitInfo}>
-          <StaticPage>{children}</StaticPage>
-        </GitContextProvider>
+        <PageDataProvider pageData={pageData}>
+          <GitContextProvider gitInfo={gitInfo}>
+            <NotificationProvider>
+              <SwitcherButton />
+              <NotificationButton />
+              <Editor>
+                <OnNodeErrorNotification />
+                <NewPageButton />
+                <MovePageButton />
+                <DisablePageButton />
+                <ClonePageButton />
+                <GitButtons />
+                <Wrapper clickable>
+                  {children}
+                </Wrapper>
+                <DeletePageButton />
+                <RedirectAliasButton />
+              </Editor>
+            </NotificationProvider>
+          </GitContextProvider>
+        </PageDataProvider>
       </ShowDesignKeys>
     </GatsbyNodeProvider>
   );

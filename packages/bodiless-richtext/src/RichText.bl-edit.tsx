@@ -20,7 +20,6 @@ import React, {
 } from 'react';
 import isEqual from 'react-fast-compare';
 import flowRight from 'lodash/flowRight';
-import pick from 'lodash/pick';
 import flow from 'lodash/flow';
 import isEmpty from 'lodash/isEmpty';
 import { createEditor, Editor } from 'slate';
@@ -38,19 +37,6 @@ import {
 } from '@bodiless/core';
 import {
   designable,
-  H1,
-  H2,
-  H3,
-  Sup,
-  B,
-  Em,
-  A,
-  Div,
-  Span,
-  applyDesign,
-  extendDesign,
-  Design,
-  DesignableComponents,
   withDisplayName,
   Fragment,
   HOC,
@@ -68,33 +54,19 @@ import {
   getHoverButtons,
   getGlobalButtons,
   getSelectorButtons,
-  getInlineButtons,
 } from './RichTextItemGetters.bl-edit';
 import useKeyBoardShortcuts from './useKeyBoardShortcuts';
 import TextSelectorButton from './components/TextSelectorButton.bl-edit';
 import { uiContext, getUI, UI } from './RichTextContext';
-import {
-  withBoldMeta,
-  withSuperScriptMeta,
-  withItalicMeta,
-  withUnderlineMeta,
-  withLinkMeta,
-  withAlignLeftMeta,
-  withAlignRightMeta,
-  withAlignCenterMeta,
-  withAlignJustifyMeta,
-  withHeader1Meta,
-  withHeader2Meta,
-  withHeader3Meta,
-} from './meta/index.bl-edit';
 import withDefaults from './withDefaults';
 import { withPreview } from './RichTextPreview.bl-edit';
 import withDataMigrator from './withDataMigrator';
 import withHtmlPaste from './withHtmlPaste';
+import withEditorSettings from './withEditorSettings';
+import applyRichTextDesign from './applyRichTextDesign';
 import type {
   RichTextProps,
   RichTextBaseProps,
-  RichTextComponents,
   EditorContext,
   Plugin,
 } from './Type';
@@ -205,17 +177,6 @@ const EditOnlyHoverMenu$: FC<Pick<Required<UI>, 'HoverMenu'>> = ({ HoverMenu, ch
 };
 const EditOnlyHoverMenu = observer(EditOnlyHoverMenu$);
 
-const withEditorSettings = (components: RichTextComponents) => (editor: Editor) => {
-  const { isInline } = editor;
-  const inlineTypes = getInlineButtons(components)
-    .map(Component => Component.id);
-  // eslint-disable-next-line no-param-reassign
-  editor.isInline = (
-    element,
-  ) => (inlineTypes.includes(element.type as string) ? true : isInline(element));
-  return editor;
-};
-
 const BasicRichText = React.memo((props: RichTextBaseProps) => {
   const {
     initialValue,
@@ -291,60 +252,12 @@ const BasicRichText = React.memo((props: RichTextBaseProps) => {
   );
 }, (prevProps, nextProps) => isEqual(prevProps.value, nextProps.value));
 
-const defaults = {
-  SuperScript: Sup,
-  Bold: B,
-  Italic: Em,
-  Underline: Span,
-  Link: A,
-  AlignLeft: Div,
-  AlignRight: Div,
-  AlignCenter: Div,
-  AlignJustify: Div,
-  H1,
-  H2,
-  H3,
-} as DesignableComponents;
-const lastDesign = {
-  SuperScript: withSuperScriptMeta,
-  Bold: withBoldMeta,
-  Italic: withItalicMeta,
-  Underline: withUnderlineMeta,
-  Link: withLinkMeta,
-  AlignLeft: withAlignLeftMeta,
-  AlignRight: withAlignRightMeta,
-  AlignCenter: withAlignCenterMeta,
-  AlignJustify: withAlignJustifyMeta,
-  H1: withHeader1Meta,
-  H2: withHeader2Meta,
-  H3: withHeader3Meta,
-};
-// Build an apply function that will only use components where we have a shared key in the design
-// as well as only apply the finalDesign on items that are already in the design.
-const apply = (design: Design<DesignableComponents>) => {
-  // We want to add our meta data if the keys are present.
-  const start = Object.getOwnPropertyNames(design)
-    .reduce(
-      (acc, key) => (
-        {
-          ...acc,
-          [key]: Object.prototype.hasOwnProperty.call(defaults, key)
-            ? defaults[key]
-            : Span,
-        }
-      ),
-      {},
-    );
-  const finalDesign = pick(lastDesign, Object.getOwnPropertyNames(design));
-  return applyDesign(start)(extendDesign(design, finalDesign));
-};
-
 const RichText = flow(
   withDataMigrator,
   withNodeStateHandlers,
   withNode,
   withPreview,
-  designable(apply, 'RichText'),
+  designable(applyRichTextDesign, 'RichText'),
 )(BasicRichText) as ComponentType<RichTextProps>;
 
 export default RichText;

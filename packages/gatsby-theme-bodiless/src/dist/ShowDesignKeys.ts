@@ -11,18 +11,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import {
+  Fragment,
+  withShowDesignKeys,
+} from '@bodiless/fclasses';
 
-import { HOC } from '@bodiless/fclasses';
-import type { CSSProperties } from 'react';
+const ShowDesignKeys = (
+  process.env.NODE_ENV === 'development' || process.env.BODILESS_SHOWDESIGNKEYS === '1'
+) ? withShowDesignKeys()(Fragment) : Fragment;
 
-export type WithoutHydrationOptions = {
-  onUpdate?: (props: Record<string, any>, element: HTMLElement | null) => void
-  WrapperStyle?: CSSProperties
-  WrapperElement: 'div'|'span',
-};
-
-// eslint-disable-next-line max-len
-export type WithoutHydrationFunction = (options: WithoutHydrationOptions) => HOC;
-
-// eslint-disable-next-line max-len
-export type WithoutHydrationWrapperFunction = (options?: Partial<WithoutHydrationOptions>) => HOC;
+export default ShowDesignKeys;

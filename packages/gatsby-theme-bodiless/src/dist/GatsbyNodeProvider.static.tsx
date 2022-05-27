@@ -1,5 +1,5 @@
 /**
- * Copyright © 2022 Johnson & Johnson
+ * Copyright © 2019 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,16 +12,13 @@
  * limitations under the License.
  */
 
-export const createLogger = (log = true) => (message: string) => {
-  // eslint-disable-next-line no-console
-  if (log) console.log(message);
-};
+import { BodilessStoreProvider } from '@bodiless/core';
+import GatsbyMobxStore from './GatsbyMobxStore';
 
-type IncludeSetting = RegExp | boolean;
+class GatsbyNodeProvider extends BodilessStoreProvider {
+  protected createStore() {
+    return new GatsbyMobxStore({ slug: this.slug });
+  }
+}
 
-export type PluginOptions = {
-  enabled?: boolean,
-  logging?: boolean,
-  include?: IncludeSetting,
-  exclude?: RegExp,
-};
+export default GatsbyNodeProvider;
