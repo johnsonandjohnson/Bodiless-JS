@@ -11,18 +11,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import asBodilessReadOnlyComponent, { withActivatorWrapper } from './asBodilessReadOnlyComponent';
 
-import { HOC } from '@bodiless/fclasses';
-import type { CSSProperties } from 'react';
+export { withActivatorWrapper };
 
-export type WithoutHydrationOptions = {
-  onUpdate?: (props: Record<string, any>, element: HTMLElement | null) => void
-  WrapperStyle?: CSSProperties
-  WrapperElement: 'div'|'span',
-};
-
-// eslint-disable-next-line max-len
-export type WithoutHydrationFunction = (options: WithoutHydrationOptions) => HOC;
-
-// eslint-disable-next-line max-len
-export type WithoutHydrationWrapperFunction = (options?: Partial<WithoutHydrationOptions>) => HOC;
+export default asBodilessReadOnlyComponent;

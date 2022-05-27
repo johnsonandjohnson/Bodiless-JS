@@ -26,22 +26,21 @@ export const dryInteractive = '<div data-no-hydrate="true" id="b46d9aa67b2042ae2
 export const dryInteractiveWithRemounting = '<aside data-reactroot=""><div data-no-hydrate="true" id="root-"><section>This component has<!-- --> not<!-- --> been hydrated.</section></div></aside>';
 
 describe('when using withoutHydration', () => {
-  it.each([
-    undefined, 'span', 'div'
-  ])('should place the given component inside a %s wrapper element', (element) => {
-    const withoutHydration = createWithoutHydration();
-    const DryComponent = withoutHydration({
-      WrapperElement: element as any
-    })(InteractiveComponent);
-    const wrapper = mount(<DryComponent />);
-    const component = wrapper.find(`${element || 'div'}[data-no-hydrate]`);
-
-    expect(component.exists()).toBe(true);
-  });
-
   describe('at the client side', () => {
     describe('on development', () => {
       const withoutHydration = createWithoutHydration();
+
+      it.each([
+        'span', 'div'
+      ])('should not place the given component inside a %s wrapper element', (element) => {
+        const DryComponent = withoutHydration({
+          WrapperElement: element as any
+        })(InteractiveComponent);
+        const wrapper = mount(<DryComponent />);
+        const component = wrapper.find(`${element || 'div'}[data-no-hydrate]`);
+
+        expect(component.exists()).toBe(false);
+      });
 
       it('should render and hydrate the given component', () => {
         const DryComponent = withoutHydration()(InteractiveComponent);
@@ -52,8 +51,41 @@ describe('when using withoutHydration', () => {
       });
     });
 
+    const withoutHydration = createWithoutHydration('production');
+
     describe('on production', () => {
-      const withoutHydration = createWithoutHydration('production');
+      it.each([
+        false, 'span', 'div'
+      ])('should place the given component inside a %s wrapper element', (element) => {
+        const options = element ? {
+          WrapperElement: element as any
+        } : {};
+        const DryComponent = withoutHydration(options)(InteractiveComponent);
+        const wrapper = mount(<DryComponent />);
+        const component = wrapper.find(`${element || 'div'}[data-no-hydrate]`);
+
+        expect(component.exists()).toBe(true);
+      });
+
+      it('the wrapper element should have display contents style by default', () => {
+        const WrapperStyle = {display: 'contents'};
+        const DryComponent = withoutHydration()(InteractiveComponent);
+        const wrapper = mount(<DryComponent />);
+        const component = wrapper.find('div[data-no-hydrate]');
+
+        expect(component.prop('style')).toStrictEqual(WrapperStyle);
+      });
+
+      it('the wrapper element should have custom style when provided', () => {
+        const WrapperStyle = {margin: 0, padding: 0};
+        const DryComponent = withoutHydration({
+          WrapperStyle
+        })(InteractiveComponent);
+        const wrapper = mount(<DryComponent />);
+        const component = wrapper.find('div[data-no-hydrate]');
+
+        expect(component.prop('style')).toStrictEqual(WrapperStyle);
+      });
 
       const initializeProductionTest = () => {
         const DryComponent = withoutHydration()(InteractiveComponent);
@@ -101,18 +133,6 @@ describe('when using withoutHydration', () => {
         const $ = cheerio.load(root.outerHTML);
 
         expect($('section').text()).toBe('This component has not been hydrated.');
-      });
-
-      it('should hydrate when using forceHydration', () => {
-        const { DryComponent, root } = initializeProductionTest();
-
-        act(() => {
-          ReactDOM.hydrate(<DryComponent forceHydration />, root);
-        });
-
-        const $ = cheerio.load(root.outerHTML);
-
-        expect($('section').text()).toBe('This component has been hydrated.');
       });
 
       it('should run onUpdate when provided', () => {

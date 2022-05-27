@@ -29,7 +29,13 @@ const requestIsIncluded = (requestedFile: string, include?: PluginOptions['inclu
   return requestedFile.match(include);
 };
 
-export const createStaticReplacementPlugin = ({ include, logging }: PluginOptions) => {
+const requestIsExcluded = (requestedFile: string, exclude?: PluginOptions['exclude']) => {
+  if (!exclude) return false;
+
+  return requestedFile.match(exclude);
+};
+
+export const createStaticReplacementPlugin = ({ include, logging, exclude }: PluginOptions) => {
   const log = createLogger(logging);
 
   return new webpack.NormalModuleReplacementPlugin(
@@ -37,7 +43,7 @@ export const createStaticReplacementPlugin = ({ include, logging }: PluginOption
     resource => {
       const requestedFile = path.join(resource.context, resource.request);
 
-      if (!requestIsIncluded(requestedFile, include)) {
+      if (!requestIsIncluded(requestedFile, include) || requestIsExcluded(requestedFile, exclude)) {
         log(`[Static replacement] Skipped excluded import for file ${requestedFile}\n`);
         return;
       }

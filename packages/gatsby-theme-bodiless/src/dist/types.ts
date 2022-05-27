@@ -12,17 +12,25 @@
  * limitations under the License.
  */
 
-import { HOC } from '@bodiless/fclasses';
-import type { CSSProperties } from 'react';
+import { ComponentType } from 'react';
+import {
+  ContextWrapperProps,
+  GitContextProviderProps,
+} from '@bodiless/core';
+import {
+  PageDataContextProviderProps,
+} from '@bodiless/page';
+import GatsbyNodeProvider from './GatsbyNodeProvider.bl-edit';
 
-export type WithoutHydrationOptions = {
-  onUpdate?: (props: Record<string, any>, element: HTMLElement | null) => void
-  WrapperStyle?: CSSProperties
-  WrapperElement: 'div'|'span',
+export type FinalUI = {
+  ContextWrapper: ComponentType<ContextWrapperProps>;
+  PageEditor: ComponentType;
 };
 
-// eslint-disable-next-line max-len
-export type WithoutHydrationFunction = (options: WithoutHydrationOptions) => HOC;
+export type UI = Partial<FinalUI>;
 
-// eslint-disable-next-line max-len
-export type WithoutHydrationWrapperFunction = (options?: Partial<WithoutHydrationOptions>) => HOC;
+type PageProviderProps = PageDataContextProviderProps & GitContextProviderProps;
+
+export type PageProps = {
+  ui?: UI,
+} & React.ComponentProps<typeof GatsbyNodeProvider> & PageProviderProps;
