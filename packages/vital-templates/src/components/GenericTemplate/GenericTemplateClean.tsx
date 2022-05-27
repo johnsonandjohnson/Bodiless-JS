@@ -37,6 +37,9 @@ const genericTemplateComponents: GenericTemplateComponents = {
   BottomContent: FlowContainerClean,
 };
 
+/* TemplateWrapper is an extra wrapper used to target the template,
+ * as PageWrapper is replaced with LayoutClean and not targetable.
+ */
 const GenericTemplateBase = (props: BaseGenericTemplateProps) => {
   const { components: C, ...rest } = props;
   return (

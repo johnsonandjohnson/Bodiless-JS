@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
-import tokens from './vitalSpacing';
+import tokens, { SpacingMeta } from './vitalSpacing';
 
 export default tokens;
+export { SpacingMeta };

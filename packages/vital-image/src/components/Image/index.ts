@@ -12,5 +12,10 @@
  * limitations under the License.
  */
 
+import { BodilessImageComponents } from '@bodiless/gatsby-theme-bodiless';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
+
+export const asImageToken = asVitalTokenSpec<BodilessImageComponents>();
+
 export * from './index.bl-edit';
 export { default as vitalImageBase } from './tokens/vitalImage';

@@ -16,7 +16,6 @@ export {
   withoutHydration,
   withoutHydrationInline,
   isStaticClientSide,
-  WithoutHydrationProps,
 } from './withoutHydration';
 export {
   StaticBlock,

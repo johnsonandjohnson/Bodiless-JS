@@ -16,4 +16,4 @@ import vitalLayout from './vitalLayout';
 
 export { LayoutIds } from './constants';
 
-export { vitalLayout };
+export default vitalLayout;

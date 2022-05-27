@@ -14,14 +14,14 @@
 
 import { asTokenGroup } from '../../../util';
 
-const meta = {
+export const ColorMeta = {
   categories: {
     Type: ['Element'],
     Group: ['Color'],
   },
 };
 
-export default asTokenGroup(meta)({
+export default asTokenGroup(ColorMeta)({
   BgPrimaryBrand: 'bg-vital-primary-brand',
   TextPrimaryBrand: 'text-vital-primary-brand',
   BgPrimaryCard: 'bg-vital-primary-card-bg',

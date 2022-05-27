@@ -66,7 +66,6 @@
     "express": "^4.17.1",
     "find-up": "^4.1.0",
     "gatsby": "^4.11.2",
-    "gatsby-link": "^4.11.1",
     "gatsby-plugin-canonical-urls": "^4.10.0",
     "gatsby-plugin-sitemap": "^5.10.2",
     "gatsby-react-router-scroll": "^5.11.0",

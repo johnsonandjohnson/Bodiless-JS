@@ -12,16 +12,8 @@
  * limitations under the License.
  */
 
-export { vitalLayout, LayoutClean, asLayoutToken } from './components/Layout';
-export {
-  vitalHeader, vitalHeaderBase, HeaderClean, asHeaderToken
-} from './components/Header';
-export {
-  vitalFooter, vitalFooterBase, FooterClean, asFooterToken
-} from './components/Footer';
-export {
-  vitalRewards, vitalRewardsBase, RewardsClean, asRewardsToken
-} from './components/Footer/Rewards';
-export {
-  vitalHelmet, vitalHelmetBase, HelmetClean, asHelmetToken
-} from './components/Helmet';
+export * from './components/Layout';
+export * from './components/Header';
+export * from './components/Footer';
+export * from './components/Logo';
+export * from './components/Helmet';

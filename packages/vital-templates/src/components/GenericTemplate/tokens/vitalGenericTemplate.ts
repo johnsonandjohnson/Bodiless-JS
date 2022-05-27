@@ -17,13 +17,13 @@ import {
   as,
   addProps,
   replaceWith,
-  Fragment,
-  flowIf,
   withDesign,
   Img,
+  Fragment,
+  flowIf,
 } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
-import { LayoutClean, vitalLayout } from '@bodiless/vital-layout';
+import { vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { withNode, withNodeKey, useNode } from '@bodiless/core';
 import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
@@ -35,6 +35,14 @@ import { CardClean, vitalCard } from '@bodiless/vital-card';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
 import { GenericTemplateNodeKeys } from '../constants';
 
+const heroDefaultData = {
+  component: 'Image',
+};
+
+const heroUseOverrides = () => ({
+  groupLabel: 'Hero'
+});
+
 const isHomePage = () => useNode().node.pagePath === '/';
 
 const WithNoBreadcrumbsOnHomePage = asGenericTemplateToken({
@@ -45,17 +53,9 @@ const WithNoBreadcrumbsOnHomePage = asGenericTemplateToken({
   },
 });
 
-const heroDefaultData = {
-  component: 'Image',
-};
-
-const heroUseOverrides = () => ({
-  groupLabel: 'Hero'
-});
-
 const Base = asGenericTemplateToken({
   Components: {
-    PageWrapper: on(LayoutClean)(vitalLayout.Default),
+    PageWrapper: vitalLayout.Default,
     Breadcrumb: as(vitalBreadcrumbs.Default),
     TopContent: as(
       asBodilessChameleon('component', heroDefaultData, heroUseOverrides),
