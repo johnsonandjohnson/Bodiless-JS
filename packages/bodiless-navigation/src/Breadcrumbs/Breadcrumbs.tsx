@@ -20,7 +20,6 @@ import type { WithNodeProps } from '@bodiless/core';
 import {
   designable, addProps, Fragment, withDesign, replaceWith, withoutProps, ComponentOrTag, flowIf,
 } from '@bodiless/fclasses';
-import { observer } from 'mobx-react';
 import flowRight from 'lodash/flowRight';
 import { asStylableBreadcrumbs } from './Breadcrumb.token';
 
@@ -170,7 +169,6 @@ const withoutFinalTrail = addProps({
  * HOC that adds breadcrumb props retrieved from breadcrumb store.
  */
 const asBreadcrumbs = flowRight(
-  observer,
   withBreadcrumbItemsFromStore,
   asStylableBreadcrumbs,
   withBreadcrumbsSD,
