@@ -34,7 +34,7 @@ const burgerMenuComponents: BurgerMenuComponents = {
   ActionFooterContainer: Div,
   UtilityMenuWrapper: Fragment,
   UtilityMenu: MenuClean,
-  LanguageButton: Fragment,
+  LanguageSelector: Fragment,
   Overlay: Div,
 };
 
@@ -56,7 +56,7 @@ const BurgerMenuCleanBase: FC<BurgerMenuProps> = ({ components: C, ...rest }) =>
             <C.UtilityMenuWrapper>
               <C.UtilityMenu />
             </C.UtilityMenuWrapper>
-            <C.LanguageButton />
+            <C.LanguageSelector />
           </C.ActionFooterContainer>
         </C.FooterWrapper>
       </C.Container>

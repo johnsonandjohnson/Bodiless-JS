@@ -1,7 +1,7 @@
 import React, { useState, useEffect, FC } from 'react';
-import { WithoutHydrationFunction } from '../src/withoutHydration/types';
+import { WithoutHydrationWrapperFunction } from '../src/withoutHydration/types';
 
-export const createWithoutHydration = (env = 'development'): WithoutHydrationFunction => {
+export const createWithoutHydration = (env = 'development'): WithoutHydrationWrapperFunction => {
   let withoutHydration;
 
   jest.isolateModules(() => {
@@ -10,7 +10,7 @@ export const createWithoutHydration = (env = 'development'): WithoutHydrationFun
     withoutHydration = require('../src').withoutHydration;
   });
 
-  return withoutHydration as unknown as WithoutHydrationFunction;
+  return withoutHydration as unknown as WithoutHydrationWrapperFunction;
 };
 
 type InteractiveComponentProps = {

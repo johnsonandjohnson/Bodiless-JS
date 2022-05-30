@@ -38,8 +38,8 @@ import {
   withDesign,
   replaceWith,
   remove,
+  A,
 } from '@bodiless/fclasses';
-import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import {
   asBold,
   asEditableLink,
@@ -65,7 +65,7 @@ const withStartingTrailIcon = (
         addProps({ href: '/' }),
         withNode,
         withNodeKey(nodeKeys),
-      )(GatsbyLink),
+      )(A),
     ),
   }),
 );
