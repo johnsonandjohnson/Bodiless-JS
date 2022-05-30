@@ -15,9 +15,9 @@
 import { graphql } from 'gatsby';
 import { StyleGuideTemplateClean } from '@bodiless/vital-templates';
 import { as } from '@bodiless/fclasses';
-import { __vital__StyleGuidePage } from '--vital--';
+import { VitalTestStyleGuidePage } from '@bodiless/vital-test';
 
-const StyleGuidePage = as(__vital__StyleGuidePage.Default)(StyleGuideTemplateClean);
+const StyleGuidePage = as(VitalTestStyleGuidePage.Default)(StyleGuideTemplateClean);
 
 export default StyleGuidePage;
 

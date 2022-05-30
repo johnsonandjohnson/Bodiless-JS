@@ -17,4 +17,5 @@ export {
   asYouTubeToken,
   vitalYouTube,
 } from './index.bl-edit';
+export { default as vitalYouTubeBase } from './tokens/vitalYouTube';
 export type { YouTubeComponents } from './types';

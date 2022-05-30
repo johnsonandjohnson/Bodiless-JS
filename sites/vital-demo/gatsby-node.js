@@ -4,18 +4,20 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  *
  */
+
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
 const fs = require('fs');
 const glob = require('glob');
 const { addTokenShadowPlugin, addStatoscopePlugin } = require('@bodiless/webpack');
 const shadow = require('--vital--/shadow');
+const shadowtest = require('@bodiless/vital-test/shadow');
 
 // Fix sourcemap issue
 // See: https://github.com/gatsbyjs/gatsby/issues/6278#issuecomment-402540404
 exports.onCreateWebpackConfig = ({ stage, actions }) => {
   actions.setWebpackConfig(
-    addTokenShadowPlugin({}, { resolvers: [shadow] })
+    addTokenShadowPlugin({}, { resolvers: [shadow, shadowtest] })
   );
   if (stage === 'develop') {
     // When running test-site with local packages (via npm pack) we seem to get

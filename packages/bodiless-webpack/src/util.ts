@@ -23,4 +23,5 @@ export type PluginOptions = {
   enabled?: boolean,
   logging?: boolean,
   include?: IncludeSetting,
+  exclude?: RegExp,
 };

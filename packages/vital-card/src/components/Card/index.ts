@@ -13,4 +13,5 @@
  */
 
 export { CardClean, vitalCard } from './index.bl-edit';
+export { default as vitalCardBase } from './tokens/vitalCard';
 export { asCardToken } from './CardClean';

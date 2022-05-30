@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 // flow-container-page.ts
-import { Page } from '@playwright/test';
 import { BasePage } from './base-page';
+import { Page } from '@playwright/test';
 
 export class FlowContainerPage extends BasePage {
   readonly page: Page;
@@ -35,6 +35,51 @@ export class FlowContainerPage extends BasePage {
   readonly squareImageButton:string;
   readonly squareImageButtonInsideContainer: string;
   readonly selectImageButton: string;
+  readonly component: {
+    richText: string,
+    table: string,
+    image: string,
+    card: string,
+    contentful: string,
+    accordion: string,
+    list: string,
+    iframe: string,
+    socialShare: string,
+    youTube: string,
+    carousel: string,
+    curator: string,
+    flowContainer: string,
+  };
+  readonly orientation: {
+    NA: string,
+    horizontal: string,
+    vertical: string,
+  };
+  readonly searchField: string;
+  readonly componentCategories: string;
+  readonly typeSection: string;
+  readonly orientationSection: string;
+  readonly gridBox: string;
+  readonly simpleRichText: string;
+  readonly basicRichText: string;
+  readonly fullRichText: string;
+  readonly landscapeLinkableImage: string;
+  readonly squareLinkableImage: string;
+  readonly landscapeImage: string;
+  readonly squareImage: string;
+  readonly closeFormButton: string;
+  readonly addComponentForm: string;
+  readonly structure: {
+    withTitleAndBody: string,
+    withCTA: string,
+    noCTA: string,
+    noTitle: string,
+    noBody: string,
+    noTitleAndBody: string,
+  };
+  readonly clearLink: string;
+  readonly componentWrapper: string;
+  readonly cardStructure: string;
   readonly swapComponentButton: string;
   readonly deleteComponentButton: string;
   readonly accordionCheckbox: string;
@@ -49,7 +94,6 @@ export class FlowContainerPage extends BasePage {
   readonly imageAlt: string;
   readonly altText: string;
   readonly accordionBodyText: string;
-  readonly landscapeLinkableImage: string;
   readonly accordionText: string;
   readonly accordionBodyPreview: string;
   readonly accordionTitlePreview: string;
@@ -82,6 +126,55 @@ export class FlowContainerPage extends BasePage {
     this.flowContainerLimitedFlow = '#flowContainerLimited > div';
     this.flowContainerNestedFlow = '#regionContainer > div:nth-child(1)';
     this.addFlowContainerButton = 'button[aria-label="Add Flow Container"]';
+    this.selectImageButton = 'button[aria-label="Select Image"]';
+    this.imagesCheckbox = '#Image';
+    this.squareImageButton = '#gridlistboxinner > div:nth-child(1) > div > button';
+    this.squareImageButtonInsideContainer = '#flowContainer > div > img';
+    this.component = {
+      richText: '#Rich\\ Text',
+      table: '#Table',
+      image: '#Image',
+      card: '#Card',
+      contentful: '#Contentful',
+      accordion: '#Accordion',
+      list: '#List',
+      iframe: '#Iframe',
+      socialShare: '#SocialShare',
+      youTube: '#YouTube',
+      carousel: '#Carousel',
+      curator: '#Curator',
+      flowContainer: '#Flow\\ Container',
+    };
+    this.orientation = {
+      NA: '#N\\/A',
+      horizontal: '#Horizontal',
+      vertical: '#Vertical',
+    };
+    this.searchField = '#Search';
+    this.componentCategories = 'a > label';
+    this.typeSection = 'label:has-text("Type")';
+    this.orientationSection = 'label:has-text("Orientation")';
+    this.cardStructure = 'label:has-text("Card Structure")';
+    this.gridBox = '#gridlistboxinner';
+    this.simpleRichText = 'div[data-item-id="EditorSimple"]';
+    this.basicRichText = 'div[data-item-id="EditorBasic"]';
+    this.fullRichText = 'div[data-item-id="EditorFullFeatured"]';
+    this.landscapeLinkableImage = 'div[data-item-id="LandscapeLinkableImage"]';
+    this.squareLinkableImage = 'div[data-item-id="SquareLinkableImage"]';
+    this.landscapeImage = 'div[data-item-id="landscapeImage"]';
+    this.squareImage = 'div[data-item-id="squareImage"]';
+    this.addComponentForm = 'form[aria-label="Context Menu Add Flow Container Form"]';
+    this.closeFormButton = 'button[aria-label="Cancel"]';
+    this.structure = {
+      withTitleAndBody: '#With\\ Title\\ and\\ Body',
+      withCTA: '#With\\ CTA',
+      noCTA: '#No\\ CTA',
+      noTitle: '#No\\ Title',
+      noBody: '#No\\ Body',
+      noTitleAndBody: '#No\\ Title\\ and\\ Body',
+    };
+    this.clearLink = 'a:has-text("Clear")';
+    this.componentWrapper = '#gridlistboxinner > div';
     this.addComponentButton = 'button[aria-label="Add Component"]';
     this.imagesCheckbox = '#Image';
     this.accordionCheckbox = '#Accordion';

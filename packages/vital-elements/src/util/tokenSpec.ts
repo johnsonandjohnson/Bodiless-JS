@@ -12,15 +12,14 @@
  * limitations under the License.
  */
 
-import type {
+import {
+  asTokenSpec,
   DesignableComponents,
+  extendMeta,
   TokenMeta,
   Token,
   TokenSpec,
-} from '@bodiless/fclasses';
-import {
-  extendMeta,
-  asTokenSpec,
+  as,
 } from '@bodiless/fclasses';
 
 const defaultDomains = {
@@ -107,7 +106,13 @@ const asTokenGroup = (...m: TokenMeta[]) => <K extends string>(
     {},
   ) as TC<K>;
 
+const asSimpleToken = (...tokens: Token[]) => asElementToken({
+  Core: {
+    _: Array.isArray(tokens) ? as(...tokens) : tokens,
+  },
+});
+
 export {
   asVitalTokenSpec, asMetaToken, asElementToken, asFluidToken,
-  asTokenGroup,
+  asTokenGroup, asSimpleToken
 };

@@ -96,7 +96,7 @@ const Base = asFooterToken({
     Copyright,
   },
   Schema: {
-    FooterMenu: withNodeKey({ nodeKey: 'footer', nodeCollection: 'site' }),
+    FooterMenu: withNodeKey({ nodeKey: 'footer-menu', nodeCollection: 'site' }),
     Copyright: withNodeKey({ nodeKey: 'copyright', nodeCollection: 'site' }),
     _: withNode,
   },
