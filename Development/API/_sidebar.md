@@ -10,3 +10,4 @@
 * [@bodiless/vital-table](/Development/API/@bodiless/vital-table/README)
 * [@bodiless/vital-youtube](/Development/API/@bodiless/vital-youtube/README)
 * [@bodiless/vital-search](/Development/API/@bodiless/vital-search/README)
+* [@bodiless/vital-content-listing](/Development/API/@bodiless/vital-content-listing/README)
