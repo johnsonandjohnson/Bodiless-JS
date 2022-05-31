@@ -89,7 +89,7 @@ ___
 
 #### Defined in
 
-[vital-buttons/src/components/FlowContainer/index.ts:50](https://github.com/johnsonandjohnson/Bodiless-JS/blob/74157dba/packages/vital-buttons/src/components/FlowContainer/index.ts#L50)
+[vital-buttons/src/components/FlowContainer/index.ts:50](https://github.com/johnsonandjohnson/Bodiless-JS/blob/d1ba18b9/packages/vital-buttons/src/components/FlowContainer/index.ts#L50)
 
 ___
 
@@ -125,7 +125,7 @@ limitations under the License.
 
 #### Defined in
 
-[vital-buttons/src/components/Buttons/tokens/vitalButtons.ts:144](https://github.com/johnsonandjohnson/Bodiless-JS/blob/74157dba/packages/vital-buttons/src/components/Buttons/tokens/vitalButtons.ts#L144)
+[vital-buttons/src/components/Buttons/tokens/vitalButtons.ts:144](https://github.com/johnsonandjohnson/Bodiless-JS/blob/d1ba18b9/packages/vital-buttons/src/components/Buttons/tokens/vitalButtons.ts#L144)
 
 ## Functions
 
@@ -137,7 +137,7 @@ limitations under the License.
 
 | Name | Type |
 | :------ | :------ |
-| `...specs` | `FinalDomains`<[`ButtonComponent`](modules.md#buttoncomponent), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\>[] |
+| `...specs` | (`string` \| `FinalDomains`<[`ButtonComponent`](modules.md#buttoncomponent), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> \| `HOC`<{}, {}, {}\>)[] |
 
 #### Returns
 
@@ -145,4 +145,4 @@ limitations under the License.
 
 #### Defined in
 
-[vital-buttons/src/components/Buttons/ButtonClean.tsx:19](https://github.com/johnsonandjohnson/Bodiless-JS/blob/74157dba/packages/vital-buttons/src/components/Buttons/ButtonClean.tsx#L19)
+[vital-buttons/src/components/Buttons/ButtonClean.tsx:19](https://github.com/johnsonandjohnson/Bodiless-JS/blob/d1ba18b9/packages/vital-buttons/src/components/Buttons/ButtonClean.tsx#L19)
