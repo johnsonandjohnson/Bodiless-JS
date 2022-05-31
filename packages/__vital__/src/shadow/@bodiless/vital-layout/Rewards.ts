@@ -12,10 +12,29 @@
  * limitations under the License.
  */
 
-// @TODO: As Rewards is implemented, move it outside Footer component into
-// a more appropriate place.
-// Also requires component structure reorganization for new static pattern.
-export { RewardsClean, asRewardsToken } from './RewardsClean';
-export { default as vitalRewards } from './tokens';
-export { default as vitalRewardsBase } from './tokens/vitalRewards';
-export type { RewardsComponents, RewardsProps } from './types';
+import {
+  flowIf,
+  withProps,
+} from '@bodiless/fclasses';
+import { useLanguageContext } from '@bodiless/i18n';
+import {
+  asRewardsToken,
+  vitalRewardsBase
+} from '@bodiless/vital-layout';
+
+const isCurrentLanguageEs = () => useLanguageContext().getCurrentLanguage().name === 'es';
+
+const Default = asRewardsToken(vitalRewardsBase.Base, {
+  Content: {
+    Brand: flowIf(isCurrentLanguageEs)(
+      withProps({
+        children: 'Brand ES',
+      }),
+    ),
+  },
+});
+
+export default {
+  ...vitalRewardsBase,
+  Default,
+};

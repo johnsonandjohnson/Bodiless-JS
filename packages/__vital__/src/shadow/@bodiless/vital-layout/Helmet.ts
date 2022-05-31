@@ -11,11 +11,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { vitalHelmetBase, asHelmetToken } from '@bodiless/vital-layout';
+import { withLangDirProps } from '@bodiless/i18n';
+import { as, addProps } from '@bodiless/fclasses';
 
-// @TODO: As Rewards is implemented, move it outside Footer component into
-// a more appropriate place.
-// Also requires component structure reorganization for new static pattern.
-export { RewardsClean, asRewardsToken } from './RewardsClean';
-export { default as vitalRewards } from './tokens';
-export { default as vitalRewardsBase } from './tokens/vitalRewards';
-export type { RewardsComponents, RewardsProps } from './types';
+const Default = asHelmetToken(vitalHelmetBase.Base, {
+  Core: {
+    LanguageHelmet: as(
+      addProps({ 'data-shadowed-by': '__vital__Helmet' }),
+      withLangDirProps,
+    ),
+  },
+});
+
+export default {
+  ...vitalHelmetBase,
+  Default,
+};

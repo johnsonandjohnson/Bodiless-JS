@@ -23,7 +23,7 @@ import { asBodilessPage } from '../asBodilessPage';
 // @todo token to GTM package when created
 const withGTMDesignKeys = withShowDesignKeys(true, 'layer-region');
 
-const Default = asElementToken({
+const Base = asElementToken({
   Core: {
     _: as(
       asBodilessChameleon('template', undefined, () => ({
@@ -56,6 +56,10 @@ const Default = asElementToken({
   },
 });
 
+const Default = asElementToken({
+  ...Base,
+});
+
 const WithSearchContext = asElementToken({
   Compose: {
     _: as(withSearchMenuProvider, withSearchResult),
@@ -63,6 +67,7 @@ const WithSearchContext = asElementToken({
 });
 
 export default {
+  Base,
   Default,
   WithSearchContext,
 };

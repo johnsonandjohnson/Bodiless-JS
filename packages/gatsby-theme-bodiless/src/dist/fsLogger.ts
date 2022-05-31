@@ -1,5 +1,5 @@
 /**
- * Copyright © 2022 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,10 +12,7 @@
  * limitations under the License.
  */
 
-// @TODO: As Rewards is implemented, move it outside Footer component into
-// a more appropriate place.
-// Also requires component structure reorganization for new static pattern.
-export { RewardsClean, asRewardsToken } from './RewardsClean';
-export { default as vitalRewards } from './tokens';
-export { default as vitalRewardsBase } from './tokens/vitalRewards';
-export type { RewardsComponents, RewardsProps } from './types';
+export const log = (message: string) => {
+  global.BODILESS_GATSBY_LOGS = global.BODILESS_GATSBY_LOGS || [];
+  global.BODILESS_GATSBY_LOGS.push(message);
+};

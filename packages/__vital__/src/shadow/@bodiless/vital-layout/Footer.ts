@@ -11,11 +11,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { vitalFooterBase, asFooterToken } from '@bodiless/vital-layout';
+import { addProps } from '@bodiless/fclasses';
+import { withLanguageNode } from '@bodiless/i18n';
 
-// @TODO: As Rewards is implemented, move it outside Footer component into
-// a more appropriate place.
-// Also requires component structure reorganization for new static pattern.
-export { RewardsClean, asRewardsToken } from './RewardsClean';
-export { default as vitalRewards } from './tokens';
-export { default as vitalRewardsBase } from './tokens/vitalRewards';
-export type { RewardsComponents, RewardsProps } from './types';
+const Default = asFooterToken(vitalFooterBase.Base, {
+  Core: {
+    _: addProps({ 'data-shadowed-by': '__vital__Footer' }),
+  },
+  Schema: {
+    _: withLanguageNode,
+  },
+});
+
+export default {
+  ...vitalFooterBase,
+  Default,
+};

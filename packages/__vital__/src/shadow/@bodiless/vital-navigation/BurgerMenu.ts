@@ -13,35 +13,29 @@
  */
 
 import { on } from '@bodiless/fclasses';
-import { withLanguages } from '@bodiless/i18n';
-import { asFluidToken } from '@bodiless/vital-elements';
-import {
-  vitalPageBase,
-  GenericTemplateClean,
-  vitalGenericTemplate,
-} from '@bodiless/vital-templates';
+import { vitalBurgerMenuBase, asBurgerMenuToken } from '@bodiless/vital-navigation';
+import { LinkClean, vitalLink, asLinkToken } from '@bodiless/vital-link';
+import { asLanguageSelector } from '@bodiless/i18n';
 
-const Default = asFluidToken(vitalPageBase.Base, {
-  Core: {
-    _: withLanguages([
-      {
-        name: 'en',
-        label: 'English',
-        isDefault: true,
-      },
-      {
-        name: 'es',
-        label: 'Español',
-      },
-    ]),
-  },
+export const asLanguageSelectorLink = on(LinkClean)(
+  asLinkToken({
+    ...vitalLink.Default,
+    // Make the link not editable.
+    Schema: {},
+  }),
+  asLanguageSelector
+);
+
+const Default = asBurgerMenuToken(vitalBurgerMenuBase.Base, {
   Components: {
-    _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
-    Search: on(GenericTemplateClean)(vitalGenericTemplate.Search),
+    LanguageSelector: asLanguageSelectorLink,
+  },
+  Spacing: {
+    LanguageSelector: 'pl-5',
   },
 });
 
 export default {
-  ...vitalPageBase,
+  ...vitalBurgerMenuBase,
   Default,
 };

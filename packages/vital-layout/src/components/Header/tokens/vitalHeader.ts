@@ -24,29 +24,14 @@ import {
   asBurgerMenuToggler,
 } from '@bodiless/vital-navigation';
 import {
-  Span,
   as,
   flowHoc,
-  replaceWith,
-  withDesign,
-  withProps,
 } from '@bodiless/fclasses';
 import { vitalSearchMenu, vitalSearchToggler, asSearchMenuToggler } from '@bodiless/vital-search';
 import { vitalButtons } from '@bodiless/vital-buttons';
 import { vitalLogo } from '../../Logo';
 import { asHeaderToken } from '../HeaderClean';
 import BurgerIcon from '../assets/BurgerIcon';
-
-// @TODO: Get rid of this after language button is implemented.
-const WithLanguageButton = flowHoc(
-  replaceWith(Span),
-  withProps({
-    children: 'Español',
-    // @TODO: Create divider tokens.
-    // @TODO: Use existing tokens.
-    className: 'text-m-base pl-5 lg:mr-5 lg:px-5 lg:py-2',
-  }),
-);
 
 /**
  * Token that defines a basic header.
@@ -64,16 +49,10 @@ const Base = asHeaderToken({
       as(vitalBurgerMenu.Default),
       // @TODO: Is there a better way to inject WhereToBuy and (future) LanguageButton
       // components into the menu? Maybe, move the components to another package...
-      withDesign({
-        // @TODO: Replace LanguageButton placeholder.
-        LanguageButton: WithLanguageButton,
-      }),
     ),
     DesktopSearch: vitalSearchMenu.Default,
     MobileSearch: vitalSearchMenu.Mobile,
     // UtilityMenu: vitalMenu.Utility,
-    // @TODO: Replace LanguageButton placeholder.
-    LanguageButton: WithLanguageButton,
     WhereToBuy: vitalButtons.WhereToBuy,
   },
   Layout: {
@@ -96,7 +75,6 @@ const Base = asHeaderToken({
   },
   Theme: {
     Wrapper: vitalColor.BgPrimaryPage,
-    LanguageButton: 'lg:border-vital-primary-divider lg:border-r-2',
   },
   Schema: {
     Logo: withNodeKey({ nodeKey: 'Logo' }),
@@ -107,6 +85,15 @@ const Base = asHeaderToken({
   },
 });
 
+const WithLanguageSelector = asHeaderToken({
+  Theme: {
+    LanguageSelectorWrapper: 'lg:border-vital-primary-divider lg:border-r-2',
+  },
+  Spacing: {
+    LanguageSelectorWrapper: 'pl-5 lg:mr-5 lg:px-5 lg:py-2',
+  }
+});
+
 const Default = asHeaderToken({
   ...Base,
 });
@@ -114,6 +101,7 @@ const Default = asHeaderToken({
 const vitalHeader = {
   Base,
   Default,
+  WithLanguageSelector,
 };
 
 export default vitalHeader;
