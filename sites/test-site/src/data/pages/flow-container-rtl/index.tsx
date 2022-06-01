@@ -24,8 +24,6 @@ import {
   flowHoc,
 } from '@bodiless/fclasses';
 import { getSnapFrom, withTailwindClasses } from '@bodiless/layouts';
-import resolvedConfigs from
-  '@bodiless/fclasses/src/tailwindcss/resolveConfig';
 // @ts-ignore Could not find a declaration file...
 import Layout from '../../../components/Layout';
 import {
@@ -33,6 +31,8 @@ import {
   FlowContainerWithContentLibraryRTL,
 } from '../../../components/FlowContainer';
 // @ts-ignore Could not find a declaration file...
+
+const resolvedConfigs = require('@bodiless/fclasses/src/tailwindcss/resolveConfig');
 
 const RTLFlowContainer = flowHoc(
   withNodeKey('rtlFlowContainer'),

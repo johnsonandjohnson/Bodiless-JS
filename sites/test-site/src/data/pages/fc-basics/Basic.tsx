@@ -21,14 +21,13 @@ import {
   withAllTitlesFromTerms, ifComponentSelector, withTailwindWidthConstraints,
 } from '@bodiless/layouts';
 import pick from 'lodash/pick';
-// @ts-ignore
-import resolvedConfigs from
-  '@bodiless/fclasses/src/tailwindcss/resolveConfig';
 
 // @ts-ignore
 import {
   asBox, asBlue, asOrange, asRounded, asSquare, withBlueBorder, withTealBorder, asTeal,
 } from './Box';
+
+const resolvedConfigs = require('@bodiless/fclasses/src/tailwindcss/resolveConfig');
 
 // These are metadata categories which should be ignored in
 // the flow container filters.
