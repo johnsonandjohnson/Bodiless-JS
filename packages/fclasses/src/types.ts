@@ -466,8 +466,14 @@ export type TokenSpec<
  * Type of a function which accepts a list of partial token specifications
  * and returns a single, complete token specification.
  *
+ * @param specs
+ * A list of partial token specifications.  These may be objects, in which case
+ * their keys should be a subset of the alloed domains.  They may also be strings
+ * or HOCs, which will be converted to partial token specifications, applying
+ * the classes or HOC to the `_` key of the `Core` domain.
+ *
  * @category Token API
  */
 export type AsTokenSpec<C extends DesignableComponents, D extends object> = (
-  ...specs: FinalDomains<C, D>[]
+  ...specs: (FinalDomains<C, D>|string|HOC)[]
 ) => TokenSpec<C, D>;

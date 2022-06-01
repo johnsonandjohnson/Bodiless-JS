@@ -72,6 +72,8 @@
       "@bodiless/tokens/*": ["bodiless-tokens/src/*"],
       "@bodiless/ui": ["bodiless-ui/src"],
       "@bodiless/ui/*": ["bodiless-ui/src/*"],
+      "@bodiless/vital-content-listing": ["vital-content-listing/src/"],
+      "@bodiless/vital-content-listing/*": ["vital-content-listing/src/*"],
       "@bodiless/vital-buttons": ["vital-buttons/src/"],
       "@bodiless/vital-buttons/*": ["vital-buttons/src/*"],      
       "@bodiless/vital-editors": ["vital-editors/src/"],

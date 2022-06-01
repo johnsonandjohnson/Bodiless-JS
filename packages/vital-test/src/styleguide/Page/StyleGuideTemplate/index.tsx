@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import { ContentListing, ContentListingMultiple } from './ContentListing';
 import { Editors, EditorsMonoFont } from './Editors';
 import { Typography } from './Typography';
 import { Layout } from './Layout';
@@ -28,6 +29,8 @@ import { Video } from './Video';
 
 export const VitalTestStyleGuideTemplate = {
   _default,
+  ContentListing,
+  ContentListingMultiple,
   Editors,
   EditorsMonoFont,
   Typography,

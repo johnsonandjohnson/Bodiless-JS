@@ -222,24 +222,63 @@ const on = (
   );
 
 /**
- * Helper function to improve type inference in token specifications, and to ensure that
- * the order of domains is consistent for all tokens.
+ * Used to create a token specification.
+ *
+ * A token specification is an object which organizes Token HOC's into "domains" which
+ * can then be selectively overridden. With the exception of certain [[ReservedDomains]],
+ * each domain is a [[Design]], defining a set of HOC's which should be applied to
+ * the individual design keys (or slots) in the target component.
+ *
+ * Normally, each component will use this create its own `as...Token` function in order
+ * to ensure type safety for the keys in the design.
  *
  * @param d
- * If specified, defines a circumscribed set of allowed token domains.
+ * If specified, defines a circumscribed set of allowed token domains.  If omitted, a single
+ * 'Core' domain will be allowed.  The resulting function will produce a token specification
+ * in which all domains are guaranteed to be present (those which were not defined will be
+ * empty objects). The order of the domains is consistent and defined by the order of the keys
+ * in this parameter.
  *
  * @returns
- * Function which recieves an object as a parameter and returns a normalized token
- * specification based on that object.
+ * Function which receives a set of partial token speciications and returns a normalized token
+ * specification created by merging those partials.  Each parameter may be:
+ * - a partial tokens specification object, in which case the keys must belong to the set of
+ *   allowed domains.  Keys will be re-ordered to match the canonoical order, and missing keys
+ *   will be supplied.
+ * - a string, which will be treated as a set of classes to be applied to the `_` key of the
+ *   `Core` domain.  The `_` key in a design applies HOC's or classes to the component as a
+ *   whole rather than one of its slots.
+ * - a function, which will be treated as an HOC to be applied to the `_` key of the `Core`
+ *   domain.
  *
- * @see https://stackoverflow.com/questions/54598322/how-to-make-typescript-infer-the-keys-of-an-object-but-define-type-of-its-value
+ * @example
+ * Create an `asTokenSpec` utility which restricts domains:
+ * ```
+ * const domains = {
+ *   Core: any,
+ *   Theme: any,
+ *   Layout: any,
+ * };
+ * const asMyTokenSpec = <
+ *   C extends DesignableComponents
+ * >() => asTokenSpec<C, DefaultDomains>(domains);
+ * ```
+ * And use it to create an `as...Token` utiity which restricts domains.
+ * ```
+ * type FooComponens = {
+ *   Wrapper: ComponentOrTag<any>,
+ *   Title: ComponentOrTag<any>,
+ *   Body: ComponentOrTag<any>,
+ *  };
+ * const asFooToken = asMyTokenSpec<FooComponents>();
+ * ```
  *
  * @category Token API
  */
 const asTokenSpec = <
   C extends DesignableComponents,
-  D extends object,
-  >(d?: D): AsTokenSpec<C, D> => (...specs) => {
+  D extends object = { Core: any },
+  >(d: D = { Core: undefined } as D): AsTokenSpec<C, D> => (...specs) => {
     const spec: FinalDomains<C, D> = Object.keys(d || {}).reduce(
       (acc, next) => ({
         ...acc,
@@ -249,7 +288,11 @@ const asTokenSpec = <
     spec.Compose = {};
     spec.Flow = undefined;
     spec.Meta = {};
-    mergeWith(spec, ...specs, tokenMergeCustomizer);
+    const coreDomain = Object.keys(d)[0];
+    const normalSpecs = specs.map(s => (
+      typeof s === 'string' || typeof s === 'function' ? { [coreDomain]: { _: s } } : s
+    ));
+    mergeWith(spec, ...normalSpecs, tokenMergeCustomizer);
     return { ...spec, [$TokenSpec]: true } as TokenSpec<C, D>;
   };
 

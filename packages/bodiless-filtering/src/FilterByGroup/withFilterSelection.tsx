@@ -22,23 +22,24 @@ import {
   withNode,
   withNodeKey,
   ifEditable,
-  ifReadOnly,
   withLocalContextMenu,
   withContextActivator,
   useNode,
   ContextMenuFormProps,
   getUI,
+  useEditContext,
+  ContentNode,
 } from '@bodiless/core';
 import {
   flowHoc,
   withDesign,
   withoutProps,
-  addProps,
   ComponentOrTag,
+  addProps,
   flowIf,
 } from '@bodiless/fclasses';
 import { useFilterByGroupContext } from './FilterByGroupContext';
-import type { NodeTagType, FilterTagType } from './types';
+import type { NodeTagType, DefaultFilterData } from './types';
 
 enum FilterSelectionAction {
   reset,
@@ -55,23 +56,6 @@ const MSG_RESET_CLEAR = 'The Saved State is filtering this Page for the End User
 const MSG_RESET_SUCCESS = 'UI Filter reset to Saved State.';
 const MSG_CLEAR_SUCCESS = 'The Saved State has been cleared.';
 
-const defaultFiltersPath = [
-  'Page',
-  'default-filters',
-];
-
-/**
- * Custom hook to retrieves default filter data on current page.
- *
- * @private
- */
-const useDefaultFiltersData = () => {
-  const { node } = useNode();
-  const defaultFilters = node.peer(defaultFiltersPath);
-  const { tags = [] } = defaultFilters.data as { tags?: FilterTagType[] };
-  return { tags };
-};
-
 /**
  * Renders default filter form in different use cases:
  * - No existing default filter set yet.
@@ -84,8 +68,7 @@ const useDefaultFiltersData = () => {
  * @params props Default filter form properties.
  * @returns void
  */
-const renderForm = (props: ContextMenuFormProps) => {
-  const { node } = useNode();
+const getRenderForm = (node: ContentNode<DefaultFilterData>) => (props: ContextMenuFormProps) => {
   const { getSelectedTags, updateSelectedTags } = useFilterByGroupContext();
   const { ui } = props;
   const {
@@ -96,7 +79,7 @@ const renderForm = (props: ContextMenuFormProps) => {
     ComponentFormRadio,
     ComponentFormSubmitButton,
   } = getUI(ui);
-  const { tags: defaultTags = [] } = useDefaultFiltersData();
+  const { tags: defaultTags = [] } = node.data;
   const { setStep } = useFormApi();
   const { values, step } = useFormState();
 
@@ -117,7 +100,7 @@ const renderForm = (props: ContextMenuFormProps) => {
       case FilterSelectionAction.clear: {
         const submitValues = { tags: [] };
         updateSelectedTags(submitValues.tags);
-        node.peer(defaultFiltersPath).setData(submitValues);
+        node.setData(submitValues);
         setStep(FilterSelectionAction.clear_success);
         return submitValues;
       }
@@ -129,7 +112,7 @@ const renderForm = (props: ContextMenuFormProps) => {
       case FilterSelectionAction.save: {
         const currentTags = getSelectedTags();
         updateSelectedTags(currentTags);
-        node.peer(defaultFiltersPath).setData({ tags: currentTags });
+        node.setData({ tags: currentTags });
         setStep(FilterSelectionAction.save_success);
         return currentTags;
       }
@@ -222,6 +205,11 @@ const renderForm = (props: ContextMenuFormProps) => {
   );
 };
 
+const useRenderForm = () => {
+  const { node } = useNode();
+  return getRenderForm(node);
+};
+
 /**
  * Custom hook to generate a default filter button menu options.
  *
@@ -239,24 +227,27 @@ const useFilterSelectionMenuOptions = () => {
     global: false,
     formTitle: 'Filter Page',
     isHidden: false,
-    renderForm,
+    renderForm: useRenderForm(),
     hasSubmit: false,
   };
   return filterSelectionMenuOptions;
 };
 
+const useIsDisabled = (props: any) => {
+  const { node } = useNode<DefaultFilterData>();
+  const { tags } = node.data;
+  const { isEdit } = useEditContext();
+  return !!tags?.length && !isEdit;
+};
+
 const withTagListDesign = withDesign({
   Title: withDesign({
-    FilterGroupItemInput: ifReadOnly(
-      flowIf(() => useDefaultFiltersData().tags.length !== 0)(
-        addProps({ disabled: true })
-      ),
-    )
+    FilterGroupItemInput: addProps({ disabled: true }),
   }),
 });
-export const asDefaultFilter = withDesign({
+export const asDefaultFilter = flowIf(useIsDisabled)(withDesign({
   TagList: withTagListDesign,
-});
+}));
 
 /**
  * HOC applies page default filter to Filter component.
@@ -267,10 +258,11 @@ export const asDefaultFilter = withDesign({
  */
 const withFilterDefaultSelection = <P extends object>(Component: ComponentOrTag<P>) => {
   const WithFilterDefaultSelection = (props: P) => {
-    const { updateSelectedTags, hasTagFromQueryParams } = useFilterByGroupContext();
-    const { tags = [] } = useDefaultFiltersData();
+    const { updateSelectedTags } = useFilterByGroupContext();
+    const { node } = useNode<DefaultFilterData>();
+    const { tags = [] } = node.data;
     useEffect(() => {
-      if (!hasTagFromQueryParams()) {
+      if (tags.length > 0) {
         updateSelectedTags(tags);
       }
     }, []);
@@ -282,17 +274,37 @@ const withFilterDefaultSelection = <P extends object>(Component: ComponentOrTag<
 };
 
 /**
- * HOC adds default filter form and data to filter list. Selected filter data has
- * default nodeKey as 'default-filters'.
+ * Creates an HOC which allows a content editor to specify a set of default
+ * filter selections which will be applied whenever a filterable content
+ * listing is displayed.
  *
- * @param nodeKey Default filter nodeKey for page level storage.
- * @param defaultData default data for default filter selection.
- * @return
- * A composed token.
+ * This adds a button to the local context menu which, when clicked, saves
+ * the current state of the filter selection as the default.
+ *
+ * For example, imagine your filters consisted a single "Color" category
+ * with "Red", "Blue" and "Green" terms. A content editor could select
+ * "Blue", and use the button to save this choice as the default
+ * filter selection for this page. Whenever a site visitor viewed the
+ * page in the browser, this filter would be pre-selected.
+ *
+ * If the filtered items themselves were stored at site level, then multiple
+ * such pages could be created, each with a different set of defautl filters,
+ * and these could be used as the basis for category landing pages.
+ *
+ * @param nodeKey
+ * The node key defining where the default filter selection will be stored.
+ * Should usually be a page-level node.
+ *
+ * @param defaultData
+ * Initial defaults for the default filter selections.
+ *
+ * @returns
+ * HOC which adds the functionality. This HOC must be applied to the
+ * [[FilterClean]] component.
  */
 const withFilterSelection = (
-  nodeKey = 'default-filters',
-  defaultData = { tags: [] },
+  nodeKey: Parameters<typeof withNodeKey>[0] = 'content-listing',
+  defaultData: Parameters<typeof withNodeDataHandlers>[0] = { tags: [] },
 ) => flowHoc(
   withoutProps(['componentData', 'setComponentData']),
   withSidecarNodes(
@@ -305,8 +317,8 @@ const withFilterSelection = (
       withContextActivator('onClick'),
       withLocalContextMenu,
     ),
+    asDefaultFilter,
   ),
-  asDefaultFilter,
 );
 
 export default withFilterSelection;
