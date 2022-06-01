@@ -47,9 +47,6 @@ exports.onCreateBabelConfig = args => {
     name: '@babel/plugin-proposal-decorators',
     options: { legacy: true },
   });
-  setBabelPlugin({
-    name: 'babel-plugin-preval',
-  });
 };
 
 /**

@@ -1,3 +1,5 @@
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable import/no-extraneous-dependencies */
 /**
  * Copyright © 2022 Johnson & Johnson
  *
@@ -12,15 +14,14 @@
  * limitations under the License.
  */
 
-// @ts-ignore
-const tailwindConfig = preval`
+// @preval
+
 const path = require('path');
 const resolveConfig = require('tailwindcss/resolveConfig');
-const tailwindConfig = require(path.resolve() + '/tailwind.config');
+
+const tailwindConfig = require(`${path.resolve()}/tailwind.config`);
 // Fixing webpack error Expecting Unicode escape sequence
 const resolvedConfigsString = JSON.stringify(resolveConfig(tailwindConfig));
 const resolvedConfigs = JSON.parse(resolvedConfigsString);
-module.exports = resolvedConfigs;
-`;
 
-export default tailwindConfig;
+module.exports = resolvedConfigs;
