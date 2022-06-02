@@ -40,6 +40,7 @@
     "@bodiless/fclasses": "^1.0.0-rc.1",
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.1",
     "@bodiless/vital-card": "^1.0.0-rc.1",
+    "@bodiless/vital-content-listing": "^1.0.0-rc.1",
     "@bodiless/vital-editors": "^1.0.0-rc.1",
     "@bodiless/vital-elements": "^1.0.0-rc.1",
     "@bodiless/vital-flowcontainer": "^1.0.0-rc.1",

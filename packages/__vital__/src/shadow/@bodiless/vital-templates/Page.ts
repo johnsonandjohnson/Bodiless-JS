@@ -12,14 +12,9 @@
  * limitations under the License.
  */
 
-import { on } from '@bodiless/fclasses';
 import { withLanguages } from '@bodiless/i18n';
 import { asFluidToken } from '@bodiless/vital-elements';
-import {
-  vitalPageBase,
-  GenericTemplateClean,
-  vitalGenericTemplate,
-} from '@bodiless/vital-templates';
+import { vitalPageBase } from '@bodiless/vital-templates';
 
 const Default = asFluidToken(vitalPageBase.Base, {
   Core: {
@@ -35,13 +30,11 @@ const Default = asFluidToken(vitalPageBase.Base, {
       },
     ]),
   },
-  Components: {
-    _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
-    Search: on(GenericTemplateClean)(vitalGenericTemplate.Search),
-  },
 });
 
-export default {
+const vitalPage: typeof vitalPageBase = {
   ...vitalPageBase,
   Default,
 };
+
+export default vitalPage;

@@ -17,6 +17,8 @@ import { vitalPage } from '@bodiless/vital-templates';
 import { VitalTestStyleGuideTemplate } from './StyleGuideTemplate';
 
 const {
+  ContentListing,
+  ContentListingMultiple,
   Editors,
   EditorsMonoFont,
   Typography,
@@ -37,6 +39,8 @@ const Default = asFluidToken({
   ...vitalPage.Default,
   Components: {
     _default,
+    ContentListing,
+    ContentListingMultiple,
     Editors,
     EditorsMonoFont,
     Typography,
