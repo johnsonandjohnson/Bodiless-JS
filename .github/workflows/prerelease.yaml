@@ -3,6 +3,7 @@ env:
   CI: true
   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
