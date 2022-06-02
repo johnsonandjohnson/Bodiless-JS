@@ -16,6 +16,7 @@
   - [Design](/Design/)
     - [Design System](/Design/DesignSystem)
     - [Image Guidelines](/Design/ImageGuidelines)
+    - [Gatsby Theme](/Design/GatsbyTheme)
   - [Components](/Components/)
     - [Bv](/Components/bv)
     - [Card](/Components/Card)

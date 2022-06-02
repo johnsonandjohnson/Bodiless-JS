@@ -337,7 +337,7 @@ type UI = {
 ```
 
 This allows us to create customized versions of the context menu, as is done in
-the canvas-x
+the Vital
 stylable `ContextMenu` (../packages/bodiless-core-ui/src/GlobalContextMenu.tsx)
 and
  `LocalContextMenu` (../packages/bodiless-core-ui/src/LocalContextMenu.tsx).

@@ -40,7 +40,7 @@ defined in the Schema Domain.
 
 ### Available Rich Text Editors
 
-There are some Editor Tokens available on cxRichText.
+There are some Editor Tokens available in `vitalRichText`.
 
 - Default
   - Available tools: Bold, Link, Superscript, and H1 to H5.
