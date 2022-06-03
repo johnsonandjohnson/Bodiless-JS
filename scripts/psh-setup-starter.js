@@ -46,7 +46,7 @@ const preparationStepsMessage = `
   4. Make sure there are no existing github intergrations for the project yet:
       https://console.platform.sh/{project name}/{project id}/-/settings/integrations
      Otherwise the script will fail due to a conflict.
-  
+
   If everything above is ready press "Enter" to continue
 `;
 
@@ -103,7 +103,7 @@ const pshGetProjectIntegrations = async (bearerAccessToken) => {
 };
 
 const pshCreateGithubIntegration = async (bearerAccessToken) => {
-  const url = `https://api.platform.sh/projects/${PSH_PROJECT_ID}/integrations`;
+  const url = `https://api.platform.sh/projects/${userInput.PSH_PROJECT_ID}/integrations`;
   const data = {
     type: 'github',
     token: userInput.GITHUB_PERSONAL_ACCESS_TOKEN,
