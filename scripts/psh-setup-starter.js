@@ -121,8 +121,8 @@ const pshCreateGithubIntegration = async (bearerAccessToken) => {
       Authorization: `Bearer ${bearerAccessToken}`,
     },
   };
-  const request = await axios.post(url, data, config);
-  return request.status;
+  const response = await axios.post(url, data, config);
+  return response.status;
 };
 
 const pshGetProjectVatiables = async (bearerAccessToken) => {
@@ -168,15 +168,6 @@ const pshCreateProjectVariables = async (bearerAccessToken) => {
       name: 'env:APP_SITE_DIR_NAME',
       attributes: {},
       value: APP_SITE_DIR_NAME,
-      is_json: false,
-      is_sensitive: false,
-      visible_build: true,
-      visible_runtime: true
-    },
-    {
-      name: 'env:APP_SITE_DIR_NAME',
-      attributes: {},
-      value: APP_SITE_NAME,
       is_json: false,
       is_sensitive: false,
       visible_build: true,
