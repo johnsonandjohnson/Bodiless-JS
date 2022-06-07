@@ -13,6 +13,8 @@
  */
 
 import { withNode, withNodeKey } from '@bodiless/core';
+import { as } from '@bodiless/fclasses';
+import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { vitalContentListingFlowContainer } from '../../ContentListingFlowContainer';
 import { vitalFilterByGroup } from '../../FilterByGroup';
 import { asContentListingToken } from '../ContentListingClean';
@@ -32,7 +34,10 @@ const WithMultipleAllowedTags = asContentListingToken({
 const Default = asContentListingToken({
   Components: {
     Wrapper: vitalFilterByGroup.Default,
-    Content: vitalContentListingFlowContainer.Default,
+    Content: as(
+      vitalContentListingFlowContainer.Default,
+      vitalFlowContainer.WithTabletOneThirdConstraint,
+    ),
   },
   Schema: {
     _: withNode,
@@ -40,7 +45,6 @@ const Default = asContentListingToken({
   },
   Compose: {
     WithFilterSelector,
-    // WithMultipleAllowedTags,
   },
 });
 

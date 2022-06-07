@@ -118,7 +118,7 @@ const getFilteredItemData = (tagsNode: ContentNode<any>) => {
  *   ...,
  *   Analytics: {
  *     ...,
- *     ComponentWrapper: t(withSelectItemGA4Event, withRegisterGA4ProductData),
+ *     ComponentWrapper: as(withSelectItemGA4Event, withRegisterGA4ProductData),
  *   },
  *   ...
  * });
@@ -141,7 +141,7 @@ export const withRegisterGA4ProductData = addProps({ getFilteredItemData });
  *   ...,
  *   Analytics: {
  *     ...,
- *     ComponentWrapper: t(withSelectItemGA4Event, withRegisterGA4ProductData),
+ *     ComponentWrapper: as(withSelectItemGA4Event, withRegisterGA4ProductData),
  *   },
  *   ...
  * });

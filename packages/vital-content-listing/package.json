@@ -35,9 +35,10 @@
     "@bodiless/core": "^1.0.0-rc.2",
     "@bodiless/fclasses": "^1.0.0-rc.2",
     "@bodiless/filtering": "^1.0.0-rc.2",
+    "@bodiless/ga4": "^1.0.0-rc.2",
+    "@bodiless/vital-card": "^1.0.0-rc.2",
     "@bodiless/vital-elements": "^1.0.0-rc.2",
     "@bodiless/vital-flowcontainer": "^1.0.0-rc.2",
-    "@bodiless/vital-image": "^1.0.0-rc.2",
     "lodash": "^4.17.19"
   },
   "peerDependencies": {
