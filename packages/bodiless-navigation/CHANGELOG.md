@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2022-06-03)
+
+
+### Features
+
+* **vital-navigation:** Add Breadcrumbs ([#1778](https://github.com/johnsonandjohnson/bodiless-js/issues/1778)) ([756284e](https://github.com/johnsonandjohnson/bodiless-js/commit/756284e2955c22fa398af293dec61b04021f0834))
+
+
+
+
+
 # [1.0.0-rc.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.18...v1.0.0-rc.1) (2022-05-20)
 
 **Note:** Version bump only for package @bodiless/navigation
@@ -115,7 +126,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **cx-navigation:** Add Cx Navigation [#12](https://github.com/johnsonandjohnson/bodiless-js/issues/12) ([#1495](https://github.com/johnsonandjohnson/bodiless-js/issues/1495)) ([c191dac](https://github.com/johnsonandjohnson/bodiless-js/commit/c191dacfcd161d188dac65db7e18a753b9de24b5)), closes [#7](https://github.com/johnsonandjohnson/bodiless-js/issues/7) [#8](https://github.com/johnsonandjohnson/bodiless-js/issues/8) [#10](https://github.com/johnsonandjohnson/bodiless-js/issues/10) [#13](https://github.com/johnsonandjohnson/bodiless-js/issues/13) [#16](https://github.com/johnsonandjohnson/bodiless-js/issues/16) [#19](https://github.com/johnsonandjohnson/bodiless-js/issues/19) [#20](https://github.com/johnsonandjohnson/bodiless-js/issues/20) [#21](https://github.com/johnsonandjohnson/bodiless-js/issues/21) [#22](https://github.com/johnsonandjohnson/bodiless-js/issues/22) [#24](https://github.com/johnsonandjohnson/bodiless-js/issues/24)
+* **vital-navigation:** Add Vital Navigation [#12](https://github.com/johnsonandjohnson/bodiless-js/issues/12) ([#1495](https://github.com/johnsonandjohnson/bodiless-js/issues/1495)) ([c191dac](https://github.com/johnsonandjohnson/bodiless-js/commit/c191dacfcd161d188dac65db7e18a753b9de24b5)), closes [#7](https://github.com/johnsonandjohnson/bodiless-js/issues/7) [#8](https://github.com/johnsonandjohnson/bodiless-js/issues/8) [#10](https://github.com/johnsonandjohnson/bodiless-js/issues/10) [#13](https://github.com/johnsonandjohnson/bodiless-js/issues/13) [#16](https://github.com/johnsonandjohnson/bodiless-js/issues/16) [#19](https://github.com/johnsonandjohnson/bodiless-js/issues/19) [#20](https://github.com/johnsonandjohnson/bodiless-js/issues/20) [#21](https://github.com/johnsonandjohnson/bodiless-js/issues/21) [#22](https://github.com/johnsonandjohnson/bodiless-js/issues/22) [#24](https://github.com/johnsonandjohnson/bodiless-js/issues/24)
 
 
 

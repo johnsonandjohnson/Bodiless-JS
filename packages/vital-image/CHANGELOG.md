@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2022-06-03)
+
+
+### Bug Fixes
+
+* **vital-test, __vital__:** fix Shadowing and move to vital-test ([#1787](https://github.com/johnsonandjohnson/bodiless-js/issues/1787)) ([33be350](https://github.com/johnsonandjohnson/bodiless-js/commit/33be350c21971f0a083efba94e360fbe928a071e))
+
+
+### Features
+
+* Vital Content Listing ([#1801](https://github.com/johnsonandjohnson/bodiless-js/issues/1801)) ([b71fbad](https://github.com/johnsonandjohnson/bodiless-js/commit/b71fbad220d4141c318a66f33819d41122ab0ee4))
+
+
+
+
+
 # [1.0.0-rc.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.18...v1.0.0-rc.1) (2022-05-20)
 
 
@@ -107,7 +123,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [1.0.0-beta.4](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2022-04-12)
 
-**Note:** Version bump only for package @bodiless/cx-image
+**Note:** Version bump only for package @bodiless/vital-image
 
 
 
@@ -130,7 +146,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 * Add static replacement mechanism ([#1440](https://github.com/johnsonandjohnson/bodiless-js/issues/1440)) ([22384f1](https://github.com/johnsonandjohnson/bodiless-js/commits/22384f184e73366bc00ec619e7b08fa3e5dfc29d))
-* **cx-templates, cx-flowcontainer:** Add generic template  ([#1483](https://github.com/johnsonandjohnson/bodiless-js/issues/1483)) ([d1c1e46](https://github.com/johnsonandjohnson/bodiless-js/commits/d1c1e4652e2be95e3dcf2aba50acf2a6249a1aa9)), closes [#1455](https://github.com/johnsonandjohnson/bodiless-js/issues/1455)
+* **vital-templates, vital-flowcontainer:** Add generic template  ([#1483](https://github.com/johnsonandjohnson/bodiless-js/issues/1483)) ([d1c1e46](https://github.com/johnsonandjohnson/bodiless-js/commits/d1c1e4652e2be95e3dcf2aba50acf2a6249a1aa9)), closes [#1455](https://github.com/johnsonandjohnson/bodiless-js/issues/1455)
 * **webpack:** Token Shadowing ([#1465](https://github.com/johnsonandjohnson/bodiless-js/issues/1465)) ([1b88de6](https://github.com/johnsonandjohnson/bodiless-js/commits/1b88de677896da149d1d02a8a664bac930d05d53)), closes [#1466](https://github.com/johnsonandjohnson/bodiless-js/issues/1466)
 
 

@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2022-06-03)
+
+
+### Bug Fixes
+
+* checkout to merge commit on pull_request_target event ([#1808](https://github.com/johnsonandjohnson/bodiless-js/issues/1808)) ([6d79474](https://github.com/johnsonandjohnson/bodiless-js/commit/6d794747734a048e9ce094b2e6b2f34121671570))
+* **docs:** fixing failed gh-page publishing ([c61e13d](https://github.com/johnsonandjohnson/bodiless-js/commit/c61e13d333de8217bcaf2bc46eb661356f8c41bb))
+* **editors:** Fix hover menu closing on click ([#1799](https://github.com/johnsonandjohnson/bodiless-js/issues/1799)) ([441a81d](https://github.com/johnsonandjohnson/bodiless-js/commit/441a81da04967d72a47376685f35a4c97c06eb2a))
+* **fclasses:** Improve mobx warning. ([#1794](https://github.com/johnsonandjohnson/bodiless-js/issues/1794)) ([3d22eef](https://github.com/johnsonandjohnson/bodiless-js/commit/3d22eefdb358a8261495c031e675d491ad644812))
+* **fclasses:** Remove empty design props from DOM ([#1816](https://github.com/johnsonandjohnson/bodiless-js/issues/1816)) ([74157db](https://github.com/johnsonandjohnson/bodiless-js/commit/74157dba070acc97d020b4d5e4d117ee70c82117))
+* **lists:** Fix list context menu not opening on tab ([#1771](https://github.com/johnsonandjohnson/bodiless-js/issues/1771)) ([57878a1](https://github.com/johnsonandjohnson/bodiless-js/commit/57878a19966f0fdb4b2a4a00330536b6f0747299))
+* psh-setup-starter script fixed ([#1824](https://github.com/johnsonandjohnson/bodiless-js/issues/1824)) ([512ef0d](https://github.com/johnsonandjohnson/bodiless-js/commit/512ef0d60c146b3ad1d847904e7e80be4a312ac0))
+* Remove fs and os node imports in the browser ([#1806](https://github.com/johnsonandjohnson/bodiless-js/issues/1806)) ([b77f873](https://github.com/johnsonandjohnson/bodiless-js/commit/b77f87310942a0cd2f96d4f1ded5b593dcf626f5))
+* **vital-cards:** update cards with buttons & misc fixes ([#1805](https://github.com/johnsonandjohnson/bodiless-js/issues/1805)) ([362d7f8](https://github.com/johnsonandjohnson/bodiless-js/commit/362d7f88e053982ca901d878c68e12285c67b731))
+* **vital-test, __vital__:** fix Shadowing and move to vital-test ([#1787](https://github.com/johnsonandjohnson/bodiless-js/issues/1787)) ([33be350](https://github.com/johnsonandjohnson/bodiless-js/commit/33be350c21971f0a083efba94e360fbe928a071e))
+
+
+### Features
+
+* **bodiless-core:** BodilessJS Remove AsBodilessComponent Edit code from Static bundle [#1542](https://github.com/johnsonandjohnson/bodiless-js/issues/1542) ([#1785](https://github.com/johnsonandjohnson/bodiless-js/issues/1785)) ([3ab1ba8](https://github.com/johnsonandjohnson/bodiless-js/commit/3ab1ba88b03811a4a9100125d4a649db5667e89c))
+* **fclasses:** Overload asTokenSpec. ([#1817](https://github.com/johnsonandjohnson/bodiless-js/issues/1817)) ([d1ba18b](https://github.com/johnsonandjohnson/bodiless-js/commit/d1ba18b9e56b5df2d788b2efcbe6e53e12a03218))
+* **i18n:** Implement i18n ([#1621](https://github.com/johnsonandjohnson/bodiless-js/issues/1621)) ([7680403](https://github.com/johnsonandjohnson/bodiless-js/commit/7680403f3d1df3e1321e665e665e73140126640b))
+* **playwright:** Migration from cypress to playwright ([#1487](https://github.com/johnsonandjohnson/bodiless-js/issues/1487)) ([0903817](https://github.com/johnsonandjohnson/bodiless-js/commit/090381731e21108e59b715d4b947eeb1838a5a09))
+* **playwright:** smoke tests for Component Picker ([#1810](https://github.com/johnsonandjohnson/bodiless-js/issues/1810)) ([fe9eaa8](https://github.com/johnsonandjohnson/bodiless-js/commit/fe9eaa818ff50bae2c064e09d9cd052a53e3e030))
+* **search:** Add @bodiless/vital-search ([#1628](https://github.com/johnsonandjohnson/bodiless-js/issues/1628)) ([7ce3fb8](https://github.com/johnsonandjohnson/bodiless-js/commit/7ce3fb8e943d50be19e59758a8bc4452a06e61f9))
+* Vital Content Listing ([#1801](https://github.com/johnsonandjohnson/bodiless-js/issues/1801)) ([b71fbad](https://github.com/johnsonandjohnson/bodiless-js/commit/b71fbad220d4141c318a66f33819d41122ab0ee4))
+* **vital-buttons:** Add Buttons ([#1781](https://github.com/johnsonandjohnson/bodiless-js/issues/1781)) ([e9dc1e5](https://github.com/johnsonandjohnson/bodiless-js/commit/e9dc1e55ed6f9d19dfa7d86375efd2b5ce5ca612))
+* **vital-navigation:** Add Breadcrumbs ([#1778](https://github.com/johnsonandjohnson/bodiless-js/issues/1778)) ([756284e](https://github.com/johnsonandjohnson/bodiless-js/commit/756284e2955c22fa398af293dec61b04021f0834))
+
+
+
+
+
 # [1.0.0-rc.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.18...v1.0.0-rc.1) (2022-05-20)
 
 
@@ -200,12 +233,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Bug Fixes
 
 * **cli:** Build bodiless cli as commonjs ([#1549](https://github.com/johnsonandjohnson/bodiless-js/issues/1549)) ([916f9df](https://github.com/johnsonandjohnson/bodiless-js/commit/916f9df79bda210adfe28cd0ce9fc9294d75418c))
-* **cx-footer:** make footer 'sticky' to bottom viewport on short pages ([#1513](https://github.com/johnsonandjohnson/bodiless-js/issues/1513)) ([dfa818a](https://github.com/johnsonandjohnson/bodiless-js/commit/dfa818a36223d035bf82d2462e1dc6a051aa2d5c))
+* **vital-footer:** make footer 'sticky' to bottom viewport on short pages ([#1513](https://github.com/johnsonandjohnson/bodiless-js/issues/1513)) ([dfa818a](https://github.com/johnsonandjohnson/bodiless-js/commit/dfa818a36223d035bf82d2462e1dc6a051aa2d5c))
 
 
 ### Features
 
-* **cx-navigation:** Add Cx Navigation [#12](https://github.com/johnsonandjohnson/bodiless-js/issues/12) ([#1495](https://github.com/johnsonandjohnson/bodiless-js/issues/1495)) ([c191dac](https://github.com/johnsonandjohnson/bodiless-js/commit/c191dacfcd161d188dac65db7e18a753b9de24b5)), closes [#7](https://github.com/johnsonandjohnson/bodiless-js/issues/7) [#8](https://github.com/johnsonandjohnson/bodiless-js/issues/8) [#10](https://github.com/johnsonandjohnson/bodiless-js/issues/10) [#13](https://github.com/johnsonandjohnson/bodiless-js/issues/13) [#16](https://github.com/johnsonandjohnson/bodiless-js/issues/16) [#19](https://github.com/johnsonandjohnson/bodiless-js/issues/19) [#20](https://github.com/johnsonandjohnson/bodiless-js/issues/20) [#21](https://github.com/johnsonandjohnson/bodiless-js/issues/21) [#22](https://github.com/johnsonandjohnson/bodiless-js/issues/22) [#24](https://github.com/johnsonandjohnson/bodiless-js/issues/24)
+* **vital-navigation:** Add vital Navigation [#12](https://github.com/johnsonandjohnson/bodiless-js/issues/12) ([#1495](https://github.com/johnsonandjohnson/bodiless-js/issues/1495)) ([c191dac](https://github.com/johnsonandjohnson/bodiless-js/commit/c191dacfcd161d188dac65db7e18a753b9de24b5)), closes [#7](https://github.com/johnsonandjohnson/bodiless-js/issues/7) [#8](https://github.com/johnsonandjohnson/bodiless-js/issues/8) [#10](https://github.com/johnsonandjohnson/bodiless-js/issues/10) [#13](https://github.com/johnsonandjohnson/bodiless-js/issues/13) [#16](https://github.com/johnsonandjohnson/bodiless-js/issues/16) [#19](https://github.com/johnsonandjohnson/bodiless-js/issues/19) [#20](https://github.com/johnsonandjohnson/bodiless-js/issues/20) [#21](https://github.com/johnsonandjohnson/bodiless-js/issues/21) [#22](https://github.com/johnsonandjohnson/bodiless-js/issues/22) [#24](https://github.com/johnsonandjohnson/bodiless-js/issues/24)
 
 
 
@@ -243,7 +276,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * action to crate daily qa branch implemented ([#1494](https://github.com/johnsonandjohnson/bodiless-js/issues/1494)) ([07a05ec](https://github.com/johnsonandjohnson/bodiless-js/commit/07a05ec82f7cb0490e55bece5795b0d2afa26161))
 * Add static replacement mechanism ([#1440](https://github.com/johnsonandjohnson/bodiless-js/issues/1440)) ([22384f1](https://github.com/johnsonandjohnson/bodiless-js/commit/22384f184e73366bc00ec619e7b08fa3e5dfc29d))
 * **bc-footer:** Add Brand.com Footer ([#1450](https://github.com/johnsonandjohnson/bodiless-js/issues/1450)) ([9025ae5](https://github.com/johnsonandjohnson/bodiless-js/commit/9025ae5351253b71b2193ccb95bcb43919583220)), closes [#7](https://github.com/johnsonandjohnson/bodiless-js/issues/7) [#8](https://github.com/johnsonandjohnson/bodiless-js/issues/8) [#10](https://github.com/johnsonandjohnson/bodiless-js/issues/10) [#13](https://github.com/johnsonandjohnson/bodiless-js/issues/13) [#16](https://github.com/johnsonandjohnson/bodiless-js/issues/16) [#17](https://github.com/johnsonandjohnson/bodiless-js/issues/17)
-* **cx-templates, cx-flowcontainer:** Add generic template  ([#1483](https://github.com/johnsonandjohnson/bodiless-js/issues/1483)) ([d1c1e46](https://github.com/johnsonandjohnson/bodiless-js/commit/d1c1e4652e2be95e3dcf2aba50acf2a6249a1aa9)), closes [#1455](https://github.com/johnsonandjohnson/bodiless-js/issues/1455)
+* **vital-templates, vital-flowcontainer:** Add generic template  ([#1483](https://github.com/johnsonandjohnson/bodiless-js/issues/1483)) ([d1c1e46](https://github.com/johnsonandjohnson/bodiless-js/commit/d1c1e4652e2be95e3dcf2aba50acf2a6249a1aa9)), closes [#1455](https://github.com/johnsonandjohnson/bodiless-js/issues/1455)
 * **webpack:** Token Shadowing ([#1465](https://github.com/johnsonandjohnson/bodiless-js/issues/1465)) ([1b88de6](https://github.com/johnsonandjohnson/bodiless-js/commit/1b88de677896da149d1d02a8a664bac930d05d53)), closes [#1466](https://github.com/johnsonandjohnson/bodiless-js/issues/1466)
 
 
@@ -261,7 +294,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **canvasx-layouts:** Layouts & Breakpoints ([#1437](https://github.com/johnsonandjohnson/bodiless-js/issues/1437)) ([be147f1](https://github.com/johnsonandjohnson/bodiless-js/commit/be147f113d66f68f962032947806b97d69eb3aac))
+* **vital-layouts:** Layouts & Breakpoints ([#1437](https://github.com/johnsonandjohnson/bodiless-js/issues/1437)) ([be147f1](https://github.com/johnsonandjohnson/bodiless-js/commit/be147f113d66f68f962032947806b97d69eb3aac))
 
 
 

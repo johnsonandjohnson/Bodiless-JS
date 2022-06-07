@@ -17,4 +17,5 @@
 // Also requires component structure reorganization for new static pattern.
 export { RewardsClean, asRewardsToken } from './RewardsClean';
 export { default as vitalRewards } from './tokens';
+export { default as vitalRewardsBase } from './tokens/vitalRewards';
 export type { RewardsComponents, RewardsProps } from './types';

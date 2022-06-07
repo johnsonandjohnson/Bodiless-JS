@@ -13,11 +13,18 @@
  */
 import { asElementToken } from '@bodiless/vital-elements';
 import { withoutHydration } from '@bodiless/hydration';
+import { withNodeKey } from '@bodiless/core';
 
 export const vitalImage = new Proxy({}, {
-  get: () => asElementToken({
-    Core: {
-      _: withoutHydration(),
-    },
-  }),
+  get: (target, prop) => {
+    const nodeKey = prop === 'WithLink' ? 'link' : 'image';
+    return asElementToken({
+      Core: {
+        _: withoutHydration(),
+      },
+      Schema: {
+        _: withNodeKey(nodeKey),
+      },
+    });
+  }
 });

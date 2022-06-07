@@ -94,6 +94,10 @@ export type FilterTagType = TagType & {
   categoryName: string,
 };
 
+export type DefaultFilterData = {
+  tags?: FilterTagType[],
+};
+
 /**
  * Type of the context which supports filtering by tags/groups.
  */

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2022-06-03)
+
+
+### Features
+
+* **playwright:** Migration from cypress to playwright ([#1487](https://github.com/johnsonandjohnson/bodiless-js/issues/1487)) ([0903817](https://github.com/johnsonandjohnson/bodiless-js/commit/090381731e21108e59b715d4b947eeb1838a5a09))
+
+
+
+
+
 # [1.0.0-rc.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.18...v1.0.0-rc.1) (2022-05-20)
 
 

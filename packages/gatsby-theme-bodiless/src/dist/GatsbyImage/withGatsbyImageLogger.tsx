@@ -15,7 +15,7 @@
 import React, { FC } from 'react';
 import { useNode } from '@bodiless/core';
 import { HOC } from '@bodiless/fclasses';
-import { log } from '../fsLogHandler';
+import { log } from '../fsLogger';
 import GatsbyImagePresets from './GatsbyImagePresets';
 
 type Props = {

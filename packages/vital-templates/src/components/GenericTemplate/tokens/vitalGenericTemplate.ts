@@ -15,16 +15,17 @@
 import {
   on,
   as,
+  flowIf,
   addProps,
   withDesign,
   Img,
-  flowIf,
   Fragment,
   replaceWith,
 } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
 import { vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
+import { ContentListingClean, vitalContentListing } from '@bodiless/vital-content-listing';
 import { withNode, withNodeKey, useNode } from '@bodiless/core';
 import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
 import { SearchLayoutClean, vitalSearchLayout } from '@bodiless/vital-search';
@@ -96,15 +97,37 @@ const Base = asGenericTemplateToken({
   },
   Compose: {
     WithNoBreadcrumbsOnHomePage,
+  },
+});
+
+const ContentListing = asGenericTemplateToken({
+  ...Base,
+  Meta: {
+    title: 'Content Listing',
+  },
+  Components: {
+    ...Base.Components,
+    Content: on(ContentListingClean)(vitalContentListing.Default),
+  },
+  Schema: {
+    ...Base.Schema,
+    Content: as(
+      withNodeKey({ nodeKey: 'content-listing', nodeCollection: 'site' }),
+      withNode,
+      Base.Schema.Content,
+    ),
   }
 });
 
 const Default = asGenericTemplateToken({
   ...Base,
+  Meta: {
+    title: 'Default',
+  },
 });
 
 const Search = asGenericTemplateToken({
-  ...Default,
+  ...Base,
   Meta: {
     title: 'Search',
   },
@@ -120,5 +143,7 @@ const Search = asGenericTemplateToken({
 export default {
   Base,
   Default,
+  ContentListing,
+  WithNoBreadcrumbsOnHomePage,
   Search,
 };

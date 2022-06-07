@@ -186,7 +186,7 @@ Depending on your system configuration, the installer may try to build `libvips`
 will usually fail. Example error:
 
 ```shell-session
-lerna ERR! npm install --legacy-peer-deps exited 1 in 'canvasx-monorepo'
+lerna ERR! npm install --legacy-peer-deps exited 1 in 'vital-monorepo'
 lerna ERR! npm install --legacy-peer-deps stderr:
 npm ERR! code 1
 npm ERR! path .../node_modules/sharp

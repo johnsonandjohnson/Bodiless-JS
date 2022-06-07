@@ -7,6 +7,7 @@ import {
   InteractiveComponent,
   RemountingComponent,
   createWithoutHydration,
+  RerenderingComponent,
 } from './WithoutHydrationTestTools';
 
 // ReactDOMServer.renderToString doesn't seem to serialize correctly on a jsdom environment (which
@@ -16,14 +17,14 @@ import {
 // the `ServerSideWithoutHydration.test.tsx` file in this folder.
 //
 // Result of: ReactDOMServer.renderToString(<DryComponent />);
-export const dryInteractive = '<div data-no-hydrate="true" id="b46d9aa67b2042ae283d4153251fe4e5" data-reactroot=""><section>This component has<!-- --> not<!-- --> been hydrated.</section></div>';
+export const dryInteractive = '<div data-no-hydrate="true" id="63a9f0ea7bb98050796b649e85481845" data-reactroot=""><section>This component has<!-- --> not<!-- --> been hydrated.</section></div>';
 
 // Result of: ReactDOMServer.renderToString(
 //  <RemountingComponent>
 //    <DryComponent />
 //  <RemountingComponent />
 // );
-export const dryInteractiveWithRemounting = '<aside data-reactroot=""><div data-no-hydrate="true" id="root-"><section>This component has<!-- --> not<!-- --> been hydrated.</section></div></aside>';
+export const dryInteractiveWithRemounting = '<aside data-reactroot=""><div data-no-hydrate="true" id="63a9f0ea7bb98050796b649e85481845"><section>This component has<!-- --> not<!-- --> been hydrated.</section></div></aside>';
 
 describe('when using withoutHydration', () => {
   describe('at the client side', () => {
@@ -57,6 +58,7 @@ describe('when using withoutHydration', () => {
       it.each([
         false, 'span', 'div'
       ])('should place the given component inside a %s wrapper element', (element) => {
+        const withoutHydration = createWithoutHydration('production');
         const options = element ? {
           WrapperElement: element as any
         } : {};
@@ -69,6 +71,8 @@ describe('when using withoutHydration', () => {
 
       it('the wrapper element should have display contents style by default', () => {
         const WrapperStyle = {display: 'contents'};
+        const withoutHydration = createWithoutHydration('production');
+
         const DryComponent = withoutHydration()(InteractiveComponent);
         const wrapper = mount(<DryComponent />);
         const component = wrapper.find('div[data-no-hydrate]');
@@ -78,6 +82,8 @@ describe('when using withoutHydration', () => {
 
       it('the wrapper element should have custom style when provided', () => {
         const WrapperStyle = {margin: 0, padding: 0};
+        const withoutHydration = createWithoutHydration('production');
+
         const DryComponent = withoutHydration({
           WrapperStyle
         })(InteractiveComponent);
@@ -88,6 +94,7 @@ describe('when using withoutHydration', () => {
       });
 
       const initializeProductionTest = () => {
+        const withoutHydration = createWithoutHydration('production');
         const DryComponent = withoutHydration()(InteractiveComponent);
         const root = document.createElement('div');
         // It's important to append the react root to the body manually, because withoutHydration
@@ -116,16 +123,40 @@ describe('when using withoutHydration', () => {
       });
 
       it('should keep component structure after remounts', () => {
-        const DryComponent = withoutHydration()(InteractiveComponent);
         const root = document.createElement('div');
         document.body.appendChild(root);
         root.innerHTML = dryInteractiveWithRemounting;
+
+        const withoutHydration = createWithoutHydration('production');
+        const DryComponent = withoutHydration()(InteractiveComponent);
 
         act(() => {
           ReactDOM.hydrate(
             <RemountingComponent>
               <DryComponent />
             </RemountingComponent>,
+            root
+          );
+        });
+
+        const $ = cheerio.load(root.outerHTML);
+
+        expect($('section').text()).toBe('This component has not been hydrated.');
+      });
+
+      it('should keep component content after parent re render before component hydration', () => {
+        const withoutHydration = createWithoutHydration('production');
+        const DryComponent = withoutHydration({
+          WrapperElement: 'div'
+        })(InteractiveComponent);
+        const root = document.createElement('div');
+        document.body.appendChild(root);
+        root.innerHTML = dryInteractiveWithRemounting;
+        const Component = RerenderingComponent(DryComponent);
+
+        act(() => {
+          ReactDOM.hydrate(
+            <Component />,
             root
           );
         });
@@ -144,6 +175,7 @@ describe('when using withoutHydration', () => {
           receivedElement = element;
         });
 
+        const withoutHydration = createWithoutHydration('production');
         const DryComponent = withoutHydration({ onUpdate })(InteractiveComponent);
         const root = document.createElement('div');
         document.body.appendChild(root);

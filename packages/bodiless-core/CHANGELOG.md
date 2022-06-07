@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2022-06-03)
+
+
+### Bug Fixes
+
+* **lists:** Fix list context menu not opening on tab ([#1771](https://github.com/johnsonandjohnson/bodiless-js/issues/1771)) ([57878a1](https://github.com/johnsonandjohnson/bodiless-js/commit/57878a19966f0fdb4b2a4a00330536b6f0747299))
+
+
+### Features
+
+* **bodiless-core:** BodilessJS Remove AsBodilessComponent Edit code from Static bundle [#1542](https://github.com/johnsonandjohnson/bodiless-js/issues/1542) ([#1785](https://github.com/johnsonandjohnson/bodiless-js/issues/1785)) ([3ab1ba8](https://github.com/johnsonandjohnson/bodiless-js/commit/3ab1ba88b03811a4a9100125d4a649db5667e89c))
+
+
+
+
+
 # [1.0.0-rc.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.18...v1.0.0-rc.1) (2022-05-20)
 
 

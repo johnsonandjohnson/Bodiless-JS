@@ -47,63 +47,14 @@ export const isEditClientSide = !!(
  */
 const getInnerHTML = memoize(
   (element: HTMLDivElement&HTMLSpanElement | null) => element?.innerHTML || '',
-  (element) => fullSelector(element)
+  (element) => element?.id
 );
 
 const getDisplayName = (WrappedComponent: ComponentOrTag<any>) => (typeof WrappedComponent !== 'string' && (WrappedComponent.displayName || WrappedComponent.name)) || 'Component';
 
 const useWrapperId = (nodeKey?: string | undefined) => {
-  const { node } = useNode();
-  // @todo improve the fix. For flow container items, on server side nodekey is part of node path.
-  // On client it is not. It produces two different Ids.
-  const { path } = node;
-  const pathCopy = [...path];
-  const lastPath = pathCopy.pop();
-  const endPath = lastPath !== nodeKey ? [lastPath, nodeKey] : [nodeKey];
-
-  return createHash('md5').update([...pathCopy, ...endPath].join('$')).digest('hex');
-};
-
-/**
- * Gets the full selector for a dom element.
- * Used to create a unique identifier for the element which can be used as a key
- * to stash the rendered, non-hydrated element so it can be restored after a
- * component remounts.
- *
- * @todo replace it with useId once upgraded to React 18
- */
-const fullSelector = (element: HTMLElement | null) => {
-  let path;
-  while (element) {
-    let subSelector = element.localName;
-    if (!subSelector) {
-      break;
-    }
-    subSelector = subSelector.toLowerCase();
-
-    const parent = element.parentElement;
-
-    if (parent) {
-      const sameTagSiblings = parent.children;
-      if (sameTagSiblings.length > 1) {
-        let nameCount = 0;
-        const index = Array.from(sameTagSiblings).findIndex((child) => {
-          if (element?.localName === child.localName) {
-            nameCount += 1;
-          }
-          return child === element;
-        }) + 1;
-        if (index > 1 && nameCount > 1) {
-          subSelector += `:nth-child(${index})`;
-        }
-      }
-    }
-
-    path = subSelector + (path ? `> ${path}` : '');
-    // eslint-disable-next-line no-param-reassign
-    element = parent;
-  }
-  return path;
+  const { node: { path = []}} = useNode();
+  return createHash('md5').update([...path, nodeKey].filter(Boolean).join('$')).digest('hex');
 };
 
 const withoutHydrationClientSideEdit: WithoutHydrationFunction = (
