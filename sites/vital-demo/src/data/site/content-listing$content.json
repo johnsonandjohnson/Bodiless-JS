@@ -22,6 +22,20 @@
       "type": "FilterableContentImageVariations"
     },
     {
+      "uuid": "8316cfd0-e682-11ec-91a9-c50c27ab8f75",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "FilterableContentImageVariations"
+    },
+    {
+      "uuid": "91bade90-e683-11ec-91a9-c50c27ab8f75",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "FilterableContentImageVariations"
+    },
+    {
       "uuid": "36b32ff0-bfed-11ec-a123-9fedd17f17d4",
       "wrapperProps": {
         "className": "w-full"
@@ -50,6 +64,20 @@
       "type": "FilterableContentImageVariations"
     },
     {
+      "uuid": "0b6ea710-e686-11ec-b86b-fdb234b2c583",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "FilterableContentImageVariations"
+    },
+    {
+      "uuid": "ca1e43f0-e686-11ec-b86b-fdb234b2c583",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "FilterableContentImageVariations"
+    },
+    {
       "uuid": "4fb21cf0-bfed-11ec-a123-9fedd17f17d4",
       "wrapperProps": {
         "className": "w-full"
@@ -71,14 +99,21 @@
       "type": "FilterableContentImageVariations"
     },
     {
-      "uuid": "bfff89d0-c7c6-11ec-a0b9-13ae2b680a52",
+      "uuid": "57424d00-bfed-11ec-a123-9fedd17f17d4",
       "wrapperProps": {
         "className": "w-full"
       },
       "type": "FilterableContentImageVariations"
     },
     {
-      "uuid": "57424d00-bfed-11ec-a123-9fedd17f17d4",
+      "uuid": "cbc04610-e684-11ec-91a9-c50c27ab8f75",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "FilterableContentImageVariations"
+    },
+    {
+      "uuid": "26574630-e687-11ec-b86b-fdb234b2c583",
       "wrapperProps": {
         "className": "w-full"
       },

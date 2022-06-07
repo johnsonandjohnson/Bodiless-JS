@@ -1,9 +1,9 @@
 [
   {
-    "type": "paragraph",
+    "type": "H1",
     "children": [
       {
-        "text": "Text with Content Region"
+        "text": "Generic Template"
       }
     ]
   }
