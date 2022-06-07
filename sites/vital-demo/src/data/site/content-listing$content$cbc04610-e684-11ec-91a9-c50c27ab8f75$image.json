@@ -1,5 +1,6 @@
 {
   "src": "/images/site/3dd422295feec422de04c6fc4fcced2c/product.jpg",
   "alt": "",
-  "title": ""
+  "title": "",
+  "preset": "fluid_withWebp"
 }
