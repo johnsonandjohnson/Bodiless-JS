@@ -56,6 +56,7 @@ const BaseHero = asCardToken({
     DescriptionWrapper: omit(vitalTypography.H4, 'Spacing'),
   },
   Meta: extendMeta(
+    flowHoc.meta.term('Type')('Card'),
     flowHoc.meta.term('Description')('Hero'),
     flowHoc.meta.term('Orientation')('Horizontal'),
   ),
@@ -75,10 +76,11 @@ const Hero = asCardToken(BaseHero, {
 });
 
 /*
- * Hero with vitalPrimaryButton
+ * With vitalPrimaryButton
  */
-const HeroWithPrimaryButton = asCardToken(BaseHero, {
+const WithPrimaryButton = asCardToken({
   Components: {
+    CTAWrapper: replaceWith(Div),
     CTALink: replaceWith(ButtonClean),
   },
   Theme: {
@@ -88,10 +90,11 @@ const HeroWithPrimaryButton = asCardToken(BaseHero, {
 });
 
 /*
- * Hero with vitalSecondaryButton
+ * With vitalSecondaryButton
  */
-const HeroWithSecondaryButton = asCardToken(BaseHero, {
+const WithSecondaryButton = asCardToken({
   Components: {
+    CTAWrapper: replaceWith(Div),
     CTALink: replaceWith(ButtonClean),
   },
   Theme: {
@@ -102,6 +105,6 @@ const HeroWithSecondaryButton = asCardToken(BaseHero, {
 
 export {
   Hero,
-  HeroWithPrimaryButton,
-  HeroWithSecondaryButton,
+  WithPrimaryButton,
+  WithSecondaryButton,
 };

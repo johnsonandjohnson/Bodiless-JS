@@ -13,7 +13,9 @@
  */
 
 import { asFluidToken } from '@bodiless/vital-elements';
-import { on, varyDesigns, flowHoc } from '@bodiless/fclasses';
+import {
+  as, on, varyDesigns, flowHoc
+} from '@bodiless/fclasses';
 import {
   CardClean, vitalCard, asCardToken,
 } from '../Card';
@@ -27,28 +29,35 @@ const OrientationVariations = {
 };
 const ContentVariations = {
   TitleDescription: asCardToken({
-    Meta: flowHoc.meta.term('Description')('With Title + Description'),
+    Meta: flowHoc.meta.term('Description')('With Eyebrow + Title + Description'),
   }),
   NoTitle: vitalCard.WithNoTitle,
   NoDescription: vitalCard.WithNoDescription,
   NoEyebrow: vitalCard.WithNoEyebrow,
 };
-const HeroCTAVariations = {
-  Link: vitalCard.Hero,
-  PrimaryButton: vitalCard.HeroWithPrimaryButton,
-  SecondaryButton: vitalCard.HeroWithSecondaryButton,
-};
+
+const HeroVariations = varyDesigns(
+  {
+    HeroCard: on(CardClean)(vitalCard.Hero, vitalCard.WithFlowContainerPreview),
+  },
+  {
+    Link: asCardToken({
+      Meta: flowHoc.meta.term('Style')('Text Link'),
+    }),
+    PrimaryButton: as(vitalCard.Hero, vitalCard.WithPrimaryButton),
+    SecondaryButton: as(vitalCard.Hero, vitalCard.WithSecondaryButton),
+  },
+);
 /**
  * Token which adds Card variations to a flow container.
  */
 const WithCardVariations = asFluidToken({
   Components: {
-    HeroCard: on(CardClean)(vitalCard.Hero),
+    ...HeroVariations,
     ...varyDesigns(
       BaseVariation,
       ContentVariations,
       OrientationVariations,
-      HeroCTAVariations,
     ),
   }
 });

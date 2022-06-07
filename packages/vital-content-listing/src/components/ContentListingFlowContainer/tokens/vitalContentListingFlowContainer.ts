@@ -23,11 +23,19 @@ const Default = asFluidToken({
     ComponentWrapper: asFilterableByGroup(),
   },
   Components: {
-    FilterableContentImageVariations: on(CardClean)(
+    FilterableContent: on(CardClean)(
       vitalCard.Default,
       vitalCard.WithVerticalOrientation,
-      vitalCard.WithNoEyebrow,
+      vitalCard.WithNoDescription,
+      vitalCard.WithPrimaryButton,
+      vitalCard.WithFlexGrowImage,
     ),
+  },
+  Spacing: {
+    ComponentWrapper: 'p-8',
+  },
+  Theme: {
+    ComponentWrapper: as('border-2 border-slate-200'),
   },
   Analytics: {
     Wrapper: withViewItemsGA4Event,
