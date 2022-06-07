@@ -42,6 +42,7 @@ export default asTokenGroup(ColorMeta)({
   BgSecondaryTable: 'bg-vital-secondary-table',
   BgSecondaryTableRowColumn: 'bg-vital-secondary-table-interactive',
   BgSecondaryTableInteractive: 'hover:bg-vital-secondary-table-interactive',
+  BorderGrid: 'border-vital-secondary-table',
   BorderSecondarySeparator: 'border-vital-secondary-separator',
   BorderSecondarySearch: 'border-vital-secondary-search',
   BgWhite: 'bg-white',

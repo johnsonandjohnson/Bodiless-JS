@@ -14,7 +14,7 @@
 
 import { on, as } from '@bodiless/fclasses';
 import { asFilterableByGroup } from '@bodiless/filtering';
-import { asFluidToken } from '@bodiless/vital-elements';
+import { asFluidToken, vitalColor } from '@bodiless/vital-elements';
 import { CardClean, vitalCard } from '@bodiless/vital-card';
 import { withViewItemsGA4Event, withSelectItemGA4Event, withRegisterGA4ProductData } from '@bodiless/ga4';
 
@@ -27,7 +27,6 @@ const Default = asFluidToken({
       vitalCard.Default,
       vitalCard.WithVerticalOrientation,
       vitalCard.WithNoDescription,
-      vitalCard.WithPrimaryButton,
       vitalCard.WithFlexGrowImage,
     ),
   },
@@ -35,7 +34,7 @@ const Default = asFluidToken({
     ComponentWrapper: 'p-8',
   },
   Theme: {
-    ComponentWrapper: as('border-2 border-slate-200'),
+    ComponentWrapper: as('border-2', vitalColor.BorderGrid),
   },
   Analytics: {
     Wrapper: withViewItemsGA4Event,
