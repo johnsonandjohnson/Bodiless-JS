@@ -5,7 +5,7 @@ content, as well as helper functions to get and return page/content data.
 
 The base package currently supports the following schemas:
 
-- FAQ
+- [FAQ](./FAQ)
 - [Organization](./Organization)
 - [Product](./Product)
 - [Video](./Video)
