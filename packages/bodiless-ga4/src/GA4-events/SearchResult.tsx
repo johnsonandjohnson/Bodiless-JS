@@ -40,7 +40,6 @@ const withSearchResultInfos = (HelmetComponent: ComponentType) => (props: any) =
   searchResultObject.event_data.result_count = results.length.toString();
 
   // User have not searched for anything but technically our search is wildcard or all results
-  // See https://jira.jnj.com/browse/AESQ-6459?focusedCommentId=6789155&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-6789155
   if (searchTerm === '' && results.length) {
     searchResultObject.event_data.search_term = '*';
   } else {
