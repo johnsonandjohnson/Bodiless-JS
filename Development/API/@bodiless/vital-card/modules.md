@@ -44,7 +44,7 @@ limitations under the License.
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:130](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c2867dad/packages/vital-card/src/components/Card/CardClean.tsx#L130)
+[vital-card/src/components/Card/CardClean.tsx:130](https://github.com/johnsonandjohnson/Bodiless-JS/blob/200d9352/packages/vital-card/src/components/Card/CardClean.tsx#L130)
 
 ___
 
@@ -71,18 +71,19 @@ limitations under the License.
 | `Base` | `TokenSpec`<`CardComponents`, { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
 | `Default` | `TokenSpec`<`CardComponents`, { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
 | `Hero` | `TokenSpec`<`CardComponents`, { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
-| `HeroWithPrimaryButton` | `TokenSpec`<`CardComponents`, { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
-| `HeroWithSecondaryButton` | `TokenSpec`<`CardComponents`, { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
+| `WithFlexGrowImage` | `TokenSpec`<`CardComponents`, { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
 | `WithFlowContainerPreview` | `TokenSpec`<`CardComponents`, { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
 | `WithHorizontalOrientation` | `TokenSpec`<`CardComponents`, { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
 | `WithNoDescription` | `TokenSpec`<`CardComponents`, { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
 | `WithNoEyebrow` | `TokenSpec`<`CardComponents`, { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
 | `WithNoTitle` | `TokenSpec`<`CardComponents`, { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
+| `WithPrimaryButton` | `TokenSpec`<`CardComponents`, { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
+| `WithSecondaryButton` | `TokenSpec`<`CardComponents`, { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
 | `WithVerticalOrientation` | `TokenSpec`<`CardComponents`, { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/vitalCard.ts:61](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c2867dad/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L61)
+[vital-card/src/components/Card/tokens/vitalCard.ts:68](https://github.com/johnsonandjohnson/Bodiless-JS/blob/200d9352/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L68)
 
 ___
 
@@ -98,7 +99,7 @@ ___
 
 #### Defined in
 
-[vital-card/src/components/FlowContainer/index.ts:56](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c2867dad/packages/vital-card/src/components/FlowContainer/index.ts#L56)
+[vital-card/src/components/FlowContainer/index.ts:65](https://github.com/johnsonandjohnson/Bodiless-JS/blob/200d9352/packages/vital-card/src/components/FlowContainer/index.ts#L65)
 
 ## Functions
 
@@ -118,4 +119,4 @@ ___
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:125](https://github.com/johnsonandjohnson/Bodiless-JS/blob/c2867dad/packages/vital-card/src/components/Card/CardClean.tsx#L125)
+[vital-card/src/components/Card/CardClean.tsx:125](https://github.com/johnsonandjohnson/Bodiless-JS/blob/200d9352/packages/vital-card/src/components/Card/CardClean.tsx#L125)

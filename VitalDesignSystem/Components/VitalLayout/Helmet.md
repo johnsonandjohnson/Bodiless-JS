@@ -3,12 +3,13 @@
 The Helmet Component collects all the data that will be rendered in the Head. We have designated
 five individual slots for different types of data.
 
-- `HreflangHelmet`: [Meta Hreflang Tag](https://moz.com/learn/seo/hreflang-tag)
-- `GtmHelmet`: Analytics scripts for [Google Tag Manager](https://tagmanager.google.com/)
+- `HreflangHelmet`: [Meta Hreflang Tag](https://moz.com/learn/seo/hreflang-tag ':target=_blank').
+- `GA4Helmet`: Analytics Data Layer scripts for [GA4](https://developers.google.com/analytics/
+  ':target=_blank').
 - `SeoHelmet`: For standard metadata such as meta description, robots tag, etc.
-- `SocialShareHelmet`: Used for [Open Graph](https://ogp.me/) and other social media, such as
-  Twitter card.
-- `LanguageHelmet`: Custom
+- `SocialShareHelmet`: Used for [Open Graph](https://ogp.me/ ':target=_blank') and other social
+  media, such as Twitter card.
+- `LanguageHelmet`: Custom.
 - `HTMLHelmet`: Will apply attributes to the `<html>` element that wraps the page. Includes things
   such as direction, language, classes, etc.
   <!-- TODO: Add description -->
