@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2022-06-03)
+
+
+### Bug Fixes
+
+* **fclasses:** Improve mobx warning. ([#1794](https://github.com/johnsonandjohnson/bodiless-js/issues/1794)) ([3d22eef](https://github.com/johnsonandjohnson/bodiless-js/commit/3d22eefdb358a8261495c031e675d491ad644812))
+* **fclasses:** Remove empty design props from DOM ([#1816](https://github.com/johnsonandjohnson/bodiless-js/issues/1816)) ([74157db](https://github.com/johnsonandjohnson/bodiless-js/commit/74157dba070acc97d020b4d5e4d117ee70c82117))
+
+
+### Features
+
+* **fclasses:** Overload asTokenSpec. ([#1817](https://github.com/johnsonandjohnson/bodiless-js/issues/1817)) ([d1ba18b](https://github.com/johnsonandjohnson/bodiless-js/commit/d1ba18b9e56b5df2d788b2efcbe6e53e12a03218))
+
+
+
+
+
 # [1.0.0-rc.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.18...v1.0.0-rc.1) (2022-05-20)
 
 
@@ -130,7 +147,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 * **bc-footer:** Add Brand.com Footer ([#1450](https://github.com/johnsonandjohnson/bodiless-js/issues/1450)) ([9025ae5](https://github.com/johnsonandjohnson/bodiless-js/commit/9025ae5351253b71b2193ccb95bcb43919583220)), closes [#7](https://github.com/johnsonandjohnson/bodiless-js/issues/7) [#8](https://github.com/johnsonandjohnson/bodiless-js/issues/8) [#10](https://github.com/johnsonandjohnson/bodiless-js/issues/10) [#13](https://github.com/johnsonandjohnson/bodiless-js/issues/13) [#16](https://github.com/johnsonandjohnson/bodiless-js/issues/16) [#17](https://github.com/johnsonandjohnson/bodiless-js/issues/17)
-* **cx-templates, cx-flowcontainer:** Add generic template  ([#1483](https://github.com/johnsonandjohnson/bodiless-js/issues/1483)) ([d1c1e46](https://github.com/johnsonandjohnson/bodiless-js/commit/d1c1e4652e2be95e3dcf2aba50acf2a6249a1aa9)), closes [#1455](https://github.com/johnsonandjohnson/bodiless-js/issues/1455)
+* **vital-templates, vital-flowcontainer:** Add generic template  ([#1483](https://github.com/johnsonandjohnson/bodiless-js/issues/1483)) ([d1c1e46](https://github.com/johnsonandjohnson/bodiless-js/commit/d1c1e4652e2be95e3dcf2aba50acf2a6249a1aa9)), closes [#1455](https://github.com/johnsonandjohnson/bodiless-js/issues/1455)
 
 
 

@@ -1,0 +1,27 @@
+[
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "This page demonstrates the content listing filters with a single allowed tag.  The content and filters are site-wide.  This page has a default filter set.  Another view on the same content (with no default filter) can be found at  "
+      },
+      {
+        "data": {
+          "openModal": true,
+          "slatenode": {
+            "href": "/styleguide/content-listing/"
+          }
+        },
+        "type": "Link",
+        "children": [
+          {
+            "text": "/styleguide/content-listing."
+          }
+        ]
+      },
+      {
+        "text": ""
+      }
+    ]
+  }
+]

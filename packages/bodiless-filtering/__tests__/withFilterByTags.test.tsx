@@ -96,9 +96,9 @@ describe('withFilterByTags', () => {
   it('Hides all items which do not match selected tags', () => {
     const wrapper = mount(<TestFilterSelector />);
     wrapper.find('#show-foo').simulate('click');
-    expect(wrapper.find('div#foo')).toHaveLength(1);
-    expect(wrapper.find('div#bar')).toHaveLength(0);
-    expect(wrapper.find('div#baz')).toHaveLength(0);
-    expect(wrapper.find('div#bat')).toHaveLength(0);
+    expect(wrapper.find('div#foo')?.prop('style')?.display).toBeUndefined();
+    expect(wrapper.find('div#bar')?.prop('style')?.display).toBe('none');
+    expect(wrapper.find('div#baz')?.prop('style')?.display).toBe('none');
+    expect(wrapper.find('div#bat')?.prop('style')?.display).toBe('none');
   });
 });

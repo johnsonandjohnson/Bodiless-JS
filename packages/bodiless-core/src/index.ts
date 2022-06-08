@@ -73,8 +73,10 @@ import {
 import withNotificationButton from './withNotificationButton';
 import withChild, { withAppendChild, withPrependChild } from './withChild';
 import withParent from './withParent';
-import asBodilessComponent, { withActivatorWrapper, withBodilessData } from './asBodilessComponent';
-import type { Options as BodilessOptions, AsBodiless } from './asBodilessComponent';
+import asBodilessComponent, { withActivatorWrapper } from './asBodilessComponent/asBodilessComponent.bl-edit';
+import asBodilessReadOnlyComponent from './asBodilessComponent/asBodilessReadOnlyComponent';
+import { withBodilessData } from './asBodilessComponent/withBodilessData';
+import type { BodilessOptions, AsBodiless } from './Types/AsBodilessTypes';
 import { useMenuOptionUI } from './components/ContextMenuContext';
 import ContextSubMenu from './ContextMenu/ContextSubMenu';
 import withSwitcherButton from './withSwitcherButton';
@@ -96,6 +98,7 @@ export * from './Git';
 
 export {
   asBodilessComponent,
+  asBodilessReadOnlyComponent,
   withBodilessData,
   asStatic,
   asReadOnly,

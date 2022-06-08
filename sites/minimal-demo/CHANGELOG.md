@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2022-06-03)
+
+
+### Bug Fixes
+
+* **docs:** fixing failed gh-page publishing ([c61e13d](https://github.com/johnsonandjohnson/bodiless-js/commit/c61e13d333de8217bcaf2bc46eb661356f8c41bb))
+
+
+
+
+
 # [1.0.0-rc.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.18...v1.0.0-rc.1) (2022-05-20)
 
 **Note:** Version bump only for package @sites/minimal-demo
@@ -41,4 +52,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-* **canvasx-layouts:** Layouts & Breakpoints ([#1437](https://github.com/johnsonandjohnson/bodiless-js/issues/1437)) ([be147f1](https://github.com/johnsonandjohnson/bodiless-js/commit/be147f113d66f68f962032947806b97d69eb3aac))
+* **vital-layouts:** Layouts & Breakpoints ([#1437](https://github.com/johnsonandjohnson/bodiless-js/issues/1437)) ([be147f1](https://github.com/johnsonandjohnson/bodiless-js/commit/be147f113d66f68f962032947806b97d69eb3aac))

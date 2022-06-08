@@ -75,26 +75,31 @@ export class BasePage {
     this.bodilessDocUrl = '/___docs/#/?id=bodilessjs';
   }
 
-  async typeText(locator:string, text:string, request:string, confirmButton?:string) {
-    if (typeof confirmButton !== 'undefined') {
-      await this.page.click(locator);
-      await this.page.waitForTimeout(300);
-      await this.page.keyboard.press('ArrowDown');
-      await this.page.type(locator, text);
-      await Promise.all([
-        this.page.waitForResponse((response) => response.url()
-          .includes(request) && response.status() === 200),
-        this.page.click(confirmButton),
-      ]);
+  async typeText(locator:string, text:string, request?:string, confirmButton?:string) {
+    if (typeof request !== 'undefined') {
+      if (typeof confirmButton !== 'undefined') {
+        await this.page.click(locator);
+        await this.page.keyboard.press('ArrowDown');
+        await this.page.type(locator, text);
+        await Promise.all([
+          this.page.waitForResponse((response) => response.url()
+            .includes(request) && response.status() === 200),
+          this.page.click(confirmButton),
+        ]);
+      } else {
+        await this.page.click(locator);
+        await this.page.keyboard.press('ArrowDown');
+        await Promise.all([
+          this.page.waitForResponse((response) => response.url()
+            .includes(request) && response.status() === 200),
+          this.page.type(locator, text),
+        ]);
+      }
     } else {
       await this.page.click(locator);
       await this.page.waitForTimeout(300);
       await this.page.keyboard.press('ArrowDown');
-      await Promise.all([
-        this.page.waitForResponse((response) => response.url()
-          .includes(request) && response.status() === 200),
-        this.page.type(locator, text),
-      ]);
+      await this.page.type(locator, text);
     }
   }
 

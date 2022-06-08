@@ -429,6 +429,26 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     return fs.writeFile(file, JSON.stringify(data, undefined, 2));
   }
 
+  async updatePshConfig() {
+    const dest = await this.getArg('dest');
+    const file = path.join(dest, 'edit/platform.custom.sh');
+
+    const hasLocalPackages = (dir = './packages') => {
+      if (!fs.existsSync(dir)) return false;
+      if (fs.readdirSync(dir).filter(sub => !sub.includes('.')).length > 0) {
+        return true;
+      }
+      return false;
+    };
+
+    if (!fs.existsSync(file) || hasLocalPackages()) return Promise.resolve();
+    const data = await fs.readFile(file);
+    const content = data.toString();
+    // Remove "npm run build:packages"
+    const updatedContent = content.replace(/\n.*npm run build:packages.*$/gm, '');
+    return fs.writeFile(file, updatedContent);
+  }
+
   async cleanMisc() {
     const dest = await this.getArg('dest');
     const packagesDir = await this.getArg('sites-dir');
@@ -485,6 +505,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     await this.updatePackageJson('root');
     await this.updatePackageJson('site');
     await this.updatePackageJson('package');
+    await this.updatePshConfig();
     await this.updateTsConfig();
     await this.moveReadMe();
     await this.replaceTemplatePackageName();

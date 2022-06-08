@@ -15,8 +15,9 @@ import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
 import { vitalMetaHelmet } from '@bodiless/vital-meta';
 import { as } from '@bodiless/fclasses';
 import { asHelmetToken } from '../HelmetClean';
+// eslint-disable-next-line import/order
 
-const Default = asHelmetToken({
+const Base = asHelmetToken({
   Components: {
     SeoHelmet: vitalMetaHelmet.SEO,
     SocialShareHelmet: vitalMetaHelmet.Share,
@@ -30,6 +31,10 @@ const Default = asHelmetToken({
       vitalTextDecoration.Normal,
     ),
   }
+});
+
+const Default = asHelmetToken({
+  ...Base,
 });
 
 /**
@@ -51,6 +56,7 @@ const WithFixedBody = asHelmetToken({
 });
 
 export default {
+  Base,
   Default,
   WithDesktopStatickBody,
   WithFixedBody,

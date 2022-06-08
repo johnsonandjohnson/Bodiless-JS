@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RichText by default produces markup that matches defined snapshot 1`] = `"<div role=\\"textbox\\" spellcheck=\\"false\\" autocorrect=\\"false\\" autocapitalize=\\"false\\" data-slate-editor=\\"true\\" data-slate-node=\\"value\\" contenteditable=\\"true\\" zindex=\\"-1\\" style=\\"position: relative; outline: none; white-space: pre-wrap; word-wrap: break-word; min-width: 100px;\\"><div data-slate-node=\\"element\\" style=\\"position: relative;\\"><span data-slate-node=\\"text\\"><span data-slate-leaf=\\"true\\"><span data-slate-zero-width=\\"n\\" data-slate-length=\\"0\\">﻿<br></span></span></span></div></div>"`;

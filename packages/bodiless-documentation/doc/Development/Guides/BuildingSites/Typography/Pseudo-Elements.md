@@ -15,10 +15,10 @@ functionality.
 
 ### Pseudo-Element Using an Icon Font
 
-The following example defines the `cx-external::after` with a [self-hosted icon
+The following example defines the `vital-external::after` with a [self-hosted icon
 font](./Fonts#via-hosted), content, and additional styling.
 
-To use, apply `cx-external-link` to any token.
+To use, apply `vital-external-link` to any token.
 
 _(Code excerpt from `tailwind.config.js` file's `module.exports = {}` section.)_
 
@@ -26,7 +26,7 @@ _(Code excerpt from `tailwind.config.js` file's `module.exports = {}` section.)_
 plugin(({ addUtilities }) => {
   addUtilities(
     {
-      '.cx-external-link::after': {
+      '.vital-external-link::after': {
         content: '"\\e801"',
         'font-family': '"linkicons"',
         'font-style': 'normal',

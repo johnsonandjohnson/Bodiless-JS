@@ -87,19 +87,26 @@ const ifTagsSelected = flowIf(useToggleByTags);
 const ifTagsNotSelected = flowIf(negate(useToggleByTags));
 
 /**
- * HOC to make an item filterable by tags. Must be applied with access to the
- * node containing the item's tags, and within the FilterByGroup context.
+ * HOC to make an item filterable by tags. Adds `display: none` to the style
+ * prop of the component when it is hidden by the filters. Must be applied with
+ * access to the node containing the item's tags, and within the FilterByGroup context.
  */
 const withFilterByTags: Enhancer<WithFilterByTagsProps> = Component => {
-  const WithFilterByTags: FC<any> = (props: WithFilterByTagsProps) => {
+  const WithFilterByTags: FC<any> = (props: WithFilterByTagsProps & { style?: any }) => {
     const { node } = useNode();
     const [id] = node.path.slice(-2);
     const isDisplayed = useToggleByTags(props);
-    const { getFilteredItemData = () => {}, ...rest } = props;
+    const { getFilteredItemData = () => {}, style = {}, ...rest } = props;
     useRegisterItem({ id, isDisplayed, data: getFilteredItemData(node) });
-    return isDisplayed
-      ? <Component {...omit(rest, 'selectedTags', 'showWhenNoTagSelected') as any} />
-      : <></>;
+
+    // Hide with CSS to avoid remounting the component every time the filters change.
+    const styleProp = isDisplayed ? { style } : { style: { ...style, display: 'none' } };
+    return (
+      <Component
+        {...omit(rest, 'selectedTags', 'showWhenNoTagSelected') as any}
+        {...styleProp}
+      />
+    );
   };
   return WithFilterByTags;
 };

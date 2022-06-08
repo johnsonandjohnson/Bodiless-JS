@@ -44,6 +44,9 @@ const Base = asStyleGuideTemplateToken({
 
 const Default = asStyleGuideTemplateToken({
   ...Base,
+  Meta: {
+    title: 'Default',
+  },
   Theme: {
     ...Base.Theme,
     Container: as(
