@@ -29,7 +29,7 @@
     "@bodiless/filtering": "^1.0.0-rc.2",
     "@bodiless/gatsby-plugin-ssi": "^1.0.0-rc.2",
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.2",
-    "@bodiless/gtm": "^1.0.0-rc.2",
+    "@bodiless/ga4": "^1.0.0-rc.2",
     "@bodiless/hydration": "^1.0.0-rc.2",
     "@bodiless/layouts": "^1.0.0-rc.2",
     "@bodiless/layouts-ui": "^1.0.0-rc.2",

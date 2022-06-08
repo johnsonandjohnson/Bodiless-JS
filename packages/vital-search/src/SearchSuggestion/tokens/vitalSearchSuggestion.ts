@@ -12,14 +12,13 @@
  * limitations under the License.
  */
 
-// import { withSearchDataLayerSuggestion } from '@canvasx/gtm';
+import { addSearchDataLayerSuggestion } from '@bodiless/ga4';
 import { asSearchSuggestionToken } from '../SearchSuggestionClean';
 
 const Default = asSearchSuggestionToken({
-  // @todo uncomment after implementing gtm package
-  // Behavior: {
-  //   Wrapper: as(withSearchDataLayerSuggestion),
-  // },
+  Behavior: {
+    Wrapper: addSearchDataLayerSuggestion,
+  },
   Layout: {
     Wrapper: 'flex',
     Count: 'flex-grow',

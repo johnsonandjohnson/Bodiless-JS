@@ -102,6 +102,13 @@ const plugins = [
     resolve: '--vital--',
   },
   {
+    resolve: 'gatsby-plugin-google-tagmanager',
+    options: {
+      id: 'GTM-N3M9LLD',
+      dataLayerName: 'globalDataLayer',
+    },
+  },
+  {
     resolve: '@bodiless/vital-test',
   }
 ];

@@ -17,10 +17,10 @@ import {
   as,
   flowIf,
   addProps,
-  replaceWith,
   withDesign,
   Img,
   Fragment,
+  replaceWith,
 } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
 import { vitalLayout } from '@bodiless/vital-layout';
@@ -34,7 +34,7 @@ import { vitalImage } from '@bodiless/vital-image';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
 import { CardClean, vitalCard } from '@bodiless/vital-card';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
-import { GenericTemplateNodeKeys } from '../constants';
+import { TemplateNodeKeys } from '../../TemplatesNodeKeys';
 
 const heroDefaultData = {
   component: 'Image',
@@ -55,6 +55,9 @@ const WithNoBreadcrumbsOnHomePage = asGenericTemplateToken({
 });
 
 const Base = asGenericTemplateToken({
+  Meta: {
+    title: 'Default',
+  },
   Components: {
     PageWrapper: vitalLayout.Default,
     Breadcrumb: as(vitalBreadcrumbs.Default),
@@ -70,9 +73,9 @@ const Base = asGenericTemplateToken({
     BottomContent: as(vitalFlowContainer.Default),
   },
   Schema: {
-    TopContent: as(withNode, withNodeKey(GenericTemplateNodeKeys.TopContent)),
-    Content: withNodeKey(GenericTemplateNodeKeys.Content),
-    BottomContent: withNodeKey(GenericTemplateNodeKeys.BottomContent),
+    TopContent: as(withNode, withNodeKey(TemplateNodeKeys.TopContent)),
+    Content: withNodeKey(TemplateNodeKeys.Content),
+    BottomContent: withNodeKey(TemplateNodeKeys.BottomContent),
   },
   Spacing: {
     BreadcrumbWrapper: as(

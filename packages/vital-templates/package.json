@@ -39,6 +39,8 @@
     "@bodiless/core": "^1.0.0-rc.2",
     "@bodiless/fclasses": "^1.0.0-rc.2",
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.2",
+    "@bodiless/ga4": "^1.0.0-rc.2",
+    "@bodiless/schema-org": "^1.0.0-rc.2",
     "@bodiless/vital-card": "^1.0.0-rc.2",
     "@bodiless/vital-content-listing": "^1.0.0-rc.2",
     "@bodiless/vital-editors": "^1.0.0-rc.2",

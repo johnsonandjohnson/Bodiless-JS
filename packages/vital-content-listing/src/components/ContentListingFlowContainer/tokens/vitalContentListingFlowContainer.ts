@@ -12,30 +12,36 @@
  * limitations under the License.
  */
 
-import { Img, on } from '@bodiless/fclasses';
+import { on, as } from '@bodiless/fclasses';
 import { asFilterableByGroup } from '@bodiless/filtering';
-import { asFluidToken } from '@bodiless/vital-elements';
-import { vitalImage } from '@bodiless/vital-image';
+import { asFluidToken, vitalColor } from '@bodiless/vital-elements';
+import { CardClean, vitalCard } from '@bodiless/vital-card';
+import { withViewItemsGA4Event, withSelectItemGA4Event, withRegisterGA4ProductData } from '@bodiless/ga4';
 
 const Default = asFluidToken({
   Core: {
     ComponentWrapper: asFilterableByGroup(),
   },
   Components: {
-    // @TODO: Replace with cards once vital-cards has been implemented.
-    FilterableContentImageVariations: on(Img)(
-      vitalImage.WithEditorPlain,
-      vitalImage.WithLink,
-      // Base token must applied after the others to wrap everything in withoutHydration.
-      vitalImage.Base,
+    FilterableContent: on(CardClean)(
+      vitalCard.Default,
+      vitalCard.WithVerticalOrientation,
+      vitalCard.WithNoDescription,
+      vitalCard.WithFlexGrowImage,
     ),
   },
-  Layout: {
-    ComponentWrapper: 'flex flex-shrink',
-  },
   Spacing: {
-    ComponentWrapper: 'p-3 w-full lg:w-1/3',
-    Wrapper: '-m-3',
+    ComponentWrapper: 'p-8',
+  },
+  Theme: {
+    ComponentWrapper: as('border-2', vitalColor.BorderGrid),
+  },
+  Analytics: {
+    Wrapper: withViewItemsGA4Event,
+    ComponentWrapper: as(
+      withSelectItemGA4Event,
+      withRegisterGA4ProductData
+    ),
   },
 });
 

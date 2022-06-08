@@ -19,24 +19,11 @@ import { Editable, asBodilessList } from '@bodiless/components';
 import {
   withDesign, replaceWith, addClasses, stylable, flowHoc,
 } from '@bodiless/fclasses';
-import Helmet from 'react-helmet';
 import Layout from '../../components/Layout';
 import { asEditableImage } from '../../components/Image';
 import { FlowContainerDefault } from '../../components/FlowContainer';
-import { withDataLayerPageType, withGlobalGTMForm } from '../../components/GTM';
 
 const HOME_PAGE_PATH = 'homepage';
-
-/**
- * A helmet Component containing datalayer script. In edit mode, it shows a form
- * to edit the values page type.
- *
- * The use of withGlobalGTMForm allows us to retain the global datalayer script
- * and only add page information to it.
- */
-const GTMDataLayerHomePageHelmet = withGlobalGTMForm(
-  withDataLayerPageType('page-type'),
-)(Helmet);
 
 const BulletPoints = (props: any) => (
   <span {...props}><Editable nodeKey="bullet" placeholder="Enter Bullet Item" /></span>
@@ -58,7 +45,6 @@ const HeaderImage = flowHoc(
 
 const HomePage = (props: any) => (
   <Page {...props}>
-    <GTMDataLayerHomePageHelmet />
     <Layout>
       <div className="flex my-3">
         <HeaderImage />

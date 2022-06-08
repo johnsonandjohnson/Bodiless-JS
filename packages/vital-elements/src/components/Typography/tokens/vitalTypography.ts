@@ -201,6 +201,10 @@ const Eyebrow = asElementToken({
     _: 'mb-3',
   },
 });
+const EyebrowNoSpacing = asElementToken({
+  ...Eyebrow,
+  Spacing: {},
+});
 
 // This probably will need a better name as Design team defines the uses of this token.
 // They have called it crumbs & reviews now.
@@ -243,6 +247,7 @@ export default {
   H5Link,
   Body,
   Eyebrow,
+  EyebrowNoSpacing,
   Rest,
   Gradient,
 };

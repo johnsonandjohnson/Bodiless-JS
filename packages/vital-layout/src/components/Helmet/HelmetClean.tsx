@@ -41,13 +41,13 @@ const createTagHelmet = <P extends object>(Tag: ComponentOrTag<P>) => {
  */
 const HelmetBase: FC<HelmetProps> = ({ components }) => {
   const {
-    HreflangHelmet, GtmHelmet, SeoHelmet, SocialShareHelmet, LanguageHelmet,
+    HreflangHelmet, GA4Helmet, SeoHelmet, SocialShareHelmet, LanguageHelmet,
     HTMLHelmet, BodyHelmet,
   } = components;
   return (
     <>
       <HreflangHelmet />
-      <GtmHelmet />
+      <GA4Helmet />
       <SeoHelmet />
       <SocialShareHelmet />
       <LanguageHelmet />
@@ -63,7 +63,7 @@ const HelmetBase: FC<HelmetProps> = ({ components }) => {
  */
 const helmetComponents: HelmetComponents = {
   HreflangHelmet: Helmet,
-  GtmHelmet: Helmet,
+  GA4Helmet: Helmet,
   SeoHelmet: Helmet,
   SocialShareHelmet: Helmet,
   LanguageHelmet: createTagHelmet<HTMLProps<HTMLHtmlElement>>('html'),

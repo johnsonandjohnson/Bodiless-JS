@@ -7,6 +7,9 @@ packages/gatsby-theme-bodiless/index.d.ts
 packages/bodiless-migration-tool/conf
 packages/bodiless-migration-tool/tests/data
 packages/bodiless-migration-tool/tests/testserver
+packages/gatsby-plugin-akamai-auth/dist
+packages/gatsby-plugin-akamai-auth/cjs
+packages/gatsby-plugin-akamai-auth/index.js
 **/public
 **/.cache
 **/static

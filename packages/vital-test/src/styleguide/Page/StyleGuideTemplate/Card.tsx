@@ -51,11 +51,13 @@ const HeroCard = as(
   withNodeKey('hero-card'),
 )(CardClean);
 const HeroPrimaryButtonCard = as(
-  vitalCard.HeroWithPrimaryButton,
+  vitalCard.Hero,
+  vitalCard.WithPrimaryButton,
   withNodeKey('hero-card-primary-button'),
 )(CardClean);
 const HeroSecondaryButtonCard = as(
-  vitalCard.HeroWithSecondaryButton,
+  vitalCard.Hero,
+  vitalCard.WithSecondaryButton,
   withNodeKey('hero-card-secondary-button'),
 )(CardClean);
 

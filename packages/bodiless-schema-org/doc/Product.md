@@ -1,25 +1,29 @@
 # Product Schema
 
-JSON-LD following the Product schema is automatically generated for Product Pages.
+JSON-LD following the Product schema can be setup to source on pages such as product detail page.
 
-## Site Builder Details
-
-01. Get data in the component file by setting the schema key desired; for example, to get the
+01. Step 1: Set fields that are source of product schema:
+    Get data in the component file by setting the schema key desired; for example, to get the
     product name:
 
     ```tsx
     import { asSchemaSource } from '@bodiless/schema-org';
 
       SEO: {
-        TitleRow: withDesign({
-          PageTitle: asSchemaSource('product-name'),
-        }),
+        PageTitle: asSchemaSource('product-name'),
       },
     ```
 
+   Implementation tips:
+    - The `product-name` is required field and is needed to render any JSON-LD.
+    - Depending on type of component you may want to set the source on your Wrapper slot instead of
+    directly on the component.  If setting directly, the component may override the schema source
+    addition.
+
+   For more information:
     - For schema keys, see [Product Schema Keys](#product-schema-keys).
 
-01. Return data; you should set the schema component in your page:
+01. Step 2: Add Schema component to your page/template to render the LD JSON in the head:
 
     ```tsx
     import { WithProductSchema } from '@bodiless/schema-org';
@@ -29,13 +33,13 @@ JSON-LD following the Product schema is automatically generated for Product Page
       },
     ```
 
-01. Set provider; you should define the schema provider in your page structure template:
+01. Step 3: Set provider; you should define the schema provider in your page structure template:
 
     ```tsx
     import { withStructuredDataProvider } from '@bodiless/schema-org';
 
       SEO: {
-        _: withStructuredDataProvider as Token,
+        _: withStructuredDataProvider,
       },
     ```
 

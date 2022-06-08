@@ -23,9 +23,9 @@ export type HelmetComponents = {
    */
   HreflangHelmet: ComponentOrTag<any>,
   /**
-   * Used to add GTM datalayer scripts.
+   * Used to add GA4 datalayer scripts.
    */
-  GtmHelmet: ComponentOrTag<any>,
+  GA4Helmet: ComponentOrTag<any>,
   /**
    * Use to add SEO related metatags.
    */

@@ -16,7 +16,7 @@ import { flowHoc, replaceWith } from '@bodiless/fclasses';
 import { asCardToken } from '../CardClean';
 
 import Base, { WithFlowContainerPreview, WithHorizontalOrientation, WithVerticalOrientation} from './Base';
-import { Hero, HeroWithPrimaryButton, HeroWithSecondaryButton } from './Hero';
+import { Hero, WithPrimaryButton, WithSecondaryButton } from './Hero';
 
 /**
  * WithNoTitle removes title from the card
@@ -54,6 +54,13 @@ const WithNoDescription = asCardToken({
   Meta: flowHoc.meta.term('Description')('No Description'),
 });
 
+const WithFlexGrowImage = asCardToken({
+  Layout: {
+    ImageWrapper: 'flex-grow',
+  },
+  Meta: flowHoc.meta.term('Description')('Flex Grow on Image Wrapper'),
+});
+
 const Default = asCardToken({
   ...Base,
 });
@@ -62,12 +69,13 @@ export default {
   Base,
   Default,
   Hero,
-  HeroWithPrimaryButton,
-  HeroWithSecondaryButton,
+  WithPrimaryButton,
+  WithSecondaryButton,
   WithNoDescription,
   WithNoTitle,
   WithNoEyebrow,
   WithHorizontalOrientation,
   WithVerticalOrientation,
   WithFlowContainerPreview,
+  WithFlexGrowImage,
 };

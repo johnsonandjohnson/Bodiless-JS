@@ -12,20 +12,14 @@
  * limitations under the License.
  */
 
-import {
-  Token,
-  as,
-  on,
-  withShowDesignKeys,
-} from '@bodiless/fclasses';
+import { as, on, Token } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
 import { asFluidToken } from '@bodiless/vital-elements';
+import { WithGA4DesignKeys } from '@bodiless/ga4';
 import { withSearchResult, withSearchMenuProvider } from '@bodiless/vital-search';
 import { asBodilessPage } from '../asBodilessPage';
 import { GenericTemplateClean, vitalGenericTemplate } from '../../GenericTemplate';
-
-// @todo token to GTM package when created
-const withGTMDesignKeys = withShowDesignKeys(true, 'layer-region');
+import { PDPTemplateClean, vitalPDPTemplate } from '../../PDPTemplate';
 
 const Base = asFluidToken({
   Core: {
@@ -33,8 +27,6 @@ const Base = asFluidToken({
       asBodilessChameleon(
         'template',
         {},
-        // Sets 'Default' for new pages creation.
-        // { component: 'Default' },
         () => ({
           root: true,
           label: 'Template',
@@ -44,6 +36,12 @@ const Base = asFluidToken({
         }),
       ),
     ),
+  },
+  Components: {
+    _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
+    PDP: on(PDPTemplateClean)(vitalPDPTemplate.Default),
+    Search: on(GenericTemplateClean)(vitalGenericTemplate.Search),
+    ContentListing: on(GenericTemplateClean)(vitalGenericTemplate.ContentListing),
   },
   // @todo restore tools
   // Behavior: {
@@ -58,12 +56,7 @@ const Base = asFluidToken({
   //   _: withPageDimensionsContext({ breakpoints }),
   // },
   Compose: {
-    _: as(withGTMDesignKeys as Token),
-  },
-  Components: {
-    _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
-    ContentListing: on(GenericTemplateClean)(vitalGenericTemplate.ContentListing),
-    Search: on(GenericTemplateClean)(vitalGenericTemplate.Search),
+    WithGA4DesignKeys: as(WithGA4DesignKeys as Token),
   },
 });
 
