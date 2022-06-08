@@ -12,17 +12,25 @@
  * limitations under the License.
  */
 
+import identity from 'lodash/identity';
 import { asFluidToken } from '@bodiless/vital-elements';
-import { on, varyDesigns } from '@bodiless/fclasses';
-import { AccordionClean, vitalAccordion } from '../Accordion';
+import { on, varyDesigns, flowHoc } from '@bodiless/fclasses';
+import { AccordionClean, vitalAccordion, asAccordionToken } from '../Accordion';
 
 const BaseVariation = {
-  Accordion: on(AccordionClean)(vitalAccordion.Default),
+  Accordion: on(AccordionClean)(vitalAccordion.Default, vitalAccordion.WithFlowContainerPreview),
+};
+
+const AccordionVariations = {
+  _: identity,
+  FAQSchema: vitalAccordion.WithFAQSchema,
 };
 
 const BehaviorVariations = {
-  InitiallyExpanded: vitalAccordion.WithInitiallyExpanded,
-  FAQSchema: vitalAccordion.WithFAQSchema,
+  Collapsed: asAccordionToken({
+    Meta: flowHoc.meta.term('Behavior')('Collapsed on Open'),
+  }),
+  Expanded: vitalAccordion.WithInitiallyExpanded,
 };
 
 /**
@@ -30,9 +38,9 @@ const BehaviorVariations = {
  */
 const WithAccordionVariations = asFluidToken({
   Components: {
-    Accordion: on(AccordionClean)(vitalAccordion.Default),
     ...varyDesigns(
       BaseVariation,
+      AccordionVariations,
       BehaviorVariations,
     ),
   }

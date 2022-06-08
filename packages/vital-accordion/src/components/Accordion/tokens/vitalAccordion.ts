@@ -13,12 +13,15 @@
  */
 
 import { withNode, withNodeKey } from '@bodiless/core';
-import { addProps, as, flowHoc } from '@bodiless/fclasses';
+import {
+  addProps, as, flowHoc, replaceWith
+} from '@bodiless/fclasses';
 import { withFAQSchema } from '@bodiless/schema-org';
 import { vitalColor } from '@bodiless/vital-elements';
+import { ifComponentSelector } from '@bodiless/layouts';
 import { vitalAccordionBody } from '../../AccordionBody';
 import { vitalAccordionTitle } from '../../AccordionTitle';
-import { asAccordionToken } from '../AccordionClean';
+import { asAccordionToken, AccordionBodyPreview } from '../AccordionClean';
 
 const Base = asAccordionToken({
   Components: {
@@ -48,7 +51,7 @@ const WithInitiallyExpanded = asAccordionToken({
   Behavior: {
     _: addProps({ expanded: true })
   },
-  Meta: flowHoc.meta.term('Behavior')('Initially Expanded'),
+  Meta: flowHoc.meta.term('Behavior')('Expanded on Open'),
 });
 
 const WithFAQSchema = asAccordionToken({
@@ -60,9 +63,17 @@ const WithFAQSchema = asAccordionToken({
   Meta: flowHoc.meta.term('Schema')('With FAQ Schema'),
 });
 
+const WithFlowContainerPreview = asAccordionToken({
+  Flow: ifComponentSelector,
+  Core: {
+    Body: replaceWith(AccordionBodyPreview),
+  },
+});
+
 export default {
   Base,
   Default,
   WithInitiallyExpanded,
   WithFAQSchema,
+  WithFlowContainerPreview,
 };

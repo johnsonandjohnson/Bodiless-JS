@@ -79,6 +79,8 @@ const AccordionBase: FC<AccordionBaseProps & AccordionProviderProps & HTMLProps<
 
 const AccordionClean = designable(AccordionComponentsStart, 'Accordion')(AccordionBase);
 
+export const AccordionBodyPreview = () => <span className="bl-text-gray-800">Accordion Body</span>;
+
 export const asAccordionToken = asVitalTokenSpec<AccordionComponents>();
 
 export default AccordionClean;
