@@ -1,0 +1,32 @@
+{
+  "items": [
+    {
+      "uuid": "433de6e0-e746-11ec-b647-67f71f91e7fb",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "Accordion_Collapsed"
+    },
+    {
+      "uuid": "47b00e10-e746-11ec-b647-67f71f91e7fb",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "Accordion_Expanded"
+    },
+    {
+      "uuid": "4a98af10-e746-11ec-b647-67f71f91e7fb",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "AccordionFAQSchemaCollapsed"
+    },
+    {
+      "uuid": "4dfa0280-e746-11ec-b647-67f71f91e7fb",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "AccordionFAQSchemaExpanded"
+    }
+  ]
+}
