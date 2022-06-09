@@ -27,7 +27,7 @@ import { vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { ContentListingClean, vitalContentListing } from '@bodiless/vital-content-listing';
 import { withNode, withNodeKey, useNode } from '@bodiless/core';
-import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
+import { vitalSpacing } from '@bodiless/vital-elements';
 import { SearchLayoutClean, vitalSearchLayout } from '@bodiless/vital-search';
 import { vitalBreadcrumbs } from '@bodiless/vital-navigation';
 import { vitalImage } from '@bodiless/vital-image';
@@ -83,9 +83,10 @@ const Base = asGenericTemplateToken({
       vitalSpacing.WithSiteXLConstraint,
       'my-2.5',
     ),
-    TopWrapper: vitalSpacing.GutterBottom,
-    // @todo move styling of breadcrumb to breadcrumb component when it exists.
-    Breadcrumb: vitalTypography.Rest,
+    TopWrapper: as(
+      vitalSpacing.GutterBottom,
+      vitalSpacing.WithSiteXLConstraint
+    ),
     ContentWrapper: as(
       vitalSpacing.WithSiteMargin,
       vitalSpacing.WithSiteXLConstraint
