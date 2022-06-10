@@ -44,7 +44,7 @@ limitations under the License.
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:130](https://github.com/johnsonandjohnson/Bodiless-JS/blob/d5e75a60/packages/vital-card/src/components/Card/CardClean.tsx#L130)
+[vital-card/src/components/Card/CardClean.tsx:130](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6ca035cf/packages/vital-card/src/components/Card/CardClean.tsx#L130)
 
 ___
 
@@ -83,7 +83,7 @@ limitations under the License.
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/vitalCard.ts:68](https://github.com/johnsonandjohnson/Bodiless-JS/blob/d5e75a60/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L68)
+[vital-card/src/components/Card/tokens/vitalCard.ts:68](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6ca035cf/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L68)
 
 ___
 
@@ -99,7 +99,7 @@ ___
 
 #### Defined in
 
-[vital-card/src/components/FlowContainer/index.ts:65](https://github.com/johnsonandjohnson/Bodiless-JS/blob/d5e75a60/packages/vital-card/src/components/FlowContainer/index.ts#L65)
+[vital-card/src/components/FlowContainer/index.ts:65](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6ca035cf/packages/vital-card/src/components/FlowContainer/index.ts#L65)
 
 ## Functions
 
@@ -119,4 +119,4 @@ ___
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:125](https://github.com/johnsonandjohnson/Bodiless-JS/blob/d5e75a60/packages/vital-card/src/components/Card/CardClean.tsx#L125)
+[vital-card/src/components/Card/CardClean.tsx:125](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6ca035cf/packages/vital-card/src/components/Card/CardClean.tsx#L125)
