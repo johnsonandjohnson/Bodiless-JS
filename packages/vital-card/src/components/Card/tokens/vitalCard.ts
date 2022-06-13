@@ -17,6 +17,7 @@ import { asCardToken } from '../CardClean';
 import type { CardToken } from '../CardClean';
 import Base, {
   WithFlowContainerPreview,
+  WithHorizontalOrientationBase,
   WithHorizontalLeftOrientation,
   WithHorizontalRightOrientation,
   WithHorizontalContentAtTop,
@@ -176,6 +177,7 @@ export default {
   WithNoDescription,
   WithNoTitle,
   WithNoEyebrow,
+  WithHorizontalOrientationBase,
   WithHorizontalLeftOrientation,
   WithHorizontalRightOrientation,
   WithHorizontalContentAtTop,
