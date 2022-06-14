@@ -1,3 +1,4 @@
+import { withNodeKey } from '@bodiless/core';
 import { as, extendMeta, flowHoc } from '@bodiless/fclasses';
 import { vitalEditorPlain } from '@bodiless/vital-editors';
 import { vitalColor, vitalFontSize } from '@bodiless/vital-elements';
@@ -7,6 +8,13 @@ const Default = asStyledEditorToken({
   Editors: {
     Content: vitalEditorPlain.Default,
   },
+  Schema: {
+    Content: withNodeKey('content'),
+  },
+  Meta: flowHoc.meta.term('Type')('Text Editor'),
+});
+
+const Borders = asStyledEditorToken(Default, {
   Theme: {
     Wrapper: as(
       'italic text-center',
@@ -24,11 +32,11 @@ const Default = asStyledEditorToken({
     Wrapper: 'py-12',
   },
   Meta: extendMeta(
-    flowHoc.meta.term('Type')('Text Editor'),
     flowHoc.meta.term('Style')('Top & Bottom Borders'),
   ),
 });
 
 export default {
   Default,
+  Borders,
 };

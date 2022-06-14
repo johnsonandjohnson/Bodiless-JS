@@ -5,7 +5,7 @@
       "wrapperProps": {
         "className": "w-full"
       },
-      "type": "StyledEditor"
+      "type": "StyledEditorBorder"
     }
   ]
 }

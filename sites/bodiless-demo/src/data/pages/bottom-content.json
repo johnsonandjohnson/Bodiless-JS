@@ -5,56 +5,56 @@
       "wrapperProps": {
         "className": "w-full"
       },
-      "type": "CardNoEyebrowHorizontalLeft"
+      "type": "CardLeftContentCenteredNoEyebrow"
     },
     {
       "uuid": "499e0d80-e769-11ec-9133-c1c0056c6eea",
       "wrapperProps": {
         "className": "w-full"
       },
-      "type": "CardNoEyebrowHorizontalRight"
+      "type": "CardRightContentCenteredNoEyebrow"
     },
     {
       "uuid": "6d5de7d0-dad6-11ec-b70a-a1c4c7d90965",
       "wrapperProps": {
         "className": "w-full"
       },
-      "type": "CardNoEyebrowHorizontalLeft"
+      "type": "CardLeftContentCenteredNoEyebrow"
     },
     {
       "uuid": "ca564270-dad6-11ec-b70a-a1c4c7d90965",
       "wrapperProps": {
         "className": "w-full"
       },
-      "type": "StyledEditor"
+      "type": "StyledEditorBorder"
     },
     {
       "uuid": "dedffb00-dad6-11ec-b70a-a1c4c7d90965",
       "wrapperProps": {
         "className": "w-full"
       },
-      "type": "CardNoEyebrowHorizontalRight"
+      "type": "CardRightContentCenteredNoEyebrow"
     },
     {
       "uuid": "21690fc0-dad7-11ec-b70a-a1c4c7d90965",
       "wrapperProps": {
         "className": "w-full"
       },
-      "type": "CardNoEyebrowHorizontalLeft"
+      "type": "CardLeftContentCenteredNoEyebrow"
     },
     {
       "uuid": "48eb0b70-dad7-11ec-b70a-a1c4c7d90965",
       "wrapperProps": {
         "className": "w-full"
       },
-      "type": "CardNoEyebrowHorizontalRight"
+      "type": "CardRightContentCenteredNoEyebrow"
     },
     {
       "uuid": "79017ba0-e76b-11ec-bfd7-3fdc34ecc976",
       "wrapperProps": {
         "className": "w-full"
       },
-      "type": "ButtonPrimary_"
+      "type": "GetStarted"
     }
   ]
 }

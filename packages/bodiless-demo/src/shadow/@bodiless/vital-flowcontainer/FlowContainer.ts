@@ -2,7 +2,9 @@ import { useNode } from '@bodiless/core';
 import { flowIf, on } from '@bodiless/fclasses';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { vitalFlowContainerBase } from '@bodiless/vital-flowcontainer';
+import { CardClean } from '@bodiless/vital-card';
 import { StyledEditor, StyledEditorClean } from '../../../components/StyledEditor';
+import { asGetStarted } from '../../../components/Cards';
 
 const isHome = () => useNode().node.pagePath === '/';
 
@@ -18,7 +20,8 @@ const Default = asFluidToken(
     ...vitalFlowContainerBase.Default,
     Components: {
       ...vitalFlowContainerBase.Default.Components,
-      StyledEditor: on(StyledEditorClean)(StyledEditor.Default),
+      StyledEditorBorder: on(StyledEditorClean)(StyledEditor.Borders),
+      GetStarted: on(CardClean)(asGetStarted),
     },
   },
   ExtraPaddingOnHome,

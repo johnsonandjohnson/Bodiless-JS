@@ -24,3 +24,11 @@ export const GitDiscuss = () => (
 
   </GitHubButton>
 );
+
+export const GitButtons = () => (
+  <div>
+    <GitStar />
+    <span className="p-2" />
+    <GitDiscuss />
+  </div>
+);
