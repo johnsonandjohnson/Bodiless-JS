@@ -1,0 +1,91 @@
+/**
+ * Copyright © 2022 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { withNodeKey } from '@bodiless/core';
+import { vitalRichText } from '@bodiless/vital-editors';
+import {
+  asVitalTokenSpec, vitalColor, vitalFontSize, vitalTextDecoration
+} from '@bodiless/vital-elements';
+import { addProps, as, replaceWith } from '@bodiless/fclasses';
+import { vitalLink } from '@bodiless/vital-link';
+import { asCopyrightRowToken } from '../CopyrightRowClean';
+import { vitalSocialLinks } from '../../SocialLinks';
+
+const Copyright = asVitalTokenSpec()({
+  ...vitalRichText.Basic,
+  Theme: {
+    paragraph: as(
+      vitalColor.TextPrimaryFooterCopy,
+      vitalFontSize.XS,
+      vitalTextDecoration.Normal,
+    ),
+    Link: as(
+      vitalLink.Base,
+      vitalTextDecoration.Bold,
+      vitalTextDecoration.Underline,
+    ),
+  },
+  Content: {
+    _: addProps({ placeholder: 'Insert Copyright' }),
+  },
+});
+
+const Base = asCopyrightRowToken({
+  Components: {
+    SocialLinks: vitalSocialLinks.Default,
+  },
+  Layout: {
+    CopyrightWrapper: 'w-full xl:w-3/4',
+    SocialLinksWrapper: 'w-full xl:w-1/4',
+  },
+  Spacing: {
+    Copyright: 'py-6 2xl:py-0 md:mb-4 2xl:mb-0', // Vertical
+    SocialLinksWrapper: 'py-6 2xl:py-0', // Vertical
+  },
+  Theme: {
+    Copyright: as(
+      vitalColor.BorderSecondarySeparator,
+      'border-t border-b md:border-0',
+    ),
+  },
+  Editors: {
+    Copyright,
+  },
+  Schema: {
+    Copyright: withNodeKey({ nodeKey: 'copyright', nodeCollection: 'site' }),
+  },
+});
+
+const CopyrightNoSocialLinks = asCopyrightRowToken({
+  ...Base,
+  Components: {
+    ...Base.Components,
+    SocialLinksWrapper: replaceWith(() => null),
+    SocialLinks: replaceWith(() => null),
+  },
+  Layout: {
+    CopyrightWrapper: 'w-full',
+    SocialLinksWrapper: 'w-full',
+  },
+});
+
+const Default = asCopyrightRowToken({
+  ...Base,
+});
+
+export default {
+  Base,
+  Default,
+  CopyrightNoSocialLinks,
+};

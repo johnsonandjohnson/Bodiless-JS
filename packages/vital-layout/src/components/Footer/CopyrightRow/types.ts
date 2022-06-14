@@ -14,23 +14,17 @@
 
 import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 
-type FooterComponents = {
+type CopyrightRowComponents = {
   Wrapper: ComponentOrTag<any>,
-  Container: ComponentOrTag<any>,
-  Column1Wrapper: ComponentOrTag<any>,
-  Column2Wrapper: ComponentOrTag<any>,
-  MenuRow: ComponentOrTag<any>,
-  CopyrightRow: ComponentOrTag<any>,
-  CopyrightRowOutsideColumns: ComponentOrTag<any>,
-  RewardsWrapper: ComponentOrTag<any>,
-  Rewards: ComponentOrTag<any>,
-  FooterMenuWrapper: ComponentOrTag<any>,
-  FooterMenu: ComponentOrTag<any>,
+  CopyrightWrapper: ComponentOrTag<any>,
+  Copyright: ComponentOrTag<any>,
+  SocialLinksWrapper: ComponentOrTag<any>,
+  SocialLinks: ComponentOrTag<any>,
 };
 
-type FooterProps = DesignableComponentsProps<FooterComponents>;
+type CopyrightRowProps = DesignableComponentsProps<CopyrightRowComponents>;
 
 export type {
-  FooterComponents,
-  FooterProps,
+  CopyrightRowComponents,
+  CopyrightRowProps,
 };
