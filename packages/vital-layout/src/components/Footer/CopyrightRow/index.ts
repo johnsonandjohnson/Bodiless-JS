@@ -12,10 +12,7 @@
  * limitations under the License.
  */
 
-export { default as FooterClean, asFooterToken } from './FooterClean';
-export { default as vitalFooter } from './tokens';
-export type { FooterComponents, FooterProps } from './types';
-export { default as vitalFooterBase } from './tokens/vitalFooter';
-
-export * from './Rewards';
-export * from './CopyrightRow';
+export { asCopyrightRowToken } from './CopyrightRowClean';
+export type { CopyrightRowComponents, CopyrightRowProps } from './types';
+export { default as vitalCopyrightRowBase } from './tokens/vitalCopyrightRow';
+export * from './index.bl-edit';

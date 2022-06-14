@@ -69,12 +69,10 @@ const Base = asLayoutToken({
   }
 });
 
-const Default = asLayoutToken({
-  ...Base,
+const Default = asLayoutToken(Base, {
   Components: {
-    ...Base.Components,
     Header: vitalHeader.Default,
-    Footer: vitalFooter.Default,
+    Footer: vitalFooter.FooterWithRewards,
   },
 });
 
