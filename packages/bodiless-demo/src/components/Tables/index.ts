@@ -1,6 +1,7 @@
 import {
   addProps, as, on, withDesign, addClassesIf, and, replaceWith, flowHoc,
 } from '@bodiless/fclasses';
+import { withNode, withNodeKey } from '@bodiless/core';
 import { asBodilessChameleon } from '@bodiless/components';
 import {
   asBodilessTable,
@@ -16,7 +17,6 @@ import {
 } from '@bodiless/vital-editors';
 import GreenYes from '../../assets/GreenYes';
 import RedNo from '../../assets/RedNo';
-import { withNode, withNodeKey } from '@bodiless/core';
 
 const DemoStyleTable = asTableToken({
   Meta: flowHoc.meta.term('Type')('Table'),
