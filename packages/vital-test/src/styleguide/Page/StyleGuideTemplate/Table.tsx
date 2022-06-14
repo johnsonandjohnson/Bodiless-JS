@@ -83,31 +83,31 @@ const SecondColumnHighlighted = as(
 )(TableClean);
 
 /* @todo
-  * Rendered only the two types of images available in flow container as separate components.
-  * To do is provide all variations we want tested individually.
-  */
+   * Rendered only the two types of images available in flow container as separate components.
+   * To do is provide all variations we want tested individually.
+   */
 const Examples = (props: any) => (
-   <>
-     <DefaultTable />
-     <hr className="my-4" />
-     <StripedTable />
-     <hr className="my-4" />
-     <HoverTable />
-     <hr className="my-4" />
-     <BorderedTable />
-     <hr className="my-4" />
-     <BottomBorderTable />
-     <hr className="my-4" />
-     <HeaderFooterTable />
-     <hr className="my-4" />
-     <ScrollingTable />
-     <hr className="my-4" />
-     <FirstColumnHeaderTable />
-     <hr className="my-4" />
-     <PrimaryHeaderFooter />
-     <hr className="my-4" />
-     <SecondColumnHighlighted />
-   </>
+    <>
+      <DefaultTable />
+      <hr className="my-4" />
+      <StripedTable />
+      <hr className="my-4" />
+      <HoverTable />
+      <hr className="my-4" />
+      <BorderedTable />
+      <hr className="my-4" />
+      <BottomBorderTable />
+      <hr className="my-4" />
+      <HeaderFooterTable />
+      <hr className="my-4" />
+      <ScrollingTable />
+      <hr className="my-4" />
+      <FirstColumnHeaderTable />
+      <hr className="my-4" />
+      <PrimaryHeaderFooter />
+      <hr className="my-4" />
+      <SecondColumnHighlighted />
+    </>
 );
 
 export const Table = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
