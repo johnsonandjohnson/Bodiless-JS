@@ -25,7 +25,10 @@ import { asPDPTemplateToken } from '../PDPTemplateClean';
 import { vitalGenericTemplate } from '../../GenericTemplate';
 import { TemplateNodeKeys } from '../../TemplatesNodeKeys';
 
-const Default = asPDPTemplateToken(vitalGenericTemplate.Default, {
+const Default = asPDPTemplateToken(vitalGenericTemplate.Base, {
+  Meta: {
+    title: 'Product Detail Listing',
+  },
   Components: {
     TopContent: replaceWith(() => null),
     GA4Helmet: replaceWith(GA4DataLayerProductItemHelmet),
