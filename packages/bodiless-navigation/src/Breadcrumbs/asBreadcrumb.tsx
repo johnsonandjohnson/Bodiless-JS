@@ -107,7 +107,7 @@ const asBreadcrumb = ({
       return () => {
         store.deleteItem(item);
       };
-    }, []);
+    }, [titleNode.data, linkNode.data]);
 
     return (
       <BreadcrumbContextProvider value={item}>
