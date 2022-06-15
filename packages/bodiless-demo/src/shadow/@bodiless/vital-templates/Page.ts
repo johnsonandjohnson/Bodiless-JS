@@ -1,13 +1,13 @@
 import { on } from '@bodiless/fclasses';
 import { asFluidToken } from '@bodiless/vital-elements';
-import { vitalPageBase, GenericTemplateClean, vitalGenericTemplate } from '@bodiless/vital-templates';
-import { WithNoTopContent } from './GenericTemplate';
+import { vitalPageBase, GenericTemplateClean } from '@bodiless/vital-templates';
+import { NoTopContent } from './GenericTemplate';
 
 const Default = asFluidToken(
   vitalPageBase.Base,
   {
     Components: {
-      NoTopContent: on(GenericTemplateClean)(vitalGenericTemplate.Base, WithNoTopContent),
+      NoTopContent: on(GenericTemplateClean)(NoTopContent),
     },
   }
 );

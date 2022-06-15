@@ -1,25 +1,24 @@
 import { vitalGenericTemplateBase, asGenericTemplateToken } from '@bodiless/vital-templates';
 import { vitalSpacing } from '@bodiless/vital-elements';
 import {
-  as, replaceWith, flowIf, not, Fragment
+  as, replaceWith, Fragment
 } from '@bodiless/fclasses';
-import { useNode } from '@bodiless/core';
 
-const isHomePage = () => useNode().node.pagePath === '/';
+const NoTopContent = asGenericTemplateToken(
+  vitalGenericTemplateBase.Base,
+  {
+    Components: {
+      TopContent: replaceWith(Fragment),
+      TopWrapper: replaceWith(Fragment),
+    },
+    Meta: {
+      title: 'Generic With No Hero',
+    },
+  }
+);
 
-const WithNoTopContent = asGenericTemplateToken({
-  Flow: flowIf(not(isHomePage)),
-  Components: {
-    TopContent: replaceWith(Fragment),
-    TopWrapper: replaceWith(Fragment),
-  },
-  Meta: {
-    title: 'No Top Content',
-  },
-});
-
-const Default = asGenericTemplateToken(
-  vitalGenericTemplateBase.Default,
+const Generic = asGenericTemplateToken(
+  vitalGenericTemplateBase.Generic,
   {
     Spacing: {
       TopWrapper: as(
@@ -32,9 +31,9 @@ const Default = asGenericTemplateToken(
 
 export default {
   ...vitalGenericTemplateBase,
-  Default,
+  Generic,
 };
 
 export {
-  WithNoTopContent,
+  NoTopContent,
 };
