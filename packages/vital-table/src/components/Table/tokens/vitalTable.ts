@@ -22,7 +22,7 @@ import {
   addProps,
 } from '@bodiless/fclasses';
 import {
-  asBodilessTable, useIsFirstColumn, useIsInBody, useIsOddRow, useIsSecondColumn,
+  asBodilessTable, useIsFirstColumn, useIsInBody, useIsOddRow, useIsSecondColumn, useIsThirdColumn,
 } from '@bodiless/table';
 import { vitalRichText, RichTextClean } from '@bodiless/vital-editors';
 import { vitalColor } from '@bodiless/vital-elements';
@@ -76,12 +76,22 @@ const WithFirstColumnHeader = asTableToken({
 });
 
 /**
- * Token which adds header design to first column
+ * Token which adds header design to second column
  */
 const WithSecondColumnHighlighted = asTableToken({
   Meta: flowHoc.meta.term('Header')('Second Column highlighted'),
   Theme: {
     Cell: flowIf(useIsSecondColumn)(as(vitalColor.BgSecondaryTable)),
+  }
+});
+
+/**
+ * Token which adds header design to third column
+ */
+const WithThirdColumnHighlighted = asTableToken({
+  Meta: flowHoc.meta.term('Header')('Third Column highlighted'),
+  Theme: {
+    Cell: flowIf(useIsThirdColumn)(as(vitalColor.BgSecondaryTable)),
   }
 });
 
@@ -141,7 +151,7 @@ const WithLightHeaderFooter = asTableToken({
  * Token which add header background to table.
  */
 const WithPrimaryHeaderFooter = asTableToken({
-  Meta: flowHoc.meta.term('Header')('Light Header'),
+  Meta: flowHoc.meta.term('Header')('Primary Header'),
   Theme: {
     THead: vitalColor.BgPrimaryBrand,
     TFoot: vitalColor.BgPrimaryBrand,
@@ -167,6 +177,7 @@ export default {
   WithLightHeaderFooter,
   WithFirstColumnHeader,
   WithSecondColumnHighlighted,
+  WithThirdColumnHighlighted,
   WithPrimaryHeaderFooter,
   WithScrolling,
   WithFlowContainerPreview,
