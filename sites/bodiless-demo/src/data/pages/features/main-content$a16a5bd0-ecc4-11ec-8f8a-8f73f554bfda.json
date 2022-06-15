@@ -1,0 +1,18 @@
+[
+  {
+    "type": "H1",
+    "children": [
+      {
+        "text": "Features"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "The features are compared to other non-cms JAMStack."
+      }
+    ]
+  }
+]

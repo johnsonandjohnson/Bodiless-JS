@@ -1,9 +1,9 @@
 {
   "items": [
     {
-      "uuid": "3a39a450-dad8-11ec-a532-8b7ededd5bb5",
+      "uuid": "a16a5bd0-ecc4-11ec-8f8a-8f73f554bfda",
       "wrapperProps": {
-        "className": "w-full"
+        "className": "w-full lg:w-1/2"
       },
       "type": "RichText"
     },
@@ -15,25 +15,11 @@
       "type": "SecondHighlightedTable"
     },
     {
-      "uuid": "5a16d680-dad8-11ec-a532-8b7ededd5bb5",
-      "wrapperProps": {
-        "className": "w-full"
-      },
-      "type": "RichText"
-    },
-    {
       "uuid": "5bfcad80-dad8-11ec-a532-8b7ededd5bb5",
       "wrapperProps": {
         "className": "w-full"
       },
       "type": "SecondHighlightedTable"
-    },
-    {
-      "uuid": "6827c270-dad8-11ec-a532-8b7ededd5bb5",
-      "wrapperProps": {
-        "className": "w-full"
-      },
-      "type": "RichText"
     },
     {
       "uuid": "69f6dd20-dad8-11ec-a532-8b7ededd5bb5",
@@ -43,13 +29,6 @@
       "type": "SecondHighlightedTable"
     },
     {
-      "uuid": "7984f330-dad8-11ec-a532-8b7ededd5bb5",
-      "wrapperProps": {
-        "className": "w-full"
-      },
-      "type": "RichText"
-    },
-    {
       "uuid": "a1c0a1f0-dad8-11ec-a532-8b7ededd5bb5",
       "wrapperProps": {
         "className": "w-full"
@@ -57,25 +36,11 @@
       "type": "SecondHighlightedTable"
     },
     {
-      "uuid": "7d6ded30-dad8-11ec-a532-8b7ededd5bb5",
-      "wrapperProps": {
-        "className": "w-full"
-      },
-      "type": "RichText"
-    },
-    {
       "uuid": "aa5c0070-dad8-11ec-a532-8b7ededd5bb5",
       "wrapperProps": {
         "className": "w-full"
       },
-      "type": "SecondHighlightedTable"
-    },
-    {
-      "uuid": "820ddb20-dad8-11ec-a532-8b7ededd5bb5",
-      "wrapperProps": {
-        "className": "w-full"
-      },
-      "type": "RichText"
+      "type": "ThirdHighlightedTable"
     },
     {
       "uuid": "b4dd35f0-dad8-11ec-a532-8b7ededd5bb5",
@@ -85,18 +50,25 @@
       "type": "SecondHighlightedTable"
     },
     {
-      "uuid": "85f91f10-dad8-11ec-a532-8b7ededd5bb5",
-      "wrapperProps": {
-        "className": "w-full"
-      },
-      "type": "RichText"
-    },
-    {
       "uuid": "b0848a30-dad8-11ec-a532-8b7ededd5bb5",
       "wrapperProps": {
         "className": "w-full"
       },
-      "type": "ThirdHighlightedTable"
+      "type": "SecondHighlightedTable"
+    },
+    {
+      "uuid": "62f35770-ecc5-11ec-8f8a-8f73f554bfda",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/2"
+      },
+      "type": "RichText"
+    },
+    {
+      "uuid": "f33625c0-ecc4-11ec-8f8a-8f73f554bfda",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/2"
+      },
+      "type": "ListBulletedLinked"
     }
   ]
 }

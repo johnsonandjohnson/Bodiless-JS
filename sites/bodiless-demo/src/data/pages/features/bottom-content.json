@@ -1,11 +1,11 @@
 {
   "items": [
     {
-      "uuid": "d9624550-dad8-11ec-a532-8b7ededd5bb5",
+      "uuid": "e3ace720-ecc3-11ec-9a12-a927e6b1fbeb",
       "wrapperProps": {
         "className": "w-full"
       },
-      "type": "ButtonPrimary_"
+      "type": "GetStarted"
     }
   ]
 }
