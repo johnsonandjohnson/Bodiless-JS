@@ -35,7 +35,6 @@ const TableVariations = {
   Stripes: vitalTable.WithRowStripes,
   Hoverable: vitalTable.WithHoverable,
   ScrollingTable: vitalTable.WithScrolling,
-  WithSecondColumnHighlighted: vitalTable.WithSecondColumnHighlighted,
 };
 
 const BorderDecorationVariations = {
