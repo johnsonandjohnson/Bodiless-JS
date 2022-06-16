@@ -151,7 +151,7 @@ interface VitalCardCore {
  * @category Token Collection
  * @see [[CardClean]]
  */
-interface VitalCard extends
+export interface VitalCard extends
   VitalCardBase,
   VitalCardHero,
   VitalCardCategory,
@@ -160,9 +160,12 @@ interface VitalCard extends
   VitalCardCore
 {}
 
-export type { VitalCard };
-
-export default {
+/**
+ * Tokens for cards.
+ *
+ * @category Token Collection
+ */
+const vitalCard: VitalCard = {
   Base,
   Default,
   Basic,
@@ -186,3 +189,5 @@ export default {
   WithFlowContainerPreview,
   WithFlexGrowImage,
 };
+
+export default vitalCard;

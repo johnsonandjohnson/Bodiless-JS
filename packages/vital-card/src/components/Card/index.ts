@@ -12,7 +12,12 @@
  * limitations under the License.
  */
 
-import vitalCardBaseOrig, { VitalCard } from './tokens/vitalCard';
+import vitalCardBaseOrig from './tokens/vitalCard';
+import type { VitalCard } from './tokens/vitalCard';
+import CardClean, { asCardToken } from './CardClean';
+import type { CardComponents } from './CardClean';
+import vitalCard from './tokens';
+import { vitalCardStatic, CardStatic } from './index.bl-edit';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
@@ -21,7 +26,13 @@ import vitalCardBaseOrig, { VitalCard } from './tokens/vitalCard';
  */
 const vitalCardBase = vitalCardBaseOrig;
 
-export { asCardToken } from './CardClean';
-export type { CardComponents } from './CardClean';
-export { VitalCard, vitalCardBase };
-export { CardClean, vitalCard } from './index.bl-edit';
+export {
+  asCardToken,
+  CardClean,
+  CardStatic,
+  vitalCard,
+  vitalCardBase,
+  vitalCardStatic,
+};
+
+export type { CardComponents, VitalCard };

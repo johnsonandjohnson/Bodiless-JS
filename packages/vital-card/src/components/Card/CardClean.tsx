@@ -193,22 +193,25 @@ const CardClean = as(
 /**
  * A token modifier that respects the Card Compoments.
  *
- * @category Component
+ * @category Token Collection
  */
 const asCardToken = asVitalTokenSpec<CardComponents>();
-type CardToken = typeof asCardToken;
+
+// These are used in definnig the VitalCard interface.
+const cardToken = asCardToken();
+type CardToken = typeof cardToken;
 
 const CardDescriptionPreview = () => <span className="bl-text-gray-800">Description</span>;
 
-export default CardClean;
-
 /**
  * Use this version of the card when all components are static.
+ *
  * @category Component
  */
 const CardStatic: ComponentType<CardProps> = withoutHydration()(CardClean);
 
+export default CardClean;
 export {
-  CardClean, asCardToken, CardDescriptionPreview, CardStatic
+  asCardToken, CardDescriptionPreview, CardStatic
 };
 export type { CardToken };

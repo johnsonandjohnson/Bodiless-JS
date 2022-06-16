@@ -259,6 +259,10 @@ export interface VitalCardFlowContainer {
   WithProductVariations: FluidToken,
 }
 
+/**
+ *
+ * @category Token Collection
+ */
 const vitalCardFlowContainer: VitalCardFlowContainer = {
   BasicVariations,
   HeroVariations,

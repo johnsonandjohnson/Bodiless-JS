@@ -13,8 +13,9 @@
  */
 
 import vitalCardFlowContainer from './tokens';
-import vitalCardFlowContainerBaseOrig from './tokens/vitalCardFlowContainer';
-import type VitalCardFlowContainer from './tokens';
+import vitalCardFlowContainerBaseOrig, {
+  VitalCardFlowContainer
+} from './tokens/vitalCardFlowContainer';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
