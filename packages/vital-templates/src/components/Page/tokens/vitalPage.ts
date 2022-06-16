@@ -39,6 +39,8 @@ const Base = asFluidToken({
   },
   Components: {
     _default: on(GenericTemplateClean)(vitalGenericTemplate.Generic),
+    Default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
+    Base: on(GenericTemplateClean)(vitalGenericTemplate.Base),
     PDP: on(PDPTemplateClean)(vitalPDPTemplate.Default),
     Search: on(GenericTemplateClean)(vitalGenericTemplate.Search),
     ContentListing: on(GenericTemplateClean)(vitalGenericTemplate.ContentListing),

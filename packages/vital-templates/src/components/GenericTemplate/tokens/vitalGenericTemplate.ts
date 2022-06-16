@@ -119,6 +119,12 @@ const ContentListing = asGenericTemplateToken({
     ),
   }
 });
+const Default = asGenericTemplateToken({
+  ...Base,
+  Meta: {
+    title: 'Default',
+  },
+});
 
 const Generic = asGenericTemplateToken({
   ...Base,
@@ -143,6 +149,7 @@ const Search = asGenericTemplateToken({
 
 export default {
   Base,
+  Default,
   Generic,
   ContentListing,
   WithNoBreadcrumbsOnHomePage,
