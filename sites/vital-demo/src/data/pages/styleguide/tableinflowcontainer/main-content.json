@@ -118,6 +118,20 @@
         "className": "w-full lg:w-1/2"
       },
       "type": "TableScrollingTableBordersFirstColumnHeader"
+    },
+    {
+      "uuid": "58c58430-ece8-11ec-b456-e90cbc1ee11e",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "RichText"
+    },
+    {
+      "uuid": "6a2cee20-ece8-11ec-b456-e90cbc1ee11e",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/2"
+      },
+      "type": "TableStripesBordersPrimaryHeaderFooter"
     }
   ]
 }
