@@ -67,7 +67,7 @@ bodiless-table/lib/types.d.ts:21
 
 #### Defined in
 
-[vital-table/src/components/Table/TableClean.tsx:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/d6b0fc9c/packages/vital-table/src/components/Table/TableClean.tsx#L23)
+[vital-table/src/components/Table/TableClean.tsx:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/76148f59/packages/vital-table/src/components/Table/TableClean.tsx#L23)
 
 ___
 
@@ -77,7 +77,7 @@ ___
 
 #### Defined in
 
-[vital-table/src/components/Table/TableClean.tsx:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/d6b0fc9c/packages/vital-table/src/components/Table/TableClean.tsx#L25)
+[vital-table/src/components/Table/TableClean.tsx:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/76148f59/packages/vital-table/src/components/Table/TableClean.tsx#L25)
 
 ___
 
@@ -92,16 +92,19 @@ ___
 | `Default` | `TokenSpec`<[`TableComponents`](README.md#tablecomponents), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
 | `WithBorders` | `TokenSpec`<[`TableComponents`](README.md#tablecomponents), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
 | `WithBottomBorders` | `TokenSpec`<[`TableComponents`](README.md#tablecomponents), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
-| `WithFirtColumnHeader` | `TokenSpec`<[`TableComponents`](README.md#tablecomponents), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
+| `WithFirstColumnHeader` | `TokenSpec`<[`TableComponents`](README.md#tablecomponents), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
 | `WithFlowContainerPreview` | `TokenSpec`<[`TableComponents`](README.md#tablecomponents), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
 | `WithHoverable` | `TokenSpec`<[`TableComponents`](README.md#tablecomponents), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
 | `WithLightHeaderFooter` | `TokenSpec`<[`TableComponents`](README.md#tablecomponents), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
+| `WithPrimaryHeaderFooter` | `TokenSpec`<[`TableComponents`](README.md#tablecomponents), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
 | `WithRowStripes` | `TokenSpec`<[`TableComponents`](README.md#tablecomponents), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
 | `WithScrolling` | `TokenSpec`<[`TableComponents`](README.md#tablecomponents), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
+| `WithSecondColumnHighlighted` | `TokenSpec`<[`TableComponents`](README.md#tablecomponents), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
+| `WithThirdColumnHighlighted` | `TokenSpec`<[`TableComponents`](README.md#tablecomponents), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
 
 #### Defined in
 
-[vital-table/src/components/Table/tokens/vitalTable.ts:140](https://github.com/johnsonandjohnson/Bodiless-JS/blob/d6b0fc9c/packages/vital-table/src/components/Table/tokens/vitalTable.ts#L140)
+[vital-table/src/components/Table/tokens/vitalTable.ts:171](https://github.com/johnsonandjohnson/Bodiless-JS/blob/76148f59/packages/vital-table/src/components/Table/tokens/vitalTable.ts#L171)
 
 ___
 
@@ -117,7 +120,7 @@ ___
 
 #### Defined in
 
-[vital-table/src/components/FlowContainer/index.ts:61](https://github.com/johnsonandjohnson/Bodiless-JS/blob/d6b0fc9c/packages/vital-table/src/components/FlowContainer/index.ts#L61)
+[vital-table/src/components/FlowContainer/index.ts:62](https://github.com/johnsonandjohnson/Bodiless-JS/blob/76148f59/packages/vital-table/src/components/FlowContainer/index.ts#L62)
 
 ## Functions
 
@@ -137,4 +140,4 @@ ___
 
 #### Defined in
 
-[vital-table/src/components/Table/TableClean.tsx:26](https://github.com/johnsonandjohnson/Bodiless-JS/blob/d6b0fc9c/packages/vital-table/src/components/Table/TableClean.tsx#L26)
+[vital-table/src/components/Table/TableClean.tsx:26](https://github.com/johnsonandjohnson/Bodiless-JS/blob/76148f59/packages/vital-table/src/components/Table/TableClean.tsx#L26)
