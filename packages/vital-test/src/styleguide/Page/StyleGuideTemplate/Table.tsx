@@ -88,10 +88,6 @@ const ThirdColumnHighlighted = as(
   withNodeKey('thirdcolumnhighlightedtable'),
 )(TableClean);
 
-/* @todo
-   * Rendered only the two types of images available in flow container as separate components.
-   * To do is provide all variations we want tested individually.
-   */
 const Examples = (props: any) => (
     <>
       <DefaultTable />
