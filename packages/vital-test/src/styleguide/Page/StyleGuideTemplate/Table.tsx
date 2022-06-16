@@ -60,7 +60,7 @@ const HeaderFooterTable = as(
 
 const FirstColumnHeaderTable = as(
   vitalTable.Default,
-  vitalTable.WithFirtColumnHeader,
+  vitalTable.WithFirstColumnHeader,
   withNodeKey('firstcolumntable'),
 )(TableClean);
 
@@ -70,28 +70,48 @@ const ScrollingTable = as(
   withNodeKey('scrollingtable'),
 )(TableClean);
 
-/* @todo
-  * Rendered only the two types of images available in flow container as separate components.
-  * To do is provide all variations we want tested individually.
-  */
+const PrimaryHeaderFooter = as(
+  vitalTable.Default,
+  vitalTable.WithPrimaryHeaderFooter,
+  withNodeKey('primaryheadertable'),
+)(TableClean);
+
+const SecondColumnHighlighted = as(
+  vitalTable.Default,
+  vitalTable.WithSecondColumnHighlighted,
+  withNodeKey('secondcolumnhighlightedtable'),
+)(TableClean);
+
+const ThirdColumnHighlighted = as(
+  vitalTable.Default,
+  vitalTable.WithThirdColumnHighlighted,
+  withNodeKey('thirdcolumnhighlightedtable'),
+)(TableClean);
+
 const Examples = (props: any) => (
-   <>
-     <DefaultTable />
-     <hr className="my-4" />
-     <StripedTable />
-     <hr className="my-4" />
-     <HoverTable />
-     <hr className="my-4" />
-     <BorderedTable />
-     <hr className="my-4" />
-     <BottomBorderTable />
-     <hr className="my-4" />
-     <HeaderFooterTable />
-     <hr className="my-4" />
-     <ScrollingTable />
-     <hr className="my-4" />
-     <FirstColumnHeaderTable />
-   </>
+    <>
+      <DefaultTable />
+      <hr className="my-4" />
+      <StripedTable />
+      <hr className="my-4" />
+      <HoverTable />
+      <hr className="my-4" />
+      <BorderedTable />
+      <hr className="my-4" />
+      <BottomBorderTable />
+      <hr className="my-4" />
+      <HeaderFooterTable />
+      <hr className="my-4" />
+      <ScrollingTable />
+      <hr className="my-4" />
+      <FirstColumnHeaderTable />
+      <hr className="my-4" />
+      <PrimaryHeaderFooter />
+      <hr className="my-4" />
+      <SecondColumnHighlighted />
+      <hr className="my-4" />
+      <ThirdColumnHighlighted />
+    </>
 );
 
 export const Table = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.4...v1.0.0-rc.5) (2022-06-16)
+
+**Note:** Version bump only for package @bodiless/ga4
+
+
+
+
+
 # [1.0.0-rc.4](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.3...v1.0.0-rc.4) (2022-06-16)
 
 **Note:** Version bump only for package @bodiless/ga4
