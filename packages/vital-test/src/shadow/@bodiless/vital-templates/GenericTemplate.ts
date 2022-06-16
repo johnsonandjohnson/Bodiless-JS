@@ -17,7 +17,7 @@ import {
 } from '@bodiless/fclasses';
 import { asGenericTemplateToken, vitalGenericTemplateBase } from '@bodiless/vital-templates';
 
-const Default = asGenericTemplateToken(vitalGenericTemplateBase.Default, {
+const Generic = asGenericTemplateToken(vitalGenericTemplateBase.Generic, {
   Behavior: {
     TemplateWrapper: flowHoc(
       replaceWith(Div),
@@ -28,5 +28,5 @@ const Default = asGenericTemplateToken(vitalGenericTemplateBase.Default, {
 
 export default {
   ...vitalGenericTemplateBase,
-  Default,
+  Generic,
 };

@@ -23,6 +23,8 @@ import {
   useIsEvenColumn,
   useIsLastColumn,
   useIsFirstColumn,
+  useIsSecondColumn,
+  useIsThirdColumn,
   useIsOddColumnn,
   useIsInBody,
   useIsInFoot,
@@ -150,6 +152,62 @@ describe('ForCell HelperFunctions', () => {
         withContextValue(TableColumnContext)({ index: 1, name: '' }),
       )(Fragment);
       const { result } = renderHook(useIsFirstColumn, { wrapper });
+      expect(result.current).toBeFalsy();
+    });
+  });
+  describe('useIsSecondColumn', () => {
+    test('returns true if Column is Second', () => {
+      const wrapper = flow(
+        withContextValue(TableContext)({
+          rows: [],
+          columns: ['0', '1'],
+          headRows: [],
+          footRows: [],
+        }),
+        withContextValue(TableColumnContext)({ index: 1, name: '' }),
+      )(Fragment);
+      const { result } = renderHook(useIsSecondColumn, { wrapper });
+      expect(result.current).toBeTruthy();
+    });
+    test('returns false if Column is not first', () => {
+      const wrapper = flow(
+        withContextValue(TableContext)({
+          rows: [],
+          columns: ['0', '1'],
+          headRows: [],
+          footRows: [],
+        }),
+        withContextValue(TableColumnContext)({ index: 0, name: '' }),
+      )(Fragment);
+      const { result } = renderHook(useIsSecondColumn, { wrapper });
+      expect(result.current).toBeFalsy();
+    });
+  });
+  describe('useIsThirdColumn', () => {
+    test('returns true if Column is Third', () => {
+      const wrapper = flow(
+        withContextValue(TableContext)({
+          rows: [],
+          columns: ['0', '1', '2', '3'],
+          headRows: [],
+          footRows: [],
+        }),
+        withContextValue(TableColumnContext)({ index: 2, name: '' }),
+      )(Fragment);
+      const { result } = renderHook(useIsThirdColumn, { wrapper });
+      expect(result.current).toBeTruthy();
+    });
+    test('returns false if Column is not first', () => {
+      const wrapper = flow(
+        withContextValue(TableContext)({
+          rows: [],
+          columns: ['0', '1', '2', '3'],
+          headRows: [],
+          footRows: [],
+        }),
+        withContextValue(TableColumnContext)({ index: 0, name: '' }),
+      )(Fragment);
+      const { result } = renderHook(useIsThirdColumn, { wrapper });
       expect(result.current).toBeFalsy();
     });
   });
