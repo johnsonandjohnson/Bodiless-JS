@@ -17,7 +17,7 @@ import {
   on, varyDesigns, flowHoc, extendDesign,
 } from '@bodiless/fclasses';
 import {
-  CardClean, vitalCard, asCardToken,
+  CardStatic, vitalCardStatic, asCardToken,
 } from '../../Card';
 
 /*
@@ -27,9 +27,9 @@ const ContentVariations = {
   All: asCardToken({
     Meta: flowHoc.meta.term('Features')('With All Fields'),
   }),
-  NoTitle: vitalCard.WithNoTitle,
-  NoDescription: vitalCard.WithNoDescription,
-  NoEyebrow: vitalCard.WithNoEyebrow,
+  NoTitle: vitalCardStatic.WithNoTitle,
+  NoDescription: vitalCardStatic.WithNoDescription,
+  NoEyebrow: vitalCardStatic.WithNoEyebrow,
 };
 
 /*
@@ -37,12 +37,12 @@ const ContentVariations = {
  */
 const HorizontalVariations = varyDesigns(
   {
-    Left: vitalCard.WithHorizontalLeftOrientation,
-    Right: vitalCard.WithHorizontalRightOrientation,
+    Left: vitalCardStatic.WithHorizontalLeftOrientation,
+    Right: vitalCardStatic.WithHorizontalRightOrientation,
   },
   {
-    ContentTop: vitalCard.WithHorizontalContentAtTop,
-    ContentCentered: vitalCard.WithHorizontalContentCentered,
+    ContentTop: vitalCardStatic.WithHorizontalContentAtTop,
+    ContentCentered: vitalCardStatic.WithHorizontalContentCentered,
   },
 );
 
@@ -59,7 +59,7 @@ const HorizontalOrientationVariations = varyDesigns(
  */
 const VerticalOrientationVariations = varyDesigns(
   {
-    Vertical: vitalCard.WithVerticalOrientation,
+    Vertical: vitalCardStatic.WithVerticalOrientation,
   },
   ContentVariations,
 );
@@ -76,13 +76,13 @@ const OrientationVariations = extendDesign(
  * Link CTA variations
  */
 const LinkVariations = {
-  Link: vitalCard.WithPrimaryTextLink,
-  PrimaryButton: vitalCard.WithPrimaryButton,
-  SecondaryButton: vitalCard.WithSecondaryButton,
+  Link: vitalCardStatic.WithPrimaryTextLink,
+  PrimaryButton: vitalCardStatic.WithPrimaryButton,
+  SecondaryButton: vitalCardStatic.WithSecondaryButton,
 };
 
 const BasicVariation = {
-  Card: on(CardClean)(vitalCard.Basic, vitalCard.WithFlowContainerPreview),
+  Card: on(CardStatic)(vitalCardStatic.Basic, vitalCardStatic.WithFlowContainerPreview),
 };
 
 const BasicVariations = varyDesigns(
@@ -98,7 +98,7 @@ const WithBasicVariations = asFluidToken({
 
 const HeroVariations = varyDesigns(
   {
-    Hero: on(CardClean)(vitalCard.HeroBase, vitalCard.WithFlowContainerPreview),
+    Hero: on(CardStatic)(vitalCardStatic.HeroBase, vitalCardStatic.WithFlowContainerPreview),
   },
   LinkVariations,
   HorizontalVariations,
@@ -116,7 +116,7 @@ const WithHeroVariations = asFluidToken({
   */
 
 const CategoryVariations = {
-  Category: on(CardClean)(vitalCard.Category, vitalCard.WithFlowContainerPreview),
+  Category: on(CardStatic)(vitalCardStatic.Category, vitalCardStatic.WithFlowContainerPreview),
 };
 
 const WithCategoryVariations = asFluidToken({
@@ -127,14 +127,14 @@ const WithCategoryVariations = asFluidToken({
 
 const TopicVariations = varyDesigns(
   {
-    Topic: on(CardClean)(vitalCard.Topic, vitalCard.WithFlowContainerPreview),
+    Topic: on(CardStatic)(vitalCardStatic.Topic, vitalCardStatic.WithFlowContainerPreview),
   },
   LinkVariations,
   {
     All: asCardToken({
       Meta: flowHoc.meta.term('Features')('With All Fields'),
     }),
-    NoEyebrow: vitalCard.WithNoEyebrow,
+    NoEyebrow: vitalCardStatic.WithNoEyebrow,
   }
 );
 
@@ -151,8 +151,8 @@ const ProductContentVariations = {
   All: asCardToken({
     Meta: flowHoc.meta.term('Features')('With All Fields'),
   }),
-  NoDescription: vitalCard.WithNoDescription,
-  NoEyebrow: vitalCard.WithNoEyebrow,
+  NoDescription: vitalCardStatic.WithNoDescription,
+  NoEyebrow: vitalCardStatic.WithNoEyebrow,
   NoRatings: asCardToken({
     Meta: flowHoc.meta.term('Features')('No Ratings'),
   }),
@@ -160,7 +160,7 @@ const ProductContentVariations = {
 
 const ProductVariations = varyDesigns(
   {
-    Product: on(CardClean)(vitalCard.Product, vitalCard.WithFlowContainerPreview),
+    Product: on(CardStatic)(vitalCardStatic.Product, vitalCardStatic.WithFlowContainerPreview),
   },
   {
     FullyClickable: asCardToken({ Meta: flowHoc.meta.term('CTA Type')('Fully Clickable'), }),
@@ -210,39 +210,17 @@ export interface VitalCardFlowContainer {
    */
   WithCardVariations: FluidToken,
   /**
-   * Token defining the basic variations
+   * Composable token which adds basic card variations.
    * Defined by Fully clickable card with no visible CTA varied over
    *  - Orientation Properties
    *  - Content Varitions
    */
-  BasicVariations: FluidToken,
-  /**
-   * Token defining the hero variations
-   * Defined by HeroBase - horizontal only cards with visible CTA varied over
-   *  - Link Styles
-   *  - Horizontal Variations to vary on Left or Right Images & Content Top & Centered.
-   */
-  HeroVariations: FluidToken,
-  /**
-   * Token defining the topic variations
-   * Defined by vertical only cards and with CTA varied over
-   * - Link Variations
-   * - Content remove of eyebrow
-   */
-  TopicVariations: FluidToken,
-  /**
-   * Token defining the product variations
-   * Defined by vertical only cards
-   * - Fully Clickable or with Link Variations
-   * - Product content varations
-   */
-  ProductVariations: FluidToken,
-  /**
-   * Composable token which adds basic card variations.
-   */
   WithBasicVariations: FluidToken,
   /**
    * Composable token which adds hero card variations.
+   * Defined by HeroBase - horizontal only cards with visible CTA varied over
+   *  - Link Styles
+   *  - Horizontal Variations to vary on Left or Right Images & Content Top & Centered.
    */
   WithHeroVariations: FluidToken,
   /**
@@ -255,6 +233,9 @@ export interface VitalCardFlowContainer {
   WithTopicVariations: FluidToken,
   /**
    * Composable token which adds product card variations.
+   * Defined by vertical only cards and with CTA varied over
+   * - Link Variations
+   * - Content remove of eyebrow
    */
   WithProductVariations: FluidToken,
 }
@@ -264,10 +245,6 @@ export interface VitalCardFlowContainer {
  * @category Token Collection
  */
 const vitalCardFlowContainer: VitalCardFlowContainer = {
-  BasicVariations,
-  HeroVariations,
-  TopicVariations,
-  ProductVariations,
   WithBasicVariations,
   WithHeroVariations,
   WithCategoryVariations,
