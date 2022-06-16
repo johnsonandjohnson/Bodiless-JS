@@ -55,9 +55,6 @@ const WithNoBreadcrumbsOnHomePage = asGenericTemplateToken({
 });
 
 const Base = asGenericTemplateToken({
-  Meta: {
-    title: 'Base',
-  },
   Components: {
     PageWrapper: vitalLayout.Default,
     Breadcrumb: as(vitalBreadcrumbs.Default),
