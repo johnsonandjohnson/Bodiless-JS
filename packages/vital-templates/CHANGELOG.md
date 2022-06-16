@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.6](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.5...v1.0.0-rc.6) (2022-06-16)
+
+
+### Bug Fixes
+
+* **vital-templates:** Fix Template Names ([#1921](https://github.com/johnsonandjohnson/bodiless-js/issues/1921)) ([eb5fc55](https://github.com/johnsonandjohnson/bodiless-js/commit/eb5fc55b0b10d1421d7515cfe44daac399feeb76))
+
+
+
+
+
 # [1.0.0-rc.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.4...v1.0.0-rc.5) (2022-06-16)
 
 **Note:** Version bump only for package @bodiless/vital-templates
