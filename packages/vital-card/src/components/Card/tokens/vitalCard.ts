@@ -107,10 +107,10 @@ interface VitalCardCore {
    * ```js
    * import { vitalCard } from '@bodiless/vital-flowcontainer';
    *
-   * const Default = asFluidToken(vitalCard.Default, {
+   * const Default = asFluidToken(vitalCardStatic.Default, {
    *   Components: {
    *     MyComponent: on(cardClean)(
-   *       vitalCard.Default,
+   *       vitalCardStatic.Default,
    *       WithMyCustomBorder,
    *       WithNoDescription
    *     ),

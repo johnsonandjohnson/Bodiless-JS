@@ -193,9 +193,9 @@ export interface VitalCardBase {
    * ```js
    * import { vitalCard } from '@bodiless/vital-flowcontainer';
    *
-   * const Default = asFluidToken(vitalCard.Default, {
+   * const Default = asFluidToken(vitalCardStatic.Default, {
    *   Components: {
-   *     MyComponent: on(cardClean)(vitalCard.Default, WithCustomBorder),
+   *     MyComponent: on(cardClean)(vitalCardStatic.Default, WithCustomBorder),
    *   }
    * });
    * ```

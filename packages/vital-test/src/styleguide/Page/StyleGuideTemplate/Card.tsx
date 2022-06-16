@@ -19,7 +19,7 @@ import {
 } from '@bodiless/fclasses';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { vitalTypography } from '@bodiless/vital-elements';
-import { CardClean, vitalCard } from '@bodiless/vital-card';
+import { CardStatic, vitalCardStatic } from '@bodiless/vital-card';
 
 const Subtitle = as(vitalTypography.H2, 'pt-4')(H2);
 
@@ -27,58 +27,58 @@ const Subtitle = as(vitalTypography.H2, 'pt-4')(H2);
  * Default Card component.
  */
 const DefaultCard = as(
-  vitalCard.Default,
+  vitalCardStatic.Default,
   withNodeKey('default-card'),
-)(CardClean);
+)(CardStatic);
 
 /**
  * Vertical Card component.
  */
 const VerticalCard = as(
-  vitalCard.Default,
-  vitalCard.WithVerticalOrientation,
+  vitalCardStatic.Default,
+  vitalCardStatic.WithVerticalOrientation,
   withNodeKey('vertical-card'),
-)(CardClean);
+)(CardStatic);
 
 const HorizontalLeftCard = as(
-  vitalCard.Default,
-  vitalCard.WithHorizontalLeftOrientation,
-  vitalCard.WithHorizontalContentAtTop,
+  vitalCardStatic.Default,
+  vitalCardStatic.WithHorizontalLeftOrientation,
+  vitalCardStatic.WithHorizontalContentAtTop,
   withNodeKey('horizontal-left-card'),
-)(CardClean);
+)(CardStatic);
 const HorizontalLeftImageCenteredContentCard = as(
-  vitalCard.Default,
-  vitalCard.WithHorizontalLeftOrientation,
-  vitalCard.WithHorizontalContentCentered,
+  vitalCardStatic.Default,
+  vitalCardStatic.WithHorizontalLeftOrientation,
+  vitalCardStatic.WithHorizontalContentCentered,
   withNodeKey('horizontal-left-centered-card'),
-)(CardClean);
+)(CardStatic);
 const HorizontalRightCard = as(
-  vitalCard.Default,
-  vitalCard.WithHorizontalRightOrientation,
-  vitalCard.WithHorizontalContentAtTop,
+  vitalCardStatic.Default,
+  vitalCardStatic.WithHorizontalRightOrientation,
+  vitalCardStatic.WithHorizontalContentAtTop,
   withNodeKey('horizontal-right-card'),
-)(CardClean);
+)(CardStatic);
 const HorizontalRightImageCenteredContentCard = as(
-  vitalCard.Default,
-  vitalCard.WithHorizontalRightOrientation,
-  vitalCard.WithHorizontalContentCentered,
+  vitalCardStatic.Default,
+  vitalCardStatic.WithHorizontalRightOrientation,
+  vitalCardStatic.WithHorizontalContentCentered,
   withNodeKey('horizontal-right-centered-card'),
-)(CardClean);
+)(CardStatic);
 
 const HeroCard = as(
-  vitalCard.Hero,
+  vitalCardStatic.Hero,
   withNodeKey('hero-card'),
-)(CardClean);
+)(CardStatic);
 const HeroPrimaryButtonCard = as(
-  vitalCard.Hero,
-  vitalCard.WithPrimaryButton,
+  vitalCardStatic.Hero,
+  vitalCardStatic.WithPrimaryButton,
   withNodeKey('hero-card-primary-button'),
-)(CardClean);
+)(CardStatic);
 const HeroSecondaryButtonCard = as(
-  vitalCard.Hero,
-  vitalCard.WithSecondaryButton,
+  vitalCardStatic.Hero,
+  vitalCardStatic.WithSecondaryButton,
   withNodeKey('hero-card-secondary-button'),
-)(CardClean);
+)(CardStatic);
 
 const CardVariations = (props: any) => (
   <>

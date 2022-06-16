@@ -177,7 +177,7 @@ const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
  * @example
  * **Create a default card:**
  * ```
- * const DefaultCard = on(CardClean)(vitalCard.Default)
+ * const DefaultCard = on(CardClean)(vitalCardStatic.Default)
  * ```
  * @example
  * **Create a custom card using a token defined in your package**

@@ -15,7 +15,7 @@
 import { on, as } from '@bodiless/fclasses';
 import { asFilterableByGroup } from '@bodiless/filtering';
 import { asFluidToken, vitalColor } from '@bodiless/vital-elements';
-import { CardClean, vitalCard } from '@bodiless/vital-card';
+import { CardStatic, vitalCardStatic } from '@bodiless/vital-card';
 import { withViewItemsGA4Event, withSelectItemGA4Event, withRegisterGA4ProductData } from '@bodiless/ga4';
 
 const Default = asFluidToken({
@@ -23,11 +23,11 @@ const Default = asFluidToken({
     ComponentWrapper: asFilterableByGroup(),
   },
   Components: {
-    FilterableContent: on(CardClean)(
-      vitalCard.Default,
-      vitalCard.WithVerticalOrientation,
-      vitalCard.WithNoDescription,
-      vitalCard.WithFlexGrowImage,
+    FilterableContent: on(CardStatic)(
+      vitalCardStatic.Default,
+      vitalCardStatic.WithVerticalOrientation,
+      vitalCardStatic.WithNoDescription,
+      vitalCardStatic.WithFlexGrowImage,
     ),
   },
   Spacing: {
