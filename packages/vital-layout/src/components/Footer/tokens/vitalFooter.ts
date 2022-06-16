@@ -35,16 +35,16 @@ const Base = asFooterToken({
     FooterMenuWrapper: 'w-full',
   },
   Spacing: {
-    Wrapper: 'mt-10', // Vertical
+    Wrapper: 'mt-10',
     Container: as(
       vitalSpacing.WithSiteMargin,
       vitalSpacing.WithSiteXLConstraint,
-      '2xl:pt-16 2xl:pb-10', // Vertical
+      '2xl:pt-16 2xl:pb-10',
     ),
-    MenuRow: 'md:mb-8 2xl:mb-9', // Vertical
-    CopyrightRow: 'md:mb-8 md:mb-0 2xl:mb-9', // Vertical
+    MenuRow: 'md:mb-8 2xl:mb-9',
+    CopyrightRow: 'md:mb-0',
     Column2Wrapper: 'md:py-9',
-    FooterMenuWrapper: 'py-9 md:p-0', // Vertical
+    FooterMenuWrapper: 'py-9 md:p-0',
   },
   Theme: {
     Wrapper: vitalColor.BgSecondaryFooter,
@@ -78,9 +78,9 @@ const WithRewardsExpanding2XL = asFooterToken({
     ),
   },
   Spacing: {
-    Column1Wrapper: '2xl:py-9 2xl:pr-20', // Vertical
-    Column2Wrapper: '2xl:py-9 2xl:pr-20',
-    RewardsWrapper: 'md:mb-0', // Vertical
+    Column1Wrapper: '2xl:py-9 2xl:pr-20',
+    Column2Wrapper: '2xl:py-9',
+    RewardsWrapper: 'md:mb-0',
   },
   Theme: {
     RewardsWrapper: 'bg-vital-primary-card-bg 2xl:bg-vital-secondary-footer-bg',
