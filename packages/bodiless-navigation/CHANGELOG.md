@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.4](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.3...v1.0.0-rc.4) (2022-06-16)
+
+
+### Bug Fixes
+
+* **@bodiless/navigation:** warning in a console when switching from Edit mode to Review Mode ([#1873](https://github.com/johnsonandjohnson/bodiless-js/issues/1873)) ([d6b0fc9](https://github.com/johnsonandjohnson/bodiless-js/commit/d6b0fc9c173d7a6b18972951ae48a112889574b5))
+
+
+
+
+
 # [1.0.0-rc.3](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.2...v1.0.0-rc.3) (2022-06-10)
 
 **Note:** Version bump only for package @bodiless/navigation
