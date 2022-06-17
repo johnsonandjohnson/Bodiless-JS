@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/youtube",
-  "version": "1.0.0-rc.6",
+  "version": "1.0.0-rc.7",
   "description": "Bodiless YouTube component.",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
@@ -29,10 +29,10 @@
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.6",
-    "@bodiless/components": "^1.0.0-rc.6",
-    "@bodiless/core": "^1.0.0-rc.6",
-    "@bodiless/fclasses": "^1.0.0-rc.6",
+    "@bodiless/cli": "^1.0.0-rc.7",
+    "@bodiless/components": "^1.0.0-rc.7",
+    "@bodiless/core": "^1.0.0-rc.7",
+    "@bodiless/fclasses": "^1.0.0-rc.7",
     "lodash": "^4.17.19"
   },
   "peerDependencies": {
