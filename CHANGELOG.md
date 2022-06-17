@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.6...v1.0.0-rc.7) (2022-06-17)
+
+
+### Bug Fixes
+
+* **vital-layouts:** Make footer more flexible by separating our rewards/copyright ([#1917](https://github.com/johnsonandjohnson/bodiless-js/issues/1917)) ([36ebaad](https://github.com/johnsonandjohnson/bodiless-js/commit/36ebaadd2cca7d44ec9d32d7d5c036fa32599c76))
+
+
+
+
+
 # [1.0.0-rc.6](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.5...v1.0.0-rc.6) (2022-06-16)
 
 
