@@ -35,6 +35,10 @@ const BaseCategory = asCardToken(Base, {
   ),
 });
 
+/*
+ * Category - Extend BaseCategory as needed.
+ * TBD: For now assign directly to category.
+ */
 const Category = BaseCategory;
 export interface VitalCardCategory {
   /**

@@ -241,7 +241,6 @@ export interface VitalCardFlowContainer {
 }
 
 /**
- *
  * @category Token Collection
  */
 const vitalCardFlowContainer: VitalCardFlowContainer = {
