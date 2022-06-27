@@ -14,19 +14,19 @@
 
 import omit from 'lodash/omit';
 import {
-  flowHoc, replaceWith, Div, extendMeta, H1, H4, as
+  flowHoc, replaceWith, Div, extendMeta, H1, H4,
 } from '@bodiless/fclasses';
 import { vitalImage } from '@bodiless/vital-image';
-import { ButtonClean, vitalButtons } from '@bodiless/vital-buttons';
 import { vitalTypography } from '@bodiless/vital-elements';
-import { LinkClean, vitalLink } from '@bodiless/vital-link';
 import { asCardToken } from '../CardClean';
-import Base, { WithHorizontalOrientation } from './Base';
+import type { CardToken } from '../CardClean';
+import Base, {
+  WithHorizontalOrientationBase,
+  WithHorizontalLeftOrientation,
+  WithHorizontalContentCentered,
+} from './Base';
 
-/**
- * Hero Base Card Design.
- */
-const BaseHero = asCardToken({
+const HeroBase = asCardToken({
   ...Base,
   Editors: {
     ...Base.Editors,
@@ -43,7 +43,7 @@ const BaseHero = asCardToken({
   Behavior: {
     Image: vitalImage.WithEager,
   },
-  Layout: WithHorizontalOrientation.Layout,
+  Layout: WithHorizontalOrientationBase.Layout,
   Spacing: {
     ...Base.Spacing,
     ContentWrapper: 'px-10',
@@ -57,54 +57,54 @@ const BaseHero = asCardToken({
   },
   Meta: extendMeta(
     flowHoc.meta.term('Type')('Card'),
-    flowHoc.meta.term('Description')('Hero'),
-    flowHoc.meta.term('Orientation')('Horizontal'),
+    flowHoc.meta.term('Sub Type')('Hero'),
   ),
 });
 
-/*
- * Hero with vitalArrowLink
- */
-const Hero = asCardToken(BaseHero, {
-  Components: {
-    CTALink: replaceWith(LinkClean),
-  },
-  Theme: {
-    CTALink: vitalLink.PrimaryLink,
-  },
-  Meta: flowHoc.meta.term('Style')('Link'),
-});
+const Hero = asCardToken(
+  HeroBase,
+  WithHorizontalContentCentered,
+  WithHorizontalLeftOrientation,
+);
 
-/*
- * With vitalPrimaryButton
- */
-const WithPrimaryButton = asCardToken({
-  Components: {
-    CTAWrapper: replaceWith(Div),
-    CTALink: replaceWith(ButtonClean),
-  },
-  Theme: {
-    CTALink: as(vitalButtons.Primary, vitalButtons.WithArrow),
-  },
-  Meta: flowHoc.meta.term('Style')('Primary Button'),
-});
-
-/*
- * With vitalSecondaryButton
- */
-const WithSecondaryButton = asCardToken({
-  Components: {
-    CTAWrapper: replaceWith(Div),
-    CTALink: replaceWith(ButtonClean),
-  },
-  Theme: {
-    CTALink: as(vitalButtons.Secondary, vitalButtons.WithArrow),
-  },
-  Meta: flowHoc.meta.term('Style')('Secondary Button'),
-});
+export interface VitalCardHero {
+  /**
+   * Defines the Hero card for the Vital DS.  Intended use is first card on a page.
+   * - Extends the Base card.
+   * - Remove the Wrapper removes setting link for the the fully clickable card.
+   * - Components domain:
+   *   - Replaces Wrapper 'A' -> 'Div' to remove fully clickable feature
+   *   - Enables CTA Wrapper to make the CTA visible.
+   *   - Removes Eyebrow
+   *   - Title is replaced with H1.
+   *   - Description is replaced with H4.
+   * - Layout domain defines Hero with Horizontal Base
+   * - Spacing domain: add custom spacing to the hero card
+   * - Theme: eliminates the Typography spacing to allow Spacing domain to take fully control.
+   *
+   * #### Customizing:
+   *
+   * @example Add a component
+   * ```js
+   * import { vitalCard } from '@bodiless/vital-flowcontainer';
+   *
+   * const MyCustomHero = asCardToken(
+   *   HeroBase,
+   *   WithHorizontalContentCentered,
+   *   WithHorizontalRightOrientation,
+   *   WithNoDescription,
+   * );
+   * ```
+   */
+  HeroBase: CardToken,
+  /**
+   * Hero extends the HeroBase token and combines it to have image on left
+   * and content is vertically centered.
+   */
+  Hero: CardToken,
+}
 
 export {
+  HeroBase,
   Hero,
-  WithPrimaryButton,
-  WithSecondaryButton,
 };

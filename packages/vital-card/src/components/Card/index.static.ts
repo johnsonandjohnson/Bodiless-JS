@@ -13,8 +13,8 @@
  */
 
 import {
-  StaticBlock as CardClean,
-  staticTokenCollection as vitalCard,
+  StaticBlock as CardStatic,
+  staticTokenCollection as vitalCardStatic,
 } from '@bodiless/hydration';
 
-export { CardClean, vitalCard };
+export { CardStatic, vitalCardStatic };

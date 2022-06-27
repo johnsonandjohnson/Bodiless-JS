@@ -12,54 +12,17 @@
  * limitations under the License.
  */
 
-import { asFluidToken } from '@bodiless/vital-elements';
-import {
-  as, on, varyDesigns, flowHoc
-} from '@bodiless/fclasses';
-import {
-  CardClean, vitalCard, asCardToken,
-} from '../Card';
+import vitalCardFlowContainer from './tokens';
+import vitalCardFlowContainerBaseOrig, {
+  VitalCardFlowContainer
+} from './tokens/vitalCardFlowContainer';
 
-const BaseVariation = {
-  Card: on(CardClean)(vitalCard.Base, vitalCard.WithFlowContainerPreview),
-};
-const OrientationVariations = {
-  Vertical: vitalCard.WithVerticalOrientation,
-  Horizontal: vitalCard.WithHorizontalOrientation,
-};
-const ContentVariations = {
-  TitleDescription: asCardToken({
-    Meta: flowHoc.meta.term('Description')('With Eyebrow + Title + Description'),
-  }),
-  NoTitle: vitalCard.WithNoTitle,
-  NoDescription: vitalCard.WithNoDescription,
-  NoEyebrow: vitalCard.WithNoEyebrow,
-};
-
-const HeroVariations = varyDesigns(
-  {
-    HeroCard: on(CardClean)(vitalCard.Hero, vitalCard.WithFlowContainerPreview),
-  },
-  {
-    Link: asCardToken({
-      Meta: flowHoc.meta.term('Style')('Text Link'),
-    }),
-    PrimaryButton: as(vitalCard.Hero, vitalCard.WithPrimaryButton),
-    SecondaryButton: as(vitalCard.Hero, vitalCard.WithSecondaryButton),
-  },
-);
 /**
- * Token which adds Card variations to a flow container.
+ * Use this version of the vital card tokens when extending or shadowing.
+ * @category Token Collection
+ * @see vitalCard
  */
-const WithCardVariations = asFluidToken({
-  Components: {
-    ...HeroVariations,
-    ...varyDesigns(
-      BaseVariation,
-      ContentVariations,
-      OrientationVariations,
-    ),
-  }
-});
+const vitalCardFlowContainerBase = vitalCardFlowContainerBaseOrig;
 
-export const vitalCardFlowContainer = { WithCardVariations };
+export { vitalCardFlowContainer, vitalCardFlowContainerBase };
+export type { VitalCardFlowContainer };

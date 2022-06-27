@@ -12,7 +12,18 @@
  * limitations under the License.
  */
 
-import { CardStatic as CardClean } from './CardClean';
+import { CardStatic } from './CardClean';
 import vitalCard from './tokens';
 
-export { CardClean, vitalCard };
+/**
+ * Use this version of the token collection when all sub-components are static.
+ * Be sure to use it with `CardStatic` (not `CardClean`).
+ *
+ * @see [[CardStatic]]
+ * @see [[vitalCard]]
+ *
+ * @category Token Collection
+ */
+const vitalCardStatic = vitalCard;
+
+export { CardStatic, vitalCardStatic };

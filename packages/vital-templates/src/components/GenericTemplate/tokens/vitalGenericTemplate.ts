@@ -32,7 +32,7 @@ import { SearchLayoutClean, vitalSearchLayout } from '@bodiless/vital-search';
 import { vitalBreadcrumbs } from '@bodiless/vital-navigation';
 import { vitalImage } from '@bodiless/vital-image';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
-import { CardClean, vitalCard } from '@bodiless/vital-card';
+import { CardStatic, vitalCardStatic } from '@bodiless/vital-card';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
 import { TemplateNodeKeys } from '../../TemplatesNodeKeys';
 
@@ -63,7 +63,7 @@ const Base = asGenericTemplateToken({
       withDesign({
         Image: on(Img)(vitalImage.Hero),
         Video: on(YouTubeClean)(vitalYouTube.Hero),
-        HeroCard: on(CardClean)(vitalCard.Hero),
+        HeroCard: on(CardStatic)(vitalCardStatic.Hero),
       }),
     ),
     Content: as(vitalFlowContainer.Default),
