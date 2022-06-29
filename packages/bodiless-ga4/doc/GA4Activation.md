@@ -63,7 +63,7 @@ Visit the `/sites/SITENAME/src/data/site` folder and update the following three 
     {
       resolve: 'gatsby-plugin-google-tagmanager',
       options: {
-        id: process.env.GOOGLE_TAGMANAGER_ID || 'GTM-XXXXXXX',
+        id: 'GTM-XXXXXXX',
         // The data layer — to be set before GTM is loaded — should
         // be an object or a function that is executed in the browser.
         // Defaults to null.
