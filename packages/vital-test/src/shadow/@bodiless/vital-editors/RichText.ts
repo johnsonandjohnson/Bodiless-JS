@@ -29,6 +29,9 @@ const Default = asFluidToken({
   // Components: {
   //   ...omit(vitalRichTextBase.Default.Components, 'H1'),
   // },
+  // Theme: {
+  //   ...omit(vitalRichTextBase.Default.Theme, 'H1'),
+  // },
 });
 
 export default {
