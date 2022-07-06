@@ -103,6 +103,7 @@ Files to shadow:
 
 - [`vitalTypography`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Element/Typography/tokens/vitalTypography.ts)
 - [`vitalTextDecoration`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Element/TextDecoration/tokens/vitalTextDecoration.ts)
+- [`vitalSpacing`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Element/Spacing/tokens/vitalSpacing.ts)
 
 ### Option 2: Define Custom Tokens at Package Level
 
