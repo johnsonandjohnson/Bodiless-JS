@@ -250,6 +250,7 @@ components.
   - [Buttons](VitalDesignSystem/Components/VitalButtons/)  
   - [List/CompoundList](/VitalDesignSystem/Components/VitalList)
   - [Link](/VitalDesignSystem/Components/VitalLink)
+  - [Table](/VitalDesignSystem/Components/VitalTable)  
   - [YouTube](/VitalDesignSystem/Components/VitalYouTube/)
   
 <!-- tabs:end -->

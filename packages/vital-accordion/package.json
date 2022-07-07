@@ -10,6 +10,7 @@
   "files": [
     "/lib",
     "/bodiless.docs.json",
+    "/getDocs.js",
     "/tailwind.config.js",
     "/doc"
   ],
@@ -29,6 +30,7 @@
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src"
   },
   "dependencies": {
+    "@bodiless/cli": "^1.0.0-rc.10",
     "@bodiless/components": "^1.0.0-rc.10",
     "@bodiless/core": "^1.0.0-rc.10",
     "@bodiless/fclasses": "^1.0.0-rc.10",
