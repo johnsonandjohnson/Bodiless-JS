@@ -1,8 +1,8 @@
 {
   "VitalDesignSystem": {
     "Components": {
-      "Vital_Accordion": {
-        "README.md": "./README.md"
+      "VitalAccordion": {
+        "README.md": "./doc/Accordion.md"
       }
     }
   }
