@@ -52,7 +52,7 @@ const CustomCard = on(CardClean)(myBrandCard.Custom)
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:188](https://github.com/johnsonandjohnson/Bodiless-JS/blob/cfd18d40/packages/vital-card/src/components/Card/CardClean.tsx#L188)
+[vital-card/src/components/Card/CardClean.tsx:188](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/CardClean.tsx#L188)
 
 ___
 
@@ -64,7 +64,7 @@ Use this version of the card when all components are static.
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:211](https://github.com/johnsonandjohnson/Bodiless-JS/blob/cfd18d40/packages/vital-card/src/components/Card/CardClean.tsx#L211)
+[vital-card/src/components/Card/CardClean.tsx:211](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/CardClean.tsx#L211)
 
 ___
 
@@ -78,7 +78,7 @@ Tokens for cards.
 
 #### Defined in
 
-[vital-card/src/components/Card/tokens/vitalCard.ts:168](https://github.com/johnsonandjohnson/Bodiless-JS/blob/cfd18d40/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L168)
+[vital-card/src/components/Card/tokens/vitalCard.ts:168](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/tokens/vitalCard.ts#L168)
 
 ___
 
@@ -92,7 +92,7 @@ Use this version of the vital card tokens when extending or shadowing.
 
 #### Defined in
 
-[vital-card/src/components/Card/index.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/cfd18d40/packages/vital-card/src/components/Card/index.ts#L27)
+[vital-card/src/components/Card/index.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/index.ts#L27)
 
 ___
 
@@ -102,7 +102,7 @@ ___
 
 #### Defined in
 
-[vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts:246](https://github.com/johnsonandjohnson/Bodiless-JS/blob/cfd18d40/packages/vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts#L246)
+[vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts:246](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts#L246)
 
 ___
 
@@ -116,7 +116,7 @@ Use this version of the vital card tokens when extending or shadowing.
 
 #### Defined in
 
-[vital-card/src/components/FlowContainer/index.ts:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/cfd18d40/packages/vital-card/src/components/FlowContainer/index.ts#L25)
+[vital-card/src/components/FlowContainer/index.ts:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/FlowContainer/index.ts#L25)
 
 ___
 
@@ -133,7 +133,7 @@ Be sure to use it with `CardStatic` (not `CardClean`).
 
 #### Defined in
 
-[vital-card/src/components/Card/index.bl-edit.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/cfd18d40/packages/vital-card/src/components/Card/index.bl-edit.ts#L27)
+[vital-card/src/components/Card/index.bl-edit.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/index.bl-edit.ts#L27)
 
 ## Token Collection Functions
 
@@ -155,4 +155,4 @@ A token modifier that respects the Card Compoments.
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:198](https://github.com/johnsonandjohnson/Bodiless-JS/blob/cfd18d40/packages/vital-card/src/components/Card/CardClean.tsx#L198)
+[vital-card/src/components/Card/CardClean.tsx:198](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/CardClean.tsx#L198)
