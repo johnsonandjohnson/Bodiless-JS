@@ -18,7 +18,7 @@ with many tools/settings such as Bodiless Shadowing.
 
 ### **Guide**
 
-[Site Creation: Step by Step](./SiteCreation)
+- [Site Creation: Step by Step](./SiteCreation)
 
 ### **Resources**
 
@@ -292,7 +292,7 @@ In this step you will extend the Genric template to offer additional templates t
 ### **Overview**
 
 If Bodiless/Vital DS doesn't have components, you will want to build out custom
-components in `packages/mysite/src/components`.
+components in `packages/{my-package}/src/components`.
 
 <!-- TODO: Step by step Guide -->
 

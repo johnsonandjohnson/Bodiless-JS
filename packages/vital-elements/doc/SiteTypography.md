@@ -11,7 +11,7 @@ guide](/Development/Guides/BuildingSites/Typography/Fonts).
 ## Step 2: Font Size & Line Heights
 
 The Vital Design System has defined the following [font
-sizes](https://xd.adobe.com/view/fd6e4dde-2ecf-480a-aaaf-f5043cb04bf0-a83d/screen/d0c37949-f384-4a14-ad34-011d39ef62ba/specs/),
+sizes](https://zeroheight.com/98a659433/p/1195ae-typography-final/b/5108bf),
 and they have been converted into the REM point system using base 16.
 
 To facilitate converting a custom font size into REM units, please refer to this [XLS
@@ -55,7 +55,7 @@ module.exports = {
 ## Step 3: Define Colors for Site
 
 The Vital Design System defines the following
-[colors](https://xd.adobe.com/view/fd6e4dde-2ecf-480a-aaaf-f5043cb04bf0-a83d/screen/96d7b2f3-6afb-45fb-b808-075a24af2434/specs/).
+[colors](https://zeroheight.com/98a659433/p/658354-colors-final).
 
 ### Option 1: Shadow `vitalColor` (*Preferred Solution)
 

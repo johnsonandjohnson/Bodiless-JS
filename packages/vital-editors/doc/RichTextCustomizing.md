@@ -6,12 +6,12 @@ At site or global regional/brand library level, a site can compose a set of new
 tokens to meet the design requirements, and provide additional Rich Text
 functionality (typically, via buttons).
 
-Let's add a button that creates gradient text. In this case, we want the
+Let's add a button that creates a gradient text. In this case, we want the
 Gradient style to apply on characters so will use `asMark`. See the
 [Bodiless RichText Componet](../../../../Components/Editors/RichText?id=richtext-component)
 for the different way to apply character, inline or block level formatting.
 
-01. Create a `packages/mysite/src/shadow/@bodiless/vital-editors/RichText.ts`
+01. Create a `packages/{my-package}/src/shadow/@bodiless/vital-editors/RichText.ts`
     where you will shadow the vital Rich Text editor.
 
     ```js
@@ -25,14 +25,12 @@ for the different way to apply character, inline or block level formatting.
       withButton('graphic_eq'),
     );
 
-    const Default = asFluidToken({
-      ...vitalRichTextBase.Default,
+    const Default = asFluidToken(vitalRichTextBase.Default,
+    {
       Core: {
-        ...vitalRichTextBase.Default.Core,
         Gradient: withGradient,
       },
       Theme: {
-        ...vitalRichTextBase.Default.Theme,
         Gradient: vitalTypography.Gradient,
       },
     });
@@ -46,9 +44,9 @@ for the different way to apply character, inline or block level formatting.
     - `withGradient` creates a token that will be a designable Span and
       adds a new gradient button to the editor.
     - `Default` starts with the existing `vitalRichTextBase` (non-shadowed
-      version of `vitalRichText`) functionality, and, in both Core/Theme,
-      it spreads existing functionality across these two domains and the new
-      tokens are added.
+      version of `vitalRichText`) functionality and anything added in design
+      will extend the token. In the Core domain we added the new button and in
+      the Theme domain we add the styling.
 
 ?> **REMINDER:** Rebuild Package with `npm run build -- --scope=<mysite>` and
 restart the site.
@@ -62,7 +60,7 @@ editor ability to add H1 within the content. You can remove the H1 component
 from Vital Rich Text Editor by shadowing and using the omit from the Lodash
 package.
 
-01. Create a `packages/mysite/src/shadow/@bodiless/vital-editors/RichText.ts`
+01. Create a `packages/{my-package}/src/shadow/@bodiless/vital-editors/RichText.ts`
     where you will shadow the vital Rich Text editor.
 
     ```js
