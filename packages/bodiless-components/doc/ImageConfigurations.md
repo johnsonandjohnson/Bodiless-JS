@@ -6,7 +6,7 @@ techniques.
 
 ## Activation
 
-01. Create a HOF, at site level, responsible for transforming a plain image-based component into a
+01. Create a HOC, at site level, responsible for transforming a plain image-based component into a
     Gatsby Image component.
 
     ```ts
