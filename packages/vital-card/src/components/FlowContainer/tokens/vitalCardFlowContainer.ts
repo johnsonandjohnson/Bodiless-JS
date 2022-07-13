@@ -16,6 +16,7 @@ import { asFluidToken } from '@bodiless/vital-elements';
 import {
   on, varyDesigns, flowHoc, extendDesign,
 } from '@bodiless/fclasses';
+import type { FluidToken } from '@bodiless/vital-elements';
 import {
   CardStatic, vitalCardStatic, asCardToken,
 } from '../../Card';
@@ -185,9 +186,6 @@ const WithCardVariations = asFluidToken({
   },
 });
 
-const fluidToken = asFluidToken();
-type FluidToken = typeof fluidToken;
-
 /**
  * Tokens for the vital card flow container
  *
@@ -207,6 +205,7 @@ export interface VitalCardFlowContainer {
    *     ...vitalCardFlowContainerBase.HeroVariations
    *   },
    * });
+   * ```
    */
   WithCardVariations: FluidToken,
   /**

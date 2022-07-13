@@ -33,6 +33,7 @@ import {
   designable,
   HOC,
   flowHoc,
+  DesignableComponents,
 } from '@bodiless/fclasses';
 import type { ImageData } from '@bodiless/components';
 import type {
@@ -42,10 +43,21 @@ import type {
 } from 'gatsby-image';
 import GatsbyImagePresets from './GatsbyImagePresets';
 
-export type BodilessImageComponents = {
+/**
+ * Bodiless Image Components to function as either Gatsby image or plain image
+ *
+ * @category Component
+ */
+export interface BodilessImageComponents extends DesignableComponents {
+  /**
+   * Gatsby Image
+   */
   GatsbyImage: CT<GatsbyPluginImageProps>,
+  /**
+   * Plain Image
+   */
   Image: CT<any>,
-};
+}
 
 export type BodilessFluidObject = FluidObject & {
   srcSetType: string;
@@ -237,6 +249,10 @@ const asDesignableGatsbyImage = (ImageComponent: CT<any>) => {
 
 const withActivatorWrapperDefaultStyles = addClasses('bl-w-full');
 
+/**
+ * `asGatsbyImage` is a HOC that either replaces the component with GatsbyImg, if the data required
+ * for GatsbyImg is available, or it renders the input component, otherwise.
+ */
 const asGatsbyImage = flowHoc(
   // @todo this cast should not be necessary.
   asDesignableGatsbyImage as HOC,
@@ -250,6 +266,10 @@ const asGatsbyImage = flowHoc(
   }),
 );
 
+/**
+ * `isGatsbyImage` determines if the image is utlizing gatsby images.
+ * @returns Boolean
+ */
 export const isGatsbyImage = ({ gatsbyImg }: GatsbyImageProps) => gatsbyImg !== undefined;
 
 /**

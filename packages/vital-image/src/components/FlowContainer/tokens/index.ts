@@ -11,16 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { as } from '@bodiless/fclasses';
-import { vitalCardFlowContainerBase } from '@bodiless/vital-card';
 
-// Demostrating only showing Basic & Hero Card Variations in Component Picker
-const WithCardVariations = as(
-  vitalCardFlowContainerBase.WithBasicVariations,
-  vitalCardFlowContainerBase.WithHeroVariations,
-);
+import vitalImageFlowContainer from './vitalImageFlowContainer';
 
-export default {
-  ...vitalCardFlowContainerBase,
-  WithCardVariations,
-};
+export default vitalImageFlowContainer;

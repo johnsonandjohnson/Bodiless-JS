@@ -74,7 +74,11 @@ techniques.
     ?> **Note:** When you activate Gatsby Image for an existing image, then you need to re-upload
     the image or update the corresponding image JSON file.
 
-### Change Image Preset
+## Default Image Presets
+
+Please refer to [GatsbyImagePresets API doc](../../../Development/API/@bodiless/gatsby-theme-bodiless/enums/GatsbyImagePresets)
+
+## Change Image Preset
 
 If you have an image with `GatsbyImagePresets.Fluid` preset, and you want to change the preset to
 `GatsbyImagePresets.FluidNoBase64`:
@@ -94,10 +98,11 @@ If you have an image with `GatsbyImagePresets.Fluid` preset, and you want to cha
 01. Re-upload the image via the BodilessJS admin interface, or update the preset in the
     corresponding JSON file manually.
 
-### Override Image Processing Arguments
+## Override Image Processing Arguments
 
-To override the default image processing arguments, use the `gatsbyImage.sharpArgs` option of
-`@bodiless/gatsby-theme-bodiless`. For example, to override the default quality:
+To override the default image processing arguments, use the
+`gatsbyImage.sharpArgs` option of `@bodiless/gatsby-theme-bodiless`. For
+example, to override the default quality in your site's gatsby-config.js file:
 
 ```js
 {
@@ -115,24 +120,7 @@ To override the default image processing arguments, use the `gatsbyImage.sharpAr
 See the [`gatsby-plugin-sharp`](https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/
 ':target=_blank') documentation to get a list of options you can override.
 
-### Default Image Presets
-
-| Preset                   | Description                                                             |
-| ----------------------   | ----------------------------------------------------------------------- |
-| `Fluid`                  | Fluid-size (stretched to match the container’s width and height) image. |
-| `FluidNoBase64`          | Fluid-size image with disabled blur-up effect.                          |
-| `FluidTracedSVG`         | Fluid-size image with traced placeholder SVG.                           |
-| `FluidWithWebp`          | Fluid-size image with auto-generated WebP version.                      |
-| `FluidWithWebpNoBase64`  | Fluid-size image with auto-generated WebP and disabled blur-up effect.  |
-| `FluidWithWebpTracedSVG` | Fluid-size image with auto-generated WebP and traced placeholder SVG.   |
-| `Fixed`                  | Fixed-size image.                                                       |
-| `FixedNoBase64`          | Fixed-size image with disabled blur-up effect.                          |
-| `FixedTracedSVG`         | Fixed-size image with traced placeholder SVG.                           |
-| `FixedWithWebp`          | Fixed-size image with auto-generated WebP version.                      |
-| `FixedWithWebpNoBase64`  | Fixed-size image with auto-generated WebP and disabled blur-up effect.  |
-| `FixedWithWebpTracedSVG` | Fixed-size image with auto-generated WebP and traced placeholder SVG.   |
-
-### Configure Gatsby Image for Default Content
+## Configure Gatsby Image for Default Content
 
 01. Prepare default content data.
     - Install npm packages containing default content, and/or create `.json` files at site level.

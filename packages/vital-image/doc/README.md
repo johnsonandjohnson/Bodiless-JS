@@ -30,20 +30,21 @@ be configured with additional Hero variants.
 
 The Vital Image Component provides a set of tokens to compose an Image Component:
 
-| Token                      | Description                                                  |
-| -------------------------- | ------------------------------------------------------------ |
-| `Base`                     | A token with GatsbyImage which creates the Vital base Image. |
-| `Plain`                    | A token which recomposes the base image as a Plain Image.    |
-| `Default`                  | A token which recomposes the base image as a BlurUp Image.   |
-| `WithEditorPlain`          | A token which applies a Plain image.                         |
-| `WithEditorBlurUp`         | A token which applies the BlurUp Effect.                     |
-| `WithEditorTraced`         | A token which applies the Traced Effect.                     |
-| `WithEditorNoEffect`       | A token which applies NoEffect.                              |
-| `EditableTraced`           | A token which recomposes the base image as a Traced Image.   |
-| `EditableNoEffect`         | A token which recomposes the base image as a NoEffect Image. |
-| `WithLandscapePlaceholder` | A token which applies a Landscape Placeholder.               |
-| `WithLink`                 | A token which wraps the image in a link.                     |
-| `WithFullWidthImage`       | A token which makes the image full-width.                    |
+?> **API Documentation**: visit
+[Vital Image Token Collection](../../../Development/API/@bodiless/vital-image/interfaces/VitalImage)
+
+For specific use cases, please refer to the [Image Configuration Guide](./ImageConfigurations)
+
+### Overriding Images
+#### Via Shadowing (*Preferred Method)
+
+Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
+
+File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-images/Image.ts`
+
+?> **API Documentation**: Visit the
+[Vital Image Token Collection](../../../Development/API/@bodiless/vital-image/interfaces/VitalImage)
+for examples of shadowing.
 
 ### Static Images
 
@@ -56,7 +57,7 @@ Image](/Design/GatsbyTheme#omit-gatsby-plugin-image-for-static-image) for detail
 
 ### Hero Image
 
-The `vitalImage` token collection includes a `Hero` token, which renders a full-width Bodiless Image
+The `vitalImage` token collection includes a [`Hero` token](../../../Development/API/@bodiless/vital-image/interfaces/VitalImage?id=hero), which renders a full-width Bodiless Image
 with a BlurUp. Its functionality is essentially the same as combining the `Default` and
 `WithLandscapePlaceholder` tokens. Example usage:
 
@@ -73,7 +74,3 @@ const ExamplePage = () => (
   </ExampleWrapper>
 );
 ```
-
-### Usage
-
-_To be documented._

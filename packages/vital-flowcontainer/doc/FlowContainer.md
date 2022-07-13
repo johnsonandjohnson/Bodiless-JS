@@ -13,6 +13,9 @@ Details](/Components/FlowContainer/#content-editor-details).
 
 ## Site Builder Details
 
+?> **API Documentation**: visit
+[Vital FlowContainer Token Collection](../../../Development/API/@bodiless/vital-flowcontainer/interfaces/VitalFlowContainer)
+
 ### Usage
 
 ```js
@@ -26,7 +29,20 @@ const Default = asFluidToken(
   },
   WithContentRegionVariations,
 );
+
 ```
+
+### Overriding Card
+
+#### Via Shadowing (*Preferred Method)
+
+Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
+
+File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-flowcontainer/FlowContainer.ts`
+
+?> **API Documentation**: Visit the
+[Vital FlowContainer Token Collection](../../../Development/API/@bodiless/vital-flowcontainer/interfaces/VitalFlowContainer)
+for examples of shadowing.
 
 ## Architectural Details
 

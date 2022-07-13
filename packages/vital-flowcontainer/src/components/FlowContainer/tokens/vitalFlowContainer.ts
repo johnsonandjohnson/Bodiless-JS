@@ -23,6 +23,7 @@ import {
   withLibraryComponents,
 } from '@bodiless/layouts';
 import { asFluidToken, vitalSpacing } from '@bodiless/vital-elements';
+import type { FluidToken } from '@bodiless/vital-elements';
 import { vitalImageFlowContainer } from '@bodiless/vital-image';
 import { vitalEditorsFlowContainer } from '@bodiless/vital-editors';
 import { vitalYouTubeFlowContainer } from '@bodiless/vital-youtube';
@@ -33,9 +34,6 @@ import { vitalAccordionFlowContainer } from '@bodiless/vital-accordion';
 import { vitalButtonFlowContainer } from '@bodiless/vital-buttons';
 
 import FlowContainerClean, { FlowContainerPreview } from '../FlowContainerClean';
-
-const fluidToken = asFluidToken();
-type FluidToken = typeof fluidToken;
 
 const blacklistCategories = ['Group'];
 const mandatoryCategories = ['Type'];

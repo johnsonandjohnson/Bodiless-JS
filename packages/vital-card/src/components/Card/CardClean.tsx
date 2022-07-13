@@ -33,7 +33,6 @@ import { withoutHydration } from '@bodiless/hydration';
 
 /**
  * Design keys available for the vital card.
- * @see [CardBase]
  *
  * @category Component
  */
