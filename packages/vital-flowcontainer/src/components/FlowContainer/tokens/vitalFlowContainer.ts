@@ -194,7 +194,7 @@ export interface VitalFlowContainer {
    *
    * #### Customizing:
    *
-   * @example Add a component
+   * @example Add a custom component to Vital's Default Flow Container
    * ```js
    * import { vitalFlowContainerBase } from '@bodiless/vital-flowcontainer';
    *

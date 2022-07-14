@@ -4,10 +4,10 @@ BodilessJS provides integration with [`gatsby-image`](https://www.gatsbyjs.com/p
 ':target=_blank') plugin for creating optimized images and leveraging advanced image loading
 techniques.
 
-## Activation
+## Gatsby Image Usage
 
-01. Create a HOC, at site level, responsible for transforming a plain image-based component into a
-    Gatsby Image component.
+01. Create a HOC, at site level, responsible for transforming a plain
+    image-based component into a Gatsby Image component.
 
     ```ts
     import {
@@ -50,9 +50,10 @@ techniques.
     const asFluidWithWebpGatsbyImage = asGatsbyImg(GatsbyImagePresets.FluidWithWebp);
     ```
 
-    ?> **Note:** BodilessJS uses default image presets exposed by `@bodiless/gatsby-theme-bodiless`.
-    See the [Default Image Presets](#default-image-presets) section to get a list of available
-    presets.
+    ?> **Note:** BodilessJS uses default image presets exposed by
+    `@bodiless/gatsby-theme-bodiless`. See the
+    [Default Image Presets](#default-image-presets) section to get a list of
+    available presets.
 
 01. Use the HOCs to compose Gatsby Image components.
 
@@ -71,8 +72,8 @@ techniques.
 
 01. Upload images via the BodilessJS admin interface.
 
-    ?> **Note:** When you activate Gatsby Image for an existing image, then you need to re-upload
-    the image or update the corresponding image JSON file.
+    ?> **Note:** When you activate Gatsby Image for an existing image, then you
+    need to re-upload the image or update the corresponding image JSON file.
 
 ## Default Image Presets
 
@@ -80,8 +81,8 @@ Please refer to [GatsbyImagePresets API doc](../../../Development/API/@bodiless/
 
 ## Change Image Preset
 
-If you have an image with `GatsbyImagePresets.Fluid` preset, and you want to change the preset to
-`GatsbyImagePresets.FluidNoBase64`:
+If you have an image with `GatsbyImagePresets.Fluid` preset, and you want to
+change the preset to `GatsbyImagePresets.FluidNoBase64`:
 
 01. Compose a new image component with new preset:
 
@@ -95,14 +96,15 @@ If you have an image with `GatsbyImagePresets.Fluid` preset, and you want to cha
 
 01. Render the new image component instead of the existing one.
 
-01. Re-upload the image via the BodilessJS admin interface, or update the preset in the
-    corresponding JSON file manually.
+01. Re-upload the image via the BodilessJS admin interface, or update the preset
+    in the corresponding JSON file manually.
 
 ## Override Image Processing Arguments
 
 To override the default image processing arguments, use the
-`gatsbyImage.sharpArgs` option of `@bodiless/gatsby-theme-bodiless`. For
-example, to override the default quality in your site's gatsby-config.js file:
+`gatsbyImage.sharpArgs` options for the plugin
+`@bodiless/gatsby-theme-bodiless`. For example, to override the default quality
+in your site's gatsby-config.js file use the following code:
 
 ```js
 {
@@ -120,10 +122,43 @@ example, to override the default quality in your site's gatsby-config.js file:
 See the [`gatsby-plugin-sharp`](https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/
 ':target=_blank') documentation to get a list of options you can override.
 
+## Gatsby ImgStyle Property
+
+Gatsby images do require the classes to be added as directly to the Gatsby Image
+`imgStyle`. You can do this by adding imgStyle as a prop.
+
+```js
+const ObjectFitCover = {
+  imgStyle: { objectFit: 'cover' },
+};
+const WithObjectFitCover = asImageToken({
+  Theme: {
+    _: addProps(ObjectFitCover),
+  },
+});
+```
+
+The following example, will apply rounded corners to both the GatsbyImage and Regular Image.
+```js
+const withGatsbyImageRoundedCorners = withDesign({
+  GatsbyImage: addProps({
+    imgStyle: {
+      borderRadius: '1rem',
+    },
+  }),
+  Image: addClasses('rounded-2xl');
+});
+```
+
+?> **Tip:** Ideally, its best to have the image inside a Wrapper Div/Span and applying
+styling such as absolute or rounded corners to the container rather then image
+within.
+
 ## Configure Gatsby Image for Default Content
 
 01. Prepare default content data.
-    - Install npm packages containing default content, and/or create `.json` files at site level.
+    - Install npm packages containing default content, and/or create `.json`
+      files at site level.
     - Example of `.json` file containing default image data:
 
       ```json
@@ -137,9 +172,10 @@ See the [`gatsby-plugin-sharp`](https://www.gatsbyjs.com/plugins/gatsby-plugin-s
 
       - `src`: Contains path to image.
         - The path can be relative or absolute.
-          - When a relative path is specified, then the image will be resolved relative to the JSON.
-          - When an absolute path is specified, then the image will be resolved relative to site's
-            `static` directory.
+          - When a relative path is specified, then the image will be resolved
+            relative to the JSON.
+          - When an absolute path is specified, then the image will be resolved
+            relative to site's `static` directory.
       - `alt`, `title`: Image data provided by Bodiless.
       - `preset`: Image preset for which to generate image variations.
 
