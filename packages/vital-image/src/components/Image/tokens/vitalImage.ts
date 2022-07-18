@@ -266,7 +266,7 @@ export interface VitalImage {
    *
    * #### Customizing:
    *
-   * @example Override and have all Default Images be non-gatsby plain images.
+   * @example Override and have all Default Images be non-gatsby plain images via shadowing
    * ```js
    * import { vitalImageBase } from '@bodiless/vital-image';
    *
@@ -301,7 +301,7 @@ export interface VitalImage {
    *
    * #### Customizing:
    *
-   * @example Extends the HERO Images to be a link hero image.
+   * @example Extends the HERO Images to be a link hero image via shadowing.
    * ```js
    * import { vitalImageBase } from '@bodiless/vital-image';
    *

@@ -50,7 +50,7 @@ export interface VitalImageFlowContainer {
     *
     * #### Shadowing:
     *
-    * @example will add a plain non-gatsby images for the content editor to use.
+    * @example will add a plain non-gatsby images for the content editor to use via shadowing
     * ```js
     * import { as, flowHoc, Img, on } from '@bodiless/fclasses';
     * import { asFluidToken, asMetaToken } from '@bodiless/vital-elements';

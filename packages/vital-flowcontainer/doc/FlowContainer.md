@@ -17,22 +17,6 @@ Editor Details](/Components/FlowContainer/#content-editor-details).
 ?> **API Documentation**: visit
 [Vital FlowContainer Token Collection](../../../Development/API/@bodiless/vital-flowcontainer/interfaces/VitalFlowContainer)
 
-### Usage
-
-```js
-const Default = asFluidToken(
-  {
-    ...Base,
-    Spacing: {
-      Wrapper: vitalSpacing.GutterOffset,
-      ComponentWrapper: vitalSpacing.Gutter,
-    },
-  },
-  WithContentRegionVariations,
-);
-
-```
-
 ### Overriding FlowContainer
 
 #### Via Shadowing (*Preferred Method)
@@ -44,6 +28,79 @@ File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-flowcontainer/
 ?> **API Documentation**: Visit the
 [Vital FlowContainer Token Collection](../../../Development/API/@bodiless/vital-flowcontainer/interfaces/VitalFlowContainer)
 for examples of shadowing.
+
+### Creating your own FlowContainer
+
+The Vital FlowContainer comes with a preset components available in Vital
+Design. There may be use cases where you would want to create a custom
+FlowContainer with your own constraints and components.
+
+In this example, let's say in the product description in the product template we
+want the following:
+
+* Content Library functionality,
+* constrain the components to be full width (in other words, non-resizable),
+* only provide the content editor the componenents: image, youtube and editor variations.  
+
+The following example combines all the Vital Tokens into Flowcontainer with these requirements:
+
+```js
+const ProductDescription = asFluidToken(
+  vitalFlowContainer.Base,
+  vitalFlowContainer.WithContentLibrary,
+  vitalFlowContainer.WithFullWidthConstraint,
+  /* Add only images, video & editor */
+  vitalImageFlowContainer.WithImageVariations,
+  vitalYouTubeFlowContainer.WithYouTubeVariations,
+  vitalEditorsFlowContainer.WithEditorVariations,,
+);
+```
+
+This can be shadowed in the PDP template and assign the ProductionDescription token
+to the component slot.  
+
+```js
+  const Default = asPDPTemplateToken({
+    ...vitalPDPTemplateBase.Default,
+    Components: {
+      ...vitalPDPTemplateBase.Default.Components,
+      ProductDescription,
+    },
+  });
+
+  export default {
+    ...vitalPDPTemplateBase,
+    Default,
+  };
+```
+
+?> **NOTE** In `asPDPTemplateToken`, `ProductDescription` is short for `ProductDescription: ProductDescription` when the names are identical.
+
+### FlowContainer that allows saving to the Content Library
+
+The Content Library is the ability to save components that you've created, along
+with their embedded content, allowing you to reuse them elsewhere on your site.
+
+If you would like to enable, please see [shadowing example for the vitalFlowContainer that adds the token `WithContentLibray`](../../../Development/API/@bodiless/vital-flowcontainer/interfaces/VitalFlowContainer?id=default)
+
+Once its enabled, you can [save components](../../../Components/FlowContainer/?id=saving-a-component-in-the-content-library) and [unlink components](../../../Components/FlowContainer/?id=unlinking-a-component-from-the-content-library)
+
+?> **TIP:** This can speed up site building if you save components that are commonly
+added to multiple pages.
+
+### Constraining the FlowContainer
+
+There may be use cases where you want limit the number of components added to
+FlowContainer or their width within the FlowContainer.
+
+In the Vital FlowContainer there is some useful tokens to
+[constrain width](http://localhost:8000/___docs/#/Development/API/@bodiless/vital-flowcontainer/interfaces/VitalFlowContainer?id=withfullwidthconstraint)
+and we recommend the following pattern of creating new tokens if you want to
+limit number or how are components are placed. For more information, we suggest
+referring to
+[Constraining Component Widths](../../../Components/FlowContainer/?id=constraining-component-widths)
+or
+[Limit Number of components](../../../Components/FlowContainer/?id=limit-number-of-components)
 
 ## Architectural Details
 

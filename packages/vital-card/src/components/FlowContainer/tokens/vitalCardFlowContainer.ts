@@ -197,12 +197,12 @@ export interface VitalCardFlowContainer {
    *
    * #### Shadowing:
    *
-   * @example Add a component
+   * @example Add components via shadowing.
    * ```js
-   * const WithCardVariations = asFluidToken({
+   * const WithCardVariations = asFluidToken(vitalCardFlowContainerBase, {
    *   Components: {
-   *     ...vitalCardFlowContainerBase.BasicVariations,
-   *     ...vitalCardFlowContainerBase.HeroVariations
+   *     ...vitalCardFlowContainerBase.ProductVariations,
+   *     ...myCustomVariations
    *   },
    * });
    * ```
