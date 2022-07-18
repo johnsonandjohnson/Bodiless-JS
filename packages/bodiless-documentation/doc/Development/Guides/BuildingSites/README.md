@@ -20,7 +20,7 @@ guide specifically uses the Vital Design System, building out your own custom to
     This step will define and implement basic elements of the design system (typography, spacing,
     colors).
     01. Before starting, it is best to have a clear understanding of:
-        - [Best Practices for Using Tailwind with Bodiless](./Typography/TailwindGuide)
+        - [Best Practices for Using Tailwind with Bodiless](./TailwindGuide)
         - [Best Practices Using Custom Fonts](./Typography/Fonts)
     01. [Getting Started Defining Typography](./Typography/Typography)
 

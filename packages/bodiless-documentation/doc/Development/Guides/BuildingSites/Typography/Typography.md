@@ -25,7 +25,7 @@ we recommend following patterns seen in the `vital-elements` package.
 ### Font Sizes & Line Heights
 
 If your site is defining custom font sizes and line-heights, these are set within your
-[package/site's `tailwind.config.js`](./TailwindGuide#tailwind-configuration-file).
+[package/site's `tailwind.config.js`](../TailwindGuide#tailwind-configuration-file).
 
 ?> **Tip:** Tailwind provides the ability to specify font sizes with default line-height, and this
 simplifies the process: [Providing a default
@@ -38,7 +38,7 @@ letter-spacing](https://tailwindcss.com/docs/font-size#providing-a-default-lette
 
 If your site is [defining custom
 colors](https://tailwindcss.com/docs/customizing-colors#adding-additional-colors), these are set
-within your [package/site's `tailwind.config.js`](./TailwindGuide#tailwind-configuration-file).
+within your [package/site's `tailwind.config.js`](../TailwindGuide#tailwind-configuration-file).
 
 ### Element Tokens for Headers, Links, Body, and Other Tokens
 
