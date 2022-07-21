@@ -18,20 +18,12 @@ As you might expect, BodilessJS follows the latter pattern, and provides tools w
 
 BodilessJS is being developed at J&J to meet specific use-cases in the consumer marketing space. The design and architecture are based on learnings from many years of experience trying to build and operate a large-scale Drupal 7 platform to support customer-facing sites.
 
-## Instant Start
+## Getting Started
 
+- Follow the instructions to create a new site in our [Getting Started Guide](./About/GettingStarted).
+- Learn the basics of site-building on BodilessJS, see our tutorial: [Intro To Bodiless Concepts:
+Creating a Gallery Page](/Development/Guides/IntroToBodilessConcepts).
 ```
-git clone https://github.com/johnsonandjohnson/Bodiless-JS.git
-npm run setup
-npm run start
-```
-> NOTE: Do not run `npm install` at repository root.  Use `npm run setup` instead.
-
-Then Visit `localhost:8005` in your browser.
-
-> Requires [NodeJS](https://nodejs.org/en/download/) (LTS Gallium: node
-> 16.13+/npm 8.0+ only)
-
 ## Links
 
 - [Read the Documentation on GitHub](https://johnsonandjohnson.github.io/Bodiless-JS)
