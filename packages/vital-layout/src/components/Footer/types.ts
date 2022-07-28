@@ -12,21 +12,60 @@
  * limitations under the License.
  */
 
-import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
+import { ComponentOrTag, DesignableComponents, DesignableComponentsProps } from '@bodiless/fclasses';
 
-type FooterComponents = {
+/**
+ * Type of the design element in the VitalDS `Footer` component.
+ *
+ * @category Component
+ */
+interface FooterComponents extends DesignableComponents {
+  /**
+   * Wrapper around entire Footer
+   */
   Wrapper: ComponentOrTag<any>,
+  /**
+   * Container to hold the specific footer components
+   */
   Container: ComponentOrTag<any>,
+  /**
+   * Wrapper for the a container in the first column
+   */
   Column1Wrapper: ComponentOrTag<any>,
+  /**
+   * Wrapper for the a container in the second column
+   */
   Column2Wrapper: ComponentOrTag<any>,
+  /**
+   * Used for the menus
+   */
   MenuRow: ComponentOrTag<any>,
+  /**
+   * Used for Copyright in the second column
+   */
   CopyrightRow: ComponentOrTag<any>,
+  /**
+   * Used for Copyright after the columns
+   * By Default this a Fragment and not rendered
+   */
   CopyrightRowOutsideColumns: ComponentOrTag<any>,
+  /**
+   * Wrapper for the Rewards
+   */
   RewardsWrapper: ComponentOrTag<any>,
+  /**
+   * Used for Rewards/Special component and is in the first column
+   */
   Rewards: ComponentOrTag<any>,
+  /**
+   * Wrapper around footer menus.
+   */
   FooterMenuWrapper: ComponentOrTag<any>,
+  /**
+   * Used for the footer menus.
+   */
   FooterMenu: ComponentOrTag<any>,
-};
+}
 
 type FooterProps = DesignableComponentsProps<FooterComponents>;
 

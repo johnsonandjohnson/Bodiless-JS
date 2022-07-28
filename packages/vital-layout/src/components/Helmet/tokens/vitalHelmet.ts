@@ -16,6 +16,7 @@ import { vitalMetaHelmet } from '@bodiless/vital-meta';
 import { as, replaceWith } from '@bodiless/fclasses';
 import { DefaultPageGA4DataLayerHelmet } from '@bodiless/ga4';
 import { asHelmetToken } from '../HelmetClean';
+import type { HelmetToken } from '../HelmetClean';
 // eslint-disable-next-line import/order
 
 const Base = asHelmetToken({
@@ -38,27 +39,55 @@ const Default = asHelmetToken({
   ...Base,
 });
 
-/**
- * WithDesktopStatickBody token applies static position on body.
- */
 const WithDesktopStatickBody = asHelmetToken({
   Layout: {
     BodyHelmet: 'lg:static',
   },
 });
 
-/**
- * WithFixedBody token applies fixed position on body to prevent scrolling.
- */
 const WithFixedBody = asHelmetToken({
   Layout: {
     BodyHelmet: 'fixed',
   },
 });
 
-export default {
+/**
+ * Tokens for the vital helmet
+ *
+ * @category Token Collection
+ * @see [[HelmetClean]]
+ */
+export interface VitalHelmet {
+  /**
+   * Base applies the SEO, Share, GA4 helmets
+   */
+  Base: HelmetToken,
+  /**
+   * Inherits from Base
+   */
+  Default: HelmetToken,
+  /**
+   * WithDesktopStatickBody token applies static position on body.
+   */
+  WithDesktopStatickBody: HelmetToken,
+  /**
+   * WithFixedBody token applies fixed position on body to prevent scrolling.
+   */
+  WithFixedBody: HelmetToken,
+}
+
+/**
+ * Tokens for Vital Helmet
+ *
+ * @category Token Collection
+ * @see [[VitalHelmet]]
+ * @see [[HelmetClean]]
+ */
+const vitalHelmet: VitalHelmet = {
   Base,
   Default,
   WithDesktopStatickBody,
   WithFixedBody,
 };
+
+export default vitalHelmet;

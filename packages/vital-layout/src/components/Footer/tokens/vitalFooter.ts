@@ -20,7 +20,7 @@ import {
 } from '@bodiless/fclasses';
 import { vitalRewards, RewardsClean } from '../Rewards';
 import { vitalCopyrightRow } from '../CopyrightRow';
-import { asFooterToken } from '../FooterClean';
+import { asFooterToken, FooterToken } from '../FooterClean';
 
 const Base = asFooterToken({
   Components: {
@@ -91,9 +91,45 @@ const FooterWithRewards = asFooterToken(Base, {
   ...WithRewardsExpanding2XL,
 });
 
-export default {
+/**
+ * Tokens for the vital footer
+ *
+ * @category Token Collection
+ * @see [[FooterClean]]
+ */
+export interface VitalFooter {
+  /**
+   * Base applies the following:
+   * - Footer Menu
+   * - Copyright row (with copyright editor & social links)
+   */
+  Base: FooterToken,
+  /**
+   * Inherits from Base
+   */
+  Default: FooterToken,
+  /**
+   * Token that extends base with to move rewards above footer on 2xl responsive viewports
+   */
+  FooterWithRewards: FooterToken,
+  /**
+   * An extendable token to move rewards above footer on 2xl responsive viewports
+   */
+  WithRewardsExpanding2XL: FooterToken,
+}
+
+/**
+ * Tokens for Vital Footer
+ *
+ * @category Token Collection
+ * @see [[VitalFooter]]
+ * @see [[FooterClean]]
+ */
+const vitalFooter: VitalFooter = {
   Base,
   Default,
   FooterWithRewards,
   WithRewardsExpanding2XL,
 };
+
+export default vitalFooter;

@@ -12,15 +12,36 @@
  * limitations under the License.
  */
 
-import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
+import { ComponentOrTag, DesignableComponents, DesignableComponentsProps } from '@bodiless/fclasses';
 
-type SocialLinksComponents = {
+/**
+  * Type of the design element in the VitalDS `Social Links` component which
+  * consists of linkable icons.  This is Stub component that renders
+  * Facebook/Instagram/Youtube links.
+  * @category Component
+  */
+interface SocialLinksComponents extends DesignableComponents {
+  /**
+   * Wrapper around social links component
+   */
   Wrapper: ComponentOrTag<any>,
+  /**
+   * Inner wrapper used for styling
+   */
   InnerWrapper: ComponentOrTag<any>,
+  /**
+   * Used for Facebook social link
+   */
   IconFacebook: ComponentOrTag<any>,
+  /**
+   * Used for Instagram social link
+   */
   IconInstagram: ComponentOrTag<any>,
+  /**
+   * Used for Youtube social link
+   */
   IconYouTube: ComponentOrTag<any>,
-};
+}
 
 type SocialLinksProps = DesignableComponentsProps<SocialLinksComponents>;
 

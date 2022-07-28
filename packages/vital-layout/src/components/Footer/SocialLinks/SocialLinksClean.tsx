@@ -39,11 +39,23 @@ const SocialLinksCleanBase: FC<SocialLinksProps> = ({ components: C, ...rest }) 
   </C.Wrapper>
 );
 
+/**
+ * A clean social links placeholder
+ *
+ * @category Component
+ *
+ */
 const SocialLinksClean = designable(socialLinksComponents, 'SocialLinks')(SocialLinksCleanBase);
 
+/**
+ * A token modifier that respects the Social Links Compoments.
+ *
+ * @category Token Collection
+ */
 const asSocialLinksToken = asVitalTokenSpec<SocialLinksComponents>();
 
-export {
-  SocialLinksClean,
-  asSocialLinksToken,
-};
+// These are used in defining the VitalSocialLinks interface.
+const socialLinksToken = asSocialLinksToken();
+export type SocialLinksToken = typeof socialLinksToken;
+
+export { SocialLinksClean, asSocialLinksToken };

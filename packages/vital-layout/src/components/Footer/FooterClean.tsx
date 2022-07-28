@@ -58,9 +58,21 @@ const FooterCleanBase: FC<FooterProps> = ({ components: C, ...rest }) => (
 
 /**
  * A clean footer to be used in pages layouts.
+ *
+ * @category Component
+ *
  */
 const FooterClean = designable(footerComponents, 'Footer')(FooterCleanBase);
 
+/**
+ * A token modifier that respects the Footer Compoments.
+ *
+ * @category Token Collection
+ */
 export const asFooterToken = asVitalTokenSpec<FooterComponents>();
+
+// These are used in defining the VitalFooter interface.
+const footerToken = asFooterToken();
+export type FooterToken = typeof footerToken;
 
 export default FooterClean;

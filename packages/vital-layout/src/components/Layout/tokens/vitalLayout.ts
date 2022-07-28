@@ -22,15 +22,13 @@ import {
 } from '@bodiless/fclasses';
 import { WithStructuredDataProvider } from '@bodiless/schema-org';
 import { asLayoutToken } from '../LayoutClean';
+import type { LayoutToken } from '../LayoutClean';
 import { vitalFooter } from '../../Footer';
 import { vitalHeader } from '../../Header';
 import { vitalHelmet } from '../../Helmet';
 import { LayoutIds } from './constants';
 import { StyleGuide } from './StyleGuide';
 
-/**
- * Token that defines a basic layout.
- */
 const Base = asLayoutToken({
   Core: {
     _: as(withBurgerMenuProvider, withBreadcrumbStore),
@@ -76,8 +74,38 @@ const Default = asLayoutToken(Base, {
   },
 });
 
-export default {
+/**
+ * Tokens for the vital layout
+ *
+ * @category Token Collection
+ * @see [[LayoutClean]]
+ */
+export interface VitalLayout {
+  /**
+   * Base that defines the default layout.
+   */
+  Base: LayoutToken,
+  /**
+   * Inherits from Base & assigns the components vitalHeader.Default & vitalFooter.FootWithRewards
+   */
+  Default: LayoutToken,
+  /**
+   * Special layout to demonstrate components.  Only used for testing purposing.
+   */
+  StyleGuide: LayoutToken,
+}
+
+/**
+ * Tokens for Vital Layout
+ *
+ * @category Token Collection
+ * @see [[VitalLayout]]
+ * @see [[LayoutClean]]
+ */
+const vitalLayout: VitalLayout = {
   Base,
   Default,
   StyleGuide,
 };
+
+export default vitalLayout;

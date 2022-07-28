@@ -20,6 +20,7 @@ import {
 import { addProps, as, replaceWith } from '@bodiless/fclasses';
 import { vitalLink } from '@bodiless/vital-link';
 import { asCopyrightRowToken } from '../CopyrightRowClean';
+import type { CopyrightRowToken } from '../CopyrightRowClean';
 import { vitalSocialLinks } from '../../SocialLinks';
 
 const Copyright = asVitalTokenSpec()({
@@ -84,8 +85,40 @@ const Default = asCopyrightRowToken({
   ...Base,
 });
 
-export default {
+/**
+ * Tokens for the vital Copyright Row which consists of copyright & social links.
+ *
+ * @category Token Collection
+ * @see [[CopyrightRowClean]]
+ */
+export interface VitalCopyrightRow {
+  /**
+   * Base applies the following:
+   * - Vital Styled Copyright editor on left
+   * - Social Links on right
+   */
+  Base: CopyrightRowToken,
+  /**
+   * Inherits Base
+   */
+  Default: CopyrightRowToken,
+  /**
+   * Copyright only
+   */
+  CopyrightNoSocialLinks: CopyrightRowToken,
+}
+
+/**
+ * Tokens for Vital Copyright Row
+ *
+ * @category Token Collection
+ * @see [[VitalCopyrightRow]]
+ * @see [[CopyrightRowClean]]
+ */
+const vitalCopyrightRow: VitalCopyrightRow = {
   Base,
   Default,
   CopyrightNoSocialLinks,
 };
+
+export default vitalCopyrightRow;

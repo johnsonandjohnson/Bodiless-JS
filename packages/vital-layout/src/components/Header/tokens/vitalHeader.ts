@@ -31,11 +31,9 @@ import { vitalSearchMenu, vitalSearchToggler, asSearchMenuToggler } from '@bodil
 import { vitalButtons } from '@bodiless/vital-buttons';
 import { vitalLogo } from '../../Logo';
 import { asHeaderToken } from '../HeaderClean';
+import type { HeaderToken } from '../HeaderClean';
 import BurgerIcon from '../assets/BurgerIcon';
 
-/**
- * Token that defines a basic header.
- */
 const Base = asHeaderToken({
   Core: {
     MenuToggler: asBurgerMenuToggler,
@@ -98,7 +96,38 @@ const Default = asHeaderToken({
   ...Base,
 });
 
-const vitalHeader = {
+/**
+ * Tokens for the vital header
+ *
+ * @category Token Collection
+ * @see [[HeaderClean]]
+ */
+export interface VitalHeader {
+  /**
+   * Base applies the following as defaults:
+   * - Logo
+   * - Togglers: BurgerMenu, Search
+   * - Defines the components: Logo, Menu, BurgerMenu, Search, WhereToBuy
+   */
+  Base: HeaderToken,
+  /**
+   * Inherits Base
+   */
+  Default: HeaderToken,
+  /**
+   * Extendable token that adds language selector
+   */
+  WithLanguageSelector: HeaderToken,
+}
+
+/**
+ * Tokens for Vital Header
+ *
+ * @category Token Collection
+ * @see [[VitalHeader]]
+ * @see [[HeaderClean]]
+ */
+const vitalHeader: VitalHeader = {
   Base,
   Default,
   WithLanguageSelector,

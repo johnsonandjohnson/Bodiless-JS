@@ -12,12 +12,14 @@
  * limitations under the License.
  */
 
-import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
+import { ComponentOrTag, DesignableComponents, DesignableComponentsProps } from '@bodiless/fclasses';
 
 /**
  * Type of the design element in the VitalDS `Helmet` component.
+ *
+ * @category Component
  */
-export type HelmetComponents = {
+export interface HelmetComponents extends DesignableComponents {
   /**
    * Used to add hreflang alternate links.
    */
@@ -46,6 +48,6 @@ export type HelmetComponents = {
    * Used to add arbitrary attributes or classes to the BODY tag.
    */
   BodyHelmet: ComponentOrTag<any>,
-};
+}
 
 export type HelmetProps = DesignableComponentsProps<HelmetComponents>;
