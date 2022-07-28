@@ -3,7 +3,7 @@
 The preferred approach to extending or overriding the Vital Design System is by
 using Bodiless Shadowing. It is based on
 [Gatsby Component Shadowing](https://www.gatsbyjs.com/blog/2019-04-29-component-shadowing/)
-but more restrictive. A simplistic definition of shadowing is a token is
+but more restrictive. A simplistic definition of shadowing is a token
 provided that replaces the existing design token. Whether you extend or override
 the token by shadowing is a choice made by site builder. For more detailed information,
 feel free to read  
@@ -47,7 +47,7 @@ For more details about Tailwind please visit [Tailwind Guide](./TailwindGuide).
 ## 2. Change the Footer Background Color by Shadowing
 
 Within your `packages/{my-package}/src` you will already find a
-`shadow/@bodiless` folders created of some initial components that are being
+`shadow/@bodiless` folder created of some initial components that are being
 shadowed and defining some defaults. This is where we will add additional
 shadowing. During shadowing, the naming of the folders/files are critical as
 this informs the Shadowing Plugin what is being replaced.
@@ -107,7 +107,7 @@ The VitalDS layout uses a Footer token that adds the Rewards component/column, l
 shadow the Vital Layout and switch it to using a more basic/default footer.
 
 The `vital-layout` package has already been shadowed in Vital DS template so add
-'Layout.ts' to the folder so you now have
+'Layout.ts' to the folder and you now have
 `/packages/{my-package}/src/shadow/@bodiless/vital-layout/Layout.ts`.
 
 and add the following code:

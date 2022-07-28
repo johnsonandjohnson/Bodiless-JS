@@ -21,7 +21,7 @@ The site also comes preconfigured with
   > At the prompt of `new-vds` provide path of the new site and the site name.
 
   If you review the monorepo codebase that was created,
-  you will see that you have package/SITENAME & sites/SITENAME.
+  you will see that you have packages/SITENAME & sites/SITENAME.
 
 1. Start Site in Edit mode
 
@@ -30,7 +30,7 @@ The site also comes preconfigured with
   ```
 
   Your new site should come up with predefined VitalDS Components in editor mode
-  by visiting <https://localhost:8000>.
+  by visiting <http://localhost:8000>.
 
 1. Start Site in Production mode
 
@@ -39,7 +39,7 @@ The site also comes preconfigured with
   npm run serve
   ```
 
-  Will serve your site in production mode Visit <https://localhost:9000>.
+  Will serve your site in production mode Visit <http://localhost:9000>.
 
 1. Push code to your repository
 
