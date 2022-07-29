@@ -38,7 +38,7 @@ The Vital Image Component provides a set of tokens to compose an Image Component
 ?> **API Documentation**: visit
 [Vital Image Token Collection](../../../Development/API/@bodiless/vital-image/interfaces/VitalImage)
 
-?> **Image Guideliness**: visit
+?> **Image Guidelines**: visit
 [Image Guidelines](../../../Design/ImageGuidelines?id=imagery-guidelines) for
 best practices on images.
 

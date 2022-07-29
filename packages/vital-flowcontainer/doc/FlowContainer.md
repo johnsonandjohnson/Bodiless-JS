@@ -40,7 +40,7 @@ want the following:
 
 * Content Library functionality,
 * constrain the components to be full width (in other words, non-resizable),
-* only provide the content editor the componenents: image, youtube and editor variations.  
+* only provide the content editor the components: image, youtube and editor variations.  
 
 The following example combines all the Vital Tokens into Flowcontainer with these requirements:
 
@@ -81,7 +81,7 @@ to the component slot.
 The Content Library is the ability to save components that you've created, along
 with their embedded content, allowing you to reuse them elsewhere on your site.
 
-If you would like to enable, please see [shadowing example for the vitalFlowContainer that adds the token `WithContentLibray`](../../../Development/API/@bodiless/vital-flowcontainer/interfaces/VitalFlowContainer?id=default)
+If you would like to enable, please see [shadowing example for the vitalFlowContainer that adds the token `WithContentLibrary`](../../../Development/API/@bodiless/vital-flowcontainer/interfaces/VitalFlowContainer?id=default)
 
 Once its enabled, you can [save components](../../../Components/FlowContainer/?id=saving-a-component-in-the-content-library) and [unlink components](../../../Components/FlowContainer/?id=unlinking-a-component-from-the-content-library)
 
@@ -94,7 +94,7 @@ There may be use cases where you want limit the number of components added to
 FlowContainer or their width within the FlowContainer.
 
 In the Vital FlowContainer there is some useful tokens to
-[constrain width](http://localhost:8000/___docs/#/Development/API/@bodiless/vital-flowcontainer/interfaces/VitalFlowContainer?id=withfullwidthconstraint)
+[constrain width](../../../Development/API/@bodiless/vital-flowcontainer/interfaces/VitalFlowContainer?id=withfullwidthconstraint)
 and we recommend the following pattern of creating new tokens if you want to
 limit number or how are components are placed. For more information, we suggest
 referring to

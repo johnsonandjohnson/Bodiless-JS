@@ -219,16 +219,17 @@ The above sources from a package. To make sure the images are exported in your
 package. Please ensure you perform the following steps:
 
 - In your packages, add an `assets` folder and all images you are referencing.
-- In package.json, the in the `files` section make sure you add '/assets' so its
+- In package.json, in the `files` section make sure you add '/assets' so its
   exported with the package.
 
 ?> **Note:** If you were to do: `"url('/images/myimage.svg')"` in your tailwind
 config (at package or site level), the site will default to looking for the
 assets in `sites/SITE-NAME/static` so it expects the image to be at
 `sites/SITE-NAME/static/images/myimage.png`. This is fine if the changes are
-within the site's tailwind, but it is recommended to work in packages. Thus the
-above method described in recommended process so that the packages releases all
-code and assets to render the components correctly.
+within the site's tailwind, but if its in the package's tailwind it won't find
+the assets unless you manually copy the images to site live. Thus the process of
+adding assets to packages is the recommended way so that the packages release
+all code and assets to render the components correctly.
 
 Alternatively, you could use custom css for complex background styling as described
 in the previous help but again this is not recommended method.

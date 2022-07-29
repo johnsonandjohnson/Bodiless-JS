@@ -23,7 +23,7 @@ const imagePlainVariations = {
     vitalImage.Plain,
     asMetaToken(flowHoc.meta.term('Placeholder')('Square')),
   )),
-  ImagePlaineLandscape: on(Img)(as(
+  ImagePlainLandscape: on(Img)(as(
     vitalImage.Plain,
     vitalImage.WithLandscapePlaceholder,
   )),
