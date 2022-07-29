@@ -41,7 +41,7 @@ guide specifically uses the Vital Design System, building out your own custom to
     This step will define and implement the general layout of the site. This will include the
     following:
     - Basic structure for the site's [Layout](/VitalDesignSystem/Components/VitalLayout/Layout)
-    - [Breakpoints for responsiveness](/VitalDesignSystem/Components/VitalLayout/Responsiveness#breakpoints)
+    - [Breakpoints for responsiveness](./Responsiveness#breakpoints)
     - [Header](/VitalDesignSystem/Components/VitalLayout/Header)
     - [Footer](/VitalDesignSystem/Components/VitalLayout/Footer)
     - [Helmet](/VitalDesignSystem/Components/VitalLayout/Helmet)
