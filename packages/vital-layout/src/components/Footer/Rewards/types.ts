@@ -15,9 +15,11 @@
 import { ComponentOrTag, DesignableComponents, DesignableComponentsProps } from '@bodiless/fclasses';
 
 /**
- * Type of the design element in the VitalDS `Rewards` component
- * This is a Stub component that renders a placeholder
+ * Type of the design element in the VitalDS `Rewards` component.
+ * This is a Stub component that renders a placeholder.
+ *
  * RECOMMEND TO NOT USE and marked as deprecated
+ *
  * @category Component
  * @deprecated
  */

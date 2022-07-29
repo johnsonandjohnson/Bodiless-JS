@@ -26,6 +26,9 @@ const Base = asHelmetToken({
     // LanguageHelmet: TBD,
     GA4Helmet: replaceWith(DefaultPageGA4DataLayerHelmet),
   },
+});
+
+const Default = asHelmetToken(Base, {
   Theme: {
     HTMLHelmet: as(
       'font-DMSans',
@@ -35,11 +38,7 @@ const Base = asHelmetToken({
   }
 });
 
-const Default = asHelmetToken({
-  ...Base,
-});
-
-const WithDesktopStatickBody = asHelmetToken({
+const WithDesktopStaticBody = asHelmetToken({
   Layout: {
     BodyHelmet: 'lg:static',
   },
@@ -63,13 +62,34 @@ export interface VitalHelmet {
    */
   Base: HelmetToken,
   /**
-   * Inherits from Base
+   * Inherits from Base and adds in vitalds theming
+   *
+   * @example Sets the html `lang` and changes the html font & color for entire page
+   * ```js
+   * import { vitalHelmetBase, asHelmetToken } from '@bodiless/vital-layout';
+   * import { withLangDirProps } from '@bodiless/i18n';
+   * import { as, addProps } from '@bodiless/fclasses';
+   *
+   * const Default = asHelmetToken(vitalHelmetBase.Base, {
+   *   Core: {
+   *     LanguageHelmet: withLangDirProps,
+   *   },
+   *   Theme: {
+   *     HTMLHelmet: 'font-Inter text-gray-600',
+   *   },
+   * });
+   *
+   * export default {
+   *   ...vitalHelmetBase,
+   *   Default,
+   * };
+   * ```
    */
   Default: HelmetToken,
   /**
-   * WithDesktopStatickBody token applies static position on body.
+   * WithDesktopStaticBody token applies static position on body.
    */
-  WithDesktopStatickBody: HelmetToken,
+  WithDesktopStaticBody: HelmetToken,
   /**
    * WithFixedBody token applies fixed position on body to prevent scrolling.
    */
@@ -86,7 +106,7 @@ export interface VitalHelmet {
 const vitalHelmet: VitalHelmet = {
   Base,
   Default,
-  WithDesktopStatickBody,
+  WithDesktopStaticBody,
   WithFixedBody,
 };
 

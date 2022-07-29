@@ -16,7 +16,15 @@ import { HTMLProps } from 'react';
 import { ComponentOrTag, DesignableComponents, DesignableComponentsProps } from '@bodiless/fclasses';
 
 /**
- * Type of the design element in the VitalDS `Header` component.
+ * Type of the design element in the VitalDS `Header` component which consists of:
+ * - Logo
+ * - Menu
+ * - Burger Menu toggler (on mobile)
+ * - LanguageeSelector
+ * - Search (mobile & desktop slots)
+ * - Search toggler (on mobile)
+ * - Utility Menu (second menu)
+ * - Where to Buy
  *
  * @category Component
  */

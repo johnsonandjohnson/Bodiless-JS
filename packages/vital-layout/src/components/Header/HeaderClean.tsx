@@ -88,7 +88,7 @@ const HeaderCleanBase: FC<HeaderProps> = ({ components: C, ...rest }) => (
 );
 
 /**
- * A clean header to be used in pages layouts following vital design
+ * A clean header to be used in pages layouts following vital design.
  *
  * @category Component
  *
@@ -96,7 +96,7 @@ const HeaderCleanBase: FC<HeaderProps> = ({ components: C, ...rest }) => (
 const HeaderClean = designable(headerComponents, 'Header')(HeaderCleanBase);
 
 /**
- * Use this version of the card when all components are static.
+ * Use this version of the header when all components are static.
  *
  * @category Component
  *

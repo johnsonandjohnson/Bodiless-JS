@@ -12,17 +12,17 @@
  * limitations under the License.
  */
 
-import vitaLogoBaseOrig, { VitalLogo } from './tokens/vitalLogo';
+import vitalLogoBaseOrig, { VitalLogo } from './tokens/vitalLogo';
 
 /**
  * Use this version of the vital logo tokens when extending or shadowing.
  * @category Token Collection
  * @see [[vitalLogo]]
  */
-const vitaLogoBase = vitaLogoBaseOrig;
+const vitalLogoBase = vitalLogoBaseOrig;
 
 export { default as LogoClean, asLogoToken } from './LogoClean';
 export { default as vitalLogo } from './tokens';
 export type { LogoComponents } from './LogoClean';
 
-export { vitaLogoBase, VitalLogo};
+export { vitalLogoBase, VitalLogo};

@@ -39,13 +39,15 @@ const CopyrightRowCleanBase: FC<CopyrightRowProps> = ({ components: C, ...rest }
   </C.Wrapper>
 );
 
+const CopyrightRowCleanDesignable = designable(copyrightRowComponents, 'CopyrightRow')(CopyrightRowCleanBase);
 /**
- * A clean copyright row to be used in footer following vital design
+ * A clean static copyright row to be used in footer following vital design
+ * with copyright & social links.
  *
  * @category Component
  *
  */
-const CopyrightRowClean = designable(copyrightRowComponents, 'CopyrightRow')(CopyrightRowCleanBase);
+const CopyrightRowClean = withoutHydration()(CopyrightRowCleanDesignable);
 
 /**
  * A token modifier that respects the CopyRightRow Compoments.
@@ -58,4 +60,4 @@ export const asCopyrightRowToken = asVitalTokenSpec<CopyrightRowComponents>();
 const copyrightRowToken = asCopyrightRowToken();
 export type CopyrightRowToken = typeof copyrightRowToken;
 
-export default withoutHydration()(CopyrightRowClean);
+export default CopyrightRowClean;

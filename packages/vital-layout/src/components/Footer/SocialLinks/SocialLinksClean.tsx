@@ -42,7 +42,11 @@ const SocialLinksCleanBase: FC<SocialLinksProps> = ({ components: C, ...rest }) 
 /**
  * A clean social links placeholder
  *
+ * RECOMMEND TO NOT EXTEND/OVERRIDE and marked as deprecated.
+ * In future it will move to its own package and be a list of icons.
+ *
  * @category Component
+ * @deprecated
  *
  */
 const SocialLinksClean = designable(socialLinksComponents, 'SocialLinks')(SocialLinksCleanBase);

@@ -52,7 +52,7 @@ const Base = asLayoutToken({
   Layout: {
     Helmet: flowIf(
       not(useIsBurgerMenuHidden),
-    )(as(vitalHelmet.WithFixedBody, vitalHelmet.WithDesktopStatickBody)),
+    )(as(vitalHelmet.WithFixedBody, vitalHelmet.WithDesktopStaticBody)),
   },
   Theme: {
     OuterContainer: 'flex flex-col h-screen',
@@ -87,6 +87,46 @@ export interface VitalLayout {
   Base: LayoutToken,
   /**
    * Inherits from Base & assigns the components vitalHeader.Default & vitalFooter.FootWithRewards
+   *
+   * @example Override default to use custom Footer.
+   * ```js
+   * import { asLayoutToken, vitalHeader, vitalLayoutBase } from '@bodiless/vital-layout';
+   * import asMyFooter from '../../../components/Footer';
+   *
+   * const Default = asLayoutToken(vitalLayoutBase.Base, {
+   *   Components: {
+   *     Header: vitalHeader.Default,
+   *     Footer: asMyFooter,
+   *   },
+   * });
+   *
+   * export default {
+   *   ...vitalLayoutBase,
+   *   Default,
+   * };
+   * ```
+   *
+   * @example override the Skip To Main content with language specific
+   * ```js
+   * import { vitalLayoutBase, asLayoutToken } from '@bodiless/vital-layout';
+   * import { addProps, as } from '@bodiless/fclasses';
+   *
+   * const Default = asLayoutToken(vitalLayoutBase.Default, {
+   *   Behavior: {
+   *     SkipToMainContent: as(
+   *       addProps({
+   *         children: 'Passer au contenu principal',
+   *       }),
+   *     ),
+   *   },
+   * });
+   *
+   * export default {
+   *   ...vitalLayoutBase,
+   *   Default,
+   * };
+   * ```
+   *
    */
   Default: LayoutToken,
   /**

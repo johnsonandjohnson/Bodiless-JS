@@ -27,7 +27,11 @@ Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shad
 
 File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-layout/Logo.ts`
 
+?> **API Documentation**: Visit the
+[Vital Logo Token Collection](../../../Development/API/@bodiless/vital-layout/interfaces/VitalLogo)
+for examples of shadowing.
+
 ## Architectural Details
 
-To see how these elements are structured within the wrapper, please see:
-[`LogoClean.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Logo/LogoClean.tsx).
+?> **View API documentation for details.**:
+[Vital Logo Components](../../../Development/API/@bodiless/vital-layout/interfaces/LogoComponents)

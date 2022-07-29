@@ -3,9 +3,6 @@
     "Components": {
       "VitalLayout": {
         "README.md": "./doc/README.md",
-        "Responsiveness.md": "./doc/Responsiveness.md",
-        "MenuToggler.md": "./doc/MenuToggler.md",
-        "SearchToggler.md": "./doc/SearchToggler.md",
         "Logo.md": "./doc/Logo.md",
         "Footer.md": "./doc/Footer.md",
         "Header.md": "./doc/Header.md",

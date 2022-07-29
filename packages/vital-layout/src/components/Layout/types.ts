@@ -16,7 +16,12 @@ import { HTMLProps } from 'react';
 import { ComponentOrTag, DesignableComponents, DesignableComponentsProps } from '@bodiless/fclasses';
 
 /**
- * Design keys available for the Vital Layout.
+ * Design keys available for the Vital Layout which consists of
+ * - Helmet
+ * - Skip to main content
+ * - Header & Footer
+ * - Page Topper & Closer
+ * - Content Container
  *
  * @category Component
  */

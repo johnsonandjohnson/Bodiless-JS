@@ -42,7 +42,7 @@ const Default = asSocialLinksToken({
  */
 export interface VitalSocialLinks {
   /**
-   * Base applies styling to have social links in row at specific size
+   * Base applies styling to have social links in a row at specific size
    */
   Base: SocialLinksToken,
   /**

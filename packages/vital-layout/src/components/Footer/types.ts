@@ -15,7 +15,15 @@
 import { ComponentOrTag, DesignableComponents, DesignableComponentsProps } from '@bodiless/fclasses';
 
 /**
- * Type of the design element in the VitalDS `Footer` component.
+ * Type of the design element in the VitalDS `Footer` component which
+ * consists of:
+ * - Two columns:
+ *   - First column is Rewards which can be displayed above footer on larger viewports
+ *   - Second column as Menus where each menu is in its own column
+ * - CopyrightRow: which can go in under columns (CopyrightRowOutsideColumns)
+ *   or in second column (CopyrightRow) and consists of:
+ *   - Copyright Editor
+ *   - Social Links
  *
  * @category Component
  */

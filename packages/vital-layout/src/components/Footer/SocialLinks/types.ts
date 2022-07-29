@@ -18,7 +18,12 @@ import { ComponentOrTag, DesignableComponents, DesignableComponentsProps } from 
   * Type of the design element in the VitalDS `Social Links` component which
   * consists of linkable icons.  This is Stub component that renders
   * Facebook/Instagram/Youtube links.
+  *
+  * RECOMMEND TO NOT EXTEND/OVERRIDE and marked as deprecated.
+  * In future it will move to its own package and be a list of icons.
+  *
   * @category Component
+  * @deprecated
   */
 interface SocialLinksComponents extends DesignableComponents {
   /**

@@ -28,7 +28,7 @@ import {
 } from '@bodiless/vital-elements';
 
 /**
- * Type of the design element in the VitalDS `Footer` component.
+ * Type of the design element in the VitalDS `Logo` component which consists of Linkable Image.
  *
  * @category Component
  */

@@ -12,8 +12,8 @@ components:
 - [Vital Header](./Header)
 - [Vital Footer](./Footer)
 - [Vital Logo](./Logo)
-- [Vital Menu Toggler](./MenuToggler)
-- [Vital Search Toggler](./SearchToggler)
+- [Vital Menu Toggler](../VitalNavigation/BurgerMenu)
+- Vital Search Toggler
 
 ?> **API Documentation**: visit
 [Vital Layout](../../../Development/API/@bodiless/vital-layout/README)

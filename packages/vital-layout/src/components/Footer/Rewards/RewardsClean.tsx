@@ -52,7 +52,10 @@ const RewardsCleanBase: FC<RewardsProps> = ({ components: C, ...rest }) => (
 /**
  * A clean rewards placeholder
  *
+ * RECOMMEND TO NOT EXTEND/OVERRIDE and marked as deprecated.
+ *
  * @category Component
+ * @deprecated
  *
  */
 const RewardsClean = designable(rewardsComponents, 'Rewards')(RewardsCleanBase);

@@ -57,7 +57,7 @@ const FooterCleanBase: FC<FooterProps> = ({ components: C, ...rest }) => (
 );
 
 /**
- * A clean footer to be used in pages layouts.
+ * A clean footer to be used in pages layouts following vital design.
  *
  * @category Component
  *

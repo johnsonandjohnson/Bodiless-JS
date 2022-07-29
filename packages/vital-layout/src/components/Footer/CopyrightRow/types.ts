@@ -16,7 +16,9 @@ import { ComponentOrTag, DesignableComponents, DesignableComponentsProps } from 
 
 /**
  * Type of the design element in the VitalDS `Copyright Row` component which
- * consists of Copyright & Social Links
+ * consists of:
+ * - Editable Copyright
+ * - Social Links
  * @category Component
  */
 interface CopyrightRowComponents extends DesignableComponents {

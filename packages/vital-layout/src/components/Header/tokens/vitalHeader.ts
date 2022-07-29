@@ -112,6 +112,28 @@ export interface VitalHeader {
   Base: HeaderToken,
   /**
    * Inherits Base
+   *
+   * @example Will remove Search components & Where to Buy components
+   * ```js
+   * import { vitalHeaderBase, asHeaderToken, } from '@bodiless/vital-layout';
+   * import { replaceWith } from '@bodiless/fclasses';
+   *
+   * const Default = asHeaderToken({
+   *   ...vitalHeaderBase.Default,
+   *   Components: {
+   *     ...vitalHeaderBase.Default.Components,
+   *     DesktopSearch: replaceWith(() => null),
+   *     MobileSearch: replaceWith(() => null),
+   *     WhereToBuy: replaceWith(() => null),
+   *     SearchToggler: replaceWith(() => null),
+   *   },
+   * }),
+   *
+   * export default {
+   *   ...vitalHeaderBase,
+   *   Default,
+   * };
+   * ```
    */
   Default: HeaderToken,
   /**

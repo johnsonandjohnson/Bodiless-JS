@@ -106,6 +106,27 @@ export interface VitalFooter {
   Base: FooterToken,
   /**
    * Inherits from Base
+   * @example Will remove Menu components
+   * ```js
+   * import { vitalFooterBase, asFooterToken, } from '@bodiless/vital-layout';
+   * import { replaceWith } from '@bodiless/fclasses';
+   *
+   * const Default = asFooterToken({
+   *   ...vitalFooterBase.Default,
+   *   Components: {
+   *     ...vitalFooterBase.Default.Components,
+   *     FooterMenuWrapper: replaceWith(() => null),
+   *     FooterMenu: replaceWith(() => null),
+   *     MenuRow: replaceWith(() => null),
+   *   },
+   * }),
+   *
+   * export default {
+   *   ...vitalFooterBase,
+   *   Default,
+   * };
+   * ```
+   *
    */
   Default: FooterToken,
   /**

@@ -15,7 +15,8 @@
 import { ComponentOrTag, DesignableComponents, DesignableComponentsProps } from '@bodiless/fclasses';
 
 /**
- * Type of the design element in the VitalDS `Helmet` component.
+ * Type of the design element in the VitalDS `Helmet` component which consists of Helmet
+ * slots for Meta data, adding tags to HTML, Body, and adding analytics data.
  *
  * @category Component
  */

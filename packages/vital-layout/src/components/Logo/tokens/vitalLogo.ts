@@ -65,6 +65,23 @@ export interface VitalLogo {
   Base: LogoToken,
   /**
    * Default adds vital specific design reqirements.
+   * @example Will override the layout domain of logo and apply diffent styling.
+   * ```js
+   * import { vitalLogoBase, asLogoToken } from '@bodiless/vital-layout';
+   *
+   * const Default = asLogoToken({
+   *   ...vitalLogoBase.Default,
+   *   Layout: {
+   *      Image: 'h-16 max-w-15',
+   *   },
+   * }),
+   *
+   * export default {
+   *   ...vitalLogoBase,
+   *   Default,
+   * };
+   * ```
+   *
    */
   Default: LogoToken,
 }
