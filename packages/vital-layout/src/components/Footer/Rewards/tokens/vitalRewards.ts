@@ -19,6 +19,7 @@ import {
   withProps,
 } from '@bodiless/fclasses';
 import { asRewardsToken } from '../RewardsClean';
+import type { RewardsToken } from '../RewardsClean';
 
 /*
  * @TODO
@@ -105,7 +106,33 @@ const Default = asRewardsToken({
   ...Base,
 });
 
-export default {
+/**
+ * Tokens for the vital Rewards PLACEHOLDER
+ *
+ * @category Token Collection
+ * @see [[RewardsClean]]
+ */
+export interface VitalRewards {
+  /**
+   * Base Styled PLACEHOLDER
+   */
+  Base: RewardsToken,
+  /**
+   * Inherits Base
+   */
+  Default: RewardsToken,
+}
+
+/**
+ * Tokens for Vital Copyright Row
+ *
+ * @category Token Collection
+ * @see [[VitalRewards]]
+ * @see [[RewardsClean]]
+ */
+const vitalRewards: VitalRewards = {
   Base,
   Default,
 };
+
+export default vitalRewards;

@@ -88,12 +88,31 @@ const HeaderCleanBase: FC<HeaderProps> = ({ components: C, ...rest }) => (
 );
 
 /**
- * A clean header to be used in pages layouts.
+ * A clean header to be used in pages layouts following vital design.
+ *
+ * @category Component
+ *
  */
 const HeaderClean = designable(headerComponents, 'Header')(HeaderCleanBase);
+
+/**
+ * Use this version of the header when all components are static.
+ *
+ * @category Component
+ *
+ */
 const HeaderStatic = withoutHydration()(HeaderClean);
 
+/**
+ * A token modifier that respects the Header Components.
+ *
+ * @category Token Collection
+ */
 const asHeaderToken = asVitalTokenSpec<HeaderComponents>();
+
+// These are used in defining the VitalHeader interface.
+const headerToken = asHeaderToken();
+export type HeaderToken = typeof headerToken;
 
 export default HeaderClean;
 

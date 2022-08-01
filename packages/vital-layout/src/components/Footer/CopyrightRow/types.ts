@@ -12,15 +12,37 @@
  * limitations under the License.
  */
 
-import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
+import { ComponentOrTag, DesignableComponents, DesignableComponentsProps } from '@bodiless/fclasses';
 
-type CopyrightRowComponents = {
+/**
+ * Type of the design element in the VitalDS `Copyright Row` component which
+ * consists of:
+ * - Editable Copyright
+ * - Social Links
+ * @category Component
+ */
+interface CopyrightRowComponents extends DesignableComponents {
+  /**
+   * Wrapper for Copyright Row component
+   */
   Wrapper: ComponentOrTag<any>,
+  /**
+   * Wrapper for the Copyright
+   */
   CopyrightWrapper: ComponentOrTag<any>,
+  /**
+   * Used for the copyright
+   */
   Copyright: ComponentOrTag<any>,
+  /**
+   * Wrapper for the Social Links
+   */
   SocialLinksWrapper: ComponentOrTag<any>,
+  /**
+   * Used for the social links
+   */
   SocialLinks: ComponentOrTag<any>,
-};
+}
 
 type CopyrightRowProps = DesignableComponentsProps<CopyrightRowComponents>;
 

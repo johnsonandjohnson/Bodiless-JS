@@ -24,33 +24,6 @@ From a Site Builder perspective, Vital Footer is comprised of a token collection
 a Footer component (`FooterClean`). You can use the default Vital Footer token
 (`vitalFooter.Default`) as is, or you can recompose it to meet your site's requirements.
 
-### Usage
-
-Using the following code example as a guide, you can create a Footer using the Vital default tokens,
-and applying the correct node keys. Remember to apply the necessary imports to the file.
-
-```tsx
-const Footer = as(
-  // You can compose or create a new Footer token
-  // from scratch, but we'll use the default one here.
-  vitalFooter.Default,
-  // Apply a node to the footer so inner nodes
-  // are organized into its namespace.
-  withNode,
-  withNodeKey({ 'footer', nodeCollection: 'site' }),
-)(FooterClean);
-
-const Layout: FC = ({ children }) => (
-  <SiteWrapper>
-    <ContentWrapper>
-      {children}
-    </ContentWrapper>
-    <Footer />
-  </SiteWrapper>
-);
-export default Layout;
-```
-
 ### Customizing Footer
 
 #### Via Shadowing (*Preferred Method)
@@ -58,6 +31,10 @@ export default Layout;
 Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
 
 File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-layout/Footer.ts`
+
+?> **API Documentation**: Visit the
+[Vital Footer Token Collection](../../../Development/API/@bodiless/vital-layout/interfaces/VitalFooter)
+for examples of shadowing.
 
 #### Via Extending
 
@@ -82,10 +59,13 @@ const BrandXFooter = asFooterToken({
 });
 ```
 
-This token is then applied to the Footer slot within Layout.
+This token is then applied to the Footer slot within Layout -- can be achieved
+by shadowing Layout, see
+[Vital Layout Token Collection](../../../Development/API/@bodiless/vital-layout/interfaces/VitalLayout?id=default)
 
 ## Architectural Details
 
-Vital Footer provides a `<footer>` element wrapper around its internal elements. To see how these
-elements are structured within the wrapper, please see:
-[`FooterClean.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Footer/FooterClean.tsx ':target=_blank')
+Vital Footer provides a `<footer>` element wrapper around its internal elements.
+
+?> **View API documentation for details.**:
+[Vital Footer Components](../../../Development/API/@bodiless/vital-layout/interfaces/FooterComponents)
