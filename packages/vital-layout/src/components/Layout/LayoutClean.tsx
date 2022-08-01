@@ -92,7 +92,7 @@ export const LayoutCleanBase: FC<LayoutProps> = (layoutProps: LayoutProps) => {
 const LayoutClean = designable(layoutComponents, 'Layout')(LayoutCleanBase);
 
 /**
- * A token modifier that respects the Layout Compoments.
+ * A token modifier that respects the Layout Components.
  *
  * @category Token Collection
  */

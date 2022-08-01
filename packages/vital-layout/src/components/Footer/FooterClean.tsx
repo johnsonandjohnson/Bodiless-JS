@@ -65,7 +65,7 @@ const FooterCleanBase: FC<FooterProps> = ({ components: C, ...rest }) => (
 const FooterClean = designable(footerComponents, 'Footer')(FooterCleanBase);
 
 /**
- * A token modifier that respects the Footer Compoments.
+ * A token modifier that respects the Footer Components.
  *
  * @category Token Collection
  */

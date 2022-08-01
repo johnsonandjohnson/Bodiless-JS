@@ -50,7 +50,7 @@ const CopyrightRowCleanDesignable = designable(copyrightRowComponents, 'Copyrigh
 const CopyrightRowClean = withoutHydration()(CopyrightRowCleanDesignable);
 
 /**
- * A token modifier that respects the CopyRightRow Compoments.
+ * A token modifier that respects the CopyRightRow Components.
  *
  * @category Token Collection
  */

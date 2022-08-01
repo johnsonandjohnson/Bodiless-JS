@@ -104,7 +104,7 @@ const HeaderClean = designable(headerComponents, 'Header')(HeaderCleanBase);
 const HeaderStatic = withoutHydration()(HeaderClean);
 
 /**
- * A token modifier that respects the Header Compoments.
+ * A token modifier that respects the Header Components.
  *
  * @category Token Collection
  */

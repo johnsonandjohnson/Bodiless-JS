@@ -83,7 +83,7 @@ const HelmetClean = designable(helmetComponents, 'Helmet')(HelmetBase);
 export default HelmetClean;
 
 /**
- * A token modifier that respects the Helmet Compoments.
+ * A token modifier that respects the Helmet Components.
  *
  * @category Token Collection
  */

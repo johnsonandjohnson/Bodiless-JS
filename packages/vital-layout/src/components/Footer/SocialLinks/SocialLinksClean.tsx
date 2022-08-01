@@ -52,7 +52,7 @@ const SocialLinksCleanBase: FC<SocialLinksProps> = ({ components: C, ...rest }) 
 const SocialLinksClean = designable(socialLinksComponents, 'SocialLinks')(SocialLinksCleanBase);
 
 /**
- * A token modifier that respects the Social Links Compoments.
+ * A token modifier that respects the Social Links Components.
  *
  * @category Token Collection
  */

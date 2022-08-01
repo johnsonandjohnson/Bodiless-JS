@@ -61,7 +61,7 @@ const RewardsCleanBase: FC<RewardsProps> = ({ components: C, ...rest }) => (
 const RewardsClean = designable(rewardsComponents, 'Rewards')(RewardsCleanBase);
 
 /**
- * A token modifier that respects the Rewards Compoments.
+ * A token modifier that respects the Rewards Components.
  *
  * @category Token Collection
  */

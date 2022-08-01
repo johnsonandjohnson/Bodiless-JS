@@ -68,7 +68,7 @@ const LogoBase: FC<LogoProps> = ({ components: C }) => (
 );
 
 /**
- * A token modifier that respects the Logo Compoments.
+ * A token modifier that respects the Logo Components.
  *
  * @category Token Collection
  */

@@ -1,7 +1,7 @@
 # Vital Layout Components
 
 The Vital Layout Package provides a set of components & tokens to compose the
-overall layout of a page. For more information on each componenent, visit the
+overall layout of a page. For more information on each component, visit the
 individual component documentation or the API documentation.
 
 The Vital Layout (`@bodiless/vital-layout`) package is composed of the following
