@@ -5,6 +5,7 @@
 * [@bodiless/vital-buttons](/Development/API/@bodiless/vital-buttons/README)
 * [@bodiless/vital-card](/Development/API/@bodiless/vital-card/README)
 * [@bodiless/vital-flowcontainer](/Development/API/@bodiless/vital-flowcontainer/README)
+* [@bodiless/vital-layout](/Development/API/@bodiless/vital-layout/README)
 * [@bodiless/vital-list](/Development/API/@bodiless/vital-list/README)
 * [@bodiless/vital-meta](/Development/API/@bodiless/vital-meta/README)
 * [@bodiless/vital-table](/Development/API/@bodiless/vital-table/README)

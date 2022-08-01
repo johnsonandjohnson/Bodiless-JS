@@ -42,7 +42,7 @@ The cta link.  By default is vital linkclean.
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:96](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/CardClean.tsx#L96)
+[vital-card/src/components/Card/CardClean.tsx:96](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a22989f2/packages/vital-card/src/components/Card/CardClean.tsx#L96)
 
 ___
 
@@ -54,7 +54,7 @@ The text of link.  Recommended: a plain editor.
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:100](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/CardClean.tsx#L100)
+[vital-card/src/components/Card/CardClean.tsx:100](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a22989f2/packages/vital-card/src/components/Card/CardClean.tsx#L100)
 
 ___
 
@@ -66,7 +66,7 @@ A wrapper to style the CTA. By default is a Div.
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:92](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/CardClean.tsx#L92)
+[vital-card/src/components/Card/CardClean.tsx:92](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a22989f2/packages/vital-card/src/components/Card/CardClean.tsx#L92)
 
 ___
 
@@ -78,7 +78,7 @@ The eyebrow text of the card.  By default this is a plain editor.
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:64](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/CardClean.tsx#L64)
+[vital-card/src/components/Card/CardClean.tsx:64](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a22989f2/packages/vital-card/src/components/Card/CardClean.tsx#L64)
 
 ___
 
@@ -90,7 +90,7 @@ The text body or description of the card.  Recommended: a plain rich text editor
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:80](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/CardClean.tsx#L80)
+[vital-card/src/components/Card/CardClean.tsx:80](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a22989f2/packages/vital-card/src/components/Card/CardClean.tsx#L80)
 
 ___
 
@@ -102,7 +102,7 @@ A wrapper to style the Description. By default is a Fragment.
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:76](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/CardClean.tsx#L76)
+[vital-card/src/components/Card/CardClean.tsx:76](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a22989f2/packages/vital-card/src/components/Card/CardClean.tsx#L76)
 
 ___
 
@@ -114,7 +114,7 @@ A wrapper to style the Description. By default is a Div.
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:60](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/CardClean.tsx#L60)
+[vital-card/src/components/Card/CardClean.tsx:60](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a22989f2/packages/vital-card/src/components/Card/CardClean.tsx#L60)
 
 ___
 
@@ -126,7 +126,7 @@ A wrapper to style the Eyebrow. By default is a Div.
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:56](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/CardClean.tsx#L56)
+[vital-card/src/components/Card/CardClean.tsx:56](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a22989f2/packages/vital-card/src/components/Card/CardClean.tsx#L56)
 
 ___
 
@@ -138,7 +138,7 @@ The image. By Default this is Img.
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:52](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/CardClean.tsx#L52)
+[vital-card/src/components/Card/CardClean.tsx:52](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a22989f2/packages/vital-card/src/components/Card/CardClean.tsx#L52)
 
 ___
 
@@ -150,7 +150,7 @@ A wrapper to style the Image. By default is a Div.
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:48](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/CardClean.tsx#L48)
+[vital-card/src/components/Card/CardClean.tsx:48](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a22989f2/packages/vital-card/src/components/Card/CardClean.tsx#L48)
 
 ___
 
@@ -162,7 +162,7 @@ A slot to render the rating.  By default this is a Fragment.
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:88](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/CardClean.tsx#L88)
+[vital-card/src/components/Card/CardClean.tsx:88](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a22989f2/packages/vital-card/src/components/Card/CardClean.tsx#L88)
 
 ___
 
@@ -174,7 +174,7 @@ A wrapper to style the Rating. By default is a Fragment.
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:84](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/CardClean.tsx#L84)
+[vital-card/src/components/Card/CardClean.tsx:84](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a22989f2/packages/vital-card/src/components/Card/CardClean.tsx#L84)
 
 ___
 
@@ -186,7 +186,7 @@ The text title of the card.  By default this a plain editor.
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:72](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/CardClean.tsx#L72)
+[vital-card/src/components/Card/CardClean.tsx:72](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a22989f2/packages/vital-card/src/components/Card/CardClean.tsx#L72)
 
 ___
 
@@ -198,7 +198,7 @@ A wrapper to style the Description. By default is a H3.
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:68](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/CardClean.tsx#L68)
+[vital-card/src/components/Card/CardClean.tsx:68](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a22989f2/packages/vital-card/src/components/Card/CardClean.tsx#L68)
 
 ___
 
@@ -210,4 +210,4 @@ The outer wrapper of the card.  By default this is A to make entire card clickab
 
 #### Defined in
 
-[vital-card/src/components/Card/CardClean.tsx:44](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/vital-card/src/components/Card/CardClean.tsx#L44)
+[vital-card/src/components/Card/CardClean.tsx:44](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a22989f2/packages/vital-card/src/components/Card/CardClean.tsx#L44)

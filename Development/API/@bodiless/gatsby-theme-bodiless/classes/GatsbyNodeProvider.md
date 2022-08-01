@@ -534,7 +534,7 @@ BodilessStoreProvider.createStore
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyNodeProvider.bl-edit.tsx:19](https://github.com/johnsonandjohnson/Bodiless-JS/blob/51751415/packages/gatsby-theme-bodiless/src/dist/GatsbyNodeProvider.bl-edit.tsx#L19)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyNodeProvider.bl-edit.tsx:19](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a22989f2/packages/gatsby-theme-bodiless/src/dist/GatsbyNodeProvider.bl-edit.tsx#L19)
 
 ___
 

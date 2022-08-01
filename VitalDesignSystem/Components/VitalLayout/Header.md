@@ -19,39 +19,13 @@ By default, the editable components include:
 
 - Logo
 - Menu
+- Utility Menu
 
 ## Site Builder Details
 
 From a Site Builder perspective, Vital Header is comprised of a token collection (`vitalHeader`) and
 a Header component (`HeaderClean`). You can use the default Vital Header token
 (`vitalHeader.Default`) as is, or you can recompose it to meet your site's requirements.
-
-### Usage
-
-Using the following code example as a guide, you can create a Header using the Vital default tokens,
-and applying the correct node keys. Remember to apply the necessary imports to the file.
-
-```tsx
-const Header = as(
-  // You can compose or create a new header token
-  // from scratch, but we'll use the default one here.
-  vitalHeader.Default,
-  // Apply a node to the header so inner nodes
-  // are organized into its namespace.
-  withNode,
-  withNodeKey({ 'header', nodeCollection: 'site' }),
-)(HeaderClean);
-
-const Layout: FC = ({ children }) => (
-  <SiteWrapper>
-    <Header />
-    <ContentWrapper>
-      {children}
-    </ContentWrapper>
-  </SiteWrapper>
-);
-export default Layout;
-```
 
 ### Customizing Header
 
@@ -60,6 +34,10 @@ export default Layout;
 Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
 
 File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-layout/Header.ts`
+
+?> **API Documentation**: Visit the
+[Vital Header Token Collection](../../../Development/API/@bodiless/vital-layout/interfaces/VitalHeader)
+for examples of shadowing.
 
 #### Via Extending
 
@@ -84,10 +62,13 @@ const BrandXHeader = asHeaderToken({
 });
 ```
 
-This token is then applied to the Header slot within Layout.
+This token is then applied to the Header slot within Layout -- can be achieved
+by shadowing Layout, see
+[Vital Layout Token Collection](../../../Development/API/@bodiless/vital-layout/interfaces/VitalLayout?id=default)
 
 ## Architectural Details
 
-Vital Header provides a `<header>` element wrapper around its internal elements. To see how these
-elements are structured within the wrapper, please see:
-[`HeaderClean.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Header/HeaderClean.tsx)
+Vital Header provides a `<header>` element wrapper around its internal elements.
+
+?> **View API documentation for details.**:
+[Vital Header Components](../../../Development/API/@bodiless/vital-layout/interfaces/HeaderComponents)
