@@ -16,6 +16,7 @@ import React, { FC, HTMLProps } from 'react';
 
 import {
   A,
+  DesignableComponents,
   DesignableComponentsProps,
   Span,
   Img,
@@ -26,11 +27,25 @@ import {
   asVitalTokenSpec,
 } from '@bodiless/vital-elements';
 
-export type LogoComponents = {
+/**
+ * Type of the design element in the VitalDS `Logo` component which consists of Linkable Image.
+ *
+ * @category Component
+ */
+export interface LogoComponents extends DesignableComponents {
+  /**
+   * Wrapper for the Logo
+   */
   Wrapper: ComponentOrTag<any>,
+  /**
+   * Used for the image of the logo
+   */
   Image: ComponentOrTag<any>,
+  /**
+   * Used for the link of the logo
+   */
   Link: ComponentOrTag<any>,
-};
+}
 
 type LogoProps = DesignableComponentsProps<LogoComponents> & HTMLProps<HTMLElement>;
 
@@ -53,14 +68,22 @@ const LogoBase: FC<LogoProps> = ({ components: C }) => (
 );
 
 /**
- * Crete a logo token.
+ * A token modifier that respects the Logo Components.
+ *
+ * @category Token Collection
  */
 const asLogoToken = asVitalTokenSpec<LogoComponents>();
 
 /**
  * Clean component to be used for the site logo
+ *
+ * @category Component
  */
 const LogoClean = designable(logoComponents, 'Logo')(LogoBase);
+
+// These are used in defining the VitalLogo interface.
+const logoToken = asLogoToken();
+export type LogoToken = typeof logoToken;
 
 export default LogoClean;
 export { asLogoToken };

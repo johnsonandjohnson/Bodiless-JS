@@ -13,8 +13,8 @@
  */
 
 import {
-  StaticBlock as CopyrightRowClean,
+  StaticBlock as CopyrightRowStatic,
   staticTokenCollection as vitalCopyrightRow,
 } from '@bodiless/hydration';
 
-export { CopyrightRowClean, vitalCopyrightRow };
+export { CopyrightRowStatic, vitalCopyrightRow };
