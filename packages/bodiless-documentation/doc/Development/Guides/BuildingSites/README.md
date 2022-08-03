@@ -96,21 +96,35 @@ requirements for your site, you may want to extend these tokens.
 <!-- tabs:start -->
 ### **Overview**
 
-This step will define and implement the general layout of your site. This will include breakpoints,
-header and footer, and the general overall structure each page will reuse.
+This step will define and implement the general layout of your site. This will
+include the general overall structure each page will reuse and the helmet (items
+rendered in <head>). 
 
-  <!-- TODO: Link to Layout doc and shadowing examples -->
+?> **Note:** This also includes header & footer but this step is broken out into
+three individual steps. If your site needs multi-language, it is best to do that
+step prior to setting up the Header & Footer. This will allow components within
+the header/footer or the entire header/footer component to be toggled for the
+different lang.
+
+- For more information, for [Multi-language](?id=_6-multi-language)
+- For more information, for
+  [Global Components in Header & Footer](?id=_7-global-components-in-header-amp-footer)
+
+### **Guide**
+
+Recommended patterns for overriding layout:
+
+- [Layout](/Development/API/@bodiless/vital-layout/interfaces/VitalLayout?id=default)
+- [Helmet](/Development/API/@bodiless/vital-layout/interfaces/VitalHelmet?id=default)
 
 ### **Resources**
 
-- Basic structure for your site's [Layout](/VitalDesignSystem/Components/VitalLayout/Layout).
-- [Breakpoints for responsiveness](/VitalDesignSystem/Components/VitalLayout/Responsiveness#breakpoints)
-- [Header](/VitalDesignSystem/Components/VitalLayout/Header)
-- [Footer](/VitalDesignSystem/Components/VitalLayout/Footer)
-- [Helmet](/VitalDesignSystem/Components/VitalLayout/Helmet)
-- Togglers:
-  - [Menu Toggler](/VitalDesignSystem/Components/VitalLayout/MenuToggler)
-  - [Search Toggler](/VitalDesignSystem/Components/VitalLayout/SearchToggler)
+- [Layout Documentation](/VitalDesignSystem/Components/VitalLayout/Layout)
+  - [Layout API Components](/Development/API/@bodiless/vital-layout/interfaces/LayoutComponents)
+  - [Layout API Token Collection](/Development/API/@bodiless/vital-layout/interfaces/VitalLayout)
+- [Helmet Documentation](/VitalDesignSystem/Components/VitalLayout/Helmet)
+  - [Helmet API Components](/Development/API/@bodiless/vital-layout/interfaces/HelmetComponents)
+  - [Helmet API Token Collection](/Development/API/@bodiless/vital-layout/interfaces/VitalHelmet)
 - For a more in-depth guide on working with the layout, please visit [Vital
   Layout](/VitalDesignSystem/Components/VitalLayout/).
 
@@ -131,7 +145,6 @@ default, is enabled for two languages.
   <!-- TODO: Complete bullet when able. -->
 - If your site requires multi-language, we recommend bringing in the @bodiless/i18 package... TBD
 
-
 <!-- TODO: Resources. -->
 
 <!-- tabs:end -->
@@ -144,11 +157,27 @@ default, is enabled for two languages.
 This step will define the components that appear in the header and footer, and are common to all
 pages. (Excluding the Menu which is the next step.)
 
+### **Guide**
+
+Recommended patterns for overriding layout:
+
+- [Logo](/Development/API/@bodiless/vital-layout/interfaces/VitalLogo?id=default)
+- [Header](/Development/API/@bodiless/vital-layout/interfaces/VitalHeader?id=default)
+- [Footer](/Development/API/@bodiless/vital-layout/interfaces/VitalFooter?id=default)
+
 ### **Resources**
 
 - [Logo](/VitalDesignSystem/Components/VitalLayout/Logo)
-- [Header components](/VitalDesignSystem/Components/VitalLayout/Header)
-- [Footer components](/VitalDesignSystem/Components/VitalLayout/Footer)
+  - [Logo API Components](/Development/API/@bodiless/vital-layout/interfaces/LogoComponents)
+  - [Logo API Token Collection](/Development/API/@bodiless/vital-layout/interfaces/VitalLogo)
+- [Header](/VitalDesignSystem/Components/VitalLayout/Header)
+  - [Header API Components](/Development/API/@bodiless/vital-layout/interfaces/HeaderComponents)
+  - [Header API Token Collection](/Development/API/@bodiless/vital-layout/interfaces/VitalHeader)
+- [Footer](/VitalDesignSystem/Components/VitalLayout/Footer)
+  - [Footer API Components](/Development/API/@bodiless/vital-layout/interfaces/FooterComponents)
+  - [Footer API Token Collection](/Development/API/@bodiless/vital-layout/interfaces/VitalFooter)
+  - [CopyrightRow API Components](/Development/API/@bodiless/vital-layout/interfaces/CopyrightRowComponents)
+  - [CopyrightRow API Token Collection](/Development/API/@bodiless/vital-layout/interfaces/VitalCopyrightRow)
 
 <!-- tabs:end -->
 
