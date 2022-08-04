@@ -100,11 +100,11 @@ This step will define and implement the general layout of your site. This will
 include the general overall structure each page will reuse and the helmet (items
 rendered in <head>). 
 
-?> **Note:** This also includes header & footer but this step is broken out into
-three individual steps. If your site needs multi-language, it is best to do that
-step prior to setting up the Header & Footer. This will allow components within
-the header/footer or the entire header/footer component to be toggled for the
-different lang.
+?> **Note:** Layout also includes header & footer but this step is broken out
+into three individual steps: Layout, Multilingual, & Header/Footer. If your site
+needs multi-language, it is best to do that step prior to setting up the Header
+& Footer. This will allow components within the header/footer or the entire
+header/footer component to be toggled for the different language.
 
 - For more information, for [Multi-language](?id=_6-multi-language)
 - For more information, for
