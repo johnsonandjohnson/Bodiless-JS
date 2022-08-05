@@ -18,6 +18,7 @@ import CardClean, { asCardToken } from './CardClean';
 import type { CardComponents } from './CardClean';
 import vitalCard from './tokens';
 import { vitalCardStatic, CardStatic } from './index.bl-edit';
+import { asExternalBaseCard, asExternalHeroCard } from './External';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
@@ -33,6 +34,8 @@ export {
   vitalCard,
   vitalCardBase,
   vitalCardStatic,
+  asExternalBaseCard,
+  asExternalHeroCard,
 };
 
 export type { CardComponents, VitalCard };

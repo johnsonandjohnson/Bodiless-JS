@@ -18,7 +18,6 @@ import {
   DesignableComponents,
   DesignableComponentsProps,
   Div,
-  A,
   Img,
   H3,
   StylableProps,
@@ -101,7 +100,7 @@ export interface CardComponents extends DesignableComponents {
 }
 
 const cardComponentStart: CardComponents = {
-  Wrapper: A,
+  Wrapper: Div,
   ImageWrapper: Div,
   Image: Img,
   EyebrowWrapper: Div,

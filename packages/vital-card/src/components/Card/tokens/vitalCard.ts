@@ -36,6 +36,7 @@ import { Topic } from './Topic';
 import type { VitalCardTopic } from './Topic';
 import { Product } from './Product';
 import type { VitalCardProduct } from './Product';
+import WithBodilessEditor, { VitalCardBodilessEditor } from './Editor';
 
 const WithNoTitle = asCardToken({
   Components: {
@@ -74,9 +75,10 @@ const WithFlexGrowImage = asCardToken({
   Meta: flowHoc.meta.term('Features')('Image controls height of Vertical cards in a row'),
 });
 
-const Default = asCardToken({
-  ...Base,
-});
+const Default = asCardToken(
+  Base,
+  WithBodilessEditor,
+);
 
 const Basic = asCardToken(Default, {
   Meta: extendMeta(
@@ -153,6 +155,7 @@ interface VitalCardCore {
  */
 export interface VitalCard extends
   VitalCardBase,
+  VitalCardBodilessEditor,
   VitalCardHero,
   VitalCardCategory,
   VitalCardTopic,
@@ -188,6 +191,7 @@ const vitalCard: VitalCard = {
   WithVerticalOrientation,
   WithFlowContainerPreview,
   WithFlexGrowImage,
+  WithBodilessEditor,
 };
 
 export default vitalCard;
