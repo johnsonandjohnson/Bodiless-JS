@@ -13,11 +13,11 @@
  */
 
 import vitalCardBaseOrig from './tokens/vitalCard';
-import type { VitalCardBodiless } from './tokens/vitalCard';
-import CardClean, { asCardToken } from './CardClean';
-import type { CardComponents } from './CardClean';
-import vitalCard from './tokens';
-import { vitalCardStatic, CardStatic } from './index.bl-edit';
+import type { VitalCard } from './tokens/vitalCard';
+import CardCleanCore, { asCardToken, cardComponentStart, CardBase } from './CardClean';
+import type { CardToken, CardComponents, CardProps } from './CardClean';
+import vitalCardCore from './tokens';
+import { asExternalBaseCard, asExternalHeroCard } from './External';
 
 /**
  * Use this version of the vital card tokens when extending or shadowing.
@@ -28,11 +28,15 @@ const vitalCardBase = vitalCardBaseOrig;
 
 export {
   asCardToken,
-  CardClean,
-  CardStatic,
-  vitalCard,
+  cardComponentStart,
+  CardBase,
+  CardCleanCore,
+  vitalCardCore,
   vitalCardBase,
-  vitalCardStatic,
+  asExternalBaseCard,
+  asExternalHeroCard,
 };
 
-export type { CardComponents, VitalCardBodiless };
+export type {
+  CardToken, CardComponents, VitalCard, CardProps
+};

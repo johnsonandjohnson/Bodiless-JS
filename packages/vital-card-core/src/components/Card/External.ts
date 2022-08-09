@@ -13,9 +13,14 @@
  */
 
 import {
-  addProps, flowHoc, withDesign
+  addProps, as, flowHoc, withDesign
 } from '@bodiless/fclasses';
-import { asBodilessImage, ImageData } from '@bodiless/components';
+
+export type ImageData = {
+  src: string;
+  alt: string;
+  title: string;
+};
 
 export type CardPropsData = {
   Title?: string,
@@ -28,7 +33,11 @@ export type CardPropsData = {
 
 const asExternalBaseCard = (content: CardPropsData) => flowHoc(
   withDesign({
-    Image: asBodilessImage('card-image', content.Image),
+    Image: as(
+      addProps({ src: content.Image?.src }),
+      addProps({ alt: content.Image?.alt }),
+      addProps({ title: content.Image?.title }),
+    ),
     Title: addProps({ children: content.Title }),
     Eyebrow: addProps({ children: content.Eyebrow }),
     Description: addProps({ children: content.Description }),
@@ -38,7 +47,11 @@ const asExternalBaseCard = (content: CardPropsData) => flowHoc(
 
 const asExternalHeroCard = (content: CardPropsData) => flowHoc(
   withDesign({
-    Image: asBodilessImage('card-image', content.Image),
+    Image: as(
+      addProps({ src: content.Image?.src }),
+      addProps({ alt: content.Image?.alt }),
+      addProps({ title: content.Image?.title }),
+    ),
     Title: addProps({ children: content.Title }),
     Eyebrow: addProps({ children: content.Eyebrow }),
     Description: addProps({ children: content.Description }),

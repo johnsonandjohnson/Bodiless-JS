@@ -16,9 +16,8 @@ import omit from 'lodash/omit';
 import {
   flowHoc, replaceWith, Div, extendMeta, H1, H4,
 } from '@bodiless/fclasses';
-import { vitalImage } from '@bodiless/vital-image';
+// import { vitalImage } from '@bodiless/vital-image';
 import { vitalTypography } from '@bodiless/vital-elements';
-import { asBodilessLink } from '@bodiless/components-ui';
 import { asCardToken } from '../CardClean';
 import type { CardToken } from '../CardClean';
 import Base, {
@@ -26,7 +25,6 @@ import Base, {
   WithHorizontalLeftOrientation,
   WithHorizontalContentCentered,
 } from './Base';
-import WithBodilessEditor from './Editor';
 
 const HeroBase = asCardToken({
   ...Base,
@@ -40,7 +38,7 @@ const HeroBase = asCardToken({
     DescriptionWrapper: replaceWith(H4),
   },
   Behavior: {
-    Image: vitalImage.WithEager,
+    // Image: vitalImage.WithEager,
   },
   Layout: WithHorizontalOrientationBase.Layout,
   Spacing: {
@@ -60,22 +58,10 @@ const HeroBase = asCardToken({
   ),
 });
 
-const WithHeroEditors = asCardToken(
-  WithBodilessEditor,
-  {
-    // Remove Link Editor from Wrapper and to the CTALink
-    Editors: {
-      Wrapper: undefined,
-      CTALink: asBodilessLink(),
-    },
-  },
-);
-
 const Hero = asCardToken(
   HeroBase,
   WithHorizontalContentCentered,
   WithHorizontalLeftOrientation,
-  WithHeroEditors,
 );
 
 export interface VitalCardHero {

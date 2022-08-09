@@ -13,70 +13,22 @@
  */
 
 import { extendMeta, flowHoc, replaceWith } from '@bodiless/fclasses';
-import { asCardToken } from '../CardClean';
-import type { CardToken } from '../CardClean';
-import Base, {
-  WithFlowContainerPreview,
-  WithHorizontalOrientationBase,
-  WithHorizontalLeftOrientation,
-  WithHorizontalRightOrientation,
-  WithHorizontalContentAtTop,
-  WithHorizontalContentCentered,
-  WithVerticalOrientation,
-  WithPrimaryTextLink,
-  WithPrimaryButton,
-  WithSecondaryButton,
-} from './Base';
-import type { VitalCardBase } from './Base';
-import { HeroBase, Hero } from './Hero';
-import type { VitalCardHero } from './Hero';
-import { Category } from './Category';
-import type { VitalCardCategory } from './Category';
-import { Topic } from './Topic';
-import type { VitalCardTopic } from './Topic';
-import { Product } from './Product';
-import type { VitalCardProduct } from './Product';
+import { ifComponentSelector } from '@bodiless/layouts';
+import { asBodilessLink } from '@bodiless/components-ui';
+import { vitalCardCore, asCardToken } from '@bodiless/vital-card-core';
+import type { CardToken, VitalCard } from '@bodiless/vital-card-core';
 import WithBodilessEditor, { VitalCardBodilessEditor } from './Editor';
+import { CardDescriptionPreview } from '../CardClean';
 
-const WithNoTitle = asCardToken({
-  Components: {
-    TitleWrapper: replaceWith(() => null),
+const WithFlowContainerPreview = asCardToken({
+  Flow: ifComponentSelector,
+  Core: {
+    Description: replaceWith(CardDescriptionPreview),
   },
-  Meta: flowHoc.meta.term('Features')('No Title'),
-});
-
-const WithNoEyebrow = asCardToken({
-  Components: {
-    EyebrowWrapper: replaceWith(() => null),
-  },
-  Meta: flowHoc.meta.term('Features')('No Eyebrow'),
-});
-
-/**
- * WithNoDescription removes the description from the card and adjusts title.
- *
- *  where
- *     Title - adds grow because description will not exist
- */
-const WithNoDescription = asCardToken({
-  Components: {
-    DescriptionWrapper: replaceWith(() => null),
-  },
-  Layout: {
-    Title: 'flex-grow',
-  },
-  Meta: flowHoc.meta.term('Features')('No Description'),
-});
-
-const WithFlexGrowImage = asCardToken({
-  Layout: {
-    ImageWrapper: 'flex-grow',
-  },
-  Meta: flowHoc.meta.term('Features')('Image controls height of Vertical cards in a row'),
 });
 
 const Default = asCardToken(
-  Base,
+  vitalCardCore.Base,
   WithBodilessEditor,
 );
 
@@ -87,13 +39,31 @@ const Basic = asCardToken(Default, {
   ),
 });
 
+const WithHeroEditors = asCardToken(
+  WithBodilessEditor,
+  {
+    // Remove Link Editor from Wrapper and to the CTALink
+    Editors: {
+      Wrapper: undefined,
+      CTALink: asBodilessLink(),
+    },
+  },
+);
+
+const Hero = asCardToken(
+  vitalCardCore.HeroBase,
+  vitalCardCore.WithHorizontalContentCentered,
+  vitalCardCore.WithHorizontalLeftOrientation,
+  WithHeroEditors,
+);
+
 /**
- * Tokens for the vital card
+ * Tokens for the vital card that make it Editable
  *
  * @category Token Collection
  * @see [[VitalCardClean]]
  */
-interface VitalCardCore {
+interface VitalCardEditable {
   /**
    * Defines the base card for the Vital DS.
    * - Editor/Content/Schema domains defines editors on Title/Eyebrow/Description/CTA
@@ -126,25 +96,15 @@ interface VitalCardCore {
    */
   Basic: CardToken,
   /**
-   * Composable token which removes the description from the card and adjusts title
-   * by adding flex-grow to it because description will not exist (default field to control
-   * height.) This will allow vertical cards with no description to continue to maintain
-   * same height within a flow-container.
+   * Hero extends the HeroBase token and combines it to have image on left
+   * and content is vertically centered.
    */
-  WithNoDescription: CardToken,
+  Hero: CardToken,
   /**
-   * Composable token which removes title from the card
+   * Composable token which repaces the flow container description (RTE preview)
+   * with the word 'Description'
    */
-  WithNoTitle: CardToken,
-  /**
-   * Composable token which removes eyebrow from the card
-   */
-  WithNoEyebrow: CardToken,
-  /**
-   * Composable token which adds adds flex-grow to image, allowing the vertical cards
-   * to maintain same size images.
-   */
-  WithFlexGrowImage: CardToken,
+  WithFlowContainerPreview: CardToken,
 }
 
 /**
@@ -153,14 +113,10 @@ interface VitalCardCore {
  * @category Token Collection
  * @see [[CardClean]]
  */
-export interface VitalCard extends
-  VitalCardBase,
-  VitalCardBodilessEditor,
-  VitalCardHero,
-  VitalCardCategory,
-  VitalCardTopic,
-  VitalCardProduct,
-  VitalCardCore
+export interface VitalCardBodiless extends
+  VitalCard,
+  VitalCardEditable,
+  VitalCardBodilessEditor
 {}
 
 /**
@@ -168,29 +124,12 @@ export interface VitalCard extends
  *
  * @category Token Collection
  */
-const vitalCard: VitalCard = {
-  Base,
+const vitalCard: VitalCardBodiless = {
+  ...vitalCardCore,
   Default,
   Basic,
-  HeroBase,
   Hero,
-  Category,
-  Topic,
-  Product,
-  WithPrimaryTextLink,
-  WithPrimaryButton,
-  WithSecondaryButton,
-  WithNoDescription,
-  WithNoTitle,
-  WithNoEyebrow,
-  WithHorizontalOrientationBase,
-  WithHorizontalLeftOrientation,
-  WithHorizontalRightOrientation,
-  WithHorizontalContentAtTop,
-  WithHorizontalContentCentered,
-  WithVerticalOrientation,
   WithFlowContainerPreview,
-  WithFlexGrowImage,
   WithBodilessEditor,
 };
 

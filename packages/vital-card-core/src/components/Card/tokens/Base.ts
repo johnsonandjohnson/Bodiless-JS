@@ -12,14 +12,12 @@
  * limitations under the License.
  */
 
-import { ifComponentSelector } from '@bodiless/layouts';
 import {
   flowHoc, replaceWith, as, extendMeta, Div, A,
 } from '@bodiless/fclasses';
 import { vitalTypography } from '@bodiless/vital-elements';
-import { ButtonClean, vitalButtons } from '@bodiless/vital-buttons';
-import { LinkClean, vitalLink } from '@bodiless/vital-link';
-import { asCardToken, CardDescriptionPreview } from '../CardClean';
+// import { ButtonClean, vitalButtons } from '@bodiless/vital-buttons';
+import { asCardToken } from '../CardClean';
 import type { CardToken } from '../CardClean';
 
 const Base = asCardToken({
@@ -98,19 +96,12 @@ const WithHorizontalRightOrientation = asCardToken(WithHorizontalOrientationBase
   Meta: flowHoc.meta.term('Orientation')('Right Image'),
 });
 
-const WithFlowContainerPreview = asCardToken({
-  Flow: ifComponentSelector,
-  Core: {
-    Description: replaceWith(CardDescriptionPreview),
-  },
-});
-
 const WithPrimaryTextLink = asCardToken({
   Components: {
-    CTALink: replaceWith(LinkClean),
+    // CTALink: replaceWith(LinkClean),
   },
   Theme: {
-    CTALink: vitalLink.PrimaryLink,
+    // CTALink: vitalLink.PrimaryLink,
   },
   Meta: extendMeta(
     flowHoc.meta.term('CTA Style')('Text Link'),
@@ -121,10 +112,10 @@ const WithPrimaryTextLink = asCardToken({
 const WithPrimaryButton = asCardToken({
   Components: {
     CTAWrapper: replaceWith(Div),
-    CTALink: replaceWith(ButtonClean),
+    // CTALink: replaceWith(ButtonClean),
   },
   Theme: {
-    CTALink: as(vitalButtons.Primary, vitalButtons.WithArrow),
+    // CTALink: as(vitalButtons.Primary, vitalButtons.WithArrow),
   },
   Meta: extendMeta(
     flowHoc.meta.term('CTA Style')('Primary Button'),
@@ -135,10 +126,10 @@ const WithPrimaryButton = asCardToken({
 const WithSecondaryButton = asCardToken({
   Components: {
     CTAWrapper: replaceWith(Div),
-    CTALink: replaceWith(ButtonClean),
+    // CTALink: replaceWith(ButtonClean),
   },
   Theme: {
-    CTALink: as(vitalButtons.Secondary, vitalButtons.WithArrow),
+    // CTALink: as(vitalButtons.Secondary, vitalButtons.WithArrow),
   },
   Meta: extendMeta(
     flowHoc.meta.term('CTA Style')('Secondary Button'),
@@ -209,11 +200,6 @@ export interface VitalCardBase {
    */
   WithHorizontalContentCentered: CardToken,
   /**
-   * Composable token which repaces the flow container description (RTE preview)
-   * with the word 'Description'
-   */
-  WithFlowContainerPreview: CardToken,
-  /**
    * Composable token which adds a visible CTA with style primary text link
    */
   WithPrimaryTextLink: CardToken,
@@ -236,7 +222,6 @@ export {
   WithHorizontalRightOrientation,
   WithHorizontalContentAtTop,
   WithHorizontalContentCentered,
-  WithFlowContainerPreview,
   WithPrimaryTextLink,
   WithPrimaryButton,
   WithSecondaryButton,

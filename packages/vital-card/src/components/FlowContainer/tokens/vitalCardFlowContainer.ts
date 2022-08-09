@@ -17,8 +17,9 @@ import {
   on, varyDesigns, flowHoc, extendDesign,
 } from '@bodiless/fclasses';
 import {
-  CardStatic, vitalCardStatic, asCardToken,
+  CardStatic, vitalCardStatic,
 } from '../../Card';
+import { asCardToken } from '@bodiless/vital-card-core';
 
 /*
  * Content Variations to use all fields or remove specic fields.

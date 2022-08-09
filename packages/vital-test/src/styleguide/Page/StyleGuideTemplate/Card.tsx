@@ -20,7 +20,7 @@ import {
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { vitalTypography } from '@bodiless/vital-elements';
 import {
-  CardStatic, vitalCardStatic, asExternalBaseCard, asExternalHeroCard
+  CardStatic, vitalCardStatic,
 } from '@bodiless/vital-card';
 
 const Subtitle = as(vitalTypography.H2, 'pt-4')(H2);
@@ -33,38 +33,6 @@ const DefaultCard = as(
   withNodeKey('default-card'),
 )(CardStatic);
 
-const ExternalCard = as(
-  vitalCardStatic.Base,
-  asExternalBaseCard({
-    Title: 'External Data: Card Title',
-    Eyebrow: 'External Data: Card Eyebrow',
-    Description: 'External Data: Card Eyebrow',
-    CTALink: 'https://example.com',
-    Image: {
-      src: 'https://picsum.photos/400',
-      alt: 'CMS Card Image',
-      title: 'CMS Card Image',
-    },
-  }),
-)(CardStatic);
-
-const HeroExternalCard = as(
-  vitalCardStatic.HeroBase,
-  vitalCardStatic.WithHorizontalContentCentered,
-  vitalCardStatic.WithHorizontalLeftOrientation,
-  asExternalHeroCard({
-    Title: 'External Data: Hero Card Title',
-    Eyebrow: 'External Data: Hero Card Eyebrow',
-    Description: 'External Data: Hero Card Eyebrow',
-    CTALink: 'https://example.com',
-    CTAText: 'Read More',
-    Image: {
-      src: 'https://picsum.photos/400',
-      alt: 'Hero Card Image',
-      title: 'Hero Card Image',
-    },
-  }),
-)(CardStatic);
 /**
  * Vertical Card component.
  */
@@ -140,12 +108,6 @@ const CardVariations = (props: any) => (
       <HeroPrimaryButtonCard />
       <Subtitle>Hero Card with Secondary Button</Subtitle>
       <HeroSecondaryButtonCard />
-    </Div>
-    <Div className="mb-8">
-      <Subtitle>Default External Card</Subtitle>
-      <ExternalCard />
-      <Subtitle>Hero External Card</Subtitle>
-      <HeroExternalCard />
     </Div>
   </>
 );

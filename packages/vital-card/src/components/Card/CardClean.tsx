@@ -12,161 +12,15 @@
  * limitations under the License.
  */
 
-import React, { FC, ComponentType, HTMLProps } from 'react';
+import React, { ComponentType } from 'react';
 import {
   designable,
-  DesignableComponents,
-  DesignableComponentsProps,
-  Div,
-  Img,
-  H3,
-  StylableProps,
-  DesignableProps,
-  Fragment,
   as,
 } from '@bodiless/fclasses';
 import { withNode } from '@bodiless/core';
-import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import { LinkClean } from '@bodiless/vital-link';
+import { CardComponents, cardComponentStart, CardBase, asCardToken } from '@bodiless/vital-card-core';
+import type { CardProps, CardToken } from '@bodiless/vital-card-core';
 import { withoutHydration } from '@bodiless/hydration';
-
-/**
- * Design keys available for the vital card.
- * @see [CardBase]
- *
- * @category Component
- */
-export interface CardComponents extends DesignableComponents {
-  /**
-   * The outer wrapper of the card.  By default this is A to make entire card clickable.
-   */
-  Wrapper: ComponentType<StylableProps>,
-  /**
-   * A wrapper to style the Image. By default is a Div.
-   */
-  ImageWrapper: ComponentType<StylableProps>,
-  /**
-   * The image. By Default this is Img.
-   */
-  Image: ComponentType<StylableProps>,
-  /**
-   * A wrapper to style the Eyebrow. By default is a Div.
-   */
-  EyebrowWrapper: ComponentType<StylableProps>,
-  /**
-   * A wrapper to style the Description. By default is a Div.
-   */
-  Eyebrow: ComponentType<StylableProps>,
-  /**
-   * The eyebrow text of the card.  By default this is a plain editor.
-   */
-  ContentWrapper: ComponentType<StylableProps>,
-  /**
-   * A wrapper to style the Description. By default is a H3.
-   */
-  TitleWrapper: ComponentType<StylableProps>,
-  /**
-   * The text title of the card.  By default this a plain editor.
-   */
-  Title: ComponentType<StylableProps>,
-  /**
-   * A wrapper to style the Description. By default is a Fragment.
-   */
-  DescriptionWrapper: ComponentType<StylableProps>,
-  /**
-   * The text body or description of the card.  Recommended: a plain rich text editor.
-   */
-  Description: ComponentType<StylableProps>,
-  /**
-   * A wrapper to style the Rating. By default is a Fragment.
-   */
-  RatingWrapper: ComponentType<StylableProps>,
-  /**
-   * A slot to render the rating.  By default this is a Fragment.
-   */
-  Rating: ComponentType<StylableProps>,
-  /**
-   * A wrapper to style the CTA. By default is a Div.
-   */
-  CTAWrapper: ComponentType<StylableProps>,
-  /**
-   * The cta link.  By default is vital linkclean.
-   */
-  CTALink: ComponentType<StylableProps>,
-  /**
-   * The text of link.  Recommended: a plain editor.
-   */
-  CTAText: ComponentType<StylableProps>,
-}
-
-const cardComponentStart: CardComponents = {
-  Wrapper: Div,
-  ImageWrapper: Div,
-  Image: Img,
-  EyebrowWrapper: Div,
-  Eyebrow: Fragment,
-  ContentWrapper: Div,
-  TitleWrapper: H3,
-  Title: Fragment,
-  DescriptionWrapper: Fragment,
-  Description: Div,
-  Rating: Fragment,
-  RatingWrapper: Fragment,
-  CTAText: Fragment,
-  // @todo: use LinkClean without as throws ts type error.
-  CTALink: as()(LinkClean),
-  CTAWrapper: Div,
-};
-
-export type CardProps = DesignableProps<CardComponents> & HTMLProps<HTMLElement>;
-type CardBaseProps = DesignableComponentsProps<CardComponents> & HTMLProps<HTMLElement>;
-
-const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
-  const {
-    Wrapper,
-    Image,
-    ImageWrapper,
-    ContentWrapper,
-    EyebrowWrapper,
-    Eyebrow,
-    TitleWrapper,
-    Title,
-    DescriptionWrapper,
-    Description,
-    RatingWrapper,
-    Rating,
-    CTAWrapper,
-    CTALink,
-    CTAText,
-  } = components;
-
-  return (
-    <Wrapper {...rest}>
-      <ImageWrapper>
-        <Image />
-      </ImageWrapper>
-      <ContentWrapper>
-        <EyebrowWrapper>
-          <Eyebrow />
-        </EyebrowWrapper>
-        <TitleWrapper>
-          <Title />
-        </TitleWrapper>
-        <DescriptionWrapper>
-          <Description />
-        </DescriptionWrapper>
-        <RatingWrapper>
-          <Rating />
-        </RatingWrapper>
-        <CTAWrapper>
-          <CTALink>
-            <CTAText />
-          </CTALink>
-        </CTAWrapper>
-      </ContentWrapper>
-    </Wrapper>
-  );
-};
 
 /**
  * This is the base component for cards.
@@ -189,17 +43,6 @@ const CardClean = as(
   withNode,
 )(CardBase);
 
-/**
- * A token modifier that respects the Card Compoments.
- *
- * @category Token Collection
- */
-const asCardToken = asVitalTokenSpec<CardComponents>();
-
-// These are used in definnig the VitalCard interface.
-const cardToken = asCardToken();
-type CardToken = typeof cardToken;
-
 const CardDescriptionPreview = () => <span className="bl-text-gray-800">Description</span>;
 
 /**
@@ -211,6 +54,10 @@ const CardStatic: ComponentType<CardProps> = withoutHydration()(CardClean);
 
 export default CardClean;
 export {
-  asCardToken, CardDescriptionPreview, CardStatic
+  CardStatic,
+  CardComponents,
+  asCardToken,
+  CardDescriptionPreview,
 };
+
 export type { CardToken };

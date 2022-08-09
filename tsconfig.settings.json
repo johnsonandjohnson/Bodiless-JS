@@ -108,6 +108,8 @@
       "@bodiless/vital-youtube/*": ["vital-youtube/src/*"],  
       "@bodiless/vital-card": ["vital-card/src/"],
       "@bodiless/vital-card/*": ["vital-card/src/*"],
+      "@bodiless/vital-card-core": ["vital-card-core/src/"],
+      "@bodiless/vital-card-core/*": ["vital-card-core/src/*"],      
       "@bodiless/youtube": ["bodiless-youtube/src"],
       "@bodiless/youtube/*": ["bodiless-youtube/src/*"],
       "@bodiless/webpack": ["bodiless-webpack/src"],
