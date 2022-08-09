@@ -30,6 +30,7 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
+    "@bodiless/cli": "^1.0.0-rc.12",
     "@bodiless/fclasses": "^1.0.0-rc.12",
     "@types/webpack": "^5.0.0",
     "lodash": "^4.17.19",

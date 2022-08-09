@@ -42,7 +42,7 @@ const HeroExternalCard = as(
 const CardPage = () => (
   <Layout>
     <Seo title="Card" />
-    <h1 className="text-vital-secondary-eyebrow">CARD PAGE</h1>
+    <h1 className="text-vital-primary-header-copy text-m-3xl lg:text-3xl">CARD PAGE</h1>
     <ExternalCard />
     <HeroExternalCard />
   </Layout>

@@ -18,7 +18,9 @@ import {
   as,
 } from '@bodiless/fclasses';
 import { withNode } from '@bodiless/core';
-import { CardComponents, cardComponentStart, CardBase, asCardToken } from '@bodiless/vital-card-core';
+import {
+  CardComponents, cardComponentStart, CardBase, asCardToken
+} from '@bodiless/vital-card-core';
 import type { CardProps, CardToken } from '@bodiless/vital-card-core';
 import { withoutHydration } from '@bodiless/hydration';
 
