@@ -5,9 +5,9 @@
   "version": "0.1.0",
   "author": "Heidi Vanyo <hvanyo@its.jnj.com>",
   "dependencies": {
-    "@bodiless/fclasses": "^1.0.0-rc.12",
-    "@bodiless/vital-card-core": "^1.0.0-rc.12",
-    "@bodiless/vital-elements": "^1.0.0-rc.12",
+    "@bodiless/fclasses": "^1.0.0-rc.13",
+    "@bodiless/vital-card-core": "^1.0.0-rc.13",
+    "@bodiless/vital-elements": "^1.0.0-rc.13",
     "autoprefixer": "^10.4.2",
     "esm": "^3.2.25", 
     "gatsby": "^4.11.2",

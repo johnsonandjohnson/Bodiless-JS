@@ -39,11 +39,27 @@ const SocialLinksCleanBase: FC<SocialLinksProps> = ({ components: C, ...rest }) 
   </C.Wrapper>
 );
 
+/**
+ * A clean social links placeholder
+ *
+ * RECOMMEND TO NOT EXTEND/OVERRIDE and marked as deprecated.
+ * In future it will move to its own package and be a list of icons.
+ *
+ * @category Component
+ * @deprecated
+ *
+ */
 const SocialLinksClean = designable(socialLinksComponents, 'SocialLinks')(SocialLinksCleanBase);
 
+/**
+ * A token modifier that respects the Social Links Components.
+ *
+ * @category Token Collection
+ */
 const asSocialLinksToken = asVitalTokenSpec<SocialLinksComponents>();
 
-export {
-  SocialLinksClean,
-  asSocialLinksToken,
-};
+// These are used in defining the VitalSocialLinks interface.
+const socialLinksToken = asSocialLinksToken();
+export type SocialLinksToken = typeof socialLinksToken;
+
+export { SocialLinksClean, asSocialLinksToken };

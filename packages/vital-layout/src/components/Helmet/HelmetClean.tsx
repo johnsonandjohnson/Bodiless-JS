@@ -74,14 +74,21 @@ const helmetComponents: HelmetComponents = {
 /**
  * A designable component which can be used to add different elements to the
  * head section, html or body tags.
+ *
+ * @category Component
+ *
  */
 const HelmetClean = designable(helmetComponents, 'Helmet')(HelmetBase);
 
 export default HelmetClean;
 
 /**
- * Use this to define a token applicable to the VitalDS `HelmetClean` component.
+ * A token modifier that respects the Helmet Components.
  *
- * @see HelmetClean
+ * @category Token Collection
  */
 export const asHelmetToken = asVitalTokenSpec<HelmetComponents>();
+
+// These are used in defining the VitalLayout interface.
+const helmetToken = asHelmetToken();
+export type HelmetToken = typeof helmetToken;

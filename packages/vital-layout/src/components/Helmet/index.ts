@@ -12,7 +12,17 @@
  * limitations under the License.
  */
 
-export { default as vitalHelmetBase } from './tokens/vitalHelmet';
+import vitalHelmetBaseOrig, { VitalHelmet } from './tokens/vitalHelmet';
+
+/**
+ * Use this version of the vital helmet tokens when extending or shadowing.
+ * @category Token Collection
+ * @see [[vitalHelmet]]
+ */
+const vitalHelmetBase = vitalHelmetBaseOrig;
+
 export { default as vitalHelmet } from './tokens';
 export { default as HelmetClean, asHelmetToken } from './HelmetClean';
 export { HelmetComponents, HelmetProps } from './types';
+
+export { vitalHelmetBase, VitalHelmet };

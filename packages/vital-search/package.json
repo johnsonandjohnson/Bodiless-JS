@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/vital-search",
-  "version": "1.0.0-rc.12",
+  "version": "1.0.0-rc.13",
   "description": "Provide search VitalDS components and tokens for site builders.",
   "author": "Dewen Li <dli94@its.jnj.com>",
   "license": "UNLICENSED",
@@ -35,11 +35,11 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@bodiless/core": "^1.0.0-rc.12",
-    "@bodiless/fclasses": "^1.0.0-rc.12",
-    "@bodiless/ga4": "^1.0.0-rc.12",
-    "@bodiless/search": "^1.0.0-rc.12",
-    "@bodiless/vital-elements": "^1.0.0-rc.12",
+    "@bodiless/core": "^1.0.0-rc.13",
+    "@bodiless/fclasses": "^1.0.0-rc.13",
+    "@bodiless/ga4": "^1.0.0-rc.13",
+    "@bodiless/search": "^1.0.0-rc.13",
+    "@bodiless/vital-elements": "^1.0.0-rc.13",
     "lodash": "^4.17.19"
   }
 }

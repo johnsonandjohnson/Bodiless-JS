@@ -12,7 +12,17 @@
  * limitations under the License.
  */
 
+import vitalLayoutBaseOrig, { VitalLayout } from './tokens/vitalLayout';
+
+/**
+ * Use this version of the vital layout tokens when extending or shadowing.
+ * @category Token Collection
+ * @see [[vitalLayout]]
+ */
+const vitalLayoutBase = vitalLayoutBaseOrig;
+
 export { LayoutClean, asLayoutToken } from './LayoutClean';
 export { default as vitalLayout } from './tokens';
 export type { LayoutComponents, LayoutProps } from './types';
-export { default as vitalLayoutBase } from './tokens/vitalLayout';
+
+export { vitalLayoutBase, VitalLayout };
