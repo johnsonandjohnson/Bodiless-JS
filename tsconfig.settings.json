@@ -90,6 +90,8 @@
       "@bodiless/vital-layout/*": ["vital-layout/src/*"],
       "@bodiless/vital-link": ["vital-link/src/"],
       "@bodiless/vital-link/*": ["vital-link/src/*"],
+      "@bodiless/vital-link-core": ["vital-link-core/src/"],
+      "@bodiless/vital-link-core/*": ["vital-link-core/src/*"],      
       "@bodiless/vital-list": ["vital-list/src/"],
       "@bodiless/vital-list/*": ["vital-list/src/*"],
       "@bodiless/vital-meta": ["vital-meta/src/"],

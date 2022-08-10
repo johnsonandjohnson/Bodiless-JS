@@ -14,7 +14,7 @@
 
 import vitalCardBaseOrig from './tokens/vitalCard';
 import type { VitalCard } from './tokens/vitalCard';
-import CardCleanCore, { asCardToken, cardComponentStart, CardBase } from './CardClean';
+import CardCleanNonEditable, { asCardToken, cardComponentStart, CardBase } from './CardClean';
 import type { CardToken, CardComponents, CardProps } from './CardClean';
 import vitalCardCore from './tokens';
 import { asExternalBaseCard, asExternalHeroCard } from './External';
@@ -30,7 +30,7 @@ export {
   asCardToken,
   cardComponentStart,
   CardBase,
-  CardCleanCore,
+  CardCleanNonEditable,
   vitalCardCore,
   vitalCardBase,
   asExternalBaseCard,

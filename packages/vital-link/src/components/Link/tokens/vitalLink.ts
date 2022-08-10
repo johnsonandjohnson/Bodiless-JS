@@ -12,58 +12,14 @@
  * limitations under the License.
  */
 
-import {
-  Span,
-  addClassesIf,
-  addProps,
-  addPropsIf,
-  as,
-  flowIf,
-  on,
-  flowHoc,
-} from '@bodiless/fclasses';
 import { withSidecarNodes, withNodeKey } from '@bodiless/core';
-import { vitalColor, vitalTypography } from '@bodiless/vital-elements';
-import { asLinkToken } from '../LinkClean';
-import { useExternalLinkToggle, asEditableLink, useIsDownloadLink } from '../util';
-
-/**
-   * Token which causes link to display as an external link.
-   */
-const WithExternalStyles = asLinkToken({
-  Flow: flowIf(useExternalLinkToggle),
-  Core: {
-    ExternalSRText: on(Span)(
-      'sr-only',
-      addProps({
-        children: 'Open link in new window',
-      }),
-    ),
-  },
-  Behavior: {
-    Wrapper: addProps({
-      target: '_blank',
-      rel: 'noopener noreferrer',
-    }),
-  },
-  Theme: {
-    Wrapper: 'vital-external-link',
-  },
-});
-
-const WithDownloadStyles = asLinkToken({
-  Core: {
-    Wrapper: as(
-      addClassesIf(useIsDownloadLink())('vital-download-link'),
-      addPropsIf(useIsDownloadLink())({ target: '_blank', rel: 'noopener noreferrer' }),
-    ),
-  },
-});
+import { vitalLinkCore, asLinkToken } from '@bodiless/vital-link-core';
+import { asEditableLink } from '../util';
 
 /**
   * Token which produces a base editable link.
   */
-const Base = asLinkToken({
+const WithBodilessEditor = asLinkToken({
   /**
      * Makes the link editable. Nodekey must be provided separately.
      * Editor token should be applied after all composed tokens to ensure
@@ -74,26 +30,10 @@ const Base = asLinkToken({
   },
 });
 
-/**
-   * Token which produces a default VitalDS editable link.
-   */
-const Default = asLinkToken(Base, {
-  /**
-     * VitalDS typography and colors.
-     */
-  Theme: {
-    _: as(WithDownloadStyles, WithExternalStyles),
-    Wrapper: as(vitalTypography.Link),
-  },
-});
-
-const PrimaryLink = asLinkToken(Default, {
-  Theme: {
-    Wrapper: 'hover:vital-arrow hover:pr-1 hover:w-6 hover:h-2',
-    Body: vitalColor.TextPrimaryInteractiveNoHover,
-  },
-  Meta: flowHoc.meta.term('Style')('With Hover Arrow'),
-});
+const Default = asLinkToken(
+  vitalLinkCore.Base,
+  WithBodilessEditor
+);
 
 const Sidecar = asLinkToken({
   ...Default,
@@ -105,11 +45,11 @@ const Sidecar = asLinkToken({
   },
 });
 
-export default {
-  Base,
+const vitalLink = {
+  ...vitalLinkCore,
   Default,
-  WithExternalStyles,
-  WithDownloadStyles,
-  PrimaryLink,
+  WithBodilessEditor,
   Sidecar,
 };
+
+export default vitalLink;

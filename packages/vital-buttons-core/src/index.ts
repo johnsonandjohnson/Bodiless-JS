@@ -12,12 +12,4 @@
  * limitations under the License.
  */
 
-import { LinkClean as ButtonClean } from '@bodiless/vital-link';
-import type { LinkComponents as ButtonComponent, LinkBaseProps as ButtonBaseProps } from '@bodiless/vital-link';
-import { asVitalTokenSpec } from '@bodiless/vital-elements';
-
-export const asButtonToken = asVitalTokenSpec<ButtonComponent>();
-
-export default ButtonClean;
-
-export type { ButtonComponent, ButtonBaseProps};
+export * from './components/Buttons';

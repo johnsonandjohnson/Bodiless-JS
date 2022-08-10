@@ -16,7 +16,8 @@ import {
   flowHoc, replaceWith, as, extendMeta, Div, A,
 } from '@bodiless/fclasses';
 import { vitalTypography } from '@bodiless/vital-elements';
-// import { ButtonClean, vitalButtons } from '@bodiless/vital-buttons';
+import { ButtonClean, vitalButtonsCore } from '@bodiless/vital-buttons-core';
+import { LinkClean, vitalLinkCore } from '@bodiless/vital-link-core';
 import { asCardToken } from '../CardClean';
 import type { CardToken } from '../CardClean';
 
@@ -98,10 +99,10 @@ const WithHorizontalRightOrientation = asCardToken(WithHorizontalOrientationBase
 
 const WithPrimaryTextLink = asCardToken({
   Components: {
-    // CTALink: replaceWith(LinkClean),
+    CTALink: replaceWith(LinkClean),
   },
   Theme: {
-    // CTALink: vitalLink.PrimaryLink,
+    CTALink: vitalLinkCore.PrimaryLink,
   },
   Meta: extendMeta(
     flowHoc.meta.term('CTA Style')('Text Link'),
@@ -112,10 +113,10 @@ const WithPrimaryTextLink = asCardToken({
 const WithPrimaryButton = asCardToken({
   Components: {
     CTAWrapper: replaceWith(Div),
-    // CTALink: replaceWith(ButtonClean),
+    CTALink: replaceWith(ButtonClean),
   },
   Theme: {
-    // CTALink: as(vitalButtons.Primary, vitalButtons.WithArrow),
+    CTALink: as(vitalButtonsCore.Primary, vitalButtonsCore.WithArrow),
   },
   Meta: extendMeta(
     flowHoc.meta.term('CTA Style')('Primary Button'),
@@ -126,10 +127,10 @@ const WithPrimaryButton = asCardToken({
 const WithSecondaryButton = asCardToken({
   Components: {
     CTAWrapper: replaceWith(Div),
-    // CTALink: replaceWith(ButtonClean),
+    CTALink: replaceWith(ButtonClean),
   },
   Theme: {
-    // CTALink: as(vitalButtons.Secondary, vitalButtons.WithArrow),
+    CTALink: as(vitalButtonsCore.Secondary, vitalButtonsCore.WithArrow),
   },
   Meta: extendMeta(
     flowHoc.meta.term('CTA Style')('Secondary Button'),

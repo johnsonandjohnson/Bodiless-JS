@@ -43,7 +43,6 @@
     "react": "^17.0.2"
   },
   "devDependencies": {
-    "@types/node": "^16",
     "@types/tailwindcss": "^3.0.10"
   }
 }

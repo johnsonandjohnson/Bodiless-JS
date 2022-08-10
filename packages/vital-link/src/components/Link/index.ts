@@ -16,8 +16,6 @@ export * from './index.bl-edit';
 
 export { default as vitalLink } from './tokens';
 export { default as vitalLinkBase } from './tokens/vitalLink';
-export {
-  useExternalLinkToggle, useIsDownloadLink, asEditableLink, anchorTo,
-} from './util';
-export { default as LinkClean, asLinkToken } from './LinkClean';
-export type { LinkComponents, LinkBaseProps } from './types';
+export { asEditableLink } from './util';
+export { LinkClean, asLinkToken } from '@bodiless/vital-link-core';
+export type { LinkComponents, LinkBaseProps } from '@bodiless/vital-link-core';

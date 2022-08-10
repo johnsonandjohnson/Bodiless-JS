@@ -16,7 +16,7 @@ import vitalCardBaseOrig from './tokens/vitalCard';
 import type { VitalCardBodiless } from './tokens/vitalCard';
 import CardClean, { asCardToken } from './CardClean';
 import type { CardComponents } from './CardClean';
-import vitalCard from './tokens';
+import vitalCardCore from './tokens';
 import { vitalCardStatic, CardStatic } from './index.bl-edit';
 
 /**
@@ -30,7 +30,7 @@ export {
   asCardToken,
   CardClean,
   CardStatic,
-  vitalCard,
+  vitalCardCore,
   vitalCardBase,
   vitalCardStatic,
 };

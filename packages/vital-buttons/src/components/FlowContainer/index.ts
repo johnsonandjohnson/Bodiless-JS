@@ -14,9 +14,8 @@
 
 import { asFluidToken } from '@bodiless/vital-elements';
 import { on, varyDesigns, flowHoc } from '@bodiless/fclasses';
-import {
-  asButtonToken, ButtonClean, vitalButtons,
-} from '../Buttons';
+import { asButtonToken, ButtonClean } from '@bodiless/vital-buttons-core';
+import { vitalButtons } from '../Buttons';
 
 const BaseVariation = {
   Button: on(ButtonClean)(vitalButtons.Default),

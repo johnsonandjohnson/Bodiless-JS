@@ -183,7 +183,7 @@ const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
  * const CustomCard = on(CardClean)(myBrandCard.Custom)
  * ```
  */
-const CardCleanCore = as(
+const CardCleanNonEditable = as(
   designable(cardComponentStart, 'Card'),
   // withNode,
 )(CardBase);
@@ -199,7 +199,7 @@ const asCardToken = asVitalTokenSpec<CardComponents>();
 const cardToken = asCardToken();
 type CardToken = typeof cardToken;
 
-export default CardCleanCore;
+export default CardCleanNonEditable;
 export {
   asCardToken, CardBase
 };

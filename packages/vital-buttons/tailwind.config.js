@@ -23,42 +23,8 @@ const twConfig = {
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {
-    extend: {
-      fontFamily: {
-        linkicons: ['buttonicons'],
-      },
-      colors: {
-        current: 'currentColor',
-        transparent: 'transparent',
-      },
-    },
   },
   plugins: [
-    plugin(({ addBase }) => {
-      addBase({
-        '@font-face': {
-          fontFamily: 'buttonicons',
-          fontWeight: 400,
-          fontStyle: 'normal',
-          src: 'url(\'@bodiless/vital-buttons/assets/font/buttonicons.woff2\')',
-        },
-      });
-    }),
-    plugin(({ addUtilities }) => {
-      addUtilities(
-        {
-          '.vital-arrow::after': {
-            content: '"\\e800"',
-            'font-family': '"buttonicons"',
-            'text-decoration': 'none',
-            'line-height': '1',
-            'vertical-align': 'text-top',
-            display: 'inline-block',
-            'margin-left': '.25rem',
-          },
-        }
-      );
-    }),
   ],
 };
 

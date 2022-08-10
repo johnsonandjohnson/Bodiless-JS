@@ -19,9 +19,7 @@ import {
 } from '@bodiless/fclasses';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { vitalTypography } from '@bodiless/vital-elements';
-import {
-  CardStatic, vitalCardStatic,
-} from '@bodiless/vital-card';
+import { CardStatic, vitalCardStatic } from '@bodiless/vital-card';
 
 const Subtitle = as(vitalTypography.H2, 'pt-4')(H2);
 

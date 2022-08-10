@@ -12,35 +12,11 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import { designable } from '@bodiless/fclasses';
 import { withoutHydrationInline } from '@bodiless/hydration';
-import {
-  A, Span, Fragment, designable,
-} from '@bodiless/fclasses';
-import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import { LinkComponents, LinkBaseProps } from './types';
+import { linkComponents, LinkBase } from '@bodiless/vital-link-core';
 
-const linkComponents: LinkComponents = {
-  Wrapper: A,
-  Icon: Fragment,
-  Body: Span,
-  ExternalSRText: Fragment,
-};
-
-const LinkBase: FC<LinkBaseProps> = ({ components: C, children, ...rest }) => (
-  <C.Wrapper {...rest}>
-    <C.ExternalSRText />
-    <C.Icon />
-    <C.Body>
-      {children}
-    </C.Body>
-  </C.Wrapper>
-);
-
-const asLinkToken = asVitalTokenSpec<LinkComponents>();
-
+// Not sure why I have to redeclare LinkClean here -- using LinkClean from vital-link-core gave the
+// Error: The inferred type of 'LinkStatic' cannot be named without a reference to
 const LinkClean = designable(linkComponents, 'Link')(LinkBase);
-const LinkStatic = withoutHydrationInline()(LinkClean);
-
-export default LinkClean;
-export { asLinkToken, LinkStatic };
+export const LinkStatic = withoutHydrationInline()(LinkClean);

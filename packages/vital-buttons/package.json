@@ -39,6 +39,7 @@
     "@bodiless/core": "^1.0.0-rc.12",
     "@bodiless/fclasses": "^1.0.0-rc.12",
     "@bodiless/hydration": "^1.0.0-rc.12",
+    "@bodiless/vital-buttons-core": "^1.0.0-rc.12",
     "@bodiless/vital-editors": "^1.0.0-rc.12",
     "@bodiless/vital-elements": "^1.0.0-rc.12",
     "@bodiless/vital-link": "^1.0.0-rc.12",
