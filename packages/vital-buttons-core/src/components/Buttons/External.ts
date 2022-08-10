@@ -12,5 +12,20 @@
  * limitations under the License.
  */
 
-export * from './components/Link';
-export * from './components/Link/External';
+import {
+  addProps, as,
+} from '@bodiless/fclasses';
+
+export type LinksPropsData = {
+  Link?: string,
+  Text?: string,
+};
+
+const asExternalBaseButton = (content: LinksPropsData) => as(
+  addProps({ href: content.Link }),
+  addProps({ children: content.Text }),
+);
+
+export {
+  asExternalBaseButton,
+};

@@ -13,17 +13,17 @@
  */
 
 import {
-  addProps, flowHoc, withDesign
+  addProps, as,
 } from '@bodiless/fclasses';
 
 export type LinksPropsData = {
   Link?: string,
+  Text?: string,
 };
 
-const asExternalBaseLink = (content: LinksPropsData) => flowHoc(
-  withDesign({
-    Link: addProps({ href: content.Link }),
-  }),
+const asExternalBaseLink = (content: LinksPropsData) => as(
+  addProps({ href: content.Link }),
+  addProps({ children: content.Text }),
 );
 
 export {

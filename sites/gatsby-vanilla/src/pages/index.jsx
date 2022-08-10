@@ -1,20 +1,29 @@
 import * as React from 'react';
 import { StaticImage } from 'gatsby-plugin-image';
-
+import { addClasses, as } from '@bodiless/fclasses';
+import { asExternalBaseLink, LinkClean, vitalLinkCore } from '@bodiless/vital-link-core';
+import { asExternalBaseButton, ButtonClean, vitalButtonsCore } from '@bodiless/vital-buttons-core';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
 import * as styles from '../components/index.module.css';
 
-const links = [
-  {
-    text: 'Styleguide | Card',
-    url: '/styleguide/card',
-    description:
-      'A styleguide page demonstrating Vital Components Card',
-  },
-];
+const CardLink = as(
+  vitalLinkCore.Default,
+  asExternalBaseLink({
+    Text: 'StyleGuide Card',
+    Link: '/styleguide/card/',
+  }),
+  addClasses('m-10'),
+)(LinkClean);
 
-const utmParameters = '?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter';
+const CardButton = as(
+  vitalButtonsCore.Primary,
+  asExternalBaseButton({
+    Text: 'StyleGuide Card',
+    Link: '/styleguide/card/',
+  }),
+  addClasses('w-60 m-10'),
+)(ButtonClean);
 
 const IndexPage = () => (
   <Layout>
@@ -36,19 +45,8 @@ const IndexPage = () => (
       </h1>
 
     </div>
-    <ul className={styles.list}>
-      {links.map(link => (
-        <li key={link.url} className={styles.listItem}>
-          <a
-            className={styles.listItemLink}
-            href={`${link.url}${utmParameters}`}
-          >
-            {link.text}
-          </a>
-          <p className={styles.listItemDescription}>{link.description}</p>
-        </li>
-      ))}
-    </ul>
+    <CardLink />
+    <CardButton />
   </Layout>
 );
 
