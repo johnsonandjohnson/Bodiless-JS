@@ -31,6 +31,7 @@
     "@bodiless/gatsby-plugin-ssi": "^1.0.0-rc.13",
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.13",
     "@bodiless/hydration": "^1.0.0-rc.13",
+    "@bodiless/i18n": "^1.0.0-rc.13",
     "@bodiless/layouts": "^1.0.0-rc.13",
     "@bodiless/layouts-ui": "^1.0.0-rc.13",
     "@bodiless/navigation": "^1.0.0-rc.13",

@@ -1,5 +1,7 @@
 {
   "Components": {
-    "i18n.md": "./README.md"
+    "Internationalization": {
+      "README.md": "./doc/README.md"
+    }
   }
 }

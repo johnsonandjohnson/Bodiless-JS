@@ -6,7 +6,7 @@ import { useLanguageContext } from './LanguageProvider';
  *
  * @returns an object with lang and dir props.
  *
- * @category HOC Utility
+ * @category Language Provider
  */
 export const useLangDirProps = () => {
   const { getCurrentLanguage } = useLanguageContext();
@@ -24,6 +24,6 @@ export const useLangDirProps = () => {
  * @params useLanguageSelectorProps hook
  * @see useLangDirProps
  *
- * @category API
+ * @category Language Provider
  */
 export const withLangDirProps = addProps(useLangDirProps);

@@ -25,7 +25,7 @@ import type { Language } from '../LanguageProvider';
  * - children: the name of the lenguage to toggle on
  * - href: path prefix for the language to toggle on
  *
- * @category HOC Utility
+ * @category API
  */
 
 export const useLanguageSelectorProps = () => {

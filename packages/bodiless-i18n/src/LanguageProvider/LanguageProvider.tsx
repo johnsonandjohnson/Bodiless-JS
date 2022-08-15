@@ -44,7 +44,7 @@ LanguageContext.displayName = 'LanguageContext';
 /**
  * Hook which can be used to use language contet
  *
- * @category HOC Utility
+ * @category Language Provider
  */
 export const useLanguageContext = () => useContext(LanguageContext);
 
@@ -52,13 +52,22 @@ export const useLanguageContext = () => useContext(LanguageContext);
  * getCurrentLanguage$ is a helper function that filters the list of languages and
  * defines which one is current.
  *
- * @param Languages - list of language objects.
+ * @param languages - list of language objects.
  *
  * @returns current language object.
  *
- * @category HOC Utility
+ * @example will return true for all home pages of root and each language top
+   path/folder.
+ * ```js
+ * const isHomePage = () => (
+ *   useNode().node.pagePath === '/'
+ *   || useNode().node.pagePath === `/${useLanguageContext().getCurrentLanguage().name}/`
+ * );
+ * ```
+ *
+ * @category Language Provider
  */
-const getCurrentLanguage$ = (languages: Languages): Language => (
+export const getCurrentLanguage$ = (languages: Languages): Language => (
   languages.filter(language => language.isCurrent)[0]
 );
 
@@ -71,7 +80,7 @@ const getCurrentLanguage$ = (languages: Languages): Language => (
  *
  * @returns updated list of language objects
  *
- * @category HOC Utility
+ * @category Language Provider
  */
 export const setCurrentLanguage$ = (langName: string, languages: Languages): Languages => {
   const updatedState = languages.map(language => {
@@ -97,9 +106,9 @@ export const setCurrentLanguage$ = (langName: string, languages: Languages): Lan
  *
  * @returns - list of language objects with necessary default values
  *
- * @category HOC Utility
+ * @category Language Provider
  */
-const getLanguagesWithDefaultValues = (languages: Languages = []): Languages => {
+export const getLanguagesWithDefaultValues = (languages: Languages = []): Languages => {
   const defaultLanguage: Language = {
     name: 'en',
     direction: 'ltr',
@@ -142,7 +151,7 @@ const getLanguagesWithDefaultValues = (languages: Languages = []): Languages => 
  * @returns - list of sites' languages and allows to get and set the current (active)
  * language.
  *
- * @category API
+ * @category Language Provider
  */
 export const withLanguageProvider: HOC = Component => (props: any) => {
   const { languages: languagesFromProps }: PropsWithLanguages = props;
