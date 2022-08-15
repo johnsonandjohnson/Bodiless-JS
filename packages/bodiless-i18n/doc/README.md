@@ -23,13 +23,14 @@ e.g.
 * The html lang and dir is set by meta helmet and automatically updated per path.
 * Within the site, there will be a separate page representing each language
   content.
-* Global components use that use hared site data will be stored in site data
+* Global components use that use shared site data will be stored in site data
   collection and prefixed with the language per the site folder/path.
   * The default language for the site data will have no prefix.
-* The current implementation is it depends on the identical page path for each
-  associated language to find the corresponding page associated with the current
-  page. (ie. privacy, es/privacy) Your own mechanism can be implemented to
-  associate pages together such as href language attribute.
+* The current implementation of the Language Selector is it depends on the
+  identical page path for each associated language to find the corresponding
+  page associated with the current page. (ie. privacy, es/privacy) Your own
+  mechanism can be implemented to associate pages together such as href language
+  attribute.
 
 ## Activation of Internationalization
 
@@ -40,10 +41,9 @@ your site/package.
 
 ### 2. Specify Languages utilized by site on the page wrapper
 
-Within your main page template, in this example we shadow the vitalPage, add the
-possible languages with
+Within your main page template, add the possible languages
 [`withLanguages`](../../../Development/API/@bodiless/i18n/README?id=withlanguages)
-to the wrapper.
+to the wrapper. In this example we shadow the vitalPage to do this.
 
     ```js
     import { withLanguages } from '@bodiless/i18n';
@@ -105,12 +105,13 @@ and shadowing the Helmet.
 
 ### 4. Set global components to store data per language
 
-On all global components that you want to save multilinguage data. Add an HOC
+On all global components (anything saving to global site collection) that you
+want to save multilinguage data. Add an HOC
 [`withLanguageNode`](../../../Development/API/@bodiless/i18n/README?id=withlanguagenode)
 to the component's Schema domain. The best way is to shadow the component. It is
 suggested to shadow the top level components (such as Header & Footer and then
-any children components of these components will inherit the language domain by
-virtue of the data path.)
+any children components of these top components will inherit the language domain
+by virtue of the data path.)
 
     ```js
     import { vitalFooterBase, asFooterToken } from '@bodiless/vital-layout';
@@ -133,7 +134,8 @@ virtue of the data path.)
 The current supported method is simple rule that for each page with the
 associated language, add the corresponding pages in the secondary path with the
 language prefix and same path. i.e. add English page '/privacy' and Spanish page
-'/es/privacy'. Your own mechanism can be implemented to associate pages together
+'/es/privacy'. So in this method, just add pages for secondary language prefix
+and same path. Your own mechanism can be implemented to associate pages together,
 such as href language attribute.
 
 ### 6. Implement Language Selector
@@ -176,7 +178,8 @@ the current language and update the string to corresponding language string.
       vitalRewardsBase
     } from '@bodiless/vital-layout';
 
-    const isCurrentLanguageEs = () => useLanguageContext().getCurrentLanguage().name === 'es';
+    const isCurrentLanguageEs = () => 
+      useLanguageContext().getCurrentLanguage().name === 'es';
 
     const WithESLanguage = asMyComponentToken({
       Content: {
