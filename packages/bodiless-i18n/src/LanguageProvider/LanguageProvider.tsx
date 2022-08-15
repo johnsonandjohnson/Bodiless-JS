@@ -30,6 +30,9 @@ export type LanguageContextType = {
   setLanguages: React.Dispatch<React.SetStateAction<Languages>>,
 };
 
+/**
+ * @private
+ */
 export const LanguageContext = createContext<LanguageContextType>({
   languages: [],
   getCurrentLanguage: () => ({ name: 'en', direction: 'ltr' }),
@@ -38,13 +41,22 @@ export const LanguageContext = createContext<LanguageContextType>({
 });
 LanguageContext.displayName = 'LanguageContext';
 
+/**
+ * Hook which can be used to use language contet
+ *
+ * @category HOC Utility
+ */
 export const useLanguageContext = () => useContext(LanguageContext);
 
 /**
  * getCurrentLanguage$ is a helper function that filters the list of languages and
  * defines which one is current.
- * @param languages - list of language objects.
- * @returns language object.
+ *
+ * @param Languages - list of language objects.
+ *
+ * @returns current language object.
+ *
+ * @category HOC Utility
  */
 const getCurrentLanguage$ = (languages: Languages): Language => (
   languages.filter(language => language.isCurrent)[0]
@@ -53,9 +65,13 @@ const getCurrentLanguage$ = (languages: Languages): Language => (
 /**
  * setCurrentLanguage$ is a helper function that sets isCurrent option to true
  * for the selected language, and set isCurrent: false for all other languages in the list.
+ *
  * @param langName - string
  * @param languages - list of language objects
+ *
  * @returns updated list of language objects
+ *
+ * @category HOC Utility
  */
 export const setCurrentLanguage$ = (langName: string, languages: Languages): Languages => {
   const updatedState = languages.map(language => {
@@ -76,8 +92,12 @@ export const setCurrentLanguage$ = (langName: string, languages: Languages): Lan
 /**
  * getLanguagesWithDefaultValues is a helper function which ensures that all languages
  * in the passed list get all necessary default values.
+ *
  * @param languages - list of language objects
+ *
  * @returns - list of language objects with necessary default values
+ *
+ * @category HOC Utility
  */
 const getLanguagesWithDefaultValues = (languages: Languages = []): Languages => {
   const defaultLanguage: Language = {
@@ -116,6 +136,13 @@ const getLanguagesWithDefaultValues = (languages: Languages = []): Languages => 
  * withLanguageProvider is a hoc that wrapps a component into a context provider
  * which provides a list of sites' languages and allows to get and set the current (active)
  * language.
+ *
+ * @param props
+ *
+ * @returns - list of sites' languages and allows to get and set the current (active)
+ * language.
+ *
+ * @category API
  */
 export const withLanguageProvider: HOC = Component => (props: any) => {
   const { languages: languagesFromProps }: PropsWithLanguages = props;

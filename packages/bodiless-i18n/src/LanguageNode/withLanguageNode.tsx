@@ -16,6 +16,8 @@ type NodeProps = {
 /**
  * withLanguageNode is a hoc that allows the wrapped component to handle its data
  * in multilingual maner.
+ *
+ * @category API
  */
 export const withLanguageNode: HOC = Component => props => {
   const { nodeKey, nodeCollection }: NodeProps = props as any;
