@@ -122,9 +122,9 @@ Some important notes:
   In your `package.json`:
 
   ```json
-  ...
+  //...,
   "files": [
-    ...,
+    //...,
     "./shadow.js"
   ],
   ```
@@ -132,9 +132,9 @@ Some important notes:
   And, if you use the `exports` key:
 
   ```json
-  ...
+  //...,
   "exports": {
-    ...,
+    //...,
     "./shadow.js": "./shadow.js"
   }
   ```
@@ -144,18 +144,18 @@ Some important notes:
 
 ## Additional Documentation on Shadowing
 
-The Bodiless & VitalDS documentation has some step by step shadowing examples:
+The Bodiless and VitalDS documentation has some step-by-step shadowing examples:
 
 - [Shadowing Typography](../../../Development/Guides/BuildingSites/Typography/ShadowGuide)
 - [Shadowing the Rich Text Editor](../VitalEditors/RichTextCustomizing)
-- [Shadowing the Plain Editor](../VitalEditors/PlainEditor?id=via-shadowing)
+- [Shadowing the Plain Editor](../VitalEditors/PlainEditor#via-shadowing)
 
-All Vital DS tokens can be shadowed. Refer to the component's documentation and
-specific shadowing instructing.
+All Vital DS tokens can be shadowed. Refer to the component's documentation and specific shadowing
+instructions.
 
-Within bodiless repo, there is a
-[vital-test](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-test/src/shadow/%40bodiless)
-package that shadows all components and gives examples and is a good resource.
+Within the Bodiless repository, there is a
+[`vital-test`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-test/src/shadow/%40bodiless)
+package that shadows all components and provides examples — it is a good resource.
 
-In addition, to determine what is possible to shadow, we recommend visiting the
-[API doc](../../../Development/API/)
+In addition, to determine what is possible to shadow, we recommend visiting the [API
+documentation](../../../Development/API/).

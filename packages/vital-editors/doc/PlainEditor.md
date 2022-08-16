@@ -55,6 +55,7 @@ superscripted.
 #### Usage
 
 ##### Via Composing
+
 The following composes a default plain editor with a custom superscript token:
 
 ```js
@@ -77,25 +78,24 @@ Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shad
 
 File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-editors/EditorPlain.ts`
 
-For example, create the above file and add the following contents which will
-apply supercripting of those characters with the style 'align-baseline' to all
-uses of Vital Plain Editor.
+For example, create the above file and add the following contents (which will apply superscripting
+of those characters with the style `align-baseline` to all uses of the Vital Plain Editor):
 
-  ```js
-  import { asElementToken } from '@bodiless/vital-elements';
-  import { vitalEditorPlainBase, withAutoSuperscript } from '@bodiless/vital-editors';
+```js
+import { asElementToken } from '@bodiless/vital-elements';
+import { vitalEditorPlainBase, withAutoSuperscript } from '@bodiless/vital-editors';
 
-  const Default = asElementToken(vitalEditorPlainBase.Default, {
-    Compose: {
-      _: withAutoSuperscript('®™©', 'align-baseline'),
-    },
-  });
+const Default = asElementToken(vitalEditorPlainBase.Default, {
+  Compose: {
+    _: withAutoSuperscript('®™©', 'align-baseline'),
+  },
+});
 
-  export default {
-    ...vitalEditorPlainBase,
-    Default,
-  };
-  ```
+export default {
+  ...vitalEditorPlainBase,
+  Default,
+};
+```
 
 ## Architectural Details
 
