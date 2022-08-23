@@ -348,8 +348,8 @@ on other pages.
 
 ### **Resources**
 
-- [Content Editor: Saving a compoenent](../../../Components/FlowContainer/?id=saving-a-component-in-the-content-library)
-- [Content Editor: Unlinking a compoenent](../../../Components/FlowContainer/?id=unlinking-a-component-from-the-content-library)
+- [Content Editor: Saving a component](../../../Components/FlowContainer/?id=saving-a-component-in-the-content-library)
+- [Content Editor: Unlinking a component](../../../Components/FlowContainer/?id=unlinking-a-component-from-the-content-library)
 - [Manual Site Builder: Building Contentful Components without use Content Library](./BuildingComponents/BuildingContentful)
 
 <!-- tabs:end -->

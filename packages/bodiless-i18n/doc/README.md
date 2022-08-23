@@ -1,6 +1,6 @@
 # Bodiless I18N (Internationalization) Package
 
-Provides API & helper functions to create multilingual sites with path base
+Provides API & helper functions to create multilingual sites with path based
 language domains.
 
 ?> **API Documentation**: Visit the
@@ -20,7 +20,7 @@ e.g.
 ## Overview
 
 * The sites will be hosted within one monorepo with path based language pages.
-* The html lang and dir is set by meta helmet and automatically updated per path.
+* The html lang and dir are set by meta helmet and automatically updated per path.
 * Within the site, there will be a separate page representing each language
   content.
 * Global components that use shared site data will be stored in site data
@@ -39,7 +39,7 @@ e.g.
 Install the @bodiless/i18n package via
 
 ```bash
-`npm install --save @bodiless/i18n`
+npm install --save @bodiless/i18n
 ```
 
 in your site/package.
