@@ -142,10 +142,14 @@ default, is enabled for two languages.
 
 ### **Guide**
 
-  <!-- TODO: Complete bullet when able. -->
-- If your site requires multi-language, we recommend bringing in the @bodiless/i18 package... TBD
+- If your site requires multi-language, we recommend bringing in the
+  Internationalization @bodiless/i18 package. Please read the documentation that
+  includes a [step by step guide](../../../Components/Internationalization/).
 
-<!-- TODO: Resources. -->
+### **Resources**
+
+- [i18n (Internationalization) Documentation](../../../Components/Internationalization/)
+- [i18n (Internationalization) API](/Development/API/@bodiless/i18n/README)
 
 <!-- tabs:end -->
 
