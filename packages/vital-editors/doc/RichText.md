@@ -57,82 +57,11 @@ Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shad
 
 File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-editors/RichText.ts`
 
+[Examples of how to shadow the Rich Text Editor](./RichTextCustomizing)
+
 #### Via Overriding Specific Existing Styles Using Vital Rich Text Editor
 
 See [Vital Site Typography](../VitalElements/SiteTypography).
-
-### Extending Default Vital Rich Text Editor
-
-At site or global regional/brand library level, a site can compose a set of new tokens to meet the
-design requirements, and provide additional Rich Text functionality (typically, via buttons).
-
-01. Create a `src/components/Editors/RichText.tokens.ts` where you can create/use your site/brand
-    specific tokens for each. (`import` and `export` as needed.)
-
-    ```js
-    import { asBlock, withButton, } from '@bodiless/richtext';
-    import { asVitalTokenSpec } from '@bodiless/vital-elements';
-
-    const withQuoteBlockMeta = flowHoc(
-      asBlock,
-      withButton('format_quote'),
-    );
-
-    const BrandRichText = asVitalTokenSpec()({
-      ...vitalRichText.Default,
-      Core: {
-        ...vitalRichText.Default.Core,
-        Quote: withQuoteBlockMeta,
-      },
-      Components: {
-        ...vitalRichText.Default.Components,
-        Quote: 'italic',
-      },
-    });
-    ```
-
-    - `withQuoteBlockMeta` creates a token that will be a designable Span and adds a new quote
-      button to the editor.
-    - `BrandRichText` starts with the existing `vitalRichText` functionality, and, in both
-      Core/Components, it spreads existing functionality across these two domains and the new tokens
-      are added.
-    - For an example of a simple token that adds functionality to Slate, expand the disclosure
-      below:
-
-      <details>
-        <summary>Click here for example...</summary>
-
-        ```js
-        import { asBlock, withButton, } from '@bodiless/richtext';
-        import { asTokenSpec, Blockquote, replaceWith, flowHoc } from '@bodiless/fclasses';
-
-        const withQuoteBlockMeta = flowHoc(
-          asBlock,
-          withButton('format_quote'),
-        );
-
-        //...
-
-        const EditorWithBlockQuote = asTokenSpec()({
-          ...vitalDefault,
-          Core: {
-            ...vitalDefault.Core,
-            // `asBlockQuote` is an example token you would import from your site's
-            // `/src/components/Elements.token.ts` file.
-            // E.g., `const asBlockQuote = addClasses('block mx-4');`
-            BlockQuote: flowHoc(replaceWith(Blockquote), asBlockQuote, withQuoteBlockMeta),
-          }
-        });
-        ```
-
-      </details>
-
-01. Create a `src/components/Editors/index.tsx`  where you can export all tokens and schemas from
-    Editors.
-
-    ```js
-    export BrandRichText from './RichText.tokens';
-    ```
 
 ## Architectural Details
 

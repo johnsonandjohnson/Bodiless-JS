@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/tokens",
-  "version": "1.0.0-rc.13",
+  "version": "1.0.0-rc.14",
   "description": "Utilities for browsing and organizing tokens.",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
@@ -33,10 +33,10 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/core": "^1.0.0-rc.13",
-    "@bodiless/fclasses": "^1.0.0-rc.13",
-    "@bodiless/layouts": "^1.0.0-rc.13",
-    "@bodiless/layouts-ui": "^1.0.0-rc.13",
+    "@bodiless/core": "^1.0.0-rc.14",
+    "@bodiless/fclasses": "^1.0.0-rc.14",
+    "@bodiless/layouts": "^1.0.0-rc.14",
+    "@bodiless/layouts-ui": "^1.0.0-rc.14",
     "informed": "^3.34.0",
     "lodash": "^4.17.19",
     "md5-hex": "^4.0.0",
