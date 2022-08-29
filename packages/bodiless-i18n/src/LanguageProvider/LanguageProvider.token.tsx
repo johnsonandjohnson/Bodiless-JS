@@ -9,6 +9,8 @@ import type { PropsWithLanguages, Languages } from './LanguageProvider';
 /**
  * withCurrentLanguageFromHostPrefix hoc defines the current language
  * by reading the host prefix, e.g. 'es' in https://es.example.com
+ *
+ * @category Language Provider
  */
 export const withCurrentLanguageFromHostPrefix: HOC = Component => (props: any) => {
   const { languages: languagesFromProps = [] }: PropsWithLanguages = props;
@@ -28,6 +30,8 @@ export const withCurrentLanguageFromHostPrefix: HOC = Component => (props: any) 
 /**
  * withCurrentLanguageFromPath defines the current language
  * by reading the first section in the path, eg 'es' in https://example.com/es/some-page
+ *
+ * @category Language Provider
  */
 export const withCurrentLanguageFromPath: HOC = Component => (props: any) => {
   const { languages: languagesFromProps = [] }: PropsWithLanguages = props;
@@ -48,6 +52,10 @@ export const withCurrentLanguageFromPath: HOC = Component => (props: any) => {
  * mechanism of detecting which language is active (by firsh path section).
  * Should be applied on page wrapper component in order to provide necessary language info for
  * all nested components.
+ *
+ * @param Languages - list of language objects.
+ *
+ * @category Language Provider
  */
 export const withLanguages = (languages: Languages) => flowHoc(
   removeProps('languages'),
