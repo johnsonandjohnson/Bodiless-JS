@@ -2,6 +2,8 @@ import { DefaultContentNode } from '@bodiless/core';
 
 /**
  * LanguageContentNode class allows to handle content nodes for current language.
+ *
+ * @category Language Node API
  */
 class LanguageContentNode<D extends object> extends DefaultContentNode<D> {
   // @ts-ignore has no initializer and is not definitely assigned in the constructor

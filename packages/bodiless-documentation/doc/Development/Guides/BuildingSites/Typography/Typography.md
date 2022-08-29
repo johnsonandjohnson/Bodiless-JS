@@ -22,10 +22,17 @@ Typography Guide](/VitalDesignSystem/Components/VitalElements/SiteTypography).
 The following section defines a high-level overview of defining your typography. For best practices,
 we recommend following patterns seen in the `vital-elements` package.
 
+?> **Tip:** If you foresee your package being shadowed in the future, we recommend following the
+[template format](../../../../VitalDesignSystem/Components/VitalElements/ComponentTemplate) to allow
+shadowing.
+
 ### Font Sizes & Line Heights
 
 If your site is defining custom font sizes and line-heights, these are set within your
-[package/site's `tailwind.config.js`](./TailwindGuide#tailwind-configuration-file).
+[package/site's `tailwind.config.js`](./TailwindGuide#tailwind-configuration-file). We do recommend
+making a token collection of the font sizes as well, and using the token versus the Tailwind class.
+This allows for quicker changes if it's modified in the future, allows for it to be shadowed, and
+provides better consistency.
 
 ?> **Tip:** Tailwind provides the ability to specify font sizes with default line-height, and this
 simplifies the process: [Providing a default
@@ -37,8 +44,12 @@ letter-spacing](https://tailwindcss.com/docs/font-size#providing-a-default-lette
 ### Colors
 
 If your site is [defining custom
-colors](https://tailwindcss.com/docs/customizing-colors#adding-additional-colors), these are set
-within your [package/site's `tailwind.config.js`](./TailwindGuide#tailwind-configuration-file).
+colors](https://tailwindcss.com/docs/customizing-colors#adding-additional-colors ':target=_blank'),
+these are set within your [package/site's
+`tailwind.config.js`](./TailwindGuide#tailwind-configuration-file). We do recommend making a token
+collection of the font sizes as well, and using the token versus the Tailwind class. This allows for
+quicker changes if it's modified in the future, allows for it be shadowed, and provides better
+consistency.
 
 ### Element Tokens for Headers, Links, Body, and Other Tokens
 
@@ -46,7 +57,8 @@ You can define a custom collection of tokens to use within your site.
 
 ?> **Tip:** While you have the choice of using the Tailwind class or a token, we recommend that if
 you are reusing a class repeatedly, then make a token for it. In the future, it's quicker to change
-one occurrence than to search through files and replace the specific class.
+one occurrence than to search through files and replace the specific class. It also enables
+shadowing potential in the future.
 
 01. We recommend starting with an Elements folder in your package, and start defining tokens during
     creation. Keeping files small and specific to function/definition will be easier to maintain,
@@ -60,7 +72,13 @@ one occurrence than to search through files and replace the specific class.
     const H1 = asElementToken('text-xxl, font-bold, text-mycolor1, mb-5 lg:mb-6');
 
     // Shared Element Token
-    export default asTokenGroup(meta)({
+    const ColorMeta = {
+      categories: {
+        Type: ['Element'],
+        Group: ['Color'],
+      },
+    };
+    export default asTokenGroup(ColorMeta)({
       BGMyColor1: 'bg-mycolor1',
       TextMyColor1: 'text-mycolor1',
       BGMyColor2: 'bg-mycolor2',

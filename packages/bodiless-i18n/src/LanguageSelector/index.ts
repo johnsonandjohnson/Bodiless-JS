@@ -20,10 +20,14 @@ import type { Language } from '../LanguageProvider';
 /**
  * useLanguageSelectorProps is a hook that helps to toggle between two languages
  * defined on the site.
+ *
  * @returns and object of props:
  * - children: the name of the lenguage to toggle on
  * - href: path prefix for the language to toggle on
+ *
+ * @category API
  */
+
 export const useLanguageSelectorProps = () => {
   const { node: { pagePath } } = useNode();
   const currentLanguage = useLanguageContext().getCurrentLanguage();
@@ -43,5 +47,10 @@ export const useLanguageSelectorProps = () => {
 /**
  * asLanguageSelector is a hoc which, when applied to a link,
  * turns it into a language toggler.
+ *
+ * @params useLanguageSelectorProps hook
+ * @see useLanguageSelectorProps
+ *
+ * @category API
  */
 export const asLanguageSelector = addProps(useLanguageSelectorProps);
