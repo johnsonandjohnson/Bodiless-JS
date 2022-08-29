@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/vital-link-core",
   "sideEffects": false,
-  "version": "1.0.0-rc.13",
+  "version": "1.0.0-rc.15",
   "description": "",
   "author": "Konstantin Mishur <kmishur@its.jnj.com>",
   "license": "Apache-2.0",
@@ -33,9 +33,9 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.13",
-    "@bodiless/fclasses": "^1.0.0-rc.13",
-    "@bodiless/vital-elements": "^1.0.0-rc.13",
+    "@bodiless/cli": "^1.0.0-rc.15",
+    "@bodiless/fclasses": "^1.0.0-rc.15",
+    "@bodiless/vital-elements": "^1.0.0-rc.15",
     "lodash": "^4.17.19",
     "tailwindcss": "^3.0.23"
   }
