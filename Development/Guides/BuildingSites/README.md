@@ -142,10 +142,14 @@ default, is enabled for two languages.
 
 ### **Guide**
 
-  <!-- TODO: Complete bullet when able. -->
-- If your site requires multi-language, we recommend bringing in the @bodiless/i18 package... TBD
+- If your site requires multi-language, we recommend bringing in the
+  Internationalization @bodiless/i18 package. Please read the documentation that
+  includes a [step by step guide](../../../Components/Internationalization/).
 
-<!-- TODO: Resources. -->
+### **Resources**
+
+- [i18n (Internationalization) Documentation](../../../Components/Internationalization/)
+- [i18n (Internationalization) API](/Development/API/@bodiless/i18n/README)
 
 <!-- tabs:end -->
 
@@ -344,8 +348,8 @@ on other pages.
 
 ### **Resources**
 
-- [Content Editor: Saving a compoenent](../../../Components/FlowContainer/?id=saving-a-component-in-the-content-library)
-- [Content Editor: Unlinking a compoenent](../../../Components/FlowContainer/?id=unlinking-a-component-from-the-content-library)
+- [Content Editor: Saving a component](../../../Components/FlowContainer/?id=saving-a-component-in-the-content-library)
+- [Content Editor: Unlinking a component](../../../Components/FlowContainer/?id=unlinking-a-component-from-the-content-library)
 - [Manual Site Builder: Building Contentful Components without use Content Library](./BuildingComponents/BuildingContentful)
 
 <!-- tabs:end -->

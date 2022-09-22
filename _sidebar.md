@@ -33,6 +33,7 @@
       - [GA4 Activation](/Components/Analytics/GA4Activation)
       - [Adding Tracking](/Components/Analytics/AddingTracking)
       - [About GTM And GA4](/Components/Analytics/About_GTM_and_GA4)
+    - [Internationalization](/Components/Internationalization/)
     - [Flow Container](/Components/FlowContainer/)
     - [Navigation](/Components/Navigation/)
       - [Upgrade](/Components/Navigation/Upgrade)

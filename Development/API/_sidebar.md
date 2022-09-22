@@ -1,5 +1,6 @@
 * [@bodiless/fclasses](/Development/API/@bodiless/fclasses/README)
 * [@bodiless/gatsby-theme-bodiless](/Development/API/@bodiless/gatsby-theme-bodiless/README)
+* [@bodiless/i18n](/Development/API/@bodiless/i18n/README)
 * [@bodiless/layouts](/Development/API/@bodiless/layouts/README)
 * [@bodiless/schema-org](/Development/API/@bodiless/schema-org/README)
 * [@bodiless/vital-accordion](/Development/API/@bodiless/vital-accordion/README)
