@@ -11,6 +11,7 @@
     "test": "__tests__"
   },
   "dependencies": {
+    "@bodiless/minimal-demo": "^1.0.0-rc.16",
     "@bodiless/backend": "^1.0.0-rc.16",
     "@bodiless/cli": "^1.0.0-rc.16",
     "@bodiless/components": "^1.0.0-rc.16",

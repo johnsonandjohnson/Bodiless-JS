@@ -13,9 +13,12 @@
  */
 
 import { graphql } from 'gatsby';
-import Page from '../components/Page';
+import { PageClean, mysitePage} from '@bodiless/minimal-demo';
+import { as } from '@bodiless/fclasses';
 
-export default Page;
+const DefaultPage = as(mysitePage.Base)(PageClean);
+
+export default DefaultPage;
 
 // The allSite query is extraneous and exists only to prevent
 // a webpack linting error produced by default gatsby config(the $slug variable

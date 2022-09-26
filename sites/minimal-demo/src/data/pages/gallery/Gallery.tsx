@@ -6,8 +6,6 @@ import { FlowContainer } from '@bodiless/layouts-ui';
 import { withNode } from '@bodiless/core';
 import CaptionedImage from './CaptionedImage';
 
-const asGalleryTile = addClasses('mx-2 border-8');
-
 const withBlueBorder = addClasses('border-blue-400');
 const withTealBorder = addClasses('border-teal-400');
 const withOrangeBorder = addClasses('border-orange-400');
@@ -15,7 +13,6 @@ const withOrangeBorder = addClasses('border-orange-400');
 const design = {
   BlueImageTile: as(
     replaceWith(CaptionedImage),
-    asGalleryTile,
     withBlueBorder,
     withMeta({
       title: 'Blue Image Tile',
@@ -26,7 +23,6 @@ const design = {
   ),
   TealImageTile: as(
     replaceWith(CaptionedImage),
-    asGalleryTile,
     withTealBorder,
     withMeta({
       title: 'Teal Image Tile',
@@ -37,7 +33,6 @@ const design = {
   ),
   OrangeImageTile: as(
     replaceWith(CaptionedImage),
-    asGalleryTile,
     withOrangeBorder,
     withMeta({
       title: 'Orange Image Tile',
@@ -64,5 +59,4 @@ const Gallery = as(
   withNode,
 )(GalleryBase);
 
-export const GalleryTile = asGalleryTile(CaptionedImage);
 export default Gallery;

@@ -29,6 +29,7 @@ import Wizard, { Flags, WizardOptions } from './Wizard';
 import Spawner from './Spawner';
 import { listVersionsSync, listBranchesSync } from './git';
 import { recursiveRename } from './recursiveRename';
+import { rootPackageJson } from './package-json';
 
 const replaceInFile = require('replace-in-file');
 const findGitRoot = require('find-git-root');
@@ -370,8 +371,9 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     if (template$ === NO_TEMPLATE) return Promise.resolve();
     const template = template$.replace(/_/g, '-');
     const json = await fs.readFile(file);
-    const data = JSON.parse(json.toString());
+    let data = JSON.parse(json.toString());
     if (type === 'root') {
+      data = rootPackageJson;
       data.name = `${name}-monorepo`;
       if (!fs.existsSync(templatePackageDir)) {
         delete data.scripts['build:packages'];
@@ -394,9 +396,11 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     } else {
       data.name = packageName;
     }
-    data.description = '';
-    data.author = '';
-    data.version = '0.0.0';
+    if (type !== 'root') {
+      data.description = '';
+      data.author = '';
+      data.version = '0.0.0';
+    }
     return fs.writeFile(file, JSON.stringify(data, undefined, 2));
   }
 
@@ -456,13 +460,15 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const name = await this.getArg('name');
     const files = [
       path.join(dest, 'jenkins'),
+      path.join(dest, 'scripts'),
       path.join(dest, 'cypress'),
       path.join(dest, 'cypress.json'),
       path.join(dest, 'playwright'),
       path.join(dest, 'playwright.config.ts'),
       path.join(dest, '.github'),
       path.join(dest, '.vscode'),
-      path.join(dest, 'sonar-project.properties.'),
+      path.join(dest, 'sonar-project.properties'),
+      path.join(dest, 'typedoc.js'),
       path.join(dest, 'Dockerfile'),
       path.join(dest, 'UPGRADE.md'),
       path.join(dest, 'CONTRIBUTING.md'),

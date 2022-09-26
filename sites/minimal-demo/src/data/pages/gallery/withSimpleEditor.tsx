@@ -19,7 +19,7 @@ const asUnderline = addClasses('underline');
 const asLink = as(
   startWith(A),
   asBodilessLink(),
-  addClasses('text-blue-700 underline')
+  addClasses('text-blue-400 underline')
 );
 
 const simpleDesign = {

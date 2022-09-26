@@ -1,0 +1,66 @@
+export const rootPackageJson = {
+  license: 'Apache-2.0',
+  dependencies: {
+    '@babel/core': '^7.9.0',
+    '@babel/plugin-proposal-decorators': '^7.4.0',
+    '@babel/plugin-transform-modules-commonjs': '7.5.0',
+    '@babel/runtime': '^7.4.2',
+    react: '^17.0.2',
+    'react-dom': '^17.0.2'
+  },
+  devDependencies: {
+    '@types/enzyme': '^3.9.1',
+    '@types/jest': '^24.0.18',
+    '@typescript-eslint/eslint-plugin': '^5.9.1',
+    '@typescript-eslint/parser': '^5.9.1',
+    '@wojtekmaj/enzyme-adapter-react-17': '^0.6.3',
+    'babel-eslint': '^10.0.1',
+    'babel-jest': '^24.9.0',
+    'cross-env': '^5.2.0',
+    'docsify-cli': '^4.3.0',
+    enzyme: '^3.9.0',
+    'enzyme-to-json': '^3.3.5',
+    eslint: '^7.27.0',
+    'eslint-config-airbnb': '^18.2.1',
+    'eslint-config-airbnb-typescript': '^16.1.0',
+    'eslint-config-prettier': '^4.2.0',
+    'eslint-plugin-import': '^2.20.2',
+    'eslint-plugin-jest': '^23.8.2',
+    'eslint-plugin-jsx-a11y': '^6.4.1',
+    'eslint-plugin-prettier': '^3.0.1',
+    'eslint-plugin-react': '^7.19.0',
+    husky: '^3.0.0',
+    jest: '^26.6.3',
+    'jest-haste-map': '^24.5.0',
+    'jest-resolve': '^24.5.0',
+    lerna: '^4.0.0',
+    'react-test-renderer': '^17.0.2',
+    syncpack: '^6.2.0',
+    'ts-jest': '^26.4.4',
+    typedoc: '^0.22.6',
+    'typedoc-plugin-markdown': '^3.11.3',
+    typescript: '^4.0.0'
+  },
+  husky: {
+    hooks: {
+      'pre-push': 'npm run sync:check && npm run lint && npm run check'
+    }
+  },
+  scripts: {
+    bootstrap: 'npx lerna bootstrap --hoist --strict',
+    'bootstrap:gatsby-cloud': 'npm i && npx lerna bootstrap',
+    build: 'cross-env NODE_ENV=production lerna run build --stream',
+    'build:only': 'cross-env NODE_ENV=production lerna run build --stream --scope',
+    'build:packages': 'cross-env NODE_ENV=production lerna run build --stream --ignore @sites/*',
+    check: 'cross-env NODE_ENV=production lerna run check --stream',
+    fix: 'eslint --fix  --cache --ext .js,.jsx,.ts,.tsx packages sites',
+    lint: 'eslint --cache --ext .js,.jsx,.ts,.tsx packages sites',
+    'psh:setup-starter': 'node ./scripts/psh-setup-starter',
+    setup: 'npm run bootstrap && npm run build:packages',
+    'setup:gatsby-cloud': 'npm run bootstrap:gatsby-cloud && npm run build:packages',
+    start: 'lerna run start --stream --scope @sites/tutorial',
+    'sync:fix': 'syncpack fix-mismatches',
+    'sync:check': 'syncpack list-mismatches',
+    docs: 'lerna run build:docs --stream --scope @sites/tutorial && docsify serve ./sites/tutorial/doc'
+  },
+};

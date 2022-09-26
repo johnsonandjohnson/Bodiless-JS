@@ -12,8 +12,15 @@ Upon completion of this tutorial, you will end up with code similar to that foun
 ## 0. Prerequisite: Create a Site
 
 To begin, follow the directions to [create a new
-site](../../About/GettingStarted#creating-a-new-site). All the pages created in this tutorial will
-be in this new site.
+site](../../About/GettingStarted#creating-a-new-site).  Choose the `__minimal__` starter
+template.  All the pages created in this tutorial will be in this new site.
+
+> Note: The site created by the `@bodiless/cli new` command is structured as a *monorepo*.
+> The Gatsby site itself is located at `/sites/{site-name}`, where `site-name` is the name
+> you chose for your site. In this tutorial, we will only be creating files at site level,
+> and all paths are relative to this site directory.  In later tutorials, you will learn
+> how to take full advantage of the monorepo structure to create one or more packages
+> your site can depend on.
 
 ## 1. Creating a Page
 
@@ -291,11 +298,11 @@ these files are defined by the `nodeKey` passed as an argument to `asBodilessLin
 </Link>
 ```
 
-Note the name of the file containing the image data. Because the image element is a child of the
+?> **Note:** the name of the file containing the image data. Because the image element is a child of the
 link, its content file is namespaced to its parent. This allows you to compose editable primitives
 into reusable components. We'll come back to this later.
 
-Note, also, the second argument to `asBodilessImage` above. This is a way to provide a placeholder
+?> **Note:** also, the second argument to `asBodilessImage` above. This is a way to provide a placeholder
 value for the image data when no image has been uploaded. Here we use it to provide a landscape
 placeholder to improve the layout of an empty page. Of course, the image is not actually
 constrained, and will take the dimensions of any file you upload.
@@ -388,7 +395,7 @@ const asUnderline = addClasses('underline');
 const asLink = as(
   startWith(A),
   asBodilessLink(),
-  addClasses('text-blue-700 underline')
+  addClasses('text-blue-400 underline')
 );
 
 const simpleDesign = {
@@ -454,7 +461,7 @@ const asUnderline = addClasses('underline');
 const asLink = as(
   startWith(A),
   asBodilessLink(),
-  addClasses('text-blue-700 underline'),
+  addClasses('text-blue-400 underline'),
 );
 ```
 
@@ -509,9 +516,15 @@ import {
 } from '@bodiless/fclasses';
 import withSimpleEditor from './withSimpleEditor';
 
-const Wrapper = Section;
-const Image = as(addClasses('w-full'), asBodilessImage('image'))(Img);
-const Body = withSimpleEditor('caption', 'Caption')(Div);
+const Wrapper = addClasses('flex flex-col rounded-t-lg h-full mx-2 border-8')(Section);
+const Image = as(
+  addClasses('w-full'),
+  asBodilessImage('image')
+)(Img);
+const Body = as(
+  addClasses('text-white bg-black flex-grow p-2'),
+  withSimpleEditor('caption', 'Caption')
+)(Div);
 
 const CaptionedImageBase: FC<HTMLProps<HTMLElement>> = props => (
   <Wrapper {...props}>
@@ -534,7 +547,7 @@ stylable. Since all props are passed on to the `Wrapper` component, this allows 
 to be styled when the `CaptionedImage` is placed. We'll explore a more efficient way of styling the
 wrapper (and the other internal elements) later when we introduce the Design API.
 
-Next create a `Gallery.tsx` file as follows:
+Next, create a `Gallery.tsx` file as follows:
 
 ```tsx
 import React, { FC, HTMLProps } from 'react';
@@ -543,8 +556,6 @@ import {
 } from '@bodiless/fclasses';
 import { withNode } from '@bodiless/core';
 import CaptionedImage from './CaptionedImage';
-
-const asGalleryTile = addClasses('mx-2 border-8');
 
 const Wrapper = addClasses('my-2')(Section);
 const Header = addClasses('text-2xl')(H2);
@@ -564,22 +575,22 @@ const Gallery = as(
   withNode,
 )(GalleryBase);
 
-export const GalleryTile = asGalleryTile(CaptionedImage);
 export default Gallery;
 ```
 
 Once again, we see the same compositional pattern. Finally, import this into your `index.tsx`:
 
 ```tsx
-import Gallery, { GalleryTile } from './Gallery';
+import Gallery from './Gallery';
+import CaptionedImage from './CaptionedImage';
 ```
 
 And place it on the page after the `<Body />` tag:
 
 ```tsx
 <Gallery nodeKey="gallery-content">
-  <GalleryTile nodeKey="tile1" />
-  <GalleryTile nodeKey="tile2" />
+  <CaptionedImage nodeKey="tile1" />
+  <CaptionedImage nodeKey="tile2" />
 </Gallery>
 ```
 
@@ -614,8 +625,8 @@ this, BodilessJS provides a simple, Flow Container-based grid container, and a s
 an Editor to select and place components within it. Refactor the `Gallery` component to use the
 `FlowContainer` container.
 
-First, create some styled variations of `GalleryTile` with different colored borders. Add the
-following to `Gallery.tsx` just after the line where `asGalleryTile` is defined:
+First, create some styled variations of `CaptionedImage` with different colored borders. Add the
+following to `Gallery.tsx` just after the imports:
 
 ```tsx
 const withBlueBorder = addClasses('border-blue-400');
@@ -643,7 +654,6 @@ gallery:
     const design = {
       BlueImageTile: as(
         replaceWith(CaptionedImage),
-        asGalleryTile,
         withBlueBorder,
         withMeta({
           title: 'Blue Image Tile',
@@ -654,7 +664,6 @@ gallery:
       ),
       TealImageTile: as(
         replaceWith(CaptionedImage),
-        asGalleryTile,
         withTealBorder,
         withMeta({
           title: 'Teal Image Tile',
@@ -665,7 +674,6 @@ gallery:
       ),
       OrangeImageTile: as(
         replaceWith(CaptionedImage),
-        asGalleryTile,
         withOrangeBorder,
         withMeta({
           title: 'Orange Image Tile',
@@ -713,8 +721,8 @@ which makes our three tiles available for placement by a Content Editor:
 01. Now remove the following from `index.tsx`:
     ```tsx
     <Gallery nodeKey="gallery-content">
-      <GalleryTile nodeKey="tile1" />
-      <GalleryTile nodeKey="tile2" />
+      <CaptionedImage nodeKey="tile1" />
+      <CaptionedImage nodeKey="tile2" />
     </Gallery>
     ```
     And replace it with:
@@ -749,6 +757,11 @@ and the tiles now stack one per row. However, you can alter this behavior by res
 reordering) the tiles while at tablet size. In fact, the Flow Container grid remembers the layout
 you set at every breakpoint, allowing you to create completely customized, responsive layouts.
 
+**Tablet with tiles stacked:**
+![Tablet Unsized](./assets/tabletunsized.jpg)
+
+**Tablet with tiles resized to 33%:**
+![Tablet Resized](./assets/tabletsized.jpg)
 ## 10. Selection vs Configuration
 
 BodilessJS favors selection over configuration. It follows the belief that it is better to create
@@ -756,3 +769,5 @@ lots of simple components than to create a few complex components. The component
 this pattern by providing sophisticated search and filter capabilities, allowing a Content Editor to
 find the exact component they are looking for quickly and easily. You can read more about this in
 our [Core Principles](../../About/CorePrinciples).
+
+![Component Selector](./assets/componentselector.jpg)

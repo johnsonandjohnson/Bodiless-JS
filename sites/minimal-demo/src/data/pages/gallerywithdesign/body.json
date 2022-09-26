@@ -1,0 +1,87 @@
+[
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "This",
+        "Italic": true
+      },
+      {
+        "text": " is "
+      },
+      {
+        "text": "editable",
+        "Underline": true
+      },
+      {
+        "text": " text provided via a "
+      },
+      {
+        "text": "simple editor",
+        "Bold": true
+      },
+      {
+        "text": "."
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "Click the "
+      },
+      {
+        "text": "Edit",
+        "Bold": true
+      },
+      {
+        "text": " button in the "
+      },
+      {
+        "data": {
+          "openModal": true,
+          "slatenode": {
+            "href": "/___docs/#/ContentEditorUserGuide/?id=toolbar",
+            "aria-label": "Toolbar documentation"
+          }
+        },
+        "type": "Link",
+        "children": [
+          {
+            "text": "Toolbar"
+          }
+        ]
+      },
+      {
+        "text": " to try editing this page."
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "To see how this page was created, see our "
+      },
+      {
+        "data": {
+          "openModal": true,
+          "slatenode": {
+            "href": "/___docs/#/Development/Guides/IntroToBodilessConcepts",
+            "aria-label": "\"Creating a Gallery Page\" tutorial"
+          }
+        },
+        "type": "Link",
+        "children": [
+          {
+            "text": "tutorial"
+          }
+        ]
+      },
+      {
+        "text": "!"
+      }
+    ]
+  }
+]

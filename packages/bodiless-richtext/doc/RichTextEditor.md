@@ -29,6 +29,66 @@ This package also includes a set of tools for elegant scaffolding and extending 
 > Before using this module it is essential to understand how Slate editor works:
 **[Read Slate Walkthroughs and Guides sections](https://docs.slatejs.org/).**
 
+### RichText Component
+
+The RichText component is built on top of the SlateJS framework. It takes design
+object (see @bodiless/Design System) that contain HOC to build out the component
+that are available in the RichText Editor. Those are then presented to the user
+using both a contextual hover menu as well as the standard menu. These items can
+be used by using a set of HOC's.
+
+`startWith(Component)` lets us know which component should be part of the item
+
+`asMark`, `asInline` and `asBlock` are used to say how the slate editor should use the component.
+
+- `marks` are used for basic character-level formatting (eg bold, italic, underline, text=color, etc).
+- `inlines` may also be used for character formatting, but should generally be reserved for cases 
+where the component requires additional configuration besides the text (for example, a link, 
+which may require `href`, `target` or other attributes).
+- `blocks` should be used for block-level formatting (eg headers, lists, etc).
+
+`withKey('mod+k')` can be used to add a shortcut key to the component.
+
+`withButton("icon")` can be used to add a button that will set the text to a component. 
+If the item is asBlock then it will be added to the global menu if not then it will be added 
+to the local hover menu.
+
+There are a set of keys that have defaults that are often used they are the following:
+
+- SuperScript
+- Bold
+- Italic
+- Underline
+- Link
+- AlignLeft
+- AlignRight
+- AlignCenter
+- AlignJustify
+- H1
+- H2
+- H3
+
+With these one only need to include the key.
+
+Each of this helper return a function that we pass in as items. We can use flow to 
+combine them as such:
+
+```js
+const design = {
+  Bold: asBold,
+  Link: asLink,
+  Strikethrough: flow(
+    startWith(Span),
+    withButton('format_strikethrough'),
+    withKey('mod+s'),
+    asMark,
+  ),
+};
+const EditorFullFeatured = <P extends object> (props:P) => (
+  <RichText design={items2} initialValue={demoValue} {...props} />
+);
+```
+
 ## Architectural Details
 
 ### Contents
@@ -229,66 +289,6 @@ export default Content;
 ```
 
 <a name="rich-text-items"></a>
-
-#### RichText Component
-
-The RichText Component is built on the [SlateJS](https://docs.slatejs.org/) framework. It takes design object 
-(see @bodiless/Design System) that contain HOC to build out the component that are 
-available in the RichText Editor. Those are then presented to the user using both a 
-contextual hover menu as well as the standard menu. These items can be used by using 
-a set of HOC's. 
-
-`startWith(Component)` lets us know which component should be part of the item
-
-`asMark`, `asInline` and `asBlock` are used to say how the slate editor should use the component.
-
-- `marks` are used for basic character-level formatting (eg bold, italic, underline, text=color, etc).
-- `inlines` may also be used for character formatting, but should generally be reserved for cases 
-where the component requires additional configuration besides the text (for example, a link, 
-which may require `href`, `target` or other attributes).
-- `blocks` should be used for block-level formatting (eg headers, lists, etc).
-
-`withKey('mod+k')` can be used to add a shortcut key to the component.
-
-`withButton("icon")` can be used to add a button that will set the text to a component. 
-If the item is asBlock then it will be added to the global menu if not then it will be added 
-to the local hover menu.
-
-There are a set of keys that have defaults that are often used they are the following:
-
-- SuperScript
-- Bold
-- Italic
-- Underline
-- Link
-- AlignLeft
-- AlignRight
-- AlignCenter
-- AlignJustify
-- H1
-- H2
-- H3
-
-With these one only need to include the key.
-
-Each of this helper return a function that we pass in as items. We can use flow to 
-combine them as such:
-
-```js
-const design = {
-  Bold: asBold,
-  Link: asLink,
-  Strikethrough: flow(
-    startWith(Span),
-    withButton('format_strikethrough'),
-    withKey('mod+s'),
-    asMark,
-  ),
-};
-const EditorFullFeatured = <P extends object> (props:P) => (
-  <RichText design={items2} initialValue={demoValue} {...props} />
-);
-```
 
 ### Plugin Factories
 

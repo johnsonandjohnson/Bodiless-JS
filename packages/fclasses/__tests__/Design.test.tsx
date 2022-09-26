@@ -334,3 +334,27 @@ describe('replaceWith', () => {
     expect(wrapper.find('span#test')).toHaveLength(1);
   });
 });
+
+// eslint-disable-next-line jest/no-focused-tests
+describe.only('foo', () => {
+  // eslint-disable-next-line jest/expect-expect
+  it('bar', () => {
+    const Sub = (props: any) => <>{JSON.stringify(props)}</>;
+    const testHoc: HOC = Component => {
+      const TestContext = React.createContext<any>({ baz: 3 });
+      const withPropsFromTestContext: HOC = SubComponent => props => (
+        <SubComponent {...props} {...React.useContext(TestContext)} />
+      );
+      const Sub1 = withPropsFromTestContext(Sub);
+      const TestHoc: FC<any> = props => (
+        <TestContext.Provider value={props}>
+          <Sub1 />
+        </TestContext.Provider>
+      );
+      return TestHoc;
+    };
+    const Test: any = testHoc(Fragment);
+    const wrapper = mount(<Test bizzle="bing" />);
+    console.log(wrapper.debug());
+  });
+});
