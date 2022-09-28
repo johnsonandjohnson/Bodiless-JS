@@ -136,8 +136,8 @@ configured with additional Hero variants.
 
 ## Site Builder Details
 
-?> **API Documentation**: visit
-[Vital Card Token Collection](../../../Development/API/@bodiless/vital-card/interfaces/VitalCard)
+?> **API Documentation:** Visit [Vital Card Token
+Collection](/Development/API/@bodiless/vital-card/interfaces/VitalCard).
 
 ```js
 import { as } from '@bodiless/fclasses'
@@ -215,6 +215,5 @@ Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shad
 
 File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-card/Card.ts`
 
-?> **API Documentation**: Visit the
-[Vital Card Token Collection](../../../Development/API/@bodiless/vital-card/interfaces/VitalCard)
-for examples of shadowing.
+?> **API Documentation:** Visit the [Vital Card Token
+Collection](/Development/API/@bodiless/vital-card/interfaces/VitalCard) for examples of shadowing.
