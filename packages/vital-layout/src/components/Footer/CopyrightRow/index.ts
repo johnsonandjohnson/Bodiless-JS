@@ -21,7 +21,8 @@ import vitalCopyrightRowBaseOrig, { VitalCopyrightRow } from './tokens/vitalCopy
   */
 const vitalCopyrightRowBase = vitalCopyrightRowBaseOrig;
 
-export { asCopyrightRowToken } from './CopyrightRowClean';
+export { default as CopyrightRowClean, asCopyrightRowToken, CopyrightRowStatic } from './CopyrightRowClean';
+export { default as vitalCopyrightRow } from './tokens';
 export type { CopyrightRowComponents, CopyrightRowProps } from './types';
+
 export { vitalCopyrightRowBase, VitalCopyrightRow };
-export * from './index.bl-edit';
