@@ -40,7 +40,7 @@ const twConfig = {
           fontFamily: 'buttonicons',
           fontWeight: 400,
           fontStyle: 'normal',
-          src: 'url(\'@bodiless/vital-buttons/assets/font/buttonicons.woff2\')',
+          src: 'url(\'@bodiless/vital-buttons-core/assets/font/buttonicons.woff2\')',
         },
       });
     }),

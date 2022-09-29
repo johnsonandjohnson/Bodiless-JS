@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/vital-buttons-core",
   "sideEffects": false,
-  "version": "1.0.0-rc.15",
+  "version": "1.0.0-rc.16",
   "description": "",
   "author": "Heidi Vanyo <hvanyo@its.jnj.com>",
   "license": "Apache-2.0",

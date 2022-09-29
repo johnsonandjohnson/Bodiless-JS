@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/vital-link-core",
   "sideEffects": false,
-  "version": "1.0.0-rc.15",
+  "version": "1.0.0-rc.16",
   "description": "",
   "author": "Konstantin Mishur <kmishur@its.jnj.com>",
   "license": "Apache-2.0",

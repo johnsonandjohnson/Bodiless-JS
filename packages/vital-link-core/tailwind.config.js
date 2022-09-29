@@ -36,7 +36,7 @@ const twConfig = {
           fontFamily: 'linkicons',
           fontWeight: 400,
           fontStyle: 'normal',
-          src: 'url(\'@bodiless/vital-link/assets/font/linkicons.woff2\')',
+          src: 'url(\'@bodiless/vital-link-core/assets/font/linkicons.woff2\')',
         },
       });
     }),
