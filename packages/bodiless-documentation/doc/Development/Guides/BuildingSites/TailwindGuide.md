@@ -204,7 +204,7 @@ ensure you perform the following steps:
 01. In `package.json`, in the `files` section, make sure you add `'/assets'`, so it's exported with
     the package.
 
-?> **Note:** If you were to have `"url('/images/myimage.svg')"` in your Tailwind config (at package
+?> **Note:** If you were to have `"url('/images/myimage.png')"` in your Tailwind config (at package
 or site level), your site would expect the image to be at
 `sites/SITE-NAME/static/images/myimage.png`, as it will default to looking for the assets in
 `sites/SITE-NAME/static`. This is fine if the changes are within the _site's_ Tailwind config, but,
