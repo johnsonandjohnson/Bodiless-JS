@@ -12,7 +12,5 @@
  * limitations under the License.
  */
 
-import CopyrightRowClean from './CopyrightRowClean';
-import vitalCopyrightRow from './tokens';
-
-export { CopyrightRowClean, vitalCopyrightRow };
+export { default as vitalCopyrightRowStatic } from './tokens';
+export { CopyrightRowStatic } from './CopyrightRowClean';

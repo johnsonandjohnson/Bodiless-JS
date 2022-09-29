@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/vital-meta",
-  "version": "1.0.0-rc.15",
+  "version": "1.0.0-rc.16",
   "description": "Editable SEO and Share Metatags for Bodiless/VitalDS",
   "author": "Chris Oden <coden@its.jnj.com>",
   "license": "Apache-2.0",
@@ -31,12 +31,12 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.15",
-    "@bodiless/components": "^1.0.0-rc.15",
-    "@bodiless/components-ui": "^1.0.0-rc.15",
-    "@bodiless/core": "^1.0.0-rc.15",
-    "@bodiless/fclasses": "^1.0.0-rc.15",
-    "@bodiless/vital-elements": "^1.0.0-rc.15",
+    "@bodiless/cli": "^1.0.0-rc.16",
+    "@bodiless/components": "^1.0.0-rc.16",
+    "@bodiless/components-ui": "^1.0.0-rc.16",
+    "@bodiless/core": "^1.0.0-rc.16",
+    "@bodiless/fclasses": "^1.0.0-rc.16",
+    "@bodiless/vital-elements": "^1.0.0-rc.16",
     "informed": "^3.34.0",
     "lodash": "^4.17.19"
   }
