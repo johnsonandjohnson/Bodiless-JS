@@ -205,7 +205,6 @@ export interface VitalCardBase {
    * import { H2, replaceWith } from '@bodiless/fclasses';
    * import { asCardToken, vitalCardBase } from '@bodiless/vital-card';
    *
-   *
    * const Basic = asCardToken(vitalCardBase.Basic, {
    *   Components: {
    *     TitleWrapper: replaceWith(H2),
