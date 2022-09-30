@@ -84,9 +84,9 @@ export interface VitalCardHero {
    *
    * #### Customizing:
    *
-   * @example Add a component
+   * @example Create a custom Hero card
    * ```js
-   * import { vitalCard } from '@bodiless/vital-flowcontainer';
+   * import { vitalCard } from '@bodiless/vital-card';
    *
    * const MyCustomHero = asCardToken(
    *   HeroBase,
@@ -94,6 +94,28 @@ export interface VitalCardHero {
    *   WithHorizontalRightOrientation,
    *   WithNoDescription,
    * );
+   * ```
+   *
+   * @example Shadowing the Hero card with different variations and margin on image.
+   * ```js
+   * import { asCardToken, vitalCardBase } from '@bodiless/vital-card';
+   *
+   * const Hero = asCardToken(
+   *   vitalCardBase.HeroBase,
+   *   vitalCardBase.WithHorizontalContentCentered,
+   *   vitalCardBase.WithHorizontalLeftOrientation,
+   *   vitalCardBase.WithPrimaryButton,
+   *   {
+   *     Theme: {
+   *       ImageWrapper: 'mx-16',
+   *     },
+   *   },
+   * );
+   *
+   * export default {
+   *   ...vitalCardBase,
+   *   Hero,
+   * };
    * ```
    */
   HeroBase: CardToken,
