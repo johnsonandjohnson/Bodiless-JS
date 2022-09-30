@@ -8,6 +8,7 @@
 * [@bodiless/vital-card](/Development/API/@bodiless/vital-card/README)
 * [@bodiless/vital-content-listing](/Development/API/@bodiless/vital-content-listing/README)
 * [@bodiless/vital-flowcontainer](/Development/API/@bodiless/vital-flowcontainer/README)
+* [@bodiless/vital-image](/Development/API/@bodiless/vital-image/README)
 * [@bodiless/vital-layout](/Development/API/@bodiless/vital-layout/README)
 * [@bodiless/vital-list](/Development/API/@bodiless/vital-list/README)
 * [@bodiless/vital-meta](/Development/API/@bodiless/vital-meta/README)

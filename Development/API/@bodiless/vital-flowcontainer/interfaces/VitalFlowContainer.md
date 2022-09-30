@@ -30,7 +30,7 @@ Composable token which enables a flow container to be nested inside another.
 
 #### Defined in
 
-[vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts:238](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts#L238)
+[vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts:251](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts#L251)
 
 ___
 
@@ -38,9 +38,13 @@ ___
 
 • **Base**: `TokenSpec`<`any`, { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\>
 
+Token which creates the VitalDS Default Base for a Flow Container.
+This only applies the mandatory categories to category and is using in
+composing new tokens and not a functional FlowContainer.
+
 #### Defined in
 
-[vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts:189](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts#L189)
+[vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts:175](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts#L175)
 
 ___
 
@@ -48,14 +52,13 @@ ___
 
 • **ContentRegion**: `TokenSpec`<`any`, { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\>
 
-Defins a flow container which is to be used as a content region (that is,
+Defines a flow container which is to be used as a content region (that is,
 nested within another flow container). This contains all components
 defined in the `Default` flow container with the exception of
 the Content Region itself (i.e. you can't have double nesting).
 
-You can shadow this token to change the components which are available
-in a content region.  For example:
-```ts
+**`example`** change the components which are available in a content region via shadowing
+```js
 const ContentRegion = asFluidToken({
    ...vitalContentRegionBase.ContentRegion,
    Components: {
@@ -67,7 +70,7 @@ const ContentRegion = asFluidToken({
 
 #### Defined in
 
-[vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts:234](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts#L234)
+[vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts:247](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts#L247)
 
 ___
 
@@ -83,7 +86,7 @@ Defines the default flow container for the Vital DS.
 
 #### Customizing:
 
-**`example`** Add a component
+**`example`** Add a custom component to Vital's Default Flow Container via shadowing
 ```js
 import { vitalFlowContainerBase } from '@bodiless/vital-flowcontainer';
 
@@ -94,9 +97,37 @@ const Default = asFluidToken(vitalFlowContainerBase.Default, {
 });
 ```
 
+**`example`** Modifying the Vital's Default Flow Container component spacing via shadowing
+```js
+import { vitalFlowContainerBase } from '@bodiless/vital-flowcontainer';
+
+const Default = asFluidToken(vitalFlowContainerBase.Default, {
+  Spacing: {
+    ComponentWrapper: 'my-8',
+  },
+});
+```
+
+**`example`** Add a Content Library to Vital's Default Flow Container via shadowing
+```js
+import { asFluidToken } from '@bodiless/vital-elements';
+import { vitalFlowContainerBase } from '@bodiless/vital-flowcontainer';
+import { addProps } from '@bodiless/fclasses';
+
+const Default = asFluidToken(
+  vitalFlowContainerBase.Default,
+  vitalFlowContainerBase.WithContentLibrary,
+);
+
+export default {
+  ...vitalFlowContainerBase,
+  Default,
+};
+```
+
 #### Defined in
 
-[vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts:210](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts#L210)
+[vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts:224](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts#L224)
 
 ___
 
@@ -109,7 +140,7 @@ Flow container which can be used in the Hero slot.
 
 #### Defined in
 
-[vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts:215](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts#L215)
+[vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts:229](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts#L229)
 
 ___
 
@@ -121,7 +152,7 @@ Composable token which adds content library functionality.
 
 #### Defined in
 
-[vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts:254](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts#L254)
+[vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts:267](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts#L267)
 
 ___
 
@@ -133,7 +164,7 @@ Composable token which constrains all items to full width.
 
 #### Defined in
 
-[vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts:242](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts#L242)
+[vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts:255](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts#L255)
 
 ___
 
@@ -145,7 +176,7 @@ Allows only a single item in the flow container.
 
 #### Defined in
 
-[vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts:250](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts#L250)
+[vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts:263](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts#L263)
 
 ___
 
@@ -157,4 +188,4 @@ Composable token which constrains all items to 1/3 width on tablet.
 
 #### Defined in
 
-[vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts:246](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts#L246)
+[vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts:259](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/vital-flowcontainer/src/components/FlowContainer/tokens/vitalFlowContainer.ts#L259)

@@ -13,9 +13,12 @@
 - [GatsbyMobxStore](classes/GatsbyMobxStore.md)
 - [GatsbyNodeProvider](classes/GatsbyNodeProvider.md)
 
+### Component Interfaces
+
+- [BodilessImageComponents](interfaces/BodilessImageComponents.md)
+
 ### Type aliases
 
-- [BodilessImageComponents](README.md#bodilessimagecomponents)
 - [PageProps](README.md#pageprops)
 
 ### Variables
@@ -38,30 +41,13 @@
 
 ## Type aliases
 
-### BodilessImageComponents
-
-Ƭ **BodilessImageComponents**: `Object`
-
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `GatsbyImage` | `CT`<`GatsbyPluginImageProps`\> |
-| `Image` | `CT`<`any`\> |
-
-#### Defined in
-
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx:45](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx#L45)
-
-___
-
 ### PageProps
 
 Ƭ **PageProps**: { `ui?`: `UI`  } & `React.ComponentProps`<typeof [`GatsbyNodeProvider`](classes/GatsbyNodeProvider.md)\> & `PageProviderProps`
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/types.ts:34](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/types.ts#L34)
+[packages/gatsby-theme-bodiless/src/dist/types.ts:34](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/types.ts#L34)
 
 ## Variables
 
@@ -71,7 +57,7 @@ ___
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx:78](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx#L78)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx:81](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx#L81)
 
 ___
 
@@ -81,7 +67,7 @@ ___
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/Page.bl-edit.tsx:63](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/Page.bl-edit.tsx#L63)
+[packages/gatsby-theme-bodiless/src/dist/Page.bl-edit.tsx:63](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/Page.bl-edit.tsx#L63)
 
 ___
 
@@ -89,9 +75,12 @@ ___
 
 • `Const` **asGatsbyImage**: `HOCWithMeta`<{}, {}, {}\>
 
+`asGatsbyImage` is a HOC that either replaces the component with GatsbyImg, if the data required
+for GatsbyImg is available, or it renders the input component, otherwise.
+
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx:240](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx#L240)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx:256](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx#L256)
 
 ___
 
@@ -99,9 +88,11 @@ ___
 
 • `Const` **asGatsbyLink**: `HOCWithMeta`<`unknown`, `object` & `DesignableProps`<`Components`\>, {}\>
 
+**`deprecated`**
+
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx:64](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx#L64)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx:67](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx#L67)
 
 ## Functions
 
@@ -127,7 +118,7 @@ ___
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx:73](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx#L73)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx:76](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyLink/asGatsbyLink.tsx#L76)
 
 ___
 
@@ -151,13 +142,15 @@ when node data is not empty in store, then it merges default content data with n
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/getImageContentFrom.ts:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/getImageContentFrom.ts#L28)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/getImageContentFrom.ts:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/getImageContentFrom.ts#L28)
 
 ___
 
 ### isGatsbyImage
 
 ▸ **isGatsbyImage**(`__namedParameters`): `boolean`
+
+`isGatsbyImage` determines if the image is utlizing gatsby images.
 
 #### Parameters
 
@@ -169,9 +162,11 @@ ___
 
 `boolean`
 
+Boolean
+
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx:253](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx#L253)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx:273](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx#L273)
 
 ___
 
@@ -215,13 +210,17 @@ ___
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageLibrary.ts:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageLibrary.ts#L22)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageLibrary.ts:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageLibrary.ts#L22)
 
 ___
 
 ### withGatsbyImageLogger
 
 ▸ **withGatsbyImageLogger**(`preset?`): `HOC`<{}, {}, {}\>
+
+`withGatsbyImageLogger` is a HOF that fails Gatsby build and logs errors when there
+is a mismatch between the image preset passed as an argument to the Gatsby Image node
+and the corresponding image preset stored in the image node JSON file.
 
 #### Parameters
 
@@ -235,13 +234,16 @@ ___
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageLogger.tsx:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageLogger.tsx#L25)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageLogger.tsx:30](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageLogger.tsx#L30)
 
 ___
 
 ### withGatsbyImageNode
 
 ▸ **withGatsbyImageNode**(`preset`): `HOC`<{}, {}, {}\>
+
+`withGatsbyImageNode` is a HOF that adds a Gatsby Image BodilessJS node,
+which enriches image node data with image preset provided as an input.
 
 #### Parameters
 
@@ -255,7 +257,7 @@ ___
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageNode.tsx:24](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageNode.tsx#L24)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageNode.tsx:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImageNode.tsx#L28)
 
 ___
 
@@ -287,7 +289,7 @@ ___
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImagePreset.ts:24](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImagePreset.ts#L24)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImagePreset.ts:24](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/withGatsbyImagePreset.ts#L24)
 
 ___
 
@@ -319,4 +321,4 @@ but Gatsby Image is not enabled for the image
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx:262](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx#L262)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx:282](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/asGatsbyImage.tsx#L282)

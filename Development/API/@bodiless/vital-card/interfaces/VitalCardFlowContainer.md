@@ -28,7 +28,7 @@ Defined by Fully clickable card with no visible CTA varied over
 
 #### Defined in
 
-[vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts:218](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts#L218)
+[vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts:217](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts#L217)
 
 ___
 
@@ -40,18 +40,19 @@ Composable token which adds all card variations.
 
 #### Shadowing:
 
-**`example`** Add a component
+**`example`** Add components via shadowing.
 ```js
-const WithCardVariations = asFluidToken({
+const WithCardVariations = asFluidToken(vitalCardFlowContainerBase, {
   Components: {
-    ...vitalCardFlowContainerBase.BasicVariations,
-    ...vitalCardFlowContainerBase.HeroVariations
+    ...vitalCardFlowContainerBase.ProductVariations,
+    ...myCustomVariations
   },
 });
+```
 
 #### Defined in
 
-[vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts:211](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts#L211)
+[vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts:210](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts#L210)
 
 ___
 
@@ -63,7 +64,7 @@ Composable token which adds category card - no variations.
 
 #### Defined in
 
-[vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts:229](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts#L229)
+[vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts:228](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts#L228)
 
 ___
 
@@ -78,7 +79,7 @@ Defined by HeroBase - horizontal only cards with visible CTA varied over
 
 #### Defined in
 
-[vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts:225](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts#L225)
+[vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts:224](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts#L224)
 
 ___
 
@@ -93,7 +94,7 @@ Defined by vertical only cards and with CTA varied over
 
 #### Defined in
 
-[vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts:240](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts#L240)
+[vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts:239](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts#L239)
 
 ___
 
@@ -105,4 +106,4 @@ Composable token which adds topic card variations.
 
 #### Defined in
 
-[vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts:233](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts#L233)
+[vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts:232](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/vital-card/src/components/FlowContainer/tokens/vitalCardFlowContainer.ts#L232)

@@ -30,20 +30,53 @@ be configured with additional Hero variants.
 
 The Vital Image Component provides a set of tokens to compose an Image Component:
 
-| Token                      | Description                                                  |
-| -------------------------- | ------------------------------------------------------------ |
-| `Base`                     | A token with GatsbyImage which creates the Vital base Image. |
-| `Plain`                    | A token which recomposes the base image as a Plain Image.    |
-| `Default`                  | A token which recomposes the base image as a BlurUp Image.   |
-| `WithEditorPlain`          | A token which applies a Plain image.                         |
-| `WithEditorBlurUp`         | A token which applies the BlurUp Effect.                     |
-| `WithEditorTraced`         | A token which applies the Traced Effect.                     |
-| `WithEditorNoEffect`       | A token which applies NoEffect.                              |
-| `EditableTraced`           | A token which recomposes the base image as a Traced Image.   |
-| `EditableNoEffect`         | A token which recomposes the base image as a NoEffect Image. |
-| `WithLandscapePlaceholder` | A token which applies a Landscape Placeholder.               |
-| `WithLink`                 | A token which wraps the image in a link.                     |
-| `WithFullWidthImage`       | A token which makes the image full-width.                    |
+?> **API Documentation:** Visit [Vital Image Token
+Collection](/Development/API/@bodiless/vital-image/interfaces/VitalImage).
+
+?> **Image Guidelines:** Visit [Image Guidelines](/Design/ImageGuidelines) for best practices on
+images.
+
+### Default: Gatsby Image Configuration
+
+Vital Design offers the `vitalImage.Default` as a [Gatsby
+Image](https://www.gatsbyjs.com/docs/how-to/images-and-media/using-gatsby-plugin-image
+':target=_blank') with the preset of fluid image, which offers images in WebP format to improve
+performance. With that being considered, the Site Builder can configure the compression and other
+options.
+
+Follow the instructions for [configuring the compression of the image
+processing](/Components/Image/ImageConfigurations#override-image-processing-arguments).
+
+For specific use cases, please refer to the [Image Configuration
+Guide](/Components/Image/ImageConfigurations).
+
+### Overriding Image Tokens
+
+#### Via Shadowing (*Preferred Method)
+
+Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
+
+File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-images/Image.ts`
+
+?> **API Documentation:** Visit the [Vital Image Token
+Collection](/Development/API/@bodiless/vital-image/interfaces/VitalImage) for examples of shadowing.
+
+### Overriding Image FlowContainer
+
+By default, the VitalDS offers the Default Image (Gatsby Image with WebP) in square and landscape
+variations to the Content Editor in the component picker. You can extend this by shadowing the
+[`vitalImageFlowContainer`
+collection](/Development/API/@bodiless/vital-image/interfaces/VitalImageFlowContainer).
+
+#### Via Shadowing (*Preferred Method)
+
+Define a Shadowing token collection as defined in [Shadowing Vital Tokens](../VitalElements/Shadow).
+
+File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-images/FlowContainer.ts`
+
+?> **API Documentation:** Visit the [Vital Image FlowContainer Token
+Collection](/Development/API/@bodiless/vital-image/interfaces/VitalImageFlowContainer#withimagevariations)
+for examples of shadowing, and extending the container to add Plain Square and Landscape image.
 
 ### Static Images
 
@@ -56,9 +89,10 @@ Image](/Design/GatsbyTheme#omit-gatsby-plugin-image-for-static-image) for detail
 
 ### Hero Image
 
-The `vitalImage` token collection includes a `Hero` token, which renders a full-width Bodiless Image
-with a BlurUp. Its functionality is essentially the same as combining the `Default` and
-`WithLandscapePlaceholder` tokens. Example usage:
+The `vitalImage` token collection includes a [`Hero`
+token](/Development/API/@bodiless/vital-image/interfaces/VitalImage#hero), which renders a
+full-width Bodiless Image with a BlurUp. Its functionality is essentially the same as combining the
+`Default` and `WithLandscapePlaceholder` tokens. Example usage:
 
 ```js
 import { vitalImage } from '@bodiless/vital-image';
@@ -73,7 +107,3 @@ const ExamplePage = () => (
   </ExampleWrapper>
 );
 ```
-
-### Usage
-
-_To be documented._

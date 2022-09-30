@@ -2,18 +2,6 @@
 
 # Enumeration: GatsbyImagePresets
 
-Copyright © 2020 Johnson & Johnson
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-http://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-
 ## Table of contents
 
 ### Enumeration members
@@ -38,9 +26,11 @@ limitations under the License.
 
 • **Fixed** = `"fixed"`
 
+Fixed-size image.
+
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:16](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L16)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:19](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L19)
 
 ___
 
@@ -48,9 +38,11 @@ ___
 
 • **FixedNoBase64** = `"fixed_noBase64"`
 
+Fixed-size image with disabled blur-up effect.
+
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:17](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L17)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L23)
 
 ___
 
@@ -58,9 +50,11 @@ ___
 
 • **FixedTracedSVG** = `"fixed_tracedSVG"`
 
+Fixed-size image with traced placeholder SVG.
+
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:18](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L18)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L27)
 
 ___
 
@@ -68,9 +62,11 @@ ___
 
 • **FixedWithWebp** = `"fixed_withWebp"`
 
+Fluid-size image with auto-generated WebP version.
+
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:19](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L19)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:31](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L31)
 
 ___
 
@@ -78,9 +74,11 @@ ___
 
 • **FixedWithWebpNoBase64** = `"fixed_withWebp_noBase64"`
 
+Fluid-size image with auto-generated WebP and disabled blur-up effect.
+
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:20](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L20)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:35](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L35)
 
 ___
 
@@ -88,9 +86,11 @@ ___
 
 • **FixedWithWebpTracedSVG** = `"fixed_withWebp_tracedSVG"`
 
+Fluid-size image with auto-generated WebP and traced placeholder SVG.
+
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:21](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L21)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:39](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L39)
 
 ___
 
@@ -98,9 +98,11 @@ ___
 
 • **Fluid** = `"fluid"`
 
+Fluid-size (stretched to match the container’s width and height) image.
+
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:22](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L22)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:43](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L43)
 
 ___
 
@@ -110,7 +112,7 @@ ___
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:28](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L28)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:64](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L64)
 
 ___
 
@@ -118,9 +120,11 @@ ___
 
 • **FluidNoBase64** = `"fluid_noBase64"`
 
+Fluid-size image with disabled blur-up effect.
+
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:23](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L23)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:47](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L47)
 
 ___
 
@@ -128,9 +132,11 @@ ___
 
 • **FluidTracedSVG** = `"fluid_tracedSVG"`
 
+Fixed-size image with traced placeholder SVG.
+
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:24](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L24)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:51](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L51)
 
 ___
 
@@ -138,9 +144,11 @@ ___
 
 • **FluidWithWebp** = `"fluid_withWebp"`
 
+Fixed-size image with auto-generated WebP version.
+
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:25](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L25)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:55](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L55)
 
 ___
 
@@ -148,9 +156,11 @@ ___
 
 • **FluidWithWebpNoBase64** = `"fluid_withWebp_noBase64"`
 
+Fixed-size image with auto-generated WebP and disabled blur-up effect.
+
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:26](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L26)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:59](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L59)
 
 ___
 
@@ -158,6 +168,8 @@ ___
 
 • **FluidWithWebpTracedSVG** = `"fluid_withWebp_tracedSVG"`
 
+Fixed-size image with auto-generated WebP and traced placeholder SVG.
+
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:27](https://github.com/johnsonandjohnson/Bodiless-JS/blob/92c3f556c/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L27)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts:63](https://github.com/johnsonandjohnson/Bodiless-JS/blob/f0502a333/packages/gatsby-theme-bodiless/src/dist/GatsbyImage/GatsbyImagePresets.ts#L63)
