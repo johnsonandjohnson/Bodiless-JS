@@ -5,10 +5,13 @@
   "version": "0.1.0",
   "author": "Heidi Vanyo <hvanyo@its.jnj.com>",
   "dependencies": {
+    "@bodiless/components": "^1.0.0-rc.16",
+    "@bodiless/core": "^1.0.0-rc.16",
     "@bodiless/fclasses": "^1.0.0-rc.16",
     "@bodiless/vital-buttons-core": "^1.0.0-rc.16",
     "@bodiless/vital-card-core": "^1.0.0-rc.16",
     "@bodiless/vital-link-core": "^1.0.0-rc.16",
+    "@bodiless/vital-navigation-core": "^1.0.0-rc.16",
     "@bodiless/vital-elements": "^1.0.0-rc.16",
     "autoprefixer": "^10.4.2",
     "esm": "^3.2.25", 

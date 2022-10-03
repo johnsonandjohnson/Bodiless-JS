@@ -13,6 +13,6 @@
  */
 
 export { asSubMenuToken, asSubMenuWrapperToken } from './SubMenuClean';
-export { default as vitalSubMenu } from './tokens';
+export { default as vitalSubMenuCore } from './tokens';
 export { default as vitalSubMenuBase } from './tokens/vitalSubMenu';
 export type { SubMenuComponents, SubMenuWrapperComponents } from './types';

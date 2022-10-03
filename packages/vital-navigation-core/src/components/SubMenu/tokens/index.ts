@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalSubMenu from './vitalSubMenu';
+import vitalSubMenuCore from './vitalSubMenu';
 
-export default vitalSubMenu;
+export default vitalSubMenuCore;

@@ -15,17 +15,18 @@
 import { withParent } from '@bodiless/core';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { Nav, Ul, flowHoc } from '@bodiless/fclasses';
-import { asBodilessMenu } from '@bodiless/navigation';
+import { asBodilessMenu } from './tokens/nonEditableList';
+// import { asStylableList, List } from '@bodiless/components';
 import type { MenuComponents } from './types';
 
 /**
  * A clean menu for use with all navigation elements.
  */
-const MenuClean = flowHoc(
+const MenuCleanNonEditable = flowHoc(
   asBodilessMenu(),
   withParent(Nav, 'Nav', 'Menu'),
 )(Ul);
 
 export const asMenuToken = asVitalTokenSpec<MenuComponents>();
 
-export default MenuClean;
+export default MenuCleanNonEditable;

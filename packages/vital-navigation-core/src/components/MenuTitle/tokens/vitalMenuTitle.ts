@@ -12,43 +12,21 @@
  * limitations under the License.
  */
 
-import { withNodeKey, withSidecarNodes } from '@bodiless/core';
 import {
   Div,
   as,
   replaceWith,
-  startWith,
 } from '@bodiless/fclasses';
-import { withBodilessLinkToggle, withPlaceholder } from '@bodiless/components';
-import { asBodilessLink } from '@bodiless/components-ui';
-import { vitalEditorPlain } from '@bodiless/vital-editors';
-import { vitalLink } from '@bodiless/vital-link';
+import { vitalLinkCore } from '@bodiless/vital-link-core';
 import { asMenuTitleToken } from '../MenuTitleClean';
 import { withMenuTitleNoLink } from '../../../util';
-
-/**
- * @private
- */
-const asMenuLink = (asEditableLink: typeof asBodilessLink) => withSidecarNodes(
-  asEditableLink('link', undefined, () => ({ groupLabel: 'Menu Link' })),
-);
 
 /**
  * Default MenuTitleToken that applies default Editors to the Menu Titles.
  */
 const Default = asMenuTitleToken({
   Theme: {
-    Link: as(vitalLink.WithDownloadStyles, vitalLink.WithExternalStyles),
-  },
-  Editors: {
-    Title: vitalEditorPlain.Default,
-  },
-  Schema: {
-    Link: asMenuLink(withBodilessLinkToggle(asBodilessLink, startWith(Div), true)),
-    Title: withNodeKey('text'),
-  },
-  Content: {
-    Title: withPlaceholder('Menu Item'),
+    Link: as(vitalLinkCore.WithDownloadStyles, vitalLinkCore.WithExternalStyles),
   },
 });
 
@@ -58,7 +36,6 @@ const Default = asMenuTitleToken({
 const WithLinkDisabled = asMenuTitleToken({
   ...Default,
   Schema: {
-    ...Default.Schema,
     Link: replaceWith(Div),
     // Needs to delete link from title to avoid
     // additional Overview link applied by withOverviewLink.

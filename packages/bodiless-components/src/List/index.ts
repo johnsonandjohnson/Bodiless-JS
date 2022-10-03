@@ -18,7 +18,7 @@ import asBodilessList, {
 
 import asChameleonSubList, { withSubLists, withSubListDesign } from './asChameleonSubList';
 
-import { asTestableList, useListContext } from './List';
+import List, { asTestableList, useListContext } from './List';
 
 export {
   asBodilessList,
@@ -31,6 +31,7 @@ export {
   asStylableList,
   asStylableSubList,
   useListContext,
+  List,
 };
 
 export type {

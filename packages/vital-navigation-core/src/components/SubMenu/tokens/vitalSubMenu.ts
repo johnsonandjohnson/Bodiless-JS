@@ -22,13 +22,13 @@ import {
   as,
   on,
   removeClasses,
-  removeClassesIf,
+  // removeClassesIf,
   replaceWith,
   withDesign,
 } from '@bodiless/fclasses';
-import { useIsSubmenuExpanded } from '@bodiless/navigation';
+// import { useIsSubmenuExpanded } from '@bodiless/navigation';
 import { withAnalyticsAttr } from '../../../util';
-import { vitalMenuTitle, MenuTitleClean } from '../../MenuTitle';
+import { vitalMenuTitleCore, MenuTitleClean } from '../../MenuTitle';
 import { asSubMenuToken } from '../SubMenuClean';
 
 const Base = asSubMenuToken({
@@ -40,7 +40,7 @@ const Base = asSubMenuToken({
     Title: withAnalyticsAttr,
   },
   Components: {
-    Title: on(MenuTitleClean)(vitalMenuTitle.Default),
+    Title: on(MenuTitleClean)(vitalMenuTitleCore.Default),
   },
 });
 
@@ -73,7 +73,7 @@ const TopNav = asSubMenuToken({
     Wrapper: as(
       'absolute w-auto min-w-max -left-10 -right-16 top-full hidden group-hover:flex flex-col',
       removeClasses('min-w-full'),
-      removeClassesIf(useIsSubmenuExpanded)('hidden'),
+      // removeClassesIf(useIsSubmenuExpanded)('hidden'),
     ),
     Title: 'flex',
   },

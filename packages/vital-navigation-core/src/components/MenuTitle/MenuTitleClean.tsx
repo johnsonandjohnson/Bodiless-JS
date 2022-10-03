@@ -12,16 +12,46 @@
  * limitations under the License.
  */
 
-import { EditorPlainClean } from '@bodiless/vital-editors';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import { LinkClean } from '@bodiless/vital-link';
-import { replaceable, replaceWith, withDesign } from '@bodiless/fclasses';
-import { MenuTitle } from '@bodiless/navigation';
-import type { MenuTitleComponents } from '@bodiless/navigation';
+import {
+  A, designable, DesignableComponentsProps, withDesign
+} from '@bodiless/fclasses';
+
+import React, { ComponentType, FC, Fragment } from 'react';
+// import type { MenuTitleComponents } from '@bodiless/navigation';
+
+export type MenuTitleComponents = {
+  Link: ComponentType<any>,
+  Title: ComponentType<any>,
+};
+
+type MenuTitleProps = DesignableComponentsProps<MenuTitleComponents>;
+
+const MenuTitleBase: FC<MenuTitleProps> = ({ components, ...rest }) => {
+  const { Link, Title } = components;
+  return (
+    <Link {...rest}>
+      <Title />
+    </Link>
+  );
+};
+
+const MenuTitleComponents: MenuTitleComponents = {
+  Link: A,
+  Title: Fragment,
+};
+
+/**
+ * Clean component that renders Menu Titles.
+ *
+ * @see MenuTitleComponents for a list of design components.
+ */
+export const MenuTitle = designable(MenuTitleComponents, 'MenuTitle')(MenuTitleBase);
 
 const MenuTitleClean = withDesign({
-  Link: replaceWith(LinkClean),
-  Title: replaceWith(replaceable(EditorPlainClean)),
+  // Hardcode for now, will replace...
+  // Link: addProps({children: '/link'}), // replaceWith(LinkClean),
+  // Title: addProps({children: 'menutitle'}), // replaceWith(replaceable(EditorPlainClean)),
 })(MenuTitle);
 
 export const asMenuTitleToken = asVitalTokenSpec<MenuTitleComponents>();

@@ -15,27 +15,29 @@
 import {
   addProps,
   as,
-  flowHoc,
+  // flowHoc,
   flowIf,
   on,
 } from '@bodiless/fclasses';
-import {
-  asBurgerMenu,
-  withMenuDesign,
-  withListSubMenu,
-  asTopNav,
-} from '@bodiless/navigation';
-import { withNodeKey } from '@bodiless/core';
+// import {
+//   asBurgerMenu,
+//   withMenuDesign,
+//   withListSubMenu,
+//   asTopNav,
+// } from '@bodiless/navigation';
 import { vitalColor, vitalFontSize, vitalTextDecoration } from '@bodiless/vital-elements';
+import { vitalSubMenuCore } from '../../SubMenu';
+import { withListSubMenu, withMenuDesign } from './nonEditableList';
+// import { withNodeKey } from '@bodiless/core';
 import {
-  useHasSubMenu,
+  // useHasSubMenu,
   useIsFirstMenuItem,
   withExpandedAttr,
   withMenuTitleAnalytics,
 } from '../../../util';
 import { asMenuToken } from '../MenuClean';
-import { vitalMenuTitle, MenuTitleClean } from '../../MenuTitle';
-import { vitalSubMenu } from '../../SubMenu';
+import { vitalMenuTitleCore, MenuTitleClean } from '../../MenuTitle';
+// import { vitalSubMenu } from '../../SubMenu';
 import { vitalSeparator } from '../../Separator';
 
 /**
@@ -55,7 +57,7 @@ const Base = asMenuToken({
     Title: addProps({ role: 'menuitem' }),
   },
   Components: {
-    Title: on(MenuTitleClean)(vitalMenuTitle.Default),
+    Title: on(MenuTitleClean)(vitalMenuTitleCore.Default),
   },
 });
 
@@ -91,7 +93,7 @@ const Utility = asMenuToken({
     ),
   },
   Schema: {
-    _: withNodeKey({ nodeKey: 'utility-menu', nodeCollection: 'site' }),
+    // _: withNodeKey({ nodeKey: 'utility-menu', nodeCollection: 'site' }),
   },
 });
 
@@ -106,7 +108,7 @@ const Footer = asMenuToken({
   },
   Components: {
     ...Default.Components,
-    _: withMenuDesign('List')(as(vitalSubMenu.Footer)),
+    // _: withMenuDesign('List')(as(vitalSubMenu.Footer)),
   },
   Layout: {
     Nav: 'w-full lg:h-full',
@@ -135,11 +137,12 @@ const Footer = asMenuToken({
 const TopNav = asMenuToken({
   ...Default,
   Core: {
-    _: flowHoc(withListSubMenu(), asTopNav('List')),
+    _: withListSubMenu(), // flowHoc(withListSubMenu(), asTopNav('List')),
   },
   Components: {
     ...Default.Components,
-    _: withMenuDesign('List')(as(vitalSubMenu.TopNav)),
+    // _: withMenuDesign('List')(as(vitalSubMenu.TopNav)),
+    _: withMenuDesign('List')(as(vitalSubMenuCore.TopNav)),
   },
   Layout: {
     Wrapper: 'flex',
@@ -164,10 +167,10 @@ const TopNav = asMenuToken({
     ),
   },
   Behavior: {
-    Title: flowIf(useHasSubMenu)(as(vitalMenuTitle.WithLinkDisabled)),
+    //  Title: flowIf(useHasSubMenu)(as(vitalMenuTitle.WithLinkDisabled)),
   },
   Schema: {
-    _: withNodeKey({ nodeKey: 'main-menu', nodeCollection: 'site' }),
+    // _: withNodeKey({ nodeKey: 'main-menu', nodeCollection: 'site' }),
   },
 });
 
@@ -180,11 +183,11 @@ const Burger = asMenuToken({
   ...Default,
   // Turns burger menus into accordions.
   Core: {
-    _: flowHoc(withListSubMenu(), asBurgerMenu('List')),
+    // _: flowHoc(withListSubMenu(), asBurgerMenu('List')),
   },
   Components: {
     ...Default.Components,
-    _: withMenuDesign('List')(as(vitalSubMenu.Burger)),
+    // _: withMenuDesign('List')(as(vitalSubMenu.Burger)),
   },
   Layout: {
     Wrapper: 'flex flex-col',
@@ -202,7 +205,7 @@ const Burger = asMenuToken({
   },
   Behavior: {
     Item: flowIf(useIsFirstMenuItem)(withExpandedAttr),
-    Title: flowIf(useHasSubMenu)(as(vitalMenuTitle.WithLinkDisabled)),
+    // Title: flowIf(useHasSubMenu)(as(vitalMenuTitle.WithLinkDisabled)),
   },
   Schema: {
     ...TopNav.Schema,

@@ -12,9 +12,10 @@
  * limitations under the License.
  */
 
-export { default as vitalMenuTitle } from './tokens';
+export { default as vitalMenuTitleCore } from './tokens';
 export { default as vitalMenuTitleBase } from './tokens/vitalMenuTitle';
 export {
   default as MenuTitleClean,
+  MenuTitle,
   asMenuTitleToken
 } from './MenuTitleClean';

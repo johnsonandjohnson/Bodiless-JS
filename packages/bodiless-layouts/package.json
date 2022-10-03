@@ -42,6 +42,7 @@
     "@bodiless/core": "^1.0.0-rc.16",
     "@bodiless/fclasses": "^1.0.0-rc.16",
     "axios": "^0.21.0",
+    "crypto-browserify": "^3.12.0",
     "html2canvas": "^1.0.0-rc.3",
     "informed": "^3.34.0",
     "lodash": "^4.17.19",
@@ -51,6 +52,9 @@
     "re-resizable": "^4.11.0",
     "react-sortable-hoc": "^2.0.0",
     "uuid": "^3.3.2"
+  },
+  "browser": {
+    "crypto": false
   },
   "devDependencies": {
     "@types/rc-tooltip": "^3.7.1",
