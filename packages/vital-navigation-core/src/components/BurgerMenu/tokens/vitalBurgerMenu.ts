@@ -12,15 +12,17 @@
  * limitations under the License.
  */
 
-import { asStatic, withChild } from '@bodiless/core';
+import { withChild, asStatic } from '@bodiless/core';
 import { vitalColor } from '@bodiless/vital-elements';
-import { vitalButtons } from '@bodiless/vital-buttons';
+import { vitalButtonsCore } from '@bodiless/vital-buttons-core';
 import {
   addClassesIf,
   as,
 } from '@bodiless/fclasses';
-import { useIsBurgerMenuHidden, asBurgerMenuToggler } from '@bodiless/navigation';
-import { vitalMenu } from '../../Menu';
+// import { useIsBurgerMenuHidden, asBurgerMenuToggler } from '@bodiless/navigation';
+import { asBurgerMenuToggler } from './BurgerToggler';
+import { useIsBurgerMenuHidden } from './BurgerMenuContext';
+import { vitalMenuCore } from '../../Menu';
 import CloseIcon from '../assets/CloseIcon';
 import { asBurgerMenuToken } from '../BurgerMenuClean';
 
@@ -33,9 +35,9 @@ const Base = asBurgerMenuToken({
     MenuToggler: asBurgerMenuToggler,
   },
   Components: {
-    Menu: vitalMenu.Burger,
-    UtilityMenu: vitalMenu.Utility,
-    WhereToBuy: vitalButtons.WhereToBuyWithoutIcon,
+    Menu: vitalMenuCore.Burger,
+    UtilityMenu: vitalMenuCore.Utility,
+    WhereToBuy: vitalButtonsCore.WhereToBuyWithoutIcon,
   },
   Layout: {
     Wrapper: 'w-full h-full fixed left-0 top-0 bottom-0 md:w-7/12 xl:hidden',

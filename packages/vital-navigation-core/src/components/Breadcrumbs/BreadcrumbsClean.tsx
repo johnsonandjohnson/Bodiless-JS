@@ -12,10 +12,24 @@
  * limitations under the License.
  */
 
-import { BreadcrumbsClean } from '@bodiless/navigation';
-import type { BreadcrumbsComponents } from '@bodiless/navigation';
+// import { BreadcrumbsClean } from '@bodiless/navigation';
+import type { ComponentOrTag } from '@bodiless/fclasses';
+// import type { BreadcrumbsComponents } from '@bodiless/navigation';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
+
+type BreadcrumbsComponents = {
+  StartingTrail: ComponentOrTag<any>,
+  Separator: ComponentOrTag<any>,
+  NavWrapper: ComponentOrTag<any>,
+  Wrapper: ComponentOrTag<any>,
+  Item: ComponentOrTag<{
+    position: number;
+    isCurrentPage: boolean;
+  }>,
+  Title: ComponentOrTag<any>,
+  FinalTrail: ComponentOrTag<any>,
+};
 
 export const asBreadcrumbsToken = asVitalTokenSpec<BreadcrumbsComponents>();
 
-export default BreadcrumbsClean;
+// export default BreadcrumbsClean;

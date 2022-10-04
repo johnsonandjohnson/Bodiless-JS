@@ -15,8 +15,6 @@
 import {
   addProps,
   as,
-  // flowHoc,
-  flowIf,
   on,
 } from '@bodiless/fclasses';
 // import {
@@ -31,8 +29,8 @@ import { withListSubMenu, withMenuDesign } from './nonEditableList';
 // import { withNodeKey } from '@bodiless/core';
 import {
   // useHasSubMenu,
-  useIsFirstMenuItem,
-  withExpandedAttr,
+  // useIsFirstMenuItem,
+  // withExpandedAttr,
   withMenuTitleAnalytics,
 } from '../../../util';
 import { asMenuToken } from '../MenuClean';
@@ -183,11 +181,11 @@ const Burger = asMenuToken({
   ...Default,
   // Turns burger menus into accordions.
   Core: {
-    // _: flowHoc(withListSubMenu(), asBurgerMenu('List')),
+    // _: withListSubMenu(), // flowHoc(withListSubMenu(), asBurgerMenu('List')),
   },
   Components: {
     ...Default.Components,
-    // _: withMenuDesign('List')(as(vitalSubMenu.Burger)),
+    // _: withMenuDesign('List')(as(vitalSubMenuCore.Burger)),
   },
   Layout: {
     Wrapper: 'flex flex-col',
@@ -204,12 +202,12 @@ const Burger = asMenuToken({
     ),
   },
   Behavior: {
-    Item: flowIf(useIsFirstMenuItem)(withExpandedAttr),
+    // Item: flowIf(useIsFirstMenuItem)(withExpandedAttr),
     // Title: flowIf(useHasSubMenu)(as(vitalMenuTitle.WithLinkDisabled)),
   },
-  Schema: {
-    ...TopNav.Schema,
-  },
+  // Schema: {
+  //   ...TopNav.Schema,
+  // },
 });
 
 export default {

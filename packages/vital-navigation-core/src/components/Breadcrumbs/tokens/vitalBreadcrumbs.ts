@@ -12,21 +12,16 @@
  * limitations under the License.
  */
 
-import { asReadOnly, withNodeKey } from '@bodiless/core';
 import { withoutLinkWhenLinkDataEmpty } from '@bodiless/components';
 import {
   withDesign,
   addProps,
   stylable,
-  flowHoc,
   as,
 } from '@bodiless/fclasses';
-import {
-  asBreadcrumbs,
-  withEditableStartingTrail,
-  withEditableFinalTrail,
-  withMenuTitleEditors,
-} from '@bodiless/navigation';
+// import {
+//   asBreadcrumbs,
+// } from '@bodiless/navigation';
 import { vitalColor, vitalTextDecoration, vitalTypography } from '@bodiless/vital-elements';
 import { asBreadcrumbsToken } from '../BreadcrumbsClean';
 
@@ -35,20 +30,12 @@ import { asBreadcrumbsToken } from '../BreadcrumbsClean';
   */
 const Base = asBreadcrumbsToken({
   Core: {
-    _: asBreadcrumbs,
+    // _: asBreadcrumbs,
     NavWrapper: stylable,
     Separator: addProps({ children: '·' }),
     FinalTrail: withDesign({
       Link: withoutLinkWhenLinkDataEmpty,
     }),
-  },
-  Schema: {
-    _: flowHoc(
-      withNodeKey({ nodeCollection: 'site' }),
-      withMenuTitleEditors(undefined, asReadOnly),
-      withEditableStartingTrail(undefined, { nodeCollection: 'site' }),
-      withEditableFinalTrail(),
-    ),
   },
   Layout: {
     Wrapper: 'inline-flex',

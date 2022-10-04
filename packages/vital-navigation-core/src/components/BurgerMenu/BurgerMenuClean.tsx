@@ -17,8 +17,8 @@ import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import {
   Div, Fragment, A, designable,
 } from '@bodiless/fclasses';
-import { ButtonClean } from '@bodiless/vital-buttons';
-import { MenuClean } from '../Menu';
+import { ButtonClean } from '@bodiless/vital-buttons-core';
+import { MenuCleanNonEditable } from '../Menu';
 import type { BurgerMenuComponents, BurgerMenuProps } from './types';
 
 const burgerMenuComponents: BurgerMenuComponents = {
@@ -27,13 +27,13 @@ const burgerMenuComponents: BurgerMenuComponents = {
   MenuTogglerWrapper: Div,
   MenuToggler: A,
   MenuWrapper: Div,
-  Menu: MenuClean,
+  Menu: MenuCleanNonEditable,
   FooterWrapper: Div,
   WhereToBuyWrapper: Fragment,
   WhereToBuy: ButtonClean,
   ActionFooterContainer: Div,
   UtilityMenuWrapper: Fragment,
-  UtilityMenu: MenuClean,
+  UtilityMenu: MenuCleanNonEditable,
   LanguageSelector: Fragment,
   Overlay: Div,
 };
