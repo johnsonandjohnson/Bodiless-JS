@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
 import { withAppendChild, withChild } from '@bodiless/core';
 import {
-  as, withDesign, addProps, startWith, A, Div, replaceWith
+  as, withDesign, addProps, startWith, A, Fragment, replaceWith
 } from '@bodiless/fclasses';
 import {
   MenuCleanNonEditable, vitalMenuCore, MenuTitleClean, vitalMenuTitleCore,
@@ -66,10 +66,7 @@ const MenuToggler = as(
   withChild(BurgerIcon),
 )(A);
 
-const BurgerMenuProvider = as(
-  withBurgerMenuProvider,
-  addProps({ debug: 'BurgerMenuProvider'})
-)(Div);
+const BurgerMenuProvider = withBurgerMenuProvider(Fragment);
 
 const Header = ({ siteTitle }) => (
   <header

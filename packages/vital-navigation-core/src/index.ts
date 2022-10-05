@@ -13,12 +13,12 @@
  */
 
 // Re-export navigation necessary modules to make burger menu work.
-// export {
-//   asBurgerMenuToggler,
-//   useIsBurgerMenuHidden,
-//   withBurgerMenuProvider,
-//   withBreadcrumbStore,
-// } from '@bodiless/navigation';
+export {
+  asBurgerMenuToggler,
+  // useIsBurgerMenuHidden,
+  withBurgerMenuProvider,
+  // withBreadcrumbStore,
+} from '@bodiless/navigation';
 
 // VitalNavigation components and tokens.
 export * from './components/Breadcrumbs';
