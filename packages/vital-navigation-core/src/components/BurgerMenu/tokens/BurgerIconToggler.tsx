@@ -17,7 +17,7 @@
 import React, { FC, KeyboardEvent } from 'react';
 import { HOC } from '@bodiless/fclasses';
 
-import { useBurgerMenuContext } from './BurgerMenuContext';
+import { useBurgerMenuContext } from '@bodiless/navigation';
 
 const BurgerMenuKeyPressHandler = (event: KeyboardEvent, isVisible: boolean, toggle: Function) => {
   switch (event.key) {

@@ -16,7 +16,6 @@ export { default as BurgerMenuClean, asBurgerMenuToken } from './BurgerMenuClean
 export { default as vitalBurgerMenu } from './tokens';
 export { default as vitalBurgerMenuBase } from './tokens/vitalBurgerMenu';
 export type { BurgerMenuComponents, BurgerMenuProps } from './types';
-export * from './tokens/BurgerMenuToggler'; // Used on icon to open menu
-export * from './tokens/BurgerMenuContext';
+export * from './tokens/BurgerIconToggler'; // Used on icon to open menu
 
 export { default as BurgerIcon } from './assets/BurgerIcon';

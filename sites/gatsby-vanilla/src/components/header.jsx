@@ -62,7 +62,7 @@ const BurgerMenu = as(
 )(BurgerMenuClean);
 
 const MenuToggler = as(
-  asBurgerIconToggler,
+  asBurgerMenuToggler,
   withChild(BurgerIcon),
 )(A);
 

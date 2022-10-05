@@ -33,6 +33,7 @@
     "@bodiless/components": "^1.0.0-rc.17",
     "@bodiless/core": "^1.0.0-rc.17",
     "@bodiless/fclasses": "^1.0.0-rc.17",
+    "@bodiless/navigation": "^1.0.0-rc.17",
     "@bodiless/vital-buttons-core": "^1.0.0-rc.17",
     "@bodiless/vital-elements": "^1.0.0-rc.17",
     "@bodiless/vital-link-core": "^1.0.0-rc.17",

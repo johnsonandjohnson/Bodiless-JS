@@ -13,9 +13,7 @@
  */
 
 export {
-  Product,
   ProductClean,
-  asEditableProduct,
 } from './components/Products';
 
 export { default as Embed } from './components/Embed';

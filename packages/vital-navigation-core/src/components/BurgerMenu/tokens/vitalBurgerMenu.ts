@@ -19,9 +19,7 @@ import {
   addClassesIf,
   as,
 } from '@bodiless/fclasses';
-// import { useIsBurgerMenuHidden, asBurgerMenuToggler } from '@bodiless/navigation';
-import { asBurgerMenuToggler } from './BurgerToggler';
-import { useIsBurgerMenuHidden } from './BurgerMenuContext';
+import { useIsBurgerMenuHidden, asBurgerMenuToggler } from '@bodiless/navigation';
 import { vitalMenuCore } from '../../Menu';
 import CloseIcon from '../assets/CloseIcon';
 import { asBurgerMenuToken } from '../BurgerMenuClean';

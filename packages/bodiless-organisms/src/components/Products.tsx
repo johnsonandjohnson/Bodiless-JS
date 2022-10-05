@@ -16,7 +16,6 @@
 import React, { FC, ComponentType } from 'react';
 import flow from 'lodash/flow';
 import {
-  withDesign,
   designable,
   DesignableComponentsProps,
   Div,
@@ -25,13 +24,7 @@ import {
   H2,
   StylableProps,
 } from '@bodiless/fclasses';
-import {
-  asBodilessLink,
-  asEditable,
-} from '@bodiless/components';
-import { asBodilessImage } from '@bodiless/components-ui';
 import { withNode } from '@bodiless/core';
-import { BVInlineRatings } from '@bodiless/bv';
 
 export type ProductComponents = {
   Wrapper: ComponentType<StylableProps>,
@@ -99,21 +92,22 @@ const ProductClean = flow(
   withNode,
 )(ProductBase);
 
-const asEditableProduct = withDesign<ProductComponents>({
-  Image: asBodilessImage('image'),
-  ImageLink: asBodilessLink('cta'),
-  TitleLink: asBodilessLink('cta'),
-  Title: asEditable('title', 'Product Title Text'),
-  BvReviewLink: asBodilessLink('cta'),
-  BvReview: () => BVInlineRatings,
-  Body: asEditable('body', 'Product Body Text'),
-});
+// Deprecated and not used
+// const asEditableProduct = withDesign<ProductComponents>({
+//   Image: asBodilessImage('image'),
+//   ImageLink: asBodilessLink('cta'),
+//   TitleLink: asBodilessLink('cta'),
+//   Title: asEditable('title', 'Product Title Text'),
+//   BvReviewLink: asBodilessLink('cta'),
+//   BvReview: () => BVInlineRatings,
+//   Body: asEditable('body', 'Product Body Text'),
+// });
 
-const Product = asEditableProduct(ProductClean);
+// const Product = asEditableProduct(ProductClean);
 
-export default Product;
+// export default Product;
 export {
-  Product,
+  // Product,
   ProductClean,
-  asEditableProduct,
+  // asEditableProduct,
 };

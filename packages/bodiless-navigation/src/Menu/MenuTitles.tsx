@@ -16,8 +16,9 @@ import React, { ComponentType, FC } from 'react';
 import {
   withSidecarNodes, withNode, withNodeKey,
 } from '@bodiless/core';
-import { asEditable, withBodilessLinkToggle } from '@bodiless/components';
-import { asBodilessLink } from '@bodiless/components-ui';
+import { asEditable, withBodilessLinkToggle, asBodilessLink } from '@bodiless/components';
+// This is going to potentially break downloadable links if you only use bodiless/navigation pkg.
+// import { asBodilessLink } from '@bodiless/components-ui';
 import { CardClean } from '@bodiless/card';
 import {
   A, HOC, flowHoc, Fragment, designable, HOCDef,

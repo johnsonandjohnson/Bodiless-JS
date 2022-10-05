@@ -15,7 +15,7 @@
 import { withParent } from '@bodiless/core';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { Nav, Ul, flowHoc } from '@bodiless/fclasses';
-import { asBodilessMenu } from './tokens/nonEditableList';
+import { asBodilessMenu } from '@bodiless/navigation';
 // import { asStylableList, List } from '@bodiless/components';
 import type { MenuComponents } from './types';
 

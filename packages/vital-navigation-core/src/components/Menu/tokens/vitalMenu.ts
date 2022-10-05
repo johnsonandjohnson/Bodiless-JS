@@ -17,15 +17,14 @@ import {
   as,
   on,
 } from '@bodiless/fclasses';
-// import {
+import {
 //   asBurgerMenu,
-//   withMenuDesign,
-//   withListSubMenu,
+  withMenuDesign,
+  withListSubMenu,
 //   asTopNav,
-// } from '@bodiless/navigation';
+} from '@bodiless/navigation';
 import { vitalColor, vitalFontSize, vitalTextDecoration } from '@bodiless/vital-elements';
 import { vitalSubMenuCore } from '../../SubMenu';
-import { withListSubMenu, withMenuDesign } from './nonEditableList';
 // import { withNodeKey } from '@bodiless/core';
 import {
   // useHasSubMenu,
