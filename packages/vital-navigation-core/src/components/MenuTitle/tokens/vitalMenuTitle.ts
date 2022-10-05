@@ -19,7 +19,7 @@ import {
 } from '@bodiless/fclasses';
 import { vitalLinkCore } from '@bodiless/vital-link-core';
 import { asMenuTitleToken } from '../MenuTitleClean';
-import { withMenuTitleNoLink } from '../../../util';
+// import { withMenuTitleNoLink } from '../../../util';
 
 /**
  * Default MenuTitleToken that applies default Editors to the Menu Titles.
@@ -39,7 +39,7 @@ const WithLinkDisabled = asMenuTitleToken({
     Link: replaceWith(Div),
     // Needs to delete link from title to avoid
     // additional Overview link applied by withOverviewLink.
-    Title: withMenuTitleNoLink,
+    // Title: withMenuTitleNoLink,
   },
 });
 

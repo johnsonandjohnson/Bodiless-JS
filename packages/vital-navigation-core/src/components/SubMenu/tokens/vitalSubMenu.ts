@@ -27,7 +27,7 @@ import {
   withDesign,
 } from '@bodiless/fclasses';
 // import { useIsSubmenuExpanded } from '@bodiless/navigation';
-import { withAnalyticsAttr } from '../../../util';
+// import { withAnalyticsAttr } from '../../../util';
 import { vitalMenuTitleCore, MenuTitleClean } from '../../MenuTitle';
 import { asSubMenuToken } from '../SubMenuClean';
 
@@ -37,7 +37,7 @@ const Base = asSubMenuToken({
     Item: addProps({ role: 'menuitem' }),
   },
   Analytics: {
-    Title: withAnalyticsAttr,
+    // Title: withAnalyticsAttr,
   },
   Components: {
     Title: on(MenuTitleClean)(vitalMenuTitleCore.Default),

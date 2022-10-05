@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { withChild, asStatic } from '@bodiless/core';
+import { withChild } from '@bodiless/core';
 import { vitalColor } from '@bodiless/vital-elements';
 import { vitalButtonsCore } from '@bodiless/vital-buttons-core';
 import {
@@ -29,7 +29,7 @@ import { asBurgerMenuToken } from '../BurgerMenuClean';
  */
 const Base = asBurgerMenuToken({
   Core: {
-    _: asStatic,
+    // _: asStatic,
     MenuToggler: asBurgerMenuToggler,
   },
   Components: {

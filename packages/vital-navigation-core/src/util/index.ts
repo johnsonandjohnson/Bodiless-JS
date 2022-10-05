@@ -12,18 +12,19 @@
  * limitations under the License.
  */
 
-import useHasSubMenu from './useHasSubMenu';
-import useIsFirstMenuItem from './useIsFirstMenuItem';
-import withMenuTitleAnalytics, { withAnalyticsAttr } from './withMenuAnalytics';
+// import useHasSubMenu from './useHasSubMenu';
+// import useIsFirstMenuItem from './useIsFirstMenuItem';
+// import withMenuTitleAnalytics, { withAnalyticsAttr } from './withMenuAnalytics';
+import withMenuTitleAnalytics from './withMenuAnalytics';
 import withMenuItemExpanded, { withExpandedAttr } from './withMenuExpanded';
-import withMenuTitleNoLink from './withMenuTitleNoLink';
+// import withMenuTitleNoLink from './withMenuTitleNoLink';
 
 export {
-  useHasSubMenu,
-  useIsFirstMenuItem,
+  // useHasSubMenu,
+  // useIsFirstMenuItem,
   withMenuTitleAnalytics,
-  withAnalyticsAttr,
+  // withAnalyticsAttr,
   withMenuItemExpanded,
   withExpandedAttr,
-  withMenuTitleNoLink,
+  // withMenuTitleNoLink,
 };
