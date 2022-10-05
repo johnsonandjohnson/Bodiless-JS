@@ -43,7 +43,7 @@ colors).
 ### **Resources**
 
 - [Typography Overview](./Typography/Typography)
-- [Best Practices for Using Tailwind with Bodiless](./Typography/TailwindGuide)
+- [Best Practices for Using Tailwind with Bodiless](./TailwindGuide)
 - [Best Practices Using Custom Fonts](./Typography/Fonts)
 
 <!-- tabs:end -->

@@ -21,6 +21,10 @@ import {
 import { HOC } from '@bodiless/fclasses';
 import GatsbyImagePresets from './GatsbyImagePresets';
 
+/**
+ * `withGatsbyImageNode` is a HOF that adds a Gatsby Image BodilessJS node,
+ * which enriches image node data with image preset provided as an input.
+ */
 const withGatsbyImageNode = (
   preset: GatsbyImagePresets,
 ): HOC => Component => {

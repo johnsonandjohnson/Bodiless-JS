@@ -20,8 +20,6 @@ const WithCardVariations = as(
   vitalCardFlowContainerBase.WithHeroVariations,
 );
 
-// const WithCardVariations = vitalCardFlowContainerBase.WithCardVariations;
-
 export default {
   ...vitalCardFlowContainerBase,
   WithCardVariations,

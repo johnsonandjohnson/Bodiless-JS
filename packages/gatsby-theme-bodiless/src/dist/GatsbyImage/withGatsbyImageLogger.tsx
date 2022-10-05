@@ -22,6 +22,11 @@ type Props = {
   preset: GatsbyImagePresets
 };
 
+/**
+ * `withGatsbyImageLogger` is a HOF that fails Gatsby build and logs errors when there
+ * is a mismatch between the image preset passed as an argument to the Gatsby Image node
+ * and the corresponding image preset stored in the image node JSON file.
+ */
 const withGatsbyImageLogger = (preset?: GatsbyImagePresets): HOC => Component => {
   const WithGatsbyImageLogger: FC<any> = props => {
     const { node } = useNode<any>();

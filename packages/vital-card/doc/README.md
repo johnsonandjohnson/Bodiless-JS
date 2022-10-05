@@ -136,6 +136,9 @@ configured with additional Hero variants.
 
 ## Site Builder Details
 
+?> **API Documentation:** Visit [Vital Card Token
+Collection](/Development/API/@bodiless/vital-card/interfaces/VitalCard).
+
 ```js
 import { as } from '@bodiless/fclasses'
 import { asCardToken, CardClean, vitalCard } from '@bodiless/vital-card';
@@ -211,3 +214,6 @@ For example, to create a vertical Card variation you could _extend_ or _override
 Define a Shadowing token collection as defined in [Shadow](../VitalElements/Shadow).
 
 File to shadow: `packages/{my-package}/src/shadow/@bodiless/vital-card/Card.ts`
+
+?> **API Documentation:** Visit the [Vital Card Token
+Collection](/Development/API/@bodiless/vital-card/interfaces/VitalCard) for examples of shadowing.

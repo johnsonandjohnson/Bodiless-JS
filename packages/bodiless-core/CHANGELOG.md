@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.17](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.16...v1.0.0-rc.17) (2022-09-30)
+
+**Note:** Version bump only for package @bodiless/core
+
+
+
+
+
 # [1.0.0-rc.16](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.15...v1.0.0-rc.16) (2022-09-22)
 
 **Note:** Version bump only for package @bodiless/core

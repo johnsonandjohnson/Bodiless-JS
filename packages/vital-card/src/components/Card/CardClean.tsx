@@ -25,21 +25,21 @@ import type { CardProps, CardToken } from '@bodiless/vital-card-core';
 import { withoutHydration } from '@bodiless/hydration';
 
 /**
- * This is the base component for cards.
- *
- * @category Component
- *
- * @example
- * **Create a default card:**
- * ```
- * const DefaultCard = on(CardClean)(vitalCardStatic.Default)
- * ```
- * @example
- * **Create a custom card using a token defined in your package**
- * ```
- * const CustomCard = on(CardClean)(myBrandCard.Custom)
- * ```
- */
+  * This is the base component for cards.
+  *
+  * @category Component
+  *
+  * @example
+  * **Create a default card:**
+  * ```
+  * const DefaultCard = on(CardClean)(vitalCardStatic.Default)
+  * ```
+  * @example
+  * **Create a custom card using a token defined in your package**
+  * ```
+  * const CustomCard = on(CardClean)(myBrandCard.Custom)
+  * ```
+  */
 const CardClean = as(
   designable(cardComponentStart, 'Card'),
   withNode,
@@ -48,10 +48,10 @@ const CardClean = as(
 const CardDescriptionPreview = () => <span className="bl-text-gray-800">Description</span>;
 
 /**
- * Use this version of the card when all components are static.
- *
- * @category Component
- */
+  * Use this version of the card when all components are static.
+  *
+  * @category Component
+  */
 const CardStatic: ComponentType<CardProps> = withoutHydration()(CardClean);
 
 export default CardClean;
