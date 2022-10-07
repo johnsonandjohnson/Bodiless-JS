@@ -1,0 +1,56 @@
+{
+  "name": "@bodiless/vital-layout-core",
+  "version": "1.0.0-rc.17",
+  "description": "Layout components for the bodiless vital design system",
+  "author": "Chris Odem <coden@its.jnj.com>",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "sideEffects": false,
+  "typings": "lib/index.d.ts",
+  "files": [
+    "/lib",
+    "tailwind.config.js",
+    "/bodiless.docs.json",
+    "/getDocs.js",
+    "/doc"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "run-s build:lib copy build:api-doc",
+    "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api src",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
+    "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
+  },
+  "dependencies": {
+    "@bodiless/cli": "^1.0.0-rc.17",
+    "@bodiless/fclasses": "^1.0.0-rc.17",
+    "@bodiless/vital-buttons-core": "^1.0.0-rc.17",
+    "@bodiless/vital-elements": "^1.0.0-rc.17",
+    "@bodiless/vital-link-core": "^1.0.0-rc.17",
+    "@bodiless/vital-navigation-core": "^1.0.0-rc.17",
+    "lodash": "^4.17.19",
+    "mobx": "^6.0.0",
+    "mobx-react": "^7.2.1",
+    "react-contenteditable": "^3.2.6",
+    "react-dropzone": "^10.1.5",
+    "react-id-generator": "^3.0.1",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/uuid": "^3.4.4"
+  },
+  "peerDependencies": {
+    "@types/react-helmet": "^6.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-helmet": "^6.1.0"
+  }
+}

@@ -8,6 +8,7 @@
     "@bodiless/fclasses": "^1.0.0-rc.17",
     "@bodiless/vital-buttons-core": "^1.0.0-rc.17",
     "@bodiless/vital-card-core": "^1.0.0-rc.17",
+    "@bodiless/vital-layout-core": "^1.0.0-rc.17",
     "@bodiless/vital-link-core": "^1.0.0-rc.17",
     "@bodiless/vital-navigation-core": "^1.0.0-rc.17",
     "@bodiless/vital-elements": "^1.0.0-rc.17",

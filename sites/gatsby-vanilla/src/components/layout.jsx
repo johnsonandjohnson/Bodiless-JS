@@ -8,9 +8,23 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { useStaticQuery, graphql } from 'gatsby';
-
+import { as, startWith } from '@bodiless/fclasses';
+import {
+  LayoutClean, vitalLayout, asLayoutToken, vitalFooter
+} from '@bodiless/vital-layout-core';
 import Header from './header';
 import './layout.css';
+
+const VanillaLayout = asLayoutToken(vitalLayout.Base, {
+  Components: {
+    Header: startWith(Header),
+    Footer: vitalFooter.Default,
+  },
+});
+
+const VitalLayout = as(
+  VanillaLayout,
+)(LayoutClean);
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -24,37 +38,10 @@ const Layout = ({ children }) => {
   `);
 
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata?.title || 'Title'} />
-      <div
-        style={{
-          margin: '0 auto',
-          maxWidth: 'var(--size-content)',
-          padding: 'var(--size-gutter)',
-        }}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: 'var(--space-5)',
-            fontSize: 'var(--font-sm)',
-          }}
-        >
-          ©
-          {' '}
-          {new Date().getFullYear()}
-          {' '}
-          &middot; Built with
-          {' '}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
-      </div>
-    </>
+    <VitalLayout>
+      <main>{children}</main>
+    </VitalLayout>
   );
-};
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default Layout;

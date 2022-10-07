@@ -12,18 +12,17 @@
  * limitations under the License.
  */
 
-// Re-export navigation necessary modules to make burger menu work.
-export {
-  asBurgerMenuToggler,
-  useIsBurgerMenuHidden,
-  withBurgerMenuProvider,
-  withBreadcrumbStore,
-} from '@bodiless/navigation';
+import vitalHeaderBaseOrig, { VitalHeader } from './tokens/vitalHeader';
 
-// VitalNavigation components and tokens.
-export * from './components/Breadcrumbs';
-export * from './components/BurgerMenu';
-export * from './components/Menu';
-export * from './components/MenuTitle';
-export * from './components/SubMenu';
-export * from './components/Separator';
+/**
+ * Use this version of the vital helmet tokens when extending or shadowing.
+ * @category Token Collection
+ * @see [[vitalHeader]]
+ */
+const vitalHeaderBase = vitalHeaderBaseOrig;
+
+export { default as HeaderClean, asHeaderToken } from './HeaderClean';
+export { default as vitalHeader } from './tokens';
+export type { HeaderComponents, HeaderProps } from './types';
+
+export { vitalHeaderBase, VitalHeader };

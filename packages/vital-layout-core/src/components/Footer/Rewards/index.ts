@@ -12,18 +12,19 @@
  * limitations under the License.
  */
 
-// Re-export navigation necessary modules to make burger menu work.
-export {
-  asBurgerMenuToggler,
-  useIsBurgerMenuHidden,
-  withBurgerMenuProvider,
-  withBreadcrumbStore,
-} from '@bodiless/navigation';
+// @TODO: As Rewards is implemented, move it outside Footer component into
+// a more appropriate place.
+import vitalRewardsBaseOrig, { VitalRewards } from './tokens/vitalRewards';
 
-// VitalNavigation components and tokens.
-export * from './components/Breadcrumbs';
-export * from './components/BurgerMenu';
-export * from './components/Menu';
-export * from './components/MenuTitle';
-export * from './components/SubMenu';
-export * from './components/Separator';
+/**
+ * Use this version of the vital rewards tokens when extending or shadowing.
+ * @category Token Collection
+ * @see [[vitalRewards]]
+ */
+const vitalRewardsBase = vitalRewardsBaseOrig;
+
+export { RewardsClean, asRewardsToken } from './RewardsClean';
+export { default as vitalRewards } from './tokens';
+export type { RewardsComponents, RewardsProps } from './types';
+
+export { vitalRewardsBase, VitalRewards };

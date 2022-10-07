@@ -12,18 +12,17 @@
  * limitations under the License.
  */
 
-// Re-export navigation necessary modules to make burger menu work.
-export {
-  asBurgerMenuToggler,
-  useIsBurgerMenuHidden,
-  withBurgerMenuProvider,
-  withBreadcrumbStore,
-} from '@bodiless/navigation';
+import vitalCopyrightRowBaseOrig, { VitalCopyrightRow } from './tokens/vitalCopyrightRow';
 
-// VitalNavigation components and tokens.
-export * from './components/Breadcrumbs';
-export * from './components/BurgerMenu';
-export * from './components/Menu';
-export * from './components/MenuTitle';
-export * from './components/SubMenu';
-export * from './components/Separator';
+/**
+  * Use this version of the vital copyrightrow tokens when extending or shadowing.
+  * @category Token Collection
+  * @see [[vitalCopyrightRow]]
+  */
+const vitalCopyrightRowBase = vitalCopyrightRowBaseOrig;
+
+export { default as CopyrightRowClean, asCopyrightRowToken } from './CopyrightRowClean';
+export { default as vitalCopyrightRow } from './tokens';
+export type { CopyrightRowComponents, CopyrightRowProps } from './types';
+
+export { vitalCopyrightRowBase, VitalCopyrightRow };
