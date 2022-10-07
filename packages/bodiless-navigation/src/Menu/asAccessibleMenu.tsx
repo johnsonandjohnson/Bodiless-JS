@@ -16,7 +16,7 @@ import React, {
   ComponentType, FC, useRef, useCallback, useEffect,
 } from 'react';
 import {
-  withParent, withAppendChild, useNode, useClickOutside, withChild,
+  useNode, useClickOutside,
 } from '@bodiless/core';
 import { LinkData, useListContext } from '@bodiless/components';
 import {
@@ -33,6 +33,9 @@ import {
   startWith,
   Button,
   withFinalDesign,
+  withChild,
+  withParent,
+  withAppendChild,
 } from '@bodiless/fclasses';
 
 import { useMenuContext } from './withMenuContext';

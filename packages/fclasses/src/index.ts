@@ -24,3 +24,5 @@ export * from './types';
 export * from './tokenSpec';
 export * from './withShowDesignKeys';
 export * from './tailwindcss';
+export * from './withChild';
+export * from './withParent';

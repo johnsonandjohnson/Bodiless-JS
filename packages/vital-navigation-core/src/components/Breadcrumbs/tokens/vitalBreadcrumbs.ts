@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { withoutLinkWhenLinkDataEmpty } from '@bodiless/components';
+// import { withoutLinkWhenLinkDataEmpty } from '@bodiless/components';
 import {
   withDesign,
   addProps,
@@ -34,7 +34,7 @@ const Base = asBreadcrumbsToken({
     NavWrapper: stylable,
     Separator: addProps({ children: '·' }),
     FinalTrail: withDesign({
-      Link: withoutLinkWhenLinkDataEmpty,
+      // Link: withoutLinkWhenLinkDataEmpty,
     }),
   },
   Layout: {

@@ -12,9 +12,10 @@
  * limitations under the License.
  */
 
-import { withParent } from '@bodiless/core';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import { Nav, Ul, flowHoc } from '@bodiless/fclasses';
+import {
+  Nav, Ul, flowHoc, withParent
+} from '@bodiless/fclasses';
 import { asBodilessMenu } from '@bodiless/navigation';
 // import { asStylableList, List } from '@bodiless/components';
 import type { MenuComponents } from './types';
@@ -22,7 +23,8 @@ import type { MenuComponents } from './types';
 /**
  * A clean menu for use with all navigation elements.
  */
-const MenuCleanNonEditable = flowHoc(
+// TO DO fix the type to : any
+const MenuCleanNonEditable: any = flowHoc(
   asBodilessMenu(),
   withParent(Nav, 'Nav', 'Menu'),
 )(Ul);

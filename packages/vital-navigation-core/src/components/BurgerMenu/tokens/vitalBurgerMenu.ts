@@ -12,12 +12,12 @@
  * limitations under the License.
  */
 
-import { withChild } from '@bodiless/core';
 import { vitalColor } from '@bodiless/vital-elements';
 import { vitalButtonsCore } from '@bodiless/vital-buttons-core';
 import {
   addClassesIf,
   as,
+  withChild,
 } from '@bodiless/fclasses';
 import { useIsBurgerMenuHidden, asBurgerMenuToggler } from '@bodiless/navigation';
 import { vitalMenuCore } from '../../Menu';

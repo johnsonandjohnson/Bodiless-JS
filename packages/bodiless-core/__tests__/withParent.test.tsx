@@ -24,7 +24,7 @@ import {
   addClasses,
   DesignableComponentsProps,
 } from '@bodiless/fclasses';
-import withParent from '../src/withParent';
+import { withParent } from '../src/withParent';
 
 describe('withParent', () => {
   it('wraps the given Child component with the provided Parent', () => {

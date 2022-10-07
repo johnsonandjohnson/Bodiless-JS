@@ -12,12 +12,12 @@
  * limitations under the License.
  */
 
-import { asStatic, withChild } from '@bodiless/core';
 import { vitalColor } from '@bodiless/vital-elements';
 import { vitalButtons } from '@bodiless/vital-buttons';
 import {
   addClassesIf,
   as,
+  withChild,
 } from '@bodiless/fclasses';
 import { useIsBurgerMenuHidden, asBurgerMenuToggler } from '@bodiless/navigation';
 import { vitalMenu } from '../../Menu';
@@ -29,7 +29,7 @@ import { asBurgerMenuToken } from '../BurgerMenuClean';
  */
 const Base = asBurgerMenuToken({
   Core: {
-    _: asStatic,
+    // _: asStatic,
     MenuToggler: asBurgerMenuToggler,
   },
   Components: {

@@ -1,13 +1,12 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'gatsby';
-import { withAppendChild, withChild } from '@bodiless/core';
 import {
-  as, withDesign, addProps, startWith, A, Fragment, replaceWith
+  as, withDesign, addProps, startWith, A, Fragment, replaceWith, withChild
 } from '@bodiless/fclasses';
 import {
   MenuCleanNonEditable, vitalMenuCore, MenuTitleClean, vitalMenuTitleCore,
-  vitalBurgerMenu, BurgerMenuClean, asBurgerIconToggler, asBurgerMenuToggler,
+  vitalBurgerMenu, BurgerMenuClean, asBurgerMenuToggler,
   withBurgerMenuProvider, BurgerIcon
 } from '@bodiless/vital-navigation-core';
 

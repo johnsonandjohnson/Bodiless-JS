@@ -5,8 +5,6 @@
   "version": "0.1.0",
   "author": "Heidi Vanyo <hvanyo@its.jnj.com>",
   "dependencies": {
-    "@bodiless/components": "^1.0.0-rc.17",
-    "@bodiless/core": "^1.0.0-rc.17",
     "@bodiless/fclasses": "^1.0.0-rc.17",
     "@bodiless/vital-buttons-core": "^1.0.0-rc.17",
     "@bodiless/vital-card-core": "^1.0.0-rc.17",

@@ -24,7 +24,7 @@ import {
   DesignableComponentsProps,
 } from '@bodiless/fclasses';
 import flow from 'lodash/flow';
-import withChild from '../src/withChild';
+import { withChild } from '../src/withChild';
 
 type FooComponents = { Wrapper: CT };
 const BaseFoo: CT<DesignableComponentsProps<FooComponents>> = ({ components, children }) => {
