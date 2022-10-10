@@ -15,7 +15,7 @@ const Logo = () => (
       alt="LOGO"
       src="/images/logo.webp"
     />
-    <span className="ml-4 font-bold text-4xl">Vital Design System without Editable Features</span>
+    <span className="ml-4 font-bold text-4xl">without Editable Features</span>
   </a>
 );
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { as } from '@bodiless/fclasses';
 import {
-  LayoutClean, vitalLayout, asLayoutToken, vitalFooter
+  LayoutClean, vitalLayout, asLayoutToken,
 } from '@bodiless/vital-layout-core';
 import { vitalSpacing } from '@bodiless/vital-elements';
 import { asVanillaHeader } from './header';

@@ -17,7 +17,6 @@ import {
   Nav, Ul, flowHoc, withParent
 } from '@bodiless/fclasses';
 import { asBodilessMenu } from '@bodiless/navigation';
-// import { asStylableList, List } from '@bodiless/components';
 import type { MenuComponents } from './types';
 
 /**

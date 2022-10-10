@@ -15,6 +15,7 @@
 import {
   addProps,
   as,
+  // flowIf,
   on,
 } from '@bodiless/fclasses';
 import {
@@ -105,7 +106,7 @@ const Footer = asMenuToken({
   },
   Components: {
     ...Default.Components,
-    // _: withMenuDesign('List')(as(vitalSubMenu.Footer)),
+    _: withMenuDesign('List')(as(vitalSubMenuCore.Footer)),
   },
   Layout: {
     Nav: 'w-full lg:h-full',
@@ -201,6 +202,7 @@ const Burger = asMenuToken({
     ),
   },
   Behavior: {
+    // FlowIf checks depends on useNode
     // Item: flowIf(useIsFirstMenuItem)(withExpandedAttr),
     // Title: flowIf(useHasSubMenu)(as(vitalMenuTitle.WithLinkDisabled)),
   },

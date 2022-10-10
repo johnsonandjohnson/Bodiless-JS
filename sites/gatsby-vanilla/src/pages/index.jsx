@@ -1,19 +1,8 @@
 import * as React from 'react';
-import { StaticImage } from 'gatsby-plugin-image';
 import { addClasses, as } from '@bodiless/fclasses';
-import { asExternalBaseLink, LinkClean, vitalLinkCore } from '@bodiless/vital-link-core';
 import { asExternalBaseButton, ButtonClean, vitalButtonsCore } from '@bodiless/vital-buttons-core';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
-
-const CardLink = as(
-  vitalLinkCore.Default,
-  asExternalBaseLink({
-    Text: 'StyleGuide Card',
-    Link: '/styleguide/card/',
-  }),
-  addClasses('m-10'),
-)(LinkClean);
 
 const CardButton = as(
   vitalButtonsCore.Primary,
@@ -27,7 +16,7 @@ const CardButton = as(
 const IndexPage = () => (
   <Layout>
     <Seo title="Home" />
-    <CardLink />
+    <h2 className="my-16">Visit here to see examples of Vital Cards:</h2>
     <CardButton />
   </Layout>
 );

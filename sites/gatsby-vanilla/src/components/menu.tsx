@@ -1,6 +1,5 @@
 /* This is not the most elegant way to add external designed menu, it works but should refined. */
 
-import * as React from 'react';
 import {
   as, withDesign, addProps, startWith, withAppendChild,
 } from '@bodiless/fclasses';
@@ -54,8 +53,8 @@ const ExternalMenu = as(
   withDesign({
     Title: startWith(MenuItem1),
     Wrapper: as(
-      withAppendChild(AddMenuItem2),
-      withAppendChild(AddMenuItem3),
+      withAppendChild(AddMenuItem2, 'MenuItem2'),
+      withAppendChild(AddMenuItem3, 'MenuItem3'),
     ),
   }),
 );
