@@ -20,6 +20,7 @@ const Logo = () => (
 
 export const asVanillaHeader = asHeaderToken(vitalHeader.Default, {
   Layout: {
+    // Using removeclasses as its just a quick way to swap justify-between & justify-end
     MenuContainer: as(
       'justify-end',
       removeClasses('justify-between'),
