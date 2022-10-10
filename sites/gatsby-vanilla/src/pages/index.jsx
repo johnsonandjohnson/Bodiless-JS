@@ -5,7 +5,6 @@ import { asExternalBaseLink, LinkClean, vitalLinkCore } from '@bodiless/vital-li
 import { asExternalBaseButton, ButtonClean, vitalButtonsCore } from '@bodiless/vital-buttons-core';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
-import * as styles from '../components/index.module.css';
 
 const CardLink = as(
   vitalLinkCore.Default,
@@ -28,23 +27,6 @@ const CardButton = as(
 const IndexPage = () => (
   <Layout>
     <Seo title="Home" />
-    <div className={styles.textCenter}>
-      <StaticImage
-        src="../images/example.png"
-        loading="eager"
-        width={64}
-        quality={95}
-        formats={['auto', 'webp', 'avif']}
-        alt=""
-        style={{ marginBottom: 'var(--space-3)' }}
-      />
-      <h1>
-        Welcome to
-        {' '}
-        <b>Vanilla Gatsby Featuring Vital Components!</b>
-      </h1>
-
-    </div>
     <CardLink />
     <CardButton />
   </Layout>
