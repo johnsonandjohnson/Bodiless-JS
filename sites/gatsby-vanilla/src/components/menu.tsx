@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import {
-  as, withDesign, addProps, startWith, replaceWith, withAppendChild,
+  as, withDesign, addProps, startWith, withAppendChild,
 } from '@bodiless/fclasses';
 import {
   MenuCleanNonEditable, vitalMenuCore, MenuTitleClean, vitalMenuTitleCore,
@@ -61,26 +61,61 @@ const ExternalMenu = as(
 );
 
 const ExternalBurgerMenu = as(
-  vitalMenuCore.BurgerMenu,
+  vitalMenuCore.Burger,
   withDesign({
-    Title: replaceWith(MenuItem1),
+    Title: as(
+      StyledListItem,
+      vitalMenuCore.Burger,
+      withDesign({
+        Title: startWith(MenuItem1),
+      }),
+    ),
     Wrapper: as(
       withAppendChild(as(
         StyledListItem,
-        vitalMenuCore.BurgerMenu,
+        vitalMenuCore.Burger,
         withDesign({
           Title: startWith(MenuItem3),
         }),
-      )(ListItem)),
+      )(ListItem), 'MenuItem3'),
       withAppendChild(as(
         StyledListItem,
-        vitalMenuCore.BurgerMenu,
+        vitalMenuCore.Burger,
         withDesign({
           Title: startWith(MenuItem2),
         }),
-      )(ListItem)),
+      )(ListItem), 'MenuItem2'),
     ),
   }),
 )(MenuCleanNonEditable);
 
-export { ExternalMenu, ExternalBurgerMenu };
+const FooterMenu = as(
+  vitalMenuCore.Footer,
+  withDesign({
+    Title: startWith(as(
+      vitalMenuTitleCore.Default,
+      withDesign({
+        Title: startWith(MenuItem1),
+        // TO DO: Need to add sublists.
+      }),
+    )(MenuTitleClean)),
+    Wrapper: as(
+      withAppendChild(as(
+        StyledListItem,
+        vitalMenuCore.Footer,
+        withDesign({
+          Title: startWith(MenuItem3),
+        }),
+      )(ListItem), 'MenuItem3'),
+      withAppendChild(as(
+        StyledListItem,
+        vitalMenuCore.Footer,
+        withDesign({
+          Title: startWith(MenuItem2),
+        }),
+      )(ListItem), 'MenuItem2'),
+    ),
+  }),
+);
+
+export { ExternalMenu, ExternalBurgerMenu, FooterMenu };

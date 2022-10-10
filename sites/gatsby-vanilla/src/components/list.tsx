@@ -1,8 +1,8 @@
 /* Declared List Item so can add individual list items to a list */
 
-import React, { FC, } from 'react';
+import React, { FC } from 'react';
 import {
-  DesignableComponentsProps, Fragment, ComponentOrTag, Li, designable, as
+  DesignableComponentsProps, Fragment, ComponentOrTag, Li, designable, as,
 } from '@bodiless/fclasses';
 import { asVitalTokenSpec } from '@bodiless/vital-elements/';
 

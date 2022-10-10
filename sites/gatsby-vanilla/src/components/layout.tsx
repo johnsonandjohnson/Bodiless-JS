@@ -3,13 +3,21 @@ import { as } from '@bodiless/fclasses';
 import {
   LayoutClean, vitalLayout, asLayoutToken, vitalFooter
 } from '@bodiless/vital-layout-core';
+import { vitalSpacing } from '@bodiless/vital-elements';
 import { asVanillaHeader } from './header';
+import { asVanillaFooter } from './footer';
 
 const VanillaLayout = asLayoutToken(vitalLayout.Base, {
   Components: {
     Header: asVanillaHeader,
-    Footer: vitalFooter.Default,
+    Footer: asVanillaFooter,
   },
+  Theme: {
+    ContainerWrapper: as(
+      vitalSpacing.WithSiteMargin,
+      vitalSpacing.WithSiteXLConstraint
+    ),
+  }
 });
 
 const VitalLayout = as(
