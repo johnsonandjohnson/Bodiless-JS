@@ -1,59 +1,12 @@
 import * as React from 'react';
 import {
-  as, withDesign, addProps, startWith, replaceWith, on, removeClasses,
+  as, withDesign, startWith, replaceWith, on, removeClasses,
 } from '@bodiless/fclasses';
+import { MenuCleanNonEditable } from '@bodiless/vital-navigation-core';
 import {
-  MenuCleanNonEditable, vitalMenuCore, MenuTitleClean, vitalMenuTitleCore,
-  vitalBurgerMenu,
-} from '@bodiless/vital-navigation-core';
-import {
-  vitalHeader, asHeaderToken, HeaderClean,
+  vitalHeader, asHeaderToken,
 } from '@bodiless/vital-layout-core';
-
-const MenuItem1 = as(
-  vitalMenuTitleCore.Default,
-  withDesign({
-    Link: addProps({href: '/styleguide/card'}),
-    Title: addProps({children: 'Menu item 1'}),
-  }),
-)(MenuTitleClean);
-
-const MenuItem2 = as(
-  vitalMenuTitleCore.Default,
-  withDesign({
-    Link: addProps({href: '/styleguide/card'}),
-    Title: addProps({children: 'Menu item 2'}),
-  }),
-)(MenuTitleClean);
-
-const MenuItem3 = as(
-  vitalMenuTitleCore.Default,
-  withDesign({
-    Link: addProps({href: '/styleguide/card'}),
-    Title: addProps({children: 'Menu item 3'}),
-  }),
-)(MenuTitleClean);
-
-const ExternalMenu = as(
-  vitalMenuCore.TopNav,
-  withDesign({
-    Item: addProps({ test: 'heidiexternalmenu'}),
-    Title: startWith(MenuItem1),
-    // Need to add this Item with Title starting with MenuItem2/MenuItem3
-    // Wrapper: (withAppendChild(Li),
-    //   withAppendChild(MenuItem2),
-    //   withAppendChild(MenuItem3),
-    // ),
-  }),
-);
-
-const ExternalBurgerMenu = as(
-  vitalMenuCore.Default,
-  withDesign({
-    Item: addProps({ test: 'heidiburgermenu'}),
-    Title: replaceWith(MenuItem1),
-  }),
-)(MenuCleanNonEditable);
+import { ExternalMenu, ExternalBurgerMenu } from './menu';
 
 const Logo = () => (
   <img
