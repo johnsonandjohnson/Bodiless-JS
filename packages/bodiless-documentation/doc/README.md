@@ -20,11 +20,12 @@ BodilessJS is being developed at J&J to meet specific use-cases in the consumer 
 
 ## Getting Started
 
-- Follow the instructions to create a new site in our [Getting Started Guide](./About/GettingStarted).
+- Follow the instructions to create a new site in our [Getting Started Guide](https://johnsonandjohnson.github.io/Bodiless-JS/#/About/GettingStarted).
 - Learn the basics of site-building on BodilessJS, see our tutorial: [Intro To Bodiless Concepts:
-Creating a Gallery Page](/Development/Guides/IntroToBodilessConcepts).
-```
+Creating a Gallery Page](https://johnsonandjohnson.github.io/Bodiless-JS/#/Development/Guides/IntroToBodilessConcepts).
+
 ## Links
 
+- [BodilessJS](https://www.bodiless-js.org/)
 - [Read the Documentation on GitHub](https://johnsonandjohnson.github.io/Bodiless-JS)
 - [BodilessJS on NPM](https://www.npmjs.com/org/bodiless)

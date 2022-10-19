@@ -33,7 +33,6 @@ import { withoutHydration } from '@bodiless/hydration';
 
 /**
  * Design keys available for the vital card.
- * @see [CardBase]
  *
  * @category Component
  */
@@ -197,7 +196,7 @@ const CardClean = as(
  */
 const asCardToken = asVitalTokenSpec<CardComponents>();
 
-// These are used in definnig the VitalCard interface.
+// These are used in definig the VitalCard interface.
 const cardToken = asCardToken();
 type CardToken = typeof cardToken;
 

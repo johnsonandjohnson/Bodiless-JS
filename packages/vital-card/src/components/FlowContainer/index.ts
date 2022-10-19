@@ -20,7 +20,7 @@ import vitalCardFlowContainerBaseOrig, {
 /**
  * Use this version of the vital card tokens when extending or shadowing.
  * @category Token Collection
- * @see vitalCard
+ * @see [[VitalCardFlowContainer]]
  */
 const vitalCardFlowContainerBase = vitalCardFlowContainerBaseOrig;
 

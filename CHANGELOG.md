@@ -3,6 +3,76 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.20](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.19...v1.0.0-rc.20) (2022-10-19)
+
+
+### Bug Fixes
+
+* **gatsby-theme-bodiless:** Prevent crash when setting image source t… ([#1963](https://github.com/johnsonandjohnson/bodiless-js/issues/1963)) ([3003905](https://github.com/johnsonandjohnson/bodiless-js/commit/30039051f58a5c6f524196f0d669fbbdaf247f15))
+
+
+
+
+
+# [1.0.0-rc.19](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.18...v1.0.0-rc.19) (2022-10-18)
+
+**Note:** Version bump only for package bodiless-js
+
+
+
+
+
+# [1.0.0-rc.18](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.17...v1.0.0-rc.18) (2022-10-17)
+
+
+### Bug Fixes
+
+* **documentation:** fixing root README.md links ([#1961](https://github.com/johnsonandjohnson/bodiless-js/issues/1961)) ([fff7416](https://github.com/johnsonandjohnson/bodiless-js/commit/fff741665047cee2a58414719d0677c7b8031688))
+
+
+
+
+
+# [1.0.0-rc.17](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.16...v1.0.0-rc.17) (2022-09-30)
+
+**Note:** Version bump only for package bodiless-js
+
+
+
+
+
+# [1.0.0-rc.16](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.15...v1.0.0-rc.16) (2022-09-22)
+
+**Note:** Version bump only for package bodiless-js
+
+
+
+
+
+# [1.0.0-rc.15](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.14...v1.0.0-rc.15) (2022-08-24)
+
+**Note:** Version bump only for package bodiless-js
+
+
+
+
+
+# [1.0.0-rc.14](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.13...v1.0.0-rc.14) (2022-08-16)
+
+**Note:** Version bump only for package bodiless-js
+
+
+
+
+
+# [1.0.0-rc.13](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.12...v1.0.0-rc.13) (2022-08-01)
+
+**Note:** Version bump only for package bodiless-js
+
+
+
+
+
 # [1.0.0-rc.12](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.11...v1.0.0-rc.12) (2022-07-08)
 
 **Note:** Version bump only for package bodiless-js

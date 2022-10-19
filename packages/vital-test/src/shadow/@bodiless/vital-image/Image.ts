@@ -27,10 +27,17 @@ const Plain = asImageToken(vitalImageBase.Plain, {
   },
 });
 
+const Hero = asImageToken(vitalImageBase.Hero, {
+  Behavior: {
+    _: addProps({ 'data-shadowed-by': '__vital__:Image:Hero' }),
+  },
+});
+
 const vitalImage: typeof vitalImageBase = {
   ...vitalImageBase,
   Default,
   Plain,
+  Hero,
 };
 
 export default vitalImage;

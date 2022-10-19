@@ -12,9 +12,18 @@
  * limitations under the License.
  */
 
-import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
+import { ComponentOrTag, DesignableComponents, DesignableComponentsProps } from '@bodiless/fclasses';
 
-type RewardsComponents = {
+/**
+ * Type of the design element in the VitalDS `Rewards` component.
+ * This is a Stub component that renders a placeholder.
+ *
+ * RECOMMEND TO NOT USE and marked as deprecated
+ *
+ * @category Component
+ * @deprecated
+ */
+interface RewardsComponents extends DesignableComponents {
   Wrapper: ComponentOrTag<any>,
   Brand: ComponentOrTag<any>,
   Title: ComponentOrTag<any>,
@@ -24,7 +33,7 @@ type RewardsComponents = {
   FormTextEmail: ComponentOrTag<any>,
   FormButton: ComponentOrTag<any>,
   Footnote: ComponentOrTag<any>,
-};
+}
 
 type RewardsProps = DesignableComponentsProps<RewardsComponents>;
 

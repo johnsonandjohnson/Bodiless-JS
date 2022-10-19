@@ -41,6 +41,7 @@ always have precedence**.
 ### Tailwind Configuration for a Package
 
 01. Add a `tailwind.config.js` file to the root of the package.
+
     ```js
     import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
@@ -57,6 +58,7 @@ always have precedence**.
       resolver: (pkgName) => require.resolve(pkgName),
     });
     ```
+
 01. Within `files` of the `package.json`, add `/tailwind.config.js` to make sure it's exported with
     the package.
 
@@ -170,3 +172,44 @@ Common cases for using custom CSS:
 
 - Complex CSS that generates a specific styling
 - Classes that are not available in Tailwind
+
+## Using Tailwind for Background Images
+
+If components need background images, the best method is to use the [Tailwind Background
+Image](https://tailwindcss.com/docs/background-image ':target=_blank') method. This can be used to
+set gradients and/or actual images.
+
+The `backgroundImage` can be added by extending the theme, adding the background image definitions,
+and then using the Tailwind class (e.g., `bg-footer-squares`) within your code.
+
+```js
+const twConfig = {
+  content: [
+    './lib/**/!(*.d).{ts,js,jsx,tsx}',
+  ],
+  theme: {
+    extend: {
+      backgroundImage: {
+        'footer-squares': 'url(\'MY_PACKAGE/assets/squares-in-squares.svg\')',
+      },
+    },
+  },
+};
+```
+
+The above sources from a package. To make sure the images are exported in your package, please
+ensure you perform the following steps:
+
+01. In your packages, add an `assets` folder and all images you are referencing.
+01. In `package.json`, in the `files` section, make sure you add `'/assets'`, so it's exported with
+    the package.
+
+?> **Note:** If you were to have `"url('/images/myimage.png')"` in your Tailwind config (at package
+or site level), your site would expect the image to be at
+`sites/SITE-NAME/static/images/myimage.png`, as it will default to looking for the assets in
+`sites/SITE-NAME/static`. This is fine if the changes are within the _site's_ Tailwind config, but,
+if they're in the _package's_ Tailwind config, it won't find the assets unless you manually copy the
+images to site live. Thus, the process of adding assets to packages is the recommended way, so that
+the packages release all code and assets to render the components correctly.  
+Alternatively, you could use custom CSS for complex background styling, as described in the previous
+help, but, again, this is not the recommended method.

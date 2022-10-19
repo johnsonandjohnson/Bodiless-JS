@@ -37,6 +37,7 @@ import {
 import { withImagePlaceholder } from '@bodiless/components';
 import { asBodilessLink, asBodilessImage } from '@bodiless/components-ui';
 import { asElementToken } from '@bodiless/vital-elements';
+import type { ElementToken } from '@bodiless/vital-elements';
 import { withoutHydration } from '@bodiless/hydration';
 
 // @ts-ignore Cannot find module
@@ -56,9 +57,6 @@ const objectFitCoverProps = {
   imgStyle: { objectFit: 'cover' },
 };
 
-/**
- * Token which creates the VitalDS base Image.
- */
 const Base = asElementToken({
   Core: {
     _: as(
@@ -74,9 +72,6 @@ const Base = asElementToken({
   Meta: flowHoc.meta.term('Type')('Image'),
 });
 
-/**
- * Token which apply the Plain image.
- */
 const WithEditorPlain = asElementToken({
   Editors: {
     _: asBodilessImage(),
@@ -90,9 +85,6 @@ const WithEditorPlain = asElementToken({
   Meta: flowHoc.meta.term('Optimization')('Plain'),
 });
 
-/**
- * Token which apply the BlurUp Effect.
- */
 const WithEditorBlurUp = asElementToken({
   Editors: {
     _: asBodilessImage(),
@@ -109,9 +101,6 @@ const WithEditorBlurUp = asElementToken({
   },
 });
 
-/**
- * Token which apply the Traced Effect.
- */
 const WithEditorTraced = asElementToken({
   Editors: {
     _: asBodilessImage(),
@@ -128,9 +117,6 @@ const WithEditorTraced = asElementToken({
   },
 });
 
-/**
- * Token which apply NoEffect.
- */
 const WithEditorNoEffect = asElementToken({
   Editors: {
     _: asBodilessImage(),
@@ -147,9 +133,6 @@ const WithEditorNoEffect = asElementToken({
   },
 });
 
-/**
- * Token which apply a Landscape Placeholder.
- */
 const WithLandscapePlaceholder = asElementToken({
   Content: {
     _: withImagePlaceholder({ src: landscapeImage }),
@@ -157,11 +140,11 @@ const WithLandscapePlaceholder = asElementToken({
   Meta: extendMeta(flowHoc.meta.term('Placeholder')('Landscape')),
 });
 
+/**
+ * @private
+ */
 const LinkBase = withSidecarNodes(asBodilessLink('link'))(A);
 
-/**
- * Token which wrap the image in a link.
- */
 const WithLink = asElementToken({
   Core: {
     _: withParent(LinkBase, 'ImageLink'),
@@ -169,17 +152,6 @@ const WithLink = asElementToken({
   Meta: flowHoc.meta.term('Link')('With Link'),
 });
 
-/**
- * Token which makes the non-GatbsyImage <img> component full-width.
- *
- * When adding a new image into a page, it is placed as a normal <img> tag instead of a GatsbyImage
- * component. After refreshing the page, it is rendered as a GatsbyImage, which is full-width by
- * default. Although not desirable, this behavior is expected.
- *
- * Applying this token makes this <img> tag full-width, so it renders just like a GatsbyImage. This
- * is only required if you don't want the image to "change its size" when refreshing the page
- * after placing it.
- */
 const WithFullWidthImage = asElementToken({
   Layout: {
     _: withDesign({
@@ -189,23 +161,16 @@ const WithFullWidthImage = asElementToken({
 });
 
 /**
- * Token which recompose the base image as Plain Image.
-*/
+ * @private
+ */
 const EditablePlain = asElementToken(Base, WithEditorPlain);
 
-/**
-* Token which recompose the base image as BlurUp Image.
-*/
+const Plain = EditablePlain;
+
 const Default = asElementToken(Base, WithEditorBlurUp);
 
-/**
-* Token which recompose the base image as Traced Image.
-*/
 const EditableTraced = asElementToken(Base, WithEditorTraced);
 
-/**
-* Token which recompose the base image as NoEffect Image.
-*/
 const EditableNoEffect = asElementToken(Base, WithEditorNoEffect);
 
 const WithEager = asElementToken({
@@ -223,9 +188,147 @@ const Hero = asElementToken({
   },
 });
 
-export default {
+/**
+ * Tokens for the vital image
+ *
+ * @category Token Collection
+ */
+export interface VitalImage {
+  /**
+   * Token which creates the VitalDS Base Image. Defines the Base as:
+   * - Gatsby Image
+   * - With GatsbyImageLogger
+   * - Without Hydration
+   * - Schema has nodekey 'image'
+   * - Meta is Type: Image
+   */
+  Base: ElementToken,
+  /**
+   * Composable Token which apply the following tokens/features to an image:
+   * - Bodiless image.
+   * - withNode
+   * - without Gatsby Image props
+   * - Meta is Optimization: Plain
+   */
+  WithEditorPlain: ElementToken,
+  /**
+   * Composable Token which apply the following tokens/features to an image:
+   * - Bodiless image.
+   * - withGatsbyImageNode using FluidWithWebp preset.
+   * - sets object to cover for image resizing to fit container
+   * - Meta is Optimization: Optimized & Effect: BlurUp
+   */
+  WithEditorBlurUp: ElementToken,
+  /**
+   * Composable Token which apply the following tokens/features to an image:
+   * - Bodiless image.
+   * - withGatsbyImageNode using FluidWithWebpTracedSVG preset.
+   * - sets object to contain for image resizing to fit container
+   * - Meta is Optimization: Optimized & Effect: Traced
+   */
+  WithEditorTraced: ElementToken,
+  /**
+   * Composable Token which apply the following tokens/features to an image:
+   * - Bodiless image.
+   * - withGatsbyImageNode using FluidWithWebpNoBase64 preset.
+   * - sets object to contain for image resizing to fit container
+   * - Meta is Optimization: Optimized & Effect: No Effect
+   */
+  WithEditorNoEffect: ElementToken,
+  /**
+   * Composable Token which apply the landscape placeholder image.
+   * - Meta is Placeholder : Landscape
+   */
+  WithLandscapePlaceholder: ElementToken,
+  /**
+   * Composable Token which wraps the image in a link
+   * - Meta is Link : With Link
+   */
+  WithLink: ElementToken,
+  /**
+   * Composable Token which makes the non-GatsbyImage <img> component full-width.
+   *
+   * When adding a new image into a page, it is placed as a normal <img> tag instead of a
+   * GatsbyImage component. After refreshing the page, it is rendered as a GatsbyImage,
+   * which is full-width by default. Although not desirable, this behavior is expected.
+   *
+   * Applying this token makes this <img> tag full-width, so it renders just like a GatsbyImage.
+   * This is only required if you don't want the image to "change its size" when refreshing the
+   * page after placing it.
+   */
+  WithFullWidthImage: ElementToken,
+  /**
+   * Token which recomposes the Base image as Plain Image.
+   */
+  Plain: ElementToken,
+  /**
+   * Token which recomposes the Default image as a BlurUp Image.
+   *
+   * #### Customizing:
+   *
+   * @example Override and have all Default Images be non-gatsby plain images via shadowing
+   * ```js
+   * import { vitalImageBase } from '@bodiless/vital-image';
+   *
+   * const Default = asImageToken(vitalImageBase.Plain);
+   *
+   * export default {
+   *   ...vitalImageBase,
+   *   Default,
+   * };
+   * ```
+   *
+   */
+  Default: ElementToken,
+  /**
+   * Token which recomposes the base image as Traced Image.
+   */
+  EditableTraced: ElementToken,
+  /**
+   * Token which recomposes the base image as NoEffect Image.
+   */
+  EditableNoEffect: ElementToken,
+  /**
+   * Composable Token which adds the `loading: eager` property for performance.
+   */
+  WithEager: ElementToken,
+  /**
+   * Composed Token token that defines some defaults for the Hero Image.
+   * - Default (Gatsby Fluid WebP)
+   * - WithEager
+   * - WithLandscapePlaceholder
+   * - withFullWidthImage
+   *
+   * #### Customizing:
+   *
+   * @example Extends the HERO Images to be a link hero image via shadowing.
+   * ```js
+   * import { vitalImageBase } from '@bodiless/vital-image';
+   *
+   * const Hero = asImageToken(vitalImageBase.Hero, {
+   *   Compose: {
+   *     _: vitalImageBase.WithLink,
+   *   },
+   * });
+   *
+   * export default {
+   *   ...vitalImageBase,
+   *   Hero,
+   * };
+   * ```
+   */
+  Hero: ElementToken,
+}
+
+/**
+ * Tokens for Vital Image
+ *
+ * @category Token Collection
+ * @see [[VitalImage]]
+ */
+const vitalImage: VitalImage = {
   Base,
-  Plain: EditablePlain,
+  Plain,
   Default,
   WithEditorPlain,
   WithEditorBlurUp,
@@ -239,3 +342,5 @@ export default {
   WithEager,
   Hero,
 };
+
+export default vitalImage;

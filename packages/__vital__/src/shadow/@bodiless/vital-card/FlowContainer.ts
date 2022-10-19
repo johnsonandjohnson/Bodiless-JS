@@ -11,16 +11,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { as } from '@bodiless/fclasses';
+
 import { vitalCardFlowContainerBase } from '@bodiless/vital-card';
+import { asFluidToken } from '@bodiless/vital-elements';
 
 // Demostrating only showing Basic & Hero Card Variations in Component Picker
-const WithCardVariations = as(
+const WithCardVariations = asFluidToken(
   vitalCardFlowContainerBase.WithBasicVariations,
   vitalCardFlowContainerBase.WithHeroVariations,
 );
-
-// const WithCardVariations = vitalCardFlowContainerBase.WithCardVariations;
 
 export default {
   ...vitalCardFlowContainerBase,

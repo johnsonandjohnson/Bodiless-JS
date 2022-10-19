@@ -35,7 +35,16 @@ following the directions specified in [Customizing Screens](https://tailwindcss.
 ?> **Tip:** If a Site Builder _does_ modify and/or add extra breakpoints, please review the next
 section to determine if there needs to be an update to any component's behavior.
 
-## Components with Custom Responsive Behavior
+## Components with Custom Responsive Behavior using Hidden
+
+If a different component is to be displayed on different breakpoints, it is recommended to render
+both components and use Tailwind classes to hide them. This is the best performing method in most
+cases.
+
+## Components with Custom Responsive Behavior using Responsive Variants
+
+!> **IMPORTANT:** This method was determined to have performance impacts, as well as being fragile
+if the breakpoints change from the defaults. Use with caution.
 
 At times, you may need to define a specific responsive behavior that can't be defined by Tailwind
 classes by itself and should be included within the component. BodilessJS provides a mechanism to

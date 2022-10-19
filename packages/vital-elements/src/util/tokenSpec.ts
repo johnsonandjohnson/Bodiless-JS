@@ -54,12 +54,16 @@ const asVitalTokenSpec = <
  * Creates an element level token (one in which only the _ design key is allowed);
  */
 const asElementToken = asVitalTokenSpec<{}>();
+const elementToken = asElementToken();
+type ElementToken = typeof elementToken;
 
 /**
  * Creates a token for a component with a fluid design (one in which any
  * design key is allowed).
  */
 const asFluidToken = asVitalTokenSpec<any>();
+const fluidToken = asFluidToken();
+type FluidToken = typeof fluidToken;
 
 /**
  * Creates a token which applies the given metadata.
@@ -115,4 +119,7 @@ const asSimpleToken = (...tokens: Token[]) => asElementToken({
 export {
   asVitalTokenSpec, asMetaToken, asElementToken, asFluidToken,
   asTokenGroup, asSimpleToken
+};
+export type {
+  ElementToken, FluidToken,
 };

@@ -22,15 +22,9 @@ import {
 } from '@bodiless/core';
 import { asBodilessLink } from '@bodiless/components-ui';
 import { asLogoToken } from '../LogoClean';
+import type { LogoToken } from '../LogoClean';
 
-const Default = asLogoToken({
-  Layout: {
-    Wrapper: 'w-full max-w-20 md:max-w-28 lg:min-w-28',
-    Image: 'max-h-full',
-  },
-  Spacing: {
-    Wrapper: 'mx-4 lg:ml-0 lg:mr-8',
-  },
+const Base = asLogoToken({
   Components: {
     Image: vitalImage.Default,
   },
@@ -48,6 +42,60 @@ const Default = asLogoToken({
   },
 });
 
-export default {
+const Default = asLogoToken(Base, {
+  Layout: {
+    Wrapper: 'w-full max-w-20 md:max-w-28 lg:min-w-28',
+    Image: 'max-h-full',
+  },
+  Spacing: {
+    Wrapper: 'mx-4 lg:ml-0 lg:mr-8',
+  },
+});
+
+/**
+ * Tokens for the vital logo
+ *
+ * @category Token Collection
+ * @see [[HeaderClean]]
+ */
+export interface VitalLogo {
+  /**
+   * Base makes a clickable image:
+   */
+  Base: LogoToken,
+  /**
+   * Default adds vital specific design reqirements.
+   * @example Will override the layout domain of logo and apply diffent styling.
+   * ```js
+   * import { vitalLogoBase, asLogoToken } from '@bodiless/vital-layout';
+   *
+   * const Default = asLogoToken({
+   *   ...vitalLogoBase.Default,
+   *   Layout: {
+   *      Image: 'h-16 max-w-15',
+   *   },
+   * }),
+   *
+   * export default {
+   *   ...vitalLogoBase,
+   *   Default,
+   * };
+   * ```
+   *
+   */
+  Default: LogoToken,
+}
+
+/**
+ * Tokens for Vital Logo
+ *
+ * @category Token Collection
+ * @see [[VitalLogo]]
+ * @see [[LogoClean]]
+ */
+const vitalLogo: VitalLogo = {
+  Base,
   Default,
 };
+
+export default vitalLogo;

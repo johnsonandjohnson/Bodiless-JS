@@ -12,28 +12,17 @@
  * limitations under the License.
  */
 
-import { asFluidToken, asMetaToken } from '@bodiless/vital-elements';
-import {
-  Img, on, as, flowHoc
-} from '@bodiless/fclasses';
-import { vitalImage } from '../Image';
-
-const imageVariations = {
-  ImageSquare: on(Img)(as(
-    vitalImage.Default,
-    asMetaToken(flowHoc.meta.term('Placeholder')('Square')),
-  )),
-  ImageLandscape: on(Img)(as(
-    vitalImage.Default,
-    vitalImage.WithLandscapePlaceholder,
-  )),
-};
+import vitalImageFlowContainer from './tokens';
+import vitalImageFlowContainerBaseOrig, {
+  VitalImageFlowContainer
+} from './tokens/vitalImageFlowContainer';
 
 /**
- * Token which adds image variations to a flow container.
- */
-const WithImageVariations = asFluidToken({
-  Components: imageVariations,
-});
+  * Use this version of the vital card tokens when extending or shadowing.
+  * @category Token Collection
+  * @see [[VitalImageFlowContainer]]
+  */
+const vitalImageFlowContainerBase = vitalImageFlowContainerBaseOrig;
 
-export const vitalImageFlowContainer = { WithImageVariations };
+export { vitalImageFlowContainer, vitalImageFlowContainerBase };
+export type { VitalImageFlowContainer };

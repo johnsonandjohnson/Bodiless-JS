@@ -49,9 +49,27 @@ const RewardsCleanBase: FC<RewardsProps> = ({ components: C, ...rest }) => (
   </C.Wrapper>
 );
 
+/**
+ * A clean rewards placeholder
+ *
+ * RECOMMEND TO NOT EXTEND/OVERRIDE and marked as deprecated.
+ *
+ * @category Component
+ * @deprecated
+ *
+ */
 const RewardsClean = designable(rewardsComponents, 'Rewards')(RewardsCleanBase);
 
+/**
+ * A token modifier that respects the Rewards Components.
+ *
+ * @category Token Collection
+ */
 const asRewardsToken = asVitalTokenSpec<RewardsComponents>();
+
+// These are used in defining the VitalRewards interface.
+const rewardsToken = asRewardsToken();
+export type RewardsToken = typeof rewardsToken;
 
 export {
   RewardsClean,

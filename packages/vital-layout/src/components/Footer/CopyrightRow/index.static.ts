@@ -12,9 +12,7 @@
  * limitations under the License.
  */
 
-import {
-  StaticBlock as CopyrightRowClean,
-  staticTokenCollection as vitalCopyrightRow,
+export {
+  StaticBlock as CopyrightRowStatic,
+  staticTokenCollection as vitalCopyrightRowStatic,
 } from '@bodiless/hydration';
-
-export { CopyrightRowClean, vitalCopyrightRow };
