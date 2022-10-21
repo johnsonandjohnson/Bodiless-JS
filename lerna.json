@@ -15,5 +15,6 @@
       ]
     }
   },
+  "useNx": true,
   "version": "1.0.0-rc.21"
 }
