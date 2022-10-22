@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import path from 'path';
-//import type { TailwindConfig } from 'tailwindcss/tailwind-config';
+// import type { TailwindConfig } from 'tailwindcss/tailwind-config';
 import type { Package } from './mergeConfigs';
 
 const { join } = path;
