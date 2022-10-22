@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 import path from 'path';
-import type { TailwindConfig } from 'tailwindcss/tailwind-config';
+//import type { TailwindConfig } from 'tailwindcss/tailwind-config';
 import type { Package } from './mergeConfigs';
 
 const { join } = path;
@@ -46,7 +46,7 @@ export type GetTwConfigProps = {
   /**
    * The tailwind configuration with which those of dependencies will be merged.
    */
-  twConfig: TailwindConfig,
+  twConfig: any, // TailwindConfig,
   /**
    * A function which returns the absolute path to a module as resolved from
    * the context of the current module.

@@ -12,7 +12,7 @@ node_modules
 lerna-debug.log
 packages/**/lib
 !packages/headless-chrome-crawler/lib
-packages/**/bodiless.index.css
+# packages/**/bodiless.index.css
 sites/**/lib
 sites/**/.env
 sites/**/.env.development

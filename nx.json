@@ -21,16 +21,6 @@
       "outputs": [
         "{projectRoot}/lib"
       ]
-    },
-    "test": {
-      "outputs": [
-        "{projectRoot}/lib"
-      ]
-    },
-    "lint": {
-      "outputs": [
-        "{projectRoot}/lib"
-      ]
     }
   },
   "defaultBase": "main"
