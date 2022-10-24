@@ -3,7 +3,6 @@
     "sites/*",
     "packages/*"
   ],
-  "lerna": "2.0.0",
   "command": {
     "publish": {
       "message": "chore(release): publish %s"
@@ -15,5 +14,8 @@
       ]
     }
   },
-  "version": "1.0.0-rc.21"
+  "version": "1.0.0-rc.21",
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "useNx": true,
+  "useWorkspaces": false
 }
