@@ -1,0 +1,11 @@
+
+
+{
+  "version": 2,
+  "projects": {
+    "test-site": "sites/test-site",
+    "vital-demo": "sites/vital-demo",
+    "minimal-demo": "sites/minimal-demo"
+  },
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json"
+}

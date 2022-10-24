@@ -1,0 +1,10 @@
+{
+  "sourceRoot": "sites/minimal-demo",
+  "projectType": "application",
+  "targets": {
+    "minimal-demo": {
+      "executor": "@nrwl/nx-plugin:minimal-demo"
+    }
+  },
+  "tags": []
+}

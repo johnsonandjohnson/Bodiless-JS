@@ -1,0 +1,10 @@
+{
+  "sourceRoot": "sites/test-site",
+  "projectType": "application",
+  "targets": {
+    "test-site": {
+      "executor": "@nrwl/nx-plugin:test-site"
+    }
+  },
+  "tags": []
+}

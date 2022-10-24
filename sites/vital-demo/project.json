@@ -1,0 +1,10 @@
+{
+  "sourceRoot": "sites/vital-demo",
+  "projectType": "application",
+  "targets": {
+    "vital-demo": {
+      "executor": "@nrwl/nx-plugin:vital-demo"
+    }
+  },
+  "tags": []
+}

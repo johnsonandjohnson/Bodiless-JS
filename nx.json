@@ -23,5 +23,6 @@
       ]
     }
   },
-  "defaultBase": "main"
+  "defaultBase": "main",
+  "defaultProject": "test-site"
 }
