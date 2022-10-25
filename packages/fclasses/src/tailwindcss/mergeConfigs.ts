@@ -15,7 +15,7 @@
 import merge from 'lodash/merge';
 import flatten from 'lodash/flatten';
 import path from 'path';
-// import type { TailwindConfig } from 'tailwindcss/tailwind-config';
+import type { Config as TailwindConfig } from 'tailwindcss';
 
 export type Package = {
   root: string,
@@ -32,6 +32,7 @@ const getTailwindConfigs = (packages: Package[]) => packages
     ...(
       tailwindConfig.content !== undefined && Array.isArray(tailwindConfig.content)
         ? {
+          // @ts-ignore not quite sure how to fix so ignoring for now.
           content: tailwindConfig.content.map((rule: string) => path.join(root, rule)),
         }
         : {}
@@ -48,7 +49,7 @@ const mergeConfigs = (
     content: [
       // @todo: workaround for https://github.com/johnsonandjohnson/Bodiless-JS/issues/1584
       // './src/**/!(*.d).{ts,js,jsx,tsx}',
-      ...flatten(merge(packageConfigs).map((config: any) => config.content)),
+      ...flatten(merge(packageConfigs).map((config: TailwindConfig) => config.content)),
     ],
     // theme setting
     // dummy first argument because of https://github.com/microsoft/TypeScript/issues/28010#issuecomment-713484584
@@ -56,7 +57,7 @@ const mergeConfigs = (
     // plugins setting
     plugins: [
       ...flatten(
-        merge(packageConfigs).map((config: any) => config.plugins),
+        merge(packageConfigs).map((config: TailwindConfig) => config.plugins),
       ).filter(Boolean),
     ],
   };
