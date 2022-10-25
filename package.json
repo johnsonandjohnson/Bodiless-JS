@@ -11,7 +11,7 @@
     "bootstrap:gatsby-cloud": "npm i && npx lerna bootstrap",
     "build": "cross-env NODE_ENV=production nx run-many --target build --exclude=@bodiless/gatsby-starter-bodiless",
     "build:only": "cross-env NODE_ENV=production lerna run build --stream --scope",
-    "build:packages": "cross-env NODE_ENV=production nx run-many --target build --exclude=sites-test-site,sites-minimal-demo,sites-vital-demo",
+    "build:packages": "cross-env NODE_ENV=production nx run-many --target build --exclude=sites-test-site,sites-minimal-demo,sites-vital-demo,test-site,minimal-demo,vital-demo",
     "build:watch": "cross-env NODE_ENV=development lerna run build:watch --parallel",
     "build:env-vars": "cross-env NODE_ENV=production lerna run build:env-vars --stream",
     "build:tailwind-configs": "cross-env NODE_ENV=production lerna run build:tailwind-configs --stream",
