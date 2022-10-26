@@ -20,9 +20,9 @@
     "access": "public"
   },
   "scripts": {
-    "build": "npm run build:lib && npm run build:api-doc",
+    "build": "pnpm run build:lib && pnpm run build:api-doc",
     "build:lib": "tsc -p ./tsconfig.json",
-    "build:watch": "npm run build:lib -- --watch",
+    "build:watch": "pnpm run build:lib -- --watch",
     "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api src",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },

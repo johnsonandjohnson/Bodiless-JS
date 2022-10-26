@@ -22,8 +22,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run copy && npm run build:api-doc",
-    "build:watch": "npm run build -- --watch",
+    "build": "tsc -p ./tsconfig.json && pnpm run copy && pnpm run build:api-doc",
+    "build:watch": "pnpm run build -- --watch",
     "build:api-doc": "typedoc --out doc/api ./src",
     "copy": "copyfiles -u 1 \"./src/*.css\" \"./lib/\"",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo",

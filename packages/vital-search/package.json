@@ -25,9 +25,9 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
-    "build:required": "npm run build",
-    "build:watch": "npm run build -- --watch",
+    "build": "tsc -p ./tsconfig.json && pnpm run build:api-doc",
+    "build:required": "pnpm run build",
+    "build:watch": "pnpm run build -- --watch",
     "build:api-doc": "typedoc --out doc/api ./src",
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"

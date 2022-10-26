@@ -22,10 +22,10 @@
     "access": "public"
   },
   "scripts": {
-    "build": "run-p build:lib copy",
+    "build": "pnpm run build:lib && pnpm run copy",
     "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api src",
     "build:lib": "tsc -p ./tsconfig.json",
-    "build:watch": "npm run build:lib -- --watch",
+    "build:watch": "pnpm run build:lib -- --watch",
     "copy": "copyfiles -u 1 \"./src/*.css\" \"./lib/\"",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },

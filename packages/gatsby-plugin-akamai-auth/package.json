@@ -24,11 +24,11 @@
     "access": "public"
   },
   "scripts": {
-    "build": "npm run copy && npm run build:lib && npm run theme:init",
+    "build": "pnpm run copy && pnpm run build:lib && pnpm run theme:init",
     "build:lib": "tsc -p ./tsconfig.json",
     "build:watch": "run-p tsc -p ./tsconfig.json --watch && tsc -p ./tsconfig.json --watch",
     "clean": "rimraf -rf \"dist\" && rimraf -rf \"cjs\" && rimraf index* && rimraf \"doc/api\"",
-    "copy": "copyfiles -u 1 \"./src/dist/**/*.{json,jpg,png}\" \".\" && copyfiles -u 1 \"./src/dist/**/*.{json,jpg,png}\" \"./cjs\"  && npm run copy:janrain:css && npm run copy:janrain:html",
+    "copy": "copyfiles -u 1 \"./src/dist/**/*.{json,jpg,png}\" \".\" && copyfiles -u 1 \"./src/dist/**/*.{json,jpg,png}\" \"./cjs\"  && pnpm run copy:janrain:css && pnpm run copy:janrain:html",
     "copy:janrain:css": "copyfiles -f \"./src/janrain/styles/*.css\" \"./dist/janrain/styles/\"",
     "copy:janrain:html": "copyfiles -f \"./src/janrain/index.html\" \"./dist/janrain/\"",
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src",

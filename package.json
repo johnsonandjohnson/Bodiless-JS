@@ -11,7 +11,7 @@
     "bootstrap:gatsby-cloud": "pnpm i && npx lerna bootstrap",
     "build": "cross-env NODE_ENV=production pnpm run -r build",
     "build:only": "cross-env NODE_ENV=production pnpm run -r build",
-    "build:packages": "cross-env NODE_ENV=production pnpm run -r build",
+    "build:packages": "cross-env NODE_ENV=production pnpm run -r --filter './packages/**' build",
     "build:watch": "cross-env NODE_ENV=development pnpm run -r build:watch --parallel",
     "build:env-vars": "cross-env NODE_ENV=production pnpm run -r build:env-vars --stream",
     "build:tailwind-configs": "cross-env NODE_ENV=production pnpm run -r build:tailwind-configs --stream",

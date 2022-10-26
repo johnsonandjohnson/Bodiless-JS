@@ -25,9 +25,9 @@
     "access": "public"
   },
   "scripts": {
-    "build": "npm run build:lib && npm run build:css && npm run copy",
+    "build": "pnpm run build:lib && pnpm run build:css && pnpm run copy",
     "build:lib": "tsc -p ./tsconfig.json",
-    "build:watch": "npm run build:lib -- --watch",
+    "build:watch": "pnpm run build:lib -- --watch",
     "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api ./src",
     "build:css": "postcss --use autoprefixer -o ./src/bodiless.index.css index.tailwind.css",
     "copy": "copyfiles -u 1 \"./src/*.css\" \"./lib/\"",

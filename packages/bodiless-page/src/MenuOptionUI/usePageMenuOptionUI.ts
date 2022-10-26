@@ -24,7 +24,7 @@ import {
   StylableProps,
 } from '@bodiless/fclasses';
 
-const usePageMenuOptionUI = () => {
+const usePageMenuOptionUI: any = () => {
   const defaultUI = useMenuOptionUI();
   const {
     ComponentFormDescription,
