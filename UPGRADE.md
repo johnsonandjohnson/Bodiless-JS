@@ -17,7 +17,6 @@ it's better to lock into a working version while there's no stable release avail
 
 
 NOTES: for switching to PNPM
-* Best guide
 * Fixed tailwind css import types
 * Switch to postcss-cli-simple as postcss-cli hangs
 * Inferrered types:
@@ -26,3 +25,11 @@ NOTES: for switching to PNPM
   * added :any
 * in sites/minimal-demo -- pnp Can't resolve '@babel/runtime/helpers/esm/regeneratorRuntime' in '/Users/heidivanyo/slate/bj-heidi2/node_modules/.pnpm/rc-trigger@5.3.3/node_modules/rc-trigger/es/Popup'
   * https://github.com/babel/babel/issues/14576
+* npm run start of any site hits out of memory error during building development packages.
+  * no known fix at this time.
+
+Timings of PNPM
+pnpm run setup on a fresh clone
+install (npm run bootstrap):  24secs
+Build Packages (npm run build:packages): 3 min 5 secs
+Build test site only: cd sites/test-site && npm run build: 4 min 44 secs
