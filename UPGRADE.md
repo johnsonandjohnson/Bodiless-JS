@@ -33,8 +33,8 @@ pnpm run setup on a fresh clone
 
 | Step                                                      | Run 1         | Run 2 | Run 3 | Run 4 |
 |-----------------------------------------------------------|---------------|-------|-------|-------|
-| install (npm run bootstrap)                               | 24 secs       |       |       |       |
-| Build Packages (npm run build:packages)                   | 3 min 5 secs  |       |       |       |
-| Build test site only: cd sites/test-site && npm run build | 4 min 44 secs |       |       |       |
+| install (pnpm run bootstrap)                               | 24 secs       |       |       |       |
+| Build Packages (pnpm run build:packages)                   | 3 min 5 secs  |       |       |       |
+| Build test site only: cd sites/test-site && pnpm run build | 4 min 44 secs |       |       |       |
 
  ** note this still uses npm-run-all in build command so not sure if we are leveraging pnpm but most of time is gatsby build so don't think it matters that much
