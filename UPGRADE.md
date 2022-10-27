@@ -23,8 +23,8 @@ NOTES: for switching to PNPM
 * npm run start of any site hits out of memory error during building development packages.
   * no known fix at this time.
 
-Timings of PNPM
-pnpm run setup on a fresh clone
+Timings of NX
+nx run setup on a fresh clone
 
 | Step                                                      | Run 1         | Run 2 | Run 3 | Run 4 |
 |-----------------------------------------------------------|---------------|-------|-------|-------|
