@@ -28,19 +28,11 @@ const DEFAULT_OPTIONS: WithoutHydrationOptions = {
   WrapperStyle: { display: 'contents' },
 };
 
-export const isStaticClientSide = !!(
-  typeof window !== 'undefined'
-  && window.document
-  && window.document.createElement
-  && process.env.NODE_ENV === 'production'
-);
+// @ts-ignore
+export const isStaticClientSide = !!(typeof window !== 'undefined' && window.document && window.document.createElement && process.env.NODE_ENV === 'production');
 
-export const isEditClientSide = !!(
-  typeof window !== 'undefined'
-  && window.document
-  && window.document.createElement
-  && process.env.NODE_ENV === 'development'
-);
+// @ts-ignore
+export const isEditClientSide = !!(typeof window !== 'undefined' && window.document && window.document.createElement && process.env.NODE_ENV === 'development');
 
 /**
  * InnerHtml is memoized to allow retrieving it on component remount.

@@ -28,12 +28,14 @@ class Transformer<P, Q, X> extends React.Component<TransformerProps<P, Q, X>> {
   constructor(props: TransformerProps<P, Q, X>) {
     super(props);
     const { transformFixed, passedProps } = props;
+    // @ts-ignore
     this.fixedProps = transformFixed(passedProps) as X;
   }
 
   render() {
     const { Component, transformPassthrough, passedProps } = this.props;
     const props = { ...this.fixedProps as X, ...transformPassthrough(passedProps) };
+    // @ts-ignore
     return <Component {...props} />;
   }
 }
