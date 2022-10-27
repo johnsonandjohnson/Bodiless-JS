@@ -28,9 +28,9 @@ pnpm run setup on a fresh clone
 
 | Step                                                      | Run 1         | Run 2 | Run 3 | Run 4 |
 |-----------------------------------------------------------|---------------|-------|-------|-------|
-| install (npm run bootstrap)                               | 49 secs       |  3 min 9 sec|       |       |
-| Build Packages (npm run build:packages)                   | 7 min 4 secs  |  5 min 50 sec |       |       |
-| Build test site only: cd sites/test-site && npm run build | x min x secs  |  8 min 53 sec     |       |       |
+| install (nx run bootstrap)                               | 49 secs       |  3 min 9 sec|       |       |
+| Build Packages (nx run build:packages)                   | 7 min 4 secs  |  5 min 50 sec |       |       |
+| Build test site only: cd sites/test-site && nx run build | x min x secs  |  8 min 53 sec     |       |       |
 
 Run 1 build link: hhttps://cloud.nx.app/orgs/635312c86ecea75875e2d826/workspaces/635312c86ecea75875e2d827/runs?withoutBranch=true&status=&branch=
 
