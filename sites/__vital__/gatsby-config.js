@@ -89,6 +89,7 @@ const plugins = [
   {
     resolve: 'gatsby-plugin-pnpm'
   }
+];
 
 const robotsTxtPolicy = [
   {
