@@ -91,6 +91,9 @@ const plugins = [
     ...getSampleDefaultContentConfig(),
     ...getSiteDefaultContentConfig(),
   ),
+  {
+    resolve: 'gatsby-plugin-pnpm'
+  }
 ];
 
 const robotsTxtPolicy = [

@@ -24,3 +24,5 @@ NOTES: for switching to PNPM
   * https://stackoverflow.com/questions/73786166/material-ui-styled-component-the-inferred-type-of-x-cannot-be-named-without-a 
   * https://github.com/microsoft/TypeScript/issues/36800
   * added :any
+* in sites/minimal-demo -- pnp Can't resolve '@babel/runtime/helpers/esm/regeneratorRuntime' in '/Users/heidivanyo/slate/bj-heidi2/node_modules/.pnpm/rc-trigger@5.3.3/node_modules/rc-trigger/es/Popup'
+  * https://github.com/babel/babel/issues/14576

@@ -58,6 +58,9 @@ const plugins = [
       }
     },
   },
+  {
+    resolve: 'gatsby-plugin-pnpm'
+  }
   // {
   //   resolve: '@bodiless/gatsby-plugin-ssi',
   //   options: {

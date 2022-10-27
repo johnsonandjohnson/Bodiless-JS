@@ -85,8 +85,10 @@ const plugins = [
   // ),
   {
     resolve: '--vital--',
+  },
+  {
+    resolve: 'gatsby-plugin-pnpm'
   }
-];
 
 const robotsTxtPolicy = [
   {

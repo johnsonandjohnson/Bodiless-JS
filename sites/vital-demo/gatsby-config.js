@@ -110,6 +110,9 @@ const plugins = [
   },
   {
     resolve: '@bodiless/vital-test',
+  },
+  {
+    resolve: 'gatsby-plugin-pnpm'
   }
 ];
 

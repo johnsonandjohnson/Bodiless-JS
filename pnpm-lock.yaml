@@ -7,7 +7,7 @@ importers:
       '@babel/core': ^7.9.0
       '@babel/plugin-proposal-decorators': ^7.4.0
       '@babel/plugin-transform-modules-commonjs': 7.5.0
-      '@babel/runtime': ^7.4.2
+      '@babel/runtime': ^7.18.0
       '@playwright/test': '1.22'
       '@types/enzyme': ^3.9.1
       '@types/html2canvas': 0.0.35
@@ -84,7 +84,7 @@ importers:
       '@babel/core': 7.17.10
       '@babel/plugin-proposal-decorators': 7.17.9_@babel+core@7.17.10
       '@babel/plugin-transform-modules-commonjs': 7.5.0_@babel+core@7.17.10
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       '@playwright/test': 1.22.1
       '@types/enzyme': 3.10.12
       '@types/jest': 24.9.1
@@ -1714,6 +1714,7 @@ importers:
       express: ^4.17.1
       gatsby: ^4.11.2
       gatsby-plugin-gatsby-cloud: 4.13.0
+      gatsby-plugin-pnpm: ^1.2.10
       npm-run-all: ^4.1.5
       postcss: ^8.4.12
       react: ^17.0.2
@@ -1743,6 +1744,7 @@ importers:
       express: 4.18.2
       gatsby: 4.24.5_oagctitnqx3g7idiuq5vrj5arm
       gatsby-plugin-gatsby-cloud: 4.13.0_gatsby@4.24.5
+      gatsby-plugin-pnpm: 1.2.10_gatsby@4.24.5
       postcss: 8.4.18
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -1794,6 +1796,7 @@ importers:
       gatsby: ^4.11.2
       gatsby-plugin-canonical-urls: ^4.10.0
       gatsby-plugin-compile-es6-packages: ^1.1.0
+      gatsby-plugin-pnpm: ^1.2.10
       gatsby-plugin-sitemap: ^5.10.2
       glob: ^7.1.6
       informed: ^3.34.0
@@ -1844,6 +1847,7 @@ importers:
       express: 4.18.2
       gatsby: 4.24.5_oagctitnqx3g7idiuq5vrj5arm
       gatsby-plugin-canonical-urls: 4.24.0_gatsby@4.24.5
+      gatsby-plugin-pnpm: 1.2.10_gatsby@4.24.5
       gatsby-plugin-sitemap: 5.24.0_5itqukhe7lrw7kjqoonkmst2r4
       glob: 7.2.3
       informed: 3.34.0_sfoxds7t5ydpegc3knd667wn6m
@@ -1889,6 +1893,7 @@ importers:
       esm: ^3.2.25
       express: ^4.17.1
       gatsby: ^4.11.2
+      gatsby-plugin-pnpm: ^1.2.10
       npm-run-all: ^4.1.5
       postcss: ^8.4.12
       react: ^17.0.2
@@ -1916,6 +1921,7 @@ importers:
       esm: 3.2.25
       express: 4.18.2
       gatsby: 4.24.5_oagctitnqx3g7idiuq5vrj5arm
+      gatsby-plugin-pnpm: 1.2.10_gatsby@4.24.5
       postcss: 8.4.18
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -1995,6 +2001,7 @@ importers:
       gatsby: ^4.11.2
       gatsby-plugin-canonical-urls: ^4.10.0
       gatsby-plugin-compile-es6-packages: ^1.1.0
+      gatsby-plugin-pnpm: ^1.2.10
       gatsby-plugin-sitemap: ^5.10.2
       gatsby-react-router-scroll: ^5.11.0
       glob: ^7.1.6
@@ -2076,6 +2083,7 @@ importers:
       find-up: 4.1.0
       gatsby: 4.24.5_oagctitnqx3g7idiuq5vrj5arm
       gatsby-plugin-canonical-urls: 4.24.0_gatsby@4.24.5
+      gatsby-plugin-pnpm: 1.2.10_gatsby@4.24.5
       gatsby-plugin-sitemap: 5.24.0_5itqukhe7lrw7kjqoonkmst2r4
       gatsby-react-router-scroll: 5.24.0_sfoxds7t5ydpegc3knd667wn6m
       glob: 7.2.3
@@ -2149,6 +2157,7 @@ importers:
       gatsby-plugin-canonical-urls: ^4.10.0
       gatsby-plugin-compile-es6-packages: ^1.1.0
       gatsby-plugin-google-tagmanager: ^4.13.0
+      gatsby-plugin-pnpm: ^1.2.10
       gatsby-plugin-sitemap: ^5.10.2
       glob: ^7.1.6
       informed: ^3.34.0
@@ -2207,6 +2216,7 @@ importers:
       gatsby: 4.24.5_oagctitnqx3g7idiuq5vrj5arm
       gatsby-plugin-canonical-urls: 4.24.0_gatsby@4.24.5
       gatsby-plugin-google-tagmanager: 4.24.0_5itqukhe7lrw7kjqoonkmst2r4
+      gatsby-plugin-pnpm: 1.2.10_gatsby@4.24.5
       gatsby-plugin-sitemap: 5.24.0_5itqukhe7lrw7kjqoonkmst2r4
       glob: 7.2.3
       informed: 3.34.0_sfoxds7t5ydpegc3knd667wn6m
@@ -3705,12 +3715,6 @@ packages:
       core-js-pure: 3.26.0
       regenerator-runtime: 0.13.9
 
-  /@babel/runtime/7.17.9:
-    resolution: {integrity: sha512-lSiBBvodq29uShpWGNbgFdKYNiFDo5/HIYsaCEY9ff4sb10x9jizo2+pRrSyF4jKZCXqgzuqBOQKbUm90gQwJg==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      regenerator-runtime: 0.13.9
-
   /@babel/runtime/7.19.4:
     resolution: {integrity: sha512-EXpLCrk55f+cYqmHsSR+yD/0gAIMxxA9QK9lnQWzhMCvt+YmoBN7Zx94s++Kv0+unHk39vxNO8t+CMA2WSS3wA==}
     engines: {node: '>=6.9.0'}
@@ -3899,7 +3903,7 @@ packages:
     peerDependencies:
       react: '>=16.3.0'
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       '@emotion/cache': 10.0.29
       '@emotion/css': 10.0.27
       '@emotion/serialize': 0.11.16
@@ -3967,7 +3971,7 @@ packages:
       '@emotion/core': ^10.0.28
       react: '>=16.3.0'
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       '@emotion/core': 10.3.1
       '@emotion/is-prop-valid': 0.8.8
       '@emotion/serialize': 0.11.16
@@ -5603,7 +5607,7 @@ packages:
       react-test-renderer:
         optional: true
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       '@types/react': 17.0.45
       '@types/react-dom': 17.0.16
       '@types/react-test-renderer': 18.0.0
@@ -6730,7 +6734,7 @@ packages:
     resolution: {integrity: sha512-o/HelwhuKpTj/frsOsbNLNgnNGVIFsVP/SW2BSF14gVl7kAfMOJ6/8wUAUvG1R1NHKrfG+2sHZTu0yauT1qBrA==}
     engines: {node: '>=6.0'}
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       '@babel/runtime-corejs3': 7.17.9
 
   /arr-diff/4.0.0:
@@ -7157,7 +7161,7 @@ packages:
     resolution: {integrity: sha512-8DqJq6/LPUjSZ0Qq6bVIFpsj2flCEE0Cbnbut9TvGU6jP9g3dOWEXtQ/sdvsA9d6souza8eNGh04WRXpuH9ThA==}
     engines: {node: '>=10', npm: '>=6'}
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       babel-plugin-macros: 2.8.0
       require-from-string: 2.0.2
     dev: false
@@ -9943,7 +9947,7 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       aria-query: 4.2.2
       array-includes: 3.1.5
       ast-types-flow: 0.0.7
@@ -11105,7 +11109,7 @@ packages:
     engines: {node: '>=12.13.0'}
     deprecated: 'gatsby-image is now gatsby-plugin-image: https://npm.im/gatsby-plugin-image. This package will no longer receive updates.'
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       object-fit-images: 3.2.4
       prop-types: 15.8.1
     dev: false
@@ -11170,7 +11174,7 @@ packages:
     peerDependencies:
       gatsby: ^4.0.0-next
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       gatsby: 4.24.5_oagctitnqx3g7idiuq5vrj5arm
     dev: false
 
@@ -11179,7 +11183,7 @@ packages:
     peerDependencies:
       gatsby: '>2.0.0-alpha'
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       gatsby: 4.24.5_oagctitnqx3g7idiuq5vrj5arm
       regex-escape: 3.4.10
     dev: true
@@ -11192,7 +11196,7 @@ packages:
       '@emotion/react': ^11.0.0
       gatsby: ^4.0.0-next
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       '@emotion/babel-preset-css-prop': 11.10.0
     dev: false
 
@@ -11209,7 +11213,7 @@ packages:
       gatsby: ^4.0.0-next
       webpack: '*'
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       date-fns: 2.29.3
       fs-extra: 10.1.0
       gatsby: 4.24.5_oagctitnqx3g7idiuq5vrj5arm
@@ -11235,7 +11239,7 @@ packages:
       react: ^16.9.0 || ^17.0.0 || ^18.0.0 || ^0.0.0
       react-dom: ^16.9.0 || ^17.0.0 || ^18.0.0 || ^0.0.0
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       gatsby: 4.24.5_oagctitnqx3g7idiuq5vrj5arm
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -11254,7 +11258,7 @@ packages:
     dependencies:
       '@babel/code-frame': 7.16.7
       '@babel/parser': 7.17.12
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       '@babel/traverse': 7.17.12
       babel-jsx-utils: 1.1.0
       babel-plugin-remove-graphql-queries: 4.24.0
@@ -11279,7 +11283,7 @@ packages:
     peerDependencies:
       gatsby: ^4.0.0-next
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       gatsby-core-utils: 3.24.0
       gatsby-plugin-utils: 3.18.0
       semver: 7.3.7
@@ -11319,6 +11323,16 @@ packages:
       - graphql
       - supports-color
 
+  /gatsby-plugin-pnpm/1.2.10_gatsby@4.24.5:
+    resolution: {integrity: sha512-29xjIakNEUY42OBb3wI9Thmawr5EcUUOB3dB8nE51yr/TfKQFCREk+HAOATQHTNedG3VZhgU4wVjl2V3wgOXJA==}
+    peerDependencies:
+      gatsby: ~2.x.x || ~3.x.x || ~4.x.x
+    dependencies:
+      gatsby: 4.24.5_oagctitnqx3g7idiuq5vrj5arm
+      lodash.get: 4.4.2
+      lodash.uniq: 4.5.0
+    dev: false
+
   /gatsby-plugin-postcss/5.10.0_postcss@8.4.18:
     resolution: {integrity: sha512-s1zzysu1kKIqR+CfQeQsG0CCdj2S7tjc4BhCY2a3V4cl7ORJtMx1HGKDUzE9gV/EXRTmr9lhE9Gl+2v8fRouvA==}
     engines: {node: '>=14.15.0'}
@@ -11326,7 +11340,7 @@ packages:
       gatsby: ^4.0.0-next
       postcss: ^8.0.5
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       postcss: 8.4.18
       postcss-loader: 4.3.0_postcss@8.4.18
     transitivePeerDependencies:
@@ -11340,7 +11354,7 @@ packages:
       gatsby: ^4.0.0-next
       react-helmet: ^5.1.3 || ^6.0.0
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
     dev: false
 
   /gatsby-plugin-remove-serviceworker/1.0.0:
@@ -11352,7 +11366,7 @@ packages:
     peerDependencies:
       gatsby: ^4.0.0 || ^3.0.0 || ^2.0.0
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       generate-robotstxt: 8.0.3
     dev: false
 
@@ -11362,7 +11376,7 @@ packages:
     peerDependencies:
       gatsby: ^4.0.0-next
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       '@gatsbyjs/potrace': 2.3.0
       async: 3.2.4
       bluebird: 3.7.2
@@ -11390,7 +11404,7 @@ packages:
       react: ^16.9.0 || ^17.0.0 || ^18.0.0 || ^0.0.0
       react-dom: ^16.9.0 || ^17.0.0 || ^18.0.0 || ^0.0.0
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       common-tags: 1.8.2
       gatsby: 4.24.5_oagctitnqx3g7idiuq5vrj5arm
       minimatch: 3.1.2
@@ -11410,7 +11424,7 @@ packages:
       '@babel/plugin-proposal-numeric-separator': 7.18.6_@babel+core@7.17.10
       '@babel/plugin-proposal-optional-chaining': 7.18.9_@babel+core@7.17.10
       '@babel/preset-typescript': 7.18.6_@babel+core@7.17.10
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       babel-plugin-remove-graphql-queries: 4.24.0_@babel+core@7.17.10
     transitivePeerDependencies:
       - supports-color
@@ -11427,7 +11441,7 @@ packages:
       '@babel/plugin-proposal-numeric-separator': 7.18.6_@babel+core@7.17.10
       '@babel/plugin-proposal-optional-chaining': 7.18.9_@babel+core@7.17.10
       '@babel/preset-typescript': 7.18.6_@babel+core@7.17.10
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       babel-plugin-remove-graphql-queries: 4.24.0_3vg5hlo72boal3hqd3ew2kiate
       gatsby: 4.24.5_oagctitnqx3g7idiuq5vrj5arm
     transitivePeerDependencies:
@@ -11484,7 +11498,7 @@ packages:
       react: ^16.9.0 || ^17.0.0 || ^18.0.0 || ^0.0.0
       react-dom: ^16.9.0 || ^17.0.0 || ^18.0.0 || ^0.0.0
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       '@gatsbyjs/reach-router': 1.3.9_sfoxds7t5ydpegc3knd667wn6m
       prop-types: 15.8.1
       react: 17.0.2
@@ -11498,7 +11512,7 @@ packages:
       react: ^16.9.0 || ^17.0.0 || ^18.0.0 || ^0.0.0
       react-dom: ^16.9.0 || ^17.0.0 || ^18.0.0 || ^0.0.0
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       prop-types: 15.8.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -11529,7 +11543,7 @@ packages:
     peerDependencies:
       gatsby: ^4.0.0-next
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       chokidar: 3.5.3
       file-type: 16.5.4
       fs-extra: 10.1.0
@@ -11568,7 +11582,7 @@ packages:
       gatsby: ^4.0.0-next
       gatsby-plugin-sharp: ^4.0.0-next
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       '@gatsbyjs/potrace': 2.3.0
       bluebird: 3.7.2
       common-tags: 1.8.2
@@ -11606,7 +11620,7 @@ packages:
       '@babel/eslint-parser': 7.19.1_lo7hea4543mt7ov7dzggwgszyq
       '@babel/helper-plugin-utils': 7.17.12
       '@babel/parser': 7.17.12
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       '@babel/traverse': 7.17.12
       '@babel/types': 7.17.12
       '@builder.io/partytown': 0.5.4
@@ -16724,7 +16738,7 @@ packages:
       react: 15.x || 16.x || 17.x || 18.x
       react-dom: 15.x || 16.x || 17.x || 18.x
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       deep-freeze: 0.0.1
       deepmerge: 2.2.1
       equals: 1.0.5
@@ -16737,7 +16751,7 @@ packages:
       react: 15.x || 16.x || 17.x || 18.x
       react-dom: 15.x || 16.x || 17.x || 18.x
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       deep-freeze: 0.0.1
       deepmerge: 2.2.1
       equals: 1.0.5
@@ -16935,7 +16949,7 @@ packages:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       classnames: 2.3.2
       rc-trigger: 5.3.3
     dev: false
@@ -16946,7 +16960,7 @@ packages:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       classnames: 2.3.2
       rc-trigger: 5.3.3_sfoxds7t5ydpegc3knd667wn6m
       react: 17.0.2
@@ -17097,7 +17111,7 @@ packages:
     peerDependencies:
       react: '>=16.13.1'
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
     dev: true
 
   /react-error-overlay/6.0.11:
@@ -17220,7 +17234,7 @@ packages:
       react: ^16.3.0 || ^17.0.0
       react-dom: ^16.3.0 || ^17.0.0
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       invariant: 2.2.4
       prop-types: 15.8.1
     dev: false
@@ -17232,7 +17246,7 @@ packages:
       react: ^16.3.0 || ^17.0.0
       react-dom: ^16.3.0 || ^17.0.0
     dependencies:
-      '@babel/runtime': 7.17.9
+      '@babel/runtime': 7.19.4
       invariant: 2.2.4
       prop-types: 15.8.1
     dev: false
