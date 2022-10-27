@@ -16,52 +16,23 @@ it's better to lock into a working version while there's no stable release avail
 - Issue: https://github.com/johnsonandjohnson/Bodiless-JS/issues/1243
 
 
-NOTES:
-https://tailwindcss.com/docs/upgrade-guide
 
-TAILWIND Upgrade:
-* Upgrade packages  CHECK : tailwindcss & postcss
-* Migrating to the JIT engine -- no mode.
-* Configure content sources -- replace purge with content -- CHECK had to do in scripts as well.
-* Also because of this "If you weren’t already using the purge option in your project, it’s crucial that you configure your template paths now or your compiled CSS will be empty." 
+NOTES: for switching to PNPM
+* Fixed tailwind css import types
+* Switch to postcss-cli-simple as postcss-cli hangs
+* npm run start of any site hits out of memory error during building development packages.
+  * no known fix at this time.
 
-** every package that uses bl-classes other than bodiless-ui is being purged in edit.  NEED TO SOLVE
+Timings of PNPM
+pnpm run setup on a fresh clone
 
-All these packages use bl-classes:
-Bodiless-page
-Bodiless-components
-Bodiless-components-ui
-Bodiless-core
-Bodiless-core-ui
-bodiless-layouts
-Bodiless-layouts-ui
-Bodiless-richtext
-Bodiless-richtext-ui
-Bodiless-ui. ** primary bodiless tailwind and only one not being purged
-Gatsby-theme-bodiless
+| Step                                                      | Run 1         | Run 2 | Run 3 | Run 4 |
+|-----------------------------------------------------------|---------------|-------|-------|-------|
+| install (npm run bootstrap)                               | 49 secs       |  3 min 9 sec|       |       |
+| Build Packages (npm run build:packages)                   | 7 min 4 secs  |  5 min 50 sec |       |       |
+| Build test site only: cd sites/test-site && npm run build | x min x secs  |  8 min 53 sec     |       |       |
 
-* Remove dark mode configuration -- no usage of darkMode
-* Remove variant configuration -- CHECK had to remove in scripts as well
-* Replace @variants with @layer -- no usage of @variants
-* Automatic transforms and filters -- left usage as they said it was harmless..
-* Color palette changes -- 
-** replaced -green- with -emerald-
-** replaced -yellow- with -amber-   -- no usage -- site & bodiless define their own yellow color
-** repleaced -purple- with -violet-
-** left -gray- as -gray....
-* Class name changes -- 
-** overflow-clip with text-clip
-** overflow-ellipsis -- no usage
-** flex-grow-* -- no usage
-** flex-shrink-* -- no usage
-** outline-black -- one usage replaced with "focus:outline-black focus:outline-2 focus:outline-dotted focus:outline-offset-2"
-** outline-white -- no usage
-** decoration-clone -- no usage
-** decoration-slice -- no usage
-* Separator cannot be a dash - no usage
-* Prefix cannot be a function -- no usage
-* File modifier order reversed -- no usage
-* Fill and stroke use color palette -- no usage
-* Negative values removed -- ??
-* Base layer must be present -- check at site level
-* Screens layer has been renamed -- no usage
+Run 1 build link: hhttps://cloud.nx.app/orgs/635312c86ecea75875e2d826/workspaces/635312c86ecea75875e2d827/runs?withoutBranch=true&status=&branch=
+
+Build test site only: cd sites/test-site && npm run build: 4 min 44 secs
+ ** note this still uses npm-run-all in build command so not sure if we are leveraging pnpm but most of time is gatsby build so don't think it matters that much

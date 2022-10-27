@@ -95,7 +95,7 @@
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "scripts": {
-    "build": "npm-run-all build:env-vars build:lib build:scripts build:search",
+    "build": "npm-run-all timestamp build:env-vars build:lib build:scripts build:search timestamp",
     "build:docs": "bl-docs-build",
     "build:env-vars": "bodiless generate-env-vars",
     "build:lib": "bl-clear-logs && gatsby build && bl-validate-logs",
@@ -111,7 +111,8 @@
     "docs": "run-s build:docs serve:docs",
     "serve": "gatsby serve",
     "serve:docs": "docsify serve ./doc",
-    "start": "run-p -r dev-frontend dev-backend"
+    "start": "run-p -r dev-frontend dev-backend",
+    "timestamp": "echo timestamp=$(date \"+%Y/%m/%d %H:%M:%S\")"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.0",

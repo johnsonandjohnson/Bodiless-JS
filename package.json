@@ -7,7 +7,7 @@
   ],
   "license": "Apache-2.0",
   "scripts": {
-    "bootstrap": "npm run clean:symlinks && npx lerna bootstrap --hoist --strict",
+    "bootstrap": "npm run clean:symlinks && npm run timestamp && npx lerna bootstrap --hoist --strict && npm run timestamp",
     "bootstrap:gatsby-cloud": "npm i && npx lerna bootstrap",
     "build": "cross-env NODE_ENV=production nx run-many --target build --exclude=@bodiless/gatsby-starter-bodiless",
     "build:only": "cross-env NODE_ENV=production lerna run build --stream --scope",
@@ -42,7 +42,7 @@
     "pw:run": "npx playwright test playwright/tests/smoke/* --project=chromium --workers 1",
     "psh:setup-starter": "node ./scripts/psh-setup-starter",
     "serve": "nx run --project ${APP_SITE_DIR_NAME:-test-site} serve",
-    "setup": "npm run bootstrap && npm run build:packages",
+    "setup": "npm run bootstrap && npm run build:packages && npm run timestamp ",
     "setup:gatsby-cloud": "npm run bootstrap:gatsby-cloud && npm run build:packages",
     "start": "nx run --project ${APP_SITE_DIR_NAME:-test-site} start",
     "sync:fix": "syncpack fix-mismatches",
@@ -51,7 +51,8 @@
     "test:monorepo-pw": "WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-monorepo http://localhost:8005 pw:run",
     "test:ci": "WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-test http://localhost:8005 cy:run",
     "test:monorepo": "WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-monorepo http://localhost:8005 cy:run",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "timestamp": "echo timestamp=$(date \"+%Y/%m/%d %H:%M:%S\")"
   },
   "husky": {
     "hooks": {
