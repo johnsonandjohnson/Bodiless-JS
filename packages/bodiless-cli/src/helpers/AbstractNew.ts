@@ -62,7 +62,7 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
       },
     }),
     validator: (arg: string) => {
-      if (!arg) return 'Desitination is required';
+      if (!arg) return 'Destination is required';
       if (fs.existsSync(arg)) return 'Destination already exists';
       return true;
     },
@@ -95,7 +95,7 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
 
   'sites-dir': {
     ...commandFlags.string({
-      description: 'Directory in source monorepo containg sites',
+      description: 'Directory in source monorepo containing sites',
       parse: d => d.trim(),
       default: 'sites',
     }),
@@ -105,7 +105,7 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
   'packages-dir': {
     ...commandFlags.string({
       parse: d => d.trim(),
-      description: 'Directory in source monorepo containg packages',
+      description: 'Directory in source monorepo containing packages',
       default: 'packages',
     }),
     prompt: false,

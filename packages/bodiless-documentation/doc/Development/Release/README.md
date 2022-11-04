@@ -42,9 +42,9 @@ The [distribution tag](https://docs.npmjs.com/adding-dist-tags-to-packages ':tar
 
 - `canary-<PR_NUMBER>`
 
-#### Beta Releases (Pre-Release)
+#### RC Releases (Pre-Release)
 
-Any commit to the main branch will produce a _beta release_. These releases are tagged in the
+Any commit to the main branch will produce a _rc release_. These releases are tagged in the
 repository, and will receive the `next` [distribution
 tag](https://docs.npmjs.com/adding-dist-tags-to-packages ':target=_blank') (dist-tag) in npm.
 
@@ -94,6 +94,19 @@ The version numbers are calculated using [Lerna](https://lerna.js.org/ ':target=
   </details>
 
 </div>
+
+Additionally there is an option to run a RC Release manually.
+
+![BodilessJS Release Workflow](./assets/PrereleaseWorkflowManual.png)
+
+To execute a RC Release manually perform the following steps from the [Actions](https://github.com/johnsonandjohnson/Bodiless-JS/actions ':target=_blank')
+tab of the BodilessJS GitHub page::
+
+01. Under the _Workflows_ list, select the **Prerelease** workflow.
+01. Click **Run workflow**.
+01. From the _Use workflow from_ dropdown, select the branch to perform conventional prerelease.
+    - By default, it's the repository's main (default) branch.
+01. Click **Run workflow**.
 
 ### Full Releases
 

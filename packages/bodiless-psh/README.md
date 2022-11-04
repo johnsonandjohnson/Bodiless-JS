@@ -1,336 +1,115 @@
-# Bodiless integration with platform.sh
+# Using Platform.sh with BodilessJS
 
-This package provides standard configuration files and helper scripts which
-make it easy for a bodiless site to be deployed to platform.sh.
+Bodiless starters ship with standard configuration files and helper scripts
+which make it easy for a bodiless site to be deployed to platform.sh.
+
+If you are only looking to host the *static* site (production and static preview
+environments), then [other options](../WebPlatforms/) may be cost effective. We
+recommend using platform.sh when you want to host your *edit* environments in
+the cloud, so that content editors can update the site without having to run the
+Bodiless application locally. While you *can* host your production site on
+platform.sh as well, the most economical option for many sites will be to host
+the edit environments on platform.sh, while keeping the production site on a
+different host.
+
+Bear in mind that you may not need to host edit environments in the cloud at
+all. You can derive many of the benefits of using BodilessJS by running the edit
+application locally.
 
 ## Setting up your project
 
 ### Pre-requisites
 
-- Admin access to a [platform.sh](https://platform.sh/) project.
-- A service user with *admin access* to a repository in a Bitbucket Server instance.
-- The [platform.sh cli](https://docs.platform.sh/gettingstarted/cli.html)
+- A Platform.sh account.  Sign up at https://auth.api.platform.sh/register?trial_type=general.
+  > Note: Bodiless deployment on Platform.sh requires at least 15GB of storage available, so
+  > you will have to upgrade to a paid "development" plan and upgrade your storage as described
+  > below.
+- A GitHub Account
+  > Note: In the following instructions, GitHub is used as an example source
+  > code provider. If you're using a different supported provider (e.g., GitLab
+  > or Bitbucket), adapt the instructions as needed.
+- A [Platform.sh API token](https://docs.platform.sh/development/cli/api-tokens.html)
+- A [GitHub personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
-### Step 1. Gather required information
+### Create a Platform.sh organization and add a payment method.
 
-To continue, you will need the following:
+01. Go to [https://console.platform.sh](https://console.platform.sh ':target=_blank').
 
-#### The platform.sh project key
-- Log in via the platform.sh cli.  From your local machine execute:
-  ```
-  platform login
-  ```
-  You will be directed to log in via a web browser
-- Execute
-  ```
-  platform project:list
-  ```
-  You should see a list of all projects you have access to, something like:
-  ```
-    Your projects are:
-  +---------------+-------------------------+-----------------------------------------------------+
-  | ID            | Title                   | URL                                                 |
-  +---------------+-------------------------+-----------------------------------------------------+
-  | abcdefghijklm | project_a               | https://console.platform.sh/webalerts/abcdefghijklm |
-  | lmnopqrstuvwx | project_b               | https://console.platform.sh/webalerts/lmnopqrstuvwx |
-  +---------------+-------------------------+-----------------------------------------------------+`
-  ```
-- Take note of the project ID for your project. This is the value you will use below.
+01. In order to add payment method create an organization first.
+    01. On the top right corner click on the user name.
+    01. On the drop-down click **Create Organization**  
+        ![Create Organization](./assets/platformsh/CreateOrganization.png)
+    01. On the "Create Organization" page fill in the organization details.
+        ![Organization Details](./assets/platformsh/OrganizationDetails.png)
+    01. Click **Create** button.
 
-### Step 2. Initialize your project configuration files
+01. Once the organization is created proceed with adding billing details.
+    01. On the top right corner click on the user name. For now there should be your organization. Click **Billing**.  
+        ![Billing](./assets/platformsh/Billing.png)
 
-Platform.sh requires several configuration files to be in place
-in your repository. This package contains default versions of these
-files for a BodilessJS.  To install or update them:
+        - If no organization appeared in the drop-down, go to the "All Projects" page by clicking the Platform.sh icon top left corner, click on the **All projects** drop-down and select the organization created previously. After that follow the instructions provided in point above.
 
-1. Add this package as a dependency of your project:
-  ```
-  npm i --save-dev @bodiless/psh
-  ```
-2. Add the following to your `package.json` scripts:
-  ```
-  "init-psh": "bodiless-psh-init"
-  ```
-3. Install or update the configuration files:
-  ```
-  npm run init-psh
-  ```
-> When `@bodiless/psh` is installing its' files it will try to merge `static` and `edit` `*.platform.app.yaml` files based on the whitelisted keys from `packages/bodiless-psh/resources/.platform/platform.whitelist.yaml`. Only the keys that are specified in `platform.whitelist.yaml` will be merged. Merging will be performed by using the recursive algorithm to preserve any keys that are not in default `.platform.app.yaml`. Non-whitelisted keys will be ignored, and a warning message will be printed to the console.
+    01. Fill in the "Credit Card" and "Billing Details".
 
-4. Commit the added configuration files to your repository.  These include
-   ```
-   static.platform.sh
-   .platform.app.yaml
-   .platform/*
-   edit/*
-   ```
+### Create a Project
 
-### Step 3. Create platform.sh environment variables.
+01. Switch back to the "All Projects" page and select the organization.
 
-First, configure your local install to connect to your platform.sh project. From
-within your project root, execute
-```
-platform project:set-remote {project id}
-```
-where {project id} is the platform.sh project id you acquired above.
+01. On the top right corner click **Create Project** button.
 
-All variables below should be set at the project level using the platform.sh command
-line, as described in [the platform.sh documentation](https://docs.platform.sh/development/variables.html#project-variables), and all should be visible at both build time and run time.
+01. On the "New Project" pop-up click on the **Create from scratch** option.
+!["New Project" pop-up](./assets/platformsh/CreateNewProject.png)
 
-Add the following variables:
+01. On the "Details" tab provide the project details.
 
-- env:APP_GIT_REMOTE_URL -- The URL of your upstream Git repository
-- env:APP_GIT_USER -- The user to access your upstream Git repository.
-- env:APP_GIT_USER_EMAIL -- THe user email for your upstream Git repository.
-- env:APP_GIT_PW -- The user password for your upstream Git repository.
+01. Click on the **Create Project** button.
+    - In case of "Plan & Pricing" pop-up click **Continue**.
 
+### Add necessary storage.
 
-> Be sure to specify `--sensitive true` for all credentials.
+01. Go to the project page and click **Upgrade button** near the development Plan.
+![Upgrade Plan](./assets/platformsh/CreateNewProject.png)
 
-Example:
-```
-$ platform variable:create
-* Level (--level)
-The level at which to set the variable
-  [project    ] Project-wide
-  [environment] Environment-specific
-> project
+01. On the "Upgrade plan" page scroll to "Storage" option and select 15GB from the drop-down. Click **Save** on the bottom right corner and **Back To Project** on the top left corner.
 
-* Name (--name)
-The variable name
-> APP_GIT_USER_EMAIL
+### Run the provisioning Script.
 
-* Value (--value)
-The variable's value
-> email@your.service.account
+01. Switch to the project root on the local machine, e.g. `~/bodiless-minimal`
+01. Using command line run
+    ```
+    npm run setup
+    npm run psh:setup-starter
+    ```
+01. Make sure that all of the requirements listed are met.  
+![Prerequisites](./assets/platformsh/SetupPshCliStep1.png).  You will also need your
+GitHub username and password.
+01. Provide required input parameters. The script will return 'Success' response to the console, if all the parameters were provided correctly and integration with Platform.sh and project variables are created.
+01. After integration is created the deploy of the main branch will be triggered automatically.
 
-JSON (--json)
-Is the value JSON-formatted? [y|N] N
+### Troubleshooting an Customizing Setup
 
-Sensitive (--sensitive)
-Is the value sensitive? [y|N] N
+#### 409 Error from Platform.sh API
 
-Prefix (--prefix)
-The variable name's prefix
-Default: none
-  [none] No prefix: The variable will be part of $PLATFORM_VARIABLES.
-  [env:] env: The variable will be exposed directly, e.g. as $APP_GIT_USER_EMAIL.
-> env:
+This usually means that a previous automated or manual provisioning was
+attempted, leaving some variable definitions or integrations associated with the
+project. To resolve, visit your project setting on platform.sh and remove all
+variables and and integrations, and then try again.
 
-Visible at build time (--visible-build)
-Should the variable be available at build time? [Y|n] Y
+#### Verify the GitHub integration
 
-Visible at runtime (--visible-runtime)
-Should the variable be available at runtime? [Y|n] Y
-
-Creating variable env:APP_GIT_USER_EMAIL on the project...
-```
-
-You can verify that the variable was created properly by executing, eg:
-  ```
-  platform variable:get env:APP_GIT_USER_EMAIL
-  ```
-  You should see something like:
-  ```
-  $ platform variable:get env:APP_NPM_AUTH
-  +-----------------+---------------------------+
-  | Property        | Value                     |
-  +-----------------+---------------------------+
-  | id              | env:APP_GIT_USER_EMAL     |
-  | created_at      | 2019-08-09T06:48:52-04:00 |
-  | updated_at      | 2019-08-09T06:48:52-04:00 |
-  | name            | env:APP_GIT_USER_EMAIL    |
-  | attributes      | {  }                      |
-  | is_json         | false                     |
-  | is_sensitive    | false                     |
-  | visible_build   | true                      |
-  | visible_runtime | true                      |
-  | level           | project                   |
-  +-----------------+---------------------------+
-  ```
-
-#### Optional: Configure an NPM Private Registry
-
-If you wish to install packages from a private registry, you may do so. The
-packages to be installed must be namespaced. Set the following 3 environment
-variables on p.sh. All variables should be visible at both build and run time:
-- `env:APP_NPM_REGISTRY`: the full path to your registry, eg
-  `//my-artifactory.com/api/npm/my-registry/`.
-- `env:APP_NPM_AUTH`: Ypur NPM authentication token. This should be marked as sensitive.
-  To obtain your token:
-  1. Login to your registry:
-     ```
-     npm login --registry=https://url/of/your/private/registry
-     ```
-     Follow the prompts with the username/password/email of the account you wish
-     to use for p.sh automation.
-  2. Examine your `.npmrc` file (usually located in your home directory). You
-     should see something like
-     ```
-     //url/of/your/privateregistry/:_authToken={token}
-     ```
-  3. Copy the token value to the `env:APP_NPM_AUTH` variable in your p.sh project.
-
-- `env:APP_NPM_NAMESPACE`: The namespace of the packages in your private
-  regsitry, eg `@mynamespace`.
-
-### Step 4. Configure the platform.sh Git Service integration.
-
-Platform.sh provides out-of-the-box integrations with many popular Git service providers.
-We have tested with Bitbucket Server and GitHub.
-
-Note that you must have admin access to the repository in order to configure the integration.
-
-#### GitHub
-
-From your project root, execute `platform integration:add` and follow
-the prompts, as:
-
-```
-$ platform integration:add
-* Integration type (--type)
-Enter a number to choose:
-  [0] bitbucket
-  [1] bitbucket_server
-  [2] github
-  [3] gitlab
-  [4] hipchat
-  [5] webhook
-  [6] health.email
-  [7] health.pagerduty
-  [8] health.slack
-  [9] health.webhook
-> 2
-
-* Token (--token)
-An access token for the integration
-> {your GitHub personal access token}
-
-* Repository (--repository)
-The repository (e.g. 'foo/bar')
-> johnsonandjohnson/Bodiless-JS
-
-Build pull requests (--build-pull-requests)
-Build every pull request as an environment? [Y|n] Y
-
-Build pull requests post-merge (--build-pull-requests-post-merge)
-Build pull requests based on their post-merge state? [y|N] y
-
-Clone data for pull requests (--pull-requests-clone-parent-data)
-Clone the parent environment's data for pull requests? [Y|n] n
-
-Fetch branches (--fetch-branches)
-Fetch all branches from the remote (as inactive environments)? [Y|n] y
-
-Prune branches (--prune-branches)
-Delete branches that do not exist on the remote? [Y|n] y
-
-Warning: adding a 'github' integration will automatically synchronize code from the external Git repository.
-This means it can overwrite all the code in your project.
-
-Are you sure you want to continue? [y/N] y
-Checking webhook configuration on the repository: johnsonandjohnson/Bodiless-JS
-  Creating new webhook
-  Webhook created successfully
-Created integration xxxxxxxx (type: github)
-+---------------------------+--------------------------------------------------------------------+
-| Property                  | Value                                                              |
-+---------------------------+--------------------------------------------------------------------+
-| id                        | xxxxxxx                                                            |
-| type                      | github                                                             |
-| token                     | ******                                                             |
-| base_url                  |                                                                    |
-| repository                | foo/bar                                                            |
-| fetch_branches            | true                                                               |
-| prune_branches            | true                                                               |
-| build_pull_requests       | true                                                               |
-| build_pull_requests_post_ | true                                                               |
-| merge                     |                                                                    |
-| pull_requests_clone_paren | false                                                              |
-| t_data                    |                                                                    |
-| hook_url                  | https://us-2.platform.sh/api/projects/jvaff4bu65vgm/integrations/4 |
-|                           | 4zqv2kqqfcgq/hook                                                  |
-+---------------------------+--------------------------------------------------------------------+
-```
-
-#### Bitbucket Server
-
-From your project root, execute `platform integration:add` and follow
-the prompts, as:
-
-```bash
-$ platform integration:add
-* Integration type (--type)
-Enter a number to choose:
-  [0] bitbucket
-  [1] bitbucket_server
-  [2] github
-  [3] gitlab
-  [4] hipchat
-  [5] webhook
-  [6] health.email
-  [7] health.pagerduty
-  [8] health.slack
-> 1
-
-* Username (--username)
-The Bitbucket Server username
-> {bitbukcet service username}
-
-* Token (--token)
-An access token for the integration
-> {bitbucket service user password}
-
-* Repository (--repository)
-The repository (e.g. 'foo/bar')
-> {project/repository, eg: foo/bar}
-
-Build pull requests (--build-pull-requests)
-Build every pull request as an environment? [Y|n] N
-
-Clone data for pull requests (--pull-requests-clone-parent-data)
-Clone the parent environments data for pull requests? [Y|n] Y
-
-Fetch branches (--fetch-branches)
-Fetch all branches from the remote (as inactive environments)? [Y|n] Y
-
-Prune branches (--prune-branches)
-Delete branches that do not exist on the remote? [Y|n] Y
-
-Warning: adding a 'bitbucket_server' integration will automatically synchronize code from the external Git repository.
-This means it can overwrite all the code in your project.
-
-Are you sure you want to continue? [y/N] y
-```
-
-##### Verify the integration
-
-##### GitHub
-- Visit the "webhooks" section of your bitbucket repository settings, eg
+- Visit the "webhooks" section of your GitHub repository settings, eg
   ```
   https://github.com/project/repo/settings/hooks
   ```
   and verify that a webhook to platform.sh has been added. Note you will need admin access
   to the project in order to view the webhooks.
 - Activate a branch in your project (as described below) and validate that an environment
-  is created and deployed to platform.sh. *Note you must first push the branch to bitbucket*.
+  is created and deployed to platform.sh. *Note you must first push the branch to GitHub*.
 - Issue a PR to your repository and verify that the PR branch is deployed.
 
-##### Bitbucket Server
-- Visit the "webhooks" section of your bitbucket repository settings, eg
-  ```
-  https://domain/plugins/servlet/webhooks/projects/{project-key}/repos/{repo-name}
-  ```
-  and verify that a webhook to platform.sh has been added. Note you will need admin access
-  to the project in order to view the webhooks.
-- Activate a branch in your project (as described below) and validate that an environment
-  is created and deployed to platform.sh. *Note you must first push the branch to bitbucket*.
-- Issue a PR to your repository and verify that the PR branch is deployed (note that only
-  the static environment will be build for PR's on Bitbucket).
+#### Customizing Hook Implementations
 
-### Customizing Hook Implementations
-
-This package includes default implementations of platform.sh
+Bodiless starters includes default implementations of platform.sh
 [build and deploy hooks](https://docs.platform.sh/configuration/app/build.html#hooks) which
 should work for most Bodiless sites.  However, should your site have special needs, you can
 customize by creating a `platform.custom.sh` or `static.platform.custom.sh` script and placing
@@ -353,18 +132,44 @@ prepare_deploy () {
 }
 ```
 
+#### Configuring an NPM Private Registry
+
+If you wish to install packages from a private registry, you may do so. The
+packages to be installed must be namespaced. Set the following 3 environment
+variables on p.sh. All variables should be visible at both build and run time:
+- `env:APP_NPM_REGISTRY`: the full path to your registry, eg
+  `//my-artifactory.com/api/npm/my-registry/`.
+- `env:APP_NPM_AUTH`: Your NPM authentication token. This should be marked as sensitive.
+  To obtain your token:
+  1. Login to your registry:
+     ```
+     npm login --registry=https://url/of/your/private/registry
+     ```
+     Follow the prompts with the username/password/email of the account you wish
+     to use for p.sh automation.
+  2. Examine your `.npmrc` file (usually located in your home directory). You
+     should see something like
+     ```
+     //url/of/your/privateregistry/:_authToken={token}
+     ```
+  3. Copy the token value to the `env:APP_NPM_AUTH` variable in your p.sh project.
+
+- `env:APP_NPM_NAMESPACE`: The namespace of the packages in your private
+  registry, eg `@mynamespace`.
+
 ## Building and Deploying
 
 ### Continuous Integration
 
-If you configured platform.sh to build pull requests, then every PR to your repository will be
-deployed to its own environment. Be aware of the following:
+The default provisioning script will configure platform.sh to build pull
+requests, so that every PR to your repository will be deployed to its own
+environment. Be aware of the following:
 - It is easy to reach your quota of development environments with this enabled, so use cautiously.
-- Edit environments for pull requests are currently only supported on GitHub -- and pushing changes
-  from the edit environment is not supported even there.
-- On Bitbucket Server, pull requests from *forks* will not automatically rebuild when new commits
-  are added.  This limitation does not apply to GitHub.
-- On both GitHub and Bitbucket, changes pushed to code outside the `/edit` directory will
+  One way to limit environment use is to create *draft* pull requests, as these are not deployed.
+- Edit environments for pull requests are currently only supported on GitHub repos -- and pushing 
+  changes from the edit environment is not supported on cross repository pull request(e.g. PR's
+  source branch from fork).
+- Changes pushed to code outside the `/edit` directory will
   not automatically be deployed to the edit environment.  You must manually update the
   edit environment as described under [Pushing Changes](#pushing-changes) below.
 - Pull request environments will be automatically deleted when the PR is merged or declined.
@@ -375,8 +180,6 @@ deployed to its own environment. Be aware of the following:
 - A link to the p.sh environment will be posted to the PR:
   - **GitHub**: Expand the "Show All Checks" link next to the section on the "Conversations"
     tab, and click the "details" link next to the platform.sh build.
-  - **Bitbucket Server**: Click the build status icon next to the PR title, and then click the
-    "platform.sh" link.
 
 ### Manual Deployments
 
@@ -397,7 +200,7 @@ deployed to its own environment. Be aware of the following:
 #### Initial deployment of a new branch
 
 - Ensure you are on the correct branch locally.
-- Push the branch to bitbucket.
+- Push the branch to GitHub.
   ```
   git push origin <branch>
   ```
@@ -406,7 +209,7 @@ deployed to its own environment. Be aware of the following:
     platform env:activate
     ```
   Note - you may have to wait a few moments after pushing the branch to
-  bitbucket before activating the environment, in order to allow the branch to
+  GitHub before activating the environment, in order to allow the branch to
   sync to p.sh. If, when you try to activate, you are asked for an "Environment
   ID", wait a bit and try again.
 - The public URL of the new environment will be printed to the console.
@@ -431,7 +234,7 @@ to learn more.
 
 #### Pushing changes
 
-Once a new branch is created, changes pushed to Bitbucket will be automatically
+Once a new branch is created, changes pushed to GitHub will be automatically
 deployed to the static site on platform.sh. You can run `platform activity:log`
 to see the current build status, or visit [console.platform.sh](https://console.platform.sh),
 locate your build, and click "View Logs".
@@ -447,7 +250,7 @@ trigger an update of the edit environment by executing:
 #### Deleting an environment
 
 The platform.sh environment will be deleted when you remove the corresponding
-branch from bitbucket. *Please delete obsolete branches*.
+branch from GitHub. *Please delete obsolete branches*.
 
 You can also remove an environment without deleting your branch by checking
 out the branch locally and executing `platform env:delete -y`.
@@ -458,7 +261,7 @@ When you merge a feature branch to main, the updated main branch will be automat
 to the static environment on platform.sh.  To deploy changes to the edit environment, you must follow the same process as in [Pushing Changes](#pushing-changes) above.
 
 
-## Handling Redirect with Routes
+## Handling Redirects with Routes
 
 ### Overview
 In HTTP, URL redirecting is a technique to forward one URL to a different URL. It is commonly used for handling cases like URL shortening, preventing broken links when pages removed, pointing multiple domain addresses to a single URL address, etc. It is also critical to preserve page SEO value when there are URL changes.
@@ -659,13 +462,23 @@ If there are issues or you need to troubleshoot, here are some good resources:
 
     ``` curl -X PURGE www.example.com/index.html ```
 
-## How to load environment specific html snippets
+## Environment specific HTML snippets
 
-When you want to inject different html snippets depending on your environment type, you can use Server Side Includes (SSI) mechanism.
+> Note: this section applies only to hosting your static site on platform.sh,
+> and is not required if you are using platform.sh only for edit environments.
+
+Sometimes your site will need to know at build time whether it is in a
+production or development environment -- for example to set different endpoints
+for third party integrations. Platform.sh does not make the
+current branch available or allow you to expose environment level environment
+variables to your application during the build stage. To work around this
+limitation, Bodiless provides a mechanism to inject different html snippets
+depending on your environment type via Server Side Includes (SSI) mechanism.
+
 ### Activate SSI
 
 * Activate SSI for your route(s) in your routes.yaml file. See: https://docs.platform.sh/configuration/routes/ssi.html
-* Use SSI_ENV enviroment variable to specify type of your environment. Default value is 'dev'.
+* Use SSI_ENV environment variable to specify type of your environment. Default value is 'dev'.
 * Ensure ssi configs are loaded to psh container and set SSI_CONF_PATH environment variable to path to json file containing SSI configs.
 * Ensure your .platform.app.yaml contains invocation of generate-ssi-files.js node scripts. The script should be invoked during build and deploy phases. PSH phase (build or deploy) should be passed as an argument to the script.
 * Ensure the files of you app, that will be served by psh, contain SSI directives.
@@ -703,16 +516,13 @@ SSI configuration file should be in json format.
 ```
 ### How it works
 
-* during build phase, generate-ssi-files reads SSI configs and for each key it creates symlink from PLATFORM_DOCUMENT_ROOT/filename.html into APP_VOLUME/filename.html. Filename is generated based on key. There is an opportunity to improve this logic. We can read and parse pragma field, exract filename from it. But it makes the things more complicated and in addition, pragma may not have files at all.
+* during build phase, generate-ssi-files reads SSI configs and for each key it creates symlink from PLATFORM_DOCUMENT_ROOT/filename.html into APP_VOLUME/filename.html. Filename is generated based on key. There is an opportunity to improve this logic. We can read and parse pragma field, extract filename from it. But it makes the things more complicated and in addition, pragma may not have files at all.
 * during deploy phase, generate-ssi-files reads SSI configs and SSI_ENV and for each key it copies the file defined in conf.{key}.{env}.{file} to APP_VOLUME/filename.html that was created during build phase.
 
 ## How to replace your site prod url with psh environment url in a public file
 
 If you want to make urls in a particular public file match psh environment url, you can leverage psh-url-replacer node script. For instance, your site sitemap.xml, which is generated during build time, contains production urls and you want to replace the production url with psh environment url, to which your website is deployed to.
 
-### Why
-
-Platform.sh does not allow to expose environment level environment variables to the application build stage.
 
 ### How it works
 
@@ -759,19 +569,20 @@ hooks:
         node /path/to/psh-url-replacer.js deploy
 ```
 
-## Known limitations
+## Known limitations and Troubleshooting
 
 ### General
-- PR Branches and Feature branches created in bitbucket will always inherit from
+- PR Branches and Feature branches created in GitHub will always inherit from
   main. This means that you must manually configure basic authentication for
   these branches if you want them protected from the public internet.
 - There is a 64-character limit on hostnames for TLS, and platform.sh uses 43 of
   them. Since hostnames are created based on branch names, and since the edit
   environment uses an additional 5 ("edit."), your branch names should be
   limited to a maximum of 16 characters to avoid certificate warnings.
-- When you create a bitbucket integration, a webhook is added to your bitbucket
+- When you run the provisioning script, a webhook is added to your GitHub
   repository. However, deleting the integration does not remove the webhook, you
   must do this manually.
+
 ### Environment memory
 On development environments, the `edit` site environment can use a large amount
 of memory when running, which might cause out-of-memory issues when building 
@@ -792,7 +603,6 @@ To disable a site's cache, add `cache: false` to its webpack configuration. This
 is done in the `gatsby-node.js` file on the site root. Read [Gatsby's documentation](https://www.gatsbyjs.com/docs/how-to/custom-configuration/add-custom-webpack-config/#examples)
 for an example, and refer to [Webpacks's documentation](https://webpack.js.org/configuration/cache/)
 if you want to understand how its caching system works.
-## Troubleshooting
 
 ### Viewing Logs
 
@@ -842,9 +652,3 @@ are only available from the command line).
   ```
 - There are many other useful platform cli subcommands.  Run `platform list`
   to see them all.
-
-## Deploying bodiless packages from a private registry
-
-By default the public regisry will be used to download bodiless packages: //registry.npmjs.org/
-
-In order to switch to a private registry follow Step 3 (Create platform.sh environment variables.) of this doc.

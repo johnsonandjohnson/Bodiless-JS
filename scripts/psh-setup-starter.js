@@ -111,7 +111,7 @@ const pshCreateGithubIntegration = async (bearerAccessToken) => {
     repository: `${userInput.GITHUB_OWNER}/${userInput.GITHUB_REPO}`,
     fetch_branches: true,
     prune_branches: true,
-    build_pull_requests: false,
+    build_pull_requests: true,
     build_draft_pull_requests: false,
     build_pull_requests_post_merge: false,
     pull_requests_clone_parent_data: false,

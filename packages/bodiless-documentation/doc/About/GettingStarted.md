@@ -96,75 +96,14 @@ npx @bodiless/cli new -i
 By default, you will not be prompted for this, and the "latest" revision (i.e., the last tagged
 version which isn't a pre-release) will be used.
 
-### Creating a New Minimal Gatsby Starter Site
+## Going Live
 
-Using the BodilessJS CLI `new` command, you're also able to create a new BodilessJS site from a
-standard [Gatsby starter](https://www.gatsbyjs.com/docs/creating-a-starter/ ':target=_blank'). This
-starter site can be hosted on [Gatsby
-Cloud](https://support.gatsbyjs.com/hc/en-us/articles/360058874874-What-is-Gatsby-Cloud-
-':target=_blank').
+A BodilessJS site is not too different from any other Gatsby site, and
+can easily be hosted on a variety of JAMstack-optimized web platforms.
+You can also host the edit application in the cloud so that content
+editors can make site updates without having to run it locally.
 
-01. Create a new BodilessJS Gatsby starter site:
-    ```shell-session
-    npx @bodiless/cli new --setup "npm run setup:gatsby-cloud"
-    ```
-    - Answer the prompts, as described above in [Creating a New Site](#creating-a-new-site).
-    <!-- Inlining HTML to add multi-line info block with code blocks. -->
-    <div class="warn">
-      <strong>Note:</strong> If you're using a <em>pre-release</em> version of Bodiless (i.e.,
-      <code>&lt;1.0.0</code>), instead of the command documented above, please use the following:
-
-      ```shell-session
-      npx @bodiless/cli@1.0.0-PRERELEASE.IDENTIFIER new -r REVISION \
-        --setup "npm run setup:gatsby-cloud"
-      ```
-
-      Where:
-
-      - `PRERELEASE.IDENTIFIER` is the package version of `@bodiless/cli` that you wish to use
-        (e.g., `beta.12`).
-        - Prior to the official `1.0` release of Bodiless, you _must_ use at least `1.0.0-beta.11`.
-        - You may also use `next` to use the latest pre-release version (i.e.,
-          `@bodiless/cli@next`).
-        - Using `@bodiless/cli` without a version specifier will fail.
-      - `REVISION` is the revision of the repository to check out when cloning.
-        - Use `next` to check out the latest pre-release version.
-        - Use `HEAD` to check out the latest commit on the `main` branch.
-
-      E.g., to use pre-release version `1.0.0-beta.12` of the CLI package while checking out the
-      latest commit on `main`:
-
-      ```shell-session
-      npx @bodiless/cli@1.0.0-beta.12 new -r HEAD \
-        --setup "npm run setup:gatsby-cloud"
-      ```
-
-    </div>
-01. Push the site to a git repository.  
-    For example:
-    ```shell-session
-    git remote add origin https://github.com/USER/REPO-NAME.git
-    git push -u origin main
-    ```
-01. If you don't have one already, [sign up for a free Gatsby Cloud
-    account](https://support.gatsbyjs.com/hc/en-us/articles/1500000666102-Signing-Up-for-a-New-Gatsby-Cloud-Account
-    ':target=_blank').
-01. Using your Gatsby account, [create a new Gatsby Cloud
-    project](https://support.gatsbyjs.com/hc/en-us/articles/360059253654-Create-a-Site-from-a-Repository
-    ':target=_blank') linked to your site repository.
-    - When providing the details for your site/repository, make sure to set the _base directory_ as
-      your site directory (e.g., `/sites/SITE-NAME`).
-    - When configuring the environment variables for your site, _remove_ the suggested variables for
-      both your **Build** and **Preview** variables.
-
-You can view your site on Gatsby Cloud using the private build URL or the public default domain
-(both described in [Create a Site from a Repository | Gatsby
-Cloud](https://support.gatsbyjs.com/hc/en-us/articles/360059253654-Create-a-Site-from-a-Repository
-':target=_blank')).
-
-Or you can view your site locally, as an edit environment or a static site build (i.e., using `npm
-run start` or `npm run build && npm run serve`), as described above in [Creating a New
-Site](#creating-a-new-site).
+We provide step-by-step instructions for hosting your site in the [Web Platforms](../Development/WebPlatforms/) section of the documentation.  
 
 ## Troubleshooting Setup
 

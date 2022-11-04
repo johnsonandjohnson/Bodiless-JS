@@ -12,25 +12,25 @@ instructions as needed.
     - Or use a different account (e.g., GitLab or Bitbucket), if applicable.
 
 01. On the "Get started" page, fill in your details and click the **Set up and continue** button.  
-    !["Get started" page](./assets/GetStarted.png)
+    !["Get started" page](./assets/netlify/GetStarted.png)
 
 01. On the "Deploy your first project" page,  click the **Import from Git** button.  
-    !["Deploy your first project" page](./assets/DeployYourFirstProject.png)
+    !["Deploy your first project" page](./assets/netlify/DeployYourFirstProject.png)
 
 01. On the "Import an existing project from a Git repository" page, choose a source code provider.  
     (We'll continue to use GitHub as our instructional example.)  
-    !["Import an existing project from a Git repository" page](./assets/ImportProjectFromRepo.png)
+    !["Import an existing project from a Git repository" page](./assets/netlify/ImportProjectFromRepo.png)
 
 01. Assuming that this is your first time performing this process, Netlify will show your user
     account as having no repos; scroll down the page, and click the link to **Configure the Netlify
     app on GitHub**.  
-    ![Can't see your repo here?](./assets/CantSeeYourRepo.png)
+    ![Can't see your repo here?](./assets/netlify/CantSeeYourRepo.png)
 
 01. In the "Install Netlify" pop-up window:
     01. Select the user or organization where your project is located, and click **Configure**.
         - Or just select the user/project, if the **Configure** option is absent.
     01. Provide your git password on the next page.  
-    ![Install Netlify](./assets/InstallNetlify.png)
+    ![Install Netlify](./assets/netlify/InstallNetlify.png)
 
 01. Configure the Netlify app to access either all of your repos or some specific repos.
     - In this example, we gave access to all of the user repos.
@@ -55,6 +55,11 @@ instructions as needed.
           (In our example screenshot below, it is `bodiless-vital`.)
 
     01. Set the "Publish directory" to `sites/{site-name}/public`.  
-        ![Build and Deployment Settings](./assets/BuildAndDeploySettings.png)
+        ![Build and Deployment Settings](./assets/netlify/BuildAndDeploySettings.png)
 
 01. Click the **Deploy site** button.
+
+> Please note that only the static site (not the edit environment) can
+> be hosted on Netlify.  If you want to make edit environments
+> accessible in the cloud, the most fully supported option at present is
+> through [platform.sh](../Platform.sh.md);

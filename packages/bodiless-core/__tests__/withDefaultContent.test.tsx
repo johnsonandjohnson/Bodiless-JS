@@ -15,6 +15,7 @@
 import React, { FC, ComponentType } from 'react';
 import { mount } from 'enzyme';
 import flow from 'lodash/flow';
+import { ComponentWithMeta, flowHoc } from '@bodiless/fclasses';
 import { DefaultContentNode } from '../src/ContentNode';
 import NodeProvider, { useNode } from '../src/NodeProvider';
 import withNode, { withNodeKey } from '../src/withNode';
@@ -107,10 +108,14 @@ describe('withDefaultContent', () => {
         <Bar />
       </>
     );
-    const Baz = withDefaultContent({
-      foo: 'defaultFooValue',
-      bar: 'defaultBarValue',
-    })(BazBase) as ComponentType<any>;
+    const Baz = flow(
+      withDefaultContent({
+        foo: 'defaultFooValue',
+      }),
+      withDefaultContent({
+        bar: 'defaultBarValue',
+      }),
+    )(BazBase) as ComponentType<any>;
     const wrapper = mount(<Baz />);
     expect(wrapper.find('Foo').html()).toBe('defaultFooValue');
     expect(wrapper.find('Bar').html()).toBe('defaultBarValue');
@@ -178,57 +183,131 @@ describe('withDefaultContent', () => {
       expect(wrapper.find('Foo').html()).toBe('root$foo=fooValue');
     });
   });
+  describe('when default content providers are nested', () => {
+    const fooContent = {
+      foo: 'defaultFooContent',
+    };
+    const barContent = {
+      bar: 'defaultBarContent',
+    };
+    const Foo = flow(
+      withNode,
+      withNodeKey('foo'),
+    )(createNodeConsumer('Foo'));
+    const Bar: ComponentType<any> = flow(
+      withNode,
+      withNodeKey('bar'),
+    )(createNodeConsumer('Bar'));
+
+    it('renders default content from both layers', () => {
+      const Test$: FC = () => (
+        <>
+          <Foo />
+          <Bar />
+        </>
+      );
+      const Test = flow(
+        withDefaultContent(fooContent),
+        withDefaultContent(barContent),
+      )(Test$);
+      const wrapper = mount(<Test />);
+      expect(wrapper.find('Foo').html()).toBe('defaultFooContent');
+      expect(wrapper.find('Bar').html()).toBe('defaultBarContent');
+    });
+
+    it('lists keys from both layers', () => {
+      const KeyPrinter$ = () => {
+        const { node } = useNode();
+        const { keys } = node;
+        return <>{keys.join(',')}</>;
+      };
+      const KeyPrinter = flow(
+        withDefaultContent(fooContent),
+        withDefaultContent(barContent),
+      )(KeyPrinter$);
+      const wrapper = mount(<KeyPrinter />);
+      const keys = wrapper.find(KeyPrinter).html().split(',');
+      const expectedKeys = ['root', 'root$foo', 'root$bar'];
+      expect(keys.sort()).toEqual(expectedKeys.sort());
+    });
+
+    it('uses default content from outermost layer', () => {
+      const fooContentOuter = {
+        foo: 'fooOuterContent',
+      };
+      const Test = flow(
+        withDefaultContent(fooContent),
+        withDefaultContent(fooContentOuter)
+      )(Foo);
+      const wrapper = mount(<Test />);
+      const text = wrapper.html();
+      expect(text).toBe('fooOuterContent');
+    });
+
+    it('gets correct content from a peer node', () => {
+      const Bar$ = () => {
+        const { node } = useNode();
+        const peer = node.peer('root$foo');
+        const content = {
+          fooData: peer.data,
+          barData: node.data,
+        };
+        return <pre id="test">{JSON.stringify(content)}</pre>;
+      };
+      const Bar = flow(
+        withNode,
+        withNodeKey('bar'),
+        withDefaultContent(barContent),
+      )(Bar$);
+      const Test$ = () => <Bar />;
+      const Test = withDefaultContent(fooContent)(Test$);
+      const wrapper = mount(<Test />);
+      const json = wrapper.find('pre#test').text();
+      const data = JSON.parse(json);
+      expect(data.fooData).toBe(fooContent.foo);
+      expect(data.barData).toBe(barContent.bar);
+    });
+  });
+
   describe('when a component with single node is wrapped', () => {
-    describe('when the wrapped component node data is not empty', () => {
-      test('wrapped component takes node data from store', () => {
-        const Foo = flow(
-          withNode,
-          withNodeKey('foo'),
-          withDefaultContent({
-            foo: 'defaultFooContent',
-          }),
-          withRootNode({
-            ...defaultStore,
-            root$foo: 'fooValue',
-          }),
-        )(createNodeConsumer('Foo'));
-        const wrapper = mount(<Foo />);
-        expect(wrapper.find('Foo').html()).toBe('fooValue');
-      });
+    const ValuePrinter: FC = () => {
+      const { node } = useNode();
+      return <pre id="test">{JSON.stringify(node.data)}</pre>;
+    };
+    const FooBase = flow(
+      withNode,
+      withNodeKey('foo'),
+      withDefaultContent({
+        foo: 'fooDefaultContent',
+      }),
+    )(ValuePrinter);
+    const withFooStore = (value: any) => withRootNode({
+      ...defaultStore,
+      root$foo: value,
+    })(FooBase);
+    it('uses store data when store data is an empty array', () => {
+      const fooValue: any[] = [];
+      const Foo = withFooStore(fooValue);
+      const wrapper = mount(<Foo />);
+      expect(JSON.parse(wrapper.find('pre#test').text())).toEqual(fooValue);
     });
-    describe('when the wrapped component node data is empty object', () => {
-      test('wrapped component takes default content', () => {
-        const Foo = flow(
-          withNode,
-          withNodeKey('foo'),
-          withDefaultContent({
-            foo: 'defaultFooContent',
-          }),
-          withRootNode({
-            ...defaultStore,
-            root$foo: {},
-          }),
-        )(createNodeConsumer('Foo'));
-        const wrapper = mount(<Foo />);
-        expect(wrapper.find('Foo').html()).toBe('defaultFooContent');
-      });
+    it('uses store data when store data is an object', () => {
+      const fooValue = { foo: 'bar '};
+      const Foo = withFooStore(fooValue);
+      const wrapper = mount(<Foo />);
+      expect(JSON.parse(wrapper.find('pre#test').text())).toEqual(fooValue);
     });
-    describe('when the wrapped component node data is undefined', () => {
-      test('wrapped component takes default content', () => {
-        const Foo = flow(
-          withNode,
-          withNodeKey('foo'),
-          withDefaultContent({
-            foo: 'defaultFooContent',
-          }),
-          withRootNode({
-            ...defaultStore,
-            root$foo: undefined,
-          }),
-        )(createNodeConsumer('Foo'));
-        const wrapper = mount(<Foo />);
-        expect(wrapper.find('Foo').html()).toBe('defaultFooContent');
-      });
+    it('uses default data when store data is an empty object', () => {
+      const fooValue = {};
+      const Foo = withFooStore(fooValue);
+      const wrapper = mount(<Foo />);
+      expect(JSON.parse(wrapper.find('pre#test').text())).toEqual('fooDefaultContent');
+    });
+    it('uses default data when store data is undefined', () => {
+      const fooValue = undefined;
+      const Foo = withFooStore(fooValue);
+      const wrapper = mount(<Foo />);
+      expect(JSON.parse(wrapper.find('pre#test').text())).toEqual('fooDefaultContent');
     });
   });
 });

@@ -103,18 +103,15 @@ export default class ContentfulNode<D extends object, K extends object> extends 
       // passing content node of the type equal to node at the time withDefaultContent is invoked
       return (defaultContent as GetContentFrom<D>)(this.sourceNode.peer(this.path));
     }
-    const { getNode } = this.getters;
-    const nodeData = getNode(this.path) as D;
-    // @TODO: When we deprecate componentData, this will have to be updated.
-    // We'll need to return our default content instead of the emptyValue.
-    const isNodeDataEmpty = !nodeData || Object.keys(nodeData).length === 0;
-    return !isNodeDataEmpty ? nodeData : defaultContent;
+    const nodeData = this.sourceNode.peer(this.path).data;
+    // Ensure that an empty array counts as existing data.
+    if (Array.isArray(nodeData)) return nodeData;
+    return (nodeData && Object.keys(nodeData).length > 0) ? nodeData : defaultContent;
   }
 
   get keys() {
-    const { getKeys } = this.getters;
     return union(
-      getKeys(),
+      this.sourceNode.peer(this.path).keys,
       Object.keys(this.content)
         .map(key => getAbsoluteNodeKey(this.sourceNode.path, key)),
     );
