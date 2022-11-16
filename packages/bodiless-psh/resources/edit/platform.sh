@@ -68,10 +68,39 @@ get_current_branch () {
   echo ${branch_name##refs/heads/}
 }
 
+# Check if the given branch name is a PR branch.
+#
+# @param string - git branch name.
+#
+# prints "true"|"false"
+is_pr_branch() {
+  local BRANCH_NAME=${1}
+  if [[ ${BRANCH_NAME} =~ ^pr-[0-9]+$ ]] || \
+    [[ ${BRANCH_NAME} =~ ^x--bitbucket-[^-]+-pr-[0-9]+$ ]]; then
+    echo "true"
+  else
+    echo "false"
+  fi
+}
+
+# Retrieve pull request id from branch name
+#
+# @param string - branch name, e.g 'pr-123' or 'x--bitbucket-xxxxxxxxxxx-pr-123'
+#
+# prints PR number
+get_pr_id() {
+  ID=$(echo ${1} | sed -r 's/.*pr-([0-9]+)$/\1/g')
+  if [[ ${ID} =~ ^[0-9]+$ ]]; then
+    echo ${ID}
+  else
+    return 1
+  fi
+}
+
 rebase () {
-  if [[ ${PLATFORM_BRANCH} =~ ^pr ]]; then
-    ID=$(echo $PLATFORM_BRANCH | sed s/pr-//g)
-    git fetch origin pull/${ID}/head:${PLATFORM_BRANCH}-rebase
+  if [[ $(is_pr_branch ${PLATFORM_BRANCH}) == "true" ]]; then
+    ID=$(get_pr_id ${PLATFORM_BRANCH})
+    ${CMD_GIT} fetch origin pull/${ID}/head:${PLATFORM_BRANCH}-rebase
     ${CMD_GIT} rebase ${PLATFORM_BRANCH}-rebase -s recursive -X theirs
     ${CMD_GIT} branch -d ${PLATFORM_BRANCH}-rebase
   else
@@ -82,27 +111,27 @@ rebase () {
 
 reset () {
   echo "Reset"
-  if [[ ${PLATFORM_BRANCH} =~ ^pr ]]; then
+  if [[ $(is_pr_branch ${PLATFORM_BRANCH}) == "true" ]]; then
     current_branch=${get_current_branch}
     if [[ -z ${current_branch} || ${current_branch} != ${PLATFORM_BRANCH} ]]; then
       echo Cannot reset PR when platform branch is not current branch.
       exit 1
     fi
-    ID=$(echo $PLATFORM_BRANCH | sed s/pr-//g)
-    git fetch origin pull/${ID}/head:${PLATFORM_BRANCH}-rebase
-    git reset --hard ${PLATFORM_BRANCH}-rebase
-    git branch -D ${PLATFORM_BRANCH}-rebase
+    ID=$(get_pr_id ${PLATFORM_BRANCH})
+    ${CMD_GIT} fetch origin pull/${ID}/head:${PLATFORM_BRANCH}-rebase
+    ${CMD_GIT} reset --hard ${PLATFORM_BRANCH}-rebase
+    ${CMD_GIT} branch -D ${PLATFORM_BRANCH}-rebase
   else
     if [[ -z ${current_branch} || ${current_branch} != ${PLATFORM_BRANCH} ]]; then
-      git checkout ${PLATFORM_BRANCH}
+      ${CMD_GIT} checkout ${PLATFORM_BRANCH}
     fi
-    git reset --hard origin/${PLATFORM_BRANCH}
+    ${CMD_GIT} reset --hard origin/${PLATFORM_BRANCH}
   fi
-  git clean -fd
+  ${CMD_GIT} clean -fd
 }
 
 pull () {
-  if [ -z "$(git status -s)" ]; then
+  if [ -z "$(${CMD_GIT} status -s)" ]; then
     echo "Working tree clean"
     rebase
   else
@@ -117,14 +146,14 @@ pull () {
 incremental_deploy () {
   echo "Performing incremental deploy on $(get_current_branch)"
   cd ${ROOT_DIR}
-  if [ ! -z "$(git status | grep rebasing)" ]; then
-    git rebase --abort
+  if [ ! -z "$(${CMD_GIT} status | grep rebasing)" ]; then
+    ${CMD_GIT} rebase --abort
   fi
-  git fetch origin
-  git status
+  ${CMD_GIT} fetch origin
+  ${CMD_GIT} status
   if [ ${PLATFORM_BRANCH} = $(get_current_branch) ]; then
     echo "Already on ${PLATFORM_BRANCH}"
-    if [ ! -z "$(git status | grep diverged)" ]; then
+    if [ ! -z "$(${CMD_GIT} status | grep diverged)" ]; then
       echo "Branches have diverged, discarding local changes"
       reset
     else
@@ -134,6 +163,9 @@ incremental_deploy () {
     echo "Not on ${PLATFORM_BRANCH}"
     reset
   fi
+  # skip finalize steps on incremental deploy
+  unset default_finalize_deploy
+  unset finalize_deploy
 }
 
 # Check if the given command available in shell, with mute output.
@@ -144,71 +176,93 @@ shell_command_exist() {
 
 # Get the source branch and repo info of given PR.
 #
-# - This function retrieves PR info via github API with given PR ID. 
+# - This function retrieves PR info via github/bitbucket API using PR ID. 
 # - It exits with error code in following cases:
 #     code:
-#       [1] A non-github https remote url provided. 
+#       [1] A non-github/bitbucket https remote url provided. 
 #       [2] `curl` command is not available
 #       [3] `jq` command is not available
-#       [4] Failed on GitHub API request, i.e. authentication failure, invalid PR id, etc
+#       [4] Failed on API request, i.e. authentication failure, invalid PR id, etc
 #     
 # @param string pull request id
-# @param string git remote https url
-# @param string github PAT (Personal Access Token)
 #
 # This function prints PR `head ref`, `head repo id`, `base repo id` as string.
 get_pr_source_branch() {
-  set +e
   # get function arguments
-  GIT=${1}
-  PR_ID=${2}
-  REMOTE_URL=${3}
-  PAT=${4}
+  local PR_ID=${1}
+  local GIT_HOST=$(echo ${APP_GIT_REMOTE_URL} | awk -F/ '{print $3}')
 
-  GIT_HOST=$(echo ${REMOTE_URL} | awk -F/ '{print $3}')
-  if [ ${GIT_HOST} != "github.com" ]; then
-    echo 'upstream branch setup is only available for github'
+  # validate input and env cmd
+  if [[ ${GIT_HOST} != "github.com" ]] && [[ ${GIT_HOST} != "bitbucket.org" ]]; then
     return 1
   fi
-  GIT_OWNER=$(echo ${REMOTE_URL} | awk -F/ '{print $4}')
-  GIT_REPO=$(echo ${REMOTE_URL} | awk -F/ '{print $5}' | cut -d'.' -f1)
+  local GIT_OWNER=$(echo ${APP_GIT_REMOTE_URL} | awk -F/ '{print $4}')
+  local GIT_REPO=$(echo ${APP_GIT_REMOTE_URL} | awk -F/ '{print $5}' | cut -d'.' -f1)
   if ! (shell_command_exist curl); then
-    echo '"curl" is required to set upstream branch'
     return 2
   fi
   if ! (shell_command_exist jq); then
-    echo '"jq" is required to set upstream branch'
     return 3
   fi
 
-  # Get PR info using github API.
-  ${GIT} fetch origin
-  PR_INFO=$(curl \
-    -s -f -H "Accept: application/vnd.github+json" \
-    -H "Authorization: Bearer ${PAT}" \
-    https://api.github.com/repos/${GIT_OWNER}/${GIT_REPO}/pulls/${PR_ID})
-  RESULT=$?
-  if [ ${RESULT} -ne 0 ];then
-    echo 'Failed to get PR info, please check github Pull Request number and PAT(personal access token) are valid'
-    return 4
+  ${CMD_GIT} fetch origin
+  if [[ ${GIT_HOST} == "github.com" ]]; then
+    # Get PR info using github API.
+    local PR_INFO=$(curl \
+      -s -f -H "Accept: application/vnd.github+json" \
+      -H "Authorization: Bearer ${PAT}" \
+      https://api.github.com/repos/${GIT_OWNER}/${GIT_REPO}/pulls/${PR_ID})
+    local RESULT=$?
+    if [ ${RESULT} -ne 0 ];then
+      return 4
+    fi
+    # Get branch info from json response.
+    local HEAD=$(echo ${PR_INFO} | jq -r '.head.ref,.head.repo.id,.base.repo.id')
+  else
+    # Get PR info using BitBucket API.
+    # https://developer.atlassian.com/cloud/bitbucket/rest/intro/#authentication
+    # https://developer.atlassian.com/cloud/bitbucket/rest/api-group-pullrequests/#api-repositories-workspace-repo-slug-pullrequests-pull-request-id-get
+    local ACCESS_TOKEN_INFO=$(curl \
+      -s -X POST -u "${APP_GIT_BITBUCKT_OAUTH_KEY}:${APP_GIT_BITBUCKT_OAUTH_SECRET}" \
+      https://bitbucket.org/site/oauth2/access_token \
+      -d grant_type=client_credentials)
+    local RESULT_TOKEN=$?
+    if [ ${RESULT_TOKEN} -ne 0 ];then
+      return 4
+    fi
+    local ACCESS_TOKEN=$(echo ${ACCESS_TOKEN_INFO} | jq -r '.access_token')
+    local PR_INFO=$(curl \
+      -s --request GET \
+      --url 'https://api.bitbucket.org/2.0/repositories/'${GIT_OWNER}'/'${GIT_REPO}'/pullrequests/'${PR_ID} \
+      --header 'Authorization: Bearer '${ACCESS_TOKEN} \
+      --header 'Accept: application/json')
+    local RESULT=$?
+    if [ ${RESULT} -ne 0 ];then
+      return 4
+    fi
+    # Get branch info from json response.
+    local HEAD=$(echo ${PR_INFO} | jq -r '.source.branch.name,.source.repository.uuid,.destination.repository.uuid')
   fi
-  # Get branch info from json response.
-  HEAD=$(echo ${PR_INFO} | jq -r '.head.ref,.head.repo.id,.base.repo.id')
   echo ${HEAD}
-  set -e
   return 0
 }
 
 full_deploy () {
-  echo "Full deploy, branch is ${PLATFORM_BRANCH}"
+  echo "Performing full deploy on branch [ ${PLATFORM_BRANCH} ]"
   rm -rf ${ROOT_DIR}
-  if [[ ${PLATFORM_BRANCH} =~ ^pr- ]]; then
-    ${CMD_GIT} -c credential.helper="!f() { sleep 5; echo username=${APP_GIT_USER}; echo password=${APP_GIT_PW}; }; f" clone ${APP_GIT_REMOTE_URL} ${ROOT_DIR}
+
+  if [[ $(is_pr_branch ${PLATFORM_BRANCH}) == "true" ]]; then
+    ${CMD_GIT} -c credential.helper='!f() { sleep 5; echo username=${APP_GIT_USER}; echo password=${APP_GIT_PW}; }; f' clone ${APP_GIT_REMOTE_URL} ${ROOT_DIR}
+    echo "Cloned to ${ROOT_DIR}"
     cd ${ROOT_DIR}
+    git_store_credential
     CHECKOUT=0
-    ID=$(echo $PLATFORM_BRANCH | sed s/pr-//g)
-    PR_BRANCH_INFO=$(get_pr_source_branch ${CMD_GIT} ${ID} ${APP_GIT_REMOTE_URL} ${APP_GIT_PW})
-    if [ $? == 0 ];then
+    ID=$(get_pr_id ${PLATFORM_BRANCH})
+    # no stop on error returned from get_pr_source_branch
+    set +e
+    PR_BRANCH_INFO=$(get_pr_source_branch ${ID})
+    echo "ID: ${ID} - ${PR_BRANCH_INFO}"
+    if [[ $? == 0 ]];then
       # Success on retrieving PR source branch info, then parse the branch and repo names.
       read -r SOURCE_BRANCH HEAD_REPO_ID BASE_REPO_ID <<< ${PR_BRANCH_INFO}
       echo ${SOURCE_BRANCH}
@@ -217,19 +271,28 @@ full_deploy () {
         ${CMD_GIT} checkout -b ${SOURCE_BRANCH} origin/${SOURCE_BRANCH}
         CHECKOUT=1
       fi
+    elif [[ $? == 1 ]]; then
+      echo 'Upstream branch setup is only available for github and bitbucket cloud repos'
+    elif [[ $? == 2 ]]; then
+      echo '"curl" is required to set upstream branch'
+    elif [[ $? == 3 ]]; then
+      echo '"jq" is required to set upstream branch'
+    elif [[ $? == 4 ]]; then
+      echo 'Failed to get PR info, please check Pull Request number and API(GitHub or BitBucket) credentials are valid'
     fi
+    set -e
     if [ ${CHECKOUT} == 0 ];then
-      # If failed to checkout by source branch, i.e. non-github repo, github API error,
+      # If failed to checkout by source branch, i.e. non-github/bitbucket repo, API error,
       # missing shell commands, or this is a cross repo PR, then checkout by head ref.
       ${CMD_GIT} fetch origin pull/${ID}/head:${PLATFORM_BRANCH}
       ${CMD_GIT} checkout ${PLATFORM_BRANCH}
     fi
     ${CMD_GIT} status
   else
-    ${CMD_GIT} -c credential.helper="!f() { sleep 5; echo username=${APP_GIT_USER}; echo password=${APP_GIT_PW}; }; f" clone -b ${PLATFORM_BRANCH} ${APP_GIT_REMOTE_URL} ${ROOT_DIR}
+    ${CMD_GIT} -c credential.helper='!f() { sleep 5; echo username=${APP_GIT_USER}; echo password=${APP_GIT_PW}; }; f' clone -b ${PLATFORM_BRANCH} ${APP_GIT_REMOTE_URL} ${ROOT_DIR}
     cd ${ROOT_DIR}
+    git_store_credential
   fi
-  git_store_credential
   ${CMD_GIT} config user.email "${APP_GIT_USER_EMAIL}"
   ${CMD_GIT} config user.name "${APP_GIT_USER}"
 }
@@ -261,11 +324,11 @@ git_store_credential () {
 }
 
 check_branch () {
-  if [[ ${PLATFORM_BRANCH} =~ ^pr- ]]; then
-    if [[ ${APP_GIT_REMOTE_URL} =~ github\.com ]]; then
+  if [[ $(is_pr_branch ${PLATFORM_BRANCH}) == "true" ]]; then
+    if [[ ${APP_GIT_REMOTE_URL} =~ github\.com ]] || [[ ${APP_GIT_REMOTE_URL} =~ bitbucket\.org ]]; then
       return 0
     else
-      echo "Edit environments for PR branches are only enabled on GitHub"
+      echo "Edit environments for PR branches are only enabled on GitHub and BitBucket Cloud"
       return 1
     fi
   fi
@@ -287,18 +350,18 @@ default_build () {
 # Default implementaiton of p.sh start command
 default_start () {
   if ! check_branch; then
-      echo 'Invalid branch: not starting edit app'
-      exec sleep infinity
+    echo 'Invalid branch: not starting edit app'
+    exec sleep infinity
   else
-      echo "Starting application on ${date}"
-      exec pm2 start --no-daemon ${PLATFORM_APP_DIR}/ecosystem.config.js
+    echo "Starting application on ${date}"
+    exec pm2 start --no-daemon ${PLATFORM_APP_DIR}/ecosystem.config.js
   fi
 }
 
 # Always run before the psh deploy hook.
 _setup_deploy () {
-  # Exit if on a PR branch and not on GitHub
   if ! check_branch; then
+    # Exit if on a PR branch and not on GitHub or BitBucket
     echo 'Invalid branch; skipping edit environment deploy'
     exit
   fi
@@ -314,12 +377,36 @@ _setup_deploy () {
 
   # wait 2 seconds to work around pm2 daemon issue.
   sleep 2
-  pm2 stop frontend && pm2 stop backend || true
+  pm2 stop ${PLATFORM_APP_DIR}/ecosystem.config.js || true
+}
+
+# If the branch to be deployed has same tree id as on origin/main, 
+# return 0, otherwise 1
+check_existing_deployment () {
+  if [ ! -d "${ROOT_DIR}/.git" ]; then
+    return 1
+  fi
+  cd ${ROOT_DIR}
+  ${CMD_GIT} fetch origin
+  local CURRENT_TREE=$(${CMD_GIT} rev-parse --verify -q HEAD^{tree})
+  local BRANCH_TREE=$(${CMD_GIT} rev-parse --verify -q origin/${PLATFORM_BRANCH}^{tree})
+  local CURRENT_BRANCH=$(get_current_branch)
+  # must go back to parent folder before perform git clone.
+  cd ${APP_VOLUME}
+  if [[ ${CURRENT_BRANCH} == 'main' ]] && [[ ${BRANCH_TREE} == ${CURRENT_TREE} ]]; then
+    return 0
+  else
+    return 1
+  fi
 }
 
 # Default implementation of psh deploy hook (fresh clone and prepare npm)
 default_deploy () {
-  full_deploy
+  if check_existing_deployment; then
+    incremental_deploy
+  else
+    full_deploy
+  fi
   mkdir -p ${NPM_CACHE_DIR}
   cd ${ROOT_DIR}
 }
@@ -332,7 +419,7 @@ default_finalize_deploy () {
 
 # Final step after p.sh deploy hook.
 _teardown_deploy () {
-  pm2 restart backend && pm2 restart frontend || pm2 start ${PLATFORM_APP_DIR}/ecosystem.config.js
+  pm2 restart ${PLATFORM_APP_DIR}/ecosystem.config.js || pm2 start ${PLATFORM_APP_DIR}/ecosystem.config.js
 }
 
 # _setup/_teardown are not hooks; they implement internal logic we never want overridden.
