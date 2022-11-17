@@ -14,37 +14,12 @@ Ensure you have the following installed locally:
 BodilessJS provides a CLI tool for creating a new site from a template.
 
 ```shell-session
-npx @bodiless/cli new
+npx @bodiless/cli@next new -r next
 ```
 
-<!-- Inlining HTML to add multi-line info block with code blocks. -->
-<div class="warn">
-  <strong>Note:</strong> If you're using a <em>pre-release</em> version of Bodiless (i.e.,
-  <code>&lt;1.0.0</code>), instead of the command documented above, please use the following:
-
-  ```shell-session
-  npx @bodiless/cli@1.0.0-PRERELEASE.IDENTIFIER new -r REVISION
-  ```
-
-  Where:
-
-  - `PRERELEASE.IDENTIFIER` is the package version of `@bodiless/cli` that you wish to use (e.g.,
-    `beta.12`).
-    - Prior to the official `1.0` release of Bodiless, you _must_ use at least `1.0.0-beta.11`.
-    - You may also use `next` to use the latest pre-release version (i.e., `@bodiless/cli@next`).
-    - Using `@bodiless/cli` without a version specifier will fail.
-  - `REVISION` is the revision of the repository to check out when cloning.
-    - Use `next` to check out the latest pre-release version.
-    - Use `HEAD` to check out the latest commit on the `main` branch.
-
-  E.g., to use pre-release version `1.0.0-beta.12` of the CLI package while checking out the latest
-  pre-release version of the Bodiless repository:
-
-  ```shell-session
-  npx @bodiless/cli@1.0.0-beta.12 new -r next
-  ```
-
-</div>
+  > Note: Bodiless-JS is currently in pre-1.x state, so you will need
+  > to install the "next" version as described above.  A full 1.0 release is planned
+  > for December, 2022.
 
 This will walk you through the process of creating a new Bodiless site locally. It will prompt you
 for:
@@ -146,3 +121,30 @@ Try removing the globally installed `libvips` and running again, or try:
 ```shell
 .SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm run setup
 ```
+## Using specific versions
+
+If you want to build a new site based on a specific version of Bodiless, you may
+supply version specifiers in the command as follows:
+
+  ```shell-session
+  npx @bodiless/cli@{VERSION} new -r {REVISION}
+  ```
+
+  Where:
+
+  - `VERSION` is the package version of `@bodiless/cli` that you wish to use (e.g.,
+    `1.0.0-rc.22`).
+    - Prior to the official `1.0` release of Bodiless, you _must_ use at least `1.0.0-beta.11`.
+    - You may also use `next` to use the latest pre-release version (i.e., `@bodiless/cli@next`).
+    - Using `@bodiless/cli` without a version specifier will fail.
+  - `REVISION` is the revision of the repository to check out when cloning.
+    - Use `next` to check out the latest pre-release version.
+    - Use `HEAD` to check out the latest commit on the `main` branch.
+    - Use the appropriate tag to check out the revisino that matches your version.
+
+  E.g., to use pre-release version `1.0.0-beta.12` of the CLI package while checking out the latest
+  pre-release version of the Bodiless repository:
+
+  ```shell-session
+  npx @bodiless/cli@1.0.0-beta.12 new -r next
+  ```
