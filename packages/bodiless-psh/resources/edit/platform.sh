@@ -384,6 +384,7 @@ _setup_deploy () {
 # return 0, otherwise 1
 check_existing_deployment () {
   if [ ! -d "${ROOT_DIR}/.git" ]; then
+    echo 'Check existing deploy - NOT a git folder'
     return 1
   fi
   cd ${ROOT_DIR}
@@ -396,6 +397,7 @@ check_existing_deployment () {
   if [[ ${CURRENT_BRANCH} == 'main' ]] && [[ ${BRANCH_TREE} == ${CURRENT_TREE} ]]; then
     return 0
   else
+    echo 'Check existing deploy - current branch['${CURRENT_BRANCH}'] Compare: '${BRANCH_TREE}' vs '${CURRENT_TREE}
     return 1
   fi
 }
