@@ -12,6 +12,10 @@
  * limitations under the License.
  */
 
+import { resolve } from 'path';
+import { unlinkSync, readFileSync, writeFileSync } from 'fs';
+import { parse, stringify } from 'yaml';
+import { omit } from 'lodash';
 import AbstractNew, { AbstractNewOptions } from '../helpers/AbstractNew';
 import { Flags } from '../helpers/Wizard';
 
@@ -28,25 +32,28 @@ class New extends AbstractNew<Options> {
 
   async clean() {
     await super.clean();
-    // await this.updatePsh();
+    await this.updatePsh();
   }
 
-  // async updatePsh() {
-  //   const dest = await this.getArg('dest');
-  //   const name = await this.getArg('name');
-  //   const updatePlatformAppYaml = async (prefix: string = '') => {
-  //     const file = path.resolve(dest, prefix, '.platform.app.yaml');
-  //     const contents = await fs.readFile(file);
-  //     const data: any = yaml.load(contents.toString());
-  //     data.variables.env.APP_SITE_NAME = name;
-  //     const output = yaml.dump(data, { indent: 2 });
-  //     await fs.writeFile(file, output);
-  //   };
-  //   return Promise.all([
-  //     updatePlatformAppYaml(),
-  //     updatePlatformAppYaml('edit'),
-  //   ]);
-  // }
+  async updatePsh() {
+    const dest = await this.getArg('dest');
+    // remove psh static config files
+    [
+      '.platform.app.yaml',
+      'static.platform.custom.sh',
+      'static.platform.sh',
+    ].forEach(f => {
+      const filePath = resolve(dest, f);
+      unlinkSync(filePath);
+    });
+
+    // update psh config, remove static route.
+    const routeFilename = resolve(dest, '.platform/routes.yaml');
+    const routeFileContent = readFileSync(routeFilename, 'utf8');
+    const data: any = parse(routeFileContent);
+    writeFileSync(routeFilename, stringify(omit(data, 'https://{default}/')));
+    return Promise.resolve();
+  }
 }
 
 export default New;
