@@ -49,7 +49,7 @@ class TestSiteAcl implements AclInterface {
   }
 }
 const testSiteAcl: AclInterface = new TestSiteAcl();
-const withAclProvider = (Component: FC<PageProps>) => props => {
+const withAclProvider = (Component: FC<PageProps>) => (props: PageProps) => {
   const accessControl = useAccessContext();
   accessControl.setAcl(testSiteAcl);
   const control = new AccessControl(testSiteAcl);
