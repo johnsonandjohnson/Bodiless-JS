@@ -17,7 +17,7 @@ import { graphql } from 'gatsby';
 import { Page, PageProps } from '@bodiless/gatsby-theme-bodiless';
 import { Editable, asBodilessList } from '@bodiless/components';
 import {
-  PageEditContext, accessContext, useAccessContext, AccessControl
+  accessContext, useAccessContext, AccessControl
 } from '@bodiless/core';
 import {
   withDesign, replaceWith, addClasses, stylable, flowHoc,
