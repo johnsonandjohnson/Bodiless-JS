@@ -15,5 +15,5 @@
 export { default as vitalPage } from './tokens';
 export { default as vitalPageBase } from './tokens/vitalPage';
 
-export type { PageProps } from './asBodilessPage';
-export { asBodilessPage } from './asBodilessPage';
+export type { PageProps } from './asBodilessPage.gatsby';
+export { asBodilessPage } from './asBodilessPage.gatsby';

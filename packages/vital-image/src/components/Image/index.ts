@@ -14,8 +14,8 @@
 
 import { BodilessImageComponents } from '@bodiless/gatsby-theme-bodiless';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import vitalImageBaseOrig from './tokens/vitalImage';
-import type { VitalImage } from './tokens/vitalImage';
+import vitalImageBaseOrig from './tokens/vitalImage.gatsby';
+import type { VitalImage } from './tokens/vitalImage.gatsby';
 
 /**
  * A token modifier that respects the Image Components.

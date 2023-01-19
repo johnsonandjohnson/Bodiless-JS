@@ -27,6 +27,7 @@ import {
   WithNodeKeyProps,
   withNodeKey,
 } from '@bodiless/core';
+
 import './Editable.css';
 import { HOC, flowHoc } from '@bodiless/fclasses';
 

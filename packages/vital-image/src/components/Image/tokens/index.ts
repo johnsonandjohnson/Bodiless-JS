@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalImage from './vitalImage';
+import vitalImage from './vitalImage.gatsby';
 
 export default vitalImage;

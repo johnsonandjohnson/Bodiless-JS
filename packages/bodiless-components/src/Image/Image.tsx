@@ -79,7 +79,7 @@ const options: BodilessOptions<Props, Data> = {
   global: false,
   local: true,
   defaultData: {
-    src: Placeholder,
+    src: Placeholder.src || Placeholder,
     alt: '',
     title: '',
   },

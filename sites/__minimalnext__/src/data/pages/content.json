@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "uuid": "8a9bd780-b60a-11ec-b7f5-33459e043a92",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/4"
+      },
+      "type": "Image"
+    },
+    {
+      "uuid": "9b16c5f0-b607-11ec-be85-9727a44b2e87",
+      "wrapperProps": {
+        "className": "w-full lg:w-2/3"
+      },
+      "type": "Editor"
+    },
+    {
+      "uuid": "22b6e5f0-b60b-11ec-b7f5-33459e043a92",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "Editor"
+    }
+  ]
+}

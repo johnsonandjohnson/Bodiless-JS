@@ -14,17 +14,16 @@
 
 import FlowContainerClean, { FlowContainerComponents } from './FlowContainerClean';
 import vitalFlowContainer from './tokens';
-import vitalFlowContainerOrig from './tokens/vitalFlowContainer';
+import vitalFlowContainerBase from './tokens/vitalFlowContainer';
 import type { VitalFlowContainer } from './tokens/vitalFlowContainer';
 
+export type { VitalFlowContainer };
+
 /**
- * Use this version of the vital flow container tokens when extending or shadowing.
+ * Use vitalFlowContainerBase tokens when extending or shadowing.
  * @category Token Collection
  * @see vitalFlowContainer
  */
-const vitalFlowContainerBase = vitalFlowContainerOrig;
-
-export type { VitalFlowContainer };
 export {
   FlowContainerClean, vitalFlowContainer, vitalFlowContainerBase,
   FlowContainerComponents,

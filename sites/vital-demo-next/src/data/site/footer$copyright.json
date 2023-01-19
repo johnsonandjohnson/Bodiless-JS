@@ -1,0 +1,38 @@
+[
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "© COMPANY  Inc. 2022. All rights reserved. This site is published by COMPANY Inc., which is solely responsible for its contents. This website is intended for visitors from the United States. The third-party trademarks used herein are trademarks of their respective owners. Freedom from Want illustration © SEPS licensed by Curtis Licensing, Indianapolis, IN. Photograph based on the "
+      },
+      {
+        "data": {
+          "openModal": true
+        },
+        "type": "Link",
+        "children": [
+          {
+            "text": "Freedom From Want illustration"
+          }
+        ]
+      },
+      {
+        "text": ". Freedom From Want © SEPS licensed by "
+      },
+      {
+        "data": {
+          "openModal": true
+        },
+        "type": "Link",
+        "children": [
+          {
+            "text": "Curtis Licensing,"
+          }
+        ]
+      },
+      {
+        "text": " Indianapolis, IN."
+      }
+    ]
+  }
+]

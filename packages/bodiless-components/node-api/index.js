@@ -14,8 +14,10 @@
 
 const getDisabledPages = require('./getDisabledPages');
 const getRedirectAliases = require('./getRedirectAliases');
+const getPages = require('./getPages');
 
 module.exports = {
   getDisabledPages,
   getRedirectAliases,
+  getPages,
 };

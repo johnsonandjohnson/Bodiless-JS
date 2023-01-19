@@ -17,7 +17,7 @@ import { asBodilessChameleon } from '@bodiless/components';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { WithGA4DesignKeys } from '@bodiless/ga4';
 import { withSearchResult, withSearchMenuProvider } from '@bodiless/vital-search';
-import { asBodilessPage } from '../asBodilessPage';
+import { asBodilessPage } from '../asBodilessPage.gatsby';
 import { GenericTemplateClean, vitalGenericTemplate } from '../../GenericTemplate';
 import { PDPTemplateClean, vitalPDPTemplate } from '../../PDPTemplate';
 

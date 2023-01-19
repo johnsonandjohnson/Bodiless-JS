@@ -1,0 +1,10 @@
+[
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "This text is the answer to the question, and it will be added as a Schema.org FAQ item in this page's metadata."
+      }
+    ]
+  }
+]
