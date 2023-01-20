@@ -17,7 +17,7 @@ import { graphql } from 'gatsby';
 import { Page, PageProps } from '@bodiless/gatsby-theme-bodiless';
 import { Editable, asBodilessList } from '@bodiless/components';
 import {
-  accessContext, useAccessContext, AccessControl
+  PageEditContext, accessContext, AccessControl, useNode
 } from '@bodiless/core';
 import {
   withDesign, replaceWith, addClasses, stylable, flowHoc,
@@ -43,6 +43,8 @@ const EditableBulletPoints = flowHoc(
 )('ul');
 
 class TestSiteAcl implements AclInterface {
+  protected resources: string[] = [];
+
   // eslint-disable-next-line class-methods-use-this
   isAllowed(resourceId?: string) {
     if (!resourceId) {
