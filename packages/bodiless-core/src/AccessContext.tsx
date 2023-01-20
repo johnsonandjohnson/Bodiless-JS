@@ -18,7 +18,7 @@ export interface AccessControlInterface {
   /**
    * client to implement editable logic base on ACL.
    */
-  canEdit: () => boolean;
+  canEdit: (id?: string) => boolean;
 
   /**
    * Able to switch ACL object.
@@ -27,12 +27,12 @@ export interface AccessControlInterface {
 }
 
 export interface AclInterface {
-  isAllowed: () => boolean;
+  isAllowed: (id?: string) => boolean;
 }
 
 class DefaultAcl implements AclInterface {
   // eslint-disable-next-line class-methods-use-this
-  isAllowed() {
+  isAllowed(id?: string) {
     return true;
   }
 }
@@ -49,8 +49,15 @@ export class AccessControl implements AccessControlInterface {
     this.acl = acl || new DefaultAcl();
   }
 
-  canEdit() {
-    return this.acl.isAllowed();
+  /**
+   * Check if current user can edit the resource represented by
+   * given resourceId.
+   *
+   * @param resourceId string
+   * @returns boolean
+   */
+  canEdit(resourceId?: string) {
+    return this.acl.isAllowed(resourceId);
   }
 
   setAcl(acl: AclInterface) {

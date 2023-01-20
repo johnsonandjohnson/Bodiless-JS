@@ -20,11 +20,11 @@ import { v1 } from 'uuid';
 import PageEditContext from './PageEditContext';
 import { useAccessContext } from './AccessContext';
 
-export const useEditContext = () => {
+export const useEditContext = (resourceId?: string) => {
   const pageEditContext = useContext(PageEditContext.context);
 
   const accessContext = useAccessContext();
-  if (accessContext.canEdit()) return pageEditContext;
+  if (accessContext.canEdit(resourceId)) return pageEditContext;
 
   return new Proxy(pageEditContext, {
     get: function get(target, prop, receiver: any) {

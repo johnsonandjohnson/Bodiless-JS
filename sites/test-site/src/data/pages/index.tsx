@@ -44,14 +44,17 @@ const EditableBulletPoints = flowHoc(
 
 class TestSiteAcl implements AclInterface {
   // eslint-disable-next-line class-methods-use-this
-  isAllowed() {
-    return false;
+  isAllowed(resourceId?: string) {
+    if (!resourceId) {
+      const { pagePath } = useNode().node;
+      // check if resource is allowed
+      return (this.resources.indexOf(pagePath) !== -1);
+    }
+    return true;
   }
 }
 const testSiteAcl: AclInterface = new TestSiteAcl();
 const withAclProvider = (Component: FC<PageProps>) => (props: PageProps) => {
-  const accessControl = useAccessContext();
-  accessControl.setAcl(testSiteAcl);
   const control = new AccessControl(testSiteAcl);
   return (
     <accessContext.Provider value={control}>
