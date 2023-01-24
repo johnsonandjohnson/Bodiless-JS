@@ -13,10 +13,19 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import React, { FC } from 'react';
 import { mount } from 'enzyme';
-import { useContextActivator, useExtendHandler } from '../src/hooks';
+import {
+  useContextActivator,
+  useExtendHandler,
+  useEditContext,
+} from '../src/hooks';
 import PageEditContext from '../src/PageEditContext';
+import {
+  accessContext,
+  AccessControl,
+  AclInterface,
+} from '../src/AccessContext';
 
 const TestComponent = ({
   element: Element, event, handler, children, id,
@@ -28,6 +37,63 @@ const TestComponent = ({
     {children || 'Foo!'}
   </Element>
 );
+
+describe('useEditContext', () => {
+  it('is editable with default root context', () => {
+    const Component: FC = () => {
+      const context = useEditContext();
+      context.toggleEdit(true);
+      return (
+        <>
+          <h1>{context.name}</h1>
+          <span>{context.isEdit ? 'Edit' : 'Preview'}</span>
+        </>
+      );
+    };
+    const wrapper = mount(<Component />);
+    expect(wrapper.find('h1').text()).toBe('Root');
+    expect(wrapper.find('span').text()).toBe('Edit');
+  });
+
+  it('is able to add access control with ACL object', () => {
+    const Component: FC = () => {
+      const context = useEditContext();
+      context.toggleEdit(true);
+      return (
+        <>
+          <span>{context.isEdit ? 'Edit' : 'Preview'}</span>
+        </>
+      );
+    };
+    class TestAcl implements AclInterface {
+      protected allow: boolean = false;
+
+      constructor(allow: boolean) {
+        this.allow = allow;
+      }
+
+      isAllowed() {
+        return this.allow;
+      }
+    }
+
+    const control1 = new AccessControl(new TestAcl(true));
+    const control2 = new AccessControl(new TestAcl(false));
+
+    const wrapper1 = mount(
+      <accessContext.Provider value={control1}>
+        <Component />
+      </accessContext.Provider>
+    );
+    const wrapper2 = mount(
+      <accessContext.Provider value={control2}>
+        <Component />
+      </accessContext.Provider>
+    );
+    expect(wrapper1.find('span').text()).toBe('Edit');
+    expect(wrapper2.find('span').text()).toBe('Preview');
+  });
+});
 
 describe('useExtendHandler', () => {
   let mockIsEdit: any;
