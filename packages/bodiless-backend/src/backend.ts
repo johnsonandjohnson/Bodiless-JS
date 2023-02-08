@@ -12,20 +12,25 @@
  * limitations under the License.
  */
 
-/* eslint no-console: 0 */
-/* eslint global-require: 0 */
-const express = require('express');
-const bodyParser = require('body-parser');
-const { spawn } = require('child_process');
-const formidable = require('formidable');
-const tmp = require('tmp');
-const path = require('path');
-const uniq = require('lodash/uniq');
-const Page = require('./page');
-const GitCmd = require('./GitCmd');
-const { getChanges, getConflicts, mergeMain } = require('./git');
-const { copyAllFiles, copyFile, moveFile } = require('./fileHelper');
-const Logger = require('./logger');
+import express from 'express';
+import bodyParser from 'body-parser';
+import { spawn } from 'child_process';
+import formidable from 'formidable';
+import tmp from 'tmp';
+import path from 'path';
+import uniq from 'lodash/uniq';
+import morgan from 'morgan';
+import morganBody from 'morgan-body';
+import type {
+  Express, IRoute, Request, Response
+} from 'express';
+
+import Page from './page';
+import GitCmd, { GitCmdError } from './gitCmd';
+import { getChanges, getConflicts, mergeMain } from './git';
+import { copyAllFiles, copyFile, moveFile } from './fileHelper';
+import Logger from './logger';
+import type { GitInfoType } from './gitCmd';
 
 const backendPrefix = process.env.GATSBY_BACKEND_PREFIX || '/___backend';
 const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
@@ -40,30 +45,37 @@ const canSave = (process.env.BODILESS_BACKEND_SAVE_ENABLED || '1') === '1';
 
 const logger = new Logger('BACKEND');
 
+type GitBranchInfoType = {
+  isCurrent: boolean;
+  name: string;
+  description: string;
+  lastCommitMessage: string;
+};
+
 const isMorganEnabled = () => isExtendedLogging;
 /*
 This Class holds all of the interaction with Git
 */
 class Git {
-  static setCurrent(branch) {
-    return Git.cmd()
-      .add('checkout', branch)
-      .exec();
-  }
+  // static setCurrent(branch: string) {
+  //   return Git.cmd()
+  //     .add('checkout', branch)
+  //     .exec();
+  // }
 
-  static getCurrent() {
-    return Git.cmd()
-      .add('rev-parse', '--abbrev-ref', 'HEAD')
-      .exec()
-      .catch(data => logger.log(data))
-      .then(data => data.stdout);
-  }
+  // static getCurrent() {
+  //   return Git.cmd()
+  //     .add('rev-parse', '--abbrev-ref', 'HEAD')
+  //     .exec()
+  //     .catch(data => logger.log(data))
+  //     .then(data => data.stdout);
+  // }
 
   static list() {
     return new Promise(resolve => {
       const cmdName = path.join(__dirname, 'getBranches.sh');
       const cmd = spawn('bash', [cmdName]);
-      const results = [];
+      const results: GitBranchInfoType[] = [];
       cmd.stdout.on('data', data => {
         const values = data.toString().split('||');
         if (values.length === 4) {
@@ -86,6 +98,10 @@ class Git {
 This Class lets us build and execute a GitCommit
 */
 class GitCommit {
+  files: string[] = [];
+
+  remote: string;
+
   constructor() {
     try {
       // If App git path is specified, switch to the path.
@@ -99,17 +115,17 @@ class GitCommit {
     this.remote = 'origin';
   }
 
-  addDirectory(...dirs) {
+  addDirectory(...dirs: string[]) {
     this.files.push(...dirs);
     return this;
   }
 
-  addPaths(...paths) {
+  addPaths(...paths: string[]) {
     this.files.push(...paths.map(p => `${backendFilePath}/${p}.json`));
     return this;
   }
 
-  addFiles(...files) {
+  addFiles(...files: string[]) {
     this.files.push(...files.map(p => `${backendStaticPath}/${p}`));
     return this;
   }
@@ -134,7 +150,7 @@ class GitCommit {
     }
 
     // Get current branch name.
-    const data = await GitCmd.cmd()
+    const data: GitInfoType = await GitCmd.cmd()
       .add('symbolic-ref', '--short', 'HEAD')
       .exec();
     const branch = data.stdout.trim();
@@ -144,7 +160,7 @@ class GitCommit {
       result = await GitCmd.cmd()
         .add('rebase', `${remote}/${branch}`, '-s', 'recursive', '-X', 'theirs')
         .exec();
-    } catch (rebaseErr) {
+    } catch (rebaseErr: any) {
       // Set another http.status code for unstaged changes?
       // const unstaged = /You have unstaged changes/i.test(rebaseErr.message);
 
@@ -158,7 +174,7 @@ class GitCommit {
           await GitCmd.cmd()
             .add('rebase', '--abort')
             .exec();
-        } catch (abortErr) {
+        } catch (abortErr: any) {
           logger.log('Found error while attempting to abort rebase.');
           logger.error(abortErr);
         }
@@ -168,7 +184,7 @@ class GitCommit {
       throw rebaseErr;
     } finally {
       // If there was a temporary commit, rewind working directory back one commit.
-      if (dirty.code && (result.stdout.search('Already applied') === -1)) {
+      if (dirty.code && (result?.stdout.search('Already applied') === -1)) {
         await GitCmd.cmd()
           .add('reset', 'HEAD^')
           .exec();
@@ -177,7 +193,7 @@ class GitCommit {
     return result;
   }
 
-  async commit(message, author) {
+  async commit(message: string, author: string) {
     const { remote } = this;
 
     await this.pull();
@@ -202,7 +218,7 @@ class GitCommit {
       hasChanges = true;
     }
     if (!hasChanges) {
-      const errNoChange = new Error('No changes found for this commit.');
+      const errNoChange = new GitCmdError('No changes found for this commit.');
       errNoChange.code = 405;
       throw errNoChange;
     }
@@ -234,29 +250,29 @@ class GitCommit {
     return res;
   }
 
-  amend() {
-    // we have to tell git we intend to add our files
-    return Git.cmd()
-      .add('add', '--intent-to-add')
-      .addFiles(...this.files)
-      .exec()
-      .then(
-        Git.cmd()
-          .add('commit')
-          .add('--amend', '--no-edit')
-          .addFiles(...this.files)
-          .exec(),
-      );
-  }
+  // amend() {
+  //   // we have to tell git we intend to add our files
+  //   return Git.cmd()
+  //     .add('add', '--intent-to-add')
+  //     .addFiles(...this.files)
+  //     .exec()
+  //     .then(
+  //       Git.cmd()
+  //         .add('commit')
+  //         .add('--amend', '--no-edit')
+  //         .addFiles(...this.files)
+  //         .exec(),
+  //     );
+  // }
 }
 
 class Backend {
+  app: Express;
+
   constructor() {
     this.app = express();
     this.app.use(bodyParser.json());
     if (isMorganEnabled()) {
-      const morgan = require('morgan');
-      const morganBody = require('morgan-body');
       this.app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
       morganBody(this.app);
     }
@@ -271,14 +287,14 @@ class Backend {
     this.setRoute(`${backendPrefix}/changes`, Backend.getChanges);
     this.setRoute(`${backendPrefix}/changes/conflicts`, Backend.getConflicts);
     this.setRoute(`${backendPrefix}/get/commits`, Backend.getLatestCommits);
-    this.setRoute(`${backendPrefix}/change/amend`, Backend.setChangeAmend);
+    // this.setRoute(`${backendPrefix}/change/amend`, Backend.setChangeAmend);
     this.setRoute(`${backendPrefix}/change/commit`, Backend.setChangeCommit);
-    this.setRoute(`${backendPrefix}/change/push`, Backend.setChangePush);
+    // this.setRoute(`${backendPrefix}/change/push`, Backend.setChangePush);
     this.setRoute(`${backendPrefix}/change/reset`, Backend.setChangeReset);
     this.setRoute(`${backendPrefix}/change/pull`, Backend.setChangePull);
     this.setRoute(`${backendPrefix}/merge/main`, Backend.mergeMain);
     this.setRoute(`${backendPrefix}/asset/*`, Backend.setAsset);
-    this.setRoute(`${backendPrefix}/set/current`, Backend.setSetCurrent);
+    // this.setRoute(`${backendPrefix}/set/current`, Backend.setSetCurrent);
     this.setRoute(`${backendPrefix}/set/list`, Backend.setSetList);
     this.setRoute(`${backendPrefix}/content/*`, Backend.setContent);
     this.setRoute(`${backendPrefix}/log`, Backend.log);
@@ -293,7 +309,7 @@ class Backend {
     this.setRoute(`${backendPrefix}/assets/move`, Backend.moveAssets);
   }
 
-  setRoute(route, action) {
+  setRoute(route: string, action: (r: IRoute) => void) {
     action.bind(this)(this.app.route(route));
   }
 
@@ -301,8 +317,8 @@ class Backend {
     return this.app;
   }
 
-  static exitWithErrorResponse(error, res) {
-    logger.error(error);
+  static exitWithErrorResponse(error: GitCmdError, res: Response) {
+    logger.error(error.message);
     if (Number(error.code) >= 300) {
       res.status(Number(error.code));
     } else {
@@ -312,10 +328,10 @@ class Backend {
     res.send(Backend.sanitizeOutput(error.message)).end();
   }
 
-  static ensureCommitEnabled(res) {
+  static ensureCommitEnabled(res: Response) {
     // Exit with HTTP 405 "Method Not Allowed" if git commits are disabled.
     if (!canCommit) {
-      const error = new Error(
+      const error = new GitCmdError(
         'Your current environment does not allow saving content.',
       );
       error.code = 405;
@@ -325,10 +341,10 @@ class Backend {
     return true;
   }
 
-  static ensureSaveEnabled(res) {
+  static ensureSaveEnabled(res: Response) {
     // Exit with HTTP 405 "Method Not Allowed" if git commits are disabled.
     if (!canSave) {
-      const error = new Error(
+      const error = new GitCmdError(
         'Your current environment does not allow saving content.',
       );
       error.code = 405;
@@ -338,12 +354,12 @@ class Backend {
     return true;
   }
 
-  static getChanges(route) {
-    route.get(async (req, res) => {
+  static getChanges(route: IRoute) {
+    route.get(async (req: Request, res) => {
       try {
         const status = await getChanges();
         res.send(status);
-      } catch (error) {
+      } catch (error: any) {
         logger.log(error);
         error.code = 500;
         Backend.exitWithErrorResponse(error, res);
@@ -351,9 +367,15 @@ class Backend {
     });
   }
 
-  static getConflicts(route) {
-    route.get(async (req, res) => {
-      const target = req.query.target || undefined;
+  static getConflicts(route: IRoute) {
+    route.get(async (req: Request, res: Response) => {
+      const { targetQs = undefined } = req.query;
+
+      let target: string | undefined;
+      if (typeof targetQs === 'string') {
+        target = targetQs;
+      }
+
       try {
         const conflicts = await getConflicts(target);
         const pages = uniq(conflicts.files.filter(file => (file.search(backendPagePath) !== -1))
@@ -366,7 +388,7 @@ class Backend {
           path.dirname(file).replace(defaultBackendSitePath, '').replace(/^\/|\/$/g, '') || 'site'
         )));
         res.send({ ...conflicts, pages, site });
-      } catch (error) {
+      } catch (error: any) {
         logger.log(error);
         error.code = 500;
         Backend.exitWithErrorResponse(error, res);
@@ -374,22 +396,22 @@ class Backend {
     });
   }
 
-  static getLatestCommits(route) {
-    route.post(async (req, res) => {
+  static getLatestCommits(route: IRoute) {
+    route.post(async (req: Request, res: Response) => {
       try {
         await GitCmd.cmd().add('fetch', '--all');
         const gitLog = await GitCmd.cmd()
           .add('log', '--pretty=format:%H%n%ad%n%an%n%s%n')
           .exec();
         res.send(gitLog);
-      } catch (error) {
+      } catch (error: any) {
         res.send(error.info);
       }
     });
   }
 
-  static setChangeReset(route) {
-    route.post(async (req, res) => {
+  static setChangeReset(route: IRoute) {
+    route.post(async (req: Request, res: Response) => {
       if (!Backend.ensureSaveEnabled(res)) return;
       logger.log('Start reset');
       try {
@@ -430,15 +452,15 @@ class Backend {
           .add('reset', '--hard', 'HEAD')
           .exec();
         res.send(cleanExisting.stdout);
-      } catch (error) {
+      } catch (error: any) {
         // Need to inform user of merge operation fails.
         Backend.exitWithErrorResponse(error, res);
       }
     });
   }
 
-  static setChangePull(route) {
-    route.post((req, res) => {
+  static setChangePull(route: IRoute) {
+    route.post((req: Request, res: Response) => {
       if (!Backend.ensureSaveEnabled(res)) return;
       logger.log('Start pull');
       new GitCommit()
@@ -449,13 +471,13 @@ class Backend {
     });
   }
 
-  static mergeMain(route) {
-    route.post(async (req, res) => {
+  static mergeMain(route: IRoute) {
+    route.post(async (req: Request, res: Response) => {
       if (!Backend.ensureSaveEnabled(res)) return;
       try {
         const status = await mergeMain();
         res.send(status);
-      } catch (error) {
+      } catch (error: any) {
         logger.log(error);
         error.code = 500;
         Backend.exitWithErrorResponse(error, res);
@@ -463,20 +485,21 @@ class Backend {
     });
   }
 
-  static setChangeAmend(route) {
-    route.post((req, res) => {
-      logger.log('Start amend');
-      logger.log(req.body.paths);
-      Git.commit()
-        .addPaths(...req.body.paths)
-        .amend()
-        .then(data => res.send(data.stdout))
-        .catch(data => logger.log(data));
-    });
-  }
+  // @todo: do we need this?
+  // static setChangeAmend(route: IRoute) {
+  //   route.post((req: Request, res: Response) => {
+  //     logger.log('Start amend');
+  //     logger.log(req.body.paths);
+  //     GitCommit.commit()
+  //       .addPaths(...req.body.paths)
+  //       .amend()
+  //       .then(data => res.send(data.stdout))
+  //       .catch(data => logger.log(data));
+  //   });
+  // }
 
-  static setChangeCommit(route) {
-    route.post((req, res) => {
+  static setChangeCommit(route: IRoute) {
+    route.post((req: Request, res: Response) => {
       if (!Backend.ensureCommitEnabled(res)) return;
       logger.log(`Start committing: ${req.body.message}`);
       const { author } = req.body;
@@ -496,48 +519,53 @@ class Backend {
     });
   }
 
-  static setChangePush(route) {
-    route.post((req, res) => {
-      if (!Backend.ensureCommitEnabled(res)) return;
-      logger.log('Start push');
-      new GitCmd()
-        .add('symbolic-ref', '--short', 'HEAD')
-        .exec()
-        .then(data => {
-          const branch = data.stdout.trim();
-          logger.log(`Branch = ${branch}`);
-          Git.cmd()
-            .add('rebase', `origin/${branch}`)
-            .exec()
-            .then(
-              Git.cmd()
-                .add('push', 'origin', branch)
-                .exec(),
-            )
-            .then(addData => res.send(addData.stdout))
-            .catch(addData => logger.error(addData));
-        })
-        .catch(data => logger.log(data));
-    });
-  }
+  // @todo: !!! do we need this?
+  // static setChangePush(route: IRoute) {
+  //   route.post((req: Request, res: Response) => {
+  //     if (!Backend.ensureCommitEnabled(res)) return;
+  //     logger.log('Start push');
+  //     new GitCmd()
+  //       .add('symbolic-ref', '--short', 'HEAD')
+  //       .exec()
+  //       .then(data => {
+  //         const branch = data.stdout.trim();
+  //         logger.log(`Branch = ${branch}`);
+  //         Git.cmd()
+  //           .add('rebase', `origin/${branch}`)
+  //           .exec()
+  //           .then(
+  //             Git.cmd()
+  //               .add('push', 'origin', branch)
+  //               .exec(),
+  //           )
+  //           .then(addData => res.send(addData.stdout))
+  //           .catch(addData => logger.error(addData));
+  //       })
+  //       .catch(data => logger.log(data));
+  //   });
+  // }
 
-  static log(route) {
-    route.post((req, res) => {
+  static log(route: IRoute) {
+    route.post((req: Request, res: Response) => {
       new Logger(req.body.id).print(req.body.message, req.body.severity);
       res.send('success');
     });
   }
 
-  static setAsset(route) {
-    route.post((req, res) => {
+  static setAsset(route: IRoute) {
+    route.post((req: Request, res: Response) => {
       if (!Backend.ensureSaveEnabled(res)) return;
       const baseResourcePath = Backend.getPath(req);
-      const tmpDir = tmp.dirSync({ mode: '0755', unsafeCleanup: true, prefix: 'backendTmpDir_' });
+      const tmpDir = tmp.dirSync({
+        mode: 0o755,
+        unsafeCleanup: true,
+        prefix: 'backendTmpDir_'
+      });
       const form = formidable({ multiples: true, uploadDir: tmpDir.name });
 
       form.parse(req, (err, fields, files) => {
         const { nodePath } = fields;
-        copyAllFiles(files, baseResourcePath, nodePath).then((filesPath) => {
+        copyAllFiles(files, baseResourcePath, nodePath as string).then((filesPath) => {
           res.json({ filesPath });
         }).catch(copyErr => {
           console.log(copyErr);
@@ -547,37 +575,37 @@ class Backend {
     });
   }
 
-  static setSetCurrent(route) {
-    route
-      .get((req, res) => {
-        logger.log('Start get current set');
-        Git.getCurrent().then(data => res.send(data));
-      })
-      .post((req, res) => {
-        logger.log(`Start Post current Set:${req.body}`);
-        Git.setCurrent(req.body.name)
-          .then(Git.list())
-          .then(data => {
-            res.send(data);
-          })
-          .catch(reason => {
-            logger.log(reason);
-          });
-      });
-  }
+  // static setSetCurrent(route: IRoute) {
+  //   route
+  //     .get((req: Request, res: Response) => {
+  //       logger.log('Start get current set');
+  //       Git.getCurrent().then(data => res.send(data));
+  //     })
+  //     .post((req: Request, res: Response) => {
+  //       logger.log(`Start Post current Set:${req.body}`);
+  //       Git.setCurrent(req.body.name)
+  //         .then(Git.list())
+  //         .then(data => {
+  //           res.send(data);
+  //         })
+  //         .catch(reason => {
+  //           logger.log(reason);
+  //         });
+  //     });
+  // }
 
-  static setSetList(route) {
-    route.get((req, res) => {
+  static setSetList(route: IRoute) {
+    route.get((req: Request, res: Response) => {
       logger.log('Start Get Set List');
       Git.list().then(data => res.send(data));
     });
   }
 
-  static setContent(route) {
+  static setContent(route: IRoute) {
     route
-      .get((req, res) => {
+      .get((req: Request, res: Response) => {
         // @todo: refactor 2nd argument.
-        logger.log(req);
+        // logger.log(req);
         const page = Backend.getPage(Backend.getPath(req));
         logger.log(`Start get content for:${page.file}`);
         page
@@ -587,14 +615,14 @@ class Backend {
           })
           .catch(() => res.send({}));
       })
-      .post((req, res) => {
+      .post((req: Request, res: Response) => {
         if (!Backend.ensureSaveEnabled(res)) return;
         // @todo: refactor 2nd argument.
         const page = Backend.getPage(Backend.getPath(req));
         logger.log(`Start post content for:${page.file}`);
         page
           .write(req.body)
-          .then(data => {
+          .then((data: any) => {
             logger.log('Sending', data);
             res.send(data);
           })
@@ -603,13 +631,13 @@ class Backend {
             res.send({});
           });
       })
-      .delete((req, res) => {
+      .delete((req: Request, res: Response) => {
         if (!Backend.ensureSaveEnabled(res)) return;
         const page = Backend.getPage(Backend.getPath(req));
         logger.log(`Start deletion for:${page.file}`);
         page
           .delete()
-          .then(data => {
+          .then((data: any) => {
             logger.log('Sending', data);
             res.send(data);
           })
@@ -620,7 +648,7 @@ class Backend {
       });
   }
 
-  static getPath(req) {
+  static getPath(req: Request) {
     const prefixCount = backendPrefix.split('/').filter(Boolean).length + 1;
     logger.log(req.originalUrl);
     return req.originalUrl
@@ -631,13 +659,13 @@ class Backend {
       .join('/');
   }
 
-  static getPage(pagePath) {
+  static getPage(pagePath: string) {
     return new Page(pagePath);
   }
 
-  static removePage(route) {
+  static removePage(route: IRoute) {
     route
-      .delete((req, res) => {
+      .delete((req: Request, res: Response) => {
         if (!Backend.ensureSaveEnabled(res)) return;
         const pagePath = req.params[0];
         const page = Backend.getPage(pagePath);
@@ -647,7 +675,7 @@ class Backend {
 
         page
           .deleteDirectory()
-          .then(error => {
+          .then((error: any) => {
             if (error) {
               logger.log(error);
               res.send(error);
@@ -658,9 +686,9 @@ class Backend {
       });
   }
 
-  static removeFile(route) {
+  static removeFile(route: IRoute) {
     route
-      .delete((req, res) => {
+      .delete((req: Request, res: Response) => {
         if (!Backend.ensureSaveEnabled(res)) return;
         const pagePath = req.params[0];
         const page = Backend.getPage(pagePath);
@@ -670,7 +698,7 @@ class Backend {
 
         page
           .removeFile(origin)
-          .then(error => {
+          .then((error: any) => {
             if (error) {
               logger.log(error);
               res.send(error);
@@ -681,9 +709,9 @@ class Backend {
       });
   }
 
-  static directoryChild(route) {
+  static directoryChild(route: IRoute) {
     route
-      .delete((req, res) => {
+      .delete((req: Request, res: Response) => {
         if (!Backend.ensureSaveEnabled(res)) return;
         const pagePath = req.params[0];
         const page = Backend.getPage(pagePath);
@@ -694,7 +722,7 @@ class Backend {
 
         page
           .hasChildDirectory()
-          .then(error => {
+          .then((error: any) => {
             if (error) {
               logger.log(error);
               res.send(error);
@@ -705,9 +733,9 @@ class Backend {
       });
   }
 
-  static directoryExists(route) {
+  static directoryExists(route: IRoute) {
     route
-      .delete((req, res) => {
+      .delete((req: Request, res: Response) => {
         const pagePath = req.params[0];
         const page = Backend.getPage(pagePath);
 
@@ -717,7 +745,7 @@ class Backend {
 
         page
           .directoryExists(page.directory)
-          .then(error => {
+          .then((error: any) => {
             if (error) {
               logger.log(error);
               res.send(error);
@@ -728,8 +756,8 @@ class Backend {
       });
   }
 
-  static setPages(route) {
-    route.post((req, res) => {
+  static setPages(route: IRoute) {
+    route.post((req: Request, res: Response) => {
       if (!Backend.ensureSaveEnabled(res)) return;
       const { body } = req;
       const pagePath = body.path || '';
@@ -748,7 +776,7 @@ class Backend {
       }
       page
         .write(pageContent)
-        .then(data => {
+        .then((data: any) => {
           logger.log('Sending', data);
           res.status(201);
           res.send(data);
@@ -760,8 +788,8 @@ class Backend {
     });
   }
 
-  static clonePage(route) {
-    route.post(async (req, res) => {
+  static clonePage(route: IRoute) {
+    route.post(async (req: Request, res: Response) => {
       if (!Backend.ensureSaveEnabled(res)) return;
       const { body: { origin, destination } } = req;
       const page = Backend.getPage(destination);
@@ -786,8 +814,8 @@ class Backend {
     });
   }
 
-  static removeAssets(route) {
-    route.delete(async (req, res) => {
+  static removeAssets(route: IRoute) {
+    route.delete(async (req: Request, res: Response) => {
       if (!Backend.ensureSaveEnabled(res)) return;
       const origin = req.params[0];
       const page = Backend.getPage(origin);
@@ -810,8 +838,8 @@ class Backend {
     });
   }
 
-  static copyAssets(route) {
-    route.post((req, res) => {
+  static copyAssets(route: IRoute) {
+    route.post((req: Request, res: Response) => {
       if (!Backend.ensureSaveEnabled(res)) return;
       const {
         body: {
@@ -826,15 +854,15 @@ class Backend {
         setTimeout(() => {
           res.send({status: 'success'});
         }, 500);
-      } catch (error) {
+      } catch (error: any) {
         logger.log(error);
         res.status(500).send(error);
       }
     });
   }
 
-  static moveAssets(route) {
-    route.post((req, res) => {
+  static moveAssets(route: IRoute) {
+    route.post((req: Request, res: Response) => {
       if (!Backend.ensureSaveEnabled(res)) return;
       const {
         body: {
@@ -849,21 +877,21 @@ class Backend {
         setTimeout(() => {
           res.send({status: 'success'});
         }, 500);
-      } catch (error) {
+      } catch (error: any) {
         logger.log(error);
         res.status(500).send(error);
       }
     });
   }
 
-  static sanitizeOutput(data) {
+  static sanitizeOutput(data: string) {
     return data.replace(/(http|https):\/\/[^@]+:[^@]+@/gi, '$1://****:****@');
   }
 
-  start(port) {
+  start(port: string | number) {
     logger.log('Start');
     this.app.listen(port, () => logger.log(`Backend listening on Port: ${port}`));
   }
 }
 
-module.exports = Backend;
+export default Backend;

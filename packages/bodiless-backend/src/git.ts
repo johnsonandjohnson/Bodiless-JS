@@ -11,14 +11,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const path = require('path');
-const util = require('util');
-const os = require('os');
-const rimraf = require('rimraf');
-const { v1 } = require('uuid');
-const copyfiles = require('copyfiles');
-const GitCmd = require('./GitCmd');
-const Logger = require('./logger');
+import path from 'path';
+import util from 'util';
+import os from 'os';
+import rimraf from 'rimraf';
+import { v1 } from 'uuid';
+import copyfiles from 'copyfiles';
+import GitCmd, { GitInfoType } from './gitCmd';
+import Logger from './logger';
 
 /**
  * Returns the name of the current branch as a string.
@@ -32,11 +32,11 @@ const getCurrentBranch = async () => {
  * Verify the existence of an upstream branch.
  * @todo: replace with getUpstreamTrackingBranch?
  */
-const getUpstreamBranch = async (branch, remote = 'origin') => {
+const getUpstreamBranch = async (branch: string, remote = 'origin') => {
   try {
     await GitCmd.cmd().add('ls-remote', '--heads', '--exit-code', remote, branch).exec();
     return `${remote}/${branch}`;
-  } catch (e) {
+  } catch (e: any) {
     // Catch only the error where the upstream branch doesn't exist.
     if (e.code === '2') return undefined;
     throw e;
@@ -48,7 +48,7 @@ const getUpstreamBranch = async (branch, remote = 'origin') => {
  *
  * @param {string} local branch name.
  */
-const getUpstreamTrackingBranch = async branch => {
+const getUpstreamTrackingBranch = async (branch: string) => {
   const result = await GitCmd.cmd()
     .add('for-each-ref', '--format="%(upstream:short)"', `refs/heads/${branch}`)
     .exec();
@@ -58,15 +58,15 @@ const getUpstreamTrackingBranch = async branch => {
 /**
  * Returns the merge-base between two branches.
  */
-const getMergeBase = async (a, b) => {
+const getMergeBase = async (a: string, b: string) => {
   const mergeBase = await GitCmd.cmd()
     .add('merge-base', a, b)
     .exec();
   return mergeBase.stdout.trim();
 };
 
-const getGitCmdOutputString = result => result.stdout.trim().replace('\n$', '');
-const getGitCmdOutputArray = result => (
+const getGitCmdOutputString = (result: GitInfoType) => result.stdout.trim().replace('\n$', '');
+const getGitCmdOutputArray = (result: GitInfoType) => (
   result.stdout.trim().split('\n').map(l => l.trim()).filter(l => l.length > 0)
 );
 
@@ -77,7 +77,7 @@ const getGitCmdOutputArray = result => (
  * @param show The branch whose commits to show.
  * @param comparedTo The branch to compare it to.
  */
-const compare = async (show, comparedTo) => {
+const compare = async (show: string, comparedTo: string) => {
   const mergeBase = await getMergeBase(show, comparedTo);
   const commitsPromise = GitCmd.cmd()
     .add('rev-list', '--oneline', '--left-only', `${show}...${comparedTo}`)
@@ -150,7 +150,7 @@ const getChanges = async () => {
       },
     };
     return status;
-  } catch (e) {
+  } catch (e: any) {
     throw new Error(`Error occurred: ${e.message}`);
   }
 };
@@ -161,7 +161,7 @@ const getChanges = async () => {
  * @param {string} url - Repo url.
  * @param {array} options - Clone options [branch|directory].
  */
-const clone = async (url, options = {}) => {
+const clone = async (url: string, options: {branch?: string, directory?: string} = {}) => {
   const logger = new Logger('BACKEND');
   let result = await GitCmd.cmd().add('config', '--get', 'user.name').exec();
   const configName = result.stdout.trim().replace('\n', '');
@@ -173,7 +173,7 @@ const clone = async (url, options = {}) => {
   cmd.add('--config', `user.name=${configName}`);
   if (options.branch) cmd.add('-b', options.branch);
   if (options.directory) cmd.add(options.directory);
-  logger.log([`Clone to path: ${options.directory}`]);
+  logger.log(`Clone to path: ${options?.directory}`);
   return cmd.exec();
 };
 
@@ -201,12 +201,12 @@ const getConflicts = async (target = 'upstream') => {
 
   const rootResult = await GitCmd.cmd().add('rev-parse', '--show-toplevel').exec();
   const rootDir = getGitCmdOutputString(rootResult);
-  logger.log([`Repo root: ${rootDir}`]);
+  logger.log(`Repo root: ${rootDir}`);
 
   let workBranch = '';
   let targetBranch = '';
   let uncommittedResult;
-  let files = [];
+  let files: string[] = [];
   switch (target) {
     case 'edit':
       targetBranch = `origin-${branch}`;
@@ -249,14 +249,17 @@ const getConflicts = async (target = 'upstream') => {
 
   await clone(rootDir, { directory: tmpDir, branch: targetBranch });
   process.chdir(tmpDir);
-  const copyfilesPromised = util.promisify(copyfiles);
+  const copyfilesPromised = util.promisify<string[], copyfiles.Options | number>(copyfiles);
   if (files.length) {
-    logger.log([`Copy Files: ${files} ${tmpDir}`, process.cwd()]);
+    logger.log(`Copy Files: ${files} ${tmpDir}`, process.cwd());
 
     try {
       const result = await copyfilesPromised(
         [...files, tmpDir],
-        { error: true, up: (rootDir.match(/\//g) || []).length + 1 },
+        {
+          error: true,
+          up: (rootDir.match(/\//g) || []).length + 1
+        },
       );
       logger.log(`Result: ${result}`);
 
@@ -266,12 +269,12 @@ const getConflicts = async (target = 'upstream') => {
       await GitCmd.cmd()
         .add('commit', '-m', 'TEMPORARY COMMIT')
         .exec();
-    } catch (e) {
+    } catch (e: any) {
       logger.error(e);
     }
   }
 
-  let conflictFiles = [];
+  let conflictFiles: string[] = [];
   try {
     await GitCmd.cmd()
       .add('merge', '--no-commit', '--no-ff', 'origin/origin-main')
@@ -356,7 +359,7 @@ const mergeMain = async () => {
     await GitCmd.cmd()
       .add('push')
       .exec();
-  } catch (e) {
+  } catch (e: any) {
     logger.error(e);
   }
 
@@ -371,7 +374,7 @@ const mergeMain = async () => {
   return {};
 };
 
-module.exports = {
+export {
   getCurrentBranch,
   getUpstreamBranch,
   getUpstreamTrackingBranch,

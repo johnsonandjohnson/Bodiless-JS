@@ -12,15 +12,14 @@
  * limitations under the License.
 */
 
+import dotenv from 'dotenv';
+import Backend from './backend';
+
 // Use the same .env file as gatsby develop.
-require('dotenv').config({
+dotenv.config({
   path: '.env.development',
 });
 
-const express = require('express');
-const Backend = require('./backend');
-
 const backendPort = process.env.BODILESS_BACKEND_PORT || 8001;
-
-const backend = new Backend(express());
+const backend = new Backend();
 backend.start(backendPort);

@@ -12,12 +12,14 @@
  * limitations under the License.
  */
 
-const fs = require('fs');
-const fse = require('fs-extra');
-const path = require('path');
-const os = require('os');
-const replace = require('replace-in-file');
-const Logger = require('./logger');
+import fs from 'fs';
+import fse from 'fs-extra';
+import path from 'path';
+import os from 'os';
+import replace from 'replace-in-file';
+import type { Dirent, PathLike } from 'fs';
+import type { ReplaceInFileConfig, ReplaceResult } from 'replace-in-file';
+import Logger from './logger';
 
 const logger = new Logger('BACKEND');
 
@@ -25,12 +27,12 @@ const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
 const IMG_ASSETS_PATH = `/images${path.sep}pages`;
 
-const getDirectories = (dir) => fs
+const getDirectories = (dir: string) => fs
   .readdirSync(dir)
   .filter((file) => fs.statSync(`${dir}/${file}`).isDirectory());
-// once we on node > 10.12.0
+// @todo: update to fs.mkdir - once we on node > 10.12.0
 // we can leverage fs.mkdir since it supports { recursive: true }
-function ensureDirectoryExistence(filePath) {
+function ensureDirectoryExistence(filePath: string) {
   const dirname = path.dirname(filePath);
   if (fs.existsSync(dirname)) {
     return;
@@ -40,9 +42,13 @@ function ensureDirectoryExistence(filePath) {
 }
 
 class Page {
-  supportedExtensions = ['json', 'tsx', 'jsx', 'js'];
+  path: string = '';
 
-  constructor(pagePath) {
+  basePath: string = '';
+
+  extensions = ['json', 'tsx', 'jsx', 'js'];
+
+  constructor(pagePath: string) {
     this.path = pagePath;
   }
 
@@ -50,12 +56,12 @@ class Page {
     return this.basePath || backendFilePath;
   }
 
-  setBasePath(basePath) {
+  setBasePath(basePath: string) {
     this.basePath = basePath;
   }
 
   get supportedExtensions() {
-    return this.supportedExtensions;
+    return this.extensions;
   }
 
   get exists() {
@@ -75,15 +81,18 @@ class Page {
 
   read() {
     const readPromise = new Promise((resolve) => {
-      fs.readFile(this.file, (err, data) => {
-        if (err) logger.log(err);
-        resolve(data || {});
-      });
+      fs.readFile(
+        this.file,
+        (err: NodeJS.ErrnoException | null, data) => {
+          if (err) logger.log(err.message);
+          resolve(data || {});
+        }
+      );
     });
     return readPromise;
   }
 
-  write(data) {
+  write(data: any) {
     const readPromise = new Promise((resolve, reject) => {
       ensureDirectoryExistence(this.file);
       fs.writeFile(this.file, JSON.stringify(data, null, 2), (err) => {
@@ -109,51 +118,58 @@ class Page {
     return readPromise;
   }
 
-  static dirHasSubObjects(dirPath, objType) {
-    return new Promise((resove) => {
+  static dirHasSubObjects(dirPath: string, objType?: string) {
+    return new Promise<Dirent[]>((resolve) => {
       try {
-        fs.readdir(dirPath, { withFileTypes: true }, (err, files) => {
-          if (err) {
-            return resove([]);
-          }
-
-          const filteredObjects = files.filter((item) => {
-            if (objType === 'file') {
-              return item.isFile();
+        fs.readdir(
+          dirPath,
+          { withFileTypes: true },
+          (err: NodeJS.ErrnoException | null, files: Dirent[]) => {
+            if (err) {
+              return resolve([]);
             }
-            if (objType === 'directory') {
-              return item.isDirectory();
-            }
-            return true;
-          });
 
-          if (!filteredObjects.length) {
-            return resove([]);
+            const filteredObjects = files.filter((item) => {
+              if (objType === 'file') {
+                return item.isFile();
+              }
+              if (objType === 'directory') {
+                return item.isDirectory();
+              }
+              return true;
+            });
+
+            if (!filteredObjects.length) {
+              return resolve([]);
+            }
+            return resolve(filteredObjects);
           }
-          return resove(filteredObjects);
-        });
+        );
       } catch (error) {
-        resove([]);
+        resolve([]);
       }
     });
   }
 
-  static dirHasFiles(dirPath) {
+  static dirHasFiles(dirPath: string): Promise<Dirent[]> {
     return Page.dirHasSubObjects(dirPath, 'file');
   }
 
-  static dirHasDirectories(dirPath) {
+  static dirHasDirectories(dirPath: string) {
     return Page.dirHasSubObjects(dirPath, 'directory');
   }
 
-  static rmDirectories(destinationPath, dirPaths) {
-    const dels = [];
+  static rmDirectories(destinationPath: string, dirPaths: Dirent[]) {
+    const dels: Promise<string>[] = [];
     dirPaths.forEach((dir) => {
       dels.push(
-        new Promise((resove) => {
-          fse.remove(`${destinationPath}/${dir.name}`, (err) => {
-            if (err) return console.error(err);
-            return resove();
+        new Promise((resolve, reject) => {
+          fse.remove(`${destinationPath}/${dir.name}`, (err: any) => {
+            if (err) {
+              console.error(err);
+              return reject(err);
+            }
+            return resolve('ok');
           });
         }),
       );
@@ -161,18 +177,22 @@ class Page {
     return Promise.resolve(Promise.all(dels));
   }
 
-  static jsFilesPathResolve(originPath, destinationPath, files) {
-    const actions = [];
+  static jsFilesPathResolve(
+    originPath: string,
+    destinationPath: string,
+    files: Dirent[]
+  ) {
+    const actions: Promise<string>[] = [];
     const reg = /from ('|")(\.\..*)('|")/g;
 
-    const readF = (file) => new Promise((resolve, reject) => {
+    const readF = (file: Dirent) => new Promise<string>((resolve, reject) => {
       const filePath = `${destinationPath}/${file.name}`;
       fs.readFile(filePath, 'utf8', (err, content) => {
         if (err) return reject();
-        const matchs = content.match(reg);
-        if (!matchs.length) return reject();
+        const matches = content.match(reg);
+        if (!matches?.length) return reject();
         let newContent = content;
-        matchs.forEach((item) => {
+        matches.forEach((item) => {
           const delimiter = item[item.search(/'|"/)];
           const oldPath = item.split(' ')[1].replace(/'|"/g, '');
           const from = path.dirname(filePath);
@@ -186,7 +206,7 @@ class Page {
         });
         fs.writeFile(filePath, newContent, (writeErr) => {
           if (writeErr) return reject();
-          return resolve();
+          return resolve('ok');
         });
         return true;
       });
@@ -199,7 +219,7 @@ class Page {
     return Promise.resolve(Promise.all(actions));
   }
 
-  async copyDirectory(origin, destination) {
+  async copyDirectory(origin: string, destination: string) {
     const bp = this.basePath;
     const originPath = `${bp}${origin}`.replace(/\/$/, '');
     const destinationPath = `${bp}${destination}`.replace(/\/$/, '');
@@ -222,10 +242,10 @@ class Page {
       isOriginPathExists.map((file) => {
         const from = `${originPath}/${file.name}`;
         const to = `${destinationPath}/${file.name}`;
-        return new Promise((resove, reject) => {
+        return new Promise((resolve, reject) => {
           fse.copy(from, to, (err) => {
             if (err) return reject(err);
-            return resove();
+            return resolve('ok');
           });
         });
       }),
@@ -254,11 +274,20 @@ class Page {
     return 'success';
   }
 
-  static clonePageImgAssets(origin, destination, basePath) {
+  static clonePageImgAssets(
+    origin: string,
+    destination: string,
+    basePath: string
+  ) {
     Page.clonePageAssets(origin, destination, basePath, IMG_ASSETS_PATH);
   }
 
-  static async clonePageAssets(origin, destination, basePath, target) {
+  static async clonePageAssets(
+    origin: string,
+    destination: string,
+    basePath: string,
+    target: string
+  ) {
     const originPath = origin.replace(/\/$/, '');
     const originPathCrossPlatform = os.platform() === 'win32'
       ? originPath.replace('/', '\\\\')
@@ -305,7 +334,7 @@ class Page {
               return new Promise((resolve, reject) => {
                 fse.copy(fromPath, toPath, (err) => {
                   if (err) return reject(err);
-                  return resolve();
+                  return resolve('ok');
                 });
               });
             }),
@@ -332,10 +361,10 @@ class Page {
                 // - '/images/pages/example2'
                 const toPath = `${imgAssetsPath}${destinationPathCrossPlatform}`;
 
-                const options = {
+                const options: ReplaceInFileConfig = {
                   files: fileToBeUpdated,
                   from: fromPath,
-                  to: match => match.replace(fromPath, toPath),
+                  to: (match) => match.replace(fromPath, toPath),
                 };
                 return Page.updateFileContent(options);
               }),
@@ -343,20 +372,20 @@ class Page {
           }
         }
       }
-    } catch (err) {
+    } catch (err: any) {
       if (err) logger.log(err);
     }
     return 'success';
   }
 
-  static updateFileContent(options) {
-    return new Promise((resolve) => {
+  static updateFileContent(options: ReplaceInFileConfig) {
+    return new Promise((resolve, reject) => {
       try {
-        replace(options, (error, results) => {
+        replace.replaceInFile(options, (error: Error, results: ReplaceResult[]) => {
           if (error) {
-            return resolve([]);
+            reject(error);
           }
-          return resolve(results);
+          resolve(results);
         });
       } catch (error) {
         resolve([]);
@@ -364,7 +393,7 @@ class Page {
     });
   }
 
-  directoryExists(newDirectory) {
+  directoryExists(newDirectory: PathLike) {
     const readPromise = new Promise((resolve) => {
       fs.access(newDirectory, err => {
         if (!err) {
@@ -376,7 +405,7 @@ class Page {
     return readPromise;
   }
 
-  removeFile(origin) {
+  removeFile(origin: string) {
     const readPromise = new Promise((resolve, reject) => {
       fs.unlink(origin, err => {
         if (err) {
@@ -415,8 +444,8 @@ class Page {
 
   hasChildDirectory() {
     const readPromise = new Promise((resolve) => {
-      const subdirs = getDirectories(this.directory);
-      if (subdirs.length !== 0) {
+      const subDirs = getDirectories(this.directory);
+      if (subDirs.length !== 0) {
         resolve(
           'The page cannot be deleted it has child pages. To delete this page, first delete or move all child pages, and retry.',
         );
@@ -428,16 +457,16 @@ class Page {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  removePageAssets(path) {
-    return new Promise((resolve, reject) => {
+  removePageAssets(path: string) {
+    return new Promise<string>((resolve, reject) => {
       fse.remove(path, err => {
         if (err) {
           reject(err);
         }
-        resolve();
+        resolve('ok');
       });
     });
   }
 }
 
-module.exports = Page;
+export default Page;
