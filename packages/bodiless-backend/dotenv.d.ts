@@ -3,7 +3,8 @@
 
 export interface DotenvParseOptions {
   /**
-   * You may turn on logging to help debug why certain keys or values are not being set as you expect.
+   * You may turn on logging to help debug why certain keys or values
+   * are not being set as you expect.
    */
   debug?: boolean;
 }
@@ -26,7 +27,8 @@ export function parse(
 
 export interface DotenvConfigOptions {
   /**
-   * You may specify a custom path if your file containing environment variables is located elsewhere.
+   * You may specify a custom path if your file containing environment
+   * variables is located elsewhere.
    */
   path?: string;
 
@@ -36,7 +38,8 @@ export interface DotenvConfigOptions {
   encoding?: string;
 
   /**
-   * You may turn on logging to help debug why certain keys or values are not being set as you expect.
+   * You may turn on logging to help debug why certain keys or values are
+   * not being set as you expect.
    */
   debug?: boolean;
 }
