@@ -13,25 +13,31 @@
  */
 
 import request from 'supertest';
+import type { Express } from 'express';
+import Backend from '../src/backend';
 
 const origin = '/from';
 const destination = '/to';
 const backendPrefix = '/prefix';
 const backendFilePath = '/files';
 
+process.env.GATSBY_BACKEND_PREFIX = backendPrefix;
+process.env.BODILESS_BACKEND_DATA_PAGE_PATH = backendFilePath;
+
 const mockPageClone = jest.fn();
 
 jest.mock('../src/page', () => (pagePath: any) => ({
   path: pagePath,
-  copyDirectory: pagePath === destination
-    ? mockPageClone.mockResolvedValue(true)
-    : mockPageClone.mockRejectedValue(false),
+  copyDirectory: (
+    (pagePath === destination)
+      ? mockPageClone.mockResolvedValue({data: true})
+      : mockPageClone.mockRejectedValue({data: false})
+  ),
   setBasePath: () => true,
 }));
 
-const getApp = () => {
-  // eslint-disable-next-line global-require
-  const Backend = require('../src/backend');
+// get Express app
+const getApp = (): Express => {
   const backend = new Backend();
   return backend.getApp();
 };
@@ -41,20 +47,24 @@ describe('Clone page endpoint', () => {
   // clearing mocks
   beforeEach(() => {
     jest.resetModules();
-    process.env.GATSBY_BACKEND_PREFIX = backendPrefix;
-    process.env.BODILESS_BACKEND_DATA_PAGE_PATH = backendFilePath;
     mockPageClone.mockReset();
   });
 
-  const performRequest = (app$: any, data: any) => request(app$)
+  const performCloneRequest = (
+    app$: Express, data?: (string | object)
+  ) => request(app$)
     .post(`${backendPrefix}/clone`)
-    .send(data);
+    .send(data)
+    .on('error', (err: any) => {
+      // Some errors might be expected for testing.
+      console.log(err.error);
+    });
 
-  describe('when the page is cloned succefully', () => {
+  describe('when the page is cloned successfully', () => {
     const data = { origin, destination };
-    it('cloned page should be writen to file system', async () => {
+    it('cloned page should be written to file system', async () => {
       const app = getApp();
-      await performRequest(app, data);
+      await performCloneRequest(app, data);
       expect(mockPageClone).toHaveBeenCalledTimes(1);
       const resolved = await mockPageClone.mock.instances[0];
       expect(resolved.path).toBe(destination);
@@ -62,14 +72,14 @@ describe('Clone page endpoint', () => {
 
     it('should get the correct parameters', async () => {
       const app = getApp();
-      await performRequest(app, data);
+      await performCloneRequest(app, data);
       expect(mockPageClone.mock.calls[0][0]).toBe(origin);
       expect(mockPageClone.mock.calls[0][1]).toBe(destination);
     });
 
     it('should respond with 200 status', async () => {
       const app = getApp();
-      const result = await performRequest(app, data);
+      const result = await performCloneRequest(app, data);
       expect(result.status).toEqual(200);
     });
   });
@@ -78,7 +88,7 @@ describe('Clone page endpoint', () => {
     const data = { origin, destination: '/page/error' };
     it('should respond with 500 status', async () => {
       const app = getApp();
-      const result = await performRequest(app, data);
+      const result = await performCloneRequest(app, data);
       expect(result.status).toEqual(500);
     });
   });

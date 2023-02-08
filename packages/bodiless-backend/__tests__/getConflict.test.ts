@@ -12,10 +12,11 @@
  * limitations under the License.
  */
 
+import Git from '../src/tools/git';
+import GitCmd from '../src/gitCmd';
 import { cloneGitFixture, cleanGitFixture } from './tools';
 
-const { getConflicts, getUpstreamTrackingBranch } = require('../src/git');
-const GitCmd = require('../src/GitCmd');
+const { getConflicts, getUpstreamTrackingBranch } = Git;
 
 describe('getConflicts', () => {
   beforeEach(cloneGitFixture('get-conflicts', 'feat/foo-test-1'));

@@ -133,8 +133,8 @@ export class BasePage {
 
   async isImageVisible(imageXpath: string) {
     expect(await this.page.locator(imageXpath).isVisible()).toBeTruthy();
-    const imageDimentions = await this.page.locator(imageXpath).boundingBox();
-    expect(imageDimentions!.width).toBeGreaterThan(0);
-    expect(imageDimentions!.height).toBeGreaterThan(0);
+    const imageDimensions = await this.page.locator(imageXpath).boundingBox();
+    expect(imageDimensions!.width).toBeGreaterThan(0);
+    expect(imageDimensions!.height).toBeGreaterThan(0);
   }
 }

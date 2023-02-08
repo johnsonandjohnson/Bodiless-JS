@@ -13,19 +13,15 @@
  */
 
 import path from 'path';
+import rimraf from 'rimraf';
 import { mkdirSync } from 'fs';
-import GitCmd from '../src/GitCmd';
-
-// eslint-disable-next-line import/no-extraneous-dependencies
-const rimraf = require('rimraf');
+import GitCmd from '../src/gitCmd';
 
 const originalCwd = process.cwd();
 
-export const resolveRelativeToMe = (...segments: string[]) => {
-  const scriptName = path.basename(__filename);
-  const scriptPath = require.resolve(`./${scriptName}`);
-  return path.resolve(path.dirname(scriptPath), ...segments);
-};
+export const resolveRelativeToMe = (...segments: string[]) => (
+  path.resolve(path.dirname(__filename), ...segments)
+);
 
 export const cloneGitFixture = (repo: string, branch: string) => async () => {
   const tmp = resolveRelativeToMe(`tmp-${repo}`);

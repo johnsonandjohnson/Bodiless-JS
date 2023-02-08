@@ -12,14 +12,15 @@
  * limitations under the License.
  */
 
-const fs = require('fs');
-const fse = require('fs-extra');
-const path = require('path');
-const crypto = require('crypto');
+import fs from 'fs';
+import fse from 'fs-extra';
+import path from 'path';
+import crypto from 'crypto';
+import type { Files, File } from 'formidable';
 
 const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
 
-const copyFilePromise = (from, to) => new Promise((resolve, reject) => {
+const copyFilePromise = (from: string, to: string) => new Promise((resolve, reject) => {
   fs.copyFile(from, to, copyErr => {
     if (copyErr) reject(copyErr);
     fs.unlinkSync(from);
@@ -27,9 +28,9 @@ const copyFilePromise = (from, to) => new Promise((resolve, reject) => {
   });
 });
 
-const generateHash = str => crypto.createHash('md5').update(str).digest('hex');
+const generateHash = (str: string) => crypto.createHash('md5').update(str).digest('hex');
 
-const isImage = fileType => {
+const isImage = (fileType: string) => {
   const imageFileTypes = [
     'image/jpeg',
     'image/png',
@@ -40,12 +41,18 @@ const isImage = fileType => {
   return imageFileTypes.includes(fileType);
 };
 
-const copyAllFiles = (files, baseResourcePath, nodePath) => {
-  const allFiles = [];
-  Object.keys(files).forEach(key => allFiles.push(files[key]));
+const copyAllFiles = (files: Files, baseResourcePath: string, nodePath: string) => {
+  const allFiles: File[] = [];
+  Object.keys(files).forEach(key => {
+    if (Array.isArray(files[key])) {
+      allFiles.push(...files[key] as File[]);
+    } else {
+      allFiles.push(files[key] as File);
+    }
+  });
 
-  return Promise.all(allFiles.map(file => {
-    const baseDir = isImage(file.type) ? 'images' : 'files';
+  return Promise.all(allFiles.map((file: File) => {
+    const baseDir = isImage(file.type || '') ? 'images' : 'files';
     const distFolderPath = path.join(
       backendStaticPath,
       baseDir,
@@ -57,7 +64,7 @@ const copyAllFiles = (files, baseResourcePath, nodePath) => {
       fs.mkdirSync(distFolderPath, { recursive: true });
     }
 
-    return copyFilePromise(file.path, path.join(distFolderPath, file.name));
+    return copyFilePromise(file.path, path.join(distFolderPath, file.name || ''));
   }));
 };
 
@@ -71,10 +78,10 @@ const copyAllFiles = (files, baseResourcePath, nodePath) => {
  * @param pathFrom string - source file path
  * @param pathTo string - destination file path
  */
-const copyFile = (pathFrom, pathTo) => {
+const copyFile = (pathFrom: string, pathTo: string) => {
   try {
     fse.copySync(pathFrom, pathTo);
-  } catch (err) {
+  } catch (err: any) {
     throw new Error(`Failed to copy file from ${pathFrom} to ${pathTo}: ${err.message}`);
   }
 };
@@ -85,15 +92,15 @@ const copyFile = (pathFrom, pathTo) => {
  * @param pathFrom string - source file path
  * @param pathTo string - destination file path
  */
-const moveFile = (pathFrom, pathTo) => {
+const moveFile = (pathFrom: string, pathTo: string) => {
   try {
     fse.moveSync(pathFrom, pathTo, { overwrite: true });
-  } catch (err) {
+  } catch (err: any) {
     throw new Error(`Failed to move file from ${pathFrom} to ${pathTo}: ${err.message}`);
   }
 };
 
-module.exports = {
+export {
   copyAllFiles,
   moveFile,
   copyFile,

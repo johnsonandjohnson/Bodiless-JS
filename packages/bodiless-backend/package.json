@@ -6,10 +6,16 @@
   "files": [
     "/bodiless.docs.json",
     "/getDocs.js",
-    "/src"
+    "/lib"
   ],
   "bin": {
     "bodiless-backend": "./bin/bodiless-backend"
+  },
+  "scripts": {
+    "build": "run-p build:lib",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
     "@bodiless/cli": "^1.0.0-rc.22",
@@ -20,6 +26,7 @@
     "formidable": "^1.2.1",
     "fs-extra": "^8.1.0",
     "lodash": "^4.17.19",
+    "qs": "^6.11.0",
     "replace-in-file": "^6.2.0",
     "rimraf": "^2.6.3",
     "tmp": "^0.0.33",
@@ -32,7 +39,16 @@
   "author": "Dewen Li <dli94@its.jnj.com>",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@types/copyfiles": "^2.1.1",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.17",
+    "@types/formidable": "^1.2.5",
+    "@types/fs-extra": "^8.0.0",
+    "@types/morgan": "^1.9.4",
+    "@types/react": "^17.0.39",
+    "@types/rimraf": "^3.0.0",
     "@types/supertest": "^2.0.8",
+    "@types/tmp": "^0.2.3",
     "morgan": "^1.9.1",
     "morgan-body": "^2.4.8",
     "supertest": "^4.0.2"
