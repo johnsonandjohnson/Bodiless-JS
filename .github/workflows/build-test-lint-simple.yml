@@ -42,8 +42,8 @@ jobs:
       # - name: Cypress tests
         # run: npm run test:monorepo
         # run: npm run test:ci
-      # - name: Install Playwright
-      #   run: npx playwright install --with-deps
+      - name: Install Playwright
+        run: npx playwright install
       - name: Run Playwright Tests
         run: |
           npm run test:monorepo-pw
