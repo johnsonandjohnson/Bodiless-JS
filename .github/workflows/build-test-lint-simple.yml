@@ -43,7 +43,7 @@ jobs:
         # run: npm run test:monorepo
         # run: npm run test:ci
       - name: Install Playwright
-        run: npx playwright install --with-deps
+        run: npx playwright@1.20 install --with-deps
       - name: Run Playwright Tests
         run: |
           npm run test:monorepo-pw
