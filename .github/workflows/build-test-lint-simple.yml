@@ -10,7 +10,7 @@ on:
 jobs:
   setup:
     name: Setup, Build, Lint and Test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       # install a specific version of Node using
