@@ -24,7 +24,7 @@ Base that defines the default layout.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/tokens/vitalLayout.ts:87](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8a9d75ab2/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L87)
+[vital-layout/src/components/Layout/tokens/vitalLayout.ts:87](https://github.com/johnsonandjohnson/Bodiless-JS/blob/613288855/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L87)
 
 ___
 
@@ -75,7 +75,7 @@ export default {
 
 #### Defined in
 
-[vital-layout/src/components/Layout/tokens/vitalLayout.ts:131](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8a9d75ab2/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L131)
+[vital-layout/src/components/Layout/tokens/vitalLayout.ts:131](https://github.com/johnsonandjohnson/Bodiless-JS/blob/613288855/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L131)
 
 ___
 
@@ -87,4 +87,4 @@ Special layout to demonstrate components.  Only used for testing purposing.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/tokens/vitalLayout.ts:135](https://github.com/johnsonandjohnson/Bodiless-JS/blob/8a9d75ab2/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L135)
+[vital-layout/src/components/Layout/tokens/vitalLayout.ts:135](https://github.com/johnsonandjohnson/Bodiless-JS/blob/613288855/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L135)
