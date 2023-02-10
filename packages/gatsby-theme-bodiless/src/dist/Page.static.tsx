@@ -11,46 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React, { FC } from 'react';
-import { StaticPage } from '@bodiless/core';
-import { ContextWrapper } from '@bodiless/core-ui';
-import { PageDataProvider } from '@bodiless/page';
-import type { FinalUI, UI, PageProps } from './types';
-import GatsbyNodeProvider from './GatsbyNodeProvider.bl-edit';
-import ShowDesignKeys from './ShowDesignKeys';
-
-const defaultUI: Omit<FinalUI, 'PageEditor'> = {
-  ContextWrapper,
-};
-
-const getUI = (ui: UI = {}): Omit<FinalUI, 'PageEditor'> => ({ ...defaultUI, ...ui });
-
-const Page: FC<PageProps> = ({ children, ui, ...rest }) => {
-  const { ContextWrapper: Wrapper } = getUI(ui);
-  const { pageContext } = rest;
-  const {
-    // @ts-ignore non-existing subPageTemplate, and template, types in pageContext.
-    slug, subPageTemplate, template,
-  } = pageContext;
-
-  const pageData = {
-    pagePath: slug,
-    subPageTemplate,
-    template,
-  };
-  return (
-    <GatsbyNodeProvider {...rest}>
-      <PageDataProvider pageData={pageData}>
-        <ShowDesignKeys>
-          <StaticPage>
-            <Wrapper>
-              {children}
-            </Wrapper>
-          </StaticPage>
-        </ShowDesignKeys>
-      </PageDataProvider>
-    </GatsbyNodeProvider>
-  );
-};
+import Page from './StaticPage';
 
 export default Page;
