@@ -32,7 +32,7 @@ const getDirectories = (dir: string) => fs
   .filter((file) => fs.statSync(`${dir}/${file}`).isDirectory());
 // @todo: update to fs.mkdir - once we on node > 10.12.0
 // we can leverage fs.mkdir since it supports { recursive: true }
-function ensureDirectoryExistence(filePath: string) {
+function ensureDirectoryExistence(filePath: string): void {
   const dirname = path.dirname(filePath);
   if (fs.existsSync(dirname)) {
     return;
@@ -80,45 +80,44 @@ class Page {
   }
 
   read() {
-    const readPromise = new Promise((resolve) => {
+    return new Promise<string>((resolve) => {
       fs.readFile(
         this.file,
-        (err: NodeJS.ErrnoException | null, data) => {
+        'utf8',
+        (err: NodeJS.ErrnoException | null, data: string) => {
           if (err) logger.log(err.message);
-          resolve(data || {});
+          resolve(data);
         }
       );
     });
-    return readPromise;
   }
 
   write(data: any) {
-    const readPromise = new Promise((resolve, reject) => {
+    return new Promise<string>((resolve, reject) => {
       ensureDirectoryExistence(this.file);
       fs.writeFile(this.file, JSON.stringify(data, null, 2), (err) => {
         if (err) {
           reject(err);
         }
-        resolve(this);
+        resolve('ok');
       });
     });
-    return readPromise;
   }
 
   delete() {
-    const readPromise = new Promise((resolve, reject) => {
+    return new Promise<string>((resolve, reject) => {
       ensureDirectoryExistence(this.file);
       fs.unlink(this.file, (err) => {
         if (err) {
           reject(err);
         }
-        resolve(this);
+        resolve('ok');
       });
     });
-    return readPromise;
   }
 
   static dirHasSubObjects(dirPath: string, objType?: string) {
+    // @todo: add reject
     return new Promise<Dirent[]>((resolve) => {
       try {
         fs.readdir(
@@ -219,19 +218,19 @@ class Page {
     return Promise.resolve(Promise.all(actions));
   }
 
-  async copyDirectory(origin: string, destination: string) {
-    const bp = this.basePath;
-    const originPath = `${bp}${origin}`.replace(/\/$/, '');
-    const destinationPath = `${bp}${destination}`.replace(/\/$/, '');
-
+  async copyDirectory(origin: string, destination: string): Promise<object> {
+    const {basePath} = this;
+    const originPath = path.resolve(basePath, origin).replace(/\/$/, '');
+    const destinationPath = path.resolve(basePath, destination).replace(/\/$/, '');
     const isDestinationPathExists = await Page.dirHasFiles(destinationPath);
+
     if (isDestinationPathExists.length) {
-      return Promise.reject(new Error(`page ${destination} already exists`));
+      return Promise.reject(new Error(`page ${destinationPath} already exists`));
     }
 
     const isOriginPathExists = await Page.dirHasFiles(originPath);
     if (!isOriginPathExists.length) {
-      return Promise.reject(new Error(`page ${origin} is not exists`));
+      return Promise.reject(new Error(`page ${originPath} does not exist`));
     }
 
     // Make sure the destination tree exist
@@ -271,7 +270,7 @@ class Page {
     // Clone Image assets
     Page.clonePageImgAssets(origin, destination, this.basePath);
 
-    return 'success';
+    return {status: 'ok'};
   }
 
   static clonePageImgAssets(

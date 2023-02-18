@@ -17,8 +17,37 @@ import os from 'os';
 import rimraf from 'rimraf';
 import { v1 } from 'uuid';
 import copyfiles from 'copyfiles';
-import GitCmd, { GitInfoType } from './gitCmd';
-import Logger from './logger';
+import GitCmd, { GitInfoType } from '../gitCmd';
+import Logger from '../logger';
+
+export type GitBranchInfo = {
+  branch: string | null,
+  commits: string[],
+  files: string[],
+};
+
+export type GitChanges = {
+  upstream: GitBranchInfo,
+  production: GitBranchInfo,
+  local: GitBranchInfo,
+};
+
+export type GitConflictInfo = {
+  hasConflict: boolean,
+  files: string[],
+  target: string,
+};
+
+export type GitUtil = {
+  getCurrentBranch: () => Promise<string>,
+  getUpstreamBranch: (branch: string, remote?: string) => Promise<string | undefined>,
+  getUpstreamTrackingBranch: (branch: string) => Promise<string>,
+  getChanges: () => Promise<GitChanges>,
+  getConflicts: (branch?: string) => Promise<GitConflictInfo>,
+  getMergeBase: (b1: string, b2: string) => Promise<string>,
+  compare: (show: string, comparedTo: string) => Promise<{commits: string[], files: string[]}>,
+  mergeMain: () => Promise<{}>,
+};
 
 /**
  * Returns the name of the current branch as a string.
@@ -32,13 +61,13 @@ const getCurrentBranch = async () => {
  * Verify the existence of an upstream branch.
  * @todo: replace with getUpstreamTrackingBranch?
  */
-const getUpstreamBranch = async (branch: string, remote = 'origin') => {
+const getUpstreamBranch = async (branch: string, remote = 'origin'): Promise<string> => {
   try {
     await GitCmd.cmd().add('ls-remote', '--heads', '--exit-code', remote, branch).exec();
     return `${remote}/${branch}`;
   } catch (e: any) {
     // Catch only the error where the upstream branch doesn't exist.
-    if (e.code === '2') return undefined;
+    if (e.code === 2) return '';
     throw e;
   }
 };
@@ -151,6 +180,7 @@ const getChanges = async () => {
     };
     return status;
   } catch (e: any) {
+    console.log(e, '<<<<<<<<<<<<<<,');
     throw new Error(`Error occurred: ${e.message}`);
   }
 };
@@ -185,7 +215,7 @@ const clone = async (url: string, options: {branch?: string, directory?: string}
  *
  * @return {object} Results.
  */
-const getConflicts = async (target = 'upstream') => {
+const getConflicts = async (target: string = 'upstream') => {
   // const remoteUrl = await getRemote('origin');
   const logger = new Logger('BACKEND');
   const tmpDir = path.resolve(process.env.BODILESS_BACKEND_TMP || os.tmpdir(), v1());
@@ -374,7 +404,7 @@ const mergeMain = async () => {
   return {};
 };
 
-export {
+const gitUtil: GitUtil = {
   getCurrentBranch,
   getUpstreamBranch,
   getUpstreamTrackingBranch,
@@ -384,3 +414,5 @@ export {
   compare,
   mergeMain,
 };
+
+export default gitUtil;
