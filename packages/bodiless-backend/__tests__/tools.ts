@@ -13,11 +13,9 @@
  */
 
 import path from 'path';
+import rimraf from 'rimraf';
 import { mkdirSync } from 'fs';
 import GitCmd from '../src/GitCmd';
-
-// eslint-disable-next-line import/no-extraneous-dependencies
-const rimraf = require('rimraf');
 
 const originalCwd = process.cwd();
 
