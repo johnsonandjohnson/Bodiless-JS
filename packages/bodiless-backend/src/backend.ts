@@ -45,19 +45,19 @@ type GitBranchInfoType = {
 This Class holds all of the interaction with Git
 */
 class Git {
-  // static setCurrent(branch: string) {
-  //   return Git.cmd()
-  //     .add('checkout', branch)
-  //     .exec();
-  // }
+  static setCurrent(branch: string) {
+    return GitCmd.cmd()
+      .add('checkout', branch)
+      .exec();
+  }
 
-  // static getCurrent() {
-  //   return Git.cmd()
-  //     .add('rev-parse', '--abbrev-ref', 'HEAD')
-  //     .exec()
-  //     .catch(data => logger.log(data))
-  //     .then(data => data.stdout);
-  // }
+  static getCurrent() {
+    return GitCmd.cmd()
+      .add('rev-parse', '--abbrev-ref', 'HEAD')
+      .exec()
+      .catch(data => logger.log(data))
+      .then(data => data?.stdout);
+  }
 
   static list() {
     return new Promise<GitBranchInfoType[]>((resolve) => {
@@ -228,20 +228,20 @@ class GitCommit {
     return res;
   }
 
-  // amend() {
-  //   // we have to tell git we intend to add our files
-  //   return Git.cmd()
-  //     .add('add', '--intent-to-add')
-  //     .addFiles(...this.files)
-  //     .exec()
-  //     .then(
-  //       Git.cmd()
-  //         .add('commit')
-  //         .add('--amend', '--no-edit')
-  //         .addFiles(...this.files)
-  //         .exec(),
-  //     );
-  // }
+  amend() {
+    // we have to tell git we intend to add our files
+    return GitCmd.cmd()
+      .add('add', '--intent-to-add')
+      .addFiles(...this.files)
+      .exec()
+      .then(() => {
+        GitCmd.cmd()
+          .add('commit')
+          .add('--amend', '--no-edit')
+          .addFiles(...this.files)
+          .exec();
+      });
+  }
 }
 
 class Backend {
@@ -578,9 +578,9 @@ class Backend {
   }
 
   // @todo: !!! do we need this?
-  // static setChangePush(route: IRoute) {
+  // setChangePush(route: IRoute) {
   //   route.post((req: Request, res: Response) => {
-  //     if (!Backend.ensureCommitEnabled(res)) return;
+  //     if (!this.ensureCommitEnabled(res)) return;
   //     logger.log('Start push');
   //     new GitCmd()
   //       .add('symbolic-ref', '--short', 'HEAD')
@@ -588,14 +588,14 @@ class Backend {
   //       .then(data => {
   //         const branch = data.stdout.trim();
   //         logger.log(`Branch = ${branch}`);
-  //         Git.cmd()
+  //         GitCmd.cmd()
   //           .add('rebase', `origin/${branch}`)
   //           .exec()
-  //           .then(
-  //             Git.cmd()
+  //           .then(() => {
+  //             GitCmd.cmd()
   //               .add('push', 'origin', branch)
-  //               .exec(),
-  //           )
+  //               .exec();
+  //           })
   //           .then(addData => res.send(addData.stdout))
   //           .catch(addData => logger.error(addData));
   //       })
@@ -635,24 +635,24 @@ class Backend {
     });
   }
 
-  // static setSetCurrent(route: IRoute) {
-  //   route
-  //     .get((req: Request, res: Response) => {
-  //       logger.log('Start get current set');
-  //       Git.getCurrent().then(data => res.send(data));
-  //     })
-  //     .post((req: Request, res: Response) => {
-  //       logger.log(`Start Post current Set:${req.body}`);
-  //       Git.setCurrent(req.body.name)
-  //         .then(Git.list())
-  //         .then(data => {
-  //           res.send(data);
-  //         })
-  //         .catch(reason => {
-  //           logger.log(reason);
-  //         });
-  //     });
-  // }
+  static setSetCurrent(route: IRoute) {
+    route
+      .get((req: Request, res: Response) => {
+        logger.log('Start get current set');
+        Git.getCurrent().then(data => res.send(data));
+      })
+      .post((req: Request, res: Response) => {
+        logger.log(`Start Post current Set:${req.body}`);
+        Git.setCurrent(req.body.name)
+          .then(() => Git.list())
+          .then(data => {
+            res.send(data);
+          })
+          .catch(reason => {
+            logger.log(reason);
+          });
+      });
+  }
 
   static setSetList(route: IRoute) {
     route.get((req: Request, res: Response<object>) => {
