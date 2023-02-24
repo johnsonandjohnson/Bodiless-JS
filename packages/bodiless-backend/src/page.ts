@@ -23,10 +23,6 @@ import Logger from './logger';
 
 const logger = new Logger('BACKEND');
 
-const backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
-const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
-const IMG_ASSETS_PATH = `/images${path.sep}pages`;
-
 const getDirectories = (dir: string) => fs
   .readdirSync(dir)
   .filter((file) => fs.statSync(`${dir}/${file}`).isDirectory());
@@ -46,14 +42,22 @@ class Page {
 
   basePath: string = '';
 
+  backendFilePath: string;
+
+  backendStaticPath: string = process.env.BODILESS_BACKEND_STATIC_PATH || '';
+
+  static imgAssetsPath: string = `/images${path.sep}pages`;
+
   extensions = ['json', 'tsx', 'jsx', 'js'];
 
   constructor(pagePath: string) {
     this.path = pagePath;
+    this.backendFilePath = process.env.BODILESS_BACKEND_DATA_FILE_PATH || '';
+    this.backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
   }
 
   getBasePath() {
-    return this.basePath || backendFilePath;
+    return this.basePath || this.backendFilePath;
   }
 
   setBasePath(basePath: string) {
@@ -165,7 +169,6 @@ class Page {
         new Promise((resolve, reject) => {
           fse.remove(`${destinationPath}/${dir.name}`, (err: any) => {
             if (err) {
-              console.error(err);
               return reject(err);
             }
             return resolve('ok');
@@ -268,20 +271,20 @@ class Page {
     }
 
     // Clone Image assets
-    Page.clonePageImgAssets(origin, destination, this.basePath);
+    this.clonePageImgAssets(origin, destination, this.basePath);
 
     return {status: 'ok'};
   }
 
-  static clonePageImgAssets(
+  clonePageImgAssets(
     origin: string,
     destination: string,
     basePath: string
   ) {
-    Page.clonePageAssets(origin, destination, basePath, IMG_ASSETS_PATH);
+    this.clonePageAssets(origin, destination, basePath, Page.imgAssetsPath);
   }
 
-  static async clonePageAssets(
+  async clonePageAssets(
     origin: string,
     destination: string,
     basePath: string,
@@ -296,9 +299,9 @@ class Page {
       ? destinationPath.replace('/', '\\')
       : destinationPath;
 
-    const originStaticPath = path.join(backendStaticPath, target, originPath);
+    const originStaticPath = path.join(this.backendStaticPath, target, originPath);
     const destinationStaticPath = path.join(
-      backendStaticPath,
+      this.backendStaticPath,
       target,
       destinationPath,
     );
@@ -350,7 +353,7 @@ class Page {
                 const fileToBeUpdated = path.join(destinationPagePath, item);
                 // Make sure to not replace '/images/pages' part of the path
                 // .e.g if the source page path is '/images';
-                const imgAssetsPath = IMG_ASSETS_PATH.replace('\\', '\\\\\\\\');
+                const imgAssetsPath = Page.imgAssetsPath.replace('\\', '\\\\\\\\');
                 // If homepage, originPathCrossPlatform will be empty, so this
                 // template string handles both cases:
                 // - '/images/pages' for homepage (/)

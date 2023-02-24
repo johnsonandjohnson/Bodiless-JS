@@ -18,12 +18,13 @@ import path from 'path';
 import crypto from 'crypto';
 import type { Files, File } from 'formidable';
 
-const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
+const getStaticPath = () => (process.env.BODILESS_BACKEND_STATIC_PATH || '');
 
 const copyFilePromise = (from: string, to: string) => new Promise((resolve, reject) => {
   fs.copyFile(from, to, copyErr => {
     if (copyErr) reject(copyErr);
     fs.unlinkSync(from);
+    const backendStaticPath = getStaticPath();
     resolve(`/${path.relative(backendStaticPath, to)}`);
   });
 });
@@ -53,6 +54,7 @@ const copyAllFiles = (files: Files, baseResourcePath: string, nodePath: string) 
 
   return Promise.all(allFiles.map((file: File) => {
     const baseDir = isImage(file.type || '') ? 'images' : 'files';
+    const backendStaticPath = getStaticPath();
     const distFolderPath = path.join(
       backendStaticPath,
       baseDir,

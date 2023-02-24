@@ -323,7 +323,7 @@ class Backend {
     this.setRoute(`${this.prefix}/directory/child/*`, this.directoryChild);
     this.setRoute(
       `${this.prefix}/directory/exists/*`,
-      Backend.directoryExists,
+      this.directoryExists,
     );
     this.setRoute(`${this.prefix}/file/remove/*`, this.removeFile);
     this.setRoute(`${this.prefix}/assets/remove/*`, this.removeAssets);
@@ -375,6 +375,24 @@ class Backend {
     }
     return true;
   }
+
+  getPath(req: Request) {
+    const prefixCount = this.prefix.split('/').filter(Boolean).length + 1;
+    logger.log(req.originalUrl);
+    return req.originalUrl
+      .replace(/\/*$/, '')
+      .replace(/^\/*/, '')
+      .split('/')
+      .splice(prefixCount)
+      .join('/');
+  }
+
+  static getPage(pagePath: string) {
+    return new Page(pagePath);
+  }
+
+  // *** Middleware ***
+  // @todo: move middleware to a new folder
 
   getChanges(route: IRoute) {
     route.get(async (req: Request, res) => {
@@ -688,27 +706,12 @@ class Backend {
       });
   }
 
-  getPath(req: Request) {
-    const prefixCount = this.prefix.split('/').filter(Boolean).length + 1;
-    logger.log(req.originalUrl);
-    return req.originalUrl
-      .replace(/\/*$/, '')
-      .replace(/^\/*/, '')
-      .split('/')
-      .splice(prefixCount)
-      .join('/');
-  }
-
-  static getPage(pagePath: string) {
-    return new Page(pagePath);
-  }
-
   removePage(route: IRoute) {
     route.delete((req: Request, res: Response<object>) => {
       if (!this.ensureSaveEnabled(res)) return;
       const pagePath = req.params[0];
       const page = Backend.getPage(pagePath);
-      page.setBasePath(pagePath);
+      page.setBasePath(this.pagePath);
 
       logger.log(`Start deleting page:${page.directory}`);
 
@@ -728,7 +731,8 @@ class Backend {
       if (!this.ensureSaveEnabled(res)) return;
       const pagePath = req.params[0];
       const page = Backend.getPage(pagePath);
-      page.setBasePath(pagePath);
+      page.setBasePath(this.pagePath);
+      // @todo: remove hard coded path
       const origin = `./src/data/pages/${pagePath}index.json`;
       logger.log(`Start deleting file: ${origin}`);
 
@@ -749,7 +753,7 @@ class Backend {
       const pagePath = req.params[0];
       const page = Backend.getPage(pagePath);
 
-      page.setBasePath(pagePath);
+      page.setBasePath(this.pagePath);
 
       logger.log(`Start verify page child directory: ${page.directory}`);
 
@@ -764,12 +768,12 @@ class Backend {
     });
   }
 
-  static directoryExists(route: IRoute) {
+  directoryExists(route: IRoute) {
     route.delete((req: Request, res: Response<object>) => {
       const pagePath = req.params[0];
       const page = Backend.getPage(pagePath);
 
-      page.setBasePath(pagePath);
+      page.setBasePath(this.pagePath);
 
       logger.log(`Start verifying new page exists: ${page.directory}`);
 
@@ -795,7 +799,7 @@ class Backend {
         '#template': template,
       };
       const page = Backend.getPage(filePath);
-      page.setBasePath(pagePath);
+      page.setBasePath(this.pagePath);
       logger.log(`Start creating page for:${page.file}`);
       if (page.exists) {
         res.status(409);
