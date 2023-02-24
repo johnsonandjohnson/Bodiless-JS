@@ -38,6 +38,7 @@ import {
 import GatsbyNodeProvider from './GatsbyNodeProvider.bl-edit';
 import { FinalUI, UI, PageProps } from './types';
 import ShowDesignKeys from './ShowDesignKeys';
+import StaticPage from './Page.static';
 
 const defaultUI: FinalUI = {
   ContextWrapper,
@@ -60,7 +61,7 @@ const GitButtons: FC = () => {
   return <></>;
 };
 
-const Page: FC<PageProps> = observer(({ children, ui, ...rest }) => {
+const EditPage: FC<PageProps> = observer(({ children, ui, ...rest }) => {
   const { PageEditor: Editor, ContextWrapper: Wrapper } = getUI(ui);
   const { pageContext } = rest;
   const {
@@ -102,5 +103,7 @@ const Page: FC<PageProps> = observer(({ children, ui, ...rest }) => {
     </GatsbyNodeProvider>
   );
 });
+
+const Page = process.env.BODILESS_DISABLE_EDITOR === '1' ? StaticPage : EditPage;
 
 export default Page;

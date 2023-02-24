@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/vital-image",
   "sideEffects": false,
-  "version": "1.0.0-rc.22",
+  "version": "1.0.0-rc.24",
   "description": "Clean, designable Image components for Vital Design System based projects",
   "author": "Marco Pagliarulo <mpaglia1@its.jnj.com>",
   "license": "UNLICENSED",
@@ -33,16 +33,16 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.22",
-    "@bodiless/components": "^1.0.0-rc.22",
-    "@bodiless/components-ui": "^1.0.0-rc.22",
-    "@bodiless/core": "^1.0.0-rc.22",
-    "@bodiless/fclasses": "^1.0.0-rc.22",
-    "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.22",
-    "@bodiless/hydration": "^1.0.0-rc.22",
-    "@bodiless/layouts": "^1.0.0-rc.22",
-    "@bodiless/layouts-ui": "^1.0.0-rc.22",
-    "@bodiless/vital-elements": "^1.0.0-rc.22",
+    "@bodiless/cli": "^1.0.0-rc.24",
+    "@bodiless/components": "^1.0.0-rc.24",
+    "@bodiless/components-ui": "^1.0.0-rc.24",
+    "@bodiless/core": "^1.0.0-rc.24",
+    "@bodiless/fclasses": "^1.0.0-rc.24",
+    "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.24",
+    "@bodiless/hydration": "^1.0.0-rc.24",
+    "@bodiless/layouts": "^1.0.0-rc.24",
+    "@bodiless/layouts-ui": "^1.0.0-rc.24",
+    "@bodiless/vital-elements": "^1.0.0-rc.24",
     "lodash": "^4.17.19"
   }
 }

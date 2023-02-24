@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/backend",
-  "version": "1.0.0-rc.22",
+  "version": "1.0.0-rc.24",
   "description": "",
   "main": "",
   "files": [
@@ -18,7 +18,7 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.22",
+    "@bodiless/cli": "^1.0.0-rc.24",
     "body-parser": "^1.18.3",
     "copyfiles": "^2.1.1",
     "dotenv": "^8.2.0",

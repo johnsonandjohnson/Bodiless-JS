@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.24](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.23...v1.0.0-rc.24) (2023-02-23)
+
+
+### Features
+
+* **gatsby-theme-bodiless:** Allow disabling of editor in dev mode. ([#1989](https://github.com/johnsonandjohnson/bodiless-js/issues/1989)) ([93d67b8](https://github.com/johnsonandjohnson/bodiless-js/commit/93d67b849dbc39129afe2f2a2c13285b3e7d53e2))
+
+
+
+
+
+# [1.0.0-rc.23](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.22...v1.0.0-rc.23) (2023-02-08)
+
+**Note:** Version bump only for package @bodiless/gatsby-theme-bodiless
+
+
+
+
+
 # [1.0.0-rc.22](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.21...v1.0.0-rc.22) (2022-10-27)
 
 **Note:** Version bump only for package @bodiless/gatsby-theme-bodiless
