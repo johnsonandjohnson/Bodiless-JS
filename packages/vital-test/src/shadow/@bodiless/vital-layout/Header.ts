@@ -15,9 +15,12 @@
 import { vitalHeaderBase, asHeaderToken } from '@bodiless/vital-layout';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asHeaderToken(vitalHeaderBase.Base, {
+// Note: when used with the __vital__ package on vital-demo, that package takes precedence
+// over this one.  This test override has no effect and just an example.
+
+const Default = asHeaderToken(vitalHeaderBase.Default, {
   Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': '__vital__:Header' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vitaltest__:Header' }),
   },
 });
 

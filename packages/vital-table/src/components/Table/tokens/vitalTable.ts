@@ -38,8 +38,9 @@ const WithFlowContainerPreview = asTableToken({
 
 /**
  * Token which produces a base VitalDS editable table with editable RTE cells
+ * and with minimal styling
  */
-const Base = asTableToken({
+const Default = asTableToken({
   Meta: flowHoc.meta.term('Type')('Table'),
   Schema: {
     _: asBodilessTable(),
@@ -47,20 +48,11 @@ const Base = asTableToken({
   Editors: {
     CellContent: on(RichTextClean)(vitalRichText.Default, addProps({ placeholder: 'Cell' })),
   },
-});
-
-/**
- * Token which produces a default VitalDS editable table with minimal styling
- */
-const Default = asTableToken({
-  ...Base,
   Theme: {
-    ...Base.Theme,
     Table: 'min-w-full',
     CellContent: 'text-left',
   },
   Spacing: {
-    ...Base.Spacing,
     Cell: 'pt-6 px-6',
   },
 });

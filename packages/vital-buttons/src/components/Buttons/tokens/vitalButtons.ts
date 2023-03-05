@@ -37,7 +37,7 @@ const ButtonThemeStyle = as(
   'hover:opacity-80',
 );
 
-const Base = asButtonToken({
+const Default = asButtonToken({
   Layout: {
     Wrapper: 'flex group justify-center',
   },
@@ -82,7 +82,7 @@ const WithArrow = asButtonToken({
   Meta: flowHoc.meta.term('Style')('With Hover Arrow'),
 });
 
-const Primary = asButtonToken(Base, {
+const WithPrimary = asButtonToken({
   Theme: {
     Wrapper: as(
       vitalColor.BgPrimaryInteractive,
@@ -92,7 +92,7 @@ const Primary = asButtonToken(Base, {
   Meta: flowHoc.meta.term('Style')('Primary'),
 });
 
-const Secondary = asButtonToken(Base, {
+const WithSecondary = asButtonToken({
   Theme: {
     Wrapper: as(
       'border-2',
@@ -103,7 +103,7 @@ const Secondary = asButtonToken(Base, {
   Meta: flowHoc.meta.term('Style')('Secondary'),
 });
 
-const PrimarySelected = asButtonToken(Base, {
+const WithPrimarySelected = asButtonToken({
   Theme: {
     Wrapper: as(
       vitalColor.BgButtonSelected,
@@ -113,7 +113,7 @@ const PrimarySelected = asButtonToken(Base, {
   Meta: flowHoc.meta.term('Style')('Primary Selected'),
 });
 
-const SecondarySelected = asButtonToken(Base, {
+const WithSecondarySelected = asButtonToken({
   Theme: {
     Wrapper: as(
       'border-2',
@@ -138,9 +138,26 @@ const WithDisabled = asButtonToken({
   Meta: flowHoc.meta.term('Style')('Disabled'),
 });
 
-const Default = asButtonToken({
-  ...Base,
-});
+// Declaring for backward compability, document as deprecated.
+const Primary = asButtonToken(
+  Default,
+  WithPrimary,
+);
+// Declaring for backward compability, document as deprecated.
+const PrimarySelected = asButtonToken(
+  Default,
+  WithPrimarySelected,
+);
+// Declaring for backward compability, document as deprecated.
+const Secondary = asButtonToken(
+  Default,
+  WithSecondary,
+);
+// Declaring for backward compability, document as deprecated.
+const SecondarySelected = asButtonToken(
+  Default,
+  WithSecondarySelected
+);
 
 export default {
   Default,
@@ -148,6 +165,10 @@ export default {
   PrimarySelected,
   Secondary,
   SecondarySelected,
+  WithPrimary,
+  WithPrimarySelected,
+  WithSecondary,
+  WithSecondarySelected,
   WithDisabled,
   WithArrow,
   WhereToBuy,

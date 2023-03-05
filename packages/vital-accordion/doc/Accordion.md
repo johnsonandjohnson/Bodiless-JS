@@ -44,14 +44,6 @@ const Foo = asFooToken({
 
 The Vital Accordion package comes with a few useful tokens.
 
-### Base
-
-Exported by: `Accordion`, `AccordionTitle`, `AccordionBody`
-
-This token implements the accordion's basic functionality, like toggling its body when clicking in
-the title and using Vital Editors for content editing. Use this token as a base if you don't want
-VitalDS styling.
-
 ### Default
 
 Exported by: `Accordion`, `AccordionTitle`, `AccordionBody`

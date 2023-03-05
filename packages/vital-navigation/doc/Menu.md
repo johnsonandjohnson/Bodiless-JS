@@ -98,7 +98,7 @@ Links](./Sub-Menu#allow-parent-menu-item-links).
 ## Site Builder Details
 
 From a Site Builder perspective, Vital Menu is comprised of a token collection (`vitalMenu`) and a
-Menu component (`MenuClean`). You can use the base Vital Menu token (`vitalMenu.Base`) to provide a
+Menu component (`MenuClean`). You can use the default Vital Menu token (`vitalMenu.Default`) to provide a
 menu structure, or use the default Vital Menu token (`vitalMenu.Default`) to provide a menu with a
 submenus structure, or you can even recompose it to meet your site's requirements.
 

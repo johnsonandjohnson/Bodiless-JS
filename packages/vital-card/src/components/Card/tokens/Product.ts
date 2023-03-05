@@ -22,14 +22,12 @@ import Base from './Base';
 /**
   * TBD: STUB Product Base Card Design.
   */
-const BaseProduct = asCardToken(Base, {
-  ...Base,
+const Product = asCardToken(Base, {
   Meta: extendMeta(
     flowHoc.meta.term('Sub Type')('Product'),
   ),
 });
 
-const Product = BaseProduct;
 export interface VitalCardProduct {
   /**
    * Defines the Product card for the Vital DS.

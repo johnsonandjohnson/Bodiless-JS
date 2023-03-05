@@ -155,7 +155,6 @@ The Card can be composed of different tokens (see
 [`vitalCard.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-card/src/components/Card/tokens/vitalCard.ts
 ':target=_blank')) to create many card variations. These variations include:
 
-- Base
 - Default
 - Hero
 - With No Description

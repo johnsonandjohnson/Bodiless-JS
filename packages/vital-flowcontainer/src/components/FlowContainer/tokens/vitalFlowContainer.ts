@@ -50,6 +50,9 @@ const Base = asFluidToken({
   },
 });
 
+// Useful if you are creating a custom defined flow container.
+const Empty = asFluidToken(Base);
+
 /**
  * @private
  * SnapData function to use for a full width constrained flow container.
@@ -168,11 +171,12 @@ const WithContentLibrary = asFluidToken(
  */
 export interface VitalFlowContainer {
   /**
-   * Token which creates the VitalDS Default Base for a Flow Container.
-   * This only applies the mandatory categories to category and is using in
-   * composing new tokens and not a functional FlowContainer.
+   *
+   * Token which creates the VitalDS Default Base for a Flow Container
+   * with no compoents or theme. This only applies the mandatory categories
+   * to category and is using in composing new tokens and not a functional FlowContainer.
    */
-  Base: FluidToken,
+  Empty: FluidToken,
   /**
    * Defines the default flow container for the Vital DS.
    * - Core domain defines constraints on categories.
@@ -275,8 +279,8 @@ export interface VitalFlowContainer {
  * @see [[FlowContainerClean]]
  */
 const vitalFlowContainer: VitalFlowContainer = {
-  Base,
   Default,
+  Empty,
   Hero,
   ContentRegion,
   AsFlowContainerItem,

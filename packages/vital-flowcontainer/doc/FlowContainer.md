@@ -44,7 +44,7 @@ The following example combines all the Vital Tokens into FlowContainer with thes
 
 ```js
 const ProductDescription = asFluidToken(
-  vitalFlowContainer.Base,
+  vitalFlowContainer.Empty,
   vitalFlowContainer.WithContentLibrary,
   vitalFlowContainer.WithFullWidthConstraint,
   /* Add only images, video & editor */

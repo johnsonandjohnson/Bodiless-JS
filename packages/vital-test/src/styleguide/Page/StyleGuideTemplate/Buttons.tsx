@@ -49,60 +49,72 @@ const DefaultButton = as(
   withNodeKey('defaultbutton'),
 )(ButtonClean);
 const PrimaryButton = as(
-  vitalButtons.Primary,
+  vitalButtons.Default,
+  vitalButtons.WithPrimary,
   withNodeKey('primarybutton'),
 )(ButtonClean);
 const SecondaryButton = as(
-  vitalButtons.Secondary,
+  vitalButtons.Default,
+  vitalButtons.WithSecondary,
   withNodeKey('secondarybutton'),
 )(ButtonClean);
 const PrimarySelectedButton = as(
-  vitalButtons.PrimarySelected,
+  vitalButtons.Default,
+  vitalButtons.WithPrimarySelected,
   withNodeKey('primarybutton'),
 )(ButtonClean);
 const PrimaryDisabledButton = as(
-  vitalButtons.Primary,
+  vitalButtons.Default,
+  vitalButtons.WithPrimary,
   vitalButtons.WithDisabled,
   withNodeKey('primarybutton'),
 )(ButtonClean);
 const SecondarySelectedButton = as(
-  vitalButtons.SecondarySelected,
+  vitalButtons.Default,
+  vitalButtons.WithSecondarySelected,
   withNodeKey('secondarybutton'),
 )(ButtonClean);
 const SecondaryDisabledButton = as(
-  vitalButtons.Secondary,
+  vitalButtons.Default,
+  vitalButtons.WithSecondary,
   vitalButtons.WithDisabled,
   withNodeKey('secondarybutton'),
 )(ButtonClean);
 
 const PrimaryButtonWithArrow = as(
-  vitalButtons.Primary,
+  vitalButtons.Default,
+  vitalButtons.WithPrimary,
   vitalButtons.WithArrow,
   withNodeKey('primarybutton'),
 )(ButtonClean);
 const SecondaryButtonWithArrow = as(
-  vitalButtons.Secondary,
+  vitalButtons.Default,
+  vitalButtons.WithSecondary,
   vitalButtons.WithArrow,
   withNodeKey('secondarybutton'),
 )(ButtonClean);
 const PrimarySelectedButtonWithArrow = as(
-  vitalButtons.PrimarySelected,
+  vitalButtons.Default,
+  vitalButtons.WithPrimarySelected,
   vitalButtons.WithArrow,
   withNodeKey('primarybutton'),
 )(ButtonClean);
 const PrimaryDisabledButtonWithArrow = as(
-  vitalButtons.Primary,
+  vitalButtons.Default,
+  vitalButtons.WithPrimary,
   vitalButtons.WithArrow,
   vitalButtons.WithDisabled,
   withNodeKey('primarybutton'),
 )(ButtonClean);
 const SecondarySelectedButtonWithArrow = as(
-  vitalButtons.SecondarySelected,
+  vitalButtons.Default,
+  vitalButtons.WithSecondarySelected,
   vitalButtons.WithArrow,
   withNodeKey('secondarybutton'),
 )(ButtonClean);
 const SecondaryDisabledButtonWithArrow = as(
-  vitalButtons.Secondary,
+  vitalButtons.Default,
+  vitalButtons.WithSecondary,
   vitalButtons.WithArrow,
   vitalButtons.WithDisabled,
   withNodeKey('secondarybutton'),
@@ -163,7 +175,8 @@ const Examples = (props: any) => (
   </>
 );
 
-export const Buttons = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
+export const Buttons = asStyleGuideTemplateToken({
+  ...vitalStyleGuideTemplate.Default,
   Meta: flowHoc.meta.term('Token')('Buttons'),
   Content: {
     Title: replaceWith(() => <>Buttons</>),

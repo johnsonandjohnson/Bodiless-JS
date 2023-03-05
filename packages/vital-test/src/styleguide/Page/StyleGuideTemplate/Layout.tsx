@@ -17,7 +17,8 @@ import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vi
 import { flowHoc, on, replaceWith } from '@bodiless/fclasses';
 import { vitalLayout, LayoutClean } from '@bodiless/vital-layout';
 
-export const Layout = asStyleGuideTemplateToken(vitalStyleGuideTemplate.NoLayout, {
+export const Layout = asStyleGuideTemplateToken({
+  ...vitalStyleGuideTemplate.NoLayout,
   Meta: flowHoc.meta.term('Token')('Layout'),
   Content: {
     Title: replaceWith(() => <>Layout</>),

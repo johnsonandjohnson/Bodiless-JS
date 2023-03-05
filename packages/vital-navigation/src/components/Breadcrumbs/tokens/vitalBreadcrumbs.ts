@@ -33,7 +33,7 @@ import { asBreadcrumbsToken } from '../BreadcrumbsClean';
 /**
   * Token which produces the Base Vital Breadcrumbs.
   */
-const Base = asBreadcrumbsToken({
+const Default = asBreadcrumbsToken({
   Core: {
     _: asBreadcrumbs,
     NavWrapper: stylable,
@@ -70,17 +70,9 @@ const Base = asBreadcrumbsToken({
 });
 
 /**
-  * Token which produces the Default Vital Breadcrumbs.
-  */
-const Default = asBreadcrumbsToken({
-  ...Base,
-});
-
-/**
   * Breadcrumbs Token Definition Object.
   * Contains Token variations that can be used to transform BreadcrumbsClean.
   */
 export default {
-  Base,
   Default,
 };

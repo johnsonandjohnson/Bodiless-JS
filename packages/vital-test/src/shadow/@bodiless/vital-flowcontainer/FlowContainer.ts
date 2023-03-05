@@ -21,7 +21,7 @@ const Default = asFluidToken(
   vitalFlowContainerBase.WithContentLibrary,
   {
     Behavior: {
-      Wrapper: addProps({ 'data-shadowed-by': '__vital__:FlowContainer' }),
+      Wrapper: addProps({ 'data-shadowed-by': '__vitaltest__:FlowContainer' }),
     }
   }
 );

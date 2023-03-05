@@ -30,7 +30,7 @@ const WithProductDescriptionVariations = asFluidToken(
 );
 
 const ProductDescription = asFluidToken(
-  vitalFlowContainer.Base,
+  vitalFlowContainer.Empty,
   vitalFlowContainer.WithContentLibrary,
   vitalFlowContainer.WithFullWidthConstraint,
   WithProductDescriptionVariations,
@@ -41,7 +41,7 @@ const Default = asPDPTemplateToken({
   Behavior: {
     TopWrapper: flowHoc(
       replaceWith(Div),
-      addProps({ 'data-shadowed-by': '__vital__:PDPTemplate' }),
+      addProps({ 'data-shadowed-by': '__vitaltest__:PDPTemplate' }),
     ),
   },
   Components: {

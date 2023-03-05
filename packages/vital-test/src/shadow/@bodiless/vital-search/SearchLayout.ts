@@ -17,7 +17,7 @@ import { addProps } from '@bodiless/fclasses';
 
 const Default = asSearchLayoutToken(vitalSearchLayoutBase.Default, {
   Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': '__vital__:SearchLayout' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vitaltest__:SearchLayout' }),
   },
 });
 

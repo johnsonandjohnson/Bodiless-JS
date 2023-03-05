@@ -112,8 +112,8 @@ Some important notes:
 
 - Above, we show the contents of the compiled JavaScript files containing the shadowed token
   collections, but you should write them in TypeScript and compile them to those locations.
-- If you are extending a base token collection, be sure to import it using the `...Base` version
-  name.
+- If you are extending a base token collection, be sure to import it using the `tokenCollectionBase`
+  version name.
 - Ensure that your token shadow resolver (`shadow.js`) uses [CJS module
   syntax](https://www.typescriptlang.org/docs/handbook/2/modules.html#commonjs-syntax
   ':target=_blank').

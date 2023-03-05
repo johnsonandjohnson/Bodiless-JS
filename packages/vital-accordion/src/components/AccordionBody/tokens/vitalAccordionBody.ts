@@ -20,7 +20,7 @@ import { vitalRichText, RichTextClean } from '@bodiless/vital-editors';
 import { useIsAccordionContracted, useIsAccordionExpanded } from '../../Accordion';
 import { asAccordionBodyToken } from '../AccordionBodyClean';
 
-const Base = asAccordionBodyToken({
+const Default = asAccordionBodyToken({
   Core: {
     Wrapper: as(
       flowIf(useIsAccordionExpanded)(as('block')),
@@ -36,9 +36,6 @@ const Base = asAccordionBodyToken({
   Schema: {
     Content: withNodeKey('body'),
   },
-});
-
-const Default = asAccordionBodyToken(Base, {
   Spacing: {
     Wrapper: 'p-2',
   },
@@ -51,7 +48,6 @@ const WithFAQSchema = asAccordionBodyToken({
 });
 
 export default {
-  Base,
   Default,
   WithFAQSchema,
 };

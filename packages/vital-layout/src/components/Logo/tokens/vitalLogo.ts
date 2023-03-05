@@ -60,10 +60,6 @@ const Default = asLogoToken(Base, {
  */
 export interface VitalLogo {
   /**
-   * Base makes a clickable image:
-   */
-  Base: LogoToken,
-  /**
    * Default adds vital specific design reqirements.
    * @example Will override the layout domain of logo and apply diffent styling.
    * ```js
@@ -94,7 +90,6 @@ export interface VitalLogo {
  * @see [[LogoClean]]
  */
 const vitalLogo: VitalLogo = {
-  Base,
   Default,
 };
 

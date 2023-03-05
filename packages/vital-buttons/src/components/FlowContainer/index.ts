@@ -23,8 +23,8 @@ const BaseVariation = {
 };
 
 const ColorVariations = {
-  Primary: vitalButtons.Primary,
-  Secondary: vitalButtons.Secondary,
+  Primary: vitalButtons.WithPrimary,
+  Secondary: vitalButtons.WithSecondary,
 };
 
 const ButtonStyles = {

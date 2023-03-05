@@ -69,7 +69,8 @@ const Examples = (props: any) => (
   </>
 );
 
-export const Images = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
+export const Images = asStyleGuideTemplateToken({
+  ...vitalStyleGuideTemplate.Default,
   Meta: flowHoc.meta.term('Token')('Images'),
   Content: {
     Title: replaceWith(() => <>Images</>),

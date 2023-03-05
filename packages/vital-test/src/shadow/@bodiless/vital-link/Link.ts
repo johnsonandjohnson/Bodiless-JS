@@ -17,7 +17,7 @@ import { addProps } from '@bodiless/fclasses';
 
 const Default = asLinkToken(vitalLinkBase.Default, {
   Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': '__vital__:Link' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vitaltest__:Link' }),
   },
 
 });

@@ -110,7 +110,8 @@ const CardVariations = (props: any) => (
   </>
 );
 
-export const Card = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
+export const Card = asStyleGuideTemplateToken({
+  ...vitalStyleGuideTemplate.Default,
   Meta: flowHoc.meta.term('Token')('Card'),
   Content: {
     Title: replaceWith(() => <>Card</>),

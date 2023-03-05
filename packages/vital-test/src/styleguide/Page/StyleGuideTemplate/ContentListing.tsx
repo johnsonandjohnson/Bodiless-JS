@@ -35,14 +35,16 @@ const Multiple = as(
   withNodeKey('multiple'),
 )(ContentListingClean);
 
-export const ContentListing = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
+export const ContentListing = asStyleGuideTemplateToken({
+  ...vitalStyleGuideTemplate.Default,
   Meta: flowHoc.meta.term('Token')('ContentListing'),
   Content: {
     Examples: replaceWith(() => <Default />),
   },
 });
 
-export const ContentListingMultiple = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
+export const ContentListingMultiple = asStyleGuideTemplateToken({
+  ...vitalStyleGuideTemplate.Default,
   Meta: flowHoc.meta.term('Token')('ContentListingMultiple'),
   Content: {
     Title: replaceWith(() => <>Content Listing (Multiple)</>),

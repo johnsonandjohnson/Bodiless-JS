@@ -17,19 +17,19 @@ import { addProps } from '@bodiless/fclasses';
 
 const Default = asImageToken(vitalImageBase.Default, {
   Behavior: {
-    _: addProps({ 'data-shadowed-by': '__vital__:Image:Gatsby' }),
+    _: addProps({ 'data-shadowed-by': '__vitaltest__:Image:Gatsby' }),
   },
 });
 
 const Plain = asImageToken(vitalImageBase.Plain, {
   Behavior: {
-    _: addProps({ 'data-shadowed-by': '__vital__:Image:Plain' }),
+    _: addProps({ 'data-shadowed-by': '__vitaltest__:Image:Plain' }),
   },
 });
 
 const Hero = asImageToken(vitalImageBase.Hero, {
   Behavior: {
-    _: addProps({ 'data-shadowed-by': '__vital__:Image:Hero' }),
+    _: addProps({ 'data-shadowed-by': '__vitaltest__:Image:Hero' }),
   },
 });
 

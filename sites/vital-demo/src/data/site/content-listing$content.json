@@ -111,6 +111,13 @@
         "className": "w-full"
       },
       "type": "FilterableContent"
+    },
+    {
+      "uuid": "9c8f51e0-baa2-11ed-84a0-d90c7c99ddc5",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "FilterableContent"
     }
   ]
 }

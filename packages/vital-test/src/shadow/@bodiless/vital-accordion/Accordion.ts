@@ -17,7 +17,7 @@ import { addProps } from '@bodiless/fclasses';
 
 const Default = asAccordionToken(vitalAccordionBase.Default, {
   Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': 'vital:Accordion' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vitaltest__:Accordion' }),
   },
 });
 

@@ -12,24 +12,27 @@
  * limitations under the License.
  */
 
-import {
-  addProps, Div, flowHoc, replaceWith
-} from '@bodiless/fclasses';
-import { asGenericTemplateToken, vitalGenericTemplateBase } from '@bodiless/vital-templates';
-
 // Note: when used with the __vital__ package on vital-demo, that package takes precedence
 // over this one.  This test override has no effect and just an example.
 
-const Default = asGenericTemplateToken(vitalGenericTemplateBase.Default, {
+import { vitalBreadcrumbsBase, asBreadcrumbsToken } from '@bodiless/vital-navigation';
+import { addProps } from '@bodiless/fclasses';
+
+const Default = asBreadcrumbsToken(vitalBreadcrumbsBase.Default, {
   Behavior: {
-    TemplateWrapper: flowHoc(
-      replaceWith(Div),
-      addProps({ 'data-shadowed-by': '__vitaltest__:GenericTemplate' }),
-    ),
+    Wrapper: addProps({ 'data-shadowed-by': '__vitaltest__:Breadcrumbs' }),
   },
 });
 
-export default {
-  ...vitalGenericTemplateBase,
+// Throws The inferred type of 'default' so using typeof method
+// export default {
+//   ...vitalBreadcrumbsBase,
+//   Default,
+// };
+
+const vitalBreadcrumbs: typeof vitalBreadcrumbsBase = {
+  ...vitalBreadcrumbsBase,
   Default,
 };
+
+export default vitalBreadcrumbs;

@@ -19,7 +19,7 @@ import {
 import { asSocialLinksToken } from '../SocialLinksClean';
 import type { SocialLinksToken } from '../SocialLinksClean';
 
-const Base = asSocialLinksToken({
+const Default = asSocialLinksToken({
   Components: {
     Wrapper: startWith(Div),
   },
@@ -30,10 +30,6 @@ const Base = asSocialLinksToken({
   }
 });
 
-const Default = asSocialLinksToken({
-  ...Base,
-});
-
 /**
  * Tokens for the vital Social Links
  *
@@ -42,11 +38,7 @@ const Default = asSocialLinksToken({
  */
 export interface VitalSocialLinks {
   /**
-   * Base applies styling to have social links in a row at specific size
-   */
-  Base: SocialLinksToken,
-  /**
-   * Inherits Base
+   * Setups social links with some styling.
    */
   Default: SocialLinksToken,
 }
@@ -59,7 +51,6 @@ export interface VitalSocialLinks {
  * @see [[SocialLinksClean]]
  */
 const vitalSocialLinks: VitalSocialLinks = {
-  Base,
   Default,
 };
 

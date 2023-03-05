@@ -155,7 +155,7 @@ const WithPrimaryButton = asCardToken({
     CTALink: replaceWith(ButtonClean),
   },
   Theme: {
-    CTALink: as(vitalButtons.Primary, vitalButtons.WithArrow),
+    CTALink: as(vitalButtons.Default, vitalButtons.WithPrimary, vitalButtons.WithArrow),
   },
   Meta: extendMeta(
     flowHoc.meta.term('CTA Style')('Primary Button'),
@@ -169,7 +169,7 @@ const WithSecondaryButton = asCardToken({
     CTALink: replaceWith(ButtonClean),
   },
   Theme: {
-    CTALink: as(vitalButtons.Secondary, vitalButtons.WithArrow),
+    CTALink: as(vitalButtons.Default, vitalButtons.WithSecondary, vitalButtons.WithArrow),
   },
   Meta: extendMeta(
     flowHoc.meta.term('CTA Style')('Secondary Button'),
@@ -178,49 +178,7 @@ const WithSecondaryButton = asCardToken({
 });
 
 export interface VitalCardBase {
-  /**
-   * Defines the base card for the Vital DS.
-   * - Editor/Content/Schema domains defines editors on Title/Eyebrow/Description/CTA
-   *   and makes the entire Card clickable.
-   * - Components domain hides the CTA and adds in vitalImage.Default for Image.
-   * - Theme domain styles Wrappers for Eyebrow, Title, Description.
-   * - Layout domain defines a basic full-width component in flex.
-   * - Spacing domain: add spacing to Eyebrow
-   *
-   * #### Customizing:
-   *
-   * @example Add a component
-   * ```js
-   * import { vitalCard } from '@bodiless/vital-flowcontainer';
-   *
-   * const Default = asFluidToken(vitalCardStatic.Default, {
-   *   Components: {
-   *     MyComponent: on(cardClean)(vitalCardStatic.Default, WithCustomBorder),
-   *   }
-   * });
-   * ```
-   *
-   * @example Shadowing the basic card to render H2 for title and image margins.
-   * ```js
-   * import { H2, replaceWith } from '@bodiless/fclasses';
-   * import { asCardToken, vitalCardBase } from '@bodiless/vital-card';
-   *
-   * const Basic = asCardToken(vitalCardBase.Basic, {
-   *   Components: {
-   *     TitleWrapper: replaceWith(H2),
-   *   },
-   *   Theme: {
-   *     ImageWrapper: 'md:mx-16',
-   *   },
-   * });
-   *
-   * export default {
-   *   ...vitalCardBase,
-   *   Basic,
-   * };
-   * ```
-   */
-  Base: CardToken,
+
   /**
    * Composable token which removes unnecessary wrappers from the card
    */

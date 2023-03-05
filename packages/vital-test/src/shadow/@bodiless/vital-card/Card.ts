@@ -22,7 +22,7 @@ import {
 
 const Default = asCardToken(vitalCardBase.Default, {
   Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': '__vital__:Card' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vitaltest__:Card' }),
   },
 });
 
@@ -30,7 +30,7 @@ const Hero = asCardToken(vitalCardBase.Hero, {
   Behavior: {
     Wrapper: flowHoc(
       startWith(Div),
-      addProps({ 'data-shadowed-by': '__vital__:HeroCard' }),
+      addProps({ 'data-shadowed-by': '__vitaltest__:HeroCard' }),
     ),
   },
 });

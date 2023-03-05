@@ -118,15 +118,9 @@ export interface VitalCardHero {
    * };
    * ```
    */
-  HeroBase: CardToken,
-  /**
-   * Hero extends the HeroBase token and combines it to have image on left
-   * and content is vertically centered.
-   */
   Hero: CardToken,
 }
 
 export {
-  HeroBase,
   Hero,
 };

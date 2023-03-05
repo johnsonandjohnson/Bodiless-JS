@@ -17,7 +17,7 @@ import { addProps } from '@bodiless/fclasses';
 
 const Default = asTableToken(vitalTableBase.Default, {
   Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': '__vital__:Table' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vitaltest__:Table' }),
   },
   /* The following is an example that overrides full width and uses
    * fixed widths for columns. The width of the first row will set the

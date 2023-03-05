@@ -97,7 +97,8 @@ const Examples = (props: any) => (
   </>
 );
 
-export const Typography = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
+export const Typography = asStyleGuideTemplateToken({
+  ...vitalStyleGuideTemplate.Default,
   Meta: flowHoc.meta.term('Token')('Typography'),
   Content: {
     Title: replaceWith(() => <>Typography</>),

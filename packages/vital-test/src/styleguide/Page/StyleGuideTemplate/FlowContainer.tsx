@@ -74,7 +74,8 @@ const Examples = (props: any) => (
   </>
 );
 
-export const FlowContainer = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
+export const FlowContainer = asStyleGuideTemplateToken({
+  ...vitalStyleGuideTemplate.Default,
   Meta: flowHoc.meta.term('Token')('FlowContainer'),
   Content: {
     Title: replaceWith(() => <>FlowContainer</>),
