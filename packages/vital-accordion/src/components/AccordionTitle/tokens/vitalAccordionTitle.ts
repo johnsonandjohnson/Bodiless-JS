@@ -20,7 +20,7 @@ import { EditorPlainClean, vitalEditorPlain } from '@bodiless/vital-editors';
 import { vitalColor, vitalFontSize, vitalTextDecoration } from '@bodiless/vital-elements';
 import { asAccordionTitleToken, withAccordionTitleHandler } from '../AccordionTitleClean';
 
-const Base = asAccordionTitleToken({
+const Default = asAccordionTitleToken({
   Editors: {
     Label: on(EditorPlainClean)(vitalEditorPlain.Default),
   },
@@ -33,9 +33,6 @@ const Base = asAccordionTitleToken({
   Behavior: {
     Wrapper: withAccordionTitleHandler,
   },
-});
-
-const Default = asAccordionTitleToken(Base, {
   Theme: {
     Wrapper: as(
       vitalFontSize.XL,
@@ -59,7 +56,6 @@ const WithFAQSchema = asAccordionTitleToken({
 });
 
 export default {
-  Base,
   Default,
   WithFAQSchema,
 };

@@ -210,9 +210,8 @@ const Burger = asMenuToken({
 });
 
 export default {
-  Base,
-  Burger,
   Default,
+  Burger,
   Footer,
   TopNav,
   Utility,

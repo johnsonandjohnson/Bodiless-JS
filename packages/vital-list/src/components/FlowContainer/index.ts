@@ -15,11 +15,11 @@
 import { asFluidToken } from '@bodiless/vital-elements';
 import { on, varyDesigns, flowHoc, } from '@bodiless/fclasses';
 import {
-  asListToken, ListClean, ListStatic, vitalList, vitalListStatic
+  asListToken, ListClean, ListStatic, vitalList, vitalListStatic,
 } from '../List';
 
 const BaseVariation = {
-  List: on(ListClean)(vitalList.Base),
+  List: on(ListClean)(vitalList.Default),
 };
 
 const TitleVariations = {
@@ -41,7 +41,7 @@ const DecorationVariations = {
  */
 const WithListVariations = asFluidToken({
   Components: {
-    ListInfographic: on(ListStatic)(vitalListStatic.Base, vitalListStatic.WithInfographicTitle),
+    ListInfographic: on(ListStatic)(vitalList.Default, vitalListStatic.WithInfographicTitle),
     ...varyDesigns(
       BaseVariation,
       DecorationVariations,

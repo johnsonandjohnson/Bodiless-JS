@@ -17,7 +17,7 @@ import { addProps } from '@bodiless/fclasses';
 
 const Default = asSearchTogglerToken(vitalSearchTogglerBase.Default, {
   Behavior: {
-    _: addProps({ 'data-shadowed-by': '__vital__:SearchToggler' }),
+    _: addProps({ 'data-shadowed-by': '__vitaltest__:SearchToggler' }),
   },
 });
 

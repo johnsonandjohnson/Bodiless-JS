@@ -23,48 +23,47 @@ import { vitalList, ListClean } from '@bodiless/vital-list';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 
 const DefaultList = as(
-  vitalList.Default,
+  vitalList.DefaultWithRichTitle,
   withNodeKey('defaultlist'),
 )(ListClean);
 
 const ListwithIndent = as(
-  vitalList.Default,
+  vitalList.DefaultWithRichTitle,
   vitalList.WithIndent,
   withNodeKey('ListwithIndent'),
 )(ListClean);
 
 const ListwithBullets = as(
-  vitalList.Default,
+  vitalList.DefaultWithRichTitle,
   vitalList.WithBullets,
   withNodeKey('ListwithBullets'),
 )(ListClean);
 
 const ListwithRichText = as(
-  vitalList.Base,
-  vitalList.WithRichTitle,
+  vitalList.DefaultWithRichTitle,
   withNodeKey('ListwithRichText'),
 )(ListClean);
 
 const ListwithPlainTitle = as(
-  vitalList.Base,
+  vitalList.Default,
   vitalList.WithPlainTitle,
   withNodeKey('ListwithPlainTitle'),
 )(ListClean);
 
 const ListwithInfographicTitle = as(
-  vitalList.Base,
+  vitalList.Default,
   vitalList.WithInfographicTitle,
   withNodeKey('ListwithInfographicTitle'),
 )(ListClean);
 
 const ListwithLinkedTitle = as(
-  vitalList.Base,
+  vitalList.Default,
   vitalList.WithLinkedTitle,
   withNodeKey('ListwithLinkedTitle'),
 )(ListClean);
 
 const ListwithNumbers = as(
-  vitalList.Default,
+  vitalList.DefaultWithRichTitle,
   vitalList.WithNumbers,
   withNodeKey('ListwithNumbers'),
 )(ListClean);
@@ -94,7 +93,8 @@ const Examples = (props: any) => (
   </>
 );
 
-export const List = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
+export const List = asStyleGuideTemplateToken({
+  ...vitalStyleGuideTemplate.Default,
   Meta: flowHoc.meta.term('Token')('List'),
   Content: {
     Title: replaceWith(() => <>List</>),

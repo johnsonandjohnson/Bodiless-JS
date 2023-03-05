@@ -17,7 +17,7 @@ import { addProps } from '@bodiless/fclasses';
 
 const Default = asMenuTitleToken(vitalMenuTitleBase.Default, {
   Behavior: {
-    _: addProps({ 'data-shadowed-by': '__vital__:MenuTitle' }),
+    _: addProps({ 'data-shadowed-by': '__vitaltest__:MenuTitle' }),
   },
 });
 

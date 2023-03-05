@@ -17,7 +17,7 @@ import { addProps } from '@bodiless/fclasses';
 
 const Default = asSearchMenuToken(vitalSearchMenuBase.Default, {
   Behavior: {
-    _: addProps({ 'data-shadowed-by': '__vital__:SearchMenu' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vitaltest__:SearchMenu' }),
   },
 });
 

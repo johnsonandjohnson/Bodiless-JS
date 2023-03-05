@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { on } from '@bodiless/fclasses';
+import { on, addProps } from '@bodiless/fclasses';
 import { vitalBurgerMenuBase, asBurgerMenuToken } from '@bodiless/vital-navigation';
 import { LinkClean, vitalLink, asLinkToken } from '@bodiless/vital-link';
 import { asLanguageSelector } from '@bodiless/i18n';
@@ -26,12 +26,15 @@ export const asLanguageSelectorLink = on(LinkClean)(
   asLanguageSelector
 );
 
-const Default = asBurgerMenuToken(vitalBurgerMenuBase.Base, {
+const Default = asBurgerMenuToken(vitalBurgerMenuBase.Default, {
   Components: {
     LanguageSelector: asLanguageSelectorLink,
   },
   Spacing: {
     LanguageSelector: 'pl-5',
+  },
+  Behavior: {
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:BurgerMenu' }),
   },
 });
 

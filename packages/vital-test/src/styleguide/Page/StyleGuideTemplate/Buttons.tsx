@@ -95,7 +95,8 @@ const data = {
   examples$PrimaryExternalLink: { href: 'https://www.example.com/' },
 };
 
-export const Buttons = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
+export const Buttons = asStyleGuideTemplateToken({
+  ...vitalStyleGuideTemplate.Default,
   Meta: flowHoc.meta.term('Token')('Buttons'),
   Content: {
     Title: replaceWith(() => <>Buttons</>),

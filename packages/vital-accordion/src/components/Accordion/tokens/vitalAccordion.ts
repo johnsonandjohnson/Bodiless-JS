@@ -23,10 +23,10 @@ import { vitalAccordionBody } from '../../AccordionBody';
 import { vitalAccordionTitle } from '../../AccordionTitle';
 import { asAccordionToken, AccordionBodyPreview } from '../AccordionClean';
 
-const Base = asAccordionToken({
+const Default = asAccordionToken({
   Components: {
-    Title: vitalAccordionTitle.Base,
-    Body: vitalAccordionBody.Base,
+    Title: vitalAccordionTitle.Default,
+    Body: vitalAccordionBody.Default,
   },
   Schema: {
     _: as(
@@ -34,17 +34,10 @@ const Base = asAccordionToken({
       withNodeKey('accordion'),
     ),
   },
-  Meta: flowHoc.meta.term('Type')('Accordion'),
-});
-
-const Default = asAccordionToken(Base, {
-  Components: {
-    Title: vitalAccordionTitle.Default,
-    Body: vitalAccordionBody.Default,
-  },
   Theme: {
     Wrapper: vitalColor.BgPrimaryCard,
   },
+  Meta: flowHoc.meta.term('Type')('Accordion'),
 });
 
 const WithInitiallyExpanded = asAccordionToken({
@@ -71,7 +64,6 @@ const WithFlowContainerPreview = asAccordionToken({
 });
 
 export default {
-  Base,
   Default,
   WithInitiallyExpanded,
   WithFAQSchema,

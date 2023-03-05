@@ -155,7 +155,7 @@ const WithPrimaryButton = asCardToken({
     CTALink: replaceWith(ButtonClean),
   },
   Theme: {
-    CTALink: as(vitalButtons.Primary, vitalButtons.WithArrow),
+    CTALink: as(vitalButtons.Default, vitalButtons.WithPrimary, vitalButtons.WithArrow),
   },
   Meta: extendMeta(
     flowHoc.meta.term('CTA Style')('Primary Button'),
@@ -169,7 +169,7 @@ const WithSecondaryButton = asCardToken({
     CTALink: replaceWith(ButtonClean),
   },
   Theme: {
-    CTALink: as(vitalButtons.Secondary, vitalButtons.WithArrow),
+    CTALink: as(vitalButtons.Default, vitalButtons.WithSecondary, vitalButtons.WithArrow),
   },
   Meta: extendMeta(
     flowHoc.meta.term('CTA Style')('Secondary Button'),

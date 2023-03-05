@@ -31,7 +31,7 @@ import { withAnalyticsAttr } from '../../../util';
 import { vitalMenuTitle, MenuTitleClean } from '../../MenuTitle';
 import { asSubMenuToken } from '../SubMenuClean';
 
-const Base = asSubMenuToken({
+const Default = asSubMenuToken({
   A11y: {
     Wrapper: addProps({ role: 'menu' }),
     Item: addProps({ role: 'menuitem' }),
@@ -45,7 +45,7 @@ const Base = asSubMenuToken({
 });
 
 const Footer = asSubMenuToken({
-  ...Base,
+  ...Default,
   Theme: {
     Title: as(
       vitalTextDecoration.Uppercase,
@@ -62,9 +62,9 @@ const Footer = asSubMenuToken({
 });
 
 const TopNav = asSubMenuToken({
-  ...Base,
+  ...Default,
   Components: {
-    ...Base.Components,
+    ...Default.Components,
     // Disables indicator icon per requirements.
     // @TODO: This can be removed to improve accessibility.
     SubmenuIndicator: replaceWith(() => null),
@@ -97,9 +97,9 @@ const TopNav = asSubMenuToken({
 });
 
 const Burger = asSubMenuToken({
-  ...Base,
+  ...Default,
   Components: {
-    ...Base.Components,
+    ...Default.Components,
     // Removes accordions icons.
     OuterWrapper: withDesign({
       Title: withDesign({
@@ -118,8 +118,6 @@ const Burger = asSubMenuToken({
     ),
   },
 });
-
-const Default = Base;
 
 export default {
   Default,

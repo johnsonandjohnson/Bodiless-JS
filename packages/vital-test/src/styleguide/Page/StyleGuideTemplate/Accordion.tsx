@@ -88,7 +88,8 @@ const data = {
   examples$FAQExpanded$accordion$body: simplebody,
 };
 
-export const Accordion = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
+export const Accordion = asStyleGuideTemplateToken({
+  ...vitalStyleGuideTemplate.Default,
   Meta: flowHoc.meta.term('Token')('Accordion'),
   Content: {
     Title: replaceWith(() => <>Accordion</>),

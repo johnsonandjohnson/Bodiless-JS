@@ -65,7 +65,8 @@ const content = {
   title, description, eyebrow, image
 };
 
-export const Card = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
+export const Card = asStyleGuideTemplateToken({
+  ...vitalStyleGuideTemplate.Default,
   Meta: flowHoc.meta.term('Token')('Card'),
   Content: {
     Title: replaceWith(() => <>Card</>),

@@ -17,7 +17,7 @@ import { addProps } from '@bodiless/fclasses';
 
 const Default = asYouTubeToken(vitalYouTubeBase.Default, {
   Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': '__vital__:YouTube' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vitaltest__:YouTube' }),
   },
 });
 

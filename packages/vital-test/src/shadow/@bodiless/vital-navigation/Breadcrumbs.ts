@@ -12,17 +12,27 @@
  * limitations under the License.
  */
 
-import { vitalLinkBase, asLinkToken } from '@bodiless/vital-link';
+// Note: when used with the __vital__ package on vital-demo, that package takes precedence
+// over this one.  This test override has no effect and just an example.
+
+import { vitalBreadcrumbsBase, asBreadcrumbsToken } from '@bodiless/vital-navigation';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asLinkToken(vitalLinkBase.Default, {
+const Default = asBreadcrumbsToken(vitalBreadcrumbsBase.Default, {
   Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': '__vitaltest__:Link' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vitaltest__:Breadcrumbs' }),
   },
-
 });
 
-export default {
-  ...vitalLinkBase,
+// Throws The inferred type of 'default' so using typeof method
+// export default {
+//   ...vitalBreadcrumbsBase,
+//   Default,
+// };
+
+const vitalBreadcrumbs: typeof vitalBreadcrumbsBase = {
+  ...vitalBreadcrumbsBase,
   Default,
 };
+
+export default vitalBreadcrumbs;

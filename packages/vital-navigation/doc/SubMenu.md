@@ -71,7 +71,7 @@ To add a Link to a Sub-Menu Item:
 
 From a Site Builder perspective, Vital Sub-Menu is comprised of a token collection (`vitalSubMenu`)
 that can be appended directly to menus, without providing a Sub-Menu clean component. You can use
-the base Vital Sub-Menu token (`vitalSubMenu.Base`) as it is, or you can recompose it to meet your
+the default Vital Sub-Menu token (`vitalSubMenu.Default`) as it is, or you can recompose it to meet your
 site's requirements.
 
 Some recomposed tokens are already provided for Vital, such as:
@@ -89,7 +89,7 @@ in your Menu token.
 const Menu = as(
   // You can compose or create a new customized submenu token.
   withListSubMenu(),
-  withMenuDesign('List')(as(vitalSubMenu.Base)),
+  withMenuDesign('List')(as(vitalSubMenu.Default)),
 )(MenuClean);
 ```
 

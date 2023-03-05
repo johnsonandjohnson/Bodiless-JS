@@ -12,12 +12,18 @@
  * limitations under the License.
  */
 
+// Note: when used with the __vital__ package on vital-demo, that package takes precedence
+// over this one.  This test override has no effect and just an example.
+
 import { vitalBurgerMenuBase, asBurgerMenuToken } from '@bodiless/vital-navigation';
 import { addProps } from '@bodiless/fclasses';
 
+// Note: when used with the __vital__ package on vital-demo, that package takes precedence
+// over this one.  This test override has no effect and just an example.
+
 const Default = asBurgerMenuToken(vitalBurgerMenuBase.Default, {
   Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': '__vital__:BurgerMenu' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vitaltest__:BurgerMenu' }),
   },
 });
 

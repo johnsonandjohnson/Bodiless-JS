@@ -17,19 +17,19 @@ import { addProps } from '@bodiless/fclasses';
 
 const TopNav = asMenuToken(vitalMenuBase.TopNav, {
   Core: {
-    _: addProps({ 'data-shadowed-by': '__vital__Menu_TopNav' }),
+    _: addProps({ 'data-shadowed-by': '__vitaltest__:Menu_TopNav' }),
   },
 });
 
 const Footer = asMenuToken(vitalMenuBase.Footer, {
   Core: {
-    _: addProps({ 'data-shadowed-by': '__vital__Menu_Footer' }),
+    _: addProps({ 'data-shadowed-by': '__vitaltest__:Menu_Footer' }),
   },
 });
 
 const Utility = asMenuToken(vitalMenuBase.Utility, {
   Core: {
-    _: addProps({ 'data-shadowed-by': '__vital__Menu_Utility' }),
+    _: addProps({ 'data-shadowed-by': '__vitaltest__:Menu_Utility' }),
   },
 });
 

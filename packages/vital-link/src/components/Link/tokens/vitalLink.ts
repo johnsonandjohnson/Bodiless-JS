@@ -61,9 +61,9 @@ const WithDownloadStyles = asLinkToken({
 });
 
 /**
-  * Token which produces a base editable link.
+  * Token which produces a base editable link & default VitalDS styling.
   */
-const Base = asLinkToken({
+const Default = asLinkToken({
   /**
      * Makes the link editable. Nodekey must be provided separately.
      * Editor token should be applied after all composed tokens to ensure
@@ -72,15 +72,6 @@ const Base = asLinkToken({
   Schema: {
     _: asEditableLink(),
   },
-});
-
-/**
-   * Token which produces a default VitalDS editable link.
-   */
-const Default = asLinkToken(Base, {
-  /**
-     * VitalDS typography and colors.
-     */
   Theme: {
     _: as(WithDownloadStyles, WithExternalStyles),
     Wrapper: as(vitalTypography.Link),
@@ -106,7 +97,6 @@ const Sidecar = asLinkToken({
 });
 
 export default {
-  Base,
   Default,
   WithExternalStyles,
   WithDownloadStyles,

@@ -17,19 +17,19 @@ import { addProps } from '@bodiless/fclasses';
 
 const Footer = asSubMenuToken(vitalSubMenuBase.Footer, {
   Behavior: {
-    _: addProps({ 'data-shadowed-by-2': '__vital__:FooterSubMenu' }),
+    _: addProps({ 'data-shadowed-by-2': '__vitaltest__:FooterSubMenu' }),
   },
 });
 
 const TopNav = asSubMenuToken(vitalSubMenuBase.TopNav, {
   Behavior: {
-    _: addProps({ 'data-shadowed-by': '__vital__:TopNavSubMenu' }),
+    _: addProps({ 'data-shadowed-by': '__vitaltest__:TopNavSubMenu' }),
   },
 });
 
 const Burger = asSubMenuToken(vitalSubMenuBase.Burger, {
   Behavior: {
-    _: addProps({ 'data-shadowed-by': '__vital__:BurgerSubMenu' }),
+    _: addProps({ 'data-shadowed-by': '__vitaltest__:BurgerSubMenu' }),
   },
 });
 

@@ -17,7 +17,7 @@ import { addProps } from '@bodiless/fclasses';
 
 const Default = asTitleInfographicToken(vitalTitleInfographicBase.Default, {
   Behavior: {
-    Wrapper: addProps({ 'data-shadowed-by': '__vital__:TitleInfographic' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vitaltest__:TitleInfographic' }),
   },
 });
 

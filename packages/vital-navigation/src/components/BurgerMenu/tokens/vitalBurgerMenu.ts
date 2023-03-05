@@ -27,7 +27,7 @@ import { asBurgerMenuToken } from '../BurgerMenuClean';
 /**
  * Token that produces the Base VitalDS Burger Menu.
  */
-const Base = asBurgerMenuToken({
+const Default = asBurgerMenuToken({
   Core: {
     _: asStatic,
     MenuToggler: asBurgerMenuToggler,
@@ -82,11 +82,6 @@ const Base = asBurgerMenuToken({
   },
 });
 
-const Default = asBurgerMenuToken({
-  ...Base,
-});
-
 export default {
-  Base,
   Default,
 };

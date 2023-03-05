@@ -17,7 +17,7 @@ import { addProps } from '@bodiless/fclasses';
 
 const Default = asSearchResultsToken(vitalSearchResultsBase.Default, {
   Behavior: {
-    SearchResultWrapper: addProps({ 'data-shadowed-by': '__vital__:SearchResults' }),
+    SearchResultWrapper: addProps({ 'data-shadowed-by': '__vitaltest__:SearchResults' }),
   },
 });
 

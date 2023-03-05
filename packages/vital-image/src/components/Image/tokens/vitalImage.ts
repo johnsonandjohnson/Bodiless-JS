@@ -195,15 +195,6 @@ const Hero = asElementToken({
  */
 export interface VitalImage {
   /**
-   * Token which creates the VitalDS Base Image. Defines the Base as:
-   * - Gatsby Image
-   * - With GatsbyImageLogger
-   * - Without Hydration
-   * - Schema has nodekey 'image'
-   * - Meta is Type: Image
-   */
-  Base: ElementToken,
-  /**
    * Composable Token which apply the following tokens/features to an image:
    * - Bodiless image.
    * - withNode
@@ -327,7 +318,6 @@ export interface VitalImage {
  * @see [[VitalImage]]
  */
 const vitalImage: VitalImage = {
-  Base,
   Plain,
   Default,
   WithEditorPlain,

@@ -81,18 +81,17 @@ const WithNumbers = asListToken({
   },
 });
 
-const Base = asListToken({
+const Default = asListToken({
   Meta: flowHoc.meta.term('Type')('List'),
 });
 
-const Default = asListToken({
-  ...Base,
+const DefaultWithRichTitle = asListToken({
+  ...Default,
   ...WithRichTitle,
 });
-
 export default {
-  Base,
   Default,
+  DefaultWithRichTitle,
   WithIndent,
   WithBullets,
   WithRichTitle,

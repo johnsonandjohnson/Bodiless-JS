@@ -17,7 +17,7 @@ import { addProps } from '@bodiless/fclasses';
 
 const Default = asSearchBoxToken(vitalSearchBoxBase.Default, {
   Behavior: {
-    _: addProps({ 'data-shadowed-by': '__vital__:SearchBox' }),
+    _: addProps({ 'data-shadowed-by': '__vitaltest__:SearchBox' }),
   },
 });
 

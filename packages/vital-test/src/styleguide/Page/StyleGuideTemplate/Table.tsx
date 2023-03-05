@@ -114,7 +114,8 @@ const Examples = (props: any) => (
     </>
 );
 
-export const Table = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
+export const Table = asStyleGuideTemplateToken({
+  ...vitalStyleGuideTemplate.Default,
   Meta: flowHoc.meta.term('Token')('Table'),
   Content: {
     Title: replaceWith(() => <>Table</>),

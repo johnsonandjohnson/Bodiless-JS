@@ -42,7 +42,8 @@ const WithYouTubeVariations = asFluidToken({
   },
 });
 
-export const Video = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
+export const Video = asStyleGuideTemplateToken({
+  ...vitalStyleGuideTemplate.Default,
   Meta: flowHoc.meta.term('Token')('Video'),
   Content: {
     Title: replaceWith(() => <>Video</>),

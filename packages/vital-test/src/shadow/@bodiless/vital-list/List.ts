@@ -17,7 +17,7 @@ import { addProps } from '@bodiless/fclasses';
 
 const Default = asListToken(vitalListBase.Default, {
   Behavior: {
-    _: addProps({ 'data-shadowed-by': '__vital__:List' }),
+    _: addProps({ 'data-shadowed-by': '__vitaltest__:List' }),
   },
 });
 

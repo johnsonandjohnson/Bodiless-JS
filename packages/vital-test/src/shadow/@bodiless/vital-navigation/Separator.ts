@@ -18,12 +18,12 @@ import { addProps } from '@bodiless/fclasses';
 
 const FooterMenu = asElementToken(vitalSeparatorBase.FooterMenu, {
   Behavior: {
-    _: addProps({ 'data-shadowed-by': '__vital__:FooterMenuSeparator' }),
+    _: addProps({ 'data-shadowed-by': '__vitaltest__:FooterMenuSeparator' }),
   },
 });
 const UtilityMenu = asElementToken(vitalSeparatorBase.UtilityMenu, {
   Behavior: {
-    _: addProps({ 'data-shadowed-by': '__vital__:UtilityMenuSeparator' }),
+    _: addProps({ 'data-shadowed-by': '__vitaltest__:UtilityMenuSeparator' }),
   },
 });
 

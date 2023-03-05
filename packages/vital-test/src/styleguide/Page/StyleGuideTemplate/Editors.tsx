@@ -84,7 +84,8 @@ const Examples = () => (
   </>
 );
 
-export const Editors = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
+export const Editors = asStyleGuideTemplateToken({
+  ...vitalStyleGuideTemplate.Default,
   Meta: flowHoc.meta.term('Token')('Editors'),
   Content: {
     Title: replaceWith(() => <>Text Editors</>),
@@ -104,7 +105,8 @@ const ExamplesMonoFont = () => (
   </>
 );
 
-export const EditorsMonoFont = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
+export const EditorsMonoFont = asStyleGuideTemplateToken({
+  ...vitalStyleGuideTemplate.Default,
   Meta: flowHoc.meta.term('Token')('Editors'),
   Content: {
     Title: replaceWith(() => <>Text Editors</>),

@@ -30,7 +30,7 @@ const WithProductDescriptionVariations = asFluidToken(
 );
 
 const ProductDescription = asFluidToken(
-  vitalFlowContainer.Base,
+  vitalFlowContainer.Empty,
   vitalFlowContainer.WithContentLibrary,
   vitalFlowContainer.WithFullWidthConstraint,
   WithProductDescriptionVariations,
