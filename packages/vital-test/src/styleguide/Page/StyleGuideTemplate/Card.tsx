@@ -15,7 +15,7 @@
 import React from 'react';
 import { withNodeKey } from '@bodiless/core';
 import {
-  flowHoc, replaceWith, as, Div, H2
+  flowHoc, replaceWith, as, Div, H2, withProps
 } from '@bodiless/fclasses';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { vitalTypography } from '@bodiless/vital-elements';
@@ -23,12 +23,15 @@ import { CardStatic, vitalCardStatic } from '@bodiless/vital-card';
 
 const Subtitle = as(vitalTypography.H2, 'pt-4')(H2);
 
+const withTestId = (testId: string) => withProps({ 'data-testid': testId })
+
 /**
  * Default Card component.
  */
 const DefaultCard = as(
   vitalCardStatic.Default,
   withNodeKey('default-card'),
+  withTestId('default-card'),
 )(CardStatic);
 
 /**
@@ -38,6 +41,7 @@ const VerticalCard = as(
   vitalCardStatic.Default,
   vitalCardStatic.WithVerticalOrientation,
   withNodeKey('vertical-card'),
+  withTestId('vertical-card'),
 )(CardStatic);
 
 const HorizontalLeftCard = as(
@@ -45,39 +49,46 @@ const HorizontalLeftCard = as(
   vitalCardStatic.WithHorizontalLeftOrientation,
   vitalCardStatic.WithHorizontalContentAtTop,
   withNodeKey('horizontal-left-card'),
+  withTestId('horizontal-left-card'),
 )(CardStatic);
 const HorizontalLeftImageCenteredContentCard = as(
   vitalCardStatic.Default,
   vitalCardStatic.WithHorizontalLeftOrientation,
   vitalCardStatic.WithHorizontalContentCentered,
   withNodeKey('horizontal-left-centered-card'),
+  withTestId('horizontal-left-centered-card'),
 )(CardStatic);
 const HorizontalRightCard = as(
   vitalCardStatic.Default,
   vitalCardStatic.WithHorizontalRightOrientation,
   vitalCardStatic.WithHorizontalContentAtTop,
   withNodeKey('horizontal-right-card'),
+  withTestId('horizontal-right-card'),
 )(CardStatic);
 const HorizontalRightImageCenteredContentCard = as(
   vitalCardStatic.Default,
   vitalCardStatic.WithHorizontalRightOrientation,
   vitalCardStatic.WithHorizontalContentCentered,
   withNodeKey('horizontal-right-centered-card'),
+  withTestId('horizontal-right-centered-card'),
 )(CardStatic);
 
 const HeroCard = as(
   vitalCardStatic.Hero,
   withNodeKey('hero-card'),
+  withTestId('hero-card'),
 )(CardStatic);
 const HeroPrimaryButtonCard = as(
   vitalCardStatic.Hero,
   vitalCardStatic.WithPrimaryButton,
   withNodeKey('hero-card-primary-button'),
+  withTestId('hero-card-primary-button'),
 )(CardStatic);
 const HeroSecondaryButtonCard = as(
   vitalCardStatic.Hero,
   vitalCardStatic.WithSecondaryButton,
   withNodeKey('hero-card-secondary-button'),
+  withTestId('hero-card-secondary-button'),
 )(CardStatic);
 
 const CardVariations = (props: any) => (
