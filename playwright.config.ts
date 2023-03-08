@@ -14,7 +14,7 @@ import { devices } from '@playwright/test';
 const config: PlaywrightTestConfig = {
   testDir: './playwright/tests',
   /* Maximum time one test can run for. */
-  timeout: 30 * 1000,
+  timeout: 90 * 1000,
   expect: {
     /**
      * Maximum time expect() should wait for the condition to be met.
@@ -40,6 +40,7 @@ const config: PlaywrightTestConfig = {
     // viewport: { width: 1200, height: 850 },
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on',
+    testIdAttribute: 'id'
   },
 
   /* Configure projects for major browsers */

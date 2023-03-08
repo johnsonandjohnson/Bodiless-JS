@@ -1,10 +1,10 @@
-name: Build, Test, Lint for Pull Requests
+name: Build, Test and Lint for Pull Requests
 env:
   CI: true
   FORCE_COLOR: 1
   NODE_OPTIONS: --max_old_space_size=4096
 on:
-  pull_request:
+  pull_request_target:
     branches:
       - main
 jobs:
@@ -44,9 +44,21 @@ jobs:
         # run: npm run test:ci
       - name: Install Playwright
         run: npx playwright install --with-deps
-      - name: Run Playwright Tests
+      - name: Run Deprecated Playwright Tests
         run: |
           npm run test:monorepo-pw
+      - name: Upload Tests Artifact
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: deprecated-playwright-report
+          path: playwright-report/
+          retention-days: 30
+      - name: Run Playwright Tests
+        env:
+          APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY }}
+        run: |
+          npm run test:playwright
       - name: Upload Tests Artifact
         if: always()
         uses: actions/upload-artifact@v2
