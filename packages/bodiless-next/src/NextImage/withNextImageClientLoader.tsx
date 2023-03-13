@@ -45,7 +45,7 @@ const withNextImageClientLoader = (Component: ComponentOrTag<any>) => (
                 if (entry.isIntersecting || entry.intersectionRatio > 0) {
                   const t = entry.target;
                   const n = t.nextSibling;
-                  if (t.srcset == '' ) {
+                  if (t.srcset == '' || t.src == '' ) {
                     if(!n || n.nodeName !== 'NOSCRIPT') {
                       observer.disconnect();
                       return;
