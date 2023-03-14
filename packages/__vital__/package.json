@@ -1,7 +1,7 @@
 {
   "name": "--vital--",
   "sideEffects": false,
-  "version": "1.0.0-rc.25",
+  "version": "1.0.0-rc.26",
   "description": "Starter template for a Design System package based on Vital DS",
   "author": "Chris Oden <coden@its.jnj.com>",
   "license": "Apache-2.0",
@@ -31,16 +31,16 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.25",
-    "@bodiless/core": "^1.0.0-rc.25",
-    "@bodiless/fclasses": "^1.0.0-rc.25",
-    "@bodiless/i18n": "^1.0.0-rc.25",
-    "@bodiless/vital-card": "^1.0.0-rc.25",
-    "@bodiless/vital-elements": "^1.0.0-rc.25",
-    "@bodiless/vital-layout": "^1.0.0-rc.25",
-    "@bodiless/vital-link": "^1.0.0-rc.25",
-    "@bodiless/vital-navigation": "^1.0.0-rc.25",
-    "@bodiless/vital-templates": "^1.0.0-rc.25",
+    "@bodiless/cli": "^1.0.0-rc.26",
+    "@bodiless/core": "^1.0.0-rc.26",
+    "@bodiless/fclasses": "^1.0.0-rc.26",
+    "@bodiless/i18n": "^1.0.0-rc.26",
+    "@bodiless/vital-card": "^1.0.0-rc.26",
+    "@bodiless/vital-elements": "^1.0.0-rc.26",
+    "@bodiless/vital-layout": "^1.0.0-rc.26",
+    "@bodiless/vital-link": "^1.0.0-rc.26",
+    "@bodiless/vital-navigation": "^1.0.0-rc.26",
+    "@bodiless/vital-templates": "^1.0.0-rc.26",
     "lodash": "^4.17.19",
     "tailwindcss": "^3.0.23"
   }

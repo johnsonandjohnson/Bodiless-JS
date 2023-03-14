@@ -13,108 +13,67 @@
  */
 
 import React from 'react';
-import { withNodeKey } from '@bodiless/core';
 import {
-  flowHoc, replaceWith, as, Div, H2
+  flowHoc, replaceWith, on, addProps
 } from '@bodiless/fclasses';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
-import { vitalTypography } from '@bodiless/vital-elements';
-import { CardStatic, vitalCardStatic } from '@bodiless/vital-card';
+import { vitalCardFlowContainer } from '@bodiless/vital-card';
+import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
-const Subtitle = as(vitalTypography.H2, 'pt-4')(H2);
+const eyebrow = {
+  text: 'LOREM EYEBROW'
+};
 
-/**
- * Default Card component.
- */
-const DefaultCard = as(
-  vitalCardStatic.Default,
-  withNodeKey('default-card'),
-)(CardStatic);
+// @todo Provide actual default image in package rather than manual upload.
+const image = {
+  src: '/images/pages/styleguide/card/89e732f5d5bfe4a4a80eebfa4e01a8bd/image1.png',
+  alt: '',
+  title: '',
+  preset: 'fluid_withWebp'
+};
 
-/**
- * Vertical Card component.
- */
-const VerticalCard = as(
-  vitalCardStatic.Default,
-  vitalCardStatic.WithVerticalOrientation,
-  withNodeKey('vertical-card'),
-)(CardStatic);
+const title = {
+  text: 'Ipsum Title'
+};
 
-const HorizontalLeftCard = as(
-  vitalCardStatic.Default,
-  vitalCardStatic.WithHorizontalLeftOrientation,
-  vitalCardStatic.WithHorizontalContentAtTop,
-  withNodeKey('horizontal-left-card'),
-)(CardStatic);
-const HorizontalLeftImageCenteredContentCard = as(
-  vitalCardStatic.Default,
-  vitalCardStatic.WithHorizontalLeftOrientation,
-  vitalCardStatic.WithHorizontalContentCentered,
-  withNodeKey('horizontal-left-centered-card'),
-)(CardStatic);
-const HorizontalRightCard = as(
-  vitalCardStatic.Default,
-  vitalCardStatic.WithHorizontalRightOrientation,
-  vitalCardStatic.WithHorizontalContentAtTop,
-  withNodeKey('horizontal-right-card'),
-)(CardStatic);
-const HorizontalRightImageCenteredContentCard = as(
-  vitalCardStatic.Default,
-  vitalCardStatic.WithHorizontalRightOrientation,
-  vitalCardStatic.WithHorizontalContentCentered,
-  withNodeKey('horizontal-right-centered-card'),
-)(CardStatic);
+const description = [
+  {
+    type: 'paragraph',
+    children: [
+      {
+        text: 'Lorem ipsum '
+      },
+      {
+        text: 'dolor',
+        Bold: true
+      },
+      {
+        text: ' sit amet'
+      },
+      {
+        text: 'super',
+        SuperScript: true
+      },
+      {
+        text: ', consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '
+      }
+    ]
+  }
+];
 
-const HeroCard = as(
-  vitalCardStatic.Hero,
-  withNodeKey('hero-card'),
-)(CardStatic);
-const HeroPrimaryButtonCard = as(
-  vitalCardStatic.Hero,
-  vitalCardStatic.WithPrimaryButton,
-  withNodeKey('hero-card-primary-button'),
-)(CardStatic);
-const HeroSecondaryButtonCard = as(
-  vitalCardStatic.Hero,
-  vitalCardStatic.WithSecondaryButton,
-  withNodeKey('hero-card-secondary-button'),
-)(CardStatic);
-
-const CardVariations = (props: any) => (
-  <>
-    <Div className="md:w-1/3 mb-8">
-      <Subtitle>Default Card</Subtitle>
-      <DefaultCard />
-      <Subtitle>Vertical Card</Subtitle>
-      <VerticalCard />
-    </Div>
-    <Subtitle>Horizontal Card Variations</Subtitle>
-    <Div className="md:w-1/2 mb-8">
-      <Subtitle>Left Image : Content Top Aligned </Subtitle>
-      <HorizontalLeftCard />
-      <Subtitle>Left Image : Content Centered</Subtitle>
-      <HorizontalLeftImageCenteredContentCard />
-      <Subtitle>Right Image : Content Top Aligned </Subtitle>
-      <HorizontalRightCard />
-      <Subtitle>Right Image : Content Centered</Subtitle>
-      <HorizontalRightImageCenteredContentCard />
-    </Div>
-    <Div className="mb-8">
-      <Subtitle>Hero Card</Subtitle>
-      <HeroCard />
-      <Subtitle>Hero Card with Primary Button</Subtitle>
-      <HeroPrimaryButtonCard />
-      <Subtitle>Hero Card with Secondary Button</Subtitle>
-      <HeroSecondaryButtonCard />
-    </Div>
-  </>
-);
+const content = {
+  title, description, eyebrow, image
+};
 
 export const Card = asStyleGuideTemplateToken({
   ...vitalStyleGuideTemplate.Default,
   Meta: flowHoc.meta.term('Token')('Card'),
   Content: {
     Title: replaceWith(() => <>Card</>),
-    Examples: replaceWith(CardVariations),
+    Examples: on(StyleGuideExamplesClean)(
+      vitalStyleGuideExamples.Default,
+      vitalCardFlowContainer.WithCardVariations,
+      addProps({ content }),
+    ),
   },
 });

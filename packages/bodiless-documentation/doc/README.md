@@ -29,3 +29,9 @@ Creating a Gallery Page](https://johnsonandjohnson.github.io/Bodiless-JS/#/Devel
 - [BodilessJS](https://www.bodiless-js.org/)
 - [Read the Documentation on GitHub](https://johnsonandjohnson.github.io/Bodiless-JS)
 - [BodilessJS on NPM](https://www.npmjs.com/org/bodiless)
+
+## Acknowledgements
+
+[<img src="https://applitools.com/wp-content/uploads/2022/08/Applitools-Logo-Set-V2_Applitools_1c_Green_Applitools_fullcolor_tagline-1.svg" width="150px" alt="Applitools">](https://applitools.com/)
+
+[Applitools](https://applitools.com/) has provided us with the tools to build a high quality toolset by testing our components on a range of browsers and platforms. Thank you.
