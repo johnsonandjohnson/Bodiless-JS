@@ -17,7 +17,7 @@ import { addProps } from '@bodiless/fclasses';
 
 const Default = asLayoutToken(vitalLayoutBase.Default, {
   Behavior: {
-    OuterContainer: addProps({ 'data-shadowed-by': '__vital__:Layout' }),
+    OuterContainer: addProps({ 'data-shadowed-by': '__vitaltest__:Layout' }),
   },
 });
 

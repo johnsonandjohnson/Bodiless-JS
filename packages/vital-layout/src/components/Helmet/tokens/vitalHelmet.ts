@@ -19,16 +19,13 @@ import { asHelmetToken } from '../HelmetClean';
 import type { HelmetToken } from '../HelmetClean';
 // eslint-disable-next-line import/order
 
-const Base = asHelmetToken({
+const Default = asHelmetToken({
   Components: {
     SeoHelmet: vitalMetaHelmet.SEO,
     SocialShareHelmet: vitalMetaHelmet.Share,
     // LanguageHelmet: TBD,
     GA4Helmet: replaceWith(DefaultPageGA4DataLayerHelmet),
   },
-});
-
-const Default = asHelmetToken(Base, {
   Theme: {
     HTMLHelmet: as(
       'font-DMSans',
@@ -58,11 +55,7 @@ const WithFixedBody = asHelmetToken({
  */
 export interface VitalHelmet {
   /**
-   * Base applies the SEO, Share, GA4 helmets
-   */
-  Base: HelmetToken,
-  /**
-   * Inherits from Base and adds in vitalds theming
+   * Defines the default vital helmet with SEO, Share & Meta tokens.
    *
    * @example Sets the html `lang` and changes the html font & color for entire page
    * ```js
@@ -70,7 +63,7 @@ export interface VitalHelmet {
    * import { withLangDirProps } from '@bodiless/i18n';
    * import { as, addProps } from '@bodiless/fclasses';
    *
-   * const Default = asHelmetToken(vitalHelmetBase.Base, {
+   * const Default = asHelmetToken(vitalHelmetBase.Default, {
    *   Core: {
    *     LanguageHelmet: withLangDirProps,
    *   },
@@ -104,7 +97,6 @@ export interface VitalHelmet {
  * @see [[HelmetClean]]
  */
 const vitalHelmet: VitalHelmet = {
-  Base,
   Default,
   WithDesktopStaticBody,
   WithFixedBody,

@@ -22,7 +22,7 @@ utility classes, components, and tokens.
 
 We use [Tailwind](https://tailwindcss.com/ ':target=_blank') to generate a rich set of CSS utility
 classes which are composed to produce all styling in a design. The Tailwind configuration for Vital
-defines the base set of styling options (colors, typography, spacing, etc.) available for use in the
+defines the default set of styling options (colors, typography, spacing, etc.) available for use in the
 design system. A brand library will have its own Tailwind configuration, which extends the Vital
 configuration to introduce brand-specific elements. Finally, in some cases, an individual site may
 further extend this to introduce site-specific variations. Details on how to implement this
@@ -31,7 +31,7 @@ extension mechanism in Vital can be found [_TBD_]().
 
 ## Components
 
-Base React components in Vital are usually bare templates which do little or nothing in themselves
+Default React components in Vital are usually bare templates which do little or nothing in themselves
 until one or more _tokens_ (see below) are applied to them. To make this clear, exported components
 are generally suffixed with "...Clean" (e.g.,
 [`HeaderClean`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Header/HeaderClean.tsx
@@ -324,18 +324,18 @@ behavior of the brand link and change its styling:
 
 ```ts
 import { brandLink } from '@bodiless/brand';
-const Base = {
-  ...brandLink.Base,
+const Default = {
+  ...brandLink.Deafult,
   Theme: {
     Wrapper: addClasses('text-violet'),
   },
 };
 export const siteLink = {
-  Base,
+  Default,
 };
 ```
 
-Our site-level `Base` token reuses everything from the Vital `Base` token, but overrides the `Theme`
+Our site-level `Default` token reuses everything from the Vital `Default` token, but overrides the `Theme`
 domain with site-specific styling.
 
 As another example, imagine we wanted to reuse the styling of the original link, but in a context
@@ -347,7 +347,7 @@ import omit from 'lodash/omit';
 import { LinkClean } from '@bodiless/vital-link';
 import { brandLink } from '@bodiless/brand';
 
-const NonEditableLink = as(omit(brandLink.Base, 'Editors'))(LinkClean);
+const NonEditableLink = as(omit(brandLink.Default, 'Editors'))(LinkClean);
 ```
 
 #### Domains
@@ -369,21 +369,21 @@ The real power of tokens is their ability to be extended or composed to produce 
 component without altering the base component itself. There are two patterns for doing this —
 _Extension_ and _Composition_ — and it's important to understand the difference.
 
-As an example, let's consider the Vital `Header` component. This exports a `Base` token which
+As an example, let's consider the Vital `Header` component. This exports a `Default` token which
 contains the basic header layout, styling, and behavior; as well as a `WithSticky` token which can
-be composed with the `Base` to produce a sticky version. Using the _Extension_ pattern, you could
+be composed with the `Default` to produce a sticky version. Using the _Extension_ pattern, you could
 merge these two tokens into a single object:
 
 ```ts
 const Sticky = asHeaderToken({
-  ...Base,
+  ...Default,
   Theme: {
-    ...Base.Theme,
-    Wrapper: as(Base.Theme.Wrapper, WithSticky.Theme.Wrapper),
+    ...Default.Theme,
+    Wrapper: as(Default.Theme.Wrapper, WithSticky.Theme.Wrapper),
   },
   Layout: {
-    ...Base.Layout,
-    Wrapper: as(Base.Layout.Wrapper, WithSticky.Layout.Wrapper),
+    ...Default.Layout,
+    Wrapper: as(Default.Layout.Wrapper, WithSticky.Layout.Wrapper),
   },
 });
 ```
@@ -393,7 +393,7 @@ Vital provides the `extend` utility to make this a bit less verbose:
 ```ts
 import { extend } from '@bodiless/vital-elements';
 
-const Sticky = extend(Base, WithSticky);
+const Sticky = extend(Default, WithSticky);
 ```
 
 This is exactly equivalent to the above, and would merge all design keys in all domains of both
@@ -401,13 +401,13 @@ tokens. Note, this is quite different from the following:
 
 ```ts
 const Sticky = asHeaderToken({
-  ...Base,
+  ...Default,
   Theme: {
-    ...Base.Theme,
+    ...Default.Theme,
     Wrapper: WithSticky.Theme.Wrapper,
   },
   Layout: {
-    ...Base.Layout,
+    ...Default.Layout,
     Wrapper: WithSticky.Layout.Wrapper,
   },
 });
@@ -415,17 +415,17 @@ const Sticky = asHeaderToken({
 
 In that version, using default JavaScript object composition, the `Wrapper` key in both `Theme` and
 `Layout` domains is _replaced_ with the values from `WithSticky`, with the result that any styles
-applied to that key by those domains in the `Base` token will be lost.
+applied to that key by those domains in the `Default` token will be lost.
 
 Using the above pattern creates a new token which can be used to create a sticky header, but it has
 one disadvantage. What if a downstream consumer of the token wants to reuse that token but omit the
-sticky part? Here, they could simply use the `Base` token by itself — but what if that base token
+sticky part? Here, they could simply use the `Default` token by itself — but what if that base token
 weren't available? There is no easy way to extract an enhancement which has been deeply merged into
 another token. For this example, it would be better to use the _composition_ pattern. The simplest
 way to compose two tokens is to apply them both via `as`:
 
 ```ts
-const StickyHeader = as(Base, WithSticky)(HeaderClean);
+const StickyHeader = as(Default, WithSticky)(HeaderClean);
 ```
 
 This will work, and is fine for one-time composition, but Vital also provides a mechanism for
@@ -433,20 +433,20 @@ exporting a composed token (rather than a component to which the tokens are appl
 
 ```ts
 const Sticky = asHeaderToken({
-  ...Base,
+  ...Default,
   Compose: {
     WithSticky,
   },
 });
 ```
 
-Now `as(Sticky)` is exactly equivalent to `as(Base, WithSticky)` — and a downstream consumer can
+Now `as(Sticky)` is exactly equivalent to `as(Default, WithSticky)` — and a downstream consumer can
 easily remove (or customize) the sticky part:
 
 ```ts
 const NotSticky = asHeaderToken({
   ...Sticky,
-  Compose: omit(Base.Compose, 'Sticky'),
+  Compose: omit(Default.Compose, 'Sticky'),
 });
 ```
 

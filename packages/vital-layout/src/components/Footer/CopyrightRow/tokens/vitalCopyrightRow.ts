@@ -13,6 +13,7 @@
  */
 
 import { withNodeKey } from '@bodiless/core';
+import omit from 'lodash/omit';
 import { vitalRichText } from '@bodiless/vital-editors';
 import {
   asVitalTokenSpec, vitalColor, vitalFontSize, vitalTextDecoration
@@ -32,7 +33,7 @@ const Copyright = asVitalTokenSpec()({
       vitalTextDecoration.Normal,
     ),
     Link: as(
-      vitalLink.Base,
+      omit(vitalLink.Default, 'Theme'),
       vitalTextDecoration.Bold,
       vitalTextDecoration.Underline,
     ),
@@ -42,7 +43,7 @@ const Copyright = asVitalTokenSpec()({
   },
 });
 
-const Base = asCopyrightRowToken({
+const Default = asCopyrightRowToken({
   Components: {
     SocialLinks: vitalSocialLinks.Default,
   },
@@ -69,9 +70,9 @@ const Base = asCopyrightRowToken({
 });
 
 const CopyrightNoSocialLinks = asCopyrightRowToken({
-  ...Base,
+  ...Default,
   Components: {
-    ...Base.Components,
+    ...Default.Components,
     SocialLinksWrapper: replaceWith(() => null),
     SocialLinks: replaceWith(() => null),
   },
@@ -79,10 +80,6 @@ const CopyrightNoSocialLinks = asCopyrightRowToken({
     CopyrightWrapper: 'w-full',
     SocialLinksWrapper: 'w-full',
   },
-});
-
-const Default = asCopyrightRowToken({
-  ...Base,
 });
 
 /**
@@ -93,13 +90,7 @@ const Default = asCopyrightRowToken({
  */
 export interface VitalCopyrightRow {
   /**
-   * Base applies the following:
-   * - Vital Styled Copyright editor on left
-   * - Social Links on right
-   */
-  Base: CopyrightRowToken,
-  /**
-   * Inherits Base
+   * Defines the Default Copyright row with copyright & social tokens
    */
   Default: CopyrightRowToken,
   /**
@@ -116,7 +107,7 @@ export interface VitalCopyrightRow {
  * @see [[CopyrightRowClean]]
  */
 const vitalCopyrightRow: VitalCopyrightRow = {
-  Base,
+
   Default,
   CopyrightNoSocialLinks,
 };

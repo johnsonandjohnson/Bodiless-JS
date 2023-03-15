@@ -13,6 +13,7 @@
  */
 
 import {
+  addProps,
   flowIf,
   withProps,
 } from '@bodiless/fclasses';
@@ -24,13 +25,16 @@ import {
 
 const isCurrentLanguageEs = () => useLanguageContext().getCurrentLanguage().name === 'es';
 
-const Default = asRewardsToken(vitalRewardsBase.Base, {
+const Default = asRewardsToken(vitalRewardsBase.Default, {
   Content: {
     Brand: flowIf(isCurrentLanguageEs)(
       withProps({
         children: 'Brand ES',
       }),
     ),
+  },
+  Behavior: {
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:Rewards' }),
   },
 });
 

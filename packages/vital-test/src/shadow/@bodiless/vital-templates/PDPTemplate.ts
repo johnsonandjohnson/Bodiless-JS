@@ -41,7 +41,7 @@ const Default = asPDPTemplateToken({
   Behavior: {
     TopWrapper: flowHoc(
       replaceWith(Div),
-      addProps({ 'data-shadowed-by': '__vital__:PDPTemplate' }),
+      addProps({ 'data-shadowed-by': '__vitaltest__:PDPTemplate' }),
     ),
   },
   Components: {

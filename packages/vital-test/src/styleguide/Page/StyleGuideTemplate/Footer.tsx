@@ -13,7 +13,8 @@ const StickFooterLayout = asStyleGuideTemplateToken({
   },
 });
 
-export const Footer = asStyleGuideTemplateToken(StickFooterLayout, {
+export const Footer = asStyleGuideTemplateToken({
+  ...StickFooterLayout,
   Meta: flowHoc.meta.term('Token')('Footer'),
   Content: {
     Title: replaceWith(() => <>Footer</>),

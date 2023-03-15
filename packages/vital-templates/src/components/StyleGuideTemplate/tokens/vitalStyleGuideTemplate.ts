@@ -24,12 +24,16 @@ import {
 import { vitalLayout, LayoutClean } from '@bodiless/vital-layout';
 import { asStyleGuideTemplateToken } from '../StyleGuideTemplateClean';
 
-const Base = asStyleGuideTemplateToken({
+const Default = asStyleGuideTemplateToken({
   Components: {
     Wrapper: on(LayoutClean)(vitalLayout.Default),
   },
   Theme: {
     TitleWrapper: vitalTypography.H1,
+    Container: as(
+      vitalSpacing.WithSiteMargin,
+      vitalSpacing.WithSiteXLConstraint
+    ),
   },
   Editors: {
     Title: on(EditorPlainClean)(vitalEditorPlain.Default),
@@ -40,25 +44,14 @@ const Base = asStyleGuideTemplateToken({
     Description: withNodeKey('description'),
     Examples: withNodeKey('examples'),
   },
-});
-
-const Default = asStyleGuideTemplateToken({
-  ...Base,
   Meta: {
     title: 'Default',
   },
-  Theme: {
-    ...Base.Theme,
-    Container: as(
-      vitalSpacing.WithSiteMargin,
-      vitalSpacing.WithSiteXLConstraint
-    ),
-  },
 });
 
-const NoLayout = asStyleGuideTemplateToken(omit(Base, 'Components'), {
+const NoLayout = asStyleGuideTemplateToken(omit(Default, 'Components'), {
   Components: {
-    ...Base.Components,
+    ...Default.Components,
     Wrapper: replaceWith(Fragment),
   },
   Layout: {

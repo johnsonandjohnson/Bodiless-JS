@@ -13,7 +13,9 @@
  */
 
 import { useNode } from '@bodiless/core';
-import { flowIf, replaceWith, Fragment } from '@bodiless/fclasses';
+import {
+  flowHoc, addProps, Div, flowIf, replaceWith, Fragment
+} from '@bodiless/fclasses';
 import { useLanguageContext } from '@bodiless/i18n';
 import { vitalGenericTemplateBase, asGenericTemplateToken } from '@bodiless/vital-templates';
 
@@ -30,10 +32,16 @@ const WithNoBreadcrumbsOnHomePage = asGenericTemplateToken({
   },
 });
 
-const Default = asGenericTemplateToken(vitalGenericTemplateBase.Base, {
+const Default = asGenericTemplateToken(vitalGenericTemplateBase.Default, {
   Compose: {
     WithNoBreadcrumbsOnHomePage,
-  }
+  },
+  Behavior: {
+    TemplateWrapper: flowHoc(
+      replaceWith(Div),
+      addProps({ 'data-shadowed-by': '__vital__:GenericTemplate' }),
+    ),
+  },
 });
 
 export default {

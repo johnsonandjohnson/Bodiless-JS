@@ -15,9 +15,11 @@ import { vitalFooterBase, asFooterToken } from '@bodiless/vital-layout';
 import { addProps } from '@bodiless/fclasses';
 import { withLanguageNode } from '@bodiless/i18n';
 
-const Default = asFooterToken(vitalFooterBase.Base, {
-  Core: {
-    _: addProps({ 'data-shadowed-by': '__vital__Footer' }),
+// Setup the vital package to use the Rewards by default.
+const Default = asFooterToken(vitalFooterBase.Default, {
+  ...vitalFooterBase.WithRewardsExpanding2XL,
+  Behavior: {
+    Container: addProps({ 'data-shadowed-by': '__vital__Footer' }),
   },
   Schema: {
     _: withLanguageNode,

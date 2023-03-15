@@ -29,7 +29,7 @@ export const asLanguageSelectorLink = on(LinkClean)(
 );
 
 const Default = asHeaderToken(
-  vitalHeaderBase.Base,
+  vitalHeaderBase.Default,
   vitalHeaderBase.WithLanguageSelector,
   {
     Core: {
