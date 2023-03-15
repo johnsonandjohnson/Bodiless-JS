@@ -14,10 +14,7 @@
 
 import { vitalCardBase, asCardToken } from '@bodiless/vital-card';
 import {
-  Div,
   addProps,
-  startWith,
-  flowHoc
 } from '@bodiless/fclasses';
 
 const Basic = asCardToken(vitalCardBase.Basic, {
@@ -28,10 +25,7 @@ const Basic = asCardToken(vitalCardBase.Basic, {
 
 const Hero = asCardToken(vitalCardBase.Hero, {
   Behavior: {
-    Wrapper: flowHoc(
-      startWith(Div),
-      addProps({ 'data-shadowed-by': '__vitaltest__:Card:Hero' }),
-    ),
+    Wrapper: addProps({ 'data-shadowed-by': '__vitaltest__:Card:Hero' }),
   },
 });
 
