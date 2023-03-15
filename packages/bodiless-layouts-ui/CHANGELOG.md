@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.27](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v1.0.0-rc.27) (2023-03-15)
+
+
+### Bug Fixes
+
+* **bodiless-layouts & layouts-ui:** empty = gray ([#1646](https://github.com/johnsonandjohnson/bodiless-js/issues/1646)) ([eef363a](https://github.com/johnsonandjohnson/bodiless-js/commit/eef363ae64bf6c840f093ef70ee1518dd762aca1))
+* **bodiless-layouts-ui:** cmponent picker in site ([#1579](https://github.com/johnsonandjohnson/bodiless-js/issues/1579)) ([ba5c39f](https://github.com/johnsonandjohnson/bodiless-js/commit/ba5c39f3d022f7330351e5aa61d4afc029b284b8))
+* **bodiless-ui:** fix icon size & color ([#1596](https://github.com/johnsonandjohnson/bodiless-js/issues/1596)) ([e60b434](https://github.com/johnsonandjohnson/bodiless-js/commit/e60b43429511fa6c10774c01b12d1959841594de))
+* **bodiless-ui:** try find all missing bl- prefixes in editor  ([#1589](https://github.com/johnsonandjohnson/bodiless-js/issues/1589)) ([942cfd6](https://github.com/johnsonandjohnson/bodiless-js/commit/942cfd6dc522341a757f70b84cf6879f5690332b))
+* **layouts-ui:** Add missing tailwind export. ([#1656](https://github.com/johnsonandjohnson/bodiless-js/issues/1656)) ([601bc7d](https://github.com/johnsonandjohnson/bodiless-js/commit/601bc7d65c0dee07830e664589b0f5c0196ff554))
+* **material-icons:** remove dependency on google fonts material fonts css & clean up of components. ([#1580](https://github.com/johnsonandjohnson/bodiless-js/issues/1580)) ([013d547](https://github.com/johnsonandjohnson/bodiless-js/commit/013d547316b122904a3561406fa5c88fd2385679))
+
+
+### Features
+
+* Add tree shaking support to all browser packages ([#1251](https://github.com/johnsonandjohnson/bodiless-js/issues/1251)) ([0c73113](https://github.com/johnsonandjohnson/bodiless-js/commit/0c73113c7c2d0c9dcc2dd8be922048173b1e9138)), closes [#1254](https://github.com/johnsonandjohnson/bodiless-js/issues/1254) [#1244](https://github.com/johnsonandjohnson/bodiless-js/issues/1244) [#1245](https://github.com/johnsonandjohnson/bodiless-js/issues/1245) [#1261](https://github.com/johnsonandjohnson/bodiless-js/issues/1261) [#1283](https://github.com/johnsonandjohnson/bodiless-js/issues/1283)
+* **cli:** Bodiless new ([#1568](https://github.com/johnsonandjohnson/bodiless-js/issues/1568)) ([3bc0e2c](https://github.com/johnsonandjohnson/bodiless-js/commit/3bc0e2c8e06fe78751c0712d7e1d3cfb8d1fb04d)), closes [#1520](https://github.com/johnsonandjohnson/bodiless-js/issues/1520)
+* **layouts, layouts-ui:** UX Identification of Library Components ([#1227](https://github.com/johnsonandjohnson/bodiless-js/issues/1227)) ([d44ef46](https://github.com/johnsonandjohnson/bodiless-js/commit/d44ef46706060fde4486441b5a715d5978113fb4)), closes [#1083](https://github.com/johnsonandjohnson/bodiless-js/issues/1083)
+
+
+
+
+
 # [1.0.0-rc.26](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.25...v1.0.0-rc.26) (2023-03-14)
 
 **Note:** Version bump only for package @bodiless/layouts-ui

@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/accessibility",
-  "version": "1.0.0-rc.26",
+  "version": "1.0.0-rc.27",
   "description": "Accessibility tools for bodiless",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
@@ -27,7 +27,7 @@
     "audit": "node ./index.js $*"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.26",
+    "@bodiless/cli": "^1.0.0-rc.27",
     "arg": "^4.1.1",
     "chalk": "^2.4.2",
     "esm": "^3.2.25",
