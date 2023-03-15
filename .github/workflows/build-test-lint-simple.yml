@@ -21,9 +21,10 @@ jobs:
       # install a specific version of Node using
       # https://github.com/actions/setup-node
       - name: Use Node.js v16.13
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 16.13
+          cache: 'npm'
       - name: Print Git Version
         run: git --version
       - name: Setup git user
