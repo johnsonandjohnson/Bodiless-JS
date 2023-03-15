@@ -28,7 +28,7 @@ import Base, {
   WithSecondaryButton,
 } from './Base';
 import type { VitalCardBase } from './Base';
-import { HeroBase, Hero } from './Hero';
+import { Hero } from './Hero';
 import type { VitalCardHero } from './Hero';
 import { Category } from './Category';
 import type { VitalCardCategory } from './Category';
@@ -74,9 +74,7 @@ const WithFlexGrowImage = asCardToken({
   Meta: flowHoc.meta.term('Features')('Image controls height of Vertical cards in a row'),
 });
 
-const Default = asCardToken({
-  ...Base,
-});
+const Default = asCardToken(Base);
 
 const Basic = asCardToken(Default, {
   Meta: extendMeta(
@@ -93,7 +91,7 @@ const Basic = asCardToken(Default, {
  */
 interface VitalCardCore {
   /**
-   * Defines the base card for the Vital DS.
+   * Defines the Default card for the Vital DS.
    * - Editor/Content/Schema domains defines editors on Title/Eyebrow/Description/CTA
    *   and makes the entire Card clickable.
    * - Components domain hides the CTA and adds in vitalImage.Default for Image.
@@ -116,6 +114,36 @@ interface VitalCardCore {
    *     ),
    *   }
    * });
+   * ```
+   * @example Add a component
+   * ```js
+   * import { vitalCard } from '@bodiless/vital-flowcontainer';
+   *
+   * const Default = asFluidToken(vitalCardStatic.Default, {
+   *   Components: {
+   *     MyComponent: on(cardClean)(vitalCardStatic.Default, WithCustomBorder),
+   *   }
+   * });
+   * ```
+   *
+   * @example Shadowing the basic card to render H2 for title and image margins.
+   * ```js
+   * import { H2, replaceWith } from '@bodiless/fclasses';
+   * import { asCardToken, vitalCardBase } from '@bodiless/vital-card';
+   *
+   * const Basic = asCardToken(vitalCardBase.Basic, {
+   *   Components: {
+   *     TitleWrapper: replaceWith(H2),
+   *   },
+   *   Theme: {
+   *     ImageWrapper: 'md:mx-16',
+   *   },
+   * });
+   *
+   * export default {
+   *   ...vitalCardBase,
+   *   Basic,
+   * };
    * ```
    */
   Default: CardToken,
@@ -166,10 +194,8 @@ export interface VitalCard extends
  * @category Token Collection
  */
 const vitalCard: VitalCard = {
-  Base,
   Default,
   Basic,
-  HeroBase,
   Hero,
   Category,
   Topic,

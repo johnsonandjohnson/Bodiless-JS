@@ -99,7 +99,7 @@ const WithBasicVariations = asFluidToken({
 
 const HeroVariations = varyDesigns(
   {
-    Hero: on(CardStatic)(vitalCardStatic.HeroBase, vitalCardStatic.WithFlowContainerPreview),
+    Hero: on(CardStatic)(vitalCardStatic.Hero, vitalCardStatic.WithFlowContainerPreview),
   },
   LinkVariations,
   HorizontalVariations,

@@ -22,8 +22,7 @@ import Base from './Base';
 /**
   * TBD: STUB Category Base Card Design.
   */
-const BaseCategory = asCardToken(Base, {
-  ...Base,
+const Category = asCardToken(Base, {
   Components: {
     EyebrowWrapper: replaceWith(() => null),
     DescriptionWrapper: replaceWith(() => null),
@@ -35,11 +34,6 @@ const BaseCategory = asCardToken(Base, {
   ),
 });
 
-/*
- * Category - Extend BaseCategory as needed.
- * TBD: For now assign directly to category.
- */
-const Category = BaseCategory;
 export interface VitalCardCategory {
   /**
    * Defines the Category card for the Vital DS.
