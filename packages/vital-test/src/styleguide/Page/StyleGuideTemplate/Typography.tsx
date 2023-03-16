@@ -19,6 +19,7 @@ import {
   replaceWith,
   on,
   Div,
+  A,
   withDesign,
   varyDesigns,
 } from '@bodiless/fclasses';
@@ -56,7 +57,7 @@ const vitalTypographyVariations = varyDesigns(
 const LinkVariation = {
   Link: on(EditorPlainClean)(
     vitalEditorPlain.Default,
-    withParent(Div),
+    withParent(A),
     withDesign({
       Parent: as(
         vitalTypography.Link,
