@@ -14,6 +14,7 @@
 
 import React from 'react';
 import {
+  as,
   flowHoc,
   replaceWith,
   on,
@@ -24,7 +25,8 @@ import {
 import { EditorPlainClean, vitalEditorPlain } from '@bodiless/vital-editors';
 import { asFluidToken, vitalTypography } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
-import { withDefaultContent, withParent } from '@bodiless/core';
+import { withDefaultContent, withNodeKey, withParent } from '@bodiless/core';
+import { vitalLink } from '@bodiless/vital-link';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
 const BaseVariation = {
@@ -43,6 +45,7 @@ const TypographyVariations = {
   Body: withDesign({ Parent: vitalTypography.Body }),
   Eyebrow: withDesign({ Parent: vitalTypography.Eyebrow }),
   Gradient: withDesign({ Parent: vitalTypography.Gradient }),
+  Rest: withDesign({ Parent: vitalTypography.Rest }),
 };
 
 const vitalTypographyVariations = varyDesigns(
@@ -50,9 +53,25 @@ const vitalTypographyVariations = varyDesigns(
   TypographyVariations,
 );
 
+const LinkVariation = {
+  Link: on(EditorPlainClean)(
+    vitalEditorPlain.Default,
+    withParent(Div),
+    withDesign({
+      Parent: as(
+        vitalTypography.Link,
+        vitalLink.Default,
+        vitalLink.Sidecar,
+      )
+    }),
+    withNodeKey('linktext'),
+  ),
+};
+
 const vitalTypographyFlowContainer = asFluidToken({
   Components: {
     ...vitalTypographyVariations,
+    ...LinkVariation,
   },
 });
 
@@ -65,6 +84,9 @@ const data = {
   examples$Body: { text: 'An example of the Body' },
   examples$Eyebrow: { text: 'An example of the Eyebrow' },
   examples$Gradient: { text: 'An example of the Gradient' },
+  examples$Rest: { text: 'An example of the Rest' },
+  examples$Link$linktext: { text: 'An example of the Link' },
+  examples$Link: { href: '/test/' },
 };
 
 export const Typography = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
