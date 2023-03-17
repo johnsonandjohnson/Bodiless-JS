@@ -13,45 +13,40 @@
  */
 
 import React from 'react';
-import { withNodeKey } from '@bodiless/core';
 import {
-  flowHoc,
-  as,
-  replaceWith,
-  H3,
+  flowHoc, replaceWith, on,
 } from '@bodiless/fclasses';
+import { asFluidToken } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
-import { vitalTypography } from '@bodiless/vital-elements';
+import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
-const C = {
-  H3: as(vitalTypography.H3)(H3),
-};
-
-const DefaultVideo = as(
-  vitalYouTube.Default,
-  withNodeKey('defaultvideo'),
-)(YouTubeClean);
-
-const HeroVideo = as(
-  vitalYouTube.Hero,
-  withNodeKey('herovideo'),
-)(YouTubeClean);
-
-const Examples = () => (
-  <>
-    <C.H3>Default</C.H3>
-    <DefaultVideo />
-    <hr className="my-4" />
-    <C.H3>Hero</C.H3>
-    <HeroVideo />
-  </>
-);
+const WithYouTubeVariations = asFluidToken({
+  Components: {
+    Default: on(YouTubeClean)(vitalYouTube.Default),
+    Hero: on(YouTubeClean)(vitalYouTube.Default),
+    WithFullScreenEnabled: on(YouTubeClean)(
+      vitalYouTube.Default,
+      vitalYouTube.WithFullScreenEnabled,
+    ),
+    WithSchema: on(YouTubeClean)(
+      vitalYouTube.Default,
+      vitalYouTube.WithFullScreenEnabled
+    ),
+    WithResponsive16By9Embed: on(YouTubeClean)(
+      vitalYouTube.Default,
+      vitalYouTube.WithFullScreenEnabled
+    ),
+  },
+});
 
 export const Video = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Video'),
   Content: {
     Title: replaceWith(() => <>Video</>),
-    Examples: replaceWith(Examples),
+    Examples: on(StyleGuideExamplesClean)(
+      vitalStyleGuideExamples.Default,
+      WithYouTubeVariations,
+    ),
   },
 });
