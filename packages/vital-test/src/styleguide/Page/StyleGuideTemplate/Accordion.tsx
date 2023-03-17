@@ -26,6 +26,7 @@ import { withDefaultContent } from '@bodiless/core';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
 const BaseVariation = {
+  // using '' means it won't add any string to name key of the variations
   '': on(AccordionClean)(
     vitalAccordion.Default,
   ),

@@ -45,7 +45,7 @@ const ButtonStyleVariations = varyDesigns(
     SecondarySelected: vitalButtons.SecondarySelected,
   },
   {
-    '': '', // vary on itself
+    '': '', // vary on itself and produce default button variation
     AsDisabled: vitalButtons.WithDisabled,
     WithArrow: vitalButtons.WithArrow,
   },
@@ -61,7 +61,7 @@ const LinkVariations = varyDesigns(
     Primary: vitalLink.PrimaryLink,
   },
   {
-    '': '',
+    '': '', // vary on itself and produce plain link variation
     External: vitalLink.Default,
     PDF: vitalLink.Default,
   },
