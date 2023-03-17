@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 // linkToggle.spec.ts
+/* eslint-disable max-len */
 import { expect, Page, test } from '@playwright/test';
 import { LinkTogglePage } from '../../pages/link-toggle-page';
 
@@ -63,18 +64,18 @@ test.describe('Link Toggle smoke tests', () => {
     await page.click(linkTogglePage.linkIconEditXpath);
     await linkTogglePage.typeText(linkTogglePage.urlFieldEditXpath, linkTogglePage.editedPostfix, 'linktoggle', linkTogglePage.checkmarkIconLinkEditFormXpath);
     expect(await page.locator(linkTogglePage.labelXpath).innerText()).toEqual(linkTogglePage.label + linkTogglePage.editedPostfix);
-    expect(await page.locator(linkTogglePage.linkXpath).getAttribute('href')).toEqual(linkTogglePage.normalizedUrl + linkTogglePage.editedPostfix + '/');
+    expect(await page.locator(linkTogglePage.linkXpath).getAttribute('href')).toEqual(`${linkTogglePage.normalizedUrl + linkTogglePage.editedPostfix}/`);
   });
 
   test('link toggle: 7 - checking the edited link in Preview mode', async () => {
     await linkTogglePage.togglePreviewMode();
     expect(await page.locator(linkTogglePage.labelPreviewXpath).innerText()).toEqual(linkTogglePage.label + linkTogglePage.editedPostfix);
-    expect(await page.locator(linkTogglePage.linkXpath).getAttribute('href')).toEqual(linkTogglePage.normalizedUrl + linkTogglePage.editedPostfix + '/');
+    expect(await page.locator(linkTogglePage.linkXpath).getAttribute('href')).toEqual(`${linkTogglePage.normalizedUrl + linkTogglePage.editedPostfix}/`);
   });
 
   test('link toggle: 8 - checking clicking the link in Preview mode', async ({ baseURL }) => {
     await page.click(linkTogglePage.linkXpath);
-    expect(page.url()).toEqual(baseURL + linkTogglePage.normalizedUrl + linkTogglePage.editedPostfix + '/');
+    expect(page.url()).toEqual(`${baseURL + linkTogglePage.normalizedUrl + linkTogglePage.editedPostfix}/`);
     await page.goto('/link-toggle/');
   });
 
@@ -92,6 +93,6 @@ test.describe('Link Toggle smoke tests', () => {
     expect(await page.locator(linkTogglePage.linkXpath).isVisible()).toBeFalsy();
     expect(await page.locator(linkTogglePage.labelPreviewXpath).innerText()).toEqual(linkTogglePage.label + linkTogglePage.editedPostfix);
     await page.click(linkTogglePage.labelPreviewXpath);
-    expect(page.url()).toEqual(baseURL + '/link-toggle/');
+    expect(page.url()).toEqual(`${baseURL}/link-toggle/`);
   });
 });

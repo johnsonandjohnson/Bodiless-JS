@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 // componentPicker.spec.ts
+/* eslint-disable max-len */
 import { expect, Page, test } from '@playwright/test';
 import { FlowContainerPage } from '../../pages/flow-container-page';
 
