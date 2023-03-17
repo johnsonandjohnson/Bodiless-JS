@@ -23,20 +23,22 @@ import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples
 
 const WithYouTubeVariations = asFluidToken({
   Components: {
-    Default: on(YouTubeClean)(vitalYouTube.Default),
-    Hero: on(YouTubeClean)(vitalYouTube.Default),
+    // TBD (we want to remove base exporting and switch it to Basic)
+    Basic: on(YouTubeClean)(vitalYouTube.Base),
     WithFullScreenEnabled: on(YouTubeClean)(
-      vitalYouTube.Default,
+      vitalYouTube.Base,
       vitalYouTube.WithFullScreenEnabled,
     ),
     WithSchema: on(YouTubeClean)(
-      vitalYouTube.Default,
-      vitalYouTube.WithFullScreenEnabled
+      vitalYouTube.Base,
+      vitalYouTube.WithSchema
     ),
     WithResponsive16By9Embed: on(YouTubeClean)(
-      vitalYouTube.Default,
-      vitalYouTube.WithFullScreenEnabled
+      vitalYouTube.Base,
+      vitalYouTube.WithResponsive16By9Embed
     ),
+    Default: on(YouTubeClean)(vitalYouTube.Default),
+    Hero: on(YouTubeClean)(vitalYouTube.Hero),
   },
 });
 
