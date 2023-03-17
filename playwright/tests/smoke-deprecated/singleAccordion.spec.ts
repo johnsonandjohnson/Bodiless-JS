@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 // singleAccordion.spec.ts
+/* eslint-disable max-len */
 import { expect, Page, test } from '@playwright/test';
 import { AccordionPage } from '../../pages/accordion-page';
 

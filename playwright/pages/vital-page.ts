@@ -1,17 +1,17 @@
 export abstract class VitalPage {
+  readonly relativeUrl: string;
 
-    readonly relativeUrl: string;
-    readonly mainContentSelector: string;
+  readonly mainContentSelector: string;
 
-    constructor(relativeUrl: string) {
-        this.relativeUrl = relativeUrl;
-        this.mainContentSelector = 'main-content';
-    }
+  constructor(relativeUrl: string) {
+    this.relativeUrl = relativeUrl;
+    this.mainContentSelector = 'main-content';
+  }
 
-    abstract getElements(): VitalElement[];
+  abstract getElements(): VitalElement[];
 }
 
 export type VitalElement = {
-    id: string,
-    name?: string
-}
+  id: string,
+  name?: string
+};
