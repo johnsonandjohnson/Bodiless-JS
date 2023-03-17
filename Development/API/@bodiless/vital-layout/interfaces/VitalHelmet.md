@@ -25,7 +25,7 @@ Base applies the SEO, Share, GA4 helmets
 
 #### Defined in
 
-[vital-layout/src/components/Helmet/tokens/vitalHelmet.ts:63](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a5b594ba/packages/vital-layout/src/components/Helmet/tokens/vitalHelmet.ts#L63)
+[vital-layout/src/components/Helmet/tokens/vitalHelmet.ts:63](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6d43d8d73/packages/vital-layout/src/components/Helmet/tokens/vitalHelmet.ts#L63)
 
 ___
 
@@ -58,7 +58,7 @@ export default {
 
 #### Defined in
 
-[vital-layout/src/components/Helmet/tokens/vitalHelmet.ts:88](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a5b594ba/packages/vital-layout/src/components/Helmet/tokens/vitalHelmet.ts#L88)
+[vital-layout/src/components/Helmet/tokens/vitalHelmet.ts:88](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6d43d8d73/packages/vital-layout/src/components/Helmet/tokens/vitalHelmet.ts#L88)
 
 ___
 
@@ -70,7 +70,7 @@ WithDesktopStaticBody token applies static position on body.
 
 #### Defined in
 
-[vital-layout/src/components/Helmet/tokens/vitalHelmet.ts:92](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a5b594ba/packages/vital-layout/src/components/Helmet/tokens/vitalHelmet.ts#L92)
+[vital-layout/src/components/Helmet/tokens/vitalHelmet.ts:92](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6d43d8d73/packages/vital-layout/src/components/Helmet/tokens/vitalHelmet.ts#L92)
 
 ___
 
@@ -82,4 +82,4 @@ WithFixedBody token applies fixed position on body to prevent scrolling.
 
 #### Defined in
 
-[vital-layout/src/components/Helmet/tokens/vitalHelmet.ts:96](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9a5b594ba/packages/vital-layout/src/components/Helmet/tokens/vitalHelmet.ts#L96)
+[vital-layout/src/components/Helmet/tokens/vitalHelmet.ts:96](https://github.com/johnsonandjohnson/Bodiless-JS/blob/6d43d8d73/packages/vital-layout/src/components/Helmet/tokens/vitalHelmet.ts#L96)
