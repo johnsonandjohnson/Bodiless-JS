@@ -13,160 +13,97 @@
  */
 
 import React from 'react';
-import { withNodeKey } from '@bodiless/core';
 import {
   flowHoc,
-  as,
   replaceWith,
-  H3,
+  on,
+  varyDesigns,
+  addProps
 } from '@bodiless/fclasses';
 import { ButtonClean, vitalButtons } from '@bodiless/vital-buttons';
+import { asFluidToken, vitalTypography } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
-import { vitalTypography } from '@bodiless/vital-elements';
 import { LinkClean, vitalLink } from '@bodiless/vital-link';
-import { withEditorPlain } from '@bodiless/vital-editors';
+import { withDefaultContent } from '@bodiless/core';
+import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
-const C = {
-  H3: as(vitalTypography.H3)(H3),
+const label = {
+  buttontext: { text: 'Button Label' },
 };
 
-const VitalDemoLink = flowHoc(
-  withEditorPlain('Link1', 'Link'),
-  as(
-    vitalTypography.Link,
-    vitalLink.Default,
-  ),
-  withNodeKey('demo-link'),
-)(LinkClean);
-const VitalPrimaryLink = flowHoc(
-  withEditorPlain('Link1', 'Link'),
-  as(vitalLink.PrimaryLink),
-  withNodeKey('demo-link-arrow'),
-)(LinkClean);
-
-const DefaultButton = as(
+const Default = on(ButtonClean)(
   vitalButtons.Default,
-  withNodeKey('defaultbutton'),
-)(ButtonClean);
-const PrimaryButton = as(
-  vitalButtons.Primary,
-  withNodeKey('primarybutton'),
-)(ButtonClean);
-const SecondaryButton = as(
-  vitalButtons.Secondary,
-  withNodeKey('secondarybutton'),
-)(ButtonClean);
-const PrimarySelectedButton = as(
-  vitalButtons.PrimarySelected,
-  withNodeKey('primarybutton'),
-)(ButtonClean);
-const PrimaryDisabledButton = as(
-  vitalButtons.Primary,
-  vitalButtons.WithDisabled,
-  withNodeKey('primarybutton'),
-)(ButtonClean);
-const SecondarySelectedButton = as(
-  vitalButtons.SecondarySelected,
-  withNodeKey('secondarybutton'),
-)(ButtonClean);
-const SecondaryDisabledButton = as(
-  vitalButtons.Secondary,
-  vitalButtons.WithDisabled,
-  withNodeKey('secondarybutton'),
-)(ButtonClean);
-
-const PrimaryButtonWithArrow = as(
-  vitalButtons.Primary,
-  vitalButtons.WithArrow,
-  withNodeKey('primarybutton'),
-)(ButtonClean);
-const SecondaryButtonWithArrow = as(
-  vitalButtons.Secondary,
-  vitalButtons.WithArrow,
-  withNodeKey('secondarybutton'),
-)(ButtonClean);
-const PrimarySelectedButtonWithArrow = as(
-  vitalButtons.PrimarySelected,
-  vitalButtons.WithArrow,
-  withNodeKey('primarybutton'),
-)(ButtonClean);
-const PrimaryDisabledButtonWithArrow = as(
-  vitalButtons.Primary,
-  vitalButtons.WithArrow,
-  vitalButtons.WithDisabled,
-  withNodeKey('primarybutton'),
-)(ButtonClean);
-const SecondarySelectedButtonWithArrow = as(
-  vitalButtons.SecondarySelected,
-  vitalButtons.WithArrow,
-  withNodeKey('secondarybutton'),
-)(ButtonClean);
-const SecondaryDisabledButtonWithArrow = as(
-  vitalButtons.Secondary,
-  vitalButtons.WithArrow,
-  vitalButtons.WithDisabled,
-  withNodeKey('secondarybutton'),
-)(ButtonClean);
-
-/* @todo
-  * Rendered only the two types of images available in flow container as separate components.
-  * To do is provide all variations we want tested individually.
-  */
-const Examples = (props: any) => (
-  <>
-    <hr className="my-4" />
-    <C.H3>Default Vital Link</C.H3>
-
-    <span>
-      Vital Link:
-      {' '}
-
-    </span>
-    <VitalDemoLink />
-    <br />
-    <span>
-      Vital Primary Link with Arrow:
-      {' '}
-
-    </span>
-    <VitalPrimaryLink />
-    <hr className="my-4" />
-    <C.H3>Default Button with no Style</C.H3>
-    <div className="flex flex-wrap w-full p-8 space-x-4">
-      <DefaultButton />
-    </div>
-    <C.H3>Primary Buttons</C.H3>
-    <div className="flex flex-col lg:flex-row lg:flex-wrap w-full p-8 gap-4">
-      <PrimaryButton />
-      <PrimarySelectedButton />
-      <PrimaryDisabledButton />
-    </div>
-    <C.H3>Primary Buttons With Hover Arrows</C.H3>
-    <div className="flex flex-col lg:flex-row lg:flex-wrap w-full p-8 gap-4">
-      <PrimaryButtonWithArrow />
-      <PrimarySelectedButtonWithArrow />
-      <PrimaryDisabledButtonWithArrow />
-    </div>
-    <C.H3>Secondary Buttons</C.H3>
-    <div className="flex flex-col lg:flex-row lg:flex-wrap w-full p-8 gap-4">
-      <SecondaryButton />
-      <SecondarySelectedButton />
-      <SecondaryDisabledButton />
-    </div>
-    <C.H3>Secondary Buttons With Hover Arrows</C.H3>
-    <div className="flex flex-col lg:flex-row lg:flex-wrap w-full p-8 gap-4">
-      <SecondaryButtonWithArrow />
-      <SecondarySelectedButtonWithArrow />
-      <SecondaryDisabledButtonWithArrow />
-    </div>
-    <p>Note: all Primary buttons share same node key and Secondary buttons share same node key</p>
-  </>
+  withDefaultContent(label),
 );
+
+// Generate the Button Varations
+const ButtonStyleVariations = varyDesigns(
+  {
+    Primary: vitalButtons.Primary,
+    Secondary: vitalButtons.Secondary,
+    PrimarySelected: vitalButtons.PrimarySelected,
+    SecondarySelected: vitalButtons.SecondarySelected,
+  },
+  {
+    '': '', // vary on itself
+    AsDisabled: vitalButtons.WithDisabled,
+    WithArrow: vitalButtons.WithArrow,
+  },
+  {
+    '': Default
+  },
+);
+
+// Generate the Link Varations
+const LinkVariations = varyDesigns(
+  {
+    Default: vitalLink.Default,
+    Primary: vitalLink.PrimaryLink,
+  },
+  {
+    '': '',
+    External: vitalLink.Default,
+    PDF: vitalLink.Default,
+  },
+  {
+    Link: on(LinkClean)(
+      vitalTypography.Link,
+      addProps({ children: 'Lorem Ipsum' }),
+    ),
+  },
+);
+
+const TestFlowContainer = asFluidToken({
+  Components: {
+    ...LinkVariations,
+    Default,
+    ...ButtonStyleVariations,
+  },
+});
+
+const StyleGuideColumns = asFluidToken({
+  ...vitalStyleGuideExamples.Default,
+  Layout: {
+    Wrapper: 'flex flex-wrap gap-20',
+  },
+});
+
+const data = {
+  examples$DefaultPDFLink: { href: '/files/pages/styleguide/buttons/test.pdf' },
+  examples$DefaultExternalLink: { href: 'https://www.example.com/' },
+  examples$PrimaryPDFLink: { href: '/files/pages/styleguide/buttons/test.pdf' },
+  examples$PrimaryExternalLink: { href: 'https://www.example.com/' },
+};
 
 export const Buttons = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Buttons'),
   Content: {
     Title: replaceWith(() => <>Buttons</>),
-    Examples: replaceWith(Examples),
+    Description: replaceWith(() => <>The following are examples of Vital Links & Buttons.</>),
+    Examples: on(StyleGuideExamplesClean)(
+      StyleGuideColumns,
+      TestFlowContainer,
+      withDefaultContent(data),
+    ),
   },
 });
