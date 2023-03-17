@@ -11,6 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/* eslint-disable max-len */
 import { expect, Page, test } from '@playwright/test';
 import { FlowContainerPage } from '../../pages/flow-container-page';
 
@@ -102,7 +103,7 @@ test.describe('Flow container', async () => {
     ]);
     const containerWidth = await page.locator(flowContainerPage.flowContainer33Width).boundingBox();
     const contentfulWidth = await page.locator(flowContainerPage.elementInside33Width).boundingBox();
-    const ratio = Math.floor((contentfulWidth.width + 40) / containerWidth.width * 100);
+    const ratio = Math.floor(((contentfulWidth.width + 40) / containerWidth.width) * 100);
     expect.soft(ratio).toBeCloseTo(32);
   });
 

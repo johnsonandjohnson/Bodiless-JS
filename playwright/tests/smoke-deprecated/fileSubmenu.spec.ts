@@ -12,10 +12,12 @@
  * limitations under the License.
  */
 // fileSubmenu.spec.ts
+/* eslint-disable jest/expect-expect */
 import { expect, Page, test } from '@playwright/test';
 import { FileSubmenuPage } from '../../pages/file-submenu-page';
 
-async function checkFileSubMenuButtons(mode: 'preview' | 'edit', page: Page, fileSubmenuPage: FileSubmenuPage) {
+async function checkFileSubMenuButtons(mode: 'preview' | 'edit', page: Page,
+  fileSubmenuPage: FileSubmenuPage) {
   await page.click(fileSubmenuPage.fileFormButton);
   expect(await page.locator(fileSubmenuPage.historyButton).isVisible()).toBeTruthy();
   expect(await page.locator(fileSubmenuPage.pushButton).isVisible()).toBeTruthy();

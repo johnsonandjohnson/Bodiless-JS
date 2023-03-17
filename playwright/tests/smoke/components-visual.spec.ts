@@ -1,16 +1,55 @@
-import { test as baseTest } from '@playwright/test';
-import { BatchInfo, Configuration, VisualGridRunner, BrowserType, DeviceName, ScreenOrientation, Eyes, Target, IosDeviceName, AndroidDeviceName } from '@applitools/eyes-playwright';
-import { vitalCards } from '../../pages/vital-cards';
+/**
+ * Copyright © 2023 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+import { Locator, Page, test as baseTest } from '@playwright/test';
+import {
+  BatchInfo, Configuration, VisualGridRunner, BrowserType, DeviceName, ScreenOrientation, Eyes,
+  Target, IosDeviceName, AndroidDeviceName
+} from '@applitools/eyes-playwright';
+import { VitalPage } from '../../pages/vital-page';
+import { VitalCardsPage } from '../../pages/vital-cards';
+import { VitalTypographyPage } from '../../pages/vital-typography';
+import { VitalLayoutPage } from '../../pages/vital-layout';
+import { VitalProductPage } from '../../pages/vital-product';
+import { VitalGenericTemplatePage } from '../../pages/vital-generic-template';
 
-const data: VisualParameters[] = [
+const variations: VisualParameters[] = [
   {
     suite: 'Cards',
-    relativeUrl: '/styleguide/card/',
-    elementIds: vitalCards.map((card) => card.id)
+    page: new VitalCardsPage()
+  },
+  {
+    suite: 'Typography',
+    page: new VitalTypographyPage()
   }
-]
+];
 
-const test = baseTest.extend< { eyes: Eyes } > ({
+const compositions: VisualParameters[] = [
+  {
+    suite: 'Layout',
+    page: new VitalLayoutPage()
+  },
+  {
+    suite: 'Product',
+    page: new VitalProductPage()
+  },
+  {
+    suite: 'Generic Template',
+    page: new VitalGenericTemplatePage()
+  }
+];
+
+const test = baseTest.extend< { eyes: Eyes } >({
   eyes: async ({ page }, use) => {
     const runner: VisualGridRunner = new VisualGridRunner({ testConcurrency: 5 });
 
@@ -19,51 +58,62 @@ const test = baseTest.extend< { eyes: Eyes } > ({
     const batch: BatchInfo = new BatchInfo({
       id: process.env.APPLITOOLS_BATCH_ID,
       name: 'Bodiless JS Components Visual'
-    })
-    configuration.setBatch(batch)
-    configuration.setApiKey(process.env.APPLITOOLS_API_KEY as string)
+    });
+    configuration.setBatch(batch);
+    configuration.setApiKey(process.env.APPLITOOLS_API_KEY as string);
 
     // Desktop
     configuration.addBrowser(1920, 1080, BrowserType.CHROME);
 
     // Mobile
-    configuration.addMobileDevice(IosDeviceName.iPhone_14, ScreenOrientation.PORTRAIT)
-    configuration.addDeviceEmulation(AndroidDeviceName.Galaxy_S22, ScreenOrientation.PORTRAIT)
+    configuration.addMobileDevice(IosDeviceName.iPhone_14, ScreenOrientation.PORTRAIT);
+    configuration.addDeviceEmulation(AndroidDeviceName.Galaxy_S22, ScreenOrientation.PORTRAIT);
 
     // Tables
-    configuration.addMobileDevice(IosDeviceName.iPad_9, ScreenOrientation.PORTRAIT)
-    configuration.addDeviceEmulation(DeviceName.Galaxy_Tab_S7, ScreenOrientation.PORTRAIT)
+    configuration.addMobileDevice(IosDeviceName.iPad_9, ScreenOrientation.PORTRAIT);
+    configuration.addDeviceEmulation(DeviceName.Galaxy_Tab_S7, ScreenOrientation.PORTRAIT);
 
-    const eyes: Eyes = new Eyes(runner, configuration)
+    const eyes: Eyes = new Eyes(runner, configuration);
 
     await eyes.open(page, 'Bodiless JS', test.info().title);
 
-    await use(eyes)
+    await use(eyes);
 
-    await eyes.close(true)
+    await eyes.close(true);
   }
-})
+});
 
-test.describe.configure({ mode: 'parallel' })
+test.describe.configure({ mode: 'parallel' });
 
-data.forEach((param) => {
-  test.describe(param.suite, () => {
-    param.elementIds.forEach((elementId) => {
-      test(elementId, async ({ page, eyes }) => {
-        await page.goto(param.relativeUrl);
-        await page.waitForLoadState()
-  
-        const element = page.getByTestId(elementId)
-                            .locator('[data-layer-region="StyleGuideExamples:ItemContent"]')
-    
-        await eyes.check(elementId, Target.region(element).strict().fully())
+const runVisualTest = (data: VisualParameters[],
+  elementFinder: (page: Page, elementId: string) => Locator) => {
+  data.forEach((param) => {
+    test.describe(param.suite, () => {
+      const vitalPage: VitalPage = param.page;
+      vitalPage.getElements().forEach((element) => {
+        const elementId: string = element.id;
+
+        /* eslint-disable jest/expect-expect */
+        test(element.name??elementId, async ({ page, eyes }) => {
+          await page.goto(vitalPage.relativeUrl);
+          await page.waitForLoadState();
+
+          const element = elementFinder(page, elementId);
+
+          await eyes.check(elementId, Target.region(element).strict().fully());
+        });
+        /* eslint-enable jest/expect-expect */
       });
-    })
+    });
   });
-})
+};
+
+runVisualTest(variations, (page: Page, elementId: string) => page.getByTestId(elementId)
+  .locator('[data-layer-region="StyleGuideExamples:ItemContent"]'));
+
+runVisualTest(compositions, (page: Page, elementId: string) => page.getByTestId(elementId));
 
 type VisualParameters = {
   suite: string,
-  relativeUrl: string,
-  elementIds: string[]
-}
+  page: VitalPage
+};

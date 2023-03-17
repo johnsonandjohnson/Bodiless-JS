@@ -12,21 +12,16 @@
  * limitations under the License.
  */
 import { expect, test } from '@playwright/test';
-import { VitalCardsPage } from '../../pages/vital-cards';
+import { VitalTypographyPage } from '../../pages/vital-typography';
 
-test.describe.configure({ mode: 'parallel' });
-
-test.describe('Vital Cards', () => {
-  const cardsPage: VitalCardsPage = new VitalCardsPage();
-
-  cardsPage.vitalCards.filter((card) => card.hasButton).forEach((card) => {
-    test(`Should click on button in ${card.id} card`, async ({ page }) => {
-      await page.goto(cardsPage.relativeUrl);
-      await page.waitForLoadState();
-      const element = page.getByTestId(card.id)
-        .locator('[data-layer-region="Link:Wrapper"]');
-      await element.click({ noWaitAfter: false });
-      expect(page.url().endsWith('#')).toBeTruthy();
-    });
+test.describe('Vital Typography', () => {
+  test('Should click on Link typography element', async ({ page }) => {
+    const typographyPage: VitalTypographyPage = new VitalTypographyPage();
+    await page.goto(typographyPage.relativeUrl);
+    await page.waitForLoadState();
+    const element = page.getByTestId(typographyPage.linkId)
+      .locator('a');
+    await element.click({ noWaitAfter: false });
+    expect(page.url().endsWith('/test/')).toBeTruthy();
   });
 });
