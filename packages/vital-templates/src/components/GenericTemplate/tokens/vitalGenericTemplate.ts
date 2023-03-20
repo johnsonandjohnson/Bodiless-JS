@@ -63,7 +63,7 @@ const Base = asGenericTemplateToken({
       withDesign({
         Image: on(Img)(vitalImage.Hero),
         Video: on(YouTubeClean)(vitalYouTube.Hero),
-        HeroCard: on(CardStatic)(vitalCardStatic.Hero),
+        HeroCard: on(CardStatic)(vitalCardStatic.HeroLeftImageContentCentered),
       }),
     ),
     Content: as(vitalFlowContainer.Default),

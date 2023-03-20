@@ -26,7 +26,7 @@ import Base, {
   WithHorizontalContentCentered,
 } from './Base';
 
-const HeroBase = asCardToken({
+const Hero = asCardToken({
   ...Base,
   Editors: {
     ...Base.Editors,
@@ -61,8 +61,8 @@ const HeroBase = asCardToken({
   ),
 });
 
-const Hero = asCardToken(
-  HeroBase,
+const HeroLeftImageContentCentered = asCardToken(
+  Hero,
   WithHorizontalContentCentered,
   WithHorizontalLeftOrientation,
 );
@@ -119,8 +119,13 @@ export interface VitalCardHero {
    * ```
    */
   Hero: CardToken,
+  /*
+   * Hero card with default Left Image and Content Centered.
+   */
+  HeroLeftImageContentCentered: CardToken,
 }
 
 export {
   Hero,
+  HeroLeftImageContentCentered,
 };
